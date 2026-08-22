@@ -17,7 +17,7 @@ export interface OverviewProps {
   /** Id de BASE du perso — la clé du choix de portrait (réglages du site). */
   charId: string;
   fullArts: FullArt[];
-  /** Badge type d'unité (premium/limited/…), si taggé. */
+  /** Badge type d'unité (premium/festival/…), si taggé. */
   unitTag: OverviewBadge | null;
   /** Badge rôle (dps/support/sustain), si curé. */
   roleTag: OverviewBadge | null;

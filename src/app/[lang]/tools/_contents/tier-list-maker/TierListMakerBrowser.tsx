@@ -130,8 +130,12 @@ const DRAG_THRESHOLD = 6;
 const TOUCH_HOLD_MS = 220;
 
 const SORT_KEYS: SortKey[] = ['default', 'name', 'rarity', 'element'];
-/** Tags de perso exposés en filtres de pool, dans l'ordre d'affichage. */
-const FILTER_TAGS = ['limited', 'collab', 'seasonal', 'free', 'premium'];
+/**
+ * Tags de perso exposés en filtres de pool, dans l'ORDRE CANONIQUE du
+ * glossaire (`data/curated/tags.json` : premium, festival, seasonal, collab,
+ * free) — le même que celui des badges de carte partout ailleurs.
+ */
+const FILTER_TAGS = ['premium', 'festival', 'seasonal', 'collab', 'free'];
 const CLASSES = ['striker', 'defender', 'ranger', 'healer', 'mage'];
 const RARITIES = [1, 2, 3];
 
@@ -311,12 +315,15 @@ function wrapLabel(ctx: CanvasRenderingContext2D, text: string, maxWidth: number
   return lines.length ? lines : [''];
 }
 
-/** Badge de recrutement pour un jeu de tags (même priorité que les cartes). */
+/**
+ * Badge de recrutement pour un jeu de tags — MÊME règle que les cartes de
+ * perso : les `tags` arrivent déjà triés canoniquement (`characterTags` →
+ * `sortTags`), donc le premier qui a une icône fait le badge. L'ordre en dur
+ * qui vivait ici contredisait celui du glossaire.
+ */
 function recruitBadge(tags?: string[]): string | null {
-  if (!tags) return null;
-  for (const tag of ['collab', 'seasonal', 'premium', 'free', 'limited'])
-    if (tags.includes(tag)) return img.tag(tag);
-  return null;
+  const tag = tags?.find((t) => FILTER_TAGS.includes(t));
+  return tag ? img.tag(tag) : null;
 }
 
 // ── Vignette d'item ──

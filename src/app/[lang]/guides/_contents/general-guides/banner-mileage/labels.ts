@@ -309,8 +309,8 @@ export const LABELS = {
       zh: ' - 是获取限定同伴的唯一途径。',
       fr: " - Le seul moyen d'obtenir les Limited Heroes.",
     },
-    // « Festival » : le terme du jeu pour le tag `limited` (cf. tags hérités —
-    // « Festival Units ») ; « Limited » désignait à tort toute la catégorie.
+    // « Festival » : le nom du jeu (`OUTER_FES`) et celui du tag `festival` ;
+    // « Limited » est le GROUPE des trois, pas l'une d'elles.
     type_limited_label: {
       en: 'Festival:',
       jp: 'フェス:',

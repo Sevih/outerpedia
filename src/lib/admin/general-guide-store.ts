@@ -15,6 +15,7 @@ import type { LocalizedText } from '@contracts';
 import { normalizeReview, type ReviewEntryData } from './review-shape';
 export { normalizeReview };
 import { characterDisplayName, findCharacterByName, getAllCharacters } from '@/lib/data/characters';
+import { hasTagInGroup } from '@/lib/data/tags';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 
 const CONTENTS_DIR = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
@@ -113,12 +114,12 @@ const plReviewsPath = () => resolve(plDir(), 'premium-reviews.json');
 const plPrioritiesPath = () => resolve(plDir(), 'premium-priorities.json');
 
 const PREMIUM_TAG = 'premium';
-const LIMITED_TAGS = ['limited', 'seasonal', 'collab'];
 
 /**
  * Rosters « à reviewer » dérivés des TAGS de perso (source unique, toujours à
- * jour) : Premium = tag `premium` ; Limited = `limited`/`seasonal`/`collab`
- * (hors `premium`/`core-fusion`, qui ont leurs propres bannières/guides).
+ * jour) : Premium = tag `premium` ; Limited = la FAMILLE `limited` du
+ * glossaire (festival/seasonal/collab, cf. `tagsInGroup`), hors
+ * `premium`/`core-fusion` qui ont leurs propres bannières/guides.
  * Noms d'affichage EN triés. Sert au compteur « X/Y reviews » de l'outil.
  */
 export function premiumLimitedRoster(): { premium: string[]; limited: string[] } {
@@ -132,9 +133,7 @@ export function premiumLimitedRoster(): { premium: string[]; limited: string[] }
   const limited = chars
     .filter(
       (c) =>
-        (c.tags ?? []).some((t) => LIMITED_TAGS.includes(t)) &&
-        !has(c, PREMIUM_TAG) &&
-        !has(c, 'core-fusion'),
+        hasTagInGroup(c.tags ?? [], 'limited') && !has(c, PREMIUM_TAG) && !has(c, 'core-fusion'),
     )
     .map((c) => characterDisplayName(c))
     .sort(byName);

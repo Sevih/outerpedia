@@ -42,12 +42,12 @@ const CHAIN_ROLE: Record<string, ChainType> = {
  * marqueur d'obtention gratuite dans les tables) → couche curée.
  */
 export type CharacterTag =
-  'premium' | 'limited' | 'seasonal' | 'collab' | 'ignore-defense' | 'core-fusion';
+  'premium' | 'festival' | 'seasonal' | 'collab' | 'ignore-defense' | 'core-fusion';
 
 /** Ordre canonique d'affichage (le 1er tag trouvé fait le badge de carte). */
 const TAG_ORDER: readonly CharacterTag[] = [
   'premium',
-  'limited',
+  'festival',
   'seasonal',
   'collab',
   'ignore-defense',
@@ -66,10 +66,18 @@ export type IgnoreDefenseSource = 'kit' | 'ee' | 'transcend';
 /** Ordre canonique des provenances (sortie déterministe). */
 const IGNORE_DEFENSE_SOURCES: readonly IgnoreDefenseSource[] = ['kit', 'ee', 'transcend'];
 
-/** `RibbonType` de la bannière de recrutement → étiquette d'acquisition. */
+/**
+ * `RibbonType` de la bannière de recrutement → étiquette d'acquisition.
+ *
+ * `OUTER_FES` → `festival`, et pas `limited` : « limited » est le nom du
+ * GROUPE que le joueur donne aux trois bannières qui ne reviennent pas
+ * (festival + seasonal + collab). Le lui donner aussi comme nom de tag faisait
+ * porter au membre le nom du tout — corrigé le 22/08/2026 ; le groupe se lit
+ * désormais sur `TagDef.group` (`data/curated/tags.json`).
+ */
 const RIBBON_TAG: Record<string, CharacterTag> = {
   PREMIUM: 'premium',
-  OUTER_FES: 'limited',
+  OUTER_FES: 'festival',
   SEASONAL: 'seasonal',
 };
 
@@ -723,7 +731,7 @@ export const characterSpec: ExtractorSpec<Character, CharacterAux> = {
       formSkillsByBase.set(baseId, [...(formSkillsByBase.get(baseId) ?? []), ...skills]);
     }
 
-    // ACQUISITION (premium/limited/seasonal/collab) : la BANNIÈRE fait foi.
+    // ACQUISITION (premium/festival/seasonal/collab) : la BANNIÈRE fait foi.
     // `RecruitGroupTemplet` liste chaque bannière avec le perso mis en avant
     // (`PickupID`) et son ruban (`RibbonType`). Un perso peut revenir dans
     // plusieurs bannières (rerun, sélection) → on prend l'UNION de ses rubans

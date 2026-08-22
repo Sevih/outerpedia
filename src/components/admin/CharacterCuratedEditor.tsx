@@ -29,7 +29,7 @@ const STARS = transcendenceFullSteps(STAR_RARITY).map(String);
 /**
  * Tags ÉDITABLES ici = les tags HUMAINS. Il n'y en a qu'un.
  *
- * premium/limited/seasonal/collab (bannière), ignore-defense (buffs de
+ * premium/festival/seasonal/collab (bannière), ignore-defense (buffs de
  * pénétration) et core-fusion (lignée) sont désormais DÉRIVÉS DU JEU par
  * l'extraction (`Character.tags`) : ils s'affichent en lecture seule ci-dessous.
  * Les cocher ici les figerait en curé et ils divergeraient à la régénération.

@@ -30,7 +30,7 @@ import { customBannerPicks, freeHeroesSources } from './recommended';
 const WHERE = 'free-heroes-start-banner';
 
 /** Tags qui excluent un perso du roster « régulier » recrutable. */
-const SPECIAL_TAGS = new Set(['premium', 'limited', 'seasonal', 'collab', 'core-fusion']);
+const SPECIAL_TAGS = new Set(['premium', 'festival', 'seasonal', 'collab', 'core-fusion']);
 
 /** Les `\n` éditoriaux → retours à la ligne (+ parse-text par segment). */
 function withLineBreaks(text: string, ctx?: ParseCtx): ReactNode {

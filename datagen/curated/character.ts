@@ -68,7 +68,7 @@ export interface CharacterCurated {
   /**
    * Étiquettes purement HUMAINES — aujourd'hui `free` seul.
    *
-   * Tout le reste du vocabulaire (premium/limited/seasonal/collab, ignore-defense,
+   * Tout le reste du vocabulaire (premium/festival/seasonal/collab, ignore-defense,
    * core-fusion) est DÉRIVÉ DU JEU par l'extraction (`Character.tags`) : ne pas
    * le recopier ici, il serait dupliqué et divergerait à la première régénération.
    * `free` n'a aucun marqueur dans les tables (les persos offerts sont malgré

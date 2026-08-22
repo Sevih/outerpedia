@@ -9685,7 +9685,7 @@
     "ee": "2000090",
     "recommendedSets": ["1", "12", "13"],
     "ignoreDefense": ["kit"],
-    "tags": ["limited", "ignore-defense"],
+    "tags": ["festival", "ignore-defense"],
     "appearances": ["2010090"],
     "costumes": [
       {
@@ -9798,7 +9798,7 @@
     "ee": "2000091",
     "recommendedSets": ["5", "13", "1"],
     "ignoreDefense": ["kit"],
-    "tags": ["limited", "ignore-defense"],
+    "tags": ["festival", "ignore-defense"],
     "appearances": ["2010091"],
     "costumes": [
       {
@@ -10894,7 +10894,7 @@
     },
     "ee": "2000102",
     "recommendedSets": ["3", "2", "13"],
-    "tags": ["limited"]
+    "tags": ["festival"]
   },
   "2000103": {
     "id": "2000103",
@@ -12093,7 +12093,7 @@
     "ee": "2000114",
     "recommendedSets": ["3", "11", "10"],
     "ignoreDefense": ["kit", "transcend"],
-    "tags": ["limited", "ignore-defense"],
+    "tags": ["festival", "ignore-defense"],
     "appearances": ["2010114"],
     "costumes": [
       {

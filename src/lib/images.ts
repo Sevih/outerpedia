@@ -71,7 +71,7 @@ export const img = {
   star: (tone: 'y' | 'o' | 'r' | 'v' = 'y') => `${BASE}/images/ui/star/CM_icon_star_${tone}.webp`,
   /** Étoile Singularity (item ascendé). */
   starSingularity: () => `${BASE}/images/ui/star/CM_Star_Singularity.webp`,
-  /** Icône de tag éditorial (premium/limited/…). */
+  /** Icône de tag éditorial (premium/festival/…). */
   tag: (slug: string) => `${BASE}/images/ui/tags/${slug}.webp`,
   /** Icône d'effet (nom d'icône du glossaire). */
   effect: (icon: string) => `${BASE}/images/ui/effect/${icon}.webp`,
@@ -191,7 +191,7 @@ export const img = {
    * manifest). Le nom est celui du jeu, tel que `portrait-fx.json` le porte.
    */
   portraitFx: (name: string) => `${BASE}/images/characters/portrait-fx/${name}.webp`,
-  /** Badge de recrutement (premium/limited/…) sur les cartes. */
+  /** Badge de recrutement (premium/festival/…) sur les cartes. */
   recruitTag: (tag: string) => `${BASE}/images/ui/recruit/${RECRUIT_TAG_SPRITE[tag]}.webp`,
   /** Sprite de recrutement par NOM (boutons/rubans de bannière — recruit.json). */
   recruitSprite: (name: string) => `${BASE}/images/ui/recruit/${name}.webp`,
@@ -312,7 +312,8 @@ export const RECRUIT_TAG_SPRITE: Record<string, string> = {
   seasonal: 'CM_Recruit_Tag_Seasonal',
   premium: 'CM_Recruit_Tag_Premium',
   free: 'CM_Recruit_Tag_Free',
-  limited: 'CM_Recruit_Tag_Fes',
+  // Le jeu dit « Fes » — d'où le nom du tag, `festival` et non `limited`.
+  festival: 'CM_Recruit_Tag_Fes',
 };
 
 /** Couleur de texte par grade d'item (tokens item-* : teintes inchangées). */

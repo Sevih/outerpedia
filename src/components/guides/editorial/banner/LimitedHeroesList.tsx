@@ -1,9 +1,12 @@
 /**
- * Liste des héros LIMITED (limited/seasonal/collab) et de leurs passages en
- * bannière — release et dernier rerun DÉRIVÉS de `recruit.json` (bannières à
- * pickup des tables du jeu), là où `data/banner.json` était maintenu à la
- * main. Les persos tagués limited SANS bannière (unités d'event, ex. Ais
- * Wallenstein) sont affichés « event uniquement » au lieu d'une fausse date.
+ * Liste des héros LIMITED et de leurs passages en bannière. « Limited » est
+ * ici la FAMILLE du glossaire — festival + seasonal + collab, cf.
+ * `tagsInGroup` — et non le tag d'un seul de ces trois.
+ *
+ * Release et dernier rerun DÉRIVÉS de `recruit.json` (bannières à pickup des
+ * tables du jeu), là où `data/banner.json` était maintenu à la main. Les
+ * persos de la famille SANS bannière (unités d'event, ex. Ais Wallenstein)
+ * sont affichés « event uniquement » au lieu d'une fausse date.
  *
  * Un rerun via bannière « Selection » (choisis un ancien limited) compte comme
  * n'importe quel passage : le perso était réellement obtenable à cette date.
@@ -15,11 +18,11 @@ import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { characterDisplayName, getAllCharacters, slugForId } from '@/lib/data/characters';
+import { tagLabel, tagsInGroup } from '@/lib/data/tags';
 import { bannersOf } from '@/lib/data/recruit';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 
-const LIMITED_TAGS = ['limited', 'seasonal', 'collab'] as const;
-type LimitedTag = (typeof LIMITED_TAGS)[number];
+const LIMITED_TAGS = tagsInGroup('limited');
 
 const LABELS = {
   released: { en: 'Released:', jp: 'リリース:', kr: '출시:', zh: '发布:', fr: 'Sortie :' },
@@ -38,38 +41,16 @@ const LABELS = {
     fr: "Récompense d'event uniquement — jamais disponible en banner",
   },
   with: { en: ' with ', jp: ' × ', kr: ' × ', zh: ' × ', fr: ' avec ' },
-  // Libellés hérités (data/tags.json) — le tag `limited` s'affiche « Festival ».
-  badgeLimited: {
-    en: 'Festival Units',
-    jp: 'フェスユニット',
-    kr: '페스티벌 유닛',
-    zh: '限定单位',
-    fr: 'Festival Units',
-  },
-  badgeSeasonal: {
-    en: 'Seasonal Units',
-    jp: '季節限定ユニット',
-    kr: '시즌 유닛',
-    zh: '季节单位',
-    fr: 'Seasonal Units',
-  },
-  badgeCollab: {
-    en: 'Collab Units',
-    jp: 'コラボユニット',
-    kr: '콜라보 유닛',
-    zh: '联动单位',
-    fr: 'Collab Units',
-  },
 } satisfies Record<string, LocalizedText>;
 
-const BADGE_LABEL: Record<LimitedTag, LocalizedText> = {
-  limited: LABELS.badgeLimited,
-  seasonal: LABELS.badgeSeasonal,
-  collab: LABELS.badgeCollab,
-};
-
-const BADGE_TEXT: Record<LimitedTag, string> = {
-  limited: 'text-ed-pink',
+/**
+ * Teinte par tag. Le LIBELLÉ, lui, n'est plus recopié ici : il vient de
+ * `tagLabel` (`data/curated/tags.json`), seul endroit où le sens d'un tag
+ * s'écrit. La copie qui vivait là affichait « Festival Units » pour un tag
+ * nommé `limited` — l'incohérence même que le renommage a levée.
+ */
+const BADGE_TEXT: Record<string, string> = {
+  festival: 'text-ed-pink',
   seasonal: 'text-ed-emerald',
   collab: 'text-ed-rose',
 };
@@ -93,7 +74,9 @@ export function LimitedHeroesList({
 }) {
   const heroes = getAllCharacters()
     .map((c) => {
-      const tag = LIMITED_TAGS.find((t) => c.tags?.includes(t));
+      // `some` et non `includes` : `tagsInGroup` rend des `string`, et
+      // `CharacterTag[].includes` refuserait le type élargi.
+      const tag = LIMITED_TAGS.find((t) => (c.tags ?? []).some((x) => x === t));
       if (!tag) return undefined;
       const apps = bannersOf(c.id);
       const release = apps[0]?.start;
@@ -135,7 +118,7 @@ export function LimitedHeroesList({
             <span className="flex flex-col">
               <span className="text-content-strong font-medium">{name}</span>
               <span className="text-sm">
-                <strong className={BADGE_TEXT[tag]}>{lRec(BADGE_LABEL[tag], lang)}</strong>
+                <strong className={BADGE_TEXT[tag]}>{tagLabel(tag, lang)}</strong>
                 {collab && (
                   <span className="text-content-muted">
                     {lRec(LABELS.with, lang)}

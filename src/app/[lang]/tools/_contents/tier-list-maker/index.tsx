@@ -3,6 +3,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
 import { loadShortNames } from '@/lib/data/short-names';
+import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadDataJson } from '@/lib/data/disk';
 import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
@@ -64,6 +65,10 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
   // Personnages (tri par nom localisé), chacun suivi de ses costumes — les 99
   // modèles de costume ont leurs sprites FI_/CT_ sur R2 (collecte `appearances`).
   const characters: TierItem[] = [];
+  // Tags CURÉS COMPRIS et triés canoniquement : `Character.tags` seul n'a pas
+  // `free` (tag humain, couche curée) — les pills « Free » ne matchaient donc
+  // jamais rien. Le curé se charge une fois, pas une lecture par perso.
+  const curated = loadCuratedCharacters();
   const bases = getAllCharacters()
     .filter((c) => !c.originalCharacter)
     .map((c) => ({ c, label: lRec(c.name, lang) }))
@@ -82,7 +87,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
       element: c.element,
       cls: c.class,
       rarity: c.rarity,
-      tags: c.tags,
+      tags: characterTags(c, curated),
     });
     for (const cos of c.costumes ?? []) {
       if (!cos.model || cos.model === '0' || cos.model === c.id) continue;
@@ -96,7 +101,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
         element: c.element,
         cls: c.class,
         rarity: c.rarity,
-        tags: c.tags,
+        tags: characterTags(c, curated),
         isSkin: true,
         baseLabel: label,
         baseShort: short,
@@ -119,7 +124,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
       bosses: t('tools.tier-list-maker.tab.bosses'),
     },
     tags: {
-      limited: t('tools.tier-list-maker.tag.limited'),
+      festival: t('tools.tier-list-maker.tag.festival'),
       collab: t('tools.tier-list-maker.tag.collab'),
       seasonal: t('tools.tier-list-maker.tag.seasonal'),
       free: t('tools.tier-list-maker.tag.free'),

@@ -7,6 +7,52 @@
 
 ## 2026-08-22
 
+- **Tags de type d'unité — le tag `limited` s'appelait comme son propre
+  groupe.** Le jeu a trois bannières qui ne reviennent pas (ruban `OUTER_FES`,
+  `SEASONAL`, et le collab qui emprunte `SEASONAL`) ; le joueur, lui, n'a qu'un
+  mot pour les trois : « limited ». Le vocabulaire donnait ce mot au premier des
+  trois — le ruban `OUTER_FES`, que le jeu nomme « Fes » et que le glossaire
+  affichait déjà « Festival Units ». Un membre portait donc le nom du tout, et
+  la conséquence se lisait partout : quatre modules recopiaient
+  `LIMITED_TAGS = ['limited', 'seasonal', 'collab']` (pull-simulator,
+  LimitedHeroesList, general-guide-store, hero-tracker), `LimitedHeroesList`
+  recopiait EN PLUS les cinq traductions du glossaire, et `/characters`
+  fabriquait ses libellés de filtre par titlecase du slug — « Limited » sur la
+  liste contre « Festival Units » sur la fiche du perso, jamais traduit ni dans
+  une langue. Le tag s'appelle `festival` (slug, sprite, asset éditorial), et
+  `limited` ne désigne plus QUE la famille, déclarée une fois via
+  `TagDef.group` dans `data/curated/tags.json` et lue par `tagsInGroup` /
+  `hasTagInGroup` : une quatrième bannière limitée demandait quatre éditions,
+  elle n'en demande plus qu'une. Les libellés de `/characters` viennent du
+  glossaire comme ceux de la fiche. Le codec `?z=` ne bouge PAS — l'indice 3
+  reste l'indice 3, seule la chaîne change, donc les liens en circulation
+  décodent toujours juste (c'est exactement ce que son contrat « les positions,
+  pas les chaînes » promettait). Trouvé en chemin et corrigé : le
+  tier-list-maker lisait `Character.tags` BRUT, sans la couche curée — ses
+  pills « Free » ne pouvaient donc matcher personne, `free` étant le seul tag
+  humain ; il passe par `characterTags`, et son ordre de badges en dur, qui
+  contredisait l'ordre canonique du glossaire, a suivi. Deux axes qu'on
+  continuait à confondre au passage : `core-fusion` n'est PAS un mode
+  d'obtention (`kind: lineage`) — les six core-fusions ne portent aucun tag
+  d'acquisition, elles ne se tirent pas. Dans la foulée (demande Sevih) :
+  `/characters` gagne une case **« Limited Units »** qui retient les trois d'un
+  geste, là où il fallait cocher trois cases ET penser à passer la logique en
+  OU. Elle n'entre PAS au glossaire — celui-ci définit des tags que des persos
+  PORTENT, et son test le vérifie dans les deux sens ; c'est un agrégat
+  d'affichage, dont le libellé est éditorial (`characters.filters.tag_group.*`)
+  et la composition lue sur `TagDef.group`. Cochée, elle matche en OU même
+  quand la logique est en ET — trois bannières s'excluent, exiger les trois ne
+  rendrait jamais personne. Sans icône, aussi : le sprite du jeu ne représente
+  que le festival. Côté lien de partage elle part en clair dans `tx` (aucun
+  indice gelé ne lui revient) et ne touche pas à l'indice 3. Les cases de tags
+  suivent maintenant l'ordre canonique du glossaire — la famille ouvrant ses
+  propres membres — au lieu d'un tri alphabétique sur des slugs que le lecteur
+  ne voit jamais. Assets : `festival.webp` est déjà en
+  ligne (renommage commité et poussé par Sevih pendant le chantier).
+  `limited.webp` y reste, orphelin — `pushed.json` le déclare encore parce
+  qu'il y EST réellement ; le push ne retire jamais rien (`merged = {...pushed}`),
+  la suppression se fait côté R2 ou pas du tout.
+
 - **Damage calc — lignes DoT dans le Résultat et conditions en tag inline.**
   Décision Sevih : les conditions d'état restent MANUELLES (pas
   d'automatisation HAS_BUFF), mais leur affichage montre l'effet référencé en

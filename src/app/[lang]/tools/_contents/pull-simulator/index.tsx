@@ -2,6 +2,7 @@ import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { characterNamePrefix, characterSearchNames, getAllCharacters } from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { hasTagInGroup } from '@/lib/data/tags';
 import {
   PullSimulatorBrowser,
   type GachaChar,
@@ -9,15 +10,14 @@ import {
   type PullSimLabels,
 } from './PullSimulatorBrowser';
 
-const LIMITED_TAGS = new Set(['limited', 'seasonal', 'collab']);
-
 /**
  * Pull Simulator — wrapper SERVEUR : construit les pools de gacha depuis le
  * catalogue de persos (noms/préfixes localisés, recherche multilingue). Les
  * entités core-fusion sont EXCLUES : elles ne se tirent pas, elles se
  * fusionnent. Rareté 1/2 = pools mineurs (remplissage des résultats), rareté 3
- * = pool principal, catégorisé par tags (premium / limited-seasonal-collab /
- * le reste). Les tirages eux-mêmes vivent dans `@/lib/gacha` (client).
+ * = pool principal, catégorisé par tags : `premium`, la FAMILLE `limited` du
+ * glossaire (festival/seasonal/collab — la bannière limitée les tire tous les
+ * trois), puis le reste. Les tirages eux-mêmes vivent dans `@/lib/gacha`.
  */
 export default async function PullSimulator({ lang }: { lang: Lang }) {
   const t = await getT(lang);
@@ -47,7 +47,7 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
     }
     const category = c.tags?.includes('premium')
       ? 'premium'
-      : c.tags?.some((tag) => LIMITED_TAGS.has(tag))
+      : hasTagInGroup(c.tags ?? [], 'limited')
         ? 'limited'
         : 'normal';
     characters.push({ ...minor, category, searchNames: characterSearchNames(c, aliases[c.id]) });

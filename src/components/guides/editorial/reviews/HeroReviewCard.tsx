@@ -14,7 +14,7 @@ import { localePath } from '@/lib/navigation';
 import { characterDisplayName, slugForId } from '@/lib/data/characters';
 
 /** Tags dont un sprite éditorial existe (images/ui/tags/<tag>.webp). */
-const TAG_SPRITES = new Set(['premium', 'limited', 'seasonal', 'collab', 'core-fusion']);
+const TAG_SPRITES = new Set(['premium', 'festival', 'seasonal', 'collab', 'core-fusion']);
 
 export function HeroReviewCard({
   character,

@@ -68,6 +68,16 @@ describe('encodeFilters', () => {
     expect(decoded.tags).toEqual(['nouveau-tag']);
   });
 
+  it('la FAMILLE `limited` voyage en clair, sans voler l’indice de `festival`', () => {
+    // La case « Limited » de /characters n'est pas un tag de perso mais un
+    // agrégat (festival + seasonal + collab) : aucun indice gelé ne lui
+    // revient, elle part donc dans le champ d'extension. L'indice 3, lui,
+    // reste celui du tag `festival` — les liens émis quand il s'appelait
+    // `limited` décodent toujours vers la bonne case.
+    const round = decodeFilters(encodeFilters({ ...EMPTY, tags: ['festival', 'limited'] })!)!;
+    expect(round.tags).toEqual(['festival', 'limited']);
+  });
+
   it('ÉPINGLAGE du format de fil (compat liens — ne doit JAMAIS changer)', () => {
     const state: FilterState = {
       ...EMPTY,

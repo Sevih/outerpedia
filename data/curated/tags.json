@@ -17,8 +17,9 @@
       "fr": "Ces personnages ne s'obtiennent que via des événements spéciaux ou les bannières Premium."
     }
   },
-  "limited": {
+  "festival": {
     "kind": "recruit",
+    "group": "limited",
     "sort": 2,
     "name": {
       "en": "Festival Units",
@@ -28,15 +29,16 @@
       "fr": "Unités Festival"
     },
     "desc": {
-      "en": "These characters are time-limited and only available during specific banners.",
-      "jp": "期間限定で、特定のバナー期間中のみ入手可能なキャラクター。",
-      "kr": "기간 한정으로 특정 배너 기간에만 획득할 수 있는 캐릭터입니다.",
-      "zh": "这些角色为限时角色，仅在特定卡池期间可获得。",
-      "fr": "Ces personnages sont limités dans le temps et ne sont disponibles que sur certaines bannières."
+      "en": "Time-limited heroes, available only during their Festival banner — the classic limited units, apart from Seasonal and Collab.",
+      "jp": "フェスバナー期間中のみ入手できる期間限定ヒーロー。シーズンやコラボとは別枠の、通常の限定ユニットです。",
+      "kr": "페스티벌 배너 기간에만 획득할 수 있는 기간 한정 영웅입니다. 시즌·콜라보와 구분되는 일반 한정 유닛입니다.",
+      "zh": "仅在限定（Fes）卡池期间可获得的限时同伴，是区别于季节和联动的常规限定单位。",
+      "fr": "Héros à durée limitée, disponibles uniquement pendant leur bannière Festival — les limitées classiques, distinctes des Seasonal et des Collab."
     }
   },
   "seasonal": {
     "kind": "recruit",
+    "group": "limited",
     "sort": 3,
     "name": {
       "en": "Seasonal Units",
@@ -55,6 +57,7 @@
   },
   "collab": {
     "kind": "recruit",
+    "group": "limited",
     "sort": 4,
     "name": {
       "en": "Collab Units",

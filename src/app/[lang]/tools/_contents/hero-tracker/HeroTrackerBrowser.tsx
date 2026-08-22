@@ -56,7 +56,7 @@ export interface HeroRow {
   /** Type de cadeau préféré (`present_01`…) — oriente la conversion en cadeaux. */
   gift?: string;
   searchNames: string[];
-  /** Tags curés (`premium`, `limited`…) — ils disent comment le héros s'obtient. */
+  /** Tags (`premium`, `festival`…) — ils disent comment le héros s'obtient. */
   tags: string[];
   /** Icônes des 4 skills améliorables, dans l'ordre S1 / S2 / ultime / chain. */
   skillIcons: string[];
@@ -153,6 +153,8 @@ export interface HeroTrackerData {
   items: Record<string, ItemAsset>;
   /** Nom traduit de chaque élément — les pièces se groupent comme on les farme. */
   elementNames: Record<string, string>;
+  /** Tags de la famille « limited » du glossaire (festival/seasonal/collab). */
+  limitedTags: string[];
   /** Nom traduit de chaque classe — infobulle des filtres du roster. */
   classNames: Record<string, string>;
   labels: HeroTrackerLabels;
@@ -226,12 +228,16 @@ const LONG_PRESS_MS = 450;
  * élément promettrait une source qui n'existe pas.
  *
  * Deux familles, et pas une : « limité » au sens du joueur couvre TOUT ce qui ne
- * revient pas — festival, saisonnier, collaboration — là où les tags curés les
+ * revient pas — festival, saisonnier, collaboration — là où les tags les
  * distinguent par occasion. Le premium, lui, reste achetable.
+ *
+ * La composition de la famille arrive en prop (`limitedTags`) : elle se déclare
+ * dans `data/curated/tags.json` et se lit avec `tagsInGroup`, côté serveur —
+ * ce composant est client et n'a pas accès au glossaire.
  */
-const PIECES_APART: { key: string; tags: string[] }[] = [
+const piecesApart = (limitedTags: string[]): { key: string; tags: string[] }[] => [
   { key: 'premium', tags: ['premium'] },
-  { key: 'limited', tags: ['limited', 'seasonal', 'collab'] },
+  { key: 'limited', tags: limitedTags },
 ];
 
 /**
@@ -305,6 +311,7 @@ export function HeroTrackerBrowser({
   transcend,
   items,
   elementNames,
+  limitedTags,
   classNames,
   labels,
 }: HeroTrackerData) {
@@ -704,6 +711,7 @@ export function HeroTrackerBrowser({
           itemTotal={itemTotal}
           heroById={heroById}
           elementNames={elementNames}
+          limitedTags={limitedTags}
           axis={axis}
           onAxis={setAxis}
           labels={labels}
@@ -828,6 +836,7 @@ function SummaryPanel({
   itemTotal,
   heroById,
   elementNames,
+  limitedTags,
   axis,
   onAxis,
   labels,
@@ -837,6 +846,7 @@ function SummaryPanel({
   itemTotal: number;
   heroById: Map<string, HeroRow>;
   elementNames: Record<string, string>;
+  limitedTags: string[];
   axis: NeedAxis | 'all';
   onAxis: (a: NeedAxis | 'all') => void;
   labels: HeroTrackerLabels;
@@ -853,6 +863,7 @@ function SummaryPanel({
    * un donjon qui ne les donnera jamais.
    */
   const pieceGroups = useMemo(() => {
+    const apart = piecesApart(limitedTags);
     const rows = Object.entries(total.pieces).map(([id, { pieces: count, steps }]) => ({
       id,
       count,
@@ -860,7 +871,7 @@ function SummaryPanel({
       hero: heroById.get(id),
     }));
     const family = (r: (typeof rows)[number]) =>
-      PIECES_APART.find((f) => r.hero?.tags?.some((t) => f.tags.includes(t)))?.key;
+      apart.find((f) => r.hero?.tags?.some((t) => f.tags.includes(t)))?.key;
     const order = (a: { count: number }, b: { count: number }) => b.count - a.count;
     const groups: {
       key: string;
@@ -878,7 +889,7 @@ function SummaryPanel({
       premium: labels.piecesPremium,
       limited: labels.piecesLimited,
     };
-    for (const f of PIECES_APART) {
+    for (const f of apart) {
       groups.push({
         key: f.key,
         element: null,
@@ -887,7 +898,14 @@ function SummaryPanel({
       });
     }
     return groups.filter((g) => g.rows.length > 0);
-  }, [total.pieces, heroById, elementNames, labels.piecesPremium, labels.piecesLimited]);
+  }, [
+    total.pieces,
+    heroById,
+    elementNames,
+    limitedTags,
+    labels.piecesPremium,
+    labels.piecesLimited,
+  ]);
 
   return (
     <details

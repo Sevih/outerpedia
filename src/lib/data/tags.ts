@@ -15,7 +15,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { Lang } from '@/lib/i18n/config';
-import type { TagDef, TagGlossary, TagKind } from '@contracts';
+import type { TagDef, TagGlossary, TagGroup, TagKind } from '@contracts';
 
 const TAGS_PATH = resolve(process.cwd(), 'data/curated/tags.json');
 
@@ -61,4 +61,27 @@ export function sortTags(tags: readonly string[]): string[] {
 export function firstTagOfKind(tags: readonly string[], kind: TagKind): string | undefined {
   const g = loadTagGlossary();
   return sortTags(tags).find((t) => g[t]?.kind === kind);
+}
+
+/**
+ * Les tags d'une FAMILLE, dans l'ordre canonique — `limited` rend
+ * `['festival', 'seasonal', 'collab']`.
+ *
+ * Le point de la fonction : ces trois-là ne sont un groupe que pour le JOUEUR
+ * (« ça ne revient pas »), le jeu, lui, ne connaît que trois bannières
+ * distinctes. Tant que le groupe n'était écrit nulle part, quatre modules le
+ * recopiaient en dur sous le nom `LIMITED_TAGS` — une liste dont le premier
+ * élément s'appelait, lui aussi, `limited`. Une quatrième bannière limitée
+ * demandait alors quatre éditions ; elle n'en demande plus qu'une, dans
+ * `data/curated/tags.json`.
+ */
+export function tagsInGroup(group: TagGroup): string[] {
+  const g = loadTagGlossary();
+  return sortTags(Object.keys(g).filter((t) => g[t]?.group === group));
+}
+
+/** Le perso relève-t-il de la famille ? (au moins un de ses tags y appartient) */
+export function hasTagInGroup(tags: readonly string[], group: TagGroup): boolean {
+  const g = loadTagGlossary();
+  return tags.some((t) => g[t]?.group === group);
 }

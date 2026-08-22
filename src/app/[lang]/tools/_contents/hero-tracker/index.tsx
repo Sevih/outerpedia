@@ -16,6 +16,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { tagsInGroup } from '@/lib/data/tags';
 import {
   HeroTrackerBrowser,
   type HeroRow,
@@ -221,6 +222,10 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
     CLASSES.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
   );
 
+  // Le groupe « limité » (festival/seasonal/collab) se lit ICI : le glossaire
+  // est un fichier, et le browser est un composant client.
+  const limitedTags = tagsInGroup('limited');
+
   const labels = Object.fromEntries(
     LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
   ) as unknown as HeroTrackerLabels;
@@ -240,6 +245,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       transcend={transcend}
       items={items}
       elementNames={elementNames}
+      limitedTags={limitedTags}
       classNames={classNames}
       labels={labels}
     />

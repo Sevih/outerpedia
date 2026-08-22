@@ -433,10 +433,16 @@ const DEBUFF_DEC: Record<number, string> = {
   79: 'BT_STAT|ST_PIERCE_POWER_RATE',
 };
 
+/**
+ * Indices GELÉS des tags. L'indice EST le contrat, pas la chaîne : le tag
+ * anciennement nommé `limited` s'appelle `festival` depuis le 22/08/2026 et
+ * garde l'indice 3 — tous les liens `?z=` en circulation continuent donc de
+ * décoder vers la bonne case de filtre.
+ */
 const TAG_ENC: Record<string, number> = {
   'ignore-defense': 1,
   premium: 2,
-  limited: 3,
+  festival: 3,
   seasonal: 4,
   collab: 5,
   free: 6,

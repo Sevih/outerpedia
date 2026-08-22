@@ -70,6 +70,19 @@ export interface CharactersBrowserLabels {
   };
   /** Icônes des tags (slug → URL). */
   tagIcons: Record<string, string>;
+  /**
+   * Valeurs des cases « Tags », dans l'ordre d'affichage — ordre canonique du
+   * glossaire, familles comprises (cf. `tagGroups`).
+   */
+  tagOrder: string[];
+  /**
+   * Cases qui ne sont pas un tag mais une FAMILLE de tags : valeur → tags
+   * qu'elle couvre (`limited` → festival/seasonal/collab). Cocher la famille
+   * retient un perso qui porte N'IMPORTE LEQUEL de ses tags, y compris quand
+   * la logique est en ET — trois bannières s'excluent, exiger les trois ne
+   * rendrait jamais personne.
+   */
+  tagGroups: Record<string, string[]>;
   /** Données des filtres d'effets/bonus, construites côté serveur. */
   effects: {
     buff: EffectGroup[];
@@ -137,7 +150,17 @@ export function CharactersBrowser({
     () => [...new Set(rows.map((r) => r.rarity))].sort((a, b) => b - a),
     [rows],
   );
-  const allTags = useMemo(() => [...new Set(rows.flatMap((r) => r.tags))].sort(), [rows]);
+  // Ordonnées côté serveur (ordre canonique + familles) : le client ne
+  // retrie pas des slugs dont il n'affiche que les libellés.
+  const allTags = labels.tagOrder;
+  /** Le row porte-t-il ce tag — ou, pour une famille, l'un de ses tags ? */
+  const matchTag = useMemo(() => {
+    const groups = labels.tagGroups;
+    return (row: CharacterRow, tag: string) => {
+      const members = groups[tag];
+      return members ? members.some((m) => row.tags.includes(m)) : row.tags.includes(tag);
+    };
+  }, [labels.tagGroups]);
 
   // ── Bascule multi-sélection générique ──
   const toggle =
@@ -267,8 +290,8 @@ export function CharactersBrowser({
       if (tags.length) {
         const ok =
           tagLogic === 'AND'
-            ? tags.every((t) => row.tags.includes(t))
-            : tags.some((t) => row.tags.includes(t));
+            ? tags.every((t) => matchTag(row, t))
+            : tags.some((t) => matchTag(row, t));
         if (!ok) return false;
       }
       // Effets : buffs et debuffs combinés selon la logique ET/OU (inchangé).
@@ -309,6 +332,7 @@ export function CharactersBrowser({
     role,
     tags,
     tagLogic,
+    matchTag,
     buffs,
     debuffs,
     effectLogic,

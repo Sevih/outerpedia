@@ -29,9 +29,29 @@ import type { LocalizedText } from './character';
  */
 export type TagKind = 'recruit' | 'mechanic' | 'lineage';
 
+/**
+ * FAMILLE d'étiquettes — ce que le joueur nomme d'un seul mot là où le jeu
+ * distingue plusieurs bannières.
+ *
+ * `limited` en est le seul cas, et LA source de la confusion qu'il règle : le
+ * jeu a trois bannières qui ne reviennent pas (Festival `OUTER_FES`, Seasonal,
+ * Collab), le joueur n'a qu'un mot pour les trois. Tant que le groupe n'était
+ * écrit nulle part, chaque outil recopiait sa propre liste
+ * `['limited', 'seasonal', 'collab']` — où le premier élément portait le nom
+ * du tout. Le groupe se déclare ICI, une fois ; les listes en dur ont disparu.
+ *
+ * Un tag SANS groupe se suffit à lui-même (`premium` s'achète, `free` s'offre).
+ */
+export type TagGroup = 'limited';
+
 /** Définition d'une étiquette (le sens ; la classification vit dans l'extraction). */
 export interface TagDef {
   kind: TagKind;
+  /**
+   * Famille à laquelle l'étiquette appartient, si elle en a une — ce que le
+   * joueur nomme d'un mot (`limited` = festival + seasonal + collab).
+   */
+  group?: TagGroup;
   /** Libellé affiché. */
   name: LocalizedText;
   /** Ce que le tag promet au lecteur — la phrase qui lève l'ambiguïté. */
@@ -47,6 +67,7 @@ export const tagDefSchema: Schema = {
   kind: 'object',
   fields: {
     kind: { kind: 'string', enum: ['recruit', 'mechanic', 'lineage'] },
+    group: { kind: 'string', enum: ['limited'], optional: true },
     name: { kind: 'record', of: { kind: 'string' } },
     desc: { kind: 'record', of: { kind: 'string' }, optional: true },
     sort: { kind: 'number', int: true, min: 0 },

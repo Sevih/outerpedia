@@ -20,6 +20,8 @@ import { releaseDateOf } from '@/lib/data/character-release';
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
+import { sortTags, tagLabel, tagsInGroup } from '@/lib/data/tags';
+import type { TagGroup } from '@contracts';
 import { lRec } from '@/lib/i18n/localize';
 import { buildEffectGroups, canonicalizeKeys } from '@/lib/data/effect-filters';
 import { img } from '@/lib/images';
@@ -27,6 +29,12 @@ import { STAT_ICON } from '@/lib/stats';
 import glossariesData from '@data/generated/glossaries.json';
 
 export const revalidate = 86400;
+
+/**
+ * La famille de tags qui a sa propre case de filtre (cf. `buildLabels`). Une
+ * seule existe : `limited` = festival + seasonal + collab.
+ */
+const LIMITED_GROUP: TagGroup = 'limited';
 
 /** chainType (donnée) → clé de libellé i18n. */
 const CHAIN_LABEL: Record<string, string> = {
@@ -150,11 +158,36 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       GIFT_NAMES[v]?.[lang] ?? GIFT_NAMES[v]?.en ?? v,
     ]),
   );
-  const allTags = [...new Set(rows.flatMap((r) => r.tags))];
-  const tagMap = Object.fromEntries(
-    allTags.map((tg) => [tg, tg.replace(/-/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase())]),
+  // Le libellé vient du GLOSSAIRE (`data/curated/tags.json`), pas d'un
+  // titlecase du slug : celui-ci affichait « Limited » là où la fiche du perso,
+  // qui lit le glossaire, affichait « Festival Units » — deux noms pour un même
+  // tag selon la page, et jamais traduit.
+  const presentTags = new Set(rows.flatMap((r) => r.tags));
+  const tagMap = Object.fromEntries([...presentTags].map((tg) => [tg, tagLabel(tg, lang)]));
+  const tagIcons = Object.fromEntries([...presentTags].map((tg) => [tg, img.tag(tg)]));
+
+  /**
+   * Une case de plus que de tags : la FAMILLE `limited` (festival + seasonal +
+   * collab). Le joueur cherche « les limitées » d'un seul geste, là où le jeu
+   * ne connaît que trois bannières ; sans elle il devait cocher trois cases et
+   * penser à passer la logique en OU.
+   *
+   * Elle vit ICI et pas dans le glossaire : `data/curated/tags.json` définit
+   * les tags que des PERSOS portent (son test le vérifie dans les deux sens) —
+   * aucun perso n'est taggé `limited`, c'est un agrégat d'affichage. Le
+   * glossaire dit de QUOI la famille est faite (`TagDef.group`), le libellé de
+   * la case est éditorial comme les autres libellés de filtre. Sans icône :
+   * le sprite du jeu (`CM_Recruit_Tag_Fes`) ne représente que le festival, le
+   * poser sur la famille rejouerait la confusion qu'on vient de lever.
+   */
+  const groupTags = tagsInGroup('limited').filter((tg) => presentTags.has(tg));
+  if (groupTags.length) tagMap[LIMITED_GROUP] = t('characters.filters.tag_group.limited');
+  // Ordre canonique du glossaire (celui des badges de carte), la famille
+  // ouvrant ses propres membres — et non un tri alphabétique sur des slugs que
+  // le lecteur ne voit jamais.
+  const tagOrder = sortTags([...presentTags]).flatMap((tg) =>
+    tg === groupTags[0] ? [LIMITED_GROUP, tg] : [tg],
   );
-  const tagIcons = Object.fromEntries(allTags.map((tg) => [tg, img.tag(tg)]));
 
   // ── Filtres d'effets / bonus (options dérivées des agrégats canoniques) ──
   const buffGroups = buildEffectGroups(
@@ -247,6 +280,8 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
       tag: tagMap,
     },
     tagIcons,
+    tagOrder,
+    tagGroups: groupTags.length ? { [LIMITED_GROUP]: groupTags } : {},
     effects: { buff: buffGroups, debuff: debuffGroups, sources, teamBonus },
   };
 }

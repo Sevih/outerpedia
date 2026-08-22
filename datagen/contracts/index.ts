@@ -39,7 +39,7 @@ export type {
   LocalizedText,
 } from '../curated/character';
 export type { EffectCurated } from '../curated/effects';
-export type { TagDef, TagGlossary, TagKind } from '../curated/tags';
+export type { TagDef, TagGlossary, TagGroup, TagKind } from '../curated/tags';
 export type {
   GearBuild,
   GearPick,

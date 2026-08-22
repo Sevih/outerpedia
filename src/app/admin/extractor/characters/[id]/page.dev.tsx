@@ -25,6 +25,7 @@ import { img } from '@/lib/images';
 import { lRec } from '@/lib/i18n/localize';
 import { statAbbr } from '@/lib/stats';
 import { getCharacter } from '@/lib/data/characters';
+import { tagDef, tagLabel } from '@/lib/data/tags';
 import { getCharacterCurated } from '@/lib/data/curated';
 import { entityReview, extractedBundle } from '@/lib/admin/review-store';
 import { diffLabels, skillLabel } from '@/lib/admin/diff-labels';
@@ -168,6 +169,13 @@ export default async function ExtractorCharacterDetail({
                 className="border-line-subtle text-content rounded border px-2 py-0.5 text-xs"
               >
                 {t}
+                {/* Le slug SEUL a longtemps suffi à égarer : `limited` s'affichait
+                    ici pour un perso que le glossaire nomme « Festival ». On
+                    montre les deux, plus la famille quand il y en a une. */}
+                <span className="text-content-subtle"> · {tagLabel(t, 'en')}</span>
+                {tagDef(t)?.group && (
+                  <span className="text-content-subtle"> · group: {tagDef(t)?.group}</span>
+                )}
                 {t === 'ignore-defense' && char.ignoreDefense && (
                   <span className="text-content-subtle"> · {char.ignoreDefense.join(' + ')}</span>
                 )}
@@ -180,7 +188,9 @@ export default async function ExtractorCharacterDetail({
         <p className="text-content-subtle text-xs">
           Acquisition ← banner (RecruitGroupTemplet) · ignore-defense ← penetration buffs
           (kit/EE/transcendence) · core-fusion ← lineage. The only human tag (<code>free</code>)
-          lives on the Editor side.
+          lives on the Editor side. <code>festival</code> is the game&apos;s own{' '}
+          <code>OUTER_FES</code> ribbon — &laquo;&nbsp;limited&nbsp;&raquo; is the GROUP of festival
+          + seasonal + collab, never a tag of its own.
         </p>
       </section>
 

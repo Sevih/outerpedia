@@ -1586,7 +1586,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // Icônes de tags (créées pour le wiki).
   for (const tag of [
     'premium',
-    'limited',
+    'festival',
     'seasonal',
     'collab',
     'free',

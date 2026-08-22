@@ -91,6 +91,23 @@ describe('vocabulaire des tags', () => {
     }
   });
 
+  it('la famille « limited » couvre les trois bannières qui ne reviennent pas', () => {
+    // LE point du renommage du 22/08/2026 : `limited` est le nom du GROUPE, pas
+    // celui d'un de ses membres. Quatre modules recopiaient la liste en dur ;
+    // elle se déclare maintenant ici et se lit avec `tagsInGroup`. Si une
+    // quatrième bannière limitée arrive, c'est CE test qui dit où l'inscrire.
+    const inGroup = Object.entries(glossary)
+      .filter(([, d]) => d.group === 'limited')
+      .map(([slug]) => slug)
+      .sort();
+    expect(inGroup).toEqual(['collab', 'festival', 'seasonal']);
+    // Un membre ne porte JAMAIS le nom de sa famille — c'était toute la
+    // confusion : un tag `limited` DANS le groupe `limited`.
+    expect(glossary.limited).toBeUndefined();
+    // Et seuls des tags d'acquisition peuvent en faire partie.
+    for (const slug of inGroup) expect(glossary[slug].kind, slug).toBe('recruit');
+  });
+
   it('chaque définition respecte le schéma (kind, name, desc?, sort)', () => {
     // La forme aussi est gardée, pas que la couverture : un `kind` hors enum ou
     // un `sort` manquant dans le fichier committé fait sonner la suite.
@@ -109,7 +126,7 @@ describe('vocabulaire des tags', () => {
 
 describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
   it('les catégories de bannière sont mutuellement exclusives', () => {
-    const recruitTags = ['premium', 'limited', 'seasonal', 'collab'];
+    const recruitTags = ['premium', 'festival', 'seasonal', 'collab'];
     for (const c of all) {
       const hits = (c.tags ?? []).filter((t) => recruitTags.includes(t));
       expect(hits.length, `${c.name.en} : ${hits.join('+')}`).toBeLessThanOrEqual(1);
@@ -120,7 +137,7 @@ describe('détection des tags d’acquisition (RecruitGroupTemplet)', () => {
     // Planchers, pas un recensement — cf. l'explication en tête de fichier.
     // Ces catégories grandissent à chaque bannière.
     expect(withTag('premium').length).toBeGreaterThanOrEqual(11);
-    expect(withTag('limited').length).toBeGreaterThanOrEqual(4);
+    expect(withTag('festival').length).toBeGreaterThanOrEqual(4);
     expect(withTag('seasonal').length).toBeGreaterThanOrEqual(6);
     expect(withTag('collab').length).toBeGreaterThanOrEqual(3);
   });
