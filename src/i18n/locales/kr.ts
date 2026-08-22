@@ -1,4 +1,4 @@
-﻿import type { TranslationKey } from './en';
+import type { TranslationKey } from './en';
 
 const kr: Record<TranslationKey, string> = {
   // Page 404
@@ -536,6 +536,15 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.caster_hprate_over': 'HP {n}% 이상',
   'tools.damage-calculator.context.cond.target_has_buff': '대상에게 버프 있음',
   'tools.damage-calculator.context.cond.target_has_not_buff': '대상에게 버프 없음',
+  // 버프 참조 조건 : {buff}는 인라인 태그(아이콘+이름)로 표시
+  'tools.damage-calculator.context.cond_ref.owner_has_buff': '자신에게 {buff} 있음',
+  'tools.damage-calculator.context.cond_ref.owner_has_all_buff': '자신에게 {buff} 모두 있음',
+  'tools.damage-calculator.context.cond_ref.owner_has_not_buff': '자신에게 {buff} 없음',
+  'tools.damage-calculator.context.cond_ref.caster_has_buff': '시전자에게 {buff} 있음',
+  'tools.damage-calculator.context.cond_ref.caster_has_not_buff': '시전자에게 {buff} 없음',
+  'tools.damage-calculator.context.cond_ref.caster_enemy_team_has_buff': '적 팀에 {buff} 있음',
+  'tools.damage-calculator.context.cond_ref.target_has_buff': '대상에게 {buff} 있음',
+  'tools.damage-calculator.context.cond_ref.target_has_not_buff': '대상에게 {buff} 없음',
   'tools.damage-calculator.context.cond.target_hprate_over': '대상 HP {n}% 이상',
   'tools.damage-calculator.context.cond.target_hprate_under': '대상 HP {n}% 이하',
   'tools.damage-calculator.context.cond.target_run_counter': '대상 행동 횟수 조건',
@@ -671,6 +680,9 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.loading': '계산 테이블 불러오는 중…',
   'tools.damage-calculator.report.tables_error':
     '계산 테이블을 불러오지 못했습니다 — 페이지를 새로고침해 주세요',
+  'tools.damage-calculator.report.dot': '지속 피해',
+  'tools.damage-calculator.report.dot_tick': '틱당 {n}',
+  'tools.damage-calculator.report.dot_apply': '부여 확률 {p}%',
   'tools.damage-calculator.report.critical': '치명타',
   'tools.damage-calculator.report.miss': '회피',
   'tools.damage-calculator.report.support_skills': '서포트 스킬(카드 없음): {names}',

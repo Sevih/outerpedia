@@ -313,6 +313,20 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(b1.clips).toEqual([{ name: '2000015_Skill_2_Upgrade', totalFactor: 1000 }]);
   });
 
+  it('DoT du kit : le S2 de Francesca porte sa ligne Bleed (tick § 11, pose certaine)', () => {
+    const r = buildDamageReport({ ...attackerBase(), id: '2000015' }, target(true), data);
+    const s2 = r.slots.find((x) => x.slot === 'S2' && x.burst === undefined)!;
+    const bleed = s2.dots?.find((d) => d.buffId === '2000015_2_1');
+    expect(bleed?.type).toBe('BT_DOT_BLEED');
+    expect(bleed?.tooltipId).toBe(3); // jointure glossaire (icône/nom UI)
+    expect(bleed?.damagePerTick ?? 0).toBeGreaterThan(0);
+    // DEBUFF_IGNORE_RESIST + CreateRate 1000 : pose certaine, sans jet § 5.
+    expect(bleed?.applyProbability).toBe(1);
+    expect(bleed?.turnDuration).toBe(2);
+    // Le S3 ne pose pas de DoT — pas de ligne inventée.
+    expect(r.slots.find((x) => x.slot === 'S3')!.dots).toBeUndefined();
+  });
+
   it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {
     // Même scénario, S3 vs S1 : la ligne S3 se calcule contre une DEF
     // réduite de moitié — un ratio S3/S1 nettement au-dessus du seul écart

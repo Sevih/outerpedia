@@ -1,4 +1,4 @@
-﻿import type { TranslationKey } from './en';
+import type { TranslationKey } from './en';
 
 const jp: Record<TranslationKey, string> = {
   // Page 404
@@ -546,6 +546,15 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.caster_hprate_over': 'HPが{n}%以上',
   'tools.damage-calculator.context.cond.target_has_buff': '対象にバフあり',
   'tools.damage-calculator.context.cond.target_has_not_buff': '対象にバフなし',
+  // バフ参照つき条件 : {buff} はインラインタグ（アイコン＋名前）になる
+  'tools.damage-calculator.context.cond_ref.owner_has_buff': '自身に{buff}がある',
+  'tools.damage-calculator.context.cond_ref.owner_has_all_buff': '自身に{buff}がすべてある',
+  'tools.damage-calculator.context.cond_ref.owner_has_not_buff': '自身に{buff}がない',
+  'tools.damage-calculator.context.cond_ref.caster_has_buff': '使用者に{buff}がある',
+  'tools.damage-calculator.context.cond_ref.caster_has_not_buff': '使用者に{buff}がない',
+  'tools.damage-calculator.context.cond_ref.caster_enemy_team_has_buff': '敵チームに{buff}がある',
+  'tools.damage-calculator.context.cond_ref.target_has_buff': '対象に{buff}がある',
+  'tools.damage-calculator.context.cond_ref.target_has_not_buff': '対象に{buff}がない',
   'tools.damage-calculator.context.cond.target_hprate_over': '対象のHPが{n}%以上',
   'tools.damage-calculator.context.cond.target_hprate_under': '対象のHPが{n}%以下',
   'tools.damage-calculator.context.cond.target_run_counter': '対象の行動回数の条件',
@@ -681,6 +690,9 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.loading': '計算テーブルを読み込み中…',
   'tools.damage-calculator.report.tables_error':
     '計算テーブルの読み込みに失敗しました — ページを再読み込みしてください',
+  'tools.damage-calculator.report.dot': '継続ダメージ',
+  'tools.damage-calculator.report.dot_tick': '1回あたり{n}',
+  'tools.damage-calculator.report.dot_apply': '付与率{p}%',
   'tools.damage-calculator.report.critical': 'クリティカル',
   'tools.damage-calculator.report.miss': '回避',
   'tools.damage-calculator.report.support_skills': 'サポートスキル（カードなし）：{names}',

@@ -738,6 +738,9 @@ export interface DotLineInput {
   buffChancePermille?: number;
   /** BUFF_RESIST du défenseur (‰). Défaut 0 (stat neutre). */
   buffResistPermille?: number;
+  /** `BuffDebuffType == DEBUFF_IGNORE_RESIST` : la pose saute le CheckResist
+   *  § 5 — P(pose) = P‰(CreateRate) seul (ex. le Bleed de Francesca). */
+  ignoreResist?: boolean;
 }
 
 export interface DotLine {
@@ -755,6 +758,8 @@ export interface DotLine {
 export function buildDotLine(input: DotLineInput): DotLine {
   const damagePerTick = calcDamageDOT(input);
   const pCreate = permilleSuccessProbability(input.createRatePermille);
-  const pResist = resistProbability(input.buffChancePermille ?? 0, input.buffResistPermille ?? 0);
+  const pResist = input.ignoreResist
+    ? 0
+    : resistProbability(input.buffChancePermille ?? 0, input.buffResistPermille ?? 0);
   return { damagePerTick, applyProbability: pCreate * (1 - pResist) };
 }

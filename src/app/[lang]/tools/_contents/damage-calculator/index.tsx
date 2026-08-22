@@ -30,7 +30,7 @@ import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
 import { presetSpawnStats } from '@/lib/damage/preset-target';
 import { familyMembersFor, uniqueGroupsOf } from '@/lib/damage/preset-gear';
 import { staticBossPassives } from '@/lib/damage/passives';
-import { buildCondBuffNames } from './cond-names';
+import { buildEffectRefs } from './cond-names';
 import { sheetSlugOfStat, type DamageBuffsData, type DamageTargetsData } from '@/lib/damage/inputs';
 import type { ActiveBuff } from '@/lib/damage/aggregate';
 import { loadDataJson } from '@/lib/data/disk';
@@ -645,9 +645,24 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const condLabels: Record<string, string> = Object.fromEntries(
     CONDITION_ENUMS.map((c) => [c, t(k(`context.cond.${c.toLowerCase()}` as never))]),
   );
-  // Noms des buffs RÉFÉRENCÉS par les conditions (prédicat + résolution :
-  // cond-names.ts, prédicat partagé avec le client via `conditionBuffRef`).
-  const condBuffNames = buildCondBuffNames(DMG_BUFFS, GLOSS, lang);
+  // Gabarits des conditions à buff RÉFÉRENCÉ : `{buff}` devient un tag inline
+  // (icône + nom + desc) côté client — Sevih 22/08/2026.
+  const BUFF_REF_ENUMS = [
+    'OWNER_HAS_BUFF',
+    'OWNER_HAS_ALL_BUFF',
+    'OWNER_HAS_NOT_BUFF',
+    'CASTER_HAS_BUFF',
+    'CASTER_HAS_NOT_BUFF',
+    'CASTER_ENEMY_TEAM_HAS_BUFF',
+    'TARGET_HAS_BUFF',
+    'TARGET_HAS_NOT_BUFF',
+  ] as const;
+  const condRefLabels: Record<string, string> = Object.fromEntries(
+    BUFF_REF_ENUMS.map((c) => [c, t(k(`context.cond_ref.${c.toLowerCase()}` as never))]),
+  );
+  // Références d'effets résolues (conditions `*HAS_BUFF*` + DoT des skills) :
+  // cond-names.ts, prédicat partagé avec le client via `conditionBuffRef`.
+  const effectRefs = buildEffectRefs(DMG_BUFFS, GLOSS, lang);
   const passivesCache = new Map<string, DcBossPassive[]>();
   const bossPassiveChips = (bossId: string): DcBossPassive[] => {
     const hit = passivesCache.get(bossId);
@@ -1016,6 +1031,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       mechanics: t(k('context.mechanics')),
       mechanicsHint: t(k('context.mechanics_hint')),
       conds: condLabels,
+      condsRef: condRefLabels,
       // Compteurs § 9.1 (« ×N buffs/débuffs ») — steppers contextuels.
       counters: t(k('context.counters')),
       countersHint: t(k('context.counters_hint')),
@@ -1052,6 +1068,9 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       unsupportedHint: t(k('report.unsupported_hint')),
       loading: t(k('report.loading')),
       tablesError: t(k('report.tables_error')),
+      dot: t(k('report.dot')),
+      dotTick: t(k('report.dot_tick')),
+      dotApply: t(k('report.dot_apply')),
     },
   };
 
@@ -1093,7 +1112,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       codexTiers={codexTiers}
       guildTiers={guildTiers}
       titleHpPct={titleHpPct}
-      condBuffNames={condBuffNames}
+      effectRefs={effectRefs}
       lang={lang}
       labels={labels}
     />

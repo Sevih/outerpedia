@@ -313,8 +313,9 @@ export function gearConditionMet(
 // ── Sélections de niveau (§ 17.5) ───────────────────────────────────────────
 
 /** La ligne de buff du niveau demandé — sinon la plus haute ligne ≤ demandé,
- *  sinon la première (un buff mono-niveau sert tous les paliers). */
-function pickBuffRow(rows: DataBuffLevel[], level: number): DataBuffLevel | undefined {
+ *  sinon la première (un buff mono-niveau sert tous les paliers). Exportée :
+ *  la sélection des lignes DoT (inputs.ts) suit la MÊME règle. */
+export function pickBuffRow(rows: DataBuffLevel[], level: number): DataBuffLevel | undefined {
   let best: DataBuffLevel | undefined;
   for (const r of rows) if (r.level <= level && (!best || r.level > best.level)) best = r;
   return best ?? rows[0];

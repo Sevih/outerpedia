@@ -269,4 +269,20 @@ describe('report — ligne DOT (§ 11 + § 5)', () => {
     expect(line.damagePerTick).toBe(100); // 100 × 1000 × 1e6 / 1e6, puis ×1000/1e6
     expect(line.applyProbability).toBe(1);
   });
+
+  it('DEBUFF_IGNORE_RESIST : la pose saute le CheckResist § 5 (P = CreateRate seul)', () => {
+    // Sans le flag, chance 0 vs resist 0 → seuil 9 → P(résist) ≈ 1 % ; avec le
+    // flag (Bleed de Francesca), P(pose) = P‰(1000) = 1 exactement.
+    const base = {
+      attackRate: 700,
+      statValue: 10000,
+      defense: 0,
+      piercePowerRate: 0,
+      piercePower: 0,
+      dmgReduceRate: 0,
+      createRatePermille: 1000,
+    };
+    expect(buildDotLine(base).applyProbability).toBeLessThan(1);
+    expect(buildDotLine({ ...base, ignoreResist: true }).applyProbability).toBe(1);
+  });
 });

@@ -126,6 +126,18 @@ export interface DcSet {
   hpScaled?: boolean;
 }
 
+/** Référence d'effet résolue (glossaire du jeu) — tag inline : icône + nom,
+ *  desc en tooltip. Sert les conditions `*_HAS_BUFF*` (« Target has <tag> »)
+ *  et les lignes DoT du Résultat. Clés = ids de tooltip (cond-names.ts). */
+export interface DcEffectRef {
+  name: string;
+  /** Sprite IG_Buff_* (rendu EffectIconTile). */
+  icon: string;
+  /** Desc officielle du glossaire — tooltip du tag. */
+  desc: string;
+  debuff: boolean;
+}
+
 /** Buff/débuff de scénario STANDARDISÉ (magnitude fixe du glossaire du jeu). */
 export interface DcBuffOption {
   key: string;
@@ -389,6 +401,9 @@ export interface DcLabels {
     teamBuffs: string;
     tgtBuffs: string;
     tgtDebuffs: string;
+    /** Gabarits des conditions à buff RÉFÉRENCÉ (placeholder `{buff}` → tag
+     *  inline icône + nom) — « Target has {buff} » (Sevih 22/08/2026). */
+    condsRef: Record<string, string>;
   };
   team: { emptySlot: string; eeOwned: string; eePlus: string };
   buffs: {
@@ -414,6 +429,10 @@ export interface DcLabels {
     unsupportedHint: string;
     loading: string;
     tablesError: string;
+    /** Lignes DoT (§ 11) — pied de la table Résultat : effet + tick. */
+    dot: string;
+    dotTick: string;
+    dotApply: string;
   };
 }
 
@@ -448,10 +467,11 @@ interface Props {
   guildTiers: number[];
   /** `% de PV max` du buff de titre « Premium Body » (growth.titleMaxHp). */
   titleHpPct: number;
-  /** Noms LOCALISÉS des buffs référencés par les conditions `*HAS_BUFF*`
-   *  (`conditionValue` = id de tooltip → glossaire des effets) — libellés des
-   *  mécaniques du panneau contexte. Id absent = sans nom dans le jeu. */
-  condBuffNames: Record<string, string>;
+  /** Références d'effets LOCALISÉES (nom + icône + desc, glossaire du jeu),
+   *  clés = ids de tooltip : buffs référencés par les conditions `*HAS_BUFF*`
+   *  (tag inline des mécaniques) ET DoT des skills (lignes du Résultat).
+   *  Id absent = sans nom dans le jeu (le client montre l'id brut). */
+  effectRefs: Record<string, DcEffectRef>;
   /** Langue rendue — localise les DESCS du catalogue de skills chargé à la
    *  demande (seul texte que le client localise : la donnée arrive en
    *  dictionnaires complets, tout le reste vient pré-localisé du wrapper). */
@@ -552,6 +572,21 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
       {children}
+    </span>
+  );
+}
+
+/** Tag INLINE d'un effet du glossaire : icône + nom, desc officielle en
+ *  tooltip — le même rendu pour les conditions (« Target has <tag> ») et les
+ *  lignes DoT du Résultat (Sevih 22/08/2026). */
+function EffectRefTag({ r }: { r: DcEffectRef }) {
+  return (
+    <span
+      title={r.desc || r.name}
+      className="border-line-subtle bg-surface-sunken/70 text-content inline-flex cursor-help items-center gap-1 rounded border px-1 py-0.5"
+    >
+      <EffectIconTile icon={r.icon} isDebuff={r.debuff} className="h-3.5 w-3.5" />
+      <span>{r.name}</span>
     </span>
   );
 }
@@ -1066,7 +1101,7 @@ export function DamageCalculatorBrowser({
   codexTiers,
   guildTiers,
   titleHpPct,
-  condBuffNames,
+  effectRefs,
   lang,
   labels: L,
 }: Props) {
@@ -1768,27 +1803,40 @@ export function DamageCalculatorBrowser({
     }
     return { name: e.buffId, ...(slot ? { slot } : {}) };
   };
-  /** Libellé LISIBLE de la condition d'une mécanique (« Target has a buff »,
+  /** Libellé LISIBLE de la condition d'une mécanique (« Target has … »,
    *  « Target HP below 90% »…) — gabarit localisé, `{n}` = seuil (HPRATE en
    *  ‰ → %) ; repli sur l'enum brut si le gabarit manquait. Quand la condition
    *  référence un buff PRÉCIS (`conditionBuffRef` — prédicat PARTAGÉ avec le
-   *  wrapper, sentinelles « n'importe quel buff » exclues), son nom résolu est
-   *  ajouté (« Enemy team has a buff : Burned » — Sevih 18/08/2026) ; sans nom
-   *  dans le jeu (marqueur technique au NameID vide, ex. 4089002 des
-   *  Irréguliers), l'id brut plutôt qu'un libellé générique trompeur. */
-  const mechCond = (e: (typeof statefulPassives)[number]): string | undefined => {
+   *  wrapper, sentinelles « n'importe quel buff » exclues), le gabarit
+   *  `condsRef` s'ouvre autour de `{buff}` et le buff devient un TAG INLINE
+   *  (icône + nom, desc en tooltip — Sevih 22/08/2026, remplace le « : nom »
+   *  en texte plat du 18/08) ; sans entrée au glossaire (marqueur technique
+   *  au NameID vide, ex. 4089002 des Irréguliers), l'id brut plutôt qu'un
+   *  libellé générique trompeur. */
+  const mechCond = (
+    e: (typeof statefulPassives)[number],
+  ): { pre: string; ref?: DcEffectRef; post?: string } | undefined => {
     if (!e.condition) return undefined;
+    const refId = conditionBuffRef(e.condition, e.conditionValue);
+    if (refId !== undefined) {
+      const ref = effectRefs[refId];
+      const tplRef = L.context.condsRef[e.condition];
+      if (ref && tplRef !== undefined) {
+        const [pre, post] = tplRef.split('{buff}');
+        return { pre, ref, ...(post ? { post } : {}) };
+      }
+      const tpl = L.context.conds[e.condition] ?? e.condition;
+      return { pre: `${tpl} : #${refId}` };
+    }
     const tpl = L.context.conds[e.condition];
-    if (!tpl) return e.condition;
-    const ref = conditionBuffRef(e.condition, e.conditionValue);
-    if (ref !== undefined) return `${tpl} : ${condBuffNames[ref] ?? `#${ref}`}`;
+    if (!tpl) return { pre: e.condition };
     const n =
       e.conditionValue !== undefined
         ? e.condition.includes('HPRATE')
           ? e.conditionValue / 10
           : e.conditionValue
         : undefined;
-    return n !== undefined ? tpl.replace('{n}', String(n)) : tpl;
+    return { pre: n !== undefined ? tpl.replace('{n}', String(n)) : tpl };
   };
 
   // ── Cycle de capture (harnais) : un scénario = UNE ligne de dégâts ──
@@ -2963,7 +3011,11 @@ export function DamageCalculatorBrowser({
                               </span>
                             )}
                             {cond && (
-                              <span className="text-content-subtle text-[10px]">— {cond}</span>
+                              <span className="text-content-subtle flex flex-wrap items-center gap-1 text-[10px]">
+                                — {cond.pre}
+                                {cond.ref && <EffectRefTag r={cond.ref} />}
+                                {cond.post}
+                              </span>
                             )}
                           </label>
                         );
@@ -3451,6 +3503,60 @@ export function DamageCalculatorBrowser({
                         </Fragment>
                       ));
                     })}
+                    {/* DoT posés par le kit (§ 11) : UNE ligne par EFFET en
+                      pied de table — le tag et les dégâts PAR TICK, rien
+                      d'autre (Sevih 22/08/2026 : la durée ne compte pas).
+                      Deux ticks différents pour un même effet (stat capturée
+                      au lancement) gardent chacun leur ligne — jamais deux
+                      valeurs fusionnées. Le tick périodique n'est pas
+                      désassemblé (§ 12.8) : pas de somme sur tours. */}
+                    {(() => {
+                      const seen = new Set<string>();
+                      const distinct = (report?.slots ?? [])
+                        .flatMap((s) => s.dots ?? [])
+                        .filter((d) => {
+                          const key = `${d.tooltipId ?? d.buffId}|${d.damagePerTick}|${d.applyProbability}`;
+                          if (seen.has(key)) return false;
+                          seen.add(key);
+                          return true;
+                        });
+                      if (!distinct.length) return null;
+                      return (
+                        <div className="bg-surface-raised/60 col-span-4 space-y-1 px-3 py-1.5">
+                          <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                            {L.report.dot}
+                          </span>
+                          {distinct.map((d, di) => {
+                            const ref =
+                              d.tooltipId !== undefined
+                                ? effectRefs[String(d.tooltipId)]
+                                : undefined;
+                            return (
+                              <div
+                                key={`${d.buffId}:${di}`}
+                                className="flex flex-wrap items-center gap-1.5 text-xs"
+                              >
+                                {ref ? (
+                                  <EffectRefTag r={ref} />
+                                ) : (
+                                  <span className="text-content-subtle font-mono">{d.buffId}</span>
+                                )}
+                                <span className="text-content font-mono font-bold tabular-nums">
+                                  {vars(L.report.dotTick, { n: d.damagePerTick.toLocaleString() })}
+                                </span>
+                                {d.applyProbability < 1 && (
+                                  <span className="text-content-subtle text-[10px]">
+                                    {vars(L.report.dotApply, {
+                                      p: Math.round(d.applyProbability * 100),
+                                    })}
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })()}
                   </div>
                 </div>
 

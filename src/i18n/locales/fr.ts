@@ -1,4 +1,4 @@
-﻿import type { TranslationKey } from './en';
+import type { TranslationKey } from './en';
 
 const fr: Record<TranslationKey, string> = {
   // Page 404
@@ -564,6 +564,16 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.caster_hprate_over': 'PV au-dessus de {n} %',
   'tools.damage-calculator.context.cond.target_has_buff': 'La cible a un buff',
   'tools.damage-calculator.context.cond.target_has_not_buff': "La cible n'a aucun buff",
+  // Variantes à buff référencé : {buff} devient un tag inline (icône + nom)
+  'tools.damage-calculator.context.cond_ref.owner_has_buff': 'Le porteur a {buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_all_buff': 'Le porteur a tous : {buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_not_buff': "Le porteur n'a pas {buff}",
+  'tools.damage-calculator.context.cond_ref.caster_has_buff': 'Le lanceur a {buff}',
+  'tools.damage-calculator.context.cond_ref.caster_has_not_buff': "Le lanceur n'a pas {buff}",
+  'tools.damage-calculator.context.cond_ref.caster_enemy_team_has_buff':
+    "L'équipe ennemie a {buff}",
+  'tools.damage-calculator.context.cond_ref.target_has_buff': 'La cible a {buff}',
+  'tools.damage-calculator.context.cond_ref.target_has_not_buff': "La cible n'a pas {buff}",
   'tools.damage-calculator.context.cond.target_hprate_over': 'PV de la cible au-dessus de {n} %',
   'tools.damage-calculator.context.cond.target_hprate_under': 'PV de la cible en dessous de {n} %',
   'tools.damage-calculator.context.cond.target_run_counter':
@@ -704,6 +714,9 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.loading': 'chargement des tables de calcul…',
   'tools.damage-calculator.report.tables_error':
     'échec du chargement des tables — recharger la page',
+  'tools.damage-calculator.report.dot': 'Dégâts sur la durée',
+  'tools.damage-calculator.report.dot_tick': '{n} par tick',
+  'tools.damage-calculator.report.dot_apply': 'chance de pose {p} %',
   'tools.damage-calculator.report.critical': 'Critique',
   'tools.damage-calculator.report.miss': 'Esquivé',
   'tools.damage-calculator.report.support_skills': 'Skills de soutien (sans carte) : {names}',

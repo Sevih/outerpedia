@@ -30,6 +30,7 @@ import { collectStatChannels, type ActiveBuff } from './aggregate';
 import { calcBaseStat } from './formula';
 import {
   burstableSlotOf,
+  pickBuffRow,
   resolveGearPassives,
   resolveKitPassives,
   resolveQuirkPassives,
@@ -39,6 +40,7 @@ import {
 import { BASE_AMOUNT_STATS, resolveBossPassives, type BossPassivesInfo } from './passives';
 import {
   attachChainClips,
+  buildDotLine,
   buildSkillReport,
   groupHitsByChain,
   type ReportScenario,
@@ -162,6 +164,17 @@ export interface DataBuffLevel {
   /** `CallerSkillType` (`SKT_*`, CSV) — buff restreint aux skills LANCEURS
    *  (ex. nœuds « Chain Damage » : SKT_STRIKE_* seulement). */
   callerSkillType?: string;
+  /** ‰ — proba de pose (`CheckProbabilityPermille` puis CheckResist § 5). */
+  createRate?: number;
+  /** Valeur effective = `value × stacks` (§ 14.1). */
+  stackCount?: number;
+  /** `DEBUFF_IGNORE_RESIST` = pose sans jet de résistance § 5. */
+  buffDebuffType?: string;
+  /** Tours de présence (`-1` = permanent) — affichage des lignes DoT. */
+  turnDuration?: number;
+  /** Jointure vers le glossaire des effets (même espace d'ids que
+   *  `conditionValue` des conditions `*_HAS_BUFF*`) — icône/nom UI. */
+  tooltipId?: number;
 }
 
 export interface DamageBuffsData {
@@ -524,6 +537,27 @@ export interface BuildReportOptions extends SkillReportOptions {
   includeMissBranch?: boolean;
 }
 
+/** Un DoT posé par le skill (BT_DOT_* des `buffIds` du niveau servi) —
+ *  dégâts PAR TICK § 11 + proba de pose § 5. Le tick périodique lui-même
+ *  (ordre, cumul sur tours) n'est pas désassemblé (§ 12.8) : la ligne montre
+ *  le tick et la durée, jamais une somme inventée. */
+export interface SlotDotLine {
+  buffId: string;
+  /** `BT_DOT_*` (BLEED, BURN, POISON…). */
+  type: string;
+  /** Jointure glossaire des effets (icône + nom UI) — `ToolTipID` du templet. */
+  tooltipId?: number;
+  /** Dégâts d'UN tick (§ 11 — stat de référence capturée au lancement). */
+  damagePerTick: number;
+  /** P(pose) = P‰(CreateRate) × (1 − P(résist § 5)) — résistance sautée si
+   *  `DEBUFF_IGNORE_RESIST` (ex. le Bleed de Francesca). */
+  applyProbability: number;
+  /** Tours de présence (`TurnDuration`). */
+  turnDuration?: number;
+  /** Stacks posés d'un coup (`StackCount` > 1). */
+  stackCount?: number;
+}
+
 /** Une ligne de rapport par source de skill (S2 et ses bursts séparés). */
 export interface SlotReport {
   slot: 'S1' | 'S2' | 'S3';
@@ -535,6 +569,8 @@ export interface SlotReport {
   /** Chaînes de hits irrésolues (§ 12.4) — la ligne n'a pas de dégâts. */
   hitsUnresolved?: boolean;
   report: SkillReport;
+  /** DoT posés par ce skill (dégâts par tick § 11) — absents si aucun. */
+  dots?: SlotDotLine[];
 }
 
 export interface DamageReportResult {
@@ -1062,6 +1098,60 @@ export function buildDamageReport(
     return stats;
   };
 
+  // DoT posés par un skill : les BT_DOT_* de ses `buffIds` au niveau servi,
+  // tick § 11 sur les stats de LA ligne (stat de référence capturée au
+  // lancement — même canal § 16.1 que les procs). Un DoT sans taux OAT_RATE
+  // d'une stat lisible n'a pas de tick calculable : pas de ligne inventée.
+  const collectSlotDots = (
+    buffIds: string[],
+    buffLevel: number,
+    slotScenario: ReportScenario,
+  ): SlotDotLine[] => {
+    const out: SlotDotLine[] = [];
+    for (const id of buffIds) {
+      const rows = data.buffs.buffs[id];
+      if (!rows?.length) continue;
+      const row = pickBuffRow(rows, buffLevel);
+      if (!row || !row.type.startsWith('BT_DOT_')) continue;
+      if (!row.targetType?.startsWith('ENEMY')) continue;
+      // Row conditionnelle = inactive par défaut (contexte absent = 0, § 12.1)
+      // — ex. le Bleed OWNER_IS_BOSS du S1 de Francesca (version monstre du
+      // kit) : jamais posé par un attaquant joueur, pas de ligne fantôme.
+      if (row.conditionType !== undefined) continue;
+      if (row.applyingType !== 'OAT_RATE' || row.value === undefined || row.stat === undefined)
+        continue;
+      const statValue =
+        row.stat === 'ST_ATK'
+          ? slotScenario.attacker.attackStat
+          : (slotScenario.additionalContext?.attackerStat?.(row.stat) ?? 0);
+      if (statValue <= 0) continue;
+      const line = buildDotLine({
+        attackRate: row.value,
+        statValue,
+        defense: slotScenario.defender.defense,
+        piercePowerRate: slotScenario.attacker.piercePowerRate,
+        piercePower: slotScenario.attacker.piercePower,
+        dmgReduceRate: slotScenario.defender.dmgReduceRate,
+        createRatePermille: row.createRate ?? 1000,
+        buffChancePermille: slotScenario.additionalContext?.attackerStat?.('ST_BUFF_CHANCE') ?? 0,
+        buffResistPermille: slotScenario.additionalContext?.defenderStat?.('ST_BUFF_RESIST') ?? 0,
+        ignoreResist: row.buffDebuffType === 'DEBUFF_IGNORE_RESIST',
+      });
+      out.push({
+        buffId: id,
+        type: row.type,
+        ...(row.tooltipId !== undefined ? { tooltipId: row.tooltipId } : {}),
+        damagePerTick: line.damagePerTick,
+        applyProbability: line.applyProbability,
+        ...(row.turnDuration !== undefined ? { turnDuration: row.turnDuration } : {}),
+        ...(row.stackCount !== undefined && row.stackCount > 1
+          ? { stackCount: row.stackCount }
+          : {}),
+      });
+    }
+    return out;
+  };
+
   const slots: SlotReport[] = [];
   const pushSlot = (slot: 'S1' | 'S2' | 'S3', sk: DataSkill, burst?: number) => {
     const wanted = attacker.skillLevels[slot] ?? sk.levels.length;
@@ -1149,6 +1239,7 @@ export function buildDamageReport(
       slotScenario,
       options,
     );
+    const dots = collectSlotDots(lv.buffIds, lv.level, slotScenario);
     slots.push({
       slot,
       skillId: sk.id,
@@ -1156,6 +1247,7 @@ export function buildDamageReport(
       skillLevel: lv.level,
       ...(sk.hitsUnresolved ? { hitsUnresolved: true } : {}),
       report,
+      ...(dots.length ? { dots } : {}),
     });
   };
 

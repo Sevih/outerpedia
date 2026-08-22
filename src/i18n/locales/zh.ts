@@ -1,4 +1,4 @@
-﻿import type { TranslationKey } from './en';
+import type { TranslationKey } from './en';
 
 const zh: Record<TranslationKey, string> = {
   // Page 404
@@ -528,6 +528,15 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.caster_hprate_over': 'HP高于{n}%',
   'tools.damage-calculator.context.cond.target_has_buff': '目标有增益',
   'tools.damage-calculator.context.cond.target_has_not_buff': '目标无增益',
+  // 引用具体效果的条件：{buff} 渲染为内联标签（图标+名称）
+  'tools.damage-calculator.context.cond_ref.owner_has_buff': '自身拥有{buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_all_buff': '自身拥有全部{buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_not_buff': '自身没有{buff}',
+  'tools.damage-calculator.context.cond_ref.caster_has_buff': '施放者拥有{buff}',
+  'tools.damage-calculator.context.cond_ref.caster_has_not_buff': '施放者没有{buff}',
+  'tools.damage-calculator.context.cond_ref.caster_enemy_team_has_buff': '敌方队伍拥有{buff}',
+  'tools.damage-calculator.context.cond_ref.target_has_buff': '目标拥有{buff}',
+  'tools.damage-calculator.context.cond_ref.target_has_not_buff': '目标没有{buff}',
   'tools.damage-calculator.context.cond.target_hprate_over': '目标HP高于{n}%',
   'tools.damage-calculator.context.cond.target_hprate_under': '目标HP低于{n}%',
   'tools.damage-calculator.context.cond.target_run_counter': '目标行动次数条件',
@@ -660,6 +669,9 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.branches_note': '枚举分支 · 精确概率',
   'tools.damage-calculator.report.loading': '正在加载计算数据…',
   'tools.damage-calculator.report.tables_error': '计算数据加载失败 — 请刷新页面重试',
+  'tools.damage-calculator.report.dot': '持续伤害',
+  'tools.damage-calculator.report.dot_tick': '每跳{n}',
+  'tools.damage-calculator.report.dot_apply': '施加概率{p}%',
   'tools.damage-calculator.report.critical': '暴击',
   'tools.damage-calculator.report.miss': '闪避',
   'tools.damage-calculator.report.support_skills': '辅助技能（无卡片）：{names}',

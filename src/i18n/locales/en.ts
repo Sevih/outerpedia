@@ -1,4 +1,4 @@
-﻿// Source of truth — exports TranslationKey type.
+// Source of truth — exports TranslationKey type.
 //
 // CONTRAT (gardé par locales/keys.test.ts depuis la fin du portage) :
 // chaque clé a un CONSOMMATEUR dans le code (littéral ou préfixe dynamique
@@ -557,6 +557,15 @@ const en = {
   'tools.damage-calculator.context.cond.caster_hprate_over': 'HP above {n}%',
   'tools.damage-calculator.context.cond.target_has_buff': 'Target has a buff',
   'tools.damage-calculator.context.cond.target_has_not_buff': 'Target has no buff',
+  // Buff-referencing variants: {buff} becomes an inline effect tag (icon+name)
+  'tools.damage-calculator.context.cond_ref.owner_has_buff': 'Self has {buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_all_buff': 'Self has all: {buff}',
+  'tools.damage-calculator.context.cond_ref.owner_has_not_buff': 'Self does not have {buff}',
+  'tools.damage-calculator.context.cond_ref.caster_has_buff': 'Caster has {buff}',
+  'tools.damage-calculator.context.cond_ref.caster_has_not_buff': 'Caster does not have {buff}',
+  'tools.damage-calculator.context.cond_ref.caster_enemy_team_has_buff': 'Enemy team has {buff}',
+  'tools.damage-calculator.context.cond_ref.target_has_buff': 'Target has {buff}',
+  'tools.damage-calculator.context.cond_ref.target_has_not_buff': 'Target does not have {buff}',
   'tools.damage-calculator.context.cond.target_hprate_over': 'Target HP above {n}%',
   'tools.damage-calculator.context.cond.target_hprate_under': 'Target HP below {n}%',
   'tools.damage-calculator.context.cond.target_run_counter': "Target's action count condition",
@@ -696,6 +705,9 @@ const en = {
   'tools.damage-calculator.report.loading': 'loading damage tables…',
   'tools.damage-calculator.report.tables_error':
     'damage tables failed to load — refresh the page to retry',
+  'tools.damage-calculator.report.dot': 'Damage over time',
+  'tools.damage-calculator.report.dot_tick': '{n} per tick',
+  'tools.damage-calculator.report.dot_apply': 'apply chance {p}%',
   'tools.damage-calculator.report.critical': 'Critical',
   'tools.damage-calculator.report.miss': 'Miss',
   'tools.damage-calculator.report.support_skills': 'Support skills (no card): {names}',

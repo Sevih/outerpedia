@@ -62,6 +62,11 @@ export interface DamageBuffLevel {
   isDebuff?: boolean;
   isIgnoreImmune?: boolean;
   isIgnoreResist?: boolean;
+  /** `ToolTipID` — JOINTURE vers le glossaire des effets (même espace d'ids
+   *  que `conditionValue` des conditions `*_HAS_BUFF*`) : l'UI y résout nom,
+   *  icône et description (ex. lignes DoT du résultat). Pas un champ visuel :
+   *  c'est la clé de résolution, le visuel vit dans le glossaire. */
+  tooltipId?: number;
 }
 
 export interface DamageBuffsData {
@@ -125,6 +130,7 @@ function buffLevel(r: Row): DamageBuffLevel {
     ...opt(bool(r.IsDebuff), 'isDebuff', true),
     ...opt(bool(r.IsIgnoreImmune), 'isIgnoreImmune', true),
     ...opt(bool(r.IsIgnoreResist), 'isIgnoreResist', true),
+    ...opt(!!r.ToolTipID && r.ToolTipID !== '0', 'tooltipId', num(r.ToolTipID)),
   };
 }
 

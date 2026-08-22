@@ -7,6 +7,32 @@
 
 ## 2026-08-22
 
+- **Damage calc — lignes DoT dans le Résultat et conditions en tag inline.**
+  Décision Sevih : les conditions d'état restent MANUELLES (pas
+  d'automatisation HAS_BUFF), mais leur affichage montre l'effet référencé en
+  tag inline — « La cible a [🩸 Bleeding] » (icône + nom, desc officielle en
+  tooltip) au lieu du « : Bleeding » en texte plat. Le pont existait déjà :
+  `conditionValue` des conditions ET `ToolTipID` des templets de buff vivent
+  dans le MÊME espace d'ids du glossaire des effets — `ToolTipID` ajouté à
+  `buffs.json` (c'est une clé de jointure, pas un champ visuel),
+  `cond-names.ts` → `buildEffectRefs` (nom + icône + desc + sens), gabarits
+  `cond_ref.*` à placeholder `{buff}` dans les 5 locales. Et le même pont
+  sert la 2ᵉ demande : les **DoT posés par les skills** (BT_DOT_* des
+  `buffIds` du niveau servi, le Bleed 725 ‰ ATK de Francesca en tête) ont
+  leur ligne en PIED de la table Résultat — UNE par effet, tag + dégâts PAR
+  TICK et rien d'autre (Sevih : « on se fiche de la durée » — elle reste
+  dans la donnée moteur, pas à l'écran ; deux ticks différents d'un même
+  effet gardent chacun leur ligne). Tick = § 11 (`CalcDamageDOT` sur les
+  stats de la ligne) ; proba de pose affichée seulement si incertaine (§ 5 —
+  sautée si `DEBUFF_IGNORE_RESIST`, nouveau flag de `buildDotLine`) ; une
+  row conditionnelle (le Bleed OWNER_IS_BOSS de la version monstre du kit)
+  n'est pas émise — contexte absent = 0. Détail appris en route : le burst
+  du S2 de Francesca pose RÉELLEMENT deux Bleedings (2_1 + u_1) — mêmes
+  ticks, donc une seule ligne à l'écran.
+  Le tick périodique n'étant pas désassemblé (§ 12.8), on affiche le tick,
+  jamais une somme sur tours inventée. Le tick § 11 n'a JAMAIS été vérifié
+  in-game : première capture du Bleed attendue pour le valider.
+
 - **Damage calc — le § 8.1 passe au modèle PAR CLIP : 26/26 observations
   exactes au point près.** Suite directe de l'entrée précédente : l'extraction
   des AnimationEvents est devenue un pipeline. `extract-anim-events.py`
