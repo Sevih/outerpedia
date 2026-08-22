@@ -215,16 +215,20 @@
     {
       "platform": "youtube",
       "id": "TTFAtX5A4dg",
-      "title": "Urd (Dark) - Dimensional Singularity - Rank SSS++",
-      "author": "Sevih",
-      "label": "Mero — Rank SSS++"
+      "title": "Urd (Dark) - Rank SSS++",
+      "author": "Sevih"
     },
     {
       "platform": "youtube",
       "id": "1--P5DZ2VZM",
-      "title": "Light team vs Urd (Dark Element) - Dimensional Singularity",
-      "author": "baba yaga",
-      "label": "Light Team"
+      "title": "Light team",
+      "author": "baba yaga"
+    },
+    {
+      "platform": "youtube",
+      "id": "kbPCuR0tjSU",
+      "title": "Light Team 2",
+      "author": "baba yaga"
     }
   ]
 }
