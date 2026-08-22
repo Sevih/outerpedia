@@ -3649,6 +3649,18 @@
       "first": 1,
       "second": 2,
       "ultimate": 3
+    },
+    "prosCons": {
+      "pros": [],
+      "cons": [
+        {
+          "en": "Cannot be placed on the same team as another limited {C/Ranger} (such as {P/Heatwave Cop Delta}).",
+          "jp": "他の限定版{C/Ranger}（例：{P/Heatwave Cop Delta}）と同じチームに配置することはできません。",
+          "kr": "다른 한정판 ‘{C/Ranger}’(예: {P/Heatwave Cop Delta})과 같은 팀에 배치할 수 없습니다.",
+          "zh": "不能与另一名受限{C/Ranger}（例如{P/Heatwave Cop Delta}）分在同一支队伍中。",
+          "fr": "Ne peut pas faire partie de la même équipe qu'un autre « limited-{C/Ranger} » (tel que {P/Heatwave Cop Delta})."
+        }
+      ]
     }
   },
   "2000098": {
@@ -4457,6 +4469,18 @@
       "first": 3,
       "second": 1,
       "ultimate": 2
+    },
+    "prosCons": {
+      "pros": [],
+      "cons": [
+        {
+          "fr": "Ne peut pas faire partie de la même équipe qu’un autre « limited {C/Ranger} » (comme « {P/Ryu Lion} »).",
+          "en": "Cannot be placed on the same team as another limited {C/Ranger} (such as {P/Ryu Lion}).",
+          "jp": "他のリミテッド・{C/Ranger}（例：{P/Ryu Lion}）と同じチームに配置することはできません。",
+          "kr": "다른 한정판 ‘{C/Ranger}’ (예: ‘{P/Ryu Lion}’ 등)과 같은 팀에 배치할 수 없습니다.",
+          "zh": "不能与另一名受限的{C/Ranger}（例如{P/Ryu Lion}）分在同一支队伍中。"
+        }
+      ]
     }
   },
   "2000129": {
