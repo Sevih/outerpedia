@@ -558,6 +558,28 @@ export interface SlotDotLine {
   stackCount?: number;
 }
 
+/**
+ * DoT DISTINCTS d'un rapport — dédup par EFFET + tick + proba, pas par slot
+ * ni par buffId : les poses jumelles (les Bleeds du S1/S2 de Francesca)
+ * fusionnent, deux ticks différents d'un même effet gardent chacun leur
+ * ligne. MÊME liste pour le pied de la table Résultat et pour
+ * `flattenReport` (capture/rejeu — clé `dot:<buffId>` du premier
+ * représentant, ordre des slots donc déterministe).
+ */
+export function distinctDots(slots: SlotReport[]): SlotDotLine[] {
+  const seen = new Set<string>();
+  const out: SlotDotLine[] = [];
+  for (const s of slots) {
+    for (const d of s.dots ?? []) {
+      const key = `${d.tooltipId ?? d.buffId}|${d.damagePerTick}|${d.applyProbability}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(d);
+    }
+  }
+  return out;
+}
+
 /** Une ligne de rapport par source de skill (S2 et ses bursts séparés). */
 export interface SlotReport {
   slot: 'S1' | 'S2' | 'S3';

@@ -13,6 +13,7 @@ import { calcBaseStat } from './formula';
 import {
   buildCombatStats,
   buildDamageReport,
+  distinctDots,
   dungeonModeOf,
   elementOf,
   eventMaxHpRate,
@@ -325,6 +326,12 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(bleed?.turnDuration).toBe(2);
     // Le S3 ne pose pas de DoT — pas de ligne inventée.
     expect(r.slots.find((x) => x.slot === 'S3')!.dots).toBeUndefined();
+    // distinctDots (pied de table ET flattenReport) : les poses jumelles
+    // fusionnent — S1/S2/bursts posent tous le même Bleed 725 ‰ (+ le second
+    // Bleed 1 tour des bursts, MÊME tick) → UNE seule ligne au final.
+    const distinct = distinctDots(r.slots);
+    expect(distinct).toHaveLength(1);
+    expect(distinct[0].buffId).toBe('2000015_1_1');
   });
 
   it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {

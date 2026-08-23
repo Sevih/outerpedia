@@ -74,7 +74,16 @@
   row conditionnelle (le Bleed OWNER_IS_BOSS de la version monstre du kit)
   n'est pas émise — contexte absent = 0. Détail appris en route : le burst
   du S2 de Francesca pose RÉELLEMENT deux Bleedings (2_1 + u_1) — mêmes
-  ticks, donc une seule ligne à l'écran.
+  ticks, donc une seule ligne à l'écran. Sevih a vérifié en jeu : le tick
+  § 11 « a l'air de matcher » — et pour pouvoir DÉPANNER un DoT qui ne
+  matche pas, les lignes DoT entrent dans le cycle de capture du harnais :
+  dédup partagée `distinctDots` (moteur), lignes `dot:<buffId>` dans
+  `flattenReport` (branche `normal` par convention), saisie « en jeu » +
+  Δ + « + » sur chaque ligne du pied de table — une fixture peut désormais
+  observer un tick. Et la première est tombée dans la foulée : tick du
+  Bleed de Francesca sur Ars Nova, 1494 observé = 1494 calculé (0.00 %,
+  `francesca-dot-bleed.json`) — CalcDamageDOT (§ 11) validé in-game de
+  bout en bout, 28ᵉ observation du corpus, toutes exactes.
   Le tick périodique n'étant pas désassemblé (§ 12.8), on affiche le tick,
   jamais une somme sur tours inventée. Le tick § 11 n'a JAMAIS été vérifié
   in-game : première capture du Bleed attendue pour le valider.

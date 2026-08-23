@@ -39,6 +39,7 @@ import {
 } from '@/lib/damage/scenario';
 import {
   buildDamageReport,
+  distinctDots,
   elementOf,
   type DamageData,
   type DamageReportResult,
@@ -3506,20 +3507,12 @@ export function DamageCalculatorBrowser({
                     {/* DoT posés par le kit (§ 11) : UNE ligne par EFFET en
                       pied de table — le tag et les dégâts PAR TICK, rien
                       d'autre (Sevih 22/08/2026 : la durée ne compte pas).
-                      Deux ticks différents pour un même effet (stat capturée
-                      au lancement) gardent chacun leur ligne — jamais deux
-                      valeurs fusionnées. Le tick périodique n'est pas
-                      désassemblé (§ 12.8) : pas de somme sur tours. */}
+                      Dédup `distinctDots` — la MÊME que flattenReport : la
+                      clé de capture `dot:<buffId>` retrouve sa ligne au
+                      rejeu. En devMode, saisie « en jeu » + Δ + « + » comme
+                      les cellules de branches (dépannage d'un tick § 11). */}
                     {(() => {
-                      const seen = new Set<string>();
-                      const distinct = (report?.slots ?? [])
-                        .flatMap((s) => s.dots ?? [])
-                        .filter((d) => {
-                          const key = `${d.tooltipId ?? d.buffId}|${d.damagePerTick}|${d.applyProbability}`;
-                          if (seen.has(key)) return false;
-                          seen.add(key);
-                          return true;
-                        });
+                      const distinct = distinctDots(report?.slots ?? []);
                       if (!distinct.length) return null;
                       return (
                         <div className="bg-surface-raised/60 col-span-4 space-y-1 px-3 py-1.5">
@@ -3531,6 +3524,13 @@ export function DamageCalculatorBrowser({
                               d.tooltipId !== undefined
                                 ? effectRefs[String(d.tooltipId)]
                                 : undefined;
+                            const lineSlot = `dot:${d.buffId}`;
+                            const obsKey = `${lineSlot}|normal`;
+                            const seen = Number(obs[obsKey]);
+                            const filled = Number.isFinite(seen) && seen > 0;
+                            const delta = filled
+                              ? ((d.damagePerTick - seen) / seen) * 100
+                              : undefined;
                             return (
                               <div
                                 key={`${d.buffId}:${di}`}
@@ -3549,6 +3549,43 @@ export function DamageCalculatorBrowser({
                                     {vars(L.report.dotApply, {
                                       p: Math.round(d.applyProbability * 100),
                                     })}
+                                  </span>
+                                )}
+                                {devMode && (
+                                  <span className="flex items-center gap-1.5">
+                                    <input
+                                      value={obs[obsKey] ?? ''}
+                                      onChange={(e) =>
+                                        setObs((p) => ({ ...p, [obsKey]: e.target.value }))
+                                      }
+                                      inputMode="numeric"
+                                      placeholder="en jeu"
+                                      className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
+                                    />
+                                    <span
+                                      className={`w-14 text-center font-mono text-[10px] ${
+                                        delta === undefined
+                                          ? 'text-content-subtle'
+                                          : Math.abs(delta) <= DEFAULT_TOLERANCE
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                      }`}
+                                    >
+                                      {delta !== undefined ? `${delta.toFixed(2)}%` : 'Δ'}
+                                    </span>
+                                    <button
+                                      type="button"
+                                      onClick={() => saveCell(lineSlot, 'normal', Math.round(seen))}
+                                      disabled={!filled}
+                                      title={
+                                        filled
+                                          ? 'sauvegarder ce scénario'
+                                          : 'saisir la valeur en jeu d’abord'
+                                      }
+                                      className="text-success hover:text-accent cursor-pointer font-mono text-base leading-none font-extrabold disabled:cursor-not-allowed disabled:opacity-35"
+                                    >
+                                      +
+                                    </button>
                                   </span>
                                 )}
                               </div>

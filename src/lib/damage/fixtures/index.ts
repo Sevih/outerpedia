@@ -23,6 +23,7 @@ import francescaS3 from './francesca-s3.json';
 import francescaS2crit from './francesca-s2-crit.json';
 import francescaS2 from './francesca-s2.json';
 import francescaS2b2 from './francesca-s2-burst2.json';
+import francescaDotBleed from './francesca-dot-bleed.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -57,4 +58,7 @@ export const FIXTURES: DamageFixture[] = [
   // structurel § 8.1 : le burst joue le clip unique Skill_2_Upgrade (une
   // cascade de 1000 ‰) là où le S2 de base fait cascade(700) + cascade(300).
   francescaS2b2 as DamageFixture,
+  // Premier tick de DoT mesuré in-game (22/08/2026) — valide CalcDamageDOT
+  // (§ 11) de bout en bout : le Bleed de Francesca sur Ars Nova.
+  francescaDotBleed as DamageFixture,
 ];

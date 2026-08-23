@@ -10,7 +10,12 @@
  */
 
 import type { DamageBranch } from './harness';
-import type { AttackerBuildInput, DamageReportResult, TargetBuildInput } from './inputs';
+import {
+  distinctDots,
+  type AttackerBuildInput,
+  type DamageReportResult,
+  type TargetBuildInput,
+} from './inputs';
 import { MAX_USER_TEAM_MEMBER } from './types';
 
 // ── Référentiels de saisie (l'UI et le pont lisent LA même table) ───────────
@@ -314,7 +319,8 @@ export function buildInputsFromZ(
 // ── Aplat du rapport (capture et rejeu parlent LA même clé) ─────────────────
 
 export interface ObservedLine {
-  /** `S1`/`S2`/`S3`, burst en suffixe (`S2b1`), état non-base en `#chaîne`. */
+  /** `S1`/`S2`/`S3`, burst en suffixe (`S2b1`), état non-base en `#chaîne` ;
+   *  DoT en `dot:<buffId>` (le tick § 11, branche `normal` par convention). */
   slot: string;
   branch: DamageBranch;
   damage: number;
@@ -335,6 +341,13 @@ export function flattenReport(result: DamageReportResult): ObservedLine[] {
         out.push({ slot, branch: b.branch, damage: b.totalDamage });
       }
     }
+  }
+  // Lignes DoT (§ 11) : mêmes DoT DISTINCTS que le pied de la table Résultat
+  // (dédup `distinctDots`), clé `dot:<buffId>` — un tick n'a pas de branche,
+  // `normal` par convention. Saisie/dépannage comme les hits (Sevih
+  // 22/08/2026 : « si y'en a un qui merde on peux pas le dépanner »).
+  for (const d of distinctDots(result.slots)) {
+    out.push({ slot: `dot:${d.buffId}`, branch: 'normal', damage: d.damagePerTick });
   }
   return out;
 }

@@ -1,0 +1,50 @@
+{
+  "name": "Francesca vs Ars Nova - tick du Bleed (DoT section 11)",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0xMlDAAuVaABYY4jCADGAJwCWAuVLAEA+gBMAtgHMosAJy5JABzkBTGVLOrjAewDuF1TMFm9SepgBGAVwBmfqpSABZgAHZW7gAccCDcIIp6KHDwIgj6kGkA7LgIUShRcUA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "dot:2000015_1_1",
+      "branch": "normal",
+      "damage": 1494
+    }
+  ],
+  "notes": "Capture Sevih 22/08/2026 — PREMIERE mesure in-game d un tick de DoT : 1494 EXACT (0.00 %). Valide CalcDamageDOT (section 11) de bout en bout : attackRate (725 pour mille, Bleed de Francesca) x stat de reference (ATK finale de la ligne), mitigation defense + DMG_REDUCE cap 900, PAS d element ni de crit, pose sans jet (DEBUFF_IGNORE_RESIST)."
+}
