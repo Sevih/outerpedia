@@ -1,0 +1,50 @@
+{
+  "name": "Francesca + Eris alliée vs Ars Nova · S1 critical (1 stack +20 % Strikers)",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0xMlDAAuVaABYY4jCADGAJwCWAuVLAEA+gBMAtgHMosAJy5JABzkBTGVLOrjAewDuF1TMFm9SepgBGAVwBmfqpSABZgAHZW7gAccCDcIF5QANogxmZhIAC6mIp6KHDwIggA7JBFxbgIUShGmOmkmCrJKfAIHsUY+CAYZOhI6HDZKRhwmD2j-UhD3QNjfRN9mdngiZBJLYjtqjCqaIuZnEA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "critical",
+      "damage": 25276
+    }
+  ],
+  "notes": "Capture Sevih 23/08/2026, prise APRES 1 S2 d Eris — 25276 EXACT (0.00 %). Prouve le buff DYNAMIQUE declare : 1 S2 = 1 stack de 2000117_2_5 (+200 pour mille, BT_DMG additif section 9.1), cible MY_TEAM_ATTACKER = les Strikers allies (Francesca eligible). Le z porte la declaration ab=[[2000117_2_5,1]] (recompresse : la capture originale precedait le champ ab, le scenario declare est identique a l etat du combat). Boss ENRAGE + chip pen actifs."
+}

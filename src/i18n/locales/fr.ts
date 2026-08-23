@@ -699,6 +699,11 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.counters': 'Nombre de buffs',
   'tools.damage-calculator.context.counters_hint':
     'un passif dépend de ces nombres — comptez les icônes juste avant que le coup parte (les buffs posés par le skill lui-même arrivent après)',
+  'tools.damage-calculator.context.stack_buffs': 'Buffs de skill (stacks)',
+  'tools.damage-calculator.context.dmg_word': 'dégâts infligés',
+  'tools.damage-calculator.context.stack_max': '(max {n} stacks)',
+  'tools.damage-calculator.context.stack_buffs_hint':
+    "mécaniques de skill masquées ou spécifiques — celles de l'attaquant comme celles d'un allié. Indiquez les stacks présents au moment du coup (les buffs standards visibles, ATK/pénétration…, se déclarent via les chips de buffs)",
   'tools.damage-calculator.context.own_buffs': "Buffs sur l'attaquant",
   'tools.damage-calculator.context.own_debuffs': "Débuffs sur l'attaquant",
   'tools.damage-calculator.context.team_buffs': "Buffs sur toute l'équipe (lanceur inclus)",
@@ -709,7 +714,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.kits_soon':
     'nécessite les données de buffs des kits — arrive avec le moteur',
   'tools.damage-calculator.report.engine_wip':
-    'Moteur v1 — pas encore comptés : alliés, DoT, procs d’équipement en combat (représentez leur état via les buffs/débuffs).',
+    'Moteur v1 — non simulés : procs d’équipement en combat (représentez leur état via les buffs/débuffs ; les buffs de skill ont leurs propres saisies de stacks).',
   'tools.damage-calculator.report.branches_note': 'branches énumérées · probabilités exactes',
   'tools.damage-calculator.report.loading': 'chargement des tables de calcul…',
   'tools.damage-calculator.report.tables_error':

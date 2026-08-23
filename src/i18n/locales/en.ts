@@ -691,6 +691,11 @@ const en = {
   'tools.damage-calculator.context.counters': 'Buff counts',
   'tools.damage-calculator.context.counters_hint':
     'a passive scales with these counts — count the icons right before the hit lands (buffs the skill itself applies land after)',
+  'tools.damage-calculator.context.stack_buffs': 'Skill buffs (stacks)',
+  'tools.damage-calculator.context.dmg_word': 'damage dealt',
+  'tools.damage-calculator.context.stack_max': '(max {n} stacks)',
+  'tools.damage-calculator.context.stack_buffs_hint':
+    'hidden or character-specific skill buffs — the attacker’s own or an ally’s. Set the stacks present when the hit lands (standard visible buffs like ATK/penetration are declared via the buff chips instead)',
   'tools.damage-calculator.context.own_buffs': 'Buffs on the attacker',
   'tools.damage-calculator.context.own_debuffs': 'Debuffs on the attacker',
   'tools.damage-calculator.context.team_buffs': 'Buffs across the team (caster included)',
@@ -700,7 +705,7 @@ const en = {
   'tools.damage-calculator.buffs.await_pick': 'Pick an attacker and a target first',
   'tools.damage-calculator.buffs.kits_soon': 'needs kit buff data — coming with the engine',
   'tools.damage-calculator.report.engine_wip':
-    'Engine v1 — not counted yet: allies, DoT, in-combat equipment procs (represent their state via buffs/debuffs).',
+    'Engine v1 — not simulated: in-combat equipment procs (represent their state via buffs/debuffs; skill buffs have their own stack inputs).',
   'tools.damage-calculator.report.branches_note': 'enumerated branches · exact probabilities',
   'tools.damage-calculator.report.loading': 'loading damage tables…',
   'tools.damage-calculator.report.tables_error':

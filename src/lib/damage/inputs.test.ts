@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
 import buffsData from '../../../data/generated/damage/buffs.json';
+import equipmentData from '../../../data/generated/damage/equipment.json';
 import { calcBaseStat } from './formula';
 import {
   buildCombatStats,
@@ -493,5 +494,132 @@ describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
     const r = buildDamageReport(a, { ...target(), mode: 'raid_1' }, data);
     expect(r.maxHpBuff).toBeUndefined();
     expect(r.combatStats.hp).toBe(50000);
+  });
+});
+
+describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () => {
+  const dataEq = { ...data, equipment: equipmentData } as unknown as DamageData;
+  const target = () => ({ element: 'earth', stats: { hp: 500000, def: 2000 }, boss: true });
+  // Témoins RÉELS : Francesca 2000015 = CCT_ATTACKER (Striker), 2000004 =
+  // CCT_MAGE ; l'EE d'Eris (BID_CEQUIP_2000117_2, ligne Lv1) donne
+  // +500 ‰ crit dmg PREMIUM plat aux alliés Strikers (OWNER_CLASS = 2), l'EE
+  // de 2000028 (BID_CEQUIP_2000028_3) +300 ‰ d'ATK aux alliés Mages.
+  const francesca = (): AttackerBuildInput => ({ ...attackerBase(), id: '2000015' });
+
+  it('EE d’Eris alliée + attaquant Striker : premium ACTIF via le canal buff (pas de défactorisation — il n’est pas dans la fiche saisie)', () => {
+    const without = buildDamageReport(francesca(), target(), dataEq);
+    const withAlly = buildDamageReport(
+      { ...francesca(), allies: [{ id: '2000117', ee: { enchant: 0 } }] },
+      target(),
+      dataEq,
+    );
+    const entry = withAlly.allyPassives?.entries.find((e) => e.buffId === 'BID_CEQUIP_2000117_2');
+    expect(entry).toMatchObject({
+      ally: '2000117',
+      source: 'ee',
+      side: 'attacker',
+      active: true,
+      condition: 'OWNER_CLASS',
+      buff: {
+        type: 'BT_STAT_PREMIUM',
+        stat: 'ST_CRITICAL_DMG_RATE',
+        applyingType: 'OAT_ADD',
+        value: 500,
+      },
+    });
+    // Plat +500 ‰ dans le canal buff du crit dmg — multiplié par les taux du
+    // canal (identité § 16.1, même terme croisé que trust × premiums : la
+    // fiche de Francesca porte un taux crit dmg, le delta observé est 580).
+    // Propriété stable : delta ≥ +500 (taux du canal jamais négatifs ici).
+    expect(withAlly.combatStats.critical_dmg).toBeGreaterThanOrEqual(
+      without.combatStats.critical_dmg + 500,
+    );
+    // Le +20 % Strikers du S2 d'Eris (2000117_2_5, SKILL_FINISH, 3 stacks) :
+    // DYNAMIQUE — signalé, jamais simulé.
+    expect(withAlly.allyPassives?.dynamic.some((d) => d.buffId === '2000117_2_5')).toBe(true);
+  });
+
+  it('attaquant HORS classe : le premium gaté OWNER_CLASS est INACTIF, le dynamique par classe n’est pas signalé', () => {
+    const mage = buildDamageReport(
+      { ...attackerBase(), id: '2000004', allies: [{ id: '2000117', ee: { enchant: 0 } }] },
+      target(),
+      dataEq,
+    );
+    const entry = mage.allyPassives?.entries.find((e) => e.buffId === 'BID_CEQUIP_2000117_2');
+    expect(entry?.active).toBe(false);
+    // 2000117_2_5 cible MY_TEAM_ATTACKER (les Strikers) : un Mage n'est pas
+    // atteignable — pas même une chip signalée.
+    expect(mage.allyPassives?.dynamic.some((d) => d.buffId === '2000117_2_5')).toBe(false);
+  });
+
+  it('premium en TAUX (EE 2000028, +300 ‰ ATK aux Mages) : l’ATK de combat monte pour un attaquant Mage', () => {
+    const mageBase = (): AttackerBuildInput => ({ ...attackerBase(), id: '2000004' });
+    const without = buildDamageReport(mageBase(), target(), dataEq);
+    const withAlly = buildDamageReport(
+      { ...mageBase(), allies: [{ id: '2000028', ee: { enchant: 0 } }] },
+      target(),
+      dataEq,
+    );
+    const entry = withAlly.allyPassives?.entries.find((e) => e.buffId === 'BID_CEQUIP_2000028_3');
+    expect(entry).toMatchObject({
+      active: true,
+      buff: { type: 'BT_STAT_PREMIUM', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300 },
+    });
+    expect(withAlly.combatStats.atk).toBeGreaterThan(without.combatStats.atk);
+  });
+
+  it('allié SANS EE déclaré : aucune entrée `ee` — le kit reste résolu', () => {
+    const r = buildDamageReport({ ...francesca(), allies: [{ id: '2000117' }] }, target(), dataEq);
+    expect(r.allyPassives?.entries.some((e) => e.source === 'ee')).toBe(false);
+    expect(r.allyPassives?.dynamic.some((d) => d.buffId === '2000117_2_5')).toBe(true);
+  });
+
+  it('sans allié déclaré : aucun bloc allyPassives', () => {
+    expect(buildDamageReport(francesca(), target(), dataEq).allyPassives).toBeUndefined();
+  });
+
+  it('dynamique DÉCLARÉ (stacks) : valeur × stacks § 14.1, plafonné au StackCount de la ligne', () => {
+    // Le +20 % Strikers d'Eris (2000117_2_5 : BT_DMG 200 ‰, StackCount 3) —
+    // prouvé in-game 23/08/2026 : 1 S2 d'Eris = 1 stack, S1 de Francesca
+    // exact (fixture francesca-eris-ally-s1-stack).
+    const withStacks = (n?: Record<string, number>) =>
+      buildDamageReport(
+        {
+          ...francesca(),
+          allies: [{ id: '2000117' }],
+          ...(n ? { buffStacks: n } : {}),
+        },
+        target(),
+        dataEq,
+      ).slots.find((s) => s.slot === 'S1' && s.burst === undefined)!.report.states[0].branches[0]
+        .totalDamage;
+    const base = withStacks();
+    const one = withStacks({ '2000117_2_5': 1 });
+    const three = withStacks({ '2000117_2_5': 3 });
+    expect(one).toBeGreaterThan(base);
+    expect(three).toBeGreaterThan(one);
+    // Plafond : 99 déclarés = 3 servis (StackCount de la ligne).
+    expect(withStacks({ '2000117_2_5': 99 })).toBe(three);
+    // Un buffId inconnu du rapport ne pèse rien.
+    expect(withStacks({ inconnu: 5 })).toBe(base);
+  });
+
+  it('le PROPRE kit de l’attaquant se déclare aussi : Eris (Striker) porte son +20 % — cible MY_TEAM_ATTACKER, classe évaluée', () => {
+    // Eris attaque APRÈS son S2 : son 2000117_2_5 la couvre (elle est
+    // CCT_ATTACKER) — même mécanique que côté allié, sans allié déclaré.
+    const eris = (n?: Record<string, number>) =>
+      buildDamageReport(
+        { ...attackerBase(), id: '2000117', ...(n ? { buffStacks: n } : {}) },
+        target(),
+        dataEq,
+      );
+    const base = eris();
+    // Le proc est SIGNALÉ déclarable (side attacker + plafond 3) dans le kit.
+    const dyn = base.kitPassives?.dynamic.find((d) => d.buffId === '2000117_2_5');
+    expect(dyn).toMatchObject({ side: 'attacker', maxStacks: 3 });
+    const dmg = (r: ReturnType<typeof eris>) =>
+      r.slots.find((s) => s.slot === 'S1' && s.burst === undefined)!.report.states[0].branches[0]
+        .totalDamage;
+    expect(dmg(eris({ '2000117_2_5': 2 }))).toBeGreaterThan(dmg(base));
   });
 });

@@ -58,7 +58,11 @@ export function buildEffectRefs(
     for (const r of rows) {
       const condRef = conditionBuffRef(r.conditionType, r.conditionValue);
       if (condRef !== undefined) add(condRef);
-      if (r.type.startsWith('BT_DOT_') && r.tooltipId !== undefined) add(String(r.tooltipId));
+      // Tout `ToolTipID` porté par une ligne : DoT (ligne Résultat) ET procs
+      // dynamiques déclarables (steppers de stacks — « Pilgrimage —
+      // <tag Penetration Up> +30 % », 23/08/2026). Borné par le glossaire :
+      // seuls les ids qui y résolvent entrent dans la map.
+      if (r.tooltipId !== undefined) add(String(r.tooltipId));
     }
   }
   return out;

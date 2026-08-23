@@ -5,13 +5,14 @@
  * scénario par CE chemin — jamais par du code de composant, qui divergerait.
  *
  * Périmètre v1 assumé : les pans du scénario que le moteur ne consomme pas
- * encore (passifs d'équipement § 15, alliés, décroissance multi-cible) sont
- * REMONTÉS dans `ignored` — affichés par le harnais, jamais tus.
+ * encore sont REMONTÉS dans `ignored` — affichés par le harnais, jamais tus
+ * (reste : la main stat de talisman d'un allié, sans consommateur en donnée).
  */
 
 import type { DamageBranch } from './harness';
 import {
   distinctDots,
+  type AllyBuildInput,
   type AttackerBuildInput,
   type DamageReportResult,
   type TargetBuildInput,
@@ -108,6 +109,11 @@ export interface CalculatorUrlState {
    *  EE possédé 0/1, EE+10 0/1]) · buffs actifs. */
   n?: number;
   al?: [string, number, string, number, number, number][];
+  /** Stacks DÉCLARÉS des procs dynamiques qui atteignent l'attaquant —
+   *  kit/EE/quirks du porteur comme des alliés ([buffId, stacks]) : le
+   *  moteur ne simule jamais un proc, le scénario le déclare (steppers du
+   *  panneau Contexte ; plafond = StackCount de la ligne). */
+  ab?: [string, number][];
   b?: string[];
   d?: string[];
   /** Conditions d'ÉTAT déclarées remplies (buffIds des entrées `stateful` —
@@ -258,8 +264,39 @@ export function buildInputsFromZ(
     // EE : porté par défaut (`eo: 0` = absent), enchant par défaut +10.
     if (st.eo !== 0) gear.ee = { enchant: clamp(st.e ?? 10, 0, 10) };
     if (Object.keys(gear).length) attacker.gear = gear;
-    // Hors périmètre v1 (team) : signalé.
-    if (st.al?.some((row) => row[0])) ignored.push('alliés — passifs de team hors v1');
+    // ALLIÉS déclarés → passifs d'équipe (kit + EE, resolveAllyPassives). La
+    // main stat de talisman (row[2..3]) n'a AUCUN consommateur damage-pertinent
+    // en 1.4.14 (cf. AllyBuildInput) : saisie signalée, jamais tue.
+    if (st.al?.length) {
+      const allies: AllyBuildInput[] = [];
+      let talismanSet = false;
+      for (const row of st.al) {
+        const [id, tx, tal, , eo, ep] = row;
+        if (!id) continue;
+        if (tal) talismanSet = true;
+        allies.push({
+          id,
+          ...(typeof tx === 'number' ? { transcendIndex: tx } : {}),
+          ...(eo === 1 ? { ee: { enchant: ep === 1 ? 10 : 0 } } : {}),
+        });
+      }
+      if (allies.length) attacker.allies = allies;
+      if (talismanSet)
+        ignored.push(
+          'talisman d’allié — aucune famille damage-pertinente ne lit les stats d’allié (1.4.14)',
+        );
+    }
+    // Stacks déclarés des procs dynamiques — kit/EE/quirks de l'ATTAQUANT
+    // comme de ses alliés (bornés côté moteur au StackCount de la ligne —
+    // ici, garde de saisie seulement).
+    if (st.ab?.length) {
+      const stacks: Record<string, number> = {};
+      for (const [buffId, n] of st.ab) {
+        if (typeof buffId !== 'string' || !buffId || typeof n !== 'number' || n < 1) continue;
+        stacks[buffId] = clamp(Math.round(n), 1, 99);
+      }
+      if (Object.keys(stacks).length) attacker.buffStacks = stacks;
+    }
   }
 
   let target: TargetBuildInput | undefined;

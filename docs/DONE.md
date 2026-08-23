@@ -5,6 +5,90 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-23
+
+- **Damage calc — buffs d'ALLIÉS branchés (le champ `al` de l'URL n'est plus
+  « hors v1 »).** L'UI capturait les 3 alliés depuis le 27/07 (perso,
+  transcendance, talisman, EE/+10) et le pont les jetait avec un signalement ;
+  maintenant les MÊMES résolveurs kit + EE tournent en « mode allié »
+  (`makeCollector(allyReceiver)`, gear.ts) : seules les lignes qui ATTEIGNENT
+  l'attaquant comptent. Tout est tiré de la donnée — trois découvertes en
+  route. (1) Les cibles `MY_TEAM_<CLASSE>` filtrent par CLASSE du receveur, et
+  la preuve est dans la desc officielle d'Eris : « increases the damage of
+  ally Strikers » = `MY_TEAM_ATTACKER` (Striker = `CCT_ATTACKER`) — du coup
+  `OWNER_CLASS` devient évaluable (même enum que les quirks `AAT_CLASS`,
+  corroboré par l'EE d'Eris : cond 2 + desc « Strikers »). (2) Le
+  `BT_STAT_PREMIUM` d'un allié ne suit PAS la doctrine fiche : la fiche
+  saisie est celle de la VILLE, sans équipe — le premium d'allié descend le
+  canal buff normal (§ 16.4 : le premium EST une part de buffVal/buffRate),
+  sans défactorisation ; le +50 % crit dmg de l'EE d'Eris aux Strikers tombe
+  ainsi tout seul sur Francesca. (3) Les stats propres d'un allié (main stat
+  de talisman saisie le 27/07) n'ont AUCUN consommateur damage-pertinent en
+  1.4.14 — sondage exhaustif : les familles d'équipe à stat de poseur sont
+  des soins/boucliers ; la saisie reste signalée `ignored`, jamais tue.
+  Doctrine constante : dynamiques (le +20 % Strikers du S2 d'Eris est un
+  SKILL_FINISH à 3 stacks) SIGNALÉS jamais simulés, sélections
+  situationnelles (`LOWEST_HP_RATE`…) non attribuables signalées, auras
+  `ENEMY*` d'allié par le classement défenseur normal, conditions d'état
+  cochables comme celles du porteur (le libellé porte le nom de l'allié).
+  Tests : 259 verts (6 nouveaux — témoins réels Eris/2000028, canal premium
+  d'allié au niveau agrégat, pont z complet).
+
+- **Damage calc — le lot alliés VALIDÉ IN-GAME le jour même, et les
+  dynamiques d'alliés deviennent déclarables (stacks).** Deux captures Sevih
+  (Francesca + Eris alliée vs Ars Nova), deux exactitudes : S2 crit
+  30658 = 30658 (0,000 %) — les DEUX premiums d'équipe d'Eris (EE
+  `BID_CEQUIP_2000117_2` +500 ‰ crit dmg plat gate Strikers, ET le skill_8
+  de transcendance `trancendent_8_cri_dmg_team_upgrade`, découvert team au
+  rejeu) tombent par le canal buff sans défactorisation, crit dmg de combat
+  3540 = 2960 + 500 + 80. La 2ᵉ capture, prise APRÈS un S2 d'Eris, faisait
+  −4,98 % : l'émulation « 1 stack du +20 % Strikers en passif » a rendu
+  25276 = 25276 (0,000 %) — trois faits prouvés d'un coup (la cible
+  `MY_TEAM_ATTACKER` atteint bien Francesca, la valeur est additive § 9.1,
+  1 S2 = 1 stack). Câblé dans la foulée : les procs d'alliés
+  damage-pertinents côté attaquant sont DÉCLARABLES — stepper de stacks
+  dans le panneau Contexte (plafond = `StackCount` de la ligne, valeur
+  × stacks § 14.1), z `ab`, bannière « moteur v1 » des 5 locales mise à
+  jour (alliés et DoT n'y sont plus des manques). Fixtures :
+  `francesca-eris-ally-s2` et `francesca-eris-ally-s1-stack` (z recompressé
+  avec la déclaration `ab` — la capture originale précédait le champ).
+  Généralisé dans la foulée (retour Sevih : « dans l'UI on a aucun moyen de
+  dire ce perso a cette méca stackée N fois ») : la déclaration de stacks
+  couvre AUSSI les procs du PROPRE kit/EE/quirks de l'attaquant — Eris
+  attaquante déclare son propre +20 % (sa classe évaluée contre
+  `MY_TEAM_ATTACKER`), champ moteur `buffStacks`, z `ab` indépendant de
+  `al`, libellés génériques « Buffs de skill (stacks) » ×5 locales avec
+  garde anti-double-compte dans le hint. Seuls les procs à VALEUR atteignant
+  le porteur sont déclarables (flags et cibles ennemies restent signalés) ;
+  volume mesuré sur le roster : 1 à 3 steppers médians, 8 au pire.
+  Lisibilité (retour Sevih « je comprend pas » sur « Pilgrimage+300 » /
+  id brut / « +20 % » sans objet) : chaque ligne dit maintenant CE QUE fait
+  le proc — tag inline du glossaire quand la ligne porte un `ToolTipID`
+  (« Pilgrimage S2 — [Increased Penetration] +30 % », même mécanisme que
+  conditions et DoT, `buildEffectRefs` élargi à tous les tooltips ~211 ids),
+  sinon nom localisé de la stat de la fiche, sinon « dégâts infligés »
+  (clé UI ×5) pour la famille BT_DMG ; plats des stats-% enfin en %, et les
+  skills BURST résolus par la rangée `burstIds` (fini le buffId brut).
+  Puis recadrage Sevih : « les buffs de Pilgrimage sont LITTÉRALEMENT ceux
+  de caster buffs, là tu déclares en double — Eris, elle, c'est
+  passif/masqué ». La section ne liste donc QUE les mécaniques masquées ou
+  spécifiques : un proc portant le tooltip d'une des 6 chips génériques
+  (`FX_CHIP_TOOLTIPS` : 6 def, 7 atk, 8 pen, 9 eff, 12 chd, 15 spd —
+  magnitudes identiques vérifiées sur la table entière, 75/76 lignes
+  tooltip 7 = ATK 300 ‰) EST ce buff visible et se déclare par la chip ;
+  et un BT_STAT dont la stat ne pèse aucun montant (counter rate, buff
+  resist…) est filtré comme les chips de boss (`amountStats`). Un effet
+  visible mais DISTINCT (tooltip propre au perso, ex. +50 % vs break)
+  garde son stepper. Résultat mesuré : Francesca + Eris = UNE ligne (le
+  +20 % d'Eris) ; 90 persos du roster n'affichent aucun stepper, 4 au pire.
+  Format final (demande Sevih) : « Eris S2 — Striker dégâts infligés +20 %
+  (max 3 stacks) » — le moteur annote chaque proc de son SLOT source (bursts
+  rattachés au burstable, comme partout) et de la CLASSE visée
+  (`targetClass`, présent seulement si le receveur matche) ; l'UI les rend
+  avec les noms de classes du glossaire système (`sys.class.*`,
+  CCT_ATTACKER = Striker) et un gabarit « (max {n} stacks) » ×5 locales.
+  Corpus : 30 observations, toutes exactes ; 272 tests verts.
+
 ## 2026-08-22
 
 - **Tags de type d'unité — le tag `limited` s'appelait comme son propre

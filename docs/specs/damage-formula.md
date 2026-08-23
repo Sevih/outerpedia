@@ -880,6 +880,58 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 > inactif. `BT_WG_*` → non résolu § 12.3 ; conditions non évaluables § 12.1 →
 > non résolu, contribution 0.
 >
+> RÉALISÉ (23/08/2026) — **buffs d'ALLIÉS** : les MÊMES résolveurs (kit + EE)
+> tournent en « mode allié » pour chaque membre déclaré (`gear.ts`,
+> `makeCollector(allyReceiver)`) ; le receveur est l'attaquant du scénario.
+> Règles, toutes tirées de la donnée :
+>
+> - Sélection de cible d'abord : `MY_TEAM`/`MY_TEAM_WITHOUT_ME` atteignent le
+>   receveur ; `MY_TEAM_<CLASSE>` seulement si sa classe matche — la sémantique
+>   « classe » (et non « membre en train d'agir ») est PROUVÉE par la desc
+>   officielle du S2 d'Eris : « increases the damage of ally Strikers » =
+>   `MY_TEAM_ATTACKER` (2000117_2_5), Striker = `CCT_ATTACKER`. Les sélections
+>   SITUATIONNELLES (`LOWEST_HP_RATE`, `HIGHEST_ATK`, `ONE`…) ne sont pas
+>   attribuables statiquement : signalées si damage-pertinentes. `ME` (buffs
+>   de l'allié sur lui-même) : sans effet sur le hit calculé. Les auras
+>   `ENEMY*` d'un allié suivent le classement défenseur normal.
+> - `OWNER_CLASS` (le porteur du buff = le receveur) : évalué —
+>   `BuffConditionValue` = enum `CLASS_ENUM` du binaire (même table que les
+>   quirks `AAT_CLASS` ; corroboration : `BID_CEQUIP_2000117_2` porte cond 2 =
+>   `CCT_ATTACKER` et sa desc dit « Strikers »).
+> - `BT_STAT_PREMIUM` d'un ALLIÉ : PAS la doctrine fiche — le premium d'un
+>   allié n'est pas dans la fiche saisie du receveur (fiche de VILLE, sans
+>   équipe) ; il descend le canal buff normal (§ 16.4 : le premium EST une
+>   part de `buffVal`/`buffRate`), sans défactorisation.
+> - Créations DYNAMIQUES (`SKILL_FINISH`, `SKILL_START` — le proc part d'un
+>   skill de l'ALLIÉ, pas d'une ligne du rapport) : jamais simulées d'office,
+>   mais DÉCLARABLES côté attaquant — le scénario porte les stacks posés en
+>   jeu (z `ab`, stepper du panneau Contexte, plafond = `StackCount` de la
+>   ligne, valeur effective = value × stacks § 14.1). PROUVÉ in-game
+>   23/08/2026 (2 captures Sevih, Francesca + Eris alliée vs Ars Nova) :
+>   S2 crit 30658 EXACT (premiums d'équipe seuls) et S1 crit 25276 EXACT
+>   avec 1 stack déclaré du +20 % Strikers — 1 S2 d'Eris = 1 stack de
+>   `2000117_2_5`, additif § 9.1. La déclaration couvre AUSSI les procs du
+>   PROPRE kit/EE/quirks de l'attaquant (demande Sevih 23/08 : « dire ce
+>   perso a cette méca stackée N fois » — Eris attaquante porte son propre
+>   +20 %, sa classe évaluée contre `MY_TEAM_ATTACKER`) ; seuls les procs à
+>   VALEUR qui atteignent le porteur sont déclarables, les flags
+>   (MARKING/GROUP) et cibles `ENEMY*` restent signalés non déclarables
+>   (chips cible). Côté UI, un proc portant le tooltip d'une des 6 chips
+>   génériques (`FX_CHIP_TOOLTIPS`) EST ce buff visible en jeu — mêmes
+>   magnitudes sur la table entière, pas de cumul (`isTypeOverlap`) : il se
+>   déclare par la CHIP, jamais par un stepper (sinon double compte —
+>   recadrage Sevih 23/08) ; seules les mécaniques MASQUÉES (sans tooltip)
+>   ou à effet distinct (tooltip propre au perso) ont un stepper. Passifs restreints par lanceur de l'allié
+>   (`SKT_BACKUP_*`) : contribution 0, signalé. Conditions d'état
+>   (`OWNER_HAS_BUFF`…) : entrées `stateful` cochables comme celles du
+>   porteur.
+> - Stats propres de l'allié (main stat de talisman, enhancement — saisies UI
+>   du 27/07) : AUCUN consommateur damage-pertinent en 1.4.14 (sondage
+>   23/08 : les familles d'équipe à stat de poseur sont soins/boucliers ; le
+>   seul cas dégâts, `BID_CEQUIP_2000040` `BT_DMG_CASTER_LOST_HP_RATE`,
+>   dépend des PV perdus de l'allié, non capturés — contribution 0). La
+>   saisie est signalée `ignored`, jamais tue.
+>
 > Condition `TARGET_ELEMENT` PROUVÉE : `BuffConditionValue` =
 > `CHARACTER_ELEMENT_TYPE` de la CIBLE (dump.cs : EARTH=0, WATER=1, FIRE=2,
 > LIGHT=3, DARK=4 ; valeur absente = 0 = terre). Corroborations : la desc

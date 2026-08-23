@@ -67,7 +67,11 @@ export function collectStatChannels(
   for (const b of buffs) {
     if (!b.stat) continue;
     let v: number;
-    if (b.type === 'BT_STAT') v = effectiveValue(b);
+    // BT_STAT_PREMIUM n'arrive ici QUE posé par un ALLIÉ (resolveAllyPassives) :
+    // pas dans la fiche saisie du receveur, donc pas de défactorisation — le
+    // premium EST le canal buffVal/buffRate (§ 16.4). Ceux du PORTEUR ne
+    // deviennent jamais des buffs de scénario (doctrine fiche, gear.ts).
+    if (b.type === 'BT_STAT' || b.type === 'BT_STAT_PREMIUM') v = effectiveValue(b);
     else if (
       b.type === 'BT_STAT_OWNER_LOST_HP_RATE' ||
       b.type === 'BT_STAT_OWNER_LOST_HP_RATE_HALF'

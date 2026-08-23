@@ -41,6 +41,8 @@ import {
   buildDamageReport,
   distinctDots,
   elementOf,
+  FX_CHIP_TOOLTIPS,
+  sheetSlugOfStat,
   type DamageData,
   type DamageReportResult,
 } from '@/lib/damage/inputs';
@@ -397,6 +399,17 @@ export interface DcLabels {
      *  quand un passif du rapport LIT la famille correspondante. */
     counters: string;
     countersHint: string;
+    /** Procs dynamiques déclarables — kit/EE/quirks du porteur + alliés
+     *  (steppers de stacks, z `ab`). */
+    stackBuffs: string;
+    stackBuffsHint: string;
+    /** « dégâts » — famille BT_DMG (§ 9.1) sans stat ni tooltip. */
+    dmgWord: string;
+    /** Noms de CLASSES localisés par enum `CCT_*` (cibles `MY_TEAM_<CLASSE>`
+     *  des procs — « Striker dégâts infligés +20 % »). */
+    classNames: Record<string, string>;
+    /** Gabarit « (max {n} stacks) » du plafond d'un proc à stacks. */
+    stackMax: string;
     ownBuffs: string;
     ownDebuffs: string;
     teamBuffs: string;
@@ -1166,6 +1179,11 @@ export function DamageCalculatorBrowser({
   const [tgtHpPct, setTgtHpPct] = useState('100');
   const [targetsHit, setTargetsHit] = useState(1);
   const [allies, setAllies] = useState<AllyPick[]>([EMPTY_ALLY, EMPTY_ALLY, EMPTY_ALLY]);
+  // Stacks déclarés des procs DYNAMIQUES qui atteignent l'attaquant — son
+  // propre kit/EE/quirks comme ses alliés (buffId → stacks, z `ab`) : le
+  // moteur ne simule jamais un proc, le joueur déclare l'état du combat
+  // (prouvé 23/08/2026 : 1 S2 d'Eris = 1 stack du +20 % Strikers).
+  const [stackDecls, setStackDecls] = useState<Record<string, number>>({});
   // Buffs/débuffs de scénario ACTIFS (clés de DcBuffOption), par côté.
   const [atkFx, setAtkFx] = useState<string[]>([]);
   const [tgtFx, setTgtFx] = useState<string[]>([]);
@@ -1319,6 +1337,7 @@ export function DamageCalculatorBrowser({
     setTgtHpPct('100');
     setTargetsHit(1);
     setAllies([EMPTY_ALLY, EMPTY_ALLY, EMPTY_ALLY]);
+    setStackDecls({});
     setAtkFx([]);
     setTgtFx([]);
     setMetConds([]);
@@ -1448,6 +1467,15 @@ export function DamageCalculatorBrowser({
           };
         }),
       );
+    if (Array.isArray(st.ab))
+      setStackDecls(
+        Object.fromEntries(
+          st.ab.filter(
+            (r): r is [string, number] =>
+              Array.isArray(r) && typeof r[0] === 'string' && typeof r[1] === 'number' && r[1] > 0,
+          ),
+        ),
+      );
   };
 
   // Hydratation `?z=` UNE fois au mount — SANS tableau de deps, à dessein :
@@ -1573,6 +1601,10 @@ export function DamageCalculatorBrowser({
         Number(a.ee),
         Number(a.eePlus),
       ]);
+    // Stacks déclarés — kit/EE/quirks du porteur comme des alliés : le champ
+    // vit indépendamment de `al`.
+    const ab = Object.entries(stackDecls).filter(([, n]) => n > 0);
+    if (ab.length) z.ab = ab;
     return z;
   };
   const packZ = (): string => {
@@ -1721,15 +1753,85 @@ export function DamageCalculatorBrowser({
     bossPassiveActive(p) &&
     (p.side !== 'attacker' || p.stat === undefined || amountStats.has(p.stat));
 
-  // Mécaniques perso : entrées `stateful` du rapport (kit/EE/quirks) — leur
-  // condition d'ÉTAT de combat (ressource, buffs posés… — CheckAvailable
-  // § 12.1) n'est jamais évaluée par le moteur ; la coche du panneau Contexte
-  // la déclare remplie (z `cs`).
+  // Mécaniques perso : entrées `stateful` du rapport (kit/EE/quirks + passifs
+  // d'ALLIÉS) — leur condition d'ÉTAT de combat (ressource, buffs posés… —
+  // CheckAvailable § 12.1) n'est jamais évaluée par le moteur ; la coche du
+  // panneau Contexte la déclare remplie (z `cs`).
   const statefulPassives = report
-    ? [report.kitPassives, report.gearPassives, report.quirkPassives].flatMap((i) =>
-        (i?.entries ?? []).filter((e) => e.stateful),
+    ? [report.kitPassives, report.gearPassives, report.quirkPassives, report.allyPassives].flatMap(
+        (i) => (i?.entries ?? []).filter((e) => e.stateful),
       )
     : [];
+
+  // Procs dynamiques DÉCLARABLES (« ce perso a cette méca stackée N fois »,
+  // Sevih 23/08/2026) : procs damage-pertinents côté attaquant — de son
+  // PROPRE kit/EE/quirks comme de ses alliés — dédup par buffId (un même
+  // buff référencé par plusieurs sources = UNE instance, même règle que le
+  // moteur). Deux exclusions (Sevih 23/08) :
+  //  - un proc qui porte le tooltip d'une CHIP générique EST ce buff visible
+  //    en jeu (mêmes magnitudes, pas de cumul) — il se déclare par la chip,
+  //    un stepper le ferait compter DEUX fois (FX_CHIP_TOOLTIPS) ;
+  //  - un BT_STAT dont la stat ne pèse aucun MONTANT dans ce scénario
+  //    (counter rate, buff resist…) n'a rien à déclarer — même filtre que
+  //    les chips de passifs de boss (`amountStats`).
+  const stackableDynamics = (() => {
+    const seen = new Set<string>();
+    return report
+      ? [report.kitPassives, report.gearPassives, report.quirkPassives, report.allyPassives]
+          .flatMap((i) => i?.dynamic ?? [])
+          .filter((d) => {
+            if (d.side !== 'attacker' || seen.has(d.buffId)) return false;
+            if (d.tooltipId !== undefined && FX_CHIP_TOOLTIPS[d.tooltipId] !== undefined)
+              return false;
+            if (d.buff.type === 'BT_STAT' && (!d.buff.stat || !amountStats.has(d.buff.stat)))
+              return false;
+            seen.add(d.buffId);
+            return true;
+          })
+      : [];
+  })();
+  // Libellé d'un proc : le NOM du jeu de sa source (perso allié, skill du
+  // kit — déclinaisons BURST résolues sur la rangée qui porte `burstIds` —
+  // EE, nœud d'éveil) — jamais de texte écrit main ; repli sur le buffId
+  // brut.
+  const dynLabel = (d: (typeof stackableDynamics)[number]): { name: string; slot?: string } => {
+    if (d.ally)
+      return {
+        name: chars.find((c) => c.id === d.ally)?.label ?? d.ally,
+        // Slot du skill de l'ALLIÉ (résolu par le moteur — « Eris S2 »).
+        ...(d.slot ? { slot: d.slot } : {}),
+      };
+    if (d.source === 'kit') {
+      const row = kit.find((r) => r.id === d.sourceId || r.burstIds?.includes(d.sourceId));
+      if (row) return { name: row.name, slot: row.slot };
+    }
+    if (d.source === 'ee' && ee) return { name: ee.name };
+    if (d.source === 'quirk') {
+      for (const g of quirks) {
+        const n = g.nodes.find((x) => String(x.id) === d.sourceId);
+        if (n) return { name: n.name };
+      }
+    }
+    return { name: d.buffId };
+  };
+  // Ce que le proc FAIT, lisible : tag du glossaire quand la ligne porte un
+  // ToolTipID (même tag inline que conditions et DoT), sinon le nom localisé
+  // de la stat visée (fiche), sinon « dégâts » pour la famille BT_DMG (§ 9.1)
+  // — la magnitude vient de la donnée (OAT_RATE et stats-% : affichage en %).
+  const dynEffect = (
+    d: (typeof stackableDynamics)[number],
+  ): { ref?: DcEffectRef; what?: string; amount: string } => {
+    const ref = d.tooltipId !== undefined ? effectRefs[String(d.tooltipId)] : undefined;
+    const v = d.buff.value ?? 0;
+    const slug = d.buff.stat !== undefined ? sheetSlugOfStat(d.buff.stat) : undefined;
+    const field = slug !== undefined ? statFields.find((f) => f.key === slug) : undefined;
+    const pct = d.buff.applyingType === 'OAT_RATE' || field?.percent === true;
+    const amount = `${v >= 0 ? '+' : ''}${pct ? `${v / 10}%` : v}`;
+    if (ref) return { ref, amount };
+    const what =
+      field?.label ?? d.buff.stat ?? (d.buff.type === 'BT_DMG' ? L.context.dmgWord : undefined);
+    return { ...(what !== undefined ? { what } : {}), amount };
+  };
 
   // Compteurs § 9.1 (« ×N buffs/débuffs ») : le scénario DÉCLARE les nombres
   // (le moteur ne compte jamais les chips — elles ne couvrent pas tous les
@@ -1739,9 +1841,12 @@ export function DamageCalculatorBrowser({
   const counterTypes = new Set(
     report
       ? [
-          ...[report.kitPassives, report.gearPassives, report.quirkPassives].flatMap(
-            (i) => i?.entries ?? [],
-          ),
+          ...[
+            report.kitPassives,
+            report.gearPassives,
+            report.quirkPassives,
+            report.allyPassives,
+          ].flatMap((i) => i?.entries ?? []),
           ...(report.bossPassives?.entries ?? []),
         ]
           .filter((e) => e.side === 'attacker')
@@ -1790,6 +1895,12 @@ export function DamageCalculatorBrowser({
   const slotOfCaller = (c: string): string | undefined =>
     SLOT_OF_CALLER[c] ?? (c.startsWith('SKT_BURST_') ? kitBurstSlot : undefined);
   const mechLabel = (e: (typeof statefulPassives)[number]): { name: string; slot?: string } => {
+    // Entrée d'ALLIÉ : sa source (skill/EE) vit dans le kit de l'ALLIÉ, hors
+    // des props — le NOM du personnage allié situe la mécanique.
+    if (e.ally) {
+      const nm = chars.find((c) => c.id === e.ally)?.label;
+      if (nm) return { name: nm };
+    }
     const slot = e.callers?.map(slotOfCaller).find((s) => s !== undefined);
     if (e.source === 'kit' && slot) {
       const nm = kit.find((r) => r.slot === slot)?.name;
@@ -3018,6 +3129,74 @@ export function DamageCalculatorBrowser({
                                 {cond.post}
                               </span>
                             )}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Procs dynamiques à STACKS (kit/EE/quirks du porteur +
+                    alliés) qui atteignent l'attaquant : jamais simulés — le
+                    stepper déclare les stacks posés EN JEU (z `ab`, plafond
+                    = StackCount de la ligne). Prouvé 23/08/2026 : 1 S2
+                    d'Eris = 1 stack du +20 % Strikers, S1 de Francesca
+                    exact. */}
+                  {stackableDynamics.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
+                        {L.context.stackBuffs}
+                      </span>
+                      <p className="text-content-subtle text-[10px]">{L.context.stackBuffsHint}</p>
+                      {stackableDynamics.map((d) => {
+                        const n = stackDecls[d.buffId] ?? 0;
+                        const max = d.maxStacks ?? 1;
+                        const m = dynLabel(d);
+                        const eff = dynEffect(d);
+                        return (
+                          <label
+                            key={`${d.ally ?? ''}:${d.buffId}`}
+                            title={`${d.buffId} · ${d.createType}`}
+                            className="flex items-center justify-between gap-2 text-xs"
+                          >
+                            <span
+                              className={`flex min-w-0 flex-wrap items-center gap-1.5 ${n > 0 ? 'text-content' : 'text-content-muted'}`}
+                            >
+                              {m.name}
+                              {m.slot && (
+                                <span className="text-content-subtle font-mono text-[9px]">
+                                  {m.slot}
+                                </span>
+                              )}
+                              <span className="text-content-subtle flex items-center gap-1 text-[10px]">
+                                —{d.targetClass && (L.context.classNames[d.targetClass] ?? '')}
+                                {eff.ref && <EffectRefTag r={eff.ref} />}
+                                {eff.what}
+                                <span className="font-mono">{eff.amount}</span>
+                                {max > 1 ? vars(L.context.stackMax, { n: max }) : ''}
+                              </span>
+                            </span>
+                            <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-7 w-16 items-center rounded-lg border px-2">
+                              <input
+                                type="text"
+                                inputMode="numeric"
+                                value={String(n)}
+                                onChange={(e) => {
+                                  const v = Number(e.target.value);
+                                  const next = Number.isFinite(v)
+                                    ? Math.min(Math.max(Math.round(v), 0), max)
+                                    : 0;
+                                  setStackDecls((all) => {
+                                    if (next === 0) {
+                                      const rest = { ...all };
+                                      delete rest[d.buffId];
+                                      return rest;
+                                    }
+                                    return { ...all, [d.buffId]: next };
+                                  });
+                                }}
+                                className="text-content w-full min-w-0 bg-transparent text-right font-mono text-sm font-bold tabular-nums outline-none"
+                              />
+                            </span>
                           </label>
                         );
                       })}

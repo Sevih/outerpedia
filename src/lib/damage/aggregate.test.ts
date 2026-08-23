@@ -35,6 +35,20 @@ describe('aggregate — canaux et familles § 9', () => {
     expect(ch.ST_HP).toBeUndefined();
   });
 
+  it('BT_STAT_PREMIUM posé par un ALLIÉ : même canal que BT_STAT (§ 16.4 — le premium EST buffVal/buffRate ; pas dans la fiche du receveur, donc pas de défactorisation)', () => {
+    const ch = collectStatChannels([
+      B({ type: 'BT_STAT_PREMIUM', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300 }),
+      B({
+        type: 'BT_STAT_PREMIUM',
+        stat: 'ST_CRITICAL_DMG_RATE',
+        applyingType: 'OAT_ADD',
+        value: 500,
+      }),
+    ]);
+    expect(ch.ST_ATK).toEqual({ value: 0, rate: 300 });
+    expect(ch.ST_CRITICAL_DMG_RATE).toEqual({ value: 500, rate: 0 });
+  });
+
   it('§ 9.1 : familles contextuelles — contexte absent = 0, jamais deviné', () => {
     const buffs: ActiveBuff[] = [
       B({ type: 'BT_DMG', value: 150 }),

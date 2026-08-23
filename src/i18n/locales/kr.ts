@@ -666,6 +666,11 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.counters': '버프 개수',
   'tools.damage-calculator.context.counters_hint':
     '패시브가 이 개수에 비례합니다 — 타격 직전의 아이콘 수를 세어 입력하세요 (스킬 자체가 부여하는 버프는 타격 후에 적용)',
+  'tools.damage-calculator.context.stack_buffs': '스킬 버프 (스택)',
+  'tools.damage-calculator.context.dmg_word': '주는 피해',
+  'tools.damage-calculator.context.stack_max': '(최대 {n}스택)',
+  'tools.damage-calculator.context.stack_buffs_hint':
+    '숨겨진·캐릭터 고유 스킬 버프 — 공격자 자신의 것도, 아군의 것도. 타격 시점에 쌓여 있는 스택 수를 입력하세요 (공격력·관통 등 일반 가시 버프는 버프 칩으로 지정합니다)',
   'tools.damage-calculator.context.own_buffs': '공격자의 버프 수',
   'tools.damage-calculator.context.own_debuffs': '공격자의 디버프 수',
   'tools.damage-calculator.context.team_buffs': '팀 전체 버프 수 (시전자 포함)',
@@ -675,7 +680,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.await_pick': '먼저 공격자와 대상을 선택하세요',
   'tools.damage-calculator.buffs.kits_soon': '킷 버프 데이터 필요 — 엔진과 함께 제공',
   'tools.damage-calculator.report.engine_wip':
-    '엔진 v1 — 아직 미반영: 아군, 지속 피해, 전투 중 장비 발동 효과(상태는 버프/디버프로 표현하세요).',
+    '엔진 v1 — 미시뮬레이션: 전투 중 장비 발동 효과(상태는 버프/디버프로 표현하세요. 스킬 버프는 전용 스택 입력이 있습니다).',
   'tools.damage-calculator.report.branches_note': '분기 열거 · 정확한 확률',
   'tools.damage-calculator.report.loading': '계산 테이블 불러오는 중…',
   'tools.damage-calculator.report.tables_error':

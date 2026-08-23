@@ -24,6 +24,8 @@ import francescaS2crit from './francesca-s2-crit.json';
 import francescaS2 from './francesca-s2.json';
 import francescaS2b2 from './francesca-s2-burst2.json';
 import francescaDotBleed from './francesca-dot-bleed.json';
+import francescaErisAllyS2 from './francesca-eris-ally-s2.json';
+import francescaErisAllyS1 from './francesca-eris-ally-s1-stack.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -61,4 +63,11 @@ export const FIXTURES: DamageFixture[] = [
   // Premier tick de DoT mesuré in-game (22/08/2026) — valide CalcDamageDOT
   // (§ 11) de bout en bout : le Bleed de Francesca sur Ars Nova.
   francescaDotBleed as DamageFixture,
+  // Buffs d'ALLIÉS (23/08/2026) — Eris déclarée alliée de Francesca : les
+  // premiums d'équipe (EE + skill_8) tombent par le canal buff (S2 exact),
+  // et 1 S2 d'Eris = 1 stack déclaré du +20 % Strikers (S1 exact) — la
+  // sémantique MY_TEAM_ATTACKER = classe, la valeur additive § 9.1 et le
+  // pas-de-défactorisation des premiums d'alliés sont prouvés d'un coup.
+  francescaErisAllyS2 as DamageFixture,
+  francescaErisAllyS1 as DamageFixture,
 ];

@@ -1035,6 +1035,19 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       // Compteurs § 9.1 (« ×N buffs/débuffs ») — steppers contextuels.
       counters: t(k('context.counters')),
       countersHint: t(k('context.counters_hint')),
+      stackBuffs: t(k('context.stack_buffs')),
+      stackBuffsHint: t(k('context.stack_buffs_hint')),
+      dmgWord: t(k('context.dmg_word')),
+      // Classes du binaire → noms localisés du glossaire système (Striker =
+      // CCT_ATTACKER en interne, Healer = CCT_PRIEST).
+      classNames: {
+        CCT_DEFENDER: t('sys.class.defender'),
+        CCT_ATTACKER: t('sys.class.striker'),
+        CCT_RANGER: t('sys.class.ranger'),
+        CCT_MAGE: t('sys.class.mage'),
+        CCT_PRIEST: t('sys.class.healer'),
+      },
+      stackMax: t(k('context.stack_max')),
       ownBuffs: t(k('context.own_buffs')),
       ownDebuffs: t(k('context.own_debuffs')),
       teamBuffs: t(k('context.team_buffs')),

@@ -88,6 +88,9 @@ export interface GearPassiveEntry {
   /** GroupID / id de set — lien vers le libellé côté UI. */
   sourceId: string;
   buffId: string;
+  /** Id du personnage ALLIÉ dont vient l'entrée (resolveAllyPassives) —
+   *  absent : entrée du porteur lui-même. */
+  ally?: string;
   /** `attacker` = le porteur ; `defender` = débuff permanent sur l'ennemi ;
    *  `allies` = MY_TEAM_WITHOUT_ME — ne profite JAMAIS au porteur (affiché
    *  inactif, ex. Absolute Music : +dégâts aux boss pour les ALLIÉS). */
@@ -135,6 +138,25 @@ export interface GearDynamicEntry {
   buffId: string;
   createType: string;
   buff: ActiveBuff;
+  /** Id du personnage ALLIÉ dont vient le proc (resolveAllyPassives). */
+  ally?: string;
+  /** Côté du proc d'ALLIÉ (`attacker` = atteint le receveur) — seuls les
+   *  procs côté attaquant sont DÉCLARABLES (stacks, z `ab`). */
+  side?: 'attacker' | 'defender';
+  /** `StackCount` de la ligne — plafond de la déclaration. PROUVÉ in-game
+   *  23/08/2026 (Francesca + Eris alliée) : 1 S2 d'Eris = 1 stack de
+   *  2000117_2_5 (+200 ‰ § 9.1 additif), S1 crit 25276 EXACT. */
+  maxStacks?: number;
+  /** `ToolTipID` de la ligne — jointure vers le glossaire des effets (tag
+   *  inline icône + nom + desc, comme les conditions et les DoT) ; absent =
+   *  mécanique sans entrée de glossaire. */
+  tooltipId?: number;
+  /** Classe `CCT_*` visée quand la cible est `MY_TEAM_<CLASSE>` (présent
+   *  seulement si le receveur matche) — l'UI l'affiche (« Striker … »). */
+  targetClass?: string;
+  /** Slot UI du skill SOURCE (kit seulement — S1/S2/S3, bursts rattachés au
+   *  slot du burstable) ; absent : passif, EE, quirk. */
+  slot?: 'S1' | 'S2' | 'S3';
 }
 
 /**
@@ -160,7 +182,14 @@ export interface GearPassivesInfo {
   dynamic: GearDynamicEntry[];
   /** Taux premium par stat, déjà dans la fiche — cf. `GearPremiumEntry`. */
   premium: GearPremiumEntry[];
-  unresolved: { source: GearSource; sourceId: string; buffId: string; reason: string }[];
+  unresolved: {
+    source: GearSource;
+    sourceId: string;
+    buffId: string;
+    reason: string;
+    /** Id du personnage ALLIÉ concerné (resolveAllyPassives). */
+    ally?: string;
+  }[];
 }
 
 // ── Référentiels de classement ──────────────────────────────────────────────
@@ -215,6 +244,20 @@ const ELEMENT_CONDITIONS = new Set([
   'ATTACKER_ELEMENT_EQUAL',
   'ATTACKER_ELEMENT_LOSE',
 ]);
+
+/**
+ * Cibles d'équipe FILTRÉES PAR CLASSE (`CCT_*` du receveur). La sémantique
+ * « classe » (et non « membre en train d'agir ») est prouvée par la desc
+ * officielle du S2 d'Eris : « increases the damage of ally Strikers » =
+ * `MY_TEAM_ATTACKER` (2000117_2_5) — Striker = `CCT_ATTACKER` en interne.
+ */
+const TEAM_CLASS_TARGETS: Record<string, string> = {
+  MY_TEAM_DEFENDER: 'CCT_DEFENDER',
+  MY_TEAM_ATTACKER: 'CCT_ATTACKER',
+  MY_TEAM_RANGER: 'CCT_RANGER',
+  MY_TEAM_MAGE: 'CCT_MAGE',
+  MY_TEAM_PRIEST: 'CCT_PRIEST',
+};
 
 /**
  * Conditions d'ÉTAT DE COMBAT (mécaniques perso — ressource unique, buffs
@@ -300,6 +343,10 @@ export function gearConditionMet(
   /** Cible boss du scénario — évalue `TARGET_IS_BOSS` (preuve runtime : le
    *  +300 ‰ pierce de Rhona, fixture 18/08/2026) ; absent = non évaluable. */
   targetIsBoss?: boolean,
+  /** Classe `CCT_*` du PORTEUR du buff — évalue `OWNER_CLASS`
+   *  (`BuffConditionValue` = enum CLASS_ENUM du binaire, même table que les
+   *  quirks AAT_CLASS) ; absente = non évaluable. */
+  ownerClass?: string,
 ): boolean | undefined {
   if (condition === undefined) return true;
   if (ELEMENT_CONDITIONS.has(condition))
@@ -307,6 +354,8 @@ export function gearConditionMet(
   // BuffConditionValue = CET_* de la CIBLE, absente = 0 = terre (cf. en-tête).
   if (condition === 'TARGET_ELEMENT') return defenderElement === ((conditionValue ?? 0) as Element);
   if (condition === 'TARGET_IS_BOSS') return targetIsBoss;
+  if (condition === 'OWNER_CLASS')
+    return ownerClass !== undefined ? CLASS_ENUM[ownerClass] === conditionValue : undefined;
   return undefined;
 }
 
@@ -356,6 +405,15 @@ function makeCollector(
   defenderElement: Element,
   metConditions?: ReadonlySet<string>,
   targetIsBoss?: boolean,
+  /** Mode ALLIÉ (resolveAllyPassives) : les lignes viennent du kit/EE d'un
+   *  AUTRE membre de l'équipe et le RECEVEUR est l'attaquant — seules les
+   *  cibles `MY_TEAM*` qui l'atteignent (et les auras `ENEMY*`) comptent.
+   *  `class` = classe `CCT_*` du receveur (cibles par classe, OWNER_CLASS). */
+  allyReceiver?: { class?: string },
+  /** Classe `CCT_*` du PORTEUR (mode classique) — décide si un proc ciblé
+   *  `MY_TEAM_<CLASSE>` l'atteint (déclarabilité) ; absente = signalé sans
+   *  témoin, jamais deviné. */
+  wearerClass?: string,
 ): {
   info: GearPassivesInfo;
   feed: (
@@ -386,19 +444,120 @@ function makeCollector(
     procCallers?: string[],
   ): void => {
     const ct = row.createType;
+    // ── Mode ALLIÉ : sélection de cible AVANT tout — la ligne ne compte que
+    // si elle ATTEINT le receveur (MY_TEAM*) ou l'ennemi (auras ENEMY*).
+    let allyTarget: string | undefined;
+    let allyTargetClass: string | undefined;
+    if (allyReceiver) {
+      const tgt = row.targetType ?? '';
+      if (tgt.startsWith('MY_TEAM')) {
+        const cls = TEAM_CLASS_TARGETS[tgt];
+        if (cls !== undefined) {
+          // Cible filtrée par CLASSE (preuve : « ally Strikers » d'Eris =
+          // MY_TEAM_ATTACKER) — hors classe, la ligne ne touche pas le receveur.
+          if (allyReceiver.class !== cls) return;
+          allyTargetClass = cls;
+        } else if (tgt !== 'MY_TEAM' && tgt !== 'MY_TEAM_WITHOUT_ME') {
+          // Sélection SITUATIONNELLE (LOWEST_HP_RATE, HIGHEST_ATK, ONE…) :
+          // non attribuable statiquement — signalée si damage-pertinente.
+          if (damageRelevant(row)) {
+            info.unresolved.push({
+              source,
+              sourceId,
+              buffId,
+              reason: `cible ${tgt} — sélection d'équipe situationnelle, non attribuable`,
+            });
+          }
+          return;
+        }
+        allyTarget = 'MY_TEAM'; // atteint le receveur : classement côté attaquant
+      } else if (tgt.startsWith('ENEMY')) {
+        allyTarget = tgt; // aura sur l'ennemi : même classement que le porteur
+      } else {
+        return; // ME/self de l'allié : sans effet sur le hit de l'attaquant
+      }
+      // Créations DYNAMIQUES (SKILL_START inclus : le proc part d'un skill de
+      // l'ALLIÉ, pas d'une ligne du rapport) : jamais simulées d'office — mais
+      // DÉCLARABLES côté attaquant (`side` + `maxStacks`, stacks déclarés
+      // z `ab`) : prouvé in-game 23/08/2026 (le +20 % Strikers d'Eris à
+      // 1 stack rend le S1 de Francesca exact).
+      if (ct !== 'PASSIVE' && ct !== 'PASSIVE2') {
+        if (
+          damageRelevant(row) ||
+          row.type === 'BT_STAT_PREMIUM' ||
+          row.type === 'BT_MARKING' ||
+          row.type.startsWith('BT_GROUP')
+        ) {
+          info.dynamic.push({
+            source,
+            sourceId,
+            buffId,
+            createType: ct ?? '',
+            buff: toActiveBuff(row),
+            side: allyTarget === 'MY_TEAM' ? 'attacker' : 'defender',
+            ...(row.stackCount !== undefined && row.stackCount > 1
+              ? { maxStacks: row.stackCount }
+              : {}),
+            ...(row.tooltipId !== undefined ? { tooltipId: row.tooltipId } : {}),
+            ...(allyTargetClass !== undefined ? { targetClass: allyTargetClass } : {}),
+          });
+        }
+        return;
+      }
+      // Passif restreint par skill LANCEUR : les lanceurs sont ceux de
+      // l'ALLIÉ (auras de soutien SKT_BACKUP_*) — jamais une ligne du
+      // rapport du receveur. Contribution 0, signalé.
+      if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: `réservé aux skills de l'allié (${row.callerSkillType}) — contribution 0`,
+        });
+        return;
+      }
+    }
     // Proc SKILL_START : posé au LANCEMENT, il pèse sur le hit du lanceur
     // (preuve fixture Rhona 18/08/2026) — traité comme une entrée gatée par
-    // ses lanceurs. Les autres créations dynamiques restent non simulées.
+    // ses lanceurs. Les autres créations dynamiques restent non simulées
+    // d'office — mais DÉCLARABLES quand elles atteignent le porteur (`side`
+    // + `maxStacks`, stacks déclarés z `ab` — même mécanique que les procs
+    // d'alliés, demande Sevih 23/08/2026 : « dire ce perso a cette méca
+    // stack N fois »).
     const isSkillStart = ct === 'SKILL_START';
     if (ct !== 'PASSIVE' && ct !== 'PASSIVE2' && !isSkillStart) {
       // Proc — jamais simulé ; signalé seulement s'il peut peser sur le hit.
       if (damageRelevant(row) || row.type === 'BT_MARKING' || row.type.startsWith('BT_GROUP')) {
+        // Côté du proc, pour la DÉCLARATION : seuls les procs à valeur
+        // (damageRelevant) qui atteignent le PORTEUR sont déclarables —
+        // cibles ME/MY_TEAM, ou MY_TEAM_<CLASSE> si sa classe matche
+        // (sémantique classe prouvée, cf. TEAM_CLASS_TARGETS) ; classe
+        // inconnue = signalé sans témoin, jamais deviné. MARKING/GROUP
+        // (flags sans valeur à stacker) et cibles ENEMY* (représentables
+        // par les chips cible) restent signalés non déclarables.
+        let side: GearDynamicEntry['side'];
+        let targetClass: string | undefined;
+        if (damageRelevant(row)) {
+          const tgt = row.targetType ?? '';
+          const cls = TEAM_CLASS_TARGETS[tgt];
+          if (tgt === '' || tgt === 'ME' || tgt === 'MY_TEAM') side = 'attacker';
+          else if (cls !== undefined && wearerClass !== undefined && wearerClass === cls) {
+            side = 'attacker';
+            targetClass = cls;
+          } else if (tgt.startsWith('ENEMY')) side = 'defender';
+        }
         info.dynamic.push({
           source,
           sourceId,
           buffId,
           createType: ct ?? '',
           buff: toActiveBuff(row),
+          ...(side !== undefined ? { side } : {}),
+          ...(side !== undefined && row.stackCount !== undefined && row.stackCount > 1
+            ? { maxStacks: row.stackCount }
+            : {}),
+          ...(row.tooltipId !== undefined ? { tooltipId: row.tooltipId } : {}),
+          ...(targetClass !== undefined ? { targetClass } : {}),
         });
       }
       return;
@@ -421,9 +580,12 @@ function makeCollector(
     // ALLIÉS attend le lot « buffs d'alliés »). Un premium CONDITIONNEL ou
     // non-passif n'existe pas en donnée 1.4.14 côté porteur : signalé, jamais
     // deviné.
-    if (row.type === 'BT_STAT_PREMIUM') {
+    // En mode ALLIÉ, un premium N'EST PAS dans la fiche saisie du receveur
+    // (la fiche est celle de la VILLE, sans équipe) : il descend le canal
+    // buff normal — § 16.4 : le premium EST (une part de) buffVal/buffRate.
+    if (row.type === 'BT_STAT_PREMIUM' && !allyReceiver) {
       const tgt = row.targetType ?? '';
-      if (tgt !== 'ME' && tgt !== 'MY_TEAM') return; // alliés seuls : lot dédié
+      if (tgt !== 'ME' && tgt !== 'MY_TEAM') return; // apport aux alliés : resolveAllyPassives
       if (row.conditionType !== undefined || isSkillStart) {
         info.unresolved.push({
           source,
@@ -438,11 +600,12 @@ function makeCollector(
       }
       return;
     }
-    const target = row.targetType ?? '';
+    const target = allyTarget ?? row.targetType ?? '';
     let side: GearPassiveEntry['side'] | undefined;
     if (target === 'MY_TEAM_WITHOUT_ME') side = 'allies';
     else if (target === 'ME' || target === 'MY_TEAM' || target === '') {
-      if (ATTACKER_TYPES.has(row.type)) side = 'attacker';
+      // BT_STAT_PREMIUM n'arrive ici qu'en mode allié (canal buff, cf. supra).
+      if (ATTACKER_TYPES.has(row.type) || row.type === 'BT_STAT_PREMIUM') side = 'attacker';
       else if (row.type.startsWith('BT_WG_')) {
         info.unresolved.push({
           source,
@@ -518,6 +681,9 @@ function makeCollector(
             attackerElement,
             defenderElement,
             targetIsBoss,
+            // OWNER_CLASS : le porteur du buff est le RECEVEUR (mode allié) —
+            // évaluable ; côté porteur classique, la classe n'est pas fournie.
+            allyReceiver?.class,
           );
     if (met === undefined) {
       // Condition d'ÉTAT DE COMBAT (STATE_CONDITIONS) : entrée `stateful`,
@@ -595,6 +761,11 @@ export function resolveGearPassives(
   defenderElement: Element,
   metConditions?: ReadonlySet<string>,
   targetIsBoss?: boolean,
+  /** Mode ALLIÉ : `attackerId` est l'ALLIÉ porteur, le receveur est
+   *  l'attaquant du scénario (cf. makeCollector). */
+  allyReceiver?: { class?: string },
+  /** Classe `CCT_*` du porteur — déclarabilité des procs `MY_TEAM_<CLASSE>`. */
+  wearerClass?: string,
 ): GearPassivesInfo {
   const { info, feedBuff } = makeCollector(
     buffs,
@@ -602,6 +773,8 @@ export function resolveGearPassives(
     defenderElement,
     metConditions,
     targetIsBoss,
+    allyReceiver,
+    wearerClass,
   );
 
   /** Groupes d'options UNIQUES (arme/accessoire/talisman/EE) au niveau spécial
@@ -683,6 +856,8 @@ export function resolveGearPassives(
 export interface KitCharacter {
   id: string;
   basicStar: number;
+  /** Classe `CCT_*` — déclarabilité des procs `MY_TEAM_<CLASSE>` du kit. */
+  class?: string;
   skills: { slot: number; id: string }[];
 }
 
@@ -800,6 +975,8 @@ export function resolveQuirkPassives(
     defenderElement,
     metConditions,
     targetIsBoss,
+    undefined,
+    char.class,
   );
   for (const [nodeId, level] of Object.entries(quirks)) {
     if (level < 1) continue;
@@ -883,6 +1060,10 @@ export function resolveKitPassives(
   skillLevels: Partial<Record<'S1' | 'S2' | 'S3', number>> = {},
   metConditions?: ReadonlySet<string>,
   targetIsBoss?: boolean,
+  /** Mode ALLIÉ : `char` est le kit de l'ALLIÉ, le receveur est l'attaquant
+   *  du scénario (cf. makeCollector) — niveaux de skill au max (pas de
+   *  saisie UI pour les alliés). */
+  allyReceiver?: { class?: string },
 ): GearPassivesInfo {
   const { info, feedBuff } = makeCollector(
     buffs,
@@ -890,6 +1071,8 @@ export function resolveKitPassives(
     defenderElement,
     metConditions,
     targetIsBoss,
+    allyReceiver,
+    char.class,
   );
   // Slot du skill BURSTABLE : ses déclinaisons burst tiennent leur niveau de
   // LUI (S1 chez Caren — le « toujours S2 » d'avant faussait la sélection des
@@ -954,6 +1137,15 @@ export function resolveKitPassives(
       const refs = activeRefs.get(b);
       feedBuff('kit', sk.id, b, wanted, refs ? [...refs] : undefined);
     }
+  }
+  // Slot UI du skill SOURCE des procs signalés (affichage « Pilgrimage S2 »,
+  // « Eris S2 ») — bursts rattachés au slot du burstable, comme partout.
+  for (const d of info.dynamic) {
+    const sk = skills[d.sourceId];
+    if (!sk) continue;
+    const slot =
+      MAIN_SLOT_OF[sk.type] ?? (sk.type.startsWith('SKT_BURST_') ? burstSlot : undefined);
+    if (slot !== undefined) d.slot = slot;
   }
   return info;
 }

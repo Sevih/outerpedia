@@ -423,6 +423,26 @@ export const FX_CATALOG: Record<string, ActiveBuff | null> = {
   t_dmg_taken: null,
 };
 
+/**
+ * Tooltips des 6 buffs STANDARDS couverts par les chips attaquant ci-dessus
+ * (tooltip → clé de chip). Un proc de skill qui porte un de ces tooltips EST
+ * ce buff visible en jeu, LITTÉRALEMENT (vérifié table entière 23/08/2026 :
+ * magnitudes identiques aux chips — ex. tooltip 7 = ST_ATK 300 ‰ sur 75/76
+ * lignes) et il ne se cumule pas avec lui (`isTypeOverlap`) : il se déclare
+ * par la CHIP, jamais par un stepper de stacks (retour Sevih 23/08 — « les
+ * buffs de Pilgrimage sont les mêmes que dans caster buffs, là tu déclares
+ * en double »). Un effet visible mais DISTINCT (tooltip propre au perso, ex.
+ * +50 % vs break) garde son stepper : ce n'est pas le même buff.
+ */
+export const FX_CHIP_TOOLTIPS: Record<number, string> = {
+  6: 'def',
+  7: 'atk',
+  8: 'pen',
+  9: 'eff',
+  12: 'chd',
+  15: 'spd',
+};
+
 /** Chips → buffs actifs ; les clés sans magnitude standard partent en `unresolved`. */
 export function resolveFx(keys: string[]): { buffs: ActiveBuff[]; unresolved: string[] } {
   const buffs: ActiveBuff[] = [];
@@ -494,6 +514,32 @@ export interface AttackerBuildInput {
   debuffCount?: number;
   /** Σ des buffs positifs de l'ÉQUIPE (§ 9.1 BT_DMG_OWNER_TEAM_BUFF). */
   teamBuffCount?: number;
+  /** ALLIÉS déclarés (z `al`) — leurs passifs d'équipe `MY_TEAM*` et leurs
+   *  auras `ENEMY*` atteignent le scénario (resolveAllyPassives). */
+  allies?: AllyBuildInput[];
+  /** Stacks DÉCLARÉS des buffs DYNAMIQUES qui atteignent l'attaquant —
+   *  procs de son PROPRE kit/EE/quirks comme de ses ALLIÉS (z `ab` :
+   *  buffId → stacks posés en jeu). Le moteur ne simule jamais un proc, le
+   *  scénario le déclare ; plafonné au `StackCount` de la ligne, valeur
+   *  effective = value × stacks (§ 14.1). PROUVÉ 23/08/2026 : 1 S2 d'Eris
+   *  = 1 stack de 2000117_2_5 (+200 ‰ § 9.1), S1 de Francesca exact. */
+  buffStacks?: Record<string, number>;
+}
+
+/** Un allié déclaré — seuls les champs CONSOMMÉS par la donnée 1.4.14 :
+ *  ses passifs de kit (gatés par la transcendance pour le passif unique) et
+ *  son EE. Sa main stat de talisman (z `al[2..3]`) n'a AUCUN consommateur
+ *  damage-pertinent (sondage 23/08/2026 : les familles d'équipe à stat de
+ *  poseur sont des soins/boucliers ; le seul cas dégâts, BT_DMG_CASTER_LOST_
+ *  HP_RATE de l'EE 2000040, dépend des PV perdus de l'allié — non capturés,
+ *  contribution 0 signalée par le résolveur). */
+export interface AllyBuildInput {
+  id: string;
+  /** INDEX du palier de transcendance — absent = palier MAX (défaut UI). */
+  transcendIndex?: number;
+  /** EE possédé — `enchant` 10 si « +10 » déclaré, 0 sinon ; absent = pas
+   *  d'EE déclaré (les lignes d'équipe des EE vivent au Lv1 comme au Lv10). */
+  ee?: { enchant: number };
 }
 
 export interface TargetBuildInput {
@@ -624,6 +670,10 @@ export interface DamageReportResult {
   /** QUIRKS du compte (nœuds d'éveil à buff) — présent dès qu'un niveau > 0
    *  est fourni. */
   quirkPassives?: GearPassivesInfo;
+  /** Passifs d'ALLIÉS (kit + EE des membres déclarés, cibles `MY_TEAM*` qui
+   *  atteignent l'attaquant + auras `ENEMY*`) — présent dès qu'un allié est
+   *  déclaré ; chaque entrée porte son `ally` (id du personnage). */
+  allyPassives?: GearPassivesInfo;
 }
 
 // ── Construction ─────────────────────────────────────────────────────────────
@@ -785,6 +835,8 @@ export function buildDamageReport(
           defenderElement,
           metConditions,
           target.boss === true,
+          undefined,
+          char.class,
         )
       : {
           entries: [],
@@ -811,14 +863,16 @@ export function buildDamageReport(
 
   // Passifs du KIT (§ 16.3 côté joueur) : skills `*_PASSIVE` du perso — le
   // passif UNIQUE suit la TRANSCENDANCE (growth.transcend.skillLevel).
-  const maxTransStar = data.growth.transcend.reduce(
-    (m, r) => (r.basicStar === char.basicStar && r.transStar > m ? r.transStar : m),
-    char.basicStar,
-  );
-  const transStar =
-    attacker.transcendIndex !== undefined
-      ? Math.min(char.basicStar + attacker.transcendIndex, maxTransStar)
-      : maxTransStar;
+  // Étoile de transcendance EFFECTIVE (index absent = palier MAX, défaut UI)
+  // — même règle pour l'attaquant et les alliés déclarés.
+  const transStarOf = (c: DataCharacter, transcendIndex: number | undefined): number => {
+    const max = data.growth.transcend.reduce(
+      (m, r) => (r.basicStar === c.basicStar && r.transStar > m ? r.transStar : m),
+      c.basicStar,
+    );
+    return transcendIndex !== undefined ? Math.min(c.basicStar + transcendIndex, max) : max;
+  };
+  const transStar = transStarOf(char, attacker.transcendIndex);
   const kitPassives = resolveKitPassives(
     char,
     transStar,
@@ -856,10 +910,93 @@ export function buildDamageReport(
       .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
       .map((e) => e.buff);
 
+  // Passifs d'ALLIÉS (lot « buffs d'alliés ») : pour chaque membre déclaré,
+  // son kit (niveaux de skill au MAX — pas de saisie UI) et son EE passent
+  // par les MÊMES résolveurs en mode allié — seules les cibles `MY_TEAM*`
+  // qui atteignent l'attaquant (classe évaluée) et les auras `ENEMY*`
+  // ressortent ; dynamiques signalés, jamais simulés. Chaque entrée est
+  // étiquetée de son `ally` pour l'affichage.
+  let allyPassives: GearPassivesInfo | undefined;
+  if (attacker.allies?.length) {
+    allyPassives = { entries: [], dynamic: [], premium: [], unresolved: [] };
+    const receiver = { class: char.class };
+    for (const al of attacker.allies) {
+      const ac = data.characters.characters[al.id];
+      if (!ac) {
+        allyPassives.unresolved.push({
+          source: 'kit',
+          sourceId: al.id,
+          buffId: al.id,
+          reason: 'allié absent des tables characters',
+          ally: al.id,
+        });
+        continue;
+      }
+      const infos = [
+        resolveKitPassives(
+          ac,
+          transStarOf(ac, al.transcendIndex),
+          data.characters.skills,
+          data.growth.transcend,
+          data.buffs,
+          attackerElement,
+          defenderElement,
+          {},
+          metConditions,
+          target.boss === true,
+          receiver,
+        ),
+      ];
+      if (al.ee && data.equipment) {
+        infos.push(
+          resolveGearPassives(
+            al.id,
+            { ee: al.ee },
+            data.equipment,
+            data.buffs,
+            attackerElement,
+            defenderElement,
+            metConditions,
+            target.boss === true,
+            receiver,
+          ),
+        );
+      }
+      for (const i of infos) {
+        allyPassives.entries.push(...i.entries.map((e) => ({ ...e, ally: al.id })));
+        allyPassives.dynamic.push(...i.dynamic.map((e) => ({ ...e, ally: al.id })));
+        allyPassives.unresolved.push(...i.unresolved.map((e) => ({ ...e, ally: al.id })));
+      }
+    }
+  }
+  const allyBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>
+    (allyPassives?.entries ?? [])
+      .filter((e) => scenarioSide(e, side) && e.active && !e.callers)
+      .map((e) => e.buff);
+  // Procs DÉCLARÉS (stacks > 0, côté attaquant seulement) — kit/EE/quirks
+  // du porteur comme des alliés : valeur effective = value × stacks
+  // (§ 14.1), stacks plafonnés au StackCount de la ligne. Dédup par buffId
+  // (un même buff référencé par plusieurs sources = UNE instance en jeu).
+  // NB : cette collecte lit gearPassives/kitPassives/quirkPassives déclarés
+  // PLUS HAUT — allyPassives ferme la liste.
+  const declaredDynamicBuffs: ActiveBuff[] = [];
+  if (attacker.buffStacks) {
+    const served = new Set<string>();
+    for (const i of [kitPassives, gearPassives, quirkPassives, allyPassives]) {
+      for (const d of i?.dynamic ?? []) {
+        if (d.side !== 'attacker' || served.has(d.buffId)) continue;
+        const n = attacker.buffStacks[d.buffId] ?? 0;
+        if (n < 1) continue;
+        served.add(d.buffId);
+        declaredDynamicBuffs.push({ ...d.buff, stacks: Math.min(n, d.maxStacks ?? 1) });
+      }
+    }
+  }
+
   // Buffs restreints par slot (`CallerSkillType`, gear.ts) : versés SEULEMENT
   // au slot dont le skill lanceur matche — jamais aux stats de combat (les
   // familles à canal de stat gatées sont signalées, pas des entrées).
-  const gatedInfos = () => [gearPassives, kitPassives, quirkPassives];
+  const gatedInfos = () => [gearPassives, kitPassives, quirkPassives, allyPassives];
   const gatedBuffs = (side: 'attacker' | 'defender', skillType: string): ActiveBuff[] =>
     gatedInfos().flatMap((i) =>
       (i?.entries ?? [])
@@ -878,6 +1015,8 @@ export function buildDamageReport(
     ...gearBuffs('attacker'),
     ...kitBuffs('attacker'),
     ...quirkBuffs('attacker'),
+    ...allyBuffs('attacker'),
+    ...declaredDynamicBuffs,
   ];
   const defenderBuffs = [
     ...tgtFx.buffs,
@@ -885,6 +1024,7 @@ export function buildDamageReport(
     ...gearBuffs('defender'),
     ...kitBuffs('defender'),
     ...quirkBuffs('defender'),
+    ...allyBuffs('defender'),
   ];
 
   // Stats effectives de la CIBLE (canal § 16.1, A = 0) : BT_STAT actifs posés
@@ -1306,5 +1446,6 @@ export function buildDamageReport(
     ...(gearPassives ? { gearPassives } : {}),
     kitPassives,
     ...(quirkPassives ? { quirkPassives } : {}),
+    ...(allyPassives ? { allyPassives } : {}),
   };
 }

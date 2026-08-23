@@ -180,10 +180,26 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
   it('sans resolver de gear : arme/accessoire/talisman SIGNALÉS, jamais tus', () => {
     const { ignored, attacker, targetsHit } = buildInputsFromZ(z);
     expect(ignored.filter((l) => l.includes('non résolu'))).toHaveLength(3);
-    // Alliés : hors v1, signalé. Cibles touchées (`n`) : BRANCHÉ (décompte
-    // § 7, 10/08/2026) — exposé à l'appelant, plus jamais « ignoré ».
-    expect(ignored.filter((l) => l.includes('hors v1'))).toHaveLength(1);
+    // Alliés : BRANCHÉS (lot « buffs d'alliés », 23/08/2026) — l'entrée moteur
+    // porte l'allié (EE +10 déclaré par défaut), plus jamais « hors v1 ».
+    // Reste signalée : la main stat de talisman, sans consommateur en donnée.
+    expect(ignored.some((l) => l.includes('hors v1'))).toBe(false);
+    expect(attacker?.allies).toEqual([{ id: '2000002', transcendIndex: 0, ee: { enchant: 10 } }]);
     expect(targetsHit).toBe(3);
+    // Stacks déclarés (z `ab`) : indépendants de `al` (les procs du PROPRE
+    // kit de l'attaquant se déclarent aussi) — entrées invalides filtrées
+    // (le plafond StackCount est côté moteur).
+    const withStacks = buildInputsFromZ({
+      ...z,
+      ab: [
+        ['2000117_2_5', 2],
+        ['', 3],
+        ['x', 0],
+      ],
+    });
+    expect(withStacks.attacker?.buffStacks).toEqual({ '2000117_2_5': 2 });
+    const noAlly = buildInputsFromZ({ a: '2000117', ab: [['2000117_2_5', 2]] });
+    expect(noAlly.attacker?.buffStacks).toEqual({ '2000117_2_5': 2 });
     // Les sets ne dépendent d'aucun resolver (GroupID = id de set, jointure
     // 1:1) ; un seul set choisi = 4 pièces enchantées ; `eo: 0` = pas d'EE.
     expect(attacker?.gear).toEqual({

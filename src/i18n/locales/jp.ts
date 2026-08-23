@@ -676,6 +676,11 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.counters': 'バフの数',
   'tools.damage-calculator.context.counters_hint':
     'パッシブがこの数に比例します — ヒット直前のアイコン数を数えてください（スキル自身が付与するバフはヒット後に付きます）',
+  'tools.damage-calculator.context.stack_buffs': 'スキルバフ（スタック）',
+  'tools.damage-calculator.context.dmg_word': '与ダメージ',
+  'tools.damage-calculator.context.stack_max': '（最大{n}スタック）',
+  'tools.damage-calculator.context.stack_buffs_hint':
+    '非表示・キャラ固有のスキルバフ — 攻撃者自身のものも味方のものも。ヒット時点のスタック数を入力してください（攻撃力・貫通などの通常の可視バフはバフチップで指定します）',
   'tools.damage-calculator.context.own_buffs': '攻撃側のバフ数',
   'tools.damage-calculator.context.own_debuffs': '攻撃側のデバフ数',
   'tools.damage-calculator.context.team_buffs': 'チーム全体のバフ数（使用者を含む）',
@@ -685,7 +690,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.await_pick': '先にアタッカーとターゲットを選択してください',
   'tools.damage-calculator.buffs.kits_soon': 'キットのバフデータが必要 — エンジンと同時に実装',
   'tools.damage-calculator.report.engine_wip':
-    'エンジンv1 — 未対応：味方、継続ダメージ、戦闘中の装備発動効果（状態はバフ／デバフで再現してください）。',
+    'エンジンv1 — 非シミュレート：戦闘中の装備発動効果（状態はバフ／デバフで再現してください。スキルのバフは専用のスタック入力があります）。',
   'tools.damage-calculator.report.branches_note': '分岐を列挙・正確な確率',
   'tools.damage-calculator.report.loading': '計算テーブルを読み込み中…',
   'tools.damage-calculator.report.tables_error':

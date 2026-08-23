@@ -1,0 +1,50 @@
+{
+  "name": "Francesca + Eris alliée vs Ars Nova · S2 critical",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0xMlDAAuVaABYY4jCADGAJwCWAuVLAEA+gBMAtgHMosAJy5JABzkBTGVLOrjAewDuF1TMFm9SepgBGAVwBmfqpSABZgAHZW7gAccCDc0gDOUADasIjIKKowqmgAupiKeihw8CIIAOyQZeW4CFEoRpgqKanwCB7lGPggGGToSOhw+akYcJi9YwNIwz2D4-2T-bm5nEA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S2",
+      "branch": "critical",
+      "damage": 30658
+    }
+  ],
+  "notes": "Capture Sevih 23/08/2026 — PREMIERE validation in-game du lot buffs d allies : 30658 EXACT (0.00 %). Eris declaree alliee (EE possede, pas +10) : ses DEUX premiums d equipe tombent sur Francesca (Striker) via le canal buff sans defactorisation — BID_CEQUIP_2000117_2 (+500 pour mille crit dmg plat, gate OWNER_CLASS=2 evalue) et trancendent_8_cri_dmg_team_upgrade (skill_8 de transcendance, team). Crit dmg de combat 3540 = 2960 (fiche) + 500 (EE) + 80 (skill_8)."
+}
