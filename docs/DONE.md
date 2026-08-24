@@ -7,6 +7,46 @@
 
 ## 2026-08-24
 
+- **Guide `banner-mileage` — la maj du 25/08 documentée et la Dimensional
+  Supply ajoutée (SOLDE l'item PRIO du TODO, qui attendait cette refonte).**
+  GARANTIE DE RECRUIT (pity) : éditoriale, aucune colonne des tables ne la
+  porte (`OpenRecruitCount` est un déblocage de bannière, pas ça) — un encart
+  par onglet (100 tirages ; 2 max et reset en fin de bannière, 1 fois par
+  Demiurge avec compteur conservé par cible, illimité en Custom) et les règles
+  communes en intro. L'intro ne pouvait plus opposer le mileage aux
+  « compteurs de pity » : le jeu en a un.
+  DIMENSIONAL SUPPLY : 5e onglet (`#banner=supply`). Le type `equipment` entre
+  dans `recruit.json` — taux lus sur les recettes ITEM, mileage depuis
+  `PC_MILEAGE_EQUIP` (150), ticket, sprite : rien n'est écrit en dur, et les
+  chiffres générés retombent sur ceux publiés par l'éditeur. Couvre la refonte
+  du 25/08 (cycle mensuel, sélection verrouillée, 2 % répartis sur les pièces
+  restantes — donc 2 % pleins sur la dernière, déduit et non recopié).
+  CONTENU DES PALIERS : `drops` généré depuis `RecruitItemRecipeTemplet`, taux
+  absolu de chaque lot (`Rate / ΣRate × palier`) — VÉRIFIÉ au dix-millième
+  contre les taux publiés (Reload Cartridge x10 : 3/26 × 8 % = 0,9231 %).
+  Seuls les paliers sans `IT_EQUIP` sont listés : ailleurs les 154 lignes sont
+  le catalogue d'équipement, les dérouler n'apprendrait rien. Rendu au survol
+  / tap ; `InlineTooltip` gagne `interactive` (défaut false) — sans lui le
+  contenu se fermait avant qu'on l'atteigne (closeDelay 0) ou qu'on le
+  scrolle (le portail n'est pas dans le déclencheur).
+  PALIER VEDETTE mis en avant sur les CINQ bannières, dérivé des clés
+  (`_TITLE_05` sinon `_TITLE_03`) : juste partout sans table à tenir.
+  DEUX CORRECTIONS trouvées en chemin : le Custom Rate Up rend du « Custom
+  Mileage » et non de l'« Elemental Mileage » (ce dernier appartient au
+  Selected Element Recruit et se convertit en fin de période — le jeu le dit
+  dans sa description d'item) ; et `EVENT_TICKET_OF`, tenu à la main, laisse
+  place à `eventTicketId` généré depuis `RecruitTicketID_FREE`, colonne qui
+  portait déjà l'info pour les cinq types.
+  Libellés EN du client corrigés par override (`TITLE_EN_OVERRIDE`, sinon la
+  régénération les réécrit) : « Advanced » → « High-Dimensional Supply », là
+  où JP/KR/ZH disent déjà « haute dimension ».
+  RELU contre le patch note officiel (`posts.json` id 10923) : conforme règle
+  par règle sur les deux volets. Deux effets restent à vérifier au refresh du
+  25 — le Demiurge passe à « 1 héros 2★+ tous les 10 tirages », donc l'encart
+  de garantie x10 apparaîtra SEUL sur l'onglet Premium (il est dérivé des taux
+  confirm), et sept héros quittent le pool (Leo, Maxwell, Pesketh, Bleu,
+  Guizam, Flamberge, Orox), ce qui touche `customPool`.
+
 - **Damage calc — le lot talismans VALIDÉ IN-GAME (2 captures Sevih, toutes
   les deux à 0,000 %).** `francesca-eris-tal-dmg` : S1 crit 9907 EXACT — la
   main DMG +10 d'Eris alliée (120 ‰) atteint Francesca par le canal buff,

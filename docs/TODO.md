@@ -12,15 +12,6 @@
 
 ---
 
-## 🎯 PRIO (décision Sevih)
-
-- [ ] **Ajouter la bannière Dimensional Supply au guide banner** (banner-mileage) —
-      elle donne au max 4 segments jaunes sur un substat (cf. guide gear, onglet
-      Bases) ; à documenter côté guide des bannières.
-      VÉRIFIÉ le 26/07 : « Dimensional Supply » n'apparaît que dans
-      `general-guides/gear/labels.ts` (la source de l'info), nulle part dans le
-      guide des bannières. Toujours à faire. MAIS FAUT ATTENDRE LA REFONTE INGAME AVANT!!!!!
-
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
 > Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
