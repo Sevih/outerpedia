@@ -206,6 +206,10 @@ if (!PURGE_ONLY) {
         stdio: 'inherit',
         env: {
           ...process.env,
+          // Aucun fichier de config, par construction : tout arrive par les
+          // RCLONE_S3_* ci-dessous. Sans ce vide EXPLICITE, rclone cherche son
+          // rclone.conf inexistant et log un NOTICE à chaque appel.
+          RCLONE_CONFIG: '',
           RCLONE_S3_PROVIDER: 'Cloudflare',
           RCLONE_S3_ENDPOINT: R2_ENDPOINT,
           RCLONE_S3_ACCESS_KEY_ID: R2_ACCESS_KEY_ID,

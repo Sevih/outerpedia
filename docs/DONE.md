@@ -7,6 +7,18 @@
 
 ## 2026-08-24
 
+- **`pnpm images` — le NOTICE rclone à chaque appel, supprimé à la source.**
+  Le pipeline R2 est conçu SANS fichier de config (remote anonyme `:s3:`,
+  identifiants passés en `RCLONE_S3_*`) — c'est écrit dans les en-têtes de
+  `datagen/lib/r2.ts` et `scripts/assets-push.mjs`. Mais rclone, lui, cherche
+  son `rclone.conf` au démarrage et log un NOTICE quand il ne le trouve pas :
+  bruit permanent sur `editorial:push`, la seule étape qui l'invoque
+  réellement les jours où `assets:push` n'a rien à pousser (`process.exit(0)`
+  avant le spawn). `RCLONE_CONFIG: ''` dans les deux env ne masque pas le
+  message, il supprime la cause : l'invariant que les en-têtes décrivaient
+  est enfin dit AU BINAIRE. Vérifié en rejouant le `spawnSync` exact des deux
+  fichiers, sans toucher R2 : stderr non vide avant, vide après.
+
 - **Guide `banner-mileage` — la maj du 25/08 documentée et la Dimensional
   Supply ajoutée (SOLDE l'item PRIO du TODO, qui attendait cette refonte).**
   GARANTIE DE RECRUIT (pity) : éditoriale, aucune colonne des tables ne la
