@@ -54,17 +54,7 @@
       },
       "entries": [
         {
-          "names": [
-            "Alice",
-            "Eliza",
-            "Francesca",
-            "Leo",
-            "Maxwell",
-            "Rhona",
-            "Rin",
-            "Saeran",
-            "Valentine"
-          ],
+          "names": ["Alice", "Eliza", "Francesca", "Rhona", "Rin", "Saeran", "Valentine"],
           "pickType": "one",
           "reason": {
             "en": "{I-I/3★ Hero Selection Ticket}. \n 1 for completing all 30 missions \n 1 for Season 1 Hardmode Adventure 10 clear.",
@@ -270,6 +260,28 @@
             "kr": "스토리 모드에서 무료로 제공됩니다.",
             "zh": "在故事模式中免费获得。",
             "fr": "Offert gratuitement en mode histoire."
+          }
+        }
+      ]
+    },
+    {
+      "source": {
+        "en": "Story Dungeon first clear",
+        "jp": "ストーリーダンジョン初回クリア",
+        "kr": "스토리 던전 최초 클리어",
+        "zh": "剧情副本首次通关",
+        "fr": "Story Dungeon first clear"
+      },
+      "entries": [
+        {
+          "names": ["Leo", "Maxwell", "Pesketh", "Bleu", "Guizam", "Flamberge", "Orox"],
+          "pickType": "all",
+          "reason": {
+            "en": "Removed from the Recruitment pool: obtained on the first clear of the Story Dungeon they appear in. If the dungeon is already cleared, the Hero is sent by mail — or 150 Pieces if already owned (120 for a native 1★).",
+            "jp": "募集プールから除外：登場するストーリーダンジョンの初回クリアで入手。クリア済みの場合はメールで配布され、所持済みなら破片150個（本来1★は120個）。",
+            "kr": "모집 풀에서 제외: 등장하는 스토리 던전을 처음 클리어할 때 획득. 이미 클리어했다면 우편으로 지급되며, 이미 보유 중이면 조각 150개(원래 1★는 120개).",
+            "zh": "已从招募池移除：首次通关其登场的剧情副本即可获得。若已通关则通过邮件发放；若已拥有则给予碎片150个（原生1★为120个）。",
+            "fr": "Retiré du pool de recrutement : obtenu à la première clear du Story Dungeon où il apparaît. Si le donjon est déjà clear, le héros arrive par mail — ou 150 Pieces s'il est déjà possédé (120 pour un 1★ natif)."
           }
         }
       ]

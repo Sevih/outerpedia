@@ -1104,6 +1104,7 @@
   "2000041": {
     "rank": "C",
     "role": "support",
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -1239,6 +1240,7 @@
   "2000045": {
     "rank": "E",
     "role": "dps",
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -1275,6 +1277,7 @@
   "2000049": {
     "rank": "E",
     "role": "dps",
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
@@ -1325,6 +1328,7 @@
   "2000050": {
     "rank": "D",
     "role": "sustain",
+    "tags": ["free"],
     "skillPriority": {
       "first": 2,
       "second": 3,
@@ -1334,6 +1338,7 @@
   "2000051": {
     "rank": "E",
     "role": "dps",
+    "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
