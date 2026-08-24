@@ -32,6 +32,8 @@ import gnosisbethArsnova from './gnosisbeth-arsnova.json';
 import gnosisbethScrapmetal from './gnosisbeth-scrapmetal.json';
 import gnosisbethScrapmetalNoEE from './gnosisbeth-scrapmetal-noee.json';
 import gnosisbethScrapmetalEffbuff from './gnosisbeth-scrapmetal-effbuff.json';
+import francescaDotScrapmetal from './francesca-dot-scrapmetal.json';
+import francescaDotScrapmetalAtkbuff from './francesca-dot-scrapmetal-atkbuff.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -101,4 +103,13 @@ export const FIXTURES: DamageFixture[] = [
   // COMPLÈTE, main de talisman incluse (stat d'ITEM, pas un premium
   // défactorisé — 190 × 2 = 380 tout rond).
   gnosisbethScrapmetalEffbuff as DamageFixture,
+  // Le protocole live rejoué sur un DoT à formule DÉFENSE (24/08/2026) :
+  // Bleed de Francesca vs Scrap Metal, tick 771 sans buff (CalcDamageDOT
+  // def + DMG_REDUCE validé hors raid) puis 1110 après ATK +30 % / pierce
+  // +300 — le « live » vaut pour toute la jump table, la PÉNÉTRATION du
+  // poseur est lue au tick, et l'assiette § 16.1 exige le taux premium du
+  // nœud de quirk 101 (Striker +150 ‰, BT_STAT_PREMIUM) : la mesure qui a
+  // sorti ces nœuds du filtre UI « déjà dans la fiche ».
+  francescaDotScrapmetal as DamageFixture,
+  francescaDotScrapmetalAtkbuff as DamageFixture,
 ];

@@ -1,0 +1,52 @@
+{
+  "name": "Francesca vs Scrap Metal Grid · tick du Bleed SANS buff",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0wBcBbKCABGAVwBmYgPoBjABZgAdtICmGEKshxMJSKDA8q0eGwAsa6QCcAljyvSwBSQBM+Ac0FIAHJ7UAHK8oWKpK+APYA7oGSFvoaIHBqohIy8kpxSPBqLq6SQqGhAM48ggncILaCMGRkMJAmSCZscCYsmA5QANodsIhwuLgY+CAYZOhI6HAAuujdGFrDY1rjSNOzE5gjS2OTk5xAA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "101": 10,
+    "121": 10,
+    "141": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "dot:2000015_1_1",
+      "branch": "normal",
+      "damage": 771
+    }
+  ],
+  "notes": "Capture Sevih 24/08/2026 (Francesca lv100 nue sauf EE+0, aucun buff de part et d autre) — premier tick de DoT a formule DEFENSE mesure HORS raid : 2034 x 725 pour mille x mitigation(def 789) x (1 - 64 pour mille de DMG_REDUCE) = 771 EXACT. Valide CalcDamageDOT section 11 contre une cible normal_hard (le temoin du 22/08 etait un boss de raid a def 52). Le noeud de quirk 101 (Striker +150 pour mille ATK, BT_STAT_PREMIUM) est declare : invisible ici (identite de refactorisation sans buff de scenario), indispensable au scenario bufle jumeau."
+}

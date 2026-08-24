@@ -26,6 +26,7 @@ import {
   gearConditionMet,
   resolveGearPassives,
   resolveKitPassives,
+  resolveQuirkPassives,
   uniquePassiveLevel,
   type KitCharacter,
   type KitSkill,
@@ -706,5 +707,51 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     const fullS3 = full.slots.find((s) => s.slot === 'S3' && s.burst === undefined)?.report
       .states[0].branches[0].damageRate;
     expect(fullS3! - rateOf('S1')!).toBe(806);
+  });
+});
+
+describe('quirks — nœuds MAÎTRES de classe BT_STAT_PREMIUM (mesuré 24/08/2026)', () => {
+  // Le tick du Bleed de Francesca bufflé ATK +30 % (fixture
+  // francesca-dot-scrapmetal-atkbuff) exige la défactorisation par le nœud
+  // 101 : « déjà dans la fiche » ne veut PAS dire « à ignorer » pour un taux
+  // premium — même leçon que Caren 18/08, côté quirks.
+  const awakening = data.growth.awakening;
+
+  it('nœud 101 (Striker) : ST_ATK +15 ‰/niveau collecté en TAUX premium pour un Attacker', () => {
+    const info = resolveQuirkPassives(
+      { '101': 10 },
+      awakening,
+      { element: Element.Dark, class: 'CCT_ATTACKER', subClass: 'ATTACKER' },
+      buffs,
+      Element.Earth,
+    );
+    expect(info.premium).toContainEqual(
+      expect.objectContaining({ source: 'quirk', sourceId: '101', stat: 'ST_ATK', valueRate: 150 }),
+    );
+  });
+
+  it('gate de classe : le même nœud ne donne RIEN à un Ranger', () => {
+    const info = resolveQuirkPassives(
+      { '101': 10 },
+      awakening,
+      { element: Element.Light, class: 'CCT_RANGER', subClass: 'TACTICIAN' },
+      buffs,
+      Element.Earth,
+    );
+    expect(info.premium.some((p) => p.stat === 'ST_ATK')).toBe(false);
+  });
+
+  it('nœud 141 (Ranger, ST_BUFF_CHANCE OAT_ADD) : premium PLAT — transparent, jamais collecté', () => {
+    // Un premium OAT_ADD vit dans la fiche ET dans l'assiette que les buffs
+    // multiplient (§ 3 : buffVal s'ajoute à sub AVANT ×buffRate) — la
+    // défactorisation ne concerne que les TAUX ; le déclarer ne change rien.
+    const info = resolveQuirkPassives(
+      { '141': 10 },
+      awakening,
+      { element: Element.Light, class: 'CCT_RANGER', subClass: 'TACTICIAN' },
+      buffs,
+      Element.Earth,
+    );
+    expect(info.premium.some((p) => p.stat === 'ST_BUFF_CHANCE')).toBe(false);
   });
 });

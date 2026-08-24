@@ -573,11 +573,20 @@ jump table sur `BUFF_TYPE − 56` route chaque DoT vers SA formule :
   « jamais posés » a vécu quelques heures le même jour sur l'autre branche
   de cette ambiguïté, gate ajouté puis retiré.
 - **La stat est lue EN DIRECT à chaque tick**, jamais capturée à la pose —
-  prouvé DEUX fois in-game (Beth, 24/08/2026) : (a) les procs `SKILL_START`
-  actifs à la pose n'y sont pas (tick = 7000 ‰ × 636 fiche, pas × 694) ;
-  (b) l'expérience LIVE (fixture `gnosisbeth-scrapmetal-effbuff`) — Sterope
-  buffe +100 % EFF ENTRE deux ticks, le tick passe de 1995 à 3990. Un buff
-  de stat posé ou expiré en cours de route déplace donc les ticks restants.
+  prouvé TROIS fois in-game (24/08/2026) : (a) les procs `SKILL_START`
+  actifs à la pose n'y sont pas (Beth : tick = 7000 ‰ × 636 fiche, pas
+  × 694) ; (b) l'expérience LIVE (fixture `gnosisbeth-scrapmetal-effbuff`) —
+  Sterope buffe +100 % EFF ENTRE deux ticks, le tick passe de 1995 à 3990 ;
+  (c) le MÊME protocole sur un DoT à formule DÉFENSE (fixtures
+  `francesca-dot-scrapmetal[-atkbuff]`) — ATK +30 % entre deux ticks du
+  Bleed, 771 → 1110 : le « live » vaut pour toute la jump table, et la
+  PÉNÉTRATION du poseur (pierce +300 du S2, active au tick) est lue en
+  direct elle aussi (`CalcDamageDOT` la consomme, § ci-dessus). Un buff de
+  stat posé ou expiré en cours de route déplace donc les ticks restants.
+  Le couple 771/1110 valide au passage `CalcDamageDOT` de bout en bout HORS
+  raid (def 789 + `DMG_REDUCE` 64 ‰ d'un boss `normal_hard`) et l'assiette
+  § 16.1 des buffs `OAT_RATE` avec un taux premium dans la fiche (le nœud
+  de quirk 101 — voir § 16.1, la mesure qui l'a rendu déclarable).
 - **`× _nCount`** : le tick multiplie par le compteur du buff — mais les
   POSES MULTIPLES d'un même skill ne l'alimentent PAS. Les 3 mesures
   d'Eternal Bleeding du 24/08/2026 contraignent `_nCount = 1` : le popup est
@@ -1201,6 +1210,21 @@ EE Lv10 200) ; DEF de combat **5891** = div1000((4291 + 200 trust) × 1300) +
 53, la valeur que les 6 captures exigeaient (« +60 » = terme croisé
 trust × premiums, uniforme sur deux cibles). L'affichage `X (+Y)` de la fiche
 est `valeur (delta vs portion blanche)` — `Y` est INCLUS dans `X`.
+
+**Nœuds de quirk MAÎTRES de classe (mesuré 24/08/2026, Francesca 2000015)** :
+le nœud d'éveil 101 (« Increases Attack of Striker heroes », IOT_BUFF) est un
+`BT_STAT_PREMIUM ST_ATK OAT_RATE` +15 ‰/niveau — un taux premium de PLUS dans
+`buffRate`, comme skill_8/EE Lv10. Preuve par le protocole live (fixtures
+`francesca-dot-scrapmetal[-atkbuff]`) : tick du Bleed 771 sans buff (identité
+transparente, le taux est invisible sans buff de scénario) puis 1110 avec
+ATK +30 % — qui n'est EXACT qu'en défactorisant la fiche 2034 par 150 ‰
+(sub 1687, combat = div1000(1687 × 1450) + 94 = 2540) ; sans le taux déclaré,
+2616 → +2,97 %. Conséquence UI : « déjà dans la fiche » ne veut PAS dire « à
+ignorer » — ces nœuds sont sortis du filtre « hausses de stats
+inconditionnelles » du réglage quirks (décision du 26/07 amendée). Seuls les
+premiums `OAT_RATE` exigent la déclaration : la variante `OAT_ADD` (nœud 141,
+Effectiveness des Rangers) vit dans `buffVal`, multipliée comme le reste de
+`sub` (§ 3) — mathématiquement transparente, le collecteur l'ignore.
 
 **Identité de reconstruction** (EXACTE quand la stat n'a aucun premium — les
 troncatures s'annulent car `fiche = sub_sans_buffs + A`) : pour passer d'une

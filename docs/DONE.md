@@ -7,6 +7,27 @@
 
 ## 2026-08-24
 
+- **Damage calc — le protocole live rejoué sur un Bleed classique : 2 fixtures
+  à 0,000 %, un nœud de quirk PREMIUM débusqué, le filtre UI amendé.**
+  Sevih refait l'expérience sur le Bleed de Francesca (formule DÉFENSE, pas
+  le flat custom de Beth) vs Scrap Metal : tick 771 sans buff, 1110 après
+  ATK +30 % / CritDMG / Pierce +300 (S2 de Francesca). Le 771 est EXACT
+  d'emblée (CalcDamageDOT def 789 + DMG_REDUCE 64 ‰ validé HORS raid) ; le
+  1110 ne collait avec AUCUN modèle (+2,97 %) jusqu'à la reconstruction
+  arithmétique : la fiche 2034 contient le nœud d'éveil 101 (« Increases
+  Attack of Striker heroes », BT_STAT_PREMIUM +150 ‰ au niveau 10) — un taux
+  premium invisible sans buff (identité) mais qui rejoint le multiplicateur
+  dès qu'un buff % arrive : div1000(1687 × 1450) + 94 = 2540 → tick 1110,
+  0,000 % sur les DEUX mesures. Le moteur savait déjà faire (déclarer le
+  nœud suffisait) : le bug était dans le FILTRE UI des quirks qui écartait
+  ces nœuds comme « hausses de stats déjà dans la fiche » — vrai pour
+  IOT_STAT, faux pour un premium OAT_RATE (même leçon que Caren 18/08, côté
+  quirks). Filtre amendé (+ nœuds 101/141, diff vérifié sur données
+  entières), 3 tests unitaires (collecte, gate de classe, OAT_ADD
+  transparent), § 11 (« live » prouvé 3×, pierce lu au tick) et § 16.1
+  réécrits. Sevih doit cocher le nœud Striker à 10 dans ses réglages.
+  1824 tests verts.
+
 - **Damage calc — l'expérience LIVE de Sevih (buff EFF entre deux ticks) :
   2 preuves, 1 fix talisman, fixture `gnosisbeth-scrapmetal-effbuff`.**
   Sterope lance +100 % EFF entre deux ticks d'Eternal Bleeding : 1995 → 3990. (1) La stat du tick est lue EN DIRECT à chaque tick (pas capturée à
