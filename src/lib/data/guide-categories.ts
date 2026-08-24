@@ -264,11 +264,11 @@ export const GUIDE_CATEGORIES = {
         fr: 'Condition de déblocage : terminer la True Ending de Monad Gate Depth 1.',
       },
       schedule: {
-        en: 'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 2 entries per day.',
-        jp: '毎週水曜00:00 UTCから土曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日2回挑戦可能。',
-        kr: '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 2회 도전 가능.',
-        zh: '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日2次挑战机会。',
-        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 2 entrées par jour.',
+        en: 'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 1 entry per day.',
+        jp: '毎週水曜00:00 UTCから土曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日1回挑戦可能。',
+        kr: '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 1회 도전 가능.',
+        zh: '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日1次挑战机会。',
+        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 1 entrée par jour.',
       },
       features: [
         {
@@ -279,11 +279,11 @@ export const GUIDE_CATEGORIES = {
           fr: 'Singularity Repel : lance le combat de Boss du jour.',
         },
         {
-          en: "Singularity Ascension Device: ascend gear that has reached max Enhancement and max Reforge. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
-          jp: '特異点昇華装置：強化と再鍛造が最大に達した装備を昇華する。昇華により装備のメインステータスが上昇し、再鍛造回数が+3される。さらに強化+15に到達するとランダムな追加ステータスが付与される（種類は装備スロットに依存、数値はランダム）。',
-          kr: '특이점 승화 장치: 강화와 재련이 최대치에 도달한 장비를 승화합니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
-          zh: '奇点升华装置：将达到最大强化和最大重铸的装备进行升华。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
-          fr: "Singularity Ascension Device : fait ascensionner un équipement ayant atteint l'Enhancement max et le Reforge max. L'ascension augmente la/les stat(s) principale(s) de l'équipement et octroie 3 tentatives de Reforge supplémentaires ; atteindre Enhancement +15 ajoute alors une stat bonus aléatoire (le type dépend du slot, la valeur est aléatoire).",
+          en: "Equipment Inspection: opens the Inventory, where Singularity activation and ascension now take place — enhancing to +10, reforging, activating, ascending to +15 and recalculating options all follow on the Gear Enhancement screen. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
+          jp: '装備点検：インベントリを開く。特異点の活性化と昇華はそこで行う。+10までの強化、再鍛造、活性化、+15までの昇華、オプション再算定を装備の強化画面で続けて行える。昇華により装備のメインステータスが上昇し、再鍛造回数が+3される。さらに強化+15に到達するとランダムな追加ステータスが付与される（種類は装備スロットに依存、数値はランダム）。',
+          kr: '장비 점검: 인벤토리를 엽니다. 특이점 활성화와 승화는 이곳에서 진행합니다. +10 강화, 재련, 활성화, +15 승화, 옵션 재산정을 장비 강화 화면에서 이어서 진행할 수 있습니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
+          zh: '装备检查：打开背包，奇点激活与升华现已在此进行——强化至+10、重铸、激活、升华至+15与选项重算可在装备强化界面依次完成。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
+          fr: "Equipment Inspection : ouvre l'inventaire, où se font désormais l'activation et l'ascension Singularity — l'enhancement jusqu'à +10, le reforge, l'activation, l'ascension jusqu'à +15 et le recalcul des options s'enchaînent sur l'écran d'enhancement du gear. L'ascension augmente la/les stat(s) principale(s) et octroie 3 tentatives de Reforge supplémentaires ; atteindre Enhancement +15 ajoute alors une stat bonus aléatoire (le type dépend du slot, la valeur est aléatoire).",
         },
         {
           en: 'Ranking Report: claim daily rewards based on your score the previous day.',

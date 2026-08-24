@@ -469,12 +469,15 @@ export const LABELS = {
   },
 
   // ── Ascension ──
+  // Le patch du 25/08/2026 a sorti l'ascension du lobby : activation et
+  // ascension vivent désormais dans l'écran d'enhancement du gear, où tout
+  // s'enchaîne. L'objet [Equipment Inspection] du lobby renvoie à l'inventaire.
   ascension_intro: {
-    en: 'Singularity Ascension extends the enhancement cap of a +10 / max-Reforge gear from +10 to +15. It is performed at the Singularity Ascension Device unlocked through Dimensional Singularity (Monad Gate).',
-    jp: '特異点昇華は、+10かつ再鍛造最大の装備の強化上限を+10から+15まで拡張します。次元特異点（モナドゲート）から解放される特異点昇華装置で行います。',
-    kr: '특이점 승화는 +10이며 재련이 최대인 장비의 강화 상한을 +10에서 +15까지 확장합니다. 차원 특이점(모나드 게이트)에서 해방되는 특이점 승화 장치에서 수행합니다.',
-    zh: '奇点升华可将已达到+10且重铸已满的装备强化上限从+10扩展至+15。在通过次元奇点（莫纳德之门）解锁的奇点升华装置中进行。',
-    fr: "La Singularity Ascension étend le cap d'enhancement d'un gear +10 / max-Reforge de +10 à +15. Elle se fait au Singularity Ascension Device débloqué via Dimensional Singularity (Monad Gate).",
+    en: 'Singularity Ascension extends the enhancement cap of a +10 / max-Reforge gear from +10 to +15. It is unlocked through Dimensional Singularity (Monad Gate) and performed on the Gear Enhancement screen, where enhancing to +10, reforging, activating, ascending and recalculating options all follow on a single screen.',
+    jp: '特異点昇華は、+10かつ再鍛造最大の装備の強化上限を+10から+15まで拡張します。次元特異点（モナドゲート）で解放され、装備の強化画面で行います。+10までの強化、再鍛造、活性化、昇華、オプション再算定を同じ画面で続けて行えます。',
+    kr: '특이점 승화는 +10이며 재련이 최대인 장비의 강화 상한을 +10에서 +15까지 확장합니다. 차원 특이점(모나드 게이트)에서 해방되며, 장비 강화 화면에서 수행합니다. +10 강화, 재련, 활성화, 승화, 옵션 재산정을 한 화면에서 이어서 진행할 수 있습니다.',
+    zh: '奇点升华可将已达到+10且重铸已满的装备强化上限从+10扩展至+15。通过次元奇点（莫纳德之门）解锁，并在装备强化界面进行：强化至+10、重铸、激活、升华与选项重算可在同一界面依次完成。',
+    fr: "La Singularity Ascension étend le cap d'enhancement d'un gear +10 / max-Reforge de +10 à +15. Elle se débloque via Dimensional Singularity (Monad Gate) et se fait depuis l'écran d'enhancement du gear, où l'enhancement jusqu'à +10, le reforge, l'activation, l'ascension et le recalcul des options s'enchaînent sur un seul écran.",
   },
   ascension_prereqTitle: {
     en: 'Prerequisites',
