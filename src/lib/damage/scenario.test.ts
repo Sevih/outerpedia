@@ -182,7 +182,6 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
     expect(ignored.filter((l) => l.includes('non résolu'))).toHaveLength(3);
     // Alliés : BRANCHÉS (lot « buffs d'alliés », 23/08/2026) — l'entrée moteur
     // porte l'allié (EE +10 déclaré par défaut), plus jamais « hors v1 ».
-    // Reste signalée : la main stat de talisman, sans consommateur en donnée.
     expect(ignored.some((l) => l.includes('hors v1'))).toBe(false);
     expect(attacker?.allies).toEqual([{ id: '2000002', transcendIndex: 0, ee: { enchant: 10 } }]);
     expect(targetsHit).toBe(3);
@@ -220,6 +219,51 @@ describe('buildInputsFromZ — équipement § 15 et hors périmètre signalés',
     expect(attacker?.gear?.roguesCharm).toEqual({ groups: ['3025'] });
     // L'accessoire ne se résout pas → signalé.
     expect(ignored.some((l) => l.includes('accessoire ring'))).toBe(true);
+  });
+
+  it('main de talisman (porteur `tm`/`tml`, allié `al[2..3]`) : résolue → buff d’équipe ; arme/accessoire d’allié en queue de tuple', () => {
+    const zz: CalculatorUrlState = {
+      a: '2000001',
+      tm: 'atk',
+      tml: 7,
+      al: [['2000002', 0, 'critical_dmg_rate', 10, 1, 1, 'sword', 2, 'ring', 0]],
+    };
+    const resolveTalismanMain = (slug: string) =>
+      slug === 'atk'
+        ? { buffId: 'BID_ITEM_STAT_OOPARTS_ATK_6' }
+        : slug === 'critical_dmg_rate'
+          ? { buffId: 'BID_ITEM_STAT_OOPARTS_CRI_DMG_6' }
+          : undefined;
+    const ok = buildInputsFromZ(zz, {
+      resolveTalismanMain,
+      resolveGear: (kind, slug) =>
+        kind === 'weapon' && slug === 'sword' ? { groups: ['1008'] } : undefined,
+    });
+    expect(ok.attacker?.gear?.talismanMain).toEqual({
+      buffId: 'BID_ITEM_STAT_OOPARTS_ATK_6',
+      enchant: 7,
+    });
+    expect(ok.attacker?.allies?.[0]).toMatchObject({
+      id: '2000002',
+      talisman: { buffId: 'BID_ITEM_STAT_OOPARTS_CRI_DMG_6', enchant: 10 },
+      weapon: { groups: ['1008'], tier: 2 },
+    });
+    // L'accessoire d'allié ne se résout pas → SIGNALÉ, jamais tu.
+    expect(ok.ignored.some((l) => l.includes('accessoire d’allié ring'))).toBe(true);
+    expect(ok.attacker?.allies?.[0]?.amulet).toBeUndefined();
+    // Sans resolver de main : les DEUX saisies (porteur + allié) signalées.
+    const ko = buildInputsFromZ(zz);
+    expect(ko.attacker?.gear?.talismanMain).toBeUndefined();
+    expect(ko.attacker?.allies?.[0]?.talisman).toBeUndefined();
+    expect(ko.ignored.filter((l) => l.includes('main de talisman'))).toHaveLength(2);
+    // Vieux tuple à 6 champs : parse inchangé, aucun équipement d'allié.
+    const legacy = buildInputsFromZ(
+      { a: '2000001', al: [['2000002', 0, '', 10, 1, 1]] },
+      { resolveTalismanMain },
+    );
+    expect(legacy.attacker?.allies).toEqual([
+      { id: '2000002', transcendIndex: 0, ee: { enchant: 10 } },
+    ]);
   });
 
   it('deux sets choisis = 2P chacun ; cible en break transite (bk)', () => {

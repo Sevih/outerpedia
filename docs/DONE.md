@@ -5,6 +5,36 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-24
+
+- **Damage calc — équipement d'ÉQUIPE branché (talismans du porteur et des
+  alliés, arme/accessoire d'alliés), et un correctif de doctrine.** Remarque
+  Sevih (« t'as pas évoqué les passifs d'arme/accessoire/set ni les talismans
+  de la team ») → re-sondage, et le constat du 23/08 « la main stat de
+  talisman d'un allié n'a aucun consommateur » tombe : il cherchait les
+  familles caster-stat et a raté que la main d'un talisman EST un buff
+  d'équipe direct (`BID_ITEM_STAT_OOPARTS_*` = `BT_STAT_PREMIUM` `MY_TEAM`
+  permanent, cumulable entre porteurs — ATK 6★ : 120 ‰ → 150 ‰ sur les 11
+  niveaux d'enchant, niveau de ligne = enchant + 1 comme les mains d'EE).
+  Branché : la saisie d'allié du 27/07 (`al[2..3]`) est enfin consommée
+  (canal buff du receveur, doctrine premium d'allié prouvée le 23/08) ; le
+  PORTEUR gagne sa propre saisie (z `tm`/`tml`, select dans la section
+  talisman) routée doctrine FICHE (taux en `premium`, défactorisation) —
+  extension ME/MY_TEAM du kit NON mesurée pour un équipement, la mesure qui
+  tranche est notée dans la spec (la fiche de ville bouge-t-elle en équipant
+  un talisman ATK ?). Arme/accessoire d'ALLIÉS (z `al[6..9]`, selects par
+  allié filtrés par sa classe) : `resolveGearPassives` en mode allié — en
+  donnée 1.4.14 les lignes d'équipe damage-pertinentes sont
+  `BID_ITEM_UO_ACC_25` (+10 % vs boss aux alliés) et deux
+  `BT_DMG_CASTER_STAT` sur la DEF du porteur (stat non capturée : signalé,
+  contribution 0). Sets : sondage complet, AUCUN buff `MY_TEAM` — le set
+  d'un allié n'atteint jamais l'attaquant, rien à câbler. La résolution
+  slug → buffId vit dans `preset-gear.ts` (`talismanMainBuffs`, pools réels,
+  palier le plus haut), partagée wrapper/fixtures/harnais ; aucun texte
+  nouveau (libellés existants réutilisés). Tests : 1792 verts (4 nouveaux —
+  talisman d'allié aux deux niveaux, accessoire d'allié 2025, doctrine fiche
+  du porteur, pont z porteur + tuple allié étendu + compat 6 champs).
+
 ## 2026-08-23
 
 - **Damage calc — buffs d'ALLIÉS branchés (le champ `al` de l'URL n'est plus

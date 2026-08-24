@@ -12,6 +12,8 @@
  */
 
 import damageEquipment from '@data/generated/damage/equipment.json';
+import poolsData from '@data/generated/equipment/pools.json';
+import talismanRawData from '@data/generated/equipment/talisman.json';
 import { getCharacter } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
@@ -64,4 +66,56 @@ export function resolveGearGroups(
   const cls = getCharacter(attackerId)?.class;
   const groups = uniqueGroupsOf(familyMembersFor(family, cls));
   return groups.length ? { groups } : undefined;
+}
+
+// ── Main stat de TALISMAN (buff d'ÉQUIPE `BID_ITEM_STAT_OOPARTS_*`, § 15) ───
+
+/**
+ * Token de la clé de buff du jeu (`BID_ITEM_STAT_OOPARTS_<STAT>_<palier>`,
+ * stable) → slug du glossaire des noms de stats. La main du talisman de
+ * chaque membre est un buff d'ÉQUIPE `BT_STAT_PREMIUM` `MY_TEAM` (constat
+ * 24/08/2026) — entrée du moteur pour le porteur comme pour les alliés.
+ */
+export const TALIS_STAT_SLUG: Record<string, string> = {
+  ATK: 'atk',
+  DEF: 'def',
+  HP: 'hp',
+  CRI: 'critical_rate',
+  CRI_DMG: 'critical_dmg_rate',
+  DMG_REDUCE: 'dmg_reduce_rate',
+  DMG: 'dmg_boost',
+  BUFF_CHANCE: 'buff_chance',
+  BUF_RESIST: 'buff_resist',
+};
+
+interface TalisPoolRow {
+  buff?: string;
+}
+const POOLS = poolsData as unknown as Record<string, TalisPoolRow[]>;
+const TALISMAN_RAW = talismanRawData as unknown as Record<string, { options?: string[] }>;
+
+/**
+ * Main stats de talisman RÉELLES (union des pools, mêmes 9 stats à tous les
+ * paliers) : slug de stat → buffId du palier le PLUS HAUT trouvé (suffixe de
+ * rareté du BID — seul le 6★ porte les 11 niveaux d'enchant L1..L11).
+ */
+export function talismanMainBuffs(): { key: string; buffId: string }[] {
+  const best = new Map<string, { tier: number; buffId: string }>();
+  for (const tal of Object.values(TALISMAN_RAW))
+    for (const ref of tal.options ?? [])
+      for (const row of POOLS[ref] ?? []) {
+        const m = /^BID_ITEM_STAT_OOPARTS_(.+)_(\d+)$/.exec(row.buff ?? '');
+        const slug = m ? TALIS_STAT_SLUG[m[1]] : undefined;
+        if (!slug || !m || !row.buff) continue;
+        const tier = Number(m[2]);
+        const prev = best.get(slug);
+        if (!prev || tier > prev.tier) best.set(slug, { tier, buffId: row.buff });
+      }
+  return [...best.entries()].map(([key, v]) => ({ key, buffId: v.buffId }));
+}
+
+/** Resolver `ScenarioBuildOptions.resolveTalismanMain` côté node/serveur. */
+export function resolveTalismanMainBuff(slug: string): { buffId: string } | undefined {
+  const hit = talismanMainBuffs().find((m) => m.key === slug);
+  return hit ? { buffId: hit.buffId } : undefined;
 }

@@ -925,12 +925,49 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 >   (`SKT_BACKUP_*`) : contribution 0, signalé. Conditions d'état
 >   (`OWNER_HAS_BUFF`…) : entrées `stateful` cochables comme celles du
 >   porteur.
-> - Stats propres de l'allié (main stat de talisman, enhancement — saisies UI
->   du 27/07) : AUCUN consommateur damage-pertinent en 1.4.14 (sondage
->   23/08 : les familles d'équipe à stat de poseur sont soins/boucliers ; le
->   seul cas dégâts, `BID_CEQUIP_2000040` `BT_DMG_CASTER_LOST_HP_RATE`,
->   dépend des PV perdus de l'allié, non capturés — contribution 0). La
->   saisie est signalée `ignored`, jamais tue.
+> - ~~Stats propres de l'allié (main stat de talisman) : aucun consommateur~~
+>   — **CORRIGÉ le 24/08/2026** (bloc suivant) : le sondage du 23/08 était mal
+>   cadré (il cherchait les familles caster-stat) — la main d'un talisman est
+>   un buff d'ÉQUIPE direct. Reste vrai : les STATS du porteur allié ne sont
+>   pas capturées, les lignes qui en dépendent (`BT_DMG_CASTER_*`, ex.
+>   `BID_CEQUIP_2000040` sur les PV perdus) sortent signalées, contribution 0.
+>
+> RÉALISÉ (24/08/2026) — **équipement d'ÉQUIPE** (talisman / arme /
+> accessoire, porteur ET alliés — remarque Sevih : « les passifs
+> d'arme/accessoire/set et les talismans de la team ») :
+>
+> - **Main stat de talisman = buff d'équipe**, PAS une stat d'item :
+>   `BID_ITEM_STAT_OOPARTS_<STAT>_<rareté>` = `BT_STAT_PREMIUM` cible
+>   `MY_TEAM`, permanent (`turnDuration: -1`, `isEquipBuff`), cumulable entre
+>   porteurs (`isTypeOverlap`). 9 stats (ATK/DEF/HP/CRI/CRI_DMG/DMG_REDUCE/
+>   DMG/BUFF_CHANCE/BUF_RESIST) × 3 raretés (suffixe 4/5/6) ; seul le 6★
+>   porte les 11 niveaux d'enchant (ATK : L1 120 ‰ → L11 150 ‰), niveau de
+>   ligne = enchant + 1 (`pickBuffRow` replie les paliers mono-niveau) — même
+>   motif que la main « dégâts vs élément » des EE. Résolution slug → buffId
+>   par les POOLS réels au palier le plus haut (`talismanMainBuffs`,
+>   preset-gear.ts) ; saisie : z `tm`/`tml` (porteur), `al[2..3]` (alliés,
+>   UI du 27/07 enfin consommée).
+> - **Destination** : pour un ALLIÉ, canal buff du receveur (doctrine premium
+>   d'allié PROUVÉE le 23/08). Pour le PORTEUR, route fiche (taux collecté
+>   en `premium`, défactorisation § 16.4) — EXTENSION de la doctrine
+>   ME/MY_TEAM du kit, NON mesurée pour un premium `MY_TEAM` d'équipement
+>   (la preuve Caren du 18/08 portait sur un `ME`). Mesure qui tranche : la
+>   fiche de VILLE bouge-t-elle quand on équipe un talisman ATK ? Si non,
+>   basculer la source 'talisman' du porteur vers le canal buff (gear.ts,
+>   branche premium).
+> - **Armes/accessoires d'ALLIÉS** : `resolveGearPassives` en mode allié
+>   (z `al[6..9]` : arme, breakthrough, accessoire, breakthrough) — seules
+>   les lignes qui ATTEIGNENT l'attaquant comptent. Recensement 1.4.14 des
+>   lignes d'équipe damage-pertinentes : `BID_ITEM_UO_ACC_25` (+10 % vs boss
+>   aux alliés, `MY_TEAM_WITHOUT_ME`), `BID_ITEM_UO_WEAPON_22` et
+>   `BID_FESTIVAL_UO_WEAPON_2` (`BT_DMG_CASTER_STAT` 2,5 % de la DEF du
+>   PORTEUR allié — dépend d'une stat non capturée : signalé, contribution 0) ; le reste est non-damage (DEF/heal/shield/stealth d'équipe).
+> - **Sets : RIEN à faire côté alliés** — sondage complet des
+>   `twoPiece`/`fourPiece` : AUCUN buff `MY_TEAM` en 1.4.14 ; le set d'un
+>   allié n'atteint jamais l'attaquant (celui du porteur était déjà branché).
+> - Niveaux des passifs d'armes/accessoires : exactement 5 lignes de buff
+>   (`[1..5]`) mappées `tier 0..4` (breakthrough) — la saisie d'allié suit
+>   la même règle que le porteur.
 >
 > Condition `TARGET_ELEMENT` PROUVÉE : `BuffConditionValue` =
 > `CHARACTER_ELEMENT_TYPE` de la CIBLE (dump.cs : EARTH=0, WATER=1, FIRE=2,

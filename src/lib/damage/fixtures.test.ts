@@ -22,7 +22,7 @@ import equipmentData from '../../../data/generated/damage/equipment.json';
 import { FIXTURES } from './fixtures';
 import { ENGINE_GAME_VERSION } from './harness';
 import { buildDamageReport, type DamageData } from './inputs';
-import { resolveGearGroups } from './preset-gear';
+import { resolveGearGroups, resolveTalismanMainBuff } from './preset-gear';
 import { resolvePresetTarget } from './preset-target';
 import {
   buildInputsFromZ,
@@ -68,6 +68,7 @@ describe('fixtures dorées (harnais § 4)', () => {
           ...(f.quirks ? { quirks: f.quirks } : {}),
           resolvePreset: resolvePresetTarget,
           resolveGear: resolveGearGroups,
+          resolveTalismanMain: resolveTalismanMainBuff,
         });
         if (!attacker) throw new Error('attaquant non résolu depuis z');
         if (!target) throw new Error('cible non résolue depuis z (preset disparu des tables ?)');

@@ -75,6 +75,15 @@ export interface GearSelection {
   sets?: GearSetInput[];
   /** Rogue's Charm +10 — groupes du talisman 6★ (résolus par le pont). */
   roguesCharm?: { groups: string[] };
+  /** Main stat du TALISMAN porté : un buff d'ÉQUIPE (`BID_ITEM_STAT_OOPARTS_*`
+   *  = `BT_STAT_PREMIUM` cible `MY_TEAM`, permanent, `isEquipBuff`) — PAS une
+   *  stat d'item. `buffId` résolu par le pont depuis les pools réels ;
+   *  `enchant` 0..10 = niveau de la ligne − 1 (le 6★ a 11 niveaux, L1:120 ‰
+   *  → L11:150 ‰ pour l'ATK — même motif que la main « dégâts vs élément »
+   *  des EE). Constat 24/08/2026 : le sondage du 23/08 (« aucun consommateur
+   *  damage-pertinent ») était mal cadré — il cherchait les familles
+   *  caster-stat et a raté ces buffs d'équipe directs. */
+  talismanMain?: { buffId: string; enchant: number };
   /** EE porté (pièce trouvée par `characterLimit` = perso) + enchant 0..10. */
   ee?: { enchant: number };
 }
@@ -583,6 +592,11 @@ function makeCollector(
     // En mode ALLIÉ, un premium N'EST PAS dans la fiche saisie du receveur
     // (la fiche est celle de la VILLE, sans équipe) : il descend le canal
     // buff normal — § 16.4 : le premium EST (une part de) buffVal/buffRate.
+    // Source 'talisman' (main stat, 24/08/2026) : même route fiche pour le
+    // PORTEUR — extension de la doctrine ME/MY_TEAM du kit, PAS mesurée pour
+    // un premium MY_TEAM d'équipement (mesure qui tranche : la fiche de ville
+    // bouge-t-elle quand on équipe un talisman ATK ? si NON, basculer cette
+    // source vers le canal buff comme en mode allié).
     if (row.type === 'BT_STAT_PREMIUM' && !allyReceiver) {
       const tgt = row.targetType ?? '';
       if (tgt !== 'ME' && tgt !== 'MY_TEAM') return; // apport aux alliés : resolveAllyPassives
@@ -805,6 +819,16 @@ export function resolveGearPassives(
   if (gear.amulet) feedUnique('amulet', gear.amulet.groups, 1, gear.amulet.tier + 1);
   // Rogue's Charm : interrupteur « +10 » (cf. en-tête) — lignes Lv1 + Lv10.
   if (gear.roguesCharm) feedUnique('talisman', gear.roguesCharm.groups, 10, 1);
+  // Main stat du talisman : buff d'ÉQUIPE `MY_TEAM` (cf. GearSelection) —
+  // niveau de ligne = enchant + 1 (pickBuffRow replie les paliers sans lignes
+  // hautes, ex. 4★/5★ mono-niveau). En mode ALLIÉ : canal buff du receveur
+  // (même doctrine PROUVÉE que l'EE premium d'Eris, 23/08/2026). En mode
+  // PORTEUR : doctrine fiche (branche premium du collecteur) — extension au
+  // talisman NON mesurée à ce jour, cf. le commentaire de la branche.
+  if (gear.talismanMain) {
+    const { buffId, enchant } = gear.talismanMain;
+    feedBuff('talisman', buffId, buffId, Math.max(enchant, 0) + 1);
+  }
 
   for (const s of gear.sets ?? []) {
     const rows = equipment.specialGroups[s.groupId];

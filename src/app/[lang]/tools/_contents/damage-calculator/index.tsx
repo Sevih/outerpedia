@@ -28,7 +28,7 @@ import damageGrowthData from '@data/generated/damage/growth.json';
 import { statName } from '@/lib/data/stat-glossary';
 import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
 import { presetSpawnStats } from '@/lib/damage/preset-target';
-import { familyMembersFor, uniqueGroupsOf } from '@/lib/damage/preset-gear';
+import { familyMembersFor, talismanMainBuffs, uniqueGroupsOf } from '@/lib/damage/preset-gear';
 import { staticBossPassives } from '@/lib/damage/passives';
 import { buildEffectRefs } from './cond-names';
 import { sheetSlugOfStat, type DamageBuffsData, type DamageTargetsData } from '@/lib/damage/inputs';
@@ -48,7 +48,6 @@ import scalingData from '@data/generated/damage-scaling.json';
 import passivesData from '@data/generated/equipment/passives.json';
 import eeRawData from '@data/generated/equipment/ee.json';
 import poolsData from '@data/generated/equipment/pools.json';
-import talismanRawData from '@data/generated/equipment/talisman.json';
 import setsRawData from '@data/generated/equipment/sets.json';
 import glossariesData from '@data/generated/glossaries.json';
 import encountersData from '@data/generated/encounters.json';
@@ -120,25 +119,6 @@ interface PoolRow {
 }
 const EE_RAW = eeRawData as unknown as Record<string, { options: string[] }>;
 const POOLS = poolsData as unknown as Record<string, PoolRow[]>;
-const TALISMAN_RAW = talismanRawData as unknown as Record<string, { options?: string[] }>;
-
-/**
- * Main stats possibles d'un TALISMAN — token de la clé de buff du jeu
- * (`BID_ITEM_STAT_OOPARTS_<STAT>_<palier>`, stable) → slug du glossaire des
- * noms. La main du talisman de chaque ALLIÉ est une entrée du moteur
- * (décision Sevih 27/07/2026).
- */
-const TALIS_STAT_SLUG: Record<string, string> = {
-  ATK: 'atk',
-  DEF: 'def',
-  HP: 'hp',
-  CRI: 'critical_rate',
-  CRI_DMG: 'critical_dmg_rate',
-  DMG_REDUCE: 'dmg_reduce_rate',
-  DMG: 'dmg_boost',
-  BUFF_CHANCE: 'buff_chance',
-  BUF_RESIST: 'buff_resist',
-};
 
 // Sets bruts : la CLASSIFICATION (« proportional to missing Health ») se fait
 // sur le texte EN — l'affichage reste localisé via getSetViews.
@@ -885,22 +865,13 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     percent,
   }));
 
-  // Main stats de talisman proposées pour les ALLIÉS — union des pools réels
-  // (mêmes 9 stats à tous les paliers), dans l'ordre du jeu.
-  const talismanMains: { key: string; label: string }[] = [];
-  {
-    const seen = new Set<string>();
-    for (const tal of Object.values(TALISMAN_RAW))
-      for (const ref of tal.options ?? [])
-        for (const row of POOLS[ref] ?? []) {
-          const m = /^BID_ITEM_STAT_OOPARTS_(.+)_\d+$/.exec(row.buff ?? '');
-          const slug = m ? TALIS_STAT_SLUG[m[1]] : undefined;
-          if (slug && !seen.has(slug)) {
-            seen.add(slug);
-            talismanMains.push({ key: slug, label: statName(slug, lang) });
-          }
-        }
-  }
+  // Main stats de talisman proposées (porteur comme ALLIÉS) — union des
+  // pools réels (`talismanMainBuffs`, preset-gear.ts) : slug + buffId du
+  // buff d'ÉQUIPE (`BT_STAT_PREMIUM` `MY_TEAM`, moteur § 15) au palier le
+  // plus haut, libellé localisé ici.
+  const talismanMains: { key: string; label: string; buffId: string }[] = talismanMainBuffs().map(
+    ({ key, buffId }) => ({ key, label: statName(key, lang), buffId }),
+  );
 
   // Quirks de compte : SEULS les nœuds offensifs (cf. OFFENSIVE_QUIRK_DESC),
   // en liste plate par catégorie — le réglage localStorage vit côté client.

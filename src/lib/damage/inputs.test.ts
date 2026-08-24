@@ -623,3 +623,78 @@ describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () 
     expect(dmg(eris({ '2000117_2_5': 2 }))).toBeGreaterThan(dmg(base));
   });
 });
+
+describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/08/2026)', () => {
+  const dataEq = { ...data, equipment: equipmentData } as unknown as DamageData;
+  const target = () => ({ element: 'earth', stats: { hp: 500000, def: 2000 }, boss: true });
+  // Témoins RÉELS des tables : la main ATK du talisman 6★
+  // (BID_ITEM_STAT_OOPARTS_ATK_6) = BT_STAT_PREMIUM MY_TEAM OAT_RATE,
+  // 11 niveaux L1:120 ‰ → L11:150 ‰ (enchant +0..+10) ; l'accessoire 2025
+  // (BID_ITEM_UO_ACC_25) = BT_DMG_TO_BOSS +100 ‰ cible MY_TEAM_WITHOUT_ME.
+  const TAL_ATK = 'BID_ITEM_STAT_OOPARTS_ATK_6';
+
+  it('talisman d’ALLIÉ : la main est un buff d’équipe — canal buff du receveur, montant au niveau d’enchant', () => {
+    const without = buildDamageReport(attackerBase(), target(), dataEq);
+    const at = (enchant: number) =>
+      buildDamageReport(
+        {
+          ...attackerBase(),
+          allies: [{ id: '2000117', talisman: { buffId: TAL_ATK, enchant } }],
+        },
+        target(),
+        dataEq,
+      );
+    const plus10 = at(10);
+    const entry = plus10.allyPassives?.entries.find((e) => e.buffId === TAL_ATK);
+    expect(entry).toMatchObject({
+      ally: '2000117',
+      source: 'talisman',
+      side: 'attacker',
+      active: true,
+      buff: { type: 'BT_STAT_PREMIUM', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 150 },
+    });
+    expect(plus10.combatStats.atk).toBeGreaterThan(without.combatStats.atk);
+    // +0 : la ligne L1 (120 ‰) — le montant suit l'enchant déclaré.
+    const plus0 = at(0).allyPassives?.entries.find((e) => e.buffId === TAL_ATK);
+    expect(plus0?.buff.value).toBe(120);
+  });
+
+  it('accessoire d’ALLIÉ à ligne d’équipe (2025 : +10 % vs boss aux alliés) : atteint l’attaquant', () => {
+    const without = buildDamageReport(attackerBase(), target(), dataEq);
+    const withAlly = buildDamageReport(
+      {
+        ...attackerBase(),
+        allies: [{ id: '2000117', amulet: { groups: ['2025'], tier: 0 } }],
+      },
+      target(),
+      dataEq,
+    );
+    const entry = withAlly.allyPassives?.entries.find((e) => e.buffId === 'BID_ITEM_UO_ACC_25');
+    expect(entry).toMatchObject({
+      ally: '2000117',
+      source: 'amulet',
+      side: 'attacker',
+      active: true,
+      buff: { type: 'BT_DMG_TO_BOSS', value: 100 },
+    });
+    const dmg = (r: ReturnType<typeof buildDamageReport>) =>
+      r.slots.find((s) => s.slot === 'S1' && s.burst === undefined)!.report.states[0].branches[0]
+        .totalDamage;
+    expect(dmg(withAlly)).toBeGreaterThan(dmg(without));
+  });
+
+  it('talisman du PORTEUR : doctrine fiche — le taux part en `premium` (défactorisation), jamais recompté en buff', () => {
+    // Extension de la doctrine ME/MY_TEAM du kit (gear.ts) — NON mesurée pour
+    // un premium MY_TEAM d'équipement : si la fiche de ville s'avère NE PAS
+    // porter la main du talisman, basculer la source vers le canal buff.
+    const r = buildDamageReport(
+      { ...attackerBase(), gear: { talismanMain: { buffId: TAL_ATK, enchant: 10 } } },
+      target(),
+      dataEq,
+    );
+    expect(r.gearPassives?.premium).toContainEqual(
+      expect.objectContaining({ source: 'talisman', buffId: TAL_ATK, valueRate: 150 }),
+    );
+    expect(r.gearPassives?.entries.some((e) => e.buffId === TAL_ATK)).toBe(false);
+  });
+});

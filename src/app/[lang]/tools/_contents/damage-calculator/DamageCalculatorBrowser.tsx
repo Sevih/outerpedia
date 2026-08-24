@@ -462,8 +462,9 @@ interface Props {
   statFields: DcStatField[];
   /** Stats défensives de la CIBLE (affichage preset + saisie manuelle). */
   targetStatFields: DcStatField[];
-  /** Main stats de talisman proposées pour les ALLIÉS (slug + libellé). */
-  talismanMains: { key: string; label: string }[];
+  /** Main stats de talisman proposées (porteur comme ALLIÉS) : slug, libellé
+   *  et buffId du buff d'ÉQUIPE (`BID_ITEM_STAT_OOPARTS_*`, moteur § 15). */
+  talismanMains: { key: string; label: string; buffId: string }[];
   /** Buffs/débuffs de scénario standardisés à impact (chips à bascule),
    *  par côté ET par sens : buffs/débuffs du lanceur, buffs/débuffs de la cible. */
   buffOptions: {
@@ -1073,7 +1074,8 @@ interface SetPick {
 }
 
 /** Un allié : perso + transcendance + main stat & enhancement (+0 à +10) du
- *  talisman porté + EE possédé / +10 (certains EE portent sur l'équipe) —
+ *  talisman porté + EE possédé / +10 (certains EE portent sur l'équipe) +
+ *  arme/accessoire (des uniques portent des lignes `MY_TEAM*` — 24/08/2026) —
  *  tout est une entrée du moteur (Sevih 27/07/2026). */
 interface AllyPick {
   id: string | null;
@@ -1082,6 +1084,10 @@ interface AllyPick {
   talismanLv: number;
   ee: boolean;
   eePlus: boolean;
+  weapon: string | null;
+  weaponTier: number;
+  amulet: string | null;
+  amuletTier: number;
 }
 const EMPTY_ALLY: AllyPick = {
   id: null,
@@ -1090,6 +1096,10 @@ const EMPTY_ALLY: AllyPick = {
   talismanLv: 10,
   ee: true,
   eePlus: true,
+  weapon: null,
+  weaponTier: 0,
+  amulet: null,
+  amuletTier: 0,
 };
 
 // L'état `?z=` (`UrlState`) vit dans la LIB (`CalculatorUrlState`,
@@ -1132,8 +1142,12 @@ export function DamageCalculatorBrowser({
   const [weaponTier, setWeaponTier] = useState(0);
   const [amuletSlug, setAmuletSlug] = useState<string | null>(null);
   const [amuletTier, setAmuletTier] = useState(0);
-  // Rogue's Charm +10 : simple interrupteur (seul talisman à toucher aux dégâts).
+  // Rogue's Charm +10 : simple interrupteur (lignes spéciales — dégâts vs break).
   const [talismanOn, setTalismanOn] = useState(false);
+  // Main stat du talisman du PORTEUR (buff d'ÉQUIPE § 15, 24/08/2026) +
+  // enhancement +0..+10 (le montant de la main en dépend, 11 niveaux du 6★).
+  const [talisMain, setTalisMain] = useState<string | null>(null);
+  const [talisMainLv, setTalisMainLv] = useState(10);
   // EE possédé ou non — +0 ≠ absent : le passif Lv0 s'applique dès qu'on le porte.
   const [eeOwned, setEeOwned] = useState(true);
   // Niveau d'enchant de l'EE (+0..+10) — ne sert qu'aux mains « dégâts vs élément ».
@@ -1320,6 +1334,8 @@ export function DamageCalculatorBrowser({
     setAmuletSlug(null);
     setAmuletTier(0);
     setTalismanOn(false);
+    setTalisMain(null);
+    setTalisMainLv(10);
     setEeOwned(true);
     setEeLevel(10);
     setStatVals({});
@@ -1411,6 +1427,10 @@ export function DamageCalculatorBrowser({
             .map(([setId, tier]) => ({ setId, tier: tier ? 1 : 0 })),
         );
       if (st.t) setTalismanOn(true);
+      if (typeof st.tm === 'string' && talismanMains.some((mn) => mn.key === st.tm)) {
+        setTalisMain(st.tm);
+        if (typeof st.tml === 'number') setTalisMainLv(Math.min(Math.max(st.tml, 0), 10));
+      }
       if (st.eo === 0) setEeOwned(false);
       if (typeof st.e === 'number') setEeLevel(Math.min(Math.max(st.e, 0), 10));
       if (st.v && typeof st.v === 'object')
@@ -1451,7 +1471,7 @@ export function DamageCalculatorBrowser({
         Array.from({ length: 3 }, (_, i) => {
           const row = st.al?.[i];
           if (!Array.isArray(row)) return EMPTY_ALLY;
-          const [id, tx, tal, tlv, eo, ep] = row;
+          const [id, tx, tal, tlv, eo, ep, w, wy, m, mq] = row;
           const c = typeof id === 'string' ? chars.find((x) => x.id === id) : undefined;
           if (!c) return EMPTY_ALLY;
           const maxIdx = Math.max(c.transcend.length - 1, 0);
@@ -1464,6 +1484,10 @@ export function DamageCalculatorBrowser({
             talismanLv: typeof tlv === 'number' ? Math.min(Math.max(tlv, 0), 10) : 10,
             ee,
             eePlus: ee && (typeof ep === 'number' ? Boolean(ep) : true),
+            weapon: typeof w === 'string' && weapons.some((x) => x.slug === w) ? w : null,
+            weaponTier: typeof wy === 'number' ? Math.min(Math.max(wy, 0), 4) : 0,
+            amulet: typeof m === 'string' && amulets.some((x) => x.slug === m) ? m : null,
+            amuletTier: typeof mq === 'number' ? Math.min(Math.max(mq, 0), 4) : 0,
           };
         }),
       );
@@ -1563,6 +1587,10 @@ export function DamageCalculatorBrowser({
       }
       if (setPicks.length) z.s = setPicks.map((p) => [p.setId, p.tier]);
       if (talismanOn) z.t = 1;
+      if (talisMain) {
+        z.tm = talisMain;
+        if (talisMainLv !== 10) z.tml = talisMainLv;
+      }
       if (!eeOwned) z.eo = 0;
       if (eeLevel !== 10) z.e = eeLevel;
       const vals = Object.fromEntries(Object.entries(statVals).filter(([, v]) => v !== ''));
@@ -1593,14 +1621,21 @@ export function DamageCalculatorBrowser({
     if (tgtDebuffN > 0) z.dd = tgtDebuffN;
     if (targetsHit > 1) z.n = targetsHit;
     if (allies.some((a) => a.id))
-      z.al = allies.map((a) => [
-        a.id ?? '',
-        a.transcend,
-        a.talisman ?? '',
-        a.talismanLv,
-        Number(a.ee),
-        Number(a.eePlus),
-      ]);
+      z.al = allies.map((a) => {
+        const base: NonNullable<UrlState['al']>[number] = [
+          a.id ?? '',
+          a.transcend,
+          a.talisman ?? '',
+          a.talismanLv,
+          Number(a.ee),
+          Number(a.eePlus),
+        ];
+        // Arme/accessoire d'allié (24/08/2026) : 4 champs de queue, omis
+        // quand rien n'est porté (les vieux liens restent identiques).
+        if (a.weapon || a.amulet)
+          base.push(a.weapon ?? '', a.weaponTier, a.amulet ?? '', a.amuletTier);
+        return base;
+      });
     // Stacks déclarés — kit/EE/quirks du porteur comme des alliés : le champ
     // vit indépendamment de `al`.
     const ab = Object.entries(stackDecls).filter(([, n]) => n > 0);
@@ -1711,6 +1746,13 @@ export function DamageCalculatorBrowser({
     const groups = (cls && g?.dmgGroupsByClass?.[cls]) || g?.dmgGroups;
     return groups?.length ? { groups } : undefined;
   };
+  // Main de talisman (slug → buffId du buff d'équipe § 15) — même table que
+  // les selects (props `talismanMains`, résolue par le wrapper depuis les
+  // pools réels ; pendant node : resolveTalismanMainBuff, preset-gear.ts).
+  const resolveTalisMainLocal = (slug: string) => {
+    const hit = talismanMains.find((mn) => mn.key === slug);
+    return hit ? { buffId: hit.buffId } : undefined;
+  };
 
   // Entrées + rapport du scénario COURANT — recalculés au rendu (quelques ms
   // sur un kit complet) ; null tant que le scénario est incomplet ou les
@@ -1726,6 +1768,7 @@ export function DamageCalculatorBrowser({
     quirks: activeQuirks,
     resolvePreset: resolvePresetLocal,
     resolveGear: resolveGearLocal,
+    resolveTalismanMain: resolveTalisMainLocal,
   });
   let report: DamageReportResult | null = null;
   if (dmgData && scenarioInputs.attacker && scenarioInputs.target) {
@@ -1999,6 +2042,7 @@ export function DamageCalculatorBrowser({
           ...(s.quirks ? { quirks: s.quirks } : {}),
           resolvePreset: resolvePresetLocal,
           resolveGear: resolveGearLocal,
+          resolveTalismanMain: resolveTalisMainLocal,
         });
         if (!inp.attacker || !inp.target) continue;
         const r = buildDamageReport(inp.attacker, inp.target, dmgData, {
@@ -2141,6 +2185,7 @@ export function DamageCalculatorBrowser({
           amulet: amulet ? { slug: amulet.slug, tier: amuletTier } : null,
           sets: setPicks,
           roguesCharm: talismanOn,
+          talisman: talisMain ? { main: talisMain, lv: talisMainLv } : null,
           ee: ee && eeOwned ? { level: eeLevel } : null,
           stats: statVals,
           hpPct,
@@ -2174,6 +2219,8 @@ export function DamageCalculatorBrowser({
         transcend: chars.find((c) => c.id === a.id)?.transcend[a.transcend]?.label ?? null,
         talisman: a.talisman ? { main: a.talisman, lv: a.talismanLv } : null,
         ee: a.id && ees[a.id] ? { owned: a.ee, plus10: a.eePlus } : null,
+        weapon: a.weapon ? { slug: a.weapon, tier: a.weaponTier } : null,
+        amulet: a.amulet ? { slug: a.amulet, tier: a.amuletTier } : null,
       })),
     quirks: Object.fromEntries(Object.entries(quirkLvls).filter(([, v]) => v > 0)),
     codex: codexLvl,
@@ -2623,10 +2670,44 @@ export function DamageCalculatorBrowser({
                     )}
                   </div>
 
-                  {/* Rogue's Charm : une CASE À COCHER — équipé au +10 ou non
-                    (seul son passif +10, dégâts sur cible break, compte). */}
-                  <div className={`${wellClass} space-y-1 p-2`}>
+                  {/* Talisman du porteur : main stat (buff d'ÉQUIPE § 15,
+                    24/08/2026) + enhancement, puis Rogue's Charm en CASE À
+                    COCHER — équipé au +10 ou non (son passif +10, dégâts sur
+                    cible break). */}
+                  <div className={`${wellClass} space-y-1.5 p-2`}>
                     <Eyebrow>{L.equipment.talisman}</Eyebrow>
+                    <div className="flex items-center gap-1.5">
+                      <select
+                        value={talisMain ?? ''}
+                        onChange={(e) => setTalisMain(e.target.value || null)}
+                        className={`${SELECT_CLASS} min-w-0 flex-7`}
+                        title={L.equipment.talisman}
+                      >
+                        <option value="">{L.equipment.talisman}</option>
+                        {talismanMains.map((mn) => (
+                          <option key={mn.key} value={mn.key}>
+                            {mn.label}
+                          </option>
+                        ))}
+                      </select>
+                      {talisMain && (
+                        <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 min-w-0 flex-3 items-center gap-0.5 rounded-lg border px-1.5">
+                          <span className="text-content-subtle text-xs">+</span>
+                          <input
+                            type="number"
+                            min={0}
+                            max={10}
+                            value={talisMainLv}
+                            onChange={(e) =>
+                              setTalisMainLv(
+                                Math.min(Math.max(Math.trunc(Number(e.target.value) || 0), 0), 10),
+                              )
+                            }
+                            className="text-content w-full min-w-0 flex-1 bg-transparent text-right font-mono text-xs font-bold tabular-nums outline-none"
+                          />
+                        </span>
+                      )}
+                    </div>
                     {talisman && (
                       <>
                         <label className="flex cursor-pointer items-center gap-2">
@@ -2965,6 +3046,59 @@ export function DamageCalculatorBrowser({
                           )}
                         </div>
                       )}
+                      {/* Arme / accessoire de l'allié (24/08/2026) : des
+                        uniques portent des lignes MY_TEAM* (ex. +10 % vs boss
+                        aux alliés) — seules celles qui ATTEIGNENT l'attaquant
+                        comptent (mode allié du moteur). Breakthrough T0..T4 :
+                        le niveau du passif en dépend. */}
+                      {allyChar &&
+                        (
+                          [
+                            ['weapon', 'weaponTier', weapons, L.equipment.pickWeapon],
+                            ['amulet', 'amuletTier', amulets, L.equipment.pickAccessory],
+                          ] as const
+                        ).map(([slugKey, tierKey, catalog, placeholder]) => (
+                          <div key={slugKey} className="flex items-center gap-1.5">
+                            <select
+                              value={ally[slugKey] ?? ''}
+                              onChange={(e) => patch({ [slugKey]: e.target.value || null })}
+                              className={`${SELECT_CLASS} min-w-0 flex-7`}
+                              title={placeholder}
+                            >
+                              <option value="">{placeholder}</option>
+                              {catalog
+                                .filter(
+                                  (g) =>
+                                    !g.classLimits.length || g.classLimits.includes(allyChar.cls),
+                                )
+                                .map((g) => (
+                                  <option key={g.slug} value={g.slug}>
+                                    {g.label}
+                                  </option>
+                                ))}
+                            </select>
+                            {ally[slugKey] && (
+                              <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 min-w-0 flex-3 items-center gap-0.5 rounded-lg border px-1.5">
+                                <span className="text-content-subtle text-xs">T</span>
+                                <input
+                                  type="number"
+                                  min={0}
+                                  max={4}
+                                  value={ally[tierKey]}
+                                  onChange={(e) =>
+                                    patch({
+                                      [tierKey]: Math.min(
+                                        Math.max(Math.trunc(Number(e.target.value) || 0), 0),
+                                        4,
+                                      ),
+                                    })
+                                  }
+                                  className="text-content w-full min-w-0 flex-1 bg-transparent text-right font-mono text-xs font-bold tabular-nums outline-none"
+                                />
+                              </span>
+                            )}
+                          </div>
+                        ))}
                       {/* EE possédé / +10 : certains EE portent sur l'équipe
                         (Sevih 27/07/2026) — seulement si le perso en a un. */}
                       {allyChar && ees[allyChar.id] && (
@@ -3970,6 +4104,7 @@ export function DamageCalculatorBrowser({
           zState={buildZ()}
           resolvePreset={resolvePresetLocal}
           resolveGear={resolveGearLocal}
+          resolveTalismanMain={resolveTalisMainLocal}
           codexLevel={codexLvl}
           guildLevel={guildLvl}
           premiumHp={premiumOn}

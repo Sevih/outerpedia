@@ -5,8 +5,7 @@
  * scénario par CE chemin — jamais par du code de composant, qui divergerait.
  *
  * Périmètre v1 assumé : les pans du scénario que le moteur ne consomme pas
- * encore sont REMONTÉS dans `ignored` — affichés par le harnais, jamais tus
- * (reste : la main stat de talisman d'un allié, sans consommateur en donnée).
+ * encore sont REMONTÉS dans `ignored` — affichés par le harnais, jamais tus.
  */
 
 import type { DamageBranch } from './harness';
@@ -86,6 +85,10 @@ export interface CalculatorUrlState {
   t?: 1;
   eo?: 0;
   e?: number;
+  /** Main stat du TALISMAN du porteur (slug de `talismanMains`) + enchant
+   *  0..10 (omis à 10) — buff d'équipe `BID_ITEM_STAT_OOPARTS_*` (§ 15). */
+  tm?: string;
+  tml?: number;
   /** Stats saisies · PV actuels (%). */
   v?: Record<string, string>;
   h?: string;
@@ -106,9 +109,10 @@ export interface CalculatorUrlState {
   pb?: 1;
   th?: string;
   /** Cibles touchées · alliés ([id, palier, main talisman, enhancement,
-   *  EE possédé 0/1, EE+10 0/1]) · buffs actifs. */
+   *  EE possédé 0/1, EE+10 0/1, arme, breakthrough, accessoire,
+   *  breakthrough] — les 4 derniers optionnels, UI du 24/08) · buffs actifs. */
   n?: number;
-  al?: [string, number, string, number, number, number][];
+  al?: [string, number, string, number, number, number, string?, number?, string?, number?][];
   /** Stacks DÉCLARÉS des procs dynamiques qui atteignent l'attaquant —
    *  kit/EE/quirks du porteur comme des alliés ([buffId, stacks]) : le
    *  moteur ne simule jamais un proc, le scénario le déclare (steppers du
@@ -167,6 +171,10 @@ export interface ScenarioBuildOptions {
     slug: string,
     attackerId: string,
   ) => { groups: string[] } | undefined;
+  /** Résolution d'une MAIN STAT de talisman (slug de `talismanMains` → buffId
+   *  `BID_ITEM_STAT_OOPARTS_*` du palier 6★, tiré des pools réels par le
+   *  wrapper). Sans lui, la saisie est SIGNALÉE ignorée, jamais tue. */
+  resolveTalismanMain?: (slug: string) => { buffId: string } | undefined;
 }
 
 export interface ScenarioBuildResult {
@@ -261,30 +269,62 @@ export function buildInputsFromZ(
       if (r?.groups.length) gear.roguesCharm = { groups: r.groups };
       else ignored.push('Rogue’s Charm — non résolu');
     }
+    // Main stat du talisman du PORTEUR — buff d'équipe § 15 (doctrine fiche
+    // côté porteur, cf. gear.ts) ; slug non résolu SIGNALÉ, jamais tu.
+    const talismanMainOf = (
+      slug: string,
+      lv: number | undefined,
+    ): { buffId: string; enchant: number } | undefined => {
+      const r = opts.resolveTalismanMain?.(slug);
+      if (!r) {
+        ignored.push(`main de talisman ${slug} — non résolue`);
+        return undefined;
+      }
+      return { buffId: r.buffId, enchant: clamp(lv ?? 10, 0, 10) };
+    };
+    if (st.tm) {
+      const t = talismanMainOf(st.tm, st.tml);
+      if (t) gear.talismanMain = t;
+    }
     // EE : porté par défaut (`eo: 0` = absent), enchant par défaut +10.
     if (st.eo !== 0) gear.ee = { enchant: clamp(st.e ?? 10, 0, 10) };
     if (Object.keys(gear).length) attacker.gear = gear;
-    // ALLIÉS déclarés → passifs d'équipe (kit + EE, resolveAllyPassives). La
-    // main stat de talisman (row[2..3]) n'a AUCUN consommateur damage-pertinent
-    // en 1.4.14 (cf. AllyBuildInput) : saisie signalée, jamais tue.
+    // ALLIÉS déclarés → passifs d'équipe (kit + EE + talisman + arme +
+    // accessoire, mode allié de resolveGearPassives — 24/08/2026 : la main
+    // de talisman est un buff d'équipe, le sondage du 23/08 était mal cadré).
     if (st.al?.length) {
       const allies: AllyBuildInput[] = [];
-      let talismanSet = false;
       for (const row of st.al) {
-        const [id, tx, tal, , eo, ep] = row;
+        const [id, tx, tal, tlv, eo, ep, w, wy, m, mq] = row;
         if (!id) continue;
-        if (tal) talismanSet = true;
+        const alUnique = (
+          kind: 'weapon' | 'amulet',
+          slug: unknown,
+          tier: unknown,
+        ): { groups: string[]; tier: number } | undefined => {
+          if (typeof slug !== 'string' || !slug) return undefined;
+          const r = opts.resolveGear?.(kind, slug, id);
+          if (!r?.groups.length) {
+            ignored.push(
+              `${kind === 'weapon' ? 'arme' : 'accessoire'} d’allié ${slug} — non résolue`,
+            );
+            return undefined;
+          }
+          return { groups: r.groups, tier: clamp(typeof tier === 'number' ? tier : 0, 0, 4) };
+        };
+        const talisman = typeof tal === 'string' && tal ? talismanMainOf(tal, tlv) : undefined;
+        const weapon = alUnique('weapon', w, wy);
+        const amulet = alUnique('amulet', m, mq);
         allies.push({
           id,
           ...(typeof tx === 'number' ? { transcendIndex: tx } : {}),
           ...(eo === 1 ? { ee: { enchant: ep === 1 ? 10 : 0 } } : {}),
+          ...(talisman ? { talisman } : {}),
+          ...(weapon ? { weapon } : {}),
+          ...(amulet ? { amulet } : {}),
         });
       }
       if (allies.length) attacker.allies = allies;
-      if (talismanSet)
-        ignored.push(
-          'talisman d’allié — aucune famille damage-pertinente ne lit les stats d’allié (1.4.14)',
-        );
     }
     // Stacks déclarés des procs dynamiques — kit/EE/quirks de l'ATTAQUANT
     // comme de ses alliés (bornés côté moteur au StackCount de la ligne —

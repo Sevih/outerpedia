@@ -124,6 +124,7 @@ export function DebugHarness({
   zState,
   resolvePreset,
   resolveGear,
+  resolveTalismanMain,
   codexLevel,
   guildLevel,
   premiumHp,
@@ -143,6 +144,8 @@ export function DebugHarness({
   resolvePreset: (targetId: string, spawnIdx: number) => ResolvedPresetTarget | undefined;
   /** Équipement (slug → groupes des tables damage, résolu par le parent). */
   resolveGear: NonNullable<ScenarioBuildOptions['resolveGear']>;
+  /** Main de talisman (slug → buffId du buff d'équipe, résolue par le parent). */
+  resolveTalismanMain: NonNullable<ScenarioBuildOptions['resolveTalismanMain']>;
   /** Codex du COMPTE (localStorage — hors z, capturé à part). */
   codexLevel: number;
   /** Niveau de GUILDE du compte (localStorage — hors z, capturé à part). */
@@ -175,6 +178,7 @@ export function DebugHarness({
     quirks,
     resolvePreset,
     resolveGear,
+    resolveTalismanMain,
   });
   const ignored = [...inputs.ignored, ...(extraIgnored ?? [])];
   let result: DamageReportResult | null = null;
@@ -209,6 +213,7 @@ export function DebugHarness({
         ...(f.quirks ? { quirks: f.quirks } : {}),
         resolvePreset,
         resolveGear,
+        resolveTalismanMain,
       });
       if (!inp.attacker || !inp.target) return null;
       // Un miss observé force sa branche — même règle que fixtures.test.ts.

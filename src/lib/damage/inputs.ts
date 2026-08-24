@@ -526,13 +526,16 @@ export interface AttackerBuildInput {
   buffStacks?: Record<string, number>;
 }
 
-/** Un allié déclaré — seuls les champs CONSOMMÉS par la donnée 1.4.14 :
- *  ses passifs de kit (gatés par la transcendance pour le passif unique) et
- *  son EE. Sa main stat de talisman (z `al[2..3]`) n'a AUCUN consommateur
- *  damage-pertinent (sondage 23/08/2026 : les familles d'équipe à stat de
- *  poseur sont des soins/boucliers ; le seul cas dégâts, BT_DMG_CASTER_LOST_
- *  HP_RATE de l'EE 2000040, dépend des PV perdus de l'allié — non capturés,
- *  contribution 0 signalée par le résolveur). */
+/** Un allié déclaré — ses passifs de kit (gatés par la transcendance pour le
+ *  passif unique) et son ÉQUIPEMENT d'équipe : EE, main stat de talisman,
+ *  arme et accessoire. Correctif 24/08/2026 : le sondage du 23/08 (« la main
+ *  stat de talisman d'un allié n'a aucun consommateur ») était mal cadré —
+ *  cette main est un buff d'ÉQUIPE direct (`BT_STAT_PREMIUM` `MY_TEAM`,
+ *  cf. GearSelection.talismanMain), et des armes/accessoires portent aussi
+ *  des lignes `MY_TEAM*` (ex. `BID_ITEM_UO_ACC_25` : +10 % vs boss aux
+ *  alliés ; `BID_ITEM_UO_WEAPON_22` : dégâts d'équipe basés sur la DEF du
+ *  porteur). Les stats du PORTEUR allié restent non capturées : les lignes
+ *  qui en dépendent (`BT_DMG_CASTER_*`) sortent signalées, contribution 0. */
 export interface AllyBuildInput {
   id: string;
   /** INDEX du palier de transcendance — absent = palier MAX (défaut UI). */
@@ -540,6 +543,12 @@ export interface AllyBuildInput {
   /** EE possédé — `enchant` 10 si « +10 » déclaré, 0 sinon ; absent = pas
    *  d'EE déclaré (les lignes d'équipe des EE vivent au Lv1 comme au Lv10). */
   ee?: { enchant: number };
+  /** Main stat du talisman porté (buff d'équipe — résolue par le pont). */
+  talisman?: { buffId: string; enchant: number };
+  /** Arme / accessoire portés (groupes des tables + breakthrough 0..4) —
+   *  seules les lignes qui ATTEIGNENT l'attaquant comptent (mode allié). */
+  weapon?: { groups: string[]; tier: number };
+  amulet?: { groups: string[]; tier: number };
 }
 
 export interface TargetBuildInput {
@@ -947,11 +956,20 @@ export function buildDamageReport(
           receiver,
         ),
       ];
-      if (al.ee && data.equipment) {
+      // Équipement de l'allié (EE, main de talisman, arme, accessoire) : le
+      // MÊME résolveur qu'au porteur, en mode allié — seules les lignes qui
+      // atteignent l'attaquant ressortent (24/08/2026).
+      const alGear: GearSelection = {
+        ...(al.ee ? { ee: al.ee } : {}),
+        ...(al.talisman ? { talismanMain: al.talisman } : {}),
+        ...(al.weapon ? { weapon: al.weapon } : {}),
+        ...(al.amulet ? { amulet: al.amulet } : {}),
+      };
+      if (Object.keys(alGear).length && data.equipment) {
         infos.push(
           resolveGearPassives(
             al.id,
-            { ee: al.ee },
+            alGear,
             data.equipment,
             data.buffs,
             attackerElement,
