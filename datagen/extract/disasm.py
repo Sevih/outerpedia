@@ -132,6 +132,17 @@ M = [
     ("CalcCharacterSharedDamage", "CFormula$$CalcCharacterSharedDamage", 0),
     ("CalcDamage", "CFormula$$CalcDamage", 0),
     ("CalcDamageDOT", "CFormula$$CalcDamageDOT", 0),
+    # Chemin du TICK des DoT (§ 12.8 → désassemblage 24/08/2026, déclencheur :
+    # le DoT custom BT_DOT_2000092 d'Eternal Bleeding, tick observé sans
+    # défense — 2 × 7000 ‰ × Effectiveness fiche).
+    ("CBattleManager_ProcessDamageOverTime", "CBattleManager$$ProcessDamageOverTime", 0),
+    ("CBattleManager_ApplyDamageCap", "CBattleManager$$ApplyDamageCap", 0),
+    ("CBattleManager_ApplyImmediatelyDotDamageCap", "CBattleManager$$ApplyImmediatelyDotDamageCap", 0),
+    ("CBattleManager_GetImmediatelyDotDamageCapBuffType", "CBattleManager$$GetImmediatelyDotDamageCapBuffType", 0),
+    ("CCharacterBattle_IsDotBuffType", "CCharacterBattle$$IsDotBuffType", 0),
+    ("CCharacterBattle_GetSpecificDotEnhanceBuffType", "CCharacterBattle$$GetSpecificDotEnhanceBuffType", 0),
+    ("CCharacterBattle_GetDotDamageIncreaseBuffValue", "CCharacterBattle$$GetDotDamageIncreaseBuffValue", 0),
+    ("CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue", "CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue", 0),
     ("CalcDamageWG", "CFormula$$CalcDamageWG", 0),
     ("CalcDamage_g__helper", "CFormula$$<CalcDamage>g__CalcDamage|17_0", 0),
     ("CalcFinalStat", "CFormula$$CalcFinalStat", 0),
