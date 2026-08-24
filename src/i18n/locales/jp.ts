@@ -561,6 +561,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.attacker_element_win': '攻撃側が有利属性',
   'tools.damage-calculator.context.cond.attacker_element_lose': '攻撃側が不利属性',
   'tools.damage-calculator.context.cond.attacker_element_equal': '属性の有利なし',
+  'tools.damage-calculator.context.cond.target_element': '攻撃側が{el}属性',
   'tools.damage-calculator.context.cond.owner_rage': '激怒中',
   'tools.damage-calculator.toolbar.reset': 'シナリオをリセット',
   'tools.damage-calculator.toolbar.copy_link': 'リンクをコピー',

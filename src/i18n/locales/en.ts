@@ -574,6 +574,7 @@ const en = {
   'tools.damage-calculator.context.cond.attacker_element_lose':
     'Attacker at elemental disadvantage',
   'tools.damage-calculator.context.cond.attacker_element_equal': 'No elemental advantage',
+  'tools.damage-calculator.context.cond.target_element': 'Attacker is {el}',
   'tools.damage-calculator.context.cond.owner_rage': 'While enraged',
   'tools.damage-calculator.toolbar.reset': 'Reset scenario',
   'tools.damage-calculator.toolbar.copy_link': 'Copy link',

@@ -543,6 +543,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.attacker_element_win': '攻击方属性占优',
   'tools.damage-calculator.context.cond.attacker_element_lose': '攻击方属性被克',
   'tools.damage-calculator.context.cond.attacker_element_equal': '无属性克制',
+  'tools.damage-calculator.context.cond.target_element': '攻击方为{el}属性',
   'tools.damage-calculator.context.cond.owner_rage': '激怒期间',
   'tools.damage-calculator.toolbar.reset': '重置方案',
   'tools.damage-calculator.toolbar.copy_link': '复制链接',

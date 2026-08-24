@@ -211,9 +211,11 @@ export interface DcBossPassive {
   /** Enum `ST_*` du BT_STAT — côté attaquant, la chip est TUE quand la stat
    *  ne pèse aucun MONTANT pour le kit courant (`attackerAmountStats`). */
   stat?: string;
-  /** `ATTACKER_ELEMENT_WIN/EQUAL/LOSE` ou `OWNER_RAGE` — absent = toujours
-   *  actif (hors gate d'enrage). */
+  /** `ATTACKER_ELEMENT_WIN/EQUAL/LOSE`, `TARGET_ELEMENT` ou `OWNER_RAGE` —
+   *  absent = toujours actif (hors gate d'enrage). */
   condition?: string;
+  /** `ConditionValue` de la ligne (élément CET_* pour `TARGET_ELEMENT`). */
+  conditionValue?: number;
   /** Libellé LISIBLE de la condition (localisé serveur) — affiché sur la chip
    *  pour dire POURQUOI elle est active ou barrée (Sevih 17/08/2026). */
   cond?: string;
@@ -1384,7 +1386,9 @@ export function DamageCalculatorBrowser({
     if (p.condition === 'OWNER_RAGE') return tgtEnraged;
     const a = attacker ? elementOf(attacker.element) : undefined;
     const d = target ? elementOf(target.element) : undefined;
-    return a !== undefined && d !== undefined && passiveConditionMet(p.condition, a, d);
+    return (
+      a !== undefined && d !== undefined && passiveConditionMet(p.condition, a, d, p.conditionValue)
+    );
   };
 
   // ── Persistance URL (`?z=` lz-string, motif team-planner) ────────────────

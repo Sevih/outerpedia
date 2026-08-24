@@ -551,6 +551,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.attacker_element_win': '공격자가 유리 속성',
   'tools.damage-calculator.context.cond.attacker_element_lose': '공격자가 불리 속성',
   'tools.damage-calculator.context.cond.attacker_element_equal': '속성 우위 없음',
+  'tools.damage-calculator.context.cond.target_element': '공격자가 {el} 속성',
   'tools.damage-calculator.context.cond.owner_rage': '격노 중',
   'tools.damage-calculator.toolbar.reset': '시나리오 초기화',
   'tools.damage-calculator.toolbar.copy_link': '링크 복사',

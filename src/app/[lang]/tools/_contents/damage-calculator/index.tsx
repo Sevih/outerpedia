@@ -651,12 +651,23 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     for (const e of staticBossPassives(bossId, DMG_TARGETS, DMG_BUFFS)?.entries ?? []) {
       const nameRec = MONSTER_SKILLS[e.skillId]?.name;
       // Condition en clair sur la chip : celle de la ligne, précédée du gate
-      // d'enrage quand le buff vient du skill d'enrage.
+      // d'enrage quand le buff vient du skill d'enrage. `TARGET_ELEMENT` :
+      // gabarit `{el}` rempli avec l'élément CET_* de `ConditionValue`
+      // (égalité stricte, binaire `CheckElementEqual` — 24/08/2026).
+      const ELEMENT_SLUGS = ['earth', 'water', 'fire', 'light', 'dark'];
+      const condLabel = (): string | undefined => {
+        if (e.condition === undefined || e.condition === 'OWNER_RAGE') return undefined;
+        if (e.condition === 'TARGET_ELEMENT') {
+          const slug = e.conditionValue !== undefined ? ELEMENT_SLUGS[e.conditionValue] : undefined;
+          const el = slug ? t(`sys.element.${slug}` as Parameters<typeof t>[0]) : '?';
+          return t(k('context.cond.target_element')).replace('{el}', el);
+        }
+        return condLabels[e.condition] ?? e.condition;
+      };
+      const condText = condLabel();
       const condParts = [
         ...(e.rage ? [condLabels.OWNER_RAGE] : []),
-        ...(e.condition !== undefined && e.condition !== 'OWNER_RAGE'
-          ? [condLabels[e.condition] ?? e.condition]
-          : []),
+        ...(condText !== undefined ? [condText] : []),
       ];
       out.push({
         name: nameRec ? lRec(nameRec, lang) || nameRec.en || e.skillId : e.skillId,
@@ -667,6 +678,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // lecture § 9.1 comme 2000067, cf. `attackerAmountStats` du rapport).
         ...(e.buff.type === 'BT_STAT' && e.buff.stat !== undefined ? { stat: e.buff.stat } : {}),
         ...(e.condition !== undefined ? { condition: e.condition } : {}),
+        ...(e.conditionValue !== undefined ? { conditionValue: e.conditionValue } : {}),
         ...(condParts.length ? { cond: condParts.join(' · ') } : {}),
         ...(e.rage ? { rage: true as const } : {}),
       });

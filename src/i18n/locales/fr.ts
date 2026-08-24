@@ -582,6 +582,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.attacker_element_lose':
     "Attaquant désavantagé par l'élément",
   'tools.damage-calculator.context.cond.attacker_element_equal': 'Sans avantage élémentaire',
+  'tools.damage-calculator.context.cond.target_element': 'Attaquant {el}',
   'tools.damage-calculator.context.cond.owner_rage': "Pendant l'enrage",
   'tools.damage-calculator.toolbar.reset': 'Réinitialiser le scénario',
   'tools.damage-calculator.toolbar.copy_link': 'Copier le lien',
