@@ -1,0 +1,55 @@
+{
+  "name": "Gnosis Beth vs Scrap Metal Grid · S1 normal + tick Eternal Bleeding",
+  "z": "N4IghiBcIEwAwLgThiANCAHlAbBsAZlAIwIYDWUoAysVAKwbWqSMjUDMDAvhgC4BbKCABGAVwIEA+gGMAFmAB2MgKboQANyrg+laMSRwA7OpkAnAJZ8LMsABspAEwEBzYcQAccdQAcLKs1UpHwB7AHcAqTMwPjVobwxxSVkFZTjYY3VnFykREJCAZz53b14Qa2EYUlIYSAAWYjqOODrUbiA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "normal",
+      "damage": 3229
+    },
+    {
+      "slot": "dot:2000092_1_1",
+      "branch": "normal",
+      "damage": 2898
+    }
+  ],
+  "notes": "Captures Sevih 24/08/2026 — meme Beth (nue sauf EE, transcendance max, seule), cible HORS raid (normal_hard, boss terre, def 789 / dmgRed 64). Le TEMOIN des captures Ars Nova : S1 3229 EXACT sans aucun passif de boss elementaire (boss terre, aucune ligne TARGET_ELEMENT) — l ecart du raid venait bien du passif du boss, pas du moteur. Le tick 2898 identique (flat, insensible a la cible) = 207 x 700 pour cent x 2,0 : les DEUX ENHANCE (trans 8 + EE, ce boss est flagge boss donc OWNER_IS_BOSS tient) s appliquent ici aussi — voir gnosisbeth-scrapmetal-noee pour la mesure qui discrimine."
+}

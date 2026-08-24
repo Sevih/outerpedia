@@ -67,6 +67,31 @@ describe('passives — conditions élémentaires (même relation que § 6)', () 
     expect(passiveConditionMet(undefined, Element.Fire, Element.Earth)).toBe(true);
     expect(passiveConditionMet('OWNER_HAS_BUFF', Element.Fire, Element.Earth)).toBe(false);
   });
+
+  it('TARGET_ELEMENT : égalité STRICTE de l’élément de l’attaquant (CheckElementEqual)', () => {
+    // Ars Nova buff `9` : −450 si l'attaquant est LUMIÈRE (ConditionValue 3).
+    // Prouvé in-game 24/08/2026 (Gnosis Beth, fixture gnosisbeth-arsnova) —
+    // avec le +300 EQUAL du buff `7`, S1 au raid EXACT.
+    expect(passiveConditionMet('TARGET_ELEMENT', Element.Light, Element.Light, 3)).toBe(true);
+    expect(passiveConditionMet('TARGET_ELEMENT', Element.Dark, Element.Light, 3)).toBe(false);
+    expect(passiveConditionMet('TARGET_ELEMENT', Element.Fire, Element.Light, 3)).toBe(false);
+    // Sans ConditionValue : jamais actif, pas deviné.
+    expect(passiveConditionMet('TARGET_ELEMENT', Element.Light, Element.Light)).toBe(false);
+  });
+});
+
+describe('passives — Ars Nova (raid_2), donnée réelle', () => {
+  it('le buff 9 (TARGET_ELEMENT 3) est une entrée évaluable, plus un unresolved', () => {
+    const s = staticBossPassives('407600853', data.targets!, data.buffs)!;
+    const nine = s.entries.find((e) => e.buffId === '9');
+    expect(nine).toMatchObject({
+      side: 'defender',
+      condition: 'TARGET_ELEMENT',
+      conditionValue: 3,
+      buff: { type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: -450 },
+    });
+    expect(s.unresolved.some((u) => u.buffId === '9')).toBe(false);
+  });
 });
 
 describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () => {

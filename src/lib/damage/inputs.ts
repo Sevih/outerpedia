@@ -602,7 +602,10 @@ export interface SlotDotLine {
   type: string;
   /** Jointure glossaire des effets (icône + nom UI) — `ToolTipID` du templet. */
   tooltipId?: number;
-  /** Dégâts d'UN tick (§ 11 — stat de référence capturée au lancement). */
+  /** Le POPUP du tick tel que le jeu l'affiche : tick UNITAIRE (jump table
+   *  § 11 par type, stats GLOBALES au tick, × enhance de la cible). Les
+   *  poses multiples d'un même skill ne le multiplient PAS (mesure
+   *  discriminante EE on/off du 24/08/2026 — Eternal Bleeding). */
   damagePerTick: number;
   /** P(pose) = P‰(CreateRate) × (1 − P(résist § 5)) — résistance sautée si
    *  `DEBUFF_IGNORE_RESIST` (ex. le Bleed de Francesca). */
@@ -1322,14 +1325,53 @@ export function buildDamageReport(
     return stats;
   };
 
-  // DoT posés par un skill : les BT_DOT_* de ses `buffIds` au niveau servi,
-  // tick § 11 sur les stats de LA ligne (stat de référence capturée au
-  // lancement — même canal § 16.1 que les procs). Un DoT sans taux OAT_RATE
-  // d'une stat lisible n'a pas de tick calculable : pas de ligne inventée.
+  // DoT posés par un skill : les BT_DOT_* de ses `buffIds` au niveau servi.
+  // TICK par TYPE (jump table de `ProcessDamageOverTime`, désassemblée le
+  // 24/08/2026 — listings damage-formula-asm) : la POSE lit les stats de LA
+  // ligne (le skill est en cours, procs SKILL_START actifs), le TICK lit les
+  // stats GLOBALES (il arrive au début du tour suivant — les procs de
+  // lancement ont expiré : PROUVÉ par Eternal Bleeding, 636 fiche et pas
+  // 694). Le taux subit ApplyRate(Σ ENHANCE actifs sur la CIBLE) avant la
+  // formule. Un type BT_DOT_* hors de la jump table 1.4.14 est SIGNALÉ,
+  // jamais calculé par une formule supposée.
+  const DOT_TICK: Record<
+    string,
+    { formula: 'defense' | 'flat'; stat: 'row' | 'atk' | 'maxhp' | 'buff_chance' }
+  > = {
+    BT_DOT_BURN: { formula: 'flat', stat: 'atk' }, // get_Atk en dur, SANS défense
+    BT_DOT_BLEED: { formula: 'defense', stat: 'row' }, // CalcDamageDOT § 11
+    BT_DOT_POISON: { formula: 'defense', stat: 'row' },
+    BT_DOT_LIGHTNING: { formula: 'defense', stat: 'row' },
+    BT_DOT_CURSE: { formula: 'flat', stat: 'maxhp' }, // % PV max du POSEUR, cap 77
+    BT_DOT_2000092: { formula: 'flat', stat: 'buff_chance' }, // Effectiveness, SANS défense
+    BT_DOT_PUNISH: { formula: 'defense', stat: 'row' },
+  };
+  // Σ des ENHANCE par type de DoT (GetDotDamageIncreaseBuffValue) : le
+  // spécifique + COMMON (DoT standard 56..60 SEULEMENT — le binaire exclut
+  // 2000092 et PUNISH du COMMON) + ALL.
+  const DOT_ENHANCE_OF: Record<string, string[]> = {
+    BT_DOT_BURN: ['BT_BURN_ENHANCE', 'BT_ENHANCE_COMMON', 'BT_ENHANCE_ALL'],
+    BT_DOT_BLEED: ['BT_BLEED_ENHANCE', 'BT_ENHANCE_COMMON', 'BT_ENHANCE_ALL'],
+    BT_DOT_POISON: ['BT_POISON_ENHANCE', 'BT_ENHANCE_COMMON', 'BT_ENHANCE_ALL'],
+    BT_DOT_LIGHTNING: ['BT_LIGHTNING_ENHANCE', 'BT_ENHANCE_COMMON', 'BT_ENHANCE_ALL'],
+    BT_DOT_CURSE: ['BT_CURSE_ENHANCE', 'BT_ENHANCE_COMMON', 'BT_ENHANCE_ALL'],
+    BT_DOT_2000092: ['BT_2000092_ENHANCE', 'BT_ENHANCE_ALL'],
+    BT_DOT_PUNISH: ['BT_PUNISH_ENHANCE', 'BT_ENHANCE_ALL'],
+  };
+  // `OWNER_ALONE` (2e ligne du S1 de Gnosis Beth — « if only one target
+  // survives ») : condition SANS EFFET sur le montant depuis que la fusion
+  // des poses multiples ne cumule plus le tick (mesures du 24/08/2026,
+  // § 12.17 : un popup = tick unitaire × enhance, quelle que soit la 2e
+  // ligne). La row passe le filtre conditionnel ci-dessous et fusionne avec
+  // sa jumelle — l'évaluer précisément n'est plus nécessaire.
+  // Signalements de DONNÉE (remontés au rapport) — remplis par pushSlot et
+  // les gardes burst plus bas.
+  const dataIssues: string[] = [];
   const collectSlotDots = (
     buffIds: string[],
     buffLevel: number,
     slotScenario: ReportScenario,
+    globalScenario: ReportScenario,
   ): SlotDotLine[] => {
     const out: SlotDotLine[] = [];
     for (const id of buffIds) {
@@ -1337,30 +1379,71 @@ export function buildDamageReport(
       if (!rows?.length) continue;
       const row = pickBuffRow(rows, buffLevel);
       if (!row || !row.type.startsWith('BT_DOT_')) continue;
+      if (row.type === 'BT_DOT_CURSE_CAP') continue; // plafond, pas un DoT
       if (!row.targetType?.startsWith('ENEMY')) continue;
-      // Row conditionnelle = inactive par défaut (contexte absent = 0, § 12.1)
-      // — ex. le Bleed OWNER_IS_BOSS du S1 de Francesca (version monstre du
-      // kit) : jamais posé par un attaquant joueur, pas de ligne fantôme.
-      if (row.conditionType !== undefined) continue;
-      if (row.applyingType !== 'OAT_RATE' || row.value === undefined || row.stat === undefined)
+      // Conditions : `OWNER_ALONE` = cible seule, vraie dans le modèle duel
+      // (voir le bloc au-dessus de collectSlotDots) ; toute autre row
+      // conditionnelle = inactive par défaut (contexte absent = 0, § 12.1) —
+      // ex. le Bleed OWNER_IS_BOSS du S1 de Francesca (version monstre du
+      // kit) : jamais posé par un attaquant joueur.
+      if (row.conditionType !== undefined && row.conditionType !== 'OWNER_ALONE') continue;
+      if (row.applyingType !== 'OAT_RATE' || row.value === undefined) continue;
+      const tick = DOT_TICK[row.type];
+      if (!tick) {
+        dataIssues.push(`DoT ${row.type} (${id}) hors jump table 1.4.14 — tick non calcule`);
         continue;
-      const statValue =
-        row.stat === 'ST_ATK'
-          ? slotScenario.attacker.attackStat
-          : (slotScenario.additionalContext?.attackerStat?.(row.stat) ?? 0);
+      }
+      // Stat du TICK : lue sur le scénario GLOBAL (jamais les procs de slot).
+      const g = globalScenario;
+      let statValue = 0;
+      if (tick.stat === 'atk') statValue = g.attacker.attackStat;
+      else if (tick.stat === 'maxhp') statValue = g.additionalContext?.attacker?.maxHP ?? 0;
+      else if (tick.stat === 'buff_chance')
+        statValue = g.additionalContext?.attackerStat?.('ST_BUFF_CHANCE') ?? 0;
+      else if (row.stat !== undefined)
+        statValue =
+          row.stat === 'ST_ATK'
+            ? g.attacker.attackStat
+            : (g.additionalContext?.attackerStat?.(row.stat) ?? 0);
       if (statValue <= 0) continue;
+      // ENHANCE et cap CURSE : lus sur les buffs ACTIFS de la CIBLE.
+      const enhancePermille = (g.defenderBuffs ?? [])
+        .filter((b) => DOT_ENHANCE_OF[row.type].includes(b.type))
+        .reduce((s, b) => s + (b.value ?? 0), 0);
+      const caps = (g.defenderBuffs ?? [])
+        .filter((b) => b.type === 'BT_DOT_CURSE_CAP')
+        .map((b) => b.value ?? 0);
+      const capValue = row.type === 'BT_DOT_CURSE' && caps.length ? Math.min(...caps) : undefined;
       const line = buildDotLine({
         attackRate: row.value,
         statValue,
-        defense: slotScenario.defender.defense,
-        piercePowerRate: slotScenario.attacker.piercePowerRate,
-        piercePower: slotScenario.attacker.piercePower,
-        dmgReduceRate: slotScenario.defender.dmgReduceRate,
+        formula: tick.formula,
+        ...(enhancePermille !== 0 ? { enhancePermille } : {}),
+        ...(capValue !== undefined ? { capValue } : {}),
+        defense: g.defender.defense,
+        piercePowerRate: g.attacker.piercePowerRate,
+        piercePower: g.attacker.piercePower,
+        dmgReduceRate: g.defender.dmgReduceRate,
         createRatePermille: row.createRate ?? 1000,
+        // La POSE, elle, a lieu PENDANT le skill : buff chance de la ligne.
         buffChancePermille: slotScenario.additionalContext?.attackerStat?.('ST_BUFF_CHANCE') ?? 0,
         buffResistPermille: slotScenario.additionalContext?.defenderStat?.('ST_BUFF_RESIST') ?? 0,
         ignoreResist: row.buffDebuffType === 'DEBUFF_IGNORE_RESIST',
       });
+      // Poses MULTIPLES du même effet par le même skill (ex. les 2 lignes
+      // d'Eternal Bleeding du S1 de Beth) : le tick observé ne les cumule
+      // PAS — un popup = UN tick unitaire × enhance. PROUVÉ le 24/08/2026
+      // par la mesure discriminante EE on/off (2898 = 207 × 7 × 2,0 avec
+      // EE, 1995 = 190 × 7 × 1,5 sans — jamais × poses ; la lecture
+      // « popup = tick × poses » du même jour était l'autre branche d'une
+      // ambiguïté numérique, levée par cette mesure). Le mécanisme exact de
+      // la fusion (refresh ? 2ᵉ pose écartée ?) n'est pas désassemblé
+      // (§ 12.8) : le moteur garde UNE ligne par (type, tooltip) et n'empile
+      // jamais le tick.
+      const twin = out.find(
+        (d) => d.type === row.type && (d.tooltipId ?? d.buffId) === (row.tooltipId ?? id),
+      );
+      if (twin) continue;
       out.push({
         buffId: id,
         type: row.type,
@@ -1463,7 +1546,7 @@ export function buildDamageReport(
       slotScenario,
       options,
     );
-    const dots = collectSlotDots(lv.buffIds, lv.level, slotScenario);
+    const dots = collectSlotDots(lv.buffIds, lv.level, slotScenario, scenario);
     slots.push({
       slot,
       skillId: sk.id,
@@ -1484,7 +1567,6 @@ export function buildDamageReport(
   // supposé rejouerait le bug « toujours S2 » avec le niveau du S2, en
   // silence (revue 18/08/2026).
   const burstSlot = burstableSlotOf(SLOT_TYPES.map(({ type }) => byType.get(type)));
-  const dataIssues: string[] = [];
   if (burstSlot === undefined && BURST_TYPES.some((t) => byType.has(t))) {
     dataIssues.push(
       'bursts sans marqueur burstAP (damage/characters.json anterieur ?) — lignes burst omises',

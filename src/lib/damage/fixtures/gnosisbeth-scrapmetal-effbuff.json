@@ -1,0 +1,50 @@
+{
+  "name": "Gnosis Beth SANS EE + buff EFF de Sterope · tick Eternal Bleeding",
+  "z": "N4IghiBcIEwAwLgThiANCAHlAbBsAZlAIwIYDWUoAysVAKwbWqSMjUDMDAvhgC4BbKCABGAVwIEA+gGMAFmAB2MgKboQKgPZQ4GNZF0gAblXB9K0YkjgB2dTIBOASz5OZYADZSAJgIDmwsQAHHDqAA5OKg6qUmGaAO5RUg5gfPogoRjikrIKyulWmSC+flIimpoAznyBobyiUADaGpIgALr8TsIwpKQwkAAsxAMccAOo+B5NzfCI9HZoeCDopGjEaHAdzeiGK7rrxFvLGxh7a2ttbdxAA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "dot:2000092_1_1",
+      "branch": "normal",
+      "damage": 3990
+    }
+  ],
+  "notes": "Capture Sevih 24/08/2026 — l experience LIVE : Beth sans EE (EFF fiche 190), premier tick a 1995, puis Sterope lance son S3 (+100 pour cent EFF sur l equipe, 2000057_3_2), tick suivant 3990. Deux preuves d un coup : (1) la stat du tick est LUE EN DIRECT a chaque tick (pas capturee a la pose — le buff arrive APRES la pose et double le tick) ; (2) le buff OAT_RATE multiplie la fiche COMPLETE, main de talisman incluse : 190 x 2 = 380 tout rond (tick 380 x 700 pour cent x 1,5 = 3990 EXACT) — la defactorisation premium de la main de talisman aurait donne 365 (calc 3832). La main de talisman est une stat d ITEM dans l assiette, contrairement aux premiums skill_8/EE (defactorisation prouvee par Caren 18/08)."
+}

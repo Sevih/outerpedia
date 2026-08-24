@@ -28,6 +28,10 @@ import francescaErisAllyS2 from './francesca-eris-ally-s2.json';
 import francescaErisAllyS1 from './francesca-eris-ally-s1-stack.json';
 import francescaErisTalDmg from './francesca-eris-tal-dmg.json';
 import francescaTalDmgNoncumul from './francesca-tal-dmg-noncumul.json';
+import gnosisbethArsnova from './gnosisbeth-arsnova.json';
+import gnosisbethScrapmetal from './gnosisbeth-scrapmetal.json';
+import gnosisbethScrapmetalNoEE from './gnosisbeth-scrapmetal-noee.json';
+import gnosisbethScrapmetalEffbuff from './gnosisbeth-scrapmetal-effbuff.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -78,4 +82,23 @@ export const FIXTURES: DamageFixture[] = [
   // la plus forte compte — un cumul aurait calculé trop haut).
   francescaErisTalDmg as DamageFixture,
   francescaTalDmgNoncumul as DamageFixture,
+  // Gnosis Beth (24/08/2026, Beth nue sauf EE, seule, avant le 1er tour du
+  // boss) — CINQ zéros qui verrouillent trois mécaniques : le tick custom
+  // d'Eternal Bleeding (Effectiveness × 700 %, flat) est boosté par les
+  // ENHANCE posés sur la cible (trans_8 +50 % dès la transcendance 4★, EE
+  // +50 % contre les boss — la capture SANS EE à × 1,5 discrimine : sans
+  // elle, « 2 poses × 1,0 » et « 1 pose × 2,0 » sont indiscernables) ; les
+  // poses multiples d'un même skill ne cumulent JAMAIS le tick ; et les
+  // passifs de BOSS à condition TARGET_ELEMENT (Ars Nova : +300 EQUAL − 450
+  // « attaquant lumière » = net −150 § 9.2 — le témoin Scrap Metal, boss
+  // terre sans ces lignes, est exact sans elles).
+  gnosisbethArsnova as DamageFixture,
+  gnosisbethScrapmetal as DamageFixture,
+  gnosisbethScrapmetalNoEE as DamageFixture,
+  // L'expérience LIVE (24/08/2026) : Sterope buffe +100 % EFF ENTRE la pose
+  // et le tick suivant → 1995 → 3990. Prouve que la stat du tick est lue EN
+  // DIRECT (pas capturée à la pose) ET que le buff multiplie la fiche
+  // COMPLÈTE, main de talisman incluse (stat d'ITEM, pas un premium
+  // défactorisé — 190 × 2 = 380 tout rond).
+  gnosisbethScrapmetalEffbuff as DamageFixture,
 ];

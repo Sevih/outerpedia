@@ -44,6 +44,7 @@ import {
   checkDamageRate,
   checkResistThreshold,
   getElementeryDamageRate,
+  applyRate,
   mulPermille,
 } from './formula';
 import type { DamageBranch, TraceStep } from './harness';
@@ -722,8 +723,27 @@ function totalFactorOf(hits: ReportHitInput[]): number {
 export interface DotLineInput {
   /** Taux du DOT (‰) — templet du buff (`AttackRate`). */
   attackRate: number;
-  /** Stat de référence capturée à la pose (ex. ATK final du poseur). */
+  /** Stat que le BINAIRE lit pour ce type au moment du TICK (jump table de
+   *  `ProcessDamageOverTime`, désassemblée le 24/08/2026) — l'ATK pour
+   *  BURN, la stat de la LIGNE pour BLEED/POISON/LIGHTNING/PUNISH, les PV
+   *  max du poseur pour CURSE, l'Effectiveness pour le DoT custom 2000092. */
   statValue: number;
+  /**
+   * Forme du tick (jump table 56..62 du binaire) :
+   * - `defense` (défaut) : `CalcDamageDOT` § 11 — défense (avec pénétration)
+   *   + DMG_REDUCE cap 900 (BLEED / POISON / LIGHTNING / PUNISH).
+   * - `flat` : `MulPermille(stat, rate)` SANS défense ni réduction — BURN
+   *   (ATK), CURSE (PV max du poseur, cappé par `capValue`) et le DoT custom
+   *   2000092 (Effectiveness). PROUVÉ in-game 24/08/2026 : Eternal Bleeding
+   *   = 2 × 7000 ‰ × 636 EXACT, sans le terme de défense d'Ars Nova.
+   */
+  formula?: 'defense' | 'flat';
+  /** Σ des `BT_*_ENHANCE` actifs SUR LA CIBLE (‰) — `ApplyRate` sur le taux
+   *  AVANT la formule (GetDotDamageIncreaseBuffValue, toutes branches). */
+  enhancePermille?: number;
+  /** CURSE : min des `BT_DOT_CURSE_CAP` actifs sur la cible — le tick est
+   *  plafonné à cette valeur (boucle de la branche 60). */
+  capValue?: number;
   /** ST_DEF du défenseur. */
   defense: number;
   /** ST_PIERCE_POWER_RATE de l'attaquant, ‰. */
@@ -753,10 +773,18 @@ export interface DotLine {
 /**
  * Ligne DOT du rapport : dégâts par tick + probabilité de pose. La liaison
  * skill → buffs DOT (BuffIDs du niveau → buffs.json) appartient à la couche
- * d'appel ; ici on ne fait que composer § 11 et § 5.
+ * d'appel ; ici on ne fait que composer la jump table de
+ * `ProcessDamageOverTime` (§ 11) et § 5.
  */
 export function buildDotLine(input: DotLineInput): DotLine {
-  const damagePerTick = calcDamageDOT(input);
+  const rate = applyRate(input.attackRate, input.enhancePermille ?? 0);
+  let damagePerTick =
+    input.formula === 'flat'
+      ? mulPermille(input.statValue, rate)
+      : calcDamageDOT({ ...input, attackRate: rate });
+  if (input.capValue !== undefined && damagePerTick > input.capValue) {
+    damagePerTick = input.capValue;
+  }
   const pCreate = permilleSuccessProbability(input.createRatePermille);
   const pResist = input.ignoreResist
     ? 0

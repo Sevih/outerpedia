@@ -248,6 +248,25 @@ const DEFENDER_TYPES = new Set([
   'BT_MARKING',
 ]);
 
+/** `BT_*_ENHANCE` des DoT (BUFF_TYPE 70..76, 78, 79 — dump 1.4.14) : posés
+ *  SUR L'ENNEMI, lus sur la CIBLE au tick (`GetDotDamageIncreaseBuffValue`,
+ *  désassemblé 24/08/2026 : Σ spécifique + COMMON [DoT standard seulement]
+ *  + ALL, `ApplyRate` sur le taux du DoT) et par `BT_DOT_CURSE_CAP` (77,
+ *  plafond du tick CURSE). Classés côté défenseur — consommés par les lignes
+ *  DoT du rapport (inputs.ts), jamais par le hit. */
+const DOT_ENHANCE_TYPES = new Set([
+  'BT_BURN_ENHANCE',
+  'BT_BLEED_ENHANCE',
+  'BT_POISON_ENHANCE',
+  'BT_LIGHTNING_ENHANCE',
+  'BT_CURSE_ENHANCE',
+  'BT_2000092_ENHANCE',
+  'BT_PUNISH_ENHANCE',
+  'BT_ENHANCE_COMMON',
+  'BT_ENHANCE_ALL',
+  'BT_DOT_CURSE_CAP',
+]);
+
 const ELEMENT_CONDITIONS = new Set([
   'ATTACKER_ELEMENT_WIN',
   'ATTACKER_ELEMENT_EQUAL',
@@ -356,6 +375,13 @@ export function gearConditionMet(
    *  (`BuffConditionValue` = enum CLASS_ENUM du binaire, même table que les
    *  quirks AAT_CLASS) ; absente = non évaluable. */
   ownerClass?: string,
+  /** Le PORTEUR du buff est-il un boss ? — évalue `OWNER_IS_BOSS`. L'appelant
+   *  le résout par le `TargetType` de la ligne : débuff `ENEMY_*` → porteur =
+   *  la CIBLE (boss du scénario) ; `ME`/`MY_TEAM` → un héros, jamais boss.
+   *  Ex. l'ENHANCE de l'EE de Gnosis Beth (`BID_CEQUIP_2000092`, ENEMY_TEAM,
+   *  OWNER_IS_BOSS) : actif contre un boss — PROUVÉ par la mesure EE on/off
+   *  du 24/08/2026 (tick ×2,0 → ×1,5). Absent = non évaluable. */
+  ownerIsBoss?: boolean,
 ): boolean | undefined {
   if (condition === undefined) return true;
   if (ELEMENT_CONDITIONS.has(condition))
@@ -363,6 +389,7 @@ export function gearConditionMet(
   // BuffConditionValue = CET_* de la CIBLE, absente = 0 = terre (cf. en-tête).
   if (condition === 'TARGET_ELEMENT') return defenderElement === ((conditionValue ?? 0) as Element);
   if (condition === 'TARGET_IS_BOSS') return targetIsBoss;
+  if (condition === 'OWNER_IS_BOSS') return ownerIsBoss;
   if (condition === 'OWNER_CLASS')
     return ownerClass !== undefined ? CLASS_ENUM[ownerClass] === conditionValue : undefined;
   return undefined;
@@ -592,14 +619,18 @@ function makeCollector(
     // En mode ALLIÉ, un premium N'EST PAS dans la fiche saisie du receveur
     // (la fiche est celle de la VILLE, sans équipe) : il descend le canal
     // buff normal — § 16.4 : le premium EST (une part de) buffVal/buffRate.
-    // Source 'talisman' (main stat, 24/08/2026) : même route fiche pour le
-    // PORTEUR — extension de la doctrine ME/MY_TEAM du kit, PAS mesurée pour
-    // un premium MY_TEAM d'équipement (mesure qui tranche : la fiche de ville
-    // bouge-t-elle quand on équipe un talisman ATK ? si NON, basculer cette
-    // source vers le canal buff comme en mode allié).
+    // Source 'talisman' (main stat) : dans la fiche du porteur, MAIS PAS dans
+    // le multiplicateur défactorisé — MESURÉ le 24/08/2026 (Sterope +100 %
+    // EFF sur la Beth au talisman buff_chance : tick 1995 → 3990 = fiche 190
+    // × 2 TOUT ROND, assiette PLEINE ; la défactorisation aurait donné 365).
+    // La main de talisman se comporte comme une stat d'ITEM (l'assiette que
+    // les buffs multiplient), à la différence des premiums skill_8/EE
+    // (défactorisation PROUVÉE par Caren 18/08/2026, ci-dessus) : rien à
+    // collecter, la fiche saisie suffit.
     if (row.type === 'BT_STAT_PREMIUM' && !allyReceiver) {
       const tgt = row.targetType ?? '';
       if (tgt !== 'ME' && tgt !== 'MY_TEAM') return; // apport aux alliés : resolveAllyPassives
+      if (source === 'talisman') return;
       if (row.conditionType !== undefined || isSkillStart) {
         info.unresolved.push({
           source,
@@ -632,8 +663,16 @@ function makeCollector(
     } else if (target.startsWith('ENEMY')) {
       // BT_STAT posé sur l'ennemi (débuff de stat permanent ou au lancement —
       // ex. Rhona 2000008_3_3 : DEF -50 % au début du S3) : canal § 16.1 des
-      // stats de la CIBLE, global ou par slot (branché 18/08/2026).
-      if (DEFENDER_TYPES.has(row.type) || row.type === 'BT_STAT') side = 'defender';
+      // stats de la CIBLE, global ou par slot (branché 18/08/2026). Les
+      // `BT_*_ENHANCE` de DoT (ex. le trans_8 de Gnosis Beth, l'ENHANCE de
+      // son EE OWNER_IS_BOSS) : idem — consommés par les TICKS, pas par le
+      // hit. Les passifs ENEMY_* SONT posés in-game : PROUVÉ le 24/08/2026
+      // par la mesure discriminante EE on/off de Beth (tick ×2,0 avec EE,
+      // ×1,5 sans — la lecture « jamais posé » du même jour était l'autre
+      // branche d'une ambiguïté numérique 2 poses × 1,0 ≡ 1 pose × 2,0,
+      // levée par cette mesure).
+      if (DEFENDER_TYPES.has(row.type) || row.type === 'BT_STAT' || DOT_ENHANCE_TYPES.has(row.type))
+        side = 'defender';
       else return;
     } else return;
 
@@ -670,6 +709,17 @@ function makeCollector(
         });
         return;
       }
+    } else if (
+      isSkillStart &&
+      (row.callerSkillType === undefined || row.callerSkillType === 'SKT_ALL')
+    ) {
+      // SKILL_START « à tout skill » sans référent (ex. les quirks ACCURACY
+      // dark/light : durée 1 tour, retiré ON_SKILL_FINISH) : le buff n'existe
+      // QUE pendant le lancement — gated sur CHAQUE ligne du rapport, JAMAIS
+      // global (sinon il gonflerait les stats servies aux TICKS des DoT :
+      // c'était le −71 % du tick d'Eternal Bleeding, 24/08/2026 — le binaire
+      // lit l'Effectiveness AU TICK, le proc a déjà expiré).
+      callers = [...REPORT_SKILL_TYPES];
     } else if (row.callerSkillType !== undefined && row.callerSkillType !== 'SKT_ALL') {
       const all = row.callerSkillType.split(',').map((s) => s.trim());
       callers = all.filter((c) => REPORT_SKILL_TYPES.has(c));
@@ -698,6 +748,9 @@ function makeCollector(
             // OWNER_CLASS : le porteur du buff est le RECEVEUR (mode allié) —
             // évaluable ; côté porteur classique, la classe n'est pas fournie.
             allyReceiver?.class,
+            // OWNER_IS_BOSS : porteur = la CIBLE pour un débuff ENEMY_*
+            // (boss du scénario), un héros sinon (jamais boss).
+            target.startsWith('ENEMY') ? targetIsBoss : false,
           );
     if (met === undefined) {
       // Condition d'ÉTAT DE COMBAT (STATE_CONDITIONS) : entrée `stateful`,

@@ -1,0 +1,55 @@
+{
+  "name": "Gnosis Beth vs Ars Nova stage 4 · S1 normal + tick Eternal Bleeding",
+  "z": "N4IghiBcIEwAwLgThiANCAHlAbBsAZlAIwIYDWUoAysVAKwbWqSMjUDMDAvhgC4BbKCABGAVwIEA+gGMAFmAB2MgKboQANyrg+laMSRwA7OpkAnAJZ8LMsABspAEwEBzYcQAccdQAcLKs1UpHwB7AHcAqTMwPjVobwxxSVkFZTjYY3VnFykREJCAZz53b14Qa2F6OHgAFgQayDqjHAQPei5uIA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "normal",
+      "damage": 4571
+    },
+    {
+      "slot": "dot:2000092_1_1",
+      "branch": "normal",
+      "damage": 2898
+    }
+  ],
+  "notes": "Captures Sevih 24/08/2026 — Beth SANS equipement sauf EE (portee par defaut du z), transcendance max, seule en equipe, mesure avant le premier tour d Ars Nova (raid_2 stage 4, boss lumiere). Le S1 (4571 EXACT) prouve les passifs de BOSS a condition TARGET_ELEMENT : le passif du boss porte DMG_REDUCE +300 (ATTACKER_ELEMENT_EQUAL, light vs light) ET -450 (TARGET_ELEMENT 3 : attaquant lumiere, CheckElementEqual = egalite stricte, desassemble) — net -150 dans la somme § 9.2. Le tick 2898 = 207 x 700 pour cent x 2,0 : tick UNITAIRE booste par les DEUX ENHANCE poses sur le boss (trans 8 +500 et EE +500 OWNER_IS_BOSS) — PAS 2 poses x 1449 (l autre decomposition, refutee par la mesure sans EE du meme jour : gnosisbeth-scrapmetal-noee). Les poses multiples du S1 ne cumulent jamais le tick."
+}

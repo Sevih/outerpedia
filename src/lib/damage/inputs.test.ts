@@ -327,12 +327,39 @@ describe('inputs — procs SKILL_START au lanceur (captures 18/08/2026)', () => 
     expect(bleed?.turnDuration).toBe(2);
     // Le S3 ne pose pas de DoT — pas de ligne inventée.
     expect(r.slots.find((x) => x.slot === 'S3')!.dots).toBeUndefined();
-    // distinctDots (pied de table ET flattenReport) : les poses jumelles
-    // fusionnent — S1/S2/bursts posent tous le même Bleed 725 ‰ (+ le second
-    // Bleed 1 tour des bursts, MÊME tick) → UNE seule ligne au final.
+    // Poses MULTIPLES d'un même skill : le tick ne les cumule JAMAIS
+    // (mesure discriminante EE on/off du 24/08/2026 — le popup est le tick
+    // UNITAIRE × enhance, pas × poses). Les BURSTS posent DEUX Bleeds
+    // (2000015_2_1 + 2000015_u_1) : une seule ligne, même tick que la pose
+    // simple — distinctDots fusionne donc tout en UNE ligne.
+    const burst = r.slots.find((x) => x.slot === 'S2' && x.burst === 1)!;
+    const burstBleed = burst.dots?.find((d) => d.buffId === '2000015_2_1');
+    expect(burstBleed?.damagePerTick).toBe(bleed?.damagePerTick ?? 0);
+    expect(burst.dots?.filter((d) => d.type === 'BT_DOT_BLEED')).toHaveLength(1);
     const distinct = distinctDots(r.slots);
     expect(distinct).toHaveLength(1);
     expect(distinct[0].buffId).toBe('2000015_1_1');
+  });
+
+  it('poses multiples du S1 de Gnosis Beth : UNE ligne, tick unitaire, stable avec ou sans alliés', () => {
+    // Les 2 lignes de pose du S1 (2000092_1_1 + _1_2 OWNER_ALONE) fusionnent
+    // sans cumul — 3 mesures du 24/08/2026 : tick = EFF × 700 % × enhance,
+    // jamais × poses. Et la fusion ne dépend pas de l'équipe déclarée.
+    const beth = (allies?: { id: string }[]) => ({
+      ...attackerBase(),
+      id: '2000092',
+      sheet: { atk: 4580, buff_chance: 636 },
+      ...(allies ? { allies } : {}),
+    });
+    const tickOf = (r: ReturnType<typeof buildDamageReport>) =>
+      r.slots
+        .find((x) => x.slot === 'S1' && x.burst === undefined)!
+        .dots?.filter((d) => d.type === 'BT_DOT_2000092');
+    const solo = tickOf(buildDamageReport(beth(), target(true), data));
+    const withAlly = tickOf(buildDamageReport(beth([{ id: '2000117' }]), target(true), data));
+    expect(solo).toHaveLength(1);
+    expect(withAlly).toHaveLength(1);
+    expect(withAlly![0].damagePerTick).toBe(solo![0].damagePerTick);
   });
 
   it('débuff au LANCEMENT côté cible (Rhona 2000008_3_3 : DEF -50 % au S3) — le canal par slot baisse la DEF de SA ligne', () => {
@@ -683,18 +710,19 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
     expect(dmg(withAlly)).toBeGreaterThan(dmg(without));
   });
 
-  it('talisman du PORTEUR : doctrine fiche — le taux part en `premium` (défactorisation), jamais recompté en buff', () => {
+  it('talisman du PORTEUR : dans la fiche, assiette PLEINE — ni premium défactorisé, ni buff', () => {
     // MESURÉ (Sevih 24/08/2026) : « la stat est appliquée de base sur la
-    // fiche du perso qui le porte » — même route fiche que les premiums
-    // ME/MY_TEAM du kit.
+    // fiche du perso qui le porte », ET la mesure Sterope +100 % EFF du même
+    // jour (tick 1995 → 3990 = fiche × 2 TOUT ROND) prouve que le buff
+    // multiplie la fiche COMPLÈTE, main de talisman incluse — une stat
+    // d'ITEM, pas un premium du multiplicateur (fixture
+    // gnosisbeth-scrapmetal-effbuff). Rien à collecter.
     const r = buildDamageReport(
       { ...attackerBase(), gear: { talismanMain: { buffId: TAL_ATK, enchant: 10 } } },
       target(),
       dataEq,
     );
-    expect(r.gearPassives?.premium).toContainEqual(
-      expect.objectContaining({ source: 'talisman', buffId: TAL_ATK, valueRate: 150 }),
-    );
+    expect(r.gearPassives?.premium.some((p) => p.source === 'talisman')).toBe(false);
     expect(r.gearPassives?.entries.some((e) => e.buffId === TAL_ATK)).toBe(false);
   });
 

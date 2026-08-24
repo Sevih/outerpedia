@@ -364,6 +364,30 @@ describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
   });
 });
 
+describe('débuffs passifs ENEMY_* du kit — POSÉS in-game (mesure EE on/off 24/08/2026)', () => {
+  it('le trans_8 de Gnosis Beth (BT_2000092_ENHANCE ENEMY_TEAM) : entrée défenseur active', () => {
+    // Mesure discriminante du 24/08/2026 : sans EE le tick fait × 1,5
+    // (l'ENHANCE du trans_8 seul), avec EE × 2,0 (les deux se somment) —
+    // les débuffs passifs ENEMY_* sont bien posés et lus par le tick.
+    const beth = data.characters.characters['2000092'] as unknown as KitCharacter;
+    const kit = resolveKitPassives(
+      beth,
+      9,
+      data.characters.skills as unknown as Record<string, KitSkill>,
+      data.growth.transcend,
+      buffs,
+      Element.Light,
+      Element.Light,
+    );
+    expect(kit.entries.find((x) => x.buffId === 'trancendent_8_2000092_2')).toMatchObject({
+      side: 'defender',
+      active: true,
+      buff: { type: 'BT_2000092_ENHANCE', value: 500 },
+    });
+    expect(kit.unresolved.some((u) => u.buffId === 'trancendent_8_2000092_2')).toBe(false);
+  });
+});
+
 describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026)', () => {
   /** Noa — terre, +3 % PV cible sur le S2 (2000022_2_2), EE à décompte (§ 7). */
   const NOA = '2000022';

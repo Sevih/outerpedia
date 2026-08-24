@@ -7,6 +7,71 @@
 
 ## 2026-08-24
 
+- **Damage calc — l'expérience LIVE de Sevih (buff EFF entre deux ticks) :
+  2 preuves, 1 fix talisman, fixture `gnosisbeth-scrapmetal-effbuff`.**
+  Sterope lance +100 % EFF entre deux ticks d'Eternal Bleeding : 1995 → 3990. (1) La stat du tick est lue EN DIRECT à chaque tick (pas capturée à
+  la pose) — la § 11 disait déjà « au tick » via les procs expirés, c'est
+  maintenant prouvé frontalement. (2) 3990 = fiche 190 × 2 TOUT ROND : le
+  buff multiplie la fiche COMPLÈTE, main de talisman incluse — la main du
+  porteur est une stat d'ITEM dans l'assiette, PAS un premium défactorisé
+  § 16.4 (le calc rendait 3832 via la défactorisation, écart −3,96 %). Le
+  moteur ne collecte plus la source 'talisman' en premium (gear.ts) — les
+  premiums skill_8/EE restent défactorisés (preuve Caren 18/08 intacte). Le
+  commentaire de la branche anticipait exactement cette mesure manquante.
+  1817 tests verts.
+
+- **Damage calc — les écarts Gnosis Beth RÉSOLUS par 5 captures propres
+  (Beth nue ± EE, seule) : 3 fixtures, 5 zéros — et une leçon de méthode.**
+  (1) Les passifs de BOSS à condition `TARGET_ELEMENT` sont évaluables :
+  `CheckElementEqual` désassemblé (égalité STRICTE avec l'élément de
+  l'attaquant) — le passif d'Ars Nova porte +300 ATTACKER_ELEMENT_EQUAL ET
+  −450 « attaquant lumière », net −150 ‰ § 9.2 : le S1 au raid tombe EXACT,
+  et le témoin hors raid (Scrap Metal Grid, boss terre) était déjà exact
+  sans ces lignes — c'était le « increase damage taken from light and
+  dark » repéré par Sevih, pas un bug moteur. Chips UI : libellé localisé
+  « Attaquant {élément} » (5 locales). (2) Le tick d'Eternal Bleeding : la
+  capture SANS EE (× 1,5) a levé une ambiguïté numérique parfaite —
+  « 2 poses × 1,0 » et « 1 pose × 2,0 » étaient indiscernables sur toutes
+  les mesures précédentes. Monde réel : les débuffs passifs `ENEMY_TEAM` du
+  kit et de l'EE SONT posés et l'ENHANCE se somme (trans_8 +50 % dès la
+  transcendance 4★, EE +50 % contre les boss via `OWNER_IS_BOSS`, désormais
+  évaluable), et les poses MULTIPLES d'un même skill ne cumulent JAMAIS le
+  tick (§ 12.17 — le pourquoi n'est pas tranché). DEUX conclusions inverses
+  ont été codées puis DÉFAITES dans la journée (« popup = tick × poses »
+  puis « jamais posés » + une relecture d'`OWNER_ALONE`, chacune cohérente
+  avec les mesures d'alors) — c'est la mesure DISCRIMINANTE qui a tranché,
+  pas le raisonnement. Fixtures `gnosisbeth-arsnova` + `gnosisbeth-
+scrapmetal` (S1 + tick) + `gnosisbeth-scrapmetal-noee` (LA discriminante).
+  1815 tests verts.
+
+- **Damage calc — le TICK des DoT refondu sur le binaire (jump table par
+  type), déclenché par 2 captures Gnosis Beth qui ne collaient pas.** Le tick
+  d'« Eternal Bleeding » (BT_DOT_2000092, un DoT CUSTOM par perso) sortait à
+  −71 % : la § 12.8 (« ProcessDamageOverTime non désassemblé ») a été levée —
+  8 méthodes ajoutées au manifeste disasm, listings régénérés. Découvertes,
+  toutes rédigées en § 11 : (1) une JUMP TABLE route chaque type de DoT vers
+  SA formule — BURN = ATK du poseur SANS défense, BLEED/POISON/LIGHTNING/
+  PUNISH = CalcDamageDOT (stat de la ligne, défense+réduction), CURSE = % des
+  PV max du POSEUR plafonné par BT_DOT_CURSE_CAP, custom 2000092 =
+  Effectiveness SANS défense ; notre moteur servait CalcDamageDOT à tous.
+  (2) Les BT_*_ENHANCE (70-76/78/79) sont lus SUR LA CIBLE et boostent le
+  taux (ApplyRate) — ils étaient DROPPÉS sans signalement, ils sont
+  maintenant classés côté défenseur et consommés par les ticks (COMMON exclut
+  les types 61/62, fidèle au dispatch). (3) La stat du tick est lue AU TICK,
+  pas à la pose : les procs SKILL_START (quirks ACCURACY dark/light, durée
+  1 tour) ont expiré — ils fuyaient dans le canal global du moteur (SKT_ALL
+  sans référent), ils sont désormais gatés par slot. (4) Les poses
+  SIMULTANÉES d'un même effet cumulent le popup (× _nCount) : la 2e ligne du
+  S1 de Beth est conditionnée OWNER_ALONE (évaluable — l'équipe déclarée),
+  8904 = 2 × 7000 ‰ × 636 EXACT ; la mesure 1-pose de Francesca (1494)
+  exclut « × tours restants ». Le rejeu de la capture tombe à 0,000 % à
+  transcendance basse — le delta restant est une question de SAISIE (la
+  transcendance réelle active l'ENHANCE du skill_8) ; le S1 direct (−18,8 %)
+  reste ouvert (équipement non déclaré ?), questions posées à Sevih —
+  fixtures en attente de ses réponses. Tests : 276 damage verts (jump table
+  flat/enhance/cap, poses cumulées des bursts de Francesca en extrapolation
+  documentée).
+
 - **`pnpm images` — le NOTICE rclone à chaque appel, supprimé à la source.**
   Le pipeline R2 est conçu SANS fichier de config (remote anonyme `:s3:`,
   identifiants passés en `RCLONE_S3_*`) — c'est écrit dans les en-têtes de

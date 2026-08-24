@@ -536,6 +536,72 @@ d = trunc( d × (1000 - reduce) / 1_000_000 )
 return d                                                            // PAS de clamp ≥ 1
 ```
 
+### Le TICK par type — `CBattleManager.ProcessDamageOverTime` (0x2313894)
+
+**Désassemblé le 24/08/2026** (déclencheur : le tick d'Eternal Bleeding de
+Gnosis Beth, −71 % avec la formule standard — listing
+`CBattleManager_ProcessDamageOverTime.asm`). La § 12.8 est levée pour le
+DISPATCH : `CalcDamageDOT` ci-dessus n'est PAS servi à tous les types — une
+jump table sur `BUFF_TYPE − 56` route chaque DoT vers SA formule :
+
+| BUFF_TYPE             | stat lue AU TICK                                                 | formule                                                                           |
+| --------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 56 `BT_DOT_BURN`      | `Caster.Data.get_Atk` (en dur — la stat de la LIGNE est ignorée) | `MulPermille(atk, taux)` — **sans défense ni réduction**                          |
+| 57 `BT_DOT_BLEED`     | `GetStatValue(StatType de la ligne)` du poseur                   | `CalcDamageDOT` (défense + réduction)                                             |
+| 58 `BT_DOT_POISON`    | idem                                                             | `CalcDamageDOT`                                                                   |
+| 59 `BT_DOT_LIGHTNING` | idem                                                             | `CalcDamageDOT`                                                                   |
+| 60 `BT_DOT_CURSE`     | PV MAX du POSEUR (`GetStatValuePermille(ST_HP, taux)`)           | % des PV max, **plafonné** au min des `BT_DOT_CURSE_CAP` (77) actifs sur la cible |
+| 61 `BT_DOT_2000092`   | `GetFinalStat(ST_BUFF_CHANCE)` du poseur (Effectiveness, en dur) | `MulPermille(eff, taux)` — **sans défense ni réduction**                          |
+| 62 `BT_DOT_PUNISH`    | `GetStatValue(StatType de la ligne)` du poseur                   | `CalcDamageDOT`                                                                   |
+
+- **`taux = ApplyRate(AttackRate, Σ ENHANCE)`** — toutes branches. Les
+  `BT_*_ENHANCE` sont lus SUR LA CIBLE (`GetDotDamageIncreaseBuffValue`,
+  0x282A928, listing) : Σ du spécifique (70..76, mapping 1:1 avec le type de
+  DoT — byte table de la jump table interne LUE dans le binaire le
+  24/08/2026, 0x106ED31) + `BT_ENHANCE_COMMON` (78 — **DoT standard 56..60
+  seulement**, le binaire exclut 61 et 62) + `BT_ENHANCE_ALL` (79),
+  `CheckCondition` évalué par buff — dans la liste générale `m_BuffList`
+  (+0x380).
+  Les débuffs passifs `ENEMY_TEAM` du kit joueur (trans_8 de Gnosis Beth :
+  +500 sans condition dès la transcendance 4★) et de son EE
+  (`BID_CEQUIP_2000092` : +500 `OWNER_IS_BOSS` — le porteur du débuff est la
+  CIBLE) **sont posés et se SOMMENT** : PROUVÉ par la triple mesure du
+  24/08/2026 (fixtures `gnosisbeth-*`) — tick = EFF × 700 % × 2,0 avec EE
+  (207 → 2898, deux boss / deux modes), × 1,5 SANS EE (190 → 1995). La
+  capture sans EE est LA mesure discriminante : sans elle, « 2 poses × 1,0 »
+  et « 1 pose × 2,0 » sont numériquement indiscernables — une conclusion
+  « jamais posés » a vécu quelques heures le même jour sur l'autre branche
+  de cette ambiguïté, gate ajouté puis retiré.
+- **La stat est lue EN DIRECT à chaque tick**, jamais capturée à la pose —
+  prouvé DEUX fois in-game (Beth, 24/08/2026) : (a) les procs `SKILL_START`
+  actifs à la pose n'y sont pas (tick = 7000 ‰ × 636 fiche, pas × 694) ;
+  (b) l'expérience LIVE (fixture `gnosisbeth-scrapmetal-effbuff`) — Sterope
+  buffe +100 % EFF ENTRE deux ticks, le tick passe de 1995 à 3990. Un buff
+  de stat posé ou expiré en cours de route déplace donc les ticks restants.
+- **`× _nCount`** : le tick multiplie par le compteur du buff — mais les
+  POSES MULTIPLES d'un même skill ne l'alimentent PAS. Les 3 mesures
+  d'Eternal Bleeding du 24/08/2026 contraignent `_nCount = 1` : le popup est
+  toujours le tick UNITAIRE × enhance (2898 = 207 × 7 × 2,0 ; 1995 = 190 ×
+  7 × 1,5), jamais × poses — alors que le S1 de Beth porte DEUX lignes de
+  pose (2000092_1_1 + _1_2 `OWNER_ALONE`, toutes deux `isTypeOverlap` ET
+  `isIdOverlap`). Une décomposition « popup = tick × poses » a été crue
+  quelques heures (2 × 4452 = 8904 collait aussi) avant d'être réfutée par
+  la mesure discriminante sans EE. POURQUOI la 2ᵉ pose ne produit ni 2ᵉ
+  popup ni cumul (fusion/refresh ? condition `OWNER_ALONE` fausse ? tick
+  unique par type ?) n'est PAS tranché (§ 12.8) : le moteur garde UNE ligne
+  de tick par (type, tooltip) et n'empile jamais. Ce que `StackCount`
+  alimente réellement (`_nCount` > 1 — DoT stackables d'autres kits ?) reste
+  à mesurer. Dans `CBuff.OnCreate` (déclenchement IMMEDIATELY § 14.6),
+  `_nCount` = `RemainTurnCont` puis remis à 0 : la DÉTONATION consomme les
+  tours restants.
+- Fin commune : `FindBuffByType(3)` sur la cible (immunité → 0) puis
+  `AddHP(−dmg)` DIRECT — pas de `ProcessDamage`, pas de cap au tick
+  périodique (`ApplyImmediatelyDotDamageCap` n'est appelé que si
+  `_ImmediatelyCaster` est non nul ; `BT_IMMEDIATELY_2000092_CAP` = 161).
+- Un `BT_DOT_*` hors de cette table (futur DoT custom d'un autre perso) :
+  SIGNALÉ par le moteur, jamais calculé par une formule supposée — chaque
+  custom a sa propre branche dans le binaire.
+
 ### CalcDamageWG (0x2CB3D40) — dégâts de jauge de faiblesse
 
 ```text
@@ -613,10 +679,17 @@ return restant
    la scène (`[scene+0x100]`, lue par § 14.2) passe de **0** (avant le premier
    cycle, les soins PvP ne sont PAS réduits) à 500 ‰, puis +250 ‰/cycle,
    **cap 1000 ‰** (`min(x, 1000)`).
-8. **`CBattleManager.ProcessDamageOverTime`** : le tick périodique des DOT (qui appelle
-   `CalcDamageDOT` § 11 avec la stat capturée) et l'ordre exact des ENHANCE
-   (BT 70–76 `*_ENHANCE`) n'ont pas été désassemblés ; seul le déclenchement « immédiat »
-   (BT 63–69, § 14.6) l'a été.
+8. ~~`CBattleManager.ProcessDamageOverTime`~~ — **RÉSOLU pour l'essentiel**
+   (24/08/2026, listings `CBattleManager_ProcessDamageOverTime` +
+   `CCharacterBattle_GetDotDamageIncreaseBuffValue`) : la jump table des
+   ticks par type, l'agrégation des ENHANCE (lus sur la cible, `ApplyRate`
+   sur le taux), la stat lue AU TICK et le `× _nCount` sont désassemblés et
+   rédigés en § 11 — quatre mesures in-game exactes (le Bleed de Francesca
+   ET la triple mesure d'Eternal Bleeding, dont la discriminante sans EE).
+   RESTE non désassemblé : l'appelant PÉRIODIQUE (qui fixe `_nCount` au
+   début de tour — les mesures contraignent `_nCount = 1`, y compris avec
+   deux lignes de pose du même skill, cf. § 12.17) et le comportement exact
+   d'une re-pose sur un buff existant (refresh vs incrément).
 9. **Contre-attaques** : `get_CounterRate` n'est lu que par
    `CCharacterBattle.OnReturnFinishDefenderTeam` (§ 16) — le roll et le skill
    utilisé en contre ne sont pas désassemblés.
@@ -688,6 +761,23 @@ return restant
     [`src/lib/damage/types.ts:175`](../../src/lib/damage/types.ts) (« buffs
     114/115/116 », lire 119/120/121). Laissés en l'état volontairement : cette
     passe est documentaire, aucun fichier de code n'a été touché.
+
+17. **Poses multiples d'un DoT par un même skill — pas de cumul du tick,
+    mécanisme non désassemblé.** Le S1 de Gnosis Beth porte DEUX lignes de
+    pose d'Eternal Bleeding (2000092_1_1 + _1_2 `OWNER_ALONE`, coexistence
+    permise par `isTypeOverlap`/`isIdOverlap`) — mais les 3 mesures du
+    24/08/2026 (fixtures `gnosisbeth-*`, dont la discriminante SANS EE)
+    montrent UN popup = tick unitaire × enhance, jamais × poses. Non
+    tranché : la 2ᵉ pose est-elle écartée (`OWNER_ALONE` faux dans ces
+    combats ?), fusionnée (refresh du même type ?), ou les deux buffs
+    coexistent-ils avec un tick unique par type ? Idem pour ce qui alimente
+    `_nCount` > 1 (`StackCount` — aucun cas mesuré). Le moteur garde une
+    ligne de tick par (type, tooltip) sans jamais empiler ; une mesure d'un
+    DoT réellement stackable (StackCount > 1 en donnée) ou d'un combat à
+    plusieurs poseurs du même type trancherait. (L'entrée précédente de ce
+    numéro — « débuffs passifs ENEMY_TEAM jamais posés » — était FAUSSE :
+    artefact d'une ambiguïté numérique levée le jour même par la mesure sans
+    EE ; ces débuffs sont posés et lus, cf. § 11.)
 
 ## 13. À vérifier in-game (phase 2)
 
@@ -947,13 +1037,18 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 >   par les POOLS réels au palier le plus haut (`talismanMainBuffs`,
 >   preset-gear.ts) ; saisie : z `tm`/`tml` (porteur), `al[2..3]` (alliés,
 >   UI du 27/07 enfin consommée).
-> - **Destination — MESURÉ (Sevih, 24/08/2026)** : « la stat est appliquée de
->   base sur la fiche du perso qui le porte ; celle d'un autre membre
->   n'apparaît pas » (Aer porte tal DCC → sa fiche montre le total ; Eris
->   porte tal ATK → la fiche d'Eris l'inclut, celle d'Aer non). Donc : pour
->   le PORTEUR, route fiche (taux collecté en `premium`, défactorisation
->   § 16.4) ; pour un ALLIÉ, canal buff du receveur (doctrine premium
->   d'allié prouvée le 23/08).
+> - **Destination — MESURÉ (Sevih, 24/08/2026, en deux temps)** : « la stat
+>   est appliquée de base sur la fiche du perso qui le porte ; celle d'un
+>   autre membre n'apparaît pas » (Aer porte tal DCC → sa fiche montre le
+>   total ; Eris porte tal ATK → la fiche d'Eris l'inclut, celle d'Aer non).
+>   ET la main du porteur reste dans l'ASSIETTE que les buffs multiplient —
+>   stat d'ITEM, PAS un premium défactorisé § 16.4 : l'expérience Sterope
+>   +100 % EFF (fixture `gnosisbeth-scrapmetal-effbuff`) donne fiche × 2
+>   TOUT ROND (190 → 380, tick 3990 EXACT) là où la défactorisation aurait
+>   rendu 365. Donc : pour le PORTEUR, rien à collecter (la fiche saisie
+>   suffit) ; pour un ALLIÉ, canal buff du receveur (doctrine premium
+>   d'allié prouvée le 23/08). Les premiums skill_8/EE, eux, restent
+>   défactorisés (preuve Caren 18/08 intacte — deux familles distinctes).
 > - **NON-CUMUL par stat — MESURÉ (Sevih, 24/08/2026)** : les mains de
 >   talisman ne se cumulent pas sur la même stat, la PLUS FORTE l'emporte
 >   dans l'équipe. Le moteur (inputs.ts, bloc allyPassives) : le porteur
@@ -1236,6 +1331,19 @@ dégâts, ex. buffs génériques `1`/`2`/`3` : `BT_DMG_REDUCE OAT_RATE` −150/+
 même-élément ET les hors-cycle type lumière vs terre), pas « même élément ».
 C'est la MÊME relation que le taux élémentaire § 6 — corroboré par la desc du
 passif (le monde y est partagé en « Fire / non-Fire » pour un boss terre).
+
+**`TARGET_ELEMENT` (`BUFF_CONDITION_TYPE` 104)** — désassemblé le 24/08/2026 :
+le case appelle `CCharacterBattle.CheckElementEqual(cible, ConditionValue)`
+(0x2829FE4, 40 octets) = **égalité STRICTE** `get_Element(cible) ==
+ConditionValue` (enum `CET_*` : 3 = Lumière). La « cible » d'un buff porté par
+un BOSS est l'ATTAQUANT. Preuve in-game (fixture `gnosisbeth-arsnova`) : le
+passif d'Ars Nova « The Boy Who Dreamed of Becoming a Musician » (skill
+monstre `132305`) porte `7` (+300 `ATTACKER_ELEMENT_EQUAL`) ET `9` (−450
+`TARGET_ELEMENT` 3) — pour Gnosis Beth (lumière vs boss lumière) les DEUX sont
+actifs, net −150 ‰ dans la somme § 9.2, S1 au raid EXACT (4571). Le tooltip
+dit « light and dark » mais la donnée ne conditionne qu'à 3 (lumière) — un
+attaquant TÉNÈBRES ne déclenche PAS cette ligne (égalité stricte) ; si une
+mesure dark contredit un jour, chercher une ligne jumelle, pas élargir le case.
 Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage —,
 `OWNER_RAGE`…) dépend de l'état du combat : non évaluable statiquement.
 

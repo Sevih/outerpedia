@@ -1,0 +1,50 @@
+{
+  "name": "Gnosis Beth SANS EE vs Scrap Metal Grid · tick Eternal Bleeding",
+  "z": "N4IghiBcIEwAwLgThiANCAHlAbBsAZlAIwIYDWUoAysVAKwbWqSMjUDMDAvhgC4BbKCABGAVwIEA+gGMAFmAB2MgKboQANyrg+laMSRwA7OpkAnAJZ8LMsABspAEwEBzYcQAccdQAcLKs1UpHwB7AHcAqTMwPjVobwxxSVkFZTiQAwSQZxcpERCQgGc+d29eEGthGFJSGEgAFmJ6jjh61AwVEKg4biA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "dot:2000092_1_1",
+      "branch": "normal",
+      "damage": 1995
+    }
+  ],
+  "notes": "Capture Sevih 24/08/2026 — LA mesure DISCRIMINANTE du lot Eternal Bleeding : meme Beth mais EE retiree (eo 0), Effectiveness fiche 190. Tick = 190 x 700 pour cent x 1,5 = 1995 EXACT : seul l ENHANCE du trans 8 (+50 pour cent) reste — l EE en ajoutait 50 de plus (mesures a 207 d EFF : x 2,0). Cette mesure leve l ambiguite numerique 2 poses x 1,0 = 1 pose x 2,0 des captures precedentes : les debuffs passifs ENEMY_TEAM du kit et de l EE SONT poses et lus par le tick, et les poses multiples d un meme skill ne cumulent JAMAIS le tick."
+}

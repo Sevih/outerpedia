@@ -57,9 +57,11 @@ export interface BossPassiveEntry {
   side: 'attacker' | 'defender';
   /** La forme consommée par l'agrégateur (§ 9 / § 16.1). */
   buff: ActiveBuff;
-  /** Condition élémentaire (`ATTACKER_ELEMENT_*`) ou `OWNER_RAGE` — absente =
-   *  toujours actif. */
+  /** Condition élémentaire (`ATTACKER_ELEMENT_*`, `TARGET_ELEMENT`) ou
+   *  `OWNER_RAGE` — absente = toujours actif. */
   condition?: string;
+  /** `ConditionValue` de la ligne (élément CET_* pour `TARGET_ELEMENT`). */
+  conditionValue?: number;
   /**
    * Buff posé par le skill d'ENRAGE du boss (`SKT_RAGE_ENTER*`) — actif
    * seulement quand le scénario déclare le boss enragé (coche, z `en`).
@@ -88,6 +90,12 @@ const ELEMENT_CONDITIONS = new Set([
   'ATTACKER_ELEMENT_WIN',
   'ATTACKER_ELEMENT_EQUAL',
   'ATTACKER_ELEMENT_LOSE',
+  // TARGET_ELEMENT (BUFF_CONDITION_TYPE 104) : `CheckElementEqual(cible,
+  // ConditionValue)` = égalité STRICTE avec l'élément CET_* (désassemblé le
+  // 24/08/2026, 40 octets) — la « cible » du buff d'un BOSS est l'ATTAQUANT.
+  // Ex. Ars Nova buff `9` : DMG_REDUCE −450 si l'attaquant est LUMIÈRE (3) —
+  // avec le buff `7` (+300 EQUAL), rend le S1 de Beth au raid EXACT (4571).
+  'TARGET_ELEMENT',
 ]);
 
 /** Types côté DÉFENSEUR réellement consommés par le pipeline (§ 9.2/9.3, drapeaux). */
@@ -227,6 +235,7 @@ export function staticBossPassives(
         ...(row.value !== undefined ? { value: row.value } : {}),
       },
       ...(condition !== undefined ? { condition } : {}),
+      ...(row.conditionValue !== undefined ? { conditionValue: row.conditionValue } : {}),
       ...(rage ? { rage: true as const } : {}),
     });
   };
@@ -265,8 +274,13 @@ export function passiveConditionMet(
   condition: string | undefined,
   attackerElement: Element,
   defenderElement: Element,
+  conditionValue?: number,
 ): boolean {
   if (condition === undefined) return true;
+  // TARGET_ELEMENT : égalité STRICTE de l'élément de la « cible » du buff —
+  // pour un buff de boss, l'ATTAQUANT (`CheckElementEqual`, cf.
+  // ELEMENT_CONDITIONS). Sans ConditionValue : jamais actif, pas deviné.
+  if (condition === 'TARGET_ELEMENT') return attackerElement === conditionValue;
   const sup = getElementSuperiority(attackerElement, defenderElement);
   if (condition === 'ATTACKER_ELEMENT_WIN') return sup === ElementSuperiority.AttackerWin;
   if (condition === 'ATTACKER_ELEMENT_LOSE') return sup === ElementSuperiority.AttackerLose;
@@ -294,7 +308,7 @@ export function resolveBossPassives(
         (e.rage !== true || enraged) &&
         (e.condition === 'OWNER_RAGE'
           ? enraged
-          : passiveConditionMet(e.condition, attackerElement, defenderElement)),
+          : passiveConditionMet(e.condition, attackerElement, defenderElement, e.conditionValue)),
     })),
     unresolved: stat.unresolved,
   };

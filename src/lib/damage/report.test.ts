@@ -285,4 +285,47 @@ describe('report — ligne DOT (§ 11 + § 5)', () => {
     expect(buildDotLine(base).applyProbability).toBeLessThan(1);
     expect(buildDotLine({ ...base, ignoreResist: true }).applyProbability).toBe(1);
   });
+
+  it('jump table des ticks (24/08/2026) : `flat` sans défense, ENHANCE sur le taux, cap CURSE', () => {
+    const base = {
+      defense: 1000,
+      piercePowerRate: 0,
+      piercePower: 0,
+      dmgReduceRate: 100,
+      createRatePermille: 1000,
+      ignoreResist: true,
+    };
+    // `flat` (BURN / CURSE / DoT custom 61) : MulPermille(stat, taux) — ni
+    // défense ni réduction (Eternal Bleeding : 636 × 7000 ‰ = 4452 exact).
+    expect(
+      buildDotLine({ ...base, attackRate: 7000, statValue: 636, formula: 'flat' as const })
+        .damagePerTick,
+    ).toBe(4452);
+    // ENHANCE : ApplyRate AVANT la formule — 7000 ‰ → 10500 ‰.
+    expect(
+      buildDotLine({
+        ...base,
+        attackRate: 7000,
+        statValue: 636,
+        formula: 'flat' as const,
+        enhancePermille: 500,
+      }).damagePerTick,
+    ).toBe(6678);
+    // Cap (CURSE) : plafond dur APRÈS la formule.
+    expect(
+      buildDotLine({
+        ...base,
+        attackRate: 7000,
+        statValue: 636,
+        formula: 'flat' as const,
+        capValue: 1000,
+      }).damagePerTick,
+    ).toBe(1000);
+    // `defense` + ENHANCE : le taux boosté passe dans CalcDamageDOT —
+    // 1050 × 10000 × 1e6 / 2e6 = 5 250 000, ×(1000−100)/1e6 = 4725.
+    expect(
+      buildDotLine({ ...base, attackRate: 700, statValue: 10000, enhancePermille: 500 })
+        .damagePerTick,
+    ).toBe(4725);
+  });
 });
