@@ -7,6 +7,43 @@
 
 ## 2026-08-24
 
+- **Damage calc — le lot talismans VALIDÉ IN-GAME (2 captures Sevih, toutes
+  les deux à 0,000 %).** `francesca-eris-tal-dmg` : S1 crit 9907 EXACT — la
+  main DMG +10 d'Eris alliée (120 ‰) atteint Francesca par le canal buff,
+  fiche saisie à dmg_boost 0 (le fix « stat non saisie » du même jour est
+  prouvé par la même capture). `francesca-tal-dmg-noncumul` : S1 crit 10141
+  EXACT — deux alliés portent la MÊME main DMG (Eris +10 = 120 ‰, 2000055
+  +0 = 96 ‰) et seule la plus forte compte (un cumul à 216 ‰ aurait calculé
+  trop haut) ; le delta 9907 → 10141 vient des autres passifs d'équipe du
+  2000055, qui eux se cumulent. Corpus : 32 observations, toutes exactes.
+
+- **Damage calc — bug Sevih : une stat NON saisie visée par un buff d'équipe
+  restait « hors calcul ».** Repro : fiche sans « DMG Increase » (champ
+  vide) + talisman DMG sur un membre → les stats finales gardaient « — » (et
+  le moteur perdait le +12 % du calcul) ; en saisissant 0, tout allait.
+  Cause : `buildCombatStats` ne bouclait que sur les stats SAISIES — un
+  canal de buff sans base n'était jamais construit. Fix (inputs.ts) : les
+  stats calculées = celles de la fiche PLUS celles qu'un canal de buff
+  non nul vise (base 0) ; une stat ni saisie ni buffée reste absente
+  (l'UI garde « — »). Tests : 1798 verts (1 nouveau — dmg_boost absent
+  sans buff, 120 ‰ avec le talisman DMG d'un allié).
+
+- **Damage calc — doctrine des talismans MESURÉE (Sevih) et non-cumul
+  branché.** Deux réponses in-game dans la foulée du lot équipement
+  d'équipe : (1) la main stat est appliquée DE BASE sur la fiche du perso
+  qui la porte (celle d'un autre membre n'y apparaît pas) — le routage
+  porteur=fiche / allié=canal buff est confirmé tel qu'implémenté, la
+  mention « non mesurée » de la spec est levée ; (2) DÉCOUVERTE : les mains
+  de talisman ne se cumulent PAS sur la même stat, la plus forte l'emporte
+  dans l'équipe (« Aer tal DCC + Eris tal ATK : chacun sa fiche, pas de
+  cumul DCC/DCC »). Branché dans inputs.ts (bloc allyPassives) : par stat,
+  le porteur pose sa valeur de fiche, une main d'allié ne verse que
+  l'EXCÉDENT sur le meilleur retenu (delta additif § 16.4), les autres
+  entrées sont désactivées — les AUTRES premiums d'équipe (EE, skill_8) se
+  cumulent, eux (capture du 23/08 : crit dmg 3540 = fiche + EE + skill_8).
+  Tests : 1797 verts (1 nouveau — porteur fort/allié faible désactivé à
+  l'identité de stat près, excédent 30 ‰, deux alliés même stat → un seul).
+
 - **Damage calc — équipement d'ÉQUIPE branché (talismans du porteur et des
   alliés, arme/accessoire d'alliés), et un correctif de doctrine.** Remarque
   Sevih (« t'as pas évoqué les passifs d'arme/accessoire/set ni les talismans

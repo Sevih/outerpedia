@@ -947,14 +947,28 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 >   par les POOLS réels au palier le plus haut (`talismanMainBuffs`,
 >   preset-gear.ts) ; saisie : z `tm`/`tml` (porteur), `al[2..3]` (alliés,
 >   UI du 27/07 enfin consommée).
-> - **Destination** : pour un ALLIÉ, canal buff du receveur (doctrine premium
->   d'allié PROUVÉE le 23/08). Pour le PORTEUR, route fiche (taux collecté
->   en `premium`, défactorisation § 16.4) — EXTENSION de la doctrine
->   ME/MY_TEAM du kit, NON mesurée pour un premium `MY_TEAM` d'équipement
->   (la preuve Caren du 18/08 portait sur un `ME`). Mesure qui tranche : la
->   fiche de VILLE bouge-t-elle quand on équipe un talisman ATK ? Si non,
->   basculer la source 'talisman' du porteur vers le canal buff (gear.ts,
->   branche premium).
+> - **Destination — MESURÉ (Sevih, 24/08/2026)** : « la stat est appliquée de
+>   base sur la fiche du perso qui le porte ; celle d'un autre membre
+>   n'apparaît pas » (Aer porte tal DCC → sa fiche montre le total ; Eris
+>   porte tal ATK → la fiche d'Eris l'inclut, celle d'Aer non). Donc : pour
+>   le PORTEUR, route fiche (taux collecté en `premium`, défactorisation
+>   § 16.4) ; pour un ALLIÉ, canal buff du receveur (doctrine premium
+>   d'allié prouvée le 23/08).
+> - **NON-CUMUL par stat — MESURÉ (Sevih, 24/08/2026)** : les mains de
+>   talisman ne se cumulent pas sur la même stat, la PLUS FORTE l'emporte
+>   dans l'équipe. Le moteur (inputs.ts, bloc allyPassives) : le porteur
+>   pose sa valeur (fiche saisie) ; une main d'allié ne verse que
+>   l'EXCÉDENT sur le meilleur déjà retenu (delta additif — § 16.4), les
+>   autres sont désactivées. Ne concerne QUE les mains OOPARTS — les autres
+>   premiums d'équipe (EE, skill_8) se cumulent (crit dmg 3540 = fiche +
+>   EE + skill_8, capture du 23/08).
+> - **VALIDÉ IN-GAME le jour même** (2 captures Sevih, fixtures dorées) :
+>   `francesca-eris-tal-dmg` — S1 crit 9907 EXACT (0,000 %), la main DMG
+>   +10 d'Eris alliée (120 ‰ `ST_DMG_BOOST`) atteint Francesca par le canal
+>   buff, avec une fiche saisie à dmg_boost 0 (prouve aussi le fix « stat
+>   non saisie ») ; `francesca-tal-dmg-noncumul` — S1 crit 10141 EXACT,
+>   deux alliés portent la MÊME main DMG (120 ‰ et 96 ‰) et seule la plus
+>   forte compte (un cumul à 216 ‰ aurait calculé trop haut).
 > - **Armes/accessoires d'ALLIÉS** : `resolveGearPassives` en mode allié
 >   (z `al[6..9]` : arme, breakthrough, accessoire, breakthrough) — seules
 >   les lignes qui ATTEIGNENT l'attaquant comptent. Recensement 1.4.14 des

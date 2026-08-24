@@ -684,9 +684,9 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
   });
 
   it('talisman du PORTEUR : doctrine fiche — le taux part en `premium` (défactorisation), jamais recompté en buff', () => {
-    // Extension de la doctrine ME/MY_TEAM du kit (gear.ts) — NON mesurée pour
-    // un premium MY_TEAM d'équipement : si la fiche de ville s'avère NE PAS
-    // porter la main du talisman, basculer la source vers le canal buff.
+    // MESURÉ (Sevih 24/08/2026) : « la stat est appliquée de base sur la
+    // fiche du perso qui le porte » — même route fiche que les premiums
+    // ME/MY_TEAM du kit.
     const r = buildDamageReport(
       { ...attackerBase(), gear: { talismanMain: { buffId: TAL_ATK, enchant: 10 } } },
       target(),
@@ -696,5 +696,69 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
       expect.objectContaining({ source: 'talisman', buffId: TAL_ATK, valueRate: 150 }),
     );
     expect(r.gearPassives?.entries.some((e) => e.buffId === TAL_ATK)).toBe(false);
+  });
+
+  it('stat NON saisie + buff d’équipe qui la vise : calculée sur base 0, jamais « hors calcul » (bug Sevih 24/08)', () => {
+    // Repro : fiche sans dmg_boost (champ vide) + talisman DMG d'équipe
+    // (BID_ITEM_STAT_OOPARTS_DMG_6, ST_DMG_BOOST OAT_ADD, L11 = 120 ‰) —
+    // la stat finale doit exister à 12 %, pas rester « — ».
+    const without = buildDamageReport(attackerBase(), target(), dataEq);
+    expect(without.combatStats.dmg_boost).toBeUndefined();
+    const withAlly = buildDamageReport(
+      {
+        ...attackerBase(),
+        allies: [
+          { id: '2000117', talisman: { buffId: 'BID_ITEM_STAT_OOPARTS_DMG_6', enchant: 10 } },
+        ],
+      },
+      target(),
+      dataEq,
+    );
+    expect(withAlly.combatStats.dmg_boost).toBe(120);
+  });
+
+  it('NON-CUMUL des mains par stat (mesure Sevih 24/08) : la plus forte l’emporte, l’allié ne verse que l’excédent', () => {
+    const withTal = (
+      porteur: number | undefined,
+      allies: { id: string; enchant: number }[],
+    ): ReturnType<typeof buildDamageReport> =>
+      buildDamageReport(
+        {
+          ...attackerBase(),
+          ...(porteur !== undefined
+            ? { gear: { talismanMain: { buffId: TAL_ATK, enchant: porteur } } }
+            : {}),
+          allies: allies.map((a) => ({
+            id: a.id,
+            talisman: { buffId: TAL_ATK, enchant: a.enchant },
+          })),
+        },
+        target(),
+        dataEq,
+      );
+    // Porteur +10 (150) > allié +0 (120) : l'entrée alliée est DÉSACTIVÉE —
+    // l'ATK de combat est celui du porteur seul.
+    const strongOwner = withTal(10, [{ id: '2000117', enchant: 0 }]);
+    const ownerOnly = buildDamageReport(
+      { ...attackerBase(), gear: { talismanMain: { buffId: TAL_ATK, enchant: 10 } } },
+      target(),
+      dataEq,
+    );
+    expect(strongOwner.allyPassives?.entries.find((e) => e.buffId === TAL_ATK)?.active).toBe(false);
+    expect(strongOwner.combatStats.atk).toBe(ownerOnly.combatStats.atk);
+    // Porteur +0 (120) < allié +10 (150) : l'allié ne verse que l'EXCÉDENT
+    // (30 ‰) — pas les 150 pleins.
+    const strongAlly = withTal(0, [{ id: '2000117', enchant: 10 }]);
+    expect(strongAlly.allyPassives?.entries.find((e) => e.buffId === TAL_ATK)?.buff.value).toBe(30);
+    // Deux ALLIÉS sur la même stat : seul le plus fort compte.
+    const twoAllies = withTal(undefined, [
+      { id: '2000117', enchant: 10 },
+      { id: '2000028', enchant: 0 },
+    ]);
+    const actives = twoAllies.allyPassives?.entries.filter((e) => e.buffId === TAL_ATK && e.active);
+    expect(actives).toHaveLength(1);
+    expect(actives?.[0]).toMatchObject({ ally: '2000117', buff: { value: 150 } });
+    const oneAlly = withTal(undefined, [{ id: '2000117', enchant: 10 }]);
+    expect(twoAllies.combatStats.atk).toBe(oneAlly.combatStats.atk);
   });
 });

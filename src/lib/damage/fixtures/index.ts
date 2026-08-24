@@ -26,6 +26,8 @@ import francescaS2b2 from './francesca-s2-burst2.json';
 import francescaDotBleed from './francesca-dot-bleed.json';
 import francescaErisAllyS2 from './francesca-eris-ally-s2.json';
 import francescaErisAllyS1 from './francesca-eris-ally-s1-stack.json';
+import francescaErisTalDmg from './francesca-eris-tal-dmg.json';
+import francescaTalDmgNoncumul from './francesca-tal-dmg-noncumul.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -70,4 +72,10 @@ export const FIXTURES: DamageFixture[] = [
   // pas-de-défactorisation des premiums d'alliés sont prouvés d'un coup.
   francescaErisAllyS2 as DamageFixture,
   francescaErisAllyS1 as DamageFixture,
+  // Talismans d'ÉQUIPE (24/08/2026) — la main DMG d'Eris alliée atteint
+  // Francesca par le canal buff (S1 exact, fiche à dmg_boost 0 → combat
+  // 120 ‰), et deux alliés portant la MÊME main ne se cumulent PAS (seule
+  // la plus forte compte — un cumul aurait calculé trop haut).
+  francescaErisTalDmg as DamageFixture,
+  francescaTalDmgNoncumul as DamageFixture,
 ];

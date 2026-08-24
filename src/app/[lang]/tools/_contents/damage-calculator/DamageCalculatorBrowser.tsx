@@ -2676,11 +2676,13 @@ export function DamageCalculatorBrowser({
                     cible break). */}
                   <div className={`${wellClass} space-y-1.5 p-2`}>
                     <Eyebrow>{L.equipment.talisman}</Eyebrow>
-                    <div className="flex items-center gap-1.5">
+                    {/* Colonne attaquant plus étroite que la team : le niveau
+                      passe SOUS le select (Sevih 24/08/2026). */}
+                    <div className="space-y-1.5">
                       <select
                         value={talisMain ?? ''}
                         onChange={(e) => setTalisMain(e.target.value || null)}
-                        className={`${SELECT_CLASS} min-w-0 flex-7`}
+                        className={`${SELECT_CLASS} w-full min-w-0`}
                         title={L.equipment.talisman}
                       >
                         <option value="">{L.equipment.talisman}</option>
@@ -2691,7 +2693,7 @@ export function DamageCalculatorBrowser({
                         ))}
                       </select>
                       {talisMain && (
-                        <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 min-w-0 flex-3 items-center gap-0.5 rounded-lg border px-1.5">
+                        <span className="border-line-subtle bg-surface-sunken/70 focus-within:border-accent flex h-8 w-full min-w-0 items-center gap-0.5 rounded-lg border px-1.5">
                           <span className="text-content-subtle text-xs">+</span>
                           <input
                             type="number"

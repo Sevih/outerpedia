@@ -746,7 +746,17 @@ export function buildCombatStats(
   const channels = collectStatChannels(activeBuffs, owner ? { owner } : undefined);
   const modifier = modifierAfter100For(char, attacker.level, growth);
   const combat: Record<string, number> = {};
-  for (const [slug, sheetValue] of Object.entries(attacker.sheet)) {
+  // Toutes les stats SAISIES, plus celles qu'un buff vise SANS saisie (bug
+  // Sevih 24/08/2026 : talisman DMG d'équipe sur un champ laissé vide — une
+  // stat non renseignée vaut 0, elle n'est pas « hors calcul »).
+  const slugs = new Set(Object.keys(attacker.sheet));
+  for (const [st, ch] of Object.entries(channels)) {
+    if (ch.value === 0 && ch.rate === 0) continue;
+    const slug = sheetSlugOfStat(st);
+    if (slug) slugs.add(slug);
+  }
+  for (const slug of slugs) {
+    const sheetValue = attacker.sheet[slug] ?? 0;
     const map = SHEET_STAT_MAP[slug];
     if (!map) continue;
     const pair = map.base ? char.baseStats[map.base] : undefined;
@@ -985,6 +995,40 @@ export function buildDamageReport(
         allyPassives.dynamic.push(...i.dynamic.map((e) => ({ ...e, ally: al.id })));
         allyPassives.unresolved.push(...i.unresolved.map((e) => ({ ...e, ally: al.id })));
       }
+    }
+    // NON-CUMUL des mains de talisman (MESURÉ, Sevih 24/08/2026) : par stat,
+    // la PLUS FORTE l'emporte dans toute l'équipe — celle du porteur est déjà
+    // dans sa fiche (« Aer porte tal DCC : sa fiche montre le total ; le tal
+    // ATK d'Eris n'apparaît pas sur la fiche d'Aer »). Par stat : le porteur
+    // pose sa valeur (fiche saisie) ; une main d'allié ne verse que
+    // l'EXCÉDENT sur le meilleur déjà retenu (delta additif — § 16.4, les
+    // premiums sont une part additive de buffVal/buffRate), les autres sont
+    // désactivées. Ne concerne QUE les mains (source 'talisman' à buff
+    // OOPARTS) — les autres premiums d'équipe (EE, skill_8) se cumulent.
+    const bestMainBy = new Map<string, number>();
+    const tm = attacker.gear?.talismanMain;
+    if (tm) {
+      const rows = data.buffs.buffs[tm.buffId];
+      const row = rows?.length ? pickBuffRow(rows, tm.enchant + 1) : undefined;
+      if (row?.stat !== undefined) bestMainBy.set(row.stat, row.value ?? 0);
+    }
+    const allyMains = allyPassives.entries
+      .filter((e) => e.source === 'talisman' && e.side === 'attacker' && e.buff.stat !== undefined)
+      .sort((a, b) => (b.buff.value ?? 0) - (a.buff.value ?? 0));
+    for (const e of allyMains) {
+      const stat = e.buff.stat as string;
+      const v = e.buff.value ?? 0;
+      const prev = bestMainBy.get(stat);
+      if (prev === undefined) {
+        bestMainBy.set(stat, v);
+        continue;
+      }
+      if (v <= prev) {
+        e.active = false; // remplacé par une main plus forte (ou égale)
+        continue;
+      }
+      e.buff = { ...e.buff, value: v - prev };
+      bestMainBy.set(stat, v);
     }
   }
   const allyBuffs = (side: 'attacker' | 'defender'): ActiveBuff[] =>

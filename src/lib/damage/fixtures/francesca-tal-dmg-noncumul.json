@@ -1,0 +1,50 @@
+{
+  "name": "Francesca vs Ars Nova · S1 critical (2 talismans DMG — non-cumul)",
+  "z": "N4IghiBcIEwAwLgRgKwgDQgB5QGyYBsA3KJBTAaylAGUkoVMaYGmBmBgX0xMlDAAuVaDDYBODpgDGAJwCWAuVLAEA+gBMAtgHMosBBhAAHOQFMZU06qMB7AO7nVMwab1xDAIwCuAMx+qpAAswADtLPSR4Qy1tVQ8bGwBnATcQbhBFPRQ4eAAWBAB2SHyC3AQADhRcQxUoAG06-QQkJAKMfBAYuITkjDJ0JAGAXXRG+EQUNHQOrviklPQ4AeHRkAwltYGlwaQhoc4gA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "121": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "critical",
+      "damage": 10141
+    }
+  ],
+  "notes": "Capture Sevih 24/08/2026 — NON-CUMUL des mains de talisman PROUVE in-game : 10141 EXACT (0.000 %). Deux allies portent la MEME main DMG (Eris +10 = 120 pour mille, 2000055 +0 = 96 pour mille) : seule la plus forte compte (combat dmg_boost = 120, pas 216 — un cumul aurait calcule trop haut). Le delta vs francesca-eris-tal-dmg (9907 -> 10141) vient des AUTRES passifs d equipe du 2000055 (crit dmg +80), qui eux se cumulent."
+}
