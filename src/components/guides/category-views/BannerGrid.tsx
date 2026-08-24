@@ -80,10 +80,18 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
               {t('page.guide.updated', { date: formatGuideDate(guideUpdatedDate(guide), lang) })}
             </span>
             <SeasonBadge bossId={bossId} lang={lang} />
-            <h2 className="text-content-strong absolute inset-0 flex items-center p-3 text-sm font-semibold drop-shadow-lg">
+            {/* `w-full after:hidden` : neutralise la règle globale des titres —
+                `width: fit-content` réduirait ce calque plein-carte à la largeur
+                du texte, et le trait de titre viendrait barrer la description. */}
+            <h2 className="text-content-strong absolute inset-0 flex w-full items-center p-3 text-sm font-semibold drop-shadow-lg after:hidden">
               {lRec(guide.title, lang)}
             </h2>
-            <p className="text-content-muted absolute inset-x-0 bottom-0 line-clamp-2 px-3 pb-1.5 text-[10px] drop-shadow-lg">
+            {/* La marge basse passe par `bottom-1.5`, PAS par un `pb-1.5` :
+                `overflow: hidden` d'un `line-clamp` coupe au bord du PADDING, donc
+                un padding bas laisse déverser la ligne suivante à moitié rognée
+                sous les points de suspension. Trois lignes tiennent dans la carte
+                (300x128) : la description entière s'affiche au lieu d'être coupée. */}
+            <p className="text-content-muted absolute inset-x-0 bottom-1.5 line-clamp-3 px-3 text-[10px] drop-shadow-lg">
               {lRec(guide.description, lang)}
             </p>
           </Link>
