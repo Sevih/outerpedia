@@ -34,6 +34,8 @@ import gnosisbethScrapmetalNoEE from './gnosisbeth-scrapmetal-noee.json';
 import gnosisbethScrapmetalEffbuff from './gnosisbeth-scrapmetal-effbuff.json';
 import francescaDotScrapmetal from './francesca-dot-scrapmetal.json';
 import francescaDotScrapmetalAtkbuff from './francesca-dot-scrapmetal-atkbuff.json';
+import gnosisbethArsnovaS1crit from './gnosisbeth-arsnova-s1-crit.json';
+import gnosisbethArsnovaS1 from './gnosisbeth-arsnova-s1.json';
 
 export const FIXTURES: DamageFixture[] = [
   valentineRhona as DamageFixture,
@@ -112,4 +114,11 @@ export const FIXTURES: DamageFixture[] = [
   // sorti ces nœuds du filtre UI « déjà dans la fiche ».
   francescaDotScrapmetal as DamageFixture,
   francescaDotScrapmetalAtkbuff as DamageFixture,
+  // Recaptures stage 7 (Sevih, 25/08/2026) : S1 crit et non-crit de Gnosis
+  // Beth vs Ars Nova, avec l'AFFINITÉ déclarée à 100 — remplacent la vieille
+  // capture à +2,27 % supprimée, dont le z portait affinité 0 (la cause du
+  // delta, pas le moteur). Le stamp 1.4.14 vient d'ENGINE_GAME_VERSION pas
+  // encore bumpée dans l'UI au moment du ⧉ (bump 1.4.15 le jour même).
+  gnosisbethArsnovaS1crit as DamageFixture,
+  gnosisbethArsnovaS1 as DamageFixture,
 ];

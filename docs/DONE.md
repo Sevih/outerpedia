@@ -63,7 +63,9 @@
   `_nCount = RemainTurnCont` = les tours restants consommés — hypothèse de
   formule notée, PAS branchée : décision Sevih, pas une prio) ; (3) la
   vieille capture stage 7 à +2,27 % est morte : Sevih a recapturé S1 crit et
-  non-crit à 0 % — le coupable était l'affinité déclarée 0 au lieu de 100.
+  non-crit à 0 % — le coupable était l'affinité déclarée 0 au lieu de 100
+  (les deux recaptures sont ENREGISTRÉES en fixtures dorées le jour même :
+  corpus à 28, 42/42 lignes exactes au `damage:check`).
   Premier run réel de l'intégration dans la foulée : tables damage à
   1.11.101 (elles étaient restées à 1.10.906), anim-events régénéré
   (243 persos, 1460 clips), **1837 tests verts sur les données du patch** —

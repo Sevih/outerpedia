@@ -1,0 +1,51 @@
+{
+  "name": "Gnosis Beth vs Ars Nova · S1 critical",
+  "z": "N4IghiBcIEwAwLgThiANCAHlAbBsAZlAIwIYDWUoAysVAKwbWqSMjUDMDAvhgC4BbKCABGAVwIEA+gGMAFmAB2MgKboQANyrg+laABZ6ADjjqZAJwCWfSzLAAbKQBMBAc2HxTGAA6WV51SlvAHsAd38pczA+NWgvUQlpeSVVYRwOHHUXVykRYOCAZz40nAA6ehBeEBthejh4fQQAdkhGppwEI3pM7iA",
+  "codex": 11,
+  "guild": 10,
+  "quirks": {
+    "1": 10,
+    "12": 2,
+    "21": 10,
+    "31": 2,
+    "41": 10,
+    "53": 2,
+    "61": 10,
+    "67": 1,
+    "69": 1,
+    "81": 10,
+    "87": 1,
+    "93": 1,
+    "101": 10,
+    "121": 10,
+    "141": 10,
+    "231": 10,
+    "232": 1,
+    "233": 1,
+    "234": 1,
+    "236": 1,
+    "237": 1,
+    "238": 1,
+    "240": 1,
+    "242": 1,
+    "243": 1,
+    "244": 1,
+    "245": 1,
+    "246": 1,
+    "251": 10,
+    "252": 1,
+    "257": 1,
+    "262": 1,
+    "264": 1,
+    "267": 1,
+    "268": 1
+  },
+  "gameVersion": "1.4.14",
+  "observed": [
+    {
+      "slot": "S1",
+      "branch": "critical",
+      "damage": 14810
+    }
+  ]
+}
