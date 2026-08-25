@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-08-18",
+  "asOf": "2026-09-01",
   "shops": [
     {
       "key": "guild",
@@ -1671,26 +1671,6 @@
           "limit": {
             "count": 0,
             "period": "one-time"
-          },
-          "priority": "B"
-        },
-        {
-          "key": "stars/item-500018/monthly",
-          "productId": "2037",
-          "name": {
-            "en": "6★ Talisman Selection Chest [Resilience]",
-            "jp": "★6タリスマン 選択ボックス [効果抵抗]",
-            "kr": "6성 탈리스만 선택 상자 [효과 저항]",
-            "zh": "6星护身符选择箱 [效果抵抗]"
-          },
-          "icon": "TI_Talisman_Box02",
-          "iconKind": "item",
-          "grade": "unique",
-          "gives": 1,
-          "cost": 500,
-          "limit": {
-            "count": 1,
-            "period": "monthly"
           },
           "priority": "B"
         },

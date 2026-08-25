@@ -214739,7 +214739,7 @@
     ],
     "desc": {
       "en": "<color=#ffd732>I Shall Carve a Scar</color>: Attacks an enemy. Removes <color=#28d9ed>1 debuff</color> from all allies.\\nThe target and the caster take Fixed Damage equal to <color=#28d9ed>2%</color> of their respective Max Health.\\nThis damage can transform the caster into the <color=#28d9ed>Demon</color>.\\n\\n<color=#ffd732>Thus Spoke the Demon</color>: Before attacking, inflicts <color=#28d9ed>Punishment</color> on all enemies for <color=#28d9ed>[Buff_T_2000130_1_1] turns</color>. (Ignores Resilience)\\nAttacks all enemies.",
-      "jp": "<color=#ffd732>【傷を刻まん】</color>：敵単体を攻撃する。味方全体の弱体効果を<color=#28d9ed>1個</color>解除する。\\n敵と自分はそれぞれの最大HPの<color=#28d9ed>2%</color>の固定ダメージを受ける。\\nこのダメージで<color=#28d9ed>魔神</color>に変身できる。\\n\\n<color=#ffd732>【魔神曰く】</color>：攻撃前、敵全体に<color=#28d9ed>裁き</color>を<color=#28d9ed>[Buff_T_2000130_1_1]ターン</color>の間付与してから攻撃する。(効果抵抗無視)",
+      "jp": "<color=#ffd732>【傷を刻まん】</color>：敵単体を攻撃する。味方全体の弱体効果を<color=#28d9ed>1個</color>解除する。\\n敵と自分はそれぞれの最大HPの<color=#28d9ed>2%</color>の固定ダメージを受ける。\\nこのダメージで<color=#28d9ed>魔神</color>に変身できる。\\n\\n<color=#ffd732>【魔神曰く】</color>：攻撃前、敵全体に<color=#28d9ed>懲罰</color>を<color=#28d9ed>[Buff_T_2000130_1_1]ターン</color>の間付与してから攻撃する。(効果抵抗無視)",
       "kr": "<color=#ffd732>흉터를 새기리</color> :  적을 공격합니다. 아군 전체의 약화 효과를 <color=#28d9ed>1개</color> 해제합니다.\\n적과 자신은 각자의 최대 체력의 <color=#28d9ed>2%</color> 만큼 고정 피해를 입습니다.\\n이 피해로 <color=#28d9ed>마신</color>으로 전환 할 수 있습니다.\\n\\n<color=#ffd732>마신 가라사대</color> : 공격 전 적 전체에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_1_1]턴</color> 동안 부여한 뒤 공격합니다.(효과 저항 무시)",
       "zh": "<color=#ffd732>铭刻伤痕</color>：攻击1名敌人。解除我方全体<color=#28d9ed>1个</color>弱化效果。\\n敌人与自身各自受到相当于自身最大生命值<color=#28d9ed>2%</color>的固定伤害。\\n可通过该伤害转化为<color=#28d9ed>魔神</color>。\\n\\n<color=#ffd732>魔神如是说</color>：攻击前，对全体敌人赋予<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_1_1]回合</color>，然后攻击。（无视效果抵抗）"
     },
@@ -214920,7 +214920,7 @@
     ],
     "desc": {
       "en": "<color=#ffd732>Demon Descends</color>\\n(Passive Effect): At the start of battle, gains <color=#28d9ed>Sin</color>. This effect lasts until the caster transforms into the Demon.\\n\\n(Triggered Effect): When Health falls to 0 or below, transforms into the <color=#28d9ed>Demon</color>. Restores the caster's Health to <color=#28d9ed>100%</color>, resets AP to its initial value, removes all <color=#28d9ed>buffs</color> and <color=#28d9ed>debuffs</color>, then attacks all enemies with <color=#28d9ed>Gaze of Contempt</color>. After transforming, damage dealt by all attacks increases proportional to the caster's <color=#28d9ed>Speed</color>. Cannot return to the previous form.\\n\\n<color=#ffd732>Gaze of Contempt</color>: After attacking all enemies, inflicts <color=#28d9ed>1 Punishment</color> on each target. (Ignores Immunity and Resilience, Irremovable, Permanent) Then grants the caster <color=#28d9ed>Immortality</color> for <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Buff Reversal</color> on all enemies. (Ignores Resilience)",
-      "jp": "<color=#ffd732>【魔神降臨】</color>\\n(パッシブ効果)：戦闘開始時に<color=#28d9ed>罪業</color>を獲得し、魔神に変身するまで持続する。\\n\\n(発動効果)：HPが0以下になると<color=#28d9ed>魔神</color>に変身する。自分のHPを<color=#28d9ed>100%</color>にし、保有する<color=#28d9ed>AP</color>を初期化した後、<color=#28d9ed>強化・弱体効果</color>を解除し、<color=#28d9ed>【侮蔑の眼差し】</color>で敵全体にダメージを与える。変身後、すべての攻撃は自分の<color=#28d9ed>スピード</color>が高いほどダメージがUPする。元の姿には戻らない。\\n\\n<color=#ffd732>【侮蔑の眼差し】</color>：敵全体にダメージを与えた後、対象に<color=#28d9ed>裁き</color>を<color=#28d9ed>1個</color>付与する。(免疫および効果抵抗無視、解除不可、永続) 自分に<color=#28d9ed>不死</color>を<color=#28d9ed>1ターン</color>の間付与し、敵全体に<color=#28d9ed>強化逆転</color>を発生させる。(効果抵抗無視)",
+      "jp": "<color=#ffd732>【魔神降臨】</color>\\n(パッシブ効果)：戦闘開始時に<color=#28d9ed>罪業</color>を獲得し、魔神に変身するまで持続する。\\n\\n(発動効果)：HPが0以下になると<color=#28d9ed>魔神</color>に変身する。自分のHPを<color=#28d9ed>100%</color>にし、保有する<color=#28d9ed>AP</color>を初期化した後、<color=#28d9ed>強化・弱体効果</color>を解除し、<color=#28d9ed>【侮蔑の眼差し】</color>で敵全体にダメージを与える。変身後、すべての攻撃は自分の<color=#28d9ed>スピード</color>が高いほどダメージがUPする。元の姿には戻らない。\\n\\n<color=#ffd732>【侮蔑の眼差し】</color>：敵全体にダメージを与えた後、対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>1個</color>付与する。(免疫および効果抵抗無視、解除不可、永続) 自分に<color=#28d9ed>不死</color>を<color=#28d9ed>1ターン</color>の間付与し、敵全体に<color=#28d9ed>強化逆転</color>を発生させる。(効果抵抗無視)",
       "kr": "<color=#ffd732>마신 강림</color>\\n(패시브 효과) 전투 시작시 <color=#28d9ed>죄업</color>을 획득하여 마신으로 전환하기 전까지 유지합니다.\\n\\n(발동 효과) 체력이 0 이하가 되면 <color=#28d9ed>마신</color>으로 전환합니다. 자신의 체력을 <color=#28d9ed>100%</color> 회복 후, 보유한 <color=#28d9ed>AP</color>를 초기 상태로 갱신하고 <color=#28d9ed>강화</color> 및 <color=#28d9ed>약화</color> 효과를 제거한 뒤, 적 전체를 <color=#28d9ed>모멸적인 시선</color>으로 공격합니다.전환 후 모든 공격은 자신의 <color=#28d9ed>속도</color>에 비례하여 피해가 증가합니다. 이전 상태로 돌아갈 수 없습니다.\\n\\n<color=#ffd732>모멸적인 시선</color> : 적 전체 공격 후 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>1개</color> 부여합니다 (면역 및 효과 저항 무시, 해제 불가, 영구 지속) 이후 자신에게 <color=#28d9ed>불사</color>를 <color=#28d9ed>1턴</color> 동안 부여한 뒤 적 전체에게 <color=#28d9ed>강화 역전</color>을 발생시킵니다.(효과 저항 무시)",
       "zh": "<color=#ffd732>魔神降临</color>\\n（被动效果）：战斗开始时获得<color=#28d9ed>罪业</color>，持续至转化为魔神。\\n\\n（触发效果）：生命值降至0以下时，转化为<color=#28d9ed>魔神</color>。将自身生命值恢复至<color=#28d9ed>100%</color>后，将持有的<color=#28d9ed>AP</color>重置为初始状态，解除<color=#28d9ed>强化</color>及<color=#28d9ed>弱化</color>效果后，使用<color=#28d9ed>轻蔑之眼</color>攻击全体敌人。转化后，所有攻击的伤害会根据自身<color=#28d9ed>速度</color>提升。无法变回原形态。\\n\\n<color=#ffd732>轻蔑之眼</color>：攻击全体敌人后，赋予目标<color=#28d9ed>1个</color><color=#28d9ed>惩戒</color>。（无视免疫及效果抵抗、无法解除、永久持续）随后赋予自身<color=#28d9ed>1回合</color><color=#28d9ed>不死</color>，并对全体敌人发动<color=#28d9ed>强化逆转</color>。（无视效果抵抗）"
     },
@@ -215210,7 +215210,7 @@
     ],
     "desc": {
       "en": "<color=#ffd732>Dominion of Pain</color>: Increases the <color=#28d9ed>Defense and Crit DMG</color> of all allies except the caster for <color=#28d9ed>[Buff_T_2000129_3_1] turns</color> and grants them <color=#28d9ed>Buff Enhancement</color> for <color=#28d9ed>[Buff_T_2000129_3_1] turns</color>.\\nThen recovers <color=#28d9ed>100 AP</color> for all allies and deals Fixed Damage to the caster equal to <color=#28d9ed>99%</color> of the caster's Max Health.\\nThis damage can transform the caster into the <color=#28d9ed>Demon</color>.\\n\\n<color=#ffd732>Final Judgment</color>: Before using the skill, inflicts <color=#28d9ed>Punishment</color> on the target for <color=#28d9ed>[Buff_T_2000130_3_1] turns</color>. If the target is a Boss, adds <color=#28d9ed>[Buff_T_2000130_3_1] turns</color> to the duration of Punishment. (Ignores Resilience)\\nAttacks all enemies, then reduces the skill cooldowns of all other <color=#28d9ed>Dark</color> allies by <color=#28d9ed>1 turn</color>.",
-      "jp": "<color=#ffd732>【苦痛の権能】</color>：自分を除く味方全体の<color=#28d9ed>防御力</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間UPし、<color=#28d9ed>強化促進</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間付与する。\\nその後、味方全体のAPを<color=#28d9ed>100</color>回復し、自分の最大HP<color=#28d9ed>99%</color>の固定ダメージを自分に与える。\\nこのダメージで<color=#28d9ed>魔神</color>に変身できる。\\n\\n<color=#ffd732>【終末の宣告】</color>：スキル使用前、対象に<color=#28d9ed>裁き</color>を<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>裁き</color>をさらに<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与する。(効果抵抗無視)\\n敵全体にダメージを与えた後、自分を除く<color=#28d9ed>闇属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+      "jp": "<color=#ffd732>【苦痛の権能】</color>：自分を除く味方全体の<color=#28d9ed>防御力</color>と<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間UPし、<color=#28d9ed>強化促進</color>を<color=#28d9ed>[Buff_T_2000129_3_1]ターン</color>の間付与する。\\nその後、味方全体のAPを<color=#28d9ed>100</color>回復し、自分の最大HP<color=#28d9ed>99%</color>の固定ダメージを自分に与える。\\nこのダメージで<color=#28d9ed>魔神</color>に変身できる。\\n\\n<color=#ffd732>【終末の宣告】</color>：スキル使用前、対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>懲罰</color>をさらに<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与する。(効果抵抗無視)\\n敵全体にダメージを与えた後、自分を除く<color=#28d9ed>闇属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
       "kr": "<color=#ffd732>고통의 권세</color> : 자신을 제외한 아군 전체의 <color=#28d9ed>방어력</color>,<color=#28d9ed>치명 피해</color>를 <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 증가시키고 <color=#28d9ed>강화 촉진</color>을  <color=#28d9ed>[Buff_T_2000129_3_1]턴</color> 동안 부여합니다.\\n이후 아군 전체의 AP를 <color=#28d9ed>100</color> 회복하고 자신에게 자신 최대 체력의 <color=#28d9ed>99%</color> 만큼 고정 피해를 입힙니다. \\n이 피해로 <color=#28d9ed>마신</color>으로 전환 할 수 있습니다.\\n\\n<color=#ffd732>종말 선고</color> : 스킬 사용 전 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 부여하고 대상이 보스인 경우 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 추가합니다.(효과 저항 무시)\\n적 전체를 공격한 후 자신을 제외한 <color=#28d9ed>암속성</color> 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
       "zh": "<color=#ffd732>痛苦权能</color>：提升除自身外全体友军的<color=#28d9ed>防御力</color>、<color=#28d9ed>暴击伤害</color>，持续<color=#28d9ed>[Buff_T_2000129_3_1]回合</color>，并赋予<color=#28d9ed>强化促进</color>，持续<color=#28d9ed>[Buff_T_2000129_3_1]回合</color>。\\n随后为全体友军回复AP<color=#28d9ed>100</color>，并对自身造成相当于自身最大生命值<color=#28d9ed>99%</color>的固定伤害。\\n可通过该伤害转化为<color=#28d9ed>魔神</color>。\\n\\n<color=#ffd732>终末宣告</color>：使用技能前，赋予目标<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。若目标为首领，则额外赋予<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。（无视效果抵抗）\\n攻击全体敌人后，使除自身外<color=#28d9ed>暗属性</color>全体友军的技能冷却时间减少<color=#28d9ed>1回合</color>。"
     },
@@ -215667,7 +215667,7 @@
       {
         "family": "damage",
         "category": "buff",
-        "type": "BT_DMG_TARGET_DEBUFF",
+        "type": "BT_DMG_TARGET_DEBUFF_LIMIT",
         "target": "me",
         "buff": "trancendent_8_2000129_2"
       },
@@ -216791,7 +216791,7 @@
     ],
     "desc": {
       "en": "Before attacking, inflicts <color=#28d9ed>Punishment</color> on all enemies for <color=#28d9ed>[Buff_T_2000130_1_1] turns</color>. (Ignores Resilience)\\nAttacks all enemies.",
-      "jp": "攻撃前、敵全体に<color=#28d9ed>裁き</color>を<color=#28d9ed>[Buff_T_2000130_1_1]ターン</color>の間付与し、ダメージを与える。(効果抵抗無視)",
+      "jp": "攻撃前、敵全体に<color=#28d9ed>懲罰</color>を<color=#28d9ed>[Buff_T_2000130_1_1]ターン</color>の間付与し、ダメージを与える。(効果抵抗無視)",
       "kr": "공격 전 적 전체에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_1_1]턴</color> 동안 부여한 뒤 공격합니다.(효과 저항 무시)",
       "zh": "攻击前，对全体敌人赋予<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_1_1]回合</color>，然后攻击。（无视效果抵抗）"
     },
@@ -217247,7 +217247,7 @@
     ],
     "desc": {
       "en": "Before using the skill, inflicts <color=#28d9ed>Punishment</color> on the target for <color=#28d9ed>[Buff_T_2000130_3_1] turns</color>. If the target is a Boss, adds <color=#28d9ed>[Buff_T_2000130_3_1] turns</color> to the duration of Punishment. (Ignores Resilience)\\nAttacks all enemies, then reduces the skill cooldowns of all other <color=#28d9ed>Dark</color> allies by <color=#28d9ed>1 turn</color>.",
-      "jp": "スキル使用前、対象に<color=#28d9ed>裁き</color>を<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>裁き</color>をさらに<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>追加する。(効果抵抗無視)\\n敵全体にダメージを与えた後、自分を除く<color=#28d9ed>闇属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+      "jp": "スキル使用前、対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>の間付与し、対象がボスの場合、<color=#28d9ed>懲罰</color>をさらに<color=#28d9ed>[Buff_T_2000130_3_1]ターン</color>追加する。(効果抵抗無視)\\n敵全体にダメージを与えた後、自分を除く<color=#28d9ed>闇属性</color>の味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
       "kr": "스킬 사용 전 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 부여하고 대상이 보스인 경우 <color=#28d9ed>응징</color>을 <color=#28d9ed>[Buff_T_2000130_3_1]턴</color> 동안 추가합니다.(효과 저항 무시)\\n적 전체를 공격한 후 자신을 제외한 <color=#28d9ed>암속성</color> 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
       "zh": "使用技能前，赋予目标<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。若目标为首领，则使<color=#28d9ed>惩戒</color>额外增加<color=#28d9ed>[Buff_T_2000130_3_1]回合</color>。（无视效果抵抗）\\n攻击全体敌人后，使除自身外<color=#28d9ed>暗属性</color>全体友军的技能冷却时间减少<color=#28d9ed>1回合</color>。"
     },
@@ -217684,7 +217684,7 @@
       {
         "family": "damage",
         "category": "buff",
-        "type": "BT_DMG_TARGET_DEBUFF",
+        "type": "BT_DMG_TARGET_DEBUFF_LIMIT",
         "target": "me",
         "buff": "trancendent_8_2000129_2"
       },
