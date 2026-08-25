@@ -87,3 +87,21 @@ système laisse donc des textes faux derrière elle (ex. 12/08/2026 : les taux d
 réussite de l'ascension Singularity supprimés, alors que le guide `gear` et la
 carte d'ascension de `/equipment/<slug>` les décrivaient encore). Relire le
 patch note en cherchant ce qui est _décrit_ sur le site, pas seulement _calculé_.
+
+Et l'éditorial ne vit pas que dans `_contents/` : des **règles de jeu sont
+écrites en dur dans le code** là où aucune table ne les porte, et elles se
+périment pareil. Le raté du 12/08 en est l'exemple — le « 2 entries per day »
+n'était pas dans un guide mais dans `src/lib/data/guide-categories.ts` : cherché
+dans les guides, on ne le trouvait pas. Les endroits vérifiés le 25/08 :
+
+- `src/lib/data/guide-categories.ts` — fiches de catégorie (entrées par jour,
+  coûts, description du mode) ;
+- `src/lib/gacha.ts` — `GUARANTEE_OF`, la garantie du pull simulator (100
+  tirages, plafond par bannière) : elle vient des notes de patch, pas des tables ;
+- `guides/_contents/general-guides/banner-mileage/index.tsx` — `MILEAGE_OF`
+  (bannière → monnaie de mileage) et `STANDARD_REWARDS` (doublons → wildcards),
+  qu'aucune table ne relie ;
+- `components/guides/editorial/banner/*.tsx` — libellés de chrome des bannières.
+
+Le réflexe qui rattrape ça : `grep` le chiffre ou le terme du patch note dans
+`src/` en entier, pas seulement dans `_contents/`.
