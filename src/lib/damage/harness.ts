@@ -13,8 +13,11 @@
  * Version du jeu des TABLES courantes (binaire de référence des extracteurs).
  * Le panneau Debug la compare au `gameVersion` des fixtures (badge « à
  * revérifier en jeu ») et `fixtures.test.ts` oriente son message d'échec.
+ * Constante MANUELLE, à bumper à chaque patch qui régénère les tables —
+ * `pnpm damage:check` avertit si elle diverge du dump-stamp de la machine
+ * de datamine (le filet contre l'oubli).
  */
-export const ENGINE_GAME_VERSION = '1.4.14';
+export const ENGINE_GAME_VERSION = '1.4.15';
 
 /** Une étape de la trace de calcul (spec § 2). */
 export interface TraceStep {

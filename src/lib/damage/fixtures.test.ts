@@ -1,10 +1,10 @@
 /**
  * Anti-régression des fixtures « dorées » (harnais § 4) : chaque scénario
- * VÉRIFIÉ EN JEU (`src/lib/damage/fixtures/`) est rejoué SANS UI —
- * décompression de `z`, pont partagé (`buildInputsFromZ` + resolver preset
- * node), amont pur, moteur — et comparé aux dégâts observés avec sa
- * tolérance (défaut 0.5 % — réglage de MISE AU POINT, l'objectif à terme
- * est 0, décision Sevih 03/08).
+ * VÉRIFIÉ EN JEU (`src/lib/damage/fixtures/`) est rejoué SANS UI par la
+ * logique PARTAGÉE `replayFixture` (replay.ts — la même que
+ * `pnpm damage:check`) et comparé aux dégâts observés avec sa tolérance
+ * (défaut 0.5 % — réglage de MISE AU POINT, l'objectif à terme est 0,
+ * décision Sevih 03/08).
  *
  * Un échec ne dit pas d'office « moteur cassé » : le message oriente —
  * fixture d'une AUTRE version du jeu → revérifier EN JEU d'abord ;
@@ -12,7 +12,6 @@
  * dépendant d'une incertitude § 12 (`skipRef`) est sauté : il devient le
  * test d'acceptation du jour où on tranche.
  */
-import LZString from 'lz-string';
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../../data/generated/damage/characters.json';
 import growthData from '../../../data/generated/damage/growth.json';
@@ -21,15 +20,9 @@ import targetsData from '../../../data/generated/damage/targets.json';
 import equipmentData from '../../../data/generated/damage/equipment.json';
 import { FIXTURES } from './fixtures';
 import { ENGINE_GAME_VERSION } from './harness';
-import { buildDamageReport, type DamageData } from './inputs';
-import { resolveGearGroups, resolveTalismanMainBuff } from './preset-gear';
-import { resolvePresetTarget } from './preset-target';
-import {
-  buildInputsFromZ,
-  flattenReport,
-  type CalculatorUrlState,
-  type ObservedLine,
-} from './scenario';
+import { type DamageData } from './inputs';
+import { replayFixture } from './replay';
+import { type ObservedLine } from './scenario';
 
 const data = {
   characters: charactersData,
@@ -47,44 +40,19 @@ describe('fixtures dorées (harnais § 4)', () => {
   for (const f of FIXTURES) {
     const suite = f.skipRef ? describe.skip : describe;
     suite(`${f.name} [${f.gameVersion}]${f.skipRef ? ` — skip ${f.skipRef}` : ''}`, () => {
-      // Rejeu au COLLECT : le même chemin que le panneau Debug, jamais du
-      // code de composant. Toute erreur est capturée pour échouer en `it`.
+      // Rejeu au COLLECT par la logique partagée (replay.ts) : le même chemin
+      // que le panneau Debug et que `pnpm damage:check`, jamais du code de
+      // composant. Toute erreur est capturée pour échouer en `it`. `pending` =
+      // slots § 12.4 (chaîne de hits irrésolue) : une valeur observée capturée
+      // dessus est GARDÉE (test skippé) — le test d'acceptation du jour où on
+      // tranche (même logique que `skipRef`, mais par ligne).
       let lines: ObservedLine[] | null = null;
       let error: unknown = null;
-      // Clés de slot EN ATTENTE : le slot existe mais sa chaîne de hits est
-      // irrésolue (§ 12.4) — une valeur observée capturée dessus est GARDÉE
-      // (test skippé), elle devient le test d'acceptation du jour où § 12.4
-      // est tranché (même logique que `skipRef`, mais par ligne).
       let pending = new Set<string>();
       try {
-        const st = JSON.parse(
-          LZString.decompressFromEncodedURIComponent(f.z) || 'null',
-        ) as CalculatorUrlState | null;
-        if (!st) throw new Error('z indéchiffrable — fixture corrompue ?');
-        const { attacker, target, targetsHit } = buildInputsFromZ(st, {
-          codexLevel: f.codex ?? 0,
-          guildLevel: f.guild ?? 0,
-          premiumHp: f.premium === true,
-          ...(f.quirks ? { quirks: f.quirks } : {}),
-          resolvePreset: resolvePresetTarget,
-          resolveGear: resolveGearGroups,
-          resolveTalismanMain: resolveTalismanMainBuff,
-        });
-        if (!attacker) throw new Error('attaquant non résolu depuis z');
-        if (!target) throw new Error('cible non résolue depuis z (preset disparu des tables ?)');
-        // Un miss observé force sa branche (sans esquive, le miss n'existe
-        // qu'avec un buff de « miss chance » — jamais émis par défaut).
-        const wantMiss = f.observed.some((o) => o.branch === 'miss');
-        const report = buildDamageReport(attacker, target, data, {
-          ...(wantMiss ? { includeMissBranch: true } : {}),
-          ...(targetsHit !== undefined ? { targetsHit } : {}),
-        });
-        lines = flattenReport(report);
-        pending = new Set(
-          report.slots
-            .filter((s) => s.hitsUnresolved === true && s.report.states.length === 0)
-            .map((s) => `${s.slot}${s.burst !== undefined ? `b${s.burst}` : ''}`),
-        );
+        const r = replayFixture(f, data);
+        lines = r.lines;
+        pending = r.pending;
       } catch (e) {
         error = e;
       }

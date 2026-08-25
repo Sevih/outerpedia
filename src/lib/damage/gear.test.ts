@@ -141,8 +141,11 @@ describe('gear — EE « Earnest Love » (H.Dianne), donnée réelle', () => {
   });
 
   it('perso sans EE : rien — état normal, pas un « non résolu »', () => {
+    // Le témoin historique (K, 2000001) a reçu son EE au patch 1.4.15 — la
+    // couverture est désormais COMPLÈTE sur le roster, le cas ne se teste
+    // plus que hors roster (id sans pièce `characterLimit`).
     const info = resolveGearPassives(
-      '2000001',
+      '9999999',
       { ee: { enchant: 10 } },
       equipment,
       buffs,
@@ -386,6 +389,29 @@ describe('débuffs passifs ENEMY_* du kit — POSÉS in-game (mesure EE on/off 2
       buff: { type: 'BT_2000092_ENHANCE', value: 500 },
     });
     expect(kit.unresolved.some((u) => u.buffId === 'trancendent_8_2000092_2')).toBe(false);
+  });
+});
+
+describe('famille damage INCONNUE — signalée, jamais écartée en silence', () => {
+  it('le trans_8 de Demiurge Saeran (BT_DMG_TARGET_DEBUFF_LIMIT, nouveau 1.4.15) part en unresolved', () => {
+    // Le patch 1.4.15 a changé le type de `trancendent_8_2000129_2`
+    // (BT_DMG_TARGET_DEBUFF → BT_DMG_TARGET_DEBUFF_LIMIT, enum 164 du dump).
+    // Sa sémantique n'est pas désassemblée : contribution 0 SIGNALÉE — la
+    // branche « soins/CP/AP » l'écartait en silence, un BT_DMG_* inédit doit
+    // remonter.
+    const saeran = data.characters.characters['2000129'] as unknown as KitCharacter;
+    const kit = resolveKitPassives(
+      saeran,
+      9,
+      data.characters.skills as unknown as Record<string, KitSkill>,
+      data.growth.transcend,
+      buffs,
+      Element.Dark,
+      Element.Earth,
+    );
+    const u = kit.unresolved.find((x) => x.buffId === 'trancendent_8_2000129_2');
+    expect(u?.reason).toContain('BT_DMG_TARGET_DEBUFF_LIMIT');
+    expect(kit.entries.some((x) => x.buffId === 'trancendent_8_2000129_2')).toBe(false);
   });
 });
 

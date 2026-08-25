@@ -659,6 +659,19 @@ function makeCollector(
           reason: 'agrégation jauge non désassemblée (§ 12.3)',
         });
         return;
+      } else if (row.type.startsWith('BT_DMG')) {
+        // Famille DAMAGE hors référentiel — typiquement un BT inédit d'un
+        // patch (1.4.15 : `BT_DMG_TARGET_DEBUFF_LIMIT` 164, trans_8 de
+        // Demiurge Saeran). Sa sémantique n'est pas désassemblée : contribution
+        // 0 SIGNALÉE, jamais devinée — l'écarter en silence comme un soin
+        // cachait l'apparition du type.
+        info.unresolved.push({
+          source,
+          sourceId,
+          buffId,
+          reason: `famille damage inconnue (${row.type}) — non desassemblee, contribution 0`,
+        });
+        return;
       } else return; // soins, CP/AP, boucliers… : sans effet sur le hit calculé
     } else if (target.startsWith('ENEMY')) {
       // BT_STAT posé sur l'ennemi (débuff de stat permanent ou au lancement —

@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.10.906",
+  "resVersion": "1.11.101",
   "buffs": {
     "1": [
       {
@@ -144634,7 +144634,7 @@
     "trancendent_8_2000129_2": [
       {
         "level": 1,
-        "type": "BT_DMG_TARGET_DEBUFF",
+        "type": "BT_DMG_TARGET_DEBUFF_LIMIT",
         "targetType": "ME",
         "createRate": 1000,
         "stackCount": 1,

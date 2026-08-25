@@ -154,6 +154,18 @@ describe('genSteps — la chaîne déclarée', () => {
     expect(genSteps({ apply: false, collect: true }).some((s) => s.id === 'assets')).toBe(true);
   });
 
+  it('`damage` est dans la chaîne, APRÈS promote — le trou du patch 1.4.15', () => {
+    // Le 25/08/2026, `datagen:patch` avait tout rafraîchi (listings ASM
+    // compris) SAUF les tables du moteur damage, restées sur l'ancienne
+    // resVersion : le pipeline damage n'était pas dans la chaîne. Après
+    // promote parce que skill-descs.ts lit les artefacts wiki promus.
+    const ids = dry.map((s) => s.id);
+    expect(ids.indexOf('damage')).toBeGreaterThan(ids.indexOf('promote'));
+    // Pas de champ `py` : build.ts lance et annonce LUI-MÊME extract-anim-events
+    // (doctrine lib/python.ts — sauté si non outillé, fatal si le script casse).
+    expect(dry.find((s) => s.id === 'damage')!.py).toBeUndefined();
+  });
+
   it('chaque étape python déclare le module dont ELLE dépend', () => {
     expect(dry.filter((s) => s.py).map((s) => [s.id, s.py])).toEqual([
       ['face-layout', 'UnityPy'],

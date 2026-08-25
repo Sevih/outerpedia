@@ -7,6 +7,49 @@
 
 ## 2026-08-25
 
+- **Damage calc — `pnpm damage:check` : la VALIDATION RÉELLE en un geste
+  (demande Sevih).** Rejoue TOUTES les fixtures dorées contre les tables
+  courantes et imprime chaque ligne avec son Δ exact — là où
+  `fixtures.test.ts` ne dit que passe/casse sous tolérance. La logique de
+  rejeu est FACTORISÉE (`replay.ts`, consommée par le test ET le check —
+  pas de copie qui divergerait). Lancé automatiquement en fin de
+  `damage:build` (donc de la chaîne patch) : dérive sur une fixture de la
+  version des tables = régression moteur → exit 1, le build casse ; dérive
+  sur une fixture d'une ANCIENNE version = le jeu a pu changer →
+  avertissement, à revérifier en jeu. `ENGINE_GAME_VERSION` bumpée à 1.4.15
+  (elle était restée à 1.4.14) avec un filet contre l'oubli : le check la
+  compare au dump-stamp de la machine de datamine. Premier run réel :
+  **40/40 lignes à 0,000 % sur les tables 1.11.101** — le corpus complet
+  survit au patch, prouvé au point près.
+
+- **Damage calc — le pipeline damage rejoint la chaîne patch, et trois
+  questions ouvertes se ferment.** Le patch 1.4.15 du matin a montré le trou :
+  `datagen:patch` rafraîchissait tout (listings ASM compris — code du tick
+  vérifié INCHANGÉ, instruction pour instruction, sur les 4 fonctions clés)
+  SAUF `data/generated/damage/`, restée sur l'ancienne resVersion parce que
+  `pnpm damage:build` n'était dans aucune chaîne. Intégré (demande Sevih) :
+  `extract-anim-events.py` est lancé PAR `damage:build` (doctrine
+  lib/python.ts — sauté si non outillé, fatal si le script casse), et
+  `damage:build` est une étape de `genSteps` après promote (skill-descs lit
+  les artefacts wiki promus) ; test de chaîne + procédure newPatch.md à jour.
+  Au passage, trois clôtures : (1) les INSTANCES de DoT coexistent (obs
+  Sevih : deux casts du S1 de Beth = deux DoT simultanés qui tickent chacun
+  au même montant — ni refresh ni cumul, § 11 réécrit) ; (2) la DÉTONATION
+  est documentée § 11 (famille `BT_IMMEDIATELY_<TYPE>`, porteurs listés,
+  `_nCount = RemainTurnCont` = les tours restants consommés — hypothèse de
+  formule notée, PAS branchée : décision Sevih, pas une prio) ; (3) la
+  vieille capture stage 7 à +2,27 % est morte : Sevih a recapturé S1 crit et
+  non-crit à 0 % — le coupable était l'affinité déclarée 0 au lieu de 100.
+  Premier run réel de l'intégration dans la foulée : tables damage à
+  1.11.101 (elles étaient restées à 1.10.906), anim-events régénéré
+  (243 persos, 1460 clips), **1837 tests verts sur les données du patch** —
+  et deux trouvailles au diff : le type `BT_DMG_TARGET_DEBUFF_LIMIT` (164,
+  inédit — trans_8 de Demiurge Saeran, § 12.18 : signalé `unresolved`, la
+  branche « soins » l'écartait en silence, gear.ts remonte désormais tout
+  `BT_DMG*` hors référentiel) et la couverture EE désormais COMPLÈTE sur le
+  roster (K a reçu la sienne — le test « perso sans EE » passe sur un id
+  hors roster).
+
 - **Refresh du 25/08 — les deux effets prédits la veille se sont produits
   SEULS, sans une ligne de code.** L'onglet Premium a gagné son encart
   « x10 garantit un 2★ » : les taux confirm du Demiurge ont basculé (1★

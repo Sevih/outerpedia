@@ -12,9 +12,11 @@
  * celle qui bouge quand les tables changent) — c'est elle que le harnais de
  * debug compare aux fixtures (spec damage-debug-harness § 5).
  */
+import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { writeJson } from '../lib/json';
+import { pythonToolingMissing } from '../lib/python';
 import { buildGameVersion } from '../generators/game-version';
 import { buildDamageCharacters } from './characters';
 import { buildDamageGrowth } from './growth';
@@ -36,6 +38,25 @@ async function main(): Promise<void> {
   }
   mkdirSync(OUT, { recursive: true });
   console.log(`damage:build → data/generated/damage/ (resVersion ${version.resVersion})`);
+
+  // AnimationEvents D'ABORD — l'entrée de clips.ts (§ 8.1), régénérée depuis
+  // les bundles pullés AVANT de construire les chaînes de hits (intégrée ici
+  // le 25/08/2026 : le patch 1.4.15 avait régénéré les listings ASM mais
+  // laissé anim-events.json et les tables damage sur l'ancienne version).
+  // Doctrine datagen/lib/python.ts : machine non outillée → étape SAUTÉE, le
+  // JSON committé prend le relais ; un échec du script LUI-MÊME lève toujours.
+  const pyMissing = pythonToolingMissing('UnityPy');
+  if (pyMissing) {
+    console.warn(
+      `⚠ extract-anim-events SAUTÉ — ${pyMissing} ; anim-events.json committé pris tel quel.`,
+    );
+  } else {
+    console.log('▶ extract-anim-events (clips + triggers → datagen/damage/anim-events.json)');
+    execFileSync('python', [resolve('datagen/damage/extract-anim-events.py')], {
+      stdio: 'inherit',
+      env: { ...process.env, PYTHONIOENCODING: 'utf-8' },
+    });
+  }
 
   const charactersData = buildDamageCharacters();
   const { characters, skills } = charactersData;
@@ -74,6 +95,17 @@ async function main(): Promise<void> {
       `${Object.keys(equipment.specialGroups).length} groupes spéciaux), ${equipment.artifacts.length} artefacts, ` +
       `${Object.keys(targetsData.targets).length} cibles (${Object.keys(targetsData.skills).length} skills de monstre), ` +
       `${Object.keys(buffsData.buffs).length} buffs atteignables.`,
+  );
+
+  // VALIDATION RÉELLE (25/08/2026) : rejouer toutes les fixtures dorées sur
+  // les tables qu'on vient d'écrire — une dérive après patch saute aux yeux
+  // ici, pas au prochain vitest. Processus séparé (mêmes flags tsx que la
+  // chaîne refresh) : une régression moteur (exit 1) fait échouer le build.
+  console.log('');
+  execFileSync(
+    process.execPath,
+    [resolve('node_modules/tsx/dist/cli.mjs'), resolve('datagen/damage/check-fixtures.ts')],
+    { stdio: 'inherit' },
   );
 }
 

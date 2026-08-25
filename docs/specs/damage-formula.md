@@ -595,14 +595,33 @@ jump table sur `BUFF_TYPE − 56` route chaque DoT vers SA formule :
   pose (2000092_1_1 + _1_2 `OWNER_ALONE`, toutes deux `isTypeOverlap` ET
   `isIdOverlap`). Une décomposition « popup = tick × poses » a été crue
   quelques heures (2 × 4452 = 8904 collait aussi) avant d'être réfutée par
-  la mesure discriminante sans EE. POURQUOI la 2ᵉ pose ne produit ni 2ᵉ
-  popup ni cumul (fusion/refresh ? condition `OWNER_ALONE` fausse ? tick
-  unique par type ?) n'est PAS tranché (§ 12.8) : le moteur garde UNE ligne
-  de tick par (type, tooltip) et n'empile jamais. Ce que `StackCount`
-  alimente réellement (`_nCount` > 1 — DoT stackables d'autres kits ?) reste
-  à mesurer. Dans `CBuff.OnCreate` (déclenchement IMMEDIATELY § 14.6),
-  `_nCount` = `RemainTurnCont` puis remis à 0 : la DÉTONATION consomme les
-  tours restants.
+  la mesure discriminante sans EE. **Les INSTANCES coexistent** (observé en
+  jeu par Sevih, 25/08/2026) : deux casts successifs du S1 (le boss survit)
+  = deux DoT de 2 tours SIMULTANÉS, chacun tick SÉPARÉMENT au même montant
+  (mêmes règles à la pose, même stat live au tick) — un re-cast n'est ni un
+  refresh ni un cumul dans un même popup. Le moteur affiche le tick d'UNE
+  instance (une ligne par type/tooltip) et c'est le bon contrat : la 2ᵉ
+  ligne `_1_2` d'un même cast ne produit pas de 2ᵉ instance côté joueur
+  (comme le `_1_2` `OWNER_IS_BOSS` de Francesca — variante monstre du kit).
+  Ce que `StackCount` alimente reste non mesuré ; `_nCount` > 1, lui, est le
+  canal de la DÉTONATION : dans `CBuff.OnCreate` (déclenchement IMMEDIATELY
+  § 14.6), `_nCount` = `RemainTurnCont` puis remis à 0 — la détonation
+  consomme les tours restants.
+- **DÉTONATION (`BT_IMMEDIATELY_<TYPE>`) — documentée, PAS branchée**
+  (décision Sevih 25/08/2026 : trop de paramètres pour une priorité non
+  bloquante). Un skill « détonateur » porte un buff `BT_IMMEDIATELY_BLEED /
+_BURN / _POISON / _CURSE / _2000092` (`createType`
+  `SKILL_FINISH_IMMEDIATELY`) : les DoT du type visé sur la cible tickent
+  IMMÉDIATEMENT en consommant leurs tours restants (`_nCount` ci-dessus),
+  modulés par la `value` ‰ du détonateur (hypothèse : tick × tours
+  restants × value — À MESURER avant tout branchement). Porteurs en donnée
+  1.4.14 : Gnosis Beth S3 (`2000092_3_2`, 500/750/1000 ‰ par niveau, gate
+  `CASTER_HAS_BUFF`), Vlada S2 + burst (`2000073_2_*`/`_u_1_1`,
+  BURN 700/500/1000 ‰), Tamamo Eternity S3 (`2000086_3_2`, CURSE),
+  Francesca S3 (`2000015_3_2`, BLEED), et 2000032/200005299/2000109/
+  2000117/2700056. Le cap dédié `ApplyImmediatelyDotDamageCap`
+  (`BT_IMMEDIATELY_2000092_CAP` = 161) ne s'applique qu'à ce chemin
+  (`_ImmediatelyCaster` non nul).
 - Fin commune : `FindBuffByType(3)` sur la cible (immunité → 0) puis
   `AddHP(−dmg)` DIRECT — pas de `ProcessDamage`, pas de cap au tick
   périodique (`ApplyImmediatelyDotDamageCap` n'est appelé que si
@@ -779,14 +798,28 @@ return restant
     montrent UN popup = tick unitaire × enhance, jamais × poses. Non
     tranché : la 2ᵉ pose est-elle écartée (`OWNER_ALONE` faux dans ces
     combats ?), fusionnée (refresh du même type ?), ou les deux buffs
-    coexistent-ils avec un tick unique par type ? Idem pour ce qui alimente
-    `_nCount` > 1 (`StackCount` — aucun cas mesuré). Le moteur garde une
-    ligne de tick par (type, tooltip) sans jamais empiler ; une mesure d'un
-    DoT réellement stackable (StackCount > 1 en donnée) ou d'un combat à
-    plusieurs poseurs du même type trancherait. (L'entrée précédente de ce
+    coexistent-ils avec un tick unique par type ? PARTIELLEMENT tranché le
+    25/08/2026 (obs Sevih en jeu) : les instances d'un même DoT COEXISTENT —
+    deux CASTS successifs du S1 = deux DoT simultanés qui tickent CHACUN au
+    même montant (ni refresh ni cumul de popup, § 11). Reste ouvert : le sort
+    de la 2ᵉ LIGNE (`_1_2`) d'un même cast, et ce qui alimente `_nCount` > 1
+    hors détonation (`StackCount` — aucun cas mesuré ; la détonation, elle,
+    est documentée § 11 : `_nCount` = tours restants). Le moteur garde une
+    ligne de tick par (type, tooltip) — le tick d'UNE instance, le bon
+    contrat vu la coexistence. Plusieurs poseurs du même type = plusieurs
+    popups (confirmé Sevih 25/08). (L'entrée précédente de ce
     numéro — « débuffs passifs ENEMY_TEAM jamais posés » — était FAUSSE :
     artefact d'une ambiguïté numérique levée le jour même par la mesure sans
     EE ; ces débuffs sont posés et lus, cf. § 11.)
+18. **`BT_DMG_TARGET_DEBUFF_LIMIT` (164, NOUVEAU au patch 1.4.15) — sémantique
+    non désassemblée.** Le trans_8 de Demiurge Saeran
+    (`trancendent_8_2000129_2`) a changé de type au patch (était
+    `BT_DMG_TARGET_DEBUFF`). Le nom suggère « dégâts par débuff de la cible,
+    PLAFONNÉ » — jamais deviné : le moteur signale l'entrée `unresolved`
+    (contribution 0, gear.ts : toute famille `BT_DMG*` hors référentiel
+    remonte désormais au lieu d'être écartée en silence comme un soin). À
+    résoudre en désassemblant le nouveau case de `FindBuffDamageUp` § 9.1
+    dans le binaire 1.4.15.
 
 ## 13. À vérifier in-game (phase 2)
 

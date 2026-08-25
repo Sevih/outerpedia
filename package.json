@@ -31,6 +31,7 @@
     "datagen:version-boss": "tsx datagen/version-boss.ts",
     "datagen:video-meta": "tsx datagen/video-meta.ts",
     "damage:build": "tsx datagen/damage/build.ts",
+    "damage:check": "tsx datagen/damage/check-fixtures.ts",
     "seo:audit": "pnpm dlx unlighthouse",
     "getNews": "tsx scripts/get-news.ts",
     "stamp:guides": "tsx scripts/stamp-guides.ts",

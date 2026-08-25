@@ -8,6 +8,13 @@ Prérequis : LDPlayer lancé + Outerplane à jour.
 
 ```bash
 pnpm datagen:patch           # pull → extract → convert → build → résumé du diff (dry)
+                             # + dump/ASM si le CODE a changé, + pipeline DAMAGE
+                             # (anim-events + data/generated/damage — intégré le
+                             # 25/08 : le patch 1.4.15 l'avait laissé derrière),
+                             # qui se termine par `damage:check` : rejeu des
+                             # fixtures dorées, chaque Δ imprimé — une dérive
+                             # après patch = le jeu a changé, à revérifier en jeu
+
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
 pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
 pnpm images                  # assets:collect + assets:push (R2) — AVANT le push git

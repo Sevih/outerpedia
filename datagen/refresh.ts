@@ -9,7 +9,7 @@
  *     ├─ si le CODE du jeu a changé (version installée ≠ empreinte du dump) :
  *     │  dump (→ dump.cs + listings ASM committés)
  *     └─ si tiré : extract → convert → face-layout(py) → sprite-rect(py) →
- *        font-metrics(py) → build → promote[ --apply] → [collect]
+ *        font-metrics(py) → build → promote[ --apply] → damage → [collect]
  *   [getNews]  ← optionnel (fetch web, indépendant du datamine)
  *
  * La chaîne gatée est DÉCLARÉE (`genSteps`), pas écrite en ligne droite : c'est
@@ -203,6 +203,20 @@ export function genSteps(o: { apply: boolean; collect: boolean }): Step[] {
       label: o.apply ? 'promote  (extracted → generated)' : 'promote  (revue du diff — dry-run)',
       file: 'datagen/promote.ts',
       args: o.apply ? ['--apply'] : [],
+    },
+    // Pipeline DAMAGE (tables du moteur du calculateur) — intégré le 25/08/2026 :
+    // le patch 1.4.15 avait tout rafraîchi SAUF `data/generated/damage/` (restée
+    // sur l'ancienne resVersion, personne ne pensait à `pnpm damage:build`).
+    // APRÈS promote : `skill-descs.ts` lit les artefacts wiki de data/generated.
+    // Pas de couche extracted/promote pour lui (doctrine en tête de
+    // damage/build.ts : la revue est le diff git) — en dry-run il écrit donc
+    // directement, et ce diff se revoit avec le reste. Le script lance lui-même
+    // `extract-anim-events.py` (UnityPy) avec sa propre annonce de saut — c'est
+    // pourquoi il n'a pas de champ `py` ici.
+    {
+      id: 'damage',
+      label: 'damage   (anim-events + tables moteur → data/generated/damage)',
+      file: 'datagen/damage/build.ts',
     },
     ...(o.collect
       ? [
