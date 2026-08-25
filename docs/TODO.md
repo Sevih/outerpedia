@@ -50,6 +50,20 @@
 > (**D1–D5**). Bilan, y compris les constats tombés à la vérification, dans
 > [DONE.md](./DONE.md).
 
+- [ ] **Découper les gros composants client des autres outils — RÉSERVÉ SEVIH
+      (décision 25/08 : pas un lot agent).** Le damage calculator a eu ce
+      traitement le 25/08 (`DamageCalculatorBrowser` 4 983 → 2 147 lignes,
+      éclaté en types / stores / briques UI / hooks d'état / sections — cf.
+      DONE 25/08) ; le même motif « un composant client géant qui tient tout »
+      existe encore sur `hero-tracker/HeroTrackerBrowser.tsx` (2 113 l. —
+      désormais le plus gros fichier du repo),
+      `tier-list-maker/TierListMakerBrowser.tsx` (1 939 l.) et
+      `progress-tracker/ProgressTrackerBrowser.tsx` (1 384 l.). Dette FROIDE —
+      aucun des trois n'est en souffrance active. Méthode qui a marché sur le
+      calculateur, si utile : découpe par script de tranches de lignes (zéro
+      retranscription), hook d'état destructuré sous les MÊMES noms (le JSX ne
+      bouge pas), tsc/eslint/tests après chaque étape.
+
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
