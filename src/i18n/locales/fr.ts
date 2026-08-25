@@ -444,7 +444,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.tier-list-maker.show_skin_names': 'Noms de skin',
   'tools.damage-calculator': 'Calculateur de dégâts',
   'tools.damage-calculator.desc':
-    "Calculez les dégâts exacts infligés par vos personnages — fidèle au bit près à la formule du jeu. Choisissez l'attaquant, la cible, l'équipement et les buffs pour voir le résultat.",
+    "Calculez les dégâts infligés par vos personnages, d'après la formule du jeu. Choisissez l'attaquant, la cible, l'équipement et les buffs pour voir le résultat.",
   'tools.damage-calculator.disclaimer':
     "En cours de développement — le calculateur est en développement actif. Les résultats peuvent varier par rapport à la valeur du jeu pendant que nous ajustons les contributeurs et ajoutons la prise en charge de l'équipement et des buffs.",
   'tools.damage-calculator.settings.title': 'Paramètres du compte',
@@ -716,7 +716,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.kits_soon':
     'nécessite les données de buffs des kits — arrive avec le moteur',
   'tools.damage-calculator.report.engine_wip':
-    'Moteur v1 — non simulés : procs d’équipement en combat (représentez leur état via les buffs/débuffs ; les buffs de skill ont leurs propres saisies de stacks).',
+    'Les procs d’équipement déclenchés en combat ne sont pas simulés — utilisez les buffs/débuffs pour refléter leur état (les buffs de skill ont leurs propres saisies de stacks).',
   'tools.damage-calculator.report.branches_note': 'branches énumérées · probabilités exactes',
   'tools.damage-calculator.report.loading': 'chargement des tables de calcul…',
   'tools.damage-calculator.report.tables_error':

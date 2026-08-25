@@ -421,7 +421,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.tier-list-maker.show_skin_names': '스킨 이름',
   'tools.damage-calculator': '데미지 계산기',
   'tools.damage-calculator.desc':
-    '캐릭터가 입히는 정확한 데미지를 계산합니다. 게임 내 공식과 동일합니다. 공격자, 대상, 장비, 버프를 선택하여 결과를 확인하세요.',
+    '게임 내 공식에 따라 캐릭터가 입히는 데미지를 계산합니다. 공격자, 대상, 장비, 버프를 선택하여 결과를 확인하세요.',
   'tools.damage-calculator.disclaimer':
     '개발 중 — 데미지 계산기는 현재 개발 중입니다. 기여 요소를 조정하고 장비/버프 지원을 추가하면서 인게임 수치와 차이가 있을 수 있습니다.',
   'tools.damage-calculator.settings.title': '계정 설정',
@@ -682,7 +682,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.await_pick': '먼저 공격자와 대상을 선택하세요',
   'tools.damage-calculator.buffs.kits_soon': '킷 버프 데이터 필요 — 엔진과 함께 제공',
   'tools.damage-calculator.report.engine_wip':
-    '엔진 v1 — 미시뮬레이션: 전투 중 장비 발동 효과(상태는 버프/디버프로 표현하세요. 스킬 버프는 전용 스택 입력이 있습니다).',
+    '전투 중 발동하는 장비 효과는 시뮬레이션되지 않습니다. 버프/디버프로 해당 상태를 반영하세요(스킬 버프는 전용 스택 입력이 있습니다).',
   'tools.damage-calculator.report.branches_note': '분기 열거 · 정확한 확률',
   'tools.damage-calculator.report.loading': '계산 테이블 불러오는 중…',
   'tools.damage-calculator.report.tables_error':

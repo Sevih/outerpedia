@@ -414,7 +414,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.tier-list-maker.show_skin_names': '皮肤名称',
   'tools.damage-calculator': '伤害计算器',
   'tools.damage-calculator.desc':
-    '精确计算角色造成的伤害——使用游戏内公式。选择攻击者、目标、装备和增益来查看结果。',
+    '根据游戏内公式计算角色造成的伤害。选择攻击者、目标、装备和增益来查看结果。',
   'tools.damage-calculator.disclaimer':
     '开发中 — 伤害计算器正在积极开发中。在我们调试和添加对装备/增益的支持的过程中，结果可能与游戏内数值存在偏差。',
   'tools.damage-calculator.settings.title': '账户设置',
@@ -672,7 +672,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.await_pick': '请先选择攻击者和目标',
   'tools.damage-calculator.buffs.kits_soon': '需要技能组增益数据 — 与引擎一同推出',
   'tools.damage-calculator.report.engine_wip':
-    '引擎v1 — 不做模拟：战斗中的装备触发效果（其状态请用增益/减益表示；技能增益有专门的层数输入）。',
+    '战斗中触发的装备效果不做模拟——请用增益/减益来反映其状态（技能增益有专门的层数输入）。',
   'tools.damage-calculator.report.branches_note': '枚举分支 · 精确概率',
   'tools.damage-calculator.report.loading': '正在加载计算数据…',
   'tools.damage-calculator.report.tables_error': '计算数据加载失败 — 请刷新页面重试',

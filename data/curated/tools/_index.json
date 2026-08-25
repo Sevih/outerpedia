@@ -52,7 +52,7 @@
     "icon": "nav/CM_Damage_Calc",
     "category": "simulators",
     "order": 75,
-    "status": "unlisted",
+    "status": "available",
     "keywords": ["damage", "calculator", "calc", "compute", "skill", "formula", "dps"]
   },
   "pull-simulator": {

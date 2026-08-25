@@ -440,7 +440,7 @@ const en = {
   'tools.tier-list-maker.show_skin_names': 'Skin names',
   'tools.damage-calculator': 'Damage Calculator',
   'tools.damage-calculator.desc':
-    'Compute the exact damage your characters deal — bit-faithful with the in-game formula. Pick attacker, target, gear and buffs to see the result.',
+    'Calculate the damage your characters deal, based on the in-game damage formula. Pick attacker, target, gear and buffs to see the result.',
   'tools.damage-calculator.disclaimer':
     'Work in progress — calculator is under active development. Results may have variance compared to the in-game value as we tune contributors and add gear/buff support.',
   'tools.damage-calculator.settings.title': 'Account Settings',
@@ -707,7 +707,7 @@ const en = {
   'tools.damage-calculator.buffs.await_pick': 'Pick an attacker and a target first',
   'tools.damage-calculator.buffs.kits_soon': 'needs kit buff data — coming with the engine',
   'tools.damage-calculator.report.engine_wip':
-    'Engine v1 — not simulated: in-combat equipment procs (represent their state via buffs/debuffs; skill buffs have their own stack inputs).',
+    'Equipment procs that trigger during combat are not simulated — use the buff/debuff toggles to reflect their state (skill buffs have their own stack inputs).',
   'tools.damage-calculator.report.branches_note': 'enumerated branches · exact probabilities',
   'tools.damage-calculator.report.loading': 'loading damage tables…',
   'tools.damage-calculator.report.tables_error':

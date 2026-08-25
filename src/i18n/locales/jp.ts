@@ -430,7 +430,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.tier-list-maker.show_skin_names': 'スキン名',
   'tools.damage-calculator': 'ダメージ計算機',
   'tools.damage-calculator.desc':
-    'キャラクターが与える正確なダメージを計算します。ゲーム内の計算式に忠実です。攻撃側、対象、装備、バフを選択して結果を確認してください。',
+    'キャラクターが与えるダメージをゲーム内の計算式に基づいて算出します。攻撃側、対象、装備、バフを選択して結果を確認してください。',
   'tools.damage-calculator.disclaimer':
     '開発中 — 計算機は現在開発中です。コントリビューターを調整し、装備/バフ対応を追加していくため、ゲーム内の値とずれが生じる場合があります。',
   'tools.damage-calculator.settings.title': 'アカウント設定',
@@ -692,7 +692,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.buffs.await_pick': '先にアタッカーとターゲットを選択してください',
   'tools.damage-calculator.buffs.kits_soon': 'キットのバフデータが必要 — エンジンと同時に実装',
   'tools.damage-calculator.report.engine_wip':
-    'エンジンv1 — 非シミュレート：戦闘中の装備発動効果（状態はバフ／デバフで再現してください。スキルのバフは専用のスタック入力があります）。',
+    '戦闘中に発動する装備効果はシミュレートされません。バフ／デバフでその状態を反映してください（スキルのバフには専用のスタック入力があります）。',
   'tools.damage-calculator.report.branches_note': '分岐を列挙・正確な確率',
   'tools.damage-calculator.report.loading': '計算テーブルを読み込み中…',
   'tools.damage-calculator.report.tables_error':

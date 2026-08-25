@@ -7,6 +7,17 @@
 
 ## 2026-08-25
 
+- **Damage calc — PUBLIC : `unlisted` → `available` (décision Sevih), textes
+  vitrine adoucis.** L'outil apparaît sur la landing `/tools` et dans le
+  footer — l'item de portage « RESTE 1 sous-outil » du TODO est soldé (la
+  mise en garde V2, qui n'existait que là, migre dans ses notes de
+  référence). Sur retour Sevih (« pompeux voire présomptueux ») : la
+  description ne promet plus « exact au bit près » mais « d'après la formule
+  du jeu », et le bandeau du rapport dit simplement que les procs
+  d'équipement en combat ne sont pas simulés — réécrit dans les 5 langues.
+  Le commentaire du registre des outils disait encore « Phase UI seule » :
+  remis à l'état réel.
+
 - **Damage calc — découpage du composant SOLDÉ (dernier point ouvert de
   l'audit [audit/damage-calculator.md](./audit/damage-calculator.md)) :
   `DamageCalculatorBrowser.tsx` passe de 4 983 à 2 147 lignes, en deux phases

@@ -23,15 +23,6 @@
 > DONE. (Le pré-seed des clés de locale est TERMINÉ et purgé — une clé sans
 > consommateur fait désormais échouer `locales/keys.test.ts`.)
 
-- [ ] **`/tools` — RESTE 1 sous-outil : damage-calculator** — namespaces `tools.*`.
-      UI POSÉE et committée le 26/07 (page `unlisted`, boucle de revue Sevih en
-      cours — cf. DONE). RESTE : le MOTEUR — extracteurs damage
-      (`docs/specs/damage-report-inputs.md` § 6) puis branchement du rapport ;
-      `pnpm images` AVANT merge (icône `CM_Damage_Calc` pas encore sur R2) ;
-      passage `unlisted` → `available` quand le rapport calcule.
-      ⚠ SURTOUT NE PAS se baser sur la V2 pour cet outil (décision Sevih 22/07 :
-      le calculateur V2 est foireux) — exception à la règle « V2 = oracle »,
-      conception V3 native.
 - [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V2 livrée le 12/08 au
       périmètre in-game qu'il a dicté, cf. DONE — page PUBLIÉE le 12/08 sur ordre
       de Sevih). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
@@ -82,6 +73,11 @@
 ---
 
 ## 📌 Notes de référence (à ne pas perdre)
+
+- **Damage calculator : SURTOUT NE PAS se baser sur la V2** (décision Sevih
+  22/07 : le calculateur V2 est foireux) — exception à la règle « V2 =
+  oracle », conception V3 native. Vaut pour toute évolution future du moteur
+  (l'outil est PUBLIC depuis le 25/08, item de portage soldé — cf. DONE).
 
 - **Warnings Turbopack au build (« overly broad patterns » sur guides.ts,
   « unexpected file in NFT list ») : BÉNINS, mesurés le 26/07.** Le scan FS des
