@@ -5,6 +5,45 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-25
+
+- **Refresh du 25/08 — les deux effets prédits la veille se sont produits
+  SEULS, sans une ligne de code.** L'onglet Premium a gagné son encart
+  « x10 garantit un 2★ » : les taux confirm du Demiurge ont basculé (1★
+  77,25 % → 0 %, 2★ 19 % → 96,25 %), donc la dérivation `percent > 0 &&
+confirmPercent === 0` s'allume d'elle-même. Et `customPool` passe de 88 à
+  81 — Maxwell, Pesketh, Leo, Bleu, Guizam, Flamberge, Orox, exactement les
+  sept annoncés, aucun ajout. La Dimensional Supply est intacte (taux, 43
+  lots, mileage 150), les `groupId` de référence n'ont pas bougé donc aucun
+  visuel d'onglet n'a changé d'URL, et les 32 bannières historiques sont
+  toutes là. À savoir en relisant `recruit.json` : les libellés générés
+  disent toujours « Advanced Dimensional Supply » — c'est le texte du client,
+  `TITLE_EN_OVERRIDE` les affiche en « High-Dimensional Supply ».
+
+- **Pull simulator — la garantie à 100 modélisée, et `BANNER_CONFIGS` cesse
+  d'être écrit à la main.** Le compteur avance tirage par tirage : au 100e le
+  focus est FORCÉ, et s'il tombe de lui-même avant, la garantie en cours est
+  quand même consommée (« considered completed once » — le piège de la note).
+  Plafond : 2 en rate up / limited, 1 pour le Demiurge, aucun sur « All
+  Heroes ». CORRECTION DE PRÉMISSE (Sevih) : cette première bannière n'est
+  PAS la Custom Rate Up du jeu, c'est un mode « tout le pool » propre au
+  simulateur (libellé « All Heroes ») — d'où `focus3Rate: 0` et l'absence de
+  sélection, et donc rien à y garantir. L'arbitrage qu'on croyait devoir
+  trancher (modéliser les 3 persos choisis) n'existe pas. Les quatre règles
+  de garantie sont ÉDITORIALES, comme dans le guide : aucune table ne porte
+  le pity.
+  Les huit valeurs de chaque bannière se dérivent désormais de `recruit.json`
+  (`bannerConfigOf`). La dérivation reproduit l'ancienne table À L'IDENTIQUE
+  sauf une : le Demiurge avait `tenPullGuarantee: false`, devenu FAUX à la
+  maintenance de la veille — le simulateur tirait déjà sans la garantie du
+  x10 et rien ne pouvait le signaler, une table à la main n'étant reliée à
+  rien. `gacha.ts` n'importe aucun JSON (le type seul) : le wrapper serveur
+  descend les configs en props, le bundle client reste propre. Deux
+  `useCallback` avaient perdu `config` dans leurs deps — changer de bannière
+  puis tirer pouvait utiliser la config précédente. `gacha.test.ts` créé (il
+  n'existait pas) : 11 cas, dont la garantie forcée au 100e et pas au 90e, le
+  plafond, et la consommation par un focus naturel.
+
 ## 2026-08-24
 
 - **Damage calc — le protocole live rejoué sur un Bleed classique : 2 fixtures

@@ -5,7 +5,11 @@
 > code, puis nettoyé les 18, 19, 20, 21 et **26/07** : à chaque passe, le « fait »
 > migre dans DONE et les sections vidées sont retirées — leur bilan vit là-bas, le
 > garder ici en produirait une copie qui finirait par mentir.
-> État de référence : **26/07**.
+> Le **24/08**, l'item PRIO (Dimensional Supply au guide des bannières) est parti
+> dans DONE avec la refonte in-game qu'il attendait, et sa section — vide — a
+> suivi.
+> État de référence : **26/07** — la migration du 24/08 n'était PAS une passe de
+> relecture, les items ci-dessous n'ont pas été re-vérifiés contre le code depuis.
 > Re-vérifier chaque item contre le code au moment de le traiter (le 26/07, cette
 > relecture a corrigé deux chiffres périmés — cf. l'item SEO ; l'autre, le
 > CHANGELOG, est tranché depuis : gelé, cf. DONE 03/08).
@@ -38,11 +42,6 @@
       (og:image de la page) et les `PI_*` des pièces ne sont que dans le staging
       local — le manifest les demande déjà, aucune curation à faire (sa source
       était fausse jusqu'au 13/08, cf. DONE ; il est produit depuis).
-- [ ] **Arbre de dons / awakening — outil ou guide À PART.** Constaté en
-      cartographiant le hero-tracker : l'awakening n'est PAS par héros, c'est un
-      arbre de COMPTE (`CharacterAwakeningTemplet` : 5 groupes, 207 nœuds,
-      conditions de niveau de compte / donjon) qui consomme Proof of Destiny,
-      Token of Connection et Proof of Worth. Rien n'est extrait aujourd'hui.
 
 ## 🧹 Dette code
 
