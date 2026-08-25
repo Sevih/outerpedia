@@ -416,7 +416,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.desc':
     '根据游戏内公式计算角色造成的伤害。选择攻击者、目标、装备和增益来查看结果。',
   'tools.damage-calculator.disclaimer':
-    '开发中 — 伤害计算器正在积极开发中。在我们调试和添加对装备/增益的支持的过程中，结果可能与游戏内数值存在偏差。',
+    '开发中 — 伤害计算器仍在开发中，结果可能与游戏内数值存在偏差。',
   'tools.damage-calculator.settings.title': '账户设置',
   'tools.damage-calculator.settings.subtitle': '图鉴与天赋增益适用于所有角色',
   'tools.damage-calculator.settings.quirks': '天赋',

@@ -827,9 +827,11 @@ export function DamageCalculatorBrowser({
 
   return (
     <div className="mx-auto w-full max-w-400 space-y-4">
-      {/* Bandeau : le CAVEAT du moteur (ce qui n'est pas encore compté). */}
+      {/* Bandeau : l'outil n'est PAS FINI (disclaimer — demandé affiché par
+        Sevih 25/08/2026), puis le caveat du moteur (procs non simulés). */}
       <div className="border-warn/30 bg-warn/10 text-warn rounded-lg border px-4 py-2.5 text-center text-sm">
-        {L.report.wip}
+        <p>{L.disclaimer}</p>
+        <p className="mt-1 text-xs opacity-80">{L.report.wip}</p>
       </div>
 
       {/* Onglets : le calculateur, et le réglage de COMPTE (quirks) à côté. */}

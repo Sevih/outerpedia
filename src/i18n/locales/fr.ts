@@ -446,7 +446,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.desc':
     "Calculez les dégâts infligés par vos personnages, d'après la formule du jeu. Choisissez l'attaquant, la cible, l'équipement et les buffs pour voir le résultat.",
   'tools.damage-calculator.disclaimer':
-    "En cours de développement — le calculateur est en développement actif. Les résultats peuvent varier par rapport à la valeur du jeu pendant que nous ajustons les contributeurs et ajoutons la prise en charge de l'équipement et des buffs.",
+    'En cours de développement — le calculateur est encore en chantier. Les résultats peuvent différer de la valeur en jeu.',
   'tools.damage-calculator.settings.title': 'Paramètres du compte',
   'tools.damage-calculator.settings.subtitle': 'Codex + Quirks partagés entre tous les personnages',
   'tools.damage-calculator.settings.quirks': 'Quirks',

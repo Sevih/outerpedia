@@ -423,7 +423,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.desc':
     '게임 내 공식에 따라 캐릭터가 입히는 데미지를 계산합니다. 공격자, 대상, 장비, 버프를 선택하여 결과를 확인하세요.',
   'tools.damage-calculator.disclaimer':
-    '개발 중 — 데미지 계산기는 현재 개발 중입니다. 기여 요소를 조정하고 장비/버프 지원을 추가하면서 인게임 수치와 차이가 있을 수 있습니다.',
+    '개발 중 — 계산기는 아직 개발 중입니다. 결과가 인게임 수치와 다를 수 있습니다.',
   'tools.damage-calculator.settings.title': '계정 설정',
   'tools.damage-calculator.settings.subtitle': '도감 + 기프트는 모든 캐릭터에 공통 적용',
   'tools.damage-calculator.settings.quirks': '기프트',

@@ -16,7 +16,12 @@
   du jeu », et le bandeau du rapport dit simplement que les procs
   d'équipement en combat ne sont pas simulés — réécrit dans les 5 langues.
   Le commentaire du registre des outils disait encore « Phase UI seule » :
-  remis à l'état réel.
+  remis à l'état réel. Dans la foulée (demande Sevih : « le truc est pas
+  fini ») : la clé `disclaimer`, jusque-là sans consommateur, est AFFICHÉE —
+  le bandeau d'en-tête dit d'abord « en cours de développement, les résultats
+  peuvent différer du jeu », puis le caveat des procs ; son texte perdait au
+  passage sa fin périmée (« pendant que nous ajoutons l'équipement et les
+  buffs » — c'est fait depuis).
 
 - **Damage calc — découpage du composant SOLDÉ (dernier point ouvert de
   l'audit [audit/damage-calculator.md](./audit/damage-calculator.md)) :

@@ -442,7 +442,7 @@ const en = {
   'tools.damage-calculator.desc':
     'Calculate the damage your characters deal, based on the in-game damage formula. Pick attacker, target, gear and buffs to see the result.',
   'tools.damage-calculator.disclaimer':
-    'Work in progress — calculator is under active development. Results may have variance compared to the in-game value as we tune contributors and add gear/buff support.',
+    'Work in progress — the calculator is still under active development. Results may differ from the in-game value.',
   'tools.damage-calculator.settings.title': 'Account Settings',
   'tools.damage-calculator.settings.subtitle': 'Codex + Quirks shared across every character',
   'tools.damage-calculator.settings.quirks': 'Quirks',

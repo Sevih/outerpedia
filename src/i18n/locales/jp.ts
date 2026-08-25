@@ -432,7 +432,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.desc':
     'キャラクターが与えるダメージをゲーム内の計算式に基づいて算出します。攻撃側、対象、装備、バフを選択して結果を確認してください。',
   'tools.damage-calculator.disclaimer':
-    '開発中 — 計算機は現在開発中です。コントリビューターを調整し、装備/バフ対応を追加していくため、ゲーム内の値とずれが生じる場合があります。',
+    '開発中 — 計算機はまだ開発の途中です。結果はゲーム内の値と異なる場合があります。',
   'tools.damage-calculator.settings.title': 'アカウント設定',
   'tools.damage-calculator.settings.subtitle': 'コーデックス + ギフトは全キャラ共通',
   'tools.damage-calculator.settings.quirks': 'ギフト',

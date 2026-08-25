@@ -923,6 +923,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     search: t('common.search'),
     select: t(k('common.select')),
     noMatches: t(k('common.no_matches')),
+    disclaimer: t(k('disclaimer')),
     clear: t(k('common.clear_slot')),
     panels: {
       attacker: t(k('panel.attacker')),

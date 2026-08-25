@@ -265,6 +265,9 @@ export interface DcLabels {
   search: string;
   select: string;
   noMatches: string;
+  /** Bandeau « outil pas fini » en tête de page (les résultats peuvent
+   *  différer du jeu) — demandé affiché par Sevih le 25/08/2026. */
+  disclaimer: string;
   clear: string;
   panels: { attacker: string; target: string; team: string; result: string };
   title: string;
