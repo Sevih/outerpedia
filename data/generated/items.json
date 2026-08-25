@@ -14871,6 +14871,46 @@
     "subType": "box_type_random",
     "star": 0
   },
+  "30558": {
+    "kind": "item",
+    "name": {
+      "en": "Demiurge Hero Selection Ticket I",
+      "jp": "デミウルゴス仲間選択券 I",
+      "kr": "데미우르고스 동료 선택권 I",
+      "zh": "德米乌尔戈斯伙伴选择券 I"
+    },
+    "desc": {
+      "en": "Select and obtain the Demiurge Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero instead. Once Transcendence is complete for all Heroes, this ticket can be sold for 1,000 Ether.",
+      "jp": "お好みのデミウルゴスの仲間を選択して獲得します。すでに保有している仲間を選択した場合、該当仲間のピースを150個獲得します。すべての仲間の超越が完了している場合、選択券を1,000エーテルで売却できます。",
+      "kr": "원하시는 데미우르고스 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000에테르로 판매하실 수 있습니다.",
+      "zh": "可选择并获得心仪的德米乌尔戈斯伙伴。若选择已持有的伙伴，则可获得该伙伴的碎片150个。若所有伙伴均已完成超越，则可将选择券以1,000以太出售。"
+    },
+    "icon": "TI_CharacterCard_05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_char",
+    "star": 0
+  },
+  "30559": {
+    "kind": "item",
+    "name": {
+      "en": "Demiurge Hero Selection Ticket II",
+      "jp": "デミウルゴス仲間選択券 II",
+      "kr": "데미우르고스 동료 선택권 II",
+      "zh": "德米乌尔戈斯伙伴选择券 II"
+    },
+    "desc": {
+      "en": "Select and obtain the Demiurge Hero of your choice. If you select a Hero you already own, you will obtain 150 Pieces of that Hero instead. Once Transcendence is complete for all Heroes, this ticket can be sold for 1,000 Ether.",
+      "jp": "お好みのデミウルゴスの仲間を選択して獲得します。すでに保有している仲間を選択した場合、該当仲間のピースを150個獲得します。すべての仲間の超越が完了している場合、選択券を1,000エーテルで売却できます。",
+      "kr": "원하시는 데미우르고스 동료를 선택하여 얻습니다. 이미 보유하신 동료를 선택하실 경우, 해당 동료의 조각 150개를 얻습니다. 모든 동료의 초월이 완료되신 경우, 선택권을 1,000에테르로 판매하실 수 있습니다.",
+      "zh": "可选择并获得心仪的德米乌尔戈斯伙伴。若选择已持有的伙伴，则可获得该伙伴的碎片150个。若所有伙伴均已完成超越，则可将选择券以1,000以太出售。"
+    },
+    "icon": "TI_CharacterCard_05",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_char",
+    "star": 0
+  },
   "40001": {
     "kind": "item",
     "name": {
@@ -22228,16 +22268,16 @@
   "SYS_ASSET_EVENT_COIN_2": {
     "kind": "goods",
     "name": {
-      "en": "Cursed Script Piece",
-      "jp": "呪われた脚本の紙切れ",
-      "kr": "저주받은 각본 조각",
-      "zh": "受诅咒的剧本碎片"
+      "en": "Glass Bottle of Materials",
+      "jp": "素材のガラス瓶",
+      "kr": "재료가 담긴 유리병",
+      "zh": "材料瓶"
     },
     "desc": {
-      "en": "A script piece burning with sinister flames. You can exchange it for a variety of items in the Event Shop.",
-      "jp": "うす気味悪く燃え盛る脚本の紙切れ。イベントショップでアイテムと交換できる。",
-      "kr": "음습한 불길이 타오르는 각본의 조각. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "燃烧阴森火焰的剧本碎片。\\n可于活动商店兑换各种商品。"
+      "en": "A glass bottle containing fresh wild fruits used as food ingredients. Can be exchanged for various items in the Event Shop.",
+      "jp": "料理の素材として使われる新鮮な野生の果物が入ったガラス瓶。イベントショップで様々なアイテムと交換できる。",
+      "kr": "음식 재료로 사용되는 신선한 야생 과일을 담은 유리병. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "装有用作食材的新鲜野生水果的玻璃瓶。可在活动商店兑换各种商品。"
     },
     "icon": "TI_Item_Event_Coin_02",
     "grade": "normal",

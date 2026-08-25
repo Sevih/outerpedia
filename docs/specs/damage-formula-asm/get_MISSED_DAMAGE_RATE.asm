@@ -1,57 +1,57 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== get_MISSED_DAMAGE_RATE @ 0x2a00268..0x2a00344 (taille 220 octets) =====
-  0x2a00268: str      x30, [sp, #-0x20]!
-  0x2a0026c: stp      x20, x19, [sp, #0x10]
-  0x2a00270: adrp     x20, #0x59d8000
-  0x2a00274: adrp     x19, #0x558a000
-  0x2a00278: ldrb     w8, [x20, #0x9e1]
-  0x2a0027c: ldr      x19, [x19, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
-  0x2a00280: tbnz     w8, #0, #0x2a002a4
-  0x2a00284: adrp     x0, #0x558a000
-  0x2a00288: ldr      x0, [x0, #0x6d8] ; = 0x0 (u64 @ 0x558a6d8)
-  0x2a0028c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2a00290: adrp     x0, #0x558a000
-  0x2a00294: ldr      x0, [x0, #0x88] ; = 0x0 (u64 @ 0x558a088)
-  0x2a00298: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2a0029c: mov      w8, #1
-  0x2a002a0: strb     w8, [x20, #0x9e1]
-  0x2a002a4: ldr      x0, [x19] ; = 0x0 (u64 @ 0x558a000)
-  0x2a002a8: ldr      w8, [x0, #0xe0]
-  0x2a002ac: cbnz     w8, #0x2a002b8
-  0x2a002b0: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2a002b4: ldr      x0, [x19] ; = 0x0 (u64 @ 0x558a000)
-  0x2a002b8: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x2a002bc: ldr      w8, [x8, #0x14]
-  0x2a002c0: cbnz     w8, #0x2a0031c
-  0x2a002c4: adrp     x8, #0x558a000
-  0x2a002c8: ldr      x8, [x8, #0x88] ; = 0x0 (u64 @ 0x558a088)
-  0x2a002cc: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2a002d0: ldr      w8, [x0, #0xe0]
-  0x2a002d4: cbnz     w8, #0x2a002dc
-  0x2a002d8: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2a002dc: mov      x0, xzr
-  0x2a002e0: bl       #0x261aa78 ; -> CTempletManager$$get_Instance
-  0x2a002e4: cbz      x0, #0x2a00340
-  0x2a002e8: mov      w1, #0xf
-  0x2a002ec: mov      x2, xzr
-  0x2a002f0: bl       #0x262513c ; -> CTempletManager$$GetGameConfig
-  0x2a002f4: cbz      x0, #0x2a00340
-  0x2a002f8: mov      x8, x0
-  0x2a002fc: ldr      x0, [x19] ; = 0x0 (u64 @ 0x558a000)
-  0x2a00300: ldr      w20, [x8, #0x14]
-  0x2a00304: ldr      w9, [x0, #0xe0]
-  0x2a00308: cbnz     w9, #0x2a00314
-  0x2a0030c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2a00310: ldr      x0, [x19] ; = 0x0 (u64 @ 0x558a000)
-  0x2a00314: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x2a00318: str      w20, [x8, #0x14]
-  0x2a0031c: ldr      w8, [x0, #0xe0]
-  0x2a00320: cbnz     w8, #0x2a0032c
-  0x2a00324: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2a00328: ldr      x0, [x19] ; = 0x0 (u64 @ 0x558a000)
-  0x2a0032c: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x2a00330: ldp      x20, x19, [sp, #0x10]
-  0x2a00334: ldr      w0, [x8, #0x14]
-  0x2a00338: ldr      x30, [sp], #0x20
-  0x2a0033c: ret      
-  0x2a00340: bl       #0x21afc18 ; -> ??? 0x21afc18
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== get_MISSED_DAMAGE_RATE @ 0x2a0aa14..0x2a0aaf0 (taille 220 octets) =====
+  0x2a0aa14: str      x30, [sp, #-0x20]!
+  0x2a0aa18: stp      x20, x19, [sp, #0x10]
+  0x2a0aa1c: adrp     x20, #0x59e8000
+  0x2a0aa20: adrp     x19, #0x5599000
+  0x2a0aa24: ldrb     w8, [x20, #0x61a]
+  0x2a0aa28: ldr      x19, [x19, #0x1e8] ; = 0x0 (u64 @ 0x55991e8)
+  0x2a0aa2c: tbnz     w8, #0, #0x2a0aa50
+  0x2a0aa30: adrp     x0, #0x5599000
+  0x2a0aa34: ldr      x0, [x0, #0x1e8] ; = 0x0 (u64 @ 0x55991e8)
+  0x2a0aa38: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2a0aa3c: adrp     x0, #0x5598000
+  0x2a0aa40: ldr      x0, [x0, #0xb98] ; = 0x0 (u64 @ 0x5598b98)
+  0x2a0aa44: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2a0aa48: mov      w8, #1
+  0x2a0aa4c: strb     w8, [x20, #0x61a]
+  0x2a0aa50: ldr      x0, [x19] ; = 0x0 (u64 @ 0x5599000)
+  0x2a0aa54: ldr      w8, [x0, #0xe0]
+  0x2a0aa58: cbnz     w8, #0x2a0aa64
+  0x2a0aa5c: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2a0aa60: ldr      x0, [x19] ; = 0x0 (u64 @ 0x5599000)
+  0x2a0aa64: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x2a0aa68: ldr      w8, [x8, #0x14]
+  0x2a0aa6c: cbnz     w8, #0x2a0aac8
+  0x2a0aa70: adrp     x8, #0x5598000
+  0x2a0aa74: ldr      x8, [x8, #0xb98] ; = 0x0 (u64 @ 0x5598b98)
+  0x2a0aa78: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x2a0aa7c: ldr      w8, [x0, #0xe0]
+  0x2a0aa80: cbnz     w8, #0x2a0aa88
+  0x2a0aa84: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2a0aa88: mov      x0, xzr
+  0x2a0aa8c: bl       #0x262162c ; -> CTempletManager$$get_Instance
+  0x2a0aa90: cbz      x0, #0x2a0aaec
+  0x2a0aa94: mov      w1, #0xf
+  0x2a0aa98: mov      x2, xzr
+  0x2a0aa9c: bl       #0x262bcf0 ; -> CTempletManager$$GetGameConfig
+  0x2a0aaa0: cbz      x0, #0x2a0aaec
+  0x2a0aaa4: mov      x8, x0
+  0x2a0aaa8: ldr      x0, [x19] ; = 0x0 (u64 @ 0x5599000)
+  0x2a0aaac: ldr      w20, [x8, #0x14]
+  0x2a0aab0: ldr      w9, [x0, #0xe0]
+  0x2a0aab4: cbnz     w9, #0x2a0aac0
+  0x2a0aab8: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2a0aabc: ldr      x0, [x19] ; = 0x0 (u64 @ 0x5599000)
+  0x2a0aac0: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x2a0aac4: str      w20, [x8, #0x14]
+  0x2a0aac8: ldr      w8, [x0, #0xe0]
+  0x2a0aacc: cbnz     w8, #0x2a0aad8
+  0x2a0aad0: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2a0aad4: ldr      x0, [x19] ; = 0x0 (u64 @ 0x5599000)
+  0x2a0aad8: ldr      x8, [x0, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x2a0aadc: ldp      x20, x19, [sp, #0x10]
+  0x2a0aae0: ldr      w0, [x8, #0x14]
+  0x2a0aae4: ldr      x30, [sp], #0x20
+  0x2a0aae8: ret      
+  0x2a0aaec: bl       #0x21b4d20 ; -> ??? 0x21b4d20

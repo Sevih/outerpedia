@@ -1,1163 +1,1328 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== FindBuffAdditionalDamage @ 0x28268c0..0x2827ae4 (taille 4644 octets) =====
-  0x28268c0: sub      sp, sp, #0x100
-  0x28268c4: stp      d13, d12, [sp, #0x70]
-  0x28268c8: stp      d11, d10, [sp, #0x80]
-  0x28268cc: stp      d9, d8, [sp, #0x90]
-  0x28268d0: stp      x29, x30, [sp, #0xa0]
-  0x28268d4: stp      x28, x27, [sp, #0xb0]
-  0x28268d8: stp      x26, x25, [sp, #0xc0]
-  0x28268dc: stp      x24, x23, [sp, #0xd0]
-  0x28268e0: stp      x22, x21, [sp, #0xe0]
-  0x28268e4: stp      x20, x19, [sp, #0xf0]
-  0x28268e8: adrp     x20, #0x59d7000
-  0x28268ec: ldrb     w8, [x20, #0xabf]
-  0x28268f0: mov      x21, x2
-  0x28268f4: mov      x19, x1
-  0x28268f8: mov      x22, x0
-  0x28268fc: tbnz     w8, #0, #0x2826998
-  0x2826900: adrp     x0, #0x558a000
-  0x2826904: ldr      x0, [x0, #0x250] ; = 0x0 (u64 @ 0x558a250)
-  0x2826908: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x282690c: adrp     x0, #0x558a000
-  0x2826910: ldr      x0, [x0, #0x7a0] ; = 0x0 (u64 @ 0x558a7a0)
-  0x2826914: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826918: adrp     x0, #0x558a000
-  0x282691c: ldr      x0, [x0, #0x260] ; = 0x0 (u64 @ 0x558a260)
-  0x2826920: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826924: adrp     x0, #0x558a000
-  0x2826928: ldr      x0, [x0, #0x268] ; = 0x0 (u64 @ 0x558a268)
-  0x282692c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826930: adrp     x0, #0x558a000
-  0x2826934: ldr      x0, [x0, #0x270] ; = 0x0 (u64 @ 0x558a270)
-  0x2826938: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x282693c: adrp     x0, #0x558a000
-  0x2826940: ldr      x0, [x0, #0x278] ; = 0x0 (u64 @ 0x558a278)
-  0x2826944: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826948: adrp     x0, #0x558a000
-  0x282694c: ldr      x0, [x0, #0x280] ; = 0x0 (u64 @ 0x558a280)
-  0x2826950: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826954: adrp     x0, #0x558a000
-  0x2826958: ldr      x0, [x0, #0x288] ; = 0x0 (u64 @ 0x558a288)
-  0x282695c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826960: adrp     x0, #0x558a000
-  0x2826964: ldr      x0, [x0, #0x290] ; = 0x0 (u64 @ 0x558a290)
-  0x2826968: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x282696c: adrp     x0, #0x558a000
-  0x2826970: ldr      x0, [x0, #0x298] ; = 0x0 (u64 @ 0x558a298)
-  0x2826974: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826978: adrp     x0, #0x558a000
-  0x282697c: ldr      x0, [x0, #0xd88] ; = 0x0 (u64 @ 0x558ad88)
-  0x2826980: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826984: adrp     x0, #0x5587000
-  0x2826988: ldr      x0, [x0, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x282698c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826990: mov      w8, #1
-  0x2826994: strb     w8, [x20, #0xabf]
-  0x2826998: stp      xzr, xzr, [sp, #0x50]
-  0x282699c: str      xzr, [sp, #0x60]
-  0x28269a0: stp      xzr, xzr, [sp, #0x30]
-  0x28269a4: str      xzr, [sp, #0x40]
-  0x28269a8: str      wzr, [x19]
-  0x28269ac: ldr      x0, [x22, #0x380]
-  0x28269b0: cbz      x0, #0x2827794
-  0x28269b4: adrp     x8, #0x558a000
-  0x28269b8: ldr      x8, [x8, #0x298] ; = 0x0 (u64 @ 0x558a298)
-  0x28269bc: adrp     x29, #0x558a000
-  0x28269c0: ldr      x29, [x29, #0x270] ; = 0x0 (u64 @ 0x558a270)
-  0x28269c4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28269c8: add      x8, sp, #0x18
-  0x28269cc: bl       #0x44bb5c0 ; -> System.Collections.Generic.List<object>$$GetEnumerator
-  0x28269d0: adrp     x23, #0x5588000
-  0x28269d4: ldur     q0, [sp, #0x18]
-  0x28269d8: ldr      x8, [sp, #0x28]
-  0x28269dc: ldr      x23, [x23, #0x530] ; = 0x0 (u64 @ 0x5588530)
-  0x28269e0: mov      w28, #0x447a0000
-  0x28269e4: adrp     x20, #0x59d5000
-  0x28269e8: fmov     d9, #-0.50000000
-  0x28269ec: fmov     d10, #-1.00000000
-  0x28269f0: mov      x27, #0x7ff0000000000000
-  0x28269f4: fmov     d11, #0.50000000
-  0x28269f8: fmov     d12, #1.00000000
-  0x28269fc: str      q0, [sp, #0x50]
-  0x2826a00: str      x8, [sp, #0x60]
-  0x2826a04: ldr      x1, [x29] ; = 0x0 (u64 @ 0x558a000)
-  0x2826a08: add      x0, sp, #0x50
-  0x2826a0c: bl       #0x4112894 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
-  0x2826a10: tbz      w0, #0, #0x28276b4
-  0x2826a14: ldr      x24, [sp, #0x60]
-  0x2826a18: cbz      x24, #0x2827788
-  0x2826a1c: mov      x0, x24
-  0x2826a20: mov      x1, xzr
-  0x2826a24: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826a28: cmp      w0, #0x5a
-  0x2826a2c: b.ne     #0x2826a5c
-  0x2826a30: mov      w2, #0x17
-  0x2826a34: mov      x0, x24
-  0x2826a38: mov      x1, x21
-  0x2826a3c: mov      x3, xzr
-  0x2826a40: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826a44: tbz      w0, #0, #0x2826a5c
-  0x2826a48: ldr      w25, [x19]
-  0x2826a4c: mov      x0, x24
-  0x2826a50: mov      x1, xzr
-  0x2826a54: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826a58: b        #0x2826af4
-  0x2826a5c: mov      x0, x24
-  0x2826a60: mov      x1, xzr
-  0x2826a64: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826a68: cmp      w0, #0x5b
-  0x2826a6c: b.ne     #0x2826aa8
-  0x2826a70: mov      w2, #0x17
-  0x2826a74: mov      x0, x24
-  0x2826a78: mov      x1, xzr
-  0x2826a7c: mov      x3, xzr
-  0x2826a80: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826a84: tbz      w0, #0, #0x2826aa8
-  0x2826a88: ldr      w25, [x19]
-  0x2826a8c: mov      x0, x24
-  0x2826a90: mov      x1, xzr
-  0x2826a94: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826a98: mov      w1, w0
-  0x2826a9c: mov      x0, x22
-  0x2826aa0: bl       #0x280f19c ; -> CCharacterBattle$$GetLostHPRateValue
-  0x2826aa4: b        #0x2826af4
-  0x2826aa8: mov      x0, x24
-  0x2826aac: mov      x1, xzr
-  0x2826ab0: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826ab4: cmp      w0, #0x5c
-  0x2826ab8: b.ne     #0x2826afc
-  0x2826abc: mov      w2, #0x17
-  0x2826ac0: mov      x0, x24
-  0x2826ac4: mov      x1, xzr
-  0x2826ac8: mov      x3, xzr
-  0x2826acc: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826ad0: tbz      w0, #0, #0x2826afc
-  0x2826ad4: ldr      w25, [x19]
-  0x2826ad8: mov      x0, x24
-  0x2826adc: mov      x1, xzr
-  0x2826ae0: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826ae4: mov      w1, w0
-  0x2826ae8: cbz      x21, #0x282778c
-  0x2826aec: mov      x0, x21
-  0x2826af0: bl       #0x280f19c ; -> CCharacterBattle$$GetLostHPRateValue
-  0x2826af4: add      w8, w0, w25
-  0x2826af8: b        #0x2826fcc
-  0x2826afc: mov      x0, x24
-  0x2826b00: mov      x1, xzr
-  0x2826b04: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826b08: cmp      w0, #0x5d
-  0x2826b0c: b.ne     #0x2826b94
-  0x2826b10: mov      w2, #0x17
-  0x2826b14: mov      x0, x24
-  0x2826b18: mov      x1, xzr
-  0x2826b1c: mov      x3, xzr
-  0x2826b20: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826b24: tbz      w0, #0, #0x2826b94
-  0x2826b28: ldr      x25, [x22, #0x28]
-  0x2826b2c: mov      x0, x24
-  0x2826b30: mov      x1, xzr
-  0x2826b34: bl       #0x2320318 ; -> CBuff$$get_StatType
-  0x2826b38: mov      w26, w0
-  0x2826b3c: mov      x0, x24
-  0x2826b40: mov      x1, xzr
-  0x2826b44: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826b48: cbz      x25, #0x2827790
-  0x2826b4c: mov      w2, w0
-  0x2826b50: mov      x0, x25
-  0x2826b54: mov      w1, w26
-  0x2826b58: mov      x3, xzr
-  0x2826b5c: bl       #0x29033c8 ; -> CCharacterData$$GetStatValuePermille
-  0x2826b60: ldrb     w8, [x20, #0x3fe]
-  0x2826b64: ldr      w25, [x19]
-  0x2826b68: mov      w24, w0
-  0x2826b6c: cbnz     w8, #0x2826b80
-  0x2826b70: mov      x0, x23
-  0x2826b74: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826b78: mov      w8, #1
-  0x2826b7c: strb     w8, [x20, #0x3fe]
-  0x2826b80: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5588000)
-  0x2826b84: ldr      w8, [x0, #0xe0]
-  0x2826b88: cbnz     w8, #0x2826cfc
-  0x2826b8c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2826b90: b        #0x2826cfc
-  0x2826b94: mov      x0, x24
-  0x2826b98: mov      x1, xzr
-  0x2826b9c: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826ba0: cmp      w0, #0x5e
-  0x2826ba4: b.ne     #0x2826c30
-  0x2826ba8: mov      w2, #0x17
-  0x2826bac: mov      x0, x24
-  0x2826bb0: mov      x1, xzr
-  0x2826bb4: mov      x3, xzr
-  0x2826bb8: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826bbc: tbz      w0, #0, #0x2826c30
-  0x2826bc0: cbz      x21, #0x2827798
-  0x2826bc4: ldr      x25, [x21, #0x28]
-  0x2826bc8: mov      x0, x24
-  0x2826bcc: mov      x1, xzr
-  0x2826bd0: bl       #0x2320318 ; -> CBuff$$get_StatType
-  0x2826bd4: mov      w26, w0
-  0x2826bd8: mov      x0, x24
-  0x2826bdc: mov      x1, xzr
-  0x2826be0: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826be4: cbz      x25, #0x282779c
-  0x2826be8: mov      w2, w0
-  0x2826bec: mov      x0, x25
-  0x2826bf0: mov      w1, w26
-  0x2826bf4: mov      x3, xzr
-  0x2826bf8: bl       #0x29033c8 ; -> CCharacterData$$GetStatValuePermille
-  0x2826bfc: ldrb     w8, [x20, #0x3fe]
-  0x2826c00: ldr      w25, [x19]
-  0x2826c04: mov      w24, w0
-  0x2826c08: cbnz     w8, #0x2826c1c
-  0x2826c0c: mov      x0, x23
-  0x2826c10: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826c14: mov      w8, #1
-  0x2826c18: strb     w8, [x20, #0x3fe]
-  0x2826c1c: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5588000)
-  0x2826c20: ldr      w8, [x0, #0xe0]
-  0x2826c24: cbnz     w8, #0x2826cfc
-  0x2826c28: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2826c2c: b        #0x2826cfc
-  0x2826c30: mov      x0, x24
-  0x2826c34: mov      x1, xzr
-  0x2826c38: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826c3c: cmp      w0, #0x6b
-  0x2826c40: b.ne     #0x2826d38
-  0x2826c44: mov      w2, #0x17
-  0x2826c48: mov      x0, x24
-  0x2826c4c: mov      x1, xzr
-  0x2826c50: mov      x3, xzr
-  0x2826c54: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826c58: tbz      w0, #0, #0x2826d38
-  0x2826c5c: adrp     x8, #0x5587000
-  0x2826c60: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2826c64: ldr      x25, [x24, #0x18]
-  0x2826c68: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x2826c6c: ldr      w8, [x0, #0xe0]
-  0x2826c70: cbnz     w8, #0x2826c78
-  0x2826c74: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2826c78: mov      x0, x25
-  0x2826c7c: mov      x1, xzr
-  0x2826c80: mov      x2, xzr
-  0x2826c84: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2826c88: tbz      w0, #0, #0x2826a04
-  0x2826c8c: ldr      x8, [x24, #0x18]
-  0x2826c90: cbz      x8, #0x28277a4
-  0x2826c94: ldr      x25, [x8, #0x28] ; = 0x0 (u64 @ 0x5587028)
-  0x2826c98: cbz      x25, #0x2826a04
-  0x2826c9c: mov      x0, x24
-  0x2826ca0: mov      x1, xzr
-  0x2826ca4: bl       #0x2320318 ; -> CBuff$$get_StatType
-  0x2826ca8: mov      w26, w0
-  0x2826cac: mov      x0, x24
-  0x2826cb0: mov      x1, xzr
-  0x2826cb4: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826cb8: mov      w2, w0
-  0x2826cbc: mov      x0, x25
-  0x2826cc0: mov      w1, w26
-  0x2826cc4: mov      x3, xzr
-  0x2826cc8: bl       #0x29033c8 ; -> CCharacterData$$GetStatValuePermille
-  0x2826ccc: ldrb     w8, [x20, #0x3fe]
-  0x2826cd0: ldr      w25, [x19]
-  0x2826cd4: mov      w24, w0
-  0x2826cd8: cbnz     w8, #0x2826cec
-  0x2826cdc: mov      x0, x23
-  0x2826ce0: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2826ce4: mov      w8, #1
-  0x2826ce8: strb     w8, [x20, #0x3fe]
-  0x2826cec: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5588000)
-  0x2826cf0: ldr      w8, [x0, #0xe0]
-  0x2826cf4: cbnz     w8, #0x2826cfc
-  0x2826cf8: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2826cfc: scvtf    s0, w24
-  0x2826d00: fmov     s1, w28
-  0x2826d04: fminnm   s13, s0, s1
-  0x2826d08: fcvt     d8, s13
-  0x2826d0c: add      x0, sp, #0x18
-  0x2826d10: mov      v0.16b, v8.16b
-  0x2826d14: bl       #0x525f560 ; -> ??? 0x525f560
-  0x2826d18: fcmp     s13, #0.0
-  0x2826d1c: b.ge     #0x2826ddc
-  0x2826d20: fcmp     d0, d9
-  0x2826d24: b.ne     #0x2826fa0
-  0x2826d28: ldr      d0, [sp, #0x18]
-  0x2826d2c: fcvtzs   x8, d0
-  0x2826d30: fadd     d1, d0, d10
-  0x2826d34: b        #0x2826df0
-  0x2826d38: mov      x0, x24
-  0x2826d3c: mov      x1, xzr
-  0x2826d40: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826d44: cmp      w0, #0x5f
-  0x2826d48: b.ne     #0x2826d88
-  0x2826d4c: mov      w2, #0x17
-  0x2826d50: mov      x0, x24
-  0x2826d54: mov      x1, xzr
-  0x2826d58: mov      x3, xzr
-  0x2826d5c: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826d60: tbz      w0, #0, #0x2826d88
-  0x2826d64: ldr      w26, [x19]
-  0x2826d68: mov      x0, x22
-  0x2826d6c: mov      w1, wzr
-  0x2826d70: bl       #0x282516c ; -> CCharacterBattle$$GetBuffCount
-  0x2826d74: mov      w25, w0
-  0x2826d78: mov      x0, x24
-  0x2826d7c: mov      x1, xzr
-  0x2826d80: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826d84: b        #0x2826e9c
-  0x2826d88: mov      x0, x24
-  0x2826d8c: mov      x1, xzr
-  0x2826d90: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826d94: cmp      w0, #0x60
-  0x2826d98: b.ne     #0x2826dfc
-  0x2826d9c: mov      w2, #0x17
-  0x2826da0: mov      x0, x24
-  0x2826da4: mov      x1, xzr
-  0x2826da8: mov      x3, xzr
-  0x2826dac: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826db0: tbz      w0, #0, #0x2826dfc
-  0x2826db4: ldr      x0, [x22, #0x348]
-  0x2826db8: cbz      x0, #0x28277a0
-  0x2826dbc: ldr      w26, [x19]
-  0x2826dc0: mov      w1, wzr
-  0x2826dc4: bl       #0x282516c ; -> CCharacterBattle$$GetBuffCount
-  0x2826dc8: mov      w25, w0
-  0x2826dcc: mov      x0, x24
-  0x2826dd0: mov      x1, xzr
-  0x2826dd4: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826dd8: b        #0x2826e9c
-  0x2826ddc: fcmp     d0, d11
-  0x2826de0: b.ne     #0x2826fac
-  0x2826de4: ldr      d0, [sp, #0x18]
-  0x2826de8: fcvtzs   x8, d0
-  0x2826dec: fadd     d1, d0, d12
-  0x2826df0: tst      x8, #1
-  0x2826df4: fcsel    d0, d0, d1, eq
-  0x2826df8: b        #0x2826fb4
-  0x2826dfc: mov      x0, x24
-  0x2826e00: mov      x1, xzr
-  0x2826e04: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826e08: cmp      w0, #0x61
-  0x2826e0c: b.ne     #0x2826e4c
-  0x2826e10: mov      w2, #0x17
-  0x2826e14: mov      x0, x24
-  0x2826e18: mov      x1, xzr
-  0x2826e1c: mov      x3, xzr
-  0x2826e20: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826e24: tbz      w0, #0, #0x2826e4c
-  0x2826e28: ldr      w26, [x19]
-  0x2826e2c: mov      w1, #1
-  0x2826e30: mov      x0, x22
-  0x2826e34: bl       #0x282516c ; -> CCharacterBattle$$GetBuffCount
-  0x2826e38: mov      w25, w0
-  0x2826e3c: mov      x0, x24
-  0x2826e40: mov      x1, xzr
-  0x2826e44: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826e48: b        #0x2826e9c
-  0x2826e4c: mov      x0, x24
-  0x2826e50: mov      x1, xzr
-  0x2826e54: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826e58: cmp      w0, #0x62
-  0x2826e5c: b.ne     #0x2826ea4
-  0x2826e60: mov      w2, #0x17
-  0x2826e64: mov      x0, x24
-  0x2826e68: mov      x1, xzr
-  0x2826e6c: mov      x3, xzr
-  0x2826e70: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826e74: tbz      w0, #0, #0x2826ea4
-  0x2826e78: ldr      x0, [x22, #0x348]
-  0x2826e7c: cbz      x0, #0x28277a8
-  0x2826e80: ldr      w26, [x19]
-  0x2826e84: mov      w1, #1
-  0x2826e88: bl       #0x282516c ; -> CCharacterBattle$$GetBuffCount
-  0x2826e8c: mov      w25, w0
-  0x2826e90: mov      x0, x24
-  0x2826e94: mov      x1, xzr
-  0x2826e98: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826e9c: madd     w8, w0, w25, w26
-  0x2826ea0: b        #0x2826fcc
-  0x2826ea4: mov      x0, x24
-  0x2826ea8: mov      x1, xzr
-  0x2826eac: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826eb0: cmp      w0, #0x66
-  0x2826eb4: b.ne     #0x2826f00
-  0x2826eb8: mov      w2, #0x17
-  0x2826ebc: mov      x0, x24
-  0x2826ec0: mov      x1, xzr
-  0x2826ec4: mov      x3, xzr
-  0x2826ec8: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826ecc: tbz      w0, #0, #0x2826f00
-  0x2826ed0: ldr      x8, [x22, #0x348]
-  0x2826ed4: cbz      x8, #0x28277b0
-  0x2826ed8: ldr      x0, [x8, #0x378] ; = 0x0 (u64 @ 0x5587378)
-  0x2826edc: cbz      x0, #0x28277ac
-  0x2826ee0: mov      x1, xzr
-  0x2826ee4: bl       #0x2509788 ; -> CRageManager$$get_IsBreak
-  0x2826ee8: tbz      w0, #0, #0x2826f00
-  0x2826eec: ldr      w25, [x19]
-  0x2826ef0: mov      x0, x24
-  0x2826ef4: mov      x1, xzr
-  0x2826ef8: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826efc: b        #0x2826af4
-  0x2826f00: mov      x0, x24
-  0x2826f04: mov      x1, xzr
-  0x2826f08: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826f0c: cmp      w0, #0x67
-  0x2826f10: b.ne     #0x2826f60
-  0x2826f14: mov      w2, #0x17
-  0x2826f18: mov      x0, x24
-  0x2826f1c: mov      x1, xzr
-  0x2826f20: mov      x3, xzr
-  0x2826f24: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826f28: tbz      w0, #0, #0x2826f60
-  0x2826f2c: ldr      x8, [x22, #0x348]
-  0x2826f30: cbz      x8, #0x28277b4
-  0x2826f34: ldr      x0, [x8, #0x28] ; = 0x0 (u64 @ 0x5587028)
-  0x2826f38: cbz      x0, #0x2826f60
-  0x2826f3c: mov      x1, xzr
-  0x2826f40: bl       #0x29010f8 ; -> CCharacterData$$get_Type
-  0x2826f44: cmp      w0, #3
-  0x2826f48: b.le     #0x2826f60
-  0x2826f4c: ldr      w25, [x19]
-  0x2826f50: mov      x0, x24
-  0x2826f54: mov      x1, xzr
-  0x2826f58: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826f5c: b        #0x2826af4
-  0x2826f60: mov      x0, x24
-  0x2826f64: mov      x1, xzr
-  0x2826f68: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826f6c: cmp      w0, #0x68
-  0x2826f70: b.ne     #0x2826fd4
-  0x2826f74: mov      w2, #0x17
-  0x2826f78: mov      x0, x24
-  0x2826f7c: mov      x1, x21
-  0x2826f80: mov      x3, xzr
-  0x2826f84: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826f88: tbz      w0, #0, #0x2826fd4
-  0x2826f8c: ldr      w25, [x19]
-  0x2826f90: mov      x0, x24
-  0x2826f94: mov      x1, xzr
-  0x2826f98: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2826f9c: b        #0x2826af4
-  0x2826fa0: fadd     d0, d8, d9
-  0x2826fa4: frintp   d0, d0
-  0x2826fa8: b        #0x2826fb4
-  0x2826fac: fadd     d0, d8, d11
-  0x2826fb0: frintm   d0, d0
-  0x2826fb4: fmov     d1, x27
-  0x2826fb8: fcvtzs   w8, d0
-  0x2826fbc: fcmp     d0, d1
-  0x2826fc0: mov      w9, #-0xffffffff80000000
-  0x2826fc4: csel     w8, w9, w8, eq
-  0x2826fc8: add      w8, w8, w25
-  0x2826fcc: str      w8, [x19]
-  0x2826fd0: b        #0x2826a04
-  0x2826fd4: mov      x0, x24
-  0x2826fd8: mov      x1, xzr
-  0x2826fdc: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2826fe0: cmp      w0, #0x69
-  0x2826fe4: b.ne     #0x2827048
-  0x2826fe8: mov      w2, #0x17
-  0x2826fec: mov      x0, x24
-  0x2826ff0: mov      x1, xzr
-  0x2826ff4: mov      x3, xzr
-  0x2826ff8: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2826ffc: tbz      w0, #0, #0x2827048
-  0x2827000: cbz      x21, #0x28277bc
-  0x2827004: mov      x0, x21
-  0x2827008: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x282700c: cbz      x0, #0x28277b8
-  0x2827010: ldr      w8, [x0, #0x3c]
-  0x2827014: cmp      w8, #1
-  0x2827018: b.eq     #0x2827034
-  0x282701c: mov      x0, x21
-  0x2827020: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2827024: cbz      x0, #0x28277c4
-  0x2827028: ldr      w8, [x0, #0x3c]
-  0x282702c: cmp      w8, #3
-  0x2827030: b.ne     #0x2827048
-  0x2827034: ldr      w25, [x19]
-  0x2827038: mov      x0, x24
-  0x282703c: mov      x1, xzr
-  0x2827040: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2827044: b        #0x2826af4
-  0x2827048: mov      x0, x24
-  0x282704c: mov      x1, xzr
-  0x2827050: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2827054: cmp      w0, #0x6a
-  0x2827058: b.ne     #0x28270d0
-  0x282705c: mov      w2, #0x17
-  0x2827060: mov      x0, x24
-  0x2827064: mov      x1, xzr
-  0x2827068: mov      x3, xzr
-  0x282706c: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2827070: tbz      w0, #0, #0x28270d0
-  0x2827074: adrp     x8, #0x59d4000
-  0x2827078: ldrb     w8, [x8, #0xfc3]
-  0x282707c: cbnz     w8, #0x2827098
-  0x2827080: adrp     x0, #0x558a000
-  0x2827084: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2827088: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x282708c: adrp     x8, #0x59d4000
-  0x2827090: mov      w9, #1
-  0x2827094: strb     w9, [x8, #0xfc3]
-  0x2827098: adrp     x8, #0x558a000
-  0x282709c: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28270a0: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28270a4: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x28270a8: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28270ac: cbz      x0, #0x28277c0
-  0x28270b0: mov      x1, xzr
-  0x28270b4: bl       #0x2595824 ; -> CDungeonScene$$get_IsPvp
-  0x28270b8: tbz      w0, #0, #0x28270d0
-  0x28270bc: ldr      w25, [x19]
-  0x28270c0: mov      x0, x24
-  0x28270c4: mov      x1, xzr
-  0x28270c8: bl       #0x232036c ; -> CBuff$$get_Value
-  0x28270cc: b        #0x2826af4
-  0x28270d0: mov      x0, x24
-  0x28270d4: mov      x1, xzr
-  0x28270d8: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x28270dc: cmp      w0, #0x6c
-  0x28270e0: b.ne     #0x2827160
-  0x28270e4: mov      w2, #0x17
-  0x28270e8: mov      x0, x24
-  0x28270ec: mov      x1, xzr
-  0x28270f0: mov      x3, xzr
-  0x28270f4: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x28270f8: tbz      w0, #0, #0x2827160
-  0x28270fc: adrp     x8, #0x5587000
-  0x2827100: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2827104: ldr      x25, [x24, #0x18]
-  0x2827108: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x282710c: ldr      w8, [x0, #0xe0]
-  0x2827110: cbnz     w8, #0x2827118
-  0x2827114: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2827118: mov      x0, x25
-  0x282711c: mov      x1, xzr
-  0x2827120: mov      x2, xzr
-  0x2827124: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2827128: tbz      w0, #0, #0x2826a04
-  0x282712c: ldr      x25, [x24, #0x18]
-  0x2827130: cbz      x25, #0x28277f0
-  0x2827134: ldr      x8, [x25, #0x28]
-  0x2827138: cbz      x8, #0x2826a04
-  0x282713c: ldr      w26, [x19]
-  0x2827140: mov      x0, x24
-  0x2827144: mov      x1, xzr
-  0x2827148: bl       #0x232036c ; -> CBuff$$get_Value
-  0x282714c: mov      w1, w0
-  0x2827150: mov      x0, x25
-  0x2827154: bl       #0x280f19c ; -> CCharacterBattle$$GetLostHPRateValue
-  0x2827158: add      w8, w0, w26
-  0x282715c: b        #0x2826fcc
-  0x2827160: mov      x0, x24
-  0x2827164: mov      x1, xzr
-  0x2827168: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x282716c: cmp      w0, #0x6e
-  0x2827170: b.ne     #0x282728c
-  0x2827174: mov      w2, #0x17
-  0x2827178: mov      x0, x24
-  0x282717c: mov      x1, xzr
-  0x2827180: mov      x3, xzr
-  0x2827184: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x2827188: tbz      w0, #0, #0x282728c
-  0x282718c: adrp     x8, #0x5587000
-  0x2827190: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2827194: ldr      x25, [x24, #0x20]
-  0x2827198: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x282719c: ldr      w8, [x0, #0xe0]
-  0x28271a0: cbnz     w8, #0x28271a8
-  0x28271a4: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x28271a8: mov      x0, x25
-  0x28271ac: mov      x1, xzr
-  0x28271b0: mov      x2, xzr
-  0x28271b4: bl       #0x5037d24 ; -> UnityEngine.Object$$op_Equality
-  0x28271b8: tbnz     w0, #0, #0x2826a04
-  0x28271bc: ldr      x0, [x24, #0x20]
-  0x28271c0: cbz      x0, #0x28277f4
-  0x28271c4: ldr      x8, [x0, #0x28] ; = 0x0 (u64 @ 0x558a028)
-  0x28271c8: cbz      x8, #0x2826a04
-  0x28271cc: bl       #0x2811ba8 ; -> CCharacterBattle$$GetTeam
-  0x28271d0: cbz      x0, #0x2826a04
-  0x28271d4: ldr      x0, [x0, #0x10] ; = 0x0 (u64 @ 0x558a010)
-  0x28271d8: cbz      x0, #0x2827830
-  0x28271dc: adrp     x8, #0x558a000
-  0x28271e0: ldr      x8, [x8, #0x290] ; = 0x0 (u64 @ 0x558a290)
-  0x28271e4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28271e8: add      x8, sp, #0x18
-  0x28271ec: bl       #0x44bb5c0 ; -> System.Collections.Generic.List<object>$$GetEnumerator
-  0x28271f0: ldur     q0, [sp, #0x18]
-  0x28271f4: ldr      x8, [sp, #0x28]
-  0x28271f8: str      wzr, [sp, #0x14]
-  0x28271fc: str      q0, [sp, #0x30]
-  0x2827200: str      x8, [sp, #0x40]
-  0x2827204: adrp     x8, #0x558a000
-  0x2827208: ldr      x8, [x8, #0x278] ; = 0x0 (u64 @ 0x558a278)
-  0x282720c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827210: add      x0, sp, #0x30
-  0x2827214: bl       #0x4112894 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
-  0x2827218: tbz      w0, #0, #0x2827580
-  0x282721c: adrp     x8, #0x5587000
-  0x2827220: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2827224: ldr      x25, [sp, #0x40]
-  0x2827228: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x282722c: ldr      w8, [x0, #0xe0]
-  0x2827230: cbnz     w8, #0x2827238
-  0x2827234: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2827238: mov      x0, x25
-  0x282723c: mov      x1, xzr
-  0x2827240: mov      x2, xzr
-  0x2827244: bl       #0x5037d24 ; -> UnityEngine.Object$$op_Equality
-  0x2827248: tbnz     w0, #0, #0x2827204
-  0x282724c: cbz      x25, #0x2827614
-  0x2827250: mov      x0, x25
-  0x2827254: mov      w1, wzr
-  0x2827258: bl       #0x28248b4 ; -> CCharacterBattle$$GetBuffList
-  0x282725c: adrp     x8, #0x558a000
-  0x2827260: ldr      x8, [x8, #0x250] ; = 0x0 (u64 @ 0x558a250)
-  0x2827264: mov      x25, x0
-  0x2827268: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282726c: bl       #0x34143f8 ; -> CExtension$$IsNullOrEmpty<object>
-  0x2827270: tbnz     w0, #0, #0x2827204
-  0x2827274: cbz      x25, #0x2827624
-  0x2827278: ldr      w8, [x25, #0x18]
-  0x282727c: ldr      w9, [sp, #0x14]
-  0x2827280: add      w9, w8, w9
-  0x2827284: str      w9, [sp, #0x14]
-  0x2827288: b        #0x2827204
-  0x282728c: mov      x0, x24
-  0x2827290: mov      x1, xzr
-  0x2827294: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2827298: cmp      w0, #0x6f
-  0x282729c: b.ne     #0x282739c
-  0x28272a0: mov      w2, #0x17
-  0x28272a4: mov      x0, x24
-  0x28272a8: mov      x1, xzr
-  0x28272ac: mov      x3, xzr
-  0x28272b0: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x28272b4: tbz      w0, #0, #0x282739c
-  0x28272b8: adrp     x8, #0x5587000
-  0x28272bc: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x28272c0: ldr      x25, [x24, #0x20]
-  0x28272c4: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x28272c8: ldr      w8, [x0, #0xe0]
-  0x28272cc: cbnz     w8, #0x28272d4
-  0x28272d0: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x28272d4: mov      x0, x25
-  0x28272d8: mov      x1, xzr
-  0x28272dc: mov      x2, xzr
-  0x28272e0: bl       #0x5037d24 ; -> UnityEngine.Object$$op_Equality
-  0x28272e4: tbnz     w0, #0, #0x2826a04
-  0x28272e8: ldr      x0, [x24, #0x20]
-  0x28272ec: cbz      x0, #0x28277f8
-  0x28272f0: ldr      x8, [x0, #0x28] ; = 0x0 (u64 @ 0x558a028)
-  0x28272f4: cbz      x8, #0x2826a04
-  0x28272f8: bl       #0x2811ba8 ; -> CCharacterBattle$$GetTeam
-  0x28272fc: cbz      x0, #0x2826a04
-  0x2827300: ldr      x0, [x0, #0x10] ; = 0x0 (u64 @ 0x558a010)
-  0x2827304: cbz      x0, #0x282783c
-  0x2827308: adrp     x8, #0x558a000
-  0x282730c: ldr      x8, [x8, #0x290] ; = 0x0 (u64 @ 0x558a290)
-  0x2827310: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827314: add      x8, sp, #0x18
-  0x2827318: bl       #0x44bb5c0 ; -> System.Collections.Generic.List<object>$$GetEnumerator
-  0x282731c: ldur     q0, [sp, #0x18]
-  0x2827320: ldr      x8, [sp, #0x28]
-  0x2827324: str      wzr, [sp, #0x14]
-  0x2827328: str      q0, [sp, #0x30]
-  0x282732c: str      x8, [sp, #0x40]
-  0x2827330: adrp     x8, #0x558a000
-  0x2827334: ldr      x8, [x8, #0x278] ; = 0x0 (u64 @ 0x558a278)
-  0x2827338: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282733c: add      x0, sp, #0x30
-  0x2827340: bl       #0x4112894 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
-  0x2827344: tbz      w0, #0, #0x28275c4
-  0x2827348: adrp     x8, #0x5587000
-  0x282734c: ldr      x8, [x8, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2827350: ldr      x25, [sp, #0x40]
-  0x2827354: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5587000)
-  0x2827358: ldr      w8, [x0, #0xe0]
-  0x282735c: cbnz     w8, #0x2827364
-  0x2827360: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2827364: mov      x0, x25
-  0x2827368: mov      x1, xzr
-  0x282736c: mov      x2, xzr
-  0x2827370: bl       #0x5037d24 ; -> UnityEngine.Object$$op_Equality
-  0x2827374: tbnz     w0, #0, #0x2827330
-  0x2827378: cbz      x25, #0x282761c
-  0x282737c: mov      x0, x25
-  0x2827380: mov      x1, xzr
-  0x2827384: bl       #0x270d5c8 ; -> CCharacter$$get_IsAlive
-  0x2827388: ldr      w9, [sp, #0x14]
-  0x282738c: and      w8, w0, #1
-  0x2827390: add      w9, w9, w8
-  0x2827394: str      w9, [sp, #0x14]
-  0x2827398: b        #0x2827330
-  0x282739c: mov      x0, x24
-  0x28273a0: mov      x1, xzr
-  0x28273a4: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x28273a8: cmp      w0, #0x70
-  0x28273ac: b.ne     #0x2827488
-  0x28273b0: mov      w2, #0x17
-  0x28273b4: mov      x0, x24
-  0x28273b8: mov      x1, xzr
-  0x28273bc: mov      x3, xzr
-  0x28273c0: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x28273c4: tbz      w0, #0, #0x2827488
-  0x28273c8: adrp     x8, #0x59d4000
-  0x28273cc: ldrb     w8, [x8, #0xfc3]
-  0x28273d0: cbnz     w8, #0x28273ec
-  0x28273d4: adrp     x0, #0x558a000
-  0x28273d8: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28273dc: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x28273e0: adrp     x8, #0x59d4000
-  0x28273e4: mov      w9, #1
-  0x28273e8: strb     w9, [x8, #0xfc3]
-  0x28273ec: adrp     x8, #0x558a000
-  0x28273f0: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28273f4: adrp     x9, #0x5587000
-  0x28273f8: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28273fc: ldr      x9, [x9, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2827400: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x2827404: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5587000)
-  0x2827408: ldr      x25, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282740c: ldr      w9, [x0, #0xe0]
-  0x2827410: cbnz     w9, #0x2827418
-  0x2827414: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2827418: mov      x0, x25
-  0x282741c: mov      x1, xzr
-  0x2827420: mov      x2, xzr
-  0x2827424: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2827428: tbz      w0, #0, #0x2827488
-  0x282742c: adrp     x8, #0x59d4000
-  0x2827430: ldrb     w8, [x8, #0xfc3]
-  0x2827434: cbnz     w8, #0x2827450
-  0x2827438: adrp     x0, #0x558a000
-  0x282743c: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2827440: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2827444: adrp     x8, #0x59d4000
-  0x2827448: mov      w9, #1
-  0x282744c: strb     w9, [x8, #0xfc3]
-  0x2827450: adrp     x8, #0x558a000
-  0x2827454: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2827458: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282745c: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x2827460: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827464: cbz      x0, #0x2827824
-  0x2827468: mov      x1, xzr
-  0x282746c: bl       #0x2595970 ; -> CDungeonScene$$get_IsMonadGate
-  0x2827470: tbz      w0, #0, #0x2827488
-  0x2827474: ldr      w25, [x19]
-  0x2827478: mov      x0, x24
-  0x282747c: mov      x1, xzr
-  0x2827480: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2827484: b        #0x2826af4
-  0x2827488: mov      x0, x24
-  0x282748c: mov      x1, xzr
-  0x2827490: bl       #0x2320198 ; -> CBuff$$get_Type
-  0x2827494: cmp      w0, #0x71
-  0x2827498: b.ne     #0x2826a04
-  0x282749c: mov      w2, #0x17
-  0x28274a0: mov      x0, x24
-  0x28274a4: mov      x1, xzr
-  0x28274a8: mov      x3, xzr
-  0x28274ac: bl       #0x232bb04 ; -> CBuff$$CheckAvailable
-  0x28274b0: tbz      w0, #0, #0x2826a04
-  0x28274b4: adrp     x8, #0x59d4000
-  0x28274b8: ldrb     w8, [x8, #0xfc3]
-  0x28274bc: cbnz     w8, #0x28274d8
-  0x28274c0: adrp     x0, #0x558a000
-  0x28274c4: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28274c8: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x28274cc: adrp     x8, #0x59d4000
-  0x28274d0: mov      w9, #1
-  0x28274d4: strb     w9, [x8, #0xfc3]
-  0x28274d8: adrp     x8, #0x558a000
-  0x28274dc: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28274e0: adrp     x9, #0x5587000
-  0x28274e4: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28274e8: ldr      x9, [x9, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x28274ec: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x28274f0: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5587000)
-  0x28274f4: ldr      x25, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28274f8: ldr      w9, [x0, #0xe0]
-  0x28274fc: cbnz     w9, #0x2827504
-  0x2827500: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2827504: mov      x0, x25
-  0x2827508: mov      x1, xzr
-  0x282750c: mov      x2, xzr
-  0x2827510: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2827514: tbz      w0, #0, #0x2826a04
-  0x2827518: adrp     x8, #0x59d4000
-  0x282751c: ldrb     w8, [x8, #0xfc3]
-  0x2827520: cbnz     w8, #0x282753c
-  0x2827524: adrp     x0, #0x558a000
-  0x2827528: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x282752c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2827530: adrp     x8, #0x59d4000
-  0x2827534: mov      w9, #1
-  0x2827538: strb     w9, [x8, #0xfc3]
-  0x282753c: adrp     x8, #0x558a000
-  0x2827540: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2827544: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827548: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x282754c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827550: cbz      x8, #0x282782c
-  0x2827554: ldr      x8, [x8, #0x20] ; = 0x0 (u64 @ 0x558a020)
-  0x2827558: cbz      x8, #0x2827828
-  0x282755c: ldr      w0, [x8, #0xa4]
-  0x2827560: mov      x1, xzr
-  0x2827564: bl       #0x2cb0b0c ; -> CExtension$$IsTowerModes
-  0x2827568: tbz      w0, #0, #0x2826a04
-  0x282756c: ldr      w25, [x19]
-  0x2827570: mov      x0, x24
-  0x2827574: mov      x1, xzr
-  0x2827578: bl       #0x232036c ; -> CBuff$$get_Value
-  0x282757c: b        #0x2826af4
-  0x2827580: mov      x25, xzr
-  0x2827584: mov      w26, #0x18
-  0x2827588: adrp     x8, #0x558a000
-  0x282758c: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
-  0x2827590: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827594: add      x0, sp, #0x30
-  0x2827598: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x282759c: cbnz     x25, #0x2827834
-  0x28275a0: cmp      w26, #0x18
-  0x28275a4: b.eq     #0x28275ac
-  0x28275a8: cbnz     w26, #0x282776c
-  0x28275ac: ldr      w25, [x19]
-  0x28275b0: mov      x0, x24
-  0x28275b4: mov      x1, xzr
-  0x28275b8: bl       #0x232036c ; -> CBuff$$get_Value
-  0x28275bc: ldr      w8, [sp, #0x14]
-  0x28275c0: b        #0x282760c
-  0x28275c4: mov      x25, xzr
-  0x28275c8: mov      w26, #0x1c
-  0x28275cc: adrp     x8, #0x558a000
-  0x28275d0: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
-  0x28275d4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28275d8: add      x0, sp, #0x30
-  0x28275dc: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x28275e0: cbnz     x25, #0x2827840
-  0x28275e4: cmp      w26, #0x1c
-  0x28275e8: b.eq     #0x28275f0
-  0x28275ec: cbnz     w26, #0x282776c
-  0x28275f0: ldr      w25, [x19]
-  0x28275f4: mov      x0, x24
-  0x28275f8: mov      x1, xzr
-  0x28275fc: bl       #0x232036c ; -> CBuff$$get_Value
-  0x2827600: ldr      w9, [sp, #0x14]
-  0x2827604: mov      w8, #4
-  0x2827608: sub      w8, w8, w9
-  0x282760c: madd     w8, w0, w8, w25
-  0x2827610: b        #0x2826fcc
-  0x2827614: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827618: b        #0x2827848
-  0x282761c: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827620: b        #0x2827848
-  0x2827624: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827628: b        #0x2827848
-  0x282762c: b        #0x2827684
-  0x2827630: b        #0x2827650
-  0x2827634: b        #0x2827650
-  0x2827638: b        #0x2827650
-  0x282763c: b        #0x2827684
-  0x2827640: b        #0x2827684
-  0x2827644: b        #0x2827684
-  0x2827648: b        #0x2827684
-  0x282764c: b        #0x2827650
-  0x2827650: mov      x26, x1
-  0x2827654: mov      x25, x0
-  0x2827658: cmp      w26, #1
-  0x282765c: b.ne     #0x28277fc
-  0x2827660: mov      x0, x25
-  0x2827664: bl       #0x525f4e0 ; -> ??? 0x525f4e0
-  0x2827668: ldr      x8, [x0] ; = 0x0 (u64 @ 0x558a000)
-  0x282766c: str      x8, [sp, #8]
-  0x2827670: bl       #0x525f4f0 ; -> ??? 0x525f4f0
-  0x2827674: ldr      x25, [sp, #8]
-  0x2827678: mov      w26, wzr
-  0x282767c: b        #0x28275cc
-  0x2827680: b        #0x2827684
-  0x2827684: mov      x26, x1
-  0x2827688: mov      x25, x0
-  0x282768c: cmp      w26, #1
-  0x2827690: b.ne     #0x28277c8
-  0x2827694: mov      x0, x25
-  0x2827698: bl       #0x525f4e0 ; -> ??? 0x525f4e0
-  0x282769c: ldr      x8, [x0] ; = 0x0 (u64 @ 0x558a000)
-  0x28276a0: str      x8, [sp, #8]
-  0x28276a4: bl       #0x525f4f0 ; -> ??? 0x525f4f0
-  0x28276a8: ldr      x25, [sp, #8]
-  0x28276ac: mov      w26, wzr
-  0x28276b0: b        #0x2827588
-  0x28276b4: adrp     x8, #0x558a000
-  0x28276b8: ldr      x8, [x8, #0x268] ; = 0x0 (u64 @ 0x558a268)
-  0x28276bc: add      x0, sp, #0x50
-  0x28276c0: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28276c4: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x28276c8: adrp     x20, #0x59d4000
-  0x28276cc: ldrb     w8, [x20, #0xfc3]
-  0x28276d0: cbnz     w8, #0x28276e8
-  0x28276d4: adrp     x0, #0x558a000
-  0x28276d8: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28276dc: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x28276e0: mov      w8, #1
-  0x28276e4: strb     w8, [x20, #0xfc3]
-  0x28276e8: adrp     x8, #0x558a000
-  0x28276ec: ldr      x8, [x8, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x28276f0: ldr      x8, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28276f4: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x558a0b8)
-  0x28276f8: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28276fc: cbz      x0, #0x2827794
-  0x2827700: mov      x1, xzr
-  0x2827704: bl       #0x2595900 ; -> CDungeonScene$$get_IsPvpRealtime
-  0x2827708: tbz      w0, #0, #0x2827740
-  0x282770c: adrp     x8, #0x558a000
-  0x2827710: ldr      w20, [x19]
-  0x2827714: ldr      x8, [x8, #0x7a0] ; = 0x0 (u64 @ 0x558a7a0)
-  0x2827718: ldr      x0, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282771c: bl       #0x3e5d064 ; -> CSingletonBehaviour<object>$$get_Instance
-  0x2827720: cbz      x0, #0x2827794
-  0x2827724: mov      x1, xzr
-  0x2827728: bl       #0x2558ab0 ; -> CPVPRealTimeManager$$get_CurrentMatchInfo
-  0x282772c: cbz      x0, #0x2827794
-  0x2827730: mov      x1, xzr
-  0x2827734: bl       #0x25612e4 ; -> CPvpRealtimeMatch$$get_FieldSkillDmg
-  0x2827738: add      w8, w0, w20
-  0x282773c: str      w8, [x19]
-  0x2827740: ldp      x20, x19, [sp, #0xf0]
-  0x2827744: ldp      x22, x21, [sp, #0xe0]
-  0x2827748: ldp      x24, x23, [sp, #0xd0]
-  0x282774c: ldp      x26, x25, [sp, #0xc0]
-  0x2827750: ldp      x28, x27, [sp, #0xb0]
-  0x2827754: ldp      x29, x30, [sp, #0xa0]
-  0x2827758: ldp      d9, d8, [sp, #0x90]
-  0x282775c: ldp      d11, d10, [sp, #0x80]
-  0x2827760: ldp      d13, d12, [sp, #0x70]
-  0x2827764: add      sp, sp, #0x100
-  0x2827768: ret      
-  0x282776c: adrp     x8, #0x558a000
-  0x2827770: ldr      x8, [x8, #0x268] ; = 0x0 (u64 @ 0x558a268)
-  0x2827774: add      x0, sp, #0x50
-  0x2827778: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282777c: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x2827780: cbnz     w26, #0x2827740
-  0x2827784: b        #0x28276c8
-  0x2827788: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x282778c: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827790: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827794: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827798: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x282779c: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277a0: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277a4: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277a8: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277ac: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277b0: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277b4: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277b8: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277bc: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277c0: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277c4: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277c8: str      xzr, [sp, #8]
-  0x28277cc: adrp     x8, #0x558a000
-  0x28277d0: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
-  0x28277d4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x28277d8: add      x0, sp, #0x30
-  0x28277dc: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x28277e0: ldr      x8, [sp, #8]
-  0x28277e4: cbz      x8, #0x2827a68
-  0x28277e8: ldr      x0, [sp, #8]
-  0x28277ec: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x28277f0: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277f4: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277f8: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x28277fc: str      xzr, [sp, #8]
-  0x2827800: adrp     x8, #0x558a000
-  0x2827804: ldr      x8, [x8, #0x260] ; = 0x0 (u64 @ 0x558a260)
-  0x2827808: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x282780c: add      x0, sp, #0x30
-  0x2827810: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x2827814: ldr      x8, [sp, #8]
-  0x2827818: cbz      x8, #0x2827a68
-  0x282781c: ldr      x0, [sp, #8]
-  0x2827820: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x2827824: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827828: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x282782c: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827830: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827834: mov      x0, x25
-  0x2827838: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x282783c: bl       #0x21afc18 ; -> ??? 0x21afc18
-  0x2827840: mov      x0, x25
-  0x2827844: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x2827848: mov      x25, x0
-  0x282784c: mov      w26, w1
-  0x2827850: b        #0x2827800
-  0x2827854: mov      x25, x0
-  0x2827858: mov      w26, w1
-  0x282785c: b        #0x28277cc
-  0x2827860: b        #0x2827ad8
-  0x2827864: b        #0x2827ad8
-  0x2827868: b        #0x2827ad8
-  0x282786c: b        #0x2827ad8
-  0x2827870: b        #0x2827ad8
-  0x2827874: b        #0x2827ad8
-  0x2827878: b        #0x2827ad8
-  0x282787c: b        #0x2827ad8
-  0x2827880: b        #0x2827ad8
-  0x2827884: b        #0x2827ad8
-  0x2827888: b        #0x2827ad8
-  0x282788c: b        #0x2827ad8
-  0x2827890: b        #0x2827ad8
-  0x2827894: b        #0x2827ad8
-  0x2827898: b        #0x2827ad8
-  0x282789c: b        #0x2827ad8
-  0x28278a0: b        #0x2827ad8
-  0x28278a4: b        #0x2827ad8
-  0x28278a8: b        #0x2827ad8
-  0x28278ac: b        #0x2827ad8
-  0x28278b0: b        #0x2827ad8
-  0x28278b4: b        #0x2827a60
-  0x28278b8: b        #0x2827ad8
-  0x28278bc: b        #0x2827a60
-  0x28278c0: b        #0x2827a60
-  0x28278c4: b        #0x2827a60
-  0x28278c8: b        #0x2827a60
-  0x28278cc: b        #0x2827a60
-  0x28278d0: b        #0x2827a60
-  0x28278d4: b        #0x2827a60
-  0x28278d8: b        #0x2827ad8
-  0x28278dc: b        #0x2827ad8
-  0x28278e0: b        #0x2827a60
-  0x28278e4: b        #0x2827a60
-  0x28278e8: b        #0x2827ad8
-  0x28278ec: b        #0x2827a60
-  0x28278f0: b        #0x2827a60
-  0x28278f4: b        #0x2827a60
-  0x28278f8: b        #0x2827a60
-  0x28278fc: b        #0x2827a60
-  0x2827900: b        #0x2827ad8
-  0x2827904: b        #0x2827ad8
-  0x2827908: b        #0x2827a60
-  0x282790c: b        #0x2827a60
-  0x2827910: b        #0x2827ad8
-  0x2827914: b        #0x2827a60
-  0x2827918: b        #0x2827a60
-  0x282791c: b        #0x2827a60
-  0x2827920: b        #0x2827a60
-  0x2827924: b        #0x2827a60
-  0x2827928: b        #0x2827a60
-  0x282792c: b        #0x2827a60
-  0x2827930: b        #0x2827a60
-  0x2827934: b        #0x2827ad8
-  0x2827938: b        #0x2827ad8
-  0x282793c: b        #0x2827a60
-  0x2827940: b        #0x2827a60
-  0x2827944: b        #0x2827a60
-  0x2827948: b        #0x2827ad8
-  0x282794c: b        #0x2827a60
-  0x2827950: b        #0x2827a60
-  0x2827954: b        #0x2827a60
-  0x2827958: b        #0x2827a60
-  0x282795c: b        #0x2827a60
-  0x2827960: b        #0x2827a60
-  0x2827964: b        #0x2827a60
-  0x2827968: b        #0x2827a60
-  0x282796c: b        #0x2827a60
-  0x2827970: b        #0x2827a60
-  0x2827974: b        #0x2827a60
-  0x2827978: b        #0x2827a60
-  0x282797c: b        #0x2827a60
-  0x2827980: b        #0x2827a60
-  0x2827984: b        #0x2827a60
-  0x2827988: b        #0x2827a60
-  0x282798c: b        #0x2827a60
-  0x2827990: b        #0x2827a60
-  0x2827994: b        #0x2827a60
-  0x2827998: b        #0x2827a60
-  0x282799c: b        #0x2827a60
-  0x28279a0: b        #0x2827a60
-  0x28279a4: b        #0x2827a60
-  0x28279a8: b        #0x2827a60
-  0x28279ac: b        #0x2827a60
-  0x28279b0: b        #0x2827a60
-  0x28279b4: b        #0x2827a60
-  0x28279b8: b        #0x2827a60
-  0x28279bc: b        #0x2827a60
-  0x28279c0: b        #0x2827a60
-  0x28279c4: b        #0x2827a60
-  0x28279c8: b        #0x2827a60
-  0x28279cc: b        #0x2827a60
-  0x28279d0: b        #0x2827a60
-  0x28279d4: b        #0x2827a60
-  0x28279d8: b        #0x2827a60
-  0x28279dc: b        #0x2827a60
-  0x28279e0: b        #0x2827a60
-  0x28279e4: b        #0x2827a60
-  0x28279e8: b        #0x2827a60
-  0x28279ec: b        #0x2827a60
-  0x28279f0: b        #0x2827a60
-  0x28279f4: b        #0x2827a60
-  0x28279f8: b        #0x2827a60
-  0x28279fc: b        #0x2827a60
-  0x2827a00: b        #0x2827a60
-  0x2827a04: b        #0x2827a60
-  0x2827a08: b        #0x2827a60
-  0x2827a0c: b        #0x2827a60
-  0x2827a10: b        #0x2827a60
-  0x2827a14: b        #0x2827a60
-  0x2827a18: b        #0x2827a60
-  0x2827a1c: b        #0x2827a60
-  0x2827a20: b        #0x2827a60
-  0x2827a24: b        #0x2827a60
-  0x2827a28: b        #0x2827a60
-  0x2827a2c: b        #0x2827a60
-  0x2827a30: b        #0x2827a60
-  0x2827a34: b        #0x2827a60
-  0x2827a38: b        #0x2827a60
-  0x2827a3c: b        #0x2827a60
-  0x2827a40: b        #0x2827a60
-  0x2827a44: b        #0x2827a60
-  0x2827a48: b        #0x2827a60
-  0x2827a4c: b        #0x2827a60
-  0x2827a50: b        #0x2827a60
-  0x2827a54: b        #0x2827a60
-  0x2827a58: b        #0x2827a60
-  0x2827a5c: b        #0x2827a60
-  0x2827a60: mov      x26, x1
-  0x2827a64: mov      x25, x0
-  0x2827a68: cmp      w26, #1
-  0x2827a6c: b.ne     #0x2827aa0
-  0x2827a70: mov      x0, x25
-  0x2827a74: bl       #0x525f4e0 ; -> ??? 0x525f4e0
-  0x2827a78: ldr      x21, [x0] ; = 0x0 (u64 @ 0x558a000)
-  0x2827a7c: bl       #0x525f4f0 ; -> ??? 0x525f4f0
-  0x2827a80: adrp     x8, #0x558a000
-  0x2827a84: ldr      x8, [x8, #0x268] ; = 0x0 (u64 @ 0x558a268)
-  0x2827a88: add      x0, sp, #0x50
-  0x2827a8c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827a90: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x2827a94: cbz      x21, #0x28276c8
-  0x2827a98: mov      x0, x21
-  0x2827a9c: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x2827aa0: mov      x21, xzr
-  0x2827aa4: b        #0x2827aac
-  0x2827aa8: mov      x25, x0
-  0x2827aac: adrp     x8, #0x558a000
-  0x2827ab0: ldr      x8, [x8, #0x268] ; = 0x0 (u64 @ 0x558a268)
-  0x2827ab4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x558a000)
-  0x2827ab8: add      x0, sp, #0x50
-  0x2827abc: bl       #0x4112890 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
-  0x2827ac0: cbnz     x21, #0x2827acc
-  0x2827ac4: mov      x0, x25
-  0x2827ac8: bl       #0x22b072c ; -> ??? 0x22b072c
-  0x2827acc: mov      x0, x21
-  0x2827ad0: bl       #0x21afc10 ; -> ??? 0x21afc10
-  0x2827ad4: bl       #0x1f86e18 ; -> ??? 0x1f86e18
-  0x2827ad8: mov      x25, x0
-  0x2827adc: mov      w26, w1
-  0x2827ae0: b        #0x2827a68
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== FindBuffAdditionalDamage @ 0x282d838..0x282ecf0 (taille 5304 octets) =====
+  0x282d838: sub      sp, sp, #0x110
+  0x282d83c: stp      d13, d12, [sp, #0x80]
+  0x282d840: stp      d11, d10, [sp, #0x90]
+  0x282d844: stp      d9, d8, [sp, #0xa0]
+  0x282d848: stp      x29, x30, [sp, #0xb0]
+  0x282d84c: stp      x28, x27, [sp, #0xc0]
+  0x282d850: stp      x26, x25, [sp, #0xd0]
+  0x282d854: stp      x24, x23, [sp, #0xe0]
+  0x282d858: stp      x22, x21, [sp, #0xf0]
+  0x282d85c: stp      x20, x19, [sp, #0x100]
+  0x282d860: adrp     x20, #0x59e7000
+  0x282d864: ldrb     w8, [x20, #0x6de]
+  0x282d868: mov      x21, x2
+  0x282d86c: mov      x19, x1
+  0x282d870: mov      x22, x0
+  0x282d874: tbnz     w8, #0, #0x282d940
+  0x282d878: adrp     x0, #0x5598000
+  0x282d87c: ldr      x0, [x0, #0xd60] ; = 0x0 (u64 @ 0x5598d60)
+  0x282d880: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d884: adrp     x0, #0x5599000
+  0x282d888: ldr      x0, [x0, #0x2b0] ; = 0x0 (u64 @ 0x55992b0)
+  0x282d88c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d890: adrp     x0, #0x55bf000
+  0x282d894: ldr      x0, [x0, #0x7b8] ; = 0x0 (u64 @ 0x55bf7b8)
+  0x282d898: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d89c: adrp     x0, #0x5597000
+  0x282d8a0: ldr      x0, [x0, #0x490] ; = 0x0 (u64 @ 0x5597490)
+  0x282d8a4: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8a8: adrp     x0, #0x55a0000
+  0x282d8ac: ldr      x0, [x0, #0x258] ; = 0x0 (u64 @ 0x55a0258)
+  0x282d8b0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8b4: adrp     x0, #0x5597000
+  0x282d8b8: ldr      x0, [x0, #0x498] ; = 0x0 (u64 @ 0x5597498)
+  0x282d8bc: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8c0: adrp     x0, #0x5598000
+  0x282d8c4: ldr      x0, [x0, #0xd70] ; = 0x0 (u64 @ 0x5598d70)
+  0x282d8c8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8cc: adrp     x0, #0x5598000
+  0x282d8d0: ldr      x0, [x0, #0xd78] ; = 0x0 (u64 @ 0x5598d78)
+  0x282d8d4: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8d8: adrp     x0, #0x5598000
+  0x282d8dc: ldr      x0, [x0, #0xd80] ; = 0x0 (u64 @ 0x5598d80)
+  0x282d8e0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8e4: adrp     x0, #0x5598000
+  0x282d8e8: ldr      x0, [x0, #0xd88] ; = 0x0 (u64 @ 0x5598d88)
+  0x282d8ec: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8f0: adrp     x0, #0x5598000
+  0x282d8f4: ldr      x0, [x0, #0xd90] ; = 0x0 (u64 @ 0x5598d90)
+  0x282d8f8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d8fc: adrp     x0, #0x5598000
+  0x282d900: ldr      x0, [x0, #0xd98] ; = 0x0 (u64 @ 0x5598d98)
+  0x282d904: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d908: adrp     x0, #0x5598000
+  0x282d90c: ldr      x0, [x0, #0xda0] ; = 0x0 (u64 @ 0x5598da0)
+  0x282d910: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d914: adrp     x0, #0x5598000
+  0x282d918: ldr      x0, [x0, #0xda8] ; = 0x0 (u64 @ 0x5598da8)
+  0x282d91c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d920: adrp     x0, #0x5599000
+  0x282d924: ldr      x0, [x0, #0x898] ; = 0x0 (u64 @ 0x5599898)
+  0x282d928: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d92c: adrp     x0, #0x5596000
+  0x282d930: ldr      x0, [x0, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282d934: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282d938: mov      w8, #1
+  0x282d93c: strb     w8, [x20, #0x6de]
+  0x282d940: stp      xzr, xzr, [sp, #0x60]
+  0x282d944: str      xzr, [sp, #0x70]
+  0x282d948: stp      xzr, xzr, [sp, #0x50]
+  0x282d94c: stp      xzr, xzr, [sp, #0x40]
+  0x282d950: str      wzr, [x19]
+  0x282d954: ldr      x0, [x22, #0x380]
+  0x282d958: cbz      x0, #0x282e924
+  0x282d95c: adrp     x8, #0x5598000
+  0x282d960: ldr      x8, [x8, #0xda8] ; = 0x0 (u64 @ 0x5598da8)
+  0x282d964: adrp     x28, #0x5598000
+  0x282d968: ldr      x28, [x28, #0xd80] ; = 0x0 (u64 @ 0x5598d80)
+  0x282d96c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282d970: add      x8, sp, #0x28
+  0x282d974: bl       #0x44c9ec4 ; -> System.Collections.Generic.List<object>$$GetEnumerator
+  0x282d978: adrp     x23, #0x5597000
+  0x282d97c: ldur     q0, [sp, #0x28]
+  0x282d980: ldr      x8, [sp, #0x38]
+  0x282d984: ldr      x23, [x23, #0x40] ; = 0x0 (u64 @ 0x5597040)
+  0x282d988: mov      x24, xzr
+  0x282d98c: adrp     x20, #0x59e5000
+  0x282d990: fmov     d9, #-0.50000000
+  0x282d994: fmov     d10, #-1.00000000
+  0x282d998: mov      x29, #0x7ff0000000000000
+  0x282d99c: fmov     d11, #0.50000000
+  0x282d9a0: fmov     d12, #1.00000000
+  0x282d9a4: str      q0, [sp, #0x60]
+  0x282d9a8: str      x8, [sp, #0x70]
+  0x282d9ac: ldr      x1, [x28] ; = 0x0 (u64 @ 0x5598000)
+  0x282d9b0: add      x0, sp, #0x60
+  0x282d9b4: bl       #0x4121198 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
+  0x282d9b8: tbz      w0, #0, #0x282e848
+  0x282d9bc: ldr      x25, [sp, #0x70]
+  0x282d9c0: cbz      x25, #0x282e918
+  0x282d9c4: mov      x0, x25
+  0x282d9c8: mov      x1, xzr
+  0x282d9cc: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282d9d0: cmp      w0, #0x5a
+  0x282d9d4: b.ne     #0x282da04
+  0x282d9d8: mov      w2, #0x17
+  0x282d9dc: mov      x0, x25
+  0x282d9e0: mov      x1, x21
+  0x282d9e4: mov      x3, xzr
+  0x282d9e8: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282d9ec: tbz      w0, #0, #0x282da04
+  0x282d9f0: ldr      w26, [x19]
+  0x282d9f4: mov      x0, x25
+  0x282d9f8: mov      x1, xzr
+  0x282d9fc: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282da00: b        #0x282da9c
+  0x282da04: mov      x0, x25
+  0x282da08: mov      x1, xzr
+  0x282da0c: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282da10: cmp      w0, #0x5b
+  0x282da14: b.ne     #0x282da50
+  0x282da18: mov      w2, #0x17
+  0x282da1c: mov      x0, x25
+  0x282da20: mov      x1, xzr
+  0x282da24: mov      x3, xzr
+  0x282da28: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282da2c: tbz      w0, #0, #0x282da50
+  0x282da30: ldr      w26, [x19]
+  0x282da34: mov      x0, x25
+  0x282da38: mov      x1, xzr
+  0x282da3c: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282da40: mov      w1, w0
+  0x282da44: mov      x0, x22
+  0x282da48: bl       #0x281611c ; -> CCharacterBattle$$GetLostHPRateValue
+  0x282da4c: b        #0x282da9c
+  0x282da50: mov      x0, x25
+  0x282da54: mov      x1, xzr
+  0x282da58: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282da5c: cmp      w0, #0x5c
+  0x282da60: b.ne     #0x282daa4
+  0x282da64: mov      w2, #0x17
+  0x282da68: mov      x0, x25
+  0x282da6c: mov      x1, xzr
+  0x282da70: mov      x3, xzr
+  0x282da74: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282da78: tbz      w0, #0, #0x282daa4
+  0x282da7c: ldr      w26, [x19]
+  0x282da80: mov      x0, x25
+  0x282da84: mov      x1, xzr
+  0x282da88: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282da8c: mov      w1, w0
+  0x282da90: cbz      x21, #0x282e91c
+  0x282da94: mov      x0, x21
+  0x282da98: bl       #0x281611c ; -> CCharacterBattle$$GetLostHPRateValue
+  0x282da9c: add      w8, w0, w26
+  0x282daa0: b        #0x282e074
+  0x282daa4: mov      x0, x25
+  0x282daa8: mov      x1, xzr
+  0x282daac: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282dab0: cmp      w0, #0x5d
+  0x282dab4: b.ne     #0x282db3c
+  0x282dab8: mov      w2, #0x17
+  0x282dabc: mov      x0, x25
+  0x282dac0: mov      x1, xzr
+  0x282dac4: mov      x3, xzr
+  0x282dac8: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282dacc: tbz      w0, #0, #0x282db3c
+  0x282dad0: ldr      x26, [x22, #0x28]
+  0x282dad4: mov      x0, x25
+  0x282dad8: mov      x1, xzr
+  0x282dadc: bl       #0x2325438 ; -> CBuff$$get_StatType
+  0x282dae0: mov      w27, w0
+  0x282dae4: mov      x0, x25
+  0x282dae8: mov      x1, xzr
+  0x282daec: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282daf0: cbz      x26, #0x282e920
+  0x282daf4: mov      w2, w0
+  0x282daf8: mov      x0, x26
+  0x282dafc: mov      w1, w27
+  0x282db00: mov      x3, xzr
+  0x282db04: bl       #0x290a63c ; -> CCharacterData$$GetStatValuePermille
+  0x282db08: ldrb     w8, [x20, #0xf]
+  0x282db0c: ldr      w26, [x19]
+  0x282db10: mov      w25, w0
+  0x282db14: cbnz     w8, #0x282db28
+  0x282db18: mov      x0, x23
+  0x282db1c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282db20: mov      w8, #1
+  0x282db24: strb     w8, [x20, #0xf]
+  0x282db28: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5597000)
+  0x282db2c: ldr      w8, [x0, #0xe0]
+  0x282db30: cbnz     w8, #0x282dca4
+  0x282db34: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282db38: b        #0x282dca4
+  0x282db3c: mov      x0, x25
+  0x282db40: mov      x1, xzr
+  0x282db44: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282db48: cmp      w0, #0x5e
+  0x282db4c: b.ne     #0x282dbd8
+  0x282db50: mov      w2, #0x17
+  0x282db54: mov      x0, x25
+  0x282db58: mov      x1, xzr
+  0x282db5c: mov      x3, xzr
+  0x282db60: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282db64: tbz      w0, #0, #0x282dbd8
+  0x282db68: cbz      x21, #0x282e928
+  0x282db6c: ldr      x26, [x21, #0x28]
+  0x282db70: mov      x0, x25
+  0x282db74: mov      x1, xzr
+  0x282db78: bl       #0x2325438 ; -> CBuff$$get_StatType
+  0x282db7c: mov      w27, w0
+  0x282db80: mov      x0, x25
+  0x282db84: mov      x1, xzr
+  0x282db88: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282db8c: cbz      x26, #0x282e92c
+  0x282db90: mov      w2, w0
+  0x282db94: mov      x0, x26
+  0x282db98: mov      w1, w27
+  0x282db9c: mov      x3, xzr
+  0x282dba0: bl       #0x290a63c ; -> CCharacterData$$GetStatValuePermille
+  0x282dba4: ldrb     w8, [x20, #0xf]
+  0x282dba8: ldr      w26, [x19]
+  0x282dbac: mov      w25, w0
+  0x282dbb0: cbnz     w8, #0x282dbc4
+  0x282dbb4: mov      x0, x23
+  0x282dbb8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282dbbc: mov      w8, #1
+  0x282dbc0: strb     w8, [x20, #0xf]
+  0x282dbc4: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5597000)
+  0x282dbc8: ldr      w8, [x0, #0xe0]
+  0x282dbcc: cbnz     w8, #0x282dca4
+  0x282dbd0: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282dbd4: b        #0x282dca4
+  0x282dbd8: mov      x0, x25
+  0x282dbdc: mov      x1, xzr
+  0x282dbe0: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282dbe4: cmp      w0, #0x6b
+  0x282dbe8: b.ne     #0x282dce4
+  0x282dbec: mov      w2, #0x17
+  0x282dbf0: mov      x0, x25
+  0x282dbf4: mov      x1, xzr
+  0x282dbf8: mov      x3, xzr
+  0x282dbfc: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282dc00: tbz      w0, #0, #0x282dce4
+  0x282dc04: adrp     x8, #0x5596000
+  0x282dc08: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282dc0c: ldr      x26, [x25, #0x18]
+  0x282dc10: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282dc14: ldr      w8, [x0, #0xe0]
+  0x282dc18: cbnz     w8, #0x282dc20
+  0x282dc1c: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282dc20: mov      x0, x26
+  0x282dc24: mov      x1, xzr
+  0x282dc28: mov      x2, xzr
+  0x282dc2c: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x282dc30: tbz      w0, #0, #0x282d9ac
+  0x282dc34: ldr      x8, [x25, #0x18]
+  0x282dc38: cbz      x8, #0x282e934
+  0x282dc3c: ldr      x26, [x8, #0x28] ; = 0x0 (u64 @ 0x5596028)
+  0x282dc40: cbz      x26, #0x282d9ac
+  0x282dc44: mov      x0, x25
+  0x282dc48: mov      x1, xzr
+  0x282dc4c: bl       #0x2325438 ; -> CBuff$$get_StatType
+  0x282dc50: mov      w27, w0
+  0x282dc54: mov      x0, x25
+  0x282dc58: mov      x1, xzr
+  0x282dc5c: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282dc60: mov      w2, w0
+  0x282dc64: mov      x0, x26
+  0x282dc68: mov      w1, w27
+  0x282dc6c: mov      x3, xzr
+  0x282dc70: bl       #0x290a63c ; -> CCharacterData$$GetStatValuePermille
+  0x282dc74: ldrb     w8, [x20, #0xf]
+  0x282dc78: ldr      w26, [x19]
+  0x282dc7c: mov      w25, w0
+  0x282dc80: cbnz     w8, #0x282dc94
+  0x282dc84: mov      x0, x23
+  0x282dc88: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282dc8c: mov      w8, #1
+  0x282dc90: strb     w8, [x20, #0xf]
+  0x282dc94: ldr      x0, [x23] ; = 0x0 (u64 @ 0x5597000)
+  0x282dc98: ldr      w8, [x0, #0xe0]
+  0x282dc9c: cbnz     w8, #0x282dca4
+  0x282dca0: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282dca4: mov      w8, #0x447a0000
+  0x282dca8: scvtf    s0, w25
+  0x282dcac: fmov     s1, w8
+  0x282dcb0: fminnm   s13, s0, s1
+  0x282dcb4: fcvt     d8, s13
+  0x282dcb8: add      x0, sp, #0x28
+  0x282dcbc: mov      v0.16b, v8.16b
+  0x282dcc0: bl       #0x526dd90 ; -> ??? 0x526dd90
+  0x282dcc4: fcmp     s13, #0.0
+  0x282dcc8: b.ge     #0x282dd88
+  0x282dccc: fcmp     d0, d9
+  0x282dcd0: b.ne     #0x282e048
+  0x282dcd4: ldr      d0, [sp, #0x28]
+  0x282dcd8: fcvtzs   x8, d0
+  0x282dcdc: fadd     d1, d0, d10
+  0x282dce0: b        #0x282dd9c
+  0x282dce4: mov      x0, x25
+  0x282dce8: mov      x1, xzr
+  0x282dcec: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282dcf0: cmp      w0, #0x5f
+  0x282dcf4: b.ne     #0x282dd34
+  0x282dcf8: mov      w2, #0x17
+  0x282dcfc: mov      x0, x25
+  0x282dd00: mov      x1, xzr
+  0x282dd04: mov      x3, xzr
+  0x282dd08: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282dd0c: tbz      w0, #0, #0x282dd34
+  0x282dd10: ldr      w27, [x19]
+  0x282dd14: mov      x0, x22
+  0x282dd18: mov      w1, wzr
+  0x282dd1c: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282dd20: mov      w26, w0
+  0x282dd24: mov      x0, x25
+  0x282dd28: mov      x1, xzr
+  0x282dd2c: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282dd30: b        #0x282df44
+  0x282dd34: mov      x0, x25
+  0x282dd38: mov      x1, xzr
+  0x282dd3c: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282dd40: cmp      w0, #0x60
+  0x282dd44: b.ne     #0x282dda8
+  0x282dd48: mov      w2, #0x17
+  0x282dd4c: mov      x0, x25
+  0x282dd50: mov      x1, xzr
+  0x282dd54: mov      x3, xzr
+  0x282dd58: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282dd5c: tbz      w0, #0, #0x282dda8
+  0x282dd60: cbz      x21, #0x282e930
+  0x282dd64: ldr      w27, [x19]
+  0x282dd68: mov      x0, x21
+  0x282dd6c: mov      w1, wzr
+  0x282dd70: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282dd74: mov      w26, w0
+  0x282dd78: mov      x0, x25
+  0x282dd7c: mov      x1, xzr
+  0x282dd80: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282dd84: b        #0x282df44
+  0x282dd88: fcmp     d0, d11
+  0x282dd8c: b.ne     #0x282e054
+  0x282dd90: ldr      d0, [sp, #0x28]
+  0x282dd94: fcvtzs   x8, d0
+  0x282dd98: fadd     d1, d0, d12
+  0x282dd9c: tst      x8, #1
+  0x282dda0: fcsel    d0, d0, d1, eq
+  0x282dda4: b        #0x282e05c
+  0x282dda8: mov      x0, x25
+  0x282ddac: mov      x1, xzr
+  0x282ddb0: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282ddb4: cmp      w0, #0xa5
+  0x282ddb8: b.ne     #0x282dea4
+  0x282ddbc: mov      w2, #0x17
+  0x282ddc0: mov      x0, x25
+  0x282ddc4: mov      x1, xzr
+  0x282ddc8: mov      x3, xzr
+  0x282ddcc: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282ddd0: tbz      w0, #0, #0x282dea4
+  0x282ddd4: cbnz     x24, #0x282ddfc
+  0x282ddd8: adrp     x8, #0x5597000
+  0x282dddc: ldr      x8, [x8, #0x498] ; = 0x0 (u64 @ 0x5597498)
+  0x282dde0: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5597000)
+  0x282dde4: bl       #0x21b4d10 ; -> ??? 0x21b4d10
+  0x282dde8: adrp     x8, #0x5597000
+  0x282ddec: ldr      x8, [x8, #0x490] ; = 0x0 (u64 @ 0x5597490)
+  0x282ddf0: mov      x24, x0
+  0x282ddf4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5597000)
+  0x282ddf8: bl       #0x405e668 ; -> System.Collections.Generic.Dictionary<object, int>$$.ctor
+  0x282ddfc: mov      x0, x25
+  0x282de00: mov      x1, xzr
+  0x282de04: bl       #0x232524c ; -> CBuff$$get_ID
+  0x282de08: mov      x1, x0
+  0x282de0c: cbz      x24, #0x282e938
+  0x282de10: adrp     x8, #0x55bf000
+  0x282de14: ldr      x8, [x8, #0x7b8] ; = 0x0 (u64 @ 0x55bf7b8)
+  0x282de18: ldr      x3, [x8] ; = 0x0 (u64 @ 0x55bf000)
+  0x282de1c: add      x2, sp, #0x5c
+  0x282de20: mov      x0, x24
+  0x282de24: bl       #0x40607d8 ; -> System.Collections.Generic.Dictionary<object, int>$$TryGetValue
+  0x282de28: cbz      x21, #0x282e93c
+  0x282de2c: ldr      w27, [sp, #0x5c]
+  0x282de30: mov      x0, x21
+  0x282de34: mov      w1, wzr
+  0x282de38: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282de3c: mov      w26, w0
+  0x282de40: mov      x0, x25
+  0x282de44: mov      x1, xzr
+  0x282de48: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282de4c: ldr      x8, [x25, #0x10]
+  0x282de50: cbz      x8, #0x282e940
+  0x282de54: ldr      w8, [x8, #0x58]
+  0x282de58: ldr      w9, [x19]
+  0x282de5c: ldr      w10, [sp, #0x5c]
+  0x282de60: madd     w11, w0, w26, w27
+  0x282de64: cmp      w11, w8
+  0x282de68: csel     w26, w11, w8, lt
+  0x282de6c: sub      w8, w9, w10
+  0x282de70: add      w8, w8, w26
+  0x282de74: str      w8, [x19]
+  0x282de78: mov      x0, x25
+  0x282de7c: mov      x1, xzr
+  0x282de80: bl       #0x232524c ; -> CBuff$$get_ID
+  0x282de84: mov      x1, x0
+  0x282de88: adrp     x8, #0x55a0000
+  0x282de8c: ldr      x8, [x8, #0x258] ; = 0x0 (u64 @ 0x55a0258)
+  0x282de90: ldr      x3, [x8] ; = 0x0 (u64 @ 0x55a0000)
+  0x282de94: mov      x0, x24
+  0x282de98: mov      w2, w26
+  0x282de9c: bl       #0x405f008 ; -> System.Collections.Generic.Dictionary<object, int>$$set_Item
+  0x282dea0: b        #0x282d9ac
+  0x282dea4: mov      x0, x25
+  0x282dea8: mov      x1, xzr
+  0x282deac: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282deb0: cmp      w0, #0x61
+  0x282deb4: b.ne     #0x282def4
+  0x282deb8: mov      w2, #0x17
+  0x282debc: mov      x0, x25
+  0x282dec0: mov      x1, xzr
+  0x282dec4: mov      x3, xzr
+  0x282dec8: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282decc: tbz      w0, #0, #0x282def4
+  0x282ded0: ldr      w27, [x19]
+  0x282ded4: mov      w1, #1
+  0x282ded8: mov      x0, x22
+  0x282dedc: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282dee0: mov      w26, w0
+  0x282dee4: mov      x0, x25
+  0x282dee8: mov      x1, xzr
+  0x282deec: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282def0: b        #0x282df44
+  0x282def4: mov      x0, x25
+  0x282def8: mov      x1, xzr
+  0x282defc: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282df00: cmp      w0, #0x62
+  0x282df04: b.ne     #0x282df4c
+  0x282df08: mov      w2, #0x17
+  0x282df0c: mov      x0, x25
+  0x282df10: mov      x1, xzr
+  0x282df14: mov      x3, xzr
+  0x282df18: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282df1c: tbz      w0, #0, #0x282df4c
+  0x282df20: cbz      x21, #0x282e944
+  0x282df24: ldr      w27, [x19]
+  0x282df28: mov      w1, #1
+  0x282df2c: mov      x0, x21
+  0x282df30: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282df34: mov      w26, w0
+  0x282df38: mov      x0, x25
+  0x282df3c: mov      x1, xzr
+  0x282df40: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282df44: madd     w8, w0, w26, w27
+  0x282df48: b        #0x282e074
+  0x282df4c: mov      x0, x25
+  0x282df50: mov      x1, xzr
+  0x282df54: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282df58: cmp      w0, #0xa4
+  0x282df5c: b.ne     #0x282e07c
+  0x282df60: mov      w2, #0x17
+  0x282df64: mov      x0, x25
+  0x282df68: mov      x1, xzr
+  0x282df6c: mov      x3, xzr
+  0x282df70: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282df74: tbz      w0, #0, #0x282e07c
+  0x282df78: cbnz     x24, #0x282dfa0
+  0x282df7c: adrp     x8, #0x5597000
+  0x282df80: ldr      x8, [x8, #0x498] ; = 0x0 (u64 @ 0x5597498)
+  0x282df84: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5597000)
+  0x282df88: bl       #0x21b4d10 ; -> ??? 0x21b4d10
+  0x282df8c: adrp     x8, #0x5597000
+  0x282df90: ldr      x8, [x8, #0x490] ; = 0x0 (u64 @ 0x5597490)
+  0x282df94: mov      x24, x0
+  0x282df98: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5597000)
+  0x282df9c: bl       #0x405e668 ; -> System.Collections.Generic.Dictionary<object, int>$$.ctor
+  0x282dfa0: mov      x0, x25
+  0x282dfa4: mov      x1, xzr
+  0x282dfa8: bl       #0x232524c ; -> CBuff$$get_ID
+  0x282dfac: mov      x1, x0
+  0x282dfb0: cbz      x24, #0x282e948
+  0x282dfb4: adrp     x8, #0x55bf000
+  0x282dfb8: ldr      x8, [x8, #0x7b8] ; = 0x0 (u64 @ 0x55bf7b8)
+  0x282dfbc: ldr      x3, [x8] ; = 0x0 (u64 @ 0x55bf000)
+  0x282dfc0: add      x2, sp, #0x58
+  0x282dfc4: mov      x0, x24
+  0x282dfc8: bl       #0x40607d8 ; -> System.Collections.Generic.Dictionary<object, int>$$TryGetValue
+  0x282dfcc: cbz      x21, #0x282e950
+  0x282dfd0: ldr      w27, [sp, #0x58]
+  0x282dfd4: mov      w1, #1
+  0x282dfd8: mov      x0, x21
+  0x282dfdc: bl       #0x282c0e4 ; -> CCharacterBattle$$GetBuffCount
+  0x282dfe0: mov      w26, w0
+  0x282dfe4: mov      x0, x25
+  0x282dfe8: mov      x1, xzr
+  0x282dfec: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282dff0: ldr      x8, [x25, #0x10]
+  0x282dff4: cbz      x8, #0x282e94c
+  0x282dff8: ldr      w8, [x8, #0x58]
+  0x282dffc: ldr      w9, [x19]
+  0x282e000: ldr      w10, [sp, #0x58]
+  0x282e004: madd     w11, w0, w26, w27
+  0x282e008: cmp      w11, w8
+  0x282e00c: csel     w26, w11, w8, lt
+  0x282e010: sub      w8, w9, w10
+  0x282e014: add      w8, w8, w26
+  0x282e018: str      w8, [x19]
+  0x282e01c: mov      x0, x25
+  0x282e020: mov      x1, xzr
+  0x282e024: bl       #0x232524c ; -> CBuff$$get_ID
+  0x282e028: mov      x1, x0
+  0x282e02c: adrp     x8, #0x55a0000
+  0x282e030: ldr      x8, [x8, #0x258] ; = 0x0 (u64 @ 0x55a0258)
+  0x282e034: ldr      x3, [x8] ; = 0x0 (u64 @ 0x55a0000)
+  0x282e038: mov      x0, x24
+  0x282e03c: mov      w2, w26
+  0x282e040: bl       #0x405f008 ; -> System.Collections.Generic.Dictionary<object, int>$$set_Item
+  0x282e044: b        #0x282d9ac
+  0x282e048: fadd     d0, d8, d9
+  0x282e04c: frintp   d0, d0
+  0x282e050: b        #0x282e05c
+  0x282e054: fadd     d0, d8, d11
+  0x282e058: frintm   d0, d0
+  0x282e05c: fmov     d1, x29
+  0x282e060: fcvtzs   w8, d0
+  0x282e064: fcmp     d0, d1
+  0x282e068: mov      w9, #-0xffffffff80000000
+  0x282e06c: csel     w8, w9, w8, eq
+  0x282e070: add      w8, w8, w26
+  0x282e074: str      w8, [x19]
+  0x282e078: b        #0x282d9ac
+  0x282e07c: mov      x0, x25
+  0x282e080: mov      x1, xzr
+  0x282e084: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e088: cmp      w0, #0x66
+  0x282e08c: b.ne     #0x282e0d8
+  0x282e090: mov      w2, #0x17
+  0x282e094: mov      x0, x25
+  0x282e098: mov      x1, xzr
+  0x282e09c: mov      x3, xzr
+  0x282e0a0: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e0a4: tbz      w0, #0, #0x282e0d8
+  0x282e0a8: ldr      x8, [x22, #0x348]
+  0x282e0ac: cbz      x8, #0x282e958
+  0x282e0b0: ldr      x0, [x8, #0x378] ; = 0x0 (u64 @ 0x55a0378)
+  0x282e0b4: cbz      x0, #0x282e954
+  0x282e0b8: mov      x1, xzr
+  0x282e0bc: bl       #0x250b21c ; -> CRageManager$$get_IsBreak
+  0x282e0c0: tbz      w0, #0, #0x282e0d8
+  0x282e0c4: ldr      w26, [x19]
+  0x282e0c8: mov      x0, x25
+  0x282e0cc: mov      x1, xzr
+  0x282e0d0: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e0d4: b        #0x282da9c
+  0x282e0d8: mov      x0, x25
+  0x282e0dc: mov      x1, xzr
+  0x282e0e0: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e0e4: cmp      w0, #0x67
+  0x282e0e8: b.ne     #0x282e138
+  0x282e0ec: mov      w2, #0x17
+  0x282e0f0: mov      x0, x25
+  0x282e0f4: mov      x1, xzr
+  0x282e0f8: mov      x3, xzr
+  0x282e0fc: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e100: tbz      w0, #0, #0x282e138
+  0x282e104: ldr      x8, [x22, #0x348]
+  0x282e108: cbz      x8, #0x282e95c
+  0x282e10c: ldr      x0, [x8, #0x28] ; = 0x0 (u64 @ 0x55a0028)
+  0x282e110: cbz      x0, #0x282e138
+  0x282e114: mov      x1, xzr
+  0x282e118: bl       #0x290836c ; -> CCharacterData$$get_Type
+  0x282e11c: cmp      w0, #3
+  0x282e120: b.le     #0x282e138
+  0x282e124: ldr      w26, [x19]
+  0x282e128: mov      x0, x25
+  0x282e12c: mov      x1, xzr
+  0x282e130: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e134: b        #0x282da9c
+  0x282e138: mov      x0, x25
+  0x282e13c: mov      x1, xzr
+  0x282e140: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e144: cmp      w0, #0x68
+  0x282e148: b.ne     #0x282e178
+  0x282e14c: mov      w2, #0x17
+  0x282e150: mov      x0, x25
+  0x282e154: mov      x1, x21
+  0x282e158: mov      x3, xzr
+  0x282e15c: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e160: tbz      w0, #0, #0x282e178
+  0x282e164: ldr      w26, [x19]
+  0x282e168: mov      x0, x25
+  0x282e16c: mov      x1, xzr
+  0x282e170: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e174: b        #0x282da9c
+  0x282e178: mov      x0, x25
+  0x282e17c: mov      x1, xzr
+  0x282e180: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e184: cmp      w0, #0x69
+  0x282e188: b.ne     #0x282e1ec
+  0x282e18c: mov      w2, #0x17
+  0x282e190: mov      x0, x25
+  0x282e194: mov      x1, xzr
+  0x282e198: mov      x3, xzr
+  0x282e19c: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e1a0: tbz      w0, #0, #0x282e1ec
+  0x282e1a4: cbz      x21, #0x282e960
+  0x282e1a8: mov      x0, x21
+  0x282e1ac: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x282e1b0: cbz      x0, #0x282e964
+  0x282e1b4: ldr      w8, [x0, #0x3c]
+  0x282e1b8: cmp      w8, #1
+  0x282e1bc: b.eq     #0x282e1d8
+  0x282e1c0: mov      x0, x21
+  0x282e1c4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x282e1c8: cbz      x0, #0x282e96c
+  0x282e1cc: ldr      w8, [x0, #0x3c]
+  0x282e1d0: cmp      w8, #3
+  0x282e1d4: b.ne     #0x282e1ec
+  0x282e1d8: ldr      w26, [x19]
+  0x282e1dc: mov      x0, x25
+  0x282e1e0: mov      x1, xzr
+  0x282e1e4: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e1e8: b        #0x282da9c
+  0x282e1ec: mov      x0, x25
+  0x282e1f0: mov      x1, xzr
+  0x282e1f4: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e1f8: cmp      w0, #0x6a
+  0x282e1fc: b.ne     #0x282e274
+  0x282e200: mov      w2, #0x17
+  0x282e204: mov      x0, x25
+  0x282e208: mov      x1, xzr
+  0x282e20c: mov      x3, xzr
+  0x282e210: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e214: tbz      w0, #0, #0x282e274
+  0x282e218: adrp     x8, #0x59e4000
+  0x282e21c: ldrb     w8, [x8, #0xbd3]
+  0x282e220: cbnz     w8, #0x282e23c
+  0x282e224: adrp     x0, #0x5598000
+  0x282e228: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e22c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e230: adrp     x8, #0x59e4000
+  0x282e234: mov      w9, #1
+  0x282e238: strb     w9, [x8, #0xbd3]
+  0x282e23c: adrp     x8, #0x5598000
+  0x282e240: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e244: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e248: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e24c: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e250: cbz      x0, #0x282e968
+  0x282e254: mov      x1, xzr
+  0x282e258: bl       #0x259be3c ; -> CDungeonScene$$get_IsPvp
+  0x282e25c: tbz      w0, #0, #0x282e274
+  0x282e260: ldr      w26, [x19]
+  0x282e264: mov      x0, x25
+  0x282e268: mov      x1, xzr
+  0x282e26c: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e270: b        #0x282da9c
+  0x282e274: mov      x0, x25
+  0x282e278: mov      x1, xzr
+  0x282e27c: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e280: cmp      w0, #0x6c
+  0x282e284: b.ne     #0x282e304
+  0x282e288: mov      w2, #0x17
+  0x282e28c: mov      x0, x25
+  0x282e290: mov      x1, xzr
+  0x282e294: mov      x3, xzr
+  0x282e298: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e29c: tbz      w0, #0, #0x282e304
+  0x282e2a0: adrp     x8, #0x5596000
+  0x282e2a4: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e2a8: ldr      x26, [x25, #0x18]
+  0x282e2ac: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282e2b0: ldr      w8, [x0, #0xe0]
+  0x282e2b4: cbnz     w8, #0x282e2bc
+  0x282e2b8: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e2bc: mov      x0, x26
+  0x282e2c0: mov      x1, xzr
+  0x282e2c4: mov      x2, xzr
+  0x282e2c8: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x282e2cc: tbz      w0, #0, #0x282d9ac
+  0x282e2d0: ldr      x26, [x25, #0x18]
+  0x282e2d4: cbz      x26, #0x282e998
+  0x282e2d8: ldr      x8, [x26, #0x28]
+  0x282e2dc: cbz      x8, #0x282d9ac
+  0x282e2e0: ldr      w27, [x19]
+  0x282e2e4: mov      x0, x25
+  0x282e2e8: mov      x1, xzr
+  0x282e2ec: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e2f0: mov      w1, w0
+  0x282e2f4: mov      x0, x26
+  0x282e2f8: bl       #0x281611c ; -> CCharacterBattle$$GetLostHPRateValue
+  0x282e2fc: add      w8, w0, w27
+  0x282e300: b        #0x282e074
+  0x282e304: mov      x0, x25
+  0x282e308: mov      x1, xzr
+  0x282e30c: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e310: cmp      w0, #0x6e
+  0x282e314: b.ne     #0x282e428
+  0x282e318: mov      w2, #0x17
+  0x282e31c: mov      x0, x25
+  0x282e320: mov      x1, xzr
+  0x282e324: mov      x3, xzr
+  0x282e328: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e32c: tbz      w0, #0, #0x282e428
+  0x282e330: adrp     x8, #0x5596000
+  0x282e334: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e338: ldr      x26, [x25, #0x20]
+  0x282e33c: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282e340: ldr      w8, [x0, #0xe0]
+  0x282e344: cbnz     w8, #0x282e34c
+  0x282e348: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e34c: mov      x0, x26
+  0x282e350: mov      x1, xzr
+  0x282e354: mov      x2, xzr
+  0x282e358: bl       #0x5046628 ; -> UnityEngine.Object$$op_Equality
+  0x282e35c: tbnz     w0, #0, #0x282d9ac
+  0x282e360: ldr      x0, [x25, #0x20]
+  0x282e364: cbz      x0, #0x282e99c
+  0x282e368: ldr      x8, [x0, #0x28] ; = 0x0 (u64 @ 0x5598028)
+  0x282e36c: cbz      x8, #0x282d9ac
+  0x282e370: bl       #0x2818b28 ; -> CCharacterBattle$$GetTeam
+  0x282e374: cbz      x0, #0x282d9ac
+  0x282e378: ldr      x0, [x0, #0x10] ; = 0x0 (u64 @ 0x5598010)
+  0x282e37c: cbz      x0, #0x282e9d8
+  0x282e380: adrp     x8, #0x5598000
+  0x282e384: ldr      x8, [x8, #0xda0] ; = 0x0 (u64 @ 0x5598da0)
+  0x282e388: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e38c: add      x8, sp, #0x28
+  0x282e390: bl       #0x44c9ec4 ; -> System.Collections.Generic.List<object>$$GetEnumerator
+  0x282e394: ldur     q0, [sp, #0x28]
+  0x282e398: ldr      x8, [sp, #0x38]
+  0x282e39c: mov      w27, wzr
+  0x282e3a0: str      q0, [sp, #0x40]
+  0x282e3a4: str      x8, [sp, #0x50]
+  0x282e3a8: adrp     x8, #0x5598000
+  0x282e3ac: ldr      x8, [x8, #0xd88] ; = 0x0 (u64 @ 0x5598d88)
+  0x282e3b0: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e3b4: add      x0, sp, #0x40
+  0x282e3b8: bl       #0x4121198 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
+  0x282e3bc: tbz      w0, #0, #0x282e714
+  0x282e3c0: adrp     x8, #0x5596000
+  0x282e3c4: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e3c8: ldr      x26, [sp, #0x50]
+  0x282e3cc: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282e3d0: ldr      w8, [x0, #0xe0]
+  0x282e3d4: cbnz     w8, #0x282e3dc
+  0x282e3d8: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e3dc: mov      x0, x26
+  0x282e3e0: mov      x1, xzr
+  0x282e3e4: mov      x2, xzr
+  0x282e3e8: bl       #0x5046628 ; -> UnityEngine.Object$$op_Equality
+  0x282e3ec: tbnz     w0, #0, #0x282e3a8
+  0x282e3f0: cbz      x26, #0x282e798
+  0x282e3f4: mov      x0, x26
+  0x282e3f8: mov      w1, wzr
+  0x282e3fc: bl       #0x282b82c ; -> CCharacterBattle$$GetBuffList
+  0x282e400: adrp     x8, #0x5598000
+  0x282e404: ldr      x8, [x8, #0xd60] ; = 0x0 (u64 @ 0x5598d60)
+  0x282e408: mov      x26, x0
+  0x282e40c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e410: bl       #0x3422e2c ; -> CExtension$$IsNullOrEmpty<object>
+  0x282e414: tbnz     w0, #0, #0x282e3a8
+  0x282e418: cbz      x26, #0x282e7ac
+  0x282e41c: ldr      w8, [x26, #0x18]
+  0x282e420: add      w27, w8, w27
+  0x282e424: b        #0x282e3a8
+  0x282e428: mov      x0, x25
+  0x282e42c: mov      x1, xzr
+  0x282e430: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e434: cmp      w0, #0x6f
+  0x282e438: b.ne     #0x282e530
+  0x282e43c: mov      w2, #0x17
+  0x282e440: mov      x0, x25
+  0x282e444: mov      x1, xzr
+  0x282e448: mov      x3, xzr
+  0x282e44c: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e450: tbz      w0, #0, #0x282e530
+  0x282e454: adrp     x8, #0x5596000
+  0x282e458: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e45c: ldr      x26, [x25, #0x20]
+  0x282e460: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282e464: ldr      w8, [x0, #0xe0]
+  0x282e468: cbnz     w8, #0x282e470
+  0x282e46c: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e470: mov      x0, x26
+  0x282e474: mov      x1, xzr
+  0x282e478: mov      x2, xzr
+  0x282e47c: bl       #0x5046628 ; -> UnityEngine.Object$$op_Equality
+  0x282e480: tbnz     w0, #0, #0x282d9ac
+  0x282e484: ldr      x0, [x25, #0x20]
+  0x282e488: cbz      x0, #0x282e9a0
+  0x282e48c: ldr      x8, [x0, #0x28] ; = 0x0 (u64 @ 0x5598028)
+  0x282e490: cbz      x8, #0x282d9ac
+  0x282e494: bl       #0x2818b28 ; -> CCharacterBattle$$GetTeam
+  0x282e498: cbz      x0, #0x282d9ac
+  0x282e49c: ldr      x0, [x0, #0x10] ; = 0x0 (u64 @ 0x5598010)
+  0x282e4a0: cbz      x0, #0x282e9e4
+  0x282e4a4: adrp     x8, #0x5598000
+  0x282e4a8: ldr      x8, [x8, #0xda0] ; = 0x0 (u64 @ 0x5598da0)
+  0x282e4ac: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e4b0: add      x8, sp, #0x28
+  0x282e4b4: bl       #0x44c9ec4 ; -> System.Collections.Generic.List<object>$$GetEnumerator
+  0x282e4b8: ldur     q0, [sp, #0x28]
+  0x282e4bc: ldr      x8, [sp, #0x38]
+  0x282e4c0: mov      w27, wzr
+  0x282e4c4: str      q0, [sp, #0x40]
+  0x282e4c8: str      x8, [sp, #0x50]
+  0x282e4cc: adrp     x8, #0x5598000
+  0x282e4d0: ldr      x8, [x8, #0xd88] ; = 0x0 (u64 @ 0x5598d88)
+  0x282e4d4: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e4d8: add      x0, sp, #0x40
+  0x282e4dc: bl       #0x4121198 ; -> System.Collections.Generic.List.Enumerator<object>$$MoveNext
+  0x282e4e0: tbz      w0, #0, #0x282e75c
+  0x282e4e4: adrp     x8, #0x5596000
+  0x282e4e8: ldr      x8, [x8, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e4ec: ldr      x26, [sp, #0x50]
+  0x282e4f0: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5596000)
+  0x282e4f4: ldr      w8, [x0, #0xe0]
+  0x282e4f8: cbnz     w8, #0x282e500
+  0x282e4fc: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e500: mov      x0, x26
+  0x282e504: mov      x1, xzr
+  0x282e508: mov      x2, xzr
+  0x282e50c: bl       #0x5046628 ; -> UnityEngine.Object$$op_Equality
+  0x282e510: tbnz     w0, #0, #0x282e4cc
+  0x282e514: cbz      x26, #0x282e7a4
+  0x282e518: mov      x0, x26
+  0x282e51c: mov      x1, xzr
+  0x282e520: bl       #0x2714530 ; -> CCharacter$$get_IsAlive
+  0x282e524: and      w8, w0, #1
+  0x282e528: add      w27, w27, w8
+  0x282e52c: b        #0x282e4cc
+  0x282e530: mov      x0, x25
+  0x282e534: mov      x1, xzr
+  0x282e538: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e53c: cmp      w0, #0x70
+  0x282e540: b.ne     #0x282e61c
+  0x282e544: mov      w2, #0x17
+  0x282e548: mov      x0, x25
+  0x282e54c: mov      x1, xzr
+  0x282e550: mov      x3, xzr
+  0x282e554: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e558: tbz      w0, #0, #0x282e61c
+  0x282e55c: adrp     x8, #0x59e4000
+  0x282e560: ldrb     w8, [x8, #0xbd3]
+  0x282e564: cbnz     w8, #0x282e580
+  0x282e568: adrp     x0, #0x5598000
+  0x282e56c: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e570: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e574: adrp     x8, #0x59e4000
+  0x282e578: mov      w9, #1
+  0x282e57c: strb     w9, [x8, #0xbd3]
+  0x282e580: adrp     x8, #0x5598000
+  0x282e584: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e588: adrp     x9, #0x5596000
+  0x282e58c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e590: ldr      x9, [x9, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e594: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e598: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5596000)
+  0x282e59c: ldr      x26, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e5a0: ldr      w9, [x0, #0xe0]
+  0x282e5a4: cbnz     w9, #0x282e5ac
+  0x282e5a8: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e5ac: mov      x0, x26
+  0x282e5b0: mov      x1, xzr
+  0x282e5b4: mov      x2, xzr
+  0x282e5b8: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x282e5bc: tbz      w0, #0, #0x282e61c
+  0x282e5c0: adrp     x8, #0x59e4000
+  0x282e5c4: ldrb     w8, [x8, #0xbd3]
+  0x282e5c8: cbnz     w8, #0x282e5e4
+  0x282e5cc: adrp     x0, #0x5598000
+  0x282e5d0: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e5d4: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e5d8: adrp     x8, #0x59e4000
+  0x282e5dc: mov      w9, #1
+  0x282e5e0: strb     w9, [x8, #0xbd3]
+  0x282e5e4: adrp     x8, #0x5598000
+  0x282e5e8: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e5ec: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e5f0: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e5f4: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e5f8: cbz      x0, #0x282e9cc
+  0x282e5fc: mov      x1, xzr
+  0x282e600: bl       #0x259bf88 ; -> CDungeonScene$$get_IsMonadGate
+  0x282e604: tbz      w0, #0, #0x282e61c
+  0x282e608: ldr      w26, [x19]
+  0x282e60c: mov      x0, x25
+  0x282e610: mov      x1, xzr
+  0x282e614: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e618: b        #0x282da9c
+  0x282e61c: mov      x0, x25
+  0x282e620: mov      x1, xzr
+  0x282e624: bl       #0x23252b8 ; -> CBuff$$get_Type
+  0x282e628: cmp      w0, #0x71
+  0x282e62c: b.ne     #0x282d9ac
+  0x282e630: mov      w2, #0x17
+  0x282e634: mov      x0, x25
+  0x282e638: mov      x1, xzr
+  0x282e63c: mov      x3, xzr
+  0x282e640: bl       #0x2330c0c ; -> CBuff$$CheckAvailable
+  0x282e644: tbz      w0, #0, #0x282d9ac
+  0x282e648: adrp     x8, #0x59e4000
+  0x282e64c: ldrb     w8, [x8, #0xbd3]
+  0x282e650: cbnz     w8, #0x282e66c
+  0x282e654: adrp     x0, #0x5598000
+  0x282e658: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e65c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e660: adrp     x8, #0x59e4000
+  0x282e664: mov      w9, #1
+  0x282e668: strb     w9, [x8, #0xbd3]
+  0x282e66c: adrp     x8, #0x5598000
+  0x282e670: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e674: adrp     x9, #0x5596000
+  0x282e678: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e67c: ldr      x9, [x9, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x282e680: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e684: ldr      x0, [x9] ; = 0x0 (u64 @ 0x5596000)
+  0x282e688: ldr      x26, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e68c: ldr      w9, [x0, #0xe0]
+  0x282e690: cbnz     w9, #0x282e698
+  0x282e694: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x282e698: mov      x0, x26
+  0x282e69c: mov      x1, xzr
+  0x282e6a0: mov      x2, xzr
+  0x282e6a4: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x282e6a8: tbz      w0, #0, #0x282d9ac
+  0x282e6ac: adrp     x8, #0x59e4000
+  0x282e6b0: ldrb     w8, [x8, #0xbd3]
+  0x282e6b4: cbnz     w8, #0x282e6d0
+  0x282e6b8: adrp     x0, #0x5598000
+  0x282e6bc: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e6c0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e6c4: adrp     x8, #0x59e4000
+  0x282e6c8: mov      w9, #1
+  0x282e6cc: strb     w9, [x8, #0xbd3]
+  0x282e6d0: adrp     x8, #0x5598000
+  0x282e6d4: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e6d8: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e6dc: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e6e0: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e6e4: cbz      x8, #0x282e9d4
+  0x282e6e8: ldr      x8, [x8, #0x20] ; = 0x0 (u64 @ 0x5598020)
+  0x282e6ec: cbz      x8, #0x282e9d0
+  0x282e6f0: ldr      w0, [x8, #0xa4]
+  0x282e6f4: mov      x1, xzr
+  0x282e6f8: bl       #0x2cbf540 ; -> CExtension$$IsTowerModes
+  0x282e6fc: tbz      w0, #0, #0x282d9ac
+  0x282e700: ldr      w26, [x19]
+  0x282e704: mov      x0, x25
+  0x282e708: mov      x1, xzr
+  0x282e70c: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e710: b        #0x282da9c
+  0x282e714: str      w27, [sp, #0x20]
+  0x282e718: mov      x26, xzr
+  0x282e71c: mov      w27, #0x1c
+  0x282e720: adrp     x8, #0x5598000
+  0x282e724: ldr      x8, [x8, #0xd70] ; = 0x0 (u64 @ 0x5598d70)
+  0x282e728: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e72c: add      x0, sp, #0x40
+  0x282e730: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e734: cbnz     x26, #0x282e9dc
+  0x282e738: cmp      w27, #0x1c
+  0x282e73c: b.eq     #0x282e744
+  0x282e740: cbnz     w27, #0x282e900
+  0x282e744: ldr      w26, [x19]
+  0x282e748: mov      x0, x25
+  0x282e74c: mov      x1, xzr
+  0x282e750: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e754: ldr      w8, [sp, #0x20]
+  0x282e758: b        #0x282e790
+  0x282e75c: mov      x26, xzr
+  0x282e760: adrp     x8, #0x5598000
+  0x282e764: ldr      x8, [x8, #0xd70] ; = 0x0 (u64 @ 0x5598d70)
+  0x282e768: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e76c: add      x0, sp, #0x40
+  0x282e770: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e774: cbnz     x26, #0x282e9e8
+  0x282e778: ldr      w26, [x19]
+  0x282e77c: mov      x0, x25
+  0x282e780: mov      x1, xzr
+  0x282e784: bl       #0x232548c ; -> CBuff$$get_Value
+  0x282e788: mov      w8, #4
+  0x282e78c: sub      w8, w8, w27
+  0x282e790: madd     w8, w0, w8, w26
+  0x282e794: b        #0x282e074
+  0x282e798: str      w27, [sp, #0x20]
+  0x282e79c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e7a0: b        #0x282e9f0
+  0x282e7a4: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e7a8: b        #0x282e9f0
+  0x282e7ac: str      w27, [sp, #0x20]
+  0x282e7b0: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e7b4: b        #0x282e9f0
+  0x282e7b8: b        #0x282e814
+  0x282e7bc: b        #0x282e7dc
+  0x282e7c0: b        #0x282e7dc
+  0x282e7c4: b        #0x282e7dc
+  0x282e7c8: b        #0x282e810
+  0x282e7cc: b        #0x282e814
+  0x282e7d0: b        #0x282e810
+  0x282e7d4: b        #0x282e810
+  0x282e7d8: b        #0x282e7dc
+  0x282e7dc: mov      x8, x1
+  0x282e7e0: mov      x26, x0
+  0x282e7e4: cmp      w8, #1
+  0x282e7e8: str      x1, [sp, #0x18]
+  0x282e7ec: b.ne     #0x282e9a4
+  0x282e7f0: mov      x0, x26
+  0x282e7f4: bl       #0x526dd10 ; -> ??? 0x526dd10
+  0x282e7f8: ldr      x8, [x0] ; = 0x0 (u64 @ 0x5598000)
+  0x282e7fc: str      x8, [sp, #0x20]
+  0x282e800: bl       #0x526dd20 ; -> ??? 0x526dd20
+  0x282e804: ldr      x26, [sp, #0x20]
+  0x282e808: b        #0x282e760
+  0x282e80c: b        #0x282e810
+  0x282e810: str      w27, [sp, #0x20]
+  0x282e814: mov      x8, x1
+  0x282e818: mov      x26, x0
+  0x282e81c: cmp      w8, #1
+  0x282e820: str      x1, [sp, #0x18]
+  0x282e824: b.ne     #0x282e970
+  0x282e828: mov      x0, x26
+  0x282e82c: bl       #0x526dd10 ; -> ??? 0x526dd10
+  0x282e830: ldr      x8, [x0] ; = 0x0 (u64 @ 0x5598000)
+  0x282e834: str      x8, [sp, #0x10]
+  0x282e838: bl       #0x526dd20 ; -> ??? 0x526dd20
+  0x282e83c: ldr      x26, [sp, #0x10]
+  0x282e840: mov      w27, wzr
+  0x282e844: b        #0x282e720
+  0x282e848: adrp     x8, #0x5598000
+  0x282e84c: ldr      x8, [x8, #0xd78] ; = 0x0 (u64 @ 0x5598d78)
+  0x282e850: add      x0, sp, #0x60
+  0x282e854: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e858: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e85c: adrp     x20, #0x59e4000
+  0x282e860: ldrb     w8, [x20, #0xbd3]
+  0x282e864: cbnz     w8, #0x282e87c
+  0x282e868: adrp     x0, #0x5598000
+  0x282e86c: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e870: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x282e874: mov      w8, #1
+  0x282e878: strb     w8, [x20, #0xbd3]
+  0x282e87c: adrp     x8, #0x5598000
+  0x282e880: ldr      x8, [x8, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x282e884: ldr      x8, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e888: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55980b8)
+  0x282e88c: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e890: cbz      x0, #0x282e924
+  0x282e894: mov      x1, xzr
+  0x282e898: bl       #0x259bf18 ; -> CDungeonScene$$get_IsPvpRealtime
+  0x282e89c: tbz      w0, #0, #0x282e8d4
+  0x282e8a0: adrp     x8, #0x5599000
+  0x282e8a4: ldr      w20, [x19]
+  0x282e8a8: ldr      x8, [x8, #0x2b0] ; = 0x0 (u64 @ 0x55992b0)
+  0x282e8ac: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5599000)
+  0x282e8b0: bl       #0x3e6b928 ; -> CSingletonBehaviour<object>$$get_Instance
+  0x282e8b4: cbz      x0, #0x282e924
+  0x282e8b8: mov      x1, xzr
+  0x282e8bc: bl       #0x255f0c8 ; -> CPVPRealTimeManager$$get_CurrentMatchInfo
+  0x282e8c0: cbz      x0, #0x282e924
+  0x282e8c4: mov      x1, xzr
+  0x282e8c8: bl       #0x25678fc ; -> CPvpRealtimeMatch$$get_FieldSkillDmg
+  0x282e8cc: add      w8, w0, w20
+  0x282e8d0: str      w8, [x19]
+  0x282e8d4: ldp      x20, x19, [sp, #0x100]
+  0x282e8d8: ldp      x22, x21, [sp, #0xf0]
+  0x282e8dc: ldp      x24, x23, [sp, #0xe0]
+  0x282e8e0: ldp      x26, x25, [sp, #0xd0]
+  0x282e8e4: ldp      x28, x27, [sp, #0xc0]
+  0x282e8e8: ldp      x29, x30, [sp, #0xb0]
+  0x282e8ec: ldp      d9, d8, [sp, #0xa0]
+  0x282e8f0: ldp      d11, d10, [sp, #0x90]
+  0x282e8f4: ldp      d13, d12, [sp, #0x80]
+  0x282e8f8: add      sp, sp, #0x110
+  0x282e8fc: ret      
+  0x282e900: adrp     x8, #0x5598000
+  0x282e904: ldr      x8, [x8, #0xd78] ; = 0x0 (u64 @ 0x5598d78)
+  0x282e908: add      x0, sp, #0x60
+  0x282e90c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e910: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e914: b        #0x282e8d4
+  0x282e918: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e91c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e920: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e924: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e928: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e92c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e930: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e934: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e938: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e93c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e940: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e944: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e948: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e94c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e950: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e954: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e958: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e95c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e960: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e964: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e968: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e96c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e970: str      xzr, [sp, #0x10]
+  0x282e974: adrp     x8, #0x5598000
+  0x282e978: ldr      x8, [x8, #0xd70] ; = 0x0 (u64 @ 0x5598d70)
+  0x282e97c: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e980: add      x0, sp, #0x40
+  0x282e984: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e988: ldr      x8, [sp, #0x10]
+  0x282e98c: cbz      x8, #0x282ec70
+  0x282e990: ldr      x0, [sp, #0x10]
+  0x282e994: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282e998: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e99c: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9a0: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9a4: str      xzr, [sp, #0x20]
+  0x282e9a8: adrp     x8, #0x5598000
+  0x282e9ac: ldr      x8, [x8, #0xd70] ; = 0x0 (u64 @ 0x5598d70)
+  0x282e9b0: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282e9b4: add      x0, sp, #0x40
+  0x282e9b8: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282e9bc: ldr      x8, [sp, #0x20]
+  0x282e9c0: cbz      x8, #0x282ec70
+  0x282e9c4: ldr      x0, [sp, #0x20]
+  0x282e9c8: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282e9cc: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9d0: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9d4: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9d8: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9dc: mov      x0, x26
+  0x282e9e0: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282e9e4: bl       #0x21b4d20 ; -> ??? 0x21b4d20
+  0x282e9e8: mov      x0, x26
+  0x282e9ec: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282e9f0: mov      x26, x0
+  0x282e9f4: str      x1, [sp, #0x18]
+  0x282e9f8: b        #0x282e974
+  0x282e9fc: mov      x26, x0
+  0x282ea00: str      x1, [sp, #0x18]
+  0x282ea04: b        #0x282e9a8
+  0x282ea08: b        #0x282ece4
+  0x282ea0c: b        #0x282ece4
+  0x282ea10: b        #0x282ece4
+  0x282ea14: b        #0x282ece4
+  0x282ea18: b        #0x282ece4
+  0x282ea1c: b        #0x282ece4
+  0x282ea20: b        #0x282ece4
+  0x282ea24: b        #0x282ece4
+  0x282ea28: b        #0x282ece4
+  0x282ea2c: b        #0x282ece4
+  0x282ea30: b        #0x282ece4
+  0x282ea34: b        #0x282ece4
+  0x282ea38: b        #0x282ece4
+  0x282ea3c: b        #0x282ece4
+  0x282ea40: b        #0x282ece4
+  0x282ea44: b        #0x282ece4
+  0x282ea48: b        #0x282ece4
+  0x282ea4c: b        #0x282ece4
+  0x282ea50: b        #0x282ece4
+  0x282ea54: b        #0x282ece4
+  0x282ea58: b        #0x282ece4
+  0x282ea5c: b        #0x282ece4
+  0x282ea60: b        #0x282ece4
+  0x282ea64: b        #0x282ece4
+  0x282ea68: b        #0x282ec68
+  0x282ea6c: b        #0x282ece4
+  0x282ea70: b        #0x282ece4
+  0x282ea74: b        #0x282ec68
+  0x282ea78: b        #0x282ece4
+  0x282ea7c: b        #0x282ece4
+  0x282ea80: b        #0x282ece4
+  0x282ea84: b        #0x282ece4
+  0x282ea88: b        #0x282ece4
+  0x282ea8c: b        #0x282ece4
+  0x282ea90: b        #0x282ece4
+  0x282ea94: b        #0x282ece4
+  0x282ea98: b        #0x282ec68
+  0x282ea9c: b        #0x282ece4
+  0x282eaa0: b        #0x282ece4
+  0x282eaa4: b        #0x282ece4
+  0x282eaa8: b        #0x282ece4
+  0x282eaac: b        #0x282ece4
+  0x282eab0: b        #0x282ece4
+  0x282eab4: b        #0x282ece4
+  0x282eab8: b        #0x282ece4
+  0x282eabc: b        #0x282ece4
+  0x282eac0: b        #0x282ece4
+  0x282eac4: b        #0x282ec68
+  0x282eac8: b        #0x282ec68
+  0x282eacc: b        #0x282ece4
+  0x282ead0: b        #0x282ece4
+  0x282ead4: b        #0x282ec68
+  0x282ead8: b        #0x282ece4
+  0x282eadc: b        #0x282ece4
+  0x282eae0: b        #0x282ece4
+  0x282eae4: b        #0x282ec68
+  0x282eae8: b        #0x282ece4
+  0x282eaec: b        #0x282ec68
+  0x282eaf0: b        #0x282ece4
+  0x282eaf4: b        #0x282ece4
+  0x282eaf8: b        #0x282ec68
+  0x282eafc: b        #0x282ec68
+  0x282eb00: b        #0x282ec68
+  0x282eb04: b        #0x282ec68
+  0x282eb08: b        #0x282ec68
+  0x282eb0c: b        #0x282ece4
+  0x282eb10: b        #0x282ec68
+  0x282eb14: b        #0x282ec68
+  0x282eb18: b        #0x282ec68
+  0x282eb1c: b        #0x282ec68
+  0x282eb20: b        #0x282ec68
+  0x282eb24: b        #0x282ec68
+  0x282eb28: b        #0x282ec68
+  0x282eb2c: b        #0x282ec68
+  0x282eb30: b        #0x282ec68
+  0x282eb34: b        #0x282ec68
+  0x282eb38: b        #0x282ece4
+  0x282eb3c: b        #0x282ec68
+  0x282eb40: b        #0x282ec68
+  0x282eb44: b        #0x282ec68
+  0x282eb48: b        #0x282ec68
+  0x282eb4c: b        #0x282ec68
+  0x282eb50: b        #0x282ece4
+  0x282eb54: b        #0x282ec68
+  0x282eb58: b        #0x282ec68
+  0x282eb5c: b        #0x282ec68
+  0x282eb60: b        #0x282ec68
+  0x282eb64: b        #0x282ec68
+  0x282eb68: b        #0x282ec68
+  0x282eb6c: b        #0x282ec68
+  0x282eb70: b        #0x282ec68
+  0x282eb74: b        #0x282ec68
+  0x282eb78: b        #0x282ec68
+  0x282eb7c: b        #0x282ec68
+  0x282eb80: b        #0x282ec68
+  0x282eb84: b        #0x282ec68
+  0x282eb88: b        #0x282ec68
+  0x282eb8c: b        #0x282ec68
+  0x282eb90: b        #0x282ec68
+  0x282eb94: b        #0x282ec68
+  0x282eb98: b        #0x282ec68
+  0x282eb9c: b        #0x282ec68
+  0x282eba0: b        #0x282ec68
+  0x282eba4: b        #0x282ec68
+  0x282eba8: b        #0x282ec68
+  0x282ebac: b        #0x282ec68
+  0x282ebb0: b        #0x282ec68
+  0x282ebb4: b        #0x282ec68
+  0x282ebb8: b        #0x282ec68
+  0x282ebbc: b        #0x282ec68
+  0x282ebc0: b        #0x282ec68
+  0x282ebc4: b        #0x282ec68
+  0x282ebc8: b        #0x282ec68
+  0x282ebcc: b        #0x282ec68
+  0x282ebd0: b        #0x282ec68
+  0x282ebd4: b        #0x282ec68
+  0x282ebd8: b        #0x282ec68
+  0x282ebdc: b        #0x282ec68
+  0x282ebe0: b        #0x282ec68
+  0x282ebe4: b        #0x282ec68
+  0x282ebe8: b        #0x282ec68
+  0x282ebec: b        #0x282ec68
+  0x282ebf0: b        #0x282ec68
+  0x282ebf4: b        #0x282ec68
+  0x282ebf8: b        #0x282ec68
+  0x282ebfc: b        #0x282ec68
+  0x282ec00: b        #0x282ec68
+  0x282ec04: b        #0x282ec68
+  0x282ec08: b        #0x282ec68
+  0x282ec0c: b        #0x282ec68
+  0x282ec10: b        #0x282ec68
+  0x282ec14: b        #0x282ec68
+  0x282ec18: b        #0x282ec68
+  0x282ec1c: b        #0x282ec68
+  0x282ec20: b        #0x282ec68
+  0x282ec24: b        #0x282ec68
+  0x282ec28: b        #0x282ec68
+  0x282ec2c: b        #0x282ec68
+  0x282ec30: b        #0x282ec68
+  0x282ec34: b        #0x282ec68
+  0x282ec38: b        #0x282ec68
+  0x282ec3c: b        #0x282ec68
+  0x282ec40: b        #0x282ec68
+  0x282ec44: b        #0x282ec68
+  0x282ec48: b        #0x282ec68
+  0x282ec4c: b        #0x282ec68
+  0x282ec50: b        #0x282ec68
+  0x282ec54: b        #0x282ec68
+  0x282ec58: b        #0x282ec68
+  0x282ec5c: b        #0x282ec68
+  0x282ec60: b        #0x282ec68
+  0x282ec64: b        #0x282ec68
+  0x282ec68: str      x1, [sp, #0x18]
+  0x282ec6c: mov      x26, x0
+  0x282ec70: ldr      x8, [sp, #0x18]
+  0x282ec74: cmp      w8, #1
+  0x282ec78: b.ne     #0x282ecac
+  0x282ec7c: mov      x0, x26
+  0x282ec80: bl       #0x526dd10 ; -> ??? 0x526dd10
+  0x282ec84: ldr      x21, [x0] ; = 0x0 (u64 @ 0x5598000)
+  0x282ec88: bl       #0x526dd20 ; -> ??? 0x526dd20
+  0x282ec8c: adrp     x8, #0x5598000
+  0x282ec90: ldr      x8, [x8, #0xd78] ; = 0x0 (u64 @ 0x5598d78)
+  0x282ec94: add      x0, sp, #0x60
+  0x282ec98: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282ec9c: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282eca0: cbz      x21, #0x282e85c
+  0x282eca4: mov      x0, x21
+  0x282eca8: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282ecac: mov      x21, xzr
+  0x282ecb0: b        #0x282ecb8
+  0x282ecb4: mov      x26, x0
+  0x282ecb8: adrp     x8, #0x5598000
+  0x282ecbc: ldr      x8, [x8, #0xd78] ; = 0x0 (u64 @ 0x5598d78)
+  0x282ecc0: ldr      x1, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x282ecc4: add      x0, sp, #0x60
+  0x282ecc8: bl       #0x4121194 ; -> System.Collections.Generic.List.Enumerator<object>$$Dispose
+  0x282eccc: cbnz     x21, #0x282ecd8
+  0x282ecd0: mov      x0, x26
+  0x282ecd4: bl       #0x22b5834 ; -> ??? 0x22b5834
+  0x282ecd8: mov      x0, x21
+  0x282ecdc: bl       #0x21b4d18 ; -> ??? 0x21b4d18
+  0x282ece0: bl       #0x1f8bf20 ; -> ??? 0x1f8bf20
+  0x282ece4: mov      x26, x0
+  0x282ece8: str      x1, [sp, #0x18]
+  0x282ecec: b        #0x282ec70

@@ -1,9 +1,9 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== CCharacterBattle_GetSpecificDotEnhanceBuffType @ 0x282a90c..0x282a928 (taille 28 octets) =====
-  0x282a90c: sub      w8, w0, #0x38
-  0x282a910: cmp      w8, #6
-  0x282a914: b.hi     #0x282a920
-  0x282a918: add      w0, w0, #0xe
-  0x282a91c: ret      
-  0x282a920: mov      w0, wzr
-  0x282a924: ret      
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== CCharacterBattle_GetSpecificDotEnhanceBuffType @ 0x2831b18..0x2831b34 (taille 28 octets) =====
+  0x2831b18: sub      w8, w0, #0x38
+  0x2831b1c: cmp      w8, #6
+  0x2831b20: b.hi     #0x2831b2c
+  0x2831b24: add      w0, w0, #0xe
+  0x2831b28: ret      
+  0x2831b2c: mov      w0, wzr
+  0x2831b30: ret      

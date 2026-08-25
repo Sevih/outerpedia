@@ -1,456 +1,456 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== CheckDamageRate @ 0x2cb226c..0x2cb2984 (taille 1816 octets) =====
-  0x2cb226c: sub      sp, sp, #0x50
-  0x2cb2270: stp      x30, x25, [sp, #0x10]
-  0x2cb2274: stp      x24, x23, [sp, #0x20]
-  0x2cb2278: stp      x22, x21, [sp, #0x30]
-  0x2cb227c: stp      x20, x19, [sp, #0x40]
-  0x2cb2280: adrp     x21, #0x59da000
-  0x2cb2284: ldrb     w8, [x21, #0x112]
-  0x2cb2288: mov      x19, x1
-  0x2cb228c: mov      x20, x0
-  0x2cb2290: tbnz     w8, #0, #0x2cb22c0
-  0x2cb2294: adrp     x0, #0x5589000
-  0x2cb2298: ldr      x0, [x0, #0xf50] ; = 0x0 (u64 @ 0x5589f50)
-  0x2cb229c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb22a0: adrp     x0, #0x5587000
-  0x2cb22a4: ldr      x0, [x0, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2cb22a8: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb22ac: adrp     x0, #0x55cb000
-  0x2cb22b0: ldr      x0, [x0, #0x88] ; = 0x0 (u64 @ 0x55cb088)
-  0x2cb22b4: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb22b8: mov      w8, #1
-  0x2cb22bc: strb     w8, [x21, #0x112]
-  0x2cb22c0: adrp     x23, #0x59d4000
-  0x2cb22c4: adrp     x25, #0x5587000
-  0x2cb22c8: ldrb     w8, [x23, #0xfc3]
-  0x2cb22cc: ldr      x25, [x25, #0xb30] ; = 0x0 (u64 @ 0x5587b30)
-  0x2cb22d0: str      xzr, [sp, #8]
-  0x2cb22d4: cbnz     w8, #0x2cb22ec
-  0x2cb22d8: adrp     x0, #0x558a000
-  0x2cb22dc: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb22e0: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb22e4: mov      w8, #1
-  0x2cb22e8: strb     w8, [x23, #0xfc3]
-  0x2cb22ec: adrp     x24, #0x558a000
-  0x2cb22f0: ldr      x24, [x24, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb22f4: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5587000)
-  0x2cb22f8: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb22fc: ldr      w9, [x0, #0xe0]
-  0x2cb2300: ldr      x8, [x8, #0xb8]
-  0x2cb2304: ldr      x21, [x8]
-  0x2cb2308: cbnz     w9, #0x2cb2310
-  0x2cb230c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2cb2310: mov      x0, x21
-  0x2cb2314: mov      x1, xzr
-  0x2cb2318: mov      x2, xzr
-  0x2cb231c: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2cb2320: tbz      w0, #0, #0x2cb23fc
-  0x2cb2324: ldrb     w8, [x23, #0xfc3]
-  0x2cb2328: cbnz     w8, #0x2cb2340
-  0x2cb232c: adrp     x0, #0x558a000
-  0x2cb2330: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb2334: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb2338: mov      w8, #1
-  0x2cb233c: strb     w8, [x23, #0xfc3]
-  0x2cb2340: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb2344: ldr      x8, [x8, #0xb8]
-  0x2cb2348: ldr      x0, [x8]
-  0x2cb234c: cbz      x0, #0x2cb2980
-  0x2cb2350: mov      x1, xzr
-  0x2cb2354: bl       #0x25958b8 ; -> CDungeonScene$$get_IsWorldBoss
-  0x2cb2358: tbz      w0, #0, #0x2cb23fc
-  0x2cb235c: ldrb     w8, [x23, #0xfc3]
-  0x2cb2360: cbnz     w8, #0x2cb2378
-  0x2cb2364: adrp     x0, #0x558a000
-  0x2cb2368: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb236c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb2370: mov      w8, #1
-  0x2cb2374: strb     w8, [x23, #0xfc3]
-  0x2cb2378: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb237c: ldr      x8, [x8, #0xb8]
-  0x2cb2380: ldr      x8, [x8]
-  0x2cb2384: cbz      x8, #0x2cb2980
-  0x2cb2388: ldrb     w8, [x8, #0x35]
-  0x2cb238c: cbz      w8, #0x2cb23fc
-  0x2cb2390: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5587000)
-  0x2cb2394: ldr      w8, [x0, #0xe0]
-  0x2cb2398: cbnz     w8, #0x2cb23a0
-  0x2cb239c: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2cb23a0: mov      x0, x20
-  0x2cb23a4: mov      x1, xzr
-  0x2cb23a8: mov      x2, xzr
-  0x2cb23ac: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2cb23b0: tbz      w0, #0, #0x2cb23fc
-  0x2cb23b4: cbz      x20, #0x2cb2980
-  0x2cb23b8: mov      x0, x20
-  0x2cb23bc: mov      x1, xzr
-  0x2cb23c0: bl       #0x280db44 ; -> CCharacterBattle$$get_IsBoss
-  0x2cb23c4: tbz      w0, #0, #0x2cb23fc
-  0x2cb23c8: cbz      x19, #0x2cb2980
-  0x2cb23cc: mov      x0, x19
-  0x2cb23d0: mov      x1, xzr
-  0x2cb23d4: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb23d8: cbz      x0, #0x2cb2980
-  0x2cb23dc: mov      w8, #1
-  0x2cb23e0: str      w8, [x0, #0x3c]
-  0x2cb23e4: mov      x0, x19
-  0x2cb23e8: mov      x1, xzr
-  0x2cb23ec: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb23f0: cbz      x0, #0x2cb2980
-  0x2cb23f4: mov      w8, #0x3e8
-  0x2cb23f8: b        #0x2cb2964
-  0x2cb23fc: cbz      x19, #0x2cb2980
-  0x2cb2400: mov      w1, #3
-  0x2cb2404: mov      x0, x19
-  0x2cb2408: mov      x2, xzr
-  0x2cb240c: bl       #0x280df90 ; -> CCharacterBattle$$FindBuffByType
-  0x2cb2410: cbz      x0, #0x2cb2444
-  0x2cb2414: mov      x0, x19
-  0x2cb2418: mov      x1, xzr
-  0x2cb241c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2420: cbz      x0, #0x2cb2980
-  0x2cb2424: mov      w8, #4
-  0x2cb2428: str      w8, [x0, #0x3c]
-  0x2cb242c: mov      x0, x19
-  0x2cb2430: mov      x1, xzr
-  0x2cb2434: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2438: cbz      x0, #0x2cb2980
-  0x2cb243c: mov      w8, wzr
-  0x2cb2440: b        #0x2cb2964
-  0x2cb2444: cbz      x20, #0x2cb2980
-  0x2cb2448: mov      x0, x20
-  0x2cb244c: mov      x1, xzr
-  0x2cb2450: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2454: cbz      x0, #0x2cb2980
-  0x2cb2458: ldrb     w8, [x0, #0x34]
-  0x2cb245c: cbz      w8, #0x2cb251c
-  0x2cb2460: mov      x0, x19
-  0x2cb2464: mov      x1, xzr
-  0x2cb2468: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb246c: cbz      x0, #0x2cb2980
-  0x2cb2470: ldr      w8, [x0, #0x3c]
-  0x2cb2474: cbz      w8, #0x2cb251c
-  0x2cb2478: mov      x0, x19
-  0x2cb247c: mov      x1, xzr
-  0x2cb2480: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2484: cbz      x0, #0x2cb2980
-  0x2cb2488: ldr      w21, [x0, #0x3c]
-  0x2cb248c: mov      x0, x19
-  0x2cb2490: mov      x1, xzr
-  0x2cb2494: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2498: cbz      x0, #0x2cb2980
-  0x2cb249c: cmp      w21, #3
-  0x2cb24a0: b.eq     #0x2cb2844
-  0x2cb24a4: ldr      w21, [x0, #0x3c]
-  0x2cb24a8: mov      x0, x19
-  0x2cb24ac: mov      x1, xzr
-  0x2cb24b0: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb24b4: cmp      w21, #2
-  0x2cb24b8: mov      x21, x0
-  0x2cb24bc: b.ne     #0x2cb2850
-  0x2cb24c0: ldr      x0, [x20, #0x28]
-  0x2cb24c4: cbz      x0, #0x2cb2980
-  0x2cb24c8: mov      x1, xzr
-  0x2cb24cc: bl       #0x290227c ; -> CCharacterData$$get_CriticalDMGRate
-  0x2cb24d0: cbz      x21, #0x2cb2980
-  0x2cb24d4: str      w0, [x21, #0x40]
-  0x2cb24d8: ldr      x0, [x19, #0x28]
-  0x2cb24dc: cbz      x0, #0x2cb2980
-  0x2cb24e0: mov      x1, xzr
-  0x2cb24e4: bl       #0x29031f4 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
-  0x2cb24e8: cbz      w0, #0x2cb285c
-  0x2cb24ec: mov      x0, x19
-  0x2cb24f0: mov      x1, xzr
-  0x2cb24f4: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb24f8: cbz      x0, #0x2cb2980
-  0x2cb24fc: mov      x21, x0
-  0x2cb2500: ldr      x0, [x19, #0x28]
-  0x2cb2504: cbz      x0, #0x2cb2980
-  0x2cb2508: ldr      w22, [x21, #0x40]
-  0x2cb250c: mov      x1, xzr
-  0x2cb2510: bl       #0x29031f4 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
-  0x2cb2514: sub      w8, w22, w0
-  0x2cb2518: b        #0x2cb2858
-  0x2cb251c: ldr      x0, [x19, #0x28]
-  0x2cb2520: cbz      x0, #0x2cb2980
-  0x2cb2524: mov      x1, xzr
-  0x2cb2528: bl       #0x29027a4 ; -> CCharacterData$$get_Avoid
-  0x2cb252c: cmp      w0, #1
-  0x2cb2530: b.lt     #0x2cb254c
-  0x2cb2534: mov      w21, w0
-  0x2cb2538: mov      w1, #0x3e8
-  0x2cb253c: mov      w0, wzr
-  0x2cb2540: bl       #0x2cb1b04 ; -> CFormula$$GetBattleRandomRange
-  0x2cb2544: cmp      w0, w21
-  0x2cb2548: b.le     #0x2cb260c
-  0x2cb254c: ldr      x0, [x20, #0x28]
-  0x2cb2550: cbz      x0, #0x2cb2980
-  0x2cb2554: mov      x1, xzr
-  0x2cb2558: bl       #0x29021a0 ; -> CCharacterData$$get_CriticalRate
-  0x2cb255c: cmp      w0, #1
-  0x2cb2560: b.lt     #0x2cb264c
-  0x2cb2564: mov      w21, w0
-  0x2cb2568: mov      w1, #0x3e8
-  0x2cb256c: mov      w0, wzr
-  0x2cb2570: bl       #0x2cb1b04 ; -> CFormula$$GetBattleRandomRange
-  0x2cb2574: mov      w22, w0
-  0x2cb2578: mov      x0, x19
-  0x2cb257c: mov      x1, xzr
-  0x2cb2580: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2584: cbz      x0, #0x2cb2980
-  0x2cb2588: cmp      w22, w21
-  0x2cb258c: b.gt     #0x2cb265c
-  0x2cb2590: mov      w8, #2
-  0x2cb2594: str      w8, [x0, #0x3c]
-  0x2cb2598: mov      x0, x19
-  0x2cb259c: mov      x1, xzr
-  0x2cb25a0: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb25a4: ldr      x8, [x20, #0x28]
-  0x2cb25a8: cbz      x8, #0x2cb2980
-  0x2cb25ac: mov      x21, x0
-  0x2cb25b0: mov      x0, x8
-  0x2cb25b4: mov      x1, xzr
-  0x2cb25b8: bl       #0x290227c ; -> CCharacterData$$get_CriticalDMGRate
-  0x2cb25bc: cbz      x21, #0x2cb2980
-  0x2cb25c0: str      w0, [x21, #0x40]
-  0x2cb25c4: ldr      x0, [x19, #0x28]
-  0x2cb25c8: cbz      x0, #0x2cb2980
-  0x2cb25cc: mov      x1, xzr
-  0x2cb25d0: bl       #0x29031f4 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
-  0x2cb25d4: cbz      w0, #0x2cb267c
-  0x2cb25d8: mov      x0, x19
-  0x2cb25dc: mov      x1, xzr
-  0x2cb25e0: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb25e4: cbz      x0, #0x2cb2980
-  0x2cb25e8: mov      x21, x0
-  0x2cb25ec: ldr      x0, [x19, #0x28]
-  0x2cb25f0: cbz      x0, #0x2cb2980
-  0x2cb25f4: ldr      w22, [x21, #0x40]
-  0x2cb25f8: mov      x1, xzr
-  0x2cb25fc: bl       #0x29031f4 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
-  0x2cb2600: sub      w8, w22, w0
-  0x2cb2604: str      w8, [x21, #0x40]
-  0x2cb2608: b        #0x2cb267c
-  0x2cb260c: adrp     x8, #0x5589000
-  0x2cb2610: ldr      x8, [x8, #0xf50] ; = 0x0 (u64 @ 0x5589f50)
-  0x2cb2614: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5589000)
-  0x2cb2618: ldr      w8, [x0, #0xe0]
-  0x2cb261c: cbnz     w8, #0x2cb2624
-  0x2cb2620: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2cb2624: adrp     x8, #0x55cb000
-  0x2cb2628: ldr      x8, [x8, #0x88] ; = 0x0 (u64 @ 0x55cb088)
-  0x2cb262c: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb2630: bl       #0x2ca7164 ; -> CDebug$$Log
-  0x2cb2634: mov      x0, x19
-  0x2cb2638: mov      x1, xzr
-  0x2cb263c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2640: cbz      x0, #0x2cb2980
-  0x2cb2644: mov      w8, #3
-  0x2cb2648: b        #0x2cb2660
-  0x2cb264c: mov      x0, x19
-  0x2cb2650: mov      x1, xzr
-  0x2cb2654: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2658: cbz      x0, #0x2cb2980
-  0x2cb265c: mov      w8, #1
-  0x2cb2660: str      w8, [x0, #0x3c]
-  0x2cb2664: mov      x0, x19
-  0x2cb2668: mov      x1, xzr
-  0x2cb266c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2670: cbz      x0, #0x2cb2980
-  0x2cb2674: mov      w8, #0x3e8
-  0x2cb2678: str      w8, [x0, #0x40]
-  0x2cb267c: ldrb     w8, [x23, #0xfc3]
-  0x2cb2680: cbnz     w8, #0x2cb2698
-  0x2cb2684: adrp     x0, #0x558a000
-  0x2cb2688: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb268c: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb2690: mov      w8, #1
-  0x2cb2694: strb     w8, [x23, #0xfc3]
-  0x2cb2698: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb269c: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5587000)
-  0x2cb26a0: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb26a4: ldr      w9, [x0, #0xe0]
-  0x2cb26a8: ldr      x21, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb26ac: cbnz     w9, #0x2cb26b4
-  0x2cb26b0: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2cb26b4: mov      x0, x21
-  0x2cb26b8: mov      x1, xzr
-  0x2cb26bc: mov      x2, xzr
-  0x2cb26c0: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2cb26c4: tbz      w0, #0, #0x2cb2764
-  0x2cb26c8: ldrb     w8, [x23, #0xfc3]
-  0x2cb26cc: cbnz     w8, #0x2cb26e4
-  0x2cb26d0: adrp     x0, #0x558a000
-  0x2cb26d4: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb26d8: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb26dc: mov      w8, #1
-  0x2cb26e0: strb     w8, [x23, #0xfc3]
-  0x2cb26e4: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb26e8: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb26ec: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb26f0: cbz      x0, #0x2cb2980
-  0x2cb26f4: mov      x1, xzr
-  0x2cb26f8: bl       #0x25958b8 ; -> CDungeonScene$$get_IsWorldBoss
-  0x2cb26fc: tbz      w0, #0, #0x2cb2764
-  0x2cb2700: ldrb     w8, [x23, #0xfc3]
-  0x2cb2704: cbnz     w8, #0x2cb271c
-  0x2cb2708: adrp     x0, #0x558a000
-  0x2cb270c: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb2710: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb2714: mov      w8, #1
-  0x2cb2718: strb     w8, [x23, #0xfc3]
-  0x2cb271c: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb2720: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb2724: ldr      x8, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb2728: cbz      x8, #0x2cb2980
-  0x2cb272c: ldrb     w8, [x8, #0x34]
-  0x2cb2730: cbz      w8, #0x2cb2764
-  0x2cb2734: mov      x0, x19
-  0x2cb2738: mov      x1, xzr
-  0x2cb273c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2740: cbz      x0, #0x2cb2980
-  0x2cb2744: mov      w8, #1
-  0x2cb2748: str      w8, [x0, #0x3c]
-  0x2cb274c: mov      x0, x19
-  0x2cb2750: mov      x1, xzr
-  0x2cb2754: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2758: cbz      x0, #0x2cb2980
-  0x2cb275c: mov      w8, #0x3e8
-  0x2cb2760: str      w8, [x0, #0x40]
-  0x2cb2764: ldrb     w8, [x23, #0xfc3]
-  0x2cb2768: cbnz     w8, #0x2cb2780
-  0x2cb276c: adrp     x0, #0x558a000
-  0x2cb2770: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb2774: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb2778: mov      w8, #1
-  0x2cb277c: strb     w8, [x23, #0xfc3]
-  0x2cb2780: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb2784: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5587000)
-  0x2cb2788: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb278c: ldr      w9, [x0, #0xe0]
-  0x2cb2790: ldr      x21, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb2794: cbnz     w9, #0x2cb279c
-  0x2cb2798: bl       #0x21afaf4 ; -> ??? 0x21afaf4
-  0x2cb279c: mov      x0, x21
-  0x2cb27a0: mov      x1, xzr
-  0x2cb27a4: mov      x2, xzr
-  0x2cb27a8: bl       #0x5037138 ; -> UnityEngine.Object$$op_Inequality
-  0x2cb27ac: tbz      w0, #0, #0x2cb285c
-  0x2cb27b0: ldrb     w8, [x23, #0xfc3]
-  0x2cb27b4: cbnz     w8, #0x2cb27cc
-  0x2cb27b8: adrp     x0, #0x558a000
-  0x2cb27bc: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb27c0: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb27c4: mov      w8, #1
-  0x2cb27c8: strb     w8, [x23, #0xfc3]
-  0x2cb27cc: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb27d0: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb27d4: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb27d8: cbz      x0, #0x2cb2980
-  0x2cb27dc: mov      x1, xzr
-  0x2cb27e0: bl       #0x259594c ; -> CDungeonScene$$get_IsIrregularInfiltrate
-  0x2cb27e4: tbz      w0, #0, #0x2cb285c
-  0x2cb27e8: ldrb     w8, [x23, #0xfc3]
-  0x2cb27ec: cbnz     w8, #0x2cb2804
-  0x2cb27f0: adrp     x0, #0x558a000
-  0x2cb27f4: ldr      x0, [x0, #0x248] ; = 0x0 (u64 @ 0x558a248)
-  0x2cb27f8: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2cb27fc: mov      w8, #1
-  0x2cb2800: strb     w8, [x23, #0xfc3]
-  0x2cb2804: ldr      x8, [x24] ; = 0x0 (u64 @ 0x558a000)
-  0x2cb2808: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55cb0b8)
-  0x2cb280c: ldr      x8, [x8] ; = 0x0 (u64 @ 0x55cb000)
-  0x2cb2810: cbz      x8, #0x2cb2980
-  0x2cb2814: ldrb     w8, [x8, #0x38]
-  0x2cb2818: cbz      w8, #0x2cb285c
-  0x2cb281c: mov      x0, x19
-  0x2cb2820: mov      x1, xzr
-  0x2cb2824: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2828: cbz      x0, #0x2cb2980
-  0x2cb282c: mov      w8, #1
-  0x2cb2830: str      w8, [x0, #0x3c]
-  0x2cb2834: mov      x0, x19
-  0x2cb2838: mov      x1, xzr
-  0x2cb283c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2840: cbz      x0, #0x2cb2980
-  0x2cb2844: mov      w8, #0x3e8
-  0x2cb2848: str      w8, [x0, #0x40]
-  0x2cb284c: b        #0x2cb285c
-  0x2cb2850: cbz      x21, #0x2cb2980
-  0x2cb2854: mov      w8, #0x3e8
-  0x2cb2858: str      w8, [x21, #0x40]
-  0x2cb285c: add      x1, sp, #0xc
-  0x2cb2860: mov      x0, x20
-  0x2cb2864: mov      x2, x19
-  0x2cb2868: mov      x3, xzr
-  0x2cb286c: bl       #0x28268c0 ; -> CCharacterBattle$$FindBuffAdditionalDamage
-  0x2cb2870: ldr      w8, [sp, #0xc]
-  0x2cb2874: cbz      w8, #0x2cb2898
-  0x2cb2878: mov      x0, x19
-  0x2cb287c: mov      x1, xzr
-  0x2cb2880: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2884: cbz      x0, #0x2cb2980
-  0x2cb2888: ldr      w8, [x0, #0x40]
-  0x2cb288c: ldr      w9, [sp, #0xc]
-  0x2cb2890: add      w8, w9, w8
-  0x2cb2894: str      w8, [x0, #0x40]
-  0x2cb2898: add      x1, sp, #8
-  0x2cb289c: mov      x0, x19
-  0x2cb28a0: mov      x2, x20
-  0x2cb28a4: mov      x3, xzr
-  0x2cb28a8: bl       #0x2827ae4 ; -> CCharacterBattle$$FindBuffDamageReduce
-  0x2cb28ac: ldr      w8, [sp, #8]
-  0x2cb28b0: cbz      w8, #0x2cb28d4
-  0x2cb28b4: mov      x0, x19
-  0x2cb28b8: mov      x1, xzr
-  0x2cb28bc: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb28c0: cbz      x0, #0x2cb2980
-  0x2cb28c4: ldr      w8, [x0, #0x40]
-  0x2cb28c8: ldr      w9, [sp, #8]
-  0x2cb28cc: sub      w8, w8, w9
-  0x2cb28d0: str      w8, [x0, #0x40]
-  0x2cb28d4: mov      x0, x19
-  0x2cb28d8: mov      x1, xzr
-  0x2cb28dc: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb28e0: cbz      x0, #0x2cb2980
-  0x2cb28e4: mov      x21, x0
-  0x2cb28e8: ldr      x0, [x20, #0x28]
-  0x2cb28ec: cbz      x0, #0x2cb2980
-  0x2cb28f0: ldr      w20, [x21, #0x40]
-  0x2cb28f4: mov      x1, xzr
-  0x2cb28f8: bl       #0x2903118 ; -> CCharacterData$$get_DMGBoost
-  0x2cb28fc: add      w8, w0, w20
-  0x2cb2900: mov      x0, x19
-  0x2cb2904: mov      x1, xzr
-  0x2cb2908: str      w8, [x21, #0x40]
-  0x2cb290c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2910: cbz      x0, #0x2cb2980
-  0x2cb2914: mov      x20, x0
-  0x2cb2918: ldr      x0, [x19, #0x28]
-  0x2cb291c: cbz      x0, #0x2cb2980
-  0x2cb2920: ldr      w21, [x20, #0x40]
-  0x2cb2924: mov      x1, xzr
-  0x2cb2928: bl       #0x29020c4 ; -> CCharacterData$$get_DMGReduceRate
-  0x2cb292c: sub      w8, w21, w0
-  0x2cb2930: mov      x0, x19
-  0x2cb2934: mov      x1, xzr
-  0x2cb2938: str      w8, [x20, #0x40]
-  0x2cb293c: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb2940: cbz      x0, #0x2cb2980
-  0x2cb2944: ldr      w8, [x0, #0x40]
-  0x2cb2948: cmp      w8, #0x12b
-  0x2cb294c: b.gt     #0x2cb2968
-  0x2cb2950: mov      x0, x19
-  0x2cb2954: mov      x1, xzr
-  0x2cb2958: bl       #0x280f704 ; -> CCharacterBattle$$get_SkillRecord
-  0x2cb295c: cbz      x0, #0x2cb2980
-  0x2cb2960: mov      w8, #0x12c
-  0x2cb2964: str      w8, [x0, #0x40]
-  0x2cb2968: ldp      x20, x19, [sp, #0x40]
-  0x2cb296c: ldp      x22, x21, [sp, #0x30]
-  0x2cb2970: ldp      x24, x23, [sp, #0x20]
-  0x2cb2974: ldp      x30, x25, [sp, #0x10]
-  0x2cb2978: add      sp, sp, #0x50
-  0x2cb297c: ret      
-  0x2cb2980: bl       #0x21afc18 ; -> ??? 0x21afc18
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== CheckDamageRate @ 0x2cc0ca0..0x2cc13b8 (taille 1816 octets) =====
+  0x2cc0ca0: sub      sp, sp, #0x50
+  0x2cc0ca4: stp      x30, x25, [sp, #0x10]
+  0x2cc0ca8: stp      x24, x23, [sp, #0x20]
+  0x2cc0cac: stp      x22, x21, [sp, #0x30]
+  0x2cc0cb0: stp      x20, x19, [sp, #0x40]
+  0x2cc0cb4: adrp     x21, #0x59e9000
+  0x2cc0cb8: ldrb     w8, [x21, #0xd67]
+  0x2cc0cbc: mov      x19, x1
+  0x2cc0cc0: mov      x20, x0
+  0x2cc0cc4: tbnz     w8, #0, #0x2cc0cf4
+  0x2cc0cc8: adrp     x0, #0x5598000
+  0x2cc0ccc: ldr      x0, [x0, #0xa60] ; = 0x0 (u64 @ 0x5598a60)
+  0x2cc0cd0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0cd4: adrp     x0, #0x5596000
+  0x2cc0cd8: ldr      x0, [x0, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x2cc0cdc: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0ce0: adrp     x0, #0x55d9000
+  0x2cc0ce4: ldr      x0, [x0, #0xeb0] ; = 0x0 (u64 @ 0x55d9eb0)
+  0x2cc0ce8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0cec: mov      w8, #1
+  0x2cc0cf0: strb     w8, [x21, #0xd67]
+  0x2cc0cf4: adrp     x23, #0x59e4000
+  0x2cc0cf8: adrp     x25, #0x5596000
+  0x2cc0cfc: ldrb     w8, [x23, #0xbd3]
+  0x2cc0d00: ldr      x25, [x25, #0x640] ; = 0x0 (u64 @ 0x5596640)
+  0x2cc0d04: str      xzr, [sp, #8]
+  0x2cc0d08: cbnz     w8, #0x2cc0d20
+  0x2cc0d0c: adrp     x0, #0x5598000
+  0x2cc0d10: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc0d14: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0d18: mov      w8, #1
+  0x2cc0d1c: strb     w8, [x23, #0xbd3]
+  0x2cc0d20: adrp     x24, #0x5598000
+  0x2cc0d24: ldr      x24, [x24, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc0d28: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5596000)
+  0x2cc0d2c: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc0d30: ldr      w9, [x0, #0xe0]
+  0x2cc0d34: ldr      x8, [x8, #0xb8]
+  0x2cc0d38: ldr      x21, [x8]
+  0x2cc0d3c: cbnz     w9, #0x2cc0d44
+  0x2cc0d40: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2cc0d44: mov      x0, x21
+  0x2cc0d48: mov      x1, xzr
+  0x2cc0d4c: mov      x2, xzr
+  0x2cc0d50: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x2cc0d54: tbz      w0, #0, #0x2cc0e30
+  0x2cc0d58: ldrb     w8, [x23, #0xbd3]
+  0x2cc0d5c: cbnz     w8, #0x2cc0d74
+  0x2cc0d60: adrp     x0, #0x5598000
+  0x2cc0d64: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc0d68: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0d6c: mov      w8, #1
+  0x2cc0d70: strb     w8, [x23, #0xbd3]
+  0x2cc0d74: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc0d78: ldr      x8, [x8, #0xb8]
+  0x2cc0d7c: ldr      x0, [x8]
+  0x2cc0d80: cbz      x0, #0x2cc13b4
+  0x2cc0d84: mov      x1, xzr
+  0x2cc0d88: bl       #0x259bed0 ; -> CDungeonScene$$get_IsWorldBoss
+  0x2cc0d8c: tbz      w0, #0, #0x2cc0e30
+  0x2cc0d90: ldrb     w8, [x23, #0xbd3]
+  0x2cc0d94: cbnz     w8, #0x2cc0dac
+  0x2cc0d98: adrp     x0, #0x5598000
+  0x2cc0d9c: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc0da0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc0da4: mov      w8, #1
+  0x2cc0da8: strb     w8, [x23, #0xbd3]
+  0x2cc0dac: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc0db0: ldr      x8, [x8, #0xb8]
+  0x2cc0db4: ldr      x8, [x8]
+  0x2cc0db8: cbz      x8, #0x2cc13b4
+  0x2cc0dbc: ldrb     w8, [x8, #0x35]
+  0x2cc0dc0: cbz      w8, #0x2cc0e30
+  0x2cc0dc4: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5596000)
+  0x2cc0dc8: ldr      w8, [x0, #0xe0]
+  0x2cc0dcc: cbnz     w8, #0x2cc0dd4
+  0x2cc0dd0: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2cc0dd4: mov      x0, x20
+  0x2cc0dd8: mov      x1, xzr
+  0x2cc0ddc: mov      x2, xzr
+  0x2cc0de0: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x2cc0de4: tbz      w0, #0, #0x2cc0e30
+  0x2cc0de8: cbz      x20, #0x2cc13b4
+  0x2cc0dec: mov      x0, x20
+  0x2cc0df0: mov      x1, xzr
+  0x2cc0df4: bl       #0x2814ac4 ; -> CCharacterBattle$$get_IsBoss
+  0x2cc0df8: tbz      w0, #0, #0x2cc0e30
+  0x2cc0dfc: cbz      x19, #0x2cc13b4
+  0x2cc0e00: mov      x0, x19
+  0x2cc0e04: mov      x1, xzr
+  0x2cc0e08: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0e0c: cbz      x0, #0x2cc13b4
+  0x2cc0e10: mov      w8, #1
+  0x2cc0e14: str      w8, [x0, #0x3c]
+  0x2cc0e18: mov      x0, x19
+  0x2cc0e1c: mov      x1, xzr
+  0x2cc0e20: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0e24: cbz      x0, #0x2cc13b4
+  0x2cc0e28: mov      w8, #0x3e8
+  0x2cc0e2c: b        #0x2cc1398
+  0x2cc0e30: cbz      x19, #0x2cc13b4
+  0x2cc0e34: mov      w1, #3
+  0x2cc0e38: mov      x0, x19
+  0x2cc0e3c: mov      x2, xzr
+  0x2cc0e40: bl       #0x2814f10 ; -> CCharacterBattle$$FindBuffByType
+  0x2cc0e44: cbz      x0, #0x2cc0e78
+  0x2cc0e48: mov      x0, x19
+  0x2cc0e4c: mov      x1, xzr
+  0x2cc0e50: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0e54: cbz      x0, #0x2cc13b4
+  0x2cc0e58: mov      w8, #4
+  0x2cc0e5c: str      w8, [x0, #0x3c]
+  0x2cc0e60: mov      x0, x19
+  0x2cc0e64: mov      x1, xzr
+  0x2cc0e68: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0e6c: cbz      x0, #0x2cc13b4
+  0x2cc0e70: mov      w8, wzr
+  0x2cc0e74: b        #0x2cc1398
+  0x2cc0e78: cbz      x20, #0x2cc13b4
+  0x2cc0e7c: mov      x0, x20
+  0x2cc0e80: mov      x1, xzr
+  0x2cc0e84: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0e88: cbz      x0, #0x2cc13b4
+  0x2cc0e8c: ldrb     w8, [x0, #0x34]
+  0x2cc0e90: cbz      w8, #0x2cc0f50
+  0x2cc0e94: mov      x0, x19
+  0x2cc0e98: mov      x1, xzr
+  0x2cc0e9c: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0ea0: cbz      x0, #0x2cc13b4
+  0x2cc0ea4: ldr      w8, [x0, #0x3c]
+  0x2cc0ea8: cbz      w8, #0x2cc0f50
+  0x2cc0eac: mov      x0, x19
+  0x2cc0eb0: mov      x1, xzr
+  0x2cc0eb4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0eb8: cbz      x0, #0x2cc13b4
+  0x2cc0ebc: ldr      w21, [x0, #0x3c]
+  0x2cc0ec0: mov      x0, x19
+  0x2cc0ec4: mov      x1, xzr
+  0x2cc0ec8: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0ecc: cbz      x0, #0x2cc13b4
+  0x2cc0ed0: cmp      w21, #3
+  0x2cc0ed4: b.eq     #0x2cc1278
+  0x2cc0ed8: ldr      w21, [x0, #0x3c]
+  0x2cc0edc: mov      x0, x19
+  0x2cc0ee0: mov      x1, xzr
+  0x2cc0ee4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0ee8: cmp      w21, #2
+  0x2cc0eec: mov      x21, x0
+  0x2cc0ef0: b.ne     #0x2cc1284
+  0x2cc0ef4: ldr      x0, [x20, #0x28]
+  0x2cc0ef8: cbz      x0, #0x2cc13b4
+  0x2cc0efc: mov      x1, xzr
+  0x2cc0f00: bl       #0x29094f0 ; -> CCharacterData$$get_CriticalDMGRate
+  0x2cc0f04: cbz      x21, #0x2cc13b4
+  0x2cc0f08: str      w0, [x21, #0x40]
+  0x2cc0f0c: ldr      x0, [x19, #0x28]
+  0x2cc0f10: cbz      x0, #0x2cc13b4
+  0x2cc0f14: mov      x1, xzr
+  0x2cc0f18: bl       #0x290a468 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
+  0x2cc0f1c: cbz      w0, #0x2cc1290
+  0x2cc0f20: mov      x0, x19
+  0x2cc0f24: mov      x1, xzr
+  0x2cc0f28: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0f2c: cbz      x0, #0x2cc13b4
+  0x2cc0f30: mov      x21, x0
+  0x2cc0f34: ldr      x0, [x19, #0x28]
+  0x2cc0f38: cbz      x0, #0x2cc13b4
+  0x2cc0f3c: ldr      w22, [x21, #0x40]
+  0x2cc0f40: mov      x1, xzr
+  0x2cc0f44: bl       #0x290a468 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
+  0x2cc0f48: sub      w8, w22, w0
+  0x2cc0f4c: b        #0x2cc128c
+  0x2cc0f50: ldr      x0, [x19, #0x28]
+  0x2cc0f54: cbz      x0, #0x2cc13b4
+  0x2cc0f58: mov      x1, xzr
+  0x2cc0f5c: bl       #0x2909a18 ; -> CCharacterData$$get_Avoid
+  0x2cc0f60: cmp      w0, #1
+  0x2cc0f64: b.lt     #0x2cc0f80
+  0x2cc0f68: mov      w21, w0
+  0x2cc0f6c: mov      w1, #0x3e8
+  0x2cc0f70: mov      w0, wzr
+  0x2cc0f74: bl       #0x2cc0538 ; -> CFormula$$GetBattleRandomRange
+  0x2cc0f78: cmp      w0, w21
+  0x2cc0f7c: b.le     #0x2cc1040
+  0x2cc0f80: ldr      x0, [x20, #0x28]
+  0x2cc0f84: cbz      x0, #0x2cc13b4
+  0x2cc0f88: mov      x1, xzr
+  0x2cc0f8c: bl       #0x2909414 ; -> CCharacterData$$get_CriticalRate
+  0x2cc0f90: cmp      w0, #1
+  0x2cc0f94: b.lt     #0x2cc1080
+  0x2cc0f98: mov      w21, w0
+  0x2cc0f9c: mov      w1, #0x3e8
+  0x2cc0fa0: mov      w0, wzr
+  0x2cc0fa4: bl       #0x2cc0538 ; -> CFormula$$GetBattleRandomRange
+  0x2cc0fa8: mov      w22, w0
+  0x2cc0fac: mov      x0, x19
+  0x2cc0fb0: mov      x1, xzr
+  0x2cc0fb4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0fb8: cbz      x0, #0x2cc13b4
+  0x2cc0fbc: cmp      w22, w21
+  0x2cc0fc0: b.gt     #0x2cc1090
+  0x2cc0fc4: mov      w8, #2
+  0x2cc0fc8: str      w8, [x0, #0x3c]
+  0x2cc0fcc: mov      x0, x19
+  0x2cc0fd0: mov      x1, xzr
+  0x2cc0fd4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc0fd8: ldr      x8, [x20, #0x28]
+  0x2cc0fdc: cbz      x8, #0x2cc13b4
+  0x2cc0fe0: mov      x21, x0
+  0x2cc0fe4: mov      x0, x8
+  0x2cc0fe8: mov      x1, xzr
+  0x2cc0fec: bl       #0x29094f0 ; -> CCharacterData$$get_CriticalDMGRate
+  0x2cc0ff0: cbz      x21, #0x2cc13b4
+  0x2cc0ff4: str      w0, [x21, #0x40]
+  0x2cc0ff8: ldr      x0, [x19, #0x28]
+  0x2cc0ffc: cbz      x0, #0x2cc13b4
+  0x2cc1000: mov      x1, xzr
+  0x2cc1004: bl       #0x290a468 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
+  0x2cc1008: cbz      w0, #0x2cc10b0
+  0x2cc100c: mov      x0, x19
+  0x2cc1010: mov      x1, xzr
+  0x2cc1014: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1018: cbz      x0, #0x2cc13b4
+  0x2cc101c: mov      x21, x0
+  0x2cc1020: ldr      x0, [x19, #0x28]
+  0x2cc1024: cbz      x0, #0x2cc13b4
+  0x2cc1028: ldr      w22, [x21, #0x40]
+  0x2cc102c: mov      x1, xzr
+  0x2cc1030: bl       #0x290a468 ; -> CCharacterData$$get_EnemyCriticalDamageReduce
+  0x2cc1034: sub      w8, w22, w0
+  0x2cc1038: str      w8, [x21, #0x40]
+  0x2cc103c: b        #0x2cc10b0
+  0x2cc1040: adrp     x8, #0x5598000
+  0x2cc1044: ldr      x8, [x8, #0xa60] ; = 0x0 (u64 @ 0x5598a60)
+  0x2cc1048: ldr      x0, [x8] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc104c: ldr      w8, [x0, #0xe0]
+  0x2cc1050: cbnz     w8, #0x2cc1058
+  0x2cc1054: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2cc1058: adrp     x8, #0x55d9000
+  0x2cc105c: ldr      x8, [x8, #0xeb0] ; = 0x0 (u64 @ 0x55d9eb0)
+  0x2cc1060: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc1064: bl       #0x2cb5f24 ; -> CDebug$$Log
+  0x2cc1068: mov      x0, x19
+  0x2cc106c: mov      x1, xzr
+  0x2cc1070: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1074: cbz      x0, #0x2cc13b4
+  0x2cc1078: mov      w8, #3
+  0x2cc107c: b        #0x2cc1094
+  0x2cc1080: mov      x0, x19
+  0x2cc1084: mov      x1, xzr
+  0x2cc1088: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc108c: cbz      x0, #0x2cc13b4
+  0x2cc1090: mov      w8, #1
+  0x2cc1094: str      w8, [x0, #0x3c]
+  0x2cc1098: mov      x0, x19
+  0x2cc109c: mov      x1, xzr
+  0x2cc10a0: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc10a4: cbz      x0, #0x2cc13b4
+  0x2cc10a8: mov      w8, #0x3e8
+  0x2cc10ac: str      w8, [x0, #0x40]
+  0x2cc10b0: ldrb     w8, [x23, #0xbd3]
+  0x2cc10b4: cbnz     w8, #0x2cc10cc
+  0x2cc10b8: adrp     x0, #0x5598000
+  0x2cc10bc: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc10c0: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc10c4: mov      w8, #1
+  0x2cc10c8: strb     w8, [x23, #0xbd3]
+  0x2cc10cc: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc10d0: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5596000)
+  0x2cc10d4: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc10d8: ldr      w9, [x0, #0xe0]
+  0x2cc10dc: ldr      x21, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc10e0: cbnz     w9, #0x2cc10e8
+  0x2cc10e4: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2cc10e8: mov      x0, x21
+  0x2cc10ec: mov      x1, xzr
+  0x2cc10f0: mov      x2, xzr
+  0x2cc10f4: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x2cc10f8: tbz      w0, #0, #0x2cc1198
+  0x2cc10fc: ldrb     w8, [x23, #0xbd3]
+  0x2cc1100: cbnz     w8, #0x2cc1118
+  0x2cc1104: adrp     x0, #0x5598000
+  0x2cc1108: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc110c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc1110: mov      w8, #1
+  0x2cc1114: strb     w8, [x23, #0xbd3]
+  0x2cc1118: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc111c: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc1120: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc1124: cbz      x0, #0x2cc13b4
+  0x2cc1128: mov      x1, xzr
+  0x2cc112c: bl       #0x259bed0 ; -> CDungeonScene$$get_IsWorldBoss
+  0x2cc1130: tbz      w0, #0, #0x2cc1198
+  0x2cc1134: ldrb     w8, [x23, #0xbd3]
+  0x2cc1138: cbnz     w8, #0x2cc1150
+  0x2cc113c: adrp     x0, #0x5598000
+  0x2cc1140: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc1144: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc1148: mov      w8, #1
+  0x2cc114c: strb     w8, [x23, #0xbd3]
+  0x2cc1150: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc1154: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc1158: ldr      x8, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc115c: cbz      x8, #0x2cc13b4
+  0x2cc1160: ldrb     w8, [x8, #0x34]
+  0x2cc1164: cbz      w8, #0x2cc1198
+  0x2cc1168: mov      x0, x19
+  0x2cc116c: mov      x1, xzr
+  0x2cc1170: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1174: cbz      x0, #0x2cc13b4
+  0x2cc1178: mov      w8, #1
+  0x2cc117c: str      w8, [x0, #0x3c]
+  0x2cc1180: mov      x0, x19
+  0x2cc1184: mov      x1, xzr
+  0x2cc1188: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc118c: cbz      x0, #0x2cc13b4
+  0x2cc1190: mov      w8, #0x3e8
+  0x2cc1194: str      w8, [x0, #0x40]
+  0x2cc1198: ldrb     w8, [x23, #0xbd3]
+  0x2cc119c: cbnz     w8, #0x2cc11b4
+  0x2cc11a0: adrp     x0, #0x5598000
+  0x2cc11a4: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc11a8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc11ac: mov      w8, #1
+  0x2cc11b0: strb     w8, [x23, #0xbd3]
+  0x2cc11b4: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc11b8: ldr      x0, [x25] ; = 0x0 (u64 @ 0x5596000)
+  0x2cc11bc: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc11c0: ldr      w9, [x0, #0xe0]
+  0x2cc11c4: ldr      x21, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc11c8: cbnz     w9, #0x2cc11d0
+  0x2cc11cc: bl       #0x21b4bfc ; -> ??? 0x21b4bfc
+  0x2cc11d0: mov      x0, x21
+  0x2cc11d4: mov      x1, xzr
+  0x2cc11d8: mov      x2, xzr
+  0x2cc11dc: bl       #0x5045a3c ; -> UnityEngine.Object$$op_Inequality
+  0x2cc11e0: tbz      w0, #0, #0x2cc1290
+  0x2cc11e4: ldrb     w8, [x23, #0xbd3]
+  0x2cc11e8: cbnz     w8, #0x2cc1200
+  0x2cc11ec: adrp     x0, #0x5598000
+  0x2cc11f0: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc11f4: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc11f8: mov      w8, #1
+  0x2cc11fc: strb     w8, [x23, #0xbd3]
+  0x2cc1200: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc1204: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc1208: ldr      x0, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc120c: cbz      x0, #0x2cc13b4
+  0x2cc1210: mov      x1, xzr
+  0x2cc1214: bl       #0x259bf64 ; -> CDungeonScene$$get_IsIrregularInfiltrate
+  0x2cc1218: tbz      w0, #0, #0x2cc1290
+  0x2cc121c: ldrb     w8, [x23, #0xbd3]
+  0x2cc1220: cbnz     w8, #0x2cc1238
+  0x2cc1224: adrp     x0, #0x5598000
+  0x2cc1228: ldr      x0, [x0, #0xd58] ; = 0x0 (u64 @ 0x5598d58)
+  0x2cc122c: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x2cc1230: mov      w8, #1
+  0x2cc1234: strb     w8, [x23, #0xbd3]
+  0x2cc1238: ldr      x8, [x24] ; = 0x0 (u64 @ 0x5598000)
+  0x2cc123c: ldr      x8, [x8, #0xb8] ; = 0x0 (u64 @ 0x55d90b8)
+  0x2cc1240: ldr      x8, [x8] ; = 0x0 (u64 @ 0x55d9000)
+  0x2cc1244: cbz      x8, #0x2cc13b4
+  0x2cc1248: ldrb     w8, [x8, #0x38]
+  0x2cc124c: cbz      w8, #0x2cc1290
+  0x2cc1250: mov      x0, x19
+  0x2cc1254: mov      x1, xzr
+  0x2cc1258: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc125c: cbz      x0, #0x2cc13b4
+  0x2cc1260: mov      w8, #1
+  0x2cc1264: str      w8, [x0, #0x3c]
+  0x2cc1268: mov      x0, x19
+  0x2cc126c: mov      x1, xzr
+  0x2cc1270: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1274: cbz      x0, #0x2cc13b4
+  0x2cc1278: mov      w8, #0x3e8
+  0x2cc127c: str      w8, [x0, #0x40]
+  0x2cc1280: b        #0x2cc1290
+  0x2cc1284: cbz      x21, #0x2cc13b4
+  0x2cc1288: mov      w8, #0x3e8
+  0x2cc128c: str      w8, [x21, #0x40]
+  0x2cc1290: add      x1, sp, #0xc
+  0x2cc1294: mov      x0, x20
+  0x2cc1298: mov      x2, x19
+  0x2cc129c: mov      x3, xzr
+  0x2cc12a0: bl       #0x282d838 ; -> CCharacterBattle$$FindBuffAdditionalDamage
+  0x2cc12a4: ldr      w8, [sp, #0xc]
+  0x2cc12a8: cbz      w8, #0x2cc12cc
+  0x2cc12ac: mov      x0, x19
+  0x2cc12b0: mov      x1, xzr
+  0x2cc12b4: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc12b8: cbz      x0, #0x2cc13b4
+  0x2cc12bc: ldr      w8, [x0, #0x40]
+  0x2cc12c0: ldr      w9, [sp, #0xc]
+  0x2cc12c4: add      w8, w9, w8
+  0x2cc12c8: str      w8, [x0, #0x40]
+  0x2cc12cc: add      x1, sp, #8
+  0x2cc12d0: mov      x0, x19
+  0x2cc12d4: mov      x2, x20
+  0x2cc12d8: mov      x3, xzr
+  0x2cc12dc: bl       #0x282ecf0 ; -> CCharacterBattle$$FindBuffDamageReduce
+  0x2cc12e0: ldr      w8, [sp, #8]
+  0x2cc12e4: cbz      w8, #0x2cc1308
+  0x2cc12e8: mov      x0, x19
+  0x2cc12ec: mov      x1, xzr
+  0x2cc12f0: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc12f4: cbz      x0, #0x2cc13b4
+  0x2cc12f8: ldr      w8, [x0, #0x40]
+  0x2cc12fc: ldr      w9, [sp, #8]
+  0x2cc1300: sub      w8, w8, w9
+  0x2cc1304: str      w8, [x0, #0x40]
+  0x2cc1308: mov      x0, x19
+  0x2cc130c: mov      x1, xzr
+  0x2cc1310: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1314: cbz      x0, #0x2cc13b4
+  0x2cc1318: mov      x21, x0
+  0x2cc131c: ldr      x0, [x20, #0x28]
+  0x2cc1320: cbz      x0, #0x2cc13b4
+  0x2cc1324: ldr      w20, [x21, #0x40]
+  0x2cc1328: mov      x1, xzr
+  0x2cc132c: bl       #0x290a38c ; -> CCharacterData$$get_DMGBoost
+  0x2cc1330: add      w8, w0, w20
+  0x2cc1334: mov      x0, x19
+  0x2cc1338: mov      x1, xzr
+  0x2cc133c: str      w8, [x21, #0x40]
+  0x2cc1340: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1344: cbz      x0, #0x2cc13b4
+  0x2cc1348: mov      x20, x0
+  0x2cc134c: ldr      x0, [x19, #0x28]
+  0x2cc1350: cbz      x0, #0x2cc13b4
+  0x2cc1354: ldr      w21, [x20, #0x40]
+  0x2cc1358: mov      x1, xzr
+  0x2cc135c: bl       #0x2909338 ; -> CCharacterData$$get_DMGReduceRate
+  0x2cc1360: sub      w8, w21, w0
+  0x2cc1364: mov      x0, x19
+  0x2cc1368: mov      x1, xzr
+  0x2cc136c: str      w8, [x20, #0x40]
+  0x2cc1370: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1374: cbz      x0, #0x2cc13b4
+  0x2cc1378: ldr      w8, [x0, #0x40]
+  0x2cc137c: cmp      w8, #0x12b
+  0x2cc1380: b.gt     #0x2cc139c
+  0x2cc1384: mov      x0, x19
+  0x2cc1388: mov      x1, xzr
+  0x2cc138c: bl       #0x2816684 ; -> CCharacterBattle$$get_SkillRecord
+  0x2cc1390: cbz      x0, #0x2cc13b4
+  0x2cc1394: mov      w8, #0x12c
+  0x2cc1398: str      w8, [x0, #0x40]
+  0x2cc139c: ldp      x20, x19, [sp, #0x40]
+  0x2cc13a0: ldp      x22, x21, [sp, #0x30]
+  0x2cc13a4: ldp      x24, x23, [sp, #0x20]
+  0x2cc13a8: ldp      x30, x25, [sp, #0x10]
+  0x2cc13ac: add      sp, sp, #0x50
+  0x2cc13b0: ret      
+  0x2cc13b4: bl       #0x21b4d20 ; -> ??? 0x21b4d20

@@ -1,57 +1,57 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== CCharacterData_get_DMGBoost @ 0x2903118..0x29031f4 (taille 220 octets) =====
-  0x2903118: str      x30, [sp, #-0x20]!
-  0x290311c: stp      x20, x19, [sp, #0x10]
-  0x2903120: adrp     x20, #0x59d8000
-  0x2903124: ldrb     w8, [x20, #0x26f]
-  0x2903128: mov      x19, x0
-  0x290312c: tbnz     w8, #0, #0x2903150
-  0x2903130: adrp     x0, #0x55b6000
-  0x2903134: ldr      x0, [x0, #0x778] ; = 0x0 (u64 @ 0x55b6778)
-  0x2903138: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x290313c: adrp     x0, #0x55b6000
-  0x2903140: ldr      x0, [x0, #0x780] ; = 0x0 (u64 @ 0x55b6780)
-  0x2903144: bl       #0x21af97c ; -> ??? 0x21af97c
-  0x2903148: mov      w8, #1
-  0x290314c: strb     w8, [x20, #0x26f]
-  0x2903150: ldrb     w8, [x19, #0x28]
-  0x2903154: cbz      w8, #0x2903160
-  0x2903158: mov      x0, x19
-  0x290315c: bl       #0x2904780 ; -> CCharacterData$$CalcStat
-  0x2903160: ldr      x0, [x19, #0x40]
-  0x2903164: cbz      x0, #0x29031f0
-  0x2903168: adrp     x8, #0x55b6000
-  0x290316c: ldr      x8, [x8, #0x778] ; = 0x0 (u64 @ 0x55b6778)
-  0x2903170: mov      w1, #0x19
-  0x2903174: ldr      x2, [x8] ; = 0x0 (u64 @ 0x55b6000)
-  0x2903178: bl       #0x4019c78 ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
-  0x290317c: cbz      x0, #0x29031f0
-  0x2903180: adrp     x10, #0x55b6000
-  0x2903184: ldr      x8, [x0] ; = 0x0 (u64 @ 0x55b6000)
-  0x2903188: ldr      x10, [x10, #0x780] ; = 0x0 (u64 @ 0x55b6780)
-  0x290318c: mov      x19, x0
-  0x2903190: ldrh     w9, [x8, #0x12e]
-  0x2903194: ldr      x1, [x10] ; = 0x0 (u64 @ 0x55b6000)
-  0x2903198: cbz      x9, #0x29031bc
-  0x290319c: ldr      x10, [x8, #0xb0] ; = 0x0 (u64 @ 0x55b60b0)
-  0x29031a0: add      x10, x10, #8
-  0x29031a4: ldur     x11, [x10, #-8]
-  0x29031a8: cmp      x11, x1
-  0x29031ac: b.eq     #0x29031cc
-  0x29031b0: subs     x9, x9, #1
-  0x29031b4: add      x10, x10, #0x10
-  0x29031b8: b.ne     #0x29031a4
-  0x29031bc: mov      w2, #1
-  0x29031c0: mov      x0, x19
-  0x29031c4: bl       #0x2210028 ; -> ??? 0x2210028
-  0x29031c8: b        #0x29031dc
-  0x29031cc: ldr      w9, [x10]
-  0x29031d0: add      w9, w9, #1
-  0x29031d4: add      x8, x8, w9, sxtw #4
-  0x29031d8: add      x0, x8, #0x138
-  0x29031dc: ldp      x2, x1, [x0]
-  0x29031e0: mov      x0, x19
-  0x29031e4: ldp      x20, x19, [sp, #0x10]
-  0x29031e8: ldr      x30, [sp], #0x20
-  0x29031ec: br       x2
-  0x29031f0: bl       #0x21afc18 ; -> ??? 0x21afc18
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== CCharacterData_get_DMGBoost @ 0x290a38c..0x290a468 (taille 220 octets) =====
+  0x290a38c: str      x30, [sp, #-0x20]!
+  0x290a390: stp      x20, x19, [sp, #0x10]
+  0x290a394: adrp     x20, #0x59e7000
+  0x290a398: ldrb     w8, [x20, #0xe8e]
+  0x290a39c: mov      x19, x0
+  0x290a3a0: tbnz     w8, #0, #0x290a3c4
+  0x290a3a4: adrp     x0, #0x55c5000
+  0x290a3a8: ldr      x0, [x0, #0x378] ; = 0x0 (u64 @ 0x55c5378)
+  0x290a3ac: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x290a3b0: adrp     x0, #0x55c5000
+  0x290a3b4: ldr      x0, [x0, #0x380] ; = 0x0 (u64 @ 0x55c5380)
+  0x290a3b8: bl       #0x21b4a84 ; -> ??? 0x21b4a84
+  0x290a3bc: mov      w8, #1
+  0x290a3c0: strb     w8, [x20, #0xe8e]
+  0x290a3c4: ldrb     w8, [x19, #0x28]
+  0x290a3c8: cbz      w8, #0x290a3d4
+  0x290a3cc: mov      x0, x19
+  0x290a3d0: bl       #0x290b9f4 ; -> CCharacterData$$CalcStat
+  0x290a3d4: ldr      x0, [x19, #0x40]
+  0x290a3d8: cbz      x0, #0x290a464
+  0x290a3dc: adrp     x8, #0x55c5000
+  0x290a3e0: ldr      x8, [x8, #0x378] ; = 0x0 (u64 @ 0x55c5378)
+  0x290a3e4: mov      w1, #0x19
+  0x290a3e8: ldr      x2, [x8] ; = 0x0 (u64 @ 0x55c5000)
+  0x290a3ec: bl       #0x402857c ; -> System.Collections.Generic.Dictionary<Int32Enum, object>$$get_Item
+  0x290a3f0: cbz      x0, #0x290a464
+  0x290a3f4: adrp     x10, #0x55c5000
+  0x290a3f8: ldr      x8, [x0] ; = 0x0 (u64 @ 0x55c5000)
+  0x290a3fc: ldr      x10, [x10, #0x380] ; = 0x0 (u64 @ 0x55c5380)
+  0x290a400: mov      x19, x0
+  0x290a404: ldrh     w9, [x8, #0x12e]
+  0x290a408: ldr      x1, [x10] ; = 0x0 (u64 @ 0x55c5000)
+  0x290a40c: cbz      x9, #0x290a430
+  0x290a410: ldr      x10, [x8, #0xb0] ; = 0x0 (u64 @ 0x55c50b0)
+  0x290a414: add      x10, x10, #8
+  0x290a418: ldur     x11, [x10, #-8]
+  0x290a41c: cmp      x11, x1
+  0x290a420: b.eq     #0x290a440
+  0x290a424: subs     x9, x9, #1
+  0x290a428: add      x10, x10, #0x10
+  0x290a42c: b.ne     #0x290a418
+  0x290a430: mov      w2, #1
+  0x290a434: mov      x0, x19
+  0x290a438: bl       #0x2215130 ; -> ??? 0x2215130
+  0x290a43c: b        #0x290a450
+  0x290a440: ldr      w9, [x10]
+  0x290a444: add      w9, w9, #1
+  0x290a448: add      x8, x8, w9, sxtw #4
+  0x290a44c: add      x0, x8, #0x138
+  0x290a450: ldp      x2, x1, [x0]
+  0x290a454: mov      x0, x19
+  0x290a458: ldp      x20, x19, [sp, #0x10]
+  0x290a45c: ldr      x30, [sp], #0x20
+  0x290a460: br       x2
+  0x290a464: bl       #0x21b4d20 ; -> ??? 0x21b4d20

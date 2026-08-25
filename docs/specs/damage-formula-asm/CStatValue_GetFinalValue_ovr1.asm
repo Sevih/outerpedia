@@ -1,7 +1,7 @@
-; jeu 1.4.14 — régénéré par datagen/extract/disasm.py
-; ===== CStatValue_GetFinalValue_ovr1 @ 0x29fc7b0..0x29fc7c4 (taille 20 octets) =====
-  0x29fc7b0: ldr      w8, [x0, #0x10]
-  0x29fc7b4: cmp      w8, #1
-  0x29fc7b8: b.ne     #0x29fc7c0
-  0x29fc7bc: b        #0x29fc154
-  0x29fc7c0: b        #0x29fbd34
+; jeu 1.4.15 — régénéré par datagen/extract/disasm.py
+; ===== CStatValue_GetFinalValue_ovr1 @ 0x2a06f5c..0x2a06f70 (taille 20 octets) =====
+  0x2a06f5c: ldr      w8, [x0, #0x10]
+  0x2a06f60: cmp      w8, #1
+  0x2a06f64: b.ne     #0x2a06f6c
+  0x2a06f68: b        #0x2a06900
+  0x2a06f6c: b        #0x2a064e0
