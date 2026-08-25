@@ -3,7 +3,7 @@
 /**
  * Pickers du Damage Calculator — slots d'arme/accessoire, sets, et le picker
  * de cible en modale (browser visuel de l'histoire compris). Extrait de
- * `DamageCalculatorBrowser.tsx` le 25/08/2026 (audit D4 — découpage
+ * `DamageCalculatorBrowser.tsx` le 25/08/2026 (découpage
  * mécanique, contenu inchangé).
  */
 import { useMemo, useState } from 'react';

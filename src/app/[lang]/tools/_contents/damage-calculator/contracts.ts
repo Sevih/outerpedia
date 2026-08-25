@@ -2,7 +2,7 @@
  * Contrats du Damage Calculator — les TYPES du pont wrapper serveur → client
  * (`Dc*`, `Props`) et les types d'état partagés avec les sous-composants
  * (`SetPick`, `AllyPick`). Extrait de `DamageCalculatorBrowser.tsx` le
- * 25/08/2026 (audit D4 — découpage mécanique, contenu inchangé).
+ * 25/08/2026 (découpage mécanique, contenu inchangé).
  */
 import type { Lang } from '@/lib/i18n/config';
 

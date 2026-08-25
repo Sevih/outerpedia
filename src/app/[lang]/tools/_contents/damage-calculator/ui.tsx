@@ -4,7 +4,7 @@
  * Briques d'affichage du Damage Calculator — composants de présentation
  * PARTAGÉS entre le composant principal et les pickers (cartes, steppers,
  * modales, portraits, pickers de perso). Extrait de
- * `DamageCalculatorBrowser.tsx` le 25/08/2026 (audit D4 — découpage
+ * `DamageCalculatorBrowser.tsx` le 25/08/2026 (découpage
  * mécanique, contenu inchangé).
  */
 import { useState, useEffect, type ReactNode } from 'react';

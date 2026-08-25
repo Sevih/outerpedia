@@ -2,7 +2,7 @@
 
 /**
  * État du SCÉNARIO du Damage Calculator + persistance URL `?z=` — extrait du
- * composant principal (audit D4 phase 2, 25/08/2026 — déplacement mécanique,
+ * composant principal (découpage du 25/08/2026 — déplacement mécanique,
  * logique inchangée). Le hook possède :
  *   - tous les états du scénario (attaquant, équipement, cible, contexte) et
  *     les réglages de COMPTE (quirks/codex/guilde/titre, localStorage) ;

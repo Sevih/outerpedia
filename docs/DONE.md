@@ -7,8 +7,10 @@
 
 ## 2026-08-25
 
-- **Damage calc — audit D4 SOLDÉ : `DamageCalculatorBrowser.tsx` passe de
-  4 983 à 2 147 lignes, en deux phases mécaniques.** Phase 1 (blocs hors
+- **Damage calc — découpage du composant SOLDÉ (dernier point ouvert de
+  l'audit [audit/damage-calculator.md](./audit/damage-calculator.md)) :
+  `DamageCalculatorBrowser.tsx` passe de 4 983 à 2 147 lignes, en deux phases
+  mécaniques.** Phase 1 (blocs hors
   composant principal, par les frontières déjà commentées) : `contracts.ts`
   (types `Dc*` du pont wrapper→client + `Props` + types d'état partagés,
   importés désormais directement par index/cond-names/SkillTip), `stores.ts`

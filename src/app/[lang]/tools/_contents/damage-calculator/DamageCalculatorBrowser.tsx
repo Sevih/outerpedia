@@ -9,7 +9,7 @@
  * arrivent en dictionnaires complets d'une projection chargée à la demande et
  * se localisent au rendu (`lang`).
  *
- * Géographie du dossier (audit D4, 25/08/2026 — découpage mécanique) :
+ * Géographie du dossier (découpage mécanique du 25/08/2026) :
  *   - `contracts.ts` (types du pont wrapper → client), `stores.ts`
  *     (localStorage + cycle de capture), `ui.tsx` (briques d'affichage),
  *     `target-pickers.tsx` (slots d'équipement + picker de cible) ;
@@ -122,7 +122,7 @@ export function DamageCalculatorBrowser({
   // Feedback du bouton « copier le lien » (l'URL porte déjà tout le scénario).
   const [copied, setCopied] = useState(false);
   // État du SCÉNARIO + réglages de COMPTE + persistance `?z=` : tout vit
-  // dans useScenarioState (audit D4 phase 2) — destructuré sous les MÊMES
+  // dans useScenarioState (découpage du 25/08/2026) — destructuré sous les MÊMES
   // noms que les anciens useState, le JSX ci-dessous n'a pas bougé.
   const {
     attackerId,

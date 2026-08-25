@@ -4,8 +4,8 @@
  * Table RÉSULTAT du calculateur : une ligne par skill offensif (sous-lignes
  * de burst B1..B3), trois colonnes de branches, DoT en pied de table — plus,
  * en devMode, les coches de branches observables, la saisie « en jeu » (obs),
- * le Δ et le « + » de capture. Extrait du composant principal (audit D4
- * phase 2, 25/08/2026 — JSX déplacé tel quel ; l'état, `saveCell` et le
+ * le Δ et le « + » de capture. Extrait du composant principal (découpage
+ * du 25/08/2026 — JSX déplacé tel quel ; l'état, `saveCell` et le
  * rapport restent au parent).
  */
 import { Fragment } from 'react';

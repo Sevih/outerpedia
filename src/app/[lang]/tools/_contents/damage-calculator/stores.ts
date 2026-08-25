@@ -1,7 +1,7 @@
 /**
  * Réglages de COMPTE du Damage Calculator (localStorage) et cycle de capture
  * des scénarios du harnais. Extrait de `DamageCalculatorBrowser.tsx` le
- * 25/08/2026 (audit D4 — découpage mécanique, contenu inchangé).
+ * 25/08/2026 (découpage mécanique, contenu inchangé).
  */
 import type { StoreSpec } from '@/lib/client-storage';
 import type { DamageBranch } from '@/lib/damage/harness';

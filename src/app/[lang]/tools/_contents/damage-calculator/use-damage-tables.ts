@@ -5,7 +5,7 @@
  * bundle initial du visiteur public, un seul chargement par session) +
  * resolvers LOCAUX du pont z → moteur (preset, gear, main de talisman) — le
  * même contrat que les resolvers node de fixtures.test.ts. Extrait du
- * composant principal (audit D4 phase 2, 25/08/2026 — déplacement mécanique ;
+ * composant principal (découpage du 25/08/2026 — déplacement mécanique ;
  * seule adaptation : `savedScns.length` devient le paramètre `savedScnsLen`).
  */
 import { useEffect, useRef, useState } from 'react';

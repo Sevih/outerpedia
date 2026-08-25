@@ -2,8 +2,8 @@
 
 /**
  * Onglet RÉGLAGES (réglages de COMPTE, hors scénario) : Codex, guilde, titre
- * « Premium Body », arbres de quirks — extrait du composant principal (audit
- * D4 phase 2, 25/08/2026 — JSX déplacé tel quel ; l'état localStorage reste
+ * « Premium Body », arbres de quirks — extrait du composant principal (découpage
+ * du 25/08/2026 — JSX déplacé tel quel ; l'état localStorage reste
  * au parent, via useScenarioState).
  */
 import { GameText } from '@/components/ui/GameText';

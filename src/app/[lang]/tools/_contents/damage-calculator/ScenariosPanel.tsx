@@ -5,7 +5,7 @@
  * « en jeu » vs calculé (REJOUÉ par le parent, jamais stocké : `savedCalcMap`),
  * Charger / ⧉ fixture / supprimer, et l'import du JSON ⧉ d'un beta testeur.
  * Libellés en dur (exemption harnais § 5). Extrait du composant principal
- * (audit D4 phase 2, 25/08/2026 — JSX déplacé tel quel ; l'état et le cycle
+ * (découpage du 25/08/2026 — JSX déplacé tel quel ; l'état et le cycle
  * de capture restent au parent).
  */
 import { ENGINE_GAME_VERSION } from '@/lib/damage/harness';
