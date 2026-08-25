@@ -250,6 +250,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.pull-simulator.mileage_cap': '마일리지 상한',
   'tools.pull-simulator.free_pull': '무료 데일리 모집',
   'tools.pull-simulator.guarantee': '10연 2★ 확정',
+  'tools.pull-simulator.focus_guarantee': '픽업 확정',
   'tools.pull-simulator.yes': '있음',
   'tools.pull-simulator.no': '없음',
   'tools.pull-simulator.never': 'N/A',

@@ -3,6 +3,8 @@ import type { Lang } from '@/lib/i18n/config';
 import { characterNamePrefix, characterSearchNames, getAllCharacters } from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { hasTagInGroup } from '@/lib/data/tags';
+import { getRecruitKind } from '@/lib/data/recruit';
+import { BANNER_TYPES, RECRUIT_KIND_OF, bannerConfigOf, type BannerConfig } from '@/lib/gacha';
 import {
   PullSimulatorBrowser,
   type GachaChar,
@@ -18,6 +20,10 @@ import {
  * = pool principal, catégorisé par tags : `premium`, la FAMILLE `limited` du
  * glossaire (festival/seasonal/collab — la bannière limitée les tire tous les
  * trois), puis le reste. Les tirages eux-mêmes vivent dans `@/lib/gacha`.
+ *
+ * Les configs de bannière (taux, coûts, mileage, garantie du x10) se DÉRIVENT
+ * ici de `recruit.json` et descendent en props : le moteur reste pur, et le
+ * bundle client n'embarque pas la donnée générée.
  */
 export default async function PullSimulator({ lang }: { lang: Lang }) {
   const t = await getT(lang);
@@ -67,6 +73,7 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
     },
     etherCost: t('tools.pull-simulator.ether_cost'),
     guarantee: t('tools.pull-simulator.guarantee'),
+    focusGuarantee: t('tools.pull-simulator.focus_guarantee'),
     yes: t('tools.pull-simulator.yes'),
     no: t('tools.pull-simulator.no'),
     selectFocus: t('tools.pull-simulator.select_focus'),
@@ -89,7 +96,17 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
     batch: t('tools.pull-simulator.batch'),
   };
 
+  const configs = Object.fromEntries(
+    BANNER_TYPES.map((type) => [type, bannerConfigOf(type, getRecruitKind(RECRUIT_KIND_OF[type]))]),
+  ) as Record<(typeof BANNER_TYPES)[number], BannerConfig>;
+
   return (
-    <PullSimulatorBrowser characters={characters} pool1={pool1} pool2={pool2} labels={labels} />
+    <PullSimulatorBrowser
+      characters={characters}
+      pool1={pool1}
+      pool2={pool2}
+      labels={labels}
+      configs={configs}
+    />
   );
 }

@@ -265,6 +265,7 @@ const en = {
   'tools.pull-simulator.mileage_cap': 'Mileage cap',
   'tools.pull-simulator.free_pull': 'Free daily pull',
   'tools.pull-simulator.guarantee': '10-pull 2★ guarantee',
+  'tools.pull-simulator.focus_guarantee': 'Focus guarantee',
   'tools.pull-simulator.yes': 'Yes',
   'tools.pull-simulator.no': 'No',
   'tools.pull-simulator.never': 'N/A',

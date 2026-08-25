@@ -263,6 +263,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.pull-simulator.mileage_cap': 'Plafond du Mileage',
   'tools.pull-simulator.free_pull': 'Pull gratuit quotidien',
   'tools.pull-simulator.guarantee': 'Garantie 2★ sur 10 pulls',
+  'tools.pull-simulator.focus_guarantee': 'Garantie focus',
   'tools.pull-simulator.yes': 'Oui',
   'tools.pull-simulator.no': 'Non',
   'tools.pull-simulator.never': 'N/A',

@@ -254,6 +254,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.pull-simulator.mileage_cap': 'マイレージ上限',
   'tools.pull-simulator.free_pull': '無料デイリー募集',
   'tools.pull-simulator.guarantee': '10連2★確定',
+  'tools.pull-simulator.focus_guarantee': 'ピックアップ確定',
   'tools.pull-simulator.yes': 'あり',
   'tools.pull-simulator.no': 'なし',
   'tools.pull-simulator.never': 'N/A',

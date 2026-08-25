@@ -244,6 +244,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.pull-simulator.mileage_cap': '指定招募上限',
   'tools.pull-simulator.free_pull': '每日免费抽',
   'tools.pull-simulator.guarantee': '十连2★保底',
+  'tools.pull-simulator.focus_guarantee': 'UP保底',
   'tools.pull-simulator.yes': '有',
   'tools.pull-simulator.no': '无',
   'tools.pull-simulator.never': 'N/A',

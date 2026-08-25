@@ -5,11 +5,13 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { FitText } from '@/components/ui/FitText';
 import {
-  BANNER_CONFIGS,
+  BANNER_TYPES,
   canUseMileage,
+  guaranteeLeft,
   createSession,
   performPulls,
   redeemMileage,
+  type BannerConfig,
   type BannerType,
   type PullResult,
 } from '@/lib/gacha';
@@ -39,6 +41,7 @@ export interface PullSimLabels {
   banners: Record<BannerType, string>;
   etherCost: string;
   guarantee: string;
+  focusGuarantee: string;
   yes: string;
   no: string;
   selectFocus: string;
@@ -60,8 +63,6 @@ export interface PullSimLabels {
   history: string;
   batch: string;
 }
-
-const BANNER_TYPES: BannerType[] = ['custom', 'rateup', 'premium', 'limited'];
 
 /** Catégorie sélectionnable comme focus par bannière (null = pas de focus). */
 const BANNER_FOCUS_CATEGORY: Record<BannerType, GachaCategory | null> = {
@@ -137,11 +138,14 @@ export function PullSimulatorBrowser({
   pool1,
   pool2,
   labels,
+  configs,
 }: {
   characters: GachaChar[];
   pool1: GachaMinor[];
   pool2: GachaMinor[];
   labels: PullSimLabels;
+  /** Taux et coûts DÉRIVÉS de `recruit.json` par le wrapper serveur. */
+  configs: Record<BannerType, BannerConfig>;
 }) {
   const [bannerType, setBannerType] = useState<BannerType>('rateup');
   const [session, setSession] = useState(() => createSession('rateup'));
@@ -150,7 +154,7 @@ export function PullSimulatorBrowser({
   const [focusSearch, setFocusSearch] = useState('');
   const [focusOpen, setFocusOpen] = useState(false);
 
-  const config = BANNER_CONFIGS[bannerType];
+  const config = configs[bannerType];
   const maxFocus = BANNER_FOCUS_COUNT[bannerType];
   const focusCategory = BANNER_FOCUS_CATEGORY[bannerType];
   const poolCategories = BANNER_POOL[bannerType];
@@ -220,32 +224,37 @@ export function PullSimulatorBrowser({
   const handlePull = useCallback(
     (count: 1 | 10) => {
       setSession((prev) => {
-        const { results, session: next } = performPulls(prev, count);
+        const { results, session: next } = performPulls(prev, count, config);
         setLastResults(results.map((r) => ({ ...r, charId: resolveChar(r) })));
         return next;
       });
     },
-    [resolveChar],
+    [resolveChar, config],
   );
 
   const handleMileage = useCallback(() => {
     setSession((prev) => {
-      const next = redeemMileage(prev);
+      const next = redeemMileage(prev, config);
       if (!next) return prev;
       const focus =
         focusChars.length > 0 ? focusChars[Math.floor(Math.random() * focusChars.length)] : null;
       setLastResults([{ rarity: 3, isFocus: true, charId: focus?.id ?? null }]);
       return next;
     });
-  }, [focusChars]);
+  }, [focusChars, config]);
 
   const handleReset = useCallback(() => {
     setSession(createSession(bannerType));
     setLastResults(null);
   }, [bannerType]);
 
-  const mileageReady = maxFocus > 0 && canUseMileage(session);
+  const mileageReady = maxFocus > 0 && canUseMileage(session, config);
   const mileagePercent = Math.min((session.mileage / config.mileageCap) * 100, 100);
+  // Compteur de garantie (pity du 25/08). `null` sur « All Heroes », qui
+  // n'existe pas dans le jeu.
+  const pity = config.guarantee;
+  const pityLeft = guaranteeLeft(session, config);
+  const pityPercent = pity ? Math.min((session.pullsSinceGuarantee / pity.at) * 100, 100) : 0;
   const needle = focusSearch.normalize('NFKC').toLowerCase().trim();
   const displayName = (c: GachaMinor) => (c.prefix ? `${c.prefix} ${c.name}` : c.name);
 
@@ -420,6 +429,31 @@ export function PullSimulatorBrowser({
             {labels.reset}
           </button>
         </div>
+
+        {pity && (
+          <div className="flex min-w-0 flex-1 items-center gap-3 sm:max-w-xs">
+            <div className="flex-1">
+              <div className="mb-1 flex items-center justify-between text-xs">
+                <span className="text-content-muted">{labels.focusGuarantee}</span>
+                <span className={pityLeft ? 'text-content' : 'text-content-subtle'}>
+                  {pityLeft ? `${session.pullsSinceGuarantee} / ${pity.at}` : '—'}
+                  {pity.max !== null && (
+                    <span className="text-content-subtle">
+                      {' '}
+                      ({session.guaranteesUsed}/{pity.max})
+                    </span>
+                  )}
+                </span>
+              </div>
+              <div className="bg-surface-overlay h-2 overflow-hidden rounded-full">
+                <div
+                  className={`h-full rounded-full transition-all duration-300 ${pityLeft ? 'bg-violet-400' : 'bg-violet-600/40'}`}
+                  style={{ width: `${pityLeft ? pityPercent : 100}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
         {maxFocus > 0 && (
           <div className="flex min-w-0 flex-1 items-center gap-3 sm:max-w-xs">
