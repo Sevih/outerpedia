@@ -20,7 +20,7 @@ import { conditionBuffRef } from '@/lib/damage/gear';
 import type { DamageBuffsData } from '@/lib/damage/inputs';
 import { lRec } from '@/lib/i18n/localize';
 import type { Lang } from '@/lib/i18n/config';
-import type { DcEffectRef } from './DamageCalculatorBrowser';
+import type { DcEffectRef } from './contracts';
 
 export interface CondNameGlossary {
   effects: Record<

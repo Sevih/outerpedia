@@ -24,7 +24,7 @@ import { levelAt } from '@/lib/skills';
 import { lRec } from '@/lib/i18n/localize';
 import type { Lang } from '@/lib/i18n/config';
 import type { SkillBuffVars } from '@contracts';
-import type { DcSkillRow } from './DamageCalculatorBrowser';
+import type { DcSkillRow } from './contracts';
 
 /** Miroir minimal d'une entrée de la projection (la vérité : datagen). */
 interface DescEntry {

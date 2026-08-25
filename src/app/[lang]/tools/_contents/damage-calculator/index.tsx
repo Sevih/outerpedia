@@ -52,8 +52,8 @@ import setsRawData from '@data/generated/equipment/sets.json';
 import glossariesData from '@data/generated/glossaries.json';
 import encountersData from '@data/generated/encounters.json';
 import quirksRaw from '@data/generated/quirks.json';
+import { DamageCalculatorBrowser } from './DamageCalculatorBrowser';
 import {
-  DamageCalculatorBrowser,
   type DcBossPassive,
   type DcBuffOption,
   type DcChar,
@@ -67,7 +67,7 @@ import {
   type DcStatField,
   type DcTalisman,
   type DcTarget,
-} from './DamageCalculatorBrowser';
+} from './contracts';
 
 /**
  * Damage Calculator — wrapper SERVEUR, phase UI SEULE (le moteur `src/lib/damage`

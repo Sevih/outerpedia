@@ -7,6 +7,28 @@
 
 ## 2026-08-25
 
+- **Damage calc — audit D4 SOLDÉ : `DamageCalculatorBrowser.tsx` passe de
+  4 983 à 2 147 lignes, en deux phases mécaniques.** Phase 1 (blocs hors
+  composant principal, par les frontières déjà commentées) : `contracts.ts`
+  (types `Dc*` du pont wrapper→client + `Props` + types d'état partagés,
+  importés désormais directement par index/cond-names/SkillTip), `stores.ts`
+  (réglages de compte localStorage + cycle de capture), `ui.tsx` (briques
+  d'affichage partagées), `target-pickers.tsx` (slots d'équipement, sets,
+  picker de cible et browser story). Phase 2 (le composant principal
+  lui-même) : `use-scenario-state.ts` (~60 états du scénario + réglages de
+  compte + TOUT le cycle `?z=` — applyZ/buildZ/packZ, hydratation, debounce,
+  flushShareUrl — destructuré sous les MÊMES noms : le JSX n'a pas bougé),
+  `use-damage-tables.ts` (import dynamique des tables + resolvers locaux du
+  pont ; seule adaptation : `savedScns.length` → paramètre `savedScnsLen`),
+  `SettingsTab.tsx`, `ResultTable.tsx` (branches + DoT + saisie « en jeu »),
+  `ScenariosPanel.tsx` (table des captures du harnais). Les deux phases par
+  SCRIPT de tranches de lignes (aucune retranscription) ; reste dans
+  l'orchestrateur : capture (saveCell/savedCalcs/import), rapport et dérivés,
+  colonnes Attaquant/Cible/Contexte. Docblock d'en-tête remis à l'état réel
+  (il disait encore « PHASE UI SEULE » d'avant le branchement moteur).
+  Zéro changement de comportement visé — tsc/eslint silencieux, 1837 tests
+  verts ; vérif visuelle de la page = Sevih.
+
 - **Damage calc — `pnpm damage:check` : la VALIDATION RÉELLE en un geste
   (demande Sevih).** Rejoue TOUTES les fixtures dorées contre les tables
   courantes et imprime chaque ligne avec son Δ exact — là où
