@@ -3,32 +3,32 @@
     {
       "id": 11141,
       "date": "2026-08-26",
-      "modified": "2026-08-26T10:06:50",
+      "modified": "2026-08-26T10:54:26",
       "slug": "notice-steam-version-release-delay",
       "lang": "en",
       "type": "notice",
-      "title": "[Notice] Steam Version Release Delay (Edited on 8/26 4:18 UTC)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.</p>\n\n\n\n<p>We would like to inform you that the release of the OUTERPLANE Steam version, originally scheduled for today, has been delayed due to an issue requiring further review during the release preparation process.</p>\n\n\n\n<p>We are currently reviewing the relevant matter to ensure stable service on Steam.</p>\n\n\n\n<p>We will provide an update once the release schedule has been confirmed.</p>\n\n\n\n<p>Updated Scheduel: 8/27, 03:00</p>\n\n\n\n<p>We sincerely apologize for the inconvenience to all Masters who have been waiting for the Steam version.</p>\n\n\n\n<p>We will do our best to make the Steam version available as soon as possible.</p>\n\n\n\n<p>Thank you.</p>\n\n\n\n<p></p>\n"
+      "title": "[Notice] Steam Version App Deployment and Maintenance Notice (Added 8/26 16:00)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>The Steam version of OUTERPLANE has been rolling out sequentially since August 26, 2026 at 16:00 (KST).<br>We are currently conducting maintenance on the Steam version servers to ensure stable service.<br><br>■ Steam Version App Deployment and Maintenance Status</p>\n\n\n\n<p>Maintenance Expected to End: August 27, 2026 at 12:00 (KST)<br><br>Even if the app appears on the Steam Store, the game will not be available to play until maintenance has been completed.<br><br>We sincerely apologize for the inconvenience to all Masters who have been waiting for the official Steam release.<br><br>We will do our best to complete the maintenance and provide a stable service as soon as possible.<br><br>Thank you.</p>\n"
     },
     {
       "id": 11139,
       "date": "2026-08-26",
-      "modified": "2026-08-26T04:18:33",
-      "slug": "%ea%b3%b5%ec%a7%80-steam-%eb%b2%84%ec%a0%84-%ec%b6%9c%ec%8b%9c-%ec%a7%80%ec%97%b0-%ec%95%88%eb%82%b4",
+      "modified": "2026-08-26T10:52:01",
+      "slug": "260826_steam_update_kr",
       "lang": "kr",
       "type": "notice",
-      "title": "[공지] Steam 버전 출시 지연 안내 (8/26 13:16 수정)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.</p>\n\n\n\n<p>GM 아메입니다.</p>\n\n\n\n<p>금일 예정되어 있던 아우터플레인 Steam 버전 출시가 출시 준비 과정에서 확인이 필요한 사항이 발생하여 부득이하게 지연되어 안내드립니다.</p>\n\n\n\n<p>현재 정상적인 Steam 서비스 제공을 위해 관련 사항을 확인하고 있으며, 출시 일정이 확정되는 대로 본 공지를 통해 다시 안내드리겠습니다.</p>\n\n\n\n<p>출시 예정 시간: 8월 27일 12:00 AM</p>\n\n\n\n<p>Steam 버전을 기다려주신 오너 여러분께 불편을 드려 죄송합니다.</p>\n\n\n\n<p>최대한 빠르게 서비스를 제공할 수 있도록 노력하겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n"
+      "title": "[공지] 아우터플레인 Steam 버전 앱 배포 및 점검 안내 (8/26 19:50 수정)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.</p>\n\n\n\n<p>GM 아메입니다.</p>\n\n\n\n<p>금일 예정되어 있던 아우터플레인 Steam 버전 출시가 출시 준비 과정에서 확인이 필요한 사항이 발생하여 부득이하게 지연되어 안내드립니다.</p>\n\n\n\n<p>Steam 버전 앱은 2026년 8월 26일(수) 16:00(KST)부터 순차적으로 배포되고 있습니다.</p>\n\n\n\n<p>현재 안정적인 서비스 제공을 위해 Steam 버전 서버 점검을 진행하고 있습니다.</p>\n\n\n\n<p>■ Steam 버전 앱 배포 및 점검 현황</p>\n\n\n\n<ul>\n<li>순차 배포 시작: 2026년 8월 26일(수) 16:00(KST)</li>\n\n\n\n<li>점검 종료 예정: 2026년 8월 27일(목) 12:00(KST)</li>\n</ul>\n\n\n\n<p>Steam 스토어에 앱이 표시되더라도 점검이 종료되기 전까지는 게임을 이용하실 수 없습니다.</p>\n\n\n\n<p>Steam 버전 정식 출시를 기다려 주신 오너 여러분께 불편을 끼쳐 드려 진심으로 사과드립니다.</p>\n\n\n\n<p>안정적인 서비스를 제공해 드릴 수 있도록 점검이 완료될 때까지 최선을 다하겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n"
     },
     {
       "id": 11144,
       "date": "2026-08-26",
-      "modified": "2026-08-26T04:16:58",
-      "slug": "%e3%80%90steam%e7%89%88%e3%82%a2%e3%83%97%e3%83%aa%e9%85%8d%e4%bf%a1%e9%81%85%e5%bb%b6%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91",
+      "modified": "2026-08-26T10:46:33",
+      "slug": "260826_steam_update_jp",
       "lang": "jp",
       "type": "notice",
-      "title": "【お知らせ】Steam版アプリ配信遅延のご案内(8/26 13:16 修正)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>こんにちは。GMあめです。<br>現在、Steam版アプリの配信作業に遅延が発生しております。</p>\n\n\n\n<p>■ Steam版アプリ配信日程</p>\n\n\n\n<ul>\n<li>配信完了予定時刻：<s>未定</s> → 2026年8月27日（木）12:00（JST）</li>\n</ul>\n\n\n\n<p>現在、配信完了予定時刻を確認しております。<br>日程が確定次第、本お知らせにてご案内いたします。</p>\n\n\n\n<p>Steam版の正式リリースをお待ちいただいているマスターの皆様に、<br>ご迷惑をおかけし誠に申し訳ございません。<br><br>一刻も早く配信を完了できるよう、最善を尽くしてまいります。</p>\n\n\n\n<p>ありがとうございます。<br></p>\n\n\n\n<p></p>\n"
+      "title": "【お知らせ】Steam版アプリの配信およびメンテナンスについて（8/26 19:44 追記）",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>こんにちは。GMあめです。</p>\n\n\n\n<p>Steam版アプリにつきまして、2026年8月26日（水）16:00（JST）より順次配信を開始しております。</p>\n\n\n\n<p>現在、安定したサービスをご提供するため、Steam版サーバーのメンテナンスを実施しております。</p>\n\n\n\n<p>■ Steam版アプリ配信およびメンテナンス状況</p>\n\n\n\n<ul>\n<li>順次配信開始：2026年8月26日（水）16:00（JST）</li>\n\n\n\n<li>メンテナンス終了予定：2026年8月27日（木）12:00（JST）</li>\n</ul>\n\n\n\n<p>Steam版アプリがストアに表示されている場合でも、メンテナンス終了まではゲームをご利用いただけません。</p>\n\n\n\n<p>Steam版の正式リリースをお待ちいただいているマスターの皆様には、<br>ご迷惑をおかけしておりますことを、心よりお詫び申し上げます。</p>\n\n\n\n<p>安定したサービスをご提供できるよう、メンテナンス完了まで最善を尽くしてまいります。</p>\n\n\n\n<p>ありがとうございます。<br></p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11089,
