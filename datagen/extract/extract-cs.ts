@@ -168,7 +168,9 @@ export function extractListings(): void {
       missing.push(`${l.file} ← ${l.method} (classe ${cls} introuvable)`);
       continue;
     }
-    const blocks = extractMembers(readFileSync(file, 'utf-8'), cls, member);
+    // ilspycmd écrit en CRLF ; les listings sont committés en LF, comme le reste.
+    const text = readFileSync(file, 'utf-8').replace(/\r\n/g, '\n');
+    const blocks = extractMembers(text, cls, member);
     if (!blocks.length) {
       missing.push(`${l.file} ← ${l.method} (membre absent de ${basename(file)})`);
       continue;
