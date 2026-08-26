@@ -1,5 +1,13 @@
 [
   {
+    "code": "STEAMWISH3",
+    "start": "2026-08-26",
+    "end": "2026-09-22",
+    "description": {
+      "SYS_ASSET_DEMIURGE_FREE": "100"
+    }
+  },
+  {
     "code": "STEAMWISH2",
     "start": "2026-08-26",
     "end": "2026-09-22",
