@@ -1,0 +1,502 @@
+[
+  {
+    "file": "AddCheckEnemyTeamDecreaseDamageRate",
+    "method": "CFormula$$AddCheckEnemyTeamDecreaseDamageRate",
+    "overload": 0
+  },
+  {
+    "file": "ApplyRate",
+    "method": "CCommonDefine$$ApplyRate",
+    "overload": 0
+  },
+  {
+    "file": "CBuff_CheckReverseHealCAP",
+    "method": "CBuff$$CheckReverseHealCAP",
+    "overload": 0
+  },
+  {
+    "file": "CBuff_OnCreate",
+    "method": "CBuff$$OnCreate",
+    "overload": 0
+  },
+  {
+    "file": "CBuff_Run",
+    "method": "CBuff$$Run",
+    "overload": 0
+  },
+  {
+    "file": "CBuff_TrySetDieByReverseHeal",
+    "method": "CBuff$$TrySetDieByReverseHeal",
+    "overload": 0
+  },
+  {
+    "file": "CBuff_get_Value",
+    "method": "CBuff$$get_Value",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_AddHP",
+    "method": "CCharacterBattle$$AddHP",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_SetShieldHP",
+    "method": "CCharacterBattle$$SetShieldHP",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_AddEvolutionStatToDictionary",
+    "method": "CCharacterData$$AddEvolutionStatToDictionary",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcArchiveStats",
+    "method": "CCharacterData$$CalcArchiveStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcAwakeningNodeStats",
+    "method": "CCharacterData$$CalcAwakeningNodeStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcBasicStats",
+    "method": "CCharacterData$$CalcBasicStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcEvolutionStats",
+    "method": "CCharacterData$$CalcEvolutionStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcMonadGateEnchantNodeStats",
+    "method": "CCharacterData$$CalcMonadGateEnchantNodeStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcStat",
+    "method": "CCharacterData$$CalcStat",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CalcTranscendentStarStats",
+    "method": "CCharacterData$$CalcTranscendentStarStats",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_CheckNodeApply",
+    "method": "CCharacterData$$CheckNodeApply",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_GetArchiveGrowValueByType",
+    "method": "CCharacterData$$GetArchiveGrowValueByType",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_GetEvolutionStat",
+    "method": "CCharacterData$$GetEvolutionStat",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_GetValueByLevel",
+    "method": "CCharacterData$$GetValueByLevel",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_Avoid",
+    "method": "CCharacterData$$get_Avoid",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_CriticalDMGRate",
+    "method": "CCharacterData$$get_CriticalDMGRate",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_CriticalRate",
+    "method": "CCharacterData$$get_CriticalRate",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_DMGBoost",
+    "method": "CCharacterData$$get_DMGBoost",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_DMGReduceRate",
+    "method": "CCharacterData$$get_DMGReduceRate",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_Def",
+    "method": "CCharacterData$$get_Def",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_EnemyCritDmgReduce",
+    "method": "CCharacterData$$get_EnemyCriticalDamageReduce",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_HitHPRecovery",
+    "method": "CCharacterData$$get_HitHPRecovery",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_PiercePower",
+    "method": "CCharacterData$$get_PiercePower",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_PiercePowerRate",
+    "method": "CCharacterData$$get_PiercePowerRate",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterData_get_Vampiric",
+    "method": "CCharacterData$$get_Vampiric",
+    "overload": 0
+  },
+  {
+    "file": "CCustomBossStatValue_SetBaseValue",
+    "method": "CCustomBossStatValue$$SetBaseValue",
+    "overload": 0
+  },
+  {
+    "file": "CDungeonScene_UpdatePvpTurnPenalty",
+    "method": "CDungeonScene$$UpdatePvpTurnPenalty",
+    "overload": 0
+  },
+  {
+    "file": "CFormula_CalcBattlePower",
+    "method": "CFormula$$CalcBattlePower",
+    "overload": 0
+  },
+  {
+    "file": "CFormula_CalcStat",
+    "method": "CFormula$$CalcStat",
+    "overload": 0
+  },
+  {
+    "file": "CFormula_IsIgnoreTurnLimitDamage",
+    "method": "CFormula$$IsIgnoreTurnLimitDamage",
+    "overload": 0
+  },
+  {
+    "file": "CFormula_CheckProbabilityPercent",
+    "method": "CFormula$$CheckProbabilityPercent",
+    "overload": 0
+  },
+  {
+    "file": "CFormula_CheckProbabilityPermille",
+    "method": "CFormula$$CheckProbabilityPermille",
+    "overload": 0
+  },
+  {
+    "file": "CItemMainOption_ctor",
+    "method": "CItemMainOption$$.ctor",
+    "overload": 0
+  },
+  {
+    "file": "CItemMainOption_get_OptionValue",
+    "method": "CItemMainOption$$get_OptionValue",
+    "overload": 0
+  },
+  {
+    "file": "CItem_GetBreakLimitFactor",
+    "method": "CItem$$GetBreakLimitFactor",
+    "overload": 0
+  },
+  {
+    "file": "CItem_GetEnchantFactor",
+    "method": "CItem$$GetEnchantFactor",
+    "overload": 0
+  },
+  {
+    "file": "CItem_GetSingularityFactor",
+    "method": "CItem$$GetSingularityFactor",
+    "overload": 0
+  },
+  {
+    "file": "CItem_InitializeOptionData",
+    "method": "CItem$$InitializeOptionData",
+    "overload": 1,
+    "note": "Surcharge 0 = thunk 1 argument qui saute sur l'implémentation (4 args) : c'est celle-ci que la spec cite."
+  },
+  {
+    "file": "CSkillManager_CheckItemBuffCool",
+    "method": "CSkillManager$$CheckItemBuffCool",
+    "overload": 0
+  },
+  {
+    "file": "CSkillManager_GetBuffList",
+    "method": "CSkillManager$$GetBuffList",
+    "overload": 0
+  },
+  {
+    "file": "CSkillManager_GetBuffListOnSpawn",
+    "method": "CSkillManager$$GetBuffListOnSpawn",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_GetFinalValue",
+    "method": "CStatValue$$GetFinalValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_GetFinalValue_ovr1",
+    "method": "CCustomBossStatValue$$GetFinalValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_GetFinalValue_ovr2",
+    "method": "CSkillDungeonStatValue$$GetFinalValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_SetAwakeningNodeStatValue",
+    "method": "CStatValue$$SetAwakeningNodeStatValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_SetBaseValue",
+    "method": "CStatValue$$SetBaseValue",
+    "overload": 1,
+    "note": "Surcharge 0 = `SetBaseValue(int)` court ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData)."
+  },
+  {
+    "file": "CStatValue_SetFinalValue",
+    "method": "CStatValue$$SetFinalValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_SetMonadGateEnchantNodeStatValue",
+    "method": "CStatValue$$SetMonadGateEnchantNodeStatValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_get_AwakeningValue",
+    "method": "CStatValue$$get_m_nAwakeningValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_get_BuffValue",
+    "method": "CStatValue$$get_m_nBuffValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_get_FinalValue",
+    "method": "CStatValue$$get_m_nFinalValue",
+    "overload": 0
+  },
+  {
+    "file": "CStatValue_get_ItemOptionValue",
+    "method": "CStatValue$$get_m_nItemOptionValue",
+    "overload": 0
+  },
+  {
+    "file": "CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext",
+    "method": "CStateBattle.<PvpAttackTeamPenaltyDmg>d__81$$MoveNext",
+    "overload": 0,
+    "note": "Noms générés par le compilateur : le `81` est un compteur interne qui se renumérote dès que CStateBattle change (79 en 1.4.9, 81 en 1.4.14). Les chiffres sont joker à la résolution — voir `skeleton()`."
+  },
+  {
+    "file": "CStateBattle_PvpPenalty_PlayDamage",
+    "method": "CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1",
+    "overload": 0
+  },
+  {
+    "file": "CalcCharacterSharedDamage",
+    "method": "CFormula$$CalcCharacterSharedDamage",
+    "overload": 0
+  },
+  {
+    "file": "CalcDamage",
+    "method": "CFormula$$CalcDamage",
+    "overload": 0
+  },
+  {
+    "file": "CalcDamageDOT",
+    "method": "CFormula$$CalcDamageDOT",
+    "overload": 0
+  },
+  {
+    "file": "CBattleManager_ProcessDamageOverTime",
+    "method": "CBattleManager$$ProcessDamageOverTime",
+    "overload": 0,
+    "note": "Chemin du TICK des DoT (§ 12.8 → désassemblage 24/08/2026, déclencheur : le DoT custom BT_DOT_2000092 d'Eternal Bleeding, tick observé sans défense — 2 × 7000 ‰ × Effectiveness fiche)."
+  },
+  {
+    "file": "CBattleManager_ApplyDamageCap",
+    "method": "CBattleManager$$ApplyDamageCap",
+    "overload": 0
+  },
+  {
+    "file": "CBattleManager_ApplyImmediatelyDotDamageCap",
+    "method": "CBattleManager$$ApplyImmediatelyDotDamageCap",
+    "overload": 0
+  },
+  {
+    "file": "CBattleManager_GetImmediatelyDotDamageCapBuffType",
+    "method": "CBattleManager$$GetImmediatelyDotDamageCapBuffType",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_IsDotBuffType",
+    "method": "CCharacterBattle$$IsDotBuffType",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_GetSpecificDotEnhanceBuffType",
+    "method": "CCharacterBattle$$GetSpecificDotEnhanceBuffType",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_GetDotDamageIncreaseBuffValue",
+    "method": "CCharacterBattle$$GetDotDamageIncreaseBuffValue",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue",
+    "method": "CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue",
+    "overload": 0
+  },
+  {
+    "file": "CalcDamageWG",
+    "method": "CFormula$$CalcDamageWG",
+    "overload": 0
+  },
+  {
+    "file": "CalcDamage_g__helper",
+    "method": "CFormula$$<CalcDamage>g__CalcDamage|17_0",
+    "overload": 0
+  },
+  {
+    "file": "CalcFinalStat",
+    "method": "CFormula$$CalcFinalStat",
+    "overload": 0
+  },
+  {
+    "file": "CalcStat",
+    "method": "CFormula$$CalcStat",
+    "overload": 0
+  },
+  {
+    "file": "CheckDamageRate",
+    "method": "CFormula$$CheckDamageRate",
+    "overload": 0
+  },
+  {
+    "file": "CheckProbability",
+    "method": "CFormula$$CheckProbability",
+    "overload": 0
+  },
+  {
+    "file": "CheckProbabilityPercent",
+    "method": "CFormula$$CheckProbabilityPercent",
+    "overload": 0
+  },
+  {
+    "file": "CheckProbabilityPermille",
+    "method": "CFormula$$CheckProbabilityPermille",
+    "overload": 0
+  },
+  {
+    "file": "CheckResist",
+    "method": "CFormula$$CheckResist",
+    "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_FindBuffByType",
+    "method": "CCharacterBattle$$FindBuffByType",
+    "overload": 0
+  },
+  {
+    "file": "FindBuffAdditionalDamage",
+    "method": "CCharacterBattle$$FindBuffAdditionalDamage",
+    "overload": 0
+  },
+  {
+    "file": "FindBuffDamageReduce",
+    "method": "CCharacterBattle$$FindBuffDamageReduce",
+    "overload": 0
+  },
+  {
+    "file": "FindBuffElementDamageRate",
+    "method": "CCharacterBattle$$FindBuffElementDamageRate",
+    "overload": 0
+  },
+  {
+    "file": "FindBuffEnemyTeamDecreaseDamageRate",
+    "method": "CCharacterBattle$$FindBuffEnemyTeamDecreaseDamageRate",
+    "overload": 0
+  },
+  {
+    "file": "GetAttackStat",
+    "method": "CCharacterBattle$$GetAttackStat",
+    "overload": 0
+  },
+  {
+    "file": "GetBattleRandomRange_int",
+    "method": "CFormula$$GetBattleRandomRange",
+    "overload": 0,
+    "note": "Surcharges (int, int) puis (float, float) — adresses croissantes en 1.4.9."
+  },
+  {
+    "file": "GetBattleRandomRange_float",
+    "method": "CFormula$$GetBattleRandomRange",
+    "overload": 1
+  },
+  {
+    "file": "GetBuffDamgeFinalReduce",
+    "method": "CCharacterBattle$$GetBuffDamgeFinalReduce",
+    "overload": 0
+  },
+  {
+    "file": "GetElementSuperiority",
+    "method": "CFormula$$GetElementSuperiority",
+    "overload": 0
+  },
+  {
+    "file": "GetElementeryDamageRate",
+    "method": "CFormula$$GetElementeryDamageRate",
+    "overload": 0
+  },
+  {
+    "file": "GetLostHPRateValue_1",
+    "method": "CCharacterBattle$$GetLostHPRateValue",
+    "overload": 0
+  },
+  {
+    "file": "GetLostHPRateValue_2",
+    "method": "CCharacterBattle$$GetLostHPRateValue",
+    "overload": 1
+  },
+  {
+    "file": "GetRandomRange_int",
+    "method": "CFormula$$GetRandomRange",
+    "overload": 0
+  },
+  {
+    "file": "GetSkillFactor",
+    "method": "CSkillManager$$GetSkillFactor",
+    "overload": 0
+  },
+  {
+    "file": "GetStatValuePermille",
+    "method": "CCharacterData$$GetStatValuePermille",
+    "overload": 0
+  },
+  {
+    "file": "MulPermille",
+    "method": "CCommonDefine$$MulPermille",
+    "overload": 0
+  },
+  {
+    "file": "get_MISSED_DAMAGE_RATE",
+    "method": "CCommonDefine$$get_MISSED_DAMAGE_RATE_PERMILLE",
+    "overload": 0
+  }
+]

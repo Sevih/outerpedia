@@ -4,8 +4,9 @@
  * Le RÉSULTAT DU PULL pilote tout : on ne re-génère que si on a réellement tiré
  * du nouveau (ou `--force`). Sinon on saute toute la chaîne.
  *
+ *   choix de la SOURCE (Android/LDPlayer ou client Steam) et de sa racine gamedata
  *   pré-vol de l'outillage python  ← AVANT le pull : ce qui sera sauté, tout de suite
- *   pull (si LDPlayer + diff)
+ *   pull (si la source est là + diff)
  *     ├─ si le CODE du jeu a changé (version installée ≠ empreinte du dump) :
  *     │  dump (→ dump.cs + listings ASM committés)
  *     └─ si tiré : extract → convert → face-layout(py) → sprite-rect(py) →
@@ -19,37 +20,112 @@
  * Deux points d'entrée partagent ce module (plus de logique dupliquée) :
  *   - `pnpm dev`         → scripts/dev-refresh.ts : { apply, collect, news } = true
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
+ *
+ * DEUX SOURCES depuis le 2026-08-26 (`--source android|steam`, défaut android
+ * jusqu'à la bascule) : chacune a son pull, son dump et son signal « le code a
+ * changé », derrière la même interface `Source`. Elles écrivent la MÊME
+ * arborescence, dans des racines distinctes (`lib/paths`) : la chaîne
+ * extract→collect ne sait pas d'où viennent les fichiers. Les modules de
+ * source sont importés DYNAMIQUEMENT, après que la racine est posée — ils
+ * figent leurs chemins à l'import.
  */
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
+import { STEAM_GAMEDATA_ROOT, gamedata, gamedataRoot } from './lib/paths';
 import { pythonToolingMissing } from './lib/python';
-import { gameVersion, pickDevice } from './extract/adb';
-import { pull } from './extract/pull-gamedata';
+import type { PullResult } from './extract/pull-gamedata';
 
 const TSX_CLI = resolve('node_modules/tsx/dist/cli.mjs');
-const GAMEDATA = resolve('.gamedata/files');
+const filesDir = (): string => gamedata('files');
 // Empreinte des ENTRÉES au dernier build RÉUSSI. Tant que la signature actuelle
 // == ce stamp, la donnée générée est à jour ; sinon on régénère. Comme le stamp
 // n'est écrit qu'APRÈS un succès, un extract planté en cours laisse la signature
 // désynchronisée → le run suivant se répare tout seul (sans avoir à `--force`).
-const STAMP = resolve('.gamedata/.refresh-stamp');
+const stampPath = (): string => gamedata('.refresh-stamp');
 // Progression DANS la chaîne, réécrite après chaque étape et effacée au succès
 // complet — c'est ce qui permet de reprendre après un échec au lieu de tout
 // rejouer (cf. `resumeDecision`). Complète le stamp, ne le remplace pas.
-const CHECKPOINT = resolve('.gamedata/.refresh-checkpoint.json');
-// Empreinte du dernier `datagen:dump` : porte la version du jeu dont sortent
-// dump.cs et les listings ASM committés.
-const DUMP_STAMP = resolve('.gamedata/apk/dumped/.dump-stamp.json');
-// La metadata que le JEU embarque dans son dossier `files/` (tirée par le pull,
-// suivie au md5). Second signal de changement de code — cf. `dumpDecision`.
-const PULLED_META = resolve('.gamedata/files/il2cpp/Metadata/global-metadata.dat');
+const checkpointPath = (): string => gamedata('.refresh-checkpoint.json');
+// Empreinte du dernier `datagen:dump` / `datagen:dump-steam` : porte la version
+// du jeu dont sortent dump.cs et les listings (ASM ou C#) committés.
+const dumpStampPath = (): string => gamedata('apk/dumped/.dump-stamp.json');
+
+export type SourceName = 'android' | 'steam';
+
+/**
+ * Une SOURCE de jeu : ce que `refresh` a besoin d'elle, rien de plus. Le
+ * reste de la chaîne lit la racine gamedata sans savoir qui l'a remplie.
+ */
+type Source = {
+  name: SourceName;
+  label: string;
+  /** Synchronise `files/` ; ne lève pas si la source est absente (cf. PullResult). */
+  pull(): Promise<PullResult>;
+  /**
+   * Ce que le monde dit du CODE du client : version installée (null si
+   * indécidable) et sha256 du fichier de code TIRÉ par le pull (Android :
+   * `files/il2cpp/Metadata/global-metadata.dat` ; Steam :
+   * `files/managed/Assembly-CSharp.dll`) — les deux signaux de `dumpDecision`.
+   */
+  installed(): { version: string | null; codeSha: string | null };
+  /** Le script de dump à jouer quand le code a changé. */
+  dumpFile: string;
+};
+
+const sha256File = (path: string): string | null =>
+  existsSync(path) ? createHash('sha256').update(readFileSync(path)).digest('hex') : null;
+
+/** Charge une source — imports DYNAMIQUES : la racine gamedata est déjà posée. */
+async function loadSource(name: SourceName): Promise<Source> {
+  if (name === 'steam') {
+    const { pull } = await import('./extract/pull-steam');
+    const { findSteamInstall } = await import('./extract/steam');
+    const { bundleVersion } = await import('./extract/dump-steam');
+    return {
+      name,
+      label: 'client Steam',
+      pull: () => pull(),
+      dumpFile: 'datagen/extract/dump-steam.ts',
+      installed() {
+        const install = findSteamInstall();
+        return {
+          version: install ? bundleVersion(install.globalGameManagers) : null,
+          codeSha: sha256File(gamedata('files/managed/Assembly-CSharp.dll')),
+        };
+      },
+    };
+  }
+  const { pull } = await import('./extract/pull-gamedata');
+  const { gameVersion, pickDevice } = await import('./extract/adb');
+  return {
+    name,
+    label: 'LDPlayer',
+    pull: () => pull(),
+    dumpFile: 'datagen/extract/dump.ts',
+    installed() {
+      let version: string | null = null;
+      try {
+        version = gameVersion(pickDevice());
+      } catch {
+        // pas de device : on peut encore juger sur la metadata déjà tirée
+      }
+      // La metadata que le JEU embarque dans son dossier `files/` (tirée par le
+      // pull, suivie au md5) : second signal de changement de code.
+      return {
+        version,
+        codeSha: sha256File(gamedata('files/il2cpp/Metadata/global-metadata.dat')),
+      };
+    },
+  };
+}
 
 /**
  * Le CODE du client a-t-il changé depuis le dernier dump ? Compare la version
- * INSTALLÉE sur l'émulateur à celle gravée dans l'empreinte du dump.
+ * INSTALLÉE (émulateur ou client Steam, cf. `Source.installed`) à celle gravée
+ * dans l'empreinte du dump.
  *
  * Un patch de DONNÉES ne bouge pas le binaire ; un patch de CODE oui, et alors
  * dump.cs et les 91 listings de docs/specs/damage-formula-asm/ sont périmés
@@ -59,27 +135,34 @@ const PULLED_META = resolve('.gamedata/files/il2cpp/Metadata/global-metadata.dat
  * pas d'émulateur, `dumpsys` muet, ou pas d'empreinte (auquel cas c'est un
  * premier dump à faire à la main, pas une régression à rattraper).
  */
-function codeChanged(): DumpVerdict {
-  if (!existsSync(DUMP_STAMP)) return null;
-  let stamp: { gameVersion?: string; metadata?: { sha256?: string } };
+function codeChanged(source: Source): DumpVerdict {
+  const path = dumpStampPath();
+  if (!existsSync(path)) return null;
+  let stamp: {
+    source?: SourceName;
+    gameVersion?: string;
+    metadata?: { sha256?: string };
+    dll?: { sha256?: string };
+  };
   try {
-    stamp = JSON.parse(readFileSync(DUMP_STAMP, 'utf8'));
+    stamp = JSON.parse(readFileSync(path, 'utf8'));
   } catch {
-    return null; // empreinte illisible : `disasm.py` refusera de toute façon
+    return null; // empreinte illisible : `disasm.py` / `extract-cs` refuseront de toute façon
   }
-  let installed: string | null = null;
-  try {
-    installed = gameVersion(pickDevice());
-  } catch {
-    // pas de device : on peut encore juger sur la metadata déjà tirée
+  // Une empreinte d'une AUTRE source sous cette racine (mélange de miroirs) :
+  // ses sha ne sont pas comparables — on ne décide rien, on le dit.
+  if ((stamp.source ?? 'android') !== source.name) {
+    console.warn(
+      `⚠ ${path} vient de la source « ${stamp.source ?? 'android'} », pas « ${source.name} » — re-dump à la main.`,
+    );
+    return null;
   }
+  const { version, codeSha } = source.installed();
   return dumpDecision({
     stamped: stamp.gameVersion ?? null,
-    installed,
-    stampedMetaSha: stamp.metadata?.sha256 ?? null,
-    pulledMetaSha: existsSync(PULLED_META)
-      ? createHash('sha256').update(readFileSync(PULLED_META)).digest('hex')
-      : null,
+    installed: version,
+    stampedMetaSha: stamp.metadata?.sha256 ?? stamp.dll?.sha256 ?? null,
+    pulledMetaSha: codeSha,
   });
 }
 
@@ -324,7 +407,7 @@ function runStep(s: Step, missing: string | undefined): void {
  * leur NOM change déjà avec le contenu). '' si le dossier est absent.
  */
 function inputSignature(): string {
-  if (!existsSync(GAMEDATA)) return '';
+  if (!existsSync(filesDir())) return '';
   const parts: string[] = [];
   const walk = (dir: string, prefix: string): void => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -334,7 +417,7 @@ function inputSignature(): string {
       else if (e.isFile()) parts.push(`${rel}:${statSync(abs).size}`);
     }
   };
-  walk(GAMEDATA, '');
+  walk(filesDir(), '');
   return createHash('md5').update(parts.sort().join('\n')).digest('hex');
 }
 
@@ -358,7 +441,9 @@ function sourceSignature(): string {
       const rel = prefix ? `${prefix}/${e.name}` : e.name;
       const abs = join(dir, e.name);
       if (e.isDirectory()) walk(abs, rel);
-      else if (e.isFile() && /\.(ts|py)$/.test(e.name)) {
+      // `extract/listings.json` est une SOURCE aussi : le manifeste des listings
+      // que `disasm.py` et `extract-cs.ts` lisent.
+      else if (e.isFile() && (/\.(ts|py)$/.test(e.name) || rel === 'extract/listings.json')) {
         const st = statSync(abs);
         parts.push(`${rel}:${st.size}:${st.mtimeMs}`);
       }
@@ -376,7 +461,7 @@ type Checkpoint = { key: string; done: string[] };
 
 const readCheckpoint = (): Checkpoint | null => {
   try {
-    const c: unknown = JSON.parse(readFileSync(CHECKPOINT, 'utf8'));
+    const c: unknown = JSON.parse(readFileSync(checkpointPath(), 'utf8'));
     const ok =
       !!c &&
       typeof c === 'object' &&
@@ -390,7 +475,7 @@ const readCheckpoint = (): Checkpoint | null => {
 
 const readStamp = (): string | null => {
   try {
-    return readFileSync(STAMP, 'utf8').trim();
+    return readFileSync(stampPath(), 'utf8').trim();
   } catch {
     return null;
   }
@@ -453,18 +538,39 @@ export type RefreshOptions = {
   collect?: boolean;
   /** Rejouer `getNews` (toujours, indépendant du pull). */
   news?: boolean;
+  /** Source de jeu (défaut : `DATAGEN_SOURCE`, sinon android). */
+  source?: SourceName;
 };
+
+/**
+ * Source demandée → nom validé, et pose la racine gamedata qui va avec si
+ * `GAMEDATA_ROOT` ne l'impose pas (Steam : `.gamedata-steam`, pour ne jamais
+ * écraser le miroir Android tant que les deux coexistent). DOIT précéder tout
+ * `gamedata()` et tout import de module de source.
+ */
+export function resolveSource(requested: string | undefined): SourceName {
+  const name = requested ?? process.env.DATAGEN_SOURCE ?? 'android';
+  if (name !== 'android' && name !== 'steam') {
+    throw new Error(`source inconnue : « ${name} » (android | steam)`);
+  }
+  if (name === 'steam' && !process.env.GAMEDATA_ROOT) {
+    process.env.GAMEDATA_ROOT = STEAM_GAMEDATA_ROOT;
+  }
+  return name;
+}
 
 /** Exécute le flux de rafraîchissement gaté sur le résultat du pull. */
 export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   const { force = false, noPull = false, apply = false, collect = false, news = false } = opts;
+  const source = await loadSource(resolveSource(opts.source));
+  console.log(`◆ source : ${source.label} → ${gamedataRoot()}`);
   const steps = genSteps({ apply, collect });
 
   // 0) PRÉ-VOL — AVANT le pull, donc avant le quart d'heure de datamine : dire
   // tout de suite ce qui manque et ce qui sera sauté. Inutile sans `.gamedata`
   // (aucune étape ne tournera) : on éviterait juste d'avertir dans le vide sur
   // une machine qui ne datamine pas.
-  const preflightDone = existsSync(GAMEDATA);
+  const preflightDone = existsSync(filesDir());
   let pyMissing = preflightDone ? preflight(steps) : new Map<string, string>();
 
   // 1) Pull — ne tire que si LDPlayer est là ET que le distant diffère.
@@ -472,23 +578,24 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   if (noPull) {
     console.log('⏭  pull sauté (--no-pull).');
   } else {
-    console.log('▶ pull (jeu → .gamedata)');
-    changed = (await pull()).changed;
+    console.log(`▶ pull (${source.label} → ${gamedataRoot()})`);
+    changed = (await source.pull()).changed;
   }
 
   // 1bis) Le binaire a-t-il changé ? Si oui, re-dumper AVANT de générer : les
-  // générateurs lisent dump.cs (ASSET_TYPE), et les listings ASM que citent les
-  // specs damage en sortent aussi. `dump.ts` enchaîne `disasm.py` tout seul.
+  // générateurs lisent dump.cs (ASSET_TYPE), et les listings que citent les
+  // specs damage en sortent aussi (`dump.ts` enchaîne `disasm.py`,
+  // `dump-steam.ts` enchaîne `extract-cs.ts`).
   if (!noPull) {
-    const bump = codeChanged();
+    const bump = codeChanged(source);
     if (bump) {
       console.log(
-        `\n⚙  le CODE du jeu a changé (${bump.reason === 'version' ? 'version installée' : 'global-metadata.dat tirée'}) :` +
+        `\n⚙  le CODE du jeu a changé (${bump.reason === 'version' ? 'version installée' : 'fichier de code tiré'}) :` +
           `\n   ${bump.from} → ${bump.to}` +
-          `\n   → re-dump du binaire (dump.cs + les listings de docs/specs/damage-formula-asm/,` +
+          `\n   → re-dump du binaire (dump.cs + les listings de docs/specs/damage-formula-${source.name === 'steam' ? 'cs' : 'asm'}/,` +
           `\n     committés : leur diff fait partie du patch).`,
       );
-      step('dump     (APK installé → dump.cs + listings ASM)', 'datagen/extract/dump.ts');
+      step(`dump     (${source.label} → dump.cs + listings)`, source.dumpFile);
     }
   }
 
@@ -498,7 +605,7 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   //   - la signature des entrées ≠ stamp du dernier build réussi (AUTO-RÉPARATION :
   //     couvre un extract planté, un `.gamedata` restauré à la main, etc.).
   // Rien à générer si `.gamedata/files` est absent (ex. machine sans datamine).
-  const hasGamedata = existsSync(GAMEDATA);
+  const hasGamedata = existsSync(filesDir());
   const currentSig = inputSignature();
   const prevSig = readStamp();
   const { doGen, staleByStamp } = regenDecision({
@@ -544,27 +651,35 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
       // laissant gravé exactement ce qui a réussi, et rien de plus.
       runStep(s, pyMissing.get(s.id));
       doneKeys.add(stepKey(s));
-      writeFileSync(CHECKPOINT, `${JSON.stringify({ key, done: [...doneKeys] }, null, 2)}\n`);
+      writeFileSync(checkpointPath(), `${JSON.stringify({ key, done: [...doneKeys] }, null, 2)}\n`);
     }
 
     // Succès de toute la chaîne : on grave le stamp (une exception plus haut nous
     // aurait fait sortir avant → stamp inchangé → réparation au prochain run) et
     // on jette le checkpoint, qui n'a plus rien à reprendre.
-    writeFileSync(STAMP, currentSig);
-    rmSync(CHECKPOINT, { force: true });
+    writeFileSync(stampPath(), currentSig);
+    rmSync(checkpointPath(), { force: true });
   } else {
     console.log('\n✓ Donnée à jour — génération sautée.');
     // Amorçage silencieux : 1er run sans stamp mais donnée committée réputée à
     // jour → on grave la baseline sans régénérer (évite un extract inutile).
-    if (hasGamedata && prevSig === null) writeFileSync(STAMP, currentSig);
+    if (hasGamedata && prevSig === null) writeFileSync(stampPath(), currentSig);
   }
 
   // 3) News — optionnel (fetch web, indépendant du jeu).
   if (news) step('getNews', 'scripts/get-news.ts');
 }
 
+/** `--source steam` ou `--source=steam` dans argv, sinon undefined. PUR. */
+export function sourceArg(argv: string[]): string | undefined {
+  const i = argv.indexOf('--source');
+  if (i >= 0) return argv[i + 1];
+  return argv.find((x) => x.startsWith('--source='))?.slice('--source='.length);
+}
+
 // Exécution directe = `pnpm datagen:patch` : refresh headless, promote en DRY
-// (revue du diff) sauf `--apply`. Flags : --force / --no-pull / --apply / --collect.
+// (revue du diff) sauf `--apply`. Flags : --force / --no-pull / --apply /
+// --collect / --source android|steam.
 if (isMain(import.meta.url)) {
   const a = process.argv.slice(2);
   refresh({
@@ -573,6 +688,7 @@ if (isMain(import.meta.url)) {
     apply: a.includes('--apply'),
     collect: a.includes('--collect'),
     news: false,
+    source: sourceArg(a) as SourceName | undefined,
   })
     .then(() => console.log('\n✅ refresh terminé.\n'))
     .catch((e) => {

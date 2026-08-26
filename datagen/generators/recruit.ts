@@ -33,7 +33,7 @@
  * Un PickupID de bannière inconnu de CharacterTemplet casse la génération.
  */
 import type { LangDict } from '../lib/lang';
-import { DUMP_PATH, readDump } from '../lib/dump';
+import { DUMP_PATH, assetTypeKeys } from '../lib/dump';
 import { isMain } from '../lib/is-main';
 import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
@@ -309,12 +309,7 @@ let assetEnum: { data: Map<string, string>; stamp: string } | undefined;
 function assetKeyOf(id: string): string {
   const stamp = fileStamp(DUMP_PATH);
   if (!assetEnum || assetEnum.stamp !== stamp) {
-    const data = new Map<string, string>();
-    const dump = readDump();
-    for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
-      data.set(m[2], `SYS_ASSET_${m[1]}`);
-    }
-    assetEnum = { data, stamp };
+    assetEnum = { data: assetTypeKeys(), stamp };
   }
   const key = assetEnum.data.get(id);
   if (!key) throw new Error(`recruit : ASSET_TYPE inconnu dans la dump — id ${id}`);

@@ -21,6 +21,11 @@ grâce à des primitives partagées et des contrats typés.
 `.gamedata/` n'est **jamais** committé (évite le bloat). Il est régénérable depuis
 le jeu et sauvegardé sur **Cloudflare R2** (cf. multi-PC plus bas).
 
+Sa racine est **pilotable** (`GAMEDATA_ROOT`, cf. `lib/paths.ts`) : deux sources
+de jeu coexistent (§ « Récupérer les données du jeu »), chacune dans sa racine
+— `.gamedata/` (Android) et `.gamedata-steam/` (client Steam) — avec **la même
+arborescence**. Rien en aval ne code `.gamedata` en dur.
+
 ---
 
 ## Les 5 couches de la lib (`datagen/`)
@@ -191,7 +196,7 @@ additif, l'ignorer (ou l'effacer à la main) ramène au comportement d'avant.
 ## Le flux de bout en bout
 
 ```
-   [ jeu : APK / bundles ]
+   [ jeu : bundles — Android (LDPlayer) OU client Steam ]
             │  (extract/ — outil Unity, local)
             ▼
    .gamedata/extracted/  (images + .bytes)
@@ -252,7 +257,50 @@ cas, cf. `datagen/assets/collect-comics.ts`).
 
 ---
 
-## Récupérer les données du jeu (depuis LDPlayer)
+## Récupérer les données du jeu
+
+Deux sources, derrière la même interface `Source` de `refresh.ts`
+(`--source android|steam`, défaut `android` jusqu'à la bascule) :
+
+| Source                 | Pull                         | Code du client → `dump.cs`                        | « le code a changé »                         | Listings des specs damage                              |
+| ---------------------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------ |
+| **Android** (LDPlayer) | `datagen:pull` (adb, tar)    | `datagen:dump` — Il2CppDumper sur l'APK installée | `versionName` + md5 de `global-metadata.dat` | `disasm.py` → `docs/specs/damage-formula-asm/` (ARM64) |
+| **Steam** (2026-08-26) | `datagen:pull-steam` (copie) | `datagen:dump-steam` — ilspycmd sur le DLL Mono   | `bundleVersion` + sha256 du DLL tiré         | `extract-cs.ts` → `docs/specs/damage-formula-cs/` (C#) |
+
+Les deux écrivent la **même arborescence**, dans des racines distinctes
+(`.gamedata/` et `.gamedata-steam/`, cf. `lib/paths.ts`) ; tout ce qui suit le
+pull (extract, convert, build, scripts python, admin) tourne tel quel sur l'une ou
+l'autre. Vérifié le 26/08 : les `.bytes` extraits du client Steam sont
+**identiques octet pour octet** à ceux de l'Android (hashes de bundles différents,
+contenu identique). Le manifeste des listings (`extract/listings.json`) est
+**partagé** : une méthode qu'une spec se met à citer s'ajoute là, une fois.
+
+### Client Steam
+
+Le client Windows est compilé en **Mono** (pas IL2CPP) : `Assembly-CSharp.dll` se
+décompile en C# lisible, non obfusqué — les formules sont du code, plus du
+désassemblage. Il se **patche en place** dans `StreamingAssets/bundles` au
+lancement : un seul dossier à lire, toujours à jour dès que le jeu a été lancé.
+
+```bash
+pnpm datagen:patch-steam     # = datagen:patch --source steam (racine .gamedata-steam)
+pnpm datagen:pull-steam      # seul : miroir bundles + Managed/Assembly-CSharp.dll
+pnpm datagen:dump-steam      # seul : DLL + globalgamemanagers → dump.cs, src/ décompilé,
+                             #        puis listings C# (= pnpm datagen:extract-cs)
+```
+
+Prérequis : le jeu Steam installé et lancé une fois (localisé via le registre +
+`libraryfolders.vdf`, ou `OUTERPLANE_STEAM_DIR`), le **runtime .NET 10** pour
+ilspycmd (tiré de NuGet, version et sha256 épinglés dans `extract/tools.ts` — pas
+de dépôt R2), python + UnityPy pour la version applicative de l'empreinte (sinon
+« inconnue », jamais devinée).
+
+**Bascule** (après la release officielle, décision Sevih 26/08) : changer
+`DEFAULT_GAMEDATA_ROOT` et le défaut de `resolveSource` — rien d'autre. D'ici là,
+les `.asm` restent régénérés par l'Android et la spec damage les cite ; les `.cs`
+sont produits à côté, et la spec migrera vers eux à son rythme.
+
+### Android (LDPlayer)
 
 Les bundles + il2cpp viennent du dossier `files` du jeu, sur une instance
 **LDPlayer** (Android), via `adb`. Pour les rapatrier dans `.gamedata/files/` :
@@ -384,7 +432,7 @@ Règles d'or :
 
 ✅ **Opérationnel de bout en bout.** Tout ce qui est décrit ci-dessus existe :
 
-- couche 0 (pull LDPlayer + extraction AssetStudio) ;
+- couche 0 (pull LDPlayer OU client Steam + extraction AssetStudio) ;
 - couche 1 (`templates/`, parser `.bytes → JSON` typé, TS) ;
 - couche 2 (`lib/`, primitives partagées) ;
 - couche 3 (`generators/`, 20 générateurs — DÉCOMPTE DE RÉFÉRENCE : les

@@ -11,6 +11,9 @@
 #   - extract/disasm.py               → docs/specs/damage-formula-asm/*.asm
 #                                       (listings ARM64 cités par les specs damage,
 #                                        régénérés à chaque dump)
+#   - extract/bundle-version.py       → version applicative du client Steam
+#                                       (`bundleVersion` des PlayerSettings, pour
+#                                        l'empreinte de `datagen:dump-steam`)
 #
 #   python -m pip install -r datagen/requirements.txt
 #

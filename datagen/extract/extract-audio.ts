@@ -39,8 +39,9 @@ import { parse as parsePath, resolve } from 'node:path';
 import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, FFMPEG, ensureTool } from './tools';
+import { gamedata } from '../lib/paths';
 
-const ROOT = resolve('.gamedata');
+const ROOT = gamedata();
 const BUNDLES = resolve(ROOT, 'files/bundles');
 const OUT_BGM = resolve(ROOT, 'extracted/audio/bgm');
 const WAV_TMP = resolve(ROOT, 'extracted/audio/_wav');

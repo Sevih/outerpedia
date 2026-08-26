@@ -39,6 +39,7 @@ Usage : python datagen/damage/extract-anim-events.py
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -46,8 +47,11 @@ from pathlib import Path
 import UnityPy
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = ROOT / '.gamedata' / 'files' / 'bundles' / 'manifest.dat'
-BUNDLES_DIR = ROOT / '.gamedata' / 'files' / 'bundles'
+# Racine de l'aire de travail — `GAMEDATA_ROOT` (cf. datagen/lib/paths.ts),
+# `.gamedata` sinon. Relative → depuis la racine du repo.
+GAMEDATA = ROOT / os.environ.get('GAMEDATA_ROOT', '.gamedata')
+MANIFEST = GAMEDATA / 'files' / 'bundles' / 'manifest.dat'
+BUNDLES_DIR = GAMEDATA / 'files' / 'bundles'
 OUT = ROOT / 'datagen' / 'damage' / 'anim-events.json'
 
 PC_PREFIX = 'character/pc/'

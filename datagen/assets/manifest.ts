@@ -36,6 +36,7 @@ import { loadCuratedEffects } from '../curated/effects';
 import { effectIconCandidates } from '../lib/effects';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
+import { ITEM_SPRITE_DIR } from './source';
 
 import { loadTable, tablesStamp } from '../lib/tables';
 import { loadTextIndex } from '../lib/text';
@@ -1073,10 +1074,7 @@ export function buildAssetManifest(): AssetRequest[] {
   // rattachés à un item : l'admin (Editor › Item) les liste comme « à rentrer »
   // et doit pouvoir les prévisualiser.
   try {
-    const dir = resolve(
-      '.gamedata/extracted/images/assets/editor/resources/sprite/at_thumbnailitemruntime',
-    );
-    for (const f of readdirSync(dir)) {
+    for (const f of readdirSync(ITEM_SPRITE_DIR)) {
       if (!/^TI_.*\.png$/i.test(f)) continue;
       const icon = f.replace(/\.png$/i, '');
       push({

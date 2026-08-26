@@ -6,10 +6,10 @@
  * derniers octets pour éviter de parser un fichier multi-Mo.
  */
 import { openSync, readSync, closeSync, statSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
+import { gamedata } from '../lib/paths';
 
-const MANIFEST = resolve('.gamedata/files/bundles/manifest.dat');
+const MANIFEST = gamedata('files/bundles/manifest.dat');
 
 export interface GameVersion {
   resVersion: string;

@@ -31,10 +31,11 @@ import { langDict } from '../lib/text';
 import type { LangDict } from '../lib/lang';
 import { isMain } from '../lib/is-main';
 import { ensureTool, FFPROBE } from '../extract/tools';
+import { gamedata } from '../lib/paths';
 
 const execFile = promisify(execFileCb);
 
-const AUDIO_DIR = resolve(process.cwd(), '.gamedata/extracted/audio/bgm');
+const AUDIO_DIR = gamedata('extracted/audio/bgm');
 
 /** Chemin de `ffprobe` : surcharge `FFPROBE`, sinon rapatrié de R2 (ensureTool). */
 function ffprobeBin(): string {

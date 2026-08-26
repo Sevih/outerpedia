@@ -26,6 +26,7 @@ center, and +Y is up. To translate to CSS, flip Y (CSS_y = -unity_y).
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Iterable
@@ -33,8 +34,11 @@ from typing import Iterable
 import UnityPy
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = ROOT / '.gamedata' / 'files' / 'bundles' / 'manifest.dat'
-BUNDLES_DIR = ROOT / '.gamedata' / 'files' / 'bundles'
+# Racine de l'aire de travail — `GAMEDATA_ROOT` (cf. datagen/lib/paths.ts),
+# `.gamedata` sinon. Relative → depuis la racine du repo.
+GAMEDATA = ROOT / os.environ.get('GAMEDATA_ROOT', '.gamedata')
+MANIFEST = GAMEDATA / 'files' / 'bundles' / 'manifest.dat'
+BUNDLES_DIR = GAMEDATA / 'files' / 'bundles'
 OUT = ROOT / 'datagen' / 'assets' / 'face-icon-layout.json'
 
 FACEICON_BUNDLE_NAME = 'prefabs/ui/faceicon'

@@ -27,8 +27,9 @@ import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, ensureTool } from './tools';
 import { runAudio } from './extract-audio';
 import { runWallpapers } from './extract-wallpapers';
+import { gamedata } from '../lib/paths';
 
-const ROOT = resolve('.gamedata');
+const ROOT = gamedata();
 // Surcharge explicite via ASTUDIO_CLI ; sinon `ensureTool` le résout (et le tire
 // de R2 s'il manque) au premier appel.
 const CLI_OVERRIDE = process.env.ASTUDIO_CLI;

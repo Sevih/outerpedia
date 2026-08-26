@@ -37,8 +37,9 @@ import sharp from 'sharp';
 import { mapLimit } from '../lib/concurrency';
 import { isMain } from '../lib/is-main';
 import { readPngSize } from '../lib/png';
+import { gamedata } from '../lib/paths';
 
-const ROOT = resolve('.gamedata');
+const ROOT = gamedata();
 const SRC_IMAGES = resolve(ROOT, 'extracted/images');
 const OUT_WP = resolve(ROOT, 'extracted/wallpapers');
 

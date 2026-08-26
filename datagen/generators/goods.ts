@@ -16,8 +16,8 @@
  * comme tous les autres assets.
  */
 import { readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { DUMP_PATH, readDump } from '../lib/dump';
+import { ITEM_SPRITE_DIR } from '../assets/source';
+import { assetTypeKeys } from '../lib/dump';
 import { fileStamp, loadTable } from '../lib/tables';
 import { hasText, langDict } from '../lib/text';
 import type { LangDict } from '../lib/lang';
@@ -32,10 +32,7 @@ export interface Goods {
 
 const NON_ASSET = /(TOOLTIP|TITLE|DESC|POPUP|BTN|GUIDE|NOTICE|MSG|CHANGE)/;
 
-const SPRITE_DIR = resolve(
-  process.cwd(),
-  '.gamedata/extracted/images/assets/editor/resources/sprite/at_thumbnailitemruntime',
-);
+const SPRITE_DIR = ITEM_SPRITE_DIR;
 
 // Empreinte mtime du DOSSIER : elle bouge à l'ajout/retrait d'entrées — et le
 // cache ne tient que la LISTE des noms, c'est exactement le signal qu'il faut
@@ -166,16 +163,12 @@ export function buildGoods(): Record<string, Goods> {
  * `AT_CRYSTAL` face à la clé texte `SYS_ASSET_CRISTAL`).
  */
 export function buildAssetTypes(goods: Record<string, Goods>): Record<string, string> {
-  const dump = readDump();
   const out: Record<string, string> = {};
-  for (const m of dump.matchAll(/public const ASSET_TYPE AT_([A-Z0-9_]+) = (\d+);/g)) {
-    const [, name, id] = m;
-    if (name === 'MAX') continue; // sentinelle de l'enum, pas une monnaie
-    const key = `SYS_ASSET_${name}`;
+  for (const [id, key] of assetTypeKeys()) {
     if (goods[key]) out[id] = key;
   }
   if (!Object.keys(out).length) {
-    throw new Error(`buildAssetTypes : aucun ASSET_TYPE résolu depuis ${DUMP_PATH}`);
+    throw new Error('buildAssetTypes : aucun ASSET_TYPE ne correspond au catalogue goods');
   }
   return out;
 }

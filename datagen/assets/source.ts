@@ -10,8 +10,14 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { walkFiles } from '../lib/fs';
+import { gamedata } from '../lib/paths';
 
-export const GAME_IMAGES_DIR = resolve('.gamedata/extracted/images');
+export const GAME_IMAGES_DIR = gamedata('extracted/images');
+/** Les sprites d'items du jeu (`TI_*`), tels qu'AssetStudio les range (`-g containerFull`). */
+export const ITEM_SPRITE_DIR = resolve(
+  GAME_IMAGES_DIR,
+  'assets/editor/resources/sprite/at_thumbnailitemruntime',
+);
 
 export type ImageIndex = Map<string, string>;
 

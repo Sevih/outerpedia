@@ -5,6 +5,40 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-26
+
+- **Seconde pipeline de données : le client STEAM comme source, à côté de
+  l'Android (décision Sevih : « une seconde, propre ; on bascule après la
+  release officielle »).** OUTERPLANE est sorti sur Steam ce jour ; le client
+  Windows est compilé en **Mono** (pas IL2CPP), `Assembly-CSharp.dll` non
+  obfusqué, et les bundles vivent dans `StreamingAssets/bundles` — même layout
+  content-addressed + `manifest.dat` que l'Android, patchés **en place** au
+  lancement. Vérifié : les `.bytes` extraits (CharacterTemplet, CharacterSkillTemplet,
+  TextCharacter) sont **identiques octet pour octet** à ceux de l'Android.
+  Livré : (1) **une seule racine gamedata** (`lib/paths.ts`, `GAMEDATA_ROOT`) —
+  les ~30 chemins `.gamedata` codés en dur (TS + 5 scripts python + l'admin)
+  passent par là, et le dossier des sprites d'items, défini trois fois, n'a plus
+  qu'une constante (`ITEM_SPRITE_DIR`) ; (2) `extract/steam.ts` (registre →
+  `libraryfolders.vdf` → `appmanifest_4247320.acf`, parseur KeyValues testé),
+  `pull-steam.ts` (miroir incrémental, même garde anti-purge, +
+  `files/managed/Assembly-CSharp.dll` comme signal « le code a changé »),
+  `dump-steam.ts` (ilspycmd 11 épinglé depuis NuGet avec sha256, runtime .NET 10
+  ; → `src/` décompilé + `dump.cs` + empreinte `source: steam`) ; (3)
+  `lib/dump.ts` lit l'enum `ASSET_TYPE` dans les DEUX syntaxes (Il2CppDumper /
+  C#) — goods et recruit partagent enfin `assetTypeKeys()` au lieu de deux
+  regex copiées ; (4) le manifeste des 99 listings sort de `disasm.py` vers
+  `extract/listings.json`, partagé avec `extract-cs.ts` qui écrit leur jumeau
+  C# dans `docs/specs/damage-formula-cs/` (99/99 résolus — les trois noms
+  fabriqués par le compilateur, machine d'état et fonctions locales, sont
+  repliés dans leur méthode porteuse) ; (5) `refresh.ts --source android|steam`
+  derrière une interface `Source` (pull, dump, signal de code), modules de
+  source importés dynamiquement après la pose de la racine ; `pnpm
+datagen:patch-steam`. Tourné pour de vrai : miroir 18 Go, dump, listings,
+  `refresh --source steam` (pull à jour, pas de re-dump). Écarté : réécrire la
+  spec damage sur le C# maintenant (prématuré avant la bascule) ; un MITM PC
+  pour le gear-solver (BestHTTP a sa propre pile TLS, un plugin Mono est la
+  voie, autre projet). Le suivi de la bascule est dans TODO.
+
 ## 2026-08-25
 
 - **Damage calc — PUBLIC : `unlisted` → `available` (décision Sevih), textes

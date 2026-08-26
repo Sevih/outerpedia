@@ -50,128 +50,20 @@ except ImportError:
         "capstone manquant — `pip install capstone` (désassembleur ARM64 des listings)."
     )
 
-APK_DIR = os.path.join(".gamedata", "apk")
+# Racine de l'aire de travail — `GAMEDATA_ROOT` (cf. datagen/lib/paths.ts).
+APK_DIR = os.path.join(os.environ.get("GAMEDATA_ROOT", ".gamedata"), "apk")
 LIB = os.path.join(APK_DIR, "libil2cpp.so")
 SCRIPT_JSON = os.path.join(APK_DIR, "dumped", "script.json")
 STAMP = os.path.join(APK_DIR, "dumped", ".dump-stamp.json")
 ASM_DIR = os.path.join("docs", "specs", "damage-formula-asm")
 RUN_DUMP = "lancer `pnpm datagen:dump` (émulateur lancé, jeu À JOUR)."
 
-# ── Manifeste : listing → nom script.json (+ ordinal parmi les surcharges,
-# adresses croissantes). AJOUTER ICI toute méthode qu'une spec se met à citer.
-M = [
-    # (fichier sans .asm, nom Il2CppDumper, ordinal de surcharge)
-    ("AddCheckEnemyTeamDecreaseDamageRate", "CFormula$$AddCheckEnemyTeamDecreaseDamageRate", 0),
-    ("ApplyRate", "CCommonDefine$$ApplyRate", 0),
-    ("CBuff_CheckReverseHealCAP", "CBuff$$CheckReverseHealCAP", 0),
-    ("CBuff_OnCreate", "CBuff$$OnCreate", 0),
-    ("CBuff_Run", "CBuff$$Run", 0),
-    ("CBuff_TrySetDieByReverseHeal", "CBuff$$TrySetDieByReverseHeal", 0),
-    ("CBuff_get_Value", "CBuff$$get_Value", 0),
-    ("CCharacterBattle_AddHP", "CCharacterBattle$$AddHP", 0),
-    ("CCharacterBattle_SetShieldHP", "CCharacterBattle$$SetShieldHP", 0),
-    ("CCharacterData_AddEvolutionStatToDictionary", "CCharacterData$$AddEvolutionStatToDictionary", 0),
-    ("CCharacterData_CalcArchiveStats", "CCharacterData$$CalcArchiveStats", 0),
-    ("CCharacterData_CalcAwakeningNodeStats", "CCharacterData$$CalcAwakeningNodeStats", 0),
-    ("CCharacterData_CalcBasicStats", "CCharacterData$$CalcBasicStats", 0),
-    ("CCharacterData_CalcEvolutionStats", "CCharacterData$$CalcEvolutionStats", 0),
-    ("CCharacterData_CalcMonadGateEnchantNodeStats", "CCharacterData$$CalcMonadGateEnchantNodeStats", 0),
-    ("CCharacterData_CalcStat", "CCharacterData$$CalcStat", 0),
-    ("CCharacterData_CalcTranscendentStarStats", "CCharacterData$$CalcTranscendentStarStats", 0),
-    ("CCharacterData_CheckNodeApply", "CCharacterData$$CheckNodeApply", 0),
-    ("CCharacterData_GetArchiveGrowValueByType", "CCharacterData$$GetArchiveGrowValueByType", 0),
-    ("CCharacterData_GetEvolutionStat", "CCharacterData$$GetEvolutionStat", 0),
-    ("CCharacterData_GetValueByLevel", "CCharacterData$$GetValueByLevel", 0),
-    ("CCharacterData_get_Avoid", "CCharacterData$$get_Avoid", 0),
-    ("CCharacterData_get_CriticalDMGRate", "CCharacterData$$get_CriticalDMGRate", 0),
-    ("CCharacterData_get_CriticalRate", "CCharacterData$$get_CriticalRate", 0),
-    ("CCharacterData_get_DMGBoost", "CCharacterData$$get_DMGBoost", 0),
-    ("CCharacterData_get_DMGReduceRate", "CCharacterData$$get_DMGReduceRate", 0),
-    ("CCharacterData_get_Def", "CCharacterData$$get_Def", 0),
-    ("CCharacterData_get_EnemyCritDmgReduce", "CCharacterData$$get_EnemyCriticalDamageReduce", 0),
-    ("CCharacterData_get_HitHPRecovery", "CCharacterData$$get_HitHPRecovery", 0),
-    ("CCharacterData_get_PiercePower", "CCharacterData$$get_PiercePower", 0),
-    ("CCharacterData_get_PiercePowerRate", "CCharacterData$$get_PiercePowerRate", 0),
-    ("CCharacterData_get_Vampiric", "CCharacterData$$get_Vampiric", 0),
-    ("CCustomBossStatValue_SetBaseValue", "CCustomBossStatValue$$SetBaseValue", 0),
-    ("CDungeonScene_UpdatePvpTurnPenalty", "CDungeonScene$$UpdatePvpTurnPenalty", 0),
-    ("CFormula_CalcBattlePower", "CFormula$$CalcBattlePower", 0),
-    ("CFormula_CalcStat", "CFormula$$CalcStat", 0),
-    ("CFormula_IsIgnoreTurnLimitDamage", "CFormula$$IsIgnoreTurnLimitDamage", 0),
-    ("CFormula_CheckProbabilityPercent", "CFormula$$CheckProbabilityPercent", 0),
-    ("CFormula_CheckProbabilityPermille", "CFormula$$CheckProbabilityPermille", 0),
-    ("CItemMainOption_ctor", "CItemMainOption$$.ctor", 0),
-    ("CItemMainOption_get_OptionValue", "CItemMainOption$$get_OptionValue", 0),
-    ("CItem_GetBreakLimitFactor", "CItem$$GetBreakLimitFactor", 0),
-    ("CItem_GetEnchantFactor", "CItem$$GetEnchantFactor", 0),
-    ("CItem_GetSingularityFactor", "CItem$$GetSingularityFactor", 0),
-    # Surcharge 0 = thunk 1 argument qui saute sur l'implémentation (4 args) :
-    # c'est celle-ci que la spec cite.
-    ("CItem_InitializeOptionData", "CItem$$InitializeOptionData", 1),
-    ("CSkillManager_CheckItemBuffCool", "CSkillManager$$CheckItemBuffCool", 0),
-    ("CSkillManager_GetBuffList", "CSkillManager$$GetBuffList", 0),
-    ("CSkillManager_GetBuffListOnSpawn", "CSkillManager$$GetBuffListOnSpawn", 0),
-    ("CStatValue_GetFinalValue", "CStatValue$$GetFinalValue", 0),
-    ("CStatValue_GetFinalValue_ovr1", "CCustomBossStatValue$$GetFinalValue", 0),
-    ("CStatValue_GetFinalValue_ovr2", "CSkillDungeonStatValue$$GetFinalValue", 0),
-    ("CStatValue_SetAwakeningNodeStatValue", "CStatValue$$SetAwakeningNodeStatValue", 0),
-    # Surcharge 0 = `SetBaseValue(int)` court ; la spec § 9 cite la complète
-    # (int, int, int, int, int, CCharacterData).
-    ("CStatValue_SetBaseValue", "CStatValue$$SetBaseValue", 1),
-    ("CStatValue_SetFinalValue", "CStatValue$$SetFinalValue", 0),
-    ("CStatValue_SetMonadGateEnchantNodeStatValue", "CStatValue$$SetMonadGateEnchantNodeStatValue", 0),
-    ("CStatValue_get_AwakeningValue", "CStatValue$$get_m_nAwakeningValue", 0),
-    ("CStatValue_get_BuffValue", "CStatValue$$get_m_nBuffValue", 0),
-    ("CStatValue_get_FinalValue", "CStatValue$$get_m_nFinalValue", 0),
-    ("CStatValue_get_ItemOptionValue", "CStatValue$$get_m_nItemOptionValue", 0),
-    # Noms générés par le compilateur : le `81` est un compteur interne qui se
-    # renumérote dès que CStateBattle change (79 en 1.4.9, 81 en 1.4.14). Les
-    # chiffres sont joker à la résolution — voir `skeleton()`.
-    ("CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext", "CStateBattle.<PvpAttackTeamPenaltyDmg>d__81$$MoveNext", 0),
-    ("CStateBattle_PvpPenalty_PlayDamage", "CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1", 0),
-    ("CalcCharacterSharedDamage", "CFormula$$CalcCharacterSharedDamage", 0),
-    ("CalcDamage", "CFormula$$CalcDamage", 0),
-    ("CalcDamageDOT", "CFormula$$CalcDamageDOT", 0),
-    # Chemin du TICK des DoT (§ 12.8 → désassemblage 24/08/2026, déclencheur :
-    # le DoT custom BT_DOT_2000092 d'Eternal Bleeding, tick observé sans
-    # défense — 2 × 7000 ‰ × Effectiveness fiche).
-    ("CBattleManager_ProcessDamageOverTime", "CBattleManager$$ProcessDamageOverTime", 0),
-    ("CBattleManager_ApplyDamageCap", "CBattleManager$$ApplyDamageCap", 0),
-    ("CBattleManager_ApplyImmediatelyDotDamageCap", "CBattleManager$$ApplyImmediatelyDotDamageCap", 0),
-    ("CBattleManager_GetImmediatelyDotDamageCapBuffType", "CBattleManager$$GetImmediatelyDotDamageCapBuffType", 0),
-    ("CCharacterBattle_IsDotBuffType", "CCharacterBattle$$IsDotBuffType", 0),
-    ("CCharacterBattle_GetSpecificDotEnhanceBuffType", "CCharacterBattle$$GetSpecificDotEnhanceBuffType", 0),
-    ("CCharacterBattle_GetDotDamageIncreaseBuffValue", "CCharacterBattle$$GetDotDamageIncreaseBuffValue", 0),
-    ("CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue", "CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue", 0),
-    ("CalcDamageWG", "CFormula$$CalcDamageWG", 0),
-    ("CalcDamage_g__helper", "CFormula$$<CalcDamage>g__CalcDamage|17_0", 0),
-    ("CalcFinalStat", "CFormula$$CalcFinalStat", 0),
-    ("CalcStat", "CFormula$$CalcStat", 0),
-    ("CheckDamageRate", "CFormula$$CheckDamageRate", 0),
-    ("CheckProbability", "CFormula$$CheckProbability", 0),
-    ("CheckProbabilityPercent", "CFormula$$CheckProbabilityPercent", 0),
-    ("CheckProbabilityPermille", "CFormula$$CheckProbabilityPermille", 0),
-    ("CheckResist", "CFormula$$CheckResist", 0),
-    ("CCharacterBattle_FindBuffByType", "CCharacterBattle$$FindBuffByType", 0),
-    ("FindBuffAdditionalDamage", "CCharacterBattle$$FindBuffAdditionalDamage", 0),
-    ("FindBuffDamageReduce", "CCharacterBattle$$FindBuffDamageReduce", 0),
-    ("FindBuffElementDamageRate", "CCharacterBattle$$FindBuffElementDamageRate", 0),
-    ("FindBuffEnemyTeamDecreaseDamageRate", "CCharacterBattle$$FindBuffEnemyTeamDecreaseDamageRate", 0),
-    ("GetAttackStat", "CCharacterBattle$$GetAttackStat", 0),
-    # Surcharges (int, int) puis (float, float) — adresses croissantes en 1.4.9.
-    ("GetBattleRandomRange_int", "CFormula$$GetBattleRandomRange", 0),
-    ("GetBattleRandomRange_float", "CFormula$$GetBattleRandomRange", 1),
-    ("GetBuffDamgeFinalReduce", "CCharacterBattle$$GetBuffDamgeFinalReduce", 0),
-    ("GetElementSuperiority", "CFormula$$GetElementSuperiority", 0),
-    ("GetElementeryDamageRate", "CFormula$$GetElementeryDamageRate", 0),
-    ("GetLostHPRateValue_1", "CCharacterBattle$$GetLostHPRateValue", 0),
-    ("GetLostHPRateValue_2", "CCharacterBattle$$GetLostHPRateValue", 1),
-    ("GetRandomRange_int", "CFormula$$GetRandomRange", 0),
-    ("GetSkillFactor", "CSkillManager$$GetSkillFactor", 0),
-    ("GetStatValuePermille", "CCharacterData$$GetStatValuePermille", 0),
-    ("MulPermille", "CCommonDefine$$MulPermille", 0),
-    ("get_MISSED_DAMAGE_RATE", "CCommonDefine$$get_MISSED_DAMAGE_RATE_PERMILLE", 0),
-]
+# ── Manifeste : listing → nom Il2CppDumper (+ ordinal parmi les surcharges,
+# adresses croissantes). Il vit dans `listings.json`, PARTAGÉ avec
+# `extract-cs.ts` (pipeline Steam, mêmes 99 méthodes en C#) : AJOUTER LÀ-BAS
+# toute méthode qu'une spec se met à citer.
+with open(os.path.join("datagen", "extract", "listings.json"), encoding="utf-8") as _f:
+    M = [(e["file"], e["method"], e["overload"]) for e in json.load(_f)]
 
 
 def load_binary() -> tuple[bytes, str]:

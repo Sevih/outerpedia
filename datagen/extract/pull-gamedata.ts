@@ -25,13 +25,14 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join } from 'node:path';
 import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
+import { gamedata } from '../lib/paths';
 import { ADB, PKG, capture, ensureRoot, pickDevice, stream } from './adb';
 
 const REMOTE = `/sdcard/Android/data/${PKG}/files`;
-const LOCAL = resolve('.gamedata/files');
+const LOCAL = gamedata('files');
 
 // Sous-dossiers source réellement utiles (on ignore promos / cookies / cache).
 const DEFAULT_SUBDIRS = ['bundles', 'il2cpp'];
@@ -135,7 +136,7 @@ function tarAvailable(serial: string): boolean {
 
 /** Liste des fichiers d'un lot, DÉPOSÉE sur le device (cf. `pullBatch`). */
 const REMOTE_LIST = '/data/local/tmp/outerpedia-pull-list.txt';
-const LOCAL_LIST = resolve('.gamedata/.pull-list.txt');
+const LOCAL_LIST = gamedata('.pull-list.txt');
 
 /**
  * Tire UN LOT de fichiers en un seul transfert : `tar` côté device empaquette,

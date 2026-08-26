@@ -20,8 +20,9 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } fr
 import { join, resolve } from 'node:path';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { STAGING_DIR } from './stage';
+import { gamedata } from '../lib/paths';
 
-const GAME_POOL = resolve('.gamedata/extracted/wallpapers');
+const GAME_POOL = gamedata('extracted/wallpapers');
 const EDITORIAL = resolve('.editorial/wallpapers');
 const DEST = resolve(STAGING_DIR, 'images/download');
 

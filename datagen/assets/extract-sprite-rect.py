@@ -34,13 +34,17 @@ with DIFFERENT geometry (CM_Element_Water is 42x42 in `common` and 46x46 in
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import UnityPy
 
 ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = ROOT / '.gamedata' / 'files' / 'bundles' / 'manifest.dat'
-BUNDLES_DIR = ROOT / '.gamedata' / 'files' / 'bundles'
+# Racine de l'aire de travail — `GAMEDATA_ROOT` (cf. datagen/lib/paths.ts),
+# `.gamedata` sinon. Relative → depuis la racine du repo.
+GAMEDATA = ROOT / os.environ.get('GAMEDATA_ROOT', '.gamedata')
+MANIFEST = GAMEDATA / 'files' / 'bundles' / 'manifest.dat'
+BUNDLES_DIR = GAMEDATA / 'files' / 'bundles'
 OUT = ROOT / 'datagen' / 'assets' / 'sprite-rect.json'
 
 ATLASES = [

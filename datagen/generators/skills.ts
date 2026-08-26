@@ -34,8 +34,9 @@ import type { LangDict } from '../lib/lang';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { burstAPCosts } from '../lib/burst';
 import { groupBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
+import { gamedata } from '../lib/paths';
 
-const OUT = resolve('.gamedata/staging/skills');
+const OUT = gamedata('staging/skills');
 
 /** Sous-type fonctionnel d'un skill. */
 export type SkillSubType = 'active' | 'passive' | null;

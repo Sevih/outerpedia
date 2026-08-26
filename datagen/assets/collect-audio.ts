@@ -21,9 +21,10 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAGING_DIR } from './stage';
+import { gamedata } from '../lib/paths';
 
 /** Pool audio extrait du jeu (miroir de `GAME_IMAGES_DIR` pour les images). */
-const GAME_AUDIO_DIR = resolve('.gamedata/extracted/audio/bgm');
+const GAME_AUDIO_DIR = gamedata('extracted/audio/bgm');
 const DEST_DIR = resolve(STAGING_DIR, 'audio/bgm');
 
 export function collectAudio(): { copied: number; skipped: number } {

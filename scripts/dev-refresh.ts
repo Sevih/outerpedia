@@ -9,9 +9,10 @@
  * « Valider l'extraction ») ou en lot via `pnpm datagen:promote --apply`. La
  * console affiche quand même le diff (dry) pour savoir ce qui a bougé.
  *
- * Flags : --force (re-génère même si local à jour) / --no-pull (offline).
+ * Flags : --force (re-génère même si local à jour) / --no-pull (offline) /
+ * --source android|steam (défaut : DATAGEN_SOURCE, sinon android).
  */
-import { refresh } from '../datagen/refresh';
+import { refresh, sourceArg, type SourceName } from '../datagen/refresh';
 
 const argv = process.argv.slice(2);
 
@@ -21,6 +22,7 @@ refresh({
   apply: false,
   collect: true,
   news: true,
+  source: sourceArg(argv) as SourceName | undefined,
 })
   .then(() => console.log('\n✅ dev-refresh terminé.\n'))
   .catch((e) => {

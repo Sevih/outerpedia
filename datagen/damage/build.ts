@@ -18,6 +18,7 @@ import { resolve } from 'node:path';
 import { writeJson } from '../lib/json';
 import { pythonToolingMissing } from '../lib/python';
 import { buildGameVersion } from '../generators/game-version';
+import { gamedata } from '../lib/paths';
 import { buildDamageCharacters } from './characters';
 import { buildDamageGrowth } from './growth';
 import { buildDamageEquipment } from './equipment';
@@ -32,8 +33,8 @@ async function main(): Promise<void> {
   const version = buildGameVersion();
   if (!version) {
     throw new Error(
-      '.gamedata/files/bundles/manifest.dat introuvable — lancer les extracteurs ' +
-        'sur une machine où .gamedata est peuplé (datagen:pull / datagen:extract).',
+      `${gamedata('files/bundles/manifest.dat')} introuvable — lancer les extracteurs ` +
+        'sur une machine où la racine gamedata est peuplée (datagen:pull / datagen:extract).',
     );
   }
   mkdirSync(OUT, { recursive: true });

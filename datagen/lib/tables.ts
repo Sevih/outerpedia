@@ -8,6 +8,7 @@
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { gamedata } from './paths';
 
 /** Une ligne de table : colonnes → valeurs (toujours des chaînes au sortir du parser). */
 export type Row = Record<string, string>;
@@ -20,7 +21,9 @@ export interface ParsedTable {
 }
 
 /** Répertoire des tables parsées (sortie de `datagen:convert`). Surchargable pour les tests. */
-const PARSED_DIR = resolve(process.env.DATAGEN_PARSED_DIR ?? '.gamedata/parsed');
+const PARSED_DIR = process.env.DATAGEN_PARSED_DIR
+  ? resolve(process.env.DATAGEN_PARSED_DIR)
+  : gamedata('parsed');
 
 /** Chemin sur disque d'une table parsée (pour `statSync` & co — pas pour lire soi-même). */
 export function tablePath(name: string): string {

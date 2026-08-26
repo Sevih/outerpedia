@@ -55,6 +55,7 @@ Usage :
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -63,21 +64,23 @@ import UnityPy
 from UnityPy.helpers.MeshHelper import MeshHandler
 
 ROOT = Path(__file__).resolve().parents[2]
-BUNDLES_DIR = ROOT / '.gamedata' / 'files' / 'bundles'
+# Racine de l'aire de travail — `GAMEDATA_ROOT` (cf. datagen/lib/paths.ts),
+# `.gamedata` sinon. Relative → depuis la racine du repo.
+GAMEDATA = ROOT / os.environ.get('GAMEDATA_ROOT', '.gamedata')
+BUNDLES_DIR = GAMEDATA / 'files' / 'bundles'
 MANIFEST = BUNDLES_DIR / 'manifest.dat'
-EXTRA_TABLE = ROOT / '.gamedata' / 'parsed' / 'CharacterExtraTemplet.json'
+EXTRA_TABLE = GAMEDATA / 'parsed' / 'CharacterExtraTemplet.json'
 OUT_JSON = ROOT / 'datagen' / 'assets' / 'portrait-fx.json'
 # `globalgamemanagers` tiré du jeu INSTALLÉ par `pnpm datagen:dump` (adb, même
 # geste que la paire metadata/so). Source à jour et reproductible du colorSpace,
 # là où l'APK déposée à la main ne vivait que sur une machine.
-GGM = ROOT / '.gamedata' / 'apk' / 'globalgamemanagers'
+GGM = GAMEDATA / 'apk' / 'globalgamemanagers'
 GGM_ENTRY_IN_APK = 'assets/bin/Data/globalgamemanagers'
 # Le pool que `buildImageIndex` (assets/source.ts) balaye. On reproduit le
 # rangement par container d'AssetStudio (`-g containerFull`) : l'index n'indexe
 # que le basename, mais le chemin dit d'où vient le fichier.
 OUT_TEX = (
-    ROOT
-    / '.gamedata'
+    GAMEDATA
     / 'extracted'
     / 'images'
     / 'assets'
@@ -244,7 +247,7 @@ def read_color_space() -> str:
             return found
         print("  ! globalgamemanagers sans PlayerSettings — on tente l'APK")
 
-    apks = sorted((ROOT / '.gamedata' / 'apk').glob('*/com.smilegate.*.apk'))
+    apks = sorted((GAMEDATA / 'apk').glob('*/com.smilegate.*.apk'))
     if not apks:
         kept = previous_color_space()
         print(f'  ! ni globalgamemanagers ni APK — colorSpace conservé : {kept}')

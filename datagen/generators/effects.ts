@@ -18,8 +18,9 @@ import {
 } from '../lib/effects';
 import { isMain } from '../lib/is-main';
 import { loadTable } from '../lib/tables';
+import { gamedata } from '../lib/paths';
 
-const OUT = resolve('.gamedata/staging/effects');
+const OUT = gamedata('staging/effects');
 
 function write(name: string, data: unknown): void {
   writeFileSync(resolve(OUT, name), JSON.stringify(data, null, 2));

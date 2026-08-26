@@ -26,6 +26,7 @@ import { isMain } from '../lib/is-main';
 import { readPngSize } from '../lib/png';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { listHeroFullArt } from '../assets/hero-full-art';
+import { gamedata } from '../lib/paths';
 
 /** Une entrée wallpaper : nom de fichier (sans extension) + dimensions. */
 export interface Wallpaper {
@@ -36,7 +37,7 @@ export interface Wallpaper {
 export type WallpapersData = Record<string, Wallpaper[]>;
 
 /** Pool wallpaper extrait du jeu (worker) — catégories Cutin/Full/Banner/Art. */
-const GAME_POOL = resolve('.gamedata/extracted/wallpapers');
+const GAME_POOL = gamedata('extracted/wallpapers');
 /** Pool éditorial rapatrié (Outerpedia). */
 const EDITORIAL = resolve('.editorial/wallpapers');
 

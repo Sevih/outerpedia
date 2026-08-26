@@ -27,6 +27,7 @@ import { isMain } from '../lib/is-main';
 import { pythonToolingMissing } from '../lib/python';
 import { PKG, capture, ensureRoot, gameVersion, pickDevice, stream } from './adb';
 import { IL2CPPDUMPER, ensureTool } from './tools';
+import { gamedata } from '../lib/paths';
 
 // Entrées à extraire des APK (chemins internes stables du zip).
 const META_ENTRY = 'assets/bin/Data/Managed/Metadata/global-metadata.dat';
@@ -37,7 +38,7 @@ const SO_ENTRY = 'lib/arm64-v8a/libil2cpp.so';
 // sur UNE machine ; on le tire du jeu INSTALLÉ, comme la paire metadata/so.
 const GGM_ENTRY = 'assets/bin/Data/globalgamemanagers';
 
-const APK_DIR = resolve('.gamedata/apk');
+const APK_DIR = gamedata('apk');
 const META = resolve(APK_DIR, 'global-metadata.dat');
 const SO = resolve(APK_DIR, 'libil2cpp.so');
 const GGM = resolve(APK_DIR, 'globalgamemanagers');

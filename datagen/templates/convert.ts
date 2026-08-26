@@ -12,12 +12,13 @@
  * Usage : pnpm datagen:convert
  */
 import { mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
-import { basename, join, resolve } from 'node:path';
+import { basename, join } from 'node:path';
 import { isMain } from '../lib/is-main';
 import { parseBytes } from './bytes-parser';
+import { gamedata } from '../lib/paths';
 
-const IN = resolve('.gamedata/extracted/bytes');
-const OUT = resolve('.gamedata/parsed');
+const IN = gamedata('extracted/bytes');
+const OUT = gamedata('parsed');
 
 function main(): void {
   mkdirSync(OUT, { recursive: true });

@@ -5,6 +5,9 @@
 > (TypeDefIndex 7282) + méthodes satellites de `CCharacterBattle` / `CCharacterData` /
 > `CCommonDefine`. Désassemblage ciblé capstone (mapping VA→offset via program headers
 > ELF), cibles `bl` résolues par `script.json` d'Il2CppDumper. Les listings annotés sont
+> (leur jumeau C#, tiré du client Steam décompilé, vit dans
+> [damage-formula-cs/](./damage-formula-cs/) — même manifeste, `pnpm datagen:extract-cs` ;
+> la spec cite encore l'ASM jusqu'à la bascule de source)
 > dans [damage-formula-asm/](./damage-formula-asm/), régénérés À CHAQUE PATCH par
 > `pnpm datagen:dump` (qui ré-extrait le binaire de l'APK installé sur l'émulateur,
 > puis enchaîne sur [disasm.py](../../datagen/extract/disasm.py) — manifeste des

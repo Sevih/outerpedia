@@ -19,6 +19,7 @@ import { FIXTURES } from '../../src/lib/damage/fixtures';
 import { ENGINE_GAME_VERSION, type DamageFixture } from '../../src/lib/damage/harness';
 import { type DamageData } from '../../src/lib/damage/inputs';
 import { replayFixture } from '../../src/lib/damage/replay';
+import { gamedata } from '../lib/paths';
 
 const J = (name: string): unknown =>
   JSON.parse(readFileSync(resolve('data/generated/damage', name), 'utf8'));
@@ -34,7 +35,7 @@ const resVersion = (data.characters as unknown as { resVersion?: string }).resVe
 // Garde anti-mensonge : ENGINE_GAME_VERSION (harness.ts) est une constante
 // MANUELLE — si le dump-stamp de la machine de datamine connaît une autre
 // version du client, c'est qu'on a oublié de la bumper avec le patch.
-const DUMP_STAMP = resolve('.gamedata/apk/dumped/.dump-stamp.json');
+const DUMP_STAMP = gamedata('apk/dumped/.dump-stamp.json');
 if (existsSync(DUMP_STAMP)) {
   try {
     const stamp = JSON.parse(readFileSync(DUMP_STAMP, 'utf8')) as { gameVersion?: string };

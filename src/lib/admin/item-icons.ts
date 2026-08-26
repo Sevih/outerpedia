@@ -4,14 +4,11 @@
  * issue d'un sprite = le nom du sprite (l'icône se pré-remplit toute seule).
  */
 import { readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { ITEM_SPRITE_DIR } from '@datagen/assets/source';
 import { getCatalog } from '@/lib/data/items';
 import { loadItemCurated } from './item-curated-store';
 
-const SPRITE_DIR = resolve(
-  process.cwd(),
-  '.gamedata/extracted/images/assets/editor/resources/sprite/at_thumbnailitemruntime',
-);
+const SPRITE_DIR = ITEM_SPRITE_DIR;
 
 function sprites(): string[] {
   try {

@@ -153,6 +153,8 @@ Rien n'est committé côté data locale : il faut la construire une fois.
 ```bash
 pnpm datagen:pull        # bundles + il2cpp depuis l'émulateur (adb).  ~15 Go
 pnpm datagen:dump        # dump.cs depuis l'APK installé (paire assortie, auto)
+pnpm datagen:pull-steam  # VARIANTE Steam (racine .gamedata-steam) : copie locale, ~18 Go
+pnpm datagen:dump-steam  # VARIANTE Steam : ilspycmd sur Assembly-CSharp.dll (runtime .NET 10)
 pnpm datagen:extract     # .bytes + images → .gamedata/extracted/ (via AssetStudioModCLI)
 pnpm datagen:convert     # .bytes → tables parsées (.gamedata/parsed/*.json)
 pnpm datagen:regen       # build + promote --apply → data/extracted (lit parsed + dump.cs)
