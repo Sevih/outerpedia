@@ -1,6 +1,6 @@
 /**
- * Soins, shields, reverse heal, WG — miroir de CBuff.OnCreate (0x22FC71C) et
- * CCharacterBattle.AddHP (0x26C5FD8), libil2cpp 1.4.9.
+ * Soins, shields, reverse heal, WG — miroir de CBuff.OnCreate et
+ * CCharacterBattle.AddHP (listings C#, docs/specs/damage-formula-cs/).
  * Réf : docs/specs/damage-formula.md § 14. Mêmes conventions que formula.ts
  * (entiers, troncature vers zéro, ‰).
  */
@@ -14,13 +14,13 @@ import {
 } from './formula';
 import { PVP_HEAL_PENALTY_REDUCE_RATE_PERMILLE, type DamageWgInput } from './types';
 
-/** CBuff.get_Value — RVA 0x22F4B38 : Templet.Value × StackCount (linéaire en stacks). */
+/** CBuff.get_Value : Templet.Value × StackCount (linéaire en stacks). */
 export function buffValue(templetValue: number, stackCount: number): number {
   return Math.imul(templetValue, stackCount);
 }
 
 /**
- * Valeur effective d'un buff de stat sous STAT_BUFF/DEBUFF_ENHANCE (BT 27/28) :
+ * Valeur effective d'un buff de stat sous STAT_BUFF/DEBUFF_ENHANCE (BT 29/30) :
  * ApplyRate(value, enhance) = trunc(value × (1000 + enhance) / 1000).
  */
 export function enhanceStatBuffValue(value: number, enhanceValue: number): number {
@@ -28,7 +28,7 @@ export function enhanceStatBuffValue(value: number, enhanceValue: number): numbe
 }
 
 /**
- * BT 32 STAT_OWNER_LOST_HP_RATE_HALF : PV effectifs = clamp(2×HP − MaxHP, 0, MaxHP),
+ * BT 34 STAT_OWNER_LOST_HP_RATE_HALF : PV effectifs = clamp(2×HP − MaxHP, 0, MaxHP),
  * puis GetLostHPRateValue — le bonus croît 2× plus vite et sature sous 50 % PV.
  */
 export function lostHpRateHalfValue(maxHP: number, hp: number, value: number): number {
@@ -68,9 +68,14 @@ export interface HealInput {
   pvpHealReducePermille?: number;
 }
 
-/** Soin brut d'un buff BT 14/15, AVANT les modificateurs de soins reçus (§ 14.2). */
+/**
+ * Soin brut d'un buff BT 14/15, AVANT les modificateurs de soins reçus (§ 14.2).
+ * La réduction PvP est DANS la branche `StatType != ST_NONE` : un soin plat n'est
+ * pas réduit (C#, 26/08/2026 — l'ASM la plaçait hors de la branche).
+ */
 export function calcHealValue(input: HealInput): number {
-  let heal = statOrFlatValue(input.value, input.sourceStatValue);
+  if (input.sourceStatValue === undefined) return input.value;
+  let heal = getStatValuePermille(input.sourceStatValue, input.value);
   if (input.isPvp) {
     heal = mulPermille(heal, 1000 - (input.pvpHealReducePermille ?? 0));
   }
@@ -105,7 +110,7 @@ export interface ReceiveHealModifiers {
   reducePermille?: number;
   /** PvP temps réel : FieldSkillReduceReceiveHeal du match (‰). */
   pvpRealtimeFieldReducePermille?: number;
-  /** BT_DOT_BLEED (55) présent : soins reçus ÷ 2 (×500 ‰). */
+  /** BT_DOT_BLEED (57) présent : soins reçus ÷ 2 (×500 ‰). */
   hasBleed?: boolean;
 }
 
@@ -144,7 +149,7 @@ export function shieldAbsorb(
 
 /**
  * Application finale d'un delta de PV (fin d'AddHP) : clamp [0, MaxHP], puis
- * BT_UNDEAD (111) maintient à 1 PV si le coup serait mortel.
+ * BT_UNDEAD (116) maintient à 1 PV si le coup serait mortel.
  */
 export function applyHpDelta(
   hp: number,
@@ -162,12 +167,12 @@ export function applyHpDelta(
 export interface ShieldInput {
   /** Valeur du buff (Templet.Value × stacks). */
   value: number;
-  /** Stat de la source (caster pour BT 19, porteur pour BT 20) si StatType != 0. */
+  /** Stat de la source (caster pour BT 21, porteur pour BT 22) si StatType != 0. */
   sourceStatValue?: number;
 }
 
 /**
- * Valeur d'un shield BT 19/20 (§ 14.4). SetShieldHP REMPLACE le shield courant —
+ * Valeur d'un shield BT 21/22 (§ 14.4). SetShieldHP REMPLACE le shield courant —
  * aucun cumul, même si le nouveau est plus petit. Pas de pénalité PvP.
  */
 export function calcShieldValue(input: ShieldInput): number {
@@ -184,16 +189,24 @@ export interface ReverseHealInput {
   /** PV courants et shield du porteur (protection létale). */
   hp: number;
   shieldHP: number;
-  /** Contenu « létal » (guild dungeon, event challenge, world boss, singularité Monad) ou cible boss. */
+  /**
+   * Branche létale, décidée par l'appelant (§ 14.5) : type `_ABLE_KILL` (BT 18/19,
+   * tue partout), OU scène létale (guild dungeon, event challenge, world boss,
+   * singularité Monad) ET porteur boss — les deux conditions ensemble (C#,
+   * 26/08/2026 : l'ASM lisait « ou »). Variante périodique (OnTurnStart) : cf. spec.
+   */
   canKill?: boolean;
+  /** Le porteur a BT_INVINCIBLE (3) : garde d'entrée, aucune perte de PV. */
+  invincible?: boolean;
 }
 
 /**
  * Perte de PV effective d'un reverse heal (§ 14.5) : stat-ou-plat, cappé par le
- * plus petit BT 18, et hors contenu létal la cible reste à 1 (PV + shield).
+ * plus petit BT 20, et hors branche létale la cible reste à 1 (PV + shield).
  * Ignore défense/élément/crit/DMG_REDUCE ; passe par le shield (cf. shieldAbsorb).
  */
 export function calcReverseHealValue(input: ReverseHealInput): number {
+  if (input.invincible) return 0;
   let v = statOrFlatValue(input.value, input.sourceStatValue);
   if (input.capValue !== undefined && input.capValue < v) v = input.capValue;
   const total = input.hp + input.shieldHP;
@@ -201,12 +214,13 @@ export function calcReverseHealValue(input: ReverseHealInput): number {
   return total - 1; // AddHP(1 − (HP+shield)) : laisse exactement 1
 }
 
-/** BT 80 WG_HEAL / BT 84 WG_DMG : valeur ‰ de MaxWG si ApplyingType == 2, plate sinon. */
+/** BT 85 WG_HEAL / BT 86 WG_REVERSE_HEAL : valeur ‰ de MaxWG si `OAT_RATE`, plate sinon. */
 export function wgBuffValue(value: number, maxWG: number, isPermilleOfMaxWG: boolean): number {
   return isPermilleOfMaxWG ? mulPermille(maxWG, value) : value;
 }
 
-/** Dégâts de jauge d'un buff BT 84 (passe par CalcDamageWG avec la valeur en custom). */
+/** Dégâts de jauge d'un buff BT 86 WG_REVERSE_HEAL (CalcDamageWG avec la valeur en custom,
+ *  si `RageManager.CanReduceWG` — sinon le buff n'est pas créé). */
 export function calcWgBuffDamage(
   value: number,
   maxWG: number,
@@ -221,9 +235,11 @@ export function calcWgBuffDamage(
 }
 
 /**
- * Tick immédiat d'un DOT (BT 60–65, § 14.6) : chaque DOT du type visé déjà posé
- * tick à ApplyRate(dotValue, immediateValue) = dot × (1000 + v)/1000, puis passe
- * par CalcDamageDOT (formula.ts).
+ * Détonation d'un DOT (BT 63–69 IMMEDIATELY_*, § 14.6) : chaque DOT du type visé
+ * déjà posé tick à ApplyRate(dotValue, immediateValue) = dot × (1000 + v)/1000,
+ * × ses tours restants, par la formule de son type (§ 11) sous les caps
+ * IMMEDIATELY. Seule la valeur est modélisée ici — le tick × tours n'est pas
+ * branché (décision Sevih 25/08/2026).
  */
 export function immediateDotValue(dotValue: number, immediateValue: number): number {
   return applyRate(dotValue, immediateValue);

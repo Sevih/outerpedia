@@ -25,6 +25,7 @@ const DAMAGE_CONFIG_KEYS = [
   'CHECK_AVOID_VALUE_3',
   'CHECK_AVOID_VALUE_4',
   'GUILD_RAID_MAIN_BOSS_MAX_GRADE',
+  'PUNISH_DMG_REDUCE_VALUE',
 ] as const;
 
 export type DamageConfigKey = (typeof DAMAGE_CONFIG_KEYS)[number];

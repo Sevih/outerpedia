@@ -28,6 +28,7 @@
 import {
   findBuffAdditionalDamage,
   findBuffDamageReduce,
+  findBuffWGDamageReduce,
   getBuffDamageFinalReduce,
   collectCombatFlags,
   type ActiveBuff,
@@ -234,9 +235,10 @@ export interface ReportScenario {
   includeMissBranch?: boolean;
   /** Cibles décomptées pour BT_DMG_ENEMY_TEAM_DECREASE (helper § 7). */
   decreaseTargetCount?: number;
-  /** GameConfig MISSED_DAMAGE_RATE — défaut 500 (1.4.9). */
+  /** GameConfig MISSED_DAMAGE_RATE — défaut 500 (1.4.15). */
   missedDamageRatePermille?: number;
-  /** Sorties de FindBuffWGDamageReduce (BT 83/84, § 12.3 — non désassemblé). */
+  /** Sorties de FindBuffWGDamageReduce (BT 88/89, § 11) — fournies, elles
+   *  REMPLACENT l'agrégation des buffs actifs (`findBuffWGDamageReduce`). */
   wgReduceFlat?: number;
   wgReduceRate?: number;
 }
@@ -380,21 +382,24 @@ export function buildSkillReport(
   const withTrace = options?.trace === true;
 
   const wgTrace = withTrace ? ([] as TraceStep[]) : undefined;
+  const wgAgg = findBuffWGDamageReduce(attackerBuffs, defenderBuffs);
+  const wgReduceFlat = scenario.wgReduceFlat ?? wgAgg.flat;
+  const wgReduceRate = scenario.wgReduceRate ?? wgAgg.rate;
   const weaknessGaugeDamage = calcDamageWG({
     defenderWgInvincible: flags.defenderWgInvincible,
     skillWgReduce: skill.wgReduce ?? 0,
-    wgReduceFlat: scenario.wgReduceFlat,
-    wgReduceRate: scenario.wgReduceRate,
+    wgReduceFlat,
+    wgReduceRate,
   });
   wgTrace?.push({
     ref: '§ 11',
     label: flags.defenderWgInvincible
       ? 'jauge : BT_WG_INVINCIBLE → 0'
-      : 'dégâts de jauge (BT 83/84 : agrégation non désassemblée, § 12.3 — entrées telles que fournies)',
+      : 'dégâts de jauge (BT_WG_DMG de l’attaquant + BT_WG_DMG_REDUCE du défenseur, § 11)',
     in: {
       skillWgReduce: skill.wgReduce ?? 0,
-      wgReduceFlat: scenario.wgReduceFlat ?? 0,
-      wgReduceRate: scenario.wgReduceRate ?? 0,
+      wgReduceFlat,
+      wgReduceRate,
     },
     out: weaknessGaugeDamage,
   });
@@ -430,6 +435,7 @@ export function buildSkillReport(
   const damageReduceRate = findBuffDamageReduce(defenderBuffs, {
     attackerSkillMonoTarget: skill.monoTarget,
     casterAliveAllies: scenario.defenderCasterAliveAllies,
+    attackerHasDotPunish: attackerBuffs.some((b) => b.type === 'BT_DOT_PUNISH'),
   });
   const finalReduceRate = getBuffDamageFinalReduce(defenderBuffs, {
     isFirstSkill: skill.isFirstSkill,

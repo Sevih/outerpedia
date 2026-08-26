@@ -337,13 +337,13 @@ export function dungeonModeOf(encounterMode: string): string {
     : `DM_${encounterMode.toUpperCase()}`;
 }
 
-/** `MaxHPRate` du binaire : `float32(100 + Σ) × 0.01f` (constante 0x1056648) —
+/** `MaxHPRate` (CCharacterData, C#) : `float32(100 + Σ) × 0.01f` —
  *  Σ = somme des `BuffValue` de TOUS les event buffs MAX_HP actifs. */
 export function eventMaxHpRate(sum: number): number {
   return Math.fround((sum + 100) * Math.fround(0.01));
 }
 
-/** `get_MaxHP` (0x27DFB20) : `floor(float32(rate × float32(HP)))`. */
+/** `get_MaxHP` : `floor(float32(rate × float32(HP)))`. */
 export function applyMaxHpRate(hp: number, rate: number): number {
   return Math.floor(Math.fround(rate * Math.fround(hp)));
 }
@@ -739,7 +739,7 @@ export function buildCombatStats(
   char: DataCharacter,
   growth: DamageGrowthData,
   activeBuffs: ActiveBuff[],
-  /** PV du porteur (§ 14 BT 31/32 — stats « PV perdus ») ; absent : ces
+  /** PV du porteur (§ 14 BT 33/34 — stats « PV perdus ») ; absent : ces
    *  familles contribuent 0. */
   owner?: { maxHP: number; hp: number },
   /** Taux premium par ST_* (‰), DÉJÀ dans la fiche saisie — collectés par les
@@ -1153,7 +1153,7 @@ export function buildDamageReport(
     undefined,
     premiumRates,
   );
-  // Familles « PV perdus » § 14 (BT 31/32 — sets Revenge/Patience/Swiftness) :
+  // Familles « PV perdus » § 14 (BT 33/34 — sets Revenge/Patience/Swiftness) :
   // leur contexte est le PV de COMBAT, connu seulement après la première
   // passe — on rejoue alors la construction avec le contexte (le PV lui-même
   // n'est jamais scalé par ces familles : la seconde passe est stable).
@@ -1326,14 +1326,13 @@ export function buildDamageReport(
   };
 
   // DoT posés par un skill : les BT_DOT_* de ses `buffIds` au niveau servi.
-  // TICK par TYPE (jump table de `ProcessDamageOverTime`, désassemblée le
-  // 24/08/2026 — listings damage-formula-asm) : la POSE lit les stats de LA
-  // ligne (le skill est en cours, procs SKILL_START actifs), le TICK lit les
-  // stats GLOBALES (il arrive au début du tour suivant — les procs de
-  // lancement ont expiré : PROUVÉ par Eternal Bleeding, 636 fiche et pas
-  // 694). Le taux subit ApplyRate(Σ ENHANCE actifs sur la CIBLE) avant la
-  // formule. Un type BT_DOT_* hors de la jump table 1.4.14 est SIGNALÉ,
-  // jamais calculé par une formule supposée.
+  // TICK par TYPE (`switch` de `CBattleManager.ProcessDamageOverTime`, listing
+  // C# § 11) : la POSE lit les stats de LA ligne (le skill est en cours,
+  // procs SKILL_START actifs), le TICK lit les stats GLOBALES (il arrive au
+  // début du tour suivant — les procs de lancement ont expiré : PROUVÉ par
+  // Eternal Bleeding, 636 fiche et pas 694). Le taux subit ApplyRate(Σ
+  // ENHANCE actifs sur la CIBLE) avant la formule. Un type BT_DOT_* hors du
+  // `switch` 1.4.15 est SIGNALÉ, jamais calculé par une formule supposée.
   const DOT_TICK: Record<
     string,
     { formula: 'defense' | 'flat'; stat: 'row' | 'atk' | 'maxhp' | 'buff_chance' }
@@ -1342,7 +1341,7 @@ export function buildDamageReport(
     BT_DOT_BLEED: { formula: 'defense', stat: 'row' }, // CalcDamageDOT § 11
     BT_DOT_POISON: { formula: 'defense', stat: 'row' },
     BT_DOT_LIGHTNING: { formula: 'defense', stat: 'row' },
-    BT_DOT_CURSE: { formula: 'flat', stat: 'maxhp' }, // % PV max du POSEUR, cap 77
+    BT_DOT_CURSE: { formula: 'flat', stat: 'maxhp' }, // % PV max de la CIBLE (`_Defender`), cap 77
     BT_DOT_2000092: { formula: 'flat', stat: 'buff_chance' }, // Effectiveness, SANS défense
     BT_DOT_PUNISH: { formula: 'defense', stat: 'row' },
   };
@@ -1397,7 +1396,9 @@ export function buildDamageReport(
       const g = globalScenario;
       let statValue = 0;
       if (tick.stat === 'atk') statValue = g.attacker.attackStat;
-      else if (tick.stat === 'maxhp') statValue = g.additionalContext?.attacker?.maxHP ?? 0;
+      // CURSE : `_Defender.CharacterData.GetStatValuePermille(ST_HP, taux)` — les
+      // PV max de la CIBLE (le C# l'a tranché le 26/08/2026 ; l'ASM disait le poseur).
+      else if (tick.stat === 'maxhp') statValue = g.additionalContext?.defender?.maxHP ?? 0;
       else if (tick.stat === 'buff_chance')
         statValue = g.additionalContext?.attackerStat?.('ST_BUFF_CHANCE') ?? 0;
       else if (row.stat !== undefined)

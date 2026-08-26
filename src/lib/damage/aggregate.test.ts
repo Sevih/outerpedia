@@ -11,6 +11,7 @@ import {
   effectiveValue,
   findBuffAdditionalDamage,
   findBuffDamageReduce,
+  findBuffWGDamageReduce,
   getBuffDamageFinalReduce,
   type ActiveBuff,
 } from './aggregate';
@@ -93,7 +94,35 @@ describe('aggregate — canaux et familles § 9', () => {
     expect(findBuffDamageReduce(buffs, {})).toBe(200);
   });
 
-  it('§ 9.3 : MAX, pas somme — et BT 116 saute sur le S1', () => {
+  it('§ 9.2 : BT_DOT_PUNISH = un TERME de config (300) par buff du défenseur, +1 si l’attaquant en porte', () => {
+    const buffs: ActiveBuff[] = [
+      B({ type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: 100 }),
+      B({ type: 'BT_DOT_PUNISH', value: 700, stacks: 3 }), // la valeur et les stacks du buff sont IGNORÉS
+      B({ type: 'BT_DOT_PUNISH', value: 700 }),
+    ];
+    expect(findBuffDamageReduce(buffs, {})).toBe(100 + 300 + 300);
+    expect(findBuffDamageReduce(buffs, { attackerHasDotPunish: true })).toBe(100 + 300 + 300 + 300);
+    expect(findBuffDamageReduce(buffs, { punishReducePermille: 250 })).toBe(100 + 250 + 250);
+    expect(findBuffDamageReduce([], { attackerHasDotPunish: true })).toBe(300);
+  });
+
+  it('§ 11 : FindBuffWGDamageReduce — WG_DMG de l’attaquant ajoute, WG_DMG_REDUCE du défenseur retranche', () => {
+    expect(
+      findBuffWGDamageReduce(
+        [
+          B({ type: 'BT_WG_DMG', applyingType: 'OAT_ADD', value: 2 }),
+          B({ type: 'BT_WG_DMG', applyingType: 'OAT_RATE', value: 500 }),
+        ],
+        [
+          B({ type: 'BT_WG_DMG_REDUCE', applyingType: 'OAT_ADD', value: 1 }),
+          B({ type: 'BT_WG_DMG_REDUCE', applyingType: 'OAT_RATE', value: 200, stacks: 2 }),
+        ],
+      ),
+    ).toEqual({ flat: 1, rate: 100 });
+    expect(findBuffWGDamageReduce([], [])).toEqual({ flat: 0, rate: 0 });
+  });
+
+  it('§ 9.3 : MAX, pas somme — et BT 121 saute sur le S1', () => {
     const buffs: ActiveBuff[] = [
       B({ type: 'BT_DMG_REDUCE_FINAL', value: 300 }),
       B({ type: 'BT_DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL', value: 500 }),

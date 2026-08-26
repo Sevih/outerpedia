@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.101",
+  "resVersion": "1.11.103",
   "config": {
     "MAX_CHARACTER_LEVEL": 120,
     "MISSED_DAMAGE_RATE": 500,
@@ -14,6 +14,7 @@
     "CHECK_AVOID_VALUE_3": 100,
     "CHECK_AVOID_VALUE_4": 1,
     "GUILD_RAID_MAIN_BOSS_MAX_GRADE": 100,
+    "PUNISH_DMG_REDUCE_VALUE": 300,
     "GUILD_RAID_AFTER_10_BOSS_STAT": [300, 300, 10]
   }
 }

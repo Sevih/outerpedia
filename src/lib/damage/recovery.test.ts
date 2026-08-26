@@ -64,6 +64,8 @@ describe('calcHealValue', () => {
   it('pénalité PvP : aucune réduction avant le 1er cycle, puis la valeur de scène', () => {
     // scene.pvpHealReduce = 0 avant le tour de pénalité (spec § 17.6)
     expect(calcHealValue({ value: 350, sourceStatValue: 12000, isPvp: true })).toBe(4200);
+    // Soin PLAT (StatType == ST_NONE) : jamais réduit, même en PvP (§ 14.2, C# 26/08/2026).
+    expect(calcHealValue({ value: 1234, isPvp: true, pvpHealReducePermille: 500 })).toBe(1234);
     expect(
       calcHealValue({
         value: 350,
@@ -149,7 +151,7 @@ describe('calcReverseHealValue', () => {
     expect(calcReverseHealValue(base)).toBe(10000);
   });
 
-  it('cappé par le plus petit BT 18', () => {
+  it('cappé par le plus petit BT 20', () => {
     expect(calcReverseHealValue({ ...base, capValue: 4000 })).toBe(4000);
     expect(calcReverseHealValue({ ...base, capValue: 15000 })).toBe(10000);
   });
@@ -159,6 +161,11 @@ describe('calcReverseHealValue', () => {
     expect(calcReverseHealValue({ ...base, hp: 8000, shieldHP: 1000, canKill: true })).toBe(10000);
     // strictement supérieur requis : HP+shield == v → protégé aussi
     expect(calcReverseHealValue({ ...base, hp: 10000 })).toBe(9999);
+  });
+
+  it('garde INVINCIBLE : aucune perte de PV (§ 14.5)', () => {
+    expect(calcReverseHealValue({ ...base, invincible: true })).toBe(0);
+    expect(calcReverseHealValue({ ...base, invincible: true, canKill: true })).toBe(0);
   });
 });
 

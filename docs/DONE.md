@@ -7,6 +7,38 @@
 
 ## 2026-08-26
 
+- **Le MOTEUR TS passe sur le C# du client Steam — section par section,
+  `damage:check` à chaque étape (42/42 lignes exactes, avant comme après).**
+  Ce que la spec avait corrigé le matin est maintenant dans le code : § 9.2 —
+  les termes `BT_DOT_PUNISH` (`findBuffDamageReduce` : un terme
+  `PUNISH_DMG_REDUCE_VALUE` = 300 ‰ par buff punish du défenseur, +1 si
+  l'attaquant en porte ; la valeur et les stacks du buff sont ignorés — c'est
+  la config ; clé ajoutée à `config.json`) ; § 11 — le tick CURSE lit les PV
+  max de la CIBLE (`defender.maxHP`, plus l'attaquant) ; § 11/12.3 —
+  `findBuffWGDamageReduce` (WG_DMG de l'attaquant ajoute, WG_DMG_REDUCE du
+  défenseur retranche, plat ou taux selon `OAT_*`) remplace les entrées « telles
+  que fournies » du rapport (un scénario qui les fournit garde la main) ;
+  § 14.2 — la réduction PvP ne touche que les soins PAR STAT, un soin plat
+  passe entier ; § 14.5 — garde INVINCIBLE du reverse heal, et `canKill`
+  redocumenté (`_ABLE_KILL`, ou scène létale ET boss). Hors périmètre,
+  assumé : § 8.5 (limite par tour d'un boss). Les commentaires de
+  `src/lib/damage` ne portent plus AUCUNE adresse : 14 RVA et 6 constantes
+  magiques retirées de `formula.ts`, en-têtes « libil2cpp 1.4.9 » réécrits sur
+  les listings C#, 16 numéros d'enum remis à 1.4.15 (ELEMENT 99/100/109, SHARE
+  141/142, BLEED 57, UNDEAD 116, WG 85–89, shields 21/22, ENHANCE 29/30, PV
+  perdus 33/34, IMMEDIATELY 63–69, § 9.3 BT 121). **`EventEffect` sondé plutôt
+  qu'extrait** : sur les 241 bundles `character/pc/` du miroir Steam, 3 506
+  clips portent des `EventEffect` et AUCUN n'a de 2ᵉ paramètre entier > 0 (le
+  `data` est un nom `FX_…`) — le facteur littéral de § 8.1 n'existe pas dans
+  la donnée joueur 1.4.15, l'extracteur reste sur `EventAttackStart`, la spec
+  le note (§ 8.1, § 12.4 c). Au passage, `damage:build` relancé sur le miroir
+  Steam : `anim-events.json` identique à l'octet près hors format (243 persos),
+  les tables ne bougent pas — seul le `resVersion` des JSON générés passe à
+  1.11.103 (celui du manifeste Steam). Tests : 1 871 verts (+3), tsc/eslint
+  propres. RESTE, à mesurer avant de brancher : une fixture avec un DoT punish
+  (aucune capture ne contraint les 300 ‰) ; `LimitValue` § 9.1 (Saeran) ; la
+  détonation § 14.6 (décision Sevih : pas une prio).
+
 - **Bascule : le client Steam est LA source de données, l'Android passe en
   secours ; les listings ASM sont supprimés (décisions Sevih, le soir même).**
   « Steam fait foi de toute façon, la pipeline Android ne doit être utilisée

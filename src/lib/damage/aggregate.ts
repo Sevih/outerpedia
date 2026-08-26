@@ -17,6 +17,7 @@
  */
 
 import { getLostHPRateValue, getStatValuePermille } from './formula';
+import { PUNISH_DMG_REDUCE_VALUE_PERMILLE } from './types';
 
 /** Un buff ACTIF du scénario (forme brute de `buffs.json` + stacks courants). */
 export interface ActiveBuff {
@@ -51,13 +52,13 @@ export interface StatChannel {
   rate: number;
 }
 
-/** Contexte des stats « PV perdus » (BT 31/32, § 14) — absent : contribution 0. */
+/** Contexte des stats « PV perdus » (BT 33/34, § 14) — absent : contribution 0. */
 export interface StatChannelContext {
   owner?: { maxHP: number; hp: number };
 }
 
-/** Buffs `BT_STAT` (+ familles « PV perdus » § 14 : BT 31 OWNER_LOST_HP_RATE,
- *  BT 32 `_HALF` — `InstanceValue = GetLostHPRateValue`) → canaux plat/taux
+/** Buffs `BT_STAT` (+ familles « PV perdus » § 14 : BT 33 OWNER_LOST_HP_RATE,
+ *  BT 34 `_HALF` — `InstanceValue = GetLostHPRateValue`) → canaux plat/taux
  *  PAR stat (`ST_*`). */
 export function collectStatChannels(
   buffs: ActiveBuff[],
@@ -208,9 +209,14 @@ export interface DamageReduceContext {
   attackerSkillMonoTarget?: boolean;
   /** Alliés VIVANTS de l'équipe du poseur — REDUCE_MY_TEAM_INCREASE. */
   casterAliveAllies?: number;
+  /** L'ATTAQUANT porte un BT_DOT_PUNISH (`FindBuffByType`) : +300 ‰ hors boucle. */
+  attackerHasDotPunish?: boolean;
+  /** GameConfig PUNISH_DMG_REDUCE_VALUE — défaut 300 (1.4.15). */
+  punishReducePermille?: number;
 }
 
 export function findBuffDamageReduce(buffs: ActiveBuff[], ctx: DamageReduceContext): number {
+  const punish = ctx.punishReducePermille ?? PUNISH_DMG_REDUCE_VALUE_PERMILLE;
   let sum = 0;
   for (const b of buffs) {
     const v = effectiveValue(b);
@@ -225,11 +231,47 @@ export function findBuffDamageReduce(buffs: ActiveBuff[], ctx: DamageReduceConte
       case 'BT_DMG_REDUCE_MY_TEAM_INCREASE':
         sum += ctx.casterAliveAllies !== undefined ? v * (ctx.casterAliveAllies - 1) : 0;
         break;
+      case 'BT_DOT_PUNISH':
+        // Un TERME de la somme par buff punish du défenseur (C#, 26/08/2026 —
+        // l'ASM le laissait lire comme un plafond) : la valeur de config, pas
+        // celle du buff (ni ses stacks).
+        sum += punish;
+        break;
       default:
         break;
     }
   }
+  // Hors boucle : l'attaquant lui-même sous punish → le même terme, une fois.
+  if (ctx.attackerHasDotPunish) sum += punish;
   return sum;
+}
+
+// ── § 11 FindBuffWGDamageReduce — jauge de faiblesse (BT 88/89) ─────────────
+
+/**
+ * Modificateurs de dégâts de jauge (CalcDamageWG § 11 ; § 12.3 levée le
+ * 26/08/2026) : chaque `BT_WG_DMG` (89) de l'ATTAQUANT AJOUTE sa valeur au plat
+ * (`OAT_ADD`) ou au taux ‰ (`OAT_RATE`) ; chaque `BT_WG_DMG_REDUCE` (88) du
+ * DÉFENSEUR la RETRANCHE de même. `CheckAvailable` n'est pas émulé (buffs actifs
+ * = disponibles, cf. en-tête).
+ */
+export function findBuffWGDamageReduce(
+  attackerBuffs: ActiveBuff[],
+  defenderBuffs: ActiveBuff[],
+): { flat: number; rate: number } {
+  let flat = 0;
+  let rate = 0;
+  for (const b of attackerBuffs) {
+    if (b.type !== 'BT_WG_DMG') continue;
+    if (b.applyingType === 'OAT_RATE') rate += effectiveValue(b);
+    else flat += effectiveValue(b);
+  }
+  for (const b of defenderBuffs) {
+    if (b.type !== 'BT_WG_DMG_REDUCE') continue;
+    if (b.applyingType === 'OAT_RATE') rate -= effectiveValue(b);
+    else flat -= effectiveValue(b);
+  }
+  return { flat, rate };
 }
 
 // ── § 9.3 GetBuffDamgeFinalReduce — défenseur, MAX (‰), pas somme ───────────

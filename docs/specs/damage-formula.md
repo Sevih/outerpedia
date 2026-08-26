@@ -34,8 +34,12 @@
 > comportement près et 3 ont bougé. Les trois sont désassemblés et rédigés
 > (§ 8.5, § 9.2, § 14.5), et `BUFF_TYPE` a été **renuméroté** (§ 2 — les identifiants
 > de ce document sont à jour, ne jamais reporter un numéro d'une version à l'autre).
-> Le **moteur TS n'implémente aucun des trois** ; les inconnues de lecture que l'ASM
-> laissait sont FERMÉES par le C# du client Steam (26/08/2026, § 12.16).
+> Les inconnues de lecture que l'ASM laissait sont FERMÉES par le C# du client Steam
+> (26/08/2026, § 12.16), et le **moteur TS est passé sur le C# le même jour** : les
+> termes DOT_PUNISH (§ 9.2), la CURSE sur les PV max de la cible (§ 11), la réduction
+> PvP des seuls soins par stat (§ 14.2), le garde INVINCIBLE et la branche létale
+> du reverse heal (§ 14.5), l'agrégation WG (§ 11) sont implémentés ; § 8.5 (limite
+> par tour d'un boss) reste hors périmètre du calculateur.
 
 ## 1. Conventions numériques
 
@@ -88,8 +92,9 @@
 > corrigés dans § 6, § 7, § 9.1 et § 10.1.
 >
 > Le moteur TS et les tables générées ne sont **pas** touchés : ils clés sur le nom
-> (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier. (Les deux commentaires du moteur
-> qui portaient encore les anciens numéros sont corrigés le 26/08/2026 — § 12.16.)
+> (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier. (Les commentaires du moteur qui
+> portaient encore des numéros 1.4.9/1.4.14, des RVA ou des renvois aux listings ASM
+> sont tous réécrits le 26/08/2026 — il ne reste aucune adresse dans `src/lib/damage`.)
 
 Les stats finales d'un personnage vivent dans `CCharacterData.StatDict[STAT_TYPE]`
 (recalcul lazy par `CCharacterData.CalcStat`) ; chaque getter (`get_Def`,
@@ -392,8 +397,12 @@ même chaîne en UNE cascade de 1000 ‰), `TriggerNameSkip` porte l'état SKIP.
 par clip — les events d'une AUTRE chaîne présents dans le clip comptent dans
 son facteur et consomment leur part, chaque chaîne n'affiche que ses hits.
 ⚠ L'extracteur ne garde que les `EventAttackStart` : le « facteur littéral » du jeu
-est l'event `EventEffect` (2ᵉ paramètre entier > 0 — nom lu en C# le 26/08/2026),
-NON extrait à ce jour (§ 12.4 c).
+est l'event `EventEffect` (2ᵉ paramètre entier > 0 — nom lu en C# le 26/08/2026).
+SONDÉ le 26/08/2026 sur les 241 bundles `character/pc/` du miroir Steam 1.4.15 :
+3 506 clips portent des `EventEffect`, **aucun** n'a de 2ᵉ paramètre entier > 0
+(le `data` est un nom d'effet, `FX_…`, parfois suivi de `,0`). Le facteur littéral
+n'existe pas dans la donnée joueur — l'extracteur reste sur `EventAttackStart`
+(§ 12.4 c) ; à re-sonder à chaque patch qui touche les bundles de persos.
 
 ### 8.2 Le cœur — fonction locale `CalcDamage(int factor)`
 
@@ -587,8 +596,10 @@ TERMES additifs : un par buff punish du défenseur (dans la boucle), un si l'att
 en porte un (hors boucle). Le montant vient de la config serveur (`GAME_CONFIG` 215,
 valeur de table 300 = 30 %), pas du buff.
 
-⚠ Le moteur TS n'implémente pas les termes DOT_PUNISH — aucune mesure ne les
-contraint encore ; à brancher sur une fixture (§ 12.16).
+Moteur : implémenté le 26/08/2026 (`findBuffDamageReduce`, `aggregate.ts` — un
+terme `PUNISH_DMG_REDUCE_VALUE` par `BT_DOT_PUNISH` du défenseur, +1 si l'attaquant
+en porte ; la constante est aussi exportée dans `config.json`). Aucune mesure ne le
+contraint encore — une fixture avec un DoT punish reste à capturer (§ 12.16).
 
 ### 9.3 GetBuffDamgeFinalReduce — défenseur, **MAX** (‰), pas somme
 
@@ -672,7 +683,8 @@ ci-dessus n'est PAS servi à tous :
 
 Une ligne BLEED/POISON/LIGHTNING/PUNISH sans `StatType` (`ST_NONE`) est une erreur
 de donnée : `LogError`, pas de tick. La lecture ASM plaçait la CURSE sur les PV max du
-POSEUR — le C# lit `_Defender` (la cible) : corrigé le 26/08/2026.
+POSEUR — le C# lit `_Defender` (la cible) : corrigé le 26/08/2026, moteur aligné le
+même jour (`inputs.ts`, tick CURSE sur `defender.maxHP`).
 
 Fin commune, dans l'ordre :
 
@@ -829,8 +841,9 @@ return restant
    (c) ~~noms des `functionName`~~ — LUS en C# (26/08/2026) :
    `"EventAttackStart"` (facteur par templet) et `"EventEffect"` (2ᵉ paramètre
    entier > 0 = facteur littéral, § 8.1). L'extracteur ne garde que les
-   premiers : les `EventEffect` à facteur ne sont PAS cherchés dans la donnée —
-   à extraire avant d'affirmer qu'il n'y en a aucun ;
+   premiers — SONDÉ le 26/08/2026 (§ 8.1) : sur 3 506 clips à `EventEffect` des
+   241 bundles de persos jouables, aucun 2ᵉ paramètre entier > 0. Rien à extraire
+   en 1.4.15 ; re-sonder si un patch touche les bundles ;
    (d) les events des monstres (`character/monster/…`) ne sont pas extraits —
    sans objet tant que le calculateur ne calcule pas côté monstre.
 5. **`GetSkillFactor` — skill courant** : `GetCurrentSkill()?.DamageFactor ?? 0`
@@ -931,14 +944,12 @@ return restant
       branche « peut tuer » des scènes exige la scène **ET** `owner.IsBoss` (l'ASM
       disait « ou » — corrigée) ; le garde INVINCIBLE d'entrée manquait.
 
-    Les deux commentaires du moteur qui portaient les anciens numéros
-    (`recovery.ts`, `types.ts`) sont corrigés le même jour.
-
-    RESTE — de l'implémentation, plus de la lecture : le moteur TS n'implémente
-    ni les termes DOT_PUNISH (§ 9.2 — le seul des trois qui pèse sur un hit de
-    joueur, aucune mesure ne le contraint encore), ni l'exemption world boss
-    (§ 8.5 — limite par tour d'un boss, hors périmètre), ni le reverse heal létal
-    (§ 14.5 — perte de PV, hors périmètre dégâts).
+    Moteur (26/08/2026, même jour) : les termes DOT_PUNISH sont implémentés
+    (§ 9.2 — le seul des trois qui pèse sur un hit de joueur ; aucune mesure ne
+    le contraint encore, fixture à capturer) ; le reverse heal (`recovery.ts`)
+    porte le garde INVINCIBLE et la branche létale telle que lue (§ 14.5) ;
+    l'exemption world boss (§ 8.5 — limite par tour d'un boss) reste hors
+    périmètre du calculateur.
 
 17. **Poses multiples d'un DoT par un même skill — pas de cumul du tick,
     mécanisme non désassemblé.** Le S1 de Gnosis Beth porte DEUX lignes de

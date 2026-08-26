@@ -1,5 +1,6 @@
 /**
- * Types du moteur de dégâts — miroir fidèle de CFormula (libil2cpp 1.4.9).
+ * Types du moteur de dégâts — miroir fidèle de CFormula (client Steam, C#
+ * décompilé : docs/specs/damage-formula-cs/).
  * Réf : docs/specs/damage-formula.md. Toutes les valeurs de taux sont en
  * pour-mille (‰) : 1000 = 100 %. Toutes les stats sont les stats FINALES
  * (buffs inclus), telles que renvoyées par les getters de CCharacterData.
@@ -33,8 +34,16 @@ export const DamageRateType = {
 } as const;
 export type DamageRateType = (typeof DamageRateType)[keyof typeof DamageRateType];
 
-/** MISSED_DAMAGE_RATE — GameConfig id 15 (GameConfigTemplet.json), version 1.4.9. */
+/** MISSED_DAMAGE_RATE — GameConfig (GameConfigTemplet.json), 500 en 1.4.15. */
 export const MISSED_DAMAGE_RATE_PERMILLE = 500;
+
+/**
+ * PUNISH_DMG_REDUCE_VALUE — GameConfig (GameConfigTemplet.json), 300 en 1.4.15 :
+ * terme ‰ ajouté à FindBuffDamageReduce (§ 9.2) par BT_DOT_PUNISH du défenseur,
+ * plus une fois si l'attaquant en porte un. Le montant vient de la config,
+ * pas du buff.
+ */
+export const PUNISH_DMG_REDUCE_VALUE_PERMILLE = 300;
 
 /**
  * PVP_HEAL_PENALTY_REDUCE_RATE (GameConfig) — réduction de base des soins en PvP.
@@ -209,13 +218,13 @@ export interface DamageDotInput {
 
 /** Entrées de CalcDamageWG (jauge de faiblesse). */
 export interface DamageWgInput {
-  /** Le défenseur porte BT_WG_INVINCIBLE (82) → 0. */
+  /** Le défenseur porte BT_WG_INVINCIBLE (87) → 0. */
   defenderWgInvincible?: boolean;
   /** Valeur custom ; si 0, on prend le WGReduce du skill courant. */
   customValue?: number;
   /** WGReduce (byte) du SkillLevelTemplet du skill courant de l'attaquant. */
   skillWgReduce: number;
-  /** Sortie flat de FindBuffWGDamageReduce (BT 83/84). */
+  /** Sortie flat de FindBuffWGDamageReduce (BT 88 WG_DMG_REDUCE / 89 WG_DMG, § 11). */
   wgReduceFlat?: number;
   /** Sortie taux (‰) de FindBuffWGDamageReduce. */
   wgReduceRate?: number;

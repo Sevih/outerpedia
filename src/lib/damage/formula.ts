@@ -1,6 +1,7 @@
 /**
- * Moteur de dégâts Outerplane — miroir fidèle de CFormula (libil2cpp 1.4.9).
- * Réf : docs/specs/damage-formula.md (pseudo-code + RVA + listings asm).
+ * Moteur de dégâts Outerplane — miroir fidèle de CFormula (client Steam, C#
+ * décompilé : docs/specs/damage-formula-cs/).
+ * Réf : docs/specs/damage-formula.md (pseudo-code + listings C#).
  *
  * Fidélité numérique :
  *  - Le binaire calcule en entiers 64 bits avec divisions tronquées vers zéro ;
@@ -37,15 +38,15 @@ import {
 
 // ── Primitives entières (CCommonDefine) ─────────────────────────────────────
 
-/** Division entière signée tronquée vers zéro par 1000 (magique 0x20C49BA5E353F7CF). */
+/** Division entière signée tronquée vers zéro par 1000 (`/ 1000` sur `long` en C#). */
 const div1000 = (x: bigint): bigint => x / 1000n;
 
-/** CCommonDefine.MulPermille — RVA 0x28D81C0 : trunc(v × p / 1000). */
+/** CCommonDefine.MulPermille : trunc(v × p / 1000). */
 export function mulPermille(value: number, permille: number): number {
   return Number(div1000(BigInt(value) * BigInt(permille)));
 }
 
-/** CCommonDefine.ApplyRate — RVA 0x28D18E4 : trunc(v × (1000 + r) / 1000). */
+/** CCommonDefine.ApplyRate : trunc(v × (1000 + r) / 1000). */
 export function applyRate(value: number, rate: number): number {
   return Number(div1000(BigInt(value) * BigInt(1000 + rate)));
 }
@@ -53,12 +54,12 @@ export function applyRate(value: number, rate: number): number {
 /** Mathf.FloorToInt (le quirk +∞ → int.MinValue du binaire n'est jamais atteint). */
 const floorToInt = (x: number): number => Math.floor(x);
 
-// ── CalcStat — RVA 0x2C59DB0 (stat de base par niveau) ──────────────────────
+// ── CalcStat (stat de base par niveau) ──────────────────────
 
 /**
  * Stat de base au niveau donné : interpolation linéaire entre la stat
- * niveau 1 (min) et niveau 100 (max), ÷99 tronqué vers zéro (division
- * magique 0xA57EB50295FAD40B du binaire). Alimente le baseValue de
+ * niveau 1 (min) et niveau 100 (max), ÷99 tronqué vers zéro (`/ 99` sur
+ * `long` en C#). Alimente le baseValue de
  * calcFinalStat. Spec § 3.1.
  */
 export function calcStatByLevel(minValue: number, maxValue: number, level: number): number {
@@ -67,9 +68,9 @@ export function calcStatByLevel(minValue: number, maxValue: number, level: numbe
 }
 
 /**
- * Miroir de CStatValue.SetBaseValue (0x28D16BC), spec § 3.2 : au-delà du
+ * Miroir de CStatValue.SetBaseValue, spec § 3.2 : au-delà du
  * niveau 100 (personnages CT_PC uniquement), chaque niveau ajoute en plus
- * modifierAfter100 ‰ du pas linéaire (÷99000, magique 0x54BBC10777CC3339).
+ * modifierAfter100 ‰ du pas linéaire (÷99000).
  * modifierAfter100 vient de CharacterMaxLevelTemplet (palier 1/2/3 →
  * 200/400/700 ‰) — passer 0 pour un monstre. addRate ≥ 1 multiplie la base.
  */
@@ -90,7 +91,7 @@ export function calcBaseStat(
   return base;
 }
 
-// ── CalcFinalStat — RVA 0x2C59E48 ───────────────────────────────────────────
+// ── CalcFinalStat ───────────────────────────────────────────
 
 /**
  * Stat finale : (base+évo+éveil+monad) × (1000 + Σ taux)/1000, + plats item/buff,
@@ -114,7 +115,7 @@ export function calcFinalStat(s: FinalStatInput): number {
   return total < 0n ? 0 : Number(total);
 }
 
-// ── Probabilités — RVA 0x2C59DE8 / 0x2C59E30 / 0x2C59E3C ────────────────────
+// ── Probabilités ────────────────────
 
 /**
  * CheckProbability : succès si roll ≤ value (roll = entier uniforme [0, max] inclus,
@@ -135,7 +136,7 @@ export function checkProbabilityPermille(value: number, roll: number): boolean {
   return checkProbability(value, 1000, roll);
 }
 
-// ── CheckResist — RVA 0x2C5A388 ─────────────────────────────────────────────
+// ── CheckResist ─────────────────────────────────────────────
 
 /**
  * Seuil de résistance (‰, à comparer à un tirage [0,1000]) :
@@ -165,7 +166,7 @@ export function checkResist(
   return roll <= threshold;
 }
 
-// ── Élément — RVA 0x2C5AC64 / 0x2C5AB60 ─────────────────────────────────────
+// ── Élément ─────────────────────────────────────
 
 /**
  * Triangle Terre>Eau>Feu>Terre ((att+1) % 3 == def) ; Lumière/Ténèbres sont
@@ -184,11 +185,11 @@ export function getElementSuperiority(attacker: Element, defender: Element): Ele
 export interface ElementRateInput {
   attackerElement: Element;
   defenderElement: Element;
-  /** L'attaquant porte BT_DMG_ELEMENT_SUPERIORITY (94) : avantage forcé. */
+  /** L'attaquant porte BT_DMG_ELEMENT_SUPERIORITY (99) : avantage forcé. */
   forcedSuperiority?: boolean;
-  /** L'attaquant porte BT_DMG_ELEMENT_INFERIORITY (104) : désavantage forcé. */
+  /** L'attaquant porte BT_DMG_ELEMENT_INFERIORITY (109) : désavantage forcé. */
   forcedInferiority?: boolean;
-  /** Σ des buffs BT_DMG_ELEMENT_ENCHANT (95) de l'attaquant (‰) — ne joue que si avantage. */
+  /** Σ des buffs BT_DMG_ELEMENT_ENCHANT (100) de l'attaquant (‰) — ne joue que si avantage. */
   elementDamageRateBonus?: number;
 }
 
@@ -203,7 +204,7 @@ export function getElementeryDamageRate(input: ElementRateInput): number {
   return ELEMENT_NEUTRAL_RATE_PERMILLE;
 }
 
-// ── CheckDamageRate — RVA 0x2C5A448 ─────────────────────────────────────────
+// ── CheckDamageRate ─────────────────────────────────────────
 
 /** Libellés de trace par résultat de hit (harnais § 2 — dev only). */
 const RATE_TYPE_LABEL: Record<DamageRateType, string> = {
@@ -307,7 +308,7 @@ export function checkDamageRate(
 }
 
 /**
- * AddCheckEnemyTeamDecreaseDamageRate — RVA 0x2C5ACF8 :
+ * AddCheckEnemyTeamDecreaseDamageRate :
  * rate + (Σ buffs BT_DMG_ENEMY_TEAM_DECREASE de l'attaquant) × nb de cibles décomptées.
  */
 export function addCheckEnemyTeamDecreaseDamageRate(
@@ -327,7 +328,7 @@ function defenseTerm(defense: number, piercePowerRate: number, piercePower: numb
   return term < -999000n ? -999000n : term;
 }
 
-// ── CalcDamage — RVA 0x2C5AD30 (helper 0x2C5B4DC) ───────────────────────────
+// ── CalcDamage ───────────────────────────
 
 /**
  * Cœur du calcul d'un hit (<CalcDamage>g__CalcDamage|17_0). Chaque étape tronque
@@ -444,7 +445,7 @@ export function adjustLastHitDamage(
   return currentHitDamage;
 }
 
-// ── CalcDamageDOT — RVA 0x2C5BC6C ───────────────────────────────────────────
+// ── CalcDamageDOT ───────────────────────────────────────────
 
 /**
  * Dégâts sur la durée : défense (avec pénétration) + DMG_REDUCE cappé à 900 ‰.
@@ -459,7 +460,7 @@ export function calcDamageDOT(input: DamageDotInput): number {
   return Number(d);
 }
 
-// ── CalcDamageWG — RVA 0x2C5BDBC ────────────────────────────────────────────
+// ── CalcDamageWG ────────────────────────────────────────────
 
 /** Dégâts de jauge de faiblesse : ApplyRate(flat + wg, rate), clamp ≥ 0. */
 export function calcDamageWG(input: DamageWgInput): number {
@@ -470,12 +471,12 @@ export function calcDamageWG(input: DamageWgInput): number {
   return result < 0 ? 0 : result;
 }
 
-// ── CalcCharacterSharedDamage — RVA 0x2C5B778 ───────────────────────────────
+// ── CalcCharacterSharedDamage ───────────────────────────────
 
 /**
- * Partage de dégâts : chaque porteur de BT_SHARE_DMG_MULTI (137) prend
+ * Partage de dégâts : chaque porteur de BT_SHARE_DMG_MULTI (142) prend
  * MulPermille(dégâts ORIGINAUX, valeur) ; puis le porteur unique de
- * BT_SHARE_DMG (136) prend MulPermille(restant, valeur).
+ * BT_SHARE_DMG (141) prend MulPermille(restant, valeur).
  */
 export function calcCharacterSharedDamage(
   damage: number,
@@ -499,14 +500,14 @@ export function calcCharacterSharedDamage(
 
 // ── Helpers d'agrégats de buffs (formules exactes, spec § 9) ────────────────
 
-/** GetLostHPRateValue — RVA 0x26C6CBC : trunc((maxHP − hp) × value / maxHP). */
+/** GetLostHPRateValue : trunc((maxHP − hp) × value / maxHP). */
 export function getLostHPRateValue(maxHP: number, hp: number, value: number): number {
   if (maxHP < 1) return 0;
   return Number((BigInt(maxHP - hp) * BigInt(value)) / BigInt(maxHP));
 }
 
 /**
- * GetStatValuePermille — RVA 0x27E14B8 : trunc(statValue × permille / 1000),
+ * GetStatValuePermille : trunc(statValue × permille / 1000),
  * saturé à INT32_MAX (garde d'overflow du binaire). Les buffs BT_DMG_*_STAT
  * cappent ensuite le résultat à 1000 ‰ (fait ici par l'appelant).
  */

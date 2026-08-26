@@ -1,7 +1,7 @@
 /**
- * Options d'équipement — miroir de CItem.GetEnchantFactor (0x23104A4),
- * GetBreakLimitFactor (0x23105D8) et CItemMainOption.get_OptionValue (0x230DB18),
- * libil2cpp 1.4.9. Réf : docs/specs/damage-formula.md § 17.5.
+ * Options d'équipement — miroir de CItem.GetEnchantFactor, GetBreakLimitFactor
+ * et CItemMainOption.get_OptionValue (listings C#, docs/specs/damage-formula-cs/).
+ * Réf : docs/specs/damage-formula.md § 17.5.
  * Tout est float32 (Math.fround), troncature vers zéro à la fin.
  */
 
