@@ -23,8 +23,8 @@ le jeu et sauvegardé sur **Cloudflare R2** (cf. multi-PC plus bas).
 
 Sa racine est **pilotable** (`GAMEDATA_ROOT`, cf. `lib/paths.ts`) : deux sources
 de jeu coexistent (§ « Récupérer les données du jeu »), chacune dans sa racine
-— `.gamedata/` (Android) et `.gamedata-steam/` (client Steam) — avec **la même
-arborescence**. Rien en aval ne code `.gamedata` en dur.
+— `.gamedata/` (client Steam, le défaut) et `.gamedata-android/` (LDPlayer, le
+secours) — avec **la même arborescence**. Rien en aval ne code `.gamedata` en dur.
 
 ---
 
@@ -260,22 +260,22 @@ cas, cf. `datagen/assets/collect-comics.ts`).
 ## Récupérer les données du jeu
 
 Deux sources, derrière la même interface `Source` de `refresh.ts`
-(`--source android|steam`, défaut `android` jusqu'à la bascule) :
+(`--source steam|android`) : le **client Steam** est la source par défaut depuis
+la bascule du 26/08/2026 ; l'**Android** (LDPlayer) est le SECOURS, dans sa
+propre racine `.gamedata-android/` (`pnpm datagen:patch-android`).
 
-| Source                 | Pull                         | Code du client → `dump.cs`                        | « le code a changé »                         | Listings des specs damage                              |
-| ---------------------- | ---------------------------- | ------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------ |
-| **Android** (LDPlayer) | `datagen:pull` (adb, tar)    | `datagen:dump` — Il2CppDumper sur l'APK installée | `versionName` + md5 de `global-metadata.dat` | `disasm.py` → `docs/specs/damage-formula-asm/` (ARM64) |
-| **Steam** (2026-08-26) | `datagen:pull-steam` (copie) | `datagen:dump-steam` — ilspycmd sur le DLL Mono   | `bundleVersion` + sha256 du DLL tiré         | `extract-cs.ts` → `docs/specs/damage-formula-cs/` (C#) |
+| Source                | Pull                              | Code du client → `dump.cs`                                | « le code a changé »                         | Listings des specs damage                              |
+| --------------------- | --------------------------------- | --------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------ |
+| **Steam** (défaut)    | `datagen:pull` (copie locale)     | `datagen:dump` — ilspycmd sur le DLL Mono                 | `bundleVersion` + sha256 du DLL tiré         | `extract-cs.ts` → `docs/specs/damage-formula-cs/` (C#) |
+| **Android** (secours) | `datagen:pull-android` (adb, tar) | `datagen:dump-android` — Il2CppDumper sur l'APK installée | `versionName` + md5 de `global-metadata.dat` | aucun (les `.asm` ont été supprimés le 26/08)          |
 
 Les deux écrivent la **même arborescence**, dans des racines distinctes
-(`.gamedata/` et `.gamedata-steam/`, cf. `lib/paths.ts`) ; tout ce qui suit le
-pull (extract, convert, build, scripts python, admin) tourne tel quel sur l'une ou
-l'autre. Vérifié le 26/08 : les `.bytes` extraits du client Steam sont
-**identiques octet pour octet** à ceux de l'Android (hashes de bundles différents,
-contenu identique). Le manifeste des listings (`extract/listings.json`) est
-**partagé** : une méthode qu'une spec se met à citer s'ajoute là, une fois.
+(`lib/paths.ts`) ; tout ce qui suit le pull (extract, convert, build, scripts
+python, admin) tourne tel quel sur l'une ou l'autre. Vérifié le 26/08 : les
+`.bytes` extraits du client Steam sont **identiques octet pour octet** à ceux de
+l'Android (hashes de bundles différents, contenu identique).
 
-### Client Steam
+### Client Steam (défaut)
 
 Le client Windows est compilé en **Mono** (pas IL2CPP) : `Assembly-CSharp.dll` se
 décompile en C# lisible, non obfusqué — les formules sont du code, plus du
@@ -283,9 +283,9 @@ désassemblage. Il se **patche en place** dans `StreamingAssets/bundles` au
 lancement : un seul dossier à lire, toujours à jour dès que le jeu a été lancé.
 
 ```bash
-pnpm datagen:patch-steam     # = datagen:patch --source steam (racine .gamedata-steam)
-pnpm datagen:pull-steam      # seul : miroir bundles + Managed/Assembly-CSharp.dll
-pnpm datagen:dump-steam      # seul : DLL + globalgamemanagers → dump.cs, src/ décompilé,
+pnpm datagen:patch           # pull → (dump si le code a changé) → extract → … (cf. refresh.ts)
+pnpm datagen:pull            # seul : miroir bundles + Managed/Assembly-CSharp.dll
+pnpm datagen:dump            # seul : DLL + globalgamemanagers → dump.cs, src/ décompilé,
                              #        puis listings C# (= pnpm datagen:extract-cs)
 ```
 
@@ -295,26 +295,25 @@ ilspycmd (tiré de NuGet, version et sha256 épinglés dans `extract/tools.ts` �
 de dépôt R2), python + UnityPy pour la version applicative de l'empreinte (sinon
 « inconnue », jamais devinée).
 
-**Bascule** (après la release officielle, décision Sevih 26/08) : changer
-`DEFAULT_GAMEDATA_ROOT` et le défaut de `resolveSource` — rien d'autre. D'ici là,
-les `.asm` restent régénérés par l'Android et la spec damage les cite ; les `.cs`
-sont produits à côté, et la spec migrera vers eux à son rythme.
+Le manifeste des listings (`extract/listings.json`) : une méthode qu'une spec se
+met à citer s'ajoute là (`{file, method}`, nom `Classe$$Membre`), puis
+`pnpm datagen:extract-cs`.
 
-### Android (LDPlayer)
+### Android (LDPlayer, secours)
 
 Les bundles + il2cpp viennent du dossier `files` du jeu, sur une instance
-**LDPlayer** (Android), via `adb`. Pour les rapatrier dans `.gamedata/files/` :
+**LDPlayer** (Android), via `adb`. Pour les rapatrier dans `.gamedata-android/files/` :
 
 ```bash
-pnpm datagen:pull          # bundles + il2cpp
-pnpm datagen:pull il2cpp   # un sous-dossier précis
+pnpm datagen:pull-android          # bundles + il2cpp
+pnpm datagen:pull-android il2cpp   # un sous-dossier précis
 ```
 
 **Le flux patch, en 4 commandes** (chaque enchaînement s'arrête à la
 première erreur) :
 
 ```bash
-pnpm datagen:patch           # pull → extract → convert → build → résumé du diff
+pnpm datagen:patch-android   # pull → extract → convert → build → résumé du diff
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
 pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
 pnpm images                  # assets:collect + assets:push (R2)
@@ -432,7 +431,7 @@ Règles d'or :
 
 ✅ **Opérationnel de bout en bout.** Tout ce qui est décrit ci-dessus existe :
 
-- couche 0 (pull LDPlayer OU client Steam + extraction AssetStudio) ;
+- couche 0 (pull client Steam — ou LDPlayer en secours — + extraction AssetStudio) ;
 - couche 1 (`templates/`, parser `.bytes → JSON` typé, TS) ;
 - couche 2 (`lib/`, primitives partagées) ;
 - couche 3 (`generators/`, 20 générateurs — DÉCOMPTE DE RÉFÉRENCE : les

@@ -1,7 +1,7 @@
 // CStatValue$$SetBaseValue — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStatValue.cs.
 // 2 surcharges, dans l'ordre du source.
-// Note du manifeste : Surcharge 0 = `SetBaseValue(int)` court ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData).
+// Note du manifeste : Le listing porte les deux surcharges ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData).
 
 	public virtual void SetBaseValue(int value)
 	{

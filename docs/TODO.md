@@ -16,25 +16,6 @@
 
 ---
 
-## 🎮 Source de données : bascule Android → Steam (après la release officielle)
-
-> La pipeline Steam existe et tourne (26/08, cf. DONE) dans sa racine
-> `.gamedata-steam/`, l'Android reste la source par défaut. Décision Sevih : on
-> bascule APRÈS la release officielle Steam, pas avant.
-
-- [ ] **Basculer le défaut** : `DEFAULT_GAMEDATA_ROOT` (`datagen/lib/paths.ts`) et
-      le défaut de `resolveSource` (`datagen/refresh.ts`) ; mettre à jour
-      installation.md / newPatch.md (prérequis : plus de LDPlayer).
-- [ ] **Spec damage sur le C#** : `docs/specs/damage-formula.md` cite 99 listings
-      ARM64 ; leur jumeau C# (`damage-formula-cs/`) est déjà produit. Migrer les
-      références, puis décider du sort de `disasm.py` + `damage-formula-asm/`
-      (figés à la dernière version Android, ou supprimés).
-- [ ] **`check-fixtures` / `ENGINE_GAME_VERSION`** : l'empreinte Steam porte la
-      même `gameVersion` (1.4.15) que l'Android — vérifier que la garde parle
-      toujours après bascule.
-- [ ] **Sevih, à trancher** : garder l'Android en source SECONDAIRE (comparaison
-      des `.bytes` à chaque patch, comme contrôle) ou la retirer avec LDPlayer.
-
 ## 📄 Pages manquantes (inventaire layout du 2026-07-17)
 
 > Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404

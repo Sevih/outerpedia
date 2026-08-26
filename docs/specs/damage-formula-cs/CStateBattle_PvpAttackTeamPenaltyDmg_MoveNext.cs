@@ -1,7 +1,7 @@
 // CStateBattle.<PvpAttackTeamPenaltyDmg>d__81$$MoveNext — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStateBattle.cs.
 // Le binaire cite MoveNext de CStateBattle.<PvpAttackTeamPenaltyDmg>d__81 — généré par le compilateur, ILSpy le replie dans CStateBattle.PvpAttackTeamPenaltyDmg.
-// Note du manifeste : Noms générés par le compilateur : le `81` est un compteur interne qui se renumérote dès que CStateBattle change (79 en 1.4.9, 81 en 1.4.14). Les chiffres sont joker à la résolution — voir `skeleton()`.
+// Note du manifeste : Nom généré par le compilateur (le `81` se renumérote dès que CStateBattle change) : extract-cs le replie dans la méthode porteuse PvpAttackTeamPenaltyDmg.
 
 	private IEnumerator PvpAttackTeamPenaltyDmg(int _nDmgHpRate)
 	{

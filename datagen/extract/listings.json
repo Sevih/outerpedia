@@ -1,586 +1,454 @@
 [
   {
     "file": "AddCheckEnemyTeamDecreaseDamageRate",
-    "method": "CFormula$$AddCheckEnemyTeamDecreaseDamageRate",
-    "overload": 0
+    "method": "CFormula$$AddCheckEnemyTeamDecreaseDamageRate"
   },
   {
     "file": "ApplyRate",
-    "method": "CCommonDefine$$ApplyRate",
-    "overload": 0
+    "method": "CCommonDefine$$ApplyRate"
   },
   {
     "file": "CBuff_CheckReverseHealCAP",
-    "method": "CBuff$$CheckReverseHealCAP",
-    "overload": 0
+    "method": "CBuff$$CheckReverseHealCAP"
   },
   {
     "file": "CBuff_OnCreate",
-    "method": "CBuff$$OnCreate",
-    "overload": 0
+    "method": "CBuff$$OnCreate"
   },
   {
     "file": "CBuff_Run",
-    "method": "CBuff$$Run",
-    "overload": 0
+    "method": "CBuff$$Run"
   },
   {
     "file": "CBuff_TrySetDieByReverseHeal",
-    "method": "CBuff$$TrySetDieByReverseHeal",
-    "overload": 0
+    "method": "CBuff$$TrySetDieByReverseHeal"
   },
   {
     "file": "CBuff_get_Value",
-    "method": "CBuff$$get_Value",
-    "overload": 0
+    "method": "CBuff$$get_Value"
   },
   {
     "file": "CCharacterBattle_AddHP",
-    "method": "CCharacterBattle$$AddHP",
-    "overload": 0
+    "method": "CCharacterBattle$$AddHP"
   },
   {
     "file": "CCharacterBattle_SetShieldHP",
-    "method": "CCharacterBattle$$SetShieldHP",
-    "overload": 0
+    "method": "CCharacterBattle$$SetShieldHP"
   },
   {
     "file": "CCharacterBattle_GetBuffCount",
     "method": "CCharacterBattle$$GetBuffCount",
-    "overload": 0,
     "note": "Compteur des buffs/débuffs VISIBLES (tooltip > 0, non neutres) — les familles OWNER/TARGET_(DE)BUFF de § 9.1."
   },
   {
     "file": "CCharacterBattle_SkillSimulation",
     "method": "CCharacterBattle$$SkillSimulation",
-    "overload": 0,
     "note": "Mode simulateur (CPlayer.IsYSLSimulator) : la seule écriture du TotalSkillFactor de l'ATTAQUANT — le repli `num == 0` de CalcDamage (spec § 8.1)."
   },
   {
     "file": "CCharacterData_AddEvolutionStatToDictionary",
-    "method": "CCharacterData$$AddEvolutionStatToDictionary",
-    "overload": 0
+    "method": "CCharacterData$$AddEvolutionStatToDictionary"
   },
   {
     "file": "CCharacterData_CalcArchiveStats",
-    "method": "CCharacterData$$CalcArchiveStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcArchiveStats"
   },
   {
     "file": "CCharacterData_CalcAwakeningNodeStats",
-    "method": "CCharacterData$$CalcAwakeningNodeStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcAwakeningNodeStats"
   },
   {
     "file": "CCharacterData_CalcBasicStats",
-    "method": "CCharacterData$$CalcBasicStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcBasicStats"
   },
   {
     "file": "CCharacterData_CalcEvolutionStats",
-    "method": "CCharacterData$$CalcEvolutionStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcEvolutionStats"
   },
   {
     "file": "CCharacterData_CalcMonadGateEnchantNodeStats",
-    "method": "CCharacterData$$CalcMonadGateEnchantNodeStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcMonadGateEnchantNodeStats"
   },
   {
     "file": "CCharacterData_CalcStat",
-    "method": "CCharacterData$$CalcStat",
-    "overload": 0
+    "method": "CCharacterData$$CalcStat"
   },
   {
     "file": "CCharacterData_CalcTranscendentStarStats",
-    "method": "CCharacterData$$CalcTranscendentStarStats",
-    "overload": 0
+    "method": "CCharacterData$$CalcTranscendentStarStats"
   },
   {
     "file": "CCharacterData_CheckNodeApply",
-    "method": "CCharacterData$$CheckNodeApply",
-    "overload": 0
+    "method": "CCharacterData$$CheckNodeApply"
   },
   {
     "file": "CCharacterData_GetArchiveGrowValueByType",
-    "method": "CCharacterData$$GetArchiveGrowValueByType",
-    "overload": 0
+    "method": "CCharacterData$$GetArchiveGrowValueByType"
   },
   {
     "file": "CCharacterData_GetEvolutionStat",
-    "method": "CCharacterData$$GetEvolutionStat",
-    "overload": 0
+    "method": "CCharacterData$$GetEvolutionStat"
   },
   {
     "file": "CCharacterData_GetValueByLevel",
-    "method": "CCharacterData$$GetValueByLevel",
-    "overload": 0
+    "method": "CCharacterData$$GetValueByLevel"
   },
   {
     "file": "CCharacterData_get_Avoid",
-    "method": "CCharacterData$$get_Avoid",
-    "overload": 0
+    "method": "CCharacterData$$get_Avoid"
   },
   {
     "file": "CCharacterData_get_CriticalDMGRate",
-    "method": "CCharacterData$$get_CriticalDMGRate",
-    "overload": 0
+    "method": "CCharacterData$$get_CriticalDMGRate"
   },
   {
     "file": "CCharacterData_get_CriticalRate",
-    "method": "CCharacterData$$get_CriticalRate",
-    "overload": 0
+    "method": "CCharacterData$$get_CriticalRate"
   },
   {
     "file": "CCharacterData_get_DMGBoost",
-    "method": "CCharacterData$$get_DMGBoost",
-    "overload": 0
+    "method": "CCharacterData$$get_DMGBoost"
   },
   {
     "file": "CCharacterData_get_DMGReduceRate",
-    "method": "CCharacterData$$get_DMGReduceRate",
-    "overload": 0
+    "method": "CCharacterData$$get_DMGReduceRate"
   },
   {
     "file": "CCharacterData_get_Def",
-    "method": "CCharacterData$$get_Def",
-    "overload": 0
+    "method": "CCharacterData$$get_Def"
   },
   {
     "file": "CCharacterData_get_EnemyCritDmgReduce",
-    "method": "CCharacterData$$get_EnemyCriticalDamageReduce",
-    "overload": 0
+    "method": "CCharacterData$$get_EnemyCriticalDamageReduce"
   },
   {
     "file": "CCharacterData_get_HitHPRecovery",
-    "method": "CCharacterData$$get_HitHPRecovery",
-    "overload": 0
+    "method": "CCharacterData$$get_HitHPRecovery"
   },
   {
     "file": "CCharacterData_get_PiercePower",
-    "method": "CCharacterData$$get_PiercePower",
-    "overload": 0
+    "method": "CCharacterData$$get_PiercePower"
   },
   {
     "file": "CCharacterData_get_PiercePowerRate",
-    "method": "CCharacterData$$get_PiercePowerRate",
-    "overload": 0
+    "method": "CCharacterData$$get_PiercePowerRate"
   },
   {
     "file": "CCharacterData_get_Vampiric",
-    "method": "CCharacterData$$get_Vampiric",
-    "overload": 0
+    "method": "CCharacterData$$get_Vampiric"
   },
   {
     "file": "CCustomBossStatValue_SetBaseValue",
-    "method": "CCustomBossStatValue$$SetBaseValue",
-    "overload": 0
+    "method": "CCustomBossStatValue$$SetBaseValue"
   },
   {
     "file": "CDungeonScene_UpdatePvpTurnPenalty",
-    "method": "CDungeonScene$$UpdatePvpTurnPenalty",
-    "overload": 0
+    "method": "CDungeonScene$$UpdatePvpTurnPenalty"
   },
   {
     "file": "CFormula_CalcBattlePower",
-    "method": "CFormula$$CalcBattlePower",
-    "overload": 0
-  },
-  {
-    "file": "CFormula_CalcStat",
-    "method": "CFormula$$CalcStat",
-    "overload": 0
+    "method": "CFormula$$CalcBattlePower"
   },
   {
     "file": "CFormula_IsIgnoreTurnLimitDamage",
-    "method": "CFormula$$IsIgnoreTurnLimitDamage",
-    "overload": 0
-  },
-  {
-    "file": "CFormula_CheckProbabilityPercent",
-    "method": "CFormula$$CheckProbabilityPercent",
-    "overload": 0
-  },
-  {
-    "file": "CFormula_CheckProbabilityPermille",
-    "method": "CFormula$$CheckProbabilityPermille",
-    "overload": 0
+    "method": "CFormula$$IsIgnoreTurnLimitDamage"
   },
   {
     "file": "CItemMainOption_ctor",
-    "method": "CItemMainOption$$.ctor",
-    "overload": 0
+    "method": "CItemMainOption$$.ctor"
   },
   {
     "file": "CItemMainOption_get_OptionValue",
-    "method": "CItemMainOption$$get_OptionValue",
-    "overload": 0
+    "method": "CItemMainOption$$get_OptionValue"
   },
   {
     "file": "CItem_GetBreakLimitFactor",
-    "method": "CItem$$GetBreakLimitFactor",
-    "overload": 0
+    "method": "CItem$$GetBreakLimitFactor"
   },
   {
     "file": "CItem_GetEnchantFactor",
-    "method": "CItem$$GetEnchantFactor",
-    "overload": 0
+    "method": "CItem$$GetEnchantFactor"
   },
   {
     "file": "CItem_GetSingularityFactor",
-    "method": "CItem$$GetSingularityFactor",
-    "overload": 0
+    "method": "CItem$$GetSingularityFactor"
   },
   {
     "file": "CItem_InitializeOptionData",
     "method": "CItem$$InitializeOptionData",
-    "overload": 1,
-    "note": "Surcharge 0 = thunk 1 argument qui saute sur l'implémentation (4 args) : c'est celle-ci que la spec cite."
+    "note": "Le listing porte les deux surcharges ; la spec cite l'implémentation (4 args), pas le raccourci à 1 argument."
   },
   {
     "file": "CSkillManager_CheckItemBuffCool",
-    "method": "CSkillManager$$CheckItemBuffCool",
-    "overload": 0
+    "method": "CSkillManager$$CheckItemBuffCool"
   },
   {
     "file": "CSkillManager_GetBuffList",
-    "method": "CSkillManager$$GetBuffList",
-    "overload": 0
+    "method": "CSkillManager$$GetBuffList"
   },
   {
     "file": "CSkillManager_GetBuffListOnSpawn",
-    "method": "CSkillManager$$GetBuffListOnSpawn",
-    "overload": 0
+    "method": "CSkillManager$$GetBuffListOnSpawn"
   },
   {
     "file": "CStatValue_GetFinalValue",
-    "method": "CStatValue$$GetFinalValue",
-    "overload": 0
+    "method": "CStatValue$$GetFinalValue"
   },
   {
     "file": "CStatValue_GetFinalValue_ovr1",
-    "method": "CCustomBossStatValue$$GetFinalValue",
-    "overload": 0
+    "method": "CCustomBossStatValue$$GetFinalValue"
   },
   {
     "file": "CStatValue_GetFinalValue_ovr2",
-    "method": "CSkillDungeonStatValue$$GetFinalValue",
-    "overload": 0
+    "method": "CSkillDungeonStatValue$$GetFinalValue"
   },
   {
     "file": "CStatValue_SetAwakeningNodeStatValue",
-    "method": "CStatValue$$SetAwakeningNodeStatValue",
-    "overload": 0
+    "method": "CStatValue$$SetAwakeningNodeStatValue"
   },
   {
     "file": "CStatValue_CalcPcExtendedBaseValue",
     "method": "CStatValue$$CalcPcExtendedBaseValue",
-    "overload": 0,
     "note": "Post-100 des PC (spec § 3.2) — l'ASM l'inlinait dans SetBaseValue, le C# la nomme."
   },
   {
     "file": "CStatValue_SetBaseValue",
     "method": "CStatValue$$SetBaseValue",
-    "overload": 1,
-    "note": "Surcharge 0 = `SetBaseValue(int)` court ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData)."
+    "note": "Le listing porte les deux surcharges ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData)."
   },
   {
     "file": "CStatValue_SetFinalValue",
-    "method": "CStatValue$$SetFinalValue",
-    "overload": 0
+    "method": "CStatValue$$SetFinalValue"
   },
   {
     "file": "CStatValue_SetMonadGateEnchantNodeStatValue",
-    "method": "CStatValue$$SetMonadGateEnchantNodeStatValue",
-    "overload": 0
+    "method": "CStatValue$$SetMonadGateEnchantNodeStatValue"
   },
   {
     "file": "CStatValue_get_AwakeningValue",
-    "method": "CStatValue$$get_m_nAwakeningValue",
-    "overload": 0
+    "method": "CStatValue$$get_m_nAwakeningValue"
   },
   {
     "file": "CStatValue_get_BuffValue",
-    "method": "CStatValue$$get_m_nBuffValue",
-    "overload": 0
+    "method": "CStatValue$$get_m_nBuffValue"
   },
   {
     "file": "CStatValue_get_FinalValue",
-    "method": "CStatValue$$get_m_nFinalValue",
-    "overload": 0
+    "method": "CStatValue$$get_m_nFinalValue"
   },
   {
     "file": "CStatValue_get_ItemOptionValue",
-    "method": "CStatValue$$get_m_nItemOptionValue",
-    "overload": 0
+    "method": "CStatValue$$get_m_nItemOptionValue"
   },
   {
     "file": "CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext",
     "method": "CStateBattle.<PvpAttackTeamPenaltyDmg>d__81$$MoveNext",
-    "overload": 0,
-    "note": "Noms générés par le compilateur : le `81` est un compteur interne qui se renumérote dès que CStateBattle change (79 en 1.4.9, 81 en 1.4.14). Les chiffres sont joker à la résolution — voir `skeleton()`."
+    "note": "Nom généré par le compilateur (le `81` se renumérote dès que CStateBattle change) : extract-cs le replie dans la méthode porteuse PvpAttackTeamPenaltyDmg."
   },
   {
     "file": "CStateBattle_PvpPenalty_PlayDamage",
-    "method": "CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1",
-    "overload": 0
+    "method": "CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1"
   },
   {
     "file": "CalcCharacterSharedDamage",
-    "method": "CFormula$$CalcCharacterSharedDamage",
-    "overload": 0
+    "method": "CFormula$$CalcCharacterSharedDamage"
   },
   {
     "file": "CalcDamage",
-    "method": "CFormula$$CalcDamage",
-    "overload": 0
+    "method": "CFormula$$CalcDamage"
   },
   {
     "file": "CalcDamageDOT",
-    "method": "CFormula$$CalcDamageDOT",
-    "overload": 0
+    "method": "CFormula$$CalcDamageDOT"
   },
   {
     "file": "CBattleManager_ProcessDamageOverTime",
     "method": "CBattleManager$$ProcessDamageOverTime",
-    "overload": 0,
     "note": "Chemin du TICK des DoT (§ 12.8 → désassemblage 24/08/2026, déclencheur : le DoT custom BT_DOT_2000092 d'Eternal Bleeding, tick observé sans défense — 2 × 7000 ‰ × Effectiveness fiche)."
   },
   {
     "file": "CBattleManager_ApplyDamageCap",
-    "method": "CBattleManager$$ApplyDamageCap",
-    "overload": 0
+    "method": "CBattleManager$$ApplyDamageCap"
   },
   {
     "file": "CBattleManager_ApplyImmediatelyDotDamageCap",
-    "method": "CBattleManager$$ApplyImmediatelyDotDamageCap",
-    "overload": 0
+    "method": "CBattleManager$$ApplyImmediatelyDotDamageCap"
   },
   {
     "file": "CBattleManager_GetImmediatelyDotDamageCapBuffType",
-    "method": "CBattleManager$$GetImmediatelyDotDamageCapBuffType",
-    "overload": 0
+    "method": "CBattleManager$$GetImmediatelyDotDamageCapBuffType"
   },
   {
     "file": "CCharacterBattle_IsDotBuffType",
-    "method": "CCharacterBattle$$IsDotBuffType",
-    "overload": 0
+    "method": "CCharacterBattle$$IsDotBuffType"
   },
   {
     "file": "CCharacterBattle_GetSpecificDotEnhanceBuffType",
-    "method": "CCharacterBattle$$GetSpecificDotEnhanceBuffType",
-    "overload": 0
+    "method": "CCharacterBattle$$GetSpecificDotEnhanceBuffType"
   },
   {
     "file": "CCharacterBattle_GetDotDamageIncreaseBuffValue",
-    "method": "CCharacterBattle$$GetDotDamageIncreaseBuffValue",
-    "overload": 0
+    "method": "CCharacterBattle$$GetDotDamageIncreaseBuffValue"
   },
   {
     "file": "CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue",
-    "method": "CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue",
-    "overload": 0
+    "method": "CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue"
   },
   {
     "file": "CalcDamageWG",
-    "method": "CFormula$$CalcDamageWG",
-    "overload": 0
+    "method": "CFormula$$CalcDamageWG"
   },
   {
     "file": "CalcDamage_g__helper",
-    "method": "CFormula$$<CalcDamage>g__CalcDamage|17_0",
-    "overload": 0
+    "method": "CFormula$$<CalcDamage>g__CalcDamage|17_0"
   },
   {
     "file": "CalcFinalStat",
-    "method": "CFormula$$CalcFinalStat",
-    "overload": 0
+    "method": "CFormula$$CalcFinalStat"
   },
   {
     "file": "CalcStat",
-    "method": "CFormula$$CalcStat",
-    "overload": 0
+    "method": "CFormula$$CalcStat"
   },
   {
     "file": "CheckDamageRate",
-    "method": "CFormula$$CheckDamageRate",
-    "overload": 0
+    "method": "CFormula$$CheckDamageRate"
   },
   {
     "file": "CheckProbability",
-    "method": "CFormula$$CheckProbability",
-    "overload": 0
+    "method": "CFormula$$CheckProbability"
   },
   {
     "file": "CheckProbabilityPercent",
-    "method": "CFormula$$CheckProbabilityPercent",
-    "overload": 0
+    "method": "CFormula$$CheckProbabilityPercent"
   },
   {
     "file": "CheckProbabilityPermille",
-    "method": "CFormula$$CheckProbabilityPermille",
-    "overload": 0
+    "method": "CFormula$$CheckProbabilityPermille"
   },
   {
     "file": "CheckResist",
-    "method": "CFormula$$CheckResist",
-    "overload": 0
+    "method": "CFormula$$CheckResist"
   },
   {
     "file": "CCharacterBattle_FindBuffByType",
-    "method": "CCharacterBattle$$FindBuffByType",
-    "overload": 0
+    "method": "CCharacterBattle$$FindBuffByType"
   },
   {
     "file": "FindBuffAdditionalDamage",
-    "method": "CCharacterBattle$$FindBuffAdditionalDamage",
-    "overload": 0
+    "method": "CCharacterBattle$$FindBuffAdditionalDamage"
   },
   {
     "file": "FindBuffDamageReduce",
-    "method": "CCharacterBattle$$FindBuffDamageReduce",
-    "overload": 0
+    "method": "CCharacterBattle$$FindBuffDamageReduce"
   },
   {
     "file": "FindBuffElementDamageRate",
-    "method": "CCharacterBattle$$FindBuffElementDamageRate",
-    "overload": 0
+    "method": "CCharacterBattle$$FindBuffElementDamageRate"
   },
   {
     "file": "FindBuffEnemyTeamDecreaseDamageRate",
-    "method": "CCharacterBattle$$FindBuffEnemyTeamDecreaseDamageRate",
-    "overload": 0
+    "method": "CCharacterBattle$$FindBuffEnemyTeamDecreaseDamageRate"
   },
   {
     "file": "GetAttackStat",
-    "method": "CCharacterBattle$$GetAttackStat",
-    "overload": 0
+    "method": "CCharacterBattle$$GetAttackStat"
   },
   {
     "file": "GetBattleRandomRange_int",
     "method": "CFormula$$GetBattleRandomRange",
-    "overload": 0,
-    "note": "Surcharges (int, int) puis (float, float) — adresses croissantes en 1.4.9."
-  },
-  {
-    "file": "GetBattleRandomRange_float",
-    "method": "CFormula$$GetBattleRandomRange",
-    "overload": 1
+    "note": "Le listing porte les deux surcharges (int, int) et (float, float)."
   },
   {
     "file": "GetBuffDamgeFinalReduce",
-    "method": "CCharacterBattle$$GetBuffDamgeFinalReduce",
-    "overload": 0
+    "method": "CCharacterBattle$$GetBuffDamgeFinalReduce"
   },
   {
     "file": "GetElementSuperiority",
-    "method": "CFormula$$GetElementSuperiority",
-    "overload": 0
+    "method": "CFormula$$GetElementSuperiority"
   },
   {
     "file": "GetElementeryDamageRate",
-    "method": "CFormula$$GetElementeryDamageRate",
-    "overload": 0
+    "method": "CFormula$$GetElementeryDamageRate"
   },
   {
     "file": "GetLostHPRateValue_1",
     "method": "CCharacterBattle$$GetLostHPRateValue",
-    "overload": 0
-  },
-  {
-    "file": "GetLostHPRateValue_2",
-    "method": "CCharacterBattle$$GetLostHPRateValue",
-    "overload": 1
+    "note": "Le listing porte les deux surcharges."
   },
   {
     "file": "GetRandomRange_int",
-    "method": "CFormula$$GetRandomRange",
-    "overload": 0
+    "method": "CFormula$$GetRandomRange"
   },
   {
     "file": "GetSkillFactor",
-    "method": "CSkillManager$$GetSkillFactor",
-    "overload": 0
+    "method": "CSkillManager$$GetSkillFactor"
   },
   {
     "file": "GetStatValuePermille",
-    "method": "CCharacterData$$GetStatValuePermille",
-    "overload": 0
+    "method": "CCharacterData$$GetStatValuePermille"
   },
   {
     "file": "MulPermille",
-    "method": "CCommonDefine$$MulPermille",
-    "overload": 0
+    "method": "CCommonDefine$$MulPermille"
   },
   {
     "file": "get_MISSED_DAMAGE_RATE",
-    "method": "CCommonDefine$$get_MISSED_DAMAGE_RATE_PERMILLE",
-    "overload": 0
+    "method": "CCommonDefine$$get_MISSED_DAMAGE_RATE_PERMILLE"
   },
   {
     "file": "CCharacterBattle_FindBuffWGDamageReduce",
     "method": "CCharacterBattle$$FindBuffWGDamageReduce",
-    "overload": 0,
     "note": "Agrégation add/rate des BT_WG_DMG (attaquant) − BT_WG_DMG_REDUCE (défenseur) — spec § 11 CalcDamageWG, lève § 12.3."
   },
   {
     "file": "CCharacterBattle_FindBuffWGInvincible",
     "method": "CCharacterBattle$$FindBuffWGInvincible",
-    "overload": 0,
     "note": "Garde BT_WG_INVINCIBLE de CalcDamageWG (§ 11)."
   },
   {
     "file": "CBuff_OnTurnStart",
     "method": "CBuff$$OnTurnStart",
-    "overload": 0,
     "note": "Appelant PÉRIODIQUE du tick : ProcessDamageOverTime(this, Value, 1, null) — _nCount = 1 (§ 11, lève le reste de § 12.8) ; HoT et reverse heal périodiques (§ 14)."
   },
   {
     "file": "CBuff_ConvertImmediatelyToDot",
     "method": "CBuff$$ConvertImmediatelyToDot",
-    "overload": 0,
     "note": "Détonation : BT_IMMEDIATELY_<TYPE> → BT_DOT_<TYPE> (§ 14.6)."
   },
   {
     "file": "CCharacterData_get_MaxHP",
     "method": "CCharacterData$$get_MaxHP",
-    "overload": 0,
     "note": "Buff de guilde / titre sur les PV max (spec § 16.2)."
   },
   {
     "file": "CBuffSystemManager_CheckMaxHPEvent",
     "method": "CBuffSystemManager$$CheckMaxHPEvent",
-    "overload": 0,
     "note": "Taux MAX_HP par contenu (guilde + titre) — spec § 16.2."
   },
   {
     "file": "CCharacterBattle_CheckElementEqual",
     "method": "CCharacterBattle$$CheckElementEqual",
-    "overload": 0,
     "note": "Condition TARGET_ELEMENT : égalité stricte (§ 16.3)."
   },
   {
     "file": "CCharacterBattle_CheckElementWin",
     "method": "CCharacterBattle$$CheckElementWin",
-    "overload": 0,
     "note": "Conditions ATTACKER_ELEMENT_WIN/EQUAL/LOSE (§ 16.3) — supériorité forcée prise en compte, pas l'infériorité."
   },
   {
     "file": "CCharacterData_GetCriticalStatBuffValues",
     "method": "CCharacterData$$GetCriticalStatBuffValues",
-    "overload": 0,
     "note": "Branche crit de SetFinalValue : buffs passifs DANS CalcFinalStat puis cap 1000, actifs APRÈS (§ 16, lève § 12.11)."
   },
   {
     "file": "CCharacterBattle_OnReturnFinishDefenderTeam",
     "method": "CCharacterBattle$$OnReturnFinishDefenderTeam",
-    "overload": 0,
     "note": "Roll de contre-attaque : CheckProbabilityPermille(CounterRate) après avoir été touché, S1 (§ 12.9)."
   },
   {
     "file": "CCharacterData_CalcBasicStatHp",
     "method": "CCharacterData$$CalcBasicStatHp",
-    "overload": 0,
     "note": "Base HP (§ 17.2) — séparée des autres stats dans CalcBasicStats."
   }
 ]

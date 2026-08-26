@@ -7,6 +7,27 @@
 
 ## 2026-08-26
 
+- **Bascule : le client Steam est LA source de données, l'Android passe en
+  secours ; les listings ASM sont supprimés (décisions Sevih, le soir même).**
+  « Steam fait foi de toute façon, la pipeline Android ne doit être utilisée
+  qu'en secours » ; « on garde le C# et on vire les asm ». Concrètement :
+  `.gamedata/` est la racine Steam, `.gamedata-android/` celle du secours
+  (`--source android`, `pnpm datagen:patch-android` / `pull-android` /
+  `dump-android`) ; les noms courts (`datagen:pull`, `datagen:dump`,
+  `datagen:patch`) désignent Steam. `disasm.py`, `docs/specs/damage-formula-asm/`
+  (dernier état au commit `a29a36c`), `datagen:disasm` et la dépendance
+  `capstone` sont retirés ; `dump.ts` (Android) n'enchaîne plus rien après le
+  dump. Le manifeste des listings perd son champ `overload` (un ordinal
+  d'adresses ARM64, sans sens en C#) et ses 5 doublons hérités
+  (`CFormula_CalcStat`, `CFormula_CheckProbability*`,
+  `GetBattleRandomRange_float`, `GetLostHPRateValue_2` — aucun cité par la
+  spec) : 108 listings. L'item TODO de la bascule est soldé ; la garde
+  `ENGINE_GAME_VERSION` n'est pas une décision, elle se bumpe au premier patch
+  Steam. Reste, pour le worker du calculateur : le MOTEUR TS implémente encore
+  les anciennes lectures ASM là où le C# les a corrigées (six numéros d'enum,
+  § 8.5, § 9.2, § 11, § 14.x) — passage moteur section par section avec
+  `damage:check`, et l'extracteur `EventEffect` de § 8.1.
+
 - **Seconde pipeline de données : le client STEAM comme source, à côté de
   l'Android (décision Sevih : « une seconde, propre ; on bascule après la
   release officielle »).** OUTERPLANE est sorti sur Steam ce jour ; le client

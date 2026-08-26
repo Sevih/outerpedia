@@ -10,8 +10,8 @@
  *     là-bas (ilspycmd), qui tournent sur le runtime .NET installé.
  * Appelé à la demande par les étapes qui en dépendent :
  *   - AssetStudioModCLI → `datagen:extract`
- *   - Il2CppDumper      → `datagen:dump` (Android)
- *   - ilspycmd          → `datagen:dump-steam` (Steam : décompile Assembly-CSharp.dll ;
+ *   - Il2CppDumper      → `datagen:dump-android` (le secours)
+ *   - ilspycmd          → `datagen:dump` (Steam : décompile Assembly-CSharp.dll ;
  *                         paquet « dotnet tool », lancé via `dotnet <dll>` — il
  *                         exige le runtime .NET de sa cible, cf. `ILSPYCMD`)
  *   - ffmpeg + ffprobe  → `datagen:extract-audio` (conversion) et `datagen:build`

@@ -21,8 +21,8 @@
  *   - `pnpm dev`         → scripts/dev-refresh.ts : { apply, collect, news } = true
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
  *
- * DEUX SOURCES depuis le 2026-08-26 (`--source android|steam`, défaut android
- * jusqu'à la bascule) : chacune a son pull, son dump et son signal « le code a
+ * DEUX SOURCES depuis le 2026-08-26 (`--source steam|android`, défaut STEAM ;
+ * l'Android est le secours) : chacune a son pull, son dump et son signal « le code a
  * changé », derrière la même interface `Source`. Elles écrivent la MÊME
  * arborescence, dans des racines distinctes (`lib/paths`) : la chaîne
  * extract→collect ne sait pas d'où viennent les fichiers. Les modules de
@@ -34,7 +34,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
-import { STEAM_GAMEDATA_ROOT, gamedata, gamedataRoot } from './lib/paths';
+import { ANDROID_GAMEDATA_ROOT, gamedata, gamedataRoot } from './lib/paths';
 import { pythonToolingMissing } from './lib/python';
 import type { PullResult } from './extract/pull-gamedata';
 
@@ -49,7 +49,7 @@ const stampPath = (): string => gamedata('.refresh-stamp');
 // complet — c'est ce qui permet de reprendre après un échec au lieu de tout
 // rejouer (cf. `resumeDecision`). Complète le stamp, ne le remplace pas.
 const checkpointPath = (): string => gamedata('.refresh-checkpoint.json');
-// Empreinte du dernier `datagen:dump` / `datagen:dump-steam` : porte la version
+// Empreinte du dernier `datagen:dump` (Steam) / `datagen:dump-android` : porte la version
 // du jeu dont sortent dump.cs et les listings (ASM ou C#) committés.
 const dumpStampPath = (): string => gamedata('apk/dumped/.dump-stamp.json');
 
@@ -128,7 +128,7 @@ async function loadSource(name: SourceName): Promise<Source> {
  * dans l'empreinte du dump.
  *
  * Un patch de DONNÉES ne bouge pas le binaire ; un patch de CODE oui, et alors
- * dump.cs et les 91 listings de docs/specs/damage-formula-asm/ sont périmés
+ * dump.cs et les listings de docs/specs/damage-formula-cs/ sont périmés
  * (constat Sevih 13/08/2026 : rien ne le signalait, il fallait y penser).
  *
  * Renvoie `null` quand la question ne se pose pas ou n'est pas décidable :
@@ -147,7 +147,7 @@ function codeChanged(source: Source): DumpVerdict {
   try {
     stamp = JSON.parse(readFileSync(path, 'utf8'));
   } catch {
-    return null; // empreinte illisible : `disasm.py` / `extract-cs` refuseront de toute façon
+    return null; // empreinte illisible : `extract-cs` refusera de toute façon
   }
   // Une empreinte d'une AUTRE source sous cette racine (mélange de miroirs) :
   // ses sha ne sont pas comparables — on ne décide rien, on le dit.
@@ -442,7 +442,7 @@ function sourceSignature(): string {
       const abs = join(dir, e.name);
       if (e.isDirectory()) walk(abs, rel);
       // `extract/listings.json` est une SOURCE aussi : le manifeste des listings
-      // que `disasm.py` et `extract-cs.ts` lisent.
+      // que `extract-cs.ts` lit.
       else if (e.isFile() && (/\.(ts|py)$/.test(e.name) || rel === 'extract/listings.json')) {
         const st = statSync(abs);
         parts.push(`${rel}:${st.size}:${st.mtimeMs}`);
@@ -538,23 +538,23 @@ export type RefreshOptions = {
   collect?: boolean;
   /** Rejouer `getNews` (toujours, indépendant du pull). */
   news?: boolean;
-  /** Source de jeu (défaut : `DATAGEN_SOURCE`, sinon android). */
+  /** Source de jeu (défaut : `DATAGEN_SOURCE`, sinon steam ; android = secours). */
   source?: SourceName;
 };
 
 /**
  * Source demandée → nom validé, et pose la racine gamedata qui va avec si
- * `GAMEDATA_ROOT` ne l'impose pas (Steam : `.gamedata-steam`, pour ne jamais
- * écraser le miroir Android tant que les deux coexistent). DOIT précéder tout
- * `gamedata()` et tout import de module de source.
+ * `GAMEDATA_ROOT` ne l'impose pas (Android, le secours : `.gamedata-android`,
+ * pour ne jamais écraser le miroir Steam). DOIT précéder tout `gamedata()` et
+ * tout import de module de source.
  */
 export function resolveSource(requested: string | undefined): SourceName {
-  const name = requested ?? process.env.DATAGEN_SOURCE ?? 'android';
+  const name = requested ?? process.env.DATAGEN_SOURCE ?? 'steam';
   if (name !== 'android' && name !== 'steam') {
-    throw new Error(`source inconnue : « ${name} » (android | steam)`);
+    throw new Error(`source inconnue : « ${name} » (steam | android)`);
   }
-  if (name === 'steam' && !process.env.GAMEDATA_ROOT) {
-    process.env.GAMEDATA_ROOT = STEAM_GAMEDATA_ROOT;
+  if (name === 'android' && !process.env.GAMEDATA_ROOT) {
+    process.env.GAMEDATA_ROOT = ANDROID_GAMEDATA_ROOT;
   }
   return name;
 }
@@ -584,16 +584,14 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
 
   // 1bis) Le binaire a-t-il changé ? Si oui, re-dumper AVANT de générer : les
   // générateurs lisent dump.cs (ASSET_TYPE), et les listings que citent les
-  // specs damage en sortent aussi (`dump.ts` enchaîne `disasm.py`,
-  // `dump-steam.ts` enchaîne `extract-cs.ts`).
+  // specs damage en sortent aussi (`dump-steam.ts` enchaîne `extract-cs.ts`).
   if (!noPull) {
     const bump = codeChanged(source);
     if (bump) {
       console.log(
         `\n⚙  le CODE du jeu a changé (${bump.reason === 'version' ? 'version installée' : 'fichier de code tiré'}) :` +
           `\n   ${bump.from} → ${bump.to}` +
-          `\n   → re-dump du binaire (dump.cs + les listings de docs/specs/damage-formula-${source.name === 'steam' ? 'cs' : 'asm'}/,` +
-          `\n     committés : leur diff fait partie du patch).`,
+          `\n   → re-dump du binaire (dump.cs${source.name === 'steam' ? ' + les listings de docs/specs/damage-formula-cs/, committés : leur diff fait partie du patch' : ''}).`,
       );
       step(`dump     (${source.label} → dump.cs + listings)`, source.dumpFile);
     }
@@ -679,7 +677,7 @@ export function sourceArg(argv: string[]): string | undefined {
 
 // Exécution directe = `pnpm datagen:patch` : refresh headless, promote en DRY
 // (revue du diff) sauf `--apply`. Flags : --force / --no-pull / --apply /
-// --collect / --source android|steam.
+// --collect / --source steam|android.
 if (isMain(import.meta.url)) {
   const a = process.argv.slice(2);
   refresh({

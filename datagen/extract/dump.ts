@@ -1,5 +1,6 @@
 /**
- * dump — génère `.gamedata/apk/dumped/dump.cs` via Il2CppDumper (`pnpm datagen:dump`).
+ * dump — génère `<root>/apk/dumped/dump.cs` via Il2CppDumper (`pnpm datagen:dump-android`,
+ * la source de SECOURS depuis le 26/08/2026 ; le défaut est `dump-steam.ts`).
  *
  * `dump.cs` = tout le code du client sous forme lisible (enums, structures, méthodes).
  * Les générateurs (goods, recruit) n'en lisent QU'`ASSET_TYPE`, mais le fichier sert
@@ -24,7 +25,6 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
-import { pythonToolingMissing } from '../lib/python';
 import { PKG, capture, ensureRoot, gameVersion, pickDevice, stream } from './adb';
 import { IL2CPPDUMPER, ensureTool } from './tools';
 import { gamedata } from '../lib/paths';
@@ -43,9 +43,8 @@ const META = resolve(APK_DIR, 'global-metadata.dat');
 const SO = resolve(APK_DIR, 'libil2cpp.so');
 const GGM = resolve(APK_DIR, 'globalgamemanagers');
 const OUT = resolve(APK_DIR, 'dumped');
-// Empreinte du dump : ATTESTE que le script.json d'à côté sort de CE binaire.
-// `disasm.py` la vérifie avant de désassembler — un .so périmé apparié à un
-// script.json frais produirait des listings plausibles et FAUX, sans erreur.
+// Empreinte du dump : ATTESTE que le script.json d'à côté sort de CE binaire
+// (`refresh` la compare à l'installé pour décider d'un re-dump).
 const STAMP = resolve(OUT, '.dump-stamp.json');
 const REMOTE_TMP = '/data/local/tmp';
 
@@ -160,29 +159,8 @@ export function dump(): void {
     ) + '\n',
   );
   console.log(`✅ dump généré dans ${OUT}`);
-
-  // Les listings ASM des specs damage suivent le dump À CHAQUE PATCH (Sevih
-  // 10/08/2026) : résolution PAR NOM dans script.json — les RVA bougent. Un
-  // échec ici doit se VOIR (méthode renommée = spec peut-être périmée), le
-  // dump lui-même reste acquis ; relancer seul via `pnpm datagen:disasm`.
-  console.log('↻ listings ASM (datagen/extract/disasm.py) ...');
-  // Outillage sondé AVANT : `capstone` absent n'est pas un échec du dump, c'est
-  // une machine non outillée — et le dump, lui, est déjà acquis (dump.cs écrit
-  // plus haut). Le faire échouer donnait un `datagen:dump a échoué` trompeur
-  // après plusieurs minutes de travail RÉUSSI (constat 21/08 sur le portable).
-  // Les listings committés prennent le relais ; un échec du script lui-même
-  // (méthode renommée, .so périmé) lève toujours — c'est tout l'intérêt.
-  const missing = pythonToolingMissing('capstone');
-  if (missing) {
-    console.warn(
-      `  ⚠ listings ASM SAUTÉS — ${missing}.\n` +
-        '    Les .asm committés restent ceux du dump précédent, donc PÉRIMÉS si les\n' +
-        '    RVA ont bougé.\n' +
-        '    → pip install -r datagen/requirements.txt, puis `pnpm datagen:disasm`.',
-    );
-    return;
-  }
-  execFileSync('python', [resolve('datagen/extract/disasm.py')], { stdio: 'inherit' });
+  // Plus de listings ici : les specs damage se lisent sur le C# du client Steam
+  // (`extract-cs.ts`) depuis le 26/08/2026 — cette source est le SECOURS.
 }
 
 if (isMain(import.meta.url)) {

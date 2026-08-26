@@ -2,7 +2,7 @@
 
 > **Source de vérité** : `Assembly-CSharp.dll` du **client Steam** (Mono — 1.4.15 au
 > 26/08/2026), décompilé en C# lisible et non obfusqué par `ilspycmd`
-> (`pnpm datagen:dump-steam`, racine `.gamedata-steam/`) : classe `CFormula` +
+> (`pnpm datagen:dump`, racine `.gamedata/`) : classe `CFormula` +
 > méthodes satellites de `CCharacterBattle` / `CCharacterData` / `CStatValue` /
 > `CBuff` / `CCommonDefine`. Les listings cités vivent dans
 > [damage-formula-cs/](./damage-formula-cs/) — un fichier par entrée du manifeste
@@ -11,19 +11,18 @@
 > [extract-cs.ts](../../datagen/extract/extract-cs.ts) : un listing porte TOUTES les
 > surcharges, `get_X` = la propriété entière, les noms fabriqués par le compilateur
 > sont repliés dans leur méthode porteuse). Le code complet est dans
-> `.gamedata-steam/apk/dumped/src/` (un type par fichier) et `dump.cs` (à plat, pour
+> `.gamedata/apk/dumped/src/` (un type par fichier) et `dump.cs` (à plat, pour
 > grep) — pour tout ce qui dépasse les listings. Toute méthode que ce document se met
 > à citer doit être AJOUTÉE au manifeste, sinon son listing n'existe pas.
 >
 > **Jusqu'au 25/08/2026** la source était `libil2cpp.so` ARM64 de l'APK Android
-> (désassemblage capstone). Ces listings, dans
-> [damage-formula-asm/](./damage-formula-asm/), sont FIGÉS à 1.4.15 Android et ne
-> seront plus régénérés : témoin lisible, mais en cas d'écart C# ↔ ASM **le C# fait
-> foi** (c'est la source, l'ASM en est la compilation) — un écart se NOTE dans la
-> section concernée, jamais résolu au jugé. Les RVA n'ont plus de sens : l'identifiant
-> d'une méthode est son NOM (`Classe$$Membre`). Migration faite section par section
-> le 26/08/2026 : TOUTES les sections sont relues sur le C# — chaque écart avec la
-> lecture ASM est noté dans sa section, daté, avec le listing qui le tranche.
+> (désassemblage capstone, listings `damage-formula-asm/`). Ils ont été SUPPRIMÉS
+> avec la bascule du 26/08 (décision Sevih : le C# fait foi, un témoin qu'on ne
+> régénère plus finit par mentir — git garde l'historique, dernier état au commit
+> `a29a36c`). Les RVA n'ont plus de sens : l'identifiant d'une méthode est son NOM
+> (`Classe$$Membre`). Migration faite section par section le 26/08/2026 : TOUTES
+> les sections sont relues sur le C# — chaque écart avec l'ancienne lecture ASM est
+> noté dans sa section, daté, avec le listing qui le tranche.
 >
 > **Règle de rédaction** : chaque pseudo-code ci-dessous est la traduction fidèle du
 > code (ordre des opérations, entier vs flottant, arrondis, clamps). En C#, `/ 1000`

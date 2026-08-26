@@ -24,8 +24,7 @@
  * pendant le pull : on ne fait que lire.
  *
  * Usage :
- *   pnpm datagen:pull-steam            # bundles + managed
- *   GAMEDATA_ROOT=.gamedata-steam pnpm datagen:pull-steam
+ *   pnpm datagen:pull                  # bundles + managed (racine .gamedata)
  */
 import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, statSync } from 'node:fs';
@@ -132,7 +131,7 @@ export async function pull(install: SteamInstall | null = findSteamInstall()): P
   return { changed, devicePresent: true };
 }
 
-// Exécution directe (`pnpm datagen:pull-steam`).
+// Exécution directe (`pnpm datagen:pull`).
 if (isMain(import.meta.url)) {
   pull().catch((e) => {
     console.error(e);

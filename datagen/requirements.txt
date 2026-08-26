@@ -8,12 +8,9 @@
 #                                       portrait : table + textures PNG du pool)
 #   - assets/extract-font-metrics.py  → portrait-font-metrics.json (chasses des
 #                                       polices du portrait)
-#   - extract/disasm.py               → docs/specs/damage-formula-asm/*.asm
-#                                       (listings ARM64 cités par les specs damage,
-#                                        régénérés à chaque dump)
 #   - extract/bundle-version.py       → version applicative du client Steam
 #                                       (`bundleVersion` des PlayerSettings, pour
-#                                        l'empreinte de `datagen:dump-steam`)
+#                                        l'empreinte de `datagen:dump`)
 #
 #   python -m pip install -r datagen/requirements.txt
 #
@@ -32,8 +29,3 @@ UnityPy>=1.25,<2
 # transitif d'UnityPy — déclaré ici parce que cette étape en dépend directement.
 fontTools>=4.50,<5
 brotli>=1.1
-
-# Désassembleur ARM64 des listings des specs damage (`extract/disasm.py`, joué en
-# fin de `pnpm datagen:dump`). Non déclaré jusqu'au 2026-08-21 : son absence
-# faisait échouer TOUT `datagen:dump`, dump.cs pourtant déjà écrit.
-capstone>=5,<6

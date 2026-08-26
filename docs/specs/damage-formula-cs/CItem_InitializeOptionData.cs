@@ -1,7 +1,7 @@
 // CItem$$InitializeOptionData — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CItem.cs.
 // 2 surcharges, dans l'ordre du source.
-// Note du manifeste : Surcharge 0 = thunk 1 argument qui saute sur l'implémentation (4 args) : c'est celle-ci que la spec cite.
+// Note du manifeste : Le listing porte les deux surcharges ; la spec cite l'implémentation (4 args), pas le raccourci à 1 argument.
 
 	public void InitializeOptionData(WSItemData _ItemData)
 	{

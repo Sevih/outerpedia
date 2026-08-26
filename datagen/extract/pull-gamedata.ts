@@ -16,9 +16,12 @@
  *
  * Prérequis : LDPlayer lancé, Outerplane installé (idéalement à jour).
  *
+ * Source de SECOURS depuis le 26/08/2026 (le défaut est le client Steam,
+ * `pull-steam.ts`) ; racine `.gamedata-android/`.
+ *
  * Usage :
- *   pnpm datagen:pull            # bundles + il2cpp (par défaut)
- *   pnpm datagen:pull il2cpp     # un sous-dossier précis
+ *   pnpm datagen:pull-android            # bundles + il2cpp (par défaut)
+ *   pnpm datagen:pull-android il2cpp     # un sous-dossier précis
  *
  * Le chemin de l'adb LDPlayer peut être surchargé via ADB_PATH.
  */
@@ -322,7 +325,7 @@ export async function pull(subdirs: string[] = DEFAULT_SUBDIRS): Promise<PullRes
   return { changed, devicePresent: true };
 }
 
-// Exécution directe (`pnpm datagen:pull [sous-dossier…]`).
+// Exécution directe (`pnpm datagen:pull-android [sous-dossier…]`).
 if (isMain(import.meta.url)) {
   const subdirs = process.argv.slice(2).length ? process.argv.slice(2) : DEFAULT_SUBDIRS;
   pull(subdirs).catch((e) => {

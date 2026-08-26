@@ -1,6 +1,7 @@
 // CCharacterBattle$$GetLostHPRateValue — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // 2 surcharges, dans l'ordre du source.
+// Note du manifeste : Le listing porte les deux surcharges.
 
 	public int GetLostHPRateValue(int _nValue)
 	{

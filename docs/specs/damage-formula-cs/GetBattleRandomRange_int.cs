@@ -1,7 +1,7 @@
 // CFormula$$GetBattleRandomRange — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 // 2 surcharges, dans l'ordre du source.
-// Note du manifeste : Surcharges (int, int) puis (float, float) — adresses croissantes en 1.4.9.
+// Note du manifeste : Le listing porte les deux surcharges (int, int) et (float, float).
 
 	public static int GetBattleRandomRange(int nMin, int nMax)
 	{

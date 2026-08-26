@@ -3,8 +3,8 @@
  * message clair s'il manque.
  *
  * C'est un artefact LOCAL, jamais committé, généré par `pnpm datagen:dump`
- * (Il2CppDumper sur l'APK Android) ou `pnpm datagen:dump-steam` (ilspycmd sur
- * l'Assembly-CSharp.dll du client Steam). Les générateurs (goods, recruit) y
+ * (ilspycmd sur l'Assembly-CSharp.dll du client Steam) ou `pnpm
+ * datagen:dump-android` (Il2CppDumper sur l'APK, le secours). Les générateurs (goods, recruit) y
  * lisent des enums du client (ASSET_TYPE…) via `readEnum`, qui comprend les
  * DEUX syntaxes — la source ne doit pas se voir en aval :
  *
@@ -25,8 +25,8 @@ export function readDump(): string {
     return readFileSync(DUMP_PATH, 'utf8');
   } catch {
     throw new Error(
-      `dump.cs manquant (${DUMP_PATH}). Génère-le : \`pnpm datagen:dump\` (Android) ` +
-        `ou \`pnpm datagen:dump-steam\` (voir docs/procedure/installation.md).`,
+      `dump.cs manquant (${DUMP_PATH}). Génère-le : \`pnpm datagen:dump\` ` +
+        `(voir docs/procedure/installation.md).`,
     );
   }
 }

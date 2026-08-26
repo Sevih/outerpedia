@@ -10,7 +10,7 @@
  * console affiche quand même le diff (dry) pour savoir ce qui a bougé.
  *
  * Flags : --force (re-génère même si local à jour) / --no-pull (offline) /
- * --source android|steam (défaut : DATAGEN_SOURCE, sinon android).
+ * --source steam|android (défaut : DATAGEN_SOURCE, sinon steam ; android = secours).
  */
 import { refresh, sourceArg, type SourceName } from '../datagen/refresh';
 

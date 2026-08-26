@@ -19,7 +19,7 @@ next-env.d.ts
 # Bundles bruts, extraction, parsing, outils, images en attente d'upload R2.
 # Régénérables depuis le jeu / sauvegardés sur R2 (cf. datagen/README.md).
 /.gamedata/
-/.gamedata-steam/
+/.gamedata-android/
 # Sortie de `datagen:build` = la PROPOSITION (non validée). Seul
 # `data/generated/` (via `pnpm datagen:promote`) est committé et servi.
 /data/extracted/

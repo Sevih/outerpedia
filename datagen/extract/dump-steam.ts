@@ -1,7 +1,7 @@
 /**
  * dump-steam — génère `<root>/apk/dumped/dump.cs` depuis le CLIENT STEAM
- * (`pnpm datagen:dump-steam`). Pendant Mono de `dump.ts` (Il2CppDumper sur l'APK
- * Android) : même sortie pour l'aval (`lib/dump.ts` lit les deux syntaxes), et
+ * (`pnpm datagen:dump`). Pendant Mono de `dump.ts` (Il2CppDumper sur l'APK
+ * Android, le secours) : même sortie pour l'aval (`lib/dump.ts` lit les deux syntaxes), et
  * en prime le code ENTIER, lisible — le client Steam est compilé en Mono, pas en
  * IL2CPP, et `Assembly-CSharp.dll` n'est pas obfusqué (noms complets, chemins
  * source d'origine dans les attributs).
@@ -133,8 +133,8 @@ export function dumpSteam(install: SteamInstall = requireSteamInstall()): void {
   );
   console.log(`✅ dump généré dans ${OUT}`);
 
-  // Les listings C# des specs damage suivent le dump à chaque patch, comme les
-  // .asm côté Android. Un échec ici doit se VOIR (méthode renommée) ; le dump
+  // Les listings C# des specs damage suivent le dump à chaque patch. Un échec
+  // ici doit se VOIR (méthode renommée) ; le dump
   // lui-même reste acquis — relancer seul via `pnpm datagen:extract-cs`.
   console.log('↻ listings C# (datagen/extract/extract-cs.ts) ...');
   extractListings();
@@ -147,7 +147,7 @@ if (isMain(import.meta.url)) {
     }
     dumpSteam();
   } catch (e) {
-    console.error('\n✗ datagen:dump-steam a échoué :', e instanceof Error ? e.message : e);
+    console.error('\n✗ datagen:dump a échoué :', e instanceof Error ? e.message : e);
     process.exit(1);
   }
 }

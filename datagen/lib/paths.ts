@@ -2,19 +2,18 @@
  * paths — la RACINE de l'aire de travail brute (`.gamedata/` par défaut), en un
  * seul endroit.
  *
- * Deux sources de jeu coexistent depuis le 2026-08-26 : l'Android (LDPlayer,
- * `pull-gamedata.ts`) et le client Steam (`pull-steam.ts`). Elles produisent
+ * Deux sources de jeu depuis le 2026-08-26 : le client Steam (`pull-steam.ts`,
+ * la source par défaut) et l'Android (LDPlayer, `pull-gamedata.ts`, le
+ * SECOURS — `--source android`, racine `.gamedata-android/`). Elles produisent
  * EXACTEMENT la même arborescence (`files/bundles`, `apk/dumped`, `extracted`,
  * `parsed`…), donc tout l'aval (extract, convert, build, scripts python, admin)
  * tourne tel quel sur l'une ou l'autre — à condition de ne jamais coder
  * `.gamedata` en dur. C'est ce module qui porte la racine :
  *
- *   GAMEDATA_ROOT=.gamedata-steam pnpm datagen:extract
+ *   GAMEDATA_ROOT=.gamedata-android pnpm datagen:extract
  *
- * `refresh.ts --source steam` pose la variable pour les étapes qu'il lance ; les
- * scripts python la lisent de la même façon (`os.environ['GAMEDATA_ROOT']`).
- * La bascule Android → Steam se fera en changeant `DEFAULT_GAMEDATA_ROOT`,
- * rien d'autre.
+ * `refresh.ts --source android` pose la variable pour les étapes qu'il lance ;
+ * les scripts python la lisent de la même façon (`os.environ['GAMEDATA_ROOT']`).
  *
  * `gamedata()` relit l'environnement À CHAQUE APPEL (pas de constante figée à
  * l'import) : `refresh.ts` choisit la source en tête de process, puis importe
@@ -28,10 +27,10 @@
  */
 import { resolve } from 'node:path';
 
-/** Racine par défaut — à changer pour basculer la source principale. */
+/** Racine par défaut — celle du client Steam depuis la bascule du 26/08/2026. */
 export const DEFAULT_GAMEDATA_ROOT = '.gamedata';
-/** Racine que `refresh --source steam` pose quand `GAMEDATA_ROOT` n'est pas donnée. */
-export const STEAM_GAMEDATA_ROOT = '.gamedata-steam';
+/** Racine que `refresh --source android` (le secours) pose quand `GAMEDATA_ROOT` n'est pas donnée. */
+export const ANDROID_GAMEDATA_ROOT = '.gamedata-android';
 
 /** Racine ABSOLUE de l'aire de travail courante (env `GAMEDATA_ROOT`, sinon le défaut). */
 export function gamedataRoot(): string {

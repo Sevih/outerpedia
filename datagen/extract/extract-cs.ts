@@ -1,25 +1,23 @@
 /**
  * extract-cs — écrit les listings C# que citent les specs damage, depuis le
- * client Steam décompilé (`pnpm datagen:extract-cs`). Pendant Mono de
- * `disasm.py` : même manifeste (`listings.json`), une sortie par entrée, mais en
- * C# lisible plutôt qu'en ARM64 — le client Steam n'a pas de code natif.
+ * client Steam décompilé (`pnpm datagen:extract-cs`) : une sortie par entrée du
+ * manifeste `listings.json`. (Jusqu'au 26/08/2026 les listings étaient des
+ * désassemblages ARM64 de l'APK Android — `disasm.py`, supprimé avec eux.)
  *
- * Entrées, produites par `pnpm datagen:dump-steam` :
+ * Entrées, produites par `pnpm datagen:dump` :
  *   - <root>/apk/dumped/src/**\/*.cs      projet décompilé par ilspycmd (-p)
  *   - <root>/apk/dumped/.dump-stamp.json  empreinte (source `steam`)
  *
- * Sortie : docs/specs/damage-formula-cs/<listing>.cs — SUIVIS PAR GIT, comme
- * les .asm : le diff d'un patch montre ce que le jeu a bougé dans les formules.
+ * Sortie : docs/specs/damage-formula-cs/<listing>.cs — SUIVIS PAR GIT : le diff
+ * d'un patch montre ce que le jeu a bougé dans les formules.
  *
  * Résolution d'un nom Il2CppDumper `Classe$$Membre` dans le décompilé :
  *   - la classe = le fichier `Classe.cs` (ilspy -p : un type par fichier, dans
  *     le dossier de son namespace), sinon le premier fichier qui la déclare ;
  *   - `get_X` / `set_X` = la PROPRIÉTÉ `X` entière (accesseurs compris) ;
  *   - `.ctor` = les constructeurs ;
- *   - le reste = la méthode, TOUTES SURCHARGES CONFONDUES. L'ordinal du
- *     manifeste ordonne les surcharges par ADRESSE dans le binaire ARM64 — il
- *     n'a pas de sens ici (pas de thunk, ordre source), donc un listing C# porte
- *     toutes les surcharges, chacune sous son en-tête. La spec choisit à la lecture.
+ *   - le reste = la méthode, TOUTES SURCHARGES CONFONDUES, chacune sous son
+ *     en-tête, dans l'ordre du source. La spec choisit à la lecture.
  *
  * Une entrée du manifeste ABSENTE du décompilé = échec de fin de run avec la
  * liste complète : un renommage du jeu doit se VOIR (la spec qui cite ce listing
@@ -37,9 +35,9 @@ const STAMP = gamedata('apk/dumped/.dump-stamp.json');
 const OUT = resolve('docs/specs/damage-formula-cs');
 const MANIFEST = resolve('datagen/extract/listings.json');
 
-export type Listing = { file: string; method: string; overload: number; note?: string };
+export type Listing = { file: string; method: string; note?: string };
 
-/** Le manifeste partagé avec `disasm.py`. */
+/** Le manifeste des listings que la spec damage cite. */
 export function loadListings(): Listing[] {
   return JSON.parse(readFileSync(MANIFEST, 'utf-8')) as Listing[];
 }
@@ -147,7 +145,7 @@ export function resolveTarget(method: string): { cls: string; member: string; fo
 
 export function extractListings(): void {
   if (!existsSync(SRC)) {
-    throw new Error(`${SRC} absent — lancer \`pnpm datagen:dump-steam\` d'abord.`);
+    throw new Error(`${SRC} absent — lancer \`pnpm datagen:dump\` d'abord.`);
   }
   const stamp = JSON.parse(readFileSync(STAMP, 'utf-8')) as {
     gameVersion?: string;

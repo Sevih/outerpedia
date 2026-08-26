@@ -151,10 +151,9 @@ pnpm install
 Rien n'est committé côté data locale : il faut la construire une fois.
 
 ```bash
-pnpm datagen:pull        # bundles + il2cpp depuis l'émulateur (adb).  ~15 Go
-pnpm datagen:dump        # dump.cs depuis l'APK installé (paire assortie, auto)
-pnpm datagen:pull-steam  # VARIANTE Steam (racine .gamedata-steam) : copie locale, ~18 Go
-pnpm datagen:dump-steam  # VARIANTE Steam : ilspycmd sur Assembly-CSharp.dll (runtime .NET 10)
+pnpm datagen:pull        # bundles + Assembly-CSharp.dll depuis le client Steam (copie, ~18 Go)
+pnpm datagen:dump        # dump.cs + src/ décompilé (ilspycmd, runtime .NET 10) + listings C#
+pnpm datagen:pull-android / dump-android   # SECOURS : LDPlayer + adb, racine .gamedata-android
 pnpm datagen:extract     # .bytes + images → .gamedata/extracted/ (via AssetStudioModCLI)
 pnpm datagen:convert     # .bytes → tables parsées (.gamedata/parsed/*.json)
 pnpm datagen:regen       # build + promote --apply → data/extracted (lit parsed + dump.cs)
@@ -167,14 +166,14 @@ pnpm editorial:pull      # pool éditorial (BD 4-cut + wallpapers faits main) de
 > autrement, et c'est le seul moyen d'avoir ce contenu : il n'est ni dans le jeu,
 > ni dans git.
 
-> `datagen:dump` a besoin de l'émulateur **lancé** avec le jeu **installé et À JOUR**
-> (il lit l'APK via adb — un install périmé regénère du périmé, en silence). Il
-> enchaîne sur `disasm.py`, qui réécrit les listings de
-> [docs/specs/damage-formula-asm/](../specs/damage-formula-asm/) : ceux-là sont
-> committés, leur diff fait partie du patch.
+> `datagen:dump` a besoin du jeu Steam **installé et lancé une fois** depuis le
+> dernier patch (il se patche en place au lancement — un client pas relancé
+> regénère du périmé, en silence). Il enchaîne sur `extract-cs.ts`, qui réécrit
+> les listings de [docs/specs/damage-formula-cs/](../specs/damage-formula-cs/) :
+> ceux-là sont committés, leur diff fait partie du patch.
 >
 > **Il n'y a plus à y penser** : `datagen:patch` (et `pnpm dev`) compare la version
-> installée sur l'émulateur à celle gravée dans `.gamedata/apk/dumped/.dump-stamp.json`
+> installée à celle gravée dans `.gamedata/apk/dumped/.dump-stamp.json`
 > et déclenche le dump lui-même quand le CODE du jeu a changé. La commande manuelle
 > reste utile pour un premier dump, ou pour re-générer sans patcher.
 

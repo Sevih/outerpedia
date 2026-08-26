@@ -4,9 +4,9 @@ Le détail (flux, garanties, rétention, versionnage de boss) vit dans
 [datagen/README.md](../../datagen/README.md) — ce fichier n'est que le
 pense-bête, pour ne pas maintenir deux docs.
 
-Prérequis : LDPlayer lancé + Outerplane à jour. (Client Steam, tant que la
-bascule n'est pas faite : `pnpm datagen:patch-steam`, racine `.gamedata-steam/`
-séparée — cf. datagen/README § « Client Steam ».)
+Prérequis : le client Steam installé et lancé une fois depuis le patch (il se met
+à jour au lancement). Secours LDPlayer : `pnpm datagen:patch-android`, racine
+`.gamedata-android/` — cf. datagen/README § « Récupérer les données du jeu ».
 
 ```bash
 pnpm datagen:patch           # pull → extract → convert → build → résumé du diff (dry)
