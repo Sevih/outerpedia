@@ -95,7 +95,8 @@ export function extractMembers(src: string, cls: string, member: string): string
   const isProperty = /^(get|set)_/.test(member);
   const re = new RegExp(
     `^[ \\t]*(?:\\[[^\\n]*\\]\\s*)*(?:(?:public|private|protected|internal|static|override|virtual|unsafe|sealed|new|extern|readonly|abstract)\\s+)*` +
-      (member === '.ctor' ? '' : '[^\\s=;(){}]+(?:<[^\\n]*?>)?\\s+') +
+      // Type de retour : identifiant (générique inclus) OU tuple `(int a, int b)`.
+      (member === '.ctor' ? '' : '(?:\\([^\\n)]*\\)|[^\\s=;(){}]+(?:<[^\\n]*?>)?)\\s+') +
       `${name}(?:<[^\\n]*?>)?\\s*` +
       (isProperty ? '(?=\\{|=>)' : '\\('),
     'gm',

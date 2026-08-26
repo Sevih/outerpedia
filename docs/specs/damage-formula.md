@@ -1,51 +1,61 @@
 # Formules de dégâts — Outerplane (extraites du binaire)
 
-> **Source de vérité** : `libil2cpp.so` ARM64 de l'APK **installé sur l'émulateur**
-> (1.4.14 au 13/08/2026), classe `CFormula`
-> (TypeDefIndex 7282) + méthodes satellites de `CCharacterBattle` / `CCharacterData` /
-> `CCommonDefine`. Désassemblage ciblé capstone (mapping VA→offset via program headers
-> ELF), cibles `bl` résolues par `script.json` d'Il2CppDumper. Les listings annotés sont
-> (leur jumeau C#, tiré du client Steam décompilé, vit dans
-> [damage-formula-cs/](./damage-formula-cs/) — même manifeste, `pnpm datagen:extract-cs` ;
-> la spec cite encore l'ASM jusqu'à la bascule de source)
-> dans [damage-formula-asm/](./damage-formula-asm/), régénérés À CHAQUE PATCH par
-> `pnpm datagen:dump` (qui ré-extrait le binaire de l'APK installé sur l'émulateur,
-> puis enchaîne sur [disasm.py](../../datagen/extract/disasm.py) — manifeste des
-> méthodes résolues par NOM). Toute méthode que ce document se met à citer doit
-> être AJOUTÉE au manifeste `M` de ce script, sinon son listing se fige.
+> **Source de vérité** : `Assembly-CSharp.dll` du **client Steam** (Mono — 1.4.15 au
+> 26/08/2026), décompilé en C# lisible et non obfusqué par `ilspycmd`
+> (`pnpm datagen:dump-steam`, racine `.gamedata-steam/`) : classe `CFormula` +
+> méthodes satellites de `CCharacterBattle` / `CCharacterData` / `CStatValue` /
+> `CBuff` / `CCommonDefine`. Les listings cités vivent dans
+> [damage-formula-cs/](./damage-formula-cs/) — un fichier par entrée du manifeste
+> [datagen/extract/listings.json](../../datagen/extract/listings.json), régénérés À
+> CHAQUE PATCH par `pnpm datagen:extract-cs` (particularités en tête de
+> [extract-cs.ts](../../datagen/extract/extract-cs.ts) : un listing porte TOUTES les
+> surcharges, `get_X` = la propriété entière, les noms fabriqués par le compilateur
+> sont repliés dans leur méthode porteuse). Le code complet est dans
+> `.gamedata-steam/apk/dumped/src/` (un type par fichier) et `dump.cs` (à plat, pour
+> grep) — pour tout ce qui dépasse les listings. Toute méthode que ce document se met
+> à citer doit être AJOUTÉE au manifeste, sinon son listing n'existe pas.
 >
-> **Règle de rédaction** : chaque pseudo-code ci-dessous est la traduction fidèle de
-> l'asm (ordre des opérations, arithmétique entière vs flottante, arrondis, clamps).
-> Aucune formule n'est devinée ; toute zone non désassemblée est signalée en § 12.
+> **Jusqu'au 25/08/2026** la source était `libil2cpp.so` ARM64 de l'APK Android
+> (désassemblage capstone). Ces listings, dans
+> [damage-formula-asm/](./damage-formula-asm/), sont FIGÉS à 1.4.15 Android et ne
+> seront plus régénérés : témoin lisible, mais en cas d'écart C# ↔ ASM **le C# fait
+> foi** (c'est la source, l'ASM en est la compilation) — un écart se NOTE dans la
+> section concernée, jamais résolu au jugé. Les RVA n'ont plus de sens : l'identifiant
+> d'une méthode est son NOM (`Classe$$Membre`). Migration faite section par section
+> le 26/08/2026 : TOUTES les sections sont relues sur le C# — chaque écart avec la
+> lecture ASM est noté dans sa section, daté, avec le listing qui le tranche.
+>
+> **Règle de rédaction** : chaque pseudo-code ci-dessous est la traduction fidèle du
+> code (ordre des opérations, entier vs flottant, arrondis, clamps). En C#, `/ 1000`
+> sur `int`/`long` tronque vers zéro — c'est le `div1000` de ce document ; ce sont les
+> TYPES (`int`, `long`, `float`) qui décident, pas les instructions. Aucune formule
+> n'est devinée ; toute zone non lue est signalée en § 12.
 >
 > **Écart 1.4.9 → 1.4.14 (13/08/2026)** : sur 88 listings, 72 sont inchangés au
 > comportement près et 3 ont bougé. Les trois sont désassemblés et rédigés
 > (§ 8.5, § 9.2, § 14.5), et `BUFF_TYPE` a été **renuméroté** (§ 2 — les identifiants
 > de ce document sont à jour, ne jamais reporter un numéro d'une version à l'autre).
-> Le **moteur TS n'implémente aucun des trois** ; § 12.16 liste ce qui reste ouvert.
->
-> Les **RVA** citées ici sont celles de 1.4.14 : les 44 adresses de 1.4.9 ont été
-> réécrites le 13/08/2026 en réidentifiant chaque méthode par son nom, et un balayage
-> final vérifie que toute adresse du document existe bien dans la table des méthodes
-> du binaire courant. Elles bougent à CHAQUE patch — l'autorité reste le nom, et
-> l'en-tête du listing correspondant dans [damage-formula-asm/](./damage-formula-asm/).
+> Le **moteur TS n'implémente aucun des trois** ; les inconnues de lecture que l'ASM
+> laissait sont FERMÉES par le C# du client Steam (26/08/2026, § 12.16).
 
 ## 1. Conventions numériques
 
 - **Tout est entier et en pour-mille (‰)** sauf mention contraire : `1000` = 100 %.
-- `div1000(x)` : division **entière signée tronquée vers zéro** par 1000. Le binaire
-  l'implémente par multiplication magique (`0x20C49BA5E353F7CF`, `smulh` + `asr #7`
-  - correction de signe) — sémantique exacte du `/` C sur entiers signés 64 bits.
-- `div1e6(x)` : idem par 1 000 000 (magique `0x431BDE82D7B634DB`, shift 18) ou `sdiv`.
-- Les produits intermédiaires sont calculés en **64 bits** (`smull`/`mul` 64) : pas
-  d'overflow 32 bits intermédiaire. Le résultat final est repris en 32 bits.
-- Deux fonctions utilisent du **float32** (voir `CheckResist` § 5 et HitRecovery § 8.4) ;
-  `FloorToInt` = `Mathf.FloorToInt` (floor puis cast, `int.MinValue` si +∞ — quirk Unity
-  jamais atteint en pratique).
-- `CCommonDefine.MulPermille(v, p)` = `div1000(v × p)` (RVA 0x2A00D74).
-- `CCommonDefine.ApplyRate(v, r)` = `div1000(v × (1000 + r))` (RVA 0x29FA264).
+- `div1000(x)` : division **entière tronquée vers zéro** par 1000 — le `/ 1000` C# sur
+  `int`/`long` (l'ASM l'implémentait par multiplication magique, même sémantique).
+- `div1e6(x)` : idem par 1 000 000.
+- Les produits intermédiaires sont calculés en **`long` (64 bits)** — les casts
+  `(long)` sont explicites dans le code : pas d'overflow 32 bits intermédiaire. Le
+  résultat final est repris en `int` par cast tronquant.
+- Deux fonctions utilisent du **`float` (32 bits)** (voir `CheckResist` § 5 et
+  HitRecovery § 8.4) ; `FloorToInt` = `Mathf.FloorToInt`, `RoundToInt` =
+  `Mathf.RoundToInt`.
+- `CCommonDefine.MulPermille(v, p)` = `(int)((long)v × p / 1000)` —
+  [`MulPermille.cs`](./damage-formula-cs/MulPermille.cs).
+- `CCommonDefine.ApplyRate(v, r)` = `(int)((long)v × (1000 + r) / 1000)` —
+  [`ApplyRate.cs`](./damage-formula-cs/ApplyRate.cs).
 
-## 2. Enums utiles (dump.cs)
+## 2. Enums utiles (`src/<ENUM>.cs` du client Steam — en clair, séquentiels)
 
 - `CHARACTER_ELEMENT_TYPE` : 0 Terre, 1 Eau, 2 Feu, 3 Lumière, 4 Ténèbres.
 - `ELEMENT_SUPERIORITY_TYPE` : 0 ATTACKER_WIN, 1 EQUAL, 2 ATTACKER_LOSE.
@@ -56,10 +66,14 @@
   12 HIT_HP_RECOVERY, 13 ACCURACY, 14 AVOID, 15 BUFF_CHANCE, 16 BUFF_RESIST,
   22 COUNTER_RATE, 23 AVOID_ADD_CAP, 24 AVOID_SUBTRACT_CAP, 25 DMG_BOOST,
   26 E_CRI_DMG_REDUCE.
-- `BUFF_TYPE` (extraits pertinents pour les dégâts, **valeurs 1.4.14**) :
-  3 INVINCIBLE, 5 MARKING, 90–113 famille `BT_DMG_*` (voir § 9), 115 DMG_REDUCE,
-  118 DMG_REDUCE_MY_TEAM_INCREASE, 119–121 DMG_REDUCE_FINAL*, 141 SHARE_DMG,
-  142 SHARE_DMG_MULTI, 154 STEALTHED.
+- `BUFF_TYPE` (extraits pertinents pour les dégâts, **valeurs 1.4.15** —
+  `BUFF_TYPE.cs`, enum séquentiel sans valeur explicite) : 3 INVINCIBLE, 5 MARKING,
+  90–113 famille `BT_DMG_*` (voir § 9 — `BT_DMG` lui-même est 90),
+  114 SWAP_STAT_ATTACK, 115 DMG_REDUCE, 118 DMG_REDUCE_MY_TEAM_INCREASE,
+  119–121 DMG_REDUCE_FINAL*, 141 SHARE_DMG, 142 SHARE_DMG_MULTI, 154 STEALTHED.
+  **1.4.15 n'a fait qu'ajouter en queue** : 156–162 `BT_IMMEDIATELY_*_CAP`,
+  163 `BT_DOT_LIMIT`, 164 `BT_DMG_TARGET_DEBUFF_LIMIT`, 165 `BT_DMG_TARGET_BUFF_LIMIT`
+  (§ 9.1) — rien n'a bougé avant.
 
 > ⚠ **`BUFF_TYPE` a été RENUMÉROTÉ en 1.4.14.** L'insertion de
 > `BT_REVERSE_HEAL_BASED_{CASTER,TARGET}_ABLE_KILL` en 18/19 (§ 14.5), puis d'autres
@@ -68,70 +82,80 @@
 > 154, les `IMMEDIATELY_*` de 60–65 à 63–69… Les 29 identifiants numériques cités
 > dans ce document ont été réécrits le 13/08/2026 en résolvant chaque **nom** dans
 > l'énumération 1.4.14 — ne jamais reporter un numéro d'une version à l'autre.
+> Relecture du 26/08/2026 sur l'enum C# : six numéros avaient échappé à cette passe
+> — `BT_DMG` (85 → 90), `BT_DMG_ELEMENT_SUPERIORITY` (94 → 99),
+> `BT_DMG_ELEMENT_ENCHANT` (95 → 100), `BT_DMG_ENEMY_TEAM_DECREASE` (96 → 101),
+> `BT_DMG_ELEMENT_INFERIORITY` (104 → 109), `BT_SWAP_STAT_ATTACK` (109 → 114) —
+> corrigés dans § 6, § 7, § 9.1 et § 10.1.
 >
 > Le moteur TS et les tables générées ne sont **pas** touchés : ils clés sur le nom
-> (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier. Deux commentaires portent encore
-> les anciens numéros — voir § 12.16.
+> (`Type: 'BT_DMG_REDUCE'`), jamais sur l'entier. (Les deux commentaires du moteur
+> qui portaient encore les anciens numéros sont corrigés le 26/08/2026 — § 12.16.)
 
 Les stats finales d'un personnage vivent dans `CCharacterData.StatDict[STAT_TYPE]`
 (recalcul lazy par `CCharacterData.CalcStat`) ; chaque getter (`get_Def`,
 `get_CriticalRate`…) lit simplement cette entrée. Le recalcul par stat passe par
 `CFormula.CalcFinalStat` (§ 3).
 
-## 3. CalcFinalStat — RVA 0x2CB1C6C
+## 3. CalcFinalStat
 
-Signature :
+Listing : [`CalcFinalStat.cs`](./damage-formula-cs/CalcFinalStat.cs). Signature :
 `CalcFinalStat(base, spawnAdvRate, evo, awak, awakRate, monad, monadRate, transRate, archiveRate, itemVal, itemRate, buffVal, buffRate)`
+— 13 `int`, calcul en `long`.
 
 ```text
 flat  = base + evo + awak + monad                                  // valeurs plates
-rate  = 1000 + spawnAdvRate + awakRate + monadRate + transRate + itemRate
+rate  = 1000 + spawnAdvRate + transRate + itemRate + awakRate + monadRate
 sub   = div1000(flat × rate) + itemVal + buffVal
 total = div1000(sub × (1000 + buffRate)) + div1000(base × archiveRate)
-return max(total, 0)                                                // bic asr#31
+return Mathf.Max(0, (int)total)                     // cast int AVANT le clamp (§ 12.6)
 ```
 
 Points fermes :
 
-- Les **taux** (éveil, monad, transcendance, items) s'additionnent en un seul
-  multiplicateur commun appliqué au _flat_ (base+évo+éveil+monad plats).
+- Les **taux** (éveil, monad, transcendance, items, spawn advantage) s'additionnent en
+  un seul multiplicateur commun appliqué au _flat_ (base+évo+éveil+monad plats).
 - `itemVal` et `buffVal` (plats) s'ajoutent **après** ce multiplicateur, puis le
   `buffRate` multiplie **le tout** (y compris les plats item/buff).
 - Le bonus d'archive s'applique **sur la stat de base seule** et s'ajoute à la fin.
 - Clamp final à ≥ 0. Chaque division tronque vers zéro.
 
-### 3.1 CalcStat — RVA 0x2CB1BD4 (stat de base par niveau)
+### 3.1 CalcStat — stat de base par niveau
 
-En amont : le `base` fourni à CalcFinalStat sort de
-`CFormula.CalcStat(min, max, level)` (division magique `0xA57EB50295FAD40B`,
-shift 6 = ÷99 signé tronqué vers zéro, vérifiée sur 200 000 triplets) :
+Listing : [`CalcStat.cs`](./damage-formula-cs/CalcStat.cs). En amont : le `base` fourni
+à CalcFinalStat sort de `CFormula.CalcStat(min, max, level)` :
 
 ```text
-CalcStat(min, max, level) = min + trunc((level − 1) × (max − min) / 99)
+CalcStat(min, max, level) = (int)( (long)(max − min) × (level − 1) / 99 ) + min
 ```
 
-Interpolation **linéaire** entre la stat niveau 1 (`min`) et la stat
-niveau 100 (`max`), en 99 pas ; `level = 100` redonne exactement `max`.
-Aucune courbe, aucun palier.
+Interpolation **linéaire** entre la stat niveau 1 (`min`) et la stat niveau 100
+(`max`), en 99 pas (division `long` tronquée vers zéro, puis cast `int`) ;
+`level = 100` redonne exactement `max`. Aucune courbe, aucun palier.
 
-### 3.2 SetBaseValue — RVA 0x29FA03C (niveau > 100 et addRate)
+### 3.2 SetBaseValue — niveau > 100 et addRate
 
 L'appelant réel de CalcStat côté personnages est
-`CStatValue.SetBaseValue(min, max, level, spawnAdvRate = 0, addRate = 0, owner)`
-(`CStatValue_SetBaseValue.asm`) — et il ajoute deux couches :
+`CStatValue.SetBaseValue(min, max, level, spawnAdvRate = 0, addRate = 0, owner = null)`
+— surcharge complète de [`CStatValue_SetBaseValue.cs`](./damage-formula-cs/CStatValue_SetBaseValue.cs)
+(la courte, `SetBaseValue(int)`, pose une valeur brute). Elle ajoute deux couches, la
+première dans une méthode que l'ASM inlinait et que le C# nomme :
+[`CStatValue_CalcPcExtendedBaseValue.cs`](./damage-formula-cs/CStatValue_CalcPcExtendedBaseValue.cs).
 
 ```text
-si level ≥ 101 ET owner.Type == CT_PC :
-  base = min + trunc((level−1) × (max−min) / 99)              // = CalcStat, inliné
-       + trunc((level−100) × (max−min) × mod / 99000)         // magique 0x54BBC10777CC3339, shift 15
+si owner != null : OwnerCharacter = owner
+si OwnerCharacter != null ET OwnerCharacter.Type == CT_PC ET level > 100 :
+  base = CalcPcExtendedBaseValue(min, max, level, mod)
+       = (int)((long)(max−min) × (level−1) / 99) + min                    // = CalcStat
+       + (int)((long)(max−min) × mod × max(level−100, 0) / 1000 / 99)     // long, deux troncatures
 sinon :
   base = CalcStat(min, max, level)
-si addRate ≥ 1 : base = div1000(base × (1000 + addRate))      // multiplicateur direct sur la base
+si addRate > 0 : base = ApplyRate(base, addRate)             // = div1000(base × (1000 + addRate))
 m_nBaseValue = base
 m_nSpawnAdvantageRate = spawnAdvRate                          // conservé pour CalcFinalStat (§ 3)
 ```
 
-- `mod` = `CCharacterData.LevelUpStatModifierAfter100` (champ 0x88), chargé depuis
+- `mod` = `CCharacterData.LevelUpStatModifierAfter100`, chargé depuis
   `CharacterMaxLevelTemplet.LevelUpStatModifierAfter100`. Données 1.4.9 : palier 1
   (→105) = **200 ‰**, palier 2 (→110) = **400 ‰**, palier 3 (→120) = **700 ‰**.
   Un seul `mod` (celui du palier courant) s'applique à TOUS les niveaux au-delà de
@@ -141,40 +165,47 @@ m_nSpawnAdvantageRate = spawnAdvRate                          // conservé pour 
 - `addRate` : multiplicateur appliqué directement à la base — posé UNIQUEMENT
   par le scaling d'overgrade du boss de guild raid (§ 12.13, RÉSOLU), 0 partout
   ailleurs.
-- `CCustomBossStatValue.SetBaseValue` (0x29FC7C4) : pour ST_HP, `base = max − min` ;
-  pour les autres stats, CalcStat normal.
+- `CCustomBossStatValue.SetBaseValue`
+  ([`CCustomBossStatValue_SetBaseValue.cs`](./damage-formula-cs/CCustomBossStatValue_SetBaseValue.cs)) :
+  pour ST_HP, `base = max − min` ; pour les autres stats, CalcStat normal — et elle
+  IGNORE `addRate` comme `spawnAdvRate` (jamais posés).
 
-## 4. Probabilités — CheckProbability* (0x2CB1C0C / 0x2CB1C54 / 0x2CB1C60)
+## 4. Probabilités — CheckProbability\*
+
+Listings : [`CheckProbability.cs`](./damage-formula-cs/CheckProbability.cs),
+[`CheckProbabilityPercent.cs`](./damage-formula-cs/CheckProbabilityPercent.cs),
+[`CheckProbabilityPermille.cs`](./damage-formula-cs/CheckProbabilityPermille.cs),
+[`GetBattleRandomRange_int.cs`](./damage-formula-cs/GetBattleRandomRange_int.cs),
+[`GetRandomRange_int.cs`](./damage-formula-cs/GetRandomRange_int.cs).
 
 ```text
-CheckProbability(value, max, isAuto):
-  if value < 1: return false
-  roll = isAuto ? UnityEngine.Random.Range(0, max+1)   // uniforme [0, max]
-                : GetBattleRandomRange(0, max)         // idem [0, max] inclus
-  return roll <= value
+CheckProbability(value, max, isAuto = false):
+  if value <= 0: return false
+  roll = isAuto ? GetRandomRange(0, max)          // Random.Range(0, max+1) : uniforme [0, max]
+                : GetBattleRandomRange(0, max)    // idem, RNG du match en PvP temps réel
+  return value >= roll
 ```
 
 - `CheckProbabilityPercent(v, isAuto)` = `CheckProbability(v, 100, isAuto)`.
 - `CheckProbabilityPermille(v, isAuto)` = `CheckProbability(v, 1000, isAuto)`.
-- `GetBattleRandomRange(min, max)` (0x2CB1B04) : en PvP temps réel, RNG synchronisé du
-  match (`CPvpRealtimeMatch.GetRandomRange`) ; sinon `Random.Range(min, max+1)` →
-  **entier uniforme inclusif** `[min, max]`.
+- `GetBattleRandomRange(min, max)` : en PvP temps réel, RNG synchronisé du match
+  (`CPVPRealTimeManager.PvpRealtimeMatch.GetRandomRange`) ; sinon
+  `GetRandomRange(min, max)` = `Random.Range(min, max + 1)` → **entier uniforme
+  inclusif** `[min, max]` (la surcharge `float` est `Random.Range(min, max)`, sans +1).
 - Conséquence : P(succès) = `(value+1)/(max+1)` pour `1 ≤ value ≤ max` (ex. 50 ‰ affiché
-  → 51/1001 réels), 0 % si `value < 1`, 100 % si `value ≥ max`.
+  → 51/1001 réels), 0 % si `value ≤ 0`, 100 % si `value ≥ max`.
 
-## 5. CheckResist — RVA 0x2CB21AC (résistance aux effets)
+## 5. CheckResist — résistance aux effets
 
-Entrées : `chance` = BUFF_CHANCE de l'attaquant (‰), `resist` = BUFF_RESIST du défenseur (‰).
+Listing : [`CheckResist.cs`](./damage-formula-cs/CheckResist.cs). Entrées : `chance` =
+BUFF_CHANCE de l'attaquant (‰), `resist` = BUFF_RESIST du défenseur (‰).
 
 ```text
-diff = resist - chance
-if diff < 0: return false                       // jamais de résistance
-d = (diff == 0) ? 1 : diff                      // csinc
-p32 = 1000.0f / (100.0f / (float)d + 1.0f)      // arithmétique float32
-p = FloorToInt(p32)
-if p < 1: return false
-roll = GetBattleRandomRange(0, 1000)
-return roll <= p                                // résisté
+if chance > resist: return false                // jamais de résistance
+d = resist - chance
+if d == 0: d = 1
+p = FloorToInt( 1000f / (1f + 100f / (float)d) ) // arithmétique float 32 bits
+return CheckProbabilityPermille(p)              // § 4 : faux si p ≤ 0, sinon roll [0,1000] ≤ p
 ```
 
 Formule non linéaire : P(résist) ≈ `floor(1000·d/(d+100)) / 1001`-ish. Ex. diff=100 →
@@ -183,39 +214,43 @@ de vrais artefacts d'arrondi : diff=900 donne 899 (et non 900) — valeurs véri
 contre une référence float32 exacte (rationnels) sur diff ∈ [0, 20000], ancrées par
 somme de contrôle dans `src/lib/damage/formula.test.ts`.
 
-## 6. Élément — GetElementSuperiority (0x2CB2A88) & GetElementeryDamageRate (0x2CB2984)
+## 6. Élément — GetElementSuperiority & GetElementeryDamageRate
+
+Listings : [`GetElementSuperiority.cs`](./damage-formula-cs/GetElementSuperiority.cs),
+[`GetElementeryDamageRate.cs`](./damage-formula-cs/GetElementeryDamageRate.cs),
+[`FindBuffElementDamageRate.cs`](./damage-formula-cs/FindBuffElementDamageRate.cs).
 
 ```text
 GetElementSuperiority(att, def):                 // enum § 2
-  if att ≤ 2 && def ≤ 2:                          // triangle Terre/Eau/Feu
+  if att ≤ CET_FIRE && def ≤ CET_FIRE:            // triangle Terre/Eau/Feu (0/1/2)
     if (att+1) % 3 == def: return ATTACKER_WIN    // Terre>Eau, Eau>Feu, Feu>Terre
     if (def+1) % 3 == att: return ATTACKER_LOSE
     return EQUAL
-  // au moins un Lumière/Ténèbres :
-  if att < 3 or def < 3: return EQUAL             // L/T vs élément de base = neutre
-  return (att == def) ? EQUAL : ATTACKER_WIN      // Lumière ↔ Ténèbres : les DEUX gagnent
+  if att ≥ CET_LIGHT && def ≥ CET_LIGHT:          // Lumière ↔ Ténèbres : les DEUX gagnent
+    return (att == def) ? EQUAL : ATTACKER_WIN
+  return EQUAL                                    // L/T vs élément de base = neutre
 ```
 
 ```text
 GetElementeryDamageRate(Attacker, Defender):      // retourne un taux ‰
-  if Attacker.FindBuffElementSuperiority():       // buff BT_DMG_ELEMENT_SUPERIORITY (94)
-    return 1200 + Attacker.FindBuffElementDamageRate()
-  if Attacker.FindBuffElementInferiority():       // buff BT_DMG_ELEMENT_INFERIORITY (104)
-    return 800
-  sup = triangle sur Data.Element des deux persos (même logique que ci-dessus)
-  ATTACKER_WIN  → 1200 + Attacker.FindBuffElementDamageRate()
-  ATTACKER_LOSE → 800
-  EQUAL         → 1000
+  rate = 1000
+  if Attacker.FindBuffElementSuperiority():       rate = 1200   // buff BT_DMG_ELEMENT_SUPERIORITY (99)
+  elif Attacker.FindBuffElementInferiority():     rate = 800    // buff BT_DMG_ELEMENT_INFERIORITY (109)
+  else:
+    sup = GetElementSuperiority(Attacker.Data.Element, Defender.Data.Element)
+    ATTACKER_WIN → rate = 1200 ; ATTACKER_LOSE → rate = 800 ; EQUAL → 1000
+  if rate == 1200: rate += Attacker.FindBuffElementDamageRate()
+  return rate
 ```
 
-- `FindBuffElementDamageRate` (0x28287F8) = **somme** des `Value` des buffs
-  BT_DMG_ELEMENT_ENCHANT (95) disponibles. Ne s'applique **que** quand l'attaquant a
-  l'avantage (réel ou forcé par le buff 94).
+- `FindBuffElementDamageRate` = **somme** des `Value` des buffs BT_DMG_ELEMENT_ENCHANT
+  (100) dont `CheckAvailable()` passe. Ne s'applique **que** quand l'attaquant a
+  l'avantage (réel ou forcé par le buff 99).
 - Avantage = ×1,2 ; désavantage = ×0,8 ; neutre = ×1,0.
 
-## 7. CheckDamageRate — RVA 0x2CB226C (fixe le résultat et le taux du hit)
+## 7. CheckDamageRate — fixe le résultat et le taux du hit
 
-Écrit `Defender.SkillRecord.DamageRateType` (résultat) et `.DamageRate` (‰), consommés
+Listing : [`CheckDamageRate.cs`](./damage-formula-cs/CheckDamageRate.cs). Écrit `Defender.SkillRecord.DamageRateType` (résultat) et `.DamageRate` (‰), consommés
 ensuite par `CalcDamage`. Ordre exact :
 
 ```text
@@ -238,13 +273,11 @@ CheckDamageRate(Attacker, Defender):
     // (result inchangé) → sauter à l'étape 6
   else:
     // 4. Esquive : roll sur l'Avoid du défenseur (l'ACCURACY attaquant n'apparaît PAS ici)
-    avoid = Defender.Data.Avoid
-    if avoid ≥ 1 && GetBattleRandomRange(0,1000) ≤ avoid:
+    if CheckProbabilityPermille(Defender.Data.Avoid):        // § 4 : avoid ≥ 1 et roll ≤ avoid
       result = MISSED(3) ; rate = 1000        // la pénalité ×0,5 vient plus tard (§ 8.2)
     else:
       // 5. Critique : roll sur le CriticalRate de l'attaquant
-      crit = Attacker.Data.CriticalRate
-      if crit ≥ 1 && GetBattleRandomRange(0,1000) ≤ crit:
+      if CheckProbabilityPermille(Attacker.Data.CriticalRate):
         result = CRITICAL(2)
         rate = Attacker.Data.CriticalDMGRate
         if Defender.Data.EnemyCriticalDamageReduce != 0:
@@ -276,19 +309,27 @@ Points fermes :
 - Un MISS garde un taux de 1000 ici — la vraie pénalité (×0,5) est appliquée dans le
   cœur du calcul (§ 8.2) via `MISSED_DAMAGE_RATE`.
 
-`AddCheckEnemyTeamDecreaseDamageRate(Attacker, count, ref rate)` (0x2CB2B1C) —
+`AddCheckEnemyTeamDecreaseDamageRate(Attacker, count, ref rate)`
+([`AddCheckEnemyTeamDecreaseDamageRate.cs`](./damage-formula-cs/AddCheckEnemyTeamDecreaseDamageRate.cs),
+[`FindBuffEnemyTeamDecreaseDamageRate.cs`](./damage-formula-cs/FindBuffEnemyTeamDecreaseDamageRate.cs)) —
 appelé par le code d'attaque (hors CFormula) pour les compétences dont la cible
 « décroît » : `rate += FindBuffEnemyTeamDecreaseDamageRate(Attacker) × count`
-(somme des buffs BT_DMG_ENEMY_TEAM_DECREASE (96) × nombre de cibles décomptées).
+(somme des buffs BT_DMG_ENEMY_TEAM_DECREASE (101) dont `CheckAvailable()` passe ×
+nombre de cibles décomptées).
 Le calcul du `count` par le code d'attaque n'est pas désassemblé ; **prouvé en
 jeu** (fixture Noa vs Rhona 10/08/2026, EE +0 `BID_CEQUIP_2000022` 150 ‰,
 Δ 0 exact) : `count = MAX_USER_TEAM_MEMBER − cibles touchées` (la taille
-d'équipe, `CCommonDefine.MAX_USER_TEAM_MEMBER = 4` — dump.cs ; vague à
+d'équipe, `CCommonDefine.MAX_USER_TEAM_MEMBER = 4`, `const` de `CCommonDefine.cs` ; vague à
 1 ennemi → ×3 → +450 ‰). Le moteur applique ce décompte via
 `BuildReportOptions.targetsHit` (z `n`, défaut 1) ; le buff arrive gaté par
 son `CallerSkillType` (application par slot, gear.ts).
 
-## 8. CalcDamage — RVA 0x2CB2B54 (+ helper local 0x2CB330C)
+## 8. CalcDamage
+
+Listing : [`CalcDamage.cs`](./damage-formula-cs/CalcDamage.cs) — la fonction locale
+`CalcDamage(int factor)` qu'il contient (nom binaire `<CalcDamage>g__CalcDamage|17_0`,
+repliée par ILSpy ; [`CalcDamage_g__helper.cs`](./damage-formula-cs/CalcDamage_g__helper.cs)
+en est la même sortie) est le cœur § 8.2.
 
 Signature : `CalcDamage(Attacker, Defender, DamageTemplet, damageRate, out dmg, out vampiric, out hitRecovery)`.
 `damageRate` = le `SkillRecord.DamageRate` produit par § 7. Sorties nulles si
@@ -297,21 +338,39 @@ Signature : `CalcDamage(Attacker, Defender, DamageTemplet, damageRate, out dmg, 
 ### 8.1 Facteur total de la compétence (comptabilité multi-hit) — PAR CLIP
 
 Un skill multi-hit appelle `CalcDamage` une fois **par hit**, avec le
-`CDamageTemplet` du hit (`DamageFactor` ‰ du hit). Au premier hit
-(`SkillRecord.ReceiveMaxDamage == 0`), le jeu scanne les `AnimationEvent` du clip
-d'attaque courant de l'attaquant pour calculer le **facteur total** :
+`CDamageTemplet` du hit (`DamageFactor` ‰ du hit). Les compteurs sont portés par le
+`SkillRecord` du **DÉFENSEUR** (un AoE tient une cascade par cible). Au premier hit
+(`Defender.SkillRecord.ReceiveMaxDamage == 0`), le jeu scanne les `AnimationEvent`
+des clips en cours de l'attaquant pour calculer le **facteur total** :
 
 ```text
-totalFactor = Σ sur les events « hit » :
-    templet = GetDamageTemplet(param.Split(',')[0])
-    (templet.MaxHitCount == 0 ? 1 : templet.MaxHitCount) × templet.DamageFactor
-  + Σ sur les events « facteur littéral » : int.Parse(param) si ≥ 1
+total = 0
+pour chaque clip de Attacker.Animator.GetCurrentAnimatorClipInfo(0):   // layer 0, clip(s) en cours
+  pour chaque AnimationEvent du clip :
+    "EventAttackStart" : templet = GetDamageTemplet(param.Replace(" ", "").Split(',')[0])
+                         total += templet.DamageFactor × (templet.MaxHitCount == 0 ? 1 : templet.MaxHitCount)
+    "EventEffect"      : si param.Split(',')[1] est un int > 0 : total += cet int   // « facteur littéral »
+if total == 0 && Attacker.SkillRecord.TotalSkillFactor != 0:
+  total = Attacker.SkillRecord.TotalSkillFactor                // repli — simulateur seulement, voir ci-dessous
+Defender.SkillRecord.ReceiveMaxDamage = CalcDamageCore(total)   // § 8.2
+Defender.SkillRecord.TotalSkillFactor = total
+Defender.SkillRecord.ReceiveCurrentFactorDamage = 0
+Defender.SkillRecord.CurrentSkillFactor = 0
 ```
 
-Puis : `ReceiveMaxDamage = CalcDamageCore(totalFactor)` (§ 8.2),
-`TotalSkillFactor = totalFactor`, compteurs remis à zéro.
+**Le repli « Σ tables » n'existe qu'en mode simulateur.** Le seul code qui écrit le
+`TotalSkillFactor` de l'ATTAQUANT est `CCharacterBattle.SkillSimulation()`
+([`CCharacterBattle_SkillSimulation.cs`](./damage-formula-cs/CCharacterBattle_SkillSimulation.cs)),
+appelé UNIQUEMENT quand `CPlayer.IsYSLSimulator` : Σ sur
+`GetDamageTempletBySkillID(skill.ID)` de `DamageFactor × max(1, MaxHitCount)`. En
+combat réel il vaut 0 : un clip sans event laisse `total = 0` →
+`ReceiveMaxDamage = CalcDamageCore(0) = 1` (clamp ≥ 1), `TotalSkillFactor = 0`, et
+chaque hit passe `CurrentSkillFactor ≥ 0` dès le premier — aucune rehausse possible,
+hits servis bruts, compteurs remis à zéro à chaque hit. L'heuristique du moteur pour
+les chaînes irrésolues (§ 12.4 : « Σ tables, comblée à 1000 sous 990 ») est donc un
+repli du CALCULATEUR borné par les mesures, pas un comportement du jeu.
 
-**Le scan ne voit que le clip COURANT — un skill joué en plusieurs clips fait
+**Le scan ne voit que le(s) clip(s) COURANT(S) — un skill joué en plusieurs clips fait
 plusieurs cascades** (le rattrapage § 8.3 remet les compteurs à zéro à la fin
 de chaque clip, le clip suivant re-scanne). Prouvé le 22/08/2026 par la paire
 de mesures du S2 de Francesca (10202 normal / 22028 crit, exacts UNIQUEMENT en
@@ -322,8 +381,8 @@ clips uniques d'Eris S2 (1000) et Noa S2 (999, servi brut) restent exacts.
 
 **Source de la donnée (22/08/2026)** : les bundles Unity ne sont pas chiffrés —
 `datagen/damage/extract-anim-events.py` (UnityPy) extrait les
-`EventAttackStart` de chaque clip (param `<templetId>,<valeur>` — la valeur
-après la virgule n'est PAS un facteur, non élucidée) ET le mapping
+`EventAttackStart` de chaque clip (param `<templetId>,<valeur>` — seul `[0]` est lu
+par `CalcDamage`, la valeur après la virgule n'est PAS un facteur) ET le mapping
 trigger → clips du controller compilé `AC_<charId>`. La liaison skill → clips
 est de la donnée aussi : `CharacterSkillTemplet.TriggerName` liste les
 triggers du skill DANS L'ORDRE (« Skill2,Skill2_2 » = deux clips chez
@@ -333,39 +392,38 @@ même chaîne en UNE cascade de 1000 ‰), `TriggerNameSkip` porte l'état SKIP.
 (`DamageSkill.clips`) ; le moteur (`report.ts`) fait une cascade § 8.2 + § 8.3
 par clip — les events d'une AUTRE chaîne présents dans le clip comptent dans
 son facteur et consomment leur part, chaque chaîne n'affiche que ses hits.
-Aucun event « facteur littéral » n'existe dans les données extraites (1.4.14).
+⚠ L'extracteur ne garde que les `EventAttackStart` : le « facteur littéral » du jeu
+est l'event `EventEffect` (2ᵉ paramètre entier > 0 — nom lu en C# le 26/08/2026),
+NON extrait à ce jour (§ 12.4 c).
 
-### 8.2 Le cœur — `<CalcDamage>g__CalcDamage|17_0` (0x2CB330C)
+### 8.2 Le cœur — fonction locale `CalcDamage(int factor)`
 
 ```text
-CalcDamageCore(factor):                       // factor = DamageFactor du hit (‰)
-  atk         = Attacker.GetAttackStat()      // § 10.1
+CalcDamageCore(factor):                        // factor = DamageFactor du hit (‰)
+  atk         = Attacker.GetAttackStat()       // § 10.1
   skillFactor = Attacker.SkillManager.GetSkillFactor()
-              // = SkillLevelTemplet.DamageFactor du skill courant (‰, données
-              //   CharacterSkillLevelTemplet.json, ex. 960…1840)
-  ppRate = Attacker.Data.PiercePowerRate      // stat 10, ‰ (pénétration %)
-  pp     = Attacker.Data.PiercePower          // stat 9, plat
-  def    = Defender.Data.Def                  // stat 5
-
-  // Terme de défense (×1000), plancher -999000 :
-  defTerm = max( def × max(0, 1000 - ppRate) - pp × 1000 , -999000 )
-
-  d = div1000(atk × factor × skillFactor)          // produit 64 bits
-  d = trunc( d × 1_000_000 / (1_000_000 + defTerm) )   // sdiv, mitigation défense
-  d = div1000(d × damageRate)                      // crit/boosts/réduc (§ 7)
-
-  if Defender a un buff BT_MARKING (5):
-    d = div1000(d × 1150)                          // cible marquée : +15 % subis
-
-  d = div1000(d × GetElementeryDamageRate(Attacker, Defender))   // § 6
-
-  if Defender.SkillRecord.DamageRateType == MISSED(3):
-    d = div1000(d × MISSED_DAMAGE_RATE)            // GameConfig 15 = 500 → ×0,5
-
-  finalReduce = Defender.GetBuffDamgeFinalReduce(Attacker)       // § 9.3 (max, pas somme)
-  d = trunc( d × (1000 - finalReduce) / 1_000_000 )              // ÷1e6 : retombe à l'échelle ATK
-  return max(d, 1)                                 // un hit inflige toujours ≥ 1
+              // = GetCurrentSkill()?.DamageFactor ?? 0 (SkillLevelTemplet.DamageFactor
+              //   du skill courant, ‰ — CharacterSkillLevelTemplet.json, ex. 960…1840)
+  d       = (long)atk × skillFactor × factor / 1000               // long
+  ppRate  = min(1000, Attacker.Data.PiercePowerRate)              // stat 10, ‰ (pénétration %)
+  pp      = Attacker.Data.PiercePower                             // stat 9, plat
+  defTerm = max( -999000, (long)Defender.Data.Def × (1000 − ppRate) − (long)pp × 1000 )
+  d = d × 1_000_000 / (1_000_000 + defTerm)                       // mitigation défense
+  d = d × damageRate / 1000                                       // crit/boosts/réduc (§ 7)
+  if Defender.FindBuffByType(BT_MARKING) != null:
+    d = d × 1150 / 1000                                           // cible marquée : +15 % subis
+  d = d × GetElementeryDamageRate(Attacker, Defender) / 1000      // § 6
+  if Defender.SkillRecord.DamageRateType == MISSED:
+    d = d × MISSED_DAMAGE_RATE_PERMILLE / 1000                    // GameConfig MISSED_DAMAGE_RATE (15) = 500
+  finalReduce = Defender.GetBuffDamgeFinalReduce(Attacker)        // § 9.3 (max, pas somme)
+  d = d × (1000 − finalReduce) / 1000
+  return Mathf.Max(1, (int)(d / 1000))                            // ÷1000 final : échelle ATK ; ≥ 1
 ```
+
+`MISSED_DAMAGE_RATE_PERMILLE` — [`get_MISSED_DAMAGE_RATE.cs`](./damage-formula-cs/get_MISSED_DAMAGE_RATE.cs),
+lu une fois dans `GameConfig` (valeur de table 500 → ×0,5). Toutes les divisions sont
+des divisions `long` tronquées vers zéro (les deux `/ 1000` finaux valent un `/ 1e6`
+sur un entier positif).
 
 Mitigation défensive en clair : `multiplicateur = 1e6 / (1e6 + def_effective × 1000)`
 avec `def_effective = def × (1 - pen%) - penFlat`, soit la forme classique
@@ -374,63 +432,71 @@ avec `def_effective = def × (1 - pen%) - penFlat`, soit la forme classique
 
 ### 8.3 Répartition par hit et rattrapage d'arrondi
 
-Chaque hit stocke `CurrentSkillFactor += factor`. Au **dernier** hit
-(`CurrentSkillFactor ≥ TotalSkillFactor`) : si `ReceiveMaxDamage >
-ReceiveCurrentFactorDamage + dmg_hit`, le hit courant est **rehaussé** à
-`ReceiveMaxDamage - ReceiveCurrentFactorDamage` (le total de la compétence est donc
-exactement `CalcDamageCore(totalFactor)`, pas la somme des hits tronqués — sauf cas
-dégénéré où les clamps `≥ 1` feraient dépasser, jamais corrigé à la baisse).
-`ReceiveCurrentFactorDamage += dmg_hit` après chaque hit. Le rattrapage vaut
-PAR CLIP (§ 8.1) : le dernier event du clip atteint `TotalSkillFactor`, les
-compteurs repartent à zéro, et le clip suivant refait sa propre cascade —
-c'est la séquence RÉELLE des events (rejeux compris) qui décide qui est
-« dernier », pas les tables.
+```text
+Defender.SkillRecord.CurrentSkillFactor += factor                 // chaque hit (après le garde § 8.5)
+if CurrentSkillFactor ≥ TotalSkillFactor:                        // DERNIER hit du clip
+  if ReceiveMaxDamage > ReceiveCurrentFactorDamage + dmg:
+    dmg = ReceiveMaxDamage − ReceiveCurrentFactorDamage           // rehausse
+  TotalSkillFactor = 0 ; ReceiveMaxDamage = 0                     // le clip suivant re-scanne (§ 8.1)
+ReceiveCurrentFactorDamage += dmg
+```
 
-Limite de dégâts par tour (gimmick de boss, sauté si
-`scene.IsUseWorldBossFinishAttack`) : si `Defender.TurnLimitMaxDamage != -1` et
-`SkillRecord.SkillLimitMaxDamage == -1`, le plafond restant
-`max(0, TurnLimitMaxDamage - TurnLimitCurrentDamage)` est borné par
-`ReceiveMaxDamage`, passé par `CalcCharacterSharedDamage` (§ 11), et stocké.
+Au **dernier** hit le hit courant est **rehaussé** (le total de la compétence est donc
+exactement `CalcDamageCore(totalFactor)`, pas la somme des hits tronqués — sauf cas
+dégénéré où les clamps `≥ 1` feraient dépasser, jamais corrigé à la baisse). Le
+rattrapage vaut PAR CLIP (§ 8.1) : le dernier event du clip atteint
+`TotalSkillFactor`, les compteurs repartent à zéro, et le clip suivant refait sa
+propre cascade — c'est la séquence RÉELLE des events (rejeux compris) qui décide qui
+est « dernier », pas les tables.
+
+Limite de dégâts par tour (world boss) : voir § 8.5 — calculée AVANT l'accumulation,
+dans le même appel.
 
 ### 8.4 Sorties annexes
 
 ```text
 vampiric    = MulPermille(dmg, Attacker.Data.Vampiric)            // stat 11, ‰
-hitRecovery = FloorToInt( (float32)(Defender.Data.HitHPRecovery × dmg) × 0.001f )
-              // produit int 32 bits, puis float32 (0.001f = 0x3A83126F), floor
+hitRecovery = FloorToInt( (float)(dmg × Defender.Data.HitHPRecovery) × 0.001f )
+              // produit int 32 bits, puis float 32 bits × 0.001f, floor
 ```
 
-### 8.5 IsIgnoreTurnLimitDamage (0x2CB35A8) — exemption world boss, **1.4.14**
+### 8.5 IsIgnoreTurnLimitDamage — exemption world boss, **1.4.14**
 
-`CalcDamage` gagne un garde avant la comptabilité du facteur courant (§ 8.1). Le
-prédicat est court et entièrement résolu :
+Listing : [`CFormula_IsIgnoreTurnLimitDamage.cs`](./damage-formula-cs/CFormula_IsIgnoreTurnLimitDamage.cs) ;
+site d'appel dans [`CalcDamage.cs`](./damage-formula-cs/CalcDamage.cs). Le prédicat
+est court et entièrement résolu :
 
 ```text
 IsIgnoreTurnLimitDamage(attaquant):
-  scene = CDungeonScene courante
-  if scene == null:                       return false   // Unity op_Inequality
+  scene = CDungeonScene.Instance
+  if scene == null:                       return false
   if !scene.IsWorldBoss:                  return false
-  if !scene.IsUseWorldBossSpecialAttack:  return false    // CDungeonScene+0x34
+  if !scene.IsUseWorldBossSpecialAttack:  return false
   if attaquant == null:                   return false
   return attaquant.UID == 0                               // attaquant sans UID
 ```
 
-Effet dans `CalcDamage` :
+Effet dans `CalcDamage`, lu en clair (26/08/2026) — le garde ne gouverne QUE la
+**limite de dégâts par tour** (§ 8.3), jamais la comptabilité du facteur :
 
 ```text
-if IsIgnoreTurnLimitDamage(attaquant)  ou  scene.IsUseWorldBossFinishAttack:
-    accumuler dans SkillRecord.CurrentSkillFactor        // CSkillRecord+0x8C
-else:
-    … chaîne de vérifications préexistante, puis même accumulation ou abandon
+if !IsIgnoreTurnLimitDamage(attaquant)
+   and !scene.IsUseWorldBossFinishAttack
+   and Defender.TurnLimitMaxDamage != -1
+   and Defender.SkillRecord.SkillLimitMaxDamage == -1:
+    reste = min( max(0, TurnLimitMaxDamage - TurnLimitCurrentDamage), ReceiveMaxDamage )
+    Defender.SkillRecord.SkillLimitMaxDamage = CalcCharacterSharedDamage(Defender, reste)  // § 11
+    Defender.TurnLimitCurrentDamage += reste
+Defender.SkillRecord.CurrentSkillFactor += DamageTemplet.DamageFactor    // INCONDITIONNEL (§ 8.3)
 ```
 
 Autrement dit : pendant l'**attaque spéciale d'un world boss**, un attaquant **sans
 UID** (source de dégâts qui n'est pas un personnage joueur instancié) échappe à la
-limite par tour. En 1.4.9 seul `IsUseWorldBossFinishAttack` ouvrait ce chemin.
+limite par tour, exactement comme `IsUseWorldBossFinishAttack` (seul chemin en 1.4.9).
 
-⚠ La **quantité accumulée** dans `CurrentSkillFactor` (`w22` au site d'appel) n'a pas
-été tracée jusqu'à sa définition — voir § 12.16. La condition d'entrée, elle, est
-certaine.
+La lecture ASM du 13/08/2026 plaçait « l'accumulation dans `CurrentSkillFactor` » SOUS
+ce garde : c'était faux. L'accumulation suit le garde sans condition, et la quantité
+que § 12.16 n'avait pas tracée (`w22`) est simplement le `DamageFactor` du hit courant.
 
 ## 9. Agrégation des buffs de taux (CCharacterBattle)
 
@@ -442,129 +508,190 @@ certaine.
 > EXPLICITE : une famille sans son contexte contribue 0. `CheckAvailable`
 > (§ 12) n'est pas émulé — l'UI ne propose que des buffs actifs.
 
-### 9.1 FindBuffAdditionalDamage (0x28268C0) — buffs de l'ATTAQUANT, somme (‰)
+### 9.1 FindBuffAdditionalDamage — buffs de l'ATTAQUANT, somme (‰)
 
-Parcourt `m_BuffList` de l'attaquant ; chaque buff passe `CheckAvailable` (conditions
-internes au buff : cible, stacks, cooldown d'application — non désassemblé, § 12) :
+Listing : [`FindBuffAdditionalDamage.cs`](./damage-formula-cs/FindBuffAdditionalDamage.cs).
+Parcourt `m_BuffList` de l'attaquant (`if / else if` : un buff n'entre que dans UNE
+branche) ; chaque buff passe `CheckAvailable` (conditions internes au buff : cible,
+stacks, cooldown d'application — non lu, § 12.1). Deux « cibles » coexistent dans le
+code : `_TargetCharacter`, le PARAMÈTRE (le défenseur du hit), et `TargetCharacter`,
+le CHAMP de l'attaquant (sa cible principale) — identiques sur un mono-cible, pas sur
+un AoE.
 
-| BT  | Nom                     | Contribution                                                     |
-| --- | ----------------------- | ---------------------------------------------------------------- |
-| 85  | DMG                     | `+Value` (condition évaluée contre le défenseur)                 |
-| 91  | DMG_OWNER_LOST_HP_RATE  | `+GetLostHPRateValue(attaquant, Value)`                          |
-| 92  | DMG_TARGET_LOST_HP_RATE | `+GetLostHPRateValue(défenseur, Value)`                          |
-| 93  | DMG_OWNER_STAT          | `+min(GetStatValuePermille(att.Data, StatType, Value), 1000)`    |
-| 94  | DMG_TARGET_STAT         | idem sur les stats du **défenseur**, cap 1000                    |
-| 95  | DMG_OWNER_BUFF          | `+Value × nb de buffs (positifs) de l'attaquant`                 |
-| 96  | DMG_TARGET_BUFF         | `+Value × nb de buffs de att.TargetCharacter`                    |
-| 97  | DMG_OWNER_DEBUFF        | `+Value × nb de débuffs de l'attaquant`                          |
-| 98  | DMG_TARGET_DEBUFF       | `+Value × nb de débuffs de att.TargetCharacter`                  |
-| 102 | DMG_TARGET_BREAK        | `+Value` si la cible est en Break (`RageManager.IsBreak`)        |
-| 103 | DMG_TO_BOSS             | `+Value` si `target.Data.Type > 3` (types boss)                  |
-| 104 | DMG_KILL_COUNT_STACK    | `+Value` (stacks gérés dans CheckAvailable/Value)                |
-| 105 | DMG_NOT_CRITICAL        | `+Value` si résultat ∈ {NORMAL, MISSED}                          |
-| 106 | DMG_PVP_CONTENT         | `+Value` si scène PvP                                            |
-| 107 | DMG_CASTER_STAT         | `+min(GetStatValuePermille(caster.Data, StatType, Value), 1000)` |
-| 108 | DMG_CASTER_LOST_HP_RATE | `+GetLostHPRateValue(caster du buff, Value)`                     |
-| 110 | DMG_OWNER_TEAM_BUFF     | `+Value × Σ buffs (positifs) de l'équipe du caster`              |
-| 111 | DMG_MY_TEAM_DECREASE    | `+Value × (4 - alliés vivants de l'équipe du caster)`            |
-| 112 | DMG_MONADGATE_CONTENT   | `+Value` si scène Monad Gate                                     |
-| 113 | DMG_TOWER_CONTENT       | `+Value` si mode Tour                                            |
+| BT  | Nom                     | Contribution                                                                                                   |
+| --- | ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 90  | DMG                     | `+Value` — `CheckAvailable(défenseur)`                                                                         |
+| 91  | DMG_OWNER_LOST_HP_RATE  | `+GetLostHPRateValue(attaquant, Value)`                                                                        |
+| 92  | DMG_TARGET_LOST_HP_RATE | `+GetLostHPRateValue(défenseur, Value)`                                                                        |
+| 93  | DMG_OWNER_STAT          | `+RoundToInt(min((float)GetStatValuePermille(att.Data, StatType, Value), 1000f))`                              |
+| 94  | DMG_TARGET_STAT         | idem sur les stats du **défenseur** (paramètre), cap 1000                                                      |
+| 95  | DMG_OWNER_BUFF          | `+Value × GetBuffCount(attaquant, buffs)`                                                                      |
+| 96  | DMG_TARGET_BUFF         | `+Value × GetBuffCount(défenseur, buffs)`                                                                      |
+| 165 | DMG_TARGET_BUFF_LIMIT   | comme 96, mais le CUMUL des instances d'un même `BuffID` est plafonné à `Templet.LimitValue` (**1.4.15**)      |
+| 97  | DMG_OWNER_DEBUFF        | `+Value × GetBuffCount(attaquant, débuffs)`                                                                    |
+| 98  | DMG_TARGET_DEBUFF       | `+Value × GetBuffCount(défenseur, débuffs)`                                                                    |
+| 164 | DMG_TARGET_DEBUFF_LIMIT | comme 98, plafonné à `Templet.LimitValue` par `BuffID` (**1.4.15**, § 12.18)                                   |
+| 102 | DMG_TARGET_BREAK        | `+Value` si `att.TargetCharacter.m_RageManager.IsBreak` (le CHAMP)                                             |
+| 103 | DMG_TO_BOSS             | `+Value` si `att.TargetCharacter.IsBoss` (le CHAMP ; `IsBoss` = `Data.Type ≥ CT_BOSS_MONSTER` = 4)             |
+| 104 | DMG_KILL_COUNT_STACK    | `+Value` — `CheckAvailable(défenseur)` (stacks gérés dans CheckAvailable/Value)                                |
+| 105 | DMG_NOT_CRITICAL        | `+Value` si `défenseur.SkillRecord.DamageRateType ∈ {NORMAL, MISSED}`                                          |
+| 106 | DMG_PVP_CONTENT         | `+Value` si `scene.IsPvp`                                                                                      |
+| 107 | DMG_CASTER_STAT         | `+RoundToInt(min((float)GetStatValuePermille(caster.Data, StatType, Value), 1000f))` — caster du buff non null |
+| 108 | DMG_CASTER_LOST_HP_RATE | `+GetLostHPRateValue(caster du buff, Value)`                                                                   |
+| 110 | DMG_OWNER_TEAM_BUFF     | `+Value × Σ sur les membres (vivants ou non) de l'équipe du porteur : GetBuffList(buffs).Count`                |
+| 111 | DMG_MY_TEAM_DECREASE    | `+Value × (4 − membres vivants de l'équipe du porteur)`                                                        |
+| 112 | DMG_MONADGATE_CONTENT   | `+Value` si `scene.IsMonadGate`                                                                                |
+| 113 | DMG_TOWER_CONTENT       | `+Value` si `scene.DungeonTemplet.DungeonMode.IsTowerModes()`                                                  |
 
 Puis, en PvP temps réel : `+ CurrentMatchInfo.FieldSkillDmg`.
 
+Plafond par ID (164/165) : `cumul[ID] = min(cumul[ID] + GetBuffCount(·) × Value, LimitValue)`
+(dictionnaire local à l'appel), la contribution ajoutée est `cumul − ancien cumul` —
+plusieurs instances du même buff (stacks, re-poses) ne dépassent jamais `LimitValue`
+ensemble.
+
 Helpers numériques (exacts) :
 
-- `GetLostHPRateValue(c, v)` (0x280F19C) = `trunc((MaxHP - HP) × v / MaxHP)`, 0 si MaxHP < 1.
-- `GetStatValuePermille(data, type, p)` (0x29033C8) = `div1000(GetStatValue(type) × p)`,
-  0 si type NONE, `INT32_MAX` si le produit dépasse int32 après division. Les usages
-  ci-dessus passent ensuite par `min(·, 1000.0f)` + `Math.Round` half-to-even (sans
-  effet sur un entier) : **cap à 1000 ‰**.
+- `GetLostHPRateValue(c, v)` ([`GetLostHPRateValue_1.cs`](./damage-formula-cs/GetLostHPRateValue_1.cs),
+  les deux surcharges) = `(int)((long)(MaxHP − HP) × v / MaxHP)`, 0 si `MaxHP ≤ 0`.
+- `GetStatValuePermille(data, type, p)` ([`GetStatValuePermille.cs`](./damage-formula-cs/GetStatValuePermille.cs))
+  = `(long)GetStatValue(type) × p / 1000`, 0 si type NONE, `int.MaxValue` si le
+  quotient dépasse `int`. Les usages 93/94/107 passent le résultat en `float`, le
+  bornent à `1000f` puis `RoundToInt` — sans effet sur un entier ≤ 1000 : **cap à
+  1000 ‰**.
+- `GetBuffCount(isDebuff)` ([`CCharacterBattle_GetBuffCount.cs`](./damage-formula-cs/CCharacterBattle_GetBuffCount.cs))
+  compte les buffs **VISIBLES** : `IsDebuff == isDebuff && !IsNeutral && Templet.ToolTipID > 0`
+  — exactement les icônes que le joueur voit (les compteurs § 9.1 DÉCLARÉS par le
+  scénario comptent la même chose). `GetBuffList(isDebuff)` (110) filtre autrement :
+  `IsDebuff == isDebuff && !IsNeutral && RemainTurnCont > 0` — pas de condition de
+  tooltip, mais des tours restants.
 
-### 9.2 FindBuffDamageReduce (0x2827AE4) — buffs du DÉFENSEUR, somme (‰)
+### 9.2 FindBuffDamageReduce — buffs du DÉFENSEUR, somme (‰)
 
-| BT  | Nom                         | Contribution                                                                         |
-| --- | --------------------------- | ------------------------------------------------------------------------------------ |
-| 115 | DMG_REDUCE                  | `+Value` si `CheckAvailable(attaquant)` et `ApplyingType == 2`                       |
-| 154 | STEALTHED                   | `+Value` si le skill de l'attaquant n'est **pas** mono-cible (`SkillRangeType != 1`) |
-| 118 | DMG_REDUCE_MY_TEAM_INCREASE | `+Value × (alliés vivants du caster - 1)`                                            |
+Listing : [`FindBuffDamageReduce.cs`](./damage-formula-cs/FindBuffDamageReduce.cs). UNE
+boucle sur `m_BuffList` du défenseur (`if / else if` dans cet ordre), puis un terme
+hors boucle :
 
-**Nouveauté 1.4.14 — réduction liée au DOT « punish ».** La fonction gagne 492 octets :
-une quatrième boucle de buffs, un `CCharacterBattle.FindBuffByType(BT 62 BT_DOT_PUNISH)`
-et **deux lectures de `GameConfig.PUNISH_DMG_REDUCE_VALUE`** (`GAME_CONFIG` 215, valeur
-de table **300**, soit 30 %). Autrement dit : porter un DOT « punish » ouvre une
-réduction de dégâts supplémentaire dont le montant vient désormais de la config
-serveur, pas du buff. La **place exacte de ces 300 ‰ dans l'agrégation** (terme
-additionnel de la somme, ou plafond appliqué au total) n'est pas tranchée — les deux
-lectures sont sur des chemins distincts. Voir § 12.16 ; ne pas trancher au jugé.
+| BT  | Nom                         | Contribution                                                                                                                                  |
+| --- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 115 | DMG_REDUCE                  | `+Value` si `CheckAvailable(attaquant)` et `ApplyingType == OAT_RATE` (buff consommé : `MarkUsedHitOverThisSkill`)                            |
+| 154 | STEALTHED                   | `+Value` si attaquant non null et son skill n'est **pas** mono-cible (`SkillRangeType != SINGLE`)                                             |
+| 118 | DMG_REDUCE_MY_TEAM_INCREASE | `+Value × (membres vivants de l'équipe du caster − 1)` si `CheckAvailable(attaquant)` ; ignoré si le caster n'a plus d'équipe (buff consommé) |
+| 62  | DOT_PUNISH                  | `+GameConfig.PUNISH_DMG_REDUCE_VALUE` (**300**) si `CheckAvailable()` — un **terme de la somme**, PAS un plafond                              |
 
-### 9.3 GetBuffDamgeFinalReduce (0x2828164) — défenseur, **MAX** (‰), pas somme
+Puis, hors boucle : si l'**attaquant** porte lui-même un `BT_DOT_PUNISH`
+(`FindBuffByType`), `+300` une fois de plus.
 
-Multiplicatif final `(1000 - r)/1000` dans § 8.2. `r` = maximum parmi :
+**Nouveauté 1.4.14, tranchée le 26/08/2026 à la lecture du C#.** Les « deux lectures
+de `PUNISH_DMG_REDUCE_VALUE` sur des chemins distincts » que l'ASM montrait sont deux
+TERMES additifs : un par buff punish du défenseur (dans la boucle), un si l'attaquant
+en porte un (hors boucle). Le montant vient de la config serveur (`GAME_CONFIG` 215,
+valeur de table 300 = 30 %), pas du buff.
 
-- BT 119 DMG_REDUCE_FINAL : `Value` (si CheckAvailable vs attaquant).
-- BT 120 DMG_REDUCE_FINAL_MY_TEAM_INCREASE : `Value × (alliés vivants du caster - 1)`.
+⚠ Le moteur TS n'implémente pas les termes DOT_PUNISH — aucune mesure ne les
+contraint encore ; à brancher sur une fixture (§ 12.16).
+
+### 9.3 GetBuffDamgeFinalReduce — défenseur, **MAX** (‰), pas somme
+
+Listing : [`GetBuffDamgeFinalReduce.cs`](./damage-formula-cs/GetBuffDamgeFinalReduce.cs).
+Multiplicatif final `(1000 − r)/1000` dans § 8.2. `r` = maximum parmi (quatre `if`
+indépendants par buff, pas de `else`) :
+
+- BT 119 DMG_REDUCE_FINAL : `Value` si `CheckAvailable(attaquant)` et `Value > r`
+  (buff consommé — `MarkUsedHitOverThisSkill`).
+- BT 120 DMG_REDUCE_FINAL_MY_TEAM_INCREASE : `Value × (membres vivants de l'équipe du
+porteur − 1)` si `CheckAvailable(attaquant)` et supérieur à `r` (consommé).
 - BT 121 DMG_REDUCE_FINAL_WITH_OUT_FIRST_SKILL : `Value` si le skill de l'attaquant
-  n'est pas le skill 1 (`SkillRecord.SkillType != 0`) ; sinon buff seulement consommé.
+  n'est pas le S1 (`SkillRecord.SkillType != SKT_FIRST`), `CheckAvailable(attaquant,
+SkillType)` et `Value > r` (consommé) ; sur un S1, le buff est seulement consommé.
 
 ## 10. Stats d'entrée
 
-### 10.1 GetAttackStat (0x282939C)
+### 10.1 GetAttackStat
+
+Listing : [`GetAttackStat.cs`](./damage-formula-cs/GetAttackStat.cs).
 
 ```text
-if Attacker a un buff BT_SWAP_STAT_ATTACK (109) disponible :
+buff = Attacker.FindBuffByType(BT_SWAP_STAT_ATTACK (114))
+if buff != null && buff.CheckAvailable(Attacker):
   stat = Attacker.Data.GetFinalStat(buff.StatType)
-  return (buff.ApplyingType == 2) ? MulPermille(stat, buff.Value) : stat + buff.Value
-return Attacker.Data.Attack        // stat finale ST_ATK (4), buffs inclus
+  return (buff.ApplyingType == OAT_RATE) ? MulPermille(stat, buff.Value) : stat + buff.Value
+return Attacker.Data.Atk        // stat finale ST_ATK (4), buffs inclus
 ```
 
 ### 10.2 Getters `CCharacterData.get_*`
 
-Tous identiques (ex. `get_Def` 0x2901FE8) : recalcul lazy (`CalcStat`) si dirty, puis
-`StatDict[type].Value`. Les stats finales incluent base/évo/éveil/monad/trans/archive/
-items/buffs via `CalcFinalStat` (§ 3). Le détail de `CCharacterData.CalcStat`
-(assemblage des 13 paramètres par stat) n'a pas été désassemblé ici (§ 12).
+Tous identiques (ex. [`CCharacterData_get_Def.cs`](./damage-formula-cs/CCharacterData_get_Def.cs)) :
+`CheckStatDirty()` (recalcul lazy par `CCharacterData.CalcStat` si dirty) puis
+`m_StatDic[type].GetFinalValue()`. Les stats finales incluent
+base/évo/éveil/monad/trans/archive/items/buffs via `CalcFinalStat` (§ 3) ;
+l'assemblage des 13 paramètres par stat est extrait en § 17.
 
 ## 11. Fonctions annexes
 
-### CalcDamageDOT (0x2CB3BF0) — dégâts sur la durée
+### CalcDamageDOT — dégâts sur la durée
 
-Entrées : `attackRate` (‰, du templet de buff DOT) et `statValue` (stat de référence
-capturée). **Ignore** élément, crit, taux de § 7 ; seule mitigation : défense + DMG_REDUCE.
+Listing : [`CalcDamageDOT.cs`](./damage-formula-cs/CalcDamageDOT.cs). Entrées :
+`attackRate` (‰ — le taux du buff DOT déjà modulé par les ENHANCE, voir le tick) et
+`statValue` (stat de référence, lue AU TICK). **Ignore** élément, crit, taux de § 7 ;
+seule mitigation : défense + DMG_REDUCE.
 
 ```text
-defTerm  = max(def × max(0, 1000 - ppRate) - pp × 1000, -999000)   // même forme que § 8.2
-reduce   = min(Defender.Data.DMGReduceRate, 900)                    // cap 90 %
-d = trunc( attackRate × statValue × 1_000_000 / (1_000_000 + defTerm) )
-d = trunc( d × (1000 - reduce) / 1_000_000 )
-return d                                                            // PAS de clamp ≥ 1
+d       = (long)statValue × attackRate
+ppRate  = min(1000, Attacker.Data.PiercePowerRate)
+defTerm = max( -999000, (long)Defender.Data.Def × (1000 − ppRate) − (long)Attacker.Data.PiercePower × 1000 )
+d       = d × 1_000_000 / (1_000_000 + defTerm)                 // même forme que § 8.2
+reduce  = min(900, Defender.Data.DMGReduceRate)                 // cap 90 %
+return (int)( d × (1000 − reduce) / 1000 / 1000 )               // PAS de clamp ≥ 1
 ```
 
-### Le TICK par type — `CBattleManager.ProcessDamageOverTime` (0x2313894)
+### Le TICK par type — `CBattleManager.ProcessDamageOverTime`
 
-**Désassemblé le 24/08/2026** (déclencheur : le tick d'Eternal Bleeding de
-Gnosis Beth, −71 % avec la formule standard — listing
-`CBattleManager_ProcessDamageOverTime.asm`). La § 12.8 est levée pour le
-DISPATCH : `CalcDamageDOT` ci-dessus n'est PAS servi à tous les types — une
-jump table sur `BUFF_TYPE − 56` route chaque DoT vers SA formule :
+Listings : [`CBattleManager_ProcessDamageOverTime.cs`](./damage-formula-cs/CBattleManager_ProcessDamageOverTime.cs),
+[`CCharacterBattle_GetDotDamageIncreaseBuffValue.cs`](./damage-formula-cs/CCharacterBattle_GetDotDamageIncreaseBuffValue.cs),
+[`CCharacterBattle_GetSpecificDotEnhanceBuffType.cs`](./damage-formula-cs/CCharacterBattle_GetSpecificDotEnhanceBuffType.cs),
+[`CCharacterBattle_IsDotBuffType.cs`](./damage-formula-cs/CCharacterBattle_IsDotBuffType.cs) ;
+appelants : [`CBuff_OnTurnStart.cs`](./damage-formula-cs/CBuff_OnTurnStart.cs) (tick
+périodique) et [`CBuff_OnCreate.cs`](./damage-formula-cs/CBuff_OnCreate.cs) (détonation,
+§ 14.6). Désassemblé le 24/08/2026 (déclencheur : le tick d'Eternal Bleeding de Gnosis
+Beth, −71 % avec la formule standard), relu en C# le 26/08/2026.
 
-| BUFF_TYPE             | stat lue AU TICK                                                 | formule                                                                           |
-| --------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| 56 `BT_DOT_BURN`      | `Caster.Data.get_Atk` (en dur — la stat de la LIGNE est ignorée) | `MulPermille(atk, taux)` — **sans défense ni réduction**                          |
-| 57 `BT_DOT_BLEED`     | `GetStatValue(StatType de la ligne)` du poseur                   | `CalcDamageDOT` (défense + réduction)                                             |
-| 58 `BT_DOT_POISON`    | idem                                                             | `CalcDamageDOT`                                                                   |
-| 59 `BT_DOT_LIGHTNING` | idem                                                             | `CalcDamageDOT`                                                                   |
-| 60 `BT_DOT_CURSE`     | PV MAX du POSEUR (`GetStatValuePermille(ST_HP, taux)`)           | % des PV max, **plafonné** au min des `BT_DOT_CURSE_CAP` (77) actifs sur la cible |
-| 61 `BT_DOT_2000092`   | `GetFinalStat(ST_BUFF_CHANCE)` du poseur (Effectiveness, en dur) | `MulPermille(eff, taux)` — **sans défense ni réduction**                          |
-| 62 `BT_DOT_PUNISH`    | `GetStatValue(StatType de la ligne)` du poseur                   | `CalcDamageDOT`                                                                   |
+`ProcessDamageOverTime(buff, buffValue, count, immediatelyCaster)` : `caster` =
+`buff.Caster` (le POSEUR), `defender` = `buff.Owner` (la CIBLE) — l'un des deux nul →
+`false`. Un `switch` sur le type route chaque DoT vers SA formule ; `CalcDamageDOT`
+ci-dessus n'est PAS servi à tous :
 
-- **`taux = ApplyRate(AttackRate, Σ ENHANCE)`** — toutes branches. Les
-  `BT_*_ENHANCE` sont lus SUR LA CIBLE (`GetDotDamageIncreaseBuffValue`,
-  0x282A928, listing) : Σ du spécifique (70..76, mapping 1:1 avec le type de
-  DoT — byte table de la jump table interne LUE dans le binaire le
-  24/08/2026, 0x106ED31) + `BT_ENHANCE_COMMON` (78 — **DoT standard 56..60
-  seulement**, le binaire exclut 61 et 62) + `BT_ENHANCE_ALL` (79),
-  `CheckCondition` évalué par buff — dans la liste générale `m_BuffList`
-  (+0x380).
+| BUFF_TYPE             | stat lue AU TICK                                                        | formule (`taux = ApplyRate(buffValue, Σ ENHANCE)`)                                                            |
+| --------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| 56 `BT_DOT_BURN`      | `caster.Data.Atk` (en dur — la stat de la LIGNE est ignorée)            | `MulPermille(atk, taux) × count` — **sans défense ni réduction**                                              |
+| 57 `BT_DOT_BLEED`     | `caster.Data.GetStatValue(StatType de la ligne)`                        | `CalcDamageDOT(caster, cible, taux, stat) × count` (défense + réduction)                                      |
+| 58 `BT_DOT_POISON`    | idem                                                                    | `CalcDamageDOT` × count                                                                                       |
+| 59 `BT_DOT_LIGHTNING` | idem                                                                    | `CalcDamageDOT` × count                                                                                       |
+| 60 `BT_DOT_CURSE`     | PV MAX de la **CIBLE** (`cible.Data.GetStatValuePermille(ST_HP, taux)`) | % des PV max, **plafonné** au min des `BT_DOT_CURSE_CAP` (77) actifs sur la cible (`CheckCondition`), × count |
+| 61 `BT_DOT_2000092`   | `caster.Data.GetFinalStat(ST_BUFF_CHANCE)` (Effectiveness, en dur)      | `MulPermille(eff, taux) × count` — **sans défense ni réduction** (+ effet de jauge, ci-dessous)               |
+| 62 `BT_DOT_PUNISH`    | `caster.Data.GetStatValue(StatType de la ligne)`                        | `CalcDamageDOT` × count                                                                                       |
+
+Une ligne BLEED/POISON/LIGHTNING/PUNISH sans `StatType` (`ST_NONE`) est une erreur
+de donnée : `LogError`, pas de tick. La lecture ASM plaçait la CURSE sur les PV max du
+POSEUR — le C# lit `_Defender` (la cible) : corrigé le 26/08/2026.
+
+Fin commune, dans l'ordre :
+
+```text
+if immediatelyCaster != null:                        // détonation seulement (§ 14.6)
+  dmg = ApplyImmediatelyDotDamageCap(cible, type, dmg)   // cap BT_IMMEDIATELY_<TYPE>_CAP (156–161) puis
+                                                          // BT_IMMEDIATELY_ALL_CAP (162) : min des caps dont CheckCondition passe
+if cible a BT_INVINCIBLE (3): dmg = 0                   // effet SYS_BUFF_INVINCIBLE
+if dmg > 0: cible.AddHP(−dmg) (shield § 14.3), popup, totaux d'équipe
+if cible.HP == 0 && IsAlive && !IsNotDie: SetDie() (+ BossKill si boss ennemi)   // même garde que § 14.5
+```
+
+- **`taux = ApplyRate(buffValue, Σ ENHANCE)`** — toutes branches. Les
+  `BT_*_ENHANCE` sont lus SUR LA CIBLE (`GetDotDamageIncreaseBuffValue`, listing) :
+  Σ du spécifique (70..76 — `GetSpecificDotEnhanceBuffType`, mapping 1:1 56→70 …
+  62→76) + `BT_ENHANCE_COMMON` (78 — **DoT standard 56..60 seulement**,
+  `IsCommonDotEnhanceTarget`, le code exclut 61 et 62) + `BT_ENHANCE_ALL` (79),
+  `buff.CheckCondition(cible)` évalué par buff dans `BuffList` de la cible.
   Les débuffs passifs `ENEMY_TEAM` du kit joueur (trans_8 de Gnosis Beth :
   +500 sans condition dès la transcendance 4★) et de son EE
   (`BID_CEQUIP_2000092` : +500 `OWNER_IS_BOSS` — le porteur du débuff est la
@@ -582,80 +709,89 @@ jump table sur `BUFF_TYPE − 56` route chaque DoT vers SA formule :
   Sterope buffe +100 % EFF ENTRE deux ticks, le tick passe de 1995 à 3990 ;
   (c) le MÊME protocole sur un DoT à formule DÉFENSE (fixtures
   `francesca-dot-scrapmetal[-atkbuff]`) — ATK +30 % entre deux ticks du
-  Bleed, 771 → 1110 : le « live » vaut pour toute la jump table, et la
+  Bleed, 771 → 1110 : le « live » vaut pour toute la table, et la
   PÉNÉTRATION du poseur (pierce +300 du S2, active au tick) est lue en
   direct elle aussi (`CalcDamageDOT` la consomme, § ci-dessus). Un buff de
   stat posé ou expiré en cours de route déplace donc les ticks restants.
   Le couple 771/1110 valide au passage `CalcDamageDOT` de bout en bout HORS
   raid (def 789 + `DMG_REDUCE` 64 ‰ d'un boss `normal_hard`) et l'assiette
   § 16.1 des buffs `OAT_RATE` avec un taux premium dans la fiche (le nœud
-  de quirk 101 — voir § 16.1, la mesure qui l'a rendu déclarable).
-- **`× _nCount`** : le tick multiplie par le compteur du buff — mais les
-  POSES MULTIPLES d'un même skill ne l'alimentent PAS. Les 3 mesures
-  d'Eternal Bleeding du 24/08/2026 contraignent `_nCount = 1` : le popup est
-  toujours le tick UNITAIRE × enhance (2898 = 207 × 7 × 2,0 ; 1995 = 190 ×
-  7 × 1,5), jamais × poses — alors que le S1 de Beth porte DEUX lignes de
-  pose (2000092_1_1 + _1_2 `OWNER_ALONE`, toutes deux `isTypeOverlap` ET
-  `isIdOverlap`). Une décomposition « popup = tick × poses » a été crue
-  quelques heures (2 × 4452 = 8904 collait aussi) avant d'être réfutée par
-  la mesure discriminante sans EE. **Les INSTANCES coexistent** (observé en
-  jeu par Sevih, 25/08/2026) : deux casts successifs du S1 (le boss survit)
-  = deux DoT de 2 tours SIMULTANÉS, chacun tick SÉPARÉMENT au même montant
-  (mêmes règles à la pose, même stat live au tick) — un re-cast n'est ni un
-  refresh ni un cumul dans un même popup. Le moteur affiche le tick d'UNE
-  instance (une ligne par type/tooltip) et c'est le bon contrat : la 2ᵉ
-  ligne `_1_2` d'un même cast ne produit pas de 2ᵉ instance côté joueur
-  (comme le `_1_2` `OWNER_IS_BOSS` de Francesca — variante monstre du kit).
-  Ce que `StackCount` alimente reste non mesuré ; `_nCount` > 1, lui, est le
-  canal de la DÉTONATION : dans `CBuff.OnCreate` (déclenchement IMMEDIATELY
-  § 14.6), `_nCount` = `RemainTurnCont` puis remis à 0 — la détonation
-  consomme les tours restants.
-- **DÉTONATION (`BT_IMMEDIATELY_<TYPE>`) — documentée, PAS branchée**
-  (décision Sevih 25/08/2026 : trop de paramètres pour une priorité non
-  bloquante). Un skill « détonateur » porte un buff `BT_IMMEDIATELY_BLEED /
-_BURN / _POISON / _CURSE / _2000092` (`createType`
-  `SKILL_FINISH_IMMEDIATELY`) : les DoT du type visé sur la cible tickent
-  IMMÉDIATEMENT en consommant leurs tours restants (`_nCount` ci-dessus),
-  modulés par la `value` ‰ du détonateur (hypothèse : tick × tours
-  restants × value — À MESURER avant tout branchement). Porteurs en donnée
-  1.4.14 : Gnosis Beth S3 (`2000092_3_2`, 500/750/1000 ‰ par niveau, gate
-  `CASTER_HAS_BUFF`), Vlada S2 + burst (`2000073_2_*`/`_u_1_1`,
-  BURN 700/500/1000 ‰), Tamamo Eternity S3 (`2000086_3_2`, CURSE),
-  Francesca S3 (`2000015_3_2`, BLEED), et 2000032/200005299/2000109/
-  2000117/2700056. Le cap dédié `ApplyImmediatelyDotDamageCap`
-  (`BT_IMMEDIATELY_2000092_CAP` = 161) ne s'applique qu'à ce chemin
-  (`_ImmediatelyCaster` non nul).
-- Fin commune : `FindBuffByType(3)` sur la cible (immunité → 0) puis
-  `AddHP(−dmg)` DIRECT — pas de `ProcessDamage`, pas de cap au tick
-  périodique (`ApplyImmediatelyDotDamageCap` n'est appelé que si
-  `_ImmediatelyCaster` est non nul ; `BT_IMMEDIATELY_2000092_CAP` = 161).
+  de quirk 101 — voir § 16.1, la mesure qui l'a rendu déclarable). Le C# le
+  confirme : chaque branche lit `caster.CharacterData.<stat>` au moment de
+  l'appel, rien n'est mémorisé dans le buff.
+- **`× count`** : le tick PÉRIODIQUE passe TOUJOURS `count = 1` —
+  `CBuff.OnTurnStart` appelle `ProcessDamageOverTime(this, Value, 1, null)` (C#,
+  26/08/2026 ; les 3 mesures d'Eternal Bleeding du 24/08 le contraignaient déjà :
+  popup = tick UNITAIRE × enhance, 2898 = 207 × 7 × 2,0 ; 1995 = 190 × 7 × 1,5).
+  `StackCount` agit sur le TAUX, via `buffValue = Value = Templet.Value × StackCount`
+  (§ 14.1), jamais sur le compteur. `count > 1` n'existe qu'à la DÉTONATION
+  (tours restants, § 14.6). **Les INSTANCES coexistent** (observé en jeu par
+  Sevih, 25/08/2026) : deux casts successifs du S1 (le boss survit) = deux DoT
+  de 2 tours SIMULTANÉS, chacun tick SÉPARÉMENT au même montant (mêmes règles à
+  la pose, même stat live au tick) — un re-cast n'est ni un refresh ni un cumul
+  dans un même popup. Le moteur affiche le tick d'UNE instance (une ligne par
+  type/tooltip) et c'est le bon contrat : la 2ᵉ ligne `_1_2` d'un même cast ne
+  produit pas de 2ᵉ instance côté joueur (comme le `_1_2` `OWNER_IS_BOSS` de
+  Francesca — variante monstre du kit ; § 12.17).
+- **DÉTONATION (`BT_IMMEDIATELY_<TYPE>`, 63–69) — LUE en clair, PAS branchée**
+  (décision Sevih 25/08/2026 : pas une priorité bloquante). À la création du
+  buff détonateur (`CBuff.OnCreate`, § 14.6) : pour CHAQUE DoT du type converti
+  présent sur la cible, `ProcessDamageOverTime(dot, ApplyRate(dot.Value,
+détonateur.Templet.Value), dot.RemainTurnCont, caster)` puis
+  `dot.RemainTurnCont = 0`, et `ClearBuffFinishDuration()` retire les DoT
+  consommés. Donc : **dégâts = tick(taux = ApplyRate(ApplyRate(dot.Value, valeur
+  du détonateur), Σ ENHANCE)) × tours restants**, sous les caps IMMEDIATELY
+  ci-dessus — la valeur du détonateur est son `Templet.Value` (pas × stacks),
+  celle du DoT son `Value` (× stacks). Porteurs en donnée 1.4.14 : Gnosis Beth
+  S3 (`2000092_3_2`, 500/750/1000 ‰ par niveau, gate `CASTER_HAS_BUFF`), Vlada
+  S2 + burst (`2000073_2_*`/`_u_1_1`, BURN 700/500/1000 ‰), Tamamo Eternity S3
+  (`2000086_3_2`, CURSE), Francesca S3 (`2000015_3_2`, BLEED), et
+  2000032/200005299/2000109/2000117/2700056. À MESURER avant tout branchement.
+- **Effet de jauge du DoT 2000092** (hors dégâts) : chaque tick donne à chaque
+  membre de l'équipe du POSEUR `AddActionPoint(GetDot2000092ActionGaugeEnhanceValue() × count)`
+  — 50 ‰ de `MAX_ACTION_POINT`, × `(1000 + Σ BT_ACTION_GAUGE_ENHANCE (51)) / 1000`
+  ([`CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue.cs`](./damage-formula-cs/CCharacterBattle_GetDot2000092ActionGaugeEnhanceValue.cs)).
 - Un `BT_DOT_*` hors de cette table (futur DoT custom d'un autre perso) :
   SIGNALÉ par le moteur, jamais calculé par une formule supposée — chaque
-  custom a sa propre branche dans le binaire.
+  custom a sa propre branche dans le code.
 
-### CalcDamageWG (0x2CB3D40) — dégâts de jauge de faiblesse
+### CalcDamageWG — dégâts de jauge de faiblesse
+
+Listings : [`CalcDamageWG.cs`](./damage-formula-cs/CalcDamageWG.cs),
+[`CCharacterBattle_FindBuffWGInvincible.cs`](./damage-formula-cs/CCharacterBattle_FindBuffWGInvincible.cs),
+[`CCharacterBattle_FindBuffWGDamageReduce.cs`](./damage-formula-cs/CCharacterBattle_FindBuffWGDamageReduce.cs).
 
 ```text
-if Defender.FindBuffWGInvincible(Attacker): return 0        // BT_WG_INVINCIBLE (82)
-wg = customValue != 0 ? customValue
-                      : Attacker.UsingSkill.WGReduce         // byte du SkillLevelTemplet
-(flat, rate) = Defender.FindBuffWGDamageReduce(Attacker)     // BT 88/89, non désassemblé
-return max(0, ApplyRate(flat + wg, rate))                    // = div1000((flat+wg)×(1000+rate))
+if Defender.FindBuffWGInvincible(Attacker) != null:      // BT_WG_INVINCIBLE (87), CheckAvailable(attaquant)
+  buff.PlayActivateEffect() ; return 0
+wg = (customValue == 0) ? Attacker.UsingSkill.WGReduce : customValue   // WGReduce du SkillLevelTemplet
+(add, rate) = Defender.FindBuffWGDamageReduce(Attacker)
+return max(0, ApplyRate(wg + add, rate))                  // = div1000((wg + add) × (1000 + rate))
 ```
 
-### CalcCharacterSharedDamage (0x2CB36FC) — partage de dégâts
+`FindBuffWGDamageReduce` (§ 12.3, LEVÉE le 26/08/2026) : `add`/`rate` partent de 0 ;
+chaque `BT_WG_DMG` (89) de l'ATTAQUANT dont `CheckAvailable(attaquant)` passe AJOUTE
+`Value` à `add` (`OAT_ADD`) ou à `rate` (`OAT_RATE`) ; chaque `BT_WG_DMG_REDUCE` (88)
+du DÉFENSEUR dont `CheckAvailable(attaquant)` passe RETRANCHE de même (et joue son
+effet d'activation).
+
+### CalcCharacterSharedDamage — partage de dégâts
+
+Listing : [`CalcCharacterSharedDamage.cs`](./damage-formula-cs/CalcCharacterSharedDamage.cs).
 
 ```text
 restant = dmg
-pour chaque allié du défenseur porteur de BT_SHARE_DMG_MULTI (137, ApplyingType 2):
+multi = membres de l'équipe du défenseur portant un BT_SHARE_DMG_MULTI (142)
+        DONT LE CASTER EST le défenseur (FindBuffShareMultiDamage(défenseur))
+pour chaque membre de multi, si son buff est OAT_RATE :
   part = MulPermille(dmg, buff.Value)          // sur le dmg ORIGINAL
-  allié.SkillRecord.MultiSharedDamage += part
-  restant = max(0, restant - part)
-partageur = équipe.GetCharacterSharedDamage()  // porteur unique de BT_SHARE_DMG (136)
+  membre.SkillRecord.MultiSharedDamage += part
+  restant = max(0, restant − part)
+partageur = équipe.GetCharacterSharedDamage()   // porteur de BT_SHARE_DMG (141) — le plus de MaxHP s'il y en a plusieurs
 if partageur existe et ≠ défenseur:
   part = MulPermille(restant, buff.Value)
   partageur.SkillRecord.SharedDamage += part
-  restant -= part
+  restant −= part
 return restant
 ```
 
@@ -671,8 +807,9 @@ return restant
    10/08/2026, ex. les 5 Kaizer Energy du S3 de Noa, `2000022_3_3`).
 2. ~~`CCharacterData.CalcStat`~~ — **RÉSOLU** : le mapping complet templet → 13
    paramètres est désormais extrait, voir § 17.
-3. **`FindBuffWGDamageReduce`** (BT 88/89) : les deux sorties (flat, rate) sont
-   identifiées mais leur agrégation interne n'est pas désassemblée.
+3. ~~`FindBuffWGDamageReduce`~~ — **RÉSOLU** (26/08/2026, C#) : Σ des `BT_WG_DMG`
+   (89) de l'attaquant MOINS Σ des `BT_WG_DMG_REDUCE` (88) du défenseur, chacun
+   dans la sortie de son `ApplyingType` (add / rate) — § 11 CalcDamageWG.
 4. ~~Événements d'animation (§ 8.1)~~ — **RÉSOLU pour l'essentiel**
    (22/08/2026) : les bundles ne sont pas chiffrés — les `EventAttackStart`
    des clips ET le mapping trigger → clips des controllers `AC_<charId>` sont
@@ -688,28 +825,32 @@ return restant
    `factorFilled`), bornée par les deux mesures Caren S1 (700 → 1000, 18/08)
    et Noa S2 (999 brut, 22/08) ;
    (b) la valeur après la virgule du `data` des events (34.142, 45, 200…) —
-   PAS un facteur (les sommes tombent juste sans elle), non élucidée ;
-   (c) les noms exacts des `functionName` comparés par le binaire restent des
-   littéraux runtime non extraits — `EventAttackStart` est validé par les
-   mesures, et aucun event « facteur littéral » n'existe dans la donnée
-   1.4.14 ;
+   PAS un facteur : `CalcDamage` ne lit que `[0]` (C#, 26/08/2026) ; son
+   consommateur, s'il existe, est ailleurs — non lu ;
+   (c) ~~noms des `functionName`~~ — LUS en C# (26/08/2026) :
+   `"EventAttackStart"` (facteur par templet) et `"EventEffect"` (2ᵉ paramètre
+   entier > 0 = facteur littéral, § 8.1). L'extracteur ne garde que les
+   premiers : les `EventEffect` à facteur ne sont PAS cherchés dans la donnée —
+   à extraire avant d'affirmer qu'il n'y en a aucun ;
    (d) les events des monstres (`character/monster/…`) ne sont pas extraits —
    sans objet tant que le calculateur ne calcule pas côté monstre.
-5. **`GetSkillFactor` — skill courant** : lit `CurrentSkillType` (offset 0x70 du
-   SkillManager) ; la correspondance SKILL_TYPE → skill équipé est du ressort du
-   code d'attaque, pas de la formule.
+5. **`GetSkillFactor` — skill courant** : `GetCurrentSkill()?.DamageFactor ?? 0`
+   ([`GetSkillFactor.cs`](./damage-formula-cs/GetSkillFactor.cs)) ; la
+   correspondance skill courant → skill équipé est du ressort de
+   `CSkillManager.GetCurrentSkill`, pas de la formule.
 6. **Wrap 32 bits** : le binaire reprend les résultats en 32 bits ; pour des valeurs
    réalistes aucun wrap ne se produit. Le moteur TS calcule en BigInt sans émuler le
    wrap (documenté dans le code).
 7. ~~Escalade des pénalités PvP~~ — **RÉSOLU** (`CDungeonScene.UpdatePvpTurnPenalty`
-   0x259F724 + `CStateBattle.PvpAttackTeamPenaltyDmg`, § 17.6) : première pénalité au
-   tour `PVP_ATK_PENALTY_START_TURN` (10), puis tous les `…_LOOP_TURN` (5) tours.
-   À chaque cycle : (a) chaque attaquant vivant subit
-   `AddHP(−MulPermille(MaxHP, dmgRate))` avec `dmgRate` = 100 ‰ puis +30 ‰/cycle,
-   **sans cap**, `bIgnoreUndead=true` (perce UNDEAD) ; (b) la réduction de soins de
-   la scène (`[scene+0x100]`, lue par § 14.2) passe de **0** (avant le premier
-   cycle, les soins PvP ne sont PAS réduits) à 500 ‰, puis +250 ‰/cycle,
-   **cap 1000 ‰** (`min(x, 1000)`).
+   - `CStateBattle.PvpAttackTeamPenaltyDmg`, § 17.6) : première pénalité au
+     tour `PVP_ATK_PENALTY_START_TURN` (10), puis tous les `…_LOOP_TURN` (5) tours.
+     À chaque cycle : (a) chaque attaquant vivant subit
+     `AddHP(−MulPermille(MaxHP, dmgRate))` — les DEUX équipes (§ 17.6) — avec
+     `dmgRate` = 100 ‰ puis +30 ‰/cycle,
+     **sans cap**, `bIgnoreUndead=true` (perce UNDEAD) ; (b) la réduction de soins de
+     la scène (`[scene+0x100]`, lue par § 14.2) passe de **0** (avant le premier
+     cycle, les soins PvP ne sont PAS réduits) à 500 ‰, puis +250 ‰/cycle,
+     **cap 1000 ‰** (`min(x, 1000)`).
 8. ~~`CBattleManager.ProcessDamageOverTime`~~ — **RÉSOLU pour l'essentiel**
    (24/08/2026, listings `CBattleManager_ProcessDamageOverTime` +
    `CCharacterBattle_GetDotDamageIncreaseBuffValue`) : la jump table des
@@ -717,26 +858,37 @@ return restant
    sur le taux), la stat lue AU TICK et le `× _nCount` sont désassemblés et
    rédigés en § 11 — quatre mesures in-game exactes (le Bleed de Francesca
    ET la triple mesure d'Eternal Bleeding, dont la discriminante sans EE).
-   RESTE non désassemblé : l'appelant PÉRIODIQUE (qui fixe `_nCount` au
-   début de tour — les mesures contraignent `_nCount = 1`, y compris avec
-   deux lignes de pose du même skill, cf. § 12.17) et le comportement exact
-   d'une re-pose sur un buff existant (refresh vs incrément).
-9. **Contre-attaques** : `get_CounterRate` n'est lu que par
-   `CCharacterBattle.OnReturnFinishDefenderTeam` (§ 16) — le roll et le skill
-   utilisé en contre ne sont pas désassemblés.
-10. **Caps de stat par scène** (§ 16) : le dictionnaire `[scene+0x168]` existe et
-    borne les stats par contenu ; quels contenus le remplissent et avec quelles
-    valeurs n'a pas été extrait (probable lien avec les configs de tour —
-    `TowerElementalConfigTemplet.json`).
-11. **`GetCriticalStatBuffValues`** : l'agrégation spéciale des buffs de taux
-    critique (branche type 7 de `SetFinalValue`, § 16) n'est pas détaillée.
-12. **`ProcessDamage` / `ProcessDamageSimulator`** : l'orchestration autour de
-    `CalcDamage` (ordre shield → HP, WG, événements on-damage) n'est pas
-    désassemblée — les formules qu'elle appelle le sont toutes.
+   RÉSOLU aussi, le 26/08/2026 (C#) : l'appelant périodique est
+   `CBuff.OnTurnStart` — `ProcessDamageOverTime(this, Value, 1, null)`,
+   `_nCount = 1` toujours, `StackCount` passe par `Value` (§ 14.1). RESTE : le
+   comportement exact d'une re-pose sur un buff existant (refresh vs incrément
+   de `StackCount`) — dans `CCharacterBattle.AddBuff`, non lu.
+9. ~~Contre-attaques~~ — **RÉSOLU côté lecture** (26/08/2026,
+   [`CCharacterBattle_OnReturnFinishDefenderTeam.cs`](./damage-formula-cs/CCharacterBattle_OnReturnFinishDefenderTeam.cs)) :
+   à la fin du tour ennemi, dans l'ordre — (1) un `BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER`
+   dont `CheckProbabilityPermille(buff.Value)` passe lance le skill PASSIF ciblé ;
+   (2) un `BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER` de même lance le S1 ; (3) sinon, si
+   le défenseur a été touché ce tour (`SkillRecord.HitAttacker`) et que
+   `CheckProbabilityPermille(CounterRate)` passe, il contre avec son **S1** contre
+   l'acteur ennemi. Le hit de contre est un S1 ordinaire (§ 7/§ 8) — rien de
+   spécifique à calculer.
+10. ~~Caps de stat par scène~~ — **RÉSOLU** (26/08/2026, C#) : `CDungeonScene.m_StatCapDic`
+    n'est rempli que par `ParseStatCapString(PVPRealTimeScheduleTemplet.TacticsLeaugeStatCap)`
+    — la **Tactics League** (PvP temps réel), chaîne `STAT,valeur,STAT,valeur…` ;
+    aucun contenu PvE ne cape les stats. Hors périmètre.
+11. ~~`GetCriticalStatBuffValues`~~ — **RÉSOLU** (26/08/2026, C#) : les buffs de crit
+    PASSIFS/ON_SPAWN entrent dans `CalcFinalStat` puis cap 1000, les ACTIFS
+    s'appliquent APRÈS le cap (`ApplyRate(core + add, rate)`), re-cap après le plat
+    PvP — § 16. Le moteur applique le cap 1000 sur la stat finale ; l'ordre
+    passif/actif n'est pas distingué (aucune mesure ne le contraint : un scénario
+    qui dépasserait 100 % de crit AVEC des buffs actifs le montrerait).
+12. **`CBattleManager.ProcessDamage` / `ProcessDamageSimulator`** : l'orchestration
+    autour de `CalcDamage` (ordre shield → HP, WG, événements on-damage) n'est pas
+    lue — les formules qu'elle appelle le sont toutes (C# disponible dans
+    `CBattleManager.cs`).
 13. ~~`addRate` de `SetBaseValue`~~ — **RÉSOLU** (04/08/2026, scan exhaustif des
-    stores inlinés 0xC0/0xC4 du binaire + callers de `SetStatValue` 0x29065C0) :
-    la SEULE source combat est `CGuildRaidSpawnData.GetCharacterData`
-    (0x231B804) — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
+    stores `AddRateAtk`/`AddRateDef` du binaire + callers de `SetStatValue`) :
+    la SEULE source combat est `CGuildRaidSpawnData.GetCharacterData` — le scaling du BOSS de guild raid en **overgrade**. Au-delà du
     grade 10, avec `GameConfig.GUILD_RAID_AFTER_10_BOSS_STAT` (enum 149) =
     `[300, 300, 10]` :
     `MaxHP = floor(float32((1 + overGrade × 300 × 0.001f)) × float32(BossMonsterHP))`
@@ -765,33 +917,29 @@ return restant
     l'état de base (sans objets de run) ; l'agrégation exacte n'est pas
     désassemblée — une fixture d'infiltration doit être capturée en début de
     run, sans modificateur actif.
-16. **Écart 1.4.9 → 1.4.14 (13/08/2026) — rédigé, PAS implémenté.** Comparaison
-    des 88 corps normalisés (RVA, pages `adrp` et slots de métadonnées
-    neutralisés) : **72 inchangés**, 13 à allocation de registres près, **3
-    changements de comportement** — tous les trois désassemblés et rédigés :
-    § 8.5 (`IsIgnoreTurnLimitDamage`), § 9.2 (réduction `BT_DOT_PUNISH` via
-    `GameConfig.PUNISH_DMG_REDUCE_VALUE` = 300) et § 14.5 (reverse heal
-    `_ABLE_KILL` + `TrySetDieByReverseHeal`). S'y ajoute la **renumérotation de
-    `BUFF_TYPE`** traitée en § 2.
+16. ~~Écart 1.4.9 → 1.4.14 (13/08/2026) — rédigé, PAS implémenté~~ — **RÉSOLU côté
+    lecture** (26/08/2026, client Steam décompilé en C#). Les trois changements de
+    comportement du patch 1.4.14 (§ 8.5, § 9.2, § 14.5) étaient rédigés depuis
+    l'ASM avec trois inconnues ; le C# les tranche, chacune dans sa section :
+    - **§ 9.2** — les 300 ‰ de `PUNISH_DMG_REDUCE_VALUE` sont des TERMES de la
+      somme (un par `BT_DOT_PUNISH` du défenseur, +1 si l'attaquant en porte un),
+      pas un plafond ;
+    - **§ 8.5** — la quantité accumulée dans `CurrentSkillFactor` est le
+      `DamageFactor` du hit, et l'accumulation est INCONDITIONNELLE : le garde ne
+      gouverne que la limite par tour (la lecture ASM la plaçait sous le garde —
+      corrigée) ;
+    - **§ 14.5** — le « slot virtuel 0x198 » est `CCharacterBattle.SetDie()` ; la
+      branche « peut tuer » des scènes exige la scène **ET** `owner.IsBoss` (l'ASM
+      disait « ou » — corrigée) ; le garde INVINCIBLE d'entrée manquait.
 
-    Ce qui reste ouvert, à ne PAS combler au jugé :
-    - **§ 9.2 — place des 300 ‰.** Les deux `GetGameConfig(215)` sont sur des
-      chemins distincts ; terme additionnel de la somme ou plafond du total,
-      non tranché. Le moteur applique encore l'agrégation 1.4.9.
-    - **§ 8.5 — quantité accumulée** dans `CSkillRecord.CurrentSkillFactor`
-      (`w22` au site d'appel) : définition non atteinte par lecture linéaire,
-      il faut suivre les arcs arrière du bloc.
-    - **§ 14.5 — le slot virtuel 0x198** de `CCharacterBattle` (la mise à mort
-      appelée par `TrySetDieByReverseHeal`) n'est pas résolu en nom.
+    Les deux commentaires du moteur qui portaient les anciens numéros
+    (`recovery.ts`, `types.ts`) sont corrigés le même jour.
 
-    **Le moteur TS n'implémente aucun des trois.** Il n'est pas pour autant
-    faux sur les identifiants : il clé sur les noms de `BUFF_TYPE`, pas sur les
-    entiers. Deux commentaires portent en revanche les anciens numéros et
-    mentent désormais — [`src/lib/damage/recovery.ts:182`](../../src/lib/damage/recovery.ts)
-    (« BT_REVERSE_HEAL_CAP (18) », lire 20) et
-    [`src/lib/damage/types.ts:175`](../../src/lib/damage/types.ts) (« buffs
-    114/115/116 », lire 119/120/121). Laissés en l'état volontairement : cette
-    passe est documentaire, aucun fichier de code n'a été touché.
+    RESTE — de l'implémentation, plus de la lecture : le moteur TS n'implémente
+    ni les termes DOT_PUNISH (§ 9.2 — le seul des trois qui pèse sur un hit de
+    joueur, aucune mesure ne le contraint encore), ni l'exemption world boss
+    (§ 8.5 — limite par tour d'un boss, hors périmètre), ni le reverse heal létal
+    (§ 14.5 — perte de PV, hors périmètre dégâts).
 
 17. **Poses multiples d'un DoT par un même skill — pas de cumul du tick,
     mécanisme non désassemblé.** Le S1 de Gnosis Beth porte DEUX lignes de
@@ -805,24 +953,29 @@ return restant
     25/08/2026 (obs Sevih en jeu) : les instances d'un même DoT COEXISTENT —
     deux CASTS successifs du S1 = deux DoT simultanés qui tickent CHACUN au
     même montant (ni refresh ni cumul de popup, § 11). Reste ouvert : le sort
-    de la 2ᵉ LIGNE (`_1_2`) d'un même cast, et ce qui alimente `_nCount` > 1
-    hors détonation (`StackCount` — aucun cas mesuré ; la détonation, elle,
-    est documentée § 11 : `_nCount` = tours restants). Le moteur garde une
+    de la 2ᵉ LIGNE (`_1_2`) d'un même cast. (`_nCount` est tranché par le C#
+    le 26/08/2026 : 1 au tick périodique, tours restants à la détonation ;
+    `StackCount` multiplie `Value`, § 14.1.) Le moteur garde une
     ligne de tick par (type, tooltip) — le tick d'UNE instance, le bon
     contrat vu la coexistence. Plusieurs poseurs du même type = plusieurs
     popups (confirmé Sevih 25/08). (L'entrée précédente de ce
     numéro — « débuffs passifs ENEMY_TEAM jamais posés » — était FAUSSE :
     artefact d'une ambiguïté numérique levée le jour même par la mesure sans
     EE ; ces débuffs sont posés et lus, cf. § 11.)
-18. **`BT_DMG_TARGET_DEBUFF_LIMIT` (164, NOUVEAU au patch 1.4.15) — sémantique
-    non désassemblée.** Le trans_8 de Demiurge Saeran
-    (`trancendent_8_2000129_2`) a changé de type au patch (était
-    `BT_DMG_TARGET_DEBUFF`). Le nom suggère « dégâts par débuff de la cible,
-    PLAFONNÉ » — jamais deviné : le moteur signale l'entrée `unresolved`
-    (contribution 0, gear.ts : toute famille `BT_DMG*` hors référentiel
-    remonte désormais au lieu d'être écartée en silence comme un soin). À
-    résoudre en désassemblant le nouveau case de `FindBuffDamageUp` § 9.1
-    dans le binaire 1.4.15.
+18. ~~`BT_DMG_TARGET_DEBUFF_LIMIT` (164, nouveau 1.4.15) — sémantique non
+    désassemblée~~ — **RÉSOLU côté lecture** (26/08/2026, C# de
+    `FindBuffAdditionalDamage`, § 9.1) : même contribution que
+    `BT_DMG_TARGET_DEBUFF` (`Value × débuffs VISIBLES de la cible`), mais le
+    cumul de toutes les instances d'un même `BuffID` est PLAFONNÉ à
+    `BuffTemplet.LimitValue` (dictionnaire par ID, local à l'appel) ; jumeau
+    `BT_DMG_TARGET_BUFF_LIMIT` (165) côté buffs. Donnée 1.4.15 : le trans_8 de
+    Demiurge Saeran (`trancendent_8_2000129_2`) est la SEULE ligne de
+    `BuffTemplet` à `LimitValue` non nul — `Value` 200, `LimitValue` 2000 :
+    +20 % par débuff, plafond +200 % (10 débuffs). RESTE — l'implémentation :
+    l'extracteur `datagen/damage/buffs.ts` n'exporte pas `LimitValue`, et le
+    moteur signale encore l'entrée `unresolved` (contribution 0, gear.ts). À
+    brancher : champ `limitValue` dans buffs.json, plafond par ID dans
+    l'agrégation § 9.1 — et une fixture Saeran pour le prouver.
 
 ## 13. À vérifier in-game (phase 2)
 
@@ -838,46 +991,58 @@ return restant
   prime sur REDUCE (un seul des deux s'applique).
 - Le reverse heal laisse à 1 PV hors contenus « létaux » (§ 14.5).
 
-## 14. Soins, shields, reverse heal, WG — CBuff.OnCreate (0x232856C) & AddHP (0x280E4B8)
+## 14. Soins, shields, reverse heal, WG — CBuff.OnCreate, CBuff.OnTurnStart & AddHP
 
 Ces mécaniques ne sont pas dans `CFormula` : ce sont des **buffs**, résolus dans le
-dispatch `CBuff.OnCreate` (~12,7 Ko, table de saut sur BUFF_TYPE 10–81) et appliqués
-via `CCharacterBattle.AddHP`. Listings : `CBuff_OnCreate.asm`, `CCharacterBattle_AddHP.asm`,
-`CBuff_get_Value.asm`, `CBuff_CheckReverseHealCAP.asm`, `CCharacterBattle_SetShieldHP.asm`.
+dispatch `CBuff.OnCreate` (à la pose) et `CBuff.OnTurnStart` (tick périodique — HoT,
+reverse heal, DoT § 11), appliqués via `CCharacterBattle.AddHP`. Listings :
+[`CBuff_OnCreate.cs`](./damage-formula-cs/CBuff_OnCreate.cs),
+[`CBuff_OnTurnStart.cs`](./damage-formula-cs/CBuff_OnTurnStart.cs),
+[`CCharacterBattle_AddHP.cs`](./damage-formula-cs/CCharacterBattle_AddHP.cs),
+[`CBuff_get_Value.cs`](./damage-formula-cs/CBuff_get_Value.cs),
+[`CBuff_CheckReverseHealCAP.cs`](./damage-formula-cs/CBuff_CheckReverseHealCAP.cs),
+[`CCharacterBattle_SetShieldHP.cs`](./damage-formula-cs/CCharacterBattle_SetShieldHP.cs).
 
 ### 14.1 Valeur d'un buff et enhance
 
-- `CBuff.Value` (0x232036C) = `Templet.Value × StackCount` — **linéaire en stacks**,
-  partout (dégâts § 9, soins, shields…).
-- Buffs de stat (BT 29/30 STAT_BUFF/DEBUFF_ENHANCE sur le porteur) : la valeur
-  effective du buff de stat posé devient `ApplyRate(value, enhance.Value)`
-  = `trunc(value × (1000 + enhance) / 1000)` (stockée en `InstanceValue`).
-- BT 33 STAT_OWNER_LOST_HP_RATE : `InstanceValue = GetLostHPRateValue(owner, value)`.
-- BT 34 …_HALF : `hpEff = clamp(2×HP − MaxHP, 0, MaxHP)` puis
-  `GetLostHPRateValue(hpEff)` — le bonus croît deux fois plus vite et sature quand
-  HP ≤ 50 %.
-- Un buff de MaxHP préserve le **ratio de PV** : `HP' = trunc(MaxHP' × HP / MaxHP)`
-  (plein PV reste plein PV).
+- `CBuff.Value` = `Templet.Value × StackCount` — **linéaire en stacks**, partout
+  (dégâts § 9, soins, shields, taux des DoT § 11…).
+- Buffs de stat `BT_STAT` (31) VISIBLES (`Templet.ToolTipID != 0`) : si le porteur a
+  un `BT_STAT_BUFF_ENHANCE` (29 — pour un buff) ou `BT_STAT_DEBUFF_ENHANCE` (30 — pour
+  un débuff), la valeur effective devient `InstanceValue = ApplyRate(Value, enhance.Value)`
+  = `trunc(Value × (1000 + enhance) / 1000)`. Les autres familles de stat
+  (`BT_STAT_PREMIUM` 32, `_TOWER_CONTENT`…) ne sont PAS enhancées.
+- BT 33 STAT_OWNER_LOST_HP_RATE : `InstanceValue = owner.GetLostHPRateValue(Value)`.
+- BT 34 …_HALF : `hpEff = clamp(2×HP − MaxHP, 0, MaxHP)` (calcul `long`) puis
+  `InstanceValue = owner.GetLostHPRateValue(hpEff, Value)` — le bonus croît deux fois
+  plus vite et sature quand HP ≤ 50 %.
+- Un buff de stat sur `ST_HP` préserve le **ratio de PV** : porteur à PV pleins →
+  `AddHP(MaxHP)` après `AddStatBuff` (reste plein) ; sinon
+  `AddHP( (int)((long)MaxHP' × HP / MaxHP) − HP )` — `bIgnoreHealModifier = true` dans
+  les deux cas (ce n'est pas un soin).
 
 ### 14.2 Soins directs (BT 14 HEAL_BASED_CASTER / 15 HEAL_BASED_TARGET)
 
 ```text
-heal = (Templet.StatType != 0)
-         ? GetStatValuePermille(source.Data, StatType, value)   // source = caster (14) ou porteur (15)
-         : value                                                 // valeur plate
-if IsPvp ou IsPvpRealtime:
-  heal = MulPermille(heal, 1000 - scene.pvpHealReduce)   // [scene+0x100] : 0 avant le 1er cycle de
-                                                          // pénalité, puis 500/750/1000 ‰ (§ 12.7, § 17.6)
-healEffectif = AddHP(owner, heal, bHeal=true)             // § 14.3
+heal = value                                                // valeur plate
+if Templet.StatType != ST_NONE:
+  heal = source.Data.GetStatValuePermille(StatType, value)  // source = caster (14) ou porteur (15)
+  if IsPvp ou IsPvpRealtime:
+    heal = MulPermille(heal, 1000 − scene.PvpHealReduceRate) // 0 avant le 1er cycle de pénalité,
+                                                            // puis 500/750/1000 ‰ (§ 12.7, § 17.6)
+healEffectif = AddHP(owner, heal, bHeal = true)             // § 14.3
 SkillRecord.Heal += healEffectif ; CTeam.AddTotalHeal(casterUID, healEffectif)
 ```
 
-Les HoT (soins sur la durée) sont ces mêmes buffs re-déclenchés à chaque tick de tour.
+La réduction PvP ne touche que les soins PAR STAT — un soin plat (`StatType ==
+ST_NONE`) n'est pas réduit (la lecture ASM la plaçait hors de la branche : corrigé le
+26/08/2026). Les HoT sont ces mêmes buffs re-déclenchés à chaque `OnTurnStart`
+(code identique).
 
 ### 14.3 AddHP(value, bHeal, bIgnoreUndead, bIgnoreHealModifier) — modificateurs
 
-Pour `value ≥ 1` (soin), si `!bIgnoreHealModifier` et que le porteur a un buff de
-modification de soins reçus :
+Pour `value > 0` (soin), si `!bIgnoreHealModifier` et que le porteur a un buff de
+modification de soins reçus (`FindBuffeReceiveHeal()`) :
 
 ```text
 if BT_SEALED_RECEIVE_HEAL (7):        return 0            // soin annulé
@@ -886,27 +1051,29 @@ elif BT_REDUCE_RECEIVE_HEAL (9):      value -= MulPermille(value, buff.Value)
 // chaîne elif : INCREASE prime, un seul des deux s'applique
 ```
 
-Puis, inconditionnellement pour les soins :
+Puis, inconditionnellement pour les soins (toujours sous `!bIgnoreHealModifier`) :
 
 ```text
 if IsPvpRealtime: value -= MulPermille(value, match.FieldSkillReduceReceiveHeal)
-if porteur a BT_DOT_BLEED (55): value = MulPermille(value, 500)   // saignement : soins ÷ 2
+if porteur a BT_DOT_BLEED (57): value = MulPermille(value, 500)   // saignement : soins ÷ 2
 ```
 
 Pour `value < 0` (dégâts) : le **shield absorbe d'abord**
-(`shield > |value|` → shield -= |value|, dégâts 0 ; sinon shield = 0 et
-`value += shield`). Enfin `HP = clamp(HP + value, 0, MaxHP)` ; si HP tombe à 0 et
-BT_UNDEAD (111) présent (et `!bIgnoreUndead`) → HP = 1. Retourne le delta effectif
-(c'est lui qui alimente `SkillRecord.Heal`). Le paramètre `bHeal` n'est pas lu dans
-le corps (uniquement transmis par les appelants).
+(`shield > |value|` → `shield += value`, dégâts 0 ; sinon `value += shield`, shield = 0,
+`RemoveBuffShield()`) ; un boss comptabilise `|value|` (`SetBossDamage`, `LoseHP` hors
+rage). Enfin `HP = clamp(HP + value, 0, MaxHP)` ; si HP tombe à 0 et BT_UNDEAD (116)
+présent (et `!bIgnoreUndead`) → HP = 1. **Retourne `value` ajusté** (modificateurs de
+soin, absorption du shield) — PAS le delta de PV clampé : un soin de 500 sur 100 PV
+manquants renvoie 500 (c'est cette valeur qui alimente `SkillRecord.Heal`). Le
+paramètre `bHeal` n'est pas lu dans le corps (uniquement transmis par les appelants).
 
 ### 14.4 Shields (BT 21 SHIELD_BASED_CASTER / 22 SHIELD_BASED_TARGET)
 
 ```text
-shield = (Templet.StatType != 0)
-           ? GetStatValuePermille(source.Data, StatType, value)  // source = caster (19) ou porteur (20)
+shield = (Templet.StatType != ST_NONE)
+           ? source.Data.GetStatValuePermille(StatType, value)  // source = caster (21) ou porteur (22)
            : value
-SetShieldHP(owner, shield)     // REMPLACE m_nShieldHP (aucun cumul), mémorise le max pour la jauge
+SetShieldHP(owner, shield)     // REMPLACE m_nShieldHP (aucun cumul) et pose m_nShieldMax pour la jauge
 ```
 
 Pas de réduction PvP sur les shields. La consommation est dans AddHP (§ 14.3) ;
@@ -914,81 +1081,120 @@ Pas de réduction PvP sur les shields. La consommation est dans AddHP (§ 14.3) 
 
 ### 14.5 Reverse heal (BT 16 …_CASTER / 17 …_TARGET, **18/19 `_ABLE_KILL`**, cap BT 20)
 
+Listings : [`CBuff_OnCreate.cs`](./damage-formula-cs/CBuff_OnCreate.cs) (les deux
+`case`, CASTER et TARGET, symétriques au choix de la source de stat près),
+[`CBuff_TrySetDieByReverseHeal.cs`](./damage-formula-cs/CBuff_TrySetDieByReverseHeal.cs).
+
 ```text
-v = (Templet.StatType != 0) ? GetStatValuePermille(source.Data, StatType, value) : value
+if owner a un buff BT_INVINCIBLE:  effet SYS_BUFF_INVINCIBLE, rien d'autre   // garde d'entrée
+v = value
+if Templet.StatType != ST_NONE:
+  v = source.Data.GetStatValuePermille(StatType, value)   // source = CASTER (16/18) ou OWNER (17/19)
 v = CheckReverseHealCAP(v)     // min(v, plus petit BT_REVERSE_HEAL_CAP (20) dont la condition passe)
 if HP + ShieldHP > v:
-  AddHP(owner, -v, bIgnoreHealModifier…)      // passe par le shield, ignore la mitigation de dégâts
-else:                                          // serait létal
-  if Templet.Type == 18 (BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL):   // ← 1.4.14
-    AddHP(owner, -v)
-    TrySetDieByReverseHeal()                   // tue, PARTOUT, sans condition de scène
-  elif scène ∈ {GuildDungeon, EventChallenge, WorldBoss, MonadGateSingularity} ou owner.IsBoss:
-    AddHP(owner, -v)                           // peut tuer
-  else:
-    AddHP(owner, 1 - (HP + ShieldHP))          // laisse exactement 1 (PV+shield)
+  AddHP(-v)                                    // passe par le shield (§ 14.3)
+elif Type ∈ {18 CASTER_ABLE_KILL, 19 TARGET_ABLE_KILL}:      // ← 1.4.14
+  AddHP(-v)
+  TrySetDieByReverseHeal()                     // tue, PARTOUT, sans condition de scène
+elif scène ∈ {GuildDungeon, EventChallenge, WorldBoss, MonadGateSingularity} ET owner.IsBoss:
+  AddHP(-v)                                    // peut tuer
+else:
+  AddHP(-(HP + ShieldHP - 1))                  // laisse exactement 1 (PV+shield)
+  v = HP_avant + ShieldHP - 1                  // montant AFFICHÉ
+if v != 0: ShowDamage(caster, owner, |v|, crit=false)
 ```
 
 Le reverse heal ignore défense, élément, crit et DMG_REDUCE — c'est une perte de PV
-brute, pas un dégât.
+brute, pas un dégât. `AddHP` est appelé avec ses défauts (`_bHeal=false`,
+`_bIgnoreUndead=false`, `_bIgnoreHealModifier=false`).
 
 **Nouveauté 1.4.14 — le reverse heal peut tuer explicitement.** L'énumération gagne
-`BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL` (18) et `…_TARGET_ABLE_KILL` (19). Quand le
-buff appliqué est de ce type, la branche létale court-circuite entièrement la liste
-de scènes ci-dessus et appelle `CBuff.TrySetDieByReverseHeal` (0x232C11C) :
+`BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL` (18) et `…_TARGET_ABLE_KILL` (19). Pour ces
+deux types la branche létale court-circuite entièrement la liste de scènes et appelle
+`CBuff.TrySetDieByReverseHeal` :
 
 ```text
 TrySetDieByReverseHeal():
   owner = buff.Owner
   if owner.HP != 0:      return          // le AddHP précédent ne l'a pas mis à 0
   if !owner.IsAlive:     return
-  if owner.IsNotDie:     return          // CCharacterBattle+0x2E8
-  owner.<slot virtuel 0x198>(false)      // la mise à mort ; méthode non résolue
+  if owner.IsNotDie:     return
+  owner.SetDie()                         // CCharacterBattle.SetDie(_bReturnEscape = false)
   if owner.TeamType != ENEMY: return
   if !owner.IsBoss:           return
-  owner.GetTeam().BossKill(null)         // CTeam.BossKill — comptabilité de kill de boss
+  owner.GetTeam().BossKill()             // CTeam.BossKill — comptabilité de kill de boss
 ```
 
 Le garde `IsNotDie` est le seul verrou : un porteur marqué « ne meurt pas » survit.
 Le tour de comptabilité `BossKill` ne s'exécute que pour un boss de l'équipe ENNEMIE.
 
+Deux corrections de la lecture ASM (26/08/2026) : la branche « peut tuer » des scènes
+exige la scène **ET** `owner.IsBoss` (l'ASM disait « ou ») ; le « slot virtuel 0x198 »
+est `SetDie()`. Le garde INVINCIBLE d'entrée n'était pas rédigé.
+
+**Variante PÉRIODIQUE** (`CBuff.OnTurnStart`, le même buff aux tours suivants) : même
+calcul, mais les branches létales diffèrent et sont ASYMÉTRIQUES — côté CASTER
+(16/18) : `_ABLE_KILL` tue (`TrySetDieByReverseHeal`), sinon laisse toujours 1 PV,
+sans aucune condition de scène ; côté TARGET (17/19) : `_ABLE_KILL` tue, sinon
+`AddHP(−v)` (peut tuer) en GuildDungeon / EventChallenge et 1 PV ailleurs — sans
+condition `IsBoss`, sans WorldBoss ni MonadGateSingularity.
+
 ### 14.6 Jauge de faiblesse et DOT immédiats
 
-- BT 85 WG_HEAL : `wg += (ApplyingType == 2) ? MulPermille(MaxWG, value) : value`.
-- BT 89 WG_DMG : si la cible peut perdre du WG :
-  `wg -= CalcDamageWG(caster, owner, (ApplyingType == 2) ? MulPermille(MaxWG, value) : value)`.
-- BT 63–69 IMMEDIATELY_(BURN…) : chaque DOT du type correspondant déjà présent sur la
-  cible tick immédiatement à `ApplyRate(dot.Value, value)` = `dot × (1000+value)/1000`
-  (via `CBuffManager.ProcessDamageOverTime`, qui applique ensuite `CalcDamageDOT` § 11).
+- BT 85 WG_HEAL : `wg += (ApplyingType == OAT_RATE) ? MulPermille(MaxWG, value) : value`.
+- BT 86 WG_REVERSE_HEAL (la lecture ASM le nommait « WG_DMG », 89 : corrigé) : si
+  `RageManager.CanReduceWG`, `wg −= CalcDamageWG(caster, owner, (OAT_RATE) ?
+MulPermille(MaxWG, value) : value)` (§ 11) ; sinon le buff n'est pas créé.
+- BT 63–69 IMMEDIATELY_<TYPE> — **détonation**, à la création du buff : `dot =
+ConvertImmediatelyToDot(type)` ([`CBuff_ConvertImmediatelyToDot.cs`](./damage-formula-cs/CBuff_ConvertImmediatelyToDot.cs))
+  ; pour chaque buff de ce type sur la cible :
+  `ProcessDamageOverTime(dot, ApplyRate(dot.Value, Templet.Value), dot.RemainTurnCont, caster)`
+  puis `dot.RemainTurnCont = 0` ; enfin `ClearBuffFinishDuration()`. Le tick complet
+  (formule par type, enhance, caps IMMEDIATELY) est en § 11.
 
 ## 15. Passifs d'équipement (sets, options uniques, EE, artefacts…)
 
 Deux canaux distincts, tous deux côté `CCharacterData` / `CSkillManager` :
 
 1. **Stats chiffrées** (main stat, substats, bonus de set en %) : agrégées par
-   `CCharacterData.CalcStat` / `CalcSetItem` dans les paramètres
+   `CCharacterData.CalcStat` (§ 17.1 — `SetItemOptionsValue(m_EquipDic)` +
+   `SetSetItemValue(m_SetItemDic)` par stat) dans les paramètres
    `itemOptionValue`/`itemOptionValueRate` de `CalcFinalStat` (§ 3). Données :
-   `ItemOptionTemplet.json`. (Mapping détaillé non désassemblé — § 12.2.)
+   `ItemOptionTemplet.json` ; la croissance d'une option principale est en § 17.5.
 
 2. **Passifs à effet** (procs de set, option unique d'une pièce, équipement
    exclusif, ooparts, artefacts…) : ce sont des **`CBuffTemplet` ordinaires**,
    chargés dans des listes dédiées de `CSkillManager` :
    - `InitializeItemUniqueBuff(Weapon, Accessory, Helmet, Armor, Gloves, Shoes,
-Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
+Exclusive, Ooparts)` → `m_ItemBuffTempletList` ;
    - `CCharacterData.CreateBuffSetItem` → `InitializeItemSetBuff` →
-     `m_ItemSetBuffTempletList` (0x20) ;
-   - `SetArtifactBuffTempletList` (0x28) et les listes de contenu (guild raid,
-     PvP league, nœuds d'éveil, infiltration, Monad gate, leader PvP temps réel,
-     daily gift — offsets 0x30…0x60).
+     `m_ItemSetBuffTempletList` ;
+   - `m_ArtifactBuffTempletList` et les listes de contenu : `m_GuildRaidBuffTempletList`,
+     `m_PvpLeagueBuffTempletList`, `m_PVPRealTimeLeaderBuffTempletList`,
+     `m_AwakeningNodeBuffTempletList` (nœuds d'éveil IOT_BUFF, § 17.4),
+     `m_InfiltrateBuffTempletList`, `m_MonadGateBuffTempletList`,
+     `m_DailyGiftBuffTempletList`.
 
-   Le collecteur central `CSkillManager.GetBuffList` (RVA 0x2510400, listing
-   `CSkillManager_GetBuffList.asm`) parcourt, dans cet ordre : les buffs des
-   skills (`m_SkillList`) **puis toutes ces listes**, filtrés par
-   `IsBuffCreateType` (le moment, enum `BUFF_CREATE_TYPE` : 1–2 PASSIVE, 3–4
-   ON_SPAWN, 5 ON_TURN, 6–11 SKILL_START/FINISH, 16 DAMAGE, 17 AVOID, 18 DIE,
-   20–25 CHAIN, 26 ON_BREAK, 27 ON_RESIST…) et `IsCallerSkillType`. Les wrappers
-   `GetBuffListOn*` fixent juste le `BUFF_CREATE_TYPE` (ex. `OnSpawn` = types 3
-   puis 4).
+   Le collecteur central `CSkillManager.GetBuffList(skillType, isPassiveSkill,
+createType, ref list)` ([`CSkillManager_GetBuffList.cs`](./damage-formula-cs/CSkillManager_GetBuffList.cs))
+   parcourt, dans cet ordre : les buffs des skills (`m_SkillList` entier si
+   `SKT_ALL`, sinon le skill demandé), puis — si `isPassiveSkill` — ceux des skills
+   passifs et du `SKT_UNIQUE_PASSIVE` (dédoublonnés), **puis toutes les listes
+   ci-dessus**, chaque templet filtré par `IsBuffCreateType(createType)` (le moment,
+   enum `BUFF_CREATE_TYPE` : 1–2 PASSIVE/PASSIVE2, 3–4 ON_SPAWN/ON_SPAWN2, 5 ON_TURN,
+   6–11 SKILL_START…SKILL_FINISH_IMMEDIATELY, 12–15 ON_TURN_END_\*/ON_TURN_CHANGE,
+   16 DAMAGE, 17 AVOID, 18 DIE, 19–24 CHAIN\_\*, 25 ON_BREAK, 26 ON_RESIST,
+   27 ON_GOLDEN_CURSE_BUFF_REMOVE) et `IsCallerSkillType(skillType)`. Les wrappers
+   `GetBuffListOn*` fixent juste le `BUFF_CREATE_TYPE`
+   ([`CSkillManager_GetBuffListOnSpawn.cs`](./damage-formula-cs/CSkillManager_GetBuffListOnSpawn.cs) :
+   `SKT_NONE`, passifs, ON_SPAWN puis ON_SPAWN2).
+
+   **Exclusion structurelle** (C#, 26/08/2026) : dans les listes de skills,
+   d'items, de nœuds d'éveil, d'infiltration, de Monad et de daily gift, un
+   `BT_STAT_PREMIUM` visant `ME` n'est JAMAIS collecté comme buff de combat — il
+   passe par `m_StatPremiumBuffList` (`SetBuffPremiumValue`, § 17.1), la voie qui le
+   met dans la fiche (§ 16.1). Les listes de sets, d'artefacts, de guild raid et de
+   PvP n'ont pas cette exclusion.
 
    **Conséquence pour le calculateur : un passif d'équipement instancié est un
    `CBuff` comme un autre** — il passe par les mêmes agrégations que les buffs de
@@ -997,9 +1203,10 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 
    Particularité : les buffs d'équipement portant un `BuffCool` sont gardés par
    `m_EquipItemBuffCoolList` (dictionnaire par BuffID) — `CheckItemBuffCool`
-   (0x2513824) refuse le déclenchement tant que `compteur < BuffCool` puis le
-   remet à zéro ; `AddItemBuffCool` incrémente le compteur (cadence
-   d'incrémentation non désassemblée).
+   ([`CSkillManager_CheckItemBuffCool.cs`](./damage-formula-cs/CSkillManager_CheckItemBuffCool.cs))
+   laisse passer un BuffID absent du dictionnaire, sinon exige `CCustomBuffCool.CanUse()`
+   (vrai si `Cool == 0`, sinon si `CurrentCool ≥ Cool`) puis remet le compteur à zéro
+   (`Zero()`) ; la cadence d'incrémentation de `CurrentCool` n'est pas lue.
 
 > RÉALISÉ (05/08/2026) : `src/lib/damage/gear.ts` — le canal 2 (buffs) est
 > branché pour l'ÉQUIPEMENT DU PORTEUR : arme, accessoire (niveau de buff
@@ -1012,8 +1219,8 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 > combat × % saisis). Procs damage-pertinents : signalés `dynamic`, jamais
 > simulés (le marking de Rampaging Caracal se coche en chip d'état).
 > `MY_TEAM_WITHOUT_ME` (Absolute Music) : jamais appliqué au porteur, affiché
-> inactif. `BT_WG_*` → non résolu § 12.3 ; conditions non évaluables § 12.1 →
-> non résolu, contribution 0.
+> inactif. `BT_WG_*` → jauge de faiblesse, hors périmètre dégâts (agrégation lue
+> § 11 / § 12.3) ; conditions non évaluables § 12.1 → non résolu, contribution 0.
 >
 > RÉALISÉ (23/08/2026) — **buffs d'ALLIÉS** : les MÊMES résolveurs (kit + EE)
 > tournent en « mode allié » pour chaque membre déclaré (`gear.ts`,
@@ -1124,8 +1331,8 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 >   la même règle que le porteur.
 >
 > Condition `TARGET_ELEMENT` PROUVÉE : `BuffConditionValue` =
-> `CHARACTER_ELEMENT_TYPE` de la CIBLE (dump.cs : EARTH=0, WATER=1, FIRE=2,
-> LIGHT=3, DARK=4 ; valeur absente = 0 = terre). Corroborations : la desc
+> `CHARACTER_ELEMENT_TYPE` de la CIBLE (`CHARACTER_ELEMENT_TYPE.cs` : EARTH=0,
+> WATER=1, FIRE=2, LIGHT=3, DARK=4 ; valeur absente = 0 = terre). Corroborations : la desc
 > officielle de l'EE 2000019 (« damage dealt to Fire enemies ») porte la
 > valeur 2 = CET_FIRE ; les mains d'EE `BID_CEQUIP_MAIN_DMG_<EL>` visent
 > l'élément que le porteur BAT (feu → terre…), les armes de Singularité
@@ -1134,72 +1341,93 @@ Exclusive, Ooparts)` → `m_ItemBuffTempletList` (0x18) ;
 
 ## 16. Couches contextuelles au-dessus de CalcFinalStat — CStatValue (audit de couverture)
 
-La stat lue en combat est `CStatValue.GetFinalValue` (0x29FBD34), pas la sortie brute
-de `CalcFinalStat`. Chaîne exacte (`CStatValue_SetFinalValue.asm` / `_GetFinalValue.asm`) :
+La stat lue en combat est `CStatValue.GetFinalValue`, pas la sortie brute de
+`CalcFinalStat`. Listings : [`CStatValue_SetFinalValue.cs`](./damage-formula-cs/CStatValue_SetFinalValue.cs),
+[`CStatValue_GetFinalValue.cs`](./damage-formula-cs/CStatValue_GetFinalValue.cs),
+[`CCharacterData_GetCriticalStatBuffValues.cs`](./damage-formula-cs/CCharacterData_GetCriticalStatBuffValues.cs).
+Chaîne exacte :
 
 ```text
-SetFinalValue():                              // au recalcul (dirty)
-  final = CalcFinalStat(les 13 paramètres)    // § 3
-  core  = CalcFinalStat(base, spawn, évo, éveil, éveilRate, 0, 0, 0, 0, 0, 0, 0, 0)
-  m_nEquipIncrementValue = final − core       // SORTIE : part monad/trans/archive/items/buffs
-                                              // (consommée par l'UI/CP, pas une entrée)
-  final += m_nPvpRealtimeFieldSkillValue      // field skills PvP temps réel : bonus PLAT additif
+SetFinalValue():                                    // au recalcul (dirty)
   if type == ST_CRITICAL_RATE (7):
-    final = max(0, min(final, 1000))          // CAP DUR : 100 % de taux critique
-                                              // (le type 7 a aussi une branche dédiée où les
-                                              //  buffs de crit passent par GetCriticalStatBuffValues)
+    (addP, rateP) = owner.GetCriticalStatBuffValues(passifs = true)   // buffs de crit PASSIFS/ON_SPAWN
+    core  = CalcFinalStat(…les 11 autres paramètres…, addP, rateP)    // les passifs DANS la formule (§ 3)
+    core  = clamp(core, 0, 1000)                                       // CAP DUR : 100 % de taux critique
+    (addA, rateA) = owner.GetCriticalStatBuffValues(passifs = false)  // buffs de crit ACTIFS (skills, procs…)
+    final = max(0, ApplyRate(core + addA, rateA))                      // appliqués APRÈS le cap
+  else:
+    final = CalcFinalStat(les 13 paramètres)        // § 3
+  m_nEquipIncrementValue = final − CalcFinalStat(base, spawn, évo, éveil, éveilRate, 0, 0, 0, 0, 0, 0, 0, 0)
+                                                    // SORTIE : part monad/trans/archive/items/buffs (UI/CP)
+  final += m_nPvpRealtimeFieldSkillValue            // field skills PvP temps réel : bonus PLAT additif
+  if type == ST_CRITICAL_RATE: final = clamp(final, 0, 1000)   // re-cap après le plat PvP
 
 GetFinalValue():
-  if m_nTempMaxValue != -1: return m_nTempMaxValue        // OVERRIDE total (synchro de niveau)
+  if m_nTempMaxValue != -1: return m_nTempMaxValue  // OVERRIDE total (synchro de niveau)
   if dirty: SetFinalValue()
-  if scene.StatCapDict[scene+0x168] contient le STAT_TYPE :
-    return min(m_nFinalValue, cap)                        // cap de stat PAR CONTENU
-  return m_nFinalValue
+  if scene != null && scene.m_StatCapDic contient le type: return min(final, cap)   // § 12.10
+  return final
 ```
 
-Vérifications de couverture par scan exhaustif des `bl` du binaire
-(`.gamedata/apk/find_callers.py`) :
+`GetCriticalStatBuffValues(passifs)` (§ 12.11, LEVÉE le 26/08/2026) parcourt
+`m_StatBuffList` (les `CBuff` de stat — `InstanceValue` si `IsUseInstanceValue`, sinon
+`Value`) et `m_StatPremiumBuffList` (templets premium, `Value`) sur `ST_CRITICAL_RATE` ;
+un buff est « passif » si `BuffCreateType ∈ {PASSIVE, PASSIVE2, ON_SPAWN, ON_SPAWN2}` ;
+`OAT_ADD` alimente `add`, `OAT_RATE` alimente `rate`. Les taux de crit actifs d'un
+buff de skill s'appliquent donc SUR une valeur déjà capée à 1000 — puis le total est
+re-capé.
 
-- **`get_Accuracy` (ST_ACCURACY, 13) : ZÉRO appelant** — la précision n'est lue par
-  aucun code de combat en 1.4.9 (l'esquive ne roll que sur l'Avoid § 7 ; le
-  « toucher » des effets, c'est BUFF_CHANCE/BUFF_RESIST § 5). Elle ne peut agir que
-  si un buff dynamique la référence par StatType.
-- `get_Avoid` : 1 seul appelant = `CheckDamageRate` ✓ (couverture § 7 confirmée).
-- `get_BuffChance`/`get_BuffResist` : consommées par `CBuff.Initialize` (le
-  `CheckResist` § 5 se joue à la pose du buff) et par `CalcBattlePower`.
-- `get_CounterRate` (ST_COUNTER_RATE, 22) : 1 appelant,
-  `CCharacterBattle.OnReturnFinishDefenderTeam` — le roll de contre-attaque, non
-  désassemblé (§ 12.9).
+Sous-classes : `CCustomBossStatValue.GetFinalValue` renvoie la BASE brute pour `ST_HP`
+([`CStatValue_GetFinalValue_ovr1.cs`](./damage-formula-cs/CStatValue_GetFinalValue_ovr1.cs),
+§ 3.2) ; `CSkillDungeonStatValue.GetFinalValue` renvoie 0 pour `ST_SPEED`
+([`CStatValue_GetFinalValue_ovr2.cs`](./damage-formula-cs/CStatValue_GetFinalValue_ovr2.cs)).
+
+Vérifications de couverture par grep du C# (26/08/2026 — elles remplacent le scan
+des `bl` du binaire du 13/08) :
+
+- **`Accuracy` (ST_ACCURACY, 13) : ZÉRO consommateur** hors `CCharacterData` — la
+  précision n'est lue par aucun code de combat (l'esquive ne roll que sur l'Avoid
+  § 7 ; le « toucher » des effets, c'est BUFF_CHANCE/BUFF_RESIST § 5). Elle ne peut
+  agir que si un buff dynamique la référence par StatType.
+- `Avoid` : un seul consommateur, `CheckDamageRate` ✓ (couverture § 7 confirmée).
+- `BuffChance`/`BuffResist` : `CheckResist` (§ 5) n'a qu'un appelant,
+  `CBuff.Initialize` — le test se joue à la POSE du buff, et seulement si
+  `!Templet.IsIgnoreResist` (un buff peut ignorer la résistance) ; le reste des
+  usages est `CalcBattlePower`.
+- `CounterRate` (ST_COUNTER_RATE, 22) : un appelant,
+  `CCharacterBattle.OnReturnFinishDefenderTeam` (§ 12.9).
 - `CalcDamage` : 2 appelants — `CBattleManager.ProcessDamage` et
   `ProcessDamageSimulator` (chemin « simulateur » identique, utilisé pour les
-  prévisualisations/IA). `CheckDamageRate` : 1 appelant (`UseSkill`).
-- `CalcFinalStat` : uniquement `CStatValue` (le pipeline ci-dessus est le seul).
+  prévisualisations/IA). `CheckDamageRate` : 3 appelants (`UseSkill` et le
+  simulateur). `CalcFinalStat` : uniquement `CStatValue` (le pipeline ci-dessus est
+  le seul).
 
-Audit d'exhaustivité de la classe `CFormula` (dump.cs, TypeDefIndex 7258) — les
-19 méthodes sont toutes comptabilisées :
+Audit d'exhaustivité de la classe `CFormula` (`CFormula.cs`, 22 méthodes statiques +
+une fonction locale) — toutes comptabilisées :
 
 | Méthode                                                      | Statut                                                              |
 | ------------------------------------------------------------ | ------------------------------------------------------------------- |
 | CalcStat                                                     | § 3.1                                                               |
 | CalcFinalStat                                                | § 3                                                                 |
-| CheckProbability / …Percent / …Permille                      | § 4 (wrappers vérifiés : `b` vers 0x2CB1C0C avec max=100/1000)      |
+| CheckProbability / …Percent / …Permille                      | § 4                                                                 |
 | CheckResist                                                  | § 5                                                                 |
 | GetElementSuperiority / GetElementeryDamageRate              | § 6                                                                 |
 | CheckDamageRate / AddCheckEnemyTeamDecreaseDamageRate        | § 7                                                                 |
-| CalcDamage + helper local `g__CalcDamage\|17_0`              | § 8                                                                 |
+| CalcDamage + fonction locale `CalcDamage(int)`               | § 8                                                                 |
+| IsIgnoreTurnLimitDamage                                      | § 8.5                                                               |
 | CalcDamageDOT / CalcDamageWG / CalcCharacterSharedDamage     | § 11                                                                |
 | InitRandomSeed / GetRandomRange ×2 / GetBattleRandomRange ×2 | RNG — tirages injectés dans le moteur (§ 4)                         |
 | Approximately                                                | comparaison float à tolérance, aucun appel dans les formules        |
-| CalcBattlePower (0x2CB1D08)                                  | **hors périmètre** : calcul du CP affiché, ne touche pas aux dégâts |
+| CalcBattlePower                                              | **hors périmètre** : calcul du CP affiché, ne touche pas aux dégâts |
 
 Ce qui s'applique **hors combat vs en combat** :
 
 - Permanents (partout, via CalcFinalStat) : évolution, éveil, monad, transcendance,
   archive, items ; les stats affichées hors combat = même pipeline sans `buffVal`/`buffRate`.
 - Combat/contenu uniquement : buffs (§ 9/14/15), pénalités PvP (soins § 14.2, ATK
-  § 12.7), field skills PvP temps réel (plat, ci-dessus), caps de stat par scène,
-  override synchro (`TempMaxValue`), avantage d'apparition (`spawnAdvantageRate`,
-  monstres PvE), listes de buffs par contenu (§ 15).
+  § 12.7), field skills PvP temps réel (plat, ci-dessus), caps de stat de la Tactics
+  League (§ 12.10), override synchro (`TempMaxValue`), avantage d'apparition
+  (`spawnAdvantageRate`, monstres PvE), listes de buffs par contenu (§ 15).
 - Jamais en combat : ST_GET_GOLD_RATE (20), ST_GET_CHARACTER_EXP_RATE (21)
   (économie), et de fait ST_ACCURACY (13).
 
@@ -1278,9 +1506,8 @@ la défactorisation le reconstruit avec une ambiguïté de ±1 (±2 sur la stat 
 combat) quand `Rp > 0` — nulle quand `Rp = 0`. Le moteur a donc besoin de : la
 fiche saisie, la stat de base recalculée, le niveau de Codex, le palier
 d'affinité, les taux premium collectés (kit/EE/quirks/artefacts) et les buffs
-du scénario. (Re-vérification du 27/07/2026 : la formule § 3 a été re-dérivée
-indépendamment depuis `CalcFinalStat.asm` — conforme, y compris le clamp `bic`
-et les troncatures vers zéro.)
+du scénario. (Re-vérification du 27/07/2026 depuis l'ASM, puis du 26/08/2026 depuis
+`CalcFinalStat.cs` — conforme, clamp et troncatures vers zéro compris.)
 
 > RÉALISÉ (03/08/2026, amendé 18/08/2026) : `src/lib/damage/sheet.ts`
 > (`sheetToCombatStat`, `archiveTerm`, `sheetToCombatStatAtLevel`) — l'identité
@@ -1292,26 +1519,32 @@ et les troncatures vers zéro.)
 > NB pour l'amont : le terme Codex exige la stat de BASE, donc le NIVEAU de
 > l'attaquant — l'UI ne le demande pas encore (défaut 120 à prévoir).
 
-### 16.2 Buff de guilde (event buff MAX_HP) — get_MaxHP (0x2901A30), 04/08/2026
+### 16.2 Buff de guilde (event buff MAX_HP) — get_MaxHP, 04/08/2026
 
 Signalé par Sevih (le « buff de guilde » n'est pas actif dans tous les modes) ;
-chaîne ENTIÈRE vérifiée au binaire :
+chaîne ENTIÈRE lue — listings [`CBuffSystemManager_CheckMaxHPEvent.cs`](./damage-formula-cs/CBuffSystemManager_CheckMaxHPEvent.cs),
+[`CCharacterData_get_MaxHP.cs`](./damage-formula-cs/CCharacterData_get_MaxHP.cs) :
 
 ```text
-// Au CHARGEMENT du donjon (CDungeonScene.<LoadResource>d__247.MoveNext,
-// 0x25ABC8C) — seul appelant dans tout le binaire :
-rate = CBuffSystemManager.CheckMaxHPEvent(dungeonMode, dungeonPlayMode, areaID)
-CCharacterData.MaxHPRate = rate                       // str s0, [x20, #0x120]
-// remis à neutre par ResetMaxHPRate (CStateResult.OnStart, fin de combat)
+// Au CHARGEMENT du donjon (itérateur CDungeonScene.LoadResource), pour chaque
+// perso de l'équipe utilisateur :
+CharacterData.MaxHPRate = CBuffSystemManager.CheckMaxHPEvent(DungeonTemplet.DungeonMode,
+                                                              DungeonTemplet.DungeonPlayMode,
+                                                              DungeonTemplet.AreaID)
+// remis à 1f en fin de combat ; recopié tel quel à la synchro de CCharacterData (CStateBattle)
 
-// CBuffSystemManager.CheckMaxHPEvent (0x24A6F5C) :
-sum  = Σ CEventBuffGroupData.CheckMaxHPEvent(...)     // par groupe de buff actif
-     + (buff de ZONE type EBT_MAX_HP=5 si areaID matche et playMode ≠ 2)
-rate = float32(sum + 100) × 0.01f                     // constante 0.01f à 0x1056648
+CheckMaxHPEvent(mode, playMode, areaID):
+  sum = Σ CEventBuffGroupData.CheckMaxHPEvent(mode, playMode, areaID)   // groupes de buff système ACTIFS
+  titre = UserNickNameTemplet[CPlayer.SelectedUserTitleID]
+  if titre.BuffSystemGroupID != 0 && playMode != DPM_PVP
+     && BuffSystemTemplet[groupe].IsEnableDungeonMode(mode) && .BuffType == EBT_MAX_HP:
+    sum += BuffValue                                                    // le buff du TITRE sélectionné
+  return (float)(100 + sum) × 0.01f
 
-// CCharacterData.get_MaxHP (0x2901A30) :
-MaxHP = floor(float32(MaxHPRate × float32(HP_final)))  // scvtf/fmul/frintm
-        // HP_final = la stat § 16/§ 3 ; float32 exact tant que HP < 2^24
+CCharacterData.MaxHP (get):
+  hp = StatDic[ST_HP].GetFinalValue()             // la stat § 16 / § 3
+  if scene.IsWorldBoss && Templet.IsBoss(): hp = Hud.GetBossGauge().WorldBossMaxHP   // PV serveur du world boss
+  return FloorToInt((float)hp × MaxHPRate)        // float 32 bits, exact tant que hp < 2^24
 ```
 
 **La donnée** (`BuffSystemTemplet` via `GuildBuffTemplet.BuffGroupID` →
@@ -1342,8 +1575,11 @@ stores binaires de `MaxHPRate`) : UNE seule autre ligne existe — groupe 65,
 « Title Buff [Premium Body] » (`SYS_BUFF_USERNICKNAME_LICENSE_04`) :
 **+5 % PV max**, modes `DM_NORMAL`, `DM_RAID_1`, `DM_RAID_2`,
 `DM_ADVENTURE_MISSION`, `DM_ADVENTURE_CHALLENGE`. Aucune table CLIENT ne
-l'accorde (ce n'est pas un titre de `UserNickNameTemplet`) : buff poussé par le
-SERVEUR — vraisemblablement le pass Story License premium. Il se CUMULE avec le
+l'accorde : le C# lit bien le `BuffSystemGroupID` du TITRE SÉLECTIONNÉ
+(`UserNickNameTemplet`), et 24 des 51 titres de 1.4.15 en portent un — mais AUCUN ne
+référence le groupe 65 (vérifié dans la table, 26/08/2026). Le chemin existe côté
+client pour un titre qui reste à accorder (vraisemblablement le pass Story License
+premium, poussé par le serveur). Il se CUMULE avec le
 buff de guilde dans la somme du manager (listes de modes différentes : lui ne
 couvre ni side story/gold/farming/tour/donjon de guilde ; la guilde ne couvre
 pas les modes Adventure). Les event buffs des ~24 autres types
@@ -1385,17 +1621,20 @@ dégâts, ex. buffs génériques `1`/`2`/`3` : `BT_DMG_REDUCE OAT_RATE` −150/+
 +500 conditionnés à l'élément de l'attaquant).
 
 **Conditions élémentaires** : `ATTACKER_ELEMENT_WIN/EQUAL/LOSE`
-(`BUFF_CONDITION_TYPE` 123-125) s'évaluent par `CheckElementWin` →
-`ELEMENT_SUPERIORITY_TYPE`, enum à TROIS valeurs (`ATTACKER_WIN`/`EQUAL`/
+(`BUFF_CONDITION_TYPE` 140–142 en 1.4.15) s'évaluent par `CheckElementWin(attaquant)`
+([`CCharacterBattle_CheckElementWin.cs`](./damage-formula-cs/CCharacterBattle_CheckElementWin.cs)
+— la supériorité FORCÉE par buff de l'attaquant compte, pas l'infériorité forcée)
+→ `ELEMENT_SUPERIORITY_TYPE`, enum à TROIS valeurs (`ATTACKER_WIN`/`EQUAL`/
 `ATTACKER_LOSE`) : **EQUAL est le « ni avantage ni désavantage »** (couvre
 même-élément ET les hors-cycle type lumière vs terre), pas « même élément ».
 C'est la MÊME relation que le taux élémentaire § 6 — corroboré par la desc du
 passif (le monde y est partagé en « Fire / non-Fire » pour un boss terre).
 
-**`TARGET_ELEMENT` (`BUFF_CONDITION_TYPE` 104)** — désassemblé le 24/08/2026 :
-le case appelle `CCharacterBattle.CheckElementEqual(cible, ConditionValue)`
-(0x2829FE4, 40 octets) = **égalité STRICTE** `get_Element(cible) ==
-ConditionValue` (enum `CET_*` : 3 = Lumière). La « cible » d'un buff porté par
+**`TARGET_ELEMENT` (`BUFF_CONDITION_TYPE` 104)** — désassemblé le 24/08/2026, relu en
+C# : le case appelle `CCharacterBattle.CheckElementEqual(ConditionValue)` sur la cible
+([`CCharacterBattle_CheckElementEqual.cs`](./damage-formula-cs/CCharacterBattle_CheckElementEqual.cs))
+= **égalité STRICTE** `cible.Data.Element == (CHARACTER_ELEMENT_TYPE)ConditionValue`
+(3 = Lumière). La « cible » d'un buff porté par
 un BOSS est l'ATTAQUANT. Preuve in-game (fixture `gnosisbeth-arsnova`) : le
 passif d'Ars Nova « The Boy Who Dreamed of Becoming a Musician » (skill
 monstre `132305`) porte `7` (+300 `ATTACKER_ELEMENT_EQUAL`) ET `9` (−450
@@ -1415,8 +1654,8 @@ Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage �
 > dans `attackerBuffs`/`defenderBuffs` (le crit forcé passe par le canal
 > § 16.1 → la branche critique devient P = 1 dès que la CHC est saisie) et
 > expose `result.bossPassives` (harnais). NON appliqué et SIGNALÉ
-> (`unresolved`, contribution 0) : `BT_WG_DMG_REDUCE` (agrégation jauge non
-> désassemblée § 12.3), conditions non élémentaires, `BT_STAT` sur le boss
+> (`unresolved`, contribution 0) : `BT_WG_DMG_REDUCE` (jauge de faiblesse, hors
+> périmètre — agrégation lue § 11), conditions non élémentaires, `BT_STAT` sur le boss
 > (canal défenseur non consommé — aucun cas statique en 1.4.9). Ignorés
 > silencieusement (documenté) : `BT_DMG*` sortants du boss (le rapport ne
 > calcule jamais les dégâts de la cible) et les soins/CP/boucliers. Côté UI,
@@ -1424,114 +1663,175 @@ Toute autre condition (`OWNER_HAS_BUFF` — le WG reduce sous bouclier de rage �
 > affiche les chips AUTO « passif du boss » (nom localisé du skill, jamais
 > togglables, état actif/inactif selon l'élément de l'attaquant courant).
 
-## 17. Agrégation des couches — CCharacterData.CalcStat (0x2904780) et satellites
+## 17. Agrégation des couches — CCharacterData.CalcStat et satellites
 
-Le mapping templet → 13 paramètres de CalcFinalStat, extrait fonction par fonction
-(listings `CCharacterData_*.asm`, `CStatValue_SetAwakeningNodeStatValue.asm`,
-`CItem*.asm`).
+Le mapping templet → 13 paramètres de CalcFinalStat, lu fonction par fonction
+(listings `CCharacterData_*.cs`, `CStatValue_SetAwakeningNodeStatValue.cs`,
+`CStatValue_SetMonadGateEnchantNodeStatValue.cs`, `CItem*.cs`).
 
-### 17.1 Orchestration (CalcStat, 876 o)
+### 17.1 Orchestration (CalcStat)
+
+Listing : [`CCharacterData_CalcStat.cs`](./damage-formula-cs/CCharacterData_CalcStat.cs).
 
 ```text
 CalcStat():
   CalcBasicStats()                        // § 17.2 — base par niveau, par stat
-  si Templet.Type == CT_PC:
+  si Type == CT_PC:
     CalcEvolutionStats()                  // § 17.3
     CalcTranscendentStarStats()           // taux HP/ATK/DEF de CharacterTranscendentTemplet
     CalcArchiveStats()                    // § 17.3
   CalcSetItem()                           // options d'items + sets (§ 15/17.5)
-  pour chaque stat: SetItemOptionValue / SetBuffValue…  // agrégats par stat
+  pour chaque stat :
+    SetItemOptionsValue(m_EquipDic)       // itemVal / itemRate
+    SetSetItemValue(m_SetItemDic)
+    SetBuffValue(m_StatBuffList)          // buffVal / buffRate (les CBuff de stat)
+    SetBuffPremiumValue(m_StatPremiumBuffList)   // les BT_STAT_PREMIUM `ME` — la voie « fiche » (§ 15, § 16.1)
   CreateBuffSetItem()                     // buffs de sets (§ 15)
   CalcPvpRealtimeFieldSkillStats()        // bonus plat § 16
   CalcAwakeningNodeStats()                // § 17.4 — l'éveil passe EN DERNIER
 ```
 
-### 17.2 CalcBasicStats (0x2906660) — appels SetBaseValue par stat
+Les nœuds MONAD ne sont pas dans cette chaîne : `CalcMonadGateEnchantNodeStats` est
+appelé quand la liste est posée (`SetMonadGateEnchantNodeNodes`), ses valeurs restent
+dans `CStatValue` et entrent dans `CalcFinalStat` au recalcul suivant.
 
+### 17.2 CalcBasicStats — appels SetBaseValue par stat
+
+Listings : [`CCharacterData_CalcBasicStats.cs`](./damage-formula-cs/CCharacterData_CalcBasicStats.cs),
+[`CCharacterData_CalcBasicStatHp.cs`](./damage-formula-cs/CCharacterData_CalcBasicStatHp.cs).
 Chaque stat reçoit `SetBaseValue(min, max, level, spawnAdv, addRate, this)` (§ 3.2)
 avec les paires Min/Max du CharacterTemplet. Particularités :
 
-- `spawnAdv` n'est passé que pour ATK/DEF/HP/SPEED, depuis les champs
-  `SpawnAdvantageRate{Atk,Def,HP,Spd}` (remplis par les colonnes
-  `SpawnAdvantageRate_*` des tables de contenu — monstres).
-- `addRate` n'existe que pour ATK (`AddRateAtk`, 0xC0) et DEF (`AddRateDef`, 0xC4) —
-  posés par `SetStatValue(ST_ATK|ST_DEF, v)`, dont la seule source combat est
-  l'overgrade du boss de guild raid (§ 12.13, RÉSOLU) ; défaut 0.
-- Les stats sans paire Min/Max partent de 0.
+- `spawnAdv` n'est passé que pour HP/ATK/DEF/SPEED, depuis les champs
+  `SpawnAdvantageRate{HP,Atk,Def,Spd}` (remplis par les colonnes
+  `SpawnAdvantageRate_*` des tables de contenu — monstres). Le HP passe par
+  `CalcBasicStatHp()`, méthode `virtual` séparée — `CCustomBossData` la surcharge en
+  `SetBaseValue(m_StartDamage, m_MaxDamage, level)` (sans spawnAdv ni addRate).
+- `addRate` n'existe que pour ATK (`AddRateAtk`) et DEF (`AddRateDef`) — posés par
+  `SetStatValue(ST_ATK|ST_DEF, v)`, dont la seule source combat est l'overgrade du
+  boss de guild raid (§ 12.13, RÉSOLU) ; défaut 0.
+- Toutes les stats ont une paire Min/Max dans le templet (WG, DMG_REDUCE_RATE, crit,
+  pierce, vampiric, hit recovery, accuracy, avoid, buff chance/resist, AP, gold/exp,
+  counter, avoid caps, DMG_BOOST, E_CRI_DMG_REDUCE) — une stat non renseignée vaut 0.
 
 ### 17.3 Évolution (cumulative) et archive
 
-- `GetEvolutionStat(this, cumulatif=1, 0)` (0x2908A60) : parcourt les lignes
-  `CharacterEvolutionStatTemplet` du perso et **somme** les `RewardValue_i` de
-  TOUTES les lignes avec `EvolutionLevel ≤ niveau d'évolution courant`
-  (`AddEvolutionStatToDictionary` : `dict[stat] += value`). Valeurs **plates**.
-- `CalcArchiveStats` (0x2907B28) : ligne `CharacterArchiveStatTemplet` d'ID
-  `ArchiveStatID` → `SetArchiveStatValueRate` sur ATK (+0x14), DEF (+0x16),
-  HP (+0x18) — **taux**, ces trois stats seulement.
-- `CalcTranscendentStarStats` (0x29078DC) : ligne `(BasicStar, TransStar)` de
-  `CharacterTranscendentTemplet` → taux `RewardHPRate`/`RewardAtkRate`/
-  `RewardDefRate` sur HP/ATK/DEF — confirme § 3 (les autres stats → 0).
+- `GetEvolutionStat(checkTotal = true, target = 0)`
+  ([`CCharacterData_GetEvolutionStat.cs`](./damage-formula-cs/CCharacterData_GetEvolutionStat.cs)) :
+  parcourt les lignes `CharacterEvolutionStatTemplet` du perso et **somme** les
+  `RewardValue_1..3` (par `RewardStatType_1..3` non NONE) de TOUTES les lignes avec
+  `EvolutionLevel ≤ niveau d'évolution courant` (`AddEvolutionStatToDictionary` :
+  `dict[stat] += value`). Valeurs **plates**. (`checkTotal = false` : la seule ligne
+  `== target`, usage UI.)
+- `CalcArchiveStats` ([`CCharacterData_CalcArchiveStats.cs`](./damage-formula-cs/CCharacterData_CalcArchiveStats.cs)) :
+  ligne `CharacterArchiveStatTemplet` d'ID `ArchiveStatID` → `SetArchiveStatValue`
+  sur ATK (`Atk_Rate`), DEF (`Def_Rate`), HP (`HP_Rate`) — **taux**, ces trois stats
+  seulement.
+- `CalcTranscendentStarStats` ([`CCharacterData_CalcTranscendentStarStats.cs`](./damage-formula-cs/CCharacterData_CalcTranscendentStarStats.cs)) :
+  ligne `GetCharacterTranscendent(Templet.BasicStar, Star, ID)` de
+  `CharacterTranscendentTemplet` → taux `RewardHPRate`/`RewardAtkRate`/`RewardDefRate`
+  sur HP/ATK/DEF — confirme § 3 (les autres stats → 0).
+  [`CCharacterData_GetValueByLevel.cs`](./damage-formula-cs/CCharacterData_GetValueByLevel.cs)
+  (UI : stat à un niveau donné) refait `CalcStat + MulPermille(·, taux de
+transcendance)` pour ATK/HP/DEF seulement.
 
 ### 17.4 Éveil et Monad (mêmes règles, code identique au champ près)
 
-`CalcAwakeningNodeStats` (0x2905578) parcourt les nœuds débloqués :
+`CalcAwakeningNodeStats` ([`CCharacterData_CalcAwakeningNodeStats.cs`](./damage-formula-cs/CCharacterData_CalcAwakeningNodeStats.cs))
+parcourt `AwakeningNodeList` (les nœuds débloqués) :
 
-- Les nœuds de **type 2** (skill) sont ignorés pour les stats.
-- `CheckNodeApply` (0x2908E44) filtre : l'`AwakeningApplyType` compare
-  `AwakeningApplyTypeValue` à l'élément/classe/race du perso ; les nœuds
-  « licence » (type 5) ne s'appliquent que si
-  `CDungeonScene.IsApplyAwakeningNodeAdventureLicense()` — **dépendant du
-  contenu** ; type 3 réservé à certains IDs (198–201) et types de perso.
+- Les nœuds `AWAKENING_TYPE.UTILITY` (2 — enum : 0 ELEMENTAL, 1 JOB, 2 UTILITY,
+  3 PVE, 4 PVP, 5 ADVENTURE_LICENSE) sont ignorés pour les stats.
+- `CheckNodeApply` ([`CCharacterData_CheckNodeApply.cs`](./damage-formula-cs/CCharacterData_CheckNodeApply.cs))
+  filtre : un nœud `PVE` dont le `LevelTemplet.ID` ∈ 198..201 ne s'applique qu'aux
+  BOSS (`Type ≥ CT_BOSS_MONSTER`) ; sinon tout non-PC est refusé ; un nœud
+  `ADVENTURE_LICENSE` exige `CDungeonScene.IsApplyAwakeningNodeAdventureLicense()`
+  — **dépendant du contenu** ; enfin l'`AwakeningApplyType` compare
+  `AwakeningApplyTypeValue` à l'élément (`AAT_ELEMENTAL`), la classe (`AAT_CLASS`) ou
+  la sous-classe (`AAT_SUBCLASS`) du perso, tout autre type passe.
 - `OptionType == IOT_BUFF` → chaque `BuffID` est résolu en `CBuffTemplet`
-  **niveau 1** et rejoint la liste de buffs (appliqué comme un buff ordinaire).
+  **niveau 1** et rejoint `m_AwakeningNodeBuffTempletList` (§ 15 — appliqué comme un
+  buff ordinaire, sauf les `BT_STAT_PREMIUM` `ME`, voie fiche).
 - `OptionType == IOT_STAT` → groupé par `StatType`, puis
-  `CStatValue.SetAwakeningNodeStatValue` (0x29FC228) : remise à zéro puis, pour
-  chaque templet du groupe, `ApplyingType == OAT_ADD (1)` → **somme plate**
-  (`awakeningValue`), `OAT_RATE (2)` → **somme de taux** (`awakeningValueRate`).
+  `CStatValue.SetAwakeningNodeStatValue`
+  ([`CStatValue_SetAwakeningNodeStatValue.cs`](./damage-formula-cs/CStatValue_SetAwakeningNodeStatValue.cs)) :
+  remise à zéro puis, pour chaque templet du groupe, `OAT_ADD` → **somme plate**
+  (`awakeningValue`), `OAT_RATE` → **somme de taux** (`awakeningValueRate`).
 
-`CalcMonadGateEnchantNodeStats` / `SetMonadGateEnchantNodeStatValue` (0x29FC46C) :
-diff instruction par instruction = identique à l'éveil (champs monad à la place).
+`CalcMonadGateEnchantNodeStats` / `SetMonadGateEnchantNodeStatValue`
+([`CCharacterData_CalcMonadGateEnchantNodeStats.cs`](./damage-formula-cs/CCharacterData_CalcMonadGateEnchantNodeStats.cs),
+[`CStatValue_SetMonadGateEnchantNodeStatValue.cs`](./damage-formula-cs/CStatValue_SetMonadGateEnchantNodeStatValue.cs)) :
+même code, champs monad à la place — sans filtre `CheckNodeApply` ni branche IOT_BUFF,
+et appelé à la pose de la liste (§ 17.1).
 
 ### 17.5 Options d'équipement — CItem (enchant, break limit, singularité)
 
-`CItem.InitializeOptionData` (0x2340FF0) construit les options d'une pièce :
+`CItem.InitializeOptionData(mainOptions, subOptions, singularityOptionID)`
+([`CItem_InitializeOptionData.cs`](./damage-formula-cs/CItem_InitializeOptionData.cs))
+construit les options d'une pièce :
 
 ```text
-enchantFactor     = Σ float32 UpgradeFactorforOP des lignes ItemEnchantTemplet
-                    (ItemSubType de la pièce, EnchantLevel 1..enchant)   // GetEnchantFactor
-breakLimitFactor  = Σ float32 des valeurs BreakLimit [0..breakCount-1]   // GetBreakLimitFactor
-singularityFactor = analogue (SingularityEquipEnchantTemplet)            // GetSingularityFactor
+enchantFactor     = Σ float UpgradeFactorforOP des lignes ItemEnchantTemplet du ItemSubType
+                    dont 0 < EnchantLevel ≤ enchant (liste triée, arrêt au premier au-delà)   // GetEnchantFactor
+breakLimitFactor  = Σ float FactorArr[0..breakCount-1] de BreakLimitTemplet(BasicStar, ItemGrade), 0 si breakCount = 0   // GetBreakLimitFactor
+singularityFactor = 0 si SingularityStep = 0, sinon UpgradeFactorforOP(SET_ENCHANT)
+                    + Σ UpgradeFactorforOP(SET_EQUIP_ENHANCE, SingularityLevel)                 // GetSingularityFactor
 
-option PRINCIPALE (CItemMainOption.get_OptionValue, 0x233F1B0, float32) :
-  final = trunc_f32(OptionValue × (1 + enchantFactor + singularityFactor)
-                                × (1 + breakLimitFactor))
-  ordre exact : t = fround(enchantFactor + 1) ; t = fround(t + singularityFactor) ;
-                t = fround(t × (float)OptionValue) ; t = fround(t × fround(breakLimitFactor + 1)) ;
-                final = trunc(t)   // fcvtzs, +∞ → int.MinValue jamais atteint
+option PRINCIPALE (CItemMainOption.OptionValue, float 32 bits) :
+  final = (int)( (float)OptionValue × (1f + enchantFactor + singularityFactor) × (1f + breakLimitFactor) )
+  // évaluation gauche → droite en float : t = (1f + e) + s ; t = OptionValue × t ; t = t × (1f + b) ; trunc
 ```
 
+Listings : [`CItem_GetEnchantFactor.cs`](./damage-formula-cs/CItem_GetEnchantFactor.cs),
+[`CItem_GetBreakLimitFactor.cs`](./damage-formula-cs/CItem_GetBreakLimitFactor.cs),
+[`CItem_GetSingularityFactor.cs`](./damage-formula-cs/CItem_GetSingularityFactor.cs),
+[`CItemMainOption_ctor.cs`](./damage-formula-cs/CItemMainOption_ctor.cs) (les facteurs y
+passent par `× 1000f / 1000f`, sans effet),
+[`CItemMainOption_get_OptionValue.cs`](./damage-formula-cs/CItemMainOption_get_OptionValue.cs).
+
 - Les **sub-options ne sont PAS multipliées** par ces facteurs (leurs valeurs sont
-  stockées telles quelles ; leur croissance passe par des re-tirages — hors calcul).
+  stockées telles quelles — `CItemSubOptionData(optionID, baseLevel, level)` ; leur
+  croissance passe par des re-tirages — hors calcul).
+- Une pièce `ITS_EQUIP_EXCLUSIVE` (EE) enchantée porte en plus une option de stat
+  exclusive (`m_ExclusiveStatOption` = première `ItemOptionTemplet` du groupe de
+  l'item, au niveau `EnchantLevel`).
 - Option principale de type **buff** (EE, etc.) : le `CBuffTemplet` est résolu au
-  **niveau `enchantLevel + 1`** si la pièce est enchantable en spécial, niveau 1
-  sinon — c'est ainsi que l'effet unique d'un EE grandit avec l'enchant.
-- Options de set (`ItemSpecialOptionTemplet`) : sélection par niveau
-  (`max(enchant, 1)` pour les enchantables), une ligne `IsAdd=false` remplace les
-  niveaux inférieurs, `IsAdd=true` s'ajoute.
+  **niveau `enchantLevel + 1`** si la pièce est enchantable en spécial
+  (`IsSpecialItemEnchantable`), niveau 1 sinon — c'est ainsi que l'effet unique d'un
+  EE grandit avec l'enchant.
+- Options uniques / de set (`ItemSpecialOptionTemplet`, `Templet.UniqueOptionIDList`) :
+  niveau par défaut `1 + BreakLimitCount` (arme/accessoire : breakthrough + 1, la
+  règle que § 15 appliquait) ; pour une pièce enchantable en spécial, le niveau est
+  celui du templet, retenu seulement si `≤ max(enchant, 1)`, et une ligne
+  `IsAdd = false` retire les niveaux inférieurs de son groupe, `IsAdd = true`
+  s'ajoute.
 
-### 17.6 Pénalités PvP (UpdatePvpTurnPenalty, 0x259F724)
+### 17.6 Pénalités PvP (UpdatePvpTurnPenalty)
 
-Cycle : premier déclenchement au tour `PVP_ATK_PENALTY_START_TURN` (10), puis tous
-les `PVP_ATK_PENALTY_LOOP_TURN` (5) tours. À chaque cycle :
+Listings : [`CDungeonScene_UpdatePvpTurnPenalty.cs`](./damage-formula-cs/CDungeonScene_UpdatePvpTurnPenalty.cs),
+[`CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext.cs`](./damage-formula-cs/CStateBattle_PvpAttackTeamPenaltyDmg_MoveNext.cs)
+(la fonction locale `PlayDamage`, [`CStateBattle_PvpPenalty_PlayDamage.cs`](./damage-formula-cs/CStateBattle_PvpPenalty_PlayDamage.cs),
+est la même sortie repliée).
+
+Cycle : à l'init de la scène, `PvpPenaltyTurnCount = PVP_ATK_PENALTY_START_TURN` (10)
+et `PvpPenaltyDmgRate = PVP_ATK_PENALTY_DMG_RATE` (100) ; à chaque cycle
+(`PvpAttackTeamPenaltyDmg(dmgRate)` puis `UpdatePvpTurnPenalty()`) :
 
 ```text
-scene.pvpAtkDmgRate   = (précédent ou PVP_ATK_PENALTY_DMG_RATE=100) + 30/cycle  // SANS cap
-scene.pvpHealReduce   = (0 → 500) puis +250/cycle, min(…, 1000)                  // cap 100 %
-chaque attaquant vivant : AddHP(−MulPermille(MaxHP, pvpAtkDmgRate),
-                                bHeal=false, bIgnoreUndead=TRUE)
+PlayDamage(équipe UTILISATEUR) puis PlayDamage(équipe ENNEMIE) :   // les DEUX équipes
+  pour chaque membre non nul :
+    AddHP(−MulPermille(MaxHP, dmgRate), bHeal = false, bIgnoreUndead = TRUE)
+    si HP == 0 && IsAlive : SetDie()
+UpdatePvpTurnPenalty():
+  PvpPenaltyLevel++
+  PvpPenaltyTurnCount += PVP_ATK_PENALTY_LOOP_TURN (5)
+  PvpPenaltyDmgRate   += PVP_ATK_PENALTY_DMG_ADD_RATE (30)                 // SANS cap
+  PvpHealReduceRate    = (0 → PVP_HEAL_PENALTY_REDUCE_RATE (500)) sinon += PVP_HEAL_PENALTY_REDUCE_ADD_RATE (250)
+  PvpHealReduceRate    = min(PvpHealReduceRate, 1000)                       // cap 100 %
 ```
 
 Les « dégâts de pénalité » sont donc des pertes de PV directes (% des PV max,
-passent par l'absorption de shield § 14.3, percent UNDEAD) — pas une baisse d'ATK.
-Avant le premier cycle, `pvpHealReduce = 0` : **les soins PvP ne sont pas réduits
-en début de match**.
+passent par l'absorption de shield § 14.3, percent UNDEAD) — pas une baisse d'ATK —
+et frappent les deux équipes (la lecture ASM disait « chaque attaquant vivant » :
+corrigé). Avant le premier cycle, `PvpHealReduceRate = 0` : **les soins PvP ne sont
+pas réduits en début de match**.

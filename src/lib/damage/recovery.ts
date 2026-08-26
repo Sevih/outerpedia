@@ -179,7 +179,7 @@ export interface ReverseHealInput {
   value: number;
   /** Stat de la source (caster pour BT 16, porteur pour BT 17) si StatType != 0. */
   sourceStatValue?: number;
-  /** Plus petit cap BT_REVERSE_HEAL_CAP (18) actif (valeur × stacks), s'il existe. */
+  /** Plus petit cap BT_REVERSE_HEAL_CAP (20) actif (valeur × stacks), s'il existe. */
   capValue?: number;
   /** PV courants et shield du porteur (protection létale). */
   hp: number;

@@ -172,7 +172,7 @@ export interface DamageCoreInput {
   isMissed?: boolean;
   /** GameConfig MISSED_DAMAGE_RATE ; défaut 500 (version 1.4.9). */
   missedDamageRatePermille?: number;
-  /** GetBuffDamgeFinalReduce — MAX des buffs 114/115/116 (‰), cf. spec § 9.3. */
+  /** GetBuffDamgeFinalReduce — MAX des buffs 119/120/121 (‰), cf. spec § 9.3. */
   finalReduceRate?: number;
 }
 

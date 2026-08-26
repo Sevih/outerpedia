@@ -68,6 +68,11 @@ public class CFormula
 \t}
 
 \tpublic static extern void Native();
+
+\tpublic (int addValue, int rateValue) Pair(int x)
+\t{
+\t\treturn (addValue: x, rateValue: 2 * x);
+\t}
 }
 `;
 
@@ -108,6 +113,12 @@ describe('extractMembers', () => {
     expect(extractMembers(SRC, 'CFormula', 'Native')).toEqual([
       '\tpublic static extern void Native();',
     ]);
+  });
+
+  it('type de retour tuple `(int a, int b)` (GetCriticalStatBuffValues, 26/08/2026) → déclaration reconnue', () => {
+    const [pair] = extractMembers(SRC, 'CFormula', 'Pair');
+    expect(pair).toMatch(/^\tpublic \(int addValue, int rateValue\) Pair\(int x\)/);
+    expect(pair).toContain('rateValue: 2 * x');
   });
 
   it('membre absent → rien (l’appelant décide de l’échec)', () => {

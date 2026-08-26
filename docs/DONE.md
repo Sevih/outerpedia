@@ -39,6 +39,39 @@ datagen:patch-steam`. Tourné pour de vrai : miroir 18 Go, dump, listings,
   pour le gear-solver (BestHTTP a sa propre pile TLS, un plugin Mono est la
   voie, autre projet). Le suivi de la bascule est dans TODO.
 
+## 2026-08-26
+
+- **Spec damage MIGRÉE de l'ASM Android au C# du client Steam — section par
+  section, 17 sections relues, 14 listings ajoutés au manifeste (113).** Le
+  client Windows est Mono : `Assembly-CSharp.dll` se décompile en C# lisible, la
+  source de vérité devient `damage-formula-cs/` (les `.asm` restent figés en
+  témoin, le C# fait foi, plus aucune RVA dans le document). Chaque pseudo-code a
+  été relu contre son `.cs` : **confirmé** partout sur le cœur (§ 3–8.4, § 9.3,
+  § 10, CalcDamageDOT, WG, partage, PvP) ; **corrigé** là où l'ASM avait trompé —
+  § 8.5 (l'accumulation du facteur est INCONDITIONNELLE, le garde ne touche que la
+  limite par tour), § 9.2 (les 300 ‰ DOT_PUNISH sont des TERMES, pas un plafond),
+  § 14.5 (scène ET boss, `SetDie()`, garde INVINCIBLE), § 11 (la CURSE lit les PV
+  max de la CIBLE ; tick périodique à `_nCount = 1`, `StackCount` via `Value` ;
+  détonation = tick × tours restants, formule exacte), § 14.2 (réduction PvP des
+  soins sur les soins PAR STAT seulement), § 14.3 (`AddHP` renvoie la valeur
+  ajustée, pas le delta clampé), § 14.6 (`WG_REVERSE_HEAL`, pas `WG_DMG`), § 17.6
+  (les DEUX équipes), § 9.1 (`_TargetCharacter` paramètre vs champ
+  `TargetCharacter`), § 8.1 (le repli « Σ tables » n'existe qu'en mode
+  simulateur ; le facteur littéral est l'event `EventEffect`, que l'extracteur ne
+  cherche pas encore) ; **six numéros d'enum** que la passe du 13/08 avait ratés
+  (`BT_DMG` 90, ELEMENT 99/100/109, ENEMY_TEAM_DECREASE 101, SWAP_STAT 114) et
+  les conditions élémentaires 140–142. Zones d'incertitude FERMÉES à la lecture :
+  § 12.3 (WG), § 12.8 (appelant périodique), § 12.9 (contre : S1 sur
+  `CounterRate` après un hit), § 12.10 (caps = Tactics League seulement), § 12.11
+  (crit : passifs dans la formule puis cap 1000, actifs après), § 12.16 (les 3
+  inconnues de 1.4.14), § 12.18 (`BT_DMG_TARGET_DEBUFF_LIMIT` = plafond
+  `LimitValue` par ID — Saeran : +20 %/débuff, cap +200 %). Les deux commentaires
+  du moteur aux anciens numéros sont corrigés. L'extracteur `extract-cs`
+  accepte désormais un type de retour tuple (`GetCriticalStatBuffValues`, test).
+  RESTE côté moteur (lecture faite, implémentation non demandée) : `LimitValue`
+  dans buffs.json + plafond § 9.1 ; termes DOT_PUNISH § 9.2 ; extraction des
+  `EventEffect` ; détonation (décision Sevih : pas une prio).
+
 ## 2026-08-25
 
 - **Damage calc — PUBLIC : `unlisted` → `available` (décision Sevih), textes

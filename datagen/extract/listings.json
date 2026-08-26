@@ -45,6 +45,18 @@
     "overload": 0
   },
   {
+    "file": "CCharacterBattle_GetBuffCount",
+    "method": "CCharacterBattle$$GetBuffCount",
+    "overload": 0,
+    "note": "Compteur des buffs/débuffs VISIBLES (tooltip > 0, non neutres) — les familles OWNER/TARGET_(DE)BUFF de § 9.1."
+  },
+  {
+    "file": "CCharacterBattle_SkillSimulation",
+    "method": "CCharacterBattle$$SkillSimulation",
+    "overload": 0,
+    "note": "Mode simulateur (CPlayer.IsYSLSimulator) : la seule écriture du TotalSkillFactor de l'ATTAQUANT — le repli `num == 0` de CalcDamage (spec § 8.1)."
+  },
+  {
     "file": "CCharacterData_AddEvolutionStatToDictionary",
     "method": "CCharacterData$$AddEvolutionStatToDictionary",
     "overload": 0
@@ -259,6 +271,12 @@
     "file": "CStatValue_SetAwakeningNodeStatValue",
     "method": "CStatValue$$SetAwakeningNodeStatValue",
     "overload": 0
+  },
+  {
+    "file": "CStatValue_CalcPcExtendedBaseValue",
+    "method": "CStatValue$$CalcPcExtendedBaseValue",
+    "overload": 0,
+    "note": "Post-100 des PC (spec § 3.2) — l'ASM l'inlinait dans SetBaseValue, le C# la nomme."
   },
   {
     "file": "CStatValue_SetBaseValue",
@@ -498,5 +516,71 @@
     "file": "get_MISSED_DAMAGE_RATE",
     "method": "CCommonDefine$$get_MISSED_DAMAGE_RATE_PERMILLE",
     "overload": 0
+  },
+  {
+    "file": "CCharacterBattle_FindBuffWGDamageReduce",
+    "method": "CCharacterBattle$$FindBuffWGDamageReduce",
+    "overload": 0,
+    "note": "Agrégation add/rate des BT_WG_DMG (attaquant) − BT_WG_DMG_REDUCE (défenseur) — spec § 11 CalcDamageWG, lève § 12.3."
+  },
+  {
+    "file": "CCharacterBattle_FindBuffWGInvincible",
+    "method": "CCharacterBattle$$FindBuffWGInvincible",
+    "overload": 0,
+    "note": "Garde BT_WG_INVINCIBLE de CalcDamageWG (§ 11)."
+  },
+  {
+    "file": "CBuff_OnTurnStart",
+    "method": "CBuff$$OnTurnStart",
+    "overload": 0,
+    "note": "Appelant PÉRIODIQUE du tick : ProcessDamageOverTime(this, Value, 1, null) — _nCount = 1 (§ 11, lève le reste de § 12.8) ; HoT et reverse heal périodiques (§ 14)."
+  },
+  {
+    "file": "CBuff_ConvertImmediatelyToDot",
+    "method": "CBuff$$ConvertImmediatelyToDot",
+    "overload": 0,
+    "note": "Détonation : BT_IMMEDIATELY_<TYPE> → BT_DOT_<TYPE> (§ 14.6)."
+  },
+  {
+    "file": "CCharacterData_get_MaxHP",
+    "method": "CCharacterData$$get_MaxHP",
+    "overload": 0,
+    "note": "Buff de guilde / titre sur les PV max (spec § 16.2)."
+  },
+  {
+    "file": "CBuffSystemManager_CheckMaxHPEvent",
+    "method": "CBuffSystemManager$$CheckMaxHPEvent",
+    "overload": 0,
+    "note": "Taux MAX_HP par contenu (guilde + titre) — spec § 16.2."
+  },
+  {
+    "file": "CCharacterBattle_CheckElementEqual",
+    "method": "CCharacterBattle$$CheckElementEqual",
+    "overload": 0,
+    "note": "Condition TARGET_ELEMENT : égalité stricte (§ 16.3)."
+  },
+  {
+    "file": "CCharacterBattle_CheckElementWin",
+    "method": "CCharacterBattle$$CheckElementWin",
+    "overload": 0,
+    "note": "Conditions ATTACKER_ELEMENT_WIN/EQUAL/LOSE (§ 16.3) — supériorité forcée prise en compte, pas l'infériorité."
+  },
+  {
+    "file": "CCharacterData_GetCriticalStatBuffValues",
+    "method": "CCharacterData$$GetCriticalStatBuffValues",
+    "overload": 0,
+    "note": "Branche crit de SetFinalValue : buffs passifs DANS CalcFinalStat puis cap 1000, actifs APRÈS (§ 16, lève § 12.11)."
+  },
+  {
+    "file": "CCharacterBattle_OnReturnFinishDefenderTeam",
+    "method": "CCharacterBattle$$OnReturnFinishDefenderTeam",
+    "overload": 0,
+    "note": "Roll de contre-attaque : CheckProbabilityPermille(CounterRate) après avoir été touché, S1 (§ 12.9)."
+  },
+  {
+    "file": "CCharacterData_CalcBasicStatHp",
+    "method": "CCharacterData$$CalcBasicStatHp",
+    "overload": 0,
+    "note": "Base HP (§ 17.2) — séparée des autres stats dans CalcBasicStats."
   }
 ]
