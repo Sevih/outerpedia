@@ -5,6 +5,22 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-27
+
+- **`extract` ciblé par le manifeste des bundles.** AssetStudio recevait les
+  19 Go de `files/bundles` et filtrait après ouverture, pour en garder 35 Mo de
+  `.bytes` (257 bundles sur 6 028) et 1,2 Go d'images UI (~1 100). Désormais
+  chaque cible désigne ses bundles via `manifest.dat` (`lib/bundle-manifest` :
+  mêmes regex que les filtres AssetStudio, fermeture des `dependencies` — un
+  sprite UI vit dans l'atlas d'un autre bundle), les lie en dur dans
+  `extracted/.input-<cible>/`, et note l'empreinte du jeu de bundles dans
+  `extracted/.extract-stamp.json` : une cible dont rien n'a bougé est sautée,
+  `--force` (aussi depuis `refresh`) rejoue. Un patch voix/scènes/vidéo (13 Go)
+  ne relance plus l'extraction. Sorties vérifiées identiques au scan complet.
+  Le miroir `.gamedata/files` reste COMPLET, délibérément : filtrer au pull
+  demanderait de connaître tous les consommateurs (python compris), et un
+  bundle manquant casse en silence.
+
 ## 2026-08-26
 
 - **Le MOTEUR TS passe sur le C# du client Steam — section par section,

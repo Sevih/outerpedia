@@ -32,8 +32,10 @@ secours) — avec **la même arborescence**. Rien en aval ne code `.gamedata` en
 
 ```
 extract/      Couche 0 — wrapper de l'extracteur Unity (AssetStudio).
-              Lance l'outil sur les bundles, range la sortie. NON réécrit en TS
-              (extraction d'assets = domaine spécialisé), juste piloté proprement.
+              Lance l'outil sur les bundles DÉSIGNÉS PAR LE MANIFESTE (257 sur
+              6 000 pour les .bytes, ~1 100 pour les images UI — lib/bundle-manifest),
+              range la sortie. NON réécrit en TS (extraction d'assets = domaine
+              spécialisé), juste piloté proprement.
 
 templates/    Couche 1 — parse les .bytes en TEMPLATES typés du jeu.
               1 schéma TS par template (CharacterTemplet, ItemTemplet, Text*...).
@@ -173,7 +175,14 @@ un extract de 2,2 Go déjà fait. Le checkpoint le complète, ne le remplace pas
 Ce n'est **pas** de l'incrémental, et c'est délibéré : modéliser les entrées de
 chaque étape pour décider « celle-ci est à jour » demande de n'en oublier
 aucune, et une entrée oubliée sert de la donnée périmée **en silence** — bien
-pire que rejouer. La promesse est plus étroite et vérifiable : _mêmes entrées,
+pire que rejouer. Une seule exception, parce que ses entrées sont exactes **par
+construction** : `extract` désigne lui-même, via `manifest.dat`, les bundles
+qu'AssetStudio ouvre (mêmes regex que ses filtres, dépendances fermées) — rien
+d'autre n'entre dans cet appel. Il en note l'empreinte par cible
+(`extracted/.extract-stamp.json`) et saute la cible dont aucun bundle n'a
+changé : un patch qui ne touche que voix ou scènes (13 Go sur 19) ne relance
+plus 1,2 Go d'images. Vérifié le 27/08/2026 : sorties identiques au scan
+complet (257/257 `.bytes`, images au md5 près). La promesse est plus étroite et vérifiable : _mêmes entrées,
 mêmes sources, on reprend où ça a cassé_. Toute autre situation jette le
 checkpoint :
 

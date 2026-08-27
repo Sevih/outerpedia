@@ -149,6 +149,14 @@ describe('genSteps — la chaîne déclarée', () => {
     expect(stepKey(applied.find((s) => s.id === 'promote')!)).toBe('promote --apply');
   });
 
+  it('`--force` descend jusqu’à extract, qui tient sa propre empreinte par cible', () => {
+    // Sans lui, `refresh --force` rejouerait la chaîne mais extract sauterait
+    // ses cibles « inchangées » — un --force qui n'extrait rien.
+    expect(stepKey(dry.find((s) => s.id === 'extract')!)).toBe('extract');
+    const forced = genSteps({ apply: false, collect: false, force: true });
+    expect(stepKey(forced.find((s) => s.id === 'extract')!)).toBe('extract --force');
+  });
+
   it('collect n’est dans la chaîne que si on le demande', () => {
     expect(dry.some((s) => s.id === 'assets')).toBe(false);
     expect(genSteps({ apply: false, collect: true }).some((s) => s.id === 'assets')).toBe(true);

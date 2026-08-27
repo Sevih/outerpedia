@@ -237,9 +237,17 @@ export type Step = {
  * régénération) et `getNews` (indépendante du jeu) — restent des appels directs :
  * elles ne sont ni gatées par le stamp ni reprises.
  */
-export function genSteps(o: { apply: boolean; collect: boolean }): Step[] {
+export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean }): Step[] {
   return [
-    { id: 'extract', label: 'extract  (.bytes + images)', file: 'datagen/extract/extract.ts' },
+    // `extract` tient sa propre empreinte par cible (bundles ouverts, désignés
+    // par le manifeste) et saute ce qui n'a pas bougé ; `--force` la lui fait
+    // ignorer, comme pour le reste de la chaîne.
+    {
+      id: 'extract',
+      label: 'extract  (.bytes + images)',
+      file: 'datagen/extract/extract.ts',
+      args: o.force ? ['--force'] : [],
+    },
     {
       id: 'convert',
       label: 'convert  (.bytes → templates)',
@@ -564,7 +572,7 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
   const { force = false, noPull = false, apply = false, collect = false, news = false } = opts;
   const source = await loadSource(resolveSource(opts.source));
   console.log(`◆ source : ${source.label} → ${gamedataRoot()}`);
-  const steps = genSteps({ apply, collect });
+  const steps = genSteps({ apply, collect, force });
 
   // 0) PRÉ-VOL — AVANT le pull, donc avant le quart d'heure de datamine : dire
   // tout de suite ce qui manque et ce qui sera sauté. Inutile sans `.gamedata`
