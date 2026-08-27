@@ -1,6 +1,66 @@
 {
   "posts": [
     {
+      "id": 11193,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T05:59:13",
+      "slug": "notice-8-27thu-sequential-rolling-patch",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 8/27(Thu) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br>We will carry out a patch for fixing issues in the game.<br>Please note that players may experience some server instability during this time, but players can continue to play.<br>To ensure the patch is applied correctly, please completely close the game and reconnect.</p>\n\n\n\n<p>We kindly ask for your understanding. Please see below for more information.</p>\n\n\n\n<p>◈ Patch Schedule</p>\n\n\n\n<ul>\n<li>8/27(Thu) 06:00 ~ 06:30 (UTC)</li>\n\n\n\n<li>It will be applied sequentially within the specified timeframe.</li>\n</ul>\n\n\n\n<p>◈ Details</p>\n\n\n\n<ol>\n<li>An issue where the duration of buffs on Heroes affected by [Irregular Infection] is reduced before their turn begins</li>\n\n\n\n<li>An issue where the remaining challenge attempts and HP are not updated after using a challenge attempt against an Enhanced Deadly Creature in Terminus Isle</li>\n\n\n\n<li>An issue where some description text is cut off on the Gear Selection screen in Dimensional Supply<br>◈ Notice</li>\n</ol>\n\n\n\n<ul>\n<li>Players may experience some server instability.</li>\n\n\n\n<li>After restart, you will be able to access the game’s improved function.</li>\n\n\n\n<li><strong>Real-Time Arena will be unavailable during the maintenance.</strong></li>\n</ul>\n\n\n\n<p>We sincerely apologize for any inconvenience caused.<br>We will continue doing our best to provide you with the best service possible.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11181,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T02:50:31",
+      "slug": "notice-outerplane-steam-version-official-release",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] OUTERPLANE Steam Version Official Release",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>The Steam version of OUTERPLANE officially launched on August 27, 2026 at 03:00 (UTC).<br>You can now download and play OUTERPLANE through Steam.</p>\n\n\n\n<p>■ Steam Version Official Release</p>\n\n\n\n<ul>\n<li>Release Date: August 27, 2026 at 03:00 (UTC)</li>\n\n\n\n<li>Steam Store:<br>https://store.steampowered.com/app/4247320/OUTERPLANE/</li>\n</ul>\n\n\n\n<p>Thank you to all Masters who have been waiting for the Steam version.<br>We hope you continue your adventures in OUTERPLANE on Steam as well.<br><br>We will continue doing our best to provide a stable service.<br><br>Thank you.</p>\n"
+    },
+    {
+      "id": 11199,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T06:00:44",
+      "slug": "%ea%b3%b5%ec%a7%80-8-27%eb%aa%a9-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 8/27(목) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다.<br>패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다.<br>원활한 패치 적용을 위해 게임을 완전히 종료한 후 재접속해 주시기 바랍니다.</p>\n\n\n\n<p>자세한 내용은 아래에서 확인해 주시기 바랍니다.</p>\n\n\n\n<p>◈ 패치 진행 일정</p>\n\n\n\n<ul>\n<li>8/27(목) 15:00 ~ 15:30 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</li>\n</ul>\n\n\n\n<p>◈ 내용</p>\n\n\n\n<ol>\n<li>이레귤러 감염증이 적용된 동료의 강화 효과 지속 시간이 턴 시작 전에 감소하는 현상</li>\n\n\n\n<li>멸망의 섬에서 강화 위험종 전투 도전 기회 소모 후 남은 도전 횟수 및 체력 정보가 갱신되지 않는 현상</li>\n\n\n\n<li>차원 보급 장비 선택 화면에서 일부 설명 문구가 잘려 노출되는 현상</li>\n</ol>\n\n\n\n<p>◈ 유의사항</p>\n\n\n\n<ul>\n<li>패치 진행하는 동안 접속 불안정 현상이 있을 수 있습니다.</li>\n\n\n\n<li>재접속 후 개선된 내용을 이용할 수 있습니다.</li>\n\n\n\n<li><strong> 해당 시간 동안 실시간 대전 점검이 함께 진행됩니다.</strong></li>\n</ul>\n\n\n\n<p>이용에 불편을 드려 대단히 죄송합니다.<br>보다 쾌적하고 안정적인 환경을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br>감사합니다.</p>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 11177,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T02:43:14",
+      "slug": "%ea%b3%b5%ec%a7%80-%ec%95%84%ec%9a%b0%ed%84%b0%ed%94%8c%eb%a0%88%ec%9d%b8-steam-%eb%b2%84%ec%a0%84-%ec%a0%95%ec%8b%9d-%ec%b6%9c%ec%8b%9c-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 아우터플레인 Steam 버전 정식 출시 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>아우터플레인 Steam 버전이 2026년 8월 27일(목) 12:00(KST) 정식 출시되었습니다.</p>\n\n\n\n<p>이제 Steam을 통해 아우터플레인을 다운로드하고 플레이하실 수 있습니다.</p>\n\n\n\n<p>■ Steam 버전 정식 출시</p>\n\n\n\n<ul>\n<li>출시 일시: 2026년 8월 27일(목) 12:00(KST)</li>\n\n\n\n<li>Steam 스토어:<br>https://store.steampowered.com/app/4247320/OUTERPLANE/</li>\n</ul>\n\n\n\n<p>Steam 버전 출시를 기다려 주신 오너 여러분께 감사드리며,<br>앞으로 Steam에서도 아우터플레인과 함께 즐거운 모험을 이어가시길 바랍니다.</p>\n\n\n\n<p>보다 안정적인 서비스를 제공해 드릴 수 있도록 최선을 다하겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 11196,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T06:05:38",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b8-27",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】データ更新作業のお知らせ(8/27)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>8/27(木)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>パッチを正常に適用するため、ゲームを完全に終了した後、再起動していただきますようお願いいたします。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n\n\n<p>◈データ更新実施時間<br>: 8/27(木) 15:00 ~ 15:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈更新内容</p>\n\n\n\n<ol>\n<li>イレギュラー感染症が付与された味方の強化効果の持続ターンが、ターン開始前に減少する現象</li>\n\n\n\n<li>テルミナス島にて、強化危険種との戦闘挑戦回数を消費した後、残りの挑戦回数およびHP情報が更新されない現象<br><br>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・更新された再ログイン後、修正された内容をご利用いただけます。</li>\n</ol>\n\n\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
+    },
+    {
+      "id": 11183,
+      "date": "2026-08-27",
+      "modified": "2026-08-27T02:45:38",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%80%8e%e3%82%a2%e3%82%a6%e3%82%bf%e3%83%bc%e3%83%97%e3%83%ac%e3%83%bc%e3%83%b3%e3%80%8fsteam%e7%89%88%e6%ad%a3%e5%bc%8f%e3%83%aa%e3%83%aa",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】『アウタープレーン』Steam版正式リリースのご案内",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>こんにちは。GMあめです。</p>\n\n\n\n<p>『アウタープレーン』Steam版が、2026年8月27日（木）12:00（JST）に正式リリースされました。</p>\n\n\n\n<p>Steamより『アウタープレーン』をダウンロードしてお楽しみいただけます。</p>\n\n\n\n<p>■ Steam版正式リリース</p>\n\n\n\n<p>リリース日時：2026年8月27日（木）12:00（JST）<br>Steamストア：<br>https://store.steampowered.com/app/4247320/OUTERPLANE/</p>\n\n\n\n<p>Steam版のリリースをお待ちいただいたマスターの皆様に、心より感謝申し上げます。<br>これからはSteamでも、『アウタープレーン』とともに楽しい冒険をお楽しみください。</p>\n\n\n\n<p>より安定したサービスをご提供できるよう、今後も最善を尽くしてまいります。</p>\n\n\n\n<p>ありがとうございます。</p>\n"
+    },
+    {
       "id": 11141,
       "date": "2026-08-26",
       "modified": "2026-08-26T10:54:26",
@@ -83,12 +143,12 @@
     {
       "id": 10975,
       "date": "2026-08-25",
-      "modified": "2026-08-25T06:52:46",
+      "modified": "2026-08-27T05:28:18",
       "slug": "kien",
       "lang": "en",
       "type": "known-issue",
       "title": "[Issues] Known Issues (8/25 Maintenance) (Added on 8/25 6:52 UTC)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues.<br><br><strong>1. An issue where an error pop-up appears when attempting Sweep All while an Enhanced Deadly Creature is active in [Terminus Isle] <br></strong>→ The Enhanced Deadly Creature can be battled normally, and the error pop-up will no longer appear after defeating it manually.</p>\n\n\n\n<p><strong>2.  An issue where the Masters Ban Pick is applied in [Friendly Match]<br></strong>→ This issue will be fixed in a future update.<br><br><strong>3. An issue where the number of Recruits required for guaranteed recruitment is displayed as 150 instead of 100 on certain Recruit screens<br></strong>→ This issue affects Rate Up Hero Recruit, Custom Hero Recruit, and Demiurge Hero Recruit.<br>→ This is a display issue only, and guaranteed recruitment is correctly applied at 100 Recruits.<br><br><strong>4. An issue where the unsupported [Apple Login] option is displayed on the [Account Link] screen in Google Play Games<br></strong>→ Apple Login is not supported in Google Play Games. This option will be removed in a future update.<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<p>Thank you.</p>\n\n\n\n<p></p>\n"
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues.<br><br>1. [Terminus Isle] An issue where an error pop-up appears when attempting Sweep All while an Enhanced Deadly Creature is active<br>→ The Enhanced Deadly Creature can be battled normally, and the error pop-up will no longer appear after defeating it manually.</p>\n\n\n\n<p>2. [Friendly Match] An issue where the Masters Ban Pick is applied<br>→ This issue will be fixed in a future update.</p>\n\n\n\n<p>3. An issue where the number of Recruits required for guaranteed recruitment is displayed as 150 instead of 100 on certain Recruit screens<br>→ This issue affects Rate Up Hero Recruit, Custom Hero Recruit, and Demiurge Hero Recruit.<br>→ This is a display issue only, and guaranteed recruitment is correctly applied at 100 Recruits.</p>\n\n\n\n<p>4. An issue where the unsupported [Apple Login] option is displayed on the [Account Link] screen in Google Play Game<br>→ Apple Login is not supported in Google Play Games. This option will be removed in a future update.</p>\n\n\n\n<p>5. An issue where the duration of buffs on Heroes affected by [Irregular Infection] is reduced before their turn begins<br>→ Currently under investigation</p>\n\n\n\n<p>6. An issue where the remaining challenge attempts and HP are not updated after using a challenge attempt against an Enhanced Deadly Creature in Terminus Isle<br>→ Currently under investigation</p>\n\n\n\n<p>7. An issue where some description text is cut off on the Gear Selection screen in Dimensional Supply<br>→ Currently under investigation<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<p>Thank you.</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11051,
@@ -143,12 +203,12 @@
     {
       "id": 10972,
       "date": "2026-08-25",
-      "modified": "2026-08-25T06:52:21",
+      "modified": "2026-08-27T05:29:05",
       "slug": "kikr",
       "lang": "kr",
       "type": "known-issue",
       "title": "[이슈] 8/25 업데이트 이후 확인된 현상 (8/25 15:51 추가)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.<br><br><strong>1. 멸망의 섬에서 강화 위험종 출현 상태에서 일괄 소탕 시도 시 에러 팝업이 노출되는 현상<br></strong>ㄴ 강화 위험종은 정상적으로 전투 및 클리어 가능하며, 처치 후 해당 에러 팝업은 더 이상 노출되지 않습니다.</p>\n\n\n\n<p><strong>2.일부 영입 화면의 영입 확정 안내에서 확정 영입에 필요한 횟수가 100회가 아닌 150회로 표시되는 현상<br></strong>ㄴ 픽업 동료 영입, 커스텀 동료 영입, 데미우르고스 동료 영입에서 해당 현상이 발생합니다.<br>ㄴ 해당 현상은 표시상의 문제이며, 실제 영입 확정은 100회 기준으로 정상 적용됩니다.”<br><br><strong>3. 친선전에서 마스터즈 밴픽이 적용되는 현상<br></strong>ㄴ 해당 현상은 추후 수정될 예정입니다.</p>\n\n\n\n<p><strong>4. Google Play Games의 계정 연동 화면에 지원되지 않는 Apple 로그인 항목이 노출되는 현상<br></strong>ㄴ Google Play Games에서는 Apple 로그인을 지원하지 않으며, 해당 항목은 추후 수정될 예정입니다.</p>\n\n\n\n<p>감사합니다.</p>\n\n\n\n<p></p>\n"
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.<br><br><strong>1. 멸망의 섬에서 강화 위험종 출현 상태에서 일괄 소탕 시도 시 에러 팝업이 노출되는 현상<br></strong>ㄴ 강화 위험종은 정상적으로 전투 및 클리어 가능하며, 처치 후 해당 에러 팝업은 더 이상 노출되지 않습니다.</p>\n\n\n\n<p><strong>2.일부 영입 화면의 영입 확정 안내에서 확정 영입에 필요한 횟수가 100회가 아닌 150회로 표시되는 현상<br></strong>ㄴ 픽업 동료 영입, 커스텀 동료 영입, 데미우르고스 동료 영입에서 해당 현상이 발생합니다.<br>ㄴ 해당 현상은 표시상의 문제이며, 실제 영입 확정은 100회 기준으로 정상 적용됩니다.”<br><br><strong>3. 친선전에서 마스터즈 밴픽이 적용되는 현상<br></strong>ㄴ 해당 현상은 추후 수정될 예정입니다.</p>\n\n\n\n<p><strong>4. Google Play Games의 계정 연동 화면에 지원되지 않는 Apple 로그인 항목이 노출되는 현상<br></strong>ㄴ Google Play Games에서는 Apple 로그인을 지원하지 않으며, 해당 항목은 추후 수정될 예정입니다.<br><br><strong>5. 이레귤러 감염증이 적용된 동료의 강화 효과 지속 시간이 턴 시작 전에 감소하는 현상<br></strong>ㄴ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>6. 멸망의 섬에서 강화 위험종 전투 도전 기회 소모 후 남은 도전 횟수 및 체력 정보가 갱신되지 않는 현상</strong><br>ㄴ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>7. 차원 보급 장비 선택 화면에서 일부 설명 문구가 잘려 노출되는 현상</strong><br>ㄴ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p>감사합니다.</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11063,
@@ -203,12 +263,12 @@
     {
       "id": 10984,
       "date": "2026-08-25",
-      "modified": "2026-08-25T06:44:28",
+      "modified": "2026-08-27T05:30:44",
       "slug": "kijp",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (8/25)(8/25 15:40 追記)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1.テルミナス島に強化された危険種が出現している状態で「まとめてスキップ」を行うと、エラー画面が表示される現象<br></strong>→ 強化された危険種との戦闘は正常に行えます。手動で討伐してクリアすると、以降は該当のエラー画面が表示されなくなります。<br>→該当不具合項目は次回のアップデートにて修正予定です。</p>\n\n\n\n<p><strong>2. フレンド対戦でマスターズBAN・PICKが適用される現象<br></strong>→ 現在、本現象について調査を行っております。<br>→該当不具合項目は次回のアップデートにて修正予定です。</p>\n\n\n\n<p><strong>3.一部のスカウト画面の「確定スカウトのご案内」において、確定スカウトに必要な回数が100回ではなく150回と表示される現象(8/25 15:40 追記)<br></strong>→「ピックアップスカウト」「カスタムスカウト」「デミウルゴススカウト」で発生します。<br>→ 本現象は表示上の問題であり、実際には100回で確定スカウトが正常に適用されます。</p>\n\n\n\n<p><strong>4.Google Play Gamesのアカウント連携画面に、サポートされていない「Appleでログイン」の項目が表示される現象(8/25 15:40 追記)<br></strong>→ Google Play Gamesでは「Appleでログイン」をご利用いただけません。<br>→該当不具合は次回のアップデートにて修正予定です。</p>\n\n\n\n<p>　<br><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
+      "title": "【不具合】現在確認されている不具合について (8/25)(8/27 14:30 追記)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n\n<p><br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1.テルミナス島に強化された危険種が出現している状態で「まとめてスキップ」を行うと、エラー画面が表示される現象<br></strong>→ 強化された危険種との戦闘は正常に行えます。手動で討伐してクリアすると、以降は該当のエラー画面が表示されなくなります。<br>→該当不具合項目は次回のアップデートにて修正予定です。</p>\n\n\n\n<p><strong>2. フレンド対戦でマスターズBAN・PICKが適用される現象<br></strong>→ 現在、本現象について調査を行っております。<br>→該当不具合項目は次回のアップデートにて修正予定です。</p>\n\n\n\n<p><strong>3.一部のスカウト画面の「確定スカウトのご案内」において、確定スカウトに必要な回数が100回ではなく150回と表示される現象(8/25 15:40 追記)<br></strong>→「ピックアップスカウト」「カスタムスカウト」「デミウルゴススカウト」で発生します。<br>→ 本現象は表示上の問題であり、実際には100回で確定スカウトが正常に適用されます。</p>\n\n\n\n<p><strong>4.Google Play Gamesのアカウント連携画面に、サポートされていない「Appleでログイン」の項目が表示される現象(8/25 15:40 追記)<br></strong>→ Google Play Gamesでは「Appleでログイン」をご利用いただけません。<br>→該当不具合は次回のアップデートにて修正予定です。</p>\n\n\n\n<p><strong>5. イレギュラー感染症が付与された味方の強化効果の持続ターンが、ターン開始前に減少する現象</strong><br>→ 現在、本現象について調査を行っております。<br><br>6.テルミナス島にて、<strong>強化された危険種</strong>との戦闘挑戦回数を消費した後、残りの挑戦回数およびHP情報が更新されない現象(8/27 14:30 <strong>追記)</strong><br>→ 現在、本現象について調査を行っております。<br><br>7.次元物資召喚の装備選択画面にて、一部の説明テキストが見切れて表示される現象(8/27 14:30 <strong>追記)</strong><br>→ 現在、本現象について調査を行っております。<br></p>\n\n\n\n<p><br><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
     },
     {
       "id": 10923,
