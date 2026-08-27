@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.103",
+  "resVersion": "1.11.105",
   "buffs": {
     "1": [
       {
@@ -143920,7 +143920,9 @@
         "createRate": 1000,
         "stackCount": 1,
         "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
-        "applyingType": "OAT_RATE",
+        "stat": "ST_AVOID_SUBTRACT_CAP",
+        "applyingType": "OAT_ADD",
+        "value": 1,
         "callerSkillType": "SKT_ALL",
         "createType": "ON_SPAWN",
         "turnDuration": 1,
@@ -143937,7 +143939,9 @@
         "createRate": 1000,
         "stackCount": 1,
         "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
-        "applyingType": "OAT_RATE",
+        "stat": "ST_AVOID_SUBTRACT_CAP",
+        "applyingType": "OAT_ADD",
+        "value": 1,
         "callerSkillType": "SKT_ALL",
         "createType": "ON_SPAWN",
         "turnDuration": 1,

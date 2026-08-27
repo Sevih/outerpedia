@@ -19693,8 +19693,8 @@
       "bundle": "prefabs/character/ui_effect"
     },
     "T_5040030_Snow": {
-      "w": 256,
-      "h": 256,
+      "w": 1024,
+      "h": 1024,
       "wrapU": 0,
       "wrapV": 0,
       "filter": 1,
@@ -19783,8 +19783,8 @@
       "bundle": "effects/common/textures/t_fx_atlas_01"
     },
     "T_FX_Crystal_001_A": {
-      "w": 512,
-      "h": 512,
+      "w": 2048,
+      "h": 2048,
       "wrapU": 0,
       "wrapV": 0,
       "filter": 1,
