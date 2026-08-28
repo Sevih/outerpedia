@@ -28,6 +28,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
+import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 /** AppID Steam d'OUTERPLANE. */
@@ -106,6 +107,32 @@ function steamPathFromRegistry(): string | null {
   }
 }
 
+/**
+ * Racines Steam CANDIDATES, par ordre de préférence.
+ *
+ * Windows : le registre, sinon l'emplacement par défaut.
+ * Linux   : pas de registre — Steam vit sous `~/.local/share/Steam`
+ *           (`~/.steam/steam` et `~/.steam/root` y pointent selon les distributions),
+ *           ou sous `~/.var/app/…` en Flatpak. On retient TOUTES celles qui existent :
+ *           `findSteamInstall` balaiera ensuite leurs bibliothèques.
+ *
+ * Ne JAMAIS retomber sur le chemin Windows hors Windows : c'est ce qui masquait
+ * l'install réelle et faisait échouer la détection sous Linux (constaté 28/08/2026,
+ * jeu pourtant présent dans `~/.local/share/Steam/steamapps/common/OUTERPLANE`).
+ */
+function steamRoots(): string[] {
+  const fromRegistry = steamPathFromRegistry();
+  if (fromRegistry) return [fromRegistry];
+  if (process.platform === 'win32') return ['C:\\Program Files (x86)\\Steam'];
+  const home = homedir();
+  return [
+    join(home, '.local', 'share', 'Steam'),
+    join(home, '.steam', 'steam'),
+    join(home, '.steam', 'root'),
+    join(home, '.var', 'app', 'com.valvesoftware.Steam', '.local', 'share', 'Steam'),
+  ].filter((dir) => existsSync(dir));
+}
+
 function fromRoot(root: string, buildId: string | null): SteamInstall {
   const data = join(root, 'OUTERPLANE_Data');
   return {
@@ -128,9 +155,14 @@ export function findSteamInstall(): SteamInstall | null {
     const root = resolve(override);
     return existsSync(join(root, 'OUTERPLANE_Data')) ? fromRoot(root, null) : null;
   }
-  const steam = steamPathFromRegistry() ?? 'C:\\Program Files (x86)\\Steam';
-  const vdf = join(steam, 'steamapps', 'libraryfolders.vdf');
-  const libraries = existsSync(vdf) ? libraryPaths(readFileSync(vdf, 'utf-8')) : [steam];
+  const libraries = new Set<string>();
+  for (const steam of steamRoots()) {
+    const vdf = join(steam, 'steamapps', 'libraryfolders.vdf');
+    if (existsSync(vdf))
+      for (const lib of libraryPaths(readFileSync(vdf, 'utf-8'))) libraries.add(lib);
+    // La racine elle-même : une install sans `libraryfolders.vdf` reste valide.
+    libraries.add(steam);
+  }
   for (const lib of libraries) {
     const acf = join(lib, 'steamapps', `appmanifest_${STEAM_APPID}.acf`);
     if (!existsSync(acf)) continue;

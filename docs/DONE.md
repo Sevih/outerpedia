@@ -7,6 +7,16 @@
 
 ## 2026-08-28
 
+- **L'install Steam est détectée hors Windows** (`datagen/extract/steam.ts`).
+  `findSteamInstall` interrogeait le registre (`reg query`, Windows uniquement),
+  puis retombait sur `C:\Program Files (x86)\Steam` — un chemin qui n'existe
+  nulle part ailleurs, donc `null` et une source sautée alors que le jeu était
+  installé. On balaie maintenant `~/.local/share/Steam`, `~/.steam/steam`,
+  `~/.steam/root` et le chemin Flatpak, et on ne retombe sur le chemin Windows
+  QUE sous Windows. L'échappatoire `OUTERPLANE_STEAM_DIR` marchait déjà mais
+  renvoyait `buildId: null` : la détection par `appmanifest` le conserve (24947556
+  au 28/08), et c'est lui le signal « le client a patché » le moins cher.
+
 - **Les outils d'extraction sont résolus PAR PLATEFORME** (`datagen/extract/tools.ts`,
   `datagen/lib/r2.ts`). Le build Windows d'AssetStudioModCLI embarque `fmod.dll`,
   `Texture2DDecoderNative.dll` et `ooz.dll`, natifs : rapatrié tel quel sur Linux il
