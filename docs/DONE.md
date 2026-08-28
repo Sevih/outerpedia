@@ -5,6 +5,25 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-08-28
+
+- **`pnpm images` committe ses deux états lui-même** (`scripts/commit-assets.ts`,
+  dernier maillon de la chaîne, sur le modèle du `--no-commit` de `pnpm getNews`).
+  Toute la collecte part sur R2 depuis le staging gitignoré : les SEULS fichiers
+  versionnés qu'elle écrit sont `datagen/assets/pushed.json` (ce que le bucket
+  sert) et `data/generated/comics.json` (le repli 4-comics réaligné sur le
+  manifeste en ligne). Les oublier ne casse pas la prod, qui lit R2 — mais ce
+  sont les deux TÉMOINS HORS LIGNE dont vivent les garde-fous : `collect-comics`
+  s'en sert pour décider s'il peut publier le manifeste sans amputer la galerie,
+  et le repli est la seule source en dev. Un état non committé sur une machine,
+  c'est l'autre qui publie à l'aveugle (dérive du 15/08, repli à 27 BD contre 31
+  en ligne). Commit `chore(assets)`/`chore(comics)` par CHEMINS EXPLICITES
+  (jamais `git add -A` : le checkout porte du travail en cours), et
+  BEST-EFFORT — un échec git est signalé, jamais fatal, les assets sont déjà sur
+  R2. `pnpm commit` passe désormais `pnpm images --no-commit` : son `git add -A`
+  les embarque avec le bump de version dans LE commit de la release, qu'un
+  commit d'assets glissé juste avant aurait coupé en deux.
+
 ## 2026-08-27
 
 - **`extract` ciblé par le manifeste des bundles.** AssetStudio recevait les

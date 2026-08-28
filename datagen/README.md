@@ -325,7 +325,7 @@ première erreur) :
 pnpm datagen:patch-android   # pull → extract → convert → build → résumé du diff
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
 pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
-pnpm images                  # assets:collect + assets:push (R2)
+pnpm images                  # assets:collect + assets:push (R2) + auto-commit des états
 ```
 
 **Incrémental & fiable** : ne tire que les fichiers nouveaux/modifiés, et
@@ -401,6 +401,15 @@ git add data/generated data/curated      # 2. le validé + le curé
 git commit -m "data: patch <version> — <résumé>"
 git push                                 # 3. sur une branche → PR vers main
 ```
+
+> **Les états d'assets se committent seuls.** `pnpm images` finit par
+> `assets:commit` : `datagen/assets/pushed.json` (ce que R2 sert) et
+> `data/generated/comics.json` (le repli 4-comics) partent dans un commit
+> `chore(assets)` à eux, par chemins explicites. Rien à stager pour eux — et
+> surtout, plus d'état oublié en local, sur lequel l'AUTRE machine se fonderait
+> pour décider ce qu'elle peut publier. `pnpm images --no-commit` les laisse au
+> working tree (ce que fait `pnpm commit`, dont le `git add -A` les embarque
+> avec le bump de version).
 
 > Première publication d'une branche : `git push -u origin <branche>`
 > (ou une fois pour toutes : `git config --global push.autoSetupRemote true`).

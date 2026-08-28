@@ -267,7 +267,11 @@ async function main(): Promise<void> {
   console.log('\n▶ pré-vol (rappel, avant publication)');
   preflight(branch);
   console.log('\n▶ images (collect + push R2)');
-  sh('pnpm images');
+  // `--no-commit` : `pnpm images` auto-committe sinon les états d'assets
+  // (`pushed.json`, repli 4-comics). Ici, le `git add -A` de l'étape 6 les
+  // embarque avec le bump de version dans LE commit de la release — un commit
+  // d'assets séparé, juste avant, le couperait en deux.
+  sh('pnpm images --no-commit');
 
   // 6) COMMIT. L'écriture du bump arrive ICI (plus d'abandon possible), et
   // AVANT le status : un commit « bump seul » reste possible.
