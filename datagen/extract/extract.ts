@@ -30,15 +30,14 @@
  * Chemin de l'outil surchargeable via ASTUDIO_CLI.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, linkSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
-import { basename, join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import {
-  bundlePaths,
   bundlesFor,
   bundlesSignature,
   readManifest,
-  type BundleInfo,
+  stageBundles,
   type ExtractTarget,
 } from '../lib/bundle-manifest';
 import { isMain } from '../lib/is-main';
@@ -103,19 +102,6 @@ function writeStamp(patch: Stamp): void {
 }
 
 /**
- * Dossier d'entrée d'une cible : liens durs vers les bundles retenus, rebâti à
- * chaque passe. Un lien dur = le même fichier sous un autre nom, sur le même
- * volume (`.gamedata` entier) — AssetStudio y voit un dossier ordinaire.
- */
-function stageInput(key: keyof typeof TARGETS, bundles: BundleInfo[]): string {
-  const dir = resolve(EXTRACTED, `.input-${key}`);
-  rmSync(dir, { recursive: true, force: true });
-  mkdirSync(dir, { recursive: true });
-  for (const src of bundlePaths(bundles)) linkSync(src, join(dir, basename(src)));
-  return dir;
-}
-
-/**
  * Une cible : bundles désignés par le manifeste → empreinte → saut si rien de
  * neuf (sauf `force` ou sortie absente) → AssetStudio sur le dossier lié →
  * empreinte notée (APRÈS succès : une passe plantée se rejoue d'elle-même).
@@ -134,7 +120,7 @@ function runTarget(key: keyof typeof TARGETS, force: boolean, extraArgs: string[
   }
   console.log(`↻ extraction des ${t.label} — ${summary} sur ${readManifest().length}...`);
   mkdirSync(t.out, { recursive: true });
-  const input = stageInput(key, bundles);
+  const input = stageBundles(key, bundles);
   const args = [input, '-m', 'export', '-r', '-o', t.out, '--log-level', 'warning'];
   const filters = ['--filter-by-name', t.name.source];
   if (t.container) filters.push('--filter-by-container', t.container.source);

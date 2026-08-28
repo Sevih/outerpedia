@@ -7,6 +7,17 @@
 
 ## 2026-08-28
 
+- **L'extraction audio est ciblée par le manifeste** (`datagen/extract/extract-audio.ts`,
+  `stageBundles` remonté dans `datagen/lib/bundle-manifest.ts`). L'audio était le
+  SEUL target resté sur le dossier entier après le ciblage du 27/08 : il passait les
+  6 028 bundles (19,1 Go) à AssetStudio, qui construit alors la liste d'assets de tout
+  le jeu. Mesuré le 28/08 : **25,1 Go résidents, tué par l'OOM killer** sur une machine
+  de 30 Go (VS Code emporté avec). Ciblé, c'est 263 bundles / 814 Mo, pic à 3,02 Go et
+  2 min 36 au lieu de 5 min 24 — et les 164 BGM sont tous là (92 mp3, compte inchangé),
+  la sélection couvrant bien la totalité. `stageInput` vit maintenant dans
+  `bundle-manifest` : `extract.ts` importe déjà `runAudio` d'`extract-audio.ts`, l'y
+  laisser aurait fait un cycle.
+
 - **L'install Steam est détectée hors Windows** (`datagen/extract/steam.ts`).
   `findSteamInstall` interrogeait le registre (`reg query`, Windows uniquement),
   puis retombait sur `C:\Program Files (x86)\Steam` — un chemin qui n'existe

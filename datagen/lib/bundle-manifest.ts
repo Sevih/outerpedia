@@ -21,7 +21,7 @@
  * `readManifest` ; testé dans bundle-manifest.test.ts.
  */
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, linkSync, mkdirSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
 import { gamedata } from './paths';
 
@@ -120,4 +120,22 @@ export function bundlePaths(bundles: BundleInfo[], dir = gamedata('files/bundles
     );
   }
   return paths;
+}
+
+/**
+ * Dossier d'entrée d'une extraction : liens durs vers les bundles retenus,
+ * rebâti à chaque passe. Un lien dur = le même fichier sous un autre nom sur le
+ * même volume (`.gamedata` entier) — l'outil y voit un dossier ordinaire, sans
+ * qu'un seul octet soit copié.
+ *
+ * Vit ICI et non dans `extract.ts` parce que `extract-audio.ts` en a besoin
+ * aussi, et qu'`extract.ts` importe déjà `runAudio` de ce dernier : l'y laisser
+ * aurait fait un cycle d'imports.
+ */
+export function stageBundles(key: string, bundles: BundleInfo[]): string {
+  const dir = gamedata(`extracted/.input-${key}`);
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  for (const src of bundlePaths(bundles)) linkSync(src, join(dir, basename(src)));
+  return dir;
 }

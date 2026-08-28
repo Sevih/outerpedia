@@ -21,8 +21,9 @@
  *
  * Usage : `pnpm datagen:extract-audio` (autonome), OU branché sur l'ombrelle
  * `pnpm datagen:extract [all]` via `runAudio()` (cf. datagen/extract/extract.ts).
- * Outils auto-résolus via `ensureTool` (tirés de R2 s'ils manquent) : AssetStudio
- * + ffmpeg. Surcharges d'exe : ASTUDIO_CLI, FFMPEG (build local hors R2).
+ * Outils auto-résolus via `ensureTool` (tirés de leur source s'ils manquent —
+ * R2, release GitHub selon la plateforme, ou commande système) : AssetStudio
+ * + ffmpeg. Surcharges d'exe : ASTUDIO_CLI, FFMPEG (build local).
  */
 import { execFileSync } from 'node:child_process';
 import {
@@ -39,6 +40,7 @@ import { parse as parsePath, resolve } from 'node:path';
 import { walkFiles } from '../lib/fs';
 import { isMain } from '../lib/is-main';
 import { ASSETSTUDIO, FFMPEG, ensureTool } from './tools';
+import { bundlesFor, readManifest, stageBundles } from '../lib/bundle-manifest';
 import { gamedata } from '../lib/paths';
 
 const ROOT = gamedata();
@@ -66,11 +68,21 @@ function extractWavs(): number {
   rmSync(WAV_TMP, { recursive: true, force: true });
   mkdirSync(WAV_TMP, { recursive: true });
   const maxTasks = Math.min(Math.max(cpus().length - 4, 1), 16);
-  console.log('↻ extraction de l’audio (BGM) depuis les bundles...');
+  // CIBLÉ PAR LE MANIFESTE, comme les cibles `bytes` et `images` — l'audio
+  // était le seul target resté sur le dossier entier. Lui passer les 6 028
+  // bundles (19 Go) fait construire à AssetStudio la liste d'assets de TOUT le
+  // jeu : mesuré à 25 Go résidents le 28/08/2026, tué par l'OOM killer sur une
+  // machine de 30 Go. Le manifeste ramène ça à 263 bundles / 814 Mo.
+  const bundles = bundlesFor(readManifest(), { name: new RegExp(BGM_FILTER) });
+  const input = stageBundles('audio', bundles);
+  console.log(
+    `↻ extraction de l’audio (BGM) — ${bundles.length} bundle(s), ` +
+      `${(bundles.reduce((n, b) => n + b.fileSize, 0) / 1e6).toFixed(0)} Mo...`,
+  );
   execFileSync(
     bin,
     [
-      BUNDLES,
+      input,
       '-m',
       'export',
       '-t',
@@ -92,6 +104,7 @@ function extractWavs(): number {
     ],
     { timeout: 600_000, stdio: 'inherit' },
   );
+  rmSync(input, { recursive: true, force: true });
   // `-g none` peut nicher sous un sous-dossier selon l'outil : on récupère les
   // WAV où qu'ils soient, remontés à plat dans WAV_TMP.
   const wavs: string[] = [];
