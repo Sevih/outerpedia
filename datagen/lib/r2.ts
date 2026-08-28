@@ -7,7 +7,7 @@
  * anonyme `:s3:`, identifiants lus dans `.env.local` (parse maison, sans dépendance)
  * et passés à rclone par variables d'environnement. Aucune config rclone requise.
  *
- * Prérequis : rclone (winget install Rclone.Rclone).
+ * Prérequis : rclone — voir `ensureRclone` pour la commande d'installation.
  */
 import { spawnSync } from 'node:child_process';
 import { loadEnvLocal } from './env';
@@ -33,7 +33,15 @@ export function r2Env(): R2Env {
 
 function ensureRclone(): void {
   if (spawnSync('rclone', ['version'], { stdio: 'ignore' }).status !== 0) {
-    throw new Error('rclone introuvable — installe-le : winget install Rclone.Rclone');
+    // Message d'installation PAR PLATEFORME : la chaîne tourne aussi sous Linux
+    // depuis le 28/08/2026, et « winget » n'y veut rien dire.
+    const how =
+      process.platform === 'win32'
+        ? 'winget install Rclone.Rclone'
+        : process.platform === 'darwin'
+          ? 'brew install rclone'
+          : 'sudo dnf install rclone (ou apt install rclone)';
+    throw new Error(`rclone introuvable — installe-le : ${how}`);
   }
 }
 

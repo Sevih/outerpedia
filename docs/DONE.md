@@ -7,6 +7,21 @@
 
 ## 2026-08-28
 
+- **Les outils d'extraction sont résolus PAR PLATEFORME** (`datagen/extract/tools.ts`,
+  `datagen/lib/r2.ts`). Le build Windows d'AssetStudioModCLI embarque `fmod.dll`,
+  `Texture2DDecoderNative.dll` et `ooz.dll`, natifs : rapatrié tel quel sur Linux il
+  ne s'exécute pas. Le projet publie des builds Linux/macOS portant les `.so`/`.dylib`
+  équivalents, MÊME version 0.19.0 — tirés des releases GitHub, URL et sha256 épinglés,
+  parce que R2 n'héberge que le build Windows. Équivalence vérifiée le 28/08 : `.bytes`
+  257/257 identiques AU BIT PRÈS, images 12 327/12 652 (les 325 restants tous dans des
+  dossiers à doublons, dont l'ordre dépend de pathID que le patch du jeu avait bougés,
+  0 écart ailleurs), wallpapers 962/962 contre ceux publiés sur R2 en juillet.
+  Deux pièges corrigés au passage : les `.exe` rapatriés EXISTENT dans `.gamedata/tools/`,
+  donc `existsSync` les acceptait et on lançait un binaire PE — hors Windows la commande
+  système (`ffmpeg`, `ffprobe`) passe maintenant AVANT ; et `fetchNuget` dézippait avec
+  `tar`, qui sous Linux est GNU tar et ne lit PAS les zip (cascade bsdtar → unzip, erreur
+  explicite sinon). Le build Linux exige le runtime .NET 9, pas le 10.
+
 - **`pnpm images` committe ses deux états lui-même** (`scripts/commit-assets.ts`,
   dernier maillon de la chaîne, sur le modèle du `--no-commit` de `pnpm getNews`).
   Toute la collecte part sur R2 depuis le staging gitignoré : les SEULS fichiers
