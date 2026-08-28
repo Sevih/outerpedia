@@ -7,6 +7,15 @@
 
 ## 2026-08-28
 
+- **Une cible repart d'une sortie VIDE avant d'extraire** (`datagen/extract/extract.ts`).
+  `runTarget` ne faisait qu'un `mkdirSync` : les fichiers d'une extraction précédente
+  survivaient donc indéfiniment, seul l'audio nettoyait déjà la sienne (`rmSync(OUT_BGM)`).
+  Constaté le 28/08 : la sortie images portait 14 258 fichiers là où l'extraction n'en
+  produit que 13 175 — l'union EXACTE du périmé et du frais (13 735 + 13 175 − 12 652
+  communs). Dedans, 28 `T_FX_*` que le filtre exclut pourtant depuis, et des doublons
+  aux pathID d'avant le dernier patch. L'empreinte n'étant écrite qu'APRÈS succès, une
+  passe interrompue se rejoue d'elle-même : rien à perdre à repartir de zéro.
+
 - **L'extraction audio est ciblée par le manifeste** (`datagen/extract/extract-audio.ts`,
   `stageBundles` remonté dans `datagen/lib/bundle-manifest.ts`). L'audio était le
   SEUL target resté sur le dossier entier après le ciblage du 27/08 : il passait les
