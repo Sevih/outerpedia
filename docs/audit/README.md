@@ -10,11 +10,17 @@
 > Ce document ne réécrit pas les constats : il **relie**, dédoublonne les
 > recouvrements et donne UN ordre de traitement pour les trois à la fois.
 >
-> **Volet POSTÉRIEUR, hors de cette synthèse** (domaine à worker dédié, aucun
+> **Volets POSTÉRIEURS, hors de cette synthèse** (domaines à worker dédié, aucun
 > recouvrement avec les trois ci-dessus) :
-> [damage-calculator.md](./damage-calculator.md) — calculateur de dégâts
-> `src/lib/damage/` + `tools/_contents/damage-calculator/` (constats **D1–D5**,
-> 2026-08-07).
+>
+> - [damage-calculator.md](./damage-calculator.md) — calculateur de dégâts
+>   `src/lib/damage/` + `tools/_contents/damage-calculator/` (constats **D1–D5**,
+>   2026-08-07).
+> - [plateforme.md](./plateforme.md) — socle public : routes API publiques,
+>   limitation de débit, socle de partage MySQL, couche d'accès aux données,
+>   i18n, `next.config.ts` (constats **S1–S9**, 2026-08-28). Un seul constat
+>   Haute : **S1**, la limitation de débit s'appuie sur `X-Forwarded-For`, que
+>   le client contrôle.
 
 ## Verdict croisé
 
