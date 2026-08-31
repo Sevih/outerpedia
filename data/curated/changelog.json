@@ -11,29 +11,24 @@
     },
     "content": {
       "en": [
-        "OUTERPLANE has been available on Steam since 26 August 2026.",
-        "Leaving a review there — positive or critical — helps a game of this size be found by other players. Only players who have the game in their Steam library can post one, but installing it from Steam is enough: it is the same account and the same progress as on mobile.",
-        "Nothing is offered in exchange. Honest opinions are the only useful ones, both for players deciding whether to try it and for the team reading them."
-      ],
-      "jp": [
-        "OUTERPLANEは2026年8月26日よりSteamで配信されています。",
-        "Steamでレビューを投稿していただけると、この規模のタイトルが他のプレイヤーに見つけてもらううえで大きな助けになります。高い評価でも厳しい評価でも構いません。投稿できるのはSteamのライブラリに本作を持っているプレイヤーだけですが、Steamからインストールするだけで大丈夫です。アカウントも進行状況もモバイル版と同じものをそのまま利用できます。",
-        "見返りは一切ありません。プレイを迷っている方にとっても、レビューを読む開発チームにとっても、役に立つのは率直な意見だけです。"
-      ],
-      "kr": [
-        "OUTERPLANE은 2026년 8월 26일부터 Steam에서 서비스되고 있습니다.",
-        "Steam에 리뷰를 남겨 주시면, 좋은 평가든 비판적인 평가든 이 정도 규모의 게임이 다른 플레이어에게 알려지는 데 큰 도움이 됩니다. 리뷰는 Steam 라이브러리에 게임을 보유한 플레이어만 작성할 수 있지만, Steam에서 설치하기만 하면 됩니다. 계정과 진행 상황은 모바일과 동일합니다.",
-        "대가로 제공되는 것은 없습니다. 플레이를 망설이는 분들에게도, 리뷰를 읽는 개발팀에게도 도움이 되는 것은 솔직한 의견뿐입니다."
-      ],
-      "zh": [
-        "OUTERPLANE 自 2026 年 8 月 26 日起在 Steam 上线。",
-        "在 Steam 上留下一条评测——无论好评还是批评——都能帮助这样体量的游戏被更多玩家发现。只有在 Steam 库中拥有本作的玩家才能发表评测，不过从 Steam 安装一次就够了：账号和进度与手机端完全相同。",
-        "这不附带任何奖励。无论是对犹豫要不要尝试的玩家，还是对阅读评测的开发团队，真实的意见才是有用的。"
+        "OUTERPLANE has been on Steam since 26 August. If you play it there, a review is the simplest way to help other players find it.",
+        "It takes a minute — say what you actually think, good or bad. And if you started on mobile, your account comes with you."
       ],
       "fr": [
-        "OUTERPLANE est disponible sur Steam depuis le 26 août 2026.",
-        "Y laisser un avis — positif comme critique — aide un jeu de cette taille à être découvert par d'autres joueurs. Seuls les joueurs qui l'ont dans leur bibliothèque Steam peuvent en publier un, mais l'installer depuis Steam suffit : c'est le même compte et la même progression que sur mobile.",
-        "Rien n'est offert en échange. Seuls les avis honnêtes sont utiles, autant aux joueurs qui hésitent qu'à l'équipe qui les lit."
+        "OUTERPLANE est sur Steam depuis le 26 août. Si vous y jouez, un avis est le moyen le plus simple d'aider d'autres joueurs à le découvrir.",
+        "Ça prend une minute — dites ce que vous en pensez vraiment, en bien comme en mal. Et si vous avez commencé sur mobile, votre compte vous suit."
+      ],
+      "jp": [
+        "OUTERPLANEは8月26日よりSteamで配信されています。Steamでプレイされている方にとって、レビューはこのゲームをほかのプレイヤーに知ってもらういちばん簡単な方法です。",
+        "書くのは1分ほど。良かったところも気になったところも、思ったままで大丈夫です。モバイルで始めた方も、アカウントはそのまま引き継げます。"
+      ],
+      "kr": [
+        "OUTERPLANE은 8월 26일부터 Steam에서 서비스되고 있습니다. Steam으로 플레이하고 계신다면, 리뷰는 다른 플레이어에게 이 게임을 알리는 가장 간단한 방법입니다.",
+        "1분이면 충분합니다. 좋았던 점도 아쉬웠던 점도 느낀 그대로 적어 주세요. 모바일에서 시작하셨더라도 계정은 그대로 이어집니다."
+      ],
+      "zh": [
+        "OUTERPLANE 自 8 月 26 日起在 Steam 上线。如果你在 Steam 上游玩，写一条评测就是让更多玩家发现它最简单的方式。",
+        "花一分钟就够了——喜欢的地方、不满意的地方，照实写就好。如果你是从手机端开始的，账号也会跟着一起过来。"
       ]
     }
   },
