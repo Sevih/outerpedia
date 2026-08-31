@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-08-31",
+    "type": "news",
+    "title": {
+      "en": "OUTERPLANE on Steam",
+      "jp": "OUTERPLANEがSteamで配信中",
+      "kr": "OUTERPLANE, Steam 서비스 중",
+      "zh": "OUTERPLANE 已登陆 Steam",
+      "fr": "OUTERPLANE sur Steam"
+    },
+    "content": {
+      "en": [
+        "OUTERPLANE has been available on Steam since 26 August 2026.",
+        "If that is where you play, leaving a review — positive or critical — helps a game of this size be found by other players. Only an account that has launched the game through Steam can post one; playing on mobile does not make you eligible.",
+        "Nothing is offered in exchange. Honest opinions are the only useful ones, both for players deciding whether to try it and for the team reading them."
+      ],
+      "jp": [
+        "OUTERPLANEは2026年8月26日よりSteamで配信されています。",
+        "Steamでプレイされている方がレビューを投稿してくださると、この規模のタイトルが他のプレイヤーに見つけてもらううえで大きな助けになります。高い評価でも厳しい評価でも構いません。投稿できるのはSteamからゲームを起動したアカウントのみで、モバイルでのプレイは対象外です。",
+        "見返りは一切ありません。プレイを迷っている方にとっても、レビューを読む開発チームにとっても、役に立つのは率直な意見だけです。"
+      ],
+      "kr": [
+        "OUTERPLANE은 2026년 8월 26일부터 Steam에서 서비스되고 있습니다.",
+        "Steam으로 플레이하고 계신다면, 좋은 평가든 비판적인 평가든 리뷰를 남겨 주시는 것이 이 정도 규모의 게임이 다른 플레이어에게 알려지는 데 큰 도움이 됩니다. 리뷰는 Steam에서 게임을 실행한 계정만 작성할 수 있으며, 모바일 플레이는 해당되지 않습니다.",
+        "대가로 제공되는 것은 없습니다. 플레이를 망설이는 분들에게도, 리뷰를 읽는 개발팀에게도 도움이 되는 것은 솔직한 의견뿐입니다."
+      ],
+      "zh": [
+        "OUTERPLANE 自 2026 年 8 月 26 日起在 Steam 上线。",
+        "如果你在 Steam 上游玩，留下一条评测——无论好评还是批评——都能帮助这样体量的游戏被更多玩家发现。只有通过 Steam 启动过游戏的账号才能发表评测，手机端的游玩不计入。",
+        "这不附带任何奖励。无论是对犹豫要不要尝试的玩家，还是对阅读评测的开发团队，真实的意见才是有用的。"
+      ],
+      "fr": [
+        "OUTERPLANE est disponible sur Steam depuis le 26 août 2026.",
+        "Si c'est là que vous jouez, laisser un avis — positif comme critique — aide un jeu de cette taille à être découvert par d'autres joueurs. Seul un compte ayant lancé le jeu via Steam peut en publier un ; jouer sur mobile ne compte pas.",
+        "Rien n'est offert en échange. Seuls les avis honnêtes sont utiles, autant aux joueurs qui hésitent qu'à l'équipe qui les lit."
+      ]
+    }
+  },
+  {
     "date": "2026-08-12",
     "type": "character",
     "title": {
