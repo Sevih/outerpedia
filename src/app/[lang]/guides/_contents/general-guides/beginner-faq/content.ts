@@ -255,11 +255,11 @@ export const LABELS = {
   },
   healers: { en: 'Healers', jp: 'ヒーラー', kr: '힐러', zh: '奶妈', fr: 'Healers' },
   healersLine: {
-    en: 'You get {P/Mene} and {P/Viella} for free from Story mode, and can choose between {P/Dianne} and {P/Nella} later. {P/Monad Eva} is highly recommended from the Premium banner due to her unconditional {B/BT_CALL_BACKUP}, with {P/Primine} from the Custom Recruit banner as a budget alternative.',
-    jp: '{P/Mene}と{P/Viella}はストーリーモードで無料入手でき、後から{P/Dianne}と{P/Nella}のどちらかを選べます。{P/Monad Eva}は無条件の{B/BT_CALL_BACKUP}があるためプレミアムバナーから強くおすすめで、{P/Primine}はカスタム募集バナーで手に入る低コストの代替です。',
-    kr: '{P/Mene}와 {P/Viella}는 스토리 모드에서 무료로 획득할 수 있고, 나중에 {P/Dianne}와 {P/Nella} 중 하나를 선택할 수 있습니다. {P/Monad Eva}는 무조건적인 {B/BT_CALL_BACKUP} 덕분에 프리미엄 배너에서 강력히 추천되며, {P/Primine}은 커스텀 모집 배너에서 얻을 수 있는 저렴한 대안입니다.',
-    zh: '{P/Mene}和{P/Viella}可在故事模式中免费获得，之后可以在{P/Dianne}和{P/Nella}中选择一个。{P/Monad Eva}因为拥有无条件的{B/BT_CALL_BACKUP}，非常推荐从精选卡池获取；{P/Primine}则是定向招募卡池中的平价替代。',
-    fr: 'Vous obtenez {P/Mene} et {P/Viella} gratuitement en mode histoire, et pouvez choisir entre {P/Dianne} et {P/Nella} plus tard. {P/Monad Eva} est fortement recommandée depuis la Premium Banner grâce à son {B/BT_CALL_BACKUP} inconditionnel, avec {P/Primine} depuis la Custom Recruit Banner comme alternative économique.',
+    en: 'You get {P/Mene} and {P/Viella} for free, and can choose between {P/Dianne} and {P/Nella} later. {P/Monad Eva} is highly recommended from the Premium banner due to her unconditional {B/BT_CALL_BACKUP}, with {P/Primine} from the Custom Recruit banner as a budget alternative.',
+    jp: '{P/Mene}と{P/Viella}は無料で入手でき、後から{P/Dianne}と{P/Nella}のどちらかを選べます。{P/Monad Eva}は無条件の{B/BT_CALL_BACKUP}があるためプレミアムバナーから強くおすすめで、{P/Primine}はカスタム募集バナーで手に入る低コストの代替です。',
+    kr: '{P/Mene}와 {P/Viella}는 무료로 획득할 수 있고, 나중에 {P/Dianne}와 {P/Nella} 중 하나를 선택할 수 있습니다. {P/Monad Eva}는 무조건적인 {B/BT_CALL_BACKUP} 덕분에 프리미엄 배너에서 강력히 추천되며, {P/Primine}은 커스텀 모집 배너에서 얻을 수 있는 저렴한 대안입니다.',
+    zh: '{P/Mene}和{P/Viella}可以免费获得，之后可以在{P/Dianne}和{P/Nella}中选择一个。{P/Monad Eva}因为拥有无条件的{B/BT_CALL_BACKUP}，非常推荐从精选卡池获取；{P/Primine}则是定向招募卡池中的平价替代。',
+    fr: 'Vous obtenez {P/Mene} et {P/Viella} gratuitement, et pouvez choisir entre {P/Dianne} et {P/Nella} plus tard. {P/Monad Eva} est fortement recommandée depuis la Premium Banner grâce à son {B/BT_CALL_BACKUP} inconditionnel, avec {P/Primine} depuis la Custom Recruit Banner comme alternative économique.',
   },
   flexSupport: {
     en: 'Flex/Support',
