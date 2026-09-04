@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 11221,
+      "date": "2026-09-03",
+      "modified": "2026-09-03T04:43:10",
+      "slug": "notice-9-3thu-sequential-rolling-patch",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 9/3(Thu) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>We will carry out a patch for fixing issues in the game.<br>Please note that players may experience some server instability during this time, but players can continue to play.<br><br>We kindly ask for your understanding. Please see below for more information.</p>\n\n\n\n<p>◈ Patch Schedule<br>– 9/3(Thu) 05:00 ~ 05:30 (UTC)</p>\n\n\n\n<p>– It will be applied sequentially within the specified timeframe.</p>\n\n\n\n<p>◈ Details<br>1. An issue where some text is cut off on the +15 Gear Enhancement screen<br>2. An issue where an abnormal sound effect plays when entering the Irregular Extermination Project<br>3. An issue where the thumbnails for some Steam Launch Celebration packages are displayed with incorrect proportions in the Shop</p>\n\n\n\n<p>◈ Notice<br>– Players may experience some server instability.<br>– After restart, you will be able to access the game’s improved function.</p>\n\n\n\n<p>We sincerely apologize for any inconvenience caused.<br>We will continue doing our best to provide you with the best service possible.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11217,
+      "date": "2026-09-03",
+      "modified": "2026-09-03T04:41:41",
+      "slug": "%ea%b3%b5%ec%a7%80-9-3%eb%aa%a9-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 9/3(목) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다.<br>패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다.</p>\n\n\n\n<p>자세한 내용은 아래에서 확인해 주시기 바랍니다.</p>\n\n\n\n<p>◈ 패치 진행 일정</p>\n\n\n\n<ul>\n<li>9/3(목) 14:00 ~ 14:30 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</li>\n</ul>\n\n\n\n<p>◈ 내용</p>\n\n\n\n<p>1. +15 장비 강화 화면에서 일부 텍스트가 잘려 노출되는 현상<br>2. 이레귤러 섬멸전 진입 시 비정상적인 효과음이 출력되는 현상<br>3. 상점에서 일부 스팀 런칭 기념! 초특가 패키지 섬네일이 비정상적인 비율로 노출되는 현상</p>\n\n\n\n<ol start=\"2\"></ol>\n\n\n\n<p>◈ 유의사항</p>\n\n\n\n<ul>\n<li>패치 진행하는 동안 접속 불안정 현상이 있을 수 있습니다.</li>\n\n\n\n<li>재접속 후 개선된 내용을 이용할 수 있습니다.</li>\n</ul>\n\n\n\n<p>이용에 불편을 드려 대단히 죄송합니다.<br>보다 쾌적하고 안정적인 환경을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br><br>감사합니다.</p>\n\n\n\n<p></p>\n"
+    },
+    {
+      "id": 11226,
+      "date": "2026-09-03",
+      "modified": "2026-09-03T04:44:07",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b9-3",
+      "lang": "jp",
+      "type": "known-issue",
+      "title": "【お知らせ】データ更新作業のお知らせ(9/3)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>9/3(木)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n\n\n<p>◈データ更新実施時間<br>: 9/3(木) 14:00 ~ 14:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈更新内容<br>1.イレギュラー殲滅戦への入場時、異常な効果音が再生される不具合<br>2.ショップで、一部の「Steamリリース記念！パック」が正常に表示されない不具合<br>3.イベントストーリー内の一部セリフで、名称が誤って翻訳されている不具合</p>\n\n\n\n<p>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・更新された再ログイン後、修正された内容をご利用いただけます。</p>\n\n\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
+    },
+    {
       "id": 11193,
       "date": "2026-08-27",
       "modified": "2026-08-27T05:59:13",
@@ -13,7 +43,7 @@
     {
       "id": 11181,
       "date": "2026-08-27",
-      "modified": "2026-08-27T02:50:31",
+      "modified": "2026-09-04T03:19:25",
       "slug": "notice-outerplane-steam-version-official-release",
       "lang": "en",
       "type": "notice",
@@ -23,7 +53,7 @@
     {
       "id": 11199,
       "date": "2026-08-27",
-      "modified": "2026-08-27T06:00:44",
+      "modified": "2026-09-03T04:40:13",
       "slug": "%ea%b3%b5%ec%a7%80-8-27%eb%aa%a9-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
       "lang": "kr",
       "type": "notice",
