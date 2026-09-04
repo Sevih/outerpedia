@@ -45,13 +45,17 @@ const FAQ_LD: Array<{ q: keyof typeof LABELS; a: Array<keyof typeof LABELS> }> =
   { q: 'whoPullFor', a: ['wideRangeHeroes', 'limitedDesc', 'premiumBannerDesc'] },
   { q: 'pullForDupes', a: ['regularHeroesFarm', 'star4WeaknessGauge', 'star5Burst3'] },
   { q: 'whatTeam', a: ['standardTeam', 'earthFireTeam'] },
-  { q: 'howGetGear', a: ['gearSourceDesc', 'chimeraArmorDesc', 'weaponAccessorySkills'] },
+  {
+    q: 'howGetGear',
+    a: ['gearSourceDesc', 'gearDimensionalSupply', 'chimeraArmorDesc', 'weaponAccessorySkills'],
+  },
   { q: 'howGetEETalismans', a: ['exclusiveEquipmentDesc', 'talismansDesc'] },
   { q: 'gearWorthKeeping', a: ['dontThrowBlues', 'epicGearStaple', 'gearRarityMeaning'] },
   {
     q: 'whenUpgradeGear',
     a: ['enhancingWeaponsDesc', 'accessoriesCritDesc', 'armorLaterChapters'],
   },
+  { q: 'limitBreakPlus15', a: ['limitBreakDesc'] },
   { q: 'skillManualsFirst', a: ['skillLevel2Weakness', 'effectChanceDuration', 'chainPassive'] },
   { q: 'baseUpgrades', a: ['baseUpgradeOrder', 'unlockQuirks'] },
   { q: 'quirksPriority', a: ['quirksUpgradeOrder', 'dpsSubclassFirst', 'quirkLevel5'] },
@@ -257,8 +261,8 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
             <QACard accent="violet" question={L(LABELS.whatTeam)}>
               <Prose>{L(LABELS.standardTeam)}</Prose>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <Callout accent="rose" label={L(LABELS.dpsFromStartDash)}>
-                  {parseText('{P/Ame} {P/Rey} {P/Rin} {P/Vlada}', ctx)}
+                <Callout accent="rose" label={L(LABELS.dps)}>
+                  {P(LABELS.dpsLine)}
                 </Callout>
                 <Callout accent="sky" label={L(LABELS.critBuffFromCustom)}>
                   {parseText('{P/Valentine} {P/Tamara} {P/Skadi} {P/Charlotte}', ctx)}
@@ -299,6 +303,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
           <div className="flex flex-col gap-3.5">
             <QACard accent="amber" question={L(LABELS.howGetGear)}>
               <Prose>{L(LABELS.gearSourceDesc)}</Prose>
+              <Prose>{L(LABELS.gearDimensionalSupply)}</Prose>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <Callout accent="cyan" label={L(LABELS.armorPriority)}>
                   <BossInline id="4034002" label={L(LABELS.unidentifiedChimera)} />{' '}
@@ -400,6 +405,10 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
         <section id="progression-resources" className="scroll-mt-28">
           <SectionHeading accent="emerald" title={L(LABELS.sectionProgressionResources)} />
           <div className="flex flex-col gap-3.5">
+            <QACard accent="emerald" question={L(LABELS.limitBreakPlus15)}>
+              <Prose>{P(LABELS.limitBreakDesc)}</Prose>
+            </QACard>
+
             <QACard accent="emerald" question={L(LABELS.skillManualsFirst)}>
               <Callout accent="amber" label={L(LABELS.skillUpRule)}>
                 <div className="mt-0.5">

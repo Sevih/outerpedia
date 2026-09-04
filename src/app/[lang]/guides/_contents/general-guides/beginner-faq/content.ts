@@ -238,12 +238,13 @@ export const LABELS = {
     zh: '故事模式的标准队伍是主力输出、暴击率增益角色、奶妈，以及自由位（减益角色、副输出、增益角色或坦克）。大部分故事不需要坦克，奶妈或战士型角色就能应付。',
     fr: "Une équipe standard pour la Story est composée d'un main damage dealer, d'un buffer de Crit Chance, d'un Healer et d'un slot flexible pour un debuffer, un second damage dealer ou buffer, ou un Defender. Les Defenders ne sont pas requis dans la majeure partie de la Story ; les Healers ou les Bruisers peuvent suffire.",
   },
-  dpsFromStartDash: {
-    en: 'DPS (from Start Dash banner)',
-    jp: 'DPS（スタートダッシュバナーから）',
-    kr: 'DPS (스타트 대시 배너에서)',
-    zh: 'DPS（来自新手冲刺卡池）',
-    fr: 'DPS (depuis la Start Dash Banner)',
+  dps: { en: 'DPS', jp: 'DPS', kr: 'DPS', zh: 'DPS', fr: 'DPS' },
+  dpsLine: {
+    en: '{P/Ame} {P/Rey} {P/Rin} {P/Vlada} from the Start Dash banner, and {P/Demiurge Luna} from the Demiurge Contract or a Selector.',
+    jp: 'スタートダッシュバナーの{P/Ame} {P/Rey} {P/Rin} {P/Vlada}、そしてデミウルゴス契約やセレクターから入手できる{P/Demiurge Luna}。',
+    kr: '스타트 대시 배너의 {P/Ame} {P/Rey} {P/Rin} {P/Vlada}, 그리고 데미우르고스 계약이나 선택권으로 얻는 {P/Demiurge Luna}.',
+    zh: '来自新手冲刺卡池的{P/Ame} {P/Rey} {P/Rin} {P/Vlada}，以及通过创世之神契约或选择箱获得的{P/Demiurge Luna}。',
+    fr: '{P/Ame} {P/Rey} {P/Rin} {P/Vlada} depuis la Start Dash Banner, et {P/Demiurge Luna} via le Demiurge Contract ou un sélecteur.',
   },
   critBuffFromCustom: {
     en: 'Crit Buff (from Custom Recruit banner)',
@@ -254,11 +255,11 @@ export const LABELS = {
   },
   healers: { en: 'Healers', jp: 'ヒーラー', kr: '힐러', zh: '奶妈', fr: 'Healers' },
   healersLine: {
-    en: 'You get {P/Mene} for free and can choose between {P/Dianne} and {P/Nella} later, with {P/Monad Eva} also being highly recommended from Premium banner due to her unconditional {B/BT_CALL_BACKUP}.',
-    jp: '{P/Mene}は無料で入手でき、後から{P/Dianne}と{P/Nella}のどちらかを選べます。{P/Monad Eva}も無条件の{B/BT_CALL_BACKUP}があるため、プレミアムバナーからのおすすめです。',
-    kr: '{P/Mene}는 무료로 획득할 수 있고, 나중에 {P/Dianne}와 {P/Nella} 중 하나를 선택할 수 있습니다. {P/Monad Eva}도 무조건적인 {B/BT_CALL_BACKUP}이 있어 프리미엄 배너에서 추천합니다.',
-    zh: '{P/Mene}免费获得，之后可以在{P/Dianne}和{P/Nella}中选择一个。{P/Monad Eva}因为有无条件的{B/BT_CALL_BACKUP}，也推荐从精选卡池获取。',
-    fr: 'Vous obtenez {P/Mene} gratuitement et pouvez choisir entre {P/Dianne} et {P/Nella} plus tard, avec {P/Monad Eva} également fortement recommandée depuis la Premium Banner grâce à son {B/BT_CALL_BACKUP} inconditionnel.',
+    en: 'You get {P/Mene} and {P/Viella} for free from Story mode, and can choose between {P/Dianne} and {P/Nella} later. {P/Monad Eva} is highly recommended from the Premium banner due to her unconditional {B/BT_CALL_BACKUP}, with {P/Primine} from the Custom Recruit banner as a budget alternative.',
+    jp: '{P/Mene}と{P/Viella}はストーリーモードで無料入手でき、後から{P/Dianne}と{P/Nella}のどちらかを選べます。{P/Monad Eva}は無条件の{B/BT_CALL_BACKUP}があるためプレミアムバナーから強くおすすめで、{P/Primine}はカスタム募集バナーで手に入る低コストの代替です。',
+    kr: '{P/Mene}와 {P/Viella}는 스토리 모드에서 무료로 획득할 수 있고, 나중에 {P/Dianne}와 {P/Nella} 중 하나를 선택할 수 있습니다. {P/Monad Eva}는 무조건적인 {B/BT_CALL_BACKUP} 덕분에 프리미엄 배너에서 강력히 추천되며, {P/Primine}은 커스텀 모집 배너에서 얻을 수 있는 저렴한 대안입니다.',
+    zh: '{P/Mene}和{P/Viella}可在故事模式中免费获得，之后可以在{P/Dianne}和{P/Nella}中选择一个。{P/Monad Eva}因为拥有无条件的{B/BT_CALL_BACKUP}，非常推荐从精选卡池获取；{P/Primine}则是定向招募卡池中的平价替代。',
+    fr: 'Vous obtenez {P/Mene} et {P/Viella} gratuitement en mode histoire, et pouvez choisir entre {P/Dianne} et {P/Nella} plus tard. {P/Monad Eva} est fortement recommandée depuis la Premium Banner grâce à son {B/BT_CALL_BACKUP} inconditionnel, avec {P/Primine} depuis la Custom Recruit Banner comme alternative économique.',
   },
   flexSupport: {
     en: 'Flex/Support',
@@ -268,11 +269,11 @@ export const LABELS = {
     fr: 'Flex/Support',
   },
   flexLine: {
-    en: '{P/Veronica} {P/Eternal} {P/Akari} or another hero you picked up along the way.',
-    jp: '{P/Veronica} {P/Eternal} {P/Akari}や、途中で入手した他のヒーロー。',
-    kr: '{P/Veronica} {P/Eternal} {P/Akari} 또는 진행 중 획득한 다른 영웅.',
-    zh: '{P/Veronica} {P/Eternal} {P/Akari}或途中获得的其他英雄。',
-    fr: '{P/Veronica} {P/Eternal} {P/Akari} ou un autre Héros récupéré en chemin.',
+    en: '{P/Veronica} {P/Eternal} {P/Akari} {P/Mystic Sage Ame} {P/Luna} or another hero you picked up along the way.',
+    jp: '{P/Veronica} {P/Eternal} {P/Akari} {P/Mystic Sage Ame} {P/Luna}や、途中で入手した他のヒーロー。',
+    kr: '{P/Veronica} {P/Eternal} {P/Akari} {P/Mystic Sage Ame} {P/Luna} 또는 진행 중 획득한 다른 영웅.',
+    zh: '{P/Veronica} {P/Eternal} {P/Akari} {P/Mystic Sage Ame} {P/Luna}或途中获得的其他英雄。',
+    fr: '{P/Veronica} {P/Eternal} {P/Akari} {P/Mystic Sage Ame} {P/Luna} ou un autre Héros récupéré en chemin.',
   },
   firstBossPriorities: {
     en: 'First boss priorities are:',
@@ -373,11 +374,18 @@ export const LABELS = {
     fr: "Comment obtenir de l'équipement ?",
   },
   gearSourceDesc: {
-    en: "Eva's Guide Quests and Skyward Tower will sort this out while levelling, along with the Challenge! Special Request missions' 6-star legendary gear. When enough Survey Hub or Arena currency is available, these can also offer solid 6-star gear. Farming for gear isn't a big focus until you have cleared Stage 10 on the Special Request bosses, so they can only drop 6-star gear.",
-    jp: 'エヴァのガイドクエストと昇天の塔がレベリング中の装備を提供してくれます。また、チャレンジ！スペシャルリクエストミッションの6つ星レジェンダリー装備も入手できます。十分なサーベイハブやアリーナの通貨が貯まったら、これらも良い6つ星装備を提供してくれます。装備ファームは、スペシャルリクエストボスのステージ10をクリアして6つ星装備のみがドロップするようになるまでは、大きな焦点ではありません。',
-    kr: '에바의 가이드 퀘스트와 승천의 탑이 레벨링 중 장비를 제공합니다. 또한 챌린지! 스페셜 리퀘스트 미션의 6성 레전더리 장비도 얻을 수 있습니다. 충분한 서베이 허브나 아레나 화폐가 모이면 이곳에서도 좋은 6성 장비를 얻을 수 있습니다. 장비 파밍은 스페셜 리퀘스트 보스의 스테이지 10을 클리어해서 6성 장비만 드롭되기 전까지는 큰 초점이 아닙니다.',
-    zh: '艾娃引导任务和升天之塔会在升级过程中提供装备，还有挑战！特别委托任务的6星传说装备。当积累足够的调查站或竞技场货币时，也能获得不错的6星装备。在特别委托BOSS的第10关通关、只掉落6星装备之前，装备刷取不是主要重点。',
-    fr: "Les Eva's Guide Quests et la Skyward Tower vous fourniront de l'équipement pendant le leveling, tout comme les récompenses 6 étoiles légendaires des missions Challenge! Special Request. Avec assez de monnaie du Survey Hub ou de l'Arène, vous obtiendrez aussi du bon équipement 6 étoiles. Le farm d'équipement n'est pas une priorité tant que vous n'avez pas clear le Stage 10 des bosses Special Request, afin qu'ils ne droppent que de l'équipement 6 étoiles.",
+    en: "Guide Quests, Mirsha Settlement Support, permanent Event Dungeons and Skyward Tower will sort this out while levelling, along with the Challenge! Special Request missions' 6-star legendary gear. When enough Survey Hub or Arena currency is available, these can also offer solid 6-star gear. Farming for gear isn't a big focus until you have cleared Stage 10 on the Special Request bosses, so they can only drop 6-star gear.",
+    jp: 'ガイドクエスト、メルシャ集落支援、常設イベントダンジョン、昇天の塔がレベリング中の装備を提供してくれます。また、チャレンジ！スペシャルリクエストミッションの6つ星レジェンダリー装備も入手できます。十分なサーベイハブやアリーナの通貨が貯まったら、これらも良い6つ星装備を提供してくれます。装備ファームは、スペシャルリクエストボスのステージ10をクリアして6つ星装備のみがドロップするようになるまでは、大きな焦点ではありません。',
+    kr: '가이드 퀘스트, 메르샤 정착지 지원, 상설 이벤트 던전, 승천의 탑이 레벨링 중 장비를 제공합니다. 또한 챌린지! 스페셜 리퀘스트 미션의 6성 레전더리 장비도 얻을 수 있습니다. 충분한 서베이 허브나 아레나 화폐가 모이면 이곳에서도 좋은 6성 장비를 얻을 수 있습니다. 장비 파밍은 스페셜 리퀘스트 보스의 스테이지 10을 클리어해서 6성 장비만 드롭되기 전까지는 큰 초점이 아닙니다.',
+    zh: '引导任务、弥乐沙定居地支援、常驻活动副本和升天之塔会在升级过程中提供装备，还有挑战！特别委托任务的6星传说装备。当积累足够的调查站或竞技场货币时，也能获得不错的6星装备。在特别委托BOSS的第10关通关、只掉落6星装备之前，装备刷取不是主要重点。',
+    fr: "Les Guide Quests, le Mirsha Settlement Support, les Event Dungeons permanents et la Skyward Tower vous fourniront de l'équipement pendant le leveling, tout comme les récompenses 6 étoiles légendaires des missions Challenge! Special Request. Avec assez de monnaie du Survey Hub ou de l'Arène, vous obtiendrez aussi du bon équipement 6 étoiles. Le farm d'équipement n'est pas une priorité tant que vous n'avez pas clear le Stage 10 des bosses Special Request, afin qu'ils ne droppent que de l'équipement 6 étoiles.",
+  },
+  gearDimensionalSupply: {
+    en: 'The Dimensional Supply banner can be used to target 3 high grade pieces per month, and exchanging some of your Special Recruitment Tickets can help jumpstart your gear — but focus on collecting enough heroes first.',
+    jp: '次元物資召喚では月に3つの高グレード装備を狙えます。スペシャル募集チケットの一部を交換すれば装備の出だしを早められますが、まずは十分な数のヒーローを集めることを優先しましょう。',
+    kr: '차원 물자 호출에서는 매월 고등급 장비 3개를 노릴 수 있습니다. 스페셜 모집 티켓 일부를 교환하면 장비를 빠르게 갖출 수 있지만, 우선 충분한 영웅을 모으는 것이 먼저입니다.',
+    zh: '次元物资召唤每月可以指定3件高品质装备，兑换部分特别招募券有助于快速起步，但请优先收集足够的英雄。',
+    fr: 'La bannière Dimensional Supply permet de cibler 3 pièces de haut grade par mois, et échanger quelques Special Recruitment Tickets aide à lancer son équipement — mais commencez par rassembler assez de Héros.',
   },
   armorPriority: {
     en: 'Armor Priority',
@@ -453,11 +461,11 @@ export const LABELS = {
     fr: 'Talismans et Charms',
   },
   talismansDesc: {
-    en: "The Archdemon's Ruins' Infinite Corridor is the primary source for Talismans. The Archdemon's Ruins Shop offers one 6-star selector per month. You also get a few from the Challenge! Special Request missions.",
-    jp: 'アークデーモンの遺跡の無限回廊がタリスマンの主な入手源です。アークデーモンの遺跡ショップでは毎月1つの6つ星セレクターを提供しています。チャレンジ！スペシャルリクエストミッションからもいくつか入手できます。',
-    kr: '아크데몬의 유적의 무한 회랑이 탈리스만의 주요 획득처입니다. 아크데몬의 유적 상점에서는 매월 6성 셀렉터 1개를 제공합니다. 챌린지! 스페셜 리퀘스트 미션에서도 몇 개를 얻을 수 있습니다.',
-    zh: '大恶魔遗迹的无限回廊是护符的主要来源。大恶魔遗迹商店每月提供一个6星选择器。挑战！特别委托任务也能获得一些。',
-    fr: "L'Infinite Corridor de l'Archdemon's Ruins est la source principale de Talismans. L'Archdemon's Ruins Shop offre un sélecteur 6 étoiles par mois. Vous en obtenez aussi quelques-uns via les missions Challenge! Special Request.",
+    en: 'Skyward Tower is the primary source for Talismans. The Survey Hub and Star Memory shops offer one 6-star Selection Chest per month. Dimensional Supply can drop 6-star Talisman Selection Chests with a fixed main stat. You will also get six 6-star Talismans from the Challenge! Special Request missions.',
+    jp: '昇天の塔がタリスマンの主な入手源です。サーベイハブとスターメモリーのショップでは毎月1つの6つ星選択ボックスを提供しています。次元物資召喚では、メインオプションが固定された6つ星タリスマン選択ボックスが排出されることがあります。チャレンジ！スペシャルリクエストミッションからも6つ星タリスマンを6個入手できます。',
+    kr: '승천의 탑이 탈리스만의 주요 획득처입니다. 서베이 허브와 별의 기억 상점에서는 매월 6성 선택 상자 1개를 제공합니다. 차원 물자 호출에서는 메인 옵션이 고정된 6성 탈리스만 선택 상자가 나올 수 있습니다. 챌린지! 스페셜 리퀘스트 미션에서도 6성 탈리스만 6개를 얻을 수 있습니다.',
+    zh: '升天之塔是护符的主要来源。调查站和星之记忆商店每月提供一个6星选择箱。次元物资召唤可能掉落主属性固定的6星护符选择箱。挑战！特别委托任务还能获得6个6星护符。',
+    fr: 'La Skyward Tower est la source principale de Talismans. Les boutiques Survey Hub et Star Memory offrent un coffre de sélection 6 étoiles par mois. La Dimensional Supply peut donner des coffres de sélection de Talisman 6 étoiles au stat principal fixe. Vous obtenez aussi six Talismans 6 étoiles via les missions Challenge! Special Request.',
   },
 
   /* Gear worth keeping */
@@ -596,6 +604,20 @@ export const LABELS = {
   },
 
   /* ═══ Progression & Resources ═══ */
+  limitBreakPlus15: {
+    en: 'How do I Limit Break heroes and enhance gear to +15?',
+    jp: 'ヒーローの限界突破と装備の+15強化はどうすればいいですか？',
+    kr: '영웅 한계 돌파와 장비 +15 강화는 어떻게 하나요?',
+    zh: '如何突破英雄和将装备强化到+15？',
+    fr: 'Comment Limit Break ses Héros et enhance son équipement en +15 ?',
+  },
+  limitBreakDesc: {
+    en: '{I-I/Limit Break Memory} and {I-I/High-Precision Chip} are mainly obtained from {L/Dimensional Singularity|/guides/dimensional-singularity}. This is a high difficulty game mode, unlocked by clearing Season 2 in Normal, then clearing {L/Monad Gate|/guides/monad-gate} Depth 1 with the True Ending.',
+    jp: '{I-I/Limit Break Memory}と{I-I/High-Precision Chip}は主に{L/Dimensional Singularity|/guides/dimensional-singularity}から入手します。高難度コンテンツで、シーズン2のノーマルをクリアした後、{L/Monad Gate|/guides/monad-gate}深度1をトゥルーエンディングでクリアすると開放されます。',
+    kr: '{I-I/Limit Break Memory}와 {I-I/High-Precision Chip}은 주로 {L/Dimensional Singularity|/guides/dimensional-singularity}에서 얻습니다. 고난도 콘텐츠로, 시즌 2 노말을 클리어한 뒤 {L/Monad Gate|/guides/monad-gate} 심도 1을 트루 엔딩으로 클리어하면 해금됩니다.',
+    zh: '{I-I/Limit Break Memory}和{I-I/High-Precision Chip}主要来自{L/Dimensional Singularity|/guides/dimensional-singularity}。这是高难度玩法，需要通关第二季普通难度，再以真结局通关{L/Monad Gate|/guides/monad-gate}深度1后解锁。',
+    fr: "{I-I/Limit Break Memory} et {I-I/High-Precision Chip} s'obtiennent principalement dans la {L/Dimensional Singularity|/guides/dimensional-singularity}. C'est un mode de haute difficulté, débloqué en clear la Season 2 en Normal, puis le Depth 1 du {L/Monad Gate|/guides/monad-gate} avec la True Ending.",
+  },
   skillManualsFirst: {
     en: 'Where do I use skill manuals first?',
     jp: 'スキルマニュアルはどこに使うべきですか？',
