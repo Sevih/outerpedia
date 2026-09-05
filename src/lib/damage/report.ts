@@ -406,14 +406,17 @@ export function buildSkillReport(
 
   if (flags.defenderInvincible) {
     return {
-      states: skill.states.map((s) => ({
-        chain: s.chain,
-        totalFactor: s.clips?.length
-          ? s.clips.reduce((t, c) => t + c.events.reduce((x, e) => x + e.factor * e.count, 0), 0)
-          : totalFactorOf(s.hits),
-        branches: [],
-        expectedDamage: 0,
-      })),
+      states: skill.states.map((s) => {
+        const factor = stateTotalFactor(s);
+        return {
+          chain: s.chain,
+          totalFactor: factor.totalFactor,
+          ...(factor.factorFilled ? { factorFilled: true as const } : {}),
+          ...(factor.clips ? { clips: factor.clips } : {}),
+          branches: [],
+          expectedDamage: 0,
+        };
+      }),
       weaknessGaugeDamage,
       defenderInvincible: true,
       ...(wgTrace ? { wgTrace } : {}),
@@ -539,18 +542,19 @@ export function buildSkillReport(
   });
 
   const states = skill.states.map((state): StateLine => {
+    // Facteur total § 8.1 de l'état — règle unique `stateTotalFactor` (clips
+    // résolus, sinon Σ tables comblée § 12.4), partagée avec les consommateurs
+    // hors calculateur.
+    const factor = stateTotalFactor(state);
     // ── Chemin RÉSOLU : cascade § 8.2 + rattrapage § 8.3 PAR CLIP ──────────
     // (le binaire recalcule ReceiveMaxDamage à chaque scan § 8.1, donc à
     // chaque clip — S2 de Francesca : cascade(700) + cascade(300), mesures
     // exactes 22/08/2026). Les events étrangers à la chaîne comptent dans le
     // facteur du clip et consomment leur part de la cascade, mais seuls les
     // hits de LA chaîne alimentent sa ligne (les autres ont la leur).
-    if (state.clips?.length) {
+    if (state.clips?.length && factor.clips) {
       const chainIds = new Set(state.hits.map((h) => h.id));
-      const clipFactors = state.clips.map((clip) => ({
-        name: clip.name,
-        totalFactor: clip.events.reduce((sum, e) => sum + e.factor * e.count, 0),
-      }));
+      const clipFactors = factor.clips;
       const branchLines = branchRates.map(
         ({ branch, probability, rate, rateTrace }): BranchLine => {
           const trace = rateTrace ? [...rateTrace] : undefined;
@@ -622,7 +626,7 @@ export function buildSkillReport(
       const expectedDamage = branchLines.reduce((e, b) => e + b.probability * b.totalDamage, 0);
       return {
         chain: state.chain,
-        totalFactor: clipFactors.reduce((s, c) => s + c.totalFactor, 0),
+        totalFactor: factor.totalFactor,
         clips: clipFactors,
         branches: branchLines,
         expectedDamage,
@@ -631,7 +635,6 @@ export function buildSkillReport(
 
     // ── Fallback : chaîne sans clips extraits — heuristique § 12.4 ─────────
     const occurrences = unfoldHits(state.hits);
-    const rawFactor = occurrences.reduce((sum, o) => sum + o.damageFactor, 0);
     // § 8.1 : le facteur total réel somme les AnimationEvents du CLIP (dont
     // les « facteurs littéraux ») — invisibles des tables. Deux mesures
     // encadrent la règle : Caren S1 (Σ tables 700 ‰, jeu = 1000 — un morceau
@@ -642,8 +645,9 @@ export function buildSkillReport(
     // 900/920…), morceau manquant : complétés au facteur plein (le § 8.3
     // verse le manque dans le dernier hit). Le seuil 990 est une heuristique
     // bornée par les deux mesures (§ 12.4). Σ ≥ 1000 est GARDÉ tel quel
-    // (1001/1002 = arrondis par excès ; bursts renforcés plausibles).
-    const totalFactor = rawFactor < 990 ? 1000 : rawFactor;
+    // (1001/1002 = arrondis par excès ; bursts renforcés plausibles). La règle
+    // vit dans `stateTotalFactor` (ci-dessous) — appliquée ici.
+    const { totalFactor, rawFactor } = factor;
 
     const branchLines = branchRates.map(({ branch, probability, rate, rateTrace }): BranchLine => {
       const trace = rateTrace ? [...rateTrace] : undefined;
@@ -722,6 +726,45 @@ function totalFactorOf(hits: ReportHitInput[]): number {
     (sum, h) => sum + (h.maxHitCount && h.maxHitCount > 0 ? h.maxHitCount : 1) * h.damageFactor,
     0,
   );
+}
+
+/** Facteur total § 8.1 d'un état, SANS scénario (cf. `stateTotalFactor`). */
+export interface StateTotalFactor {
+  /** ‰ du facteur du skill que l'état délivre (1000 = le facteur plein). */
+  totalFactor: number;
+  /** Σ brute avant comblement (== `totalFactor` hors fallback comblé). */
+  rawFactor: number;
+  /** Fallback tables comblé à 1000 (Σ < 990) — cf. `StateLine.factorFilled`. */
+  factorFilled?: true;
+  /** Détail par clip quand la chaîne est résolue par les AnimationEvents. */
+  clips?: { name: string; totalFactor: number }[];
+}
+
+/**
+ * La règle UNIQUE du facteur total d'un état (`StateLine.totalFactor`),
+ * isolée pour être réutilisable sans scénario — `buildSkillReport` l'applique,
+ * et le générateur solver d'outerpedia (« meilleur hit » d'un perso pour la
+ * colonne Damage de gear-solver) la consomme telle quelle, sans recoder.
+ *
+ * Chaîne RÉSOLUE par les AnimationEvents : Σ des events (factor × count) de
+ * chaque clip joué — chaque clip fait SA cascade § 8.2/8.3, sa somme fait foi
+ * (rejeux et events d'autres chaînes compris). Fallback (pas de clips) :
+ * Σ tables (MaxHitCount||1) × DamageFactor, comblée à 1000 ‰ sous 990
+ * (heuristique § 12.4 bornée par Caren S1 700 → 1000 et Noa S2 999 servi brut).
+ */
+export function stateTotalFactor(state: ReportState): StateTotalFactor {
+  if (state.clips?.length) {
+    const clips = state.clips.map((clip) => ({
+      name: clip.name,
+      totalFactor: clip.events.reduce((sum, e) => sum + e.factor * e.count, 0),
+    }));
+    const totalFactor = clips.reduce((s, c) => s + c.totalFactor, 0);
+    return { totalFactor, rawFactor: totalFactor, clips };
+  }
+  const rawFactor = totalFactorOf(state.hits);
+  return rawFactor < 990
+    ? { totalFactor: 1000, rawFactor, factorFilled: true }
+    : { totalFactor: rawFactor, rawFactor };
 }
 
 // ── DOT : ligne « dégâts par tick » (§ 11 + § 5) ────────────────────────────

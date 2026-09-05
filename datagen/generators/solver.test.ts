@@ -27,7 +27,13 @@ import versionData from '../../data/generated/solver/version.json';
 
 const characters = charactersData as Record<
   string,
-  { name: string | null; cls: string | null; star: number | null; ingredients: unknown }
+  {
+    name: string | null;
+    cls: string | null;
+    star: number | null;
+    ingredients: unknown;
+    bestSkill?: { slot: string; burst?: number; factor: number; unresolvedHits?: true };
+  }
 >;
 const equipment = equipmentData as Record<
   string,
@@ -188,5 +194,29 @@ describe('solver — cohérence inter-fichiers', () => {
     const v = versionData as { hash: string; builtAt: string };
     expect(v.hash).toMatch(/^[0-9a-f]{12}$/);
     expect(Number.isNaN(Date.parse(v.builtAt))).toBe(false);
+  });
+});
+
+describe('solver — bestSkill (colonne Damage de gear-solver)', () => {
+  it('chaque perso porte un bestSkill entier > 0 sur S1/S2/S3 (burst 1..3 optionnel)', () => {
+    // Le repli 1000 ‰ vit côté gear-solver : ici la donnée doit être COMPLÈTE —
+    // un perso sans kit offensif en S1/S2/S3 serait une régression de l'extracteur.
+    const missing = Object.entries(characters)
+      .filter(([, c]) => !c.bestSkill)
+      .map(([id]) => id);
+    expect(missing).toEqual([]);
+    for (const [id, c] of Object.entries(characters)) {
+      const b = c.bestSkill!;
+      expect(['S1', 'S2', 'S3'], id).toContain(b.slot);
+      expect(Number.isInteger(b.factor) && b.factor > 0, `${id} factor ${b.factor}`).toBe(true);
+      if (b.burst !== undefined) expect([1, 2, 3], id).toContain(b.burst);
+    }
+  });
+
+  it('ordre de grandeur : facteurs dans [500, 5000] ‰ (des % ou un ×10 seraient une unité fausse)', () => {
+    for (const [id, c] of Object.entries(characters)) {
+      expect(c.bestSkill!.factor, id).toBeGreaterThanOrEqual(500);
+      expect(c.bestSkill!.factor, id).toBeLessThanOrEqual(5000);
+    }
   });
 });

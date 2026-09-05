@@ -5,6 +5,27 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-05
+
+- **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,
+  `solver-best-skill.ts` + tests). gear-solver voulait, pour sa colonne Damage, le
+  facteur total (‰) du skill le plus puissant de chaque perso — S1/S2/S3 au niveau MAX,
+  états burst 1..3 rattachés au slot burstable exactement comme le calculateur
+  (`burstableSlotOf`, jamais un slot supposé). Facteur = `DamageFactor` du niveau ×
+  facteur total de l'état (multi-hit = SOMME des hits), état le plus fort d'un skill à
+  plusieurs chaînes. Calculé depuis `buildDamageCharacters()` du MÊME build (pas un
+  artefact committé potentiellement périmé). Skills à facteur 0 ignorés ; chaîne
+  irrésolue = facteur plein PORTÉ en `unresolvedHits` (signalé, jamais tu) ; perso sans
+  donnée = champ absent + warning (le repli 1000 ‰ vit chez le consommateur). Diff des
+  artefacts solver limité au nouveau champ (125/125, 25 gagnants burst, 4 irrésolus).
+- **`stateTotalFactor` extrait de `report.ts`** — la règle unique du facteur total d'un
+  état (clips résolus → Σ events factor × count ; sinon Σ tables `MaxHitCount||1 ×
+DamageFactor` comblée à 1000 ‰ sous 990) était inline dans `buildSkillReport`, en deux
+  copies (chemin invincible SANS comblement, chemin normal AVEC). Une fonction exportée,
+  les deux chemins la consomment (le chemin invincible rapporte désormais `factorFilled`
+  / `clips` comme l'autre), le générateur solver aussi — aucune logique recodée. Test :
+  le rapport et le helper donnent le même `totalFactor` sur les deux chemins.
+
 ## 2026-08-28
 
 - **Une cible repart d'une sortie VIDE avant d'extraire** (`datagen/extract/extract.ts`).

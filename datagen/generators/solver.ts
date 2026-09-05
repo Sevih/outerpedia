@@ -14,7 +14,12 @@
  *   - `sub-ticks` recomposé depuis `ItemOptionTemplet` (pools de subs des
  *     gears 5★/6★) — `item-stats-detail.json` n'existe plus ;
  *   - `dmgStat`/`dmgSec`/`noCrit` re-dérivés des tables brutes
- *     (`BT_SWAP_STAT_ATTACK` / `BT_DMG_OWNER_STAT` / crit −100 permanent).
+ *     (`BT_SWAP_STAT_ATTACK` / `BT_DMG_OWNER_STAT` / crit −100 permanent) ;
+ *   - `bestSkill` (ajout 2026-09-05) : facteur total ‰ du skill le plus
+ *     puissant (S1/S2/S3 + bursts, niveau max) — calculé par l'extracteur
+ *     damage du MÊME build (`buildDamageCharacters`) et la règle du moteur
+ *     (`stateTotalFactor`), cf. solver-best-skill.ts. Absent = pas de donnée
+ *     (gear-solver replie sur 1000 ‰ et le signale).
  *
  * ⚠ CONTRAT app externe : enums moteur BRUTS (`ST_*`, `OAT_*`, `CCT_*`, slots
  * `weapon…boots/exclusive/ooparts`), textes EN en string simple. Aucun slug wiki.
@@ -23,6 +28,8 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadTable, type Row } from '../lib/tables';
+import { buildDamageCharacters } from '../damage/characters';
+import { bestSkillOf } from './solver-best-skill';
 import {
   computeCharacterIngredients,
   type CharacterIngredients,
@@ -772,12 +779,23 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
     };
   }
 
+  // ---- bestSkill : « meilleur hit » (S1/S2/S3 + bursts, niveau max) ----
+  // Kit offensif de l'extracteur damage (mêmes tables, même build — pas de
+  // lecture d'un artefact committé potentiellement périmé) ; la sélection
+  // vit dans solver-best-skill.ts. Un perso sans donnée est SIGNALÉ, jamais
+  // comblé ici : c'est gear-solver qui replie (1000 ‰) et l'affiche.
+  const damage = buildDamageCharacters();
+  const withoutBestSkill: string[] = [];
+
   const characters: Record<string, unknown> = {};
   for (const c of characterTemplet) {
     if (c.Type !== 'CT_PC') continue;
     if (c.NameID !== `${c.ID}_Name`) continue;
     const ing: CharacterIngredients | undefined = ingredientsResult.characters[c.ID];
     const nickname = showNickName.has(c.ID) ? (textChar.get(c.NickNameID ?? '') ?? null) : null;
+    const dmgChar = damage.characters[c.ID];
+    const bestSkill = dmgChar ? bestSkillOf(dmgChar, damage.skills) : undefined;
+    if (!bestSkill) withoutBestSkill.push(c.ID);
     characters[c.ID] = {
       name: textChar.get(c.NameID ?? '') ?? null,
       nickname,
@@ -788,7 +806,14 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
       recommendSetId:
         c.RecommandSetOptionID && c.RecommandSetOptionID !== '0' ? c.RecommandSetOptionID : null,
       ...deriveDmgScaling(c),
+      ...(bestSkill ? { bestSkill } : {}),
     };
+  }
+  if (withoutBestSkill.length) {
+    console.warn(
+      `⚠ solver : ${withoutBestSkill.length} perso(s) sans bestSkill (absents de l'extracteur ` +
+        `damage ou kit sans dégâts en S1/S2/S3) : ${withoutBestSkill.join(', ')}`,
+    );
   }
   emit('characters.json', characters);
 

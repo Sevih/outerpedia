@@ -16,6 +16,7 @@ import {
   resistProbability,
   resolveAttackStat,
   type ReportScenario,
+  stateTotalFactor,
 } from './report';
 import { Element } from './types';
 
@@ -327,5 +328,78 @@ describe('report — ligne DOT (§ 11 + § 5)', () => {
       buildDotLine({ ...base, attackRate: 700, statValue: 10000, enhancePermille: 500 })
         .damagePerTick,
     ).toBe(4725);
+  });
+});
+
+describe('report — stateTotalFactor (règle unique § 8.1, sans scénario)', () => {
+  it('clips résolus : Σ factor × count par clip, rejeux compris — la somme des clips fait foi', () => {
+    const f = stateTotalFactor({
+      chain: 'F_Skill_2',
+      hits: [
+        { id: 'F_Skill_2_1', damageFactor: 700 },
+        { id: 'F_Skill_2_2', damageFactor: 300 },
+      ],
+      clips: [
+        { name: 'F_Skill_2', events: [{ id: 'F_Skill_2_1', factor: 700, count: 1 }] },
+        { name: 'F_Skill_2_2', events: [{ id: 'F_Skill_2_2', factor: 150, count: 2 }] },
+      ],
+    });
+    expect(f).toEqual({
+      totalFactor: 1000,
+      rawFactor: 1000,
+      clips: [
+        { name: 'F_Skill_2', totalFactor: 700 },
+        { name: 'F_Skill_2_2', totalFactor: 300 },
+      ],
+    });
+  });
+
+  it('fallback tables : MaxHitCount déplié ; Σ < 990 comblée à 1000 (factorFilled), ≥ 990 brute', () => {
+    expect(stateTotalFactor({ chain: 'C', hits: [{ id: 'C_1', damageFactor: 700 }] })).toEqual({
+      totalFactor: 1000,
+      rawFactor: 700,
+      factorFilled: true,
+    });
+    expect(
+      stateTotalFactor({ chain: 'N', hits: [{ id: 'N_1', damageFactor: 333, maxHitCount: 3 }] }),
+    ).toEqual({ totalFactor: 999, rawFactor: 999 });
+    expect(stateTotalFactor({ chain: 'B', hits: [{ id: 'B_1', damageFactor: 1300 }] })).toEqual({
+      totalFactor: 1300,
+      rawFactor: 1300,
+    });
+  });
+
+  it('buildSkillReport rapporte le MÊME totalFactor que le helper (chemin résolu et fallback)', () => {
+    const scenario = {
+      attacker: {
+        attackStat: 1000,
+        criticalRate: 0,
+        criticalDmgRate: 1500,
+        dmgBoost: 0,
+        piercePowerRate: 0,
+        piercePower: 0,
+        element: Element.Fire,
+      },
+      defender: {
+        defense: 0,
+        avoid: 0,
+        dmgReduceRate: 0,
+        enemyCriticalDamageReduce: 0,
+        element: Element.Fire,
+      },
+    };
+    const states = [
+      {
+        chain: 'R',
+        hits: [{ id: 'R_1', damageFactor: 500 }],
+        clips: [{ name: 'R', events: [{ id: 'R_1', factor: 500, count: 3 }] }],
+      },
+      { chain: 'U', hits: [{ id: 'U_1', damageFactor: 700 }] },
+    ];
+    const report = buildSkillReport({ skillFactor: 1000, states }, scenario);
+    expect(report.states.map((s) => s.totalFactor)).toEqual(
+      states.map((s) => stateTotalFactor(s).totalFactor),
+    );
+    expect(report.states[1].factorFilled).toBe(true);
   });
 });
