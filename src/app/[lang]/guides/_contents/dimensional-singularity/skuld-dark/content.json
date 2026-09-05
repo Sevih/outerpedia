@@ -230,5 +230,13 @@
         }
       ]
     }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "HCr-4TxgJkA",
+      "title": "Dimensional Singularity Skuld (Dark) - Light Team | Outerplane",
+      "author": "Salty Tuna"
+    }
   ]
 }
