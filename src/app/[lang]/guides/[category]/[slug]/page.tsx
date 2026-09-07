@@ -4,7 +4,13 @@ import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
-import { getGuide, guideBossMonster, guideUpdatedDate, listGuideParams } from '@/lib/data/guides';
+import {
+  getGuide,
+  guideBossMonster,
+  guideOgImage,
+  guideUpdatedDate,
+  listGuideParams,
+} from '@/lib/data/guides';
 import { monsterOgImage } from '@/lib/data/monsters';
 import { img } from '@/lib/images';
 import { GuideDetail } from './guide-detail';
@@ -75,7 +81,7 @@ export async function generateMetadata({
     description: bossName
       ? `${bossName} — ${lRec(guide.description, lang)}`
       : lRec(guide.description, lang),
-    ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
+    ...(guide.ogImage ? { ogImage: guideOgImage(guide) } : {}),
     ...portrait,
     // og:type=article + dates (published = modified faute de date de création).
     article: { publishedTime: updated, modifiedTime: updated, authors: [guide.author] },

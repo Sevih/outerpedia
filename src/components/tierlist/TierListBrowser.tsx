@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useDeferredValue, useMemo, useRef, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { img } from '@/lib/images';
 import { CharacterCard } from '@/components/character/CharacterCard';
 import { joinDisplayName } from '@/lib/data/characters';
@@ -135,7 +135,6 @@ export function TierListBrowser({
    */
   fixedTranscend?: number;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [q, setQ] = useState('');
@@ -200,11 +199,13 @@ export function TierListBrowser({
     const handle = setTimeout(() => {
       if (lastUrl.current === url) return;
       lastUrl.current = url;
-      // URL dynamique (filtres) → hors du typage des routes statiques de Next.
-      router.replace(url as Parameters<typeof router.replace>[0], { scroll: false });
+      // replaceState ne met à jour QUE la barre d'adresse — pas de fetch RSC,
+      // pas de re-rendu (`router.replace` en déclenchait un par frappe, débattue
+      // ou non). Même geste que le tier-list-maker.
+      window.history.replaceState(window.history.state, '', url);
     }, 150);
     return () => clearTimeout(handle);
-  }, [q, element, klass, rarity, role, transcend, withTranscend, pathname, router]);
+  }, [q, element, klass, rarity, role, transcend, withTranscend, pathname]);
 
   /** Le palier auquel la liste se lit — choisi (PvE), imposé (PvP) ou aucun (EE). */
   const step = withTranscend ? transcend : fixedTranscend;

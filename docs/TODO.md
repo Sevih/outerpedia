@@ -90,10 +90,6 @@
       `preventDefault` sur touchend, le click du `<Link>` est annulé. Ne pas
       empêcher quand le déclencheur contient un lien, ou mettre le lien dans la
       bulle en tactile.
-- [ ] **Statut d'événement figé 24 h en ISR** (G5) : `event/index.tsx` calcule
-      upcoming/ongoing/ended côté serveur. Envoyer les bornes au client et
-      dériver avec `useNow`, comme `SeasonBadge` (règle déjà écrite dans les
-      notes ci-dessous : « le statut en cours se calcule CÔTÉ CLIENT »).
 
 ### Lot 2 — métier, données, outillage
 
@@ -153,22 +149,11 @@
       et dans le picker du hero-tracker) + 8 dans les composants (`ON`/`OFF`,
       `aria-label` anglais, nombres en `toLocaleString('en')`). Liste complète
       dans le rapport.
-- [ ] **`router.replace` à chaque frappe** (G25) : `MostUsedUnitsBrowser`,
-      `CharactersBrowser`, `TierListBrowser` — un aller-retour RSC par filtre,
-      là où le tier-list-maker fait `history.replaceState` et l'explique.
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] `parseText` strict : `{E/xxx}`/`{C/xxx}` inconnus rendent une clé et une
-      image cassée sans passer par `unknownRef` ; `{L/…|href}` non validé (G27).
 - [ ] `fr` : `sys.element.*`/`sys.class.*` traduits dans l'UI mais la fiche lit
       le glossaire EN — trancher une source (G28).
-- [ ] Mapping sous-domaine ↔ langue résolu par la CLÉ dans le proxy, par
-      `subdomain` dans `site.ts` ; `outerpedia.com/jp/…` servi au lieu de
-      rediriger (G30).
-- [ ] `GuideMeta.ogImage` documenté en chemin racine `/images/…` et passé tel
-      quel par 3 sites — le piège déjà corrigé pour `DEFAULT_OG_IMAGE` ; aucun
-      `meta.json` ne l'utilise aujourd'hui (G33).
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
@@ -177,13 +162,10 @@
       premier retrait, que le validateur ne verra pas (G51) ; `comics.json`,
       `video-meta.json`, `posts.json` écrits hors `formatJson` (passe prettier
       par chance de forme, un tableau court le ferait échouer en CI) (G52).
-- [ ] Hero-tracker : long press qui avale le tap suivant (à confirmer sur
-      appareil — pas de `pointercancel`), « réinitialiser » gaté sur la liste
-      filtrée et qui oublie `fused` (G39).
-- [ ] Pull simulator : `setLastResults` appelé DANS l'updater de `setSession`
-      (effet de bord dans un updater, StrictMode garde le second appel) (G44,
-      reste) ; admin : `key={i}` sur listes réordonnées par `MoveButtons`
-      (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) (G45).
+- [ ] Admin : `key={i}` sur des listes réordonnées par `MoveButtons`
+      (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) — l'état
+      interne d'`InlineTextField` reste collé à la position ; il faut un id par
+      bloc (G45).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
       3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres,
       presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de

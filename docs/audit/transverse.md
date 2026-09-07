@@ -124,6 +124,11 @@ mettre le lien dans la bulle en mode tactile.
 
 ### G5 — Statut d'événement figé 24 h dans le cache ISR · logique métier
 
+> **Tombé à la vérification le soir même** : la page lit `events.json` par
+> `loadRuntimeJson` (`revalidate: 600`), donc l'ISR réel est de 10 minutes, et
+> la purge nocturne couvre `/event` depuis G8. Le calcul serveur est voulu (un
+> teaser ne doit pas quitter le serveur). Rien à changer — cf. DONE 07/09.
+
 [`src/app/[lang]/tools/_contents/event/index.tsx:22-39`](../../src/app/[lang]/tools/_contents/event/index.tsx),
 [`src/lib/data/events.ts:198`](../../src/lib/data/events.ts) (`summarize`
 prend `Date.now()`), [`src/app/[lang]/event/page.tsx:19`](../../src/app/[lang]/event/page.tsx)

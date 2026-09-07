@@ -17,7 +17,7 @@ import { normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
-import { getGuide } from '@/lib/data/guides';
+import { getGuide, guideOgImage } from '@/lib/data/guides';
 import { getTower } from '@/lib/data/towers';
 import { getMonster } from '@/lib/data/monsters';
 import { GuideDetail } from '../guide-detail';
@@ -56,7 +56,7 @@ export async function generateMetadata({
     canonicalPath: `/guides/${category}/${slug}`,
     title: `${lRec(guide.title, lang)} — ${label}`,
     description: `${label} — ${lRec(guide.description, lang)}`,
-    ...(guide.ogImage ? { ogImage: guide.ogImage } : {}),
+    ...(guide.ogImage ? { ogImage: guideOgImage(guide) } : {}),
   });
 }
 

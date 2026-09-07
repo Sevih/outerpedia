@@ -157,6 +157,34 @@
     restent par catégorie. RESTE au TODO : vérifier le pool hors-focus des
     bannières rateup/premium/limited contre la donnée.
 
+- **Audit transverse — lot 6 (G5 tombé à la vérification, G25, G27, G30, G33,
+  G39, G44)**.
+  - **G5 « statut d'événement figé 24 h » — CONSTAT TOMBÉ** : la page lit
+    `events.json` par `loadRuntimeJson`, dont le `revalidate: 600` abaisse
+    l'ISR réel à 10 minutes (règle Next : le plus court gagne) ; la purge
+    nocturne couvre en plus `/event` et `/event/[slug]` depuis le lot 1. Et le
+    calcul CÔTÉ SERVEUR est voulu : un teaser ne doit pas quitter le serveur
+    (titre, résumé, bannière), ce qu'un statut dérivé côté client rendrait
+    impossible. Rien à changer ; le rapport le surestimait.
+  - **`parseText` strict complet** : `{E/xxx}` et `{C/xxx}` inconnus passent
+    par `unknownRef` (le build casse au lieu de rendre `sys.element.xxx` et une
+    image morte) ; `{L/label|href}` n'accepte que chemin interne, ancre ou
+    http(s) — même garde que les liens markdown d'`EventBlocks`. Vérifié sur
+    les 2 945 balises du contenu : aucune ne tombe. Tests ajoutés.
+  - **Le proxy résout le sous-domaine par `LANGUAGES[*].subdomain`**
+    (`langBySubdomain`), la même clé que `buildUrl` — un `subdomain: 'ja'`
+    casserait désormais à un seul endroit au lieu de passer en silence.
+  - **`guideOgImage`** : l'og:image explicite d'un guide est résolue sous la
+    base des assets (3 sites) ; la doc de `GuideMeta.ogImage` dit pourquoi
+    (`/images/*` n'est servi par personne en prod).
+  - **Hero-tracker** : « réinitialiser » se gate sur le TOTAL suivi, pas sur la
+    liste filtrée, et remet aussi `fused`.
+  - **Pull simulator** : les tirages se calculent hors des updaters
+    (`setLastResults` dedans était un effet de bord rejoué par StrictMode).
+  - **`history.replaceState` au lieu de `router.replace`** dans
+    `MostUsedUnitsBrowser`, `CharactersBrowser`, `TierListBrowser` — plus
+    d'aller-retour RSC par frappe ; aucun des trois ne lit `useSearchParams`.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

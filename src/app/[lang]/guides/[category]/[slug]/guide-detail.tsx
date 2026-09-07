@@ -22,6 +22,7 @@ import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categorie
 import {
   formatGuideDate,
   getGuide,
+  guideOgImage,
   guideUpdatedDate,
   type GuideContentProps,
 } from '@/lib/data/guides';
@@ -68,7 +69,7 @@ export async function GuideDetail({
     description: lRec(guide.description, lang),
     author: guide.author,
     dateModified: updated,
-    ...(guide.ogImage ? { image: guide.ogImage } : {}),
+    ...(guide.ogImage ? { image: guideOgImage(guide) } : {}),
   });
   const crumbLd = buildBreadcrumbJsonLd([
     { name: 'Outerpedia', url: buildUrl(lang, '/') },

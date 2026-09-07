@@ -30,6 +30,7 @@ import {
 import { isTowerKey, TOWER_KEYS } from '@/lib/data/towers';
 import { getMonster } from '@/lib/data/monsters';
 import { encountersOfGroup } from '@/lib/data/encounters';
+import { img } from '@/lib/images';
 
 // Sous-dossier lu via env (défaut = le chemin réel). L'indirection `process.env
 // … ?? …` casse la CONSTANT-FOLD de l'analyseur : sinon Turbopack résout
@@ -145,7 +146,12 @@ export interface GuideMeta {
    * cadrage mobile l'exige (le libellé du pin passe alors sous la vignette).
    */
   mapPos?: { top: number; left: number; mobileTop?: number };
-  /** og:image explicite (chemin `/images/...`, PNG/JPG par convention). */
+  /**
+   * og:image explicite : chemin SOUS LA BASE DES ASSETS (`/images/...`,
+   * PNG/JPG — certains crawlers ignorent le webp), résolu par `guideOgImage`.
+   * Jamais tel quel dans une balise : `/images/*` n'est servi par personne en
+   * prod (le piège déjà corrigé pour `DEFAULT_OG_IMAGE`, cf. `seo.ts`).
+   */
   ogImage?: string;
   /** Exclu des listes/compteurs, accessible en URL directe (comportement conservé). */
   hidden?: boolean;
@@ -423,6 +429,11 @@ export function listGuides(): Guide[] {
  * (maintenu par le stamp), sinon dérivée du dossier `versions/` le plus récent
  * (`YYYY-MM` → `YYYY-MM-01`). Le scan garantit qu'au moins l'une existe.
  */
+/** URL absolue de l'og:image explicite d'un guide (`undefined` s'il n'en a pas). */
+export function guideOgImage(guide: Pick<Guide, 'ogImage'>): string | undefined {
+  return guide.ogImage ? img.asset(guide.ogImage) : undefined;
+}
+
 export function guideUpdatedDate(guide: Pick<Guide, 'updated' | 'versions'>): string {
   if (guide.updated) return guide.updated;
   const newest = guide.versions[0]?.key;

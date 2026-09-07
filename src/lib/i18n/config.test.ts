@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_LANG, isValidLang, normalizeLang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, isValidLang, langBySubdomain, normalizeLang } from '@/lib/i18n/config';
 import { isGuideCategory, isGuideTier } from '@/lib/data/guide-categories';
 import { isTowerKey } from '@/lib/data/towers';
 import { getToolMeta } from '@/lib/data/tools';
@@ -27,5 +27,14 @@ describe('gardes de type — noms de la chaîne de prototype', () => {
       expect(isTowerKey(n), n).toBe(false);
       expect(getToolMeta(n), n).toBeNull();
     }
+  });
+});
+
+describe('langBySubdomain', () => {
+  it('résout un sous-domaine de langue, jamais la langue par défaut (apex) ni un inconnu', () => {
+    expect(langBySubdomain('jp')).toBe('jp');
+    expect(langBySubdomain('')).toBeUndefined(); // l'apex n'a pas de sous-domaine
+    expect(langBySubdomain('www')).toBeUndefined();
+    expect(langBySubdomain('constructor')).toBeUndefined();
   });
 });

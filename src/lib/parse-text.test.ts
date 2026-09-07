@@ -21,11 +21,19 @@ describe('parseText — références inconnues', () => {
     );
     expect(() => parseText('{I-I/Objet Inexistant}', strict)).toThrow(/\{I-I\/Objet Inexistant\}/);
     expect(() => parseText('{ZZZ/tag inconnu}', strict)).toThrow(/\{ZZZ\/tag inconnu\}/);
+    // Élément / classe / lien : mêmes règles que `checkTag` (audit 07/09, G27).
+    expect(() => parseText('{E/Wind}', strict)).toThrow(/\{E\/Wind\}/);
+    expect(() => parseText('{C/Paladin}', strict)).toThrow(/\{C\/Paladin\}/);
+    expect(() => parseText('{C/Striker|Ninja}', strict)).toThrow(/\{C\/Striker\|Ninja\}/);
+    expect(() => parseText('{L/x|javascript:alert(1)}', strict)).toThrow(/\{L\/x\|javascript/);
   });
 
   it('mode STRICT : une référence VALIDE ne lève pas', () => {
     const strict: ParseCtx = { ...ctx, strict: true };
-    expect(() => parseText('{E/Fire} et {C/Healer}', strict)).not.toThrow();
+    expect(() => parseText('{E/Fire} et {C/Healer} et {C/Striker|Attacker}', strict)).not.toThrow();
+    expect(() =>
+      parseText('{L/guide|/guides/x} {L/site|https://discord.com/x} {L/a|#s} {L/nu}', strict),
+    ).not.toThrow();
   });
 });
 

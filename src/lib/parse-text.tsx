@@ -503,6 +503,21 @@ function itemChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   );
 }
 
+/** Classes et sous-classes que l'i18n connaît (`sys.class.*`, `sys.subclass.*`). */
+const CLASS_SLUGS = new Set(['defender', 'striker', 'ranger', 'mage', 'healer']);
+const SUBCLASS_SLUGS = new Set([
+  'attacker',
+  'bruiser',
+  'wizard',
+  'enchanter',
+  'vanguard',
+  'tactician',
+  'sweeper',
+  'phalanx',
+  'reliever',
+  'sage',
+]);
+
 type TagHandler = (value: string, ctx: ParseCtx, key: number) => ReactNode;
 
 const TAG_MAP: Record<string, TagHandler> = {
@@ -510,6 +525,9 @@ const TAG_MAP: Record<string, TagHandler> = {
   D: (v, ctx, k) => effectChip('debuff', v, ctx, k),
   E: (v, ctx, k) => {
     const slug = v.trim().toLowerCase();
+    // Même règle que `checkTag` : en strict, un élément inconnu casse le build
+    // au lieu de rendre la clé `sys.element.xxx` et une image cassée.
+    if (ELEMENT_TEXT[slug] === undefined) return unknownRef(v, `{E/${v}}`, ctx, k);
     return (
       <InlineIcon
         key={k}
@@ -523,6 +541,9 @@ const TAG_MAP: Record<string, TagHandler> = {
   C: (v, ctx, k) => {
     const [name, subclass] = v.split('|');
     const slug = name.trim().toLowerCase();
+    const sub = subclass?.trim().toLowerCase();
+    if (!CLASS_SLUGS.has(slug) || (sub !== undefined && !SUBCLASS_SLUGS.has(sub)))
+      return unknownRef(v, `{C/${v}}`, ctx, k);
     const label = subclass
       ? ctx.t(`sys.subclass.${subclass.trim().toLowerCase()}` as TranslationKey)
       : ctx.t(`sys.class.${slug}` as TranslationKey);
@@ -544,10 +565,14 @@ const TAG_MAP: Record<string, TagHandler> = {
   P: (v, ctx, k) => characterChip(v, ctx, k),
   SK: (v, ctx, k) => skillChip(v, ctx, k),
   EE: (v, ctx, k) => eeChip(v, ctx, k),
-  L: (v, _ctx, k) => {
+  L: (v, ctx, k) => {
     const sep = v.indexOf('|');
     const label = sep === -1 ? v : v.slice(0, sep);
     const href = sep === -1 ? '' : v.slice(sep + 1);
+    // Chemin interne (`/guides/…`), ancre (`#…`) ou URL http(s) — même garde
+    // que les liens markdown d'`EventBlocks` ; `javascript:` & co. n'ont rien à
+    // faire dans un contenu curé, et en strict c'est une faute de contenu.
+    if (href && !/^(\/[^/]|#|https?:\/\/)/.test(href)) return unknownRef(label, `{L/${v}}`, ctx, k);
     return <InlineIcon key={k} label={label} color="text-highlight" href={href || undefined} />;
   },
   // Domaine équipement : items branchés sur les familles / le catalogue.
@@ -606,8 +631,14 @@ function checkTag(
       return ELEMENT_TEXT[v.toLowerCase()] !== undefined
         ? { ok: true }
         : { ok: false, reason: 'élément inconnu' };
-    case 'C':
-      return { ok: true }; // classe/sous-classe : libellé i18n, jamais bloquant
+    case 'C': {
+      const [name, subclass] = v.split('|');
+      const sub = subclass?.trim().toLowerCase();
+      return CLASS_SLUGS.has(name.trim().toLowerCase()) &&
+        (sub === undefined || SUBCLASS_SLUGS.has(sub))
+        ? { ok: true }
+        : { ok: false, reason: 'classe inconnue' };
+    }
     case 'S':
       return STAT_ICON[v] ? { ok: true } : { ok: false, reason: 'stat inconnue' };
     case 'P':

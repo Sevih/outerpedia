@@ -3,7 +3,7 @@
 import { useEffect, useDeferredValue, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { img } from '@/lib/images';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import {
@@ -66,7 +66,6 @@ export function MostUsedUnitsBrowser({
   rows: UsageRow[];
   labels: MostUsedLabels;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [q, setQ] = useState('');
@@ -125,11 +124,13 @@ export function MostUsedUnitsBrowser({
     const handle = setTimeout(() => {
       if (lastUrl.current === url) return;
       lastUrl.current = url;
-      // URL dynamique (filtres) → hors du typage des routes statiques de Next.
-      router.replace(url as Parameters<typeof router.replace>[0], { scroll: false });
+      // replaceState ne met à jour QUE la barre d'adresse — pas de fetch RSC,
+      // pas de re-rendu (`router.replace` en déclenchait un par frappe, débattue
+      // ou non). Même geste que le tier-list-maker.
+      window.history.replaceState(window.history.state, '', url);
     }, 150);
     return () => clearTimeout(handle);
-  }, [q, element, klass, rarity, category, pathname, router]);
+  }, [q, element, klass, rarity, category, pathname]);
 
   // ── Filtrage (le total suit les catégories cochées) ──
   const filtered = useMemo(() => {

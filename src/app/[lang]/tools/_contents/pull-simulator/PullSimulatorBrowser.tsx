@@ -234,27 +234,28 @@ export function PullSimulatorBrowser({
     [pool1, pool2, focusChars, pullPool, selectedIds, weights],
   );
 
+  // Les tirages se calculent HORS des updaters (un updater doit être pur :
+  // StrictMode le rejoue, et `setLastResults` dedans était un effet de bord —
+  // deux séries de `Math.random()` pour un clic). Un clic = un tirage depuis la
+  // session courante ; deux clics ne peuvent pas se chevaucher dans un même
+  // rendu.
   const handlePull = useCallback(
     (count: 1 | 10) => {
-      setSession((prev) => {
-        const { results, session: next } = performPulls(prev, count, config);
-        setLastResults(results.map((r) => ({ ...r, charId: resolveChar(r) })));
-        return next;
-      });
+      const { results, session: next } = performPulls(session, count, config);
+      setSession(next);
+      setLastResults(results.map((r) => ({ ...r, charId: resolveChar(r) })));
     },
-    [resolveChar, config],
+    [session, resolveChar, config],
   );
 
   const handleMileage = useCallback(() => {
-    setSession((prev) => {
-      const next = redeemMileage(prev, config);
-      if (!next) return prev;
-      const focus =
-        focusChars.length > 0 ? focusChars[Math.floor(Math.random() * focusChars.length)] : null;
-      setLastResults([{ rarity: 3, isFocus: true, charId: focus?.id ?? null }]);
-      return next;
-    });
-  }, [focusChars, config]);
+    const next = redeemMileage(session, config);
+    if (!next) return;
+    const focus =
+      focusChars.length > 0 ? focusChars[Math.floor(Math.random() * focusChars.length)] : null;
+    setSession(next);
+    setLastResults([{ rarity: 3, isFocus: true, charId: focus?.id ?? null }]);
+  }, [session, focusChars, config]);
 
   const handleReset = useCallback(() => {
     setSession(createSession(bannerType));

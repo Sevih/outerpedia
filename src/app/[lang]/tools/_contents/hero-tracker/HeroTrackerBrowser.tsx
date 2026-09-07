@@ -720,7 +720,9 @@ export function HeroTrackerBrowser({
           store={store}
           setStore={setStore}
           fusionPairs={fusionPairs}
-          trackedCount={trackedRows.length}
+          // Le TOTAL suivi, pas la liste filtrée : « réinitialiser » disparaissait
+          // dès qu'un filtre ne montrait rien alors que des héros étaient suivis.
+          trackedCount={trackedTotal}
           onImport={onImport}
           importState={importState}
           labels={labels}
@@ -1230,8 +1232,10 @@ function Settings({
           <button
             type="button"
             onClick={() => {
+              // `fused` suit `heroes` : un choix de fusion sans héros suivi n'a
+              // plus de sens, et il rejaillissait au prochain suivi du même perso.
               if (window.confirm(labels.resetConfirm))
-                setStore((prev) => ({ ...prev, heroes: {} }));
+                setStore((prev) => ({ ...prev, heroes: {}, fused: {} }));
             }}
             className="border-line text-content-muted hover:border-danger hover:text-danger rounded border px-2 py-1 text-[11px] transition-colors"
           >

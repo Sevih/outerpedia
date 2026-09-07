@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { DEFAULT_LANG, isValidLang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, isValidLang, langBySubdomain } from '@/lib/i18n/config';
 
 /**
  * CSP : servie STATIQUEMENT par `next.config.ts` (headers globaux) ; le proxy ne
@@ -67,8 +67,9 @@ export function proxy(request: NextRequest) {
   // --- Sous-domaine → réécriture de path ---
   const host = request.headers.get('host') ?? '';
   const subdomain = extractSubdomain(host);
+  const hostLang = subdomain ? langBySubdomain(subdomain) : undefined;
 
-  if (subdomain && isValidLang(subdomain)) {
+  if (hostLang) {
     const firstSegment = pathname.split('/')[1];
     // Le SOUS-DOMAINE fait foi. Un préfixe de langue dans le path (vieux lien
     // path-based, ou switcher d'avant le passage aux sous-domaines) entre en
@@ -82,7 +83,7 @@ export function proxy(request: NextRequest) {
       return NextResponse.redirect(url, 308);
     }
     const url = request.nextUrl.clone();
-    url.pathname = `/${subdomain}${pathname}`;
+    url.pathname = `/${hostLang}${pathname}`;
     return NextResponse.rewrite(url);
   }
 

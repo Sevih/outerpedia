@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { CharacterCard } from './CharacterCard';
 import { CharactersFiltersBar, type FiltersBarLabels } from './filters/CharactersFiltersBar';
 import { CharactersFiltersSidebar } from './filters/CharactersFiltersSidebar';
@@ -108,7 +108,6 @@ export function CharactersBrowser({
   rows: CharacterRow[];
   labels: CharactersBrowserLabels;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [q, setQ] = useState('');
@@ -234,8 +233,10 @@ export function CharactersBrowser({
     const handle = setTimeout(() => {
       if (lastUrl.current === url) return;
       lastUrl.current = url;
-      // URL dynamique (filtres) → hors du typage des routes statiques de Next.
-      router.replace(url as Parameters<typeof router.replace>[0], { scroll: false });
+      // replaceState ne met à jour QUE la barre d'adresse — pas de fetch RSC,
+      // pas de re-rendu (`router.replace` en déclenchait un par frappe, débattue
+      // ou non). Même geste que le tier-list-maker.
+      window.history.replaceState(window.history.state, '', url);
     }, 150);
     return () => clearTimeout(handle);
   }, [
@@ -257,7 +258,6 @@ export function CharactersBrowser({
     sort,
     releaseDesc,
     pathname,
-    router,
   ]);
 
   // ── Filtrage ──

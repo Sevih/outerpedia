@@ -81,6 +81,17 @@ export function normalizeLang(raw: string): Lang {
   return isValidLang(raw) ? raw : DEFAULT_LANG;
 }
 
+/**
+ * Langue servie par un SOUS-DOMAINE (`jp` → `jp`), `undefined` si l'hôte n'en
+ * désigne aucune. Résout par `LANGUAGES[*].subdomain` — la même clé que
+ * `buildUrl` (`site.ts`) pour CONSTRUIRE les URL — et non par la clé de
+ * langue : les deux coïncident aujourd'hui, mais un `subdomain: 'ja'` doit
+ * casser à un seul endroit, pas faire passer le proxy en silence.
+ */
+export function langBySubdomain(sub: string): Lang | undefined {
+  return LANGS.find((l) => LANGUAGES[l].subdomain === sub && sub !== '');
+}
+
 // NB : la notion « langue de jeu » (sous-ensemble officiel, hors traductions
 // communautaires) vit CÔTÉ DONNÉES dans `datagen/lib/lang.ts` (`GameLang`/
 // `GAME_LANGS`) — la copie côté site avait été ajoutée ici mais aucun rendu ne
