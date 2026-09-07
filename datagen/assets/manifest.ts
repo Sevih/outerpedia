@@ -34,6 +34,7 @@ import { buildItemCatalog } from '../generators/item-catalog';
 import { listHeroFullArt } from './hero-full-art';
 import { loadCuratedEffects } from '../curated/effects';
 import { effectIconCandidates } from '../lib/effects';
+import { readCuratedJson } from '../lib/json';
 import { resolveClass } from '../lib/class';
 import { slugEnum } from '../lib/enums';
 import { ITEM_SPRITE_DIR } from './source';
@@ -80,14 +81,12 @@ const load = (p: string): Dict =>
  * une erreur — comme les événements curés plus haut.
  */
 function portraitFxTextures(): Record<string, unknown> {
-  try {
-    const data = JSON.parse(readFileSync(resolve('datagen/assets/portrait-fx.json'), 'utf8')) as {
-      textures?: Record<string, unknown>;
-    };
-    return data.textures ?? {};
-  } catch {
-    return {};
-  }
+  // `readCuratedJson` : absent → rien à collecter ; JSON cassé → LÈVE (avant,
+  // un fichier corrompu vidait le manifeste de ces textures sans un mot).
+  return (
+    readCuratedJson<{ textures?: Record<string, unknown> }>('datagen/assets/portrait-fx.json')
+      ?.textures ?? {}
+  );
 }
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
@@ -103,14 +102,8 @@ interface CuratedEvent {
   blocks?: { kind: string; src?: string }[];
 }
 function curatedEvents(): CuratedEvent[] {
-  try {
-    const data = JSON.parse(
-      readFileSync(resolve('data/curated/events.json'), 'utf8'),
-    ) as CuratedEvent[];
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
+  const data = readCuratedJson<unknown>('data/curated/events.json');
+  return Array.isArray(data) ? (data as CuratedEvent[]) : [];
 }
 /** Bannières d'événement (dédupliquées) — elles ont aussi une variante PNG. */
 const eventCovers = (): string[] => [
@@ -669,9 +662,11 @@ export function buildAssetManifest(): AssetRequest[] {
 
   // --- Gear reco : icônes des équipements réellement recommandés -------------
   // Collecte CIBLÉE : uniquement les ids référencés par la couche curée
-  // (gear-reco + presets), pas les ~850 items du jeu.
-  try {
-    const reco = JSON.parse(readFileSync(resolve('data/curated/gear-reco.json'), 'utf8')) as Record<
+  // (gear-reco + presets), pas les ~850 items du jeu. Curés absents → rien à
+  // collecter ; curé CASSÉ → lève (un seul `catch` avalait les deux, ET les
+  // quatre tables generated lues juste après).
+  const reco = readCuratedJson<
+    Record<
       string,
       {
         weapons?: { id: string }[];
@@ -679,11 +674,13 @@ export function buildAssetManifest(): AssetRequest[] {
         talismans?: string[];
         sets?: { preset?: string; pieces?: { set: string }[] }[];
       }[]
-    >;
-    const presets = JSON.parse(readFileSync(resolve('data/curated/gear-presets.json'), 'utf8')) as {
-      talismans: Record<string, string[]>;
-      sets: Record<string, { set: string }[]>;
-    };
+    >
+  >('data/curated/gear-reco.json');
+  const presets = readCuratedJson<{
+    talismans: Record<string, string[]>;
+    sets: Record<string, { set: string }[]>;
+  }>('data/curated/gear-presets.json');
+  if (reco && presets) {
     const equip = (file: string) =>
       JSON.parse(readFileSync(resolve(`data/generated/equipment/${file}`), 'utf8')) as Record<
         string,
@@ -731,8 +728,6 @@ export function buildAssetManifest(): AssetRequest[] {
           domain: 'ui',
         });
     }
-  } catch {
-    /* pas de gear-reco curé — rien à collecter */
   }
 
   // --- UI statique de la fiche perso (apparence portée de l'ancien site) -----

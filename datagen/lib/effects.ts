@@ -28,8 +28,6 @@
  * exhaustivement sur les 143 types réels. Un futur type inconnu retombe sur
  * `special` (jamais de drop silencieux ; le `type` brut est toujours conservé).
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { formatRowValue } from './buff';
 import { readCuratedJson } from './json';
 import type { LangDict } from './lang';
@@ -649,18 +647,18 @@ export function buildEffectGlossary(): EffectGlossary {
   // Le manifest les rapatriera du pool éditorial (`editorialFallback`) — seule
   // exception à la règle « images = extraction du jeu » : cet éditorial n'existe
   // pas dans les tables.
-  try {
-    const iconByLabelRaw = JSON.parse(
-      readFileSync(resolve('data/editorial/effect-icons.json'), 'utf8'),
-    ) as Record<string, string>;
+  // Map éditoriale absente → les effets sans icône restent sans icône ; map
+  // CASSÉE → lève (`readCuratedJson`, l'idiome des curés/éditoriaux).
+  const iconByLabelRaw = readCuratedJson<Record<string, string>>(
+    'data/editorial/effect-icons.json',
+  );
+  if (iconByLabelRaw) {
     const iconByLabel = new Map(
       Object.entries(iconByLabelRaw).map(([label, icon]) => [label.toLowerCase(), icon]),
     );
     for (const e of effects.values()) {
       if (!e.icon) e.icon = iconByLabel.get((e.name.en ?? '').toLowerCase()) ?? '';
     }
-  } catch {
-    /* map éditoriale absente — les effets sans icône restent sans icône */
   }
 
   // Officiel ou communautaire ? Une icône introuvable dans les sprites

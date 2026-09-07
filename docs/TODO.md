@@ -123,10 +123,6 @@
 
 ### Lot 3 — régler à la source
 
-- [ ] Lectures « ratée = vide silencieux » côté DATAGEN (G13, reste) :
-      `datagen/assets/manifest.ts:83,104,674`, `datagen/lib/effects.ts:653`,
-      `datagen/generators/character-release.ts:414` → `readCuratedJson`
-      (absent → défaut, cassé → throw nommé). Le côté `src/` est fait.
 - [ ] **40+ imports directs de `@data/*` hors data layer** (G14), interdit par
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur

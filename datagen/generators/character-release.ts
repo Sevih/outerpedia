@@ -398,7 +398,7 @@ export function buildRoster(characters: Record<string, Character>): RosterEntry[
   }));
 }
 
-const VALIDATED = resolve('data/generated/characters.json');
+const VALIDATED = 'data/generated/characters.json'; // relatif au cwd, comme readCuratedJson l'attend
 
 /**
  * Persos INTÉGRÉS — même garde que la promotion (`promote.ts` § garde perso) et
@@ -412,12 +412,11 @@ const VALIDATED = resolve('data/generated/characters.json');
  * PREUVE de non-intégration, jamais sur une absence de donnée.
  */
 export function keepIntegrated(roster: RosterEntry[]): RosterEntry[] {
-  let ids: Set<string>;
-  try {
-    ids = new Set(Object.keys(JSON.parse(readFileSync(VALIDATED, 'utf8')) as object));
-  } catch {
-    return roster;
-  }
+  // Absent → pas de preuve → pas de filtrage ; CASSÉ → lève (un
+  // `characters.json` tronqué n'est pas une absence de donnée).
+  const validated = readCuratedJson<object>(VALIDATED);
+  if (!validated) return roster;
+  const ids = new Set(Object.keys(validated));
   return ids.size ? roster.filter((r) => ids.has(r.id)) : roster;
 }
 

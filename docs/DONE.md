@@ -200,6 +200,13 @@
   mêmes lectures côté datagen (`manifest.ts`, `lib/effects.ts`,
   `character-release.ts`) → `readCuratedJson`.
 
+- **Audit transverse — G13 côté datagen** : `manifest.ts` (portrait-fx,
+  `events.json`, gear-reco + presets — un seul `catch` avalait aussi les quatre
+  tables generated lues derrière), `lib/effects.ts` (`effect-icons.json`) et
+  `character-release.ts` (`characters.json` validé) passent par
+  `readCuratedJson` : absent → défaut, cassé → throw nommé. G13 est soldé des
+  deux côtés.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,
