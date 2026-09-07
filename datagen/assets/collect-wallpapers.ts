@@ -21,6 +21,7 @@ import { join, resolve } from 'node:path';
 import { isUnreleasedCharacterAsset } from '../lib/released';
 import { STAGING_DIR } from './stage';
 import { gamedata } from '../lib/paths';
+import { isMain } from '../lib/is-main';
 
 const GAME_POOL = gamedata('extracted/wallpapers');
 const EDITORIAL = resolve('.editorial/wallpapers');
@@ -83,8 +84,10 @@ export function collectWallpapers(): { copied: number; skipped: number; pruned: 
   return { copied, skipped, pruned };
 }
 
-const { copied, skipped, pruned } = collectWallpapers();
-if (copied || skipped || pruned) {
-  const tail = pruned ? `, ${pruned} retirés (perso non intégré)` : '';
-  console.log(`wallpapers → ${copied} copiés, ${skipped} à jour${tail}`);
+if (isMain(import.meta.url)) {
+  const { copied, skipped, pruned } = collectWallpapers();
+  if (copied || skipped || pruned) {
+    const tail = pruned ? `, ${pruned} retirés (perso non intégré)` : '';
+    console.log(`wallpapers → ${copied} copiés, ${skipped} à jour${tail}`);
+  }
 }

@@ -32,4 +32,9 @@ Dockerfile
 data/legacy
 data/extracted
 .gamedata
+.gamedata-android
 .assets-staging
+.editorial
+.dev
+.unlighthouse
+*.sql

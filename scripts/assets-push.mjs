@@ -73,12 +73,18 @@ const FULL = process.argv.includes('--full');
  */
 const PURGE_ONLY = process.argv.includes('--purge-only');
 
+// Quotes d'enrobage (convention dotenv) : `KEY="valeur"` → `valeur`. Même règle
+// que `datagen/lib/env.ts` (un .mjs ne peut pas l'importer sans loader TS).
+const unquote = (/** @type {string} */ v) =>
+  v.length >= 2 && ((v[0] === '"' && v.endsWith('"')) || (v[0] === "'" && v.endsWith("'")))
+    ? v.slice(1, -1)
+    : v;
 // .env.local : parse minimal KEY=VALUE (pas de dépendance).
 const env = /** @type {Record<string, string>} */ ({});
 try {
   for (const line of readFileSync(resolve('.env.local'), 'utf8').split('\n')) {
     const m = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
-    if (m) env[m[1]] = m[2].trim();
+    if (m) env[m[1]] = unquote(m[2].trim());
   }
 } catch {
   /* pas de .env.local */

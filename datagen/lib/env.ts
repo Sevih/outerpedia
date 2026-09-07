@@ -16,7 +16,9 @@ export function loadEnvLocal(): Record<string, string> {
   const path = resolve('.env.local');
   if (existsSync(path)) {
     for (const line of readFileSync(path, 'utf8').split('\n')) {
-      const m = line.match(/^([A-Z0-9_]+)=(.*)$/);
+      // `trim()` de la LIGNE : `.` ne matche pas le retour chariot (`\r`), un fichier réécrit en CRLF
+      // par un éditeur Windows vidait sinon toutes les variables (R2 compris).
+      const m = line.trim().match(/^([A-Z0-9_]+)=(.*)$/);
       if (!m) continue;
       let v = m[2].trim();
       // Quotes d'enrobage (convention dotenv) : `KEY="valeur"` doit donner

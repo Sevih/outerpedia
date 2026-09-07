@@ -25,7 +25,8 @@
  * de la chaîne garantit qu'on ne passe ici que si le push a réussi.
  */
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { writeTextAtomic } from '../lib/json';
 import { resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
 import { STAGING_DIR } from './stage';
@@ -76,7 +77,7 @@ export function syncComicsSeed(paths: SyncPaths = DEFAULTS): SyncOutcome {
   // écrit déjà en 2 espaces + newline finale, donc prettier reste content.
   const text = raw.toString('utf8');
   if (existsSync(paths.seed) && readFileSync(paths.seed, 'utf8') === text) return 'à jour';
-  writeFileSync(paths.seed, text);
+  writeTextAtomic(paths.seed, text);
   return 'mis à jour';
 }
 

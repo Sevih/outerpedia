@@ -20,7 +20,8 @@
  * `YOUTUBE_API_KEY` (`.env.local`) : absent → warn et cache conservé tel quel,
  * jamais d'échec — le site rend simplement moins de VideoObject.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
+import { writeTextAtomic } from './lib/json';
 import { resolve } from 'node:path';
 import { envVar } from './lib/env';
 import { walkFiles } from './lib/fs';
@@ -131,7 +132,7 @@ export async function refreshVideoMeta(): Promise<void> {
 
   // Clés triées : diffs git stables.
   const sorted = Object.fromEntries(Object.entries(cache).sort(([a], [b]) => a.localeCompare(b)));
-  writeFileSync(OUTPUT, JSON.stringify(sorted, null, 2) + '\n');
+  writeTextAtomic(OUTPUT, JSON.stringify(sorted, null, 2) + '\n');
   if (missing.length || ghosts.length) console.log(`✔ ${OUTPUT}`);
 }
 

@@ -99,8 +99,15 @@ export async function formatJson(data: unknown): Promise<string> {
  */
 let tmpSeq = 0;
 
-export async function writeJson(path: string, data: unknown): Promise<void> {
-  const body = await formatJson(data);
+/**
+ * Écriture ATOMIQUE d'un texte déjà formaté (tmp unique + rename) — le socle de
+ * `writeJson`, exposé pour les écrivains qui ne passent pas par `formatJson`
+ * (fichiers committés sous un autre format : `posts.json`, `pushed.json`,
+ * `comics.json`, `video-meta.json`, les `meta.json` de guides, et surtout
+ * `promote --apply` qui réécrit tout `data/generated/`). Même garantie : jamais
+ * de fichier tronqué sur Ctrl-C.
+ */
+export function writeTextAtomic(path: string, body: string): void {
   const tmp = `${path}.${process.pid}.${++tmpSeq}.tmp`;
   try {
     writeFileSync(tmp, body);
@@ -111,4 +118,8 @@ export async function writeJson(path: string, data: unknown): Promise<void> {
     rmSync(tmp, { force: true });
     throw e;
   }
+}
+
+export async function writeJson(path: string, data: unknown): Promise<void> {
+  writeTextAtomic(path, await formatJson(data));
 }

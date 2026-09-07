@@ -21,7 +21,8 @@
  *   pnpm stamp:guides --date DATE surcharge la date « aujourd'hui » (tests)
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { writeTextAtomic } from '../datagen/lib/json';
 import { relative, resolve } from 'node:path';
 import { format as prettierFormat, resolveConfig } from 'prettier';
 
@@ -42,7 +43,10 @@ if (argv.includes('--all') && !ALL) {
   console.error('`--all` exige une DATE de baseline (ex. `--all 2026-07-01`).');
   process.exit(1);
 }
-const TODAY = flag('--date') ?? ALL ?? new Date().toISOString().slice(0, 10);
+// Date LOCALE, pas UTC : un `pnpm commit` entre 0 h et 2 h (Paris) datait le
+// guide de la veille. `sv-SE` formate nativement en `YYYY-MM-DD`.
+const TODAY =
+  flag('--date') ?? ALL ?? new Intl.DateTimeFormat('sv-SE').format(new Date()).slice(0, 10);
 
 if (!DATE_RE.test(TODAY)) {
   console.error(`Date invalide : "${TODAY}" (attendu YYYY-MM-DD).`);
@@ -169,7 +173,7 @@ async function stampMeta(metaPath: string, date: string): Promise<boolean> {
     }
     if (!('updated' in out)) out.updated = date;
   }
-  writeFileSync(metaPath, await toPrettierJson(out, metaPath));
+  writeTextAtomic(metaPath, await toPrettierJson(out, metaPath));
   return true;
 }
 

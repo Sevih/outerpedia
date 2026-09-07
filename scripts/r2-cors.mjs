@@ -14,10 +14,16 @@ import { createHash, createHmac } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+// Quotes d'enrobage (convention dotenv) : `KEY="valeur"` → `valeur`. Même règle
+// que `datagen/lib/env.ts` (un .mjs ne peut pas l'importer sans loader TS).
+const unquote = (/** @type {string} */ v) =>
+  v.length >= 2 && ((v[0] === '"' && v.endsWith('"')) || (v[0] === "'" && v.endsWith("'")))
+    ? v.slice(1, -1)
+    : v;
 const env = /** @type {Record<string, string>} */ ({});
 for (const line of readFileSync(resolve('.env.local'), 'utf8').split('\n')) {
   const m = /^([A-Z0-9_]+)=(.*)$/.exec(line.trim());
-  if (m) env[m[1]] = m[2];
+  if (m) env[m[1]] = unquote(m[2].trim());
 }
 const { R2_ENDPOINT, R2_BUCKET, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY } = env;
 if (!R2_ENDPOINT || !R2_BUCKET || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY) {

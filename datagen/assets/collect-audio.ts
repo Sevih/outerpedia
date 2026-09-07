@@ -22,6 +22,7 @@ import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node
 import { resolve } from 'node:path';
 import { STAGING_DIR } from './stage';
 import { gamedata } from '../lib/paths';
+import { isMain } from '../lib/is-main';
 
 /** Pool audio extrait du jeu (miroir de `GAME_IMAGES_DIR` pour les images). */
 const GAME_AUDIO_DIR = gamedata('extracted/audio/bgm');
@@ -54,7 +55,9 @@ export function collectAudio(): { copied: number; skipped: number } {
   return { copied, skipped };
 }
 
-const { copied, skipped } = collectAudio();
-if (copied || skipped) {
-  console.log(`audio/bgm — ${copied} copiés, ${skipped} à jour`);
+if (isMain(import.meta.url)) {
+  const { copied, skipped } = collectAudio();
+  if (copied || skipped) {
+    console.log(`audio/bgm — ${copied} copiés, ${skipped} à jour`);
+  }
 }

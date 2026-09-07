@@ -20,6 +20,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { writeTextAtomic } from '../datagen/lib/json';
 import { readFile } from 'node:fs/promises';
 import { join, basename, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -274,7 +275,9 @@ function commitPatchNotes(files: string[]): void {
     execFileSync('git', ['add', '--', ...paths], { stdio: 'ignore' });
     // `commit -- <paths>` : ne committe QUE ces fichiers, même si d'autres
     // changements sont en cours (index/WIP d'un autre worker) → jamais happés.
-    execFileSync('git', ['commit', '-m', 'news', '--', ...paths], { stdio: 'ignore' });
+    execFileSync('git', ['commit', '-m', 'chore(news): notes de patch', '--', ...paths], {
+      stdio: 'ignore',
+    });
     console.log(`[getNews] committé : ${files.join(', ')}`);
   } catch (e) {
     console.warn(`[getNews] auto-commit sauté (${e instanceof Error ? e.message : e})`);
@@ -291,7 +294,7 @@ async function writeJsonIfChanged(path: string, data: unknown): Promise<boolean>
     /* absent → écrire */
   }
   if (current === json) return false;
-  writeFileSync(path, json);
+  writeTextAtomic(path, json);
   return true;
 }
 

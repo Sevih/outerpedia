@@ -44,6 +44,34 @@
     gain — convention) ; commentaire posé sur la fiche perso : ISR réel 60 s via
     le fetch des reviews, voulu.
 
+- **Audit transverse — lot 2 datagen/scripts (G6, G16, G46, G47, G48, G49, G52)**.
+  - **Un raster éditorial déposé pour CORRIGER une icône n'est plus effacé sans
+    conversion** (`datagen/assets/collect.ts`) : on convertit si le raster est
+    plus récent que le webp, et on ne supprime QUE ce qui vient d'être converti
+    (un raster plus ancien reste en place, visible en `git status`). Avant : webp
+    présent → rien, puis `rmSync` inconditionnel — le PNG jamais committé
+    partait, le log disait « 0 raster ».
+  - **`writeTextAtomic` dans `datagen/lib/json.ts`** (tmp unique + rename, le
+    socle de `writeJson` exposé) — utilisée par `promote --apply` (tout
+    `data/generated/`), `get-news`, `stamp-guides`, `sync-comics-seed`,
+    `video-meta`. Un Ctrl-C ne laisse plus de fichier committé tronqué.
+    `assets-push.mjs` (`pushed.json`) reste en `writeFileSync` : un `.mjs`
+    n'importe pas la lib TS sans loader — état régénérable, pas un curé.
+  - **`stamp:guides` date en heure LOCALE** (`sv-SE`), plus en UTC : un commit
+    entre 0 h et 2 h datait le guide de la veille.
+  - **Parseurs `.env.local`** : `datagen/lib/env.ts` fait `trim()` de la LIGNE
+    (`.` ne matche pas le retour chariot — un fichier réécrit en CRLF vidait
+    toutes les variables, R2 compris) ; `assets-push.mjs` et `r2-cors.mjs`
+    dé-quotent comme la lib.
+  - **`get-news` committe en `chore(news): notes de patch`** (39 commits `news`
+    dans le log jusqu'ici).
+  - **`.dockerignore`** exclut `.gamedata-android/` (≈19 Go), `.editorial/`,
+    `.dev/`, `.unlighthouse/`, `*.sql` — sans effet en CI, mais un
+    `docker build` local n'envoie plus tout ça au démon.
+  - **`collect-audio`/`collect-comics`/`collect-wallpapers`** gardés par
+    `isMain` comme le reste du datagen ; `collect-comics` a un `.catch` (un
+    rejet partait en unhandled rejection sans le nom de l'étape).
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

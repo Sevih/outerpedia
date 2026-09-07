@@ -94,10 +94,6 @@
       upcoming/ongoing/ended côté serveur. Envoyer les bornes au client et
       dériver avec `useNow`, comme `SeasonBadge` (règle déjà écrite dans les
       notes ci-dessous : « le statut en cours se calcule CÔTÉ CLIENT »).
-- [ ] **Un PNG éditorial déposé pour CORRIGER une icône est effacé sans
-      conversion** (G6) : `collect.ts:44-52` ne convertit que si le webp
-      n'existe pas, mais supprime toujours. Convertir si plus récent, ne
-      supprimer que ce qui a été converti.
 - [ ] **HTML des patch-notes injecté sans assainissement** (G7) :
       `get-news.ts` `processContent` laisse `<script>` (23 dans le committé),
       les attributs `on*` et les iframes hors allowlist (30 vers un hôte vagames
@@ -126,10 +122,6 @@
       bâti sur l'ANCIEN `skills.json`** (G12) : artefacts de deux versions
       estampillés du nouveau `resVersion`. Ne jouer `damage` que si `apply`, ou
       lire depuis `data/extracted` en dry.
-- [ ] **Six écritures non atomiques sur des fichiers committés** (G16) :
-      `promote.ts:331` (tout `data/generated/*` à l'apply), `get-news.ts:294`,
-      `stamp-guides.ts:172`, `assets-push.mjs:281`, `sync-comics-seed.ts:79`,
-      `video-meta.ts:134`. Une `writeTextAtomic` dans `lib/json.ts`.
 - [ ] **`pnpm commit` fait `git add -A`** (G17), ce que CONVENTIONS.md interdit
       (`commit.ts:288`, après un `pnpm format` sur tout le repo) ;
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
@@ -215,17 +207,15 @@
 - [ ] Petites fuites : timers `setCopied` (×3), écouteurs du drag de LIGNE du
       tier-list-maker, `clipboard.writeText` sans catch, `setLastResults` dans
       un updater (G44) ; admin : `key={i}` sur listes réordonnées (G45).
-- [ ] `stamp:guides` date en UTC (G46) ; trois parseurs de `.env.local`, celui
-      de `datagen/lib/env.ts` vide tout en CRLF (G47) ; 39 commits `news` non
-      conventionnels (G48) ; `.dockerignore` n'exclut ni `.gamedata-android/`
-      (19 Go) ni `*.sql` (G49).
+- [ ] `retired` posé par promote sur monsters/monster-skills/encounters alors
+      que seul `DungeonRef.retired` existe dans le contrat — clé fantôme au
+      premier retrait, que le validateur ne verra pas (G51) ; `comics.json`,
+      `video-meta.json`, `posts.json` écrits hors `formatJson` (passe prettier
+      par chance de forme, un tableau court le ferait échouer en CI) (G52).
 - [ ] Guides : `joint-challenge/shichifuja` `updated` février alors que sa
       dernière version est juillet ; 4 descriptions Joint Challenge répètent le
       titre entier ; `effect-filters.json` et `gear-presets.json` sans `_doc`
       alors qu'ils encodent des arbitrages (G50).
-- [ ] `retired` posé par promote sur des entités dont le contrat ne le déclare
-      pas (G51) ; collectes exécutées à l'import sans `isMain`, JSON écrits hors
-      `formatJson` (G52).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
       3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres,
       presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de

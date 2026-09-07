@@ -38,6 +38,7 @@ import { join, resolve } from 'node:path';
 import sharp, { type Sharp } from 'sharp';
 import { STAGING_DIR } from './stage';
 import { buildComics, removedStems } from '../generators/comics';
+import { isMain } from '../lib/is-main';
 
 const EDITORIAL = resolve('.editorial/comics');
 /** Seed committé : la trace VERSIONNÉE du pool complet (garde-fou, cf. plus bas). */
@@ -184,6 +185,15 @@ export async function collectComics(): Promise<{ made: number; skipped: number }
   return { made, skipped };
 }
 
-collectComics().then(({ made, skipped }) => {
-  if (made || skipped) console.log(`4-comics → ${made} converties, ${skipped} à jour`);
-});
+if (isMain(import.meta.url)) {
+  collectComics()
+    .then(({ made, skipped }) => {
+      if (made || skipped) console.log(`4-comics → ${made} converties, ${skipped} à jour`);
+    })
+    .catch((e: unknown) => {
+      // Sans `.catch`, un rejet partait en « unhandled rejection » sans le nom
+      // de l'étape — `pnpm images` continuait sur la suivante.
+      console.error(`4-comics : ${e instanceof Error ? e.message : String(e)}`);
+      process.exit(1);
+    });
+}

@@ -41,16 +41,26 @@ async function normalizeEditorialPool(): Promise<void> {
     .filter((p) => /\.(png|jpe?g)$/i.test(p));
   if (!dropped.length) return;
   let made = 0;
+  let kept = 0;
   for (const rel of dropped) {
     const abs = resolve(rel);
     const webp = abs.replace(/\.(png|jpe?g)$/i, '.webp');
-    if (!existsSync(webp)) {
-      await sharp(abs).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile(webp);
-      made++;
+    // Un raster déposé À CÔTÉ d'un webp existant est une CORRECTION (c'est
+    // l'usage que l'en-tête invite) : on convertit si le raster est plus récent.
+    // Auparavant « webp présent → rien », puis suppression INCONDITIONNELLE du
+    // raster : le PNG (jamais committé) partait, l'ancien webp restait, et le
+    // log annonçait « 0 raster » — perte silencieuse du travail éditorial.
+    const stale = existsSync(webp) && statSync(webp).mtimeMs >= statSync(abs).mtimeMs;
+    if (stale) {
+      kept++; // laissé en place, visible en `git status` : à l'humain de trancher
+      continue;
     }
-    rmSync(abs, { force: true });
+    await sharp(abs).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile(webp);
+    made++;
+    rmSync(abs, { force: true }); // on ne supprime QUE ce qui vient d'être converti
   }
-  console.log(`  pool éditorial : ${made} raster(s) déposé(s) → webp`);
+  const tail = kept ? ` (${kept} plus ancien(s) que leur webp, laissé(s) tels quels)` : '';
+  console.log(`  pool éditorial : ${made} raster(s) déposé(s) → webp${tail}`);
 }
 
 async function main(): Promise<void> {

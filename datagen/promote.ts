@@ -27,10 +27,10 @@
  * injectables : c'est elle qui est couverte par `promote.test.ts` — l'apply
  * est destructif, on ne le teste pas sur les vrais dossiers.
  */
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
-import { formatJson } from './lib/json';
+import { formatJson, writeTextAtomic } from './lib/json';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
@@ -330,7 +330,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   }
   for (const { path, text } of pending) {
     mkdirSync(dirname(path), { recursive: true });
-    writeFileSync(path, text);
+    writeTextAtomic(path, text); // un Ctrl-C ici ne laisse pas un generated tronqué
   }
 
   console.log(
