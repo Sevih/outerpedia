@@ -21,6 +21,14 @@
 >   i18n, `next.config.ts` (constats **S1–S9**, 2026-08-28). Un seul constat
 >   Haute : **S1**, la limitation de débit s'appuie sur `X-Forwarded-For`, que
 >   le client contrôle.
+>
+> - [transverse.md](./transverse.md) — **tout le repo en une passe**
+>   (constats **G1–G52**, 2026-09-07) : générateurs `datagen/generators/`
+>   (jamais audités avant), scripts et configuration, `src/lib/` + API +
+>   routing, composants et pages, outils, guides (par script). Huit Haute,
+>   toutes de la même famille : des bugs invisibles depuis un poste de dev
+>   EN/desktop (sous-domaines, JP/ZH, tactile, ISR 24 h). S1 re-vérifié :
+>   toujours ouvert.
 
 ## Verdict croisé
 
