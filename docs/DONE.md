@@ -207,6 +207,17 @@
   `readCuratedJson` : absent → défaut, cassé → throw nommé. G13 est soldé des
   deux côtés.
 
+- **Audit transverse — G22 soldé : `useDialogFocus`** (`src/hooks/`). Les trois
+  promesses de `role="dialog"` qu'aucune modale ne tenait : le focus ENTRE
+  (élément désigné, sinon premier focusable), Tab/Shift+Tab BOUCLENT, et à la
+  fermeture le focus REVIENT à l'ouvreur ; Échap en option. Branché sur
+  `ImageLightbox` (+ verrou du scroll de fond), `SearchModal` (Échap ferme
+  d'où que vienne le focus, plus seulement depuis le champ), `SettingsModal`
+  et la `Modal` du progress-tracker, qui gagne au passage `role="dialog"`,
+  `aria-modal` et un nom (`label`). Test happy-dom (entrée, boucle, retour,
+  Échap). Avec le drawer `inert` et le sous-menu `focus-within` du lot 3, G22
+  est complet.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { createPortal } from 'react-dom';
 import { img } from '@/lib/images';
 import { clearAllSkins, setAnimatedPortraits, setSkin, useSiteSettings } from '@/lib/site-settings';
@@ -90,6 +91,11 @@ export function SettingsModal({
     };
   }, [onClose]);
 
+  // Focus qui entre, boucle et revient au bouton « réglages » (Échap : déjà
+  // écouté au niveau `window` plus haut).
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef);
+
   const rows = useMemo(() => {
     const q = norm(query.trim());
     if (!q) return catalog;
@@ -105,6 +111,7 @@ export function SettingsModal({
 
   return createPortal(
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-9999 flex items-end justify-center sm:items-start sm:px-4 sm:pt-[8vh] sm:pb-4"
       role="dialog"
       aria-modal="true"

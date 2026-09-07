@@ -127,11 +127,6 @@
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
       par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-- [ ] **Focus des modales** (G22, reste) : `ImageLightbox` (ni focus initial,
-      ni retour, ni scroll-lock), `SettingsModal`, `SearchModal` (pas de
-      retour ; Échap seulement depuis l'input), modale du progress-tracker (sans
-      `role="dialog"` ni Échap). Aucune ne piège le focus : un `useDialogFocus`
-      partagé. (Drawer `inert` et sous-menu `focus-within` : FAITS.)
 - [ ] **Durées « 3d 4h 12m » en anglais dans les 5 langues, quatre copies**
       (G23) : `BannerCountdown`, `BuffEventTimer`, `ServerResets`,
       `progress-tracker/tracker.ts`. `SingularityCountdown` a déjà tranché

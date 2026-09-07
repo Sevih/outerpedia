@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { cn } from '@/lib/cn';
 
 /**
@@ -29,15 +30,19 @@ export function ImageLightbox({
 }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  // Focus qui entre (bouton Fermer), boucle, et revient à la vignette ; Échap.
+  useDialogFocus(dialogRef, { active: open, onEscape: close });
 
+  // Verrou du scroll de fond tant que la lightbox est ouverte.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
     };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [open, close]);
+  }, [open]);
 
   return (
     <>
@@ -65,6 +70,7 @@ export function ImageLightbox({
 
       {open && (
         <div
+          ref={dialogRef}
           className="bg-surface-sunken/80 fixed inset-0 z-50 flex items-center justify-center p-4"
           onClick={close}
           role="dialog"

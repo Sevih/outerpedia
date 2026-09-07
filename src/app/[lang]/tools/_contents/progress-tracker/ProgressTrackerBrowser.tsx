@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useStoredState } from '@/lib/client-storage';
 import {
   SWEEPABLE_TASK_IDS,
@@ -369,6 +370,7 @@ export function ProgressTrackerBrowser({
       {/* Modale export / import */}
       {showExport && (
         <Modal
+          label={labels.exportImport}
           onClose={() => {
             setShowExport(false);
             setImportData('');
@@ -423,7 +425,7 @@ export function ProgressTrackerBrowser({
 
       {/* Modale réglages */}
       {showSettings && (
-        <Modal onClose={() => setShowSettings(false)} wide>
+        <Modal label={labels.settingsTitle} onClose={() => setShowSettings(false)} wide>
           <h3 className="mb-4 text-xl font-bold">{labels.settingsTitle}</h3>
           <div className="border-line mb-6 flex gap-0.5 border-b pb-2 md:gap-2">
             {(['display', 'game', 'content', 'craft', 'shop'] as SettingsTab[]).map((tab) => (
@@ -715,14 +717,25 @@ export function ProgressTrackerBrowser({
 function Modal({
   children,
   onClose,
+  label,
   wide = false,
 }: {
   children: ReactNode;
   onClose: () => void;
+  /** Nom accessible de la boîte (son titre). */
+  label: string;
   wide?: boolean;
 }) {
+  // Une vraie boîte de dialogue : rôle, nom, focus qui entre/boucle/revient,
+  // Échap — avant, un simple `<div>` cliquable sans clavier.
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, { onEscape: onClose });
   return (
     <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={label}
       className="bg-scrim/60 fixed inset-0 z-100 flex items-center justify-center p-4"
       onClick={onClose}
     >

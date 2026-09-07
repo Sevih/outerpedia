@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
@@ -81,9 +82,14 @@ export function SearchModal({
     };
   }, [lang]);
 
-  // Focus à l'ouverture + verrou du scroll de fond.
+  // Focus qui entre (le champ), boucle dans la palette, revient au déclencheur
+  // à la fermeture ; Échap ferme d'où que vienne le focus (avant : seulement
+  // depuis le champ).
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, { initial: inputRef, onEscape: onClose });
+
+  // Verrou du scroll de fond.
   useEffect(() => {
-    inputRef.current?.focus();
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
@@ -146,6 +152,7 @@ export function SearchModal({
   // était confinée à sa bande, et le clic sous elle ne fermait pas.
   return createPortal(
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-9999 flex items-start justify-center px-4 pt-[12vh]"
       role="dialog"
       aria-modal="true"
