@@ -133,12 +133,6 @@
 - [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : `download`
       cross-origin vers R2 sans `Content-Disposition` (vérifié `curl -I`).
       Poser `attachment` sur R2 (`audio/bgm/*`, wallpapers) ou `fetch → blob`.
-- [ ] **Impossible de taper un niveau au clavier dans le hero-tracker** (G20) :
-      `NumberField` borne à chaque frappe avec `min = 5`. Texte local, borne au
-      blur/Enter.
-- [ ] **OST : `ArrowUp/Down` et `Space` confisquent la page** (G21) — même sans
-      piste, même sur un bouton focalisé. Garder si piste chargée et cible non
-      contrôle.
 
 ### Lot 3 — régler à la source
 
@@ -153,11 +147,11 @@
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
       par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-- [ ] **Aucune modale ne gère le focus** (G22) : `ImageLightbox`,
-      `SettingsModal`, `SearchModal`, la modale du progress-tracker ; le drawer
-      de filtres reste tabulable sous `aria-hidden` ; le sous-menu Guides du
-      header est hover-only. Un `useDialogFocus` partagé, `inert={!open}`,
-      `group-focus-within`.
+- [ ] **Focus des modales** (G22, reste) : `ImageLightbox` (ni focus initial,
+      ni retour, ni scroll-lock), `SettingsModal`, `SearchModal` (pas de
+      retour ; Échap seulement depuis l'input), modale du progress-tracker (sans
+      `role="dialog"` ni Échap). Aucune ne piège le focus : un `useDialogFocus`
+      partagé. (Drawer `inert` et sous-menu `focus-within` : FAITS.)
 - [ ] **Durées « 3d 4h 12m » en anglais dans les 5 langues, quatre copies**
       (G23) : `BannerCountdown`, `BuffEventTimer`, `ServerResets`,
       `progress-tracker/tracker.ts`. `SingularityCountdown` a déjà tranché
@@ -197,21 +191,18 @@
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
-- [ ] Hero-tracker : long press qui avale le tap suivant (à confirmer sur
-      appareil), « réinitialiser » gaté sur la liste filtrée et qui oublie
-      `fused` (G39). OST : Précédent/Suivant grisés aux bornes alors que
-      shuffle/repeat marchent (G40). Team planner : ordre de chaîne `0000`
-      accepté (G41). Tier-list maker : couleur d'import non validée, nom de
-      fichier exporté vide en JP/KR/ZH (G42). Patch-history : strip HTML sur
-      2,8 Mo à chaque frappe (G43).
-- [ ] Petites fuites : timers `setCopied` (×3), écouteurs du drag de LIGNE du
-      tier-list-maker, `clipboard.writeText` sans catch, `setLastResults` dans
-      un updater (G44) ; admin : `key={i}` sur listes réordonnées (G45).
 - [ ] `retired` posé par promote sur monsters/monster-skills/encounters alors
       que seul `DungeonRef.retired` existe dans le contrat — clé fantôme au
       premier retrait, que le validateur ne verra pas (G51) ; `comics.json`,
       `video-meta.json`, `posts.json` écrits hors `formatJson` (passe prettier
       par chance de forme, un tableau court le ferait échouer en CI) (G52).
+- [ ] Hero-tracker : long press qui avale le tap suivant (à confirmer sur
+      appareil — pas de `pointercancel`), « réinitialiser » gaté sur la liste
+      filtrée et qui oublie `fused` (G39).
+- [ ] Pull simulator : `setLastResults` appelé DANS l'updater de `setSession`
+      (effet de bord dans un updater, StrictMode garde le second appel) (G44,
+      reste) ; admin : `key={i}` sur listes réordonnées par `MoveButtons`
+      (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) (G45).
 - [ ] Guides : `joint-challenge/shichifuja` `updated` février alors que sa
       dernière version est juillet ; 4 descriptions Joint Challenge répètent le
       titre entier ; `effect-filters.json` et `gear-presets.json` sans `_doc`

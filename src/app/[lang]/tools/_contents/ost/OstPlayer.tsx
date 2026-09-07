@@ -216,12 +216,24 @@ export function OstPlayer({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      // Un CONTRÔLE focalisé garde ses touches : Espace sur « shuffle » doit
+      // activer le bouton, pas lancer la lecture.
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target instanceof HTMLButtonElement ||
+        e.target instanceof HTMLSelectElement ||
+        e.target instanceof HTMLAnchorElement
+      )
+        return;
+      // Sans piste chargée, le lecteur ne confisque rien : les flèches restent
+      // au défilement de la page, Espace au navigateur.
+      if (currentTrackIndex === null) return;
       const el = audioRef.current;
       switch (e.code) {
         case 'Space':
           e.preventDefault();
-          if (currentTrackIndex !== null && el) {
+          if (el) {
             if (isPlaying) el.pause();
             else el.play();
           }
@@ -433,7 +445,13 @@ export function OstPlayer({
               <button
                 type="button"
                 onClick={handlePrevious}
-                disabled={currentTrackIndex === 0 || currentTrackIndex === null}
+                // Aux bornes, `handlePrevious` sait encore faire en shuffle
+                // (historique) et en repeat-all (boucle) : ne griser que si le
+                // gestionnaire n'a réellement rien à faire.
+                disabled={
+                  currentTrackIndex === null ||
+                  (currentTrackIndex === 0 && !shuffle && repeat !== 'all')
+                }
                 className="text-content-muted hover:text-content-strong p-1 transition-colors disabled:opacity-30"
               >
                 <PrevGlyph className="size-5" />
@@ -455,7 +473,10 @@ export function OstPlayer({
               <button
                 type="button"
                 onClick={handleNext}
-                disabled={currentTrackIndex === null || currentTrackIndex === tracks.length - 1}
+                disabled={
+                  currentTrackIndex === null ||
+                  (currentTrackIndex === tracks.length - 1 && !shuffle && repeat !== 'all')
+                }
                 className="text-content-muted hover:text-content-strong p-1 transition-colors disabled:opacity-30"
               >
                 <NextGlyph className="size-5" />

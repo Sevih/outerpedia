@@ -182,7 +182,7 @@ export function HeaderClient({
               </Link>
 
               {item.children && (
-                <div className="pointer-events-none absolute top-full left-0 pt-1 opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100">
+                <div className="pointer-events-none absolute top-full left-0 pt-1 opacity-0 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100">
                   <div className="border-line bg-surface-raised min-w-52 rounded-lg border py-1 shadow-xl">
                     {item.children.map((child) => (
                       <Link

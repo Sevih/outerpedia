@@ -58,6 +58,9 @@ export function CharactersFiltersDrawer({
       role="dialog"
       aria-modal="true"
       aria-hidden={!open}
+      // `inert` : fermé, le panneau reste MONTÉ (translation) — sans lui, tout
+      // `AdvancedFiltersPanel` restait tabulable hors écran sous `aria-hidden`.
+      inert={!open}
     >
       {/* Scrim */}
       <button

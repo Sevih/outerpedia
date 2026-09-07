@@ -117,6 +117,18 @@ const DEFAULT_LABELS = ['S', 'A', 'B', 'C', 'D'];
 
 // Ids de tiers DÉTERMINISTES : ce code tourne au SSR et à l'hydratation, un id
 // aléatoire ici créerait un mismatch.
+/**
+ * Nom de fichier d'export depuis le titre. `\p{L}\p{N}` : `[^\w-]` retirait tout
+ * caractère non ASCII — un titre japonais donnait `_.png`.
+ */
+function safeFileStem(title: string): string {
+  const stem = title
+    .trim()
+    .replace(/[^\p{L}\p{N}_-]+/gu, '_')
+    .replace(/^_+|_+$/g, '');
+  return stem || 'tier-list';
+}
+
 function makeDefaultTiers(): Tier[] {
   return DEFAULT_LABELS.map((label, i) => ({
     id: `t${i}`,
@@ -690,6 +702,8 @@ export function TierListMakerBrowser({
   const [dropAt, setDropAt] = useState<{ tierId: string; index: number } | null>(null);
   const [colorRow, setColorRow] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => clearTimeout(copiedTimer.current ?? undefined), []);
 
   // Deux lignes de nom distinctes : « noms » = toujours le nom du PERSO (un
   // skin affiche celui de son perso de base) ; « noms de skin » = le nom du
@@ -831,6 +845,12 @@ export function TierListMakerBrowser({
     return () => document.removeEventListener('touchmove', block);
   }, []);
 
+  // Fin du drag de LIGNE en cours (ou rien). Tenue dans un ref pour que le
+  // démontage puisse la jouer : le drag d'ITEM a son `cleanupPointer`, celui
+  // des lignes laissait ses écouteurs `window` derrière lui.
+  const endRowDragRef = useRef<(() => void) | null>(null);
+  useEffect(() => () => endRowDragRef.current?.(), []);
+
   const onRowHandlePointerDown = useCallback((e: React.PointerEvent, id: string) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     e.stopPropagation();
@@ -842,6 +862,7 @@ export function TierListMakerBrowser({
         setTiers((prev) => moveRowToIndex(prev, rowDragId.current!, rowIndexAtY(ev.clientY)));
     };
     const onEnd = () => {
+      endRowDragRef.current = null;
       rowDragId.current = null;
       rowDraggingRef.current = false;
       setRowDragActive(null);
@@ -849,6 +870,7 @@ export function TierListMakerBrowser({
       window.removeEventListener('pointerup', onEnd);
       window.removeEventListener('pointercancel', onEnd);
     };
+    endRowDragRef.current = onEnd;
     window.addEventListener('pointermove', onMove);
     window.addEventListener('pointerup', onEnd);
     window.addEventListener('pointercancel', onEnd);
@@ -1015,7 +1037,7 @@ export function TierListMakerBrowser({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${(title.trim() || 'tier-list').replace(/[^\w-]+/g, '_')}.json`;
+    a.download = `${safeFileStem(title)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1032,7 +1054,13 @@ export function TierListMakerBrowser({
         const next: Tier[] = data.tiers.map((tr, i) => ({
           id: `t${i}-${Math.random().toString(36).slice(2, 7)}`,
           label: typeof tr.label === 'string' ? tr.label : '',
-          color: typeof tr.color === 'string' ? tr.color : TIER_PALETTE[i % TIER_PALETTE.length],
+          // Même forme que `codeToColor` : une couleur libre (`red`) faisait
+          // protester `<input type="color">` et s'encodait `cred`, que le décodeur
+          // rejetait — le lien partagé perdait la couleur.
+          color:
+            typeof tr.color === 'string' && /^#[0-9a-f]{6}$/i.test(tr.color)
+              ? tr.color
+              : TIER_PALETTE[i % TIER_PALETTE.length],
           items: Array.isArray(tr.items)
             ? tr.items.filter((k: unknown): k is string => typeof k === 'string' && itemMap.has(k))
             : [],
@@ -1072,7 +1100,8 @@ export function TierListMakerBrowser({
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      clearTimeout(copiedTimer.current ?? undefined);
+      copiedTimer.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       window.prompt('', url);
     }
@@ -1376,7 +1405,7 @@ export function TierListMakerBrowser({
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${(title.trim() || 'tier-list').replace(/[^\w-]+/g, '_')}.png`;
+        a.download = `${safeFileStem(title)}.png`;
         a.click();
         URL.revokeObjectURL(url);
       }, 'image/png');

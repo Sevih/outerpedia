@@ -1961,18 +1961,29 @@ function NumberField({
   max: number;
   onChange: (v: number) => void;
 }) {
+  // Texte LOCAL pendant la saisie, borne au blur/Enter : borner à chaque frappe
+  // rendait le clavier inutilisable — avec `min = 5`, taper « 1 » pour 120
+  // devenait 5, puis « 2 » → 52, « 0 » → 520 → plafond. Le moteur borne de
+  // toute façon ; l'écran ne ment que le temps de la frappe.
+  const [draft, setDraft] = useState<string | null>(null);
+  const commit = (raw: string) => {
+    setDraft(null);
+    const v = Number(raw);
+    if (raw.trim() !== '' && Number.isFinite(v)) {
+      onChange(Math.min(Math.max(Math.trunc(v), min), max));
+    }
+  };
   return (
     <input
       type="number"
       inputMode="numeric"
-      value={value}
+      value={draft ?? value}
       min={min}
       max={max}
-      onChange={(e) => {
-        const v = Number(e.target.value);
-        // Le moteur borne déjà, mais un champ qui garde une valeur hors plage
-        // ferait mentir l'écran par rapport au calcul.
-        if (Number.isFinite(v)) onChange(Math.min(Math.max(Math.trunc(v), min), max));
+      onChange={(e) => setDraft(e.target.value)}
+      onBlur={(e) => commit(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') e.currentTarget.blur();
       }}
       className="border-line-subtle bg-surface-sunken text-content-strong focus:border-accent h-9 w-14 shrink-0 rounded-lg border px-1.5 text-center font-mono text-sm font-semibold outline-none"
     />

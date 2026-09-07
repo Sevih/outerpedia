@@ -72,6 +72,32 @@
     `isMain` comme le reste du datagen ; `collect-comics` a un `.catch` (un
     rejet partait en unhandled rejection sans le nom de l'étape).
 
+- **Audit transverse — lot 3 outils et a11y (G20, G21, G40, G41, G42, G43, G44,
+  G22 partiel)**.
+  - **Hero-tracker : le niveau se tape au clavier** — `NumberField` garde un
+    texte local et borne au blur/Enter ; borner à chaque frappe avec `min = 5`
+    transformait « 1 » en 5, « 12 » en 52, « 120 » en plafond.
+  - **OST : les raccourcis ne confisquent plus la page** — sans piste chargée,
+    les flèches restent au défilement ; un bouton/lien focalisé garde Espace.
+    Précédent/Suivant ne sont grisés aux bornes que si shuffle et repeat-all
+    n'ont réellement rien à faire (la touche N/P marchait, le bouton non).
+  - **Team planner** : un ordre de chaîne partagé doit être une PERMUTATION
+    (`0000` donnait quatre fois le même slot) ; le timer « copié » est nettoyé
+    au démontage ; `clipboard.writeText` a un `catch` (iOS hors geste : rejet
+    non géré → repli `prompt`).
+  - **Tier-list maker** : couleur d'import validée comme `codeToColor`
+    (`"red"` s'encodait `cred`, le lien partagé perdait la couleur) ; nom de
+    fichier exporté en `\p{L}\p{N}` (un titre japonais donnait `_.png`) ; timer
+    « copié » nettoyé ; les écouteurs `window` du drag de LIGNE sont retirés au
+    démontage (le drag d'item les nettoyait déjà, pas celui des lignes).
+  - **Patch-history** : texte nu précalculé par liste — le strip HTML sur
+    2,8 Mo se refaisait à chaque frappe.
+  - **A11y** : le drawer de filtres est `inert` fermé (tout
+    `AdvancedFiltersPanel` restait tabulable hors écran sous `aria-hidden`) ;
+    le sous-menu Guides du header s'ouvre aussi au `focus-within` (hover-only
+    = invisible au Tab). RESTE de G22 (focus initial/retour/trap des modales,
+    un hook partagé) au TODO.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

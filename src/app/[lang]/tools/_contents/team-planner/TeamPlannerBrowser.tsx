@@ -454,6 +454,8 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
   const [selectedChainIndex, setSelectedChainIndex] = useState<number | null>(null);
   const [teamName, setTeamName] = useState('');
   const [copied, setCopied] = useState(false);
+  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => clearTimeout(copiedTimer.current ?? undefined), []);
 
   const byId = useMemo(() => new Map(chars.map((c) => [c.id, c])), [chars]);
   const fxOf = useCallback((id: string): TpFx => fx[id] ?? EMPTY_FX, [fx]);
@@ -492,7 +494,10 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
         while (loaded.length < 4) loaded.push(null);
         setTeam(loaded);
       }
-      if (data.o && /^[0-3]{4}$/.test(data.o)) setChainOrder(data.o.split('').map(Number));
+      // Une PERMUTATION de 0..3, pas quatre chiffres quelconques : `0000` donnait
+      // quatre fois le même slot, irréparable par l'échange à deux clics.
+      if (data.o && /^[0-3]{4}$/.test(data.o) && new Set(data.o).size === 4)
+        setChainOrder(data.o.split('').map(Number));
       if (data.n) setTeamName(data.n.slice(0, 100));
     });
   }, [byId]);
@@ -530,10 +535,16 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
     window.history.replaceState(null, '', `${window.location.pathname}?z=${z}`);
     // Lien court `/s/<id>` si le serveur répond, lien long `?z=` sinon.
     void shortShareUrl().then((url) =>
-      navigator.clipboard.writeText(url).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      }),
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          setCopied(true);
+          clearTimeout(copiedTimer.current ?? undefined);
+          copiedTimer.current = setTimeout(() => setCopied(false), 1500);
+        })
+        // iOS refuse l'écriture hors geste utilisateur direct : sans `catch`,
+        // rejet non géré. L'URL est déjà dans la barre d'adresse (replaceState).
+        .catch(() => window.prompt('', url)),
     );
   }, [team, chainOrder, teamName]);
 

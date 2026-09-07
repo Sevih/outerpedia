@@ -167,21 +167,26 @@ export function PatchHistoryBrowser({
   const currentTypes = era === 'major9' ? MAJOR9_TYPES : LEGACY_TYPES;
   const legacyLoading = era === 'smilegate' && legacy === null;
 
+  // Texte nu par post, calculé UNE fois par liste : le strip HTML sur 2,8 Mo
+  // (archive legacy) se refaisait à chaque frappe de la recherche.
+  const plainText = useMemo(() => {
+    const m = new Map<PatchPost['id'], string>();
+    for (const p of [...posts, ...(legacy ?? [])])
+      m.set(
+        p.id,
+        `${p.title}
+${p.content.replace(/<[^>]*>/g, '')}`.toLowerCase(),
+      );
+    return m;
+  }, [posts, legacy]);
+
   const filtered = useMemo(() => {
     let list = era === 'major9' ? posts : (legacy ?? []);
     if (typeFilter) list = list.filter((p) => p.type === typeFilter);
     const needle = query.trim().toLowerCase();
-    if (needle)
-      list = list.filter(
-        (p) =>
-          p.title.toLowerCase().includes(needle) ||
-          p.content
-            .replace(/<[^>]*>/g, '')
-            .toLowerCase()
-            .includes(needle),
-      );
+    if (needle) list = list.filter((p) => (plainText.get(p.id) ?? '').includes(needle));
     return list;
-  }, [era, posts, legacy, typeFilter, query]);
+  }, [era, posts, legacy, typeFilter, query, plainText]);
 
   const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
   const pagePosts = filtered.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
