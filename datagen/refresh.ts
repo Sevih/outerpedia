@@ -8,7 +8,7 @@
  *   pré-vol de l'outillage python  ← AVANT le pull : ce qui sera sauté, tout de suite
  *   pull (si la source est là + diff)
  *     ├─ si le CODE du jeu a changé (version installée ≠ empreinte du dump) :
- *     │  dump (→ dump.cs + listings ASM committés)
+ *     │  dump (→ dump.cs)
  *     └─ si tiré : extract → convert → face-layout(py) → sprite-rect(py) →
  *        font-metrics(py) → build → promote[ --apply] → damage → [collect]
  *   [getNews]  ← optionnel (fetch web, indépendant du datamine)
@@ -18,7 +18,8 @@
  * reprise après échec (`resumeDecision`, checkpoint écrit après chaque étape).
  *
  * Deux points d'entrée partagent ce module (plus de logique dupliquée) :
- *   - `pnpm dev`         → scripts/dev-refresh.ts : { apply, collect, news } = true
+ *   - `pnpm dev`         → scripts/dev-refresh.ts : { collect, news } = true,
+ *                          promote en DRY (`apply: false`) — la revue reste humaine
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
  *
  * DEUX SOURCES depuis le 2026-08-26 (`--source steam|android`, défaut STEAM ;

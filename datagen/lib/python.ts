@@ -1,7 +1,7 @@
 /**
  * Primitive — SONDAGE de l'outillage python, partagé par les flux qui appellent
- * un script `.py` (`refresh` pour ses étapes de génération, `dump` pour les
- * listings ASM).
+ * un script `.py` (`refresh` pour ses étapes de génération, `dump` pour
+ * `dump.cs`).
  *
  * Le principe, tiré de trois pannes : un module python manquant n'est pas une
  * erreur du script, c'est une machine non outillée. Il ne doit donc PAS faire

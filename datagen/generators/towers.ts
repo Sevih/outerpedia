@@ -41,7 +41,7 @@
  *     au joueur, donc NON figé par étage → l'étage garde `restrictions: []` et
  *     `randomized: true`, le menu dédupliqué vit dans `Tower.restrictionsPool`.
  * `Count` : `-1` = interdiction (ban) ; `N` > 0 = quota requis. `ConditionDesc`
- * est déjà localisé (5 langues) → résolu par la primitive de texte partagée.
+ * est déjà localisé (les 4 langues du jeu) → résolu par la primitive de texte partagée.
  */
 import type { LangDict } from '../lib/lang';
 import { slugEnum } from '../lib/enums';
@@ -82,7 +82,7 @@ export interface TowerRestriction {
   subType: string;
   /** `-1` = interdiction (ban) ; `N` > 0 = quota requis. */
   count: number;
-  /** Libellé localisé fourni par le jeu (5 langues). */
+  /** Libellé localisé fourni par le jeu (les 4 langues du jeu, `LangDict`). */
   desc: LangDict;
 }
 

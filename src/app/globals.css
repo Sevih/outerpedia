@@ -1,20 +1,20 @@
 @import 'tailwindcss';
 
 /* Fonts (posées par next/font dans layout.tsx) : la police « jeu » prime,
- * comme en V2 (--font-sans = Paybooc puis Geist). */
+ * (--font-sans = Paybooc puis Geist). */
 @theme {
   --font-sans: var(--font-game), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* Utility explicite (V2 s'appuyait sur le fallback de font-sans). */
+/* Utility explicite (auparavant, on s'appuyait sur le fallback de font-sans). */
 .font-game {
   font-family: var(--font-game), var(--font-geist-sans);
 }
 
 /*
  * TOKENS SÉMANTIQUES — l'unique source des couleurs de l'UI.
- * THÈME UNIQUE : sombre (l'apparence V2 de référence). Le thème clair a été
+ * THÈME UNIQUE : sombre (l'apparence de référence de l'ancien site). Le thème clair a été
  * retiré (décision projet) — les tokens restent la seule porte d'entrée des
  * couleurs hors fiche perso (portage pixel-perfect exempté, cf. eslint).
  *
@@ -59,7 +59,7 @@
   --danger-strong: oklch(63.7% 0.237 25.331);
   --danger-deep: oklch(57.7% 0.245 27.325);
 
-  /* Tokens métier — teintes V2 */
+  /* Tokens métier — teintes héritées de l'ancien site */
   --fire: #ff6b6b;
   --water: #4dabf7;
   --earth: #51cf66;
@@ -74,7 +74,7 @@
   --item-epic: #93c5fd;
   --item-legendary: #f87171;
   --singularity: #f0abfc;
-  /* Echelle des grades d'ascension Singularity (C -> S+), palette V2. */
+  /* Echelle des grades d'ascension Singularity (C -> S+), palette héritée. */
   --ax-grade-c: #16ebf1;
   --ax-grade-b: #5e86f4;
   --ax-grade-a: #9d51ff;
@@ -83,7 +83,7 @@
   --stat-accent: #fbbf24;
 
   /* Barre de segments de substat (gear) : jaune = roll initial (max 3), orange
-     = ajouté via reforge, creux = segment inactif. Valeurs V2 (yellow-400 /
+     = ajouté via reforge, creux = segment inactif. Valeurs héritées (yellow-400 /
      orange-400 / slate creux). */
   --substat-roll: #facc15;
   --substat-reforge: #fb923c;
@@ -105,7 +105,7 @@
   --buff: #38bdf8;
   --debuff: #f87171;
   /* Teinte des ICÔNES d'effets recolorées (EffectIconTile, masque de
-     luminance) et du ✓ de GeasUnlockList — teintes V2 exactes, la seule
+     luminance) et du ✓ de GeasUnlockList — teintes héritées exactes, la seule
      source de ces deux valeurs. */
   --buff-tint: #4cc2ff;
   --debuff-tint: #ff5a4e;
@@ -116,7 +116,7 @@
   --chain-join: #facc15;
   --chain-finish: #f87171;
   /* Couleur de TEXTE des nœuds de la carte Monad Gate (popups/résumé), PAR
-     RÔLE du nœud — mêmes valeurs V2 que le reste de la palette guides, tokenisées
+     RÔLE du nœud — mêmes valeurs héritées que le reste de la palette guides, tokenisées
      pour sortir les couleurs vives de nodeStyles.ts. Le filtre CSS qui teinte le
      sprite reste à part (chaîne `filter`, pas un utilitaire de couleur). */
   --monad-milestone: #facc15; /* jaune — jalons / chemin (start/path…) */
@@ -149,14 +149,14 @@
   --select-fg-hover: oklch(94.5% 0.129 101.54); /* jaune-200 : texte au survol */
   --stat: #fbbf24;
   --highlight: #22d3ee;
-  /* Texte « équipement » (noms d'items dans la prose) — teinte V2 exacte. */
+  /* Texte « équipement » (noms d'items dans la prose) — teinte héritée exacte. */
   --equipment: #fbbf24;
 
-  /* ACCENTS DE CATÉGORIE de guides (portage V2 `guidesTheme`). Chaque catégorie
+  /* ACCENTS DE CATÉGORIE de guides (hérités de `guidesTheme`). Chaque catégorie
      porte une teinte d'identité déclinée en 3 valeurs : -fg (texte, -300), -bd
      (bords/fonds à opacités, -500 ; l'opacité reste côté classe) et -glow (ombre
      colorée au survol). fg/bd = valeurs Tailwind v4 EXACTES (OKLCH) ; glow = hex
-     V2 verbatim. `other` (fourre-tout) reste sur les tokens neutres, hors d'ici. */
+     de l'ancien site verbatim. `other` (fourre-tout) reste sur les tokens neutres, hors d'ici. */
   --cat-emerald-fg: oklch(84.5% 0.143 164.978);
   --cat-emerald-bd: oklch(69.6% 0.17 162.48);
   --cat-emerald-glow: #4ade80;
@@ -192,12 +192,12 @@
   --cat-cyan-glow: #22d3ee;
 
   /* ACCENTS ÉDITORIAUX (primitives QACard/Callout/TocBar, bannières, reviews).
-     Palette LOCALE à 6 teintes (portage FAQ V2) : chaque encart prend la teinte
+     Palette LOCALE à 6 teintes (héritée de la FAQ) : chaque encart prend la teinte
      qui code son propos, plusieurs cohabitent dans une page. Base = -400 (à
-     opacités côté classe), -glow = halo des puces (rgba V2 = -400 à 0.6). Crans
+     opacités côté classe), -glow = halo des puces (rgba hérité = -400 à 0.6). Crans
      annexes des bannières/reviews : -soft (-200, texte clair sur callout),
      -faint (-100, anneau au survol), -deep (-500, anneaux PvE/PvP), purple/pink.
-     Valeurs OKLCH EXACTES de Tailwind v4 ; glows = rgba V2 verbatim. */
+     Valeurs OKLCH EXACTES de Tailwind v4 ; glows = rgba hérités verbatim. */
   --ed-sky: oklch(74.6% 0.16 232.661);
   --ed-violet: oklch(70.2% 0.183 293.541);
   --ed-emerald: oklch(76.5% 0.177 163.223);
@@ -224,11 +224,9 @@
   /* Voile du fond de page */
   --page-veil: rgba(0, 0, 0, 0.4);
 
-  /* Cartes / panneaux — valeurs V2 EXACTES */
+  /* Cartes / panneaux — valeurs héritées EXACTES */
   --card-border: rgb(39 39 42);
   --card-bg: oklab(0.278 -0.00750867 -0.0321344 / 0.9);
-  --card-bg-solid: oklch(0.21 0.034 264.665);
-  --card-bg-light: oklch(0.278 0.033 256.848);
   --card-hover-border: rgb(63 63 70);
   --buff-bg: #1a69a7;
   --debuff-bg: #a72a27;
@@ -365,7 +363,7 @@
  * Fond de page : artwork + voile (thémé via --page-veil) sur un CALQUE FIXE.
  * `cover` se calcule ainsi sur le VIEWPORT partout (l'artwork 2752×1536 reste
  * cadré, jamais étiré) — sans `background-attachment: fixed` et ses repaints
- * Safari (le repli `scroll` mobile de la V2 zoomait l'image sur la hauteur de
+ * Safari (le repli `scroll` mobile de l'ancien site zoomait l'image sur la hauteur de
  * page entière).
  */
 body {
@@ -394,7 +392,7 @@ body::before {
 }
 
 /*
- * TITRES « jeu » (portage V2) : chaque niveau de heading porte un trait
+ * TITRES « jeu » (hérités) : chaque niveau de heading porte un trait
  * souligné en image d'UI du jeu. Le h2 des sections de fiche en hérite.
  */
 @layer base {
@@ -485,32 +483,9 @@ body::before {
   }
 }
 
-/* Variante h2 hors hiérarchie (blocs internes), portage V2. */
-.h2-style {
-  position: relative;
-  padding-bottom: 0.5rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 700;
-  width: fit-content;
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    pointer-events: none;
-    background-image: var(--hr-h2);
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-}
-
-/* Onglet « jeu » actif (portage V2) : glow doré façon UI Outerplane. Tout le
+/* Onglet « jeu » actif (hérité) : glow doré façon UI Outerplane. Tout le
    visuel vit ici (couleurs ambre brutes interdites dans les composants) ; le
-   liseré en pied est un pur gradient — pas d'asset, contrairement à la V2.
+   liseré en pied est un pur gradient — pas d'asset, contrairement à l'ancien site.
    Teinte PARAMÉTRABLE via `--tab-glow` : par défaut le thème élémentaire de la
    fiche perso (`--cd-el`) s'il est posé, sinon l'ambre. Toutes les nuances en
    dérivent (color-mix), le texte est éclairci comme l'amber-300 d'origine. */
@@ -545,7 +520,7 @@ body::before {
 }
 
 @layer components {
-  /* Titre héro des landings (portage V2) : bandeau d'UI du jeu en fond, liseré
+  /* Titre héro des landings (hérité) : bandeau d'UI du jeu en fond, liseré
      « victoire » en pied. À poser sur un h1 — écrase le trait de titre de base
      (le ::after garde son image --hr-h1, seule la géométrie change). */
   .h1-page {
@@ -561,23 +536,11 @@ body::before {
     }
   }
 
-  /* Cartes (fiches) — thémées via --card-* (valeurs V2 exactes en sombre). */
+  /* Cartes (fiches) — thémées via --card-* (valeurs héritées exactes en sombre). */
   .card {
     border-radius: 0.5rem;
     border: 1px solid var(--card-border);
     background: var(--card-bg);
-  }
-
-  .card-solid {
-    border-radius: 0.5rem;
-    border: 1px solid var(--card-border);
-    background: var(--card-bg-solid);
-  }
-
-  .card-light {
-    border-radius: 0.5rem;
-    border: 1px solid var(--card-border);
-    background: var(--card-bg-light);
   }
 
   .card-interactive {
@@ -593,7 +556,7 @@ body::before {
     }
   }
 
-  /* Panneaux sémantiques (portage V2). */
+  /* Panneaux sémantiques (hérités). */
   .panel-info {
     border-radius: 0.5rem;
     border: 1px solid oklch(0.63 0.14 233 / 0.3);
@@ -606,32 +569,8 @@ body::before {
     background: oklch(0.35 0.08 85 / 0.2);
   }
 
-  .panel-success {
-    border-radius: 0.5rem;
-    border: 1px solid oklch(0.7 0.15 165 / 0.2);
-    background: oklch(0.25 0.06 165 / 0.2);
-  }
-
-  .panel-danger {
-    border-radius: 0.5rem;
-    border: 1px solid oklch(0.63 0.2 25 / 0.2);
-    background: oklch(0.25 0.06 25 / 0.2);
-  }
-
-  .panel-feature {
-    border-radius: 0.5rem;
-    border: 1px solid oklch(0.63 0.2 300 / 0.3);
-    background: oklch(0.25 0.07 300 / 0.2);
-  }
-
-  .panel-highlight {
-    border-radius: 0.5rem;
-    border: 1px solid oklch(0.75 0.15 70 / 0.3);
-    background: oklch(0.28 0.07 70 / 0.2);
-  }
-
   /* Fiche perso : bande accent élément en haut de chaque carte (--cd-el posé
-     sur .cd-page). LA signature visuelle de la page V2. */
+     sur .cd-page). LA signature visuelle de la fiche, héritée. */
   .cd-page .card {
     position: relative;
   }
@@ -654,10 +593,6 @@ body::before {
   }
 }
 
-.scroll-offset {
-  scroll-margin-top: 5rem;
-}
-
 /* Nom d'item ascendé (Singularity) : dégradé du jeu. */
 .singularity-text {
   background: linear-gradient(180deg, #16ebf1 0%, #9d51ff 50%, #e02bcd 100%);
@@ -672,7 +607,7 @@ body::before {
 
 /* ── Patch notes (HTML WordPress stocké — outil /patch-history) ───────────────
    Prose scrapée par getNews/l'archive Stove : on style les balises telles que
-   la donnée les porte. Teintes = tokens sémantiques (V2 posait des zinc). */
+   la donnée les porte. Teintes = tokens sémantiques (auparavant des zinc en dur). */
 .patch-note-content {
   color: var(--content-muted);
   font-size: 0.875rem;

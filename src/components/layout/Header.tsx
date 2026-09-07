@@ -38,9 +38,9 @@ function buildSkinCatalog(lang: Lang): SkinCatalogEntry[] {
 }
 
 /**
- * En-tête global — wrapper serveur : localise le contrat `lib/nav.ts`
- * (cibles 404 assumées le temps du portage), résout les icônes R2 et les
- * catégories de guides (sous-menu), puis délègue l'interactif à HeaderClient.
+ * En-tête global — wrapper serveur : localise le contrat `lib/nav.ts`, résout
+ * les icônes R2 et les catégories de guides (sous-menu), puis délègue
+ * l'interactif à HeaderClient.
  */
 export async function Header() {
   const lang = getRequestLang();

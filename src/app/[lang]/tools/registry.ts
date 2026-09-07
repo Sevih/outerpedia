@@ -27,8 +27,8 @@ export const TOOL_COMPONENTS: Record<
   // PUBLIC depuis le 25/08/2026 (décision Sevih — moteur branché, découpage
   // soldé, corpus de fixtures à 0 %).
   'damage-calculator': () => import('./_contents/damage-calculator'),
-  // Statut `unlisted` (routable pour revue, absent de la landing) le temps de
-  // la boucle Sevih ; passera `available` une fois les axes arbitrés.
+  // `available` depuis le 12/08 (publié sur ordre de Sevih) ; la boucle de
+  // revue des axes continue au TODO, sans repasser par `unlisted`.
   'hero-tracker': () => import('./_contents/hero-tracker'),
   'tier-list-maker': () => import('./_contents/tier-list-maker'),
   'team-planner': () => import('./_contents/team-planner'),

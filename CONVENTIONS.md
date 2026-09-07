@@ -17,7 +17,8 @@
 Format : `type(scope): description courte à l'impératif`
 
 Types : `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `build`, `ci`,
-`chore`, `style`.
+`chore`, `style`, `revert` (celui que `scripts/commit.ts` accepte — la liste et
+l'outil disent la même chose).
 
 Exemples :
 
@@ -84,8 +85,10 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
     de jeu traduit (noms, skills, items).
   - **communautaire** (`fr`) : UI traduite, mais **pas** de données de jeu →
     fallback sur EN pour le contenu de jeu.
-- Fichiers de locale : **alignement par ligne** (mêmes clés/commentaires aux
-  mêmes numéros de ligne dans les 4 langues).
+- Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans les
+  5 langues — c'est `locales/keys.test.ts` qui le garantit (clés identiques ×5,
+  chaque clé consommée). L'ancien « alignement par numéro de ligne » n'est plus
+  tenable : prettier replie les chaînes longues différemment selon la langue.
 - Pas de clés i18n dupliquées — vérifier avant d'en créer.
 - Les balises inline (`{B/...}`, `{D/...}`, etc.) restent **identiques** dans
   toutes les langues.

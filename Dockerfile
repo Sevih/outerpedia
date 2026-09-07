@@ -1,9 +1,10 @@
 # syntax=docker/dockerfile:1
 ###############################################################################
-# Image de production outerpedia V3 (Next.js, sortie "standalone", pnpm).
+# Image de production outerpedia (Next.js, sortie "standalone", pnpm).
 #
 # Build simple : pas de python, pas de pipeline de données (les données générées
-# seront committées — cf. Phase 2). Multi-stage -> image finale minimale, non-root.
+# sont committées, cf. CLAUDE.md § Build & données). Multi-stage -> image finale
+# minimale, non-root.
 ###############################################################################
 
 # ---- Base (avec pnpm) pour deps + build ----

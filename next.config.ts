@@ -21,7 +21,7 @@ const scriptSrc = [
   'https://static.cloudflareinsights.com',
 ].join(' ');
 
-// Security headers (ported from V2 — proven config).
+// En-têtes de sécurité (config héritée de l'ancien site, éprouvée en prod).
 const securityHeaders = [
   { key: 'X-DNS-Prefetch-Control', value: 'on' },
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
@@ -143,7 +143,7 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Slugs de guides RENOMMÉS en V2 (301 hérités — contrat d'URL). Chaque entrée
+  // Slugs de guides RENOMMÉS par le passé (301 hérités — contrat d'URL). Chaque entrée
   // existe en deux formes à cause du routing mixte : sous-domaine en prod (pas
   // de préfixe) et path `/:lang/…` en dev.
   async redirects() {

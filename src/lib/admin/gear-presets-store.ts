@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { GearBuild, GearPresets } from '@contracts';
 import { validateGearPresets } from '@datagen/curated/gear-reco';
-import { writeJson } from '@datagen/lib/json';
+import { readCuratedJson, writeJson } from '@datagen/lib/json';
 
 const PATH = resolve(process.cwd(), 'data/curated/gear-presets.json');
 const RECO_PATH = resolve(process.cwd(), 'data/curated/gear-reco.json');
@@ -55,7 +55,10 @@ export async function saveGearPresets(p: GearPresets): Promise<string[]> {
   if (errors.length) return errors;
   const broken = brokenRefs(p);
   if (broken.length) return broken.map((b) => `preset still referenced : ${b}`);
+  // La clé de doc (`_doc`, convention des curés) survit au remplacement entier.
+  const doc = readCuratedJson<{ _doc?: string }>(PATH)?._doc;
   await writeJson(PATH, {
+    ...(doc && { _doc: doc }),
     talismans: sortKeys(p.talismans),
     sets: sortKeys(p.sets),
     substats: sortKeys(p.substats),

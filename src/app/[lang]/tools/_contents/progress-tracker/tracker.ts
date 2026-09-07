@@ -24,7 +24,12 @@ import {
 
 export interface TaskProgress {
   count: number;
-  /** Timestamp de la dernière action — référence du cycle des récurrentes. */
+  /**
+   * Timestamp de la dernière action. Écrit à chaque incrément, lu par personne
+   * depuis le retrait des tâches récurrentes (22/07) — conservé pour ne pas
+   * casser les données persistées ; un futur « dernière activité » l'a sous
+   * la main.
+   */
   lastUpdated: number;
 }
 

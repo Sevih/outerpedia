@@ -50,8 +50,8 @@ const ADMIN_BOUNDARY_MSG =
 const SHARED_BRICK_MSG =
   "Ce dossier de briques est PARTAGÉ avec les outils publics de contribution : tout ce qui s'y trouve part dans le bundle de production. Interdit d'y importer un module porteur de secret (server actions `*-actions`) ou dont la sûreté repose sur IS_DEV. Sors la fonction concernée dans un module admin-only, hors de ce dossier (cf. premium-limited-translate.ts).";
 
-// Note vs V2: on NE désactive PAS react-hooks/set-state-in-effect — on garde la
-// règle active et on corrige les vrais cas au portage (faire BIEN).
+// On NE désactive PAS react-hooks/set-state-in-effect (l'ancien site le faisait) :
+// la règle reste active et on corrige les vrais cas (faire BIEN).
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -103,8 +103,8 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    // FICHE PERSO — portage pixel-perfect de la V2 (layout éditorial sombre,
-    // markup V2 copié à l'identique, zinc/white compris). Exception ASSUMÉE et
+    // FICHE PERSO — portage pixel-perfect de l'ancien site (layout éditorial
+    // sombre, markup copié à l'identique, zinc/white compris). Exception ASSUMÉE et
     // CONFINÉE : tout le reste du site reste sous le garde-fou tokens.
     // (Resserrée le 2026-07-16 : parse-text/inline/ShareButtons n'ont plus
     // aucune couleur brute — seule la fiche perso en a encore besoin.)

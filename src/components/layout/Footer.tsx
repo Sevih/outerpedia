@@ -17,9 +17,8 @@ import { getGameVersion } from '@/lib/data/game-version';
  * Pied de page global (structure héritée, tokens actuels) : marque + versions + chips
  * sociaux + chips de langues, 4 colonnes (Database / Tools / Guides /
  * Community — repliables en mobile via <details>, zéro JS), bandeau des liens
- * officiels Outerplane, disclaimer, barre légale. Les cibles pas encore
- * portées (/tierlist, /coupons, /tools, /contributors, /changelog, /legal,
- * /feed) sont ASSUMÉES 404 — cf. TODO « Pages manquantes ». Icônes de marque
+ * officiels Outerplane, disclaimer, barre légale. Toutes les cibles du contrat
+ * `lib/nav.ts` existent (portage clos le 21/07). Icônes de marque
  * (Discord/GitHub/…) : react-icons, inchangé.
  */
 

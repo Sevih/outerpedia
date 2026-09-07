@@ -98,6 +98,48 @@
     = invisible au Tab). RESTE de G22 (focus initial/retour/trap des modales,
     un hook partagé) au TODO.
 
+- **Audit transverse — lot 4 docs et commentaires (G35, G36, G50, dette CSS)**.
+  - **Commentaires qui mentaient, réécrits** : `Footer`/`Header` (« cibles
+    ASSUMÉES 404 » — toutes existent depuis le 21/07), `HeaderClient`
+    (« recherche réservée » — la palette est livrée), `tools/registry.ts`
+    (hero-tracker « unlisted » — `available` depuis le 12/08),
+    `datagen/refresh.ts` (listings ASM supprimés le 26/08 ; `pnpm dev` promeut
+    en DRY, pas `apply: true`), `lib/python.ts`, `datagen/README.md` (le
+    « décompte de référence » de 20 générateurs — 31 réels — remplacé par la
+    commande qui compte), `monad.ts` (noms de fichiers `theme.json`/`routes.json`),
+    `lib/lang.ts` (la config i18n existe et verrouille par le type),
+    `towers.ts` (« 5 langues » → les 4 du jeu), `items.ts` (« PROPOSITION à
+    valider » — consommé depuis longtemps), `progress-tracker/tracker.ts`
+    (`lastUpdated` écrit partout, lu nulle part depuis le 22/07 — conservé pour
+    les données persistées), `curated.ts` (la relecture n'est pas « à dessein »,
+    un cache mtime ferait pareil — pointe G13), fiche perso (ISR réel 60 s).
+  - **« Ni V2 ni V3 » tenu partout** : `globals.css` (25 occurrences — le seul
+    fichier de `src/` qui y échappait, plateforme.md S4 le croyait réservé à
+    `next.config.ts`), `next.config.ts`, `eslint.config.mjs`, `Dockerfile`
+    (« V3 », « Phase 2 »). Formulé par ce que la chose EST (« hérité »,
+    « l'ancien site »), pas par comparaison.
+  - **8 utilitaires morts retirés de `globals.css`** (`.scroll-offset`,
+    `.h2-style`, `.card-solid`, `.card-light`, `.panel-success`,
+    `.panel-danger`, `.panel-feature`, `.panel-highlight` — 0 usage) et leurs
+    deux tokens orphelins (`--card-bg-solid`, `--card-bg-light`).
+  - **Guides** : `joint-challenge/shichifuja` daté du 07/08 (sa dernière
+    version, `2026-07`, était postérieure au `updated` de février) ; les 4
+    descriptions Joint Challenge qui répétaient le titre entier (« boss guide
+    for Shichifuja Joint Challenge Guide: ») nomment le boss, dans les 5
+    langues (modèle : Prototype EX-78).
+  - **`_doc` posé sur `effect-filters.json` et `gear-presets.json`** (ils
+    encodent des arbitrages : facettes/regroupements, codes de presets).
+    Vérifié avant : le validateur ignore les clés hors schéma, `effect-filters`
+    n'a pas d'écrivain admin, et `gear-presets-store` — qui remplace le fichier
+    entier — PRÉSERVE désormais la clé (sinon le premier enregistrement admin
+    l'aurait effacée). Inséré textuellement pour garder le format compact du
+    fichier (un `JSON.stringify` l'éclatait en 685 lignes).
+  - **CONVENTIONS.md** : `revert` ajouté aux types de commit (l'outil
+    l'acceptait déjà) ; la règle « locales alignées par numéro de ligne »
+    remplacée par ce qui est vrai et vérifié (mêmes clés, même ordre, garanti
+    par `keys.test.ts`) — prettier replie les chaînes longues différemment
+    selon la langue, l'alignement par ligne n'était plus tenable.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

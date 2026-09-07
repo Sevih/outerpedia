@@ -6,8 +6,8 @@
  * de données de jeu : il n'a donc pas sa place ici. L'atelier `datagen` ne
  * connaît que ces 4 langues.
  *
- * À garder aligné avec les langues `isOfficial` de la future config i18n
- * (`src/lib/i18n`) quand elle sera portée.
+ * Aligné par le TYPE sur les langues `isOfficial` de `src/lib/i18n/config.ts`
+ * (`GameLang`) : une divergence ne compile pas.
  */
 export const GAME_LANGS = ['en', 'jp', 'kr', 'zh'] as const;
 

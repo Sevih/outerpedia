@@ -37,7 +37,8 @@ export interface CuratedCharacter extends Character {
  * Source unique — le site ne re-dérive plus aucun tag à la volée.
  *
  * `curated` se passe EN PARAMÈTRE sur les listes : le curé est relu du disque à
- * chaque appel (à dessein — l'admin doit voir ses écritures aussitôt), donc le
+ * chaque appel (pour que l'admin voie ses écritures aussitôt — un cache mtime
+ * comme `disk.ts` rendrait le même service, cf. TODO G13), donc le
  * charger une fois pour tout le roster évite 122 lectures de fichier.
  * Prend un `Pick` et non un `Character` complet : les items allégés de liste
  * (`CharacterListItem`) passent tels quels.

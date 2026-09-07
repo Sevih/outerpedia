@@ -1,4 +1,5 @@
 {
+  "_doc": "Taxonomie des FILTRES d'effets de la liste des persos (facettes buff/debuff). Clé = effet canonique (`BT_xxx` ou `BT_STAT|ST_xxx`, l'espace de effectByKey) ; `category` = la facette où il s'affiche (statBoosts, …) ; `group` = l'effet parent sous lequel il se RANGE (un `_IR` — irrésistible — se range sous son effet de base, BUFF_ENHANCEMENT regroupe les amplifications). Un effet absent d'ici n'est PAS filtrable — c'est un choix éditorial (effets trop rares ou trop techniques), pas un oubli du pipeline. Validé par datagen/curated/effect-filters.ts au build (warning, pas d'échec).",
   "buff": {
     "BT_RANDOM_STAT": { "category": "statBoosts" },
     "BT_STAT_BUFF_ENHANCE_IR": { "category": "statBoosts", "group": "BUFF_ENHANCEMENT" },

@@ -2,7 +2,7 @@
  * Générateur — MONAD GATE (`monad/theme.json` + `monad/routes.json`, routes
  * indexées par groupId dans UN fichier).
  *
- * Porté de l'ancien extracteur admin (`api/admin/extractor-v3/monad-gate/route.ts`),
+ * Porté de l'ancien extracteur admin (route `monad-gate` de l'ancien site),
  * en ne gardant QUE la logique pure (graphe + solveur) et en la branchant sur
  * la lib datagen (`loadTable`/`indexBy`/`groupBy`/`resolveText`…) au lieu des
  * anciens loaders ad-hoc.
@@ -112,7 +112,7 @@ export interface MonadRouteRef {
   name: LangDict | null;
 }
 
-/** `monad/theme-{id}.json` — registres partagés du thème. */
+/** `monad/theme.json` — registres partagés du thème (nom stable, cf. build.ts). */
 export interface MonadThemeFile {
   themeId: string;
   name: LangDict | null;
@@ -121,7 +121,7 @@ export interface MonadThemeFile {
   routes: MonadRouteRef[];
 }
 
-/** `monad/routes/{groupId}.json` — une route prête à rendre. */
+/** Une route prête à rendre — toutes dans `monad/routes.json`, indexées par groupId. */
 export interface MonadRouteFile {
   groupId: string;
   depth: number;

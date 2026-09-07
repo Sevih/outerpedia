@@ -1,4 +1,5 @@
 {
+  "_doc": "Presets de gear reco, référencés par les builds de gear-reco.json sous la forme `$slug` (talismans, sets, substats). Le SLUG est un code lisible par l'éditeur, pas une donnée du jeu : lettres = talismans/stats dans l'ordre (a=atk, e=eff, m=…, r=res, s=spd, t=…, v=…), `CPplusAssa`/`CPplusVang` = builds orientés combat power par classe, `dps`/`dpsHP`/… = profils de substats. Un preset s'édite dans l'admin (/admin/tools/gear-presets), qui refuse d'en supprimer un encore référencé ; changer un preset change TOUS les builds qui le citent — c'est le but (une décision à un endroit). Les ids sont ceux de data/generated/equipment/*.json.",
   "talismans": {
     "aem": ["10008", "10001", "10009"],
     "aemrs": ["10008", "10001", "10009", "10003", "10004"],

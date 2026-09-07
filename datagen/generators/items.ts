@@ -9,7 +9,7 @@
  * pools d'options…) → générateur `equipment` à part.
  *
  * Entrées (tables du jeu) : ItemTemplet, TextItem.
- * Sortie : data/items.json (id → entité).  [PROPOSITION — forme à valider]
+ * Sortie : data/items.json (id → entité), consommé par `item-catalog`.
  */
 import { isMain } from '../lib/is-main';
 import { loadTable, num } from '../lib/tables';

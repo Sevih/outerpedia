@@ -178,16 +178,6 @@
 - [ ] `GuideMeta.ogImage` documenté en chemin racine `/images/…` et passé tel
       quel par 3 sites — le piège déjà corrigé pour `DEFAULT_OG_IMAGE` ; aucun
       `meta.json` ne l'utilise aujourd'hui (G33).
-- [ ] **Commentaires qui mentent** (G35) : `Footer.tsx:19`/`Header.tsx:41`
-      (« ASSUMÉES 404 »), `HeaderClient.tsx:63`, `tools/registry.ts:31`
-      (hero-tracker « unlisted »), `datagen/refresh.ts:11,21`, `lib/python.ts:3`,
-      `datagen/README.md:455` (« 20 générateurs », 31), `monad.ts:115,124`,
-      `lib/lang.ts:9`, `towers.ts:44,85`, `items.ts:12`,
-      `progress-tracker/tracker.ts:27` (`lastUpdated` écrit, jamais lu),
-      `curated.ts`.
-- [ ] **« Ni V2 ni V3 »** : `globals.css` 25 occurrences (seul fichier de
-      `src/`), `next.config.ts:24`, `eslint.config.mjs:53,106`, `Dockerfile:3,6`
-      (G36).
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
@@ -203,10 +193,6 @@
       (effet de bord dans un updater, StrictMode garde le second appel) (G44,
       reste) ; admin : `key={i}` sur listes réordonnées par `MoveButtons`
       (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) (G45).
-- [ ] Guides : `joint-challenge/shichifuja` `updated` février alors que sa
-      dernière version est juillet ; 4 descriptions Joint Challenge répètent le
-      titre entier ; `effect-filters.json` et `gear-presets.json` sans `_doc`
-      alors qu'ils encodent des arbitrages (G50).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
       3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres,
       presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
@@ -214,10 +200,9 @@
       deux listes de shops permanents, « persos intégrés » ×4 lecteurs, paires
       classe/enum en dur après dérivation, rebuilds redondants ; familles
       d'équipement rematérialisées à chaque appel ; 8 utilitaires morts dans
-      `globals.css` et pas de `--text-2xs` pour les 349 `text-[10/11px]` ;
+      `globals.css` FAITS ; pas de `--text-2xs` pour les 349 `text-[10/11px]` ;
       schémas persistés non normalisés (tier-list-maker) ; Twitch `parent` sans
-      les sous-domaines ; `lefthook` `parallel: true` format+lint ; convention
-      « locales alignées par ligne » plus vraie, à réécrire.
+      les sous-domaines ; `lefthook` `parallel: true` format+lint.
 - [ ] **Lot non couvert à relancer** : le code TSX des 148 guides (seuls les
       JSON ont été passés au script — l'agent prévu a été coupé par le quota),
       18 générateurs de `datagen/generators/` listés dans le rapport,
