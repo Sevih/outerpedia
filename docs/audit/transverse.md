@@ -19,10 +19,10 @@
 > données committées, comptages). Ce qui n'a pas pu être exécuté (`pnpm dev`
 > interdit, pas d'appareil tactile) est marqué « à confirmer ».
 
-> **Suite, le soir même** : 24 constats traités en cinq commits (G1, G2, G3,
-> G6, G7, G8, G9, G15, G16, G20, G21, G26, G29, G31, G32, G34, G35, G36, G40,
-> G41, G42, G43, G44, G46–G50, G52, plus la moitié de G22 et la dette CSS) —
-> détail dans [DONE.md](../DONE.md) § 2026-09-07. Ce qui reste est au
+> **Suite, le soir même** : 33 constats traités en dix commits (G1–G3, G6–G9,
+> G13, G15, G16, G20–G22, G25–G27, G29–G36, G39–G44, G46–G50, G52, la dette
+> CSS ; G5 tombé à la vérification) — détail dans [DONE.md](../DONE.md)
+> § 2026-09-07. Ce qui reste est au
 > [TODO](../TODO.md) § « Audit transverse du 07/09 » ; ce rapport n'est pas
 > mis à jour constat par constat, il reste l'état du matin.
 
