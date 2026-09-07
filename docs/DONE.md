@@ -140,6 +140,23 @@
     par `keys.test.ts`) — prettier replie les chaînes longues différemment
     selon la langue, l'alignement par ligne n'était plus tenable.
 
+- **Audit transverse — lot 5 (G7, G9)**.
+  - **Patch-notes assainis** (`scripts/get-news.ts`, fonction `sanitize`) : le
+    HTML du WordPress officiel finit en `dangerouslySetInnerHTML` sous une CSP
+    `'unsafe-inline'` — un `<img onerror>` publié là-bas s'exécuterait chez nos
+    visiteurs. Retirés : `script`/`style`/`object`/`embed`/`form`, attributs
+    `on*`, valeurs `javascript:` ; les iframes hors `frame-src` (30 annonces
+    vagames — cadre VIDE sous la CSP) deviennent un lien. Idempotent et rejoué
+    sur tout le corpus à chaque run ; appliqué une fois au committé : 56 posts
+    modifiés, 918 posts sans script/iframe ressortis octet pour octet (la
+    sérialisation cheerio est stable), 33 iframes YouTube conservées, 0 script.
+  - **Le simulateur de pull respecte `recruit.json.customPool`** : la bannière
+    custom tirait 35 des 91 3★ non-fusion que le jeu n'y met pas (Maxwell, Leo,
+    Stella, Astei, Drakhan, Vlada, Eva, Regina…). `GachaChar.inCustomPool`
+    (via `isInCustomRecruitPool`) décide du pool custom ; les autres bannières
+    restent par catégorie. RESTE au TODO : vérifier le pool hors-focus des
+    bannières rateup/premium/limited contre la donnée.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

@@ -94,21 +94,12 @@
       upcoming/ongoing/ended côté serveur. Envoyer les bornes au client et
       dériver avec `useNow`, comme `SeasonBadge` (règle déjà écrite dans les
       notes ci-dessous : « le statut en cours se calcule CÔTÉ CLIENT »).
-- [ ] **HTML des patch-notes injecté sans assainissement** (G7) :
-      `get-news.ts` `processContent` laisse `<script>` (23 dans le committé),
-      les attributs `on*` et les iframes hors allowlist (30 vers un hôte vagames
-      que la CSP bloque en silence). Retirer script/`on*`/`javascript:`,
-      n'accepter que les iframes de `frame-src` (ou y ajouter l'hôte s'il est
-      voulu).
 
 ### Lot 2 — métier, données, outillage
 
-- [ ] **Le simulateur de pull ignore `recruit.json.customPool`** (G9) : la
-      bannière custom tire 35 des 91 héros 3★ non-fusion que le jeu n'y met pas
-      (Maxwell, Leo, Stella, Astei…). `isInCustomRecruitPool` existe, seul un
-      guide l'appelle — brancher le wrapper `pull-simulator/index.tsx` dessus.
-      Vérifier au passage le pool hors-focus des bannières rateup/premium/limited
-      contre la donnée.
+- [ ] Pull simulator : vérifier le pool HORS-FOCUS des bannières
+      rateup/premium/limited contre `recruit.json` (même mécanisme que le pool
+      custom, corrigé le 07/09) (G9, reste).
 - [ ] **Tours very hard : 12 formations ALTERNATIVES émises comme une vague de
       35 monstres** (G10) : `encounters.ts:975-1015` aplatit ce que `towers.ts`
       sait être un pool tiré au hasard (vérifié sur 40103001). C'est exactement

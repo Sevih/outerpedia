@@ -33,6 +33,12 @@ export interface GachaMinor {
 /** Perso 3★ tirable, catégorisé pour les pools de bannière. */
 export interface GachaChar extends GachaMinor {
   category: GachaCategory;
+  /**
+   * Recrutable au Custom Recruit (`recruit.json.customPool`, donnée du jeu).
+   * Orthogonal à `category` : le jeu n'y met ni les derniers sortis ni certains
+   * premium — 35 des 91 3★ en sont absents (audit 07/09).
+   */
+  inCustomPool: boolean;
   /** Noms recherchables normalisés (toutes langues + alias). */
   searchNames: string[];
 }
@@ -72,7 +78,11 @@ const BANNER_FOCUS_CATEGORY: Record<BannerType, GachaCategory | null> = {
   limited: 'limited',
 };
 
-/** Catégories présentes dans le pool hors focus. */
+/**
+ * Catégories présentes dans le pool hors focus. `custom` ne se décide PAS par
+ * catégorie mais par `inCustomPool` (cf. `pullPool`) — la liste ici dit
+ * seulement quelles catégories la bannière peut contenir.
+ */
 const BANNER_POOL: Record<BannerType, Set<GachaCategory>> = {
   custom: new Set(['normal', 'premium', 'limited']),
   rateup: new Set(['normal']),
@@ -165,8 +175,11 @@ export function PullSimulatorBrowser({
     [characters, focusCategory],
   );
   const pullPool = useMemo(
-    () => characters.filter((c) => poolCategories.has(c.category)),
-    [characters, poolCategories],
+    () =>
+      characters.filter((c) =>
+        bannerType === 'custom' ? c.inCustomPool : poolCategories.has(c.category),
+      ),
+    [characters, poolCategories, bannerType],
   );
   const focusChars = useMemo(
     () =>

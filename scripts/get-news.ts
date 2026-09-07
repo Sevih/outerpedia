@@ -222,8 +222,60 @@ function decodeEntities(text: string): string {
  * convertit, clé de contenu), remplace <video> par un lien, purge les classes
  * `wp-*`. Renvoie le nombre d'images RÉELLEMENT téléchargées (pour le rate-limit).
  */
+/** Hôtes d'iframe que la CSP (`frame-src`, next.config.ts) laisse s'afficher. */
+const FRAME_HOSTS = new Set([
+  'www.youtube.com',
+  'youtube.com',
+  'www.youtube-nocookie.com',
+  'player.twitch.tv',
+  'player.bilibili.com',
+]);
+
+/**
+ * ASSAINISSEMENT — le HTML est celui d'un WordPress tiers et finit en
+ * `dangerouslySetInnerHTML` (patch-history), sous une CSP `'unsafe-inline'`.
+ * Un `<img onerror>` publié là-bas (ou un compromis du site) s'exécuterait
+ * chez nos visiteurs. Idempotent : rejoué sur TOUT le corpus à chaque run.
+ *   - `script`/`style`/`object`/`embed`/`form` : retirés (23 `<script>` dans
+ *     le committé au 07/09 — widgets X et ld+json, inertes en innerHTML mais
+ *     sans raison d'être dans le DOM) ;
+ *   - iframe hors `FRAME_HOSTS` : la CSP rendrait un cadre VIDE (30 annonces
+ *     vagames au 07/09) — remplacée par un lien, le contenu reste atteignable ;
+ *   - attributs `on*` et valeurs `javascript:` : retirés.
+ */
+function sanitize($: cheerio.CheerioAPI): void {
+  $('script, style, object, embed, form').remove();
+  for (const el of $('iframe').toArray()) {
+    const src = $(el).attr('src') ?? '';
+    let host = '';
+    try {
+      host = new URL(src).hostname;
+    } catch {
+      /* src relatif ou vide → hors allowlist */
+    }
+    if (FRAME_HOSTS.has(host)) continue;
+    $(el).replaceWith(
+      src ? `<a href="${src}" target="_blank" rel="noopener noreferrer">${src}</a>` : '',
+    );
+  }
+  for (const el of $('*').toArray()) {
+    if (!('attribs' in el)) continue;
+    for (const [name, value] of Object.entries(el.attribs)) {
+      if (/^on/i.test(name) || /^\s*javascript:/i.test(value)) $(el).removeAttr(name);
+    }
+  }
+}
+
+/** Assainit un contenu déjà stocké (corpus committé) — même règle, sans images. */
+function sanitizeStored(html: string): string {
+  const $ = cheerio.load(html);
+  sanitize($);
+  return $('body').html() || '';
+}
+
 async function processContent(html: string): Promise<{ html: string; downloads: number }> {
   const $ = cheerio.load(html);
+  sanitize($);
   let downloads = 0;
   for (const el of $('img').toArray()) {
     const src = $(el).attr('src');
@@ -392,6 +444,17 @@ async function main(): Promise<void> {
   }
 
   const allPosts = [...byId.values()].sort((a, b) => b.date.localeCompare(a.date));
+  // Le corpus déjà committé passe par la même règle : une règle ajoutée
+  // s'applique au passé, pas seulement aux prochains posts.
+  let sanitized = 0;
+  for (const p of allPosts) {
+    const clean = sanitizeStored(p.content);
+    if (clean !== p.content) {
+      p.content = clean;
+      sanitized++;
+    }
+  }
+  if (sanitized) console.log(`[getNews] ${sanitized} post(s) assaini(s)`);
   const postsWritten = await writeJsonIfChanged(outputPath, { posts: allPosts });
   const buffSchedule = deriveBuffEvents(allPosts);
   const buffWritten = await writeJsonIfChanged(join(OUT_DIR, 'buff-events.json'), {

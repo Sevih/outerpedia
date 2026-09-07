@@ -3,7 +3,7 @@ import type { Lang } from '@/lib/i18n/config';
 import { characterNamePrefix, characterSearchNames, getAllCharacters } from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { hasTagInGroup } from '@/lib/data/tags';
-import { getRecruitKind } from '@/lib/data/recruit';
+import { getRecruitKind, isInCustomRecruitPool } from '@/lib/data/recruit';
 import { BANNER_TYPES, RECRUIT_KIND_OF, bannerConfigOf, type BannerConfig } from '@/lib/gacha';
 import {
   PullSimulatorBrowser,
@@ -56,7 +56,12 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
       : hasTagInGroup(c.tags ?? [], 'limited')
         ? 'limited'
         : 'normal';
-    characters.push({ ...minor, category, searchNames: characterSearchNames(c, aliases[c.id]) });
+    characters.push({
+      ...minor,
+      category,
+      inCustomPool: isInCustomRecruitPool(c.id),
+      searchNames: characterSearchNames(c, aliases[c.id]),
+    });
   }
 
   const byName = (a: GachaMinor, b: GachaMinor) => a.name.localeCompare(b.name);
