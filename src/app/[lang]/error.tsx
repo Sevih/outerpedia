@@ -18,7 +18,7 @@ import { localePath } from '@/lib/navigation';
  * TRADUCTION — un `error.tsx` est forcément un Client Component (il reçoit
  * `reset`), donc pas de `getT`/`getRequestLang`, tous deux serveur. On N'importe
  * PAS `@/i18n` pour autant : aucun composant client du projet ne le fait, et ce
- * serait tirer les 519 clés des 5 locales dans le bundle pour trois phrases.
+ * serait tirer les ~1 170 clés des 5 locales dans le bundle pour trois phrases.
  * D'où ce dictionnaire local, saisi sur `<html lang>` — que le layout pose déjà
  * à la vraie langue. Le premier rendu est en anglais (le DOM n'existe pas encore
  * côté serveur), puis il se localise au montage : acceptable pour un écran qui

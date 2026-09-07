@@ -9,6 +9,7 @@ import type { Metadata } from 'next';
 import { LANGUAGES, LANGS, DEFAULT_LANG, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
 import { getBaseUrl, buildUrl, CANONICAL_ORIGIN } from '@/lib/site';
+import { serverNow } from '@/lib/time';
 
 // URL / domaine : le profil de déploiement (origine, routage, index) vit dans
 // src/lib/site.ts — source UNIQUE. Réexporté ici pour préserver les imports
@@ -17,7 +18,7 @@ export { getBaseUrl, buildUrl };
 
 /** « Month Year » localisé pour les titres SEO dynamiques (tier lists…). */
 export function getMonthYear(lang: Lang): string {
-  return new Date().toLocaleString(LANGUAGES[normalizeLang(lang)].htmlLang, {
+  return serverNow().toLocaleString(LANGUAGES[normalizeLang(lang)].htmlLang, {
     month: 'long',
     year: 'numeric',
   });

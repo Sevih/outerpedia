@@ -141,7 +141,8 @@ export const GUIDE_SPECS: Record<string, CatSpec> = {
 };
 
 export const guideSpec = (category: string): CatSpec | undefined => GUIDE_SPECS[category];
-export const isEditableGuideCategory = (category: string): boolean => category in GUIDE_SPECS;
+export const isEditableGuideCategory = (category: string): boolean =>
+  Object.hasOwn(GUIDE_SPECS, category);
 
 /* --- Modèle éditable --- */
 

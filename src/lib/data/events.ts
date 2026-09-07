@@ -19,6 +19,7 @@ import { LANGUAGES } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { loadRuntimeJson } from '@/lib/data/runtime-json';
 import eventsData from '@data/curated/events.json';
+import { serverNow } from '@/lib/time';
 
 /** Familles d'événements (badge + libellé i18n `tools.event.type.*`). */
 export type EventType = 'tournament' | 'contest' | 'community';
@@ -196,7 +197,7 @@ export function summarize(
   lang: Lang,
   options?: { includeDrafts?: boolean; now?: number },
 ): EventSummary[] {
-  const now = options?.now ?? Date.now();
+  const now = options?.now ?? serverNow().getTime();
   const kept = options?.includeDrafts ? all : all.filter(isPublic);
   return kept
     .map((e) => {
@@ -267,7 +268,7 @@ export async function getEventView(
 ): Promise<EventView | undefined> {
   const event = await getEvent(slug, options);
   if (!event) return undefined;
-  const now = Date.now();
+  const now = serverNow().getTime();
   const status = eventStatus(event, now);
   return {
     event,

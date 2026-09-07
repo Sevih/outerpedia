@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang: raw, slug } = await params;
   const lang = normalizeLang(raw);
   const tool = getToolMeta(slug);
-  if (!tool || !TOOL_COMPONENTS[slug] || tool.status === 'coming-soon') return {};
+  if (!tool || !Object.hasOwn(TOOL_COMPONENTS, slug) || tool.status === 'coming-soon') return {};
   const t = await getT(lang);
   const title = t(`tools.${slug}` as TranslationKey);
   return createPageMetadata({
@@ -44,7 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ToolPage({ params }: Props) {
   const { lang: raw, slug } = await params;
   const lang = normalizeLang(raw);
-  const loader = TOOL_COMPONENTS[slug];
+  // `hasOwn` : `/jp/constructor` récupérait sinon `Object` comme loader.
+  const loader = Object.hasOwn(TOOL_COMPONENTS, slug) ? TOOL_COMPONENTS[slug] : undefined;
   const tool = getToolMeta(slug);
   if (!loader || !tool || tool.status === 'coming-soon') notFound();
 

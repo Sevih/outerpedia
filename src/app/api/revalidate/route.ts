@@ -28,6 +28,18 @@ const TIME_SENSITIVE_ROUTES = [
   // sans cette purge, la page servirait le boss d'hier pendant des heures.
   '/[lang]/guides/[category]',
   '/[lang]/guides/[category]/[slug]',
+  // Accueil : bannières « actives aujourd'hui » (jour UTC, `lib/home.ts`).
+  '/[lang]',
+  // Changelog (page + flux) : une entrée PROGRAMMÉE à la date du jour n'entre
+  // qu'à la régénération — sans purge, jusqu'à 24 h de retard (audit 07/09).
+  '/[lang]/changelog',
+  '/feed/changelog',
+  // Tier lists : le titre « Month Year » (`getMonthYear`) tourne au 1er du mois.
+  '/[lang]/tierlist',
+  '/[lang]/[slug]',
+  // Événements : statut upcoming/ongoing/ended calculé au rendu (`events.ts`).
+  '/[lang]/event',
+  '/[lang]/event/[slug]',
 ] as const;
 
 /** Comparaison à temps constant (un `===` fuit la longueur du préfixe commun). */

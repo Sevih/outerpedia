@@ -13,7 +13,6 @@
 import type { Metadata } from 'next';
 import type { Route } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
@@ -125,13 +124,12 @@ export default async function EventDetailPage({ params }: Props) {
 
           {event.cover && !teased && (
             <div className="relative mx-auto aspect-video w-full max-w-md">
-              <Image
+              <img
                 src={img.asset(event.cover)}
                 alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, 448px"
-                priority
-                className="rounded-lg object-contain"
+                aria-hidden
+                fetchPriority="high"
+                className="absolute inset-0 h-full w-full rounded-lg object-contain"
               />
             </div>
           )}

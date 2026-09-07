@@ -61,9 +61,14 @@ export const GAME_LANGS: readonly GameLang[] = LANGS.filter(
 export const DEFAULT_LANG = (Object.entries(LANGUAGES).find(([, v]) => v.isDefault)?.[0] ??
   'en') as DefaultLang;
 
-/** Garde de type. */
+/**
+ * Garde de type. `Object.hasOwn`, pas `in` : `in` remonte la chaîne de prototype
+ * et acceptait `constructor`/`toString`/`__proto__` — `/constructor` passait
+ * le proxy comme langue valide, puis `import('./locales/constructor.ts')`
+ * jetait dans le layout racine (500 sur l'apex).
+ */
 export function isValidLang(value: string): value is Lang {
-  return value in LANGUAGES;
+  return Object.hasOwn(LANGUAGES, value);
 }
 
 /**

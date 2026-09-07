@@ -24,6 +24,9 @@ import { GuideDetail } from '../guide-detail';
 
 export const revalidate = 86400;
 
+/** Un étage (ou un id de boss en very hard) = des chiffres, rien d'autre, ≥ 1. */
+const isFloorSegment = (s: string): boolean => /^[1-9]\d*$/.test(s);
+
 export async function generateMetadata({
   params,
 }: {
@@ -32,8 +35,8 @@ export async function generateMetadata({
   const { lang: raw, category, slug, floor } = await params;
   const lang = normalizeLang(raw);
   const guide = getGuide(category, slug);
+  if (!guide?.tower || !isFloorSegment(floor)) return {};
   const n = Number(floor);
-  if (!guide || !Number.isInteger(n)) return {};
   const t = await getT(lang);
   // Very hard : le segment est un id de boss (nav par combat) → on titre au NOM
   // du boss ; standard : c'est un n° d'étage.
@@ -64,8 +67,11 @@ export default async function GuideFloorPage({
 }) {
   const { lang: raw, category, slug, floor } = await params;
   const lang = normalizeLang(raw);
-  const n = Number(floor);
-  // Étage non numérique = URL fabriquée → 404 (le composant valide l'existence).
-  if (!Number.isInteger(n) || n < 1) notFound();
-  return <GuideDetail lang={lang} category={category} slug={slug} floor={n} />;
+  // Seuls les guides de TOUR ont des étages ; pour les autres, `floor` était
+  // ignoré et `/guides/general-guides/beginner-faq/42` rendait un 200 (une
+  // entrée ISR par URL visitée). Segment strictement décimal : `Number()`
+  // acceptait `1e3`, `0x10`, `5.0` — autant de doublons de cache du même étage.
+  const guide = getGuide(category, slug);
+  if (!guide?.tower || !isFloorSegment(floor)) notFound();
+  return <GuideDetail lang={lang} category={category} slug={slug} floor={Number(floor)} />;
 }

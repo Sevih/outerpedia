@@ -19,9 +19,10 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { LANGUAGES } from '@/lib/i18n/config';
 
 const LOCALES_DIR = resolve(__dirname);
-const LANGS = ['en', 'fr', 'jp', 'kr', 'zh'] as const;
+const LANGS = Object.keys(LANGUAGES);
 
 function keysOf(lang: string): string[] {
   const src = readFileSync(join(LOCALES_DIR, `${lang}.ts`), 'utf8');

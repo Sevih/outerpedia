@@ -79,7 +79,8 @@ export function parseContribution(raw: unknown): Contribution {
   const o = raw as Record<string, unknown>;
 
   if (typeof o.kind === 'string') {
-    if (!(o.kind in CONTRIBUTION_LABELS)) throw new Error(`unknown contribution kind “${o.kind}”.`);
+    if (!Object.hasOwn(CONTRIBUTION_LABELS, o.kind))
+      throw new Error(`unknown contribution kind “${o.kind}”.`);
     if (o.payload == null) throw new Error('envelope has no “payload”.');
     const mode: ContributionMode = o.mode === 'add' ? 'add' : 'edit';
     return { contributionVersion: Number(o.contributionVersion) || 1, kind: o.kind as ContributionKind, mode, payload: o.payload }; // prettier-ignore

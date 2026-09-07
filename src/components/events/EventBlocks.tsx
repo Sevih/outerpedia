@@ -14,7 +14,6 @@
  * reste retombe en texte.
  */
 import type { ReactNode } from 'react';
-import Image from 'next/image';
 import type { TFunction } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -81,12 +80,11 @@ function VideoCard({ video, byLabel }: { video: EventVideo; byLabel: string }) {
     >
       <div className="bg-surface-sunken relative aspect-video w-full">
         {thumb ? (
-          <Image
+          <img
             src={thumb}
             alt={video.title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover"
           />
         ) : (
           <span className="text-content-subtle absolute inset-0 flex items-center justify-center text-xs tracking-wide uppercase">
@@ -296,12 +294,11 @@ function Block({ block, event, ctx }: { block: EventBlock; event: EventEntry; ct
       return (
         <figure className="space-y-2">
           <div className="relative mx-auto aspect-video w-full max-w-2xl">
-            <Image
+            <img
               src={img.asset(block.src)}
               alt={lRec(block.alt, ctx.lang)}
-              fill
-              sizes="(max-width: 768px) 100vw, 672px"
-              className="rounded-lg object-contain"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full rounded-lg object-contain"
             />
           </div>
           {block.caption && (

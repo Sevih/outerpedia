@@ -85,21 +85,6 @@
 
 ### Lot 1 — huit bugs invisibles depuis un poste de dev EN/desktop (une soirée)
 
-- [ ] **`/constructor`, `/toString`, `/__proto__` font un 500** (G1) : les
-      gardes `value in OBJ` acceptent la chaîne de prototype. Passer à
-      `Object.hasOwn` dans les 7 gardes (`isValidLang`, `isGuideCategory`,
-      `isGuideTier`, `towers.ts`, `tools.ts` `INDEX[slug]`, `[slug]/page.tsx`
-      `TOOL_COMPONENTS`, `contribution.ts`, `general-guide-store.ts`) ; en
-      ceinture `dynamicParams = false` sur `[lang]/layout.tsx`. Corriger le
-      commentaire `layout.tsx:65-67` qui affirme qu'un lang inconnu n'arrive
-      jamais.
-- [ ] **Les puces de langue du footer ne changent pas de langue en prod** (G2) :
-      elles pointent `/fr` (path) alors que la prod route par sous-domaine — sur
-      `jp.`, cliquer FR reste en japonais. `Footer.tsx:160` → `buildUrl(l, '/')`
-      comme `LanguageSwitcher`.
-- [ ] **Chaîne / Duo jamais séparés en JP et ZH** (G3) : `splitChainDual`
-      (`src/lib/skills.ts:47`) exige `:` ASCII, le jeu écrit `：`. Découpes
-      réussies EN 129 / KR 129 / JP 8 / ZH 6. Regex `[:：]` + un test jp/zh.
 - [ ] **Les chips à lien ne naviguent pas au doigt** (G4, à CONFIRMER sur un
       téléphone avant de toucher) : `InlineTooltip.tsx:40-45` fait
       `preventDefault` sur touchend, le click du `<Link>` est annulé. Ne pas
@@ -119,14 +104,6 @@
       que la CSP bloque en silence). Retirer script/`on*`/`javascript:`,
       n'accepter que les iframes de `frame-src` (ou y ajouter l'hôte s'il est
       voulu).
-- [ ] **La purge nocturne ne purge pas ce que trois commentaires lui
-      attribuent** (G8) : `/api/revalidate` ne touche que les guides ;
-      `/changelog`, `/feed/changelog`, `/tierlist` (titre « September 2026 »),
-      `/event` restent 24 h en retard. Ajouter ces routes à
-      `TIME_SENSITIVE_ROUTES`, remplacer les `new Date()` de `seo.ts:98`,
-      `home.ts:73`, `changelog.ts:66` par `serverNow()` (promesse de
-      `time.ts`), puis réaligner les commentaires de `changelog.ts:65`,
-      `feed/changelog/route.ts:14`, `events.ts:274`.
 
 ### Lot 2 — métier, données, outillage
 
@@ -149,10 +126,6 @@
       bâti sur l'ANCIEN `skills.json`** (G12) : artefacts de deux versions
       estampillés du nouveau `resVersion`. Ne jouer `damage` que si `apply`, ou
       lire depuis `data/extracted` en dry.
-- [ ] **`[floor]` rend n'importe quel guide avec n'importe quel entier** (G15) :
-      `/guides/general-guides/beginner-faq/42` → 200 et une entrée ISR par URL.
-      `notFound()` si le guide n'est pas une tour ou si `floor` n'est pas
-      `^\d+$`, dans la page ET `generateMetadata`.
 - [ ] **Six écritures non atomiques sur des fichiers committés** (G16) :
       `promote.ts:331` (tout `data/generated/*` à l'apply), `get-news.ts:294`,
       `stamp-guides.ts:172`, `assets-push.mjs:281`, `sync-comics-seed.ts:79`,
@@ -209,23 +182,16 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] `/api/tierlist` ne valide pas l'ASCII de `z` (colonne `CHARSET=ascii`) —
-      `sql_mode` du VPS à confirmer (G26).
 - [ ] `parseText` strict : `{E/xxx}`/`{C/xxx}` inconnus rendent une clé et une
       image cassée sans passer par `unknownRef` ; `{L/…|href}` non validé (G27).
 - [ ] `fr` : `sys.element.*`/`sys.class.*` traduits dans l'UI mais la fiche lit
       le glossaire EN — trancher une source (G28).
-- [ ] Littéraux `'en'` résiduels (`i18n/index.ts:12`, `api/search`, `feed`,
-      `characters.ts`), `keys.test.ts` avec la liste des langues en dur,
-      `error.tsx:21` qui parle de 519 clés (1 169) (G29).
 - [ ] Mapping sous-domaine ↔ langue résolu par la CLÉ dans le proxy, par
       `subdomain` dans `site.ts` ; `outerpedia.com/jp/…` servi au lieu de
       rediriger (G30).
-- [ ] `monsterIconSrc` recopie `img.monster` (G31) ; `next/image` dans
-      `event/[slug]`, `EventsBrowser`, `EventBlocks` (G32) ; `GuideMeta.ogImage`
-      documenté en chemin racine — le piège déjà corrigé pour `DEFAULT_OG_IMAGE`
-      (G33) ; fiche perso : `revalidate = 86400` affiché, 60 s réel via le fetch
-      des reviews (G34).
+- [ ] `GuideMeta.ogImage` documenté en chemin racine `/images/…` et passé tel
+      quel par 3 sites — le piège déjà corrigé pour `DEFAULT_OG_IMAGE` ; aucun
+      `meta.json` ne l'utilise aujourd'hui (G33).
 - [ ] **Commentaires qui mentent** (G35) : `Footer.tsx:19`/`Header.tsx:41`
       (« ASSUMÉES 404 »), `HeaderClient.tsx:63`, `tools/registry.ts:31`
       (hero-tracker « unlisted »), `datagen/refresh.ts:11,21`, `lib/python.ts:3`,

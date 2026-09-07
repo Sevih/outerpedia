@@ -5,6 +5,45 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-07
+
+- **Audit transverse — lot 1 (G1, G2, G3, G8, G15, G26, G29, G31, G32, G34)**,
+  cf. [audit/transverse.md](./audit/transverse.md).
+  - **Gardes de type en `Object.hasOwn`** (8 sites : `isValidLang`,
+    `isGuideCategory`, `isGuideTier`, `isTowerKey`, `getToolMeta`,
+    `TOOL_COMPONENTS[slug]`, `parseContribution`, `isEditableGeneralGuide`,
+    `isEditableGuideCategory`) : `'constructor' in {}` est vrai, `/constructor`
+    passait le proxy comme langue puis faisait jeter l'import de locale dans le
+    layout racine (500 sur l'apex). Test `lib/i18n/config.test.ts` sur les cinq
+    noms de la chaîne de prototype ; commentaire du layout réécrit (il affirmait
+    qu'un lang inconnu n'arrive jamais).
+  - **Puces de langue du footer en `buildUrl`** : elles pointaient `/fr` (path)
+    alors que la prod route par sous-domaine — sur `jp.`, FR renvoyait à
+    l'accueil japonais. Même geste que `LanguageSwitcher`.
+  - **Chaîne / Duo découpés en JP et ZH** : `splitChainDual` n'acceptait que le
+    `:` ASCII ; JP/ZH écrivent `：` (découpes réussies avant : EN 129, JP 8,
+    ZH 6). Regex `[:：]`, test `lib/skills.test.ts`.
+  - **Purge nocturne étendue** : `/api/revalidate` ne purgeait que les guides
+    alors que trois commentaires promettaient le changelog, le flux et les
+    événements. Ajoutés : accueil, `/changelog`, `/feed/changelog`, `/tierlist`,
+    `/[slug]` (titres « Month Year » des tier lists), `/event`, `/event/[slug]`.
+    `seo.ts`, `home.ts`, `changelog.ts`, `events.ts` passent par `serverNow()`
+    (la promesse de `time.ts` : tout rendu dépendant de l'instant est greppable).
+  - **`[floor]` réservé aux guides de tour** et au segment strictement décimal :
+    `/guides/general-guides/beginner-faq/42` rendait un 200 (une entrée ISR par
+    URL visitée) et `Number()` acceptait `1e3`/`0x10`/`5.0` (doublons de cache).
+  - **`/api/tierlist` exige de l'ASCII imprimable** pour `z` (colonne
+    `CHARSET=ascii` : 500 en strict, `?` substitués et id faux sinon).
+  - **Littéraux `'en'` retirés** (`i18n/index.ts` → `normalizeLang`,
+    `api/search`, `feed` → `LANGUAGES[DEFAULT_LANG].htmlLang`, `characters.ts`
+    → `DEFAULT_LANG`) ; `keys.test.ts` dérive ses langues de `LANGUAGES` ;
+    `error.tsx` ne parle plus de « 519 clés ».
+  - **`monsterIconSrc` = `img.monster`** (la règle `startsWith('2')` ne vit plus
+    qu'à un endroit) ; **`next/image` remplacé par `<img>`** dans
+    `event/[slug]`, `EventsBrowser`, `EventBlocks` (`unoptimized: true`, aucun
+    gain — convention) ; commentaire posé sur la fiche perso : ISR réel 60 s via
+    le fetch des reviews, voulu.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

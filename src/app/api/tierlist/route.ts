@@ -25,7 +25,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'bad_request' }, { status: 400 });
   }
   // `z[0] === '1'` : préfixe de version du format d'encodage (cf. share-codec).
-  if (typeof z !== 'string' || z.length < 2 || z.length > MAX_PAYLOAD || z[0] !== '1') {
+  // ASCII imprimable seulement : la colonne est `CHARSET=ascii` (hash-store) —
+  // hors ASCII, MySQL strict répond 500, MySQL laxiste substitue `?` et l'id
+  // (hash du `z` ORIGINAL) servirait un payload altéré. Le codec n'émet que
+  // base64url, la garde ne refuse donc rien de légitime.
+  if (
+    typeof z !== 'string' ||
+    z.length < 2 ||
+    z.length > MAX_PAYLOAD ||
+    z[0] !== '1' ||
+    !/^[!-~]+$/.test(z)
+  ) {
     return NextResponse.json({ error: 'bad_payload' }, { status: 400 });
   }
 

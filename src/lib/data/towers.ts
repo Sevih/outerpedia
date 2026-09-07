@@ -20,7 +20,7 @@ export const TOWER_KEYS = Object.keys(TOWERS);
 
 /** Garde de type : la clé désigne-t-elle une tour connue ? */
 export function isTowerKey(key: string): boolean {
-  return key in TOWERS;
+  return Object.hasOwn(TOWERS, key);
 }
 
 /** Une tour par sa clé (`undefined` si inconnue). */

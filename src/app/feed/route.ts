@@ -1,4 +1,4 @@
-import { DEFAULT_LANG } from '@/lib/i18n/config';
+import { DEFAULT_LANG, LANGUAGES } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { buildUrl } from '@/lib/site';
 import { guideUpdatedDate, listGuides } from '@/lib/data/guides';
@@ -64,7 +64,7 @@ export async function GET() {
     '    <title>Outerpedia</title>',
     `    <link>${esc(home)}</link>`,
     `    <description>${esc(t('footer.tagline'))}</description>`,
-    '    <language>en</language>',
+    `    <language>${LANGUAGES[DEFAULT_LANG].htmlLang}</language>`,
     `    <lastBuildDate>${lastBuild}</lastBuildDate>`,
     `    <atom:link href="${esc(self)}" rel="self" type="application/rss+xml" />`,
     items,

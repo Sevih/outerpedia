@@ -44,7 +44,7 @@ export const EDITABLE_GENERAL_GUIDES: Record<string, string> = {
 };
 
 export function isEditableGeneralGuide(slug: string): boolean {
-  return slug in EDITABLE_GENERAL_GUIDES;
+  return Object.hasOwn(EDITABLE_GENERAL_GUIDES, slug);
 }
 
 const freeHeroesPath = () =>

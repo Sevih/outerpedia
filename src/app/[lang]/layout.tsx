@@ -62,9 +62,11 @@ export default async function LangLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang: raw } = await params;
-  // PAS de notFound() ici : interdit dans un layout racine. Inutile de toute
-  // façon — le proxy réécrit tout préfixe invalide vers /en/… (un lang inconnu
-  // n'arrive jamais jusqu'ici) ; on dégrade en `normalizeLang`, comme les pages.
+  // PAS de notFound() ici : interdit dans un layout racine. Le proxy réécrit
+  // tout préfixe invalide vers /en/…, mais « invalide » dépend de `isValidLang`
+  // — quand elle acceptait `constructor` (garde `in`), ce nom arrivait ici et
+  // faisait jeter l'import de locale. On dégrade en `normalizeLang`, comme les
+  // pages : le repli couvre aussi ce qui passerait entre les mailles.
   const lang = normalizeLang(raw);
   setRequestLang(lang);
   const t = await getT(lang);

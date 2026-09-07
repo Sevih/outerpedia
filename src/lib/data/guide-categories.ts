@@ -124,7 +124,7 @@ export const GUIDE_TIER_KEYS = (Object.keys(GUIDE_TIERS) as GuideTierKey[]).sort
 
 /** Garde de type. */
 export function isGuideTier(value: string): value is GuideTierKey {
-  return value in GUIDE_TIERS;
+  return Object.hasOwn(GUIDE_TIERS, value);
 }
 
 export const GUIDE_CATEGORIES = {
@@ -467,9 +467,9 @@ export const GUIDE_CATEGORY_SLUGS = (Object.keys(GUIDE_CATEGORIES) as GuideCateg
   (a, b) => GUIDE_CATEGORIES[a].order - GUIDE_CATEGORIES[b].order,
 );
 
-/** Garde de type. */
+/** Garde de type (`hasOwn`, pas `in` : `constructor` n'est pas une catégorie). */
 export function isGuideCategory(value: string): value is GuideCategorySlug {
-  return value in GUIDE_CATEGORIES;
+  return Object.hasOwn(GUIDE_CATEGORIES, value);
 }
 
 /**

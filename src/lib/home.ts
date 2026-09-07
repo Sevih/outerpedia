@@ -26,6 +26,7 @@ import type { InlineItem } from '@/components/inline/ItemInline';
 import bannersData from '@data/curated/banner.json';
 import couponsData from '@data/curated/coupons.json';
 import buffData from '@data/patch-notes/buff-events.json';
+import { serverNow } from '@/lib/time';
 
 /** Une bannière active, prête pour `CharacterCard` + son compte à rebours. */
 export interface BannerVM {
@@ -70,7 +71,7 @@ const loadBanners = (): Promise<RawBanner[]> =>
 
 /** Jour courant `YYYY-MM-DD` en UTC (les fenêtres actives sont en jours UTC). */
 function todayUTC(): string {
-  return new Date().toISOString().slice(0, 10);
+  return serverNow().toISOString().slice(0, 10);
 }
 
 /**

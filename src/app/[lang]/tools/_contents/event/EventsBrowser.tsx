@@ -10,7 +10,6 @@
  */
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import type { Route } from 'next';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { EVENT_STATUS_BADGE, EVENT_TYPE_BADGE } from '@/components/events/presentation';
@@ -101,13 +100,13 @@ export function EventsBrowser({ events, labels }: { events: EventCardVM[]; label
                 <div className="relative hidden h-20 w-36 shrink-0 overflow-hidden rounded-md sm:block">
                   {/* La première vignette est au-dessus de la ligne de flottaison
                       (c'est le LCP de la page) — les suivantes restent paresseuses. */}
-                  <Image
+                  <img
                     src={e.cover}
                     alt=""
-                    fill
-                    sizes="144px"
-                    priority={i === 0}
-                    className="object-cover"
+                    aria-hidden
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={i === 0 ? 'high' : 'auto'}
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
               )}

@@ -11,7 +11,7 @@ import { buildSearchIndex } from '@/lib/search-index';
  * agressif (revalidation en arrière-plan).
  */
 export async function GET(req: NextRequest) {
-  const lang = normalizeLang(req.nextUrl.searchParams.get('lang') ?? 'en');
+  const lang = normalizeLang(req.nextUrl.searchParams.get('lang') ?? '');
   const t = await getT(lang);
   return NextResponse.json(buildSearchIndex(lang, t), {
     headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' },

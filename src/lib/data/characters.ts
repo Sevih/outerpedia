@@ -17,7 +17,7 @@ import type {
   Glossaries,
   LangDict,
 } from '@contracts';
-import type { Lang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, type Lang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
 
 const CHARACTERS = charactersData as unknown as CharactersFile;
@@ -55,12 +55,12 @@ type Named = {
  * dans les rangées d'affichage, et le complet qui se reconstruit là où on en a
  * besoin (tri, JSON-LD, `title`) — via `joinDisplayName`.
  */
-export function characterBaseName(c: Named, lang: string = 'en'): string {
+export function characterBaseName(c: Named, lang: string = DEFAULT_LANG): string {
   return ((c.name as Record<string, string>)[lang] ?? c.name.en) as string;
 }
 
 /** Préfixe de titre seul (« Core Fusion » / surnom), null sinon. */
-export function characterNamePrefix(c: Named, lang: string = 'en'): string | null {
+export function characterNamePrefix(c: Named, lang: string = DEFAULT_LANG): string | null {
   const pick = (d: LangDict) => (d as Record<string, string>)[lang] ?? d.en;
   if (c.originalCharacter) return pick(FUSION_TITLE);
   if (c.showNickName && c.nickname) return pick(c.nickname);
@@ -77,7 +77,7 @@ export function joinDisplayName(prefix: string | null | undefined, base: string)
  * jeu) pour les entités core-fusion (c'est leur nom complet), sinon le surnom
  * quand le perso l'inclut (`showNickName`), ex. « Monad Iota ».
  */
-export function characterDisplayName(c: Named, lang: string = 'en'): string {
+export function characterDisplayName(c: Named, lang: string = DEFAULT_LANG): string {
   return joinDisplayName(characterNamePrefix(c, lang), characterBaseName(c, lang));
 }
 

@@ -44,7 +44,10 @@ export function levelAt<T extends { level: number }>(levels: T[], lvl: number): 
  * (`<color=#ffd732>…</color>:`). Une seule section → tout est « chain ».
  */
 export function splitChainDual(desc: string): { chain: string; dual: string } {
-  const marker = /<color=#ffd732>[^<]+<\/color>\s*:\s*/gi;
+  // `[:：]` : JP et ZH ponctuent avec le deux-points pleine largeur (U+FF1A) —
+  // avec le seul `:` ASCII, 121 chain passives sur 129 restaient d'un bloc en
+  // JP (123 en ZH) : le « Dual Attack » disparaissait de la fiche.
+  const marker = /<color=#ffd732>[^<]+<\/color>\s*[:：]\s*/gi;
   const matches = [...desc.matchAll(marker)];
   if (matches.length < 2) return { chain: desc.trim(), dual: '' };
   const splitIndex = matches[1].index ?? 0;

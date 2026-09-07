@@ -58,7 +58,9 @@ export function getVisibleTools(): ToolMeta[] {
 
 /** Métadonnées d'un outil par slug (`null` si inconnu). Inclut hidden/unlisted. */
 export function getToolMeta(slug: string): ToolMeta | null {
-  const d = INDEX[slug];
+  // `hasOwn` : un slug d'URL comme `constructor` indexerait sinon la chaîne de
+  // prototype du JSON importé.
+  const d = Object.hasOwn(INDEX, slug) ? INDEX[slug] : undefined;
   if (!d) return null;
   return {
     slug,

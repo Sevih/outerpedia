@@ -17,6 +17,7 @@
 import type { Lang } from '@/lib/i18n/config';
 import type { LocalizedText } from '@contracts';
 import rawEntries from '@data/curated/changelog.json';
+import { serverNow } from '@/lib/time';
 
 /** Familles d'entrées du journal (badge + libellé i18n `changelog.type.*`). */
 export type ChangelogType = 'guide' | 'update' | 'feature' | 'character' | 'news' | 'fix';
@@ -63,7 +64,7 @@ const entries = rawEntries as ChangelogEntry[];
 
 /** Date du jour en UTC, 'YYYY-MM-DD' — borne de publication (aligne sur la purge 00:05 UTC). */
 function todayUtc(): string {
-  return new Date().toISOString().slice(0, 10);
+  return serverNow().toISOString().slice(0, 10);
 }
 
 function resolveText(map: LocalizedText, lang: Lang): string {

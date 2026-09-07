@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import type { Lang } from '@/lib/i18n/config';
-import { isValidLang } from '@/lib/i18n/config';
+import { normalizeLang } from '@/lib/i18n/config';
 import type { TranslationKey } from './locales/en';
 
 export type { TranslationKey };
@@ -9,7 +9,7 @@ export type TFunction = (key: TranslationKey, vars?: Record<string, string | num
 
 /** Charge les messages d'une langue (mémoïsé par requête). */
 export const loadMessages = cache(async (lang: Lang): Promise<Messages> => {
-  const safeLang = isValidLang(lang) ? lang : 'en';
+  const safeLang = normalizeLang(lang);
   // `webpackExclude` : le glob de ce dynamic import balaie tout `locales/*.ts` ;
   // sans ça, webpack (dev) embarque `keys.test.ts` → vitest → vite (warning
   // `import.meta`). `safeLang` est déjà validé, le test n'est jamais chargé au

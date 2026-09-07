@@ -93,6 +93,9 @@ export function generateStaticParams() {
   return LANGS.flatMap((lang) => slugs.map((slug) => ({ lang, slug })));
 }
 
+// Plafond de la route — mais le `fetch` des reviews (`reviews.ts`, `revalidate: 60`)
+// abaisse l'ISR RÉEL de la fiche à 60 s (règle Next : le plus court gagne,
+// cf. `runtime-json.ts`). Voulu : les avis sont la seule donnée vivante.
 export const revalidate = 86400;
 
 export async function generateMetadata({

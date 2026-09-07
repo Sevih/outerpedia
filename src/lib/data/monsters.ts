@@ -292,7 +292,7 @@ function bossKitSources(entry?: MonsterArchiveEntry): KitSources {
  * vignette complète serait illisible.
  */
 export function monsterIconSrc(m: Pick<Monster, 'icon'>): string {
-  return m.icon.startsWith('2') ? img.face(m.icon) : img.boss(`MT_${m.icon}`);
+  return img.monster(m.icon); // la règle `startsWith('2')` vit dans `images.ts`, pas ici
 }
 
 /**

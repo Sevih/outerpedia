@@ -7,8 +7,9 @@ import { img } from '@/lib/images';
 import { getRequestLang } from '@/lib/i18n/server';
 import { getT, type TranslationKey, type TFunction } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { DEFAULT_LANG, LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
+import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
+import { buildUrl } from '@/lib/site';
 import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import { getGameVersion } from '@/lib/data/game-version';
 
@@ -157,7 +158,11 @@ function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
           return (
             <Link
               key={l}
-              href={(l === DEFAULT_LANG ? '/' : `/${l}`) as Route}
+              // `buildUrl` : en prod la langue EST le sous-domaine — un `/fr`
+              // path-based était renvoyé par le proxy vers l'accueil du MÊME
+              // sous-domaine (« le sous-domaine fait foi »), sans changer de
+              // langue. Même geste que `LanguageSwitcher`.
+              href={buildUrl(l, '/') as Route}
               className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition ${
                 isCurrent
                   ? 'border-accent/60 bg-accent/10 text-accent'
