@@ -185,6 +185,21 @@
     `MostUsedUnitsBrowser`, `CharactersBrowser`, `TierListBrowser` — plus
     d'aller-retour RSC par frappe ; aucun des trois ne lit `useSearchParams`.
 
+- **Audit transverse — lot 7 (G13, côté `src/`)** : les sept lecteurs de JSON
+  curé de `src/lib/data` (`characters`, `effects`, `equipment`, `gear-reco` ×2,
+  `search-aliases`, `short-names`, `tags`) passent par UN `loadCuratedJson`
+  (`disk.ts`) — fichier absent → repli, JSON cassé → LÈVE en nommant le fichier
+  (avant : sept `try { parse } catch { {} }`, un curé corrompu faisait
+  disparaître pros/cons, recos ou alias sans un mot). Cache du parse par
+  mtime+taille, mais **sans TTL** : les stores admin lisent ces fichiers en
+  read-merge-write, et un cache de 200 ms (celui de `loadDataJson`) servait
+  la version d'AVANT leur propre écriture — trois tests de stores l'ont montré
+  à la première tentative. `tags.json` perd son cache permanent (une édition
+  admin était invisible jusqu'au redémarrage) ; `characters.json` (243 Ko)
+  n'est plus reparsé à chaque chip. Test `disk.test.ts`. RESTE au TODO : les
+  mêmes lectures côté datagen (`manifest.ts`, `lib/effects.ts`,
+  `character-release.ts`) → `readCuratedJson`.
+
 ## 2026-09-05
 
 - **Générateur solver : `bestSkill` par perso** (`datagen/generators/solver.ts`,

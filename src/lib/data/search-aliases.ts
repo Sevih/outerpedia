@@ -9,16 +9,9 @@
  * NB : DISTINCT du nom court d'AFFICHAGE (cf. `short-names`, hérité
  * `name-aliases.json`). Ici on n'affiche rien : on élargit seulement la recherche.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 
-const PATH = resolve(process.cwd(), 'data/curated/search-aliases.json');
-
-/** Charge tous les alias de recherche (clé = ID). Fichier absent/illisible → {}. */
+/** Charge tous les alias de recherche (clé = ID). Fichier absent → {} ; JSON cassé → lève. */
 export function loadSearchAliases(): Record<string, string[]> {
-  try {
-    return JSON.parse(readFileSync(PATH, 'utf8')) as Record<string, string[]>;
-  } catch {
-    return {};
-  }
+  return loadCuratedJson<Record<string, string[]>>('curated/search-aliases.json', {});
 }

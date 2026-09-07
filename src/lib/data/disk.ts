@@ -29,6 +29,43 @@ interface Entry {
 }
 const cache = new Map<string, Entry>();
 
+/**
+ * JSON CURÉ (`data/curated/<x>.json`) : même cache mtime, mais l'ABSENCE du
+ * fichier est un état normal (pas de curation → `fallback`), alors qu'un JSON
+ * INVALIDE lève en nommant le fichier — jamais un `{}` silencieux qui ferait
+ * disparaître pros/cons, recos ou alias sans un mot (audit 07/09, G13 ; même
+ * doctrine que `readCuratedJson` côté datagen). Les sept lecteurs de curés
+ * de `src/lib/data` passent par ici — avant, sept `try { parse } catch { {} }`.
+ */
+export function loadCuratedJson<T>(rel: string, fallback: T): T {
+  const abs = resolve(process.cwd(), 'data', rel);
+  let st: { mtimeMs: number; size: number };
+  try {
+    st = statSync(abs);
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return fallback;
+    throw e;
+  }
+  // PAS de TTL ici, contrairement à `loadDataJson` : les stores admin lisent
+  // ces fichiers en read-merge-write, et une lecture servie du cache 200 ms
+  // après leur propre écriture perdrait la mise à jour précédente. Un `stat`
+  // par appel coûte des microsecondes ; seul le parse est mémoïsé. La taille
+  // s'ajoute au mtime : deux écritures dans la même milliseconde (tests,
+  // enregistrements en rafale) ne se confondent pas.
+  const key = `${st.mtimeMs}:${st.size}`;
+  const hit = curated.get(rel);
+  if (hit && hit.key === key) return hit.data as T;
+  let data: T;
+  try {
+    data = JSON.parse(readFileSync(abs, 'utf8')) as T;
+  } catch (e) {
+    throw new Error(`data/${rel} : JSON invalide — ${(e as Error).message}`);
+  }
+  curated.set(rel, { key, data });
+  return data;
+}
+const curated = new Map<string, { key: string; data: unknown }>();
+
 /** JSON de `data/<rel>` (ex. `generated/monsters.json`), cache par mtime. */
 export function loadDataJson<T>(rel: string): T {
   const now = Date.now();

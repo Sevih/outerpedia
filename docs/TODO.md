@@ -123,13 +123,10 @@
 
 ### Lot 3 — régler à la source
 
-- [ ] **Sept lecteurs de JSON curé, repli `{}` silencieux** (G13) :
-      `curated.ts` (243 Ko relus à chaque appel), `effects.ts`, `equipment.ts`,
-      `gear-reco.ts`, `search-aliases.ts`, `short-names.ts`, `tags.ts`,
-      `guides.ts` — aucun n'utilise `disk.ts` qui offre déjà le cache mtime.
-      Même famille dans datagen : `manifest.ts:83,104,674`, `lib/effects.ts:653`,
-      `character-release.ts:414`. Un lecteur, absence tolérée, JSON invalide
-      jamais.
+- [ ] Lectures « ratée = vide silencieux » côté DATAGEN (G13, reste) :
+      `datagen/assets/manifest.ts:83,104,674`, `datagen/lib/effects.ts:653`,
+      `datagen/generators/character-release.ts:414` → `readCuratedJson`
+      (absent → défaut, cassé → throw nommé). Le côté `src/` est fait.
 - [ ] **40+ imports directs de `@data/*` hors data layer** (G14), interdit par
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur

@@ -6,8 +6,7 @@
  * voie ses écritures immédiatement (en dev, Next invalide le module à la
  * recompilation — le cache module ci-dessous ne survit pas à une écriture).
  */
-import { readFileSync, statSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Effect, EffectCurated, Glossaries, LangDict } from '@contracts';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
@@ -19,8 +18,6 @@ const EFFECTS = G.effects as Record<string, Effect>;
 const BY_TOOLTIP = G.effectByTooltip as Record<string, string>;
 const BY_LABEL = G.effectByLabel as Record<string, string>;
 const BY_KEY = G.effectByKey as Record<'buff' | 'debuff', Record<string, string>>;
-
-const CURATED_PATH = resolve(process.cwd(), 'data/curated/effects.json');
 
 /**
  * SOURCES de résolution d'un effet : le glossaire extrait + la curation. Toutes
@@ -83,33 +80,14 @@ export interface MergedEffect {
   overridden: boolean;
 }
 
-// Cache module CLÉ SUR LE MTIME : le contrat de ce fichier est que l'admin
-// voie ses écritures immédiatement (l'éditeur d'effets écrit ce JSON au
-// runtime — un memo pur survivrait à l'écriture jusqu'au redémarrage, le
-// fichier est lu par fs, pas importé, donc Next ne recompile rien). Le
-// statSync par appel remplace la relecture/parse complète qu'on faisait avant
-// — c'est lui qui rend le cache correct, pas seulement rapide.
-let curatedCache: { data: Record<string, EffectCurated>; mtimeMs: number } | null = null;
-
-/** Charge tous les overrides curés (clé = id d'effet) — mémoïsé sur le mtime. */
+/**
+ * Charge tous les overrides curés (clé = id d'effet). Le contrat de ce fichier
+ * est que l'admin voie ses écritures immédiatement (l'éditeur d'effets écrit
+ * ce JSON au runtime) : c'est le cache MTIME de `disk.ts` qui le tient — lu
+ * par fs, pas importé, donc Next ne recompile rien.
+ */
 export function loadCuratedEffects(): Record<string, EffectCurated> {
-  let mtimeMs = -1;
-  try {
-    mtimeMs = statSync(CURATED_PATH).mtimeMs;
-  } catch {
-    /* fichier absent → catalogue vide (mtime sentinelle -1) */
-  }
-  if (curatedCache && curatedCache.mtimeMs === mtimeMs) return curatedCache.data;
-  let data: Record<string, EffectCurated> = {};
-  if (mtimeMs !== -1) {
-    try {
-      data = JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<string, EffectCurated>;
-    } catch {
-      data = {};
-    }
-  }
-  curatedCache = { data, mtimeMs };
-  return data;
+  return loadCuratedJson<Record<string, EffectCurated>>('curated/effects.json', {});
 }
 
 /**

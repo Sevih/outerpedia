@@ -10,17 +10,10 @@
  * NB : DISTINCT des alias de RECHERCHE (cf. `search-aliases`) — ici on AFFICHE,
  * on n'élargit pas la recherche.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 import type { LocalizedText } from '@contracts';
 
-const PATH = resolve(process.cwd(), 'data/curated/short-names.json');
-
-/** Charge tous les noms courts (clé = ID). Fichier absent/illisible → {}. */
+/** Charge tous les noms courts (clé = ID). Fichier absent → {} ; JSON cassé → lève. */
 export function loadShortNames(): Record<string, LocalizedText> {
-  try {
-    return JSON.parse(readFileSync(PATH, 'utf8')) as Record<string, LocalizedText>;
-  } catch {
-    return {};
-  }
+  return loadCuratedJson<Record<string, LocalizedText>>('curated/short-names.json', {});
 }

@@ -4,8 +4,7 @@
  * (nom localisé, icône, grade) depuis le généré. Lu au FS pour que l'admin voie
  * ses écritures immédiatement.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 import type { GearBuild, GearPresets, LangDict, Option, SetComboPiece } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -50,25 +49,18 @@ const TALISMANS = talismanData as unknown as Record<string, EquipEntry>;
 const SETS = setsData as unknown as Record<string, SetEntry>;
 const POOLS = poolsData as unknown as Record<string, Option[]>;
 
-const RECO_PATH = resolve(process.cwd(), 'data/curated/gear-reco.json');
-const PRESETS_PATH = resolve(process.cwd(), 'data/curated/gear-presets.json');
-
-function readJson<T>(path: string, fallback: T): T {
-  try {
-    return JSON.parse(readFileSync(path, 'utf8')) as T;
-  } catch {
-    return fallback;
-  }
-}
-
 /** Tous les builds curés (clé = id de perso), bruts. */
 export function loadGearReco(): Record<string, GearBuild[]> {
-  return readJson(RECO_PATH, {});
+  return loadCuratedJson<Record<string, GearBuild[]>>('curated/gear-reco.json', {});
 }
 
-/** Presets partagés, bruts. */
+/** Presets partagés, bruts (`_doc` du fichier ignoré par les consommateurs). */
 export function loadGearPresets(): GearPresets {
-  return readJson(PRESETS_PATH, { talismans: {}, sets: {}, substats: {} });
+  return loadCuratedJson<GearPresets>('curated/gear-presets.json', {
+    talismans: {},
+    sets: {},
+    substats: {},
+  });
 }
 
 /** Source d'obtention localisée (tooltip des MiniCards). */

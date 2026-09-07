@@ -11,7 +11,8 @@
  *
  * Le curé est lu au FS (l'admin voit ses écritures immédiatement).
  */
-import { readFileSync, statSync } from 'node:fs';
+import { statSync } from 'node:fs';
+import { loadCuratedJson } from '@/lib/data/disk';
 import { resolve } from 'node:path';
 import type {
   ArmorItem,
@@ -112,13 +113,9 @@ export function gearById(id: string): GearIdentity | undefined {
 const CURATED_PATH = resolve(process.cwd(), 'data/curated/equipment.json');
 const EMPTY: EquipmentCurated = { weapons: {}, amulets: {}, talismans: {}, sets: {}, ee: {} };
 
-/** Éditorial curé complet (fichier absent = vide). */
+/** Éditorial curé complet (fichier absent = vide ; JSON cassé → lève). */
 export function loadEquipmentEditorial(): EquipmentCurated {
-  try {
-    return { ...EMPTY, ...(JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as EquipmentCurated) };
-  } catch {
-    return EMPTY;
-  }
+  return { ...EMPTY, ...loadCuratedJson<Partial<EquipmentCurated>>('curated/equipment.json', {}) };
 }
 
 /**

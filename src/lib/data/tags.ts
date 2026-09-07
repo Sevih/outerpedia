@@ -12,25 +12,17 @@
  * L'ordre d'affichage (`sort`) vit ici et NULLE PART ailleurs — les composants
  * ne redéclarent plus de liste ordonnée en dur.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 import type { Lang } from '@/lib/i18n/config';
 import type { TagDef, TagGlossary, TagGroup, TagKind } from '@contracts';
 
-const TAGS_PATH = resolve(process.cwd(), 'data/curated/tags.json');
-
-let cache: TagGlossary | null = null;
-
-/** Vocabulaire complet (slug → définition). Fichier absent → {} (dégradé propre). */
+/**
+ * Vocabulaire complet (slug → définition). Fichier absent → {} ; JSON cassé →
+ * lève. Cache mtime de `disk.ts` (l'ancien cache permanent rendait une édition
+ * admin de `tags.json` invisible jusqu'au redémarrage).
+ */
 export function loadTagGlossary(): TagGlossary {
-  cache ??= (() => {
-    try {
-      return JSON.parse(readFileSync(TAGS_PATH, 'utf8')) as TagGlossary;
-    } catch {
-      return {};
-    }
-  })();
-  return cache;
+  return loadCuratedJson<TagGlossary>('curated/tags.json', {});
 }
 
 /** Définition d'un tag, `undefined` hors vocabulaire. */

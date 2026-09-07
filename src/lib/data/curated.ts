@@ -5,20 +5,13 @@
  * écritures immédiatement. Le curé reste SÉPARÉ de l'extraction : on le fusionne
  * à la lecture (`withCurated`) plutôt que de le mélanger dans `data/generated`.
  */
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { loadCuratedJson } from '@/lib/data/disk';
 import type { Character, CharacterCurated } from '@contracts';
 import { sortTags } from './tags';
 
-const CURATED_PATH = resolve(process.cwd(), 'data/curated/characters.json');
-
-/** Charge tout le curé (clé = ID). Fichier absent/illisible → {} (dégradé propre). */
+/** Charge tout le curé (clé = ID). Fichier absent → {} ; JSON cassé → LÈVE. */
 export function loadCuratedCharacters(): Record<string, CharacterCurated> {
-  try {
-    return JSON.parse(readFileSync(CURATED_PATH, 'utf8')) as Record<string, CharacterCurated>;
-  } catch {
-    return {};
-  }
+  return loadCuratedJson<Record<string, CharacterCurated>>('curated/characters.json', {});
 }
 
 /** Curé d'un personnage (par id), `{}` si aucun. */
