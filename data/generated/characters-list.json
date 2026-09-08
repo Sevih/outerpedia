@@ -3854,6 +3854,33 @@
     },
     "teamBonuses": ["SPD"]
   },
+  "2000122": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+    "debuff": ["BT_STAT|ST_DEF", "WEAKNESS_GAUGE_DAMAGE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_STAT|ST_DEF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_COOL_CHARGE"],
+        "debuff": []
+      },
+      "chainPassive": {
+        "buff": ["BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": ["CHC"]
+  },
   "2000129": {
     "buff": [
       "BT_ACTION_GAUGE",
@@ -3959,6 +3986,36 @@
       }
     },
     "teamBonuses": []
+  },
+  "2700019": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_ATTACK",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "BT_STAT|ST_PIERCE_POWER_RATE"
+    ],
+    "debuff": ["WEAKNESS_GAUGE_DAMAGE"],
+    "effectsBySource": {
+      "s1": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      },
+      "s2": {
+        "buff": ["BT_COOL_CHARGE", "BT_STAT|ST_ATK"],
+        "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_ACTION_GAUGE", "BT_ADDITIVE_ATTACK", "BT_STAT|ST_PIERCE_POWER_RATE"],
+        "debuff": []
+      },
+      "dualAttack": {
+        "buff": ["BT_STAT|ST_CRITICAL_DMG_RATE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": ["CHD"]
   },
   "2700037": {
     "buff": [

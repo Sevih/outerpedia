@@ -2864,6 +2864,21 @@
       }
     ]
   },
+  "2000122": {
+    "name": "Titia's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "DMG dealt to Earth enemies <color=#28d9ed>+50%</color> (Unaffected by elemental advantage bonuses)"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "After taking an action, increases all Fire allies' Damage Dealt by <color=#28d9ed>15%</color>. (Stacks up to 4 times)"
+      }
+    ]
+  },
   "2000129": {
     "name": "Demiurge Saeran's Exclusive Equipment",
     "tiers": [
@@ -2906,6 +2921,21 @@
         "unlockLevel": 10,
         "isAdd": true,
         "desc": "When a Mage ally takes action, increases own Attack by <color=#28d9ed>+7%</color> (Stacks up to 5 times)."
+      }
+    ]
+  },
+  "2700019": {
+    "name": "Resonance Rin's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "Damage Dealt to Bosses <color=#28d9ed>+50%</color>"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "Damage Dealt to Fire enemies <color=#28d9ed>+75%</color> (Unaffected by elemental advantage bonuses)"
       }
     ]
   },

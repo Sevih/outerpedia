@@ -279,8 +279,8 @@
   {
     "file": "Event_00024",
     "name": "Event: Twilight Project",
-    "size": 1.1,
-    "duration": 48,
+    "size": 2.12,
+    "duration": 92.4,
     "name_jp": "Event - Dusk Project",
     "name_kr": "Event - Dusk Project",
     "name_zh": "Event - Dusk Project"
@@ -288,8 +288,8 @@
   {
     "file": "Event_00025",
     "name": "Event - Moonlight at World's End",
-    "size": 0.95,
-    "duration": 41.6
+    "size": 2.05,
+    "duration": 89.3
   },
   {
     "file": "Event_00026",

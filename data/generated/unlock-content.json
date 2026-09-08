@@ -1734,11 +1734,12 @@
       "contentType": "MAIN_MENU_SIDESTORY",
       "requirements": [
         {
+          "stage": "S1-1-6",
           "dungeonName": {
-            "en": "Intro - Fateful Encounter",
-            "jp": "Intro - 運命的な出会い",
-            "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "en": "Fixing the Circuit (2)",
+            "jp": "回路を直す（2）",
+            "kr": "회로 고치기 (2)",
+            "zh": "修复电路（2）"
           },
           "areaName": {
             "en": "Path to Nationhood",
@@ -1749,22 +1750,29 @@
           "mode": "story"
         },
         {
+          "stage": "S1-1-5",
           "dungeonName": {
-            "en": "Intro - Fateful Encounter",
-            "jp": "Intro - 運命的な出会い",
-            "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "en": "The Demibeast and the Lord",
+            "jp": "獣人と領主",
+            "kr": "수인과 영주",
+            "zh": "兽人与领主"
           },
           "areaName": {
-            "en": "Path to Nationhood",
-            "jp": "建国の道",
-            "kr": "건국의 길",
-            "zh": "建国之路"
+            "en": "Outer City",
+            "jp": "アウターシティ",
+            "kr": "아우터시티",
+            "zh": "外城"
           },
-          "mode": "story"
+          "mode": "origin"
         }
       ],
       "lockScreenName": {
+        "en": "Side Story",
+        "jp": "外伝",
+        "kr": "외전",
+        "zh": "外传"
+      },
+      "officialName": {
         "en": "Side Story",
         "jp": "外伝",
         "kr": "외전",

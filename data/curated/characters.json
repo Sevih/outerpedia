@@ -4632,6 +4632,15 @@
       }
     ]
   },
+  "2700019": {
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
   "2700037": {
     "rank": "A",
     "rankPvp": "A",

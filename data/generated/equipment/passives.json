@@ -10735,6 +10735,39 @@
       }
     ]
   },
+  "2000122": {
+    "name": {
+      "en": "Titia's Exclusive Equipment",
+      "jp": "ティティアの専用装備",
+      "kr": "티티아의 고유장비",
+      "zh": "缇缇娅的专属装备"
+    },
+    "desc": {
+      "en": "DMG dealt to Earth enemies [+Value] (Unaffected by elemental advantage bonuses)",
+      "jp": "地属性の敵へのダメージ[+Value] (有利相性の影響を受けない)",
+      "kr": "지속성 적에게 입히는 피해 [+Value] (유리한 상성 공격의 영향을 받지 않음)",
+      "zh": "对地属性敌人造成的伤害 [+Value]（不受属性克制攻击的影响）"
+    },
+    "values": [
+      {
+        "value": "50%"
+      }
+    ],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000122",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000122",
+        "stat": "dmg_boost",
+        "mode": "up"
+      }
+    ]
+  },
   "2000129": {
     "name": {
       "en": "Demiurge Saeran's Exclusive Equipment",
@@ -14555,6 +14588,35 @@
       }
     ]
   },
+  "2100122": {
+    "name": {
+      "en": "Titia's Exclusive Equipment",
+      "jp": "ティティアの専用装備",
+      "kr": "티티아의 고유장비",
+      "zh": "缇缇娅的专属装备"
+    },
+    "desc": {
+      "en": "After taking an action, increases all Fire allies' Damage Dealt by <color=#28d9ed>15%</color>. (Stacks up to 4 times)",
+      "jp": "行動後、火属性の味方全体のダメージ<color=#28d9ed>15%</color>UP (最大4回重複)",
+      "kr": "행동 후 화속성 아군 전체 피해 증가 <color=#28d9ed>15%</color> (최대 4회 중첩)",
+      "zh": "行动后使火属性我方全体伤害提升<color=#28d9ed>15%</color>（最多叠加4次）"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000122_ADD",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team_element_fire_all",
+        "buff": "BID_CEQUIP_2000122_ADD",
+        "stat": "dmg_boost",
+        "mode": "up"
+      }
+    ]
+  },
   "2100129": {
     "name": {
       "en": "Demiurge Saeran's Exclusive Equipment",
@@ -14564,7 +14626,7 @@
     },
     "desc": {
       "en": "Grants an Extra Turn after using <color=#28d9ed>Dominion of Pain</color>\\n<color=#ffd732>Demon</color>: At the start of each turn, inflicts Punishment on the enemy with the highest Speed for <color=#28d9ed>2 additional turns</color>. (Ignores Resilience)",
-      "jp": "<color=#28d9ed>【苦痛の権能】</color>使用後、追加ターン獲得\\n<color=#ffd732>魔神</color>：毎ターン、最もスピードが高い敵に懲罰<color=#28d9ed>+2ターン</color>(効果抵抗無視)",
+      "jp": "<color=#28d9ed>【苦痛の権能】</color>使用後、追加ターン獲得\\n<color=#ffd732>魔神</color>：毎ターン、最もスピードが高い敵に裁き<color=#28d9ed>+2ターン</color>(効果抵抗無視)",
       "kr": "<color=#28d9ed>고통의 권세</color> 사용 후 추가 턴 획득\\n<color=#ffd732>마신</color> : 매 턴 가장 빠른 적 응징 <color=#28d9ed>+2턴</color> (효과 저항 무시)",
       "zh": "使用<color=#28d9ed>痛苦权能</color>后获得额外回合\\n<color=#ffd732>魔神</color>：每回合对速度最高的敌人赋予惩戒<color=#28d9ed>+2回合</color>（无视效果抵抗）"
     },
@@ -14635,6 +14697,37 @@
         "type": "BT_DMG",
         "target": "my_team_without_me",
         "buff": "BID_CEQUIP_2700005"
+      }
+    ]
+  },
+  "2700019": {
+    "name": {
+      "en": "Resonance Rin's Exclusive Equipment",
+      "jp": "レゾナンス・リンの専用装備",
+      "kr": "레조넌스 린의 전용장비",
+      "zh": "共鸣 琳的专属装备"
+    },
+    "desc": {
+      "en": "Damage Dealt to Bosses [+Value]",
+      "jp": "ボスへのダメージ[+Value]",
+      "kr": "보스에게 입히는 피해 [+Value]",
+      "zh": "对BOSS造成的伤害 [+Value]"
+    },
+    "values": [
+      {
+        "value": "50%"
+      }
+    ],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700019",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_TO_BOSS",
+        "target": "me",
+        "buff": "BID_CEQUIP_2700019"
       }
     ]
   },
@@ -14823,6 +14916,37 @@
         "buff": "BID_CEQUIP_2700005_ADD",
         "stat": "atk",
         "mode": "up"
+      }
+    ]
+  },
+  "2710019": {
+    "name": {
+      "en": "Resonance Rin's Exclusive Equipment",
+      "jp": "レゾナンス・リンの専用装備",
+      "kr": "레조넌스 린의 전용장비",
+      "zh": "共鸣 琳的专属装备"
+    },
+    "desc": {
+      "en": "Damage Dealt to Fire enemies [+Value] (Unaffected by elemental advantage bonuses)",
+      "jp": "火属性の敵へのダメージ[+Value] (有利相性の影響を受けない)",
+      "kr": "화속성 적에게 입히는 피해 [+Value] (유리한 상성 공격의 영향을 받지 않음)",
+      "zh": "对火属性敌人造成的伤害 [+Value]（不受属性克制攻击的影响）"
+    },
+    "values": [
+      {
+        "value": "75%"
+      }
+    ],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700019_ADD",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "BID_CEQUIP_2700019_ADD"
       }
     ]
   },

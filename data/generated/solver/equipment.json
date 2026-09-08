@@ -46724,6 +46724,21 @@
     "armorSetIcon": null,
     "class": null
   },
+  "2000122": {
+    "slot": "exclusive",
+    "grade": "unique",
+    "star": 6,
+    "classLimit": null,
+    "setId": "2000122,2100122",
+    "armorSetId": null,
+    "name": "Astraea",
+    "mainGroup": "2000122",
+    "subGroup": null,
+    "image": "TI_Equipment_EX_2000122",
+    "effectIcon": "TI_Icon_UO_EXCLUSIVE",
+    "armorSetIcon": null,
+    "class": null
+  },
   "2000129": {
     "slot": "exclusive",
     "grade": "unique",
@@ -46765,6 +46780,21 @@
     "mainGroup": "2700005",
     "subGroup": null,
     "image": "TI_Equipment_EX_2700005",
+    "effectIcon": "TI_Icon_UO_EXCLUSIVE",
+    "armorSetIcon": null,
+    "class": null
+  },
+  "2700019": {
+    "slot": "exclusive",
+    "grade": "unique",
+    "star": 6,
+    "classLimit": null,
+    "setId": "2700019,2710019",
+    "armorSetId": null,
+    "name": "Ame-no-Murakumo",
+    "mainGroup": "2700019",
+    "subGroup": null,
+    "image": "TI_Equipment_EX_2700019",
     "effectIcon": "TI_Icon_UO_EXCLUSIVE",
     "armorSetIcon": null,
     "class": null

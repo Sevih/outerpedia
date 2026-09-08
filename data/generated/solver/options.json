@@ -4909,6 +4909,9 @@
   "20121": {
     "buffId": "BID_CEQUIP_MAIN_DMG_EARTH"
   },
+  "20122": {
+    "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
+  },
   "20129": {
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },
@@ -4917,6 +4920,9 @@
   },
   "27005": {
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
+  },
+  "27019": {
+    "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
   "27037": {
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"

@@ -7507,6 +7507,191 @@
       "substats": "$subDpsCrit"
     }
   ],
+  "2000122": [
+    {
+      "name": "Attack",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "a4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Critical Strike",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen combos",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1801",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p2s2"
+        },
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "p2ag2"
+        },
+        {
+          "preset": "p2chd2"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "17",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1023",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$CPdps"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
+    }
+  ],
   "2000129": [
     {
       "name": "Revenge",
@@ -7953,6 +8138,74 @@
       "note": {
         "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
+    }
+  ],
+  "2700019": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "CritDmg",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "chd4"
+        }
+      ],
+      "substats": "$dps"
+    },
+    {
+      "name": "Pen",
+      "weapons": [
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["$elemcritAP"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "$dps"
     }
   ],
   "2700037": [

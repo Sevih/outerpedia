@@ -195970,7 +195970,7 @@
     ],
     "desc": {
       "en": "Attacks all enemies.\\nInflicts <color=#28d9ed>Punishment</color> on the targets for <color=#28d9ed>3 turns</color>.",
-      "jp": "敵全体にダメージを与える。\\n対象に<color=#28d9ed>懲罰</color>を<color=#28d9ed>3ターン</color>の間付与する。",
+      "jp": "敵全体にダメージを与える。\\n対象に<color=#28d9ed>裁き</color>を<color=#28d9ed>3ターン</color>の間付与する。",
       "kr": "적 전체를 공격합니다.\\n대상에게 <color=#28d9ed>응징</color>를 <color=#28d9ed>3턴</color> 동안 부여합니다.",
       "zh": "攻击全体敌人。\\n赋予目标<color=#28d9ed>惩戒</color>，持续<color=#28d9ed>3回合</color>。"
     },
@@ -216821,6 +216821,390 @@
       }
     ]
   },
+  "155323": {
+    "id": "155323",
+    "name": {
+      "en": "Triple Slash",
+      "jp": "三連剣",
+      "kr": "삼연검",
+      "zh": "三连剑"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1100,
+        "vars": {
+          "155323_1": {
+            "c": "100%",
+            "v": "100%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy.\\nDamage dealt to <color=#28d9ed>Water</color> targets increases by <color=#28d9ed>100%</color>.",
+      "jp": "敵単体にダメージを与える。\\n<color=#28d9ed>水属性</color>の対象へのダメージが<color=#28d9ed>100%</color>UPする。",
+      "kr": "적을 공격합니다.\\n<color=#28d9ed>수속성</color> 대상에게 입히는 피해가 <color=#28d9ed>100%</color> 증가합니다.",
+      "zh": "攻击敌人。\\n对<color=#28d9ed>水属性</color>目标造成的伤害提升<color=#28d9ed>100%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_2000010",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "155323_1",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "caller": "first"
+      }
+    ]
+  },
+  "155324": {
+    "id": "155324",
+    "name": {
+      "en": "Antipathy",
+      "jp": "返し突き",
+      "kr": "앙심",
+      "zh": "嫉恶如仇"
+    },
+    "type": "second",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1700,
+        "cool": 2,
+        "startCool": 2,
+        "vars": {
+          "155324_1": {
+            "c": "100%",
+            "v": "1000"
+          }
+        },
+        "tooltips": ["45"]
+      }
+    ],
+    "desc": {
+      "en": "(Triggered Effect) Counterattacks when attacked.",
+      "jp": "(発動効果)：自分が攻撃を受けた時、<color=#28d9ed>反撃</color>する。",
+      "kr": "(발동 효과) 자신이 공격받았을 때 <color=#28d9ed>반격</color>합니다.",
+      "zh": "（触发效果）自身受到攻击时进行<color=#28d9ed>反击</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_2000010",
+    "effects": [
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
+        "target": "me",
+        "buff": "155324_1",
+        "label": "SYS_BUFF_COUNTER"
+      }
+    ]
+  },
+  "155325": {
+    "id": "155325",
+    "name": {
+      "en": "Noble Swordcraft",
+      "jp": "アルデラミン奥義",
+      "kr": "귀족 검술",
+      "zh": "贵族剑术"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2800,
+        "cool": 5,
+        "startCool": 2,
+        "vars": {
+          "155325_1": {
+            "c": "100%",
+            "v": "50%"
+          }
+        },
+        "tooltips": ["61"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy.\\nIf the caster is not <color=#28d9ed>Burned</color>, increases the caster's Priority by <color=#28d9ed>50%</color>.",
+      "jp": "敵単体にダメージを与える。\\n自分に<color=#28d9ed>火傷</color>がない場合、行動ゲージを<color=#28d9ed>50%</color>UPさせる。",
+      "kr": "적을 공격합니다.\\n자신에게 <color=#28d9ed>화상</color>이 없다면 행동 게이지가 <color=#28d9ed>50%</color> 증가합니다.",
+      "zh": "攻击敌人。\\n若自身未持有<color=#28d9ed>灼烧</color>，则行动条提升<color=#28d9ed>50%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Ultimate_2000010",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "155325_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "155326": {
+    "id": "155326",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "155326_1": {
+            "c": "100%",
+            "v": "100%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) Reduces damage taken from targets without <color=#28d9ed>Increased Critical Damage</color> by <color=#28d9ed>100%</color>.",
+      "jp": "(パッシブ効果)：会心ダメージUPを保有していない対象から受けるダメージが<color=#28d9ed>100%</color>減少する。",
+      "kr": "(패시브 효과) 치명 피해를 보유하지 않은 대상에게 받는 피해가 <color=#28d9ed>100%</color> 감소합니다.",
+      "zh": "（被动效果）受到未持有<color=#28d9ed>暴击伤害</color>提升效果的目标造成的伤害降低<color=#28d9ed>100%</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "155326_1"
+      }
+    ]
+  },
+  "155327": {
+    "id": "155327",
+    "name": {
+      "en": "Distant Nautilus",
+      "jp": "遙かなるノーティラス",
+      "kr": "아득한 노틸러스",
+      "zh": "茫然的航海家"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1100,
+        "vars": {
+          "155327_1": {
+            "c": "100%",
+            "v": "100%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy.\\nDamage dealt to <color=#28d9ed>Fire</color> targets increases by <color=#28d9ed>100%</color>.",
+      "jp": "敵単体にダメージを与える。\\n<color=#28d9ed>火属性</color>の対象へのダメージが<color=#28d9ed>100%</color>UPする。",
+      "kr": "적을 공격합니다.\\n<color=#28d9ed>화속성</color> 대상에게 입히는 피해가 <color=#28d9ed>100%</color> 증가합니다.",
+      "zh": "攻击敌人。\\n对<color=#28d9ed>火属性</color>目标造成的伤害提升<color=#28d9ed>100%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_2000037",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "155327_1",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "caller": "first"
+      }
+    ]
+  },
+  "155328": {
+    "id": "155328",
+    "name": {
+      "en": "Immortal Comet",
+      "jp": "不滅のコメット",
+      "kr": "불멸의 코메트",
+      "zh": "不朽彗星"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1700,
+        "cool": 4,
+        "startCool": 2,
+        "vars": {
+          "155328_1": {
+            "c": "100%",
+            "v": "100%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["21"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and reduces the target's <color=#28d9ed>Resilience</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "敵単体にダメージを与え、対象の<color=#28d9ed>効果抵抗</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+      "kr": "적을 공격하고 대상의 <color=#28d9ed>효과 저항</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "zh": "攻击敌人，并使目标的<color=#28d9ed>效果抵抗</color>降低<color=#28d9ed>2回合</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Ultimate_2000003",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy",
+        "buff": "155328_1",
+        "stat": "buff_resist",
+        "mode": "down",
+        "tooltip": "21",
+        "caller": "second"
+      }
+    ]
+  },
+  "155329": {
+    "id": "155329",
+    "name": {
+      "en": "Endless Ryvius",
+      "jp": "果てしなきリヴァイアス",
+      "kr": "끝 모를 리바이어스",
+      "zh": "无限的未知"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1500,
+        "cool": 5,
+        "startCool": 2,
+        "vars": {
+          "155329_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and reduces their <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turns</color>.",
+      "jp": "敵全体にダメージを与え、対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。",
+      "kr": "적 전체를 공격하고 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다.",
+      "zh": "攻击敌方全体，并使目标的<color=#28d9ed>防御力</color>降低<color=#28d9ed>2回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_2000037",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_team",
+        "buff": "155329_1",
+        "stat": "def",
+        "mode": "down",
+        "tooltip": "17",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "155330": {
+    "id": "155330",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "155330_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "155330_2": {
+            "c": "100%",
+            "v": "100%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "(Passive Effect) Increases damage taken from Revenge and Counterattack by <color=#28d9ed>50%</color> and reduces damage taken by <color=#28d9ed>100%</color>.",
+      "jp": "(パッシブ効果)：復讐および反撃によるダメージが<color=#28d9ed>50%</color>UPし、自分が受けるダメージが<color=#28d9ed>100%</color>減少する。",
+      "kr": "(패시브 효과) 복수 및 반격으로 입는 피해가 <color=#28d9ed>50%</color> 증가하고 자신이 받는 피해가 <color=#28d9ed>100%</color> 감소합니다.",
+      "zh": "（被动效果）通过复仇及反击造成的伤害提升<color=#28d9ed>50%</color>，自身受到的伤害降低<color=#28d9ed>100%</color>。"
+    },
+    "icon": "MT_Passive_1_Water",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "neutral",
+        "type": "BT_DMG",
+        "target": "enemy_team",
+        "buff": "155330_1"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "me",
+        "buff": "155330_2",
+        "stat": "dmg_reduce_rate",
+        "mode": "up"
+      }
+    ]
+  },
   "160001": {
     "id": "160001",
     "name": {
@@ -226994,7 +227378,7 @@
     "desc": {
       "en": "Gains an extra turn when attacking targets inflicted with Poisoned.\\nIf a Ranger enemy is deployed, inflicts irremovable <color=#28d9ed>Unbuffable</color> on all enemies.",
       "jp": "中毒状態の対象を攻撃時、追加ターンを獲得する。\\nスピード型の敵が編成されている場合、敵全体に解除不可能な<color=#28d9ed>強化不可</color>を付与する。",
-      "kr": "중독 보유 대상 공격 시 추가 턴을 획득합니다.\\n속도형 적이 편성되어 있다면 적 전체에게 해제 불가능한 <color=#28d9ed>강화 불가</color>를 부여합니다.",
+      "kr": "중독 보유 대상 공격 시 추가 턴을 획득합니다.\\n전투 시작 시 속도형 적이 편성되어 있다면 적 전체에게 <color=#28d9ed>강화 불가</color>를 부여합니다.(영구 지속, 해제 불가)",
       "zh": "攻击附带中毒效果的目标时，获得额外回合。\\n若配置有速度型敌人，则对全体敌人造成无法解除的<color=#28d9ed>无法强化</color>效果。"
     },
     "icon": "MT_Passive_1_Earth",
@@ -239357,6 +239741,475 @@
     "target": "enemy",
     "range": "all",
     "icon": "MT_Boss_Rage_Common_1"
+  },
+  "900121": {
+    "id": "900121",
+    "name": {
+      "en": "Where Am I?",
+      "jp": "ここはどこ?",
+      "kr": "여기는 어디?",
+      "zh": "这是哪里？"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1450,
+        "vars": {
+          "Singularity_CHI_SKILL01_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["62"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks 2 enemies and reduces their <color=#28d9ed>Priority</color> by <color=#28d9ed>20%</color>.",
+      "jp": "敵2体にダメージを与え、対象の<color=#28d9ed>行動ゲージ</color>を<color=#28d9ed>20%</color>DOWNさせる。",
+      "kr": "적 2인을 공격하고, 대상의 <color=#28d9ed>행동 게이지</color>를 <color=#28d9ed>20%</color> 감소시킵니다.",
+      "zh": "攻击敌方2人，并使目标的<color=#28d9ed>行动条</color>降低<color=#28d9ed>20%</color>。"
+    },
+    "target": "enemy",
+    "range": "double",
+    "icon": "Skill_First_4034002",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_skill_target",
+        "buff": "Singularity_CHI_SKILL01_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN",
+        "caller": "first"
+      }
+    ]
+  },
+  "900122": {
+    "id": "900122",
+    "name": {
+      "en": "Who Are You?",
+      "jp": "あなたはだれ?",
+      "kr": "당신은 누구?",
+      "zh": "你是谁？"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1550,
+        "cool": 4,
+        "startCool": 2,
+        "vars": {
+          "Singularity_CHI_SKILL02_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "3"
+          }
+        },
+        "tooltips": ["11"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies. Increases the caster's <color=#28d9ed>Critical Hit Chance</color> for <color=#28d9ed>3 turns</color>.",
+      "jp": "敵全体にダメージを与える。自分の<color=#28d9ed>会心率</color>を<color=#28d9ed>3ターン</color>の間UPさせる。",
+      "kr": "적 전체를 공격합니다. 자신의 <color=#28d9ed>치명 확률</color>을 <color=#28d9ed>3턴</color> 동안 증가시킵니다.",
+      "zh": "攻击敌方全体。使自身的<color=#28d9ed>暴击率</color>提升<color=#28d9ed>3回合</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_4034002",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_CHI_SKILL02_1",
+        "stat": "critical_rate",
+        "mode": "up",
+        "tooltip": "11",
+        "caller": "second"
+      }
+    ]
+  },
+  "900123": {
+    "id": "900123",
+    "name": {
+      "en": "Thank You For This Meal",
+      "jp": "いただきます",
+      "kr": "잘 먹겠습니다",
+      "zh": "开动了"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1750,
+        "cool": 5,
+        "startCool": 2,
+        "vars": {
+          "Singularity_CHI_SKILL03_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "Singularity_CHI_SKILL03_2": {
+            "c": "100%",
+            "v": "75.5%",
+            "t": "2"
+          },
+          "Singularity_CHI_SKILL03_3": {
+            "c": "100%",
+            "v": "100%"
+          }
+        },
+        "tooltips": ["4"]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies and inflicts <color=#28d9ed>Poison</color> for <color=#28d9ed>2 turns</color>. (Irremovable) If the caster's <color=#28d9ed>Critical Hit Chance</color> is increased, damage dealt increases by <color=#28d9ed>50%</color>.\\nImmediately after this skill is used, enemies cannot trigger Counterattack, Revenge, or Agile Response.",
+      "jp": "敵全体にダメージを与え、対象に<color=#28d9ed>中毒</color>を<color=#28d9ed>2ターン</color>の間付与する。(解除不可)自分の<color=#28d9ed>会心率</color>がUPしている状態なら、ダメージが<color=#28d9ed>50%</color>UPする。\\nスキル発動直後、敵の反撃/復讐/迅速対応は発生しない。",
+      "kr": "적 전체를 공격하고 대상에게 <color=#28d9ed>2턴</color> 동안 <color=#28d9ed>중독</color>을 부여합니다.(해제 불가) 자신의 <color=#28d9ed>치명 확률</color>이 증가한 상태라면 피해량이 <color=#28d9ed>50%</color> 증가하고\\n스킬 발동 직후에는 적의 반격/복수/신속 대응이 발생하지 않습니다",
+      "zh": "攻击敌方全体，并对目标附加<color=#28d9ed>2回合</color>的<color=#28d9ed>中毒</color>。（无法解除）若自身处于<color=#28d9ed>暴击率</color>提升状态，则伤害量提升<color=#28d9ed>50%</color>。\\n技能发动后，敌方不会触发反击/复仇/迅速应对。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_4034002",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_CHI_SKILL03_1",
+        "stat": "dmg_boost",
+        "mode": "up",
+        "caller": "ultimate"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_POISON",
+        "target": "enemy_skill_target",
+        "buff": "Singularity_CHI_SKILL03_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1004",
+        "caller": "ultimate"
+      },
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_SEAL_COUNTER",
+        "target": "me",
+        "buff": "Singularity_CHI_SKILL03_3",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "900124": {
+    "id": "900124",
+    "name": {
+      "en": "Starving Devil",
+      "jp": "飢えた魔獣",
+      "kr": "굶주린 마수",
+      "zh": "饥饿的魔兽"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_CHI_PASSIVE_1_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "Singularity_CHI_PASSIVE_1_2": {
+            "c": "100%",
+            "v": "120%"
+          },
+          "Singularity_CHI_PASSIVE_1_3": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "Singularity_CHI_PASSIVE_1_4": {
+            "c": "100%",
+            "v": "50%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "If there are <color=#28d9ed>3</color>/<color=#28d9ed>4</color> <color=#28d9ed>Fire</color> members among the enemies, damage taken increases by <color=#28d9ed>50%</color>/<color=#28d9ed>120%</color>, respectively.\\nAlso increases damage taken from targets with increased <color=#28d9ed>Penetration</color> by <color=#28d9ed>50%</color>.\\n\\nDamage taken by the boss from Curses and Fixed Damage cannot exceed <color=#28d9ed>50000</color>.",
+      "jp": "敵の編成に<color=#28d9ed>火属性</color>が<color=#28d9ed>3人</color>/<color=#28d9ed>4人</color>いる場合、それぞれ<color=#28d9ed>50%</color>/<color=#28d9ed>120%</color>の追加ダメージを受ける。\\nまた、<color=#28d9ed>貫通力UP効果</color>を保有している対象から受けるダメージが<color=#28d9ed>50%</color>UPする。\\n\\nボスが受ける呪いおよび固定ダメージは<color=#28d9ed>50000</color>を超えない。",
+      "kr": "적이 구성원 중 <color=#28d9ed>화속성</color>이 <color=#28d9ed>3명</color>/<color=#28d9ed>4명</color>이면 각각 <color=#28d9ed>50%</color>/<color=#28d9ed>120%</color> 추가 피해를 입습니다.\\n또한 <color=#28d9ed>관통력</color> 증가 효과를 보유한 대상에게 받는 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n\\n보스가 받는 저주 및 고정 피해의 피해는 <color=#28d9ed>50000</color>을 초과하지 않습니다.",
+      "zh": "若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>3名</color>/<color=#28d9ed>4名</color>，敌人将分别受到<color=#28d9ed>50%</color>/<color=#28d9ed>120%</color>的额外伤害。\\n此外，受到持有<color=#28d9ed>穿透力</color>提升效果的目标造成的伤害提升<color=#28d9ed>50%</color>。\\n\\nBOSS所受的诅咒及固定伤害不会超过<color=#28d9ed>50000</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "dmg_reduce",
+        "category": "neutral",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_1_1"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "neutral",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_1_2"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "neutral",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_1_3"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "neutral",
+        "type": "BT_DMG_REDUCE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_1_4"
+      }
+    ]
+  },
+  "900125": {
+    "id": "900125",
+    "name": {
+      "en": "Ferocious Beast",
+      "jp": "凶暴な魔獣",
+      "kr": "흉포한 마수",
+      "zh": "凶暴的魔兽"
+    },
+    "type": "monster_1",
+    "subType": "passive",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Singularity_Passive_AntiCurse": {
+            "c": "100%",
+            "v": "50000"
+          },
+          "Singularity_Passive_AntiTureDmg": {
+            "c": "100%",
+            "v": "50000"
+          },
+          "Singularity_CHI_PASSIVE_2_1": {
+            "c": "100%",
+            "v": "70%"
+          },
+          "Singularity_CHI_PASSIVE_2_2": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "Singularity_CHI_PASSIVE_2_3": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "Singularity_CHI_PASSIVE_2_4": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Reduces the caster's <color=#28d9ed>Speed</color> by <color=#28d9ed>70%</color>, but after an enemy acts, increases the caster's Priority by <color=#28d9ed>15%</color>.\\nIncreases the caster's <color=#28d9ed>Priority Efficiency</color> by <color=#28d9ed>50%</color> and reduces all enemies' <color=#28d9ed>Priority Efficiency</color> by <color=#28d9ed>20%</color>.",
+      "jp": "自分の<color=#28d9ed>スピード</color>が<color=#28d9ed>70%</color>DOWNするが、敵の行動後、自分の行動ゲージが<color=#28d9ed>15%</color>UPする。\\n自分の<color=#28d9ed>行動ゲージ効率</color>が<color=#28d9ed>50%</color>UPし、敵全体は<color=#28d9ed>20%</color>DOWNする。",
+      "kr": "자신의 <color=#28d9ed>속도</color>가 <color=#28d9ed>70%</color> 감소하지만, 적 행동 후 자신의 행동 게이지가 <color=#28d9ed>15%</color> 증가합니다.\\n자신의 <color=#28d9ed>행동 게이지 효율</color>이 <color=#28d9ed>50%</color> 증가하고 적 전체는 <color=#28d9ed>20%</color> 감소합니다.",
+      "zh": "自身的<color=#28d9ed>速度</color>降低<color=#28d9ed>70%</color>，但敌人行动后自身的行动条提升<color=#28d9ed>15%</color>。\\n自身的<color=#28d9ed>行动条效率</color>提升<color=#28d9ed>50%</color>，敌方全体降低<color=#28d9ed>20%</color>。"
+    },
+    "icon": "MT_Passive_1_Earth",
+    "effects": [
+      {
+        "family": "dot",
+        "category": "buff",
+        "type": "BT_DOT_CURSE_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiCurse"
+      },
+      {
+        "family": "anti_heal",
+        "category": "buff",
+        "type": "BT_REVERSE_HEAL_CAP",
+        "target": "me",
+        "buff": "Singularity_Passive_AntiTureDmg"
+      },
+      {
+        "family": "stat",
+        "category": "neutral",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_2_1",
+        "stat": "speed",
+        "mode": "down"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_2_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE_ENHANCE",
+        "target": "me",
+        "buff": "Singularity_CHI_PASSIVE_2_3"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE_ENHANCE_REVERSE",
+        "target": "enemy_team",
+        "buff": "Singularity_CHI_PASSIVE_2_4"
+      }
+    ]
+  },
+  "900126": {
+    "id": "900126",
+    "name": {
+      "en": "Enraged",
+      "jp": "狂暴化",
+      "kr": "광폭화",
+      "zh": "狂暴化"
+    },
+    "type": "rage_enter1",
+    "subType": "active",
+    "offensive": false,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "vars": {
+          "Common_Rage_Buff_1": {
+            "c": "100%",
+            "v": "40%",
+            "t": "3"
+          },
+          "Common_Rage_Buff_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "Singularity_Rage_Action_guage": {
+            "c": "100%",
+            "v": "20%"
+          },
+          "common_monster_passive_wg1": {
+            "c": "100%",
+            "v": "10%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Transitions into <color=#28d9ed>Berserk</color> state every 4 actions taken by the caster.\\n\\n<color=#28d9ed>Berserk Entry</color>: Grants self undispellable Attack Up/DMG Reduction for 3 turns and recovers 10% WG. Berserk lasts 3 turns.\\n\\n<color=#28d9ed>Berserk Finisher</color>: Removes <color=#28d9ed>3 Buffs</color> from all enemies and deals heavy damage to all enemies.",
+      "jp": "自分が4回行動するたびに、<color=#28d9ed>狂暴化状態</color>になる。\\n\\n<color=#28d9ed>【狂暴化突入】</color>：自分に解除されない攻撃力UP/ダメージDOWN効果を3ターンの間付与し、WGを10%回復させる。\\n狂暴化は3ターンの間持続する。\\n\\n<color=#28d9ed>【狂暴化必殺スキル】</color>：敵全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>3個</color>解除し、敵全体に大ダメージを与える。",
+      "kr": "자신이 4회 행동할 때 마다 <color=#28d9ed>광폭화</color> 상태로 전환합니다.\\n\\n<color=#28d9ed>광폭화 돌입</color> :  자신에게 해제되지 않는 공격력 증가/피해 감소 효과를 3턴 동안 부여하고 WG를 10% 회복시킵니다.\\n광폭화는 3턴 동안 유지됩니다.\\n\\n<color=#28d9ed>광폭화 필살기</color> : 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>3개</color> 해제하고 적 전체에게 큰 피해를 입합니다.",
+      "zh": "自身每行动4次，便会转换为<color=#28d9ed>狂暴化</color>状态。\\n\\n<color=#28d9ed>进入狂暴化</color>：为自身附加3回合无法解除的攻击力提升/伤害减免效果，并恢复10%的WG。\\n狂暴化将持续3回合。\\n\\n<color=#28d9ed>狂暴化必杀技</color>：解除敌方全体的<color=#28d9ed>3个</color><color=#28d9ed>增益效果</color>，并对敌方全体造成大量伤害。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_1",
+        "stat": "dmg_reduce_rate",
+        "mode": "up",
+        "tooltip": "1069"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "Common_Rage_Buff_2",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1007"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "Singularity_Rage_Action_guage",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      },
+      {
+        "family": "heal",
+        "category": "buff",
+        "type": "BT_WG_HEAL",
+        "target": "me",
+        "buff": "common_monster_passive_wg1",
+        "label": "SYS_BUFF_WG_CHARGE"
+      }
+    ]
+  },
+  "900127": {
+    "id": "900127",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "rage_finish1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 5000,
+        "vars": {
+          "Singularity_CHI_RAGE": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "icon": "MT_Boss_Rage_Common_1",
+    "effects": [
+      {
+        "family": "cleanse",
+        "category": "debuff",
+        "type": "BT_REMOVE_BUFF",
+        "target": "enemy_skill_target",
+        "buff": "Singularity_CHI_RAGE",
+        "label": "SYS_BUFF_REMOVE_BUFF"
+      }
+    ]
   },
   "900131": {
     "id": "900131",

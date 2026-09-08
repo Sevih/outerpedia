@@ -1335,6 +1335,13 @@
       "isDebuff": false
     }
   ],
+  "2000122": [
+    {
+      "key": "stat:dmg_boost:up",
+      "label": "DMG Increase up",
+      "isDebuff": false
+    }
+  ],
   "2000129": [
     {
       "key": "stat:atk:up",
@@ -1368,6 +1375,18 @@
     {
       "key": "stat:atk:up",
       "label": "Attack up",
+      "isDebuff": false
+    }
+  ],
+  "2700019": [
+    {
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
+      "isDebuff": false
+    },
+    {
+      "key": "type:BT_DMG",
+      "label": "DMG bonus",
       "isDebuff": false
     }
   ],

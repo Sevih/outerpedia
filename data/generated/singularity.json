@@ -26,10 +26,10 @@
       "bosses": [
         {
           "order": 0,
-          "dungeon": "75000108",
-          "monsters": ["60000008"],
-          "thumbnail": "MT_Singularity_4038004",
-          "banner": "T_Singularity_4038004"
+          "dungeon": "75000107",
+          "monsters": ["60000007"],
+          "thumbnail": "MT_Singularity_4034002",
+          "banner": "T_Singularity_4034002"
         },
         {
           "order": 1,
@@ -161,10 +161,10 @@
       "bosses": [
         {
           "order": 0,
-          "dungeon": "75000109",
-          "monsters": ["60000009"],
-          "thumbnail": "MT_Singularity_4024002",
-          "banner": "T_Singularity_4024002"
+          "dungeon": "75000107",
+          "monsters": ["60000007"],
+          "thumbnail": "MT_Singularity_4034002",
+          "banner": "T_Singularity_4034002"
         },
         {
           "order": 1,

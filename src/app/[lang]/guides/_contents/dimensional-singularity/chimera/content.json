@@ -1,0 +1,12 @@
+{
+  "intro": {
+    "en": "{E/Earth}-element {C/Mage} boss featured in the Dimensional Singularity rotation. A headcount check: with 3 / 4 {E/Fire} heroes in the party it takes +50% / +120% damage, and heroes with increased {S/PEN} deal another +50%. It spreads irremovable {D/BT_DOT_POISON}, cuts its own {S/SPD} by 70% while gaining Priority after every enemy action, and caps Curse / Fixed damage at 50000. Berserk triggers every 4 of its actions and its finisher strips 3 buffs from the whole team.",
+    "jp": "次元特異点ローテーションに登場する{E/Earth}属性{C/Mage}ボス。人数チェック：味方に{E/Fire}属性が3体／4体いると被ダメージが+50%／+120%になり、{S/PEN}が増加した味方はさらに+50%を与える。解除不能の{D/BT_DOT_POISON}を撒き、自身の{S/SPD}を70%下げる代わりに敵の行動後に行動優先度を得る。呪い／固定ダメージは50000で頭打ち。狂暴化は自身の4行動ごとに発動し、その締めで味方全体のバフを3個解除する。",
+    "kr": "차원 특이점 로테이션에 등장하는 {E/Earth} 속성 {C/Mage} 보스. 인원수 체크: 아군에 {E/Fire} 속성이 3명/4명이면 받는 피해가 +50%/+120%가 되고, {S/PEN}이 증가한 아군은 추가로 +50%를 줍니다. 해제 불가 {D/BT_DOT_POISON}을 퍼뜨리며, 자신의 {S/SPD}를 70% 낮추는 대신 적이 행동한 뒤 행동 우선도를 얻습니다. 저주/고정 피해는 50000으로 제한됩니다. 광폭화는 자신의 4번째 행동마다 발동하고, 마무리로 아군 전체의 버프 3개를 해제합니다.",
+    "zh": "出现在次元奇点轮换中的{E/Earth}属性{C/Mage}Boss。人数检定：队伍中有3名/4名{E/Fire}属性时，它受到的伤害+50%/+120%，而{S/PEN}提升的友军再造成+50%。它散布无法解除的{D/BT_DOT_POISON}，将自身{S/SPD}降低70%以换取敌方行动后获得行动优先度，且诅咒／固定伤害上限为50000。狂暴化在其每4次行动时触发，收尾会驱散全队3个增益。",
+    "fr": "Boss {E/Earth} {C/Mage} présent dans la rotation de la Singularité Dimensionnelle. Un contrôle d'effectif : avec 3 / 4 héros {E/Fire} dans l'équipe il subit +50% / +120% de dégâts, et les héros avec de la {S/PEN} en plus lui infligent encore +50%. Il répand un {D/BT_DOT_POISON} indissipable, se retire 70% de {S/SPD} mais gagne de la priorité après chaque action ennemie, et plafonne les dégâts de Malédiction / Fixes à 50000. Son Berserk se déclenche toutes les 4 de ses actions et son final retire 3 buffs à toute l'équipe."
+  },
+  "tips": [],
+  "teams": [],
+  "videos": []
+}

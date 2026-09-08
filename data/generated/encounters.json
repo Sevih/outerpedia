@@ -39179,6 +39179,738 @@
       "hp": -616
     }
   },
+  "200400": {
+    "mode": "normal",
+    "name": {
+      "en": "Stealth Action",
+      "jp": "潜入アクション",
+      "kr": "잠입 액션",
+      "zh": "潜入行动"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4002022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4202021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001024",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 0,
+    "reward": "200400",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "200401": {
+    "mode": "normal",
+    "name": {
+      "en": "Shackles of Memory",
+      "jp": "記憶の枷",
+      "kr": "기억의 족쇄",
+      "zh": "记忆的枷锁"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4002021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4001022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4001024",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4001021",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4001022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4202022",
+        "level": 25,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 1,
+    "reward": "200401",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "200402": {
+    "mode": "normal",
+    "name": {
+      "en": "Luna's Secret",
+      "jp": "ルナの秘密",
+      "kr": "루나의 비밀",
+      "zh": "露娜的秘密"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4002021",
+        "level": 26,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4001024",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4001021",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4001023",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4003022",
+        "level": 26,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001023",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 2,
+    "reward": "200402",
+    "adv": {
+      "atk": -736,
+      "hp": -603
+    }
+  },
+  "200403": {
+    "mode": "normal",
+    "name": {
+      "en": "Where's the Core?",
+      "jp": "コアはどこに？",
+      "kr": "코어는 어디에?",
+      "zh": "核心在哪里？"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4002021",
+        "level": 26,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4001023",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4002022",
+        "level": 26,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4001022",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4003021",
+        "level": 26,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001022",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      },
+      {
+        "id": "4001024",
+        "level": 26,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 3,
+    "reward": "200403",
+    "adv": {
+      "atk": -736,
+      "hp": -603
+    }
+  },
+  "200404": {
+    "mode": "normal",
+    "name": {
+      "en": "The Chief of Staff's Advice",
+      "jp": "参謀長の助言",
+      "kr": "참모장의 조언",
+      "zh": "参谋长的建议"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4001021",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001023",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4001024",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4001023",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4001024",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4001022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4003022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4001021",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "4001024",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 4,
+    "reward": "200404",
+    "adv": {
+      "atk": -741,
+      "hp": -591
+    }
+  },
+  "200405": {
+    "mode": "normal",
+    "name": {
+      "en": "Thought I Was a Saint?",
+      "jp": "聖者だと思った？",
+      "kr": "성자인 줄 알았어?",
+      "zh": "以为我是圣者？"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4002021",
+        "level": 27,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4001023",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4001022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4002022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4201805",
+        "level": 27,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4001022",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      },
+      {
+        "id": "4203806",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 5,
+    "reward": "200405",
+    "adv": {
+      "atk": -741,
+      "hp": -591
+    }
+  },
+  "200407": {
+    "mode": "normal",
+    "name": {
+      "en": "Dark Admiral",
+      "jp": "黒き提督",
+      "kr": "검은 제독",
+      "zh": "玄青提督"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4041001",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4041003",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4041002",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4041004",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "4043001",
+        "level": 27,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "4041001",
+        "level": 27,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 7,
+    "reward": "200407",
+    "adv": {
+      "atk": -741,
+      "hp": -591
+    }
+  },
+  "200408": {
+    "mode": "normal",
+    "name": {
+      "en": "True Form",
+      "jp": "真の姿",
+      "kr": "진정한 형상",
+      "zh": "真正的形态"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4041001",
+        "level": 28,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4041004",
+        "level": 28,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "4042002",
+        "level": 28,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4041003",
+        "level": 28,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4744001",
+        "level": 28,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 8,
+    "reward": "200408",
+    "adv": {
+      "atk": -738,
+      "hp": -579
+    }
+  },
+  "200409": {
+    "mode": "normal",
+    "name": {
+      "en": "Forbidden Power",
+      "jp": "許されざる力",
+      "kr": "허락받지 못한 힘",
+      "zh": "未被允许的力量"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4042001",
+        "level": 29,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4041001",
+        "level": 29,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4042002",
+        "level": 29,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4041003",
+        "level": 29,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4544006",
+        "level": 29,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 9,
+    "reward": "200409",
+    "adv": {
+      "atk": -732,
+      "hp": -568
+    }
+  },
+  "200412": {
+    "mode": "normal",
+    "name": {
+      "en": "Luna's Potential",
+      "jp": "ルナの可能性",
+      "kr": "루나의 가능성",
+      "zh": "露娜的可能性"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "4042002",
+        "level": 30,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "4041003",
+        "level": 30,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "4042001",
+        "level": 30,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4041001",
+        "level": 30,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4403807",
+        "level": 30,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 12,
+    "reward": "200412",
+    "adv": {
+      "atk": -701,
+      "hp": -574
+    }
+  },
   "210101": {
     "mode": "normal_hard",
     "name": {
@@ -40287,8 +41019,9 @@
     "stage": 1,
     "reward": "210301",
     "adv": {
-      "atk": -767,
-      "hp": -693
+      "atk": -641,
+      "def": -1,
+      "hp": -378
     }
   },
   "210302": {
@@ -40357,8 +41090,9 @@
     "stage": 2,
     "reward": "210302",
     "adv": {
-      "atk": -759,
-      "hp": -682
+      "atk": -641,
+      "def": -1,
+      "hp": -378
     }
   },
   "210303": {
@@ -40445,8 +41179,8 @@
     "stage": 3,
     "reward": "210303",
     "adv": {
-      "atk": -759,
-      "hp": -682
+      "atk": -607,
+      "hp": -370
     }
   },
   "210304": {
@@ -40476,8 +41210,8 @@
     "stage": 4,
     "reward": "210304",
     "adv": {
-      "atk": -766,
-      "hp": -663
+      "atk": -607,
+      "hp": -370
     }
   },
   "210305": {
@@ -40546,8 +41280,8 @@
     "stage": 5,
     "reward": "210305",
     "adv": {
-      "atk": -740,
-      "hp": -646
+      "atk": -607,
+      "hp": -370
     }
   },
   "210306": {
@@ -40623,8 +41357,8 @@
     "stage": 6,
     "reward": "210306",
     "adv": {
-      "atk": -740,
-      "hp": -646
+      "atk": -609,
+      "hp": -372
     }
   },
   "210307": {
@@ -40692,8 +41426,8 @@
     "stage": 7,
     "reward": "210307",
     "adv": {
-      "atk": -739,
-      "hp": -630
+      "atk": -609,
+      "hp": -372
     }
   },
   "210308": {
@@ -40799,9 +41533,8 @@
     "stage": 9,
     "reward": "210309",
     "adv": {
-      "atk": -737,
-      "def": 4,
-      "hp": -616
+      "atk": -603,
+      "hp": -320
     }
   },
   "210310": {
@@ -40843,9 +41576,8 @@
     "stage": 10,
     "reward": "210310",
     "adv": {
-      "atk": -737,
-      "def": 4,
-      "hp": -616
+      "atk": -603,
+      "hp": -320
     }
   },
   "210401": {
@@ -40917,6 +41649,160 @@
       "atk": -737,
       "def": 4,
       "hp": -616
+    }
+  },
+  "210402": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Shackles of Memory",
+      "jp": "記憶の枷",
+      "kr": "기억의 족쇄",
+      "zh": "记忆的枷锁"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400202111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400102111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400102111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400102211",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400102411",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400102111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "400102211",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "410202211",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 2,
+    "reward": "210402",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "210403": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Luna's Secret",
+      "jp": "ルナの秘密",
+      "kr": "루나의 비밀",
+      "zh": "露娜的秘密"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400202111",
+        "level": 76,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400102411",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400102111",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400102311",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400302211",
+        "level": 76,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102311",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 3,
+    "reward": "210403",
+    "adv": {
+      "atk": -736,
+      "hp": -603
     }
   },
   "210404": {
@@ -40996,6 +41882,103 @@
       "hp": -603
     }
   },
+  "210405": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "The Chief of Staff's Advice",
+      "jp": "参謀長の助言",
+      "kr": "참모장의 조언",
+      "zh": "参谋长的建议"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102311",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400102411",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102311",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400102411",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400102211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "400302211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "400102111",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      },
+      {
+        "id": "400102411",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 5,
+    "reward": "210405",
+    "adv": {
+      "atk": -741,
+      "hp": -591
+    }
+  },
   "210406": {
     "mode": "normal_hard",
     "name": {
@@ -41071,6 +42054,262 @@
     "adv": {
       "atk": -741,
       "hp": -591
+    }
+  },
+  "210407": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Dark Admiral",
+      "jp": "黒き提督",
+      "kr": "검은 제독",
+      "zh": "玄青提督"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "404100111",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404100311",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "404100211",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "404100411",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2
+      },
+      {
+        "id": "404300111",
+        "level": 78,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "404100111",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 7,
+    "reward": "210407",
+    "adv": {
+      "atk": -741,
+      "hp": -591
+    }
+  },
+  "210408": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "True Form",
+      "jp": "真の姿",
+      "kr": "진정한 형상",
+      "zh": "真正的形态"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "404100111",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "404100411",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "404200211",
+        "level": 78,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "404100311",
+        "level": 78,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4844001",
+        "level": 78,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 8,
+    "reward": "210408",
+    "adv": {
+      "atk": -738,
+      "hp": -579
+    }
+  },
+  "210409": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Forbidden Power",
+      "jp": "許されざる力",
+      "kr": "허락받지 못한 힘",
+      "zh": "未被允许的力量"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "404200111",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "404100111",
+        "level": 79,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "404200211",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "404100311",
+        "level": 79,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4644006",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 9,
+    "reward": "210409",
+    "adv": {
+      "atk": -732,
+      "hp": -568
+    }
+  },
+  "210410": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Luna's Potential",
+      "jp": "ルナの可能性",
+      "kr": "루나의 가능성",
+      "zh": "露娜的可能性"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "404200211",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "404100311",
+        "level": 79,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "404200111",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "404100111",
+        "level": 79,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "4503807",
+        "level": 79,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 10,
+    "reward": "210410",
+    "adv": {
+      "atk": -701,
+      "hp": -574
     }
   },
   "40101001": {
@@ -94300,7 +95539,642 @@
       "atk": -280,
       "def": 500,
       "spd": 300
-    }
+    },
+    "ranks": [
+      {
+        "name": "E",
+        "level": 100,
+        "transLevel": 100,
+        "hp": 100000,
+        "damage": {
+          "min": 1,
+          "max": 100000
+        },
+        "adv": {
+          "atk": -280,
+          "def": 500,
+          "spd": 300
+        }
+      },
+      {
+        "name": "E+",
+        "level": 103,
+        "transLevel": 103,
+        "hp": 50000,
+        "damage": {
+          "min": 100001,
+          "max": 150000
+        },
+        "adv": {
+          "atk": -278,
+          "def": 490,
+          "spd": 295
+        }
+      },
+      {
+        "name": "E++",
+        "level": 106,
+        "transLevel": 106,
+        "hp": 50000,
+        "damage": {
+          "min": 150001,
+          "max": 200000
+        },
+        "adv": {
+          "atk": -276,
+          "def": 480,
+          "spd": 290
+        }
+      },
+      {
+        "name": "D",
+        "level": 109,
+        "transLevel": 109,
+        "hp": 50000,
+        "damage": {
+          "min": 200001,
+          "max": 250000
+        },
+        "adv": {
+          "atk": -274,
+          "def": 470,
+          "spd": 285
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "D+",
+        "level": 112,
+        "transLevel": 112,
+        "hp": 50000,
+        "damage": {
+          "min": 250001,
+          "max": 300000
+        },
+        "adv": {
+          "atk": -272,
+          "def": 460,
+          "spd": 280
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "D++",
+        "level": 115,
+        "transLevel": 115,
+        "hp": 50000,
+        "damage": {
+          "min": 300001,
+          "max": 350000
+        },
+        "adv": {
+          "atk": -270,
+          "def": 450,
+          "spd": 275
+        },
+        "options": ["Singularity_Passive_Dmg_up_d", "Singularity_Passive_Dmg_down_d"]
+      },
+      {
+        "name": "C",
+        "level": 118,
+        "transLevel": 118,
+        "hp": 50000,
+        "damage": {
+          "min": 350001,
+          "max": 400000
+        },
+        "adv": {
+          "atk": -268,
+          "def": 440,
+          "spd": 270
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "C+",
+        "level": 121,
+        "transLevel": 121,
+        "hp": 50000,
+        "damage": {
+          "min": 400001,
+          "max": 450000
+        },
+        "adv": {
+          "atk": -266,
+          "def": 430,
+          "spd": 265
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "C++",
+        "level": 124,
+        "transLevel": 124,
+        "hp": 50000,
+        "damage": {
+          "min": 450001,
+          "max": 500000
+        },
+        "adv": {
+          "atk": -264,
+          "def": 420,
+          "spd": 260
+        },
+        "options": ["Singularity_Passive_Dmg_up_c", "Singularity_Passive_Dmg_down_c"]
+      },
+      {
+        "name": "B",
+        "level": 127,
+        "transLevel": 127,
+        "hp": 50000,
+        "damage": {
+          "min": 500001,
+          "max": 550000
+        },
+        "adv": {
+          "atk": -262,
+          "def": 410,
+          "spd": 255
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "B+",
+        "level": 130,
+        "transLevel": 130,
+        "hp": 50000,
+        "damage": {
+          "min": 550001,
+          "max": 600000
+        },
+        "adv": {
+          "atk": -260,
+          "def": 400,
+          "spd": 250
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "B++",
+        "level": 133,
+        "transLevel": 133,
+        "hp": 50000,
+        "damage": {
+          "min": 600001,
+          "max": 650000
+        },
+        "adv": {
+          "atk": -258,
+          "def": 390,
+          "spd": 245
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_c",
+          "Singularity_Passive_Dmg_down_c"
+        ]
+      },
+      {
+        "name": "A",
+        "level": 136,
+        "transLevel": 136,
+        "hp": 50000,
+        "damage": {
+          "min": 650001,
+          "max": 700000
+        },
+        "adv": {
+          "atk": -256,
+          "def": 380,
+          "spd": 240
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "A+",
+        "level": 139,
+        "transLevel": 139,
+        "hp": 100000,
+        "damage": {
+          "min": 700001,
+          "max": 800000
+        },
+        "adv": {
+          "atk": -254,
+          "def": 370,
+          "spd": 235
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "A++",
+        "level": 142,
+        "transLevel": 142,
+        "hp": 100000,
+        "damage": {
+          "min": 800001,
+          "max": 900000
+        },
+        "adv": {
+          "atk": -252,
+          "def": 360,
+          "spd": 230
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_a",
+          "Singularity_Passive_Dmg_down_a"
+        ]
+      },
+      {
+        "name": "AA",
+        "level": 145,
+        "transLevel": 145,
+        "hp": 100000,
+        "damage": {
+          "min": 900001,
+          "max": 1000000
+        },
+        "adv": {
+          "atk": -250,
+          "def": 350,
+          "spd": 225
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AA+",
+        "level": 148,
+        "transLevel": 148,
+        "hp": 150000,
+        "damage": {
+          "min": 1000001,
+          "max": 1150000
+        },
+        "adv": {
+          "atk": -248,
+          "def": 340,
+          "spd": 220
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AA++",
+        "level": 151,
+        "transLevel": 151,
+        "hp": 150000,
+        "damage": {
+          "min": 1150001,
+          "max": 1300000
+        },
+        "adv": {
+          "atk": -246,
+          "def": 330,
+          "spd": 215
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aa",
+          "Singularity_Passive_Dmg_down_aa"
+        ]
+      },
+      {
+        "name": "AAA",
+        "level": 154,
+        "transLevel": 154,
+        "hp": 150000,
+        "damage": {
+          "min": 1300001,
+          "max": 1450000
+        },
+        "adv": {
+          "atk": -244,
+          "def": 320,
+          "spd": 210
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa",
+          "Singularity_Passive_Dmg_down_aaa"
+        ]
+      },
+      {
+        "name": "AAA+",
+        "level": 157,
+        "transLevel": 157,
+        "hp": 200000,
+        "damage": {
+          "min": 1450001,
+          "max": 1650000
+        },
+        "adv": {
+          "atk": -242,
+          "def": 310,
+          "spd": 205
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa_2",
+          "Singularity_Passive_Dmg_down_aaa_2"
+        ]
+      },
+      {
+        "name": "AAA++",
+        "level": 160,
+        "transLevel": 160,
+        "hp": 200000,
+        "damage": {
+          "min": 1650001,
+          "max": 1850000
+        },
+        "adv": {
+          "atk": -240,
+          "def": 300,
+          "spd": 200
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "S",
+        "level": 163,
+        "transLevel": 163,
+        "hp": 150000,
+        "damage": {
+          "min": 1850001,
+          "max": 2000000
+        },
+        "adv": {
+          "atk": -238,
+          "def": 290,
+          "spd": 195
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_aaa_3",
+          "Singularity_Passive_Dmg_down_aaa_3"
+        ]
+      },
+      {
+        "name": "S+",
+        "level": 166,
+        "transLevel": 166,
+        "hp": 150000,
+        "damage": {
+          "min": 2000001,
+          "max": 2150000
+        },
+        "adv": {
+          "atk": -236,
+          "def": 280,
+          "spd": 190
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_s_2",
+          "Singularity_Passive_Dmg_down_s_2"
+        ]
+      },
+      {
+        "name": "S++",
+        "level": 169,
+        "transLevel": 169,
+        "hp": 150000,
+        "damage": {
+          "min": 2150001,
+          "max": 2300000
+        },
+        "adv": {
+          "atk": -234,
+          "def": 270,
+          "spd": 185
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_s_3",
+          "Singularity_Passive_Dmg_down_s_3"
+        ]
+      },
+      {
+        "name": "SS",
+        "level": 172,
+        "transLevel": 172,
+        "hp": 200000,
+        "damage": {
+          "min": 2300001,
+          "max": 2500000
+        },
+        "adv": {
+          "atk": -232,
+          "def": 260,
+          "spd": 180
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss",
+          "Singularity_Passive_Dmg_down_ss"
+        ]
+      },
+      {
+        "name": "SS+",
+        "level": 175,
+        "transLevel": 175,
+        "hp": 250000,
+        "damage": {
+          "min": 2500001,
+          "max": 2750000
+        },
+        "adv": {
+          "atk": -230,
+          "def": 250,
+          "spd": 175
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss_2",
+          "Singularity_Passive_Dmg_down_ss_2"
+        ]
+      },
+      {
+        "name": "SS++",
+        "level": 180,
+        "transLevel": 180,
+        "hp": 250000,
+        "damage": {
+          "min": 2750001,
+          "max": 3000000
+        },
+        "adv": {
+          "atk": -228,
+          "def": 240,
+          "spd": 170
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_ss_3",
+          "Singularity_Passive_Dmg_down_ss_3"
+        ]
+      },
+      {
+        "name": "SSS",
+        "level": 185,
+        "transLevel": 185,
+        "hp": 300000,
+        "damage": {
+          "min": 3000001,
+          "max": 3300000
+        },
+        "adv": {
+          "atk": -226,
+          "def": 230,
+          "spd": 165
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      },
+      {
+        "name": "SSS+",
+        "level": 190,
+        "transLevel": 190,
+        "hp": 300000,
+        "damage": {
+          "min": 3300001,
+          "max": 3600000
+        },
+        "adv": {
+          "atk": -224,
+          "def": 220,
+          "spd": 160
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      },
+      {
+        "name": "SSS++",
+        "level": 200,
+        "transLevel": 200,
+        "hp": 400000,
+        "damage": {
+          "min": 3600001,
+          "max": 4000000
+        },
+        "adv": {
+          "atk": -222,
+          "def": 210,
+          "spd": 155
+        },
+        "options": [
+          "Singularity_Passive_Normal_1_1",
+          "Singularity_Passive_Normal_1_2",
+          "Singularity_Passive_Normal_2_1",
+          "Singularity_Passive_Normal_2_2",
+          "Singularity_Pasive_S_1",
+          "Singularity_Passive_Dmg_up_sss",
+          "Singularity_Passive_Dmg_down_sss"
+        ]
+      }
+    ]
   },
   "75000108": {
     "mode": "monad_battle_2",
