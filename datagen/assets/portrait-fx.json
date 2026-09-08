@@ -2948,6 +2948,228 @@
         }
       ]
     },
+    "FX_UI_Character_List_Resonance": {
+      "origin": [
+        -3.001465,
+        0
+      ],
+      "emitters": [
+        {
+          "name": "inner",
+          "active": true,
+          "pos": [
+            0,
+            0
+          ],
+          "scale": [
+            0.99,
+            1,
+            1.024531
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "lengthInSec": 1.5,
+          "simulationSpeed": 1,
+          "looping": false,
+          "prewarm": false,
+          "ringBufferMode": 2,
+          "ringBufferLoopRange": [
+            0,
+            1
+          ],
+          "startLifetime": 1.5,
+          "startLifetimeMin": 5,
+          "startLifetimeMode": 0,
+          "startSize": 100,
+          "startSizeMin": 1,
+          "startSizeMode": 0,
+          "size3D": false,
+          "startSizeY": 1,
+          "startSizeYMin": 1,
+          "startSizeYMode": 0,
+          "startRotation": 0,
+          "startRotationMin": 6.283185,
+          "startRotationMode": 0,
+          "gravityModifier": 0,
+          "scalingMode": 0,
+          "startSpeed": 0,
+          "startSpeedMin": 5,
+          "startSpeedMode": 0,
+          "startColor": {
+            "mode": 0,
+            "max": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "maxParticles": 1000,
+          "emission": {
+            "rateOverTime": 0,
+            "bursts": [
+              {
+                "time": 0,
+                "count": 1,
+                "cycles": 1,
+                "interval": 0.01
+              }
+            ]
+          },
+          "renderMode": 4,
+          "sortingFudge": 0,
+          "sortingOrder": 0,
+          "applyActiveColorSpace": true,
+          "mesh": "Mesh_FX_UI_Character_List_in",
+          "material": "FX_UI_Character_List_IN_Resonance",
+          "colorOverLifetime": {
+            "mode": 1,
+            "maxGradient": {
+              "mode": 0,
+              "rgb": [
+                {
+                  "t": 0,
+                  "c": [
+                    0.589623,
+                    0.711796,
+                    1
+                  ]
+                },
+                {
+                  "t": 1,
+                  "c": [
+                    0.589623,
+                    0.711796,
+                    1
+                  ]
+                }
+              ],
+              "a": [
+                {
+                  "t": 0,
+                  "a": 0.392157
+                },
+                {
+                  "t": 1,
+                  "a": 0.392157
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "out",
+          "active": true,
+          "pos": [
+            0,
+            0
+          ],
+          "scale": [
+            1.052323,
+            1.025,
+            1.03
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "lengthInSec": 1.5,
+          "simulationSpeed": 1,
+          "looping": false,
+          "prewarm": false,
+          "ringBufferMode": 2,
+          "ringBufferLoopRange": [
+            0,
+            1
+          ],
+          "startLifetime": 1.5,
+          "startLifetimeMin": 5,
+          "startLifetimeMode": 0,
+          "startSize": 100,
+          "startSizeMin": 1,
+          "startSizeMode": 0,
+          "size3D": false,
+          "startSizeY": 1,
+          "startSizeYMin": 1,
+          "startSizeYMode": 0,
+          "startRotation": 0,
+          "startRotationMin": 6.283185,
+          "startRotationMode": 0,
+          "gravityModifier": 0,
+          "scalingMode": 0,
+          "startSpeed": 0,
+          "startSpeedMin": 5,
+          "startSpeedMode": 0,
+          "startColor": {
+            "mode": 0,
+            "max": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "maxParticles": 1000,
+          "emission": {
+            "rateOverTime": 0,
+            "bursts": [
+              {
+                "time": 0,
+                "count": 1,
+                "cycles": 1,
+                "interval": 0.01
+              }
+            ]
+          },
+          "renderMode": 4,
+          "sortingFudge": 2,
+          "sortingOrder": 0,
+          "applyActiveColorSpace": true,
+          "mesh": "Mesh_FX_UI_Character_List_out",
+          "material": "M_FX_UI_Char_out_Demi",
+          "colorOverLifetime": {
+            "mode": 1,
+            "maxGradient": {
+              "mode": 0,
+              "rgb": [
+                {
+                  "t": 0,
+                  "c": [
+                    0.514151,
+                    0.723833,
+                    1
+                  ]
+                },
+                {
+                  "t": 1,
+                  "c": [
+                    0.514151,
+                    0.723833,
+                    1
+                  ]
+                }
+              ],
+              "a": [
+                {
+                  "t": 0,
+                  "a": 0.670588
+                },
+                {
+                  "t": 1,
+                  "a": 0.670588
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
     "FX_UI_Character_List_2000086": {
       "origin": [
         -3.001465,
@@ -15075,6 +15297,160 @@
         ]
       }
     },
+    "FX_UI_Character_List_IN_Resonance": {
+      "name": "FX_UI_Character_List_IN_Resonance",
+      "keywords": [
+        "_ALPHA_TEX_ON",
+        "_MAIN_CONTRAST_ON",
+        "_NOISE_UV_ON",
+        "_THIRD_TEX_ON"
+      ],
+      "renderQueue": 3000,
+      "textures": {
+        "_AlphaTex": {
+          "tex": "T_FX_2000047_Shield_Mask",
+          "st": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "_MainTex": {
+          "tex": "T_FX_Noise_29",
+          "st": [
+            0.53,
+            0.67,
+            -1.3,
+            0.32
+          ]
+        },
+        "_NoiseTex": {
+          "tex": "T_FX_Noise_38",
+          "st": [
+            0.3,
+            0.3,
+            0,
+            0
+          ]
+        },
+        "_SecondTex": {
+          "tex": "Noise88",
+          "st": [
+            1,
+            1,
+            0,
+            0
+          ]
+        },
+        "_ThirdTex": {
+          "tex": "T_FX_Gradation_06",
+          "st": [
+            1,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "floats": {
+        "_ALPHA_CLAMP": 0,
+        "_ALPHA_CONTRAST_ON": 0,
+        "_ALPHA_TEX_ON": 1,
+        "_AlphaContrast": 1,
+        "_AlphaStrength": 7,
+        "_ColorMask": 15,
+        "_CullMode": 0,
+        "_DISSOLVE_UV_ON": 0,
+        "_DissolveCustomIndex1": 0,
+        "_DissolveCustomIndex2": 0,
+        "_DissolveIntensity": 0,
+        "_DissolveType": 0,
+        "_DstBlend": 1,
+        "_MAIN_ALPHACHANNEL_ON": 0,
+        "_MAIN_CLAMP": 0,
+        "_MAIN_CONTRAST_ON": 1,
+        "_MAIN_CUSTOM_DATA": 0,
+        "_MainContrast": 0.2,
+        "_MainCustomIndex": 0,
+        "_MainStrength": 2,
+        "_NOISE_UV_ON": 1,
+        "_NoiseStrength": 0.36,
+        "_POLAR_CUSTOM_DATA": 0,
+        "_POLAR_UV_ON": 0,
+        "_PolarCustomIndex1": 0,
+        "_PolarCustomIndex2": 0,
+        "_SECOND_CUSTOM_DATA": 0,
+        "_SECOND_TEX_ON": 0,
+        "_SECOND_TYPE_ADD": 0,
+        "_SecondCustomIndex": 0,
+        "_SrcBlend": 5,
+        "_Stencil": 0,
+        "_StencilComp": 8,
+        "_StencilOp": 0,
+        "_StencilReadMask": 255,
+        "_StencilWriteMask": 255,
+        "_THIRD_CUSTOM_DATA": 0,
+        "_THIRD_TEX_ON": 1,
+        "_THIRD_TYPE_ADD": 0,
+        "_ThirdCustomIndex": 0,
+        "_USE_SCENE_LIGHT_COLOR": 0,
+        "_UseUIAlphaClip": 0,
+        "_ZTest": 4,
+        "_ZWrite": 0,
+        "__dirty": 1
+      },
+      "vectors": {
+        "_AlphaSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "_Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "_DissolveSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "_MainSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "_NoiseSpeed": [
+          0.01,
+          -0.01,
+          0,
+          0
+        ],
+        "_PolarSpeed": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "_SecondTexSpeed": [
+          0,
+          -0.1,
+          0,
+          0
+        ],
+        "_ThirdTexSpeed": [
+          0.5,
+          0,
+          0,
+          0
+        ]
+      }
+    },
     "FX_UI_Character_List_2000086": {
       "name": "FX_UI_Character_List_2000086",
       "keywords": [
@@ -19683,6 +20059,16 @@
     }
   },
   "textures": {
+    "Noise88": {
+      "w": 512,
+      "h": 512,
+      "wrapU": 0,
+      "wrapV": 0,
+      "filter": 1,
+      "mips": 10,
+      "srgb": 1,
+      "bundle": "prefabs/character/ui_effect"
+    },
     "Noise99": {
       "w": 256,
       "h": 256,
@@ -19840,6 +20226,16 @@
       "wrapV": 0,
       "filter": 1,
       "mips": 1,
+      "srgb": 1,
+      "bundle": "prefabs/character/ui_effect"
+    },
+    "T_FX_Noise_29": {
+      "w": 256,
+      "h": 256,
+      "wrapU": 0,
+      "wrapV": 0,
+      "filter": 1,
+      "mips": 9,
       "srgb": 1,
       "bundle": "prefabs/character/ui_effect"
     },

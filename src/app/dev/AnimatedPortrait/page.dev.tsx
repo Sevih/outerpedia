@@ -40,6 +40,7 @@ const FX2000106 = 'FX_UI_Character_List_2000106';
 const FX2000110 = 'FX_UI_Character_List_2000110';
 const FX2000114 = 'FX_UI_Character_List_2000114';
 const FX2000121 = 'FX_UI_Character_List_2000121';
+const RESONANCE = 'FX_UI_Character_List_Resonance';
 /** Les effets servis, dans l'ordre du portage — la table par calque les déroule tous. */
 const SERVED = [
   DEMI,
@@ -51,6 +52,7 @@ const SERVED = [
   FX2000110,
   FX2000114,
   FX2000121,
+  RESONANCE,
 ];
 
 /**
@@ -79,6 +81,9 @@ const DUNGEON_SUBJECTS = CARRIERS.filter((c) => c.short === 'Dungeon' && c.char)
   (c) => c.char!,
 );
 const SEASONAL_SUBJECTS = CARRIERS.filter((c) => c.short === 'Seasonal' && c.char).map(
+  (c) => c.char!,
+);
+const RESONANCE_SUBJECTS = CARRIERS.filter((c) => c.short === 'Resonance' && c.char).map(
   (c) => c.char!,
 );
 const SUBJECT = byId('2000053'); // Stella — le premier porteur de `_Demi` par id
@@ -161,7 +166,7 @@ const LAST_FOUR: {
 /**
  * Les QUATRE paliers responsives de `CharacterCard` — mêmes libellés que
  * `/dev/portrait`. La taille du prefab (`w-45`) n'y est pas : c'est celle des
- * sections du haut. La page pose 10 portraits animés pour un plafond de 8
+ * sections du haut. La page pose plus de portraits animés que le plafond de 8
  * contextes WebGL : l'éviction peut donc jouer au défilement — mais elle ne
  * frappe que HORS écran, et la carte évincée ressuscite en revenant. Une carte
  * qu'on regarde ne s'éteint jamais.
@@ -193,7 +198,7 @@ const FROM_BINARY: { k: string; v: string }[] = [
   },
   {
     k: 'Où est l’animation',
-    v: 'Dans le SHADER, pas dans le système. Les 22 matériaux des dix effets partagent `MASTA/S_Assemble_Particle_UI`, qui fait défiler quatre textures sur `_Time` et compose main × second × third × `_MainStrength`. Aucun `AnimationClip`, aucun `Animator` dans le bundle.',
+    v: 'Dans le SHADER, pas dans le système. Tous les matériaux du bundle, tous effets confondus, partagent `MASTA/S_Assemble_Particle_UI`, qui fait défiler quatre textures sur `_Time` et compose main × second × third × `_MainStrength`. Aucun `AnimationClip`, aucun `Animator` dans le bundle.',
   },
   {
     k: 'Ce que `_Dungeon` ajoute',
@@ -220,6 +225,10 @@ const FROM_BINARY: { k: string; v: string }[] = [
     v: 'Une seule FAMILLE, relevée d’un bloc : `_2000106`, `_2000110`, `_2000114` et `_2000121` partagent le `out (1)` violet de `_Demi` (6ᵉ à 9ᵉ réutilisation du matériau, la teinte de particule ne bouge même plus) et des `star` moulés sur ceux de `_2000093` — dégradés en `minMaxState = 3`, seules les teintes changent. Trois nouveautés quand même. D’abord un matériau SANS `_MainTex` (`inner` de `_2000106`) : le shader retombe sur son défaut « white » (relevé dans `m_ParsedForm` — TOUS les slots y déclarent `white`), qui porte la luminance ET l’alpha ; un sampler non lié rendrait noir en WebGL2, donc alpha = 0 et calque invisible — d’où la texture blanche 1×1 posée sur les slots vides du moteur. Ensuite les premiers émetteurs DÉCORATIFS à matériau sur mesure : les cercles magiques de `_2000110` (tuile 2 d’une planche 2×2, ×4) et l’emblème de `_2000114` — qui réutilise par ailleurs le matériau de voile `FX_UI_Character_List_2000110_2` TEL QUEL, seul cas d’un matériau signature partagé entre deux effets. Enfin des minuties qui ne s’inventent pas : la force de bruit NÉGATIVE de `_2000121` (−0,03), son motif tuilé 2×4 défilant en diagonale, et l’arc-en-ciel de `_2000106` — première `_SECOND_TEX_ON` sur un billboard. Aucun des quatre ne demande `_POLAR_UV_ON` ni `_DISSOLVE_UV_ON` : les branches non transcrites du shader restent non demandées.',
   },
   {
+    k: 'Ce que `_Resonance` ajoute',
+    v: 'RIEN au moteur — et c’est la nouvelle qui compte : arrivé au patch du 08/09/2026 (porteur 2700019), c’est le premier effet ajouté par le jeu APRÈS le portage, et il s’est servi tel quel. Deux calques de cadre, zéro émetteur — le patron de `_Demi` —, `out` en 10ᵉ réutilisation de son matériau (bleu pâle par la couleur de particule seule, `applyActiveColorSpace` VRAI comme sur `_Demi`). Le matériau neuf d’`inner` ne demande que des branches déjà transcrites : `_ALPHA_TEX_ON` (masque-bouclier de `_2000093`, force 7), third MULTIPLIÉ qui balaye à l’horizontale (0,5 UV/s — la signature), bruit d’UV en dérive lente (0,01 ; −0,01). Et une `_SecondTex` câblée AVEC une vitesse réglée (0 ; −0,1) mais sans mot-clé : lettre morte, deuxième cas après `_2000093` — les mots-clés font foi, pas les slots.',
+  },
+  {
     k: 'La couleur de particule',
     v: '`startColor` × `colorOverLifetime` arrive au shader en couleur de SOMMET, avec DEUX conversions possibles sur la route : `m_ApplyActiveColorSpace` (relevé émetteur par émetteur) la linéarise à la cuisson, puis la chaîne UIParticle → Canvas linéarise TOUTES les couleurs cuites en projet Linear. Les calques de `_Demi` cumulent donc les deux — c’est ce qui fait le rouge PROFOND du liseré (0,618 → 0,34 → 0,095), confronté à l’écran du jeu : une conversion seule plafonne le rapport vert/rouge à 0,34 et rend le ruban blanc rosé, jamais rouge.',
   },
@@ -237,14 +246,14 @@ const FROM_BINARY: { k: string; v: string }[] = [
 const UNSURE: string[] = [
   'LES PARTICULES SONT APPROCHÉES, PAS CLONÉES. Trois écarts au ParticleSystem d’Unity, déclarés en tête de `portrait-fx-sim` : le bruit Perlin interne (le relevé dit un champ STATIQUE, `scrollSpeed = 0` : rendu par deux sinus déphasés échantillonnés le long du CHEMIN parcouru — une dérive de 0,05 u/s au plus, jamais une oscillation sur l’horloge, que le jeu n’a pas), le frein (`dampen` s’applique là-bas PAR IMAGE de simulation, rendu par convergence calée sur 60 pas/s ; `drag` suit la reconstruction publique `drag × π·(taille/2)² × vitesse²`, drapeaux `multiplyDragBy…` honorés, mais Unity ne documente pas sa formule ni s’il prend la taille de naissance ou celle du moment), et `size3D` dont on suppose que les axes tirent le MÊME aléa — les plages de `star`, ×2 exactes, gardent alors leur rapport. `autoRandomSeed` étant vrai côté jeu, l’aléa par montage est conforme, lui.',
   'LE TEMPS D’ORIGINE. `_Time` du jeu compte depuis le chargement de la scène et est PARTAGÉ par tous les effets : deux cartes de la même page y sont donc en phase. Ici chaque canvas compte depuis son propre montage, donc deux cartes montées à des instants différents sont déphasées. Invisible sur une carte seule, visible sur une rangée — et c’est un des arguments pour le contexte partagé ci-dessous.',
-  'L’ÉCHELLE DU NŒUD RACINE. Les dix prefabs ont un `m_LocalScale` de (0, 0, 0) sur leur racine, ce qui écraserait tout. C’est de l’état d’éditeur : `UIParticle` pose l’échelle au runtime et son `m_Scale3D` vaut (1, 1, 1). La géométrie le confirme (le cadre tombe juste au pixel), mais c’est une déduction, pas un relevé.',
+  'L’ÉCHELLE DU NŒUD RACINE. Les prefabs du bundle ont tous un `m_LocalScale` de (0, 0, 0) sur leur racine (revérifié sur `_Resonance` à son arrivée), ce qui écraserait tout. C’est de l’état d’éditeur : `UIParticle` pose l’échelle au runtime et son `m_Scale3D` vaut (1, 1, 1). La géométrie le confirme (le cadre tombe juste au pixel), mais c’est une déduction, pas un relevé.',
   'LE FILTRAGE ENTRE NIVEAUX. Le nombre de mips vient désormais du jeu (`m_MipCount`), et les cinq textures qui n’en ont aucun n’en reçoivent plus. Reste que `FilterMode.Bilinear` est rendu en `LINEAR_MIPMAP_NEAREST` pour les trois qui en ont : c’est la lecture usuelle de l’énum, pas une mesure, et Unity ne dit pas s’il génère les mêmes niveaux que `generateMipmap`.',
   'LA CHROME EN DOM. Étoiles, niveau, nom et badges sont posés par-dessus le canvas, donc composés par le navigateur en sRGB, quand le jeu les mélange en linéaire comme le reste. Ils sont opaques ou presque, là où les deux espaces coïncident — mais leurs bords antialiasés, eux, diffèrent d’un cheveu.',
 ];
 
 /** Ce qui n'est pas fait, et qu'il vaut mieux écrire que sous-entendre. */
 const TODO: string[] = [
-  'LE DIXIÈME EFFET, `_Synchro` — ÉCARTÉ, pas oublié (décision du 10/08/2026). Ce n’est pas la parure d’un personnage : `CUICharacterThumbnail.SetSynchroEffect()` (sans paramètre, hors `ThumbnailEffect`) le pose sur la vignette de N’IMPORTE QUEL perso placé dans le Synchro Device — un état du COMPTE joueur, que le site n’a pas et n’aura pas. Relevé quand même pour mémoire : deux calques de cadre bleus (0,102 ; 0,275 ; 0,802), zéro émetteur, mais une feuille UV 5×5 à tuile ALÉATOIRE sur un calque-maille et le matériau `M_FX_UI_Char_out_UI` sur la troisième maille du bundle — deux choses que le moteur ne transcrit pas, et n’aura pas à transcrire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des neuf servis ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
+  '`_Synchro` — ÉCARTÉ, pas oublié (décision du 10/08/2026). Ce n’est pas la parure d’un personnage : `CUICharacterThumbnail.SetSynchroEffect()` (sans paramètre, hors `ThumbnailEffect`) le pose sur la vignette de N’IMPORTE QUEL perso placé dans le Synchro Device — un état du COMPTE joueur, que le site n’a pas et n’aura pas. Relevé quand même pour mémoire : deux calques de cadre bleus (0,102 ; 0,275 ; 0,802), zéro émetteur, mais une feuille UV 5×5 à tuile ALÉATOIRE sur un calque-maille et le matériau `M_FX_UI_Char_out_UI` sur la troisième maille du bundle — deux choses que le moteur ne transcrit pas, et n’aura pas à transcrire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des effets servis ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
   'UN CONTEXTE WebGL PARTAGÉ. Aujourd’hui, un contexte par carte, plafonné à 8 et recyclé par ordre de dernière apparition — ça tient une page, pas une grille de 124 personnages dont 15 animés. Un seul contexte qui peindrait toutes les cartes lèverait le plafond ET le déphasage noté plus haut.',
   'LE PASSAGE DANS `characters.json`. La table `byCharacter` vit dans `portrait-fx.json` parce qu’une page /dev ne justifie pas d’ouvrir un contrat de données. Le jour où l’effet sort d’ici, sa place est un champ de perso — le datagen lit déjà `CharacterExtraTemplet` pour `showNickName`.',
   'LE `Dim` DU PORTRAIT STATIQUE. Sans rapport avec l’effet, mais vu en lisant l’ordre des nœuds : dans le prefab, `Dim` est le 2ᵉ enfant de `CharacterInfo`, donc SOUS le rail d’étoiles, l’élément, la classe et le niveau. `Portrait` le rend en dernier, donc par-dessus tout. À vérifier en jeu avant de toucher quoi que ce soit.',
@@ -272,13 +281,14 @@ export default function DevAnimatedPortrait() {
           <code>portrait-fx-gl</code>). Rien ici n’est une approximation CSS.
         </p>
         <p className="text-content-muted mt-2 max-w-3xl text-sm">
-          <strong className="text-content-strong">Neuf effets sont servis : </strong>
+          <strong className="text-content-strong">{SERVED.length} effets sont servis : </strong>
           <code>_Demi</code> ({DEMI_SUBJECTS.length} porteurs), <code>_Dungeon</code> (
           {DUNGEON_SUBJECTS.length} porteurs), <code>_Seasonal</code> ({SEASONAL_SUBJECTS.length}{' '}
-          porteur) et les SIX effets sur mesure (1 porteur chacun) — tous sauf <code>_Demi</code>{' '}
-          amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Le dixième,{' '}
-          <code>_Synchro</code>, est un état de compte joueur — écarté volontairement, cf. « ce qui
-          reste » en bas.
+          porteur), <code>_Resonance</code> ({RESONANCE_SUBJECTS.length} porteur) et les SIX effets
+          sur mesure (1 porteur chacun) — tous sauf <code>_Demi</code> et <code>_Resonance</code>{' '}
+          amènent les émetteurs de PARTICULES simulés (<code>portrait-fx-sim</code>). Le prefab
+          restant, <code>_Synchro</code>, est un état de compte joueur — écarté volontairement, cf.
+          « ce qui reste » en bas.
         </p>
       </header>
 
@@ -422,6 +432,50 @@ export default function DevAnimatedPortrait() {
               </Figure>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-content-strong font-semibold">
+          <code>_Resonance</code> — deux cadres bleus, sans particules
+        </h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Arrivé au patch du 08/09/2026 — le premier effet ajouté APRÈS le portage, et le retour au
+          patron minimal de <code>_Demi</code> : deux calques de cadre, aucun émetteur décoratif.{' '}
+          <code>out</code> reprend le matériau de <code>_Demi</code> (10ᵉ réutilisation), bleui par
+          la seule couleur de particule ; <code>inner</code> est un matériau neuf mais sans branche
+          nouvelle — un bruit compressé en principal, un dégradé multiplié en third qui BALAYE la
+          carte à l’horizontale (0,5 UV/s, la signature de l’effet), l’alpha par le masque-bouclier
+          déjà vu sur <code>_2000093</code>. Sa <code>_SecondTex</code> est câblée ET dotée d’une
+          vitesse, mais le mot-clé est absent : lettre morte, deuxième cas du bundle.
+        </p>
+        <div className="flex flex-wrap items-end gap-6">
+          {RESONANCE_SUBJECTS.slice(0, 1).map((c) => (
+            <Figure key={`${c.id}-plain`} label="Portrait (statique)">
+              <Portrait
+                id={c.id}
+                name={name(c)}
+                rarity={c.rarity}
+                element={c.element}
+                cls={c.class}
+                level={100}
+                className="w-45"
+              />
+            </Figure>
+          ))}
+          {RESONANCE_SUBJECTS.slice(0, 1).map((c) => (
+            <Figure key={c.id} label="AnimatedPortrait">
+              <AnimatedPortrait
+                id={c.id}
+                name={name(c)}
+                rarity={c.rarity}
+                element={c.element}
+                cls={c.class}
+                level={100}
+                className="w-45"
+              />
+            </Figure>
+          ))}
         </div>
       </section>
 

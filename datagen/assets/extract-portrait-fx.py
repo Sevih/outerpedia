@@ -10,12 +10,14 @@ Rien d'autre : pas de paramètre, pas de variante. Le nom vient de
 `CharacterExtraTemplet.ThumbnailEffect` — une minorité de persos en ont un (26 au
 patch du 12/08/2026, et ça grandit : les compter ici pourrirait).
 
-Les prefabs correspondants vivent dans le bundle `prefabs/character/ui_effect` : dix,
-dont quatre partagés (`_Demi`, `_Dungeon`, `_Seasonal`, `_Synchro` que pose
-`SetSynchroEffect`) et six sur mesure.
+Les prefabs correspondants vivent dans le bundle `prefabs/character/ui_effect`, en
+deux familles de noms : les NOMMÉS, partagés ou partageables (`_Demi`, `_Dungeon`,
+`_Seasonal`, `_Resonance`, et `_Synchro` que pose `SetSynchroEffect`), et les
+NUMÉROTÉS, sur mesure pour un perso (`_2000086`…). Le bundle grandit avec le jeu —
+onze prefabs au patch du 08/09/2026.
 
 CE QU'ILS CONTIENNENT, ET CE QUI SURPREND. Aucun `AnimationClip`, aucun `Animator` :
-47 `ParticleSystem`, en deux familles.
+que des `ParticleSystem`, en deux familles.
 
   1. LES CALQUES DE CADRE (`inner`, `out`, `web`, `inner_2`) n'émettent QU'UNE
      particule, en `m_RenderMode = Mesh` sur une maille dédiée. Leur `looping` est
@@ -28,7 +30,7 @@ CE QU'ILS CONTIENNENT, ET CE QUI SURPREND. Aucun `AnimationClip`, aucun `Animato
      particules — 2 à 10 par seconde, forme BoxShell, courbes de taille et de couleur
      sur la vie, feuille UV. `_Demi` n'en a aucun : c'est pourquoi il vient en premier.
 
-LE SHADER EST UNIQUE pour les 22 matériaux : `MASTA/S_Assemble_Particle_UI`
+LE SHADER EST UNIQUE pour tous les matériaux : `MASTA/S_Assemble_Particle_UI`
 (bundle `shader/common`). Son GLSL ES 3.0 compilé est lisible dans le bundle, et la
 transcription web le rejoue à l'identique — cf. `src/components/character/portrait-fx-gl.ts`,
 qui porte la formule ligne à ligne. Ce script-ci n'extrait donc QUE ses ENTRÉES :
@@ -49,7 +51,7 @@ franc sur un dégradé. La clé du manifest porte donc `.png`, ce qui suffit à
 Usage :
     python extract-portrait-fx.py              # les effets par défaut (cf. DEFAULT_EFFECTS)
     python extract-portrait-fx.py Demi Synchro # d'autres, par suffixe de nom
-    python extract-portrait-fx.py --all        # les dix
+    python extract-portrait-fx.py --all        # tout le bundle
 """
 
 from __future__ import annotations
@@ -97,8 +99,8 @@ EFFECT_PREFIX = 'FX_UI_Character_List_'
 
 #: Les effets rendus par le site. Élargir cette liste est le SEUL geste à faire
 #: pour en servir un de plus — le reste du script est data-driven.
-DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', '2000086', '2000093',
-                   '2000106', '2000110', '2000114', '2000121']
+DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', 'Resonance', '2000086',
+                   '2000093', '2000106', '2000110', '2000114', '2000121']
 
 
 def bundle_path(name: str) -> Path:

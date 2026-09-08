@@ -1,7 +1,7 @@
 /**
  * LE SHADER DU JEU, REJOUÉ — pas imité.
  *
- * Les 22 matériaux des dix effets de portrait partagent UN shader,
+ * Tous les matériaux des effets de portrait partagent UN shader,
  * `MASTA/S_Assemble_Particle_UI` (bundle `shader/common`). Son GLSL ES 3.0
  * compilé est lisible dans le bundle : 672 variantes, qui ne sont que le même
  * ubershader sous `#ifdef`, et 44 fragments distincts. Le fragment ci-dessous en
