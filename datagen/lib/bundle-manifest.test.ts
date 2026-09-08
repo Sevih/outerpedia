@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
 import {
   assetName,
+  bundlePaths,
   bundlesFor,
   bundlesSignature,
   closeOverDependencies,
@@ -106,5 +110,47 @@ describe('bundlesSignature', () => {
     expect(bundlesSignature([TEMPLET])).not.toBe(s);
     expect(bundlesSignature([TEMPLET, { ...TEXT, fileSize: TEXT.fileSize + 1 }])).not.toBe(s);
     expect(bundlesSignature([TEMPLET, { ...TEXT, filename: 'other' }])).not.toBe(s);
+  });
+});
+
+describe('bundlePaths — ce que le client ne livre pas vs ce qui est cassé', () => {
+  // Fixtures À PART : le `filename` du jeu est un hash plat (pas de sous-dossier),
+  // et ces tests-ci écrivent vraiment les fichiers.
+  const fx = (name: string, filename: string, fileSize: number): BundleInfo => ({
+    name,
+    folder: name,
+    filename,
+    fileSize,
+    assets: [],
+    dependencies: [],
+  });
+  const KR = fx('tmpfont', 'aaaa1111', 64);
+  const JP = fx('tmpfont', 'bbbb2222', 96);
+  const ATLAS_FX = fx('spriteatlas/ui', 'cccc3333', 128);
+
+  const dir = mkdtempSync(join(tmpdir(), 'bundles-'));
+  const write = (b: BundleInfo, size = b.fileSize) =>
+    writeFileSync(join(dir, b.filename), Buffer.alloc(size));
+
+  it('un bundle du manifeste ABSENT du disque est écarté, pas fatal', () => {
+    write(KR);
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    // JP n'est pas écrit : le client ne le livre pas (cas réel des polices JP/CN).
+    expect(bundlePaths([KR, JP], dir)).toEqual([join(dir, KR.filename)]);
+    expect(warn).toHaveBeenCalledOnce();
+    expect(String(warn.mock.calls[0][0])).toContain('tmpfont');
+    warn.mockRestore();
+  });
+
+  it('un bundle TRONQUÉ lève — une copie coupée ne s’extrait pas', () => {
+    write(ATLAS_FX, ATLAS_FX.fileSize - 1);
+    expect(() => bundlePaths([KR, ATLAS_FX], dir)).toThrow(/TRONQUÉ/);
+  });
+
+  it('tout présent à la bonne taille : aucun avertissement', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    expect(bundlePaths([KR], dir)).toHaveLength(1);
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
   });
 });

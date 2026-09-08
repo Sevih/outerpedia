@@ -5,6 +5,25 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-08
+
+- **`pnpm dev` cassé par la 1.4.16 : le manifeste déclare plus que le client ne
+  livre** — l'extraction s'arrêtait sur « 3 bundle(s) du manifeste absent(s) ou
+  tronqué(s) sur disque (tmpfont, tmpfont, tmpfont) — relancer le pull », et
+  relancer le pull n'y changeait rien : les trois manquants sont les polices
+  `tmpfont` **JP / CNSC / CNTC**, déclarées au manifeste et **absentes du client
+  Steam lui-même** (qui n'embarque que la KR). Le pull était fidèle — 6 116
+  fichiers de part et d'autre, à l'octet. Le garde confondait deux absences que
+  tout oppose : une TAILLE qui ne colle pas au manifeste (copie coupée, vraie
+  corruption → on lève toujours) et un FICHIER ABSENT (le client ne le livre
+  pas → on l'écarte en le disant). Elles arrivent ici par la fermeture sur les
+  `dependencies` : un prefab d'UI dépend du bundle de police, AssetStudio s'en
+  passe — c'est déjà ce que faisait le scan complet du dossier, qui ne voyait
+  que les fichiers existants. Extraction réelle rejouée bout en bout : images,
+  audio (92 mp3) et wallpapers (489) passent, avec un simple avertissement.
+  3 tests sur disque (absent → écarté + averti ; tronqué → lève ; tout bon →
+  silence).
+
 ## 2026-09-07
 
 - **Audit transverse — lot 1 (G1, G2, G3, G8, G15, G26, G29, G31, G32, G34)**,

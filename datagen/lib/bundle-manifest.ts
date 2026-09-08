@@ -105,18 +105,44 @@ export function bundlesSignature(bundles: BundleInfo[]): string {
   return createHash('md5').update(parts.join('\n')).digest('hex');
 }
 
-/** Chemins absolus des bundles, en vérifiant qu'ils sont bien sur disque. */
+/**
+ * Chemins absolus des bundles PRÉSENTS sur disque. Deux absences que tout
+ * oppose, et qu'il ne faut donc pas traiter pareil :
+ *
+ *  - TAILLE ≠ manifeste → la copie a été coupée en route. C'est une corruption,
+ *    on lève : extraire un bundle tronqué donnerait des assets muets ou faux.
+ *  - FICHIER ABSENT → le client ne le livre pas. Le manifeste DÉCLARE plus que
+ *    l'installation ne contient (constaté le 08/09/2026, jeu 1.4.16 : les polices
+ *    `tmpfont` JP/CNSC/CNTC sont au manifeste et absentes du client Steam, qui
+ *    n'embarque que la KR — le pull est fidèle, la source non plus ne les a
+ *    pas). On les écarte, en le disant : c'est exactement ce que faisait le
+ *    scan complet du dossier, qui ne voyait que les fichiers existants.
+ *
+ * Les dépendances tombent dans le second cas — un prefab d'UI dépend du bundle
+ * de police, la fermeture le réclame, AssetStudio s'en passe sans broncher
+ * (même raisonnement que la dépendance absente du manifeste, cf. plus haut).
+ */
 export function bundlePaths(bundles: BundleInfo[], dir = gamedata('files/bundles')): string[] {
-  const missing: string[] = [];
-  const paths = bundles.map((b) => {
+  const truncated: string[] = [];
+  const unshipped: string[] = [];
+  const paths: string[] = [];
+  for (const b of bundles) {
     const p = join(dir, b.filename);
-    if (!existsSync(p) || statSync(p).size !== b.fileSize) missing.push(b.name);
-    return p;
-  });
-  if (missing.length) {
+    if (!existsSync(p)) unshipped.push(b.name);
+    else if (statSync(p).size !== b.fileSize) truncated.push(b.name);
+    else paths.push(p);
+  }
+  if (truncated.length) {
     throw new Error(
-      `${missing.length} bundle(s) du manifeste absent(s) ou tronqué(s) sur disque ` +
-        `(${missing.slice(0, 3).join(', ')}${missing.length > 3 ? ', …' : ''}) — relancer le pull.`,
+      `${truncated.length} bundle(s) TRONQUÉ(S) sur disque ` +
+        `(${truncated.slice(0, 3).join(', ')}${truncated.length > 3 ? ', …' : ''}) — relancer le pull.`,
+    );
+  }
+  if (unshipped.length) {
+    const names = [...new Set(unshipped)];
+    console.warn(
+      `⚠ ${unshipped.length} bundle(s) du manifeste non livré(s) par ce client, ignoré(s) ` +
+        `(${names.slice(0, 3).join(', ')}${names.length > 3 ? ', …' : ''}).`,
     );
   }
   return paths;
