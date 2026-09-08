@@ -1,6 +1,20 @@
 [
   {
     "date": "2026-09-08",
+    "type": "update",
+    "title": {
+      "en": "Knight of Hope Meteos"
+    },
+    "content": {
+      "en": ["Knight of Hope Meteos Joint Challenge Guide updated for September 2026 version."]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/joint-challenge/koh-meteos"
+    }
+  },
+  {
+    "date": "2026-09-08",
     "type": "character",
     "title": {
       "en": "Titia",
