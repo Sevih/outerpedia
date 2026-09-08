@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.105",
+  "resVersion": "1.11.203",
   "buffs": {
     "1": [
       {
@@ -92088,6 +92088,261 @@
         "createType": "PASSIVE",
         "turnDuration": -1,
         "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_1_1": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_TEAM_ELEMENT_FIRE_COUNT",
+        "conditionValue": 3,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_1_2": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": -1200,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_TEAM_ELEMENT_FIRE_COUNT",
+        "conditionValue": 4,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_1_3": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_HAS_BUFF",
+        "conditionValue": 8,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_1_4": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_HAS_NOT_BUFF",
+        "conditionValue": 8,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_2_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL2",
+        "stat": "ST_SPEED",
+        "applyingType": "OAT_RATE",
+        "value": -700,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_2_2": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 150,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_2_3": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE_ENHANCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_PASSIVE_2_4": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE_ENHANCE_REVERSE",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_ALL",
+        "applyingType": "OAT_RATE",
+        "value": 200,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "additiveAttack": true,
+        "removeOnCasterDie": true
+      }
+    ],
+    "Singularity_CHI_RAGE": [
+      {
+        "level": 1,
+        "type": "BT_REMOVE_BUFF",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "applyingType": "OAT_ADD",
+        "value": 3,
+        "callerSkillType": "SKT_RAGE_FINISH1,SKT_RAGE_FINISH2",
+        "createType": "SKILL_START",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 9996,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_SKILL01_1": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "applyingType": "OAT_RATE",
+        "value": -200,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_SKILL02_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_CRITICAL_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 500,
+        "callerSkillType": "SKT_SECOND",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 3,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 11
+      }
+    ],
+    "Singularity_CHI_SKILL03_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 500,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_START",
+        "conditionType": "CASTER_HAS_BUFF",
+        "conditionValue": 11,
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "Singularity_CHI_SKILL03_2": [
+      {
+        "level": 1,
+        "type": "BT_DOT_POISON",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 755,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 1004
+      }
+    ],
+    "Singularity_CHI_SKILL03_3": [
+      {
+        "level": 1,
+        "type": "BT_SEAL_COUNTER",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 1000,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
         "additiveAttack": true
       }
     ],

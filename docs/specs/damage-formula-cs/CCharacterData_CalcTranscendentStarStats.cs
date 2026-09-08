@@ -1,4 +1,4 @@
-// CCharacterData$$CalcTranscendentStarStats — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$CalcTranscendentStarStats — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	private void CalcTranscendentStarStats()

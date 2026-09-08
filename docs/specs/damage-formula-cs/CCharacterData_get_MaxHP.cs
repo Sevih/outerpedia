@@ -1,4 +1,4 @@
-// CCharacterData$$get_MaxHP — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$get_MaxHP — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 // Note du manifeste : Buff de guilde / titre sur les PV max (spec § 16.2).
 

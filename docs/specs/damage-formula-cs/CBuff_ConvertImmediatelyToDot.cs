@@ -1,4 +1,4 @@
-// CBuff$$ConvertImmediatelyToDot — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBuff$$ConvertImmediatelyToDot — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 // Note du manifeste : Détonation : BT_IMMEDIATELY_<TYPE> → BT_DOT_<TYPE> (§ 14.6).
 

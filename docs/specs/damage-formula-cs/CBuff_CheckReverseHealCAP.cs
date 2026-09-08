@@ -1,8 +1,12 @@
-// CBuff$$CheckReverseHealCAP — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBuff$$CheckReverseHealCAP — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	private int CheckReverseHealCAP(int _nFinalValue)
 	{
+		if (BUFF_TYPE.BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL == Type || BUFF_TYPE.BT_REVERSE_HEAL_BASED_TARGET_ABLE_KILL == Type)
+		{
+			return _nFinalValue;
+		}
 		foreach (CBuff item in Owner.GetBuffListByType(BUFF_TYPE.BT_REVERSE_HEAL_CAP))
 		{
 			if (item != null && item.CheckCondition() && _nFinalValue > item.Value)

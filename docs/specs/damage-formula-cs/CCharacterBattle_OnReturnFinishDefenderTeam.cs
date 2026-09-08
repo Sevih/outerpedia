@@ -1,4 +1,4 @@
-// CCharacterBattle$$OnReturnFinishDefenderTeam — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$OnReturnFinishDefenderTeam — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Roll de contre-attaque : CheckProbabilityPermille(CounterRate) après avoir été touché, S1 (§ 12.9).
 

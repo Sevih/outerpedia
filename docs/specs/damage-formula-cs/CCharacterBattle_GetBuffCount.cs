@@ -1,4 +1,4 @@
-// CCharacterBattle$$GetBuffCount — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$GetBuffCount — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Compteur des buffs/débuffs VISIBLES (tooltip > 0, non neutres) — les familles OWNER/TARGET_(DE)BUFF de § 9.1.
 

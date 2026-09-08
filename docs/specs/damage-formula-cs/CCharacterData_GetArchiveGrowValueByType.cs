@@ -1,4 +1,4 @@
-// CCharacterData$$GetArchiveGrowValueByType — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$GetArchiveGrowValueByType — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	public int GetArchiveGrowValueByType(ARCHIVE_CHARACTER_TYPE _eType)

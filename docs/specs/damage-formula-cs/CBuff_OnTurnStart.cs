@@ -1,4 +1,4 @@
-// CBuff$$OnTurnStart — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBuff$$OnTurnStart — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 // Note du manifeste : Appelant PÉRIODIQUE du tick : ProcessDamageOverTime(this, Value, 1, null) — _nCount = 1 (§ 11, lève le reste de § 12.8) ; HoT et reverse heal périodiques (§ 14).
 
@@ -57,6 +57,12 @@
 				num = Caster.CharacterData.GetStatValuePermille(StatType, Value);
 			}
 			num = CheckReverseHealCAP(num);
+			Debug.LogWarning((object)"=========================");
+			Debug.LogWarning((object)("bAbleKill : " + flag));
+			Debug.LogWarning((object)("StatType : " + StatType));
+			Debug.LogWarning((object)("Value : " + Value));
+			Debug.LogWarning((object)("nFinalValue : " + num));
+			Debug.LogWarning((object)"=========================");
 			if (Owner.HP + Owner.ShieldHP > num)
 			{
 				num = Owner.AddHP(-num);

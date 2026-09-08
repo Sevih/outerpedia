@@ -1,4 +1,4 @@
-// CBattleManager$$GetImmediatelyDotDamageCapBuffType — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBattleManager$$GetImmediatelyDotDamageCapBuffType — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBattleManager.cs.
 
 	private static BUFF_TYPE GetImmediatelyDotDamageCapBuffType(BUFF_TYPE _eDotBuffType)

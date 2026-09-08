@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.105",
+  "resVersion": "1.11.203",
   "characters": {
     "2000001": {
       "id": "2000001",
@@ -49291,6 +49291,46 @@
           "multiHit": true,
           "maxHitCount": 6,
           "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_1_1",
+          "chain": "2700019_Skill_1",
+          "hit": 1,
+          "damageFactor": 120,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_1_2",
+          "chain": "2700019_Skill_1",
+          "hit": 2,
+          "damageFactor": 120,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_1_3",
+          "chain": "2700019_Skill_1",
+          "hit": 3,
+          "damageFactor": 160,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_1_4",
+          "chain": "2700019_Skill_1",
+          "hit": 4,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 6,
+          "isAdditive": false
         }
       ],
       "clips": [
@@ -49384,6 +49424,26 @@
         {
           "id": "2000019_Skill_2_2",
           "chain": "2000019_Skill_2",
+          "hit": 2,
+          "damageFactor": 600,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_1",
+          "chain": "2700019_Skill_2",
+          "hit": 1,
+          "damageFactor": 400,
+          "damageType": "DT_CUT_KEEP_BIG",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_2",
+          "chain": "2700019_Skill_2",
           "hit": 2,
           "damageFactor": 600,
           "damageType": "DT_CUT_RANDOM",
@@ -49487,6 +49547,66 @@
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_1",
+          "chain": "2700019_Skill_3",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_CUT",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_2",
+          "chain": "2700019_Skill_3",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_CUT",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_3",
+          "chain": "2700019_Skill_3",
+          "hit": 3,
+          "damageFactor": 100,
+          "damageType": "DT_CUT",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_4",
+          "chain": "2700019_Skill_3",
+          "hit": 4,
+          "damageFactor": 50,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_5",
+          "chain": "2700019_Skill_3",
+          "hit": 5,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_3_6",
+          "chain": "2700019_Skill_3",
+          "hit": 6,
+          "damageFactor": 100,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
           "isAdditive": false
         }
       ],
@@ -49652,6 +49772,46 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_1",
+          "chain": "2700019_Skill_4",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_2",
+          "chain": "2700019_Skill_4",
+          "hit": 2,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_3",
+          "chain": "2700019_Skill_4",
+          "hit": 3,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_4",
+          "chain": "2700019_Skill_4",
+          "hit": 4,
+          "damageFactor": 300,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "clips": [
@@ -49744,6 +49904,26 @@
         {
           "id": "2000019_Skill_5_2",
           "chain": "2000019_Skill_5",
+          "hit": 2,
+          "damageFactor": 150,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_5_1",
+          "chain": "2700019_Skill_5",
+          "hit": 1,
+          "damageFactor": 400,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_5_2",
+          "chain": "2700019_Skill_5",
           "hit": 2,
           "damageFactor": 150,
           "damageType": "DT_CUT_RANDOM",
@@ -49900,6 +50080,46 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_1",
+          "chain": "2700019_Skill_4",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_2",
+          "chain": "2700019_Skill_4",
+          "hit": 2,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_3",
+          "chain": "2700019_Skill_4",
+          "hit": 3,
+          "damageFactor": 250,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_4_4",
+          "chain": "2700019_Skill_4",
+          "hit": 4,
+          "damageFactor": 300,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "clips": [
@@ -49998,6 +50218,26 @@
           "multiHit": true,
           "maxHitCount": 4,
           "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_5_1",
+          "chain": "2700019_Skill_5",
+          "hit": 1,
+          "damageFactor": 400,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_5_2",
+          "chain": "2700019_Skill_5",
+          "hit": 2,
+          "damageFactor": 150,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
         }
       ],
       "clips": [
@@ -50086,6 +50326,26 @@
           "multiHit": false,
           "maxHitCount": 0,
           "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_1_Upgrade",
+          "chain": "2700019_Skill_2_1_Upgrade",
+          "hit": 1,
+          "damageFactor": 300,
+          "damageType": "DT_CUT_KEEP_BIG",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_2_Upgrade",
+          "chain": "2700019_Skill_2_2_Upgrade",
+          "hit": 1,
+          "damageFactor": 700,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
         }
       ],
       "clips": [
@@ -50168,6 +50428,26 @@
         {
           "id": "2000019_Skill_2_2_Upgrade",
           "chain": "2000019_Skill_2_2_Upgrade",
+          "hit": 1,
+          "damageFactor": 700,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_1_Upgrade",
+          "chain": "2700019_Skill_2_1_Upgrade",
+          "hit": 1,
+          "damageFactor": 300,
+          "damageType": "DT_CUT_KEEP_BIG",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_2_2_Upgrade",
+          "chain": "2700019_Skill_2_2_Upgrade",
           "hit": 1,
           "damageFactor": 700,
           "damageType": "DT_CUT_RANDOM",
@@ -50286,6 +50566,26 @@
         {
           "id": "2000019_Skill_6_2",
           "chain": "2000019_Skill_6",
+          "hit": 2,
+          "damageFactor": 700,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_6_1",
+          "chain": "2700019_Skill_6",
+          "hit": 1,
+          "damageFactor": 300,
+          "damageType": "DT_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700019_Skill_6_2",
+          "chain": "2700019_Skill_6",
           "hit": 2,
           "damageFactor": 700,
           "damageType": "DT_CUT_RANDOM",

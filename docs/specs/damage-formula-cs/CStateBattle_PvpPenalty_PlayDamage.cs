@@ -1,4 +1,4 @@
-// CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1 — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CStateBattle$$<PvpAttackTeamPenaltyDmg>g__PlayDamage|81_1 — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStateBattle.cs.
 // Le binaire cite fonction locale PlayDamage — généré par le compilateur, ILSpy le replie dans CStateBattle.PvpAttackTeamPenaltyDmg.
 

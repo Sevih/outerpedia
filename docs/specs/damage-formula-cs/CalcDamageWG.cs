@@ -1,4 +1,4 @@
-// CFormula$$CalcDamageWG — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CFormula$$CalcDamageWG — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static int CalcDamageWG(CCharacterBattle _Attacker, CCharacterBattle _Defender, int _nCustomValue = 0)

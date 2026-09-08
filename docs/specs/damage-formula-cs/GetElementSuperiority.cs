@@ -1,4 +1,4 @@
-// CFormula$$GetElementSuperiority — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CFormula$$GetElementSuperiority — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static ELEMENT_SUPERIORITY_TYPE GetElementSuperiority(CHARACTER_ELEMENT_TYPE _eAttackerElement, CHARACTER_ELEMENT_TYPE _eDefenderElement)

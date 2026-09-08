@@ -1,4 +1,4 @@
-// CBattleManager$$ProcessDamageOverTime — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBattleManager$$ProcessDamageOverTime — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBattleManager.cs.
 // Note du manifeste : Chemin du TICK des DoT (§ 12.8 → désassemblage 24/08/2026, déclencheur : le DoT custom BT_DOT_2000092 d'Eternal Bleeding, tick observé sans défense — 2 × 7000 ‰ × Effectiveness fiche).
 

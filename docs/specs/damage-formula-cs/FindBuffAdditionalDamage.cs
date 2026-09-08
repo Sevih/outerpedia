@@ -1,4 +1,4 @@
-// CCharacterBattle$$FindBuffAdditionalDamage — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$FindBuffAdditionalDamage — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	public void FindBuffAdditionalDamage(out int _nDmgRate, CCharacterBattle _TargetCharacter)

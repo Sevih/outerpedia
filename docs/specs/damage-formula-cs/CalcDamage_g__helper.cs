@@ -1,4 +1,4 @@
-// CFormula$$<CalcDamage>g__CalcDamage|17_0 — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CFormula$$<CalcDamage>g__CalcDamage|17_0 — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 // 2 surcharges, dans l'ordre du source.
 // Le binaire cite fonction locale CalcDamage — généré par le compilateur, ILSpy le replie dans CFormula.CalcDamage.

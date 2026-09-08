@@ -1,4 +1,4 @@
-// CCharacterData$$CalcBasicStatHp — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$CalcBasicStatHp — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 // Note du manifeste : Base HP (§ 17.2) — séparée des autres stats dans CalcBasicStats.
 

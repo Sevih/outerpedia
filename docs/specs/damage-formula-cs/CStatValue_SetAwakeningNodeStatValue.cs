@@ -1,4 +1,4 @@
-// CStatValue$$SetAwakeningNodeStatValue — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CStatValue$$SetAwakeningNodeStatValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStatValue.cs.
 
 	public void SetAwakeningNodeStatValue(List<CCharacterAwakeningLevelTemplet> levelTempletList)

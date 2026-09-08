@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.105",
+  "resVersion": "1.11.203",
   "targets": {
     "400101": {
       "id": "400101",
@@ -5498,6 +5498,10 @@
         "Def": {
           "min": 37,
           "max": 1000
+        },
+        "DMGReduceRate": {
+          "min": 0,
+          "max": 100
         },
         "CriticalRate": {
           "min": 100,
@@ -107909,15 +107913,15 @@
           "max": 60
         },
         "Speed": {
-          "min": 125,
-          "max": 205
+          "min": 150,
+          "max": 300
         },
         "Atk": {
-          "min": 213,
+          "min": 1000,
           "max": 6400
         },
         "Def": {
-          "min": 43,
+          "min": 35,
           "max": 1300
         },
         "DMGReduceRate": {
@@ -107934,11 +107938,11 @@
         },
         "BuffChance": {
           "min": 192,
-          "max": 300
+          "max": 350
         },
         "BuffResist": {
           "min": 72,
-          "max": 215
+          "max": 230
         },
         "DamageBoost": {
           "min": 1000,
@@ -107951,14 +107955,24 @@
         "BT_FREEZE",
         "BT_STONE",
         "BT_SILENCE",
-        "BT_AGGRO"
+        "BT_AGGRO",
+        "BT_SEALED",
+        "BT_REMOVE_BUFF",
+        "BT_DOT_BURN",
+        "BT_DOT_CURSE",
+        "BT_DOT_BLEED",
+        "BT_DOT_POISON",
+        "BT_DOT_LIGHTNING",
+        "BT_DOT_2000092",
+        "BT_DOT_PUNISH",
+        "BT_ACTION_GAUGE"
       ],
       "rage": {
-        "trigger": "USER_TURN_COUNT",
+        "trigger": "TURN_COUNT",
         "steps": [
           {
-            "value": 7,
-            "duration": 0
+            "value": 4,
+            "duration": 4
           }
         ],
         "breakBuffIds": ["BID_BREAK_1", "BID_BREAK_2", "BID_BREAK_3"]
@@ -107966,15 +107980,23 @@
       "skills": [
         {
           "slot": 1,
-          "id": "130501"
+          "id": "900121"
         },
         {
           "slot": 2,
-          "id": "130502"
+          "id": "900122"
         },
         {
           "slot": 3,
-          "id": "130503"
+          "id": "900123"
+        },
+        {
+          "slot": 12,
+          "id": "900124"
+        },
+        {
+          "slot": 13,
+          "id": "900125"
         },
         {
           "slot": 14,
@@ -107982,11 +108004,11 @@
         },
         {
           "slot": 15,
-          "id": "130521"
+          "id": "900126"
         },
         {
           "slot": 16,
-          "id": "130522"
+          "id": "900127"
         }
       ]
     },
@@ -228506,6 +228528,146 @@
           "damageFactor": 3150,
           "wgReduce": 0,
           "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "900121": {
+      "id": "900121",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "DOUBLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1450,
+          "wgReduce": 0,
+          "buffIds": ["Singularity_CHI_SKILL01_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "900122": {
+      "id": "900122",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1550,
+          "wgReduce": 0,
+          "buffIds": ["Singularity_CHI_SKILL02_1"],
+          "cool": 4,
+          "startCool": 2
+        }
+      ]
+    },
+    "900123": {
+      "id": "900123",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1750,
+          "wgReduce": 0,
+          "buffIds": [
+            "Singularity_CHI_SKILL03_1",
+            "Singularity_CHI_SKILL03_2",
+            "Singularity_CHI_SKILL03_3"
+          ],
+          "cool": 5,
+          "startCool": 2
+        }
+      ]
+    },
+    "900124": {
+      "id": "900124",
+      "type": "SKT_MONSTER_1",
+      "subType": "PASSIVE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "Singularity_CHI_PASSIVE_1_1",
+            "Singularity_CHI_PASSIVE_1_2",
+            "Singularity_CHI_PASSIVE_1_3",
+            "Singularity_CHI_PASSIVE_1_4"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "900125": {
+      "id": "900125",
+      "type": "SKT_MONSTER_1",
+      "subType": "PASSIVE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "Singularity_Passive_AntiCurse",
+            "Singularity_Passive_AntiTureDmg",
+            "Singularity_CHI_PASSIVE_2_1",
+            "Singularity_CHI_PASSIVE_2_2",
+            "Singularity_CHI_PASSIVE_2_3",
+            "Singularity_CHI_PASSIVE_2_4"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "900126": {
+      "id": "900126",
+      "type": "SKT_RAGE_ENTER1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "Common_Rage_Buff_1",
+            "Common_Rage_Buff_2",
+            "Singularity_Rage_Action_guage",
+            "common_monster_passive_wg1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ]
+    },
+    "900127": {
+      "id": "900127",
+      "type": "SKT_RAGE_FINISH1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 5000,
+          "wgReduce": 0,
+          "buffIds": ["Singularity_CHI_RAGE"],
           "cool": 0,
           "startCool": 0
         }

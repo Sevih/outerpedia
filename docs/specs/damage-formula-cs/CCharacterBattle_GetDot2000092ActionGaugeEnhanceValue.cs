@@ -1,4 +1,4 @@
-// CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$GetDot2000092ActionGaugeEnhanceValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	public int GetDot2000092ActionGaugeEnhanceValue()

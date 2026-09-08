@@ -1,4 +1,4 @@
-// CBuff$$OnCreate — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBuff$$OnCreate — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	public bool OnCreate()
@@ -68,6 +68,12 @@
 				num = Caster.CharacterData.GetStatValuePermille(StatType, Value);
 			}
 			num = CheckReverseHealCAP(num);
+			Debug.LogWarning((object)"=========================");
+			Debug.LogWarning((object)("bAbleKill : " + flag4));
+			Debug.LogWarning((object)("StatType : " + StatType));
+			Debug.LogWarning((object)("Value : " + Value));
+			Debug.LogWarning((object)("nFinalValue : " + num));
+			Debug.LogWarning((object)"=========================");
 			if (Owner.HP + Owner.ShieldHP > num)
 			{
 				Owner.AddHP(-num);

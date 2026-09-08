@@ -1,4 +1,4 @@
-// CBuffSystemManager$$CheckMaxHPEvent — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CBuffSystemManager$$CheckMaxHPEvent — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuffSystemManager.cs.
 // Note du manifeste : Taux MAX_HP par contenu (guilde + titre) — spec § 16.2.
 

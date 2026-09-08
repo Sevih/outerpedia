@@ -1,4 +1,4 @@
-// CCharacterBattle$$AddHP — client Steam 1.4.15 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$AddHP — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	public int AddHP(int _nValue, bool _bHeal = false, bool _bIgnoreUndead = false, bool _bIgnoreHealModifier = false)
