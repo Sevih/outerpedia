@@ -10687,6 +10687,26 @@
         "dungeon": "200312",
         "level": 25,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200400",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200401",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200402",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200404",
+        "level": 27,
+        "hpLines": 10
       }
     ]
   },
@@ -10778,6 +10798,31 @@
         "dungeon": "200312",
         "level": 25,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200400",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200401",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200404",
+        "level": 27,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200405",
+        "level": 27,
+        "hpLines": 10
       }
     ]
   },
@@ -10853,6 +10898,26 @@
       {
         "dungeon": "200107",
         "level": 8,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200402",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200404",
+        "level": 27,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200405",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -10963,6 +11028,31 @@
       {
         "dungeon": "200312",
         "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200400",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200401",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200402",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200404",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -11270,6 +11360,10 @@
       "critical_dmg": {
         "min": 1500,
         "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
       },
       "buff_chance": {
         "min": 16,
@@ -16830,6 +16924,26 @@
         "dungeon": "200312",
         "level": 25,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200401",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200402",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200405",
+        "level": 27,
+        "hpLines": 10
       }
     ]
   },
@@ -16910,6 +17024,21 @@
       {
         "dungeon": "200312",
         "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200400",
+        "level": 25,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200405",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -20067,6 +20196,11 @@
         "dungeon": "200312",
         "level": 25,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200403",
+        "level": 26,
+        "hpLines": 10
       }
     ]
   },
@@ -20143,6 +20277,16 @@
       {
         "dungeon": "200302",
         "level": 20,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200402",
+        "level": 26,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200404",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -37250,6 +37394,26 @@
         "dungeon": "200304",
         "level": 21,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200407",
+        "level": 27,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200408",
+        "level": 28,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200409",
+        "level": 29,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200412",
+        "level": 30,
+        "hpLines": 10
       }
     ]
   },
@@ -37367,6 +37531,11 @@
         "dungeon": "200106",
         "level": 7,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200407",
+        "level": 27,
+        "hpLines": 10
       }
     ]
   },
@@ -37479,6 +37648,26 @@
         "dungeon": "200304",
         "level": 21,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200407",
+        "level": 27,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200408",
+        "level": 28,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200409",
+        "level": 29,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200412",
+        "level": 30,
+        "hpLines": 10
       }
     ]
   },
@@ -37587,6 +37776,16 @@
       {
         "dungeon": "200304",
         "level": 21,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200407",
+        "level": 27,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200408",
+        "level": 28,
         "hpLines": 10
       }
     ]
@@ -38690,6 +38889,16 @@
         "dungeon": "200304",
         "level": 21,
         "hpLines": 10
+      },
+      {
+        "dungeon": "200409",
+        "level": 29,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200412",
+        "level": 30,
+        "hpLines": 10
       }
     ]
   },
@@ -38772,6 +38981,21 @@
         "dungeon": "120904",
         "level": 92,
         "hpLines": 50
+      },
+      {
+        "dungeon": "200408",
+        "level": 28,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200409",
+        "level": 29,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200412",
+        "level": 30,
+        "hpLines": 10
       }
     ]
   },
@@ -39406,6 +39630,11 @@
       {
         "dungeon": "200304",
         "level": 21,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "200407",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -77831,6 +78060,219 @@
       }
     ]
   },
+  "4201805": {
+    "id": "4201805",
+    "name": {
+      "en": "Idith",
+      "jp": "イディス",
+      "kr": "이디스",
+      "zh": "伊蒂斯"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "earth",
+    "rarity": 3,
+    "icon": "2000010",
+    "skills": ["150011", "150012", "150013"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Honorable Knight",
+      "jp": "誠実な貴族騎士",
+      "kr": "긍지 높은 기사",
+      "zh": "充满荣誉感的骑士"
+    },
+    "subClass": "bruiser",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_AGGRO"],
+    "immuneTooltips": ["32"],
+    "spawns": [
+      {
+        "dungeon": "200405",
+        "level": 27,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4202021": {
+    "id": "4202021",
+    "name": {
+      "en": "Nightwatch Waraxe-Wielder",
+      "jp": "騎士団兵〈斧〉",
+      "kr": "기사단 워액스",
+      "zh": "骑士团战斧兵"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "water",
+    "rarity": 2,
+    "icon": "4002021",
+    "skills": ["110092", "110093", "110396"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "200400",
+        "level": 25,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4202022": {
+    "id": "4202022",
+    "name": {
+      "en": "Nightwatch Ballista",
+      "jp": "騎士団兵〈バリスタ〉",
+      "kr": "기사단 발리스타",
+      "zh": "骑士团弩兵"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "water",
+    "rarity": 2,
+    "icon": "4002022",
+    "skills": ["110094", "110095", "110396"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "200401",
+        "level": 25,
+        "hpLines": 10
+      }
+    ]
+  },
   "4202061": {
     "id": "4202061",
     "name": {
@@ -79242,6 +79684,77 @@
       {
         "dungeon": "200314",
         "level": 25,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4203806": {
+    "id": "4203806",
+    "name": {
+      "en": "Sofia",
+      "jp": "ソフィア",
+      "kr": "소피아",
+      "zh": "索菲雅"
+    },
+    "type": "monster",
+    "race": "alien",
+    "class": "striker",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2000006",
+    "skills": ["150001", "150002"],
+    "stats": {
+      "hp": {
+        "min": 160,
+        "max": 23920
+      },
+      "atk": {
+        "min": 51,
+        "max": 4651
+      },
+      "def": {
+        "min": 37,
+        "max": 1000
+      },
+      "speed": {
+        "min": 90,
+        "max": 90
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 70
+      },
+      "buff_resist": {
+        "min": 33,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "A Sophisticated Lady",
+      "jp": "優美な貴族騎士",
+      "kr": "우아한 귀부인",
+      "zh": "优雅贵妇"
+    },
+    "subClass": "attacker",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "200405",
+        "level": 27,
         "hpLines": 10
       }
     ]
@@ -84540,6 +85053,83 @@
       }
     ]
   },
+  "4301805": {
+    "id": "4301805",
+    "name": {
+      "en": "Idith",
+      "jp": "イディス",
+      "kr": "이디스",
+      "zh": "伊蒂斯"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "earth",
+    "rarity": 3,
+    "icon": "2000010",
+    "skills": ["155323", "155324", "155325", "155326"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "nickname": {
+      "en": "Honorable Knight",
+      "jp": "誠実な貴族騎士",
+      "kr": "긍지 높은 기사",
+      "zh": "充满荣誉感的骑士"
+    },
+    "subClass": "bruiser",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "32"],
+    "spawns": [
+      {
+        "dungeon": "210406",
+        "level": 77,
+        "hpLines": 10
+      }
+    ]
+  },
   "4302071": {
     "id": "4302071",
     "name": {
@@ -84802,6 +85392,77 @@
       {
         "dungeon": "210310",
         "level": 75,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4303806": {
+    "id": "4303806",
+    "name": {
+      "en": "Sofia",
+      "jp": "ソフィア",
+      "kr": "소피아",
+      "zh": "索菲雅"
+    },
+    "type": "monster",
+    "race": "alien",
+    "class": "striker",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2000006",
+    "skills": ["150001", "150002"],
+    "stats": {
+      "hp": {
+        "min": 218,
+        "max": 32531
+      },
+      "atk": {
+        "min": 64,
+        "max": 5814
+      },
+      "def": {
+        "min": 37,
+        "max": 1000
+      },
+      "speed": {
+        "min": 90,
+        "max": 90
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 21,
+        "max": 63
+      },
+      "buff_resist": {
+        "min": 33,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "A Sophisticated Lady",
+      "jp": "優美な貴族騎士",
+      "kr": "우아한 귀부인",
+      "zh": "优雅贵妇"
+    },
+    "subClass": "attacker",
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "210406",
+        "level": 77,
         "hpLines": 10
       }
     ]
@@ -89207,6 +89868,80 @@
       {
         "dungeon": "140209",
         "level": 177,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4403807": {
+    "id": "4403807",
+    "name": {
+      "en": "Veronica",
+      "jp": "ヴェロニカ",
+      "kr": "베로니카",
+      "zh": "维罗妮卡"
+    },
+    "type": "area_boss",
+    "race": "human",
+    "class": "defender",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2010037",
+    "skills": ["150315", "150319", "150320"],
+    "stats": {
+      "hp": {
+        "min": 1240,
+        "max": 73600
+      },
+      "atk": {
+        "min": 180,
+        "max": 6064
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 15,
+        "max": 40
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 70
+      },
+      "buff_resist": {
+        "min": 33,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "Invincible Knight Commander",
+      "jp": "天下無敵の騎士団長",
+      "kr": "무적의 기사단장",
+      "zh": "无敌的骑士团长"
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "200412",
+        "level": 30,
         "hpLines": 10
       }
     ]
@@ -117279,6 +118014,82 @@
     "statBuffImmune": ["ST_SPEED"],
     "immuneTooltips": ["104", "34", "33", "35", "26"]
   },
+  "4503807": {
+    "id": "4503807",
+    "name": {
+      "en": "Veronica",
+      "jp": "ヴェロニカ",
+      "kr": "베로니카",
+      "zh": "维罗妮卡"
+    },
+    "type": "area_boss",
+    "race": "human",
+    "class": "defender",
+    "element": "water",
+    "rarity": 3,
+    "icon": "2010037",
+    "skills": ["155327", "155328", "155329", "155330"],
+    "stats": {
+      "hp": {
+        "min": 1686,
+        "max": 100096
+      },
+      "atk": {
+        "min": 225,
+        "max": 7580
+      },
+      "def": {
+        "min": 44,
+        "max": 1199
+      },
+      "speed": {
+        "min": 110,
+        "max": 165
+      },
+      "guard": {
+        "min": 20,
+        "max": 50
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 70
+      },
+      "buff_resist": {
+        "min": 33,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "Invincible Knight Commander",
+      "jp": "天下無敵の騎士団長",
+      "kr": "무적의 기사단장",
+      "zh": "无敌的骑士团长"
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN", "BT_AGGRO"],
+    "immuneTooltips": ["104", "34", "33", "35", "32"],
+    "spawns": [
+      {
+        "dungeon": "210410",
+        "level": 79,
+        "hpLines": 10
+      }
+    ]
+  },
   "4510000": {
     "id": "4510000",
     "name": {
@@ -123891,6 +124702,76 @@
     "aiType": "attack",
     "pushBack": true
   },
+  "4544006": {
+    "id": "4544006",
+    "name": {
+      "en": "Vlada Assault Suit",
+      "jp": "重装機兵ヴラダ",
+      "kr": "블라다 중장기병",
+      "zh": "布拉达重骑兵"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "mage",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044006",
+    "skills": ["132701", "132702", "132703"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN"],
+    "immuneTooltips": ["104", "34", "33", "35"],
+    "spawns": [
+      {
+        "dungeon": "200409",
+        "level": 29,
+        "hpLines": 10
+      }
+    ]
+  },
   "4548001": {
     "id": "4548001",
     "name": {
@@ -128641,6 +129522,76 @@
     "aiType": "attack",
     "pushBack": true
   },
+  "4644006": {
+    "id": "4644006",
+    "name": {
+      "en": "Vlada Assault Suit",
+      "jp": "重装機兵ヴラダ",
+      "kr": "블라다 중장기병",
+      "zh": "布拉达重骑兵"
+    },
+    "type": "boss",
+    "race": "automaton",
+    "class": "mage",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044006",
+    "skills": ["132701", "132702", "132703"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": false,
+    "pushUp": false,
+    "buffImmune": ["BT_GOLDEN_CURSE", "BT_FREEZE", "BT_STONE", "BT_STUN"],
+    "immuneTooltips": ["104", "34", "33", "35"],
+    "spawns": [
+      {
+        "dungeon": "210409",
+        "level": 79,
+        "hpLines": 10
+      }
+    ]
+  },
   "4712071": {
     "id": "4712071",
     "name": {
@@ -128853,6 +129804,140 @@
       "4104001",
       "410400111",
       "51000019"
+    ]
+  },
+  "4744001": {
+    "id": "4744001",
+    "name": {
+      "en": "Core Guardian",
+      "jp": "コアガーディアン",
+      "kr": "코어 가디언",
+      "zh": "核心守护者"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044001",
+    "skills": ["130002", "130003", "130004"],
+    "stats": {
+      "hp": {
+        "min": 372,
+        "max": 55200
+      },
+      "atk": {
+        "min": 120,
+        "max": 5176
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 10,
+        "max": 35
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 26,
+        "max": 80
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "spawns": [
+      {
+        "dungeon": "200408",
+        "level": 28,
+        "hpLines": 10
+      }
+    ]
+  },
+  "4844001": {
+    "id": "4844001",
+    "name": {
+      "en": "Core Guardian",
+      "jp": "コアガーディアン",
+      "kr": "코어 가디언",
+      "zh": "核心守护者"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "fire",
+    "rarity": 3,
+    "icon": "4044001",
+    "skills": ["130002", "130003", "130004"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "spawns": [
+      {
+        "dungeon": "210408",
+        "level": 78,
+        "hpLines": 10
+      }
     ]
   },
   "4900001": {
@@ -161818,7 +162903,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26", "48"]
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "48", "62"]
   },
   "40040070": {
     "id": "40040070",
@@ -161900,7 +162985,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"],
     "linkedTo": ["4086031"]
   },
   "40040080": {
@@ -161983,7 +163068,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"]
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"]
   },
   "40103001": {
     "id": "40103001",
@@ -202020,23 +203105,23 @@
     "element": "earth",
     "rarity": 3,
     "icon": "4034002",
-    "skills": ["130501", "130502", "130503", "910001", "130521", "130522"],
+    "skills": ["900121", "900122", "900123", "900124", "900125", "910001", "900126", "900127"],
     "stats": {
       "hp": {
         "min": 100000,
         "max": 100000
       },
       "atk": {
-        "min": 213,
+        "min": 1000,
         "max": 6400
       },
       "def": {
-        "min": 43,
+        "min": 35,
         "max": 1300
       },
       "speed": {
-        "min": 125,
-        "max": 205
+        "min": 150,
+        "max": 300
       },
       "guard": {
         "min": 50,
@@ -202060,16 +203145,33 @@
       },
       "buff_chance": {
         "min": 192,
-        "max": 300
+        "max": 350
       },
       "buff_resist": {
         "min": 72,
-        "max": 215
+        "max": 230
       }
     },
     "aiType": "attack",
-    "buffImmune": ["BT_GOLDEN_CURSE", "BT_STUN", "BT_FREEZE", "BT_STONE", "BT_SILENCE", "BT_AGGRO"],
-    "immuneTooltips": ["104", "34", "35", "37", "32", "33"],
+    "buffImmune": [
+      "BT_GOLDEN_CURSE",
+      "BT_STUN",
+      "BT_FREEZE",
+      "BT_STONE",
+      "BT_SILENCE",
+      "BT_AGGRO",
+      "BT_SEALED",
+      "BT_REMOVE_BUFF",
+      "BT_DOT_BURN",
+      "BT_DOT_CURSE",
+      "BT_DOT_BLEED",
+      "BT_DOT_POISON",
+      "BT_DOT_LIGHTNING",
+      "BT_DOT_2000092",
+      "BT_DOT_PUNISH",
+      "BT_ACTION_GAUGE"
+    ],
+    "immuneTooltips": ["91", "104", "34", "35", "37", "32", "33", "39", "48", "62"],
     "spawns": [
       {
         "dungeon": "75000107",
@@ -202078,10 +203180,11 @@
       }
     ],
     "rage": {
-      "trigger": "user_turn_count",
+      "trigger": "turn_count",
       "steps": [
         {
-          "value": 7
+          "value": 4,
+          "duration": 4
         }
       ]
     }
@@ -202426,7 +203529,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"],
     "spawns": [
       {
         "dungeon": "75000111",
@@ -202523,7 +203626,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"],
     "spawns": [
       {
         "dungeon": "75000112",
@@ -202621,7 +203724,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26", "48"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "48", "62"],
     "spawns": [
       {
         "dungeon": "75000113",
@@ -202718,7 +203821,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"],
     "spawns": [
       {
         "dungeon": "75000114",
@@ -202815,7 +203918,7 @@
       "BT_ACTION_GAUGE"
     ],
     "statBuffImmune": ["ST_SPEED"],
-    "immuneTooltips": ["104", "34", "33", "35", "37", "62", "26"],
+    "immuneTooltips": ["104", "34", "33", "35", "37", "26", "62"],
     "spawns": [
       {
         "dungeon": "75000115",
@@ -244894,6 +245997,26 @@
         "dungeon": "210308",
         "level": 74,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210401",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210402",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210403",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210405",
+        "level": 77,
+        "hpLines": 10
       }
     ]
   },
@@ -245093,6 +246216,31 @@
       {
         "dungeon": "210308",
         "level": 74,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210401",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210402",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210405",
+        "level": 77,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210406",
+        "level": 77,
         "hpLines": 10
       }
     ]
@@ -245425,6 +246573,26 @@
         "dungeon": "210107",
         "level": 68,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210403",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210405",
+        "level": 77,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210406",
+        "level": 77,
+        "hpLines": 10
       }
     ]
   },
@@ -245656,6 +246824,31 @@
       {
         "dungeon": "210308",
         "level": 74,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210401",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210402",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210403",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210405",
+        "level": 77,
         "hpLines": 10
       }
     ]
@@ -248857,6 +250050,26 @@
         "dungeon": "210308",
         "level": 74,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210402",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210403",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210406",
+        "level": 77,
+        "hpLines": 10
       }
     ]
   },
@@ -249148,6 +250361,21 @@
       {
         "dungeon": "210308",
         "level": 74,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210401",
+        "level": 75,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210406",
+        "level": 77,
         "hpLines": 10
       }
     ]
@@ -251930,6 +253158,11 @@
         "dungeon": "210308",
         "level": 74,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210404",
+        "level": 76,
+        "hpLines": 10
       }
     ]
   },
@@ -252226,6 +253459,16 @@
       {
         "dungeon": "210301",
         "level": 72,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210403",
+        "level": 76,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210405",
+        "level": 77,
         "hpLines": 10
       }
     ]
@@ -275470,6 +276713,26 @@
         "dungeon": "210303",
         "level": 73,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210407",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210408",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210409",
+        "level": 79,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210410",
+        "level": 79,
+        "hpLines": 10
       }
     ]
   },
@@ -275738,6 +277001,11 @@
         "dungeon": "210106",
         "level": 67,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210407",
+        "level": 78,
+        "hpLines": 10
       }
     ]
   },
@@ -275948,6 +277216,26 @@
         "dungeon": "210303",
         "level": 73,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210407",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210408",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210409",
+        "level": 79,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210410",
+        "level": 79,
+        "hpLines": 10
       }
     ]
   },
@@ -276093,6 +277381,16 @@
       {
         "dungeon": "210303",
         "level": 73,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210407",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210408",
+        "level": 78,
         "hpLines": 10
       }
     ]
@@ -278037,6 +279335,16 @@
         "dungeon": "210303",
         "level": 73,
         "hpLines": 10
+      },
+      {
+        "dungeon": "210409",
+        "level": 79,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210410",
+        "level": 79,
+        "hpLines": 10
       }
     ]
   },
@@ -278188,6 +279496,21 @@
         "dungeon": "121904",
         "level": 107,
         "hpLines": 50
+      },
+      {
+        "dungeon": "210408",
+        "level": 78,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210409",
+        "level": 79,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210410",
+        "level": 79,
+        "hpLines": 10
       }
     ]
   },
@@ -280707,6 +282030,11 @@
       {
         "dungeon": "210303",
         "level": 73,
+        "hpLines": 10
+      },
+      {
+        "dungeon": "210407",
+        "level": 78,
         "hpLines": 10
       }
     ]
@@ -304609,6 +305937,142 @@
       {
         "dungeon": "40101045",
         "level": 64
+      }
+    ]
+  },
+  "410202111": {
+    "id": "410202111",
+    "name": {
+      "en": "Nightwatch Waraxe-Wielder",
+      "jp": "騎士団兵〈斧〉",
+      "kr": "기사단 워액스",
+      "zh": "骑士团战斧兵"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "striker",
+    "element": "water",
+    "rarity": 3,
+    "icon": "4002021",
+    "skills": ["110092", "110093", "110396"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "210401",
+        "level": 75,
+        "hpLines": 10
+      }
+    ]
+  },
+  "410202211": {
+    "id": "410202211",
+    "name": {
+      "en": "Nightwatch Ballista",
+      "jp": "騎士団兵〈バリスタ〉",
+      "kr": "기사단 발리스타",
+      "zh": "骑士团弩兵"
+    },
+    "type": "boss",
+    "race": "alien",
+    "class": "ranger",
+    "element": "water",
+    "rarity": 3,
+    "icon": "4002022",
+    "skills": ["110094", "110095", "110396"],
+    "stats": {
+      "hp": {
+        "min": 506,
+        "max": 75072
+      },
+      "atk": {
+        "min": 150,
+        "max": 6470
+      },
+      "def": {
+        "min": 44,
+        "max": 1200
+      },
+      "speed": {
+        "min": 105,
+        "max": 160
+      },
+      "guard": {
+        "min": 15,
+        "max": 45
+      },
+      "critical_rate": {
+        "min": 100,
+        "max": 100
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "dmg_reduce": {
+        "min": 0,
+        "max": 100
+      },
+      "buff_chance": {
+        "min": 23,
+        "max": 72
+      },
+      "buff_resist": {
+        "min": 53,
+        "max": 160
+      }
+    },
+    "aiType": "attack",
+    "pushBack": true,
+    "pushUp": true,
+    "spawns": [
+      {
+        "dungeon": "210402",
+        "level": 75,
+        "hpLines": 10
       }
     ]
   },

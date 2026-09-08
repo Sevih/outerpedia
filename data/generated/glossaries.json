@@ -3938,10 +3938,10 @@
         "zh": "龙之恐惧"
       },
       "desc": {
-        "en": "",
-        "jp": "",
-        "kr": "",
-        "zh": ""
+        "en": "Attack decreases by 50% under the dragon's overwhelming aura.",
+        "jp": "竜の気迫に圧され、対象の攻撃力が50%Downする。",
+        "kr": "용의 기운에 눌려 공격력이 50% 감소합니다.",
+        "zh": "在龙之气势压制下，攻击力降低50%。"
       },
       "icon": "IG_Buff_Stat_Atk_Interruption_D",
       "isDebuff": true,

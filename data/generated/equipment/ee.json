@@ -3180,6 +3180,33 @@
       }
     ]
   },
+  "2000122": {
+    "name": {
+      "en": "Astraea",
+      "jp": "アストライア",
+      "kr": "아스트라이아",
+      "zh": "阿斯特赖亚"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000122",
+    "craftable": false,
+    "character": "2000122",
+    "trustLevel": 10,
+    "options": ["2000122"],
+    "passives": [
+      {
+        "id": "2000122",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100122",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2000129": {
     "name": {
       "en": "Original Sin",
@@ -3256,6 +3283,33 @@
       },
       {
         "id": "2710005",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
+  "2700019": {
+    "name": {
+      "en": "Ame-no-Murakumo",
+      "jp": "天叢雲剣",
+      "kr": "천총운검",
+      "zh": "天丛云剑"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700019",
+    "craftable": false,
+    "character": "2700019",
+    "trustLevel": 10,
+    "options": ["2700019"],
+    "passives": [
+      {
+        "id": "2700019",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710019",
         "level": 10,
         "isAdd": true
       }

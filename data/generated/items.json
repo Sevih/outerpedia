@@ -4043,6 +4043,27 @@
     "star": 0,
     "characterLimit": "2000129"
   },
+  "23045": {
+    "kind": "item",
+    "name": {
+      "en": "Oath with Titia",
+      "jp": "ティティアとの誓約",
+      "kr": "티티아와의 서약",
+      "zh": "与蒂蒂亚之约"
+    },
+    "desc": {
+      "en": "A token that forges an eternal bond with [Titia].\\nUse to gain enough EXP (170,000) to raise [Titia]'s Affinity to Lv.10 at once.\\nIf Affinity is already maxed, this item can be sold for 300 Ether (Free).",
+      "jp": "【ティティア】との絆をより深めることができる証票。\\n使用で親密度を一度にLv.10まで上昇させる分の経験値(170,000)を付与。\\n既に最大なら300無償エーテルで売却可能。",
+      "kr": "[티티아]와 영원한 애정 관계를 구축할 수 있는 증표.\\n사용 시 [티티아]의 애정도를 한번에 10LV까지 성장 시킬 수 있는 분량의 경험치 (170,000) 를 제공합니다.\\n이미 완벽한 애정 관계가 구축되신 경우, 해당 아이템을 300 무료 에테르로 판매하실 수 있습니다.",
+      "zh": "与【蒂蒂亚】建立永恒关系的凭证。\\n使用后提供可将亲密度一次提升至Lv.10的经验值(170,000)。\\n若已达最大，则可出售换取300无偿以太。"
+    },
+    "icon": "TI_present_Max_Public",
+    "grade": "unique",
+    "type": "present",
+    "subType": "present_max",
+    "star": 0,
+    "characterLimit": "2000122"
+  },
   "24001": {
     "kind": "item",
     "name": {
@@ -15811,6 +15832,26 @@
     "subType": "box_type_random",
     "star": 0
   },
+  "51000": {
+    "kind": "item",
+    "name": {
+      "en": "Limit Break Memory [Resonance Rin]",
+      "jp": "限界突破メモリー [レゾナンス・リン]",
+      "kr": "한계 돌파 메모리 [레조넌스 린]",
+      "zh": "极限突破记忆[共鸣 琳]"
+    },
+    "desc": {
+      "en": "Obtain Resonance Rin's Limit Break Factor.",
+      "jp": "レゾナンス・リンの限界突破因子を獲得します。",
+      "kr": "레조넌스 린의 한계 돌파 인자를 얻습니다.",
+      "zh": "获得共鸣 琳的极限突破因子。"
+    },
+    "icon": "TI_CharacterCard_07_W",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_char_break_piece",
+    "star": 0
+  },
   "60001": {
     "kind": "item",
     "name": {
@@ -19925,6 +19966,27 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000129",
+    "source": "shop"
+  },
+  "COSTUME_105": {
+    "kind": "costume",
+    "name": {
+      "en": "Noble Justice Titia",
+      "jp": "高潔なる正義・ティティア",
+      "kr": "고결한 정의 티티아",
+      "zh": "高洁正义·缇缇娅"
+    },
+    "desc": {
+      "en": "A costume that [Titia] can equip.",
+      "jp": "【ティティア】のスキンです。\\nスキンは【仲間】→【スキン】で装備できます。",
+      "kr": "[티티아]가 착용할 수 있는 코스튬입니다.",
+      "zh": "【蒂蒂亚】可穿戴的皮肤。"
+    },
+    "icon": "TI_Costume_Clothes_2000122_02",
+    "grade": "rare",
+    "type": "costume",
+    "star": 0,
+    "characterId": "2000122",
     "source": "battlepass"
   },
   "COSTUME_11": {
@@ -20260,7 +20322,8 @@
     "grade": "normal",
     "type": "costume",
     "star": 0,
-    "characterId": "2000056"
+    "characterId": "2000056",
+    "source": "event_shop"
   },
   "COSTUME_26": {
     "kind": "costume",
@@ -20406,7 +20469,8 @@
     "grade": "normal",
     "type": "costume",
     "star": 0,
-    "characterId": "2000009"
+    "characterId": "2000009",
+    "source": "event_shop"
   },
   "COSTUME_32": {
     "kind": "costume",
@@ -20696,7 +20760,7 @@
       "zh": "【黛安】可穿戴的皮肤。"
     },
     "icon": "TI_Costume_Clothes_2000074_02",
-    "grade": "rare",
+    "grade": "normal",
     "type": "costume",
     "star": 0,
     "characterId": "2000074",
@@ -20909,7 +20973,8 @@
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000087"
+    "characterId": "2000087",
+    "source": "event_shop"
   },
   "COSTUME_54": {
     "kind": "costume",
@@ -21181,7 +21246,8 @@
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000084"
+    "characterId": "2000084",
+    "source": "event_shop"
   },
   "COSTUME_66": {
     "kind": "costume",
@@ -21201,7 +21267,8 @@
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000001"
+    "characterId": "2000001",
+    "source": "shop"
   },
   "COSTUME_67": {
     "kind": "costume",
@@ -21306,7 +21373,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000075",
-    "source": "shop"
+    "source": "event_mission"
   },
   "COSTUME_71": {
     "kind": "costume",
@@ -21327,7 +21394,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000061",
-    "source": "event_shop"
+    "source": "event_attendence"
   },
   "COSTUME_72": {
     "kind": "costume",
@@ -21348,7 +21415,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000074",
-    "source": "shop"
+    "source": "package_shop"
   },
   "COSTUME_73": {
     "kind": "costume",
@@ -21577,7 +21644,7 @@
     "type": "costume",
     "star": 0,
     "characterId": "2000090",
-    "source": "shop"
+    "source": "package_shop"
   },
   "COSTUME_83": {
     "kind": "costume",
@@ -21864,8 +21931,7 @@
     "grade": "rare",
     "type": "costume",
     "star": 0,
-    "characterId": "2000114",
-    "source": "shop"
+    "characterId": "2000114"
   },
   "COSTUME_96": {
     "kind": "costume",

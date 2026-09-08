@@ -40762,9 +40762,8 @@
     "stage": 8,
     "reward": "210308",
     "adv": {
-      "atk": -737,
-      "def": 4,
-      "hp": -616
+      "atk": -609,
+      "hp": -372
     }
   },
   "210309": {
@@ -40847,6 +40846,231 @@
       "atk": -737,
       "def": 4,
       "hp": -616
+    }
+  },
+  "210401": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Stealth Action",
+      "jp": "潜入アクション",
+      "kr": "잠입 액션",
+      "zh": "潜入行动"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400102111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1
+      },
+      {
+        "id": "400102211",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400102111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400202211",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "410202111",
+        "level": 75,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102411",
+        "level": 75,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 1,
+    "reward": "210401",
+    "adv": {
+      "atk": -737,
+      "def": 4,
+      "hp": -616
+    }
+  },
+  "210404": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Where's the Core?",
+      "jp": "コアはどこに？",
+      "kr": "코어는 어디에?",
+      "zh": "核心在哪里？"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400202111",
+        "level": 76,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400102311",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400202211",
+        "level": 76,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "400102211",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400302111",
+        "level": 76,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102211",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      },
+      {
+        "id": "400102411",
+        "level": 76,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 4,
+    "reward": "210404",
+    "adv": {
+      "atk": -736,
+      "hp": -603
+    }
+  },
+  "210406": {
+    "mode": "normal_hard",
+    "name": {
+      "en": "Thought I Was a Saint?",
+      "jp": "聖者だと思った？",
+      "kr": "성자인 줄 알았어?",
+      "zh": "以为我是圣者？"
+    },
+    "area": {
+      "en": "Everyone's Wish",
+      "jp": "みんなの願い",
+      "kr": "모두의 소원",
+      "zh": "大家的愿望"
+    },
+    "monsters": [
+      {
+        "id": "400202111",
+        "level": 77,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 1
+      },
+      {
+        "id": "400102311",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 1,
+        "count": 2
+      },
+      {
+        "id": "400102211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 2,
+        "count": 2
+      },
+      {
+        "id": "400202211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 2
+      },
+      {
+        "id": "4301805",
+        "level": 77,
+        "hpLines": 10,
+        "role": "boss",
+        "wave": 3
+      },
+      {
+        "id": "400102211",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3,
+        "count": 2
+      },
+      {
+        "id": "4303806",
+        "level": 77,
+        "hpLines": 10,
+        "role": "add",
+        "wave": 3
+      }
+    ],
+    "season": 1,
+    "episode": 4,
+    "stage": 6,
+    "reward": "210406",
+    "adv": {
+      "atk": -741,
+      "hp": -591
     }
   },
   "40101001": {

@@ -34730,6 +34730,1899 @@
       }
     ]
   },
+  "1951": {
+    "id": "1951",
+    "name": {
+      "en": "Moonfall",
+      "jp": "落月",
+      "kr": "낙월",
+      "zh": "落月"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1050,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1150,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "damageFactor": 1250,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "damageFactor": 1350,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "damageFactor": 1450,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and increases all allies' <color=#28d9ed>Critical Damage</color> by <color=#28d9ed>20%</color>. (Stacks up to 3 times)",
+      "jp": "敵単体にダメージを与え、味方全体の<color=#28d9ed>会心ダメージ</color>を<color=#28d9ed>20%</color>UPさせる。(最大3回累積)",
+      "kr": "적을 공격하고 아군 전체의 <color=#28d9ed>치명 피해</color>를 <color=#28d9ed>20%</color> 증가시킵니다.(최대 3회 누적)",
+      "zh": "攻击敌人，并使我方全体的<color=#28d9ed>暴击伤害</color>提升<color=#28d9ed>20%</color>。（最多累计3次）"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_2000019",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2700019_1_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
+        "caller": "first"
+      }
+    ]
+  },
+  "1952": {
+    "id": "1952",
+    "name": {
+      "en": "Ittō Zangetsu",
+      "jp": "一刀 - 斬月",
+      "kr": "일도 - 참월",
+      "zh": "一刀 - 斩月"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1250,
+        "cool": 4,
+        "startCool": 4,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_2_2": {
+            "c": "100%",
+            "v": "1"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        },
+        "tooltips": ["84", "67"]
+      },
+      {
+        "level": 2,
+        "damageFactor": 1350,
+        "cool": 4,
+        "startCool": 4,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_2_2": {
+            "c": "100%",
+            "v": "1"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        },
+        "tooltips": ["84", "67"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "damageFactor": 1350,
+        "cool": 3,
+        "startCool": 3,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_2_2": {
+            "c": "100%",
+            "v": "1"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        },
+        "tooltips": ["84", "67"],
+        "upgrades": [
+          {
+            "en": "-1 turn Skill Cooldown",
+            "jp": "スキルターン-1ターン",
+            "kr": "스킬 쿨타임 -1턴",
+            "zh": "冷却时间-1回合"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "damageFactor": 1450,
+        "cool": 3,
+        "startCool": 3,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_2_2": {
+            "c": "100%",
+            "v": "1"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        },
+        "tooltips": ["84", "67"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "damageFactor": 1600,
+        "cool": 3,
+        "startCool": 3,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_2_2": {
+            "c": "100%",
+            "v": "1"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        },
+        "tooltips": ["84", "67"],
+        "upgrades": [
+          {
+            "en": "+15% damage",
+            "jp": "ダメージ+15%",
+            "kr": "피해량 +15%",
+            "zh": "伤害量+15%"
+          }
+        ]
+      }
+    ],
+    "desc": {
+      "en": "Attacks all enemies.\\nResets this skill's cooldown if the caster has a buff.\\nReduces the cooldown of <color=#28d9ed>The One True Path of the Sword</color> by <color=#28d9ed>1 turn</color>.\\nAfter attacking, increases the caster's <color=#28d9ed>Attack</color> by <color=#28d9ed>15%</color>. (Stacks up to 3 times)",
+      "jp": "敵全体にダメージを与える。\\nこのスキルは強化効果を保有している場合、スキルターンが初期化される。\\n<color=#28d9ed>【唯一の剣筋】</color>のスキルターンが<color=#28d9ed>1ターン</color>減少する。\\n攻撃後、自分の<color=#28d9ed>攻撃力</color>を<color=#28d9ed>15%</color>UPさせる。(最大3回累積)",
+      "kr": "적 전체를 공격합니다.\\n이 스킬은 강화 효과 보유 시 쿨타임이 초기화됩니다.\\n<color=#28d9ed>단 하나의 검로</color>의 쿨타임이 <color=#28d9ed>1턴</color> 감소합니다.\\n공격 후 자신의 <color=#28d9ed>공격력</color>을 <color=#28d9ed>15%</color> 증가시킵니다.(최대 3회 누적)",
+      "zh": "攻击敌方全体。\\n本技能在持有增益效果时，冷却时间将被重置。\\n<color=#28d9ed>唯一剑路</color>的冷却时间减少<color=#28d9ed>1回合</color>。\\n攻击后使自身的<color=#28d9ed>攻击力</color>提升<color=#28d9ed>15%</color>。（最多累计3次）"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Second_2000019",
+    "requireAP": 80,
+    "burstAP": [80, 120, 160],
+    "effects": [
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL2_CHARGE",
+        "target": "me",
+        "buff": "2700019_2_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE",
+        "caller": "second"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2700019_2_2",
+        "label": "SYS_BUFF_COOLTIME_REDUCE",
+        "caller": "second"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_2_4",
+        "stat": "atk",
+        "mode": "up",
+        "label": "SYS_BUFF_ATTACK_UP",
+        "caller": "second"
+      }
+    ]
+  },
+  "1953": {
+    "id": "1953",
+    "name": {
+      "en": "The One True Path of the Sword",
+      "jp": "唯一の剣筋",
+      "kr": "단 하나의 검로",
+      "zh": "唯一剑路"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1450,
+        "cool": 5,
+        "startCool": 5,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_3_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2700019_3_2": {
+            "c": "100%",
+            "v": "100%"
+          }
+        },
+        "tooltips": ["8", "61"],
+        "desc": {
+          "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
+          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
+          "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1550,
+        "cool": 5,
+        "startCool": 5,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_3_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2700019_3_2": {
+            "c": "100%",
+            "v": "100%"
+          }
+        },
+        "tooltips": ["8", "61"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ],
+        "desc": {
+          "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
+          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
+          "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1650,
+        "cool": 4,
+        "startCool": 4,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_3_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2700019_3_2": {
+            "c": "100%",
+            "v": "100%"
+          }
+        },
+        "tooltips": ["8", "61"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "-1 turn Skill Cooldown",
+            "jp": "スキルターン-1ターン",
+            "kr": "스킬 쿨타임 -1턴",
+            "zh": "冷却时间-1回合"
+          }
+        ],
+        "desc": {
+          "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
+          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
+          "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1800,
+        "cool": 4,
+        "startCool": 4,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_3_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2700019_3_2": {
+            "c": "100%",
+            "v": "100%"
+          }
+        },
+        "tooltips": ["8", "61"],
+        "upgrades": [
+          {
+            "en": "+15% damage",
+            "jp": "ダメージ+15%",
+            "kr": "피해량 +15%",
+            "zh": "伤害量+15%"
+          },
+          {
+            "en": "+1 turn effect duration",
+            "jp": "効果ターン+1ターン",
+            "kr": "효과 지속 +1턴",
+            "zh": "效果持续时间+1回合"
+          }
+        ],
+        "desc": {
+          "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
+          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
+          "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1950,
+        "cool": 4,
+        "startCool": 4,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_3_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2700019_3_2": {
+            "c": "100%",
+            "v": "100%"
+          },
+          "2700019_2_3": {
+            "c": "100%",
+            "v": "1000"
+          }
+        },
+        "tooltips": ["8", "61"],
+        "upgrades": [
+          {
+            "en": "+15% damage",
+            "jp": "ダメージ+15%",
+            "kr": "피해량 +15%",
+            "zh": "伤害量+15%"
+          },
+          {
+            "en": "Additional Attack",
+            "jp": "追加攻撃",
+            "kr": "추가 공격",
+            "zh": "追加攻击"
+          }
+        ],
+        "desc": {
+          "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color> and uses <color=#28d9ed>Iai</color> on the target.\\n\\n<color=#ffd732>Iai</color>: After attacking, grants all allies the <color=#28d9ed>Critical Damage</color> increase effect from <color=#28d9ed>Moonfall</color>.",
+          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせ、対象に<color=#28d9ed>【居合】</color>を使用する。\\n\\n<color=#ffd732>【居合】</color>：攻撃後、<color=#28d9ed>【落月】</color>の味方全体<color=#28d9ed>会心ダメージ</color>UP効果を獲得する。",
+          "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시키고, 대상에게 <color=#28d9ed>거합</color>을 사용합니다.\\n\\n<color=#ffd732>거합</color> : 공격 후 <color=#28d9ed>낙월</color>의 아군 전체 <color=#28d9ed>치명 피해</color> 증가 효과를 얻습니다.",
+          "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>，并对目标使用<color=#28d9ed>居合</color>。\\n\\n<color=#ffd732>居合</color>：攻击后，获得<color=#28d9ed>落月</color>的我方全体<color=#28d9ed>暴击伤害</color>提升效果。"
+        }
+      }
+    ],
+    "desc": {
+      "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
+      "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+      "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
+      "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
+    },
+    "target": "enemy",
+    "range": "all",
+    "icon": "Skill_Ultimate_2700019",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_3_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "2700019_3_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_EXTRA_ATTACK_ON_TURN_END",
+        "target": "me",
+        "buff": "2700019_2_3",
+        "label": "SYS_BUFF_ADDITIVE_ATTACK",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "1954": {
+    "id": "1954",
+    "name": {
+      "en": "Chain Passive",
+      "jp": "チェーンパッシブ",
+      "kr": "체인 패시브",
+      "zh": "连携被动"
+    },
+    "type": "chain_passive",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 770,
+        "tooltips": ["73"],
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 770,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ],
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 770,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          }
+        ],
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 770,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          }
+        ],
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 770,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ],
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "<color=#ffd732>Chain Companion Effect</color>: After attacking, additionally reduces WG by <color=#28d9ed>3</color>.\\n\\n<color=#ffd732>Assist Effect</color>: After attacking, increases the caster's Critical Damage for <color=#28d9ed>[Buff_T_2700019_backup_1_1] turns</color>.",
+      "jp": "<color=#ffd732>チェーン効果(汎用)</color>：攻撃後、<color=#28d9ed>3</color>のWGダメージを追加で与える。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の会心ダメージを<color=#28d9ed>[Buff_T_2700019_backup_1_1]ターン</color>の間UPさせる。",
+      "kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>3</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 치명 피해를 <color=#28d9ed>[Buff_T_2700019_backup_1_1]턴</color> 동안 증가시킵니다.",
+      "zh": "<color=#ffd732>连锁伙伴效果</color>：攻击后额外降低<color=#28d9ed>3</color>点WG。\\n\\n<color=#ffd732>协攻效果</color>：攻击后使自身的暴击伤害提升<color=#28d9ed>[Buff_T_2700019_backup_1_1]回合</color>。"
+    },
+    "icon": "Skill_ChainPassive_Water_Join"
+  },
+  "1955": {
+    "id": "1955",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "strike_aerial",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 5,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_WG_REVERSE_HEAL",
+        "target": "enemy_team",
+        "buff": "2700019_chain_1_1"
+      }
+    ]
+  },
+  "1956": {
+    "id": "1956",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "strike_ground",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 4,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 5,
+        "vars": {
+          "2700019_chain_1_1": {
+            "c": "100%",
+            "v": "3"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "anti_heal",
+        "category": "neutral",
+        "type": "BT_WG_REVERSE_HEAL",
+        "target": "enemy_team",
+        "buff": "2700019_chain_1_1"
+      }
+    ]
+  },
+  "1958": {
+    "id": "1958",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "unique_passive",
+    "subType": null,
+    "offensive": false,
+    "maxLevel": 4,
+    "levels": [
+      {
+        "level": 1,
+        "desc": {
+          "en": "Burst Level 2 Unlocked",
+          "jp": "バーストスキル2段階解禁",
+          "kr": "버스트 2단계 해금",
+          "zh": "解锁2阶爆发"
+        }
+      },
+      {
+        "level": 2,
+        "vars": {
+          "trancendent_8_cri_dmg_team": {
+            "c": "100%",
+            "v": "4%"
+          }
+        },
+        "desc": {
+          "en": "+4% Ally Team Critical Damage\\n+1 Chain Passive Weakness Gauge damage",
+          "jp": "味方の会心ダメージ+4%\\nチェーンパッシブのWGダメージ+1",
+          "kr": "아군 치명 피해 +4%\\n체인 패시브의 WG 감소량 +1",
+          "zh": "友军暴击伤害+4%\\n连携被动技能的WG降低量+1"
+        }
+      },
+      {
+        "level": 3,
+        "vars": {
+          "trancendent_8_cri_dmg_team_upgrade": {
+            "c": "100%",
+            "v": "8%"
+          },
+          "trancendent_8_2700019_1": {
+            "c": "100%",
+            "v": "40%"
+          }
+        },
+        "desc": {
+          "en": "Burst Level 3 Unlocked\\nFinal Damage Taken from Fire enemies -40%",
+          "jp": "バーストスキル3段階解禁\\n火属性の敵から攻撃を受けた時、受ける最終ダメージ-40%",
+          "kr": "버스트 3단계 해금\\n화속성 적에게 피격 시 받는 최종 피해 -40%",
+          "zh": "解锁爆发3阶段\\n受到火属性敌人攻击时，所受最终伤害 -40%"
+        }
+      },
+      {
+        "level": 4,
+        "vars": {
+          "trancendent_8_cri_dmg_team_upgrade": {
+            "c": "100%",
+            "v": "8%"
+          },
+          "trancendent_8_ap": {
+            "c": "100%",
+            "v": "25"
+          },
+          "trancendent_8_2700019_1": {
+            "c": "100%",
+            "v": "40%"
+          },
+          "trancendent_8_2700019_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "desc": {
+          "en": "After a Fire enemy acts, increases the caster's Priority by 20%\\n+25 Action Points at battle start",
+          "jp": "火属性の敵の行動終了時、自分の行動ゲージ+20%\\n戦闘開始時AP+25",
+          "kr": "화속성 적 행동 종료 시 자신 행동 게이지+20%\\n입장 시 AP +25",
+          "zh": "火属性敌人行动结束时，自身行动条 +20%\\n进入战斗时 AP +25"
+        }
+      }
+    ],
+    "desc": {
+      "en": "Burst Level 2 Unlocked",
+      "jp": "バーストスキル2段階解禁",
+      "kr": "버스트 2단계 해금",
+      "zh": "解锁2阶爆发"
+    },
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "my_team",
+        "buff": "trancendent_8_cri_dmg_team",
+        "stat": "critical_dmg_rate",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "my_team",
+        "buff": "trancendent_8_cri_dmg_team_upgrade",
+        "stat": "critical_dmg_rate",
+        "mode": "up"
+      },
+      {
+        "family": "dmg_reduce",
+        "category": "buff",
+        "type": "BT_DMG_REDUCE_FINAL",
+        "target": "me",
+        "buff": "trancendent_8_2700019_1"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "trancendent_8_ap",
+        "stat": "enter_ap",
+        "mode": "up"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "trancendent_8_2700019_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "ultimate"
+      }
+    ]
+  },
+  "1959": {
+    "id": "1959",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "backup_aerial",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_backup_1_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "tooltip": "12"
+      }
+    ]
+  },
+  "1960": {
+    "id": "1960",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "backup_ground",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_backup_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_backup_1_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "tooltip": "12"
+      }
+    ]
+  },
+  "1969": {
+    "id": "1969",
+    "name": {
+      "en": "Damage Increase\\nAdditional Ultimate Skill Cooldown Reduction",
+      "jp": "ダメージUP\\n必殺スキルターン追加減少",
+      "kr": "피해 증가\\n필살기 쿨타임 추가 감소",
+      "zh": "伤害提升\\n必杀技冷却时间额外减少"
+    },
+    "type": "burst_1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1250,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1350,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1350,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1450,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1600,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Damage Increase\\nAdditional Cooldown Reduction for The One True Path of the Sword -1 Turn",
+      "jp": "ダメージUP\\n【唯一の剣筋】のスキルターン追加減少-1ターン",
+      "kr": "피해 증가\\n단 하나의 검로 쿨타임 추가 감소 -1턴",
+      "zh": "伤害提升\\n唯一剑路冷却时间额外减少 -1回合"
+    },
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL2_CHARGE",
+        "target": "me",
+        "buff": "2700019_2_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE",
+        "caller": "second"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2700019_u_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_1_2"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_2_4",
+        "stat": "atk",
+        "mode": "up",
+        "label": "SYS_BUFF_ATTACK_UP",
+        "caller": "second"
+      }
+    ]
+  },
+  "1970": {
+    "id": "1970",
+    "name": {
+      "en": "Damage Increase\\nWeakness Gauge Reduction",
+      "jp": "ダメージUP\\nWGダメージ",
+      "kr": "피해 증가\\nWG 감소",
+      "zh": "伤害提升\\nWG降低"
+    },
+    "type": "burst_2",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1250,
+        "gainCP": 2,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1350,
+        "gainCP": 2,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1350,
+        "gainCP": 2,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1450,
+        "gainCP": 2,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1600,
+        "gainCP": 2,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Damage Increase\\nWeakness Gauge Reduction +1",
+      "jp": "ダメージUP\\nWGダメージ+1",
+      "kr": "피해 증가\\nWG 감소 +1",
+      "zh": "伤害提升\\nWG降低 +1"
+    },
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL2_CHARGE",
+        "target": "me",
+        "buff": "2700019_2_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE",
+        "caller": "second"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2700019_u_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_1_2"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_2"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_2_4",
+        "stat": "atk",
+        "mode": "up",
+        "label": "SYS_BUFF_ATTACK_UP",
+        "caller": "second"
+      }
+    ]
+  },
+  "1971": {
+    "id": "1971",
+    "name": {
+      "en": "<color=#28d9ed>Enhanced Attack</color>\\nDamage Increase (Additional Damage Increase against Fire enemies)\\nCooldown Reset (Ultimate Skill)",
+      "jp": "<color=#28d9ed>強化攻撃</color>\\nダメージUP(火属性の敵にはさらにダメージUP)\\nスキルターン初期化(必殺スキル)",
+      "kr": "<color=#28d9ed>강화 공격</color>\\n피해 증가(화속성 적에게는 추가로 피해 증가)\\n쿨타임 초기화(필살기)",
+      "zh": "<color=#28d9ed>强化攻击</color>\\n伤害提升（对火属性敌人额外提升伤害）\\n冷却时间重置（必杀技）"
+    },
+    "type": "burst_3",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1688,
+        "gainCP": 7,
+        "wgReduce": 2,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2700019_u_3_3": {
+            "c": "100%",
+            "v": "99"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1788,
+        "gainCP": 7,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2700019_u_3_3": {
+            "c": "100%",
+            "v": "99"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1788,
+        "gainCP": 7,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2700019_u_3_3": {
+            "c": "100%",
+            "v": "99"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1888,
+        "gainCP": 7,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2700019_u_3_3": {
+            "c": "100%",
+            "v": "99"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 2038,
+        "gainCP": 7,
+        "wgReduce": 3,
+        "vars": {
+          "2700019_2_1": {
+            "c": "100%",
+            "v": "4"
+          },
+          "2700019_u_1": {
+            "c": "100%",
+            "v": "2"
+          },
+          "2700019_u_1_2": {
+            "c": "100%",
+            "v": "30%"
+          },
+          "2700019_u_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_1": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_u_3_2": {
+            "c": "100%",
+            "v": "50%"
+          },
+          "2700019_2_4": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2700019_u_3_3": {
+            "c": "100%",
+            "v": "99"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Replaced with Enhanced Attack\\nDamage Increase (Additional Damage Increase against Fire enemies)\\nResets <color=#28d9ed>The One True Path of the Sword</color>'s cooldown",
+      "jp": "強化攻撃に変更\\nダメージUP(火属性の敵にはさらにダメージUP)\\n<color=#28d9ed>【唯一の剣筋】</color>のスキルターン初期化",
+      "kr": "강화 공격으로 교체\\n피해 증가 (화속성 적에게는 추가로 피해 증가)\\n<color=#28d9ed>단 하나의 검로</color> 쿨타임 초기화",
+      "zh": "替换为强化攻击\\n伤害提升（对火属性敌人额外提升伤害）\\n重置<color=#28d9ed>唯一剑路</color>的冷却时间"
+    },
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL2_CHARGE",
+        "target": "me",
+        "buff": "2700019_2_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE",
+        "caller": "second"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2700019_u_1",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_1_2"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_2"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_3_1"
+      },
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG",
+        "target": "me",
+        "buff": "2700019_u_3_2"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2700019_2_4",
+        "stat": "atk",
+        "mode": "up",
+        "label": "SYS_BUFF_ATTACK_UP",
+        "caller": "second"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2700019_u_3_3",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      }
+    ]
+  },
+  "1972": {
+    "id": "1972",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "extra",
+    "subType": "passive",
+    "offensive": true,
+    "maxLevel": 1,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1450,
+        "wgReduce": 1,
+        "vars": {
+          "2700019_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2700019_1_1",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_CRITICAL_DAMAGE_UP",
+        "caller": "first"
+      }
+    ]
+  },
   "2001": {
     "id": "2001",
     "name": {
@@ -214551,6 +216444,1687 @@
         "buff": "2000121_1_5",
         "label": "SYS_BUFF_COOLTIME_REDUCE",
         "caller": "first"
+      }
+    ]
+  },
+  "12201": {
+    "id": "12201",
+    "name": {
+      "en": "Perfect Rebuttal",
+      "jp": "隙のない反論",
+      "kr": "빈틈 없는 반론",
+      "zh": "无懈可击的反驳"
+    },
+    "type": "first",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1250,
+        "gainAP": 10,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_1_1": {
+            "c": "70%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"]
+      },
+      {
+        "level": 2,
+        "damageFactor": 1350,
+        "gainAP": 10,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_1_1": {
+            "c": "70%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"],
+        "upgrades": [
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          },
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "damageFactor": 1350,
+        "gainAP": 10,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_1_1": {
+            "c": "85%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"],
+        "upgrades": [
+          {
+            "en": "+15% effect chance",
+            "jp": "効果発生率+15%",
+            "kr": "효과 발동 확률 +15%",
+            "zh": "效果触发几率+15%"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "damageFactor": 1450,
+        "gainAP": 10,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_1_1": {
+            "c": "85%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "damageFactor": 1550,
+        "gainAP": 10,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_1_1": {
+            "c": "100%",
+            "v": "50%",
+            "t": "2"
+          }
+        },
+        "tooltips": ["17"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+15% effect chance",
+            "jp": "効果発生率+15%",
+            "kr": "효과 발동 확률 +15%",
+            "zh": "效果触发几率+15%"
+          }
+        ]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and has a <color=#28d9ed>[Buff_C_2000122_1_1]</color> chance to decrease the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>2 turns</color>. (Ignores Resilience)",
+      "jp": "敵単体にダメージを与え、<color=#28d9ed>[Buff_C_2000122_1_1]</color>の確率で対象の<color=#28d9ed>防御力</color>を<color=#28d9ed>2ターン</color>の間DOWNさせる。(効果抵抗無視)",
+      "kr": "적을 공격하고 <color=#28d9ed>[Buff_C_2000122_1_1]</color> 확률로 대상의 <color=#28d9ed>방어력</color>을 <color=#28d9ed>2턴</color> 동안 감소시킵니다. (효과 저항 무시)",
+      "zh": "攻击敌人，并有<color=#28d9ed>[Buff_C_2000122_1_1]</color>的概率使目标的<color=#28d9ed>防御力</color>降低<color=#28d9ed>2回合</color>。（无视效果抵抗）"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_First_2000122",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_skill_target",
+        "buff": "2000122_1_1",
+        "stat": "def",
+        "mode": "down",
+        "tooltip": "17",
+        "caller": "first"
+      }
+    ]
+  },
+  "12202": {
+    "id": "12202",
+    "name": {
+      "en": "Incisive Reasoning",
+      "jp": "鋭い主張",
+      "kr": "날카로운 주장",
+      "zh": "尖锐的主张"
+    },
+    "type": "second",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1350,
+        "cool": 4,
+        "startCool": 4,
+        "gainAP": 25,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_2_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["84", "61", "8"]
+      },
+      {
+        "level": 2,
+        "damageFactor": 1450,
+        "cool": 4,
+        "startCool": 4,
+        "gainAP": 25,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_2_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["84", "61", "8"],
+        "upgrades": [
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          },
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "damageFactor": 1450,
+        "cool": 3,
+        "startCool": 3,
+        "gainAP": 25,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_2_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["84", "61", "8"],
+        "upgrades": [
+          {
+            "en": "-1 turn Skill Cooldown",
+            "jp": "スキルターン-1ターン",
+            "kr": "스킬 쿨타임 -1턴",
+            "zh": "冷却时间-1回合"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "damageFactor": 1550,
+        "cool": 3,
+        "startCool": 3,
+        "gainAP": 25,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_2_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["84", "61", "8"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "damageFactor": 1650,
+        "cool": 3,
+        "startCool": 3,
+        "gainAP": 25,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2000122_2_2": {
+            "c": "100%",
+            "v": "20%"
+          }
+        },
+        "tooltips": ["84", "61", "8"],
+        "upgrades": [
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          },
+          {
+            "en": "+1 turn effect duration",
+            "jp": "効果ターン+1ターン",
+            "kr": "효과 지속 +1턴",
+            "zh": "效果持续时间+1回合"
+          }
+        ]
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and increases all allies' <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2000122_2_1] turns</color>. If the target is <color=#28d9ed>Earth</color>, increases the caster's Priority by <color=#28d9ed>20%</color>.",
+      "jp": "敵単体にダメージを与え、味方全体の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2000122_2_1]ターン</color>の間UPさせる。対象が<color=#28d9ed>地属性</color>の場合、自分の行動ゲージを<color=#28d9ed>20%</color>UPさせる。",
+      "kr": "적을 공격하고 아군 전체의 <color=#28d9ed>관통력</color>을 <color=#28d9ed>[Buff_T_2000122_2_1]턴</color> 동안 증가시킵니다. 대상이 <color=#28d9ed>지속성</color>인 경우 자신의 행동 게이지를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "zh": "攻击敌人，并使我方全体的<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2000122_2_1]回合</color>。若目标为<color=#28d9ed>地属性</color>，则使自身的行动条提升<color=#28d9ed>20%</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Second_2000122",
+    "requireAP": 70,
+    "burstAP": [70, 105, 140],
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000122_2_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8",
+        "caller": "second"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "my_team",
+        "buff": "2000122_2_2",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP",
+        "caller": "second"
+      }
+    ]
+  },
+  "12203": {
+    "id": "12203",
+    "name": {
+      "en": "Closing Argument",
+      "jp": "最終弁論",
+      "kr": "최후 변론",
+      "zh": "最终辩论"
+    },
+    "type": "ultimate",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 2450,
+        "cool": 5,
+        "startCool": 5,
+        "gainAP": 35,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_3_1": {
+            "c": "100%",
+            "v": "5%"
+          },
+          "2000122_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_3_3": {
+            "c": "100%",
+            "v": "1"
+          }
+        },
+        "tooltips": ["63"],
+        "desc": {
+          "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>5%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+          "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>5%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>5%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+          "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>5%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 2550,
+        "cool": 5,
+        "startCool": 5,
+        "gainAP": 35,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_3_1": {
+            "c": "100%",
+            "v": "5%"
+          },
+          "2000122_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_3_3": {
+            "c": "100%",
+            "v": "1"
+          }
+        },
+        "tooltips": ["63"],
+        "upgrades": [
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          },
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ],
+        "desc": {
+          "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>5%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+          "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>5%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>5%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+          "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>5%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 2550,
+        "cool": 4,
+        "startCool": 4,
+        "gainAP": 35,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_3_1": {
+            "c": "100%",
+            "v": "5%"
+          },
+          "2000122_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_3_3": {
+            "c": "100%",
+            "v": "1"
+          }
+        },
+        "tooltips": ["63"],
+        "upgrades": [
+          {
+            "en": "-1 turn Skill Cooldown",
+            "jp": "スキルターン-1ターン",
+            "kr": "스킬 쿨타임 -1턴",
+            "zh": "冷却时间-1回合"
+          }
+        ],
+        "desc": {
+          "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>5%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+          "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>5%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>5%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+          "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>5%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 2700,
+        "cool": 4,
+        "startCool": 4,
+        "gainAP": 35,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_3_1": {
+            "c": "100%",
+            "v": "5%"
+          },
+          "2000122_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_3_3": {
+            "c": "100%",
+            "v": "1"
+          }
+        },
+        "tooltips": ["63"],
+        "upgrades": [
+          {
+            "en": "+15% damage",
+            "jp": "ダメージ+15%",
+            "kr": "피해량 +15%",
+            "zh": "伤害量+15%"
+          }
+        ],
+        "desc": {
+          "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>5%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+          "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>5%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>5%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+          "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>5%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 2800,
+        "cool": 4,
+        "startCool": 4,
+        "gainAP": 35,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_3_1": {
+            "c": "100%",
+            "v": "15%"
+          },
+          "2000122_3_2": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_3_3": {
+            "c": "100%",
+            "v": "1"
+          }
+        },
+        "tooltips": ["63"],
+        "upgrades": [
+          {
+            "en": "Target DMG Reduction -10%",
+            "jp": "対象の受けるダメージ-10%",
+            "kr": "대상 받는 피해 감소 -10%",
+            "zh": "目标伤害减免 -10%"
+          },
+          {
+            "en": "+10% damage",
+            "jp": "ダメージ+10%",
+            "kr": "피해량 +10%",
+            "zh": "伤害量+10%"
+          }
+        ],
+        "desc": {
+          "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>15%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+          "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>15%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+          "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>15%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+          "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>15%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+        }
+      }
+    ],
+    "desc": {
+      "en": "Attacks an enemy and decreases the target's Damage Reduction by <color=#28d9ed>5%</color>. (Stacks up to 5 times, ignores Resilience)\\nIf the target is a Boss, ignores <color=#28d9ed>30%</color> of the target's Defense.\\nIf there are <color=#28d9ed>4 Fire</color> members on the team, decreases all allies' skill cooldowns by <color=#28d9ed>1 turn</color>.",
+      "jp": "敵単体にダメージを与え、対象のダメージ減少数値を<color=#28d9ed>5%</color>DOWNさせる。(最大5回累積、効果抵抗無視)\\n対象がボスの場合、防御力を<color=#28d9ed>30%</color>無視する。\\n味方に<color=#28d9ed>火属性</color>が<color=#28d9ed>4人</color>いる場合、味方全体のスキルターンを<color=#28d9ed>1ターン</color>減少させる。",
+      "kr": "적을 공격하고 대상의 피해 감소 수치를 <color=#28d9ed>5%</color> 감소시킵니다. (최대 5회 누적, 효과 저항 무시)\\n대상이 보스인 경우 방어력의 <color=#28d9ed>30%</color>를 무시합니다.\\n<color=#28d9ed>화속성</color> 구성원이 <color=#28d9ed>4명</color>이면 아군 전체의 스킬 쿨타임을 <color=#28d9ed>1턴</color> 감소시킵니다.",
+      "zh": "攻击敌人，并使目标的伤害减免数值降低<color=#28d9ed>5%</color>。（最多累计5次，无视效果抵抗）\\n若目标为BOSS，则无视其<color=#28d9ed>30%</color>防御力。\\n若队伍中<color=#28d9ed>火属性</color>成员为<color=#28d9ed>4名</color>，则使我方全体的技能冷却时间减少<color=#28d9ed>1回合</color>。"
+    },
+    "target": "enemy",
+    "range": "single",
+    "icon": "Skill_Ultimate_2000122",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "debuff",
+        "type": "BT_STAT",
+        "target": "enemy_skill_target",
+        "buff": "2000122_3_1",
+        "stat": "dmg_reduce_rate",
+        "mode": "down",
+        "caller": "ultimate"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_3_2",
+        "stat": "pierce_power_rate",
+        "mode": "up"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL_CHARGE",
+        "target": "my_team",
+        "buff": "2000122_3_3",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      }
+    ]
+  },
+  "12204": {
+    "id": "12204",
+    "name": {
+      "en": "Chain Passive",
+      "jp": "チェーンパッシブ",
+      "kr": "체인 패시브",
+      "zh": "连携被动"
+    },
+    "type": "chain_passive",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 590,
+        "tooltips": ["73"]
+      },
+      {
+        "level": 2,
+        "damageFactor": 590,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "damageFactor": 590,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          }
+        ]
+      },
+      {
+        "level": 4,
+        "damageFactor": 590,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          }
+        ]
+      },
+      {
+        "level": 5,
+        "damageFactor": 590,
+        "tooltips": ["73"],
+        "upgrades": [
+          {
+            "en": "+5% Dual Attack and Skill Chain damage",
+            "jp": "チェーンスキルと連携ダメージ+5%",
+            "kr": "협공/스킬 체인 피해량 +5%",
+            "zh": "夹攻/连携技能伤害量+5%"
+          },
+          {
+            "en": "+1 Weakness Gauge damage",
+            "jp": "WGダメージ+1",
+            "kr": "WG 감소량 +1",
+            "zh": "WG降低量+1"
+          }
+        ]
+      }
+    ],
+    "desc": {
+      "en": "<color=#ffd732>Chain Companion Effect</color>: After attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>2 turns</color>.\\n\\n<color=#ffd732>Assist Effect</color>: Increases the caster's Priority by <color=#28d9ed>20%</color>.",
+      "jp": "<color=#ffd732>チェーン効果(汎用)</color>：攻撃後、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>2ターン</color>の間UPさせる。\\n\\n<color=#ffd732>連携効果</color>：自分の行動ゲージを<color=#28d9ed>20%</color>UPさせる。",
+      "kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 자신의 <color=#28d9ed>관통력</color>을 <color=#28d9ed>2턴</color> 동안 증가시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 자신의 행동 게이지를 <color=#28d9ed>20%</color> 증가시킵니다.",
+      "zh": "<color=#ffd732>连锁伙伴效果</color>：攻击后使自身的<color=#28d9ed>穿透力</color>提升<color=#28d9ed>2回合</color>。\\n\\n<color=#ffd732>协攻效果</color>：使自身的行动条提升<color=#28d9ed>20%</color>。"
+    },
+    "icon": "Skill_ChainPassive_Fire_Join"
+  },
+  "12205": {
+    "id": "12205",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "strike_aerial",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 5,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_chain_1_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8"
+      }
+    ]
+  },
+  "12206": {
+    "id": "12206",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "strike_ground",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1050,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 4,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 5,
+        "vars": {
+          "2000122_chain_1_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "all",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_chain_1_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8"
+      }
+    ]
+  },
+  "12208": {
+    "id": "12208",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "unique_passive",
+    "subType": null,
+    "offensive": false,
+    "maxLevel": 4,
+    "levels": [
+      {
+        "level": 1,
+        "desc": {
+          "en": "Burst Level 2 Unlocked",
+          "jp": "バーストスキル2段階解禁",
+          "kr": "버스트 2단계 해금",
+          "zh": "解锁2阶爆发"
+        }
+      },
+      {
+        "level": 2,
+        "vars": {
+          "trancendent_8_cri_team": {
+            "c": "100%",
+            "v": "3%"
+          }
+        },
+        "desc": {
+          "en": "+3% Ally Team Critical Hit Chance\\n+1 Chain Passive Weakness Gauge damage",
+          "jp": "味方の会心率+3%\\nチェーンパッシブのWGダメージ+1",
+          "kr": "아군 치명 확률 +3%\\n체인 패시브의 WG 감소량 +1",
+          "zh": "友军暴击率+3%\\n连携被动技能的WG降低量+1"
+        }
+      },
+      {
+        "level": 3,
+        "vars": {
+          "trancendent_8_cri_team": {
+            "c": "100%",
+            "v": "3%"
+          }
+        },
+        "desc": {
+          "en": "Burst Level 3 Unlocked",
+          "jp": "バーストスキル3段階解禁",
+          "kr": "버스트 3단계 해금",
+          "zh": "解锁3阶爆发"
+        }
+      },
+      {
+        "level": 4,
+        "vars": {
+          "trancendent_8_cri_team_upgrade": {
+            "c": "100%",
+            "v": "6%"
+          },
+          "trancendent_8_ap": {
+            "c": "100%",
+            "v": "25"
+          }
+        },
+        "desc": {
+          "en": "+3% Ally Team Critical Hit Chance\\n+25 Action Points at battle start",
+          "jp": "味方の会心率+3%\\n戦闘開始時、AP+25",
+          "kr": "아군 치명 확률 +3%\\n입장 시 AP +25",
+          "zh": "友军暴击率+3%\\n入场时AP+25"
+        }
+      }
+    ],
+    "desc": {
+      "en": "Burst Level 2 Unlocked",
+      "jp": "バーストスキル2段階解禁",
+      "kr": "버스트 2단계 해금",
+      "zh": "解锁2阶爆发"
+    },
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "my_team",
+        "buff": "trancendent_8_cri_team",
+        "stat": "critical_rate",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "my_team",
+        "buff": "trancendent_8_cri_team_upgrade",
+        "stat": "critical_rate",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "trancendent_8_ap",
+        "stat": "enter_ap",
+        "mode": "up"
+      }
+    ]
+  },
+  "12209": {
+    "id": "12209",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "backup_aerial",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1070,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "2000122_backup_1_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      }
+    ]
+  },
+  "12210": {
+    "id": "12210",
+    "name": {
+      "en": "",
+      "jp": "",
+      "kr": "",
+      "zh": ""
+    },
+    "type": "backup_ground",
+    "subType": null,
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1000,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1070,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1100,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1150,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1200,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_backup_1_1": {
+            "c": "100%",
+            "v": "20%"
+          }
+        }
+      }
+    ],
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "2000122_backup_1_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      }
+    ]
+  },
+  "12219": {
+    "id": "12219",
+    "name": {
+      "en": "DMG Increase\\nWG Reduction",
+      "jp": "ダメージUP\\nWGダメージ",
+      "kr": "피해 증가\\nWG 감소",
+      "zh": "伤害提升\\nWG降低"
+    },
+    "type": "burst_1",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1350,
+        "wgReduce": 1,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1450,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1450,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1550,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1650,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG Increase\\nWG Reduction +1",
+      "jp": "ダメージUP\\nWGダメージ+1",
+      "kr": "피해 증가\\nWG 감소 +1",
+      "zh": "伤害提升\\nWG降低 +1"
+    },
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000122_2_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8",
+        "caller": "second"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_U_1",
+        "stat": "dmg_boost",
+        "mode": "up"
+      }
+    ]
+  },
+  "12220": {
+    "id": "12220",
+    "name": {
+      "en": "DMG Increase\\nPriority Increase",
+      "jp": "ダメージUP\\n行動ゲージUP",
+      "kr": "피해 증가\\n행동 게이지 증가",
+      "zh": "伤害提升\\n行动条提升"
+    },
+    "type": "burst_2",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1350,
+        "gainCP": 1,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1450,
+        "gainCP": 1,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1450,
+        "gainCP": 1,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1550,
+        "gainCP": 1,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1650,
+        "gainCP": 1,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "DMG Increase\\nOwn Priority +10%",
+      "jp": "ダメージUP\\n自分の行動ゲージ+10%",
+      "kr": "피해 증가\\n자신 행동 게이지 +10%",
+      "zh": "伤害提升\\n自身行动条 +10%"
+    },
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000122_2_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8",
+        "caller": "second"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_U_1",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_U_2",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "2000122_U_2_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
+      }
+    ]
+  },
+  "12221": {
+    "id": "12221",
+    "name": {
+      "en": "Ultimate Cooldown Reset",
+      "jp": "必殺スキルターン初期化",
+      "kr": "필살기 쿨타임 초기화",
+      "zh": "必杀技冷却时间重置"
+    },
+    "type": "burst_3",
+    "subType": "active",
+    "offensive": true,
+    "maxLevel": 5,
+    "levels": [
+      {
+        "level": 1,
+        "damageFactor": 1350,
+        "gainCP": 6,
+        "wgReduce": 2,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_3": {
+            "c": "100%",
+            "v": "99"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 2,
+        "damageFactor": 1450,
+        "gainCP": 6,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_3": {
+            "c": "100%",
+            "v": "99"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 3,
+        "damageFactor": 1450,
+        "gainCP": 6,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_3": {
+            "c": "100%",
+            "v": "99"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 4,
+        "damageFactor": 1550,
+        "gainCP": 6,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "2"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_3": {
+            "c": "100%",
+            "v": "99"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      },
+      {
+        "level": 5,
+        "damageFactor": 1650,
+        "gainCP": 6,
+        "wgReduce": 3,
+        "vars": {
+          "2000122_2_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "3"
+          },
+          "2000122_U_1": {
+            "c": "100%",
+            "v": "30%",
+            "t": "1"
+          },
+          "2000122_U_2": {
+            "c": "100%",
+            "v": "50%",
+            "t": "1"
+          },
+          "2000122_U_3": {
+            "c": "100%",
+            "v": "99"
+          },
+          "2000122_U_2_1": {
+            "c": "100%",
+            "v": "30%"
+          }
+        }
+      }
+    ],
+    "desc": {
+      "en": "Closing Argument Cooldown Reset",
+      "jp": "【最終弁論】のスキルターン初期化",
+      "kr": "최후 변론 쿨타임 초기화",
+      "zh": "最终辩论冷却时间重置"
+    },
+    "target": "enemy",
+    "range": "single",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000122_2_1",
+        "stat": "pierce_power_rate",
+        "mode": "up",
+        "tooltip": "8",
+        "caller": "second"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_U_1",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000122_U_2",
+        "stat": "dmg_boost",
+        "mode": "up"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2000122_U_3",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
+      },
+      {
+        "family": "gauge",
+        "category": "buff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "me",
+        "buff": "2000122_U_2_1",
+        "label": "SYS_BUFF_ACTION_GAUGE_UP"
       }
     ]
   },

@@ -104,7 +104,7 @@
         "icon": "TI_Costume_Clothes_2000001_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0",
+        "source": "shop",
         "art": true
       }
     ]
@@ -399,7 +399,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -511,9 +510,7 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "2710005",
-        "art": true,
-        "fusionArt": true
+        "art": true
       }
     ],
     "coreFusion": "2700005"
@@ -714,7 +711,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -917,7 +913,7 @@
         "icon": "TI_Costume_Clothes_2000009_02",
         "grade": "normal",
         "sort": 1,
-        "fusionModel": "0",
+        "source": "event_shop",
         "art": true
       }
     ]
@@ -1210,7 +1206,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -1226,7 +1221,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -1242,7 +1236,6 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -1900,7 +1893,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -1916,7 +1908,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -1931,7 +1922,6 @@
         "icon": "TI_Costume_Clothes_2000019_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -2227,7 +2217,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -2338,7 +2327,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -2354,7 +2342,6 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -2557,7 +2544,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -2573,7 +2559,6 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -3508,7 +3493,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -3710,7 +3694,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "2710037",
         "art": true
       },
       {
@@ -3726,9 +3709,7 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "2720037",
-        "art": true,
-        "fusionArt": true
+        "art": true
       },
       {
         "id": "76",
@@ -3743,7 +3724,6 @@
         "grade": "rare",
         "sort": 3,
         "source": "event_shop",
-        "fusionModel": "2730037",
         "art": true
       }
     ],
@@ -3947,7 +3927,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -3963,7 +3942,6 @@
         "grade": "normal",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -4346,9 +4324,7 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "2710043",
-        "art": true,
-        "fusionArt": true
+        "art": true
       }
     ],
     "coreFusion": "2700043"
@@ -4459,7 +4435,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -5306,7 +5281,6 @@
         "icon": "TI_Costume_Clothes_2000053_02",
         "grade": "magic",
         "sort": 1,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -5416,7 +5390,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -5528,7 +5501,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -5637,7 +5609,7 @@
         "icon": "TI_Costume_Clothes_2000056_02",
         "grade": "normal",
         "sort": 1,
-        "fusionModel": "2710056",
+        "source": "event_shop",
         "art": true
       },
       {
@@ -5653,7 +5625,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "2720056",
         "art": true
       }
     ],
@@ -5855,7 +5826,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -5967,7 +5937,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6077,7 +6046,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6093,7 +6061,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop_asset_normal",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6108,7 +6075,6 @@
         "icon": "TI_Costume_Clothes_2000060_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6219,7 +6185,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6234,8 +6199,7 @@
         "icon": "TI_Costume_Clothes_2000061_03",
         "grade": "rare",
         "sort": 2,
-        "source": "event_shop",
-        "fusionModel": "0",
+        "source": "event_attendence",
         "art": true
       }
     ]
@@ -6345,7 +6309,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6457,7 +6420,6 @@
         "grade": "magic",
         "sort": 1,
         "source": "world_boss_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6567,7 +6529,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6583,7 +6544,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6696,7 +6656,6 @@
         "grade": "normal",
         "sort": 0,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6712,7 +6671,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6728,7 +6686,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6744,7 +6701,6 @@
         "grade": "rare",
         "sort": 3,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6760,7 +6716,6 @@
         "grade": "rare",
         "sort": 5,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6776,7 +6731,6 @@
         "grade": "rare",
         "sort": 6,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -6887,7 +6841,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -6903,7 +6856,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7107,7 +7059,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7123,7 +7074,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7234,7 +7184,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7250,7 +7199,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7452,7 +7400,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7468,7 +7415,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7483,7 +7429,6 @@
         "icon": "TI_Costume_Clothes_2000071_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7595,7 +7540,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7793,10 +7737,9 @@
           "zh": "爱之火花黛安"
         },
         "icon": "TI_Costume_Clothes_2000074_02",
-        "grade": "rare",
+        "grade": "normal",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7811,8 +7754,7 @@
         "icon": "TI_Costume_Clothes_2000074_03",
         "grade": "rare",
         "sort": 2,
-        "source": "shop",
-        "fusionModel": "0",
+        "source": "package_shop",
         "art": true
       },
       {
@@ -7827,7 +7769,6 @@
         "icon": "TI_Costume_Clothes_2000074_04",
         "grade": "rare",
         "sort": 3,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -7939,7 +7880,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -7954,8 +7894,7 @@
         "icon": "TI_Costume_Clothes_2000075_03",
         "grade": "rare",
         "sort": 2,
-        "source": "shop",
-        "fusionModel": "0",
+        "source": "event_mission",
         "art": true
       }
     ]
@@ -8067,7 +8006,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -8083,7 +8021,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8195,7 +8132,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -8211,7 +8147,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8416,7 +8351,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -8432,7 +8366,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8542,7 +8475,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8653,7 +8585,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8763,7 +8694,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8873,7 +8803,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -8984,7 +8913,6 @@
         "grade": "normal",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -8999,7 +8927,7 @@
         "icon": "TI_Costume_Clothes_2000084_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0",
+        "source": "event_shop",
         "art": true
       },
       {
@@ -9015,7 +8943,6 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -9315,7 +9242,7 @@
         "icon": "TI_Costume_Clothes_2000087_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0",
+        "source": "event_shop",
         "art": true
       },
       {
@@ -9330,7 +9257,6 @@
         "icon": "TI_Costume_Clothes_2000087_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -9346,7 +9272,6 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -9459,7 +9384,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -9571,7 +9495,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -9587,7 +9510,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -9700,8 +9622,7 @@
         "icon": "TI_Costume_Clothes_2000090_02",
         "grade": "rare",
         "sort": 1,
-        "source": "shop",
-        "fusionModel": "0",
+        "source": "package_shop",
         "art": true
       }
     ]
@@ -9814,7 +9735,6 @@
         "grade": "magic",
         "sort": 1,
         "source": "world_boss_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -10112,7 +10032,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -10502,7 +10421,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -10798,7 +10716,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11093,7 +11010,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11296,7 +11212,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11406,7 +11321,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -11422,7 +11336,6 @@
         "grade": "rare",
         "sort": 2,
         "source": "event_shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11535,7 +11448,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11743,7 +11655,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -11758,7 +11669,6 @@
         "icon": "TI_Costume_Clothes_2000111_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11871,7 +11781,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -11886,7 +11795,6 @@
         "icon": "TI_Costume_Clothes_2000112_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -11996,7 +11904,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12108,8 +12015,6 @@
         "icon": "TI_Costume_Clothes_2000114_02",
         "grade": "rare",
         "sort": 1,
-        "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12221,7 +12126,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12333,7 +12237,6 @@
         "grade": "rare",
         "sort": 1,
         "source": "shop",
-        "fusionModel": "0",
         "art": true
       },
       {
@@ -12348,7 +12251,6 @@
         "icon": "TI_Costume_Clothes_2000117_03",
         "grade": "rare",
         "sort": 2,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12458,7 +12360,6 @@
         "icon": "TI_Costume_Clothes_2000118_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12582,7 +12483,6 @@
         "icon": "TI_Costume_Clothes_2000119_02",
         "grade": "rare",
         "sort": 1,
-        "fusionModel": "0",
         "art": true
       }
     ]
@@ -12679,6 +12579,117 @@
     "recommendedSets": ["13", "1", "7"],
     "ignoreDefense": ["kit", "ee"],
     "tags": ["seasonal", "ignore-defense"]
+  },
+  "2000122": {
+    "id": "2000122",
+    "name": {
+      "en": "Titia",
+      "jp": "ティティア",
+      "kr": "티티아",
+      "zh": "蒂蒂亚"
+    },
+    "rarity": 3,
+    "element": "fire",
+    "class": "mage",
+    "race": "human",
+    "icon": "2000122",
+    "skills": [
+      "12201",
+      "12202",
+      "12203",
+      "12204",
+      "12205",
+      "12206",
+      "12208",
+      "12209",
+      "12210",
+      "12219",
+      "12220",
+      "12221",
+      "4"
+    ],
+    "stats": {
+      "hp": {
+        "min": 498,
+        "max": 3433
+      },
+      "atk": {
+        "min": 86,
+        "max": 861
+      },
+      "def": {
+        "min": 16,
+        "max": 167
+      },
+      "speed": {
+        "min": 124,
+        "max": 124
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 10,
+        "max": 100
+      }
+    },
+    "nickname": {
+      "en": "Attorney of Conviction",
+      "jp": "信念の弁護士",
+      "kr": "신념의 변호사",
+      "zh": "信念的律师"
+    },
+    "subClass": "wizard",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "Oh Ro-ah",
+      "jp": "オ・ロア",
+      "kr": "오로아",
+      "zh": ""
+    },
+    "profile": {
+      "birthday": "02/20",
+      "height": 164,
+      "weight": 50,
+      "story": {
+        "en": "This is <Color=#FFBF00>Titia</Color>, a renowned lawyer from Mirsha.\\nShe was born into a noble family that ruled a small nation, but became disillusioned with a society that turned a blind eye to the exploitation of the weak by the powerful. This led her to become a lawyer. Since then, she has extended a helping hand to anyone who has been wronged, regardless of their status. In addition to her unwavering convictions, she is also highly skilled, winning every case she takes on.\\n\\nWith all the trouble we tend to get ourselves into, I think Titia would make a dependable ally! So, why don't you try building a good relationship with her?",
+        "jp": "こちらは、メルシャで名高い弁護士、<Color=#FFBF00>ティティア</Color>様です。\\nもとは小国を治める貴族家のご令嬢でしたが、弱者が強者に搾取されるという不道徳な行いを見て見ぬふりする現実に幻滅し、弁護士になったそうです。それ以来、理不尽な目に遭った者であれば、身分の高低を問わず救いの手を差し伸べているのだとか。確固たる信念をお持ちであるうえ、裁判では常に勝訴を収めるほど、実力も非常に優れているそうです。\\n\\nティティア様なら、いつも何かと事件に巻き込まれる私たちにとって、心強い味方になってくれそうです！ですから宰相様、この方と良い関係を築いてみてはいかがでしょうか？",
+        "kr": "이분은 명망 높은 메르샤의 변호사, <Color=#FFBF00>티티아</Color> 님이세요.\\n본래는 작은 나라를 다스리는 귀족 가문의 영애셨는데, 약자가 강자에게 착취당하는 비도덕적인 행태를 방관하는 현실에 환멸을 느끼고 변호사가 되었다고 해요. 이후로, 억울한 자라면 신분의 고하를 막론하고 도움의 손길을 건네신다고 하네요. 대단한 신념을 지니신 것과 더불어, 언제나 재판에서 승소하실 만큼 실력도 뛰어나시다고 해요.\\n\\n티티아 님은 언제나 사건 사고에 휘말리는 우리에게 좋은 우군이 될 거 같아요! 그러니 재상님, 이분과 좋은 관계를 맺어 보는 건 어떨까요?",
+        "zh": "这位是弥乐沙声名远扬的律师，<Color=#FFBF00>蒂蒂亚</Color>大人。\\n她原本是统治一个小国的贵族千金，但因对弱者遭强者剥削、社会却对此视而不见的现实感到失望，于是成为了一名律师。此后，无论身份高低，只要是蒙受冤屈之人，她都会伸出援手。她不仅有着坚定的信念，实力也同样出众，在法庭上更是屡战屡胜。\\n\\n我们总是会卷入各种事件，有蒂蒂亚大人在的话，一定能成为可靠的伙伴！所以宰相大人，不妨试着和她建立良好的关系吧？"
+      }
+    },
+    "ee": "2000122",
+    "recommendedSets": ["1", "12", "13"],
+    "ignoreDefense": ["kit"],
+    "tags": ["ignore-defense"],
+    "appearances": ["2010122"],
+    "costumes": [
+      {
+        "id": "105",
+        "model": "2010122",
+        "name": {
+          "en": "Noble Justice Titia",
+          "jp": "高潔なる正義・ティティア",
+          "kr": "고결한 정의 티티아",
+          "zh": "高洁正义·缇缇娅"
+        },
+        "icon": "TI_Costume_Clothes_2000122_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "battlepass",
+        "art": true
+      }
+    ]
   },
   "2000129": {
     "id": "2000129",
@@ -12799,8 +12810,7 @@
         "icon": "TI_Costume_Clothes_2000129_02",
         "grade": "rare",
         "sort": 1,
-        "source": "battlepass",
-        "fusionModel": "0",
+        "source": "shop",
         "art": true
       }
     ]
@@ -13059,7 +13069,6 @@
     "recommendedSets": ["1", "12", "13"],
     "ignoreDefense": ["kit"],
     "tags": ["ignore-defense", "core-fusion"],
-    "appearances": ["2710005"],
     "originalCharacter": "2000005",
     "fusion": {
       "group": "2",
@@ -13127,6 +13136,99 @@
         }
       ]
     }
+  },
+  "2700019": {
+    "id": "2700019",
+    "name": {
+      "en": "Rin",
+      "jp": "リン",
+      "kr": "린",
+      "zh": "琳"
+    },
+    "rarity": 3,
+    "element": "water",
+    "class": "striker",
+    "race": "human",
+    "icon": "2700019",
+    "skills": [
+      "1951",
+      "1952",
+      "1953",
+      "1954",
+      "1955",
+      "1956",
+      "1958",
+      "1959",
+      "1960",
+      "1972",
+      "1969",
+      "1970",
+      "1971",
+      "2"
+    ],
+    "stats": {
+      "hp": {
+        "min": 486,
+        "max": 3481
+      },
+      "atk": {
+        "min": 93,
+        "max": 930
+      },
+      "def": {
+        "min": 23,
+        "max": 247
+      },
+      "speed": {
+        "min": 122,
+        "max": 122
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 11,
+        "max": 110
+      }
+    },
+    "nickname": {
+      "en": "Resonance",
+      "jp": "レゾナンス",
+      "kr": "레조넌스",
+      "zh": "共鸣"
+    },
+    "showNickName": true,
+    "subClass": "attacker",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "Val Rodriguez",
+      "jp": "本渡楓",
+      "kr": "김연우",
+      "zh": ""
+    },
+    "profile": {
+      "birthday": "04/13",
+      "height": 165,
+      "weight": 45,
+      "story": {
+        "en": "This is <Color=#FFBF00>Onimaru Rin</Color>, a Soulslayer transformed by the potential lying dormant within her.\\nRin sought our help with Shutendouji, the yokai sealed within her sword, and you agreed to help her. Once the process truly began, however, neither of you woke for several days, as though you had fallen into a state of suspended animation. I was so worried! Thankfully, nothing terrible happened. In the end, Rin transformed into another possible form in which <Color=#FFBF00>the two beings coexist</Color>, and she seems somewhat more stable than before. Of course, it's still too soon to say whether this was truly a good outcome.\\n\\nBut one thing seems certain. Thanks to you, Rin has gained the strength to cut through whatever problems may stand in her way from now on.",
+        "jp": "こちらは、秘められた可能性によって変化を遂げた霊斬士、<Color=#FFBF00>鬼丸リン</Color>様です。\\nリン様は、刀に封じた妖怪・酒呑童子に関する問題で助けを求められ、主はその願いを受け入れられましたね。その後、本格的な段階に入った際、お二人ともまるで仮死状態に陥ったかのように数日間も目を覚まされなかったので、本当に心配しました！幸い、何事も起こりませんでしたけどね。その結果、リン様は<Color=#FFBF00>二つの存在が共存</Color>する、もう一つの可能性を体現した姿へと変わられ、以前よりはいくらか落ち着きを取り戻されたようです。もちろん、これが良い結果だったと断言することはできませんが。\\n\\nですが、一つだけは確かなようです。主のおかげで、リン様はこれからどんな問題が立ちはだかろうとも、一刀両断できる強さを手に入れられたということです。",
+        "kr": "이분은 잠재된 가능성을 통해 변화한 영참사 <Color=#FFBF00>오니마루 린</Color> 님이십니다.\\n린 님께서 칼에 봉인한 요괴 슈텐도지에 관한 문제로 도움을 청하셨고, 재상님은 그걸 받아들이셨죠. 이후, 본격적인 과정에 들어갔을 때, 두 분 다 마치 가사 상태에 빠진 듯 수일간 깨어나시지 않아 정말 걱정했어요! 다행히 나쁜 일은 일어나지 않았지만요. 결과적으로 린 님은 <Color=#FFBF00>두 존재가 공존</Color>하는 또 다른 가능성의 형태로 모습이 변하셨고, 전보다는 다소 안정을 찾은 듯하세요. 물론, 이게 좋은 결과라고 예단할 수는 없겠죠.\\n\\n하지만, 한 가지는 확실할 거 같네요. 재상님 덕분에 린 님은 앞으로 다가올 어떤 문제든, 일도양단할 강함을 손에 넣으셨다는걸.",
+        "zh": "这位是凭借自身潜藏的可能性发生了改变的灵斩师，<Color=#FFBF00>鬼丸琳</Color>大人。\\n琳大人曾因封印在刀中的妖怪酒吞童子而向我们求助，宰相大人也答应帮助她了呢。后来正式进入过程后，两位竟像陷入假死状态一般，连续数日都没有醒来，真的让我非常担心！幸好最终并没有发生什么坏事。结果，琳大人变成了另一种可能性的形态，让<Color=#FFBF00>两个存在得以共存</Color>，看起来也比以前稳定了一些。当然，现在还不能断言这一定是个好结果。\\n\\n不过，有一点似乎可以确定。多亏了宰相大人，琳大人已经获得了足以将今后遇到的任何问题一刀两断的强大力量。"
+      }
+    },
+    "ee": "2700019",
+    "recommendedSets": ["1", "12", "13"]
   },
   "2700037": {
     "id": "2700037",
@@ -13222,7 +13324,6 @@
     "recommendedSets": ["3", "2", "7"],
     "ignoreDefense": ["kit"],
     "tags": ["ignore-defense", "core-fusion"],
-    "appearances": ["2710037", "2720037", "2730037"],
     "originalCharacter": "2000037",
     "fusion": {
       "group": "1",
@@ -13383,7 +13484,6 @@
     "ee": "2700043",
     "recommendedSets": ["5", "13", "1"],
     "tags": ["core-fusion"],
-    "appearances": ["2710043"],
     "originalCharacter": "2000043",
     "fusion": {
       "group": "5",
@@ -13544,7 +13644,6 @@
     "ee": "2700056",
     "recommendedSets": ["13", "1", "7"],
     "tags": ["core-fusion"],
-    "appearances": ["2710056", "2720056"],
     "originalCharacter": "2000056",
     "fusion": {
       "group": "4",
