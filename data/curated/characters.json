@@ -4488,6 +4488,14 @@
       ]
     }
   },
+  "2000122": {
+    "role": "dps",
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
+  },
   "2000129": {
     "videos": [
       {

@@ -1,5 +1,55 @@
 [
   {
+    "date": "2026-09-08",
+    "type": "character",
+    "title": {
+      "en": "Titia",
+      "jp": "ティティア",
+      "kr": "티티아",
+      "zh": "蒂蒂亚",
+      "fr": "Titia"
+    },
+    "content": {
+      "en": ["Titia has been added to the database with full skills and stats."],
+      "jp": ["ティティアが、スキルとステータスをすべて含めてデータベースに追加されました。"],
+      "kr": ["티티아가 모든 스킬과 능력치를 갖춘 상태로 데이터베이스에 추가되었습니다."],
+      "zh": ["蒂蒂亚已连同其全部技能和属性数据一并添加至数据库中。"],
+      "fr": [
+        "Titia a été ajoutée à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "titia"
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "type": "character",
+    "title": {
+      "en": "Resonance Rin",
+      "jp": "レゾナンス・リン",
+      "kr": "레조넌스 린",
+      "zh": "共鸣凛",
+      "fr": "Resonance Rin"
+    },
+    "content": {
+      "en": ["Resonance Rin has been added to the database with full skills and stats."],
+      "jp": [
+        "「レゾナンス・リン」が、スキルとステータス情報をすべて含めてデータベースに追加されました。"
+      ],
+      "kr": ["‘레조넌스 린’이 전체 스킬과 능력치를 포함한 상태로 데이터베이스에 추가되었습니다."],
+      "zh": ["“共鸣凛”已加入数据库，包含完整的技能和属性。"],
+      "fr": [
+        "Resonance Rin a été ajoutée à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "resonance-rin"
+    }
+  },
+  {
     "date": "2026-08-31",
     "type": "news",
     "title": {
@@ -14,10 +64,6 @@
         "OUTERPLANE has been on Steam since 26 August. If you play it there, a review is the simplest way to help other players find it.",
         "It takes a minute — say what you actually think, good or bad. And if you started on mobile, your account comes with you."
       ],
-      "fr": [
-        "OUTERPLANE est sur Steam depuis le 26 août. Si vous y jouez, un avis est le moyen le plus simple d'aider d'autres joueurs à le découvrir.",
-        "Ça prend une minute — dites ce que vous en pensez vraiment, en bien comme en mal. Et si vous avez commencé sur mobile, votre compte vous suit."
-      ],
       "jp": [
         "OUTERPLANEは8月26日よりSteamで配信されています。Steamでプレイされている方にとって、レビューはこのゲームをほかのプレイヤーに知ってもらういちばん簡単な方法です。",
         "書くのは1分ほど。良かったところも気になったところも、思ったままで大丈夫です。モバイルで始めた方も、アカウントはそのまま引き継げます。"
@@ -29,6 +75,10 @@
       "zh": [
         "OUTERPLANE 自 8 月 26 日起在 Steam 上线。如果你在 Steam 上游玩，写一条评测就是让更多玩家发现它最简单的方式。",
         "花一分钟就够了——喜欢的地方、不满意的地方，照实写就好。如果你是从手机端开始的，账号也会跟着一起过来。"
+      ],
+      "fr": [
+        "OUTERPLANE est sur Steam depuis le 26 août. Si vous y jouez, un avis est le moyen le plus simple d'aider d'autres joueurs à le découvrir.",
+        "Ça prend une minute — dites ce que vous en pensez vraiment, en bien comme en mal. Et si vous avez commencé sur mobile, votre compte vous suit."
       ]
     }
   },
