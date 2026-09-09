@@ -5,7 +5,8 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 
 /**
  * Tooltip inline partagé (Radix HoverCard).
- * Desktop : survol. Mobile : tap pour ouvrir, tap ailleurs pour fermer.
+ * Desktop : survol. Mobile : tap pour ouvrir, tap ailleurs pour fermer — et,
+ * quand le déclencheur est un lien, second tap dessus pour y aller.
  *
  * Par défaut le contenu est une IMPASSE : on le lit, on n'y entre pas. Le
  * pointeur qui quitte le déclencheur ferme aussitôt (closeDelay 0, il ne peut
@@ -37,12 +38,21 @@ export function InlineTooltip({
   const triggerRef = useRef<HTMLSpanElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const handleTap = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    if ('ontouchstart' in window) {
+  // TACTILE : premier tap = la bulle s'ouvre (le `preventDefault` sur touchend
+  // annule le click synthétisé, donc un lien enfant NE navigue PAS) ; si le
+  // déclencheur contient un lien et que la bulle est déjà ouverte, le second
+  // tap passe tel quel et le `<Link>` navigue. Avant, tout tap était avalé :
+  // un `{P/perso}` n'avait aucun chemin vers sa fiche au doigt (audit 07/09,
+  // G4). Sans lien, la bulle se contente de basculer, comme toujours.
+  const handleTap = useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
+      if (!('ontouchstart' in window)) return;
+      if (open && triggerRef.current?.querySelector('a[href]')) return;
       e.preventDefault();
       setOpen((v) => !v);
-    }
-  }, []);
+    },
+    [open],
+  );
 
   useEffect(() => {
     if (!open) return;

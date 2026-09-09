@@ -5,6 +5,16 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-09
+
+- **Audit transverse — G4, chips à lien au toucher** (`InlineTooltip`) : au
+  doigt, tout tap était avalé (`preventDefault` sur touchend annule le click
+  synthétisé) — un `{P/perso}`, `{SK/…}`, `{EE/…}` n'avait aucun chemin vers
+  sa fiche sur mobile. Désormais : premier tap = la bulle s'ouvre ; si le
+  déclencheur contient un lien et que la bulle est déjà ouverte, le second tap
+  passe et le `<Link>` navigue. Sans lien, bascule comme avant. Écrit par
+  lecture de l'ordre des événements — **à confirmer sur téléphone** (Sevih).
+
 ## 2026-09-08
 
 - **`pnpm dev` cassé par la 1.4.16 : le manifeste déclare plus que le client ne

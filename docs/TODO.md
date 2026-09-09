@@ -85,17 +85,15 @@
 
 ### Lot 1 — huit bugs invisibles depuis un poste de dev EN/desktop (une soirée)
 
-- [ ] **Les chips à lien ne naviguent pas au doigt** (G4, à CONFIRMER sur un
-      téléphone avant de toucher) : `InlineTooltip.tsx:40-45` fait
-      `preventDefault` sur touchend, le click du `<Link>` est annulé. Ne pas
-      empêcher quand le déclencheur contient un lien, ou mettre le lien dans la
-      bulle en tactile.
-
 ### Lot 2 — métier, données, outillage
 
 - [ ] Pull simulator : vérifier le pool HORS-FOCUS des bannières
-      rateup/premium/limited contre `recruit.json` (même mécanisme que le pool
-      custom, corrigé le 07/09) (G9, reste).
+      rateup/premium/limited contre le jeu (G9, reste). BLOQUÉ côté données :
+      `recruit.json` n'expose que `customPool` ; il faudrait que le générateur
+      `recruit.ts` émette aussi le pool de chaque `kind` (RecruitGroupTemplet)
+      avant de pouvoir comparer.
+- [ ] Chips à lien au toucher : VALIDER sur téléphone le « second tap =
+      navigation » posé le 09/09 (G4).
 - [ ] **Tours very hard : 12 formations ALTERNATIVES émises comme une vague de
       35 monstres** (G10) : `encounters.ts:975-1015` aplatit ce que `towers.ts`
       sait être un pool tiré au hasard (vérifié sur 40103001). C'est exactement
