@@ -1,5 +1,27 @@
 [
   {
+    "date": "2026-09-09",
+    "type": "guide",
+    "title": {
+      "en": "Chimera",
+      "jp": "キメラ",
+      "kr": "키메라",
+      "zh": "奇美拉",
+      "fr": "Chimera"
+    },
+    "content": {
+      "en": ["Dimensional Singularity Strategy Guide vs Chimera."],
+      "jp": ["次元特異点 キメラ 攻略ガイド。"],
+      "kr": ["차원 특이점 키메라 공략 가이드."],
+      "zh": ["次元奇点 奇美拉 策略攻略。"],
+      "fr": ["Guide stratégique Singularité Dimensionnelle contre Chimera."]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/dimensional-singularity/chimera"
+    }
+  },
+  {
     "date": "2026-09-08",
     "type": "update",
     "title": {

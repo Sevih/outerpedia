@@ -6,7 +6,87 @@
     "zh": "出现在次元奇点轮换中的{E/Earth}属性{C/Mage}Boss。人数检定：队伍中有3名/4名{E/Fire}属性时，它受到的伤害+50%/+120%，而{S/PEN}提升的友军再造成+50%。它散布无法解除的{D/BT_DOT_POISON}，将自身{S/SPD}降低70%以换取敌方行动后获得行动优先度，且诅咒／固定伤害上限为50000。狂暴化在其每4次行动时触发，收尾会驱散全队3个增益。",
     "fr": "Boss {E/Earth} {C/Mage} présent dans la rotation de la Singularité Dimensionnelle. Un contrôle d'effectif : avec 3 / 4 héros {E/Fire} dans l'équipe il subit +50% / +120% de dégâts, et les héros avec de la {S/PEN} en plus lui infligent encore +50%. Il répand un {D/BT_DOT_POISON} indissipable, se retire 70% de {S/SPD} mais gagne de la priorité après chaque action ennemie, et plafonne les dégâts de Malédiction / Fixes à 50000. Son Berserk se déclenche toutes les 4 de ses actions et son final retire 3 buffs à toute l'équipe."
   },
-  "tips": [],
-  "teams": [],
-  "videos": []
+  "tips": [
+    {
+      "preset": "strategy",
+      "items": [
+        {
+          "en": "Don't chase {S/SPD}. Chimera cuts its own {S/SPD} by 70% — roughly 150-160 at SSS rank — so speed is not a priority stat on your heroes. Invest the substats elsewhere.",
+          "jp": "{S/SPD}は追わない。キメラは自身の{S/SPD}を70%下げる（SSSランクでおよそ150〜160）ため、味方の速度は優先ステータスにならない。サブステータスは他に回す。",
+          "kr": "{S/SPD}를 좇지 마세요. 키메라는 자신의 {S/SPD}를 70% 낮추므로(SSS 랭크 기준 약 150~160) 아군의 속도는 우선 스탯이 아닙니다. 부옵션은 다른 곳에 투자하세요.",
+          "zh": "不必堆{S/SPD}。奇美拉会将自身{S/SPD}降低70%（SSS阶约150~160），因此速度不是队友的优先属性，把副属性投到别处。",
+          "fr": "Ne courez pas après la {S/SPD}. Chimera se retire 70% de {S/SPD} — environ 150-160 au rang SSS — donc la vitesse n'est pas une stat prioritaire sur vos héros. Investissez les sous-stats ailleurs."
+        },
+        {
+          "en": "Stack {E/Fire} heroes. With 3 {E/Fire} members in the party Chimera takes +50% damage, with 4 it takes +120% — by far the biggest damage multiplier of the fight.",
+          "jp": "{E/Fire}属性で固める。味方に{E/Fire}属性が3体いるとキメラの被ダメージは+50%、4体なら+120%になる — この戦闘で圧倒的に大きい火力倍率。",
+          "kr": "{E/Fire} 속성으로 채우세요. 아군에 {E/Fire} 속성이 3명이면 키메라가 받는 피해 +50%, 4명이면 +120%로, 이 전투에서 압도적으로 큰 피해 배율입니다.",
+          "zh": "尽量堆{E/Fire}属性。队伍中有3名{E/Fire}属性时奇美拉受到伤害+50%，4名时+120% — 是本战中远超其他的伤害倍率。",
+          "fr": "Empilez les héros {E/Fire}. Avec 3 {E/Fire} dans l'équipe, Chimera subit +50% de dégâts ; avec 4, +120% — de loin le plus gros multiplicateur du combat."
+        },
+        {
+          "en": "Bring a {S/PEN} buff. Heroes whose {S/PEN} is increased deal +50% damage to Chimera, and it stacks with the {E/Fire} bonus.",
+          "jp": "{S/PEN}バフを用意する。{S/PEN}が増加した味方はキメラに+50%のダメージを与え、{E/Fire}のボーナスと重複する。",
+          "kr": "{S/PEN} 버프를 준비하세요. {S/PEN}이 증가한 아군은 키메라에게 +50%의 피해를 주며, {E/Fire} 보너스와 함께 적용됩니다.",
+          "zh": "带上{S/PEN}增益。{S/PEN}提升的友军对奇美拉造成+50%伤害，且与{E/Fire}加成叠加。",
+          "fr": "Emmenez un buff de {S/PEN}. Les héros dont la {S/PEN} est augmentée infligent +50% de dégâts à Chimera, et ça se cumule avec le bonus {E/Fire}."
+        }
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "element": "fire",
+      "groups": [
+        {
+          "characters": ["Titia"],
+          "reason": {
+            "en": "Strong {E/Fire} DPS who also hands the team a {B/BT_STAT|ST_PIERCE_POWER_RATE} buff — exactly the +50% the boss concedes.",
+            "jp": "優秀な{E/Fire}属性DPSであり、味方に{B/BT_STAT|ST_PIERCE_POWER_RATE}バフを供給する — ボスが許す+50%をそのまま満たす。",
+            "kr": "뛰어난 {E/Fire} 속성 딜러이면서 아군에게 {B/BT_STAT|ST_PIERCE_POWER_RATE} 버프를 제공합니다 — 보스가 내주는 +50%를 그대로 채웁니다.",
+            "zh": "优秀的{E/Fire}属性输出，同时为队伍提供{B/BT_STAT|ST_PIERCE_POWER_RATE}增益 — 正好吃满Boss给出的+50%。",
+            "fr": "Bon DPS {E/Fire}, qui apporte en plus un buff {B/BT_STAT|ST_PIERCE_POWER_RATE} à l'équipe — exactement le +50% que le boss concède."
+          }
+        },
+        {
+          "characters": ["Midnight Rush Skadi"],
+          "reason": {
+            "en": "Excellent {E/Fire} DPS, and very durable.",
+            "jp": "非常に優秀な{E/Fire}属性DPSで、耐久力も高い。",
+            "kr": "매우 뛰어난 {E/Fire} 속성 딜러이며 생존력도 높습니다.",
+            "zh": "极为出色的{E/Fire}属性输出，且非常耐打。",
+            "fr": "Excellent DPS {E/Fire}, avec une très bonne survie."
+          }
+        },
+        {
+          "characters": ["Monad Eva"],
+          "reason": {
+            "en": "{B/BT_CALL_BACKUP} dual attacks, AP battery and {B/BT_REVIVAL}.",
+            "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、{B/BT_REVIVAL}。",
+            "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, {B/BT_REVIVAL}.",
+            "zh": "{B/BT_CALL_BACKUP}联携攻击、AP电池与{B/BT_REVIVAL}。",
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}."
+          }
+        },
+        {
+          "characters": ["Eris", "Vlada", "Aer", "Holy Night's Blessing Dianne"],
+          "reason": {
+            "en": "Solid {E/Fire} alternative.",
+            "jp": "優秀な{E/Fire}属性の代替。",
+            "kr": "좋은 {E/Fire} 속성 대안.",
+            "zh": "优质的{E/Fire}属性替代。",
+            "fr": "Bonne alternative {E/Fire}."
+          }
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "platform": "youtube",
+      "id": "JhsWt_6wlnw",
+      "title": "Dimensional Singularity Chimera - Titia/Skadi Team | Outerplane",
+      "author": "Baba Yaga"
+    }
+  ]
 }
