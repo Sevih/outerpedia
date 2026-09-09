@@ -144,7 +144,9 @@ export function SkillCard({
   statuses: StatusMap;
   labels: SkillCardLabels;
 }) {
-  const [level, setLevel] = useState(1);
+  // Niveau montré par défaut : le plus haut que la compétence possède. Toutes ne
+  // montent pas à 5 — certaines plafonnent à 4, 2 ou 1.
+  const [level, setLevel] = useState(skill.maxLevel);
   const lv = levelAt(skill.levels, Math.min(level, skill.maxLevel));
 
   return (

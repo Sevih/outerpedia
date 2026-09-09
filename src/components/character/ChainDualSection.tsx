@@ -44,7 +44,8 @@ export function ChainDualSection({
   statuses: StatusMap;
   labels: { wgr: string; dualWgr: string; level: string; enhancement: string };
 }) {
-  const [level, setLevel] = useState(1);
+  // Même défaut que les cartes de compétence : le niveau max de la compétence.
+  const [level, setLevel] = useState(maxLevel);
   const lv = levelAt(levels, Math.min(level, maxLevel));
 
   return (
