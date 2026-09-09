@@ -7528,58 +7528,12 @@
         {
           "id": "1796",
           "mainStat": "PEN%"
-        },
-        {
-          "id": "1801",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1023",
-          "mainStat": "ATK%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["10004", "10003", "10001", "10010", "10007"],
       "sets": [
         {
           "preset": "a4"
-        }
-      ],
-      "substats": "$dps"
-    },
-    {
-      "name": "Critical Strike",
-      "weapons": [
-        {
-          "id": "17",
-          "mainStat": "ATK%"
-        }
-      ],
-      "amulets": [
-        {
-          "id": "1013",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1034",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1796",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1801",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1023",
-          "mainStat": "ATK%"
-        }
-      ],
-      "talismans": ["$CPdps"],
-      "sets": [
-        {
-          "preset": "chd4"
         }
       ],
       "substats": "$dps"
@@ -7604,17 +7558,9 @@
         {
           "id": "1796",
           "mainStat": "PEN%"
-        },
-        {
-          "id": "1801",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1023",
-          "mainStat": "ATK%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["10004", "10003", "10001", "10010", "10007"],
       "sets": [
         {
           "preset": "s4"
@@ -7623,7 +7569,7 @@
       "substats": "$dps"
     },
     {
-      "name": "Pen combos",
+      "name": "Penetration",
       "weapons": [
         {
           "id": "17",
@@ -7642,35 +7588,18 @@
         {
           "id": "1796",
           "mainStat": "PEN%"
-        },
-        {
-          "id": "1801",
-          "mainStat": "PEN%"
-        },
-        {
-          "id": "1023",
-          "mainStat": "ATK%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["10004", "10003", "10001", "10010", "10007"],
       "sets": [
         {
-          "preset": "p2s2"
-        },
-        {
-          "preset": "p2a2"
-        },
-        {
-          "preset": "p2ag2"
-        },
-        {
-          "preset": "p2chd2"
+          "preset": "p4"
         }
       ],
       "substats": "$dps"
     },
     {
-      "name": "Pen",
+      "name": "Pen mix",
       "weapons": [
         {
           "id": "17",
@@ -7679,14 +7608,31 @@
       ],
       "amulets": [
         {
-          "id": "1023",
-          "mainStat": "ATK%"
+          "id": "1013",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1034",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1796",
+          "mainStat": "PEN%"
         }
       ],
-      "talismans": ["$CPdps"],
+      "talismans": ["10004", "10003", "10001", "10010", "10007"],
       "sets": [
         {
-          "preset": "p4"
+          "preset": "p2s2"
+        },
+        {
+          "preset": "p2a2"
+        },
+        {
+          "preset": "p2chd2"
+        },
+        {
+          "preset": "p2ag2"
         }
       ],
       "substats": "$dps"

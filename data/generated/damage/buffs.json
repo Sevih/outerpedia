@@ -558,6 +558,178 @@
         "tooltipId": 27
       }
     ],
+    "155323_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 1000,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_START",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 1,
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "155324_1": [
+      {
+        "level": 1,
+        "type": "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "value": 1000,
+        "targetSkillType": "SKT_SECOND",
+        "createType": "PASSIVE",
+        "conditionType": "CASTER_DAMAGED",
+        "turnDuration": -1,
+        "additiveAttack": true
+      }
+    ],
+    "155325_1": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "conditionType": "OWNER_HAS_NOT_BUFF",
+        "conditionValue": 1,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "155326_1": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 1000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_HAS_NOT_BUFF",
+        "conditionValue": 12,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "155327_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 1000,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_START",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 2,
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "155328_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_BUFF_RESIST",
+        "applyingType": "OAT_RATE",
+        "value": -1000,
+        "callerSkillType": "SKT_SECOND",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 21
+      }
+    ],
+    "155329_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 17
+      }
+    ],
+    "155330_1": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "OWNER_RUN_COUNTER",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "155330_2": [
+      {
+        "level": 1,
+        "type": "BT_STAT_PREMIUM",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_REDUCE_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 1000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
     "2000001_1_1": [
       {
         "level": 1,
@@ -43846,6 +44018,292 @@
         "additiveAttack": true
       }
     ],
+    "2000122_1_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 700,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_RESIST",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 17
+      },
+      {
+        "level": 3,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 850,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_RESIST",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 17
+      },
+      {
+        "level": 5,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_RESIST",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -500,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 17
+      }
+    ],
+    "2000122_2_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 8
+      },
+      {
+        "level": 5,
+        "type": "BT_STAT",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 3,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 8
+      }
+    ],
+    "2000122_2_2": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 200,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1",
+        "createType": "SKILL_FINISH",
+        "conditionType": "ATTACKER_ELEMENT_WIN",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2000122_3_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 5,
+        "buffDebuffType": "DEBUFF_IGNORE_RESIST",
+        "stat": "ST_DMG_REDUCE_RATE",
+        "applyingType": "OAT_ADD",
+        "value": -50,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      },
+      {
+        "level": 5,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_SKILL_TARGET",
+        "createRate": 1000,
+        "stackCount": 5,
+        "buffDebuffType": "DEBUFF_IGNORE_RESIST",
+        "stat": "ST_DMG_REDUCE_RATE",
+        "applyingType": "OAT_ADD",
+        "value": -150,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2000122_3_2": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_ALL",
+        "createType": "SKILL_START",
+        "conditionType": "TARGET_IS_BOSS",
+        "conditionValue": 1,
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2000122_3_3": [
+      {
+        "level": 1,
+        "type": "BT_COOL_CHARGE",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_ALL",
+        "createType": "SKILL_FINISH",
+        "conditionType": "CASTER_TEAM_ELEMENT_FIRE_COUNT",
+        "conditionValue": 4,
+        "removeType": "IMMEDIATELY",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2000122_U_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_BURST_2,SKT_BURST_3,SKT_BURST_1",
+        "createType": "SKILL_START",
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2000122_U_2": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 500,
+        "callerSkillType": "SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_START",
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2000122_U_2_1": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 300,
+        "callerSkillType": "SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "conditionType": "ATTACKER_ELEMENT_WIN",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2000122_U_3": [
+      {
+        "level": 1,
+        "type": "BT_COOL3_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 99,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2000122_backup_1_1": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 200,
+        "callerSkillType": "SKT_BACKUP_AERIAL,SKT_BACKUP_GROUND",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2000122_chain_1_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_STRIKE_AERIAL,SKT_STRIKE_GROUND",
+        "createType": "CHAIN_STRIKER_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 8
+      }
+    ],
     "2000129_1_1": [
       {
         "level": 1,
@@ -44916,6 +45374,280 @@
         "conditionValue": 1,
         "turnDuration": -1,
         "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_1_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 3,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_CRITICAL_DMG_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 200,
+        "callerSkillType": "SKT_FIRST,SKT_EXTRA",
+        "createType": "SKILL_FINISH",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_2_1": [
+      {
+        "level": 1,
+        "type": "BT_COOL2_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 4,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 9998,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700019_2_2": [
+      {
+        "level": 1,
+        "type": "BT_COOL3_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_SECOND",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700019_2_3": [
+      {
+        "level": 1,
+        "type": "BT_EXTRA_ATTACK_ON_TURN_END",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "value": 1000,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_2_4": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 3,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 150,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_3_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_START",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 8
+      },
+      {
+        "level": 4,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_PIERCE_POWER_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_START",
+        "turnDuration": 3,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 8
+      }
+    ],
+    "2700019_3_2": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 1000,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700019_backup_1_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_CRITICAL_DMG_RATE",
+        "applyingType": "OAT_ADD",
+        "value": 500,
+        "callerSkillType": "SKT_BACKUP_AERIAL,SKT_BACKUP_GROUND",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 1,
+        "removeType": "ON_TURN_END",
+        "additiveAttack": true,
+        "tooltipId": 12
+      }
+    ],
+    "2700019_chain_1_1": [
+      {
+        "level": 1,
+        "type": "BT_WG_REVERSE_HEAL",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_ADD",
+        "value": 3,
+        "callerSkillType": "SKT_STRIKE_AERIAL,SKT_STRIKE_GROUND",
+        "createType": "CHAIN_STRIKER_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_1": [
+      {
+        "level": 1,
+        "type": "BT_COOL3_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 2,
+        "callerSkillType": "SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_1_2": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 300,
+        "callerSkillType": "SKT_BURST_1",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_2": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_BURST_2",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_3_1": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_3_2": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 2,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700019_u_3_3": [
+      {
+        "level": 1,
+        "type": "BT_COOL3_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 99,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
         "additiveAttack": true
       }
     ],
@@ -71049,6 +71781,44 @@
         "isEquipBuff": true
       }
     ],
+    "BID_CEQUIP_2000122": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "SKILL_START",
+        "conditionType": "TARGET_ELEMENT",
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "BID_CEQUIP_2000122_ADD": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "MY_TEAM_ELEMENT_FIRE_ALL",
+        "createRate": 1000,
+        "stackCount": 4,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 150,
+        "callerSkillType": "SKT_ALL",
+        "createType": "SKILL_FINISH",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
     "BID_CEQUIP_2000129": [
       {
         "level": 1,
@@ -71165,6 +71935,45 @@
         "createType": "ON_TURN_END_ATTACKER_TEAM",
         "conditionType": "CASTER_TEAM_ACTIVED_CLASS",
         "conditionValue": 4,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "isEquip": true,
+        "isEquipBuff": true
+      }
+    ],
+    "BID_CEQUIP_2700019": [
+      {
+        "level": 1,
+        "type": "BT_DMG_TO_BOSS",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 500,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "BID_CEQUIP_2700019_ADD": [
+      {
+        "level": 1,
+        "type": "BT_DMG",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 750,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 2,
         "turnDuration": -1,
         "isTypeOverlap": true,
         "additiveAttack": true,
@@ -144923,6 +145732,43 @@
         "turnDuration": -1,
         "isIdOverlap": true,
         "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "trancendent_8_2700019_1": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE_FINAL",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 400,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 2,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "trancendent_8_2700019_2": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 200,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "TARGET_ELEMENT",
+        "conditionValue": 2,
+        "removeType": "IMMEDIATELY",
         "additiveAttack": true
       }
     ],

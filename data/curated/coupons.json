@@ -34,7 +34,7 @@
   {
     "code": "LOVEDELTA",
     "start": "2026-08-02",
-    "end": "2026-10-11",
+    "end": "2026-09-08",
     "description": {
       "1000005": "10"
     }
@@ -316,7 +316,7 @@
   {
     "code": "HAPPYNEW2026",
     "start": "2026-02-13",
-    "end": "2026-08-30",
+    "end": "2026-09-30",
     "description": {
       "SYS_ASSET_FREE_CRYSTAL": "1500",
       "COSTUME_22": "1"
