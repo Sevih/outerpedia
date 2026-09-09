@@ -162,10 +162,43 @@
       `globals.css` FAITS ; pas de `--text-2xs` pour les 349 `text-[10/11px]` ;
       schémas persistés non normalisés (tier-list-maker) ; Twitch `parent` sans
       les sous-domaines ; `lefthook` `parallel: true` format+lint.
-- [ ] **Lot non couvert à relancer** : le code TSX des 148 guides (seuls les
-      JSON ont été passés au script — l'agent prévu a été coupé par le quota),
-      18 générateurs de `datagen/generators/` listés dans le rapport,
-      `portrait-fx-*.ts` (WebGL).
+- [ ] **Lot non couvert à relancer** : `portrait-fx-*.ts` (WebGL). Les guides
+      sont audités (09/09, [audit/guides.md](./audit/guides.md)) ; les 18
+      générateurs sont en cours.
+
+### Audit du code des guides (09/09, H5–H14 — ce qui reste)
+
+- [ ] **Quatre index « nom EN → item », trois avec repli muet** (H5) :
+      `gear`, `heroes-growth`, `shop-purchase-priorities` recopient une IIFE
+      `CATALOG_BY_NAME` qui rend un `<span>` texte sur un nom inconnu ;
+      `itemChipByName` (`editorial/banner/items.ts`) jette. Consommer
+      `itemChipByName` partout.
+- [ ] **152 couleurs Tailwind brutes dans 17 fichiers de guides** (H6) alors
+      que `--ed-{sky,violet,emerald,amber,rose,cyan}` existent pour ça
+      (`how-to-play` 23, `banner-mileage` 20, `roadmap-2026` 14 + 12 dans
+      `data.ts`, `outerplane-on-linux` 14, `daily-stamina` 13…) ; SVG en dur
+      dans `MonadGateMap`, `TowerCombatRoster`, `BannerTabs`, `AdventureGrid`.
+- [ ] Anglais en dur dans des rendus localisés (H7, reste) : « Cost: »
+      (`gear`), « Lv. 1 »/`orLabel="or"` (`core-fusion`), « Lv {lv} »
+      (`fusion.tsx`), « WB: »/`alt="Ether"` (`ether-income`), « SPD »
+      (`BuildRequirements`, `TurnOrder` — `statAbbr('spd')` existe),
+      `PERIOD_ABBR` D/W/M/O (`shop-purchase-priorities`), `aria-label` « N
+      stars » (`premium.tsx`), 5 `alt` de `roadmap-2026` ; `lang="en"` sur le
+      conteneur d'`outerplane-on-linux`.
+- [ ] `alt` contraires à la règle maison (H8) : `HeroReviewCard` (slugs bruts),
+      doublons icône+texte dans `premium.tsx`, `BannerTabs`, `LicenseTabs`,
+      `CardArt`, `fusion.tsx`.
+- [ ] 92 chaînes courtes des `labels.ts` déjà dans les locales (H9) — deux
+      vocabulaires pour un mot ; `t()` pour le chrome, `labels.ts` pour la
+      prose. `eslint-disable` évitable dans `ether-income/Calculator.tsx:217`
+      (H10). `QA` doublon de `QACard`, `Card`/`Heading`/`TableShell` définis
+      dans le corps du composant, `goldCell` ×2 (H11).
+- [ ] Hash d'onglets trompeurs de `banner-mileage` (`#banner=pickup` ouvre le
+      custom…, H12) ; `reward`/`rewardWin` priorité inversée entre 3 sites
+      (H13, sans effet aujourd'hui) ; à confirmer : doublon SEO
+      `/<tour>/1` vs page de base, encart « annoncé juin, livré 8/09 » sur la
+      roadmap (H14). Rendre `stamp:guides` automatique (hook pre-commit) pour
+      que H3 ne se reproduise pas.
 
 ---
 

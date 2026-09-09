@@ -8,7 +8,7 @@
  * pool — plus de liste éditoriale par exclusion, comme c'était le cas avant.
  */
 import { Fragment, type ReactNode } from 'react';
-import type { Lang } from '@/lib/i18n/config';
+import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
@@ -68,7 +68,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
         href: slug ? localePath(lang, `/characters/${slug}`) : undefined,
       };
     })
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => a.name.localeCompare(b.name, LANGUAGES[lang].htmlLang));
 
   const freeTab = (
     <div className="space-y-6">

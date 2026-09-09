@@ -362,7 +362,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
       {videos?.length ? (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xl font-bold">{t('guides.combat_footage')}</h2>
-          <MultiVideoEmbed videos={videos} />
+          <MultiVideoEmbed byLabel={t('video.by')} videos={videos} />
           <VideoJsonLd videos={videos} />
         </section>
       ) : null}

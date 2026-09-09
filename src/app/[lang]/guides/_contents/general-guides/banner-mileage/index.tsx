@@ -134,13 +134,18 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
     return rows;
   };
 
-  /** Encart mileage d'un type (coût généré ; défaut historique = 200 si absent). */
+  /** Encart mileage d'un type (coût généré — absent = donnée cassée, on jette). */
   const mileageInfo = (kind: keyof typeof MILEAGE_OF, note?: string): ReactNode => {
     const info = getRecruitKind(kind);
+    // Les cinq kinds portent la valeur ; un repli (200) masquerait un futur
+    // trou de `recruit.json` au lieu de casser le build comme le reste du guide.
+    if (info.mileageCost === undefined) {
+      throw new Error(`banner-mileage : pas de coût de mileage pour « ${kind} » dans recruit.json`);
+    }
     return (
       <MileageInfo
         mileage={itemChipByName(MILEAGE_OF[kind], lang)}
-        cost={info.mileageCost ?? 200}
+        cost={info.mileageCost}
         lang={lang}
         {...(kind === 'equipment' ? { target: 'gear' as const } : {})}
         {...(note ? { note } : {})}

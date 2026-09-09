@@ -63,8 +63,11 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
   const reviewed = new Set(fusionReviews.map((r) => r.name));
   for (const p of pairs) {
     const name = characterDisplayName(p.fusion, 'en');
+    // STRICT comme le reste du guide : un `console.warn` ne casse pas le build
+    // et se répétait à chaque rendu — c'est le commentaire ci-dessus qui dit
+    // vrai, pas l'ancien avertissement.
     if (!reviewed.has(name)) {
-      console.warn(`core-fusion : « ${name} » (${p.fusion.id}) n'a pas encore de review`);
+      throw new Error(`core-fusion : « ${name} » (${p.fusion.id}) n'a pas encore de review`);
     }
   }
 

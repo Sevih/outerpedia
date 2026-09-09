@@ -15,6 +15,30 @@
   passe et le `<Link>` navigue. Sans lien, bascule comme avant. Écrit par
   lecture de l'ordre des événements — **à confirmer sur téléphone** (Sevih).
 
+- **Audit du code des guides** ([audit/guides.md](./audit/guides.md), H1–H14) —
+  le lot que l'audit transverse n'avait pas lu. Verdict sain, aucun Haute.
+  Traité le jour même :
+  - **Roadmap 2026 : les « Core Fusion » affichaient les persos de BASE**
+    (`'Lisha'` résout 2000005 par nom d'affichage) — les cinq fusions livrées
+    nomment désormais « Core Fusion X » (2700005…) ; Rin reste la base, sa
+    fusion n'est pas en donnée.
+  - **Tour very hard : un id de boss inconnu rendait le premier combat en 200**
+    (`?? combats[0]`) — repli seulement sans segment, `notFound()` sinon.
+  - **20 guides datés avant leur dernier changement de contenu** (le commit
+    du 07/08 « Heatwave Cop Delta partout où Ryu Lion est recommandée » n'avait
+    pas été stampé) — `updated` posé au 07/08.
+  - **« by {author} » en anglais dans les 5 langues sur 21 guides** —
+    `t('video.by')` sur `VersionedBossGuide`/`StagedBossGuide`, et `byLabel`
+    devient OBLIGATOIRE dans `MultiVideoEmbed`.
+  - Petits : commentaires qui mentaient (`PursuitLootRow`, `sharedGroup`,
+    « VERBATIM (core-fusion-priorities.json) », « translucides »),
+    `type="button"` (`LicenseTabs`, `ModeColumns`), tri et format avec la
+    locale de la page (`free-heroes-start-banner`, `TowerGuide`), fuseau UTC
+    sur la date d'archive (`BossPanel`), `banner-mileage` jette au lieu de
+    replier sur 200 (les cinq kinds portent la valeur, 150 pour limited et
+    equipment — le repli aurait été FAUX), `core-fusion` jette au lieu de
+    `console.warn` à chaque rendu (STRICT, comme son commentaire l'annonçait).
+
 ## 2026-09-08
 
 - **`pnpm dev` cassé par la 1.4.16 : le manifeste déclare plus que le client ne

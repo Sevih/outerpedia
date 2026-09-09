@@ -886,13 +886,24 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
   },
 ];
 
-/** Persos Core Fusion (noms éditoriaux EN + mois d'arrivée). */
+/**
+ * Persos Core Fusion (noms éditoriaux EN + mois d'arrivée). Le nom est celui
+ * de la FUSION (« Core Fusion Lisha », 2700005), pas de la base : `Lisha` seul
+ * résout 2000005 et la section affichait six portraits de bases avec leurs
+ * liens (audit guides 09/09). Rin : sa fusion n'est pas encore en donnée
+ * (annoncée juin, livrée le 8/09 d'après la roadmap H2) — la base reste le
+ * seul portrait résolvable, à passer en « Core Fusion Rin » quand elle sera
+ * intégrée.
+ */
 export const CORE_FUSION_CHARS: Array<{ name: string; month: Text }> = [
-  { name: 'Lisha', month: { en: 'Jan', jp: '1月', kr: '1월', zh: '1月', fr: 'Janv.' } },
-  { name: 'Snow', month: { en: 'Feb', jp: '2月', kr: '2월', zh: '2月', fr: 'Fév.' } },
-  { name: 'Notia', month: { en: 'Mar', jp: '3月', kr: '3월', zh: '3月', fr: 'Mars' } },
-  { name: 'Eternal', month: { en: 'Apr', jp: '4月', kr: '4월', zh: '4月', fr: 'Avr.' } },
-  { name: 'Epsilon', month: { en: 'May', jp: '5月', kr: '5월', zh: '5月', fr: 'Mai' } },
+  { name: 'Core Fusion Lisha', month: { en: 'Jan', jp: '1月', kr: '1월', zh: '1月', fr: 'Janv.' } },
+  { name: 'Core Fusion Snow', month: { en: 'Feb', jp: '2月', kr: '2월', zh: '2月', fr: 'Fév.' } },
+  { name: 'Core Fusion Notia', month: { en: 'Mar', jp: '3月', kr: '3월', zh: '3月', fr: 'Mars' } },
+  {
+    name: 'Core Fusion Eternal',
+    month: { en: 'Apr', jp: '4月', kr: '4월', zh: '4月', fr: 'Avr.' },
+  },
+  { name: 'Core Fusion Epsilon', month: { en: 'May', jp: '5月', kr: '5월', zh: '5月', fr: 'Mai' } },
   { name: 'Rin', month: { en: 'Jun', jp: '6月', kr: '6월', zh: '6月', fr: 'Juin' } },
 ];
 

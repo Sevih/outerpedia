@@ -41,7 +41,10 @@ import { Disclosure } from '@/components/ui/Disclosure';
  * n'a pas de sens (l'archive décrit un état du JEU, pas un instant).
  */
 function archiveDate(iso: string, lang: Lang): string {
+  // `timeZone: 'UTC'` comme `formatGuideDate` : sans lui, le jour affiché
+  // dépendait du fuseau du serveur de build.
   return new Date(iso).toLocaleDateString(LANGUAGES[lang].htmlLang, {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'long',
     day: 'numeric',

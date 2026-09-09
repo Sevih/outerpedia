@@ -46,6 +46,7 @@ export function LicenseTabs({
         <div className="flex justify-center gap-2">
           {(['weekly', 'promotion'] as const).map((key) => (
             <button
+              type="button"
               key={key}
               onClick={() => setTab(key)}
               className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${

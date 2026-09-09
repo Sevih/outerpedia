@@ -1,5 +1,6 @@
 /**
- * Priorités de déblocage — VERBATIM (core-fusion-priorities.json).
+ * Priorités de déblocage — donnée INLINE (pas de JSON à côté, contrairement au
+ * pendant premium `premium-priorities.json`).
  * `op` relie une entrée à la SUIVANTE (`>` strictement avant, `>=`).
  */
 export interface FusionPriorityPick {

@@ -113,7 +113,7 @@ function PursuitLootIcons({
  * strings.json comprise : il n'y en avait pas pour ce mode, on n'en
  * invente pas).
  *
- * La carte du boss porte le BUTIN de sa difficulté (`PursuitLootRow`, dans
+ * La carte du boss porte le BUTIN de sa difficulté (`PursuitLootIcons`, dans
  * `afterStats`) : c'est la spécificité du mode — mêmes onglets que le JC, mais
  * un pool par difficulté, et l'équipement ne tombe qu'en haut d'échelle.
  *

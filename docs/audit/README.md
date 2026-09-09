@@ -29,6 +29,11 @@
 >   toutes de la même famille : des bugs invisibles depuis un poste de dev
 >   EN/desktop (sous-domaines, JP/ZH, tactile, ISR 24 h). S1 re-vérifié :
 >   toujours ouvert.
+>
+> - [guides.md](./guides.md) — le CODE des guides (`guides/_contents/**` +
+>   `components/guides/**`, constats **H1–H14**, 2026-09-09) : sain, aucun
+>   Haute ; fusions de la roadmap, 404 de la tour very hard, dates `updated` en
+>   retard, « by » non localisé — traités le jour même.
 
 ## Verdict croisé
 

@@ -58,11 +58,15 @@ function VideoPane({ video, byLabel }: { video: VideoItem; byLabel: string }) {
 
 export function MultiVideoEmbed({
   videos,
-  byLabel = 'by {author}',
+  byLabel,
 }: {
   videos: VideoItem[];
-  /** Gabarit localisé « by {author} » — défaut EN (appelant serveur : video.by). */
-  byLabel?: string;
+  /**
+   * Gabarit localisé « by {author} » (`t('video.by')`). OBLIGATOIRE : le défaut
+   * EN d'avant laissait 21 guides afficher « by … » dans les 5 langues (audit
+   * guides 09/09) — un oubli doit se voir à la compilation, pas à l'écran.
+   */
+  byLabel: string;
 }) {
   if (videos.length === 0) return null;
   if (videos.length === 1) return <VideoPane video={videos[0]} byLabel={byLabel} />;

@@ -28,6 +28,7 @@ import type { ReactNode } from 'react';
 import type { LocalizedText } from '@contracts';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
+import { LANGUAGES } from '@/lib/i18n/config';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { localePath } from '@/lib/navigation';
 import { readGuideFile, type GuideContentProps } from '@/lib/data/guides';
@@ -223,7 +224,12 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
   /* ── VERY HARD : navigation par combats, roster FILTRABLE (aléa) ── */
   if (tower.mode === 'tower_very_hard') {
     const combats = getTowerCombats(tower);
-    const current = combats.find((c) => c.boss.id === String(floor ?? '')) ?? combats[0];
+    // Sans segment : le premier combat. AVEC un segment : il doit désigner un
+    // boss connu — un id sondé (`/…/12345`) rendait le premier combat en 200
+    // avec un titre « Floor 12345 », une entrée ISR par URL (le trou que
+    // `[floor]/page.tsx` ferme pour les non-tours, resté ouvert ici).
+    const current =
+      floor === undefined ? combats[0] : combats.find((c) => c.boss.id === String(floor));
     if (!current) notFound();
 
     const groupTitle: Record<TowerCombatGroup, string> = {
@@ -321,7 +327,9 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
             <p className="text-content-muted text-sm">
               {floorData.level ? t('tower.level', { n: floorData.level }) : ''}
               {floorData.level && floorData.power ? ' · ' : ''}
-              {floorData.power ? t('tower.power', { n: floorData.power.toLocaleString() }) : ''}
+              {floorData.power
+                ? t('tower.power', { n: floorData.power.toLocaleString(LANGUAGES[lang].htmlLang) })
+                : ''}
             </p>
           )}
         </header>

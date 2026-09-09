@@ -264,7 +264,7 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
               <h2 className="text-content-strong text-xl font-bold">
                 {t('guides.combat_footage')}
               </h2>
-              <MultiVideoEmbed videos={cfg.videos} />
+              <MultiVideoEmbed byLabel={t('video.by')} videos={cfg.videos} />
               <VideoJsonLd videos={cfg.videos} />
             </section>
           ) : null}
@@ -282,7 +282,7 @@ export async function VersionedBossGuide({ lang, guide }: GuideContentProps) {
 
       {/* Le sélecteur de version est le premier contrôle de la page : il décide de
           TOUT ce qu'on lit dessous. Le boss vient juste après, rendu UNE fois —
-          il ne dépend d'aucune saison (cf. `sharedGroup`). */}
+          il ne dépend d'aucune saison (cf. `sharedBoss`). */}
       <GuideVersions
         versions={versions}
         label={t('page.guide.versions')}

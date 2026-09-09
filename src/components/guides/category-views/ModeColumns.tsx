@@ -31,6 +31,7 @@ export function ModeColumns({
       <div className="flex justify-center gap-2 lg:hidden">
         {sections.map((s, i) => (
           <button
+            type="button"
             key={s.key}
             onClick={() => setActive(i)}
             aria-pressed={i === active}

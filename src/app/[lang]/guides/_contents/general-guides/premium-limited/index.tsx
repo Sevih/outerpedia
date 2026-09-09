@@ -35,8 +35,9 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
   const ctx: ParseCtx = { lang, t, strict: true };
   const L = (m: (typeof LABELS)[keyof typeof LABELS]): string => lRec(m, lang);
 
-  // Les collab sont rendus translucides par PriorityTiers : la légende ne
-  // s'affiche que sur l'onglet qui en contient (aucun côté Premium).
+  // Les collab portent un BADGE dans PriorityTiers (l'atténuation a été
+  // abandonnée) : la légende ne s'affiche que sur l'onglet qui en contient
+  // (aucun côté Premium).
   const hasCollab = (order: PriorityOrder): boolean =>
     [order.first, order.second, order.third].some((tier) =>
       tier.some((pick) => (findCharacterByName(pick.name)?.tags ?? []).includes('collab')),
