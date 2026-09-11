@@ -5,6 +5,41 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-11
+
+- **`pnpm quick` — les trois gestes du quotidien hors du panneau admin**
+  (`scripts/quick/`, icône de bureau via `pnpm quick:install`). Mettre à jour un
+  code promo, déposer une 4-comic ou ajouter une vidéo imposait un `pnpm dev`
+  entier : `clean:all` (suppression de `node_modules` + réinstallation) puis
+  `dev-refresh` (pull Steam, build de la proposition, collecte des images) —
+  des minutes de pipeline de données pour changer quatre lignes de JSON, et
+  VS Code ouvert pour rien. L'outil sert UNE page et quelques routes sur
+  `node:http` (démarrage ~1 s, aucune dépendance ajoutée) et ne réimplémente
+  rien : il rappelle les stores de l'admin (`saveCoupons`/`publishCoupons`,
+  `collectComics`, `upsertCharacterCurated`, `fetchMeta`). Il rend surtout
+  VISIBLE ce que le code disait déjà et qu'on ne voyait plus : un code promo et
+  une BD sont en ligne par R2 en quelques minutes, sans attendre le build, là où
+  une vidéo est lue au rendu et n'existe qu'après. Les trois poussent quand même
+  avec la CI : le site bâti garde ses propres copies (repli des 4-comics, pages
+  qui lisent les coupons au rendu), les sauter les aurait laissées diverger en
+  silence. Le panneau admin complet reste la référence pour tout le reste.
+  - **Une icône par poste** (`pnpm quick:install`) : entrée `.desktop` sous
+    Linux, raccourci du menu Démarrer sous Windows (COM `WScript.Shell`, icône
+    `.ico` générée hors dépôt en emballant le PNG existant — rien de binaire à
+    committer). Les deux lanceurs se passent de pnpm : une application démarrée
+    depuis le menu n'hérite pas du shell de connexion, elles appellent node et
+    le tsx du dépôt.
+  - **Le lanceur Linux ne crie plus au loup** : il alertait sur n'importe quelle
+    sortie non nulle, donc un serveur bien démarré puis arrêté (SIGTERM, fin de
+    session) annonçait « Démarrage impossible » — vu le jour même. Il sonde
+    désormais le port (`/dev/tcp`, sans dépendance) et n'alerte que si le
+    serveur meurt AVANT d'écouter ; le journal s'ajoute au lieu d'être tronqué,
+    sinon la trace de l'échec disparaît au relancement.
+  - **Bouton « Quitter »** (`POST /api/quit`) : lancé par l'icône, l'outil n'a
+    aucune fenêtre, donc aucun moyen évident de l'arrêter — il fallait un
+    `pkill`, dont le motif évident (`-f quick/server.ts`) tue le shell qui le
+    tape, la ligne de commande contenant elle-même le motif.
+
 ## 2026-09-09
 
 - **Audit transverse — G4, chips à lien au toucher** (`InlineTooltip`) : au

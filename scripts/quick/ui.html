@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Outerpedia — quick</title>
+    <style>
+      :root {
+        --bg: #14161c;
+        --panel: #1c1f27;
+        --line: #2b303b;
+        --text: #e6e8ee;
+        --muted: #9aa2b4;
+        --accent: #6aa6ff;
+        --ok: #57c98a;
+        --warn: #e0a955;
+        --danger: #e5697a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          14px/1.5 system-ui,
+          sans-serif;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      header .env {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      header button {
+        margin-left: 10px;
+      }
+      nav {
+        display: flex;
+        gap: 4px;
+        padding: 12px 20px 0;
+      }
+      nav button {
+        background: none;
+        border: 1px solid transparent;
+        border-bottom: none;
+        color: var(--muted);
+        padding: 8px 16px;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+        font: inherit;
+      }
+      nav button[aria-selected='true'] {
+        background: var(--panel);
+        border-color: var(--line);
+        color: var(--text);
+      }
+      main {
+        padding: 0 20px 20px;
+      }
+      section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 0 8px 8px 8px;
+        padding: 18px;
+      }
+      section[hidden] {
+        display: none;
+      }
+      h2 {
+        margin: 0 0 4px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      p.hint {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      input,
+      select,
+      button.action {
+        background: #11131a;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--text);
+        padding: 7px 10px;
+        font: inherit;
+      }
+      input:focus,
+      select:focus {
+        outline: 1px solid var(--accent);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        margin-bottom: 12px;
+      }
+      .row > div {
+        flex: 1 1 140px;
+        min-width: 0;
+      }
+      button.action {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #10141c;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.action:disabled {
+        opacity: 0.5;
+        cursor: progress;
+      }
+      button.ghost {
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        border-radius: 6px;
+        padding: 4px 9px;
+        cursor: pointer;
+        font: inherit;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th {
+        text-align: left;
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 11px;
+        text-transform: uppercase;
+        padding: 6px 8px;
+        border-bottom: 1px solid var(--line);
+      }
+      td {
+        padding: 7px 8px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+      }
+      .code {
+        font-family: ui-monospace, monospace;
+        font-weight: 600;
+      }
+      .badge {
+        font-size: 11px;
+        padding: 1px 7px;
+        border-radius: 999px;
+        border: 1px solid;
+      }
+      .badge.active {
+        color: var(--ok);
+        border-color: var(--ok);
+      }
+      .badge.upcoming {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .badge.expired {
+        color: var(--muted);
+        border-color: var(--line);
+      }
+      .picker {
+        position: relative;
+      }
+      .results {
+        position: absolute;
+        z-index: 5;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 220px;
+        overflow: auto;
+        background: #11131a;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        margin-top: 2px;
+      }
+      .results div {
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .results div:hover {
+        background: var(--line);
+      }
+      .chips {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .chip {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 3px 6px 3px 11px;
+        font-size: 12px;
+      }
+      .chip button {
+        background: none;
+        border: none;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .drop {
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        padding: 26px;
+        text-align: center;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .drop.over {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      #log {
+        margin-top: 16px;
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+        font-family: ui-monospace, monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+        color: var(--muted);
+      }
+      #log .ok {
+        color: var(--ok);
+      }
+      #log .ko {
+        color: var(--danger);
+      }
+      .cands {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .cand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 6px;
+      }
+      .cand img {
+        width: 96px;
+        border-radius: 4px;
+      }
+      .cand div {
+        min-width: 0;
+        flex: 1;
+      }
+      .cand strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .cand span {
+        color: var(--muted);
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Outerpedia · quick</h1>
+      <span class="env" id="env"></span>
+      <button class="ghost" id="quit" title="Arrête le serveur local">Quitter</button>
+    </header>
+
+    <nav>
+      <button data-tab="coupons" aria-selected="true">Codes promo</button>
+      <button data-tab="comics" aria-selected="false">4-comics</button>
+      <button data-tab="videos" aria-selected="false">Vidéos</button>
+    </nav>
+
+    <main>
+      <!-- ------------------------------------------------ codes promo -->
+      <section id="tab-coupons">
+        <h2>Codes promo</h2>
+        <p class="hint">
+          Publié sur R2 à l'enregistrement (en ligne en ≤ 10 min), puis poussé : la CI rebâtit le
+          site derrière.
+        </p>
+
+        <div class="row">
+          <div><label>Code</label><input id="c-code" placeholder="OPLIVE09" /></div>
+          <div><label>Début</label><input id="c-start" type="date" /></div>
+          <div><label>Fin</label><input id="c-end" type="date" /></div>
+        </div>
+
+        <div class="row">
+          <div class="picker">
+            <label>Récompense</label>
+            <input
+              id="c-reward"
+              placeholder="Chercher un item ou une monnaie…"
+              autocomplete="off"
+            />
+            <div class="results" id="c-results" hidden></div>
+          </div>
+          <div style="flex: 0 0 110px"><label>Quantité</label><input id="c-qty" value="1" /></div>
+          <div style="flex: 0 0 auto"><button class="ghost" id="c-add-reward">Ajouter</button></div>
+        </div>
+
+        <div class="chips" id="c-chips"></div>
+        <div class="row"><button class="action" id="c-add">Ajouter le code</button></div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Période</th>
+              <th>Récompenses</th>
+              <th>Statut</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="c-list"></tbody>
+        </table>
+      </section>
+
+      <!-- ----------------------------------------------------- comics -->
+      <section id="tab-comics" hidden>
+        <h2>4-comics</h2>
+        <p class="hint">
+          Déposé dans le pool éditorial, converti en webp, poussé sur R2 : la galerie lit le
+          manifeste à la requête, la galerie les montre aussitôt. Le repli committé suit, CI
+          comprise.
+        </p>
+        <div class="row">
+          <div style="flex: 0 0 160px">
+            <label>Langue d'origine</label>
+            <select id="k-lang"></select>
+          </div>
+        </div>
+        <div class="drop" id="k-drop">Glisser les planches ici (ou cliquer) — png, jpg, webp</div>
+        <input type="file" id="k-file" accept="image/png,image/jpeg,image/webp" multiple hidden />
+        <div class="chips" id="k-chips"></div>
+        <div class="row"><button class="action" id="k-send">Publier les planches</button></div>
+      </section>
+
+      <!-- ----------------------------------------------------- vidéos -->
+      <section id="tab-videos" hidden>
+        <h2>Vidéos</h2>
+        <p class="hint">
+          Lues au rendu : la prod ne les affiche qu'une fois le build de la CI déployé.
+        </p>
+        <div class="row">
+          <div>
+            <label>Cible</label
+            ><select id="v-target"></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Chercher sur la chaîne officielle</label
+            ><input id="v-query" placeholder="nom du perso / du boss" />
+          </div>
+          <div style="flex: 0 0 auto"><button class="ghost" id="v-search">Chercher</button></div>
+        </div>
+        <div class="cands" id="v-cands"></div>
+        <div class="row">
+          <div>
+            <label>URL ou id YouTube</label><input id="v-input" placeholder="https://youtu.be/…" />
+          </div>
+          <div style="flex: 0 0 150px">
+            <label>Libellé d'onglet (option)</label><input id="v-label" />
+          </div>
+          <div style="flex: 0 0 auto"><button class="action" id="v-add">Ajouter</button></div>
+        </div>
+      </section>
+
+      <div id="log"></div>
+    </main>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let state = { coupons: [], rewards: [], langs: [], targets: { characters: [], guides: [] } };
+      let pending = []; // récompenses du code en cours de saisie
+      let files = []; // planches choisies, {name, data}
+
+      const log = (lines, ok) => {
+        $('log').innerHTML = lines
+          .map((l) => `<div class="${ok ? 'ok' : 'ko'}">${l.replace(/</g, '&lt;')}</div>`)
+          .join('');
+      };
+
+      async function post(path, payload) {
+        const res = await fetch(path, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        log(data.log ?? [data.error ?? 'erreur'], data.ok);
+        return data;
+      }
+
+      // Onglets.
+      for (const b of document.querySelectorAll('nav button')) {
+        b.onclick = () => {
+          for (const o of document.querySelectorAll('nav button'))
+            o.setAttribute('aria-selected', String(o === b));
+          for (const s of document.querySelectorAll('main section'))
+            s.hidden = s.id !== `tab-${b.dataset.tab}`;
+        };
+      }
+
+      // ------------------------------------------------------- coupons
+      const rewardName = (id) => state.rewards.find((r) => r.id === id)?.name ?? id;
+
+      function status(c) {
+        const today = new Date().toISOString().slice(0, 10);
+        if (today < c.start) return ['upcoming', 'à venir'];
+        if (today > c.end) return ['expired', 'expiré'];
+        return ['active', 'actif'];
+      }
+
+      function renderCoupons() {
+        const order = { active: 0, upcoming: 1, expired: 2 };
+        const rows = [...state.coupons].sort(
+          (a, b) => order[status(a)[0]] - order[status(b)[0]] || b.start.localeCompare(a.start),
+        );
+        $('c-list').innerHTML = rows
+          .map((c) => {
+            const [cls, label] = status(c);
+            const rewards = Object.entries(c.description)
+              .map(([k, v]) => `${rewardName(k)} ×${v}`)
+              .join(', ');
+            return `<tr>
+              <td class="code">${c.code}</td>
+              <td>${c.start} → ${c.end}</td>
+              <td>${rewards}</td>
+              <td><span class="badge ${cls}">${label}</span></td>
+              <td><button class="ghost" data-del="${c.code}">supprimer</button></td>
+            </tr>`;
+          })
+          .join('');
+        for (const b of $('c-list').querySelectorAll('[data-del]'))
+          b.onclick = () => {
+            state.coupons = state.coupons.filter((c) => c.code !== b.dataset.del);
+            renderCoupons();
+            save();
+          };
+      }
+
+      function renderChips() {
+        $('c-chips').innerHTML = pending
+          .map(
+            (p, i) =>
+              `<span class="chip">${rewardName(p.id)} ×${p.qty}<button data-i="${i}">×</button></span>`,
+          )
+          .join('');
+        for (const b of $('c-chips').querySelectorAll('button'))
+          b.onclick = () => {
+            pending.splice(Number(b.dataset.i), 1);
+            renderChips();
+          };
+      }
+
+      let chosen = null;
+      $('c-reward').oninput = () => {
+        const q = $('c-reward').value.trim().toLowerCase();
+        chosen = null;
+        if (q.length < 2) return ($('c-results').hidden = true);
+        const hits = state.rewards.filter((r) => r.name.toLowerCase().includes(q)).slice(0, 20);
+        $('c-results').innerHTML = hits
+          .map((r) => `<div data-id="${r.id}">${r.name}</div>`)
+          .join('');
+        $('c-results').hidden = !hits.length;
+        for (const d of $('c-results').children)
+          d.onclick = () => {
+            chosen = d.dataset.id;
+            $('c-reward').value = d.textContent;
+            $('c-results').hidden = true;
+          };
+      };
+
+      $('c-add-reward').onclick = () => {
+        if (!chosen) return log(['Choisir une récompense dans la liste.'], false);
+        pending.push({ id: chosen, qty: $('c-qty').value.trim() || '1' });
+        chosen = null;
+        $('c-reward').value = '';
+        renderChips();
+      };
+
+      async function save() {
+        $('c-add').disabled = true;
+        await post('/api/coupons', state.coupons);
+        $('c-add').disabled = false;
+      }
+
+      $('c-add').onclick = async () => {
+        const code = $('c-code').value.trim().toUpperCase();
+        if (!code || !$('c-start').value || !$('c-end').value)
+          return log(['Code, début et fin sont requis.'], false);
+        if (!pending.length) return log(['Au moins une récompense est requise.'], false);
+        state.coupons = [
+          {
+            code,
+            start: $('c-start').value,
+            end: $('c-end').value,
+            description: Object.fromEntries(pending.map((p) => [p.id, String(p.qty)])),
+          },
+          ...state.coupons.filter((c) => c.code !== code),
+        ];
+        pending = [];
+        $('c-code').value = '';
+        renderChips();
+        renderCoupons();
+        await save();
+      };
+
+      // -------------------------------------------------------- comics
+      const renderFiles = () => {
+        $('k-chips').innerHTML = files
+          .map((f, i) => `<span class="chip">${f.name}<button data-i="${i}">×</button></span>`)
+          .join('');
+        for (const b of $('k-chips').querySelectorAll('button'))
+          b.onclick = () => {
+            files.splice(Number(b.dataset.i), 1);
+            renderFiles();
+          };
+      };
+
+      const readFiles = async (list) => {
+        for (const f of list) {
+          const buf = await f.arrayBuffer();
+          let bin = '';
+          const bytes = new Uint8Array(buf);
+          for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+          files.push({ name: f.name, data: btoa(bin) });
+        }
+        renderFiles();
+      };
+
+      $('k-drop').onclick = () => $('k-file').click();
+      $('k-file').onchange = () => readFiles($('k-file').files);
+      $('k-drop').ondragover = (e) => (e.preventDefault(), $('k-drop').classList.add('over'));
+      $('k-drop').ondragleave = () => $('k-drop').classList.remove('over');
+      $('k-drop').ondrop = (e) => {
+        e.preventDefault();
+        $('k-drop').classList.remove('over');
+        readFiles(e.dataTransfer.files);
+      };
+
+      $('k-send').onclick = async () => {
+        if (!files.length) return log(['Aucune planche choisie.'], false);
+        $('k-send').disabled = true;
+        log(['conversion + push R2 en cours…'], true);
+        const r = await post('/api/comics', { lang: $('k-lang').value, files });
+        if (r.ok) {
+          files = [];
+          renderFiles();
+        }
+        $('k-send').disabled = false;
+      };
+
+      // -------------------------------------------------------- vidéos
+      $('v-search').onclick = async () => {
+        const q = $('v-query').value.trim();
+        if (!q) return;
+        const res = await fetch(`/api/youtube?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        if (!data.candidates) return log([data.error ?? 'recherche impossible'], false);
+        $('v-cands').innerHTML = data.candidates
+          .map(
+            (c) => `<div class="cand">
+              <img src="https://i.ytimg.com/vi/${c.id}/mqdefault.jpg" alt="" />
+              <div><strong>${c.title}</strong><span>${c.author} · ${c.uploadDate.slice(0, 10)}</span></div>
+              <button class="ghost" data-id="${c.id}">choisir</button>
+            </div>`,
+          )
+          .join('');
+        for (const b of $('v-cands').querySelectorAll('[data-id]'))
+          b.onclick = () => {
+            $('v-input').value = b.dataset.id;
+            $('v-cands').innerHTML = '';
+          };
+      };
+
+      $('v-add').onclick = async () => {
+        if (!$('v-input').value.trim()) return log(['URL ou id requis.'], false);
+        $('v-add').disabled = true;
+        log(['résolution YouTube + commit en cours…'], true);
+        const r = await post('/api/video', {
+          target: $('v-target').value,
+          input: $('v-input').value.trim(),
+          label: $('v-label').value.trim() || undefined,
+        });
+        if (r.ok) $('v-input').value = '';
+        $('v-add').disabled = false;
+      };
+
+      // Arrêt : lancé par l'icône, l'outil n'a aucune fenêtre pour le faire.
+      $('quit').onclick = async () => {
+        await post('/api/quit', {});
+        document.body.style.opacity = 0.5;
+        for (const b of document.querySelectorAll('button')) b.disabled = true;
+      };
+
+      // ---------------------------------------------------------- boot
+      (async () => {
+        state = await (await fetch('/api/state')).json();
+        $('env').textContent =
+          `${state.hasR2 ? 'R2 ✓' : 'R2 ✗'} · ${state.hasYoutubeKey ? 'YouTube ✓' : 'YouTube ✗'}`;
+        $('k-lang').innerHTML = state.langs.map((l) => `<option>${l}</option>`).join('');
+        $('v-target').innerHTML =
+          `<optgroup label="Personnages">${state.targets.characters
+            .map((t) => `<option value="${t.value}">${t.label}</option>`)
+            .join('')}</optgroup>` +
+          `<optgroup label="Guides">${state.targets.guides
+            .map((t) => `<option value="${t.value}">${t.label}</option>`)
+            .join('')}</optgroup>`;
+        renderCoupons();
+      })();
+    </script>
+  </body>
+</html>

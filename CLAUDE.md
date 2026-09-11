@@ -28,10 +28,15 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
 - **pnpm uniquement** — pas de `package-lock.json` dans ce repo, `npm install`
   y échoue.
 
-## Les 3 verbes
+## Les verbes
 
 - `pnpm dev` — clean:all → refresh des données (`scripts/dev-refresh.ts`) →
   `next dev`.
+- `pnpm quick` — l'outil de tous les jours (`scripts/quick/`, icône posée par
+  `pnpm quick:install` sur le poste courant : `.desktop` sous Linux, menu
+  Démarrer sous Windows) : code promo, 4-comic, vidéo. Trois gestes, une page,
+  pas de Next ni de refresh. **Ne pas le lancer non plus** — il ouvre un
+  navigateur et publie sur R2 ; c'est Sevih qui s'en sert.
 - `pnpm commit` — publication guidée : contrôles (format/lint/typecheck/test) →
   bump de version → images R2 → commit + push (`scripts/commit.ts`).
 - `pnpm build` — le build prod, **réservé à la CI** (un build local casse les

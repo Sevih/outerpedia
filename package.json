@@ -39,6 +39,8 @@
     "getNews": "tsx scripts/get-news.ts",
     "stamp:guides": "tsx scripts/stamp-guides.ts",
     "commit": "tsx scripts/commit.ts",
+    "quick": "tsx scripts/quick/server.ts",
+    "quick:install": "tsx scripts/quick/install-launcher.ts",
     "prepare": "lefthook install || echo skip",
     "clean": "node -e \"for(const f of ['.next'])require('fs').rmSync(f,{recursive:true,force:true})\"",
     "clean:all": "node -e \"for(const f of ['.next','node_modules'])require('fs').rmSync(f,{recursive:true,force:true})\" && pnpm install",
