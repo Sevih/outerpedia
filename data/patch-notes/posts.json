@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": 11349,
+      "date": "2026-09-11",
+      "modified": "2026-09-11T01:42:43",
+      "slug": "notice-upcoming-discontinuation-of-monad-gate-and-license",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] Upcoming Discontinuation of Monad Gate and License",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/6751a61933da5e30.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.</p>\n\n\n\n<p>As part of our ongoing efforts to improve existing content, some currently available content will be discontinued according to the schedule below.</p>\n\n\n\n<p>[Content to Be Discontinued]</p>\n\n\n\n<p>1. Monad Gate<br>– Discontinuation Date: After the September 22 (Tue) maintenance</p>\n\n\n\n<p>2. License<br>– Discontinuation Date: After the October 6 (Tue) maintenance</p>\n\n\n\n<p>The content listed above will no longer be available after the respective maintenance periods.<br>We will continue working to provide a more stable and improved gameplay experience.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11347,
+      "date": "2026-09-11",
+      "modified": "2026-09-11T01:43:05",
+      "slug": "%ea%b3%b5%ec%a7%80-%eb%aa%a8%eb%82%98%eb%93%9c-%ea%b2%8c%ec%9d%b4%ed%8a%b8-%eb%b0%8f-%eb%9d%bc%ec%9d%b4%ec%84%a0%ec%8a%a4-%ec%9d%b4%ec%9a%a9-%ec%a2%85%eb%a3%8c-%ec%98%88%ec%a0%95-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 모나드 게이트 및 라이선스 이용 종료 예정 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/90db829624102f79.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>향후 콘텐츠의 수정 및 보완을 위해,<br>현재 이용 가능한 일부 콘텐츠가 종료될 예정임을 안내드립니다.</p>\n\n\n\n<p>[종료 콘텐츠 안내]</p>\n\n\n\n<p>1. 모나드 게이트<br>– 종료 일시: 2026년 9월 22일(화) 점검 이후</p>\n\n\n\n<p>2. 라이선스<br>– 종료 일시: 2026년 10월 6일(화) 점검 이후</p>\n\n\n\n<p>위 콘텐츠들은 안내드린 일정 이후 이용이 종료될 예정입니다.</p>\n\n\n\n<p>보다 안정적이고 개선된 모습으로 선보일 수 있도록 더욱 노력하겠습니다.<br>감사합니다.</p>\n"
+    },
+    {
+      "id": 11351,
+      "date": "2026-09-11",
+      "modified": "2026-09-11T01:42:15",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%a2%e3%83%8a%e3%83%89%e3%82%b2%e3%83%bc%e3%83%88%e3%81%8a%e3%82%88%e3%81%b3%e3%83%a9%e3%82%a4%e3%82%bb%e3%83%b3%e3%82%b9%e3%81%ae%e5%88%a9",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】モナドゲートおよびライセンスの利用終了予定に関するご案内",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/3819f5f7ab09ef1b.webp\" alt=\"\"></figure>\n\n\n\n<p>マスターの皆様、こんにちは。<br>GMあめです。</p>\n\n\n\n<p>今後のコンテンツの修正・改善のため、現在ご利用いただける一部コンテンツが終了予定であることをお知らせいたします。</p>\n\n\n\n<p>終了コンテンツのご案内：</p>\n\n\n\n<p>1）モナドゲート<br>– 終了日時：9月22日（火）メンテナンス後</p>\n\n\n\n<p>2）ライセンス<br>– 終了日時：10月6日（火）メンテナンス後</p>\n\n\n\n<p>上記コンテンツは、それぞれ記載されたメンテナンス後にご利用いただけなくなります。<br>より安定した改善された形でお届けできるよう、引き続き努力してまいります。</p>\n\n\n\n<p>ありがとうございます。</p>\n"
+    },
+    {
       "id": 11336,
       "date": "2026-09-08",
       "modified": "2026-09-08T06:18:34",
@@ -13,12 +43,12 @@
     {
       "id": 11317,
       "date": "2026-09-08",
-      "modified": "2026-09-08T05:56:53",
+      "modified": "2026-09-09T06:13:29",
       "slug": "0908kie",
       "lang": "en",
       "type": "known-issue",
-      "title": "[Issues] Known Issues (9/8 Maintenance)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues<br><br><strong>1. An issue where Stage Auto Progress ends before the final stage<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong>2. An issue where some free rewards from the Mirsha Adventure Package cannot be claimed if Story EP.1–3 have not been completed<br></strong>→ The rewards can be claimed normally after completing Story EP.1–3.<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<p>Thank you.</p>\n"
+      "title": "[Issues] Known Issues (9/8 Maintenance) (Added on 9/9 6:13 UTC)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about several issues that have been identified. Our apologies for the trouble while we work on fixing these issues<br><br><strong>1. An issue where Stage Auto Progress ends before the final stage<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong>2. An issue where some free rewards from the Mirsha Adventure Package cannot be claimed if Story EP.1–3 have not been completed<br></strong>→ The rewards can be claimed normally after completing Story EP.1–3.</p>\n\n\n\n<p><strong>3. An issue where Discord is incorrectly applied when Resonance Rin is included in the lineup in Real Time Arena<br></strong>→ Until the issue is fixed, Resonance Rin will be temporarily unavailable in Real Time Arena.</p>\n\n\n\n<p><br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding this issue via this notice.</p>\n\n\n\n<p>Thank you.</p>\n"
     },
     {
       "id": 11333,
@@ -33,12 +63,12 @@
     {
       "id": 11314,
       "date": "2026-09-08",
-      "modified": "2026-09-08T05:55:36",
+      "modified": "2026-09-09T06:14:07",
       "slug": "0908kik",
       "lang": "kr",
       "type": "known-issue",
-      "title": "[이슈] 9/8 업데이트 이후 확인된 현상",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><strong>1. 스테이지 자동 진행 시 최종 스테이지 직전에서 종료되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong>2. 3지역 스토리를 완료하지 않은 상태에서 메르샤 모험 패키지의 일부 무료 보상이 정상적으로 수령되지 않는 현상<br></strong>→ 스토리 EP.1~3을 완료하면 해당 보상을 정상적으로 수령할 수 있습니다.</p>\n\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n"
+      "title": "[이슈] 9/8 업데이트 이후 확인된 현상 (9/9 15:13 추가)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><strong>1. 스테이지 자동 진행 시 최종 스테이지 직전에서 종료되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong>2. 3지역 스토리를 완료하지 않은 상태에서 메르샤 모험 패키지의 일부 무료 보상이 정상적으로 수령되지 않는 현상<br></strong>→ 스토리 EP.1~3을 완료하면 해당 보상을 정상적으로 수령할 수 있습니다.</p>\n\n\n\n<p><strong>3. 실시간 대전에서 레조넌스 린 편성 시 비정상적으로 불협화음이 적용되는 현상<br></strong>→ 해당 현상 수정 전까지 레조넌스 린을 실시간 대전에서 일시적으로 사용할 수 없도록 조치할 예정입니다.</p>\n\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n"
     },
     {
       "id": 11339,
@@ -53,12 +83,12 @@
     {
       "id": 11323,
       "date": "2026-09-08",
-      "modified": "2026-09-08T05:57:07",
+      "modified": "2026-09-09T06:21:24",
       "slug": "0908kij",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (9/8)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br><br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1.ステージオート進行時、最終ステージ直前で強制終了される現象<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong>2. エリア3のストーリーをクリアしていない状態で、[メルシャ冒険パック]のオリジンストーリーのクリア報酬を正常に受け取れない現象<br></strong>→ ストーリーEP.1～3をクリアすると、オリジンストーリーのクリア報酬を正常に受け取ることができます。<br><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
+      "title": "【不具合】現在確認されている不具合について (9/8) (9/9 15:21 追記)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br><br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1.ステージオート進行時、最終ステージ直前で強制終了される現象<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong>2. エリア3のストーリーをクリアしていない状態で、[メルシャ冒険パック]のオリジンストーリーのクリア報酬を正常に受け取れない現象<br></strong>→ ストーリーEP.1～3をクリアすると、オリジンストーリーのクリア報酬を正常に受け取ることができます。<br><br><strong>3. リアルタイムアリーナにて「レゾナンス・リン」を編成した際、「不協和音」が非正常に適用される現象<br></strong>→ 本不具合が修正されるまでの間、リアルタイムアリーナにて「レゾナンス・リン」を一時的に編成不可とする予定です。<br><br>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
     },
     {
       "id": 11282,
