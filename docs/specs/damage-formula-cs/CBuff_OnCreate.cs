@@ -208,7 +208,7 @@
 			else if (Type == BUFF_TYPE.BT_STAT_OWNER_LOST_HP_RATE_HALF)
 			{
 				IsUseInstanceValue = true;
-				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, (long)Owner.CharacterData.MaxHP);
+				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, Owner.CharacterData.MaxHP);
 				InstanceValue = Owner.GetLostHPRateValue(nHP, Value);
 			}
 			if (STAT_TYPE.ST_HP == StatType)

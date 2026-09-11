@@ -32,13 +32,13 @@
 				{
 					if ("EventAttackStart".Equals(val2.functionName))
 					{
-						string[] array = val2.stringParameter.Replace(" ", "").Split(',', StringSplitOptions.None);
+						string[] array = val2.stringParameter.Replace(" ", "").Split(',');
 						CDamageTemplet damageTemplet = CTempletManager.Instance.GetDamageTemplet(array[0]);
 						num += damageTemplet.DamageFactor * ((damageTemplet.MaxHitCount == 0) ? 1 : damageTemplet.MaxHitCount);
 					}
 					else if ("EventEffect".Equals(val2.functionName))
 					{
-						string[] array2 = val2.stringParameter.Replace(" ", "").Split(',', StringSplitOptions.None);
+						string[] array2 = val2.stringParameter.Replace(" ", "").Split(',');
 						if (array2 != null && array2.Length >= 2 && int.TryParse(array2[1], out var result) && result > 0)
 						{
 							CDebug.LogWarning("EventEffect damage factor : " + result);
