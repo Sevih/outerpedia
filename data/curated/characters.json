@@ -1472,15 +1472,6 @@
     ]
   },
   "2000055": {
-    "rank": "S",
-    "rankPvp": "C",
-    "role": "dps",
-    "tags": ["free"],
-    "skillPriority": {
-      "first": 3,
-      "second": 2,
-      "ultimate": 1
-    },
     "prosCons": {
       "pros": [
         {
@@ -1545,29 +1536,15 @@
         "uploadDate": "2025-09-22T19:00:33Z"
       }
     ],
-    "synergies": [
-      {
-        "heroes": ["2000012"],
-        "reason": {
-          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_ACTION_GAUGE} {B/BT_CALL_BACKUP}"
-        }
-      },
-      {
-        "heroes": ["2000043"],
-        "reason": {
-          "en": "{D/BT_STAT|ST_DEF}"
-        }
-      },
-      {
-        "heroes": ["2000098"],
-        "reason": {
-          "en": "S3's {B/BT_COOL_CHARGE} resets Aer's Skill 3-Skill 2 combo",
-          "jp": "S3の{B/BT_COOL_CHARGE}がAerのスキル3-スキル2コンボをリセット",
-          "kr": "S3의 {B/BT_COOL_CHARGE}가 Aer의 스킬 3-스킬 2 콤보를 초기화",
-          "zh": "S3的{B/BT_COOL_CHARGE}重置Aer的技能3-技能2连招"
-        }
-      }
-    ]
+    "rank": "A",
+    "rankPvp": "C",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 3,
+      "second": 2,
+      "ultimate": 1
+    }
   },
   "2000056": {
     "rank": "B",
@@ -4489,6 +4466,8 @@
     }
   },
   "2000122": {
+    "rank": "S",
+    "rankPvp": "C",
     "role": "dps",
     "skillPriority": {
       "first": 3,
@@ -4531,14 +4510,6 @@
     }
   },
   "2700005": {
-    "rank": "B",
-    "role": "dps",
-    "tags": ["free"],
-    "skillPriority": {
-      "first": 0,
-      "second": 0,
-      "ultimate": 0
-    },
     "prosCons": {
       "pros": [
         {
@@ -4601,52 +4572,30 @@
         }
       ]
     },
-    "synergies": [
-      {
-        "heroes": ["{C/Mage}"],
-        "reason": {
-          "en": "Benefits from her EE and charges her EE+10 {B/BT_STAT|ST_ATK}",
-          "jp": "彼女のEEの恩恵を受け、EE+10の{B/BT_STAT|ST_ATK}をチャージ",
-          "kr": "그녀의 EE 혜택을 받고 EE+10 {B/BT_STAT|ST_ATK}를 충전",
-          "zh": "受益于她的EE并充能EE+10 {B/BT_STAT|ST_ATK}"
-        }
-      },
-      {
-        "heroes": ["2000098"],
-        "reason": {
-          "en": "S3's {B/BT_COOL_CHARGE} to cycle skill 2 and 3 faster",
-          "jp": "S3の{B/BT_COOL_CHARGE}でスキル2と3をより早く回転",
-          "kr": "S3의 {B/BT_COOL_CHARGE}로 스킬 2와 3을 더 빠르게 순환",
-          "zh": "S3的{B/BT_COOL_CHARGE}加快技能2和3的循环"
-        }
-      },
-      {
-        "heroes": ["2000012"],
-        "reason": {
-          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_ACTION_GAUGE} {B/BT_CALL_BACKUP}"
-        }
-      },
-      {
-        "heroes": ["2000093"],
-        "reason": {
-          "en": "{B/BT_STAT|ST_PIERCE_POWER_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK}"
-        }
-      },
-      {
-        "heroes": ["2000101"],
-        "reason": {
-          "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}"
-        }
-      }
-    ]
+    "rank": "A",
+    "role": "dps",
+    "tags": ["free"],
+    "skillPriority": {
+      "first": 0,
+      "second": 0,
+      "ultimate": 0
+    }
   },
   "2700019": {
+    "rank": "S",
+    "rankPvp": "B",
     "role": "dps",
     "tags": ["free"],
     "skillPriority": {
       "first": 3,
       "second": 2,
       "ultimate": 1
+    },
+    "rankByTranscend": {
+      "3": "A",
+      "4": "A",
+      "6": "A",
+      "9": "S"
     }
   },
   "2700037": {
