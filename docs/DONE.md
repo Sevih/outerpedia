@@ -28,11 +28,30 @@
   porte de derrière. Deux invariants gravés dans `comics.test` : tout stem du
   catalogue est en NFC, et NFD ↔ NFC désignent la même BD (aucun retrait). Le
   repli `data/generated/comics.json` est migré (105 stems, 0 décomposé).
-  - **`pushed.json` n'est PAS migré, et c'est délibéré** : ce fichier dit ce que
-    R2 sert RÉELLEMENT, et les objets en ligne sont encore en NFD. Y pré-inscrire
-    les clés NFC ferait sauter leur upload (`assets-push.mjs` compare `clé →
-sha1`) : 26 images mortes en galerie. La bascule du bucket est un geste
-    séparé, dans l'ordre pousser → vérifier → purger (cf. TODO).
+  - **`pushed.json` n'a pas été migré à la main, et c'est ce qui a rendu la
+    bascule possible** : ce fichier dit ce que R2 sert RÉELLEMENT. Y pré-inscrire
+    les clés NFC aurait fait sauter leur upload — `assets-push.mjs` ne renvoie
+    que ce qui diffère (`else if (baseline[key] !== hash)`) — et le bucket serait
+    resté sur les anciennes graphies sans que rien ne le signale. Le bucket a
+    donc été basculé à part, dans l'ordre pousser → vérifier → retirer.
+  - **Bucket basculé dans la foulée, et la BD sans nom en a retrouvé un.** Les 13
+    originaux sont montés sous leur nom composé, la BD dont le fichier s'appelait
+    `.jpg` — stem vide au catalogue, et une entrée fantôme dans la galerie JP —
+    est devenue `yaruki_no_dashikata_JP`, d'après son titre 「ヤル気の出し方」.
+    29 clés poussées (26 dérivés + les 2 de la BD renommée + le manifeste), edge
+    purgé, repli réaligné par `assets:sync-comics-seed`, puis les 3 objets
+    devenus obsolètes supprimés du bucket et leurs 28 clés périmées retirées de
+    `pushed.json`. Vérifié en ligne : 35 BD par langue, aucun stem décomposé,
+    aucun stem vide, et les 13 BD à titre hangeul répondent 200.
+  - **Ce qu'on a appris et qui vaut pour tout le pipeline : le chemin d'un objet
+    est NORMALISÉ en amont de R2.** Les deux graphies d'une même URL renvoient le
+    MÊME objet, octet pour octet (vérifié sur les 13 BD, 26 URL) : il n'y a jamais
+    eu de doublon dans le bucket, seulement deux façons de l'écrire. Et rclone
+    normalise lui aussi par défaut quand il compare des noms : le premier
+    `editorial:push` n'a donc rien envoyé du tout, croyant les fichiers déjà là.
+    Il a fallu `--no-unicode-normalization` pour que les clés composées soient
+    réellement écrites. À retenir avant de conclure qu'un objet « manque » ou
+    qu'il est « en double » sur R2 : c'est le nom qui varie, pas l'objet.
   - **Correctif écrit en double, par les deux PC en même temps** (Sevih avait
     lancé les deux Claude) : Syncthing a arbitré et mis trois versions de côté en
     `.sync-conflict`. Les deux analyses concordaient ; la fusion a gardé la
