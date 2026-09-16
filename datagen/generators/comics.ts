@@ -43,13 +43,28 @@ const EDITORIAL = resolve('.editorial/comics');
 /** Formats sources acceptés (originaux faits main + webp éventuel déjà converti). */
 const IMAGE_RE = /\.(png|jpe?g|webp)$/i;
 
+/**
+ * Stem en Unicode COMPOSÉ (NFC) — la seule graphie qui tienne sur le disque.
+ *
+ * Syncthing (synchro fixe ↔ portable de `Documents`) EXIGE le NFC et a renommé
+ * d'office, le 2026-09-15, les 13 BD à titre hangeul qui étaient en décomposé
+ * (NFD) : mêmes octets d'image, deux graphies de nom. Le scan voyait alors les
+ * stems NFC, tandis que le repli committé et `pushed.json` portaient les NFD —
+ * les 13 BD passaient pour RETIRÉES et pour NOUVELLES à la fois, et la
+ * réconciliation de `collect-comics` les remettait au manifeste EN DOUBLE.
+ *
+ * On normalise donc à la LECTURE et à toutes les comparaisons. Revenir au NFD
+ * ne tiendrait pas : Syncthing renommerait de nouveau au premier passage.
+ */
+export const toNfc = (s: string): string => s.normalize('NFC');
+
 /** Stems (sans extension), dédoublonnés et triés, d'un dossier de langue. */
 function scanLang(dir: string): string[] {
   if (!existsSync(dir)) return [];
   const stems = new Set<string>();
   for (const f of readdirSync(dir)) {
     if (!IMAGE_RE.test(f)) continue;
-    stems.add(f.replace(IMAGE_RE, ''));
+    stems.add(toNfc(f.replace(IMAGE_RE, '')));
   }
   return [...stems].sort();
 }
@@ -60,7 +75,9 @@ function stemsByLang(catalog: unknown): Map<string, Set<string>> {
   if (!catalog || typeof catalog !== 'object') return out;
   for (const [lang, list] of Object.entries(catalog)) {
     if (Array.isArray(list)) {
-      out.set(lang, new Set(list.filter((s): s is string => typeof s === 'string')));
+      // NFC des deux côtés : un catalogue relu du disque (repli committé) peut
+      // encore porter des stems NFD d'avant le renommage — cf. `toNfc`.
+      out.set(lang, new Set(list.filter((s): s is string => typeof s === 'string').map(toNfc)));
     }
   }
   return out;

@@ -5,6 +5,41 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-16
+
+- **4-comics — les titres en hangeul ont désormais UNE seule graphie (NFC)**, et
+  le catalogue ne peut plus prendre la même BD pour deux. Unicode écrit une
+  syllabe coréenne de deux façons indiscernables à l'écran : composée (NFC) ou
+  décomposée (NFD). La synchronisation des deux PC posée le 15/09 exige la
+  première et a renommé d'office les 13 originaux concernés de
+  `.editorial/comics/` (EN 5, JP 3, KR 5) ainsi que leurs 26 dérivés du staging —
+  mêmes octets d'image, autre graphie de nom. Le scan voyait donc des stems NFC
+  là où le repli committé et `pushed.json` portaient les NFD : au prochain
+  `pnpm images`, `removedStems` aurait annoncé les 13 BD comme RETIRÉES, la
+  réconciliation de `collect-comics` les aurait remises au manifeste sous leur
+  ancien nom, et la galerie les aurait affichées EN DOUBLE. Correction à la
+  source plutôt que retour au NFD, qui n'aurait pas tenu (la synchro renomme de
+  nouveau au premier passage) : un `toNfc` unique dans `generators/comics.ts`,
+  appliqué au scan du disque (`scanLang`) et aux DEUX côtés de chaque comparaison
+  (`stemsByLang`), les clés de `pushed.json` normalisées avant lecture
+  (`isServed`) pour que les 13 BD restent reconnues comme servies, et les dérivés
+  webp ÉCRITS sous leur nom composé — sans quoi un `editorial:pull`, qui rapatrie
+  les clés NFD du bucket telles quelles, aurait fait revenir le doublon par la
+  porte de derrière. Deux invariants gravés dans `comics.test` : tout stem du
+  catalogue est en NFC, et NFD ↔ NFC désignent la même BD (aucun retrait). Le
+  repli `data/generated/comics.json` est migré (105 stems, 0 décomposé).
+  - **`pushed.json` n'est PAS migré, et c'est délibéré** : ce fichier dit ce que
+    R2 sert RÉELLEMENT, et les objets en ligne sont encore en NFD. Y pré-inscrire
+    les clés NFC ferait sauter leur upload (`assets-push.mjs` compare `clé →
+sha1`) : 26 images mortes en galerie. La bascule du bucket est un geste
+    séparé, dans l'ordre pousser → vérifier → purger (cf. TODO).
+  - **Correctif écrit en double, par les deux PC en même temps** (Sevih avait
+    lancé les deux Claude) : Syncthing a arbitré et mis trois versions de côté en
+    `.sync-conflict`. Les deux analyses concordaient ; la fusion a gardé la
+    version du portable et repris du fixe la normalisation des noms de sortie.
+    Leçon, pas anecdote : un dépôt synchronisé n'admet qu'un seul rédacteur à la
+    fois — `.git/` compris, qui voyage lui aussi.
+
 ## 2026-09-11
 
 - **`pnpm quick` — les trois gestes du quotidien hors du panneau admin**

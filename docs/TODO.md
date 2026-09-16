@@ -59,6 +59,31 @@
       retranscription), hook d'état destructuré sous les MÊMES noms (le JSX ne
       bouge pas), tsc/eslint/tests après chaque étape.
 
+- [ ] **4-comics — BASCULER R2 EN NFC : `pnpm images` reste PROSCRIT jusque-là
+      (et avec lui `editorial:push`, qu'il enchaîne).** Le code est corrigé (cf.
+      DONE 16/09) : le catalogue, la collecte et le repli sont en NFC. Le bucket,
+      lui, porte encore les graphies décomposées d'avant le renommage Syncthing
+      du 15/09 — 26 dérivés sous `images/4-comics/` et les 13 ORIGINAUX sous le
+      préfixe `editorial/`. Deux conséquences tant que ça dure : `editorial:pull`
+      (`r2Copy` du préfixe, cf. `datagen/assets/editorial.ts`) réécrit ces noms
+      NFD tels quels sur le disque, et `editorial:push` déposerait les NFC À CÔTÉ
+      des NFD — un pool dédoublé au prochain pull. Ordre à tenir, une fois
+      décidé : (1) `pnpm images` pousse les 26 dérivés NFC (clés NOUVELLES, la
+      galerie continue d'être servie par les anciennes) ; (2) vérifier la galerie
+      en ligne ; (3) seulement ensuite, supprimer du bucket les 26 objets NFD
+      d'`images/` et les 13 originaux NFD d'`editorial/` (`rclone delete`), puis
+      retirer leurs clés de `pushed.json`. NE PAS pré-inscrire les clés NFC dans
+      `pushed.json` : `assets-push.mjs` compare `clé → sha1` et sauterait
+      l'upload (`else if (baseline[key] !== hash)`), donc 26 images mortes.
+
+- [ ] **4-comics — une BD au nom VIDE dans le catalogue JP.**
+      `.editorial/comics/JP/.jpg` (784 Ko) donne le stem `""` : le catalogue
+      porte une entrée vide, et ses dérivés sont en ligne sous les clés
+      `images/4-comics/JP/.webp` et `.thumb.webp`. L'image est donc servie, mais
+      elle a perdu son nom. Sans rapport avec le NFC (constat du 16/09, vu des
+      deux PC). À renommer une fois son titre retrouvé — côté disque ET côté
+      bucket, l'ancienne clé étant à supprimer après bascule.
+
 ### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
 
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME

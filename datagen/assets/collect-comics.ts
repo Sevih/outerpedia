@@ -37,7 +37,7 @@ import { join, resolve } from 'node:path';
 // namespace `sharp.Sharp` ne compile plus.
 import sharp, { type Sharp } from 'sharp';
 import { STAGING_DIR } from './stage';
-import { buildComics, removedStems } from '../generators/comics';
+import { buildComics, removedStems, toNfc } from '../generators/comics';
 import { isMain } from '../lib/is-main';
 
 const EDITORIAL = resolve('.editorial/comics');
@@ -63,10 +63,16 @@ async function collectLang(lang: string): Promise<{ made: number; skipped: numbe
   for (const f of readdirSync(srcDir)) {
     if (!SRC_RE.test(f)) continue;
     const from = join(srcDir, f);
+    // Dérivés nommés en NFC comme les stems du catalogue (cf. `toNfc`). L'original,
+    // lui, peut être décomposé : `editorial:pull` fait un `r2Copy` du préfixe
+    // `editorial/`, où les clés d'avant le 2026-09-15 sont encore en NFD et
+    // reviennent telles quelles sur le disque. Sans cette normalisation, ces
+    // originaux produiraient des webp décomposés que le catalogue — normalisé,
+    // lui — ne désignerait plus : la même BD poussée deux fois, invisible.
     const targets: Array<[string, () => Sharp]> = [
-      [join(destDir, f.replace(SRC_RE, '.webp')), () => sharp(from).webp({ quality: 90 })],
+      [join(destDir, toNfc(f.replace(SRC_RE, '.webp'))), () => sharp(from).webp({ quality: 90 })],
       [
-        join(destDir, f.replace(SRC_RE, '.thumb.webp')),
+        join(destDir, toNfc(f.replace(SRC_RE, '.thumb.webp'))),
         // `withoutEnlargement` : un original plus étroit que 360 px reste tel quel.
         () =>
           sharp(from)
@@ -96,10 +102,16 @@ function totalStems(catalog: unknown): number {
  * Un stem est-il SERVI par R2 ? Ses DEUX dérivés doivent être confirmés poussés
  * (pleine taille + vignette de grille) dans l'état committé du push — la seule
  * preuve disponible hors ligne de ce que le bucket contient.
+ *
+ * `servedKeys` porte les clés de `pushed.json` DÉJÀ normalisées en NFC : le
+ * fichier garde les 26 clés NFD d'avant le renommage Syncthing du 2026-09-15
+ * (cf. `toNfc`), qu'un stem NFC ne retrouverait pas au caractère près. Sans
+ * cela, les 13 BD concernées passaient pour non servies et bloquaient le
+ * manifeste comme « orphelines ».
  */
-function isServed(pushed: Record<string, unknown>, lang: string, stem: string): boolean {
-  const base = `images/4-comics/${lang}/${stem}`;
-  return !!pushed[`${base}.webp`] && !!pushed[`${base}.thumb.webp`];
+function isServed(servedKeys: Set<string>, lang: string, stem: string): boolean {
+  const base = `images/4-comics/${lang}/${toNfc(stem)}`;
+  return servedKeys.has(`${base}.webp`) && servedKeys.has(`${base}.thumb.webp`);
 }
 
 export async function collectComics(): Promise<{ made: number; skipped: number }> {
@@ -138,13 +150,14 @@ export async function collectComics(): Promise<{ made: number; skipped: number }
     const pushed: Record<string, unknown> = existsSync(PUSHED)
       ? JSON.parse(readFileSync(PUSHED, 'utf8'))
       : {};
+    const servedKeys = new Set(Object.keys(pushed).map(toNfc));
     const kept: string[] = [];
     const orphans: string[] = [];
     for (const [lang, stems] of removed) {
       if (!(LANGS as readonly string[]).includes(lang)) continue;
       const list = manifest[lang as (typeof LANGS)[number]];
       for (const stem of stems) {
-        if (isServed(pushed, lang, stem)) {
+        if (isServed(servedKeys, lang, stem)) {
           list.push(stem);
           kept.push(`${lang} : ${stem}`);
         } else {
