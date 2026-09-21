@@ -4473,7 +4473,16 @@
       "first": 3,
       "second": 2,
       "ultimate": 1
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "8eGTH1MNjyY",
+        "title": "[아우터플레인] 티티아 (CV. 오로아)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-09-11T01:57:48Z"
+      }
+    ]
   },
   "2000129": {
     "videos": [
