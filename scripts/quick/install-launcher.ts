@@ -82,20 +82,32 @@ function installWindows(): void {
 
   // Un `.lnk` n'est pas un format qu'on écrit à la main : on passe par l'objet
   // COM WScript.Shell, présent sur tout Windows.
+  //
+  // Les chemins passent par des VARIABLES D'ENVIRONNEMENT, pas par des
+  // arguments : avec `-Command`, powershell.exe recolle tout ce qui suit en une
+  // seule ligne de commande qu'il réanalyse — `$args` reste vide et le premier
+  // chemin devient un « jeton inattendu ». Un env: est lu tel quel, sans
+  // réanalyse : ni espaces ni accents à échapper (la description en a).
   const ps = [
-    '$s = (New-Object -ComObject WScript.Shell).CreateShortcut($args[0])',
-    '$s.TargetPath = $args[1]',
-    '$s.WorkingDirectory = $args[2]',
-    '$s.IconLocation = $args[3]',
-    '$s.Description = "Codes promo, 4-comics, vidéos — sans lancer le serveur de dev"',
+    '$s = (New-Object -ComObject WScript.Shell).CreateShortcut($env:QUICK_LNK)',
+    '$s.TargetPath = $env:QUICK_TARGET',
+    '$s.WorkingDirectory = $env:QUICK_CWD',
+    '$s.IconLocation = $env:QUICK_ICON',
+    '$s.Description = $env:QUICK_DESC',
     '$s.Save()',
   ].join('; ');
 
-  const res = spawnSync(
-    'powershell',
-    ['-NoProfile', '-NonInteractive', '-Command', ps, lnk, target, repo, icon],
-    { encoding: 'utf8' },
-  );
+  const res = spawnSync('powershell', ['-NoProfile', '-NonInteractive', '-Command', ps], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      QUICK_LNK: lnk,
+      QUICK_TARGET: target,
+      QUICK_CWD: repo,
+      QUICK_ICON: icon,
+      QUICK_DESC: 'Codes promo, 4-comics, vidéos — sans lancer le serveur de dev',
+    },
+  });
   if (res.status !== 0)
     throw new Error(`Création du raccourci impossible : ${(res.stderr ?? '').trim()}`);
 

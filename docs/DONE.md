@@ -5,6 +5,23 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-21
+
+- **Le raccourci Windows de `pnpm quick` n'avait jamais pu être posé** — l'icône
+  « par poste » annoncée le 11/09 n'existait donc que sous Linux, la branche
+  `installWindows` échouant à la création du `.lnk`. `install-launcher.ts`
+  passait les quatre chemins en arguments positionnels derrière
+  `powershell -Command`, où ils ne remplissent PAS `$args` : powershell.exe
+  recolle tout ce qui suit en une seule ligne de commande qu'il réanalyse, si
+  bien que le premier chemin revenait en « jeton inattendu ». Ils passent
+  désormais par des variables d'environnement (`$env:QUICK_LNK`…), lues telles
+  quelles sans réanalyse — ni les espaces du chemin du dépôt ni les accents de
+  la description à échapper. Le reste du code Windows, lui, était juste
+  (`cmd /c start` pour le navigateur, node + le tsx du dépôt dans `launch.cmd`).
+  Posé et vérifié sur le poste fixe : cible, dossier de travail, icône et
+  description relus depuis le `.lnk` (accents intacts), `.ico` conforme
+  (22 octets d'en-tête puis le PNG), page servie en HTTP 200 sur le port 4747.
+
 ## 2026-09-16
 
 - **4-comics — les titres en hangeul ont désormais UNE seule graphie (NFC)**, et
