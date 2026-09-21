@@ -4596,7 +4596,16 @@
       "4": "A",
       "6": "A",
       "9": "S"
-    }
+    },
+    "videos": [
+      {
+        "platform": "youtube",
+        "id": "O70cIoY-K5U",
+        "title": "[OUTERPLANE] Resonance Rin (VA. Val Rodriguez)",
+        "author": "아우터플레인 공식 채널",
+        "uploadDate": "2026-09-17T05:00:36Z"
+      }
+    ]
   },
   "2700037": {
     "rank": "A",
