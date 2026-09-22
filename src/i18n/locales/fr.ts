@@ -852,7 +852,7 @@ const fr: Record<TranslationKey, string> = {
   'coupons.validity': '{start} — {end}',
   'coupons.redeem_android': 'Android : Menu → Paramètres → Coupon',
   'coupons.redeem_ios':
-    'iOS : <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Utiliser sur le site officiel</a>',
+    'iOS : <a href="https://coupon.outerplane.major7.kr/coupon?lang=en" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">Utiliser sur le site officiel</a>',
   // Coupon one-click redeem
 
   // Homepage sections

@@ -817,7 +817,7 @@ const kr: Record<TranslationKey, string> = {
   'coupons.validity': '{start} — {end}',
   'coupons.redeem_android': 'Android: 메뉴 → 설정 → 쿠폰',
   'coupons.redeem_ios':
-    'iOS: <a href="https://coupon.outerplane.vagames.co.kr:39009/coupon" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">공식 웹사이트에서 교환</a>',
+    'iOS: <a href="https://coupon.outerplane.major7.kr/coupon?lang=en" target="_blank" rel="noopener noreferrer" class="underline text-cyan-400">공식 웹사이트에서 교환</a>',
   // Coupon one-click redeem
 
   // Homepage sections
