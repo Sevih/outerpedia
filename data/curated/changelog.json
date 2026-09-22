@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-09-22",
+    "type": "character",
+    "title": {
+      "en": "Resonance Eliza"
+    },
+    "content": {
+      "en": ["Resonance Eliza has been added to the database with full skills and stats."]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "resonance-eliza"
+    }
+  },
+  {
     "date": "2026-09-09",
     "type": "guide",
     "title": {
