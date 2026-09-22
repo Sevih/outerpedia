@@ -30,6 +30,7 @@
     "datagen:patch": "tsx datagen/refresh.ts",
     "datagen:patch-android": "tsx datagen/refresh.ts --source android",
     "datagen:regen": "pnpm datagen:build && pnpm datagen:promote --apply",
+    "datagen:sync-derived": "tsx datagen/sync-derived.ts",
     "datagen:promote": "tsx datagen/promote.ts",
     "datagen:version-boss": "tsx datagen/version-boss.ts",
     "datagen:video-meta": "tsx datagen/video-meta.ts",

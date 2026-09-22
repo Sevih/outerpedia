@@ -788,9 +788,19 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   const withoutBestSkill: string[] = [];
 
   const characters: Record<string, unknown> = {};
+  const unreleased: string[] = [];
   for (const c of characterTemplet) {
     if (c.Type !== 'CT_PC') continue;
     if (c.NameID !== `${c.ID}_Name`) continue;
+    // Un CT_PC sans nom localisable est un perso PAS ENCORE SORTI, présent
+    // dans les tables en avance de phase (constat 22/09/2026 : 2400015 dans
+    // les tables 1.11.301 sans entrée TextCharacter) : gear-solver ne peut
+    // rien afficher d'une ligne sans nom, et elle n'a pas de bestSkill (le
+    // roster damage ne connaît que l'intégré). Émis à sa sortie, comme le wiki.
+    if (!textChar.has(c.NameID ?? '')) {
+      unreleased.push(c.ID);
+      continue;
+    }
     const ing: CharacterIngredients | undefined = ingredientsResult.characters[c.ID];
     const nickname = showNickName.has(c.ID) ? (textChar.get(c.NickNameID ?? '') ?? null) : null;
     const dmgChar = damage.characters[c.ID];
@@ -808,6 +818,12 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
       ...deriveDmgScaling(c),
       ...(bestSkill ? { bestSkill } : {}),
     };
+  }
+  if (unreleased.length) {
+    console.warn(
+      `⚠ solver : ${unreleased.length} CT_PC sans nom TextCharacter (pas encore sortis), ` +
+        `écartés : ${unreleased.join(', ')}`,
+    );
   }
   if (withoutBestSkill.length) {
     console.warn(

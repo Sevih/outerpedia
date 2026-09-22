@@ -146,7 +146,9 @@ describe('genSteps — la chaîne déclarée', () => {
     // relancée avec --apply — le dry-run compterait pour un apply.
     const applied = genSteps({ apply: true, collect: false });
     expect(stepKey(dry.find((s) => s.id === 'promote')!)).toBe('promote');
-    expect(stepKey(applied.find((s) => s.id === 'promote')!)).toBe('promote --apply');
+    // `--skip-sync` : la re-dérivation post-apply de promote est redondante
+    // dans la chaîne refresh (l'étape damage complète suit) — cf. genSteps.
+    expect(stepKey(applied.find((s) => s.id === 'promote')!)).toBe('promote --apply --skip-sync');
   });
 
   it('`--force` descend jusqu’à extract, qui tient sa propre empreinte par cible', () => {

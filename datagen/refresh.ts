@@ -294,7 +294,10 @@ export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean 
       id: 'promote',
       label: o.apply ? 'promote  (extracted → generated)' : 'promote  (revue du diff — dry-run)',
       file: 'datagen/promote.ts',
-      args: o.apply ? ['--apply'] : [],
+      // `--skip-sync` : la re-dérivation post-apply de promote (sync-derived)
+      // serait redondante ICI — l'étape damage COMPLÈTE suit, et build+promote
+      // du même run partagent le même roster (le solver émis est cohérent).
+      args: o.apply ? ['--apply', '--skip-sync'] : [],
     },
     // Pipeline DAMAGE (tables du moteur du calculateur) — intégré le 25/08/2026 :
     // le patch 1.4.15 avait tout rafraîchi SAUF `data/generated/damage/` (restée

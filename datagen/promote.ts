@@ -371,7 +371,18 @@ async function main(): Promise<void> {
     console.error('--only : au moins un fichier attendu (relatif à data/extracted).');
     process.exit(1);
   }
-  await promote({ apply, only });
+  const result = await promote({ apply, only });
+
+  // RE-DÉRIVATION (cf. datagen/sync-derived.ts) : un apply qui a changé la
+  // donnée intégrée doit rejouer damage + solver, qui la LISENT. `--skip-sync`
+  // est réservé à refresh.ts (son étape damage complète suit). Un `--only` ne
+  // synchronise que s'il a promu une des ENTRÉES de la couche dérivée.
+  const DERIVED_INPUTS = ['characters.json', 'skills.json', 'monsters.json', 'encounters.json'];
+  const touchesDerived = !only || DERIVED_INPUTS.some((f) => only.has(f));
+  if (apply && result.diffs.length > 0 && touchesDerived && !process.argv.includes('--skip-sync')) {
+    const { syncDerived } = await import('./sync-derived');
+    await syncDerived();
+  }
 }
 
 // Garde d'exécution directe : importer ce module depuis les tests ne doit

@@ -15,6 +15,7 @@
 import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 import { writeJson } from '../lib/json';
 import { pythonToolingMissing } from '../lib/python';
 import { buildGameVersion } from '../generators/game-version';
@@ -29,7 +30,14 @@ import { buildSkillDescs } from './skill-descs';
 
 const OUT = resolve('data/generated/damage');
 
-async function main(): Promise<void> {
+/**
+ * Corps du build, appelable hors CLI (cf. `datagen/sync-derived.ts`).
+ * `anim: false` saute la ré-extraction des AnimationEvents (UnityPy, minutes)
+ * et prend `anim-events.json` committé tel quel — le bon réglage quand seuls
+ * les artefacts WIKI ont bougé (intégration/promotion : les bundles du jeu,
+ * eux, n'ont pas changé). Le défaut (`anim: true`) reste celui du patch.
+ */
+export async function buildDamageArtifacts(opts: { anim?: boolean } = {}): Promise<void> {
   const version = buildGameVersion();
   if (!version) {
     throw new Error(
@@ -46,8 +54,12 @@ async function main(): Promise<void> {
   // laissé anim-events.json et les tables damage sur l'ancienne version).
   // Doctrine datagen/lib/python.ts : machine non outillée → étape SAUTÉE, le
   // JSON committé prend le relais ; un échec du script LUI-MÊME lève toujours.
-  const pyMissing = pythonToolingMissing('UnityPy');
-  if (pyMissing) {
+  const pyMissing = opts.anim === false ? null : pythonToolingMissing('UnityPy');
+  if (opts.anim === false) {
+    console.log(
+      '▷ extract-anim-events sauté (--skip-anim) — anim-events.json committé pris tel quel.',
+    );
+  } else if (pyMissing) {
     console.warn(
       `⚠ extract-anim-events SAUTÉ — ${pyMissing} ; anim-events.json committé pris tel quel.`,
     );
@@ -110,7 +122,9 @@ async function main(): Promise<void> {
   );
 }
 
-main().catch((e) => {
-  console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
-  process.exit(1);
-});
+if (isMain(import.meta.url)) {
+  buildDamageArtifacts({ anim: !process.argv.includes('--skip-anim') }).catch((e) => {
+    console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
+    process.exit(1);
+  });
+}

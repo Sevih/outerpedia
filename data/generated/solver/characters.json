@@ -96984,7 +96984,11 @@
       "s3ByLevel": {},
       "corePassive": null
     },
-    "recommendSetId": "13,3,5"
+    "recommendSetId": "13,3,5",
+    "bestSkill": {
+      "slot": "S1",
+      "factor": 1650
+    }
   },
   "2700037": {
     "name": "Veronica",

@@ -45744,6 +45744,455 @@
         "additiveAttack": true
       }
     ],
+    "2700035_1_1": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY",
+        "createRate": 700,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      },
+      {
+        "level": 3,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY",
+        "createRate": 850,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      },
+      {
+        "level": 5,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_1_2": [
+      {
+        "level": 1,
+        "type": "BT_REMOVE_BUFF",
+        "targetType": "ENEMY",
+        "createRate": 700,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_START",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 9996,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      },
+      {
+        "level": 3,
+        "type": "BT_REMOVE_BUFF",
+        "targetType": "ENEMY",
+        "createRate": 850,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_START",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 9996,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      },
+      {
+        "level": 5,
+        "type": "BT_REMOVE_BUFF",
+        "targetType": "ENEMY",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_FIRST",
+        "createType": "SKILL_START",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 9996,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700035_2_1": [
+      {
+        "level": 1,
+        "type": "BT_NONE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_SPAWN",
+        "turnDuration": 1,
+        "removeType": "ON_TURN_END",
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 2700035
+      }
+    ],
+    "2700035_2_2": [
+      {
+        "level": 1,
+        "type": "BT_NONE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "TARGET_HAS_BUFF",
+        "conditionValue": 3,
+        "turnDuration": 1,
+        "removeType": "ON_TURN_END",
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 2700035
+      }
+    ],
+    "2700035_2_3": [
+      {
+        "level": 1,
+        "type": "BT_DMG_REDUCE_FINAL",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 800,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 2700035,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700035_2_4": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "CASTER_DAMAGED_ALL_RANGE",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_2_5": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_2_6": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "applyingType": "OAT_RATE",
+        "value": -100,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      },
+      {
+        "level": 5,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "applyingType": "OAT_RATE",
+        "value": -200,
+        "callerSkillType": "SKT_SECOND,SKT_BURST_1,SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700035_2_7": [
+      {
+        "level": 1,
+        "type": "BT_IMMEDIATELY_ALL_CAP",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "value": 5000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 2700035,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700035_2_8": [
+      {
+        "level": 1,
+        "type": "BT_ACTION_GAUGE",
+        "targetType": "MY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": 100,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN_END_DEFENDER",
+        "conditionType": "TARGET_TEAM_ACTIVED_HAS_BUFF",
+        "conditionValue": 3,
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700035_3_1": [
+      {
+        "level": 1,
+        "type": "BT_STUN",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 1,
+        "removeType": "ON_TURN_END",
+        "ccType": "BLOCK_TURN",
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 34
+      },
+      {
+        "level": 5,
+        "type": "BT_STUN",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "ccType": "BLOCK_TURN",
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 34
+      }
+    ],
+    "2700035_3_2": [
+      {
+        "level": 1,
+        "type": "BT_IMMEDIATELY_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "applyingType": "OAT_RATE",
+        "value": 1500,
+        "callerSkillType": "SKT_ULTIMATE",
+        "createType": "SKILL_FINISH_IMMEDIATELY",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700035_backup_1_1": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_BACKUP_AERIAL,SKT_BACKUP_GROUND",
+        "createType": "SKILL_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_chain_1_1": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_STRIKE_AERIAL,SKT_STRIKE_GROUND",
+        "createType": "CHAIN_STRIKER_FINISH",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_u_1": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_DMG_BOOST",
+        "applyingType": "OAT_ADD",
+        "value": 300,
+        "callerSkillType": "SKT_BURST_2,SKT_BURST_3,SKT_BURST_1",
+        "createType": "SKILL_START",
+        "turnDuration": 1,
+        "removeType": "ON_SKILL_FINISH",
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "2700035_u_2": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 725,
+        "callerSkillType": "SKT_BURST_2,SKT_BURST_3",
+        "createType": "SKILL_START",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "tooltipId": 3
+      }
+    ],
+    "2700035_u_3": [
+      {
+        "level": 1,
+        "type": "BT_EXTEND_DEBUFF",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "applyingType": "OAT_ADD",
+        "value": 1,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
+    "2700035_u_3_1": [
+      {
+        "level": 1,
+        "type": "BT_COOL2_CHARGE",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_ADD",
+        "value": 99,
+        "callerSkillType": "SKT_BURST_3",
+        "createType": "SKILL_FINISH",
+        "removeType": "IMMEDIATELY",
+        "additiveAttack": true
+      }
+    ],
     "2700037_1_1": [
       {
         "level": 1,
@@ -72072,6 +72521,40 @@
         "additiveAttack": true,
         "isEquip": true,
         "isEquipBuff": true
+      }
+    ],
+    "BID_CEQUIP_2700035": [
+      {
+        "level": 1,
+        "type": "BT_STAT_PREMIUM",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "stat": "ST_BUFF_CHANCE",
+        "applyingType": "OAT_RATE",
+        "value": 1000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "BID_CEQUIP_2700035_ADD": [
+      {
+        "level": 1,
+        "type": "BT_SEAL_COUNTER",
+        "targetType": "ME",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "BUFF",
+        "applyingType": "OAT_RATE",
+        "value": 1000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "additiveAttack": true
       }
     ],
     "BID_CEQUIP_2700037": [
@@ -145681,6 +146164,68 @@
         "conditionValue": 2,
         "removeType": "IMMEDIATELY",
         "additiveAttack": true
+      }
+    ],
+    "trancendent_8_2700035_1": [
+      {
+        "level": 1,
+        "type": "BT_BLEED_ENHANCE",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "NEUTRAL",
+        "value": 1000,
+        "callerSkillType": "SKT_ALL",
+        "createType": "PASSIVE",
+        "turnDuration": -1,
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "isEquip": true
+      }
+    ],
+    "trancendent_8_2700035_2": [
+      {
+        "level": 1,
+        "type": "BT_STAT",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 4,
+        "buffDebuffType": "DEBUFF_IGNORE_ALL",
+        "stat": "ST_DEF",
+        "applyingType": "OAT_RATE",
+        "value": -50,
+        "callerSkillType": "SKT_ALL",
+        "createType": "ON_TURN",
+        "conditionType": "OWNER_HAS_BUFF",
+        "conditionValue": 3,
+        "turnDuration": -1,
+        "isTypeOverlap": true,
+        "additiveAttack": true
+      }
+    ],
+    "trancendent_8_2700035_3": [
+      {
+        "level": 1,
+        "type": "BT_DOT_BLEED",
+        "targetType": "ENEMY_TEAM",
+        "createRate": 1000,
+        "stackCount": 1,
+        "buffDebuffType": "DEBUFF_IGNORE_IMMUNE",
+        "stat": "ST_ATK",
+        "applyingType": "OAT_RATE",
+        "value": 755,
+        "callerSkillType": "SKT_ALL",
+        "createType": "SKILL_START",
+        "conditionType": "CASTER_SKILL_RANGE_ALL",
+        "turnDuration": 2,
+        "removeType": "ON_TURN_END",
+        "isIdOverlap": true,
+        "isTypeOverlap": true,
+        "additiveAttack": true,
+        "removeOnCasterDie": true,
+        "isEquip": true,
+        "tooltipId": 1003
       }
     ],
     "trancendent_8_2700043_1": [

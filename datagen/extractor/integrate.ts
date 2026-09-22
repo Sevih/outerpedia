@@ -34,6 +34,7 @@ import { buildCharacters } from './specs/character';
 import type { Character } from './specs/character';
 import { buildMonsters } from './specs/monster';
 import type { Monster } from './specs/monster';
+import { syncDerived } from '../sync-derived';
 
 const GEN = resolve('data/generated');
 
@@ -156,7 +157,29 @@ export async function integrateCharacter(id: string): Promise<IntegrateReport> {
   );
   const assets = await stageAssets(requests, index);
 
+  // 6) Re-dérivation damage + solver : ces artefacts lisent le roster et les
+  // skills INTÉGRÉS qu'on vient de changer (cf. datagen/sync-derived.ts —
+  // constat du 22/09/2026 : sans ce chaînon, un perso intégré n'existait pour
+  // le calculateur et gear-solver qu'au prochain `damage:build` manuel).
+  await syncAfterIntegration(`perso ${id}`);
+
   return { id, files, assets };
+}
+
+/**
+ * Enrobe `syncDerived` d'un message d'échec ACTIONNABLE : l'intégration
+ * elle-même est déjà écrite — si la re-dérivation casse, l'admin doit savoir
+ * que le validé est bon et que seul `pnpm datagen:sync-derived` est à rejouer.
+ */
+async function syncAfterIntegration(what: string): Promise<void> {
+  try {
+    await syncDerived();
+  } catch (e) {
+    throw new Error(
+      `${what} : INTÉGRÉ, mais la re-dérivation damage/solver a échoué (${(e as Error).message}) — ` +
+        'corriger puis relancer `pnpm datagen:sync-derived`.',
+    );
+  }
 }
 
 // --- monstres ------------------------------------------------------------------
@@ -195,6 +218,9 @@ export async function integrateMonster(id: string): Promise<IntegrateMonsterRepo
     freshSkills,
     () => buildEncounters().dungeons,
   );
+  // monsters.json / encounters.json nourrissent damage/targets.ts (cibles du
+  // calculateur) — même chaînon que le perso.
+  await syncAfterIntegration(`monstre ${id}`);
   return { id, files };
 }
 
@@ -276,6 +302,8 @@ export async function integrateMonsterMode(mode: string): Promise<IntegrateModeR
   await writeJson(GEN, 'monsters.json', monsters);
   await writeJson(GEN, 'monster-skills.json', skills);
   await writeJson(GEN, 'encounters.json', encounters);
+
+  await syncAfterIntegration(`mode ${mode}`);
 
   return {
     mode,

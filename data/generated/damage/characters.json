@@ -28645,6 +28645,240 @@
         }
       ]
     },
+    "2700035": {
+      "id": "2700035",
+      "element": "CET_DARK",
+      "class": "CCT_RANGER",
+      "subClass": "TACTICIAN",
+      "race": "CRT_DEMON",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 519,
+          "max": 3530
+        },
+        "Speed": {
+          "min": 138,
+          "max": 138
+        },
+        "Atk": {
+          "min": 75,
+          "max": 757
+        },
+        "Def": {
+          "min": 34,
+          "max": 341
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 50
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 10,
+          "max": 10
+        },
+        "BuffResist": {
+          "min": 11,
+          "max": 110
+        }
+      },
+      "evolution": [
+        {
+          "level": 2,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 88
+            },
+            {
+              "stat": "ST_SPEED",
+              "value": 3
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 88
+            },
+            {
+              "stat": "ST_SPEED",
+              "value": 3
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 132
+            },
+            {
+              "stat": "ST_SPEED",
+              "value": 3
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 132
+            },
+            {
+              "stat": "ST_SPEED",
+              "value": 7
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 493
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 105
+            },
+            {
+              "stat": "ST_ATK",
+              "value": 45
+            }
+          ]
+        },
+        {
+          "level": 7,
+          "rewards": [
+            {
+              "stat": "ST_SPEED",
+              "value": 4
+            },
+            {
+              "stat": "ST_HP",
+              "value": 240
+            },
+            {
+              "stat": "ST_DMG_BOOST",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "level": 8,
+          "rewards": [
+            {
+              "stat": "ST_SPEED",
+              "value": 4
+            },
+            {
+              "stat": "ST_ATK",
+              "value": 28
+            },
+            {
+              "stat": "ST_DMG_BOOST",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "rewards": [
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 20
+            },
+            {
+              "stat": "ST_ATK",
+              "value": 28
+            },
+            {
+              "stat": "ST_DMG_BOOST",
+              "value": 20
+            }
+          ]
+        }
+      ],
+      "skills": [
+        {
+          "slot": 1,
+          "id": "3551"
+        },
+        {
+          "slot": 2,
+          "id": "3552"
+        },
+        {
+          "slot": 3,
+          "id": "3553"
+        },
+        {
+          "slot": 4,
+          "id": "3554"
+        },
+        {
+          "slot": 5,
+          "id": "3555"
+        },
+        {
+          "slot": 6,
+          "id": "3556"
+        },
+        {
+          "slot": 8,
+          "id": "3558"
+        },
+        {
+          "slot": 9,
+          "id": "3559"
+        },
+        {
+          "slot": 10,
+          "id": "3560"
+        },
+        {
+          "slot": 19,
+          "id": "3569"
+        },
+        {
+          "slot": 20,
+          "id": "3570"
+        },
+        {
+          "slot": 21,
+          "id": "3571"
+        },
+        {
+          "slot": 22,
+          "id": "18"
+        }
+      ]
+    },
     "2700037": {
       "id": "2700037",
       "element": "CET_WATER",
@@ -29423,6 +29657,32 @@
             "2000116_2_1",
             "2000116_2_2",
             "2000116_0"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": []
+    },
+    "18": {
+      "id": "18",
+      "type": "SKT_CLASS_PASSIVE",
+      "subType": "PASSIVE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "RANGER_PASSIVE_1",
+            "2700035_2_1",
+            "2700035_2_2",
+            "2700035_2_4",
+            "2700035_2_3",
+            "2700035_2_7",
+            "2700035_2_8"
           ],
           "cool": 0,
           "startCool": 0
@@ -66948,6 +67208,942 @@
               "count": 4
             }
           ]
+        }
+      ]
+    },
+    "3551": {
+      "id": "3551",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1350,
+          "wgReduce": 1,
+          "buffIds": ["2700035_1_1", "2700035_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1450,
+          "wgReduce": 2,
+          "buffIds": ["2700035_1_1", "2700035_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1450,
+          "wgReduce": 2,
+          "buffIds": ["2700035_1_1", "2700035_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1550,
+          "wgReduce": 2,
+          "buffIds": ["2700035_1_1", "2700035_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1650,
+          "wgReduce": 2,
+          "buffIds": ["2700035_1_1", "2700035_1_2"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_1_1",
+          "chain": "2700035_Skill_1",
+          "hit": 1,
+          "damageFactor": 120,
+          "damageType": "DT_DARK_CUT",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_1_2",
+          "chain": "2700035_Skill_1",
+          "hit": 2,
+          "damageFactor": 400,
+          "damageType": "DT_DARK_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3552": {
+      "id": "3552",
+      "type": "SKT_SECOND",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1150,
+          "wgReduce": 1,
+          "buffIds": ["2700035_2_5", "2700035_2_6"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 2,
+          "damageFactor": 1250,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 3,
+          "damageFactor": 1250,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6"],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 4,
+          "damageFactor": 1350,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6"],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 5,
+          "damageFactor": 1350,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6"],
+          "cool": 3,
+          "startCool": 3
+        }
+      ],
+      "burstAP": [80, 120, 160],
+      "hits": [
+        {
+          "id": "2700035_Skill_2_1",
+          "chain": "2700035_Skill_2",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_2",
+          "chain": "2700035_Skill_2",
+          "hit": 2,
+          "damageFactor": 150,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_3",
+          "chain": "2700035_Skill_2",
+          "hit": 3,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3553": {
+      "id": "3553",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1300,
+          "wgReduce": 2,
+          "buffIds": ["2700035_3_1", "2700035_3_2"],
+          "cool": 5,
+          "startCool": 5
+        },
+        {
+          "level": 2,
+          "damageFactor": 1400,
+          "wgReduce": 3,
+          "buffIds": ["2700035_3_1", "2700035_3_2"],
+          "cool": 5,
+          "startCool": 5
+        },
+        {
+          "level": 3,
+          "damageFactor": 1400,
+          "wgReduce": 3,
+          "buffIds": ["2700035_3_1", "2700035_3_2"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 4,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": ["2700035_3_1", "2700035_3_2"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 5,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": ["2700035_3_1", "2700035_3_2"],
+          "cool": 4,
+          "startCool": 4
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_3_1",
+          "chain": "2700035_Skill_3",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_3_2",
+          "chain": "2700035_Skill_3",
+          "hit": 2,
+          "damageFactor": 50,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_3_3",
+          "chain": "2700035_Skill_3",
+          "hit": 3,
+          "damageFactor": 70,
+          "damageType": "DT_PIERCE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_3_4",
+          "chain": "2700035_Skill_3",
+          "hit": 4,
+          "damageFactor": 70,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_3_5",
+          "chain": "2700035_Skill_3",
+          "hit": 5,
+          "damageFactor": 70,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2700035_Skill_3",
+          "events": [
+            {
+              "id": "2700035_Skill_3_1",
+              "factor": 50,
+              "count": 5
+            },
+            {
+              "id": "2700035_Skill_3_2",
+              "factor": 50,
+              "count": 1
+            },
+            {
+              "id": "2700035_Skill_3_3",
+              "factor": 70,
+              "count": 1
+            },
+            {
+              "id": "2700035_Skill_3_4",
+              "factor": 70,
+              "count": 8
+            },
+            {
+              "id": "2700035_Skill_3_5",
+              "factor": 70,
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "3554": {
+      "id": "3554",
+      "type": "SKT_CHAIN_PASSIVE",
+      "subType": "NONE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [],
+      "hitsUnresolved": true
+    },
+    "3555": {
+      "id": "3555",
+      "type": "SKT_STRIKE_AERIAL",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 3,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 5,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_5_1",
+          "chain": "2700035_Skill_5",
+          "hit": 1,
+          "damageFactor": 400,
+          "damageType": "DT_DARK_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_5_2",
+          "chain": "2700035_Skill_5",
+          "hit": 2,
+          "damageFactor": 600,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3556": {
+      "id": "3556",
+      "type": "SKT_STRIKE_GROUND",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 3,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 4,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 5,
+          "buffIds": ["2700035_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_6_1",
+          "chain": "2700035_Skill_6",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_DARK_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_6_2",
+          "chain": "2700035_Skill_6",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3558": {
+      "id": "3558",
+      "type": "SKT_UNIQUE_PASSIVE",
+      "subType": "NONE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": ["trancendent_8_2700035_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": ["trancendent_8_2700035_1", "trancendent_8_2700035_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "trancendent_8_ap",
+            "trancendent_8_2700035_1",
+            "trancendent_8_2700035_2",
+            "trancendent_8_2700035_3"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": []
+    },
+    "3559": {
+      "id": "3559",
+      "type": "SKT_BACKUP_AERIAL",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 0,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 2,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_5_1",
+          "chain": "2700035_Skill_5",
+          "hit": 1,
+          "damageFactor": 400,
+          "damageType": "DT_DARK_HIT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_5_2",
+          "chain": "2700035_Skill_5",
+          "hit": 2,
+          "damageFactor": 600,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3560": {
+      "id": "3560",
+      "type": "SKT_BACKUP_GROUND",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 0,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 1,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 2,
+          "buffIds": ["2700035_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_6_1",
+          "chain": "2700035_Skill_6",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_DARK_HIT",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_6_2",
+          "chain": "2700035_Skill_6",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3569": {
+      "id": "3569",
+      "type": "SKT_BURST_1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1150,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_2_1",
+          "chain": "2700035_Skill_2",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_2",
+          "chain": "2700035_Skill_2",
+          "hit": 2,
+          "damageFactor": 150,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_3",
+          "chain": "2700035_Skill_2",
+          "hit": 3,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3570": {
+      "id": "3570",
+      "type": "SKT_BURST_2",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1150,
+          "wgReduce": 2,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1", "2700035_u_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1", "2700035_u_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1", "2700035_u_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1", "2700035_u_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": ["2700035_2_5", "2700035_2_6", "2700035_u_1", "2700035_u_2"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_2_1",
+          "chain": "2700035_Skill_2",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_2",
+          "chain": "2700035_Skill_2",
+          "hit": 2,
+          "damageFactor": 150,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 2,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_2_3",
+          "chain": "2700035_Skill_2",
+          "hit": 3,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ]
+    },
+    "3571": {
+      "id": "3571",
+      "type": "SKT_BURST_3",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1150,
+          "wgReduce": 2,
+          "buffIds": [
+            "2700035_2_5",
+            "2700035_2_6",
+            "2700035_u_1",
+            "2700035_u_2",
+            "2700035_u_3",
+            "2700035_u_3_1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": [
+            "2700035_2_5",
+            "2700035_2_6",
+            "2700035_u_1",
+            "2700035_u_2",
+            "2700035_u_3",
+            "2700035_u_3_1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1250,
+          "wgReduce": 3,
+          "buffIds": [
+            "2700035_2_5",
+            "2700035_2_6",
+            "2700035_u_1",
+            "2700035_u_2",
+            "2700035_u_3",
+            "2700035_u_3_1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": [
+            "2700035_2_5",
+            "2700035_2_6",
+            "2700035_u_1",
+            "2700035_u_2",
+            "2700035_u_3",
+            "2700035_u_3_1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1350,
+          "wgReduce": 3,
+          "buffIds": [
+            "2700035_2_5",
+            "2700035_2_6",
+            "2700035_u_1",
+            "2700035_u_2",
+            "2700035_u_3",
+            "2700035_u_3_1"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2700035_Skill_Burst_3_1",
+          "chain": "2700035_Skill_Burst_3",
+          "hit": 1,
+          "damageFactor": 600,
+          "damageType": "DT_DARK_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2700035_Skill_Burst_3_2",
+          "chain": "2700035_Skill_Burst_3",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_CUT_RANDOM",
+          "multiHit": true,
+          "maxHitCount": 4,
+          "isAdditive": false
         }
       ]
     },
