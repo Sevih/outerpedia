@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.301",
+  "resVersion": "1.11.302",
   "config": {
     "MAX_CHARACTER_LEVEL": 120,
     "MISSED_DAMAGE_RATE": 500,
