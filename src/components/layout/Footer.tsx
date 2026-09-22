@@ -10,7 +10,8 @@ import { lRec } from '@/lib/i18n/localize';
 import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
 import { buildUrl } from '@/lib/site';
-import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
+import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { visibleCategorySlugs } from '@/lib/data/guides';
 import { getGameVersion } from '@/lib/data/game-version';
 
 /**
@@ -71,10 +72,12 @@ function buildColumns(lang: Lang, t: TFunction): Array<{ title: string; links: F
     },
     {
       title: t('footer.col.guides'),
-      links: GUIDE_CATEGORY_SLUGS.slice(0, 6).map((slug) => ({
-        label: lRec(GUIDE_CATEGORIES[slug].label, lang) || GUIDE_CATEGORIES[slug].label.en,
-        href: localePath(lang, `/guides/${slug}`),
-      })),
+      links: visibleCategorySlugs()
+        .slice(0, 6)
+        .map((slug) => ({
+          label: lRec(GUIDE_CATEGORIES[slug].label, lang) || GUIDE_CATEGORIES[slug].label.en,
+          href: localePath(lang, `/guides/${slug}`),
+        })),
     },
     {
       title: t('footer.col.community'),

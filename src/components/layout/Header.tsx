@@ -5,7 +5,8 @@ import { localePath } from '@/lib/navigation';
 import { NAV_ITEMS } from '@/lib/nav';
 import { img } from '@/lib/images';
 import { getGameVersion } from '@/lib/data/game-version';
-import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
+import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { visibleCategorySlugs } from '@/lib/data/guides';
 import { characterDisplayName, getAllCharacters, getCharacter } from '@/lib/data/characters';
 import type { Lang } from '@/lib/i18n/config';
 import { HeaderClient, type HeaderNavItem } from './HeaderClient';
@@ -46,7 +47,7 @@ export async function Header() {
   const lang = getRequestLang();
   const t = await getT(lang);
 
-  const guideChildren = GUIDE_CATEGORY_SLUGS.map((slug) => ({
+  const guideChildren = visibleCategorySlugs().map((slug) => ({
     href: localePath(lang, `/guides/${slug}`) as string,
     label: lRec(GUIDE_CATEGORIES[slug].label, lang) || GUIDE_CATEGORIES[slug].label.en,
   }));

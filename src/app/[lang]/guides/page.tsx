@@ -10,8 +10,8 @@ import {
 } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import { CategoryCard } from '@/components/guides/CategoryCard';
-import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
-import { countGuides } from '@/lib/data/guides';
+import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { countGuides, visibleCategorySlugs } from '@/lib/data/guides';
 
 export const revalidate = 86400;
 
@@ -37,7 +37,7 @@ export default async function GuidesLanding({ params }: { params: Promise<{ lang
   const t = await getT(lang);
 
   // Catégories non vides, dans l'ordre d'affichage (mêmes que la grille).
-  const visibleCategories = GUIDE_CATEGORY_SLUGS.filter((slug) => countGuides(slug) > 0);
+  const visibleCategories = visibleCategorySlugs();
 
   const crumbLd = buildBreadcrumbJsonLd([
     { name: 'Outerpedia', url: buildUrl(lang, '/') },

@@ -20,6 +20,7 @@ import type { LocalizedText, Monster } from '@contracts';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import {
   GUIDE_CATEGORIES,
+  GUIDE_CATEGORY_SLUGS,
   GUIDE_TIERS,
   categoryRequires,
   isGuideCategory,
@@ -455,6 +456,24 @@ export function listGuidesByCategory(category: GuideCategorySlug): Guide[] {
 /** Compteur de guides visibles par catégorie. */
 export function countGuides(category: GuideCategorySlug): number {
   return allGuides().filter((g) => g.category === category && !g.hidden).length;
+}
+
+/**
+ * Catégories AFFICHABLES — celles qui ont au moins un guide visible, dans
+ * l'ordre de `order`.
+ *
+ * Une catégorie dont TOUS les guides sont `hidden` disparaît ainsi d'elle-même
+ * de la navigation : c'est ce qui permet de retirer un mode mort (Monad Gate,
+ * fermé en septembre 2026) sans supprimer ses pages ni casser leurs URLs, qui
+ * restent servies en accès direct.
+ *
+ * La règle vivait RECOPIÉE dans la landing et le sitemap, et manquait au
+ * header, au footer et à la recherche — qui ont donc continué d'annoncer un
+ * mode vidé de son contenu. Une règle de visibilité à cinq endroits finit
+ * toujours par n'être appliquée qu'à trois.
+ */
+export function visibleCategorySlugs(): GuideCategorySlug[] {
+  return GUIDE_CATEGORY_SLUGS.filter((slug) => countGuides(slug) > 0);
 }
 
 /** Un guide par (catégorie, slug) — `undefined` si inconnu. */

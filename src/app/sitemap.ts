@@ -2,8 +2,7 @@ import type { MetadataRoute } from 'next';
 import { LANGS, LANGUAGES, DEFAULT_LANG } from '@/lib/i18n/config';
 import { buildUrl } from '@/lib/seo';
 import { listCharacterSlugs } from '@/lib/data/characters';
-import { GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
-import { countGuides, guideUpdatedDate, listGuides } from '@/lib/data/guides';
+import { guideUpdatedDate, listGuides, visibleCategorySlugs } from '@/lib/data/guides';
 import { allEquipmentSlugs } from '@/lib/data/equipment-detail';
 import { listEventSlugs } from '@/lib/data/events';
 import { PORTED_TOOL_SLUGS } from './[lang]/tools/registry';
@@ -32,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/equipment',
     ...allEquipmentSlugs().map((s) => `/equipment/${s}`),
     '/guides',
-    ...GUIDE_CATEGORY_SLUGS.filter((c) => countGuides(c) > 0).map((c) => `/guides/${c}`),
+    ...visibleCategorySlugs().map((c) => `/guides/${c}`),
     '/event',
     ...(await listEventSlugs()).map((s) => `/event/${s}`),
     '/changelog',

@@ -16,8 +16,8 @@ import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { img } from '@/lib/images';
 import { NAV_ITEMS, EXTRA_PAGES } from '@/lib/nav';
-import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
-import { listGuides } from '@/lib/data/guides';
+import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
+import { listGuides, visibleCategorySlugs } from '@/lib/data/guides';
 import {
   characterDisplayName,
   characterSearchNames,
@@ -108,7 +108,7 @@ export function buildSearchIndex(lang: Lang, t: (key: TranslationKey) => string)
         terms: terms(t(i.key), hrefWords(href)),
       };
     }),
-    ...GUIDE_CATEGORY_SLUGS.map((slug): SearchEntry => {
+    ...visibleCategorySlugs().map((slug): SearchEntry => {
       const { label, icon } = GUIDE_CATEGORIES[slug];
       const href = localePath(lang, `/guides/${slug}`);
       return {
