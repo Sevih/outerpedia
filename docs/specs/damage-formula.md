@@ -1101,6 +1101,7 @@ v = value
 if Templet.StatType != ST_NONE:
   v = source.Data.GetStatValuePermille(StatType, value)   // source = CASTER (16/18) ou OWNER (17/19)
 v = CheckReverseHealCAP(v)     // min(v, plus petit BT_REVERSE_HEAL_CAP (20) dont la condition passe)
+                               // ⚠ 1.4.17 : les types _ABLE_KILL (18/19) SORTENT sans cap (retour direct)
 if HP + ShieldHP > v:
   AddHP(-v)                                    // passe par le shield (§ 14.3)
 elif Type ∈ {18 CASTER_ABLE_KILL, 19 TARGET_ABLE_KILL}:      // ← 1.4.14
@@ -1121,7 +1122,15 @@ brute, pas un dégât. `AddHP` est appelé avec ses défauts (`_bHeal=false`,
 **Nouveauté 1.4.14 — le reverse heal peut tuer explicitement.** L'énumération gagne
 `BT_REVERSE_HEAL_BASED_CASTER_ABLE_KILL` (18) et `…_TARGET_ABLE_KILL` (19). Pour ces
 deux types la branche létale court-circuite entièrement la liste de scènes et appelle
-`CBuff.TrySetDieByReverseHeal` :
+`CBuff.TrySetDieByReverseHeal`. **Depuis 1.4.17** (relecture du 22/09/2026,
+[`CBuff_CheckReverseHealCAP.cs`](./damage-formula-cs/CBuff_CheckReverseHealCAP.cs)),
+ils échappent AUSSI au cap `BT_REVERSE_HEAL_CAP` : `CheckReverseHealCAP` rend la
+valeur telle quelle pour 18/19 — le cap ne protège plus que des reverse heal
+non létaux (16/17). Seul changement de comportement du diff de listings
+1.4.15 → 1.4.17 ; les autres écarts sont des `Debug.LogWarning` laissés par les
+développeurs dans `OnCreate`/`OnTurnStart` (branche reverse heal) et
+`GetStatValuePermille` — aucun effet de calcul. Moteur aligné le même jour
+(`calcReverseHealValue`, drapeau `ableKill`).
 
 ```text
 TrySetDieByReverseHeal():

@@ -163,6 +163,13 @@ describe('calcReverseHealValue', () => {
     expect(calcReverseHealValue({ ...base, hp: 10000 })).toBe(9999);
   });
 
+  it('_ABLE_KILL (1.4.17) : ignore le cap BT 20 et tue sans protection létale', () => {
+    expect(calcReverseHealValue({ ...base, capValue: 4000, ableKill: true })).toBe(10000);
+    expect(calcReverseHealValue({ ...base, hp: 8000, shieldHP: 1000, ableKill: true })).toBe(10000);
+    // Les types non létaux (16/17) restent cappés.
+    expect(calcReverseHealValue({ ...base, capValue: 4000 })).toBe(4000);
+  });
+
   it('garde INVINCIBLE : aucune perte de PV (§ 14.5)', () => {
     expect(calcReverseHealValue({ ...base, invincible: true })).toBe(0);
     expect(calcReverseHealValue({ ...base, invincible: true, canKill: true })).toBe(0);

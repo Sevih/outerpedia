@@ -196,21 +196,28 @@ export interface ReverseHealInput {
    * 26/08/2026 : l'ASM lisait « ou »). Variante périodique (OnTurnStart) : cf. spec.
    */
   canKill?: boolean;
+  /**
+   * Le buff est un type `_ABLE_KILL` (BT 18/19) : depuis 1.4.17, ces types
+   * IGNORENT le cap BT 20 (`CheckReverseHealCAP` les rend non plafonnés) — et
+   * ils tuent partout (implique la branche létale, sans poser `canKill`).
+   */
+  ableKill?: boolean;
   /** Le porteur a BT_INVINCIBLE (3) : garde d'entrée, aucune perte de PV. */
   invincible?: boolean;
 }
 
 /**
  * Perte de PV effective d'un reverse heal (§ 14.5) : stat-ou-plat, cappé par le
- * plus petit BT 20, et hors branche létale la cible reste à 1 (PV + shield).
- * Ignore défense/élément/crit/DMG_REDUCE ; passe par le shield (cf. shieldAbsorb).
+ * plus petit BT 20 (sauf `_ABLE_KILL`, 1.4.17), et hors branche létale la cible
+ * reste à 1 (PV + shield). Ignore défense/élément/crit/DMG_REDUCE ; passe par
+ * le shield (cf. shieldAbsorb).
  */
 export function calcReverseHealValue(input: ReverseHealInput): number {
   if (input.invincible) return 0;
   let v = statOrFlatValue(input.value, input.sourceStatValue);
-  if (input.capValue !== undefined && input.capValue < v) v = input.capValue;
+  if (!input.ableKill && input.capValue !== undefined && input.capValue < v) v = input.capValue;
   const total = input.hp + input.shieldHP;
-  if (total > v || input.canKill) return v;
+  if (total > v || input.canKill || input.ableKill) return v;
   return total - 1; // AddHP(1 − (HP+shield)) : laisse exactement 1
 }
 

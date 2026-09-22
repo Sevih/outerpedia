@@ -17,7 +17,7 @@
  * `pnpm damage:check` avertit si elle diverge du dump-stamp de la machine
  * de datamine (le filet contre l'oubli).
  */
-export const ENGINE_GAME_VERSION = '1.4.15';
+export const ENGINE_GAME_VERSION = '1.4.17';
 
 /** Une étape de la trace de calcul (spec § 2). */
 export interface TraceStep {
