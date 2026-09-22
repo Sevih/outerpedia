@@ -1,4 +1,4 @@
-// CSkillDungeonStatValue$$GetFinalValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CSkillDungeonStatValue$$GetFinalValue — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CSkillDungeonStatValue.cs.
 
 	public override int GetFinalValue()

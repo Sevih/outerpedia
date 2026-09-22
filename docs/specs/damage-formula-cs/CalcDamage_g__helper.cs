@@ -1,4 +1,4 @@
-// CFormula$$<CalcDamage>g__CalcDamage|17_0 — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CFormula$$<CalcDamage>g__CalcDamage|17_0 — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 // 2 surcharges, dans l'ordre du source.
 // Le binaire cite fonction locale CalcDamage — généré par le compilateur, ILSpy le replie dans CFormula.CalcDamage.
@@ -33,13 +33,13 @@
 				{
 					if ("EventAttackStart".Equals(val2.functionName))
 					{
-						string[] array = val2.stringParameter.Replace(" ", "").Split(',');
+						string[] array = val2.stringParameter.Replace(" ", "").Split(',', StringSplitOptions.None);
 						CDamageTemplet damageTemplet = CTempletManager.Instance.GetDamageTemplet(array[0]);
 						num += damageTemplet.DamageFactor * ((damageTemplet.MaxHitCount == 0) ? 1 : damageTemplet.MaxHitCount);
 					}
 					else if ("EventEffect".Equals(val2.functionName))
 					{
-						string[] array2 = val2.stringParameter.Replace(" ", "").Split(',');
+						string[] array2 = val2.stringParameter.Replace(" ", "").Split(',', StringSplitOptions.None);
 						if (array2 != null && array2.Length >= 2 && int.TryParse(array2[1], out var result) && result > 0)
 						{
 							CDebug.LogWarning("EventEffect damage factor : " + result);

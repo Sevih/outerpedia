@@ -1,4 +1,4 @@
-// CCharacterBattle$$GetDotDamageIncreaseBuffValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$GetDotDamageIncreaseBuffValue — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	public int GetDotDamageIncreaseBuffValue(BUFF_TYPE _eDotBuffType)

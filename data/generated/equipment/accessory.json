@@ -8934,6 +8934,57 @@
     ],
     "breakLimit": "6|unique"
   },
+  "9950002": {
+    "name": {
+      "en": "Steel Necklace [Settlement Support]",
+      "jp": "鋼鉄の首飾り【初心者応援】",
+      "kr": "강철목걸이 [정착지원]",
+      "zh": "钢铁项链 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2453"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "9950003": {
+    "name": {
+      "en": "Steel Necklace [Settlement Support]",
+      "jp": "鋼鉄の首飾り【初心者応援】",
+      "kr": "강철목걸이 [정착지원]",
+      "zh": "钢铁项链 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2153"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
+  "9950004": {
+    "name": {
+      "en": "Steel Necklace [Settlement Support]",
+      "jp": "鋼鉄の首飾り【初心者応援】",
+      "kr": "강철목걸이 [정착지원]",
+      "zh": "钢铁项链 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Accessary_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["2053"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
+  },
   "9951795": {
     "name": {
       "en": "Briareos's Ambition",

@@ -1,4 +1,4 @@
-// CFormula$$AddCheckEnemyTeamDecreaseDamageRate — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CFormula$$AddCheckEnemyTeamDecreaseDamageRate — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static void AddCheckEnemyTeamDecreaseDamageRate(CCharacterBattle _Attacker, int _nDecreaseTargetCount, ref int _nDamageRate)

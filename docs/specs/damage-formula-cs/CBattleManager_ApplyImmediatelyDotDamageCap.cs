@@ -1,4 +1,4 @@
-// CBattleManager$$ApplyImmediatelyDotDamageCap — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CBattleManager$$ApplyImmediatelyDotDamageCap — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBattleManager.cs.
 
 	private static int ApplyImmediatelyDotDamageCap(CCharacterBattle _Defender, BUFF_TYPE _eDotBuffType, int _nDamage)

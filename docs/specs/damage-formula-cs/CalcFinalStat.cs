@@ -1,4 +1,4 @@
-// CFormula$$CalcFinalStat — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CFormula$$CalcFinalStat — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static int CalcFinalStat(int _nBaseValue, int _nSpawnAdvantageRate, int _nEvolutionValue, int _nAwakeningValue, int _nAwakeningValueRate, int _nMonadEnchantValue, int _nMonadEnchantValueRate, int _nTranscendentStarValueRate, int _nArchiveStatValueRate, int _ItemOptionValue, int _ItemOptionValueRate, int _nBuffValue, int _nBuffValueRate)

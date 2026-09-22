@@ -1,4 +1,4 @@
-// CCustomBossStatValue$$SetBaseValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCustomBossStatValue$$SetBaseValue — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCustomBossStatValue.cs.
 
 	public override void SetBaseValue(int _MinValue, int _MaxValue, int _nLevel, int _nSpawnAdvantageRate = 0, int addRate = 0, CCharacterData _OwnerCharacter = null)

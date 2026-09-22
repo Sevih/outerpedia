@@ -3135,10 +3135,10 @@
         "zh": "鲜血领域"
       },
       "desc": {
-        "en": "When an enemy inflicted with Bleeding ends their action, increases all allies' Priority by 10%.\\nDecreases damage taken by allies by 30%.\\nThis effect is removed when the caster dies.",
-        "jp": "出血状態の敵が行動終了時、\\n味方の行動ゲージが10%UPする。\\n味方が受けるダメージが30%減少する。\\nこの効果は【エリーゼ】が倒れるまで\\n解除されない。",
-        "kr": "행동 종료한 적이 출혈 보유 시 아군의 행동 게이지가 10% 증가합니다.\\n아군이 받는 피해가 30% 감소합니다.\\n엘리제가 사망하기 전까지 해제되지 않습니다.",
-        "zh": "行动结束的敌人处于出血状态时，\\n使友军行动值提升10%。\\n我方受到的伤害减少30%。\\n在伊莉莎死亡之前无法被解除。"
+        "en": "When an enemy inflicted with Bleeding ends their action, increases all allies' Priority by 10%.\\nDecreases damage taken by allies by 30% and additionally decreases damage taken by Eliza by 20%.\\n\\n(Irremovable, removed when Eliza dies)",
+        "jp": "出血状態の敵が行動終了時、味方の行動ゲージが10%UPする。\\n味方が受けるダメージが30%減少し、エリーゼが受けるダメージはさらに20%減少する。\\n\\n（解除不可／エリーゼが戦闘不能時に解除）",
+        "kr": "행동 종료한 적이 출혈 보유 시 아군의 행동 게이지가 10% 증가합니다.\\n아군이 받는 피해가 30% 감소하고 엘리제는 20% 추가 감소합니다.\\n\\n(해제 불가, 엘리제 사망 시 해제)",
+        "zh": "行动结束的敌人处于出血状态时，使友军行动值提升10%。\\n我方受到的伤害减少30%，伊莉莎受到的伤害额外减少20%。\\n\\n（无法解除／伊莉莎死亡时解除）"
       },
       "icon": "IG_Buff_2000035_Interruption",
       "isDebuff": false,
@@ -3761,6 +3761,26 @@
       "isDebuff": false,
       "origin": "tooltip",
       "tooltips": ["2100129"],
+      "irremovable": true
+    },
+    "2700035": {
+      "id": "2700035",
+      "name": {
+        "en": "True Pureblood's Dominion",
+        "jp": "真・鮮血の領域",
+        "kr": "진 선혈의 영역",
+        "zh": "真·鲜血领域"
+      },
+      "desc": {
+        "en": "Decreases Final DMG taken by 80% and caps Detonation Damage taken at 5,000.\\nCannot be removed until Eliza dies.",
+        "jp": "受ける最終ダメージが80%DOWNし、受ける破裂ダメージは5000に制限される。\\nエリーゼが倒れるまで解除されない。",
+        "kr": "받는 최종 피해가 80% 감소하고 받는 폭발 피해는 5000으로 제한됩니다.\\n\n엘리제가 사망하기 전까지 해제되지 않습니다.",
+        "zh": "受到的最终伤害减少80%，受到的爆发伤害上限为5000。\\n伊莉莎死亡前无法解除。"
+      },
+      "icon": "IG_Buff_2000035_Interruption",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2700035"],
       "irremovable": true
     },
     "4076102": {

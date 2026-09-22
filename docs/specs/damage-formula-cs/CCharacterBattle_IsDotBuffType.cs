@@ -1,4 +1,4 @@
-// CCharacterBattle$$IsDotBuffType — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$IsDotBuffType — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	private static bool IsDotBuffType(BUFF_TYPE _eDotBuffType)

@@ -1,4 +1,4 @@
-// CCharacterBattle$$SkillSimulation — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$SkillSimulation — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Mode simulateur (CPlayer.IsYSLSimulator) : la seule écriture du TotalSkillFactor de l'ATTAQUANT — le repli `num == 0` de CalcDamage (spec § 8.1).
 

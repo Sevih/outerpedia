@@ -1,4 +1,4 @@
-// CSkillManager$$GetBuffListOnSpawn — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CSkillManager$$GetBuffListOnSpawn — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CSkillManager.cs.
 
 	public void GetBuffListOnSpawn(out List<CBuffTemplet> _BuffTempletList)

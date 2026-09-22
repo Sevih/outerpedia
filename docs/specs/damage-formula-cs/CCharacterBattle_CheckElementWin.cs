@@ -1,4 +1,4 @@
-// CCharacterBattle$$CheckElementWin — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$CheckElementWin — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Conditions ATTACKER_ELEMENT_WIN/EQUAL/LOSE (§ 16.3) — supériorité forcée prise en compte, pas l'infériorité.
 

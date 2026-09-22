@@ -1,4 +1,4 @@
-// CCharacterData$$GetEvolutionStat — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$GetEvolutionStat — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	public Dictionary<STAT_TYPE, int> GetEvolutionStat(bool _bCheckTotal = true, int _nTargetEvolutionLevel = 0)

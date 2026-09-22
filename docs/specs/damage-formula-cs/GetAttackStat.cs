@@ -1,4 +1,4 @@
-// CCharacterBattle$$GetAttackStat — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$GetAttackStat — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 
 	public int GetAttackStat()

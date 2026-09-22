@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.203",
+  "resVersion": "1.11.301",
   "pieces": {
     "1": {
       "id": "1",
@@ -34985,6 +34985,182 @@
       "uniqueOptionGroups": ["2037"],
       "setOptionGroups": [],
       "breakLimitGroup": "1801"
+    },
+    "9950001": {
+      "id": "9950001",
+      "subType": "ITS_EQUIP_WEAPON",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["23", "1053"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": [],
+      "breakLimitGroup": "753"
+    },
+    "9950002": {
+      "id": "9950002",
+      "subType": "ITS_EQUIP_ACCESSORY",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["2453"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": [],
+      "breakLimitGroup": "1757"
+    },
+    "9950003": {
+      "id": "9950003",
+      "subType": "ITS_EQUIP_ACCESSORY",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["2153"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": [],
+      "breakLimitGroup": "1757"
+    },
+    "9950004": {
+      "id": "9950004",
+      "subType": "ITS_EQUIP_ACCESSORY",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["2053"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": [],
+      "breakLimitGroup": "1757"
+    },
+    "9950005": {
+      "id": "9950005",
+      "subType": "ITS_EQUIP_HELMET",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["3023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["13"],
+      "breakLimitGroup": "3311"
+    },
+    "9950006": {
+      "id": "9950006",
+      "subType": "ITS_EQUIP_ARMOR",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["4023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["13"],
+      "breakLimitGroup": "5311"
+    },
+    "9950007": {
+      "id": "9950007",
+      "subType": "ITS_EQUIP_GLOVES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["5023", "5047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["13"],
+      "breakLimitGroup": "7311"
+    },
+    "9950008": {
+      "id": "9950008",
+      "subType": "ITS_EQUIP_SHOES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["6023", "6047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["13"],
+      "breakLimitGroup": "9311"
+    },
+    "9950009": {
+      "id": "9950009",
+      "subType": "ITS_EQUIP_HELMET",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["3023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["1"],
+      "breakLimitGroup": "3023"
+    },
+    "9950010": {
+      "id": "9950010",
+      "subType": "ITS_EQUIP_ARMOR",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["4023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["1"],
+      "breakLimitGroup": "5023"
+    },
+    "9950011": {
+      "id": "9950011",
+      "subType": "ITS_EQUIP_GLOVES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["5023", "5047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["1"],
+      "breakLimitGroup": "7023"
+    },
+    "9950012": {
+      "id": "9950012",
+      "subType": "ITS_EQUIP_SHOES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["6023", "6047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["1"],
+      "breakLimitGroup": "9023"
+    },
+    "9950013": {
+      "id": "9950013",
+      "subType": "ITS_EQUIP_HELMET",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["3023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["4"],
+      "breakLimitGroup": "3095"
+    },
+    "9950014": {
+      "id": "9950014",
+      "subType": "ITS_EQUIP_ARMOR",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["4023"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["4"],
+      "breakLimitGroup": "5095"
+    },
+    "9950015": {
+      "id": "9950015",
+      "subType": "ITS_EQUIP_GLOVES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["5023", "5047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["4"],
+      "breakLimitGroup": "7095"
+    },
+    "9950016": {
+      "id": "9950016",
+      "subType": "ITS_EQUIP_SHOES",
+      "grade": "IG_RARE",
+      "basicStar": 6,
+      "mainOptionGroups": ["6023", "6047"],
+      "subOptionGroups": ["106"],
+      "uniqueOptionGroups": [],
+      "setOptionGroups": ["4"],
+      "breakLimitGroup": "9095"
     },
     "9951795": {
       "id": "9951795",

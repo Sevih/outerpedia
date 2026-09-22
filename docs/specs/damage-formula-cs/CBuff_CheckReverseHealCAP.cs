@@ -1,4 +1,4 @@
-// CBuff$$CheckReverseHealCAP — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CBuff$$CheckReverseHealCAP — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	private int CheckReverseHealCAP(int _nFinalValue)

@@ -8654,5 +8654,53 @@
     "sub": "12019",
     "breakLimit": "6|unique",
     "set": "19"
+  },
+  "9950006": {
+    "name": {
+      "en": "Steel Chest Armor of Speed [Settlement Support]",
+      "jp": "速度の鋼鉄アーマー【初心者応援】",
+      "kr": "속도의 강철 갑옷 [정착지원]",
+      "zh": "钢铁速度盔甲 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "13"
+  },
+  "9950010": {
+    "name": {
+      "en": "Steel Chest Armor of Attack [Settlement Support]",
+      "jp": "攻撃の鋼鉄アーマー【初心者応援】",
+      "kr": "공격의 강철 갑옷 [정착지원]",
+      "zh": "钢铁攻击盔甲 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "1"
+  },
+  "9950014": {
+    "name": {
+      "en": "Steel Chest Armor of Critical Hit [Settlement Support]",
+      "jp": "会心の鋼鉄アーマー【初心者応援】",
+      "kr": "치명의 강철 갑옷 [정착지원]",
+      "zh": "钢铁暴击盔甲 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Armor_06",
+    "craftable": false,
+    "main": ["4023"],
+    "sub": "106",
+    "breakLimit": "6|rare",
+    "set": "4"
   }
 }

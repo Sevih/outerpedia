@@ -1,4 +1,4 @@
-// CBuff$$OnCreate — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CBuff$$OnCreate — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	public bool OnCreate()
@@ -208,7 +208,7 @@
 			else if (Type == BUFF_TYPE.BT_STAT_OWNER_LOST_HP_RATE_HALF)
 			{
 				IsUseInstanceValue = true;
-				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, Owner.CharacterData.MaxHP);
+				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, (long)Owner.CharacterData.MaxHP);
 				InstanceValue = Owner.GetLostHPRateValue(nHP, Value);
 			}
 			if (STAT_TYPE.ST_HP == StatType)

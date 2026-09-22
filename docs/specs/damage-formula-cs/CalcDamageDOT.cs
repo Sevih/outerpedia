@@ -1,4 +1,4 @@
-// CFormula$$CalcDamageDOT — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CFormula$$CalcDamageDOT — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static int CalcDamageDOT(CCharacterBattle _Attacker, CCharacterBattle _Defender, int _nAttackRate, int _nStatValue)

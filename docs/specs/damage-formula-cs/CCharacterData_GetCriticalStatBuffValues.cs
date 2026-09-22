@@ -1,4 +1,4 @@
-// CCharacterData$$GetCriticalStatBuffValues — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$GetCriticalStatBuffValues — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 // Note du manifeste : Branche crit de SetFinalValue : buffs passifs DANS CalcFinalStat puis cap 1000, actifs APRÈS (§ 16, lève § 12.11).
 

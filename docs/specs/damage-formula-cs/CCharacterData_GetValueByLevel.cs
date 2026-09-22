@@ -1,4 +1,4 @@
-// CCharacterData$$GetValueByLevel — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$GetValueByLevel — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	public int GetValueByLevel(int _nLevel, STAT_TYPE _eStat, bool _bFinal = true)

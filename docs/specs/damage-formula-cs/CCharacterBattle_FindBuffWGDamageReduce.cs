@@ -1,4 +1,4 @@
-// CCharacterBattle$$FindBuffWGDamageReduce — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$FindBuffWGDamageReduce — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Agrégation add/rate des BT_WG_DMG (attaquant) − BT_WG_DMG_REDUCE (défenseur) — spec § 11 CalcDamageWG, lève § 12.3.
 

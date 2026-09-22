@@ -1,4 +1,4 @@
-// CCharacterBattle$$OnReturnFinishDefenderTeam — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterBattle$$OnReturnFinishDefenderTeam — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterBattle.cs.
 // Note du manifeste : Roll de contre-attaque : CheckProbabilityPermille(CounterRate) après avoir été touché, S1 (§ 12.9).
 
@@ -7,15 +7,7 @@
 		OnReturnFinishAll();
 		if ((Object)(object)CDungeonScene.Instance != (Object)null && CDungeonScene.Instance.IsPvpRealtime)
 		{
-			CDebug.LogWarning(string.Format("★ DefenderTeam: ID={0}(UID={1}), HitAttacker={2}, HitAP={3}, AP={4}, ActionPoint={5}", new object[6]
-			{
-				base.ID,
-				base.UID,
-				(Object)(object)SkillRecord.HitAttacker != (Object)null,
-				base.CharacterData.HitAP,
-				AP,
-				ActionPoint
-			}));
+			CDebug.LogWarning($"★ DefenderTeam: ID={base.ID}(UID={base.UID}), HitAttacker={(Object)(object)SkillRecord.HitAttacker != (Object)null}, HitAP={base.CharacterData.HitAP}, AP={AP}, ActionPoint={ActionPoint}");
 		}
 		if (Object.op_Implicit((Object)(object)SkillRecord.HitAttacker))
 		{
@@ -23,13 +15,7 @@
 			{
 				if ((Object)(object)CDungeonScene.Instance != (Object)null && CDungeonScene.Instance.IsPvpRealtime)
 				{
-					CDebug.LogWarning(string.Format("★ DefenderTeam HitAP: ID={0}(UID={1}), AP={2} → {3}", new object[4]
-					{
-						base.ID,
-						base.UID,
-						AP,
-						AP + base.CharacterData.HitAP
-					}));
+					CDebug.LogWarning($"★ DefenderTeam HitAP: ID={base.ID}(UID={base.UID}), AP={AP} → {AP + base.CharacterData.HitAP}");
 				}
 				AP += base.CharacterData.HitAP;
 			}

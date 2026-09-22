@@ -3315,6 +3315,33 @@
       }
     ]
   },
+  "2700035": {
+    "name": {
+      "en": "Bloodbringer",
+      "jp": "ブラッドブリンガー",
+      "kr": "블러드브링어",
+      "zh": "血之使者"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2700035",
+    "craftable": false,
+    "character": "2700035",
+    "trustLevel": 10,
+    "options": ["2700035"],
+    "passives": [
+      {
+        "id": "2700035",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2710035",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
   "2700037": {
     "name": {
       "en": "Asphodel",

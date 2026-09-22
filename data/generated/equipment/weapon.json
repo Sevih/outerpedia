@@ -7778,5 +7778,22 @@
       }
     ],
     "breakLimit": "6|unique"
+  },
+  "9950001": {
+    "name": {
+      "en": "Steel Sword [Settlement Support]",
+      "jp": "鋼鉄の剣【初心者応援】",
+      "kr": "강철검 [정착지원]",
+      "zh": "钢铁剑 [定居支援]"
+    },
+    "grade": "rare",
+    "star": 6,
+    "icon": "TI_Equipment_Weapon_06",
+    "craftable": false,
+    "classLimit": null,
+    "main": ["23", "1053"],
+    "sub": "106",
+    "passives": [],
+    "breakLimit": "6|rare"
   }
 }

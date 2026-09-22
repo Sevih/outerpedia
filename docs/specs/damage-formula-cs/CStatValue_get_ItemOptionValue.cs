@@ -1,4 +1,4 @@
-// CStatValue$$get_m_nItemOptionValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CStatValue$$get_m_nItemOptionValue — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStatValue.cs.
 
 	private int m_nItemOptionValue

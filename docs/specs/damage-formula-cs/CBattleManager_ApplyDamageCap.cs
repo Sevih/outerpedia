@@ -1,4 +1,4 @@
-// CBattleManager$$ApplyDamageCap — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CBattleManager$$ApplyDamageCap — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBattleManager.cs.
 
 	private static int ApplyDamageCap(CCharacterBattle _Defender, BUFF_TYPE _eCapBuffType, int _nDamage)

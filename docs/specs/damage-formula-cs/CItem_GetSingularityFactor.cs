@@ -1,4 +1,4 @@
-// CItem$$GetSingularityFactor — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CItem$$GetSingularityFactor — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CItem.cs.
 
 	public float GetSingularityFactor(byte _nSingularityStep, byte _nSingularityLevel)

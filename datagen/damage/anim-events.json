@@ -10266,6 +10266,24 @@
       "VerticalSpeed": ["2700019_Hit_Air_Fall", "2700019_Hit_Air_Up"]
     }
   },
+  "2700035": {
+    "clips": {
+      "2700035_Skill_3": [
+        "2700035_Skill_3_1,0",
+        "2700035_Skill_3_2,0",
+        "2700035_Skill_3_3,0",
+        "2700035_Skill_3_4,0",
+        "2700035_Skill_3_5,0"
+      ],
+      "2700035_Skill_3_Skip": ["Skip_Finish_Dark ,0"]
+    },
+    "triggers": {
+      "IsBreak": ["2700035_Hit_Stun_Loop"],
+      "IsStun": ["2700035_Hit_Stun_Loop"],
+      "Skill3": ["2700035_Skill_3"],
+      "Skill3Skip": ["2700035_Skill_3_Skip"]
+    }
+  },
   "2700037": {
     "clips": {
       "2700037_Skill_3_Skip": ["Skip_Finish_Water ,0"]
@@ -10438,6 +10456,26 @@
       "Skill11": ["2710019_Skill_Extra"],
       "Skill3": ["2710019_Skill_3"],
       "Skill3Skip": ["2710019_Skill_3_Skip"]
+    }
+  },
+  "2710035": {
+    "clips": {
+      "2710035_Skill_3": [
+        "2700035_Skill_3_1,0",
+        "2700035_Skill_3_2,0",
+        "2700035_Skill_3_3,0",
+        "2700035_Skill_3_4,0",
+        "2700035_Skill_3_5,0"
+      ],
+      "2710035_Skill_3_Skip": ["Skip_Finish_Dark ,0"]
+    },
+    "triggers": {
+      "BattleEntry": ["2710035_Battle_Entry"],
+      "BattleResultWin": ["2710035_Battle_Result_Win"],
+      "IsBreak": ["2710035_Hit_Stun_Loop"],
+      "IsStun": ["2710035_Hit_Stun_Loop"],
+      "Skill3": ["2710035_Skill_3"],
+      "Skill3Skip": ["2710035_Skill_3_Skip"]
     }
   },
   "2710037": {

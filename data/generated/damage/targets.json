@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.203",
+  "resVersion": "1.11.301",
   "targets": {
     "400101": {
       "id": "400101",
@@ -1693,15 +1693,15 @@
       "skills": [
         {
           "slot": 1,
-          "id": "113131"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "113132"
+          "id": "155100"
         },
         {
           "slot": 3,
-          "id": "113133"
+          "id": "155101"
         },
         {
           "slot": 12,
@@ -46902,7 +46902,7 @@
         },
         {
           "slot": 3,
-          "id": "150363"
+          "id": "155101"
         }
       ]
     },
@@ -54414,7 +54414,7 @@
         },
         {
           "slot": 3,
-          "id": "150363"
+          "id": "155101"
         },
         {
           "slot": 14,
@@ -76215,7 +76215,7 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
@@ -76632,7 +76632,7 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
@@ -82548,7 +82548,7 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
@@ -84637,11 +84637,11 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155100"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -86423,11 +86423,11 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155100"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -87542,11 +87542,11 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155212"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -88707,15 +88707,15 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155210"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155212"
+          "id": "150362"
         },
         {
           "slot": 3,
-          "id": "155215"
+          "id": "155101"
         },
         {
           "slot": 14,
@@ -88784,15 +88784,15 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155210"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155212"
+          "id": "150362"
         },
         {
           "slot": 3,
-          "id": "155215"
+          "id": "155216"
         },
         {
           "slot": 14,
@@ -88865,7 +88865,7 @@
         },
         {
           "slot": 2,
-          "id": "155213"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -88946,7 +88946,7 @@
         },
         {
           "slot": 2,
-          "id": "155214"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -89027,7 +89027,7 @@
         },
         {
           "slot": 2,
-          "id": "155214"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -91723,11 +91723,11 @@
       "skills": [
         {
           "slot": 1,
-          "id": "155099"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "155100"
+          "id": "150362"
         },
         {
           "slot": 3,
@@ -94943,15 +94943,15 @@
       "skills": [
         {
           "slot": 1,
-          "id": "125261"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "125262"
+          "id": "150362"
         },
         {
           "slot": 3,
-          "id": "125263"
+          "id": "155216"
         },
         {
           "slot": 9,
@@ -96435,18 +96435,18 @@
       "skills": [
         {
           "slot": 1,
-          "id": "125031"
+          "id": "150361"
         },
         {
           "slot": 2,
-          "id": "125032"
+          "id": "155100"
         },
         {
           "slot": 3,
-          "id": "125033"
+          "id": "155216"
         },
         {
-          "slot": 21,
+          "slot": 22,
           "id": "6"
         }
       ]
@@ -175570,7 +175570,7 @@
         },
         {
           "slot": 3,
-          "id": "150363"
+          "id": "155101"
         }
       ]
     },
@@ -189321,57 +189321,6 @@
         }
       ]
     },
-    "113131": {
-      "id": "113131",
-      "type": "SKT_FIRST",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "SINGLE",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1100,
-          "wgReduce": 0,
-          "buffIds": ["2000035_1_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ]
-    },
-    "113132": {
-      "id": "113132",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1200,
-          "wgReduce": 0,
-          "buffIds": ["2000035_2_1"],
-          "cool": 3,
-          "startCool": 2
-        }
-      ]
-    },
-    "113133": {
-      "id": "113133",
-      "type": "SKT_ULTIMATE",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1500,
-          "wgReduce": 0,
-          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3"],
-          "cool": 5,
-          "startCool": 3
-        }
-      ]
-    },
     "113134": {
       "id": "113134",
       "type": "SKT_RAGE_ENTER1",
@@ -193862,57 +193811,6 @@
         }
       ]
     },
-    "125031": {
-      "id": "125031",
-      "type": "SKT_FIRST",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "SINGLE",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1200,
-          "wgReduce": 0,
-          "buffIds": ["2000035_1_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ]
-    },
-    "125032": {
-      "id": "125032",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 750,
-          "wgReduce": 0,
-          "buffIds": ["2000035_2_1"],
-          "cool": 3,
-          "startCool": 3
-        }
-      ]
-    },
-    "125033": {
-      "id": "125033",
-      "type": "SKT_ULTIMATE",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1000,
-          "wgReduce": 0,
-          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3"],
-          "cool": 4,
-          "startCool": 4
-        }
-      ]
-    },
     "125036": {
       "id": "125036",
       "type": "SKT_FIRST",
@@ -196863,61 +196761,6 @@
           "buffIds": ["tower_very_hard_boss_2000069_6_1"],
           "cool": 0,
           "startCool": 0
-        }
-      ]
-    },
-    "125261": {
-      "id": "125261",
-      "type": "SKT_FIRST",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "SINGLE",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1500,
-          "wgReduce": 0,
-          "buffIds": ["tower_very_hard_boss_2000035_1_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ]
-    },
-    "125262": {
-      "id": "125262",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1150,
-          "wgReduce": 0,
-          "buffIds": ["tower_very_hard_boss_2000035_2_1"],
-          "cool": 3,
-          "startCool": 3
-        }
-      ]
-    },
-    "125263": {
-      "id": "125263",
-      "type": "SKT_ULTIMATE",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1300,
-          "wgReduce": 0,
-          "buffIds": [
-            "tower_very_hard_boss_2000035_3_1",
-            "tower_very_hard_boss_2000035_3_2",
-            "tower_very_hard_boss_2000035_3_3"
-          ],
-          "cool": 3,
-          "startCool": 3
         }
       ]
     },
@@ -211736,28 +211579,11 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 700,
+          "damageFactor": 900,
           "wgReduce": 0,
           "buffIds": ["2000035_2_1"],
           "cool": 3,
           "startCool": 2
-        }
-      ]
-    },
-    "150363": {
-      "id": "150363",
-      "type": "SKT_ULTIMATE",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1300,
-          "wgReduce": 0,
-          "buffIds": ["2000035_3_2"],
-          "cool": 7,
-          "startCool": 4
         }
       ]
     },
@@ -222510,23 +222336,6 @@
         }
       ]
     },
-    "155099": {
-      "id": "155099",
-      "type": "SKT_FIRST",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "SINGLE",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1300,
-          "wgReduce": 0,
-          "buffIds": ["tower_element_52341_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ]
-    },
     "155100": {
       "id": "155100",
       "type": "SKT_SECOND",
@@ -222536,13 +222345,9 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 950,
+          "damageFactor": 900,
           "wgReduce": 0,
-          "buffIds": [
-            "tower_element_52342_1",
-            "tower_very_hard_boss_2000035_2_3",
-            "tower_very_hard_boss_2000035_2_4"
-          ],
+          "buffIds": ["tower_element_52342_1"],
           "cool": 4,
           "startCool": 4
         }
@@ -222559,7 +222364,7 @@
           "level": 1,
           "damageFactor": 1100,
           "wgReduce": 0,
-          "buffIds": ["tower_element_52343_1", "tower_element_52343_2", "tower_element_52343_3"],
+          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3", "2000035_3_4"],
           "cool": 4,
           "startCool": 4
         }
@@ -224336,23 +224141,6 @@
         }
       ]
     },
-    "155210": {
-      "id": "155210",
-      "type": "SKT_FIRST",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "SINGLE",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1200,
-          "wgReduce": 0,
-          "buffIds": ["2000035_1_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ]
-    },
     "155211": {
       "id": "155211",
       "type": "SKT_FIRST",
@@ -224370,74 +224158,6 @@
         }
       ]
     },
-    "155212": {
-      "id": "155212",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 750,
-          "wgReduce": 0,
-          "buffIds": ["2000035_2_1"],
-          "cool": 4,
-          "startCool": 2
-        }
-      ]
-    },
-    "155213": {
-      "id": "155213",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1150,
-          "wgReduce": 0,
-          "buffIds": ["2000035_2_1"],
-          "cool": 3,
-          "startCool": 2
-        }
-      ]
-    },
-    "155214": {
-      "id": "155214",
-      "type": "SKT_SECOND",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1150,
-          "wgReduce": 0,
-          "buffIds": ["2000035_2_1"],
-          "cool": 3,
-          "startCool": 2
-        }
-      ]
-    },
-    "155215": {
-      "id": "155215",
-      "type": "SKT_ULTIMATE",
-      "subType": "ACTIVE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1000,
-          "wgReduce": 0,
-          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3"],
-          "cool": 5,
-          "startCool": 2
-        }
-      ]
-    },
     "155216": {
       "id": "155216",
       "type": "SKT_ULTIMATE",
@@ -224449,7 +224169,7 @@
           "level": 1,
           "damageFactor": 1300,
           "wgReduce": 0,
-          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3"],
+          "buffIds": ["2000035_3_1", "2000035_3_2", "2000035_3_3", "2000035_3_4"],
           "cool": 4,
           "startCool": 2
         }

@@ -1,4 +1,4 @@
-// CFormula$$CalcBattlePower — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CFormula$$CalcBattlePower — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CFormula.cs.
 
 	public static int CalcBattlePower(CCharacterData _Data, CSkillManager _SkillManager, Dictionary<ITEM_SUB_TYPE, CItem> _dicItemList)

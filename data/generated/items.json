@@ -13915,16 +13915,16 @@
   "30507": {
     "kind": "item",
     "name": {
-      "en": "6★ Epic Armor Chest [Speed]",
-      "jp": "★6ユニークー防具ボックス [速度]",
-      "kr": "6성 영웅 방어구 상자 [속도]",
-      "zh": "6星英雄防具箱 [速度]"
+      "en": "Settlement Support Armor Chest [Speed]",
+      "jp": "初心者応援防具ボックス【速度】",
+      "kr": "정착지원 방어구 상자 [속도]",
+      "zh": "定居支援防具箱 [速度]"
     },
     "desc": {
-      "en": "Obtain a full set of 6★ Epic Speed Set armor.\\nSubstats will be randomly applied according to fixed stat types.",
-      "jp": "★6ユニークーの速度セット防具をすべて獲得します。装備のサブオプションは固定された状態で支給されます。",
-      "kr": "6성 영웅 속도 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급됩니다.",
-      "zh": "可获得所有6星英雄速度套装防具。装备的副属性固定。"
+      "en": "Obtain a full set of 6★ Epic Speed Set armor for Settlement Support. Substats are fixed, and Settlement Support Gear costs less to enhance.",
+      "jp": "初心者応援用の★6ユニーク速度セット防具をすべて獲得します。装備のサブオプションは固定で、初心者応援装備は強化費用が安くなります。",
+      "kr": "정착 지원용 6성 영웅 속도 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급되며, 정착지원 장비는 강화 비용이 저렴합니다.",
+      "zh": "获得整套定居支援用6星英雄速度套装防具。装备副属性固定，且定居支援装备的强化费用较低。"
     },
     "icon": "TI_Armor_Box01",
     "grade": "unique",
@@ -13935,16 +13935,16 @@
   "30508": {
     "kind": "item",
     "name": {
-      "en": "6★ Epic Armor Chest [Attack]",
-      "jp": "★6ユニークー防具ボックス [攻撃]",
-      "kr": "6성 영웅 방어구 상자 [공격]",
-      "zh": "6星英雄防具箱 [攻击]"
+      "en": "Settlement Support Armor Chest [Attack]",
+      "jp": "初心者応援防具ボックス【攻撃】",
+      "kr": "정착지원 방어구 상자 [공격]",
+      "zh": "定居支援防具箱 [攻击]"
     },
     "desc": {
-      "en": "Obtain a full set of 6★ Epic Attack Set armor.\\nSubstats will be randomly applied according to fixed stat types.",
-      "jp": "★6ユニークーの攻撃セット防具をすべて獲得します。装備のサブオプションは固定された状態で支給されます。",
-      "kr": "6성 영웅 공격 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급됩니다.",
-      "zh": "可获得所有6星英雄攻击套装防具。装备的副属性固定。"
+      "en": "Obtain a full set of 6★ Epic Attack Set armor for Settlement Support. Substats are fixed, and Settlement Support Gear costs less to enhance.",
+      "jp": "初心者応援用の★6ユニーク攻撃セット防具をすべて獲得します。装備のサブオプションは固定で、初心者応援装備は強化費用が安くなります。",
+      "kr": "정착 지원용 6성 영웅 공격 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급되며, 정착지원 장비는 강화 비용이 저렴합니다.",
+      "zh": "获得整套定居支援用6星英雄攻击套装防具。装备副属性固定，且定居支援装备的强化费用较低。"
     },
     "icon": "TI_Armor_Box01",
     "grade": "unique",
@@ -13955,16 +13955,16 @@
   "30509": {
     "kind": "item",
     "name": {
-      "en": "6★ Epic Armor Chest [Critical Hit]",
-      "jp": "★6ユニークー防具ボックス [会心]",
-      "kr": "6성 영웅 방어구 상자 [치명]",
-      "zh": "6星英雄防具箱 [暴击]"
+      "en": "Settlement Support Armor Chest [Critical Hit]",
+      "jp": "初心者応援防具ボックス【会心】",
+      "kr": "정착지원 방어구 상자 [치명]",
+      "zh": "定居支援防具箱 [暴击]"
     },
     "desc": {
-      "en": "Obtain a full set of 6★ Epic Critical Hit Set armor.\\nSubstats will be randomly applied according to fixed stat types.",
-      "jp": "★6ユニークーの会心セット防具をすべて獲得します。装備のサブオプションは固定された状態で支給されます。",
-      "kr": "6성 영웅 치명 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급됩니다.",
-      "zh": "可获得所有6星英雄暴击套装防具。装备的副属性固定。"
+      "en": "Obtain a full set of 6★ Epic Critical Hit Set armor for Settlement Support. Substats are fixed, and Settlement Support Gear costs less to enhance.",
+      "jp": "初心者応援用の★6ユニーク会心セット防具をすべて獲得します。装備のサブオプションは固定で、初心者応援装備は強化費用が安くなります。",
+      "kr": "정착 지원용 6성 영웅 치명 세트 방어구를 모두 얻습니다. 장비의 서브 옵션이 고정되어 지급되며, 정착지원 장비는 강화 비용이 저렴합니다.",
+      "zh": "获得整套定居支援用6星英雄暴击套装防具。装备副属性固定，且定居支援装备的强化费用较低。"
     },
     "icon": "TI_Armor_Box01",
     "grade": "unique",
@@ -14932,6 +14932,126 @@
     "subType": "box_type_choice_char",
     "star": 0
   },
+  "30560": {
+    "kind": "item",
+    "name": {
+      "en": "4★ Legendary Armor Chest [Attack]",
+      "jp": "★4攻撃の防具ボックス【レジェンド】",
+      "kr": "4성 전설 방어구 상자 [공격]",
+      "zh": "4星传说防具箱【攻击】"
+    },
+    "desc": {
+      "en": "Obtain the full 4★ Legendary Attack armor set.",
+      "jp": "★4レジェンド「攻撃」セット防具一式を獲得。",
+      "kr": "[공격] 세트 옵션을 지닌 4성 전설 방어구를 모두 습득할 수 있습니다.",
+      "zh": "获得完整的4星传说【攻击】防具套装。"
+    },
+    "icon": "TI_Armor_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
+  "30561": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Weapon Selection Chest",
+      "jp": "★5武器選択ボックス【レジェンド】",
+      "kr": "5성 전설 무기 선택 상자",
+      "zh": "5星传说武器选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 5★ Legendary Weapon.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンド武器の中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 무기 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件5星传说武器。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Weapon_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30562": {
+    "kind": "item",
+    "name": {
+      "en": "5★ Legendary Accessory Selection Chest",
+      "jp": "★5アクセサリー選択ボックス【レジェンド】",
+      "kr": "5성 전설 악세서리 선택 상자",
+      "zh": "5星传说饰品选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 5★ Legendary Accessory.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★5レジェンドアクセサリーの中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "5성 전설 악세서리 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件5星传说饰品。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Accessary_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30563": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Weapon Selection Chest",
+      "jp": "★6武器選択ボックス【レジェンド】",
+      "kr": "6성 전설 무기 선택 상자",
+      "zh": "6星传说武器选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 6★ Legendary Weapon.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★6レジェンド武器の中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "6성 전설 무기 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件6星传说武器。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Weapon_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30564": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Accessory Selection Chest",
+      "jp": "★6アクセサリー選択ボックス【レジェンド】",
+      "kr": "6성 전설 악세서리 선택 상자",
+      "zh": "6星传说饰品选择箱"
+    },
+    "desc": {
+      "en": "Select and obtain one 6★ Legendary Accessory.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★6レジェンドアクセサリーの中から1つを選択して獲得する。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "6성 전설 악세서리 중 한가지를 선택하여 얻습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "选择并获得1件6星传说饰品。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Accessary_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_choice_item",
+    "star": 0
+  },
+  "30565": {
+    "kind": "item",
+    "name": {
+      "en": "6★ Legendary Armor Chest [Speed]",
+      "jp": "★6速度の防具ボックス【レジェンド】",
+      "kr": "6성 전설 방어구 상자 [속도]",
+      "zh": "6星传说防具箱【速度】"
+    },
+    "desc": {
+      "en": "Obtain the full 6★ Legendary Speed armor set.\\nThe equipment provided by this chest has fixed stats.",
+      "jp": "★6レジェンド「速度」セット防具一式を獲得。\\nこのボックスから獲得する装備のオプションは固定されている。",
+      "kr": "[속도] 세트 옵션을 지닌 6성 전설 방어구를 모두 습득할 수 있습니다.\\n해당 상자에서 지급되는 장비들은 옵션이 고정되어 지급됩니다.",
+      "zh": "获得完整的6星传说【速度】防具套装。\\n该箱子提供的装备附带固定属性。"
+    },
+    "icon": "TI_Armor_Box02",
+    "grade": "unique",
+    "type": "box",
+    "subType": "box_type_random",
+    "star": 0
+  },
   "40001": {
     "kind": "item",
     "name": {
@@ -15838,13 +15958,13 @@
       "en": "Limit Break Memory [Resonance Rin]",
       "jp": "限界突破メモリー [レゾナンス・リン]",
       "kr": "한계 돌파 메모리 [레조넌스 린]",
-      "zh": "极限突破记忆[共鸣 琳]"
+      "zh": "共鸣·琳的记忆"
     },
     "desc": {
       "en": "Obtain Resonance Rin's Limit Break Factor.",
       "jp": "レゾナンス・リンの限界突破因子を獲得します。",
       "kr": "레조넌스 린의 한계 돌파 인자를 얻습니다.",
-      "zh": "获得共鸣 琳的极限突破因子。"
+      "zh": "获得共鸣·琳的突破材料。"
     },
     "icon": "TI_CharacterCard_07_W",
     "grade": "unique",
@@ -16195,9 +16315,9 @@
       "zh": "次元奇点每日参与奖励"
     },
     "desc": {
-      "en": "Obtain the following rewards.\\nHigh-Precision Chip x40\\nReload Cartridge x50\\nLimit Break Memory x25\\nBlue Stardust x5\\nBlue Memory Stone x5",
+      "en": "Obtain the following rewards.\\nHigh-Precision Chip x40\\nReload Cartridge x50\\nLimit Break Memory x25\\nBlue Stardust x5\\nBlue Memory Stone x5\\nFusion-Type Core x25",
       "jp": "以下の報酬を獲得する。\\n高精度チップ40個\\nリロードカートリッジ50個\\n限界突破メモリー25個\\nブルースターダスト5個\\nブルーメモリーストーン5個",
-      "kr": "아래의 보상을 얻습니다.\\n고정밀 칩 40개\\n리로드 카트리지 50개\\n한계 돌파 메모리 25개\\n블루 스타 더스트 5개\\n블루 메모리 스톤 5개",
+      "kr": "아래의 보상을 얻습니다.\\n고정밀 칩 40개\\n리로드 카트리지 50개\\n한계 돌파 메모리 25개\\n블루 스타 더스트 5개\\n블루 메모리 스톤 5개\\n융합형 코어 25개",
       "zh": "获得以下奖励。\\n高精度芯片40个\\n换弹匣50个\\n极限突破记忆25个\\n蓝色星尘5个\\n蓝色记忆石5个"
     },
     "icon": "TI_Common_Box05",
@@ -22353,16 +22473,16 @@
   "SYS_ASSET_EVENT_COIN_3": {
     "kind": "goods",
     "name": {
-      "en": "Tasty Fish",
-      "jp": "おいしい魚",
-      "kr": "맛 좋은 생선",
-      "zh": "美味的鱼"
+      "en": "Sealed Invitation",
+      "jp": "印つき招待状",
+      "kr": "인장이 찍힌 초대장",
+      "zh": "盖有印章的邀请函"
     },
     "desc": {
-      "en": "An essential item for surviving at sea. Can be exchanged for various items in the Event Shop.",
-      "jp": "海で生き残るための必需品。イベントショップでさまざまなアイテムと交換可能。",
-      "kr": "바다에서 생존하기 위한 필수품. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
-      "zh": "在海上生存的必需品。可在活动商店兑换各种商品。"
+      "en": "An invitation stamped with an elegant seal in sealing wax. Can be exchanged for various items in the Event Shop.",
+      "jp": "シーリングワックスで上品な印章が押された招待状。イベントショップでさまざまなアイテムと交換できます。",
+      "kr": "실링 왁스로 위에 고급스러운 형태의 인장이 찍힌 초대장. 이벤트 상점에서 다양한 상품과 교환할 수 있습니다.",
+      "zh": "用封蜡盖有精致印章的邀请函。可在活动商店兑换各种商品。"
     },
     "icon": "TI_Item_Event_Coin_03",
     "grade": "normal",

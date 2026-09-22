@@ -1,4 +1,4 @@
-// CSkillManager$$GetBuffList — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CSkillManager$$GetBuffList — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CSkillManager.cs.
 
 	private void GetBuffList(SKILL_TYPE _eSkillType, bool _IsPassiveSkill, BUFF_CREATE_TYPE _eBuffCreateType, ref List<CBuffTemplet> _BuffTempletList)

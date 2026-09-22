@@ -1,4 +1,4 @@
-// CStatValue$$SetBaseValue — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CStatValue$$SetBaseValue — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CStatValue.cs.
 // 2 surcharges, dans l'ordre du source.
 // Note du manifeste : Le listing porte les deux surcharges ; la spec § 9 cite la complète (int, int, int, int, int, CCharacterData).

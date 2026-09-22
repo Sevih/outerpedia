@@ -1,4 +1,4 @@
-// CCharacterData$$AddEvolutionStatToDictionary — client Steam 1.4.16 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$AddEvolutionStatToDictionary — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	private void AddEvolutionStatToDictionary(Dictionary<STAT_TYPE, int> _Dic, STAT_TYPE _eStat, int _nValue)
