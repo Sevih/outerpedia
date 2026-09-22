@@ -4616,6 +4616,14 @@
       }
     ]
   },
+  "2700035": {
+    "role": "support",
+    "skillPriority": {
+      "first": 2,
+      "second": 3,
+      "ultimate": 1
+    }
+  },
   "2700037": {
     "rank": "A",
     "rankPvp": "A",
