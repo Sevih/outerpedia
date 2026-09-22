@@ -1306,7 +1306,6 @@ const en = {
   'progress.task.shop-weekly-free-gift': 'Weekly Free Gift',
   'progress.task.shop-monthly-free-gift': 'Monthly Free Gift',
   'progress.task.arena-battle': 'Arena Battle',
-  'progress.task.monad-gates-exploration': 'Monad Gate Weekly Mission',
   'progress.task.adventure-license': 'Adventure License',
   'progress.task.skyward-tower-100': 'Skyward Tower 100F',
   'progress.task.skyward-tower-hard-40': 'Skyward Tower: Hard 40F',

@@ -576,6 +576,37 @@
             "monthly": 0,
             "grandMonthly": 800
           }
+        },
+        {
+          "id": "60001",
+          "name": {
+            "en": "Fusion-Type Core",
+            "jp": "フュージョン型コア",
+            "kr": "융합형 코어",
+            "zh": "融合型核心"
+          },
+          "icon": "TI_Item_CoreMerged",
+          "iconKind": "item",
+          "grade": "unique",
+          "sources": [
+            {
+              "sourceKey": "singularity-weekly-mission",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 100
+            },
+            {
+              "sourceKey": "singularity-daily-run",
+              "origin": "cured",
+              "type": "mission",
+              "weekly": 100
+            }
+          ],
+          "totals": {
+            "weekly": 200,
+            "monthly": 0,
+            "grandMonthly": 800
+          }
         }
       ]
     },

@@ -15,7 +15,8 @@
   },
   "icon": "T_DungeonArea_11",
   "author": "Sevih",
-  "updated": "2026-07-15",
+  "updated": "2026-09-22",
+  "hidden": true,
   "depth": 7,
   "route": 2
 }

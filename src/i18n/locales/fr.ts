@@ -1317,7 +1317,6 @@ const fr: Record<TranslationKey, string> = {
   'progress.task.shop-weekly-free-gift': 'Cadeau gratuit hebdomadaire',
   'progress.task.shop-monthly-free-gift': 'Cadeau gratuit mensuel',
   'progress.task.arena-battle': "Combat d'arène",
-  'progress.task.monad-gates-exploration': 'Mission hebdomadaire Monad Gate',
   'progress.task.adventure-license': 'Adventure License',
   'progress.task.skyward-tower-100': 'Skyward Tower 100F',
   'progress.task.skyward-tower-hard-40': 'Skyward Tower : Hard 40F',

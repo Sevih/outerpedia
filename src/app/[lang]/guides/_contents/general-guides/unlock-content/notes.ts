@@ -125,13 +125,6 @@ export const ENTRIES: GuideEntry[] = [
       zh: '每周积分制Boss挑战与赛季排名',
       fr: 'Challenge boss hebdomadaire au score avec classements saisonniers',
     },
-    customNote: {
-      en: 'Unlocked after viewing the True Ending of Monad Gate Depth 1',
-      jp: 'モナドゲート深度1のトゥルーエンディング鑑賞後に開放',
-      kr: '모나드 게이트 심도 1의 트루 엔딩 감상 후 해금',
-      zh: '观看单子门户深度1的真结局后开放',
-      fr: 'Débloqué après avoir vu la True Ending du Monad Gate Depth 1',
-    },
   },
   {
     source: 'auto',

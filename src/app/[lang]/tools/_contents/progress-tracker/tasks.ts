@@ -10,6 +10,11 @@
  * partait avec : il ne servait plus rien. À ressusciter depuis git si le jeu
  * réintroduit un contenu à cycle propre.
  *
+ * Même geste le 22/09 pour la tâche hebdomadaire `monad-gates-exploration` :
+ * le Monad Gate a fermé côté jeu, et sa mission hebdomadaire d'ether est
+ * devenue celle de la Dimensional Singularity (cf. le guide `ether-income`).
+ * La définition part avec ses cinq clés `progress.task.*` ; git les garde.
+ *
  * Libellé d'une tâche : les entrées AVEC `shopItemKey` sont libellées par
  * l'item du catalogue (résolu côté serveur, nom localisé + sprite) ; les
  * autres par la clé i18n `progress.task.<id>`. On stockait avant un `labelKey`
@@ -216,7 +221,6 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
 
 export const WEEKLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('weekly', {
   'arena-battle': { category: 'task', permanent: true, maxCount: 30 },
-  'monad-gates-exploration': { category: 'task', permanent: true, maxCount: 1 },
   // Dynamique : 2/3/4 combats par étage (réglage) × 3 étages = 6/9/12
   'adventure-license': { category: 'task', permanent: true, maxCount: 12 },
   // Premium Shop > Normal > Daily/Weekly/Monthly

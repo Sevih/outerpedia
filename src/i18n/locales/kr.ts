@@ -1264,7 +1264,6 @@ const kr: Record<TranslationKey, string> = {
   'progress.task.shop-weekly-free-gift': '주간 무료 선물',
   'progress.task.shop-monthly-free-gift': '월간 무료 선물',
   'progress.task.arena-battle': '결투장 전투',
-  'progress.task.monad-gates-exploration': '모나드 게이트 주간 미션',
   'progress.task.adventure-license': '모험 라이선스',
   'progress.task.skyward-tower-100': '비천의 탑 100층',
   'progress.task.skyward-tower-hard-40': '비천의 탑 [하드] 40층',

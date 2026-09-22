@@ -612,11 +612,11 @@ export const LABELS = {
     fr: 'Comment Limit Break ses Héros et enhance son équipement en +15 ?',
   },
   limitBreakDesc: {
-    en: '{I-I/Limit Break Memory} and {I-I/High-Precision Chip} are mainly obtained from {L/Dimensional Singularity|/guides/dimensional-singularity}. This is a high difficulty game mode, unlocked by clearing Season 2 in Normal, then clearing {L/Monad Gate|/guides/monad-gate} Depth 1 with the True Ending.',
-    jp: '{I-I/Limit Break Memory}と{I-I/High-Precision Chip}は主に{L/Dimensional Singularity|/guides/dimensional-singularity}から入手します。高難度コンテンツで、シーズン2のノーマルをクリアした後、{L/Monad Gate|/guides/monad-gate}深度1をトゥルーエンディングでクリアすると開放されます。',
-    kr: '{I-I/Limit Break Memory}와 {I-I/High-Precision Chip}은 주로 {L/Dimensional Singularity|/guides/dimensional-singularity}에서 얻습니다. 고난도 콘텐츠로, 시즌 2 노말을 클리어한 뒤 {L/Monad Gate|/guides/monad-gate} 심도 1을 트루 엔딩으로 클리어하면 해금됩니다.',
-    zh: '{I-I/Limit Break Memory}和{I-I/High-Precision Chip}主要来自{L/Dimensional Singularity|/guides/dimensional-singularity}。这是高难度玩法，需要通关第二季普通难度，再以真结局通关{L/Monad Gate|/guides/monad-gate}深度1后解锁。',
-    fr: "{I-I/Limit Break Memory} et {I-I/High-Precision Chip} s'obtiennent principalement dans la {L/Dimensional Singularity|/guides/dimensional-singularity}. C'est un mode de haute difficulté, débloqué en clear la Season 2 en Normal, puis le Depth 1 du {L/Monad Gate|/guides/monad-gate} avec la True Ending.",
+    en: '{I-I/Limit Break Memory} and {I-I/High-Precision Chip} are mainly obtained from {L/Dimensional Singularity|/guides/dimensional-singularity}. This is a high difficulty game mode, unlocked by clearing Origin Story Season 2 Normal, Area 5.',
+    jp: '{I-I/Limit Break Memory}と{I-I/High-Precision Chip}は主に{L/Dimensional Singularity|/guides/dimensional-singularity}から入手します。高難度コンテンツで、オリジンストーリー シーズン2 ノーマルのエリア5をクリアすると開放されます。',
+    kr: '{I-I/Limit Break Memory}와 {I-I/High-Precision Chip}은 주로 {L/Dimensional Singularity|/guides/dimensional-singularity}에서 얻습니다. 고난도 콘텐츠로, 오리진 스토리 시즌 2 노말 5지역을 클리어하면 해금됩니다.',
+    zh: '{I-I/Limit Break Memory}和{I-I/High-Precision Chip}主要来自{L/Dimensional Singularity|/guides/dimensional-singularity}。这是高难度玩法，需要通关起源剧情第二季普通难度第5区域后解锁。',
+    fr: "{I-I/Limit Break Memory} et {I-I/High-Precision Chip} s'obtiennent principalement dans la {L/Dimensional Singularity|/guides/dimensional-singularity}. C'est un mode de haute difficulté, débloqué en clear l'Area 5 de l'Origin Story Season 2 en Normal.",
   },
   skillManualsFirst: {
     en: 'Where do I use skill manuals first?',

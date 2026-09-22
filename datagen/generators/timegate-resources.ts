@@ -75,6 +75,7 @@ const NON_SHOP_BADGE: Record<string, SourceType> = {
   'arena-weekly-play': 'mission',
   'weekly-mission': 'mission',
   'singularity-rank': 'mission',
+  'singularity-weekly-mission': 'mission',
   'singularity-daily-run': 'mission',
   'singularity-daily-ranking': 'mission',
   'kates-workshop': 'craft',

@@ -1278,7 +1278,6 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.shop-weekly-free-gift': 'ウィークリー無料プレゼント',
   'progress.task.shop-monthly-free-gift': 'マンスリー無料プレゼント',
   'progress.task.arena-battle': 'アリーナの戦闘',
-  'progress.task.monad-gates-exploration': 'モナド・ゲートのウィークリーミッション',
   'progress.task.adventure-license': '冒険者ライセンス',
   'progress.task.skyward-tower-100': '飛天の塔100階',
   'progress.task.skyward-tower-hard-40': '飛天の塔【ハード】40階',

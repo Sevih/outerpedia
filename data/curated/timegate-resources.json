@@ -5,7 +5,7 @@
     { "key": "books", "items": ["20201", "20202", "20203"] },
     { "key": "transistones", "items": ["21202", "21201"] },
     { "key": "special", "items": ["22031", "22033", "22030", "22032"] },
-    { "key": "singularity-gear", "items": ["25001", "25002"] },
+    { "key": "singularity-gear", "items": ["25001", "25002", "60001"] },
     { "key": "glunite", "items": ["21107", "21127", "21106"] },
     { "key": "limit-break", "items": ["30519"] }
   ],
@@ -66,6 +66,10 @@
     "25002": [
       { "source": "singularity-daily-run", "weekly": 200 },
       { "source": "singularity-daily-ranking", "weeklyRange": [40, 160] }
+    ],
+    "60001": [
+      { "source": "singularity-weekly-mission", "weekly": 100 },
+      { "source": "singularity-daily-run", "weekly": 100 }
     ],
 
     "21127": [

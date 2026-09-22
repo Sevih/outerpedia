@@ -180,6 +180,13 @@ export const LABELS = {
       zh: '次元奇点 SSS++评级奖励',
       fr: 'Singularité dimensionnelle — Récompense rang SSS++',
     },
+    'singularity-weekly-mission': {
+      en: 'Dimensional Singularity — Weekly Missions',
+      jp: '次元特異点 ウィークリーミッション',
+      kr: '차원 특이점 주간 미션',
+      zh: '次元奇点 每周任务',
+      fr: 'Singularité dimensionnelle — Missions hebdomadaires',
+    },
     'singularity-daily-run': {
       en: 'Dimensional Singularity — Daily Run (Wed–Sat)',
       jp: '次元特異点 デイリー参加 (水〜土)',

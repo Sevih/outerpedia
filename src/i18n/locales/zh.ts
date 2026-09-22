@@ -1241,7 +1241,6 @@ const zh: Record<TranslationKey, string> = {
   'progress.task.shop-weekly-free-gift': '每周免费礼物',
   'progress.task.shop-monthly-free-gift': '每月免费礼物',
   'progress.task.arena-battle': '竞技场战斗',
-  'progress.task.monad-gates-exploration': '单子门每周任务',
   'progress.task.adventure-license': '冒险许可证',
   'progress.task.skyward-tower-100': '飞天之塔100层',
   'progress.task.skyward-tower-hard-40': '飞天之塔【困难】第40层',

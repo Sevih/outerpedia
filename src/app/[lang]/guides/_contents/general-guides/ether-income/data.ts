@@ -38,7 +38,7 @@ export const WEEKLY_SOURCES: EtherSource[] = [
   { id: 'weekly.arena', amount: 400, ranked: 'arena' },
   { id: 'weekly.missions', amount: 150 },
   { id: 'weekly.guildCheckin', amount: 150 },
-  { id: 'weekly.monadGate', amount: 250 },
+  { id: 'weekly.singularityMissions', amount: 250 },
 ];
 
 export const MONTHLY_SOURCES: EtherSource[] = [

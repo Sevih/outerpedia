@@ -383,12 +383,12 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     zh: '公会签到',
     fr: 'Check-in Guild',
   },
-  'weekly.monadGate': {
-    en: 'Monad Gate Weekly Missions',
-    jp: 'モナドゲートウィークリーミッション',
-    kr: '모나드 게이트 주간 미션',
-    zh: '莫纳德之门每周任务',
-    fr: 'Missions Hebdomadaires Monad Gate',
+  'weekly.singularityMissions': {
+    en: 'Dimensional Singularity Weekly Missions',
+    jp: '次元特異点 ウィークリーミッション',
+    kr: '차원 특이점 주간 미션',
+    zh: '次元奇点每周任务',
+    fr: 'Missions Hebdomadaires Dimensional Singularity',
   },
   'monthly.freePack': {
     en: 'Monthly Free Pack',
@@ -457,7 +457,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     zh: '最低{min}。第1名最高{max}。',
     fr: '{min} minimum. Peut monter à {max} pour le rank 1.',
   },
-  'weekly.monadGate': {
+  'weekly.singularityMissions': {
     en: '5×10 + 200 completion bonus',
     jp: '5×10 + 200完了ボーナス',
     kr: '5×10 + 200 완료 보너스',
