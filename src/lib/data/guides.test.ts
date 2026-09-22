@@ -265,13 +265,19 @@ describe('adventure — les guides désignent des donjons réels', () => {
   });
 });
 
-/** Fichiers de contenu d'un guide (à la racine ou dans une version). */
+/** Fichiers de contenu d'un guide (à la racine ou dans une version).
+ *  Les trois derniers sont ceux du GUILD RAID (deux sous-boss + boss principal) :
+ *  sans eux, tout le contenu de ce mode — cinq guides, builds et geas compris —
+ *  n'était contrôlé par rien, et un tag mort n'aurait sauté qu'au build de prod. */
 const CONTENT_FILES = [
   'strings.json',
   'tips.json',
   'recommended.json',
   'teams.json',
   'content.json',
+  'main.json',
+  'subA.json',
+  'subB.json',
 ] as const;
 
 /** Toutes les chaînes d'un JSON de contenu, récursivement. */
@@ -289,8 +295,9 @@ function strings(v: unknown): string[] {
  * `teams[].slots`, les `buckets` du Special Request, les `sections` du World
  * Boss, les `groups` d'un `content.json`), et une liste de formes finirait par
  * en oublier une — c'est ce qui laissait le Special Request SANS contrôle de
- * noms. On cherche donc les deux CLÉS qui portent des personnages, partout où
- * elles sont : le contrat est la clé, pas la profondeur.
+ * noms. On cherche donc les CLÉS qui portent des personnages, partout où elles
+ * sont : le contrat est la clé, pas la profondeur. (`character` au singulier
+ * porte le sujet d'un build — `requirements.entries[]` du guild raid.)
  */
 function characterNames(v: unknown): string[] {
   if (Array.isArray(v)) return v.flatMap(characterNames);
@@ -299,6 +306,7 @@ function characterNames(v: unknown): string[] {
   const here: string[] = [];
   if (Array.isArray(o.characters)) here.push(...o.characters.filter((c) => typeof c === 'string'));
   if (Array.isArray(o.slots)) here.push(...(o.slots as string[][]).flat());
+  if (typeof o.character === 'string') here.push(o.character);
   return [...here, ...Object.values(o).flatMap(characterNames)];
 }
 
@@ -364,32 +372,20 @@ describe('guides versionnés — le contenu de CHAQUE version résout', () => {
     expect(versioned.length).toBeGreaterThan(0);
   });
 
-  it('tous les personnages cités existent (recommended + teams de chaque version)', () => {
-    // Les deux fichiers ont une forme COURTE (une section implicite) et une forme
-    // à `sections` (world boss : par phase / par archétype) — cf. VersionedBossGuide.
-    type Reco = Array<{ characters: string[] }> | { sections: Array<{ groups: RecoGroup[] }> };
-    type RecoGroup = { characters: string[] };
-    type Teams = { slots?: string[][]; sections?: Array<{ slots: string[][] }> };
-
+  it('tous les personnages cités existent, fichier par fichier', () => {
+    // Même contrat que les guides plats : on cherche les CLÉS qui portent des
+    // personnages, à toute profondeur. L'ancienne version réénumérait ici les
+    // formes de `recommended.json` et `teams.json` — donc elle ignorait celles
+    // qu'elle ne nommait pas (les builds et les équipes du guild raid).
     for (const g of versioned) {
       for (const v of g.versions) {
-        const reco = readGuideVersionFile<Reco>(g, v.key, 'recommended.json');
-        const groups: RecoGroup[] = !reco
-          ? []
-          : Array.isArray(reco)
-            ? reco
-            : reco.sections.flatMap((s) => s.groups);
-        const teams = readGuideVersionFile<Teams>(g, v.key, 'teams.json');
-        const slots: string[][] = [
-          ...(teams?.slots ?? []),
-          ...(teams?.sections ?? []).flatMap((s) => s.slots),
-        ];
-        const names = [...groups.flatMap((r) => r.characters), ...slots.flat()];
-        for (const name of names) {
-          expect(
-            findCharacterByName(name),
-            `${g.slug}/${v.key} : « ${name} » introuvable`,
-          ).toBeDefined();
+        for (const file of CONTENT_FILES) {
+          for (const name of characterNames(readGuideVersionFile(g, v.key, file))) {
+            expect(
+              findCharacterByName(name),
+              `${g.slug}/${v.key}/${file} : « ${name} » introuvable`,
+            ).toBeDefined();
+          }
         }
       }
     }

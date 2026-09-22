@@ -1,5 +1,29 @@
 [
   {
+    "code": "MOONPTYGOLD",
+    "start": "2026-09-21",
+    "end": "2026-10-31",
+    "description": {
+      "SYS_ASSET_GOLD": "1000000"
+    }
+  },
+  {
+    "code": "OPREG1YPT",
+    "start": "2026-09-21",
+    "end": "2026-10-31",
+    "description": {
+      "1000002": "10"
+    }
+  },
+  {
+    "code": "OPREG1YTR",
+    "start": "2026-09-21",
+    "end": "2026-10-31",
+    "description": {
+      "21202": "10"
+    }
+  },
+  {
     "code": "STEAMWISH3",
     "start": "2026-08-26",
     "end": "2026-09-22",

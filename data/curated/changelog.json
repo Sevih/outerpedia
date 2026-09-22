@@ -1,6 +1,28 @@
 [
   {
     "date": "2026-09-22",
+    "type": "update",
+    "title": {
+      "en": "The Frost Legion Guild Raid",
+      "jp": "雪国の軍勢 ギルドレイド",
+      "kr": "설국의 군세 길드 레이드",
+      "zh": "霜冻军团 公会战",
+      "fr": "The Frost Legion Guild Raid"
+    },
+    "content": {
+      "en": ["The Frost Legion guild raid updated for September 2026 version."],
+      "jp": ["雪国の軍勢 ギルドレイドが2026年9月版にアップデートされました。"],
+      "kr": ["설국의 군세 길드 레이드가 2026년 9월 버전으로 업데이트되었습니다."],
+      "zh": ["霜冻军团 公会战已更新至2026年9月版本。"],
+      "fr": ["Le Guild Raid The Frost Legion a été mis à jour pour la version de septembre 2026."]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/guild-raid/frost-legion"
+    }
+  },
+  {
+    "date": "2026-09-22",
     "type": "character",
     "title": {
       "en": "Resonance Eliza"
