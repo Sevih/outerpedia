@@ -1390,6 +1390,18 @@
       "isDebuff": false
     }
   ],
+  "2700035": [
+    {
+      "key": "stat:buff_chance:up",
+      "label": "Effectiveness up",
+      "isDebuff": false
+    },
+    {
+      "key": "status:UNCOUNTERABLE",
+      "label": "Uncounterable",
+      "isDebuff": false
+    }
+  ],
   "2700037": [
     {
       "key": "type:BT_DMG",

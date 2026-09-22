@@ -96170,6 +96170,822 @@
       "unresolvedHits": true
     }
   },
+  "2700035": {
+    "name": "Eliza",
+    "nickname": "Resonance",
+    "cls": "CCT_RANGER",
+    "element": "CET_DARK",
+    "star": 3,
+    "ingredients": {
+      "base": {
+        "atk": {
+          "min": 75,
+          "max": 757
+        },
+        "def": {
+          "min": 34,
+          "max": 341
+        },
+        "hp": {
+          "min": 519,
+          "max": 3530
+        },
+        "spd": {
+          "min": 138,
+          "max": 138
+        },
+        "chc": {
+          "min": 5,
+          "max": 5
+        },
+        "chd": {
+          "min": 150,
+          "max": 150
+        },
+        "eff": {
+          "min": 10,
+          "max": 10
+        },
+        "res": {
+          "min": 11,
+          "max": 110
+        }
+      },
+      "evoByLevel": {
+        "2": {
+          "atk": 0,
+          "def": 0,
+          "hp": 88,
+          "spd": 3,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 0,
+          "dmgRed": 0,
+          "eff": 20,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "3": {
+          "atk": 0,
+          "def": 0,
+          "hp": 88,
+          "spd": 3,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 0,
+          "dmgRed": 0,
+          "eff": 30,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "4": {
+          "atk": 0,
+          "def": 0,
+          "hp": 132,
+          "spd": 3,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 0,
+          "dmgRed": 0,
+          "eff": 30,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "5": {
+          "atk": 0,
+          "def": 0,
+          "hp": 132,
+          "spd": 7,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 0,
+          "dmgRed": 0,
+          "eff": 30,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "6": {
+          "atk": 45,
+          "def": 105,
+          "hp": 493,
+          "spd": 0,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 0,
+          "dmgRed": 0,
+          "eff": 0,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "7": {
+          "atk": 0,
+          "def": 0,
+          "hp": 240,
+          "spd": 4,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 2,
+          "dmgRed": 0,
+          "eff": 0,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "8": {
+          "atk": 28,
+          "def": 0,
+          "hp": 0,
+          "spd": 4,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 2,
+          "dmgRed": 0,
+          "eff": 0,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        },
+        "9": {
+          "atk": 28,
+          "def": 0,
+          "hp": 0,
+          "spd": 0,
+          "chc": 0,
+          "chd": 0,
+          "pen": 0,
+          "dmgInc": 2,
+          "dmgRed": 0,
+          "eff": 20,
+          "res": 0,
+          "effRate": 0,
+          "resRate": 0,
+          "atkPct": 0,
+          "defPct": 0,
+          "hpPct": 0
+        }
+      },
+      "transcendByStar": {
+        "3": {
+          "atkPct": 10,
+          "defPct": 10,
+          "hpPct": 10,
+          "skillLevel": 1,
+          "showUIStar": 3,
+          "starPlus": 0
+        },
+        "4": {
+          "atkPct": 16,
+          "defPct": 16,
+          "hpPct": 16,
+          "skillLevel": 2,
+          "showUIStar": 4,
+          "starPlus": 0
+        },
+        "5": {
+          "atkPct": 19,
+          "defPct": 19,
+          "hpPct": 19,
+          "skillLevel": 2,
+          "showUIStar": 4,
+          "starPlus": 1
+        },
+        "6": {
+          "atkPct": 22,
+          "defPct": 22,
+          "hpPct": 22,
+          "skillLevel": 3,
+          "showUIStar": 5,
+          "starPlus": 0
+        },
+        "7": {
+          "atkPct": 25,
+          "defPct": 25,
+          "hpPct": 25,
+          "skillLevel": 3,
+          "showUIStar": 5,
+          "starPlus": 1
+        },
+        "8": {
+          "atkPct": 28,
+          "defPct": 28,
+          "hpPct": 28,
+          "skillLevel": 3,
+          "showUIStar": 5,
+          "starPlus": 2
+        },
+        "9": {
+          "atkPct": 30,
+          "defPct": 30,
+          "hpPct": 30,
+          "skillLevel": 4,
+          "showUIStar": 6,
+          "starPlus": 0
+        }
+      },
+      "classPassive": {
+        "atk": 0,
+        "def": 0,
+        "hp": 0,
+        "spd": 0,
+        "chc": 0,
+        "chd": 0,
+        "pen": 0,
+        "dmgInc": 0,
+        "dmgRed": 0,
+        "eff": 0,
+        "res": 0,
+        "effRate": 0,
+        "resRate": 0,
+        "atkPct": 0,
+        "defPct": 0,
+        "hpPct": 0
+      },
+      "skill8ByLevel": {},
+      "geasByNode": {
+        "82": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 2,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "2": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 4,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "85": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 10,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "86": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 3,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "88": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 5,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "2": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 10,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "91": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 3,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "92": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 10,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "141": {
+          "source": "buff",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 5,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "2": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 10,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "3": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 15,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "4": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 20,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "5": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 25,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "6": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 30,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "7": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 35,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "8": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 40,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "9": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 45,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            },
+            "10": {
+              "atk": 0,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 50,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "150": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 100,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "151": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 100,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "152": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 200,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "153": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 100,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "154": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 100,
+              "def": 0,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "155": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 0,
+              "hp": 100,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "156": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 200,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        },
+        "157": {
+          "source": "stat",
+          "levels": {
+            "1": {
+              "atk": 0,
+              "def": 200,
+              "hp": 0,
+              "spd": 0,
+              "chc": 0,
+              "chd": 0,
+              "pen": 0,
+              "dmgInc": 0,
+              "dmgRed": 0,
+              "eff": 0,
+              "res": 0,
+              "effRate": 0,
+              "resRate": 0,
+              "atkPct": 0,
+              "defPct": 0,
+              "hpPct": 0
+            }
+          }
+        }
+      },
+      "s1ByLevel": {},
+      "s2ByLevel": {},
+      "s3ByLevel": {},
+      "corePassive": null
+    },
+    "recommendSetId": "13,3,5"
+  },
   "2700037": {
     "name": "Veronica",
     "nickname": null,

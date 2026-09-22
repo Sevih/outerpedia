@@ -14731,6 +14731,39 @@
       }
     ]
   },
+  "2700035": {
+    "name": {
+      "en": "Resonance Eliza's Exclusive Equipment",
+      "jp": "レゾナンス・エリーゼの専用装備",
+      "kr": "레조넌스 엘리제의 전용 장비",
+      "zh": "共鸣·伊莉莎的专属装备"
+    },
+    "desc": {
+      "en": "Self Effectiveness [+Value]",
+      "jp": "自身の効果命中 [+Value]",
+      "kr": "자신 효과 적중 [+Value]",
+      "zh": "自身效果命中 [+Value]"
+    },
+    "values": [
+      {
+        "value": "100%"
+      }
+    ],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700035",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT_PREMIUM",
+        "target": "me",
+        "buff": "BID_CEQUIP_2700035",
+        "stat": "buff_chance",
+        "mode": "up"
+      }
+    ]
+  },
   "2700037": {
     "name": {
       "en": "Core-Fused Veronica's Exclusive Equipment",
@@ -14947,6 +14980,34 @@
         "type": "BT_DMG",
         "target": "me",
         "buff": "BID_CEQUIP_2700019_ADD"
+      }
+    ]
+  },
+  "2710035": {
+    "name": {
+      "en": "Resonance Eliza's Exclusive Equipment",
+      "jp": "レゾナンス・エリーゼの専用装備",
+      "kr": "레조넌스 엘리제의 전용 장비",
+      "zh": "共鸣·伊莉莎的专属装备"
+    },
+    "desc": {
+      "en": "The caster's attacks do not trigger enemies' Counterattack, Revenge, or Agile Response",
+      "jp": "攻撃時、反撃/復讐/迅速対応が発動不可",
+      "kr": "공격 시 반격/복수/신속대응 불가",
+      "zh": "攻击时无法触发反击/复仇/迅速应对"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2700035_ADD",
+    "effects": [
+      {
+        "family": "trigger",
+        "category": "buff",
+        "type": "BT_SEAL_COUNTER",
+        "target": "me",
+        "buff": "BID_CEQUIP_2700035_ADD",
+        "tooltip": "UNCOUNTERABLE"
       }
     ]
   },

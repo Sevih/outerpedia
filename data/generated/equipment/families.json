@@ -635,6 +635,14 @@
       "stars": [6],
       "classLimits": ["striker", "defender", "ranger", "mage", "healer"],
       "wiki": true
+    },
+    {
+      "id": "9950001",
+      "topId": "9950001",
+      "ids": ["9950001"],
+      "stars": [6],
+      "classLimits": [],
+      "wiki": true
     }
   ],
   "accessory": [
@@ -1350,6 +1358,14 @@
       ],
       "stars": [6],
       "classLimits": ["striker", "defender", "ranger", "mage", "healer"],
+      "wiki": true
+    },
+    {
+      "id": "9950002",
+      "topId": "9950002",
+      "ids": ["9950002", "9950003", "9950004"],
+      "stars": [6],
+      "classLimits": [],
       "wiki": true
     }
   ],

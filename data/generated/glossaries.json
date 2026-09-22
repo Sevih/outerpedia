@@ -72,13 +72,13 @@
       "en": "DMG Increase",
       "jp": "与ダメUP",
       "kr": "피해 증가",
-      "zh": "造成伤害提升"
+      "zh": "伤害提升"
     },
     "dmg_reduce_rate": {
       "en": "DMG Reduction",
       "jp": "被ダメDOWN",
       "kr": "받는 피해 감소",
-      "zh": "受伤害降低"
+      "zh": "所受伤害降低"
     },
     "e_cri_dmg_reduce": {
       "en": "Crit DMG Reduc",
@@ -4525,6 +4525,7 @@
     "2100093": "2100093",
     "2100129": "2100129",
     "2300092": "56",
+    "2700035": "2700035",
     "4044007": "40760091",
     "4044017": "40760091",
     "4076102": "4076102",
@@ -4799,6 +4800,7 @@
       "WHITE_NIGHT": "2000119",
       "POLAR_NIGHT": "2000120",
       "SPATIAL_DISTORTION_SELF": "2000112",
+      "TRUE_PUREBLOODS_DOMINION": "2700035",
       "HARMONY_OF_DESPAIR": "40760092",
       "COURAGE_AGAINST_DESPAIR": "4086001",
       "CORE_ENERGY": "4086007",
@@ -4906,6 +4908,7 @@
       "WHITE_NIGHT_IR": "2000119",
       "POLAR_NIGHT_IR": "2000120",
       "SPATIAL_DISTORTION_SELF_IR": "2000112",
+      "TRUE_PUREBLOODS_DOMINION_IR": "2700035",
       "HARMONY_OF_DESPAIR_IR": "40760092",
       "COURAGE_AGAINST_DESPAIR_IR": "4086001",
       "CORE_ENERGY_IR": "4086007",
@@ -5859,6 +5862,7 @@
     "2200106": ["BT_STAT"],
     "2300106": ["BT_STAT"],
     "2700003": ["BT_DMG_OWNER_STAT|speed"],
+    "2700035": ["BT_NONE"],
     "4000000": ["BT_NONE"],
     "4004005": ["BT_STAT"],
     "4044006": ["BT_STAT"],
@@ -5973,7 +5977,7 @@
       "en": "Story Hard",
       "jp": "ストーリーハード",
       "kr": "스토리 하드",
-      "zh": "故事困难"
+      "zh": "剧情困难"
     },
     "origin_hard": {
       "en": "Origin Hard",

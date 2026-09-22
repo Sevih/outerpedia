@@ -2939,6 +2939,21 @@
       }
     ]
   },
+  "2700035": {
+    "name": "Resonance Eliza's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "Self Effectiveness <color=#28d9ed>+100%</color>"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "The caster's attacks do not trigger enemies' Counterattack, Revenge, or Agile Response"
+      }
+    ]
+  },
   "2700037": {
     "name": "Core-Fused Veronica’s Exclusive Equipment",
     "tiers": [

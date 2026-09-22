@@ -289,15 +289,28 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
+          },
+          "2000035_2_5": {
+            "c": "100%",
+            "v": "50%"
           },
           "2000035_2_6": {
             "c": "100%",
             "v": "30%"
           },
-          "2000035_2_5": {
+          "2000035_2_7": {
             "c": "100%",
-            "v": "50%"
+            "v": "75.5%",
+            "t": "1"
+          },
+          "2000035_2_8": {
+            "c": "100%",
+            "v": "10%"
+          },
+          "2000035_2_9": {
+            "c": "100%",
+            "v": "20%"
           }
         }
       }
@@ -337,19 +350,49 @@
         "tooltip": "1003"
       },
       {
-        "family": "dmg_reduce",
-        "category": "buff",
-        "type": "BT_DMG_REDUCE",
-        "target": "my_team",
-        "buff": "2000035_2_6"
-      },
-      {
         "family": "dot",
         "category": "neutral",
         "type": "BT_BLEED_ENHANCE",
         "target": "enemy_team",
-        "buff": "2000035_2_5",
-        "label": "ITEM_C_EQUIP_2000035_NAME"
+        "buff": "2000035_2_5"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000035_2_6",
+        "stat": "dmg_reduce_rate",
+        "mode": "up"
+      },
+      {
+        "family": "dot",
+        "category": "debuff",
+        "type": "BT_DOT_BLEED",
+        "target": "enemy_team_highest_spd",
+        "buff": "2000035_2_7",
+        "stat": "atk",
+        "mode": "up",
+        "tooltip": "1003"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "my_team",
+        "buff": "2000035_2_8",
+        "stat": "critical_dmg_rate",
+        "mode": "up",
+        "label": "SYS_BUFF_CRITICAL_DAMAGE_UP"
+      },
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STAT",
+        "target": "me",
+        "buff": "2000035_2_9",
+        "stat": "dmg_reduce_rate",
+        "mode": "up"
       }
     ]
   },
@@ -35210,7 +35253,7 @@
         "tooltips": ["8", "61"],
         "desc": {
           "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
-          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
           "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
           "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
         }
@@ -35249,7 +35292,7 @@
         ],
         "desc": {
           "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
-          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
           "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
           "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
         }
@@ -35288,7 +35331,7 @@
         ],
         "desc": {
           "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
-          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
           "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
           "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
         }
@@ -35327,7 +35370,7 @@
         ],
         "desc": {
           "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
-          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+          "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
           "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
           "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
         }
@@ -35370,7 +35413,7 @@
         ],
         "desc": {
           "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color> and uses <color=#28d9ed>Iai</color> on the target.\\n\\n<color=#ffd732>Iai</color>: After attacking, grants all allies the <color=#28d9ed>Critical Damage</color> increase effect from <color=#28d9ed>Moonfall</color>.",
-          "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせ、対象に<color=#28d9ed>【居合】</color>を使用する。\\n\\n<color=#ffd732>【居合】</color>：攻撃後、<color=#28d9ed>【落月】</color>の味方全体<color=#28d9ed>会心ダメージ</color>UP効果を獲得する。",
+          "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせ、対象に<color=#28d9ed>【居合】</color>を使用する。\\n\\n<color=#ffd732>【居合】</color>：攻撃後、<color=#28d9ed>【落月】</color>による味方全体の<color=#28d9ed>会心ダメージ</color>UP効果を獲得する。",
           "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시키고, 대상에게 <color=#28d9ed>거합</color>을 사용합니다.\\n\\n<color=#ffd732>거합</color> : 공격 후 <color=#28d9ed>낙월</color>의 아군 전체 <color=#28d9ed>치명 피해</color> 증가 효과를 얻습니다.",
           "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>，并对目标使用<color=#28d9ed>居合</color>。\\n\\n<color=#ffd732>居合</color>：攻击后，获得<color=#28d9ed>落月</color>的我方全体<color=#28d9ed>暴击伤害</color>提升效果。"
         }
@@ -35378,7 +35421,7 @@
     ],
     "desc": {
       "en": "Before attacking, increases the caster's <color=#28d9ed>Penetration</color> for <color=#28d9ed>[Buff_T_2700019_3_1] turns</color>, then attacks all enemies.\\nAfter attacking, increases the caster's Priority by <color=#28d9ed>100%</color>.",
-      "jp": "攻撃前、<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間<color=#28d9ed>貫通力</color>をUPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
+      "jp": "攻撃前、自分の<color=#28d9ed>貫通力</color>を<color=#28d9ed>[Buff_T_2700019_3_1]ターン</color>の間UPさせ、敵全体にダメージを与える。\\n攻撃後、自分の行動ゲージを<color=#28d9ed>100%</color>UPさせる。",
       "kr": "공격 전 <color=#28d9ed>[Buff_T_2700019_3_1]턴</color> 동안 <color=#28d9ed>관통력</color>을 증가시키고 적 전체를 공격합니다.\\n공격 후 자신의 행동게이지를 <color=#28d9ed>100%</color> 증가시킵니다.",
       "zh": "攻击前使<color=#28d9ed>穿透力</color>提升<color=#28d9ed>[Buff_T_2700019_3_1]回合</color>，并攻击敌方全体。\\n攻击后使自身的行动条提升<color=#28d9ed>100%</color>。"
     },
@@ -35536,7 +35579,7 @@
       }
     ],
     "desc": {
-      "en": "<color=#ffd732>Chain Companion Effect</color>: After attacking, additionally reduces WG by <color=#28d9ed>3</color>.\\n\\n<color=#ffd732>Assist Effect</color>: After attacking, increases the caster's Critical Damage for <color=#28d9ed>[Buff_T_2700019_backup_1_1] turns</color>.",
+      "en": "<color=#ffd732>Chain Companion Effect</color>: After attacking, additionally reduces WG by <color=#28d9ed>3</color>.\\n\\n<color=#ffd732>Dual Attack Effect</color>: After attacking, increases the caster's Critical Damage for <color=#28d9ed>[Buff_T_2700019_backup_1_1] turns</color>.",
       "jp": "<color=#ffd732>チェーン効果(汎用)</color>：攻撃後、<color=#28d9ed>3</color>のWGダメージを追加で与える。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、自分の会心ダメージを<color=#28d9ed>[Buff_T_2700019_backup_1_1]ターン</color>の間UPさせる。",
       "kr": "<color=#ffd732>체인 컴패니언 효과</color> : 공격 후 <color=#28d9ed>3</color>의 WG를 추가로 감소시킵니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 자신의 치명 피해를 <color=#28d9ed>[Buff_T_2700019_backup_1_1]턴</color> 동안 증가시킵니다.",
       "zh": "<color=#ffd732>连锁伙伴效果</color>：攻击后额外降低<color=#28d9ed>3</color>点WG。\\n\\n<color=#ffd732>协攻效果</color>：攻击后使自身的暴击伤害提升<color=#28d9ed>[Buff_T_2700019_backup_1_1]回合</color>。"
@@ -59705,7 +59748,7 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
           }
         },
         "tooltips": ["2000035", "84", "3"]
@@ -59725,7 +59768,7 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
           }
         },
         "tooltips": ["2000035", "84", "3"],
@@ -59759,7 +59802,7 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
           }
         },
         "tooltips": ["2000035", "84", "3"],
@@ -59787,7 +59830,7 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
           }
         },
         "tooltips": ["2000035", "84", "3"],
@@ -59815,7 +59858,7 @@
           "2000035_2_4": {
             "c": "100%",
             "v": "75.5%",
-            "t": "2"
+            "t": "1"
           }
         },
         "tooltips": ["2000035", "84", "3"],
@@ -59836,10 +59879,10 @@
       }
     ],
     "desc": {
-      "en": "(Passive Effect) At the start of battle, inflicts irremovable <color=#28d9ed>Bleeding</color> on the fastest enemy for <color=#28d9ed>[Buff_T_2000035_2_4] turns</color>. (Ignores Resilience)\\nAdditionally, grants <color=#28d9ed>Pureblood's Domain</color> to all allies.\\n\\nAllies' Bleeding DMG increases by <color=#28d9ed>50%</color>.\\n\\n(Active Effect) Attacks all enemies and with a <color=#28d9ed>[Buff_C_2000035_2_1]</color> chance, inflicts <color=#28d9ed>Bleeding</color> on the target for <color=#28d9ed>[Buff_T_2000035_2_1] turns</color>. (Ignores Resilience)",
-      "jp": "(パッシブ効果) 戦闘開始時、最もスピードが速い敵単体に解除されない<color=#28d9ed>出血</color>を<color=#28d9ed>[Buff_T_2000035_2_4]ターン</color>の間付与する。（効果抵抗無視）\\nさらに味方全体に<color=#28d9ed>【鮮血の領域】</color>を付与する。\\n\\n味方の出血ダメージが<color=#28d9ed>50%</color>UPする。\\n\\n(アクティブ効果) 敵全体にダメージを与え、<color=#28d9ed>[Buff_C_2000035_2_1]</color>の確率で対象に<color=#28d9ed>出血</color>を<color=#28d9ed>[Buff_T_2000035_2_1]ターン</color>の間付与する。（効果抵抗無視）",
-      "kr": "(패시브 효과) 전투 시작 시 속도가 가장 빠른 적 한 명에게 <color=#28d9ed>[Buff_T_2000035_2_4]턴</color> 동안 해제되지 않는 <color=#28d9ed>출혈</color>을 부여합니다. (효과 저항 무시)\\n추가로 아군 전체에게 <color=#28d9ed>선혈의 영역</color>을 부여합니다.\\n\\n아군의 출혈 피해가 <color=#28d9ed>50%</color> 증가합니다.\\n\\n(액티브 효과) 적 전체를 공격하고 <color=#28d9ed>[Buff_C_2000035_2_1]</color> 확률로 대상에게 <color=#28d9ed>출혈</color>을 <color=#28d9ed>[Buff_T_2000035_2_1]턴</color> 동안 부여합니다. (효과 저항 무시)",
-      "zh": "(被动效果) 战斗开始时，对速度最快的敌人1名附加<color=#28d9ed>[Buff_T_2000035_2_4]回合</color>无法解除的<color=#28d9ed>出血</color>。（无视效果抵抗）\\n追加对我方全体附加<color=#28d9ed>鲜血领域</color>。\\n\\n我方出血伤害增加<color=#28d9ed>50%</color>。\\n\\n(主动效果) 攻击全体敌人，以<color=#28d9ed>[Buff_C_2000035_2_1]</color>的概率对目标附加<color=#28d9ed>[Buff_T_2000035_2_1]回合</color>的<color=#28d9ed>出血</color>。（无视效果抵抗）"
+      "en": "(Passive Effect) At the start of battle and whenever the caster gains a turn, inflicts <color=#28d9ed>Bleeding</color> on the enemy with the highest Speed for <color=#28d9ed>[Buff_T_2000035_2_4] turns</color>. (Irremovable, ignores Resilience)\\nAdditionally, grants <color=#28d9ed>Pureblood's Dominion</color> to all allies.\\n\\nWhenever the caster gains a turn, increases all allies' Critical Damage by <color=#28d9ed>10%</color> (stacks up to 3 times) and allies' Bleeding DMG by <color=#28d9ed>50%</color>. (Permanent)\\n\\n(Active Effect) Attacks all enemies and has a <color=#28d9ed>[Buff_C_2000035_2_1]</color> chance to inflict <color=#28d9ed>Bleeding</color> on each target for <color=#28d9ed>[Buff_T_2000035_2_1] turns</color>. (Ignores Resilience)",
+      "jp": "(パッシブ効果) 戦闘開始時および自分のターン獲得時、最もスピードが速い敵単体に<color=#28d9ed>出血</color>を<color=#28d9ed>[Buff_T_2000035_2_4]ターン</color>の間付与する。（解除不可、効果抵抗無視）\\nさらに味方全体に<color=#28d9ed>【鮮血の領域】</color>を付与する。\\n\\n自分のターン獲得時、味方全体の会心ダメージが<color=#28d9ed>10%</color>UPし（最大3回まで累積）、味方の出血ダメージが<color=#28d9ed>50%</color>UPする。（永続）\\n\\n(アクティブ効果) 敵全体にダメージを与え、<color=#28d9ed>[Buff_C_2000035_2_1]</color>の確率で対象に<color=#28d9ed>出血</color>を<color=#28d9ed>[Buff_T_2000035_2_1]ターン</color>の間付与する。（効果抵抗無視）",
+      "kr": "(패시브 효과) 전투 시작 및 자신 턴 획득 시 속도가 가장 빠른 적 한 명에게 <color=#28d9ed>[Buff_T_2000035_2_4]턴</color> 동안 <color=#28d9ed>출혈</color>을 부여합니다.(해제 불가, 효과 저항 무시)\\n추가로 아군 전체에게 <color=#28d9ed>선혈의 영역</color>을 부여합니다.\\n\\n자신 턴 획득 시 아군 전체의 치명 피해가 <color=#28d9ed>10%</color> 증가하며(최대 3회 누적) 아군의 출혈 피해가 <color=#28d9ed>50%</color> 증가합니다.(영구 지속)\\n\\n(액티브 효과) 적 전체를 공격하고 <color=#28d9ed>[Buff_C_2000035_2_1]</color> 확률로 대상에게 <color=#28d9ed>출혈</color>을 <color=#28d9ed>[Buff_T_2000035_2_1]턴</color> 동안 부여합니다.(효과 저항 무시)",
+      "zh": "(被动效果) 战斗开始时及自身获得回合时，对速度最快的1名敌人附加<color=#28d9ed>出血</color>，持续<color=#28d9ed>[Buff_T_2000035_2_4]回合</color>。（无法解除，无视效果抵抗）\\n追加对我方全体附加<color=#28d9ed>鲜血领域</color>。\\n\\n自身获得回合时，我方全体暴击伤害提升<color=#28d9ed>10%</color>（最多叠加3次），我方出血伤害提升<color=#28d9ed>50%</color>。（永久持续）\\n\\n(主动效果) 攻击全体敌人，并有<color=#28d9ed>[Buff_C_2000035_2_1]</color>的概率对目标附加<color=#28d9ed>出血</color>，持续<color=#28d9ed>[Buff_T_2000035_2_1]回合</color>。（无视效果抵抗）"
     },
     "target": "enemy",
     "range": "all",
@@ -59892,6 +59935,10 @@
           "2000035_3_3": {
             "c": "100%",
             "v": "1"
+          },
+          "2000035_3_4": {
+            "c": "100%",
+            "v": "25%"
           }
         },
         "tooltips": ["17"]
@@ -59915,6 +59962,10 @@
           "2000035_3_3": {
             "c": "100%",
             "v": "1"
+          },
+          "2000035_3_4": {
+            "c": "100%",
+            "v": "25%"
           }
         },
         "tooltips": ["17"],
@@ -59952,6 +60003,10 @@
           "2000035_3_3": {
             "c": "100%",
             "v": "1"
+          },
+          "2000035_3_4": {
+            "c": "100%",
+            "v": "25%"
           }
         },
         "tooltips": ["17"],
@@ -59983,6 +60038,10 @@
           "2000035_3_3": {
             "c": "100%",
             "v": "2"
+          },
+          "2000035_3_4": {
+            "c": "100%",
+            "v": "25%"
           }
         },
         "tooltips": ["17"],
@@ -60014,6 +60073,10 @@
           "2000035_3_3": {
             "c": "100%",
             "v": "2"
+          },
+          "2000035_3_4": {
+            "c": "100%",
+            "v": "25%"
           }
         },
         "tooltips": ["17"],
@@ -60034,9 +60097,9 @@
       }
     ],
     "desc": {
-      "en": "When using this skill, removes <color=#28d9ed>[Buff_V_2000035_3_3]</color> <color=#28d9ed>buff(s)</color> from all enemies and attacks all enemies. If the target is <color=#28d9ed>Bleeding</color> , DMG increases by <color=#28d9ed>50%</color>. After using the skill, decreases the target's <color=#28d9ed>Defense</color> for <color=#28d9ed>[Buff_T_2000035_3_2] turns</color>. (Ignores Resilience)",
+      "en": "Has a <color=#28d9ed>100%</color> chance to remove <color=#28d9ed>[Buff_V_2000035_3_3]</color> <color=#28d9ed>buff(s)</color> from all enemies and decrease their Defense for <color=#28d9ed>[Buff_T_2000035_3_2] turns</color> before attacking all enemies. (Ignores Resilience)\\n\\nDeals <color=#28d9ed>50%</color> more damage to <color=#28d9ed>Bleeding</color> targets and decreases their Priority by <color=#28d9ed>[Buff_V_2000035_3_4]</color>. (Ignores Resilience)",
       "jp": "スキル使用時、敵全体の<color=#28d9ed>強化効果</color>を<color=#28d9ed>[Buff_V_2000035_3_3]個</color>解除し、敵全体にダメージを与える。対象が<color=#28d9ed>出血</color>状態の場合、ダメージが<color=#28d9ed>50%</color>UPし、スキル使用後<color=#28d9ed>防御力</color>を<color=#28d9ed>[Buff_T_2000035_3_2]ターン</color>の間DOWNさせる。（効果抵抗無視）",
-      "kr": "스킬 사용 시 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>[Buff_V_2000035_3_3]개</color> 해제하고 적 전체를 공격합니다. 대상이 <color=#28d9ed>출혈</color> 상태라면 피해가 <color=#28d9ed>50%</color> 증가하고 스킬 사용 후 <color=#28d9ed>방어력</color>을 <color=#28d9ed>[Buff_T_2000035_3_2]턴</color> 동안 감소시킵니다. (효과 저항 무시)",
+      "kr": "<color=#28d9ed>100%</color> 확률로 적 전체의 <color=#28d9ed>강화 효과</color>를 <color=#28d9ed>[Buff_V_2000035_3_3]개</color> 해제하고 방어력을 <color=#28d9ed>[Buff_T_2000035_3_2]턴</color> 동안 감소시킨 뒤(효과 저항 무시) 적 전체를 공격합니다.\\n\\n대상이 <color=#28d9ed>출혈</color> 상태라면 피해가 <color=#28d9ed>50%</color> 증가하고 출혈 보유 대상의 행동 게이지를 <color=#28d9ed>[Buff_V_2000035_3_4]</color> 감소시킵니다.(효과 저항 무시)",
       "zh": "使用技能时，解除全体敌人<color=#28d9ed>[Buff_V_2000035_3_3]个</color><color=#28d9ed>强化效果</color>并攻击全体敌人。若目标处于<color=#28d9ed>出血</color>状态，伤害增加<color=#28d9ed>50%</color>，技能使用后使目标<color=#28d9ed>防御力</color>在<color=#28d9ed>[Buff_T_2000035_3_2]回合</color>内减少。（无视效果抵抗）"
     },
     "target": "enemy",
@@ -60069,6 +60132,15 @@
         "target": "enemy_team",
         "buff": "2000035_3_3",
         "label": "SYS_BUFF_REMOVE_BUFF",
+        "caller": "ultimate"
+      },
+      {
+        "family": "gauge",
+        "category": "debuff",
+        "type": "BT_ACTION_GAUGE",
+        "target": "enemy_skill_target",
+        "buff": "2000035_3_4",
+        "label": "SYS_BUFF_ACTION_GAUGE_DOWN",
         "caller": "ultimate"
       }
     ]
@@ -60872,9 +60944,9 @@
   "3520": {
     "id": "3520",
     "name": {
-      "en": "Enhances Bleeding (Duration)",
+      "en": "Enhances Bleeding (Duration)\\nReduces Cooldown (Ultimate)",
       "jp": "出血強化(ターン数)",
-      "kr": "출혈 강화(지속 턴)",
+      "kr": "출혈 강화(지속 턴)\\n쿨타임 감소(필살기)",
       "zh": "强化出血(持续时间)"
     },
     "type": "burst_2",
@@ -60897,6 +60969,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           }
         },
         "tooltips": ["7"]
@@ -60916,6 +60992,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           }
         },
         "tooltips": ["7"]
@@ -60935,6 +61015,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           }
         },
         "tooltips": ["7"]
@@ -60954,6 +61038,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           }
         },
         "tooltips": ["7"]
@@ -60973,16 +61061,20 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           }
         },
         "tooltips": ["7"]
       }
     ],
     "desc": {
-      "en": "Increases Bleeding duration by 1 turn",
-      "jp": "出血+1ターン",
-      "kr": "출혈 지속 +1턴",
-      "zh": "出血持续+1回合"
+      "en": "Bleeding Duration +1 Turn\\nPure Blood Archdemon Cooldown -1 Turn",
+      "jp": "出血ターン+1ターン\\n鮮血の魔王 スキルターン-1ターン",
+      "kr": "출혈 지속 +1턴\\n선혈의 마왕 쿨타임 -1턴",
+      "zh": "出血持续时间+1回合\\n鲜血魔王冷却时间-1回合"
     },
     "target": "enemy",
     "range": "all",
@@ -61006,6 +61098,14 @@
         "stat": "atk",
         "mode": "up",
         "tooltip": "3"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2000035_u_2_3",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
       }
     ]
   },
@@ -61038,6 +61138,10 @@
             "v": "72.5%",
             "t": "3"
           },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
+          },
           "2000035_u_3": {
             "c": "100%",
             "v": "120%"
@@ -61060,6 +61164,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           },
           "2000035_u_3": {
             "c": "100%",
@@ -61084,6 +61192,10 @@
             "v": "72.5%",
             "t": "3"
           },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
+          },
           "2000035_u_3": {
             "c": "100%",
             "v": "120%"
@@ -61107,6 +61219,10 @@
             "v": "72.5%",
             "t": "3"
           },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
+          },
           "2000035_u_3": {
             "c": "100%",
             "v": "120%"
@@ -61129,6 +61245,10 @@
             "c": "100%",
             "v": "72.5%",
             "t": "3"
+          },
+          "2000035_u_2_3": {
+            "c": "100%",
+            "v": "1"
           },
           "2000035_u_3": {
             "c": "100%",
@@ -61166,6 +61286,14 @@
         "stat": "atk",
         "mode": "up",
         "tooltip": "3"
+      },
+      {
+        "family": "cooldown",
+        "category": "buff",
+        "type": "BT_COOL3_CHARGE",
+        "target": "me",
+        "buff": "2000035_u_2_3",
+        "label": "SYS_BUFF_COOLTIME_REDUCE"
       },
       {
         "family": "damage",
@@ -133115,7 +133243,7 @@
       }
     ],
     "desc": {
-      "en": "<color=#ffd732>Chain Starter Effect</color> : After attacking, inflicts <color=#28d9ed>Burn</color> on all enemies for <color=#28d9ed>[Buff_T_2000073_chain_1_1] turns</color> with a probability of <color=#28d9ed>[Buff_C_2000073_chain_1_1]</color>. This effect ignores Resilience.\\n\\n<color=#ffd732>Assist Effect</color> : After attacking, inflicts <color=#28d9ed>Burn</color> on the target for <color=#28d9ed>[Buff_T_2000073_backup_1_1] turns</color> with a probability of <color=#28d9ed>[Buff_C_2000073_backup_1_1]</color>. This effect ignores Resilience.",
+      "en": "<color=#ffd732>Chain Starter Effect</color> : After attacking, inflicts <color=#28d9ed>Burn</color> on all enemies for <color=#28d9ed>[Buff_T_2000073_chain_1_1] turns</color> with a probability of <color=#28d9ed>[Buff_C_2000073_chain_1_1]</color>. This effect ignores Resilience.\\n\\n<color=#ffd732>Dual Attack Effect</color> : After attacking, inflicts <color=#28d9ed>Burn</color> on the target for <color=#28d9ed>[Buff_T_2000073_backup_1_1] turns</color> with a probability of <color=#28d9ed>[Buff_C_2000073_backup_1_1]</color>. This effect ignores Resilience.",
       "jp": "<color=#ffd732>チェーン効果(初手)</color>：攻撃後、敵全体に<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_C_2000073_chain_1_1]</color>の確率で<color=#28d9ed>[Buff_T_2000073_chain_1_1]ターン</color>の間付与する。この効果は効果抵抗を無視する。\\n\\n<color=#ffd732>連携効果</color>：攻撃後、敵対象に<color=#28d9ed>火傷</color>を<color=#28d9ed>[Buff_C_2000073_backup_1_1]</color>の確率で<color=#28d9ed>[Buff_T_2000073_backup_1_1]ターン</color>の間付与する。この効果は効果抵抗を無視する。",
       "kr": "<color=#ffd732>체인 스타터 효과</color> : 공격 후 <color=#28d9ed>[Buff_C_2000073_chain_1_1]</color>의 확률로 <color=#28d9ed>[Buff_T_2000073_chain_1_1]턴</color> 동안 적 전체에게 <color=#28d9ed>화상</color>을 부여합니다.\\n이 효과는 대상의 효과 저항을 무시합니다.\\n\\n<color=#ffd732>협공 효과</color> : 공격 후 적 대상에게 <color=#28d9ed>[Buff_C_2000073_backup_1_1]</color> 확률로 <color=#28d9ed>[Buff_T_2000073_backup_1_1]턴</color> 동안 화상을 부여합니다.\\n이 효과는 대상의 효과 저항을 무시합니다.",
       "zh": "<color=#ffd732>连锁起手效果</color>：攻击后，有<color=#28d9ed>[Buff_C_2000073_chain_1_1]</color>概率对全体敌人施加<color=#28d9ed>[Buff_T_2000073_chain_1_1]回合</color>的<color=#28d9ed>灼烧</color>。该效果无视效果抵抗。\\n\\n<color=#ffd732>协同攻击效果</color>：攻击后，有<color=#28d9ed>[Buff_C_2000073_backup_1_1]</color>概率对目标施加<color=#28d9ed>[Buff_T_2000073_backup_1_1]回合</color>的<color=#28d9ed>灼烧</color>。该效果无视效果抵抗。"
@@ -220328,7 +220456,7 @@
     "desc": {
       "en": "<color=#ffd732>Demon Descends</color>\\n(Passive Effect): At the start of battle, gains <color=#28d9ed>Sin</color>. This effect lasts until the caster transforms into the Demon.\\n\\n(Triggered Effect): When Health falls to 0 or below, transforms into the <color=#28d9ed>Demon</color>. Restores the caster's Health to <color=#28d9ed>100%</color>, resets AP to its initial value, removes all <color=#28d9ed>buffs</color> and <color=#28d9ed>debuffs</color>, then attacks all enemies with <color=#28d9ed>Gaze of Contempt</color>. After transforming, damage dealt by all attacks increases proportional to the caster's <color=#28d9ed>Speed</color>. Cannot return to the previous form.\\n\\n<color=#ffd732>Gaze of Contempt</color>: After attacking all enemies, inflicts <color=#28d9ed>1 Punishment</color> on each target. (Ignores Immunity and Resilience, Irremovable, Permanent) Then grants the caster <color=#28d9ed>Immortality</color> for <color=#28d9ed>1 turn</color> and inflicts <color=#28d9ed>Buff Reversal</color> on all enemies. (Ignores Resilience)",
       "jp": "<color=#ffd732>【魔神降臨】</color>\\n(パッシブ効果)：戦闘開始時に<color=#28d9ed>罪業</color>を獲得し、魔神に変身するまで持続する。\\n\\n(発動効果)：HPが0以下になると<color=#28d9ed>魔神</color>に変身する。自分のHPを<color=#28d9ed>100%</color>にし、保有する<color=#28d9ed>AP</color>を初期化した後、<color=#28d9ed>強化・弱体効果</color>を解除し、<color=#28d9ed>【侮蔑の眼差し】</color>で敵全体にダメージを与える。変身後、すべての攻撃は自分の<color=#28d9ed>スピード</color>が高いほどダメージがUPする。元の姿には戻らない。\\n\\n<color=#ffd732>【侮蔑の眼差し】</color>：敵全体にダメージを与えた後、対象に<color=#28d9ed>裁き</color>を<color=#28d9ed>1個</color>付与する。(免疫および効果抵抗無視、解除不可、永続) 自分に<color=#28d9ed>不死</color>を<color=#28d9ed>1ターン</color>の間付与し、敵全体に<color=#28d9ed>強化逆転</color>を発生させる。(効果抵抗無視)",
-      "kr": "<color=#ffd732>마신 강림</color>\\n(패시브 효과) 전투 시작시 <color=#28d9ed>죄업</color>을 획득하여 마신으로 전환하기 전까지 유지합니다.\\n\\n(발동 효과) 체력이 0 이하가 되면 <color=#28d9ed>마신</color>으로 전환합니다. 자신의 체력을 <color=#28d9ed>100%</color> 회복 후, 보유한 <color=#28d9ed>AP</color>를 초기 상태로 갱신하고 <color=#28d9ed>강화</color> 및 <color=#28d9ed>약화</color> 효과를 제거한 뒤, 적 전체를 <color=#28d9ed>모멸적인 시선</color>으로 공격합니다.전환 후 모든 공격은 자신의 <color=#28d9ed>속도</color>에 비례하여 피해가 증가합니다. 이전 상태로 돌아갈 수 없습니다.\\n\\n<color=#ffd732>모멸적인 시선</color> : 적 전체 공격 후 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>1개</color> 부여합니다 (면역 및 효과 저항 무시, 해제 불가, 영구 지속) 이후 자신에게 <color=#28d9ed>불사</color>를 <color=#28d9ed>1턴</color> 동안 부여한 뒤 적 전체에게 <color=#28d9ed>강화 역전</color>을 발생시킵니다.(효과 저항 무시)",
+      "kr": "<color=#ffd732>마신 강림</color>\\n(패시브 효과) 전투 시작시 <color=#28d9ed>죄업</color>을 획득하여 마신으로 전환하기 전까지 유지합니다.\\n\\n(발동 효과) 체력이 0 이하가 되면 <color=#28d9ed>마신</color>으로 전환합니다. 자신의 체력을 <color=#28d9ed>100%</color> 회복 후, 보유한 <color=#28d9ed>AP</color>를 초기 상태로 갱신하고 <color=#28d9ed>강화</color> 및 <color=#28d9ed>약화</color> 효과를 제거한 뒤, 장비 효과 중 전투 시작 시점에서 획득하는 효과를 얻습니다.\\n적 전체를 <color=#28d9ed>모멸적인 시선</color>으로 공격합니다.전환 후 모든 공격은 자신의 <color=#28d9ed>속도</color>에 비례하여 피해가 증가합니다. 이전 상태로 돌아갈 수 없습니다.\\n\\n<color=#ffd732>모멸적인 시선</color> : 적 전체 공격 후 대상에게 <color=#28d9ed>응징</color>을 <color=#28d9ed>1개</color> 부여합니다 (면역 및 효과 저항 무시, 해제 불가, 영구 지속) 이후 자신에게 <color=#28d9ed>불사</color>를 <color=#28d9ed>1턴</color> 동안 부여한 뒤 적 전체에게 <color=#28d9ed>강화 역전</color>을 발생시킵니다.(효과 저항 무시)",
       "zh": "<color=#ffd732>魔神降临</color>\\n（被动效果）：战斗开始时获得<color=#28d9ed>罪业</color>，持续至转化为魔神。\\n\\n（触发效果）：生命值降至0以下时，转化为<color=#28d9ed>魔神</color>。将自身生命值恢复至<color=#28d9ed>100%</color>后，将持有的<color=#28d9ed>AP</color>重置为初始状态，解除<color=#28d9ed>强化</color>及<color=#28d9ed>弱化</color>效果后，使用<color=#28d9ed>轻蔑之眼</color>攻击全体敌人。转化后，所有攻击的伤害会根据自身<color=#28d9ed>速度</color>提升。无法变回原形态。\\n\\n<color=#ffd732>轻蔑之眼</color>：攻击全体敌人后，赋予目标<color=#28d9ed>1个</color><color=#28d9ed>惩戒</color>。（无视免疫及效果抵抗、无法解除、永久持续）随后赋予自身<color=#28d9ed>1回合</color><color=#28d9ed>不死</color>，并对全体敌人发动<color=#28d9ed>强化逆转</color>。（无视效果抵抗）"
     },
     "icon": "Skill_Second_2000129",

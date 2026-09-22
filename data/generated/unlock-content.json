@@ -56,7 +56,7 @@
         "en": "Adventure License",
         "jp": "アドベンチャーライセンス",
         "kr": "모험 라이선스",
-        "zh": "冒险执照"
+        "zh": "冒险许可证"
       },
       "officialName": {
         "en": "Adventure License",
@@ -191,7 +191,7 @@
         "en": "Base",
         "jp": "アジト",
         "kr": "아지트",
-        "zh": "据点"
+        "zh": "基地"
       },
       "officialName": {
         "en": "Base",
@@ -240,7 +240,7 @@
         "en": "Synchro Room",
         "jp": "シンクロルーム",
         "kr": "싱크로 룸",
-        "zh": "同步室"
+        "zh": "同步空间"
       },
       "officialName": {
         "en": "Synchro Room",
@@ -369,7 +369,7 @@
         "en": "Skill Burst",
         "jp": "スキルバースト",
         "kr": "스킬 버스트",
-        "zh": "技能爆发"
+        "zh": "爆发技能"
       }
     },
     {
@@ -926,7 +926,7 @@
         "en": "Joint Challenge",
         "jp": "合同チャレンジ",
         "kr": "합동 챌린지",
-        "zh": "合作挑战"
+        "zh": "联合挑战"
       }
     },
     {
@@ -1819,20 +1819,12 @@
       "contentType": "MONADGATE",
       "requirements": [
         {
-          "stage": "S2-5-14",
           "dungeonName": {
-            "en": "Notia's Letter",
-            "jp": "ノティアの手紙",
-            "kr": "노티아의 편지",
-            "zh": "诺缇亚的信"
-          },
-          "areaName": {
-            "en": "Garden of Dolls",
-            "jp": "箱庭",
-            "kr": "모형 정원",
-            "zh": "模型庄园"
-          },
-          "mode": "origin"
+            "en": "Monad Gate: Epilogue 2",
+            "jp": "モナド・ゲート：エピローグ 2",
+            "kr": "모나드 게이트 : 에필로그 2",
+            "zh": "单子门：后记 2"
+          }
         }
       ],
       "lockScreenName": {
@@ -2630,7 +2622,7 @@
         "en": "Friendly Match",
         "jp": "フレンドリーマッチ",
         "kr": "친선 대전",
-        "zh": "好友对战"
+        "zh": "友谊赛"
       }
     },
     {
@@ -2673,7 +2665,7 @@
         "en": "Friendly Match",
         "jp": "フレンドリーマッチ",
         "kr": "친선 대전",
-        "zh": "好友对战"
+        "zh": "友谊赛"
       }
     },
     {
@@ -2686,8 +2678,31 @@
     },
     {
       "contentType": "SINGULARITY",
-      "requirements": [],
+      "requirements": [
+        {
+          "stage": "S2-5-14",
+          "dungeonName": {
+            "en": "Notia's Letter",
+            "jp": "ノティアの手紙",
+            "kr": "노티아의 편지",
+            "zh": "诺缇亚的信"
+          },
+          "areaName": {
+            "en": "Garden of Dolls",
+            "jp": "箱庭",
+            "kr": "모형 정원",
+            "zh": "模型庄园"
+          },
+          "mode": "origin"
+        }
+      ],
       "lockScreenName": {
+        "en": "Dimensional Singularity",
+        "jp": "次元特異点",
+        "kr": "차원 특이점",
+        "zh": "次元奇点"
+      },
+      "officialName": {
         "en": "Dimensional Singularity",
         "jp": "次元特異点",
         "kr": "차원 특이점",

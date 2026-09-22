@@ -10880,6 +10880,32 @@
       }
     }
   ],
+  "2700035": [
+    {
+      "stat": "kill_ap",
+      "mode": "flat",
+      "value": 0,
+      "weight": 100,
+      "buff": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK",
+      "levels": [-30, -31, -32, -33, -34, -35, -36, -37, -38, -39, -40],
+      "factor": 2,
+      "max": 20,
+      "effects": [
+        {
+          "type": "stat",
+          "stat": "buff_resist",
+          "mode": "flat",
+          "value": -30
+        }
+      ],
+      "label": {
+        "en": "Effectiveness vs Light",
+        "jp": "光属性対象の 効果命中",
+        "kr": "명속성 대상 효과 적중",
+        "zh": "光属性效果命中"
+      }
+    }
+  ],
   "2700037": [
     {
       "stat": "kill_ap",

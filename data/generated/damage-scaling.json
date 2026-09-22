@@ -191,6 +191,9 @@
   "2700003": {
     "bonusStats": ["speed"]
   },
+  "2700035": {
+    "dot": true
+  },
   "2700037": {
     "attackStat": "hp"
   },

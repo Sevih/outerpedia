@@ -281,6 +281,14 @@
       "v": 1000
     }
   ],
+  "2700035": [
+    {
+      "levelThreshold": 1,
+      "st": "ST_BUFF_CHANCE",
+      "ap": "OAT_RATE",
+      "v": 1000
+    }
+  ],
   "2700043": [
     {
       "levelThreshold": 1,

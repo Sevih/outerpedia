@@ -4924,6 +4924,9 @@
   "27019": {
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },
+  "27035": {
+    "buffId": "BID_CEQUIP_MAIN_BUFF_CHANCE_DARK"
+  },
   "27037": {
     "buffId": "BID_CEQUIP_MAIN_DMG_WATER"
   },

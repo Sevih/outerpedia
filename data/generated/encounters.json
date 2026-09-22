@@ -77730,7 +77730,7 @@
       "order": 1
     },
     "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
-    "geasRewards": ["51", "61"]
+    "geasRewards": ["72", "16"]
   },
   "70401102": {
     "mode": "guild_raid_sub_boss",
@@ -77786,7 +77786,7 @@
       "order": 3
     },
     "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1",
-    "geasRewards": ["49", "63"]
+    "geasRewards": ["49", "7"]
   },
   "70401104": {
     "mode": "guild_raid_sub_boss",
@@ -77870,7 +77870,7 @@
       "order": 1
     },
     "group": "guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB2",
-    "geasRewards": ["94", "65"]
+    "geasRewards": ["94", "106"]
   },
   "70401202": {
     "mode": "guild_raid_sub_boss",

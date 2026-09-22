@@ -999,20 +999,26 @@
     "teamBonuses": []
   },
   "2000035": {
-    "buff": ["BT_ACTION_GAUGE", "PUREBLOODS_DOMINION", "UNCOUNTERABLE"],
-    "debuff": ["BT_DOT_BLEED", "BT_REMOVE_BUFF", "BT_STAT|ST_DEF"],
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_CRITICAL_DMG_RATE",
+      "PUREBLOODS_DOMINION",
+      "UNCOUNTERABLE"
+    ],
+    "debuff": ["BT_ACTION_GAUGE", "BT_DOT_BLEED", "BT_REMOVE_BUFF", "BT_STAT|ST_DEF"],
     "effectsBySource": {
       "s1": {
         "buff": [],
         "debuff": ["BT_DOT_BLEED"]
       },
       "s2": {
-        "buff": ["BT_ACTION_GAUGE", "PUREBLOODS_DOMINION"],
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "PUREBLOODS_DOMINION"],
         "debuff": ["BT_DOT_BLEED"]
       },
       "ultimate": {
         "buff": [],
-        "debuff": ["BT_REMOVE_BUFF", "BT_STAT|ST_DEF"]
+        "debuff": ["BT_ACTION_GAUGE", "BT_REMOVE_BUFF", "BT_STAT|ST_DEF"]
       },
       "chainPassive": {
         "buff": [],
@@ -4016,6 +4022,46 @@
       }
     },
     "teamBonuses": ["CHD"]
+  },
+  "2700035": {
+    "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "TRUE_PUREBLOODS_DOMINION", "UNCOUNTERABLE"],
+    "debuff": [
+      "BT_ACTION_GAUGE",
+      "BT_DOT_BLEED",
+      "BT_EXTEND_DEBUFF",
+      "BT_REMOVE_BUFF",
+      "BT_STAT|ST_DEF",
+      "BT_STUN",
+      "DETONATE",
+      "WEAKNESS_GAUGE_DAMAGE"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED", "BT_REMOVE_BUFF"]
+      },
+      "s2": {
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "debuff": ["BT_ACTION_GAUGE", "BT_DOT_BLEED", "BT_EXTEND_DEBUFF", "WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "ultimate": {
+        "buff": [],
+        "debuff": ["BT_STUN", "DETONATE"]
+      },
+      "chainPassive": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "dualAttack": {
+        "buff": [],
+        "debuff": ["BT_DOT_BLEED"]
+      },
+      "exclusiveEquip": {
+        "buff": ["UNCOUNTERABLE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": []
   },
   "2700037": {
     "buff": [
