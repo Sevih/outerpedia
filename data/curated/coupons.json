@@ -1,5 +1,13 @@
 [
   {
+    "code": "MOONPTYEX",
+    "start": "2026-09-23",
+    "end": "2026-10-31",
+    "description": {
+      "21201": "10"
+    }
+  },
+  {
     "code": "MOONPTYGOLD",
     "start": "2026-09-21",
     "end": "2026-10-31",
