@@ -4,7 +4,7 @@
     "jp": "火炎の騎士メテウス",
     "kr": "화염기사 메테우스",
     "zh": "火焰骑士梅修斯",
-    "fr": "Blazing Knight Meteos",
+    "fr": "Météos, le Chevalier Flamboyant",
     "es": "Caballero Ardiente Meteos"
   },
   "description": {
@@ -12,8 +12,8 @@
     "jp": "次元特異点「火炎の騎士メテウス」攻略 — バリア保持者は与ダメ+100%。味方が倒されると蘇生不可の全体致死攻撃が飛ぶ。スキル・編成・攻略法。",
     "kr": "차원 특이점: 화염기사 메테우스 공략 — 배리어 보유자는 주는 피해 +100%. 아군이 처치당하면 부활 불가의 전체 즉사기가 날아온다. 스킬, 팀 편성, 공략법.",
     "zh": "次元奇点：火焰骑士梅修斯攻略 — 持有护盾者造成伤害+100%；绝不能让他击杀队友，否则触发无法复活的全体致命攻击。技能、队伍编成与策略。",
-    "fr": "Singularité Dimensionnelle : Blazing Knight Meteos (Fire) — +100% de dégâts avec Barrier ; ne le laissez jamais tuer, sa punition wipe sans résurrection possible. Compétences, équipes et stratégies.",
-    "es": "Blazing Knight Meteos (Fuego), Singularidad Dimensional — los portadores de Barrera infligen +100% de daño; nunca dejes que lo mate, su golpe final elimina sin revivir. Skills, equipos y estrategias."
+    "fr": "Singularité Dimensionnelle : Météos, le Chevalier Flamboyant (Fire) — +100% de dégâts avec Barrier ; ne le laissez jamais tuer, sa punition wipe sans résurrection possible. Compétences, équipes et stratégies.",
+    "es": "Caballero Ardiente Meteos (Fuego), Singularidad Dimensional — los portadores de Barrera infligen +100% de daño; nunca dejes que lo mate, su golpe final elimina sin revivir. Skills, equipos y estrategias."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",

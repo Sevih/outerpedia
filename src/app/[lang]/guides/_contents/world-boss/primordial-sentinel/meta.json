@@ -4,16 +4,16 @@
     "jp": "太古の番兵",
     "kr": "태고의 파수병",
     "zh": "远古哨兵",
-    "fr": "Primordial Sentinel",
-    "es": "Primordial Sentinel"
+    "fr": "Sentinelle Primordiale",
+    "es": "Centinela Ancestral"
   },
   "description": {
     "en": "Primordial Sentinel world boss guide — the two-phase Dark boss: teams, hero picks and strategies for each phase, from Normal up to Extreme League.",
     "jp": "ワールドボス「太古の番兵」攻略ガイド — 2フェーズ構成の闇属性ボス。フェーズ別の編成とおすすめキャラ、ノーマルからエクストリームリーグまで。",
     "kr": "월드 보스 태고의 파수병 공략 가이드 — 2페이즈 암속성 보스. 페이즈별 팀 편성과 추천 영웅, 노멀부터 익스트림 리그까지.",
     "zh": "世界Boss远古哨兵攻略指南 — 两阶段暗属性Boss：分阶段队伍与推荐角色，从普通到极限联赛。",
-    "fr": "Guide du world boss Primordial Sentinel — boss Dark à deux phases : équipes, choix de héros et stratégies par phase, de Normal à l'Extreme League.",
-    "es": "Guía del jefe mundial Primordial Sentinel — el jefe de Oscuro de dos fases: equipos, elección de héroes y estrategias para cada fase, desde Normal hasta la Liga Extrema."
+    "fr": "Guide du world boss Sentinelle Primordiale — boss Dark à deux phases : équipes, choix de héros et stratégies par phase, de Normal à l'Extreme League.",
+    "es": "Guía del jefe mundial Centinela Ancestral — el jefe de Oscuro de dos fases: equipos, elección de héroes y estrategias para cada fase, desde Normal hasta la Liga Extrema."
   },
   "icon": "T_Banner_World_Boss_02",
   "author": "Sevih",

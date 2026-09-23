@@ -228,7 +228,7 @@ export const GUIDE_CATEGORIES = {
       kr: '길드 레이드',
       zh: '公会突袭',
       fr: 'Guild Raid',
-      es: 'Raid guilde',
+      es: 'Incursión de Gremio',
     },
     desc: {
       en: 'Comprehensive strategies for Guild Raids: boss mechanics, optimal team setups, and damage-maximizing tactics to achieve the highest raid scores.',
@@ -236,7 +236,7 @@ export const GUIDE_CATEGORIES = {
       kr: '길드 레이드 완벽 공략: 보스 메커닉, 최적 팀 구성, 최고 점수를 위한 데미지 극대화 전술.',
       zh: '公会突袭综合策略——学习首领机制、参考最佳队伍以获得最高伤害或是最高分数。',
       fr: "Stratégies complètes pour les Guild Raid : mécaniques de Boss, configurations d'équipe optimales et tactiques pour maximiser les dégâts et atteindre les meilleurs scores de Raid.",
-      es: 'Estrategias completas para los Raid guilde: mecánicas de jefes, configuraciones óptimas de equipo y tácticas para maximizar el daño y lograr las puntuaciones más altas del raid.',
+      es: 'Estrategias completas para las Incursiones de Gremio: mecánicas de jefes, configuraciones óptimas de equipo y tácticas para maximizar el daño y lograr las puntuaciones más altas del raid.',
     },
   },
   'world-boss': {

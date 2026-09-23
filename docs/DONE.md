@@ -26,10 +26,23 @@
   URL, noms propres). Prettier ne réécrit que les objets TS devenus trop longs
   pour une ligne. Typecheck et 1 921 tests verts. Règles de traduction posées
   dans CONVENTIONS § i18n (jargon commun en anglais, classes FR en anglais,
-  espagnol sur le vocabulaire officiel). À relire au fil de l'eau : les noms de
-  boss dans les titres de guides restent en anglais là où le jeu a désormais un
-  nom localisé — c'est un choix, pas un oubli (le nom anglais reste celui que
-  la communauté tape), à revoir si les lecteurs fr/es s'y perdent.
+  espagnol sur le vocabulaire officiel). Le soir même, les noms de boss et de
+  zones des TITRES de guides (et leurs descriptions) passent au nom du jeu dans
+  chaque langue, celui que `BossPanel` et le `<title>` affichaient déjà : 70
+  `meta.json` réécrits chirurgicalement (jsonc-parser, rien d'autre ne bouge),
+  nom pris dans `monsters.json` par `bossId`, table à part pour les libellés
+  éditoriaux (raids sans boss, « Hilde & sisters », héros titrés « Démiurge /
+  Gnose / Monade » comme les affiche `characterDisplayName`). L'espagnol y
+  gagne aussi sa cohérence : la passe Sonnet avait inventé « Legión de
+  Escarcha » (jeu : « Legión Helada ») et mélangé « Raid Gremio », « Incu.
+  Gremio », « Raid de Gremio » — tout est « Incursión de Gremio », y compris le
+  libellé de catégorie qui disait « Raid guilde » (du français). Onze segments
+  restent volontairement en anglais (« Anubis Guardian », « Leo & Alpha », les
+  prénoms de world boss). Deux noms français du jeu sont abrégés dans les
+  données (« Prév. l'altération de monde », « DÉF du sanctuaire ») : écrits en
+  toutes lettres dans le titre. À savoir : « Chevalier de l'Espoir Météores » et
+  « Tyrant bebé » sont les noms OFFICIELS, pas des coquilles. Les corps de guides
+  (JSON et `labels.ts`) gardent leur formulation, boss compris.
 
 - **Le jeu parle français et espagnol : six langues officielles, plus aucune
   communautaire.** Le client Steam du 22/09 ajoute deux colonnes à ses 15 tables

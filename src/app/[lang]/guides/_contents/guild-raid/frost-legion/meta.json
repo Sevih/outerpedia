@@ -4,16 +4,16 @@
     "jp": "フロストレギオン ギルドレイドガイド",
     "kr": "프로스트 레기온 길드 레이드 가이드",
     "zh": "霜冻军团 公会突袭攻略",
-    "fr": "Guide Guild Raid Frost Legion",
-    "es": "Guía del Raid Gremio Legión de Escarcha"
+    "fr": "Guide Guild Raid La Légion de Givre",
+    "es": "Guía de Incursión de Gremio: Legión Helada"
   },
   "description": {
     "en": "Guild Raid boss guide for Frost Legion: boss mechanics, geas unlocks, recommended characters, team setups and tactical tips for both phases.",
     "jp": "フロストレギオン のギルドレイド攻略：ボスの仕組み、ギアス、おすすめキャラ、編成、両フェーズの戦術ヒント。",
     "kr": "프로스트 레기온 길드 레이드 공략: 보스 메커닉, 기어스, 추천 캐릭터, 팀 구성, 양 페이즈 전술 팁.",
     "zh": "霜冻军团 公会突袭首领攻略：首领机制、契约、推荐角色、队伍配置与两阶段战术提示。",
-    "fr": "Guide du boss Guild Raid Frost Legion : mécaniques, geas, personnages recommandés, équipes et conseils pour les deux phases.",
-    "es": "Guía del jefe de Raid Gremio para Legión de Escarcha: mecánicas del jefe, desbloqueos de geas, personajes recomendados, configuraciones de equipo y consejos tácticos para ambas fases."
+    "fr": "Guide du boss Guild Raid La Légion de Givre : mécaniques, geas, personnages recommandés, équipes et conseils pour les deux phases.",
+    "es": "Guía del jefe de Incursión de Gremio para Legión Helada: mecánicas del jefe, desbloqueos de geas, personajes recomendados, configuraciones de equipo y consejos tácticos para ambas fases."
   },
   "icon": "T_GuildRaid_004",
   "author": "Sevih",

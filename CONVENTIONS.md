@@ -102,6 +102,13 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   S1/S2/S3, FAQ) ; en français les CLASSES restent en anglais (Striker,
   Defender…) et les éléments en français ; en espagnol on suit le vocabulaire
   officiel du jeu (Atacante, Defensor, Mago, Sanador ; Fuego, Agua…).
+- **Noms de boss et de zones dans les titres de guides** : le nom du JEU dans
+  chaque langue (celui que `BossPanel` et le `<title>` affichent déjà via
+  `monsters.json`), jamais l'anglais recopié — « Gardien de Sacreed », « Legión
+  Helada ». Les libellés purement éditoriaux (« Anubis Guardian », « Leo &
+  Alpha ») restent tels quels. Le mot de MODE suit la langue : anglais en
+  français (« Guide Guild Raid … », comme les catégories), officiel en espagnol
+  (« Incursión de Gremio », « Op. persecución », « Encargo Especial »).
 - Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans
   toutes les langues — c'est `locales/keys.test.ts` qui le garantit (clés
   identiques, chaque clé consommée). L'ancien « alignement par numéro de ligne »
