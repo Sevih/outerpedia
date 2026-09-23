@@ -694,6 +694,105 @@
         "title": "Gornolf Guild Raid Stage 23 - Maxie Burn Team - 21.9m Dmg - (47m score, 115% score multiplier)",
         "author": "Tango"
       }
+    },
+    {
+      "title": {
+        "en": "D.Saeran solo"
+      },
+      "element": "dark",
+      "slots": [["Demiurge Saeran"], ["Stella"], ["Anarky"], ["Monad Iota"]],
+      "requirements": {
+        "entries": [
+          {
+            "character": "Anarky",
+            "stats": {
+              "spd": "low"
+            },
+            "notes": [
+              {
+                "en": "Nothing special beyond enough bulk to survive one boss S2, so she can place her S3.",
+                "jp": "特別なものは不要。ボスのS2を1回耐えてS3を使えるだけの耐久があればよい。",
+                "kr": "특별한 건 없고, 보스 S2를 한 번 버티고 S3를 사용할 정도의 내구만 있으면 됨.",
+                "zh": "没有特别要求，只需足够的耐久扳住Boss一次S2以便放出S3。",
+                "fr": "Rien de particulier, si ce n'est assez de résistance pour survivre à un S2 du boss et poser son S3."
+              }
+            ]
+          },
+          {
+            "character": "Demiurge Saeran",
+            "stats": {
+              "spd": "0"
+            },
+            "prio": ["{S/CHC}", "{S/ATK}", "{S/CHD}", "{S/DMG UP%}"],
+            "equipment": {
+              "weapon": ["{I-W/Gorgon's Wrath [Ranger]}"],
+              "set": ["{AS/Revenge}"]
+            }
+          },
+          {
+            "character": "Stella",
+            "stats": {
+              "spd": "0"
+            },
+            "notes": [
+              {
+                "en": "Nothing special — she only has to survive one boss S2.",
+                "jp": "特別なものは不要 — ボスのS2を1回耐えるだけでよい。",
+                "kr": "특별한 건 없음 — 보스 S2를 한 번 버티기만 하면 됨.",
+                "zh": "没有特别要求 — 只需扳住Boss一次S2。",
+                "fr": "Rien de particulier — elle doit seulement survivre à un S2 du boss."
+              }
+            ]
+          },
+          {
+            "character": "Monad Iota",
+            "stats": {
+              "spd": "0"
+            },
+            "equipment": {
+              "set": ["{AS/Fortification}"]
+            },
+            "notes": [
+              {
+                "en": "Must be slower than {P/Demiurge Saeran}.",
+                "jp": "{P/Demiurge Saeran}より遅くすること。",
+                "kr": "{P/Demiurge Saeran}보다 느려야 함.",
+                "zh": "必须比{P/Demiurge Saeran}慢。",
+                "fr": "Doit être plus lente que {P/Demiurge Saeran}."
+              }
+            ]
+          }
+        ]
+      },
+      "notes": [
+        {
+          "p": {
+            "en": "Timeline: boss S2 → {P/Stella} counter → {P/Demiurge Saeran} S3 → boss enrage → {P/Monad Iota} S2 → {P/Anarky} S3 → {P/Stella} S1",
+            "jp": "進行：ボスS2 → {P/Stella}のカウンター → {P/Demiurge Saeran} S3 → ボスの激怒 → {P/Monad Iota} S2 → {P/Anarky} S3 → {P/Stella} S1",
+            "kr": "진행: 보스 S2 → {P/Stella} 반격 → {P/Demiurge Saeran} S3 → 보스 격노 → {P/Monad Iota} S2 → {P/Anarky} S3 → {P/Stella} S1",
+            "zh": "流程：Boss S2 → {P/Stella}反击 → {P/Demiurge Saeran} S3 → Boss狂暴 → {P/Monad Iota} S2 → {P/Anarky} S3 → {P/Stella} S1",
+            "fr": "Déroulé : S2 du boss → contre de {P/Stella} → S3 de {P/Demiurge Saeran} → enrage du boss → S2 de {P/Monad Iota} → S3 d'{P/Anarky} → S1 de {P/Stella}"
+          }
+        },
+        {
+          "p": {
+            "en": "For the rest of the fight {P/Demiurge Saeran} is the only one left alive — skill priority: S3 > S1B2",
+            "jp": "以降の戦闘では{P/Demiurge Saeran}だけが生き残る — スキル優先度：S3 > S1B2",
+            "kr": "이후 전투에서는 {P/Demiurge Saeran}만 살아남음 — 스킬 우선순위: S3 > S1B2",
+            "zh": "战斗后续只剩{P/Demiurge Saeran}存活 — 技能优先级：S3 > S1B2",
+            "fr": "Pour la suite du combat, {P/Demiurge Saeran} est la seule encore en vie — priorité des compétences : S3 > S1B2"
+          }
+        }
+      ],
+      "video": {
+        "platform": "youtube",
+        "id": "Me8K-FL9q68",
+        "title": "D.Saeran solo"
+      },
+      "geasActive": {
+        "bonus": ["46"],
+        "malus": ["16", "60", "7", "106", "55", "96", "58", "20"]
+      }
     }
   ]
 }
