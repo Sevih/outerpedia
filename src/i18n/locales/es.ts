@@ -72,12 +72,12 @@ const es: Record<TranslationKey, string> = {
   'page.equipment.kind.amulet': 'Accesorio',
   'page.equipment.kind.talisman': 'Talismán',
   'page.equipment.kind.set': 'Conjunto de Armadura',
-  'page.equipment.kind.ee': 'Equipo exclusivo',
+  'page.equipment.kind.ee': 'Equipo Exclusivo',
   'equip.tab.weapons': 'Armas',
   'equip.tab.accessories': 'Accesorios',
   'equip.tab.sets': 'Conjuntos de Armadura',
   'equip.tab.talismans': 'Talismanes',
-  'equip.tab.ee': 'Equipo exclusivo',
+  'equip.tab.ee': 'Equipo Exclusivo',
   'equip.filter.all': 'Todos',
   'equip.filter.type': 'Tipo',
   'equip.source.event_shop': 'Tienda de Evento',
@@ -92,7 +92,7 @@ const es: Record<TranslationKey, string> = {
   'equip.ee.upgrade': 'Mejorar',
   'equip.filter.search': 'Buscar por nombre...',
   'equip.detail.configure': 'Configurar',
-  'equip.detail.enhancement': 'Mejorar',
+  'equip.detail.enhancement': 'Mejora',
   'equip.detail.breakthrough': 'Ruptura',
   'equip.detail.reforge': 'Reforjar',
   'equip.detail.available': 'disponible',
@@ -115,15 +115,15 @@ const es: Record<TranslationKey, string> = {
   'equip.detail.mainstat': 'Estadística principal',
   'equip.detail.minmax': 'mín → máx',
   'equip.detail.step': 'Paso',
-  'equip.detail.back': 'Todo el equipo',
+  'equip.detail.back': 'Todos los equipos',
   'equip.detail.piece.helmet': 'Casco',
   'equip.detail.piece.armor': 'Armadura',
   'equip.detail.piece.gloves': 'Guantes',
   'equip.detail.piece.shoes': 'Zapatos',
   'equip.detail.set_effects': 'Efectos de conjunto',
   'equip.detail.source': 'Origen',
-  'page.tierlist.title': 'Lista de Tiers Outerplane',
-  'page.tierlist.meta_title': 'Lista de Tiers Outerplane – {monthYear}',
+  'page.tierlist.title': 'Lista de Tiers de Outerplane',
+  'page.tierlist.meta_title': 'Lista de Tiers de Outerplane – {monthYear}',
   'page.tierlist.description':
     'Lista de tiers de Outerplane clasificando todos los personajes por rol y tipo de contenido. Actualizada {monthYear}.',
   'page.tierlist.other_rankings': 'Otros rankings',
@@ -165,7 +165,7 @@ const es: Record<TranslationKey, string> = {
   'tools.category.info': 'Información',
   'tools.category.media': 'Multimedia',
   // ─── Tools ──────────────────────────────────────────────────────────────
-  'tools.most-used-units': 'Héroes más usados',
+  'tools.most-used-units': 'Unidades más usadas',
   'tools.most-used-units.desc':
     'Descubre qué personajes se recomiendan con más frecuencia en las guías del juego.',
   'tools.most-used-units.guides_count': '{count} guías',
@@ -192,7 +192,7 @@ const es: Record<TranslationKey, string> = {
     'Las estadísticas siguientes se basan solo en compilaciones recomendadas por Evamains.',
   'tools.gear-usage-statistics.tab.weapons': 'Armas',
   'tools.gear-usage-statistics.tab.amulets': 'Accesorios',
-  'tools.gear-usage-statistics.tab.sets': 'Sets',
+  'tools.gear-usage-statistics.tab.sets': 'Conjuntos',
   'tools.gear-usage-statistics.tab.talismans': 'Talismanes',
   'tools.gear-usage-finder': 'Buscador de Uso de Equipo',
   'tools.gear-usage-finder.desc':
@@ -201,7 +201,7 @@ const es: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.step_class': 'Clase',
   'tools.gear-usage-finder.step_mainstat': 'Estadística Principal',
   'tools.gear-usage-finder.step_substats': 'Subestadísticas (opcional)',
-  'tools.gear-usage-finder.step_set': 'Selecciona Conjunto',
+  'tools.gear-usage-finder.step_set': 'Seleccionar Conjunto',
   'tools.gear-usage-finder.mode_reco': 'Recomendado',
   'tools.gear-usage-finder.mode_reco.desc':
     'Solo muestra estadísticas e objetos que aparecen en recomendaciones de construcción. Filtrado estricto de estadística principal.',
@@ -210,15 +210,15 @@ const es: Record<TranslationKey, string> = {
     'Muestra todos los objetos disponibles y sus estadísticas posibles. Los resultados se clasifican según qué tan bien encaja la pieza con cada construcción.',
   'tools.gear-usage-finder.matches': 'personajes que coinciden',
   'tools.gear-usage-finder.no_users': 'Ningún personaje coincide con estos criterios.',
-  'tools.patch-history': 'Parches y Notas del Dev',
+  'tools.patch-history': 'Parches y Notas de Desarrollo',
   'tools.patch-history.desc':
-    'Explora todas las notas de parche, notas del desarrollador, compendio de héroes y más.',
+    'Explora todas las notas de parche, notas de desarrollo, compendio de héroes y más.',
   'tools.patch-history.era.major9': 'Major9 (Oct 2025+)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': 'Actualización',
   'tools.patch-history.type.notice': 'Aviso',
   'tools.patch-history.type.event': 'Evento',
-  'tools.patch-history.type.devnote': 'Nota del Dev',
+  'tools.patch-history.type.devnote': 'Nota de Desarrollo',
   'tools.patch-history.type.known-issue': 'Problema Conocido',
   'tools.patch-history.type.patchnotes': 'Notas de Parche',
   'tools.patch-history.type.compendium': 'Compendio',
@@ -226,7 +226,7 @@ const es: Record<TranslationKey, string> = {
   'tools.patch-history.type.official-4-cut-cartoon': 'Cómic de 4 Viñetas',
   'tools.patch-history.type.probabilities': 'Probabilidades',
   'tools.patch-history.type.world-introduction': 'Intro del Mundo',
-  'tools.patch-history.type.developer-notes': 'Nota del Dev',
+  'tools.patch-history.type.developer-notes': 'Nota de Desarrollo',
   'tools.patch-history.zh_fallback':
     'Este contenido se muestra en inglés porque no está disponible en chino.',
   'tools.patch-history.legacy_en_only':
@@ -268,7 +268,7 @@ const es: Record<TranslationKey, string> = {
   'tools.pull-simulator.never': 'N/A',
   'tools.progress-tracker': 'Rastreador de Progreso',
   'tools.progress-tracker.desc':
-    'Rastrear tu progreso: tareas diarias/semanales/mensuales, compras de tienda y fabricación.',
+    'Rastrea tu progreso: tareas diarias/semanales/mensuales, compras de tienda y fabricación.',
   'tools.wallpapers': 'Fondos de Pantalla',
   'tools.wallpapers.desc': 'Explora y descarga ilustraciones y fondos de pantalla oficiales.',
   'tools.4-comics': 'Cómics de 4 Viñetas',
@@ -305,19 +305,19 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.fusionLevel': 'Nivel de Fusión',
   'tools.hero-tracker.affinity': 'Afinidad',
   'tools.hero-tracker.transcend': 'Trascendencia',
-  'tools.hero-tracker.ee': 'Equipo exclusivo',
+  'tools.hero-tracker.ee': 'Equipo Exclusivo',
   'tools.hero-tracker.eeFusion': 'Fusión EE',
   'tools.hero-tracker.needTitle': 'Materiales necesarios',
-  'tools.hero-tracker.needEmpty': 'Nada pendiente — sigue a un Héroe o sube un objetivo.',
+  'tools.hero-tracker.needEmpty': 'Nada pendiente — sigue a un Héroe o eleva un objetivo.',
   'tools.hero-tracker.gold': 'Oro',
   'tools.hero-tracker.xp': 'Exp. Héroe',
   'tools.hero-tracker.affinityPoints': 'Puntos de Afinidad',
   'tools.hero-tracker.pieces': 'Fragmentos de Héroe',
   'tools.hero-tracker.dupes': 'o {count} duplicados',
   'tools.hero-tracker.giftNoteBonus':
-    'El recuento de regalos asume el regalo favorito del Héroe (+50% Afinidad).',
+    'El recuento de regalos asume el regalo favorito del Héroe (+50% afinidad).',
   'tools.hero-tracker.reset': 'Reiniciar',
-  'tools.hero-tracker.resetConfirm': '¿Limpiar todos los Héroes seguidos?',
+  'tools.hero-tracker.resetConfirm': '¿Limpiar todos los Héroes en seguimiento?',
   'tools.hero-tracker.trackedCount': '{count} seguidos',
   'tools.hero-tracker.shoppingList': 'Lista de compras',
   'tools.hero-tracker.myHeroes': 'Mis Héroes',
@@ -335,13 +335,13 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.importHint':
     'Una exportación JSON de tu cuenta reemplaza el plantel rastreado completo. La configuración se conserva.',
   'tools.hero-tracker.importPick': 'Elige un archivo…',
-  'tools.hero-tracker.importDone': '{count} Héroes importados',
+  'tools.hero-tracker.importDone': '{count} héroes importados',
   'tools.hero-tracker.importUnknown': '{count} entradas omitidas',
   'tools.hero-tracker.importEmpty': 'No hay nada que importar en este archivo',
   'tools.hero-tracker.sort': 'Ordenar',
   'tools.hero-tracker.sortNeed': 'Para farmear',
   'tools.hero-tracker.sortName': 'Nombre',
-  'tools.hero-tracker.noMatch': 'Ningún Héroe rastreado coincide con estos filtros.',
+  'tools.hero-tracker.noMatch': 'Ningún héroe rastreado coincide con estos filtros.',
   'tools.hero-tracker.piecesPremium': 'Premium',
   'tools.hero-tracker.piecesLimited': 'Limitado',
   'tools.hero-tracker.scaleHint': 'clic = ahora · mayús+clic = objetivo',
@@ -350,7 +350,7 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.settings': 'Configuración',
   'tools.hero-tracker.settingsFusion': 'Héroes de Fusión Core',
   'tools.hero-tracker.settingsFusionHint':
-    'Una Fusión Core reemplaza su Héroe base — nunca posees ambos. Elige el que tengas en tu cuenta.',
+    'Una Fusión Core reemplaza su héroe base — nunca posees ambos. Elige el que tengas en tu cuenta.',
   'tools.hero-tracker.base': 'Base',
   'tools.hero-tracker.coreFusion': 'Fusión Core',
   'tools.hero-tracker.alwaysMax': 'Apuntar siempre a valores máximos',
@@ -382,7 +382,7 @@ const es: Record<TranslationKey, string> = {
     'Esta herramienta está en desarrollo. Algunas funciones pueden estar incompletas o cambiar.',
   'tools.team-planner.reset': 'Reiniciar',
   'tools.team-planner.share': 'Compartir',
-  'tools.tier-list-maker': 'Creador de Listas de Tier',
+  'tools.tier-list-maker': 'Creador de Listas de Tiers',
   'tools.tier-list-maker.desc':
     'Crea y comparte tu propia lista de tier de Outerplane — clasifica personajes, equipo exclusivo y jefes, luego comparte un enlace o exporta una imagen.',
   'tools.tier-list-maker.tab.characters': 'Personajes',
@@ -391,7 +391,7 @@ const es: Record<TranslationKey, string> = {
   'tools.tier-list-maker.search': 'Buscar…',
   'tools.tier-list-maker.hint':
     'Arrastra un objeto a un tier — o toca un objeto, luego toca un tier.',
-  'tools.tier-list-maker.title_placeholder': 'Mi Lista de Tier',
+  'tools.tier-list-maker.title_placeholder': 'Mi Lista de Tiers',
   'tools.tier-list-maker.add_row': 'Añadir fila',
   'tools.tier-list-maker.clear_row': 'Vaciar esta fila',
   'tools.tier-list-maker.delete_row': 'Eliminar esta fila',
@@ -405,7 +405,7 @@ const es: Record<TranslationKey, string> = {
   'tools.tier-list-maker.export': 'Exportar PNG',
   'tools.tier-list-maker.no_results': 'No se encontraron objetos.',
   'tools.tier-list-maker.empty_pool': '¡Todo ha sido clasificado!',
-  'tools.tier-list-maker.confirm_reset': '¿Reiniciar la lista de tier completa?',
+  'tools.tier-list-maker.confirm_reset': '¿Reiniciar la lista de tiers completa?',
   'tools.tier-list-maker.confirm_clear_row': '¿Vaciar esta fila?',
   'tools.tier-list-maker.confirm_delete_row': '¿Eliminar esta fila y sus objetos?',
   'tools.tier-list-maker.settings': 'Configuración',
@@ -457,13 +457,13 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.settings.quirk_counteract': 'Contrarrestar Enemigos Fuertes',
   'tools.damage-calculator.settings.quirk_adventure_license': 'Licencia de Aventura',
   // Panel titles
-  'tools.damage-calculator.panel.attacker': 'Dealer de Daño',
+  'tools.damage-calculator.panel.attacker': 'Atacante',
   'tools.damage-calculator.panel.target': 'Objetivo',
   'tools.damage-calculator.panel.result': 'Resultado',
   'tools.damage-calculator.panel.team': 'Equipo',
   // Team panel — 3 ally slots
   'tools.damage-calculator.team.empty': 'Ranura {n} — elige un aliado',
-  'tools.damage-calculator.team.ee_owned': 'Equipo exclusivo poseído',
+  'tools.damage-calculator.team.ee_owned': 'Equipo Exclusivo poseído',
   'tools.damage-calculator.team.ee_plus10': 'Equipo Exclusivo +10',
   'tools.damage-calculator.team.exquisite_death': 'Exquisite Death',
   'tools.damage-calculator.team.absolute_music': 'Absolute Music',
@@ -472,7 +472,7 @@ const es: Record<TranslationKey, string> = {
     'Elige un dealer de daño y un objetivo para calcular el daño.',
   'tools.damage-calculator.result.calculated': 'Daño calculado',
   'tools.damage-calculator.result.no_crit': 'Sin crítico',
-  'tools.damage-calculator.result.debug': 'Desglose debug',
+  'tools.damage-calculator.result.debug': 'Desglose de depuración',
   'tools.damage-calculator.result.pool': 'Pool %',
   'tools.damage-calculator.result.rate': 'Tasa',
   'tools.damage-calculator.result.mitigation': 'Mitigación',
@@ -486,7 +486,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.obs.matched': 'coincidente',
   'tools.damage-calculator.obs.no_baseline': 'sin base',
   'tools.damage-calculator.obs.no_baseline_hint':
-    'Guardado antes de que `calculatedAtSave` se añadiera al esquema de admin — re-guarda en admin para rellenar.',
+    'Guardado antes de que `calculatedAtSave` se añadiera al esquema de admin — vuelve a guardar en admin para rellenar.',
   // Share panel — export / import calc state
   'tools.damage-calculator.share.title': 'Compartir',
   'tools.damage-calculator.share.subtitle':
@@ -497,7 +497,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.share.apply': 'Aplicar',
   'tools.damage-calculator.share.copied': 'Copiado al portapapeles.',
   'tools.damage-calculator.share.copy_fallback':
-    'Portapapeles bloqueado — texto seleccionado, presiona Ctrl+C para copiar.',
+    'Portapapeles bloqueado — texto seleccionado, pulsa Ctrl+C para copiar.',
   'tools.damage-calculator.share.imported': 'Importado correctamente.',
   'tools.damage-calculator.share.imported_with_warnings': 'Importado con advertencias: {warnings}',
   'tools.damage-calculator.share.paste_placeholder': 'Pega un JSON compartido aquí…',
@@ -529,9 +529,9 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.common.select': '— seleccionar —',
   'tools.damage-calculator.common.no_matches': 'Sin coincidencias',
   'tools.damage-calculator.common.clear_slot': 'Limpiar ranura',
-  'tools.damage-calculator.common.clear_all': 'limpiar todo',
-  'tools.damage-calculator.common.reset': 'reiniciar',
-  'tools.damage-calculator.common.change': 'cambiar',
+  'tools.damage-calculator.common.clear_all': 'Limpiar todo',
+  'tools.damage-calculator.common.reset': 'Reiniciar',
+  'tools.damage-calculator.common.change': 'Cambiar',
   // Target picker labels
   'tools.damage-calculator.target.category': 'Categoría',
   'tools.damage-calculator.target.season': 'Temporada',
@@ -559,7 +559,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.context.cond.caster_has_not_buff': 'El lanzador no tiene bono',
   'tools.damage-calculator.context.cond.caster_enemy_team_has_buff':
     'El equipo enemigo tiene un bono',
-  'tools.damage-calculator.context.cond.caster_hprate_over': 'Vida superior al {n}%',
+  'tools.damage-calculator.context.cond.caster_hprate_over': 'Vida superior al {n} %',
   'tools.damage-calculator.context.cond.target_has_buff': 'El objetivo tiene un bono',
   'tools.damage-calculator.context.cond.target_has_not_buff': 'El objetivo no tiene bono',
   // Buff-referencing variants: {buff} becomes an inline effect tag (icon+name)
@@ -572,8 +572,8 @@ const es: Record<TranslationKey, string> = {
     'El equipo enemigo tiene {buff}',
   'tools.damage-calculator.context.cond_ref.target_has_buff': 'El objetivo tiene {buff}',
   'tools.damage-calculator.context.cond_ref.target_has_not_buff': 'El objetivo no tiene {buff}',
-  'tools.damage-calculator.context.cond.target_hprate_over': 'Vida del objetivo superior al {n}%',
-  'tools.damage-calculator.context.cond.target_hprate_under': 'Vida del objetivo inferior al {n}%',
+  'tools.damage-calculator.context.cond.target_hprate_over': 'Vida del objetivo superior al {n} %',
+  'tools.damage-calculator.context.cond.target_hprate_under': 'Vida del objetivo inferior al {n} %',
   'tools.damage-calculator.context.cond.target_run_counter':
     'Condición de número de acciones del objetivo',
   'tools.damage-calculator.context.cond.attacker_element_win':
@@ -589,7 +589,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.floor_label': 'Piso {n}',
   'tools.damage-calculator.target.boss_mechanics': 'Mecánicas del jefe',
   'tools.damage-calculator.target.boss_enrage_badge': 'Enfurecimiento',
-  'tools.damage-calculator.target.lv_prefix': 'Nv',
+  'tools.damage-calculator.target.lv_prefix': 'Nv.',
   'tools.damage-calculator.target.pve_label': 'Contrarrestar enemigos fuertes',
   // Story visual picker (family titles come from the game glossary)
   'tools.damage-calculator.target.back': 'Atrás',
@@ -611,21 +611,21 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.stat.RES': 'RES',
   'tools.damage-calculator.stat.PEN': 'PEN',
   'tools.damage-calculator.stat.DR': 'Daño recibido -',
-  'tools.damage-calculator.stat.DMG_INC': 'Daño ↑',
+  'tools.damage-calculator.stat.DMG_INC': 'Daño↑',
   'tools.damage-calculator.stat.label': 'Estadísticas',
   // Mode tabs (top-of-page toggle)
   'tools.damage-calculator.tab.single': 'Individual',
   'tools.damage-calculator.tab.compare': 'Comparar 3 builds',
   // Attacker panel labels
-  'tools.damage-calculator.attacker.pick': 'Elige un dealer de daño…',
+  'tools.damage-calculator.attacker.pick': 'Elige un atacante…',
   'tools.damage-calculator.attacker.affinity': 'Afinidad',
   'tools.damage-calculator.attacker.crit': 'CRIT',
   'tools.damage-calculator.attacker.burst_label': 'Ráfaga',
   'tools.damage-calculator.attacker.burst_off': 'Desactivado',
   'tools.damage-calculator.attacker.df': 'Daño Hab',
   'tools.damage-calculator.attacker.additional_attack': 'Ataque adicional',
-  'tools.damage-calculator.attacker.scaling_main': 'Stat de escalado principal',
-  'tools.damage-calculator.attacker.scaling_secondary': 'Stat de escalado secundario',
+  'tools.damage-calculator.attacker.scaling_main': 'Estadística de escalado principal',
+  'tools.damage-calculator.attacker.scaling_secondary': 'Estadística de escalado secundaria',
   // Attacker panel — conditional damage modifiers (drives pool_cond buffs)
   'tools.damage-calculator.attacker.cond.label': 'Modificadores condicionales',
   'tools.damage-calculator.attacker.cond.target_debuffs': 'Debuffs del objetivo',
@@ -652,8 +652,8 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.equipment.cf': 'Fusión Core',
   'tools.damage-calculator.equipment.base': 'Base',
   'tools.damage-calculator.equipment.passive_main': 'Principal',
-  'tools.damage-calculator.equipment.passive_lv0': 'Niv0',
-  'tools.damage-calculator.equipment.passive_lv10': 'Niv10',
+  'tools.damage-calculator.equipment.passive_lv0': 'Niv. 0',
+  'tools.damage-calculator.equipment.passive_lv10': 'Niv. 10',
   'tools.damage-calculator.equipment.tier_2pc': '2-pc',
   'tools.damage-calculator.equipment.tier_4pc': '4-pc',
   // Equipment picker modal titles
@@ -719,7 +719,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.loading': 'cargando tablas de daño…',
   'tools.damage-calculator.report.tables_error':
     'las tablas de daño no se cargaron — actualiza la página para reintentar',
-  'tools.damage-calculator.report.dot': 'Daño en el tiempo',
+  'tools.damage-calculator.report.dot': 'Daño a lo largo del tiempo',
   'tools.damage-calculator.report.dot_tick': '{n} por turno',
   'tools.damage-calculator.report.dot_apply': 'probabilidad de aplicar {p}%',
   'tools.damage-calculator.report.critical': 'Crítico',
@@ -743,7 +743,7 @@ const es: Record<TranslationKey, string> = {
   // On affichait « 3 boss mer–ven + 1 le samedi » — c'était faux.
   'guides.singularity.week.title': 'Activo esta semana',
   'guides.singularity.week.title_mobile': 'Activo ahora',
-  'guides.singularity.week.live': 'En directo ahora · {dow}',
+  'guides.singularity.week.live': 'En vivo ahora · {dow}',
   'guides.singularity.timer.next': 'Próximo reinicio en {time}',
   'guides.singularity.timer.opens': 'Se abre en {time}',
   'guides.singularity.week.tagline':
@@ -762,8 +762,8 @@ const es: Record<TranslationKey, string> = {
 
   // Statut de saison d'un boss (cartes JC/WB/GR) — jointure par monstre combattu
   'guides.season.live': 'Activo hasta {date}',
-  'guides.season.next': 'Regresa {date}',
-  'guides.season.last': 'Última temporada {date}',
+  'guides.season.next': 'Regresa el {date}',
+  'guides.season.last': 'Última temporada: {date}',
 
   'guides.tips.tactical': 'Consejos Tácticos',
   // Gabarits de titre de section : le SUJET (perso / élément / effet) vient de
@@ -848,7 +848,7 @@ const es: Record<TranslationKey, string> = {
     'Aviso legal, descargo de responsabilidad y política de uso de contenido para Outerpedia — un proyecto fan no oficial de Outerplane.',
   'page.coupons.title': 'Códigos Promocionales Activos de Outerplane',
   'page.coupons.description':
-    'Todos los códigos promocionales activos de Outerplane. Canjéalos en el juego para obtener recompensas gratis: éter, entradas de recluta y más.',
+    'Todos los códigos promocionales activos de Outerplane. Canjéalos en el juego para obtener recompensas gratis: éter, entradas de reclutamiento y más.',
   'coupons.expired': 'Códigos Expirados',
   'coupons.active': 'Activo',
   'coupons.upcoming': 'Próximamente',
@@ -862,7 +862,7 @@ const es: Record<TranslationKey, string> = {
   'home.section.banners': 'Banners activos',
   'home.section.codes': 'Códigos de Promo Activos',
   'home.section.beginner': '¿Nuevo en Outerplane?',
-  'home.beginner.faq': 'FAQ para Principiantes',
+  'home.beginner.faq': 'FAQ para principiantes',
   'home.beginner.faq.desc': 'preguntas y respuestas frecuentes para nuevos jugadores.',
   'home.beginner.freeheroes': 'Héroes Gratis y Banners de Inicio',
   'home.beginner.freeheroes.desc': 'a quién invocar y cómo empezar eficientemente.',
@@ -903,7 +903,7 @@ const es: Record<TranslationKey, string> = {
   'buff.type.special-ecology': 'Ecología +30%',
   'buff.type.special-identification': 'Identificación +30%',
   'buff.type.doppelganger': 'Piezas +1',
-  'buff.type.kate-workshop': 'Oro Artesanía -30%',
+  'buff.type.kate-workshop': 'Oro de fabricación -30%',
   'buff.type.story-survey': 'Encuesta x2',
   'buff.type.evolution-stone': 'Piedra Evo x2',
   'buff.type.bounty-hunter': 'Recompensa x2',
@@ -927,7 +927,7 @@ const es: Record<TranslationKey, string> = {
   'settings.title': 'Configuración del sitio',
   'settings.animated': 'Retratos animados',
   'settings.animated_note':
-    'Reproduce el efecto de carta del juego en retratos que lo tengan. Puede usar más recursos.',
+    'Reproduce el efecto de carta del juego en retratos que lo tengan. Puede consumir más recursos.',
   'settings.skins': 'Aspectos mostrados',
   'settings.skins_note':
     'Elige qué aspecto muestra cada héroe en el sitio. Se guarda en este navegador.',
@@ -949,7 +949,7 @@ const es: Record<TranslationKey, string> = {
   'nav.guides.short': 'Guías',
 
   // Footer
-  'footer.tagline': 'Base de datos no oficial de Outerplane.',
+  'footer.tagline': 'Base de datos hecha por fans de Outerplane.',
   'footer.legal_notice': 'Aviso Legal',
   'footer.official_website': 'Sitio Oficial',
   'footer.social.github': 'GitHub',
@@ -995,7 +995,7 @@ const es: Record<TranslationKey, string> = {
 
   // Classes
   'sys.class.defender': 'Defensor',
-  'sys.class.striker': 'Guerrero',
+  'sys.class.striker': 'Atacante',
   'sys.class.ranger': 'Ranger',
   'sys.class.mage': 'Mago',
   'sys.class.healer': 'Sanador',
@@ -1033,7 +1033,7 @@ const es: Record<TranslationKey, string> = {
     'Una mente maestra en batalla que debilita enemigos con una variedad de efectos adicionales.',
   'sys.subclass.info.vanguard': 'Un líder que domina al enemigo con alta Velocidad.',
   'sys.subclass.info.tactician':
-    'Un maestro estratega que toma ventaja en batalla otorgando bonos a aliados.',
+    'Un maestro estratega que obtiene ventaja en batalla otorgando bonos a aliados.',
   'sys.subclass.info.sweeper':
     'Un especialista en combate que espera pacientemente una oportunidad.',
   'sys.subclass.info.phalanx':
@@ -1086,7 +1086,7 @@ const es: Record<TranslationKey, string> = {
   'characters.sort.label': 'Ordenar',
   'characters.sort.name': 'Nombre',
   'characters.sort.release': 'Lanzamiento',
-  'characters.sort.reverse': 'Toca para invertir el orden',
+  'characters.sort.reverse': 'Haz clic para invertir el orden',
 
   // Characters common
 
@@ -1107,8 +1107,8 @@ const es: Record<TranslationKey, string> = {
   'characters.effectsGroups.debuff.utility': 'Debuffs de Utilidad',
   'characters.effectsGroups.buff.unique': 'Bonos Únicos',
   'characters.effectsGroups.debuff.unique': 'Debuffs Únicos',
-  'characters.effectsGroups.buff.other': 'Otro',
-  'characters.effectsGroups.debuff.other': 'Otro',
+  'characters.effectsGroups.buff.other': 'Otros',
+  'characters.effectsGroups.debuff.other': 'Otros',
 
   // Characters tags
 
@@ -1160,7 +1160,7 @@ const es: Record<TranslationKey, string> = {
     'Probabilidad de efecto, duración del efecto y reducción de enfriamiento.',
   'page.character.skill.priority_rule_3': 'Aumentos de daño (solo DPS)',
   'page.character.skill.priority_rule_chain':
-    'La pasiva de Cadena puede dejarse en Nivel 2 hasta mucho después, el aumento de daño de Barrera de Debilidad en Nivel 5 es la única parte interesante, así que puedes ahorrar manuales de habilidad aquí hasta que las habilidades más importantes estén lisas.',
+    'La pasiva de Cadena puede dejarse en Nivel 2 hasta mucho después, el aumento de daño de Barrera de Debilidad en Nivel 5 es la única parte interesante, así que puedes ahorrar manuales de habilidad aquí hasta que las habilidades más importantes estén listas.',
   'page.character.ee.effect': 'Efecto',
   'page.character.ee.effect_max': 'Efecto (Niv.10)',
   'page.character.ee.main_stat': 'Estadística Principal',
@@ -1181,7 +1181,7 @@ const es: Record<TranslationKey, string> = {
   'page.character.gear.verdict.level': 'Nivel',
   'page.character.gear.verdict.calc_line': '+{pct}% × {base} = +{equiv} vs +{flat} fijo',
   'page.character.gear.verdict.calc_note':
-    'Por mejora en equipo 6★. Base en Niv.{level} = estadísticas + evoluciones{awak} — equipo equipado, trascendencia y bonos no cambian la respuesta.',
+    'Por mejora en equipo 6★. Base en Niv.{level} = estadísticas + evoluciones{awak} — equipo equipado, trascendencia y bonificaciones no cambian la respuesta.',
   'page.character.gear.verdict.calc_breakeven': '% gana por encima de {list}.',
   'page.character.gear.verdict.calc_awak': ' + peculiaridades',
   'page.character.gear.verdict.pct_wins': '% da más por mejora',
@@ -1194,13 +1194,13 @@ const es: Record<TranslationKey, string> = {
   'page.character.weight': 'Peso',
   'page.character.stats.title': 'Estadísticas Base',
   'page.character.stats.no_data': 'Sin estadísticas disponibles',
-  'page.character.stats.limit_break_cost': 'Costo de Límite de Ruptura',
+  'page.character.stats.limit_break_cost': 'Costo de Ruptura de Límite',
   'page.character.stats.codex': 'Códice',
   'page.character.stats.quirks': 'Peculiaridades',
 
   // Monad Gate
   'monad.rewards': 'Premios',
-  'monad.rewards.firstClear': 'Bono de Primera Limpieza',
+  'monad.rewards.firstClear': 'Bonificación de primer clear',
   'monad.trueEndingChoices': 'Opciones del Final Verdadero',
   'monad.ui.trueEndingPath': 'Ruta del Final Verdadero',
   'monad.ui.compact': 'Compacto',
@@ -1258,9 +1258,9 @@ const es: Record<TranslationKey, string> = {
   'comics.description':
     'Explora los cómics oficiales de 4 viñetas de Outerplane. Haz clic en cualquier imagen para ver en tamaño completo.',
   'comics.credit': 'ⓒ VAGAMES Inc. & Major9 Todos los derechos reservados.',
-  'comics.lang.EN': 'English',
-  'comics.lang.JP': 'Japanese',
-  'comics.lang.KR': 'Korean',
+  'comics.lang.EN': 'Inglés',
+  'comics.lang.JP': 'Japonés',
+  'comics.lang.KR': 'Coreano',
   // ─── Progress Tracker ───────────────────────────────────────────────────
   'progress.daily': 'Progreso Diario',
   'progress.weekly': 'Progreso Semanal',
@@ -1291,7 +1291,7 @@ const es: Record<TranslationKey, string> = {
   'progress.autoSeasonalLive': 'Activo',
   'progress.autoSeasonalOff': 'Cerrado',
   'progress.preciseCraft': 'Elaboración Precisa',
-  'progress.preciseCraftItem': 'Elaboración Precisa (recarga 30 días)',
+  'progress.preciseCraftItem': 'Elaboración Precisa (recarga de 30 días)',
   'progress.preciseCraftTimerDesc': 'Establece los días restantes si ya elaboraste recientemente.',
   'progress.daysRemaining': 'días restantes',
   'progress.availableIn': 'Disponible en',
@@ -1305,15 +1305,15 @@ const es: Record<TranslationKey, string> = {
   'progress.task.guild-raid': 'Incursión de Gremio',
   'progress.task.world-boss': 'Jefe Mundial',
   'progress.task.terminus-isle': 'Exploración de Isla Terminal',
-  'progress.task.hypnotic-frog-hall': 'Sala Rana Hipnótica',
-  'progress.task.ark-raid': 'Pase Raid Ark',
+  'progress.task.hypnotic-frog-hall': 'Salón de Ranas Hipnóticas',
+  'progress.task.ark-raid': 'Raid Ark',
   'progress.task.defeat-doppelganger': 'Derrota al Doppelgänger',
   'progress.task.special-request-ecology': 'Solicitud especial: Estudio de Ecología',
   'progress.task.special-request-identification': 'Solicitud especial: Identificación',
   'progress.task.story-hard': 'Historia (Difícil)',
   'progress.task.elemental-tower': 'Torre Elemental',
   'progress.task.memorial-match': 'Combate Conmemorativo',
-  'progress.task.ad-stamina': 'Vigor por anuncio',
+  'progress.task.ad-stamina': 'Vigor por Anuncio',
   'progress.task.dimensional-singularity': 'Singularidad Dimensional (Mié–Sáb)',
   'progress.task.shop-daily-free-gift': 'Regalo gratis diario',
   'progress.task.shop-weekly-free-gift': 'Regalo gratis semanal',
@@ -1345,7 +1345,7 @@ const es: Record<TranslationKey, string> = {
   'progress.allRegularHeroesSixStarDesc':
     'Oculta Derrota al Doppelgänger de las tareas diarias (solo útil al subir héroes regulares a 6★)',
   'progress.category.tasks': 'Tareas',
-  'progress.category.craft': 'Crafting',
+  'progress.category.craft': 'Fabricación',
   'progress.category.shop': 'Tienda',
   'progress.shop.daily-weekly-monthly': 'Diario/Semanal/Mensual',
   'progress.shop.adventurer-shop': 'Tienda del Aventurero',
@@ -1356,13 +1356,13 @@ const es: Record<TranslationKey, string> = {
   'progress.shop.joint-challenge': 'Desafío Conjunto',
   'progress.shop.friendship-point': 'Punto de Amistad',
   'progress.shop.arena-shop': 'Tienda de Arena',
-  'progress.shop.star-memory': 'Tienda Memoria Estrella',
+  'progress.shop.star-memory': 'Tienda de Memoria Estrella',
   'progress.shop.guild': 'Gremio',
   'progress.shop.guild-shop': 'Tienda de Gremio',
   'progress.shop.daily-products': 'Productos Diarios',
   'progress.shop.weekly-products': 'Productos Semanales',
   'progress.shop.world-boss': 'Tienda Jefe Mundial',
-  'progress.shop.adventure-license': 'Tienda Licencia Aventura',
+  'progress.shop.adventure-license': 'Tienda de Licencia de Aventura',
   'progress.shop.survey-hub': 'Centro de Encuestas',
   'progress.craft.kates-workshop': 'Taller de Kate',
   'progress.dangerZone': 'Zona Peligrosa',
@@ -1370,7 +1370,7 @@ const es: Record<TranslationKey, string> = {
   'progress.clearDataDesc':
     'Esto borrará todos los datos del rastreador de progreso, incluidos los ajustes. Úsalo si encuentras problemas.',
   'progress.clearDataConfirm': '¿Seguro que quieres borrar todos los datos? No se puede deshacer.',
-  'progress.settings.tab.display': 'Pantalla',
+  'progress.settings.tab.display': 'Visualización',
   'progress.settings.tab.game': 'Juego',
   'progress.settings.tab.content': 'Contenido',
   'progress.settings.tab.craft': 'Elaboración',
@@ -1402,7 +1402,7 @@ const es: Record<TranslationKey, string> = {
   'tower.group_random': 'Pisos aleatorios',
   'tower.restr_ban': 'Prohibido',
   'tower.restr_force': 'Requerido',
-  'tower.restr_clear': 'Completar',
+  'tower.restr_clear': 'Restablecer',
 };
 
 export default es;

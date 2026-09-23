@@ -43,7 +43,6 @@
 > Le code sait six langues depuis le 23/09 (cf. DONE) ; ce qui suit est ce qui
 > reste ENTRE ce commit et un `es.outerpedia.com` réellement servi.
 
-- [ ] **Relire `src/i18n/locales/es.ts`** — traduit par Claude Haiku le 23/09 (1 168 clés, glossaire tiré de la colonne `Spanish` du jeu, variables et balises vérifiées clé par clé). Relecture humaine à faire au fil de l'eau ; `keys.test.ts` garantit la structure, pas le sens.
 - [ ] **Infra `es.outerpedia.com`** (sevih-tool) — dans CET ordre, cf.
       `docs/nuage-orange.md` : (1) régénérer le certificat d'origine Cloudflare
       avec `es.outerpedia.com` (il énumère, pas de joker à cause de `zh`) et le
@@ -60,12 +59,6 @@
       ce serait une septième entrée dans `LANGUAGES` + `GAME_LANGS`, une locale
       UI de plus, un sous-domaine de plus (et la question du nuage gris, comme
       `zh`). Pas à l'ordre du jour, tracé pour ne pas le redécouvrir.
-- [ ] **Noms courts en français et en espagnol** : les 10 noms courts curés
-      n'ont ni `fr` ni `es` (les sites fr/es replient sur l'abréviation
-      anglaise, « S.Regina »). Le test des cartes a coincé « Flic de la canicule
-      Delta » (2000121) le 23/09 — réglé par un `en: "H.Delta"` dans le style
-      des autres, pas par un nom court français : à curer via
-      `/admin/tools/short-names` quand on relit les fiches fr/es.
 - [ ] **Doubleurs** : le jeu n'a pas de doublage FR/ES ; la fiche affiche le
       doubleur ANGLAIS sur les sites fr/es (colonne du jeu), vide pour zh (le
       jeu dit « 0 »). Vérifier le rendu sur une fiche une fois promu — si un
