@@ -31,6 +31,7 @@ import {
   parseTarget,
   rewardOptions,
   saveCouponList,
+  searchRewards,
   searchVideos,
   videoTargets,
   type ComicUpload,
@@ -94,6 +95,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/comics') {
     const { lang, files } = await body<{ lang: string; files: ComicUpload[] }>(req);
     json(res, await addComics(lang as (typeof COMIC_LANGS)[number], files));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/rewards') {
+    // Cherché ICI, pas dans la page : le classement par pertinence est celui du
+    // picker de l'admin, et une seule copie ne peut pas diverger de l'autre.
+    json(res, { hits: searchRewards(url.searchParams.get('q') ?? '') });
     return;
   }
 

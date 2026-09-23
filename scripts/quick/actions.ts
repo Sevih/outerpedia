@@ -31,6 +31,7 @@ import { basename, resolve, sep } from 'node:path';
 import { loadCoupons, saveCoupons, type PromoCode } from '@/lib/admin/promo-banner-store';
 import { publishCoupons } from '@/lib/admin/runtime-publish';
 import { catalogOptions } from '@/lib/data/item-catalog';
+import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
 import { loadCuratedCharacters } from '@/lib/data/curated';
@@ -121,6 +122,16 @@ export interface RewardOption {
 /** Catalogue des récompenses, allégé pour le sélecteur (items + monnaies). */
 export function rewardOptions(): RewardOption[] {
   return catalogOptions().map((o) => ({ id: o.id, name: o.name, icon: o.icon }));
+}
+
+/**
+ * Recherche du sélecteur, SERVIE — le classement par pertinence vit dans
+ * `item-search`, avec le picker de l'admin. La page ne refiltre pas la liste de
+ * son côté : c'est comme ça que « Gold » avait fini sous vingt coffres ici
+ * alors que l'admin savait déjà le trier.
+ */
+export function searchRewards(query: string): RewardOption[] {
+  return rankItemMatches(rewardOptions(), query);
 }
 
 export const currentCoupons = (): PromoCode[] => loadCoupons();

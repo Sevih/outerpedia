@@ -3,6 +3,7 @@
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import type { ItemOption } from '@/lib/data/items';
+import { rankItemMatches } from '@/lib/data/item-search';
 import { SearchPicker } from './SearchPicker';
 
 const inline = (o: ItemOption) => ({
@@ -38,22 +39,6 @@ function Tile({ o }: { o: ItemOption }) {
   );
 }
 
-/** Rang : nom exact > commence par > contient ; puis nom le plus court. Sans ça,
- * une monnaie courte (« Gold ») est noyée sous les coffres qui la contiennent. */
-function searchItems(options: ItemOption[], query: string): ItemOption[] {
-  const q = query.toLowerCase();
-  const rank = (name: string) => {
-    const n = name.toLowerCase();
-    if (n === q) return 0;
-    if (n.startsWith(q)) return 1;
-    return 2;
-  };
-  return options
-    .filter((o) => o.name.toLowerCase().includes(q))
-    .sort((a, b) => rank(a.name) - rank(b.name) || a.name.length - b.name.length)
-    .slice(0, 20);
-}
-
 /**
  * Sélecteur d'item : recherche par nom dans la data items (id stocké), aperçu
  * `ItemInline`. Une valeur non résolue (id inconnu / reste d'un vieil import par
@@ -74,7 +59,7 @@ export function ItemPicker({
       value={value}
       idOf={(o) => o.id}
       nameOf={(o) => o.name}
-      search={searchItems}
+      search={rankItemMatches}
       className="min-w-56 flex-1"
       renderIcon={(o) => (o.icon ? <Tile o={o} /> : <span aria-hidden>🪙</span>)}
       renderSelected={(o) =>

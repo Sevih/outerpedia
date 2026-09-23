@@ -485,11 +485,20 @@
       }
 
       let chosen = null;
-      $('c-reward').oninput = () => {
-        const q = $('c-reward').value.trim().toLowerCase();
+      // Le classement vit côté serveur (`/api/rewards` → `item-search`, partagé
+      // avec le picker de l'admin) : filtrer ici redonnerait l'ordre du
+      // CATALOGUE, où « Gold » arrive après les vingt coffres qui le contiennent
+      // et se retrouve coupé de la liste.
+      let seq = 0;
+      $('c-reward').oninput = async () => {
+        const q = $('c-reward').value.trim();
         chosen = null;
         if (q.length < 2) return ($('c-results').hidden = true);
-        const hits = state.rewards.filter((r) => r.name.toLowerCase().includes(q)).slice(0, 20);
+        // Une frappe rapide lance plusieurs requêtes : seule la DERNIÈRE compte,
+        // sinon une réponse en retard réaffiche la recherche précédente.
+        const mine = ++seq;
+        const { hits } = await (await fetch(`/api/rewards?q=${encodeURIComponent(q)}`)).json();
+        if (mine !== seq) return;
         $('c-results').innerHTML = hits
           .map((r) => `<div data-id="${r.id}">${r.name}</div>`)
           .join('');

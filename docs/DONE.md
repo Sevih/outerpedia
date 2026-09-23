@@ -5,6 +5,26 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-23
+
+- **« Gold » était introuvable dans le sélecteur de récompenses de `pnpm quick`**,
+  exactement comme il l'avait été dans le panneau admin. La page refiltrait la
+  liste de son côté — ordre du CATALOGUE, coupé à 20 — or 21 entrées contiennent
+  « gold » et la monnaie `SYS_ASSET_GOLD` est la dernière : les items numérotés
+  passent avant les `SYS_ASSET_*`. La correspondance exacte était donc la seule
+  introuvable, noyée sous « Gold & Stamina Chest » et les douze « Antiparticle
+  Gold Chest ». Le défaut n'a aucun symptôme : la liste se remplit, elle est
+  juste amputée de ce qu'on cherche. `ItemPicker` l'avait corrigé POUR LUI SEUL
+  (« Gold » nommément cité dans son commentaire), d'où la rechute à l'identique
+  dès qu'un second outil a cherché dans le même catalogue. Le classement
+  (exact > commence par > contient, puis nom le plus court) est donc extrait en
+  `lib/data/item-search`, d'où l'admin l'importe et que `quick` SERT
+  (`GET /api/rewards?q=`) au lieu de refiltrer — deux copies ne pouvant que
+  diverger une troisième fois. La page garde un compteur de séquence : une
+  réponse en retard ne réaffiche pas la recherche précédente. « Stamina » avait
+  le même trou, fermé du même coup. Tests sur la donnée committée : la
+  correspondance exacte est servie en tête, sous le plafond.
+
 ## 2026-09-21
 
 - **Le raccourci Windows de `pnpm quick` n'avait jamais pu être posé** — l'icône
