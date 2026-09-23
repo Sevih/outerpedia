@@ -17,7 +17,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { formatJson } from './lib/json';
-import { applyRetention, promote, stripUnintegratedCharacters } from './promote';
+import { applyRetention, completeLangDicts, promote, stripUnintegratedCharacters } from './promote';
+import { emptyDict } from './lib/lang';
 
 let src: string;
 let dst: string;
@@ -77,6 +78,24 @@ describe('applyRetention — cœur pur de la rétention', () => {
   it('une valeur retenue NON-objet passe telle quelle (pas de marquage possible)', () => {
     const { merged } = applyRetention({ n: 7 }, {});
     expect(merged.n).toBe(7);
+  });
+
+  it('complète à VIDE les langues apparues depuis, dans les dicts retenus seulement', () => {
+    // Entité produite avant le 23/09/2026 : 4 langues. Le validé ne doit porter
+    // qu'UNE forme de LangDict — sinon le JSON committé ne compile plus.
+    const old = { name: { en: 'Ragnakeus', jp: 'ラグナケウス', kr: '라그나', zh: '拉格' }, hp: 1 };
+    const { merged } = applyRetention({ old }, { fresh: { hp: 4 } });
+    expect(merged.old).toEqual({
+      name: { ...emptyDict(), en: 'Ragnakeus', jp: 'ラグナケウス', kr: '라그나', zh: '拉格' },
+      hp: 1,
+      retired: true,
+    });
+    // Un objet qui n'a PAS la forme d'un dict de langue est laissé tel quel.
+    expect(completeLangDicts({ en: 'x', level: 3 })).toEqual({ en: 'x', level: 3 });
+    expect(completeLangDicts({ jp: 'x' })).toEqual({ jp: 'x' }); // sans `en` : pas un dict
+    expect(completeLangDicts([{ desc: { en: 'a' } }])).toEqual([
+      { desc: { ...emptyDict(), en: 'a' } },
+    ]);
   });
 });
 

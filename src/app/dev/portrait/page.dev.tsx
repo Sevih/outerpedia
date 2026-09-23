@@ -25,6 +25,7 @@ import { Portrait } from '@/components/character/Portrait';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
 import { loadShortNames } from '@/lib/data/short-names';
 import { lRec } from '@/lib/i18n/localize';
+import { DEFAULT_LANG, GAME_LANGS } from '@/lib/i18n/config';
 import type { Character } from '@contracts';
 
 export const metadata = { title: 'Portrait du jeu' };
@@ -145,7 +146,7 @@ const BEST_FIT_CASES: { k: string; c: Character; n: string; p?: string }[] = [
     // on le force ici, et seulement ici, pour éprouver le pire cas de réduction.
     p: lRec(LONGEST_TITLE.nickname, 'en') || undefined,
   },
-  ...(['jp', 'kr', 'zh'] as const).map((lang) => ({
+  ...GAME_LANGS.filter((lang) => lang !== DEFAULT_LANG).map((lang) => ({
     k: `le plus long en ${lang}`,
     c: LONGEST,
     n: lRec(LONGEST.name, lang) || name(LONGEST),

@@ -6,21 +6,28 @@
  * Tourne SANS `.gamedata` (entrées synthétiques).
  */
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '../lib/lang';
 import type { EffectShape } from '../lib/effects';
 import { buildEeEffects, entryFor, type EeEffectsInput } from './ee-effects';
 
 const GLOSSARY: Pick<EeEffectsInput, 'statNames' | 'effects' | 'byTooltip' | 'byLabel'> = {
   statNames: {
-    pierce_power_rate: { en: 'Penetration', jp: '貫通力', kr: '관통력', zh: '穿透力' },
-    speed: { en: 'Speed', jp: '速度', kr: '속도', zh: '速度' },
+    pierce_power_rate: {
+      ...emptyDict(),
+      en: 'Penetration',
+      jp: '貫通力',
+      kr: '관통력',
+      zh: '穿透力',
+    },
+    speed: { ...emptyDict(), en: 'Speed', jp: '速度', kr: '속도', zh: '速度' },
   },
   effects: new Map([
     [
       'combat_readiness',
       {
         id: 'combat_readiness',
-        name: { en: 'Combat Readiness', jp: '', kr: '', zh: '' },
-        desc: { en: '', jp: '', kr: '', zh: '' },
+        name: { ...emptyDict(), en: 'Combat Readiness' },
+        desc: emptyDict(),
         icon: '',
         isDebuff: false,
         origin: 'tooltip' as const,
@@ -179,7 +186,7 @@ describe('buildEeEffects — assemblage par porteur', () => {
     ...GLOSSARY,
     ee: {
       '900001': {
-        name: { en: 'Test EE', jp: '', kr: '', zh: '' },
+        name: { ...emptyDict(), en: 'Test EE' },
         grade: 'unique',
         star: 5,
         icon: '',
@@ -195,8 +202,8 @@ describe('buildEeEffects — assemblage par porteur', () => {
     },
     passives: {
       p1: {
-        name: { en: '', jp: '', kr: '', zh: '' },
-        desc: { en: '', jp: '', kr: '', zh: '' },
+        name: emptyDict(),
+        desc: emptyDict(),
         values: [],
         levels: [],
         icon: '',
@@ -204,8 +211,8 @@ describe('buildEeEffects — assemblage par porteur', () => {
         effects: [stat()],
       },
       p2: {
-        name: { en: '', jp: '', kr: '', zh: '' },
-        desc: { en: '', jp: '', kr: '', zh: '' },
+        name: emptyDict(),
+        desc: emptyDict(),
         values: [],
         levels: [],
         icon: '',

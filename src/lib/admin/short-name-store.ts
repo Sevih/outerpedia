@@ -9,9 +9,9 @@ import type { LocalizedText } from '@contracts';
 import { writeJson } from '@datagen/lib/json';
 import { loadShortNames } from '@/lib/data/short-names';
 import { withStoreLock } from '@/lib/admin/store-lock';
+import { LANGS } from '@/lib/i18n/config';
 
 const PATH = resolve(process.cwd(), 'data/curated/short-names.json');
-const LANGS = ['en', 'jp', 'kr', 'zh', 'fr'] as const;
 
 /** Ne garde que les langues renseignées (trim). */
 function clean(name: LocalizedText): LocalizedText {

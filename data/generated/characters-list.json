@@ -4041,7 +4041,7 @@
         "debuff": ["BT_DOT_BLEED", "BT_REMOVE_BUFF"]
       },
       "s2": {
-        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE", "TRUE_PUREBLOODS_DOMINION"],
         "debuff": ["BT_ACTION_GAUGE", "BT_DOT_BLEED", "BT_EXTEND_DEBUFF", "WEAKNESS_GAUGE_DAMAGE"]
       },
       "ultimate": {

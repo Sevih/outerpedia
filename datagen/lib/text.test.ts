@@ -10,16 +10,20 @@ const row: Row = {
   Japanese: 'こんにちは',
   China_Simplified: '你好',
   China_Traditional: '你好', // colonne ignorée (zh = simplifié)
+  Spanish: 'Hola',
+  French: ' Bonjour ', // livré le 23/09/2026 avec l'espagnol — normalisé comme les autres
 };
 
 describe('getLangTexts', () => {
-  it('extrait les 4 langues officielles et normalise', () => {
+  it('extrait toutes les langues officielles et normalise', () => {
     const d = getLangTexts(row);
     expect(d).toEqual({
       en: "Hello's", // trim + apostrophe droite
       jp: 'こんにちは',
       kr: '안녕',
       zh: '你好',
+      fr: 'Bonjour',
+      es: 'Hola',
     } satisfies LangDict);
   });
 

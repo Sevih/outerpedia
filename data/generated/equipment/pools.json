@@ -7704,7 +7704,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -7730,7 +7732,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -7756,7 +7760,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -7782,7 +7788,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -7808,7 +7816,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -7834,7 +7844,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -7860,7 +7872,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -7886,7 +7900,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -7912,7 +7928,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -7938,7 +7956,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -7964,7 +7984,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -7990,7 +8012,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -8016,7 +8040,9 @@
         "en": "Effectiveness vs Water",
         "jp": "水属性対象の 効果命中",
         "kr": "수속성 대상 효과 적중",
-        "zh": "水属性效果命中"
+        "zh": "水属性效果命中",
+        "fr": "Effic. par rapport à l'eau",
+        "es": "Efectividad vs Agua"
       }
     }
   ],
@@ -8042,7 +8068,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -8068,7 +8096,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -8094,7 +8124,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -8120,7 +8152,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -8146,7 +8180,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -8172,7 +8208,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -8198,7 +8236,9 @@
         "en": "Effectiveness vs Water",
         "jp": "水属性対象の 効果命中",
         "kr": "수속성 대상 효과 적중",
-        "zh": "水属性效果命中"
+        "zh": "水属性效果命中",
+        "fr": "Effic. par rapport à l'eau",
+        "es": "Efectividad vs Agua"
       }
     }
   ],
@@ -8224,7 +8264,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -8250,7 +8292,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -8276,7 +8320,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -8302,7 +8348,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -8328,7 +8376,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -8354,7 +8404,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -8380,7 +8432,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -8406,7 +8460,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -8432,7 +8488,9 @@
         "en": "Effectiveness vs Water",
         "jp": "水属性対象の 効果命中",
         "kr": "수속성 대상 효과 적중",
-        "zh": "水属性效果命中"
+        "zh": "水属性效果命中",
+        "fr": "Effic. par rapport à l'eau",
+        "es": "Efectividad vs Agua"
       }
     }
   ],
@@ -8458,7 +8516,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -8484,7 +8544,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -8510,7 +8572,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -8536,7 +8600,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -8562,7 +8628,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -8588,7 +8656,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -8614,7 +8684,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -8640,7 +8712,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -8666,7 +8740,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -8692,7 +8768,9 @@
         "en": "DMG Increase vs Dark",
         "jp": "闇属性対象の ダメージUP",
         "kr": "암속성 대상 피해 증가",
-        "zh": "对暗属性目标造成 伤害提升"
+        "zh": "对暗属性目标造成 伤害提升",
+        "fr": "Dégâts+contre les ténè.",
+        "es": "Daño+contra Oscuridad"
       }
     }
   ],
@@ -8718,7 +8796,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -8744,7 +8824,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -8770,7 +8852,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -8796,7 +8880,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -8822,7 +8908,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -8848,7 +8936,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -8874,7 +8964,9 @@
         "en": "Effectiveness vs Water",
         "jp": "水属性対象の 効果命中",
         "kr": "수속성 대상 효과 적중",
-        "zh": "水属性效果命中"
+        "zh": "水属性效果命中",
+        "fr": "Effic. par rapport à l'eau",
+        "es": "Efectividad vs Agua"
       }
     }
   ],
@@ -8900,7 +8992,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -8926,7 +9020,9 @@
         "en": "Critical Hit Chance vs Fire",
         "jp": "火属性対象の会心率",
         "kr": "화속성 대상 치명 확률",
-        "zh": "对火属性暴击率"
+        "zh": "对火属性暴击率",
+        "fr": "Taux CRIT contre le feu",
+        "es": "Tasa CRIT vs"
       }
     }
   ],
@@ -8952,7 +9048,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -8978,7 +9076,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -9004,7 +9104,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -9030,7 +9132,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -9056,7 +9160,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -9082,7 +9188,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -9108,7 +9216,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -9134,7 +9244,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -9160,7 +9272,9 @@
         "en": "Reduced DMG Taken vs Light",
         "jp": "光属性対象の受ける ダメージDOWN",
         "kr": "명속성 대상 받는 피해 감소",
-        "zh": "光属性所受伤害降低"
+        "zh": "光属性所受伤害降低",
+        "fr": "Dégâts subis réduits vs Lumière",
+        "es": "Daño recibido reducido vs Luz"
       }
     }
   ],
@@ -9186,7 +9300,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -9212,7 +9328,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -9238,7 +9356,9 @@
         "en": "Critical Hit Chance vs Fire",
         "jp": "火属性対象の会心率",
         "kr": "화속성 대상 치명 확률",
-        "zh": "对火属性暴击率"
+        "zh": "对火属性暴击率",
+        "fr": "Taux CRIT contre le feu",
+        "es": "Tasa CRIT vs"
       }
     }
   ],
@@ -9264,7 +9384,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -9290,7 +9412,9 @@
         "en": "DMG Increase vs Dark",
         "jp": "闇属性対象の ダメージUP",
         "kr": "암속성 대상 피해 증가",
-        "zh": "对暗属性目标造成 伤害提升"
+        "zh": "对暗属性目标造成 伤害提升",
+        "fr": "Dégâts+contre les ténè.",
+        "es": "Daño+contra Oscuridad"
       }
     }
   ],
@@ -9316,7 +9440,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -9342,7 +9468,9 @@
         "en": "Effectiveness vs Dark",
         "jp": "闇属性対象の 効果命中",
         "kr": "암속성 대상 효과 적중",
-        "zh": "暗属性效果命中"
+        "zh": "暗属性效果命中",
+        "fr": "Efficacité contre Ténèbres",
+        "es": "Efect. vs. Oscuridad"
       }
     }
   ],
@@ -9368,7 +9496,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -9394,7 +9524,9 @@
         "en": "Effectiveness vs Water",
         "jp": "水属性対象の 効果命中",
         "kr": "수속성 대상 효과 적중",
-        "zh": "水属性效果命中"
+        "zh": "水属性效果命中",
+        "fr": "Effic. par rapport à l'eau",
+        "es": "Efectividad vs Agua"
       }
     }
   ],
@@ -9420,7 +9552,9 @@
         "en": "Critical Hit Chance vs Dark",
         "jp": "闇属性対象の会心率",
         "kr": "암속성 대상 치명 확률",
-        "zh": "对暗属性暴击率"
+        "zh": "对暗属性暴击率",
+        "fr": "Taux CRIT contre Ténèbres",
+        "es": "Tasa CRIT vs"
       }
     }
   ],
@@ -9446,7 +9580,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -9472,7 +9608,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -9498,7 +9636,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -9524,7 +9664,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -9550,7 +9692,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -9576,7 +9720,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -9602,7 +9748,9 @@
         "en": "DMG Increase vs Dark",
         "jp": "闇属性対象の ダメージUP",
         "kr": "암속성 대상 피해 증가",
-        "zh": "对暗属性目标造成 伤害提升"
+        "zh": "对暗属性目标造成 伤害提升",
+        "fr": "Dégâts+contre les ténè.",
+        "es": "Daño+contra Oscuridad"
       }
     }
   ],
@@ -9628,7 +9776,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -9654,7 +9804,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -9680,7 +9832,9 @@
         "en": "Critical Hit Chance vs Water",
         "jp": "水属性対象の会心率",
         "kr": "수속성 대상 치명 확률",
-        "zh": "对水属性暴击率"
+        "zh": "对水属性暴击率",
+        "fr": "Taux CRIT contre l'eau",
+        "es": "Tasa CRIT vs Agua"
       }
     }
   ],
@@ -9706,7 +9860,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -9732,7 +9888,9 @@
         "en": "Effectiveness vs Dark",
         "jp": "闇属性対象の 効果命中",
         "kr": "암속성 대상 효과 적중",
-        "zh": "暗属性效果命中"
+        "zh": "暗属性效果命中",
+        "fr": "Efficacité contre Ténèbres",
+        "es": "Efect. vs. Oscuridad"
       }
     }
   ],
@@ -9758,7 +9916,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -9784,7 +9944,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -9810,7 +9972,9 @@
         "en": "Critical Hit Chance vs Fire",
         "jp": "火属性対象の会心率",
         "kr": "화속성 대상 치명 확률",
-        "zh": "对火属性暴击率"
+        "zh": "对火属性暴击率",
+        "fr": "Taux CRIT contre le feu",
+        "es": "Tasa CRIT vs"
       }
     }
   ],
@@ -9836,7 +10000,9 @@
         "en": "Reduced DMG Taken vs Light",
         "jp": "光属性対象の受ける ダメージDOWN",
         "kr": "명속성 대상 받는 피해 감소",
-        "zh": "光属性所受伤害降低"
+        "zh": "光属性所受伤害降低",
+        "fr": "Dégâts subis réduits vs Lumière",
+        "es": "Daño recibido reducido vs Luz"
       }
     }
   ],
@@ -9862,7 +10028,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -9888,7 +10056,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -9914,7 +10084,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -9940,7 +10112,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -9966,7 +10140,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -9992,7 +10168,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -10018,7 +10196,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -10044,7 +10224,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -10070,7 +10252,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -10096,7 +10280,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10122,7 +10308,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10148,7 +10336,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10174,7 +10364,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -10200,7 +10392,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -10226,7 +10420,9 @@
         "en": "Reduced DMG Taken vs Earth",
         "jp": "地属性対象の受ける ダメージDOWN",
         "kr": "지속성 대상 받는 피해 감소",
-        "zh": "土属性所受伤害降低"
+        "zh": "土属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre la Terre",
+        "es": "Daño recibido redu. vs Tierra"
       }
     }
   ],
@@ -10252,7 +10448,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -10278,7 +10476,9 @@
         "en": "Reduced DMG Taken vs Light",
         "jp": "光属性対象の受ける ダメージDOWN",
         "kr": "명속성 대상 받는 피해 감소",
-        "zh": "光属性所受伤害降低"
+        "zh": "光属性所受伤害降低",
+        "fr": "Dégâts subis réduits vs Lumière",
+        "es": "Daño recibido reducido vs Luz"
       }
     }
   ],
@@ -10304,7 +10504,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -10330,7 +10532,9 @@
         "en": "Reduced DMG Taken vs Light",
         "jp": "光属性対象の受ける ダメージDOWN",
         "kr": "명속성 대상 받는 피해 감소",
-        "zh": "光属性所受伤害降低"
+        "zh": "光属性所受伤害降低",
+        "fr": "Dégâts subis réduits vs Lumière",
+        "es": "Daño recibido reducido vs Luz"
       }
     }
   ],
@@ -10356,7 +10560,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -10382,7 +10588,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -10408,7 +10616,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -10434,7 +10644,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -10460,7 +10672,9 @@
         "en": "Reduced DMG Taken vs Water",
         "jp": "水属性対象の受ける ダメージDOWN",
         "kr": "수속성 대상 받는 피해 감소",
-        "zh": "水属性所受伤害降低"
+        "zh": "水属性所受伤害降低",
+        "fr": "Dégâts reçus - subis par rapport à l'eau",
+        "es": "Daño recibido redu. vs Agua"
       }
     }
   ],
@@ -10486,7 +10700,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -10512,7 +10728,9 @@
         "en": "DMG Increase vs Dark",
         "jp": "闇属性対象の ダメージUP",
         "kr": "암속성 대상 피해 증가",
-        "zh": "对暗属性目标造成 伤害提升"
+        "zh": "对暗属性目标造成 伤害提升",
+        "fr": "Dégâts+contre les ténè.",
+        "es": "Daño+contra Oscuridad"
       }
     }
   ],
@@ -10538,7 +10756,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -10564,7 +10784,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -10590,7 +10812,9 @@
         "en": "Reduced DMG Taken vs Fire",
         "jp": "火属性対象の受ける ダメージDOWN",
         "kr": "화속성 대상 받는 피해 감소",
-        "zh": "火属性所受伤害降低"
+        "zh": "火属性所受伤害降低",
+        "fr": "Dégâts subis réduits contre le feu",
+        "es": "Daño Recibido Reducido vs. Fuego"
       }
     }
   ],
@@ -10616,7 +10840,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10642,7 +10868,9 @@
         "en": "Reduced DMG Taken vs Dark",
         "jp": "闇属性対象の受ける ダメージDOWN",
         "kr": "암속성 대상 받는 피해 감소",
-        "zh": "暗属性所受伤害降低"
+        "zh": "暗属性所受伤害降低",
+        "fr": "Dégâts reçus - subis contre les ténè.",
+        "es": "Daño reci. redu. vs Oscuridad"
       }
     }
   ],
@@ -10668,7 +10896,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10694,7 +10924,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -10720,7 +10952,9 @@
         "en": "DMG Increase vs Dark",
         "jp": "闇属性対象の ダメージUP",
         "kr": "암속성 대상 피해 증가",
-        "zh": "对暗属性目标造成 伤害提升"
+        "zh": "对暗属性目标造成 伤害提升",
+        "fr": "Dégâts+contre les ténè.",
+        "es": "Daño+contra Oscuridad"
       }
     }
   ],
@@ -10746,7 +10980,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -10772,7 +11008,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10798,7 +11036,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ],
@@ -10824,7 +11064,9 @@
         "en": "Effectiveness vs Fire",
         "jp": "火属性対象の 効果命中",
         "kr": "화속성 대상 효과 적중",
-        "zh": "火属性效果命中"
+        "zh": "火属性效果命中",
+        "fr": "Effic. contre le feu",
+        "es": "Efectividad vs Fuego"
       }
     }
   ],
@@ -10850,7 +11092,9 @@
         "en": "DMG Increase vs Earth",
         "jp": "地属性対象の ダメージUP",
         "kr": "지속성 대상 피해 증가",
-        "zh": "对土属性目标造成 伤害提升"
+        "zh": "对土属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la Terre",
+        "es": "Daño + contra Tierra"
       }
     }
   ],
@@ -10876,7 +11120,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -10902,7 +11148,9 @@
         "en": "Effectiveness vs Light",
         "jp": "光属性対象の 効果命中",
         "kr": "명속성 대상 효과 적중",
-        "zh": "光属性效果命中"
+        "zh": "光属性效果命中",
+        "fr": "Efficacité vs Lumière",
+        "es": "Efectividad vs Luz"
       }
     }
   ],
@@ -10928,7 +11176,9 @@
         "en": "DMG Increase vs Fire",
         "jp": "火属性対象の ダメージUP",
         "kr": "화속성 대상 피해 증가",
-        "zh": "对火属性目标造成 伤害提升"
+        "zh": "对火属性目标造成 伤害提升",
+        "fr": "Dégâts+contre le feu",
+        "es": "Daño+contra el fuego"
       }
     }
   ],
@@ -10954,7 +11204,9 @@
         "en": "Effectiveness vs Earth",
         "jp": "地属性対象の 効果命中",
         "kr": "지속성 대상 효과 적중",
-        "zh": "土属性效果命中"
+        "zh": "土属性效果命中",
+        "fr": "Effic. par rapport à la Terre",
+        "es": "Efectividad vs Tierra"
       }
     }
   ],
@@ -10980,7 +11232,9 @@
         "en": "DMG Increase vs Water",
         "jp": "水属性対象の ダメージUP",
         "kr": "수속성 대상 피해 증가",
-        "zh": "对水属性目标造成 伤害提升"
+        "zh": "对水属性目标造成 伤害提升",
+        "fr": "Dégâts + contre l'eau",
+        "es": "Daño + contra Agua"
       }
     }
   ],
@@ -11006,7 +11260,9 @@
         "en": "DMG Increase vs Light",
         "jp": "光属性対象の ダメージUP",
         "kr": "명속성 대상 피해 증가",
-        "zh": "对光属性目标造成 伤害提升"
+        "zh": "对光属性目标造成 伤害提升",
+        "fr": "Dégâts+contre la lumière",
+        "es": "Daño + contra Luz"
       }
     }
   ]

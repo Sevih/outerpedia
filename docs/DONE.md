@@ -7,6 +7,48 @@
 
 ## 2026-09-23
 
+- **Le jeu parle français et espagnol : six langues officielles, plus aucune
+  communautaire.** Le client Steam du 22/09 ajoute deux colonnes à ses 15 tables
+  `Text*`, `French` et `Spanish`, remplies à 100 % (16 104 lignes sur 16 105
+  dans TextSystem, 100 % sur TextCharacter, TextSkill, TextItem) — et un
+  `China_Traditional` que le site ne sert pas (tracé au TODO). Le `fr`,
+  communautaire depuis l'origine (UI traduite, contenu de jeu replié sur
+  l'anglais), passe `isOfficial` ; `es` entre directement officiel
+  (`LANGUAGES`, `GAME_LANGS`, `LANG_COLUMNS`). Tout ce qui DÉRIVAIT de
+  `LANGUAGES` a suivi sans une ligne : proxy par sous-domaine, sitemap et
+  hreflang, OG locale, test des clés de locale, sélecteur. Ce qui ne dérivait
+  PAS s'est vu au typecheck — exactement ce pour quoi `GAME_LANGS: readonly
+GameLang[]` avait été posé le 07/08 : trois `{ en: '', jp: '', kr: '', zh: '' }`
+  en prod (catalogue d'items côté datagen et côté site, effets), un
+  enregistrement par langue dans `monad.ts` (le build plantait sur le `.add`
+  d'un `fr` absent), la résolution des doubleurs, trois unions
+  `'en' | 'jp' | 'kr' | 'zh' | 'fr'` dans l'admin (EditorialFields,
+  contribution-actions, guide-text), `PLATFORMS_BY_LANG`, les cibles
+  DeepL/Haiku, la liste des drapeaux du manifest, le store des noms courts — et
+  17 fixtures de tests. Tous passent désormais par `emptyDict()` /
+  `uniformDict()` (déplacés dans `lib/lang.ts`, module pur que les tests du site
+  importent via `@datagen`) ou par `Lang`/`LANGS`. `LocalizedText` (curé)
+  devient `Partial<Record<GameLang, string>>` : les six coïncident, le partiel
+  reste. Deux règles métier tombent avec la frontière : `difficultyLabel`
+  n'exclut plus le `fr` du vocabulaire du jeu (item G28 du TODO — « la fiche lit
+  le glossaire EN » — résolu par la donnée elle-même), et les tests qui
+  affirmaient « le jeu ne parle pas français » lisent le texte du jeu.
+  Doubleurs : les variantes `_en`/`_jp`/`_kr` existent, jamais `_zh`/`_fr`/`_es`,
+  mais chaque ligne porte TOUTES les colonnes — fr et es affichent le doubleur
+  anglais lu dans leur colonne, zh reste vide (sentinelle « 0 » de l'ancienne
+  clé), comme avant. Livré aussi : drapeau `es.svg`, hôte `es` dans les deux
+  Caddyfile (dev ici, VPS dans sevih-tool), procédure hosts, et la règle
+  « nouvelle langue = nouveau certificat d'origine » dans `nuage-orange.md`.
+  `datagen:build` passe (129 persos, 1 639 skills, 4 511 monstres) ; `promote`
+  en lecture seule : 35 fichiers différents, tous par ajout de `fr`/`es`
+  (skills.json 6,3 → 7,5 Mo, monster-skills 9,3 → 11,7 Mo, glossaires +29 %).
+  **Non fait, volontairement** (arbitrages Sevih du jour) : le promote (revue
+  humaine), la locale `es.ts` — PROVISOIRE en anglais, script Haiku prêt dans
+  le scratchpad, il attend la clé —, l'éditorial ES (repli EN décidé),
+  Cloudflare (certificat + DNS `es`) — tout est au TODO § Langues. Tests :
+  1 916 verts ; typecheck : 4 casts sur les JSON committés à 4 langues, qui
+  tombent au promote. Après le premier promote, deux choses que seule la donnée validée pouvait montrer : les 7 rencontres RETENUES (World Boss Ragnakeus, retirées du jeu) gardaient des dicts à 4 langues — le validé mélangeait deux formes de `LangDict` et `tsc` refusait le JSON committé. `applyRetention` complète désormais à vide, récursivement, les langues apparues depuis (`completeLangDicts`, testé), et `lRec` replie sur l'anglais une chaîne VIDE comme une chaîne absente (`||`, plus `??`, testé) : un blanc n'est pas une traduction. Un second `promote --apply` (7 entités, un seul fichier) clôt le typecheck. La traduction Haiku de `es.ts`, elle, a été lancée et a échoué sur les 30 lots : l'API répond « credit balance is too low » — compte à recharger, script prêt à relancer (cache par lot, rien à repayer deux fois). Relancée par Sevih une fois le compte rechargé : 30 lots, 1 168 valeurs, variables et balises validées ; installée et formatée. La donnée promue a fait coincer le test des cartes sur « Flic de la canicule Delta » (2000121, fr) : nom court `en: "H.Delta"` dans le style des dix existants, les noms courts fr/es restant à curer (TODO).
+
 - **« Gold » était introuvable dans le sélecteur de récompenses de `pnpm quick`**,
   exactement comme il l'avait été dans le panneau admin. La page refiltrait la
   liste de son côté — ordre du CATALOGUE, coupé à 20 — or 21 entrées contiennent

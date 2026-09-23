@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '@datagen/lib/lang';
 import type { Tower, TowerRestriction } from '@contracts';
 import {
   TOWER_DIFFICULTY_MODES,
@@ -154,7 +155,7 @@ describe('getTowerFloor / formatRestriction', () => {
     type: 'element',
     subType: 'water',
     count: 4,
-    desc: { en: '{0} Water hero(es) must be deployed', jp: '', kr: '', zh: '' },
+    desc: { ...emptyDict(), en: '{0} Water hero(es) must be deployed' },
     ...over,
   });
 
@@ -163,12 +164,19 @@ describe('getTowerFloor / formatRestriction', () => {
   });
 
   it('ban (-1) : la phrase se suffit, pas d’interpolation', () => {
-    const r = restriction({ count: -1, desc: { en: 'No Fire heroes', jp: '', kr: '', zh: '' } });
+    const r = restriction({ count: -1, desc: { ...emptyDict(), en: 'No Fire heroes' } });
     expect(formatRestriction(r, 'en')).toBe('No Fire heroes');
   });
 
-  it('fr retombe sur en (le jeu ne fournit pas de fr)', () => {
-    expect(formatRestriction(restriction({}), 'fr')).toBe('4 Water hero(es) must be deployed');
+  it('fr lit le texte du jeu (langue officielle depuis le 23/09/2026), interpolation comprise', () => {
+    const r = restriction({
+      desc: {
+        ...emptyDict(),
+        en: '{0} Water hero(es) must be deployed',
+        fr: '{0} héros Eau requis',
+      },
+    });
+    expect(formatRestriction(r, 'fr')).toBe('4 héros Eau requis');
   });
 });
 

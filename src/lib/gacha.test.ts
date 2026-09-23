@@ -10,6 +10,7 @@
  *      simulateur existent, et leurs taux somment à 100 %.
  */
 import { describe, expect, it } from 'vitest';
+import { uniformDict } from '@datagen/lib/lang';
 import type { RecruitKindInfo } from '@contracts';
 import recruitData from '../../data/generated/recruit.json';
 import type { RecruitData } from '../../datagen/generators/recruit';
@@ -25,9 +26,9 @@ import {
 
 const rate = (titleKey: string, percent: number, confirmPercent = percent) => ({
   titleKey,
-  // `LangDict` veut les cinq langues : le libellé ne sert à rien ici, seul le
+  // `LangDict` veut toutes les langues du jeu : le libellé ne sert à rien ici, seul le
   // titleKey compte pour la dérivation.
-  title: { en: titleKey, jp: titleKey, kr: titleKey, zh: titleKey },
+  title: uniformDict(titleKey),
   percent,
   confirmPercent,
 });

@@ -9,7 +9,9 @@
           "en": "Guild Coin",
           "jp": "ギルドコイン",
           "kr": "길드 코인",
-          "zh": "公会币"
+          "zh": "公会币",
+          "fr": "Pièce de guilde",
+          "es": "Moneda de Gremio"
         },
         "icon": "TI_Item_Guild_Coin"
       },
@@ -21,7 +23,9 @@
             "en": "10,000 Gold",
             "jp": "10,000ゴールド",
             "kr": "골드 10,000",
-            "zh": "10,000金币"
+            "zh": "10,000金币",
+            "fr": "10,000 Gold",
+            "es": "Oro ×10,000"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -41,7 +45,9 @@
             "en": "Sandwich",
             "jp": "サンドイッチ",
             "kr": "샌드위치",
-            "zh": "三明治"
+            "zh": "三明治",
+            "fr": "Sandwich",
+            "es": "Sándwich"
           },
           "icon": "TI_Item_Growth_Potion_01",
           "iconKind": "item",
@@ -61,7 +67,9 @@
             "en": "Cake Slice",
             "jp": "チョコショートケーキ",
             "kr": "조각 케이크",
-            "zh": "切块蛋糕"
+            "zh": "切块蛋糕",
+            "fr": "Cake Slice",
+            "es": "Rodaja de Pastel"
           },
           "icon": "TI_Item_Growth_Potion_02",
           "iconKind": "item",
@@ -81,7 +89,9 @@
             "en": "Epic Quality Present Chest",
             "jp": "プレゼントボックス【ユニーク】",
             "kr": "영웅 등급 선물 상자",
-            "zh": "英雄级别礼物箱"
+            "zh": "英雄级别礼物箱",
+            "fr": "Epic Quality Present coffre",
+            "es": "Cofre Regalo Calidad Épica"
           },
           "icon": "TI_Common_Box04",
           "iconKind": "item",
@@ -101,7 +111,9 @@
             "en": "Prosciutto",
             "jp": "プロシュート",
             "kr": "프로슈토",
-            "zh": "帕尔玛火腿"
+            "zh": "帕尔玛火腿",
+            "fr": "- Oui. - Oui.",
+            "es": "Prosciutto"
           },
           "icon": "TI_Item_Growth_Potion_03",
           "iconKind": "item",
@@ -121,7 +133,9 @@
             "en": "Steak Dish",
             "jp": "ステーキ定食",
             "kr": "스테이크 정식",
-            "zh": "牛排套餐"
+            "zh": "牛排套餐",
+            "fr": "Plat de steak",
+            "es": "Plato de bistec"
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
@@ -141,7 +155,9 @@
             "en": "50,000 Gold",
             "jp": "50,000ゴールド",
             "kr": "골드 50,000",
-            "zh": "50,000金币"
+            "zh": "50,000金币",
+            "fr": "50,000 ors d'or",
+            "es": "50.000 Oro"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -161,7 +177,9 @@
             "en": "[Guild] Enhancement Toolbox",
             "jp": "【ギルド】強化ボックス",
             "kr": "[길드] 강화 도구 상자",
-            "zh": "【公会】强化道具箱"
+            "zh": "【公会】强化道具箱",
+            "fr": "[Guild] Enhancement Toolbox",
+            "es": "[Guild] Caja de herramientas de mejora"
           },
           "icon": "TI_Common_Box03",
           "iconKind": "item",
@@ -181,7 +199,9 @@
             "en": "Basic Skill Manual",
             "jp": "スキル教本：はじまり編",
             "kr": "초급 스킬 교본",
-            "zh": "初级技能教材"
+            "zh": "初级技能教材",
+            "fr": "Basic comp. manuel",
+            "es": "Manual de Habilidades"
           },
           "icon": "TI_Item_Growth_Book_01",
           "iconKind": "item",
@@ -201,7 +221,9 @@
             "en": "[Guild] Epic-Legendary Accessory Chest",
             "jp": "【ギルド】アクセサリーボックス(ユニーク～レジェンド)",
             "kr": "[길드] 영웅~전설 악세서리 상자",
-            "zh": "【公会】英雄~传说饰品箱"
+            "zh": "【公会】英雄~传说饰品箱",
+            "fr": "[Guild] Epic-Légendaire Accessory coffre",
+            "es": "[Guild] Accesorio Legendario Épico-Legendario"
           },
           "icon": "TI_Accessary_Box02",
           "iconKind": "item",
@@ -221,7 +243,9 @@
             "en": "Intermediate Skill Manual",
             "jp": "スキル教本：応用編",
             "kr": "중급 스킬 교본",
-            "zh": "中级技能教材"
+            "zh": "中级技能教材",
+            "fr": "Intermediate comp. manuel",
+            "es": "Manual de hab. intermedia"
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
@@ -241,7 +265,9 @@
             "en": "Stage 3 Gem Chest",
             "jp": "ジェムボックス(ランク3)",
             "kr": "3단계 보석 상자",
-            "zh": "第3阶段宝石箱"
+            "zh": "第3阶段宝石箱",
+            "fr": "Coffre de gemmes niv. 3",
+            "es": "Cofre de Gemas Fase 3"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
@@ -261,7 +287,9 @@
             "en": "Professional Skill Manual",
             "jp": "スキル教本：専門家編",
             "kr": "전문 스킬 교본",
-            "zh": "专家技能教材"
+            "zh": "专家技能教材",
+            "fr": "Professional comp. manuel",
+            "es": "Manual de hab. profesional"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -281,7 +309,9 @@
             "en": "[Guild] 3★ Hero Piece Selection Chest",
             "jp": "【ギルド】★3仲間ピース選択ボックス",
             "kr": "[길드] 3성 동료 조각 선택 상자",
-            "zh": "【公会】3星同伴碎片选择箱"
+            "zh": "【公会】3星同伴碎片选择箱",
+            "fr": "[Guild] 3★ Hero pièce sélection coffre",
+            "es": "[Guild] Cofre de Selección de Piezas Héroe 3★"
           },
           "icon": "TI_CharacterCard_05",
           "iconKind": "item",
@@ -304,7 +334,9 @@
           "en": "Joint Challenge Coin",
           "jp": "共同作戦コイン",
           "kr": "합동 챌린지 코인",
-          "zh": "联合挑战硬币"
+          "zh": "联合挑战硬币",
+          "fr": "Pièce de défi conj.",
+          "es": "Moneda de Desafío Conjunto"
         },
         "icon": ""
       },
@@ -316,7 +348,9 @@
             "en": "50 Stamina",
             "jp": "活力×50",
             "kr": "행동력 50",
-            "zh": "50行动力"
+            "zh": "50行动力",
+            "fr": "50 Staminales",
+            "es": "50 Vigor"
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
@@ -336,7 +370,9 @@
             "en": "Legendary Reforge Catalyst x20",
             "jp": "再錬カタリスト\\n(レジェンド)×20",
             "kr": "전설 재련 촉매제 x20",
-            "zh": "传说重铸催化剂x20"
+            "zh": "传说重铸催化剂x20",
+            "fr": "Réforce Légendaire Catalyseur x20",
+            "es": "Catalizador de Reforjar Legendario x20"
           },
           "icon": "TI_Item_Growth_Dissolve_04",
           "iconKind": "item",
@@ -356,7 +392,9 @@
             "en": "Special Recruitment Ticket (Event)",
             "jp": "プレミア\\nスカウトチケット(イベント)",
             "kr": "특별 영입 티켓(이벤트)",
-            "zh": "特别招募券(活动)"
+            "zh": "特别招募券(活动)",
+            "fr": "Billet de recrutement spécial (événement)",
+            "es": "Boleto de Reclutamiento Especial (Evento)"
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
@@ -376,7 +414,9 @@
             "en": "Stage 3 Gem Chest",
             "jp": "ジェムボックス\\n(ランク3)",
             "kr": "3단계 보석 상자",
-            "zh": "第3阶段宝石箱"
+            "zh": "第3阶段宝石箱",
+            "fr": "Coffre de gemmes niv. 3",
+            "es": "Cofre de Gemas Fase 3"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
@@ -396,7 +436,9 @@
             "en": "20,000 Gold",
             "jp": "20,000ゴールド",
             "kr": "골드 20,000",
-            "zh": "20,000金币"
+            "zh": "20,000金币",
+            "fr": "20 000 Or",
+            "es": "20.000 de oro"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -416,7 +458,9 @@
             "en": "Legendary Quality Present Chest x10",
             "jp": "プレゼントボックス\\n【レジェンド】×10",
             "kr": "전설 등급 선물 상자 x10",
-            "zh": "传说级别礼物箱x10"
+            "zh": "传说级别礼物箱x10",
+            "fr": "Qualité Légendaire Présent Coffre x10",
+            "es": "Cofre de Regalo de Calidad Legendaria x10"
           },
           "icon": "TI_Common_Box05",
           "iconKind": "item",
@@ -436,7 +480,9 @@
             "en": "Stage 5 Random Gem Chest",
             "jp": "ジェムボックス(ランク5)",
             "kr": "5단계 보석 랜덤 상자",
-            "zh": "第5阶段宝石随机箱"
+            "zh": "第5阶段宝石随机箱",
+            "fr": "Coffre de gemmes aléatoires niv. 5",
+            "es": "Cofre de gemas aleatorias Fase 5"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
@@ -456,7 +502,9 @@
             "en": "Armor Glunite",
             "jp": "アーマーグルーナイト",
             "kr": "아머 글루나이트",
-            "zh": "装甲格鲁矿石"
+            "zh": "装甲格鲁矿石",
+            "fr": "Glunite d'armure",
+            "es": "Glunite de armadura"
           },
           "icon": "TI_Equipment_Growth03",
           "iconKind": "item",
@@ -476,7 +524,9 @@
             "en": "Refined Glunite",
             "jp": "精製された\\nグルーナイト",
             "kr": "정제된 글루나이트",
-            "zh": "精炼格鲁矿石"
+            "zh": "精炼格鲁矿石",
+            "fr": "Glunite raffinée",
+            "es": "Glunite refinado"
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
@@ -496,7 +546,9 @@
             "en": "Transistone (Total)",
             "jp": "トランストーン(全体)",
             "kr": "트랜스톤(전체)",
-            "zh": "转换石(全部)"
+            "zh": "转换石(全部)",
+            "fr": "Transistone (total)",
+            "es": "Transistone (Total)"
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
@@ -516,7 +568,9 @@
             "en": "Transistone (Individual)",
             "jp": "トランストーン(選択)",
             "kr": "트랜스톤(개별)",
-            "zh": "转换石 (单个)"
+            "zh": "转换石 (单个)",
+            "fr": "Transistone (indiv.)",
+            "es": "Transistone (Individual)"
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
@@ -539,7 +593,9 @@
           "en": "Friendship Point",
           "jp": "フレンドPt",
           "kr": "우정 포인트",
-          "zh": "友情点数"
+          "zh": "友情点数",
+          "fr": "Point d'amitié",
+          "es": "Punto de Amistad"
         },
         "icon": "TI_Item_FriendPoint"
       },
@@ -551,7 +607,9 @@
             "en": "30 Stamina",
             "jp": "活力×30",
             "kr": "30 행동력",
-            "zh": "30行动力"
+            "zh": "30行动力",
+            "fr": "30 Stamina",
+            "es": "30 Vigor"
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
@@ -571,7 +629,9 @@
             "en": "10,000 Gold",
             "jp": "10,000ゴールド",
             "kr": "10,000 골드",
-            "zh": "10,000金币"
+            "zh": "10,000金币",
+            "fr": "10,000 Gold",
+            "es": "10,000 de oro"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -591,7 +651,9 @@
             "en": "3★ Hero Piece Selection Ticket",
             "jp": "★3仲間ピース選択チケット",
             "kr": "3성 동료 조각 선택권",
-            "zh": "3星同伴碎片选择券"
+            "zh": "3星同伴碎片选择券",
+            "fr": "3★ Hero pièce sélection Ticket",
+            "es": "Boleto de selección de Pieza de Héroe 3★"
           },
           "icon": "TI_CharacterCard_04",
           "iconKind": "item",
@@ -611,7 +673,9 @@
             "en": "Arena Ticket x5",
             "jp": "アリーナチケット 5枚",
             "kr": "결투장 티켓 5개",
-            "zh": "5张竞技场入场券"
+            "zh": "5张竞技场入场券",
+            "fr": "Arena Ticket x5",
+            "es": "Ticket de Arena x5"
           },
           "icon": "TI_Item_Ticket_PVP",
           "iconKind": "item",
@@ -631,7 +695,9 @@
             "en": "Apprentice's Hammer Chest",
             "jp": "まあまあな強化ボックス",
             "kr": "입문 강화 도구 상자",
-            "zh": "入门强化道具箱"
+            "zh": "入门强化道具箱",
+            "fr": "Apprentice's Hammer coffre",
+            "es": "Pecho Martillo del Aprendiz"
           },
           "icon": "TI_Common_Box01",
           "iconKind": "item",
@@ -651,7 +717,9 @@
             "en": "1-2★ Hero Piece Random Exchange Ticket",
             "jp": "★1～2仲間ピースチケット",
             "kr": "1~2성 동료 조각 랜덤 교환권",
-            "zh": "1~2星同伴碎片随机交换券"
+            "zh": "1~2星同伴碎片随机交换券",
+            "fr": "Ticket d'échange aléatoire de fragments de héros 1-2★",
+            "es": "Billete de intercambio selectivo de pieza de héroe 2★"
           },
           "icon": "TI_CharacterCard_04",
           "iconKind": "item",
@@ -674,7 +742,9 @@
           "en": "Arena Medal",
           "jp": "アリーナ勲章",
           "kr": "결투장 훈장",
-          "zh": "竞技场勋章"
+          "zh": "竞技场勋章",
+          "fr": "Méda. arène",
+          "es": "Medalla de Arena"
         },
         "icon": "TI_Item_PVP_Point"
       },
@@ -686,7 +756,9 @@
             "en": "10,000 Gold",
             "jp": "10,000ゴールド",
             "kr": "10,000 골드",
-            "zh": "10,000金币"
+            "zh": "10,000金币",
+            "fr": "10,000 Gold",
+            "es": "10,000 de oro"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -706,7 +778,9 @@
             "en": "50 Stamina",
             "jp": "活力×50",
             "kr": "50 행동력",
-            "zh": "50行动力"
+            "zh": "50行动力",
+            "fr": "50 Staminales",
+            "es": "50 Vigor"
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
@@ -726,7 +800,9 @@
             "en": "Professional Skill Manual",
             "jp": "スキル教本：専門家編",
             "kr": "전문 스킬 교본",
-            "zh": "专家技能教材"
+            "zh": "专家技能教材",
+            "fr": "Professional comp. manuel",
+            "es": "Manual de hab. profesional"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -746,7 +822,9 @@
             "en": "Etheric Helmet of Speed",
             "jp": "速度のエーテル\\nヘルム",
             "kr": "속도의 에테르 투구",
-            "zh": "以太速度头盔"
+            "zh": "以太速度头盔",
+            "fr": "Etheric Helmet of vitesse",
+            "es": "Casco etérico de VEL"
           },
           "icon": "TI_Equipment_Helmet_05",
           "iconKind": "equipment",
@@ -766,7 +844,9 @@
             "en": "Etheric Chest Armor of Speed",
             "jp": "速度のエーテル\\nアーマー",
             "kr": "속도의 에테르 갑옷",
-            "zh": "以太速度盔甲"
+            "zh": "以太速度盔甲",
+            "fr": "Etheric coffre armure of vitesse",
+            "es": "Peto Etéreo de Velocidad"
           },
           "icon": "TI_Equipment_Armor_05",
           "iconKind": "equipment",
@@ -786,7 +866,9 @@
             "en": "Etheric Gloves of Speed",
             "jp": "速度のエーテル\\nガントレット",
             "kr": "속도의 에테르 장갑",
-            "zh": "以太速度手套"
+            "zh": "以太速度手套",
+            "fr": "Etheric Gloves of vitesse",
+            "es": "Guantes Etéreos de VEL"
           },
           "icon": "TI_Equipment_Gloves_05",
           "iconKind": "equipment",
@@ -806,7 +888,9 @@
             "en": "Etheric Boots of Speed",
             "jp": "速度のエーテル\\nブーツ",
             "kr": "속도의 에테르 신발",
-            "zh": "以太速度鞋子"
+            "zh": "以太速度鞋子",
+            "fr": "Bottes éthériques de vitesse",
+            "es": "Botas Etéreas de VEL"
           },
           "icon": "TI_Equipment_Shoes_05",
           "iconKind": "equipment",
@@ -826,7 +910,9 @@
             "en": "Ether Blade",
             "jp": "エーテルブレイド",
             "kr": "에테르 블레이드",
-            "zh": "以太之剑"
+            "zh": "以太之剑",
+            "fr": "Lame d'éther",
+            "es": "Espada Éter"
           },
           "icon": "TI_Equipment_Weapon_06",
           "iconKind": "equipment",
@@ -846,7 +932,9 @@
             "en": "Ether Amulet",
             "jp": "エーテルアミュレット",
             "kr": "에테르 아뮬렛",
-            "zh": "以太守护"
+            "zh": "以太守护",
+            "fr": "Éther Amulet",
+            "es": "Amuleto Éter"
           },
           "icon": "TI_Equipment_Accessary_06",
           "iconKind": "equipment",
@@ -866,7 +954,9 @@
             "en": "Etheric Helmet of Attack",
             "jp": "攻撃のエーテルヘルム",
             "kr": "공격의 에테르 투구",
-            "zh": "以太攻击头盔"
+            "zh": "以太攻击头盔",
+            "fr": "Casque éthérique de l'attaque",
+            "es": "Casco Etérico de Ataque"
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
@@ -886,7 +976,9 @@
             "en": "Etheric Chest Armor of Attack",
             "jp": "攻撃のエーテルアーマー",
             "kr": "공격의 에테르 갑옷",
-            "zh": "以太攻击盔甲"
+            "zh": "以太攻击盔甲",
+            "fr": "Etheric coffre armure of attaque",
+            "es": "Armadura de Pecho Etérea de ATQ"
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
@@ -906,7 +998,9 @@
             "en": "Etheric Gloves of Attack",
             "jp": "攻撃のエーテルガントレット",
             "kr": "공격의 에테르 장갑",
-            "zh": "以太攻击手套"
+            "zh": "以太攻击手套",
+            "fr": "Etheric Gloves of attaque",
+            "es": "Guantes Etéreos de ATQ"
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
@@ -926,7 +1020,9 @@
             "en": "Etheric Boots of Attack",
             "jp": "攻撃のエーテルブーツ",
             "kr": "공격의 에테르 신발",
-            "zh": "以太攻击鞋子"
+            "zh": "以太攻击鞋子",
+            "fr": "Bottes éthériques d'attaque",
+            "es": "Botas Etéreas de Ataque"
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
@@ -946,7 +1042,9 @@
             "en": "Etheric Helmet of Speed",
             "jp": "速度のエーテル\\nヘルム",
             "kr": "속도의 에테르 투구",
-            "zh": "以太速度头盔"
+            "zh": "以太速度头盔",
+            "fr": "Etheric Helmet of vitesse",
+            "es": "Casco etérico de VEL"
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
@@ -966,7 +1064,9 @@
             "en": "Etheric Chest Armor of Speed",
             "jp": "速度のエーテル\\nアーマー",
             "kr": "속도의 에테르 갑옷",
-            "zh": "以太速度盔甲"
+            "zh": "以太速度盔甲",
+            "fr": "Etheric coffre armure of vitesse",
+            "es": "Peto Etéreo de Velocidad"
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
@@ -986,7 +1086,9 @@
             "en": "Etheric Gloves of Speed",
             "jp": "速度のエーテル\\nガントレット",
             "kr": "속도의 에테르 장갑",
-            "zh": "以太速度手套"
+            "zh": "以太速度手套",
+            "fr": "Etheric Gloves of vitesse",
+            "es": "Guantes Etéreos de VEL"
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
@@ -1006,7 +1108,9 @@
             "en": "Etheric Boots of Speed",
             "jp": "速度の\\nエーテルブーツ",
             "kr": "속도의 에테르 신발",
-            "zh": "以太速度鞋子"
+            "zh": "以太速度鞋子",
+            "fr": "Bottes éthériques de vitesse",
+            "es": "Botas Etéreas de VEL"
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
@@ -1026,7 +1130,9 @@
             "en": "Etheric Helmet of Lifesteal",
             "jp": "吸収のエーテルヘルム",
             "kr": "흡혈의 에테르 투구",
-            "zh": "以太吸血头盔"
+            "zh": "以太吸血头盔",
+            "fr": "Casque éthérique de la vie en vol de vie",
+            "es": "Casco Etérico de Robo de Vida"
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
@@ -1046,7 +1152,9 @@
             "en": "Etheric Chest Armor of Lifesteal",
             "jp": "吸収のエーテルアーマー",
             "kr": "흡혈의 에테르 갑옷",
-            "zh": "以太吸血盔甲"
+            "zh": "以太吸血盔甲",
+            "fr": "Etheric coffre armure of Lifesteal",
+            "es": "Armadura Etérea de Vampirismo"
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
@@ -1066,7 +1174,9 @@
             "en": "Etheric Gloves of Lifesteal",
             "jp": "吸収のエーテルガントレット",
             "kr": "흡혈의 에테르 장갑",
-            "zh": "以太吸血手套"
+            "zh": "以太吸血手套",
+            "fr": "Gants éthériques de la vie en vol de vêtements",
+            "es": "Guantes Etéreos de Robo de Vida"
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
@@ -1086,7 +1196,9 @@
             "en": "Etheric Boots of Lifesteal",
             "jp": "吸収のエーテルブーツ",
             "kr": "흡혈의 에테르 신발",
-            "zh": "以太吸血鞋子"
+            "zh": "以太吸血鞋子",
+            "fr": "Bottes éthériques de la vie vol de la vie",
+            "es": "Botas Etéreas de Robo de Vida"
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
@@ -1106,7 +1218,9 @@
             "en": "Etheric Helmet of Effectiveness",
             "jp": "効果命中のエーテルヘルム",
             "kr": "적중의 에테르 투구",
-            "zh": "以太效果命中头盔"
+            "zh": "以太效果命中头盔",
+            "fr": "Casque étherique de l'Efficacité",
+            "es": "Casco Etérico de Efectividad"
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
@@ -1126,7 +1240,9 @@
             "en": "Etheric Chest Armor of Effectiveness",
             "jp": "効果命中のエーテルアーマー",
             "kr": "적중의 에테르 갑옷",
-            "zh": "以太效果命中盔甲"
+            "zh": "以太效果命中盔甲",
+            "fr": "Armure éthérique du guérol étrique de l'Efficacité",
+            "es": "Armadura Etérea Efectividad"
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
@@ -1146,7 +1262,9 @@
             "en": "Etheric Gloves of Effectiveness",
             "jp": "効果命中のエーテルガントレット",
             "kr": "적중의 에테르 장갑",
-            "zh": "以太效果命中手套"
+            "zh": "以太效果命中手套",
+            "fr": "Etheric Gloves of Efficacité",
+            "es": "Guantes Etéreos de Efectividad"
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
@@ -1166,7 +1284,9 @@
             "en": "Etheric Boots of Effectiveness",
             "jp": "効果命中のエーテルブーツ",
             "kr": "적중의 에테르 신발",
-            "zh": "以太效果命中鞋子"
+            "zh": "以太效果命中鞋子",
+            "fr": "Bottes éthériques de l'Efficacité",
+            "es": "Botas Etéreas de Efectividad"
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
@@ -1189,7 +1309,9 @@
           "en": "Star's Memory",
           "jp": "スターピース",
           "kr": "별의 기억",
-          "zh": "星之记忆"
+          "zh": "星之记忆",
+          "fr": "Souvenir étoile",
+          "es": "Memoria Estrella"
         },
         "icon": "TI_Item_Memory_Of_Star"
       },
@@ -1201,7 +1323,9 @@
             "en": "Arena Ticket x5",
             "jp": "アリーナチケット 5枚",
             "kr": "결투장 티켓 5개",
-            "zh": "5张竞技场入场券"
+            "zh": "5张竞技场入场券",
+            "fr": "Arena Ticket x5",
+            "es": "Ticket de Arena x5"
           },
           "icon": "TI_Item_Ticket_PVP",
           "iconKind": "item",
@@ -1221,7 +1345,9 @@
             "en": "Special Recruitment Ticket (Event)",
             "jp": "プレミア\\nスカウトチケット(イベント)",
             "kr": "특별 영입 티켓 (이벤트)",
-            "zh": "特别招募券(活动)"
+            "zh": "特别招募券(活动)",
+            "fr": "Billet de recrutement spécial (événement)",
+            "es": "Boleto de reclutamiento especial (Evento)"
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
@@ -1241,7 +1367,9 @@
             "en": "150 Stamina",
             "jp": "活力×150",
             "kr": "150 행동력",
-            "zh": "150行动力"
+            "zh": "150行动力",
+            "fr": "150 Stamina",
+            "es": "150 Vigor"
           },
           "icon": "TI_Item_Stamina",
           "iconKind": "item",
@@ -1261,7 +1389,9 @@
             "en": "Steak Dish x10",
             "jp": "ステーキ定食 10個",
             "kr": "스테이크 정식 10개",
-            "zh": "10个牛排套餐"
+            "zh": "10个牛排套餐",
+            "fr": "steak plat x10",
+            "es": "Plato de bistec x10"
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
@@ -1281,7 +1411,9 @@
             "en": "Intermediate Skill Manual x1",
             "jp": "スキル教本：応用編 1個",
             "kr": "중급 스킬 교본 1개",
-            "zh": "1本中级技能教材"
+            "zh": "1本中级技能教材",
+            "fr": "Intermediate comp. manuel x1",
+            "es": "Manual de Habilidad Intermedio x1"
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
@@ -1301,7 +1433,9 @@
             "en": "Professional Skill Manual x1",
             "jp": "スキル教本：専門家編 1個",
             "kr": "전문 스킬 교본 1개",
-            "zh": "1本专家技能教材"
+            "zh": "1本专家技能教材",
+            "fr": "Professional comp. manuel x1",
+            "es": "Manual Habilidad Profesional x1"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -1321,7 +1455,9 @@
             "en": "Glunite x1",
             "jp": "グルーナイト 1個",
             "kr": "글루나이트 1개",
-            "zh": "1个格鲁矿石"
+            "zh": "1个格鲁矿石",
+            "fr": "Glunite x1",
+            "es": "Glunite x1"
           },
           "icon": "TI_Equipment_Growth01",
           "iconKind": "item",
@@ -1341,7 +1477,9 @@
             "en": "Refined Glunite x1",
             "jp": "精製されたグルーナイト 1個",
             "kr": "정제된 글루나이트 1개",
-            "zh": "1个精炼的格鲁矿石"
+            "zh": "1个精炼的格鲁矿石",
+            "fr": "Refined Glunite x1",
+            "es": "Glunite Refinado x1"
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
@@ -1361,7 +1499,9 @@
             "en": "Epic Quality Present Selection Chest x3",
             "jp": "プレゼント選択\\nボックス【ユニーク】3個",
             "kr": "영웅 등급 선물 선택 상자 3개",
-            "zh": "3个英雄级别礼物选择箱"
+            "zh": "3个英雄级别礼物选择箱",
+            "fr": "Epic Quality Present sélection coffre x3",
+            "es": "Cofre de Selección de Presente de Calidad Élite de x3"
           },
           "icon": "TI_Common_Box04",
           "iconKind": "item",
@@ -1381,7 +1521,9 @@
             "en": "200,000 Gold",
             "jp": "200,000ゴールド",
             "kr": "200,000 골드",
-            "zh": "200,000金币"
+            "zh": "200,000金币",
+            "fr": "200,000 or or",
+            "es": "200,000 Oro"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -1401,7 +1543,9 @@
             "en": "Special Recruitment Ticket x2",
             "jp": "プレミア\\nスカウトチケット2枚",
             "kr": "특별 영입 티켓 2개",
-            "zh": "2张特别招募券"
+            "zh": "2张特别招募券",
+            "fr": "Billet de recrutement spécial x2",
+            "es": "Entrada de Reclutamiento Especial x2"
           },
           "icon": "TI_Item_Ticket_Recruit_02",
           "iconKind": "item",
@@ -1421,7 +1565,9 @@
             "en": "Potentium (Weapon/Accessory) x1",
             "jp": "オプショニウム\\n(武器・アクセサリー)1個",
             "kr": "옵셔니움(무기/악세서리) 1개",
-            "zh": "1个属性剂(武器/饰品)"
+            "zh": "1个属性剂(武器/饰品)",
+            "fr": "Potentium (arme/Accessory) x1",
+            "es": "Potentium (Arma/Accesorio) x1"
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
@@ -1441,7 +1587,9 @@
             "en": "Potentium (Armor) x1",
             "jp": "オプショニウム\\n(防具)",
             "kr": "옵셔니움(방어구) 1개",
-            "zh": "1个属性剂(防具)"
+            "zh": "1个属性剂(防具)",
+            "fr": "Potentium (armure) x1",
+            "es": "Potentium (Armadura) x1"
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
@@ -1461,7 +1609,9 @@
             "en": "Transistone (Total) x1",
             "jp": "トランストーン\\n(全体)",
             "kr": "트랜스톤(전체) 1개",
-            "zh": "1个转换石(全部)"
+            "zh": "1个转换石(全部)",
+            "fr": "Transistone (Total) x1",
+            "es": "Transistone (Total) x1"
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
@@ -1481,7 +1631,9 @@
             "en": "Transistone (Individual) x1",
             "jp": "トランストーン\\n(選択)",
             "kr": "트랜스톤(개별) 1개",
-            "zh": "1个转换石(单个)"
+            "zh": "1个转换石(单个)",
+            "fr": "Transistone (Individual) x1",
+            "es": "Transistone (Individual) x1"
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
@@ -1501,7 +1653,9 @@
             "en": "Time Rewinder x1",
             "jp": "タイム・\\nリワインダー1個",
             "kr": "타임 리와인더 1개",
-            "zh": "1个时间倒带"
+            "zh": "1个时间倒带",
+            "fr": "Time Rewinder x1",
+            "es": "Rebobinador de Tiempo x1"
           },
           "icon": "TI_CharacterRecall",
           "iconKind": "item",
@@ -1521,7 +1675,9 @@
             "en": "Blue Stardust",
             "jp": "ブルースターダスト",
             "kr": "블루 스타 더스트",
-            "zh": "蓝色星尘"
+            "zh": "蓝色星尘",
+            "fr": "Blue Stardust",
+            "es": "Polvo estelar azul"
           },
           "icon": "TI_Talisman_Growth_Enhance_01",
           "iconKind": "item",
@@ -1541,7 +1697,9 @@
             "en": "Purple Stardust",
             "jp": "パープルスターダスト",
             "kr": "퍼플 스타 더스트",
-            "zh": "紫色星尘"
+            "zh": "紫色星尘",
+            "fr": "Purple Stardust",
+            "es": "Polvo de estrellas púrpura"
           },
           "icon": "TI_Talisman_Growth_Enhance_02",
           "iconKind": "item",
@@ -1561,7 +1719,9 @@
             "en": "Blue Memory Stone",
             "jp": "ブルーメモリーストーン",
             "kr": "블루 메모리 스톤",
-            "zh": "蓝色记忆石"
+            "zh": "蓝色记忆石",
+            "fr": "Blue Memory Stone",
+            "es": "Piedra de Memoria Azul"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_01",
           "iconKind": "item",
@@ -1581,7 +1741,9 @@
             "en": "Purple Memory Stone",
             "jp": "パープルメモリーストーン",
             "kr": "퍼플 메모리 스톤",
-            "zh": "紫色记忆石"
+            "zh": "紫色记忆石",
+            "fr": "Purple Memory Stone",
+            "es": "Piedra Memoria Púrpura"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_02",
           "iconKind": "item",
@@ -1601,7 +1763,9 @@
             "en": "Ultra-Precision Control Chip",
             "jp": "超精密制御チップ",
             "kr": "초정밀 제어칩",
-            "zh": "超精密控制芯片"
+            "zh": "超精密控制芯片",
+            "fr": "Chip de commande ultra-précisifs de commande",
+            "es": "Chip de control ultra preciso"
           },
           "icon": "TI_Precision_Chip",
           "iconKind": "item",
@@ -1621,7 +1785,9 @@
             "en": "Reforge Reset Scroll [Epic]",
             "jp": "再錬リセットスクロール【ユニーク】",
             "kr": "재련 초기화 스크롤[영웅]",
-            "zh": "重铸初始化卷轴【英雄】"
+            "zh": "重铸初始化卷轴【英雄】",
+            "fr": "Reforge Reset Scroll [Epic]",
+            "es": "Pergamino de Reinicio de Reforjar [Épico]"
           },
           "icon": "TI_Item_Growth_Scroll_01",
           "iconKind": "item",
@@ -1641,7 +1807,9 @@
             "en": "Reforge Reset Scroll [Legendary]",
             "jp": "再錬リセットスクロール【レジェンド】",
             "kr": "재련 초기화 스크롤[전설]",
-            "zh": "重铸初始化卷轴【传说】"
+            "zh": "重铸初始化卷轴【传说】",
+            "fr": "Reforge Reset Scroll [Legendary]",
+            "es": "Pergamino de reinicio de Reforjar [Legendario]"
           },
           "icon": "TI_Item_Growth_Scroll_01",
           "iconKind": "item",
@@ -1661,7 +1829,9 @@
             "en": "Gear Reset Module",
             "jp": "ギア・リセットモジュール",
             "kr": "기어 리셋 모듈",
-            "zh": "装备重置模块"
+            "zh": "装备重置模块",
+            "fr": "Module de réinitialisation d'équipement",
+            "es": "Módulo de Reinicio: Engranaje"
           },
           "icon": "TI_Gear_Reset",
           "iconKind": "item",
@@ -1681,7 +1851,9 @@
             "en": "Dimensional Supply Ticket x2",
             "jp": "次元召喚チケット x2",
             "kr": "차원 호출 티켓 2장",
-            "zh": "次元召唤券 x2"
+            "zh": "次元召唤券 x2",
+            "fr": "Billet d'approvisionnement dimensionnel x2",
+            "es": "Boleto Suministro Dimensional x2"
           },
           "icon": "TI_Item_Ticket_Recruit_08",
           "iconKind": "item",
@@ -1704,7 +1876,9 @@
           "en": "World Boss Token",
           "jp": "ワールドボスの証",
           "kr": "월드 보스 증표",
-          "zh": "世界首领信物"
+          "zh": "世界首领信物",
+          "fr": "Jeton de boss mondial",
+          "es": "Ficha de Jefe Mundial"
         },
         "icon": ""
       },
@@ -1716,7 +1890,9 @@
             "en": "10,000 Gold",
             "jp": "10,000ゴールド",
             "kr": "골드 10,000",
-            "zh": "10,000金币"
+            "zh": "10,000金币",
+            "fr": "10,000 Gold",
+            "es": "Oro ×10,000"
           },
           "icon": "CM_TopMenu_Gold",
           "iconKind": "item",
@@ -1736,7 +1912,9 @@
             "en": "Steak Dish",
             "jp": "ステーキ定食",
             "kr": "스테이크 정식",
-            "zh": "牛排套餐"
+            "zh": "牛排套餐",
+            "fr": "Plat de steak",
+            "es": "Plato de bistec"
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
@@ -1756,7 +1934,9 @@
             "en": "Potentium (Weapon/Accessory)",
             "jp": "オプショニウム\\n(武器・アクセサリー)",
             "kr": "옵셔니움 (무기/악세서리)",
-            "zh": "属性剂(武器/饰品)"
+            "zh": "属性剂(武器/饰品)",
+            "fr": "Potentium (arme/access.)",
+            "es": "Potentium (Arma/Accesorio)"
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
@@ -1776,7 +1956,9 @@
             "en": "Potentium (Armor)",
             "jp": "オプショニウム(防具)",
             "kr": "옵셔니움 (방어구)",
-            "zh": "属性剂(防具)"
+            "zh": "属性剂(防具)",
+            "fr": "Potentium (armure)",
+            "es": "Potentium (Armadura)"
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
@@ -1796,7 +1978,9 @@
             "en": "Transistone (Total)",
             "jp": "トランストーン\\n(全体)",
             "kr": "트랜스톤 (전체)",
-            "zh": "转换石(全部)"
+            "zh": "转换石(全部)",
+            "fr": "Transistone (total)",
+            "es": "Transistone (Total)"
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
@@ -1816,7 +2000,9 @@
             "en": "Transistone (Individual)",
             "jp": "トランストーン\\n(選択)",
             "kr": "트랜스톤 (개별)",
-            "zh": "转换石(单个)"
+            "zh": "转换石(单个)",
+            "fr": "Transistone (indiv.)",
+            "es": "Transistone (Individual)"
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
@@ -1836,7 +2022,9 @@
             "en": "Indomitable Dragon Drakhan",
             "jp": "不敗の竜・ドレイカーン",
             "kr": "불패의 용 드레이칸",
-            "zh": "不败之龙德雷坎"
+            "zh": "不败之龙德雷坎",
+            "fr": "Dragon indomptable Drakhan",
+            "es": "Dragón Drakhan invencible"
           },
           "icon": "TI_Costume_Clothes_2000063_02",
           "iconKind": "item",
@@ -1856,7 +2044,9 @@
             "en": "Undefeated Leader Nella",
             "jp": "不敗の指導者・ネラ",
             "kr": "불패의 지도자 넬라",
-            "zh": "不败的领袖内拉"
+            "zh": "不败的领袖内拉",
+            "fr": "Leader invaincu Nella Nella.",
+            "es": "Nella, la Líder Invicta"
           },
           "icon": "TI_Costume_Clothes_2000091_02",
           "iconKind": "item",
@@ -1879,7 +2069,9 @@
           "en": "License Point",
           "jp": "ライセンスポイント",
           "kr": "라이선스 포인트",
-          "zh": "许可证点数"
+          "zh": "许可证点数",
+          "fr": "Point de permis",
+          "es": "Punto de Licencia"
         },
         "icon": "TI_Licence"
       },
@@ -1891,7 +2083,9 @@
             "en": "Title [Tycoon]",
             "jp": "称号【大富豪】",
             "kr": "칭호 [대부호]",
-            "zh": "称号【大富豪】"
+            "zh": "称号【大富豪】",
+            "fr": "Titre [Tycoon]",
+            "es": "Título [Tycoon]"
           },
           "icon": "",
           "iconKind": "item",
@@ -1911,7 +2105,9 @@
             "en": "Powerful Adventurer's Talisman",
             "jp": "強力な冒険者のタリスマン",
             "kr": "강력한 모험가의 탈리스만",
-            "zh": "强力冒险家的护身符"
+            "zh": "强力冒险家的护身符",
+            "fr": "Powerful Adventurer's Talisman",
+            "es": "Talismán Poderoso del Aventurero"
           },
           "icon": "TI_Equipment_Talisman_08",
           "iconKind": "equipment",
@@ -1931,7 +2127,9 @@
             "en": "Sharp Adventurer's Talisman",
             "jp": "鋭敏な冒険者のタリスマン",
             "kr": "예리한 모험가의 탈리스만",
-            "zh": "敏锐冒险家的护身符"
+            "zh": "敏锐冒险家的护身符",
+            "fr": "acéré Adventurer's Talisman",
+            "es": "Talismán Agudo del Aventurero"
           },
           "icon": "TI_Equipment_Talisman_03",
           "iconKind": "equipment",
@@ -1951,7 +2149,9 @@
             "en": "Adventurer's Sword",
             "jp": "冒険者の剣",
             "kr": "모험가의 검",
-            "zh": "冒险家之剑"
+            "zh": "冒险家之剑",
+            "fr": "L'épée de l'aventurier",
+            "es": "Espada del Aventurero"
           },
           "icon": "TI_Equipment_Weapon_06",
           "iconKind": "equipment",
@@ -1971,7 +2171,9 @@
             "en": "Adventurer's Necklace",
             "jp": "冒険者の首飾り",
             "kr": "모험가의 목걸이",
-            "zh": "冒险家项链"
+            "zh": "冒险家项链",
+            "fr": "Adventurer's Necklace",
+            "es": "Collar del Aventurero"
           },
           "icon": "TI_Equipment_Accessary_06",
           "iconKind": "equipment",
@@ -1991,7 +2193,9 @@
             "en": "Refined Glunite",
             "jp": "精製された\\nグルーナイト",
             "kr": "정제된 글루나이트",
-            "zh": "精炼格鲁矿石"
+            "zh": "精炼格鲁矿石",
+            "fr": "Glunite raffinée",
+            "es": "Glunite refinado"
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
@@ -2011,7 +2215,9 @@
             "en": "6★ Legendary Helmet [Burst]",
             "jp": "★6炸裂のヘルム\\n【レジェンド】",
             "kr": "6성 전설 투구 [버스트]",
-            "zh": "6星传说头盔【爆发】"
+            "zh": "6星传说头盔【爆发】",
+            "fr": "6★ Casque légendaire de [Burst]",
+            "es": "Casco Legendario 6★ [Burst]"
           },
           "icon": "TI_Equipment_Helmet_06",
           "iconKind": "equipment",
@@ -2031,7 +2237,9 @@
             "en": "6★ Legendary Chest Armor [Burst]",
             "jp": "★6炸裂のアーマー\\n【レジェンド】",
             "kr": "6성 전설 갑옷 [버스트]",
-            "zh": "6星传说盔甲【爆发】"
+            "zh": "6星传说盔甲【爆发】",
+            "fr": "6★ Légendaire coffre armure [Burst]",
+            "es": "Peto Legendario 6★ [Burst]"
           },
           "icon": "TI_Equipment_Armor_06",
           "iconKind": "equipment",
@@ -2051,7 +2259,9 @@
             "en": "6★ Legendary Gloves [Burst]",
             "jp": "★6炸裂のガントレット\\n【レジェンド】",
             "kr": "6성 전설 장갑 [버스트]",
-            "zh": "6星传说手套【爆发】"
+            "zh": "6星传说手套【爆发】",
+            "fr": "6★ Légendaire Gloves [Burst]",
+            "es": "Guantes Legendarios [Burst]"
           },
           "icon": "TI_Equipment_Gloves_06",
           "iconKind": "equipment",
@@ -2071,7 +2281,9 @@
             "en": "6★ Legendary Boots [Burst]",
             "jp": "★6炸裂のブーツ\\n【レジェンド】",
             "kr": "6성 전설 신발 [버스트]",
-            "zh": "6星传说鞋子【爆发】"
+            "zh": "6星传说鞋子【爆发】",
+            "fr": "6★ Légendaire bottes [Burst]",
+            "es": "Botas Legendarias [Burst]"
           },
           "icon": "TI_Equipment_Shoes_06",
           "iconKind": "equipment",
@@ -2091,7 +2303,9 @@
             "en": "Proof of Worth",
             "jp": "資格の証明",
             "kr": "자격의 증명",
-            "zh": "资格证明"
+            "zh": "资格证明",
+            "fr": "Proof of Worth",
+            "es": "Prueba de Valía"
           },
           "icon": "TI_Gift_Cost_03",
           "iconKind": "item",
@@ -2114,7 +2328,9 @@
             "en": "Stage 5–6 Gem Chest",
             "jp": "ジェムボックス(ランク5～6)",
             "kr": "5~6단계 보석 상자",
-            "zh": "第5~6阶段宝石箱"
+            "zh": "第5~6阶段宝石箱",
+            "fr": "Coffre de gemmes niv. 5–6",
+            "es": "Cofre de gemas de fase 5–6"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
@@ -2137,7 +2353,9 @@
           "en": "Survey Points",
           "jp": "調査Pt",
           "kr": "조사 포인트",
-          "zh": "调查点数"
+          "zh": "调查点数",
+          "fr": "Points d'arpentage",
+          "es": "Puntos de Encuesta"
         },
         "icon": "CM_Icon_Support_Survey"
       },
@@ -2149,7 +2367,9 @@
             "en": "Ether",
             "jp": "エーテル",
             "kr": "에테르",
-            "zh": "以太"
+            "zh": "以太",
+            "fr": "Éther",
+            "es": "Éter"
           },
           "icon": "TI_Item_Cristal",
           "iconKind": "item",
@@ -2169,7 +2389,9 @@
             "en": "Special Recruitment Ticket (Event)",
             "jp": "プレミア\\nスカウトチケット(イベント)",
             "kr": "특별 영입 티켓(이벤트)",
-            "zh": "特别招募券(活动)"
+            "zh": "特别招募券(活动)",
+            "fr": "Billet de recrutement spécial (événement)",
+            "es": "Boleto de Reclutamiento Especial (Evento)"
           },
           "icon": "TI_Item_Ticket_Recruit_04",
           "iconKind": "item",
@@ -2189,7 +2411,9 @@
             "en": "Transistone (Individual)",
             "jp": "トランストーン\\n(選択)",
             "kr": "트랜스톤 (개별)",
-            "zh": "转换石(单个)"
+            "zh": "转换石(单个)",
+            "fr": "Transistone (indiv.)",
+            "es": "Transistone (Individual)"
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
@@ -2209,7 +2433,9 @@
             "en": "Transistone (Total)",
             "jp": "トランストーン\\n(全体)",
             "kr": "트랜스톤 (전체)",
-            "zh": "转换石(全部)"
+            "zh": "转换石(全部)",
+            "fr": "Transistone (total)",
+            "es": "Transistone (Total)"
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
@@ -2229,7 +2455,9 @@
             "en": "Refined Glunite",
             "jp": "精製されたグルーナイト",
             "kr": "정제된 글루나이트",
-            "zh": "精炼格鲁矿石"
+            "zh": "精炼格鲁矿石",
+            "fr": "Glunite raffinée",
+            "es": "Glunite refinado"
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
@@ -2249,7 +2477,9 @@
             "en": "Professional Skill Manual",
             "jp": "スキル教本：専門家編",
             "kr": "전문 스킬 교본",
-            "zh": "专家技能教材"
+            "zh": "专家技能教材",
+            "fr": "Professional comp. manuel",
+            "es": "Manual de hab. profesional"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -2269,7 +2499,9 @@
             "en": "Stage 4 Gem Selection Chest",
             "jp": "ジェム選択ボックス(ランク4)",
             "kr": "4단계 보석 선택 상자",
-            "zh": "第4阶段宝石选择箱"
+            "zh": "第4阶段宝石选择箱",
+            "fr": "Coffre de sélection de gemmes niv. 4",
+            "es": "Cofre de Selección de Gema de Fase 4"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
@@ -2289,7 +2521,9 @@
             "en": "Legendary Reforge Catalyst",
             "jp": "再錬カタリスト(レジェンド)",
             "kr": "전설 재련 촉매제",
-            "zh": "传说重铸催化剂"
+            "zh": "传说重铸催化剂",
+            "fr": "Légendaire Reforge Catalyst",
+            "es": "Catalizador de Reforjar Legendario"
           },
           "icon": "TI_Item_Growth_Dissolve_04",
           "iconKind": "item",
@@ -2309,7 +2543,9 @@
             "en": "Superior Quality Present Chest",
             "jp": "プレゼントボックス【レア】",
             "kr": "고급 등급 선물 상자",
-            "zh": "高级级别礼物箱"
+            "zh": "高级级别礼物箱",
+            "fr": "Superior Quality Present coffre",
+            "es": "Caja de Regalos de Calidad Superior"
           },
           "icon": "TI_Common_Box03",
           "iconKind": "item",
@@ -2329,7 +2565,9 @@
             "en": "Artisan's Hammer",
             "jp": "達人の強化ハンマー",
             "kr": "명인 강화 도구",
-            "zh": "名匠强化道具"
+            "zh": "名匠强化道具",
+            "fr": "Artisan's Hammer",
+            "es": "Martillo del Artesano"
           },
           "icon": "TI_Item_Growth_Enhance_04",
           "iconKind": "item",
@@ -2349,7 +2587,9 @@
             "en": "Steak Dish",
             "jp": "ステーキ定食",
             "kr": "스테이크 정식",
-            "zh": "牛排套餐"
+            "zh": "牛排套餐",
+            "fr": "Plat de steak",
+            "es": "Plato de bistec"
           },
           "icon": "TI_Item_Growth_Potion_04",
           "iconKind": "item",
@@ -2369,7 +2609,9 @@
             "en": "Potentium (Weapon/Accessory)",
             "jp": "オプショニウム\\n(武器・アクセサリー)",
             "kr": "옵셔니움 (무기/악세서리)",
-            "zh": "属性剂(武器/饰品)"
+            "zh": "属性剂(武器/饰品)",
+            "fr": "Potentium (arme/access.)",
+            "es": "Potentium (Arma/Accesorio)"
           },
           "icon": "TI_Item_Craft_Addition_O_01",
           "iconKind": "item",
@@ -2389,7 +2631,9 @@
             "en": "Potentium (Armor)",
             "jp": "オプショニウム(防具)",
             "kr": "옵셔니움 (방어구)",
-            "zh": "属性剂(防具)"
+            "zh": "属性剂(防具)",
+            "fr": "Potentium (armure)",
+            "es": "Potentium (Armadura)"
           },
           "icon": "TI_Item_Craft_Addition_O_02",
           "iconKind": "item",
@@ -2409,7 +2653,9 @@
             "en": "10% Legendary Abrasive",
             "jp": "レジェンド研磨剤10%",
             "kr": "10% 전설 등급 연마제",
-            "zh": "10%传说级别研磨剂"
+            "zh": "10%传说级别研磨剂",
+            "fr": "10% Légendaire abrasif abrasif",
+            "es": "Abrasivo Legendario 10%"
           },
           "icon": "TI_Item_Craft_Addition_U_01",
           "iconKind": "item",
@@ -2429,7 +2675,9 @@
             "en": "Time Rewinder",
             "jp": "タイム・リワインダー",
             "kr": "타임 리와인더",
-            "zh": "时间倒带"
+            "zh": "时间倒带",
+            "fr": "Time Rewinder",
+            "es": "Rebobinador de Tiempo"
           },
           "icon": "TI_CharacterRecall",
           "iconKind": "item",
@@ -2449,7 +2697,9 @@
             "en": "5★ Random Talisman Chest",
             "jp": "★5タリスマンランダムボックス",
             "kr": "5성 탈리스만 랜덤 상자",
-            "zh": "5星护身符随机箱"
+            "zh": "5星护身符随机箱",
+            "fr": "5★ Random Talisman coffre",
+            "es": "Cofre de Talismán Aleatorio 5★"
           },
           "icon": "TI_Talisman_Box02",
           "iconKind": "item",
@@ -2469,7 +2719,9 @@
             "en": "6★ Talisman Selection Chest",
             "jp": "★6タリスマン選択ボックス",
             "kr": "6성 탈리스만 선택 상자",
-            "zh": "6星护身符选择箱"
+            "zh": "6星护身符选择箱",
+            "fr": "6★ Talisman sélection coffre",
+            "es": "Cofre de Selección de Talismán 6★"
           },
           "icon": "TI_Talisman_Box02",
           "iconKind": "item",
@@ -2489,7 +2741,9 @@
             "en": "6★ Legendary Weapon Selection Chest",
             "jp": "★6武器選択ボックス【レジェンド】",
             "kr": "6성 전설 무기 선택 상자",
-            "zh": "6星传说武器选择箱"
+            "zh": "6星传说武器选择箱",
+            "fr": "Coffre de sélection d'arme légendaire 6★",
+            "es": "Cofre de Selección de Arma Legendaria 6★"
           },
           "icon": "TI_Weapon_Box02",
           "iconKind": "item",
@@ -2509,7 +2763,9 @@
             "en": "6★ Legendary Accessory Selection Chest",
             "jp": "★6アクセサリー選択ボックス【レジェンド】",
             "kr": "6성 전설 악세서리 선택 상자",
-            "zh": "6星传说饰品选择箱"
+            "zh": "6星传说饰品选择箱",
+            "fr": "Coffre de sélection d'accessoire légendaire 6★",
+            "es": "Cofre de Selección de Accesorio Legendario 6★"
           },
           "icon": "TI_Accessary_Box02",
           "iconKind": "item",
@@ -2529,7 +2785,9 @@
             "en": "6★ Legendary Helmet Selection Chest",
             "jp": "★6ヘルム選択ボックス【レジェンド】",
             "kr": "6성 전설 투구 선택 상자",
-            "zh": "6星传说头盔选择箱"
+            "zh": "6星传说头盔选择箱",
+            "fr": "6★ Légendaire Helmet sélection coffre",
+            "es": "Cofre de selección de casco legendario 6★"
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
@@ -2549,7 +2807,9 @@
             "en": "6★ Legendary Chest Armor Selection Chest",
             "jp": "★6アーマー選択ボックス【レジェンド】",
             "kr": "6성 전설 갑옷 선택 상자",
-            "zh": "6星传说盔甲选择箱"
+            "zh": "6星传说盔甲选择箱",
+            "fr": "Coffre de sélection d'armure légendaire 6★",
+            "es": "Cofre de selección de armadura legendaria 6★"
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
@@ -2569,7 +2829,9 @@
             "en": "6★ Legendary Gloves Selection Chest",
             "jp": "★6ガントレット選択ボックス【レジェンド】",
             "kr": "6성 전설 장갑 선택 상자",
-            "zh": "6星传说手套选择箱"
+            "zh": "6星传说手套选择箱",
+            "fr": "6★ Légendaire Gloves sélection coffre",
+            "es": "Cofre selección: Guantes 6★ Legendarios"
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
@@ -2589,7 +2851,9 @@
             "en": "6★ Legendary Boots Selection Chest",
             "jp": "★6ブーツ選択ボックス【レジェンド】",
             "kr": "6성 전설 신발 선택 상자",
-            "zh": "6星传说鞋子选择箱"
+            "zh": "6星传说鞋子选择箱",
+            "fr": "Coffre de sélection de bottes légendaires 6★",
+            "es": "Cofre de Selección de Botas Legendarias 6★"
           },
           "icon": "TI_Armor_Box02",
           "iconKind": "item",
@@ -2609,7 +2873,9 @@
             "en": "Sigma Piece",
             "jp": "シグマのピース",
             "kr": "시그마의 조각",
-            "zh": "西格玛碎片"
+            "zh": "西格玛碎片",
+            "fr": "Sigma pièce",
+            "es": "Pieza Sigma"
           },
           "icon": "CM_Piece_Frame",
           "iconKind": "item",

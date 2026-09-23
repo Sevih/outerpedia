@@ -4,7 +4,9 @@
     "en": "Hope is a thing with feathers",
     "jp": "希望は翼あるもの",
     "kr": "희망은 날개 달린 것",
-    "zh": "希望长有翅膀"
+    "zh": "希望长有翅膀",
+    "fr": "L'espoir est une chose à plumes",
+    "es": "esperanza es un ser con plumas"
   },
   "gauge": {
     "perMove": 20,
@@ -796,7 +798,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -810,7 +814,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -824,7 +830,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -838,7 +846,9 @@
         "en": "Route 4: Land of Sandstorms [1st Part]",
         "jp": "ルート4：砂風の国【前編】",
         "kr": "루트 4 : 모래바람의 나라 [전편]",
-        "zh": "路线4：风沙之国【前篇】"
+        "zh": "路线4：风沙之国【前篇】",
+        "fr": "Route 4: pays de temp. de sable [1ère partie]",
+        "es": "Ruta 4: Tierra de Tormentas [1ª Parte]"
       }
     },
     {
@@ -852,7 +862,9 @@
         "en": "Route 4: Land of Sandstorms [2nd Part]",
         "jp": "ルート4：砂風の国【後編】",
         "kr": "루트 4 : 모래바람의 나라 [후편]",
-        "zh": "路线4：风沙之国【后篇】"
+        "zh": "路线4：风沙之国【后篇】",
+        "fr": "Route 4: pays de temp. de sable [2e partie]",
+        "es": "Ruta 4: Tierra de Tormentas [2ª Parte]"
       }
     },
     {
@@ -866,7 +878,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -880,7 +894,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -894,7 +910,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -908,7 +926,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -922,7 +942,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -936,7 +958,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -950,7 +974,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -964,7 +990,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -978,7 +1006,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -992,7 +1022,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -1006,7 +1038,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -1020,7 +1054,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -1034,7 +1070,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -1048,7 +1086,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -1062,7 +1102,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -1076,7 +1118,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -1090,7 +1134,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -1104,7 +1150,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -1118,7 +1166,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -1132,7 +1182,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -1146,7 +1198,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -1160,7 +1214,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -1174,7 +1230,9 @@
         "en": "Route 1: Land of the White Falcon",
         "jp": "ルート1：白い鷹の国",
         "kr": "루트 1 : 하얀 매의 나라",
-        "zh": "路缐 1：白鹰之国"
+        "zh": "路缐 1：白鹰之国",
+        "fr": "Route 1 : Le Pays du Faucon Blanc",
+        "es": "Ruta 1: Tierra de White Falcon"
       }
     },
     {
@@ -1188,7 +1246,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -1202,7 +1262,9 @@
         "en": "Route 2: Sacred Archipelago",
         "jp": "ルート2：聖なる群島",
         "kr": "루트 2 : 신성한 군도",
-        "zh": "路缐 2：神圣群岛"
+        "zh": "路缐 2：神圣群岛",
+        "fr": "Route 2 : Archipel sacré",
+        "es": "Ruta 2: Archipiélago Sagrado"
       }
     },
     {
@@ -1216,7 +1278,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -1230,7 +1294,9 @@
         "en": "Route 3: Land of Snow and Steel",
         "jp": "ルート3：白い雪と鋼の国",
         "kr": "루트 3 : 하얀 눈과 강철의 나라",
-        "zh": "路缐 3：白雪与钢铁之国"
+        "zh": "路缐 3：白雪与钢铁之国",
+        "fr": "Route 3: pays de neige & acier",
+        "es": "Ruta 3: Tierra de Snow y Acero"
       }
     },
     {
@@ -1244,7 +1310,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -1258,7 +1326,9 @@
         "en": "Route 4: Land of Sandstorms",
         "jp": "ルート4：砂風の国",
         "kr": "루트 4 : 모래바람의 나라",
-        "zh": "路缐 4：风沙之国"
+        "zh": "路缐 4：风沙之国",
+        "fr": "Route 4: pays de temp. de sable",
+        "es": "Ruta 4: Tierra de Tormentas"
       }
     },
     {
@@ -1272,7 +1342,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     },
     {
@@ -1286,7 +1358,9 @@
         "en": "Route 5: Realm of Bane",
         "jp": "ルート5：劇毒の領域",
         "kr": "루트 5 : 극독의 영역",
-        "zh": "路缐 5：剧毒领域"
+        "zh": "路缐 5：剧毒领域",
+        "fr": "Route 5: Royaume de Bane",
+        "es": "Ruta 5: Reino de Bane"
       }
     }
   ]

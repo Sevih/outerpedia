@@ -4,7 +4,9 @@
       "en": "Monomolecular Blade",
       "jp": "単分子ブレード",
       "kr": "단분자 블레이드",
-      "zh": "单分子剑"
+      "zh": "单分子剑",
+      "fr": "Monomolecular Blade",
+      "es": "Espada Monomol."
     },
     "grade": "unique",
     "star": 6,
@@ -31,7 +33,9 @@
       "en": "Blade of Destiny",
       "jp": "牙双冥剣",
       "kr": "데스티니 블레이드",
-      "zh": "命运之剑"
+      "zh": "命运之剑",
+      "fr": "Lame de destinyy de la lame",
+      "es": "Espada Destino"
     },
     "grade": "unique",
     "star": 6,
@@ -58,7 +62,9 @@
       "en": "Glacial Bow",
       "jp": "グレイシャルボウ",
       "kr": "글레이셜 보우",
-      "zh": "冰河之弓"
+      "zh": "冰河之弓",
+      "fr": "Glacial Bow",
+      "es": "Arco Glacial"
     },
     "grade": "unique",
     "star": 6,
@@ -85,7 +91,9 @@
       "en": "Reptilia Z-Power",
       "jp": "パワーレプティリアZ",
       "kr": "파워 랩티리아Z",
-      "zh": "强力拉普提里亚Z"
+      "zh": "强力拉普提里亚Z",
+      "fr": "Reptilia Z-Power",
+      "es": "Poder Z de Reptilia"
     },
     "grade": "unique",
     "star": 6,
@@ -112,7 +120,9 @@
       "en": "Cleaning Brush",
       "jp": "お掃除ブラシ",
       "kr": "물청소 브러시",
-      "zh": "清洁刷"
+      "zh": "清洁刷",
+      "fr": "Cleaning Brush",
+      "es": "Cepillo de Limpieza"
     },
     "grade": "unique",
     "star": 6,
@@ -139,7 +149,9 @@
       "en": "Tempest",
       "jp": "颯爽",
       "kr": "질풍",
-      "zh": "疾风"
+      "zh": "疾风",
+      "fr": "Tempête",
+      "es": "Tempestad"
     },
     "grade": "unique",
     "star": 6,
@@ -166,7 +178,9 @@
       "en": "Nostalgic Music Box",
       "jp": "偲びのオルゴール",
       "kr": "추억의 오르골",
-      "zh": "怀旧音乐盒"
+      "zh": "怀旧音乐盒",
+      "fr": "Nostalgic Music Boîte",
+      "es": "Música Nostálgica"
     },
     "grade": "unique",
     "star": 6,
@@ -193,7 +207,9 @@
       "en": "Sword of Sorrows",
       "jp": "悲悼のつるぎ",
       "kr": "슬픔의 칼날",
-      "zh": "悲伤之刃"
+      "zh": "悲伤之刃",
+      "fr": "L'épée de la douleur.",
+      "es": "Espada Penas"
     },
     "grade": "unique",
     "star": 6,
@@ -220,7 +236,9 @@
       "en": "Prism Lens",
       "jp": "プリズムレンズ",
       "kr": "프리즘 렌즈",
-      "zh": "三棱镜"
+      "zh": "三棱镜",
+      "fr": "Prism Lenss Lens",
+      "es": "Lente Prisma"
     },
     "grade": "unique",
     "star": 6,
@@ -247,7 +265,9 @@
       "en": "Trust",
       "jp": "信の剣",
       "kr": "신뢰",
-      "zh": "信任"
+      "zh": "信任",
+      "fr": "confiance",
+      "es": "Confianza"
     },
     "grade": "unique",
     "star": 6,
@@ -274,7 +294,9 @@
       "en": "Hand Ballista",
       "jp": "ハンディバリスタ",
       "kr": "핸디 발리스타",
-      "zh": "便携式弩炮"
+      "zh": "便携式弩炮",
+      "fr": "Hand Ballista",
+      "es": "Ballesta de Mano"
     },
     "grade": "unique",
     "star": 6,
@@ -301,7 +323,9 @@
       "en": "Jackpot",
       "jp": "ジャックポット",
       "kr": "잭팟",
-      "zh": "头等奖"
+      "zh": "头等奖",
+      "fr": "- Jackpot",
+      "es": "Premio Gordo"
     },
     "grade": "unique",
     "star": 6,
@@ -328,7 +352,9 @@
       "en": "Bedtime Snuggle Buddy",
       "jp": "夢の抱き枕",
       "kr": "꿈나라 여행 친구",
-      "zh": "梦之旅伴"
+      "zh": "梦之旅伴",
+      "fr": "Bedtime Snuggle Buddy",
+      "es": "Compañero Nocturno"
     },
     "grade": "unique",
     "star": 6,
@@ -355,7 +381,9 @@
       "en": "Master's Gift",
       "jp": "ご主人様の贈り物",
       "kr": "주인님의 선물",
-      "zh": "主人的礼物"
+      "zh": "主人的礼物",
+      "fr": "Master's Gift",
+      "es": "Regalo del Amo"
     },
     "grade": "unique",
     "star": 6,
@@ -382,7 +410,9 @@
       "en": "Iron Claws of Calamity",
       "jp": "閃撃の鉤爪",
       "kr": "섬격철조",
-      "zh": "闪击铁爪"
+      "zh": "闪击铁爪",
+      "fr": "Iron Claws of Calamity",
+      "es": "Garras de Hierro de la Calamidad"
     },
     "grade": "unique",
     "star": 6,
@@ -409,7 +439,9 @@
       "en": "Knight's Special Great Sword",
       "jp": "誂えた騎士の剣",
       "kr": "기사단 특주 대검",
-      "zh": "骑士团特制巨剑"
+      "zh": "骑士团特制巨剑",
+      "fr": "Knight's Special Great Sword",
+      "es": "Gran Espada Caballero"
     },
     "grade": "unique",
     "star": 6,
@@ -436,7 +468,9 @@
       "en": "Baptismal Icon",
       "jp": "洗礼用の聖火",
       "kr": "세례용 성화",
-      "zh": "洗礼圣火"
+      "zh": "洗礼圣火",
+      "fr": "Baptême Iconal Iconal",
+      "es": "Icono Bautismal"
     },
     "grade": "unique",
     "star": 6,
@@ -463,7 +497,9 @@
       "en": "Lie Detector",
       "jp": "ライ♥ディテクター",
       "kr": "거짓말 탐지기",
-      "zh": "测谎仪"
+      "zh": "测谎仪",
+      "fr": "Lie Detector",
+      "es": "Detector Mentiras"
     },
     "grade": "unique",
     "star": 6,
@@ -490,7 +526,9 @@
       "en": "Setsuna",
       "jp": "セツナ",
       "kr": "세츠나",
-      "zh": "刹那"
+      "zh": "刹那",
+      "fr": "Setsunauna",
+      "es": "Setsuna"
     },
     "grade": "unique",
     "star": 6,
@@ -517,7 +555,9 @@
       "en": "The Book of Folk and Tall Tales",
       "jp": "メルヘンテイルズ",
       "kr": "메르헨 테일즈",
-      "zh": "童话故事"
+      "zh": "童话故事",
+      "fr": "Le livre des folklores et des grands contes.",
+      "es": "Libro Cuentos y Leyendas"
     },
     "grade": "unique",
     "star": 6,
@@ -544,7 +584,9 @@
       "en": "The \"Joy\" Bringer",
       "jp": "ハッピーメーカー",
       "kr": "해피 메이커",
-      "zh": "欢乐制造者"
+      "zh": "欢乐制造者",
+      "fr": "The \"Joy\" Bringer",
+      "es": "Portador Alegría"
     },
     "grade": "unique",
     "star": 6,
@@ -571,7 +613,9 @@
       "en": "Super Genius's Toolkit",
       "jp": "スーパー天才専用工具",
       "kr": "슈퍼 천재 전용 공구 세트",
-      "zh": "超级天才专用工套装"
+      "zh": "超级天才专用工套装",
+      "fr": "Super Genius's Toolkit",
+      "es": "Kit Super Genio"
     },
     "grade": "unique",
     "star": 6,
@@ -598,7 +642,9 @@
       "en": "Cloud Relic",
       "jp": "クラウドレリック",
       "kr": "클라우드 렐릭",
-      "zh": "云之遗迹"
+      "zh": "云之遗迹",
+      "fr": "Cloud Relic",
+      "es": "Reliquia de Nube"
     },
     "grade": "unique",
     "star": 6,
@@ -625,7 +671,9 @@
       "en": "Cyclone Changer",
       "jp": "サイクロン・チェンジャー",
       "kr": "사이클론 체인저",
-      "zh": "旋风变换器"
+      "zh": "旋风变换器",
+      "fr": "Changement de cyclone",
+      "es": "Cambiador de Ciclón"
     },
     "grade": "unique",
     "star": 6,
@@ -652,7 +700,9 @@
       "en": "Demonic Twin",
       "jp": "デモニックツイン",
       "kr": "데모닉 트윈",
-      "zh": "恶魔双子"
+      "zh": "恶魔双子",
+      "fr": "Demonic Twin",
+      "es": "Gemelo Demoníaco"
     },
     "grade": "unique",
     "star": 6,
@@ -679,7 +729,9 @@
       "en": "Shieldwall",
       "jp": "シールドウォール",
       "kr": "실드월",
-      "zh": "盾墙"
+      "zh": "盾墙",
+      "fr": "Shieldwall",
+      "es": "Muro de Escudos"
     },
     "grade": "unique",
     "star": 6,
@@ -706,7 +758,9 @@
       "en": "Saint's Staff",
       "jp": "聖者の杖",
       "kr": "성자의 지팡이",
-      "zh": "圣者之杖"
+      "zh": "圣者之杖",
+      "fr": "Personnel de Saint's",
+      "es": "Bastón del Santo"
     },
     "grade": "unique",
     "star": 6,
@@ -733,7 +787,9 @@
       "en": "Agateram",
       "jp": "アガートラム",
       "kr": "아가트람",
-      "zh": "银色手臂"
+      "zh": "银色手臂",
+      "fr": "Agateram",
+      "es": "Agateram"
     },
     "grade": "unique",
     "star": 6,
@@ -760,7 +816,9 @@
       "en": "Bag of Rare Seeds",
       "jp": "希少種子のポッケ",
       "kr": "희귀 종자 주머니",
-      "zh": "一袋稀有种子"
+      "zh": "一袋稀有种子",
+      "fr": "Sac de graines rares.",
+      "es": "Bolsa de Semillas Raras"
     },
     "grade": "unique",
     "star": 6,
@@ -787,7 +845,9 @@
       "en": "The Blacksmith's Devotion",
       "jp": "鍛冶屋の信念",
       "kr": "대장장이의 신념",
-      "zh": "铁匠的信念"
+      "zh": "铁匠的信念",
+      "fr": "The Blacksmith's Devotion",
+      "es": "La devoción del herrero"
     },
     "grade": "unique",
     "star": 6,
@@ -814,7 +874,9 @@
       "en": "Receptionist's Essentials",
       "jp": "受付嬢の必需品",
       "kr": "접수원의 필수품",
-      "zh": "接收员的必需品"
+      "zh": "接收员的必需品",
+      "fr": "L'essentiel de la réceptionniste",
+      "es": "Esenciales Recepción"
     },
     "grade": "unique",
     "star": 6,
@@ -841,7 +903,9 @@
       "en": "Secret Cooking Utensils",
       "jp": "秘伝の調理道具",
       "kr": "비전 요리 기구",
-      "zh": "独门烹饪道具"
+      "zh": "独门烹饪道具",
+      "fr": "Cuisson secrète Utensiles Utensiles",
+      "es": "Utensilios Cocina Secreto"
     },
     "grade": "unique",
     "star": 6,
@@ -868,7 +932,9 @@
       "en": "Titanic Anchor",
       "jp": "タイタンアンカー",
       "kr": "타이탄 앵커",
-      "zh": "泰坦船锚"
+      "zh": "泰坦船锚",
+      "fr": "Titanec ancre ancre",
+      "es": "Ancla Titánica"
     },
     "grade": "unique",
     "star": 6,
@@ -895,7 +961,9 @@
       "en": "Hati",
       "jp": "ハティ",
       "kr": "하티",
-      "zh": "哈提"
+      "zh": "哈提",
+      "fr": "Hatié",
+      "es": "Hati"
     },
     "grade": "unique",
     "star": 6,
@@ -922,7 +990,9 @@
       "en": "Crimson Holy Grail",
       "jp": "鮮血の聖杯",
       "kr": "선혈빛 성배",
-      "zh": "血光圣杯"
+      "zh": "血光圣杯",
+      "fr": "Crimson Holy Grail",
+      "es": "Santo Grial Carmesí"
     },
     "grade": "unique",
     "star": 6,
@@ -949,7 +1019,9 @@
       "en": "Perfect Medical Bag",
       "jp": "万能往診カバン",
       "kr": "만능 왕진 가방",
-      "zh": "万能出诊包"
+      "zh": "万能出诊包",
+      "fr": "Perfect Sac médical parfait",
+      "es": "Bolsa Médica Perf."
     },
     "grade": "unique",
     "star": 6,
@@ -976,7 +1048,9 @@
       "en": "Elysion",
       "jp": "エリシオン",
       "kr": "엘리시온",
-      "zh": "极乐世界"
+      "zh": "极乐世界",
+      "fr": "Elysion",
+      "es": "Elysion"
     },
     "grade": "unique",
     "star": 6,
@@ -1003,7 +1077,9 @@
       "en": "Love and Peace",
       "jp": "ラブ＆ピース",
       "kr": "러브 앤 피스",
-      "zh": "爱与和平"
+      "zh": "爱与和平",
+      "fr": "L'amour et la paix",
+      "es": "Amor y Paz"
     },
     "grade": "unique",
     "star": 6,
@@ -1030,7 +1106,9 @@
       "en": "Sidewinder",
       "jp": "サイドワインダー",
       "kr": "사이드 와인더",
-      "zh": "响尾蛇"
+      "zh": "响尾蛇",
+      "fr": "Sidewinder",
+      "es": "Sidewinder"
     },
     "grade": "unique",
     "star": 6,
@@ -1057,7 +1135,9 @@
       "en": "The Great Communicator",
       "jp": "立派な対話手段",
       "kr": "훌륭한 대화수단",
-      "zh": "绝佳谈判"
+      "zh": "绝佳谈判",
+      "fr": "Le grand communicateur.",
+      "es": "El Gran Comunicador"
     },
     "grade": "unique",
     "star": 6,
@@ -1084,7 +1164,9 @@
       "en": "Hidden Glove",
       "jp": "シークレットガントレット",
       "kr": "히든 글러브",
-      "zh": "隐藏手套"
+      "zh": "隐藏手套",
+      "fr": "Hidden Glove",
+      "es": "Guante Oculto"
     },
     "grade": "unique",
     "star": 6,
@@ -1111,7 +1193,9 @@
       "en": "Song of Oblivion",
       "jp": "忘却の歌",
       "kr": "망각의 노래",
-      "zh": "忘却之歌"
+      "zh": "忘却之歌",
+      "fr": "Chanson de l'Oblivition",
+      "es": "Canto del Olvido"
     },
     "grade": "unique",
     "star": 6,
@@ -1138,7 +1222,9 @@
       "en": "Death's Notes",
       "jp": "死亡予定者リスト",
       "kr": "사망 예정자 리스트",
-      "zh": "将死之人名单"
+      "zh": "将死之人名单",
+      "fr": "Les notes de la mort.",
+      "es": "Notas de la Muerte"
     },
     "grade": "unique",
     "star": 6,
@@ -1165,7 +1251,9 @@
       "en": "Dean's Authority",
       "jp": "学長の権能",
       "kr": "학장의 권능",
-      "zh": "院长的权力"
+      "zh": "院长的权力",
+      "fr": "Autorité de doyen",
+      "es": "Autoridad Decano"
     },
     "grade": "unique",
     "star": 6,
@@ -1192,7 +1280,9 @@
       "en": "Magnolia Student ID",
       "jp": "マグノリア学生証",
       "kr": "매그놀리아 학생증",
-      "zh": "麦格诺里亚学生证"
+      "zh": "麦格诺里亚学生证",
+      "fr": "Magnolia Student ID",
+      "es": "Carnet de Estudiante de Magnolia"
     },
     "grade": "unique",
     "star": 6,
@@ -1219,7 +1309,9 @@
       "en": "Automatic Bowgun",
       "jp": "オートマチックボウガン",
       "kr": "오토매틱 보우건",
-      "zh": "自动手弩"
+      "zh": "自动手弩",
+      "fr": "Automatic Bowgun",
+      "es": "Ballesta Automática"
     },
     "grade": "unique",
     "star": 6,
@@ -1246,7 +1338,9 @@
       "en": "Victim Sanctuary",
       "jp": "スタースクライング",
       "kr": "빅팀 생추어리",
-      "zh": "牺牲者圣域"
+      "zh": "牺牲者圣域",
+      "fr": "Victim Sanctuary",
+      "es": "Santuario Víctima"
     },
     "grade": "unique",
     "star": 6,
@@ -1273,7 +1367,9 @@
       "en": "Paw-er Smasher",
       "jp": "プニプニハンマー",
       "kr": "개발살",
-      "zh": "扑杀"
+      "zh": "扑杀",
+      "fr": "Paw-er Smasher",
+      "es": "Aplastagarras"
     },
     "grade": "unique",
     "star": 6,
@@ -1300,7 +1396,9 @@
       "en": "Master of Pursuit",
       "jp": "追撃の名手",
       "kr": "추격의 명수",
-      "zh": "追击高手"
+      "zh": "追击高手",
+      "fr": "Master of Pursuit",
+      "es": "Amo Persecución"
     },
     "grade": "unique",
     "star": 6,
@@ -1327,7 +1425,9 @@
       "en": "Iron Fan of Ferocity",
       "jp": "閃撃の鉄扇",
       "kr": "섬격철선",
-      "zh": "闪击铁扇"
+      "zh": "闪击铁扇",
+      "fr": "Éventail en fer de la Ferocité.",
+      "es": "Ventilador de Hierro de Fierura"
     },
     "grade": "unique",
     "star": 6,
@@ -1354,7 +1454,9 @@
       "en": "O.P.B.",
       "jp": "O.P.B",
       "kr": "O.P.B",
-      "zh": "O.P.B"
+      "zh": "O.P.B",
+      "fr": "O.P.B.B.",
+      "es": "O.P.B."
     },
     "grade": "unique",
     "star": 6,
@@ -1381,7 +1483,9 @@
       "en": "Modded Assault Weapon",
       "jp": "アドオン：バトルウェポン",
       "kr": "배틀 웨폰 애드온",
-      "zh": "战争武器附加物"
+      "zh": "战争武器附加物",
+      "fr": "Assaut d'armes d'assaut maquillé",
+      "es": "Arma de Asalto Modificada"
     },
     "grade": "unique",
     "star": 6,
@@ -1408,7 +1512,9 @@
       "en": "Ksai's Core",
       "jp": "ザイのコア",
       "kr": "크사이의 코어",
-      "zh": "科赛的核心"
+      "zh": "科赛的核心",
+      "fr": "Ksai's Core",
+      "es": "Core de Ksai"
     },
     "grade": "unique",
     "star": 6,
@@ -1435,7 +1541,9 @@
       "en": "Finn the Shark",
       "jp": "アオイ",
       "kr": "샥스핀",
-      "zh": "鲨士比"
+      "zh": "鲨士比",
+      "fr": "Finn the Shark",
+      "es": "Finn el tiburón"
     },
     "grade": "unique",
     "star": 6,
@@ -1462,7 +1570,9 @@
       "en": "Super Board",
       "jp": "スーパーボード",
       "kr": "슈퍼 보드",
-      "zh": "超级冲浪板"
+      "zh": "超级冲浪板",
+      "fr": "Super Board Board",
+      "es": "Super Tablero"
     },
     "grade": "unique",
     "star": 6,
@@ -1489,7 +1599,9 @@
       "en": "Earth's Grace",
       "jp": "大地の恩恵",
       "kr": "대지의 은혜",
-      "zh": "土之恩惠"
+      "zh": "土之恩惠",
+      "fr": "terre's Grace",
+      "es": "Gracia Tierra"
     },
     "grade": "unique",
     "star": 6,
@@ -1516,7 +1628,9 @@
       "en": "Thunderer",
       "jp": "サンダラー",
       "kr": "썬더러",
-      "zh": "雷霆者"
+      "zh": "雷霆者",
+      "fr": "Thunderer",
+      "es": "Tronador"
     },
     "grade": "unique",
     "star": 6,
@@ -1543,7 +1657,9 @@
       "en": "Divine Warmth",
       "jp": "神のぬくもり",
       "kr": "신의 온기",
-      "zh": "神之温煦"
+      "zh": "神之温煦",
+      "fr": "Divine Warmth",
+      "es": "Calor Divino"
     },
     "grade": "unique",
     "star": 6,
@@ -1570,7 +1686,9 @@
       "en": "Blind Devotion",
       "jp": "盲者の祈り",
       "kr": "눈 먼자의 기도",
-      "zh": "盲者的祈祷"
+      "zh": "盲者的祈祷",
+      "fr": "Blind Devotion",
+      "es": "Devoción Ciega"
     },
     "grade": "unique",
     "star": 6,
@@ -1597,7 +1715,9 @@
       "en": "No.62's Punishment",
       "jp": "No.62：タイム・レペント",
       "kr": "No.62 참회의 준비",
-      "zh": "No.62忏悔之准备"
+      "zh": "No.62忏悔之准备",
+      "fr": "No.62's Punishment",
+      "es": "El Castigo del No.62"
     },
     "grade": "unique",
     "star": 6,
@@ -1624,7 +1744,9 @@
       "en": "Love Is War",
       "jp": "恋は戦争",
       "kr": "사랑은 전쟁",
-      "zh": "爱情是战争"
+      "zh": "爱情是战争",
+      "fr": "Love Is War",
+      "es": "El Amor es Guerra"
     },
     "grade": "unique",
     "star": 6,
@@ -1651,7 +1773,9 @@
       "en": "Royal Fang",
       "jp": "我が牙",
       "kr": "짐의 송곳니",
-      "zh": "朕的利齿"
+      "zh": "朕的利齿",
+      "fr": "Le roi Fang-Royal",
+      "es": "Colmillo Real"
     },
     "grade": "unique",
     "star": 6,
@@ -1678,7 +1802,9 @@
       "en": "Ancestral Spirit",
       "jp": "先祖の魂",
       "kr": "선조들의 혼",
-      "zh": "先祖之魂"
+      "zh": "先祖之魂",
+      "fr": "Ancestral Spirit",
+      "es": "Espíritu Ancestral"
     },
     "grade": "unique",
     "star": 6,
@@ -1705,7 +1831,9 @@
       "en": "Juzumaru Tsunetsugu",
       "jp": "数珠丸恒次",
       "kr": "쥬즈마루 츠네츠구",
-      "zh": "数珠丸恒次"
+      "zh": "数珠丸恒次",
+      "fr": "Je suis désolée.",
+      "es": "Juzumaru Tsunetsugu"
     },
     "grade": "unique",
     "star": 6,
@@ -1732,7 +1860,9 @@
       "en": "Secret Sword, Teru Teru Bouzu",
       "jp": "秘剣テルテルボウズ",
       "kr": "비검 테루테루보우즈",
-      "zh": "飞剑晴天娃娃"
+      "zh": "飞剑晴天娃娃",
+      "fr": "Espèce secrète, Teru Bouzuzu Bouzu",
+      "es": "Espada secreta, Teru Teru Bouzu"
     },
     "grade": "unique",
     "star": 6,
@@ -1759,7 +1889,9 @@
       "en": "Detective's Emblem",
       "jp": "名探偵のしるし",
       "kr": "명탐정의 상징",
-      "zh": "名侦探的象征"
+      "zh": "名侦探的象征",
+      "fr": "Detective's Emblem",
+      "es": "Emblema Detective"
     },
     "grade": "unique",
     "star": 6,
@@ -1786,7 +1918,9 @@
       "en": "Harry Houdini",
       "jp": "ハリー・フディー二",
       "kr": "해리 후디니",
-      "zh": "哈里·胡迪尼"
+      "zh": "哈里·胡迪尼",
+      "fr": "Harry Houdini",
+      "es": "Harry Houdini"
     },
     "grade": "unique",
     "star": 6,
@@ -1813,7 +1947,9 @@
       "en": "Full Strength",
       "jp": "必死のあがき",
       "kr": "안간힘",
-      "zh": "竭尽全力"
+      "zh": "竭尽全力",
+      "fr": "Full Strength",
+      "es": "Fuerza Total"
     },
     "grade": "unique",
     "star": 6,
@@ -1840,7 +1976,9 @@
       "en": "Scepter of the Golden King",
       "jp": "黄金王の王笏",
       "kr": "황금왕의 왕홀",
-      "zh": "黄金王的权杖"
+      "zh": "黄金王的权杖",
+      "fr": "Sceptre du Roi d'Or Roi d'Or",
+      "es": "Cetro del Rey Dorado"
     },
     "grade": "unique",
     "star": 6,
@@ -1867,7 +2005,9 @@
       "en": "Ksai's Spare Core",
       "jp": "ザイの予備コア",
       "kr": "크사이의 예비 코어",
-      "zh": "科赛的预备核心"
+      "zh": "科赛的预备核心",
+      "fr": "Ksai's Spare Core",
+      "es": "El Core de Repuesto de Ksai"
     },
     "grade": "unique",
     "star": 6,
@@ -1894,7 +2034,9 @@
       "en": "Burning Fighting Spirit",
       "jp": "燃えたぎる闘志",
       "kr": "타오르는 투지",
-      "zh": "燃烧的斗志"
+      "zh": "燃烧的斗志",
+      "fr": "Burning Fighting Spirit",
+      "es": "Espíritu Lucha Ardiente"
     },
     "grade": "unique",
     "star": 6,
@@ -1921,7 +2063,9 @@
       "en": "Ninja Scroll",
       "jp": "ニンジャのニンポー帳",
       "kr": "닌자의 인법첩",
-      "zh": "忍者的忍术秘籍"
+      "zh": "忍者的忍术秘籍",
+      "fr": "Ninja Scroll",
+      "es": "Pergamino Ninja"
     },
     "grade": "unique",
     "star": 6,
@@ -1948,7 +2092,9 @@
       "en": "Adaptable Gatling",
       "jp": "可変式ガトリング",
       "kr": "가변형 개틀링",
-      "zh": "可变加特林"
+      "zh": "可变加特林",
+      "fr": "Adaptable Gatling",
+      "es": "Gatling Adaptable"
     },
     "grade": "unique",
     "star": 6,
@@ -1975,7 +2121,9 @@
       "en": "Innocent Love",
       "jp": "イノセント・ラブ",
       "kr": "이노센트 러브",
-      "zh": "永恒之爱"
+      "zh": "永恒之爱",
+      "fr": "Innocent Love",
+      "es": "Amor Inocente"
     },
     "grade": "unique",
     "star": 6,
@@ -2002,7 +2150,9 @@
       "en": "Adaptable Twin Blades",
       "jp": "可変式翼",
       "kr": "가변형 쌍익",
-      "zh": "可变双翼"
+      "zh": "可变双翼",
+      "fr": "Adaptable Twin Blades",
+      "es": "Hojas Gemelas Adap."
     },
     "grade": "unique",
     "star": 6,
@@ -2029,7 +2179,9 @@
       "en": "Exceptional Aura",
       "jp": "とてつもないオーラ",
       "kr": "독보적인 오라",
-      "zh": "独特光环"
+      "zh": "独特光环",
+      "fr": "Exceptional Aura",
+      "es": "Aura Excepcional"
     },
     "grade": "unique",
     "star": 6,
@@ -2056,7 +2208,9 @@
       "en": "Guardian's Qualification",
       "jp": "守護者の資格",
       "kr": "수호자의 자격",
-      "zh": "守护者的资格"
+      "zh": "守护者的资格",
+      "fr": "Qualification du gardien",
+      "es": "Cualif. del Guardián"
     },
     "grade": "unique",
     "star": 6,
@@ -2083,7 +2237,9 @@
       "en": "Eclipse",
       "jp": "エクリプス",
       "kr": "이클립스",
-      "zh": "日食"
+      "zh": "日食",
+      "fr": "Éclipse",
+      "es": "Eclipse"
     },
     "grade": "unique",
     "star": 6,
@@ -2105,7 +2261,9 @@
       "en": "Onimaru Kunitsuna",
       "jp": "鬼丸国綱",
       "kr": "오니마루 쿠니츠나",
-      "zh": "鬼丸国纲"
+      "zh": "鬼丸国纲",
+      "fr": "Onimaru Kunitsuna",
+      "es": "Onimaru Kunitsuna"
     },
     "grade": "unique",
     "star": 6,
@@ -2132,7 +2290,9 @@
       "en": "Lycoris and Butterfly",
       "jp": "彼岸胡蝶",
       "kr": "석산호접",
-      "zh": "石蒜蝴蝶"
+      "zh": "石蒜蝴蝶",
+      "fr": "Lycoris et papillon",
+      "es": "Lycoris y mariposa"
     },
     "grade": "unique",
     "star": 6,
@@ -2159,7 +2319,9 @@
       "en": "Scarlet Disaster",
       "jp": "スカーレットディザスター",
       "kr": "스칼렛 디재스터",
-      "zh": "猩红浩劫"
+      "zh": "猩红浩劫",
+      "fr": "Catastrophe écarlate",
+      "es": "Desastre Escarlata"
     },
     "grade": "unique",
     "star": 6,
@@ -2186,7 +2348,9 @@
       "en": "Sapphire Disaster",
       "jp": "サファイアディザスター",
       "kr": "사파이어 디재스터",
-      "zh": "蓝萤浩劫"
+      "zh": "蓝萤浩劫",
+      "fr": "Sapphire Disaster",
+      "es": "Desastre de Zafiro"
     },
     "grade": "unique",
     "star": 6,
@@ -2213,7 +2377,9 @@
       "en": "Royal Lord",
       "jp": "ロイヤルロード",
       "kr": "로열 로드",
-      "zh": "皇家权杖"
+      "zh": "皇家权杖",
+      "fr": "Royal Lord",
+      "es": "Lord Real"
     },
     "grade": "unique",
     "star": 6,
@@ -2240,7 +2406,9 @@
       "en": "Partner's Will",
       "jp": "同伴者の意志",
       "kr": "동반자의 의지",
-      "zh": "同伴的意志"
+      "zh": "同伴的意志",
+      "fr": "Volonté de l'associé",
+      "es": "Voluntad del Compañero"
     },
     "grade": "unique",
     "star": 6,
@@ -2267,7 +2435,9 @@
       "en": "Regina's All-Purpose Tube",
       "jp": "レジーナの万能浮き輪",
       "kr": "레지나의 만능 튜브",
-      "zh": "蕾吉纳的万能游泳圈"
+      "zh": "蕾吉纳的万能游泳圈",
+      "fr": "Regina's All-Purpose Tube",
+      "es": "Tubo Multiusos de Regina"
     },
     "grade": "unique",
     "star": 6,
@@ -2294,7 +2464,9 @@
       "en": "Withering Flower",
       "jp": "花無十日紅",
       "kr": "화무십일홍",
-      "zh": "花无十日红"
+      "zh": "花无十日红",
+      "fr": "Fleur séchée Fleur séchée",
+      "es": "Flor Marchita"
     },
     "grade": "unique",
     "star": 6,
@@ -2321,7 +2493,9 @@
       "en": "Sonic Blade",
       "jp": "ソニックブレード",
       "kr": "소닉 블레이드",
-      "zh": "疾速之刃"
+      "zh": "疾速之刃",
+      "fr": "Lame sonique lame",
+      "es": "Hoja sónica"
     },
     "grade": "unique",
     "star": 6,
@@ -2348,7 +2522,9 @@
       "en": "Hound",
       "jp": "ハウンド",
       "kr": "하운드",
-      "zh": "哈恩德"
+      "zh": "哈恩德",
+      "fr": "Hound",
+      "es": "Sabueso"
     },
     "grade": "unique",
     "star": 6,
@@ -2375,7 +2551,9 @@
       "en": "Logos",
       "jp": "ロゴス",
       "kr": "로고스",
-      "zh": "洛格斯"
+      "zh": "洛格斯",
+      "fr": "Logos",
+      "es": "Logos"
     },
     "grade": "unique",
     "star": 6,
@@ -2402,7 +2580,9 @@
       "en": "Deadly Ice",
       "jp": "デッドリーアイス",
       "kr": "데들리 아이스",
-      "zh": "致命冰霜"
+      "zh": "致命冰霜",
+      "fr": "Deadly Ice",
+      "es": "Hielo mortal"
     },
     "grade": "unique",
     "star": 6,
@@ -2429,7 +2609,9 @@
       "en": "True Salvation",
       "jp": "真の救い",
       "kr": "진정한 구원",
-      "zh": "真正的救赎"
+      "zh": "真正的救赎",
+      "fr": "True Salvation",
+      "es": "Verdadera Salvación"
     },
     "grade": "unique",
     "star": 6,
@@ -2456,7 +2638,9 @@
       "en": "Everlasting Grudge",
       "jp": "尽きぬ怨み",
       "kr": "마르지 않는 앙심",
-      "zh": "积怨未消"
+      "zh": "积怨未消",
+      "fr": "Everlasting Grudge",
+      "es": "Rencor Eterno"
     },
     "grade": "unique",
     "star": 6,
@@ -2483,7 +2667,9 @@
       "en": "Earnest Love",
       "jp": "熱烈な愛",
       "kr": "열렬한 사랑",
-      "zh": "炽热的爱"
+      "zh": "炽热的爱",
+      "fr": "Amour égoïste",
+      "es": "Amor sincero"
     },
     "grade": "unique",
     "star": 6,
@@ -2510,7 +2696,9 @@
       "en": "Rocinante",
       "jp": "ロシナンテ",
       "kr": "로시난테",
-      "zh": "罗西南特"
+      "zh": "罗西南特",
+      "fr": "Rocinantant",
+      "es": "Rocinante"
     },
     "grade": "unique",
     "star": 6,
@@ -2537,7 +2725,9 @@
       "en": "Hestia Knife",
       "jp": "ヘスティア・ナイフ",
       "kr": "헤스티아 나이프",
-      "zh": "赫斯缇雅之刃"
+      "zh": "赫斯缇雅之刃",
+      "fr": "Hestia Knife",
+      "es": "Cuchillo de Hestia"
     },
     "grade": "unique",
     "star": 6,
@@ -2564,7 +2754,9 @@
       "en": "Desperate",
       "jp": "デスペレート",
       "kr": "데스퍼러트",
-      "zh": "绝望之剑"
+      "zh": "绝望之剑",
+      "fr": "Désespérément.",
+      "es": "Desesperado"
     },
     "grade": "unique",
     "star": 6,
@@ -2591,7 +2783,9 @@
       "en": "Alf's Justitia",
       "jp": "アルヴス・ユースティティア",
       "kr": "알브스 유스티티아",
-      "zh": "精灵正义女神"
+      "zh": "精灵正义女神",
+      "fr": "Alf's Justitia",
+      "es": "Justitia de Alf"
     },
     "grade": "unique",
     "star": 6,
@@ -2618,7 +2812,9 @@
       "en": "Astra Soteria",
       "jp": "アストラ・ソテリア",
       "kr": "아스트라 소테리아",
-      "zh": "星辰庇佑"
+      "zh": "星辰庇佑",
+      "fr": "Astra Sotéria Sotéria",
+      "es": "Astra Soteria"
     },
     "grade": "unique",
     "star": 6,
@@ -2645,7 +2841,9 @@
       "en": "Gleipnir",
       "jp": "グレイプニル",
       "kr": "글레이프니르",
-      "zh": "格莱夫尼尔"
+      "zh": "格莱夫尼尔",
+      "fr": "Gleipnirir",
+      "es": "Gleipnir"
     },
     "grade": "unique",
     "star": 6,
@@ -2672,7 +2870,9 @@
       "en": "Wax Wings",
       "jp": "蝋の翼",
       "kr": "밀랍날개",
-      "zh": "蜡翼"
+      "zh": "蜡翼",
+      "fr": "Wax Wings",
+      "es": "Alas Cera"
     },
     "grade": "unique",
     "star": 6,
@@ -2699,7 +2899,9 @@
       "en": "Damage and Loss",
       "jp": "ダメージ・アンド・ロス",
       "kr": "피해와 손실",
-      "zh": "伤害与损失"
+      "zh": "伤害与损失",
+      "fr": "dégâts and Loss",
+      "es": "Daño y Pérdida"
     },
     "grade": "unique",
     "star": 6,
@@ -2726,7 +2928,9 @@
       "en": "Path of Endless Hunger",
       "jp": "果てない飢えの道",
       "kr": "끝없는 허기의 길",
-      "zh": "无尽饥荒之路"
+      "zh": "无尽饥荒之路",
+      "fr": "Chemin de la faim sans fin et sans fin.",
+      "es": "Camino Hambre Infinita"
     },
     "grade": "unique",
     "star": 6,
@@ -2753,7 +2957,9 @@
       "en": "Machiavelli",
       "jp": "マキャベリ",
       "kr": "마키아벨리",
-      "zh": "马基雅维利"
+      "zh": "马基雅维利",
+      "fr": "Machiavelli",
+      "es": "Machiavelli"
     },
     "grade": "unique",
     "star": 6,
@@ -2780,7 +2986,9 @@
       "en": "Miracle Machine",
       "jp": "ミラクルマシーン",
       "kr": "미라클 머신",
-      "zh": "奇迹机器"
+      "zh": "奇迹机器",
+      "fr": "Mireuse machine",
+      "es": "Máq. Milagrosa"
     },
     "grade": "unique",
     "star": 6,
@@ -2807,7 +3015,9 @@
       "en": "Bouncy Master",
       "jp": "ぷるるん師匠",
       "kr": "탱탱한 스승님",
-      "zh": "彈彈師父"
+      "zh": "彈彈師父",
+      "fr": "Bouncy Master",
+      "es": "Amo rebote"
     },
     "grade": "unique",
     "star": 6,
@@ -2834,7 +3044,9 @@
       "en": "Omertà",
       "jp": "オメルタ",
       "kr": "오메르타",
-      "zh": "沉默守則（Omertà）"
+      "zh": "沉默守則（Omertà）",
+      "fr": "Omertà",
+      "es": "Omertà"
     },
     "grade": "unique",
     "star": 6,
@@ -2861,7 +3073,9 @@
       "en": "Mortician's Coffin",
       "jp": "葬儀屋の棺",
       "kr": "장의사의 관",
-      "zh": "殯葬師之棺"
+      "zh": "殯葬師之棺",
+      "fr": "Mortiers de la caiffe",
+      "es": "Ataúd Mortuorio"
     },
     "grade": "unique",
     "star": 6,
@@ -2888,7 +3102,9 @@
       "en": "Innate Malice",
       "jp": "天賦の悪意",
       "kr": "천부의 악의",
-      "zh": "天赋的恶意"
+      "zh": "天赋的恶意",
+      "fr": "Inné Malécies innées",
+      "es": "Malicia Innata"
     },
     "grade": "unique",
     "star": 6,
@@ -2915,7 +3131,9 @@
       "en": "Lawless Immutable Ruler",
       "jp": "無法不変の万物操縦",
       "kr": "무법불변 만물조종",
-      "zh": "无法不变 万物操纵"
+      "zh": "无法不变 万物操纵",
+      "fr": "Lawless Immutable Ruler",
+      "es": "Regidor Inmutable Sin Ley"
     },
     "grade": "unique",
     "star": 6,
@@ -2942,7 +3160,9 @@
       "en": "Eternal Sun",
       "jp": "永遠の太陽",
       "kr": "무궁한 태양",
-      "zh": "无尽的太阳"
+      "zh": "无尽的太阳",
+      "fr": "Eternal Sun",
+      "es": "Eternal Sun"
     },
     "grade": "unique",
     "star": 6,
@@ -2969,7 +3189,9 @@
       "en": "Primordial Gargantua",
       "jp": "原初のガルガンテュア",
       "kr": "태초의 가르강틔아",
-      "zh": "太初的卡冈图亚"
+      "zh": "太初的卡冈图亚",
+      "fr": "Gargantua primordiale Gargantua",
+      "es": "Gargantua primordial"
     },
     "grade": "unique",
     "star": 6,
@@ -2996,7 +3218,9 @@
       "en": "Lete",
       "jp": "レーテ",
       "kr": "레테",
-      "zh": "莱特"
+      "zh": "莱特",
+      "fr": "Lete",
+      "es": "Lete"
     },
     "grade": "unique",
     "star": 6,
@@ -3023,7 +3247,9 @@
       "en": "Midnight Rose",
       "jp": "ミッドナイトローズ",
       "kr": "미드나이트 로즈",
-      "zh": "午夜玫瑰"
+      "zh": "午夜玫瑰",
+      "fr": "Midnight Rose",
+      "es": "Rosa de Medianoche"
     },
     "grade": "unique",
     "star": 6,
@@ -3050,7 +3276,9 @@
       "en": "Sound of Silence",
       "jp": "沈黙の音",
       "kr": "침묵의 소리",
-      "zh": "寂静之声"
+      "zh": "寂静之声",
+      "fr": "Son du silence",
+      "es": "Son del Silencio"
     },
     "grade": "unique",
     "star": 6,
@@ -3077,7 +3305,9 @@
       "en": "Power & Ambition",
       "jp": "Power & Ambition",
       "kr": "Power & Ambition",
-      "zh": "权力与野心"
+      "zh": "权力与野心",
+      "fr": "Puissance et ambition",
+      "es": "Fuerza y Ambición"
     },
     "grade": "unique",
     "star": 6,
@@ -3104,7 +3334,9 @@
       "en": "Triaena",
       "jp": "トリアイナ",
       "kr": "트리아이나",
-      "zh": "特里艾娜"
+      "zh": "特里艾娜",
+      "fr": "Triaénique",
+      "es": "Triaena"
     },
     "grade": "unique",
     "star": 6,
@@ -3131,7 +3363,9 @@
       "en": "King's Wisdom",
       "jp": "王の知恵",
       "kr": "왕의 지혜",
-      "zh": "王的智慧"
+      "zh": "王的智慧",
+      "fr": "King's Wisdom",
+      "es": "Sabiduría del Rey"
     },
     "grade": "unique",
     "star": 6,
@@ -3158,7 +3392,9 @@
       "en": "Gleipnir: Summer Edition",
       "jp": "グレイプニル：夏仕様",
       "kr": "글레이프니르 : 여름 사양",
-      "zh": "葛莱普尼尔：夏日规格"
+      "zh": "葛莱普尼尔：夏日规格",
+      "fr": "Gleipnir: Édition d'été",
+      "es": "Gleipnir: Edición Verano"
     },
     "grade": "unique",
     "star": 6,
@@ -3185,7 +3421,9 @@
       "en": "Astraea",
       "jp": "アストライア",
       "kr": "아스트라이아",
-      "zh": "阿斯特赖亚"
+      "zh": "阿斯特赖亚",
+      "fr": "Astrée",
+      "es": "Astraea"
     },
     "grade": "unique",
     "star": 6,
@@ -3212,7 +3450,9 @@
       "en": "Original Sin",
       "jp": "原罪",
       "kr": "원죄",
-      "zh": "原罪"
+      "zh": "原罪",
+      "fr": "Le péché original.",
+      "es": "Pecado Orig."
     },
     "grade": "unique",
     "star": 6,
@@ -3239,7 +3479,9 @@
       "en": "Frost Nova",
       "jp": "フロストノヴァ",
       "kr": "프로스트 노바",
-      "zh": "冰霜新星"
+      "zh": "冰霜新星",
+      "fr": "Frotte Nova",
+      "es": "Nova de Hielo"
     },
     "grade": "unique",
     "star": 6,
@@ -3266,7 +3508,9 @@
       "en": "The Supreme Witch's Companion",
       "jp": "大魔女の親友",
       "kr": "대마녀의 단짝",
-      "zh": "大魔女的挚友"
+      "zh": "大魔女的挚友",
+      "fr": "The Supreme Witch's Companion",
+      "es": "Compañera de la Suprema Bruja"
     },
     "grade": "unique",
     "star": 6,
@@ -3293,7 +3537,9 @@
       "en": "Ame-no-Murakumo",
       "jp": "天叢雲剣",
       "kr": "천총운검",
-      "zh": "天丛云剑"
+      "zh": "天丛云剑",
+      "fr": "Ame-no-Murakumo",
+      "es": "Ame-no-Murakumo"
     },
     "grade": "unique",
     "star": 6,
@@ -3320,7 +3566,9 @@
       "en": "Bloodbringer",
       "jp": "ブラッドブリンガー",
       "kr": "블러드브링어",
-      "zh": "血之使者"
+      "zh": "血之使者",
+      "fr": "Porte-sang",
+      "es": "Portasangre"
     },
     "grade": "unique",
     "star": 6,
@@ -3347,7 +3595,9 @@
       "en": "Asphodel",
       "jp": "アスフォデル",
       "kr": "아스포델",
-      "zh": "阿斯福德尔"
+      "zh": "阿斯福德尔",
+      "fr": "Asphodeldélé",
+      "es": "Asphodel"
     },
     "grade": "unique",
     "star": 6,
@@ -3374,7 +3624,9 @@
       "en": "Broken Providence",
       "jp": "壊れた摂理",
       "kr": "망가진 섭리",
-      "zh": "残破的天道"
+      "zh": "残破的天道",
+      "fr": "Broken Providence",
+      "es": "Providencia Rota"
     },
     "grade": "unique",
     "star": 6,
@@ -3401,7 +3653,9 @@
       "en": "Resolve of Earth",
       "jp": "大地の決意",
       "kr": "대지의 결의",
-      "zh": "大地的决意"
+      "zh": "大地的决意",
+      "fr": "Résolu de la Terre",
+      "es": "Resol. Tierra"
     },
     "grade": "unique",
     "star": 6,
@@ -3428,7 +3682,9 @@
       "en": "Annual Defense Budget",
       "jp": "年間国防予算",
       "kr": "1년치 국방 예산",
-      "zh": "一年的国防预算"
+      "zh": "一年的国防预算",
+      "fr": "Budget de la DÉF annuelle",
+      "es": "Presupuesto de DEF Anual"
     },
     "grade": "unique",
     "star": 6,

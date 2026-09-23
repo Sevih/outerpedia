@@ -8,8 +8,9 @@
  * index. Sans ça, traduire un guide en FR pourrait en supprimer des conseils.
  */
 import type { LText, VersionDraft } from '@/lib/admin/guide-draft';
+import type { Lang } from '@/lib/i18n/config';
 
-type L = 'en' | 'jp' | 'kr' | 'zh' | 'fr';
+type L = Lang;
 
 /** Liste localisée → bloc éditable (une ligne par entrée). */
 export const itemsToBlock = (items: LText[], lang: L): string =>

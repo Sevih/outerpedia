@@ -20,7 +20,7 @@
 		level WARN
 	}
 }
-outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, www.outerpedia.local {
+outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, es.outerpedia.local, www.outerpedia.local {
 	tls internal
 	reverse_proxy localhost:{$OUTERPEDIA_PORT:3000}
 }

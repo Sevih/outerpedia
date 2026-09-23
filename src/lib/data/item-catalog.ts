@@ -13,6 +13,7 @@
  * cesser de se lire comme du code dev-only.
  */
 import type { CatalogEntry, LangDict } from '@contracts';
+import { emptyDict } from '@datagen/lib/lang';
 import { getCatalog, type ItemOption } from './items';
 import { loadItemCurated, type ItemCurated } from '@/lib/admin/item-curated-store';
 
@@ -25,7 +26,7 @@ export interface CatalogItem extends CatalogEntry {
   curated: boolean;
 }
 
-const EMPTY: LangDict = { en: '', jp: '', kr: '', zh: '' };
+const EMPTY: LangDict = emptyDict();
 
 /** Applique un override curé LIVE sur une entrée bakée. */
 function overlay(id: string, base: CatalogEntry, cur?: ItemCurated): CatalogItem {

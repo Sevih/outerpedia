@@ -20,7 +20,7 @@ import { describe, expect, it } from 'vitest';
 import themeData from '../../data/generated/monad/theme.json';
 import routesData from '../../data/generated/monad/routes.json';
 import type { Row } from '../lib/tables';
-import type { LangDict } from '../lib/lang';
+import { emptyDict, type LangDict } from '../lib/lang';
 import {
   mapNodeType,
   markTruePaths,
@@ -68,7 +68,7 @@ describe('mapNodeType — NodeType du jeu → type du site', () => {
 });
 
 describe('splitLabelAndNeed — détache la condition inline', () => {
-  const dict = (o: Partial<LangDict>): LangDict => ({ en: '', jp: '', kr: '', zh: '', ...o });
+  const dict = (o: Partial<LangDict>): LangDict => ({ ...emptyDict(), ...o });
 
   it('pèle le dernier groupe entre parenthèses', () => {
     const { label, need } = splitLabelAndNeed(dict({ en: 'Advance there. (Key Item: Fake ID)' }));

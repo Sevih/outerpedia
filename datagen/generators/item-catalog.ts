@@ -20,7 +20,7 @@ import { resolve } from 'node:path';
 import { isMain } from '../lib/is-main';
 import { readCuratedJson, writeJson } from '../lib/json';
 import { num } from '../lib/tables';
-import type { LangDict } from '../lib/lang';
+import { emptyDict, type LangDict } from '../lib/lang';
 import { MISSING_ITEM_ICONS } from '../lib/item-blacklist';
 import { buildItems, type Item } from './items';
 import { buildGoods, type Goods } from './goods';
@@ -51,7 +51,7 @@ export interface CatalogEntry {
   hidden?: boolean;
 }
 
-const EMPTY: LangDict = { en: '', jp: '', kr: '', zh: '' };
+const EMPTY: LangDict = emptyDict();
 
 function loadCurated(): Record<string, ItemCurated> {
   // Absent = pas de curation ; JSON cassé = throw nommé (readCuratedJson).

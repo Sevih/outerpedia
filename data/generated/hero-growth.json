@@ -82,7 +82,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -102,7 +104,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -116,7 +120,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -136,7 +142,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -150,7 +158,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -170,7 +180,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -184,7 +196,9 @@
                 "en": "Professional Skill Manual",
                 "jp": "スキル教本：専門家編",
                 "kr": "전문 스킬 교본",
-                "zh": "专家技能教材"
+                "zh": "专家技能教材",
+                "fr": "Professional comp. manuel",
+                "es": "Manual de hab. profesional"
               },
               "icon": "TI_Item_Growth_Book_03",
               "grade": "unique"
@@ -206,7 +220,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -226,7 +242,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -240,7 +258,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -260,7 +280,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -274,7 +296,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -294,7 +318,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -308,7 +334,9 @@
                 "en": "Professional Skill Manual",
                 "jp": "スキル教本：専門家編",
                 "kr": "전문 스킬 교본",
-                "zh": "专家技能教材"
+                "zh": "专家技能教材",
+                "fr": "Professional comp. manuel",
+                "es": "Manual de hab. profesional"
               },
               "icon": "TI_Item_Growth_Book_03",
               "grade": "unique"
@@ -330,7 +358,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -350,7 +380,9 @@
                 "en": "Basic Skill Manual",
                 "jp": "スキル教本：はじまり編",
                 "kr": "초급 스킬 교본",
-                "zh": "初级技能教材"
+                "zh": "初级技能教材",
+                "fr": "Basic comp. manuel",
+                "es": "Manual de Habilidades"
               },
               "icon": "TI_Item_Growth_Book_01",
               "grade": "magic"
@@ -364,7 +396,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -384,7 +418,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -398,7 +434,9 @@
                 "en": "Professional Skill Manual",
                 "jp": "スキル教本：専門家編",
                 "kr": "전문 스킬 교본",
-                "zh": "专家技能教材"
+                "zh": "专家技能教材",
+                "fr": "Professional comp. manuel",
+                "es": "Manual de hab. profesional"
               },
               "icon": "TI_Item_Growth_Book_03",
               "grade": "unique"
@@ -418,7 +456,9 @@
                 "en": "Intermediate Skill Manual",
                 "jp": "スキル教本：応用編",
                 "kr": "중급 스킬 교본",
-                "zh": "中级技能教材"
+                "zh": "中级技能教材",
+                "fr": "Intermediate comp. manuel",
+                "es": "Manual de hab. intermedia"
               },
               "icon": "TI_Item_Growth_Book_02",
               "grade": "rare"
@@ -432,7 +472,9 @@
                 "en": "Professional Skill Manual",
                 "jp": "スキル教本：専門家編",
                 "kr": "전문 스킬 교본",
-                "zh": "专家技能教材"
+                "zh": "专家技能教材",
+                "fr": "Professional comp. manuel",
+                "es": "Manual de hab. profesional"
               },
               "icon": "TI_Item_Growth_Book_03",
               "grade": "unique"
@@ -456,7 +498,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -470,7 +514,9 @@
                 "en": "Blue Memory Stone",
                 "jp": "ブルーメモリーストーン",
                 "kr": "블루 메모리 스톤",
-                "zh": "蓝色记忆石"
+                "zh": "蓝色记忆石",
+                "fr": "Blue Memory Stone",
+                "es": "Piedra de Memoria Azul"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_01",
               "grade": "unique"
@@ -491,7 +537,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -505,7 +553,9 @@
                 "en": "Blue Memory Stone",
                 "jp": "ブルーメモリーストーン",
                 "kr": "블루 메모리 스톤",
-                "zh": "蓝色记忆石"
+                "zh": "蓝色记忆石",
+                "fr": "Blue Memory Stone",
+                "es": "Piedra de Memoria Azul"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_01",
               "grade": "unique"
@@ -526,7 +576,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -540,7 +592,9 @@
                 "en": "Blue Memory Stone",
                 "jp": "ブルーメモリーストーン",
                 "kr": "블루 메모리 스톤",
-                "zh": "蓝色记忆石"
+                "zh": "蓝色记忆石",
+                "fr": "Blue Memory Stone",
+                "es": "Piedra de Memoria Azul"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_01",
               "grade": "unique"
@@ -561,7 +615,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -575,7 +631,9 @@
                 "en": "Blue Memory Stone",
                 "jp": "ブルーメモリーストーン",
                 "kr": "블루 메모리 스톤",
-                "zh": "蓝色记忆石"
+                "zh": "蓝色记忆石",
+                "fr": "Blue Memory Stone",
+                "es": "Piedra de Memoria Azul"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_01",
               "grade": "unique"
@@ -596,7 +654,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -610,7 +670,9 @@
                 "en": "Blue Memory Stone",
                 "jp": "ブルーメモリーストーン",
                 "kr": "블루 메모리 스톤",
-                "zh": "蓝色记忆石"
+                "zh": "蓝色记忆石",
+                "fr": "Blue Memory Stone",
+                "es": "Piedra de Memoria Azul"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_01",
               "grade": "unique"
@@ -631,7 +693,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -645,7 +709,9 @@
                 "en": "Purple Memory Stone",
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
-                "zh": "紫色记忆石"
+                "zh": "紫色记忆石",
+                "fr": "Purple Memory Stone",
+                "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
               "grade": "unique"
@@ -666,7 +732,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -680,7 +748,9 @@
                 "en": "Purple Memory Stone",
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
-                "zh": "紫色记忆石"
+                "zh": "紫色记忆石",
+                "fr": "Purple Memory Stone",
+                "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
               "grade": "unique"
@@ -701,7 +771,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -715,7 +787,9 @@
                 "en": "Purple Memory Stone",
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
-                "zh": "紫色记忆石"
+                "zh": "紫色记忆石",
+                "fr": "Purple Memory Stone",
+                "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
               "grade": "unique"
@@ -736,7 +810,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -750,7 +826,9 @@
                 "en": "Purple Memory Stone",
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
-                "zh": "紫色记忆石"
+                "zh": "紫色记忆石",
+                "fr": "Purple Memory Stone",
+                "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
               "grade": "unique"
@@ -771,7 +849,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -785,7 +865,9 @@
                 "en": "Purple Memory Stone",
                 "jp": "パープルメモリーストーン",
                 "kr": "퍼플 메모리 스톤",
-                "zh": "紫色记忆石"
+                "zh": "紫色记忆石",
+                "fr": "Purple Memory Stone",
+                "es": "Piedra Memoria Púrpura"
               },
               "icon": "TI_EX_Equip_Growth_Enhance_02",
               "grade": "unique"
@@ -808,7 +890,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -822,7 +906,9 @@
                 "en": "Blue Stardust",
                 "jp": "ブルースターダスト",
                 "kr": "블루 스타 더스트",
-                "zh": "蓝色星尘"
+                "zh": "蓝色星尘",
+                "fr": "Blue Stardust",
+                "es": "Polvo estelar azul"
               },
               "icon": "TI_Talisman_Growth_Enhance_01",
               "grade": "unique"
@@ -843,7 +929,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -857,7 +945,9 @@
                 "en": "Blue Stardust",
                 "jp": "ブルースターダスト",
                 "kr": "블루 스타 더스트",
-                "zh": "蓝色星尘"
+                "zh": "蓝色星尘",
+                "fr": "Blue Stardust",
+                "es": "Polvo estelar azul"
               },
               "icon": "TI_Talisman_Growth_Enhance_01",
               "grade": "unique"
@@ -878,7 +968,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -892,7 +984,9 @@
                 "en": "Blue Stardust",
                 "jp": "ブルースターダスト",
                 "kr": "블루 스타 더스트",
-                "zh": "蓝色星尘"
+                "zh": "蓝色星尘",
+                "fr": "Blue Stardust",
+                "es": "Polvo estelar azul"
               },
               "icon": "TI_Talisman_Growth_Enhance_01",
               "grade": "unique"
@@ -913,7 +1007,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -927,7 +1023,9 @@
                 "en": "Blue Stardust",
                 "jp": "ブルースターダスト",
                 "kr": "블루 스타 더스트",
-                "zh": "蓝色星尘"
+                "zh": "蓝色星尘",
+                "fr": "Blue Stardust",
+                "es": "Polvo estelar azul"
               },
               "icon": "TI_Talisman_Growth_Enhance_01",
               "grade": "unique"
@@ -948,7 +1046,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -962,7 +1062,9 @@
                 "en": "Blue Stardust",
                 "jp": "ブルースターダスト",
                 "kr": "블루 스타 더스트",
-                "zh": "蓝色星尘"
+                "zh": "蓝色星尘",
+                "fr": "Blue Stardust",
+                "es": "Polvo estelar azul"
               },
               "icon": "TI_Talisman_Growth_Enhance_01",
               "grade": "unique"
@@ -983,7 +1085,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -997,7 +1101,9 @@
                 "en": "Purple Stardust",
                 "jp": "パープルスターダスト",
                 "kr": "퍼플 스타 더스트",
-                "zh": "紫色星尘"
+                "zh": "紫色星尘",
+                "fr": "Purple Stardust",
+                "es": "Polvo de estrellas púrpura"
               },
               "icon": "TI_Talisman_Growth_Enhance_02",
               "grade": "unique"
@@ -1018,7 +1124,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -1032,7 +1140,9 @@
                 "en": "Purple Stardust",
                 "jp": "パープルスターダスト",
                 "kr": "퍼플 스타 더스트",
-                "zh": "紫色星尘"
+                "zh": "紫色星尘",
+                "fr": "Purple Stardust",
+                "es": "Polvo de estrellas púrpura"
               },
               "icon": "TI_Talisman_Growth_Enhance_02",
               "grade": "unique"
@@ -1053,7 +1163,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -1067,7 +1179,9 @@
                 "en": "Purple Stardust",
                 "jp": "パープルスターダスト",
                 "kr": "퍼플 스타 더스트",
-                "zh": "紫色星尘"
+                "zh": "紫色星尘",
+                "fr": "Purple Stardust",
+                "es": "Polvo de estrellas púrpura"
               },
               "icon": "TI_Talisman_Growth_Enhance_02",
               "grade": "unique"
@@ -1088,7 +1202,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -1102,7 +1218,9 @@
                 "en": "Purple Stardust",
                 "jp": "パープルスターダスト",
                 "kr": "퍼플 스타 더스트",
-                "zh": "紫色星尘"
+                "zh": "紫色星尘",
+                "fr": "Purple Stardust",
+                "es": "Polvo de estrellas púrpura"
               },
               "icon": "TI_Talisman_Growth_Enhance_02",
               "grade": "unique"
@@ -1123,7 +1241,9 @@
                 "en": "Artisan's Hammer",
                 "jp": "達人の強化ハンマー",
                 "kr": "명인 강화 도구",
-                "zh": "名匠强化道具"
+                "zh": "名匠强化道具",
+                "fr": "Artisan's Hammer",
+                "es": "Martillo del Artesano"
               },
               "icon": "TI_Item_Growth_Enhance_04",
               "grade": "unique"
@@ -1137,7 +1257,9 @@
                 "en": "Purple Stardust",
                 "jp": "パープルスターダスト",
                 "kr": "퍼플 스타 더스트",
-                "zh": "紫色星尘"
+                "zh": "紫色星尘",
+                "fr": "Purple Stardust",
+                "es": "Polvo de estrellas púrpura"
               },
               "icon": "TI_Talisman_Growth_Enhance_02",
               "grade": "unique"
@@ -1157,7 +1279,9 @@
         "en": "Sandwich",
         "jp": "サンドイッチ",
         "kr": "샌드위치",
-        "zh": "三明治"
+        "zh": "三明治",
+        "fr": "Sandwich",
+        "es": "Sándwich"
       },
       "icon": "TI_Item_Growth_Potion_01",
       "grade": "normal",
@@ -1169,7 +1293,9 @@
         "en": "Cake Slice",
         "jp": "チョコショートケーキ",
         "kr": "조각 케이크",
-        "zh": "切块蛋糕"
+        "zh": "切块蛋糕",
+        "fr": "Cake Slice",
+        "es": "Rodaja de Pastel"
       },
       "icon": "TI_Item_Growth_Potion_02",
       "grade": "magic",
@@ -1181,7 +1307,9 @@
         "en": "Prosciutto",
         "jp": "プロシュート",
         "kr": "프로슈토",
-        "zh": "帕尔玛火腿"
+        "zh": "帕尔玛火腿",
+        "fr": "- Oui. - Oui.",
+        "es": "Prosciutto"
       },
       "icon": "TI_Item_Growth_Potion_03",
       "grade": "rare",
@@ -1193,7 +1321,9 @@
         "en": "Steak Dish",
         "jp": "ステーキ定食",
         "kr": "스테이크 정식",
-        "zh": "牛排套餐"
+        "zh": "牛排套餐",
+        "fr": "Plat de steak",
+        "es": "Plato de bistec"
       },
       "icon": "TI_Item_Growth_Potion_04",
       "grade": "unique",
@@ -1230,7 +1360,9 @@
         "en": "USB Drive",
         "jp": "USBメモリ",
         "kr": "USB 드라이브",
-        "zh": "USB驱动器"
+        "zh": "USB驱动器",
+        "fr": "Disque USB",
+        "es": "Unidad USB"
       },
       "icon": "TI_Present_01_01",
       "grade": "normal",
@@ -1243,7 +1375,9 @@
         "en": "Collector's Coin",
         "jp": "コレクション用コイン",
         "kr": "수집용 동전",
-        "zh": "硬币藏品"
+        "zh": "硬币藏品",
+        "fr": "Coin de collectionneur",
+        "es": "Moneda Coleccionista"
       },
       "icon": "TI_Present_02_01",
       "grade": "normal",
@@ -1256,7 +1390,9 @@
         "en": "Mana Potion",
         "jp": "マナポーション",
         "kr": "마력 회복제",
-        "zh": "魔力恢复剂"
+        "zh": "魔力恢复剂",
+        "fr": "Mana Potion",
+        "es": "Poción de Maná"
       },
       "icon": "TI_Present_03_01",
       "grade": "normal",
@@ -1269,7 +1405,9 @@
         "en": "Paper Crane",
         "jp": "折り鶴",
         "kr": "종이학",
-        "zh": "纸鹤"
+        "zh": "纸鹤",
+        "fr": "Paper Crane",
+        "es": "Grulla de papel"
       },
       "icon": "TI_Present_04_01",
       "grade": "normal",
@@ -1282,7 +1420,9 @@
         "en": "Berry",
         "jp": "木の実",
         "kr": "나무 열매",
-        "zh": "树果"
+        "zh": "树果",
+        "fr": "Berry",
+        "es": "Baya"
       },
       "icon": "TI_Present_05_01",
       "grade": "normal",
@@ -1295,7 +1435,9 @@
         "en": "Portable Gaming Device",
         "jp": "ポータブルゲーム機",
         "kr": "휴대용 게임기",
-        "zh": "掌上游戏机"
+        "zh": "掌上游戏机",
+        "fr": "Dispositif de jeu portable pour jeux",
+        "es": "Dispositivo juego portátil"
       },
       "icon": "TI_Present_01_02",
       "grade": "magic",
@@ -1308,7 +1450,9 @@
         "en": "Elegant Teacup",
         "jp": "おしゃれなティーカップ",
         "kr": "고급 찻잔",
-        "zh": "高级茶杯"
+        "zh": "高级茶杯",
+        "fr": "Elegant Teacup",
+        "es": "Taza de té elegante"
       },
       "icon": "TI_Present_02_02",
       "grade": "magic",
@@ -1321,7 +1465,9 @@
         "en": "Fay Dust",
         "jp": "妖精のこな",
         "kr": "요정의 가루",
-        "zh": "精灵的粉末"
+        "zh": "精灵的粉末",
+        "fr": "Fay Dust",
+        "es": "Polvo Hada"
       },
       "icon": "TI_Present_03_02",
       "grade": "magic",
@@ -1334,7 +1480,9 @@
         "en": "Crystal Orb",
         "jp": "ガラス玉",
         "kr": "유리구슬",
-        "zh": "玻璃珠"
+        "zh": "玻璃珠",
+        "fr": "Orb en cristal orb.",
+        "es": "Orbe de cristal"
       },
       "icon": "TI_Present_04_02",
       "grade": "magic",
@@ -1347,7 +1495,9 @@
         "en": "Wildflower",
         "jp": "野花",
         "kr": "야생화",
-        "zh": "野花"
+        "zh": "野花",
+        "fr": "Fleurs sauvages",
+        "es": "Flor silvestre"
       },
       "icon": "TI_Present_05_02",
       "grade": "magic",
@@ -1360,7 +1510,9 @@
         "en": "Smartphone",
         "jp": "スマートフォン",
         "kr": "스마트폰",
-        "zh": "智能手机"
+        "zh": "智能手机",
+        "fr": "Smartphone",
+        "es": "Smartphone"
       },
       "icon": "TI_Present_01_03",
       "grade": "rare",
@@ -1373,7 +1525,9 @@
         "en": "Decorative Chest Armor",
         "jp": "飾り用のよろい",
         "kr": "장식용 갑옷",
-        "zh": "盔甲装饰"
+        "zh": "盔甲装饰",
+        "fr": "Decorative coffre armure",
+        "es": "Armadura Peto dec."
       },
       "icon": "TI_Present_02_03",
       "grade": "rare",
@@ -1386,7 +1540,9 @@
         "en": "Witch's Cauldron",
         "jp": "魔女の釜",
         "kr": "마녀의 가마솥",
-        "zh": "魔女铁锅"
+        "zh": "魔女铁锅",
+        "fr": "Le chaudron de sorcière",
+        "es": "Caldero de bruja"
       },
       "icon": "TI_Present_03_03",
       "grade": "rare",
@@ -1399,7 +1555,9 @@
         "en": "Lion Statue",
         "jp": "ライオンの彫像",
         "kr": "사자 조각상",
-        "zh": "狮子像"
+        "zh": "狮子像",
+        "fr": "Statue de lion",
+        "es": "Estatua León"
       },
       "icon": "TI_Present_04_03",
       "grade": "rare",
@@ -1412,7 +1570,9 @@
         "en": "Phantom Bird's Egg",
         "jp": "怪鳥の卵",
         "kr": "괴조의 알",
-        "zh": "异禽的蛋"
+        "zh": "异禽的蛋",
+        "fr": "Oeuf d'oiseau de Phantom",
+        "es": "Huevo del Ave Fantasma"
       },
       "icon": "TI_Present_05_03",
       "grade": "rare",
@@ -1425,7 +1585,9 @@
         "en": "Dungeon Core Fragment",
         "jp": "ダンジョンコアの破片",
         "kr": "던전 코어 파편",
-        "zh": "暗堡核心残片"
+        "zh": "暗堡核心残片",
+        "fr": "Dungeon Core Fragment",
+        "es": "Fragmento de Dungeon Core"
       },
       "icon": "TI_Present_01_04",
       "grade": "unique",
@@ -1438,7 +1600,9 @@
         "en": "Noble's Ceremonial Sword",
         "jp": "貴族の儀装剣",
         "kr": "귀족용 의장검",
-        "zh": "贵族礼剑"
+        "zh": "贵族礼剑",
+        "fr": "Noble's Ceremonial Sword",
+        "es": "Espada Ceremonial Noble"
       },
       "icon": "TI_Present_02_04",
       "grade": "unique",
@@ -1451,7 +1615,9 @@
         "en": "Magic Textbook",
         "jp": "魔法理論書",
         "kr": "마법 이론서",
-        "zh": "魔法理论书"
+        "zh": "魔法理论书",
+        "fr": "Magic Textbook",
+        "es": "Libro Magia"
       },
       "icon": "TI_Present_03_04",
       "grade": "unique",
@@ -1464,7 +1630,9 @@
         "en": "Dreamcatcher",
         "jp": "ドリームキャッチャー",
         "kr": "드림 캐처",
-        "zh": "捕梦网"
+        "zh": "捕梦网",
+        "fr": "Rêve de capturer",
+        "es": "Atrapasueños"
       },
       "icon": "TI_Present_04_04",
       "grade": "unique",
@@ -1477,7 +1645,9 @@
         "en": "Leaf of World Tree",
         "jp": "世界樹の葉",
         "kr": "세계수의 잎",
-        "zh": "世界树叶子"
+        "zh": "世界树叶子",
+        "fr": "Leaf of World Tree",
+        "es": "Hoja del Árbol del Mundo"
       },
       "icon": "TI_Present_05_04",
       "grade": "unique",
@@ -1500,7 +1670,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1517,7 +1689,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1534,7 +1708,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1551,7 +1727,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1568,7 +1746,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1592,7 +1772,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1609,7 +1791,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1626,7 +1810,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1643,7 +1829,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1660,7 +1848,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1684,7 +1874,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1701,7 +1893,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1718,7 +1912,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1735,7 +1931,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1752,7 +1950,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1776,7 +1976,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1793,7 +1995,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1810,7 +2014,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1827,7 +2033,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1844,7 +2052,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1868,7 +2078,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1885,7 +2097,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1902,7 +2116,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1919,7 +2135,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1936,7 +2154,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1960,7 +2180,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1977,7 +2199,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -1994,7 +2218,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -2011,7 +2237,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"
@@ -2028,7 +2256,9 @@
                 "en": "Fusion-Type Core",
                 "jp": "フュージョン型コア",
                 "kr": "융합형 코어",
-                "zh": "融合型核心"
+                "zh": "融合型核心",
+                "fr": "Fusion-Type Core",
+                "es": "Core de Tipo Fusión"
               },
               "icon": "TI_Item_CoreMerged",
               "grade": "unique"

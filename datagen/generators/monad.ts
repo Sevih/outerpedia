@@ -436,12 +436,10 @@ function extractGroup(
   // Agrège les items atteignables par nœud (union des `gives` des arêtes
   // sortantes + items auto du nœud) → flag « peut octroyer un item-clé ».
   for (const node of grid.values()) {
-    const merged: Record<GameLang, Set<string>> = {
-      en: new Set(),
-      jp: new Set(),
-      kr: new Set(),
-      zh: new Set(),
-    };
+    const merged = Object.fromEntries(GAME_LANGS.map((l) => [l, new Set<string>()])) as Record<
+      GameLang,
+      Set<string>
+    >;
     for (const e of edges) {
       if (e.from !== node.id || !e.gives) continue;
       for (const lang of GAME_LANGS) {

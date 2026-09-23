@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '@datagen/lib/lang';
 import {
   accountNeed,
   foodBreakdown,
@@ -17,7 +18,7 @@ import {
  * différentiels de cumul, paliers franchis, bornes, agrégation.
  */
 
-const dict = (en: string) => ({ en, jp: '', kr: '', zh: '' });
+const dict = (en: string) => ({ ...emptyDict(), en });
 const item = (id: string, name = id) => ({ id, name: dict(name), icon: '', grade: 'normal' });
 
 const RULES: GrowthRules = {

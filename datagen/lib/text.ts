@@ -3,23 +3,22 @@
  *
  * Les tables `Text*` (`TextSystem`, `TextCharacter`, `TextSkill`, …) ont la même
  * forme : une colonne clé (`ID`) et une colonne par langue (`English`, …).
- * Ce module transforme ces lignes en « dict wiki » `{ en, jp, kr, zh }` et
+ * Ce module transforme ces lignes en « dict wiki » (une clé par `GAME_LANGS`) et
  * fournit l'index clé → dict, réécrit ~6 fois auparavant (cf. audit).
  */
-import { GAME_LANGS, LANG_COLUMNS, type LangDict } from './lang';
+import { GAME_LANGS, LANG_COLUMNS, emptyDict, type LangDict } from './lang';
 import { indexBy, loadTable, withCaseInsensitiveGet, type Row } from './tables';
 
-/** Dict localisé vide (langues manquantes = chaîne vide → diffs propres). */
-export function emptyDict(): LangDict {
-  return { en: '', jp: '', kr: '', zh: '' };
-}
+// `emptyDict` vit dans `lang.ts` (module pur, importable des tests du site sans
+// tirer `tables.ts` et `node:fs`) ; ré-exporté ici pour ses consommateurs historiques.
+export { emptyDict, uniformDict } from './lang';
 
 /** Normalise un texte de jeu : trim + apostrophes courbes → droites. */
 function clean(s: string | undefined): string {
   return (s ?? '').trim().replace(/[‘’]/g, "'");
 }
 
-/** Extrait les 4 langues d'une ligne (colonnes `English`/`Japanese`/…). `null` si ligne absente. */
+/** Extrait toutes les langues du jeu d'une ligne (colonnes `English`/`Japanese`/…). `null` si ligne absente. */
 export function getLangTexts(row: Row | undefined): LangDict | null {
   if (!row) return null;
   const out = emptyDict();
@@ -39,7 +38,7 @@ export function hasText(d: LangDict): boolean {
 
 /**
  * Construit l'index d'une table de textes :
- *   clé (colonne `keyCol`, défaut `ID`)  →  `{ en, jp, kr, zh }`
+ *   clé (colonne `keyCol`, défaut `ID`)  →  `LangDict`
  * Lookup insensible à la casse (dérive `_Lv1` / `_LV1` entre fichiers).
  */
 export function loadTextIndex(tableName: string, keyCol = 'ID'): Map<string, LangDict> {

@@ -1,7 +1,7 @@
 # Procédure — banc d'essai LOCAL du routage par sous-domaines
 
 Rejouer en local le comportement prod (`outerpedia.com` + `jp.` `kr.` `zh.`
-`fr.`) sans toucher au DNS : hosts + Caddy local (HTTPS de confiance) + profil
+`fr.` `es.`) sans toucher au DNS : hosts + Caddy local (HTTPS de confiance) + profil
 `subdomain` baké. Validé de bout en bout le **21/07/2026** (proxy, canonicals,
 hreflang, sitemap à alternates, 308 `/en/*`, `www` = apex, sélecteur de
 langue) — seul finding : `<html lang>` figé à `en`, bug PRÉEXISTANT tracé au
@@ -17,8 +17,12 @@ TODO, pas lié aux sous-domaines.
   127.0.0.1  kr.outerpedia.local
   127.0.0.1  zh.outerpedia.local
   127.0.0.1  fr.outerpedia.local
+  127.0.0.1  es.outerpedia.local
   127.0.0.1  www.outerpedia.local
   ```
+
+  (`es` ajouté le 23/09/2026 avec la langue — le fichier hosts se modifie en
+  administrateur, ce n'est pas le repo qui le pose.)
 
 - Caddy installé ; sa CA locale est déjà dans le magasin Windows (`caddy trust`
   au besoin) → cadenas vert.

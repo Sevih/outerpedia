@@ -1,5 +1,6 @@
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
+import { lRec } from '@/lib/i18n/localize';
 import { GUIDE_CATEGORIES } from '@/lib/data/guide-categories';
 import { characterDisplayName, characterSearchNames, slugForId } from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
@@ -57,7 +58,7 @@ export default async function MostUsedUnits({ lang }: { lang: Lang }) {
     categories: Object.fromEntries(
       USAGE_CATEGORIES.filter((cat) => rows.some((r) => cat in r.categories)).map((cat) => [
         cat,
-        GUIDE_CATEGORIES[cat].label[lang] ?? GUIDE_CATEGORIES[cat].label.en,
+        lRec(GUIDE_CATEGORIES[cat].label, lang),
       ]),
     ),
     elements: optionMap(

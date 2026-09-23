@@ -19,7 +19,7 @@
 import { loadTable, num, numf } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
-import type { LangDict } from '../lib/lang';
+import { uniformDict, type LangDict } from '../lib/lang';
 
 export interface AscensionMaterial {
   id: string;
@@ -156,7 +156,7 @@ export function buildEnhanceRules(): EnhanceRules {
       out.push({
         id,
         count,
-        name: it ? resolveText(textItem, it.NameID) : { en: id, jp: id, kr: id, zh: id },
+        name: it ? resolveText(textItem, it.NameID) : uniformDict(id),
         icon: it?.IconName ?? '',
         grade: slugEnum(it?.ItemGrade) || 'normal',
         ...(desc?.en ? { desc } : {}),

@@ -2,7 +2,7 @@
  * Générateur — source canonique des items (HORS équipement).
  *
  * UNE seule source pour les items « simples » (gem / material / present / box) :
- * nom + description localisés (4 langues), type/sous-type/grade normalisés,
+ * nom + description localisés (toutes les langues du jeu), type/sous-type/grade normalisés,
  * étoiles, icône. Tout consommateur référence un item par son `id` et lit ici.
  *
  * L'ÉQUIPEMENT (IT_EQUIP) est une entité distincte, bien plus riche (stats,

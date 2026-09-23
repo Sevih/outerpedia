@@ -12,6 +12,7 @@
  * Écritures réelles dans un tmp via `sandbox()` (cf. `store-fixture`).
  */
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { uniformDict } from '@datagen/lib/lang';
 import { sandbox } from './store-fixture';
 import type { ItemCurated } from './item-curated-store';
 
@@ -22,7 +23,7 @@ const { upsertItemCurated, loadItemCurated } = await import('./item-curated-stor
 const FILE = 'data/curated/items.json';
 
 /** `LangDict` est un dictionnaire COMPLET (4 langues), pas un partiel. */
-const dict = (en: string) => ({ en, jp: en, kr: en, zh: en });
+const dict = (en: string) => uniformDict(en);
 
 beforeEach(() => box.reset());
 afterAll(() => box.dispose());

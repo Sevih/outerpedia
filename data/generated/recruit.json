@@ -93,7 +93,9 @@
             "en": "3 Star Recruit Chance",
             "jp": "★3確率",
             "kr": "3성 영입 확률",
-            "zh": "3星招募几率"
+            "zh": "3星招募几率",
+            "fr": "Chance de recrut. 3 étoiles",
+            "es": "Recluta 3 estrellas"
           },
           "percent": 2.5,
           "confirmPercent": 2.5
@@ -104,7 +106,9 @@
             "en": "2 Star Recruit Chance",
             "jp": "★2確率",
             "kr": "2성 영입 확률",
-            "zh": "2星招募几率"
+            "zh": "2星招募几率",
+            "fr": "Chance de recrut. 2 étoiles",
+            "es": "Recluta 2 estrellas"
           },
           "percent": 19,
           "confirmPercent": 97.5
@@ -115,7 +119,9 @@
             "en": "1 Star Recruit Chance",
             "jp": "★1確率",
             "kr": "1성 영입 확률",
-            "zh": "1星招募几率"
+            "zh": "1星招募几率",
+            "fr": "1 chance de recrut. d'une étoile",
+            "es": "Recluta 1 estrella"
           },
           "percent": 78.5,
           "confirmPercent": 0
@@ -140,7 +146,9 @@
             "en": "Chance Increase",
             "jp": "ピックアップ確率",
             "kr": "픽업 확률",
-            "zh": "PICKUP几率"
+            "zh": "PICKUP几率",
+            "fr": "Augme. de chances",
+            "es": "Aumento de prob."
           },
           "percent": 1.25,
           "confirmPercent": 1.25
@@ -151,7 +159,9 @@
             "en": "3 Star Recruit Chance",
             "jp": "★3確率",
             "kr": "3성 영입 확률",
-            "zh": "3星招募几率"
+            "zh": "3星招募几率",
+            "fr": "Chance de recrut. 3 étoiles",
+            "es": "Recluta 3 estrellas"
           },
           "percent": 1.25,
           "confirmPercent": 1.25
@@ -162,7 +172,9 @@
             "en": "2 Star Recruit Chance",
             "jp": "★2確率",
             "kr": "2성 영입 확률",
-            "zh": "2星招募几率"
+            "zh": "2星招募几率",
+            "fr": "Chance de recrut. 2 étoiles",
+            "es": "Recluta 2 estrellas"
           },
           "percent": 19,
           "confirmPercent": 97.5
@@ -173,7 +185,9 @@
             "en": "1 Star Recruit Chance",
             "jp": "★1確率",
             "kr": "1성 영입 확률",
-            "zh": "1星招募几率"
+            "zh": "1星招募几率",
+            "fr": "1 chance de recrut. d'une étoile",
+            "es": "Recluta 1 estrella"
           },
           "percent": 78.5,
           "confirmPercent": 0
@@ -198,7 +212,9 @@
             "en": "Chance Increase",
             "jp": "ピックアップ確率",
             "kr": "픽업 확률",
-            "zh": "PICKUP几率"
+            "zh": "PICKUP几率",
+            "fr": "Augme. de chances",
+            "es": "Aumento de prob."
           },
           "percent": 1.25,
           "confirmPercent": 1.25
@@ -209,7 +225,9 @@
             "en": "3 Star Recruit Chance",
             "jp": "★3確率",
             "kr": "3성 영입 확률",
-            "zh": "3星招募几率"
+            "zh": "3星招募几率",
+            "fr": "Chance de recrut. 3 étoiles",
+            "es": "Recluta 3 estrellas"
           },
           "percent": 2.5,
           "confirmPercent": 2.5
@@ -220,7 +238,9 @@
             "en": "2 Star Recruit Chance",
             "jp": "★2確率",
             "kr": "2성 영입 확률",
-            "zh": "2星招募几率"
+            "zh": "2星招募几率",
+            "fr": "Chance de recrut. 2 étoiles",
+            "es": "Recluta 2 estrellas"
           },
           "percent": 19,
           "confirmPercent": 96.25
@@ -231,7 +251,9 @@
             "en": "1 Star Recruit Chance",
             "jp": "★1確率",
             "kr": "1성 영입 확률",
-            "zh": "1星招募几率"
+            "zh": "1星招募几率",
+            "fr": "1 chance de recrut. d'une étoile",
+            "es": "Recluta 1 estrella"
           },
           "percent": 77.25,
           "confirmPercent": 0
@@ -256,7 +278,9 @@
             "en": "Chance Increase",
             "jp": "ピックアップ確率",
             "kr": "픽업 확률",
-            "zh": "PICKUP几率"
+            "zh": "PICKUP几率",
+            "fr": "Augme. de chances",
+            "es": "Aumento de prob."
           },
           "percent": 1.25,
           "confirmPercent": 1.25
@@ -267,7 +291,9 @@
             "en": "3 Star Recruit Chance",
             "jp": "★3確率",
             "kr": "3성 영입 확률",
-            "zh": "3星招募几率"
+            "zh": "3星招募几率",
+            "fr": "Chance de recrut. 3 étoiles",
+            "es": "Recluta 3 estrellas"
           },
           "percent": 1.25,
           "confirmPercent": 1.25
@@ -278,7 +304,9 @@
             "en": "2 Star Recruit Chance",
             "jp": "★2確率",
             "kr": "2성 영입 확률",
-            "zh": "2星招募几率"
+            "zh": "2星招募几率",
+            "fr": "Chance de recrut. 2 étoiles",
+            "es": "Recluta 2 estrellas"
           },
           "percent": 19,
           "confirmPercent": 97.5
@@ -289,7 +317,9 @@
             "en": "1 Star Recruit Chance",
             "jp": "★1確率",
             "kr": "1성 영입 확률",
-            "zh": "1星招募几率"
+            "zh": "1星招募几率",
+            "fr": "1 chance de recrut. d'une étoile",
+            "es": "Recluta 1 estrella"
           },
           "percent": 78.5,
           "confirmPercent": 0
@@ -314,7 +344,9 @@
             "en": "Advanced Dimensional Supply III",
             "jp": "高次元物資III",
             "kr": "고차원 물자 lll",
-            "zh": "高次元物资III"
+            "zh": "高次元物资III",
+            "fr": "Approvisionnement dim. avancé III",
+            "es": "Suministro Dim. Avanzado III"
           },
           "percent": 1,
           "confirmPercent": 1,
@@ -352,7 +384,9 @@
             "en": "Selected Rate-Up Gear",
             "jp": "カスタムピックアップ装備",
             "kr": "커스텀 픽업 장비",
-            "zh": "已选装备"
+            "zh": "已选装备",
+            "fr": "Équip. à taux majoré choisi",
+            "es": "Equipo de Tasa Aumentada Elegido"
           },
           "percent": 2,
           "confirmPercent": 2
@@ -363,7 +397,9 @@
             "en": "Advanced Dimensional Supply II",
             "jp": "高次元物資II",
             "kr": "고차원 물자 ll",
-            "zh": "高次元物资II"
+            "zh": "高次元物资II",
+            "fr": "Approvisionnement dim. avancé II",
+            "es": "Suministro Dim. Avanzado II"
           },
           "percent": 8,
           "confirmPercent": 43,
@@ -446,7 +482,9 @@
             "en": "6★ Legendary Gear (All Substats at LV 3)",
             "jp": "★6レジェンド装備（サブオプション全てLv.3）",
             "kr": "6성 전설 장비(모든 서브 옵션 3 LV)",
-            "zh": "6★传说装备（所有副属性Lv.3）"
+            "zh": "6★传说装备（所有副属性Lv.3）",
+            "fr": "Équip. légend. 6★ (Toutes les sous-stats au nv. 3)",
+            "es": "Equipo Legendario 6★ (Substats LV 3)"
           },
           "percent": 4,
           "confirmPercent": 4
@@ -457,7 +495,9 @@
             "en": "Advanced Dimensional Supply I",
             "jp": "高次元物資I",
             "kr": "고차원 물자 l",
-            "zh": "高次元物资I"
+            "zh": "高次元物资I",
+            "fr": "Approvisionnement dim. avancé I",
+            "es": "Suministro Dim. Avanzado I"
           },
           "percent": 75,
           "confirmPercent": 0,
@@ -590,7 +630,9 @@
             "en": "6★ Legendary Gear (Random Substats)",
             "jp": "★6レジェンド装備（オプションランダム付与）",
             "kr": "6성 전설 장비(무작위 서브 옵션)",
-            "zh": "6★传说装备（随机副属性）"
+            "zh": "6★传说装备（随机副属性）",
+            "fr": "Équip. légend. 6★ (sous-stats aléat.)",
+            "es": "Equipo Legend. 6★ (Substats aleat.)"
           },
           "percent": 10,
           "confirmPercent": 50

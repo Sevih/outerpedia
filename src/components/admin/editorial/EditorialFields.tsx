@@ -11,6 +11,7 @@
  * fidèlement en place via `renderInlineBatch` (server action publique).
  */
 import { useEffect, useState } from 'react';
+import type { Lang } from '@/lib/i18n/config';
 import { type Keyed, withKey } from '@/lib/admin/keyed';
 import { InlineTextField } from '@/components/admin/InlineTextField';
 import { InlinePreview } from '@/components/admin/InlinePreview';
@@ -20,7 +21,7 @@ import type { InlineSegment } from '@/lib/parse-text';
 import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import { btn } from '../_ui';
 
-export type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
+export type LocalizedText = Partial<Record<Lang, string>>;
 export interface SynergyGroup {
   heroes: string[];
   reason?: LocalizedText;
@@ -36,7 +37,8 @@ export interface HeroView {
   href?: string;
 }
 
-export type EditorialLang = 'en' | 'jp' | 'kr' | 'zh' | 'fr';
+// Les langues du site, pas une liste locale : une liste locale finit par manquer une langue.
+export type EditorialLang = Lang;
 
 /** Datalist des noms de héros, partagée par les groupes de synergie. */
 const HERO_DATALIST = 'hero-names';

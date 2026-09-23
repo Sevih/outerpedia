@@ -9,13 +9,17 @@
             "en": "Good Night",
             "jp": "おやすみ",
             "kr": "잘 자",
-            "zh": "晚安"
+            "zh": "晚安",
+            "fr": "Bonne nuit",
+            "es": "Buenas noches"
           },
           "areaName": {
             "en": "Conclusion",
             "jp": "決着",
             "kr": "결착",
-            "zh": "完结"
+            "zh": "完结",
+            "fr": "Conclusion",
+            "es": "Conclusión"
           },
           "mode": "origin"
         },
@@ -25,13 +29,17 @@
             "en": "Snapped Back to Reality",
             "jp": "現実に向き合う時",
             "kr": "현실로 돌아갈 시간",
-            "zh": "该回到现实了"
+            "zh": "该回到现实了",
+            "fr": "Retour à la réalité",
+            "es": "De vuelta a la realidad"
           },
           "areaName": {
             "en": "Garden of Dolls",
             "jp": "箱庭",
             "kr": "모형 정원",
-            "zh": "模型庄园"
+            "zh": "模型庄园",
+            "fr": "Jardin de poupées",
+            "es": "Jardín Muñecas"
           },
           "mode": "origin"
         },
@@ -41,13 +49,17 @@
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "areaName": {
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "mode": "origin"
         }
@@ -56,13 +68,17 @@
         "en": "Adventure License",
         "jp": "アドベンチャーライセンス",
         "kr": "모험 라이선스",
-        "zh": "冒险许可证"
+        "zh": "冒险许可证",
+        "fr": "Licence aventure",
+        "es": "Licencia aventura"
       },
       "officialName": {
         "en": "Adventure License",
         "jp": "冒険者ライセンス",
         "kr": "모험 라이선스",
-        "zh": "冒险许可证"
+        "zh": "冒险许可证",
+        "fr": "Licence aventure",
+        "es": "Licencia aventura"
       }
     },
     {
@@ -74,13 +90,17 @@
             "en": "Pass",
             "jp": "合格",
             "kr": "합격",
-            "zh": "通过"
+            "zh": "通过",
+            "fr": "Passer",
+            "es": "Apro."
           },
           "areaName": {
             "en": "Magnolia",
             "jp": "マグノリア",
             "kr": "매그놀리아",
-            "zh": "麦格诺里亚"
+            "zh": "麦格诺里亚",
+            "fr": "Magnolia",
+            "es": "Magnolia"
           },
           "mode": "origin"
         },
@@ -90,13 +110,17 @@
             "en": "The Responsibility of the Guilty",
             "jp": "奪った者の責任感",
             "kr": "빼앗은 자의 책임감",
-            "zh": "掠夺者的责任感"
+            "zh": "掠夺者的责任感",
+            "fr": "La responsabilité des coupables",
+            "es": "La Responsabilidad del Culpable"
           },
           "areaName": {
             "en": "Nameless Island",
             "jp": "名もなき島",
             "kr": "이름 없는 섬",
-            "zh": "无名岛屿"
+            "zh": "无名岛屿",
+            "fr": "Île sans nom",
+            "es": "Isla sin Nombre"
           },
           "mode": "origin"
         }
@@ -105,7 +129,9 @@
         "en": "Precision Crafting",
         "jp": "精密製作",
         "kr": "정밀 제작",
-        "zh": "精密制作"
+        "zh": "精密制作",
+        "fr": "Fabrication de PRÉC",
+        "es": "Creación Precisa"
       }
     },
     {
@@ -117,13 +143,17 @@
             "en": "Pass",
             "jp": "合格",
             "kr": "합격",
-            "zh": "通过"
+            "zh": "通过",
+            "fr": "Passer",
+            "es": "Apro."
           },
           "areaName": {
             "en": "Magnolia",
             "jp": "マグノリア",
             "kr": "매그놀리아",
-            "zh": "麦格诺里亚"
+            "zh": "麦格诺里亚",
+            "fr": "Magnolia",
+            "es": "Magnolia"
           },
           "mode": "origin"
         },
@@ -133,13 +163,17 @@
             "en": "The Responsibility of the Guilty",
             "jp": "奪った者の責任感",
             "kr": "빼앗은 자의 책임감",
-            "zh": "掠夺者的责任感"
+            "zh": "掠夺者的责任感",
+            "fr": "La responsabilité des coupables",
+            "es": "La Responsabilidad del Culpable"
           },
           "areaName": {
             "en": "Nameless Island",
             "jp": "名もなき島",
             "kr": "이름 없는 섬",
-            "zh": "无名岛屿"
+            "zh": "无名岛屿",
+            "fr": "Île sans nom",
+            "es": "Isla sin Nombre"
           },
           "mode": "origin"
         }
@@ -148,7 +182,9 @@
         "en": "Gift",
         "jp": "ギフト",
         "kr": "기프트",
-        "zh": "礼物"
+        "zh": "礼物",
+        "fr": "Cadeau",
+        "es": "Regalo"
       }
     },
     {
@@ -160,13 +196,17 @@
             "en": "Not in Great Shape",
             "jp": "どうにも優れないコンディション",
             "kr": "영 좋지 않은 컨디션",
-            "zh": "状态很差"
+            "zh": "状态很差",
+            "fr": "En mauvais état",
+            "es": "En muy mala cond."
           },
           "areaName": {
             "en": "World Memory",
             "jp": "世界の記憶",
             "kr": "세계 기억",
-            "zh": "世界记忆"
+            "zh": "世界记忆",
+            "fr": "Mémoire mond.",
+            "es": "Memoria de mundo"
           },
           "mode": "story"
         },
@@ -176,13 +216,17 @@
             "en": "Gathering Supplies",
             "jp": "物資補給",
             "kr": "물자 보급",
-            "zh": "物资补给"
+            "zh": "物资补给",
+            "fr": "Fourn. de collecte",
+            "es": "Reunir Suministros"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         }
@@ -191,13 +235,17 @@
         "en": "Base",
         "jp": "アジト",
         "kr": "아지트",
-        "zh": "基地"
+        "zh": "基地",
+        "fr": "Base",
+        "es": "Base"
       },
       "officialName": {
         "en": "Base",
         "jp": "アジト",
         "kr": "아지트",
-        "zh": "基地"
+        "zh": "基地",
+        "fr": "Base",
+        "es": "Base"
       }
     },
     {
@@ -209,13 +257,17 @@
             "en": "The Commander's Consideration",
             "jp": "騎士団長の気づかい",
             "kr": "단장의 배려",
-            "zh": "团长的关怀"
+            "zh": "团长的关怀",
+            "fr": "Considérations du commandant",
+            "es": "La Consideración del Capitán"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         },
@@ -225,13 +277,17 @@
             "en": "An Unjust Fight",
             "jp": "仁義なき戦い",
             "kr": "인의 없는 싸움",
-            "zh": "不讲仁义的战斗"
+            "zh": "不讲仁义的战斗",
+            "fr": "Un combat injuste",
+            "es": "Lucha Desigual"
           },
           "areaName": {
             "en": "Fiend Territory",
             "jp": "魔族の領域",
             "kr": "마족의 영역",
-            "zh": "魔族领域"
+            "zh": "魔族领域",
+            "fr": "Terri. de démons",
+            "es": "Terri. de Demonios"
           },
           "mode": "origin"
         }
@@ -240,13 +296,17 @@
         "en": "Synchro Room",
         "jp": "シンクロルーム",
         "kr": "싱크로 룸",
-        "zh": "同步空间"
+        "zh": "同步空间",
+        "fr": "Salle Synchro",
+        "es": "Sala Sincro"
       },
       "officialName": {
         "en": "Synchro Room",
         "jp": "シンクロルーム",
         "kr": "싱크로 룸",
-        "zh": "同步空间"
+        "zh": "同步空间",
+        "fr": "Salle Synchro",
+        "es": "Sala Sincro"
       }
     },
     {
@@ -258,13 +318,17 @@
             "en": "Securing Parts (2)",
             "jp": "部品確保（2）",
             "kr": "부품 확보 (2)",
-            "zh": "确保零件（2）"
+            "zh": "确保零件（2）",
+            "fr": "Fixa. de pièces (2)",
+            "es": "Piezas (2)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -274,13 +338,17 @@
             "en": "Outer City",
             "jp": "アウターシティへ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -289,7 +357,9 @@
         "en": "Auto Battle",
         "jp": "自動戦闘",
         "kr": "자동 전투",
-        "zh": "自动战斗"
+        "zh": "自动战斗",
+        "fr": "Combat autom.",
+        "es": "Batalla autom."
       }
     },
     {
@@ -301,13 +371,17 @@
             "en": "A Suspicious Exhaust Note",
             "jp": "不審な排気音",
             "kr": "수상한 배기음",
-            "zh": "可疑的排气声"
+            "zh": "可疑的排气声",
+            "fr": "Un bruit d'échappement suspect",
+            "es": "Nota de Escape Sospechosa"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         },
@@ -317,13 +391,17 @@
             "en": "Quirk",
             "jp": "ギフト",
             "kr": "기프트",
-            "zh": "天赋"
+            "zh": "天赋",
+            "fr": "Bizar.",
+            "es": "Quirk"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -338,13 +416,17 @@
             "en": "Securing Parts (1)",
             "jp": "部品確保（1）",
             "kr": "부품 확보 (1)",
-            "zh": "确保零件（1）"
+            "zh": "确保零件（1）",
+            "fr": "Fixa. de pièces (1)",
+            "es": "Piezas (1)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -354,13 +436,17 @@
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
-            "zh": "骑士现身"
+            "zh": "骑士现身",
+            "fr": "Un chev. apparaît",
+            "es": "Caballero aparece"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -369,7 +455,9 @@
         "en": "Skill Burst",
         "jp": "スキルバースト",
         "kr": "스킬 버스트",
-        "zh": "爆发技能"
+        "zh": "爆发技能",
+        "fr": "Burst comp.",
+        "es": "Habilidad Burst"
       }
     },
     {
@@ -381,13 +469,17 @@
             "en": "The Village Becomes a Dungeon",
             "jp": "村のダンジョン化",
             "kr": "마을의 던전화",
-            "zh": "村庄的地下城化"
+            "zh": "村庄的地下城化",
+            "fr": "village se transforme en donjon",
+            "es": "La Aldea se hace Mazmorra"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         },
@@ -397,13 +489,17 @@
             "en": "Transformation",
             "jp": "メタモルフォーゼ",
             "kr": "변모",
-            "zh": "变形"
+            "zh": "变形",
+            "fr": "Transformation",
+            "es": "Transformación"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -412,7 +508,9 @@
         "en": "Skill Chain",
         "jp": "スキルチェイン",
         "kr": "스킬 체인",
-        "zh": "技能连锁"
+        "zh": "技能连锁",
+        "fr": "Chaîne de comp",
+        "es": "Cadena de Hab"
       }
     },
     {
@@ -422,7 +520,9 @@
         "en": "Continuous Battle",
         "jp": "オート進行",
         "kr": "연속 전투",
-        "zh": "连续战斗"
+        "zh": "连续战斗",
+        "fr": "Bataille continue",
+        "es": "Batalla Continua"
       }
     },
     {
@@ -433,13 +533,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -448,7 +552,9 @@
         "en": "Battle Settings",
         "jp": "バトル設定",
         "kr": "전투 설정",
-        "zh": "战斗设置"
+        "zh": "战斗设置",
+        "fr": "Param. de combat",
+        "es": "Ajustes batalla"
       }
     },
     {
@@ -460,13 +566,17 @@
             "en": "The King's Dignity",
             "jp": "国王の品格",
             "kr": "국왕의 품격",
-            "zh": "国王的品格"
+            "zh": "国王的品格",
+            "fr": "La dignité du roi",
+            "es": "Dignidad del Rey"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -476,13 +586,17 @@
             "en": "Transformation",
             "jp": "メタモルフォーゼ",
             "kr": "변모",
-            "zh": "变形"
+            "zh": "变形",
+            "fr": "Transformation",
+            "es": "Transformación"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -491,7 +605,9 @@
         "en": "Repeat Battle",
         "jp": "リピート戦闘",
         "kr": "반복 전투",
-        "zh": "重复战斗"
+        "zh": "重复战斗",
+        "fr": "Répéter le combat",
+        "es": "Batalla repe."
       }
     },
     {
@@ -503,13 +619,17 @@
             "en": "The King's Dignity",
             "jp": "国王の品格",
             "kr": "국왕의 품격",
-            "zh": "国王的品格"
+            "zh": "国王的品格",
+            "fr": "La dignité du roi",
+            "es": "Dignidad del Rey"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -519,13 +639,17 @@
             "en": "Transformation",
             "jp": "メタモルフォーゼ",
             "kr": "변모",
-            "zh": "变形"
+            "zh": "变形",
+            "fr": "Transformation",
+            "es": "Transformación"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -534,7 +658,9 @@
         "en": "Sweep",
         "jp": "スキップ",
         "kr": "소탕",
-        "zh": "扫荡"
+        "zh": "扫荡",
+        "fr": "Balayer",
+        "es": "Barrido"
       }
     },
     {
@@ -546,13 +672,17 @@
             "en": "Securing Parts (2)",
             "jp": "部品確保（2）",
             "kr": "부품 확보 (2)",
-            "zh": "确保零件（2）"
+            "zh": "确保零件（2）",
+            "fr": "Fixa. de pièces (2)",
+            "es": "Piezas (2)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -562,13 +692,17 @@
             "en": "Outer City",
             "jp": "アウターシティへ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -577,7 +711,9 @@
         "en": "Ultimate Skill Cutscene",
         "jp": "必殺スキル演出",
         "kr": "필살기 연출",
-        "zh": "必杀技演出"
+        "zh": "必杀技演出",
+        "fr": "Ciném. de comp. ultime",
+        "es": "Escena de Hab. Definitiva"
       }
     },
     {
@@ -589,13 +725,17 @@
             "en": "Securing Parts (2)",
             "jp": "部品確保（2）",
             "kr": "부품 확보 (2)",
-            "zh": "确保零件（2）"
+            "zh": "确保零件（2）",
+            "fr": "Fixa. de pièces (2)",
+            "es": "Piezas (2)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -605,13 +745,17 @@
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
-            "zh": "骑士现身"
+            "zh": "骑士现身",
+            "fr": "Un chev. apparaît",
+            "es": "Caballero aparece"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -620,13 +764,17 @@
         "en": "Hero Enhancement",
         "jp": "仲間強化",
         "kr": "동료 강화",
-        "zh": "同伴强化"
+        "zh": "同伴强化",
+        "fr": "Bonus du héros",
+        "es": "Mejora de Héroes"
       },
       "officialName": {
         "en": "Enhance Hero",
         "jp": "レベル強化",
         "kr": "동료 강화",
-        "zh": "同伴强化"
+        "zh": "同伴强化",
+        "fr": "Amél. le héros",
+        "es": "Mejorar Héroe"
       }
     },
     {
@@ -638,13 +786,17 @@
             "en": "Trauma",
             "jp": "トラウマ",
             "kr": "트라우마",
-            "zh": "创伤"
+            "zh": "创伤",
+            "fr": "Traum.",
+            "es": "Trauma"
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         },
@@ -654,13 +806,17 @@
             "en": "Onwards to Magnolia",
             "jp": "マグノリアを目指して",
             "kr": "매그놀리아를 향해",
-            "zh": "向着麦格诺里亚"
+            "zh": "向着麦格诺里亚",
+            "fr": "En route pour Magnolia",
+            "es": "Hacia Magnolia"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -669,13 +825,17 @@
         "en": "Special Gear",
         "jp": "特殊装備",
         "kr": "특수 장비",
-        "zh": "特殊装备"
+        "zh": "特殊装备",
+        "fr": "Équip. spécial",
+        "es": "Equipo esp."
       },
       "officialName": {
         "en": "Special Gear/The Archdemon's Ruins",
         "jp": "特殊装備・魔王の遺跡",
         "kr": "특수장비/마왕의 유적",
-        "zh": "特殊装备/魔王遗迹"
+        "zh": "特殊装备/魔王遗迹",
+        "fr": "Équip. spécial/ruines archidémon",
+        "es": "Equipo esp./ruinas de Archidemonio"
       }
     },
     {
@@ -687,13 +847,17 @@
             "en": "A Hunch About a Strong Enemy",
             "jp": "強敵の予感",
             "kr": "강적의 예감",
-            "zh": "预感强敌"
+            "zh": "预感强敌",
+            "fr": "Un presse. conce. un ennemi puis.",
+            "es": "Un presen. sobre un enemigo fuerte"
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         }
@@ -702,7 +866,9 @@
         "en": "Hero Evolution",
         "jp": "仲間進化",
         "kr": "동료 진화",
-        "zh": "同伴进化"
+        "zh": "同伴进化",
+        "fr": "Évol. de héros",
+        "es": "Evol. de Héroe"
       }
     },
     {
@@ -714,13 +880,17 @@
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "areaName": {
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "mode": "origin"
         }
@@ -729,7 +899,9 @@
         "en": "Core Fusion",
         "jp": "コアフュージョン",
         "kr": "코어 융합",
-        "zh": "核心融合"
+        "zh": "核心融合",
+        "fr": "Fusion Core",
+        "es": "Fusión Core"
       }
     },
     {
@@ -740,13 +912,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -755,7 +931,9 @@
         "en": "Skill Enhancement",
         "jp": "スキル強化",
         "kr": "스킬 강화",
-        "zh": "技能强化"
+        "zh": "技能强化",
+        "fr": "Bonus des comp.",
+        "es": "Mejora de Hab."
       }
     },
     {
@@ -766,13 +944,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -781,7 +963,9 @@
         "en": "Hero Transcendence",
         "jp": "仲間超越",
         "kr": "동료 초월",
-        "zh": "同伴超越"
+        "zh": "同伴超越",
+        "fr": "Transc. héroïque",
+        "es": "Trasce. de héroe"
       }
     },
     {
@@ -792,13 +976,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -807,7 +995,9 @@
         "en": "Demiurge Mission",
         "jp": "デミウルゴス任務",
         "kr": "데미우르고스 미션",
-        "zh": "德米乌戈斯任务"
+        "zh": "德米乌戈斯任务",
+        "fr": "Mission de Démiurge",
+        "es": "Misión de Demiurge"
       }
     },
     {
@@ -819,13 +1009,17 @@
             "en": "Fixing the Circuit (1)",
             "jp": "回路を直す（1）",
             "kr": "회로 고치기 (1)",
-            "zh": "修复电路（1）"
+            "zh": "修复电路（1）",
+            "fr": "Répar. de circuit (1)",
+            "es": "Reparar Circuito (1)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -835,13 +1029,17 @@
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
-            "zh": "兽人与领主"
+            "zh": "兽人与领主",
+            "fr": "La demi-bête & le Seigneur",
+            "es": "La Demibestia y el Señor"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -850,7 +1048,9 @@
         "en": "Equip All",
         "jp": "一括装備",
         "kr": "일괄 착용",
-        "zh": "一键穿戴"
+        "zh": "一键穿戴",
+        "fr": "Équiper tout",
+        "es": "Equipar todo"
       }
     },
     {
@@ -862,13 +1062,17 @@
             "en": "Quirk",
             "jp": "ギフト",
             "kr": "기프트",
-            "zh": "天赋"
+            "zh": "天赋",
+            "fr": "Bizar.",
+            "es": "Quirk"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -877,7 +1081,9 @@
         "en": "Eva's Tactical Guide",
         "jp": "エヴァの戦術ガイド",
         "kr": "에바의 전술 가이드",
-        "zh": "艾娃的战术指南"
+        "zh": "艾娃的战术指南",
+        "fr": "Guide tactique d'Eva",
+        "es": "Guía Táctica de Eva"
       }
     },
     {
@@ -889,13 +1095,17 @@
             "en": "The Commander's Sophistry",
             "jp": "騎士団長の詭弁",
             "kr": "단장의 궤변",
-            "zh": "团长的诡辩"
+            "zh": "团长的诡辩",
+            "fr": "Le sophisme du commandant",
+            "es": "Sofística Comandante"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         },
@@ -905,13 +1115,17 @@
             "en": "Awakening of an Archdemon",
             "jp": "魔王覚醒",
             "kr": "마왕 각성",
-            "zh": "魔王觉醒"
+            "zh": "魔王觉醒",
+            "fr": "L'éveil d'un archidémon",
+            "es": "Despierta el Archidemonio"
           },
           "areaName": {
             "en": "Fiend Territory",
             "jp": "魔族の領域",
             "kr": "마족의 영역",
-            "zh": "魔族领域"
+            "zh": "魔族领域",
+            "fr": "Terri. de démons",
+            "es": "Terri. de Demonios"
           },
           "mode": "origin"
         }
@@ -920,13 +1134,17 @@
         "en": "Joint Challenge",
         "jp": "合同チャレンジ",
         "kr": "합동 챌린지",
-        "zh": "联合挑战"
+        "zh": "联合挑战",
+        "fr": "Défi commun",
+        "es": "Desafío conjunto"
       },
       "officialName": {
         "en": "Joint Challenge",
         "jp": "合同チャレンジ",
         "kr": "합동 챌린지",
-        "zh": "联合挑战"
+        "zh": "联合挑战",
+        "fr": "Défi commun",
+        "es": "Desafío conjunto"
       }
     },
     {
@@ -938,13 +1156,17 @@
             "en": "A Familiar Face",
             "jp": "見覚えのある顔",
             "kr": "낯익은 얼굴",
-            "zh": "熟悉的面孔"
+            "zh": "熟悉的面孔",
+            "fr": "Un visage fami.",
+            "es": "Cara familiar"
           },
           "areaName": {
             "en": "World Memory",
             "jp": "世界の記憶",
             "kr": "세계 기억",
-            "zh": "世界记忆"
+            "zh": "世界记忆",
+            "fr": "Mémoire mond.",
+            "es": "Memoria de mundo"
           },
           "mode": "story"
         },
@@ -954,13 +1176,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         }
@@ -969,13 +1195,17 @@
         "en": "Event Dungeon",
         "jp": "イベントダンジョン",
         "kr": "이벤트 던전",
-        "zh": "活动暗堡"
+        "zh": "活动暗堡",
+        "fr": "Donjon d'événement",
+        "es": "Mazm. de evento"
       },
       "officialName": {
         "en": "Survey Hub",
         "jp": "調査支援所",
         "kr": "조사 지원소",
-        "zh": "调查支援所"
+        "zh": "调查支援所",
+        "fr": "Hub d'étude",
+        "es": "Hub estudio"
       }
     },
     {
@@ -986,13 +1216,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1002,13 +1236,17 @@
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
-            "zh": "骑士现身"
+            "zh": "骑士现身",
+            "fr": "Un chev. apparaît",
+            "es": "Caballero aparece"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1023,13 +1261,17 @@
             "en": "Part of the Plan",
             "jp": "作戦の一部",
             "kr": "작전의 일부",
-            "zh": "计划的一部分"
+            "zh": "计划的一部分",
+            "fr": "Une partie du plan",
+            "es": "Parte del plan"
           },
           "areaName": {
             "en": "World Memory",
             "jp": "世界の記憶",
             "kr": "세계 기억",
-            "zh": "世界记忆"
+            "zh": "世界记忆",
+            "fr": "Mémoire mond.",
+            "es": "Memoria de mundo"
           },
           "mode": "story"
         }
@@ -1044,13 +1286,17 @@
             "en": "An Automaton's Wish",
             "jp": "オートマタの願い",
             "kr": "자동인형의 바람",
-            "zh": "机械人偶的心愿"
+            "zh": "机械人偶的心愿",
+            "fr": "souhait d'un automate",
+            "es": "Deseo del Autómata"
           },
           "areaName": {
             "en": "Ksai",
             "jp": "ザイ",
             "kr": "크사이",
-            "zh": "科赛"
+            "zh": "科赛",
+            "fr": "Ksai",
+            "es": "Ksai"
           },
           "mode": "origin"
         }
@@ -1059,7 +1305,9 @@
         "en": "Origin Quests [Hard]",
         "jp": "オリジンハードクエスト",
         "kr": "오리진 하드 퀘스트",
-        "zh": "起源困难任务"
+        "zh": "起源困难任务",
+        "fr": "Quêtes d'origine [Difficile]",
+        "es": "Misiones Origen [Hard]"
       }
     },
     {
@@ -1071,13 +1319,17 @@
             "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
-            "zh": "骑士团的管控（1）"
+            "zh": "骑士团的管控（1）",
+            "fr": "contrôle Ordre de Chevaliers (1)",
+            "es": "Control Orden Caballeros (1)"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         }
@@ -1092,13 +1344,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1112,13 +1368,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -1127,7 +1387,9 @@
         "en": "Guide Quest Season 1",
         "jp": "ガイドクエスト シーズン1",
         "kr": "가이드 퀘스트 시즌 1",
-        "zh": "引导任务 第1季"
+        "zh": "引导任务 第1季",
+        "fr": "Guide Quest Saison 1",
+        "es": "Guía Quest Temp. 1"
       }
     },
     {
@@ -1139,13 +1401,17 @@
             "en": "An Automaton's Wish",
             "jp": "オートマタの願い",
             "kr": "자동인형의 바람",
-            "zh": "机械人偶的心愿"
+            "zh": "机械人偶的心愿",
+            "fr": "souhait d'un automate",
+            "es": "Deseo del Autómata"
           },
           "areaName": {
             "en": "Ksai",
             "jp": "ザイ",
             "kr": "크사이",
-            "zh": "科赛"
+            "zh": "科赛",
+            "fr": "Ksai",
+            "es": "Ksai"
           },
           "mode": "origin"
         }
@@ -1154,7 +1420,9 @@
         "en": "Guide Quest Season 2",
         "jp": "ガイドクエスト シーズン2",
         "kr": "가이드 퀘스트 시즌 2",
-        "zh": "引导任务 第2季"
+        "zh": "引导任务 第2季",
+        "fr": "Guide Quest Saison 2",
+        "es": "Guía Quest Temp. 2"
       }
     },
     {
@@ -1166,13 +1434,17 @@
             "en": "Notia's Letter",
             "jp": "ノティアの手紙",
             "kr": "노티아의 편지",
-            "zh": "诺缇亚的信"
+            "zh": "诺缇亚的信",
+            "fr": "Lettre de Notia",
+            "es": "Carta de Notia"
           },
           "areaName": {
             "en": "Garden of Dolls",
             "jp": "箱庭",
             "kr": "모형 정원",
-            "zh": "模型庄园"
+            "zh": "模型庄园",
+            "fr": "Jardin de poupées",
+            "es": "Jardín Muñecas"
           },
           "mode": "origin"
         }
@@ -1181,7 +1453,9 @@
         "en": "Guide Quest Season 2",
         "jp": "ガイドクエスト シーズン2",
         "kr": "가이드 퀘스트 시즌 2",
-        "zh": "引导任务 第2季"
+        "zh": "引导任务 第2季",
+        "fr": "Guide Quest Saison 2",
+        "es": "Guía Quest Temp. 2"
       }
     },
     {
@@ -1193,13 +1467,17 @@
             "en": "Unchanging",
             "jp": "何も変わってなどない",
             "kr": "아무것도 변한 것 없이",
-            "zh": "一切都没有变"
+            "zh": "一切都没有变",
+            "fr": "Inchangé",
+            "es": "Inmutable"
           },
           "areaName": {
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "mode": "origin"
         }
@@ -1208,7 +1486,9 @@
         "en": "Guide Quest Season 3",
         "jp": "ガイドクエスト シーズン3",
         "kr": "가이드 퀘스트 시즌 3",
-        "zh": "引导任务 第3季"
+        "zh": "引导任务 第3季",
+        "fr": "Guide Quest Saison 3",
+        "es": "Misión Guía Temp. 3"
       }
     },
     {
@@ -1220,13 +1500,17 @@
             "en": "To Feel Alive",
             "jp": "生きているという感覚",
             "kr": "살아있다는 감각",
-            "zh": "活着的感觉"
+            "zh": "活着的感觉",
+            "fr": "Se sentir vivant",
+            "es": "Sentirse Vivo"
           },
           "areaName": {
             "en": "War's End",
             "jp": "終戦",
             "kr": "종전",
-            "zh": "终战"
+            "zh": "终战",
+            "fr": "Fin de guerre",
+            "es": "Fin de guerra"
           },
           "mode": "origin"
         }
@@ -1240,13 +1524,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -1261,13 +1549,17 @@
             "en": "An Automaton's Wish",
             "jp": "オートマタの願い",
             "kr": "자동인형의 바람",
-            "zh": "机械人偶的心愿"
+            "zh": "机械人偶的心愿",
+            "fr": "souhait d'un automate",
+            "es": "Deseo del Autómata"
           },
           "areaName": {
             "en": "Ksai",
             "jp": "ザイ",
             "kr": "크사이",
-            "zh": "科赛"
+            "zh": "科赛",
+            "fr": "Ksai",
+            "es": "Ksai"
           },
           "mode": "origin"
         }
@@ -1276,7 +1568,9 @@
         "en": "Story Quests [Hard]",
         "jp": "ストーリーハードクエスト",
         "kr": "스토리 하드 퀘스트",
-        "zh": "剧情困难任务"
+        "zh": "剧情困难任务",
+        "fr": "Quêtes hist. [Difficile]",
+        "es": "Misi. Historia [Hard]"
       }
     },
     {
@@ -1287,13 +1581,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         }
@@ -1302,7 +1600,9 @@
         "en": "Guild",
         "jp": "ギルド",
         "kr": "길드",
-        "zh": "公会"
+        "zh": "公会",
+        "fr": "Guilde",
+        "es": "Gremio"
       }
     },
     {
@@ -1313,7 +1613,9 @@
             "en": "Search Coordinates: F01_A01_S14",
             "jp": "探索座標：01_A01_S14",
             "kr": "탐색 좌표 : F01_A01_S14",
-            "zh": "探索坐标：F01_A01_S14"
+            "zh": "探索坐标：F01_A01_S14",
+            "fr": "Coord. de recherche: F01_A01_S14",
+            "es": "Coordenadas búsqueda: F01_A01_S14"
           }
         }
       ],
@@ -1321,13 +1623,17 @@
         "en": "Pursuit Operation",
         "jp": "追撃殲滅戦",
         "kr": "추격 섬멸전",
-        "zh": "追击歼灭战"
+        "zh": "追击歼灭战",
+        "fr": "Op. poursuite",
+        "es": "Op. persecución"
       },
       "officialName": {
         "en": "Pursuit Operation",
         "jp": "追撃殲滅戦",
         "kr": "추격 섬멸전",
-        "zh": "追击歼灭战"
+        "zh": "追击歼灭战",
+        "fr": "Op. poursuite",
+        "es": "Op. persecución"
       }
     },
     {
@@ -1339,13 +1645,17 @@
             "en": "Unchanging",
             "jp": "何も変わってなどない",
             "kr": "아무것도 변한 것 없이",
-            "zh": "一切都没有变"
+            "zh": "一切都没有变",
+            "fr": "Inchangé",
+            "es": "Inmutable"
           },
           "areaName": {
             "en": "Conqueror and Destroyer",
             "jp": "征服者と破壊者",
             "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者"
+            "zh": "征服者和破坏者",
+            "fr": "Conquérant & Destructeur",
+            "es": "Conquistador & Destructor"
           },
           "mode": "origin"
         }
@@ -1354,13 +1664,17 @@
         "en": "Infiltration Operation",
         "jp": "侵入殲滅戦",
         "kr": "침투 섬멸전",
-        "zh": "渗透歼灭战"
+        "zh": "渗透歼灭战",
+        "fr": "Op. d'infiltration",
+        "es": "Op. de Infiltración"
       },
       "officialName": {
         "en": "Infiltration Operation",
         "jp": "侵入殲滅戦",
         "kr": "침투 섬멸전",
-        "zh": "渗透歼灭战"
+        "zh": "渗透歼灭战",
+        "fr": "Op. d'infiltration",
+        "es": "Op. de Infiltración"
       }
     },
     {
@@ -1372,13 +1686,17 @@
             "en": "Ambush",
             "jp": "奇襲",
             "kr": "기습",
-            "zh": "突袭"
+            "zh": "突袭",
+            "fr": "Embu.",
+            "es": "Embo."
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         },
@@ -1388,13 +1706,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -1403,7 +1725,9 @@
         "en": "Gear Limit Break",
         "jp": "装備限界突破",
         "kr": "장비 돌파",
-        "zh": "装备突破"
+        "zh": "装备突破",
+        "fr": "Limite équip.",
+        "es": "Límite de equipo"
       }
     },
     {
@@ -1415,13 +1739,17 @@
             "en": "Ambush",
             "jp": "奇襲",
             "kr": "기습",
-            "zh": "突袭"
+            "zh": "突袭",
+            "fr": "Embu.",
+            "es": "Embo."
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         },
@@ -1431,13 +1759,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -1446,7 +1778,9 @@
         "en": "Gear Refine",
         "jp": "装備錬成",
         "kr": "장비 재련",
-        "zh": "装备精炼"
+        "zh": "装备精炼",
+        "fr": "Affiner équip.",
+        "es": "Refinar equipo"
       }
     },
     {
@@ -1458,13 +1792,17 @@
             "en": "The King's Dignity",
             "jp": "国王の品格",
             "kr": "국왕의 품격",
-            "zh": "国王的品格"
+            "zh": "国王的品格",
+            "fr": "La dignité du roi",
+            "es": "Dignidad del Rey"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1474,13 +1812,17 @@
             "en": "Quirk",
             "jp": "ギフト",
             "kr": "기프트",
-            "zh": "天赋"
+            "zh": "天赋",
+            "fr": "Bizar.",
+            "es": "Quirk"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1489,7 +1831,9 @@
         "en": "Mirsha Festival",
         "jp": "メルシャフェス",
         "kr": "메르샤 페스티벌",
-        "zh": "弥乐沙节"
+        "zh": "弥乐沙节",
+        "fr": "Festival Mirsha",
+        "es": "Fest. de Mirsha"
       }
     },
     {
@@ -1501,13 +1845,17 @@
             "en": "Clash with a Role Model",
             "jp": "ロールモデルとの対立",
             "kr": "롤모델과의 대립",
-            "zh": "与榜样的对立"
+            "zh": "与榜样的对立",
+            "fr": "Conflit avec un modèle",
+            "es": "Choque con Modelo"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1517,13 +1865,17 @@
             "en": "Prisoners",
             "jp": "受刑者",
             "kr": "수감자",
-            "zh": "囚犯"
+            "zh": "囚犯",
+            "fr": "prisonniers",
+            "es": "Presos"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1532,13 +1884,17 @@
         "en": "Friends",
         "jp": "フレンド",
         "kr": "친구",
-        "zh": "好友"
+        "zh": "好友",
+        "fr": "Amis",
+        "es": "Amigos"
       },
       "officialName": {
         "en": "Friends",
         "jp": "フレンド",
         "kr": "친구",
-        "zh": "好友"
+        "zh": "好友",
+        "fr": "Amis",
+        "es": "Amigos"
       }
     },
     {
@@ -1550,13 +1906,17 @@
             "en": "Fixing the Circuit (1)",
             "jp": "回路を直す（1）",
             "kr": "회로 고치기 (1)",
-            "zh": "修复电路（1）"
+            "zh": "修复电路（1）",
+            "fr": "Répar. de circuit (1)",
+            "es": "Reparar Circuito (1)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1566,13 +1926,17 @@
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
-            "zh": "兽人与领主"
+            "zh": "兽人与领主",
+            "fr": "La demi-bête & le Seigneur",
+            "es": "La Demibestia y el Señor"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1581,13 +1945,17 @@
         "en": "Inventory",
         "jp": "バック",
         "kr": "소지품",
-        "zh": "背包"
+        "zh": "背包",
+        "fr": "Inventaire",
+        "es": "Inventario"
       },
       "officialName": {
         "en": "Inventory",
         "jp": "バッグ",
         "kr": "소지품",
-        "zh": "背包"
+        "zh": "背包",
+        "fr": "Inventaire",
+        "es": "Inventario"
       }
     },
     {
@@ -1599,13 +1967,17 @@
             "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
-            "zh": "骑士团的管控（1）"
+            "zh": "骑士团的管控（1）",
+            "fr": "contrôle Ordre de Chevaliers (1)",
+            "es": "Control Orden Caballeros (1)"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         },
@@ -1615,13 +1987,17 @@
             "en": "The Mage and Her Cat",
             "jp": "魔法使いと猫さん",
             "kr": "마법사와 고양이",
-            "zh": "魔法师与猫"
+            "zh": "魔法师与猫",
+            "fr": "Magicienne & son Chat",
+            "es": "Hechicera y Gato"
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         }
@@ -1630,7 +2006,9 @@
         "en": "Challenge",
         "jp": "チャレンジ",
         "kr": "도전",
-        "zh": "挑战"
+        "zh": "挑战",
+        "fr": "Défi",
+        "es": "Desafío"
       }
     },
     {
@@ -1642,13 +2020,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         },
@@ -1658,13 +2040,17 @@
             "en": "The Commander's Sophistry",
             "jp": "騎士団長の詭弁",
             "kr": "단장의 궤변",
-            "zh": "团长的诡辩"
+            "zh": "团长的诡辩",
+            "fr": "Le sophisme du commandant",
+            "es": "Sofística Comandante"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         }
@@ -1673,13 +2059,17 @@
         "en": "Arena",
         "jp": "アリーナ",
         "kr": "결투장",
-        "zh": "竞技场"
+        "zh": "竞技场",
+        "fr": "Arène",
+        "es": "Arena"
       },
       "officialName": {
         "en": "Arena",
         "jp": "アリーナ",
         "kr": "결투장",
-        "zh": "竞技场"
+        "zh": "竞技场",
+        "fr": "Arène",
+        "es": "Arena"
       }
     },
     {
@@ -1690,13 +2080,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1706,13 +2100,17 @@
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
-            "zh": "骑士现身"
+            "zh": "骑士现身",
+            "fr": "Un chev. apparaît",
+            "es": "Caballero aparece"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1721,13 +2119,17 @@
         "en": "Recruit",
         "jp": "スカウト",
         "kr": "영입",
-        "zh": "招募"
+        "zh": "招募",
+        "fr": "Recruter",
+        "es": "Recluta"
       },
       "officialName": {
         "en": "Recruit",
         "jp": "スカウト",
         "kr": "영입",
-        "zh": "招募"
+        "zh": "招募",
+        "fr": "Recruter",
+        "es": "Recluta"
       }
     },
     {
@@ -1739,13 +2141,17 @@
             "en": "Fixing the Circuit (2)",
             "jp": "回路を直す（2）",
             "kr": "회로 고치기 (2)",
-            "zh": "修复电路（2）"
+            "zh": "修复电路（2）",
+            "fr": "Répar. de circuit (2)",
+            "es": "Reparando circuito (2)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1755,13 +2161,17 @@
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
-            "zh": "兽人与领主"
+            "zh": "兽人与领主",
+            "fr": "La demi-bête & le Seigneur",
+            "es": "La Demibestia y el Señor"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1770,13 +2180,17 @@
         "en": "Side Story",
         "jp": "外伝",
         "kr": "외전",
-        "zh": "外传"
+        "zh": "外传",
+        "fr": "Annexe",
+        "es": "Extra"
       },
       "officialName": {
         "en": "Side Story",
         "jp": "外伝",
         "kr": "외전",
-        "zh": "外传"
+        "zh": "外传",
+        "fr": "Annexe",
+        "es": "Extra"
       }
     },
     {
@@ -1787,13 +2201,17 @@
             "en": "Intro - Fateful Encounter",
             "jp": "Intro - 運命的な出会い",
             "kr": "Intro - 운명적인 만남",
-            "zh": "Intro - 命中注定的相遇"
+            "zh": "Intro - 命中注定的相遇",
+            "fr": "Intro. - Rencontre fati.",
+            "es": "Intro - Encuentro Fatal"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -1803,13 +2221,17 @@
             "en": "A Knight Appears",
             "jp": "騎士イディス、現る",
             "kr": "기사, 나타나다",
-            "zh": "骑士现身"
+            "zh": "骑士现身",
+            "fr": "Un chev. apparaît",
+            "es": "Caballero aparece"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -1823,7 +2245,9 @@
             "en": "Monad Gate: Epilogue 2",
             "jp": "モナド・ゲート：エピローグ 2",
             "kr": "모나드 게이트 : 에필로그 2",
-            "zh": "单子门：后记 2"
+            "zh": "单子门：后记 2",
+            "fr": "Porte de Monade: Épilogue 2",
+            "es": "Portal Monad: Epílogo 2"
           }
         }
       ],
@@ -1831,13 +2255,17 @@
         "en": "Monad Gate",
         "jp": "モナドゲート",
         "kr": "모나드 게이트",
-        "zh": "单子门"
+        "zh": "单子门",
+        "fr": "Porte Monad",
+        "es": "Puerta Monad"
       },
       "officialName": {
         "en": "[Monad Gate]",
         "jp": "【モナド・ゲート】",
         "kr": "[모나드 게이트]",
-        "zh": "【单子门】"
+        "zh": "【单子门】",
+        "fr": "[Porte de la Monade]",
+        "es": "[Puerta Monad]"
       }
     },
     {
@@ -1849,13 +2277,17 @@
             "en": "Part of the Plan",
             "jp": "作戦の一部",
             "kr": "작전의 일부",
-            "zh": "计划的一部分"
+            "zh": "计划的一部分",
+            "fr": "Une partie du plan",
+            "es": "Parte del plan"
           },
           "areaName": {
             "en": "World Memory",
             "jp": "世界の記憶",
             "kr": "세계 기억",
-            "zh": "世界记忆"
+            "zh": "世界记忆",
+            "fr": "Mémoire mond.",
+            "es": "Memoria de mundo"
           },
           "mode": "story"
         }
@@ -1864,7 +2296,9 @@
         "en": "Origin Story",
         "jp": "オリジンストーリー",
         "kr": "오리진 스토리",
-        "zh": "起源剧情"
+        "zh": "起源剧情",
+        "fr": "Hist. Origin",
+        "es": "Hist. Origen"
       }
     },
     {
@@ -1876,13 +2310,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         },
@@ -1892,13 +2330,17 @@
             "en": "Pass",
             "jp": "合格",
             "kr": "합격",
-            "zh": "通过"
+            "zh": "通过",
+            "fr": "Passer",
+            "es": "Apro."
           },
           "areaName": {
             "en": "Magnolia",
             "jp": "マグノリア",
             "kr": "매그놀리아",
-            "zh": "麦格诺里亚"
+            "zh": "麦格诺里亚",
+            "fr": "Magnolia",
+            "es": "Magnolia"
           },
           "mode": "origin"
         }
@@ -1907,13 +2349,17 @@
         "en": "Defeat the Doppelgänger",
         "jp": "自己像幻視退治",
         "kr": "도플갱어 퇴치",
-        "zh": "击退二重身"
+        "zh": "击退二重身",
+        "fr": "Vaincre le Doppelgänger",
+        "es": "Vencer al Doppelgänger"
       },
       "officialName": {
         "en": "Defeat the Doppelgänger",
         "jp": "自己像幻視退治",
         "kr": "도플갱어 퇴치",
-        "zh": "击退二重身"
+        "zh": "击退二重身",
+        "fr": "Vaincre le Doppelgänger",
+        "es": "Vencer al Doppelgänger"
       }
     },
     {
@@ -1925,13 +2371,17 @@
             "en": "The Knight Order's Control (1)",
             "jp": "騎士団の制御（1）",
             "kr": "기사단의 통제 (1)",
-            "zh": "骑士团的管控（1）"
+            "zh": "骑士团的管控（1）",
+            "fr": "contrôle Ordre de Chevaliers (1)",
+            "es": "Control Orden Caballeros (1)"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         },
@@ -1941,13 +2391,17 @@
             "en": "The Mage and Her Cat",
             "jp": "魔法使いと猫さん",
             "kr": "마법사와 고양이",
-            "zh": "魔法师与猫"
+            "zh": "魔法师与猫",
+            "fr": "Magicienne & son Chat",
+            "es": "Hechicera y Gato"
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         }
@@ -1956,13 +2410,17 @@
         "en": "Hypnotic Frog Hall",
         "jp": "催眠カエルの殿堂",
         "kr": "최면 개구리의 전당",
-        "zh": "催眠青蛙殿堂"
+        "zh": "催眠青蛙殿堂",
+        "fr": "Salle de Grenouille Hypnotique",
+        "es": "Salón de Ranas Hipnóticas"
       },
       "officialName": {
         "en": "Challenge",
         "jp": "挑戦する",
         "kr": "도전",
-        "zh": "挑战"
+        "zh": "挑战",
+        "fr": "Défi",
+        "es": "Desafío"
       }
     },
     {
@@ -1974,13 +2432,17 @@
             "en": "Pass",
             "jp": "合格",
             "kr": "합격",
-            "zh": "通过"
+            "zh": "通过",
+            "fr": "Passer",
+            "es": "Apro."
           },
           "areaName": {
             "en": "Magnolia",
             "jp": "マグノリア",
             "kr": "매그놀리아",
-            "zh": "麦格诺里亚"
+            "zh": "麦格诺里亚",
+            "fr": "Magnolia",
+            "es": "Magnolia"
           },
           "mode": "origin"
         },
@@ -1990,13 +2452,17 @@
             "en": "The Responsibility of the Guilty",
             "jp": "奪った者の責任感",
             "kr": "빼앗은 자의 책임감",
-            "zh": "掠夺者的责任感"
+            "zh": "掠夺者的责任感",
+            "fr": "La responsabilité des coupables",
+            "es": "La Responsabilidad del Culpable"
           },
           "areaName": {
             "en": "Nameless Island",
             "jp": "名もなき島",
             "kr": "이름 없는 섬",
-            "zh": "无名岛屿"
+            "zh": "无名岛屿",
+            "fr": "Île sans nom",
+            "es": "Isla sin Nombre"
           },
           "mode": "origin"
         }
@@ -2005,13 +2471,17 @@
         "en": "Terminus Isle",
         "jp": "テルミナス島",
         "kr": "멸망의 섬",
-        "zh": "灭亡之岛"
+        "zh": "灭亡之岛",
+        "fr": "Île terminus",
+        "es": "Isla Terminus"
       },
       "officialName": {
         "en": "Terminus Isle Exploration",
         "jp": "テルミナス島探査",
         "kr": "멸망의 섬 탐사",
-        "zh": "探索灭亡之岛"
+        "zh": "探索灭亡之岛",
+        "fr": "Exploration île Terminus",
+        "es": "Explo. de Isla Terminus"
       }
     },
     {
@@ -2023,13 +2493,17 @@
             "en": "For Luna's Sake",
             "jp": "ルナのためならば",
             "kr": "루나를 위한다면",
-            "zh": "为了露娜"
+            "zh": "为了露娜",
+            "fr": "Pour le bien de Luna",
+            "es": "Por amor a Luna"
           },
           "areaName": {
             "en": "Singularity",
             "jp": "特異点",
             "kr": "특이점",
-            "zh": "奇点"
+            "zh": "奇点",
+            "fr": "Singularité",
+            "es": "Singularidad"
           },
           "mode": "story"
         },
@@ -2039,13 +2513,17 @@
             "en": "A Hunch About a Strong Enemy",
             "jp": "強敵の予感",
             "kr": "강적의 예감",
-            "zh": "预感强敌"
+            "zh": "预感强敌",
+            "fr": "Un presse. conce. un ennemi puis.",
+            "es": "Un presen. sobre un enemigo fuerte"
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         }
@@ -2054,13 +2532,17 @@
         "en": "Ark Raid",
         "jp": "アーク強襲",
         "kr": "방주 습격",
-        "zh": "方舟强袭"
+        "zh": "方舟强袭",
+        "fr": "Raid Ark",
+        "es": "Raid Ark"
       },
       "officialName": {
         "en": "Ark Raid",
         "jp": "アーク強襲",
         "kr": "방주 습격",
-        "zh": "方舟强袭"
+        "zh": "方舟强袭",
+        "fr": "Raid Ark",
+        "es": "Raid Ark"
       }
     },
     {
@@ -2072,13 +2554,17 @@
             "en": "Ambush",
             "jp": "奇襲",
             "kr": "기습",
-            "zh": "突袭"
+            "zh": "突袭",
+            "fr": "Embu.",
+            "es": "Embo."
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         },
@@ -2088,13 +2574,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2103,7 +2593,9 @@
         "en": "Special Request: Ecology Survey",
         "jp": "特別依頼：生態調査",
         "kr": "특별의뢰: 생태 조사",
-        "zh": "特别委托：生态调查"
+        "zh": "特别委托：生态调查",
+        "fr": "Requête spéciale: Étude écologique",
+        "es": "Encargo esp.: Estudio ecológico"
       }
     },
     {
@@ -2115,13 +2607,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         },
@@ -2131,13 +2627,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2146,7 +2646,9 @@
         "en": "Special Request: Ecology Survey",
         "jp": "特別依頼：生態調査",
         "kr": "특별의뢰: 생태 조사",
-        "zh": "特别委托：生态调查"
+        "zh": "特别委托：生态调查",
+        "fr": "Requête spéciale: Étude écologique",
+        "es": "Encargo esp.: Estudio ecológico"
       }
     },
     {
@@ -2158,13 +2660,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         },
@@ -2174,13 +2680,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2189,7 +2699,9 @@
         "en": "Special Request: Ecology Survey",
         "jp": "特別依頼：生態調査",
         "kr": "특별의뢰: 생태 조사",
-        "zh": "特别委托：生态调查"
+        "zh": "特别委托：生态调查",
+        "fr": "Requête spéciale: Étude écologique",
+        "es": "Encargo esp.: Estudio ecológico"
       }
     },
     {
@@ -2201,13 +2713,17 @@
             "en": "Ambush",
             "jp": "奇襲",
             "kr": "기습",
-            "zh": "突袭"
+            "zh": "突袭",
+            "fr": "Embu.",
+            "es": "Embo."
           },
           "areaName": {
             "en": "Eastern Dungeon",
             "jp": "東部ダンジョン",
             "kr": "동부 던전",
-            "zh": "东部暗堡"
+            "zh": "东部暗堡",
+            "fr": "Donjon de l'Est",
+            "es": "Mazmorra Oriental"
           },
           "mode": "origin"
         },
@@ -2217,13 +2733,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2232,13 +2752,17 @@
         "en": "Special Request: Identification",
         "jp": "特別依頼：正体究明",
         "kr": "특별의뢰: 정체 규명",
-        "zh": "特别委托：身份查明"
+        "zh": "特别委托：身份查明",
+        "fr": "Demande spéciale: Identification",
+        "es": "Encargo esp.: Identificación"
       },
       "officialName": {
         "en": "Gear Reforge/Breakthrough",
         "jp": "装備再錬・突破",
         "kr": "장비 재련/돌파",
-        "zh": "装备重铸/突破"
+        "zh": "装备重铸/突破",
+        "fr": "Reforge/Percée de l'équip",
+        "es": "Refo./Trascendencia de equipo"
       }
     },
     {
@@ -2250,13 +2774,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         },
@@ -2266,13 +2794,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2281,7 +2813,9 @@
         "en": "Special Request: Identification",
         "jp": "特別依頼：正体究明",
         "kr": "특별의뢰: 정체 규명",
-        "zh": "特别委托：身份查明"
+        "zh": "特别委托：身份查明",
+        "fr": "Demande spéciale: Identification",
+        "es": "Encargo esp.: Identificación"
       }
     },
     {
@@ -2293,13 +2827,17 @@
             "en": "Finding Blacksmith",
             "jp": "鍛冶屋の姉御",
             "kr": "대장장이 확보",
-            "zh": "拉拢铁匠"
+            "zh": "拉拢铁匠",
+            "fr": "Trouver un forgeron",
+            "es": "Hallar Herrero"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         },
@@ -2309,13 +2847,17 @@
             "en": "A Temporary Truce",
             "jp": "一時休戦",
             "kr": "일시 휴전",
-            "zh": "临时休战"
+            "zh": "临时休战",
+            "fr": "Une trêve tempo.",
+            "es": "Tregua Temporal"
           },
           "areaName": {
             "en": "Dimensional Bridge",
             "jp": "ディメンションブリッジ",
             "kr": "디멘션 브리지",
-            "zh": "次元之桥"
+            "zh": "次元之桥",
+            "fr": "Pont dimensionnel",
+            "es": "Dimensional Bridge"
           },
           "mode": "origin"
         }
@@ -2324,7 +2866,9 @@
         "en": "Special Request: Identification",
         "jp": "特別依頼：正体究明",
         "kr": "특별의뢰: 정체 규명",
-        "zh": "特别委托：身份查明"
+        "zh": "特别委托：身份查明",
+        "fr": "Demande spéciale: Identification",
+        "es": "Encargo esp.: Identificación"
       }
     },
     {
@@ -2335,7 +2879,9 @@
             "en": "Monad Gate: Epilogue 2",
             "jp": "モナド・ゲート：エピローグ 2",
             "kr": "모나드 게이트 : 에필로그 2",
-            "zh": "单子门：后记 2"
+            "zh": "单子门：后记 2",
+            "fr": "Porte de Monade: Épilogue 2",
+            "es": "Portal Monad: Epílogo 2"
           }
         }
       ],
@@ -2343,7 +2889,9 @@
         "en": "The Archdemon's Ruins: The Deeps",
         "jp": "魔王の遺跡：深界",
         "kr": "마왕의 유적: 심계",
-        "zh": "魔王遗迹：深界"
+        "zh": "魔王遗迹：深界",
+        "fr": "ruines archidémon: Profondeurs",
+        "es": "Ruinas de Archidemonio: Profundidades"
       }
     },
     {
@@ -2354,7 +2902,9 @@
             "en": "Monad Gate: Epilogue 2",
             "jp": "モナド・ゲート：エピローグ 2",
             "kr": "모나드 게이트 : 에필로그 2",
-            "zh": "单子门：后记 2"
+            "zh": "单子门：后记 2",
+            "fr": "Porte de Monade: Épilogue 2",
+            "es": "Portal Monad: Epílogo 2"
           }
         }
       ],
@@ -2362,7 +2912,9 @@
         "en": "The Archdemon's Ruins: The Infinite Corridor",
         "jp": "魔王の遺跡：無限の回廊",
         "kr": "마왕의 유적: 무한의 회랑",
-        "zh": "魔王遗迹：无限回廊"
+        "zh": "魔王遗迹：无限回廊",
+        "fr": "Les ruines de l'archidémon: le couloir infini",
+        "es": "Ruinas del Archidemonio: Corredor Infinito"
       }
     },
     {
@@ -2374,13 +2926,17 @@
             "en": "Tree of Sephirot",
             "jp": "セフィロトの木",
             "kr": "세피로트의 나무",
-            "zh": "生命之树·塞菲洛特"
+            "zh": "生命之树·塞菲洛特",
+            "fr": "Arbre de Sephirot",
+            "es": "Árbol de Sephirot"
           },
           "areaName": {
             "en": "World Memory",
             "jp": "世界の記憶",
             "kr": "세계 기억",
-            "zh": "世界记忆"
+            "zh": "世界记忆",
+            "fr": "Mémoire mond.",
+            "es": "Memoria de mundo"
           },
           "mode": "story"
         },
@@ -2390,13 +2946,17 @@
             "en": "Her Name is Alpha",
             "jp": "その名はアルファ",
             "kr": "그 이름은 알파",
-            "zh": "其名为阿尔法"
+            "zh": "其名为阿尔法",
+            "fr": "Elle s'appelle Alpha",
+            "es": "Su nombre es Alpha"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         }
@@ -2405,13 +2965,17 @@
         "en": "Skyward Tower - Normal",
         "jp": "飛天の塔 ノーマル",
         "kr": "비천의 탑 노멀",
-        "zh": "飞天之塔 - 普通"
+        "zh": "飞天之塔 - 普通",
+        "fr": "Tour Céleste - Normal",
+        "es": "Torre Skyward - Normal"
       },
       "officialName": {
         "en": "Skyward Tower",
         "jp": "飛天の塔",
         "kr": "비천의 탑",
-        "zh": "飞天之塔"
+        "zh": "飞天之塔",
+        "fr": "Tour Skyward",
+        "es": "Torre Skyward"
       }
     },
     {
@@ -2423,13 +2987,17 @@
             "en": "The Commander's Consideration",
             "jp": "騎士団長の気づかい",
             "kr": "단장의 배려",
-            "zh": "团长的关怀"
+            "zh": "团长的关怀",
+            "fr": "Considérations du commandant",
+            "es": "La Consideración del Capitán"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         },
@@ -2439,13 +3007,17 @@
             "en": "An Unjust Fight",
             "jp": "仁義なき戦い",
             "kr": "인의 없는 싸움",
-            "zh": "不讲仁义的战斗"
+            "zh": "不讲仁义的战斗",
+            "fr": "Un combat injuste",
+            "es": "Lucha Desigual"
           },
           "areaName": {
             "en": "Fiend Territory",
             "jp": "魔族の領域",
             "kr": "마족의 영역",
-            "zh": "魔族领域"
+            "zh": "魔族领域",
+            "fr": "Terri. de démons",
+            "es": "Terri. de Demonios"
           },
           "mode": "origin"
         }
@@ -2454,13 +3026,17 @@
         "en": "Elemental Tower",
         "jp": "エレメンタルタワー",
         "kr": "엘레멘탈 타워",
-        "zh": "元素之塔"
+        "zh": "元素之塔",
+        "fr": "Tour élémentaire",
+        "es": "Elemental Tower"
       },
       "officialName": {
         "en": "Elemental Tower",
         "jp": "エレメンタルタワー",
         "kr": "엘레멘탈 타워",
-        "zh": "元素之塔"
+        "zh": "元素之塔",
+        "fr": "Tour élémentaire",
+        "es": "Elemental Tower"
       }
     },
     {
@@ -2472,13 +3048,17 @@
             "en": "Hating One's Own Kind",
             "jp": "同族嫌悪",
             "kr": "동족혐오",
-            "zh": "同族相斥"
+            "zh": "同族相斥",
+            "fr": "La haine des siens",
+            "es": "El Odio a los Propios"
           },
           "areaName": {
             "en": "Forest Dungeon",
             "jp": "森林ダンジョン",
             "kr": "숲 속의 던전",
-            "zh": "林中暗堡"
+            "zh": "林中暗堡",
+            "fr": "Donjon de forêt",
+            "es": "Cripta Mazmorra"
           },
           "mode": "origin"
         }
@@ -2487,7 +3067,9 @@
         "en": "Skyward Tower - Hard",
         "jp": "飛天の塔 ハード",
         "kr": "비천의 탑 하드",
-        "zh": "飞天之塔 - 困难"
+        "zh": "飞天之塔 - 困难",
+        "fr": "Tour Skyward - Diff.",
+        "es": "Torre Skyward - Hard"
       }
     },
     {
@@ -2499,13 +3081,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         },
@@ -2515,13 +3101,17 @@
             "en": "The Commander's Sophistry",
             "jp": "騎士団長の詭弁",
             "kr": "단장의 궤변",
-            "zh": "团长的诡辩"
+            "zh": "团长的诡辩",
+            "fr": "Le sophisme du commandant",
+            "es": "Sofística Comandante"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         }
@@ -2530,13 +3120,17 @@
         "en": "Arena",
         "jp": "アリーナ",
         "kr": "결투장",
-        "zh": "竞技场"
+        "zh": "竞技场",
+        "fr": "Arène",
+        "es": "Arena"
       },
       "officialName": {
         "en": "Arena",
         "jp": "アリーナ",
         "kr": "결투장",
-        "zh": "竞技场"
+        "zh": "竞技场",
+        "fr": "Arène",
+        "es": "Arena"
       }
     },
     {
@@ -2548,13 +3142,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         },
@@ -2564,13 +3162,17 @@
             "en": "The Commander's Sophistry",
             "jp": "騎士団長の詭弁",
             "kr": "단장의 궤변",
-            "zh": "团长的诡辩"
+            "zh": "团长的诡辩",
+            "fr": "Le sophisme du commandant",
+            "es": "Sofística Comandante"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         }
@@ -2579,7 +3181,9 @@
         "en": "Real Time Arena",
         "jp": "ワールドアリーナ",
         "kr": "실시간 대전",
-        "zh": "实时对战"
+        "zh": "实时对战",
+        "fr": "Arène en direct",
+        "es": "Arena en vivo"
       }
     },
     {
@@ -2591,13 +3195,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         },
@@ -2607,13 +3215,17 @@
             "en": "The Commander's Sophistry",
             "jp": "騎士団長の詭弁",
             "kr": "단장의 궤변",
-            "zh": "团长的诡辩"
+            "zh": "团长的诡辩",
+            "fr": "Le sophisme du commandant",
+            "es": "Sofística Comandante"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         }
@@ -2622,7 +3234,9 @@
         "en": "Friendly Match",
         "jp": "フレンドリーマッチ",
         "kr": "친선 대전",
-        "zh": "友谊赛"
+        "zh": "友谊赛",
+        "fr": "Match amical",
+        "es": "Partido amistoso"
       }
     },
     {
@@ -2634,13 +3248,17 @@
             "en": "Commotion at the Tavern",
             "jp": "酒場での騒動",
             "kr": "주점에서의 소동",
-            "zh": "酒馆中的骚动"
+            "zh": "酒馆中的骚动",
+            "fr": "Tumulte à la taverne",
+            "es": "Alboroto en la Taberna"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         },
@@ -2650,13 +3268,17 @@
             "en": "Schwartz",
             "jp": "シュヴァルツ",
             "kr": "슈바르츠",
-            "zh": "施瓦兹"
+            "zh": "施瓦兹",
+            "fr": "Schwartz",
+            "es": "Schwartz"
           },
           "areaName": {
             "en": "Nightwatch",
             "jp": "ナイトウォッチ",
             "kr": "나이트워치",
-            "zh": "骑士堡"
+            "zh": "骑士堡",
+            "fr": "Veille de nuit",
+            "es": "Nightwatch"
           },
           "mode": "origin"
         }
@@ -2665,7 +3287,9 @@
         "en": "Friendly Match",
         "jp": "フレンドリーマッチ",
         "kr": "친선 대전",
-        "zh": "友谊赛"
+        "zh": "友谊赛",
+        "fr": "Match amical",
+        "es": "Partido amistoso"
       }
     },
     {
@@ -2685,13 +3309,17 @@
             "en": "Notia's Letter",
             "jp": "ノティアの手紙",
             "kr": "노티아의 편지",
-            "zh": "诺缇亚的信"
+            "zh": "诺缇亚的信",
+            "fr": "Lettre de Notia",
+            "es": "Carta de Notia"
           },
           "areaName": {
             "en": "Garden of Dolls",
             "jp": "箱庭",
             "kr": "모형 정원",
-            "zh": "模型庄园"
+            "zh": "模型庄园",
+            "fr": "Jardin de poupées",
+            "es": "Jardín Muñecas"
           },
           "mode": "origin"
         }
@@ -2700,13 +3328,17 @@
         "en": "Dimensional Singularity",
         "jp": "次元特異点",
         "kr": "차원 특이점",
-        "zh": "次元奇点"
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
       },
       "officialName": {
         "en": "Dimensional Singularity",
         "jp": "次元特異点",
         "kr": "차원 특이점",
-        "zh": "次元奇点"
+        "zh": "次元奇点",
+        "fr": "Singularité dim.",
+        "es": "Singularidad Dim."
       }
     },
     {
@@ -2718,13 +3350,17 @@
             "en": "Killing Both",
             "jp": "二人とも殺して",
             "kr": "둘 다 죽여",
-            "zh": "杀死他们两个"
+            "zh": "杀死他们两个",
+            "fr": "Tuer les deux",
+            "es": "Matar a Ambos"
           },
           "areaName": {
             "en": "Reunion",
             "jp": "再会",
             "kr": "재회",
-            "zh": "再会"
+            "zh": "再会",
+            "fr": "Réunion",
+            "es": "Reunión"
           },
           "mode": "origin"
         }
@@ -2733,13 +3369,17 @@
         "en": "Survey Hub",
         "jp": "調査支援所",
         "kr": "조사 지원소",
-        "zh": "调查支援所"
+        "zh": "调查支援所",
+        "fr": "Hub d'étude",
+        "es": "Hub estudio"
       },
       "officialName": {
         "en": "Survey Hub",
         "jp": "調査支援所",
         "kr": "조사 지원소",
-        "zh": "调查支援所"
+        "zh": "调查支援所",
+        "fr": "Hub d'étude",
+        "es": "Hub estudio"
       }
     },
     {
@@ -2751,13 +3391,17 @@
             "en": "Notia's Letter",
             "jp": "ノティアの手紙",
             "kr": "노티아의 편지",
-            "zh": "诺缇亚的信"
+            "zh": "诺缇亚的信",
+            "fr": "Lettre de Notia",
+            "es": "Carta de Notia"
           },
           "areaName": {
             "en": "Garden of Dolls",
             "jp": "箱庭",
             "kr": "모형 정원",
-            "zh": "模型庄园"
+            "zh": "模型庄园",
+            "fr": "Jardin de poupées",
+            "es": "Jardín Muñecas"
           },
           "mode": "origin"
         }
@@ -2766,7 +3410,9 @@
         "en": "Survey Hub",
         "jp": "調査支援所",
         "kr": "조사 지원소",
-        "zh": "调查支援所"
+        "zh": "调查支援所",
+        "fr": "Hub d'étude",
+        "es": "Hub estudio"
       }
     },
     {
@@ -2778,13 +3424,17 @@
             "en": "Fixing the Circuit (1)",
             "jp": "回路を直す（1）",
             "kr": "회로 고치기 (1)",
-            "zh": "修复电路（1）"
+            "zh": "修复电路（1）",
+            "fr": "Répar. de circuit (1)",
+            "es": "Reparar Circuito (1)"
           },
           "areaName": {
             "en": "Path to Nationhood",
             "jp": "建国の道",
             "kr": "건국의 길",
-            "zh": "建国之路"
+            "zh": "建国之路",
+            "fr": "Voie vers la nation",
+            "es": "Camino a la nación"
           },
           "mode": "story"
         },
@@ -2794,13 +3444,17 @@
             "en": "The Demibeast and the Lord",
             "jp": "獣人と領主",
             "kr": "수인과 영주",
-            "zh": "兽人与领主"
+            "zh": "兽人与领主",
+            "fr": "La demi-bête & le Seigneur",
+            "es": "La Demibestia y el Señor"
           },
           "areaName": {
             "en": "Outer City",
             "jp": "アウターシティ",
             "kr": "아우터시티",
-            "zh": "外城"
+            "zh": "外城",
+            "fr": "Ville périp.",
+            "es": "Outer City"
           },
           "mode": "origin"
         }
@@ -2809,7 +3463,9 @@
         "en": "Unequip All",
         "jp": "一括解除",
         "kr": "일괄 해제",
-        "zh": "一键卸下"
+        "zh": "一键卸下",
+        "fr": "Déséq. tout",
+        "es": "Quitar todo"
       }
     },
     {
@@ -2821,13 +3477,17 @@
             "en": "Archdemon of Pure Blood",
             "jp": "鮮血の魔王",
             "kr": "선혈의 마왕",
-            "zh": "鲜血魔王"
+            "zh": "鲜血魔王",
+            "fr": "Archidémon de sang pur",
+            "es": "Archi. de Sangre Pura"
           },
           "areaName": {
             "en": "Fiend Territory",
             "jp": "魔族の領域",
             "kr": "마족의 영역",
-            "zh": "魔族领域"
+            "zh": "魔族领域",
+            "fr": "Terri. de démons",
+            "es": "Terri. de Demonios"
           },
           "mode": "origin"
         },
@@ -2837,13 +3497,17 @@
             "en": "An Automaton's Wish",
             "jp": "オートマタの願い",
             "kr": "자동인형의 바람",
-            "zh": "机械人偶的心愿"
+            "zh": "机械人偶的心愿",
+            "fr": "souhait d'un automate",
+            "es": "Deseo del Autómata"
           },
           "areaName": {
             "en": "Ksai",
             "jp": "ザイ",
             "kr": "크사이",
-            "zh": "科赛"
+            "zh": "科赛",
+            "fr": "Ksai",
+            "es": "Ksai"
           },
           "mode": "origin"
         }
@@ -2852,13 +3516,17 @@
         "en": "World Boss",
         "jp": "ワールドボス",
         "kr": "월드 보스",
-        "zh": "世界首领"
+        "zh": "世界首领",
+        "fr": "Boss monde",
+        "es": "Jefe mundial"
       },
       "officialName": {
         "en": "World Boss",
         "jp": "ワールドボス",
         "kr": "월드 보스",
-        "zh": "世界首领"
+        "zh": "世界首领",
+        "fr": "Boss monde",
+        "es": "Jefe mundial"
       }
     }
   ]

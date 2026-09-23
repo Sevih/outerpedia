@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { validate, type Schema } from './validate';
+import { uniformDict } from '../../lib/lang';
 
 describe('validate — primitives', () => {
   it('accepte string/number/boolean conformes', () => {
@@ -30,9 +31,10 @@ describe('validate — primitives', () => {
 });
 
 describe('validate — langDict', () => {
-  it('exige les 4 langues officielles en string', () => {
-    expect(validate({ en: 'a', jp: 'b', kr: 'c', zh: 'd' }, { kind: 'langDict' })).toEqual([]);
-    expect(validate({ en: 'a', jp: 'b', kr: 'c' }, { kind: 'langDict' })).toHaveLength(1); // zh manquant
+  it('exige toutes les langues officielles en string', () => {
+    const sansZh = Object.fromEntries(Object.entries(uniformDict('a')).filter(([l]) => l !== 'zh'));
+    expect(validate(uniformDict('a'), { kind: 'langDict' })).toEqual([]);
+    expect(validate(sansZh, { kind: 'langDict' })).toHaveLength(1); // zh manquant
   });
 });
 

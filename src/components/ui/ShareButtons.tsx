@@ -21,6 +21,7 @@ const PLATFORMS_BY_LANG: Record<Lang, Platform[]> = {
   kr: ['kakaotalk', 'naver', 'twitter'],
   zh: ['weibo', 'qq', 'twitter'],
   fr: ['twitter', 'reddit', 'facebook', 'telegram', 'whatsapp'],
+  es: ['whatsapp', 'twitter', 'facebook', 'telegram', 'reddit'],
 };
 
 const PLATFORM_CONFIG: Record<Platform, { label: string; color: string; icon: string }> = {

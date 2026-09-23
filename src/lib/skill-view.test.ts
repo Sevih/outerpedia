@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '@datagen/lib/lang';
 import type { Glossaries, Skill } from '@contracts';
 import glossariesData from '@data/generated/glossaries.json';
 import skillsData from '@data/generated/skills.json';
@@ -31,7 +32,7 @@ const REAL_TOOLTIP = Object.keys(G.effectByTooltip)[0];
 const REAL_TOOLTIP2 = Object.keys(G.effectByTooltip)[1];
 
 type Effect = NonNullable<Skill['effects']>[number];
-const NAME = { en: 'x', jp: '', kr: '', zh: '' };
+const NAME = { ...emptyDict(), en: 'x' };
 
 function eff(partial: Partial<Effect>): Effect {
   return { family: 'stat', category: 'buff', type: 'BT_STAT', target: 'me', ...partial } as Effect;
@@ -172,7 +173,7 @@ describe('buildBurstViews', () => {
 /** Skill de monstre : nom VIDE par défaut (opt-in via `over.name`) — le nom
  * décide si une carte s'affiche. */
 const mon = (id: string, type: string, over: Partial<Skill> = {}): Skill =>
-  skill({ id, type, name: { en: '', jp: '', kr: '', zh: '' }, ...over });
+  skill({ id, type, name: emptyDict(), ...over });
 /** La vue d'un skill donné dans une liste de vues monstre. */
 type MView = ReturnType<typeof monsterSkillViews>[number];
 const viewOf = (views: MView[], id: string) => views.find((v) => v.skill.id === id);
@@ -184,7 +185,7 @@ describe('monsterSkillViews — réattribution du câblage', () => {
     // passif qui pointe le skill principal via CallerSkillType.
     const trigger = mon('m', 'first', {
       name: NAME,
-      desc: { en: 'triggers', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'triggers' },
     });
     const passive = mon('p', 'monster_2', {
       name: NAME,
@@ -209,12 +210,12 @@ describe('monsterSkillViews — réattribution du câblage', () => {
   it('DÉPLACE un effet vers le seul skill dont la desc nomme son buff', () => {
     const carrier = mon('a', 'monster_1', {
       name: NAME,
-      desc: { en: 'does nothing special', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'does nothing special' },
       effects: [eff({ buff: 'bx', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
     });
     const owner = mon('b', 'first', {
       name: NAME,
-      desc: { en: 'applies bx to enemies', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'applies bx to enemies' },
     });
     const views = monsterSkillViews([carrier, owner], {});
     expect(refsOf(viewOf(views, 'a'))).toEqual([]); // parti
@@ -224,7 +225,7 @@ describe('monsterSkillViews — réattribution du câblage', () => {
   it('FUSIONNE les chips d’un rage_finish sans nom/desc dans sa carte rage_enter', () => {
     const enter = mon('e', 'rage_enter1', {
       name: NAME,
-      desc: { en: 'enrage begins', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'enrage begins' },
       effects: [eff({ buff: 'be', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
     });
     const finish = mon('f', 'rage_finish1', {
@@ -240,7 +241,7 @@ describe('monsterSkillViews — réattribution du câblage', () => {
   it('SUPPRIME un rage_finish sans son rage_enter jumeau (câblage mort cloné)', () => {
     const finish = mon('f', 'rage_finish1', {
       name: NAME,
-      desc: { en: 'orphan', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'orphan' },
       effects: [eff({ tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
     });
     expect(monsterSkillViews([finish], {})).toEqual([]);
@@ -271,7 +272,7 @@ describe('monsterSkillViews — réattribution du câblage', () => {
   it('respecte un porteur imposé par la curation (chipOwner)', () => {
     const carrier = mon('a', 'monster_1', {
       name: NAME,
-      desc: { en: 'applies bz', jp: '', kr: '', zh: '' },
+      desc: { ...emptyDict(), en: 'applies bz' },
       effects: [eff({ buff: 'bz', tooltip: REAL_TOOLTIP, type: 'BT_STUN' })],
     });
     const target = mon('b', 'second', { name: NAME });
@@ -518,12 +519,7 @@ describe('cardEffects — statuts de NIVEAU (levelTooltipEffects)', () => {
     const s = skill({
       id: 'first1',
       type: 'first',
-      desc: {
-        en: `Deals damage. If the caster has ${ICON!.name}, deal more.`,
-        jp: '',
-        kr: '',
-        zh: '',
-      },
+      desc: { ...emptyDict(), en: `Deals damage. If the caster has ${ICON!.name}, deal more.` },
       levels: [{ level: 1, tooltips: [ICON!.tooltip] }],
     });
     expect(cardRefs([s], s)).not.toContain(ICON!.tooltip);

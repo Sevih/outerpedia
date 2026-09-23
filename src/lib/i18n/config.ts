@@ -8,7 +8,19 @@ import type { GameLang } from '@contracts';
  *
  * Les langues `isOfficial` restent alignées avec `GAME_LANGS` de
  * `datagen/lib/lang.ts` (couche données) — c'est désormais le TYPE qui le tient,
- * cf. `GAME_LANGS` plus bas, et non plus la discipline. Ici on ajoute le `fr`.
+ * cf. `GAME_LANGS` plus bas, et non plus la discipline.
+ *
+ * Toutes officielles depuis le 2026-09-23 : le jeu a livré le français et
+ * l'espagnol. Le `fr`, communautaire depuis l'origine du site (UI traduite,
+ * contenu de jeu en anglais), lit désormais les noms, skills et items du jeu ;
+ * `es` arrive directement officiel. La distinction reste dans le contrat — une
+ * prochaine traduction communautaire s'y rebranche sans rien réinventer.
+ *
+ * Ajouter une langue ici, c'est aussi : sa locale `src/i18n/locales/<lang>.ts`
+ * (mêmes clés, `keys.test.ts` le vérifie), son drapeau `data/editorial/ui/flags/`,
+ * son entrée `PLATFORMS_BY_LANG` (partage), son hôte Caddy (dev ET VPS) et,
+ * en prod, le certificat d'origine Cloudflare qui ÉNUMÈRE les sous-domaines
+ * (cf. sevih-tool/docs/nuage-orange.md — pas de joker, à cause de `zh`).
  *
  * `import type` : effacé à la compilation, ce fichier reste client-safe (il ne
  * tire rien de `datagen` dans le bundle).
@@ -18,7 +30,8 @@ export const LANGUAGES = {
   jp: { label: '日本語', abbrev: 'JP', flag: 'jp', subdomain: 'jp', htmlLang: 'ja', isDefault: false, isOfficial: true }, // prettier-ignore
   kr: { label: '한국어', abbrev: 'KR', flag: 'kr', subdomain: 'kr', htmlLang: 'ko', isDefault: false, isOfficial: true }, // prettier-ignore
   zh: { label: '中文', abbrev: 'ZH', flag: 'cn', subdomain: 'zh', htmlLang: 'zh', isDefault: false, isOfficial: true }, // prettier-ignore
-  fr: { label: 'Français', abbrev: 'FR', flag: 'fr', subdomain: 'fr', htmlLang: 'fr', isDefault: false, isOfficial: false }, // prettier-ignore
+  fr: { label: 'Français', abbrev: 'FR', flag: 'fr', subdomain: 'fr', htmlLang: 'fr', isDefault: false, isOfficial: true }, // prettier-ignore
+  es: { label: 'Español', abbrev: 'ES', flag: 'es', subdomain: 'es', htmlLang: 'es', isDefault: false, isOfficial: true }, // prettier-ignore
 } as const;
 
 /** Toutes les clés de langue. */
@@ -43,10 +56,12 @@ export type GameLangKey = {
  * Une première version de cette constante avait été retirée d'ici « faute de
  * consommateur ». C'était inexact : `ItemCuratedEditor` la réimplémentait en dur
  * (`['en','jp','kr','zh']`), comme 7 autres écrans admin recopiaient la liste
- * des 5 langues du site. Trois choses portaient le même nom `LANGS` selon le
+ * des langues du site. Trois choses portaient le même nom `LANGS` selon le
  * fichier — et comme ce sont toutes des listes de codes langue, confondre les
- * deux COMPILE : un éditeur de `LangDict` se serait mis à écrire une clé `fr`
- * hors contrat, sans une erreur. D'où deux noms distincts (audit du 07/08).
+ * deux COMPILE : un éditeur de `LangDict` se serait mis à écrire une clé hors
+ * contrat, sans une erreur. D'où deux noms distincts (audit du 07/08). Les deux
+ * listes coïncident depuis que toutes les langues sont officielles ; la
+ * distinction reste, elle redeviendra visible à la prochaine langue communautaire.
  *
  * L'annotation `readonly GameLang[]` n'est pas décorative : elle transforme en
  * ERREUR DE COMPILATION l'alignement que ce fichier et `datagen/lib/lang.ts` se

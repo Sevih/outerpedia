@@ -17,6 +17,7 @@
  * La suite tourne SANS `.gamedata` (contrainte CI).
  */
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '../lib/lang';
 import charactersListData from '../../data/generated/characters-list.json';
 import charactersData from '../../data/generated/characters.json';
 import { resolveEffectKey } from '../../src/lib/data/effects';
@@ -104,7 +105,7 @@ describe('buildCharactersList — agrégation end-to-end (synthétique)', () => 
       },
       UP: {
         type: 'unique_passive',
-        levels: [{ level: 1, desc: { en: '+5% Ally Team Speed', jp: '', kr: '', zh: '' } }],
+        levels: [{ level: 1, desc: { ...emptyDict(), en: '+5% Ally Team Speed' } }],
       },
       // Mécanique INTERNE sans statut nommé (dégâts proportionnels à une stat,
       // ni tooltip ni label, aucune chip) → JAMAIS comptée (zéro faux positif).

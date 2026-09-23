@@ -13,13 +13,14 @@
  * La suite tourne SANS `.gamedata` (contrainte CI).
  */
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '../lib/lang';
 import heroGrowthData from '../../data/generated/hero-growth.json';
 import itemsData from '../../data/generated/items.json';
 import type { Row } from '../lib/tables';
 import type { CatalogEntry } from './item-catalog';
 import { costsFrom, cumulativeCurve, itemRef, type HeroGrowthData } from './hero-growth';
 
-const dict = (en: string) => ({ en, jp: '', kr: '', zh: '' });
+const dict = (en: string) => ({ ...emptyDict(), en });
 const catalog = {
   '20201': { name: dict('Basic Skill Manual'), icon: 'ic_manual', grade: 'magic' },
   '20202': { name: dict('Advanced Manual'), icon: 'ic_adv', grade: 'rare' },

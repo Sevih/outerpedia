@@ -4,7 +4,9 @@
       "en": "Iron Stretcher",
       "jp": "アイアンストレッチャー",
       "kr": "아이언 스트레쳐",
-      "zh": "铁血伸张者"
+      "zh": "铁血伸张者",
+      "fr": "Civière de fer",
+      "es": "Camilla de Hierro"
     },
     "icon": "4013071",
     "element": "fire",
@@ -12,7 +14,9 @@
       "en": "Irregular Extermination Project",
       "jp": "イレギュラー殲滅戦",
       "kr": "이레귤러 섬멸전",
-      "zh": "异型怪歼灭战"
+      "zh": "异型怪歼灭战",
+      "fr": "Projet extermination Irregular",
+      "es": "Proyecto exterminio Irregular"
     }
   },
   "51202002": {
@@ -20,7 +24,9 @@
       "en": "Blockbuster",
       "jp": "ブラックバスター",
       "kr": "블록버스터",
-      "zh": "破坏猛兽"
+      "zh": "破坏猛兽",
+      "fr": "Blockbuster",
+      "es": "Blockbuster"
     },
     "icon": "4013072",
     "element": "water",
@@ -28,7 +34,9 @@
       "en": "Irregular Extermination Project",
       "jp": "イレギュラー殲滅戦",
       "kr": "이레귤러 섬멸전",
-      "zh": "异型怪歼灭战"
+      "zh": "异型怪歼灭战",
+      "fr": "Projet extermination Irregular",
+      "es": "Proyecto exterminio Irregular"
     }
   },
   "51202003": {
@@ -36,7 +44,9 @@
       "en": "Mutated Wyvre",
       "jp": "変異したワイブル",
       "kr": "변이된 와이브르",
-      "zh": "变异双足飞龙"
+      "zh": "变异双足飞龙",
+      "fr": "Wyvre mutante",
+      "es": "Wyvre mutada"
     },
     "icon": "4014003",
     "element": "light",
@@ -44,7 +54,9 @@
       "en": "Irregular Extermination Project",
       "jp": "イレギュラー殲滅戦",
       "kr": "이레귤러 섬멸전",
-      "zh": "异型怪歼灭战"
+      "zh": "异型怪歼灭战",
+      "fr": "Projet extermination Irregular",
+      "es": "Proyecto exterminio Irregular"
     }
   },
   "51202004": {
@@ -52,7 +64,9 @@
       "en": "Irregular Queen",
       "jp": "イレギュラークイーン",
       "kr": "이레귤러 퀸",
-      "zh": "异型怪女王"
+      "zh": "异型怪女王",
+      "fr": "Reine irrégulière",
+      "es": "Reina Irregular"
     },
     "icon": "4089001",
     "element": "dark",
@@ -60,7 +74,9 @@
       "en": "Irregular Extermination Project",
       "jp": "イレギュラー殲滅戦",
       "kr": "이레귤러 섬멸전",
-      "zh": "异型怪歼灭战"
+      "zh": "异型怪歼灭战",
+      "fr": "Projet extermination Irregular",
+      "es": "Proyecto exterminio Irregular"
     }
   },
   "403400262": {
@@ -68,7 +84,9 @@
       "en": "Unidentified Chimera",
       "jp": "未確認キメラ",
       "kr": "미확인 키메라",
-      "zh": "未知的奇美拉"
+      "zh": "未知的奇美拉",
+      "fr": "Chimère non identifiée",
+      "es": "Quimera No Ident."
     },
     "icon": "4034002",
     "element": "earth",
@@ -76,7 +94,9 @@
       "en": "Special Request: Ecology Study",
       "jp": "特別依頼：生態調査",
       "kr": "특별 의뢰 : 생태 조사",
-      "zh": "特别委托：生态调查"
+      "zh": "特别委托：生态调查",
+      "fr": "Requête spéciale: Étude écolo.",
+      "es": "Encargo esp.: Estudio ecología"
     }
   },
   "403400362": {
@@ -84,7 +104,9 @@
       "en": "Grand Calamari",
       "jp": "グラン・カラマリー",
       "kr": "그랑 칼라마리",
-      "zh": "海怪"
+      "zh": "海怪",
+      "fr": "Grand Calamari",
+      "es": "Gran Calamari"
     },
     "icon": "4034003",
     "element": "dark",
@@ -92,7 +114,9 @@
       "en": "Special Request: Ecology Study",
       "jp": "特別依頼：生態調査",
       "kr": "특별 의뢰 : 생태 조사",
-      "zh": "特别委托：生态调查"
+      "zh": "特别委托：生态调查",
+      "fr": "Requête spéciale: Étude écolo.",
+      "es": "Encargo esp.: Estudio ecología"
     }
   },
   "404400162": {
@@ -100,7 +124,9 @@
       "en": "Masterless Guardian",
       "jp": "主を失ったガーディアン",
       "kr": "주인 잃은 가디언",
-      "zh": "失去主人的守护者"
+      "zh": "失去主人的守护者",
+      "fr": "Gardien sans maître",
+      "es": "Guardián sin amo"
     },
     "icon": "4076006",
     "element": "fire",
@@ -108,7 +134,9 @@
       "en": "Special Request: Ecology Study",
       "jp": "特別依頼：生態調査",
       "kr": "특별 의뢰 : 생태 조사",
-      "zh": "特别委托：生态调查"
+      "zh": "特别委托：生态调查",
+      "fr": "Requête spéciale: Étude écolo.",
+      "es": "Encargo esp.: Estudio ecología"
     }
   },
   "404400362": {
@@ -116,7 +144,9 @@
       "en": "Sacreed Guardian",
       "jp": "セイクリッドガーディアン",
       "kr": "세이크리드 가디언",
-      "zh": "圣科利德守护者"
+      "zh": "圣科利德守护者",
+      "fr": "Gardien de Sacreed",
+      "es": "Guardián Sacreed"
     },
     "icon": "4044003",
     "element": "light",
@@ -124,7 +154,9 @@
       "en": "Special Request: Ecology Study",
       "jp": "特別依頼：生態調査",
       "kr": "특별 의뢰 : 생태 조사",
-      "zh": "特别委托：生态调查"
+      "zh": "特别委托：生态调查",
+      "fr": "Requête spéciale: Étude écolo.",
+      "es": "Encargo esp.: Estudio ecología"
     }
   },
   "407600162": {
@@ -132,7 +164,9 @@
       "en": "Glicys",
       "jp": "グリシス",
       "kr": "글리시스",
-      "zh": "克里希丝"
+      "zh": "克里希丝",
+      "fr": "Glicys",
+      "es": "Glicys"
     },
     "icon": "4076001",
     "element": "water",
@@ -140,7 +174,9 @@
       "en": "Special Request: Identification",
       "jp": "特別依頼：正体究明",
       "kr": "특별 의뢰 : 정체 규명",
-      "zh": "特别委托：查清身份"
+      "zh": "特别委托：查清身份",
+      "fr": "Demande spéciale: Identification",
+      "es": "Encargo esp.: Identificación"
     }
   },
   "407600262": {
@@ -148,7 +184,9 @@
       "en": "Blazing Knight Meteos",
       "jp": "火炎の騎士メテウス",
       "kr": "화염기사 메테우스",
-      "zh": "火焰骑士梅修斯"
+      "zh": "火焰骑士梅修斯",
+      "fr": "Météos, le Chevalier Flamboyant",
+      "es": "Caballero Ardiente Meteos"
     },
     "icon": "4076002",
     "element": "fire",
@@ -156,7 +194,9 @@
       "en": "Special Request: Identification",
       "jp": "特別依頼：正体究明",
       "kr": "특별 의뢰 : 정체 규명",
-      "zh": "特别委托：查清身份"
+      "zh": "特别委托：查清身份",
+      "fr": "Demande spéciale: Identification",
+      "es": "Encargo esp.: Identificación"
     }
   },
   "407600362": {
@@ -164,7 +204,9 @@
       "en": "Dek'Ril",
       "jp": "デグリル",
       "kr": "데그릴",
-      "zh": "泰格里尔"
+      "zh": "泰格里尔",
+      "fr": "Dek'Ril",
+      "es": "Dek'Ril"
     },
     "icon": "4076003",
     "element": "earth",
@@ -172,7 +214,9 @@
       "en": "Special Request: Identification",
       "jp": "特別依頼：正体究明",
       "kr": "특별 의뢰 : 정체 규명",
-      "zh": "特别委托：查清身份"
+      "zh": "特别委托：查清身份",
+      "fr": "Demande spéciale: Identification",
+      "es": "Encargo esp.: Identificación"
     }
   },
   "407600862": {
@@ -180,7 +224,9 @@
       "en": "Ars Nova",
       "jp": "アルス・ノーヴァ",
       "kr": "아르스 노바",
-      "zh": "艺术新星"
+      "zh": "艺术新星",
+      "fr": "Ars Nova",
+      "es": "Ars Nova"
     },
     "icon": "4076008",
     "element": "light",
@@ -188,7 +234,9 @@
       "en": "Special Request: Identification",
       "jp": "特別依頼：正体究明",
       "kr": "특별 의뢰 : 정체 규명",
-      "zh": "特别委托：查清身份"
+      "zh": "特别委托：查清身份",
+      "fr": "Demande spéciale: Identification",
+      "es": "Encargo esp.: Identificación"
     }
   },
   "407600962": {
@@ -196,7 +244,9 @@
       "en": "Amadeus",
       "jp": "アマデウス",
       "kr": "아마데우스",
-      "zh": "阿玛迪斯"
+      "zh": "阿玛迪斯",
+      "fr": "Amadeus",
+      "es": "Amadeus"
     },
     "icon": "4076009",
     "element": "dark",
@@ -204,7 +254,9 @@
       "en": "Special Request: Identification",
       "jp": "特別依頼：正体究明",
       "kr": "특별 의뢰 : 정체 규명",
-      "zh": "特别委托：查清身份"
+      "zh": "特别委托：查清身份",
+      "fr": "Demande spéciale: Identification",
+      "es": "Encargo esp.: Identificación"
     }
   },
   "411400258": {
@@ -212,7 +264,9 @@
       "en": "Tyrant Toddler",
       "jp": "タイラントの幼生",
       "kr": "타일런트 유생체",
-      "zh": "幼体泰兰特"
+      "zh": "幼体泰兰特",
+      "fr": "Petit Tyran",
+      "es": "Tyrant bebé"
     },
     "icon": "4076005",
     "element": "water",
@@ -220,7 +274,9 @@
       "en": "Special Request: Ecology Study",
       "jp": "特別依頼：生態調査",
       "kr": "특별 의뢰 : 생태 조사",
-      "zh": "特别委托：生态调查"
+      "zh": "特别委托：生态调查",
+      "fr": "Requête spéciale: Étude écolo.",
+      "es": "Encargo esp.: Estudio ecología"
     }
   }
 }

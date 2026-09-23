@@ -10,7 +10,9 @@
             "en": "Basic Skill Manual",
             "jp": "スキル教本：はじまり編",
             "kr": "초급 스킬 교본",
-            "zh": "初级技能教材"
+            "zh": "初级技能教材",
+            "fr": "Basic comp. manuel",
+            "es": "Manual de Habilidades"
           },
           "icon": "TI_Item_Growth_Book_01",
           "iconKind": "item",
@@ -59,7 +61,9 @@
             "en": "Intermediate Skill Manual",
             "jp": "スキル教本：応用編",
             "kr": "중급 스킬 교본",
-            "zh": "中级技能教材"
+            "zh": "中级技能教材",
+            "fr": "Intermediate comp. manuel",
+            "es": "Manual de hab. intermedia"
           },
           "icon": "TI_Item_Growth_Book_02",
           "iconKind": "item",
@@ -114,7 +118,9 @@
             "en": "Professional Skill Manual",
             "jp": "スキル教本：専門家編",
             "kr": "전문 스킬 교본",
-            "zh": "专家技能教材"
+            "zh": "专家技能教材",
+            "fr": "Professional comp. manuel",
+            "es": "Manual de hab. profesional"
           },
           "icon": "TI_Item_Growth_Book_03",
           "iconKind": "item",
@@ -175,7 +181,9 @@
             "en": "Transistone (Total)",
             "jp": "トランストーン(全体)",
             "kr": "트랜스톤(전체)",
-            "zh": "转换石 (全部)"
+            "zh": "转换石 (全部)",
+            "fr": "Transistone (total)",
+            "es": "Transistone (Total)"
           },
           "icon": "TI_Item_Option_Change_01",
           "iconKind": "item",
@@ -242,7 +250,9 @@
             "en": "Transistone (Individual)",
             "jp": "トランストーン(選択)",
             "kr": "트랜스톤(개별)",
-            "zh": "转换石 (单个)"
+            "zh": "转换石 (单个)",
+            "fr": "Transistone (indiv.)",
+            "es": "Transistone (Individual)"
           },
           "icon": "TI_Item_Option_Change_02",
           "iconKind": "item",
@@ -314,7 +324,9 @@
             "en": "Blue Stardust",
             "jp": "ブルースターダスト",
             "kr": "블루 스타 더스트",
-            "zh": "蓝色星尘"
+            "zh": "蓝色星尘",
+            "fr": "Blue Stardust",
+            "es": "Polvo estelar azul"
           },
           "icon": "TI_Talisman_Growth_Enhance_01",
           "iconKind": "item",
@@ -357,7 +369,9 @@
             "en": "Purple Stardust",
             "jp": "パープルスターダスト",
             "kr": "퍼플 스타 더스트",
-            "zh": "紫色星尘"
+            "zh": "紫色星尘",
+            "fr": "Purple Stardust",
+            "es": "Polvo de estrellas púrpura"
           },
           "icon": "TI_Talisman_Growth_Enhance_02",
           "iconKind": "item",
@@ -392,7 +406,9 @@
                   "en": "Blue Stardust",
                   "jp": "ブルースターダスト",
                   "kr": "블루 스타 더스트",
-                  "zh": "蓝色星尘"
+                  "zh": "蓝色星尘",
+                  "fr": "Blue Stardust",
+                  "es": "Polvo estelar azul"
                 },
                 "icon": "TI_Talisman_Growth_Enhance_01",
                 "grade": "unique"
@@ -412,7 +428,9 @@
             "en": "Blue Memory Stone",
             "jp": "ブルーメモリーストーン",
             "kr": "블루 메모리 스톤",
-            "zh": "蓝色记忆石"
+            "zh": "蓝色记忆石",
+            "fr": "Blue Memory Stone",
+            "es": "Piedra de Memoria Azul"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_01",
           "iconKind": "item",
@@ -455,7 +473,9 @@
             "en": "Purple Memory Stone",
             "jp": "パープルメモリーストーン",
             "kr": "퍼플 메모리 스톤",
-            "zh": "紫色记忆石"
+            "zh": "紫色记忆石",
+            "fr": "Purple Memory Stone",
+            "es": "Piedra Memoria Púrpura"
           },
           "icon": "TI_EX_Equip_Growth_Enhance_02",
           "iconKind": "item",
@@ -490,7 +510,9 @@
                   "en": "Blue Memory Stone",
                   "jp": "ブルーメモリーストーン",
                   "kr": "블루 메모리 스톤",
-                  "zh": "蓝色记忆石"
+                  "zh": "蓝色记忆石",
+                  "fr": "Blue Memory Stone",
+                  "es": "Piedra de Memoria Azul"
                 },
                 "icon": "TI_EX_Equip_Growth_Enhance_01",
                 "grade": "unique"
@@ -515,7 +537,9 @@
             "en": "High-Precision Chip",
             "jp": "高精度チップ",
             "kr": "고정밀 칩",
-            "zh": "高精度芯片"
+            "zh": "高精度芯片",
+            "fr": "Chip de haute précision",
+            "es": "Chip Alta Precisión"
           },
           "icon": "TI_Equip_Monad_Growth_Enhance_01",
           "iconKind": "item",
@@ -552,7 +576,9 @@
             "en": "Reload Cartridge",
             "jp": "リロードカートリッジ",
             "kr": "리로드 카트리지",
-            "zh": "换弹匣"
+            "zh": "换弹匣",
+            "fr": "Reload Cartridge",
+            "es": "Cartucho de Recarga"
           },
           "icon": "TI_Equip_Monad_Growth_Enhance_02",
           "iconKind": "item",
@@ -583,7 +609,9 @@
             "en": "Fusion-Type Core",
             "jp": "フュージョン型コア",
             "kr": "융합형 코어",
-            "zh": "融合型核心"
+            "zh": "融合型核心",
+            "fr": "Fusion-Type Core",
+            "es": "Core de Tipo Fusión"
           },
           "icon": "TI_Item_CoreMerged",
           "iconKind": "item",
@@ -619,7 +647,9 @@
             "en": "Refined Glunite",
             "jp": "精製されたグルーナイト",
             "kr": "정제된 글루나이트",
-            "zh": "精炼格鲁矿石"
+            "zh": "精炼格鲁矿石",
+            "fr": "Glunite raffinée",
+            "es": "Glunite refinado"
           },
           "icon": "TI_Equipment_Growth02",
           "iconKind": "item",
@@ -656,7 +686,9 @@
             "en": "Armor Glunite",
             "jp": "アーマーグルーナイト",
             "kr": "아머 글루나이트",
-            "zh": "装甲格鲁矿石"
+            "zh": "装甲格鲁矿石",
+            "fr": "Glunite d'armure",
+            "es": "Glunite de armadura"
           },
           "icon": "TI_Equipment_Growth03",
           "iconKind": "item",
@@ -693,7 +725,9 @@
             "en": "Glunite",
             "jp": "グルーナイト",
             "kr": "글루나이트",
-            "zh": "格鲁矿石"
+            "zh": "格鲁矿石",
+            "fr": "Glunite",
+            "es": "Glunite"
           },
           "icon": "TI_Equipment_Growth01",
           "iconKind": "item",
@@ -723,7 +757,9 @@
             "en": "Limit Break Memory",
             "jp": "限界突破メモリー",
             "kr": "한계 돌파 메모리",
-            "zh": "极限突破记忆"
+            "zh": "极限突破记忆",
+            "fr": "Limit Break Memory",
+            "es": "Memoria de Ruptura Límite"
           },
           "icon": "TI_CharacterCard_07",
           "iconKind": "item",

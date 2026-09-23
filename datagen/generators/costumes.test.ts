@@ -8,11 +8,11 @@
  * Tourne SANS `.gamedata` : `costumeCore` est pur (aucune table).
  */
 import { describe, expect, it } from 'vitest';
-import type { LangDict } from '../lib/lang';
+import { emptyDict, type LangDict } from '../lib/lang';
 import type { Row } from '../lib/tables';
 import { costumeCore } from './costumes';
 
-const dict = (en: string): LangDict => ({ en, jp: '', kr: '', zh: '' });
+const dict = (en: string): LangDict => ({ ...emptyDict(), en });
 const names = new Map<string, LangDict>([['C1_Name', dict('Radiant Dress')]]);
 
 describe('costumeCore — extraction commune d’une ligne CostumeTemplet', () => {

@@ -17,6 +17,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STAT_ICON } from '../../src/lib/stats';
 import { rankBadgeSprite } from '../../src/lib/ranks';
+import { LANGUAGES } from '../../src/lib/i18n/config';
 import { MISSING_ITEM_ICONS as ITEM_ICON_BLACKLIST } from '../lib/item-blacklist';
 import {
   GUIDE_CATEGORIES,
@@ -1471,7 +1472,10 @@ export function buildAssetManifest(): AssetRequest[] {
   }
 
   // --- Éditorial (n'existe pas en jeu) : drapeaux + OG -----------------------
-  for (const flag of ['gb', 'jp', 'kr', 'cn', 'fr'])
+  // Un drapeau par langue du site, lu dans `LANGUAGES` (le sélecteur affiche
+  // `img.flag(LANGUAGES[lang].flag)`) : la liste écrite en dur ici avait oublié
+  // personne jusqu'à l'espagnol — elle ne pouvait que finir par oublier.
+  for (const flag of new Set(Object.values(LANGUAGES).map((l) => l.flag)))
     push({
       kind: 'editorial',
       key: `images/ui/flags/${flag}.svg`,

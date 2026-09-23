@@ -4,7 +4,9 @@
       "en": "Attack Set",
       "jp": "攻撃セット",
       "kr": "공격 세트",
-      "zh": "攻击套装"
+      "zh": "攻击套装",
+      "fr": "attaque Ensemble",
+      "es": "Set Ataque"
     },
     "icon": "TI_Icon_Set_Enchant_01",
     "tiers": [
@@ -35,7 +37,9 @@
       "en": "Defense Set",
       "jp": "防御セット",
       "kr": "방어 세트",
-      "zh": "防御套装"
+      "zh": "防御套装",
+      "fr": "défense Ensemble",
+      "es": "Set Defensa"
     },
     "icon": "TI_Icon_Set_Enchant_02",
     "tiers": [
@@ -66,7 +70,9 @@
       "en": "Life Set",
       "jp": "生命セット",
       "kr": "생명 세트",
-      "zh": "生命套装"
+      "zh": "生命套装",
+      "fr": "Vie Ensemble",
+      "es": "Set Vida"
     },
     "icon": "TI_Icon_Set_Enchant_03",
     "tiers": [
@@ -97,7 +103,9 @@
       "en": "Critical Hit Set",
       "jp": "会心セット",
       "kr": "치명 세트",
-      "zh": "暴击套装"
+      "zh": "暴击套装",
+      "fr": "Critique touché Ensemble",
+      "es": "Golpe crítico Set"
     },
     "icon": "TI_Icon_Set_Enchant_13",
     "tiers": [
@@ -128,7 +136,9 @@
       "en": "Effectiveness Set",
       "jp": "効果命中セット",
       "kr": "적중 세트",
-      "zh": "效果命中套装"
+      "zh": "效果命中套装",
+      "fr": "Efficacité Ensemble",
+      "es": "Set Efectividad"
     },
     "icon": "TI_Icon_Set_Enchant_05",
     "tiers": [
@@ -159,7 +169,9 @@
       "en": "Resilience Set",
       "jp": "抵抗セット",
       "kr": "저항 세트",
-      "zh": "抵抗套装"
+      "zh": "抵抗套装",
+      "fr": "Ensemble de résilience",
+      "es": "Resistencia Set"
     },
     "icon": "TI_Icon_Set_Enchant_06",
     "tiers": [
@@ -190,7 +202,9 @@
       "en": "Counterattack Set",
       "jp": "反撃セット",
       "kr": "반격 세트",
-      "zh": "反击套装"
+      "zh": "反击套装",
+      "fr": "Ensemble de contre-attaques",
+      "es": "Set Contraataque"
     },
     "icon": "TI_Icon_Set_Enchant_07",
     "tiers": [
@@ -221,7 +235,9 @@
       "en": "Fortification set",
       "jp": "鉄壁セット",
       "kr": "개전 방벽 세트",
-      "zh": "开战防壁"
+      "zh": "开战防壁",
+      "fr": "Set de fortification",
+      "es": "Set Fortificación"
     },
     "icon": "TI_Icon_Set_Enchant_23",
     "tiers": [
@@ -245,7 +261,9 @@
             "en": "damage taken decreases by 40% for the first 1 incoming attack (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
             "jp": "最初の1回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
             "kr": "최초 1회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
-            "zh": "首次受到的1次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+            "zh": "首次受到的1次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）",
+            "fr": "Réduit de 40% les DGT subis lors de la première attaque reçue (Supprimé après le coup/Impossible à dissiper)\\nRéduit la VIT de l'utilisateur pendant 1 tour (Ignore l'Immunité/Impossible à dissiper)",
+            "es": "Reduce un 40% el daño recibido del primer ataque entrante (Se elimina al recibir el golpe/No se puede eliminar)\\nReduce la VEL del usuario durante 1 turno (Ignora Inmunidad/No se puede eliminar)"
           }
         },
         "4p": null
@@ -270,7 +288,9 @@
             "en": "damage taken decreases by 40% for the first 2 incoming attacks (Removed when hit/Irremovable)\\nDecreases the caster's Speed for 1 turn (Ignores Immunity/Irremovable)",
             "jp": "最初の2回の攻撃に対して、受けるダメージDOWN 40% (被弾時解除/解除不可) \\n自身のスピードDOWN 1ターン (免疫効果無視/解除不可)",
             "kr": "최초 2회의 공격에 대한 받는 피해 감소 -40%(피격 시 해제/해제 불가)\\n자신 속도 감소 1턴(면역 무시/해제 불가)",
-            "zh": "首次受到的2次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）"
+            "zh": "首次受到的2次攻击所受伤害-40%（受到攻击时解除/不可解除）\\n自身速度降低1回合（无视免疫/不可解除）",
+            "fr": "les dégâts pris diminuent de 40% pour les 2 premières attaques entrantes (Removed when hit/Irremovible)\\nDiminution de la vitesse de utilisateur pour 1 tour (Ignore Immunité/Irremovible)",
+            "es": "Daño recibido baja 40% en primeros 2 ataques (Se elimina al\\ndaño/Ineludible) Velocidad del lanzador baja 1 turno (Ignora Inmunidad/Ineludible)"
           }
         },
         "4p": null
@@ -282,7 +302,9 @@
       "en": "Mitigation set",
       "jp": "無力化セット",
       "kr": "무력화 세트",
-      "zh": "失效套装"
+      "zh": "失效套装",
+      "fr": "Ensemble d'atténuation",
+      "es": "Set Mitigación"
     },
     "icon": "TI_Icon_Set_Enchant_24",
     "tiers": [
@@ -313,7 +335,9 @@
       "en": "Lifesteal Set",
       "jp": "吸収セット",
       "kr": "흡혈 세트",
-      "zh": "吸血套装"
+      "zh": "吸血套装",
+      "fr": "Lifesteal Ensemble",
+      "es": "Set Robo de Vida"
     },
     "icon": "TI_Icon_Set_Enchant_10",
     "tiers": [
@@ -344,7 +368,9 @@
       "en": "Penetration Set",
       "jp": "貫通セット",
       "kr": "관통 세트",
-      "zh": "穿透套装"
+      "zh": "穿透套装",
+      "fr": "Penetration Ensemble",
+      "es": "Penetración Set"
     },
     "icon": "TI_Icon_Set_Enchant_11",
     "tiers": [
@@ -372,7 +398,9 @@
       "en": "Critical Strike Set",
       "jp": "極大化セット",
       "kr": "극대화 세트",
-      "zh": "暴伤套装"
+      "zh": "暴伤套装",
+      "fr": "0",
+      "es": "Set Golpe Crítico"
     },
     "icon": "TI_Icon_Set_Enchant_04",
     "tiers": [
@@ -403,7 +431,9 @@
       "en": "Speed Set",
       "jp": "速度セット",
       "kr": "속도 세트",
-      "zh": "速度套装"
+      "zh": "速度套装",
+      "fr": "vitesse Ensemble",
+      "es": "VEL Set"
     },
     "icon": "TI_Icon_Set_Enchant_15",
     "tiers": [
@@ -431,7 +461,9 @@
       "en": "Bursting Set",
       "jp": "炸裂セット",
       "kr": "버스트 세트",
-      "zh": "爆发套装"
+      "zh": "爆发套装",
+      "fr": "Bursting Ensemble",
+      "es": "Set de Burst"
     },
     "icon": "TI_Icon_Set_Enchant_14",
     "tiers": [
@@ -459,7 +491,9 @@
       "en": "Revenge Set",
       "jp": "復讐セット",
       "kr": "복수 세트",
-      "zh": "复仇套装"
+      "zh": "复仇套装",
+      "fr": "Revenge Ensemble",
+      "es": "Set de Venganza"
     },
     "icon": "TI_Icon_Set_Enchant_16",
     "tiers": [
@@ -479,7 +513,9 @@
             "en": "Increases Attack proportional to missing Health",
             "jp": "自分の残りHPが低いほど、攻撃力がUPする。",
             "kr": "잃은 체력 비례 공격력 증가",
-            "zh": "根据损失的生命值等比提升攻击力"
+            "zh": "根据损失的生命值等比提升攻击力",
+            "fr": "Accroît l'attaque proportionnelle à PV manquante.",
+            "es": "Aumenta Ataque proporcional a Vida perdida"
           }
         }
       },
@@ -499,7 +535,9 @@
             "en": "Increases Attack proportional to missing Health (Maximum efficiency at 50% Health)",
             "jp": "自分の残りHPが低いほど、\\n攻撃力がUPする。\\n(残りHP50%時に効果が最大になる)",
             "kr": "잃은 체력 비례 공격력 증가 (체력 50%에서 최대 효율)",
-            "zh": "根据已损失生命值提升攻击力(生命值50%时达到最大效率)"
+            "zh": "根据已损失生命值提升攻击力(生命值50%时达到最大效率)",
+            "fr": "Accroît l'attaque proportionnelle à PV manquante (efficacité maximale à 50% de PV)",
+            "es": "Sube el ATQ proporcionalmente a la Vida perdida (Eficiencia máxima al 50% de Vida)"
           }
         }
       }
@@ -510,7 +548,9 @@
       "en": "Patience Set",
       "jp": "忍耐セット",
       "kr": "인내 세트",
-      "zh": "忍耐套装"
+      "zh": "忍耐套装",
+      "fr": "patience Ensemble",
+      "es": "Conjunto Paciencia"
     },
     "icon": "TI_Icon_Set_Enchant_17",
     "tiers": [
@@ -530,7 +570,9 @@
             "en": "Increases Defense proportional to missing Health",
             "jp": "自分の残りHPが低いほど、防御力がUPする。",
             "kr": "잃은 체력 비례 방어력 증가",
-            "zh": "根据损失的生命值等比提升防御力"
+            "zh": "根据损失的生命值等比提升防御力",
+            "fr": "Accroît la DÉF proportionnelle à PV manquante manquante PV",
+            "es": "Aumenta Defensa proporcional a Vida perdida"
           }
         }
       },
@@ -550,7 +592,9 @@
             "en": "Increases Defense proportional to missing Health (Maximum efficiency at 50% Health)",
             "jp": "自分の残りHPが低いほど、\\n防御力がUPする。\\n(残りHP50%時に効果が最大になる)",
             "kr": "잃은 체력 비례 방어력 증가 (체력 50%에서 최대 효율)",
-            "zh": "根据已损失生命值提升防御力(生命值50%时达到最大效率)"
+            "zh": "根据已损失生命值提升防御力(生命值50%时达到最大效率)",
+            "fr": "Augmente la DÉF proportionnelle à PV manquante (efficacité maximale à 50% de PV)",
+            "es": "Sube la DEF proporcionalmente a la Vida perdida (Eficiencia máxima al 50% de Vida)"
           }
         }
       }
@@ -561,7 +605,9 @@
       "en": "Pulverization Set",
       "jp": "粉砕セット",
       "kr": "분쇄 세트",
-      "zh": "粉碎套装"
+      "zh": "粉碎套装",
+      "fr": "Pulverization Ensemble",
+      "es": "Conjunto de Pulverización"
     },
     "icon": "TI_Icon_Set_Enchant_18",
     "tiers": [
@@ -579,7 +625,9 @@
             "en": "Increases damage dealt against targets inflicted with Break by 35%",
             "jp": "ブレイク状態の対象に与える\\nダメージが+35％UPする。",
             "kr": "브레이크 상태의 대상에게 입히는 피해 +35%",
-            "zh": "对处于力竭状态的目标造成的伤害+35%"
+            "zh": "对处于力竭状态的目标造成的伤害+35%",
+            "fr": "Accroît les DGT infligés aux cibles infligées par Break de 35% par Break.",
+            "es": "Aumenta el daño infligido a los objetivos con Ruptura en un 35%"
           }
         },
         "4p": {
@@ -595,7 +643,9 @@
             "en": "Increases damage dealt against targets inflicted with Break by 25%",
             "jp": "ブレイク状態の対象に与える\\nダメージが+25％UPする。",
             "kr": "브레이크 상태의 대상에게 입히는 피해 +25%",
-            "zh": "对处于力竭状态的目标造成的伤害+25%"
+            "zh": "对处于力竭状态的目标造成的伤害+25%",
+            "fr": "Accroît les DGT infligés à des cibles infligées par Break par 25%",
+            "es": "Sube el daño infligido a los objetivos con estado de Ruptura en un 25%"
           }
         }
       },
@@ -613,7 +663,9 @@
             "en": "Increases damage dealt against targets inflicted with Break by 70%",
             "jp": "ブレイク状態の対象に\\n与えるダメージが+70％UPする。",
             "kr": "브레이크 상태의 대상에게 입히는 피해 +70%",
-            "zh": "对处于力竭状态的目标造成的伤害+70%"
+            "zh": "对处于力竭状态的目标造成的伤害+70%",
+            "fr": "Accroît les DGT infligés à des cibles infligées avec Break de 70% par Break.",
+            "es": "Aumenta un 70% el daño infligido a objetivos con Ruptura"
           }
         },
         "4p": {
@@ -629,7 +681,9 @@
             "en": "Increases damage dealt against targets inflicted with Break by 50%",
             "jp": "ブレイク状態の対象に与える\\nダメージが+50％UPする。",
             "kr": "브레이크 상태의 대상에게 입히는 피해 +50%",
-            "zh": "对处于力竭状态的目标造成的伤害+50%"
+            "zh": "对处于力竭状态的目标造成的伤害+50%",
+            "fr": "Accroît les DGT infligés aux cibles infligées par Break de 50%",
+            "es": "Sube el daño infligido a los objetivos con estado de Ruptura en un 50%"
           }
         }
       }
@@ -640,7 +694,9 @@
       "en": "Immunity Set",
       "jp": "免疫セット",
       "kr": "면역 세트",
-      "zh": "免疫套装"
+      "zh": "免疫套装",
+      "fr": "immunité Ensemble",
+      "es": "Conjunto de Inmunidad"
     },
     "icon": "TI_Icon_Set_Enchant_19",
     "tiers": [
@@ -658,7 +714,9 @@
             "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
             "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
             "kr": "전투 시작 후 1턴간 약화 효과 면역",
-            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合",
+            "fr": "Gain immunité to Debuffs durant 1 tour at the start of battle",
+            "es": "Gana Inmunidad Debuffs 1 turno inicio batalla"
           }
         },
         "4p": null
@@ -677,7 +735,9 @@
             "en": "Gain Immunity to Debuffs for 1 turn at the start of battle",
             "jp": "戦闘開始後、弱体効果免疫を1ターン間付与する。",
             "kr": "전투 시작 후 1턴간 약화 효과 면역",
-            "zh": "开始战斗后，对弱化效果免疫，持续1回合"
+            "zh": "开始战斗后，对弱化效果免疫，持续1回合",
+            "fr": "Gain immunité to Debuffs durant 1 tour at the start of battle",
+            "es": "Gana Inmunidad Debuffs 1 turno inicio batalla"
           }
         },
         "4p": {
@@ -693,7 +753,9 @@
             "en": "Permanently reduces damage taken by 30% (Irremovable)",
             "jp": "常に受けるダメージが\\n30%DOWNする。(解除不可)",
             "kr": "상시 피해 감소 +30% (해제 불가)",
-            "zh": "常驻伤害减免+30%(无法解除)"
+            "zh": "常驻伤害减免+30%(无法解除)",
+            "fr": "Réduira définitivement les DGT pris de 30% (Irremovible) (Irremovible)",
+            "es": "Reduce permanentemente el daño recibido en un 30% (Irremovible)"
           }
         }
       }
@@ -704,7 +766,9 @@
       "en": "Swiftness Set",
       "jp": "機敏セット",
       "kr": "기민 세트",
-      "zh": "敏捷套装"
+      "zh": "敏捷套装",
+      "fr": "Swiftness Ensemble",
+      "es": "Set Agilidad"
     },
     "icon": "TI_Icon_Set_Enchant_20",
     "tiers": [
@@ -723,7 +787,9 @@
             "en": "Increases Speed proportional to missing Health",
             "jp": "自分の残りHPが低いほど、スピードがUPする。",
             "kr": "잃은 체력 비례 속도 증가",
-            "zh": "根据损失的生命值等比提升速度"
+            "zh": "根据损失的生命值等比提升速度",
+            "fr": "Hausse VIT proportionnelle à PV manquante.",
+            "es": "Aumenta Velocidad proporcional a Vida faltante"
           }
         },
         "4p": null
@@ -743,7 +809,9 @@
             "en": "Increases Speed proportional to missing Health (Maximum efficiency at 50% Health)",
             "jp": "自分の残りHPが低いほど、\\nスピードがUPする。\\n(残りHP50%時に効果が最大になる)",
             "kr": "잃은 체력 비례 속도 증가 (체력 50%에서 최대 효율)",
-            "zh": "根据已损失生命值提升速度(生命值50%时达到最大效率)"
+            "zh": "根据已损失生命值提升速度(生命值50%时达到最大效率)",
+            "fr": "Accroît la vitesse proportionnelle à PV manquante (efficacité maximale à 50% de PV)",
+            "es": "Sube la VEL proporcionalmente a la Vida perdida (Eficiencia máxima al 50% de Vida)"
           }
         },
         "4p": null
@@ -755,7 +823,9 @@
       "en": "Weakness Set",
       "jp": "弱点セット",
       "kr": "약점 세트",
-      "zh": "弱点套装"
+      "zh": "弱点套装",
+      "fr": "Weakness Ensemble",
+      "es": "Conjunto de Debilidad"
     },
     "icon": "TI_Icon_Set_Enchant_21",
     "tiers": [
@@ -773,7 +843,9 @@
             "en": "Increases damage dealt against targets inflicted with a debuff by 25%",
             "jp": "弱体効果がある対象に与える\\nダメージが+25%UPする。",
             "kr": "약화 효과를 지닌 대상에게 입히는 피해 +25%",
-            "zh": "对附带弱化效果的目标造成的伤害+25%"
+            "zh": "对附带弱化效果的目标造成的伤害+25%",
+            "fr": "Accroît de 25% les DGT infligés aux cibles infligées à la débauche de.",
+            "es": "Sube el daño infligido a objetivos con un efecto de debilitamiento en un +25%."
           }
         },
         "4p": null
@@ -792,7 +864,9 @@
             "en": "Increases damage dealt against targets inflicted with a debuff by 35%",
             "jp": "弱体効果がある対象に与える\\nダメージが+35%UPする。",
             "kr": "약화 효과를 지닌 대상에게 입히는 피해 +35%",
-            "zh": "对附带弱化效果的目标造成的伤害+35%"
+            "zh": "对附带弱化效果的目标造成的伤害+35%",
+            "fr": "Accroît de 35% les DGT infligés à des cibles infligées avec un débouffement de par les victimes.",
+            "es": "Sube el daño infligido a objetivos con un efecto de debilitamiento en un +35%."
           }
         },
         "4p": null
@@ -804,7 +878,9 @@
       "en": "Augmentation Set",
       "jp": "増強セット",
       "kr": "증강 세트",
-      "zh": "加强套装"
+      "zh": "加强套装",
+      "fr": "Hausse Ensemble",
+      "es": "Set de Aumento"
     },
     "icon": "TI_Icon_Set_Enchant_22",
     "tiers": [
@@ -822,7 +898,9 @@
             "en": "Increases damage dealt while granted a buff by 20%",
             "jp": "自分に強化効果がある場合、\\n与えるダメージが+20%UPする。",
             "kr": "강화 효과를 지닌 상태에서 입히는 피해 +20%",
-            "zh": "附带强化效果时造成的伤害+20%"
+            "zh": "附带强化效果时造成的伤害+20%",
+            "fr": "Accroît de 20% le dommage causé durant qu'il est accordé un buff de.",
+            "es": "Sube el daño infligido mientras tienes un buff en un +20%."
           }
         },
         "4p": null
@@ -841,7 +919,9 @@
             "en": "Increases damage dealt while granted a buff by 30%",
             "jp": "自分に強化効果がある場合、\\n与えるダメージが+30%UPする。",
             "kr": "강화 효과를 지닌 상태에서 입히는 피해 +30%",
-            "zh": "在附带强化效果状态下造成的伤害+30%"
+            "zh": "在附带强化效果状态下造成的伤害+30%",
+            "fr": "Accroît les DGT infligés durant qu'on accorde un buff de 30% buff de",
+            "es": "Sube un 30% el daño infligido mientras se tiene una mejora"
           }
         },
         "4p": null

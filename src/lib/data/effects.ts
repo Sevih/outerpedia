@@ -9,6 +9,7 @@
 import { loadCuratedJson } from '@/lib/data/disk';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Effect, EffectCurated, Glossaries, LangDict } from '@contracts';
+import { emptyDict } from '@datagen/lib/lang';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -144,7 +145,7 @@ function merge(effect: Effect, c?: EffectCurated): MergedEffect {
   };
 }
 
-const EMPTY_DICT: LangDict = { en: '', jp: '', kr: '', zh: '' };
+const EMPTY_DICT: LangDict = emptyDict();
 
 /** Entrée curée AUTONOME (création : mécanique sans texte en jeu) → effet. */
 function fromCreation(id: string, c: EffectCurated): MergedEffect {

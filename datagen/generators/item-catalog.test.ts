@@ -15,6 +15,7 @@
  * La suite tourne SANS `.gamedata` (contrainte CI).
  */
 import { describe, expect, it } from 'vitest';
+import { emptyDict } from '../lib/lang';
 import itemsData from '../../data/generated/items.json';
 import { applyCurated, catalogCompare, COSTUME_PREFIX, type CatalogEntry } from './item-catalog';
 
@@ -45,7 +46,7 @@ describe('catalogCompare — ordre canonique du catalogue', () => {
 describe('applyCurated — override curé sur une entrée', () => {
   const base: CatalogEntry = {
     kind: 'item',
-    name: { en: 'Base', jp: '', kr: '', zh: '' },
+    name: { ...emptyDict(), en: 'Base' },
     icon: 'ic_base',
     grade: 'normal',
     type: 'material',
@@ -58,7 +59,7 @@ describe('applyCurated — override curé sur une entrée', () => {
 
   it('remplace nom/desc/icône, garde le reste', () => {
     const out = applyCurated(base, {
-      name: { en: 'Cured', jp: '', kr: '', zh: '' },
+      name: { ...emptyDict(), en: 'Cured' },
       icon: 'ic_cured',
     });
     expect(out.name.en).toBe('Cured');

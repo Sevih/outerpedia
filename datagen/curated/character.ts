@@ -7,6 +7,7 @@
  * régénération ; éditée localement via l'admin ; fusionnée à la lecture.
  */
 import type { Schema } from '../extractor/core/validate';
+import type { GameLang } from '../lib/lang';
 
 /** Rôle de combat (classification humaine). */
 export type CuratedRole = 'dps' | 'support' | 'sustain';
@@ -18,8 +19,14 @@ export interface SkillPriority {
   ultimate?: number;
 }
 
-/** Texte curé localisé (langues de jeu + fr communautaire), partiel. */
-export type LocalizedText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
+/**
+ * Texte curé localisé, PARTIEL : on ne stocke que les langues rédigées, le
+ * rendu replie sur `en` (`lRec`). Clés = les langues du SITE ; elles coïncident
+ * avec `GameLang` depuis que le `fr` est officiel (23/09/2026). Une langue
+ * communautaire (UI traduite sans donnée de jeu) se rajouterait ici en union
+ * littérale, comme l'était `'fr'` avant cette date.
+ */
+export type LocalizedText = Partial<Record<GameLang, string>>;
 
 /** Référence vidéo curée (riche). `title`/`author`/`uploadDate` sont fetchés
  * depuis YouTube ; la miniature se dérive de l'id (pas stockée). */

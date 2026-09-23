@@ -6,7 +6,9 @@
         "en": "Mirsha Continent",
         "jp": "メルシャ大陸",
         "kr": "메르샤 대륙",
-        "zh": "弥乐沙大陆"
+        "zh": "弥乐沙大陆",
+        "fr": "Continent Mirsha",
+        "es": "Conti. de Mirsha"
       },
       "dungeons": ["55000001", "55000002", "55000003"],
       "monsters": ["4086037", "4086038", "4086039"],
@@ -22,7 +24,9 @@
         "en": "Mirsha Continent",
         "jp": "メルシャ大陸",
         "kr": "메르샤 대륙",
-        "zh": "弥乐沙大陆"
+        "zh": "弥乐沙大陆",
+        "fr": "Continent Mirsha",
+        "es": "Conti. de Mirsha"
       },
       "dungeons": ["55000001", "55000002", "55000003"],
       "monsters": ["4086037", "4086038", "4086039"],
@@ -38,7 +42,9 @@
         "en": "Mirsha Continent",
         "jp": "メルシャ大陸",
         "kr": "메르샤 대륙",
-        "zh": "弥乐沙大陆"
+        "zh": "弥乐沙大陆",
+        "fr": "Continent Mirsha",
+        "es": "Conti. de Mirsha"
       },
       "dungeons": ["55100001", "55100002", "55100003"],
       "monsters": ["4086007", "4086008", "4086009"],
@@ -54,7 +60,9 @@
         "en": "Ragnakeus",
         "jp": "ラグナケウス",
         "kr": "라그나케우스",
-        "zh": "拉格纳修斯"
+        "zh": "拉格纳修斯",
+        "fr": "Ragnakeus",
+        "es": "Ragnakeus"
       },
       "dungeons": ["55000001", "55000002", "55000003"],
       "monsters": ["4086037", "4086038", "4086039"],
@@ -70,7 +78,9 @@
         "en": "World Boss Vault Venion",
         "jp": "ワールドボス\\nバルトベニオン",
         "kr": "월드보스 발트베니온",
-        "zh": "世界首领瓦尔特贝尼翁"
+        "zh": "世界首领瓦尔特贝尼翁",
+        "fr": "Boss mondial Vault Venion",
+        "es": "Alcance de Jefe Mundial Vault Venion"
       },
       "dungeons": ["55200001", "55200002", "55200003"],
       "monsters": ["4086013", "4086015", "4086017"],
@@ -86,7 +96,9 @@
         "en": "World Boss Primordial Sentinel",
         "jp": "ワールドボス 太古の番兵",
         "kr": "월드보스 태고의 파수병",
-        "zh": "世界首领远古哨兵"
+        "zh": "世界首领远古哨兵",
+        "fr": "Boss mondial Sentinelle primo.",
+        "es": "Jefe Mundial Centinela Ancestral"
       },
       "dungeons": ["55100001", "55100002", "55100003"],
       "monsters": ["4086007", "4086008", "4086009"],
@@ -102,7 +114,9 @@
         "en": "Ragnakeus",
         "jp": "ラグナケウス",
         "kr": "라그나케우스",
-        "zh": "拉格纳修斯"
+        "zh": "拉格纳修斯",
+        "fr": "Ragnakeus",
+        "es": "Ragnakeus"
       },
       "dungeons": ["55000001", "55000002", "55000003"],
       "monsters": ["4086037", "4086038", "4086039"],
@@ -118,7 +132,9 @@
         "en": "World Boss Dahlia",
         "jp": "ワールドボス ダリア",
         "kr": "월드보스 달리아",
-        "zh": "世界首领达利娅"
+        "zh": "世界首领达利娅",
+        "fr": "Dahlia, la boss mond.",
+        "es": "Jefe Mundial Dahlia"
       },
       "dungeons": ["55300001", "55300002", "55300003"],
       "monsters": ["4086019", "4086020", "4086021"],
@@ -134,7 +150,9 @@
         "en": "World Boss Drakhan",
         "jp": "ワールドボスドレイカ―ン",
         "kr": "월드 보스 드레이칸",
-        "zh": "世界首领德雷坎"
+        "zh": "世界首领德雷坎",
+        "fr": "Boss mondial Drakhan",
+        "es": "Jefe Mundial Drakhan"
       },
       "dungeons": ["55500001", "55500002", "55500003"],
       "monsters": ["4086031", "4086032", "4086033"],
@@ -150,7 +168,9 @@
         "en": "World Boss Harshna",
         "jp": "ワールドボス ハルシュナ",
         "kr": "월드 보스 하르슈나",
-        "zh": "世界首领赫索纳"
+        "zh": "世界首领赫索纳",
+        "fr": "Harshna, le boss mondial",
+        "es": "Jefe Mundial Harshna"
       },
       "dungeons": ["55600001", "55600002", "55600003", "55600004"],
       "monsters": ["4086025", "4086026", "4086027", "4086029"],
@@ -166,7 +186,9 @@
         "en": "World Boss Vault Venion",
         "jp": "ワールドボス\\nバルトベニオン",
         "kr": "월드보스 발트베니온",
-        "zh": "世界首领瓦尔特贝尼翁"
+        "zh": "世界首领瓦尔特贝尼翁",
+        "fr": "Boss mondial Vault Venion",
+        "es": "Alcance de Jefe Mundial Vault Venion"
       },
       "dungeons": ["55200101", "55200102", "55200103", "55200104"],
       "monsters": ["4086013", "4086014", "4086015", "4086017"],
@@ -182,7 +204,9 @@
         "en": "World Boss Primordial Sentinel",
         "jp": "ワールドボス 太古の番兵",
         "kr": "월드보스 태고의 파수병",
-        "zh": "世界首领远古哨兵"
+        "zh": "世界首领远古哨兵",
+        "fr": "Boss mondial Sentinelle primo.",
+        "es": "Jefe Mundial Centinela Ancestral"
       },
       "dungeons": ["55100001", "55100002", "55100003", "55100004"],
       "monsters": ["4086007", "4086008", "4086009", "4086011"],
@@ -198,7 +222,9 @@
         "en": "Ragnakeus",
         "jp": "ラグナケウス",
         "kr": "라그나케우스",
-        "zh": "拉格纳修斯"
+        "zh": "拉格纳修斯",
+        "fr": "Ragnakeus",
+        "es": "Ragnakeus"
       },
       "dungeons": ["55000001", "55000002", "55000003", "55000004"],
       "monsters": ["4086037", "4086038", "4086039", "4086041"],
@@ -214,7 +240,9 @@
         "en": "World Boss Drakhan",
         "jp": "ワールドボスドレイカ―ン",
         "kr": "월드 보스 드레이칸",
-        "zh": "世界首领德雷坎"
+        "zh": "世界首领德雷坎",
+        "fr": "Boss mondial Drakhan",
+        "es": "Jefe Mundial Drakhan"
       },
       "dungeons": ["55500001", "55500002", "55500003", "55500004"],
       "monsters": ["4086031", "4086032", "4086033", "4086035"],
@@ -230,7 +258,9 @@
         "en": "World Boss Vault Venion",
         "jp": "ワールドボス\\nバルトベニオン",
         "kr": "월드보스 발트베니온",
-        "zh": "世界首领瓦尔特贝尼翁"
+        "zh": "世界首领瓦尔特贝尼翁",
+        "fr": "Boss mondial Vault Venion",
+        "es": "Alcance de Jefe Mundial Vault Venion"
       },
       "dungeons": ["55200101", "55200102", "55200103", "55200104"],
       "monsters": ["4086013", "4086014", "4086015", "4086017"],
@@ -246,7 +276,9 @@
         "en": "World Boss Dahlia",
         "jp": "ワールドボス ダリア",
         "kr": "월드보스 달리아",
-        "zh": "世界首领达利娅"
+        "zh": "世界首领达利娅",
+        "fr": "Dahlia, la boss mond.",
+        "es": "Jefe Mundial Dahlia"
       },
       "dungeons": ["55300001", "55300002", "55300003", "55300004"],
       "monsters": ["4086019", "4086020", "4086021", "4086023"],
@@ -262,7 +294,9 @@
         "en": "World Boss Harshna",
         "jp": "ワールドボス ハルシュナ",
         "kr": "월드 보스 하르슈나",
-        "zh": "世界首领赫索纳"
+        "zh": "世界首领赫索纳",
+        "fr": "Harshna, le boss mondial",
+        "es": "Jefe Mundial Harshna"
       },
       "dungeons": ["55600001", "55600002", "55600003", "55600004"],
       "monsters": ["4086025", "4086026", "4086027", "4086029"],
@@ -278,7 +312,9 @@
         "en": "World Boss Primordial Sentinel",
         "jp": "ワールドボス 太古の番兵",
         "kr": "월드보스 태고의 파수병",
-        "zh": "世界首领远古哨兵"
+        "zh": "世界首领远古哨兵",
+        "fr": "Boss mondial Sentinelle primo.",
+        "es": "Jefe Mundial Centinela Ancestral"
       },
       "dungeons": ["55100001", "55100002", "55100003", "55100004"],
       "monsters": ["4086007", "4086008", "4086009", "4086011"],
@@ -294,7 +330,9 @@
         "en": "Ragnakeus",
         "jp": "ラグナケウス",
         "kr": "라그나케우스",
-        "zh": "拉格纳修斯"
+        "zh": "拉格纳修斯",
+        "fr": "Ragnakeus",
+        "es": "Ragnakeus"
       },
       "dungeons": ["55000001", "55000002", "55000003", "55000004"],
       "monsters": ["4086037", "4086038", "4086039", "4086041"],
@@ -310,7 +348,9 @@
         "en": "World Boss Drakhan",
         "jp": "ワールドボスドレイカ―ン",
         "kr": "월드 보스 드레이칸",
-        "zh": "世界首领德雷坎"
+        "zh": "世界首领德雷坎",
+        "fr": "Boss mondial Drakhan",
+        "es": "Jefe Mundial Drakhan"
       },
       "dungeons": ["55500001", "55500002", "55500003", "55500004"],
       "monsters": ["4086031", "4086032", "4086033", "4086035"],
@@ -326,7 +366,9 @@
         "en": "World Boss Vault Venion",
         "jp": "ワールドボス\\nバルトベニオン",
         "kr": "월드보스 발트베니온",
-        "zh": "世界首领瓦尔特贝尼翁"
+        "zh": "世界首领瓦尔特贝尼翁",
+        "fr": "Boss mondial Vault Venion",
+        "es": "Alcance de Jefe Mundial Vault Venion"
       },
       "dungeons": ["55200101", "55200102", "55200103", "55200104"],
       "monsters": ["4086013", "4086014", "4086015", "4086017"],
@@ -342,7 +384,9 @@
         "en": "World Boss Primordial Sentinel",
         "jp": "ワールドボス 太古の番兵",
         "kr": "월드보스 태고의 파수병",
-        "zh": "世界首领远古哨兵"
+        "zh": "世界首领远古哨兵",
+        "fr": "Boss mondial Sentinelle primo.",
+        "es": "Jefe Mundial Centinela Ancestral"
       },
       "dungeons": ["55100001", "55100002", "55100003", "55100004"],
       "monsters": ["4086007", "4086008", "4086009", "4086011"],
@@ -358,7 +402,9 @@
         "en": "World Boss Harshna",
         "jp": "ワールドボス ハルシュナ",
         "kr": "월드 보스 하르슈나",
-        "zh": "世界首领赫索纳"
+        "zh": "世界首领赫索纳",
+        "fr": "Harshna, le boss mondial",
+        "es": "Jefe Mundial Harshna"
       },
       "dungeons": ["55600001", "55600002", "55600003", "55600004"],
       "monsters": ["4086025", "4086026", "4086027", "4086029"],
@@ -374,7 +420,9 @@
         "en": "World Boss Dahlia",
         "jp": "ワールドボス ダリア",
         "kr": "월드보스 달리아",
-        "zh": "世界首领达利娅"
+        "zh": "世界首领达利娅",
+        "fr": "Dahlia, la boss mond.",
+        "es": "Jefe Mundial Dahlia"
       },
       "dungeons": ["55300001", "55300002", "55300003", "55300004"],
       "monsters": ["4086019", "4086020", "4086021", "4086023"],
@@ -390,7 +438,9 @@
         "en": "Ragnakeus",
         "jp": "ラグナケウス",
         "kr": "라그나케우스",
-        "zh": "拉格纳修斯"
+        "zh": "拉格纳修斯",
+        "fr": "Ragnakeus",
+        "es": "Ragnakeus"
       },
       "dungeons": ["55000001", "55000002", "55000003", "55000004"],
       "monsters": ["4086037", "4086038", "4086039", "4086041"],
@@ -408,7 +458,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -432,7 +484,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -456,7 +510,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -491,7 +547,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -515,7 +573,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -539,7 +599,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -574,7 +636,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -598,7 +662,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -622,7 +688,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -657,7 +725,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -681,7 +751,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -705,7 +777,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -740,7 +814,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -764,7 +840,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -799,7 +877,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -823,7 +903,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -847,7 +929,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -871,7 +955,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -906,7 +992,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -930,7 +1018,9 @@
         "en": "The Frost Legion",
         "jp": "雪国の軍勢",
         "kr": "설국의 군세",
-        "zh": "雪国的军势"
+        "zh": "雪国的军势",
+        "fr": "La Légion de Givre",
+        "es": "Legión Helada"
       },
       "bosses": [
         {
@@ -980,7 +1070,9 @@
         "en": "The Frost Legion",
         "jp": "雪国の軍勢",
         "kr": "설국의 군세",
-        "zh": "雪国的军势"
+        "zh": "雪国的军势",
+        "fr": "La Légion de Givre",
+        "es": "Legión Helada"
       },
       "bosses": [
         {
@@ -1030,7 +1122,9 @@
         "en": "Dignity of the Golden Kingdom",
         "jp": "黄金なる王国の威容",
         "kr": "황금 왕국의 위용",
-        "zh": "黄金王国的威仪"
+        "zh": "黄金王国的威仪",
+        "fr": "Dignité du Royaume d'Or",
+        "es": "Dignidad del Reino Dorado"
       },
       "bosses": [
         {
@@ -1080,7 +1174,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -1133,7 +1229,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -1183,7 +1281,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -1233,7 +1333,9 @@
         "en": "The Frost Legion",
         "jp": "雪国の軍勢",
         "kr": "설국의 군세",
-        "zh": "雪国的军势"
+        "zh": "雪国的军势",
+        "fr": "La Légion de Givre",
+        "es": "Legión Helada"
       },
       "bosses": [
         {
@@ -1283,7 +1385,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -1336,7 +1440,9 @@
         "en": "Dignity of the Golden Kingdom",
         "jp": "黄金なる王国の威容",
         "kr": "황금 왕국의 위용",
-        "zh": "黄金王国的威仪"
+        "zh": "黄金王国的威仪",
+        "fr": "Dignité du Royaume d'Or",
+        "es": "Dignidad del Reino Dorado"
       },
       "bosses": [
         {
@@ -1386,7 +1492,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -1436,7 +1544,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -1486,7 +1596,9 @@
         "en": "The Frost Legion",
         "jp": "雪国の軍勢",
         "kr": "설국의 군세",
-        "zh": "雪国的军势"
+        "zh": "雪国的军势",
+        "fr": "La Légion de Givre",
+        "es": "Legión Helada"
       },
       "bosses": [
         {
@@ -1536,7 +1648,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -1589,7 +1703,9 @@
         "en": "Dignity of the Golden Kingdom",
         "jp": "黄金なる王国の威容",
         "kr": "황금 왕국의 위용",
-        "zh": "黄金王国的威仪"
+        "zh": "黄金王国的威仪",
+        "fr": "Dignité du Royaume d'Or",
+        "es": "Dignidad del Reino Dorado"
       },
       "bosses": [
         {
@@ -1639,7 +1755,9 @@
         "en": "Automaton",
         "jp": "【オートマタ】",
         "kr": "[오토마톤]",
-        "zh": "【机械人偶】"
+        "zh": "【机械人偶】",
+        "fr": "Automate",
+        "es": "[Automaton]"
       },
       "bosses": [
         {
@@ -1689,7 +1807,9 @@
         "en": "The Madman's Laboratory",
         "jp": "【狂人の研究室】",
         "kr": "[광인의 연구실]",
-        "zh": "【狂人研究室】"
+        "zh": "【狂人研究室】",
+        "fr": "Le laboratoire du fou",
+        "es": "El laboratorio del loco"
       },
       "bosses": [
         {
@@ -1739,7 +1859,9 @@
         "en": "Prevent World Alteration",
         "jp": "【世界変容の阻止】",
         "kr": "[세계변용 저지]",
-        "zh": "【阻止世界之变】"
+        "zh": "【阻止世界之变】",
+        "fr": "Prév. l'altération de monde",
+        "es": "Evita Alteración Mundial"
       },
       "bosses": [
         {
@@ -1792,7 +1914,9 @@
         "en": "Dignity of the Golden Kingdom",
         "jp": "黄金なる王国の威容",
         "kr": "황금 왕국의 위용",
-        "zh": "黄金王国的威仪"
+        "zh": "黄金王国的威仪",
+        "fr": "Dignité du Royaume d'Or",
+        "es": "Dignidad del Reino Dorado"
       },
       "bosses": [
         {
@@ -1842,7 +1966,9 @@
         "en": "The Frost Legion",
         "jp": "雪国の軍勢",
         "kr": "설국의 군세",
-        "zh": "雪国的军势"
+        "zh": "雪国的军势",
+        "fr": "La Légion de Givre",
+        "es": "Legión Helada"
       },
       "bosses": [
         {
@@ -1894,7 +2020,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -1909,7 +2037,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -1924,7 +2054,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -1939,7 +2071,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -1954,7 +2088,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],
@@ -1969,7 +2105,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -1984,7 +2122,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -1999,7 +2139,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -2014,7 +2156,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -2029,7 +2173,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],
@@ -2044,7 +2190,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -2059,7 +2207,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -2074,7 +2224,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -2089,7 +2241,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -2104,7 +2258,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],
@@ -2119,7 +2275,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -2134,7 +2292,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -2149,7 +2309,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -2164,7 +2326,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -2179,7 +2343,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],
@@ -2194,7 +2360,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -2209,7 +2377,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -2224,7 +2394,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -2239,7 +2411,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -2254,7 +2428,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],
@@ -2269,7 +2445,9 @@
         "en": "Defeat the Annihilator",
         "jp": "抹殺者討伐",
         "kr": "말살자 처치",
-        "zh": "击杀歼灭者"
+        "zh": "击杀歼灭者",
+        "fr": "Vaincre l'Annihilateur",
+        "es": "Derrota al Aniquilador"
       },
       "dungeons": ["90100000", "90100100", "90100200"],
       "monsters": ["4318042", "4318052", "4318062"],
@@ -2284,7 +2462,9 @@
         "en": "Defeat Deep Sea Guardian",
         "jp": "深海のボス討伐",
         "kr": "심해 가디언 처치",
-        "zh": "击杀深海守护者"
+        "zh": "击杀深海守护者",
+        "fr": "Vaincre le Gardien de Profondeurs",
+        "es": "Derrota al Guardián de Mar Profundo"
       },
       "dungeons": ["90200000", "90200100", "90200200"],
       "monsters": ["4134045", "4134055", "4134065"],
@@ -2299,7 +2479,9 @@
         "en": "Defeat Shichifuja",
         "jp": "七歩蛇討伐",
         "kr": "시치후샤 처치",
-        "zh": "击杀七步蛇困难"
+        "zh": "击杀七步蛇困难",
+        "fr": "Vaincre Shichifuja",
+        "es": "Vence a Shichifuja"
       },
       "dungeons": ["90300000", "90300100", "90300200"],
       "monsters": ["4634064", "4634074", "4634084"],
@@ -2314,7 +2496,9 @@
         "en": "Defeat Prototype EX-78",
         "jp": "試作機：EX-78討伐",
         "kr": "EX-78 시범기 처치",
-        "zh": "击杀EX-78示范机"
+        "zh": "击杀EX-78示范机",
+        "fr": "Défaite de prot. EX-78",
+        "es": "Derrota al Prototipo EX-78"
       },
       "dungeons": ["90400000", "90400100", "90400200"],
       "monsters": ["4548161", "4548171", "4548181"],
@@ -2329,7 +2513,9 @@
         "en": "Defeat Knight of Hope",
         "jp": "光明の騎士討伐",
         "kr": "광명의 기사 처치",
-        "zh": "击杀光明骑士"
+        "zh": "击杀光明骑士",
+        "fr": "Vaincre le Chevalier Espoir",
+        "es": "Derrota al Caballero de Esperanza"
       },
       "dungeons": ["90500000", "90500100", "90500200"],
       "monsters": ["4176132", "4176142", "4176152"],

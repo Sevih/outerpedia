@@ -32,7 +32,7 @@ import breakLimitsData from '../../data/generated/equipment/breakLimits.json';
 import setsData from '../../data/generated/equipment/sets.json';
 import charactersData from '../../data/generated/characters.json';
 import type { Row } from '../lib/tables';
-import type { LangDict } from '../lib/lang';
+import { emptyDict, type LangDict } from '../lib/lang';
 import {
   conditionalLabel,
   optMode,
@@ -89,7 +89,7 @@ describe('usedValueKeys — placeholders présents dans un template', () => {
 
 describe('conditionalLabel — libellé de buff conditionnel par élément', () => {
   const sys = (o: Record<string, string>): Map<string, LangDict> =>
-    new Map(Object.entries(o).map(([k, en]) => [k, { en, jp: '', kr: '', zh: '' }]));
+    new Map(Object.entries(o).map(([k, en]) => [k, { ...emptyDict(), en }]));
 
   it('résout SYS_<Type>_<scope>_<élément> et aplatit les retours ligne', () => {
     const system = sys({ SYS_BT_DMG_REDUCE_TARGET_FIRE: 'Reduced DMG\\nTaken vs Fire' });

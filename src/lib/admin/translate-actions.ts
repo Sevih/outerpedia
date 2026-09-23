@@ -32,7 +32,7 @@ const PROTECT = /\{[^}]+\}|<\/?color[^>]*>/gi;
 
 // --- DeepL ---------------------------------------------------------------------
 
-const DEEPL_LANG: Record<Target, string> = { jp: 'JA', kr: 'KO', zh: 'ZH', fr: 'FR' };
+const DEEPL_LANG: Record<Target, string> = { jp: 'JA', kr: 'KO', zh: 'ZH', fr: 'FR', es: 'ES' };
 
 class DeeplQuotaError extends Error {}
 
@@ -111,6 +111,7 @@ const LANG_NAMES: Record<Target, string> = {
   kr: '한국어 (Korean)',
   zh: '中文 (Simplified Chinese)',
   fr: 'Français (French)',
+  es: 'Español (Spanish)',
 };
 
 /** Masque les fragments protégés par des marqueurs `⟦n⟧` (préservés par le modèle). */

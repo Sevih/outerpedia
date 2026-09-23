@@ -10,10 +10,10 @@
  * les libellés d'enum vivent dans des glossaires (slug stable) ; les stats sont
  * des NOMBRES BRUTS, l'échelle (plat/%) vit dans `statScales` (source unique).
  */
-import type { LangDict } from '../../lib/lang';
+import { DEFAULT_LANG, GAME_LANGS, type GameLang, type LangDict } from '../../lib/lang';
 import { resolveClass } from '../../lib/class';
 import { expandBuffIds, loadBuffGroups, loadBuffIndex } from '../../lib/buff';
-import { loadTextIndex, resolveText } from '../../lib/text';
+import { hasText, loadTextIndex, resolveText } from '../../lib/text';
 import { bool, loadTable, num, splitCsv, type Row } from '../../lib/tables';
 import { buildImageIndex } from '../../assets/source';
 import { costumeCore } from '../../generators/costumes';
@@ -398,22 +398,23 @@ function resolveVoiceActor(
   keyBase: string | undefined,
 ): LangDict | null {
   if (!keyBase) return null;
-  let va: LangDict = {
-    en: cleanVoiceActor(resolveText(tchar, `${keyBase}_en`).en),
-    jp: cleanVoiceActor(resolveText(tchar, `${keyBase}_jp`).jp),
-    kr: cleanVoiceActor(resolveText(tchar, `${keyBase}_kr`).kr),
-    zh: cleanVoiceActor(resolveText(tchar, `${keyBase}_zh`).zh),
+  // Nouveau format : une clé PAR DOUBLAGE (`_en`, `_jp`, `_kr` — il n'y a jamais
+  // eu de `_zh`, et le 23/09/2026 n'a apporté ni `_fr` ni `_es`), chaque ligne
+  // traduite dans TOUTES les colonnes. Une langue de site sans doublage propre
+  // affiche le doubleur ANGLAIS lu dans sa colonne (« VA. Alejandro Saab » en
+  // français), sauf si l'ancienne clé unique dit « 0 » pour elle — la sentinelle
+  // « pas de doublage » du jeu, que le zh porte : il reste vide, comme avant.
+  const variant = (l: GameLang) => resolveText(tchar, `${keyBase}_${l}`);
+  const enDub = variant(DEFAULT_LANG);
+  const legacy = resolveText(tchar, keyBase);
+  const pick = (l: GameLang): string => {
+    const own = variant(l)[l];
+    if (own) return own;
+    if (legacy[l] === '0') return '';
+    return enDub[l] || legacy[l];
   };
-  if (!(va.en || va.jp || va.kr || va.zh)) {
-    const cv = resolveText(tchar, keyBase);
-    va = {
-      en: cleanVoiceActor(cv.en),
-      jp: cleanVoiceActor(cv.jp),
-      kr: cleanVoiceActor(cv.kr),
-      zh: cleanVoiceActor(cv.zh),
-    };
-  }
-  return va.en || va.jp || va.kr || va.zh ? va : null;
+  const va = Object.fromEntries(GAME_LANGS.map((l) => [l, cleanVoiceActor(pick(l))])) as LangDict;
+  return hasText(va) ? va : null;
 }
 
 /** Stats de l'écran principal du jeu : toujours émises, même nulles — un boss

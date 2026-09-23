@@ -3,6 +3,8 @@ import type { Route } from 'next';
 import { EffectCuratedEditor } from '@/components/admin/EffectCuratedEditor';
 import { getExtractedEffect, loadCuratedEffects } from '@/lib/data/effects';
 import { EffectIconTile } from '@/components/character/EffectChips';
+import { GAME_LANGS } from '@/lib/i18n/config';
+import { emptyDict } from '@datagen/lib/lang';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,7 +52,7 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
             </span>
           </div>
           <dl className="text-content-muted grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-4">
-            {(['en', 'jp', 'kr', 'zh'] as const).map((l) => (
+            {GAME_LANGS.map((l) => (
               <div key={l}>
                 <dt className="text-content-subtle text-xs uppercase">{l}</dt>
                 <dd>{eff.name[l] || '—'}</dd>
@@ -77,7 +79,7 @@ export default async function EditorEffectEdit({ params }: { params: Promise<{ i
 
       <EffectCuratedEditor
         id={id}
-        extractedName={eff?.name ?? { en: '', jp: '', kr: '', zh: '' }}
+        extractedName={eff?.name ?? emptyDict()}
         extractedIsDebuff={eff?.isDebuff}
         initial={initial}
         creation={isCreation}

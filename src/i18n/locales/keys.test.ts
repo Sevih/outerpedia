@@ -50,7 +50,7 @@ function sourceCorpus(): string {
 describe('locales — contrat des clés', () => {
   const enKeys = keysOf('en');
 
-  it('les 5 langues portent EXACTEMENT les mêmes clés', () => {
+  it('toutes les langues portent EXACTEMENT les mêmes clés', () => {
     const ref = new Set(enKeys);
     for (const lang of LANGS) {
       if (lang === 'en') continue;

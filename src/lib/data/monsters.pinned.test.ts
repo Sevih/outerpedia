@@ -18,9 +18,10 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { uniformDict } from '@datagen/lib/lang';
 import type { Monster, MonsterArchiveEntry, Skill } from '@contracts';
 
-const dict = (en: string) => ({ en, jp: en, kr: en, zh: en });
+const dict = (en: string) => uniformDict(en);
 const monster = (name: string, skills: string[]) =>
   ({ name: dict(name), skills, element: 'fire', icon: 'MT_X' }) as unknown as Monster;
 

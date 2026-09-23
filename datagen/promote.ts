@@ -31,6 +31,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node
 import { dirname, join, relative, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
 import { formatJson, writeTextAtomic } from './lib/json';
+import { GAME_LANGS, emptyDict } from './lib/lang';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
@@ -124,10 +125,36 @@ export function applyRetention(
     const entry = committed[k];
     merged[k] =
       entry && typeof entry === 'object' && !Array.isArray(entry)
-        ? { ...entry, retired: true }
+        ? { ...(completeLangDicts(entry) as Record<string, unknown>), retired: true }
         : entry;
   }
   return { merged, retained };
+}
+
+/**
+ * Une entité retenue a été produite par un datagen d'AVANT : ses dicts de
+ * langue portent les langues de l'époque. Quand le jeu en gagne (fr et es le
+ * 23/09/2026), le validé se met à mélanger deux formes de `LangDict` — le
+ * contrat n'en admet qu'une, et `tsc` refuse le JSON committé. On complète donc
+ * à VIDE les langues apparues depuis (le jeu ne parle plus de ces entités, il
+ * n'y a pas de texte à aller chercher) ; `lRec` replie un vide sur l'anglais.
+ *
+ * Reconnaissance d'un dict de langue : un objet dont les clés sont TOUTES des
+ * codes de `GAME_LANGS`, qui porte `en`, et dont les valeurs sont des chaînes —
+ * rien d'autre dans la donnée n'a cette forme. Récursif, sans liste de champs.
+ */
+export function completeLangDicts(v: unknown): unknown {
+  if (Array.isArray(v)) return v.map(completeLangDicts);
+  if (!v || typeof v !== 'object') return v;
+  const o = v as Record<string, unknown>;
+  const keys = Object.keys(o);
+  const isLangDict =
+    keys.length > 0 &&
+    'en' in o &&
+    keys.every((k) => (GAME_LANGS as readonly string[]).includes(k)) &&
+    keys.every((k) => typeof o[k] === 'string');
+  if (isLangDict) return { ...emptyDict(), ...o };
+  return Object.fromEntries(keys.map((k) => [k, completeLangDicts(o[k])]));
 }
 
 /**

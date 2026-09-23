@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import encountersData from '@data/generated/encounters.json';
 import type { DungeonRef } from '@contracts';
-import { makeT } from '@/i18n';
-import type { Lang } from '@/lib/i18n/config';
+import { makeT, type Messages } from '@/i18n';
+import { LANGS, type Lang } from '@/lib/i18n/config';
 import en from '@/i18n/locales/en';
 import jp from '@/i18n/locales/jp';
 import kr from '@/i18n/locales/kr';
 import zh from '@/i18n/locales/zh';
 import fr from '@/i18n/locales/fr';
+import es from '@/i18n/locales/es';
 import {
   difficultyLabel,
   encounterSpawnContexts,
@@ -22,11 +23,10 @@ import { monsterPanelStats, orderedStats } from '@/lib/monster-stats';
 /**
  * Un guide désigne un COMBAT (`group`), et les difficultés en découlent. Trois
  * choses doivent tenir pour que ça vaille mieux qu'un `bossId` écrit à la main :
- * l'ordre, les libellés dans les CINQ langues (le jeu n'en parle que quatre), et
- * la stabilité de la grille de stats quand on change d'onglet.
+ * l'ordre, les libellés dans TOUTES les langues du site, et la stabilité de la
+ * grille de stats quand on change d'onglet.
  */
-const MSG = { en, jp, kr, zh, fr } as Record<Lang, typeof en>;
-const LANGS: Lang[] = ['en', 'jp', 'kr', 'zh', 'fr'];
+const MSG = { en, jp, kr, zh, fr, es } satisfies Record<Lang, Messages>;
 
 const GROUPS = [
   ...new Set(
@@ -71,8 +71,8 @@ describe('encountersOfGroup — un combat, ses difficultés', () => {
   });
 });
 
-describe('difficultyLabel — le jeu ne parle pas français', () => {
-  it('résout toute difficulté dans les 5 langues, sans jamais laisser fuir une clé', () => {
+describe('difficultyLabel — le texte du jeu, sinon la locale, jamais une clé', () => {
+  it('résout toute difficulté dans toutes les langues, sans jamais laisser fuir une clé', () => {
     // On n'exige un libellé que là où il s'AFFICHE : un combat à plusieurs
     // rencontres, dont `BossEncounters` pose les onglets. Un combat SOLITAIRE
     // n'a pas de difficulté — pas parce qu'elle manquerait, mais parce qu'il n'y
@@ -94,10 +94,16 @@ describe('difficultyLabel — le jeu ne parle pas français', () => {
     }
   });
 
-  it('le vocabulaire du JEU prime dans les langues que le jeu parle', () => {
+  it('le vocabulaire du JEU prime dans toutes les langues où il existe', () => {
     const [, , vh] = encountersOfGroup(JC_ANNIHILATOR);
     expect(difficultyLabel(vh.ref, 'en', makeT(MSG.en))).toBe('Very Hard');
-    expect(difficultyLabel(vh.ref, 'fr', makeT(MSG.fr))).toBe('Très difficile');
+    // Le `fr` lisait la locale (« Très difficile ») tant que le jeu ne parlait
+    // pas français ; depuis le 23/09/2026 il lit la donnée comme les autres —
+    // le libellé attendu est donc celui du jeu, pas un littéral écrit ici.
+    for (const lang of LANGS) {
+      const official = vh.ref.difficulty?.name?.[lang];
+      if (official) expect(difficultyLabel(vh.ref, lang, makeT(MSG[lang])), lang).toBe(official);
+    }
   });
 
   it('`stage_N` est un GABARIT — le guild raid monte à 10, pas à 3', () => {
@@ -110,7 +116,10 @@ describe('difficultyLabel — le jeu ne parle pas français', () => {
   });
 
   it('la difficulté la plus dure est celle que le guide cible', () => {
-    expect(hardestDifficultyLabel(JC_ANNIHILATOR, 'fr', makeT(MSG.fr))).toBe('Très difficile');
+    const [, , vh] = encountersOfGroup(JC_ANNIHILATOR);
+    expect(hardestDifficultyLabel(JC_ANNIHILATOR, 'fr', makeT(MSG.fr))).toBe(
+      difficultyLabel(vh.ref, 'fr', makeT(MSG.fr)),
+    );
   });
 });
 

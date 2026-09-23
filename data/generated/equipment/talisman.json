@@ -4,7 +4,9 @@
       "en": "Executioner's Charm",
       "jp": "処刑人のタリスマン",
       "kr": "처형인의 탈리스만",
-      "zh": "刽子手的护身符"
+      "zh": "刽子手的护身符",
+      "fr": "Charme de Charme du Exécuteur",
+      "es": "Encanto del Verdugo"
     },
     "grade": "unique",
     "star": 4,
@@ -25,7 +27,9 @@
       "en": "Gladiator's Charm",
       "jp": "剣闘士のタリスマン",
       "kr": "검투사의 탈리스만",
-      "zh": "剑斗士的护身符"
+      "zh": "剑斗士的护身符",
+      "fr": "Gladiator's Charm",
+      "es": "Encanto Gladiador"
     },
     "grade": "unique",
     "star": 4,
@@ -46,7 +50,9 @@
       "en": "Rogue's Charm",
       "jp": "盗賊のタリスマン",
       "kr": "도적의 탈리스만",
-      "zh": "盗贼的护身符"
+      "zh": "盗贼的护身符",
+      "fr": "Rogue's Charm",
+      "es": "Encanto Pícaro"
     },
     "grade": "unique",
     "star": 4,
@@ -67,7 +73,9 @@
       "en": "Sage's Charm",
       "jp": "賢者のタリスマン",
       "kr": "현자의 탈리스만",
-      "zh": "贤者的护身符"
+      "zh": "贤者的护身符",
+      "fr": "Sage's Charm",
+      "es": "Encanto Sabio"
     },
     "grade": "unique",
     "star": 4,
@@ -88,7 +96,9 @@
       "en": "Prophet's Charm",
       "jp": "予言者のタリスマン",
       "kr": "예언자의 탈리스만",
-      "zh": "预言者的护身符"
+      "zh": "预言者的护身符",
+      "fr": "Prophet's Charm",
+      "es": "Encanto Profeta"
     },
     "grade": "unique",
     "star": 4,
@@ -109,7 +119,9 @@
       "en": "Saint's Charm",
       "jp": "聖者のタリスマン",
       "kr": "성자의 탈리스만",
-      "zh": "圣者的护身符"
+      "zh": "圣者的护身符",
+      "fr": "Saint's Charm",
+      "es": "Encanto Santo"
     },
     "grade": "unique",
     "star": 4,
@@ -130,7 +142,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 4,
@@ -151,7 +165,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 4,
@@ -172,7 +188,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 4,
@@ -193,7 +211,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 4,
@@ -214,7 +234,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 4,
@@ -235,7 +257,9 @@
       "en": "Executioner's Charm",
       "jp": "処刑人のタリスマン",
       "kr": "처형인의 탈리스만",
-      "zh": "刽子手的护身符"
+      "zh": "刽子手的护身符",
+      "fr": "Charme de Charme du Exécuteur",
+      "es": "Encanto del Verdugo"
     },
     "grade": "unique",
     "star": 5,
@@ -256,7 +280,9 @@
       "en": "Gladiator's Charm",
       "jp": "剣闘士のタリスマン",
       "kr": "검투사의 탈리스만",
-      "zh": "剑斗士的护身符"
+      "zh": "剑斗士的护身符",
+      "fr": "Gladiator's Charm",
+      "es": "Encanto Gladiador"
     },
     "grade": "unique",
     "star": 5,
@@ -277,7 +303,9 @@
       "en": "Rogue's Charm",
       "jp": "盗賊のタリスマン",
       "kr": "도적의 탈리스만",
-      "zh": "盗贼的护身符"
+      "zh": "盗贼的护身符",
+      "fr": "Rogue's Charm",
+      "es": "Encanto Pícaro"
     },
     "grade": "unique",
     "star": 5,
@@ -298,7 +326,9 @@
       "en": "Sage's Charm",
       "jp": "賢者のタリスマン",
       "kr": "현자의 탈리스만",
-      "zh": "贤者的护身符"
+      "zh": "贤者的护身符",
+      "fr": "Sage's Charm",
+      "es": "Encanto Sabio"
     },
     "grade": "unique",
     "star": 5,
@@ -319,7 +349,9 @@
       "en": "Prophet's Charm",
       "jp": "予言者のタリスマン",
       "kr": "예언자의 탈리스만",
-      "zh": "预言者的护身符"
+      "zh": "预言者的护身符",
+      "fr": "Prophet's Charm",
+      "es": "Encanto Profeta"
     },
     "grade": "unique",
     "star": 5,
@@ -340,7 +372,9 @@
       "en": "Saint's Charm",
       "jp": "聖者のタリスマン",
       "kr": "성자의 탈리스만",
-      "zh": "圣者的护身符"
+      "zh": "圣者的护身符",
+      "fr": "Saint's Charm",
+      "es": "Encanto Santo"
     },
     "grade": "unique",
     "star": 5,
@@ -361,7 +395,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 5,
@@ -382,7 +418,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 5,
@@ -403,7 +441,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 5,
@@ -424,7 +464,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 5,
@@ -445,7 +487,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 5,
@@ -466,7 +510,9 @@
       "en": "Executioner's Charm",
       "jp": "処刑人のタリスマン",
       "kr": "처형인의 탈리스만",
-      "zh": "刽子手的护身符"
+      "zh": "刽子手的护身符",
+      "fr": "Charme de Charme du Exécuteur",
+      "es": "Encanto del Verdugo"
     },
     "grade": "unique",
     "star": 6,
@@ -492,7 +538,9 @@
       "en": "Gladiator's Charm",
       "jp": "剣闘士のタリスマン",
       "kr": "검투사의 탈리스만",
-      "zh": "剑斗士的护身符"
+      "zh": "剑斗士的护身符",
+      "fr": "Gladiator's Charm",
+      "es": "Encanto Gladiador"
     },
     "grade": "unique",
     "star": 6,
@@ -518,7 +566,9 @@
       "en": "Rogue's Charm",
       "jp": "盗賊のタリスマン",
       "kr": "도적의 탈리스만",
-      "zh": "盗贼的护身符"
+      "zh": "盗贼的护身符",
+      "fr": "Rogue's Charm",
+      "es": "Encanto Pícaro"
     },
     "grade": "unique",
     "star": 6,
@@ -544,7 +594,9 @@
       "en": "Sage's Charm",
       "jp": "賢者のタリスマン",
       "kr": "현자의 탈리스만",
-      "zh": "贤者的护身符"
+      "zh": "贤者的护身符",
+      "fr": "Sage's Charm",
+      "es": "Encanto Sabio"
     },
     "grade": "unique",
     "star": 6,
@@ -570,7 +622,9 @@
       "en": "Prophet's Charm",
       "jp": "予言者のタリスマン",
       "kr": "예언자의 탈리스만",
-      "zh": "预言者的护身符"
+      "zh": "预言者的护身符",
+      "fr": "Prophet's Charm",
+      "es": "Encanto Profeta"
     },
     "grade": "unique",
     "star": 6,
@@ -596,7 +650,9 @@
       "en": "Saint's Charm",
       "jp": "聖者のタリスマン",
       "kr": "성자의 탈리스만",
-      "zh": "圣者的护身符"
+      "zh": "圣者的护身符",
+      "fr": "Saint's Charm",
+      "es": "Encanto Santo"
     },
     "grade": "unique",
     "star": 6,
@@ -622,7 +678,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -648,7 +706,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -674,7 +734,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -700,7 +762,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -726,7 +790,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -752,7 +818,9 @@
       "en": "Powerful Adventurer's Talisman",
       "jp": "強力な冒険者のタリスマン",
       "kr": "강력한 모험가의 탈리스만",
-      "zh": "强力冒险家的护身符"
+      "zh": "强力冒险家的护身符",
+      "fr": "Powerful Adventurer's Talisman",
+      "es": "Talismán Poderoso del Aventurero"
     },
     "grade": "unique",
     "star": 6,
@@ -773,7 +841,9 @@
       "en": "Sharp Adventurer's Talisman",
       "jp": "鋭敏な冒険者のタリスマン",
       "kr": "예리한 모험가의 탈리스만",
-      "zh": "敏锐冒险家的护身符"
+      "zh": "敏锐冒险家的护身符",
+      "fr": "acéré Adventurer's Talisman",
+      "es": "Talismán Agudo del Aventurero"
     },
     "grade": "unique",
     "star": 6,
@@ -794,7 +864,9 @@
       "en": "Talisman of Hubris",
       "jp": "傲慢のタリスマン",
       "kr": "오만의 탈리스만",
-      "zh": "傲慢的护身符"
+      "zh": "傲慢的护身符",
+      "fr": "Talisman de Hubrisis",
+      "es": "Talisman Soberbia"
     },
     "grade": "unique",
     "star": 5,
@@ -815,7 +887,9 @@
       "en": "Progenitor's Charm",
       "jp": "祈願者のタリスマン",
       "kr": "기원자의 탈리스만",
-      "zh": "祈愿者的护身符"
+      "zh": "祈愿者的护身符",
+      "fr": "Progenitor's Charm",
+      "es": "Talismán del Progenitor"
     },
     "grade": "unique",
     "star": 5,
@@ -836,7 +910,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -862,7 +938,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -888,7 +966,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -914,7 +994,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -940,7 +1022,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -966,7 +1050,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -992,7 +1078,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1018,7 +1106,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1044,7 +1134,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1070,7 +1162,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1096,7 +1190,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1122,7 +1218,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1148,7 +1246,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1174,7 +1274,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1200,7 +1302,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1226,7 +1330,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1252,7 +1358,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1278,7 +1386,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1304,7 +1414,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1330,7 +1442,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1356,7 +1470,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1382,7 +1498,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1408,7 +1526,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1434,7 +1554,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1460,7 +1582,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1486,7 +1610,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1512,7 +1638,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1538,7 +1666,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1564,7 +1694,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1590,7 +1722,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1616,7 +1750,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1642,7 +1778,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1668,7 +1806,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1694,7 +1834,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1720,7 +1862,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1746,7 +1890,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1772,7 +1918,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1798,7 +1946,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1824,7 +1974,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1850,7 +2002,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,
@@ -1876,7 +2030,9 @@
       "en": "Tactician's Charm",
       "jp": "戦術家のタリスマン",
       "kr": "전술가의 탈리스만",
-      "zh": "战略家的护身符"
+      "zh": "战略家的护身符",
+      "fr": "Tactician's Charm",
+      "es": "Encanto Tactico"
     },
     "grade": "unique",
     "star": 6,
@@ -1902,7 +2058,9 @@
       "en": "Assassin's Charm",
       "jp": "暗殺者のタリスマン",
       "kr": "암살자의 탈리스만",
-      "zh": "刺客的护身符"
+      "zh": "刺客的护身符",
+      "fr": "Assassin's Charm",
+      "es": "Encanto Asesino"
     },
     "grade": "unique",
     "star": 6,
@@ -1928,7 +2086,9 @@
       "en": "Mage's Charm",
       "jp": "魔法使いのタリスマン",
       "kr": "마법사의 탈리스만",
-      "zh": "魔法师的护身符"
+      "zh": "魔法师的护身符",
+      "fr": "Mage's Charm",
+      "es": "Encanto del Mago"
     },
     "grade": "unique",
     "star": 6,
@@ -1954,7 +2114,9 @@
       "en": "Vanguard's Charm",
       "jp": "先鋒隊のタリスマン",
       "kr": "선봉대의 탈리스만",
-      "zh": "先锋队的护身符"
+      "zh": "先锋队的护身符",
+      "fr": "Vanguard's Charm",
+      "es": "Encanto Vanguard"
     },
     "grade": "unique",
     "star": 6,
@@ -1980,7 +2142,9 @@
       "en": "Undertaker's Charm",
       "jp": "葬儀師のタリスマン",
       "kr": "장의사의 탈리스만",
-      "zh": "送葬者的护身符"
+      "zh": "送葬者的护身符",
+      "fr": "Undertaker's Charm",
+      "es": "Encanto Enterrador"
     },
     "grade": "unique",
     "star": 6,

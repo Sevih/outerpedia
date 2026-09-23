@@ -2,9 +2,9 @@
  * Contrat de `upsertShortName` (audit F8) — `data/curated/short-names.json`.
  *
  * Les noms courts s'affichent là où la place manque (refs de reco d'équipement,
- * tuiles du tier-list-maker). Seules les 5 langues du contrat sont retenues : une
- * clé hors liste qui passerait dans le fichier serait ignorée au rendu tout en
- * salissant le curé.
+ * tuiles du tier-list-maker). Seules les langues du contrat (`LANGS`) sont
+ * retenues : une clé hors liste qui passerait dans le fichier serait ignorée au
+ * rendu tout en salissant le curé.
  *
  * Écritures réelles dans un tmp via `sandbox()` (cf. `store-fixture`).
  */
@@ -42,7 +42,7 @@ describe('upsertShortName', () => {
     expect(box.read<Names>(FILE).stella).toEqual({ en: 'D.Stella' });
   });
 
-  it('garde les 5 langues du contrat et IGNORE tout le reste', async () => {
+  it('garde les langues du contrat et IGNORE tout le reste', async () => {
     await upsertShortName('stella', {
       en: 'A',
       jp: 'B',

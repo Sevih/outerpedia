@@ -78,17 +78,28 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
 
 ## i18n
 
-- Langues : `en`, `fr`, `jp`, `kr`, `zh` — définies dans **une seule source** de
-  vérité (`LANGUAGES`). Ne jamais coder en dur la liste des langues ailleurs.
+- Langues : `en`, `jp`, `kr`, `zh`, `fr`, `es` — définies dans **une seule
+  source** de vérité (`LANGUAGES`, `src/lib/i18n/config.ts`). Ne jamais coder en
+  dur la liste des langues ailleurs. Côté données, `GAME_LANGS`
+  (`datagen/lib/lang.ts`) en est le sous-ensemble officiel, aligné par le type ;
+  un dict vide ou uniforme se construit avec `emptyDict()` / `uniformDict()`,
+  jamais en littéral.
 - Distinction **officiel vs communautaire** (`isOfficial`) :
-  - **officielles** (`en`, `jp`, `kr`, `zh`) : le jeu fournit les données → contenu
-    de jeu traduit (noms, skills, items).
-  - **communautaire** (`fr`) : UI traduite, mais **pas** de données de jeu →
-    fallback sur EN pour le contenu de jeu.
-- Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans les
-  5 langues — c'est `locales/keys.test.ts` qui le garantit (clés identiques ×5,
-  chaque clé consommée). L'ancien « alignement par numéro de ligne » n'est plus
-  tenable : prettier replie les chaînes longues différemment selon la langue.
+  - **officielle** : le jeu fournit les données → contenu de jeu traduit (noms,
+    skills, items). Les six langues le sont depuis le 2026-09-23 (le client a
+    livré le français et l'espagnol).
+  - **communautaire** : UI traduite, mais **pas** de données de jeu → fallback
+    sur EN pour le contenu de jeu. Plus aucune aujourd'hui (le `fr` l'a été
+    jusqu'au 2026-09-23) ; le mécanisme reste pour la prochaine.
+- L'**éditorial** (curés, `labels.ts` des guides, `meta.json`) est typé
+  `LocalizedText`, PARTIEL avec repli EN : une langue peut y manquer sans rien
+  casser. L'espagnol y est en repli depuis le lancement — le traduire passe
+  par l'outil admin, pas par un chantier bloquant.
+- Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans
+  toutes les langues — c'est `locales/keys.test.ts` qui le garantit (clés
+  identiques, chaque clé consommée). L'ancien « alignement par numéro de ligne »
+  n'est plus tenable : prettier replie les chaînes longues différemment selon la
+  langue.
 - Pas de clés i18n dupliquées — vérifier avant d'en créer.
 - Les balises inline (`{B/...}`, `{D/...}`, etc.) restent **identiques** dans
   toutes les langues.

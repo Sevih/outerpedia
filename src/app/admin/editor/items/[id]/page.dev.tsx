@@ -3,10 +3,11 @@ import type { Route } from 'next';
 import { ItemCuratedEditor, type ItemBase } from '@/components/admin/ItemCuratedEditor';
 import { itemBase } from '@/lib/data/item-catalog';
 import { loadItemCurated } from '@/lib/admin/item-curated-store';
+import { emptyDict } from '@datagen/lib/lang';
 
 export const dynamic = 'force-dynamic';
 
-const EMPTY = { en: '', jp: '', kr: '', zh: '' };
+const EMPTY = emptyDict();
 
 export default async function EditorItemDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

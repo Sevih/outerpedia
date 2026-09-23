@@ -9,7 +9,9 @@
         "en": "Bronze III",
         "jp": "ブロンズ III",
         "kr": "브론즈 III",
-        "zh": "黄铜III"
+        "zh": "黄铜III",
+        "fr": "Bronze III",
+        "es": "Bronce III"
       }
     },
     {
@@ -21,7 +23,9 @@
         "en": "Bronze II",
         "jp": "ブロンズ II",
         "kr": "브론즈 II",
-        "zh": "黄铜II"
+        "zh": "黄铜II",
+        "fr": "Bronze II",
+        "es": "Bronce II"
       }
     },
     {
@@ -33,7 +37,9 @@
         "en": "Bronze I",
         "jp": "ブロンズ I",
         "kr": "브론즈 I",
-        "zh": "黄铜I"
+        "zh": "黄铜I",
+        "fr": "Bronze I",
+        "es": "Bronce I"
       }
     },
     {
@@ -45,7 +51,9 @@
         "en": "Silver III",
         "jp": "シルバー III",
         "kr": "실버 III",
-        "zh": "白银III"
+        "zh": "白银III",
+        "fr": "Argent III",
+        "es": "Silver III"
       }
     },
     {
@@ -57,7 +65,9 @@
         "en": "Silver II",
         "jp": "シルバー II",
         "kr": "실버 II",
-        "zh": "白银II"
+        "zh": "白银II",
+        "fr": "Argent II",
+        "es": "Silver II"
       }
     },
     {
@@ -69,7 +79,9 @@
         "en": "Silver I",
         "jp": "シルバー I",
         "kr": "실버 I",
-        "zh": "白银I"
+        "zh": "白银I",
+        "fr": "Argent I",
+        "es": "Silver I"
       }
     },
     {
@@ -81,7 +93,9 @@
         "en": "Gold III",
         "jp": "ゴールド III",
         "kr": "골드 III",
-        "zh": "黄金III"
+        "zh": "黄金III",
+        "fr": "Or III",
+        "es": "Oro III"
       }
     },
     {
@@ -93,7 +107,9 @@
         "en": "Gold II",
         "jp": "ゴールド II",
         "kr": "골드 II",
-        "zh": "黄金II"
+        "zh": "黄金II",
+        "fr": "Or II",
+        "es": "Oro II"
       }
     },
     {
@@ -105,7 +121,9 @@
         "en": "Gold I",
         "jp": "ゴールド I",
         "kr": "골드 I",
-        "zh": "黄金I"
+        "zh": "黄金I",
+        "fr": "Or I",
+        "es": "Oro I"
       }
     },
     {
@@ -117,7 +135,9 @@
         "en": "Platinum III",
         "jp": "プラチナ III",
         "kr": "플래티넘 III",
-        "zh": "铂金III"
+        "zh": "铂金III",
+        "fr": "Platine III",
+        "es": "Platinum III"
       }
     },
     {
@@ -129,7 +149,9 @@
         "en": "Platinum II",
         "jp": "プラチナ II",
         "kr": "플래티넘 II",
-        "zh": "铂金II"
+        "zh": "铂金II",
+        "fr": "Platine II",
+        "es": "Platino II"
       }
     },
     {
@@ -141,7 +163,9 @@
         "en": "Platinum I",
         "jp": "プラチナ I",
         "kr": "플래티넘 I",
-        "zh": "铂金I"
+        "zh": "铂金I",
+        "fr": "Platine I",
+        "es": "Platino I"
       }
     },
     {
@@ -153,7 +177,9 @@
         "en": "Diamond III",
         "jp": "ダイヤ III",
         "kr": "다이아 III",
-        "zh": "钻石III"
+        "zh": "钻石III",
+        "fr": "Diamant III",
+        "es": "Diam III"
       }
     },
     {
@@ -165,7 +191,9 @@
         "en": "Diamond II",
         "jp": "ダイヤ II",
         "kr": "다이아 II",
-        "zh": "钻石II"
+        "zh": "钻石II",
+        "fr": "Diamant II",
+        "es": "Diamante II"
       }
     },
     {
@@ -177,7 +205,9 @@
         "en": "Diamond I",
         "jp": "ダイヤ I",
         "kr": "다이아 I",
-        "zh": "钻石I"
+        "zh": "钻石I",
+        "fr": "Diamant I",
+        "es": "Diamante I"
       }
     },
     {
@@ -189,7 +219,9 @@
         "en": "Master III",
         "jp": "マスター III",
         "kr": "마스터 III",
-        "zh": "大师III"
+        "zh": "大师III",
+        "fr": "Maître III",
+        "es": "Amo III"
       }
     },
     {
@@ -201,7 +233,9 @@
         "en": "Master II",
         "jp": "マスター II",
         "kr": "마스터 II",
-        "zh": "大师II"
+        "zh": "大师II",
+        "fr": "Maître II",
+        "es": "Amo II"
       }
     },
     {
@@ -213,7 +247,9 @@
         "en": "Master I",
         "jp": "マスター I",
         "kr": "마스터 I",
-        "zh": "大师I"
+        "zh": "大师I",
+        "fr": "Maître I",
+        "es": "Amo I"
       }
     },
     {
@@ -225,7 +261,9 @@
         "en": "Top 100",
         "jp": "TOP 100",
         "kr": "TOP 100",
-        "zh": "TOP100"
+        "zh": "TOP100",
+        "fr": "Top 100",
+        "es": "TOP 100"
       }
     },
     {
@@ -237,7 +275,9 @@
         "en": "Top 50",
         "jp": "TOP 50",
         "kr": "TOP 50",
-        "zh": "TOP50"
+        "zh": "TOP50",
+        "fr": "Top 50",
+        "es": "TOP 50"
       }
     },
     {
@@ -249,7 +289,9 @@
         "en": "Top 10",
         "jp": "TOP 10",
         "kr": "TOP 10",
-        "zh": "TOP10"
+        "zh": "TOP10",
+        "fr": "Top 10",
+        "es": "TOP 10"
       }
     },
     {
@@ -261,7 +303,9 @@
         "en": "Top 3",
         "jp": "TOP 3",
         "kr": "TOP 3",
-        "zh": "TOP3"
+        "zh": "TOP3",
+        "fr": "Top 3",
+        "es": "TOP 3"
       }
     },
     {
@@ -273,7 +317,9 @@
         "en": "Top 2",
         "jp": "TOP 2",
         "kr": "TOP 2",
-        "zh": "TOP2"
+        "zh": "TOP2",
+        "fr": "Top 2",
+        "es": "TOP 2"
       }
     },
     {
@@ -285,7 +331,9 @@
         "en": "Top 1",
         "jp": "TOP 1",
         "kr": "TOP 1",
-        "zh": "TOP1"
+        "zh": "TOP1",
+        "fr": "Top 1",
+        "es": "TOP 1"
       }
     }
   ],
@@ -411,7 +459,9 @@
           "en": "Normal League",
           "jp": "ノーマルリーグ",
           "kr": "노멀 리그",
-          "zh": "普通联赛"
+          "zh": "普通联赛",
+          "fr": "Ligue normale",
+          "es": "Liga Normal"
         },
         "tiers": [
           {
@@ -482,7 +532,9 @@
           "en": "Hard League",
           "jp": "ハードリーグ",
           "kr": "하드 리그",
-          "zh": "困难联赛"
+          "zh": "困难联赛",
+          "fr": "Ligue diff.",
+          "es": "Liga Difícil"
         },
         "tiers": [
           {
@@ -553,7 +605,9 @@
           "en": "Very Hard League",
           "jp": "ベリーハードリーグ",
           "kr": "베리 하드 리그",
-          "zh": "极难联赛"
+          "zh": "极难联赛",
+          "fr": "Ligue très diff.",
+          "es": "Liga Muy Difícil"
         },
         "tiers": [
           {
@@ -624,7 +678,9 @@
           "en": "Extreme League",
           "jp": "エクストリームリーグ",
           "kr": "익스트림 리그",
-          "zh": "极限联赛"
+          "zh": "极限联赛",
+          "fr": "Ligue extrême",
+          "es": "Liga Extrema"
         },
         "tiers": [
           {

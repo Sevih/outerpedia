@@ -19,7 +19,7 @@
 import { describe, expect, it } from 'vitest';
 import skillsData from '../../data/generated/skills.json';
 import charactersData from '../../data/generated/characters.json';
-import type { LangDict } from '../lib/lang';
+import { emptyDict, type LangDict } from '../lib/lang';
 import type { Row } from '../lib/tables';
 import { assembleSkill, slugTeam, subTypeOf, type Skill } from './skills';
 
@@ -56,7 +56,7 @@ describe('assembleSkill — cœur d’assemblage (buffs vides)', () => {
   // desc/niveaux/target/range/type/subType/offensive.
   const noBuffs = new Map() as Parameters<typeof assembleSkill>[2];
   const noGroups = new Map() as Parameters<typeof assembleSkill>[3];
-  const dict = (en: string): LangDict => ({ en, jp: '', kr: '', zh: '' });
+  const dict = (en: string): LangDict => ({ ...emptyDict(), en });
 
   it('skill offensif : type/subType/cible/portée/icône + niveaux TRIÉS', () => {
     const tskill = new Map<string, LangDict>([

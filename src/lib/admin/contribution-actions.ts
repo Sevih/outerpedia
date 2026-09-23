@@ -14,6 +14,7 @@
  */
 import type { CharacterCurated } from '@contracts';
 import { IS_DEV } from '@/lib/admin/guard';
+import type { Lang } from '@/lib/i18n/config';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { applyTranslation } from '@/lib/admin/translate-fill';
 import {
@@ -76,7 +77,7 @@ async function importReview(c: Contribution): Promise<ImportResult> {
 
 /* --- Handler `character-pros-cons-synergy` --- */
 
-type LText = Partial<Record<'en' | 'jp' | 'kr' | 'zh' | 'fr', string>>;
+type LText = Partial<Record<Lang, string>>;
 const hasText = (t: LText): boolean => Object.values(t).some((v) => v?.trim());
 
 /** Regénère les langues de tous les textes éditoriaux depuis leur EN (un batch). */

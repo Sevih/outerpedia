@@ -164,10 +164,10 @@ export function pickMonsters(e: Encounter, ids: readonly string[]): DungeonMonst
 /**
  * Libellé d'une difficulté.
  *
- * Le jeu ne parle QUE en/jp/kr/zh : il n'existe pas, et il n'existera jamais,
- * de libellé français dans la donnée. D'où la règle — le texte OFFICIEL du jeu
- * quand il existe et qu'on le rend dans une langue du jeu ; sinon nos locales,
- * accrochées à la CLÉ stable (`very_hard`, `stage_2`, `league_4`).
+ * Le texte OFFICIEL du jeu quand il existe ; sinon nos locales, accrochées à
+ * la CLÉ stable (`very_hard`, `stage_2`, `league_4`). Le `fr` avait ici une
+ * exception (« le jeu n'en parlera jamais ») qui lisait toujours la locale :
+ * le jeu parle français depuis le 23/09/2026, l'exception est tombée.
  *
  * `stage_N` est un GABARIT, pas une énumération : le guild raid va jusqu'à 3
  * étapes en boss principal et 5 en secondaire, et rien ne dit qu'il s'arrêtera
@@ -180,8 +180,8 @@ export function difficultyLabel(d: DungeonRef, lang: Lang, t: TFunction): string
   const stage = /^stage_(\d+)$/.exec(diff.key);
   if (stage) return t('guides.difficulty.stage', { n: stage[1] });
 
-  // Le vocabulaire du jeu prime dans les langues que le jeu parle.
-  if (lang !== 'fr' && diff.name) {
+  // Le vocabulaire du jeu prime.
+  if (diff.name) {
     const official = lRec(diff.name, lang);
     if (official) return official;
   }
