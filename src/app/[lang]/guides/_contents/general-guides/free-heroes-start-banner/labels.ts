@@ -12,6 +12,7 @@ export const LABELS = {
     kr: '획득 가능한 무료 영웅과 커스텀 배너의 최적 가챠 전략에 대한 종합 가이드.',
     zh: '关于可获取的免费英雄和自选池最佳抽卡策略的综合指南。',
     fr: 'Guide complet sur tous les Héros gratuits que vous pouvez obtenir et la meilleure stratégie de pull pour la Custom Banner.',
+    es: 'Una guía completa sobre todos los héroes gratuitos que puedes obtener y la mejor estrategia de tiradas para el Custom Banner.',
   },
 
   warning: {
@@ -20,6 +21,7 @@ export const LABELS = {
     kr: '중복을 피하세요 — 아직 보유하지 않은 캐릭터를 선택하세요. 게임 내 추천과 다르다면, 확정 입수 가능한 영웅（미션、스토리 진행）을 제외했기 때문입니다.',
     zh: '避免重复选择 — 始终选择你尚未拥有的角色。如果游戏内推荐看起来不同，是因为我们已经排除了从确定来源（任务、故事进度）获得的英雄。',
     fr: "Évitez les doublons : choisissez toujours des personnages que vous ne possédez pas encore. Si les recommandations en jeu diffèrent, c'est parce que nous avons déjà exclu les Héros disponibles via des sources garanties (missions, progression de la Story).",
+    es: 'Evita elegir duplicados — elige siempre personajes que aún no tengas. Si tus recomendaciones en el juego se ven diferentes, es porque ya hemos excluido héroes disponibles de fuentes garantizadas (misiones, progresión de la historia).',
   },
 
   tabFree: {
@@ -28,6 +30,7 @@ export const LABELS = {
     kr: '무료 영웅',
     zh: '免费英雄',
     fr: 'Héros Gratuits',
+    es: 'Héroes gratuitos',
   },
 
   tabCustom: {
@@ -36,6 +39,7 @@ export const LABELS = {
     kr: '커스텀 배너',
     zh: '自选池',
     fr: 'Custom Banner',
+    es: 'Custom Banner',
   },
 
   freeNote: {
@@ -44,6 +48,7 @@ export const LABELS = {
     kr: '길드 상점 영웅은 획득에 5주 이상 소요됩니다. 초반 진행을 우선하려면 커스텀 배너에서 획득하고, 길드 상점은 초월에 사용하세요.',
     zh: '公会商店英雄需要5周以上才能解锁。优先从自选池获取以便早期推进，然后使用公会商店进行超越。',
     fr: 'Les Héros du Guild Shop prennent plus de 5 semaines à débloquer. Privilégiez leur obtention via la Custom Banner pour la progression précoce, puis utilisez le Guild Shop pour la transcendance.',
+    es: 'Los héroes de la Tienda del Gremio tardan más de 5 semanas en desbloquearse. Prioriza obtenerlos del Custom Banner para el progreso temprano, luego usa la Tienda del Gremio para la trascendencia.',
   },
 
   thSource: {
@@ -52,6 +57,7 @@ export const LABELS = {
     kr: '획득처',
     zh: '获取途径',
     fr: 'Source',
+    es: 'Fuente',
   },
   thCharacters: {
     en: 'Characters',
@@ -59,6 +65,7 @@ export const LABELS = {
     kr: '캐릭터',
     zh: '角色',
     fr: 'Personnages',
+    es: 'Personajes',
   },
   thDetails: {
     en: 'Details',
@@ -66,6 +73,7 @@ export const LABELS = {
     kr: '상세',
     zh: '详情',
     fr: 'Details',
+    es: 'Detalles',
   },
 
   chooseOne: {
@@ -74,6 +82,7 @@ export const LABELS = {
     kr: '1명 선별',
     zh: '选一个',
     fr: 'Choisissez un',
+    es: 'Elige uno',
   },
 
   pullingStrategy: {
@@ -82,6 +91,7 @@ export const LABELS = {
     kr: '가챠 전략',
     zh: '抽卡策略',
     fr: 'Stratégie de Pull',
+    es: 'Estrategia de tiradas',
   },
 
   pullingDesc: {
@@ -90,6 +100,7 @@ export const LABELS = {
     kr: '새 캐릭터 획득을 우선시하세요 — 초월은 도플갱어로 가능합니다. 신규 유닛은 출시 약 3.5개월 후 커스텀 풀에 추가됩니다.',
     zh: '优先获取新角色 — 超越可以用分身处理。新角色在发布约3.5个月后加入自选池。',
     fr: 'Concentrez-vous sur le déblocage de nouveaux personnages : les doppelgangers gèrent la transcendance. Les nouvelles unités rejoignent le custom pool environ 3,5 mois après leur sortie.',
+    es: 'Concéntrate en desbloquear nuevos personajes — los dobles se encargan de la trascendencia. Las nuevas unidades se unen al pool custom ~3.5 meses después de su lanzamiento.',
   },
 
   pullingNote: {
@@ -98,6 +109,7 @@ export const LABELS = {
     kr: '참고: 일부 영웅은 출시된 지 얼마 되지 않아 아직 커스텀 배너에 추가되지 않았습니다.',
     zh: '注：部分英雄因发布时间较短，尚未加入自选池。',
     fr: 'Note : Certains Héros ne sont pas encore disponibles dans la custom banner car ils ne sont pas sortis depuis assez longtemps.',
+    es: 'Nota: Algunos héroes aún no están disponibles en el custom banner, ya que no llevan suficiente tiempo publicados.',
   },
 
   recommendedPicks: {
@@ -106,6 +118,7 @@ export const LABELS = {
     kr: '추천 픽 (우선순위)',
     zh: '推荐选择（按优先级）',
     fr: 'Choix Recommandés (par priorité)',
+    es: 'Elecciones recomendadas (por prioridad)',
   },
 
   thRecommended: {
@@ -114,6 +127,7 @@ export const LABELS = {
     kr: '추천',
     zh: '推荐',
     fr: 'Recommandé',
+    es: 'Recomendado',
   },
   thFreeAvailable: {
     en: 'Available for free',
@@ -121,6 +135,7 @@ export const LABELS = {
     kr: '무료 획득 가능',
     zh: '免费获取',
     fr: 'Disponible gratuitement',
+    es: 'Disponible gratis',
   },
 
   notYetAvailable: {
@@ -129,6 +144,7 @@ export const LABELS = {
     kr: '미구현 캐릭터',
     zh: '暂未实装',
     fr: 'Pas Encore Disponible',
+    es: 'No disponible todavía',
   },
   notYetDesc: {
     en: 'These heroes are too recent to be in the custom banner pool (~3.5 months after release).',
@@ -136,5 +152,6 @@ export const LABELS = {
     kr: '이 영웅들은 아직 커스텀 배너 풀에 추가되지 않았습니다 (출시 약 3.5개월 후 추가).',
     zh: '这些英雄尚未加入自选池（发布约3.5个月后添加）。',
     fr: 'Ces Héros sont trop récents pour figurer dans le pool de la Custom Banner (environ 3,5 mois après leur sortie).',
+    es: 'Estos héroes son demasiado recientes para estar en el pool de banners personalizados (~3.5 meses después del lanzamiento).',
   },
 } as const satisfies Record<string, LocalizedText>;

@@ -6,7 +6,8 @@
       "jp": "{D/BT_DOT_CURSE}を付与するDPSオプション。",
       "kr": "{D/BT_DOT_CURSE}를 부여하는 DPS 옵션.",
       "zh": "施加{D/BT_DOT_CURSE}的DPS选项。",
-      "fr": "Options de DPS qui appliquent {D/BT_DOT_CURSE}."
+      "fr": "Options de DPS qui appliquent {D/BT_DOT_CURSE}.",
+      "es": "Opciones de DPS que aplican {D/BT_DOT_CURSE}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{C/Healer}オプション。",
       "kr": "{C/Healer} 옵션.",
       "zh": "{C/Healer}选项。",
-      "fr": "Options de {C/Healer}."
+      "fr": "Options de {C/Healer}.",
+      "es": "Opciones de {C/Healer}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "{E/Earth}の{C/Ranger}で味方全体に{B/BT_STAT|ST_COUNTER_RATE}と{B/BT_BARRIER}を付与。",
       "kr": "아군 전체에게 {B/BT_STAT|ST_COUNTER_RATE}과 {B/BT_BARRIER}를 부여하는 {E/Earth} {C/Ranger}.",
       "zh": "为全体友军赋予{B/BT_STAT|ST_COUNTER_RATE}和{B/BT_BARRIER}的{E/Earth} {C/Ranger}。",
-      "fr": "{C/Ranger} {E/Earth} qui octroie {B/BT_STAT|ST_COUNTER_RATE} et {B/BT_BARRIER} à toute l'équipe."
+      "fr": "{C/Ranger} {E/Earth} qui octroie {B/BT_STAT|ST_COUNTER_RATE} et {B/BT_BARRIER} à toute l'équipe.",
+      "es": "{E/Earth} {C/Ranger} que otorga {B/BT_STAT|ST_COUNTER_RATE} y {B/BT_BARRIER} a todo el equipo."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{B/BT_STAT|ST_COUNTER_RATE}を持つ{E/Earth}ユニット。",
       "kr": "{B/BT_STAT|ST_COUNTER_RATE}를 가진 {E/Earth} 유닛.",
       "zh": "拥有{B/BT_STAT|ST_COUNTER_RATE}的{E/Earth}单位。",
-      "fr": "Unités {E/Earth} dotées de mécaniques de {B/BT_STAT|ST_COUNTER_RATE} intégrées."
+      "fr": "Unités {E/Earth} dotées de mécaniques de {B/BT_STAT|ST_COUNTER_RATE} intégrées.",
+      "es": "Unidades {E/Earth} con mecánicas de {B/BT_STAT|ST_COUNTER_RATE} incorporadas."
     }
   },
   {
@@ -46,7 +50,8 @@
       "jp": "{E/Earth} DPSオプション。",
       "kr": "{E/Earth} DPS 옵션.",
       "zh": "{E/Earth} DPS选项。",
-      "fr": "Options de DPS {E/Earth}."
+      "fr": "Options de DPS {E/Earth}.",
+      "es": "Opciones de DPS {E/Earth}."
     }
   }
 ]

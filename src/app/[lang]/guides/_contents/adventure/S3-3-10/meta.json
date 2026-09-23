@@ -4,18 +4,20 @@
     "jp": "シーズン3(ハード) : フェータル",
     "kr": "시즌 3 하드 : 페이탈",
     "zh": "S3 困难：致命",
-    "fr": "S3 Hard : Fatal"
+    "fr": "S3 Hard : Fatal",
+    "es": "S3 Difícil : Fatal"
   },
   "description": {
     "en": "S3 Hard 3-10 boss Fatal — near-invincible in stealth, resurrects allies and Silences your Fire heroes. Break the stealth, then burst. Mechanics & tips.",
     "jp": "ストーリーS3ハード3-10ボス「フェータル」攻略 — ステルス中はほぼ無敵、味方を蘇生し火属性を沈黙させる。ステルスを剥がして一気に削る。ギミックとクリアのコツ。",
     "kr": "스토리 S3 하드 3-10 보스 페이탈 공략 — 은신 중엔 거의 무적, 아군을 부활시키고 화속성을 침묵시킨다. 은신을 벗겨낸 뒤 폭딜. 기믹과 클리어 팁.",
     "zh": "主线S3困难3-10 Boss法塔尔攻略 — 隐身时近乎无敌，会复活队友并沉默火属性英雄。先破隐身再爆发。机制与通关技巧。",
-    "fr": "Boss S3 Hard 3-10 : Fatal — quasi invincible en stealth, ressuscite ses alliés et Silence vos héros Fire. Cassez le stealth puis burst. Mécaniques et astuces."
+    "fr": "Boss S3 Hard 3-10 : Fatal — quasi invincible en stealth, ressuscite ses alliés et Silence vos héros Fire. Cassez le stealth puis burst. Mécaniques et astuces.",
+    "es": "Jefe de S3 Difícil 3-10 Fatal — casi invencible en sigilo, resucita aliados y Silencia a tus héroes de Fuego. Rompe el sigilo, luego remata. Mecánicas y consejos."
   },
   "icon": "T_DungeonArea_23",
   "author": "Sevih",
-  "updated": "2025-05-26",
+  "updated": "2026-09-23",
   "order": 303,
   "bossId": "4500266",
   "dungeons": ["130314", "131310"]

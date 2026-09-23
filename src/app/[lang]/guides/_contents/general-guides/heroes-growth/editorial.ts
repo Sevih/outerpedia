@@ -90,6 +90,7 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       kr: '버스트 2 해금',
       zh: '爆发2解锁',
       fr: 'Burst 2 débloqué',
+      es: 'Burst 2 desbloqueado',
     },
   },
   {
@@ -102,6 +103,7 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       kr: '1★/2★는 자기 스탯, 3★는 팀 스탯 획득. 모두 +1 체인 패시브 약점 게이지 데미지 획득.',
       zh: '1★/2★获得自身属性，3★获得团队属性。全员获得+1连锁被动弱点槽伤害。',
       fr: '1★/2★ gagnent un self-stat, 3★ un team-stat. Tous gagnent +1 dégâts Chain Passive Weakness Gauge.',
+      es: '1★/2★ ganan una self-stat, 3★ gana una team-stat. Todas ganan +1 de Daño al Chain Passive Weakness Gauge.',
     },
   },
   { step: '4+', stars: 4, color: 'orange' },
@@ -115,6 +117,7 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       kr: '버스트 3 해금',
       zh: '爆发3解锁',
       fr: 'Burst 3 débloqué',
+      es: 'Burst 3 desbloqueado',
     },
   },
   { step: '5+', stars: 5, color: 'red' },
@@ -129,6 +132,7 @@ export const TRANSCENDENCE_STEPS: TranscendStep[] = [
       kr: '1★/2★는 자기 스탯 강화, 3★는 팀 스탯 강화 획득. 모두 전투 시작 시 +25 행동 포인트 획득.',
       zh: '1★/2★获得自身属性强化，3★获得团队属性强化。全员在战斗开始时获得+25行动点。',
       fr: '1★/2★ gagnent une amélioration de self-stat, 3★ une amélioration de team-stat. Tous gagnent +25 Action Points en début de combat.',
+      es: '1★/2★ ganan una mejora de self-stat, 3★ gana una mejora de team-stat. Todas ganan +25 AP al inicio del combate.',
     },
   },
 ];

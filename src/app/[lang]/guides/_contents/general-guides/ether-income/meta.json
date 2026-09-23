@@ -4,18 +4,20 @@
     "jp": "エーテル収入",
     "kr": "에테르 수입",
     "zh": "以太收入",
-    "fr": "Revenus d'Ether"
+    "fr": "Revenus d'Ether",
+    "es": "Ingreso de Éter"
   },
   "description": {
     "en": "Overview of all regular and variable sources of Ether in Outerplane, with daily, weekly, and monthly totals.",
     "jp": "Outerplaneのエーテルの定期的および変動的な供給源の概要（日次、週次、月次の合計付き）。",
     "kr": "Outerplane의 에테르에 대한 정기적 및 변동 소스 개요（일일, 주간, 월간 합계 포함）。",
     "zh": "异域战记中所有常规和不定期获得的以太来源概览，包含每日、每周和每月总计。",
-    "fr": "Vue d'ensemble de toutes les sources régulières et variables d'Ether dans Outerplane, avec totaux journaliers, hebdomadaires et mensuels."
+    "fr": "Vue d'ensemble de toutes les sources régulières et variables d'Ether dans Outerplane, avec totaux journaliers, hebdomadaires et mensuels.",
+    "es": "Resumen de todas las fuentes regulares y variables de Éter en Outerplane, con totales diarios, semanales y mensuales."
   },
   "icon": "TI_Item_Cristal",
   "author": "Birdmouth",
-  "updated": "2026-09-22",
+  "updated": "2026-09-23",
   "order": 1,
   "tier": "economy"
 }

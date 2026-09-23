@@ -7,7 +7,8 @@
         "jp": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
         "kr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
         "zh": "{B/BT_CALL_BACKUP}、{D/BT_AGGRO}",
-        "fr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
+        "fr": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}",
+        "es": "{B/BT_CALL_BACKUP}, {D/BT_AGGRO}"
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "{C/Ranger} {E/Water}",
         "kr": "{C/Ranger} {E/Water}",
         "zh": "{C/Ranger} {E/Water}",
-        "fr": "{C/Ranger} {E/Water}"
+        "fr": "{C/Ranger} {E/Water}",
+        "es": "{C/Ranger} {E/Water}"
       }
     },
     {
@@ -27,7 +29,8 @@
         "jp": "{C/Healer}、{B/BT_CALL_BACKUP}",
         "kr": "{C/Healer}, {B/BT_CALL_BACKUP}",
         "zh": "{C/Healer}、{B/BT_CALL_BACKUP}",
-        "fr": "{C/Healer}, {B/BT_CALL_BACKUP}"
+        "fr": "{C/Healer}, {B/BT_CALL_BACKUP}",
+        "es": "{C/Healer}, {B/BT_CALL_BACKUP}"
       }
     },
     {
@@ -37,7 +40,8 @@
         "jp": "高火力ユニット",
         "kr": "강력한 딜러",
         "zh": "高伤害单位",
-        "fr": "Unité à forts dégâts"
+        "fr": "Unité à forts dégâts",
+        "es": "Unidad de daño fuerte"
       }
     }
   ],

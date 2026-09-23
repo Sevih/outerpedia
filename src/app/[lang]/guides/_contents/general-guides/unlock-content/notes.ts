@@ -45,6 +45,7 @@ export const CATEGORY_LABELS: Record<Category, LocalizedText> = {
     kr: '게임 모드',
     zh: '游戏模式',
     fr: 'Modes de Jeu',
+    es: 'Modos de Juego',
   },
   character: {
     en: 'Heroes & Equipment',
@@ -52,6 +53,7 @@ export const CATEGORY_LABELS: Record<Category, LocalizedText> = {
     kr: '영웅 & 장비',
     zh: '英雄 & 装备',
     fr: 'Héros & Équipement',
+    es: 'Héroes y Equipo',
   },
   base: {
     en: 'Base',
@@ -59,6 +61,7 @@ export const CATEGORY_LABELS: Record<Category, LocalizedText> = {
     kr: '아지트',
     zh: '基地',
     fr: 'Base',
+    es: 'Base',
   },
 };
 
@@ -98,6 +101,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '8명의 영웅으로 전투하고 다른 플레이어와 순위 경쟁',
       zh: '使用8名英雄战斗并与其他玩家排名',
       fr: 'Combattez avec 8 Héros et classez-vous contre les autres joueurs',
+      es: 'Combate con 8 héroes y clasifícate contra otros jugadores',
     },
   },
   {
@@ -111,6 +115,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '영구 버프 보상이 있는 심도형 엔드게임 던전',
       zh: '提供永久增益奖励的深度型终局暗堡',
       fr: 'Dungeon endgame par paliers avec récompenses de buff permanents',
+      es: 'Mazmorra de fin de juego basada en profundidad con recompensas de bonos permanentes',
     },
   },
   {
@@ -124,6 +129,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '주간 점수 기반 보스 챌린지와 시즌 랭킹',
       zh: '每周积分制Boss挑战与赛季排名',
       fr: 'Challenge boss hebdomadaire au score avec classements saisonniers',
+      es: 'Desafío semanal de jefe basado en puntuación con clasificaciones de temporada',
     },
   },
   {
@@ -137,6 +143,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '서버 전체 협동 모드',
       zh: '全服协作模式',
       fr: "Mode co-op à l'échelle du serveur",
+      es: 'Modo cooperativo a través del servidor',
     },
   },
   {
@@ -150,6 +157,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '이벤트 던전 입장 가능',
       zh: '可进入活动暗堡',
       fr: "Autorise l'entrée aux event dungeons",
+      es: 'Permite la entrada a mazmorras de evento',
     },
   },
   {
@@ -163,6 +171,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '영웅 경험치와 골드 파밍',
       zh: '刷英雄经验值与金币',
       fr: "Farm de l'EXP de Héros et de l'or",
+      es: 'Farmea EXP de héroes y oro',
     },
   },
   {
@@ -176,6 +185,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '장비 강화 도구, 애정도 선물, 보석, 스킬 교본 파밍',
       zh: '刷装备强化道具、亲密度礼物、宝石、技能教材',
       fr: 'Farm de Gear Hammers, Affinity Gifts, Gems et Skill Manuals',
+      es: 'Farmea Martillos de Gear, Regalos de Afinidad, Gemas y Manuales de Skill',
     },
   },
   {
@@ -188,6 +198,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '1회 클리어 보상이 있는 던전',
       zh: '首次通关奖励的暗堡',
       fr: 'Dungeon avec des récompenses de clear unique',
+      es: 'Mazmorra con recompensas de clear únicas',
     },
   },
   {
@@ -200,6 +211,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '3일 쿨다운으로 보상을 받는 던전',
       zh: '每3天冷却可获得奖励的暗堡',
       fr: 'Dungeon répétable avec des récompenses en cooldown de 3 jours',
+      es: 'Mazmorra repetible con recompensas de reinicio cada 3 días',
     },
   },
   {
@@ -213,6 +225,8 @@ export const ENTRIES: GuideEntry[] = [
       jp: 'スカイワードタワー',
       kr: '스카이워드 타워',
       zh: '飞天之塔',
+      es: 'Torre Skyward',
+      fr: 'Tour Skyward',
     },
     description: {
       en: 'Monthly tower challenge - unlocks {P/Sigma}',
@@ -220,6 +234,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '월간 리셋 타워 챌린지 - {P/Sigma} 획득 가능',
       zh: '每月重置的塔挑战 - 可获得{P/Sigma}',
       fr: 'Challenge de tour mensuel - débloque {P/Sigma}',
+      es: 'Desafío mensual de torre - desbloquea {P/Sigma}',
     },
   },
   {
@@ -233,6 +248,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '강화 재료를 얻을 수 있는 속성별 챌린지 타워',
       zh: '可获得强化材料的元素挑战塔',
       fr: "Tours de challenge spécifiques aux Éléments avec des matériaux d'upgrade",
+      es: 'Torres de desafío específicas de elemento con materiales de mejora',
     },
   },
   {
@@ -246,6 +262,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '방어구 세트를 파밍하는 주요 장소',
       zh: '刷防具套装的主要场所',
       fr: 'Endroit principal pour farmer les armor sets',
+      es: 'Lugar principal para farmear sets de armadura',
     },
   },
   {
@@ -259,6 +276,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '무기와 악세서리를 파밍하는 주요 장소',
       zh: '刷武器和饰品的主要场所',
       fr: 'Endroit principal pour farmer les armes et accessoires',
+      es: 'Lugar principal para farmear armas y accesorios',
     },
   },
   {
@@ -272,6 +290,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '기프트와 정밀 제작 자원을 파밍하는 장소',
       zh: '刷天赋和精密制作资源的场所',
       fr: 'Farm de ressources pour Quirk et Precise Craft',
+      es: 'Farmea recursos para Quirk y Precise Craft',
     },
   },
   {
@@ -285,6 +304,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '{I-I/Hero Piece}를 획득하여 영웅 초월',
       zh: '获取{I-I/Hero Piece}来超越英雄',
       fr: 'Obtenez des {I-I/Hero Piece} pour transcender les Héros',
+      es: 'Obtén {I-I/Hero Piece} para trascender héroes',
     },
   },
   {
@@ -298,6 +318,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '전용 무기, 악세서리 등을 얻는 솔로 모드',
       zh: '可获得专属武器、饰品等奖励的单人模式',
       fr: 'Mode solo pour armes, accessoires exclusifs et autres récompenses',
+      es: 'Modo solitario para armas, accesorios y otras recompensas exclusivas',
     },
   },
   {
@@ -313,6 +334,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '전용 무기, 악세서리 등을 얻는 협동 모드',
       zh: '可获得专属武器、饰品等奖励的协作模式',
       fr: 'Mode co-op pour armes, accessoires exclusifs et autres récompenses',
+      es: 'Modo cooperativo para armas, accesorios y otras recompensas exclusivas',
     },
     customNote: {
       en: 'Clear Floor 1 of Infiltration Operation',
@@ -320,6 +342,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '침투 섬멸전의 플로어 1을 클리어',
       zh: '通关渗透歼灭战第1层',
       fr: "Clear le Floor 1 de l'Infiltration Operation",
+      es: 'Completa el Piso 1 de Op. de Infiltración',
     },
   },
   {
@@ -333,6 +356,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '다양한 보상이 있는 주간 챌린지 모드',
       zh: '有各种奖励的每周挑战模式',
       fr: 'Mode challenge hebdomadaire avec récompenses variées',
+      es: 'Modo de desafío semanal con varias recompensas',
     },
     customNote: {
       en: 'Any one of the listed Hard-season finals satisfies the unlock',
@@ -340,6 +364,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '나열된 하드 시즌 최종 중 하나만 클리어하면 해금',
       zh: '清完所列任一硬核赛季终章即可解锁',
       fr: 'Un seul des stages finaux Hard listés suffit pour débloquer',
+      es: 'Cualquiera de las finales de temporada difícil listadas satisface el desbloqueo',
     },
   },
   {
@@ -353,6 +378,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: 'AI 방어팀과 싸우는 PvP 모드',
       zh: '与AI防守队伍对战的PvP模式',
       fr: 'Mode PvP contre des équipes de défense IA',
+      es: 'Modo PvP contra equipos de defensa controlados por IA',
     },
   },
   {
@@ -366,6 +392,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '다른 플레이어와 실시간 PvP',
       zh: '与其他玩家进行实时PvP',
       fr: 'PvP en direct contre un autre joueur',
+      es: 'PvP en vivo contra otro jugador',
     },
   },
   {
@@ -379,6 +406,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '레이팅에 영향이 없는 실시간 결투장 연습 경기',
       zh: '不影响等级的实时竞技场练习对战',
       fr: "Matchs d'entraînement de Real-Time Arena sans impact sur le classement",
+      es: 'Practica combates de Arena en Tiempo Real sin afectar tu clasificación',
     },
   },
 
@@ -394,6 +422,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '강화 재료로 영웅 능력치 향상',
       zh: '使用强化材料提升英雄属性',
       fr: "Améliorez les stats des Héros avec des matériaux d'enchant",
+      es: 'Mejora las estadísticas del héroe con materiales de encantamiento',
     },
   },
   {
@@ -407,6 +436,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '영웅의 잠재력을 해방하고 강화',
       zh: '释放英雄潜能并加以强化',
       fr: "Débloque le potentiel d'un Héros et le renforce",
+      es: 'Desbloquea el potencial de un héroe y lo fortalece',
     },
   },
   {
@@ -420,6 +450,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '전용 장비 슬롯 해금',
       zh: '解锁专属装备栏',
       fr: "Débloque le slot d'équipement exclusif",
+      es: 'Desbloquea la ranura de equipo exclusivo',
     },
   },
   {
@@ -432,14 +463,24 @@ export const ENTRIES: GuideEntry[] = [
       jp: 'マグノリアを目指して',
       kr: '매그놀리아를 향해',
       zh: '向着麦格诺里亚',
+      es: 'Rumbo a Magnolia',
+      fr: 'En route vers Magnolia',
     },
-    modeName: { en: 'Talisman', jp: 'タリスマン', kr: '탈리스만', zh: '护身符' },
+    modeName: {
+      en: 'Talisman',
+      jp: 'タリスマン',
+      kr: '탈리스만',
+      zh: '护身符',
+      es: 'Talismán',
+      fr: 'Talisman',
+    },
     description: {
       en: 'Unlock the talisman equipment slot',
       jp: 'タリスマン装備スロットを解放',
       kr: '탈리스만 장비 슬롯 해금',
       zh: '解锁护身符装备栏',
       fr: "Débloque le slot d'équipement Talisman",
+      es: 'Desbloquea la ranura de equipo de talismán',
     },
   },
 
@@ -455,6 +496,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '제작, 상점 등의 기능이 있는 아지트 해금',
       zh: '解锁基地,包含制作、商店等功能',
       fr: 'Débloque la Base avec crafting, shop et autres fonctionnalités',
+      es: 'Desbloquea la Base con artesanía, tienda y otras funciones',
     },
   },
   {
@@ -468,6 +510,7 @@ export const ENTRIES: GuideEntry[] = [
       kr: '배치된 영웅이 룸 업그레이드에 따라 스탯 획득',
       zh: '放置的英雄根据房间升级获得属性',
       fr: 'Les Héros placés ici gagnent des stats selon les upgrades de la room',
+      es: 'Los héroes colocados aquí obtienen estadísticas según las mejoras de la sala',
     },
   },
   {
@@ -479,13 +522,21 @@ export const ENTRIES: GuideEntry[] = [
     // Crafting » (l'écran de lock) ; tout le site dit « Precise Craft »
     // (beginner-faq, labels progress.preciseCraft), on s'y aligne ici plutôt
     // que via une exception du générateur (qui, lui, ne fait que de la donnée).
-    modeName: { en: 'Precise Craft', jp: '精密作成', kr: '정밀 제작', zh: '精密制作' },
+    modeName: {
+      en: 'Precise Craft',
+      jp: '精密作成',
+      kr: '정밀 제작',
+      zh: '精密制作',
+      es: 'Artesanía precisa',
+      fr: 'Artisanat précis',
+    },
     description: {
       en: 'Craft equipment and reroll substats until satisfied',
       jp: '装備を作成し、満足するまでサブステータスをリロール',
       kr: '장비를 제작하고 만족할 때까지 부옵션 리롤',
       zh: '制作装备并重新随机副属性直到满意',
       fr: "Craftez de l'équipement et reroll les substats jusqu'à satisfaction",
+      es: 'Fabrica equipo y vuelve a tirar sub-stats hasta estar satisfecho',
     },
   },
   {
@@ -498,14 +549,17 @@ export const ENTRIES: GuideEntry[] = [
       jp: '奪った者の責任感',
       kr: '빼앗은 자의 책임감',
       zh: '掠夺者的责任感',
+      es: 'La responsabilidad del culpable',
+      fr: 'La Responsabilité du coupable',
     },
-    modeName: { en: 'Quirk', jp: 'ギフト', kr: '기프트', zh: '天赋' },
+    modeName: { en: 'Quirk', jp: 'ギフト', kr: '기프트', zh: '天赋', es: 'Quirk', fr: 'Quirk' },
     description: {
       en: 'Permanent account-wide stat bonuses',
       jp: 'アカウント全体に適用される永続ステータスボーナス',
       kr: '계정 전체에 적용되는 영구 스탯 보너스',
       zh: '全账号永久属性加成',
       fr: "Bonus de stat permanents à l'échelle du compte",
+      es: 'Bonificaciones de estadísticas permanentes para toda la cuenta',
     },
   },
 ];

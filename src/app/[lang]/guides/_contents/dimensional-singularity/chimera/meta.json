@@ -4,17 +4,19 @@
     "jp": "キメラ",
     "kr": "키메라",
     "zh": "奇美拉",
-    "fr": "Chimera"
+    "fr": "Chimera",
+    "es": "Chimera"
   },
   "description": {
     "en": "Chimera (Earth), Dimensional Singularity — a Fire headcount check: 3 or 4 Fire heroes push its damage taken to +50% / +120%, Penetration Up adds +50%; Curse and Fixed damage capped at 50000. Skills, teams & strategies.",
     "jp": "次元特異点「キメラ」攻略 — 火属性の人数チェック。味方に火属性が3体／4体いると被ダメージ+50%／+120%、貫通力増加持ちからはさらに+50%。呪い・固定ダメージは50000で頭打ち。スキル・編成・攻略法。",
     "kr": "차원 특이점: 키메라 공략 — 화속성 인원수 체크. 아군에 화속성이 3명/4명이면 받는 피해 +50%/+120%, 관통력 증가 보유자에겐 추가로 +50%. 저주·고정 피해는 50000으로 제한. 스킬, 팀 편성, 공략법.",
     "zh": "次元奇点：奇美拉攻略 — 火属性人数检定：队伍中有3名/4名火属性时其受到伤害+50%/+120%，对持穿透增加者再+50%；诅咒与固定伤害上限50000。技能、队伍编成与策略。",
-    "fr": "Singularité Dimensionnelle : Chimera (Earth) — un contrôle d'effectif Fire : 3 ou 4 héros Fire portent ses dégâts subis à +50% / +120%, la Pénétration ajoute +50% ; dégâts de Malédiction et Fixes plafonnés à 50000. Compétences, équipes et stratégies."
+    "fr": "Singularité Dimensionnelle : Chimera (Earth) — un contrôle d'effectif Fire : 3 ou 4 héros Fire portent ses dégâts subis à +50% / +120%, la Pénétration ajoute +50% ; dégâts de Malédiction et Fixes plafonnés à 50000. Compétences, équipes et stratégies.",
+    "es": "Chimera (Tierra), Singularidad Dimensional — una comprobación de recuento de Fuego: 3 o 4 héroes de Fuego elevan el daño recibido a +50% / +120%, Penetración + añade +50%; el daño de Maldición y Fijo está limitado a 50000. Skills, equipos y estrategias."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",
-  "updated": "2026-09-09",
+  "updated": "2026-09-23",
   "bossId": "60000007"
 }

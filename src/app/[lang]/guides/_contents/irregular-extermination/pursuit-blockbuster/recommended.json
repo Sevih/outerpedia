@@ -6,7 +6,8 @@
       "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_CALL_BACKUP}を持つ{C/Healer}。",
       "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_CALL_BACKUP}을 가진 {C/Healer}.",
       "zh": "拥有{B/BT_REMOVE_DEBUFF}和{B/BT_CALL_BACKUP}的{C/Healer}。",
-      "fr": "Options {C/Healer} avec {B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}."
+      "fr": "Options {C/Healer} avec {B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}.",
+      "es": "Opciones de {C/Healer} con {B/BT_REMOVE_DEBUFF} y {B/BT_CALL_BACKUP}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{D/BT_SEALED}オプション。",
       "kr": "{D/BT_SEALED} 옵션.",
       "zh": "{D/BT_SEALED}选项。",
-      "fr": "Options {D/BT_SEALED}."
+      "fr": "Options {D/BT_SEALED}.",
+      "es": "Opciones de {D/BT_SEALED}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "{B/HEAVY_STRIKE} DPS。",
       "kr": "{B/HEAVY_STRIKE} DPS.",
       "zh": "{B/HEAVY_STRIKE} DPS。",
-      "fr": "DPS {B/HEAVY_STRIKE}."
+      "fr": "DPS {B/HEAVY_STRIKE}.",
+      "es": "DPS de {B/HEAVY_STRIKE}."
     }
   },
   {
@@ -49,7 +52,8 @@
       "jp": "DPSオプション。",
       "kr": "DPS 옵션.",
       "zh": "DPS选项。",
-      "fr": "Options de DPS."
+      "fr": "Options de DPS.",
+      "es": "Opciones de DPS."
     }
   }
 ]

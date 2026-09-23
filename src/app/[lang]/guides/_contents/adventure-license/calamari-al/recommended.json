@@ -6,7 +6,8 @@
       "jp": "{E/Light} DPSオプション。",
       "kr": "{E/Light} DPS 옵션.",
       "zh": "{E/Light} DPS选项。",
-      "fr": "Options de DPS {E/Light}."
+      "fr": "Options de DPS {E/Light}.",
+      "es": "Opciones de DPS de {E/Light}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{D/BT_STEAL_BUFF}を持つ{E/Light} DPS。",
       "kr": "{D/BT_STEAL_BUFF}를 가진 {E/Light} DPS.",
       "zh": "拥有{D/BT_STEAL_BUFF}的{E/Light} DPS。",
-      "fr": "DPS {E/Light} avec {D/BT_STEAL_BUFF}."
+      "fr": "DPS {E/Light} avec {D/BT_STEAL_BUFF}.",
+      "es": "DPS de {E/Light} con {D/BT_STEAL_BUFF}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "{D/BT_SEALED}を持つ{E/Light}サポート。",
       "kr": "{D/BT_SEALED}를 가진 {E/Light} 서포트.",
       "zh": "拥有{D/BT_SEALED}的{E/Light}辅助。",
-      "fr": "Support {E/Light} avec {D/BT_SEALED}."
+      "fr": "Support {E/Light} avec {D/BT_SEALED}.",
+      "es": "Soporte de {E/Light} con {D/BT_SEALED}."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{D/BT_SEALED}の代替手段。",
       "kr": "{D/BT_SEALED} 대체 옵션.",
       "zh": "{D/BT_SEALED}的替代选项。",
-      "fr": "Alternative pour {D/BT_SEALED}."
+      "fr": "Alternative pour {D/BT_SEALED}.",
+      "es": "Alternativa de {D/BT_SEALED}."
     }
   },
   {
@@ -46,7 +50,8 @@
       "jp": "{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}を持つ優秀な選択肢。",
       "kr": "{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}를 가진 훌륭한 선택.",
       "zh": "拥有{D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}的出色选择。",
-      "fr": "Excellent choix avec {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}."
+      "fr": "Excellent choix avec {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}.",
+      "es": "Gran elección con {D/BT_STATBUFF_CONVERT_TO_STATDEBUFF}."
     }
   },
   {
@@ -56,7 +61,8 @@
       "jp": "{E/Light} {C/Healer}オプション。",
       "kr": "{E/Light} {C/Healer} 옵션.",
       "zh": "{E/Light} {C/Healer}选项。",
-      "fr": "Options de {C/Healer} {E/Light}."
+      "fr": "Options de {C/Healer} {E/Light}.",
+      "es": "Opciones de {E/Light} {C/Healer}."
     }
   }
 ]

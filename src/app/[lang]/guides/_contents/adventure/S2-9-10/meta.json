@@ -4,18 +4,20 @@
     "jp": "シーズン2(ハード) : ブラッディマックス",
     "kr": "시즌 2 Part1 하드 : 블라디 맥스",
     "zh": "S2 困难：弗拉迪麦克斯",
-    "fr": "S2 Hard : Vladi Max"
+    "fr": "S2 Hard : Vladi Max",
+    "es": "S2 Difícil: Vladi Max"
   },
   "description": {
     "en": "S2 Hard 9-10 boss Vladi Max — drains your chain points and guarantees Stuns on Defense-debuffed heroes; counters won't save you. Mechanics, team and clear tips.",
     "jp": "ストーリーS2ハード9-10ボス「ブラッディマックス」攻略 — チェインポイントを吸い取り、防御ダウン中の味方を確定スタン。反撃も貫通してくる。ギミックとクリアのコツ。",
     "kr": "스토리 S2 하드 9-10 보스 블라디 맥스 공략 — 체인 포인트를 흡수하고 방어 감소 상태의 아군을 확정 기절. 반격도 통하지 않는다. 기믹과 클리어 팁.",
     "zh": "主线S2困难9-10 Boss血腥麦克斯攻略 — 吸取连锁点数，对减防队友必定眩晕；反击类被动全部无效。机制与通关技巧。",
-    "fr": "Boss S2 Hard 9-10 : Vladi Max — draine vos points de chaîne et stun à coup sûr les héros en Defense down ; les counters ne sauvent pas. Mécaniques, équipe et astuces."
+    "fr": "Boss S2 Hard 9-10 : Vladi Max — draine vos points de chaîne et stun à coup sûr les héros en Defense down ; les counters ne sauvent pas. Mécaniques, équipe et astuces.",
+    "es": "El jefe Vladi Max de S2 Difícil 9-10 — drena tus puntos de cadena y garantiza Aturdimiento en héroes con debuff de Defensa; los contraataques no te salvarán. Mecánicas, equipo y consejos para completarlo."
   },
   "icon": "T_DungeonArea_19",
   "author": "Sevih",
-  "updated": "2025-05-26",
+  "updated": "2026-09-23",
   "order": 209,
   "bossId": "4144004",
   "dungeons": ["120911", "121910"]

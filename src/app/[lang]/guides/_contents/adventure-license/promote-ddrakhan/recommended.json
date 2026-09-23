@@ -15,7 +15,8 @@
       "jp": "生存オプション。",
       "kr": "생존 옵션.",
       "zh": "生存选择。",
-      "fr": "Options de survie."
+      "fr": "Options de survie.",
+      "es": "Opciones de supervivencia."
     }
   },
   {
@@ -34,7 +35,8 @@
       "jp": "固定ダメージチェーンユニット。",
       "kr": "고정 피해 체인 유닛.",
       "zh": "固定伤害连携单位。",
-      "fr": "Unités de chaîne à dégâts fixes."
+      "fr": "Unités de chaîne à dégâts fixes.",
+      "es": "Unidades de cadena de daño fijo."
     }
   }
 ]

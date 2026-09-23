@@ -15,7 +15,8 @@
       "jp": "固定ダメージチェーンユニット。",
       "kr": "고정 피해 체인 유닛.",
       "zh": "固定伤害连携单位。",
-      "fr": "Unités de chaîne {D/BT_FIXED_DAMAGE}."
+      "fr": "Unités de chaîne {D/BT_FIXED_DAMAGE}.",
+      "es": "Unidades de cadena de {D/BT_FIXED_DAMAGE}."
     }
   },
   {
@@ -25,7 +26,8 @@
       "jp": "{C/Healer}オプション。",
       "kr": "{C/Healer} 옵션.",
       "zh": "{C/Healer}选择。",
-      "fr": "Options de {C/Healer}."
+      "fr": "Options de {C/Healer}.",
+      "es": "Opciones de {C/Healer}."
     }
   },
   {
@@ -35,7 +37,8 @@
       "jp": "{E/Dark} DPSオプション。",
       "kr": "{E/Dark} DPS 옵션.",
       "zh": "{E/Dark}输出选择。",
-      "fr": "Options de DPS {E/Dark}."
+      "fr": "Options de DPS {E/Dark}.",
+      "es": "Opciones de DPS {E/Dark}."
     }
   }
 ]

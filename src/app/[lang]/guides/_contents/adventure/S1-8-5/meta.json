@@ -4,18 +4,20 @@
     "jp": "S1 ノーマル 8-5 : マクスウェル",
     "kr": "S1 노말 8-5 : 맥스웰",
     "zh": "S1 普通 8-5：麦克斯韦",
-    "fr": "S1 Normal 8-5 : Maxwell"
+    "fr": "S1 Normal 8-5 : Maxwell",
+    "es": "S1 Normal 8-5: Maxwell"
   },
   "description": {
     "en": "S1 8-5 story boss Maxwell — kill the orb and he drops to 3% HP instantly: it's all about precise targeting. Mechanics, team and clear tips.",
     "jp": "ストーリーS1 8-5ボス「マクスウェル」攻略 — オーブを破壊すればHPが即3%まで低下。狙う対象がすべて。ギミックと編成、クリアのコツ。",
     "kr": "스토리 S1 8-5 보스 맥스웰 공략 — 오브를 파괴하면 즉시 HP 3%까지 하락. 타겟팅이 전부다. 기믹과 팀 편성, 클리어 팁.",
     "zh": "主线S1 8-5 Boss麦克斯威尔攻略 — 击杀宝珠后Boss血量立刻降至3%：目标选择是关键。机制、队伍与通关技巧。",
-    "fr": "Boss d'histoire S1 8-5 : Maxwell — tuez l'orbe et il tombe instantanément à 3% PV : tout est dans le ciblage. Mécaniques, équipe et astuces."
+    "fr": "Boss d'histoire S1 8-5 : Maxwell — tuez l'orbe et il tombe instantanément à 3% PV : tout est dans le ciblage. Mécaniques, équipe et astuces.",
+    "es": "Jefe de historia S1 8-5 Maxwell — mata el orbe y caerá instantáneamente al 3% de vida: todo se trata de apuntar con precisión. Mecánicas, equipo y consejos para el clear."
   },
   "icon": "T_DungeonArea_08",
   "author": "Sevih",
-  "updated": "2025-05-25",
+  "updated": "2026-09-23",
   "order": 108,
   "bossId": "4104007",
   "dungeons": ["100805"],

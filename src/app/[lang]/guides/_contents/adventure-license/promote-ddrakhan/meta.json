@@ -4,18 +4,20 @@
     "jp": "昇級チャレンジ : デミウルゴス ドレイカーン",
     "kr": "승급 챌린지 : 데미우르고스 드레이칸",
     "zh": "晋升挑战：创世之神 德雷坎",
-    "fr": "Promotion : Demiurge Drakhan"
+    "fr": "Promotion : Demiurge Drakhan",
+    "es": "Ascenso: Demiurgo Drakhan"
   },
   "description": {
     "en": "Tips and advice to succeed against Demiurge Drakhan",
     "jp": "デミウルゴス ドレイカーンを成功させるためのヒントとアドバイス",
     "kr": "데미우르고스 드레이칸을 성공시키기 위한 팁과 조언",
     "zh": "成功挑战创世之神 德雷坎的提示和建议",
-    "fr": "Conseils et astuces pour réussir contre Demiurge Drakhan"
+    "fr": "Conseils et astuces pour réussir contre Demiurge Drakhan",
+    "es": "Consejos y trucos para tener éxito contra Demiurgo Drakhan"
   },
   "icon": "T_Licence_2000063_Lock",
   "author": "Shiraen",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "bossId": "50000004",
   "group": "adventure_challenge:70600102"
 }

@@ -54,6 +54,7 @@ const MAIN_STAT_LABEL: LocalizedText = {
   kr: '메인 스탯',
   zh: '主属性',
   fr: 'Main Stat',
+  es: 'Main Stat',
 };
 
 /** Matériaux d'un `subType` du catalogue, triés par rareté (par nom EN). */

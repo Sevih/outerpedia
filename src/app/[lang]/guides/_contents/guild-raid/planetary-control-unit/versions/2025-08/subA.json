@@ -7,7 +7,8 @@
         "jp": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
         "kr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
         "zh": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
-        "fr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+        "fr": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "es": "{E/Fire} {B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
         "kr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
         "zh": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
-        "fr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
+        "fr": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}",
+        "es": "{B/BT_IMMUNE} {B/BT_REMOVE_DEBUFF}"
       }
     },
     {
@@ -27,7 +29,8 @@
         "jp": "標準的な{E/Dark}アタッカー",
         "kr": "기본 {E/Dark} 딜러",
         "zh": "标准{E/Dark}输出",
-        "fr": "DPS {E/Dark} standard"
+        "fr": "DPS {E/Dark} standard",
+        "es": "DPS estándar de {E/Dark}"
       }
     },
     {
@@ -37,7 +40,8 @@
         "jp": "標準的な{E/Dark}アタッカー",
         "kr": "기본 {E/Dark} 딜러",
         "zh": "标准{E/Dark}输出",
-        "fr": "DPS {E/Dark} standard"
+        "fr": "DPS {E/Dark} standard",
+        "es": "DPS estándar de {E/Dark}"
       }
     },
     {
@@ -47,7 +51,8 @@
         "jp": "標準的な{E/Fire}アタッカー",
         "kr": "기본 {E/Fire} 딜러",
         "zh": "标准{E/Fire}输出",
-        "fr": "DPS {E/Fire} standard"
+        "fr": "DPS {E/Fire} standard",
+        "es": "DPS estándar de {E/Fire}"
       }
     },
     {
@@ -57,7 +62,8 @@
         "jp": "標準的な{E/Fire}アタッカー",
         "kr": "기본 {E/Fire} 딜러",
         "zh": "标准{E/Fire}输出",
-        "fr": "DPS {E/Fire} standard"
+        "fr": "DPS {E/Fire} standard",
+        "es": "DPS estándar de {E/Fire}"
       }
     }
   ],

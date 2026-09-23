@@ -6,7 +6,8 @@
       "jp": "{E/Water}アタッカーの選択肢.",
       "kr": "{E/Water} DPS 옵션.",
       "zh": "{E/Water}输出选择.",
-      "fr": "Options de DPS {E/Water}."
+      "fr": "Options de DPS {E/Water}.",
+      "es": "Opciones de DPS {E/Water}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_BARRIER}を持つ{E/Water}ユニット.",
       "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_BARRIER}를 가진 {E/Water} 유닛.",
       "zh": "拥有{B/BT_REMOVE_DEBUFF}和{B/BT_BARRIER}的{E/Water}单位.",
-      "fr": "Unités {E/Water} avec {B/BT_REMOVE_DEBUFF} et {B/BT_BARRIER}."
+      "fr": "Unités {E/Water} avec {B/BT_REMOVE_DEBUFF} et {B/BT_BARRIER}.",
+      "es": "Unidades {E/Water} con {B/BT_REMOVE_DEBUFF} y {B/BT_BARRIER}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "{E/Water}サポートユニット.",
       "kr": "{E/Water} 서포트 유닛.",
       "zh": "{E/Water}辅助单位.",
-      "fr": "Unités de support {E/Water}."
+      "fr": "Unités de support {E/Water}.",
+      "es": "Unidades de soporte {E/Water}."
     }
   }
 ]

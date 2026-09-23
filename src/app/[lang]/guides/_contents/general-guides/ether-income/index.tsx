@@ -38,6 +38,7 @@ const COUPON_LINK_LABEL: LocalizedText = {
   kr: '자세히 보기',
   zh: '点击查看',
   fr: 'voir plus ici',
+  es: 'ver más aquí',
 };
 
 export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {

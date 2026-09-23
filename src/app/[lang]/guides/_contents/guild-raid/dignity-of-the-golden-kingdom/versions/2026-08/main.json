@@ -2,7 +2,9 @@
   "teams": [
     {
       "title": {
-        "en": "Light"
+        "en": "Light",
+        "es": "Luz",
+        "fr": "Lumière"
       },
       "element": "light",
       "slots": [["Anarky"], ["Dianne"], ["Demiurge Luna"], ["Mystic Sage Ame"]],
@@ -63,7 +65,9 @@
     },
     {
       "title": {
-        "en": "Ember"
+        "en": "Ember",
+        "es": "Ember",
+        "fr": "Ember"
       },
       "element": "fire",
       "slots": [
@@ -91,10 +95,14 @@
             },
             "notes": [
               {
-                "en": "166+ SPD at stage 10+ — 156 works if paired with a Healer granting +10 passive speed at 6★ transcendence."
+                "en": "166+ SPD at stage 10+ — 156 works if paired with a Healer granting +10 passive speed at 6★ transcendence.",
+                "es": "166+ SPD en la etapa 10+ — 156 funciona si se combina con un Sanador que otorgue +10 de velocidad pasiva a 6★ de trascendencia.",
+                "fr": "166+ SPD au stage 10+ — 156 fonctionne si combiné avec un Healer accordant +10 vitesse passive à 6★ transcendance."
               },
               {
-                "en": "{I-A/Unholy Exsultet} with ATK% main stat for bigger shields; prioritize ATK and SPD substats, with enough Effectiveness to land debuffs (use the +Effectiveness geas rather than an Effectiveness accessory)."
+                "en": "{I-A/Unholy Exsultet} with ATK% main stat for bigger shields; prioritize ATK and SPD substats, with enough Effectiveness to land debuffs (use the +Effectiveness geas rather than an Effectiveness accessory).",
+                "es": "{I-A/Unholy Exsultet} con ATK% como stat principal para escudos más grandes; prioriza los sub-stats de ATK y SPD, con suficiente Efectividad para aplicar debuffs (usa el geas de +Efectividad en lugar de un accesorio de Efectividad).",
+                "fr": "{I-A/Unholy Exsultet} avec ATK% en main stat pour de plus gros shields ; priorise les sub-stats ATK et SPD, avec assez d'Efficacité pour placer les debuffs (utilise le geas +Efficacité plutôt qu'un accessoire d'Efficacité)."
               }
             ]
           }
@@ -103,22 +111,32 @@
       "notes": [
         {
           "p": {
-            "en": "Sacrifice options — use a {C/Mage} to tank the stun; the others can hold charms:"
+            "en": "Sacrifice options — use a {C/Mage} to tank the stun; the others can hold charms:",
+            "es": "Opciones de sacrificio — usa un {C/Mage} para tanquear el aturdimiento; los demás pueden llevar amuletos:",
+            "fr": "Options de sacrifice — utilise un {C/Mage} pour tank le stun ; les autres peuvent porter des charms :"
           }
         },
         {
           "ul": [
             {
-              "en": "{P/Liselotte}: +10 SPD and damage reduction while shielded (her EE); can hold {I-A/Starlight Road}. Best option for this slot thanks to her EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} and {P/Viella} also work."
+              "en": "{P/Liselotte}: +10 SPD and damage reduction while shielded (her EE); can hold {I-A/Starlight Road}. Best option for this slot thanks to her EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} and {P/Viella} also work.",
+              "es": "{P/Liselotte}: +10 SPD y reducción de daño mientras esté protegida (su EE); puede llevar {I-A/Starlight Road}. Mejor opción para este slot gracias a su EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} y {P/Viella} también funcionan.",
+              "fr": "{P/Liselotte} : +10 SPD et réduction des dégâts tant qu'elle est protégée par un shield (son EE) ; peut porter {I-A/Starlight Road}. Meilleure option pour ce slot grâce à son EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} et {P/Viella} fonctionnent aussi."
             },
             {
-              "en": "{P/Christina}: -30% damage reduction, holding a T4 {I-A/Charmer's Golden Chalice} — drop it if Ember doesn't fall below 50% HP on turn 1."
+              "en": "{P/Christina}: -30% damage reduction, holding a T4 {I-A/Charmer's Golden Chalice} — drop it if Ember doesn't fall below 50% HP on turn 1.",
+              "es": "{P/Christina}: -30% de reducción de daño, llevando un {I-A/Charmer's Golden Chalice} T4 — quítalo si Ember no baja del 50% de HP en el turno 1.",
+              "fr": "{P/Christina} : -30% de réduction des dégâts, en portant un {I-A/Charmer's Golden Chalice} T4 — retire-le si Ember ne descend pas sous 50% HP au tour 1."
             },
             {
-              "en": "{P/Kuro}: tanks the stun, resets the boss's action bar on turn 1 and self-revives, so Ember only needs to tank her S3 before her shield is up (268+ Effectiveness)."
+              "en": "{P/Kuro}: tanks the stun, resets the boss's action bar on turn 1 and self-revives, so Ember only needs to tank her S3 before her shield is up (268+ Effectiveness).",
+              "es": "{P/Kuro}: tanquea el aturdimiento, reinicia la barra de acción del jefe en el turno 1 y se auto-revive, así Ember solo necesita tanquear su S3 antes de que su escudo esté activo (268+ Efectividad).",
+              "fr": "{P/Kuro} : tank le stun, réinitialise la barre d'action du boss au tour 1 et se ressuscite elle-même, donc Ember n'a besoin de tank son S3 qu'avant que son shield ne soit actif (268+ Efficacité)."
             },
             {
-              "en": "{P/Ritri}, {P/Demiurge Drakhan} and {P/Omega Nadja}: damage reduction, can hold {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} also lands Irregular Infection on turn 1 for a damage debuff)."
+              "en": "{P/Ritri}, {P/Demiurge Drakhan} and {P/Omega Nadja}: damage reduction, can hold {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} also lands Irregular Infection on turn 1 for a damage debuff).",
+              "es": "{P/Ritri}, {P/Demiurge Drakhan} y {P/Omega Nadja}: reducción de daño, pueden llevar {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} también aplica Infección Irregular en el turno 1 para un debuff de daño).",
+              "fr": "{P/Ritri}, {P/Demiurge Drakhan} et {P/Omega Nadja} : réduction des dégâts, peuvent porter {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} place aussi Infection Irrégulière au tour 1 pour un debuff de dégâts)."
             }
           ]
         },
@@ -128,7 +146,8 @@
             "jp": "ギアス15（味方の最大HP-30%）を外すと生存率が上がります。",
             "kr": "기어스 15(아군 최대 체력 -30%)를 제거하면 생존율이 높아집니다.",
             "zh": "移除契约15（友军最大生命值-30%）可提高生存率。",
-            "fr": "Retirez le geas 15 (HP max alliés -30%) pour une meilleure survie."
+            "fr": "Retirez le geas 15 (HP max alliés -30%) pour une meilleure survie.",
+            "es": "Quita el geas 15 (Vida máx. aliados -30%) para mayor supervivencia."
           }
         }
       ],
@@ -141,7 +160,9 @@
     },
     {
       "title": {
-        "en": "Burn Team"
+        "en": "Burn Team",
+        "es": "Equipo de Quemadura",
+        "fr": "Équipe Burn"
       },
       "icon": "IG_Buff_Dot_Burn",
       "slots": [
@@ -167,7 +188,9 @@
             },
             "notes": [
               {
-                "en": "Can use a slower build with EE+10 to chain skill earlier and boost team AP."
+                "en": "Can use a slower build with EE+10 to chain skill earlier and boost team AP.",
+                "es": "Se puede usar un build más lento con EE+10 para encadenar skills antes y aumentar el AP del equipo.",
+                "fr": "Peut utiliser un build plus lent avec EE+10 pour enchaîner le skill plus tôt et booster les PA de l'équipe."
               }
             ]
           },
@@ -209,7 +232,9 @@
             },
             "notes": [
               {
-                "en": "Uses {I-W/Phantasm Necrosis} to lower her speed."
+                "en": "Uses {I-W/Phantasm Necrosis} to lower her speed.",
+                "es": "Usa {I-W/Phantasm Necrosis} para reducir su velocidad.",
+                "fr": "Utilise {I-W/Phantasm Necrosis} pour réduire sa vitesse."
               }
             ]
           }
@@ -222,7 +247,8 @@
             "jp": "ターン15で怒りのアルティメットを使う前にボスをブレイクしてください。生存のためにギアス15（味方の最大HP-30%）を外すか、{P/Omega Nadja}を使用してください。",
             "kr": "턴 15에서 분노 궁극기를 사용하기 전에 보스를 브레이크하세요. 생존을 위해 기어스 15(아군 최대 체력 -30%)를 제거하거나 {P/Omega Nadja}를 사용하세요.",
             "zh": "在第15回合狂暴大招前打破Boss。为了生存可以移除契约15（友军最大生命值-30%）或使用{P/Omega Nadja}。",
-            "fr": "Brisez le Boss au tour 15 avant qu'il n'utilise son ultime d'enrage. Ne retirez le geas 15 (HP max alliés -30%) ou n'utilisez {P/Omega Nadja} qu'en cas de nécessité pour la survie."
+            "fr": "Brisez le Boss au tour 15 avant qu'il n'utilise son ultime d'enrage. Ne retirez le geas 15 (HP max alliés -30%) ou n'utilisez {P/Omega Nadja} qu'en cas de nécessité pour la survie.",
+            "es": "Rompe al jefe en el turno 15 antes de que use su definitiva de furia. Solo quita el geas 15 (Vida máx. aliados -30%) o usa {P/Omega Nadja} si es necesario para la supervivencia."
           }
         },
         {
@@ -231,7 +257,8 @@
             "jp": "{P/Core Fusion Veronica}を{P/Omega Nadja}に置き換えるとターン1の生存率が上がります（最低速度で速度デバフを期待）。{P/Omega Nadja}使用時はカウンターギアスを無効に。通常の{P/Veronica}でも可。",
             "kr": "{P/Core Fusion Veronica}를 {P/Omega Nadja}로 교체하면 턴 1 생존율이 높아집니다(최저 속도로 속도 디버프 기대). {P/Omega Nadja} 사용 시 카운터 기어스를 비활성화하세요. 일반 {P/Veronica}도 가능합니다.",
             "zh": "将{P/Core Fusion Veronica}替换为{P/Omega Nadja}可提高第1回合生存率（最低速度期待速度减益触发）。使用{P/Omega Nadja}时禁用反击契约。普通{P/Veronica}也可以。",
-            "fr": "Remplacez {P/Core Fusion Veronica} par {P/Omega Nadja} pour une meilleure survie au tour 1 (utilisez la vitesse minimale, en espérant le proc du debuff de vitesse). Si vous utilisez {P/Omega Nadja}, désactivez le geas de contre-attaque. La {P/Veronica} classique fonctionne aussi."
+            "fr": "Remplacez {P/Core Fusion Veronica} par {P/Omega Nadja} pour une meilleure survie au tour 1 (utilisez la vitesse minimale, en espérant le proc du debuff de vitesse). Si vous utilisez {P/Omega Nadja}, désactivez le geas de contre-attaque. La {P/Veronica} classique fonctionne aussi.",
+            "es": "Reemplaza {P/Core Fusion Veronica} por {P/Omega Nadja} para mejor supervivencia en el turno 1 (usa velocidad mínima, esperando que se active el debuff de velocidad). Si usas {P/Omega Nadja}, desactiva el geas de contraataque. {P/Veronica} normal también funciona."
           }
         }
       ],
@@ -244,7 +271,9 @@
     },
     {
       "title": {
-        "en": "Burn Team (Stage 20+)"
+        "en": "Burn Team (Stage 20+)",
+        "es": "Equipo de Quemadura (Etapa 20+)",
+        "fr": "Équipe Burn (Stage 20+)"
       },
       "icon": "IG_Buff_Dot_Burn",
       "slots": [["Maxie"], ["Roxie"], ["Vlada"], ["Omega Nadja"]],
@@ -305,12 +334,16 @@
       "notes": [
         {
           "p": {
-            "en": "Designed for especially high-level stages (20+) over the previous team, where {P/Core Fusion Veronica} doesn't provide enough damage reduction to keep the team alive — especially if the boss crits someone on turn 1."
+            "en": "Designed for especially high-level stages (20+) over the previous team, where {P/Core Fusion Veronica} doesn't provide enough damage reduction to keep the team alive — especially if the boss crits someone on turn 1.",
+            "es": "Diseñado para etapas de nivel especialmente alto (20+) por encima del equipo anterior, donde {P/Core Fusion Veronica} no ofrece suficiente reducción de daño para mantener vivo al equipo — especialmente si el jefe hace un crítico a alguien en el turno 1.",
+            "fr": "Conçue pour les stages particulièrement élevés (20+) par rapport à l'équipe précédente, où {P/Core Fusion Veronica} ne fournit pas assez de réduction des dégâts pour garder l'équipe en vie — surtout si le boss crit quelqu'un au tour 1."
           }
         },
         {
           "p": {
-            "en": "The -30% Max HP geas is turned OFF here, but you can turn it on if all your units survive a turn-1 crit, or to gamble for more points (the boss crit rate is 10%, but it feels much lower)."
+            "en": "The -30% Max HP geas is turned OFF here, but you can turn it on if all your units survive a turn-1 crit, or to gamble for more points (the boss crit rate is 10%, but it feels much lower).",
+            "es": "El geas de -30% HP máx. está DESACTIVADO aquí, pero puedes activarlo si todas tus unidades sobreviven a un crítico en el turno 1, o para arriesgarte a conseguir más puntos (la tasa de crítico del jefe es del 10%, pero se siente mucho más baja).",
+            "fr": "Le geas -30% HP Max est désactivé ici, mais tu peux l'activer si toutes tes unités survivent à un crit au tour 1, ou pour tenter plus de points (le taux de crit du boss est de 10%, mais il semble bien plus bas)."
           }
         }
       ],

@@ -4,18 +4,20 @@
     "jp": "シーズン1(ハード) : レオ & アルファ",
     "kr": "시즌 1 하드 : 레오 & 알파",
     "zh": "S1 困难：雷欧 & 阿尔法",
-    "fr": "S1 Hard : Leo & Alpha"
+    "fr": "S1 Hard : Leo & Alpha",
+    "es": "S1 Difícil: Leo & Alpha"
   },
   "description": {
     "en": "S1 Hard 9-5 boss Leo & Alpha — shields and Defense-scaling damage; control his buffs before the S3 nuke. Mechanics, team and clear tips.",
     "jp": "ストーリーS1ハード9-5ボス「レオ＆アルファ」攻略 — シールドと防御力参照ダメージが特徴。S3の全体攻撃前にバフ管理を。ギミックと編成、クリアのコツ。",
     "kr": "스토리 S1 하드 9-5 보스 레오&알파 공략 — 실드와 방어력 비례 피해가 특징. S3 광역기 전에 버프 관리 필수. 기믹과 팀 편성, 클리어 팁.",
     "zh": "主线S1困难9-5 Boss雷欧&阿尔法攻略 — 护盾与基于防御的伤害；在S3爆发前控制其增益。机制、队伍与通关技巧。",
-    "fr": "Boss S1 Hard 9-5 : Leo & Alpha — boucliers et dégâts basés sur la Défense ; contrôlez ses buffs avant la nuke du S3. Mécaniques, équipe et astuces."
+    "fr": "Boss S1 Hard 9-5 : Leo & Alpha — boucliers et dégâts basés sur la Défense ; contrôlez ses buffs avant la nuke du S3. Mécaniques, équipe et astuces.",
+    "es": "Jefe S1 Difícil 9-5 Leo & Alpha — escudos y daño escalado por Defensa; controla sus bonos antes del nuke de S3. Mecánicas, equipo y consejos de clear."
   },
   "icon": "T_DungeonArea_09",
   "author": "Sevih",
-  "updated": "2025-05-25",
+  "updated": "2026-09-23",
   "order": 109,
   "bossId": "400401111",
   "dungeons": ["110905"],

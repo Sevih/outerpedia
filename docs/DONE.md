@@ -7,6 +7,30 @@
 
 ## 2026-09-23
 
+- **L'éditorial parle aussi français et espagnol — le « repli EN » du matin n'a
+  pas passé la soirée** (Sevih : « il faut traduire et s'occuper de toute
+  l'intégration fr/es »). Inventaire d'abord : 3 100 textes localisés dans les
+  JSON (curés, `meta.json` et JSON des 149 guides — 251 000 caractères) et
+  1 579 littéraux TS à cinq langues, dont 310 sans français non plus. Un outil
+  de session (scratchpad) a collecté chaque unité — JSON par parcours, TS par
+  le COMPILATEUR TypeScript (objets dont toutes les clés sont des codes langue,
+  `en` littéral) —, masqué les balises inline (`{B/…}`, `{SK/…|S3}`,
+  `<color>`) en marqueurs numérotés, traduit par lots de 25 avec **Sonnet 5**
+  (choix Sevih ; effort bas, glossaire officiel FR/ES + noms de persos en cache
+  de prompt : 682 000 tokens lus en cache pour 315 000 payés), validé que
+  chaque marqueur revient, puis écrit EN PLACE : JSON via `jsonc-parser` (rien
+  d'autre ne bouge), TS par insertion après la dernière propriété. 4 711
+  unités es et 310 fr, 527 fichiers, un seul échec (une contrainte de Skadi
+  dont le modèle perdait une balise trois fois de suite — traduite à la main),
+  124 « identiques à l'anglais » tous légitimes (chaînes faites de balises,
+  URL, noms propres). Prettier ne réécrit que les objets TS devenus trop longs
+  pour une ligne. Typecheck et 1 921 tests verts. Règles de traduction posées
+  dans CONVENTIONS § i18n (jargon commun en anglais, classes FR en anglais,
+  espagnol sur le vocabulaire officiel). À relire au fil de l'eau : les noms de
+  boss dans les titres de guides restent en anglais là où le jeu a désormais un
+  nom localisé — c'est un choix, pas un oubli (le nom anglais reste celui que
+  la communauté tape), à revoir si les lecteurs fr/es s'y perdent.
+
 - **Le jeu parle français et espagnol : six langues officielles, plus aucune
   communautaire.** Le client Steam du 22/09 ajoute deux colonnes à ses 15 tables
   `Text*`, `French` et `Spanish`, remplies à 100 % (16 104 lignes sur 16 105

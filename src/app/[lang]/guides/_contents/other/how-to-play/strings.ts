@@ -16,6 +16,7 @@ export const S = {
     kr: '다운로드 및 플레이 방법',
     zh: '如何下载游玩',
     fr: 'Comment télécharger et jouer',
+    es: 'Cómo descargar y jugar',
   },
   heroSubtitle: {
     en: 'Official download links and platforms to start your adventure in Outerplane.',
@@ -23,6 +24,7 @@ export const S = {
     kr: 'Outerplane에서 모험을 시작하기 위한 공식 다운로드 링크 및 플랫폼.',
     zh: '异域战记官方下载平台：开启您在异域战记的冒险！',
     fr: 'Liens de téléchargement officiels et plateformes pour démarrer votre aventure dans Outerplane.',
+    es: 'Enlaces oficiales de descarga y plataformas para comenzar tu aventura en Outerplane.',
   },
   aboutTitle: {
     en: 'About Outerplane',
@@ -30,6 +32,7 @@ export const S = {
     kr: 'Outerplane 소개',
     zh: '关于异域战记',
     fr: "À propos d'Outerplane",
+    es: 'Acerca de Outerplane',
   },
   aboutDesc: {
     en: 'Outerplane is a mobile RPG featuring stunning anime-style graphics, strategic turn-based combat, and an engaging storyline. Dive into a universe filled with unique heroes, epic battles, and exciting adventures.',
@@ -37,6 +40,7 @@ export const S = {
     kr: 'Outerplane은 멋진 애니메이션 스타일의 그래픽, 전략적인 턴제 전투, 그리고 매력적인 스토리라인을 특징으로 하는 모바일 RPG입니다. 독특한 영웅들, 장대한 전투, 그리고 흥미진진한 모험으로 가득 찬 세계로 뛰어드세요.',
     zh: '异域战记是一款角色扮演RPG。它有着华丽的二次元风格图像、策略性的回合制战斗和引人入胜的故事线。快来和风格各异的同伴一同加入这有着史诗战斗与激动人心的冒险的世界！',
     fr: "Outerplane est un RPG mobile doté de superbes graphismes de style anime, de combats stratégiques au tour par tour et d'une histoire captivante. Plongez dans un univers rempli de héros uniques, de batailles épiques et d'aventures palpitantes.",
+    es: 'Outerplane es un RPG móvil con impresionantes gráficos estilo anime, combate estratégico por turnos y una historia cautivadora. Sumérgete en un universo lleno de héroes únicos, batallas épicas y emocionantes aventuras.',
   },
   mobileTitle: {
     en: 'Download for Mobile',
@@ -44,6 +48,7 @@ export const S = {
     kr: '모바일 다운로드',
     zh: '支持移动端/电脑下载',
     fr: 'Télécharger sur mobile',
+    es: 'Descargar para móvil',
   },
   androidTitle: {
     en: 'Google Play Store (Android)',
@@ -51,6 +56,7 @@ export const S = {
     kr: 'Google Play Store (Android)',
     zh: 'Google Play Store (Android)',
     fr: 'Google Play Store (Android)',
+    es: 'Google Play Store (Android)',
   },
   androidDesc: {
     en: 'Download Outerplane from the official Google Play Store for Android devices.',
@@ -58,6 +64,7 @@ export const S = {
     kr: 'Android 기기용 공식 Google Play Store에서 Outerplane을 다운로드하세요.',
     zh: '从官方Google商店为安卓设备下载异域战记。',
     fr: 'Téléchargez Outerplane depuis le Google Play Store officiel pour appareils Android.',
+    es: 'Descarga Outerplane desde la tienda oficial Google Play Store para dispositivos Android.',
   },
   androidBtn: {
     en: 'Download on Google Play',
@@ -65,6 +72,7 @@ export const S = {
     kr: 'Google Play에서 다운로드',
     zh: '在Google Play下载',
     fr: 'Télécharger sur Google Play',
+    es: 'Descargar en Google Play',
   },
   iosTitle: {
     en: 'Apple App Store (iOS)',
@@ -72,6 +80,7 @@ export const S = {
     kr: 'Apple App Store (iOS)',
     zh: '苹果App Store (iOS)',
     fr: 'Apple App Store (iOS)',
+    es: 'Apple App Store (iOS)',
   },
   iosDesc: {
     en: 'Download Outerplane from the official Apple App Store for iPhone and iPad.',
@@ -79,6 +88,7 @@ export const S = {
     kr: 'iPhone 및 iPad용 공식 Apple App Store에서 Outerplane을 다운로드하세요.',
     zh: '从官方App Store为iPhone与iPad下载异域战记。',
     fr: "Téléchargez Outerplane depuis l'Apple App Store officiel pour iPhone et iPad.",
+    es: 'Descarga Outerplane desde la Apple App Store oficial para iPhone y iPad.',
   },
   iosBtn: {
     en: 'Download on App Store',
@@ -86,6 +96,7 @@ export const S = {
     kr: 'App Store에서 다운로드',
     zh: '在App Store下载',
     fr: "Télécharger sur l'App Store",
+    es: 'Descargar en App Store',
   },
   pcTitle: {
     en: 'Play on PC',
@@ -93,6 +104,7 @@ export const S = {
     kr: 'PC에서 플레이',
     zh: '在电脑上玩',
     fr: 'Jouer sur PC',
+    es: 'Jugar en PC',
   },
   gpgTitle: {
     en: 'Google Play Games (Beta)',
@@ -100,6 +112,7 @@ export const S = {
     kr: 'Google Play Games (베타)',
     zh: 'Google Play游戏电脑版',
     fr: 'Google Play Games (Bêta)',
+    es: 'Google Play Games (Beta)',
   },
   gpgDesc: {
     en: 'Play Outerplane on PC using Google Play Games for PC (Beta), the official PC platform supported by Google. This allows you to enjoy the game on a larger screen with mouse and keyboard support.',
@@ -107,6 +120,7 @@ export const S = {
     kr: 'Google Play Games for PC (베타)를 사용하여 PC에서 Outerplane을 플레이할 수 있습니다. 이는 Google이 공식적으로 지원하는 PC 플랫폼으로, 큰 화면에서 마우스와 키보드를 사용할 수 있습니다.',
     zh: '在Google Play游戏电脑版——受谷歌支持的官方电脑端——上游玩异域战记，享受大屏游戏与键鼠支持。',
     fr: 'Jouez à Outerplane sur PC avec Google Play Games pour PC (Bêta), la plateforme PC officielle prise en charge par Google. Cela vous permet de profiter du jeu sur un plus grand écran avec la souris et le clavier.',
+    es: 'Juega a Outerplane en PC usando Google Play Games para PC (Beta), la plataforma oficial de PC compatible con Google. Esto te permite disfrutar del juego en una pantalla más grande con soporte de mouse y teclado.',
   },
   gpgBtn: {
     en: 'Get Google Play Games for PC',
@@ -114,6 +128,7 @@ export const S = {
     kr: 'Google Play Games for PC 받기',
     zh: '获取Google Play游戏电脑版',
     fr: 'Obtenir Google Play Games pour PC',
+    es: 'Obtener Google Play Games para PC',
   },
   gpgNote: {
     en: 'Note: After installing Google Play Games, search for "Outerplane" within the app to download and play.',
@@ -121,6 +136,7 @@ export const S = {
     kr: '참고: Google Play Games 설치 후 앱 내에서 "Outerplane"을 검색하여 다운로드 및 플레이하세요.',
     zh: '注意： 在安装Google Play游戏后，在其中搜索"异域战记"并下载即可游玩。',
     fr: "Note : après avoir installé Google Play Games, recherchez « Outerplane » dans l'application pour télécharger et jouer.",
+    es: 'Nota: Después de instalar Google Play Games, busca "Outerplane" dentro de la app para descargarlo y jugar.',
   },
   pcWarningLabel: {
     en: 'Important:',
@@ -128,6 +144,7 @@ export const S = {
     kr: '중요:',
     zh: '重要事项：',
     fr: 'Important :',
+    es: 'Importante:',
   },
   pcWarning: {
     en: 'For the best experience and official support, we recommend using Google Play Games for PC. While other emulators may work, they are not officially supported and we cannot guarantee their stability or security.',
@@ -135,6 +152,7 @@ export const S = {
     kr: '최상의 경험과 공식 지원을 위해 Google Play Games for PC 사용을 권장합니다. 다른 에뮬레이터도 작동할 수 있지만 공식적으로 지원되지 않으며 안정성이나 보안을 보장할 수 없습니다.',
     zh: '我们建议使用《Google Play游戏电脑版》以获得最佳游戏体验与官方支持。别的模拟器也许可以运行，但它们不受官方支持，且我们也不能保证它们的稳定性与安全性。',
     fr: "pour une expérience optimale et un support officiel, nous recommandons d'utiliser Google Play Games pour PC. Bien que d'autres émulateurs puissent fonctionner, ils ne sont pas officiellement pris en charge et nous ne pouvons garantir leur stabilité ni leur sécurité.",
+    es: 'Para la mejor experiencia y soporte oficial, recomendamos usar Google Play Games para PC. Aunque otros emuladores pueden funcionar, no cuentan con soporte oficial y no podemos garantizar su estabilidad o seguridad.',
   },
   startTitle: {
     en: 'Getting Started',
@@ -142,6 +160,7 @@ export const S = {
     kr: '시작하기',
     zh: '如何开始',
     fr: 'Premiers pas',
+    es: 'Primeros pasos',
   },
   startStep1: {
     en: 'Download and install Outerplane from one of the official platforms above',
@@ -149,6 +168,7 @@ export const S = {
     kr: '위의 공식 플랫폼 중 하나에서 Outerplane을 다운로드 및 설치',
     zh: '从以上官方平台下载安装异域战记',
     fr: "Téléchargez et installez Outerplane depuis l'une des plateformes officielles ci-dessus",
+    es: 'Descarga e instala Outerplane desde una de las plataformas oficiales de arriba',
   },
   startStep2: {
     en: 'Launch the game and complete the initial tutorial',
@@ -156,6 +176,7 @@ export const S = {
     kr: '게임을 실행하고 초기 튜토리얼을 완료',
     zh: '启动游戏并完成教程',
     fr: 'Lancez le jeu et terminez le tutoriel initial',
+    es: 'Inicia el juego y completa el tutorial inicial',
   },
   startStep3: {
     en: 'Create or link your account (Email / Google / Apple) to save your progress',
@@ -163,6 +184,7 @@ export const S = {
     kr: '계정을 생성하거나 연결 (Email / Google / Apple)하여 진행 상황 저장',
     zh: '创建或关联邮箱/Google账户/Apple账户以保存进度',
     fr: 'Créez ou liez votre compte (E-mail / Google / Apple) pour sauvegarder votre progression',
+    es: 'Crea o vincula tu cuenta (Email / Google / Apple) para guardar tu progreso',
   },
   startStep4: {
     en: 'Begin your adventure and explore the world of Outerplane',
@@ -170,6 +192,7 @@ export const S = {
     kr: '모험을 시작하고 Outerplane의 세계를 탐험',
     zh: '开始在异域战记世界的探索与冒险',
     fr: "Commencez votre aventure et explorez le monde d'Outerplane",
+    es: 'Comienza tu aventura y explora el mundo de Outerplane',
   },
   sysreqTitle: {
     en: 'Minimum System Requirements',
@@ -177,6 +200,7 @@ export const S = {
     kr: '최소 시스템 요구 사항',
     zh: '最低系统要求',
     fr: 'Configuration minimale requise',
+    es: 'Requisitos mínimos del sistema',
   },
   sysreqAndroid: {
     en: 'Android 9.0 or higher',
@@ -184,6 +208,7 @@ export const S = {
     kr: 'Android 9.0 이상',
     zh: 'Android版本9.0或更高',
     fr: 'Android 9.0 ou supérieur',
+    es: 'Android 9.0 o superior',
   },
   sysreqIos: {
     en: 'iOS 11.0 or higher',
@@ -191,6 +216,7 @@ export const S = {
     kr: 'iOS 11.0 이상',
     zh: 'iOS版本11.0或更高',
     fr: 'iOS 11.0 ou supérieur',
+    es: 'iOS 11.0 o superior',
   },
   supportTitle: {
     en: 'Need Help?',
@@ -198,6 +224,7 @@ export const S = {
     kr: '도움이 필요하신가요?',
     zh: '需要帮助？',
     fr: "Besoin d'aide ?",
+    es: '¿Necesitas ayuda?',
   },
   supportDesc: {
     en: 'If you encounter any issues or need assistance, visit the official Help Center:',
@@ -205,6 +232,7 @@ export const S = {
     kr: '문제가 발생하거나 도움이 필요한 경우 공식 도움말 센터를 방문하세요:',
     zh: '如果遇到问题或是需要帮助，请访问：',
     fr: "Si vous rencontrez un problème ou avez besoin d'aide, consultez le Centre d'aide officiel :",
+    es: 'Si encuentras algún problema o necesitas asistencia, visita el Centro de Ayuda oficial:',
   },
   supportHelp: {
     en: 'Official Help Center',
@@ -212,6 +240,7 @@ export const S = {
     kr: '공식 도움말 센터',
     zh: '官方帮助中心',
     fr: "Centre d'aide officiel",
+    es: 'Centro de Ayuda oficial',
   },
   sidebarQuicklinks: {
     en: 'Quick Links',
@@ -219,6 +248,7 @@ export const S = {
     kr: '빠른 링크',
     zh: '链接',
     fr: 'Liens rapides',
+    es: 'Enlaces rápidos',
   },
   sidebarMobile: {
     en: 'Mobile Download',
@@ -226,6 +256,7 @@ export const S = {
     kr: '모바일 다운로드',
     zh: '移动端下载',
     fr: 'Téléchargement mobile',
+    es: 'Descarga móvil',
   },
   sidebarPc: {
     en: 'Play on PC',
@@ -233,6 +264,7 @@ export const S = {
     kr: 'PC에서 플레이',
     zh: '用电脑玩',
     fr: 'Jouer sur PC',
+    es: 'Jugar en PC',
   },
   sidebarStart: {
     en: 'Getting Started',
@@ -240,6 +272,7 @@ export const S = {
     kr: '시작하기',
     zh: '开始',
     fr: 'Premiers pas',
+    es: 'Primeros pasos',
   },
   sidebarOfficial: {
     en: 'Official Website',
@@ -247,6 +280,7 @@ export const S = {
     kr: '공식 웹사이트',
     zh: '官网',
     fr: 'Site officiel',
+    es: 'Sitio web oficial',
   },
   // Libellé volontairement neutre : le site officiel a déjà changé de main une
   // fois (VAGames → Major9), inutile d'y recâbler un nom d'éditeur.
@@ -256,6 +290,7 @@ export const S = {
     kr: '공식 웹사이트 방문',
     zh: '访问官方网站',
     fr: 'Visiter le site officiel',
+    es: 'Visita el sitio web oficial',
   },
   sidebarCommunity: {
     en: 'Join the Community',
@@ -263,6 +298,7 @@ export const S = {
     kr: '커뮤니티 참여',
     zh: '加入社区',
     fr: 'Rejoindre la communauté',
+    es: 'Únete a la comunidad',
   },
 } as const satisfies Record<string, Text>;
 
@@ -283,6 +319,7 @@ export const LOCALIZED_LINKS = {
     kr: 'https://outerplane.helpshift.com/hc/ko/4-outerplane/',
     zh: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
     fr: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
+    es: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
   },
   officialwebsite: {
     en: 'https://outerplane.vagames.kr/index_en.html',
@@ -290,5 +327,6 @@ export const LOCALIZED_LINKS = {
     kr: 'https://outerplane.vagames.kr/index.html',
     zh: 'https://outerplane.vagames.kr/index_en.html',
     fr: 'https://outerplane.vagames.kr/index_en.html',
+    es: 'https://outerplane.vagames.kr/index_en.html',
   },
 } as const satisfies Record<string, Text>;

@@ -27,7 +27,8 @@
         "jp": "ボスから{B/BT_INVINCIBLE}を奪う、解除、または封印することに集中せよ。WGダメージを与えるために増援を素早く倒せ。",
         "kr": "보스의 {B/BT_INVINCIBLE}를 탈취, 제거 또는 봉인하는 데 집중하라. WG 피해를 주기 위해 증원을 빠르게 처치하라.",
         "zh": "专注于夺取、移除或封印Boss的{B/BT_INVINCIBLE}。快速击杀增援以造成WG伤害。",
-        "fr": "Concentrez-vous sur le vol, le retrait ou le seal de {B/BT_INVINCIBLE} sur le boss. Tuez l'add rapidement pour infliger des dégâts WG."
+        "fr": "Concentrez-vous sur le vol, le retrait ou le seal de {B/BT_INVINCIBLE} sur le boss. Tuez l'add rapidement pour infliger des dégâts WG.",
+        "es": "Concéntrate en robar, eliminar o sellar {B/BT_INVINCIBLE} del jefe. Elimina al add rápidamente para infligir daño a WG."
       }
     ]
   }

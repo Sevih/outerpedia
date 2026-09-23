@@ -4,18 +4,20 @@
     "jp": "シーズン2(ハード) : デミウルゴス ドレイカーン & デミウルゴス ヴラダ",
     "kr": "시즌 2 Part1 하드 : 데미우르고스 드레이칸 & 데미우르고스 블라다",
     "zh": "S2 困难：造物主德雷坎 & 造物主弗拉达",
-    "fr": "S2 Hard : Demiurge Drakhan & Demiurge Vlada"
+    "fr": "S2 Hard : Demiurge Drakhan & Demiurge Vlada",
+    "es": "S2 Difícil: Demiurgo Drakhan & Demiurgo Vlada"
   },
   "description": {
     "en": "S2 Hard 10-10 boss Demiurge Drakhan & Vlada — percent fixed damage and executes on low HP; her enrage blocks gauge damage. Mechanics, team and clear tips.",
     "jp": "ストーリーS2ハード10-10ボス「ドレイカーン＆ヴラダ」攻略 — 割合固定ダメージと低HP処刑が脅威。激怒中は弱点ゲージが削れない。ギミックとクリアのコツ。",
     "kr": "스토리 S2 하드 10-10 보스 드레이칸&블라다 공략 — 비율 고정 피해와 낮은 HP 처형이 위협적. 격노 중엔 약점 게이지를 깎을 수 없다. 기믹과 클리어 팁.",
     "zh": "主线S2困难10-10 Boss德雷坎&布拉达攻略 — 百分比固定伤害并处决残血目标；狂暴期间无法削弱点条。机制、队伍与通关技巧。",
-    "fr": "Boss S2 Hard 10-10 : Demiurge Drakhan & Vlada — dégâts fixes en % et exécution des PV bas ; l'enrage bloque la jauge. Mécaniques, équipe et astuces."
+    "fr": "Boss S2 Hard 10-10 : Demiurge Drakhan & Vlada — dégâts fixes en % et exécution des PV bas ; l'enrage bloque la jauge. Mécaniques, équipe et astuces.",
+    "es": "Jefe S2 Difícil 10-10 Demiurgo Drakhan & Vlada — daño fijo porcentual y ejecuciones con poca vida; su furia bloquea el daño de barra. Mecánicas, equipo y consejos de clear."
   },
   "icon": "T_DungeonArea_20",
   "author": "Sevih",
-  "updated": "2025-05-26",
+  "updated": "2026-09-23",
   "order": 210,
   "bossId": "4500182",
   "dungeons": ["121012", "122010"]

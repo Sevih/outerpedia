@@ -13,7 +13,8 @@
       "jp": "{E/Dark}アタッカーの選択肢。",
       "kr": "{E/Dark} DPS 옵션.",
       "zh": "{E/Dark}输出选择。",
-      "fr": "Options de DPS {E/Dark}."
+      "fr": "Options de DPS {E/Dark}.",
+      "es": "Opciones de DPS {E/Dark}."
     }
   },
   {
@@ -23,7 +24,8 @@
       "jp": "{E/Dark}サポート。",
       "kr": "{E/Dark} 서포트.",
       "zh": "{E/Dark}辅助。",
-      "fr": "Support {E/Dark}."
+      "fr": "Support {E/Dark}.",
+      "es": "Soporte de {E/Dark}."
     }
   },
   {
@@ -33,7 +35,8 @@
       "jp": "生存力の選択肢。",
       "kr": "생존력 옵션.",
       "zh": "生存能力选择。",
-      "fr": "Options de survie."
+      "fr": "Options de survie.",
+      "es": "Opciones de supervivencia."
     }
   }
 ]

@@ -24,6 +24,7 @@ export const S = {
     kr: 'OUTERPLANE VAGAMES 서비스 이전',
     zh: 'OUTERPLANE 迁移至 VAGAMES',
     fr: 'Transfert du service OUTERPLANE vers VAGAMES',
+    es: 'Transferencia del Servicio de OUTERPLANE a VAGAMES',
   },
   heroSubtitle: {
     en: 'Keep your account, data, and rewards by following this updated guide.',
@@ -31,6 +32,7 @@ export const S = {
     kr: '업데이트된 가이드를 따라 계정, 데이터, 보상을 유지하세요.',
     zh: '按照本指南操作，保留您的账号、数据和奖励。',
     fr: 'Conservez votre compte, vos données et vos récompenses en suivant ce guide mis à jour.',
+    es: 'Conserva tu cuenta, datos y recompensas siguiendo esta guía actualizada.',
   },
   applyLabel: {
     en: 'Apply:',
@@ -38,6 +40,7 @@ export const S = {
     kr: '신청 기간：',
     zh: '申请期间：',
     fr: 'Candidature :',
+    es: 'Solicitar:',
   },
   applyDates: {
     en: 'Aug 12 → Sep 23, 2025',
@@ -45,6 +48,7 @@ export const S = {
     kr: '8월 12일 → 9월 23일, 2025',
     zh: '8月12日 → 9月23日, 2025',
     fr: '12 août → 23 sept. 2025',
+    es: '12 de agosto → 23 de septiembre de 2025',
   },
   transferLabel: {
     en: 'Transfer:',
@@ -52,15 +56,31 @@ export const S = {
     kr: '이전일：',
     zh: '迁移日期：',
     fr: 'Transfert :',
+    es: 'Transferir:',
   },
-  transferDate: { en: 'Oct 1', jp: '10月1日', kr: '10월 1일', zh: '10月1日', fr: '1er oct.' },
-  overviewTitle: { en: 'Overview', jp: '概要', kr: '개요', zh: '概述', fr: 'Aperçu' },
+  transferDate: {
+    en: 'Oct 1',
+    jp: '10月1日',
+    kr: '10월 1일',
+    zh: '10月1日',
+    fr: '1er oct.',
+    es: '1 de octubre',
+  },
+  overviewTitle: {
+    en: 'Overview',
+    jp: '概要',
+    kr: '개요',
+    zh: '概述',
+    fr: 'Aperçu',
+    es: 'Resumen',
+  },
   overviewText: {
     en: 'OUTERPLANE will be transferred to **VAGAMES**. The exact date will be announced this week. Apply between **August 12** and **September 23** to receive your transfer code. **A separate code is required for each account on each server.**',
     jp: 'OUTERPLANEは**VAGAMES**に移行されます。正確な日程は今週中に発表される予定です。**8月12日**から**9月23日**の間に申請して引き継ぎコードを受け取ってください。**各サーバーのアカウントごとに別のコードが必要です。**',
     kr: 'OUTERPLANE은 **VAGAMES**로 서비스가 이전됩니다. 정확한 날짜는 이번 주 내에 발표될 예정입니다. **8월 12일**부터 **9월 23일** 사이에 신청하여 이전 코드를 받으세요. **각 서버의 계정마다 별도의 코드가 필요합니다.**',
     zh: 'OUTERPLANE将迁移至**VAGAMES**。具体日期将于本周公布。请在**8月12日**至**9月23日**期间申请，以获取迁移码。**每个服务器的每个账号都需要单独的迁移码。**',
     fr: 'OUTERPLANE sera transféré vers **VAGAMES**. La date exacte sera annoncée cette semaine. Faites votre demande entre le **12 août** et le **23 septembre** pour recevoir votre code de transfert. **Un code distinct est requis pour chaque compte sur chaque serveur.**',
+    es: 'OUTERPLANE será transferido a **VAGAMES**. La fecha exacta se anunciará esta semana. Solicítalo entre el **12 de agosto** y el **23 de septiembre** para recibir tu código de transferencia. **Se requiere un código separado para cada cuenta en cada servidor.**',
   },
   overviewMissedWindow: {
     en: 'Missed the window or lost your code? You can still recover your account. See [Recovery Help](#recovery) below.',
@@ -68,6 +88,7 @@ export const S = {
     kr: '신청 기간을 놓쳤거나 코드를 잃어버렸나요? 계정을 복구할 수 있습니다. 아래 [복구 도움말](#recovery)을 확인하세요.',
     zh: '错过申请期间或丢失迁移码？您仍可以恢复账号。请查看下方的[恢复帮助](#recovery)。',
     fr: "Vous avez manqué la période ou perdu votre code ? Vous pouvez toujours récupérer votre compte. Consultez l'[aide à la récupération](#recovery) ci-dessous.",
+    es: '¿Perdiste el plazo o tu código? Aún puedes recuperar tu cuenta. Consulta la [Ayuda de Recuperación](#recovery) más abajo.',
   },
   howtoTitle: {
     en: 'How to Transfer Your Account',
@@ -75,6 +96,7 @@ export const S = {
     kr: '계정 이전 방법',
     zh: '如何迁移您的账号',
     fr: 'Comment transférer votre compte',
+    es: 'Cómo transferir tu cuenta',
   },
   howtoStep1: {
     en: 'Log into the game.',
@@ -82,6 +104,7 @@ export const S = {
     kr: '게임에 로그인합니다.',
     zh: '登录游戏。',
     fr: 'Connectez-vous au jeu.',
+    es: 'Inicia sesión en el juego.',
   },
   howtoStep2: {
     en: 'Tap [Service Transfer] on the main screen or go to [Settings] → [Service Transfer].',
@@ -89,6 +112,7 @@ export const S = {
     kr: '메인 화면에서 [서비스 이전]을 탭하거나 [설정] → [서비스 이전]으로 이동합니다.',
     zh: '点击主界面的[服务迁移]，或进入[设置] → [服务迁移]。',
     fr: "Appuyez sur [Service Transfer] sur l'écran principal ou allez dans [Paramètres] → [Service Transfer].",
+    es: 'Toca [Transferencia de Servicio] en la pantalla principal o ve a [Configuración] → [Transferencia de Servicio].',
   },
   howtoStep3: {
     en: 'Review the notes and agree to the terms.',
@@ -96,6 +120,7 @@ export const S = {
     kr: '안내 사항을 확인하고 약관에 동의합니다.',
     zh: '阅读注意事项并同意条款。',
     fr: 'Lisez les remarques et acceptez les conditions.',
+    es: 'Revisa las notas y acepta los términos.',
   },
   howtoStep4: {
     en: 'Receive a unique transfer code per account/server. Save it safely as a screenshot or send it to your email once issued.',
@@ -103,6 +128,7 @@ export const S = {
     kr: '계정/서버마다 고유한 이전 코드를 받습니다. 발급 후 스크린샷을 찍거나 이메일로 전송하여 안전하게 보관하세요.',
     zh: '每个账号/服务器都会获得唯一的迁移码。发放后，请截图保存或发送至您的邮箱妥善保管。',
     fr: "Recevez un code de transfert unique par compte/serveur. Conservez-le précieusement sous forme de capture d'écran ou envoyez-le par e-mail une fois émis.",
+    es: 'Recibe un código de transferencia único por cuenta/servidor. Guárdalo de forma segura como captura de pantalla o envíalo a tu correo una vez emitido.',
   },
   howtoStep5: {
     en: 'After the transfer maintenance Oct 1, create a VAGAMES account (Email/Google/Apple) and enter the code on the corresponding server.',
@@ -110,6 +136,7 @@ export const S = {
     kr: '10월 1일 이전 점검 후, VAGAMES 계정(이메일/Google/Apple)을 생성하고 해당 서버에서 코드를 입력합니다.',
     zh: '10月1日迁移维护结束后，创建VAGAMES账号（邮箱/Google/Apple），并在对应服务器输入迁移码。',
     fr: 'Après la maintenance de transfert du 1er octobre, créez un compte VAGAMES (E-mail/Google/Apple) et saisissez le code sur le serveur correspondant.',
+    es: 'Después del mantenimiento de transferencia del 1 de octubre, crea una cuenta de VAGAMES (Email/Google/Apple) e ingresa el código en el servidor correspondiente.',
   },
   mergeTitle: {
     en: 'Server Merge',
@@ -117,6 +144,7 @@ export const S = {
     kr: '서버 합병',
     zh: '服务器合并',
     fr: 'Fusion des serveurs',
+    es: 'Fusión de Servidores',
   },
   mergeLine1: {
     en: 'Korea, Asia I, Asia II → merged into Global 2',
@@ -124,6 +152,7 @@ export const S = {
     kr: '한국, 아시아 I, 아시아 II → 글로벌 2로 통합',
     zh: '韩国、亚洲I、亚洲II → 合并至Global 2',
     fr: 'Korea, Asia I, Asia II → fusionnés dans Global 2',
+    es: 'Corea, Asia I, Asia II → fusionados en Global 2',
   },
   mergeLine2: {
     en: 'Global → renamed to Global 1',
@@ -131,6 +160,7 @@ export const S = {
     kr: '글로벌 → 글로벌 1로 이름 변경',
     zh: 'Global → 更名为 Global 1',
     fr: 'Global → renommé Global 1',
+    es: 'Global → renombrado a Global 1',
   },
   mergeLine3: {
     en: 'Japan → unchanged',
@@ -138,6 +168,7 @@ export const S = {
     kr: '일본 → 변동 없음',
     zh: '日本 → 不变',
     fr: 'Japan → inchangé',
+    es: 'Japón → sin cambios',
   },
   mergeLine4: {
     en: 'Separate code needed for each account/server you have characters on',
@@ -145,6 +176,7 @@ export const S = {
     kr: '캐릭터가 있는 각 계정/서버마다 별도의 코드 필요',
     zh: '每个有角色的账号/服务器都需要单独的迁移码',
     fr: 'Un code distinct est nécessaire pour chaque compte/serveur sur lequel vous avez des personnages',
+    es: 'Se necesita un código separado para cada cuenta/servidor en el que tengas personajes',
   },
   rewardsTitle: {
     en: 'Transfer Completion Rewards',
@@ -152,6 +184,7 @@ export const S = {
     kr: '이전 완료 보상',
     zh: '迁移完成奖励',
     fr: 'Récompenses de fin de transfert',
+    es: 'Recompensas por Completar la Transferencia',
   },
   important: {
     en: 'Important Notes',
@@ -159,6 +192,7 @@ export const S = {
     kr: '중요 사항',
     zh: '重要注意事项',
     fr: 'Remarques importantes',
+    es: 'Notas Importantes',
   },
   importantNote1: {
     en: 'Transfer is irreversible once agreed.',
@@ -166,6 +200,7 @@ export const S = {
     kr: '동의하면 이전을 취소할 수 없습니다.',
     zh: '一旦同意，迁移不可撤销。',
     fr: 'Le transfert est irréversible une fois accepté.',
+    es: 'La transferencia es irreversible una vez aceptada.',
   },
   importantNote2: {
     en: 'Guest accounts must be linked to receive a code.',
@@ -173,6 +208,7 @@ export const S = {
     kr: '게스트 계정은 코드를 받기 위해 연동이 필요합니다.',
     zh: '访客账号需要关联后才能获取迁移码。',
     fr: 'Les comptes invités doivent être liés pour recevoir un code.',
+    es: 'Las cuentas de invitado deben estar vinculadas para recibir un código.',
   },
   importantNote3: {
     en: 'Inactive accounts (no 1-4 clear + no login since Nov 5, 2024) will be deleted on the transfer maintenance date Oct 1.',
@@ -180,6 +216,7 @@ export const S = {
     kr: '비활성 계정(1-4 스테이지 미클리어 + 2024년 11월 5일 이후 미로그인)은 10월 1일 이전 점검 시 삭제됩니다.',
     zh: '不活跃账号（未通关1-4且2024年11月5日后未登录）将在10月1日迁移维护时被删除。',
     fr: 'Les comptes inactifs (chapitre 1-4 non terminé + aucune connexion depuis le 5 novembre 2024) seront supprimés à la date de maintenance de transfert du 1er octobre.',
+    es: 'Las cuentas inactivas (sin clear de 1-4 y sin inicio de sesión desde el 5 de noviembre de 2024) serán eliminadas en la fecha de mantenimiento de la transferencia, el 1 de octubre.',
   },
   importantNote4: {
     en: 'Mail claim periods are not extended — claim before Sep 23.',
@@ -187,6 +224,7 @@ export const S = {
     kr: '메일 수령 기간은 연장되지 않습니다 — 9월 23일 전에 수령하세요.',
     zh: '邮件领取期限不会延长 — 请在9月23日前领取。',
     fr: 'Les périodes de réclamation du courrier ne sont pas prolongées — réclamez avant le 23 septembre.',
+    es: 'Los periodos de reclamo por correo no se extienden — reclama antes del 23 de septiembre.',
   },
   importantNote5: {
     en: "Recovery may not be possible for guest accounts or accounts without purchase history (ownership can't be verified).",
@@ -194,6 +232,7 @@ export const S = {
     kr: '게스트 계정이나 구매 내역이 없는 계정은 소유권 확인이 불가하여 복구가 어려울 수 있습니다.',
     zh: '访客账号或无购买记录的账号可能无法恢复，因为无法验证所有权。',
     fr: "La récupération peut être impossible pour les comptes invités ou les comptes sans historique d'achat (la propriété ne peut pas être vérifiée).",
+    es: 'Puede que no sea posible la recuperación para cuentas de invitado o cuentas sin historial de compras (no se puede verificar la propiedad).',
   },
   recoveryTitle: {
     en: 'Recovery Help (No Code / Lost Code)',
@@ -201,6 +240,7 @@ export const S = {
     kr: '복구 도움말 (코드 없음 / 분실)',
     zh: '恢复帮助（无迁移码/丢失迁移码）',
     fr: 'Aide à la récupération (pas de code / code perdu)',
+    es: 'Ayuda de Recuperación (Sin Código / Código Perdido)',
   },
   recoveryStep1Title: {
     en: 'Step 1 — Check / issue your code',
@@ -208,6 +248,7 @@ export const S = {
     kr: '1단계 — 코드 확인/발급',
     zh: '第1步 — 查看/领取迁移码',
     fr: 'Étape 1 — Vérifiez / émettez votre code',
+    es: 'Paso 1 — Verifica / emite tu código',
   },
   recoveryStep1Text: {
     en: 'Use the official page: [STOVE Transfer Code Confirmation](https://outerplane.game.onstove.com/transfer)',
@@ -215,6 +256,7 @@ export const S = {
     kr: '공식 페이지를 이용하세요：[STOVE 이전 코드 확인](https://outerplane.game.onstove.com/transfer)',
     zh: '请访问官方页面：[STOVE迁移码确认页](https://outerplane.game.onstove.com/transfer)',
     fr: 'Utilisez la page officielle : [Confirmation du code de transfert STOVE](https://outerplane.game.onstove.com/transfer)',
+    es: 'Usa la página oficial: [STOVE Transfer Code Confirmation](https://outerplane.game.onstove.com/transfer)',
   },
   recoveryStep1Note: {
     en: "If you didn't receive a code before, you can still get one after agreeing to the transfer agreement.",
@@ -222,6 +264,7 @@ export const S = {
     kr: '이전에 코드를 받지 못한 경우에도 이전 동의 후 발급받을 수 있습니다.',
     zh: '即使之前未收到迁移码，同意迁移协议后仍可获取。',
     fr: "Si vous n'avez pas reçu de code auparavant, vous pouvez toujours en obtenir un après avoir accepté l'accord de transfert.",
+    es: 'Si no recibiste un código antes, aún puedes obtener uno después de aceptar el acuerdo de transferencia.',
   },
   recoveryStep2Title: {
     en: "Step 2 — Can't verify your STOVE account?",
@@ -229,6 +272,7 @@ export const S = {
     kr: '2단계 — STOVE 계정 확인이 불가한 경우',
     zh: '第2步 — 无法验证STOVE账号？',
     fr: 'Étape 2 — Impossible de vérifier votre compte STOVE ?',
+    es: 'Paso 2 — ¿No puedes verificar tu cuenta STOVE?',
   },
   recoveryStep2Text: {
     en: 'If you have **purchase history**, contact support. Provide as much info as possible for a faster review:',
@@ -236,22 +280,32 @@ export const S = {
     kr: '**구매 내역**이 있는 경우 지원팀에 문의하세요. 빠른 검토를 위해 최대한 많은 정보를 제공해 주세요：',
     zh: '如有**购买记录**，请联系客服。提供尽可能多的信息以加快审核：',
     fr: "Si vous avez un **historique d'achat**, contactez le support. Fournissez autant d'informations que possible pour un traitement plus rapide :",
+    es: 'Si tienes **historial de compras**, contacta al soporte. Proporciona toda la información posible para una revisión más rápida:',
   },
-  recoveryStep2Item1: { en: 'Server', jp: 'サーバー', kr: '서버', zh: '服务器', fr: 'Serveur' },
+  recoveryStep2Item1: {
+    en: 'Server',
+    jp: 'サーバー',
+    kr: '서버',
+    zh: '服务器',
+    fr: 'Serveur',
+    es: 'Servidor',
+  },
   recoveryStep2Item2: {
     en: 'Nickname',
     jp: 'ニックネーム',
     kr: '닉네임',
     zh: '昵称',
     fr: 'Pseudo',
+    es: 'Apodo',
   },
-  recoveryStep2Item3: { en: 'UID', jp: 'UID', kr: 'UID', zh: 'UID', fr: 'UID' },
+  recoveryStep2Item3: { en: 'UID', jp: 'UID', kr: 'UID', zh: 'UID', fr: 'UID', es: 'UID' },
   recoveryStep2Item4: {
     en: 'Device & OS (e.g., iPhone 14 / iOS 17)',
     jp: 'デバイス & OS（例：iPhone 14 / iOS 17）',
     kr: '기기 및 OS(예: iPhone 14 / iOS 17)',
     zh: '设备 & 系统（如 iPhone 14 / iOS 17）',
     fr: 'Appareil & OS (ex. : iPhone 14 / iOS 17)',
+    es: 'Dispositivo y sistema operativo (ej., iPhone 14 / iOS 17)',
   },
   recoveryStep2Item5: {
     en: 'Service Transfer Code (if available)',
@@ -259,6 +313,7 @@ export const S = {
     kr: '서비스 이전 코드(있는 경우)',
     zh: '服务迁移码（如有）',
     fr: 'Code de Service Transfer (si disponible)',
+    es: 'Código de Transferencia del Servicio (si está disponible)',
   },
   recoveryStep2Item6: {
     en: 'App Store / Google Play receipt (screenshot)',
@@ -266,6 +321,7 @@ export const S = {
     kr: '앱스토어 / 구글 플레이 영수증(스크린샷)',
     zh: 'App Store / Google Play收据（截图）',
     fr: "Reçu App Store / Google Play (capture d'écran)",
+    es: 'Recibo de App Store / Google Play (captura de pantalla)',
   },
   recoveryStep2Email: {
     en: 'Email:',
@@ -273,6 +329,7 @@ export const S = {
     kr: '이메일：',
     zh: '邮箱：',
     fr: 'E-mail :',
+    es: 'Correo electrónico:',
   },
   recoveryStep2HelpCenter: {
     en: 'Help Center:',
@@ -280,6 +337,7 @@ export const S = {
     kr: '도움말 센터：',
     zh: '帮助中心：',
     fr: "Centre d'aide :",
+    es: 'Centro de Ayuda:',
   },
   recoveryStep2Note: {
     en: 'Provide info based on data **prior to the transfer maintenance date**. Typical response time is 3–5 business days (may vary).',
@@ -287,6 +345,7 @@ export const S = {
     kr: '**이전 점검일 이전** 데이터를 기준으로 정보를 제공해 주세요. 일반적인 응답 시간은 영업일 기준 3~5일입니다(변동 가능).',
     zh: '请提供**迁移维护日期之前**的数据信息。通常回复时间为3-5个工作日（可能有所变动）。',
     fr: 'Fournissez des informations basées sur les données **antérieures à la date de maintenance de transfert**. Le délai de réponse habituel est de 3 à 5 jours ouvrés (peut varier).',
+    es: 'Proporciona información basada en datos **previos a la fecha de mantenimiento de la transferencia**. El tiempo de respuesta típico es de 3 a 5 días hábiles (puede variar).',
   },
   recoveryGuestNote: {
     en: "Note: Accounts created as **Guest** or **without purchase history** may not be eligible for recovery, as ownership can't be verified.",
@@ -294,6 +353,7 @@ export const S = {
     kr: '참고: **게스트**로 생성된 계정이나 **구매 내역이 없는** 계정은 소유권 확인이 불가하여 복구 대상에서 제외될 수 있습니다.',
     zh: '注意：以**访客**身份创建或**无购买记录**的账号可能不符合恢复条件，因为无法验证所有权。',
     fr: "Note : les comptes créés en tant qu'**invité** ou **sans historique d'achat** peuvent ne pas être éligibles à la récupération, la propriété ne pouvant être vérifiée.",
+    es: 'Nota: Las cuentas creadas como **Invitado** o **sin historial de compras** pueden no ser elegibles para recuperación, ya que no se puede verificar la propiedad.',
   },
   refundTitle: {
     en: 'Refund Requests',
@@ -301,6 +361,7 @@ export const S = {
     kr: '환불 신청',
     zh: '退款申请',
     fr: 'Demandes de remboursement',
+    es: 'Solicitudes de reembolso',
   },
   refundText: {
     en: 'Available post-transfer Oct 1 → Dec 21, 2025, for Paid Ether purchased in last 90 days, if you did not transfer. Apply via STOVE Customer Center with proof of purchase.',
@@ -308,6 +369,7 @@ export const S = {
     kr: '이전하지 않은 경우 10월 1일 ~ 2025년 12월 21일까지 최근 90일 내 구매한 유료 에테르에 대한 환불을 신청할 수 있습니다. 구매 증빙서류와 함께 STOVE 고객센터에 신청하세요.',
     zh: '如未完成迁移，可在10月1日至2025年12月21日期间，对90天内购买的付费以太申请退款。请通过STOVE客服中心并附上购买凭证申请。',
     fr: "Disponible après le transfert, du 1er octobre au 21 décembre 2025, pour l'Ether payant acheté lors des 90 derniers jours, si vous n'avez pas effectué le transfert. Faites votre demande via le Service client STOVE avec une preuve d'achat.",
+    es: 'Disponible tras la transferencia del 1 de octubre → 21 de diciembre de 2025, para Éter de Pago comprado en los últimos 90 días, si no realizaste la transferencia. Solicítalo a través del Centro de Atención al Cliente STOVE con comprobante de compra.',
   },
   shopTitle: {
     en: 'Shop Suspension',
@@ -315,6 +377,7 @@ export const S = {
     kr: '상점 중단',
     zh: '商店暂停',
     fr: 'Suspension de la boutique',
+    es: 'Suspensión de la tienda',
   },
   shopText: {
     en: 'Shop closed Sep 4 → until transfer maintenance Oct 1. One new hero + Battle Pass delayed. Event dungeon rerun during downtime.',
@@ -322,6 +385,7 @@ export const S = {
     kr: '상점은 9월 4일부터 10월 1일 이전 점검까지 폐쇄. 신규 영웅 1명 + 배틀 패스 지연. 중단 기간 동안 이벤트 던전 재실행.',
     zh: '商店从9月4日关闭至10月1日迁移维护。一名新英雄+战令延期。停机期间活动副本重新开启。',
     fr: "Boutique fermée du 4 septembre jusqu'à la maintenance de transfert du 1er octobre. Un nouveau héros + le Battle Pass sont reportés. Rediffusion du donjon d'événement pendant l'interruption.",
+    es: 'Tienda cerrada del 4 de septiembre → hasta el mantenimiento de transferencia del 1 de octubre. Un nuevo héroe + Battle Pass retrasados. Repetición de la mazmorra del evento durante el cierre.',
   },
   faqTitle: {
     en: 'Service Transfer FAQ',
@@ -329,6 +393,7 @@ export const S = {
     kr: '서비스 이전 FAQ',
     zh: '服务迁移FAQ',
     fr: 'FAQ du Service Transfer',
+    es: 'Preguntas frecuentes sobre la Transferencia de Servicio',
   },
   checklistTitle: {
     en: 'Quick Checklist',
@@ -336,6 +401,7 @@ export const S = {
     kr: '빠른 체크리스트',
     zh: '快速清单',
     fr: 'Aide-mémoire rapide',
+    es: 'Lista rápida de verificación',
   },
   checklistItem1: {
     en: '✅ Apply Aug 12 → Sep 23',
@@ -343,6 +409,7 @@ export const S = {
     kr: '✅ 8월 12일 ~ 9월 23일 신청',
     zh: '✅ 8月12日至9月23日申请',
     fr: '✅ Faites votre demande du 12 août au 23 sept.',
+    es: '✅ Solicita del 12 de agosto → 23 de septiembre',
   },
   checklistItem2: {
     en: '✅ Get code for EACH account/server',
@@ -350,6 +417,7 @@ export const S = {
     kr: '✅ 각 계정/서버별 코드 받기',
     zh: '✅ 为每个账号/服务器获取迁移码',
     fr: '✅ Obtenez un code pour CHAQUE compte/serveur',
+    es: '✅ Obtén el código para CADA cuenta/servidor',
   },
   checklistItem3: {
     en: '✅ Save the code (screenshot or email)',
@@ -357,6 +425,7 @@ export const S = {
     kr: '✅ 코드 저장 (스크린샷 또는 이메일)',
     zh: '✅ 保存迁移码（截图或发送至邮箱）',
     fr: "✅ Sauvegardez le code (capture d'écran ou e-mail)",
+    es: '✅ Guarda el código (captura de pantalla o correo electrónico)',
   },
   checklistItem4: {
     en: '✅ Enter after Oct 1',
@@ -364,6 +433,7 @@ export const S = {
     kr: '✅ 10월 1일 이후 입력',
     zh: '✅ 10月1日后输入',
     fr: '✅ Saisissez-le après le 1er octobre',
+    es: '✅ Ingrésalo después del 1 de octubre',
   },
   checklistItem5: {
     en: '✅ Link guest accounts',
@@ -371,6 +441,7 @@ export const S = {
     kr: '✅ 게스트 계정 연동',
     zh: '✅ 关联访客账号',
     fr: '✅ Liez les comptes invités',
+    es: '✅ Vincula las cuentas de invitado',
   },
   officialTitle: {
     en: 'Official Announcements',
@@ -378,6 +449,7 @@ export const S = {
     kr: '공식 공지',
     zh: '官方公告',
     fr: 'Annonces officielles',
+    es: 'Anuncios oficiales',
   },
   officialBtn1: {
     en: 'View Stove Notice',
@@ -385,6 +457,7 @@ export const S = {
     kr: 'STOVE 공지 보기',
     zh: '查看STOVE公告',
     fr: "Voir l'avis Stove",
+    es: 'Ver aviso de Stove',
   },
   officialBtn2: {
     en: 'Update Notice — Code issuance started',
@@ -392,6 +465,7 @@ export const S = {
     kr: '업데이트 공지 — 코드 발급 시작',
     zh: '更新公告 — 迁移码领取开始',
     fr: 'Avis de mise à jour — émission des codes lancée',
+    es: 'Aviso de actualización — Emisión de códigos iniciada',
   },
   officialBtn3: {
     en: 'OUTERPLANE Service Transfer FAQ',
@@ -399,6 +473,7 @@ export const S = {
     kr: 'OUTERPLANE 서비스 이전 FAQ',
     zh: 'OUTERPLANE服务迁移FAQ',
     fr: 'FAQ du transfert de service OUTERPLANE',
+    es: 'Preguntas frecuentes sobre la Transferencia de Servicio de OUTERPLANE',
   },
   sidebarRecoveryTitle: {
     en: 'Need Recovery?',
@@ -406,6 +481,7 @@ export const S = {
     kr: '복구가 필요한가요?',
     zh: '需要恢复账号？',
     fr: 'Besoin de récupérer votre compte ?',
+    es: '¿Necesitas recuperación?',
   },
   sidebarRecoveryLink1: {
     en: 'Check / Issue Transfer Code (STOVE)',
@@ -413,6 +489,7 @@ export const S = {
     kr: '이전 코드 확인/발급 (STOVE)',
     zh: '查看/领取迁移码（STOVE）',
     fr: 'Vérifier / émettre le code de transfert (STOVE)',
+    es: 'Verificar / Emitir código de transferencia (STOVE)',
   },
   sidebarRecoveryLink3: {
     en: 'Help Center',
@@ -420,6 +497,7 @@ export const S = {
     kr: '도움말 센터',
     zh: '帮助中心',
     fr: "Centre d'aide",
+    es: 'Centro de ayuda',
   },
 } as const satisfies Record<string, Text>;
 
@@ -437,6 +515,7 @@ export const REWARDS: Array<{ name: string; desc?: Text }> = [
       kr: '– 모험/특별 의뢰/스카이워드 타워 스태미나 1 감소',
       zh: '– 冒险/特别委托/空塔减少1体力消耗',
       fr: '– 1 Stamina de moins dans Adventure / Special Request / Skyward Tower',
+      es: '– 1 Vigor menos en Aventura / Encargo Especial / Torre Skyward',
     },
   },
   { name: '"New Beginning" Profile Frame' },
@@ -448,6 +527,7 @@ export const REWARDS: Array<{ name: string; desc?: Text }> = [
       kr: '– 친밀도 레벨을 10으로 설정',
       zh: '– 将羁绊等级设置为10',
       fr: "– règle le niveau d'Affinité à 10",
+      es: '– establece el Nivel de Afinidad en 10',
     },
   },
   {
@@ -458,6 +538,7 @@ export const REWARDS: Array<{ name: string; desc?: Text }> = [
       kr: '– 업그레이드 단계를 6으로 설정',
       zh: '– 将升级阶段设置为6',
       fr: "– règle le palier d'Amélioration à 6",
+      es: '– establece la Etapa de Mejora en 6',
     },
   },
   {
@@ -468,6 +549,7 @@ export const REWARDS: Array<{ name: string; desc?: Text }> = [
       kr: '– 영웅을 레벨 100으로 올리기',
       zh: '– 将英雄提升至100级',
       fr: '– monte le héros au niveau 100',
+      es: '– sube al héroe al nivel 100',
     },
   },
   {
@@ -478,6 +560,7 @@ export const REWARDS: Array<{ name: string; desc?: Text }> = [
       kr: '– 스텔라, 아스테이, 드라칸, 블라다, 또는 모나드 에바 선택',
       zh: '– 选择 Stella、Astei、Drakhan、Vlada 或 Monad Eva',
       fr: '– au choix Stella, Astei, Drakhan, Vlada ou Monad Eva',
+      es: '– elige entre Stella, Astei, Drakhan, Vlada o Monad Eva',
     },
   },
   { name: '1,500 Ether' },
@@ -492,6 +575,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '서비스 이전 코드를 발급받지 않았거나/분실했습니다. 계정을 복구할 수 있나요?',
       zh: '我未领取/丢失了服务迁移码，还能恢复账号吗？',
       fr: "Je n'ai pas émis / j'ai perdu mon code de Service Transfer. Puis-je quand même récupérer mon compte ?",
+      es: 'No emití / perdí mi código de Transferencia de Servicio. ¿Aún puedo recuperar mi cuenta?',
     },
     blocks: [
       {
@@ -502,6 +586,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '네. 먼저 공식 페이지에서 코드를 확인/발급해 보세요: [STOVE 이전 코드 확인](https://outerplane.game.onstove.com/transfer).',
           zh: '可以。请先尝试在官方页面查看/领取迁移码：[STOVE迁移码确认页](https://outerplane.game.onstove.com/transfer)。',
           fr: "Oui. Essayez d'abord de vérifier/émettre votre code sur la page officielle : [Confirmation du code de transfert STOVE](https://outerplane.game.onstove.com/transfer).",
+          es: 'Sí. Primero intenta verificar/emitir tu código en la página oficial: [STOVE Transfer Code Confirmation](https://outerplane.game.onstove.com/transfer).',
         },
       },
       {
@@ -512,6 +597,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: 'STOVE 계정을 확인할 수 없지만 **구매 내역**이 있는 경우, 가능한 많은 정보를 첨부하여 지원팀에 이메일을 보내세요(아래 「복구 도움말」 참조). 데이터를 검토하여 복구를 지원합니다.',
           zh: '如果无法验证STOVE账号但有**购买记录**，请携带尽可能多的信息发邮件联系客服（参见下方「恢复帮助」）。他们将审核您的数据并协助恢复。',
           fr: "Si vous ne parvenez pas à vérifier votre compte STOVE mais que vous avez un **historique d'achat**, contactez le support par e-mail avec le maximum d'informations possible (voir la section « Aide à la récupération » ci-dessous). Ils examineront vos données et vous aideront à récupérer votre compte.",
+          es: 'Si no puedes verificar tu cuenta STOVE pero tienes **historial de compras**, envía un correo a soporte con toda la información posible (consulta la sección "Ayuda de recuperación" más abajo). Revisarán tus datos y te ayudarán con la recuperación.',
         },
       },
     ],
@@ -524,6 +610,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '서비스 이전 후 기존 계정을 계속 사용할 수 있나요?',
       zh: '服务迁移后我还能继续使用原来的账号吗？',
       fr: 'Pourrai-je continuer à utiliser mon compte existant après le transfert de service ?',
+      es: '¿Podré seguir usando mi cuenta existente después de la transferencia de servicio?',
     },
     blocks: [
       {
@@ -534,6 +621,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '네. 이전 코드를 입력하고 데이터 이전이 완료되면 기존 계정으로 계속 플레이할 수 있습니다.',
           zh: '可以。输入迁移码并完成数据迁移后，您即可继续使用原账号游戏。',
           fr: 'Oui. Une fois le code de transfert saisi et le transfert des données terminé, vous pouvez continuer à jouer avec votre compte existant.',
+          es: 'Sí. Una vez que ingreses el código de transferencia y se complete la transferencia de datos, podrás seguir jugando con tu cuenta existente.',
         },
       },
       {
@@ -545,6 +633,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '**각 계정 및 각 서버**마다 별도의 이전 코드가 필요합니다.',
             zh: '**每个账号及每个服务器**都需要单独的迁移码。',
             fr: "Vous avez besoin d'un code de transfert distinct pour **chaque compte et chaque serveur**.",
+            es: 'Necesitas un código de transferencia distinto para **cada cuenta y cada servidor**.',
           },
           {
             en: 'Codes must be used on the corresponding server. Server changes are not allowed.',
@@ -552,6 +641,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '코드는 해당 서버에서만 사용 가능합니다. 서버 변경은 허용되지 않습니다.',
             zh: '迁移码只能在对应服务器上使用，不允许更换服务器。',
             fr: 'Les codes doivent être utilisés sur le serveur correspondant. Les changements de serveur ne sont pas autorisés.',
+            es: 'Los códigos deben usarse en el servidor correspondiente. No se permiten cambios de servidor.',
           },
           {
             en: 'Ex: A Korea server code **cannot** be used on the Japan server.',
@@ -559,6 +649,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '예: 한국 서버 코드는 일본 서버에서 **사용할 수 없습니다**.',
             zh: '例：韩服迁移码**不能**用于日服。',
             fr: 'Ex. : un code du serveur Korea **ne peut pas** être utilisé sur le serveur Japan.',
+            es: 'Ej: Un código del servidor de Corea **no puede** usarse en el servidor de Japón.',
           },
           {
             en: 'Ex: A Korea server code **can** be used on the Global 2 server (post-merge).',
@@ -566,6 +657,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '예: 한국 서버 코드는 글로벌 2 서버(합병 후)에서 **사용할 수 있습니다**.',
             zh: '例：韩服迁移码**可以**用于Global 2服务器（合并后）。',
             fr: 'Ex. : un code du serveur Korea **peut** être utilisé sur le serveur Global 2 (après la fusion).',
+            es: 'Ej: Un código del servidor de Corea **puede** usarse en el servidor Global 2 (tras la fusión).',
           },
         ],
       },
@@ -579,6 +671,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '서비스 이전 코드는 어떻게 받나요?',
       zh: '如何获取服务迁移码？',
       fr: 'Comment obtenir le code de transfert de service ?',
+      es: '¿Cómo obtengo el código de transferencia de servicio?',
     },
     blocks: [
       {
@@ -590,6 +683,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '8월 12일(화) 점검 후, 로그인 → **서비스 이전** 공지 탭 → 이전 화면 오픈.',
             zh: '8月12日（周二）维护后，登录 → 点击**服务迁移**公告 → 打开迁移界面。',
             fr: "Après la maintenance du 12 août (mar.), connectez-vous → appuyez sur l'avis **Service Transfer** → ouvrez l'écran de transfert.",
+            es: 'Después del mantenimiento del 12 de agosto (mar), inicia sesión → toca el aviso de **Transferencia de Servicio** → abre la pantalla de transferencia.',
           },
           {
             en: 'Review the notes and agree to the terms to apply.',
@@ -597,6 +691,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '안내 사항을 확인하고 약관에 동의하여 신청합니다.',
             zh: '阅读注意事项并同意条款申请。',
             fr: 'Lisez les remarques et acceptez les conditions pour faire votre demande.',
+            es: 'Revisa las notas y acepta los términos para aplicar.',
           },
           {
             en: 'Proceed to **Service Transfer Code issuance**.',
@@ -604,6 +699,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '**서비스 이전 코드 발급**으로 진행합니다.',
             zh: '进行**服务迁移码领取**。',
             fr: "Procédez à l'**émission du code de Service Transfer**.",
+            es: 'Continúa con la **emisión del Código de Transferencia de Servicio**.',
           },
         ],
       },
@@ -615,6 +711,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '여러 서버에 캐릭터가 있는 경우, **서버마다** 별도의 코드를 발급받으세요.',
           zh: '若账号在多个服务器上有角色，请**为每个服务器**单独领取迁移码。',
           fr: 'Si un compte possède des personnages sur plusieurs serveurs, émettez un code distinct **pour chaque serveur**.',
+          es: 'Si una cuenta tiene personajes en varios servidores, emite un código distinto **para cada servidor**.',
         },
       },
     ],
@@ -627,6 +724,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '게스트 계정도 이전할 수 있나요?',
       zh: '访客账号也可以迁移吗？',
       fr: 'Les comptes invités peuvent-ils aussi être transférés ?',
+      es: '¿También se pueden transferir las cuentas de invitado?',
     },
     blocks: [
       {
@@ -637,6 +735,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '게스트 ID에는 이전 코드가 **발급되지 않습니다**. 먼저 계정을 연동하세요:',
           zh: '访客账号**不会**发放迁移码。请先关联账号：',
           fr: "Les codes de transfert **ne sont pas** émis pour les identifiants invités. Liez d'abord votre compte :",
+          es: '**No** se emiten códigos de transferencia para IDs de invitado. Vincula tu cuenta primero:',
         },
       },
       {
@@ -647,6 +746,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '설정 → 계정 → 계정 관리 → 계정 연동 → 이후 코드 발급.',
           zh: '设置 → 账号 → 账号管理 → 关联账号 → 然后领取迁移码。',
           fr: 'Paramètres → Compte → Gérer le compte → Lier le compte → puis émettez le code.',
+          es: 'Ajustes → Cuenta → Administrar Cuenta → Vincular Cuenta → luego emite el código.',
         },
       },
     ],
@@ -659,6 +759,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '이전 후 어떤 유형의 새 계정을 만들 수 있나요?',
       zh: '迁移后可以创建哪些类型的新账号？',
       fr: 'Quels types de nouveaux comptes peuvent être créés après le transfert ?',
+      es: '¿Qué tipos de cuentas nuevas se pueden crear después de la transferencia?',
     },
     blocks: [
       {
@@ -669,6 +770,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '**이메일 / Google / Apple**로 VAGAMES 계정을 만들거나 연동할 수 있습니다.',
           zh: '您可以通过**邮箱 / Google / Apple**创建或关联VAGAMES账号。',
           fr: 'Vous pouvez créer/lier un compte VAGAMES via **E-mail / Google / Apple**.',
+          es: 'Puedes crear/vincular una cuenta VAGAMES mediante **Correo electrónico / Google / Apple**.',
         },
       },
     ],
@@ -681,6 +783,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '여러 캐릭터가 있는 경우 모두 이전할 수 있나요?',
       zh: '如果我有多个角色，它们都可以迁移吗？',
       fr: "Si j'ai plusieurs personnages, peuvent-ils tous être transférés ?",
+      es: 'Si tengo varios personajes, ¿se pueden transferir todos?',
     },
     blocks: [
       {
@@ -691,6 +794,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '네. 하지만 여러 서버에 캐릭터가 있는 경우, 각 서버마다 **별도의** 코드를 발급받아야 합니다.',
           zh: '可以。但如果您在多个服务器上有角色，则需要为每个服务器单独领取迁移码。',
           fr: 'Oui. Mais si vous avez des personnages sur plusieurs serveurs, vous devez émettre un code **distinct** pour chaque serveur.',
+          es: 'Sí. Pero si tienes personajes en varios servidores, debes emitir un código **distinto** para cada servidor.',
         },
       },
       {
@@ -701,6 +805,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '예: 한국 서버와 글로벌 서버에 계정이 있는 경우 → 서버당 코드 1개씩 받기.',
           zh: '例：同时在韩服和Global服有账号 → 每个服务器各获取一个迁移码。',
           fr: 'Ex. : comptes sur Korea et Global → obtenez un code par serveur.',
+          es: 'Ej: Cuentas en Corea y Global → obtén un código por servidor.',
         },
       },
     ],
@@ -713,6 +818,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '이전을 신청했습니다. 변경하거나 취소할 수 있나요?',
       zh: '我已申请迁移，可以更改或取消吗？',
       fr: "J'ai fait ma demande de transfert. Puis-je la modifier ou l'annuler ?",
+      es: 'Solicité la transferencia. ¿Puedo cambiarla o cancelarla?',
     },
     blocks: [
       {
@@ -723,6 +829,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '아니요. 서비스 이전에 동의하면 **취소할 수 없습니다**.',
           zh: '不可以。一旦同意服务迁移，**不可**撤销。',
           fr: 'Non. Une fois que vous avez accepté le Service Transfer, il **ne peut pas** être annulé.',
+          es: 'No. Una vez que aceptas la Transferencia de Servicio, **no** se puede revertir.',
         },
       },
     ],
@@ -735,6 +842,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '신청 기간 중 계정을 탈퇴하면 이전 후에도 플레이할 수 있나요?',
       zh: '申请期间注销账号的话，迁移后还能继续游戏吗？',
       fr: 'Si je supprime mon compte pendant la période de candidature, puis-je encore jouer après le transfert ?',
+      es: 'Si doy de baja mi cuenta durante el período de solicitud, ¿podré jugar después de la transferencia?',
     },
     blocks: [
       {
@@ -745,6 +853,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '아니요. 이전 전에 탈퇴하면 계정이 삭제되며, 코드가 있더라도 이전이 불가능합니다.',
           zh: '不能。迁移前注销账号，账号将被删除，即使已有迁移码也无法迁移。',
           fr: 'Non. Si vous supprimez votre compte avant le transfert, le compte est effacé et le transfert devient impossible, même si vous avez déjà un code.',
+          es: 'No. Si das de baja tu cuenta antes de la transferencia, la cuenta se elimina y la transferencia es imposible, incluso si ya tienes un código.',
         },
       },
     ],
@@ -757,6 +866,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '길드 정보를 포함한 모든 게임 데이터가 유지되나요?',
       zh: '包括公会信息在内的所有游戏数据会保留吗？',
       fr: 'Toutes les données de jeu, y compris les informations de guilde, seront-elles conservées ?',
+      es: '¿Se conservarán todos los datos del juego, incluida la información del gremio?',
     },
     blocks: [
       {
@@ -767,6 +877,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '대부분의 데이터는 유지됩니다. 단:',
           zh: '大部分数据会保留。但是：',
           fr: 'La plupart des données sont conservées. Cependant :',
+          es: 'La mayoría de los datos se conservan. Sin embargo:',
         },
       },
       {
@@ -778,6 +889,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '**이름이 변경됩니다**(개명용 에테르는 9월 26일 점검 후 발송):\n– 계정 닉네임 → 현재 닉네임_번호\n– 길드명 → OuterplaneGuild_번호',
             zh: '**名称将更改**（更名用以太将在9月26日维护后发送）：\n– 账号昵称 → 当前昵称_编号\n– 公会名 → OuterplaneGuild_编号',
             fr: "**Noms modifiés** (l'Ether de renommage est envoyé après la maintenance du 26 septembre) :\n– Pseudo du compte → pseudo actuel_numéro\n– Nom de guilde → OuterplaneGuild_numéro",
+            es: '**Nombres cambiados** (Éter para cambio de nombre enviado después del mantenimiento del 26 de sep):\n– Apodo de cuenta → nickname_actual_número\n– Nombre del gremio → OuterplaneGuild_número',
           },
           {
             en: 'For Korea/ASIA/ASIA II servers, rankings will be **merged and recalculated**:\n– Guild Raid Hall of Fame\n– Arena League Hall of Fame',
@@ -785,6 +897,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '한국/아시아/아시아 II 서버의 랭킹은 **통합 및 재산정**됩니다:\n– 길드 레이드 명예의 전당\n– 아레나 리그 명예의 전당',
             zh: '韩国/亚洲/亚洲II服务器的排名将**合并重新计算**：\n– 公会Raid荣耀殿堂\n– 竞技场联赛荣耀殿堂',
             fr: "Pour les serveurs Korea/ASIA/ASIA II, les classements seront **fusionnés et recalculés** :\n– Temple de la renommée du Guild Raid\n– Temple de la renommée de l'Arena League",
+            es: 'Para los servidores Corea/ASIA/ASIA II, las clasificaciones serán **fusionadas y recalculadas**:\n– Salón de la Fama de Raid Gremio\n– Salón de la Fama de Liga Arena',
           },
         ],
       },
@@ -798,6 +911,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '길드장이 이전을 완료하지 않아도 길드가 유지되나요?',
       zh: '如果会长未完成迁移，公会还会存在吗？',
       fr: 'La guilde subsiste-t-elle si le chef de guilde ne termine pas le transfert ?',
+      es: '¿El gremio se mantendrá si el Líder del Gremio no completa la transferencia?',
     },
     blocks: [
       {
@@ -808,6 +922,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '네, 길드는 유지됩니다. 길드장은 다음 기준으로 재지정됩니다:',
           zh: '是的，公会保留。会长按以下顺序重新指定：',
           fr: 'Oui, la guilde subsiste. Le chef est réassigné selon :',
+          es: 'Sí, el gremio se mantiene. El líder se reasigna según:',
         },
       },
       {
@@ -819,6 +934,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '기여도가 가장 높은 길드 부길드장',
             zh: '贡献值最高的副会长',
             fr: "L'officier de guilde ayant la plus forte contribution",
+            es: 'Oficial del Gremio con la mayor contribución',
           },
           {
             en: 'Most recently active among top 10 contributors',
@@ -826,6 +942,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '상위 10명 기여자 중 가장 최근에 활동한 멤버',
             zh: '贡献排名前10名中最近活跃的成员',
             fr: 'Le membre le plus récemment actif parmi les 10 meilleurs contributeurs',
+            es: 'El más activo recientemente entre los 10 mayores contribuyentes',
           },
           {
             en: 'Most recently active member otherwise',
@@ -833,6 +950,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '그 외의 경우 가장 최근에 활동한 멤버',
             zh: '其他情况取最近活跃的成员',
             fr: 'Sinon, le membre le plus récemment actif',
+            es: 'En su defecto, el miembro más activo recientemente',
           },
         ],
       },
@@ -846,6 +964,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '메일함에 있는 아이템/상품은 어떻게 되나요?',
       zh: '邮箱中的物品/商品会怎样？',
       fr: "Qu'advient-il des objets/produits dans ma boîte aux lettres ?",
+      es: '¿Qué pasa con los objetos/productos en mi buzón?',
     },
     blocks: [
       {
@@ -856,6 +975,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '아이템/상품은 유지되지만, 이전 전의 메일 수령 내역은 표시되지 않습니다.',
           zh: '物品/商品会保留，但迁移前的邮件领取记录之后将不再显示。',
           fr: "Les objets/produits sont conservés, mais l'historique de réclamation du courrier antérieur au transfert ne sera plus affiché par la suite.",
+          es: 'Los objetos/productos se conservan, pero el historial de reclamos de correo anterior a la transferencia no se mostrará después.',
         },
       },
       {
@@ -866,6 +986,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '수령 기간이 만료된 메일은 연장되지 않습니다 — 9월 23일 전에 수령하세요.',
           zh: '已过领取期限的邮件不会延期 — 请在9月23日前领取。',
           fr: 'Le courrier dont la période de réclamation est expirée ne sera pas prolongé — réclamez avant le 23 septembre.',
+          es: 'El correo con períodos de reclamo vencidos no será extendido — reclámalo antes del 23 de sep.',
         },
       },
     ],
@@ -878,6 +999,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '월정액 상품은 어떻게 되나요?',
       zh: '月度订阅商品会怎样？',
       fr: "Qu'adviendra-t-il des produits d'abonnement mensuel ?",
+      es: '¿Qué pasará con los productos de Suscripción Mensual?',
     },
     blocks: [
       {
@@ -888,6 +1010,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '잔여 기간은 9월 23일(화) 점검 기간만큼 **자동 연장**됩니다.',
           zh: '剩余时长将在9月23日（周二）维护期间**自动延长**相应时间。',
           fr: 'La durée restante sera **automatiquement prolongée** de la durée de la maintenance après le 23 septembre (mar.).',
+          es: 'La duración restante será **extendida automáticamente** por el período de mantenimiento después del 23 de sep (mar).',
         },
       },
       {
@@ -898,6 +1021,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '원활한 이전을 위해 2025년 9월 23일 전에 메일함에서 수령하세요.',
           zh: '为顺利完成迁移，请在2025年9月23日前从邮箱领取。',
           fr: 'Pour un transfert sans accroc, réclamez-les depuis votre boîte aux lettres avant le 23 septembre 2025.',
+          es: 'Para una transferencia sin problemas, reclámalos desde tu buzón antes del 23 de septiembre de 2025.',
         },
       },
     ],
@@ -910,6 +1034,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '이전 후 운영 정책이 변경되더라도 이전 제재는 해제되나요?',
       zh: '迁移后运营政策变更，之前的限制会被解除吗？',
       fr: "Si la politique d'exploitation change après le transfert, les restrictions antérieures sont-elles levées ?",
+      es: 'Si la política de operación cambia tras la transferencia, ¿se eliminan las restricciones previas?',
     },
     blocks: [
       {
@@ -920,6 +1045,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '아니요. 이미 제재를 받은 계정은 접근이 불가하고, 코드도 받을 수 없으며, 이전도 불가합니다.',
           zh: '不会。已被限制的账号仍无法访问，不会获得迁移码，也无法进行迁移。',
           fr: 'Non. Les comptes déjà sous restriction restent inaccessibles, ne recevront pas de code et ne peuvent pas être transférés.',
+          es: 'No. Las cuentas ya restringidas permanecen inaccesibles, no recibirán código y no podrán transferirse.',
         },
       },
     ],
@@ -932,6 +1058,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '공식 STOVE 커뮤니티를 계속 이용할 수 있나요?',
       zh: '迁移后还能使用STOVE官方社区吗？',
       fr: 'Pourrai-je encore utiliser la communauté officielle STOVE ?',
+      es: '¿Podré seguir usando la comunidad oficial de STOVE?',
     },
     blocks: [
       {
@@ -942,6 +1069,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '제한적으로만 이용 가능합니다. 모든 게시글/콘텐츠는 **2025년 10월 27일(월)**에 삭제됩니다. 일정에 따라 필요한 것을 백업해 두세요.',
           zh: '仅限时可用。所有帖子/内容将在**2025年10月27日（周一）**删除。请按计划备份所需内容。',
           fr: 'Disponible uniquement pour une durée limitée. Tous les messages/contenus seront supprimés le **27 octobre 2025 (lun.)**. Sauvegardez tout ce dont vous avez besoin selon le calendrier.',
+          es: 'Disponible solo por tiempo limitado. Todas las publicaciones/contenido serán eliminados el **27 de oct de 2025 (lun)**. Haz una copia de seguridad de lo que necesites según el cronograma.',
         },
       },
       {
@@ -952,6 +1080,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '**공식 커뮤니티 일정**',
           zh: '**官方社区日程**',
           fr: '**Calendrier de la communauté officielle**',
+          es: '**Cronograma de la Comunidad Oficial**',
         },
       },
       {
@@ -963,6 +1092,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '9월 22일: 게시글/댓글 작성 제한',
             zh: '9月22日：限制发帖/评论',
             fr: '22 sept. : restriction de publication/commentaire',
+            es: '22 de sep: Restricción de publicaciones/comentarios',
           },
           {
             en: 'Sep 23: Closure of all boards except Notices/Updates',
@@ -970,6 +1100,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '9월 23일: 공지/업데이트 외 모든 게시판 폐쇄',
             zh: '9月23日：关闭除公告/更新外的所有版块',
             fr: '23 sept. : fermeture de tous les forums sauf Avis/Mises à jour',
+            es: '23 de sep: Cierre de todos los foros excepto Avisos/Actualizaciones',
           },
           {
             en: 'Oct 27: Complete closure of the STOVE community',
@@ -977,6 +1108,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
             kr: '10월 27일: STOVE 커뮤니티 완전 폐쇄',
             zh: '10月27日：STOVE社区完全关闭',
             fr: '27 oct. : fermeture complète de la communauté STOVE',
+            es: '27 de oct: Cierre completo de la comunidad de STOVE',
           },
         ],
       },
@@ -988,6 +1120,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '공식 VAGAMES 커뮤니티 주소는 추후 공지 예정입니다.',
           zh: '官方VAGAMES社区地址将稍后公布。',
           fr: "L'adresse de la communauté officielle VAGAMES sera annoncée ultérieurement.",
+          es: 'La dirección de la comunidad oficial de VAGAMES será anunciada más adelante.',
         },
       },
     ],
@@ -1000,6 +1133,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
       kr: '이전 후에도 공식 소셜 미디어 채널이 유지되나요?',
       zh: '迁移后官方社交媒体账号还会保留吗？',
       fr: 'Les réseaux sociaux officiels subsisteront-ils après le transfert ?',
+      es: '¿Los canales oficiales de redes sociales seguirán existiendo tras la transferencia?',
     },
     blocks: [
       {
@@ -1010,6 +1144,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '공식 **X**와 **Discord**는 계속 운영됩니다.',
           zh: '官方**X**和**Discord**将继续运营。',
           fr: 'Le **X** et le **Discord** officiels continueront de fonctionner.',
+          es: 'El **X** y **Discord** oficiales continuarán operando.',
         },
       },
       {
@@ -1020,6 +1155,7 @@ export const FAQ_ITEMS: FaqEntry[] = [
           kr: '**Facebook** 페이지는 **9월 22일**에 삭제됩니다. 필요한 콘텐츠를 저장하세요.',
           zh: '**Facebook**主页将于**9月22日**删除。请保存您需要的内容。',
           fr: 'La page **Facebook** sera supprimée le **22 septembre**. Sauvegardez tout contenu que vous souhaitez conserver.',
+          es: 'La página de **Facebook** se eliminará el **22 de sep**. Guarda cualquier contenido que quieras conservar.',
         },
       },
     ],

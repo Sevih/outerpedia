@@ -59,7 +59,8 @@
         "jp": "フレンドのユニットを使ってステージをクリアすることもできます。",
         "kr": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요.",
         "zh": "别忘了可以使用好友的角色来帮助通关。",
-        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages."
+        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages.",
+        "es": "No olvides que puedes usar las unidades de tus amigos para ayudarte a superar esas etapas."
       }
     },
     {
@@ -121,7 +122,8 @@
         "jp": "強力なデバフ付与とAoEを持つユニットでミニオンを処理しましょう。",
         "kr": "강력한 디버프 부여와 AoE를 가진 유닛으로 미니언을 처리하세요.",
         "zh": "专注于拥有强力减益施加和AoE的角色来处理小兵。",
-        "fr": "Privilégiez les unités avec une forte application de debuffs et de l'AoE pour gérer les minions."
+        "fr": "Privilégiez les unités avec une forte application de debuffs et de l'AoE pour gérer les minions.",
+        "es": "Concéntrate en unidades con buena aplicación de debuffs y AoE para manejar a los esbirros."
       }
     }
   ]

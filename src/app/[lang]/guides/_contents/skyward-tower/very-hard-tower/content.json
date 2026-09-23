@@ -4,7 +4,8 @@
     "jp": "ベリーハードモードではフロアと条件がランダム化され、ボスの組み合わせが変わります。各プレイヤーに対して3〜4セットからランダムに選ばれます。5階、10階、15階は固定ボス：デミウルゴス・ステラ、デミウルゴス・ドラカン、デミウルゴス・ヴラダ（位置はランダム）。20階は2セットのボスが交互に登場します。",
     "kr": "매우 어려움 모드에서는 층과 조건이 랜덤으로 변경되며 보스 조합이 달라집니다. 각 플레이어에게 3~4세트 중 랜덤으로 선택됩니다. 5층, 10층, 15층은 고정 보스: 데미우르고스 스텔라, 데미우르고스 드라칸, 데미우르고스 블라다 (위치는 랜덤). 20층은 2세트의 보스가 교대로 등장합니다.",
     "zh": "极难模式的楼层和条件会随机变化，Boss组合也会不同。每位玩家从3-4个方案中随机选择。第5、10、15层为固定Boss：造物主斯特拉、造物主德拉坎、造物主弗拉达（位置随机）。第20层可在3组Boss之间交替。",
-    "fr": "Le mode Very Hard propose des étages et conditions aléatoires avec des combinaisons de Boss variables. Les étages et conditions sont aléatoires (choisis parmi 3 à 4 sets pour chaque joueur). Les étages 5, 10 et 15 ont des Boss fixes : Demiurge Stella, Demiurge Drakhan et Demiurge Vlada (positions aléatoires). L'étage 20 peut alterner entre 2 sets de Boss."
+    "fr": "Le mode Very Hard propose des étages et conditions aléatoires avec des combinaisons de Boss variables. Les étages et conditions sont aléatoires (choisis parmi 3 à 4 sets pour chaque joueur). Les étages 5, 10 et 15 ont des Boss fixes : Demiurge Stella, Demiurge Drakhan et Demiurge Vlada (positions aléatoires). L'étage 20 peut alterner entre 2 sets de Boss.",
+    "es": "El modo Muy Difícil presenta pisos y condiciones aleatorios con distintos encuentros de jefes. El piso y las condiciones son aleatorios (elegidos entre 3-4 conjuntos para cada jugador). Los pisos 5, 10 y 15 tienen jefes fijos: Demiurgo Stella, Demiurgo Drakhan y Demiurgo Vlada (posiciones aleatorias). El piso 20 puede alternar entre 2 conjuntos de jefes."
   },
   "reasons": {
     "just-focus-mero": {
@@ -12,525 +13,600 @@
       "jp": "{P/Mero}を集中攻撃するだけです。",
       "kr": "{P/Mero}만 집중 공격하세요.",
       "zh": "集火{P/Mero}即可。",
-      "fr": "Focus simplement {P/Mero}."
+      "fr": "Focus simplement {P/Mero}.",
+      "es": "Solo concéntrate en {P/Mero}."
     },
     "steal-buff-options": {
       "en": "{D/BT_STEAL_BUFF} options",
       "jp": "{D/BT_STEAL_BUFF}オプション",
       "kr": "{D/BT_STEAL_BUFF} 옵션",
       "zh": "{D/BT_STEAL_BUFF}选项",
-      "fr": "Options {D/BT_STEAL_BUFF}"
+      "fr": "Options {D/BT_STEAL_BUFF}",
+      "es": "Opciones de {D/BT_STEAL_BUFF}"
     },
     "redistribute-buff-options": {
       "en": "{D/BT_REDISTRIBUTE_BUFF} options",
       "jp": "{D/BT_REDISTRIBUTE_BUFF}オプション",
       "kr": "{D/BT_REDISTRIBUTE_BUFF} 옵션",
       "zh": "{D/BT_REDISTRIBUTE_BUFF}选项",
-      "fr": "Options {D/BT_REDISTRIBUTE_BUFF}"
+      "fr": "Options {D/BT_REDISTRIBUTE_BUFF}",
+      "es": "Opciones de {D/BT_REDISTRIBUTE_BUFF}"
     },
     "steal-buff-and-redistribute-buff": {
       "en": "{D/BT_STEAL_BUFF} and {D/BT_REDISTRIBUTE_BUFF} is the key here.",
       "jp": "ここでは{D/BT_STEAL_BUFF}と{D/BT_REDISTRIBUTE_BUFF}が鍵となります。",
       "kr": "여기서는 {D/BT_STEAL_BUFF}와 {D/BT_REDISTRIBUTE_BUFF}가 핵심입니다.",
       "zh": "此处的关键是{D/BT_STEAL_BUFF}和{D/BT_REDISTRIBUTE_BUFF}。",
-      "fr": "{D/BT_STEAL_BUFF} et {D/BT_REDISTRIBUTE_BUFF} sont la clé ici."
+      "fr": "{D/BT_STEAL_BUFF} et {D/BT_REDISTRIBUTE_BUFF} sont la clé ici.",
+      "es": "{D/BT_STEAL_BUFF} y {D/BT_REDISTRIBUTE_BUFF} son la clave aquí."
     },
     "remove-debuff-and-immune-options": {
       "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE} options",
       "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}のオプション",
       "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE} 옵션",
       "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}选项",
-      "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}"
+      "fr": "Options {B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}",
+      "es": "Opciones de {B/BT_REMOVE_DEBUFF} y {B/BT_IMMUNE}"
     },
     "remove-debuff-options": {
       "en": "{B/BT_REMOVE_DEBUFF} options",
       "jp": "{B/BT_REMOVE_DEBUFF}オプション",
       "kr": "{B/BT_REMOVE_DEBUFF} 옵션",
       "zh": "{B/BT_REMOVE_DEBUFF}选项",
-      "fr": "Options {B/BT_REMOVE_DEBUFF}"
+      "fr": "Options {B/BT_REMOVE_DEBUFF}",
+      "es": "Opciones de {B/BT_REMOVE_DEBUFF}"
     },
     "immune-options": {
       "en": "{B/BT_IMMUNE} options",
       "jp": "{B/BT_IMMUNE}オプション",
       "kr": "{B/BT_IMMUNE} 옵션",
       "zh": "{B/BT_IMMUNE}选项",
-      "fr": "Options {B/BT_IMMUNE}"
+      "fr": "Options {B/BT_IMMUNE}",
+      "es": "Opciones de {B/BT_IMMUNE}"
     },
     "remove-debuff-and-immune": {
       "en": "{B/BT_REMOVE_DEBUFF} and {B/BT_IMMUNE}.",
       "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_IMMUNE}。",
       "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_IMMUNE}.",
       "zh": "{B/BT_REMOVE_DEBUFF}与{B/BT_IMMUNE}。",
-      "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}."
+      "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_IMMUNE}.",
+      "es": "{B/BT_REMOVE_DEBUFF} y {B/BT_IMMUNE}."
     },
     "dps-with-remove-debuff-on-reveng": {
       "en": "DPS with {B/BT_REMOVE_DEBUFF} on {B/BT_REVENGE}.",
       "jp": "{B/BT_REVENGE}時に{B/BT_REMOVE_DEBUFF}を持つDPS。",
       "kr": "{B/BT_REVENGE} 시 {B/BT_REMOVE_DEBUFF}를 가진 DPS.",
       "zh": "具有{B/BT_REVENGE}时触发{B/BT_REMOVE_DEBUFF}的 DPS。",
-      "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}."
+      "fr": "DPS avec {B/BT_REMOVE_DEBUFF} sur {B/BT_REVENGE}.",
+      "es": "DPS con {B/BT_REMOVE_DEBUFF} en {B/BT_REVENGE}."
     },
     "dps-with-revenge": {
       "en": "DPS with {B/BT_REVENGE}.",
       "jp": "{B/BT_REVENGE}を持つDPS。",
       "kr": "{B/BT_REVENGE}를 가진 DPS.",
       "zh": "拥有{B/BT_REVENGE}的 DPS。",
-      "fr": "DPS avec {B/BT_REVENGE}."
+      "fr": "DPS avec {B/BT_REVENGE}.",
+      "es": "DPS con {B/BT_REVENGE}."
     },
     "remove-debuff-immune-and-revenge": {
       "en": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} and {B/BT_REVENGE} will do the job.",
       "jp": "{B/BT_REMOVE_DEBUFF}、{B/BT_IMMUNE}、{B/BT_REVENGE}で対処できます。",
       "kr": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE}, {B/BT_REVENGE}로 충분합니다.",
       "zh": "{B/BT_REMOVE_DEBUFF}、{B/BT_IMMUNE}和{B/BT_REVENGE}就足够应对。",
-      "fr": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} et {B/BT_REVENGE} feront l'affaire."
+      "fr": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} et {B/BT_REVENGE} feront l'affaire.",
+      "es": "{B/BT_REMOVE_DEBUFF}, {B/BT_IMMUNE} y {B/BT_REVENGE} harán el trabajo."
     },
     "stat-in-her-kit": {
       "en": "{B/BT_STAT|ST_COUNTER_RATE} in her kit.",
       "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持っています。",
       "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 보유.",
       "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}。",
-      "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit."
+      "fr": "{B/BT_STAT|ST_COUNTER_RATE} dans son kit.",
+      "es": "{B/BT_STAT|ST_COUNTER_RATE} en su kit."
     },
     "inflicts-dot-burn-when-taking-a-": {
       "en": "Inflicts {D/BT_DOT_BURN} when taking a hit.",
       "jp": "被弾時に{D/BT_DOT_BURN}を付与します。",
       "kr": "피격 시 {D/BT_DOT_BURN}을 부여합니다.",
       "zh": "受击时施加{D/BT_DOT_BURN}。",
-      "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée."
+      "fr": "Inflige {D/BT_DOT_BURN} quand elle est touchée.",
+      "es": "Inflige {D/BT_DOT_BURN} al recibir un golpe."
     },
     "will-help-your-team-to-survive": {
       "en": "Will help your team to survive.",
       "jp": "チームの生存に役立ちます。",
       "kr": "팀의 생존에 도움이 됩니다.",
       "zh": "有助于队伍生存。",
-      "fr": "Aidera votre équipe à survivre."
+      "fr": "Aidera votre équipe à survivre.",
+      "es": "Ayudará a tu equipo a sobrevivir."
     },
     "one-of-the-best-ways-to-counter-": {
       "en": "One of the best ways to counter it is to utilize {B/BT_STAT|ST_COUNTER_RATE} to accumulate chain points faster.",
       "jp": "最善の対策の一つは、{B/BT_STAT|ST_COUNTER_RATE}を活用してチェインポイントを早く貯めることです。",
       "kr": "가장 좋은 대처법 중 하나는 {B/BT_STAT|ST_COUNTER_RATE}를 활용해 체인 포인트를 빠르게 쌓는 것입니다.",
       "zh": "应对此 Boss 的最佳方式之一是利用{B/BT_STAT|ST_COUNTER_RATE}更快地累积连锁点数。",
-      "fr": "L'une des meilleures façons de la contrer est d'utiliser {B/BT_STAT|ST_COUNTER_RATE} pour accumuler des chain points plus vite."
+      "fr": "L'une des meilleures façons de la contrer est d'utiliser {B/BT_STAT|ST_COUNTER_RATE} pour accumuler des chain points plus vite.",
+      "es": "Una de las mejores formas de contrarrestarlo es utilizar {B/BT_STAT|ST_COUNTER_RATE} para acumular puntos de cadena más rápido."
     },
     "another-way-to-counter-it-is-by-": {
       "en": "Another way to counter it is by using {P/Ember} with enough {S/EFF} to inflict {D/BT_DOT_BURN}.",
       "jp": "もう一つの対策は、{S/EFF}を十分に積んだ{P/Ember}で{D/BT_DOT_BURN}を付与することです。",
       "kr": "또 다른 대처법은 충분한 {S/EFF}를 갖춘 {P/Ember}로 {D/BT_DOT_BURN}을 부여하는 것입니다.",
       "zh": "另一种应对方式是使用携带足够{S/EFF}的{P/Ember}来施加{D/BT_DOT_BURN}。",
-      "fr": "Une autre façon de la contrer est d'utiliser {P/Ember} avec assez d'{S/EFF} pour infliger {D/BT_DOT_BURN}."
+      "fr": "Une autre façon de la contrer est d'utiliser {P/Ember} avec assez d'{S/EFF} pour infliger {D/BT_DOT_BURN}.",
+      "es": "Otra forma de contrarrestarlo es usando {P/Ember} con suficiente {S/EFF} para infligir {D/BT_DOT_BURN}."
     },
     "delta-can-go-in-tandem-with-cind": {
       "en": "{P/Delta} can go in tandem with {P/Cindy}, {P/Dianne} and/or {P/Fran} (EE+10).",
       "jp": "{P/Delta}は{P/Cindy}、{P/Dianne}、{P/Fran}（EE+10）と連携できます。",
       "kr": "{P/Delta}는 {P/Cindy}, {P/Dianne}, {P/Fran}(EE+10)과 연계할 수 있습니다.",
       "zh": "{P/Delta}可以与{P/Cindy}、{P/Dianne}和/或{P/Fran}(EE+10) 协同。",
-      "fr": "{P/Delta} peut jouer en tandem avec {P/Cindy}, {P/Dianne} et/ou {P/Fran} (EE+10)."
+      "fr": "{P/Delta} peut jouer en tandem avec {P/Cindy}, {P/Dianne} et/ou {P/Fran} (EE+10).",
+      "es": "{P/Delta} puede combinarse con {P/Cindy}, {P/Dianne} y/o {P/Fran} (EE+10)."
     },
     "control-and-focus-the-core-to-pr": {
       "en": "Control and focus the core to prevent {P/Poolside Trickster Regina} to play. Both priority reductions and stun.",
       "jp": "{P/Poolside Trickster Regina}に行動させないよう、コアを制圧・集中攻撃しましょう。行動順低下と{D/BT_STUN}の両方を使います。",
       "kr": "{P/Poolside Trickster Regina}이(가) 행동하지 못하도록 코어를 제압하고 집중 공격하세요. 행동 순서 감소와 스턴 모두 활용합니다.",
       "zh": "控制并集火核心,避免{P/Poolside Trickster Regina}行动。行动顺序降低和{D/BT_STUN}都要使用。",
-      "fr": "Contrôlez et focus le core pour empêcher {P/Poolside Trickster Regina} de jouer. À la fois réduction de priority et stun."
+      "fr": "Contrôlez et focus le core pour empêcher {P/Poolside Trickster Regina} de jouer. À la fois réduction de priority et stun.",
+      "es": "Controla y enfoca el núcleo para evitar que {P/Poolside Trickster Regina} actúe. Tanto reducciones de prioridad como aturdimiento."
     },
     "best-way-is-by-using-action-gaug": {
       "en": "Best way is by using {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} and hard CC like {D/BT_STUN}, {D/BT_FREEZE} and {D/BT_GOLDEN_CURSE}.",
       "jp": "最善策は{B/BT_ACTION_GAUGE}、{D/BT_ACTION_GAUGE}、そして{D/BT_STUN}、{D/BT_FREEZE}、{D/BT_GOLDEN_CURSE}のような強力なCCを活用することです。",
       "kr": "가장 좋은 방법은 {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE}, 그리고 {D/BT_STUN}, {D/BT_FREEZE}, {D/BT_GOLDEN_CURSE} 같은 강력한 CC를 활용하는 것입니다.",
       "zh": "最佳方式是使用{B/BT_ACTION_GAUGE}、{D/BT_ACTION_GAUGE}以及{D/BT_STUN}、{D/BT_FREEZE}和{D/BT_GOLDEN_CURSE}等强控。",
-      "fr": "Le mieux est d'utiliser {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} et du hard CC comme {D/BT_STUN}, {D/BT_FREEZE} et {D/BT_GOLDEN_CURSE}."
+      "fr": "Le mieux est d'utiliser {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} et du hard CC comme {D/BT_STUN}, {D/BT_FREEZE} et {D/BT_GOLDEN_CURSE}.",
+      "es": "La mejor forma es usando {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} y CC duro como {D/BT_STUN}, {D/BT_FREEZE} y {D/BT_GOLDEN_CURSE}."
     },
     "bring-remove-debuff-and-you-ll-b": {
       "en": "Bring {B/BT_REMOVE_DEBUFF} and you'll be fine.",
       "jp": "{B/BT_REMOVE_DEBUFF}を編成すれば問題ありません。",
       "kr": "{B/BT_REMOVE_DEBUFF}을 데려가면 괜찮습니다.",
       "zh": "带上{B/BT_REMOVE_DEBUFF}就没问题。",
-      "fr": "Emmenez {B/BT_REMOVE_DEBUFF} et tout ira bien."
+      "fr": "Emmenez {B/BT_REMOVE_DEBUFF} et tout ira bien.",
+      "es": "Trae {B/BT_REMOVE_DEBUFF} y estarás bien."
     },
     "sk-caren-s2-will-automatically-t": {
       "en": "{SK/Caren|S2} will automatically target {P/Fatal} and {SK/Caren|S1} will hit both target.",
       "jp": "{SK/Caren|S2}は自動で{P/Fatal}を狙い、{SK/Caren|S1}は両方の敵にヒットします。",
       "kr": "{SK/Caren|S2}는 자동으로 {P/Fatal}을 노리고, {SK/Caren|S1}은 두 대상 모두에게 명중합니다.",
       "zh": "{SK/Caren|S2}会自动锁定{P/Fatal},{SK/Caren|S1}会同时命中两个目标。",
-      "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles."
+      "fr": "{SK/Caren|S2} ciblera automatiquement {P/Fatal} et {SK/Caren|S1} touchera les deux cibles.",
+      "es": "{SK/Caren|S2} apuntará automáticamente a {P/Fatal} y {SK/Caren|S1} golpeará a ambos objetivos."
     },
     "same-reason-as-caren-her-sk-myst": {
       "en": "Same reason as {P/Caren}, her {SK/Mystic Sage Ame|S2} will automatically target {P/Fatal}.",
       "jp": "{P/Caren}と同じ理由で、彼女の{SK/Mystic Sage Ame|S2}は自動で{P/Fatal}を狙います。",
       "kr": "{P/Caren}과 같은 이유로, 그녀의 {SK/Mystic Sage Ame|S2}는 자동으로 {P/Fatal}을 노립니다.",
       "zh": "与{P/Caren}相同的原因,她的{SK/Mystic Sage Ame|S2}会自动锁定{P/Fatal}。",
-      "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}."
+      "fr": "Même raison que {P/Caren} : son {SK/Mystic Sage Ame|S2} ciblera automatiquement {P/Fatal}.",
+      "es": "Misma razón que {P/Caren}, su {SK/Mystic Sage Ame|S2} apuntará automáticamente a {P/Fatal}."
     },
     "single-target-edelweiss-then-fat": {
       "en": "Single target {P/Edelweiss} then {P/Fatal}.",
       "jp": "単体攻撃で{P/Edelweiss}を倒してから{P/Fatal}を狙いましょう。",
       "kr": "단일 공격으로 {P/Edelweiss}를 먼저 처치한 후 {P/Fatal}을 공격하세요.",
       "zh": "用单体攻击先击杀{P/Edelweiss},然后击杀{P/Fatal}。",
-      "fr": "Ciblez {P/Edelweiss} en monocible puis {P/Fatal}."
+      "fr": "Ciblez {P/Edelweiss} en monocible puis {P/Fatal}.",
+      "es": "Objetivo único {P/Edelweiss} luego {P/Fatal}."
     },
     "stun-options": {
       "en": "{D/BT_STUN} options",
       "jp": "{D/BT_STUN}オプション",
       "kr": "{D/BT_STUN} 옵션",
       "zh": "{D/BT_STUN}选项",
-      "fr": "Options {D/BT_STUN}"
+      "fr": "Options {D/BT_STUN}",
+      "es": "Opciones de {D/BT_STUN}"
     },
     "golden-curse-options": {
       "en": "{D/BT_GOLDEN_CURSE} options",
       "jp": "{D/BT_GOLDEN_CURSE}オプション",
       "kr": "{D/BT_GOLDEN_CURSE} 옵션",
       "zh": "{D/BT_GOLDEN_CURSE}选项",
-      "fr": "Options {D/BT_GOLDEN_CURSE}"
+      "fr": "Options {D/BT_GOLDEN_CURSE}",
+      "es": "Opciones de {D/BT_GOLDEN_CURSE}"
     },
     "freeze-options": {
       "en": "{D/BT_FREEZE} options",
       "jp": "{D/BT_FREEZE}オプション",
       "kr": "{D/BT_FREEZE} 옵션",
       "zh": "{D/BT_FREEZE}选项",
-      "fr": "Options {D/BT_FREEZE}"
+      "fr": "Options {D/BT_FREEZE}",
+      "es": "Opciones de {D/BT_FREEZE}"
     },
     "2-ways-to-handle-the-fight": {
       "en": "2 ways to handle the fight :",
       "jp": "この戦闘を攻略する2つの方法：",
       "kr": "이 전투를 공략하는 2가지 방법:",
       "zh": "应对此战斗的 2 种方法：",
-      "fr": "2 façons d'aborder le combat :"
+      "fr": "2 façons d'aborder le combat :",
+      "es": "2 formas de manejar el combate:"
     },
     "either-brute-force-with-your-str": {
       "en": "Either brute force with your strongest DPS units",
       "jp": "あるいは最強のDPSユニットで力押しする方法",
       "kr": "또는 가장 강력한 DPS 유닛으로 힘으로 밀어붙이기",
       "zh": "或者用你最强的 DPS 角色强行击破",
-      "fr": "Soit en force brute avec vos unités DPS les plus puissantes"
+      "fr": "Soit en force brute avec vos unités DPS les plus puissantes",
+      "es": "O fuerza bruta con tus unidades DPS más fuertes"
     },
     "control-since-she-lack-of-immuni": {
       "en": "Control since she lack of immunity towards any stun.",
       "jp": "{D/BT_STUN}に対する耐性がないので、行動制御しましょう。",
       "kr": "어떤 스턴에도 면역이 없으므로 행동을 제어하세요.",
       "zh": "她对任何{D/BT_STUN}都没有免疫,进行控制即可。",
-      "fr": "Soit en contrôle, car elle n'a aucune immunité face au stun."
+      "fr": "Soit en contrôle, car elle n'a aucune immunité face au stun.",
+      "es": "Control, ya que carece de inmunidad ante cualquier aturdimiento."
     },
     "units-with-stat-in-their-kits": {
       "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",
       "jp": "スキルに{B/BT_STAT|ST_COUNTER_RATE}を持つユニット",
       "kr": "스킬에 {B/BT_STAT|ST_COUNTER_RATE}를 가진 유닛",
       "zh": "技能组中带有{B/BT_STAT|ST_COUNTER_RATE}的角色",
-      "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit"
+      "fr": "Unités avec {B/BT_STAT|ST_COUNTER_RATE} dans leur kit",
+      "es": "Unidades con {B/BT_STAT|ST_COUNTER_RATE} en sus kits"
     },
     "sturdy-dps-units": {
       "en": "Sturdy DPS units",
       "jp": "耐久力のあるDPSユニット",
       "kr": "내구성 있는 DPS 유닛",
       "zh": "坚韧的 DPS 角色",
-      "fr": "Unités DPS résistantes"
+      "fr": "Unités DPS résistantes",
+      "es": "Unidades DPS resistentes"
     },
     "units-that-will-help-your-team-t": {
       "en": "Units that will help your team to survive",
       "jp": "チームの生存に役立つユニット",
       "kr": "팀의 생존에 도움이 되는 유닛",
       "zh": "有助于队伍生存的角色",
-      "fr": "Unités qui aideront votre équipe à survivre"
+      "fr": "Unités qui aideront votre équipe à survivre",
+      "es": "Unidades que ayudarán a tu equipo a sobrevivir"
     },
     "high-survivability-units-is-reco": {
       "en": "High survivability units is recommended.",
       "jp": "生存力の高いユニットが推奨されます。",
       "kr": "생존력이 높은 유닛을 추천합니다.",
       "zh": "推荐使用高生存力角色。",
-      "fr": "Des unités à haute survie sont recommandées."
+      "fr": "Des unités à haute survie sont recommandées.",
+      "es": "Se recomienda alta supervivencia en las unidades."
     },
     "stat-units-are-very-useful-here": {
       "en": "{B/BT_STAT|ST_COUNTER_RATE} units are very useful here.",
       "jp": "{B/BT_STAT|ST_COUNTER_RATE}ユニットが非常に有効です。",
       "kr": "{B/BT_STAT|ST_COUNTER_RATE} 유닛이 매우 유용합니다.",
       "zh": "{B/BT_STAT|ST_COUNTER_RATE}角色在此非常有用。",
-      "fr": "Les unités {B/BT_STAT|ST_COUNTER_RATE} sont très utiles ici."
+      "fr": "Les unités {B/BT_STAT|ST_COUNTER_RATE} sont très utiles ici.",
+      "es": "Las unidades de {B/BT_STAT|ST_COUNTER_RATE} son muy útiles aquí."
     },
     "just-focus-main-maxwell-with-sin": {
       "en": "Just focus main {P/Maxwell} with single target.",
       "jp": "単体攻撃で本体の{P/Maxwell}を集中攻撃するだけです。",
       "kr": "단일 공격으로 본체 {P/Maxwell}만 집중 공격하세요.",
       "zh": "用单体攻击集火本体{P/Maxwell}即可。",
-      "fr": "Focus simplement le {P/Maxwell} principal en monocible."
+      "fr": "Focus simplement le {P/Maxwell} principal en monocible.",
+      "es": "Solo concéntrate en el {P/Maxwell} principal con objetivo único."
     },
     "team-wide-stat-buff": {
       "en": "Team wide {B/BT_STAT|ST_BUFF_CHANCE} buff",
       "jp": "全体への{B/BT_STAT|ST_BUFF_CHANCE}バフ",
       "kr": "전체 {B/BT_STAT|ST_BUFF_CHANCE} 버프",
       "zh": "全队{B/BT_STAT|ST_BUFF_CHANCE}增益",
-      "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe"
+      "fr": "Buff {B/BT_STAT|ST_BUFF_CHANCE} pour toute l'équipe",
+      "es": "Bono de {B/BT_STAT|ST_BUFF_CHANCE} para todo el equipo"
     },
     "stat-buffer-is-recommended": {
       "en": "{B/BT_STAT|ST_BUFF_CHANCE} buffer is recommended.",
       "jp": "{B/BT_STAT|ST_BUFF_CHANCE}バッファーが推奨されます。",
       "kr": "{B/BT_STAT|ST_BUFF_CHANCE} 버퍼를 추천합니다.",
       "zh": "推荐使用{B/BT_STAT|ST_BUFF_CHANCE}辅助。",
-      "fr": "Un buffer {B/BT_STAT|ST_BUFF_CHANCE} est recommandé."
+      "fr": "Un buffer {B/BT_STAT|ST_BUFF_CHANCE} est recommandé.",
+      "es": "Se recomienda un potenciador de {B/BT_STAT|ST_BUFF_CHANCE}."
     },
     "heavy-strike-units": {
       "en": "{B/HEAVY_STRIKE} units.",
       "jp": "{B/HEAVY_STRIKE}ユニット。",
       "kr": "{B/HEAVY_STRIKE} 유닛.",
       "zh": "{B/HEAVY_STRIKE}角色。",
-      "fr": "Unités {B/HEAVY_STRIKE}."
+      "fr": "Unités {B/HEAVY_STRIKE}.",
+      "es": "Unidades de {B/HEAVY_STRIKE}."
     },
     "sealed-receive-heal-options": {
       "en": "{D/BT_SEALED_RECEIVE_HEAL} options.",
       "jp": "{D/BT_SEALED_RECEIVE_HEAL}オプション。",
       "kr": "{D/BT_SEALED_RECEIVE_HEAL} 옵션.",
       "zh": "{D/BT_SEALED_RECEIVE_HEAL}选项。",
-      "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}."
+      "fr": "Options {D/BT_SEALED_RECEIVE_HEAL}.",
+      "es": "Opciones de {D/BT_SEALED_RECEIVE_HEAL}."
     },
     "no-crit-builds-or-heavy-strike-u": {
       "en": "No crit builds or {B/HEAVY_STRIKE} unless you can endure the passive and brute force it.",
       "jp": "パッシブに耐えて力押しできない限り、クリティカルビルドや{B/HEAVY_STRIKE}は避けましょう。",
       "kr": "패시브를 견디고 힘으로 밀어붙일 수 있는 게 아니라면 치명타 빌드나 {B/HEAVY_STRIKE}는 피하세요.",
       "zh": "除非你能扛住被动并强行通关,否则不要使用暴击流或{B/HEAVY_STRIKE}。",
-      "fr": "Pas de builds crit ni de {B/HEAVY_STRIKE}, sauf si vous pouvez encaisser la passive et la passer en force brute."
+      "fr": "Pas de builds crit ni de {B/HEAVY_STRIKE}, sauf si vous pouvez encaisser la passive et la passer en force brute.",
+      "es": "Sin builds de crítico ni {B/HEAVY_STRIKE}, a menos que puedas soportar la pasiva y usar fuerza bruta."
     },
     "sealed-receive-heal-is-your-frie": {
       "en": "{D/BT_SEALED_RECEIVE_HEAL} is your friend.",
       "jp": "{D/BT_SEALED_RECEIVE_HEAL}が頼りになります。",
       "kr": "{D/BT_SEALED_RECEIVE_HEAL}이 큰 도움이 됩니다.",
       "zh": "{D/BT_SEALED_RECEIVE_HEAL}是你的好帮手。",
-      "fr": "{D/BT_SEALED_RECEIVE_HEAL} est votre ami."
+      "fr": "{D/BT_SEALED_RECEIVE_HEAL} est votre ami.",
+      "es": "{D/BT_SEALED_RECEIVE_HEAL} es tu amigo."
     },
     "silence-options": {
       "en": "{D/BT_SILENCE} options.",
       "jp": "{D/BT_SILENCE}オプション。",
       "kr": "{D/BT_SILENCE} 옵션.",
       "zh": "{D/BT_SILENCE}选项。",
-      "fr": "Options {D/BT_SILENCE}."
+      "fr": "Options {D/BT_SILENCE}.",
+      "es": "Opciones de {D/BT_SILENCE}."
     },
     "sealed-resurrection-options": {
       "en": "{D/EXTINCTION} options.",
       "jp": "{D/EXTINCTION}オプション。",
       "kr": "{D/EXTINCTION} 옵션.",
       "zh": "{D/EXTINCTION}选项。",
-      "fr": "Options {D/EXTINCTION}."
+      "fr": "Options {D/EXTINCTION}.",
+      "es": "Opciones de {D/EXTINCTION}."
     },
     "silence-or-sealed-resurrection-k": {
       "en": "{D/BT_SILENCE} or {D/EXTINCTION} {P/Kuro} in order to prevent her from reviving.",
       "jp": "{P/Kuro}の復活を防ぐため、{D/BT_SILENCE}または{D/EXTINCTION}を付与しましょう。",
       "kr": "{P/Kuro}의 부활을 막기 위해 {D/BT_SILENCE} 또는 {D/EXTINCTION}을 부여하세요.",
       "zh": "对{P/Kuro}施加{D/BT_SILENCE}或{D/EXTINCTION}以阻止其复活。",
-      "fr": "{D/BT_SILENCE} ou {D/EXTINCTION} sur {P/Kuro} pour l'empêcher de ressusciter."
+      "fr": "{D/BT_SILENCE} ou {D/EXTINCTION} sur {P/Kuro} pour l'empêcher de ressusciter.",
+      "es": "{D/BT_SILENCE} o {D/EXTINCTION} {P/Kuro} para evitar que reviva."
     },
     "ranger-with-sealed-or-silence": {
       "en": "{C/Ranger} with {D/BT_SEALED} or {D/BT_SILENCE}.",
       "jp": "{D/BT_SEALED}または{D/BT_SILENCE}を持つ{C/Ranger}。",
       "kr": "{D/BT_SEALED} 또는 {D/BT_SILENCE}을 가진 {C/Ranger}.",
       "zh": "拥有{D/BT_SEALED}或{D/BT_SILENCE}的{C/Ranger}。",
-      "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}."
+      "fr": "{C/Ranger} avec {D/BT_SEALED} ou {D/BT_SILENCE}.",
+      "es": "{C/Ranger} con {D/BT_SEALED} o {D/BT_SILENCE}."
     },
     "100-stun-options": {
       "en": "100% {D/BT_STUN} options",
       "jp": "100% {D/BT_STUN}オプション",
       "kr": "100% {D/BT_STUN} 옵션",
       "zh": "100% {D/BT_STUN}选项",
-      "fr": "Options {D/BT_STUN} 100%"
+      "fr": "Options {D/BT_STUN} 100%",
+      "es": "Opciones de {D/BT_STUN} al 100%"
     },
     "other-hard-cc-options": {
       "en": "Other hard CC options",
       "jp": "その他の強力なCCオプション",
       "kr": "기타 강력한 CC 옵션",
       "zh": "其他强控选项",
-      "fr": "Autres options de hard CC"
+      "fr": "Autres options de hard CC",
+      "es": "Otras opciones de CC duro"
     },
     "two-way-to-handle-the-fight": {
       "en": "Two way to handle the fight :",
       "jp": "この戦闘を攻略する2つの方法：",
       "kr": "이 전투를 공략하는 2가지 방법:",
       "zh": "应对此战斗的 2 种方法：",
-      "fr": "Deux façons d'aborder le combat :"
+      "fr": "Deux façons d'aborder le combat :",
+      "es": "Dos formas de afrontar el combate:"
     },
     "max-speed-ranger-to-silence-or-s": {
       "en": "Max speed {C/Ranger} to {D/BT_SILENCE} or {D/BT_SEALED}.",
       "jp": "最大速度の{C/Ranger}で{D/BT_SILENCE}または{D/BT_SEALED}を付与。",
       "kr": "최대 속도의 {C/Ranger}로 {D/BT_SILENCE} 또는 {D/BT_SEALED}를 부여.",
       "zh": "最大速度的{C/Ranger}施加{D/BT_SILENCE}或{D/BT_SEALED}。",
-      "fr": "{C/Ranger} en speed max pour {D/BT_SILENCE} ou {D/BT_SEALED}."
+      "fr": "{C/Ranger} en speed max pour {D/BT_SILENCE} ou {D/BT_SEALED}.",
+      "es": "Velocidad máxima {C/Ranger} a {D/BT_SILENCE} o {D/BT_SEALED}."
     },
     "hard-cc-lock": {
       "en": "Hard CC lock.",
       "jp": "強力なCCでロック。",
       "kr": "강력한 CC 락.",
       "zh": "强控锁定。",
-      "fr": "Verrouillage en hard CC."
+      "fr": "Verrouillage en hard CC.",
+      "es": "Bloqueo de CC duro."
     },
     "dot-bleed-options": {
       "en": "{D/BT_DOT_BLEED} options.",
       "jp": "{D/BT_DOT_BLEED}オプション。",
       "kr": "{D/BT_DOT_BLEED} 옵션.",
       "zh": "{D/BT_DOT_BLEED}选项。",
-      "fr": "Options {D/BT_DOT_BLEED}."
+      "fr": "Options {D/BT_DOT_BLEED}.",
+      "es": "Opciones de {D/BT_DOT_BLEED}."
     },
     "just-go-nuclear-on-her-and-bring": {
       "en": "Just go nuclear on her and bring your strongest DPS units.",
       "jp": "最強のDPSユニットで一気に叩きましょう。",
       "kr": "가장 강력한 DPS 유닛으로 한 번에 폭딜하세요.",
       "zh": "带上最强的 DPS 角色全力轰杀她。",
-      "fr": "Lâchez tout sur elle et emmenez vos unités DPS les plus puissantes."
+      "fr": "Lâchez tout sur elle et emmenez vos unités DPS les plus puissantes.",
+      "es": "Simplemente ve con todo contra ella y lleva a tus unidades DPS más fuertes."
     },
     "if-she-manages-to-heal-herself-t": {
       "en": "If she manages to heal herself too much you can utilize {D/BT_DOT_BLEED}.",
       "jp": "彼女の自己回復が多すぎる場合は、{D/BT_DOT_BLEED}を活用できます。",
       "kr": "그녀가 자가 회복을 너무 많이 하면 {D/BT_DOT_BLEED}를 활용할 수 있습니다.",
       "zh": "如果她自我治疗过多,可以使用{D/BT_DOT_BLEED}。",
-      "fr": "Si elle parvient à trop se soigner, vous pouvez utiliser {D/BT_DOT_BLEED}."
+      "fr": "Si elle parvient à trop se soigner, vous pouvez utiliser {D/BT_DOT_BLEED}.",
+      "es": "Si logra curarse demasiado, puedes utilizar {D/BT_DOT_BLEED}."
     },
     "dot-lightning-source": {
       "en": "{D/BT_DOT_LIGHTNING} source",
       "jp": "{D/BT_DOT_LIGHTNING}発生源",
       "kr": "{D/BT_DOT_LIGHTNING} 출처",
       "zh": "{D/BT_DOT_LIGHTNING}来源",
-      "fr": "Source de {D/BT_DOT_LIGHTNING}"
+      "fr": "Source de {D/BT_DOT_LIGHTNING}",
+      "es": "Fuente de {D/BT_DOT_LIGHTNING}"
     },
     "consistently-inflict-dot-lightni": {
       "en": "Consistently inflict {D/BT_DOT_LIGHTNING} to deal damage, as she cleanses herself with {B/BT_REMOVE_DEBUFF} at the start of her turn.",
       "jp": "ターン開始時に{B/BT_REMOVE_DEBUFF}で自身を浄化するため、継続的に{D/BT_DOT_LIGHTNING}を付与してダメージを与えましょう。",
       "kr": "턴 시작 시 {B/BT_REMOVE_DEBUFF}로 자신을 정화하므로, 지속적으로 {D/BT_DOT_LIGHTNING}을 부여해 피해를 줘야 합니다.",
       "zh": "她会在回合开始时用{B/BT_REMOVE_DEBUFF}自净,所以需要持续施加{D/BT_DOT_LIGHTNING}造成伤害。",
-      "fr": "Infligez constamment {D/BT_DOT_LIGHTNING} pour faire des dégâts, car elle se cleanse avec {B/BT_REMOVE_DEBUFF} au début de son tour."
+      "fr": "Infligez constamment {D/BT_DOT_LIGHTNING} pour faire des dégâts, car elle se cleanse avec {B/BT_REMOVE_DEBUFF} au début de son tour.",
+      "es": "Inflige {D/BT_DOT_LIGHTNING} de forma constante para hacer daño, ya que ella se purifica con {B/BT_REMOVE_DEBUFF} al inicio de su turno."
     },
     "100-stun-source": {
       "en": "100% {D/BT_STUN} source",
       "jp": "100% {D/BT_STUN}発生源",
       "kr": "100% {D/BT_STUN} 출처",
       "zh": "100% {D/BT_STUN}来源",
-      "fr": "Source de {D/BT_STUN} 100%"
+      "fr": "Source de {D/BT_STUN} 100%",
+      "es": "Fuente de {D/BT_STUN} al 100%"
     },
     "you-need-to-stun-both-and-keep-t": {
       "en": "You need to {D/BT_STUN} both and keep the stun up in order to remove and prevent Iota from regaining her {B/BT_INVINCIBLE}.",
       "jp": "イオタが{B/BT_INVINCIBLE}を再取得するのを防ぐために、両方に{D/BT_STUN}をかけ続ける必要があります。",
       "kr": "이오타가 {B/BT_INVINCIBLE}을 재획득하지 못하도록 양쪽 모두에 {D/BT_STUN}을 지속적으로 유지해야 합니다.",
       "zh": "你需要对两者都施加{D/BT_STUN}并持续维持,以防止 Iota 重新获得{B/BT_INVINCIBLE}。",
-      "fr": "Vous devez {D/BT_STUN} les deux et maintenir le stun pour retirer et empêcher Iota de regagner son {B/BT_INVINCIBLE}."
+      "fr": "Vous devez {D/BT_STUN} les deux et maintenir le stun pour retirer et empêcher Iota de regagner son {B/BT_INVINCIBLE}.",
+      "es": "Necesitas {D/BT_STUN} a ambos y mantener el aturdimiento para eliminar y evitar que Iota recupere su {B/BT_INVINCIBLE}."
     },
     "silence-sources": {
       "en": "{D/BT_SILENCE} sources",
       "jp": "{D/BT_SILENCE}発生源",
       "kr": "{D/BT_SILENCE} 출처",
       "zh": "{D/BT_SILENCE}来源",
-      "fr": "Sources de {D/BT_SILENCE}"
+      "fr": "Sources de {D/BT_SILENCE}",
+      "es": "Fuentes de {D/BT_SILENCE}"
     },
     "sealed-resurrection-sources": {
       "en": "{D/EXTINCTION} sources",
       "jp": "{D/EXTINCTION}発生源",
       "kr": "{D/EXTINCTION} 출처",
       "zh": "{D/EXTINCTION}来源",
-      "fr": "Sources de {D/EXTINCTION}"
+      "fr": "Sources de {D/EXTINCTION}",
+      "es": "Fuentes de {D/EXTINCTION}"
     },
     "silence-or-sealed-resurrection-d": {
       "en": "{D/BT_SILENCE} or {D/EXTINCTION} {P/Demiurge Astei} in order to disable her revival.",
       "jp": "{P/Demiurge Astei}の復活を無効化するため、{D/BT_SILENCE}または{D/EXTINCTION}を付与しましょう。",
       "kr": "{P/Demiurge Astei}의 부활을 차단하기 위해 {D/BT_SILENCE} 또는 {D/EXTINCTION}을 부여하세요.",
       "zh": "对{P/Demiurge Astei}施加{D/BT_SILENCE}或{D/EXTINCTION}以阻止其复活。",
-      "fr": "{D/BT_SILENCE} ou {D/EXTINCTION} sur {P/Demiurge Astei} pour désactiver sa résurrection."
+      "fr": "{D/BT_SILENCE} ou {D/EXTINCTION} sur {P/Demiurge Astei} pour désactiver sa résurrection.",
+      "es": "{D/BT_SILENCE} o {D/EXTINCTION} {P/Demiurge Astei} para desactivar su revivir."
     },
     "healer-options": {
       "en": "{C/Healer} options.",
       "jp": "{C/Healer}オプション。",
       "kr": "{C/Healer} 옵션.",
       "zh": "{C/Healer}选项。",
-      "fr": "Options {C/Healer}."
+      "fr": "Options {C/Healer}.",
+      "es": "Opciones de {C/Healer}."
     },
     "call-backup-support-options": {
       "en": "{B/BT_CALL_BACKUP} support options.",
       "jp": "{B/BT_CALL_BACKUP}サポートオプション。",
       "kr": "{B/BT_CALL_BACKUP} 서포트 옵션.",
       "zh": "{B/BT_CALL_BACKUP}辅助选项。",
-      "fr": "Options de support {B/BT_CALL_BACKUP}."
+      "fr": "Options de support {B/BT_CALL_BACKUP}.",
+      "es": "Opciones de soporte de {B/BT_CALL_BACKUP}."
     },
     "sturdy-dps-units-2": {
       "en": "Sturdy DPS units.",
       "jp": "耐久力のあるDPSユニット。",
       "kr": "내구성 있는 DPS 유닛.",
       "zh": "坚韧的 DPS 角色。",
-      "fr": "Unités DPS résistantes."
+      "fr": "Unités DPS résistantes.",
+      "es": "Unidades DPS resistentes."
     },
     "damage-mitigation-options": {
       "en": "Damage mitigation options",
       "jp": "被ダメージ軽減オプション",
       "kr": "피해 감소 옵션",
       "zh": "减伤选项",
-      "fr": "Options de damage mitigation"
+      "fr": "Options de damage mitigation",
+      "es": "Opciones de mitigación de daño"
     },
     "support-unit-to-provide-chain-po": {
       "en": "Support Unit to provide chain points, WG damage and healing.",
       "jp": "チェインポイント、WGダメージ、回復を提供するサポートユニット。",
       "kr": "체인 포인트, WG 피해, 회복을 제공하는 서포트 유닛.",
       "zh": "提供连锁点数、WG 伤害和治疗的辅助角色。",
-      "fr": "Unité de support pour fournir des chain points, des dégâts WG et du heal."
+      "fr": "Unité de support pour fournir des chain points, des dégâts WG et du heal.",
+      "es": "Unidad de soporte para proporcionar puntos de cadena, daño WG y curación."
     },
     "sturdy-dps-units-are-recommended": {
       "en": "Sturdy DPS units are recommended.",
       "jp": "耐久力のあるDPSユニットが推奨されます。",
       "kr": "내구성 있는 DPS 유닛을 추천합니다.",
       "zh": "推荐使用坚韧的 DPS 角色。",
-      "fr": "Des unités DPS résistantes sont recommandées."
+      "fr": "Des unités DPS résistantes sont recommandées.",
+      "es": "Se recomiendan unidades DPS resistentes."
     },
     "tank-that-can-protect-allies": {
       "en": "Tank that can protect allies.",
       "jp": "味方を守れるタンク。",
       "kr": "아군을 보호할 수 있는 탱커.",
       "zh": "能够保护队友的坦克。",
-      "fr": "Tank capable de protéger les alliés."
+      "fr": "Tank capable de protéger les alliés.",
+      "es": "Tanque que pueda proteger a los aliados."
     },
     "mvp-on-this-boss-fight": {
       "en": "MvP on this boss fight.",
       "jp": "このボス戦のMVPです。",
       "kr": "이 보스전의 MVP입니다.",
       "zh": "本场 Boss 战的 MVP。",
-      "fr": "MvP sur ce combat de Boss."
+      "fr": "MvP sur ce combat de Boss.",
+      "es": "MvP en este combate contra el jefe."
     },
     "healer-options-with-revival-or-r": {
       "en": "{C/Healer} options with {B/BT_REVIVAL} or {B/BT_RESURRECTION}.",
       "jp": "{B/BT_REVIVAL}または{B/BT_RESURRECTION}を持つ{C/Healer}オプション。",
       "kr": "{B/BT_REVIVAL} 또는 {B/BT_RESURRECTION}을 가진 {C/Healer} 옵션.",
       "zh": "带有{B/BT_REVIVAL}或{B/BT_RESURRECTION}的{C/Healer}选项。",
-      "fr": "Options {C/Healer} avec {B/BT_REVIVAL} ou {B/BT_RESURRECTION}."
+      "fr": "Options {C/Healer} avec {B/BT_REVIVAL} ou {B/BT_RESURRECTION}.",
+      "es": "Opciones de {C/Healer} con {B/BT_REVIVAL} o {B/BT_RESURRECTION}."
     },
     "sterope-is-recommended-because-d": {
       "en": "{P/Sterope} is recommended because {P/Demiurge Drakhan}'s counter is triggered by critical hits, she will reduce counter damage by 30% and will reduce all enemies buff duration by 1 turn.",
       "jp": "{P/Demiurge Drakhan}のカウンターはクリティカルヒットで発動するため、カウンターダメージを30%減少させ、敵全員のバフ持続時間を1ターン短縮する{P/Sterope}が推奨されます。",
       "kr": "{P/Demiurge Drakhan}의 반격은 치명타로 발동되므로, 반격 피해를 30% 감소시키고 모든 적의 버프 지속 시간을 1턴 감소시키는 {P/Sterope}를 추천합니다.",
       "zh": "推荐使用{P/Sterope},因为{P/Demiurge Drakhan}的反击由暴击触发,她可减少 30% 反击伤害并将所有敌人的增益持续时间缩短 1 回合。",
-      "fr": "{P/Sterope} est recommandée car le counter de {P/Demiurge Drakhan} est déclenché par les coups critiques : elle réduit les dégâts de counter de 30% et réduit la durée des buffs de tous les ennemis d'1 tour."
+      "fr": "{P/Sterope} est recommandée car le counter de {P/Demiurge Drakhan} est déclenché par les coups critiques : elle réduit les dégâts de counter de 30% et réduit la durée des buffs de tous les ennemis d'1 tour.",
+      "es": "Se recomienda {P/Sterope} porque el contraataque de {P/Demiurge Drakhan} se activa con golpes críticos, ella reducirá el daño de contraataque en un 30% y reducirá la duración de los bonos de todos los enemigos en 1 turno."
     },
     "hit-har-mono": {
       "en": "Strong single target DPS",
       "jp": "強力な単体DPS",
       "kr": "강력한 단일 대상 DPS",
       "zh": "强力的单体DPS",
-      "fr": "DPS mono-cible puissant"
+      "fr": "DPS mono-cible puissant",
+      "es": "DPS de objetivo único fuerte"
     },
     "hard-cc-or-priority": {
       "en": "Either hard CC or good priority manipulation.",
       "jp": "強力なCCか優れた行動順操作のいずれかを持つ。",
       "kr": "강력한 CC 또는 뛰어난 행동 우선도 조작 중 하나를 보유.",
       "zh": "拥有强控或出色的行动顺序操控。",
-      "fr": "Soit du hard CC, soit une bonne manipulation de priority."
+      "fr": "Soit du hard CC, soit une bonne manipulation de priority.",
+      "es": "Ya sea CC duro o buena manipulación de prioridad."
     },
     "has-call-backup": {
       "en": "Has {B/BT_CALL_BACKUP}.",
       "jp": "{B/BT_CALL_BACKUP}を持つ。",
       "kr": "{B/BT_CALL_BACKUP}을 보유.",
       "zh": "拥有{B/BT_CALL_BACKUP}。",
-      "fr": "Possède {B/BT_CALL_BACKUP}."
+      "fr": "Possède {B/BT_CALL_BACKUP}.",
+      "es": "Tiene {B/BT_CALL_BACKUP}."
     },
     "action-gauge-manip": {
       "en": "Either {D/BT_ACTION_GAUGE} or {B/BT_ACTION_GAUGE}.",
       "jp": "{D/BT_ACTION_GAUGE}か{B/BT_ACTION_GAUGE}のいずれかを持つ。",
       "kr": "{D/BT_ACTION_GAUGE} 또는 {B/BT_ACTION_GAUGE} 중 하나를 보유.",
       "zh": "拥有{D/BT_ACTION_GAUGE}或{B/BT_ACTION_GAUGE}。",
-      "fr": "Soit {D/BT_ACTION_GAUGE}, soit {B/BT_ACTION_GAUGE}."
+      "fr": "Soit {D/BT_ACTION_GAUGE}, soit {B/BT_ACTION_GAUGE}.",
+      "es": "Ya sea {D/BT_ACTION_GAUGE} o {B/BT_ACTION_GAUGE}."
     },
     "any-earth-does-the-job": {
       "en": "Any {E/Earth} hero can do the job.",
       "jp": "どの{E/Earth}属性のヒーローでも役目を果たせます。",
       "kr": "어떤 {E/Earth} 속성 영웅이든 역할을 수행할 수 있습니다.",
       "zh": "任何{E/Earth}属性英雄都能胜任。",
-      "fr": "N'importe quel héros {E/Earth} peut faire le travail."
+      "fr": "N'importe quel héros {E/Earth} peut faire le travail.",
+      "es": "Cualquier héroe {E/Earth} puede hacer el trabajo."
     }
   },
   "combats": {

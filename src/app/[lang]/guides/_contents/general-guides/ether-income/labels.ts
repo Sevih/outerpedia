@@ -17,6 +17,7 @@ export const LABELS = {
     kr: '이 가이드는 수입을 일간, 주간, 월간으로 분류합니다. 고급 랭크 설정(아레나, 길드 레이드, 월드 보스)을 조정하면 합계와 날짜 예측이 즉시 업데이트됩니다. 이벤트/시즌 보상은 별도로 표시되며 합계에 포함되지 않습니다.',
     zh: '本指南将收入分为日常、每周和每月来源。使用高级排名设置（竞技场、公会副本、世界Boss）来匹配您的账号——总计和日期预测会即时更新。活动/季节奖励单独列出，不计入总计。',
     fr: "Ce guide organise vos revenus en sources Daily, Weekly et Monthly. Utilisez les ajustements de rank avancés (Arena, Guild Raid, World Boss) pour les adapter à votre compte. Les totaux et la projection de date se mettent à jour instantanément. Les récompenses d'event/seasonal sont listées à part et ne sont pas comptées dans les totaux.",
+    es: 'Esta guía organiza tus ingresos en fuentes Diarias, Semanales y Mensuales. Usa los ajustes de rango Avanzado (Arena, Incu. Gremio, Jefe mundial) para que coincidan con tu cuenta: los totales y la proyección de fecha se actualizan al instante. Las recompensas de eventos/temporada se listan por separado y no se incluyen en los totales.',
   },
 
   dailyIncome: {
@@ -25,6 +26,7 @@ export const LABELS = {
     kr: '일간 수입',
     zh: '日常收入',
     fr: 'Revenu quotidien',
+    es: 'Ingresos diarios',
   },
   weeklyIncome: {
     en: 'Weekly income',
@@ -32,6 +34,7 @@ export const LABELS = {
     kr: '주간 수입',
     zh: '每周收入',
     fr: 'Revenu hebdomadaire',
+    es: 'Ingresos semanales',
   },
   monthlyIncome: {
     en: 'Monthly income',
@@ -39,6 +42,7 @@ export const LABELS = {
     kr: '월간 수입',
     zh: '每月收入',
     fr: 'Revenu mensuel',
+    es: 'Ingresos mensuales',
   },
   weeklyTotal: {
     en: 'Weekly Total',
@@ -46,6 +50,7 @@ export const LABELS = {
     kr: '주간 총합',
     zh: '周总计',
     fr: 'Total Hebdomadaire',
+    es: 'Total semanal',
   },
   monthlyTotal: {
     en: 'Monthly Total',
@@ -53,6 +58,7 @@ export const LABELS = {
     kr: '월간 총합',
     zh: '月总计',
     fr: 'Total Mensuel',
+    es: 'Total mensual',
   },
   perDay: {
     en: '/day',
@@ -60,6 +66,7 @@ export const LABELS = {
     kr: '/일',
     zh: '/天',
     fr: '/jour',
+    es: '/día',
   },
   advancedAdjustments: {
     en: 'Advanced rank adjustments',
@@ -67,6 +74,7 @@ export const LABELS = {
     kr: '고급 랭크 설정',
     zh: '高级排名设置',
     fr: 'Ajustements de rank avancés',
+    es: 'Ajustes de rango avanzado',
   },
   arena: {
     en: 'Arena',
@@ -74,6 +82,7 @@ export const LABELS = {
     kr: '아레나',
     zh: '竞技场',
     fr: 'Arena',
+    es: 'Arena',
   },
   guild: {
     en: 'Guild',
@@ -81,6 +90,7 @@ export const LABELS = {
     kr: '길드',
     zh: '公会',
     fr: 'Guild',
+    es: 'Gremio',
   },
   worldBoss: {
     en: 'World Boss',
@@ -88,6 +98,7 @@ export const LABELS = {
     kr: '월드 보스',
     zh: '世界Boss',
     fr: 'World Boss',
+    es: 'Jefe mundial',
   },
   singularity: {
     en: 'Singularity',
@@ -95,6 +106,7 @@ export const LABELS = {
     kr: '특이점',
     zh: '奇点',
     fr: 'Singularity',
+    es: 'Singularidad',
   },
   tableDaily: {
     en: 'Daily income',
@@ -102,6 +114,7 @@ export const LABELS = {
     kr: '일간 수입',
     zh: '日常收入',
     fr: 'Revenu quotidien',
+    es: 'Ingresos diarios',
   },
   tableWeekly: {
     en: 'Weekly income',
@@ -109,6 +122,7 @@ export const LABELS = {
     kr: '주간 수입',
     zh: '每周收入',
     fr: 'Revenu hebdomadaire',
+    es: 'Ingresos semanales',
   },
   tableMonthly: {
     en: 'Monthly income',
@@ -116,6 +130,7 @@ export const LABELS = {
     kr: '월간 수입',
     zh: '每月收入',
     fr: 'Revenu mensuel',
+    es: 'Ingresos mensuales',
   },
   source: {
     en: 'Source',
@@ -123,6 +138,7 @@ export const LABELS = {
     kr: '출처',
     zh: '来源',
     fr: 'Source',
+    es: 'Fuente',
   },
   daily: {
     en: 'Daily',
@@ -130,6 +146,7 @@ export const LABELS = {
     kr: '일간',
     zh: '日常',
     fr: 'Quotidien',
+    es: 'Diario',
   },
   weekly: {
     en: 'Weekly',
@@ -137,6 +154,7 @@ export const LABELS = {
     kr: '주간',
     zh: '每周',
     fr: 'Hebdomadaire',
+    es: 'Semanal',
   },
   monthly: {
     en: 'Monthly',
@@ -144,6 +162,7 @@ export const LABELS = {
     kr: '월간',
     zh: '每月',
     fr: 'Mensuel',
+    es: 'Mensual',
   },
   weeklyApprox: {
     en: 'Weekly ≈×7',
@@ -151,6 +170,7 @@ export const LABELS = {
     kr: '주≈×7',
     zh: '周≈×7',
     fr: 'Hebdo ≈×7',
+    es: 'Semanal ≈×7',
   },
   monthlyApprox: {
     en: 'Monthly ≈×30',
@@ -158,6 +178,7 @@ export const LABELS = {
     kr: '월≈×30',
     zh: '月≈×30',
     fr: 'Mensuel ≈×30',
+    es: 'Mensual ≈×30',
   },
   monthlyApprox4: {
     en: 'Monthly ≈×4',
@@ -165,6 +186,7 @@ export const LABELS = {
     kr: '월≈×4',
     zh: '月≈×4',
     fr: 'Mensuel ≈×4',
+    es: 'Mensual ≈×4',
   },
   notes: {
     en: 'Notes',
@@ -172,6 +194,7 @@ export const LABELS = {
     kr: '비고',
     zh: '备注',
     fr: 'Notes',
+    es: 'Notas',
   },
   dailySubtotal: {
     en: 'Daily subtotal',
@@ -179,6 +202,7 @@ export const LABELS = {
     kr: '일간 소계',
     zh: '日常小计',
     fr: 'Sous-total quotidien',
+    es: 'Subtotal diario',
   },
   weeklySubtotal: {
     en: 'Weekly subtotal',
@@ -186,6 +210,7 @@ export const LABELS = {
     kr: '주간 소계',
     zh: '每周小计',
     fr: 'Sous-total hebdomadaire',
+    es: 'Subtotal semanal',
   },
   monthlySubtotal: {
     en: 'Monthly subtotal',
@@ -193,6 +218,7 @@ export const LABELS = {
     kr: '월간 소계',
     zh: '每月小计',
     fr: 'Sous-total mensuel',
+    es: 'Subtotal mensual',
   },
   variableExcluded: {
     en: 'Variable / Event-Driven (excluded)',
@@ -200,6 +226,7 @@ export const LABELS = {
     kr: '변동/이벤트 보상 (제외)',
     zh: '变动/活动奖励（不计入）',
     fr: 'Variable / Lié aux Events (exclu)',
+    es: 'Variable / Según evento (excluido)',
   },
   variableTitle: {
     en: 'Extra',
@@ -207,6 +234,7 @@ export const LABELS = {
     kr: '기타',
     zh: '其他',
     fr: 'Extra',
+    es: 'Extra',
   },
   projection: {
     en: 'Projection until a date',
@@ -214,6 +242,7 @@ export const LABELS = {
     kr: '날짜까지 예측',
     zh: '日期预测',
     fr: "Projection jusqu'à une date",
+    es: 'Proyección hasta una fecha',
   },
   endDate: {
     en: 'End date',
@@ -221,6 +250,7 @@ export const LABELS = {
     kr: '종료일',
     zh: '结束日期',
     fr: 'Date de fin',
+    es: 'Fecha de finalización',
   },
   currentEther: {
     en: 'Current Ether',
@@ -228,6 +258,7 @@ export const LABELS = {
     kr: '현재 에테르',
     zh: '当前以太',
     fr: 'Ether actuel',
+    es: 'Éter actual',
   },
   days: {
     en: 'Days',
@@ -235,6 +266,7 @@ export const LABELS = {
     kr: '일수',
     zh: '天数',
     fr: 'Jours',
+    es: 'Días',
   },
   weeks: {
     en: 'Weeks',
@@ -242,6 +274,7 @@ export const LABELS = {
     kr: '주수',
     zh: '周数',
     fr: 'Semaines',
+    es: 'Semanas',
   },
   months: {
     en: 'Months',
@@ -249,6 +282,7 @@ export const LABELS = {
     kr: '월수',
     zh: '月数',
     fr: 'Mois',
+    es: 'Meses',
   },
   fromDaily: {
     en: 'From Daily',
@@ -256,6 +290,7 @@ export const LABELS = {
     kr: '일간에서',
     zh: '来自日常',
     fr: 'Depuis Daily',
+    es: 'De diario',
   },
   fromWeekly: {
     en: 'From Weekly',
@@ -263,6 +298,7 @@ export const LABELS = {
     kr: '주간에서',
     zh: '来自每周',
     fr: 'Depuis Weekly',
+    es: 'De semanal',
   },
   fromMonthly: {
     en: 'From Monthly',
@@ -270,6 +306,7 @@ export const LABELS = {
     kr: '월간에서',
     zh: '来自每月',
     fr: 'Depuis Monthly',
+    es: 'De mensual',
   },
   projectedTotal: {
     en: 'Projected Total',
@@ -277,6 +314,7 @@ export const LABELS = {
     kr: '예상 총합',
     zh: '预计总计',
     fr: 'Total projeté',
+    es: 'Total proyectado',
   },
   tierRank: {
     en: 'Rank {n}',
@@ -284,6 +322,7 @@ export const LABELS = {
     kr: '{n}위',
     zh: '第{n}名',
     fr: 'Rank {n}',
+    es: 'Rango {n}',
   },
   tierTop: {
     en: 'Top {n}',
@@ -291,6 +330,7 @@ export const LABELS = {
     kr: 'Top {n}',
     zh: 'Top {n}',
     fr: 'Top {n}',
+    es: 'Top {n}',
   },
   tierTopPct: {
     en: 'Top {n}%',
@@ -298,6 +338,7 @@ export const LABELS = {
     kr: 'Top {n}%',
     zh: 'Top {n}%',
     fr: 'Top {n}%',
+    es: 'Top {n}%',
   },
   tierBelow: {
     en: 'Below Top {n}',
@@ -305,6 +346,7 @@ export const LABELS = {
     kr: 'Top {n} 이하',
     zh: 'Top {n}以下',
     fr: 'Sous le Top {n}',
+    es: 'Por debajo del Top {n}',
   },
   // Cadence guild raid / world boss (on les comptait chaque mois auparavant).
   // Remplace l'ancienne note de rang pour ces deux sources : fourchette {min}/{max}
@@ -315,6 +357,7 @@ export const LABELS = {
     kr: '2개월에 한 번 개최 — 보상 {min}~{max}. (월평균으로 표시)',
     zh: '每两个月举办一次 — 奖励{min}至{max}。（按月平均显示）',
     fr: 'A lieu une fois tous les 2 mois — récompense de {min} à {max}. (Affiché en moyenne mensuelle)',
+    es: 'Se celebra una vez cada 2 meses — recompensa de {min} a {max}. (Mostrado como promedio mensual)',
   },
 } as const satisfies Record<string, LocalizedText>;
 
@@ -326,6 +369,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '일일 미션',
     zh: '每日任务',
     fr: 'Daily Missions',
+    es: 'Misiones diarias',
   },
   'daily.arena': {
     en: 'Daily Arena',
@@ -333,6 +377,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '일일 아레나',
     zh: '每日竞技场',
     fr: 'Daily Arena',
+    es: 'Arena diaria',
   },
   'daily.freePack': {
     en: 'Daily Free Pack',
@@ -340,6 +385,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '일일 무료 팩',
     zh: '每日免费礼包',
     fr: 'Pack Gratuit Quotidien',
+    es: 'Paquete gratis diario',
   },
   'daily.missionEvent': {
     en: 'Daily Mission Event',
@@ -347,6 +393,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '일일 미션 이벤트',
     zh: '每日任务活动',
     fr: 'Daily Mission Event',
+    es: 'Evento de misión diaria',
   },
   'daily.antiparticle': {
     en: 'Antiparticle generator (2×12h)',
@@ -354,6 +401,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '반입자 발생기 (2×12시간)',
     zh: '反粒子发生器（2×12小时）',
     fr: 'Antiparticle Generator (2×12h)',
+    es: 'Generador de antipartículas (2×12h)',
   },
   'weekly.freePack': {
     en: 'Weekly Free Pack',
@@ -361,6 +409,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '주간 무료 팩',
     zh: '每周免费礼包',
     fr: 'Pack Gratuit Hebdomadaire',
+    es: 'Paquete gratis semanal',
   },
   'weekly.arena': {
     en: 'Weekly Arena Ranking',
@@ -368,6 +417,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '주간 아레나 랭킹',
     zh: '每周竞技场排名',
     fr: 'Classement Arena Hebdomadaire',
+    es: 'Clasificación de Arena semanal',
   },
   'weekly.missions': {
     en: 'Weekly Missions',
@@ -375,6 +425,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '주간 미션',
     zh: '每周任务',
     fr: 'Weekly Missions',
+    es: 'Misiones semanales',
   },
   'weekly.guildCheckin': {
     en: 'Guild Check-in',
@@ -382,6 +433,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '길드 체크인',
     zh: '公会签到',
     fr: 'Check-in Guild',
+    es: 'Registro de Gremio',
   },
   'weekly.singularityMissions': {
     en: 'Dimensional Singularity Weekly Missions',
@@ -389,6 +441,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '차원 특이점 주간 미션',
     zh: '次元奇点每周任务',
     fr: 'Missions Hebdomadaires Dimensional Singularity',
+    es: 'Misiones semanales de Singularidad Dimensional',
   },
   'monthly.freePack': {
     en: 'Monthly Free Pack',
@@ -396,6 +449,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '월간 무료 팩',
     zh: '每月免费礼包',
     fr: 'Pack Gratuit Mensuel',
+    es: 'Paquete gratis mensual',
   },
   'monthly.skywardTower': {
     en: 'Skyward Tower',
@@ -403,6 +457,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '승천의 탑',
     zh: '升天之塔',
     fr: 'Skyward Tower',
+    es: 'Torre Skyward',
   },
   'monthly.checkin': {
     en: 'Check-in',
@@ -410,6 +465,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '체크인',
     zh: '签到',
     fr: 'Check-in',
+    es: 'Registro',
   },
   'monthly.maintenance': {
     en: 'Maintenance rewards',
@@ -417,6 +473,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '점검 보상',
     zh: '维护奖励',
     fr: 'Récompenses de Maintenance',
+    es: 'Recompensas de mantenimiento',
   },
   'monthly.jointMission': {
     en: 'Joint Mission',
@@ -424,6 +481,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '합동 미션',
     zh: '联合任务',
     fr: 'Joint Mission',
+    es: 'Misión conjunta',
   },
   'monthly.guildRaid': {
     en: 'Guild Raid Ranking Reward',
@@ -431,6 +489,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '길드 레이드 랭킹 보상',
     zh: '公会副本排名奖励',
     fr: 'Récompense de Classement Guild Raid',
+    es: 'Recompensa de clasificación de Incu. Gremio',
   },
   'monthly.worldBoss': {
     en: 'World Boss Ranking Reward',
@@ -438,6 +497,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '월드 보스 랭킹 보상',
     zh: '世界Boss排名奖励',
     fr: 'Récompense de Classement World Boss',
+    es: 'Recompensa de clasificación del Boss mundial',
   },
   'daily.singularityRanking': {
     en: 'Dimensional Singularity Daily Ranking (Wed–Sat)',
@@ -445,6 +505,7 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     kr: '차원 특이점 일일 랭킹 (수~토)',
     zh: '次元奇点每日排名 (周三~周六)',
     fr: 'Classement Quotidien Dimensional Singularity (Mer-Sam)',
+    es: 'Clasificación diaria de Singularidad Dimensional (miércoles-sábado)',
   },
 };
 
@@ -456,6 +517,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     kr: '최소 {min}. 1위 시 최대 {max}.',
     zh: '最低{min}。第1名最高{max}。',
     fr: '{min} minimum. Peut monter à {max} pour le rank 1.',
+    es: 'Mínimo {min}. Puede llegar hasta {max} para el puesto 1.',
   },
   'weekly.singularityMissions': {
     en: '5×10 + 200 completion bonus',
@@ -463,6 +525,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     kr: '5×10 + 200 완료 보너스',
     zh: '5×10 + 200完成奖励',
     fr: '5×10 + 200 bonus de complétion',
+    es: '5×10 + 200 de bono por completar',
   },
   'monthly.maintenance': {
     en: '≈200 every 2 weeks (min)',
@@ -470,6 +533,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     kr: '약 200 (2주마다, 최소)',
     zh: '约200（每2周，最低）',
     fr: '≈200 toutes les 2 semaines (min)',
+    es: '≈200 cada 2 semanas (mín.)',
   },
   'monthly.jointMission': {
     en: '80 from Event Mission, do 10 joint challenge runs',
@@ -477,6 +541,7 @@ export const SOURCE_NOTES: Record<string, LocalizedText> = {
     kr: '이벤트 미션에서 80, 합동 챌린지 10회',
     zh: '活动任务80，完成10次联合挑战',
     fr: '80 via Event Mission, faites 10 runs de joint challenge',
+    es: '80 de la Misión de evento, haz 10 partidas de Desafío conjunto',
   },
 };
 
@@ -488,6 +553,7 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     kr: '터미널 아일 에테르 보상 (터미널 10 보물 보상에서 22~26) (매일 5회, 터미널 팩으로 ×2)',
     zh: '终点岛以太奖励（终点10的宝箱奖励22~26）（每天5次，终点礼包×2）',
     fr: "Récompenses d'Ether Terminus Island (22-26 sur la treasure reward de Terminus 10) (5 chances par jour ×2 avec le terminus pack)",
+    es: 'Recompensas de Éter de Terminus Island (22-26 en la recompensa de tesoro en Terminus 10) (5 oportunidades diarias ×2 con el pack terminus)',
   },
   'variable.updateEvent': {
     en: "Every update's event",
@@ -495,6 +561,7 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     kr: '각 업데이트 이벤트',
     zh: '每次更新活动',
     fr: 'Event de chaque update',
+    es: 'Evento de cada actualización',
   },
   'variable.sideStories': {
     en: 'New Side Stories every new character (non-premium/limited)',
@@ -502,6 +569,7 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     kr: '새 캐릭터마다 새 사이드 스토리 (프리미엄/한정 제외)',
     zh: '每个新角色的新外传（精选/限定除外）',
     fr: 'Nouvelles Side Stories pour chaque nouveau personnage (hors Premium/Limited)',
+    es: 'Nuevas Historias Secundarias con cada nuevo personaje (no premium/limitado)',
   },
   'variable.coupons': {
     en: 'Coupon codes',
@@ -509,6 +577,7 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     kr: '쿠폰 코드',
     zh: '兑换码',
     fr: 'Codes coupon',
+    es: 'Códigos de cupón',
   },
   'variable.seasonalEvents': {
     en: 'Seasonal events (story, point shops, login chains)',
@@ -516,5 +585,6 @@ export const VARIABLE_ITEMS: Record<string, LocalizedText> = {
     kr: '시즌 이벤트 (스토리, 포인트 상점, 로그인 체인)',
     zh: '季节活动（剧情、积分商店、登录链）',
     fr: 'Events saisonniers (story, point shops, login chains)',
+    es: 'Eventos de temporada (historia, tiendas de puntos, cadenas de inicio de sesión)',
   },
 };

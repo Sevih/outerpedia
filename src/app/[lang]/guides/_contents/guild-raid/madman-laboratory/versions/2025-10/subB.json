@@ -7,7 +7,8 @@
         "jp": "{C/Ranger} {E/Earth}アタッカー。",
         "kr": "{C/Ranger} {E/Earth} 딜러.",
         "zh": "{C/Ranger} {E/Earth}输出。",
-        "fr": "DPS {C/Ranger} {E/Earth}."
+        "fr": "DPS {C/Ranger} {E/Earth}.",
+        "es": "{C/Ranger} dps {E/Earth}."
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "{C/Ranger} {E/Earth}サブアタッカー。",
         "kr": "{C/Ranger} {E/Earth} 서브딜러.",
         "zh": "{C/Ranger} {E/Earth}副输出。",
-        "fr": "Sub-DPS {C/Ranger} {E/Earth}."
+        "fr": "Sub-DPS {C/Ranger} {E/Earth}.",
+        "es": "{C/Ranger} sub-dps {E/Earth}."
       }
     }
   ],

@@ -4,7 +4,8 @@
     "jp": "次元特異点ローテーションに登場する{E/Earth}属性{C/Mage}ボス。人数チェック：味方に{E/Fire}属性が3体／4体いると被ダメージが+50%／+120%になり、{S/PEN}が増加した味方はさらに+50%を与える。解除不能の{D/BT_DOT_POISON}を撒き、自身の{S/SPD}を70%下げる代わりに敵の行動後に行動優先度を得る。呪い／固定ダメージは50000で頭打ち。狂暴化は自身の4行動ごとに発動し、その締めで味方全体のバフを3個解除する。",
     "kr": "차원 특이점 로테이션에 등장하는 {E/Earth} 속성 {C/Mage} 보스. 인원수 체크: 아군에 {E/Fire} 속성이 3명/4명이면 받는 피해가 +50%/+120%가 되고, {S/PEN}이 증가한 아군은 추가로 +50%를 줍니다. 해제 불가 {D/BT_DOT_POISON}을 퍼뜨리며, 자신의 {S/SPD}를 70% 낮추는 대신 적이 행동한 뒤 행동 우선도를 얻습니다. 저주/고정 피해는 50000으로 제한됩니다. 광폭화는 자신의 4번째 행동마다 발동하고, 마무리로 아군 전체의 버프 3개를 해제합니다.",
     "zh": "出现在次元奇点轮换中的{E/Earth}属性{C/Mage}Boss。人数检定：队伍中有3名/4名{E/Fire}属性时，它受到的伤害+50%/+120%，而{S/PEN}提升的友军再造成+50%。它散布无法解除的{D/BT_DOT_POISON}，将自身{S/SPD}降低70%以换取敌方行动后获得行动优先度，且诅咒／固定伤害上限为50000。狂暴化在其每4次行动时触发，收尾会驱散全队3个增益。",
-    "fr": "Boss {E/Earth} {C/Mage} présent dans la rotation de la Singularité Dimensionnelle. Un contrôle d'effectif : avec 3 / 4 héros {E/Fire} dans l'équipe il subit +50% / +120% de dégâts, et les héros avec de la {S/PEN} en plus lui infligent encore +50%. Il répand un {D/BT_DOT_POISON} indissipable, se retire 70% de {S/SPD} mais gagne de la priorité après chaque action ennemie, et plafonne les dégâts de Malédiction / Fixes à 50000. Son Berserk se déclenche toutes les 4 de ses actions et son final retire 3 buffs à toute l'équipe."
+    "fr": "Boss {E/Earth} {C/Mage} présent dans la rotation de la Singularité Dimensionnelle. Un contrôle d'effectif : avec 3 / 4 héros {E/Fire} dans l'équipe il subit +50% / +120% de dégâts, et les héros avec de la {S/PEN} en plus lui infligent encore +50%. Il répand un {D/BT_DOT_POISON} indissipable, se retire 70% de {S/SPD} mais gagne de la priorité après chaque action ennemie, et plafonne les dégâts de Malédiction / Fixes à 50000. Son Berserk se déclenche toutes les 4 de ses actions et son final retire 3 buffs à toute l'équipe.",
+    "es": "Jefe {E/Earth}-elemento {C/Mage} presente en la rotación de Singularidad Dimensional. Comprobación de recuento: con 3 / 4 héroes {E/Fire} en el equipo recibe +50% / +120% de daño, y los héroes con {S/PEN} aumentado infligen otro +50%. Extiende {D/BT_DOT_POISON} irremovible, reduce su propia {S/SPD} en un 70% mientras gana Prioridad tras cada acción enemiga, y limita el daño de Maldición / Fijo a 50000. El Frenesí se activa cada 4 de sus acciones y su golpe final elimina 3 bonos de todo el equipo."
   },
   "tips": [
     {
@@ -15,21 +16,24 @@
           "jp": "{S/SPD}は追わない。キメラは自身の{S/SPD}を70%下げる（SSSランクでおよそ150〜160）ため、味方の速度は優先ステータスにならない。サブステータスは他に回す。",
           "kr": "{S/SPD}를 좇지 마세요. 키메라는 자신의 {S/SPD}를 70% 낮추므로(SSS 랭크 기준 약 150~160) 아군의 속도는 우선 스탯이 아닙니다. 부옵션은 다른 곳에 투자하세요.",
           "zh": "不必堆{S/SPD}。奇美拉会将自身{S/SPD}降低70%（SSS阶约150~160），因此速度不是队友的优先属性，把副属性投到别处。",
-          "fr": "Ne courez pas après la {S/SPD}. Chimera se retire 70% de {S/SPD} — environ 150-160 au rang SSS — donc la vitesse n'est pas une stat prioritaire sur vos héros. Investissez les sous-stats ailleurs."
+          "fr": "Ne courez pas après la {S/SPD}. Chimera se retire 70% de {S/SPD} — environ 150-160 au rang SSS — donc la vitesse n'est pas une stat prioritaire sur vos héros. Investissez les sous-stats ailleurs.",
+          "es": "No persigas {S/SPD}. Chimera reduce su propia {S/SPD} en un 70% — aproximadamente 150-160 en rango SSS — por lo que la velocidad no es una estadística prioritaria en tus héroes. Invierte las sub-stats en otro lado."
         },
         {
           "en": "Stack {E/Fire} heroes. With 3 {E/Fire} members in the party Chimera takes +50% damage, with 4 it takes +120% — by far the biggest damage multiplier of the fight.",
           "jp": "{E/Fire}属性で固める。味方に{E/Fire}属性が3体いるとキメラの被ダメージは+50%、4体なら+120%になる — この戦闘で圧倒的に大きい火力倍率。",
           "kr": "{E/Fire} 속성으로 채우세요. 아군에 {E/Fire} 속성이 3명이면 키메라가 받는 피해 +50%, 4명이면 +120%로, 이 전투에서 압도적으로 큰 피해 배율입니다.",
           "zh": "尽量堆{E/Fire}属性。队伍中有3名{E/Fire}属性时奇美拉受到伤害+50%，4名时+120% — 是本战中远超其他的伤害倍率。",
-          "fr": "Empilez les héros {E/Fire}. Avec 3 {E/Fire} dans l'équipe, Chimera subit +50% de dégâts ; avec 4, +120% — de loin le plus gros multiplicateur du combat."
+          "fr": "Empilez les héros {E/Fire}. Avec 3 {E/Fire} dans l'équipe, Chimera subit +50% de dégâts ; avec 4, +120% — de loin le plus gros multiplicateur du combat.",
+          "es": "Acumula héroes {E/Fire}. Con 3 miembros {E/Fire} en el equipo, Chimera recibe +50% de daño, con 4 recibe +120% — por mucho el mayor multiplicador de daño del combate."
         },
         {
           "en": "Bring a {S/PEN} buff. Heroes whose {S/PEN} is increased deal +50% damage to Chimera, and it stacks with the {E/Fire} bonus.",
           "jp": "{S/PEN}バフを用意する。{S/PEN}が増加した味方はキメラに+50%のダメージを与え、{E/Fire}のボーナスと重複する。",
           "kr": "{S/PEN} 버프를 준비하세요. {S/PEN}이 증가한 아군은 키메라에게 +50%의 피해를 주며, {E/Fire} 보너스와 함께 적용됩니다.",
           "zh": "带上{S/PEN}增益。{S/PEN}提升的友军对奇美拉造成+50%伤害，且与{E/Fire}加成叠加。",
-          "fr": "Emmenez un buff de {S/PEN}. Les héros dont la {S/PEN} est augmentée infligent +50% de dégâts à Chimera, et ça se cumule avec le bonus {E/Fire}."
+          "fr": "Emmenez un buff de {S/PEN}. Les héros dont la {S/PEN} est augmentée infligent +50% de dégâts à Chimera, et ça se cumule avec le bonus {E/Fire}.",
+          "es": "Lleva un bono de {S/PEN}. Los héroes cuyo {S/PEN} está aumentado infligen +50% de daño a Chimera, y se acumula con el bono de {E/Fire}."
         }
       ]
     }
@@ -45,7 +49,8 @@
             "jp": "優秀な{E/Fire}属性DPSであり、味方に{B/BT_STAT|ST_PIERCE_POWER_RATE}バフを供給する — ボスが許す+50%をそのまま満たす。",
             "kr": "뛰어난 {E/Fire} 속성 딜러이면서 아군에게 {B/BT_STAT|ST_PIERCE_POWER_RATE} 버프를 제공합니다 — 보스가 내주는 +50%를 그대로 채웁니다.",
             "zh": "优秀的{E/Fire}属性输出，同时为队伍提供{B/BT_STAT|ST_PIERCE_POWER_RATE}增益 — 正好吃满Boss给出的+50%。",
-            "fr": "Bon DPS {E/Fire}, qui apporte en plus un buff {B/BT_STAT|ST_PIERCE_POWER_RATE} à l'équipe — exactement le +50% que le boss concède."
+            "fr": "Bon DPS {E/Fire}, qui apporte en plus un buff {B/BT_STAT|ST_PIERCE_POWER_RATE} à l'équipe — exactement le +50% que le boss concède.",
+            "es": "Fuerte DPS de {E/Fire} que además otorga al equipo un bono de {B/BT_STAT|ST_PIERCE_POWER_RATE} — exactamente el +50% que concede el jefe."
           }
         },
         {
@@ -55,7 +60,8 @@
             "jp": "非常に優秀な{E/Fire}属性DPSで、耐久力も高い。",
             "kr": "매우 뛰어난 {E/Fire} 속성 딜러이며 생존력도 높습니다.",
             "zh": "极为出色的{E/Fire}属性输出，且非常耐打。",
-            "fr": "Excellent DPS {E/Fire}, avec une très bonne survie."
+            "fr": "Excellent DPS {E/Fire}, avec une très bonne survie.",
+            "es": "Excelente DPS de {E/Fire}, y muy resistente."
           }
         },
         {
@@ -65,7 +71,8 @@
             "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、{B/BT_REVIVAL}。",
             "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, {B/BT_REVIVAL}.",
             "zh": "{B/BT_CALL_BACKUP}联携攻击、AP电池与{B/BT_REVIVAL}。",
-            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}."
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}.",
+            "es": "Ataques dobles de {B/BT_CALL_BACKUP}, batería de AP y {B/BT_REVIVAL}."
           }
         },
         {
@@ -75,7 +82,8 @@
             "jp": "優秀な{E/Fire}属性の代替。",
             "kr": "좋은 {E/Fire} 속성 대안.",
             "zh": "优质的{E/Fire}属性替代。",
-            "fr": "Bonne alternative {E/Fire}."
+            "fr": "Bonne alternative {E/Fire}.",
+            "es": "Sólida alternativa de {E/Fire}."
           }
         }
       ]

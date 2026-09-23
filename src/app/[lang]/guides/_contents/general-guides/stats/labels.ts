@@ -14,6 +14,7 @@ export const LABELS = {
     kr: '스탯 & 전투 메카닉',
     zh: '属性 & 战斗机制',
     fr: 'Stats & Mécaniques de Combat',
+    es: 'Estadísticas y Mecánicas de Combate',
   },
   intro: {
     en: 'A comprehensive guide covering stats and combat mechanics in Outerplane.',
@@ -21,6 +22,7 @@ export const LABELS = {
     kr: 'Outerplane의 스탯과 전투 메카닉을 다루는 종합 가이드입니다.',
     zh: '这是一份关于Outerplane属性和战斗机制的综合指南。',
     fr: "Guide complet sur les stats et les mécaniques de combat d'Outerplane.",
+    es: 'Una guía completa sobre las estadísticas y las mecánicas de combate en Outerplane.',
   },
 
   tab_stats: {
@@ -29,6 +31,7 @@ export const LABELS = {
     kr: '기본 스탯',
     zh: '基础属性',
     fr: 'Stats de Base',
+    es: 'Estadísticas básicas',
   },
   tab_combat: {
     en: 'Combat Basics',
@@ -36,8 +39,16 @@ export const LABELS = {
     kr: '전투 기초',
     zh: '战斗基础',
     fr: 'Bases du Combat',
+    es: 'Fundamentos del combate',
   },
-  tab_faq: { en: 'FAQ', jp: 'FAQ', kr: 'FAQ', zh: '常见问题', fr: 'FAQ' },
+  tab_faq: {
+    en: 'FAQ',
+    jp: 'FAQ',
+    kr: 'FAQ',
+    zh: '常见问题',
+    fr: 'FAQ',
+    es: 'Preguntas frecuentes',
+  },
 
   // ── Section Stats ──
   statsHeading: {
@@ -46,6 +57,7 @@ export const LABELS = {
     kr: '핵심 스탯',
     zh: '核心属性',
     fr: 'Stats Principales',
+    es: 'Estadísticas principales',
   },
   group_offensive: {
     en: 'Offensive Stats',
@@ -53,6 +65,7 @@ export const LABELS = {
     kr: '공격 스탯',
     zh: '攻击属性',
     fr: 'Stats Offensives',
+    es: 'Estadísticas ofensivas',
   },
   group_defensive: {
     en: 'Defensive Stats',
@@ -60,6 +73,7 @@ export const LABELS = {
     kr: '방어 스탯',
     zh: '防御属性',
     fr: 'Stats Défensives',
+    es: 'Estadísticas defensivas',
   },
   group_utility: {
     en: 'Utility Stats',
@@ -67,6 +81,7 @@ export const LABELS = {
     kr: '유틸리티 스탯',
     zh: '功能属性',
     fr: 'Stats Utility',
+    es: 'Estadísticas de utilidad',
   },
   group_damage: {
     en: 'Damage Modifiers',
@@ -74,6 +89,7 @@ export const LABELS = {
     kr: '데미지 보정',
     zh: '伤害修正',
     fr: 'Modificateurs de Dégâts',
+    es: 'Modificadores de daño',
   },
   group_effres: {
     en: 'Effectiveness & Resilience',
@@ -81,6 +97,7 @@ export const LABELS = {
     kr: '효과 적중 & 효과 저항',
     zh: '效果命中 & 效果抵抗',
     fr: 'EFF & RES',
+    es: 'Efectividad y Resiliencia',
   },
 
   // ── Descriptions courtes (résumé de chaque stat) ──
@@ -90,6 +107,7 @@ export const LABELS = {
     kr: '공격력이 높을수록 적에게 더 많은 데미지를 줍니다.',
     zh: '攻击力越高，对敌人造成的伤害越大。',
     fr: 'Plus votre ATK est élevée, plus vous infligez de dégâts aux ennemis.',
+    es: 'Cuanto más alto sea tu Ataque, más daño infligirás a los enemigos.',
   },
   desc_CHC: {
     en: 'Chance for a critical hit to occur. When a critical hit occurs, the damage dealt is increased according to critical damage.',
@@ -97,6 +115,7 @@ export const LABELS = {
     kr: '치명타가 발생할 확률. 치명타 발생 시 치명타 데미지에 따라 데미지가 증가합니다.',
     zh: '触发暴击的概率。暴击时根据暴击伤害增加伤害。',
     fr: "Chance de faire un coup critique. Lors d'un crit, les dégâts sont augmentés selon le CHD.",
+    es: 'Probabilidad de que ocurra un golpe crítico. Cuando ocurre un golpe crítico, el daño infligido aumenta según el Daño CRIT.',
   },
   desc_CHD: {
     en: 'Increase Damage upon scoring a critical hit.',
@@ -104,6 +123,7 @@ export const LABELS = {
     kr: '치명타 적중 시 데미지 증가량.',
     zh: '暴击命中时的伤害增幅。',
     fr: "Augmente les dégâts lors d'un coup critique.",
+    es: 'Aumenta el daño al conseguir un golpe crítico.',
   },
   desc_PEN: {
     en: "Penetration lets you ignore a portion of the target's Defense.",
@@ -111,6 +131,7 @@ export const LABELS = {
     kr: '관통으로 대상 방어력의 일부를 무시할 수 있습니다.',
     zh: '穿透可以忽略目标部分防御力。',
     fr: "PEN vous permet d'ignorer une partie de la DEF de la cible.",
+    es: 'La Penetración te permite ignorar una parte de la Defensa del objetivo.',
   },
   desc_HP: {
     en: 'You can no longer participate in combat once your Health falls below zero.',
@@ -118,6 +139,7 @@ export const LABELS = {
     kr: '체력이 0 이하로 떨어지면 전투에 참여할 수 없습니다.',
     zh: '生命值降至0以下时无法继续战斗。',
     fr: 'Vous ne pouvez plus participer au combat si vos HP tombent en dessous de zéro.',
+    es: 'Ya no puedes participar en combate una vez que tu Vida cae por debajo de cero.',
   },
   desc_DEF: {
     en: 'The higher your defense, the less damage you take from enemies.',
@@ -125,6 +147,7 @@ export const LABELS = {
     kr: '방어력이 높을수록 적에게 받는 데미지가 감소합니다.',
     zh: '防御力越高，受到的伤害越少。',
     fr: 'Plus votre DEF est élevée, moins vous subissez de dégâts des ennemis.',
+    es: 'Cuanto más alta sea tu Defensa, menos daño recibirás de los enemigos.',
   },
   desc_SPD: {
     en: 'The higher the speed, the more often you can act.',
@@ -132,6 +155,7 @@ export const LABELS = {
     kr: '속도가 높을수록 더 자주 행동할 수 있습니다.',
     zh: '速度越高，行动越频繁。',
     fr: 'Plus la SPD est élevée, plus vous pouvez agir souvent.',
+    es: 'Cuanto mayor sea la Velocidad, con más frecuencia podrás actuar.',
   },
   desc_DMGUP: {
     en: 'Increases damage dealt when attacking.',
@@ -139,6 +163,7 @@ export const LABELS = {
     kr: '공격 시 주는 피해량이 증가합니다.',
     zh: '攻击时造成的伤害增加。',
     fr: "Augmente les dégâts infligés lors d'une attaque.",
+    es: 'Aumenta el daño infligido al atacar.',
   },
   desc_DMGRED: {
     en: 'Reduces damage taken when hit.',
@@ -146,6 +171,7 @@ export const LABELS = {
     kr: '피격 시 받는 피해량이 감소합니다.',
     zh: '受到攻击时承受的伤害减少。',
     fr: "Réduit les dégâts reçus lors d'un hit.",
+    es: 'Reduce el daño recibido al ser golpeado.',
   },
   desc_CDMGRED: {
     en: 'Reduces damage taken when critically hit.',
@@ -153,6 +179,7 @@ export const LABELS = {
     kr: '치명 피격 시 받는 피해가 감소합니다.',
     zh: '被暴击时受到的伤害减少。',
     fr: "Réduit les dégâts reçus lors d'un coup critique.",
+    es: 'Reduce el daño recibido al recibir un golpe crítico.',
   },
   desc_EFF: {
     en: 'The higher the Effectiveness, the lower the chance the target has to resist debuffs.',
@@ -160,6 +187,7 @@ export const LABELS = {
     kr: '효과 적중이 높을수록 대상이 디버프에 저항할 확률이 낮아집니다.',
     zh: '效果命中越高，目标抵抗减益的概率越低。',
     fr: "Plus l'EFF est élevée, plus la chance que la cible résiste aux Debuffs est faible.",
+    es: 'Cuanto mayor sea la Efectividad, menor será la probabilidad de que el objetivo resista los debuffs.',
   },
   desc_RES: {
     en: 'The higher the Resilience, the higher the chance to resist debuffs.',
@@ -167,6 +195,7 @@ export const LABELS = {
     kr: '효과 저항이 높을수록 디버프에 저항할 확률이 증가합니다.',
     zh: '效果抵抗越高，抵抗减益的概率越高。',
     fr: 'Plus la RES est élevée, plus la chance de résister aux Debuffs est élevée.',
+    es: 'Cuanto mayor sea la Resiliencia, mayor será la probabilidad de resistir los debuffs.',
   },
 
   // ── ATK ──
@@ -176,6 +205,7 @@ export const LABELS = {
     kr: '공격력은 스킬의 기본 데미지를 직접 증가시킵니다. 단, 일부 스킬은 다른 스탯에 의존하거나 공격력을 완전히 무시합니다.',
     zh: '攻击力直接增加技能造成的基础伤害。但部分技能依赖其他属性或完全忽略攻击力。',
     fr: "L'ATK augmente directement les dégâts bruts de vos skills. Cependant, certains skills scalent avec d'autres stats ou ignorent complètement l'ATK.",
+    es: 'El Ataque aumenta directamente el daño bruto infligido por tus skills. Sin embargo, algunas skills escalan con otras estadísticas o ignoran el Ataque por completo.',
   },
   atk_p2: {
     en: 'Some DoTs (damage over time) are impacted by attack:',
@@ -183,6 +213,7 @@ export const LABELS = {
     kr: '일부 DoT(지속 데미지)는 공격력의 영향을 받습니다:',
     zh: '部分DoT（持续伤害）受攻击力影响：',
     fr: "Certains DoTs (dégâts sur la durée) sont impactés par l'ATK :",
+    es: 'Algunos DoT (daño a lo largo del tiempo) se ven afectados por el ataque:',
   },
 
   // ── CHC ──
@@ -192,6 +223,7 @@ export const LABELS = {
     kr: '기본적으로 대부분의 캐릭터는 낮은 기본 치명타 확률로 시작하며, 장비, 버프, 특성, 패시브로 올려야 합니다. 치명타 확률 100%에 도달하면 모든 대상 공격이 치명타가 됩니다.',
     zh: '默认情况下，大多数角色初始暴击率较低，需要通过装备、增益、特性或被动来提升。暴击率达到100%可保证每次符合条件的攻击都暴击。',
     fr: 'Par défaut, la plupart des personnages commencent avec un CHC de base faible et doivent le construire via le gear, les Buffs, les Quirks ou les passives. À 100% de CHC, toutes vos attaques éligibles sont garanties de crit.',
+    es: 'Por defecto, la mayoría de personajes empiezan con una Tasa CRIT base baja y deben aumentarla mediante gear, buffs, quirks o pasivas. Alcanzar 100% de Tasa CRIT garantiza que todo ataque elegible sea crítico.',
   },
   chc_notes: {
     en: 'Important notes:',
@@ -199,6 +231,7 @@ export const LABELS = {
     kr: '중요 참고:',
     zh: '重要说明：',
     fr: 'Notes importantes :',
+    es: 'Notas importantes:',
   },
   chc_n1: {
     en: 'Crit Chance is capped at 100% — any excess is wasted.',
@@ -206,6 +239,7 @@ export const LABELS = {
     kr: '치명타 확률은 100%가 상한이며, 초과분은 낭비됩니다.',
     zh: '暴击率上限为100%——超出部分无效。',
     fr: 'Le CHC est cap à 100% — tout excès est gâché.',
+    es: 'La Tasa CRIT tiene un límite de 100% — el exceso se desperdicia.',
   },
   chc_n2: {
     en: 'Healing and Shielding cannot crit.',
@@ -213,6 +247,7 @@ export const LABELS = {
     kr: '힐과 보호막은 치명타가 되지 않습니다.',
     zh: '治疗和护盾不会暴击。',
     fr: 'Les heals et les shields ne peuvent pas crit.',
+    es: 'La curación y los escudos no pueden ser críticos.',
   },
   chc_n3: {
     en: 'Skills with {B/HEAVY_STRIKE} effect cannot crit like {SK/Kitsune of Eternity Tamamo-no-Mae|S1}.',
@@ -220,6 +255,7 @@ export const LABELS = {
     kr: '{B/HEAVY_STRIKE} 효과가 있는 스킬은 치명타가 되지 않습니다({SK/Kitsune of Eternity Tamamo-no-Mae|S1} 등).',
     zh: '带有{B/HEAVY_STRIKE}效果的技能不会暴击，例如{SK/Kitsune of Eternity Tamamo-no-Mae|S1}。',
     fr: 'Skills avec {B/HEAVY_STRIKE} ne peuvent pas crit, comme {SK/Kitsune of Eternity Tamamo-no-Mae|S1}.',
+    es: 'Las skills con efecto {B/HEAVY_STRIKE} no pueden ser críticas como {SK/Kitsune of Eternity Tamamo-no-Mae|S1}.',
   },
   chc_n4: {
     en: 'Damage over Time effects cannot crit.',
@@ -227,6 +263,7 @@ export const LABELS = {
     kr: '지속 데미지 효과는 치명타가 되지 않습니다.',
     zh: '持续伤害效果不会暴击。',
     fr: 'Les effets DoT ne peuvent pas crit.',
+    es: 'Los efectos de Daño a lo largo del Tiempo no pueden ser críticos.',
   },
 
   // ── CHD ──
@@ -236,6 +273,7 @@ export const LABELS = {
     kr: '치명타 데미지는 치명타 적중 시 적용되는 보너스 데미지를 결정합니다. 계산식은 보통 기본 데미지에 치명타 데미지%를 곱합니다.',
     zh: '暴击伤害决定暴击命中时施加的额外伤害。公式通常将基础伤害乘以暴击伤害百分比。',
     fr: "Le CHD détermine la quantité de dégâts bonus appliquée lors d'un coup critique.",
+    es: 'El Daño CRIT determina cuánto daño extra se aplica cuando conectas un golpe crítico. La fórmula normalmente multiplica tu daño base por un porcentaje definido por tu estadística de Daño CRIT.',
   },
   chd_p2: {
     en: 'All units start with a base Crit Damage of **150%**.',
@@ -243,6 +281,7 @@ export const LABELS = {
     kr: '모든 유닛은 기본 치명타 데미지 **150%**로 시작합니다.',
     zh: '所有单位初始暴击伤害为**150%**。',
     fr: 'Toutes les unités commencent avec un CHD de base de **150%**.',
+    es: 'Todas las unidades empiezan con un Daño CRIT base de **150%**.',
   },
   chd_p3: {
     en: "Investing in Crit Damage isn't worthwhile if your Crit Chance is low.",
@@ -250,6 +289,7 @@ export const LABELS = {
     kr: '치명타 확률이 낮으면 치명타 데미지에 투자할 가치가 없습니다.',
     zh: '如果暴击率低，投资暴击伤害不划算。',
     fr: "Investir dans le CHD n'est pas rentable si votre CHC est faible.",
+    es: 'Invertir en Daño CRIT no vale la pena si tu Tasa CRIT es baja.',
   },
 
   // ── PEN ──
@@ -259,6 +299,7 @@ export const LABELS = {
     kr: '관통은 데미지 계산 시 적의 방어력(DEF)의 일정 비율을 무시합니다. 관통이 높을수록 데미지 감소 계산에서 DEF의 영향이 줄어듭니다.',
     zh: '穿透在计算攻击伤害时忽略敌人部分防御力（DEF）。穿透越高，伤害减免公式中计入的DEF越少。',
     fr: "La PEN ignore un pourcentage de la DEF de l'ennemi lors du calcul des dégâts de vos attaques. Plus la PEN est élevée, moins la DEF compte dans la formule de réduction de dégâts.",
+    es: 'La Penetración ignora un porcentaje de la Defensa (DEF) del enemigo al calcular cuánto daño infligen tus ataques. Cuanto mayor sea tu PEN, menos DEF se contará en la fórmula de reducción de daño.',
   },
   pen_p2: {
     en: 'For example, if your target has **2000 DEF** and you have **20% PEN**, it will behave as if they only had **1600 DEF**.',
@@ -266,6 +307,7 @@ export const LABELS = {
     kr: '예를 들어, 대상이 **2000 DEF**이고, 당신이 **20% PEN**을 가지고 있으면, 대상은 **1600 DEF**만 가진 것처럼 처리됩니다.',
     zh: '例如，目标有**2000 DEF**而你有**20% PEN**时，效果等同于目标只有**1600 DEF**。',
     fr: "Par exemple, si votre cible a **2000 DEF** et que vous avez **20% PEN**, cela se comporte comme si elle n'avait que **1600 DEF**.",
+    es: 'Por ejemplo, si tu objetivo tiene **2000 DEF** y tú tienes **20% PEN**, se comportará como si solo tuviera **1600 DEF**.',
   },
   pen_p3: {
     en: 'Penetration becomes more valuable against tanky enemies with high DEF.',
@@ -273,6 +315,7 @@ export const LABELS = {
     kr: '관통은 높은 DEF의 탱커형 적에게 더 효과적입니다.',
     zh: '穿透对高防御的肉盾型敌人更有价值。',
     fr: 'La PEN devient plus précieuse contre les ennemis tank avec une DEF élevée.',
+    es: 'La Penetración se vuelve más valiosa contra enemigos resistentes con alta DEF.',
   },
   pen_p4: {
     en: 'Penetration is capped at 100% — any excess is wasted.',
@@ -280,6 +323,7 @@ export const LABELS = {
     kr: '관통은 100%가 상한이며, 초과분은 낭비됩니다.',
     zh: '穿透上限为100%——超出部分无效。',
     fr: 'La PEN est plafonnée à 100% — tout excès est gâché.',
+    es: 'La Penetración tiene un límite de 100% — el exceso se desperdicia.',
   },
   pen_note: {
     en: '**Note:** If the enemy has 0 defense (like in joint battle), penetration becomes useless.',
@@ -287,6 +331,7 @@ export const LABELS = {
     kr: '**참고:** 적의 방어력이 0이면(합동 전투 등) 관통은 무의미해집니다.',
     zh: '**注意：** 如果敌人防御为0（如联合战斗），穿透将毫无用处。',
     fr: "**Note :** Si l'ennemi a 0 DEF (comme en joint battle), la PEN devient inutile.",
+    es: '**Nota:** Si el enemigo tiene 0 de defensa (como en la batalla conjunta), la penetración se vuelve inútil.',
   },
 
   // ── HP ──
@@ -296,6 +341,7 @@ export const LABELS = {
     kr: '체력은 유닛이 쓰러지기 전 받을 수 있는 총 데미지량입니다. HP가 0이 되면 즉시 전투에서 제외됩니다.',
     zh: '生命值代表单位被击败前可承受的总伤害量。HP归零时立即退出战斗。',
     fr: "Les HP représentent la quantité totale de dégâts qu'une unité peut subir avant d'être vaincue. Quand les HP atteignent 0, l'unité est immédiatement retirée du combat.",
+    es: 'La Vida representa la cantidad total de daño que una unidad puede recibir antes de ser derrotada. Cuando la Vida llega a 0, la unidad es eliminada inmediatamente del combate.',
   },
   hp_p2: {
     en: 'Like Attack, some skills scale with HP, such as {SK/Demiurge Drakhan|S1}.',
@@ -303,6 +349,7 @@ export const LABELS = {
     kr: '공격력처럼 일부 스킬은 HP에 의존합니다({SK/Demiurge Drakhan|S1} 등).',
     zh: '与攻击力类似，部分技能依赖HP，例如{SK/Demiurge Drakhan|S1}。',
     fr: "Comme l'ATK, certains skills scalent avec les HP, comme {SK/Demiurge Drakhan|S1}.",
+    es: 'Al igual que el Ataque, algunas skills escalan con la Vida, como {SK/Demiurge Drakhan|S1}.',
   },
   hp_p3: {
     en: 'You can replenish HP with healing skills, and protect it with buffs like:',
@@ -310,6 +357,7 @@ export const LABELS = {
     kr: '힐 스킬로 HP를 회복하고, 다음 버프로 보호할 수 있습니다:',
     zh: '可以用治疗技能补充HP，并用以下增益保护：',
     fr: 'Vous pouvez restaurer les HP avec des skills de heal et les protéger avec des Buffs comme :',
+    es: 'Puedes restaurar la Vida con skills de curación y protegerla con buffs como:',
   },
 
   // ── DEF ──
@@ -319,6 +367,7 @@ export const LABELS = {
     kr: '방어력은 대부분의 소스에서 받는 데미지를 줄입니다. 일부 스킬은 방어력에 의존합니다({SK/Caren|S3} 등).',
     zh: '防御力减少大部分来源的受到伤害。部分技能依赖防御力，例如{SK/Caren|S3}。',
     fr: 'La DEF réduit la quantité de dégâts subis de la plupart des sources. Certains skills scalent avec la DEF comme {SK/Caren|S3}.',
+    es: 'La Defensa reduce la cantidad de daño recibido de la mayoría de las fuentes. Algunas skills escalan con la defensa, como {SK/Caren|S3}.',
   },
   def_p2: {
     en: 'However, some in-game mechanics can partially or completely ignore DEF, such as:',
@@ -326,6 +375,7 @@ export const LABELS = {
     kr: '하지만 일부 게임 메카닉은 DEF를 부분적 또는 완전히 무시할 수 있습니다:',
     zh: '但部分游戏机制可以部分或完全忽略DEF，例如：',
     fr: 'Cependant, certaines mécaniques in-game peuvent ignorer partiellement ou complètement la DEF, comme :',
+    es: 'Sin embargo, algunas mecánicas del juego pueden ignorar parcial o completamente la DEF, como:',
   },
 
   // ── SPD ──
@@ -335,6 +385,7 @@ export const LABELS = {
     kr: '속도는 유닛의 턴이 얼마나 빨리 오는지 결정합니다. SPD가 높을수록 전투 중 더 자주 행동할 수 있습니다.',
     zh: '速度决定单位多快轮到行动。SPD越高，战斗中行动越频繁。',
     fr: "La SPD détermine la rapidité avec laquelle un tour arrive. Plus la SPD est élevée, plus l'unité peut agir fréquemment en combat.",
+    es: 'La Velocidad determina con qué rapidez llega el turno de una unidad. Cuanto mayor sea la SPD, con más frecuencia podrá actuar la unidad durante el combate.',
   },
   spd_p2: {
     en: 'Like Attack, some skills scale with SPD, such as {SK/Stella|S2}.',
@@ -342,6 +393,7 @@ export const LABELS = {
     kr: '공격력처럼 일부 스킬은 SPD에 의존합니다({SK/Stella|S2} 등).',
     zh: '与攻击力类似，部分技能依赖SPD，例如{SK/Stella|S2}。',
     fr: "Comme l'ATK, certains skills scalent avec la SPD, comme {SK/Stella|S2}.",
+    es: 'Al igual que el Ataque, algunas skills escalan con la SPD, como {SK/Stella|S2}.',
   },
   spd_p3: {
     en: 'Further details are provided in the **Combat Basics** section, since Speed is directly linked to the concept of "Priority".',
@@ -349,6 +401,7 @@ export const LABELS = {
     kr: '속도는 "우선도" 개념과 직접 연결되어 있으므로, 자세한 내용은 **전투 기초** 섹션에서 설명합니다.',
     zh: '速度与"行动值"概念直接相关，详见**战斗基础**部分。',
     fr: 'Plus de détails sont fournis dans la **Bases du Combat** section, car la SPD est directement liée au concept de "Priorité".',
+    es: 'Se proporcionan más detalles en la sección **Combat Basics**, ya que la Velocidad está directamente vinculada al concepto de "Prioridad".',
   },
 
   // ── DMG UP% ──
@@ -358,6 +411,7 @@ export const LABELS = {
     kr: '피해 증가는 공격 시 주는 데미지를 상승시킵니다. 이는 **합산 시스템**의 일부로, 모든 증가형 및 감소형 효과가 합산된 뒤 서로 차감됩니다(독립적으로 곱해지지 않습니다).',
     zh: '伤害增加提升攻击时造成的伤害。它属于一个**加算系统**，所有增益类和减免类效果先各自求和，再相减，而非独立相乘。',
     fr: "Le DMG UP augmente les dégâts que vous infligez à l'attaque. Il fait partie d'un **système additif** où tous les effets d'increase et de réduction sont sommés, puis soustraits les uns des autres — pas multipliés indépendamment.",
+    es: 'Daño + aumenta el daño que infliges al atacar. Forma parte de un **sistema aditivo** donde todos los efectos de tipo aumento y reducción se suman, y luego se restan entre sí — no se multiplican de forma independiente.',
   },
   dmgup_formulaLabel: {
     en: 'Additive formula:',
@@ -365,6 +419,7 @@ export const LABELS = {
     kr: '합산 공식:',
     zh: '加算公式：',
     fr: 'Formule additive :',
+    es: 'Fórmula aditiva:',
   },
   dmgup_formula: {
     en: '(CHD + DMG UP + Skill/Equip DMG UP) − (CDMG RED + DMG RED + Skill/Equip DMG RED) = Final modifier',
@@ -372,6 +427,7 @@ export const LABELS = {
     kr: '(CHD + DMG UP + Skill/Equip DMG UP) − (CDMG RED + DMG RED + Skill/Equip DMG RED) = Final modifier',
     zh: '(CHD + DMG UP + Skill/Equip DMG UP) − (CDMG RED + DMG RED + Skill/Equip DMG RED) = Final modifier',
     fr: '(CHD + DMG UP + DMG UP de Skill/Equip) − (CDMG RED + DMG RED + DMG RED de Skill/Equip) = Modificateur final',
+    es: '(Daño CRIT + Daño + + Daño + de Skill/Equipo) − (Daño recibido CRIT - + Daño recibido - + Daño recibido - de Skill/Equipo) = Modificador final',
   },
   dmgup_howLabel: {
     en: 'How it works:',
@@ -379,6 +435,7 @@ export const LABELS = {
     kr: '작동 방식:',
     zh: '运作方式：',
     fr: 'Fonctionnement :',
+    es: 'Cómo funciona:',
   },
   dmgup_h1: {
     en: 'On a non-crit hit: {S/DMG UP%} (+ any skill/equip bonuses) is opposed by the enemy’s {S/DMG RED%} (+ their skill/equip reductions).',
@@ -386,6 +443,7 @@ export const LABELS = {
     kr: '비치명 시: {S/DMG UP%}(+ 스킬/장비 보너스)이 적의 {S/DMG RED%}(+ 스킬/장비 감소)와 대항합니다.',
     zh: '非暴击时：{S/DMG UP%}（+技能/装备加成）与敌方的{S/DMG RED%}（+技能/装备减免）相对抗。',
     fr: "Sur un hit non-crit : {S/DMG UP%} (+ bonus de skill/equip) est opposé au {S/DMG RED%} de l'ennemi (+ ses réductions de skill/equip).",
+    es: 'En un golpe sin crítico: {S/DMG UP%} (+ cualquier bono de skill/equipo) se opone al {S/DMG RED%} del enemigo (+ sus reducciones de skill/equipo).',
   },
   dmgup_h2: {
     en: 'On a crit hit: {S/DMG UP%} is added to your {S/CHD}, and the enemy adds their {S/CDMG RED%} to their {S/DMG RED%}. Both totals are then compared.',
@@ -393,6 +451,7 @@ export const LABELS = {
     kr: '치명 시: {S/DMG UP%}이 자신의 {S/CHD}에 합산되고, 적은 {S/CDMG RED%}를 자신의 {S/DMG RED%}에 합산합니다. 그 후 두 합계가 비교됩니다.',
     zh: '暴击时：{S/DMG UP%}加到自身的{S/CHD}上，敌方则将{S/CDMG RED%}加到自身的{S/DMG RED%}上。随后比较双方总计。',
     fr: "Sur un crit : {S/DMG UP%} est ajouté à votre {S/CHD}, et l'ennemi ajoute son {S/CDMG RED%} à son {S/DMG RED%}. Les deux totaux sont ensuite comparés.",
+    es: 'En un golpe crítico: {S/DMG UP%} se suma a tu {S/CHD}, y el enemigo suma su {S/CDMG RED%} a su {S/DMG RED%}. Luego se comparan ambos totales.',
   },
   dmgup_h3: {
     en: 'When total damage reductions exceed total damage increases, the final modifier is floored at −70% (rate floor 0.30).',
@@ -400,6 +459,7 @@ export const LABELS = {
     kr: '총 감소가 총 증가를 초과하면 최종 보정치는 −70%로 하한 처리됩니다(레이트 하한 0.30).',
     zh: '当减免总和超过增益总和时，最终修正值以−70%为下限（速率下限0.30）。',
     fr: 'Quand les réductions totales dépassent les augmentations totales, le modificateur final est plancheré à −70% (floor de 0.30).',
+    es: 'Cuando el total de reducciones de daño supera el total de aumentos de daño, el modificador final se limita a −70% (piso de tasa 0.30).',
   },
   dmgup_note: {
     en: '**Note:** Damage Increase from quirks, skills, and equipment effects are all part of this same additive pool.',
@@ -407,6 +467,7 @@ export const LABELS = {
     kr: '**참고:** 특성, 스킬, 장비 효과로 인한 피해 증가는 모두 이 동일한 합산 풀의 일부입니다.',
     zh: '**注意：** 来自特性、技能和装备效果的伤害增加，全部属于同一个加算池。',
     fr: "**Note :** Le DMG UP venant des Quirks, skills et effets d'équipement fait partie du même pool additif.",
+    es: '**Nota:** El Daño + de quirks, skills y efectos de equipo forma parte de este mismo grupo aditivo.',
   },
   dmgup_chdNote: {
     en: 'Here CHD is expressed in percentage points (a CHD of 150% counts as 150); in the full FAQ formula it appears in decimal form (1.5).',
@@ -414,6 +475,7 @@ export const LABELS = {
     kr: '여기서 CHD는 퍼센트 포인트로 표기됩니다(CHD 150%는 150으로 계산). FAQ의 전체 공식에서는 소수(1.5)로 표시됩니다.',
     zh: '此处CHD以百分点表示（CHD 150%记为150）；在FAQ的完整公式中则以小数（1.5）表示。',
     fr: 'Ici la CHD est exprimée en points de % (une CHD de 150% compte pour 150) ; dans la formule complète de la FAQ elle apparaît en décimal (1.5).',
+    es: 'Aquí el Daño CRIT se expresa en puntos porcentuales (un Daño CRIT de 150% cuenta como 150); en la fórmula completa de la FAQ aparece en forma decimal (1.5).',
   },
 
   // ── DMG RED% ──
@@ -423,6 +485,7 @@ export const LABELS = {
     kr: '받는 피해 감소는 단독의 평탄한 비율 감소가 **아닙니다**. 이는 {S/DMG UP%}과 동일한 합산 시스템의 일부로, 공격자의 피해 증가 그룹 합계에서 차감됩니다. 이 층은 방어력 **이전**에 계산됩니다.',
     zh: '受到伤害减少并**不是**一个独立的平坦百分比减免。它与{S/DMG UP%}属于同一个加算系统——从攻击方的伤害增加总组中减去。该层在防御力**之前**计算。',
     fr: "Le DMG RED **n'est pas** une réduction plate en pourcentage. Il fait partie du même système additif que {S/DMG UP%} — il est soustrait du groupe Damage Increase total de l'attaquant. Cette couche est calculée **avant** la DEF.",
+    es: 'Daño recibido - **no** es una reducción porcentual plana independiente. Forma parte del mismo sistema aditivo que {S/DMG UP%} — se resta del grupo total de Daño + del atacante. Esta capa se calcula **antes** de la Defensa.',
   },
   dmgred_exLabel: {
     en: 'Example (non-crit):',
@@ -430,6 +493,7 @@ export const LABELS = {
     kr: '예시(비치명):',
     zh: '示例（非暴击）：',
     fr: 'Exemple (non-crit) :',
+    es: 'Ejemplo (sin crítico):',
   },
   dmgred_ex: {
     en: 'If the attacker has **50% DMG UP** and you have **30% DMG RED**, the net modifier is **+20%** damage increase (not a flat 30% reduction).',
@@ -437,6 +501,7 @@ export const LABELS = {
     kr: '공격자가 **50% DMG UP**이고 당신이 **30% DMG RED**이면, 최종 보정치는 **+20%**의 피해 증가입니다(평탄한 30% 감소가 아닙니다).',
     zh: '若攻击方拥有**50% DMG UP**且你拥有**30% DMG RED**，则净修正为**+20%**的伤害增加（并非平坦的30%减免）。',
     fr: "Si l'attaquant a **50% DMG UP** et que vous avez **30% DMG RED**, le modificateur net est **+20%** d'augmentation de dégâts (pas une réduction plate de 30%).",
+    es: 'Si el atacante tiene **50% Daño +** y tú tienes **30% Daño recibido -**, el modificador neto es **+20%** de aumento de daño (no una reducción plana del 30%).',
   },
   dmgred_critLabel: {
     en: 'On a crit hit:',
@@ -444,6 +509,7 @@ export const LABELS = {
     kr: '치명 시:',
     zh: '暴击时：',
     fr: 'Sur un crit :',
+    es: 'En un golpe crítico:',
   },
   dmgred_crit: {
     en: '{S/DMG RED%} is added to your {S/CDMG RED%} to oppose the enemy’s {S/CHD} + {S/DMG UP%}.',
@@ -451,6 +517,7 @@ export const LABELS = {
     kr: '{S/DMG RED%}가 자신의 {S/CDMG RED%}에 합산되어 적의 {S/CHD} + {S/DMG UP%}에 대항합니다.',
     zh: '{S/DMG RED%}加到自身的{S/CDMG RED%}上，以对抗敌方的{S/CHD} + {S/DMG UP%}。',
     fr: "{S/DMG RED%} est ajouté à votre {S/CDMG RED%} pour s'opposer au {S/CHD} + {S/DMG UP%} de l'ennemi.",
+    es: '{S/DMG RED%} se suma a tu {S/CDMG RED%} para oponerse al {S/CHD} + {S/DMG UP%} del enemigo.',
   },
   dmgred_note: {
     en: '**Note:** This is not the same as Final Damage Reduction, which is applied separately after Defense.',
@@ -458,6 +525,7 @@ export const LABELS = {
     kr: '**참고:** 이것은 최종 데미지 감소와는 다릅니다. 최종 데미지 감소는 방어력 이후에 별도로 적용됩니다.',
     zh: '**注意：** 这与最终伤害减免不同，最终伤害减免在防御力之后单独应用。',
     fr: "**Note :** Ce n'est pas la même chose que la Final Damage Reduction, qui est appliquée séparément après la DEF.",
+    es: '**Nota:** Esto no es lo mismo que la Reducción de Daño Final, que se aplica por separado después de la Defensa.',
   },
   dmg_cap: {
     en: '**Cap:** The combined pool (CHD + DMG UP) − (DMG RED + CDMG RED) has a rate floor of 0.30: this layer caps reduction at −70%. Defense and Final Damage Reduction are calculated separately.',
@@ -465,6 +533,7 @@ export const LABELS = {
     kr: '**상한:** 통합 풀 (CHD + DMG UP) − (DMG RED + CDMG RED)에는 0.30의 레이트 하한이 있어, 이 층은 감소를 −70%로 제한합니다. 방어력과 최종 데미지 감소는 별도로 계산됩니다.',
     zh: '**上限：** 合并池 (CHD + DMG UP) − (DMG RED + CDMG RED) 有 0.30 的速率下限：该层将减免上限限制为 −70%。防御力和最终伤害减免单独计算。',
     fr: '**Cap :** Le pool combiné (CHD + DMG UP) − (DMG RED + CDMG RED) est plancheré à 0.30 : cette couche plafonne à −70% de réduction. La DEF et la Final Damage Reduction sont calculées séparément.',
+    es: '**Límite:** El grupo combinado (Daño CRIT + Daño +) − (Daño recibido - + Daño recibido CRIT -) tiene un piso de tasa de 0.30: esta capa limita la reducción a −70%. La Defensa y la Reducción de Daño Final se calculan por separado.',
   },
 
   // ── CDMG RED% ──
@@ -474,14 +543,23 @@ export const LABELS = {
     kr: '치명 피해 감소는 치명 피격 시 적의 유효 {S/CHD}를 직접 감소시킵니다.',
     zh: '暴击伤害减免在被暴击时直接降低敌方的有效{S/CHD}。',
     fr: "Le CDMG RED ne s'active que lorsque vous subissez un coup critique. Il est ajouté à votre {S/DMG RED%} pour former le pool défensif total, qui est soustrait du pool offensif de l'attaquant ({S/CHD} + {S/DMG UP%}).",
+    es: 'La Reducción de Daño Crítico solo se activa cuando recibes un golpe crítico. Se suma a tu {S/DMG RED%} para formar el grupo defensivo total, que se resta del grupo ofensivo del atacante ({S/CHD} + {S/DMG UP%}).',
   },
-  cdmgred_exLabel: { en: 'Example:', jp: '例：', kr: '예시:', zh: '示例：', fr: 'Exemple :' },
+  cdmgred_exLabel: {
+    en: 'Example:',
+    jp: '例：',
+    kr: '예시:',
+    zh: '示例：',
+    fr: 'Exemple :',
+    es: 'Ejemplo:',
+  },
   cdmgred_ex1: {
     en: 'If the enemy has **300% CHD** + **30% DMG UP** and you have **150% CDMG RED** + **20% DMG RED**:',
     jp: '敵の**CHD 300%**に対して**CDMG RED 150%**を持つ場合、受ける会心ダメージは300%ではなく**150%**に減少します。',
     kr: '적의 **CHD 300%**에 대해 **CDMG RED 150%**를 가지고 있으면, 받는 치명 데미지가 300%가 아닌 **150%**로 감소합니다.',
     zh: '敌方**CHD 300%**，你拥有**CDMG RED 150%**时，受到的暴击伤害从300%降至**150%**。',
     fr: "Si l'ennemi a **300% CHD** + **30% DMG UP** et que vous avez **150% CDMG RED** + **20% DMG RED** :",
+    es: 'Si el enemigo tiene **300% Daño CRIT** + **30% Daño +** y tú tienes **150% Daño recibido CRIT -** + **20% Daño recibido -**:',
   },
   cdmgred_ex2: {
     en: '(300 + 30) − (150 + 20) = **+160%** effective damage modifier.',
@@ -489,6 +567,7 @@ export const LABELS = {
     kr: '치명 피격 시: CDMG RED가 {S/DMG RED%}에 합산되어 적의 {S/CHD} + {S/DMG UP%}에 대한 총 방어 보정치를 형성합니다.',
     zh: '被暴击时：CDMG RED与{S/DMG RED%}相加，形成对敌方{S/CHD} + {S/DMG UP%}的总防御修正。',
     fr: '(300 + 30) − (150 + 20) = **+160%** de modificateur effectif.',
+    es: '(300 + 30) − (150 + 20) = **+160%** de modificador de daño efectivo.',
   },
   cdmgred_note: {
     en: '**Note:** CDMG RED has no effect on non-crit hits.',
@@ -496,6 +575,7 @@ export const LABELS = {
     kr: '',
     zh: '',
     fr: "**Note :** Le CDMG RED n'a aucun effet sur les hits non-crit.",
+    es: '**Nota:** La Reducción de Daño Crítico no tiene efecto en golpes sin crítico.',
   },
 
   // ── EFF ──
@@ -505,6 +585,7 @@ export const LABELS = {
     kr: '효과 적중은 디버프 부여 성공 확률을 높이며, {S/RES}로 대응됩니다.',
     zh: '效果命中增加成功施加减益的概率，被{S/RES}对抗。',
     fr: "L'EFF augmente la chance d'appliquer un debuff avec succès et est contrée par {S/RES}.",
+    es: 'Efectividad aumenta la probabilidad de aplicar debuffs con éxito y es contrarrestada por {S/RES}.',
   },
   eff_p2: {
     en: "If your Effectiveness is equal to or higher than the enemy's Resilience, the base chance to apply a debuff is 100%.",
@@ -512,6 +593,7 @@ export const LABELS = {
     kr: '효과 적중이 적의 효과 저항 이상이면 디버프 부여 기본 확률은 100%입니다.',
     zh: '当效果命中大于等于敌人效果抵抗时，减益施加基础概率为100%。',
     fr: "Si votre EFF est supérieure ou égale à la RES de l'ennemi, la chance de base d'appliquer un debuff est de 100%.",
+    es: 'Si tu Efectividad es igual o superior a la Resiliencia del enemigo, la probabilidad base de aplicar un debuff es del 100%.',
   },
   eff_p3: {
     en: "Some skills can scale with Effectiveness, such as {P/Gnosis Beth}'s {D/ETERNAL_BLEEDING}.",
@@ -519,6 +601,7 @@ export const LABELS = {
     kr: '일부 스킬은 효과 적중에 의존합니다({P/Gnosis Beth}의 {D/ETERNAL_BLEEDING} 등).',
     zh: '部分技能依赖效果命中，例如{P/Gnosis Beth}的{D/ETERNAL_BLEEDING}。',
     fr: "Certains skills peuvent scaler avec l'EFF, comme avec {P/Gnosis Beth} avec {D/ETERNAL_BLEEDING}.",
+    es: 'Algunas skills pueden escalar con Efectividad, como el {D/ETERNAL_BLEEDING} de {P/Gnosis Beth}.',
   },
 
   // ── RES ──
@@ -528,6 +611,7 @@ export const LABELS = {
     kr: '효과 저항은 디버프를 받을 확률을 낮추며, {S/EFF}로 대응됩니다. {B/BT_IMMUNE} 버프로 디버프 면역이 됩니다.',
     zh: '效果抵抗降低被施加减益的概率，被{S/EFF}对抗。{B/BT_IMMUNE}增益可使你免疫减益。',
     fr: 'La RES réduit la chance de recevoir des debuffs et est contrée par {S/EFF}. Vous pouvez être immunisé aux debuffs avec le buff {B/BT_IMMUNE}.',
+    es: 'Resiliencia reduce la probabilidad de recibir debuffs y es contrarrestada por {S/EFF}. Puedes ser inmune a debuffs con el bono {B/BT_IMMUNE}.',
   },
   res_p2: {
     en: "When your RES is higher than the enemy's EFF:",
@@ -535,6 +619,7 @@ export const LABELS = {
     kr: '효과 저항이 적의 효과 적중보다 높을 때:',
     zh: '当效果抵抗高于敌人效果命中时：',
     fr: "Lorsque votre RES est supérieure à l'EFF de l'ennemi :",
+    es: 'Cuando tu Resiliencia es mayor que la Efectividad del enemigo:',
   },
   res_b1: {
     en: 'RES − EFF = 0 → 100% chance',
@@ -542,6 +627,7 @@ export const LABELS = {
     kr: 'RES − EFF = 0 → 100% 확률',
     zh: 'RES − EFF = 0 → 100%概率',
     fr: 'RES − EFF = 0 → 100% de chance',
+    es: 'Resiliencia − Efectividad = 0 → 100% de probabilidad',
   },
   res_note: {
     en: 'Note: Some skills bypass the resilience check like {SK/Drakhan|S2}.',
@@ -549,6 +635,7 @@ export const LABELS = {
     kr: '참고: 일부 스킬은 효과 저항 체크를 우회합니다({SK/Drakhan|S2} 등).',
     zh: '注意：部分技能绕过效果抵抗检定，例如{SK/Drakhan|S2}。',
     fr: 'Note : certains skills contournent le check de RES, comme {SK/Drakhan|S2}.',
+    es: 'Nota: Algunos skills ignoran la comprobación de Resiliencia, como {SK/Drakhan|S2}.',
   },
 
   // ════════════════ Onglet : Combat Basics ════════════════
@@ -558,6 +645,7 @@ export const LABELS = {
     kr: '턴제 우선도 시스템',
     zh: '回合制行动值系统',
     fr: 'Système de Priorité en Tour par Tour',
+    es: 'Sistema de prioridad por turnos',
   },
   combat_turnflow_heading: {
     en: 'Turn Flow Breakdown',
@@ -565,6 +653,7 @@ export const LABELS = {
     kr: '턴 흐름 상세',
     zh: '回合流程详解',
     fr: 'Découpage du Flow de Tour',
+    es: 'Desglose del flujo de turnos',
   },
   combat_firstturn_heading: {
     en: 'First Turn Calculation',
@@ -572,6 +661,7 @@ export const LABELS = {
     kr: '1턴 계산',
     zh: '第1回合计算',
     fr: 'Calcul du Premier Tour',
+    es: 'Cálculo del primer turno',
   },
   combat_special_heading: {
     en: 'Special Mechanics & Exceptions',
@@ -579,6 +669,7 @@ export const LABELS = {
     kr: '특수 메카닉 & 예외',
     zh: '特殊机制 & 例外',
     fr: 'Mécaniques Spéciales & Exceptions',
+    es: 'Mecánicas especiales y excepciones',
   },
 
   // Priority — intro
@@ -588,6 +679,7 @@ export const LABELS = {
     kr: '**Outerplane**의 모든 전투를 100미터 원형 트랙으로 상상해 보세요. 각 캐릭터(아군과 적 모두)가 이 트랙을 달립니다. 가장 먼저 한 바퀴(100%)를 완주한 자가 액션 라인에 도달하여 **턴을 가집니다**.',
     zh: '把**Outerplane**的每场战斗想象成100米环形跑道。每个角色（友方和敌方）都在这条跑道上奔跑。第一个跑完一圈（100%）到达行动线的人**获得回合**。',
     fr: "Imaginez chaque combat dans **Outerplane** comme une piste circulaire de 100 mètres. Chaque personnage — allié ou ennemi — court sur cette piste. Le premier à compléter un tour complet (100%) atteint la ligne d'action et obtient le droit de **jouer son tour**.",
+    es: 'Imagina cada combate en **Outerplane** como una pista de carreras circular de 100 metros. Cada personaje —aliado o enemigo— corre por esta pista. El primero en completar una vuelta entera (100%) llega a la línea de acción y **realiza su turno**.',
   },
   cp_intro2: {
     en: 'In-game, this progress is displayed as a **percentage** when you click the turn order icon:',
@@ -595,6 +687,7 @@ export const LABELS = {
     kr: '게임 내에서 턴 순서 아이콘을 클릭하면 이 진행 상황이 **퍼센티지**로 표시됩니다:',
     zh: '在游戏中，点击回合顺序图标可以看到这个进度以**百分比**显示：',
     fr: "In-game, cette progression est affichée en **pourcentage** lorsque vous cliquez sur l'icône d'ordre de tour :",
+    es: 'En el juego, este progreso se muestra como un **porcentaje** al hacer clic en el icono de orden de turnos:',
   },
   cp_b0: {
     en: '**0%** = starting line',
@@ -602,6 +695,7 @@ export const LABELS = {
     kr: '**0%** = 출발선',
     zh: '**0%** = 起跑线',
     fr: '**0%** = ligne de départ',
+    es: '**0%** = línea de salida',
   },
   cp_b100: {
     en: '**100%** = action line — you take your turn',
@@ -609,6 +703,7 @@ export const LABELS = {
     kr: '**100%** = 액션 라인 — 턴을 가짐',
     zh: '**100%** = 行动线 — 获得回合',
     fr: "**100%** = ligne d'action — vous jouez votre tour",
+    es: '**100%** = línea de acción — realizas tu turno',
   },
 
   // Priority — SPD accordion
@@ -618,6 +713,7 @@ export const LABELS = {
     kr: '{S/SPD}는 캐릭터의 달리기 속도 — 트랙에서 얼마나 빨리 전진하는지 결정하는 스탯이라고 상상할 수 있습니다.',
     zh: '把{S/SPD}想象成角色的奔跑速度——决定在跑道上前进多快的属性。',
     fr: "Vous pouvez vous représenter {S/SPD} comme la vitesse de course de votre personnage — c'est la stat qui détermine la vitesse à laquelle il avance sur la piste.",
+    es: 'Puedes imaginar que {S/SPD} es la velocidad de carrera de tu personaje: es la stat que determina qué tan rápido avanza en la pista.',
   },
   sp_b1: {
     en: 'Higher {S/SPD} means you reach 100% faster.',
@@ -625,6 +721,7 @@ export const LABELS = {
     kr: '{S/SPD}가 높을수록 100%에 더 빨리 도달.',
     zh: '{S/SPD}越高，越快到达100%。',
     fr: 'Plus élevé {S/SPD} plus vous atteignez 100% rapidement.',
+    es: 'Un {S/SPD} más alto significa que llegas al 100% más rápido.',
   },
   sp_b2: {
     en: 'A character with 200 {S/SPD} moves twice as fast as one with 100.',
@@ -632,6 +729,7 @@ export const LABELS = {
     kr: '200 {S/SPD} 캐릭터는 100인 캐릭터보다 2배 빠르게 움직입니다.',
     zh: '200 {S/SPD}的角色移动速度是100的两倍。',
     fr: "Un personnage avec 200 {S/SPD} avance deux fois plus vite qu'un personnage avec 100.",
+    es: 'Un personaje con 200 de {S/SPD} se mueve el doble de rápido que uno con 100.',
   },
   sp_b3: {
     en: 'This means they can act twice while the other acts only once.',
@@ -639,6 +737,7 @@ export const LABELS = {
     kr: '즉, 한쪽이 1번 행동하는 동안 2번 행동할 수 있습니다.',
     zh: '这意味着一方行动1次时，另一方可以行动2次。',
     fr: "Cela veut dire qu'il peut agir deux fois pendant que l'autre n'agit qu'une seule fois.",
+    es: 'Esto significa que puede actuar dos veces mientras el otro actúa solo una.',
   },
   sp_p2: {
     en: "This isn't a fixed turn-order system — it's a continuous flow. Characters act as soon as they reach 100%.",
@@ -646,17 +745,26 @@ export const LABELS = {
     kr: '이것은 고정 턴 순서 시스템이 아닙니다 — 연속적인 흐름입니다. 캐릭터는 100%에 도달하자마자 행동합니다.',
     zh: '这不是固定回合顺序系统——而是连续流动。角色一到达100%就立即行动。',
     fr: "Ce n'est pas un système d'ordre de tour fixe — c'est un flow continu. Les personnages agissent dès qu'ils atteignent 100%.",
+    es: 'Este no es un sistema de orden de turnos fijo, sino un flujo continuo. Los personajes actúan en cuanto llegan al 100%.',
   },
-  sp_accordion: { en: 'Speed', jp: '速度', kr: '속도', zh: '速度', fr: 'Vitesse' },
+  sp_accordion: { en: 'Speed', jp: '速度', kr: '속도', zh: '速度', fr: 'Vitesse', es: 'Velocidad' },
 
   // Priority — Priority accordion
-  pr_accordion: { en: 'Priority', jp: '優先度', kr: '우선도', zh: '行动值', fr: 'Priorité' },
+  pr_accordion: {
+    en: 'Priority',
+    jp: '優先度',
+    kr: '우선도',
+    zh: '行动值',
+    fr: 'Priorité',
+    es: 'Prioridad',
+  },
   pr_p1: {
     en: 'Some skills or effects alter your current position on the track, regardless of your speed. You can imagine this as your character teleporting forward or backward on the track.',
     jp: '一部のスキルや効果は、速度に関係なく、トラック上の現在位置を変更します。キャラクターがトラック上を前方または後方にテレポートすると想像できます。',
     kr: '일부 스킬이나 효과는 속도와 관계없이 트랙에서의 현재 위치를 변경합니다. 캐릭터가 트랙에서 앞이나 뒤로 텔레포트한다고 상상할 수 있습니다.',
     zh: '部分技能或效果可以改变你在跑道上的当前位置，与速度无关。想象角色在跑道上向前或向后瞬移。',
     fr: "Certains skills ou effets modifient votre position actuelle sur la piste, indépendamment de votre SPD. Vous pouvez l'imaginer comme votre personnage qui se téléporte en avant ou en arrière sur la piste.",
+    es: 'Algunos skills o efectos alteran tu posición actual en la pista, sin importar tu velocidad. Puedes imaginar esto como si tu personaje se teletransportara hacia adelante o hacia atrás en la pista.',
   },
   pr_p2: {
     en: 'This is known as **increasing or reducing priority**.',
@@ -664,6 +772,7 @@ export const LABELS = {
     kr: '이것을 **우선도를 증가 또는 감소시킨다**고 합니다.',
     zh: '这称为**增加或减少行动值**。',
     fr: 'On appelle cela **augmenter ou réduire la priorité**.',
+    es: 'Esto se conoce como **aumentar o reducir la prioridad**.',
   },
   pr_p3: {
     en: "In other games, similar systems exist — such as Combat Readiness in Epic Seven or the ATB gauge in Summoner's War.",
@@ -671,6 +780,7 @@ export const LABELS = {
     kr: "다른 게임에도 비슷한 시스템이 있습니다 — Epic Seven의 전투 준비나 Summoner's War의 ATB 게이지 등.",
     zh: "其他游戏也有类似系统——Epic Seven的战斗准备或Summoner's War的ATB槽等。",
     fr: "Dans d'autres jeux, des systèmes similaires existent — comme le Combat Readiness dans Epic Seven ou la jauge ATB dans Summoner's War.",
+    es: "En otros juegos existen sistemas similares, como la Preparación de Combate en Epic Seven o la barra ATB en Summoner's War.",
   },
   pr_icon_note: {
     en: 'Priority has no official in-game icon. However, this website uses the following icon to represent it:',
@@ -678,6 +788,7 @@ export const LABELS = {
     kr: '우선도에는 공식 게임 내 아이콘이 없습니다. 하지만 이 웹사이트에서는 다음 아이콘을 사용합니다:',
     zh: '行动值没有官方游戏内图标。但本网站使用此图标：',
     fr: "La priorité n'a pas d'icône officielle in-game. Cependant, ce site utilise l'icône suivante pour la représenter :",
+    es: 'La prioridad no tiene un icono oficial en el juego. Sin embargo, este sitio web usa el siguiente icono para representarla:',
   },
   pr_beneficial: {
     en: '**Beneficial**: {B/BT_ACTION_GAUGE} — pushes the character forward.',
@@ -685,6 +796,7 @@ export const LABELS = {
     kr: '**유익**: {B/BT_ACTION_GAUGE} — 캐릭터를 앞으로 밀음.',
     zh: '**有益**：{B/BT_ACTION_GAUGE} — 将角色向前推。',
     fr: "**Bénéfique** : {B/BT_ACTION_GAUGE} — pousse le personnage vers l'avant.",
+    es: '**Beneficioso**: {B/BT_ACTION_GAUGE} — impulsa al personaje hacia adelante.',
   },
   pr_detrimental: {
     en: '**Detrimental**: {D/BT_ACTION_GAUGE} — pushes the character backward.',
@@ -692,6 +804,7 @@ export const LABELS = {
     kr: '**해로움**: {D/BT_ACTION_GAUGE} — 캐릭터를 뒤로 밀음.',
     zh: '**有害**：{D/BT_ACTION_GAUGE} — 将角色向后推。',
     fr: "**Néfaste** : {D/BT_ACTION_GAUGE} — pousse le personnage vers l'arrière.",
+    es: '**Perjudicial**: {D/BT_ACTION_GAUGE} — empuja al personaje hacia atrás.',
   },
   pr_notes_title: {
     en: 'Important Notes:',
@@ -699,6 +812,7 @@ export const LABELS = {
     kr: '중요 사항:',
     zh: '重要事项：',
     fr: 'Notes importantes :',
+    es: 'Notas importantes:',
   },
   pr_n1: {
     en: 'Priority can never exceed 100% or drop below 0%.',
@@ -706,6 +820,7 @@ export const LABELS = {
     kr: '우선도는 100%를 초과하거나 0% 아래로 떨어지지 않습니다.',
     zh: '行动值不会超过100%或低于0%。',
     fr: 'La priorité ne peut jamais dépasser 100% ni descendre en dessous de 0%.',
+    es: 'La prioridad nunca puede superar el 100% ni bajar del 0%.',
   },
   pr_n2: {
     en: 'When multiple characters reach 100% at different times, the one who gets there first will act first. This is the most common case.',
@@ -713,6 +828,7 @@ export const LABELS = {
     kr: '여러 캐릭터가 다른 시점에 100%에 도달하면, 먼저 도달한 자가 먼저 행동합니다. 이것이 가장 일반적인 경우입니다.',
     zh: '多个角色在不同时间到达100%时，先到的先行动。这是最常见的情况。',
     fr: "Lorsque plusieurs personnages atteignent 100% à des moments différents, celui qui arrive en premier agit en premier. C'est le cas le plus courant.",
+    es: 'Cuando varios personajes llegan al 100% en distintos momentos, el que llega primero actúa primero. Este es el caso más común.',
   },
   pr_n3: {
     en: 'However, if multiple characters reach 100% **within the same action** (e.g. due to a mass +Priority boost), then the acting order is based on a fixed positional priority: **Front-right → Top → Bottom → Back-left**',
@@ -720,6 +836,7 @@ export const LABELS = {
     kr: '하지만 여러 캐릭터가 **같은 액션 내에서** 100%에 도달하면(예: 대량 +우선도 부스트로), 행동 순서는 고정 위치 우선도를 기반으로 합니다: **오른쪽 앞 → 위 → 아래 → 왼쪽 뒤**',
     zh: '但多个角色在**同一行动内**到达100%时（如通过大量+行动值提升），行动顺序基于固定位置优先级：**右前 → 上 → 下 → 左后**',
     fr: "Cependant, si plusieurs personnages atteignent 100% **pendant la même action** (par ex. à cause d'un boost de +Priority de masse), alors l'ordre d'action est basé sur une priorité positionnelle fixe : **Front-droite → Haut → Bas → Arrière-gauche**",
+    es: 'Sin embargo, si varios personajes llegan al 100% **dentro de la misma acción** (por ejemplo, debido a un aumento masivo de +Prioridad), el orden de actuación se basa en una prioridad posicional fija: **Frente-derecha → Arriba → Abajo → Atrás-izquierda**',
   },
   pr_n4: {
     en: 'This positional rule is only used when multiple characters are pushed to 100% at the exact same time.',
@@ -727,6 +844,7 @@ export const LABELS = {
     kr: '이 위치 규칙은 여러 캐릭터가 정확히 같은 시간에 100%로 밀려날 때만 사용됩니다.',
     zh: '此位置规则仅在多个角色被同时推到100%时使用。',
     fr: "Cette règle positionnelle ne s'applique que lorsque plusieurs personnages sont poussés à 100% exactement au même instant.",
+    es: 'Esta regla posicional solo se usa cuando varios personajes llegan al 100% exactamente al mismo tiempo.',
   },
   pr_n5: {
     en: '⚠️ Additional Priority boosts applied **after** 100% are ignored and have no effect on the turn order.',
@@ -734,6 +852,7 @@ export const LABELS = {
     kr: '⚠️ 100% 이후에 적용된 추가 우선도 부스트는 무시되며 턴 순서에 영향을 주지 않습니다.',
     zh: '⚠️ 100%之后施加的额外行动值提升被忽略，不影响回合顺序。',
     fr: "⚠️ Les boosts de priorité supplémentaires appliqués **après** 100% sont ignorés et n'ont aucun effet sur l'ordre de tour.",
+    es: '⚠️ Los aumentos de Prioridad adicionales aplicados **después** del 100% se ignoran y no tienen efecto en el orden de turnos.',
   },
   pr_n6: {
     en: 'In such cases, the acting team always goes first, followed by the enemy team — each resolving ties based on the positional rule above.',
@@ -741,6 +860,7 @@ export const LABELS = {
     kr: '그런 경우, 행동 팀이 항상 먼저 행동하고, 그 다음 적 팀 — 각각 위의 위치 규칙에 따라 타이를 해결합니다.',
     zh: '在这种情况下，行动方总是先行动，然后是敌方——各自按上述位置规则解决平局。',
     fr: "Dans ce cas, l'équipe qui agit passe toujours en premier, suivie par l'équipe ennemie — chacune résolvant les égalités selon la règle positionnelle ci-dessus.",
+    es: 'En estos casos, el equipo que actúa siempre va primero, seguido por el equipo enemigo — cada uno resolviendo empates según la regla posicional anterior.',
   },
 
   // Turn Flow
@@ -750,6 +870,7 @@ export const LABELS = {
     kr: '캐릭터가 100% 우선도에 도달하면 턴은 여러 단계로 진행됩니다. 각 단계에서 특정 이벤트가 발생합니다:',
     zh: '角色到达100%行动值时，回合分为多个阶段进行。每个阶段发生特定事件：',
     fr: "Lorsqu'un personnage atteint 100% de priorité, son tour se déroule en plusieurs phases. Chaque phase déclenche des événements spécifiques :",
+    es: 'Cuando un personaje alcanza el 100% de prioridad, su turno avanza en varias fases. Cada fase activa eventos específicos:',
   },
   tf_start_title: {
     en: '1. Starting Phase',
@@ -757,6 +878,7 @@ export const LABELS = {
     kr: '1. 시작 단계',
     zh: '1. 开始阶段',
     fr: '1. Phase de Début',
+    es: '1. Fase Inicial',
   },
   tf_s1: {
     en: 'All skill cooldowns are reduced by 1.',
@@ -764,6 +886,7 @@ export const LABELS = {
     kr: '모든 스킬 쿨다운이 1 감소.',
     zh: '所有技能冷却减少1。',
     fr: 'Tous les cooldowns de skills sont réduits de 1.',
+    es: 'Todos los tiempos de reutilización de skills se reducen en 1.',
   },
   tf_s2: {
     en: 'Healing-over-time (HoT) effects are applied, such as {B/BT_CONTINU_HEAL}',
@@ -771,6 +894,7 @@ export const LABELS = {
     kr: '지속 회복(HoT) 효과 적용({B/BT_CONTINU_HEAL} 등)',
     zh: '持续治疗(HoT)效果生效（如{B/BT_CONTINU_HEAL}）',
     fr: 'Les effets de heal-over-time (HoT) sont appliqués, comme {B/BT_CONTINU_HEAL}',
+    es: 'Se aplican los efectos de curación a lo largo del tiempo (HoT), como {B/BT_CONTINU_HEAL}',
   },
   tf_s3: {
     en: 'Damage-over-time (DoT) effects are applied, such as {D/BT_DOT_BLEED}',
@@ -778,6 +902,7 @@ export const LABELS = {
     kr: '지속 데미지(DoT) 효과 적용({D/BT_DOT_BLEED} 등)',
     zh: '持续伤害(DoT)效果生效（如{D/BT_DOT_BLEED}）',
     fr: 'Les effets de damage-over-time (DoT) sont appliqués, comme {D/BT_DOT_BLEED}',
+    es: 'Se aplican los efectos de daño a lo largo del tiempo (DoT), como {D/BT_DOT_BLEED}',
   },
   tf_action_title: {
     en: '2. Action Phase',
@@ -785,6 +910,7 @@ export const LABELS = {
     kr: '2. 행동 단계',
     zh: '2. 行动阶段',
     fr: "2. Phase d'Action",
+    es: '2. Fase de Acción',
   },
   tf_action_note: {
     en: 'If the unit is under crowd control effects like {D/BT_STUN}, this phase is skipped and the turn proceeds directly to the Ending Phase.',
@@ -792,6 +918,7 @@ export const LABELS = {
     kr: '{D/BT_STUN} 같은 행동 불가 효과를 받고 있으면, 이 단계는 건너뛰고 턴은 바로 종료 단계로 진행합니다.',
     zh: '如果受到{D/BT_STUN}等行动阻止效果，此阶段跳过，回合直接进入结束阶段。',
     fr: "Si l'unité est sous effets de CC comme {D/BT_STUN}, cette phase est sautée et le tour passe directement à la Phase de Fin.",
+    es: 'Si la unidad está bajo efectos de control de masas como {D/BT_STUN}, esta fase se omite y el turno pasa directamente a la Fase Final.',
   },
   tf_choice_title: {
     en: '2-1: Choice Phase',
@@ -799,6 +926,7 @@ export const LABELS = {
     kr: '2-1: 선택 단계',
     zh: '2-1：选择阶段',
     fr: '2-1 : Phase de Choix',
+    es: '2-1: Fase de Elección',
   },
   tf_c1: {
     en: 'Forced actions are resolved first, such as {D/BT_AGGRO}, which immediately starts the Hit Phase.',
@@ -806,6 +934,7 @@ export const LABELS = {
     kr: '강제 행동이 먼저 해결됩니다({D/BT_AGGRO} 등), 즉시 히트 단계를 시작.',
     zh: '强制行动优先解决（如{D/BT_AGGRO}），立即开始命中阶段。',
     fr: 'Les actions forcées sont résolues en premier, comme {D/BT_AGGRO}, qui démarre immédiatement la Phase de Hit.',
+    es: 'Las acciones forzadas se resuelven primero, como {D/BT_AGGRO}, que inicia inmediatamente la Fase de Impacto.',
   },
   tf_c2: {
     en: 'Then, the player selects a skill and a target.',
@@ -813,6 +942,7 @@ export const LABELS = {
     kr: '그 후, 플레이어가 스킬과 타겟을 선택.',
     zh: '之后，玩家选择技能和目标。',
     fr: 'Ensuite, le joueur sélectionne un skill et une cible.',
+    es: 'Luego, el jugador selecciona un skill y un objetivo.',
   },
   tf_hit_title: {
     en: '2-2: Hit Phase',
@@ -820,6 +950,7 @@ export const LABELS = {
     kr: '2-2: 히트 단계',
     zh: '2-2：命中阶段',
     fr: '2-2 : Phase de Hit',
+    es: '2-2: Fase de Impacto',
   },
   tf_hit_intro: {
     en: 'The skill executes in three stages:',
@@ -827,6 +958,7 @@ export const LABELS = {
     kr: '스킬은 세 단계로 실행됩니다:',
     zh: '技能分三个阶段执行：',
     fr: "Le skill s'exécute en trois étapes :",
+    es: 'El skill se ejecuta en tres etapas:',
   },
   tf_pre: {
     en: "**Pre-Hit:** Happens before the skill hits. For example, {SK/Drakhan|S3} with EE+10 applies a {D/BT_DOT_CURSE} before it hits — important, as the skill's damage scales with the number of debuffs.",
@@ -834,6 +966,7 @@ export const LABELS = {
     kr: '**프리히트:** 스킬이 히트하기 전에 발생. 예를 들어, {SK/Drakhan|S3}의 EE+10은 히트 전에 {D/BT_DOT_CURSE}를 부여 — 스킬의 데미지가 디버프 수에 의존하므로 중요.',
     zh: '**命中前：** 技能命中前发生。例如，{SK/Drakhan|S3}的EE+10在命中前施加{D/BT_DOT_CURSE}——这很重要，因为技能伤害取决于减益数量。',
     fr: '**Pre-Hit :** Se produit avant que le skill ne touche. Par exemple, {SK/Drakhan|S3} avec EE+10 applique un {D/BT_DOT_CURSE} avant que le coup ne touche — important, car les dégâts du skill scalent avec le nombre de debuffs.',
+    es: '**Pre-Impacto:** Ocurre antes de que el skill impacte. Por ejemplo, {SK/Drakhan|S3} con EE+10 aplica un {D/BT_DOT_CURSE} antes de impactar — algo importante, ya que el daño del skill escala con la cantidad de debuffs.',
   },
   tf_hit: {
     en: '**Hit:** The skill connects — direct damage and healing are applied.',
@@ -841,6 +974,7 @@ export const LABELS = {
     kr: '**히트:** 스킬이 연결 — 직접 데미지와 힐이 적용.',
     zh: '**命中：** 技能连接——直接伤害和治疗生效。',
     fr: '**Hit :** Le skill touche — les dégâts directs et heals sont appliqués.',
+    es: '**Impacto:** El skill conecta — se aplican el daño directo y la curación.',
   },
   tf_post: {
     en: '**Post-Hit:** Triggers after the skill hits — for example, {SK/Demiurge Vlada|S3} inflicts {D/BT_SEALED_RECEIVE_HEAL} post-hit.',
@@ -848,6 +982,7 @@ export const LABELS = {
     kr: '**포스트히트:** 스킬이 히트한 후 발생 — 예를 들어, {SK/Demiurge Vlada|S3}는 포스트히트에 {D/BT_SEALED_RECEIVE_HEAL}를 부여.',
     zh: '**命中后：** 技能命中后发生——例如，{SK/Demiurge Vlada|S3}在命中后施加{D/BT_SEALED_RECEIVE_HEAL}。',
     fr: '**Post-Hit :** Se déclenche après que le skill ait touché — par exemple, {SK/Demiurge Vlada|S3} inflige {D/BT_SEALED_RECEIVE_HEAL} en post-hit.',
+    es: '**Post-Impacto:** Se activa después de que el skill impacta — por ejemplo, {SK/Demiurge Vlada|S3} inflige {D/BT_SEALED_RECEIVE_HEAL} tras el impacto.',
   },
   tf_extra: {
     en: 'Extra hits are triggered, such as {SK/Ryu Lion|S2}.',
@@ -855,6 +990,7 @@ export const LABELS = {
     kr: '추가 히트가 발동({SK/Ryu Lion|S2} 등).',
     zh: '追加攻击触发（如{SK/Ryu Lion|S2}）。',
     fr: 'Des hits supplémentaires se déclenchent, comme {SK/Ryu Lion|S2}.',
+    es: 'Se activan golpes adicionales, como {SK/Ryu Lion|S2}.',
   },
   tf_ally: {
     en: 'Ally reactions, like {SK/Caren|S2}, may also trigger. These follow-up effects are resolved in positional order: **Front-right → Top → Bottom → Back-left**.',
@@ -862,6 +998,7 @@ export const LABELS = {
     kr: '아군 반응({SK/Caren|S2} 등)도 발동 가능. 이러한 후속 효과는 위치 순서로 해결: **오른쪽 앞 → 위 → 아래 → 왼쪽 뒤**.',
     zh: '友方反应（如{SK/Caren|S2}）也可能触发。这些后续效果按位置顺序解决：**右前 → 上 → 下 → 左后**。',
     fr: "Les réactions d'alliés, comme {SK/Caren|S2}, peuvent aussi se déclencher. Ces effets de follow-up sont résolus dans l'ordre positionnel : **Front-droite → Haut → Bas → Arrière-gauche**.",
+    es: 'También pueden activarse reacciones de aliados, como {SK/Caren|S2}. Estos efectos de seguimiento se resuelven en orden posicional: **Frente-derecha → Arriba → Abajo → Atrás-izquierda**.',
   },
   tf_enemy: {
     en: 'Enemy reactions such as {B/BT_STAT|ST_COUNTER_RATE}, {B/BT_AGILE_RESPONSE} or {B/BT_REVENGE} may occur, and also follow this positional order.',
@@ -869,6 +1006,7 @@ export const LABELS = {
     kr: '적 반응({B/BT_STAT|ST_COUNTER_RATE}, {B/BT_AGILE_RESPONSE}, {B/BT_REVENGE} 등)도 발생 가능하며, 같은 위치 순서를 따릅니다.',
     zh: '敌方反应（{B/BT_STAT|ST_COUNTER_RATE}、{B/BT_AGILE_RESPONSE}、{B/BT_REVENGE}）也可能发生，遵循相同位置顺序。',
     fr: 'Les réactions ennemies comme {B/BT_STAT|ST_COUNTER_RATE}, {B/BT_AGILE_RESPONSE} ou {B/BT_REVENGE} peuvent se déclencher, et suivent aussi cet ordre positionnel.',
+    es: 'Pueden ocurrir reacciones enemigas como {B/BT_STAT|ST_COUNTER_RATE}, {B/BT_AGILE_RESPONSE} o {B/BT_REVENGE}, que también siguen este orden posicional.',
   },
   tf_end_title: {
     en: '3. Ending Phase',
@@ -876,6 +1014,7 @@ export const LABELS = {
     kr: '3. 종료 단계',
     zh: '3. 结束阶段',
     fr: '3. Phase de Fin',
+    es: '3. Fase Final',
   },
   tf_e1: {
     en: 'Revive effects are resolved, such as {B/BT_REVIVAL} or {SK/Demiurge Astei|S2}.',
@@ -883,6 +1022,7 @@ export const LABELS = {
     kr: '부활 효과 해결({B/BT_REVIVAL}나 {SK/Demiurge Astei|S2} 등).',
     zh: '复活效果解决（如{B/BT_REVIVAL}或{SK/Demiurge Astei|S2}）。',
     fr: 'Les effets de revive sont résolus, comme {B/BT_REVIVAL} ou {SK/Demiurge Astei|S2}.',
+    es: 'Se resuelven los efectos de revivir, como {B/BT_REVIVAL} o {SK/Demiurge Astei|S2}.',
   },
   tf_e2: {
     en: 'All remaining buffs and debuffs decrease their duration by 1 turn — except those already processed during the Starting Phase.',
@@ -890,6 +1030,7 @@ export const LABELS = {
     kr: '남은 모든 버프와 디버프의 지속 시간이 1턴 감소 — 시작 단계에서 이미 처리된 것 제외.',
     zh: '所有剩余增益和减益的持续时间减少1回合——开始阶段已处理的除外。',
     fr: 'Tous les buffs et debuffs restants voient leur durée réduite de 1 tour — sauf ceux déjà traités pendant la Phase de Début.',
+    es: 'Todos los bonos y penalizaciones restantes reducen su duración en 1 turno, excepto los que ya se procesaron durante la Fase Inicial.',
   },
   tf_e3: {
     en: 'Any remaining priority gains or losses are now applied.',
@@ -897,6 +1038,7 @@ export const LABELS = {
     kr: '남은 우선도 증감이 적용.',
     zh: '剩余行动值增减生效。',
     fr: 'Tous les gains ou pertes de priorité restants sont alors appliqués.',
+    es: 'Ahora se aplican las ganancias o pérdidas de prioridad restantes.',
   },
 
   // First Turn
@@ -906,14 +1048,23 @@ export const LABELS = {
     kr: '전투 시작 시, 가장 높은 {S/SPD}를 가진 유닛이 먼저 행동합니다. 다른 모든 유닛은 가장 빠른 유닛과 비교한 SPD에 비례한 우선도 값으로 시작합니다.',
     zh: '战斗开始时，{S/SPD}最高的单位先行动。所有其他单位的初始行动值与最快单位的SPD成比例。',
     fr: "En début de combat, l'unité avec la plus haute {S/SPD} agit en premier. Toutes les autres unités commencent avec une valeur de priorité proportionnelle à leur SPD comparée à l'unité la plus rapide.",
+    es: 'Al inicio del combate, la unidad con el {S/SPD} más alto actuará primero. El resto de unidades comienza con un valor de prioridad proporcional a su SPD en comparación con la unidad más rápida.',
   },
-  ft_ex_title: { en: 'Example:', jp: '例：', kr: '예시:', zh: '示例：', fr: 'Exemple :' },
+  ft_ex_title: {
+    en: 'Example:',
+    jp: '例：',
+    kr: '예시:',
+    zh: '示例：',
+    fr: 'Exemple :',
+    es: 'Ejemplo:',
+  },
   ft_ex1: {
     en: 'If the fastest unit has **300 SPD**, she starts at **100%** priority.',
     jp: '最速ユニットが**300 SPD**の場合、**100%**優先度から開始。',
     kr: '가장 빠른 유닛이 **300 SPD**면 **100%** 우선도로 시작.',
     zh: '最快单位**300 SPD**时以**100%**行动值开始。',
     fr: "Si l'unité la plus rapide a **300 SPD**, elle commence à **100%** priorité.",
+    es: 'Si la unidad más rápida tiene **300 SPD**, comienza con **100%** de prioridad.',
   },
   ft_ex2: {
     en: 'A unit with **200 SPD** starts at **66%** (200 × 100 / 300).',
@@ -921,6 +1072,7 @@ export const LABELS = {
     kr: '**200 SPD** 유닛은 **66%**(200 × 100 / 300)로 시작.',
     zh: '**200 SPD**单位以**66%**(200 × 100 / 300)开始。',
     fr: 'Une unité avec **200 SPD** démarre à **66%** (200 × 100 / 300).',
+    es: 'Una unidad con **200 SPD** comienza con **66%** (200 × 100 / 300).',
   },
   ft_ex3: {
     en: 'A unit with **150 SPD** starts at **50%** (150 × 100 / 300).',
@@ -928,6 +1080,7 @@ export const LABELS = {
     kr: '**150 SPD** 유닛은 **50%**(150 × 100 / 300)로 시작.',
     zh: '**150 SPD**单位以**50%**(150 × 100 / 300)开始。',
     fr: 'Une unité avec **150 SPD** démarre à **50%** (150 × 100 / 300).',
+    es: 'Una unidad con **150 SPD** comienza con **50%** (150 × 100 / 300).',
   },
   ft_rng: {
     en: "However, the game includes a hidden random variation of **0-5%** applied to each unit's starting priority. As a result, a slightly slower unit may still act first.",
@@ -935,6 +1088,7 @@ export const LABELS = {
     kr: '하지만 게임에는 각 유닛의 시작 우선도에 적용되는 **0-5%**의 숨겨진 랜덤 변동이 있습니다. 결과적으로, 약간 느린 유닛이 먼저 행동할 수도 있습니다.',
     zh: '但游戏有一个隐藏的**0-5%**随机波动应用于每个单位的初始行动值。因此，稍慢的单位可能先行动。',
     fr: 'Cependant, le jeu inclut une variation aléatoire cachée de **0-5%** appliquée à la priorité de départ de chaque unité. En conséquence, une unité légèrement plus lente peut quand même agir en premier.',
+    es: 'Sin embargo, el juego incluye una variación aleatoria oculta de **0-5%** aplicada a la prioridad inicial de cada unidad. Como resultado, una unidad ligeramente más lenta puede actuar primero.',
   },
   ft_rng_title: {
     en: 'Example with RNG:',
@@ -942,6 +1096,7 @@ export const LABELS = {
     kr: 'RNG 포함 예시:',
     zh: '带RNG的示例：',
     fr: 'Exemple avec RNG :',
+    es: 'Ejemplo con RNG:',
   },
   ft_rng_a: {
     en: 'Unit A: 300 SPD → 100% +0% = 100%',
@@ -949,6 +1104,7 @@ export const LABELS = {
     kr: '유닛 A: 300 SPD → 100% +0% = 100%',
     zh: '单位A：300 SPD → 100% +0% = 100%',
     fr: 'Unité A : 300 SPD → 100% +0% = 100%',
+    es: 'Unidad A: 300 SPD → 100% +0% = 100%',
   },
   ft_rng_b: {
     en: 'Unit B: 290 SPD → 96% + 5% = 101%',
@@ -956,6 +1112,7 @@ export const LABELS = {
     kr: '유닛 B: 290 SPD → 96% + 5% = 101%',
     zh: '单位B：290 SPD → 96% + 5% = 101%',
     fr: 'Unité B : 290 SPD → 96% + 5% = 101%',
+    es: 'Unidad B: 290 SPD → 96% + 5% = 101%',
   },
   ft_rng_result: {
     en: '→ **Unit B will act first.**',
@@ -963,6 +1120,7 @@ export const LABELS = {
     kr: '→ **유닛 B가 먼저 행동합니다.**',
     zh: '→ **单位B先行动。**',
     fr: "→ **L'Unité B agit en premier.**",
+    es: '→ **La Unidad B actuará primero.**',
   },
   ft_pvp: {
     en: 'This mechanic is especially important in **PvP**, where the first turn can greatly influence the outcome of a match.',
@@ -970,6 +1128,7 @@ export const LABELS = {
     kr: '이 메카닉은 **PvP**에서 특히 중요하며, 1턴이 경기 결과에 큰 영향을 미칠 수 있습니다.',
     zh: '此机制在**PvP**中特别重要，第1回合可能决定比赛结果。',
     fr: "Cette mécanique est particulièrement importante en **PvP**, où le premier tour peut grandement influencer le résultat d'un match.",
+    es: 'Esta mecánica es especialmente importante en **PvP**, donde el primer turno puede influir mucho en el resultado de una partida.',
   },
   ft_spd_title: {
     en: 'Speed Buffs at Battle Start',
@@ -977,6 +1136,7 @@ export const LABELS = {
     kr: '전투 시작 시 속도 버프',
     zh: '战斗开始时的速度增益',
     fr: 'Buffs de SPD en début de combat',
+    es: 'Bonos de Velocidad al Inicio del Combate',
   },
   ft_spd_intro: {
     en: 'Some units may start the battle with a {B/BT_STAT|ST_SPEED}, significantly altering turn order.',
@@ -984,6 +1144,7 @@ export const LABELS = {
     kr: '일부 유닛은 {B/BT_STAT|ST_SPEED}를 가지고 전투를 시작하여 턴 순서를 크게 바꿀 수 있습니다.',
     zh: '部分单位带{B/BT_STAT|ST_SPEED}开始战斗，可以显著改变回合顺序。',
     fr: "Certaines unités peuvent commencer le combat avec un {B/BT_STAT|ST_SPEED}, modifiant significativement l'ordre de tour.",
+    es: 'Algunas unidades pueden comenzar el combate con un {B/BT_STAT|ST_SPEED}, alterando significativamente el orden de turnos.',
   },
   ft_spd_ex1: {
     en: '{P/Tamara}: 300 SPD → 100% priority',
@@ -991,6 +1152,7 @@ export const LABELS = {
     kr: '{P/Tamara}: 300 SPD → 100% 우선도',
     zh: '{P/Tamara}：300 SPD → 100%行动值',
     fr: '{P/Tamara} : 300 SPD → 100% priorité',
+    es: '{P/Tamara}: 300 SPD → 100% de prioridad',
   },
   ft_spd_ex2: {
     en: '{P/Dahlia}: 280 SPD → 93% (280 × 100 / 300)',
@@ -998,6 +1160,7 @@ export const LABELS = {
     kr: '{P/Dahlia}: 280 SPD → 93% (280 × 100 / 300)',
     zh: '{P/Dahlia}：280 SPD → 93% (280 × 100 / 300)',
     fr: '{P/Dahlia} : 280 SPD → 93% (280 × 100 / 300)',
+    es: '{P/Dahlia}: 280 SPD → 93% (280 × 100 / 300)',
   },
   ft_spd_ex3: {
     en: 'Normally, {P/Tamara} would go first.',
@@ -1005,6 +1168,7 @@ export const LABELS = {
     kr: '일반적으로 {P/Tamara}가 먼저 행동합니다.',
     zh: '通常{P/Tamara}先行动。',
     fr: 'Normalement, {P/Tamara} agirait en premier.',
+    es: 'Normalmente, {P/Tamara} iría primero.',
   },
   ft_spd_ex4: {
     en: 'But if {P/Dahlia} starts with a {B/BT_STAT|ST_SPEED} (e.g., from her EE), her effective SPD becomes:',
@@ -1012,6 +1176,7 @@ export const LABELS = {
     kr: '하지만 {P/Dahlia}가 {B/BT_STAT|ST_SPEED}로 시작하면(예: EE에서), 유효 SPD는:',
     zh: '但如果{P/Dahlia}带{B/BT_STAT|ST_SPEED}开始（如从EE），有效SPD为：',
     fr: 'Mais si {P/Dahlia} commence avec un {B/BT_STAT|ST_SPEED} (par ex. depuis son EE), sa SPD effective devient :',
+    es: 'Pero si {P/Dahlia} comienza con un {B/BT_STAT|ST_SPEED} (por ejemplo, de su EE), su SPD efectivo se convierte en:',
   },
   ft_spd_ex5: {
     en: '280 × 1.3 = 364 → 100% priority',
@@ -1019,6 +1184,7 @@ export const LABELS = {
     kr: '280 × 1.3 = 364 → 100% 우선도',
     zh: '280 × 1.3 = 364 → 100%行动值',
     fr: '280 × 1.3 = 364 → 100% priorité',
+    es: '280 × 1.3 = 364 → 100% de prioridad',
   },
   ft_spd_ex6: {
     en: '{P/Tamara}: 300 SPD → **82%** (300 × 100 / 364)',
@@ -1026,6 +1192,7 @@ export const LABELS = {
     kr: '{P/Tamara}: 300 SPD → **82%** (300 × 100 / 364)',
     zh: '{P/Tamara}：300 SPD → **82%** (300 × 100 / 364)',
     fr: '{P/Tamara} : 300 SPD → **82%** (300 × 100 / 364)',
+    es: '{P/Tamara}: 300 SPD → **82%** (300 × 100 / 364)',
   },
   ft_spd_ex7: {
     en: '→ **{P/Dahlia} will act first.**',
@@ -1033,6 +1200,7 @@ export const LABELS = {
     kr: '→ **{P/Dahlia}가 먼저 행동합니다.**',
     zh: '→ **{P/Dahlia}先行动。**',
     fr: '→ **{P/Dahlia} agira en premier.**',
+    es: '→ **{P/Dahlia} actuará primero.**',
   },
   ft_spd_transcend: {
     en: 'Some transcendence perks also grant {S/SPD} bonuses to the entire team, such as with {P/Mene} or {P/Demiurge Delta}.',
@@ -1040,6 +1208,7 @@ export const LABELS = {
     kr: '일부 초월 특전은 팀 전체에 {S/SPD} 보너스를 부여합니다({P/Mene}나 {P/Demiurge Delta} 등).',
     zh: '部分超越特权为全队提供{S/SPD}加成（如{P/Mene}或{P/Demiurge Delta}）。',
     fr: "Certains perks de transcendance accordent aussi des {S/SPD} bonus à toute l'équipe, comme avec {P/Mene} ou {P/Demiurge Delta}.",
+    es: 'Algunas mejoras de trascendencia también otorgan bonos de {S/SPD} a todo el equipo, como con {P/Mene} o {P/Demiurge Delta}.',
   },
 
   // Special Mechanics
@@ -1049,6 +1218,7 @@ export const LABELS = {
     kr: '추가 턴',
     zh: '额外回合',
     fr: 'Tours supplémentaires',
+    es: 'Turnos Extra',
   },
   sm_extra_p: {
     en: 'If a skill applies {B/BT_ADDITIVE_TURN}, the character will immediately take another full turn (including all phases) before resetting to 0% priority.',
@@ -1056,6 +1226,7 @@ export const LABELS = {
     kr: '스킬이 {B/BT_ADDITIVE_TURN}를 적용하면, 캐릭터는 0% 우선도로 리셋되기 전에 즉시 완전한 턴(모든 단계 포함)을 가집니다.',
     zh: '当技能施加{B/BT_ADDITIVE_TURN}时，角色在行动值重置为0%前立即获得完整回合（包括所有阶段）。',
     fr: 'Si un skill applique {B/BT_ADDITIVE_TURN}, le personnage prend immédiatement un autre tour complet (toutes phases incluses) avant que sa priorité ne revienne à 0%.',
+    es: 'Si un skill aplica {B/BT_ADDITIVE_TURN}, el personaje tomará inmediatamente otro turno completo (incluyendo todas las fases) antes de reiniciarse a 0% de prioridad.',
   },
   sm_vlada_title: {
     en: "Demiurge Vlada's Passive",
@@ -1063,6 +1234,7 @@ export const LABELS = {
     kr: '데미우르고스 블라다의 패시브',
     zh: '造物主弗拉达的被动',
     fr: 'Passive de Demiurge Vlada',
+    es: 'Pasiva de Demiurgo Vlada',
   },
   sm_vlada_p: {
     en: 'If a 5★ {P/Demiurge Vlada} is in battle, all **priority gain effects** on the enemy team are reduced by **50%**.',
@@ -1070,6 +1242,7 @@ export const LABELS = {
     kr: '5★ {P/Demiurge Vlada}가 전투에 있으면, 적 팀의 모든 **우선도 증가 효과**가 **50%** 감소합니다.',
     zh: '当5★{P/Demiurge Vlada}在战斗中时，敌方队伍所有**行动值增加效果**减少**50%**。',
     fr: "Si un 5★ {P/Demiurge Vlada} est en combat, tous les **effets de gain de priorité** sur l'équipe ennemie sont réduits de **50%**.",
+    es: 'Si un {P/Demiurge Vlada} 5★ está en combate, todos los **efectos de ganancia de prioridad** en el equipo enemigo se reducen en un **50%**.',
   },
   sm_arena_title: {
     en: 'Arena Field Skills',
@@ -1077,6 +1250,7 @@ export const LABELS = {
     kr: '아레나 필드 스킬',
     zh: '竞技场场地技能',
     fr: 'Arena Field Skills',
+    es: 'Field Skills de Arena',
   },
   sm_arena_intro: {
     en: 'In arena, field skills are applied. These change every season — here is an example:',
@@ -1084,6 +1258,7 @@ export const LABELS = {
     kr: '아레나에서는 필드 스킬이 적용됩니다. 이것들은 시즌마다 바뀝니다 — 다음은 예시입니다:',
     zh: '竞技场有场地技能生效。这些每赛季更换——以下为示例：',
     fr: 'En arène, des field skills sont appliquées. Elles changent à chaque saison — voici un exemple :',
+    es: 'En arena, se aplican field skills. Estas cambian cada temporada — aquí hay un ejemplo:',
   },
   sm_arena_1_name: {
     en: 'Pulse of the mighty',
@@ -1091,6 +1266,7 @@ export const LABELS = {
     kr: '강자의 고동',
     zh: '强者的心跳',
     fr: 'Pulse of the mighty',
+    es: 'Pulso del poderoso',
   },
   sm_arena_1_body: {
     en: 'increase all heroes {S/RES} by 50 after Gold III',
@@ -1098,6 +1274,7 @@ export const LABELS = {
     kr: '골드 III 이후, 모든 영웅의 {S/RES}를 50 증가',
     zh: '黄金III以上，所有英雄{S/RES}增加50',
     fr: 'augmente la {S/RES} de tous les héros de 50 après Gold III',
+    es: 'aumenta {S/RES} de todos los héroes en 50 después de Oro III',
   },
   sm_arena_2_name: {
     en: "Duelist's Pledge",
@@ -1105,6 +1282,7 @@ export const LABELS = {
     kr: '결투자의 맹세',
     zh: '决斗者的誓言',
     fr: "Duelist's Pledge",
+    es: 'Juramento del duelista',
   },
   sm_arena_2_body: {
     en: 'decrease priority by 50% after resurrection. Every 10 turn, deals 10% of max HP to all heroes as true damage (bypassing {B/BT_INVINCIBLE}, {B/BT_UNDEAD})',
@@ -1112,6 +1290,7 @@ export const LABELS = {
     kr: '부활 후 우선도 50% 감소. 10턴마다 모든 영웅에게 최대 HP의 10%를 고정 데미지로 줌 ({B/BT_INVINCIBLE}, {B/BT_UNDEAD} 관통)',
     zh: '复活后行动值减少50%。每10回合对所有英雄造成最大HP 10%的固定伤害（无视{B/BT_INVINCIBLE}、{B/BT_UNDEAD}）',
     fr: 'réduit la priorité de 50% après une résurrection. Tous les 10 tours, inflige 10% des HP max à tous les héros en true damage (contourne {B/BT_INVINCIBLE}, {B/BT_UNDEAD})',
+    es: 'reduce la prioridad en 50% después de la resurrección. Cada 10 turnos, inflige 10% de la Vida máxima a todos los héroes como daño verdadero (ignorando {B/BT_INVINCIBLE}, {B/BT_UNDEAD})',
   },
 
   // ════════════════ Onglet : FAQ ════════════════
@@ -1121,6 +1300,7 @@ export const LABELS = {
     kr: '치명타 & DoT',
     zh: '暴击 & DoT',
     fr: 'Coups Critiques & DoTs',
+    es: 'Golpes críticos y DoTs',
   },
   faq_sec_dmgMods: {
     en: 'Damage Modifiers',
@@ -1128,6 +1308,7 @@ export const LABELS = {
     kr: '데미지 보정',
     zh: '伤害修正',
     fr: 'Modificateurs de Dégâts',
+    es: 'Modificadores de daño',
   },
   faq_sec_defPen: {
     en: 'Defense & Penetration',
@@ -1135,6 +1316,7 @@ export const LABELS = {
     kr: '방어 & 관통',
     zh: '防御 & 穿透',
     fr: 'DEF & PEN',
+    es: 'Defensa y Penetración',
   },
   faq_sec_statScaling: {
     en: 'Stat Scaling',
@@ -1142,6 +1324,7 @@ export const LABELS = {
     kr: '스탯 의존',
     zh: '属性依赖',
     fr: 'Scaling des Stats',
+    es: 'Escalado de estadísticas',
   },
   faq_sec_speedPriority: {
     en: 'Speed & Priority',
@@ -1149,6 +1332,7 @@ export const LABELS = {
     kr: '속도 & 우선도',
     zh: '速度 & 行动值',
     fr: 'SPD & Priorité',
+    es: 'Velocidad y Prioridad',
   },
   faq_sec_formulas: {
     en: 'Formulas & Calculations',
@@ -1156,6 +1340,7 @@ export const LABELS = {
     kr: '공식 & 계산',
     zh: '公式 & 计算',
     fr: 'Formules & Calculs',
+    es: 'Fórmulas y cálculos',
   },
 
   // Titres de questions
@@ -1165,6 +1350,7 @@ export const LABELS = {
     kr: '치명타 확률이 100%를 초과할 수 있나요?',
     zh: '暴击率可以超过100%吗？',
     fr: 'Le CHC peut-il dépasser 100% ?',
+    es: '¿Puede la Tasa CRIT superar el 100%?',
   },
   q_critOnHeal: {
     en: 'Can healing or shielding crit?',
@@ -1172,6 +1358,7 @@ export const LABELS = {
     kr: '힐이나 보호막이 치명타가 되나요?',
     zh: '治疗或护盾可以暴击吗？',
     fr: 'Les Heals ou shields peuvent-ils crit ?',
+    es: '¿Pueden la curación o los escudos ser críticos?',
   },
   q_dotCrit: {
     en: 'Do DoTs scale with Crit or Crit Damage?',
@@ -1179,6 +1366,7 @@ export const LABELS = {
     kr: 'DoT는 치명타 확률이나 치명타 데미지의 영향을 받나요?',
     zh: 'DoT受暴击率或暴击伤害影响吗？',
     fr: 'Les DoTs scalent-ils avec le CHC ou le CHD ?',
+    es: '¿Los DoTs escalan con Tasa CRIT o Daño CRIT?',
   },
   q_dotScaling: {
     en: 'Do DoTs scale with Attack?',
@@ -1186,6 +1374,7 @@ export const LABELS = {
     kr: 'DoT는 공격력의 영향을 받나요?',
     zh: 'DoT受攻击力影响吗？',
     fr: "Les DoTs scalent-ils avec l'ATK ?",
+    es: '¿Los DoTs escalan con Ataque?',
   },
   q_penVsDots: {
     en: 'Does Penetration affect DoT or true damage?',
@@ -1193,6 +1382,7 @@ export const LABELS = {
     kr: '관통이 DoT나 고정 데미지에 영향을 주나요?',
     zh: '穿透影响DoT或固定伤害吗？',
     fr: 'La PEN affecte-t-elle les DoT ou les true damage ?',
+    es: '¿La Penetración afecta el daño de DoT o el daño verdadero?',
   },
   q_dmgUpVsChd: {
     en: "What's the difference between DMG UP and Crit Damage?",
@@ -1200,6 +1390,7 @@ export const LABELS = {
     kr: 'DMG UP과 치명타 데미지의 차이는?',
     zh: 'DMG UP和暴击伤害有什么区别？',
     fr: 'Quelle est la différence entre DMG UP et CHD ?',
+    es: '¿Cuál es la diferencia entre Daño + y Daño CRIT?',
   },
   q_dmgRedVsCdmgRed: {
     en: "What's the difference between DMG RED and CDMG RED?",
@@ -1207,6 +1398,7 @@ export const LABELS = {
     kr: 'DMG RED와 CDMG RED의 차이는?',
     zh: 'DMG RED和CDMG RED有什么区别？',
     fr: 'Quelle est la différence entre DMG RED et CDMG RED ?',
+    es: '¿Cuál es la diferencia entre Daño recibido - y CDMG RED?',
   },
   q_dmgAdditive: {
     en: 'How does the additive calculation work?',
@@ -1214,6 +1406,7 @@ export const LABELS = {
     kr: '합산 계산은 어떻게 작동하나요?',
     zh: '加算计算如何运作？',
     fr: 'Comment fonctionne le calcul additif ?',
+    es: '¿Cómo funciona el cálculo aditivo?',
   },
   q_dmgRedCap: {
     en: 'Is there a cap on Damage Reduction?',
@@ -1221,6 +1414,7 @@ export const LABELS = {
     kr: '데미지 감소에 상한이 있나요?',
     zh: '伤害减免有上限吗？',
     fr: 'Y a-t-il un cap sur la DMG Reduction ?',
+    es: '¿Existe un límite para el Daño recibido -?',
   },
   q_debuffOnMiss: {
     en: 'What happens when an attack misses?',
@@ -1228,6 +1422,7 @@ export const LABELS = {
     kr: '공격이 미스하면 어떻게 되나요?',
     zh: '攻击未命中会怎样？',
     fr: 'Que se passe-t-il quand une attaque rate ?',
+    es: '¿Qué pasa cuando un ataque falla?',
   },
   q_effResFormula: {
     en: 'Is there a minimum debuff success chance?',
@@ -1235,6 +1430,7 @@ export const LABELS = {
     kr: '디버프 성공 확률의 최솟값이 있나요?',
     zh: '减益成功率有最低值吗？',
     fr: "Y a-t-il une chance minimale d'appliquer un Debuff ?",
+    es: '¿Existe una probabilidad mínima de éxito de debuff?',
   },
   q_penVsHighDef: {
     en: 'Is Penetration more effective against high DEF?',
@@ -1242,6 +1438,7 @@ export const LABELS = {
     kr: '관통은 높은 DEF에 더 효과적인가요?',
     zh: '穿透对高DEF更有效吗？',
     fr: 'La PEN est-elle plus efficace contre une DEF élevée ?',
+    es: '¿Es la Penetración más efectiva contra Defensa alta?',
   },
   q_fixedDamageMitigation: {
     en: 'Can Defense reduce fixed damage?',
@@ -1249,6 +1446,7 @@ export const LABELS = {
     kr: '방어력이 고정 데미지를 감소시킬 수 있나요?',
     zh: '防御力能减免固定伤害吗？',
     fr: 'La DEF peut-elle réduire les fixed damage ?',
+    es: '¿Puede la Defensa reducir el daño fijo?',
   },
   q_dualScaling: {
     en: 'Can skills scale with more than one stat?',
@@ -1256,6 +1454,7 @@ export const LABELS = {
     kr: '스킬이 여러 스탯에 의존할 수 있나요?',
     zh: '技能可以依赖多个属性吗？',
     fr: "Un skill peut-il scaler avec plus d'une stat ?",
+    es: '¿Los skills pueden escalar con más de una estadística?',
   },
   q_statScaling: {
     en: 'How do I know which stats are used for a skill?',
@@ -1263,6 +1462,7 @@ export const LABELS = {
     kr: '스킬이 어떤 스탯을 사용하는지 어떻게 알 수 있나요?',
     zh: '如何知道技能使用什么属性？',
     fr: 'Comment savoir quelles stats sont utilisées par un skill ?',
+    es: '¿Cómo sé qué estadísticas se usan para un skill?',
   },
   q_speedFormula: {
     en: 'How is speed calculated?',
@@ -1270,6 +1470,7 @@ export const LABELS = {
     kr: '속도는 어떻게 계산되나요?',
     zh: '速度如何计算？',
     fr: 'Comment la SPD est-elle calculée ?',
+    es: '¿Cómo se calcula la velocidad?',
   },
   q_priorityFormula: {
     en: 'How is turn 1 priority calculated?',
@@ -1277,6 +1478,7 @@ export const LABELS = {
     kr: '1턴 우선도는 어떻게 계산되나요?',
     zh: '第1回合行动值如何计算？',
     fr: 'Comment la priorité du tour 1 est-elle calculée ?',
+    es: '¿Cómo se calcula la prioridad del turno 1?',
   },
   q_maxSpeed: {
     en: 'Max theoretical speed',
@@ -1284,6 +1486,7 @@ export const LABELS = {
     kr: '이론상 최대 속도',
     zh: '理论最大速度',
     fr: 'SPD théorique maximale',
+    es: 'Velocidad teórica máxima',
   },
   q_formula: {
     en: 'How calculations are done',
@@ -1291,6 +1494,7 @@ export const LABELS = {
     kr: '계산 방식',
     zh: '计算方法',
     fr: 'Comment les calculs sont effectués',
+    es: 'Cómo se hacen los cálculos',
   },
   q_damageFormula: {
     en: 'What is the full damage formula in Outerplane?',
@@ -1298,6 +1502,7 @@ export const LABELS = {
     kr: 'Outerplane의 전체 데미지 공식은?',
     zh: 'Outerplane的完整伤害公式是什么？',
     fr: 'Quelle est la formule complète de dégâts dans Outerplane ?',
+    es: '¿Cuál es la fórmula de daño completa en Outerplane?',
   },
 
   // Réponses simples (texte)
@@ -1307,6 +1512,7 @@ export const LABELS = {
     kr: '아니요. 치명타 확률은 100%가 상한입니다. 초과분은 효과가 없습니다.',
     zh: '不可以。暴击率上限为100%。超出部分无效。',
     fr: "Non. Le CHC est cap à 100%. Tout excès n'a aucun effet.",
+    es: 'No. La Tasa CRIT tiene un tope de 100%. Cualquier excedente no tiene efecto.',
   },
   a_critOnHeal: {
     en: 'No. Healing, shielding, and utility skills cannot crit unless explicitly stated. Crit mechanics only apply to damage-dealing skills.',
@@ -1314,6 +1520,7 @@ export const LABELS = {
     kr: '아니요. 힐, 보호막, 유틸리티 스킬은 명시되지 않는 한 치명타가 되지 않습니다. 치명타 메카닉은 데미지 스킬에만 적용됩니다.',
     zh: '不可以。治疗、护盾和辅助技能除非特别说明，否则不会暴击。暴击机制仅适用于伤害技能。',
     fr: "Non. Les heals, shields et utility skills ne peuvent pas crit sauf mention explicite. Les mécaniques de crit ne s'appliquent qu'aux skills de dégâts.",
+    es: 'No. Los skills de curación, escudo y utilidad no pueden ser críticos a menos que se indique explícitamente. Las mecánicas de crítico solo se aplican a los skills que causan daño.',
   },
   a_dotCrit: {
     en: 'No. Damage over Time effects (burn, bleed, poison, etc.) do not scale with Crit Rate or Crit Damage. They cannot crit.',
@@ -1321,6 +1528,7 @@ export const LABELS = {
     kr: '아니요. 지속 데미지 효과(화상, 출혈, 독 등)는 치명타 확률이나 치명타 데미지의 영향을 받지 않습니다. 치명타가 되지 않습니다.',
     zh: '不受。持续伤害效果（如燃烧、流血、中毒等）不受暴击率或暴击伤害影响。它们不会暴击。',
     fr: 'Non. Les effets DoT (burn, bleed, poison, etc.) ne scalent pas avec le CHC ou le CHD. Ils ne peuvent pas crit.',
+    es: 'No. Los efectos de Daño a lo largo del tiempo (quemadura, sangrado, veneno, etc.) no escalan con la Tasa CRIT ni el Daño CRIT. No pueden ser críticos.',
   },
   a_dotScaling: {
     en: "Yes. Some DoTs scale with the caster's ATK stat, though the scaling ratio is usually lower than for direct damage.",
@@ -1328,6 +1536,7 @@ export const LABELS = {
     kr: '네. 일부 DoT는 시전자의 공격력에 의존하지만, 직접 데미지보다 배율이 낮습니다.',
     zh: '是的。部分DoT依赖施放者的攻击力，但系数比直接伤害低。',
     fr: "Oui. Certains DoTs scalent avec l'ATK du caster, bien que le ratio soit généralement plus faible que pour les dégâts directs.",
+    es: 'Sí. Algunos DoT escalan con el Ataque del lanzador, aunque la proporción de escalado suele ser menor que en el daño directo.',
   },
   a_dmgUpVsChd: {
     en: "DMG UP applies on every attack regardless of whether it crits. Crit Damage only applies when a critical hit occurs. On a crit, both are added together (along with any skill/equipment DMG UP bonuses) before being compared to the enemy's defensive pool (DMG RED + CDMG RED + their skill/equipment reductions). All sources are additive within their respective group.",
@@ -1335,6 +1544,7 @@ export const LABELS = {
     kr: 'DMG UP은 치명 여부와 관계없이 모든 공격에 적용됩니다. 치명타 데미지는 치명 발생 시에만 적용. 치명 시 두 값이 합산된 후 적의 방어 보정치(DMG RED + CDMG RED)와 비교됩니다.',
     zh: 'DMG UP无论是否暴击都适用于所有攻击。暴击伤害仅在暴击时生效。暴击时，两个值相加后与敌方防御修正（DMG RED + CDMG RED）比较。',
     fr: "Le DMG UP s'applique à chaque attaque qu'elle crit ou non. Le CHD ne s'applique qu'en cas de crit. Lors d'un crit, les deux sont additionnés (avec les bonus de DMG UP de skill/equipment) avant d'être comparés au pool défensif de l'ennemi (DMG RED + CDMG RED + ses réductions de skill/equipment). Toutes les sources sont additives au sein de leur groupe respectif.",
+    es: 'Daño + se aplica en cada ataque sin importar si es crítico o no. El Daño CRIT solo se aplica cuando ocurre un golpe crítico. En un crítico, ambos se suman (junto con cualquier bono de Daño + de skill/equipo) antes de compararse con el conjunto defensivo del enemigo (Daño recibido - + reducción de Daño CRIT + sus reducciones de skill/equipo). Todas las fuentes son aditivas dentro de su respectivo grupo.',
   },
   a_dmgRedVsCdmgRed: {
     en: "DMG RED opposes the attacker's DMG UP on every hit — it is subtracted from their Damage Increase total, not applied as a flat percentage. CDMG RED only activates on critical hits. When critically hit, both DMG RED and CDMG RED are summed to counter the attacker's CHD + DMG UP.",
@@ -1342,6 +1552,7 @@ export const LABELS = {
     kr: 'DMG RED는 모든 받는 데미지를 감소시키고, CDMG RED는 치명타 데미지만 감소시킵니다. 치명 피격 시 두 값이 합산되어 적의 CHD + DMG UP에 대항합니다.',
     zh: 'DMG RED减少所有受到的伤害，CDMG RED仅减少暴击伤害。被暴击时，两个值相加以对抗敌方的CHD + DMG UP。',
     fr: "Le DMG RED s'oppose au DMG UP de l'attaquant à chaque coup : il est soustrait de son total d'Increase de dégâts, pas appliqué comme un pourcentage plat. Le CDMG RED ne s'active que sur les coups critiques. Lors d'un crit reçu, le DMG RED et le CDMG RED sont additionnés pour contrer le CHD + DMG UP de l'attaquant.",
+    es: 'Daño recibido - se opone al Daño + del atacante en cada golpe: se resta del total de Daño + del atacante, no se aplica como un porcentaje fijo. La reducción de Daño CRIT solo se activa en golpes críticos. Al recibir un golpe crítico, tanto Daño recibido - como la reducción de Daño CRIT se suman para contrarrestar el Daño CRIT + Daño + del atacante.',
   },
   a_dmgAdditive: {
     en: 'All increase-type effects (CHD on crit, DMG UP, skill/equip DMG UP) are summed into one group. All reduction-type effects (CDMG RED on crit, DMG RED, skill/equip DMG RED) are summed into another. The final modifier is: (Total Increase) − (Total Reduction). This result is then applied before Defense and Final Damage modifiers.',
@@ -1349,6 +1560,7 @@ export const LABELS = {
     kr: '공격 측: DMG UP이 치명타 데미지에 합산(치명 시). 방어 측: DMG RED가 CDMG RED에 합산(치명 시). 공격 측 합계가 방어 측 합계와 비교되어 최종 데미지 보정이 결정됩니다.',
     zh: '攻击方：DMG UP与暴击伤害相加（暴击时）。防御方：DMG RED与CDMG RED相加（暴击时）。攻击方总计与防御方总计比较，决定最终伤害修正。',
     fr: "Tous les effets d'increase (CHD en crit, DMG UP, DMG UP de skill/equip) sont sommés dans un groupe. Tous les effets de réduction (CDMG RED en crit, DMG RED, DMG RED de skill/equip) sont sommés dans un autre. Le modificateur final est : (Total Increase) − (Total Reduction). Ce résultat est appliqué avant la DEF et les modificateurs de Final Damage.",
+    es: 'Todos los efectos de tipo aumento (Daño CRIT en crítico, Daño +, Daño + de skill/equipo) se suman en un grupo. Todos los efectos de tipo reducción (reducción de Daño CRIT en crítico, Daño recibido -, Daño recibido - de skill/equipo) se suman en otro grupo. El modificador final es: (Aumento Total) − (Reducción Total). Este resultado se aplica antes de los modificadores de Defensa y Daño Final.',
   },
   a_dmgRedCap: {
     en: 'Yes. The damage modifier system has a built-in rate floor of 0.30, capping reduction from DMG RED + CDMG RED at 70% via this layer. Defense and Final Damage Reduction (boss-specific final-damage-reduction passives) are calculated separately and are not affected by this cap.',
@@ -1356,6 +1568,7 @@ export const LABELS = {
     kr: '네. 데미지 보정 시스템에는 0.30의 레이트 하한이 내장되어 있어, 이 층을 통한 DMG RED + CDMG RED 감소는 최대 70%로 제한됩니다. 방어력과 최종 데미지 감소(보스 전용 최종 데미지 감소 패시브)는 별도로 계산되며 이 상한의 영향을 받지 않습니다.',
     zh: '是的。伤害修正系统内置了0.30的速率下限，使得通过此层的DMG RED + CDMG RED最多只能减免70%伤害。防御力和最终伤害减免（首领专属的最终伤害减免被动）是独立计算的，不受此上限影响。',
     fr: 'Oui. Le système de modificateur de dégâts intègre un floor de 0.30, ce qui cap la réduction via DMG RED + CDMG RED à 70% sur cette couche. La DEF et la Final Damage Reduction (passives boss-specific) sont calculées séparément et ne sont pas affectées par ce cap.',
+    es: 'Sí. El sistema de modificador de daño tiene un límite mínimo incorporado de 0.30, limitando la reducción de Daño recibido - + reducción de Daño CRIT al 70% mediante esta capa. La Defensa y la Reducción de Daño Final (pasivas de reducción de daño final específicas de jefes) se calculan por separado y no se ven afectadas por este límite.',
   },
   a_effResFormula: {
     en: "No. The success chance depends on the difference between the attacker's Effectiveness (EFF) and the target's Resilience (RES). If EFF ≥ RES, the success chance is 100%. Otherwise, the chance decreases with a lower bound that depends on how much RES exceeds EFF. For example, a RES − EFF difference of 300 leads to a 25% chance, and a difference of 900 leads to only 10%.",
@@ -1363,6 +1576,7 @@ export const LABELS = {
     kr: '아니요. 성공 확률은 공격자의 효과 적중(EFF)과 대상의 효과 저항(RES) 차이에 의존합니다. EFF ≥ RES면 100% 성공. 그 외에는 RES가 EFF를 초과하는 양에 따라 확률이 감소합니다. 예를 들어, RES − EFF 차이가 300이면 25%, 900이면 10%만 됩니다.',
     zh: '没有。成功率取决于攻击者的效果命中(EFF)和目标的效果抵抗(RES)之差。EFF ≥ RES时100%成功。否则根据RES超过EFF的量递减。例如，RES − EFF差值为300时只有25%，900时只有10%。',
     fr: "Non. La chance de succès dépend de la différence entre l'EFF de l'attaquant et la RES de la cible. Si EFF ≥ RES, la chance est de 100%. Sinon, elle diminue avec une borne inférieure dépendant de l'écart RES − EFF. Par exemple, un écart de 300 donne 25% de chance, et un écart de 900 seulement 10%.",
+    es: 'No. La probabilidad de éxito depende de la diferencia entre la Efectividad (EFF) del atacante y la Resiliencia (RES) del objetivo. Si EFF ≥ RES, la probabilidad de éxito es del 100%. De lo contrario, la probabilidad disminuye con un límite inferior que depende de cuánto exceda la RES a la EFF. Por ejemplo, una diferencia RES − EFF de 300 lleva a una probabilidad del 25%, y una diferencia de 900 lleva a solo un 10%.',
   },
   a_penVsHighDef: {
     en: 'Yes. The more DEF the enemy has, the greater the damage gain from Penetration, since it reduces the effective DEF used in the damage formula.',
@@ -1370,6 +1584,7 @@ export const LABELS = {
     kr: '네. 적의 DEF가 높을수록 관통으로 인한 데미지 증가가 커집니다. 데미지 공식에서 유효 DEF를 줄이기 때문입니다.',
     zh: '是的。敌人DEF越高，穿透带来的伤害增幅越大。因为它减少了伤害公式中的有效DEF。',
     fr: "Oui. Plus l'ennemi a de DEF, plus le gain de dégâts grâce à la PEN est important, car elle réduit la DEF effective utilisée dans la formule.",
+    es: 'Sí. Cuanta más Defensa tenga el enemigo, mayor será la ganancia de daño de la Penetración, ya que reduce la Defensa efectiva usada en la fórmula de daño.',
   },
   a_fixedDamageMitigation: {
     en: 'No. Fixed damage ignores DEF. Only shields or invincibility can prevent it.',
@@ -1377,6 +1592,7 @@ export const LABELS = {
     kr: '아니요. 고정 데미지는 DEF를 무시합니다. 보호막이나 무적만으로 막을 수 있습니다.',
     zh: '不能。固定伤害忽略DEF。只能用护盾或无敌来阻挡。',
     fr: "Non. Les fixed damage ignorent la DEF. Seuls les shields ou l'invincibilité peuvent les empêcher.",
+    es: 'No. El daño fijo ignora la Defensa. Solo los escudos o la invencibilidad pueden prevenirlo.',
   },
 
   // penVsDots (riche)
@@ -1386,6 +1602,7 @@ export const LABELS = {
     kr: 'DoT 종류에 따라 다릅니다. DEF로 감소되는 DoT는 관통의 혜택을 받습니다:',
     zh: '取决于DoT类型。被DEF减免的DoT受穿透加成：',
     fr: 'Cela dépend du type de DoT. Certains DoTs sont réduits par la DEF et bénéficient donc de la PEN :',
+    es: 'Depende del tipo de DoT. Algunos DoT se reducen por la Defensa y por lo tanto se benefician de la Penetración:',
   },
   pvd_p2: {
     en: 'However, some DoTs ignore DEF entirely and are unaffected by Penetration:',
@@ -1393,6 +1610,7 @@ export const LABELS = {
     kr: '하지만 DEF를 완전히 무시하고 관통의 영향을 받지 않는 DoT도 있습니다:',
     zh: '但部分DoT完全忽略DEF，不受穿透影响：',
     fr: 'Cependant, certains DoTs ignorent complètement la DEF et ne sont pas affectés par la PEN :',
+    es: 'Sin embargo, algunos DoT ignoran completamente la Defensa y no se ven afectados por la Penetración:',
   },
   pvd_p3: {
     en: 'Fixed damage always ignores DEF and is unaffected by Penetration.',
@@ -1400,6 +1618,7 @@ export const LABELS = {
     kr: '고정 데미지는 항상 DEF를 무시하며 관통의 영향을 받지 않습니다.',
     zh: '固定伤害始终忽略DEF，不受穿透影响。',
     fr: 'Les fixed damage ignorent toujours la DEF et ne sont pas affectés par la PEN.',
+    es: 'El daño fijo siempre ignora la Defensa y no se ve afectado por la Penetración.',
   },
 
   // debuffOnMiss (riche)
@@ -1409,6 +1628,7 @@ export const LABELS = {
     kr: '미스 발생 시 공격 데미지가 **50% 감소**하며, 디버프와 치명타 모두 발생하지 않습니다.',
     zh: '未命中时，攻击伤害**减少50%**，且不会触发减益和暴击。',
     fr: "Lorsqu'un miss survient, l'attaque inflige **50% de dégâts en moins**, et ni les debuffs ni les coups critiques ne peuvent se produire.",
+    es: 'Cuando ocurre un fallo, el ataque inflige **50% menos de daño**, y no pueden ocurrir ni debuffs ni golpes críticos.',
   },
   dom_p2: {
     en: 'A miss can occur when the attacker is affected by effects like {B/BT_STAT|ST_AVOID}, which increases the miss rate by 15%.',
@@ -1416,6 +1636,7 @@ export const LABELS = {
     kr: '{B/BT_STAT|ST_AVOID} 등의 효과로 빗나감 확률이 15% 증가하여 미스가 발생할 수 있습니다.',
     zh: '通过{B/BT_STAT|ST_AVOID}等效果使未命中率提升15%，可导致未命中发生。',
     fr: "Un miss peut survenir lorsque l'attaquant est affecté par des effets comme {B/BT_STAT|ST_AVOID}, qui augmente le taux de miss de 15%.",
+    es: 'Un fallo puede ocurrir cuando el atacante está afectado por efectos como {B/BT_STAT|ST_AVOID}, que aumenta la probabilidad de fallo en un 15%.',
   },
 
   // dualScaling (riche)
@@ -1425,6 +1646,7 @@ export const LABELS = {
     kr: '정확히는 아닙니다. Outerplane에는 현재 두 스탯을 균등하게 사용하는 스킬(예: 50% ATK + 50% HP)이 없습니다. "듀얼 스케일링"이라고 불리는 것은 실제로 **부차 의존**입니다 — 메인 스탯(보통 ATK)에 HP나 SPD 등의 부차 보너스가 추가됩니다.',
     zh: '严格来说不能。Outerplane目前没有均匀使用两个属性的技能（如50% ATK + 50% HP）。所谓的"双重依赖"实际上是**次要依赖**——主属性（通常是ATK）加上HP或SPD等的次要加成。',
     fr: "Pas vraiment. Outerplane ne propose actuellement aucun skill utilisant deux stats à parts égales (par ex. 50% ATK + 50% HP). Ce qu'on appelle souvent \"dual-scaling\" est en réalité du **scaling secondaire** — une stat principale (généralement l'ATK), avec un bonus mineur d'une autre stat comme les HP ou la SPD.",
+    es: 'No exactamente. Outerplane actualmente no cuenta con skills que usen dos estadísticas de forma equitativa (por ejemplo, 50% ATQ + 50% Vida). Lo que a menudo se denomina "escalado dual" es en realidad **escalado secundario**: una estadística principal (generalmente ATQ), con un bono menor de otra estadística como Vida o Velocidad.',
   },
   ds_p2: {
     en: "For example, some skills primarily scale with ATK but gain a bonus from the caster's Max HP or Speed. {P/Demiurge Stella} has partial scaling from HP.",
@@ -1432,6 +1654,7 @@ export const LABELS = {
     kr: '예를 들어, 일부 스킬은 ATK를 메인으로 시전자의 최대 HP나 속도에서 보너스를 얻습니다. {P/Demiurge Stella}는 HP에서 부분 의존을 가집니다.',
     zh: '例如，部分技能以ATK为主，并从施放者的最大HP或速度获得加成。{P/Demiurge Stella}有HP的部分依赖。',
     fr: "Par exemple, certains skills scalent principalement avec l'ATK mais gagnent un bonus à partir des Max HP ou de la SPD du caster. {P/Demiurge Stella} a un scaling partiel sur les HP.",
+    es: 'Por ejemplo, algunos skills escalan principalmente con ATQ pero obtienen un bono de la Vida Máxima o Velocidad del lanzador. {P/Demiurge Stella} tiene escalado parcial de Vida.',
   },
   ds_p3: {
     en: 'These secondary scalings are usually small and should not be the focus of gear building. There are also skills that use a stat other than ATK entirely — such as HP-based or DEF-based damage.',
@@ -1439,6 +1662,7 @@ export const LABELS = {
     kr: '이러한 부차 의존은 보통 작으며 장비 구성의 초점이 되어서는 안 됩니다. ATK 외의 스탯에 완전히 의존하는 스킬(HP 기반이나 DEF 기반 데미지 등)도 있습니다.',
     zh: '这些次要依赖通常较小，不应成为装备配置的重点。也有技能完全依赖ATK以外的属性（如基于HP或DEF的伤害）。',
     fr: "Ces scalings secondaires sont généralement faibles et ne doivent pas guider le build de gear. Il existe aussi des skills qui utilisent uniquement une stat autre que l'ATK — comme des dégâts basés sur les HP ou la DEF.",
+    es: 'Estos escalados secundarios suelen ser pequeños y no deberían ser el enfoque principal al construir el gear. También hay skills que usan una stat distinta al Ataque por completo — como daño basado en Vida o en Defensa.',
   },
 
   // statScaling (riche)
@@ -1448,6 +1672,7 @@ export const LABELS = {
     kr: '아무것도 언급되지 않으면 보통 기본적으로 ATK 의존입니다.',
     zh: '如果没有提及，通常默认依赖ATK。',
     fr: "Si rien n'est mentionné, le skill scale par défaut avec l'ATK.",
+    es: 'Si no se menciona nada, la skill normalmente escala con el Ataque por defecto.',
   },
   ss_p2: {
     en: "If it uses a different stat, you'll see one of these:",
@@ -1455,6 +1680,7 @@ export const LABELS = {
     kr: '다른 스탯을 사용하면 다음과 같은 문구가 있습니다:',
     zh: '如果使用其他属性，会有类似描述：',
     fr: "S'il utilise une autre stat, vous verrez l'une de ces mentions :",
+    es: 'Si usa una stat diferente, verás uno de estos:',
   },
   ss_b1: {
     en: '"Damage dealt increases proportional to Max Health **instead of** Attack."',
@@ -1462,6 +1688,7 @@ export const LABELS = {
     kr: '"주는 데미지는 공격력 **대신** 최대 체력에 비례하여 증가합니다."',
     zh: '"造成的伤害根据最大生命值**而非**攻击力增加。"',
     fr: '"Damage dealt increases proportional to Max Health **au lieu de** Attack."',
+    es: '"El daño infligido aumenta proporcionalmente a la Vida máxima **en lugar de** al Ataque."',
   },
   ss_b2: {
     en: '"Damage dealt increases proportional to Max Health." (in addition to ATK)',
@@ -1469,6 +1696,7 @@ export const LABELS = {
     kr: '"주는 데미지는 최대 체력에 비례하여 증가합니다." (ATK에 추가로)',
     zh: '"造成的伤害根据最大生命值增加。"（在ATK基础上）',
     fr: '"Damage dealt increases proportional to Max Health." (in addition to ATK)',
+    es: '"El daño infligido aumenta proporcionalmente a la Vida máxima." (además del Ataque)',
   },
   ss_p3: {
     en: 'The wording is important: "instead of" replaces ATK scaling, while without it means additional scaling.',
@@ -1476,6 +1704,7 @@ export const LABELS = {
     kr: '문구가 중요합니다: "대신"은 ATK 의존을 대체하고, 없으면 추가 의존을 의미합니다.',
     zh: '措辞很重要："而非"表示替代ATK依赖，没有则表示额外依赖。',
     fr: 'La formulation est importante : "instead of" remplace le scaling ATK, alors que son absence indique un scaling additionnel.',
+    es: 'La redacción es importante: "en lugar de" reemplaza el escalado con Ataque, mientras que sin esa frase significa un escalado adicional.',
   },
 
   // speedFormula (riche)
@@ -1485,6 +1714,7 @@ export const LABELS = {
     kr: '**Outerplane**에서 속도 계산의 기본 공식:',
     zh: '**Outerplane**速度计算基础公式：',
     fr: 'La formule de base pour calculer la SPD dans **Outerplane** est :',
+    es: 'La fórmula base usada para calcular la velocidad en **Outerplane** es:',
   },
   sf_formula: {
     en: 'SPD = Base SPD + Gear SPD + (Base SPD × Set Effect %)',
@@ -1492,6 +1722,7 @@ export const LABELS = {
     kr: 'SPD = 기본 SPD + 장비 SPD + (기본 SPD × 세트 효과%)',
     zh: 'SPD = 基础SPD + 装备SPD + (基础SPD × 套装效果%)',
     fr: 'SPD = Base SPD + Gear SPD + (Base SPD × Set Effect %)',
+    es: 'SPD = SPD base + SPD del gear + (SPD base × % de efecto de set)',
   },
   sf_base: {
     en: "**Base SPD:** The character's innate, unmodified speed.",
@@ -1499,6 +1730,7 @@ export const LABELS = {
     kr: '**기본 SPD:** 캐릭터의 고유 미수정 속도.',
     zh: '**基础SPD：** 角色固有的未修正速度。',
     fr: '**SPD de base :** SPD intrinsèque et non modifiée du personnage.',
+    es: '**SPD base:** La velocidad innata y sin modificar del personaje.',
   },
   sf_gear: {
     en: '**Gear SPD:** Flat speed gained from equipped gear.',
@@ -1506,6 +1738,7 @@ export const LABELS = {
     kr: '**장비 SPD:** 장비에서 얻은 고정 속도.',
     zh: '**装备SPD：** 装备提供的固定速度。',
     fr: '**SPD de gear :** SPD flat obtenue depuis le gear équipé.',
+    es: '**SPD del gear:** Velocidad plana obtenida del gear equipado.',
   },
   sf_set: {
     en: '**Set Effect:**',
@@ -1513,6 +1746,7 @@ export const LABELS = {
     kr: '**세트 효과:**',
     zh: '**套装效果：**',
     fr: '**Effet de Set :**',
+    es: '**Efecto de set:**',
   },
   sf_set0: {
     en: '0 if no Speed set equipped',
@@ -1520,6 +1754,7 @@ export const LABELS = {
     kr: '속도 세트 없음 = 0',
     zh: '无速度套装 = 0',
     fr: '0 si pas de Set Speed équipé',
+    es: '0 si no hay set de Velocidad equipado',
   },
   sf_set2: {
     en: '0.12 (12%) if 2-piece Speed set',
@@ -1527,6 +1762,7 @@ export const LABELS = {
     kr: '2세트 속도 = 0.12 (12%)',
     zh: '2件速度套装 = 0.12 (12%)',
     fr: '0.12 (12%) avec un Set Speed 2-pièces',
+    es: '0.12 (12%) si es set de Velocidad de 2 piezas',
   },
   sf_set4: {
     en: '0.25 (25%) if 4-piece Speed set',
@@ -1534,6 +1770,7 @@ export const LABELS = {
     kr: '4세트 속도 = 0.25 (25%)',
     zh: '4件速度套装 = 0.25 (25%)',
     fr: '0.25 (25%) avec un Set Speed 4-pièces',
+    es: '0.25 (25%) si es set de Velocidad de 4 piezas',
   },
 
   // priorityFormula (riche)
@@ -1543,6 +1780,7 @@ export const LABELS = {
     kr: '전투 시작 시 초기 우선도 계산 공식:',
     zh: '战斗开始时的初始行动值计算公式：',
     fr: 'La formule pour calculer la priorité initiale en début de combat :',
+    es: 'La fórmula usada para calcular la prioridad inicial al comienzo del combate:',
   },
   pf_formula: {
     en: 'Priority = (SPD + Ally Speed transcend bonus + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Ally Speed transcend bonus + (Top SPD × Buff %))',
@@ -1550,6 +1788,7 @@ export const LABELS = {
     kr: '우선도 = (SPD + 아군 속도 초월 보너스 + (SPD × 버프%)) × 100 / (최고 SPD + 최고 SPD 팀 아군 속도 초월 보너스 + (최고 SPD × 버프%))',
     zh: '行动值 = (SPD + 友方速度超越加成 + (SPD × 增益%)) × 100 / (最高SPD + 最高SPD队友方速度超越加成 + (最高SPD × 增益%))',
     fr: 'Priority = (SPD + Ally Speed transcend bonus + (SPD × Buff %)) × 100 / (Top SPD + Top SPD team Ally Speed transcend bonus + (Top SPD × Buff %))',
+    es: 'Prioridad = (SPD + bono de trascendencia de Velocidad aliada + (SPD × % de Bono)) × 100 / (SPD más alta + bono de trascendencia de Velocidad aliada del equipo con la SPD más alta + (SPD más alta × % de Bono))',
   },
   pf_spd: {
     en: '**SPD:** Total speed of the unit, as calculated above.',
@@ -1557,6 +1796,7 @@ export const LABELS = {
     kr: '**SPD:** 위에서 계산된 유닛의 총 속도.',
     zh: '**SPD：** 单位的总速度（如上计算）。',
     fr: "**SPD :** SPD totale de l'unité, calculée comme ci-dessus.",
+    es: '**SPD:** Velocidad total de la unidad, calculada como se indicó arriba.',
   },
   pf_top: {
     en: '**Top SPD:** Highest SPD among all units (used as divisor).',
@@ -1564,6 +1804,7 @@ export const LABELS = {
     kr: '**최고 SPD:** 모든 유닛 중 최고 SPD (제수로 사용).',
     zh: '**最高SPD：** 所有单位中最高的SPD（作为除数）。',
     fr: '**SPD max :** SPD la plus élevée parmi toutes les unités (utilisée comme diviseur).',
+    es: '**SPD más alta:** La SPD más alta entre todas las unidades (usada como divisor).',
   },
   pf_transcend: {
     en: '**Ally Speed transcend bonus:** Speed from transcendence.',
@@ -1571,6 +1812,7 @@ export const LABELS = {
     kr: '**아군 속도 초월 보너스:** 초월에서 얻은 속도.',
     zh: '**友方速度超越加成：** 从超越获得的速度。',
     fr: '**Bonus Ally Speed de transcendance :** SPD obtenue via la transcendance.',
+    es: '**Bono de trascendencia de Velocidad aliada:** Velocidad obtenida de la trascendencia.',
   },
   pf_buff: {
     en: '**Buff:**',
@@ -1578,6 +1820,7 @@ export const LABELS = {
     kr: '**버프:**',
     zh: '**增益：**',
     fr: '**Buff :**',
+    es: '**Bono:**',
   },
   pf_buff0: {
     en: '0 if no buff speed',
@@ -1585,6 +1828,7 @@ export const LABELS = {
     kr: '속도 버프 없음 = 0',
     zh: '无速度增益 = 0',
     fr: '0 si pas de buff SPD',
+    es: '0 si no hay velocidad de bono',
   },
   pf_buff30: {
     en: '0.3 (30%) if buff speed',
@@ -1592,6 +1836,7 @@ export const LABELS = {
     kr: '속도 버프 = 0.3 (30%)',
     zh: '速度增益 = 0.3 (30%)',
     fr: '0.3 (30%) avec un buff SPD',
+    es: '0.3 (30%) si hay velocidad de bono',
   },
   pf_buffm30: {
     en: '-0.3 (-30%) if malus speed',
@@ -1599,6 +1844,7 @@ export const LABELS = {
     kr: '속도 디버프 = -0.3 (-30%)',
     zh: '速度减益 = -0.3 (-30%)',
     fr: '-0.3 (-30%) avec un malus SPD',
+    es: '-0.3 (-30%) si hay velocidad de malus',
   },
 
   // maxSpeed (riche)
@@ -1608,6 +1854,7 @@ export const LABELS = {
     kr: '이론상 최대 속도:',
     zh: '理论最大速度：',
     fr: 'La SPD théorique maximale est :',
+    es: 'La velocidad máxima teórica es:',
   },
   ms_base: {
     en: '**Base speed:** 154 hit by {C/Ranger}',
@@ -1615,6 +1862,7 @@ export const LABELS = {
     kr: '**기본 속도:** {C/Ranger}의 154',
     zh: '**基础速度：** {C/Ranger}的154',
     fr: '**SPD de base :** 154 atteint par {C/Ranger}',
+    es: '**Velocidad base:** 154 golpeada por {C/Ranger}',
   },
   ms_gear: {
     en: '**Gear SPD:** 145 (18 per piece + 55 from Accessory)',
@@ -1622,6 +1870,7 @@ export const LABELS = {
     kr: '**장비 SPD:** 145 (각 부위 18 + 악세사리 55)',
     zh: '**装备SPD：** 145（每部位18 + 饰品55）',
     fr: "**SPD de gear :** 145 (18 par pièce + 55 depuis l'Accessory)",
+    es: '**VEL de equipo:** 145 (18 por pieza + 55 de Accesorio)',
   },
   ms_set: {
     en: '**Set SPD:** 38 (on a 154 character)',
@@ -1629,6 +1878,7 @@ export const LABELS = {
     kr: '**세트 SPD:** 38 (154 캐릭터 기준)',
     zh: '**套装SPD：** 38（基于154角色）',
     fr: '**SPD de set :** 38 (sur un personnage à 154)',
+    es: '**VEL de set:** 38 (en un personaje de 154)',
   },
   ms_transcend: {
     en: '**Ally Speed transcend bonus:** 30 ({P/Dianne} + {P/Mene} + {P/Demiurge Delta})',
@@ -1636,6 +1886,7 @@ export const LABELS = {
     kr: '**아군 속도 초월 보너스:** 30 ({P/Dianne} + {P/Mene} + {P/Demiurge Delta})',
     zh: '**友方速度超越加成：** 30（{P/Dianne} + {P/Mene} + {P/Demiurge Delta}）',
     fr: '**Bonus Ally Speed de transcendance :** 30 ({P/Dianne} + {P/Mene} + {P/Demiurge Delta})',
+    es: '**Bono de trascendencia de Velocidad de aliado:** 30 ({P/Dianne} + {P/Mene} + {P/Demiurge Delta})',
   },
   ms_total: {
     en: 'Leading to a grand total of: **367** (468 including the speed buff)',
@@ -1643,6 +1894,7 @@ export const LABELS = {
     kr: '합계: **367** (속도 버프 포함 시 468)',
     zh: '总计：**367**（带速度增益时468）',
     fr: 'Pour un total de : **367** (468 avec le buff SPD inclus)',
+    es: 'Lo que da un gran total de: **367** (468 incluyendo el bono de velocidad)',
   },
   ms_ryu: {
     en: '{P/Ryu Lion} can go further with her 4 star transcend bonus: **377** (478 with speed buff)',
@@ -1650,6 +1902,7 @@ export const LABELS = {
     kr: '{P/Ryu Lion}은 4성 초월 보너스로 더 올릴 수 있습니다: **377** (속도 버프 포함 시 478)',
     zh: '{P/Ryu Lion}的4星超越加成可进一步提升：**377**（带速度增益时478）',
     fr: '{P/Ryu Lion} peut aller plus loin avec son bonus de transcendance 4 étoiles : **377** (478 avec le buff SPD)',
+    es: '{P/Ryu Lion} puede llegar más lejos con su bono de trascendencia de 4 estrellas: **377** (478 con el bono de velocidad)',
   },
 
   // formula (riche)
@@ -1659,6 +1912,7 @@ export const LABELS = {
     kr: '다음 공식과 설명은 **Enebe-NB**가 수집하고 테스트했습니다. Outerplane의 전투 공식을 분석한 훌륭한 작업입니다.',
     zh: '以下公式和说明由**Enebe-NB**收集和测试。这是对Outerplane战斗公式的出色分析工作。',
     fr: "Les formules et explications suivantes ont été rassemblées et testées par **Enebe-NB**, qui a fait un travail remarquable d'analyse des formules de combat d'Outerplane.",
+    es: 'Las siguientes fórmulas y explicaciones fueron recopiladas y probadas por **Enebe-NB**, quien hizo un trabajo increíble analizando las fórmulas de combate en Outerplane.',
   },
   fm_p2: {
     en: 'For full reference, the data is available here: {L/[Google Sheet - Outerplane Analysis by Enebe-NB]|https://docs.google.com/spreadsheets/d/10Sl_b7n7_j-PxkNxYGZEvu7HvrJNyRYDSyyYLcUwDOU/edit?gid=938189457#gid=938189457}',
@@ -1666,6 +1920,7 @@ export const LABELS = {
     kr: '전체 참조는 여기: {L/[Google Sheet - Outerplane Analysis by Enebe-NB]|https://docs.google.com/spreadsheets/d/10Sl_b7n7_j-PxkNxYGZEvu7HvrJNyRYDSyyYLcUwDOU/edit?gid=938189457#gid=938189457}',
     zh: '完整参考：{L/[Google Sheet - Outerplane Analysis by Enebe-NB]|https://docs.google.com/spreadsheets/d/10Sl_b7n7_j-PxkNxYGZEvu7HvrJNyRYDSyyYLcUwDOU/edit?gid=938189457#gid=938189457}',
     fr: 'Pour la référence complète, les données sont disponibles ici : {L/[Google Sheet - Outerplane Analysis by Enebe-NB]|https://docs.google.com/spreadsheets/d/10Sl_b7n7_j-PxkNxYGZEvu7HvrJNyRYDSyyYLcUwDOU/edit?gid=938189457#gid=938189457}',
+    es: 'Para referencia completa, los datos están disponibles aquí: {L/[Google Sheet - Outerplane Analysis by Enebe-NB]|https://docs.google.com/spreadsheets/d/10Sl_b7n7_j-PxkNxYGZEvu7HvrJNyRYDSyyYLcUwDOU/edit?gid=938189457#gid=938189457}',
   },
   fm_h_def: {
     en: 'Defense Mitigation',
@@ -1673,6 +1928,7 @@ export const LABELS = {
     kr: '방어 감소',
     zh: '防御减免',
     fr: 'Mitigation par DEF',
+    es: 'Mitigación de Defensa',
   },
   fm_def_label: {
     en: '**Formula:** `f(DEF) = 1000 / (1000 + DEF)`',
@@ -1680,6 +1936,7 @@ export const LABELS = {
     kr: '**공식:** `f(DEF) = 1000 / (1000 + DEF)`',
     zh: '**公式：** `f(DEF) = 1000 / (1000 + DEF)`',
     fr: '**Formule :** `f(DEF) = 1000 / (1000 + DEF)`',
+    es: '**Fórmula:** `f(DEF) = 1000 / (1000 + DEF)`',
   },
   fm_def_desc: {
     en: 'This formula determines how much damage is reduced by defense. As DEF increases, the effect of each additional point diminishes (diminishing returns).',
@@ -1687,6 +1944,7 @@ export const LABELS = {
     kr: '이 공식은 방어력에 의한 데미지 감소량을 결정합니다. DEF가 증가할수록 추가 포인트의 효과가 감소합니다(수확 체감).',
     zh: '此公式决定防御力的伤害减免量。DEF增加时，额外点数的效果递减（收益递减）。',
     fr: "Cette formule détermine la quantité de dégâts réduite par la DEF. Plus la DEF augmente, plus l'effet de chaque point supplémentaire diminue (rendements décroissants).",
+    es: 'Esta fórmula determina cuánto daño se reduce por la Defensa. A medida que la DEF aumenta, el efecto de cada punto adicional disminuye (rendimientos decrecientes).',
   },
   fm_ehp_intro: {
     en: 'Effective Health (EHP) can be derived from it (assuming the attacker has 0% PEN):',
@@ -1694,6 +1952,7 @@ export const LABELS = {
     kr: '유효 HP(EHP)는 여기서 도출할 수 있습니다 (공격자 PEN 0% 가정):',
     zh: '有效生命值(EHP)可由此推导（假设攻击者穿透为0%）：',
     fr: "On peut en déduire les HP effectifs (EHP), en supposant que l'attaquant a 0% de PEN :",
+    es: 'La Vida Efectiva (EHP) se puede derivar de ella (asumiendo que el atacante tiene 0% de PEN):',
   },
   fm_ehp: {
     en: '**Effective HP:** `EHP = HP × (1 + DEF / 1000)`',
@@ -1701,6 +1960,7 @@ export const LABELS = {
     kr: '**유효 HP:** `EHP = HP × (1 + DEF / 1000)`',
     zh: '**有效HP：** `EHP = HP × (1 + DEF / 1000)`',
     fr: '**HP effectifs :** `EHP = HP × (1 + DEF / 1000)`',
+    es: '**Vida Efectiva:** `EHP = Vida × (1 + DEF / 1000)`',
   },
   fm_pen_desc: {
     en: 'When the attacker has Penetration, the effective DEF is reduced before mitigation kicks in:',
@@ -1708,6 +1968,7 @@ export const LABELS = {
     kr: '공격자가 관통을 가지면 경감 계산 전에 유효 DEF가 감소합니다:',
     zh: '当攻击者带有穿透时，在减免计算之前有效DEF会先减少：',
     fr: "Lorsque l'attaquant a de la PEN, la DEF effective est réduite avant l'application de la mitigation :",
+    es: 'Cuando el atacante tiene Penetración, la DEF efectiva se reduce antes de que la mitigación entre en efecto:',
   },
   fm_ehp_pen: {
     en: '**EHP vs PEN:** `EHP = HP × (1 + (1 − PEN%) × DEF / 1000)`',
@@ -1715,6 +1976,7 @@ export const LABELS = {
     kr: '**PEN 대응 EHP:** `EHP = HP × (1 + (1 − PEN%) × DEF / 1000)`',
     zh: '**考虑穿透时的EHP：** `EHP = HP × (1 + (1 − PEN%) × DEF / 1000)`',
     fr: '**EHP vs PEN :** `EHP = HP × (1 + (1 − PEN%) × DEF / 1000)`',
+    es: '**EHP vs PEN:** `EHP = Vida × (1 + (1 − PEN%) × DEF / 1000)`',
   },
   fm_h_effres: {
     en: 'Effectiveness vs Resilience',
@@ -1722,6 +1984,7 @@ export const LABELS = {
     kr: '효과 적중 vs 효과 저항',
     zh: '效果命中 vs 效果抵抗',
     fr: 'EFF vs RES',
+    es: 'Efectividad vs Resiliencia',
   },
   fm_effres_1: {
     en: 'If `EFF ≥ RES`, the debuff success chance is 100%.',
@@ -1729,6 +1992,7 @@ export const LABELS = {
     kr: '`EFF ≥ RES`면 디버프 성공 확률은 100%.',
     zh: '如果`EFF ≥ RES`，减益成功概率为100%。',
     fr: 'Si `EFF ≥ RES`, la chance de succès du debuff est de 100%.',
+    es: 'Si `EFF ≥ RES`, la probabilidad de éxito del debuff es del 100%.',
   },
   fm_effres_2: {
     en: 'Otherwise, the chance to apply a debuff is calculated using:',
@@ -1736,6 +2000,7 @@ export const LABELS = {
     kr: '그 외, 디버프 부여 확률은 다음으로 계산:',
     zh: '否则，减益施加概率计算如下：',
     fr: "Sinon, la chance d'appliquer un debuff est calculée ainsi :",
+    es: 'En caso contrario, la probabilidad de aplicar un debuff se calcula con:',
   },
   fm_effres_formula: {
     en: 'Success Chance = 100 / (100 + (RES − EFF))',
@@ -1743,6 +2008,7 @@ export const LABELS = {
     kr: '성공 확률 = 100 / (100 + (RES − EFF))',
     zh: '成功概率 = 100 / (100 + (RES − EFF))',
     fr: 'Success Chance = 100 / (100 + (RES − EFF))',
+    es: 'Probabilidad de Éxito = 100 / (100 + (RES − EFF))',
   },
 
   // damageFormula (riche)
@@ -1752,6 +2018,7 @@ export const LABELS = {
     kr: 'Outerplane에서 스킬 데미지를 계산하는 전체 공식:',
     zh: 'Outerplane中计算技能伤害的完整公式：',
     fr: 'La formule complète utilisée pour calculer les dégâts de skill dans Outerplane est :',
+    es: 'La fórmula completa utilizada para calcular el daño de skill en Outerplane es:',
   },
   df_formula: {
     en: 'Dmg = ATK × Skill × Mitigation × Rate × Elemental × Marking × Missed × FinalReduce',
@@ -1759,6 +2026,7 @@ export const LABELS = {
     kr: 'Dmg = ATK × 스킬 × 경감 × 레이트 × 속성 × 마킹 × 미스 × 최종 경감',
     zh: '伤害 = ATK × 技能 × 减免 × 速率 × 属性 × 标记 × 未命中 × 最终减免',
     fr: 'Dmg = ATK × Skill × Mitigation × Rate × Elemental × Marking × Missed × FinalReduce',
+    es: 'Daño = ATQ × Skill × Mitigación × Tasa × Elemental × Marcado × Fallo × ReducciónFinal',
   },
   df_atk: {
     en: "**ATK**: Your unit's main scaling stat (can also be HP, DEF, etc. depending on the skill/character)",
@@ -1766,6 +2034,7 @@ export const LABELS = {
     kr: '**ATK**: 유닛의 메인 의존 스탯 (스킬/캐릭터에 따라 HP, DEF 등도 가능)',
     zh: '**ATK**：单位的主要依赖属性（根据技能/角色可能是HP、DEF等）',
     fr: '**ATK** : Stat principale de scaling de votre unité (peut aussi être HP, DEF, etc. selon le skill/personnage)',
+    es: '**ATQ**: La estadística principal de escalado de tu unidad (también puede ser Vida, DEF, etc. según el skill/personaje)',
   },
   df_skill: {
     en: '**Skill**: Per-skill internal multiplier. Not displayed in-game.',
@@ -1773,6 +2042,7 @@ export const LABELS = {
     kr: '**스킬**: 스킬별 내부 배율. 게임 내에는 표시되지 않습니다.',
     zh: '**技能**：每个技能的内部倍率。游戏内不显示。',
     fr: '**Skill** : Multiplicateur interne propre au skill. Non affiché in-game.',
+    es: '**Skill**: Multiplicador interno propio de cada skill. No se muestra en el juego.',
   },
   df_mit: {
     en: '**Mitigation**: `1000 / (1000 + (1 − PEN%) × DEF)` — same defense mitigation covered above',
@@ -1780,6 +2050,7 @@ export const LABELS = {
     kr: '**경감**: `1000 / (1000 + (1 − PEN%) × DEF)` — 위의 방어 감소와 동일',
     zh: '**减免**：`1000 / (1000 + (1 − PEN%) × DEF)` — 与上述防御减免相同',
     fr: '**Mitigation** : `1000 / (1000 + (1 − PEN%) × DEF)` — même mitigation par DEF que vue plus haut',
+    es: '**Mitigación**: `1000 / (1000 + (1 − PEN%) × DEF)` — la misma mitigación de defensa explicada arriba',
   },
   df_rate: {
     en: '**Rate**: damage modifier pool, floored at 0.30 (= up to 70% reduction). Computed as:',
@@ -1787,6 +2058,7 @@ export const LABELS = {
     kr: '**레이트**: 데미지 보정 풀, 최소값 0.30 상한(=최대 70% 감소). 계산:',
     zh: '**速率**：伤害修正池，下限为0.30（=最多减免70%）。计算：',
     fr: "**Rate** : pool de modificateurs de dégâts, avec un floor à 0.30 (= jusqu'à 70% de réduction). Calculé ainsi :",
+    es: '**Tasa**: conjunto de modificadores de daño, con un piso de 0.30 (= hasta 70% de reducción). Se calcula como:',
   },
   df_rate_formula: {
     en: 'Rate = max(0.30, base + (DMG UP additions) − (DMG RED + CDMG RED on crit))',
@@ -1794,6 +2066,7 @@ export const LABELS = {
     kr: 'Rate = max(0.30, base + (DMG UP 합산) − (DMG RED + 치명 시 CDMG RED))',
     zh: 'Rate = max(0.30, base + (DMG UP合计) − (DMG RED + 暴击时CDMG RED))',
     fr: 'Rate = max(0.30, base + (DMG UP additions) − (DMG RED + CDMG RED on crit))',
+    es: 'Tasa = max(0.30, base + (adiciones de Daño +) − (Daño recibido - + Daño CRIT recibido - en crítico))',
   },
   df_rate_note: {
     en: 'where `base = 1.0` on non-crit, or `CHD/100` on crit. Includes awakening, EE, skill, and gear contributions.',
@@ -1801,6 +2074,7 @@ export const LABELS = {
     kr: '여기서 `base = 1.0` (비치명) / `CHD/100` (치명). 각성, EE, 스킬, 장비의 기여 포함.',
     zh: '其中 `base = 1.0`（非暴击）/ `CHD/100`（暴击时）。包含觉醒、EE、技能和装备的贡献。',
     fr: "avec `base = 1.0` sur non-crit, ou `CHD/100` sur crit. Inclut les contributions d'awakening, EE, skill et gear.",
+    es: 'donde `base = 1.0` sin CRIT, o `CHD/100` en CRIT. Incluye contribuciones de despertar, EE, skill y gear.',
   },
   df_elem: {
     en: '**Elemental**: 0.80 (disadvantage), 1.00 (neutral), or 1.20 (advantage)',
@@ -1808,6 +2082,7 @@ export const LABELS = {
     kr: '**속성**: 0.80 (불리), 1.00 (중립), 1.20 (유리)',
     zh: '**属性**：0.80（被克制）、1.00（中立）、1.20（克制）',
     fr: '**Elemental** : 0.80 (désavantage), 1.00 (neutre), ou 1.20 (avantage)',
+    es: '**Elemental**: 0.80 (desventaja), 1.00 (neutro), o 1.20 (ventaja)',
   },
   df_marking: {
     en: '**Marking**: ×1.15 when the target carries the Marking debuff, else ×1.00',
@@ -1815,6 +2090,7 @@ export const LABELS = {
     kr: '**마킹**: ×1.15 대상이 마킹 디버프를 받고 있을 때, 그 외에는 ×1.00',
     zh: '**标记**：×1.15 目标带有标记减益时，否则×1.00',
     fr: '**Marking** : ×1.15 lorsque la cible porte le debuff Marking, sinon ×1.00',
+    es: '**Marking**: ×1.15 cuando el objetivo tiene el debuff Marking, sino ×1.00',
   },
   df_missed: {
     en: '**Missed**: ×0.5 when the attack misses (no crit, no debuff applied), else ×1.00',
@@ -1822,6 +2098,7 @@ export const LABELS = {
     kr: '**미스**: ×0.5 공격이 미스한 경우(치명타 없음, 디버프 부여 없음), 그 외에는 ×1.00',
     zh: '**未命中**：×0.5 攻击未命中时（无暴击，不施加减益），否则×1.00',
     fr: "**Missed** : ×0.5 lorsque l'attaque rate (pas de crit, pas de debuff appliqué), sinon ×1.00",
+    es: '**Missed**: ×0.5 cuando el ataque falla (sin CRIT, sin debuff aplicado), sino ×1.00',
   },
   df_finalreduce: {
     en: '**FinalReduce**: `1 − pct/100` for boss-specific final-damage-reduction passives (e.g. Amadeus Prelude). Default ×1.00.',
@@ -1829,6 +2106,7 @@ export const LABELS = {
     kr: '**최종 경감**: `1 − pct/100` 보스 전용 최종 데미지 감소 패시브(예: 아마데우스 프렐류드)에 대해. 기본 ×1.00.',
     zh: '**最终减免**：`1 − pct/100` 针对首领专属的最终伤害减免被动（如阿玛迪斯前奏）。默认×1.00。',
     fr: '**FinalReduce** : `1 − pct/100` pour les passives boss-specific de Final Damage Reduction (par ex. Amadeus Prelude). Défaut ×1.00.',
+    es: '**FinalReduce**: `1 − pct/100` para pasivas de reducción de daño final específicas de jefe (p. ej. Amadeus Prelude). Por defecto ×1.00.',
   },
   df_source: {
     en: 'Source: {L/Fabool on EvaMains Discord (July 23, 2024)|https://discord.com/channels/1264787916660670605/1264811556059873312/1265103204128133191} + Outerpedia damage calc reverse-engineering',
@@ -1836,6 +2114,7 @@ export const LABELS = {
     kr: '출처: {L/Fabool on EvaMains Discord (2024년 7월 23일)|https://discord.com/channels/1264787916660670605/1264811556059873312/1265103204128133191} + Outerpedia 데미지 계산기 리버스 엔지니어링',
     zh: '来源：{L/Fabool on EvaMains Discord（2024年7月23日）|https://discord.com/channels/1264787916660670605/1264811556059873312/1265103204128133191} + Outerpedia伤害计算器逆向工程',
     fr: 'Source : {L/Fabool on EvaMains Discord (July 23, 2024)|https://discord.com/channels/1264787916660670605/1264811556059873312/1265103204128133191} + Reverse-engineering du damage calc Outerpedia',
+    es: 'Fuente: {L/Fabool on EvaMains Discord (July 23, 2024)|https://discord.com/channels/1264787916660670605/1264811556059873312/1265103204128133191} + ingeniería inversa del cálculo de daño de Outerpedia',
   },
 
   // ── Atteindre 100% de crit (Basic Stats) ──
@@ -1845,6 +2124,7 @@ export const LABELS = {
     kr: '치명타 확률 100% 달성',
     zh: '达成100%暴击率',
     fr: 'Atteindre 100% de CHC',
+    es: 'Alcanzar 100% de Tasa CRIT',
   },
   crit100_intro: {
     en: 'Crit Chance is capped at 100% and stacks from many sources, so it is easy to cap. Here is where it comes from (values from the game files):',
@@ -1852,6 +2132,7 @@ export const LABELS = {
     kr: '치명타 확률은 100%가 상한이며 여러 소스에서 누적되므로 쉽게 상한에 도달합니다. 그 출처는 다음과 같습니다(게임 데이터 값):',
     zh: '暴击率上限为100%，且可从多种来源叠加，因此很容易达到上限。其来源如下（数值来自游戏文件）：',
     fr: "Le CHC est cap à 100% et se cumule depuis de nombreuses sources, donc facile à capper. Voici d'où il vient (valeurs issues des fichiers du jeu) :",
+    es: 'La Tasa CRIT tiene un límite de 100% y se acumula desde muchas fuentes, así que es fácil llegar al tope. Aquí está de dónde viene (valores de los archivos del juego):',
   },
   crit_base: {
     en: '**Base:** 5% for every hero.',
@@ -1859,6 +2140,7 @@ export const LABELS = {
     kr: '**기본:** 모든 영웅 5%.',
     zh: '**基础：** 每位英雄5%。',
     fr: '**Base :** 5% pour chaque héros.',
+    es: '**Base:** 5% para cada héroe.',
   },
   crit_class: {
     en: '**Class:** Strikers gain an extra +5% (10% total).',
@@ -1866,6 +2148,7 @@ export const LABELS = {
     kr: '**클래스:** 스트라이커는 추가로 +5%(합계 10%).',
     zh: '**职业：** 打击者额外获得+5%（共10%）。',
     fr: '**Classe :** les Strikers gagnent +5% supplémentaires (10% au total).',
+    es: '**Clase:** los Atacantes ganan un +5% extra (10% total).',
   },
   crit_wizard: {
     en: '**Wizard subclass:** +6% from class transcendence.',
@@ -1873,6 +2156,7 @@ export const LABELS = {
     kr: '**위저드 서브클래스:** 클래스 초월에서 +6%.',
     zh: '**巫师子职业：** 来自职业超越的+6%。',
     fr: '**Sous-classe Wizard :** +6% via la transcendance de classe.',
+    es: '**Subclase Mago:** +6% por trascendencia de clase.',
   },
   crit_quirk: {
     en: '**Element Quirk:** +10% (the three crit nodes of the element tree).',
@@ -1880,6 +2164,7 @@ export const LABELS = {
     kr: '**속성 기프트:** +10%(속성 트리의 치명타 노드 3개).',
     zh: '**元素天赋：** +10%（元素树的3个暴击节点）。',
     fr: "**Quirk d'élément :** +10% (les trois nœuds de crit de l'arbre d'élément).",
+    es: '**Quirk de Elemento:** +10% (los tres nodos de CRIT del árbol de elemento).',
   },
   crit_gear: {
     en: '**6★ Gear substats:** the Crit Chance substat grows per level, up to +18% per piece at level 6 — across the 6 gear slots (excluding EE and Talisman), up to +108%.',
@@ -1887,6 +2172,7 @@ export const LABELS = {
     kr: '**6★ 장비 부옵션:** 치명타 확률 부옵션은 레벨마다 증가하여 레벨 6에서 부위당 최대 +18% — 6개 장비 슬롯(EE와 탈리스만 제외)에서 최대 +108%.',
     zh: '**6★装备副属性：** 暴击率副属性随等级提升，等级6时每件最多+18%——6个装备槽（不含EE和护符）最多+108%。',
     fr: "**Substats de gear 6★ :** la substat de CHC augmente par niveau, jusqu'à +18% par pièce au niveau 6 — sur les 6 slots de gear (hors EE et Talisman), jusqu'à +108%.",
+    es: '**Sub-stats de gear 6★:** el sub-stat de Tasa CRIT crece por nivel, hasta +18% por pieza en nivel 6 — a través de los 6 slots de gear (excluyendo EE y Talismán), hasta +108%.',
   },
   crit_accessory: {
     en: '**Accessory main stat:** an accessory can carry Crit Chance as its main stat — 8% at 6★, up to +55.2% at +15 with max breakthrough. Not recommended in late game.',
@@ -1894,6 +2180,7 @@ export const LABELS = {
     kr: '**액세서리 주옵션:** 액세서리는 주옵션으로 치명타 확률을 가질 수 있습니다 — 6★에서 8%, 최대 돌파의 +15에서 최대 +55.2%. 다만 후반부에는 비추천.',
     zh: '**饰品主属性：** 饰品可将暴击率作为主属性——6★时8%，满突破+15时最高+55.2%。但后期不推荐。',
     fr: "**Main stat d'accessoire :** un accessoire peut porter le CHC en stat principale — 8% au 6★, jusqu'à +55,2% au +15 avec la percée max. Déconseillé en late game.",
+    es: '**Main stat de accesorio:** un accesorio puede llevar Tasa CRIT como main stat — 8% a 6★, hasta +55.2% en +15 con avance máximo. No recomendado en late game.',
   },
   crit_talisman: {
     en: '**Talisman:** +7.2% to +9%, depending on its enhancement.',
@@ -1901,6 +2188,7 @@ export const LABELS = {
     kr: '**탈리스만:** 강화에 따라 +7.2%~+9%.',
     zh: '**护符：** 根据强化+7.2%~+9%。',
     fr: '**Talisman :** +7.2% à +9%, selon son enhancement.',
+    es: '**Talismán:** +7.2% a +9%, dependiendo de su mejora.',
   },
   crit_gems: {
     en: '**Gems (Stage 6):** +3% per gem, up to +30% across all 10 slots.',
@@ -1908,6 +2196,7 @@ export const LABELS = {
     kr: '**젬(스테이지 6):** 젬당 +3%, 전체 10슬롯에서 최대 +30%.',
     zh: '**宝石（第6阶）：** 每颗+3%，全部10个槽位最多+30%。',
     fr: "**Gemmes (Stage 6) :** +3% par gemme, jusqu'à +30% sur les 10 slots.",
+    es: '**Gemas (Etapa 6):** +3% por gema, hasta +30% en los 10 slots.',
   },
   crit_buff: {
     en: '**Crit Chance buff:** in-combat Crit Chance buffs (from skills, e.g. supports) also count toward the cap during a fight.',
@@ -1915,6 +2204,7 @@ export const LABELS = {
     kr: '**치명타 확률 버프:** 전투 중 치명타 확률 버프(스킬, 예: 서포터)도 전투 중에는 상한에 합산됩니다.',
     zh: '**暴击率增益：** 战斗中的暴击率增益（来自技能，如辅助）在战斗中同样计入上限。',
     fr: '**Buff de CHC :** les buffs de CHC en combat (via compétences, ex. supports) comptent aussi vers le cap pendant un combat.',
+    es: '**Bono de Tasa CRIT:** los bonos de Tasa CRIT en combate (de skills, p. ej. soportes) también cuentan hacia el tope durante una pelea.',
   },
   crit100_outro: {
     en: 'Because these stack well beyond 100%, a handful of 6★ gear substats plus your class and quirk already cap you — so any crit past 100% is wasted and should be reallocated to other stats.',
@@ -1922,6 +2212,7 @@ export const LABELS = {
     kr: '이들은 100%를 크게 초과해 누적되므로, 몇 개의 6★ 장비 부옵션에 클래스와 기프트만 더해도 상한에 도달합니다. 100%를 넘는 치명타는 낭비이므로 다른 스탯에 재배분해야 합니다.',
     zh: '由于这些叠加远超100%，只需几条6★装备副属性加上职业与天赋就已封顶——超过100%的暴击都是浪费，应重新分配到其他属性。',
     fr: "Comme tout cela dépasse largement 100%, quelques substats de gear 6★ plus votre classe et votre quirk vous cappent déjà — tout crit au-delà de 100% est gâché et devrait être réalloué à d'autres stats.",
+    es: 'Como estos se acumulan mucho más allá del 100%, un puñado de sub-stats de gear 6★ más tu clase y quirk ya te dan el tope — así que cualquier CRIT por encima de 100% se desperdicia y debería reasignarse a otros stats.',
   },
 
   // ── Formule ATK/DEF/HP (FAQ) ──
@@ -1931,6 +2222,7 @@ export const LABELS = {
     kr: 'ATK, DEF, HP는 어떻게 계산되나요?',
     zh: 'ATK、DEF、HP如何计算？',
     fr: 'Comment ATK, DEF et HP sont-ils calculés ?',
+    es: '¿Cómo se calculan Ataque, Defensa y Vida?',
   },
   statf_p1: {
     en: 'The final stat is built in layers — flat bonuses first, then percentage multipliers applied in two nested steps, with the codex bonus added on the base value at the very end. This model was reverse-engineered by **Shiraen**:',
@@ -1938,6 +2230,7 @@ export const LABELS = {
     kr: '최종 스탯은 층으로 구성됩니다 — 먼저 고정 보너스, 그다음 비율 배수를 2단계로 중첩 적용하고, 마지막에 도감 보너스를 기본값에 더합니다. 이 모델은 **Shiraen**이 리버스 엔지니어링했습니다:',
     zh: '最终属性分层构建——先是固定加成，再以两个嵌套步骤应用百分比乘数，最后将图鉴加成加到基础值上。此模型由**Shiraen**逆向工程得出：',
     fr: "La stat finale se construit en couches — d'abord les bonus plats, puis les multiplicateurs en pourcentage appliqués en deux étapes imbriquées, et enfin le bonus de codex ajouté à la valeur de base tout à la fin. Ce modèle a été reverse-engineered par **Shiraen** :",
+    es: 'El stat final se construye en capas — primero bonos planos, luego multiplicadores porcentuales aplicados en dos pasos anidados, con el bono del códex añadido sobre el valor base al final. Este modelo fue realizado por ingeniería inversa por **Shiraen**:',
   },
   statf_formula: {
     en: 'ATK = ( (Base ATK + Upgrade + Class Quirk flat ATK)\n        × (1 + Gear %ATK + 6★ Transcend %ATK)\n        + flat ATK on gear )\n      × (1 + Class Quirk %ATK + Talisman + Skill/Transcend passive %ATK)\n      + Base ATK × Codex bonus',
@@ -1945,6 +2238,7 @@ export const LABELS = {
     kr: 'ATK = ( (Base ATK + Upgrade + Class Quirk flat ATK)\n        × (1 + Gear %ATK + 6★ Transcend %ATK)\n        + flat ATK on gear )\n      × (1 + Class Quirk %ATK + Talisman + Skill/Transcend passive %ATK)\n      + Base ATK × Codex bonus',
     zh: 'ATK = ( (Base ATK + Upgrade + Class Quirk flat ATK)\n        × (1 + Gear %ATK + 6★ Transcend %ATK)\n        + flat ATK on gear )\n      × (1 + Class Quirk %ATK + Talisman + Skill/Transcend passive %ATK)\n      + Base ATK × Codex bonus',
     fr: 'ATK = ( (Base ATK + Upgrade + Class Quirk flat ATK)\n        × (1 + Gear %ATK + 6★ Transcend %ATK)\n        + flat ATK on gear )\n      × (1 + Class Quirk %ATK + Talisman + Skill/Transcend passive %ATK)\n      + Base ATK × Codex bonus',
+    es: 'ATQ = ( (ATQ Base + Mejora + ATQ plano de Quirk de Clase)\n        × (1 + %ATQ de Gear + %ATQ de Trascendencia 6★)\n        + ATQ plano en gear )\n      × (1 + %ATQ de Quirk de Clase + Talismán + %ATQ pasivo de Skill/Trascendencia)\n      + ATQ Base × Bono de Códex',
   },
   statf_note: {
     en: '**DEF** and **HP** follow the exact same layered structure, each with their own flat and % sources. **Affinity ATK** is applied in combat, not on the character sheet — it sits on top of this formula, not inside it. **Note:** this is community reverse-engineering, not datamined; values are a close approximation and may differ slightly from the in-game display due to per-step rounding.',
@@ -1952,5 +2246,6 @@ export const LABELS = {
     kr: '**DEF**와 **HP**도 완전히 동일한 층 구조를 따르며 각자 고정·비율 소스를 가집니다. **친밀도 ATK**는 캐릭터 시트가 아닌 전투 중에 적용됩니다 — 이 공식 안이 아니라 위에 얹힙니다. **참고:** 이것은 커뮤니티의 리버스 엔지니어링이며 데이터마이닝이 아닙니다. 값은 근사치이며 단계별 반올림으로 인해 인게임 표시와 약간 다를 수 있습니다.',
     zh: '**DEF**和**HP**遵循完全相同的分层结构，各有自己的固定与百分比来源。**好感度ATK**在战斗中生效，而非角色面板——它叠加在此公式之上，而非其中。**注意：** 这是社区逆向工程，并非数据挖掘；数值为近似值，且因逐步取整可能与游戏内显示略有差异。',
     fr: "**DEF** et **HP** suivent exactement la même structure en couches, chacune avec ses propres sources plates et en %. L'**ATK d'affinity** est appliquée en combat, pas sur la fiche du personnage — elle se pose au-dessus de cette formule, pas à l'intérieur. **Note :** il s'agit de reverse-engineering communautaire, pas de datamining ; les valeurs sont une approximation proche et peuvent différer légèrement de l'affichage en jeu à cause des arrondis à chaque étape.",
+    es: '**Defensa** y **Vida** siguen exactamente la misma estructura en capas, cada una con sus propias fuentes planas y porcentuales. **ATQ de Afinidad** se aplica en combate, no en la hoja de personaje — se sitúa encima de esta fórmula, no dentro de ella. **Nota:** esto es ingeniería inversa de la comunidad, no extraído de datos; los valores son una aproximación cercana y pueden diferir ligeramente de lo mostrado en el juego debido al redondeo por paso.',
   },
 } satisfies Record<string, LocalizedText>;

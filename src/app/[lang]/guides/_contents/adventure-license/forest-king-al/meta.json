@@ -4,18 +4,20 @@
     "jp": "森の王",
     "kr": "숲의 왕",
     "zh": "森林之王",
-    "fr": "Forest King"
+    "fr": "Forest King",
+    "es": "Forest King"
   },
   "description": {
     "en": "Guide and advice to clear the Weekly Conquest - Forest King",
     "jp": "ウィークリー討伐 - 森の王 クリアガイドとアドバイス",
     "kr": "주간토벌 - 숲의 왕 클리어 가이드 및 조언",
     "zh": "周常征服 - 森林之王通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Forest King"
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Forest King",
+    "es": "Guía y consejos para superar la Misión Conquista Semanal - Forest King"
   },
   "icon": "T_Licence_4014001",
   "author": "Shiraen",
-  "updated": "2025-11-29",
+  "updated": "2026-09-23",
   "bossId": "51000017",
   "group": "adventure_mission:70600008"
 }

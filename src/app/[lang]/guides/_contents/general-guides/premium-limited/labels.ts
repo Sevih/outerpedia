@@ -12,6 +12,7 @@ export const LABELS = {
     kr: '프리미엄 및 한정 배너 추천 가이드입니다. 각 영웅의 PvE/PvP 목표와 주요 초월 스위트스팟(3★→6★)을 확인하세요.',
     zh: '高级和限定卡池快速推荐指南。查看每位英雄的PvE/PvP目标和关键超越甜点（3★→6★）。',
     fr: 'Recommandations rapides pour les Premium et Limited Banners. Consultez les cibles PvE/PvP et les sweetspots de transcendance clés (3★→6★) pour chaque Héros.',
+    es: 'Recomendaciones rápidas para banners Premium y Limitados. Consulta los objetivos de PvE/PvP y los puntos clave de trascendencia (3★→6★) para cada héroe.',
   },
 
   recommendedChoices: {
@@ -20,6 +21,7 @@ export const LABELS = {
     kr: '추천 선택',
     zh: '推荐选择',
     fr: 'Choix Recommandés',
+    es: 'Elecciones recomendadas',
   },
 
   priority1st: {
@@ -28,6 +30,7 @@ export const LABELS = {
     kr: '1순위',
     zh: '第一优先',
     fr: '1ère Priorité',
+    es: '1ra Prioridad',
   },
 
   priority2nd: {
@@ -36,6 +39,7 @@ export const LABELS = {
     kr: '2순위',
     zh: '第二优先',
     fr: '2e Priorité',
+    es: '2da Prioridad',
   },
 
   priority3rd: {
@@ -44,6 +48,7 @@ export const LABELS = {
     kr: '3순위',
     zh: '第三优先',
     fr: '3e Priorité',
+    es: '3ra Prioridad',
   },
 
   collabNote: {
@@ -52,6 +57,7 @@ export const LABELS = {
     kr: '콜라보 영웅은 콜라보 이벤트 기간에만 획득할 수 있으며, 재개최는 결코 보장되지 않습니다. 노려야 할 선택지가 아니라 순위의 기준을 나타내기 위해 함께 표시됩니다.',
     zh: '联动英雄仅在联动活动期间可获得，且复刻从无保证。此处列出他们只是为了标示其定位，而非值得关注的选项。',
     fr: "Les Héros de collab ne sont obtenables que pendant leur événement de collaboration, et un retour n'est jamais garanti. Ils sont listés pour situer leur niveau, pas comme une option à guetter.",
+    es: 'Los héroes de colaboración solo se pueden obtener durante su evento de colaboración, y una repetición nunca está garantizada. Se listan para indicar en qué posición estarían clasificados, no como una opción a tener en cuenta.',
   },
 
   transcendPriority: {
@@ -60,6 +66,7 @@ export const LABELS = {
     kr: '초월 우선순위',
     zh: '超越优先级',
     fr: 'Priorité de Transcendance',
+    es: 'Prioridad de Trascendencia',
   },
 
   transcendFocusNote: {
@@ -68,6 +75,7 @@ export const LABELS = {
     kr: '최대 효과를 위해 이 영웅들의 초월을 먼저 집중하세요.',
     zh: '为获得最大效果，请优先超越这些英雄。',
     fr: 'Priorisez la transcendance de ces Héros en premier pour un impact maximal.',
+    es: 'Enfócate en trascender a estos héroes primero para obtener el máximo impacto.',
   },
 
   recommendedTargets: {
@@ -76,6 +84,7 @@ export const LABELS = {
     kr: '추천 목표',
     zh: '推荐目标',
     fr: 'Cibles recommandées',
+    es: 'Objetivos recomendados',
   },
 
   transcendImpact: {
@@ -84,6 +93,7 @@ export const LABELS = {
     kr: '초월 영향',
     zh: '超越影响',
     fr: 'Impact de la transcendance',
+    es: 'Impacto de la Trascendencia',
   },
 
   colStar: {
@@ -92,5 +102,6 @@ export const LABELS = {
     kr: '★',
     zh: '★',
     fr: '★',
+    es: '★',
   },
 } as const satisfies Record<string, LocalizedText>;

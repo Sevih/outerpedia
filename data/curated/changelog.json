@@ -45,14 +45,16 @@
       "jp": "雪国の軍勢 ギルドレイド",
       "kr": "설국의 군세 길드 레이드",
       "zh": "霜冻军团 公会战",
-      "fr": "The Frost Legion Guild Raid"
+      "fr": "The Frost Legion Guild Raid",
+      "es": "Incu. Gremio The Frost Legion"
     },
     "content": {
       "en": ["The Frost Legion guild raid updated for September 2026 version."],
       "jp": ["雪国の軍勢 ギルドレイドが2026年9月版にアップデートされました。"],
       "kr": ["설국의 군세 길드 레이드가 2026년 9월 버전으로 업데이트되었습니다."],
       "zh": ["霜冻军团 公会战已更新至2026年9月版本。"],
-      "fr": ["Le Guild Raid The Frost Legion a été mis à jour pour la version de septembre 2026."]
+      "fr": ["Le Guild Raid The Frost Legion a été mis à jour pour la version de septembre 2026."],
+      "es": ["Incu. Gremio The Frost Legion actualizada para la versión de septiembre 2026."]
     },
     "link": {
       "kind": "guide",
@@ -63,10 +65,18 @@
     "date": "2026-09-22",
     "type": "character",
     "title": {
-      "en": "Resonance Eliza"
+      "en": "Resonance Eliza",
+      "es": "Resonancia Eliza",
+      "fr": "Resonance Eliza"
     },
     "content": {
-      "en": ["Resonance Eliza has been added to the database with full skills and stats."]
+      "en": ["Resonance Eliza has been added to the database with full skills and stats."],
+      "es": [
+        "Resonancia Eliza ha sido añadida a la base de datos con todas sus skills y estadísticas."
+      ],
+      "fr": [
+        "Resonance Eliza a été ajoutée à la base de données avec tous ses skills et statistiques."
+      ]
     },
     "link": {
       "kind": "character",
@@ -81,14 +91,16 @@
       "jp": "キメラ",
       "kr": "키메라",
       "zh": "奇美拉",
-      "fr": "Chimera"
+      "fr": "Chimera",
+      "es": "Chimera"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Chimera."],
       "jp": ["次元特異点 キメラ 攻略ガイド。"],
       "kr": ["차원 특이점 키메라 공략 가이드."],
       "zh": ["次元奇点 奇美拉 策略攻略。"],
-      "fr": ["Guide stratégique Singularité Dimensionnelle contre Chimera."]
+      "fr": ["Guide stratégique Singularité Dimensionnelle contre Chimera."],
+      "es": ["Guía de estrategia de Singularidad Dimensional contra Chimera."]
     },
     "link": {
       "kind": "guide",
@@ -99,10 +111,18 @@
     "date": "2026-09-08",
     "type": "update",
     "title": {
-      "en": "Knight of Hope Meteos"
+      "en": "Knight of Hope Meteos",
+      "es": "Caballero de la Esperanza Meteos",
+      "fr": "Knight of Hope Meteos"
     },
     "content": {
-      "en": ["Knight of Hope Meteos Joint Challenge Guide updated for September 2026 version."]
+      "en": ["Knight of Hope Meteos Joint Challenge Guide updated for September 2026 version."],
+      "es": [
+        "Guía del Desafío conjunto Caballero de la Esperanza Meteos actualizada para la versión de septiembre 2026."
+      ],
+      "fr": [
+        "Le guide du défi commun « Knight of Hope Meteos » a été mis à jour pour la version de septembre 2026."
+      ]
     },
     "link": {
       "kind": "guide",
@@ -117,7 +137,8 @@
       "jp": "ティティア",
       "kr": "티티아",
       "zh": "蒂蒂亚",
-      "fr": "Titia"
+      "fr": "Titia",
+      "es": "Titia"
     },
     "content": {
       "en": ["Titia has been added to the database with full skills and stats."],
@@ -126,7 +147,8 @@
       "zh": ["蒂蒂亚已连同其全部技能和属性数据一并添加至数据库中。"],
       "fr": [
         "Titia a été ajoutée à la base de données avec l'ensemble de ses compétences et de ses statistiques."
-      ]
+      ],
+      "es": ["Titia ha sido añadida a la base de datos con todas sus skills y estadísticas."]
     },
     "link": {
       "kind": "character",
@@ -141,7 +163,8 @@
       "jp": "レゾナンス・リン",
       "kr": "레조넌스 린",
       "zh": "共鸣凛",
-      "fr": "Resonance Rin"
+      "fr": "Resonance Rin",
+      "es": "Resonancia Rin"
     },
     "content": {
       "en": ["Resonance Rin has been added to the database with full skills and stats."],
@@ -152,6 +175,9 @@
       "zh": ["“共鸣凛”已加入数据库，包含完整的技能和属性。"],
       "fr": [
         "Resonance Rin a été ajoutée à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ],
+      "es": [
+        "Resonancia Rin ha sido añadida a la base de datos con todas sus skills y estadísticas."
       ]
     },
     "link": {
@@ -167,7 +193,8 @@
       "jp": "OUTERPLANEがSteamで配信中",
       "kr": "OUTERPLANE, Steam 서비스 중",
       "zh": "OUTERPLANE 已登陆 Steam",
-      "fr": "OUTERPLANE sur Steam"
+      "fr": "OUTERPLANE sur Steam",
+      "es": "OUTERPLANE en Steam"
     },
     "content": {
       "en": [
@@ -189,6 +216,10 @@
       "fr": [
         "OUTERPLANE est sur Steam depuis le 26 août. Si vous y jouez, un avis est le moyen le plus simple d'aider d'autres joueurs à le découvrir.",
         "Ça prend une minute — dites ce que vous en pensez vraiment, en bien comme en mal. Et si vous avez commencé sur mobile, votre compte vous suit."
+      ],
+      "es": [
+        "OUTERPLANE está en Steam desde el 26 de agosto. Si lo juegas ahí, una reseña es la forma más simple de ayudar a otros jugadores a encontrarlo.",
+        "Toma solo un minuto: di lo que realmente piensas, bueno o malo. Y si empezaste en móvil, tu cuenta te acompaña."
       ]
     }
   },
@@ -200,7 +231,8 @@
       "jp": "デミウルグ・サエラン",
       "kr": "데미우르그 사에란",
       "zh": "造物主萨兰",
-      "fr": "Demiurge Saeran"
+      "fr": "Demiurge Saeran",
+      "es": "Demiurgo Saeran"
     },
     "content": {
       "en": ["Demiurge Saeran has been added to the database with full skills and stats."],
@@ -213,6 +245,9 @@
       "zh": ["造物主萨兰已连同其全部技能和属性数据一并添加至数据库中。"],
       "fr": [
         "Le démiurge Saeran a été ajouté à la base de données avec l'ensemble de ses compétences et de ses statistiques."
+      ],
+      "es": [
+        "Demiurgo Saeran ha sido añadido a la base de datos con todas sus skills y estadísticas."
       ]
     },
     "link": {
@@ -228,7 +263,8 @@
       "jp": "プロトタイプ EX-78 共同チャレンジガイド — 2026年8月",
       "kr": "EX-78 프로토타입 합동 챌린지 가이드 — 2026년 8월",
       "zh": "EX-78 原型机联合挑战指南 — 2026年8月",
-      "fr": "Guide du défi collaboratif « Prototype EX-78 » — août 2026"
+      "fr": "Guide du défi collaboratif « Prototype EX-78 » — août 2026",
+      "es": "Guía del Desafío conjunto Prototype EX-78 — agosto 2026"
     },
     "content": {
       "en": ["Prototype EX-78 Joint Challenge Guide updated for August 2026 version."],
@@ -237,6 +273,9 @@
       "zh": ["EX-78 原型机联合挑战指南已更新至 2026 年 8 月版。"],
       "fr": [
         "Guide du défi collaboratif « Prototype EX-78 » mis à jour pour la version d'août 2026."
+      ],
+      "es": [
+        "Guía del Desafío conjunto Prototype EX-78 actualizada para la versión de agosto 2026."
       ]
     },
     "link": {
@@ -252,7 +291,8 @@
       "jp": "サイト設定：アニメーションポートレートとスキン",
       "kr": "사이트 설정: 애니메이션 초상화 & 스킨",
       "zh": "网站设置：动态立绘与皮肤",
-      "fr": "Réglages du site : portraits animés et skins"
+      "fr": "Réglages du site : portraits animés et skins",
+      "es": "Configuración del sitio: retratos animados y aspectos"
     },
     "content": {
       "en": [
@@ -279,6 +319,11 @@
         "Un engrenage dans l'en-tête ouvre les réglages du site.",
         "Portraits animés : rejoue les effets de carte du jeu sur les portraits qui en ont un — désactivé par défaut.",
         "Skins affichés : choisissez la tenue de chaque personnage sur tout le site — aussi depuis la galerie d'arts de sa fiche. Enregistré dans votre navigateur."
+      ],
+      "es": [
+        "Un nuevo icono de engranaje en el encabezado abre la configuración del sitio.",
+        "Retratos animados: reproduce los efectos de carta del juego en cada retrato que los tenga — desactivado por defecto.",
+        "Aspectos mostrados: elige qué atuendo muestra cada personaje en todo el sitio — también disponible desde la galería de arte en la página de cada personaje. Se guarda en tu navegador."
       ]
     }
   },
@@ -290,7 +335,8 @@
       "jp": "黄金の王国の尊厳",
       "kr": "황금 왕국의 위엄",
       "zh": "“黄金王国”的尊严",
-      "fr": "La dignité du Royaume d'Or"
+      "fr": "La dignité du Royaume d'Or",
+      "es": "Dignidad del Reino Dorado"
     },
     "content": {
       "en": ["Dignity of the Golden Kingdom Guild Raid Guide updated for July 2026 version."],
@@ -299,6 +345,9 @@
       "zh": ["《黄金王国公会团队副本攻略》已更新至2026年7月版本。"],
       "fr": [
         "Guide de raid de la guilde « Dignity of the Golden Kingdom » mis à jour pour la version de juillet 2026."
+      ],
+      "es": [
+        "Guía de la Incu. Gremio Dignidad del Reino Dorado actualizada para la versión de julio 2026."
       ]
     },
     "link": {
@@ -314,7 +363,8 @@
       "jp": "ラムダ",
       "kr": "람다",
       "zh": "Lambda",
-      "fr": "Lambda"
+      "fr": "Lambda",
+      "es": "Lambda"
     },
     "content": {
       "en": ["Lambda has been added to the database with full skills and stats."],
@@ -323,7 +373,8 @@
       "zh": ["Lambda 已连同其全部技能和属性数据一并添加至数据库中。"],
       "fr": [
         "Lambda a été ajouté à la base de données avec l'ensemble de ses compétences et de ses statistiques."
-      ]
+      ],
+      "es": ["Lambda ha sido agregado a la base de datos con sus skills y estadísticas completas."]
     },
     "link": {
       "kind": "character",
@@ -338,14 +389,16 @@
       "jp": "タイラントの幼生",
       "kr": "타일런트 유생체",
       "zh": "幼体泰兰特",
-      "fr": "Tyrant Toddler"
+      "fr": "Tyrant Toddler",
+      "es": "Tyrant Toddler"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Tyrant Toddler."],
       "jp": ["次元特異点 タイラントの幼生 攻略ガイド。"],
       "kr": ["차원 특이점 타일런트 유생체 공략 가이드."],
       "zh": ["次元奇点 幼体泰兰特 策略攻略。"],
-      "fr": ["Guide stratégique Singularité Dimensionnelle contre Tyrant Toddler."]
+      "fr": ["Guide stratégique Singularité Dimensionnelle contre Tyrant Toddler."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Tyrant Toddler."]
     },
     "link": {
       "kind": "guide",
@@ -360,7 +413,8 @@
       "jp": "七歩蛇",
       "kr": "시치후샤",
       "zh": "七步蛇",
-      "fr": "Shichifuja"
+      "fr": "Shichifuja",
+      "es": "Shichifuja"
     },
     "content": {
       "en": ["Shichifuja Joint Challenge Guide updated for July 2026 version."],
@@ -369,6 +423,9 @@
       "zh": ["七步蛇联合挑战攻略已更新至2026年7月版本。"],
       "fr": [
         "Le guide Joint Challenge Shichifuja a été mis à jour pour la version de juillet 2026."
+      ],
+      "es": [
+        "Guía del Desafío conjunto contra Shichifuja actualizada para la versión de julio de 2026."
       ]
     },
     "link": {
@@ -384,7 +441,8 @@
       "jp": "ダリア — 2026年7月アップデート",
       "kr": "달리아 — 2026년 7월 업데이트",
       "zh": "达利娅 — 2026年7月更新",
-      "fr": "Dahlia — Mise à jour juillet 2026"
+      "fr": "Dahlia — Mise à jour juillet 2026",
+      "es": "Dahlia — Actualización de julio de 2026"
     },
     "content": {
       "en": [
@@ -399,6 +457,9 @@
       "zh": ["达利娅世界Boss攻略已更新至2026年7月赛季，刷新了推荐角色和队伍编成。"],
       "fr": [
         "Le guide world boss Dahlia a été mis à jour pour la saison de juillet 2026 avec de nouveaux personnages recommandés et de nouvelles compositions d'équipe."
+      ],
+      "es": [
+        "La guía del jefe mundial Dahlia ha sido actualizada para la temporada de julio de 2026 con nuevos personajes recomendados y composiciones de equipo."
       ]
     },
     "link": {
@@ -414,14 +475,16 @@
       "jp": "惑星浄化ユニット",
       "kr": "행성 정화 유닛",
       "zh": "净化行星单位",
-      "fr": "Planet Purification Unit"
+      "fr": "Planet Purification Unit",
+      "es": "Planet Purification Unit"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Planet Purification Unit."],
       "jp": ["次元特異点 惑星浄化ユニット 攻略ガイド。"],
       "kr": ["차원 특이점 행성 정화 유닛 공략 가이드."],
       "zh": ["次元奇点 净化行星单位 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Planet Purification Unit."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Planet Purification Unit."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Planet Purification Unit."]
     },
     "link": {
       "kind": "guide",
@@ -436,7 +499,8 @@
       "jp": "深海ガーディアン",
       "kr": "심해 가디언",
       "zh": "深海守护者",
-      "fr": "Deep Sea Guardian"
+      "fr": "Deep Sea Guardian",
+      "es": "Deep Sea Guardian"
     },
     "content": {
       "en": ["Deep Sea Guardian joint boss guide updated for June 2026 version."],
@@ -445,6 +509,9 @@
       "zh": ["深海守护者联合首领指南已更新至2026年6月版本。"],
       "fr": [
         "Le guide du Boss Joint Deep Sea Guardian a été mis à jour pour la version de juin 2026."
+      ],
+      "es": [
+        "Guía del jefe conjunto Deep Sea Guardian actualizada para la versión de junio de 2026."
       ]
     },
     "link": {
@@ -460,7 +527,8 @@
       "jp": "アナーキ",
       "kr": "아나키",
       "zh": "阿娜奇",
-      "fr": "Anarky"
+      "fr": "Anarky",
+      "es": "Anarky"
     },
     "content": {
       "en": [
@@ -471,6 +539,9 @@
       "zh": ["通过降低敌人的穿透力并提升自身防御力来生存的英雄阿娜奇加入阵容。"],
       "fr": [
         "Le héros Anarky, qui survit en réduisant la Pénétration des ennemis et en augmentant sa propre Défense, rejoint le roster."
+      ],
+      "es": [
+        "La héroe Anarky, que sobrevive reduciendo la Penetración de los enemigos y aumentando su propia Defensa, se une al roster."
       ]
     },
     "link": {
@@ -486,14 +557,16 @@
       "jp": "スクルド (闇)",
       "kr": "스쿨드 (암)",
       "zh": "斯库尔德（暗）",
-      "fr": "Skuld (Dark)"
+      "fr": "Skuld (Dark)",
+      "es": "Skuld (Oscuro)"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Skuld (Dark)."],
       "jp": ["次元特異点 スクルド (闇) 攻略ガイド。"],
       "kr": ["차원 특이점 스쿨드 (암) 공략 가이드."],
       "zh": ["次元奇点 斯库尔德（暗） 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Skuld (Dark)."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Skuld (Dark)."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Skuld (Oscuro)."]
     },
     "link": {
       "kind": "guide",
@@ -508,14 +581,16 @@
       "jp": "ヴェルダンディ (光)",
       "kr": "베르단디 (빛)",
       "zh": "贝尔丹迪（光）",
-      "fr": "Verdandi (Light)"
+      "fr": "Verdandi (Light)",
+      "es": "Verdandi (Luz)"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Verdandi (Light)."],
       "jp": ["次元特異点 ヴェルダンディ (光) 攻略ガイド。"],
       "kr": ["차원 특이점 베르단디 (빛) 공략 가이드."],
       "zh": ["次元奇点 贝尔丹迪（光） 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Verdandi (Light)."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Verdandi (Light)."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Verdandi (Luz)."]
     },
     "link": {
       "kind": "guide",
@@ -530,7 +605,8 @@
       "jp": "世界変容の阻止 ギルドレイド",
       "kr": "세계변용 저지 길드 레이드",
       "zh": "阻止世界改变 公会战",
-      "fr": "Prevent World Alteration Guild Raid"
+      "fr": "Prevent World Alteration Guild Raid",
+      "es": "Incu. Gremio: Prevenir la Alteración del Mundo"
     },
     "content": {
       "en": ["Prevent World Alteration guild raid updated for June 2026 version."],
@@ -539,6 +615,9 @@
       "zh": ["阻止世界改变 公会战已更新至2026年6月版本。"],
       "fr": [
         "Le Guild Raid Prevent World Alteration a été mis à jour pour la version de juin 2026."
+      ],
+      "es": [
+        "Incu. Gremio Prevenir la Alteración del Mundo actualizada para la versión de junio de 2026."
       ]
     },
     "link": {
@@ -554,7 +633,8 @@
       "jp": "コアフュージョン イプシロン",
       "kr": "코어 융합 엡실론",
       "zh": "核心融合 埃普西隆",
-      "fr": "Core Fusion Epsilon"
+      "fr": "Core Fusion Epsilon",
+      "es": "Fusión Core Epsilon"
     },
     "content": {
       "en": ["Core Fusion Epsilon has been added to the database with full skills and stats."],
@@ -565,6 +645,9 @@
       "zh": ["核心融合 埃普西隆已添加至数据库，包含完整技能和属性。"],
       "fr": [
         "Core Fusion Epsilon a été ajouté à la base de données avec compétences et stats complètes."
+      ],
+      "es": [
+        "Fusión Core Epsilon ha sido agregado a la base de datos con sus skills y estadísticas completas."
       ]
     },
     "link": {
@@ -580,14 +663,16 @@
       "jp": "ウルド (闇)",
       "kr": "울드 (암)",
       "zh": "乌尔德（暗）",
-      "fr": "Urd (Dark)"
+      "fr": "Urd (Dark)",
+      "es": "Urd (Oscuro)"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Urd (Dark)."],
       "jp": ["次元特異点 ウルド (闇) 攻略ガイド。"],
       "kr": ["차원 특이점 울드 (암) 공략 가이드."],
       "zh": ["次元奇点 乌尔德（暗） 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Urd (Dark)."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Urd (Dark)."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Urd (Oscuro)."]
     },
     "link": {
       "kind": "guide",
@@ -602,14 +687,16 @@
       "jp": "スクルド (光)",
       "kr": "스쿨드 (빛)",
       "zh": "斯库尔德（光）",
-      "fr": "Skuld (Light)"
+      "fr": "Skuld (Light)",
+      "es": "Skuld (Luz)"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Skuld (Light)."],
       "jp": ["次元特異点 スクルド (光) 攻略ガイド。"],
       "kr": ["차원 특이점 스쿨드 (빛) 공략 가이드."],
       "zh": ["次元奇点 斯库尔德（光） 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Skuld (Light)."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Skuld (Light)."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Skuld (Luz)."]
     },
     "link": {
       "kind": "guide",
@@ -624,7 +711,8 @@
       "jp": "ミッドナイトラッシュ スカディ",
       "kr": "미드나이트 러시 스카디",
       "zh": "午夜狂潮 斯卡蒂",
-      "fr": "Midnight Rush Skadi"
+      "fr": "Midnight Rush Skadi",
+      "es": "Rush de Medianoche Skadi"
     },
     "content": {
       "en": [
@@ -635,6 +723,9 @@
       "zh": ["以惊人之势冲破敌人的英雄午夜狂潮 斯卡蒂加入阵容。"],
       "fr": [
         "Le héros Midnight Rush Skadi, qui charge à travers les ennemis avec une force phénoménale, rejoint le roster."
+      ],
+      "es": [
+        "El héroe Rush de Medianoche Skadi, que arremete contra los enemigos con una fuerza tremenda, se une al elenco."
       ]
     },
     "link": {
@@ -650,14 +741,16 @@
       "jp": "エクスタミネーター",
       "kr": "말살자",
       "zh": "歼灭者",
-      "fr": "Annihilator"
+      "fr": "Annihilator",
+      "es": "Annihilator"
     },
     "content": {
       "en": ["Annihilator joint boss guide updated for May 2026 version."],
       "jp": ["エクスタミネーター共同ボスガイドが2026年5月版にアップデートされました。"],
       "kr": ["말살자 공동 보스 가이드가 2026년 5월 버전으로 업데이트되었습니다."],
       "zh": ["歼灭者联合首领指南已更新至2026年5月版本。"],
-      "fr": ["Le guide du Boss Joint Annihilator a été mis à jour pour la version de mai 2026."]
+      "fr": ["Le guide du Boss Joint Annihilator a été mis à jour pour la version de mai 2026."],
+      "es": ["Guía del jefe conjunto Annihilator actualizada para la versión de mayo de 2026."]
     },
     "link": {
       "kind": "guide",
@@ -672,7 +765,8 @@
       "jp": "ブレイジング・ナイト メテオス",
       "kr": "불타는 기사 메테오스",
       "zh": "烈焰骑士梅特奥斯",
-      "fr": "Meteos, le chevalier flamboyant"
+      "fr": "Meteos, le chevalier flamboyant",
+      "es": "Caballero Ardiente Meteos"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Blazing Knight Meteos."],
@@ -681,7 +775,8 @@
       ],
       "kr": ["‘디멘셔널 싱귤래리티’ 전략 가이드 vs ‘블레이징 나이트 메테오스’."],
       "zh": ["《维度奇点》攻略指南 vs 《烈焰骑士：Meteos》。"],
-      "fr": ["Guide stratégique de Dimensional Singularity contre Blazing Knight Meteos."]
+      "fr": ["Guide stratégique de Dimensional Singularity contre Blazing Knight Meteos."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Caballero Ardiente Meteos."]
     },
     "link": {
       "kind": "guide",
@@ -696,14 +791,16 @@
       "jp": "Android スフィンクス",
       "kr": "안드로이드 스핑크스",
       "zh": "Android Sphinx",
-      "fr": "Android Sphinx"
+      "fr": "Android Sphinx",
+      "es": "Android Sphinx"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Android Sphinx."],
       "jp": ["『Dimensional Singularity』攻略ガイド vs Android版『Sphinx』。"],
       "kr": ["‘Dimensional Singularity’ 전략 가이드 vs Android Sphinx."],
       "zh": ["《维度奇点》攻略指南 vs Android版《斯芬克斯》。"],
-      "fr": ["Guide stratégique de Dimensional Singularity contre Android Sphinx."]
+      "fr": ["Guide stratégique de Dimensional Singularity contre Android Sphinx."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Android Sphinx."]
     },
     "link": {
       "kind": "guide",
@@ -718,14 +815,16 @@
       "jp": "VI=E-11-A",
       "kr": "VI=E-11-A",
       "zh": "VI=E-11-A",
-      "fr": "VI=E-11-A"
+      "fr": "VI=E-11-A",
+      "es": "VI=E-11-A"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs VI=E-11-A."],
       "jp": ["『ディメンショナル・シンギュラリティ』攻略ガイド vs VI=E-11-A。"],
       "kr": ["차원 특이점 전략 가이드 vs VI=E-11-A."],
       "zh": ["《维度奇点》攻略指南 vs VI=E-11-A。"],
-      "fr": ["Guide stratégique de « Dimensional Singularity » contre VI=E-11-A."]
+      "fr": ["Guide stratégique de « Dimensional Singularity » contre VI=E-11-A."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs VI=E-11-A."]
     },
     "link": {
       "kind": "guide",
@@ -740,14 +839,16 @@
       "jp": "ウルド (光)",
       "kr": "울드 (빛)",
       "zh": "乌尔德（光）",
-      "fr": "Urd (Light)"
+      "fr": "Urd (Light)",
+      "es": "Urd (Luz)"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Urd (Light)."],
       "jp": ["次元特異点 ウルド (光) 攻略ガイド。"],
       "kr": ["차원 특이점 울드 (빛) 공략 가이드."],
       "zh": ["次元奇点 乌尔德（光） 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Urd (Light)."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Urd (Light)."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Urd (Luz)."]
     },
     "link": {
       "kind": "guide",
@@ -762,7 +863,8 @@
       "jp": "ハルシュナ — 2026年5月アップデート",
       "kr": "하르슈나 — 2026년 5월 업데이트",
       "zh": "哈尔修娜 — 2026年5月更新",
-      "fr": "Harshna — Mise à jour mai 2026"
+      "fr": "Harshna — Mise à jour mai 2026",
+      "es": "Harshna — Actualización de mayo de 2026"
     },
     "content": {
       "en": [
@@ -777,6 +879,9 @@
       "zh": ["哈尔修娜世界Boss攻略已更新至2026年5月赛季，刷新了推荐角色和队伍编成。"],
       "fr": [
         "Le guide world boss Harshna a été mis à jour pour la saison de mai 2026 avec de nouveaux personnages recommandés et de nouvelles compositions d'équipe."
+      ],
+      "es": [
+        "La guía del jefe mundial Harshna se ha actualizado para la temporada de mayo de 2026 con nuevos personajes recomendados y composiciones de equipo."
       ]
     },
     "link": {
@@ -792,14 +897,16 @@
       "jp": "凶悪な狩人べリアル",
       "kr": "흉물 사냥꾼 벨리알",
       "zh": "凶兽猎人贝利尔",
-      "fr": "Abomination Hunter Belial"
+      "fr": "Abomination Hunter Belial",
+      "es": "Cazador de Abominaciones Belial"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Abomination Hunter Belial."],
       "jp": ["次元特異点 凶悪な狩人べリアル 攻略ガイド。"],
       "kr": ["차원 특이점 흉물 사냥꾼 벨리알 공략 가이드."],
       "zh": ["次元奇点 凶兽猎人贝利尔 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Abomination Hunter Belial."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Abomination Hunter Belial."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs Cazador de Abominaciones Belial."]
     },
     "link": {
       "kind": "guide",
@@ -814,14 +921,18 @@
       "jp": "氷幻帝竜ハルシュナ",
       "kr": "빙환제룡 하르슈나",
       "zh": "冰幻帝龙赫索纳",
-      "fr": "Frozen Dragon of Phantasm Harshna"
+      "fr": "Frozen Dragon of Phantasm Harshna",
+      "es": "Dragón Congelado del Fantasma Harshna"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Frozen Dragon of Phantasm Harshna."],
       "jp": ["次元特異点 氷幻帝竜ハルシュナ 攻略ガイド。"],
       "kr": ["차원 특이점 빙환제룡 하르슈나 공략 가이드."],
       "zh": ["次元奇点 冰幻帝龙赫索纳 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Frozen Dragon of Phantasm Harshna."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Frozen Dragon of Phantasm Harshna."],
+      "es": [
+        "Guía de estrategia de Singularidad Dimensional vs Dragón Congelado del Fantasma Harshna."
+      ]
     },
     "link": {
       "kind": "guide",
@@ -836,14 +947,16 @@
       "jp": "七歩蛇の影",
       "kr": "시치후샤의 그림자",
       "zh": "七步蛇的影子",
-      "fr": "Shichifuja's Shadow"
+      "fr": "Shichifuja's Shadow",
+      "es": "La Sombra de Shichifuja"
     },
     "content": {
       "en": ["Dimensional Singularity Strategy Guide vs Shichifuja's Shadow."],
       "jp": ["次元特異点 七歩蛇の影 攻略ガイド。"],
       "kr": ["차원 특이점 시치후샤의 그림자 공략 가이드."],
       "zh": ["次元奇点 七步蛇的影子 策略攻略。"],
-      "fr": ["Guide de stratégie Dimensional Singularity vs Shichifuja's Shadow."]
+      "fr": ["Guide de stratégie Dimensional Singularity vs Shichifuja's Shadow."],
+      "es": ["Guía de estrategia de Singularidad Dimensional vs la Sombra de Shichifuja."]
     },
     "link": {
       "kind": "guide",
@@ -858,7 +971,8 @@
       "jp": "ヒーロー動画イベント — 2026年春 結果発表",
       "kr": "히어로 영상 이벤트 — 2026년 봄 결과 발표",
       "zh": "英雄视频活动 — 2026年春季 结果公布",
-      "fr": "Hero Video Event — Résultats Printemps 2026"
+      "fr": "Hero Video Event — Résultats Printemps 2026",
+      "es": "Evento de Video de Héroe — Resultados de Primavera 2026"
     },
     "content": {
       "en": [
@@ -885,6 +999,11 @@
         "Le Hero Video Event est terminé — parcourez les 9 contributions de la communauté ainsi que le top 3 sélectionné par vote.",
         "Chacun des 9 participants reçoit un coupon supplémentaire de 3 000 ether en plus de son prix.",
         "N'oubliez pas d'utiliser le code coupon OUTERPEDIA1YEAR — disponible pour tous les joueurs."
+      ],
+      "es": [
+        "El Evento de Video de Héroe ha terminado — explora las 9 propuestas de la comunidad y las 3 mejores elegidas por votación comunitaria.",
+        "Cada uno de los 9 participantes recibe un cupón adicional de 3 000 de éter además de su premio.",
+        "No olvides canjear el código de cupón OUTERPEDIA1YEAR — disponible para todos los jugadores."
       ]
     },
     "link": {
@@ -900,7 +1019,8 @@
       "jp": "コアフュージョン エターナル",
       "kr": "코어 융합 이터널",
       "zh": "核心融合 伊特诺",
-      "fr": "Core Fusion Eternal"
+      "fr": "Core Fusion Eternal",
+      "es": "Fusión Core Eternal"
     },
     "content": {
       "en": ["Core Fusion Eternal has been added to the database with full skills and stats."],
@@ -911,6 +1031,9 @@
       "zh": ["核心融合 伊特诺已添加至数据库，包含完整技能和属性。"],
       "fr": [
         "Core Fusion Eternal a été ajouté à la base de données avec compétences et stats complètes."
+      ],
+      "es": [
+        "Fusión Core Eternal se ha añadido a la base de datos con todas sus skills y estadísticas."
       ]
     },
     "link": {
@@ -926,7 +1049,8 @@
       "jp": "光明の騎士・メテウス",
       "kr": "광명의 기사 메테우스",
       "zh": "光明骑士梅修斯",
-      "fr": "Knight of Hope Meteos"
+      "fr": "Knight of Hope Meteos",
+      "es": "Caballero de la Esperanza Meteos"
     },
     "content": {
       "en": ["Knight of Hope Meteos Joint Challenge Guide updated for April 2026 version."],
@@ -935,6 +1059,9 @@
       "zh": ["光明骑士梅修斯联合挑战攻略已更新至2026年4月版本。"],
       "fr": [
         "Le guide Joint Challenge Knight of Hope Meteos a été mis à jour pour la version d'avril 2026."
+      ],
+      "es": [
+        "Guía del Desafío conjunto Caballero de la Esperanza Meteos actualizada para la versión de abril de 2026."
       ]
     },
     "link": {
@@ -950,7 +1077,8 @@
       "jp": "狂人の研究室",
       "kr": "광인의 연구실",
       "zh": "狂人研究室",
-      "fr": "The Madman's Laboratory"
+      "fr": "The Madman's Laboratory",
+      "es": "El Laboratorio del Loco"
     },
     "content": {
       "en": ["The Madman's Laboratory Guild Raid Guide updated for April 2026 version."],
@@ -959,6 +1087,9 @@
       "zh": ["狂人研究室 公会战指南已更新至2026年4月版本。"],
       "fr": [
         "Le guide Guild Raid The Madman's Laboratory a été mis à jour pour la version d'avril 2026."
+      ],
+      "es": [
+        "Guía de Incu. Gremio El Laboratorio del Loco actualizada para la versión de abril de 2026."
       ]
     },
     "link": {
@@ -974,7 +1105,8 @@
       "jp": "グノーシス ドミネ",
       "kr": "그노시스 도미네",
       "zh": "诺希斯 多米内",
-      "fr": "Gnosis Domine"
+      "fr": "Gnosis Domine",
+      "es": "Gnosis Domine"
     },
     "content": {
       "en": [
@@ -987,6 +1119,9 @@
       "zh": ["操控增益并对敌人造成高伤害的造物主英雄诺希斯 多米内加入阵容。"],
       "fr": [
         "Le héros Demiurge Gnosis Domine, qui contrôle les buffs et inflige de lourds dégâts aux ennemis, rejoint le roster."
+      ],
+      "es": [
+        "El Héroe Demiurgo Gnosis Domine, que controla bonos y causa mucho daño a los enemigos, se une al roster."
       ]
     },
     "link": {
@@ -1002,7 +1137,8 @@
       "jp": "コアフュージョン — 解放優先順位",
       "kr": "코어 퓨전 — 해금 우선순위",
       "zh": "核心融合 — 解锁优先级",
-      "fr": "Core Fusion — Priorités de déblocage"
+      "fr": "Core Fusion — Priorités de déblocage",
+      "es": "Fusión Core — Prioridades de desbloqueo"
     },
     "content": {
       "en": [
@@ -1013,6 +1149,9 @@
       "zh": ["异域战记核心融合英雄的解锁优先级和推荐技能等级。"],
       "fr": [
         "Priorités de déblocage et niveaux de compétences recommandés pour les héros Core Fusion dans Outerplane."
+      ],
+      "es": [
+        "Prioridades de desbloqueo y niveles de skill recomendados para los héroes de Fusión Core en Outerplane."
       ]
     },
     "link": {
@@ -1028,7 +1167,8 @@
       "jp": "コアフュージョン ノティア",
       "kr": "코어 융합 노티아",
       "zh": "核心融合 诺缇亚",
-      "fr": "Core Fusion Notia"
+      "fr": "Core Fusion Notia",
+      "es": "Fusión Core Notia"
     },
     "content": {
       "en": ["Core Fusion Notia has been added to the database with full skills and stats."],
@@ -1037,6 +1177,9 @@
       "zh": ["核心融合 诺缇亚已添加至数据库，包含完整技能和属性。"],
       "fr": [
         "Core Fusion Notia a été ajouté à la base de données avec compétences et stats complètes."
+      ],
+      "es": [
+        "Fusión Core Notia se ha añadido a la base de datos con todas sus skills y estadísticas."
       ]
     },
     "link": {
@@ -1052,7 +1195,8 @@
       "jp": "試作機:EX-78 共同作戦ガイド — 2026年3月",
       "kr": "EX-78 시범기 합동 챌린지 가이드 — 2026년 3월",
       "zh": "原型机EX-78联合挑战攻略 — 2026年3月",
-      "fr": "Guide Joint Challenge Prototype EX-78 — Mars 2026"
+      "fr": "Guide Joint Challenge Prototype EX-78 — Mars 2026",
+      "es": "Guía del Desafío conjunto Prototype EX-78 — Marzo 2026"
     },
     "content": {
       "en": ["Prototype EX-78 Joint Challenge Guide updated for March 2026 version."],
@@ -1061,6 +1205,9 @@
       "zh": ["原型机EX-78联合挑战攻略已更新至2026年3月版本。"],
       "fr": [
         "Le guide Joint Challenge Prototype EX-78 a été mis à jour pour la version de mars 2026."
+      ],
+      "es": [
+        "Guía del Desafío conjunto Prototype EX-78 actualizada para la versión de marzo de 2026."
       ]
     },
     "link": {
@@ -1076,7 +1223,8 @@
       "jp": "チームプランナー（ベータ）",
       "kr": "팀 플래너 (베타)",
       "zh": "队伍规划器（测试版）",
-      "fr": "Team Planner (Beta)"
+      "fr": "Team Planner (Beta)",
+      "es": "Team Planner (Beta)"
     },
     "content": {
       "en": [
@@ -1108,6 +1256,12 @@
         "Construisez des équipes de 4, visualisez l'ordre des chains et consultez les buffs/debuffs d'équipe en un coup d'œil.",
         "Partagez vos compositions d'équipe via une URL.",
         "Cet outil est encore en développement — d'autres fonctionnalités arrivent bientôt !"
+      ],
+      "es": [
+        "Una nueva herramienta Team Planner ya está disponible en la sección Tools.",
+        "Arma equipos de 4, visualiza el orden de la chain y consulta los bonos/debuffs del equipo de un vistazo.",
+        "Comparte tus composiciones de equipo mediante URL.",
+        "Esta herramienta todavía está en desarrollo — ¡más funciones próximamente!"
       ]
     },
     "link": {
@@ -1123,7 +1277,8 @@
       "jp": "コミュニティレビュー",
       "kr": "커뮤니티 리뷰",
       "zh": "社区评价",
-      "fr": "Community Reviews"
+      "fr": "Community Reviews",
+      "es": "Reseñas de la comunidad"
     },
     "content": {
       "en": [
@@ -1160,6 +1315,13 @@
         "Votez sur les reviews avec 👍 et 👎 — les mieux notées apparaissent en premier.",
         "Les emojis personnalisés du serveur sont supportés dans le texte des reviews.",
         "Rejoignez le canal forum #hero-reviews sur le Discord EvaMains pour commencer !"
+      ],
+      "es": [
+        "Ahora puedes enviar reseñas de personajes directamente desde el servidor de Discord de EvaMains.",
+        "Las reseñas se muestran en la página de cada personaje con calificaciones, texto y avatares de Discord.",
+        "Vota las reseñas con 👍 y 👎 — las más votadas aparecen primero.",
+        "Se admiten emojis personalizados del servidor en el texto de las reseñas.",
+        "¡Dirígete al canal del foro #hero-reviews en el Discord de EvaMains para empezar!"
       ]
     }
   },
@@ -1171,7 +1333,8 @@
       "jp": "Outerpedia V2 — 正式リリース",
       "kr": "Outerpedia V2 — 정식 출시",
       "zh": "Outerpedia V2 — 正式上线",
-      "fr": "Outerpedia V2 — Sortie officielle"
+      "fr": "Outerpedia V2 — Sortie officielle",
+      "es": "Outerpedia V2 — Lanzamiento oficial"
     },
     "content": {
       "en": [
@@ -1208,6 +1371,13 @@
         "Corrections de bugs et de données suite aux retours de la beta.",
         "V2 permet la recherche sur tout le site — cherchez l'icône loupe dans le menu.",
         "Vous pouvez aussi installer le site comme une appli sur votre téléphone pour un accès rapide."
+      ],
+      "es": [
+        "Outerpedia V2 ya está disponible y reemplaza la versión anterior en outerpedia.com.",
+        "¡Gracias a todos los que probaron durante la semana beta y reportaron problemas!",
+        "Corrección de errores y datos basada en los comentarios de la beta.",
+        "V2 te permite buscar en todo el sitio — busca el ícono de la lupa en el menú.",
+        "También puedes instalar el sitio como una app en tu teléfono para un acceso rápido."
       ]
     }
   },
@@ -1219,7 +1389,8 @@
       "jp": "太古の番兵 — 2026年3月アップデート",
       "kr": "태고의 파수병 — 2026년 3월 업데이트",
       "zh": "太古守卫 — 2026年3月更新",
-      "fr": "Primordial Sentinel — Mise à jour mars 2026"
+      "fr": "Primordial Sentinel — Mise à jour mars 2026",
+      "es": "Centinela Primordial — Actualización de marzo 2026"
     },
     "content": {
       "en": [
@@ -1234,6 +1405,9 @@
       "zh": ["太古守卫世界Boss攻略已更新至2026年3月赛季，刷新了推荐角色和队伍编成。"],
       "fr": [
         "Le guide world boss Primordial Sentinel a été mis à jour pour la saison de mars 2026 avec de nouveaux personnages recommandés et de nouvelles compositions d'équipe."
+      ],
+      "es": [
+        "La guía del Jefe mundial Centinela Primordial se actualizó para la temporada de marzo 2026 con nuevos personajes recomendados y composiciones de equipo."
       ]
     },
     "link": {
@@ -1249,7 +1423,8 @@
       "jp": "新キャラクター — エリス",
       "kr": "신규 캐릭터 — 에리스",
       "zh": "新角色 — 艾理斯",
-      "fr": "Nouveau personnage — Eris"
+      "fr": "Nouveau personnage — Eris",
+      "es": "Nuevo personaje — Eris"
     },
     "content": {
       "en": [
@@ -1264,6 +1439,9 @@
       "zh": ["异常猎人艾理斯加入战场，对敌人施加减益效果并对处于减益状态的敌人造成强力伤害。"],
       "fr": [
         "L'Irregular Hunter Eris, qui inflige des debuffs aux ennemis et inflige de lourds dégâts aux ennemis sous debuff, rejoint le roster."
+      ],
+      "es": [
+        "Se une a la lista Irregular Hunter Eris, quien inflige debuffs a los enemigos y causa un daño poderoso a los enemigos con debuffs."
       ]
     },
     "link": {
@@ -1279,7 +1457,8 @@
       "jp": "Outerpedia V2 — パブリックベータ",
       "kr": "Outerpedia V2 — 공개 베타",
       "zh": "Outerpedia V2 — 公测开启",
-      "fr": "Outerpedia V2 — Beta publique"
+      "fr": "Outerpedia V2 — Beta publique",
+      "es": "Outerpedia V2 — Beta pública"
     },
     "content": {
       "en": [
@@ -1316,6 +1495,13 @@
         "Les pages sont entièrement générées au build — temps de chargement plus rapides, plus d'appels API pour le contenu statique.",
         "UI repensée sur toutes les pages : personnages, équipement, guides, tier list, patch notes, etc.",
         "Nouvelles fonctionnalités : recherche instantanée pour personnages, équipement et guides — et un flux RSS pour suivre les mises à jour."
+      ],
+      "es": [
+        "Outerpedia V2 ya está abierta para una beta pública de una semana antes de reemplazar el sitio actual.",
+        "Sistema multilingüe reconstruido con alternates de idioma SEO adecuados y una arquitectura más limpia.",
+        "Las páginas ahora se generan completamente en tiempo de compilación — cargas más rápidas, sin más llamadas a la API para contenido estático.",
+        "Interfaz rediseñada en todas las páginas: personajes, equipo, guías, tierlist, notas de parche y más.",
+        "Nuevas funciones: búsqueda instantánea de personajes, equipo y guías — y un feed RSS para seguir las actualizaciones."
       ]
     }
   },
@@ -1327,7 +1513,8 @@
       "jp": "七歩蛇",
       "kr": "시치후샤",
       "zh": "七步蛇",
-      "fr": "Shichifuja"
+      "fr": "Shichifuja",
+      "es": "Shichifuja"
     },
     "content": {
       "en": ["Shichifuja Joint Challenge Guide updated for February 2026 version."],
@@ -1336,7 +1523,8 @@
       "zh": ["七步蛇联合挑战攻略已更新至2026年2月版本。"],
       "fr": [
         "Le guide Joint Challenge Shichifuja a été mis à jour pour la version de février 2026."
-      ]
+      ],
+      "es": ["Guía del Desafío conjunto Shichifuja actualizada para la versión de febrero 2026."]
     },
     "link": {
       "kind": "guide",
@@ -1351,7 +1539,8 @@
       "jp": "惑星制御ユニット",
       "kr": "행성 제어 유닛",
       "zh": "行星控制单元",
-      "fr": "Planetary Control Unit"
+      "fr": "Planetary Control Unit",
+      "es": "Unidad de Control Planetario"
     },
     "content": {
       "en": ["Planetary Control Unit Guild Raid Guide updated for February 2026 version."],
@@ -1360,6 +1549,9 @@
       "zh": ["行星控制单元 公会战指南已更新至2026年2月版本。"],
       "fr": [
         "Le guide Guild Raid Planetary Control Unit a été mis à jour pour la version de février 2026."
+      ],
+      "es": [
+        "Guía del Raid guild Unidad de Control Planetario actualizada para la versión de febrero 2026."
       ]
     },
     "link": {
@@ -1375,14 +1567,16 @@
       "jp": "S4 Ep.2 : 聖所防衛戦",
       "kr": "S4 Ep.2 : 성소 방어전",
       "zh": "S4 Ep.2 : 圣所防御战",
-      "fr": "S4 Ep.2 : Sanctuary Defense"
+      "fr": "S4 Ep.2 : Sanctuary Defense",
+      "es": "T4 Ep.2: Defensa del Santuario"
     },
     "content": {
       "en": ["Final boss guide of Season 4 Episode 2 is now available."],
       "jp": ["シーズン4 エピソード2の最終ボスガイドが公開されました。"],
       "kr": ["시즌 4 에피소드 2 최종 보스 가이드가 공개되었습니다."],
       "zh": ["现已推出第4季第2章最终Boss攻略。"],
-      "fr": ["Le guide du Boss final de la Saison 4 Épisode 2 est désormais disponible."]
+      "fr": ["Le guide du Boss final de la Saison 4 Épisode 2 est désormais disponible."],
+      "es": ["Ya está disponible la guía del jefe final de la Temporada 4 Episodio 2."]
     },
     "link": {
       "kind": "guide",
@@ -1397,7 +1591,8 @@
       "jp": "新ヒーロー：プリミネ",
       "kr": "신규 영웅: 프리미네",
       "zh": "新同伴：普莉米妮",
-      "fr": "Nouveau héros : Primine"
+      "fr": "Nouveau héros : Primine",
+      "es": "Nuevo Héroe: Primine"
     },
     "content": {
       "en": [
@@ -1412,6 +1607,9 @@
       "zh": ["普莉米妮加入战场，通过夹攻造成稳定伤害，同时以护盾和免疫保护队友。"],
       "fr": [
         "Primine rejoint le roster — inflige des dégâts fiables grâce aux Dual Attacks tout en protégeant ses alliés avec des Shields et Immunity."
+      ],
+      "es": [
+        "Primine se une a la lista, causando daño confiable mediante Ataques Duales mientras protege a sus aliados con Escudos e Inmunidad."
       ]
     },
     "link": {
@@ -1427,7 +1625,8 @@
       "jp": "サウンドトラックプレイヤー",
       "kr": "사운드트랙 플레이어",
       "zh": "原声带播放器",
-      "fr": "Soundtrack Player"
+      "fr": "Soundtrack Player",
+      "es": "Reproductor de banda sonora"
     },
     "content": {
       "en": [
@@ -1442,6 +1641,9 @@
       "zh": ["在Outerpedia上欣赏《异域战记》的BGM！流媒体播放或下载您喜欢的曲目。"],
       "fr": [
         "Profitez des BGM d'Outerplane directement sur Outerpedia ! Streamez ou téléchargez vos pistes préférées."
+      ],
+      "es": [
+        "¡Disfruta de la BGM de Outerplane directamente en Outerpedia! Escucha o descarga tus pistas favoritas."
       ]
     },
     "link": {
@@ -1457,7 +1659,8 @@
       "jp": "OUTERPLANEの開発チームからの公式認定",
       "kr": "OUTERPLANE 개발팀의 공식 인정",
       "zh": "《异域战记》官方认可",
-      "fr": "Reconnaissance officielle des développeurs d'OUTERPLANE"
+      "fr": "Reconnaissance officielle des développeurs d'OUTERPLANE",
+      "es": "Reconocimiento oficial de los desarrolladores de OUTERPLANE"
     },
     "content": {
       "en": [
@@ -1474,6 +1677,9 @@
       ],
       "fr": [
         "Outerpedia a été officiellement reconnu par l'équipe de développement d'OUTERPLANE ! Un code coupon spécial **OUTERPEDIA** a été créé pour célébrer notre ressource communautaire. Merci à toutes et tous pour votre soutien !"
+      ],
+      "es": [
+        "¡Outerpedia ha sido oficialmente reconocida por el equipo de desarrollo de OUTERPLANE! Se ha creado un código de cupón especial **OUTERPEDIA** para celebrar nuestro recurso comunitario. ¡Gracias a todos los usuarios por su apoyo!"
       ]
     }
   },
@@ -1485,7 +1691,8 @@
       "jp": "壁紙ギャラリー",
       "kr": "배경화면 갤러리",
       "zh": "壁纸画廊",
-      "fr": "Galerie de wallpapers"
+      "fr": "Galerie de wallpapers",
+      "es": "Galería de fondos de pantalla"
     },
     "content": {
       "en": [
@@ -1502,6 +1709,9 @@
       ],
       "fr": [
         "Parcourez et téléchargez les artworks et wallpapers officiels d'Outerplane. Assets fournis avec l'accord de Major9 et VAGames pour un usage personnel."
+      ],
+      "es": [
+        "Explora y descarga artes oficiales y fondos de pantalla de Outerplane. Recursos proporcionados con aprobación de Major9 y VAGames para uso personal."
       ]
     },
     "link": {
@@ -1517,7 +1727,8 @@
       "jp": "歩行要塞バルトベニオン",
       "kr": "보행요새 발트베니온",
       "zh": "移动要塞瓦尔特贝尼翁",
-      "fr": "Walking Fortress Vault Venion"
+      "fr": "Walking Fortress Vault Venion",
+      "es": "Walking Fortress Vault Venion"
     },
     "content": {
       "en": ["Walking Fortress Vault Venion world boss guide updated for January 2026 version."],
@@ -1526,6 +1737,9 @@
       "zh": ["移动要塞瓦尔特贝尼翁 世界首领指南已更新至2026年1月版本。"],
       "fr": [
         "Le guide world boss Walking Fortress Vault Venion a été mis à jour pour la version de janvier 2026."
+      ],
+      "es": [
+        "Guía del jefe mundial Walking Fortress Vault Venion actualizada para la versión de enero de 2026."
       ]
     },
     "link": {
@@ -1541,7 +1755,8 @@
       "jp": "新デミウルゴヒーロー：モナド イオータ",
       "kr": "새로운 데미우르고 영웅: 모나드 요타",
       "zh": "新的造物主英雄：单子 佑妲",
-      "fr": "Nouveau héros Demiurge : Monad Iota"
+      "fr": "Nouveau héros Demiurge : Monad Iota",
+      "es": "Nuevo Héroe Demiurgo: Monad Iota"
     },
     "content": {
       "en": [
@@ -1554,6 +1769,9 @@
       "zh": ["单子 佑妲加入战场，干扰敌人的攻击模式并为所有队友提供强力增益。"],
       "fr": [
         "Monad Iota rejoint le roster, perturbant les patterns d'attaque ennemis et offrant de puissants buffs à tous les alliés."
+      ],
+      "es": [
+        "Monad Iota se une a la lista, alterando los patrones de ataque enemigos y otorgando poderosos bonos a todos los aliados."
       ]
     },
     "link": {
@@ -1569,7 +1787,8 @@
       "jp": "進捗トラッカー",
       "kr": "진행률 추적기",
       "zh": "进度追踪器",
-      "fr": "Progress Tracker"
+      "fr": "Progress Tracker",
+      "es": "Rastreador de progreso"
     },
     "content": {
       "en": [
@@ -1582,6 +1801,9 @@
       "zh": ["追踪《异域战记》每日/每周/每月任务、商店购买和制作的新工具。"],
       "fr": [
         "Nouvel outil pour suivre vos tâches quotidiennes, hebdomadaires et mensuelles, vos achats de shop et vos crafts dans Outerplane."
+      ],
+      "es": [
+        "Nueva herramienta para rastrear tus tareas diarias, semanales y mensuales, compras en la tienda y artesanías en Outerplane."
       ]
     },
     "link": {
@@ -1597,7 +1819,8 @@
       "jp": "インターフェース改善",
       "kr": "인터페이스 개선",
       "zh": "界面改进",
-      "fr": "Améliorations de l'interface"
+      "fr": "Améliorations de l'interface",
+      "es": "Mejoras de interfaz"
     },
     "content": {
       "en": [
@@ -1624,6 +1847,11 @@
         "Amélioration de l'affichage des cards de personnage sur tout le site : tier lists, recommandations d'équipe et pages de guide partagent désormais un look unifié et épuré.",
         "Meilleure expérience mobile : les grilles d'équipes s'affichent désormais correctement sur petits écrans, et la page « Most Used Units » n'a plus de texte qui se chevauche.",
         "Refonte de la homepage : le lien Discord est désormais une banner à part, et un message s'affiche quand aucune banner personnage n'est active."
+      ],
+      "es": [
+        "Se mejoró la visualización de las tarjetas de personajes en todo el sitio: las listas de tier, las recomendaciones de equipo y las páginas de guías ahora comparten un aspecto unificado y más limpio.",
+        "Mejor experiencia móvil: las cuadrículas de equipo ahora se muestran correctamente en pantallas pequeñas, y la página \"Most Used Units\" ya no tiene texto superpuesto.",
+        "Rediseño de la página de inicio: el enlace de Discord ahora es un banner separado, y se muestra un mensaje cuando no hay ningún banner de personaje activo."
       ]
     }
   },
@@ -1635,7 +1863,8 @@
       "jp": "深海ガーディアン",
       "kr": "심해 가디언",
       "zh": "深海守护者",
-      "fr": "Deep Sea Guardian"
+      "fr": "Deep Sea Guardian",
+      "es": "Deep Sea Guardian"
     },
     "content": {
       "en": ["Deep Sea Guardian joint boss guide updated for January 2026 version."],
@@ -1644,6 +1873,9 @@
       "zh": ["深海守护者联合首领指南已更新至2026年1月版本。"],
       "fr": [
         "Le guide du Boss Joint Deep Sea Guardian a été mis à jour pour la version de janvier 2026."
+      ],
+      "es": [
+        "Guía del jefe conjunto Deep Sea Guardian actualizada para la versión de enero de 2026."
       ]
     },
     "link": {
@@ -1659,7 +1891,8 @@
       "jp": "2026年ロードマップガイド",
       "kr": "2026 로드맵 가이드",
       "zh": "2026路线图指南",
-      "fr": "Guide Roadmap 2026"
+      "fr": "Guide Roadmap 2026",
+      "es": "Guía de la hoja de ruta 2026"
     },
     "content": {
       "en": [
@@ -1676,6 +1909,9 @@
       ],
       "fr": [
         "Résumé du meeting offline de janvier 2026 : orientations de développement, roadmap trimestrielle, nouveaux personnages (Monad Iota, Premine, Eris, Gnosis Domine), plans Core Fusion, RTA, Dimension Singularity et code coupon."
+      ],
+      "es": [
+        "Resumen de la reunión offline de enero de 2026: dirección de desarrollo, hoja de ruta trimestral, nuevos personajes (Monad Iota, Premine, Eris, Gnosis Domine), planes de Fusión Core, RTA, Singularidad Dimensional y código de cupón."
       ]
     },
     "link": {
@@ -1691,7 +1927,8 @@
       "jp": "黄金なる王国の威容",
       "kr": "황금 왕국의 위용",
       "zh": "黄金王国的威严",
-      "fr": "Dignity of the Golden Kingdom"
+      "fr": "Dignity of the Golden Kingdom",
+      "es": "Dignidad del Reino Dorado"
     },
     "content": {
       "en": ["Dignity of the Golden Kingdom Guild Raid Guide updated for January 2026 version."],
@@ -1700,6 +1937,9 @@
       "zh": ["黄金王国的威严 公会战指南已更新至2026年1月版本。"],
       "fr": [
         "Le guide Guild Raid Dignity of the Golden Kingdom a été mis à jour pour la version de janvier 2026."
+      ],
+      "es": [
+        "Guía del Raid de Gremio Dignity of the Golden Kingdom actualizada para la versión de enero de 2026."
       ]
     },
     "link": {
@@ -1715,14 +1955,16 @@
       "jp": "ドレイカーン",
       "kr": "드레이칸",
       "zh": "德雷坎",
-      "fr": "Drakhan"
+      "fr": "Drakhan",
+      "es": "Drakhan"
     },
     "content": {
       "en": ["Drakhan world boss guide updated for December 2025 version."],
       "jp": ["ドレイカーン ワールドボスガイドが2025年12月版にアップデートされました。"],
       "kr": ["드레이칸 월드 보스 가이드가 2025년 12월 버전으로 업데이트되었습니다."],
       "zh": ["德雷坎 世界首领指南已更新至2025年12月版本。"],
-      "fr": ["Le guide world boss Drakhan a été mis à jour pour la version de décembre 2025."]
+      "fr": ["Le guide world boss Drakhan a été mis à jour pour la version de décembre 2025."],
+      "es": ["Guía del jefe mundial Drakhan actualizada para la versión de diciembre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -1737,7 +1979,8 @@
       "jp": "エクスタミネーター",
       "kr": "말살자",
       "zh": "歼灭者",
-      "fr": "Annihilator"
+      "fr": "Annihilator",
+      "es": "Annihilator"
     },
     "content": {
       "en": ["Annihilator joint boss guide updated for December 2025 version."],
@@ -1746,7 +1989,8 @@
       "zh": ["歼灭者联合首领指南已更新至2025年12月版本。"],
       "fr": [
         "Le guide du Boss Joint Annihilator a été mis à jour pour la version de décembre 2025."
-      ]
+      ],
+      "es": ["Guía del jefe conjunto Annihilator actualizada para la versión de diciembre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -1761,7 +2005,8 @@
       "jp": "世界変容の阻止 ギルドレイド",
       "kr": "세계변용 저지 길드 레이드",
       "zh": "阻止世界改变 公会战",
-      "fr": "Prevent World Alteration Guild Raid"
+      "fr": "Prevent World Alteration Guild Raid",
+      "es": "Incu. Gremio: Prevenir la Alteración del Mundo"
     },
     "content": {
       "en": ["Prevent World Alteration guild raid updated for December 2025 version."],
@@ -1770,6 +2015,9 @@
       "zh": ["阻止世界改变 公会战已更新至2025年12月版本。"],
       "fr": [
         "Le Guild Raid Prevent World Alteration a été mis à jour pour la version de décembre 2025."
+      ],
+      "es": [
+        "Incu. Gremio Prevent World Alteration actualizada para la versión de diciembre de 2025."
       ]
     },
     "link": {
@@ -1785,7 +2033,8 @@
       "jp": "新限定ヒーロー：三蔵法師 あめ",
       "kr": "새로운 한정 영웅: 삼장법사 아메",
       "zh": "新限定英雄：三藏法师 亚美",
-      "fr": "Nouveau héros Limited : Mystic Sage Ame"
+      "fr": "Nouveau héros Limited : Mystic Sage Ame",
+      "es": "Nuevo Héroe Limitado: Míst. Sabio Ame"
     },
     "content": {
       "en": [
@@ -1800,6 +2049,9 @@
       "zh": ["三藏法师 亚美造成固定伤害并对敌人施加减益效果，同时提高自身和队友的优先度。"],
       "fr": [
         "Mystic Sage Ame, qui inflige des Fixed Damage et applique des Debuffs aux ennemis tout en augmentant la Priority d'elle-même et de ses alliés."
+      ],
+      "es": [
+        "Míst. Sabio Ame, quien inflige Daño Fijo y aplica Debuffs a los enemigos mientras aumenta la Prioridad de sí misma y de sus aliados."
       ]
     },
     "link": {
@@ -1815,14 +2067,16 @@
       "jp": "ラグナケウス",
       "kr": "라그나케우스",
       "zh": "拉格纳凯乌斯",
-      "fr": "Ragnakeus"
+      "fr": "Ragnakeus",
+      "es": "Ragnakeus"
     },
     "content": {
       "en": ["Ragnakeus world boss guide updated for December 2025 version."],
       "jp": ["ラグナケウス ワールドボスガイドが2025年12月版にアップデートされました。"],
       "kr": ["라그나케우스 월드 보스 가이드가 2025년 12월 버전으로 업데이트되었습니다."],
       "zh": ["拉格纳凯乌斯 世界首领指南已更新至2025年12月版本。"],
-      "fr": ["Le guide world boss Ragnakeus a été mis à jour pour la version de décembre 2025."]
+      "fr": ["Le guide world boss Ragnakeus a été mis à jour pour la version de décembre 2025."],
+      "es": ["Guía del jefe mundial Ragnakeus actualizada para la versión de diciembre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -1837,7 +2091,8 @@
       "jp": "光明の騎士・メテウス",
       "kr": "광명의 기사 메테우스",
       "zh": "希望骑士梅特乌斯",
-      "fr": "Knight of Hope Meteos"
+      "fr": "Knight of Hope Meteos",
+      "es": "Caballero de la Esperanza Meteos"
     },
     "content": {
       "en": ["Knight of Hope Meteos joint boss guide updated for November 2025 version."],
@@ -1846,6 +2101,9 @@
       "zh": ["希望骑士梅特乌斯联合首领指南已更新至2025年11月版本。"],
       "fr": [
         "Le guide du Boss Joint Knight of Hope Meteos a été mis à jour pour la version de novembre 2025."
+      ],
+      "es": [
+        "Guía del jefe conjunto Caballero de la Esperanza Meteos actualizada para la versión de noviembre de 2025."
       ]
     },
     "link": {
@@ -1861,7 +2119,8 @@
       "jp": "装備表示の改善",
       "kr": "장비 표시 개선",
       "zh": "装备显示改进",
-      "fr": "Améliorations d'affichage de l'équipement"
+      "fr": "Améliorations d'affichage de l'équipement",
+      "es": "Mejoras en la visualización del equipo"
     },
     "content": {
       "en": [
@@ -1888,6 +2147,11 @@
         "Couleurs et arrière-plans de rareté dynamiques pour les cards d'équipement selon la rareté de l'item (legendary, epic, superior, normal).",
         "Ajout du support des plages de stats pour les équipements Epic 6★ sur les pages weapons et accessoires.",
         "Synchronisation URL pour les onglets sur la page Gear Usage Statistics."
+      ],
+      "es": [
+        "Colores y fondos de rareza dinámicos para las tarjetas de equipo según la rareza del objeto (legendario, épico, superior, normal).",
+        "Se agregó soporte de rangos de estadísticas para equipo Épico de 6 estrellas en las páginas de armas y accesorios.",
+        "Sincronización de URL para las pestañas en la página de Estadísticas de Uso de Gear."
       ]
     }
   },
@@ -1899,14 +2163,16 @@
       "jp": "雪国の軍勢 ギルドレイド",
       "kr": "설국의 군세 길드 레이드",
       "zh": "霜冻军团 公会战",
-      "fr": "The Frost Legion Guild Raid"
+      "fr": "The Frost Legion Guild Raid",
+      "es": "Incu. Gremio The Frost Legion"
     },
     "content": {
       "en": ["The Frost Legion guild raid updated for November 2025 version."],
       "jp": ["雪国の軍勢 ギルドレイドが2025年11月版にアップデートされました。"],
       "kr": ["설국의 군세 길드 레이드가 2025년 11월 버전으로 업데이트되었습니다."],
       "zh": ["霜冻军团 公会战已更新至2025年11月版本。"],
-      "fr": ["Le Guild Raid The Frost Legion a été mis à jour pour la version de novembre 2025."]
+      "fr": ["Le Guild Raid The Frost Legion a été mis à jour pour la version de novembre 2025."],
+      "es": ["Incu. Gremio The Frost Legion actualizada para la versión de noviembre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -1921,7 +2187,8 @@
       "jp": "新ヒーロー フォルトゥナ",
       "kr": "신규 영웅 포르투나",
       "zh": "新英雄 福图娜",
-      "fr": "Nouvelle héroïne Fortuna"
+      "fr": "Nouvelle héroïne Fortuna",
+      "es": "Nuevo héroe Fortuna"
     },
     "content": {
       "en": [
@@ -1936,6 +2203,9 @@
       "zh": ["福图娜在攻击敌人的同时施加冰冻、流血和优先度降低等减益效果，加入战场。"],
       "fr": [
         "Fortuna, qui attaque les ennemis en infligeant des debuffs comme Freeze, Bleed et réduction de Priority, rejoint le champ de bataille."
+      ],
+      "es": [
+        "Fortuna, quien ataca a los enemigos mientras inflige debuffs como Congelación, Sangrado y reducción de Prioridad, se une al campo de batalla."
       ]
     },
     "link": {
@@ -1951,14 +2221,16 @@
       "jp": "原初の番人 ワールドボス",
       "kr": "원시의 파수꾼 월드 보스",
       "zh": "原初守卫 世界首领",
-      "fr": "Primordial Sentinel World Boss"
+      "fr": "Primordial Sentinel World Boss",
+      "es": "Jefe mundial Centinela Primordial"
     },
     "content": {
       "en": ["Primordial Sentinel world boss updated for November 2025 version."],
       "jp": ["原初の番人 ワールドボスが2025年11月版にアップデートされました。"],
       "kr": ["원시의 파수꾼 월드 보스가 2025년 11월 버전으로 업데이트되었습니다。"],
       "zh": ["原初守卫 世界首领已更新至2025年11月版本。"],
-      "fr": ["Primordial Sentinel world boss a été mis à jour pour la version de novembre 2025."]
+      "fr": ["Primordial Sentinel world boss a été mis à jour pour la version de novembre 2025."],
+      "es": ["Jefe mundial Centinela Primordial actualizado para la versión de noviembre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -1973,7 +2245,8 @@
       "jp": "新デミウルゴヒーロー：グノーシス ビエラ",
       "kr": "새로운 데미우르고 영웅: 그노시스 비엘라",
       "zh": "新的造物主英雄：诺希斯 比埃拉",
-      "fr": "Nouvelle héroïne Demiurge : Gnosis Viella"
+      "fr": "Nouvelle héroïne Demiurge : Gnosis Viella",
+      "es": "Nuevo héroe Demiurgo: Gnosis Viella"
     },
     "content": {
       "en": [
@@ -1984,6 +2257,9 @@
       "zh": ["诺希斯 比埃拉在攻击敌人的同时施加各种减益效果，加入战场。"],
       "fr": [
         "Gnosis Viella, qui attaque les ennemis en infligeant divers debuffs, rejoint le champ de bataille."
+      ],
+      "es": [
+        "Gnosis Viella, quien ataca a los enemigos mientras inflige varios debuffs, se une al campo de batalla."
       ]
     },
     "link": {
@@ -1999,7 +2275,8 @@
       "jp": "初心者向けFAQガイド",
       "kr": "초보자 FAQ 가이드",
       "zh": "新手FAQ指南",
-      "fr": "Guide FAQ débutant"
+      "fr": "Guide FAQ débutant",
+      "es": "Guía de FAQ para principiantes"
     },
     "content": {
       "en": [
@@ -2012,6 +2289,9 @@
       "zh": ["新玩家常见问题：起始队伍、抽卡优先级、装备进度、资源管理。"],
       "fr": [
         "Questions fréquentes des nouveaux joueurs : équipes de départ, priorités de pull, progression de l'équipement et gestion des ressources."
+      ],
+      "es": [
+        "Preguntas comunes de jugadores nuevos: equipos iniciales, prioridades de invocación, progresión de gear y gestión de recursos."
       ]
     },
     "link": {
@@ -2027,7 +2307,8 @@
       "jp": "試作機 EX-78 ジョイントボス",
       "kr": "EX-78 조인트 보스 시제품",
       "zh": "EX-78 原型机 连接凸台",
-      "fr": "Prototype EX-78 « Joint Boss »"
+      "fr": "Prototype EX-78 « Joint Boss »",
+      "es": "Jefe conjunto Prototipo EX-78"
     },
     "content": {
       "en": ["Prototype EX-78 joint boss updated for October 2025 version."],
@@ -2036,7 +2317,8 @@
       "zh": ["EX-78 原型机的接头凸台已针对 2025 年 10 月版进行了更新。"],
       "fr": [
         "Mise à jour du bossage d'assemblage du prototype EX-78 pour la version d'octobre 2025."
-      ]
+      ],
+      "es": ["Jefe conjunto Prototipo EX-78 actualizado para la versión de octubre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2051,7 +2333,8 @@
       "jp": "「狂人の実験室」ギルドレイド",
       "kr": "‘광인의 실험실’ 길드 레이드",
       "zh": "“疯子实验室”公会团队副本",
-      "fr": "Le raid de guilde « Le laboratoire du fou »"
+      "fr": "Le raid de guilde « Le laboratoire du fou »",
+      "es": "Incu. Gremio El Laboratorio del Loco"
     },
     "content": {
       "en": ["The Madman's Laboratory guild raid updated for october 2025 version."],
@@ -2060,7 +2343,8 @@
       "zh": ["“疯子实验室”公会团队副本已更新至2025年10月版本。"],
       "fr": [
         "Le raid de guilde « Le laboratoire du fou » a été mis à jour pour la version d'octobre 2025."
-      ]
+      ],
+      "es": ["Incu. Gremio El Laboratorio del Loco actualizada para la versión de octubre de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2075,7 +2359,8 @@
       "jp": "新ヒーロー「ヴィエラ」",
       "kr": "새로운 영웅 비엘라",
       "zh": "新英雄维埃拉",
-      "fr": "Nouvelle héroïne : Viella"
+      "fr": "Nouvelle héroïne : Viella",
+      "es": "Nuevo héroe Viella"
     },
     "content": {
       "en": [
@@ -2090,6 +2375,9 @@
       "zh": ["维埃拉——这位能为盟友提供免疫效果，并通过“毒”效果提升团队整体伤害的英雄——现已上线。"],
       "fr": [
         "Viella, qui confère l'immunité à ses alliés et augmente les dégâts globaux de l'équipe grâce à l'effet « Poison », est désormais disponible."
+      ],
+      "es": [
+        "Viella, quien otorga inmunidad a los aliados y aumenta el daño total del equipo mediante Veneno, ya está disponible."
       ]
     },
     "link": {
@@ -2105,7 +2393,8 @@
       "jp": "ガイドで最もよく使われる単位",
       "kr": "가이드에서 가장 많이 사용되는 단위",
       "zh": "指南中最常用的单位",
-      "fr": "Unités les plus utilisées dans les guides"
+      "fr": "Unités les plus utilisées dans les guides",
+      "es": "Unidades más usadas en guías"
     },
     "content": {
       "en": [
@@ -2132,6 +2421,11 @@
         "🔍 **Nouvel outil disponible** – Découvrez quels héros sont les plus souvent recommandés dans tous les guides d'Outerpedia.",
         "🎯 Filtrez par catégorie, élément, classe, rareté et activez/désactivez l'affichage des unités en quantité limitée.",
         "🆓 **Étiquette « Unité gratuite »** désormais disponible sur les pages des personnages et dans les classements."
+      ],
+      "es": [
+        "🔍 **Nueva herramienta disponible** – Descubre qué héroes son los más recomendados en todas las guías de Outerpedia.",
+        "🎯 Filtra por categoría, elemento, clase, rareza y activa/desactiva unidades limitadas.",
+        "🆓 **Etiqueta de Unidad Gratuita** ahora disponible en las páginas de personajes y en las tier lists."
       ]
     },
     "link": {
@@ -2147,7 +2441,8 @@
       "jp": "Outerpediaの最新情報 – 2025年10月",
       "kr": "Outerpedia 업데이트 – 2025년 10월",
       "zh": "《Outerpedia》更新——2025年10月",
-      "fr": "Mise à jour d'Outerpedia – octobre 2025"
+      "fr": "Mise à jour d'Outerpedia – octobre 2025",
+      "es": "Actualización de Outerpedia – Octubre 2025"
     },
     "content": {
       "en": [
@@ -2174,6 +2469,11 @@
         "Une mise à jour majeure axée sur les **fiches produits** et la **prise en charge multilingue** !",
         "🌍 **Déploiement multilingue** – Toutes les pages d'objets (armes, accessoires, ensembles) sont désormais entièrement disponibles en **anglais, japonais et coréen**.",
         "⚔️ **Refonte de l'interface** – Refonte visuelle complète des pages de la base de données pour un aspect plus épuré et harmonisé."
+      ],
+      "es": [
+        "¡Una actualización importante centrada en las **páginas de objetos** y el **soporte multilingüe**!",
+        "🌍 **Expansión multilingüe** – Todas las páginas de objetos (Armas, Accesorios, Sets) ya están completamente disponibles en **inglés, japonés y coreano**.",
+        "⚔️ **Renovación del equipo** – Rediseño visual completo de las páginas de la base de datos para un aspecto más limpio y unificado."
       ]
     }
   },
@@ -2185,7 +2485,8 @@
       "jp": "新ヒーロー「サマーナイト」の「ドリーム・エンバー」",
       "kr": "신규 영웅 ‘여름의 기사’의 꿈의 불씨",
       "zh": "新英雄“夏日骑士”的“梦之余烬”",
-      "fr": "Nouveau héros : « Summer Knight's Dream Ember »"
+      "fr": "Nouveau héros : « Summer Knight's Dream Ember »",
+      "es": "Nuevo héroe Sueño del Caballero de Verano Ember"
     },
     "content": {
       "en": [
@@ -2207,6 +2508,10 @@
       "fr": [
         "Le héros en édition limitée saisonnière **Summer Knight's Dream Ember** fait son apparition dans OUTERPLANE !",
         "Elle inflige **des dégâts fixes aux boss** et confère à ses alliés les bonus **Pénétration** et **Priorité**."
+      ],
+      "es": [
+        "¡El héroe limitado de temporada **Sueño del Caballero de Verano Ember** ha llegado a OUTERPLANE!",
+        "Inflige **daño fijo a los jefes** y otorga bonos de **Penetración** y **Prioridad** a sus aliados."
       ]
     },
     "link": {
@@ -2222,7 +2527,8 @@
       "jp": "多言語対応（開発中）",
       "kr": "다국어 지원 (개발 중)",
       "zh": "多语言支持（开发中）",
-      "fr": "Prise en charge multilingue (en cours de développement)"
+      "fr": "Prise en charge multilingue (en cours de développement)",
+      "es": "Soporte multilingüe (en progreso)"
     },
     "content": {
       "en": [
@@ -2249,6 +2555,11 @@
         "Nous avons commencé à mettre en place la prise en charge multilingue. Un sélecteur de **langue** est désormais disponible dans l'en-tête et permet de conserver la page sur laquelle vous vous trouvez lorsque vous changez de langue (en/jp/kr).",
         "La localisation initiale est désormais disponible pour le référencement de la page d'accueil et le journal des modifications. D'autres pages seront mises en ligne progressivement.",
         "Travaux en cours. Merci de signaler tout problème sur Discord."
+      ],
+      "es": [
+        "Se comenzó a implementar el soporte multilingüe. Ahora hay disponible un selector de **Idioma** en el encabezado que mantiene tu página actual al cambiar (en/jp/kr).",
+        "La localización inicial ya está activa para el SEO de la página principal y el registro de cambios. Más páginas se irán implementando progresivamente.",
+        "Trabajo en progreso. Por favor, reporta los problemas en Discord."
       ]
     }
   },
@@ -2260,7 +2571,8 @@
       "jp": "ガチャ引きシミュレーター＆ユーティリティの名称変更",
       "kr": "가챠 뽑기 시뮬레이터 및 유틸리티 이름 변경",
       "zh": "抽卡模拟器及实用工具重命名",
-      "fr": "Simulateur de tirages Gacha et utilitaires de changement de nom"
+      "fr": "Simulateur de tirages Gacha et utilitaires de changement de nom",
+      "es": "Cambio de nombre del Simulador de Tiradas Gacha y Utilidades"
     },
     "content": {
       "en": [
@@ -2282,6 +2594,10 @@
       "fr": [
         "Nouveau **Simulateur de tirages Gacha** : simulez les bannières « Rate Up », « Premium » et « Limited » grâce au système de points.",
         "La catégorie **Outils** a été renommée **Utilitaires** (l'URL reste `/tools`) et les métadonnées de la page ont été optimisées pour le référencement."
+      ],
+      "es": [
+        "Nuevo **Simulador de Tiradas Gacha**: simula banners Rate Up, Premium y Limitados con el sistema de millaje.",
+        "Se cambió el nombre de la categoría **Tools** a **Utilities** (la URL sigue siendo `/tools`) y se alinearon los metadatos de la página para SEO."
       ]
     },
     "link": {
@@ -2297,7 +2613,8 @@
       "jp": "公式動画",
       "kr": "공식 영상",
       "zh": "官方视频",
-      "fr": "Vidéo officielle"
+      "fr": "Vidéo officielle",
+      "es": "Video oficial"
     },
     "content": {
       "en": [
@@ -2310,6 +2627,9 @@
       "zh": ["角色详情页现已嵌入官方 YouTube 视频（如有）。"],
       "fr": [
         "Les vidéos YouTube officielles sont désormais intégrées aux pages de présentation des personnages (lorsqu'elles sont disponibles)."
+      ],
+      "es": [
+        "Los videos oficiales de YouTube ahora están incrustados en las páginas de detalle de los personajes (cuando están disponibles)."
       ]
     }
   },
@@ -2321,7 +2641,8 @@
       "jp": "イーサリアム収入ガイド",
       "kr": "이더리움 수익 창출 가이드",
       "zh": "以太坊收益指南",
-      "fr": "Guide sur les revenus en Ether"
+      "fr": "Guide sur les revenus en Ether",
+      "es": "Guía de Ingresos de Éter"
     },
     "content": {
       "en": [
@@ -2338,6 +2659,9 @@
       ],
       "fr": [
         "Ajout du **Guide des revenus en Ether** : aperçu de toutes les sources régulières et variables d'Ether dans Outerplane, avec les totaux quotidiens, hebdomadaires et mensuels."
+      ],
+      "es": [
+        "Se añadió la **Guía de Ingresos de Éter**: un resumen de todas las fuentes regulares y variables de Éter en Outerplane, con totales diarios, semanales y mensuales."
       ]
     },
     "link": {
@@ -2353,7 +2677,8 @@
       "jp": "プレミアム＆限定ガイド",
       "kr": "프리미엄 및 한정판 가이드",
       "zh": "高级与限量版指南",
-      "fr": "Guide « Premium » et « Édition limitée »"
+      "fr": "Guide « Premium » et « Édition limitée »",
+      "es": "Guía Premium y Limitado"
     },
     "content": {
       "en": [
@@ -2368,6 +2693,9 @@
       "zh": ["新增了**“高级与限时指南”**：针对高级和限时横幅的快速推荐。"],
       "fr": [
         "Ajout du **Guide Premium et Éditions limitées** : recommandations rapides pour les bannières Premium et Éditions limitées."
+      ],
+      "es": [
+        "Se añadió la **Guía Premium y Limitado**: recomendaciones rápidas para banners Premium y Limitados."
       ]
     },
     "link": {
@@ -2383,7 +2711,8 @@
       "jp": "スカイワード・タワー ガイド、タグ、役割フィルター",
       "kr": "스카이워드 타워 가이드, 태그 및 역할 필터",
       "zh": "《天际塔》攻略、标签与角色筛选器",
-      "fr": "Guide de la Tour Céleste, filtres par mots-clés et rôles"
+      "fr": "Guide de la Tour Céleste, filtres par mots-clés et rôles",
+      "es": "Guía de la Torre Skyward, filtros de Etiquetas y Roles"
     },
     "content": {
       "en": [
@@ -2415,6 +2744,12 @@
         "Ajout de filtres par balise dans la liste des personnages",
         "Ajout de filtres par rôle dans la liste des personnages",
         "Amélioration du tri et de la navigation parmi les personnages grâce aux nouveaux filtres"
+      ],
+      "es": [
+        "Se añadió la **Guía de la Torre Skyward**",
+        "Se introdujeron filtros de etiquetas en la lista de personajes",
+        "Se introdujeron filtros de roles en la lista de personajes",
+        "Se mejoró la ordenación y exploración de personajes con los nuevos filtros"
       ]
     },
     "link": {
@@ -2430,7 +2765,8 @@
       "jp": "共有可能な文字フィルター",
       "kr": "공유 가능한 문자 필터",
       "zh": "可共享的角色筛选器",
-      "fr": "Filtres de caractères partageables"
+      "fr": "Filtres de caractères partageables",
+      "es": "Filtros de personajes compartibles"
     },
     "content": {
       "en": [
@@ -2452,6 +2788,10 @@
       "fr": [
         "Les filtres de la page des personnages (élément, classe, rareté, bonus/malus, etc.) sont désormais intégrés dans l'URL.",
         "Vous pouvez copier et partager le lien pour montrer directement vos personnages filtrés à d'autres personnes."
+      ],
+      "es": [
+        "Los filtros de la página de personajes (elemento, clase, rareza, bonos/debuffs, etc.) ahora se codifican en la URL.",
+        "Puedes copiar y compartir el enlace para mostrar directamente a otros tus personajes filtrados."
       ]
     },
     "link": {
@@ -2467,7 +2807,8 @@
       "jp": "ショップガイドの公開",
       "kr": "쇼핑 가이드 출시",
       "zh": "《购物指南》发布",
-      "fr": "Sortie du guide d'achat"
+      "fr": "Sortie du guide d'achat",
+      "es": "Publicación de la Guía de Tienda"
     },
     "content": {
       "en": [
@@ -2484,6 +2825,9 @@
       ],
       "fr": [
         "**Guide d'achat** d'Outerplane avec les priorités d'achat — les meilleurs objets à acheter, ceux à éviter et comment dépenser judicieusement vos devises."
+      ],
+      "es": [
+        "**Guía de tienda** de Outerplane con prioridades de compra — mejores objetos para comprar, cuáles omitir y cómo gastar las monedas sabiamente."
       ]
     },
     "link": {
@@ -2499,14 +2843,16 @@
       "jp": "七藤の最新情報",
       "kr": "시치후자 최신 소식",
       "zh": "七七冤家最新动态",
-      "fr": "Actualités Shichifuja"
+      "fr": "Actualités Shichifuja",
+      "es": "Actualización de Shichifuja"
     },
     "content": {
       "en": ["Joint boss Shichifuja has been updated for August 2025 version."],
       "jp": ["共同ボス「七藤」が、2025年8月版に更新されました。"],
       "kr": ["공동 보스 시치후자가 2025년 8월 버전으로 업데이트되었습니다."],
       "zh": ["联合首领“七藤”已更新至2025年8月版本。"],
-      "fr": ["Le boss Shichifuja a été mis à jour pour la version d'août 2025."]
+      "fr": ["Le boss Shichifuja a été mis à jour pour la version d'août 2025."],
+      "es": ["El jefe conjunto Shichifuja fue actualizado para la versión de agosto de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2521,14 +2867,16 @@
       "jp": "惑星制御ユニット ギルドレイド",
       "kr": "행성 제어 장치 길드 레이드",
       "zh": "行星控制单元公会团队副本",
-      "fr": "Raid de guilde « Unité de contrôle planétaire »"
+      "fr": "Raid de guilde « Unité de contrôle planétaire »",
+      "es": "Incu. Gremio Unidad de Control Planetario"
     },
     "content": {
       "en": ["Planetary Control Unit Guild Raid Guide release."],
       "jp": ["「プラネタリー・コントロール・ユニット」ギルドレイドガイドを公開しました。"],
       "kr": ["행성 제어 장치 길드 레이드 가이드 공개."],
       "zh": ["《行星控制单元》公会团队副本攻略发布。"],
-      "fr": ["Sortie du guide des raids de guilde « Planetary Control Unit »."]
+      "fr": ["Sortie du guide des raids de guilde « Planetary Control Unit »."],
+      "es": ["Publicación de la Guía de Incu. Gremio Unidad de Control Planetario."]
     },
     "link": {
       "kind": "guide",
@@ -2543,7 +2891,8 @@
       "jp": "OUTERPLANEのサービスがVAGAMESに移管されました",
       "kr": "OUTERPLANE 서비스, VAGAMES로 이전",
       "zh": "OUTERPLANE 服务移交至 VAGAMES",
-      "fr": "Transfert du service OUTERPLANE vers VAGAMES"
+      "fr": "Transfert du service OUTERPLANE vers VAGAMES",
+      "es": "Transferencia del Servicio de OUTERPLANE a VAGAMES"
     },
     "content": {
       "en": [
@@ -2570,6 +2919,11 @@
         "📢 <strong>Transfert de service à venir : </strong> OUTERPLANE sera transféré vers <strong>VAGAMES</strong> le <strong>23 septembre 2025</strong>.",
         "Veillez à mener à bien la procédure de transfert afin de conserver votre compte et vos données.",
         "[Consulter la procédure de transfert](/guides/other/service-transfer)"
+      ],
+      "es": [
+        "📢 <strong>Transferencia de servicio próxima:</strong> OUTERPLANE se transferirá a <strong>VAGAMES</strong> el <strong>23 de septiembre de 2025</strong>.",
+        "Asegúrate de completar el proceso de transferencia para conservar tu cuenta y tus datos.",
+        "[Ver Procedimiento de Transferencia](/guides/other/service-transfer)"
       ]
     }
   },
@@ -2581,7 +2935,8 @@
       "jp": "タイムゲート付きリソースガイド",
       "kr": "시간 제한 자원 안내서",
       "zh": "《时间门限资源指南》",
-      "fr": "Guide des ressources à durée limitée"
+      "fr": "Guide des ressources à durée limitée",
+      "es": "Guía de Recursos con Tiempo de Espera"
     },
     "content": {
       "en": [
@@ -2596,6 +2951,9 @@
       "zh": ["《Outerplane》时间门限资源完整指南——技能书、晶石、特殊装备材料及格鲁尼特来源。"],
       "fr": [
         "Guide complet des ressources à durée limitée d'Outerplane : livres de compétences, transistones, matériaux d'équipement spéciaux et sources de glunite."
+      ],
+      "es": [
+        "Guía completa de los recursos con tiempo de espera de Outerplane — libros de habilidad, transistones, materiales especiales de equipo y fuentes de glunita."
       ]
     },
     "link": {
@@ -2611,7 +2969,8 @@
       "jp": "リヴェナント・ドラゴン「ハルシュナ」のアップデート",
       "kr": "리버넌트 드래곤 하르슈나 업데이트",
       "zh": "“复仇之龙哈什纳”更新",
-      "fr": "Mise à jour concernant le dragon revenant Harshna"
+      "fr": "Mise à jour concernant le dragon revenant Harshna",
+      "es": "Actualización de Revenant Dragon Harshna"
     },
     "content": {
       "en": ["Guide is up to date for july 2025 version. Learn More"],
@@ -2620,7 +2979,8 @@
         "이 가이드는 2025년 7월 버전을 기준으로 최신 정보로 업데이트되었습니다. 자세히 알아보기"
       ],
       "zh": ["本指南已更新至2025年7月版。了解更多"],
-      "fr": ["Ce guide est à jour pour la version de juillet 2025. En savoir plus"]
+      "fr": ["Ce guide est à jour pour la version de juillet 2025. En savoir plus"],
+      "es": ["La guía está actualizada para la versión de julio de 2025. Aprende más"]
     },
     "link": {
       "kind": "guide",
@@ -2635,7 +2995,8 @@
       "jp": "新ヒーロー「フラン」",
       "kr": "새로운 영웅 프란",
       "zh": "新英雄弗兰",
-      "fr": "Fran, la nouvelle héroïne"
+      "fr": "Fran, la nouvelle héroïne",
+      "es": "Nuevo Héroe Fran"
     },
     "content": {
       "en": [
@@ -2650,6 +3011,9 @@
       "zh": ["弗兰，一位天才玩家，能为所有盟友赋予“反击”效果，并减少目标身上所有独特资源的数量。"],
       "fr": [
         "Fran, une joueuse de génie qui confère « Contre-attaque » à tous ses alliés et réduit le nombre total de ressources uniques de la cible."
+      ],
+      "es": [
+        "Fran, una gamer genio que otorga Contraataque a todos los aliados y reduce el conteo de Recurso Único de todos en el objetivo."
       ]
     },
     "link": {
@@ -2665,7 +3029,8 @@
       "jp": "『ディープ・シー・ガーディアン』最新情報",
       "kr": "‘딥 시 가디언’ 업데이트",
       "zh": "《深海守护者》更新",
-      "fr": "Mise à jour sur « Deep Sea Guardian »"
+      "fr": "Mise à jour sur « Deep Sea Guardian »",
+      "es": "Actualización de Deep Sea Guardian"
     },
     "content": {
       "en": ["Joint boss Deep Sea Guardian has been updated for July 2025 version."],
@@ -2674,7 +3039,8 @@
       "zh": ["联合BOSS“深海守护者”已更新至2025年7月版本。"],
       "fr": [
         "Le boss « Joint » de Deep Sea Guardian a été mis à jour pour la version de juillet 2025."
-      ]
+      ],
+      "es": ["El jefe conjunto Deep Sea Guardian fue actualizado para la versión de julio de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2689,14 +3055,16 @@
       "jp": "「黄金の王国」ギルドレイドの尊厳",
       "kr": "황금 왕국 길드 레이드의 위엄",
       "zh": "“黄金王国”公会团队副本：尊严",
-      "fr": "Raid de la guilde « Dignité du Royaume d’Or »"
+      "fr": "Raid de la guilde « Dignité du Royaume d’Or »",
+      "es": "Incu. Gremio Dignidad del Reino Dorado"
     },
     "content": {
       "en": ["Dignity of the Golden Kingdom Guild Raid Guide release."],
       "jp": ["「黄金の王国」ギルドレイドガイドを公開しました。"],
       "kr": ["‘황금 왕국의 위엄’ 길드 레이드 가이드 공개."],
       "zh": ["《黄金王国公会团队副本攻略》发布。"],
-      "fr": ["Sortie du guide de raid de la guilde « Dignity of the Golden Kingdom »."]
+      "fr": ["Sortie du guide de raid de la guilde « Dignity of the Golden Kingdom »."],
+      "es": ["Publicación de la Guía de Incu. Gremio Dignidad del Reino Dorado."]
     },
     "link": {
       "kind": "guide",
@@ -2711,14 +3079,16 @@
       "jp": "「傲慢の大悪魔ダリア」の最新情報",
       "kr": "오만 대악마 달리아 업데이트",
       "zh": "傲慢之大恶魔达莉亚更新",
-      "fr": "Mise à jour concernant l'archidémon de l'Orgueil, Dahlia"
+      "fr": "Mise à jour concernant l'archidémon de l'Orgueil, Dahlia",
+      "es": "Actualización de Archdemon of Hubris Dahlia"
     },
     "content": {
       "en": ["Guide is up to date for july 2025 version."],
       "jp": ["このガイドは2025年7月版に更新されています。"],
       "kr": ["이 가이드는 2025년 7월 버전에 맞춰 최신 정보로 업데이트되었습니다."],
       "zh": ["本指南已更新至2025年7月版。"],
-      "fr": ["Ce guide est à jour pour la version de juillet 2025."]
+      "fr": ["Ce guide est à jour pour la version de juillet 2025."],
+      "es": ["La guía está actualizada para la versión de julio de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2733,7 +3103,8 @@
       "jp": "ティアリストの大幅な変更",
       "kr": "티어 리스트의 대대적인 변경",
       "zh": "实力排名表重大调整",
-      "fr": "Changement majeur dans le classement par niveaux"
+      "fr": "Changement majeur dans le classement par niveaux",
+      "es": "Cambio importante en la Tier List"
     },
     "content": {
       "en": [
@@ -2750,6 +3121,9 @@
       ],
       "fr": [
         "Les héros 1-2★ devaient initialement être classés séparément des héros 3★. Afin d'améliorer la lisibilité et d'éviter toute confusion, tous les héros 1-2★ ont été rétrogradés d'un niveau pour mieux refléter leurs performances réelles."
+      ],
+      "es": [
+        "Los héroes 1-2★ debían clasificarse por separado de los 3★. Para mejorar la legibilidad y evitar confusiones, todos los héroes 1-2★ fueron degradados un nivel para reflejar mejor su rendimiento real."
       ]
     }
   },
@@ -2761,14 +3135,16 @@
       "jp": "「アニヒレーター」の最新情報",
       "kr": "애니힐레이터 업데이트",
       "zh": "《Annihilator》更新",
-      "fr": "Mise à jour d'Annihilator"
+      "fr": "Mise à jour d'Annihilator",
+      "es": "Actualización de Annihilator"
     },
     "content": {
       "en": ["Joint boss Annihilator  has been updated for June 2025 version."],
       "jp": ["「ジョイントボス・アニヒレーター」が、2025年6月版にアップデートされました。"],
       "kr": ["공동 보스 ‘애니힐레이터’가 2025년 6월 버전에 맞춰 업데이트되었습니다."],
       "zh": ["联合首领“毁灭者”已更新至2025年6月版本。"],
-      "fr": ["Le boss commun « Annihilator » a été mis à jour pour la version de juin 2025."]
+      "fr": ["Le boss commun « Annihilator » a été mis à jour pour la version de juin 2025."],
+      "es": ["El jefe conjunto Annihilator ha sido actualizado para la versión de junio de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2783,14 +3159,16 @@
       "jp": "「世界改変阻止ギルド」のレイド",
       "kr": "‘세계 변형 방지 길드’ 레이드",
       "zh": "阻止“世界改变公会”的团队副本",
-      "fr": "Raid de la guilde « Prevent World Alteration »"
+      "fr": "Raid de la guilde « Prevent World Alteration »",
+      "es": "Incu. Gremio: Prevenir la Alteración del Mundo"
     },
     "content": {
       "en": ["Prevent World Alteration Guild Raid Guide release."],
       "jp": ["「ワールド変更防止ギルド」レイドガイドの公開。"],
       "kr": ["‘세계 변형 방지 길드’ 레이드 가이드 공개."],
       "zh": ["《防止世界改变公会》团队副本攻略发布。"],
-      "fr": ["Sortie du guide de raid de la guilde « Prevent World Alteration »."]
+      "fr": ["Sortie du guide de raid de la guilde « Prevent World Alteration »."],
+      "es": ["Lanzamiento de la guía de Prevent World Alteration Guild Raid."]
     },
     "link": {
       "kind": "guide",
@@ -2805,7 +3183,8 @@
       "jp": "新ヒーロー「リゼロッテ」",
       "kr": "새로운 영웅 리젤로테",
       "zh": "新英雄莉泽洛特",
-      "fr": "Nouvelle héroïne : Liselotte"
+      "fr": "Nouvelle héroïne : Liselotte",
+      "es": "Nueva Heroína Liselotte"
     },
     "content": {
       "en": [
@@ -2822,6 +3201,9 @@
       ],
       "fr": [
         "Liselotte, une magicienne de génie qui renforce les barrières et les défenses lorsqu'un allié lance une attaque ciblant tous les ennemis, et qui combat en supprimant les effets négatifs et en réduisant les temps de recharge."
+      ],
+      "es": [
+        "Liselotte, una maga genio que aumenta la barrera y la defensa cuando un aliado usa un ataque que apunta a todos los enemigos, y lucha eliminando debuffs y reduciendo tiempos de reutilización."
       ]
     },
     "link": {
@@ -2837,7 +3219,8 @@
       "jp": "キャラクター紹介",
       "kr": "캐릭터 소개",
       "zh": "角色简介",
-      "fr": "Fiches des personnages"
+      "fr": "Fiches des personnages",
+      "es": "Perfiles de personaje"
     },
     "content": {
       "en": [
@@ -2852,6 +3235,9 @@
       "zh": ["角色页面现已包含详细的个人资料信息：生日、身高、体重以及背景故事。"],
       "fr": [
         "Les fiches des personnages contiennent désormais des informations détaillées sur leur profil : date de naissance, taille, poids et histoire."
+      ],
+      "es": [
+        "Las páginas de personaje ahora incluyen información detallada de perfil: cumpleaños, altura, peso y lore."
       ]
     }
   },
@@ -2863,7 +3249,8 @@
       "jp": "クィークガイド",
       "kr": "Quirk 가이드",
       "zh": "怪癖指南",
-      "fr": "Guide des particularités"
+      "fr": "Guide des particularités",
+      "es": "Guía de Quirk"
     },
     "content": {
       "en": [
@@ -2878,6 +3265,9 @@
       "zh": ["了解如何通过“特质”系统高效提升英雄实力：升级路径、推荐优先级以及所需材料。"],
       "fr": [
         "Découvrez comment améliorer efficacement vos héros grâce au système « Quirk » : parcours d'amélioration, priorités recommandées et ressources nécessaires."
+      ],
+      "es": [
+        "Aprende cómo mejorar eficientemente a tus héroes con el sistema Quirk: rutas de mejora, prioridades recomendadas y materiales necesarios."
       ]
     },
     "link": {
@@ -2893,7 +3283,8 @@
       "jp": "基本ステータス、ギフトの好み、プロモーションコードの表示を追加しました",
       "kr": "기본 능력치, 선물 선호도 및 프로모션 코드 표시 기능을 추가했습니다.",
       "zh": "添加了基础属性、礼物偏好和促销代码显示功能",
-      "fr": "Ajout des statistiques de base, des préférences en matière de cadeaux et de l'affichage des codes promotionnels"
+      "fr": "Ajout des statistiques de base, des préférences en matière de cadeaux et de l'affichage des codes promotionnels",
+      "es": "Se añadieron estadísticas base, preferencias de regalo y visualización de códigos promocionales"
     },
     "content": {
       "en": [
@@ -2920,6 +3311,11 @@
         "- Les fiches de personnages affichent désormais les statistiques de base",
         "- Les préférences en matière de cadeaux apparaissent désormais sur les fiches des personnages et peuvent servir de filtre dans la liste des personnages",
         "- Les codes promotionnels sont désormais visibles sur la page d'accueil (uniquement ceux qui sont valides) et répertoriés dans leur intégralité sur la page [/coupons](/coupons)"
+      ],
+      "es": [
+        "-Las páginas de personaje ahora muestran las estadísticas base",
+        "-Las preferencias de regalo ahora se muestran en las páginas de personaje y se pueden usar como filtro en la lista de personajes",
+        "-Los códigos promocionales ahora son visibles en la página de inicio (solo los válidos) y están listados completamente en la página [/coupons](/coupons)"
       ]
     }
   },
@@ -2931,7 +3327,8 @@
       "jp": "「統計・戦闘の基礎と昇格」：モナド・エヴァのガイドが公開されました",
       "kr": "통계 및 전투 기초와 승급: ‘모나드 에바’ 가이드가 공개되었습니다",
       "zh": "《属性与战斗基础及晋升》：Monad Eva攻略现已发布",
-      "fr": "Statistiques, principes de base du combat et promotion : les guides Monad Eva sont désormais disponibles"
+      "fr": "Statistiques, principes de base du combat et promotion : les guides Monad Eva sont désormais disponibles",
+      "es": "Ya están disponibles las guías de Estadísticas y Fundamentos de Combate, y de Ascenso: Monad Eva"
     },
     "content": {
       "en": [
@@ -2953,6 +3350,10 @@
       "fr": [
         "[Statistiques et principes de base du combat](/guides/general-guides/stats) : Systèmes fondamentaux, mécanismes de jeu et guides destinés aux débutants, applicables à l'ensemble du jeu.",
         "[Promotion Monad Eva](/guides/adventure-license/promote-meva) : Guide stratégique pour le boss."
+      ],
+      "es": [
+        "[Estadísticas y Fundamentos de Combate](/guides/general-guides/stats): Sistemas fundamentales, mecánicas y guías para principiantes aplicables a todo el juego.",
+        "[Ascenso Monad Eva](/guides/adventure-license/promote-meva): Guía de estrategia contra el jefe."
       ]
     }
   },
@@ -2964,14 +3365,16 @@
       "jp": "「ウォーキング・フォートレス・ヴェニオン」のアップデート",
       "kr": "‘걷는 요새 베니온’ 업데이트",
       "zh": "“行走要塞”维尼翁更新",
-      "fr": "Mise à jour de « Walking Fortress Venion »"
+      "fr": "Mise à jour de « Walking Fortress Venion »",
+      "es": "Actualización de Walking Fortress Venion"
     },
     "content": {
       "en": ["Guide is up to date for june 2025 version."],
       "jp": ["このガイドは、2025年6月版の最新情報に基づいています。"],
       "kr": ["이 가이드는 2025년 6월 버전에 맞춰 최신 정보로 업데이트되었습니다."],
       "zh": ["本指南已更新至2025年6月版。"],
-      "fr": ["Ce guide est à jour pour la version de juin 2025."]
+      "fr": ["Ce guide est à jour pour la version de juin 2025."],
+      "es": ["La guía está actualizada para la versión de junio de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -2986,7 +3389,8 @@
       "jp": "ヒーローの育成・装備ガイド",
       "kr": "영웅 성장 및 장비 가이드",
       "zh": "英雄成长与装备指南",
-      "fr": "Guides sur la progression et l'équipement des héros"
+      "fr": "Guides sur la progression et l'équipement des héros",
+      "es": "Guías de Crecimiento de Héroes y Equipo"
     },
     "content": {
       "en": [
@@ -3008,6 +3412,10 @@
       "fr": [
         "[Guide de progression des héros](/guides/general-guides/heroes-growth) : un guide complet pour savoir comment faire progresser efficacement vos héros.",
         "[Guide de l'équipement](/guides/general-guides/gear) : un guide sur les différents types d'équipement, les améliorations possibles et les moyens de renforcer votre équipement."
+      ],
+      "es": [
+        "[Guía de Crecimiento de Héroes](/guides/general-guides/heroes-growth): Un desglose completo de cómo potenciar a tus héroes de manera eficiente.",
+        "[Guía de Equipo](/guides/general-guides/gear): Una guía sobre tipos de equipo, mejoras y cómo hacer tu equipo más fuerte."
       ]
     }
   },
@@ -3019,14 +3427,16 @@
       "jp": "『Knight of Hope』メテオス攻略ガイド",
       "kr": "‘희망의 기사’ 메테오스 공략 가이드",
       "zh": "《希望骑士：梅特奥斯》攻略",
-      "fr": "Guide de « Knight of Hope » sur Meteos"
+      "fr": "Guide de « Knight of Hope » sur Meteos",
+      "es": "Guía de Knight of Hope Meteos"
     },
     "content": {
       "en": ["Guide update for May 2025."],
       "jp": ["2025年5月のガイド更新。"],
       "kr": ["2025년 5월 가이드 업데이트."],
       "zh": ["2025年5月指南更新。"],
-      "fr": ["Mise à jour du guide pour mai 2025."]
+      "fr": ["Mise à jour du guide pour mai 2025."],
+      "es": ["Actualización de la guía para mayo de 2025."]
     },
     "link": {
       "kind": "guide",
@@ -3041,7 +3451,8 @@
       "jp": "『アドベンチャー・ガイド』発売",
       "kr": "어드벤처 가이드 출시",
       "zh": "《冒险指南》发布",
-      "fr": "Sortie du guide d'aventure"
+      "fr": "Sortie du guide d'aventure",
+      "es": "Lanzamiento de la Guía de Aventura"
     },
     "content": {
       "en": [
@@ -3073,6 +3484,12 @@
         "Le mode « sans spoilers » est activé par défaut",
         "Vous pouvez dévoiler les noms et les informations concernant les boss en désactivant le mode « Sans spoilers ».",
         "Découvrez dès maintenant : [Guides d'aventure](/guides/adventure)"
+      ],
+      "es": [
+        "Las guías están agrupadas por temporada (S1, S2, S3...) y siguen la progresión del juego",
+        "El modo Sin Spoilers está activado por defecto",
+        "Puedes revelar los nombres y detalles de los jefes desactivando el modo Sin Spoilers",
+        "Explora ahora: [Guías de Aventura](/guides/adventure)"
       ]
     }
   },
@@ -3084,7 +3501,8 @@
       "jp": "ガイドの更新：「一般」セクションに新しい項目が追加されました",
       "kr": "가이드 업데이트: ‘일반’ 섹션에 새로운 항목 추가",
       "zh": "指南已更新：\"综合\"栏目新增条目",
-      "fr": "Mise à jour des guides : nouvelles entrées dans la section « Général »"
+      "fr": "Mise à jour des guides : nouvelles entrées dans la section « Général »",
+      "es": "Guías actualizadas: Nuevas entradas en la sección General"
     },
     "content": {
       "en": [
@@ -3106,6 +3524,10 @@
       "fr": [
         "Publication du guide [Bannières et système de points de fidélité](/guides/general-guides/banner-mileage).",
         "Publication du guide « [Consommation quotidienne d'endurance](/guides/general-guides/daily-stamina) »."
+      ],
+      "es": [
+        "Publicación de la guía [Banners & Sistema de Millaje](/guides/general-guides/banner-mileage).",
+        "Publicación de la guía [Gasto Diario de Vigor](/guides/general-guides/daily-stamina)."
       ]
     }
   },
@@ -3117,7 +3539,8 @@
       "jp": "スキルチェーンのフィルタリングと修正",
       "kr": "스킬 체인 필터 및 수정",
       "zh": "技能链筛选与修复",
-      "fr": "Filtrer et corriger la chaîne de compétences"
+      "fr": "Filtrer et corriger la chaîne de compétences",
+      "es": "Filtro de Skill Chain y correcciones"
     },
     "content": {
       "en": [
@@ -3144,6 +3567,11 @@
         "Ajouter un filtre de type « Chaîne de compétences » sur la page « Personnage »",
         "Ajouter une note concernant le classement PvE et PvP",
         "Présentation des compétences de niveau 2 de la Légion du Givre"
+      ],
+      "es": [
+        "Añadido filtro de tipo Skill Chain en la página del personaje",
+        "Añadido aviso en Tier List PvE y PvP",
+        "Resumen de skills de Frost Legion P2"
       ]
     }
   },
@@ -3155,7 +3583,8 @@
       "jp": "スキルの強化優先順位",
       "kr": "스킬 업그레이드 우선순위",
       "zh": "技能升级优先级",
-      "fr": "Priorité d'amélioration des compétences"
+      "fr": "Priorité d'amélioration des compétences",
+      "es": "Prioridad de Mejora de Skills"
     },
     "content": {
       "en": ["Add Skill Upgrade Priority section in character's pages"],
@@ -3164,7 +3593,8 @@
       "zh": ["在角色页面中添加“技能升级优先级”部分"],
       "fr": [
         "Ajouter une section « Priorité d'amélioration des compétences » dans les fiches des personnages"
-      ]
+      ],
+      "es": ["Añadida sección de Prioridad de Mejora de Skills en las páginas de personajes"]
     }
   },
   {
@@ -3175,7 +3605,8 @@
       "jp": "D.lunaの装備おすすめ＆フロスト・レギオン フェーズ1攻略ガイド",
       "kr": "D.luna 장비 추천 및 프로스트 군단 1단계 공략 가이드",
       "zh": "D.luna 装备推荐及霜之军团第一阶段攻略",
-      "fr": "Recommandations d'équipement pour D.luna et guide de la phase 1 de la Légion de Givre"
+      "fr": "Recommandations d'équipement pour D.luna et guide de la phase 1 de la Légion de Givre",
+      "es": "Recomendación de gear para D.luna y guía de Frost Legion Fase 1"
     },
     "content": {
       "en": [
@@ -3194,6 +3625,10 @@
       "fr": [
         "Ajouter une recommandation d'équipement pour Demiurge Luna",
         "Ajouter un guide pour le raid de guilde actuel « Frost Legion » – Phase 1"
+      ],
+      "es": [
+        "Añadida recomendación de gear para Demiurgo Luna",
+        "Añadida guía para la Incu. Gremio actual Frost Legion Fase 1"
       ]
     }
   },
@@ -3205,7 +3640,8 @@
       "jp": "デミウルグ・ルナ",
       "kr": "데미우르그 루나",
       "zh": "造物主卢娜",
-      "fr": "Demiurge Luna"
+      "fr": "Demiurge Luna",
+      "es": "Demiurgo Luna"
     },
     "content": {
       "en": [
@@ -3222,6 +3658,9 @@
       ],
       "fr": [
         "Demiurge Luna, une héroïne polyvalente capable d'infliger d'importants dégâts à une cible unique et particulièrement douée pour infliger des dégâts à plusieurs cibles, est désormais disponible."
+      ],
+      "es": [
+        "Demiurgo Luna, un Héroe versátil que inflige un daño pesado a un solo objetivo y destaca en el daño multi-objetivo, ya está disponible."
       ]
     },
     "link": {
@@ -3237,7 +3676,8 @@
       "jp": "ギア使用状況検索ツール",
       "kr": "장비 사용 안내",
       "zh": "齿轮使用查找器",
-      "fr": "Recherche d'utilisation des équipements"
+      "fr": "Recherche d'utilisation des équipements",
+      "es": "Buscador de Uso de Gear"
     },
     "content": {
       "en": [
@@ -3259,6 +3699,10 @@
       "fr": [
         "Vous ne savez pas quel personnage peut utiliser votre équipement ? Cet outil vous aide à trouver la meilleure combinaison en fonction de votre équipement.",
         "Cet outil est encore en cours de développement ; les résultats peuvent être incomplets ou imprécis. Utilisez-le à titre indicatif, et non comme une réponse définitive."
+      ],
+      "es": [
+        "¿No estás seguro de qué personaje puede usar tu gear? Esta herramienta te ayuda a encontrar la mejor coincidencia según el equipo.",
+        "Esta herramienta aún está en desarrollo — los resultados pueden ser incompletos o imprecisos. Úsala como guía, no como respuesta final."
       ]
     },
     "link": {
@@ -3274,7 +3718,8 @@
       "jp": "ギアの使用統計",
       "kr": "장비 사용 통계",
       "zh": "装备使用统计",
-      "fr": "Statistiques d'utilisation de l'équipement"
+      "fr": "Statistiques d'utilisation de l'équipement",
+      "es": "Estadísticas de Uso de Gear"
     },
     "content": {
       "en": ["Discover the most recommended weapons, amulets and sets in Outerplane builds."],
@@ -3285,7 +3730,8 @@
       "zh": ["探索《Outerplane》各流派中最受推荐的武器、护身符和套装。"],
       "fr": [
         "Découvrez les armes, amulettes et ensembles les plus recommandés pour les builds d'Outerplane."
-      ]
+      ],
+      "es": ["Descubre las armas, amuletos y sets más recomendados en los builds de Outerplane."]
     },
     "link": {
       "kind": "tool",
@@ -3300,7 +3746,8 @@
       "jp": "新ガイド - 無料ヒーローとスターターバナーの解説",
       "kr": "새로운 가이드 - 무료 영웅 및 초보자 배너 이해하기",
       "zh": "新指南——了解免费英雄与新手卡池",
-      "fr": "Nouveau guide - Tout savoir sur les héros gratuits et les bannières de démarrage"
+      "fr": "Nouveau guide - Tout savoir sur les héros gratuits et les bannières de démarrage",
+      "es": "Nueva guía - Entendiendo los Héroes Gratuitos y los Banners Iniciales"
     },
     "content": {
       "en": [
@@ -3315,6 +3762,9 @@
       "zh": ["了解在《Outerplane》中可以免费获得哪些英雄，以及如何从一开始就做出最佳选择。"],
       "fr": [
         "Découvrez quels héros vous obtiendrez gratuitement dans Outerplane et comment faire les meilleurs choix dès le début."
+      ],
+      "es": [
+        "Descubre qué héroes obtendrás gratis en Outerplane y cómo tomar las mejores decisiones desde el inicio."
       ]
     },
     "link": {
@@ -3330,7 +3780,8 @@
       "jp": "5★アイテムのサポート",
       "kr": "5★ 아이템 지원",
       "zh": "5★道具支持",
-      "fr": "Assistance pour les objets 5★"
+      "fr": "Assistance pour les objets 5★",
+      "es": "Soporte de objetos 5★"
     },
     "content": {
       "en": [
@@ -3349,6 +3800,10 @@
       "fr": [
         "Ajouter des objets 5★ depuis la boutique de l'événement",
         "Des filtres par nom et par rareté ont été ajoutés à la page « Équipements »."
+      ],
+      "es": [
+        "Añadir objetos 5★ de la tienda de eventos",
+        "Se han añadido filtros de Nombre y Rareza en la página de Equipos"
       ]
     }
   },
@@ -3360,14 +3815,16 @@
       "jp": "PvP ティアリスト",
       "kr": "PvP 티어 리스트",
       "zh": "PvP 强度排行榜",
-      "fr": "Classement PvP"
+      "fr": "Classement PvP",
+      "es": "Tier List PvP"
     },
     "content": {
       "en": ["PvP tier list add updated with O. Nadja"],
       "jp": ["O. Nadja を追加・更新した PvP ティアリスト"],
       "kr": ["O. Nadja가 추가된 PvP 티어 리스트 업데이트"],
       "zh": ["PvP 排名榜已更新，新增了 O. Nadja"],
-      "fr": ["Mise à jour du classement PvP avec O. Nadja"]
+      "fr": ["Mise à jour du classement PvP avec O. Nadja"],
+      "es": ["Tier list PvP actualizada con O. Nadja"]
     }
   },
   {
@@ -3378,7 +3835,8 @@
       "jp": "アドベンチャー・ライセンス、ギア・ボス、およびイレギュラー・パースート・ガイド",
       "kr": "어드벤처 라이선스, 기어 보스 및 어리규어 퍼슈트 가이드",
       "zh": "《冒险许可证》、《装备之王》及《非正规追踪指南》",
-      "fr": "Adventure License, Gear Boss et Irregular Pursuit Guides"
+      "fr": "Adventure License, Gear Boss et Irregular Pursuit Guides",
+      "es": "Guías de Licencia aventura, Gear Boss y Op. persecución irregular"
     },
     "content": {
       "en": [
@@ -3410,6 +3868,12 @@
         "Tous les guides « Adventure License » sont désormais disponibles",
         "Tous les guides « Irregular Pursuit » sont désormais disponibles",
         "« Agile Respond » a été ajouté aux filtres de la page « Personnages »"
+      ],
+      "es": [
+        "Todas las guías de Gear Boss ya están disponibles",
+        "Todas las guías de Licencia aventura ya están disponibles",
+        "Todas las guías de Op. persecución irregular ya están disponibles",
+        "Se ha añadido Agile Respond a los filtros en la página de Personajes"
       ]
     }
   },
@@ -3421,7 +3885,8 @@
       "jp": "新ヒーロー - ナジャ",
       "kr": "새로운 영웅 - 나디아",
       "zh": "新英雄——娜佳",
-      "fr": "Nouveau héros : Nadja"
+      "fr": "Nouveau héros : Nadja",
+      "es": "Nuevo héroe - Nadja"
     },
     "content": {
       "en": [
@@ -3438,6 +3903,9 @@
       ],
       "fr": [
         "Omega Nadja, qui supprime les dégâts de détonation infligés par l'ennemi ainsi que les effets d'augmentation de priorité, joue un rôle important dans divers combats contre des boss et va rejoindre nos rangs."
+      ],
+      "es": [
+        "Omega Nadja, quien elimina el daño de Detonación enemigo y los efectos de aumento de Prioridad, juega un papel importante en varias batallas contra jefes y se unirá a nosotros."
       ]
     }
   },
@@ -3449,7 +3917,8 @@
       "jp": "ガイドを追加",
       "kr": "가이드 추가",
       "zh": "添加指南",
-      "fr": "Ajouter un guide"
+      "fr": "Ajouter un guide",
+      "es": "Añadir guía"
     },
     "content": {
       "en": ["Some guide were add like world boss and RGB special request"],
@@ -3458,7 +3927,8 @@
       "zh": ["新增了一些指南，例如世界首领和RGB特殊请求等。"],
       "fr": [
         "Certains guides ont été ajoutés, comme ceux consacrés aux boss mondiaux et aux demandes spéciales RGB."
-      ]
+      ],
+      "es": ["Se añadieron algunas guías como el jefe mundial y el encargo especial RGB"]
     }
   },
   {
@@ -3469,7 +3939,8 @@
       "jp": "複数選択",
       "kr": "여러 개 선택",
       "zh": "多选",
-      "fr": "Sélection multiple"
+      "fr": "Sélection multiple",
+      "es": "Selección múltiple"
     },
     "content": {
       "en": [
@@ -3484,6 +3955,9 @@
       "zh": ["在层级列表、ee优先级和角色页面中添加选择多个元素、类和稀有度的选项"],
       "fr": [
         "Ajouter la possibilité de sélectionner plusieurs éléments, classes, niveaux de rareté dans le classement, priorités EE et sur la page des personnages"
+      ],
+      "es": [
+        "Añadir la opción de seleccionar múltiples elementos, clases y rarezas en la tier list, prioridad EE y página de personajes"
       ]
     }
   },
@@ -3495,7 +3969,8 @@
       "jp": "専用装備の優先順位",
       "kr": "전용 장비 우선권",
       "zh": "专用设备优先权",
-      "fr": "Priorité exclusive en matière d'équipement"
+      "fr": "Priorité exclusive en matière d'équipement",
+      "es": "Prioridad de Equipo Exclusivo"
     },
     "content": {
       "en": [
@@ -3511,6 +3986,10 @@
       "fr": [
         "Ajouter le classement par niveau de priorité des équipements exclusifs",
         "Ajouter un filtre par élément et par classe dans le classement par niveau"
+      ],
+      "es": [
+        "Añadir Tier List de Prioridad de Equipo Exclusivo",
+        "Añadir filtro por Elemento y Clase en la Tier List"
       ]
     }
   },
@@ -3522,7 +4001,8 @@
       "jp": "法令遵守に関する最新情報",
       "kr": "법규 준수 관련 최신 정보",
       "zh": "合规动态",
-      "fr": "Point sur la conformité réglementaire"
+      "fr": "Point sur la conformité réglementaire",
+      "es": "Actualización de cumplimiento legal"
     },
     "content": {
       "en": [
@@ -3549,6 +4029,11 @@
         "Ajout d'une clause de non-responsabilité générale concernant la propriété intellectuelle et le caractère non officiel.",
         "Création d'une page dédiée « /legal » contenant les informations relatives à l'hébergement et la politique de retrait de contenu.",
         "Il a été confirmé que le site ne collecte pas de données à caractère personnel et ne fait l'objet d'aucune monétisation."
+      ],
+      "es": [
+        "Se añadió un aviso legal global sobre propiedad intelectual y estado no oficial.",
+        "Se creó una página dedicada `/legal` con información de alojamiento y política de retiro de contenido.",
+        "Se confirmó que el sitio no recopila datos personales ni incluye monetización."
       ]
     }
   },
@@ -3560,7 +4045,8 @@
       "jp": "デバフロジックのフィルタリングと1～2スターのティアリスト",
       "kr": "디버프 로직 필터링 및 1~2성 티어 리스트",
       "zh": "减益效果筛选逻辑及1-2星评级榜",
-      "fr": "Logique des effets négatifs des filtres et classement des niveaux 1 à 2 étoiles"
+      "fr": "Logique des effets négatifs des filtres et classement des niveaux 1 à 2 étoiles",
+      "es": "Lógica de filtro de debuff y tier list de 1-2 estrellas"
     },
     "content": {
       "en": [
@@ -3582,6 +4068,10 @@
       "fr": [
         "Ajout des héros 1 et 2 étoiles au classement par niveau",
         "Ajouter les bonus et malus liés aux compétences « EE » et « Burst » dans la logique de filtrage des héros sur la page https://outerpedia.com/characters"
+      ],
+      "es": [
+        "se añadieron héroes de 1 y 2 estrellas en la tier list",
+        "Añadir buff y debuff de skill EE y Burst en la lógica al filtrar héroes en la página https://outerpedia.com/characters"
       ]
     }
   },
@@ -3593,7 +4083,8 @@
       "jp": "ウェブサイトの正式公開",
       "kr": "웹사이트 공식 출시",
       "zh": "网站正式上线",
-      "fr": "Lancement officiel du site web"
+      "fr": "Lancement officiel du site web",
+      "es": "Lanzamiento Oficial del Sitio Web"
     },
     "content": {
       "en": [
@@ -3645,6 +4136,16 @@
         "Routage dynamique pour les pages de personnages, les onglets de classement et les listes d'équipement.",
         "Prise en charge complète du CDN pour les images (personnages, équipement, icônes), garantissant des temps de chargement rapides.",
         "Une page de journal des modifications intégrée et un flux d'actualités sur la page d'accueil permettent de suivre les améliorations apportées."
+      ],
+      "es": [
+        "🎉 ¡Outerpedia ya está oficialmente en línea!",
+        "Incluye **Tier List completa**, **base de datos completa de personajes**, y datos de **equipo exclusivo**.",
+        "Optimizado para **escritorio y móvil** con soporte completo de **PWA** (instalable como app).",
+        "Generación estática rápida con SEO optimizado, datos estructurados e imágenes Open Graph dinámicas.",
+        "UI moderna y responsive impulsada por **Next.js 15** y **TailwindCSS**.",
+        "Enrutamiento dinámico para páginas de personajes, pestañas de la Tier List y listados de equipo.",
+        "Soporte completo de CDN para imágenes (personajes, equipo, íconos) asegurando tiempos de carga rápidos.",
+        "Página de registro de cambios integrada y feed de actualizaciones recientes en la página principal para seguir las mejoras."
       ]
     }
   },
@@ -3656,7 +4157,8 @@
       "jp": "すべてのキャラクターデータ、ティアリスト、およびSEO対策の改善",
       "kr": "모든 캐릭터 데이터, 티어 리스트 및 SEO 개선 사항",
       "zh": "所有角色数据、强度榜及SEO优化",
-      "fr": "Toutes les données sur les personnages, le classement par niveau et les améliorations en matière de référencement"
+      "fr": "Toutes les données sur les personnages, le classement par niveau et les améliorations en matière de référencement",
+      "es": "Todos los datos de personajes, Tier List y Mejoras de SEO"
     },
     "content": {
       "en": [
@@ -3708,6 +4210,16 @@
         "Ajout de mots-clés méta dynamiques par personnage pour améliorer l'indexation.",
         "Script SEO amélioré (seo-check.cjs) permettant de vérifier l'intégrité des fichiers JSON et la présence des images, exécuté uniquement en mode développement.",
         "Amélioration du chargement et des indications de priorité pour les images essentielles (portraits du classement, icônes de personnages)."
+      ],
+      "es": [
+        "Se refactorizó la página de la Tier List para soportar pestañas dinámicas (DPS, Support, Sustain) mediante enrutamiento por URL (/tierlist/[tab]).",
+        "Se implementó un archivo estático _allCharacters.json generado en cada build para evitar la consulta a la API en producción.",
+        "Se mejoraron los metadatos de SEO de la Tier List dinámicamente por pestaña y de forma global.",
+        "Se añadieron imágenes dinámicas de OpenGraph y Twitter Card para todas las páginas de personajes según el ID del personaje.",
+        "Se mejoró la descripción estructurada en las páginas de personajes combinando información de elemento, clase y subclase.",
+        "Se añadieron meta keywords dinámicas por personaje para una mejor indexación.",
+        "Se mejoró el script de SEO (seo-check.cjs) para validar la integridad del JSON y la presencia de imágenes, ejecutado solo en modo desarrollo.",
+        "Se mejoraron las sugerencias de carga y prioridad para imágenes críticas (retratos de la Tier List, íconos de personajes)."
       ]
     }
   },
@@ -3719,7 +4231,8 @@
       "jp": "SEO、モバイル、およびPWAの改善",
       "kr": "SEO, 모바일 및 PWA 개선 사항",
       "zh": "SEO、移动端及PWA优化",
-      "fr": "Améliorations en matière de référencement naturel (SEO), de mobile et d'applications web progressives (PWA)"
+      "fr": "Améliorations en matière de référencement naturel (SEO), de mobile et d'applications web progressives (PWA)",
+      "es": "Mejoras de SEO, Móvil y PWA"
     },
     "content": {
       "en": [
@@ -3756,6 +4269,13 @@
         "Ajout du fichier `manifest.json` et des icônes mobiles pour la prise en charge des PWA.",
         "Mise en page mobile optimisée pour la page d'accueil et la navigation.",
         "Correction des avertissements liés à la validation des données structurées (Search Console : tout est en ordre)."
+      ],
+      "es": [
+        "Se mejoraron los metadatos de SEO y OpenGraph en todas las páginas.",
+        "Se generó automáticamente sitemap.xml en cada despliegue.",
+        "Se añadieron manifest.json e íconos móviles para soporte de PWA.",
+        "Se optimizaron los diseños móviles para el Inicio y la Navegación.",
+        "Se corrigieron advertencias de validación de datos estructurados (Search Console OK)."
       ]
     }
   },
@@ -3767,7 +4287,8 @@
       "jp": "独占装備データの全情報",
       "kr": "독점 장비 데이터 완료",
       "zh": "独家设备数据已完整",
-      "fr": "Données complètes et exclusives sur les équipements"
+      "fr": "Données complètes et exclusives sur les équipements",
+      "es": "Datos de Equipo Exclusivo completados"
     },
     "content": {
       "en": [
@@ -3839,6 +4360,20 @@
         "Structure de code harmonisée entre les composants **arme** et **amulette** afin de faciliter la maintenance.",
         "Les erreurs critiques de Search Console ont été résolues grâce à l'adoption du schéma **VideoGame** approprié.",
         "Outils internes : ajout d'un **bouton d'aperçu JSON-LD** pour la validation en cours de développement."
+      ],
+      "es": [
+        "Se añadieron todos los **datos e imágenes de equipo exclusivo** para todos los personajes.",
+        "Cada EE incluye metadatos completos (nombre, stat principal, efectos +0/+10).",
+        "Se añadió **soporte de doble stat** para armas y amuletos (forcedMainStat con separador `/`).",
+        "Se mostraron **ambos íconos y valores de stat** correctamente en tooltips y tarjetas resumen.",
+        "Se mejoraron los componentes **WeaponMiniCard** y **AmuletMiniCard** para soportar múltiples stats principales con íconos de respaldo.",
+        "Se implementó la estructura completa **VideoGame + CreativeWork** de **schema.org JSON-LD** en /equipments.",
+        "Se incluyeron imágenes para todas las **armas**, **amuletos**, **sets de armadura**, **talismanes** y **equipo exclusivo** en JSON-LD.",
+        "Se variaron las imágenes de sets dinámicamente (**Casco**, **Armadura**, **Guantes**, **Zapatos**) para una representación realista.",
+        "Se añadió **vinculación automática de URL** para Equipo Exclusivo hacia las páginas de personajes en los datos estructurados.",
+        "Se unificó la estructura de código entre los componentes de **arma** y **amuleto** para facilitar el mantenimiento.",
+        "Se resolvieron errores críticos de Search Console al cambiar al esquema **VideoGame** adecuado.",
+        "Herramientas internas: se añadió un **botón de vista previa JSON-LD** para validación en desarrollo."
       ]
     }
   },
@@ -3850,14 +4385,16 @@
       "jp": "キャラクターの追加",
       "kr": "캐릭터 추가",
       "zh": "新增角色",
-      "fr": "Nouveaux personnages"
+      "fr": "Nouveaux personnages",
+      "es": "Adiciones de personajes"
     },
     "content": {
       "en": ["Added character from Christina to Ember (39 / 101)."],
       "jp": ["クリスティーナからエンバーにキャラクターを追加しました（39 / 101）。"],
       "kr": ["크리스티나에서 엠버로 캐릭터를 추가했습니다 (39 / 101)."],
       "zh": ["从克里斯蒂娜处为埃姆伯增加了角色（39 / 101）。"],
-      "fr": ["Ajout d'un personnage de Christina à Ember (39 / 101)."]
+      "fr": ["Ajout d'un personnage de Christina à Ember (39 / 101)."],
+      "es": ["Se añadió personajes desde Christina hasta Ember (39 / 101)."]
     }
   },
   {
@@ -3868,7 +4405,8 @@
       "jp": "キャラクターの追加とバーンエフェクト",
       "kr": "캐릭터 추가 및 화상 효과",
       "zh": "角色新增内容与燃烧特效",
-      "fr": "Ajouts de personnages et effets visuels de brûlure"
+      "fr": "Ajouts de personnages et effets visuels de brûlure",
+      "es": "Adiciones de personajes y visuales de quemadura"
     },
     "content": {
       "en": [
@@ -3905,6 +4443,13 @@
         "Correction d'un problème d'alignement dans les écrans d'éveil de **Luna** et **Hilde**.",
         "Correction du placement des compétences de **Charisma Bryn**.",
         "Ajout de métadonnées Open Graph pour la page « Équipement » et d'icônes à la liste des personnages."
+      ],
+      "es": [
+        "Se añadieron **Charlotte**, **Caren** y todos los personajes de A a B a la base de datos de personajes.",
+        "Se añadió el ícono de skill (esquina superior izquierda) en las tarjetas de quemadura para coincidir con los visuales del juego.",
+        "Se corrigió un desalineamiento en las pantallas de despertar de **Luna** e **Hilde**.",
+        "Se corrigió la ubicación del skill de **Charisma Bryn**.",
+        "Se añadieron metadatos Open Graph para la página de Equipo e íconos a la lista de Personajes."
       ]
     }
   },
@@ -3916,7 +4461,8 @@
       "jp": "新キャラクターとビジュアルの改良",
       "kr": "새로운 캐릭터 및 그래픽 개선",
       "zh": "新角色与画面优化",
-      "fr": "Nouveaux personnages et améliorations graphiques"
+      "fr": "Nouveaux personnages et améliorations graphiques",
+      "es": "Nuevos personajes y mejoras visuales"
     },
     "content": {
       "en": [
@@ -3943,6 +4489,11 @@
         "Ajout de **Luna**, **Hilde** et **Adelie** à la base de données des personnages.",
         "Mise à jour de la bannière de la page d'accueil avec un nouveau visuel et un masquage CSS fluide.",
         "Nous avons peaufiné le style de la section « Disponible actuellement » afin d'obtenir une mise en page plus épurée."
+      ],
+      "es": [
+        "Se añadieron **Luna**, **Hilde** y **Adelie** a la base de datos de personajes.",
+        "Se actualizó el banner de la página principal con un nuevo visual y un enmascarado CSS suave.",
+        "Se refinó el estilo de la sección \"Actualmente disponible\" para un diseño más limpio."
       ]
     }
   },
@@ -3954,7 +4505,8 @@
       "jp": "変更履歴とアップデートの整理およびUIの改良",
       "kr": "변경 내역 및 업데이트 항목에 대한 정리 및 UI 개선",
       "zh": "对“更新日志”和“更新”部分进行整理与界面优化",
-      "fr": "Nettoyage et amélioration de l'interface utilisateur pour le journal des modifications et les mises à jour"
+      "fr": "Nettoyage et amélioration de l'interface utilisateur pour le journal des modifications et les mises à jour",
+      "es": "Limpieza y mejora de UI para el Changelog y las Actualizaciones"
     },
     "content": {
       "en": [
@@ -3991,6 +4543,13 @@
         "Le rendu Markdown est activé pour les entrées du journal des modifications afin de prendre en charge les listes, les liens et la mise en forme.",
         "La section « Mises à jour récentes » de la page d'accueil utilise une mise en page verticale de type chronologique avec des titres de section animés.",
         "Toutes les tentatives d'intégration des actualités STOVE ont été supprimées pour des raisons de facilité de maintenance."
+      ],
+      "es": [
+        "Estilo visual unificado entre la página de inicio y /changelog para las entradas de actualización.",
+        "Tarjetas del changelog estilizadas con colores de insignia para cada tipo de actualización (FEATURE, FIX, UPDATE...).",
+        "Renderizado Markdown habilitado para las entradas del changelog, con soporte de listas, enlaces y formato.",
+        "La sección \"Actualizaciones Recientes\" de la página de inicio usa un diseño vertical estilo línea de tiempo con títulos de sección animados.",
+        "Se eliminaron todos los intentos de integración de noticias de STOVE por motivos de mantenibilidad."
       ]
     }
   },
@@ -4002,7 +4561,8 @@
       "jp": "ホームページおよびSEOの改善、ギアノートの見直し",
       "kr": "홈페이지 및 SEO 개선, 기어 노트 개편",
       "zh": "主页及搜索引擎优化（SEO）改进，装备说明重写",
-      "fr": "Améliorations apportées à la page d'accueil et au référencement naturel (SEO), refonte de la rubrique « Équipement »"
+      "fr": "Améliorations apportées à la page d'accueil et au référencement naturel (SEO), refonte de la rubrique « Équipement »",
+      "es": "Mejoras en la página de inicio y SEO, rediseño de notas de gear"
     },
     "content": {
       "en": [
@@ -4039,6 +4599,13 @@
         "Le format des notes sur les équipements a été simplifié et affiche désormais des icônes à la place des étoiles.",
         "Correction de problèmes liés aux caractères spéciaux dans les noms des charmes.",
         "Ajout d'un plan du site, d'un fichier robots.txt et de scripts de vérification du référencement."
+      ],
+      "es": [
+        "Mejorado el SEO de la página de inicio y añadido un banner Open Graph para las vistas previas sociales.",
+        "Añadidos metadatos JSON-LD a las páginas de personajes y equipo.",
+        "Formato de notas de gear simplificado, ahora muestra iconos en lugar de texto con estrellas.",
+        "Corregidos problemas con caracteres especiales en los nombres de los amuletos.",
+        "Añadidos sitemap, robots.txt y scripts de verificación SEO."
       ]
     }
   },
@@ -4050,7 +4617,8 @@
       "jp": "データパイプラインの大幅な更新",
       "kr": "주요 데이터 파이프라인 업데이트",
       "zh": "数据管道重大更新",
-      "fr": "Mise à jour majeure du pipeline de données"
+      "fr": "Mise à jour majeure du pipeline de données",
+      "es": "Actualización mayor del pipeline de datos"
     },
     "content": {
       "en": [
@@ -4067,6 +4635,9 @@
       ],
       "fr": [
         "Extraction et analyse automatisées des données du jeu à partir des fichiers `.bytes`. Les fichiers JSON des personnages sont désormais générés avec toutes les informations relatives aux compétences (améliorations, effets en chaîne/doubles, buffs/débuffs), l'équipement exclusif (`ee.json`) et l'équipement recommandé (`data/reco/`). Les données de personnage (à l'exception des recommandations d'équipement) seront mises en ligne dans quelques jours !"
+      ],
+      "es": [
+        "Extracción y análisis automatizados de los datos del juego a partir de archivos `.bytes`. Los JSON de personajes ahora se generan con información completa de skills (mejoras, efectos chain/dual, buffs/debuffs), equipo exclusivo (`ee.json`) y gear recomendado (`data/reco/`). ¡Los datos de personajes (sin la recomendación de gear) se publicarán en unos días!"
       ]
     }
   },
@@ -4078,7 +4649,8 @@
       "jp": "公式Discordサーバー",
       "kr": "공식 디스코드 서버",
       "zh": "官方 Discord 服务器",
-      "fr": "Serveur Discord officiel"
+      "fr": "Serveur Discord officiel",
+      "es": "Servidor oficial de Discord"
     },
     "content": {
       "en": [
@@ -4095,6 +4667,9 @@
       ],
       "fr": [
         "Le serveur Discord officiel d'Outerpedia est désormais disponible ! [Rejoignez la communauté](https://discord.com/invite/PNMd5mkAV8) pour discuter des configurations, signaler des problèmes, proposer des améliorations et recevoir des notifications de mise à jour."
+      ],
+      "es": [
+        "¡El servidor oficial de Discord de Outerpedia ya está activo! [Únete a la comunidad](https://discord.com/invite/PNMd5mkAV8) para hablar sobre builds, reportar problemas, sugerir mejoras y recibir notificaciones de actualizaciones."
       ]
     }
   },
@@ -4106,7 +4681,8 @@
       "jp": "武器のミニカード・ツールチップ",
       "kr": "무기 미니카드 툴팁",
       "zh": "武器迷你卡工具提示",
-      "fr": "Info-bulle de la MiniCard « Arme »"
+      "fr": "Info-bulle de la MiniCard « Arme »",
+      "es": "Tooltip de MiniCard de arma"
     },
     "content": {
       "en": [
@@ -4121,6 +4697,9 @@
       "zh": ["在角色页面“推荐装备”部分，为武器悬停时添加了详细的工具提示。"],
       "fr": [
         "Ajout d'une infobulle détaillée qui s'affiche lorsque l'on passe la souris sur une arme dans la section « Équipement recommandé » des pages de personnage."
+      ],
+      "es": [
+        "Añadido un tooltip detallado al pasar el cursor sobre el arma en la sección de Gear Recomendado de las páginas de personajes."
       ]
     }
   },
@@ -4132,7 +4711,8 @@
       "jp": "スキルに関する免責事項",
       "kr": "기술 관련 면책 조항",
       "zh": "技能免责声明",
-      "fr": "Avertissement concernant les compétences"
+      "fr": "Avertissement concernant les compétences",
+      "es": "Aviso sobre las skills"
     },
     "content": {
       "en": ["Added a disclaimer: 'Skills are displayed here with maximum enhancements applied.'"],
@@ -4145,7 +4725,8 @@
       "zh": ["添加了一条免责声明：“此处显示的技能已应用了最大强化效果。”"],
       "fr": [
         "Ajout d'une mention : « Les compétences sont présentées ici avec toutes les améliorations possibles. »"
-      ]
+      ],
+      "es": ["Añadido un aviso: 'Las skills se muestran aquí con las mejoras máximas aplicadas.'"]
     }
   },
   {
@@ -4156,7 +4737,8 @@
       "jp": "限定装備のレベル修正",
       "kr": "독점 장비 레벨 수정",
       "zh": "专属装备等级修复",
-      "fr": "Correction exclusive du niveau d'équipement"
+      "fr": "Correction exclusive du niveau d'équipement",
+      "es": "Corrección del nivel de Equipo Exclusivo"
     },
     "content": {
       "en": ["Corrected display of Exclusive Equipment levels: 'EE: Lv. 10', not 'rank 10'."],
@@ -4167,6 +4749,9 @@
       "zh": ["修正了专属装备等级的显示：应为“EE：Lv. 10”，而非“rank 10”。"],
       "fr": [
         "Correction de l'affichage des niveaux d'équipement exclusif : « EE : Niv. 10 », et non « rang 10 »."
+      ],
+      "es": [
+        "Corregida la visualización de los niveles de Equipo Exclusivo: 'EE: Nv. 10', no 'rango 10'."
       ]
     }
   },
@@ -4178,7 +4763,8 @@
       "jp": "初期変更履歴の設定",
       "kr": "초기 변경 내역 설정",
       "zh": "初始变更日志设置",
-      "fr": "Configuration initiale du journal des modifications"
+      "fr": "Configuration initiale du journal des modifications",
+      "es": "Configuración inicial del Changelog"
     },
     "content": {
       "en": [
@@ -4195,6 +4781,9 @@
       ],
       "fr": [
         "J'ai créé une page présentant l'historique des modifications sous forme visuelle et j'ai ajouté un lien vers celle-ci dans le pied de page. Les 10 dernières mises à jour s'affichent désormais sur la page d'accueil."
+      ],
+      "es": [
+        "Creada una página visual de changelog y enlazada en el pie de página. Ahora se muestran las últimas 10 actualizaciones en la página de inicio."
       ]
     }
   },
@@ -4206,7 +4795,8 @@
       "jp": "キャラクターページの機能強化",
       "kr": "캐릭터 페이지 개선 사항",
       "zh": "角色页面优化",
-      "fr": "Améliorations apportées à la page des personnages"
+      "fr": "Améliorations apportées à la page des personnages",
+      "es": "Mejoras en la página de personaje"
     },
     "content": {
       "en": ["Added chain and dual attack effects with icons based on character element."],
@@ -4217,6 +4807,9 @@
       "zh": ["新增了连锁攻击和双重攻击效果，其图标根据角色属性而定。"],
       "fr": [
         "Ajout d'effets de chaîne et de double attaque avec des icônes correspondant à l'élément du personnage."
+      ],
+      "es": [
+        "Se agregaron efectos de ataque en cadena y ataque doble con íconos según el elemento del personaje."
       ]
     }
   },
@@ -4228,7 +4821,8 @@
       "jp": "バフ／デバフフィルター",
       "kr": "버프/디버프 필터",
       "zh": "增益/减益过滤器",
-      "fr": "Filtres de buffs/débuffs"
+      "fr": "Filtres de buffs/débuffs",
+      "es": "Filtros de Bono/Debuff"
     },
     "content": {
       "en": [
@@ -4243,6 +4837,9 @@
       "zh": ["实现了用于增益和减益效果的过滤器接口，支持“与”/“或”逻辑及图标显示。"],
       "fr": [
         "Mise en place d'une interface de filtrage pour les bonus et les malus, avec une logique « ET/OU » et la prise en charge des icônes."
+      ],
+      "es": [
+        "Se implementó una interfaz de filtro para bonos y debuffs con lógica Y/O y soporte de íconos."
       ]
     }
   },
@@ -4254,7 +4851,8 @@
       "jp": "基本装備のフィルター",
       "kr": "기본 장비 필터",
       "zh": "基本设备过滤器",
-      "fr": "Filtres pour équipement de base"
+      "fr": "Filtres pour équipement de base",
+      "es": "Filtros básicos de equipo"
     },
     "content": {
       "en": [
@@ -4265,6 +4863,9 @@
       "zh": ["已从“装备”页面中过滤掉了专属装备和护身符。仅显示基础装备。"],
       "fr": [
         "Les équipements exclusifs et les talismans ont été masqués sur la page « Équipement ». Seuls les équipements de base sont affichés."
+      ],
+      "es": [
+        "Se filtraron el equipo exclusivo y los talismanes de la página de Equipo. Solo se muestra el equipo básico."
       ]
     }
   },
@@ -4276,7 +4877,8 @@
       "jp": "アーマーセットのビジュアルカード",
       "kr": "갑옷 세트 비주얼 카드",
       "zh": "护甲套装视觉卡",
-      "fr": "Cartes illustrées des ensembles d'armures"
+      "fr": "Cartes illustrées des ensembles d'armures",
+      "es": "Tarjetas visuales de sets de armadura"
     },
     "content": {
       "en": ["Introduced visual cards for armor sets with hover effects and custom backgrounds."],
@@ -4289,6 +4891,9 @@
       "zh": ["为护甲套装引入了带有悬停效果和自定义背景的视觉卡片。"],
       "fr": [
         "Ajout de cartes visuelles pour les ensembles d'armures, avec des effets au survol et des arrière-plans personnalisés."
+      ],
+      "es": [
+        "Se introdujeron tarjetas visuales para los sets de armadura con efectos al pasar el cursor y fondos personalizados."
       ]
     }
   },
@@ -4300,14 +4905,16 @@
       "jp": "三つの鳴き声（ナーフ後）",
       "kr": "세 울음소리 (너프 후)",
       "zh": "三声啼哭（削弱后）",
-      "fr": "Three Cries (Post-nerf)"
+      "fr": "Three Cries (Post-nerf)",
+      "es": "Three Cries (Post-nerfeo)"
     },
     "content": {
       "en": ["Three Cries boss guide updated with post-nerf skill data."],
       "jp": ["三つの鳴き声ボスガイドがナーフ後のスキルデータで更新されました。"],
       "kr": ["세 울음소리 보스 가이드가 너프 후 스킬 데이터로 업데이트되었습니다."],
       "zh": ["三声啼哭Boss指南已更新削弱后的技能数据。"],
-      "fr": ["Le guide du Boss Three Cries a été mis à jour avec les données de skills post-nerf."]
+      "fr": ["Le guide du Boss Three Cries a été mis à jour avec les données de skills post-nerf."],
+      "es": ["Se actualizó la guía del jefe Three Cries con los datos de skills post-nerfeo."]
     },
     "link": {
       "kind": "guide",

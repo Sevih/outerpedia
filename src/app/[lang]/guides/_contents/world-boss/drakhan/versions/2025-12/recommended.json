@@ -6,7 +6,8 @@
         "jp": "フェーズ1",
         "kr": "페이즈 1",
         "zh": "阶段1",
-        "fr": "Phase 1"
+        "fr": "Phase 1",
+        "es": "Fase 1"
       },
       "groups": [
         {
@@ -16,7 +17,8 @@
             "jp": "{D/BT_DOT_POISON}と{B/BT_STAT|ST_COUNTER_RATE}を持つ{C/Healer}。",
             "kr": "{D/BT_DOT_POISON}과 {B/BT_STAT|ST_COUNTER_RATE}를 가진 {C/Healer}.",
             "zh": "拥有{D/BT_DOT_POISON}和{B/BT_STAT|ST_COUNTER_RATE}的{C/Healer}。",
-            "fr": "{C/Healer} avec {D/BT_DOT_POISON} et {B/BT_STAT|ST_COUNTER_RATE}."
+            "fr": "{C/Healer} avec {D/BT_DOT_POISON} et {B/BT_STAT|ST_COUNTER_RATE}.",
+            "es": "{C/Healer} con {D/BT_DOT_POISON} y {B/BT_STAT|ST_COUNTER_RATE}."
           }
         },
         {
@@ -26,7 +28,8 @@
             "jp": "{D/CORROSIVE_POISON}の供給源。",
             "kr": "{D/CORROSIVE_POISON} 공급원.",
             "zh": "{D/CORROSIVE_POISON}来源。",
-            "fr": "Source de {D/CORROSIVE_POISON}."
+            "fr": "Source de {D/CORROSIVE_POISON}.",
+            "es": "Fuente de {D/CORROSIVE_POISON}."
           }
         },
         {
@@ -45,7 +48,8 @@
             "jp": "{B/BT_STAT|ST_COUNTER_RATE}または{B/BT_REVENGE}メカニクス内蔵。",
             "kr": "{B/BT_STAT|ST_COUNTER_RATE} 또는 {B/BT_REVENGE} 메커니즘 내장.",
             "zh": "内置{B/BT_STAT|ST_COUNTER_RATE}或{B/BT_REVENGE}机制。",
-            "fr": "Mécaniques {B/BT_STAT|ST_COUNTER_RATE} ou {B/BT_REVENGE} intégrées."
+            "fr": "Mécaniques {B/BT_STAT|ST_COUNTER_RATE} ou {B/BT_REVENGE} intégrées.",
+            "es": "Mecánicas de {B/BT_STAT|ST_COUNTER_RATE} o {B/BT_REVENGE} integradas."
           }
         }
       ]
@@ -56,7 +60,8 @@
         "jp": "フェーズ2",
         "kr": "페이즈 2",
         "zh": "阶段2",
-        "fr": "Phase 2"
+        "fr": "Phase 2",
+        "es": "Fase 2"
       },
       "groups": [
         {
@@ -66,7 +71,8 @@
             "jp": "{B/BT_REMOVE_DEBUFF}と{B/BT_CALL_BACKUP}。",
             "kr": "{B/BT_REMOVE_DEBUFF}와 {B/BT_CALL_BACKUP}.",
             "zh": "{B/BT_REMOVE_DEBUFF}和{B/BT_CALL_BACKUP}。",
-            "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}."
+            "fr": "{B/BT_REMOVE_DEBUFF} et {B/BT_CALL_BACKUP}.",
+            "es": "{B/BT_REMOVE_DEBUFF} y {B/BT_CALL_BACKUP}."
           }
         },
         {
@@ -76,7 +82,8 @@
             "jp": "{D/BT_DOT_POISON}の供給源。",
             "kr": "{D/BT_DOT_POISON} 공급원.",
             "zh": "{D/BT_DOT_POISON}来源。",
-            "fr": "Source de {D/BT_DOT_POISON}."
+            "fr": "Source de {D/BT_DOT_POISON}.",
+            "es": "Fuente de {D/BT_DOT_POISON}."
           }
         },
         {
@@ -93,7 +100,8 @@
             "jp": "バッファーオプション。",
             "kr": "버퍼 옵션.",
             "zh": "增益选项。",
-            "fr": "Options Buffer."
+            "fr": "Options Buffer.",
+            "es": "Opciones de buffer."
           }
         },
         {
@@ -103,7 +111,8 @@
             "jp": "4凸から行動ゲージ上昇効率を20%減少（5凸で50%）。",
             "kr": "4성부터 행동 게이지 증가 효율 20% 감소 (5성에서 50%).",
             "zh": "从4星开始，降低行动值增加效率20%（5星时50%）。",
-            "fr": "À partir de 4 étoiles, réduit l'efficacité du gain de priority de 20% (50% à 5 étoiles)."
+            "fr": "À partir de 4 étoiles, réduit l'efficacité du gain de priority de 20% (50% à 5 étoiles).",
+            "es": "A partir de 4 estrellas, reduce la eficiencia de ganancia de prioridad en un 20% (50% a 5 estrellas)."
           }
         },
         {
@@ -113,7 +122,8 @@
             "jp": "前列スロット用の{C/Defender}オプション。",
             "kr": "전열 슬롯용 {C/Defender} 옵션.",
             "zh": "前排位置的{C/Defender}选项。",
-            "fr": "Option {C/Defender} pour le slot de devant."
+            "fr": "Option {C/Defender} pour le slot de devant.",
+            "es": "Opción de {C/Defender} para el puesto delantero."
           }
         }
       ]

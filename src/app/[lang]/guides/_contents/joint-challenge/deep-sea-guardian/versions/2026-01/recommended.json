@@ -6,7 +6,8 @@
       "jp": "スコアボーナスのための必須ピック。",
       "kr": "점수 보너스를 위한 필수 픽.",
       "zh": "分数加成必选角色。",
-      "fr": "Pick essentiel pour le bonus de score."
+      "fr": "Pick essentiel pour le bonus de score.",
+      "es": "Elección esencial para el bono de puntuación."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "ボスの{B/BT_INVINCIBLE}を{D/BT_STEAL_BUFF}。",
       "kr": "보스의 {B/BT_INVINCIBLE}를 {D/BT_STEAL_BUFF}.",
       "zh": "{D/BT_STEAL_BUFF}首领的{B/BT_INVINCIBLE}。",
-      "fr": "{D/BT_STEAL_BUFF} le {B/BT_INVINCIBLE} du boss."
+      "fr": "{D/BT_STEAL_BUFF} le {B/BT_INVINCIBLE} du boss.",
+      "es": "{B/BT_INVINCIBLE} del jefe {D/BT_STEAL_BUFF}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "ボスの{B/BT_INVINCIBLE}を{D/BT_REMOVE_BUFF}。",
       "kr": "보스의 {B/BT_INVINCIBLE}를 {D/BT_REMOVE_BUFF}.",
       "zh": "{D/BT_REMOVE_BUFF}首领的{B/BT_INVINCIBLE}。",
-      "fr": "{D/BT_REMOVE_BUFF} le {B/BT_INVINCIBLE} du boss."
+      "fr": "{D/BT_REMOVE_BUFF} le {B/BT_INVINCIBLE} du boss.",
+      "es": "{B/BT_INVINCIBLE} del jefe {D/BT_REMOVE_BUFF}."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{B/BT_STAT|ST_COUNTER_RATE}持ちの{C/Striker}（ボスが速い）。",
       "kr": "{B/BT_STAT|ST_COUNTER_RATE}를 가진 {C/Striker} (보스가 빠름).",
       "zh": "拥有{B/BT_STAT|ST_COUNTER_RATE}的{C/Striker}（首领速度快）。",
-      "fr": "Buff {B/BT_STAT|ST_COUNTER_RATE} (le boss est rapide)."
+      "fr": "Buff {B/BT_STAT|ST_COUNTER_RATE} (le boss est rapide).",
+      "es": "Bono de {B/BT_STAT|ST_COUNTER_RATE} (el jefe es rápido)."
     }
   },
   {
@@ -46,7 +50,8 @@
       "jp": "{B/BT_STAT|ST_SPEED}と{B/BT_INVINCIBLE}サポート。",
       "kr": "{B/BT_STAT|ST_SPEED}와 {B/BT_INVINCIBLE} 서포트.",
       "zh": "{B/BT_STAT|ST_SPEED}和{B/BT_INVINCIBLE}辅助。",
-      "fr": "Support {B/BT_STAT|ST_SPEED} et {B/BT_INVINCIBLE}."
+      "fr": "Support {B/BT_STAT|ST_SPEED} et {B/BT_INVINCIBLE}.",
+      "es": "Soporte de {B/BT_STAT|ST_SPEED} y {B/BT_INVINCIBLE}."
     }
   }
 ]

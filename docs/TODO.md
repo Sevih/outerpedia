@@ -49,11 +49,6 @@
       remplacer sur le VPS ; (2) déployer le `Caddyfile` (bloc déjà édité) ;
       (3) créer l'enregistrement DNS `es` en nuage orange. Poste local :
       `127.0.0.1 es.outerpedia.local` dans le fichier hosts (admin).
-- [ ] **Éditorial en espagnol** — décision du 23/09 : repli EN au lancement.
-      À traduire au fil de l'eau par l'outil admin (DeepL/Haiku, `es` ajouté aux
-      cibles) : 589 chaînes curées portant un `fr`, 145 libellés à 5 langues dans
-      les `labels.ts`/`content.ts` des guides, les `title`/`description` des
-      `meta.json`. Rien ne casse sans : `LocalizedText` est partiel.
 - [ ] **`China_Traditional`** : les tables `Text*` la portent, remplie à 100 %,
       et le site ne la sert pas. Trancher un jour si un `zh-TW` a un public —
       ce serait une septième entrée dans `LANGUAGES` + `GAME_LANGS`, une locale

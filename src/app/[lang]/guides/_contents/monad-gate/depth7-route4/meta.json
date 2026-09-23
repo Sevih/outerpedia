@@ -4,18 +4,20 @@
     "fr": "Terre des tempêtes de sable",
     "jp": "砂風の国",
     "kr": "모래바람의 나라",
-    "zh": "风沙之国"
+    "zh": "风沙之国",
+    "es": "Tierra de Tormentas de Arena"
   },
   "description": {
     "en": "Monad Gate Endless Depth 7 — Land of Sandstorms: interactive map, path choices, key items and rewards.",
     "fr": "Monad Gate Endless Depth 7 — Terre des tempêtes de sable : carte interactive, choix de chemin, objets-clés et récompenses.",
     "jp": "モナドゲート 深層7 — 砂風の国：インタラクティブマップ、ルート選択、イベント選択、報酬。",
     "kr": "모나드 게이트 심층 7 — 모래바람의 나라: 인터랙티브 맵, 경로 선택, 이벤트 선택, 보상.",
-    "zh": "单子门 深层7 — 风沙之国：交互式地图、路线选择、事件选项与奖励。"
+    "zh": "单子门 深层7 — 风沙之国：交互式地图、路线选择、事件选项与奖励。",
+    "es": "Puerta Monad Profundidad Infinita 7 — Tierra de Tormentas de Arena: mapa interactivo, elecciones de ruta, objetos clave y recompensas."
   },
   "icon": "T_DungeonArea_22",
   "author": "Sevih",
-  "updated": "2026-09-22",
+  "updated": "2026-09-23",
   "hidden": true,
   "depth": 7,
   "route": 4

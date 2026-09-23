@@ -16,6 +16,7 @@ export const TERMS = {
     kr: '강적 대응',
     zh: '应对强敌',
     fr: 'Counteract Strong Enemies',
+    es: 'Contrarrestar enemigos fuertes',
   },
   classEnhancement: {
     en: 'Class Enhancement',
@@ -23,6 +24,7 @@ export const TERMS = {
     kr: '직업 강화',
     zh: '职业强化',
     fr: 'Class Enhancement',
+    es: 'Mejora de clase',
   },
   elementEnhancement: {
     en: 'Element Enhancement',
@@ -30,14 +32,23 @@ export const TERMS = {
     kr: '속성 강화',
     zh: '属性强化',
     fr: 'Élément Enhancement',
+    es: 'Mejora de elemento',
   },
-  utility: { en: 'Utility', jp: '実用関連', kr: '유틸리티', zh: '效益', fr: 'Utility' },
+  utility: {
+    en: 'Utility',
+    jp: '実用関連',
+    kr: '유틸리티',
+    zh: '效益',
+    fr: 'Utility',
+    es: 'Utilidad',
+  },
   adventureLicense: {
     en: 'Adventure License',
     jp: '冒険者ライセンス',
     kr: '모험 라이선스',
     zh: '冒险许可证',
     fr: 'Adventure License',
+    es: 'Licencia aventura',
   },
 } satisfies Record<string, LocalizedText>;
 
@@ -57,16 +68,25 @@ export const LABELS = {
     kr: '기프트 작동 방식',
     zh: '天赋机制说明',
     fr: 'Fonctionnement des Quirks',
+    es: 'Cómo funcionan los Quirks',
   },
-  tab_guide: { en: 'Guide', jp: 'ガイド', kr: '가이드', zh: '指南', fr: 'Guide' },
+  tab_guide: { en: 'Guide', jp: 'ガイド', kr: '가이드', zh: '指南', fr: 'Guide', es: 'Guía' },
   tab_trees: {
     en: 'Quirk Trees',
     jp: 'ギフトツリー',
     kr: '기프트 트리',
     zh: '天赋树',
     fr: 'Arbres de Quirks',
+    es: 'Árboles de Quirk',
   },
-  tab_faq: { en: 'FAQ', jp: 'よくある質問', kr: '자주 묻는 질문', zh: '常见问题', fr: 'FAQ' },
+  tab_faq: {
+    en: 'FAQ',
+    jp: 'よくある質問',
+    kr: '자주 묻는 질문',
+    zh: '常见问题',
+    fr: 'FAQ',
+    es: 'Preguntas frecuentes',
+  },
 
   categoryOverview: {
     en: 'Category Overview',
@@ -74,6 +94,7 @@ export const LABELS = {
     kr: '카테고리 개요',
     zh: '类别概览',
     fr: 'Aperçu des Catégories',
+    es: 'Resumen de categoría',
   },
   howItWorks: {
     en: 'How It Works',
@@ -81,6 +102,7 @@ export const LABELS = {
     kr: '작동 방식',
     zh: '运作方式',
     fr: 'Comment ça fonctionne',
+    es: 'Cómo funciona',
   },
   upgradingPriority: {
     en: 'Upgrading Priority',
@@ -88,6 +110,7 @@ export const LABELS = {
     kr: '업그레이드 우선순위',
     zh: '升级优先级',
     fr: "Priorité d'Upgrade",
+    es: 'Prioridad de mejora',
   },
   earlyGameExample: {
     en: 'Early Game Example',
@@ -95,6 +118,7 @@ export const LABELS = {
     kr: '초반 예시',
     zh: '前期示例',
     fr: 'Exemple Early Game',
+    es: 'Ejemplo de inicio de juego',
   },
 
   introP1: {
@@ -103,6 +127,7 @@ export const LABELS = {
     kr: '시즌 1 스테이지 9-5: 빼앗은 자의 책임감을 클리어하면 기프트 시스템이 해금됩니다.',
     zh: '通关第一季9-5关卡「掠夺者的责任感」后，将解锁天赋系统。',
     fr: 'Après avoir clear le stage 9-5 de Season 1 : The Responsibility of the Guilty, vous débloquerez le système des Quirks.',
+    es: 'Después de completar la Temporada 1, etapa 9-5: La Responsabilidad del Culpable, desbloquearás el sistema de Quirk.',
   },
   introP2: {
     en: 'Quirks are a permanent, account-wide enhancement system available in the Base → Quirk menu. They provide additional stats for your heroes or utility effects for your account, and are unlocked using materials such as {I-I/Proof of Destiny}, {I-I/Token of Connection}, and {I-I/Proof of Worth}.',
@@ -110,6 +135,7 @@ export const LABELS = {
     kr: '기프트는 아지트 → 기프트 메뉴에서 사용할 수 있는 영구적인 계정 전체 강화 시스템입니다. 영웅에게 추가 스탯이나 계정에 유틸리티 효과를 제공하며, {I-I/Proof of Destiny}, {I-I/Token of Connection}, {I-I/Proof of Worth} 등의 재료로 해금됩니다.',
     zh: '天赋是一个永久的全账户强化系统，可在基地→天赋菜单中使用。它为英雄提供额外属性或账户效益效果，使用{I-I/Proof of Destiny}、{I-I/Token of Connection}和{I-I/Proof of Worth}等材料解锁。',
     fr: "Les Quirks sont un système d'amélioration permanent et global au compte, disponible dans Base → Quirk menu. Ils fournissent des stats supplémentaires pour vos Héros ou des effets utility pour votre compte, et se débloquent avec des matériaux comme {I-I/Proof of Destiny}, {I-I/Token of Connection} et {I-I/Proof of Worth}.",
+    es: 'Los Quirks son un sistema de mejora permanente a nivel de cuenta disponible en el menú Base → Quirk. Proporcionan estadísticas adicionales para tus héroes o efectos de utilidad para tu cuenta, y se desbloquean usando materiales como {I-I/Proof of Destiny}, {I-I/Token of Connection} y {I-I/Proof of Worth}.',
   },
 
   catCounteract: {
@@ -118,6 +144,7 @@ export const LABELS = {
     kr: '보스전에서 팀을 강화하거나 적을 약화시키는 보너스',
     zh: '面对Boss时强化队伍或削弱敌人的加成',
     fr: "bonus qui renforcent votre équipe ou affaiblissent l'ennemi face aux bosses",
+    es: 'bonos que mejoran a tu equipo o debilitan al enemigo al enfrentar jefes',
   },
   catClass: {
     en: 'stat boosts for heroes based on their class and subclass',
@@ -125,6 +152,7 @@ export const LABELS = {
     kr: '직업과 하위 직업에 따른 영웅 스탯 부스트',
     zh: '基于职业和子职业的英雄属性提升',
     fr: 'boosts de stats pour les Héros selon leur class et subclass',
+    es: 'mejoras de estadísticas para héroes según su clase y subclase',
   },
   catElement: {
     en: 'stat boosts based on hero elements',
@@ -132,6 +160,7 @@ export const LABELS = {
     kr: '영웅 속성에 따른 스탯 부스트',
     zh: '基于英雄属性的属性提升',
     fr: 'boosts de stats selon les Éléments des Héros',
+    es: 'mejoras de estadísticas según los elementos de los héroes',
   },
   catUtility: {
     en: 'account-wide bonuses (EXP gain, drop rate, crafting cost, etc.)',
@@ -139,6 +168,7 @@ export const LABELS = {
     kr: '계정 전체 보너스 (경험치 획득, 드롭률, 제작 비용 등)',
     zh: '全账户加成（经验获取、掉落率、制作成本等）',
     fr: "bonus à l'échelle du compte (gain d'EXP, drop rate, coût de crafting, etc.)",
+    es: 'bonos a nivel de cuenta (ganancia de EXP, tasa de drop, costo de crafteo, etc.)',
   },
   catAdventure: {
     en: 'bonuses that only apply in Adventure License mode',
@@ -146,6 +176,7 @@ export const LABELS = {
     kr: '모험 라이선스 모드에서만 적용되는 보너스',
     zh: '仅在冒险许可证模式中生效的加成',
     fr: "bonus qui ne s'appliquent qu'en mode Adventure License",
+    es: 'bonos que solo se aplican en el modo Licencia aventura',
   },
 
   howP1: {
@@ -154,6 +185,7 @@ export const LABELS = {
     kr: '각 카테고리에는 메인 노드와 서브 노드가 있습니다. 서브 노드를 해금하려면 메인 노드를 업그레이드해야 합니다.',
     zh: '每个类别都有主节点和子节点。必须升级主节点才能解锁子节点。',
     fr: 'Chaque catégorie a des Main Nodes et Sub-Nodes. Vous devez upgrade le main node pour débloquer ses sub-nodes.',
+    es: 'Cada categoría tiene Nodos Principales y Subnodos. Debes mejorar el nodo principal para desbloquear sus subnodos.',
   },
   howP2: {
     en: 'You need 5 points in a main node to unlock all sub-nodes (except {ICON_AL}, which requires level 9).',
@@ -161,6 +193,7 @@ export const LABELS = {
     kr: '모든 서브 노드를 해금하려면 메인 노드에 5포인트가 필요합니다 ({ICON_AL} 제외, 레벨 9 필요).',
     zh: '需要主节点5点才能解锁所有子节点（{ICON_AL}除外，需要9级）。',
     fr: 'Vous avez besoin de 5 points dans un main node pour débloquer tous les sub-nodes (sauf {ICON_AL}, qui requiert le niveau 9).',
+    es: 'Necesitas 5 puntos en un nodo principal para desbloquear todos los subnodos (excepto {ICON_AL}, que requiere nivel 9).',
   },
   howP3: {
     en: 'Some nodes are more valuable than others. You can skip early nodes like {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED%} and {S/RES} quirks.',
@@ -168,6 +201,7 @@ export const LABELS = {
     kr: '일부 노드는 다른 것보다 가치가 높습니다. {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED%}, {S/RES} 기프트는 초반에 스킵할 수 있습니다.',
     zh: '某些节点比其他节点更有价值。可以跳过{C/Healer}、{C/Defender}、{C/Ranger}（{C/Ranger|Tactician}）、{S/DMG RED%}和{S/RES}等早期天赋。',
     fr: "Certains nodes ont plus de valeur que d'autres. Vous pouvez sauter les Quirks early comme {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED%} et {S/RES}.",
+    es: 'Algunos nodos son más valiosos que otros. Puedes omitir los quirks iniciales como {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED%} y {S/RES}.',
   },
   howP4: {
     en: 'You can reset quirk investments using {I-I/Free Ether}, refunding all materials spent.',
@@ -175,6 +209,7 @@ export const LABELS = {
     kr: '{I-I/Free Ether}를 사용하여 기프트 투자를 리셋하고 사용한 모든 재료를 환불받을 수 있습니다.',
     zh: '可以使用{I-I/Free Ether}重置天赋投资，退还所有使用的材料。',
     fr: "Vous pouvez reset vos investissements de Quirks avec de l'{I-I/Free Ether}, ce qui rembourse tous les matériaux dépensés.",
+    es: 'Puedes restablecer las inversiones de quirk usando {I-I/Free Ether}, recuperando todos los materiales gastados.',
   },
 
   priorityP1: {
@@ -183,6 +218,7 @@ export const LABELS = {
     kr: '초반에는 {ICON_CSE} 기프트를 최우선으로 하세요. 적, 게임 모드, 영웅 직업, 속성에 관계없이 보너스가 보편적으로 적용됩니다.',
     zh: '前期应优先{ICON_CSE}天赋，因为其加成普遍适用——无论敌人、游戏模式、英雄职业或属性。',
     fr: "En early game, votre priorité numéro un devrait être les Quirks {ICON_CSE}, car leurs bonus s'appliquent universellement, quel que soit l'ennemi, le mode de jeu, la class ou l'Élément du Héros.",
+    es: 'En el inicio del juego, tu primera prioridad deberían ser los quirks de {ICON_CSE}, ya que sus bonos se aplican universalmente, sin importar el enemigo, el modo de juego, la clase del héroe o el elemento.',
   },
   priorityP2: {
     en: 'Next, focus on {ICON_CE}, starting with the class of your main DPS. Then move on to {ICON_EE}, prioritizing the element your team relies on the most.',
@@ -190,6 +226,7 @@ export const LABELS = {
     kr: '다음으로 {ICON_CE}에 집중하세요. 메인 딜러의 직업부터 시작하여 {ICON_EE}로 넘어가고, 팀이 가장 의존하는 속성을 우선하세요.',
     zh: '接下来专注于{ICON_CE}，从主力输出的职业开始。然后转向{ICON_EE}，优先队伍最依赖的属性。',
     fr: "Ensuite, concentrez-vous sur {ICON_CE}, en commençant par la class de votre main DPS. Passez ensuite à {ICON_EE}, en priorisant l'Élément sur lequel votre équipe s'appuie le plus.",
+    es: 'Luego, concéntrate en {ICON_CE}, empezando por la clase de tu DPS principal. Después pasa a {ICON_EE}, priorizando el elemento del que más depende tu equipo.',
   },
   priorityP3: {
     en: 'Finally, consider {ICON_U} quirks, which offer account-wide bonuses such as EXP gain, drop rate, crafting discounts — and most notably, an increase to your stamina cap. While the stamina cap boost is the most impactful perk in this category, Utility quirks as a whole still remain a lower priority early on.',
@@ -197,6 +234,7 @@ export const LABELS = {
     kr: '마지막으로 {ICON_U} 기프트를 고려하세요. 경험치 획득, 드롭률, 제작 할인 등 계정 전체 보너스를 제공하며, 특히 스태미나 상한 증가가 주목됩니다. 스태미나 상한 부스트가 이 카테고리에서 가장 영향력 있는 혜택이지만, 유틸리티 기프트 전체적으로는 초반에 우선순위가 낮습니다.',
     zh: '最后考虑{ICON_U}天赋，提供全账户加成如经验获取、掉落率、制作折扣——最值得注意的是体力上限增加。虽然体力上限提升是该类别中最有价值的特权，但效益天赋整体在前期优先级仍然较低。',
     fr: "Enfin, regardez les Quirks {ICON_U}, qui offrent des bonus à l'échelle du compte comme le gain d'EXP, drop rate, discounts de crafting et surtout une augmentation de votre stamina cap. Bien que le boost de stamina cap soit l'avantage le plus impactant de cette catégorie, les Utility Quirks dans leur ensemble restent une priorité moindre en early.",
+    es: 'Finalmente, considera los quirks de {ICON_U}, que ofrecen bonificaciones a nivel de cuenta como ganancia de EXP, tasa de drop, descuentos de crafteo — y sobre todo, un aumento al límite de vigor. Aunque el aumento del límite de vigor es la ventaja más impactante de esta categoría, los quirks de Utilidad en general siguen siendo una prioridad baja al principio del juego.',
   },
   priorityP4: {
     en: "As for the {ICON_AL} tree: this is an endgame system and shouldn't be your early focus. It's also the only tree that requires {I-I/Proof of Worth}, which is exclusively obtained from Adventure License mode.",
@@ -204,6 +242,7 @@ export const LABELS = {
     kr: '{ICON_AL} 트리에 대해: 이것은 엔드게임 시스템이므로 초반에 집중해서는 안 됩니다. 또한 {I-I/Proof of Worth}가 필요한 유일한 트리이며, 모험 라이선스 모드에서만 획득할 수 있습니다.',
     zh: '关于{ICON_AL}树：这是终局系统，不应作为前期重点。它也是唯一需要{I-I/Proof of Worth}的树，该材料仅从冒险许可证模式获取。',
     fr: "Concernant l'arbre {ICON_AL} : c'est un système d'endgame qui ne devrait pas être votre focus early. C'est aussi le seul arbre qui nécessite des {I-I/Proof of Worth}, exclusivement obtenus du mode Adventure License.",
+    es: 'En cuanto al árbol de {ICON_AL}: es un sistema de endgame y no debería ser tu prioridad temprana. También es el único árbol que requiere {I-I/Proof of Worth}, que se obtiene exclusivamente en el modo Licencia aventura.',
   },
 
   exampleIntro: {
@@ -212,6 +251,7 @@ export const LABELS = {
     kr: '초반의 일반적인 팀을 예로 들어봅시다: {P/Valentine}, {P/Aer}, {P/Monad Eva}, {P/Drakhan}.',
     zh: '以常见的前期队伍为例：{P/Valentine}、{P/Aer}、{P/Monad Eva}、{P/Drakhan}。',
     fr: 'Prenons une équipe early courante : {P/Valentine}, {P/Aer}, {P/Monad Eva}, {P/Drakhan}.',
+    es: 'Tomemos un equipo temprano común: {P/Valentine}, {P/Aer}, {P/Monad Eva}, {P/Drakhan}.',
   },
   exampleP1: {
     en: 'After unlocking boss quirks, prioritize the {C/Striker} tree — especially the left path, which benefits Attackers like {P/Aer} and {P/Drakhan}.',
@@ -219,6 +259,7 @@ export const LABELS = {
     kr: '보스 기프트를 해금한 후 {C/Striker} 트리를 우선하세요. 특히 왼쪽 경로는 {P/Aer}와 {P/Drakhan} 같은 어태커에게 유리합니다.',
     zh: '解锁Boss天赋后，优先{C/Striker}树——特别是左侧路径，对{P/Aer}和{P/Drakhan}等攻击者有利。',
     fr: "Après avoir débloqué les Quirks Boss, priorisez l'arbre {C/Striker}, surtout le chemin de gauche qui bénéficie aux Attackers comme {P/Aer} et {P/Drakhan}.",
+    es: 'Después de desbloquear los quirks de jefe, prioriza el árbol de {C/Striker} — especialmente el camino de la izquierda, que beneficia a Atacantes como {P/Aer} y {P/Drakhan}.',
   },
   exampleP2: {
     en: 'Then, upgrade the {E/Fire} tree ({P/Valentine} and {P/Aer}) — one of your early goals will be farming Chimera for Speed gear.',
@@ -226,6 +267,7 @@ export const LABELS = {
     kr: '그 다음, {E/Fire} 트리를 업그레이드하세요 ({P/Valentine}와 {P/Aer}). 초반 목표 중 하나는 키메라에서 스피드 장비를 파밍하는 것입니다.',
     zh: '然后升级{E/Fire}树（{P/Valentine}和{P/Aer}）——前期目标之一是刷奇美拉获取速度装备。',
     fr: "Ensuite, upgrade l'arbre {E/Fire} ({P/Valentine} et {P/Aer}) ; l'un de vos objectifs early sera de farmer Chimera pour du gear SPD.",
+    es: 'Luego, mejora el árbol de {E/Fire} ({P/Valentine} y {P/Aer}) — uno de tus objetivos tempranos será farmear Chimera para conseguir gear de Velocidad.',
   },
   exampleP3: {
     en: 'Then, invest in {E/Light} quirks for {P/Drakhan} and {P/Monad Eva}.',
@@ -233,6 +275,7 @@ export const LABELS = {
     kr: '그 다음, {P/Drakhan}와 {P/Monad Eva}를 위해 {E/Light} 기프트에 투자하세요.',
     zh: '然后为{P/Drakhan}和{P/Monad Eva}投资{E/Light}天赋。',
     fr: 'Ensuite, investissez dans les Quirks {E/Light} pour {P/Drakhan} et {P/Monad Eva}.',
+    es: 'Luego, invierte en los quirks de {E/Light} para {P/Drakhan} y {P/Monad Eva}.',
   },
   exampleOutro: {
     en: 'This is just one example — always adapt your quirk investments based on your team composition and progression goals.',
@@ -240,6 +283,7 @@ export const LABELS = {
     kr: '이것은 하나의 예시일 뿐입니다. 항상 팀 구성과 진행 목표에 맞게 기프트 투자를 조정하세요.',
     zh: '这只是一个示例——请根据队伍配置和进度目标调整天赋投资。',
     fr: "Ce n'est qu'un exemple : adaptez toujours vos investissements de Quirks en fonction de votre composition d'équipe et de vos objectifs de progression.",
+    es: 'Este es solo un ejemplo — siempre adapta tus inversiones de quirks según la composición de tu equipo y tus objetivos de progresión.',
   },
 
   faqRespecTitle: {
@@ -248,6 +292,7 @@ export const LABELS = {
     kr: '실수했을 때 기프트를 리셋할 수 있나요?',
     zh: '如果犯错可以重置天赋吗？',
     fr: 'Puis-je reset les Quirks si je fais une erreur ?',
+    es: '¿Puedo resetear los Quirks si me equivoco?',
   },
   faqRespecContent: {
     en: 'Yes. You can respec all your quirks by spending {I-I/Free Ether}. This will fully refund all materials used, letting you reallocate them freely.',
@@ -255,6 +300,7 @@ export const LABELS = {
     kr: '네. {I-I/Free Ether}를 사용하여 모든 기프트를 리스펙할 수 있습니다. 사용한 모든 재료가 환불되어 자유롭게 재배분할 수 있습니다.',
     zh: '可以。使用{I-I/Free Ether}可以重置所有天赋。这将全额退还所有使用的材料，让您自由重新分配。',
     fr: "Oui. Vous pouvez respec tous vos Quirks en dépensant de l'{I-I/Free Ether}. Cela rembourse intégralement tous les matériaux utilisés, vous permettant de les réallouer librement.",
+    es: 'Sí. Puedes reasignar todos tus quirks gastando {I-I/Free Ether}. Esto reembolsará por completo todos los materiales usados, permitiéndote reasignarlos libremente.',
   },
   faqSubnodesTitle: {
     en: 'Should I max out a main node before unlocking sub-nodes?',
@@ -262,6 +308,7 @@ export const LABELS = {
     kr: '서브 노드를 해금하기 전에 메인 노드를 최대로 올려야 하나요?',
     zh: '解锁子节点前需要将主节点升到满级吗？',
     fr: 'Faut-il maxer un main node avant de débloquer les sub-nodes ?',
+    es: '¿Debo maximizar un nodo principal antes de desbloquear los subnodos?',
   },
   faqSubnodesP1: {
     en: 'No. Most main nodes should be upgraded to 5/10 — this unlocks all sub-nodes. Focus on sub-nodes early, as they usually offer better value per point.',
@@ -269,6 +316,7 @@ export const LABELS = {
     kr: '아니요. 대부분의 메인 노드는 5/10까지만 업그레이드하면 됩니다. 이렇게 하면 모든 서브 노드가 해금됩니다. 서브 노드는 보통 포인트당 가치가 높으므로 초반에는 서브 노드에 집중하세요.',
     zh: '不需要。大多数主节点升到5/10即可——这样就能解锁所有子节点。优先关注子节点，因为它们通常每点的价值更高。',
     fr: 'Non. La plupart des main nodes doivent être upgrade à 5/10, ce qui débloque tous les sub-nodes. Concentrez-vous sur les sub-nodes en early car ils offrent généralement une meilleure valeur par point.',
+    es: 'No. La mayoría de los nodos principales deberían mejorarse a 5/10 — esto desbloquea todos los subnodos. Enfócate primero en los subnodos, ya que suelen ofrecer mejor valor por punto.',
   },
   faqSubnodesP2: {
     en: 'The exception is the {ICON_AL} tree, which requires level 9 in the main node to unlock sub-nodes.',
@@ -276,6 +324,7 @@ export const LABELS = {
     kr: '예외는 {ICON_AL} 트리로, 서브 노드를 해금하려면 메인 노드를 레벨 9까지 올려야 합니다.',
     zh: '{ICON_AL}树是例外，需要主节点达到9级才能解锁子节点。',
     fr: "L'exception est l'arbre {ICON_AL}, qui nécessite le niveau 9 du main node pour débloquer les sub-nodes.",
+    es: 'La excepción es el árbol de {ICON_AL}, que requiere nivel 9 en el nodo principal para desbloquear los subnodos.',
   },
   faqSkipTitle: {
     en: 'Are there any nodes I should skip?',
@@ -283,6 +332,7 @@ export const LABELS = {
     kr: '스킵해야 하는 노드가 있나요?',
     zh: '有需要跳过的节点吗？',
     fr: 'Y a-t-il des nodes à sauter ?',
+    es: '¿Hay algún nodo que deba saltarme?',
   },
   faqSkipIntro: {
     en: 'Yes. In early and mid-game, skip quirks related to:',
@@ -290,6 +340,7 @@ export const LABELS = {
     kr: '네. 초반과 중반에는 다음과 관련된 기프트를 스킵하세요:',
     zh: '有的。在前中期，跳过以下相关天赋：',
     fr: 'Oui. En early et mid-game, sautez les Quirks liés à :',
+    es: 'Sí. Al principio y a mitad de juego, sáltate los quirks relacionados con:',
   },
   faqSkipHealers: {
     en: '{C/Healer}',
@@ -297,6 +348,7 @@ export const LABELS = {
     kr: '{C/Healer}',
     zh: '{C/Healer}',
     fr: '{C/Healer}',
+    es: '{C/Healer}',
   },
   faqSkipDefenders: {
     en: '{C/Defender}',
@@ -304,6 +356,7 @@ export const LABELS = {
     kr: '{C/Defender}',
     zh: '{C/Defender}',
     fr: '{C/Defender}',
+    es: '{C/Defender}',
   },
   faqSkipTactician: {
     en: '{C/Ranger|Tactician} ({C/Ranger} subclass)',
@@ -311,6 +364,7 @@ export const LABELS = {
     kr: '{C/Ranger|Tactician} ({C/Ranger} 서브클래스)',
     zh: '{C/Ranger|Tactician}（{C/Ranger}子职业）',
     fr: '{C/Ranger|Tactician} (subclass {C/Ranger})',
+    es: '{C/Ranger|Tactician} (subclase {C/Ranger})',
   },
   faqSkipDmgRed: {
     en: '{S/DMG RED%} and {S/RES} effects',
@@ -318,6 +372,7 @@ export const LABELS = {
     kr: '{S/DMG RED%}와 {S/RES} 효과',
     zh: '{S/DMG RED%}和{S/RES}效果',
     fr: 'effets {S/DMG RED%} et {S/RES}',
+    es: 'efectos de {S/DMG RED%} y {S/RES}',
   },
   faqMaterialsTitle: {
     en: 'What materials do I need to upgrade Quirks?',
@@ -325,6 +380,7 @@ export const LABELS = {
     kr: '기프트 업그레이드에 어떤 재료가 필요한가요?',
     zh: '升级天赋需要什么材料？',
     fr: 'Quels matériaux faut-il pour upgrade les Quirks ?',
+    es: '¿Qué materiales necesito para mejorar los Quirks?',
   },
   faqMaterialProofDestiny: {
     en: '{I-I/Proof of Destiny} — mainly obtained through Terminus Isle',
@@ -332,6 +388,7 @@ export const LABELS = {
     kr: '{I-I/Proof of Destiny} — 주로 종착지 섬에서 획득',
     zh: '{I-I/Proof of Destiny} — 主要通过终点岛获取',
     fr: '{I-I/Proof of Destiny} — principalement obtenu via Terminus Isle',
+    es: '{I-I/Proof of Destiny} — se obtiene principalmente en Terminus Isle',
   },
   faqMaterialTokenConnection: {
     en: '{I-I/Token of Connection} — mainly obtained through Terminus Isle',
@@ -339,6 +396,7 @@ export const LABELS = {
     kr: '{I-I/Token of Connection} — 주로 종착지 섬에서 획득',
     zh: '{I-I/Token of Connection} — 主要通过终点岛获取',
     fr: '{I-I/Token of Connection} — principalement obtenu via Terminus Isle',
+    es: '{I-I/Token of Connection} — se obtiene principalmente en Terminus Isle',
   },
   faqMaterialProofWorth: {
     en: '{I-I/Proof of Worth} — exclusively obtained from Adventure License shop',
@@ -346,6 +404,7 @@ export const LABELS = {
     kr: '{I-I/Proof of Worth} — 모험 라이선스 상점에서만 획득',
     zh: '{I-I/Proof of Worth} — 仅从冒险许可证商店获取',
     fr: "{I-I/Proof of Worth} — exclusivement obtenu dans l'Adventure License Shop",
+    es: '{I-I/Proof of Worth} — se obtiene exclusivamente en la tienda de Licencia aventura',
   },
 
   // ── Onglet Arbres ──
@@ -355,6 +414,7 @@ export const LABELS = {
     kr: '모든 기프트 트리를 게임 데이터에서 재현했습니다. 카테고리(및 속성/직업)를 선택하고 노드에 마우스를 올리면 효과와 만렙까지의 총비용이 표시됩니다.',
     zh: '所有天赋树，从游戏文件还原。选择类别（及属性/职业），将鼠标悬停在节点上即可查看效果与满级总消耗。',
     fr: 'Tous les arbres de quirks, reproduits depuis les fichiers du jeu. Choisissez une catégorie (et un élément/une class), puis survolez un nœud pour voir son effet et le coût total au max.',
+    es: 'Todos los árboles de quirks, reproducidos desde los archivos del juego. Elige una categoría (y elemento/clase), luego pasa el cursor sobre un nodo para ver su efecto y el costo total para maximizarlo.',
   },
   treeResetNote: {
     en: 'Each category can be fully reset with Free Ether, refunding every material.',
@@ -362,5 +422,6 @@ export const LABELS = {
     kr: '각 카테고리는 Free Ether로 완전히 리셋할 수 있으며 모든 재료가 환불됩니다.',
     zh: '每个类别都可用 Free Ether 完全重置，退还所有材料。',
     fr: 'Chaque catégorie se reset entièrement avec de la Free Ether, tous les matériaux remboursés.',
+    es: 'Cada categoría puede resetearse por completo con Éter Gratis, reembolsando todos los materiales.',
   },
 } satisfies Record<string, LocalizedText>;

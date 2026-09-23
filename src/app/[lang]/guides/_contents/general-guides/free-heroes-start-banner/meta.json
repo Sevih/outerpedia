@@ -4,18 +4,20 @@
     "jp": "無料ヒーロー&スターターバナー",
     "kr": "무료 영웅 & 스타터 배너",
     "zh": "免费同伴和新手卡池",
-    "fr": "Héros gratuits & Starter Banners"
+    "fr": "Héros gratuits & Starter Banners",
+    "es": "Héroes gratis y Banners iniciales"
   },
   "description": {
     "en": "Learn which heroes you'll get for free in Outerplane and how to make the best choices from the start",
     "jp": "Outerplaneで無料で入手できるヒーローと、最初から最適な選択をする方法を学びましょう。",
     "kr": "Outerplane에서 무료로 받을 수 있는 영웅과 시작부터 최선의 선택을 하는 방법을 배우세요.",
     "zh": "了解可以在异域战记免费获得的同伴，以及如何做出最佳选择",
-    "fr": "Découvrez quels héros vous obtiendrez gratuitement dans Outerplane et comment faire les meilleurs choix dès le début."
+    "fr": "Découvrez quels héros vous obtiendrez gratuitement dans Outerplane et comment faire les meilleurs choix dès le début.",
+    "es": "Descubre qué héroes obtendrás gratis en Outerplane y cómo hacer las mejores elecciones desde el principio"
   },
   "icon": "T_Chat_Emoticon_08",
   "author": "Various Author",
-  "updated": "2026-08-24",
+  "updated": "2026-09-23",
   "order": 2,
   "tier": "first-steps"
 }

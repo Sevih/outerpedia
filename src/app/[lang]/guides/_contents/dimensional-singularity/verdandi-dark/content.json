@@ -4,7 +4,8 @@
     "jp": "次元特異点ローテーションに登場する{E/Dark}属性{C/Striker}ボス。呪いテーマのバトル：味方に絶えず{D/BT_DOT_CURSE}を付与するが、自身が与える呪いダメージは半減する — 弱体効果を保有させる設計で、味方は保有する弱体効果1個あたり与ダメージ+10%。{B/BT_IMMUNE}を罰する：免疫保有者は行動終了時にボスのWGを回復させる。",
     "kr": "차원 특이점 로테이션에 등장하는 {E/Dark} 속성 {C/Striker} 보스. 저주 테마 전투: 아군에게 끊임없이 {D/BT_DOT_CURSE}를 부여하지만 자신이 주는 저주 피해는 절반으로 감소합니다 — 약화 효과를 유지하게 만드는 설계로, 아군은 보유한 약화 효과 1개당 주는 피해 +10%. {B/BT_IMMUNE}을 처벌: 면역 보유자는 행동 종료 시 보스의 약점 게이지를 회복시킵니다.",
     "zh": "出现在次元奇点轮换中的{E/Dark}属性{C/Striker}Boss。诅咒主题战斗：持续对我方附加{D/BT_DOT_CURSE}，但自身造成的诅咒伤害减半 — 设计上鼓励你保留弱化效果，因为我方每持有1个弱化效果造成的伤害+10%。惩罚{B/BT_IMMUNE}：持有免疫的单位在行动结束时会恢复Boss的弱点槽。",
-    "fr": "Boss {E/Dark} {C/Striker} présent dans la rotation de la Singularité Dimensionnelle. Combat à thème malédiction : il applique sans cesse {D/BT_DOT_CURSE} à votre équipe, mais les dégâts de malédiction qu'il inflige sont réduits de moitié — il veut que vous conserviez ces debuffs, car votre équipe inflige +10% de dégâts par debuff porté. Punit {B/BT_IMMUNE} : chaque porteur d'Immunité restaure sa Weakness Gauge en fin de tour."
+    "fr": "Boss {E/Dark} {C/Striker} présent dans la rotation de la Singularité Dimensionnelle. Combat à thème malédiction : il applique sans cesse {D/BT_DOT_CURSE} à votre équipe, mais les dégâts de malédiction qu'il inflige sont réduits de moitié — il veut que vous conserviez ces debuffs, car votre équipe inflige +10% de dégâts par debuff porté. Punit {B/BT_IMMUNE} : chaque porteur d'Immunité restaure sa Weakness Gauge en fin de tour.",
+    "es": "Jefe de elemento {E/Dark} {C/Striker} presente en la rotación de Singularidad. Encuentro con temática de maldición: aplica constantemente {D/BT_DOT_CURSE} a tu equipo, pero el daño de Maldición que inflige se reduce a la mitad — quiere que conserves esos debuffs, ya que tu equipo inflige +10% de daño por cada debuff que tenga. Castiga la {B/BT_IMMUNE}: cada portador de Inmunidad restaura su Medidor de Debilidad al final del turno."
   },
   "tips": [
     {
@@ -15,28 +16,32 @@
           "jp": "呪いテーマのボス：毎ターン{D/BT_DOT_CURSE}を付与するが、自身が与える呪いダメージは半減する。呪いはヴェルダンディへのダメージ源としては不向き — ボスが受ける呪い・固定ダメージは50,000で頭打ちで、HPバーはランクごとに分割されるため、約4,250k HPでも呪いから受けるのは約15kにとどまる。",
           "kr": "저주 테마 보스: 매 턴 {D/BT_DOT_CURSE}를 부여하지만 자신이 주는 저주 피해는 절반으로 감소합니다. 저주는 베르단디에게 피해 수단으로 부적합합니다 — 보스가 받는 저주 / 고정 피해는 50,000으로 제한되고 HP 바가 랭크별로 분할되어, 약 4,250k HP라도 저주로는 약 15k만 입힙니다.",
           "zh": "诅咒主题Boss：每回合附加{D/BT_DOT_CURSE}，但自身造成的诅咒伤害减半。诅咒不适合作为对贝尔丹迪的伤害来源 — Boss受到的诅咒/固定伤害上限为50,000，且其血条按评级分段，因此即便约4,250k最大生命值也只受到约15k的诅咒伤害。",
-          "fr": "Boss à thème malédiction : il applique {D/BT_DOT_CURSE} chaque tour mais les dégâts de malédiction qu'il inflige sont réduits de moitié. La malédiction est une mauvaise source de dégâts contre Verdandi — les dégâts de malédiction / fixes qu'il subit sont plafonnés à 50 000 et sa barre de vie est segmentée par rang, si bien que même une barre de ~4 250k PV ne subit que ~15k de la malédiction."
+          "fr": "Boss à thème malédiction : il applique {D/BT_DOT_CURSE} chaque tour mais les dégâts de malédiction qu'il inflige sont réduits de moitié. La malédiction est une mauvaise source de dégâts contre Verdandi — les dégâts de malédiction / fixes qu'il subit sont plafonnés à 50 000 et sa barre de vie est segmentée par rang, si bien que même une barre de ~4 250k PV ne subit que ~15k de la malédiction.",
+          "es": "Jefe con temática de maldición: aplica {D/BT_DOT_CURSE} cada turno pero el daño de Maldición que inflige se reduce a la mitad. La Maldición es una fuente de daño pobre contra Verdandi — el daño de Maldición/Fijo que recibe está limitado a 50,000 y su barra de Vida está segmentada por rango, así que incluso una barra de ~4,250k de Vida solo recibe ~15k de Maldición."
         },
         {
           "en": "Your team deals +10% damage per debuff its members hold — the boss's constant Curse application actually fuels your damage output.",
           "jp": "味方は保有する弱体効果1個あたり与ダメージ+10% — ボスの絶え間ない呪い付与がむしろ自軍の火力を伸ばす。",
           "kr": "아군은 보유한 약화 효과 1개당 주는 피해 +10% — 보스의 끊임없는 저주 부여가 오히려 아군의 화력을 높여줍니다.",
           "zh": "我方每持有1个弱化效果，造成的伤害+10% — Boss不断附加的诅咒反而会提升我方输出。",
-          "fr": "Votre équipe inflige +10% de dégâts par debuff porté par ses membres — l'application constante de malédiction par le Boss alimente en réalité vos dégâts."
+          "fr": "Votre équipe inflige +10% de dégâts par debuff porté par ses membres — l'application constante de malédiction par le Boss alimente en réalité vos dégâts.",
+          "es": "Tu equipo inflige +10% de daño por cada debuff que tengan sus miembros — la aplicación constante de Maldición del jefe en realidad alimenta tu output de daño."
         },
         {
           "en": "A target holding {B/BT_IMMUNE} restores 2 WG for the boss on turn end — avoid blanket Immunity.",
           "jp": "{B/BT_IMMUNE}を保有する対象は行動終了時にボスのWGを2回復させる — 無闇な免疫付与は避ける。",
           "kr": "{B/BT_IMMUNE}을 보유한 대상은 행동 종료 시 보스의 WG를 2 회복시킵니다 — 무분별한 면역 부여는 피하세요.",
           "zh": "持有{B/BT_IMMUNE}的目标在行动结束时为Boss恢复2点WG — 避免无差别地附加免疫。",
-          "fr": "Une cible dotée de {B/BT_IMMUNE} restaure 2 de WG au Boss en fin de tour — évitez l'Immunité généralisée."
+          "fr": "Une cible dotée de {B/BT_IMMUNE} restaure 2 de WG au Boss en fin de tour — évitez l'Immunité généralisée.",
+          "es": "Un objetivo que tenga {B/BT_IMMUNE} restaura 2 WG para el jefe al final del turno — evita la Inmunidad general."
         },
         {
           "en": "Berserk triggers every 6 enemy actions; before its skill the boss dispels 2 buffs from all enemies.",
           "jp": "狂暴化は敵が6回行動するたびに発動し、スキル使用前に敵全体の強化効果を2個解除する。",
           "kr": "광폭화는 적이 6회 행동할 때마다 발동하며, 스킬 사용 전 적 전체의 강화 효과를 2개 해제합니다.",
           "zh": "狂暴化由敌方每6次行动触发；使用技能前Boss解除全体敌人2个强化效果。",
-          "fr": "Berserk se déclenche toutes les 6 actions ennemies ; avant sa compétence, le Boss retire 2 buffs à tous les ennemis."
+          "fr": "Berserk se déclenche toutes les 6 actions ennemies ; avant sa compétence, le Boss retire 2 buffs à tous les ennemis.",
+          "es": "Berserk se activa cada 6 acciones del enemigo; antes de su skill, el jefe elimina 2 bonos de todos los enemigos."
         }
       ]
     },
@@ -48,14 +53,16 @@
           "jp": "{P/Gnosis Beth}を{D/ETERNAL_BLEEDING}でキャリーする。",
           "kr": "{P/Gnosis Beth}를 {D/ETERNAL_BLEEDING}로 운영하세요.",
           "zh": "以{P/Gnosis Beth}为主C，使用{D/ETERNAL_BLEEDING}。",
-          "fr": "{P/Gnosis Beth} porte l'équipe avec {D/ETERNAL_BLEEDING}."
+          "fr": "{P/Gnosis Beth} porte l'équipe avec {D/ETERNAL_BLEEDING}.",
+          "es": "Carries de {P/Gnosis Beth} con {D/ETERNAL_BLEEDING}."
         },
         {
           "en": "Like every {P/Gnosis Beth} team : {D/BT_EXTEND_DEBUFF} and {B/BT_CALL_BACKUP} are the key.",
           "jp": "他の{P/Gnosis Beth}編成と同様、{D/BT_EXTEND_DEBUFF}と{B/BT_CALL_BACKUP}が鍵となる。",
           "kr": "다른 {P/Gnosis Beth} 편성과 마찬가지로 {D/BT_EXTEND_DEBUFF}과 {B/BT_CALL_BACKUP}이 핵심입니다.",
           "zh": "与所有{P/Gnosis Beth}队伍一样，{D/BT_EXTEND_DEBUFF}与{B/BT_CALL_BACKUP}是关键。",
-          "fr": "Comme pour toute équipe {P/Gnosis Beth}, {D/BT_EXTEND_DEBUFF} et {B/BT_CALL_BACKUP} sont la clé."
+          "fr": "Comme pour toute équipe {P/Gnosis Beth}, {D/BT_EXTEND_DEBUFF} et {B/BT_CALL_BACKUP} sont la clé.",
+          "es": "Como en todo equipo de {P/Gnosis Beth}: {D/BT_EXTEND_DEBUFF} y {B/BT_CALL_BACKUP} son la clave."
         }
       ]
     },
@@ -67,14 +74,16 @@
           "jp": "ボスのWGを素早く割り、狂暴化でしか行動できないようにする。{B/BT_UNDEAD}・{B/BT_REVIVAL}・{B/BT_INVINCIBLE}を使う前にバフを乗せ、狂暴化の一撃を耐える。",
           "kr": "보스의 WG를 빠르게 깨뜨려 광폭화로만 행동하게 만드세요. {B/BT_UNDEAD}, {B/BT_REVIVAL}, {B/BT_INVINCIBLE}을 사용하기 전에 버프를 걸어 광폭화 공격을 버팁니다.",
           "zh": "快速击破Boss的WG，使其只能通过狂暴化行动。在使用{B/BT_UNDEAD}、{B/BT_REVIVAL}或{B/BT_INVINCIBLE}之前先叠好增益，以撑过狂暴化的一击。",
-          "fr": "Brisez rapidement la WG du Boss pour qu'il ne puisse agir que via son Berserk. Appliquez vos buffs avant {B/BT_UNDEAD}, {B/BT_REVIVAL} ou {B/BT_INVINCIBLE} pour que l'équipe survive au coup de Berserk."
+          "fr": "Brisez rapidement la WG du Boss pour qu'il ne puisse agir que via son Berserk. Appliquez vos buffs avant {B/BT_UNDEAD}, {B/BT_REVIVAL} ou {B/BT_INVINCIBLE} pour que l'équipe survive au coup de Berserk.",
+          "es": "Concéntrate en romper el WG del jefe rápido para que solo pueda actuar mediante su Enrage. Aplica tus bonos antes de {B/BT_UNDEAD}, {B/BT_REVIVAL} o {B/BT_INVINCIBLE} para que el equipo sobreviva al golpe del Enrage."
         },
         {
           "en": "{P/Demiurge Luna} or {P/Regina} carries with high damage mitigation; {P/Skadi} supplies cooldown reduction and the immortality / revival / invincibility cover; {P/Monad Eva} starts the WG-damage chain. Round it out with one of {P/Mystic Sage Ame}, {P/Leo} or {P/Demiurge Drakhan}.",
           "jp": "{P/Demiurge Luna}または{P/Regina}が高い被ダメージ軽減を持つキャリー。{P/Skadi}がクールダウン短縮と不死/復活/無敵のカバーを担当、{P/Monad Eva}がWGダメージチェインの起点。残り1枠は{P/Mystic Sage Ame}・{P/Leo}・{P/Demiurge Drakhan}から選ぶ。",
           "kr": "{P/Demiurge Luna} 또는 {P/Regina}가 높은 피해 감소를 지닌 메인 딜러. {P/Skadi}가 쿨다운 감소와 불사/부활/무적 커버를 담당하고, {P/Monad Eva}가 WG 피해 연계의 시작점입니다. 남은 1자리는 {P/Mystic Sage Ame}, {P/Leo}, {P/Demiurge Drakhan} 중에서 선택하세요.",
           "zh": "{P/Demiurge Luna}或{P/Regina}作为具备高伤害减免的主C；{P/Skadi}提供冷却缩减及不死/复活/无敌的保障；{P/Monad Eva}作为WG伤害连携的起点。最后一格从{P/Mystic Sage Ame}、{P/Leo}或{P/Demiurge Drakhan}中三选一。",
-          "fr": "{P/Demiurge Luna} ou {P/Regina} porte l'équipe avec une forte réduction de dégâts ; {P/Skadi} fournit la réduction de cooldown et la couverture immortalité / réanimation / invincibilité ; {P/Monad Eva} amorce la chaîne de dégâts de WG. Complétez avec l'un de {P/Mystic Sage Ame}, {P/Leo} ou {P/Demiurge Drakhan}."
+          "fr": "{P/Demiurge Luna} ou {P/Regina} porte l'équipe avec une forte réduction de dégâts ; {P/Skadi} fournit la réduction de cooldown et la couverture immortalité / réanimation / invincibilité ; {P/Monad Eva} amorce la chaîne de dégâts de WG. Complétez avec l'un de {P/Mystic Sage Ame}, {P/Leo} ou {P/Demiurge Drakhan}.",
+          "es": "{P/Demiurge Luna} o {P/Regina} cargan con alta mitigación de daño; {P/Skadi} aporta reducción de cooldown y cobertura de inmortalidad / revivir / invencibilidad; {P/Monad Eva} inicia la cadena de daño al WG. Complétalo con uno de {P/Mystic Sage Ame}, {P/Leo} o {P/Demiurge Drakhan}."
         }
       ]
     }
@@ -90,7 +99,8 @@
             "jp": "GBeth編成のメインDPS。",
             "kr": "GBeth 팀의 메인 딜러.",
             "zh": "GBeth队伍的主C。",
-            "fr": "DPS principal pour l'équipe GBeth."
+            "fr": "DPS principal pour l'équipe GBeth.",
+            "es": "DPS principal del equipo GBeth."
           }
         },
         {
@@ -100,7 +110,8 @@
             "jp": "{D/BT_EXTEND_DEBUFF}でチームのDoTを延長する。",
             "kr": "{D/BT_EXTEND_DEBUFF}으로 팀의 DoT를 연장합니다.",
             "zh": "以{D/BT_EXTEND_DEBUFF}延长全队对Boss的DoT。",
-            "fr": "{D/BT_EXTEND_DEBUFF} pour prolonger les DoTs de l'équipe sur le Boss."
+            "fr": "{D/BT_EXTEND_DEBUFF} pour prolonger les DoTs de l'équipe sur le Boss.",
+            "es": "{D/BT_EXTEND_DEBUFF} para extender los DoT del equipo sobre el jefe."
           }
         },
         {
@@ -110,7 +121,8 @@
             "jp": "APバッテリーであり{B/BT_CALL_BACKUP}を持つ{C/Healer}。",
             "kr": "AP 배터리이자 {B/BT_CALL_BACKUP}을 보유한 {C/Healer}.",
             "zh": "作为AP电池并拥有{B/BT_CALL_BACKUP}的{C/Healer}。",
-            "fr": "{C/Healer} qui sert de batterie d'AP et apporte {B/BT_CALL_BACKUP}."
+            "fr": "{C/Healer} qui sert de batterie d'AP et apporte {B/BT_CALL_BACKUP}.",
+            "es": "{C/Healer} que es una batería de AP y con {B/BT_CALL_BACKUP}."
           }
         }
       ]
@@ -125,7 +137,8 @@
             "jp": "高い被ダメージ軽減を持つメインアタッカー。",
             "kr": "높은 피해 감소를 지닌 메인 딜러.",
             "zh": "具备高伤害减免的主C。",
-            "fr": "DPS principal doté d'une forte réduction de dégâts."
+            "fr": "DPS principal doté d'une forte réduction de dégâts.",
+            "es": "Principal atacante con alta mitigación de daño."
           }
         },
         {
@@ -135,7 +148,8 @@
             "jp": "クールダウン短縮に加え、不死・復活・無敵をカバーするバフを提供する。",
             "kr": "쿨다운 감소와 더불어 불사·부활·무적을 보완하는 버프를 제공합니다.",
             "zh": "提供冷却缩减，以及保障不死、复活与无敌的增益。",
-            "fr": "Réductions de cooldown, plus des buffs pour assurer immortalité, réanimation et invincibilité."
+            "fr": "Réductions de cooldown, plus des buffs pour assurer immortalité, réanimation et invincibilité.",
+            "es": "Reducciones de cooldown, además de bonos para cubrir inmortalidad, revivir e invencibilidad."
           }
         },
         {
@@ -145,7 +159,8 @@
             "jp": "連携攻撃、WGダメージチェインの起点、{B/BT_REVIVAL}と{B/BT_INVINCIBLE}を提供する。",
             "kr": "협공, WG 피해 연계의 시작점, {B/BT_REVIVAL}과 {B/BT_INVINCIBLE}을 제공합니다.",
             "zh": "夹攻、作为WG伤害连携的起点，并提供{B/BT_REVIVAL}与{B/BT_INVINCIBLE}。",
-            "fr": "Attaques doubles, amorce la chaîne de dégâts de WG et apporte {B/BT_REVIVAL} et {B/BT_INVINCIBLE}."
+            "fr": "Attaques doubles, amorce la chaîne de dégâts de WG et apporte {B/BT_REVIVAL} et {B/BT_INVINCIBLE}.",
+            "es": "Ataques duales, inicia la cadena de daño WG y proporciona {B/BT_REVIVAL} y {B/BT_INVINCIBLE}."
           }
         },
         {
@@ -155,7 +170,8 @@
             "jp": "1枠選択 — {P/Mystic Sage Ame}はメインDPSのS3クールダウン短縮と高いWGダメージを、{P/Leo}はクールダウン短縮のチェイン起点と{B/BT_INVINCIBLE}を、{P/Demiurge Drakhan}はAoEダメージ軽減・{S/PEN%}バフ・{B/BT_BARRIER}・WGダメージ補助を提供する。",
             "kr": "1자리 선택 — {P/Mystic Sage Ame}는 메인 딜러의 S3 쿨다운 감소와 높은 WG 피해를, {P/Leo}는 쿨다운 감소 연계 시작점과 {B/BT_INVINCIBLE}을, {P/Demiurge Drakhan}은 광역 피해 감소·{S/PEN%} 버프·{B/BT_BARRIER}·WG 피해 보조를 제공합니다.",
             "zh": "三选一 — {P/Mystic Sage Ame}为主C的S3缩减冷却并提供高WG伤害；{P/Leo}提供冷却缩减连携起点与{B/BT_INVINCIBLE}；{P/Demiurge Drakhan}提供范围伤害减免、{S/PEN%}增益、{B/BT_BARRIER}及WG伤害支援。",
-            "fr": "Au choix — {P/Mystic Sage Ame} apporte une réduction de cooldown du S3 du DPS principal et de gros dégâts de WG ; {P/Leo} apporte une amorce de chaîne de réduction de cooldown et {B/BT_INVINCIBLE} ; {P/Demiurge Drakhan} apporte réduction de dégâts de zone, buff de {S/PEN%}, {B/BT_BARRIER} et soutien aux dégâts de WG."
+            "fr": "Au choix — {P/Mystic Sage Ame} apporte une réduction de cooldown du S3 du DPS principal et de gros dégâts de WG ; {P/Leo} apporte une amorce de chaîne de réduction de cooldown et {B/BT_INVINCIBLE} ; {P/Demiurge Drakhan} apporte réduction de dégâts de zone, buff de {S/PEN%}, {B/BT_BARRIER} et soutien aux dégâts de WG.",
+            "es": "Elige uno: {P/Mystic Sage Ame} aporta reducción de cooldown para el S3 del DPS principal y alto daño al WG; {P/Leo} aporta un iniciador de cadena de reducción de cooldown y {B/BT_INVINCIBLE}; {P/Demiurge Drakhan} aporta reducción de daño AoE, bono de {S/PEN%}, {B/BT_BARRIER} y soporte de daño al WG."
           }
         }
       ]

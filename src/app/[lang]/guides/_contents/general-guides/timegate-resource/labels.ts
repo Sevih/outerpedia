@@ -21,6 +21,7 @@ export const LABELS = {
     kr: '이 가이드는 아우터플레인에서 정기적으로 획득할 수 있는 주간·월간 시간제한 리소스를 모두 정리한 것입니다. 상점 항목은 게임 데이터에서 도출되므로 상점이 개편되어도 최신 상태를 유지합니다. 상점 외 항목(던전 드롭, 미션·특이점 보상)은 SSS++ 등급 도달이나 매일 플레이 등을 전제로 한 추정치입니다. 아래 아이템은 기간 한정 이벤트나 캐시 패키지로도 얻을 수 있지만 여기에는 포함하지 않습니다.',
     zh: '本指南列出了《Outerplane》中所有可定期获取的每周和每月限时资源。商店行由游戏数据推导，因此在商店重排后仍保持最新；非商店行（副本掉落、任务与奇点奖励）为玩家估算值，假设达成 SSS++ 评级或每天参与等条件。下列物品有时也可通过限时活动或充值礼包获得，但这些不计入本表。',
     fr: "Ce guide liste toutes les sources hebdomadaires et mensuelles régulières de ressources timegated dans Outerplane. Les lignes de shop sont dérivées des données du jeu : elles restent à jour quand un shop est rebrassé. Les lignes hors shop (drops de donjon, récompenses de mission et de singularité) sont des estimations joueur qui supposent par exemple d'atteindre le rang SSS++ ou de jouer chaque jour éligible. Les items ci-dessous peuvent aussi provenir d'events à durée limitée ou de packs payants, non comptés ici.",
+    es: 'Esta guía lista todas las fuentes semanales y mensuales regulares de recursos con límite de tiempo en Outerplane. Las filas de tienda se derivan de datos del juego, así que se mantienen actualizadas cuando una tienda se reorganiza; las filas que no son de tienda (drops de dungeon, recompensas de misión y singularidad) son estimaciones de jugadores que asumen cosas como alcanzar el rango SSS++ o jugar cada día elegible. Los ítems de abajo también pueden venir ocasionalmente de eventos por tiempo limitado o paquetes de pago, que no se cuentan aquí.',
   },
 
   tabs: {
@@ -30,6 +31,7 @@ export const LABELS = {
       kr: '스킬 교본',
       zh: '技能教材',
       fr: 'Manuels de skill',
+      es: 'Manual de Skill',
     },
     transistones: {
       en: 'Transistone',
@@ -37,6 +39,7 @@ export const LABELS = {
       kr: '트랜스톤',
       zh: '转换石',
       fr: 'Transistone',
+      es: 'Transistone',
     },
     special: {
       en: 'Special Gear',
@@ -44,6 +47,7 @@ export const LABELS = {
       kr: '특수 장비',
       zh: '特殊装备',
       fr: 'Équipement spécial',
+      es: 'Equipo especial',
     },
     'singularity-gear': {
       en: 'Singularity Gear',
@@ -51,36 +55,74 @@ export const LABELS = {
       kr: '특이점 장비',
       zh: '奇点装备',
       fr: 'Équipement de singularité',
+      es: 'Equipo de Singularidad',
     },
-    glunite: { en: 'Glunite', jp: 'グルーナイト', kr: '글루나이트', zh: '格鲁矿石', fr: 'Glunite' },
+    glunite: {
+      en: 'Glunite',
+      jp: 'グルーナイト',
+      kr: '글루나이트',
+      zh: '格鲁矿石',
+      fr: 'Glunite',
+      es: 'Glunite',
+    },
     'limit-break': {
       en: 'Limit Break',
       jp: '限界突破',
       kr: '한계 돌파',
       zh: '极限突破',
       fr: 'Limit Break',
+      es: 'Limit Break',
     },
   } satisfies Record<string, LocalizedText>,
 
   headers: {
-    source: { en: 'Source', jp: '獲得先', kr: '획득처', zh: '获取途径', fr: 'Source' },
-    weekly: { en: 'Weekly', jp: 'ウィークリー', kr: '주간', zh: '每周', fr: 'Hebdo' },
-    monthly: { en: 'Monthly', jp: 'マンスリー', kr: '월간', zh: '每月', fr: 'Mensuel' },
-    total: { en: 'Total', jp: '合計', kr: '합계', zh: '总计', fr: 'Total' },
+    source: {
+      en: 'Source',
+      jp: '獲得先',
+      kr: '획득처',
+      zh: '获取途径',
+      fr: 'Source',
+      es: 'Fuente',
+    },
+    weekly: {
+      en: 'Weekly',
+      jp: 'ウィークリー',
+      kr: '주간',
+      zh: '每周',
+      fr: 'Hebdo',
+      es: 'Semanal',
+    },
+    monthly: {
+      en: 'Monthly',
+      jp: 'マンスリー',
+      kr: '월간',
+      zh: '每月',
+      fr: 'Mensuel',
+      es: 'Mensual',
+    },
+    total: { en: 'Total', jp: '合計', kr: '합계', zh: '总计', fr: 'Total', es: 'Total' },
     grandTotal: {
       en: 'Grand Total (Monthly)',
       jp: '月間合計',
       kr: '월간 총합',
       zh: '月度总计',
       fr: 'Total mensuel global',
+      es: 'Total General (Mensual)',
     },
   } satisfies Record<string, LocalizedText>,
 
   badges: {
-    mission: { en: 'Mission', jp: 'ミッション', kr: '미션', zh: '任务', fr: 'Mission' },
-    guild: { en: 'Guild', jp: 'ギルド', kr: '길드', zh: '公会', fr: 'Guilde' },
-    shop: { en: 'Shop', jp: 'ショップ', kr: '상점', zh: '商店', fr: 'Shop' },
-    craft: { en: 'Craft', jp: '製作', kr: '제작', zh: '制作', fr: 'Craft' },
+    mission: {
+      en: 'Mission',
+      jp: 'ミッション',
+      kr: '미션',
+      zh: '任务',
+      fr: 'Mission',
+      es: 'Misión',
+    },
+    guild: { en: 'Guild', jp: 'ギルド', kr: '길드', zh: '公会', fr: 'Guilde', es: 'Gremio' },
+    shop: { en: 'Shop', jp: 'ショップ', kr: '상점', zh: '商店', fr: 'Shop', es: 'Tienda' },
+    craft: { en: 'Craft', jp: '製作', kr: '제작', zh: '制作', fr: 'Craft', es: 'Fabricar' },
   } satisfies Record<SourceType, LocalizedText>,
 
   /** Note de coût d'un craft : « coût 30× <item> » (l'item est un chip séparé). */
@@ -90,6 +132,7 @@ export const LABELS = {
     kr: '소모',
     zh: '消耗',
     fr: 'coût',
+    es: 'costo',
   } satisfies LocalizedText,
 
   sources: {
@@ -100,6 +143,7 @@ export const LABELS = {
       kr: '일반 상점',
       zh: '普通商店',
       fr: 'Boutique générale',
+      es: 'Tienda General',
     },
     guild: {
       en: 'Guild Shop',
@@ -107,6 +151,7 @@ export const LABELS = {
       kr: '길드 상점',
       zh: '公会商店',
       fr: 'Guild Shop',
+      es: 'Tienda del Gremio',
     },
     arena: {
       en: 'Arena Shop',
@@ -114,6 +159,7 @@ export const LABELS = {
       kr: '결투장 상점',
       zh: '竞技场商店',
       fr: 'Arena Shop',
+      es: 'Tienda de Arena',
     },
     stars: {
       en: "Star's Memory Shop",
@@ -121,6 +167,7 @@ export const LABELS = {
       kr: '별의 기억 상점',
       zh: '星之记忆商店',
       fr: "Star's Memory Shop",
+      es: 'Tienda de Memoria de Estrella',
     },
     survey: {
       en: 'Survey Hub',
@@ -128,6 +175,7 @@ export const LABELS = {
       kr: '조사 지원소',
       zh: '调查支援所',
       fr: 'Survey Hub',
+      es: 'Centro de Encuestas',
     },
     worldboss: {
       en: 'World Boss Shop',
@@ -135,6 +183,7 @@ export const LABELS = {
       kr: '월드 보스 상점',
       zh: '世界首领商店',
       fr: 'World Boss Shop',
+      es: 'Tienda de Jefe mundial',
     },
     joint: {
       en: 'Joint Challenge Shop',
@@ -142,6 +191,7 @@ export const LABELS = {
       kr: '합동 챌린지 상점',
       zh: '联合挑战商店',
       fr: 'Joint Challenge Shop',
+      es: 'Tienda de Desafío conjunto',
     },
 
     // Sources non-shop curées (transplant verbatim).
@@ -151,6 +201,7 @@ export const LABELS = {
       kr: '이레귤러 침투 섬멸전 플로어 3',
       zh: '异型怪渗透歼灭战 第3层',
       fr: "Opération d'infiltration Irregular — Étage 3",
+      es: 'Op. de Infiltración Irregular — Piso 3',
     },
     'irregular-extermination-points': {
       en: 'Irregular Extermination Project — Point Exchange',
@@ -158,6 +209,7 @@ export const LABELS = {
       kr: '이레귤러 섬멸전 포인트 교환소',
       zh: '异型怪歼灭战 点数兑换所',
       fr: "Projet d'extermination Irregular — Échange de points",
+      es: 'Proyecto de Exterminio Irregular — Intercambio de Puntos',
     },
     'arena-weekly-play': {
       en: 'Weekly Play Reward',
@@ -165,6 +217,7 @@ export const LABELS = {
       kr: '주간 플레이 보상',
       zh: '每周游戏奖励',
       fr: 'Récompense de jeu hebdomadaire',
+      es: 'Recompensa Semanal por Jugar',
     },
     'weekly-mission': {
       en: 'Weekly Mission',
@@ -172,6 +225,7 @@ export const LABELS = {
       kr: '주간 미션',
       zh: '每周任务',
       fr: 'Mission hebdomadaire',
+      es: 'Misión Semanal',
     },
     'singularity-rank': {
       en: 'Dimensional Singularity — SSS++ Rank Reward',
@@ -179,6 +233,7 @@ export const LABELS = {
       kr: '차원 특이점 SSS++ 등급 보상',
       zh: '次元奇点 SSS++评级奖励',
       fr: 'Singularité dimensionnelle — Récompense rang SSS++',
+      es: 'Singularidad Dimensional — Recompensa de Rango SSS++',
     },
     'singularity-weekly-mission': {
       en: 'Dimensional Singularity — Weekly Missions',
@@ -186,6 +241,7 @@ export const LABELS = {
       kr: '차원 특이점 주간 미션',
       zh: '次元奇点 每周任务',
       fr: 'Singularité dimensionnelle — Missions hebdomadaires',
+      es: 'Singularidad Dimensional — Misiones Semanales',
     },
     'singularity-daily-run': {
       en: 'Dimensional Singularity — Daily Run (Wed–Sat)',
@@ -193,6 +249,7 @@ export const LABELS = {
       kr: '차원 특이점 일일 참여 (수~토)',
       zh: '次元奇点 每日参与 (周三~周六)',
       fr: 'Singularité dimensionnelle — Run quotidien (Mer–Sam)',
+      es: 'Singularidad Dimensional — Ejecución Diaria (Mié–Sáb)',
     },
     'singularity-daily-ranking': {
       en: 'Dimensional Singularity — Daily Ranking',
@@ -200,6 +257,7 @@ export const LABELS = {
       kr: '차원 특이점 일일 랭킹',
       zh: '次元奇点 每日排名',
       fr: 'Singularité dimensionnelle — Classement quotidien',
+      es: 'Singularidad Dimensional — Clasificación Diaria',
     },
     'kates-workshop': {
       en: "Kate's Workshop",
@@ -207,6 +265,7 @@ export const LABELS = {
       kr: '케이트 공방',
       zh: '凯特工坊',
       fr: 'Atelier de Kate',
+      es: "Kate's Workshop",
     },
   } satisfies Record<string, LocalizedText>,
 } as const;

@@ -2,7 +2,9 @@
   "teams": [
     {
       "title": {
-        "en": "Water Striker"
+        "en": "Water Striker",
+        "es": "Atacante de Agua",
+        "fr": "Striker Eau"
       },
       "element": "water",
       "slots": [
@@ -20,7 +22,9 @@
     },
     {
       "title": {
-        "en": "Water Mage"
+        "en": "Water Mage",
+        "es": "Mago de Agua",
+        "fr": "Mage Eau"
       },
       "element": "water",
       "slots": [
@@ -38,7 +42,9 @@
     },
     {
       "title": {
-        "en": "GBeth"
+        "en": "GBeth",
+        "es": "GBeth",
+        "fr": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],

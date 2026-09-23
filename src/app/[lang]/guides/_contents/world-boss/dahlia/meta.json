@@ -4,17 +4,19 @@
     "jp": "ダリア",
     "kr": "달리아",
     "zh": "达利娅",
-    "fr": "Dahlia"
+    "fr": "Dahlia",
+    "es": "Dahlia"
   },
   "description": {
     "en": "Dahlia world boss guide — the two-phase Water boss: teams, hero picks and strategies for each phase, from Normal up to Extreme League.",
     "jp": "ワールドボス「ダリア」攻略ガイド — 2フェーズ構成の水属性ボス。フェーズ別の編成とおすすめキャラ、ノーマルからエクストリームリーグまで。",
     "kr": "월드 보스 달리아 공략 가이드 — 2페이즈 수속성 보스. 페이즈별 팀 편성과 추천 영웅, 노멀부터 익스트림 리그까지.",
     "zh": "世界Boss达利娅攻略指南 — 两阶段水属性Boss：分阶段队伍与推荐角色，从普通到极限联赛。",
-    "fr": "Guide du world boss Dahlia — boss Water à deux phases : équipes, choix de héros et stratégies par phase, de Normal à l'Extreme League."
+    "fr": "Guide du world boss Dahlia — boss Water à deux phases : équipes, choix de héros et stratégies par phase, de Normal à l'Extreme League.",
+    "es": "Guía del jefe mundial Dahlia — el jefe de Agua de dos fases: equipos, selección de héroes y estrategias para cada fase, desde Normal hasta la Liga Extrema."
   },
   "icon": "T_Banner_World_Boss_04",
   "author": "Sevih",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "bossId": "4086023"
 }

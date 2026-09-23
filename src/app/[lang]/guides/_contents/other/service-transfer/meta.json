@@ -4,17 +4,19 @@
     "jp": "VAGAMESへのサービス移行",
     "kr": "VAGAMES 서비스 이전",
     "zh": "迁移至 VAGAMES",
-    "fr": "Transfert de service vers VAGAMES"
+    "fr": "Transfert de service vers VAGAMES",
+    "es": "Transferencia de servicio a VAGAMES"
   },
   "description": {
     "en": "Complete guide for the OUTERPLANE service transfer from STOVE to VAGAMES — steps, rewards, recovery help & FAQ.",
     "jp": "STOVEからVAGAMESへのOUTERPLANEサービス移行の完全ガイド — 手順、報酬、回復サポートとFAQ。",
     "kr": "STOVE에서 VAGAMES로의 OUTERPLANE 서비스 이전 완전 가이드 — 절차, 보상, 복구 도움말 및 FAQ.",
     "zh": "OUTERPLANE 从 STOVE 迁移至 VAGAMES 的完整指南 — 步骤、奖励、账号找回帮助与常见问题。",
-    "fr": "Guide complet du transfert de service d'OUTERPLANE de STOVE vers VAGAMES — étapes, récompenses, aide à la récupération de compte et FAQ."
+    "fr": "Guide complet du transfert de service d'OUTERPLANE de STOVE vers VAGAMES — étapes, récompenses, aide à la récupération de compte et FAQ.",
+    "es": "Guía completa para la transferencia de servicio de OUTERPLANE de STOVE a VAGAMES — pasos, recompensas, ayuda de recuperación y FAQ."
   },
   "icon": "CM_EtcMenu_Azit",
   "author": "Sevih",
-  "updated": "2025-10-01",
+  "updated": "2026-09-23",
   "order": 4
 }

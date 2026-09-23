@@ -32,6 +32,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '{E/Earth} 특화 자급자족형 딜러로 완전 리워크. 최대 50% DEF 무시.',
       zh: '完全重做为反{E/Earth}自给自足型输出，最高50%无视防御。',
       fr: "Rework complet en DPS auto-suffisant anti-{E/Earth} avec jusqu'à 50% d'ignore DEF.",
+      es: 'Rediseño completo en un DPS anti-{E/Earth} autosuficiente con hasta 50% de ignorar DEF.',
     },
     recommendedLevels: [3, 5],
     changes: {
@@ -41,6 +42,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{B/BT_STAT|ST_CRITICAL_RATE} 자기 버프가 {B/BT_STAT|ST_ATK} 자기 버프로 변경 (Lv5에서 2턴).',
         zh: '{B/BT_STAT|ST_CRITICAL_RATE}自我增益替换为{B/BT_STAT|ST_ATK}自我增益（Lv5时2回合）。',
         fr: 'Le self-buff {B/BT_STAT|ST_CRITICAL_RATE} est remplacé par un self-buff {B/BT_STAT|ST_ATK} (2 tours au Lv5).',
+        es: 'El autobono de {B/BT_STAT|ST_CRITICAL_RATE} reemplazado por el autobono de {B/BT_STAT|ST_ATK} (2 turnos en Nv5).',
       },
       s2: {
         en: 'Complete rework. Grants {B/BT_STAT|ST_PIERCE_POWER_RATE} (3 turns).\nWith {B/BT_STAT|ST_CRITICAL_DMG_RATE}: becomes single-target + S3 cooldown -1.\nVs {E/Earth}: +30% Priority.',
@@ -48,6 +50,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '완전 리워크. {B/BT_STAT|ST_PIERCE_POWER_RATE} 부여 (3턴).\n{B/BT_STAT|ST_CRITICAL_DMG_RATE} 시: 단일 대상으로 변경 + S3 쿨다운 -1.\n{E/Earth} 상대: 우선도 +30%.',
         zh: '完全重做。赋予{B/BT_STAT|ST_PIERCE_POWER_RATE}（3回合）。\n{B/BT_STAT|ST_CRITICAL_DMG_RATE}时：变为单体+S3冷却-1。\n对{E/Earth}：优先度+30%。',
         fr: 'Rework complet. Accorde {B/BT_STAT|ST_PIERCE_POWER_RATE} (3 tours).\nAvec {B/BT_STAT|ST_CRITICAL_DMG_RATE} : devient single-target + cooldown S3 -1.\nVs {E/Earth} : +30% de Priority.',
+        es: 'Rediseño completo. Otorga {B/BT_STAT|ST_PIERCE_POWER_RATE} (3 turnos).\nCon {B/BT_STAT|ST_CRITICAL_DMG_RATE}: se vuelve de objetivo único + tiempo de reutilización de S3 -1.\nVs {E/Earth}: +30% de Prioridad.',
       },
       s3: {
         en: 'Self-buff changed from {B/BT_STAT|ST_ATK} to {B/BT_STAT|ST_CRITICAL_DMG_RATE} (3 turns). +20% DMG vs {E/Earth} replaced by DEF ignore:\nWith {B/BT_STAT|ST_PIERCE_POWER_RATE}: ignores 20% DEF.\nVs {E/Earth}: ignores additional 30% DEF (50% total).',
@@ -55,6 +58,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '자기 버프가 {B/BT_STAT|ST_ATK}에서 {B/BT_STAT|ST_CRITICAL_DMG_RATE} (3턴)로 변경. {E/Earth} 대상 +20% 피해가 DEF 무시로 교체:\n{B/BT_STAT|ST_PIERCE_POWER_RATE} 시: DEF 20% 무시.\n{E/Earth} 상대: 추가 30% DEF 무시 (총 50%).',
         zh: '自我增益从{B/BT_STAT|ST_ATK}改为{B/BT_STAT|ST_CRITICAL_DMG_RATE}（3回合）。对{E/Earth}+20%伤害替换为无视防御：\n有{B/BT_STAT|ST_PIERCE_POWER_RATE}时：无视20%防御。\n对{E/Earth}：额外无视30%防御（共50%）。',
         fr: "Self-buff passe de {B/BT_STAT|ST_ATK} à {B/BT_STAT|ST_CRITICAL_DMG_RATE} (3 tours). Les +20% DMG vs {E/Earth} sont remplacés par de l'ignore DEF :\nAvec {B/BT_STAT|ST_PIERCE_POWER_RATE} : ignore 20% de DEF.\nVs {E/Earth} : ignore 30% de DEF supplémentaires (50% au total).",
+        es: 'El autobono cambió de {B/BT_STAT|ST_ATK} a {B/BT_STAT|ST_CRITICAL_DMG_RATE} (3 turnos). +20% de Daño vs {E/Earth} reemplazado por ignorar DEF:\nCon {B/BT_STAT|ST_PIERCE_POWER_RATE}: ignora 20% de DEF.\nVs {E/Earth}: ignora un 30% adicional de DEF (50% en total).',
       },
       chain: {
         en: 'Chain: Starter → Companion. Team {B/BT_STAT|ST_ATK} replaced by 25 AP restore (caster + next chain unit).\nDual: {B/BT_STAT|ST_ATK} duration 1 → 2 turns.',
@@ -62,6 +66,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인: 스타터 → 컴패니언. 아군 전체 {B/BT_STAT|ST_ATK}가 AP 25 회복 (시전자 + 다음 체인 유닛)으로 교체.\n협공: {B/BT_STAT|ST_ATK} 1 → 2턴.',
         zh: '连锁：开启者→同伴。全队{B/BT_STAT|ST_ATK}替换为25 AP恢复（施法者+下一个连锁单位）。\n协攻：{B/BT_STAT|ST_ATK} 1→2回合。',
         fr: "Chain : Starter → Companion. Le {B/BT_STAT|ST_ATK} d'équipe est remplacé par 25 AP restore (caster + unité suivante de la chain).\nDual : durée du {B/BT_STAT|ST_ATK} 1 → 2 tours.",
+        es: 'Cadena: Iniciador → Compañero. El {B/BT_STAT|ST_ATK} de equipo reemplazado por restauración de 25 AP (lanzador + siguiente unidad de la cadena).\nDual: duración de {B/BT_STAT|ST_ATK} de 1 → 2 turnos.',
       },
       passive: {
         en: '+50% DMG vs elemental advantage. Enhanced (Lv5): +50% DMG vs bosses.',
@@ -69,6 +74,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '속성 유리 시 +50% 피해. 강화 (Lv5): 보스에 +50% 피해.',
         zh: '属性克制时+50%伤害。强化（Lv5）：对Boss+50%伤害。',
         fr: '+50% DMG en avantage élémentaire. Amélioré (Lv5) : +50% DMG vs bosses.',
+        es: '+50% de Daño vs ventaja elemental. Mejorado (Nv5): +50% de Daño vs jefes.',
       },
     },
   },
@@ -80,6 +86,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '모든 스킬에 속도 비례 피해. 우선도 감소가 모든 대상으로 확대 ({E/Fire} 상대 추가 보너스 유지). {D/BT_FREEZE} 확정으로 변경.',
       zh: '所有技能获得速度比例伤害。优先度降低扩展至所有敌人（对{E/Fire}仍有额外加成）。{D/BT_FREEZE}改为必定触发。',
       fr: 'Scaling complet sur la SPD pour tous les skills. La réduction de Priority est étendue à tous les ennemis (bonus supplémentaire vs {E/Fire} conservé). {D/BT_FREEZE} désormais garanti.',
+      es: 'Escalado de Velocidad completo en todos los skills. Reducción de Prioridad extendida a todos los enemigos (aún con bonus extra contra enemigos {E/Fire}). {D/BT_FREEZE} ahora garantizado.',
     },
     recommendedLevels: [3, 5],
     changes: {
@@ -89,6 +96,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '우선도 감소가 모든 대상으로 (이전에는 {E/Fire}만). {E/Fire} 상대 추가 +10%.',
         zh: '优先度降低现在对所有敌人生效（原仅{E/Fire}）。对{E/Fire}额外+10%。',
         fr: 'La réduction de Priority cible désormais tous les ennemis (avant : {E/Fire} uniquement). +10% supplémentaires vs {E/Fire}.',
+        es: 'La reducción de Prioridad ahora afecta a todos los enemigos (antes solo {E/Fire}). +10% adicional vs {E/Fire}.',
       },
       s2: {
         en: '{D/BT_FREEZE} now guaranteed (was 80%). Gains +20% Priority after attacking. +50% DMG vs {D/BT_FREEZE} targets.',
@@ -96,6 +104,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{D/BT_FREEZE} 확정으로 변경 (이전 80%). 공격 후 우선도 +20%. {D/BT_FREEZE} 대상에 피해 +50%.',
         zh: '{D/BT_FREEZE}改为必定触发（原80%）。攻击后优先度+20%。对{D/BT_FREEZE}目标伤害+50%。',
         fr: '{D/BT_FREEZE} désormais garanti (avant 80%). Gagne +20% de Priority après attaque. +50% DMG vs cibles {D/BT_FREEZE}.',
+        es: '{D/BT_FREEZE} ahora garantizado (antes 80%). Gana +20% de Prioridad tras atacar. +50% de Daño vs objetivos {D/BT_FREEZE}.',
       },
       s3: {
         en: 'Changed from AoE to single-target. Priority reduction replaced by {B/BT_STAT|ST_SPEED} self-buff and {D/BT_FREEZE} (2 turns). Extra Priority reduction vs {E/Fire} remains.',
@@ -103,6 +112,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '전체에서 단일 대상으로 변경. 우선도 감소가 {B/BT_STAT|ST_SPEED} 자기 버프와 {D/BT_FREEZE} (2턴)으로 교체. {E/Fire} 상대 추가 우선도 감소는 유지.',
         zh: '从全体改为单体。优先度降低替换为{B/BT_STAT|ST_SPEED}自我增益和{D/BT_FREEZE}（2回合）。对{E/Fire}额外优先度降低不变。',
         fr: "Passe d'AoE à single-target. La réduction de Priority est remplacée par un self-buff {B/BT_STAT|ST_SPEED} et {D/BT_FREEZE} (2 tours). La réduction de Priority supplémentaire vs {E/Fire} est conservée.",
+        es: 'Cambiado de AoE a objetivo único. La reducción de Prioridad fue reemplazada por un autobono {B/BT_STAT|ST_SPEED} y {D/BT_FREEZE} (2 turnos). Se mantiene la reducción de Prioridad extra vs {E/Fire}.',
       },
       chain: {
         en: 'Chain: Finish → Companion. Gains Speed scaling + always counts as elemental advantage.\nDual: gains Speed scaling + -10% target Priority.',
@@ -110,6 +120,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인: 피니시 → 컴패니언. 속도 비례 피해 획득 + 항상 속성 유리로 적용.\n협공: 속도 비례 피해 획득 + 대상 우선도 -10%.',
         zh: '连锁：终结者→同伴。获得速度比例伤害+始终视为属性克制。\n协攻：获得速度比例伤害+目标优先度-10%。',
         fr: 'Chain : Finish → Companion. Gagne du scaling SPD + toujours compté comme avantage élémentaire.\nDual : gagne du scaling SPD + -10% de Priority sur la cible.',
+        es: 'Chain: Finish → Companion. Gana escalado de Velocidad + siempre cuenta como ventaja elemental.\nDual: gana escalado de Velocidad + -10% de Prioridad al objetivo.',
       },
       passive: {
         en: '+50% DMG vs elemental advantage. Enhanced (Lv5): +50% DMG vs bosses.',
@@ -117,6 +128,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '속성 유리 시 +50% 피해. 강화 (Lv5): 보스에 +50% 피해.',
         zh: '属性克制时+50%伤害。强化（Lv5）：对Boss+50%伤害。',
         fr: '+50% DMG en avantage élémentaire. Amélioré (Lv5) : +50% DMG vs bosses.',
+        es: '+50% de Daño vs ventaja elemental. Mejorado (Nv5): +50% de Daño vs jefes.',
       },
     },
   },
@@ -128,6 +140,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '모든 스킬의 피해가 혼합 비율 대신 시전자의 최대 HP에 비례하도록 변경. 순수 HP 스케일링 탱커로 전환.',
       zh: '所有技能伤害从混合比例改为基于施法者最大生命值。使她成为纯HP成长型坦克。',
       fr: "Tous les skills infligent désormais des dégâts proportionnels aux Max HP du caster au lieu d'un ratio de scaling mixte. Elle devient une tank au scaling HP pur.",
+      es: 'Todos los skills ahora infligen daño proporcional a la Vida Máxima del lanzador en lugar de un ratio de escalado mixto. Esto la convierte en un tank de escalado puro por HP.',
     },
     recommendedLevels: [5],
     changes: {
@@ -137,6 +150,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{B/BT_CALL_BACKUP}에 {B/BT_STAT|ST_DEF}가 불필요. {B/BT_STAT|ST_DEF} 활성 시 대상에 {D/BT_STAT|ST_ATK} 부여.\n버스트 1: WGD +1.\n버스트 2: 효과 저항 무시.',
         zh: '{B/BT_CALL_BACKUP}不再需要{B/BT_STAT|ST_DEF}。{B/BT_STAT|ST_DEF}激活时对目标施加{D/BT_STAT|ST_ATK}。\n爆发1：WGD+1。\n爆发2：无视效果抵抗。',
         fr: '{B/BT_CALL_BACKUP} ne nécessite plus {B/BT_STAT|ST_DEF}. {D/BT_STAT|ST_ATK} sur la cible si {B/BT_STAT|ST_DEF} est actif.\nBurst 1 : +1 WGD.\nBurst 2 : ignore la RES.',
+        es: '{B/BT_CALL_BACKUP} ya no requiere {B/BT_STAT|ST_DEF}. {D/BT_STAT|ST_ATK} en el objetivo si {B/BT_STAT|ST_DEF} está activo.\nBurst 1: +1 WGD.\nBurst 2: ignora Resiliencia.',
       },
       s2: {
         en: '{B/BT_REMOVE_DEBUFF} now targets lowest HP ally instead of self only. Gains counterattack when hit, inflicts {D/BT_AGGRO}.',
@@ -144,6 +158,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{B/BT_REMOVE_DEBUFF}가 자신만에서 최저 HP 아군으로 변경. 피격 시 반격 추가, {D/BT_AGGRO} 부여.',
         zh: '{B/BT_REMOVE_DEBUFF}从仅自身改为最低HP友军。受击时反击并施加{D/BT_AGGRO}。',
         fr: "{B/BT_REMOVE_DEBUFF} cible désormais l'allié avec le moins de HP au lieu de soi-même uniquement. Gagne une contre-attaque quand touchée, inflige {D/BT_AGGRO}.",
+        es: '{B/BT_REMOVE_DEBUFF} ahora se dirige al aliado con menos Vida en lugar de solo a sí misma. Gana contraataque al recibir daño e inflige {D/BT_AGGRO}.',
       },
       s3: {
         en: '{D/BT_REMOVE_BUFF} 2 buffs (was 1). Ignores 30% DEF vs bosses.',
@@ -151,6 +166,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{D/BT_REMOVE_BUFF} 2개로 (이전 1개). 보스 상대 DEF 30% 무시.',
         zh: '{D/BT_REMOVE_BUFF}增至2个（原1个）。对Boss无视30%防御。',
         fr: '{D/BT_REMOVE_BUFF} 2 buffs (avant 1). Ignore 30% de DEF vs bosses.',
+        es: '{D/BT_REMOVE_BUFF} 2 bonos (antes 1). Ignora 30% de Defensa vs jefes.',
       },
       chain: {
         en: 'Chain: unchanged. Dual: {D/BT_AGGRO} 100% (was 70%).',
@@ -158,6 +174,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인: 변경 없음. 협공: {D/BT_AGGRO} 100% (이전 70%).',
         zh: '连锁：无变化。协攻：{D/BT_AGGRO} 100%（原70%）。',
         fr: 'Chain : inchangée. Dual : {D/BT_AGGRO} 100% (avant 70%).',
+        es: 'Chain: sin cambios. Dual: {D/BT_AGGRO} 100% (antes 70%).',
       },
       passive: {
         en: 'Team {B/BT_STAT|ST_CRITICAL_DMG_RATE} for 2 turns at battle start. Increases damage for all allies under {B/BT_STAT|ST_DEF}.',
@@ -165,6 +182,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '전투 시작 시 팀 전체 {B/BT_STAT|ST_CRITICAL_DMG_RATE} (2턴). {B/BT_STAT|ST_DEF} 받는 모든 아군 피해 증가.',
         zh: '战斗开始时全队{B/BT_STAT|ST_CRITICAL_DMG_RATE}（2回合）。{B/BT_STAT|ST_DEF}状态下的所有友军伤害提升。',
         fr: "{B/BT_STAT|ST_CRITICAL_DMG_RATE} d'équipe pendant 2 tours en début de combat. Augmente les dégâts de tous les alliés sous {B/BT_STAT|ST_DEF}.",
+        es: 'Equipo {B/BT_STAT|ST_CRITICAL_DMG_RATE} durante 2 turnos al inicio del combate. Aumenta el daño de todos los aliados bajo {B/BT_STAT|ST_DEF}.',
       },
     },
   },
@@ -176,6 +194,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '거의 모든 행동에서 대량의 {D/BT_DOT_POISON} 부여. 우선도/디버프 컨트롤러에서 본격적인 독 캐리로 전환. 전투 시작 시 맹공 +1턴.',
       zh: '几乎每个行动都能施加大量{D/BT_DOT_POISON}。从优先度/减益控制者转变为全面的毒伤输出核心。入场时猛烈攻势+1回合。',
       fr: "Énorme output de {D/BT_DOT_POISON} sur quasiment chaque action. Passe d'un controller de priority/debuff à un véritable poison carry. Fierce Offensive +1 tour à l'entrée en combat.",
+      es: 'Producción masiva de {D/BT_DOT_POISON} en casi cada acción. Pasa de ser un controlador de prioridad/debuff a un carry de veneno total. Ofensiva Feroz +1 turno al entrar en combate.',
     },
     recommendedLevels: [5],
     changes: {
@@ -185,6 +204,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '맹공 시: 대상에 {D/BT_DOT_POISON} (2턴) 추가.\n버스트 2: 독 폭발로 변경 (이전 피해 증가).',
         zh: '猛烈攻势时：对目标施加{D/BT_DOT_POISON}（2回合）。\n爆发2：毒引爆（原伤害提升）。',
         fr: 'Avec Fierce Offensive : ajoute {D/BT_DOT_POISON} (2 tours) sur la cible.\nBurst 2 : Poison Detonate (avant : DMG increase).',
+        es: 'Con Ofensiva Feroz: gana {D/BT_DOT_POISON} (2 turnos) en el objetivo.\nBurst 2: Detonar Veneno (antes Aumento de Daño).',
       },
       s2: {
         en: 'Crystal Storm now inflicts {D/BT_DOT_POISON} unconditionally (was Fierce Offensive only). With Fierce Offensive: additional {D/BT_DOT_POISON} + {D/BT_SILENCE} on healers.',
@@ -192,6 +212,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '크리스탈 스톰이 무조건 {D/BT_DOT_POISON} 부여 (이전에는 맹공 시만). 맹공 시: 추가 {D/BT_DOT_POISON} + 힐러에 {D/BT_SILENCE}.',
         zh: '水晶风暴现在无条件施加{D/BT_DOT_POISON}（原仅猛烈攻势时）。猛烈攻势时：额外{D/BT_DOT_POISON}+对奶妈{D/BT_SILENCE}。',
         fr: 'Crystal Storm inflige désormais {D/BT_DOT_POISON} inconditionnellement (avant : uniquement avec Fierce Offensive). Avec Fierce Offensive : {D/BT_DOT_POISON} supplémentaire + {D/BT_SILENCE} sur les healers.',
+        es: 'Crystal Storm ahora inflige {D/BT_DOT_POISON} de forma incondicional (antes solo con Ofensiva Feroz). Con Ofensiva Feroz: {D/BT_DOT_POISON} adicional + {D/BT_SILENCE} en sanadores.',
       },
       s3: {
         en: 'Gains {D/BT_DOT_POISON} on all enemies (2 turns at Lv5). +1 additional {D/BT_DOT_POISON} stack vs bosses.',
@@ -199,6 +220,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '모든 적에 {D/BT_DOT_POISON} 추가 (Lv5에서 2턴). 보스에 추가 {D/BT_DOT_POISON} +1 스택.',
         zh: '对所有敌人施加{D/BT_DOT_POISON}（Lv5时2回合）。对Boss额外+1层{D/BT_DOT_POISON}。',
         fr: 'Inflige {D/BT_DOT_POISON} à tous les ennemis (2 tours au Lv5). +1 stack supplémentaire de {D/BT_DOT_POISON} vs bosses.',
+        es: 'Gana {D/BT_DOT_POISON} en todos los enemigos (2 turnos a Nv5). +1 acumulación adicional de {D/BT_DOT_POISON} vs jefes.',
       },
       chain: {
         en: 'Chain: 25 AP restore replaced by {D/BT_DOT_POISON} (2 turns).\nDual: +20% Priority replaced by {D/BT_DOT_POISON} (2 turns).',
@@ -206,6 +228,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인: AP 25 회복이 {D/BT_DOT_POISON} (2턴)으로 교체.\n협공: 우선도 +20%가 {D/BT_DOT_POISON} (2턴)으로 교체.',
         zh: '连锁：25 AP恢复替换为{D/BT_DOT_POISON}（2回合）。\n协攻：优先度+20%替换为{D/BT_DOT_POISON}（2回合）。',
         fr: 'Chain : 25 AP restore remplacé par {D/BT_DOT_POISON} (2 tours).\nDual : +20% de Priority remplacé par {D/BT_DOT_POISON} (2 tours).',
+        es: 'Chain: la restauración de 25 AP fue reemplazada por {D/BT_DOT_POISON} (2 turnos).\nDual: el +20% de Prioridad fue reemplazado por {D/BT_DOT_POISON} (2 turnos).',
       },
       passive: {
         en: '+50% DMG vs elemental advantage. Enhanced (Lv5): +50% Effectiveness.',
@@ -213,6 +236,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '속성 유리 시 +50% 피해. 강화 (Lv5): 효과 적중 +50%.',
         zh: '属性克制时+50%伤害。强化（Lv5）：效果命中+50%。',
         fr: "+50% DMG en avantage élémentaire. Amélioré (Lv5) : +50% d'EFF.",
+        es: '+50% de Daño vs ventaja elemental. Mejorado (Nv5): +50% de Efectividad.',
       },
     },
   },
@@ -224,6 +248,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '피해량 증가, S3에 새로운 {D/BT_ACTION_GAUGE} 디버프, 초월로 전투 시작 시 {B/BT_STAT|ST_SPEED} 버프 획득.',
       zh: '伤害提升，S3获得新的{D/BT_ACTION_GAUGE}减益，超越战斗开始时获得{B/BT_STAT|ST_SPEED}增益。',
       fr: 'Plus de dégâts, nouveau debuff {D/BT_ACTION_GAUGE} sur le S3, et buff {B/BT_STAT|ST_SPEED} en début de combat via la transcendance.',
+      es: 'Más daño, nuevo debuff {D/BT_ACTION_GAUGE} en S3, y bono {B/BT_STAT|ST_SPEED} al inicio del combate por trascendencia.',
     },
     recommendedLevels: [3, 5],
     changes: {
@@ -233,6 +258,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{E/Earth} 상대에 추가 {D/BT_DOT_BURN} (2턴) 부여.\n버스트 1: 효과 적중 대신 자신에게 {B/BT_BARRIER} 부여.\n버스트 2: {D/BT_DOT_BURN} (2턴) 부여.',
         zh: '对{E/Earth}追加{D/BT_DOT_BURN}（2回合）。\n爆发1：对自身施加{B/BT_BARRIER}（原效果命中）。\n爆发2：施加{D/BT_DOT_BURN}（2回合）。',
         fr: 'Inflige du {D/BT_DOT_BURN} supplémentaire (2 tours) sur les cibles {E/Earth}.\nBurst 1 : accorde {B/BT_BARRIER} à soi-même (avant : EFF).\nBurst 2 : inflige {D/BT_DOT_BURN} (2 tours).',
+        es: 'Inflige {D/BT_DOT_BURN} adicional (2 turnos) en objetivos {E/Earth}.\nBurst 1: otorga {B/BT_BARRIER} a sí misma (antes Efectividad).\nBurst 2: inflige {D/BT_DOT_BURN} (2 turnos).',
       },
       s3: {
         en: 'Inflicts {D/BT_ACTION_GAUGE} -20% on the enemy with the highest ATK.',
@@ -240,6 +266,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '최고 공격력 적에 {D/BT_ACTION_GAUGE} -20% 부여.',
         zh: '对最高攻击力敌人施加{D/BT_ACTION_GAUGE}-20%。',
         fr: "Inflige {D/BT_ACTION_GAUGE} -20% sur l'ennemi avec la plus haute ATK.",
+        es: 'Inflige {D/BT_ACTION_GAUGE} -20% al enemigo con mayor Ataque.',
       },
       chain: {
         en: 'Chain Companion Effect: {B/BT_DMG_TARGET_BREAK} replaced by {D/BT_DOT_BURN} (2 turns, ignores Resilience) on all enemies.',
@@ -247,6 +274,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인 컴패니언 효과: {B/BT_DMG_TARGET_BREAK}이 적 전체 {D/BT_DOT_BURN} (2턴, 효과 저항 무시)으로 교체.',
         zh: '连携效果：{B/BT_DMG_TARGET_BREAK}替换为对全体敌人施加{D/BT_DOT_BURN}（2回合，无视效果抵抗）。',
         fr: 'Chain Companion Effect : {B/BT_DMG_TARGET_BREAK} remplacé par {D/BT_DOT_BURN} (2 tours, ignore la RES) sur tous les ennemis.',
+        es: 'Efecto Chain Companion: {B/BT_DMG_TARGET_BREAK} reemplazado por {D/BT_DOT_BURN} (2 turnos, ignora Resiliencia) en todos los enemigos.',
       },
       passive: {
         en: 'On Death Sentence use: self {B/BT_STAT|ST_ATK} and {B/BT_ADDITIVE_TURN}.',
@@ -254,6 +282,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '사형 선고 사용 시: 자신 {B/BT_STAT|ST_ATK} 및 {B/BT_ADDITIVE_TURN} 획득.',
         zh: '使用死刑宣判时：自身获得{B/BT_STAT|ST_ATK}和{B/BT_ADDITIVE_TURN}。',
         fr: "À l'utilisation de Death Sentence : self {B/BT_STAT|ST_ATK} et {B/BT_ADDITIVE_TURN}.",
+        es: 'Al usar Sentencia de Muerte: se otorga a sí misma {B/BT_STAT|ST_ATK} y {B/BT_ADDITIVE_TURN}.',
       },
       transcendence: {
         en: 'Self {B/BT_STAT|ST_SPEED} (1 turn) at battle start.',
@@ -261,6 +290,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '전투 시작 시 자신 {B/BT_STAT|ST_SPEED} (1턴) 획득.',
         zh: '战斗开始时获得自身{B/BT_STAT|ST_SPEED}（1回合）。',
         fr: 'Self {B/BT_STAT|ST_SPEED} (1 tour) en début de combat.',
+        es: 'Se otorga {B/BT_STAT|ST_SPEED} (1 turno) a sí misma al inicio del combate.',
       },
     },
   },
@@ -272,6 +302,7 @@ export const fusionReviews: FusionReviewEntry[] = [
       kr: '방어력 비례 딜러로 완전 리워크. 모든 스킬 피해가 공격력 대신 방어력에 비례하고, {B/BT_STAT|ST_DEF} 보유 중 피해 +50% (실드 조건 보너스 전부 삭제). 킷 전체에 강화 효과 강탈 획득, S3로 아군 전체 {B/BT_STAT|ST_CRITICAL_DMG_RATE} 부여.',
       zh: '完全重做为防御力成长型输出。所有技能伤害按防御力而非攻击力计算，持有{B/BT_STAT|ST_DEF}期间伤害+50%（护盾条件加成全部移除）。整套技能获得夺取强化效果，S3为全队提供{B/BT_STAT|ST_CRITICAL_DMG_RATE}。',
       fr: "Rework complet en DPS au scaling DEF : tous les skills infligent des dégâts proportionnels à la DEF au lieu de l'ATK, et gagnent +50% de DMG tant que {B/BT_STAT|ST_DEF} est actif (tous les bonus conditionnés au Barrier sont supprimés). Gagne du vol de buffs sur tout le kit et un buff {B/BT_STAT|ST_CRITICAL_DMG_RATE} d'équipe sur le S3.",
+      es: 'Rediseño completo en un DPS de escalado por Defensa: ahora cada skill inflige daño proporcional a la Defensa en lugar del Ataque, y gana +50% de Daño mientras {B/BT_STAT|ST_DEF} está activo (se eliminaron todos los bonos condicionados a Barrier). Gana robo de bonos en todo el kit y un bono de equipo {B/BT_STAT|ST_CRITICAL_DMG_RATE} en S3.',
     },
     recommendedLevels: [3, 5],
     changes: {
@@ -281,6 +312,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{B/BT_STAT|ST_DEF} 획득 확률 증가: 20/35/50% → 50/75/100% (Lv5에서 확정).',
         zh: '获得{B/BT_STAT|ST_DEF}的概率提升：20/35/50% → 50/75/100%（Lv5时必定触发）。',
         fr: "Chance d'obtenir {B/BT_STAT|ST_DEF} augmentée : 20/35/50% → 50/75/100% (garanti au Lv5).",
+        es: 'Probabilidad de obtener {B/BT_STAT|ST_DEF} aumentada: 20/35/50% → 50/75/100% (garantizado en Nv5).',
       },
       s2: {
         en: 'Gains {D/BT_STEAL_BUFF} (1 buff, 2 at Lv4).\nBurst 1: enhanced steal (ignores Resilience) + 1 WGD (was DMG increase + {D/BT_REMOVE_BUFF} +1).\nBurst 2: DMG increase (was {D/BT_REMOVE_BUFF} +1).',
@@ -288,6 +320,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '{D/BT_STEAL_BUFF} 획득 (1개, Lv4에서 2개).\n버스트 1: 강화 강탈 강화 (효과 저항 무시) + WG 감소량 +1 (이전 피해 증가 + {D/BT_REMOVE_BUFF} +1).\n버스트 2: 피해 증가 (이전 {D/BT_REMOVE_BUFF} +1).',
         zh: '获得{D/BT_STEAL_BUFF}（1个，Lv4时2个）。\n爆发1：强化夺取强化（无视效果抵抗）+WG降低量+1（原伤害提升+{D/BT_REMOVE_BUFF}+1）。\n爆发2：伤害提升（原{D/BT_REMOVE_BUFF}+1）。',
         fr: 'Gagne {D/BT_STEAL_BUFF} (1 buff, 2 au Lv4).\nBurst 1 : vol de buff amélioré (ignore la RES) + 1 WGD (avant : DMG increase + {D/BT_REMOVE_BUFF} +1).\nBurst 2 : DMG increase (avant : {D/BT_REMOVE_BUFF} +1).',
+        es: 'Gana {D/BT_STEAL_BUFF} (1 bono, 2 en Nv4).\nBurst 1: robo mejorado (ignora Resiliencia) + 1 WGD (antes Daño + {D/BT_REMOVE_BUFF} +1).\nBurst 2: Daño + (antes {D/BT_REMOVE_BUFF} +1).',
       },
       s3: {
         en: "Changed from AoE to single-target. AP self-recovery (35 per target) replaced by removing all of the target's AP. After attacking, grants team {B/BT_STAT|ST_CRITICAL_DMG_RATE} (2 turns). {B/BT_INVINCIBLE} at Lv5 unchanged.",
@@ -295,6 +328,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '전체에서 단일 대상으로 변경. 자신 AP 회복 (대상당 35)이 대상의 AP 전부 제거로 교체. 공격 후 아군 전체에 {B/BT_STAT|ST_CRITICAL_DMG_RATE} (2턴) 부여. Lv5의 {B/BT_INVINCIBLE}은 유지.',
         zh: '从全体改为单体。自身AP恢复（每目标35）替换为清除目标所有AP。攻击后为全队附加{B/BT_STAT|ST_CRITICAL_DMG_RATE}（2回合）。Lv5的{B/BT_INVINCIBLE}保留。',
         fr: "Passe d'AoE à monocible. La récupération d'AP (35 par cible) est remplacée par le retrait de toute l'AP de la cible. Après l'attaque, accorde {B/BT_STAT|ST_CRITICAL_DMG_RATE} à l'équipe (2 tours). {B/BT_INVINCIBLE} au Lv5 conservé.",
+        es: 'Cambiado de AoE a objetivo único. La recuperación de AP propia (35 por objetivo) se reemplaza por eliminar todo el AP del objetivo. Tras atacar, otorga al equipo {B/BT_STAT|ST_CRITICAL_DMG_RATE} (2 turnos). {B/BT_INVINCIBLE} en Nv5 sin cambios.',
       },
       chain: {
         en: 'Chain: Starter → Companion. Team {B/BT_DMG_TARGET_BREAK} replaced by {B/BT_COOL_CHARGE} on own skills.\nDual: Barrier-conditional DMG replaced by {D/BT_STEAL_BUFF} (1 buff, ignores Resilience).',
@@ -302,6 +336,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '체인: 스타터 → 컴패니언. 아군 전체 {B/BT_DMG_TARGET_BREAK}이 자신 {B/BT_COOL_CHARGE}로 교체.\n협공: 실드 조건 피해가 {D/BT_STEAL_BUFF} (1개, 효과 저항 무시)로 교체.',
         zh: '连锁：开启者→同伴。全队{B/BT_DMG_TARGET_BREAK}替换为自身{B/BT_COOL_CHARGE}。\n协攻：护盾条件伤害替换为{D/BT_STEAL_BUFF}（1个，无视效果抵抗）。',
         fr: "Chain : Starter → Companion. Le {B/BT_DMG_TARGET_BREAK} d'équipe est remplacé par {B/BT_COOL_CHARGE} sur ses propres skills.\nDual : le DMG conditionné au Barrier est remplacé par {D/BT_STEAL_BUFF} (1 buff, ignore la RES).",
+        es: 'Cadena: Iniciador → Compañero. {B/BT_DMG_TARGET_BREAK} de equipo reemplazado por {B/BT_COOL_CHARGE} en sus propios skills.\nDual: Daño condicionado a Barrera reemplazado por {D/BT_STEAL_BUFF} (1 bono, ignora Resiliencia).',
       },
       passive: {
         en: '+50% DMG vs elemental advantage. Enhanced (Lv5): all attacks count as elemental advantage.',
@@ -309,6 +344,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '속성 유리 시 +50% 피해. 강화 (Lv5): 모든 공격이 유리한 상성으로 적용.',
         zh: '属性克制时+50%伤害。强化（Lv5）：所有攻击以克制属性生效。',
         fr: '+50% DMG en avantage élémentaire. Amélioré (Lv5) : toutes les attaques comptent comme avantage élémentaire.',
+        es: '+50% Daño contra ventaja elemental. Mejorado (Nv5): todos los ataques cuentan como ventaja elemental.',
       },
       transcendence: {
         en: '5★: +30% Penetration against Dimensional Singularity bosses.',
@@ -316,6 +352,7 @@ export const fusionReviews: FusionReviewEntry[] = [
         kr: '5★: 차원 특이점 보스 대상 관통력 +30%.',
         zh: '5★：对次元奇点首领穿透力+30%。',
         fr: '5★ : +30% de Penetration vs boss Dimensional Singularity.',
+        es: '5★: +30% Penetración contra jefes de Singularidad Dimensional.',
       },
     },
   },

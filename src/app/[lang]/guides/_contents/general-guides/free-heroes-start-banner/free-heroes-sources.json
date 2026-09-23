@@ -6,7 +6,8 @@
         "jp": "選抜スカウト",
         "kr": "선별 동료 영입",
         "zh": "甄选招募",
-        "fr": "Start Dash"
+        "fr": "Start Dash",
+        "es": "Start Dash"
       },
       "entries": [
         {
@@ -17,7 +18,8 @@
             "jp": "どれも優秀。好きなキャラを選ぼう。",
             "kr": "모두 좋은 선택지. 원하는 캐릭터를 고르세요.",
             "zh": "都是不错的选择，挑你喜欢的就好。",
-            "fr": "Tous des choix solides, prenez simplement celui que vous préférez."
+            "fr": "Tous des choix solides, prenez simplement celui que vous préférez.",
+            "es": "Todas son opciones sólidas, elige la que prefieras."
           }
         }
       ]
@@ -28,7 +30,8 @@
         "jp": "新規ミッション",
         "kr": "신규 미션",
         "zh": "新手任务",
-        "fr": "New User Mission"
+        "fr": "New User Mission",
+        "es": "Misión de Nuevo Usuario"
       },
       "entries": [
         {
@@ -39,7 +42,8 @@
             "jp": "ミッションで確定入手。",
             "kr": "미션에서 확정 획득.",
             "zh": "任务确定获得。",
-            "fr": "Garanti via les missions."
+            "fr": "Garanti via les missions.",
+            "es": "Garantizado por misiones."
           }
         }
       ]
@@ -50,7 +54,8 @@
         "jp": "新規ミッション \n メルシャ大陸冒険 I",
         "kr": "신규 미션 \n 메르샤 대륙모험 I",
         "zh": "新手任务 \n 弥乐沙大陆冒险I",
-        "fr": "New User Mission \n Cross-Mirsha Adventure I"
+        "fr": "New User Mission \n Cross-Mirsha Adventure I",
+        "es": "Misión de nuevo usuario \n Aventura Cruce-Mirsha I"
       },
       "entries": [
         {
@@ -61,7 +66,8 @@
             "jp": "{I-I/3★ Hero Selection Ticket}。 \n 30ミッション全クリアで1枚 \n シーズン1ハード冒険10クリアで1枚。",
             "kr": "{I-I/3★ Hero Selection Ticket}. \n 30개 미션 전부 완료 시 1장 \n 시즌 1 하드 모험 10 클리어 시 1장.",
             "zh": "{I-I/3★ Hero Selection Ticket}。 \n 完成全部30个任务获得1张 \n 通关第1季困难冒险10获得1张。",
-            "fr": "{I-I/3★ Hero Selection Ticket}. \n 1 en complétant les 30 missions \n 1 pour le clear de Season 1 Hardmode Adventure 10."
+            "fr": "{I-I/3★ Hero Selection Ticket}. \n 1 en complétant les 30 missions \n 1 pour le clear de Season 1 Hardmode Adventure 10.",
+            "es": "{I-I/3★ Hero Selection Ticket}. \n 1 por completar las 30 misiones \n 1 por completar la Temporada 1 Aventura Modo difícil 10."
           }
         }
       ]
@@ -72,7 +78,8 @@
         "jp": "メルシャ大陸冒険 I",
         "kr": "메르샤 대륙모험 I",
         "zh": "弥乐沙大陆冒险I",
-        "fr": "Cross-Mirsha Adventure I"
+        "fr": "Cross-Mirsha Adventure I",
+        "es": "Aventura Cruce-Mirsha I"
       },
       "entries": [
         {
@@ -83,7 +90,8 @@
             "jp": "シーズン1 ノーマル冒険2-3クリア。",
             "kr": "시즌 1 노멀 모험 2-3 클리어.",
             "zh": "通关第1季普通冒险2-3。",
-            "fr": "Terminez Season 1 Normal Adventure 2-3."
+            "fr": "Terminez Season 1 Normal Adventure 2-3.",
+            "es": "Completa la Temporada 1 Aventura Normal 2-3."
           }
         }
       ]
@@ -94,7 +102,8 @@
         "jp": "ストーリー",
         "kr": "스토리",
         "zh": "故事",
-        "fr": "Story"
+        "fr": "Story",
+        "es": "Historia"
       },
       "entries": [
         {
@@ -105,7 +114,8 @@
             "jp": "シーズン3 1-13クリア：遺物の正体。",
             "kr": "시즌 3 1-13 클리어: 유물의 정체.",
             "zh": "通关第3季1-13：遗物的真面目。",
-            "fr": "Clear Season 3 1-13 : The Identity of the Relic."
+            "fr": "Clear Season 3 1-13 : The Identity of the Relic.",
+            "es": "Completa la Temporada 3 1-13: La identidad de la reliquia."
           }
         }
       ]
@@ -116,7 +126,8 @@
         "jp": "飛天の塔100階",
         "kr": "비천의 탑 100층",
         "zh": "飞天之塔100层",
-        "fr": "Skyward Tower 100F"
+        "fr": "Skyward Tower 100F",
+        "es": "Torre Skyward 100F"
       },
       "entries": [
         {
@@ -127,7 +138,8 @@
             "jp": "飛天の塔100階クリア。",
             "kr": "비천의 탑 100층 클리어.",
             "zh": "通关飞天之塔100层。",
-            "fr": "Clear le Floor 100 de la Skyward Tower."
+            "fr": "Clear le Floor 100 de la Skyward Tower.",
+            "es": "Completa el piso 100 de la Torre Skyward."
           }
         }
       ]
@@ -138,7 +150,8 @@
         "jp": "フレンドPtショップ",
         "kr": "우정 포인트 상점",
         "zh": "友情点数商店",
-        "fr": "Friendship Point Shop"
+        "fr": "Friendship Point Shop",
+        "es": "Tienda de puntos de amistad"
       },
       "entries": [
         {
@@ -149,7 +162,8 @@
             "jp": "毎週10 {I-I/Hero Piece}、700 {I-I/Friendship Point}で購入可能。",
             "kr": "매주 10 {I-I/Hero Piece}, 700 {I-I/Friendship Point}로 구매 가능.",
             "zh": "每周10个{I-I/Hero Piece}，700 {I-I/Friendship Point}购买。",
-            "fr": "10 {I-I/Hero Piece} par semaine pour 700 {I-I/Friendship Point}."
+            "fr": "10 {I-I/Hero Piece} par semaine pour 700 {I-I/Friendship Point}.",
+            "es": "10 {I-I/Hero Piece} por semana por 700 {I-I/Friendship Point}."
           }
         }
       ]
@@ -160,7 +174,8 @@
         "jp": "ギルドショップ",
         "kr": "길드 상점",
         "zh": "公会商店",
-        "fr": "Guild Shop"
+        "fr": "Guild Shop",
+        "es": "Tienda del Gremio"
       },
       "entries": [
         {
@@ -171,7 +186,8 @@
             "jp": "毎週10 {I-I/Hero Piece}、300 {I-I/Guild Coin}で購入可能。",
             "kr": "매주 10 {I-I/Hero Piece}, 300 {I-I/Guild Coin}으로 구매 가능.",
             "zh": "每周10个{I-I/Hero Piece}，300 {I-I/Guild Coin}购买。",
-            "fr": "10 {I-I/Hero Piece} par semaine pour 300 {I-I/Guild Coin}."
+            "fr": "10 {I-I/Hero Piece} par semaine pour 300 {I-I/Guild Coin}.",
+            "es": "10 {I-I/Hero Piece} por semana por 300 {I-I/Guild Coin}."
           }
         }
       ]
@@ -182,7 +198,8 @@
         "jp": "メルシャサポーターズ",
         "kr": "메르샤 서포터즈",
         "zh": "美洛沙支援者",
-        "fr": "Mirsha Supporters"
+        "fr": "Mirsha Supporters",
+        "es": "Simpatizantes de Mirsha"
       },
       "entries": [
         {
@@ -193,7 +210,8 @@
             "jp": "{E/Light}スターター — おすすめ。 \n 全員入手、{E/Dark}スターターとは排他。",
             "kr": "{E/Light} 스타터 — 추천。 \n 모두 획득、{E/Dark} 스타터와 배타적。",
             "zh": "{E/Light}新手包 - 推荐。 \n 获得全部角色，与{E/Dark}新手包互斥。",
-            "fr": "Starter {E/Light} — choix recommandé. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Dark}."
+            "fr": "Starter {E/Light} — choix recommandé. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Dark}.",
+            "es": "Inicial {E/Light} — elección recomendada. \n Consigue a todos los héroes, mutuamente excluyente con Inicial {E/Dark}."
           }
         },
         {
@@ -204,7 +222,8 @@
             "jp": "{E/Dark}スターター。 \n 全員入手、{E/Light}スターターとは排他。",
             "kr": "{E/Dark} 스타터。 \n 모두 획득、{E/Light} 스타터와 배타적。",
             "zh": "{E/Dark}新手包。 \n 获得全部角色，与{E/Light}新手包互斥。",
-            "fr": "Starter {E/Dark}. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Light}."
+            "fr": "Starter {E/Dark}. \n Obtenez tous les Héros, mutuellement exclusif avec le Starter {E/Light}.",
+            "es": "Inicial {E/Dark}. \n Consigue a todos los héroes, mutuamente excluyente con Inicial {E/Light}."
           }
         }
       ]
@@ -215,7 +234,8 @@
         "jp": "特別依頼",
         "kr": "특별 의뢰",
         "zh": "特别委托",
-        "fr": "Special Request"
+        "fr": "Special Request",
+        "es": "Encargo Especial"
       },
       "entries": [
         {
@@ -226,7 +246,8 @@
             "jp": "挑戦! 特別依頼:識別。",
             "kr": "도전! 특별의뢰 : 식별。",
             "zh": "挑战!特别委托:鉴定。",
-            "fr": "Challenge! Special Request : Identification."
+            "fr": "Challenge! Special Request : Identification.",
+            "es": "¡Desafío! Encargo esp.: Identificación."
           }
         },
         {
@@ -237,7 +258,8 @@
             "jp": "挑戦! 特別依頼:生態調査。",
             "kr": "도전! 특별의뢰 : 생태 조사。",
             "zh": "挑战!特别委托:生态调查。",
-            "fr": "Challenge! Special Request : Ecology Study."
+            "fr": "Challenge! Special Request : Ecology Study.",
+            "es": "¡Desafío! Encargo esp.: Estudio ecología."
           }
         }
       ]
@@ -248,7 +270,8 @@
         "fr": "Story mode",
         "jp": "ストーリーモード",
         "kr": "스토리 모드",
-        "zh": "剧情模式"
+        "zh": "剧情模式",
+        "es": "Modo historia"
       },
       "entries": [
         {
@@ -259,7 +282,8 @@
             "jp": "ストーリーモードで無料で入手できます。",
             "kr": "스토리 모드에서 무료로 제공됩니다.",
             "zh": "在故事模式中免费获得。",
-            "fr": "Offert gratuitement en mode histoire."
+            "fr": "Offert gratuitement en mode histoire.",
+            "es": "Se otorga gratis en el modo historia."
           }
         }
       ]
@@ -270,7 +294,8 @@
         "jp": "ストーリーダンジョン初回クリア",
         "kr": "스토리 던전 최초 클리어",
         "zh": "剧情副本首次通关",
-        "fr": "Story Dungeon first clear"
+        "fr": "Story Dungeon first clear",
+        "es": "Primer despeje de la Mazmorra de historia"
       },
       "entries": [
         {
@@ -281,7 +306,8 @@
             "jp": "募集プールから除外：登場するストーリーダンジョンの初回クリアで入手。クリア済みの場合はメールで配布され、所持済みなら破片150個（本来1★は120個）。",
             "kr": "모집 풀에서 제외: 등장하는 스토리 던전을 처음 클리어할 때 획득. 이미 클리어했다면 우편으로 지급되며, 이미 보유 중이면 조각 150개(원래 1★는 120개).",
             "zh": "已从招募池移除：首次通关其登场的剧情副本即可获得。若已通关则通过邮件发放；若已拥有则给予碎片150个（原生1★为120个）。",
-            "fr": "Retiré du pool de recrutement : obtenu à la première clear du Story Dungeon où il apparaît. Si le donjon est déjà clear, le héros arrive par mail — ou 150 Pieces s'il est déjà possédé (120 pour un 1★ natif)."
+            "fr": "Retiré du pool de recrutement : obtenu à la première clear du Story Dungeon où il apparaît. Si le donjon est déjà clear, le héros arrive par mail — ou 150 Pieces s'il est déjà possédé (120 pour un 1★ natif).",
+            "es": "Eliminado del grupo de Reclutamiento: se obtiene al despejar por primera vez la Mazmorra de historia en la que aparece. Si la mazmorra ya está despejada, el héroe se envía por correo — o 150 Piezas si ya lo tienes (120 para un 1★ nativo)."
           }
         }
       ]

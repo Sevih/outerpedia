@@ -7,7 +7,8 @@
         "jp": "{B/BT_IMMUNE}、非攻撃スキルなし",
         "kr": "{B/BT_IMMUNE}, 비공격 스킬 없음",
         "zh": "{B/BT_IMMUNE}，无非攻击技能",
-        "fr": "{B/BT_IMMUNE}, aucune compétence hors-attaque"
+        "fr": "{B/BT_IMMUNE}, aucune compétence hors-attaque",
+        "es": "{B/BT_IMMUNE}, sin no-ataques"
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "{B/BT_STAT|ST_CRITICAL_RATE}、非攻撃スキルなし",
         "kr": "{B/BT_STAT|ST_CRITICAL_RATE}, 비공격 스킬 없음",
         "zh": "{B/BT_STAT|ST_CRITICAL_RATE}，无非攻击技能",
-        "fr": "{B/BT_STAT|ST_CRITICAL_RATE}, aucune compétence hors-attaque"
+        "fr": "{B/BT_STAT|ST_CRITICAL_RATE}, aucune compétence hors-attaque",
+        "es": "{B/BT_STAT|ST_CRITICAL_RATE}, sin no-ataques"
       }
     },
     {
@@ -27,7 +29,8 @@
         "jp": "{E/Light}アタッカー",
         "kr": "{E/Light} 딜러",
         "zh": "{E/Light}输出",
-        "fr": "DPS {E/Light}"
+        "fr": "DPS {E/Light}",
+        "es": "DPS de {E/Light}"
       }
     }
   ],

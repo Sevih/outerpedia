@@ -4,7 +4,8 @@
     "jp": "レオは強力なシールドを獲得し、防御力に基づいてダメージを増加させる防御型ボスです。バフ状態でのS3は壊滅的なAoEダメージを与えるため、バフ管理が重要です。",
     "kr": "레오는 강력한 보호막을 획득하고 방어력에 따라 피해를 증가시키는 방어형 보스입니다. 버프 상태에서 S3는 치명적인 광역 피해를 줄 수 있어 버프 관리가 필수적입니다.",
     "zh": "里欧是一个防御型Boss，会获得强力护盾并根据防御力增加伤害。当有增益状态时，他的S3可以造成毁灭性的范围伤害，因此增益控制至关重要。",
-    "fr": "Leo est un Boss défensif qui gagne de puissants shields et augmente ses dégâts en fonction de sa defense. Son S3 inflige des dégâts AoE dévastateurs quand il est buffé : le contrôle de ses buffs est essentiel."
+    "fr": "Leo est un Boss défensif qui gagne de puissants shields et augmente ses dégâts en fonction de sa defense. Son S3 inflige des dégâts AoE dévastateurs quand il est buffé : le contrôle de ses buffs est essentiel.",
+    "es": "Leo es un jefe defensivo que obtiene escudos poderosos y aumenta el daño según la Defensa. Su S3 puede infligir un daño AoE devastador cuando está potenciado, por lo que el control de bonos es esencial."
   },
   "tips": [
     {
@@ -12,21 +13,24 @@
       "jp": "{B/BT_REMOVE_DEBUFF}や{B/BT_IMMUNE}を持参してAlphaを無効化しましょう。",
       "kr": "{B/BT_REMOVE_DEBUFF}나 {B/BT_IMMUNE}를 가져가 Alpha를 무효화하세요.",
       "zh": "携带{B/BT_REMOVE_DEBUFF}和/或{B/BT_IMMUNE}来无效化Alpha。",
-      "fr": "Emmenez du {B/BT_REMOVE_DEBUFF} et/ou du {B/BT_IMMUNE} pour neutraliser Alpha."
+      "fr": "Emmenez du {B/BT_REMOVE_DEBUFF} et/ou du {B/BT_IMMUNE} pour neutraliser Alpha.",
+      "es": "Trae a {B/BT_REMOVE_DEBUFF} y/o {B/BT_IMMUNE} para anular a Alpha."
     },
     {
       "en": "Bring {D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF} {D/BT_REDISTRIBUTE_BUFF} to prevent Leo to buff himself.",
       "jp": "{D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF}を持参してレオのバフを阻止しましょう。",
       "kr": "{D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF}를 가져가 레오의 버프를 방지하세요.",
       "zh": "携带{D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF}来阻止里欧给自己上增益。",
-      "fr": "Emmenez {D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF} {D/BT_REDISTRIBUTE_BUFF} pour empêcher Leo de se buffer."
+      "fr": "Emmenez {D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF} {D/BT_REDISTRIBUTE_BUFF} pour empêcher Leo de se buffer.",
+      "es": "Trae a {D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF} {D/BT_REDISTRIBUTE_BUFF} para evitar que Leo se potencie a sí mismo."
     },
     {
       "en": "Whichever the one you use, be sure that Leo isn't buffed when he is going for S3.",
       "jp": "どの方法を使用しても、レオがS3を使用する時にバフがかかっていないことを確認してください。",
       "kr": "어떤 방법을 사용하든 레오가 S3를 사용할 때 버프가 없는지 확인하세요.",
       "zh": "无论使用哪种方法，确保里欧在释放S3时没有增益状态。",
-      "fr": "Peu importe la solution choisie, assurez-vous que Leo n'est pas buffé au moment où il lance son S3."
+      "fr": "Peu importe la solution choisie, assurez-vous que Leo n'est pas buffé au moment où il lance son S3.",
+      "es": "Cualquiera que uses, asegúrate de que Leo no esté potenciado cuando vaya a usar S3."
     }
   ],
   "recommended": [
@@ -37,7 +41,8 @@
         "jp": "{D/BT_SEALED}持ち。",
         "kr": "{D/BT_SEALED} 보유.",
         "zh": "拥有{D/BT_SEALED}。",
-        "fr": "Options {D/BT_SEALED}."
+        "fr": "Options {D/BT_SEALED}.",
+        "es": "Opciones de {D/BT_SEALED}."
       }
     },
     {
@@ -47,7 +52,8 @@
         "jp": "{D/BT_STEAL_BUFF}持ち。",
         "kr": "{D/BT_STEAL_BUFF} 보유.",
         "zh": "拥有{D/BT_STEAL_BUFF}。",
-        "fr": "Options {D/BT_STEAL_BUFF}."
+        "fr": "Options {D/BT_STEAL_BUFF}.",
+        "es": "Opciones de {D/BT_STEAL_BUFF}."
       }
     },
     {
@@ -57,7 +63,8 @@
         "jp": "{D/BT_REDISTRIBUTE_BUFF}持ち。",
         "kr": "{D/BT_REDISTRIBUTE_BUFF} 보유.",
         "zh": "拥有{D/BT_REDISTRIBUTE_BUFF}。",
-        "fr": "Options {D/BT_REDISTRIBUTE_BUFF}."
+        "fr": "Options {D/BT_REDISTRIBUTE_BUFF}.",
+        "es": "Opciones de {D/BT_REDISTRIBUTE_BUFF}."
       }
     },
     {
@@ -67,7 +74,8 @@
         "jp": "{D/BT_REMOVE_BUFF}持ち。",
         "kr": "{D/BT_REMOVE_BUFF} 보유.",
         "zh": "拥有{D/BT_REMOVE_BUFF}。",
-        "fr": "Options {D/BT_REMOVE_BUFF}."
+        "fr": "Options {D/BT_REMOVE_BUFF}.",
+        "es": "{D/BT_REMOVE_BUFF} opciones."
       }
     },
     {
@@ -77,7 +85,8 @@
         "jp": "{B/BT_IMMUNE}や{B/BT_REMOVE_DEBUFF}を持つ{C/Healer}。",
         "kr": "{B/BT_IMMUNE}나 {B/BT_REMOVE_DEBUFF}를 보유한 {C/Healer}.",
         "zh": "拥有{B/BT_IMMUNE}和/或{B/BT_REMOVE_DEBUFF}的{C/Healer}。",
-        "fr": "Options {C/Healer} avec {B/BT_IMMUNE} et/ou {B/BT_REMOVE_DEBUFF}."
+        "fr": "Options {C/Healer} avec {B/BT_IMMUNE} et/ou {B/BT_REMOVE_DEBUFF}.",
+        "es": "{C/Healer} opciones con {B/BT_IMMUNE} y/o {B/BT_REMOVE_DEBUFF}."
       }
     }
   ]

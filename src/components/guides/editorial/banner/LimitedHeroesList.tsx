@@ -25,13 +25,21 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 const LIMITED_TAGS = tagsInGroup('limited');
 
 const LABELS = {
-  released: { en: 'Released:', jp: 'リリース:', kr: '출시:', zh: '发布:', fr: 'Sortie :' },
+  released: {
+    en: 'Released:',
+    jp: 'リリース:',
+    kr: '출시:',
+    zh: '发布:',
+    fr: 'Sortie :',
+    es: 'Lanzamiento:',
+  },
   lastRerun: {
     en: 'Last rerun:',
     jp: '最終復刻:',
     kr: '마지막 복각:',
     zh: '最近复刻:',
     fr: 'Dernier rerun :',
+    es: 'Última repetición:',
   },
   eventOnly: {
     en: 'Event reward only — never available on a banner',
@@ -39,8 +47,9 @@ const LABELS = {
     kr: '이벤트 보상 한정 — 배너에서 획득 불가',
     zh: '仅限活动奖励 — 从未在卡池中出现',
     fr: "Récompense d'event uniquement — jamais disponible en banner",
+    es: 'Solo recompensa de evento — nunca disponible en un banner',
   },
-  with: { en: ' with ', jp: ' × ', kr: ' × ', zh: ' × ', fr: ' avec ' },
+  with: { en: ' with ', jp: ' × ', kr: ' × ', zh: ' × ', fr: ' avec ', es: ' con ' },
 } satisfies Record<string, LocalizedText>;
 
 /**

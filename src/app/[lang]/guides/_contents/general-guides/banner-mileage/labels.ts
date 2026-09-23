@@ -13,6 +13,7 @@ export const LABELS = {
     kr: 'Outerplane의 배너 유형과 마일리지 시스템을 이해하고 소환을 최적화하세요.',
     zh: '了解异域战记中的卡池类型和指定招募系统以优化您的抽取',
     fr: 'Comprenez les types de Banner et le système de Mileage dans Outerplane pour optimiser vos pulls.',
+    es: 'Comprende los tipos de banners y el sistema de millaje en Outerplane para optimizar tus invocaciones.',
   },
 
   // ── Introduction paragraphs ──
@@ -23,6 +24,7 @@ export const LABELS = {
     kr: '대부분의 가챠 게임처럼, Outerplane에는 여러 배너를 가진 모집 시스템이 있으며, 각 배너는 서로 다른 재화를 사용합니다. 이 가이드에서는 배너와 마일리지 시스템의 작동 방식을 설명합니다.',
     zh: '与大多数抽卡游戏一样，异域战记拥有多个卡池的招募系统，每个卡池使用不同的资源。本指南将介绍卡池和指定招募系统的运作方式。',
     fr: 'Comme la plupart des jeux gacha, Outerplane propose un système de recrutement avec plusieurs banners, chacune utilisant différents types de ressources. Ce guide explique le fonctionnement des banners et du système de mileage dans Outerplane.',
+    es: 'Como la mayoría de los juegos gacha, Outerplane cuenta con un sistema de reclutamiento con múltiples banners, cada uno usando diferentes tipos de recursos. Esta guía explica cómo funcionan los banners y el sistema de millaje en Outerplane.',
   },
 
   intro_p2_before: {
@@ -31,6 +33,7 @@ export const LABELS = {
     kr: 'Outerplane은 ',
     zh: 'Outerplane采用',
     fr: 'Outerplane utilisé un ',
+    es: 'Outerplane usa un ',
   },
   intro_p2_highlight: {
     en: 'mileage system',
@@ -38,6 +41,7 @@ export const LABELS = {
     kr: '마일리지 시스템',
     zh: '指定招募系统',
     fr: 'système de mileage',
+    es: 'sistema de millaje',
   },
   intro_p2_mid: {
     en: '. Mileage allows you to',
@@ -45,6 +49,7 @@ export const LABELS = {
     kr: '을 사용합니다. 마일리지는 필요한 포인트를 모으면',
     zh: '。指定招募允许你在积累足够点数后',
     fr: ". Le mileage vous permet d'",
+    es: '. El millaje te permite',
   },
   intro_p2_bold: {
     en: ' directly obtain',
@@ -52,6 +57,7 @@ export const LABELS = {
     kr: ' 픽업 영웅을 직접 획득',
     zh: '直接获取',
     fr: 'obtenir directement',
+    es: ' obtener directamente',
   },
   intro_p2_after: {
     en: " the featured unit once you've gathered enough points.",
@@ -59,6 +65,7 @@ export const LABELS = {
     kr: '할 수 있습니다.',
     zh: 'UP同伴。',
     fr: " l'unité mise en avant une fois que vous avez rassemblé suffisamment de points.",
+    es: ' la unidad destacada una vez que hayas reunido suficientes puntos.',
   },
 
   intro_p3_before: {
@@ -67,6 +74,7 @@ export const LABELS = {
     kr: '각 모집',
     zh: '每次招募',
     fr: 'Chaque Recruit ',
+    es: 'Cada reclutamiento ',
   },
   intro_p3_bold: {
     en: '(except those using event tickets)',
@@ -74,6 +82,7 @@ export const LABELS = {
     kr: '(이벤트 티켓 제외)',
     zh: '（活动券除外）',
     fr: "(sauf ceux utilisant des tickets d'événement)",
+    es: '(excepto los que usan tickets de evento)',
   },
   intro_p3_after: {
     en: ' grants 1 mileage. Once you reach the required amount, you can exchange your mileage for the banner unit.',
@@ -81,6 +90,7 @@ export const LABELS = {
     kr: '마다 마일리지가 1 적립됩니다. 필요 수량에 도달하면 마일리지를 배너 영웅과 교환할 수 있습니다.',
     zh: '可获得1点点数。达到所需数量后，可指定招募卡池同伴。',
     fr: " rapporte 1 mileage. Une fois la quantité requise atteinte, vous pouvez échanger votre mileage contre l'unité de la banner.",
+    es: ' otorga 1 punto de millaje. Una vez que alcances la cantidad requerida, puedes intercambiar tu millaje por la unidad del banner.',
   },
 
   intro_p4_before: {
@@ -89,6 +99,7 @@ export const LABELS = {
     kr: '이 시스템의 큰 장점은 ',
     zh: '此系统的一大优势是',
     fr: 'Un avantage majeur de ce système est que le ',
+    es: 'Una ventaja importante de este sistema es que ',
   },
   intro_p4_bold1: {
     en: 'mileage is retained',
@@ -96,6 +107,7 @@ export const LABELS = {
     kr: '마일리지가 배너 간에 유지',
     zh: '点数在卡池间保留',
     fr: 'mileage est conservé',
+    es: 'el millaje se conserva',
   },
   intro_p4_mid: {
     en: ' across banners.',
@@ -103,6 +115,7 @@ export const LABELS = {
     kr: '된다는 것입니다.',
     zh: '。',
     fr: ' entre les banners.',
+    es: ' entre banners.',
   },
   intro_p4_why: {
     en: 'Why is that useful?',
@@ -110,6 +123,7 @@ export const LABELS = {
     kr: '이것이 유용한 이유는?',
     zh: '这有什么用？',
     fr: 'En quoi est-ce utile ?',
+    es: '¿Por qué es útil esto?',
   },
   intro_p4_scenario: {
     en: "Imagine you do a 10-recruit, get the unit, and also hit the mileage cap. If you're pulling for collection, you can ",
@@ -117,6 +131,7 @@ export const LABELS = {
     kr: '10연 모집에서 영웅을 획득하고 동시에 마일리지 상한에 도달했다고 가정해 봅시다. 수집 목적으로 뽑고 있다면, ',
     zh: '假设您满足指定招募的最后10连抽到了同伴。如果是为了收集，便可以',
     fr: "Imaginez que vous fassiez un Recruit x 10, obteniez l'unité et atteigniez aussi le plafond de mileage. Si vous faites des pulls pour la collection, vous pouvez ",
+    es: 'Imagina que haces un reclutamiento x10, consigues la unidad, y además alcanzas el límite de millaje. Si estás tirando por coleccionar, puedes ',
   },
   intro_p4_bold2: {
     en: 'save your mileage',
@@ -124,6 +139,7 @@ export const LABELS = {
     kr: '마일리지를 저장',
     zh: '保留点数',
     fr: 'conserver votre mileage',
+    es: 'guardar tu millaje',
   },
   intro_p4_end: {
     en: " for a future banner with a unit you're more interested in — or just keep it to secure your next target more efficiently.",
@@ -131,6 +147,7 @@ export const LABELS = {
     kr: '해서 더 관심 있는 영웅의 미래 배너에 사용하거나, 다음 목표를 더 효율적으로 확보할 수 있습니다.',
     zh: '用于未来更感兴趣的同伴卡池，高效地保证下一个目标。',
     fr: ' pour une future banner avec une unité qui vous intéresse davantage, ou simplement le garder pour sécuriser votre prochaine cible plus efficacement.',
+    es: ' para un futuro banner con una unidad que te interese más — o simplemente conservarlo para conseguir tu próximo objetivo de forma más eficiente.',
   },
 
   // ── Recruitment guarantee (pity, 2026-08-25) ──
@@ -141,6 +158,7 @@ export const LABELS = {
     kr: '마일리지만이 유일한 안전장치는 아닙니다. 대부분의 배너에는 ',
     zh: '指定招募并非唯一的保障机制。大多数卡池还拥有',
     fr: "Le mileage n'est pas le seul filet de sécurité : la plupart des banners disposent aussi d'une ",
+    es: 'El millaje no es la única red de seguridad: la mayoría de los banners también tienen una ',
   },
   intro_p5_highlight: {
     en: 'recruitment guarantee',
@@ -148,6 +166,7 @@ export const LABELS = {
     kr: '모집 확정 시스템',
     zh: '招募保底系统',
     fr: 'garantie de Recruit',
+    es: 'garantía de reclutamiento',
   },
   intro_p5_mid: {
     en: ' — a real pity counter. The target hero is guaranteed within ',
@@ -155,6 +174,7 @@ export const LABELS = {
     kr: '(이른바 천장)이 적용되어, ',
     zh: '，即真正的保底：',
     fr: ' — un vrai compteur de pity. Le Héros ciblé est garanti en ',
+    es: ' — un contador de compensación real. El héroe objetivo está garantizado dentro de ',
   },
   intro_p5_bold: {
     en: '100 recruits',
@@ -162,6 +182,7 @@ export const LABELS = {
     kr: '100회 모집 이내',
     zh: '100次招募以内',
     fr: '100 Recruits',
+    es: '100 reclutamientos',
   },
   intro_p5_after: {
     en: '. It runs entirely separately from mileage: obtaining a hero through the guarantee consumes no mileage at all.',
@@ -169,6 +190,7 @@ export const LABELS = {
     kr: '에 대상 영웅 획득이 확정됩니다. 마일리지와는 완전히 별개로 작동하며, 확정으로 영웅을 획득해도 마일리지는 전혀 소모되지 않습니다.',
     zh: '必定获得目标同伴。该系统与指定招募完全独立运作，通过保底获得同伴不会消耗任何点数。',
     fr: ' maximum. Ce système fonctionne totalement à part du mileage : obtenir un Héros par la garantie ne consomme aucun mileage.',
+    es: '. Funciona completamente por separado del millaje: obtener un héroe mediante la garantía no consume nada de millaje.',
   },
 
   guarantee_rules_label: {
@@ -177,6 +199,7 @@ export const LABELS = {
     kr: '규칙',
     zh: '规则',
     fr: 'LES RÈGLES',
+    es: 'LAS REGLAS',
   },
   guarantee_rule_scope: {
     en: 'Progress is tracked per banner and is never shared between banners.',
@@ -184,6 +207,7 @@ export const LABELS = {
     kr: '진행도는 배너별로 관리되며 다른 배너와 공유되지 않습니다.',
     zh: '进度按卡池分别记录，不同卡池之间不共享。',
     fr: 'La progression est suivie banner par banner et ne se partage jamais entre elles.',
+    es: 'El progreso se rastrea por banner y nunca se comparte entre banners.',
   },
   guarantee_rule_early: {
     en: 'Getting the target hero before the 100th recruit still counts as one guarantee, and ends that progress.',
@@ -191,6 +215,7 @@ export const LABELS = {
     kr: '100회에 도달하기 전에 대상 영웅을 획득해도 확정 1회로 계산되며 해당 진행도는 종료됩니다.',
     zh: '在第100次之前获得目标同伴同样计为1次保底，该次进度随之结束。',
     fr: 'Obtenir le Héros ciblé avant le 100e Recruit compte quand même comme une garantie, et met fin à cette progression.',
+    es: 'Obtener el héroe objetivo antes del reclutamiento 100 igualmente cuenta como una garantía, y termina ese progreso.',
   },
   guarantee_rule_reset: {
     en: 'On temporary banners, both the guarantees used and the current progress reset when the banner ends — your mileage does not.',
@@ -198,6 +223,7 @@ export const LABELS = {
     kr: '기간 한정 배너에서는 사용한 확정 횟수와 진행도가 배너 종료 시 초기화됩니다 — 마일리지는 그대로 유지됩니다.',
     zh: '限时卡池结束时，已使用的保底次数和当前进度都会重置——但点数不会。',
     fr: 'Sur les banners temporaires, les garanties utilisées et la progression en cours sont remises à zéro à la fin de la banner — pas votre mileage.',
+    es: 'En los banners temporales, tanto las garantías usadas como el progreso actual se reinician cuando el banner termina — tu millaje no.',
   },
   guarantee_rule_screen: {
     en: 'The guarantees used and the recruits left before the next one are shown on the Recruitment screen.',
@@ -205,6 +231,7 @@ export const LABELS = {
     kr: '사용한 확정 횟수와 다음 확정까지 남은 모집 횟수는 모집 화면에서 확인할 수 있습니다.',
     zh: '已使用的保底次数和距离下次保底的剩余次数可在招募界面查看。',
     fr: "Le nombre de garanties utilisées et les Recruits restants avant la prochaine s'affichent sur l'écran de Recruit.",
+    es: 'Las garantías usadas y los reclutamientos restantes antes de la siguiente se muestran en la pantalla de Reclutamiento.',
   },
   guarantee_rule_startdash: {
     en: 'Start Dash Recruitment is the exception: it has no guarantee.',
@@ -212,6 +239,7 @@ export const LABELS = {
     kr: '선별 동료 영입은 예외로, 확정 시스템이 적용되지 않습니다.',
     zh: '甄选招募是例外，不适用保底系统。',
     fr: "Le Start Dash fait exception : il n'a pas de garantie.",
+    es: 'El Reclutamiento Start Dash es la excepción: no tiene garantía.',
   },
 
   // ── Banner tabs ──
@@ -223,6 +251,7 @@ export const LABELS = {
       kr: '커스텀 픽업',
       zh: '自选UP',
       fr: 'Custom Rate Up',
+      es: 'Custom Rate Up',
     },
     heading: {
       en: 'Custom Rate Up Banner',
@@ -230,6 +259,7 @@ export const LABELS = {
       kr: '커스텀 픽업 모집',
       zh: '自选UP招募',
       fr: 'Custom Rate Up Banner',
+      es: 'Banner Custom Rate Up',
     },
     specialFeature: {
       en: 'Using Recruit x 10 guarantees at least one 2★ hero',
@@ -237,6 +267,7 @@ export const LABELS = {
       kr: '10연 모집 시 2★ 이상 영웅 1체 이상 확정',
       zh: '10连招募保底至少1个2★以上英雄',
       fr: 'Utiliser Recruit x 10 garantit au moins un Héros 2★',
+      es: 'Usar Reclutar x 10 garantiza al menos un héroe 2★',
     },
     pity: {
       en: 'Every 100 recruits, one of your 3 selected heroes is guaranteed, picked at random. This one repeats every 100 recruits, with no limit.',
@@ -244,6 +275,7 @@ export const LABELS = {
       kr: '100회 모집마다 선택한 3명의 영웅 중 하나가 무작위로 확정됩니다. 횟수 제한 없이 100회마다 반복됩니다.',
       zh: '每100次招募必定获得所选3名同伴中的随机1名。无次数上限，每100次重复触发。',
       fr: 'Tous les 100 Recruits, un de vos 3 Héros sélectionnés est garanti, tiré au hasard. Celle-ci se répète tous les 100 Recruits, sans limite.',
+      es: 'Cada 100 reclutamientos, uno de tus 3 héroes seleccionados está garantizado, elegido al azar. Esto se repite cada 100 reclutamientos, sin límite.',
     },
     desc: {
       en: 'This banner is always available. You can choose up to 3 characters to force the drop rate of those.',
@@ -251,14 +283,23 @@ export const LABELS = {
       kr: '이 배너는 상시 운영됩니다. 최대 3명의 캐릭터를 선택하여 픽업 대상으로 지정할 수 있습니다.',
       zh: '此卡池常驻开放。你可以选择最多3个角色作为UP目标。',
       fr: "Cette banner est toujours disponible. Vous pouvez choisir jusqu'à 3 personnages pour forcer leur taux de drop.",
+      es: 'Este banner siempre está disponible. Puedes elegir hasta 3 personajes para forzar la tasa de aparición de esos.',
     },
-    example_label: { en: 'Example:', jp: '例：', kr: '예시:', zh: '例如：', fr: 'Exemple :' },
+    example_label: {
+      en: 'Example:',
+      jp: '例：',
+      kr: '예시:',
+      zh: '例如：',
+      fr: 'Exemple :',
+      es: 'Ejemplo:',
+    },
     example_before: {
       en: ' If you select ',
       jp: ' ',
       kr: ' ',
       zh: ' 选择',
       fr: ' Si vous sélectionnez ',
+      es: ' Si seleccionas ',
     },
     example_after: {
       en: ", you can't drop another 3{star} except for those 3.",
@@ -266,6 +307,7 @@ export const LABELS = {
       kr: '를 선택하면 이 3명 외에는 3{star}가 배출되지 않습니다.',
       zh: '后，3{star}只会出这3个角色。',
       fr: ", vous ne pouvez pas obtenir d'autres 3{star} en dehors de ces 3.",
+      es: ', no puedes obtener otro 3{star} excepto esos 3.',
     },
     warning: {
       en: "It's not recommended to use Ether on this banner",
@@ -273,6 +315,7 @@ export const LABELS = {
       kr: '이 배너에서 에테르 사용은 권장되지 않습니다',
       zh: '不建议在此卡池使用以太',
       fr: "Il n'est pas recommandé d'utiliser de l'Ether sur cette banner",
+      es: 'No se recomienda usar Éter en este banner',
     },
   },
 
@@ -283,6 +326,7 @@ export const LABELS = {
       kr: '픽업 모집',
       zh: 'UP招募',
       fr: 'Rate Up Banner',
+      es: 'Banner Rate Up',
     },
     heading: {
       en: 'Rate Up Banner',
@@ -290,6 +334,7 @@ export const LABELS = {
       kr: '픽업 모집',
       zh: 'UP招募',
       fr: 'Rate Up Banner',
+      es: 'Banner Rate Up',
     },
     specialFeature: {
       en: 'Using Recruit x 10 guarantees at least one 2★ hero',
@@ -297,6 +342,7 @@ export const LABELS = {
       kr: '10연 모집 시 2★ 이상 영웅 1체 이상 확정',
       zh: '10连招募保底至少1个2★以上英雄',
       fr: 'Utiliser Recruit x 10 garantit au moins un Héros 2★',
+      es: 'Usar Reclutar x 10 garantiza al menos un héroe 2★',
     },
     pity: {
       en: 'The featured hero is guaranteed within 100 recruits, twice at most per banner. Guarantees used and progress reset when the banner ends.',
@@ -304,6 +350,7 @@ export const LABELS = {
       kr: '픽업 영웅은 100회 모집 이내에 확정됩니다. 배너당 최대 2회까지이며, 사용 횟수와 진행도는 배너 종료 시 초기화됩니다.',
       zh: 'UP同伴在100次招募以内必定获得，每个卡池最多2次。已使用次数和进度在卡池结束时重置。',
       fr: 'Le Héros en focus est garanti en 100 Recruits maximum, deux fois au plus par banner. Garanties utilisées et progression sont remises à zéro à la fin de la banner.',
+      es: 'El héroe destacado está garantizado dentro de 100 reclutamientos, como máximo dos veces por banner. Las garantías usadas y el progreso se reinician cuando el banner termina.',
     },
     desc: {
       en: 'This banner is temporary and usually lasts ',
@@ -311,15 +358,24 @@ export const LABELS = {
       kr: '이 배너는 기간 한정으로, 보통 ',
       zh: '此卡池为限时开放，通常持续',
       fr: 'Cette banner est temporaire et dure généralement ',
+      es: 'Este banner es temporal y generalmente dura ',
     },
-    desc_duration: { en: '2 weeks', jp: '2週間', kr: '2주간', zh: '2周', fr: '2 semaines' },
-    desc_after: { en: '.', jp: '開催されます。', kr: ' 운영됩니다.', zh: '。', fr: '.' },
+    desc_duration: {
+      en: '2 weeks',
+      jp: '2週間',
+      kr: '2주간',
+      zh: '2周',
+      fr: '2 semaines',
+      es: '2 semanas',
+    },
+    desc_after: { en: '.', jp: '開催されます。', kr: ' 운영됩니다.', zh: '。', fr: '.', es: '.' },
     warning: {
       en: "It's not recommended to use Ether on this banner",
       jp: 'このバナーでエーテルを使用することは推奨されません',
       kr: '이 배너에서 에테르 사용은 권장되지 않습니다',
       zh: '不建议在此卡池使用以太',
       fr: "Il n'est pas recommandé d'utiliser de l'Ether sur cette banner",
+      es: 'No se recomienda usar Éter en este banner',
     },
   },
 
@@ -330,6 +386,7 @@ export const LABELS = {
       kr: '프리미엄 모집',
       zh: '精选招募',
       fr: 'Premium Banner',
+      es: 'Banner Premium',
     },
     heading: {
       en: 'Premium Banner',
@@ -337,6 +394,7 @@ export const LABELS = {
       kr: '프리미엄 모집',
       zh: '精选招募',
       fr: 'Premium Banner',
+      es: 'Banner Premium',
     },
     pity: {
       en: 'The selected Demiurge hero is guaranteed within 100 recruits, once per Demiurge hero. Progress is tracked separately for each of them: switching your selection resets nothing.',
@@ -344,6 +402,7 @@ export const LABELS = {
       kr: '선택한 데미우르고스 영웅은 100회 모집 이내에 확정되며, 영웅 1명당 1회까지 이용할 수 있습니다. 진행도는 영웅별로 따로 기록되므로 선택을 바꿔도 초기화되지 않습니다.',
       zh: '所选创世之神同伴在100次招募以内必定获得，每名创世之神同伴限1次。进度按同伴分别记录，更换所选同伴不会重置进度。',
       fr: 'Le Héros Demiurge sélectionné est garanti en 100 Recruits maximum, une fois par Héros Demiurge. La progression est suivie séparément pour chacun : changer de sélection ne remet rien à zéro.',
+      es: 'El héroe Demiurgo seleccionado está garantizado dentro de 100 reclutamientos, una vez por héroe Demiurgo. El progreso se registra por separado para cada uno de ellos: cambiar tu selección no reinicia nada.',
     },
     subtext: {
       en: 'Demiurge heroes have about half the drop rate of regular off-banner heroes',
@@ -351,6 +410,7 @@ export const LABELS = {
       kr: '데미우르고스 영웅의 배출 확률은 일반 비픽업 3★의 약 절반입니다',
       zh: '创世之神同伴的掉率约为普通非UP 3★同伴的一半',
       fr: 'Les Héros Demiurge ont environ la moitié du taux de drop des Héros off-banner habituels',
+      es: 'Los héroes Demiurgo tienen aproximadamente la mitad de la tasa de aparición de los héroes normales fuera de banner',
     },
     desc_bold: {
       en: 'Permanent banner',
@@ -358,6 +418,7 @@ export const LABELS = {
       kr: '상시 배너',
       zh: '常驻卡池',
       fr: 'Banner permanente',
+      es: 'Banner permanente',
     },
     desc: {
       en: ' - The only regular way (besides events like Demiurge Contract) to get Demiurge Heroes.',
@@ -365,6 +426,7 @@ export const LABELS = {
       kr: ' - 데미우르고스 영웅을 획득할 수 있는 유일한 일반적인 방법입니다 (데미우르고스 계약 등의 이벤트 제외).',
       zh: ' - 是获取创世之神同伴的唯一常规途径（除创世之神契约等活动外）。',
       fr: " - Le seul moyen régulier (en dehors des événements comme le Demiurge Contract) d'obtenir des Demiurge Heroes.",
+      es: ' - La única forma habitual (aparte de eventos como Demiurge Contract) de conseguir Héroes Demiurgo.',
     },
     note: {
       en: 'These heroes are extremely powerful but also very rare. Demiurge heroes benefit more from transcendence overall, but some are strong right from base 3{star}.',
@@ -372,6 +434,7 @@ export const LABELS = {
       kr: '이 영웅들은 매우 강력하지만 배출 확률도 매우 낮습니다. 데미우르고스 영웅은 초월의 효과가 크지만, 기본 3{star}에서도 강력한 영웅들이 있습니다.',
       zh: '这些同伴非常强力但掉率极低：她们的超越获益更多，部分在基础3{star}时就很强。',
       fr: 'Ces Héros sont extrêmement puissants mais aussi très rares. Les Héros Demiurge bénéficient davantage de la transcendance, mais certains sont forts dès leur version de base 3{star}.',
+      es: 'Estos héroes son extremadamente poderosos pero también muy raros. Los héroes Demiurgo se benefician más de la trascendencia en general, aunque algunos son fuertes desde la base 3{star}.',
     },
   },
 
@@ -382,6 +445,7 @@ export const LABELS = {
       kr: '한정 모집',
       zh: '限定招募',
       fr: 'Limited Banner',
+      es: 'Banner Limitado',
     },
     heading: {
       en: 'Limited Banner',
@@ -389,6 +453,7 @@ export const LABELS = {
       kr: '한정 모집',
       zh: '限定招募',
       fr: 'Limited Banner',
+      es: 'Banner Limitado',
     },
     specialFeature: {
       en: 'Using Recruit x 10 guarantees at least one 2★ hero',
@@ -396,6 +461,7 @@ export const LABELS = {
       kr: '10연 모집 시 2★ 이상 영웅 1체 이상 확정',
       zh: '10连招募保底至少1个2★以上英雄',
       fr: 'Utiliser Recruit x 10 garantit au moins un Héros 2★',
+      es: 'Usar Reclutar x 10 garantiza al menos un héroe 2★',
     },
     pity: {
       en: 'The featured hero is guaranteed within 100 recruits, twice at most per banner — Seasonal, Seasonal Limited Hero Selection, Festival and Dimensional Crossroads each count separately. Everything resets when the banner ends.',
@@ -403,6 +469,7 @@ export const LABELS = {
       kr: '픽업 영웅은 100회 모집 이내에 확정되며, 배너당 최대 2회까지 이용할 수 있습니다. 시즈널, 시즈널 한정 영웅 선택, 페스티벌, 차원의 교차점은 각각 별개로 계산됩니다. 배너 종료 시 모두 초기화됩니다.',
       zh: 'UP同伴在100次招募以内必定获得，每个卡池最多2次。季节、季节限定同伴选择、节日和次元交叉点各自独立计算，卡池结束时全部重置。',
       fr: 'Le Héros en focus est garanti en 100 Recruits maximum, deux fois au plus par banner — Seasonal, Seasonal Limited Hero Selection, Festival et Dimensional Crossroads comptent chacune séparément. Tout est remis à zéro à la fin de la banner.',
+      es: 'El héroe destacado está garantizado dentro de 100 reclutamientos, un máximo de dos veces por banner — Seasonal, Seasonal Limited Hero Selection, Festival y Dimensional Crossroads cuentan cada uno por separado. Todo se reinicia cuando termina el banner.',
     },
     desc_bold: {
       en: 'Temporary banner',
@@ -410,6 +477,7 @@ export const LABELS = {
       kr: '기간 한정 배너',
       zh: '限时卡池',
       fr: 'Banner temporaire',
+      es: 'Banner temporal',
     },
     desc: {
       en: ' - The only way to obtain Limited Heroes.',
@@ -417,6 +485,7 @@ export const LABELS = {
       kr: ' - 한정 영웅을 획득할 수 있는 유일한 방법입니다.',
       zh: ' - 是获取限定同伴的唯一途径。',
       fr: " - Le seul moyen d'obtenir les Limited Heroes.",
+      es: ' - La única forma de obtener Héroes Limitados.',
     },
     // « Festival » : le nom du jeu (`OUTER_FES`) et celui du tag `festival` ;
     // « Limited » est le GROUPE des trois, pas l'une d'elles.
@@ -426,6 +495,7 @@ export const LABELS = {
       kr: '페스티벌:',
       zh: '限定:',
       fr: 'Festival :',
+      es: 'Festival:',
     },
     type_limited_desc: {
       en: 'Classic time-limited heroes',
@@ -433,6 +503,7 @@ export const LABELS = {
       kr: '기간 한정 일반 영웅',
       zh: '常规限时同伴',
       fr: 'Héros classiques à durée limitée',
+      es: 'Héroes clásicos por tiempo limitado',
     },
     type_seasonal_label: {
       en: 'Seasonal:',
@@ -440,6 +511,7 @@ export const LABELS = {
       kr: '시즌:',
       zh: '季节：',
       fr: 'Seasonal :',
+      es: 'Seasonal:',
     },
     type_seasonal_desc: {
       en: 'Heroes tied to yearly events like Halloween or Christmas',
@@ -447,14 +519,23 @@ export const LABELS = {
       kr: '할로윈, 크리스마스 등 시즌 이벤트 관련 영웅',
       zh: '与万圣节、圣诞节等年度活动相关的同伴',
       fr: 'Héros liés aux événements annuels comme Halloween ou Noël',
+      es: 'Héroes vinculados a eventos anuales como Halloween o Navidad',
     },
-    type_collab_label: { en: 'Collab:', jp: 'コラボ:', kr: '콜라보:', zh: '联动:', fr: 'Collab :' },
+    type_collab_label: {
+      en: 'Collab:',
+      jp: 'コラボ:',
+      kr: '콜라보:',
+      zh: '联动:',
+      fr: 'Collab :',
+      es: 'Collab:',
+    },
     type_collab_desc: {
       en: 'Heroes from crossovers with other licenses (least likely to return)',
       jp: '他作品とのコラボヒーロー。復刻の可能性が最も低い',
       kr: '다른 작품과의 콜라보 영웅. 복각 가능성이 가장 낮음',
       zh: '与其他作品联动的同伴，复刻可能性最低',
       fr: "Héros issus de crossovers avec d'autres licences (les moins susceptibles de revenir)",
+      es: 'Héroes de crossovers con otras licencias (los menos propensos a volver)',
     },
     duration_before: {
       en: 'This banner typically runs for ',
@@ -462,6 +543,7 @@ export const LABELS = {
       kr: '이 배너는 보통 ',
       zh: '此卡池通常持续',
       fr: 'Cette banner dure généralement ',
+      es: 'Este banner normalmente dura ',
     },
     duration_value: {
       en: '2 to 4 weeks',
@@ -469,6 +551,7 @@ export const LABELS = {
       kr: '2~4주간',
       zh: '2至4周',
       fr: '2 à 4 semaines',
+      es: '2 a 4 semanas',
     },
     duration_after: {
       en: '. Like Demiurge heroes, Limited units are (usually) extremely powerful, with their strongest abilities unlocking at high transcendence levels.',
@@ -476,6 +559,7 @@ export const LABELS = {
       kr: ' 운영됩니다. 데미우르고스 영웅과 마찬가지로, 한정 영웅은 (대체로) 매우 강력하며, 높은 초월 단계에서 가장 강력한 능력이 해금됩니다.',
       zh: '。与创世之神同伴类似，限定同伴（通常）非常强力。其最强能力在最高超越等级解锁。',
       fr: '. Comme les Demiurge Heroes, les unités Limited sont (en général) extrêmement puissantes, leurs capacités les plus fortes se débloquant à un niveau de transcendance élevé.',
+      es: '. Al igual que los héroes Demiurgo, las unidades Limitadas son (por lo general) extremadamente poderosas, con sus habilidades más fuertes desbloqueándose en niveles altos de trascendencia.',
     },
     heroes_list_title: {
       en: 'List of Limited Heroes and their release dates:',
@@ -483,6 +567,7 @@ export const LABELS = {
       kr: '한정 영웅 목록 및 출시일:',
       zh: '限定列表列表及发布日期:',
       fr: 'Liste des Limited Heroes et leurs dates de sortie :',
+      es: 'Lista de Héroes Limitados y sus fechas de lanzamiento:',
     },
     ticket_note: {
       en: "This item exists but hasn't been used yet",
@@ -490,6 +575,7 @@ export const LABELS = {
       kr: '이 아이템은 존재하지만 아직 사용된 적 없음',
       zh: '此道具存在但尚未使用过',
       fr: "Cet objet existe mais n'a pas encore été utilisé",
+      es: 'Este objeto existe pero aún no se ha usado',
     },
   },
 
@@ -500,6 +586,7 @@ export const LABELS = {
       kr: '차원 물자 호출',
       zh: '次元物资召唤',
       fr: 'Dimensional Supply',
+      es: 'Suministro Dimensional',
     },
     heading: {
       en: 'Dimensional Supply Banner',
@@ -507,6 +594,7 @@ export const LABELS = {
       kr: '차원 물자 호출 배너',
       zh: '次元物资召唤卡池',
       fr: 'Banner Dimensional Supply',
+      es: 'Banner de Suministro Dimensional',
     },
     desc_bold: {
       en: 'Permanent banner',
@@ -514,6 +602,7 @@ export const LABELS = {
       kr: '상시 배너',
       zh: '常驻卡池',
       fr: 'Banner permanente',
+      es: 'Banner permanente',
     },
     desc: {
       en: ' - The only banner that recruits GEAR instead of heroes: 6★ Legendary gear, Talisman Selection Chests and upgrade materials.',
@@ -521,6 +610,7 @@ export const LABELS = {
       kr: ' - 영웅이 아니라 장비를 뽑는 유일한 배너입니다. 6★ 전설 장비, 탈리스만 선택 상자, 육성 재료가 대상입니다.',
       zh: '——唯一抽装备而非同伴的卡池：6★传说装备、护身符选择箱和培养材料。',
       fr: " - La seule banner qui recrute de l'ÉQUIPEMENT et non des Héros : équipement Légendaire 6★, coffres de Talisman et matériaux d'amélioration.",
+      es: ' - El único banner que recluta EQUIPO en lugar de héroes: equipo Legendario 6★, cofres de Selección de Talismán y materiales de mejora.',
     },
     unlock: {
       en: 'Unlocks after clearing Story Normal 1-3.',
@@ -528,6 +618,7 @@ export const LABELS = {
       kr: '스토리 노말 1-3을 클리어하면 개방됩니다.',
       zh: '通关剧情普通1-3后解锁。',
       fr: "Se débloque en terminant l'histoire Normal 1-3.",
+      es: 'Se desbloquea al completar Story Normal 1-3.',
     },
     settings_label: {
       en: 'Rate-Up Gear settings:',
@@ -535,6 +626,7 @@ export const LABELS = {
       kr: '픽업 장비 설정:',
       zh: '已选装备设置：',
       fr: "Réglage de l'équipement en focus :",
+      es: 'Configuración de Rate-Up Gear:',
     },
     settings: {
       en: 'Before supplying, you pick 3 pieces of gear and set the main stat and substats you want on them. Those 3 are what the 2% Rate-Up Gear rate points to.',
@@ -542,6 +634,7 @@ export const LABELS = {
       kr: '호출 전에 장비 3개를 고르고, 각각의 메인 옵션과 서브 옵션을 설정합니다. 이 3개가 2% 픽업 장비 확률의 대상입니다.',
       zh: '召唤前先选择3件装备，并设定其主属性和副属性。这3件就是2%已选装备概率所指向的对象。',
       fr: "Avant de tirer, vous choisissez 3 pièces d'équipement et réglez le stat principal et les substats voulus. Ce sont ces 3 pièces que vise le taux de 2 %.",
+      es: 'Antes de suministrar, eliges 3 piezas de equipo y configuras la estadística principal y las secundarias que quieres en ellas. Esas 3 son a las que apunta el 2% de la tasa de Equipo con Tasa Aumentada.',
     },
     select_before: {
       en: 'Spending your mileage on Select Gear gives you one of those 3 with exactly the stats you configured, and substat levels rolled between ',
@@ -549,6 +642,7 @@ export const LABELS = {
       kr: '마일리지로 장비 선택을 하면 설정한 그대로의 옵션을 가진 장비 1개를 획득하며, 서브 옵션 레벨은 ',
       zh: '使用点数进行装备选择时，可获得完全按设定属性的1件装备，副属性等级在',
       fr: 'Dépenser votre mileage en Select Gear vous donne une de ces 3 pièces avec exactement les stats réglées, et des niveaux de substat tirés entre ',
+      es: 'Gastar tu millaje en Equipo Seleccionado te da una de esas 3 con exactamente las estadísticas que configuraste, y niveles de estadísticas secundarias generados entre ',
     },
     select_bold: {
       en: '4/3/2/2 and 4/4/3/2',
@@ -556,6 +650,7 @@ export const LABELS = {
       kr: '4/3/2/2 ~ 4/4/3/2',
       zh: '4/3/2/2 ~ 4/4/3/2',
       fr: '4/3/2/2 et 4/4/3/2',
+      es: '4/3/2/2 y 4/4/3/2',
     },
     select_after: {
       en: '. That 4 is what makes this banner special: it is one of the rare sources that can put a 4th yellow segment on a substat, where everything else caps at 3.',
@@ -563,6 +658,7 @@ export const LABELS = {
       kr: ' 범위에서 결정됩니다. 이 4가 이 배너의 특별한 점으로, 다른 곳은 대부분 3에서 멈추는 반면 부옵션에 4번째 노란색 세그먼트를 붙일 수 있는 몇 안 되는 출처입니다.',
       zh: '之间决定。这个4正是本卡池的特别之处：其他来源基本止步于3，而它是少数能让副属性出现第4条黄色条段的来源之一。',
       fr: ". Ce 4 est ce qui rend cette banner particulière : c'est une des rares sources capables de poser un 4e segment jaune sur un substat, là où tout le reste plafonne à 3.",
+      es: '. Ese 4 es lo que hace especial a este banner: es una de las pocas fuentes que puede poner un 4º segmento amarillo en una estadística secundaria, cuando todo lo demás tiene un tope de 3.',
     },
     monthly_label: {
       en: 'MONTHLY CYCLE',
@@ -570,6 +666,7 @@ export const LABELS = {
       kr: '월간 사이클',
       zh: '每月周期',
       fr: 'CYCLE MENSUEL',
+      es: 'CICLO MENSUAL',
     },
     monthly_reset: {
       en: 'Your selection and your progress reset on the 1st of each month. You choose your 3 pieces once per month, and once confirmed they cannot be changed until that reset.',
@@ -577,6 +674,7 @@ export const LABELS = {
       kr: '선택과 진행도는 매월 1일에 초기화됩니다. 장비 3개 선택은 월 1회뿐이며, 확정하면 다음 초기화까지 변경할 수 없습니다.',
       zh: '选择和进度于每月1日重置。每月仅能选择3件装备1次，确认后在下次重置前无法更改。',
       fr: "Votre sélection et votre progression sont remises à zéro le 1er de chaque mois. Vous choisissez vos 3 pièces une fois par mois, et une fois confirmées elles ne changent plus jusqu'à cette remise à zéro.",
+      es: 'Tu selección y tu progreso se reinician el día 1 de cada mes. Eliges tus 3 piezas una vez al mes, y una vez confirmadas no se pueden cambiar hasta ese reinicio.',
     },
     monthly_once: {
       en: 'Each selected piece can be obtained once per month. As soon as one drops, it leaves the pool for the rest of the month.',
@@ -584,6 +682,7 @@ export const LABELS = {
       kr: '선택한 장비는 각각 월 1회까지 획득할 수 있습니다. 획득한 장비는 그달의 남은 기간 동안 추첨 풀에서 빠집니다.',
       zh: '所选装备每月各可获得1次。一旦获得，该装备在当月剩余时间内将移出奖池。',
       fr: "Chaque pièce sélectionnée s'obtient une fois par mois. Dès qu'elle tombe, elle quitte le pool pour le reste du mois.",
+      es: 'Cada pieza seleccionada se puede obtener una vez al mes. En cuanto cae una, sale del pool por el resto del mes.',
     },
     monthly_rate: {
       en: 'The combined 2% never moves — it is split equally between the pieces you have not obtained yet. With two left, each sits at 1%; the last one alone carries the full 2%.',
@@ -591,6 +690,7 @@ export const LABELS = {
       kr: '합계 2%는 그대로입니다 — 아직 획득하지 않은 장비끼리 균등하게 나뉩니다. 2개가 남으면 각각 1%, 마지막 1개는 2%를 전부 가져갑니다.',
       zh: '合计2%的概率不变——它会在尚未获得的装备之间平均分配。剩2件时各为1%，最后1件独占全部2%。',
       fr: 'Les 2 % cumulés ne bougent jamais — ils se répartissent à parts égales entre les pièces pas encore obtenues. À deux restantes, chacune est à 1 % ; la dernière porte les 2 % à elle seule.',
+      es: 'El 2% combinado nunca cambia — se divide equitativamente entre las piezas que aún no has obtenido. Con dos restantes, cada una tiene 1%; la última se queda con el 2% completo.',
     },
     monthly_close: {
       en: 'Once you have all three, Dimensional Supply closes until the next monthly reset.',
@@ -598,6 +698,7 @@ export const LABELS = {
       kr: '3개를 모두 획득하면 다음 월간 초기화까지 차원 물자 호출을 이용할 수 없습니다.',
       zh: '集齐3件后，次元物资召唤将关闭，直到下次每月重置。',
       fr: "Une fois les trois obtenues, la Dimensional Supply ferme jusqu'à la remise à zéro du mois suivant.",
+      es: 'Una vez que tienes las tres, el Suministro Dimensional se cierra hasta el próximo reinicio mensual.',
     },
     monthly_mileage: {
       en: 'Gear taken with mileage does not count toward that monthly progress.',
@@ -605,6 +706,7 @@ export const LABELS = {
       kr: '마일리지로 받은 장비는 이 월간 진행도에 포함되지 않습니다.',
       zh: '用点数换取的装备不计入该每月进度。',
       fr: 'Une pièce prise au mileage ne compte pas dans cette progression mensuelle.',
+      es: 'El equipo obtenido con millaje no cuenta para ese progreso mensual.',
     },
     chips_note: {
       en: 'Independently of mileage, every 150 supplies also grant 100 High-Precision Chips.',
@@ -612,6 +714,7 @@ export const LABELS = {
       kr: '마일리지와 별개로, 150회 호출마다 고정밀 칩 100개를 획득합니다.',
       zh: '与点数无关，每150次召唤还会获得100个高精度芯片。',
       fr: 'Indépendamment du mileage, chaque palier de 150 tirages rapporte aussi 100 High-Precision Chips.',
+      es: 'Independientemente del millaje, cada 150 suministros también otorgan 100 Chips de Alta Precisión.',
     },
   },
 };

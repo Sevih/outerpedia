@@ -2,7 +2,9 @@
   "teams": [
     {
       "title": {
-        "en": "Solo Ember"
+        "en": "Solo Ember",
+        "es": "Ember en solitario",
+        "fr": "Ember solo"
       },
       "element": "fire",
       "slots": [["Ember"]],
@@ -18,7 +20,9 @@
     },
     {
       "title": {
-        "en": "Burn"
+        "en": "Burn",
+        "es": "Quemadura",
+        "fr": "Burn"
       },
       "icon": "IG_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],

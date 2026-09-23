@@ -2,7 +2,9 @@
   "teams": [
     {
       "title": {
-        "en": "Water Striker"
+        "en": "Water Striker",
+        "es": "Atacante de Agua",
+        "fr": "Striker Eau"
       },
       "element": "water",
       "slots": [
@@ -18,17 +20,23 @@
       "notes": [
         {
           "p": {
-            "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video."
+            "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video.",
+            "es": "Hay cierto margen para ir un poco más rápido o más lento que las velocidades indicadas, siempre que se mantenga el mismo orden de movimiento durante todo el combate como se muestra en el video.",
+            "fr": "Il y a une certaine marge de manœuvre pour aller légèrement plus vite ou plus lentement que les vitesses indiquées, tant que cela produit le même ordre de passage tout au long du combat, comme montré dans la vidéo."
           }
         },
         {
           "p": {
-            "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels."
+            "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels.",
+            "es": "La ejecución usa a Traviesa del borde de la piscina Regina 5★ y a Sueño del Caballero de Verano Ember 6★. Los resultados pueden variar con diferentes niveles de trascendencia.",
+            "fr": "L'exécution utilise une Farceur de la Piscine Regina 5★ et un Le Rêve du Chevalier d'Été Ember 6★. Les résultats peuvent varier avec des niveaux de transcendance différents."
           }
         },
         {
           "p": {
-            "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead."
+            "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead.",
+            "es": "Traviesa del borde de la piscina Regina puede no activar Enrage en el jefe incluso al infligir más de 50k de daño — esto parece ocurrir cuando su S1 AoE golpea los orbes, así que apunta al jefe con su S1 en su lugar.",
+            "fr": "Farceur de la Piscine Regina peut ne pas déclencher l'Enrage sur le Chef même en infligeant plus de 50k dégâts — cela semble se produire quand son S1 AoE touche les orbes, donc ciblez plutôt le Chef avec son S1."
           }
         }
       ],
@@ -46,10 +54,14 @@
             },
             "notes": [
               {
-                "en": "268 effectiveness without {I-W/Briareos's Recklessness [Ranger]}"
+                "en": "268 effectiveness without {I-W/Briareos's Recklessness [Ranger]}",
+                "es": "268 de efectividad sin {I-W/Briareos's Recklessness [Ranger]}",
+                "fr": "268 d'Efficacité sans {I-W/Briareos's Recklessness [Ranger]}"
               },
               {
-                "en": "Alternatively you can Burst 3 before her S3 for the effectiveness buff, but you'll then have to skip S2 or S1 on {P/Poolside Trickster Regina} when the boss is broken"
+                "en": "Alternatively you can Burst 3 before her S3 for the effectiveness buff, but you'll then have to skip S2 or S1 on {P/Poolside Trickster Regina} when the boss is broken",
+                "es": "Alternativamente puedes usar Burst 3 antes de su S3 para obtener el bono de efectividad, pero luego tendrás que saltarte S2 o S1 en {P/Poolside Trickster Regina} cuando el jefe esté roto",
+                "fr": "Vous pouvez aussi Burst 3 avant son S3 pour le bonus d'Efficacité, mais vous devrez alors passer S2 ou S1 sur {P/Poolside Trickster Regina} quand le Chef est cassé"
               }
             ]
           },
@@ -65,16 +77,24 @@
             },
             "notes": [
               {
-                "en": "If 5★ or higher, level her EE a few levels at minimum until you can use Burst 3 on her last turn"
+                "en": "If 5★ or higher, level her EE a few levels at minimum until you can use Burst 3 on her last turn",
+                "es": "Si es 5★ o superior, sube su EE al menos unos niveles hasta que puedas usar Burst 3 en su último turno",
+                "fr": "Si 5★ ou plus, montez son EE de quelques niveaux au minimum jusqu'à pouvoir utiliser Burst 3 lors de son dernier tour"
               },
               {
-                "en": "{AS/Revenge} is best, even if you have to use a {S/SPD} accessory over a Penetration accessory"
+                "en": "{AS/Revenge} is best, even if you have to use a {S/SPD} accessory over a Penetration accessory",
+                "es": "{AS/Revenge} es lo mejor, incluso si tienes que usar un accesorio {S/SPD} en lugar de un accesorio de Penetración",
+                "fr": "{AS/Revenge} est le meilleur choix, même s'il faut utiliser un accessoire {S/SPD} plutôt qu'un accessoire de Pénétration"
               },
               {
-                "en": "With very fast gear, {AS/Revenge} with a Penetration accessory is possible while still hitting the minimum {S/SPD} to outspeed the boss on turn 1"
+                "en": "With very fast gear, {AS/Revenge} with a Penetration accessory is possible while still hitting the minimum {S/SPD} to outspeed the boss on turn 1",
+                "es": "Con equipo muy rápido, es posible usar {AS/Revenge} con un accesorio de Penetración mientras se sigue alcanzando el mínimo de {S/SPD} para superar en velocidad al jefe en el turno 1",
+                "fr": "Avec un gear très rapide, {AS/Revenge} avec un accessoire de Pénétration est possible tout en atteignant le minimum de {S/SPD} pour dépasser en vitesse le Chef au tour 1"
               },
               {
-                "en": "If using {AS/Revenge}, try to stay below 160 resilience to always get burned."
+                "en": "If using {AS/Revenge}, try to stay below 160 resilience to always get burned.",
+                "es": "Si usas {AS/Revenge}, intenta mantenerte por debajo de 160 de Resiliencia para quemarte siempre.",
+                "fr": "Si vous utilisez {AS/Revenge}, essayez de rester en dessous de 160 de Résilience pour toujours être brûlé."
               }
             ]
           },
@@ -91,13 +111,19 @@
             },
             "notes": [
               {
-                "en": "2-set {AS/Bursting} with 5★ transcendence minimum to Burst 1 on turn 1"
+                "en": "2-set {AS/Bursting} with 5★ transcendence minimum to Burst 1 on turn 1",
+                "es": "Set 2 piezas {AS/Bursting} con 5★ de trascendencia mínimo para Burst 1 en el turno 1",
+                "fr": "Set 2 pièces {AS/Bursting} avec transcendance 5★ minimum pour Burst 1 au tour 1"
               },
               {
-                "en": "Use {I-T/Sage's Charm}. {I-T/Rogue's Charm} will not proc on targets with invulnerability."
+                "en": "Use {I-T/Sage's Charm}. {I-T/Rogue's Charm} will not proc on targets with invulnerability.",
+                "es": "Usa {I-T/Sage's Charm}. {I-T/Rogue's Charm} no se activará en objetivos con invulnerabilidad.",
+                "fr": "Utilisez {I-T/Sage's Charm}. {I-T/Rogue's Charm} ne se déclenchera pas sur les cibles invulnérables."
               },
               {
-                "en": "Use the {I-A/Chalice of Longing} {S/SPD} accessory"
+                "en": "Use the {I-A/Chalice of Longing} {S/SPD} accessory",
+                "es": "Usa el accesorio {I-A/Chalice of Longing} {S/SPD}",
+                "fr": "Utilisez l'accessoire {I-A/Chalice of Longing} {S/SPD}"
               }
             ]
           },
@@ -112,16 +138,24 @@
             },
             "notes": [
               {
-                "en": "{AS/Patience} or {AS/Defense} set"
+                "en": "{AS/Patience} or {AS/Defense} set",
+                "es": "Set {AS/Patience} o {AS/Defense}",
+                "fr": "Set {AS/Patience} ou {AS/Defense}"
               },
               {
-                "en": "If using {AS/Patience}, there's still a chance you resist the burn"
+                "en": "If using {AS/Patience}, there's still a chance you resist the burn",
+                "es": "Si usas {AS/Patience}, todavía hay una posibilidad de resistir la quemadura",
+                "fr": "Si vous utilisez {AS/Patience}, il y a toujours une chance de résister au burn"
               },
               {
-                "en": "{AS/Defense} set has more consistent results but lower potential than {AS/Patience}"
+                "en": "{AS/Defense} set has more consistent results but lower potential than {AS/Patience}",
+                "es": "El set {AS/Defense} tiene resultados más consistentes pero menor potencial que {AS/Patience}",
+                "fr": "Le set {AS/Defense} donne des résultats plus constants mais un potentiel inférieur à {AS/Patience}"
               },
               {
-                "en": "Use {I-T/Rogue's Charm} or {I-T/Sage's Charm}"
+                "en": "Use {I-T/Rogue's Charm} or {I-T/Sage's Charm}",
+                "es": "Usa {I-T/Rogue's Charm} o {I-T/Sage's Charm}",
+                "fr": "Utilisez {I-T/Rogue's Charm} ou {I-T/Sage's Charm}"
               }
             ]
           }
@@ -136,7 +170,9 @@
     },
     {
       "title": {
-        "en": "Water Mage"
+        "en": "Water Mage",
+        "es": "Mago de Agua",
+        "fr": "Mage Eau"
       },
       "element": "water",
       "slots": [["Edelweiss"], ["Roxie"], ["Fortuna"], ["Core Fusion Veronica"]],
@@ -151,7 +187,8 @@
             "jp": "必要条件:",
             "kr": "필수 조건:",
             "zh": "基本要求:",
-            "fr": "Prérequis généraux :"
+            "fr": "Prérequis généraux :",
+            "es": "Requisitos generales:"
           }
         },
         {
@@ -161,7 +198,8 @@
               "jp": "最低4★超越、チェインスキル最大レベルでチェイン時6 WGダメージ",
               "kr": "최소 4★ 초월, 체인 스킬 최대 레벨로 체인 시 6 WG 데미지",
               "zh": "最低4★超越，连携技能满级在连携时获得6 WG伤害",
-              "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne"
+              "fr": "Transcendance 4★ minimum avec chain skill au niveau max pour 6 de dégâts de WG sur la chaîne",
+              "es": "Trascendencia mínima de 4★ con chain skill de nivel máximo para 6 de daño WG en cadena"
             }
           ]
         },
@@ -171,7 +209,8 @@
             "jp": "重要: 上記の速度を正確に使用し、逸脱しないこと。速度調整は非常に精密で、小さな変動でもターン順の問題で失敗する可能性あり。",
             "kr": "중요: 위에 나열된 정확한 속도를 사용하고 벗어나지 마세요. 속도 튜닝이 매우 정밀해서 작은 변동도 턴 순서 문제로 실패할 수 있습니다.",
             "zh": "重要：使用上面列出的精确速度，不要偏离。速度调整非常精确 - 即使微小的变化也可能因回合顺序问题导致失败。",
-            "fr": "IMPORTANT : utilisez exactement les vitesses listées ci-dessus et ne vous en écartez pas. Le réglage de vitesse est extrêmement précis — même de petites variations peuvent faire échouer la run à cause de problèmes d'ordre de jeu."
+            "fr": "IMPORTANT : utilisez exactement les vitesses listées ci-dessus et ne vous en écartez pas. Le réglage de vitesse est extrêmement précis — même de petites variations peuvent faire échouer la run à cause de problèmes d'ordre de jeu.",
+            "es": "IMPORTANTE: Usa exactamente las velocidades indicadas arriba y no te desvíes de ellas. El ajuste de velocidad es increíblemente preciso: incluso pequeñas variaciones pueden hacer que la run falle por problemas de orden de turnos."
           }
         },
         {
@@ -180,13 +219,15 @@
             "jp": "ヒント: 両方のオーブを同時に倒すと、ギアスのユニット死亡パワーブーストでは1体分としかカウントされない。最大ダメージブーストのため、可能な限りオーブを1体ずつ倒す方が良い。",
             "kr": "팁: 두 오브를 동시에 처치하면 기어스의 유닛 사망 파워 부스트에서 1개로만 카운트됩니다. 최대 데미지 부스트를 위해 가능하면 오브를 하나씩 처치하는 것이 좋습니다.",
             "zh": "提示：同时击杀两个球只算击杀一个球的Geas单位死亡能量提升。为了最大伤害提升，尽可能一个一个击杀球。",
-            "fr": "ASTUCE : tuer les deux orbs en même temps ne compte que comme la destruction d'UN seul orb pour le bonus de puissance du Geas à la mort d'une unité. Il vaut mieux tuer chaque orb un par un dès que possible pour un boost de dégâts maximal."
+            "fr": "ASTUCE : tuer les deux orbs en même temps ne compte que comme la destruction d'UN seul orb pour le bonus de puissance du Geas à la mort d'une unité. Il vaut mieux tuer chaque orb un par un dès que possible pour un boost de dégâts maximal.",
+            "es": "CONSEJO: Matar ambos orbes al mismo tiempo solo cuenta como matar UN orbe para el impulso de poder de Geas al morir una unidad. Es mejor matar cada orbe uno por uno siempre que sea posible para obtener el máximo aumento de daño."
           }
         },
         {
           "p": {
             "en": "TIP: On turn 1, target the boss (not the orbs) with Edelweiss's and Core Fusion Veronica's S3. These AoE skills deal less damage to the orbs when aimed directly at them, so the damage to the orbs may not be enough otherwise.",
-            "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants."
+            "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants.",
+            "es": "CONSEJO: En el turno 1, apunta al jefe (no a los orbes) con el S3 de Edelweiss y Core Fusion Veronica. Estos skills AoE hacen menos daño a los orbes cuando se apuntan directamente a ellos, así que de otro modo el daño a los orbes podría no ser suficiente."
           }
         }
       ],
@@ -211,14 +252,16 @@
                 "jp": "5★でも動作するが、{AS/Bursting}を使わない限り最後のターンでバースト3が使えない",
                 "kr": "5★도 작동하지만 {AS/Bursting} 없이는 마지막 턴에 버스트 3 사용 불가",
                 "zh": "5★也能用但除非使用{AS/Bursting}否则最后一回合无法使用爆发3",
-                "fr": "La 5★ fonctionne encore mais vous ne pouvez pas utiliser le Burst 3 à son dernier tour sauf en utilisant {AS/Bursting}"
+                "fr": "La 5★ fonctionne encore mais vous ne pouvez pas utiliser le Burst 3 à son dernier tour sauf en utilisant {AS/Bursting}",
+                "es": "5★ sigue funcionando pero no puedes usar Burst 3 en su último turno a menos que uses {AS/Bursting}"
               },
               {
                 "en": "If you don't have {I-A/Gorgon's Vanity [Mage]}, you'll probably have to run with {AS/Speed} over {AS/Revenge}",
                 "jp": "{I-A/Gorgon's Vanity [Mage]}がない場合、{AS/Revenge}ではなく{AS/Speed}で運用する必要あり",
                 "kr": "{I-A/Gorgon's Vanity [Mage]}가 없으면 {AS/Revenge} 대신 {AS/Speed}로 운용 필요",
                 "zh": "如果没有{I-A/Gorgon's Vanity [Mage]}，需要用{AS/Speed}而非{AS/Revenge}",
-                "fr": "Si vous n'avez pas {I-A/Gorgon's Vanity [Mage]}, vous devrez probablement jouer avec {AS/Speed} plutôt que {AS/Revenge}"
+                "fr": "Si vous n'avez pas {I-A/Gorgon's Vanity [Mage]}, vous devrez probablement jouer avec {AS/Speed} plutôt que {AS/Revenge}",
+                "es": "Si no tienes {I-A/Gorgon's Vanity [Mage]}, probablemente tengas que usar {AS/Speed} en lugar de {AS/Revenge}"
               }
             ]
           },
@@ -240,14 +283,16 @@
                 "jp": "{S/SPD}は正確に288、そうでないとターン順が崩れる",
                 "kr": "{S/SPD} 정확히 288, 그렇지 않으면 턴 순서가 틀어짐",
                 "zh": "{S/SPD}必须正好288，否则回合顺序会乱",
-                "fr": "Exactement 288 {S/SPD}, sinon l'ordre de jeu sera faussé."
+                "fr": "Exactement 288 {S/SPD}, sinon l'ordre de jeu sera faussé.",
+                "es": "288 {S/SPD} exactos, de lo contrario el orden de turnos se verá alterado."
               },
               {
                 "en": "Ideally 6★ for extra AP on battle start",
                 "jp": "6★が理想（戦闘開始時に追加AP）",
                 "kr": "6★ 이상적 (전투 시작 시 추가 AP)",
                 "zh": "理想6★（战斗开始时额外AP）",
-                "fr": "Idéalement 6★ pour de l'AP supplémentaire en début de combat"
+                "fr": "Idéalement 6★ pour de l'AP supplémentaire en début de combat",
+                "es": "Idealmente 6★ para AP extra al inicio del combate"
               }
             ]
           },
@@ -267,14 +312,16 @@
                 "jp": "{I-A/Queen of Prism}のシールドで2ターン燃焼を2回耐えられるHP必要",
                 "kr": "{I-A/Queen of Prism}의 실드로 2턴 화상 2번을 버틸 HP 필요",
                 "zh": "需要足够HP用{I-A/Queen of Prism}的护盾扛住两次2回合燃烧",
-                "fr": "A besoin d'assez de HP pour survivre à deux burns de 2 tours avec {I-A/Queen of Prism}"
+                "fr": "A besoin d'assez de HP pour survivre à deux burns de 2 tours avec {I-A/Queen of Prism}",
+                "es": "Necesita suficiente Vida para sobrevivir a dos quemaduras de 2 turnos con {I-A/Queen of Prism}"
               },
               {
                 "en": "Without {I-A/Queen of Prism} have her max HP be lower than {P/Roxie} so she gets a shield from {P/Core Fusion Veronica} later (meaning you only tank 1-turn burns)",
                 "jp": "{I-A/Queen of Prism}なしの場合、最大HPを{P/Roxie}より低くして{P/Core Fusion Veronica}から後でシールドを受ける（1ターン燃焼だけ耐える）",
                 "kr": "{I-A/Queen of Prism} 없으면 최대 HP를 {P/Roxie}보다 낮게 해서 나중에 {P/Core Fusion Veronica}에게서 실드 받기 (1턴 화상만 버팀)",
                 "zh": "没有{I-A/Queen of Prism}时让最大HP低于{P/Roxie}以便之后从{P/Core Fusion Veronica}获得护盾（只需扛1回合燃烧）",
-                "fr": "Sans {I-A/Queen of Prism}, faites en sorte que ses HP max soient inférieurs à ceux de {P/Roxie} pour qu'elle reçoive un bouclier de {P/Core Fusion Veronica} plus tard (ce qui veut dire que vous n'encaissez que des burns de 1 tour)"
+                "fr": "Sans {I-A/Queen of Prism}, faites en sorte que ses HP max soient inférieurs à ceux de {P/Roxie} pour qu'elle reçoive un bouclier de {P/Core Fusion Veronica} plus tard (ce qui veut dire que vous n'encaissez que des burns de 1 tour)",
+                "es": "Sin {I-A/Queen of Prism}, haz que su Vida máxima sea menor que {P/Roxie} para que reciba un escudo de {P/Core Fusion Veronica} más tarde (lo que significa que solo tankeas quemaduras de 1 turno)"
               }
             ]
           },
@@ -292,14 +339,16 @@
                 "jp": "EE+10は必須ではないが、持っている場合は{I-A/Chalice of Longing}アクセサリーを使わない（ターン順が崩れる）",
                 "kr": "EE+10 필수 아님, 있으면 {I-A/Chalice of Longing} 악세서리 사용 금지 (턴 순서가 틀어짐)",
                 "zh": "EE+10非必需，但如果有就不要用{I-A/Chalice of Longing}饰品（否则回合顺序会乱）",
-                "fr": "EE+10 non requise, mais si vous l'avez, n'utilisez pas l'accessoire {I-A/Chalice of Longing} sinon l'ordre de jeu sera faussé."
+                "fr": "EE+10 non requise, mais si vous l'avez, n'utilisez pas l'accessoire {I-A/Chalice of Longing} sinon l'ordre de jeu sera faussé.",
+                "es": "EE+10 no es necesario, pero si lo tienes, no uses el accesorio {I-A/Chalice of Longing}, de lo contrario el orden de turnos se verá alterado."
               },
               {
                 "en": "{I-A/Chalice of Longing} is fine without EE+10",
                 "jp": "EE+10なしなら{I-A/Chalice of Longing}は使用可",
                 "kr": "EE+10 없으면 {I-A/Chalice of Longing} 사용 가능",
                 "zh": "没有EE+10时可以用{I-A/Chalice of Longing}",
-                "fr": "{I-A/Chalice of Longing} convient sans EE+10"
+                "fr": "{I-A/Chalice of Longing} convient sans EE+10",
+                "es": "{I-A/Chalice of Longing} está bien sin EE+10"
               }
             ]
           }
@@ -314,7 +363,9 @@
     },
     {
       "title": {
-        "en": "GBeth"
+        "en": "GBeth",
+        "es": "GBeth",
+        "fr": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],

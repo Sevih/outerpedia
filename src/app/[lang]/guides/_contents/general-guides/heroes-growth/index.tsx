@@ -157,6 +157,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
     kr: '기본 ATK / DEF / HP 보너스',
     zh: '基础 ATK / DEF / HP 加成',
     fr: 'bonus de base ATK / DEF / HP',
+    es: 'bono base de Ataque / Defensa / Vida',
   };
 
   const TableShell = ({ head, children }: { head: ReactNode; children: ReactNode }) => (

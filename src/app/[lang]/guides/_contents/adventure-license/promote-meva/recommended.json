@@ -6,7 +6,8 @@
       "jp": "{D/BT_FIXED_DAMAGE}チェーンのスターターとフィニッシャー。",
       "kr": "{D/BT_FIXED_DAMAGE} 체인 스타터와 피니셔.",
       "zh": "{D/BT_FIXED_DAMAGE}连携的起手和终结者。",
-      "fr": "Initiateur et finisseur de chaîne {D/BT_FIXED_DAMAGE}."
+      "fr": "Initiateur et finisseur de chaîne {D/BT_FIXED_DAMAGE}.",
+      "es": "Iniciador y finalizador de cadena de {D/BT_FIXED_DAMAGE}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{D/BT_DOT_CURSE}スペシャリスト。",
       "kr": "{D/BT_DOT_CURSE} 스페셜리스트.",
       "zh": "{D/BT_DOT_CURSE}专家。",
-      "fr": "Spécialistes du {D/BT_DOT_CURSE}."
+      "fr": "Spécialistes du {D/BT_DOT_CURSE}.",
+      "es": "Especialistas en {D/BT_DOT_CURSE}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "全スキルが全体攻撃。",
       "kr": "모든 스킬이 광역기.",
       "zh": "所有技能都是群体攻击。",
-      "fr": "Toutes ses compétences sont en AoE."
+      "fr": "Toutes ses compétences sont en AoE.",
+      "es": "Todos los skills son AoE."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{B/BT_CALL_BACKUP}持ちの優秀なサポート。",
       "kr": "{B/BT_CALL_BACKUP}를 가진 좋은 서포터.",
       "zh": "带有{B/BT_CALL_BACKUP}的优秀辅助。",
-      "fr": "Bon support avec {B/BT_CALL_BACKUP}."
+      "fr": "Bon support avec {B/BT_CALL_BACKUP}.",
+      "es": "Buen soporte con {B/BT_CALL_BACKUP}."
     }
   },
   {
@@ -46,7 +50,8 @@
       "jp": "{C/Healer}の選択肢。",
       "kr": "{C/Healer} 옵션.",
       "zh": "{C/Healer}选择。",
-      "fr": "Options de {C/Healer}."
+      "fr": "Options de {C/Healer}.",
+      "es": "Opciones de {C/Healer}."
     }
   }
 ]

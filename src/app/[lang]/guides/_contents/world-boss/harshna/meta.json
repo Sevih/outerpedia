@@ -4,17 +4,19 @@
     "jp": "ハルシュナ",
     "kr": "하르슈나",
     "zh": "哈尔修娜",
-    "fr": "Harshna"
+    "fr": "Harshna",
+    "es": "Harshna"
   },
   "description": {
     "en": "Revenant Dragon Harshna world boss guide — keep team 1 debuff-free, let team 2 carry the debuffs: phase-by-phase teams up to Extreme League.",
     "jp": "ワールドボス「死魄竜ハルシュナ」攻略ガイド — 第1チームはデバフなし、第2チームでデバフ維持が鉄則。フェーズ別編成、エクストリームリーグまで。",
     "kr": "월드 보스 사백룡 하르슈나 공략 가이드 — 1팀은 디버프 없이, 2팀이 디버프를 담당. 페이즈별 편성, 익스트림 리그까지.",
     "zh": "世界Boss死魄龙赫索纳攻略指南 — 一队保持无debuff，二队负责挂debuff：分阶段编成，直至极限联赛。",
-    "fr": "Guide du world boss Revenant Dragon Harshna — équipe 1 sans debuff, équipe 2 qui les porte : compositions phase par phase jusqu'à l'Extreme League."
+    "fr": "Guide du world boss Revenant Dragon Harshna — équipe 1 sans debuff, équipe 2 qui les porte : compositions phase par phase jusqu'à l'Extreme League.",
+    "es": "Guía del jefe mundial Dragón Revenant Harshna — mantén al equipo 1 libre de debuffs, deja que el equipo 2 cargue con los debuffs: equipos fase por fase hasta la Liga Extrema."
   },
   "icon": "T_Banner_World_Boss_06",
   "author": "Sevih",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "bossId": "4086029"
 }

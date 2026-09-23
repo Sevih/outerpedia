@@ -24,6 +24,7 @@ const LABELS = {
     kr: '특징:',
     zh: '特点：',
     fr: 'Particularité :',
+    es: 'Característica especial:',
   },
   guarantee2Star: {
     en: 'Using Recruit x 10 guarantees at least one 2{star} hero',
@@ -31,6 +32,7 @@ const LABELS = {
     kr: '10연 모집 시 2{star} 이상 영웅 1체 이상 확정',
     zh: '10连招募保底至少1个2{star}以上英雄',
     fr: 'Utiliser Recruit x 10 garantit au moins un Héros 2{star}',
+    es: 'Usar Reclutar x 10 garantiza al menos un héroe 2{star}',
   },
   guaranteeHighGrade: {
     en: 'Using Recruit x 10 guarantees at least one high-grade item',
@@ -38,6 +40,7 @@ const LABELS = {
     kr: '10연 호출 시 고급 아이템 1개 이상 확정',
     zh: '10连召唤保底至少1个高级物品',
     fr: 'Utiliser Recruit x 10 garantit au moins un objet de haute qualité',
+    es: 'Usar Reclutar x 10 garantiza al menos un objeto de alto grado',
   },
   rateUpGear: {
     en: 'Rate-Up Gear',
@@ -45,6 +48,7 @@ const LABELS = {
     kr: '픽업 장비',
     zh: '已选装备',
     fr: 'Équipement en focus',
+    es: 'Equipo con probabilidad aumentada',
   },
   guarantee: {
     en: 'Recruitment guarantee:',
@@ -52,6 +56,7 @@ const LABELS = {
     kr: '모집 확정:',
     zh: '招募保底：',
     fr: 'Garantie de Recruit :',
+    es: 'Garantía de reclutamiento:',
   },
   freePull: {
     en: '1 free pull per day',
@@ -59,6 +64,7 @@ const LABELS = {
     kr: '1일 1회 무료 모집',
     zh: '每日1次免费招募',
     fr: '1 pull gratuit par jour',
+    es: '1 tirada gratis por día',
   },
   dupesGive: {
     en: 'Duplicates give',
@@ -66,14 +72,16 @@ const LABELS = {
     kr: '중복 획득 시',
     zh: '重复获得时',
     fr: 'Les doublons donnent',
+    es: 'Los duplicados otorgan',
   },
-  rarity: { en: 'Rarity', jp: 'レアリティ', kr: '희귀도', zh: '星级', fr: 'Rareté' },
+  rarity: { en: 'Rarity', jp: 'レアリティ', kr: '희귀도', zh: '星级', fr: 'Rareté', es: 'Rareza' },
   resources: {
     en: 'Resources',
     jp: '使用できるリソース',
     kr: '사용 가능한 재화',
     zh: '可使用资源',
     fr: 'Ressources',
+    es: 'Recursos',
   },
   perRecruit: {
     en: 'per recruit',
@@ -81,14 +89,16 @@ const LABELS = {
     kr: '1회 모집당',
     zh: '每次招募',
     fr: 'par Recruit',
+    es: 'por reclutamiento',
   },
-  grants: { en: 'Grants', jp: '獲得', kr: '획득', zh: '获得', fr: 'Donne' },
+  grants: { en: 'Grants', jp: '獲得', kr: '획득', zh: '获得', fr: 'Donne', es: 'Otorga' },
   noMileage: {
     en: 'No mileage',
     jp: 'マイレージ加算なし',
     kr: '마일리지 미적용',
     zh: '不计入点数',
     fr: 'Pas de mileage',
+    es: 'Sin millaje',
   },
   keptUntilUse: {
     en: 'is kept until you decide to use it.',
@@ -96,6 +106,7 @@ const LABELS = {
     kr: '는 사용할 때까지 유지됩니다.',
     zh: '会保留直到使用。',
     fr: "est conservé jusqu'à ce que vous décidiez de l'utiliser.",
+    es: 'se conserva hasta que decidas usarlo.',
   },
   exchangeOptions: {
     en: 'Exchange options:',
@@ -103,6 +114,7 @@ const LABELS = {
     kr: '교환 옵션:',
     zh: '交换选项：',
     fr: "Options d'échange :",
+    es: 'Opciones de intercambio:',
   },
   featuredHero: {
     en: 'Featured hero',
@@ -110,6 +122,7 @@ const LABELS = {
     kr: '픽업 영웅',
     zh: 'PICKUP同伴',
     fr: 'Héros en focus',
+    es: 'Héroe destacado',
   },
   ownedBonus: {
     en: 'If you already own the hero, you get 15 additional',
@@ -117,6 +130,7 @@ const LABELS = {
     kr: '이미 보유 중인 경우 15개가 추가로 지급됩니다',
     zh: '如已拥有该同伴，额外获得15个',
     fr: 'Si vous possédez déjà le Héros, vous obtenez 15 supplémentaires',
+    es: 'Si ya tienes el héroe, obtienes 15 adicionales',
   },
 } satisfies Record<string, LocalizedText>;
 

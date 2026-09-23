@@ -6,7 +6,8 @@
       "jp": "スコアボーナスのための必須ピック。",
       "kr": "점수 보너스를 위한 필수 픽.",
       "zh": "分数加成必选角色。",
-      "fr": "Pick essentiel pour le bonus de score."
+      "fr": "Pick essentiel pour le bonus de score.",
+      "es": "Elección esencial para el bono de puntuación."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{B/BT_CALL_BACKUP}持ちの代替。",
       "kr": "{B/BT_CALL_BACKUP}를 가진 대안.",
       "zh": "拥有{B/BT_CALL_BACKUP}的替代选择。",
-      "fr": "Alternative avec {B/BT_CALL_BACKUP}."
+      "fr": "Alternative avec {B/BT_CALL_BACKUP}.",
+      "es": "Alternativa con {B/BT_CALL_BACKUP}."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "必要に応じて{B/BT_REMOVE_DEBUFF}サポート。",
       "kr": "필요시 {B/BT_REMOVE_DEBUFF} 서포트.",
       "zh": "需要时提供{B/BT_REMOVE_DEBUFF}辅助。",
-      "fr": "Support {B/BT_REMOVE_DEBUFF} au besoin."
+      "fr": "Support {B/BT_REMOVE_DEBUFF} au besoin.",
+      "es": "Soporte {B/BT_REMOVE_DEBUFF} si es necesario."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{E/Earth} DPSの選択肢。",
       "kr": "{E/Earth} DPS 옵션.",
       "zh": "{E/Earth} DPS选择。",
-      "fr": "Options de DPS {E/Earth}."
+      "fr": "Options de DPS {E/Earth}.",
+      "es": "Opciones de DPS {E/Earth}."
     }
   },
   {
@@ -54,7 +58,8 @@
       "jp": "{E/Water} DPSの選択肢。",
       "kr": "{E/Water} DPS 옵션.",
       "zh": "{E/Water} DPS选择。",
-      "fr": "Options de DPS {E/Water}."
+      "fr": "Options de DPS {E/Water}.",
+      "es": "Opciones de DPS {E/Water}."
     }
   },
   {
@@ -64,7 +69,8 @@
       "jp": "サポートの選択肢。",
       "kr": "서포트 옵션.",
       "zh": "辅助选择。",
-      "fr": "Options de support."
+      "fr": "Options de support.",
+      "es": "Opciones de soporte."
     }
   }
 ]

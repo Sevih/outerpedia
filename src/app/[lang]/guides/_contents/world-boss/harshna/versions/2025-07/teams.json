@@ -6,7 +6,8 @@
         "jp": "デバフなし編成",
         "kr": "디버프 없는 팀",
         "zh": "无减益队伍",
-        "fr": "Équipe sans debuff"
+        "fr": "Équipe sans debuff",
+        "es": "Equipo Sin Debuff"
       },
       "slots": [
         ["Demiurge Drakhan", "Leo", "Kappa"],
@@ -21,7 +22,8 @@
         "jp": "スピード型編成",
         "kr": "속도형 팀",
         "zh": "速度型队伍",
-        "fr": "Équipe Ranger"
+        "fr": "Équipe Ranger",
+        "es": "Equipo de Ranger"
       },
       "slots": [
         ["Gnosis Beth", "Bell Cranel", "Vlada"],

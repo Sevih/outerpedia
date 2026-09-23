@@ -4,17 +4,19 @@
     "jp": "ベニオン",
     "kr": "베니온",
     "zh": "维尼昂",
-    "fr": "Venion"
+    "fr": "Venion",
+    "es": "Venion"
   },
   "description": {
     "en": "Walking Fortress Vault Venion world boss guide — adapt your teams to its buff state: phase-by-phase compositions and picks, up to Extreme League.",
     "jp": "ワールドボス「歩行要塞バルトベニオン」攻略ガイド — ボスのバフ状態に合わせて編成を切り替えるのが鍵。フェーズ別編成、エクストリームリーグまで。",
     "kr": "월드 보스 보행요새 발트베니온 공략 가이드 — 보스의 버프 상태에 맞춰 편성을 바꾸는 것이 핵심. 페이즈별 편성, 익스트림 리그까지.",
     "zh": "世界Boss移动要塞瓦尔特贝尼翁攻略指南 — 根据Boss的增益状态调整队伍：分阶段编成，直至极限联赛。",
-    "fr": "Guide du world boss Walking Fortress Vault Venion — adapter les équipes à l'état de ses buffs : compositions phase par phase, jusqu'à l'Extreme League."
+    "fr": "Guide du world boss Walking Fortress Vault Venion — adapter les équipes à l'état de ses buffs : compositions phase par phase, jusqu'à l'Extreme League.",
+    "es": "Guía del jefe mundial Walking Fortress Vault Venion — adapta tus equipos a su estado de bono: composiciones y elecciones fase por fase, hasta la Liga Extrema."
   },
   "icon": "T_Banner_World_Boss_03",
   "author": "Sevih",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "bossId": "4086017"
 }

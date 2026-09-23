@@ -4,17 +4,19 @@
     "fr": "Skyward Tower : Hard",
     "jp": "飛天の塔：ハード",
     "kr": "비천의 탑: 어려움",
-    "zh": "飞天之塔：困难"
+    "zh": "飞天之塔：困难",
+    "es": "Torre Skyward: Difícil"
   },
   "description": {
     "en": "Hard Skyward Tower: per-floor bosses, team restrictions and recommended characters across its 40 floors.",
     "fr": "Skyward Tower Hard : boss par étage, restrictions d’équipe et personnages recommandés sur ses 40 étages.",
     "jp": "飛天の塔ハード：全40階の階別ボス、編成制限、おすすめキャラ。",
     "kr": "비천의 탑 어려움: 40층에 걸친 층별 보스, 편성 제한, 추천 캐릭터.",
-    "zh": "飞天之塔困难：40层的逐层Boss、编成限制与推荐角色。"
+    "zh": "飞天之塔困难：40层的逐层Boss、编成限制与推荐角色。",
+    "es": "Torre Skyward Difícil: jefes por piso, restricciones de equipo y personajes recomendados a lo largo de sus 40 pisos."
   },
   "icon": "T_Tower_Hard_Bg",
   "author": "Sevih",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "tower": "tower_hard"
 }

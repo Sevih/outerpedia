@@ -80,6 +80,7 @@ export const GUIDE_TIERS = {
       kr: '첫 걸음',
       zh: '入门',
       fr: 'Premiers pas',
+      es: 'Primeros pasos',
     },
   },
   pulls: {
@@ -90,6 +91,7 @@ export const GUIDE_TIERS = {
       kr: '배너 & 뽑기',
       zh: '卡池 & 抽卡',
       fr: 'Bannières & pulls',
+      es: 'Banners e invocaciones',
     },
   },
   economy: {
@@ -100,6 +102,7 @@ export const GUIDE_TIERS = {
       kr: '자원 & 데일리 루틴',
       zh: '资源 & 日常',
       fr: 'Ressources & routine quotidienne',
+      es: 'Recursos y rutina diaria',
     },
   },
   'heroes-gear': {
@@ -110,6 +113,7 @@ export const GUIDE_TIERS = {
       kr: '영웅 & 장비',
       zh: '角色 & 装备',
       fr: 'Héros & gear',
+      es: 'Héroes y Gear',
     },
   },
 } as const satisfies Record<string, { order: number; label: LocalizedText & { en: string } }>;
@@ -139,6 +143,7 @@ export const GUIDE_CATEGORIES = {
       kr: '일반 가이드',
       zh: '综合攻略',
       fr: 'Guides généraux',
+      es: 'Guías generales',
     },
     desc: {
       en: 'Master game fundamentals: combat mechanics, character progression, equipment systems, and essential beginner tips for new players.',
@@ -146,6 +151,7 @@ export const GUIDE_CATEGORIES = {
       kr: '게임 기초 마스터: 전투 메커닉, 캐릭터 성장, 장비 시스템, 초보자를 위한 필수 팁.',
       zh: '掌握游戏基础机制：新玩家需知、角色养成、战斗和装备。',
       fr: "Maîtrisez les fondamentaux du jeu : mécaniques de combat, progression des personnages, systèmes d'équipement et conseils essentiels pour les nouveaux joueurs.",
+      es: 'Domina los fundamentos del juego: mecánicas de combate, progresión de personajes, sistemas de equipo y consejos esenciales para nuevos jugadores.',
     },
   },
   adventure: {
@@ -171,6 +177,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모험',
       zh: '冒险',
       fr: 'Adventure',
+      es: 'Aventura',
     },
     desc: {
       en: 'Detailed strategies to defeat challenging Adventure bosses: recommended teams, mechanics explanation, and stage tips.',
@@ -178,6 +185,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모험 모드의 강력한 보스를 공략하기 위한 상세 전략: 추천 팀 구성, 메커닉 설명, 스테이지 팁.',
       zh: '击败具有挑战性的主线故事模式首领的详细策略：了解推荐队伍、关卡机制和阶段提示。',
       fr: "Stratégies détaillées pour vaincre les Boss d'Adventure exigeants : équipes recommandées, explication des mécaniques et conseils par stage.",
+      es: 'Estrategias detalladas para derrotar a los jefes desafiantes de Aventura: equipos recomendados, explicación de mecánicas y consejos por etapa.',
     },
   },
   'adventure-license': {
@@ -200,6 +208,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모험 라이선스',
       zh: '冒险许可证',
       fr: 'Adventure License',
+      es: 'Licencia aventura',
     },
     desc: {
       en: 'Guides for all Adventure License battles, including Promotion Fights: learn enemy mechanics, team recommendations, and strategies for every stage.',
@@ -207,6 +216,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모험자 라이선스의 모든 전투 공략(승급전을 포함): 적 메커닉, 추천 팀, 각 스테이지별 전략을 안내합니다.',
       zh: '包含"晋升战斗"在内的冒险许可证指南——了解关卡机制、推荐队伍以及战斗策略。',
       fr: "Guides pour toutes les batailles d'Adventure License, y compris les Promotion Fights : apprenez les mécaniques ennemies, les équipes recommandées et les stratégies pour chaque stage.",
+      es: 'Guías para todas las batallas de Licencia aventura, incluyendo los Combates de Ascenso: aprende las mecánicas de los enemigos, recomendaciones de equipo y estrategias para cada etapa.',
     },
   },
   'guild-raid': {
@@ -218,6 +228,7 @@ export const GUIDE_CATEGORIES = {
       kr: '길드 레이드',
       zh: '公会突袭',
       fr: 'Guild Raid',
+      es: 'Raid guilde',
     },
     desc: {
       en: 'Comprehensive strategies for Guild Raids: boss mechanics, optimal team setups, and damage-maximizing tactics to achieve the highest raid scores.',
@@ -225,6 +236,7 @@ export const GUIDE_CATEGORIES = {
       kr: '길드 레이드 완벽 공략: 보스 메커닉, 최적 팀 구성, 최고 점수를 위한 데미지 극대화 전술.',
       zh: '公会突袭综合策略——学习首领机制、参考最佳队伍以获得最高伤害或是最高分数。',
       fr: "Stratégies complètes pour les Guild Raid : mécaniques de Boss, configurations d'équipe optimales et tactiques pour maximiser les dégâts et atteindre les meilleurs scores de Raid.",
+      es: 'Estrategias completas para los Raid guilde: mecánicas de jefes, configuraciones óptimas de equipo y tácticas para maximizar el daño y lograr las puntuaciones más altas del raid.',
     },
   },
   'world-boss': {
@@ -236,6 +248,7 @@ export const GUIDE_CATEGORIES = {
       kr: '월드 보스',
       zh: '世界Boss',
       fr: 'World Boss',
+      es: 'Jefe mundial',
     },
     desc: {
       en: 'Comprehensive strategies to achieve SSS rank in Extreme League World Boss battles: optimal team setups, rotation timing, and damage maximization.',
@@ -243,6 +256,7 @@ export const GUIDE_CATEGORIES = {
       kr: '익스트림 리그 월드 보스전에서 SSS 등급을 달성하기 위한 완벽 공략: 최적 팀 구성, 스킬 로테이션, 데미지 극대화.',
       zh: '在世界首领战极限联赛中实现SSS排名的综合策略：优化队伍设置、学习轮换技巧和伤害最大化策略。',
       fr: "Stratégies complètes pour atteindre le rang SSS dans les batailles World Boss en Extreme League : configurations d'équipe optimales, timing des rotations et maximisation des dégâts.",
+      es: 'Estrategias completas para lograr el rango SSS en las batallas de Jefe mundial de la Liga Extrema: configuraciones óptimas de equipo, sincronización de rotación y maximización del daño.',
     },
   },
   'dimensional-singularity': {
@@ -255,6 +269,7 @@ export const GUIDE_CATEGORIES = {
         kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 토요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
         zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周六，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
         fr: 'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au samedi, et votre score quotidien détermine votre classement et vos récompenses.',
+        es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a sábado, y tu puntuación diaria determina tu clasificación y recompensas.',
       },
       unlock: {
         en: 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
@@ -262,6 +277,7 @@ export const GUIDE_CATEGORIES = {
         kr: '해금 조건: 모나드 게이트 심층 1 진 엔딩 클리어.',
         zh: '解锁条件：通关单子门深层1的真结局。',
         fr: 'Condition de déblocage : terminer la True Ending de Monad Gate Depth 1.',
+        es: 'Condición de desbloqueo: completa el Final Verdadero de la Profundidad 1 de Puerta Monad.',
       },
       schedule: {
         en: 'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 1 entry per day.',
@@ -269,6 +285,7 @@ export const GUIDE_CATEGORIES = {
         kr: '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 1회 도전 가능.',
         zh: '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日1次挑战机会。',
         fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 1 entrée par jour.',
+        es: 'Abierto cada semana de miércoles 00:00 UTC a sábado 23:59 UTC. El jefe objetivo cambia diariamente a las 00:00 UTC. 1 entrada por día.',
       },
       features: [
         {
@@ -277,6 +294,7 @@ export const GUIDE_CATEGORIES = {
           kr: '특이점 격퇴: 당일 보스전을 시작합니다.',
           zh: '奇点击退：开始当日的Boss战斗。',
           fr: 'Singularity Repel : lance le combat de Boss du jour.',
+          es: 'Repeler Singularidad: inicia la batalla diaria contra el jefe.',
         },
         {
           en: "Equipment Inspection: opens the Inventory, where Singularity activation and ascension now take place — enhancing to +10, reforging, activating, ascending to +15 and recalculating options all follow on the Gear Enhancement screen. Ascending boosts the gear's main stat(s) and grants 3 extra Reforge attempts; reaching Enhancement +15 then adds a random bonus stat (type depends on the slot, value is random).",
@@ -284,6 +302,7 @@ export const GUIDE_CATEGORIES = {
           kr: '장비 점검: 인벤토리를 엽니다. 특이점 활성화와 승화는 이곳에서 진행합니다. +10 강화, 재련, 활성화, +15 승화, 옵션 재산정을 장비 강화 화면에서 이어서 진행할 수 있습니다. 승화 시 장비의 메인 스탯이 상승하고 재련 횟수가 +3되며, 강화 +15에 도달하면 추가 랜덤 스탯이 부여됩니다(종류는 장비 슬롯에 따라 다르며, 수치는 랜덤).',
           zh: '装备检查：打开背包，奇点激活与升华现已在此进行——强化至+10、重铸、激活、升华至+15与选项重算可在装备强化界面依次完成。升华会提升装备的主属性数值并获得+3次重铸机会；强化等级达到+15时还会附加一项随机额外属性（类型取决于装备槽位，数值随机）。',
           fr: "Equipment Inspection : ouvre l'inventaire, où se font désormais l'activation et l'ascension Singularity — l'enhancement jusqu'à +10, le reforge, l'activation, l'ascension jusqu'à +15 et le recalcul des options s'enchaînent sur l'écran d'enhancement du gear. L'ascension augmente la/les stat(s) principale(s) et octroie 3 tentatives de Reforge supplémentaires ; atteindre Enhancement +15 ajoute alors une stat bonus aléatoire (le type dépend du slot, la valeur est aléatoire).",
+          es: 'Inspección de equipo: abre el Inventario, donde ahora se realizan la activación y ascensión de Singularidad — mejorar a +10, reforjar, activar, ascender a +15 y recalcular opciones, todo se hace en la pantalla de Mejora de Gear. Ascender aumenta la(s) estadística(s) principal(es) del equipo y otorga 3 intentos extra de Reforjado; alcanzar la Mejora +15 añade entonces una estadística bonus aleatoria (el tipo depende del slot, el valor es aleatorio).',
         },
         {
           en: 'Ranking Report: claim daily rewards based on your score the previous day.',
@@ -291,6 +310,7 @@ export const GUIDE_CATEGORIES = {
           kr: '랭킹 보고서: 전일 점수에 따른 일일 보상을 수령합니다.',
           zh: '排名报告：根据前一日分数领取每日奖励。',
           fr: 'Ranking Report : récupérez vos récompenses quotidiennes en fonction de votre score de la veille.',
+          es: 'Informe de Clasificación: reclama las recompensas diarias según tu puntaje del día anterior.',
         },
       ],
     },
@@ -300,6 +320,7 @@ export const GUIDE_CATEGORIES = {
       kr: '차원 특이점',
       zh: '次元奇点',
       fr: 'Dimensional Singularity',
+      es: 'Singularidad Dimensional',
     },
     desc: {
       en: 'Daily-rotating Singularity boss guides: schedule, mechanics, ranking score targets, and Singularity Ascension gear progression.',
@@ -307,6 +328,7 @@ export const GUIDE_CATEGORIES = {
       kr: '매일 바뀌는 특이점 보스 공략: 일정, 메커닉, 랭킹 점수 목표, 특이점 승화 장비 강화.',
       zh: '每日轮换的奇点Boss攻略：日程、机制、排名分数目标，以及奇点升华装备强化。',
       fr: "Guides quotidiens des Boss de Singularity en rotation : planning, mécaniques, objectifs de score au classement et progression de l'équipement Singularity Ascension.",
+      es: 'Guías de jefes de Singularidad con rotación diaria: horario, mecánicas, objetivos de puntaje de clasificación y progresión de equipo de Ascensión de Singularidad.',
     },
   },
   'joint-challenge': {
@@ -318,6 +340,7 @@ export const GUIDE_CATEGORIES = {
       kr: '합동 챌린지',
       zh: '联合挑战',
       fr: 'Joint Challenge',
+      es: 'Desafío conjunto',
     },
     desc: {
       en: 'Score higher in Joint Challenge battles with advanced strategies: best team compositions, skill timing, and synergy tips for top rankings.',
@@ -325,6 +348,7 @@ export const GUIDE_CATEGORIES = {
       kr: '합동 챌린지에서 높은 점수를 얻기 위한 고급 공략: 최적 팀 구성, 스킬 타이밍, 시너지 활용 팁.',
       zh: '使用高级战略在"联合挑战"中获得更高分：获悉顶尖排名的队伍组合、技能时机安排及协同技巧。',
       fr: "Obtenez de meilleurs scores en Joint Challenge grâce à des stratégies avancées : meilleures compositions d'équipe, timing des compétences et conseils de synergie pour atteindre le sommet du classement.",
+      es: 'Consigue un puntaje más alto en los combates del Desafío conjunto con estrategias avanzadas: mejores composiciones de equipo, timing de skills y consejos de sinergia para llegar al top del ranking.',
     },
   },
   'special-request': {
@@ -348,6 +372,7 @@ export const GUIDE_CATEGORIES = {
       kr: '특별 의뢰',
       zh: '特别委托',
       fr: 'Special Request',
+      es: 'Encargo Especial',
     },
     desc: {
       en: 'In-depth strategies for Special Request missions: Ecology Study and Identification. Learn boss mechanics, team synergies, and key tactics for success.',
@@ -355,6 +380,7 @@ export const GUIDE_CATEGORIES = {
       kr: '특별 의뢰 미션 완벽 공략: 생태 조사 및 정체 규명. 보스 메커닉, 팀 시너지, 성공을 위한 핵심 전술을 소개합니다.',
       zh: '深入解析特别委托：生态调查/查清身份。 学习过关所需的首领机制、队伍配合和关键策略。',
       fr: "Stratégies approfondies pour les missions Special Request : Ecology Study et Identification. Apprenez les mécaniques de Boss, les synergies d'équipe et les tactiques clés pour réussir.",
+      es: 'Estrategias detalladas para las misiones de Encargo Especial: Estudio de Ecología e Identificación. Aprende las mecánicas de jefes, las sinergias de equipo y las tácticas clave para tener éxito.',
     },
   },
   'irregular-extermination': {
@@ -378,6 +404,7 @@ export const GUIDE_CATEGORIES = {
       kr: '이레귤러 소탕',
       zh: '异形怪歼灭战',
       fr: 'Irregular Extermination',
+      es: 'Exterminio Irregular',
     },
     desc: {
       en: 'Boss guides for the Irregular Extermination Project mode: learn boss patterns, recommended teams, and effective strategies for each stage.',
@@ -385,6 +412,7 @@ export const GUIDE_CATEGORIES = {
       kr: '이레귤러 섬멸전 모드의 보스 공략: 보스 패턴, 추천 팀 구성, 각 스테이지별 효율적인 전략.',
       zh: '异形怪歼灭战首领攻略——了解每阶段首领的模式、推荐队伍和有效对策。',
       fr: 'Guides des Boss du mode Irregular Extermination Project : apprenez les patterns des Boss, les équipes recommandées et les stratégies efficaces pour chaque stage.',
+      es: 'Guías de jefes para el modo Proyecto de Exterminio Irregular: aprende los patrones de los jefes, los equipos recomendados y las estrategias efectivas para cada etapa.',
     },
   },
   'monad-gate': {
@@ -404,6 +432,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모나드 게이트',
       zh: '单子门',
       fr: 'Monad Gate',
+      es: 'Puerta Monad',
     },
     desc: {
       en: 'Stage guides for Monad Gate: recommended paths, choices, and strategies to reach the true ending of the mode.',
@@ -411,6 +440,7 @@ export const GUIDE_CATEGORIES = {
       kr: '모나드 게이트 스테이지 공략: 진 엔딩에 도달하기 위한 경로 선택과 전략을 안내합니다.',
       zh: '单子门攻略：抵达真结局的策略、选项以及推荐路线。',
       fr: 'Guides des stages de Monad Gate : chemins recommandés, choix et stratégies pour atteindre la True Ending du mode.',
+      es: 'Guías de etapas para la Puerta Monad: rutas recomendadas, elecciones y estrategias para llegar al verdadero final del modo.',
     },
   },
   'skyward-tower': {
@@ -430,6 +460,7 @@ export const GUIDE_CATEGORIES = {
       kr: '비천의 탑',
       zh: '飞天之塔',
       fr: 'Skyward Tower',
+      es: 'Torre Skyward',
     },
     desc: {
       en: 'Strategies for Skyward Tower and Elemental Towers: team compositions, floor mechanics, and tips.',
@@ -437,6 +468,7 @@ export const GUIDE_CATEGORIES = {
       kr: '비천의 탑과 엘레멘탈 타워 공략: 팀 구성, 층별 메커닉, 공략 팁.',
       zh: '飞天之塔与元素之塔攻略：队伍搭配、楼层机制与攻略建议。',
       fr: "Stratégies pour Skyward Tower et Elemental Towers : compositions d'équipe, mécaniques d'étage et astuces.",
+      es: 'Estrategias para la Torre Skyward y las Elemental Tower: composiciones de equipo, mecánicas de piso y consejos.',
     },
   },
   other: {
@@ -448,6 +480,7 @@ export const GUIDE_CATEGORIES = {
       kr: '기타',
       zh: '其他',
       fr: 'Autres guides',
+      es: 'Otras Guías',
     },
     desc: {
       en: "Guides, news, and content that doesn't fit into the other categories or is no longer up to date.",
@@ -455,6 +488,7 @@ export const GUIDE_CATEGORIES = {
       kr: '다른 카테고리에 해당하지 않거나 더 이상 최신이 아닌 가이드, 뉴스 및 콘텐츠.',
       zh: '不属于其他分类或已过时的攻略、新闻和内容。',
       fr: "Guides, actualités et contenus qui n'entrent dans aucune autre catégorie ou ne sont plus à jour.",
+      es: 'Guías, noticias y contenido que no encaja en las otras categorías o que ya no está actualizado.',
     },
   },
 } as const satisfies Record<string, GuideCategory>;

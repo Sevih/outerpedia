@@ -4,18 +4,20 @@
     "jp": "グラン・カラマリー特殊依頼攻略ガイド",
     "kr": "그랑 칼라마리 특수의뢰 공략 가이드",
     "zh": "海怪特殊委托攻略指南",
-    "fr": "Guide de la Requête spéciale Grand Calamari"
+    "fr": "Guide de la Requête spéciale Grand Calamari",
+    "es": "Guía del Encargo Especial de Grand Calamari"
   },
   "description": {
     "en": "Grand Calamari (Dark) Ecology Study Special Request — buff removal is immune: Seal or steal instead, and reapply your debuffs every turn. Teams & tips.",
     "jp": "特別依頼・生態調査「グラン・カラマリー」攻略ガイド — バフ解除は無効。封印や強奪で対処し、デバフは毎ターン付け直す。おすすめ編成と攻略のコツ。",
     "kr": "특별 의뢰 생태 조사: 그랑 칼라마리 공략 — 버프 해제 면역. 봉인이나 강탈로 대응하고 디버프는 매 턴 다시 부여. 추천 팀 편성과 공략 팁.",
     "zh": "特殊委托·生态调查：海怪攻略 — 免疫驱散：改用封印或偷取增益，debuff每回合都要补上。推荐队伍与实用技巧。",
-    "fr": "Special Request Ecology Study : Grand Calamari (Dark) — dispel immunisé : passez par Seal ou vol de buffs, et réappliquez vos debuffs chaque tour. Équipes et astuces."
+    "fr": "Special Request Ecology Study : Grand Calamari (Dark) — dispel immunisé : passez par Seal ou vol de buffs, et réappliquez vos debuffs chaque tour. Équipes et astuces.",
+    "es": "Encargo esp.: Estudio ecología de Grand Calamari (Oscuro) — la eliminación de bonos es inmune: sella o róbalos en su lugar, y reaplica tus debuffs cada turno. Equipos y consejos."
   },
   "icon": "CLG_Raid_Armor_Dark",
   "author": "SADtherobot",
-  "updated": "2025-04-01",
+  "updated": "2026-09-23",
   "order": 10,
   "bossId": "403400362",
   "group": "raid_1:SYS_RAID_1_DUNGEON_D"

@@ -15,7 +15,8 @@
         "jp": "{D/BT_DOT_CURSE}チーム。通常1回でクリア可能。",
         "kr": "{D/BT_DOT_CURSE} 팀. 보통 1회 시도로 클리어 가능.",
         "zh": "{D/BT_DOT_CURSE}队伍。通常一次通关。",
-        "fr": "Équipe {D/BT_DOT_CURSE}. Généralement clear en une seule tentative."
+        "fr": "Équipe {D/BT_DOT_CURSE}. Généralement clear en une seule tentative.",
+        "es": "Equipo {D/BT_DOT_CURSE}. Normalmente se supera en un solo intento."
       }
     ]
   },
@@ -35,7 +36,8 @@
         "jp": "固定ダメージチェーンチーム。{C/Healer}に{I-A/Saint's Ring}または{I-A/Obsidian Oath}を装備して耐久力UP。",
         "kr": "고정 피해 체인 팀. {C/Healer}에게 {I-A/Saint's Ring} 또는 {I-A/Obsidian Oath}를 장착하여 생존력 강화.",
         "zh": "固定伤害连携队伍。给{C/Healer}装备{I-A/Saint's Ring}或{I-A/Obsidian Oath}提升生存能力。",
-        "fr": "Équipe chain en dégâts fixes. Utilisez {I-A/Saint's Ring} ou {I-A/Obsidian Oath} sur le {C/Healer} pour plus de survie."
+        "fr": "Équipe chain en dégâts fixes. Utilisez {I-A/Saint's Ring} ou {I-A/Obsidian Oath} sur le {C/Healer} pour plus de survie.",
+        "es": "Equipo de cadena de daño fijo. Usa {I-A/Saint's Ring} o {I-A/Obsidian Oath} en {C/Healer} para mayor supervivencia."
       }
     ]
   }

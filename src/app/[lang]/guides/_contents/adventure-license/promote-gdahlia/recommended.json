@@ -6,7 +6,8 @@
       "jp": "{D/ETERNAL_BLEEDING}チームの基本編成。",
       "kr": "{D/ETERNAL_BLEEDING} 팀의 기본 편성.",
       "zh": "{D/ETERNAL_BLEEDING}队伍的基础阵容。",
-      "fr": "Équipe de base pour une équipe {D/ETERNAL_BLEEDING}."
+      "fr": "Équipe de base pour une équipe {D/ETERNAL_BLEEDING}.",
+      "es": "Equipo base para un equipo de {D/ETERNAL_BLEEDING}."
     }
   },
   {
@@ -16,7 +17,8 @@
       "jp": "{B/BT_COOL_CHARGE}を持つチェーンスターターの{C/Defender}。",
       "kr": "{B/BT_COOL_CHARGE}를 가진 체인 스타터 {C/Defender} 옵션.",
       "zh": "拥有{B/BT_COOL_CHARGE}的连携起始{C/Defender}选择。",
-      "fr": "Options de {C/Defender} avec {B/BT_COOL_CHARGE} comme initiateurs de chaîne."
+      "fr": "Options de {C/Defender} avec {B/BT_COOL_CHARGE} comme initiateurs de chaîne.",
+      "es": "Opciones de {C/Defender} con {B/BT_COOL_CHARGE} como iniciadores de cadena."
     }
   },
   {
@@ -26,7 +28,8 @@
       "jp": "{D/BT_DOT_BURN}チームの選択肢。",
       "kr": "{D/BT_DOT_BURN} 팀 옵션.",
       "zh": "{D/BT_DOT_BURN}队伍的选择。",
-      "fr": "Options pour une équipe {D/BT_DOT_BURN}."
+      "fr": "Options pour une équipe {D/BT_DOT_BURN}.",
+      "es": "Opciones para un equipo de {D/BT_DOT_BURN}."
     }
   },
   {
@@ -36,7 +39,8 @@
       "jp": "{B/BT_CALL_BACKUP}を持つ{C/Healer}。",
       "kr": "{B/BT_CALL_BACKUP}를 가진 {C/Healer}.",
       "zh": "拥有{B/BT_CALL_BACKUP}的{C/Healer}。",
-      "fr": "{C/Healer} avec {B/BT_CALL_BACKUP}."
+      "fr": "{C/Healer} avec {B/BT_CALL_BACKUP}.",
+      "es": "{C/Healer} con {B/BT_CALL_BACKUP}."
     }
   }
 ]

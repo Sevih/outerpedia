@@ -103,7 +103,7 @@ const SUPPLY_MONTHLY = [
 ] as const;
 
 /** Séparateur de l'exemple Custom (ternaire en/zh, repris verbatim). */
-const AND: LocalizedText = { en: 'and ', zh: '和' };
+const AND: LocalizedText = { en: 'and ', zh: '和', es: 'y ', fr: 'et ' };
 
 export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
   const t = await getT(lang);

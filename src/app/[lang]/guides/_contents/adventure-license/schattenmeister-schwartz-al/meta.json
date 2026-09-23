@@ -4,18 +4,20 @@
     "jp": "シャッテンマイスター・シュヴァルツ",
     "kr": "샤텐 마이스터 슈바르츠",
     "zh": "夜影团长施瓦兹",
-    "fr": "Schattenmeister Schwartz"
+    "fr": "Schattenmeister Schwartz",
+    "es": "Schattenmeister Schwartz"
   },
   "description": {
     "en": "Guide and advice to clear the Weekly Conquest - Schattenmeister Schwartz",
     "jp": "ウィークリー討伐 - シュヴァルツ クリアガイドとアドバイス",
     "kr": "주간토벌 - 샤텐 마이스터 슈바르츠 클리어 가이드 및 조언",
     "zh": "周常征服 - 暗影大师施瓦茨通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Schattenmeister Schwartz"
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Schattenmeister Schwartz",
+    "es": "Guía y consejos para superar la Misión Conquista Semanal - Schattenmeister Schwartz"
   },
   "icon": "T_Licence_4004001",
   "author": "Shiraen",
-  "updated": "2025-11-29",
+  "updated": "2026-09-23",
   "bossId": "51000019",
   "group": "adventure_mission:70600009"
 }

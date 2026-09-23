@@ -12,6 +12,7 @@ export const LABELS = {
     kr: '코어 퓨전 영웅은 코어 퓨전 시스템을 통해 해금할 수 있는 기존 캐릭터의 강화 버전입니다. 해금에는 원본 캐릭터의 5★ 초월과 {I-I/Fusion-Type Core} 300개가 필요합니다.\n해금 후 모든 스킬은 Lv1에서 시작하며, 레벨당 {I-I/Fusion-Type Core} 150개로 일괄 레벨업 가능합니다 (Lv5까지 총 900). 이 유닛들은 Lv5 도달 시 강화되는 고유 코어 퓨전 패시브도 보유합니다.\n{I-I/Fusion-Type Core}는 {L/Dimensional Singularity|/guides/dimensional-singularity}에서 얻습니다: 주간 미션 5종이 각 20개(주 100개), 그리고 수요일~토요일 일일 참여 1회당 25개 — 주당 약 200개입니다. 자세한 내역은 {L/시간 제한 자원 가이드|/guides/general-guides/timegate-resource#tab=singularity-gear}를 참고하세요.\n이 가이드에서는 해금 우선순위와 각 영웅의 리뷰를 다룹니다.',
     zh: '核心融合英雄是通过核心融合系统解锁的现有角色强化版。解锁需要原角色达到5★超越并消耗300个{I-I/Fusion-Type Core}。\n解锁后所有技能从Lv1开始，每级消耗150个{I-I/Fusion-Type Core}统一升级，最高Lv5（共计900）。这些单位还拥有在达到Lv5时强化的独特核心融合被动。\n{I-I/Fusion-Type Core}来自{L/Dimensional Singularity|/guides/dimensional-singularity}：5个每周任务各20个（每周100个），加上周三至周六每日参与每次25个 — 每周约200个。详细明细见{L/有限资源指南|/guides/general-guides/timegate-resource#tab=singularity-gear}。\n本指南涵盖解锁优先级和每位英雄的评测。',
     fr: "Les Héros Core Fusion sont des versions améliorées de personnages existants, débloquées via le système Core Fusion. Ils nécessitent le personnage original à la transcendance 5★ et 300 {I-I/Fusion-Type Core} pour être débloqués.\nUne fois débloqués, tous les skills commencent au Lv1 et peuvent être level up ensemble pour 150 {I-I/Fusion-Type Core} par niveau, jusqu'au Lv5 (900 au total). Ces unités ont aussi un Core Fusion Passive unique qui s'améliore en atteignant le Lv5.\nLa {I-I/Fusion-Type Core} vient de {L/Dimensional Singularity|/guides/dimensional-singularity} : 5 Missions hebdomadaires à 20 chacune (100 par semaine), plus 25 par Run quotidien du mercredi au samedi — environ 200 par semaine. Le détail est dans le {L/Guide des ressources Timegated|/guides/general-guides/timegate-resource#tab=singularity-gear}.\nCe guide couvre les priorités de déblocage et les reviews pour chaque Héros Core Fusion.",
+    es: 'Los héroes de Fusión Core son versiones mejoradas de personajes existentes, que se desbloquean a través del sistema de Fusión Core. Requieren que el personaje original esté a 5★ de trascendencia y 300 {I-I/Fusion-Type Core} para desbloquearse.\nUna vez desbloqueados, todos los skills comienzan en Nv1 y se pueden subir de nivel juntos por 150 {I-I/Fusion-Type Core} por nivel, hasta Nv5 (900 en total). Estas unidades también tienen un Pasivo de Fusión Core único que se mejora al alcanzar Nv5.\nEl {I-I/Fusion-Type Core} proviene de {L/Dimensional Singularity|/guides/dimensional-singularity}: 5 Misiones Semanales de 20 cada una (100 por semana), más 25 por Ejecución Diaria de miércoles a sábado — unos 200 a la semana. Desglose completo en el {L/Timegated Resources Guide|/guides/general-guides/timegate-resource#tab=singularity-gear}.\nEsta guía cubre las prioridades de desbloqueo y reseñas de cada héroe de Fusión Core.',
   },
 
   unlockPriority: {
@@ -20,6 +21,7 @@ export const LABELS = {
     kr: '해금 우선순위',
     zh: '解锁优先级',
     fr: 'Priorité de Déblocage',
+    es: 'Prioridad de Desbloqueo',
   },
 
   priority1st: {
@@ -28,6 +30,7 @@ export const LABELS = {
     kr: '1순위',
     zh: '第一优先',
     fr: '1ère Priorité',
+    es: '1ra Prioridad',
   },
 
   priority2nd: {
@@ -36,6 +39,7 @@ export const LABELS = {
     kr: '2순위',
     zh: '第二优先',
     fr: '2e Priorité',
+    es: '2da Prioridad',
   },
 
   priority3rd: {
@@ -44,6 +48,7 @@ export const LABELS = {
     kr: '3순위',
     zh: '第三优先',
     fr: '3e Priorité',
+    es: '3ra Prioridad',
   },
 
   recommendedLevel: {
@@ -52,6 +57,7 @@ export const LABELS = {
     kr: '추천 레벨',
     zh: '推荐等级',
     fr: 'Niveau Recommandé',
+    es: 'Nivel Recomendado',
   },
 
   skillChanges: {
@@ -60,6 +66,7 @@ export const LABELS = {
     kr: '스킬 변경',
     zh: '技能变更',
     fr: 'Changements de Skill',
+    es: 'Cambios de Skill',
   },
 
   fusionPassive: {
@@ -68,6 +75,7 @@ export const LABELS = {
     kr: '퓨전 패시브',
     zh: '融合被动',
     fr: 'Fusion Passive',
+    es: 'Pasivo de Fusión',
   },
 
   transcendence: {
@@ -76,6 +84,7 @@ export const LABELS = {
     kr: '초월 보너스',
     zh: '超越奖励',
     fr: 'Bonus de Transcendance',
+    es: 'Bono de Trascendencia',
   },
 
   exclusiveEquipment: {
@@ -84,6 +93,7 @@ export const LABELS = {
     kr: '전용 장비',
     zh: '专属装备',
     fr: 'Exclusive Equipment',
+    es: 'Equipo Exclusivo',
   },
 
   oldEE: {
@@ -92,6 +102,7 @@ export const LABELS = {
     kr: '기본',
     zh: '基础',
     fr: 'Base',
+    es: 'Base',
   },
 
   newEE: {
@@ -100,5 +111,6 @@ export const LABELS = {
     kr: '코어 퓨전',
     zh: '核心融合',
     fr: 'Core Fusion',
+    es: 'Fusión Core',
   },
 } as const satisfies Record<string, LocalizedText>;

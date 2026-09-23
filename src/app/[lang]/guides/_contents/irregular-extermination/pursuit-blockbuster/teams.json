@@ -13,7 +13,8 @@
         "jp": "{B/HEAVY_STRIKE} DPSキャラクターを使用して、ボスの会心ペナルティを回避。",
         "kr": "{B/HEAVY_STRIKE} DPS 캐릭터를 사용하여 보스의 치명 페널티를 회피.",
         "zh": "使用{B/HEAVY_STRIKE} DPS角色来避免触发Boss的暴击惩罚。",
-        "fr": "Utilisez des DPS avec {B/HEAVY_STRIKE} pour éviter de déclencher la pénalité de coup critique du boss."
+        "fr": "Utilisez des DPS avec {B/HEAVY_STRIKE} pour éviter de déclencher la pénalité de coup critique du boss.",
+        "es": "Usa personajes DPS de {B/HEAVY_STRIKE} para evitar activar la penalización de crítico del jefe."
       }
     ]
   },
@@ -24,7 +25,8 @@
         "jp": "クラシック編成",
         "kr": "클래식 팀",
         "zh": "常规队伍",
-        "fr": "Équipe classique"
+        "fr": "Équipe classique",
+        "es": "Equipo Clásico"
       }
     },
     "slots": [
@@ -39,7 +41,8 @@
         "jp": "強力なDPSキャラクターを自由に使用可能。十分なダメージがあれば、WG回復メカニズムを無視できる。",
         "kr": "강력한 DPS 캐릭터를 자유롭게 사용 가능. 충분한 피해량이 있으면 WG 회복 메커니즘을 무시할 수 있다.",
         "zh": "可自由使用任何强力DPS角色。伤害足够高的话可以无视WG恢复机制。",
-        "fr": "Utilisez n'importe quel bon DPS. Avec assez de dégâts, le mécanisme de regen WG peut être ignoré."
+        "fr": "Utilisez n'importe quel bon DPS. Avec assez de dégâts, le mécanisme de regen WG peut être ignoré.",
+        "es": "Siéntete libre de usar cualquier personaje DPS fuerte. Con suficiente daño, se puede ignorar el mecanismo de recuperación de WG."
       }
     ]
   }

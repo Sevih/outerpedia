@@ -20,6 +20,7 @@ const LABELS = {
     kr: 'OUTERPLANE의 많은 기능은 처음부터 사용할 수 없습니다. 아래는 각 모드가 스토리 진행 중 언제 해금되는지 카테고리별로 정리한 표입니다. 해금 조건은 게임 데이터에서 가져오며 자동으로 갱신됩니다.',
     zh: 'OUTERPLANE的许多功能并非一开始就可用。下方按类别概览各模式在故事进程中的解锁时间。解锁条件来自游戏数据并自动更新。',
     fr: "De nombreuses fonctionnalités d'OUTERPLANE ne sont pas disponibles d'emblée. Voici un aperçu par catégorie du moment où chaque mode se débloque pendant la Story. Les conditions proviennent des data du jeu et se mettent à jour automatiquement.",
+    es: 'Muchas funciones en OUTERPLANE no están disponibles de inmediato. A continuación se muestra un resumen categorizado de cuándo se desbloquea cada modo durante la historia. Las condiciones provienen de los datos del juego y se actualizan automáticamente.',
   },
   headerMode: {
     en: 'Game Mode',
@@ -27,6 +28,7 @@ const LABELS = {
     kr: '게임 모드',
     zh: '游戏模式',
     fr: 'Mode de Jeu',
+    es: 'Modo de Juego',
   },
   headerCondition: {
     en: 'Unlock Condition',
@@ -34,6 +36,7 @@ const LABELS = {
     kr: '해금 조건',
     zh: '解锁条件',
     fr: 'Condition de Déblocage',
+    es: 'Condición de Desbloqueo',
   },
   headerDescription: {
     en: 'Description',
@@ -41,17 +44,26 @@ const LABELS = {
     kr: '설명',
     zh: '描述',
     fr: 'Description',
+    es: 'Descripción',
   },
-  orSeparator: { en: 'or', jp: 'または', kr: '또는', zh: '或', fr: 'ou' },
+  orSeparator: { en: 'or', jp: 'または', kr: '또는', zh: '或', fr: 'ou', es: 'o' },
   // Noms officiels des deux campagnes (patch 21/07), transcrits des chaînes de
   // quête du jeu (SYS_GUIDE_QUEST_ORIGIN_* : « Clear Origin Story 1-4 »).
-  modeStory: { en: 'Story', jp: 'ストーリー', kr: '스토리', zh: '剧情', fr: 'Story' },
+  modeStory: {
+    en: 'Story',
+    jp: 'ストーリー',
+    kr: '스토리',
+    zh: '剧情',
+    fr: 'Story',
+    es: 'Historia',
+  },
   modeOrigin: {
     en: 'Origin Story',
     jp: 'オリジンストーリー',
     kr: '오리진 스토리',
     zh: '起源剧情',
     fr: 'Origin Story',
+    es: 'Historia de Origen',
   },
 } satisfies Record<string, LocalizedText>;
 
@@ -71,11 +83,11 @@ function requirementsOf(entry: GuideEntry): ResolvedReq[] {
     throw new Error(`unlock-content : ContentType inconnu « ${entry.contentType} » (notes.ts)`);
   }
   if (auto.requirements.length === 0) {
-    return [{ stage: '?', dungeonName: { en: '?' } }];
+    return [{ stage: '?', dungeonName: { en: '?', es: '?', fr: '?' } }];
   }
   return auto.requirements.map((r: UnlockRequirement) => ({
     stage: r.stage ?? '?',
-    dungeonName: r.dungeonName ?? { en: '?' },
+    dungeonName: r.dungeonName ?? { en: '?', es: '?', fr: '?' },
     ...(r.mode ? { mode: r.mode } : {}),
   }));
 }

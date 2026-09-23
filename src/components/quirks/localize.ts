@@ -14,29 +14,44 @@ import type { LocalTree, QuirkTreeLabels } from './QuirkTreeView';
 const L = (m: LocalizedText, lang: Lang): string => lRec(m, lang) || m.en || '';
 
 export const ELEMENT_NAME: Record<string, LocalizedText> = {
-  earth: { en: 'Earth', jp: '地', kr: '땅', zh: '地', fr: 'Terre' },
-  water: { en: 'Water', jp: '水', kr: '물', zh: '水', fr: 'Eau' },
-  fire: { en: 'Fire', jp: '火', kr: '불', zh: '火', fr: 'Feu' },
-  light: { en: 'Light', jp: '光', kr: '빛', zh: '光', fr: 'Lumière' },
-  dark: { en: 'Dark', jp: '闇', kr: '어둠', zh: '暗', fr: 'Ténèbres' },
+  earth: { en: 'Earth', jp: '地', kr: '땅', zh: '地', fr: 'Terre', es: 'Tierra' },
+  water: { en: 'Water', jp: '水', kr: '물', zh: '水', fr: 'Eau', es: 'Agua' },
+  fire: { en: 'Fire', jp: '火', kr: '불', zh: '火', fr: 'Feu', es: 'Fuego' },
+  light: { en: 'Light', jp: '光', kr: '빛', zh: '光', fr: 'Lumière', es: 'Luz' },
+  dark: { en: 'Dark', jp: '闇', kr: '어둠', zh: '暗', fr: 'Ténèbres', es: 'Oscuro' },
 };
 
 export const CLASS_NAME: Record<string, LocalizedText> = {
-  defender: { en: 'Defender', jp: 'ディフェンダー', kr: '디펜더', zh: '防御者', fr: 'Defender' },
-  striker: { en: 'Striker', jp: 'ストライカー', kr: '스트라이커', zh: '打击者', fr: 'Striker' },
-  ranger: { en: 'Ranger', jp: 'レンジャー', kr: '레인저', zh: '游侠', fr: 'Ranger' },
-  mage: { en: 'Mage', jp: 'メイジ', kr: '메이지', zh: '法师', fr: 'Mage' },
-  healer: { en: 'Healer', jp: 'ヒーラー', kr: '힐러', zh: '治疗者', fr: 'Healer' },
+  defender: {
+    en: 'Defender',
+    jp: 'ディフェンダー',
+    kr: '디펜더',
+    zh: '防御者',
+    fr: 'Defender',
+    es: 'Defensor',
+  },
+  striker: {
+    en: 'Striker',
+    jp: 'ストライカー',
+    kr: '스트라이커',
+    zh: '打击者',
+    fr: 'Striker',
+    es: 'Atacante',
+  },
+  ranger: { en: 'Ranger', jp: 'レンジャー', kr: '레인저', zh: '游侠', fr: 'Ranger', es: 'Ranger' },
+  mage: { en: 'Mage', jp: 'メイジ', kr: '메이지', zh: '法师', fr: 'Mage', es: 'Mago' },
+  healer: { en: 'Healer', jp: 'ヒーラー', kr: '힐러', zh: '治疗者', fr: 'Healer', es: 'Sanador' },
 };
 
 const TREE_LABELS: Record<keyof QuirkTreeLabels, LocalizedText> = {
-  level: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau' },
+  level: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau', es: 'Nivel' },
   cost: {
     en: 'Cost to this level:',
     jp: 'このレベルまでのコスト：',
     kr: '이 레벨까지 비용:',
     zh: '至该等级消耗：',
     fr: 'Coût jusqu’à ce niveau :',
+    es: 'Costo a este nivel:',
   },
   unlockAt: {
     en: '· unlocks at main Lv.',
@@ -44,8 +59,9 @@ const TREE_LABELS: Record<keyof QuirkTreeLabels, LocalizedText> = {
     kr: '· 메인 Lv. 해금',
     zh: '· 主节点Lv.解锁',
     fr: '· débloqué au main Lv.',
+    es: '· se desbloquea en Nivel principal.',
   },
-  mainNode: { en: 'Main', jp: 'メイン', kr: '메인', zh: '主', fr: 'Main' },
+  mainNode: { en: 'Main', jp: 'メイン', kr: '메인', zh: '主', fr: 'Main', es: 'Principal' },
 };
 
 /** Libellés du panneau de détail d'un arbre, localisés. */

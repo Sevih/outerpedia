@@ -14,6 +14,7 @@ export const LABELS = {
     kr: '구매당 정확한 비용과 수량을 명시합니다. 제한은 "횟수 / 기간" 형식입니다.',
     zh: '标明每次购买的确切成本和数量。限制以"次数/周期"格式显示。',
     fr: 'Indique les coûts exacts et la quantité donnée par achat. Les limites sont structurées au format "nombre / période".',
+    es: 'Especifica los costos exactos y la cantidad otorgada por compra. Los límites están estructurados como "cantidad / periodo".',
   },
   legendTitle: {
     en: 'Legend:',
@@ -21,6 +22,7 @@ export const LABELS = {
     kr: '범례:',
     zh: '图例:',
     fr: 'Légende :',
+    es: 'Leyenda:',
   },
   legendS: {
     en: 'S = must-buy',
@@ -28,6 +30,7 @@ export const LABELS = {
     kr: 'S = 필수 구매',
     zh: 'S = 必买',
     fr: 'S = à acheter absolument',
+    es: 'S = compra obligatoria',
   },
   legendA: {
     en: 'A = high value',
@@ -35,6 +38,7 @@ export const LABELS = {
     kr: 'A = 높은 가치',
     zh: 'A = 高价值',
     fr: 'A = grande valeur',
+    es: 'A = alto valor',
   },
   legendB: {
     en: 'B = situational',
@@ -42,6 +46,7 @@ export const LABELS = {
     kr: 'B = 상황에 따라',
     zh: 'B = 视情况而定',
     fr: 'B = situationnel',
+    es: 'B = situacional',
   },
   legendC: {
     en: 'C = low priority',
@@ -49,6 +54,7 @@ export const LABELS = {
     kr: 'C = 낮은 우선순위',
     zh: 'C = 低优先级',
     fr: 'C = faible priorité',
+    es: 'C = baja prioridad',
   },
   periodsTitle: {
     en: 'Periods:',
@@ -56,6 +62,7 @@ export const LABELS = {
     kr: '기간:',
     zh: '周期:',
     fr: 'Périodes :',
+    es: 'Periodos:',
   },
   periodD: {
     en: 'D = Daily',
@@ -63,6 +70,7 @@ export const LABELS = {
     kr: 'D = 매일',
     zh: 'D = 每日',
     fr: 'D = Quotidien',
+    es: 'D = Diario',
   },
   periodW: {
     en: 'W = Weekly',
@@ -70,6 +78,7 @@ export const LABELS = {
     kr: 'W = 매주',
     zh: 'W = 每周',
     fr: 'W = Hebdomadaire',
+    es: 'W = Semanal',
   },
   periodM: {
     en: 'M = Monthly',
@@ -77,6 +86,7 @@ export const LABELS = {
     kr: 'M = 매월',
     zh: 'M = 每月',
     fr: 'M = Mensuel',
+    es: 'M = Mensual',
   },
   periodO: {
     en: 'O = One-time',
@@ -84,6 +94,7 @@ export const LABELS = {
     kr: 'O = 일회성',
     zh: 'O = 一次性',
     fr: 'O = Unique',
+    es: 'O = Una vez',
   },
   colPriority: {
     en: 'Priority',
@@ -91,6 +102,7 @@ export const LABELS = {
     kr: '우선순위',
     zh: '优先级',
     fr: 'Priorité',
+    es: 'Prioridad',
   },
   colItem: {
     en: 'Item',
@@ -98,6 +110,7 @@ export const LABELS = {
     kr: '아이템',
     zh: '物品',
     fr: 'Item',
+    es: 'Objeto',
   },
   colGives: {
     en: 'Gives',
@@ -105,6 +118,7 @@ export const LABELS = {
     kr: '획득',
     zh: '获得',
     fr: 'Donne',
+    es: 'Otorga',
   },
   colCost: {
     en: 'Cost',
@@ -112,6 +126,7 @@ export const LABELS = {
     kr: '비용',
     zh: '花费',
     fr: 'Coût',
+    es: 'Costo',
   },
   colLimit: {
     en: 'Limit',
@@ -119,6 +134,7 @@ export const LABELS = {
     kr: '제한',
     zh: '限制',
     fr: 'Limite',
+    es: 'Límite',
   },
   colNotes: {
     en: 'Notes',
@@ -126,6 +142,7 @@ export const LABELS = {
     kr: '비고',
     zh: '备注',
     fr: 'Notes',
+    es: 'Notas',
   },
   seeGearUsageFinder: {
     en: 'See Gear Usage Finder to check which characters your gear matches.',
@@ -133,6 +150,7 @@ export const LABELS = {
     kr: 'Gear Usage Finder에서 장비가 어떤 캐릭터에 맞는지 확인하세요.',
     zh: '请查看Gear Usage Finder，确认装备适合哪些角色。',
     fr: 'Consultez le Gear Usage Finder pour vérifier à quels personnages votre gear correspond.',
+    es: 'Consulta el Buscador de Uso de Gear para ver con qué personajes coincide tu gear.',
   },
 } as const satisfies Record<string, LocalizedText>;
 
@@ -146,6 +164,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '길드 상점',
       zh: '公会商店',
       fr: 'Guild Shop',
+      es: 'Tienda del Gremio',
     },
   },
   {
@@ -156,6 +175,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '보급 모듈',
       zh: '补给模块',
       fr: 'Supply Module',
+      es: 'Supply Module',
     },
   },
   {
@@ -166,6 +186,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '리코의 비밀',
       zh: '里科的秘密',
       fr: 'Rico Secret',
+      es: 'Rico Secret',
     },
   },
   {
@@ -176,6 +197,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '이벤트 상점',
       zh: '活动商店',
       fr: 'Event Shop',
+      es: 'Tienda del Evento',
     },
   },
   {
@@ -186,6 +208,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '조인트 챌린지',
       zh: '联合挑战',
       fr: 'Joint Challenge',
+      es: 'Desafío conjunto',
     },
   },
   {
@@ -196,6 +219,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '우정 포인트',
       zh: '友情点',
       fr: 'Friendship Point',
+      es: 'Punto de Amistad',
     },
   },
   {
@@ -206,6 +230,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '아레나 상점',
       zh: '竞技场商店',
       fr: 'Arena Shop',
+      es: 'Tienda de Arena',
     },
   },
   {
@@ -216,6 +241,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '스타의 기억',
       zh: '星之记忆',
       fr: "Star's Memory",
+      es: 'Recuerdo de Estrella',
     },
   },
   {
@@ -226,6 +252,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '월드 보스',
       zh: '世界首领',
       fr: 'World Boss',
+      es: 'Jefe mundial',
     },
   },
   {
@@ -236,6 +263,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '모험 라이선스',
       zh: '冒险执照',
       fr: 'Adventure License',
+      es: 'Licencia aventura',
     },
   },
   {
@@ -246,6 +274,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '서베이 허브',
       zh: '调查中心',
       fr: 'Survey Hub',
+      es: 'Centro de Encuestas',
     },
   },
   {
@@ -256,6 +285,7 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       kr: '일반',
       zh: '通用',
       fr: 'Général',
+      es: 'General',
     },
   },
 ];

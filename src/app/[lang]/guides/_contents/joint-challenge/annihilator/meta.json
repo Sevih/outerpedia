@@ -4,17 +4,19 @@
     "jp": "エクスタミネーター 共同作戦ガイド",
     "kr": "말살자 합동 챌린지 가이드",
     "zh": "歼灭者联合挑战攻略",
-    "fr": "Guide Joint Challenge Annihilator"
+    "fr": "Guide Joint Challenge Annihilator",
+    "es": "Guía del Desafío Conjunto: Annihilator"
   },
   "description": {
     "en": "Joint Challenge boss guide for Annihilator: boss mechanics, recommended characters, team setups and tactical tips.",
     "jp": "エクスタミネーター 共同作戦ボス攻略：ボスの仕組み、おすすめキャラ、編成、戦術のヒント。",
     "kr": "말살자 합동 챌린지 보스 공략: 보스 메커닉, 추천 캐릭터, 팀 구성, 전술 팁.",
     "zh": "歼灭者联合挑战首领攻略：首领机制、推荐角色、队伍配置与战术提示。",
-    "fr": "Guide du boss Joint Challenge Annihilator : mécaniques, personnages recommandés, équipes et conseils tactiques."
+    "fr": "Guide du boss Joint Challenge Annihilator : mécaniques, personnages recommandés, équipes et conseils tactiques.",
+    "es": "Guía del jefe del Desafío Conjunto para Annihilator: mecánicas del jefe, personajes recomendados, configuraciones de equipo y consejos tácticos."
   },
   "icon": "T_Banner_Event_Boss_01",
   "author": "Sevih",
-  "updated": "2026-05-19",
+  "updated": "2026-09-23",
   "bossId": "4318062"
 }

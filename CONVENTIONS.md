@@ -91,10 +91,17 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   - **communautaire** : UI traduite, mais **pas** de données de jeu → fallback
     sur EN pour le contenu de jeu. Plus aucune aujourd'hui (le `fr` l'a été
     jusqu'au 2026-09-23) ; le mécanisme reste pour la prochaine.
-- L'**éditorial** (curés, `labels.ts` des guides, `meta.json`) est typé
-  `LocalizedText`, PARTIEL avec repli EN : une langue peut y manquer sans rien
-  casser. L'espagnol y est en repli depuis le lancement — le traduire passe
-  par l'outil admin, pas par un chantier bloquant.
+- L'**éditorial** (curés, `labels.ts` des guides, `meta.json`, JSON des guides)
+  est typé `LocalizedText`, PARTIEL avec repli EN : une langue peut y manquer
+  sans rien casser. Il est traduit dans les six langues depuis le 2026-09-23
+  (passe Sonnet 5 sur ~4 700 textes, balises inline masquées et vérifiées) ;
+  un nouveau texte s'écrit en anglais puis se traduit par l'outil admin
+  (DeepL/Haiku, `es` compris) — ne pas laisser une langue en repli par habitude.
+  Conventions de traduction : le jargon commun reste en anglais dans toutes les
+  langues (DPS, AoE, buff/debuff, gear, build, tier, clear, ATK/DEF/HP/SPD…,
+  S1/S2/S3, FAQ) ; en français les CLASSES restent en anglais (Striker,
+  Defender…) et les éléments en français ; en espagnol on suit le vocabulaire
+  officiel du jeu (Atacante, Defensor, Mago, Sanador ; Fuego, Agua…).
 - Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans
   toutes les langues — c'est `locales/keys.test.ts` qui le garantit (clés
   identiques, chaque clé consommée). L'ancien « alignement par numéro de ligne »

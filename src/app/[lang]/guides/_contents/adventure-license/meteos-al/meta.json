@@ -4,18 +4,20 @@
     "jp": "火炎の騎士メテウス",
     "kr": "화염기사 메테우스",
     "zh": "火焰骑士梅修斯",
-    "fr": "Blazing Knight Meteos"
+    "fr": "Blazing Knight Meteos",
+    "es": "Caballero Ardiente Meteos"
   },
   "description": {
     "en": "Guide and advice to clear the Weekly Conquest - Blazing Knight Meteos",
     "jp": "ウィークリー討伐 - 火炎の騎士メテウス クリアガイドとアドバイス",
     "kr": "주간토벌 - 화염기사 메테우스 클리어 가이드 및 조언",
     "zh": "周常征服 - 烈焰骑士梅特乌斯通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Blazing Knight Meteos"
+    "fr": "Guide et conseils pour réussir le Weekly Conquest — Blazing Knight Meteos",
+    "es": "Guía y consejos para completar la Misión Conquista Semanal - Caballero Ardiente Meteos"
   },
   "icon": "T_Licence_4076002",
   "author": "Shiraen",
-  "updated": "2025-11-29",
+  "updated": "2026-09-23",
   "bossId": "51000012",
   "group": "adventure_mission:70600005"
 }

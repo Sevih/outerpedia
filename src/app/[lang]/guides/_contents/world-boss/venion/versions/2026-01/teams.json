@@ -6,7 +6,8 @@
         "jp": "光・闇属性",
         "kr": "명·암속성",
         "zh": "光与暗属性",
-        "fr": "Light et Dark"
+        "fr": "Light et Dark",
+        "es": "Luz y Oscuro"
       },
       "slots": [
         ["Gnosis Dahlia", "Regina"],
@@ -29,7 +30,8 @@
         "jp": "火・水・地属性",
         "kr": "화·수·지속성",
         "zh": "火、水、土属性",
-        "fr": "Fire, Water et Earth"
+        "fr": "Fire, Water et Earth",
+        "es": "Fuego, Agua y Tierra"
       },
       "slots": [
         ["Tamara", "Tamamo-no-Mae"],

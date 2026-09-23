@@ -7,7 +7,8 @@
         "jp": "{B/BT_CALL_BACKUP}、{D/BT_SILENCE}を解除",
         "kr": "{B/BT_CALL_BACKUP}, {D/BT_SILENCE} 해제",
         "zh": "{B/BT_CALL_BACKUP}，解除{D/BT_SILENCE}",
-        "fr": "{B/BT_CALL_BACKUP} et purifie {D/BT_SILENCE}"
+        "fr": "{B/BT_CALL_BACKUP} et purifie {D/BT_SILENCE}",
+        "es": "{B/BT_CALL_BACKUP} y limpia {D/BT_SILENCE}"
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "標準的な{E/Dark}アタッカー",
         "kr": "기본 {E/Dark} 딜러",
         "zh": "标准{E/Dark}输出",
-        "fr": "DPS {E/Dark} standard"
+        "fr": "DPS {E/Dark} standard",
+        "es": "DPS estándar de {E/Dark}"
       }
     },
     {
@@ -27,7 +29,8 @@
         "jp": "標準的な{E/Dark}アタッカー",
         "kr": "기본 {E/Dark} 딜러",
         "zh": "标准{E/Dark}输出",
-        "fr": "DPS {E/Dark} standard"
+        "fr": "DPS {E/Dark} standard",
+        "es": "DPS estándar de {E/Dark}"
       }
     },
     {
@@ -37,7 +40,8 @@
         "jp": "100%クリティカルで安定したデュアルアタック",
         "kr": "100% 치명타로 일관된 듀얼 어택",
         "zh": "100%暴击率确保稳定协同攻击",
-        "fr": "100% de chance critique pour des attaques doubles régulières"
+        "fr": "100% de chance critique pour des attaques doubles régulières",
+        "es": "100% de Tasa CRIT para ataques dobles consistentes"
       }
     }
   ],

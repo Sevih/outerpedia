@@ -100,6 +100,7 @@ export const LABELS = {
     kr: '2026년 8월 14일에 열린 제2회 일본 유저 간담회에서 발표된 2026년 하반기 내용을 정리했습니다.',
     zh: '对2026年8月14日举行的第二届日本玩家恳谈会上公布的2026年下半年预计更新内容的整理。',
     fr: 'Tout ce qui a été annoncé pour le second semestre 2026 lors du 2e meetup des joueurs japonais, le 14 août 2026.',
+    es: 'Todo lo anunciado para la segunda mitad de 2026 en el 2.º Encuentro de Jugadores de Japón, celebrado el 14 de agosto de 2026.',
   },
   agenda: {
     en: 'Agenda',
@@ -107,6 +108,7 @@ export const LABELS = {
     kr: '아젠다',
     zh: '公布项目',
     fr: 'Au programme de la rencontre',
+    es: 'Agenda',
   },
   newCharacters: {
     en: 'New Characters',
@@ -114,6 +116,7 @@ export const LABELS = {
     kr: '신규 캐릭터',
     zh: '新角色',
     fr: 'Nouveaux personnages',
+    es: 'Nuevos Personajes',
   },
   releasePlan: {
     en: 'New Character Release Plan',
@@ -121,6 +124,7 @@ export const LABELS = {
     kr: '신규 캐릭터 출시 계획',
     zh: '新角色实装计划',
     fr: 'Plan de sortie des nouveaux personnages',
+    es: 'Plan de Lanzamiento de Nuevos Personajes',
   },
   coreFusion: {
     en: 'Core Fusion',
@@ -128,6 +132,7 @@ export const LABELS = {
     kr: '코어 융합',
     zh: '核心融合',
     fr: 'Core Fusion',
+    es: 'Fusión Core',
   },
   characterRework: {
     en: 'Brush-Up Characters',
@@ -135,6 +140,7 @@ export const LABELS = {
     kr: '브러시업 캐릭터',
     zh: '重制角色',
     fr: 'Personnages retouchés (Brush-Up)',
+    es: 'Personajes Renovados',
   },
   storyRegion: {
     en: 'New Story Areas',
@@ -142,6 +148,7 @@ export const LABELS = {
     kr: '신규 스토리 지역',
     zh: '新剧情章节',
     fr: 'Nouvelles zones scénaristiques',
+    es: 'Nuevas Áreas de Historia',
   },
   gameImprovements: {
     en: 'Game Improvements',
@@ -149,6 +156,7 @@ export const LABELS = {
     kr: '게임 개선',
     zh: '游戏方面改善',
     fr: 'Améliorations du jeu',
+    es: 'Mejoras del Juego',
   },
   monthlySchedule: {
     en: 'Monthly Schedule for the 2nd Half of 2026',
@@ -156,6 +164,7 @@ export const LABELS = {
     kr: '2026년 하반기 월별 스케줄',
     zh: '2026年下半年月度计划',
     fr: 'Calendrier mensuel du second semestre 2026',
+    es: 'Calendario Mensual para la 2.ª Mitad de 2026',
   },
   alreadyReleased: {
     en: 'Already released',
@@ -163,6 +172,7 @@ export const LABELS = {
     kr: '출시 완료',
     zh: '已实装',
     fr: 'Déjà sorti',
+    es: 'Ya lanzado',
   },
   labelNewCharacters: {
     en: 'Character:',
@@ -170,6 +180,7 @@ export const LABELS = {
     kr: '캐릭터:',
     zh: '新角色:',
     fr: 'Personnages :',
+    es: 'Personaje:',
   },
   labelCoreFusion: {
     en: 'Core Fusion:',
@@ -177,14 +188,23 @@ export const LABELS = {
     kr: '코어 융합:',
     zh: '核心融合:',
     fr: 'Core Fusion :',
+    es: 'Fusión Core:',
   },
-  labelStory: { en: 'Story:', jp: 'ストーリー:', kr: '스토리:', zh: '剧情:', fr: 'Scénario :' },
+  labelStory: {
+    en: 'Story:',
+    jp: 'ストーリー:',
+    kr: '스토리:',
+    zh: '剧情:',
+    fr: 'Scénario :',
+    es: 'Historia:',
+  },
   labelContent: {
     en: 'Content / Improvements:',
     jp: 'コンテンツ:',
     kr: '콘텐츠 / 개선:',
     zh: '内容 / 改善:',
     fr: 'Contenu / améliorations :',
+    es: 'Contenido / Mejoras:',
   },
   /** Le ※ répété au bas de presque toutes les diapos — écrit UNE fois. */
   disclaimer: {
@@ -193,6 +213,7 @@ export const LABELS = {
     kr: '※ 개발 일정에 따라 계획과 내용은 변경될 수 있습니다.',
     zh: '※ 根据开发日程，计划内容可能变更。',
     fr: "※ Le calendrier et le contenu peuvent changer selon l'avancement du développement.",
+    es: '※ Los planes y detalles están sujetos a cambios según el cronograma de desarrollo.',
   },
   video: {
     en: 'Watch the broadcast',
@@ -200,6 +221,7 @@ export const LABELS = {
     kr: '로드맵 영상',
     zh: '路线图影片',
     fr: 'Revoir la diffusion',
+    es: 'Ver la transmisión',
   },
   promoCode: {
     en: 'Promo code from the broadcast',
@@ -207,6 +229,7 @@ export const LABELS = {
     kr: '방송에서 공개된 쿠폰 코드',
     zh: '直播公布的兑换码',
     fr: 'Code promo annoncé pendant la diffusion',
+    es: 'Código promocional de la transmisión',
   },
   source: {
     en: 'Source: OuterPlane — 2026 2nd Half Roadmap, 2nd Japan Player Meetup (August 14, 2026)',
@@ -214,6 +237,7 @@ export const LABELS = {
     kr: '출처: 아우터플레인 2026년 하반기 로드맵, 제2회 일본 유저 간담회 (2026년 8월 14일)',
     zh: '来源: OuterPlane 2026年下半年路线图，第二届日本玩家恳谈会（2026年8月14日）',
     fr: 'Source : OuterPlane — Roadmap du second semestre 2026, 2e meetup des joueurs japonais (14 août 2026)',
+    es: 'Fuente: OuterPlane — Hoja de ruta 2ª mitad de 2026, 2º Encuentro de Jugadores de Japón (14 de agosto de 2026)',
   },
 } as const satisfies Record<string, Text>;
 
@@ -227,6 +251,7 @@ export const SEE_FIRST_HALF: Text = {
   kr: '2026년 1월~7월은 별도로 발표되었습니다. {L/2026 로드맵 (상반기)|/guides/other/roadmap-2026}를 참고하세요.',
   zh: '2026年1月至7月路线为另行公布，详见{L/2026路线图（上半年）|/guides/other/roadmap-2026}。',
   fr: 'Janvier à juillet 2026 ont été annoncés séparément — voir {L/Roadmap 2026 — Première moitié|/guides/other/roadmap-2026}.',
+  es: 'De enero a julio de 2026 se anunciaron por separado — ver {L/2026 Roadmap — First Half|/guides/other/roadmap-2026}.',
 };
 
 export const COUPONS_SEE_ALSO: Text = {
@@ -235,6 +260,7 @@ export const COUPONS_SEE_ALSO: Text = {
   kr: '사용 가능한 코드 전체와 보상·기간은 {L/쿠폰 코드|/coupons}에서 확인하세요.',
   zh: '全部可用兑换码奖励及有效期详见{L/兑换码|/coupons}。',
   fr: 'Tous les codes actifs, avec récompenses et date limite : {L/Codes promo|/coupons}.',
+  es: 'Todos los códigos activos, con sus recompensas y vencimiento: {L/Promo Codes|/coupons}.',
 };
 
 export const PICKUP_SEE_ALSO: Text = {
@@ -243,6 +269,7 @@ export const PICKUP_SEE_ALSO: Text = {
   kr: '각 배너의 규칙·확률·마일리지 상세는 {L/배너와 마일리지|/guides/general-guides/banner-mileage}를 참고하세요.',
   zh: '各卡池的完整规则、概率与点数详见{L/卡池与点数|/guides/general-guides/banner-mileage}。',
   fr: 'Règles, taux et mileage de chaque banner en détail : {L/Banner & Mileage|/guides/general-guides/banner-mileage}.',
+  es: 'Reglas completas, tasas y millaje de cada banner: {L/Banner & Mileage|/guides/general-guides/banner-mileage}.',
 };
 
 /** Les deux visuels d'ouverture du meeting. */
@@ -256,6 +283,7 @@ export const OPENING_SHOTS: Shot[] = [
       kr: '제2회 간담회',
       zh: '第二届恳谈会',
       fr: '2e rencontre communautaire',
+      es: '2º Encuentro de Jugadores',
     },
   },
   {
@@ -267,6 +295,7 @@ export const OPENING_SHOTS: Shot[] = [
       kr: '2026년 8월 14일',
       zh: '2026年8月14日',
       fr: '14 août 2026',
+      es: '14 de agosto de 2026',
     },
   },
 ];
@@ -283,6 +312,7 @@ export const AGENDA: Text[] = [
     kr: '신규 캐릭터',
     zh: '新角色',
     fr: 'Nouveaux personnages',
+    es: 'Nuevos Personajes',
   },
   {
     en: 'New Story Areas',
@@ -290,6 +320,7 @@ export const AGENDA: Text[] = [
     kr: '신규 스토리 지역',
     zh: '新剧情章节',
     fr: 'Nouvelles zones scénaristiques',
+    es: 'Nuevas Áreas de Historia',
   },
   {
     en: 'Game Improvements',
@@ -297,6 +328,7 @@ export const AGENDA: Text[] = [
     kr: '게임 개선',
     zh: '游戏方面改善',
     fr: 'Améliorations du jeu',
+    es: 'Mejoras del Juego',
   },
   {
     en: 'Monthly Schedule',
@@ -304,6 +336,7 @@ export const AGENDA: Text[] = [
     kr: '월별 스케줄',
     zh: '月度计划',
     fr: 'Calendrier mensuel',
+    es: 'Calendario mensual',
   },
 ];
 
@@ -322,6 +355,7 @@ export const RELEASE_PLAN_COUNTS: Array<{ label: Text; value: number }> = [
       kr: '데미우르고스',
       zh: '创世之神',
       fr: 'Demiurge',
+      es: 'Demiurgo',
     },
   },
   {
@@ -332,6 +366,7 @@ export const RELEASE_PLAN_COUNTS: Array<{ label: Text; value: number }> = [
       kr: '시즈널 한정',
       zh: '季节限定',
       fr: 'Limité saisonnier',
+      es: 'Limitado de temporada',
     },
   },
   {
@@ -342,9 +377,13 @@ export const RELEASE_PLAN_COUNTS: Array<{ label: Text; value: number }> = [
       kr: '비주얼 브러시업',
       zh: '形象重制',
       fr: 'Brush-Up visuel',
+      es: 'Mejora visual',
     },
   },
-  { value: 2, label: { en: 'Standard', jp: '通常', kr: '통상', zh: '普通', fr: 'Standard' } },
+  {
+    value: 2,
+    label: { en: 'Standard', jp: '通常', kr: '통상', zh: '普通', fr: 'Standard', es: 'Estándar' },
+  },
 ];
 
 export const RELEASE_PLAN_GOAL: Text = {
@@ -353,6 +392,7 @@ export const RELEASE_PLAN_GOAL: Text = {
   kr: '연내 8명의 캐릭터 공개를 목표로 준비 중',
   zh: '计划年内公开8名角色',
   fr: "Objectif visé : dévoiler 8 personnages d'ici la fin de l'année.",
+  es: 'Se apunta a revelar 8 personajes dentro del año.',
 };
 
 /**
@@ -369,6 +409,7 @@ export const RELEASE_PLAN_NOTES: Text[] = [
     kr: '8명의 내역은 1＋1＋4＋2입니다. 비주얼 브러시업 4명은 기존 캐릭터의 외형 개편이므로, 실제 신규는 4명입니다.',
     zh: '8名角色构成为 1＋1＋4＋2：4名是现有角色的外观翻新，意味着真正的新角色只有4名。',
     fr: "Les huit se répartissent en 1 + 1 + 4 + 2 : les quatre Brush-Up visuels sont des personnages existants qui changent d'apparence, donc seuls quatre des huit sont réellement nouveaux.",
+    es: 'Los ocho se desglosan como 1 + 1 + 4 + 2: las cuatro Mejoras Visuales son personajes existentes con un nuevo aspecto, así que solo cuatro de los ocho son realmente nuevos.',
   },
   {
     en: 'The Core Fusion lineup is not included at this time; it will be updated once the update policy is finalized.',
@@ -376,6 +417,7 @@ export const RELEASE_PLAN_NOTES: Text[] = [
     kr: '코어 융합 라인업은 현재 포함되어 있지 않으며, 업데이트 방침 확정 시 업데이트 예정',
     zh: '核心融合角色目前不包含在内，待更新方针确定后更新',
     fr: "La liste des Core Fusion n'est pas comprise dans ces chiffres : elle sera mise à jour dès que la politique de mise à jour sera arrêtée.",
+    es: 'La lista de Fusión Core no está incluida por el momento; se actualizará una vez que se finalice la política de actualización.',
   },
 ];
 
@@ -387,7 +429,14 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
   {
     name: 'Titia',
     accent: { border: 'border-sky-700/50', bg: 'bg-sky-900/20', text: 'text-sky-300' },
-    date: { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
+    date: {
+      en: 'September 8',
+      jp: '9月8日',
+      kr: '9월 8일',
+      zh: '9月8日',
+      fr: '8 septembre',
+      es: '8 de septiembre',
+    },
     images: ['titia.webp'],
   },
   {
@@ -395,7 +444,14 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     element: 'water',
     classType: 'striker',
     accent: { border: 'border-blue-700/50', bg: 'bg-blue-900/20', text: 'text-blue-300' },
-    date: { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
+    date: {
+      en: 'September 8',
+      jp: '9月8日',
+      kr: '9월 8일',
+      zh: '9月8日',
+      fr: '8 septembre',
+      es: '8 de septiembre',
+    },
     images: ['cf-rin.webp'],
   },
 ];
@@ -408,11 +464,18 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
 export const CORE_FUSION_CHARS: Array<{ name: string; month: Text }> = [
   {
     name: 'Rin',
-    month: { en: 'Sep 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 sept.' },
+    month: {
+      en: 'Sep 8',
+      jp: '9月8日',
+      kr: '9월 8일',
+      zh: '9月8日',
+      fr: '8 sept.',
+      es: '8 de sep',
+    },
   },
   {
     name: 'Eliza',
-    month: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre' },
+    month: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre', es: 'Septiembre' },
   },
 ];
 
@@ -422,6 +485,7 @@ export const CORE_FUSION_NOTE: Text = {
   kr: '9월 8일부터 코어 융합 동료를 일반 동료로 취급하도록 변경됩니다. 명칭 변경에 대해서는 검토 중입니다.',
   zh: '自9月8日起，核心融合同伴将被改为按普通同伴处理。是否变更该前缀仍在讨论中。',
   fr: "À partir du 8 septembre, les alliés Core Fusion sont traités comme des alliés ordinaires — un changement de nom du système est à l'étude.",
+  es: 'A partir del 8 de septiembre, los aliados de Fusión Core pasarán a tratarse como aliados estándar — se está evaluando un cambio de nombre para el sistema.',
 };
 
 /**
@@ -434,7 +498,7 @@ export const CORE_FUSION_NOTE: Text = {
 export const RELEASED: Array<{ name: string; date: Text }> = [
   {
     name: 'Demiurge Saeran',
-    date: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août' },
+    date: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août', es: 'Agosto' },
   },
 ];
 
@@ -449,17 +513,32 @@ export const REWORK_NOTE: Text = {
   kr: '비주얼 브러시업 및 밸런스 상향 조정을 진행합니다',
   zh: '将进行形象重制与平衡上调',
   fr: "Brush-up visuel et ajustements d'équilibrage à la hausse.",
+  es: 'Se realizarán mejoras visuales y ajustes de balance al alza.',
 };
 
 /** Noms éditoriaux EN + date annoncée. */
 export const REWORKS: Array<{ name: string; date: Text }> = [
   {
     name: 'Eliza',
-    date: { en: 'Sep 22', jp: '9月22日', kr: '9월 22일', zh: '9月22日', fr: '22 sept.' },
+    date: {
+      en: 'Sep 22',
+      jp: '9月22日',
+      kr: '9월 22일',
+      zh: '9月22日',
+      fr: '22 sept.',
+      es: '22 de sep',
+    },
   },
   {
     name: 'Alice',
-    date: { en: 'Dec 23', jp: '12月23日', kr: '12월 23일', zh: '12月23日', fr: '23 déc.' },
+    date: {
+      en: 'Dec 23',
+      jp: '12月23日',
+      kr: '12월 23일',
+      zh: '12月23日',
+      fr: '23 déc.',
+      es: '23 de dic',
+    },
   },
 ];
 
@@ -473,14 +552,15 @@ export const STORY_SHOTS: Shot[] = [
 
 export const STORY_TABLE: SlideTable = {
   headers: [
-    { en: 'Area', jp: '地域', kr: '지역', zh: '地区', fr: 'Zone' },
-    { en: 'Episode', jp: 'エピソード', kr: '에피소드', zh: '篇章', fr: 'Épisode' },
+    { en: 'Area', jp: '地域', kr: '지역', zh: '地区', fr: 'Zone', es: 'Área' },
+    { en: 'Episode', jp: 'エピソード', kr: '에피소드', zh: '篇章', fr: 'Épisode', es: 'Episodio' },
     {
       en: 'Scheduled Update',
       jp: 'アップデート予定',
       kr: '업데이트 예정',
       zh: '更新预定',
       fr: 'Mise à jour prévue',
+      es: 'Actualización Programada',
     },
   ],
   rows: [
@@ -491,6 +571,7 @@ export const STORY_TABLE: SlideTable = {
         kr: '리뉴얼 스토리',
         zh: '重制剧情',
         fr: 'Scénario remanié',
+        es: 'Historia Renovada',
       },
       {
         en: 'EP4: Luna & Veronica Arc',
@@ -498,8 +579,16 @@ export const STORY_TABLE: SlideTable = {
         kr: 'EP4: 루나 & 베로니카 편',
         zh: 'EP4：露娜＆维罗妮卡篇',
         fr: 'EP4 : arc Luna & Veronica',
+        es: 'EP4: Arco de Luna y Veronica',
       },
-      { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
+      {
+        en: 'September 8',
+        jp: '9月8日',
+        kr: '9월 8일',
+        zh: '9月8日',
+        fr: '8 septembre',
+        es: '8 de septiembre',
+      },
     ],
     [
       {
@@ -508,6 +597,7 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리',
         zh: '起源剧情',
         fr: 'Origin Story',
+        es: 'Historia de Origen',
       },
       {
         en: 'Origin Story Season 4-3',
@@ -515,8 +605,16 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리 시즌 4-3',
         zh: '起源剧情 第4季 Ep3',
         fr: 'Origin Story saison 4-3',
+        es: 'Historia de Origen Temporada 4-3',
       },
-      { en: 'October 20', jp: '10月20日', kr: '10월 20일', zh: '10月20日', fr: '20 octobre' },
+      {
+        en: 'October 20',
+        jp: '10月20日',
+        kr: '10월 20일',
+        zh: '10月20日',
+        fr: '20 octobre',
+        es: '20 de octubre',
+      },
     ],
     [
       {
@@ -525,6 +623,7 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리',
         zh: '起源剧情',
         fr: 'Origin Story',
+        es: 'Historia de Origen',
       },
       {
         en: 'Origin Story Season 4-4',
@@ -532,8 +631,16 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리 시즌 4-4',
         zh: '起源剧情 第4季 Ep4',
         fr: 'Origin Story saison 4-4',
+        es: 'Historia de Origen Temporada 4-4',
       },
-      { en: 'November 17', jp: '11月17日', kr: '11월 17일', zh: '11月17日', fr: '17 novembre' },
+      {
+        en: 'November 17',
+        jp: '11月17日',
+        kr: '11월 17일',
+        zh: '11月17日',
+        fr: '17 novembre',
+        es: '17 de noviembre',
+      },
     ],
     [
       {
@@ -542,6 +649,7 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리',
         zh: '起源剧情',
         fr: 'Origin Story',
+        es: 'Historia de Origen',
       },
       {
         en: 'Origin Story Season 4-5',
@@ -549,8 +657,16 @@ export const STORY_TABLE: SlideTable = {
         kr: '오리진 스토리 시즌 4-5',
         zh: '起源剧情 第4季 Ep5',
         fr: 'Origin Story saison 4-5',
+        es: 'Historia de Origen Temporada 4-5',
       },
-      { en: 'December 15', jp: '12月15日', kr: '12월 15일', zh: '12月15日', fr: '15 décembre' },
+      {
+        en: 'December 15',
+        jp: '12月15日',
+        kr: '12월 15일',
+        zh: '12月15日',
+        fr: '15 décembre',
+        es: '15 de diciembre',
+      },
     ],
   ],
 };
@@ -562,20 +678,21 @@ export const IMPROVEMENTS_SHOT: Shot = {
 
 /** En-têtes communs aux quatre tableaux d'améliorations. */
 const IMPROVEMENT_HEADERS: Text[] = [
-  { en: 'Item', jp: '項目', kr: '항목', zh: '项目', fr: 'Élément' },
-  { en: 'Details', jp: '内容', kr: '세부 내용', zh: '详细内容', fr: 'Détail' },
+  { en: 'Item', jp: '項目', kr: '항목', zh: '项目', fr: 'Élément', es: 'Objeto' },
+  { en: 'Details', jp: '内容', kr: '세부 내용', zh: '详细内容', fr: 'Détail', es: 'Detalles' },
   {
     en: 'Update (Expected) Timing',
     jp: 'アップデート（予定）時期',
     kr: '업데이트(예상) 시점',
     zh: '（预定）更新时间',
     fr: 'Mise à jour (prévue)',
+    es: 'Fecha (Prevista) de Actualización',
   },
 ];
 
 export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
   {
-    title: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août' },
+    title: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août', es: 'Agosto' },
     shot: {
       file: 'improvements-august.webp',
       alt: 'Game Improvements August table',
@@ -590,6 +707,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '스팀 런칭',
             zh: 'Steam版发布',
             fr: 'Lancement Steam',
+            es: 'Lanzamiento en Steam',
           },
           {
             en: 'Service begins on Steam.\nYou can enjoy the game even more comfortably on PC.',
@@ -597,6 +715,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '스팀에서 서비스를 시작합니다.\nPC에서도 더욱 편하게 즐기실 수 있습니다.',
             zh: '开始在Steam上运营。\nPC端也能更舒适地游玩。',
             fr: 'Ouverture du service sur Steam.\nUne expérience plus confortable sur PC également.',
+            es: 'El servicio comienza en Steam.\nPuedes disfrutar del juego de forma aún más cómoda en PC.',
           },
           {
             en: 'Late August (planned)',
@@ -604,6 +723,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '8월 말 예정',
             zh: '预计8月底',
             fr: 'Fin août (prévu)',
+            es: 'Finales de agosto (planeado)',
           },
         ],
         [
@@ -613,6 +733,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '스토리 리뉴얼',
             zh: '剧情重制',
             fr: 'Refonte du scénario',
+            es: 'Renovación de la historia',
           },
           {
             en: 'Area-transition effect added to the Adventure screen\nArea buttons improved to show Ex Stage clear status and number of stars earned\nEx Stage icon design changed to improve visibility\nGuide Quests added to Story (Hard) / Origin (Hard)',
@@ -620,8 +741,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '모험 화면에 지역 전환 연출 추가\n지역 버튼 내에서 Ex 스테이지 클리어 여부 및 별 획득 개수를 확인할 수 있도록 개선\nEx 스테이지 아이콘 디자인을 변경하여 시인성 개선\n스토리(하드) / 오리진(하드)에 가이드 퀘스트 추가',
             zh: '在冒险界面加入章节切换演出\n章节按钮内可确认Ex关卡的通关情况与获得星数\n变更Ex关卡图标设计，提升其辨识度\n为剧情(困难) / 起源(困难)加入教学任务',
             fr: "Ajout d'un effet de transition de zone sur l'écran Aventure\nLes boutons de zone affichent désormais l'état de complétion des Ex Stages et le nombre d'étoiles obtenues\nIcônes des Ex Stages redessinées pour une meilleure lisibilité\nGuide Quests ajoutées à Story (Hard) / Origin (Hard)",
+            es: 'Se añadió efecto de transición de área a la pantalla de Aventura\nBotones de área mejorados para mostrar el estado de despeje de la Etapa Ex y la cantidad de estrellas obtenidas\nDiseño del ícono de Etapa Ex cambiado para mejorar la visibilidad\nSe añadieron Misiones Guía a Historia (Difícil) / Origen (Difícil)',
           },
-          { en: 'August 11', jp: '8月11日', kr: '8월 11일', zh: '8月11日', fr: '11 août' },
+          {
+            en: 'August 11',
+            jp: '8月11日',
+            kr: '8월 11일',
+            zh: '8月11日',
+            fr: '11 août',
+            es: '11 de agosto',
+          },
         ],
         [
           {
@@ -630,6 +759,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '차원 특이점 - 2차',
             zh: '次元奇点 — 第2阶段',
             fr: 'Dimensional Singularity – phase 2',
+            es: 'Singularidad Dimensional – Fase 2',
           },
           {
             en: 'Singularity activation and enhancement can now be done together on the enhancement screen\n“Practice Mode” added so you can test repeatedly at no cost\nWhen rerolling Singularity options, a feature to compare before / after options and choose whether to apply is added\nDescriptions of how certain options apply are made easier to understand',
@@ -637,8 +767,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '특이점 활성화와 강화를 강화 화면에서 한 번에 진행할 수 있도록 개선\n부담 없이 여러 번 테스트할 수 있는 「연습 모드」 추가\n특이점 옵션 리롤 시, 변경 전 / 변경 후 옵션을 비교하여 적용 여부를 선택할 수 있는 기능 추가\n일부 옵션의 적용 방식에 대한 설명을 보다 알기 쉽게 개선',
             zh: '奇点激活与强化可在强化界面一次完成\n新增可无负担反复测试的「练习模式」\n重抽奇点选项时新增对比变更前 / 变更后选项并选择的功能\n改善部分选项作用的说明，使其更易理解',
             fr: "L'activation et l'amélioration des singularités se font désormais en une fois depuis l'écran d'amélioration\nAjout d'un « mode entraînement » permettant de tester autant de fois qu'on veut, sans coût\nLors d'un reroll des options de singularité, ajout d'une comparaison avant / après pour décider de les appliquer\nExplications plus claires sur le mode d'application de certaines options",
+            es: 'Ahora se puede realizar la activación y mejora de Singularidad juntas en la pantalla de mejora\nSe añadió el "Modo de Práctica" para que puedas probar repetidamente sin costo\nAl volver a tirar opciones de Singularidad, se añade una función para comparar las opciones de antes / después y elegir si aplicarlas\nSe hicieron más fáciles de entender las descripciones de cómo se aplican ciertas opciones',
           },
-          { en: 'August 25', jp: '8月25日', kr: '8월 25일', zh: '8月25日', fr: '25 août' },
+          {
+            en: 'August 25',
+            jp: '8月25日',
+            kr: '8월 25일',
+            zh: '8月25日',
+            fr: '25 août',
+            es: '25 de agosto',
+          },
         ],
         [
           {
@@ -647,6 +785,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '멸망의 섬 개편',
             zh: '灭亡之岛 改版',
             fr: 'Refonte de Terminus Isle',
+            es: 'Renovación de Isla Terminus',
           },
           {
             en: 'Guaranteed weather conversion is usable without a Monthly Pass purchase\nExploration wait time removed: results viewable as soon as the team is set\nStage balance adjusted: weather penalties / formation bonuses tuned per stage to remove disadvantages at lower stages, plus first-clear rewards per stage\nSweep All for exploration: check all available explorations and claim rewards at once\nTime to fully grow a Quirk shortened to roughly 30–40% of the current duration',
@@ -654,14 +793,22 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '날씨 확정 변환 기능을 월정액 구매 없이 사용할 수 있도록 개선\n탐사 시간 제거: 편성과 동시에 확인 가능하도록 개선\n단계별 밸런스 조정: 기상 페널티 / 편성 보너스를 단계별로 조정하여 낮은 단계에서의 불합리함을 해소, 단계 최초 클리어 보상 적용\n탐사 일괄 소탕: 확인 가능한 탐사를 한 번에 확인하고 보상을 수령할 수 있는 기능\n기프트 성장 완료까지의 시간 단축: 기존 대비 약 30~40% 수준으로 하향',
             zh: '天气变更无需月卡\n取消探索等待时间，编队即完成\n分阶段平衡调整：逐阶段调整天气惩罚及编队加成，消除低阶段的不合理之处，并加入各阶段首次通关奖励\n一键扫荡：可一次性完成所有可确认的探索并领取奖励\n天赋成长完成所需时间缩短：降至原先约30~40%的水平',
             fr: "Le changement de météo garanti s'utilise désormais sans achat du Monthly Pass\nSuppression du temps d'attente d'exploration : le résultat se consulte dès la composition établie\nÉquilibrage par palier : pénalités météo et bonus de composition ajustés palier par palier pour supprimer le désavantage aux paliers bas, et récompenses de première victoire par palier\nSweep All des explorations : tout consulter d'un coup et récupérer les récompenses\nDurée de croissance complète d'un Quirk réduite à environ 30–40 % de la durée actuelle",
+            es: 'La conversión garantizada de clima se puede usar sin comprar el Pase Mensual\nSe eliminó el tiempo de espera de exploración: los resultados se pueden ver tan pronto como se establece el equipo\nBalance de etapas ajustado: penalizaciones de clima / bonos de formación ajustados por etapa para eliminar desventajas en etapas más bajas, además de recompensas por primer despeje por etapa\nBarrido Total para exploración: revisa todas las exploraciones disponibles y reclama recompensas a la vez\nEl tiempo para desarrollar por completo un Quirk se acortó a aproximadamente el 30–40% de la duración actual',
           },
-          { en: 'August 25', jp: '8月25日', kr: '8월 25일', zh: '8月25日', fr: '25 août' },
+          {
+            en: 'August 25',
+            jp: '8月25日',
+            kr: '8월 25일',
+            zh: '8月25日',
+            fr: '25 août',
+            es: '25 de agosto',
+          },
         ],
       ],
     },
   },
   {
-    title: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre' },
+    title: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre', es: 'Septiembre' },
     shot: {
       file: 'improvements-september.webp',
       alt: 'Game Improvements September table',
@@ -676,6 +823,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '코어 융합',
             zh: '核心融合',
             fr: 'Core Fusion',
+            es: 'Fusión Core',
           },
           {
             en: 'Core Fusion allies changed to be treated as standard allies\n– A name change is under review',
@@ -683,8 +831,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '코어 융합 동료를 일반 동료로 취급하도록 변경\n– 명칭 변경에 대해서는 검토 중',
             zh: '将核心融合同伴改为按普通同伴处理\n– 前缀名是否变更仍在讨论中',
             fr: "Les alliés Core Fusion seront traités comme des alliés ordinaires\n– Un changement de nom est à l'étude",
+            es: 'Los aliados de Fusión Core cambiaron para ser tratados como aliados estándar\n– Se está evaluando un cambio de nombre',
           },
-          { en: 'September 8', jp: '9月8日', kr: '9월 8일', zh: '9月8日', fr: '8 septembre' },
+          {
+            en: 'September 8',
+            jp: '9月8日',
+            kr: '9월 8일',
+            zh: '9月8日',
+            fr: '8 septembre',
+            es: '8 de septiembre',
+          },
         ],
         [
           {
@@ -693,6 +849,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '초반부 장비 보상 개편',
             zh: '前期装备奖励 改版',
             fr: "Refonte des récompenses d'équipement du début de partie",
+            es: 'Rediseño de Recompensas de Equipo del Juego Temprano',
           },
           {
             en: 'Based on new players, the Gear rewards that drive early growth and convenience will have their grade / star rating reviewed\nGuide Quest / Mirsha Festival / Special Request Mission / new-player attendance · missions and more: reviewing and raising the level of obtainable Gear',
@@ -700,8 +857,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '신규 플레이어를 기준으로, 초반 성장과 플레이 편의를 담당하는 장비 보상의 등급 / 성급 재점검\n가이드 퀘스트 / 메르샤 페스티벌 / 특별 의뢰 미션 / 신규 플레이어 출석 · 미션 등에서 획득 가능한 장비 수준의 상향을 검토하여 처리',
             zh: '以新玩家为基准，重新审视承担前期成长与游玩便利性的装备奖励的等级 / 星级\n正在商讨教学任务 / 弥乐沙节 / 特别委托任务 / 新玩家签到、任务等可获得的装备的水准并予以提升',
             fr: "En prenant les nouveaux joueurs comme référence, la qualité et le rang d'étoiles des récompenses de Gear qui portent la progression du début de partie sont réexaminés\nGuide Quests / Mirsha Festival / missions de Special Request / connexion et missions des nouveaux joueurs, etc. : le niveau de Gear obtenu y sera relevé après examen",
+            es: 'Basado en los nuevos jugadores, se revisará el grado / calificación de estrellas del Equipo que impulsa el crecimiento y la comodidad temprana\nMisión Guía / Festival Mirsha / Misión de Encargo Especial / asistencia de nuevo jugador · misiones y más: revisando y elevando el nivel del Equipo obtenible',
           },
-          { en: 'September 22', jp: '9月22日', kr: '9월 22일', zh: '9月22日', fr: '22 septembre' },
+          {
+            en: 'September 22',
+            jp: '9月22日',
+            kr: '9월 22일',
+            zh: '9月22日',
+            fr: '22 septembre',
+            es: '22 de septiembre',
+          },
         ],
       ],
     },
@@ -713,6 +878,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
       kr: '콘텐츠 종료 · 연내 목표',
       zh: '内容终止 · 年内目标',
       fr: "Fermetures de contenu · objectifs de fin d'année",
+      es: 'Cierre de contenido · Objetivos del año',
     },
     shot: {
       file: 'improvements-content-closures.webp',
@@ -728,6 +894,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '모나드 게이트 종료',
             zh: '单子门关闭',
             fr: 'Fermeture de Monad Gate',
+            es: 'Cierre de Puerta Monad',
           },
           {
             en: 'Content closure processing\nRewards migrated due to closure',
@@ -735,8 +902,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '콘텐츠 종료 처리\n종료에 따른 보상 이관 처리',
             zh: '终止\n奖励将移至别处',
             fr: 'Fermeture du contenu\nTransfert des récompenses liées à la fermeture',
+            es: 'Procesamiento de cierre de contenido\nRecompensas migradas debido al cierre',
           },
-          { en: 'September 22', jp: '9月22日', kr: '9월 22일', zh: '9月22日', fr: '22 septembre' },
+          {
+            en: 'September 22',
+            jp: '9月22日',
+            kr: '9월 22일',
+            zh: '9月22日',
+            fr: '22 septembre',
+            es: '22 de septiembre',
+          },
         ],
         [
           {
@@ -745,6 +920,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '모험 라이선스 종료',
             zh: '冒险执照 关闭',
             fr: "Fermeture de l'Adventure License",
+            es: 'Cierre de Licencia aventura',
           },
           {
             en: 'Content closure processing\nRewards migrated due to closure',
@@ -752,8 +928,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '콘텐츠 종료 처리\n종료에 따른 보상 이관 처리',
             zh: '终止\n奖励移至别处',
             fr: 'Fermeture du contenu\nTransfert des récompenses liées à la fermeture',
+            es: 'Procesamiento de cierre de contenido\nRecompensas migradas debido al cierre',
           },
-          { en: 'October 6', jp: '10月6日', kr: '10월 6일', zh: '10月6日', fr: '6 octobre' },
+          {
+            en: 'October 6',
+            jp: '10月6日',
+            kr: '10월 6일',
+            zh: '10月6日',
+            fr: '6 octobre',
+            es: '6 de octubre',
+          },
         ],
         [
           {
@@ -762,6 +946,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '길드 경비 구역',
             zh: '公会警备区域',
             fr: 'Guild Security Area',
+            es: 'Área de seguridad del gremio',
           },
           {
             en: 'Sweep function unlocked upon reaching the highest rank\nWhen Sweep is available, handled together with the guild buff bubble (Lobby)',
@@ -769,8 +954,16 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '최고 랭크 도달 시, 소탕 기능 오픈\n소탕이 가능한 경우, 길드 버프 버블과 함께 처리 (로비)',
             zh: '达到最高等级时开放扫荡功能\n将与大厅公会增益气泡同时进行',
             fr: 'Fonction Sweep débloquée en atteignant le rang maximal\nQuand le Sweep est disponible, il est traité avec la bulle de buff de guilde (lobby)',
+            es: 'Función de barrido desbloqueada al alcanzar el rango más alto\nCuando el barrido esté disponible, se gestionará junto con la burbuja de bono de gremio (Lobby)',
           },
-          { en: 'October 6', jp: '10月6日', kr: '10월 6일', zh: '10月6日', fr: '6 octobre' },
+          {
+            en: 'October 6',
+            jp: '10月6日',
+            kr: '10월 6일',
+            zh: '10月6日',
+            fr: '6 octobre',
+            es: '6 de octubre',
+          },
         ],
       ],
     },
@@ -782,6 +975,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
       kr: '검토 중',
       zh: '讨论中',
       fr: "À l'étude",
+      es: 'En revisión',
     },
     shot: {
       file: 'improvements-under-review.webp',
@@ -797,6 +991,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '영입 개선',
             zh: '招募池改善',
             fr: 'Améliorations du Recruit',
+            es: 'Mejoras de Recluta',
           },
           {
             en: 'Male characters removed from the Recruit pool\nCurrent 1-star – 2-star characters: granted as Pieces in the story dungeon where they first appear\nMaxwell / Leo: kept as is, or granted in a similar manner to the above',
@@ -804,6 +999,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '남성 캐릭터를 영입 풀에서 제외\n현재의 ★1 ~ ★2 캐릭터 : 첫 등장 스토리 던전에서 조각으로 지급\n맥스웰 / 레오 : 현상 유지, 또는 위와 유사한 방법으로 지급',
             zh: '将男性角色从招募池中移除\n现有★1 ~ ★2角色：在其首次登场的剧情发放碎片\n麦克斯威尔 / 雷欧：维持现状或以与上述相似的方式发放',
             fr: 'Retrait des personnages masculins du pool de Recruit\nPersonnages ★1–★2 actuels : distribués sous forme de Pieces dans le donjon scénaristique où ils apparaissent pour la première fois\nMaxwell / Leo : statu quo, ou distribution selon une méthode similaire',
+            es: 'Personajes masculinos eliminados del pool de Recluta\nPersonajes actuales de 1-2 estrellas: otorgados como Piezas en la mazmorra de historia donde aparecen por primera vez\nMaxwell / Leo: se mantienen igual, u otorgados de manera similar a lo anterior',
           },
           {
             en: 'August 25 (planned)',
@@ -811,6 +1007,7 @@ export const IMPROVEMENT_BLOCKS: ImprovementBlock[] = [
             kr: '8월 25일 예정',
             zh: '预计8月25日',
             fr: '25 août (prévu)',
+            es: '25 de agosto (planeado)',
           },
         ],
       ],
@@ -829,6 +1026,7 @@ export const PICKUP_TITLE: Text = {
   kr: '픽업 개선 (8월 25일)',
   zh: 'PICKUP改善（8月25日）',
   fr: 'Améliorations des Pick-Up (25 août)',
+  es: 'Mejoras de Pick-Up (25 de agosto)',
 };
 
 export const PICKUP_INTRO: Text = {
@@ -837,6 +1035,7 @@ export const PICKUP_INTRO: Text = {
   kr: '기본 영입 룰과 확률은 기존과 동일하게 유지하되, 아래 요소를 추가합니다.',
   zh: '基本招募规则与概率维持不变，追加以下内容。',
   fr: "Les règles et les taux de Recruit de base ne changent pas ; les éléments suivants viennent s'y ajouter.",
+  es: 'Las reglas básicas y tasas de Recluta se mantienen sin cambios; se añaden los siguientes elementos.',
 };
 
 /**
@@ -863,6 +1062,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
       kr: '픽업 · 시즈널 한정 · 페스 한정 영입',
       zh: '概率提升招募・限定招募',
       fr: 'Rate Up Banner et Limited Banner',
+      es: 'Banners Rate Up y Limitados',
     },
     lines: [
       {
@@ -871,6 +1071,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '대상은 픽업, 시즈널 한정, 페스 한정입니다.',
         zh: '适用于概率提升招募、季节限定与庆典限定。',
         fr: 'Concerne les banners Rate Up, Seasonal Limited et Festival Limited.',
+        es: 'Cubre los banners Rate Up, Limitado de Temporada y Limitado de Festival.',
       },
       {
         en: 'The featured hero is guaranteed within 100 recruits, twice at most per banner.',
@@ -878,6 +1079,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '픽업 영웅은 100회 영입 이내에 확정됩니다. 배너당 최대 2회까지입니다.',
         zh: '在100次招募以内必定获得当期同伴，每个卡池最多2次。',
         fr: 'Le Héros en focus est garanti en 100 Recruits maximum, deux fois au plus par banner.',
+        es: 'El héroe destacado está garantizado dentro de 100 reclutamientos, como máximo dos veces por banner.',
       },
       {
         en: 'Progress is tracked per banner and never shared between them.',
@@ -885,6 +1087,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '진행도는 배너별로 관리되며 다른 배너와 공유되지 않습니다.',
         zh: '进度按卡池分别记录，不同卡池之间不共享。',
         fr: 'La progression est suivie banner par banner et ne se partage jamais entre elles.',
+        es: 'El progreso se rastrea por banner y nunca se comparte entre ellos.',
       },
       {
         en: 'Guarantees used and progress reset when the banner ends.',
@@ -892,6 +1095,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '사용한 확정 횟수와 진행도는 배너 종료 시 초기화됩니다.',
         zh: '已使用的保底次数和进度在卡池结束时重置。',
         fr: 'Garanties utilisées et progression sont remises à zéro à la fin de la banner.',
+        es: 'Las garantías usadas y el progreso se reinician cuando termina el banner.',
       },
     ],
   },
@@ -902,6 +1106,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
       kr: '프리미엄 영입 (데미우르고스)',
       zh: '创世之神招募',
       fr: 'Premium Banner (Demiurge)',
+      es: 'Banner Premium (Demiurgo)',
     },
     lines: [
       {
@@ -910,6 +1115,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '선택한 데미우르고스 영웅은 100회 영입 이내에 확정되며, 영웅 1명당 1회까지입니다.',
         zh: '在100次招募以内必定获得所选创世之神同伴。每名限1次。',
         fr: 'Le Héros Demiurge sélectionné est garanti en 100 Recruits maximum, une fois par Héros Demiurge.',
+        es: 'El héroe Demiurgo seleccionado está garantizado dentro de 100 reclutamientos, una vez por héroe Demiurgo.',
       },
       {
         en: 'Progress is tracked per hero and switching your selection resets nothing: 50 recruits on one, switch to another and it starts at 0 — come back to the first and you resume at 50.',
@@ -917,6 +1123,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '진행도는 영웅별로 기록되며 선택을 바꿔도 초기화되지 않습니다. 한 명에게 50회를 쓴 뒤 다른 영웅으로 바꾸면 그쪽은 0부터 시작하고, 원래 영웅으로 돌아오면 50회부터 이어집니다.',
         zh: '进度按同伴分别记录，更换所选同伴不会重置：对某位抽50次后换成另一位，后者从0开始；换回原来那位则从50次继续。',
         fr: "La progression est suivie par Héros et changer de sélection ne remet rien à zéro : 50 Recruits sur l'un, on passe à un autre qui démarre à 0 — on revient au premier et on reprend à 50.",
+        es: 'El progreso se rastrea por héroe y cambiar tu selección no reinicia nada: 50 reclutamientos en uno, cambia a otro y empieza en 0 — vuelve al primero y continúas en 50.',
       },
     ],
   },
@@ -927,6 +1134,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
       kr: '차원 물자 호출',
       zh: '次元物资召唤',
       fr: 'Dimensional Supply',
+      es: 'Suministro Dimensional',
     },
     lines: [
       {
@@ -935,6 +1143,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '영웅이 아니라 장비를 뽑는 배너입니다.',
         zh: '装备池。',
         fr: "La banner qui recrute de l'équipement et non des Héros.",
+        es: 'El banner que recluta gear en lugar de héroes.',
       },
       {
         en: 'Monthly acquisition opportunities adjusted for the highest-value Gear.',
@@ -942,6 +1151,7 @@ export const PICKUP_GROUPS: Array<{ heading: Text; lines: Text[] }> = [
         kr: '가장 가치가 높은 장비에 대해, 월별 획득 기회를 조정',
         zh: '针对价值最高的装备，调整每月的获取机会',
         fr: "Les occasions d'obtention mensuelles sont ajustées pour le Gear de plus grande valeur.",
+        es: 'Oportunidades mensuales de adquisición ajustadas para el Gear de mayor valor.',
       },
     ],
   },
@@ -968,6 +1178,7 @@ export const SCHEDULE_NOTE: Text = {
   kr: '해당 슬라이드는 8월과 9월까지만 다룹니다. 10월~12월은 스토리 업데이트 계획과 콘텐츠 종료 슬라이드를 바탕으로 정리한 것이며, 추측은 포함되지 않았습니다.',
   zh: '该组幻灯片本身只涵盖8月与9月的内容。10月至12月是依据"剧情更新计划"与"内容终止"两张幻灯片整理而成，未作任何推测。',
   fr: "La diapo elle-même s'arrête à septembre. Octobre à décembre sont recomposés ici depuis les diapos du plan scénaristique et des fermetures de contenu — rien n'y est déduit.",
+  es: 'La diapositiva en sí solo cubre agosto y septiembre. Octubre a diciembre se compilan aquí a partir de las diapositivas del Plan de Actualización de Historia y Cierre de Contenido — no se infiere nada.',
 };
 
 export const SCHEDULE_SHOT: Shot = {
@@ -986,7 +1197,7 @@ export const SCHEDULE_SHOT: Shot = {
  */
 export const MONTHLY_UPDATES: MonthlyUpdate[] = [
   {
-    month: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août' },
+    month: { en: 'August', jp: '8月', kr: '8월', zh: '8月', fr: 'Août', es: 'Agosto' },
     highlights: [
       {
         en: 'Steam Launch',
@@ -994,6 +1205,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '스팀 런칭',
         zh: 'Steam版发布',
         fr: 'Lancement Steam',
+        es: 'Lanzamiento en Steam',
       },
     ],
     newCharacters: [
@@ -1003,6 +1215,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '데미우르고스 세이란',
         zh: '创世之神 萨伊蓝',
         fr: 'Demiurge Saeran',
+        es: 'Demiurgo Saeran',
       },
     ],
     content: [
@@ -1012,6 +1225,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '스팀 런칭',
         zh: 'Steam版发布',
         fr: 'Lancement Steam',
+        es: 'Lanzamiento en Steam',
       },
       {
         en: 'Dimensional Singularity Improvements',
@@ -1019,6 +1233,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '차원 특이점 개선',
         zh: '次元奇点改进',
         fr: 'Améliorations Dimensional Singularity',
+        es: 'Mejoras de Singularidad Dimensional',
       },
       {
         en: 'Terminus Isle Overhaul',
@@ -1026,6 +1241,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '멸망의 섬 개편',
         zh: '灭亡之岛改版',
         fr: 'Refonte de Terminus Isle',
+        es: 'Renovación de Isla Terminus',
       },
       {
         en: 'Story Renewal',
@@ -1033,6 +1249,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '스토리 리뉴얼',
         zh: '剧情重制',
         fr: 'Refonte du scénario',
+        es: 'Renovación de la historia',
       },
       {
         en: 'Recruit Improvements',
@@ -1040,11 +1257,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '영입 개선',
         zh: '招募改进',
         fr: 'Améliorations du Recruit',
+        es: 'Mejoras de Recluta',
       },
     ],
   },
   {
-    month: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre' },
+    month: { en: 'September', jp: '9月', kr: '9월', zh: '9月', fr: 'Septembre', es: 'Septiembre' },
     highlights: [
       {
         en: 'Luna & Veronica arc concludes',
@@ -1052,27 +1270,30 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '루나 & 베로니카 편 완결',
         zh: '露娜＆维罗妮卡篇 完结',
         fr: 'Fin de l’arc Luna & Veronica',
+        es: 'El arco de Luna y Veronica concluye',
       },
     ],
     newCharacters: [
-      { en: 'Titia', jp: 'ティティア', kr: '티티아', zh: '蒂蒂亚', fr: 'Titia' },
+      { en: 'Titia', jp: 'ティティア', kr: '티티아', zh: '蒂蒂亚', fr: 'Titia', es: 'Titia' },
       {
         en: 'Eliza (Rework)',
         jp: 'エリーゼ（リワーク）',
         kr: '엘리제(리워크)',
         zh: '伊莉莎（重制）',
         fr: 'Eliza (refonte)',
+        es: 'Eliza (Rework)',
       },
     ],
     coreFusions: ['Rin', 'Eliza'],
     story: [
-      { en: 'Area 4', jp: '地域 4', kr: '지역 4', zh: 'Ep4', fr: 'Zone 4' },
+      { en: 'Area 4', jp: '地域 4', kr: '지역 4', zh: 'Ep4', fr: 'Zone 4', es: 'Área 4' },
       {
         en: 'Luna & Veronica arc concludes',
         jp: 'ルナ＆ヴェロニカ編 完結',
         kr: '루나 & 베로니카 편 완결',
         zh: '露娜＆维罗妮卡篇 完结',
         fr: 'Arc Luna & Veronica — conclusion',
+        es: 'El arco de Luna y Veronica concluye',
       },
     ],
     content: [
@@ -1082,6 +1303,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '코어 융합 개편',
         zh: '核心融合改版',
         fr: 'Refonte de Core Fusion',
+        es: 'Rework de Fusión Core',
       },
       {
         en: 'Early-Game Gear Reward Rework',
@@ -1089,6 +1311,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '초반부 장비 보상 개편',
         zh: '前期装备奖励改版',
         fr: "Refonte des récompenses d'équipement du début de partie",
+        es: 'Rediseño de Recompensas de Equipo del Juego Temprano',
       },
       {
         en: 'Monad Gate Closure',
@@ -1096,11 +1319,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '모나드 게이트 종료',
         zh: '单子门关闭',
         fr: 'Fermeture de Monad Gate',
+        es: 'Cierre de Puerta Monad',
       },
     ],
   },
   {
-    month: { en: 'October', jp: '10月', kr: '10월', zh: '10月', fr: 'Octobre' },
+    month: { en: 'October', jp: '10月', kr: '10월', zh: '10月', fr: 'Octobre', es: 'Octubre' },
     highlights: [],
     story: [
       {
@@ -1109,6 +1333,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '오리진 스토리 시즌 4-3',
         zh: '起源剧情 第4季 Ep3',
         fr: 'Origin Story saison 4-3',
+        es: 'Historia de Origen Temporada 4-3',
       },
     ],
     content: [
@@ -1118,6 +1343,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '모험 라이선스 종료',
         zh: '冒险家执照终止',
         fr: "Fermeture de l'Adventure License",
+        es: 'Cierre de Licencia aventura',
       },
       {
         en: 'Guild Security Area: Sweep at max rank',
@@ -1125,11 +1351,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '길드 경비 구역: 최고 랭크 시 소탕',
         zh: '公会警备区域可扫荡',
         fr: 'Guild Security Area : Sweep au rang max',
+        es: 'Área de Seguridad del Gremio: Barrido en rango máximo',
       },
     ],
   },
   {
-    month: { en: 'November', jp: '11月', kr: '11월', zh: '11月', fr: 'Novembre' },
+    month: { en: 'November', jp: '11月', kr: '11월', zh: '11月', fr: 'Novembre', es: 'Noviembre' },
     highlights: [],
     story: [
       {
@@ -1138,11 +1365,12 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '오리진 스토리 시즌 4-4',
         zh: '起源剧情 第4季 Ep4',
         fr: 'Origin Story saison 4-4',
+        es: 'Historia de Origen Temporada 4-4',
       },
     ],
   },
   {
-    month: { en: 'December', jp: '12月', kr: '12월', zh: '12月', fr: 'Décembre' },
+    month: { en: 'December', jp: '12月', kr: '12월', zh: '12月', fr: 'Décembre', es: 'Diciembre' },
     highlights: [],
     newCharacters: [
       {
@@ -1151,6 +1379,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '앨리스(브러시업)',
         zh: '爱丽丝（形象重制）',
         fr: 'Alice (Brush-Up)',
+        es: 'Alice (Brush-Up)',
       },
     ],
     story: [
@@ -1160,6 +1389,7 @@ export const MONTHLY_UPDATES: MonthlyUpdate[] = [
         kr: '오리진 스토리 시즌 4-5',
         zh: '起源剧情 第4季 Ep5',
         fr: 'Origin Story saison 4-5',
+        es: 'Historia de Origen Temporada 4-5',
       },
     ],
   },

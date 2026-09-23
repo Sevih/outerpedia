@@ -10,7 +10,8 @@
         "jp": "{D/ETERNAL_BLEEDING}を重ねて、弱体効果の持続ターンを延長することに集中。",
         "kr": "{D/ETERNAL_BLEEDING}를 중첩하고 약화 효과 지속 시간을 연장하는 데 집중.",
         "zh": "专注于叠加{D/ETERNAL_BLEEDING}并延长弱化效果持续时间。",
-        "fr": "Misez sur l'empilement de stacks {D/ETERNAL_BLEEDING} et le prolongement de la durée des debuffs."
+        "fr": "Misez sur l'empilement de stacks {D/ETERNAL_BLEEDING} et le prolongement de la durée des debuffs.",
+        "es": "Concéntrate en aplicar stacks de {D/ETERNAL_BLEEDING} y extender la duración de los debuffs."
       }
     ]
   },
@@ -25,7 +26,8 @@
         "jp": "{D/BT_DOT_BURN}を重ねて、弱体効果の持続ターンを延長することに集中。",
         "kr": "{D/BT_DOT_BURN}를 중첩하고 약화 효과 지속 시간을 연장하는 데 집중.",
         "zh": "专注于叠加{D/BT_DOT_BURN}并延长弱化效果持续时间。",
-        "fr": "Misez sur l'empilement de stacks {D/BT_DOT_BURN} et le prolongement de la durée des debuffs."
+        "fr": "Misez sur l'empilement de stacks {D/BT_DOT_BURN} et le prolongement de la durée des debuffs.",
+        "es": "Concéntrate en aplicar stacks de {D/BT_DOT_BURN} y extender la duración de los debuffs."
       }
     ]
   }

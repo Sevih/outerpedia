@@ -2,7 +2,9 @@
   "teams": [
     {
       "title": {
-        "en": "Light"
+        "en": "Light",
+        "es": "Luz",
+        "fr": "Lumière"
       },
       "element": "light",
       "slots": [
@@ -22,7 +24,8 @@
             "jp": "{P/Demiurge Luna} S2の追加ターン無効に注意",
             "kr": "{P/Demiurge Luna} S2의 추가 턴 불가에 주의",
             "zh": "注意{P/Demiurge Luna} S2的无额外回合",
-            "fr": "Attention au No Extra Turn pour le S2 de {P/Demiurge Luna}"
+            "fr": "Attention au No Extra Turn pour le S2 de {P/Demiurge Luna}",
+            "es": "Ten cuidado con el No Extra Turn del S2 de {P/Demiurge Luna}"
           }
         }
       ],
@@ -34,7 +37,9 @@
     },
     {
       "title": {
-        "en": "Ember"
+        "en": "Ember",
+        "es": "Ember",
+        "fr": "Ember"
       },
       "element": "fire",
       "slots": [["Ember"]],
@@ -49,7 +54,8 @@
             "jp": "{P/Ember}だけで十分です。",
             "kr": "{P/Ember}만 있으면 됩니다.",
             "zh": "只需要{P/Ember}即可。",
-            "fr": "{P/Ember} suffit à elle seule."
+            "fr": "{P/Ember} suffit à elle seule.",
+            "es": "Con {P/Ember} es suficiente."
           }
         }
       ],
@@ -61,7 +67,9 @@
     },
     {
       "title": {
-        "en": "GBeth"
+        "en": "GBeth",
+        "es": "GBeth",
+        "fr": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Kuro"], ["Akari"], ["Gnosis Beth"], ["Monad Eva"]],

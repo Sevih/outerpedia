@@ -4,17 +4,19 @@
     "jp": "VI=E-11-A",
     "kr": "VI=E-11-A",
     "zh": "VI=E-11-A",
-    "fr": "VI=E-11-A"
+    "fr": "VI=E-11-A",
+    "es": "VI=E-11-A"
   },
   "description": {
     "en": "VI=E-11-A (Earth), Dimensional Singularity — a DoT playground: +150% damage from DoTs, crits nullified, Poison spread every turn; lead with a Defender. Skills, teams & strategies.",
     "jp": "次元特異点「VI=E-11-A」攻略 — DoT特化ボス。DoTダメージ+150%、会心は無効化、毎ターン毒を撒く。先頭はディフェンダーで。スキル・編成・攻略法。",
     "kr": "차원 특이점: VI=E-11-A 공략 — 도트 특화 보스. 도트 피해 +150%, 치명타는 무효, 매 턴 중독을 뿌린다. 선두는 디펜더로. 스킬, 팀 편성, 공략법.",
     "zh": "次元奇点：VI=E-11-A攻略 — 持续伤害的主场：DoT伤害+150%，暴击被无效化，每回合散布中毒；首位放防御者。技能、队伍编成与策略。",
-    "fr": "Singularité Dimensionnelle : VI=E-11-A (Earth) — le paradis des DoT : +150% de dégâts des DoT, crits annulés, Poison chaque tour ; un Defender en tête. Compétences, équipes et stratégies."
+    "fr": "Singularité Dimensionnelle : VI=E-11-A (Earth) — le paradis des DoT : +150% de dégâts des DoT, crits annulés, Poison chaque tour ; un Defender en tête. Compétences, équipes et stratégies.",
+    "es": "VI=E-11-A (Tierra), Dimensional Singularity — un parque de DoT: +150% daño de DoTs, críticos anulados, Veneno se propaga cada turno; lidera con un Defensor. Skills, equipos y estrategias."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Shiraen / Sevih",
-  "updated": "2026-05-13",
+  "updated": "2026-09-23",
   "bossId": "60000009"
 }

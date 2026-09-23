@@ -6,7 +6,8 @@
         "jp": "フェーズ1",
         "kr": "페이즈 1",
         "zh": "阶段1",
-        "fr": "Phase 1"
+        "fr": "Phase 1",
+        "es": "Fase 1"
       },
       "slots": [
         ["Viella", "Saeran", "Veronica"],
@@ -21,7 +22,8 @@
         "jp": "フェーズ2",
         "kr": "페이즈 2",
         "zh": "阶段2",
-        "fr": "Phase 2"
+        "fr": "Phase 2",
+        "es": "Fase 2"
       },
       "slots": [
         ["Monad Eva", "Demiurge Delta"],

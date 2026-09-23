@@ -7,7 +7,8 @@
         "jp": "{C/Ranger} {E/Earth}アタッカー。",
         "kr": "{C/Ranger} {E/Earth} 딜러.",
         "zh": "{C/Ranger} {E/Earth}输出。",
-        "fr": "DPS {C/Ranger} {E/Earth}."
+        "fr": "DPS {C/Ranger} {E/Earth}.",
+        "es": "{C/Ranger} dps {E/Earth}."
       }
     },
     {
@@ -17,7 +18,8 @@
         "jp": "最強クラスの{C/Ranger}。",
         "kr": "최강급 {C/Ranger}.",
         "zh": "最强{C/Ranger}之一。",
-        "fr": "L'un des meilleurs {C/Ranger}."
+        "fr": "L'un des meilleurs {C/Ranger}.",
+        "es": "Uno de los {C/Ranger} más fuertes."
       }
     }
   ],

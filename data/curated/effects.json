@@ -40,7 +40,9 @@
       "en": "Steal buff from the target.",
       "jp": "対象の強化効果を奪う。",
       "kr": "대상의 강화 효과를 빼앗습니다.",
-      "zh": "夺取目标的强化效果。"
+      "zh": "夺取目标的强化效果。",
+      "es": "Roba un bono del objetivo.",
+      "fr": "Vole un chamois à la cible."
     }
   },
   "106": {
@@ -77,13 +79,17 @@
       "en": "Discharge AP",
       "jp": "AP減少",
       "kr": "AP 감소",
-      "zh": "减少AP"
+      "zh": "减少AP",
+      "es": "Descarga AP",
+      "fr": "Décharge de PA"
     },
     "desc": {
       "en": "Reduces enemy Action Points",
       "jp": "敵のAPを減少させる。",
       "kr": "적의 AP를 감소시킵니다.",
-      "zh": "减少敌方的AP。"
+      "zh": "减少敌方的AP。",
+      "es": "Reduce los Puntos de Acción enemigos",
+      "fr": "Réduit les Points d'Action de l'ennemi"
     },
     "icon": "SC_Debuff_Effect_AP",
     "isDebuff": true,
@@ -96,13 +102,17 @@
       "en": "Discharge CP",
       "jp": "CP減少",
       "kr": "CP 감소",
-      "zh": "减少CP"
+      "zh": "减少CP",
+      "es": "Descarga CP",
+      "fr": "Décharge de CP"
     },
     "desc": {
       "en": "Reduces enemy Chain Points",
       "jp": "敵のCPを減少させる。",
       "kr": "적의 CP를 감소시킵니다.",
-      "zh": "减少敌方的CP。"
+      "zh": "减少敌方的CP。",
+      "es": "Reduce los Puntos de Cadena enemigos",
+      "fr": "Réduit les Points de Chaîne de l'ennemi"
     },
     "icon": "SC_Buff_Effect_CP_down",
     "isDebuff": true,
@@ -115,13 +125,17 @@
       "en": "Dual Attack (x2)",
       "jp": "連携 (×2)",
       "kr": "협공 (×2)",
-      "zh": "协同攻击（×2）"
+      "zh": "协同攻击（×2）",
+      "es": "Ataque Doble (x2)",
+      "fr": "Attaque double (x2)"
     },
     "desc": {
       "en": "Calls on 2 allies to attack.",
       "jp": "味方を2人呼び出して攻撃する。",
       "kr": "아군 2명의 공격을 호출합니다.",
-      "zh": "召唤2名友方一起攻击。"
+      "zh": "召唤2名友方一起攻击。",
+      "es": "Llama a 2 aliados para atacar.",
+      "fr": "Fait appel à 2 alliés pour attaquer."
     },
     "icon": "SC_Buff_Effect_Double_Dual_Attack",
     "isDebuff": false,
@@ -134,13 +148,17 @@
       "en": "Elemental Advantage",
       "jp": "属性優位",
       "kr": "속성 우위",
-      "zh": "属性优势"
+      "zh": "属性优势",
+      "es": "Ventaja Elemental",
+      "fr": "Avantage élémentaire"
     },
     "desc": {
       "en": "This skill is always treated as having a favorable attribute",
       "jp": "常に有利な属性で攻撃する。",
       "kr": "항상 유리한 속성으로 공격합니다.",
-      "zh": "此技能始终视为具有属性优势。"
+      "zh": "此技能始终视为具有属性优势。",
+      "es": "Este skill siempre se trata como si tuviera un atributo favorable",
+      "fr": "Ce skill est toujours considéré comme ayant un attribut favorable"
     },
     "icon": "SC_Buff_Effect_Element_Superiority",
     "isDebuff": false,
@@ -153,13 +171,17 @@
       "en": "Extinction",
       "jp": "復活不可",
       "kr": "부활 불가",
-      "zh": "无法复活"
+      "zh": "无法复活",
+      "es": "Extinción",
+      "fr": "Extinction"
     },
     "desc": {
       "en": "Enemies killed by this skill cannot be Resurrected or Revived.",
       "jp": "このスキルで倒された敵は蘇生・復活できない。",
       "kr": "이 스킬로 처치된 적은 부활할 수 없습니다.",
-      "zh": "因该技能死亡的敌人无法触发复活与苏醒效果。"
+      "zh": "因该技能死亡的敌人无法触发复活与苏醒效果。",
+      "es": "Los enemigos eliminados por este skill no pueden ser Resucitados ni Revividos.",
+      "fr": "Les ennemis tués par ce skill ne peuvent pas être Ressuscités ou Réanimés."
     },
     "icon": "IG_Buff_Seal_Ressurection",
     "isDebuff": true,
@@ -172,13 +194,17 @@
       "en": "Increase Debuff Duration",
       "jp": "弱体効果持続ターン増加",
       "kr": "약화 효과 지속 시간 증가",
-      "zh": "弱化效果持续时间增加"
+      "zh": "弱化效果持续时间增加",
+      "es": "Aumenta duración de debuff",
+      "fr": "Augmentation de la durée du debuff"
     },
     "desc": {
       "en": "Increased duration of detrimental effects granted on target.",
       "jp": "対象に付与された弱体効果の持続時間が増加する。",
       "kr": "대상에게 부여된 약화 효과의 지속 시간이 증가합니다.",
-      "zh": "使目标身上的弱化效果持续时间增加。"
+      "zh": "使目标身上的弱化效果持续时间增加。",
+      "es": "Aumenta la duración de los efectos perjudiciales otorgados al objetivo.",
+      "fr": "Durée augmentée des effets néfastes accordés sur la cible."
     },
     "icon": "IG_Buff_BuffdurationIncrease",
     "isDebuff": true,
@@ -191,13 +217,17 @@
       "en": "Miss Rate Up",
       "jp": "ミスヒット発生率UP",
       "kr": "빗나감 확률 증가",
-      "zh": "未命中率提升"
+      "zh": "未命中率提升",
+      "es": "Tasa de fallo +",
+      "fr": "Taux d'échec augmenté"
     },
     "desc": {
       "en": "Increases the target's Miss rate by 15%. When a Miss occurs, damage is reduced by 50%, and debuffs and critical hits do not occur.",
       "jp": "対象のミスヒット発生率が15%増加します。ミスヒット発生時、ダメージが50%減少し、弱体効果および会心は発生しません。",
       "kr": "대상의 빗나감 확률이 15% 증가합니다. 빗나감 발생 시 피해량이 50% 감소하며, 약화 효과와 치명타가 발생하지 않습니다.",
-      "zh": "目标的未命中率提升15%。发生未命中时,伤害降低50%,且不会触发弱化效果与暴击。"
+      "zh": "目标的未命中率提升15%。发生未命中时,伤害降低50%,且不会触发弱化效果与暴击。",
+      "es": "Aumenta la tasa de fallo del objetivo en un 15%. Cuando ocurre un fallo, el daño se reduce en un 50% y no ocurren debuffs ni golpes críticos.",
+      "fr": "Augmente le taux d'échec de la cible de 15%. Lorsqu'un échec se produit, les dégâts sont réduits de 50%, et les debuffs et les coups critiques ne se produisent pas."
     },
     "icon": "SC_Buff_Stat_Avoid",
     "isDebuff": false,
@@ -210,13 +240,17 @@
       "en": "Reduced Buff Duration",
       "jp": "強化効果持続ターン減少",
       "kr": "강화 효과 지속 시간 감소",
-      "zh": "强化效果持续时间减少"
+      "zh": "强化效果持续时间减少",
+      "es": "Reduce duración de bono",
+      "fr": "Durée du chamois réduite"
     },
     "desc": {
       "en": "Reduced duration of beneficial effects granted on target.",
       "jp": "対象に付与された強化効果の持続時間が減少する。",
       "kr": "대상에게 부여된 강화 효과의 지속 시간이 감소합니다.",
-      "zh": "使目标身上的强化效果持续时间减少。"
+      "zh": "使目标身上的强化效果持续时间减少。",
+      "es": "Reduce la duración de los efectos beneficiosos otorgados al objetivo.",
+      "fr": "Durée réduite des effets bénéfiques accordés sur la cible."
     },
     "icon": "IG_Buff_BuffdurationReduce",
     "isDebuff": true,
@@ -229,13 +263,17 @@
       "en": "Reduced Evasion",
       "jp": "回避DOWN",
       "kr": "회피 감소",
-      "zh": "回避降低"
+      "zh": "回避降低",
+      "es": "Evasión reducida",
+      "fr": "Esquive réduite"
     },
     "desc": {
       "en": "Reduces Evasion by 50%.",
       "jp": "対象の回避を50%DOWNさせる。",
       "kr": "대상의 회피를 50% 감소시킵니다.",
-      "zh": "使目标的回避降低50%。"
+      "zh": "使目标的回避降低50%。",
+      "es": "Reduce la Evasión en un 50%.",
+      "fr": "Réduit l'esquive de 50%."
     },
     "icon": "SC_Buff_Stat_Avoid",
     "isDebuff": true,
@@ -252,7 +290,9 @@
       "en": "Generates AP.",
       "jp": "APを獲得する。",
       "kr": "AP를 획득합니다.",
-      "zh": "获得AP。"
+      "zh": "获得AP。",
+      "es": "Genera AP.",
+      "fr": "Génère des PA."
     },
     "keys": ["BT_AP_CHARGE"],
     "tag": "utility"
@@ -262,7 +302,9 @@
       "en": "Generates Chain Points.",
       "jp": "CPを獲得する。",
       "kr": "CP를 획득합니다.",
-      "zh": "获得CP。"
+      "zh": "获得CP。",
+      "es": "Genera Puntos de Cadena.",
+      "fr": "Génère des Points de Chaîne."
     },
     "keys": ["BT_CP_CHARGE"]
   },
@@ -274,7 +316,9 @@
       "en": "Increased duration of detrimental effects granted on target.",
       "jp": "対象に付与された弱体効果の持続時間が増加する。",
       "kr": "대상에게 부여된 약화 효과의 지속 시간이 증가합니다.",
-      "zh": "使目标身上的弱化效果持续时间增加。"
+      "zh": "使目标身上的弱化效果持续时间增加。",
+      "es": "Aumenta la duración de los efectos perjudiciales otorgados al objetivo.",
+      "fr": "Durée augmentée des effets néfastes accordés sur la cible."
     },
     "icon": "IG_Buff_BuffdurationIncrease",
     "keys": ["BT_EXTEND_DEBUFF", "INCREASE_DEBUFF_DURATION"]
@@ -284,13 +328,17 @@
       "en": "Discharge AP",
       "jp": "AP減少",
       "kr": "AP 감소",
-      "zh": "减少AP"
+      "zh": "减少AP",
+      "es": "Descarga AP",
+      "fr": "Décharge de PA"
     },
     "desc": {
       "en": "Reduces enemy Action Points",
       "jp": "敵のAPを減少させる。",
       "kr": "적의 AP를 감소시킵니다.",
-      "zh": "减少敌方的AP。"
+      "zh": "减少敌方的AP。",
+      "es": "Reduce los Puntos de Acción enemigos",
+      "fr": "Réduit les Points d'Action de l'ennemi"
     },
     "icon": "SC_Debuff_Effect_AP",
     "keys": ["BT_AP_CHARGE", "DISCHARGE_AP"],
@@ -302,13 +350,17 @@
       "en": "Uncounterable",
       "jp": "反撃不可",
       "kr": "반격 불가",
-      "zh": "无法反击"
+      "zh": "无法反击",
+      "es": "Sin contraataque",
+      "fr": "Incontrable"
     },
     "desc": {
       "en": "Negates enemy reactive strikes: Counterattack, Revenge, or Agile Response.",
       "jp": "敵の反撃・復讐・迅速対応による反応攻撃を無効化する。",
       "kr": "적의 반격·복수·신속 대응과 같은 반응 공격을 무효화합니다.",
-      "zh": "无效化敌方的反应攻击：反击、复仇或迅速应对。"
+      "zh": "无效化敌方的反应攻击：反击、复仇或迅速应对。",
+      "es": "Anula los ataques reactivos enemigos: Contraataque, Venganza o Respuesta Ágil.",
+      "fr": "Annule les ripostes ennemies : Contre-ATQ, Vengeance ou Riposte agile."
     },
     "icon": "IG_Buff_Seal_Counter",
     "isDebuff": false,
@@ -321,13 +373,17 @@
       "en": "Unique Resource Down",
       "jp": "固有リソースDOWN",
       "kr": "고유 자원 감소",
-      "zh": "固有资源减少"
+      "zh": "固有资源减少",
+      "es": "Reduce Recurso Único",
+      "fr": "Réduction de Ressource unique"
     },
     "desc": {
       "en": "Reduces the target's Unique Resource.",
       "jp": "対象の固有リソースを減少させる。",
       "kr": "대상의 고유 자원을 감소시킵니다.",
-      "zh": "减少目标的固有资源。"
+      "zh": "减少目标的固有资源。",
+      "es": "Reduce el Recurso Único del objetivo.",
+      "fr": "Réduit la Ressource unique de la cible."
     },
     "icon": "SC_Buff_resource_down",
     "isDebuff": true,
@@ -340,13 +396,17 @@
       "en": "Weakness Gauge Damage",
       "jp": "弱点ゲージダメージ",
       "kr": "약점 게이지 피해",
-      "zh": "弱点击破伤害"
+      "zh": "弱点击破伤害",
+      "es": "Daño a la Barra de Debilidad",
+      "fr": "Dégâts à la Jauge de faiblesse"
     },
     "desc": {
       "en": "Deal additional Weakness Gauge damage.",
       "jp": "WGに追加ダメージを与える。",
       "kr": "WG에 추가 피해를 줍니다.",
-      "zh": "对WG造成追加伤害。"
+      "zh": "对WG造成追加伤害。",
+      "es": "Inflige daño adicional a la Barra de Debilidad.",
+      "fr": "Inflige des dégâts supplémentaires à la Jauge de faiblesse."
     },
     "icon": "SC_Buff_Effect_WG_Dmg",
     "isDebuff": true,

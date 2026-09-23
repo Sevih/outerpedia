@@ -4,7 +4,8 @@
     "jp": "次元特異点ローテーションに登場する{E/Dark}属性{C/Ranger}ボス。スピード相対性のパズル：スクルドより{S/SPD}が遅い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける — さらに彼女は毎ターン味方全体の{S/SPD}を5%増加させる（最大+25%）。さらにHP90%以下の味方から受けるダメージが+50%、{B/BT_IMMUNE}を無視する{D/BT_SEALED}を付与し、呪い／固定ダメージは50000で頭打ちとなる。{E/Dark}属性ボスのため、狂暴化パッシブが有利相性でない対象からのダメージを大きく軽減するため、{E/Light}属性の味方が有利となる。",
     "kr": "차원 특이점 로테이션에 등장하는 {E/Dark} 속성 {C/Ranger} 보스. 속도 상대성 퍼즐: 스쿨드보다 {S/SPD}가 느린 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다 — 게다가 그녀는 매 턴 아군 전체의 {S/SPD}를 5%씩 증가시킵니다(최대 +25%). 또한 HP 90% 이하인 아군에게 +50% 피해를 받고, {B/BT_IMMUNE}을 무시하는 {D/BT_SEALED}을 부여하며, 저주/고정 피해는 50000으로 제한됩니다. {E/Dark} 속성 보스이므로 광폭화 패시브가 유리 상성이 아닌 대상의 피해를 크게 감소시켜 {E/Light} 속성 아군이 유리합니다.",
     "zh": "出现在次元奇点轮换中的{E/Dark}属性{C/Ranger}Boss。速度相对性谜题：{S/SPD}比斯库尔德慢的友军对她造成+50%伤害，而比她快的友军受到+50%伤害 — 而且她在每回合使全队{S/SPD}增加5%（最多+25%）。此外，她受到生命值90%及以下友军的伤害+50%，施加无视{B/BT_IMMUNE}的{D/BT_SEALED}，且诅咒／固定伤害上限为50000。作为{E/Dark}属性Boss，她的狂暴化被动会大幅减免非克制属性目标的伤害，因此{E/Light}属性友军更具优势。",
-    "fr": "Boss {E/Dark} {C/Ranger} présent dans la rotation de la Singularité Dimensionnelle. Un casse-tête de relativité de vitesse : les héros plus lents que Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides qu'elle subissent +50% de dégâts — et elle augmente la {S/SPD} de toute votre équipe de 5% à chaque tour (max +25%). Elle subit aussi +50% de dégâts des héros à 90% PV ou moins, inflige {D/BT_SEALED} en ignorant {B/BT_IMMUNE}, et plafonne les dégâts de Malédiction / Fixes à 50000. En tant que boss {E/Dark}, son passif de Berserk réduit fortement les dégâts des cibles sans avantage élémentaire, ce qui favorise les héros {E/Light}."
+    "fr": "Boss {E/Dark} {C/Ranger} présent dans la rotation de la Singularité Dimensionnelle. Un casse-tête de relativité de vitesse : les héros plus lents que Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides qu'elle subissent +50% de dégâts — et elle augmente la {S/SPD} de toute votre équipe de 5% à chaque tour (max +25%). Elle subit aussi +50% de dégâts des héros à 90% PV ou moins, inflige {D/BT_SEALED} en ignorant {B/BT_IMMUNE}, et plafonne les dégâts de Malédiction / Fixes à 50000. En tant que boss {E/Dark}, son passif de Berserk réduit fortement les dégâts des cibles sans avantage élémentaire, ce qui favorise les héros {E/Light}.",
+    "es": "Jefe {C/Ranger} de elemento {E/Dark} presente en la rotación de la Singularidad Dimensional. Un rompecabezas de relatividad de Velocidad: los héroes más lentos que Skuld infligen +50% de daño a ella, mientras que los héroes más rápidos que ella reciben +50% de daño — y ella aumenta el {S/SPD} de todo tu equipo en 5% cada turno (máx. +25%). También recibe +50% de daño de héroes con 90% de HP o menos, inflige {D/BT_SEALED} que ignora {B/BT_IMMUNE}, y limita el daño de Maldición / Fijo a 50000. Como jefe {E/Dark}, su pasiva Berserk mitiga fuertemente el daño de objetivos sin ventaja, por lo que los héroes {E/Light} son favorecidos."
   },
   "tips": [
     {
@@ -15,35 +16,40 @@
           "jp": "ボスより遅く保つ。スクルドより{S/SPD}が低い味方は彼女に+50%ダメージを与え、速い味方は+50%のダメージを受ける。彼女は毎ターン開始時に味方全体の{S/SPD}を5%増加させる（最大+25%）ため、十分なスピード差を確保する。",
           "kr": "보스보다 느리게 유지하세요. 스쿨드보다 {S/SPD}가 낮은 아군은 그녀에게 +50% 피해를 주고, 빠른 아군은 +50% 피해를 받습니다. 그녀는 매 턴 시작 시 아군 전체의 {S/SPD}를 5%씩 증가시키므로(최대 +25%), 충분한 속도 차이를 확보하세요.",
           "zh": "保持比Boss慢。{S/SPD}低于斯库尔德的友军对她造成+50%伤害，而比她快的友军受到+50%伤害。她在每回合开始时使全队{S/SPD}增加5%（最多+25%），因此要留出足够的速度差。",
-          "fr": "Restez plus lent que le Boss. Les héros dont la {S/SPD} est inférieure à celle de Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides subissent +50% de dégâts. Elle augmente la {S/SPD} de toute l'équipe de 5% au début de chaque tour (max +25%) — gardez une large marge de vitesse."
+          "fr": "Restez plus lent que le Boss. Les héros dont la {S/SPD} est inférieure à celle de Skuld lui infligent +50% de dégâts, tandis que les héros plus rapides subissent +50% de dégâts. Elle augmente la {S/SPD} de toute l'équipe de 5% au début de chaque tour (max +25%) — gardez une large marge de vitesse.",
+          "es": "Sé más lento que el jefe. Los héroes con menor {S/SPD} que Skuld le infligen +50% de daño, mientras que los héroes más rápidos que ella reciben +50% de daño. Ella aumenta el {S/SPD} de todo tu equipo en 5% al inicio de cada turno (máx. +25%), así que deja un amplio margen de velocidad."
         },
         {
           "en": "As a {E/Dark} boss, her Berserk passive reduces Final DMG and WG DMG taken from non-advantage targets by 70% / 50% (from Rank B). Build around {E/Light} heroes for elemental advantage.",
           "jp": "{E/Dark}属性ボスのため、狂暴化パッシブは有利相性でない対象から受ける最終ダメージとWGダメージをそれぞれ70%／50%減少させる（RANK B から）。属性有利を取れる{E/Light}属性の味方を中心に編成する。",
           "kr": "{E/Dark} 속성 보스이므로 광폭화 패시브는 유리 상성이 아닌 대상에게 받는 최종 피해와 WG 피해를 각각 70%/50% 감소시킵니다(RANK B 부터). 속성 유리를 가지는 {E/Light} 속성 아군을 중심으로 편성하세요.",
           "zh": "作为{E/Dark}属性Boss，她的狂暴化被动会使受到非克制属性目标的最终伤害和WG伤害分别减少70%/50%（从RANK B开始）。请以拥有属性克制的{E/Light}属性友军为核心进行编成。",
-          "fr": "En tant que boss {E/Dark}, son passif de Berserk réduit les dégâts finaux et les dégâts de WG subis des cibles sans avantage de 70% / 50% (à partir du Rang B). Construisez autour de héros {E/Light} pour l'avantage élémentaire."
+          "fr": "En tant que boss {E/Dark}, son passif de Berserk réduit les dégâts finaux et les dégâts de WG subis des cibles sans avantage de 70% / 50% (à partir du Rang B). Construisez autour de héros {E/Light} pour l'avantage élémentaire.",
+          "es": "Como jefe {E/Dark}, su pasiva Berserk reduce el Daño Final y el Daño WG recibido de objetivos sin ventaja en 70% / 50% (desde el Rango B). Arma tu equipo en torno a héroes {E/Light} para obtener ventaja elemental."
         },
         {
           "en": "The boss takes +50% damage from heroes at 90% current HP or less — avoid over-healing your damage dealers.",
           "jp": "ボスは現在HPが90%以下の味方から受けるダメージが+50%増加する — アタッカーを過剰回復しない。",
           "kr": "보스는 현재 체력이 90% 이하인 아군에게 받는 피해가 +50% 증가합니다 — 딜러를 과도하게 회복하지 마세요.",
           "zh": "Boss受到当前生命值90%及以下友军的伤害+50% — 不要过度治疗你的输出。",
-          "fr": "Le Boss subit +50% de dégâts des héros à 90% PV actuels ou moins — évitez de sursoigner vos DPS."
+          "fr": "Le Boss subit +50% de dégâts des héros à 90% PV actuels ou moins — évitez de sursoigner vos DPS.",
+          "es": "El jefe recibe +50% de daño de héroes con 90% de HP actual o menos — evita sobrecurar a tus atacantes."
         },
         {
           "en": "Her S2 inflicts {D/BT_SEALED} on the whole team for 2 turns and ignores {B/BT_IMMUNE} — buffs applied during that window are blocked, so favor self-sufficient kits over buff-stacking.",
           "jp": "S2は味方全体に2ターンの{D/BT_SEALED}を付与し、{B/BT_IMMUNE}を無視する — その間に付与したバフは無効化されるため、バフ依存より自己完結型のキットを優先する。",
           "kr": "S2는 아군 전체에게 2턴 동안 {D/BT_SEALED}을 부여하고 {B/BT_IMMUNE}을 무시합니다 — 그동안 부여한 버프는 차단되므로, 버프 의존보다 자급자족형 캐릭터를 우선하세요.",
           "zh": "她的S2对全队附加2回合的{D/BT_SEALED}并无视{B/BT_IMMUNE} — 此期间施加的增益会被阻挡，因此优先选择自给自足的角色而非堆叠增益。",
-          "fr": "Son S2 inflige {D/BT_SEALED} à toute l'équipe pendant 2 tours en ignorant {B/BT_IMMUNE} — les buffs appliqués durant cette fenêtre sont bloqués, privilégiez des kits autonomes plutôt que l'empilement de buffs."
+          "fr": "Son S2 inflige {D/BT_SEALED} à toute l'équipe pendant 2 tours en ignorant {B/BT_IMMUNE} — les buffs appliqués durant cette fenêtre sont bloqués, privilégiez des kits autonomes plutôt que l'empilement de buffs.",
+          "es": "Su S2 inflige {D/BT_SEALED} a todo el equipo durante 2 turnos e ignora {B/BT_IMMUNE} — los bonos aplicados durante esa ventana son bloqueados, así que favorece kits autosuficientes en lugar de acumulación de bonos."
         },
         {
           "en": "Curse and Fixed damage dealt to the boss cannot exceed 50000. She is also immune to crowd control (Stun, Freeze, Petrify, Silence, Provoke) and to {B/BT_ACTION_GAUGE} manipulation, and she heavily manipulates priority (S1 +20%, Ultimate +30% to herself / -30% to all enemies).",
           "jp": "ボスに与える呪い・固定ダメージは50000を超えない。さらに行動妨害（スタン、凍結、石化、沈黙、挑発）と{B/BT_ACTION_GAUGE}操作に免疫で、行動順を大きく操作する（S1で+20%、必殺技で自分+30%／敵全体-30%）。",
           "kr": "보스에게 주는 저주·고정 피해는 50000을 초과할 수 없습니다. 또한 행동 방해(기절, 빙결, 석화, 침묵, 도발)와 {B/BT_ACTION_GAUGE} 조작에 면역이며, 행동 순서를 크게 조작합니다(S1 +20%, 필살기 자신 +30%/적 전체 -30%).",
           "zh": "对Boss造成的诅咒及固定伤害不超过50000。她还免疫控制（眩晕、冰冻、石化、沉默、挑衅）与{B/BT_ACTION_GAUGE}操控，并大幅操控行动顺序（S1 +20%，必杀技自身+30%／全体敌人-30%）。",
-          "fr": "Les dégâts de Malédiction et Fixes infligés au Boss ne peuvent pas dépasser 50000. Elle est aussi immunisée au contrôle (Étourdissement, Gel, Pétrification, Silence, Provocation) et à la manipulation de {B/BT_ACTION_GAUGE}, et elle manipule fortement l'ordre d'action (S1 +20%, Ultime +30% pour elle / -30% à tous les ennemis)."
+          "fr": "Les dégâts de Malédiction et Fixes infligés au Boss ne peuvent pas dépasser 50000. Elle est aussi immunisée au contrôle (Étourdissement, Gel, Pétrification, Silence, Provocation) et à la manipulation de {B/BT_ACTION_GAUGE}, et elle manipule fortement l'ordre d'action (S1 +20%, Ultime +30% pour elle / -30% à tous les ennemis).",
+          "es": "El daño de Maldición y Fijo infligido al jefe no puede superar 50000. También es inmune al control de masas (Aturdimiento, Congelación, Petrificación, Silencio, Provocación) y a la manipulación de {B/BT_ACTION_GAUGE}, y manipula fuertemente la prioridad (S1 +20%, Ultimate +30% para sí misma / -30% para todos los enemigos)."
         }
       ]
     }
@@ -59,7 +65,8 @@
             "jp": "メインDPS — {D/ETERNAL_BLEEDING}でキャリーする。{I-T/Rogue's Charm}を装備する。",
             "kr": "메인 딜러 — {D/ETERNAL_BLEEDING}로 운영합니다. {I-T/Rogue's Charm}을 장착합니다.",
             "zh": "主C — 以{D/ETERNAL_BLEEDING}进行输出。装备{I-T/Rogue's Charm}。",
-            "fr": "DPS principal — porte l'équipe avec {D/ETERNAL_BLEEDING}. Équipez {I-T/Rogue's Charm}."
+            "fr": "DPS principal — porte l'équipe avec {D/ETERNAL_BLEEDING}. Équipez {I-T/Rogue's Charm}.",
+            "es": "DPS principal — carga el equipo con {D/ETERNAL_BLEEDING}. Equipa {I-T/Rogue's Charm}."
           }
         },
         {
@@ -69,7 +76,8 @@
             "jp": "{D/BT_EXTEND_DEBUFF}で{D/ETERNAL_BLEEDING}スタックを維持する。{P/Akari}は加えて{D/BT_SEALED}を付与する。{P/Akari}には{I-T/Rogue's Charm}、{P/Maxie}には{I-T/Mage's Charm}を装備する。",
             "kr": "{D/BT_EXTEND_DEBUFF}으로 {D/ETERNAL_BLEEDING} 스택을 유지합니다. {P/Akari}는 추가로 {D/BT_SEALED}을 부여합니다. {P/Akari}에게는 {I-T/Rogue's Charm}, {P/Maxie}에게는 {I-T/Mage's Charm}을 장착하세요.",
             "zh": "以{D/BT_EXTEND_DEBUFF}维持{D/ETERNAL_BLEEDING}层数；{P/Akari}还会附加{D/BT_SEALED}。{P/Akari}装备{I-T/Rogue's Charm}，{P/Maxie}装备{I-T/Mage's Charm}。",
-            "fr": "{D/BT_EXTEND_DEBUFF} pour maintenir les stacks d'{D/ETERNAL_BLEEDING} actifs ; {P/Akari} ajoute aussi {D/BT_SEALED}. Équipez {I-T/Rogue's Charm} sur {P/Akari} et {I-T/Mage's Charm} sur {P/Maxie}."
+            "fr": "{D/BT_EXTEND_DEBUFF} pour maintenir les stacks d'{D/ETERNAL_BLEEDING} actifs ; {P/Akari} ajoute aussi {D/BT_SEALED}. Équipez {I-T/Rogue's Charm} sur {P/Akari} et {I-T/Mage's Charm} sur {P/Maxie}.",
+            "es": "{D/BT_EXTEND_DEBUFF} para mantener vivas las cargas de {D/ETERNAL_BLEEDING}; {P/Akari} también añade {D/BT_SEALED}. Usa {I-T/Rogue's Charm} en {P/Akari} y {I-T/Mage's Charm} en {P/Maxie}."
           }
         },
         {
@@ -79,7 +87,8 @@
             "jp": "{B/BT_CALL_BACKUP}による連携攻撃、APバッテリー、{B/BT_REVIVAL}。{I-T/Vanguard's Charm}を装備する。",
             "kr": "{B/BT_CALL_BACKUP} 연계 공격, AP 배터리, {B/BT_REVIVAL}. {I-T/Vanguard's Charm}을 장착합니다.",
             "zh": "{B/BT_CALL_BACKUP}连携攻击、AP电池与{B/BT_REVIVAL}。装备{I-T/Vanguard's Charm}。",
-            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}. Équipez {I-T/Vanguard's Charm}."
+            "fr": "Attaques doubles {B/BT_CALL_BACKUP}, batterie d'AP et {B/BT_REVIVAL}. Équipez {I-T/Vanguard's Charm}.",
+            "es": "Ataques duales de {B/BT_CALL_BACKUP}, batería de AP y {B/BT_REVIVAL}. Equipa {I-T/Vanguard's Charm}."
           }
         },
         {
@@ -89,7 +98,8 @@
             "jp": "{B/BT_ACTION_GAUGE}と{I-A/Dies Irae}で多くのターンを取り、{D/BT_EXTEND_DEBUFF}を提供する。{I-T/Mage's Charm}を装備する。",
             "kr": "{B/BT_ACTION_GAUGE}과 {I-A/Dies Irae} 덕분에 많은 턴을 가져가며 {D/BT_EXTEND_DEBUFF}을 제공합니다. {I-T/Mage's Charm}을 장착합니다.",
             "zh": "凭借{B/BT_ACTION_GAUGE}与{I-A/Dies Irae}获得大量回合，并提供{D/BT_EXTEND_DEBUFF}。装备{I-T/Mage's Charm}。",
-            "fr": "Joue de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}, apportant {D/BT_EXTEND_DEBUFF}. Équipez {I-T/Mage's Charm}."
+            "fr": "Joue de nombreux tours grâce à sa {B/BT_ACTION_GAUGE} et à {I-A/Dies Irae}, apportant {D/BT_EXTEND_DEBUFF}. Équipez {I-T/Mage's Charm}.",
+            "es": "Toma muchos turnos gracias a su {B/BT_ACTION_GAUGE} y {I-A/Dies Irae}, proporcionando {D/BT_EXTEND_DEBUFF}. Equipa {I-T/Mage's Charm}."
           }
         }
       ]
@@ -104,7 +114,8 @@
             "jp": "高い被ダメージ軽減を持つメインアタッカー。",
             "kr": "높은 피해 감소를 지닌 메인 딜러.",
             "zh": "具备高伤害减免的主C。",
-            "fr": "DPS principal doté d'une forte réduction de dégâts."
+            "fr": "DPS principal doté d'une forte réduction de dégâts.",
+            "es": "Principal atacante con alta mitigación de daño."
           }
         },
         {
@@ -114,7 +125,8 @@
             "jp": "クールダウンの短縮、ダメージの強化",
             "kr": "재사용 대기시간 감소, 피해량 증가",
             "zh": "冷却时间缩短，伤害提升",
-            "fr": "Réduction des temps de recharge, augmentations des dégâts"
+            "fr": "Réduction des temps de recharge, augmentations des dégâts",
+            "es": "Reducción de cooldown, bonos de daño"
           }
         },
         {
@@ -124,7 +136,8 @@
             "jp": "連携攻撃、WGダメージチェインの起点、{B/BT_REVIVAL}と{B/BT_INVINCIBLE}を提供する。",
             "kr": "협공, WG 피해 연계의 시작점, {B/BT_REVIVAL}과 {B/BT_INVINCIBLE}을 제공합니다.",
             "zh": "夹攻、作为WG伤害连携的起点，并提供{B/BT_REVIVAL}与{B/BT_INVINCIBLE}。",
-            "fr": "Attaques doubles, amorce la chaîne de dégâts de WG et apporte {B/BT_REVIVAL} et {B/BT_INVINCIBLE}."
+            "fr": "Attaques doubles, amorce la chaîne de dégâts de WG et apporte {B/BT_REVIVAL} et {B/BT_INVINCIBLE}.",
+            "es": "Ataques duales, inicia la cadena de daño WG y proporciona {B/BT_REVIVAL} y {B/BT_INVINCIBLE}."
           }
         },
         {
@@ -134,7 +147,8 @@
             "jp": "どちらか一つを選んでください――「{P/Leo}」には、クールダウン短縮チェーンの起点となるスキルと「{B/BT_INVINCIBLE}」が含まれます。「{P/Demiurge Drakhan}」には、範囲ダメージ軽減、{S/PEN%}バフ、{B/BT_BARRIER}、およびWGダメージのサポートが含まれます。",
             "kr": "하나를 선택하세요 — ‘{P/Leo}’는 재사용 대기시간 감소 연쇄의 시작 효과와 ‘{B/BT_INVINCIBLE}’를 제공하며, ‘{P/Demiurge Drakhan}’는 AoE 피해 감소, ‘{S/PEN%}’ 버프, ‘{B/BT_BARRIER}’ 및 WG 피해 지원 효과를 제공합니다.",
             "zh": "选一个——{P/Leo}提供了一个冷却时间缩减链的起始道具和{B/BT_INVINCIBLE}；{P/Demiurge Drakhan}则提供范围伤害减免、{S/PEN%}增益效果、{B/BT_BARRIER}以及对WG伤害的加成。",
-            "fr": "Faites votre choix : « {P/Leo} » propose un déclencheur de chaîne de réduction des temps de recharge et « {B/BT_INVINCIBLE} » ; « {P/Demiurge Drakhan} » offre une réduction des dégâts de zone, un bonus « {S/PEN%} », « {B/BT_BARRIER} » et un soutien aux dégâts WG."
+            "fr": "Faites votre choix : « {P/Leo} » propose un déclencheur de chaîne de réduction des temps de recharge et « {B/BT_INVINCIBLE} » ; « {P/Demiurge Drakhan} » offre une réduction des dégâts de zone, un bonus « {S/PEN%} », « {B/BT_BARRIER} » et un soutien aux dégâts WG.",
+            "es": "Elige uno — {P/Leo} aporta un iniciador de cadena de reducción de cooldown y {B/BT_INVINCIBLE}; {P/Demiurge Drakhan} aporta reducción de daño AoE, bono de {S/PEN%}, {B/BT_BARRIER} y soporte de daño WG."
           }
         }
       ]
@@ -145,7 +159,8 @@
         "jp": "Meroチーム",
         "kr": "메로 팀",
         "zh": "Mero团队",
-        "fr": "L'équipe Mero"
+        "fr": "L'équipe Mero",
+        "es": "Equipo Mero"
       },
       "groups": [
         {
@@ -155,7 +170,8 @@
             "jp": "メインDPSは、{I-W/Heartunder's Blade}で{D/BT_DOT_BURN}、{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER}、{B/BT_UNDEAD}、{SK/Mero|S3}を行い、その後、ターンが尽きるまで{SK/Mero|S2}（バースト1）を繰り返す。",
             "kr": "{I-W/Heartunder's Blade}를 사용해 {D/BT_DOT_BURN}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} 및 {B/BT_UNDEAD}, {SK/Mero|S3}에 주 DPS를 가한 뒤, 턴이 다 소진될 때까지 {SK/Mero|S2} (버스트 1)을 반복합니다.",
             "zh": "主要输出职业使用{I-W/Heartunder's Blade}，对{D/BT_DOT_BURN}、{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER}和{B/BT_UNDEAD}施放技能，随后使用{SK/Mero|S3}，然后重复{SK/Mero|S2}（爆发1）直至回合结束。",
-            "fr": "DPS principal avec « {I-W/Heartunder's Blade} » pour « {D/BT_DOT_BURN} », « {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} » et « {B/BT_UNDEAD} », « {SK/Mero|S3} », puis répétez « {SK/Mero|S2} » (burst 1) jusqu’à ce que les tours soient épuisés."
+            "fr": "DPS principal avec « {I-W/Heartunder's Blade} » pour « {D/BT_DOT_BURN} », « {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} » et « {B/BT_UNDEAD} », « {SK/Mero|S3} », puis répétez « {SK/Mero|S2} » (burst 1) jusqu’à ce que les tours soient épuisés.",
+            "es": "DPS principal con {I-W/Heartunder's Blade} para {D/BT_DOT_BURN}, {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} y {B/BT_UNDEAD}, {SK/Mero|S3} luego repite {SK/Mero|S2} (burst 1) hasta que se agoten los turnos."
           }
         },
         {
@@ -165,7 +181,8 @@
             "jp": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE} を使って、{P/Mero}のバフがまだすべて発動していない場合に、{D/BT_SEALED}を排除する。",
             "kr": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE}: {P/Mero}의 버프가 모두 적용되지 않았을 때 {D/BT_SEALED}를 제거하기 위해.",
             "zh": "{B/BT_REMOVE_DEBUFF} / 使用{B/BT_IMMUNE}来消除{D/BT_SEALED}，当{P/Mero}尚未激活所有增益效果时。",
-            "fr": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE} pour se débarrasser d'{D/BT_SEALED} lorsque {P/Mero} n'a pas encore tous ses buffs actifs."
+            "fr": "{B/BT_REMOVE_DEBUFF} / {B/BT_IMMUNE} pour se débarrasser d'{D/BT_SEALED} lorsque {P/Mero} n'a pas encore tous ses buffs actifs.",
+            "es": "{B/BT_REMOVE_DEBUFF}/{B/BT_IMMUNE} para deshacerse de {D/BT_SEALED} cuando {P/Mero} aún no tiene todos sus bonos activos."
           }
         },
         {
@@ -175,7 +192,8 @@
             "jp": "防御ダウン、攻撃アップ、ダメージボーナスを積み重ねる",
             "kr": "방어력 감소, 공격력 증가 및 대미지 보너스 중첩",
             "zh": "叠加防御下、攻击上和伤害加成",
-            "fr": "Cumul de la défense, de l'attaque et du bonus de dégâts"
+            "fr": "Cumul de la défense, de l'attaque et du bonus de dégâts",
+            "es": "Acumula reducción de Defensa, aumento de Ataque y bono de daño"
           }
         },
         {
@@ -185,7 +203,8 @@
             "jp": "「{E/Fire}」要素のボスへのダメージボーナス",
             "kr": "{E/Fire} 원소의 보스 대미지 보너스",
             "zh": "{E/Fire}元素的BOSS伤害加成",
-            "fr": "Bonus de dégâts contre les boss pour l'élément «{E/Fire} »"
+            "fr": "Bonus de dégâts contre les boss pour l'élément «{E/Fire} »",
+            "es": "Bono de daño a jefe para el elemento {E/Fire}"
           }
         },
         {
@@ -195,7 +214,8 @@
             "jp": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} バフ",
             "kr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} 버프",
             "zh": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} 增益效果",
-            "fr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} bonus"
+            "fr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} bonus",
+            "es": "{B/BT_STAT|ST_CRITICAL_RATE} bonos de {B/BT_STAT|ST_CRITICAL_DMG_RATE}"
           }
         },
         {
@@ -205,7 +225,8 @@
             "jp": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
             "kr": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
             "zh": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
-            "fr": "{B/BT_STAT|ST_PIERCE_POWER_RATE}"
+            "fr": "{B/BT_STAT|ST_PIERCE_POWER_RATE}",
+            "es": "{B/BT_STAT|ST_PIERCE_POWER_RATE}"
           }
         },
         {
@@ -215,7 +236,8 @@
             "jp": "立ち上がっている間は高いダメージを与える",
             "kr": "서 있을 수 있는 동안 높은 데미지를 입힙니다",
             "zh": "在能够保持站立的同时造成高伤害",
-            "fr": "Elle inflige des dégâts importants tant qu’elle reste debout"
+            "fr": "Elle inflige des dégâts importants tant qu’elle reste debout",
+            "es": "Alto daño mientras logre mantenerse en pie"
           }
         },
         {
@@ -225,7 +247,8 @@
             "jp": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna} のバフ",
             "kr": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna}에 대한 버프",
             "zh": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} {P/Mystic Sage Ame} / {P/Demiurge Luna} 的增益效果",
-            "fr": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} améliorations pour {P/Mystic Sage Ame} / {P/Demiurge Luna}"
+            "fr": "{B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} améliorations pour {P/Mystic Sage Ame} / {P/Demiurge Luna}",
+            "es": "Bonos de {B/BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER} durante {P/Mystic Sage Ame}/{P/Demiurge Luna}"
           }
         }
       ]

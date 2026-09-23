@@ -4,18 +4,20 @@
     "jp": "昇級チャレンジ : デミウルゴス ヴラダ",
     "kr": "승급 챌린지 : 데미우르고스 블라다",
     "zh": "晋升挑战：创世之神 布拉达",
-    "fr": "Promotion : Demiurge Vlada"
+    "fr": "Promotion : Demiurge Vlada",
+    "es": "Ascenso: Demiurgo Vlada"
   },
   "description": {
     "en": "Tips and advice to succeed against Demiurge Vlada",
     "jp": "デミウルゴス ヴラダを成功させるためのヒントとアドバイス",
     "kr": "데미우르고스 블라다를 성공시키기 위한 팁과 조언",
     "zh": "成功挑战创世之神 布拉达的提示和建议",
-    "fr": "Conseils et astuces pour réussir contre Demiurge Vlada"
+    "fr": "Conseils et astuces pour réussir contre Demiurge Vlada",
+    "es": "Consejos y trucos para tener éxito contra Demiurgo Vlada"
   },
   "icon": "T_Licence_2000075_Lock",
   "author": "Shiraen",
-  "updated": "2026-08-07",
+  "updated": "2026-09-23",
   "bossId": "50000006",
   "group": "adventure_challenge:70600103"
 }

@@ -44,6 +44,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '치명타 버퍼.',
       zh: '暴击辅助。',
       fr: 'Buffers de crit.',
+      es: 'Amortiguadores de crítico.',
     },
   },
   {
@@ -54,6 +55,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '스타터 선택에 맞춰 고르세요.',
       zh: '根据新手包选择来挑选。',
       fr: 'À choisir selon votre sélecteur de starter.',
+      es: 'Elige según tu selección del starter selector.',
     },
   },
   {
@@ -64,6 +66,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '우수한 PvP 유닛.',
       zh: '优秀的PvP角色。',
       fr: 'Excellentes unités PvP.',
+      es: 'Excelentes unidades para PvP.',
     },
   },
   {
@@ -74,6 +77,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '범용 콘텐츠용 고화력 딜러.',
       zh: '通用内容的高伤害输出。',
       fr: 'Damage dealers élevés pour le contenu général.',
+      es: 'Grandes generadores de daño para contenido general.',
     },
   },
   {
@@ -84,6 +88,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '믿을 수 있는 디버퍼.',
       zh: '可靠的减益角色。',
       fr: 'Debuffers fiables.',
+      es: 'Debuffers fiables.',
     },
   },
   {
@@ -94,6 +99,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '힐러.',
       zh: '治疗角色。',
       fr: 'Healers.',
+      es: 'Sanadores.',
     },
   },
   {
@@ -104,6 +110,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '특수 용도 DPS.',
       zh: '特殊用途的输出角色。',
       fr: "DPS avec des cas d'usage spécifiques.",
+      es: 'DPS con casos de uso especiales.',
     },
   },
   {
@@ -124,6 +131,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '틈새지만 특정 콘텐츠에서 유용.',
       zh: '小众但在特定内容中有用。',
       fr: 'De niche mais utiles dans des contenus spécifiques.',
+      es: 'De nicho pero útiles en contenido específico.',
     },
   },
   {
@@ -134,6 +142,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '초반에는 DPS로 사용 가능하지만, 후반에는 밀림.',
       zh: '前期可作为输出使用，但后期会被超越。',
       fr: 'Utilisables comme DPS au début, mais généralement surpassés plus tard.',
+      es: 'Utilizables como DPS al principio, pero generalmente superados más adelante.',
     },
   },
   {
@@ -158,6 +167,7 @@ export const customBannerPicks: CustomBannerPick[] = [
       kr: '틈새 용도.',
       zh: '小众用途。',
       fr: 'Usage de niche.',
+      es: 'Uso de nicho.',
     },
   },
 ];

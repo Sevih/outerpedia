@@ -12,7 +12,8 @@
         "jp": "通常1〜2回の挑戦でクリア可能。ステージ9まで検証済み。",
         "kr": "보통 1~2회 시도로 클리어 가능. 스테이지 9까지 검증됨.",
         "zh": "通常1-2次尝试即可通关。已验证至第9阶段。",
-        "fr": "Généralement clear en 1 à 2 tentatives. Vérifié jusqu'au stage 9."
+        "fr": "Généralement clear en 1 à 2 tentatives. Vérifié jusqu'au stage 9.",
+        "es": "Normalmente se completa en 1-2 intentos. Verificado hasta la etapa 9."
       }
     ]
   },
@@ -25,7 +26,9 @@
   {
     "title": {
       "title": {
-        "en": "Ember Team"
+        "en": "Ember Team",
+        "es": "Equipo Ember",
+        "fr": "Équipe Ember"
       }
     },
     "slots": [["Ember"]]

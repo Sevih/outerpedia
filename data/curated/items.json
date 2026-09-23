@@ -4,13 +4,17 @@
       "en": "Gems",
       "jp": "ジェム",
       "kr": "보석",
-      "zh": "宝石"
+      "zh": "宝石",
+      "es": "Gemas",
+      "fr": "Gemmes"
     },
     "desc": {
       "en": "Various gems.",
       "jp": "各種ジェム",
       "kr": "각종 보석",
-      "zh": "各种宝石"
+      "zh": "各种宝石",
+      "es": "Varias gemas.",
+      "fr": "Diverses gemmes."
     },
     "icon": "TI_GEM_dissolve_Random_3"
   },
@@ -19,13 +23,17 @@
       "en": "Hero Piece",
       "jp": "仲間のピース",
       "kr": "동료 조각",
-      "zh": "同伴碎片"
+      "zh": "同伴碎片",
+      "es": "Pieza de Héroe",
+      "fr": "Fragment de Héros"
     },
     "desc": {
       "en": "A piece that contains the power of a unit. Collect 250 to unlock the unit or 150 to transcend them.",
       "jp": "ユニットの力が宿った欠片。250個集めるとそのユニットを解放でき、150個で超越できます。",
       "kr": "유닛의 힘이 담긴 조각입니다. 250개를 모으면 해당 유닛을 해금하고, 150개로 초월할 수 있습니다.",
-      "zh": "蕴含单位力量的碎片。收集250个可解锁该单位，或收集150个使其超越。"
+      "zh": "蕴含单位力量的碎片。收集250个可解锁该单位，或收集150个使其超越。",
+      "es": "Una pieza que contiene el poder de una unidad. Reúne 250 para desbloquear a la unidad o 150 para trascenderla.",
+      "fr": "Un fragment qui contient le pouvoir d'une unité. Collectes-en 250 pour débloquer l'unité ou 150 pour la transcender."
     },
     "icon": "CM_Piece_Frame"
   },
@@ -37,7 +45,9 @@
       "en": "A rare resource that can occasionally be found all over Mirsha. Can be used for special purposes.",
       "jp": "メルシャ全域でたまに発見される貴重な財貨。特別な用途に使われる。",
       "kr": "메르샤 전역에서 드물게 발견되는 귀한 재화. 특별한 곳에 사용됩니다.",
-      "zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。"
+      "zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。",
+      "es": "Un recurso raro que ocasionalmente se puede encontrar por todo Mirsha. Puede usarse para propósitos especiales.",
+      "fr": "Une ressource rare que l'on peut occasionnellement trouver partout à Mirsha. Peut être utilisée à des fins spéciales."
     },
     "icon": "TI_Item_Cristal_Cash"
   },
@@ -55,7 +65,9 @@
       "en": "A rare resource that can occasionally be found all over Mirsha. Can be used for special purposes.",
       "jp": "メルシャ全域でたまに発見される貴重な財貨。特別な用途に使われる。",
       "kr": "메르샤 전역에서 드물게 발견되는 귀한 재화. 특별한 곳에 사용됩니다.",
-      "zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。"
+      "zh": "在弥乐沙全域较为稀有的珍贵货币。\\n可用于特殊用途。",
+      "es": "Un recurso raro que ocasionalmente se puede encontrar por todo Mirsha. Puede usarse para propósitos especiales.",
+      "fr": "Une ressource rare que l'on peut occasionnellement trouver partout à Mirsha. Peut être utilisée à des fins spéciales."
     },
     "icon": "TI_Item_Cristal"
   },
@@ -85,7 +97,9 @@
       "en": "Custom Mileage can be obtained by recruiting. You can use Custom Mileage to recruit certain Heroes.",
       "jp": "スカウトを行うと、【カスタム仲間交換Pt】を獲得でき、カスタム仲間交換Ptを消費して選択内の仲間から1体を獲得できます。",
       "kr": "영입 시, 커스텀 마일리지를 획득하며 커스텀 마일리지를 사용하여 선택 영입을 할 수 있습니다.",
-      "zh": "招募时，将获得自选积分，并可以使用自选积分进行指定招募。"
+      "zh": "招募时，将获得自选积分，并可以使用自选积分进行指定招募。",
+      "es": "El Millaje Personalizado se puede obtener reclutando. Puedes usar el Millaje Personalizado para reclutar a ciertos Héroes.",
+      "fr": "Le Mileage personnalisé s'obtient en recrutant. Tu peux l'utiliser pour recruter certains Héros."
     },
     "icon": "TI_Item_Mileage_Element"
   },
@@ -94,7 +108,9 @@
       "en": "You can obtain False God's Proof through Demiurge recruitment and they are used to select and recruit specific heroes.",
       "jp": "デミウルゴススカウトで【偽りの神の証】を獲得し、仲間交換ができます。",
       "kr": "데미우르고스 영입을 통해 거짓된 신의 증명을 획득하여 선택 영입을 할 수 있습니다.",
-      "zh": "可通过创世之神招募获得伪神的证明，并以此进行指定招募。"
+      "zh": "可通过创世之神招募获得伪神的证明，并以此进行指定招募。",
+      "es": "Puedes obtener la Prueba del Falso Dios mediante el reclutamiento de Demiurgo, y se usan para seleccionar y reclutar héroes específicos.",
+      "fr": "Tu peux obtenir la Preuve du Faux Dieu via le recrutement Démiurge, elle sert à sélectionner et recruter des héros spécifiques."
     },
     "icon": "CM_Icon_Recruit_Mileage_Special_001"
   },
@@ -103,7 +119,9 @@
       "en": "You can earn Limited Mileage through Seasonal Recruitment and use it for Mileage Recruit.\\n<color=#cc5656>Limited Mileage is retained even after the recruitment period ends.</color>",
       "jp": "限定スカウトでリミテッド交換ptを獲得し、仲間交換に使用できます。\\n<color=#cc5656>リミテッド交換ptはスカウト期間が終了しても保持されます。</color>",
       "kr": "시즈널 영입을 통해 리미티드 마일리지를 획득하여 선택 영입을 할 수 있습니다.\\n<color=#cc5656>리미티드 마일리지는 영입 기간이 종료되어도 유지됩니다.</color>",
-      "zh": "可通过季节招募获取<color=#cc5656>限定积分</color>，并用于指定招募。\\n<color=#cc5656>限定积分在招募期结束后仍会保留。</color>"
+      "zh": "可通过季节招募获取<color=#cc5656>限定积分</color>，并用于指定招募。\\n<color=#cc5656>限定积分在招募期结束后仍会保留。</color>",
+      "es": "Puedes ganar Millaje Limitado mediante el Reclutamiento de Temporada y usarlo para el Reclutamiento por Millaje.\\n<color=#cc5656>El Millaje Limitado se conserva incluso después de que termine el período de reclutamiento.</color>",
+      "fr": "Tu peux gagner du Mileage limité via le Recrutement saisonnier et l'utiliser pour le Recrutement Mileage.\\n<color=#cc5656>Le Mileage limité est conservé même après la fin de la période de recrutement.</color>"
     },
     "icon": "TI_Item_Mileage_Seasonal"
   },
@@ -119,13 +137,17 @@
       "en": "Dimensional Supply",
       "jp": "次元物資召喚",
       "kr": "차원 물자 호출",
-      "zh": "次元物资召唤"
+      "zh": "次元物资召唤",
+      "es": "Suministro Dimensional",
+      "fr": "Approvisionnement dimensionnel"
     },
     "desc": {
       "en": "This is currency that can be obtained through Dimensional Supply.\\n\\nIt is used to select and obtain specific gear in Dimensional Supply.",
       "jp": "次元物資召喚を通じて獲得できるPtです。\\n\\n次元物資召喚で特定の装備を選択して入手するために使用されます。",
       "kr": "차원 물자 호출을 통해 획득할 수 있는 재화입니다. \\n\\n차원 물자 호출에서 특정 장비를 선택하여 획득하는데 사용됩니다.",
-      "zh": "可通过次元物资召唤获得的资源。\\n\\n用于在次元物资召唤中选择并获得特定装备。"
+      "zh": "可通过次元物资召唤获得的资源。\\n\\n用于在次元物资召唤中选择并获得特定装备。",
+      "es": "Esta es una moneda que se puede obtener a través del Suministro Dimensional.\\n\\nSe usa para seleccionar y obtener equipo específico en el Suministro Dimensional.",
+      "fr": "C'est une monnaie que l'on peut obtenir via l'Approvisionnement dimensionnel.\\n\\nElle sert à sélectionner et obtenir un gear spécifique dans l'Approvisionnement dimensionnel."
     },
     "icon": "TI_Item_Recruit_Equip_01"
   },
@@ -134,13 +156,17 @@
       "en": "Stamina",
       "jp": "活力",
       "kr": "행동력",
-      "zh": "行动力"
+      "zh": "行动力",
+      "es": "Vigor",
+      "fr": "Endurance"
     },
     "desc": {
       "en": "The energy needed for activities. Used in various battle content.",
       "jp": "活動に必要なエネルギー。戦闘が行われるすべてのコンテンツに使用される。",
       "kr": "활동에 필요한 에너지를 표현한 단위. 전투가 필요한 여러 컨텐츠에 활용됩니다.",
-      "zh": "活动所需能量的单位。\\n可用于各种需要战斗的地方。"
+      "zh": "活动所需能量的单位。\\n可用于各种需要战斗的地方。",
+      "es": "La energía necesaria para realizar actividades. Se usa en varios contenidos de batalla.",
+      "fr": "L'énergie nécessaire pour les activités. Utilisée dans divers contenus de combat."
     },
     "icon": "TI_Item_Stamina"
   },
@@ -149,13 +175,17 @@
       "en": "Wildcard Pieces",
       "jp": "ピース",
       "kr": "공용 조각",
-      "zh": "通用碎片"
+      "zh": "通用碎片",
+      "es": "Piezas Comodín",
+      "fr": "Fragments Joker"
     },
     "desc": {
       "en": "[Wildcard Pieces] can be exchanged for Hero Pieces in the Pieces tab at the shop.\\nYou cannot exchange them for pieces of Heroes that you have not recruited yet. You can exchange them for pieces of heroes you own, limited to the number of pieces necessary to make them 6 Star via [Transcend Hero].\\nPieces obtained through other methods will also be calculated in the purchase limit.",
       "jp": "【ピース】はピースショップで、獲得した仲間のピースを\\n購入できます。\\nまだ獲得していない仲間のピースは購入できません。仲間のピースは、★6までの育成に必要な数量まで購入できます。\\nスカウト以外で獲得したピースがある場合は、その数を\\n引いた分のピースを購入できます。",
       "kr": "획득한 [공용 조각]은 상점에 비치된 조각 탭에서 보유한 동료의 조각으로 교환이 가능합니다.\\n아직 영입하지 못한 동료의 조각은 교환할 수 없으며, 보유한 동료는 [동료 초월]로 6성까지 성장하는데 필요한 수량까지 교환이 가능합니다.\\n다른 경로를 통해 획득한 조각도 체크되어 구매 제한이 이루어집니다.",
-      "zh": "获得的【通用碎片】可于商店中的碎片栏，与持有的同伴碎片进行交换。\\n无法与尚未招募的同伴碎片进行交换，且最多可交换至通过【同伴超越】将持有的同伴升至6星所需的数量。\\n通过其他方式获得的碎片也会被计入数量上限。"
+      "zh": "获得的【通用碎片】可于商店中的碎片栏，与持有的同伴碎片进行交换。\\n无法与尚未招募的同伴碎片进行交换，且最多可交换至通过【同伴超越】将持有的同伴升至6星所需的数量。\\n通过其他方式获得的碎片也会被计入数量上限。",
+      "es": "Las [Piezas Comodín] se pueden intercambiar por Piezas de Héroe en la pestaña Piezas de la tienda.\\nNo puedes intercambiarlas por piezas de Héroes que aún no hayas reclutado. Puedes intercambiarlas por piezas de héroes que ya posees, con un límite igual a la cantidad de piezas necesarias para llevarlos a 6 estrellas mediante [Trascender Héroe].\\nLas piezas obtenidas por otros métodos también se contarán dentro del límite de compra.",
+      "fr": "Les [Fragments Joker] peuvent être échangés contre des Fragments de Héros dans l'onglet Fragments de la boutique.\\nTu ne peux pas les échanger contre des fragments de Héros que tu n'as pas encore recrutés. Tu peux les échanger contre des fragments de héros que tu possèdes, dans la limite du nombre de fragments nécessaires pour les faire passer à 6 étoiles via [Transcender Héros].\\nLes fragments obtenus par d'autres méthodes seront également comptabilisés dans la limite d'achat."
     },
     "icon": "GC_Item_Piece"
   }

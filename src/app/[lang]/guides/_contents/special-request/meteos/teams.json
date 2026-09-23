@@ -13,7 +13,8 @@
         "jp": "フレンドのユニットを使ってステージをクリアすることもできます。",
         "kr": "친구의 유닛을 사용하여 스테이지를 클리어할 수 있다는 것을 잊지 마세요.",
         "zh": "别忘了可以使用好友的角色来帮助通关。",
-        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages."
+        "fr": "N'oubliez pas que vous pouvez utiliser les unités de vos amis pour vous aider à passer ces stages.",
+        "es": "No olvides que puedes usar las unidades de tus amigos para ayudarte a superar esas etapas."
       }
     },
     {
@@ -29,7 +30,8 @@
         "jp": "{B/BT_BARRIER}ユニットに集中し、味方が倒れないようにしましょう。",
         "kr": "{B/BT_BARRIER} 유닛에 집중하고 팀원이 쓰러지지 않도록 하세요.",
         "zh": "专注于{B/BT_BARRIER}角色，避免队友阵亡。",
-        "fr": "Privilégiez les unités {B/BT_BARRIER} et évitez de laisser vos alliés mourir."
+        "fr": "Privilégiez les unités {B/BT_BARRIER} et évitez de laisser vos alliés mourir.",
+        "es": "Concéntrate en las unidades {B/BT_BARRIER} y evita que mueran tus compañeros."
       }
     }
   ]

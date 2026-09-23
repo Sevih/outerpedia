@@ -54,7 +54,9 @@
       ],
       "substats": "ATK>SPD>HP",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
       }
     },
     {
@@ -83,7 +85,9 @@
       ],
       "substats": "ATK>SPD>HP",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
       }
     },
     {
@@ -112,7 +116,9 @@
       ],
       "substats": "ATK>SPD>HP",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Tactician's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm} o {I-T/Tactician's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Tactician's Charm}"
       }
     }
   ],
@@ -171,7 +177,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Critical Hit chance up to 50%\nCombination Simulator for PvP\nAbsolute Music for PvE"
+        "en": "Critical Hit chance up to 50%\nCombination Simulator for PvP\nAbsolute Music for PvE",
+        "es": "Tasa CRIT hasta 50%\nSimulador de combinaciones para PvP\nAbsolute Music para PvE",
+        "fr": "Taux CRIT jusqu'à 50%\nCombination Simulator pour le PvP\nAbsolute Music pour le PvE"
       }
     }
   ],
@@ -378,7 +386,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X",
+        "es": "Solo necesitas 50% de Tasa CRIT gracias a Noa Kaizer X",
+        "fr": "Tu n'as besoin que de 50% de Taux CRIT grâce à Noa Kaizer X"
       }
     },
     {
@@ -407,7 +417,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X",
+        "es": "Solo necesitas 50% de Tasa CRIT gracias a Noa Kaizer X",
+        "fr": "Tu n'as besoin que de 50% de Taux CRIT grâce à Noa Kaizer X"
       }
     },
     {
@@ -436,7 +448,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X"
+        "en": "You only need 50% Critical Hit Chance thanks to Noa Kaizer X",
+        "es": "Solo necesitas 50% de Tasa CRIT gracias a Noa Kaizer X",
+        "fr": "Tu n'as besoin que de 50% de Taux CRIT grâce à Noa Kaizer X"
       }
     }
   ],
@@ -529,7 +543,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Clock up if you want Turn cycling Bleed Team"
+        "en": "Clock up if you want Turn cycling Bleed Team",
+        "es": "Sube la velocidad si quieres un Equipo de Sangrado con ciclo de turnos",
+        "fr": "Monte la vitesse si tu veux une Turn cycling Bleed Team"
       }
     },
     {
@@ -558,7 +574,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Clock up if you want Turn cycling Bleed Team"
+        "en": "Clock up if you want Turn cycling Bleed Team",
+        "es": "Sube la velocidad si quieres un Equipo de Sangrado con ciclo de turnos",
+        "fr": "Monte la vitesse si tu veux une Turn cycling Bleed Team"
       }
     },
     {
@@ -587,7 +605,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Clock up if you want Turn cycling Bleed Team"
+        "en": "Clock up if you want Turn cycling Bleed Team",
+        "es": "Sube la velocidad si quieres un Equipo de Sangrado con ciclo de turnos",
+        "fr": "Monte la vitesse si tu veux une Turn cycling Bleed Team"
       }
     }
   ],
@@ -829,7 +849,9 @@
       ],
       "substats": "SPD>ATK>CHC>EFF",
       "note": {
-        "en": "{I-A/Combination Simulator} for PvP\n{I-A/Absolute Music} for PvE"
+        "en": "{I-A/Combination Simulator} for PvP\n{I-A/Absolute Music} for PvE",
+        "es": "{I-A/Combination Simulator} para PvP\n{I-A/Absolute Music} para PvE",
+        "fr": "{I-A/Combination Simulator} pour le PvP\n{I-A/Absolute Music} pour le PvE"
       }
     }
   ],
@@ -950,7 +972,9 @@
       ],
       "substats": "CHC>ATK>CHD>DMG UP%",
       "note": {
-        "en": "You don't want speed."
+        "en": "You don't want speed.",
+        "es": "No necesitas velocidad.",
+        "fr": "Tu ne veux pas de vitesse."
       }
     }
   ],
@@ -1075,7 +1099,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -1104,7 +1130,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -1133,7 +1161,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     }
   ],
@@ -1320,7 +1350,9 @@
       ],
       "substats": "ATK>CHC>CHD>HP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     },
     {
@@ -1345,7 +1377,9 @@
       ],
       "substats": "ATK>CHC>CHD>HP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     }
   ],
@@ -1486,7 +1520,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -1511,7 +1547,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -1536,7 +1574,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -1561,7 +1601,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     }
   ],
@@ -1596,7 +1638,9 @@
       ],
       "substats": "$speedHPEff",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     },
     {
@@ -1629,7 +1673,9 @@
       ],
       "substats": "$speedHPEff",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     },
     {
@@ -1662,7 +1708,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     },
     {
@@ -1695,7 +1743,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Mage's Charm}"
       }
     }
   ],
@@ -1814,7 +1864,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Undertaker's Charm}, {I-T/Mage's Charm} o {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} ou {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -1839,7 +1891,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Undertaker's Charm}, {I-T/Mage's Charm} o {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} ou {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -1864,7 +1918,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} or {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Undertaker's Charm}, {I-T/Mage's Charm} o {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Undertaker's Charm}, {I-T/Mage's Charm} ou {I-T/Vanguard's Charm}"
       }
     }
   ],
@@ -1891,7 +1947,9 @@
       ],
       "substats": "SPD>CHC>EFF",
       "note": {
-        "en": "Critical Hit Chance up to 50%"
+        "en": "Critical Hit Chance up to 50%",
+        "es": "Tasa CRIT hasta 50%",
+        "fr": "Taux CRIT jusqu'à 50%"
       }
     }
   ],
@@ -2122,7 +2180,9 @@
       ],
       "substats": "$tankDpsHP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Assassin's Charm}"
       }
     },
     {
@@ -2159,7 +2219,9 @@
       ],
       "substats": "$tankDpsHP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm} ou {I-T/Assassin's Charm}"
       }
     }
   ],
@@ -2332,7 +2394,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -2365,7 +2429,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -2398,7 +2464,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     }
   ],
@@ -2729,7 +2797,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP"
+        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP",
+        "es": "Absolute Music para PvE\nExorcismo Físico para PvP",
+        "fr": "Absolute Music pour le PvE\nPhysical Exorcism pour le PvP"
       }
     },
     {
@@ -2762,7 +2832,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP"
+        "en": "Absolute Music for PvE\nPhysical Exorcism for PvP",
+        "es": "Absolute Music para PvE\nExorcismo Físico para PvP",
+        "fr": "Absolute Music pour le PvE\nPhysical Exorcism pour le PvP"
       }
     }
   ],
@@ -2971,7 +3043,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -3000,7 +3074,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     }
   ],
@@ -3065,7 +3141,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "In high level PvP she is very hard to use due to the inability to access her s3 on turn one"
+        "en": "In high level PvP she is very hard to use due to the inability to access her s3 on turn one",
+        "es": "En PvP de alto nivel es muy difícil de usar debido a la incapacidad de acceder a su s3 en el primer turno",
+        "fr": "En PvP haut niveau, elle est très difficile à utiliser en raison de l'impossibilité d'accéder à son S3 au tour un"
       }
     },
     {
@@ -3290,7 +3368,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     }
   ],
@@ -3373,7 +3453,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -3398,7 +3480,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -3423,7 +3507,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     }
   ],
@@ -3592,7 +3678,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -3621,7 +3709,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -3650,7 +3740,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     }
   ],
@@ -3735,7 +3827,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -3764,7 +3858,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     },
     {
@@ -3793,7 +3889,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm}",
+        "es": "PvP: {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm}"
       }
     }
   ],
@@ -3820,7 +3918,9 @@
       ],
       "substats": "$tankSDpsHP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -3845,7 +3945,9 @@
       ],
       "substats": "$tankSDpsHP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -3870,7 +3972,9 @@
       ],
       "substats": "$tankSDpsHP",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     }
   ],
@@ -4097,7 +4201,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP: {I-T/Vanguard's Charm}"
+        "en": "PvP: {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -4130,7 +4236,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP: {I-T/Vanguard's Charm}"
+        "en": "PvP: {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -4163,7 +4271,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP: {I-T/Vanguard's Charm}"
+        "en": "PvP: {I-T/Vanguard's Charm}",
+        "es": "PvP: {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     }
   ],
@@ -4194,7 +4304,9 @@
       ],
       "substats": "$speedHPEff",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Assassin's Charm} o {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -4223,7 +4335,9 @@
       ],
       "substats": "$speedHPEff",
       "note": {
-        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Assassin's Charm} or {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Assassin's Charm} o {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Assassin's Charm} ou {I-T/Vanguard's Charm}"
       }
     }
   ],
@@ -4258,7 +4372,9 @@
       ],
       "substats": "EFF>SPD>CHC",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     },
     {
@@ -4291,7 +4407,9 @@
       ],
       "substats": "EFF>SPD>CHC",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     },
     {
@@ -4316,7 +4434,9 @@
       ],
       "substats": "$speedEff",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     }
   ],
@@ -4565,7 +4685,9 @@
       ],
       "substats": "EFF>ATK>HP>DEF",
       "note": {
-        "en": "Effectiveness (until target's Resilience). Minimal speed."
+        "en": "Effectiveness (until target's Resilience). Minimal speed.",
+        "es": "Efectividad (hasta la Resiliencia del objetivo). Velocidad mínima.",
+        "fr": "Efficacité (jusqu'à la Résilience de la cible). Vitesse minimale."
       }
     }
   ],
@@ -4608,7 +4730,9 @@
       ],
       "substats": "ATK>SPD>CHC>EFF>CHD",
       "note": {
-        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness",
+        "es": "Una vez que su Equipo exclusivo esté al nivel 10, puedes ignorar la Efectividad",
+        "fr": "Une fois son Équipement exclusif au niveau 10, tu peux ignorer l'Efficacité"
       }
     },
     {
@@ -4649,7 +4773,9 @@
       ],
       "substats": "ATK>SPD>CHC>EFF>CHD",
       "note": {
-        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness",
+        "es": "Una vez que su Equipo exclusivo esté al nivel 10, puedes ignorar la Efectividad",
+        "fr": "Une fois son Équipement exclusif au niveau 10, tu peux ignorer l'Efficacité"
       }
     },
     {
@@ -4690,7 +4816,9 @@
       ],
       "substats": "ATK>SPD>CHC>EFF>CHD",
       "note": {
-        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness"
+        "en": "Once his Exclusive Equipment is lv 10 you can ignore the Effectiveness",
+        "es": "Una vez que su Equipo exclusivo esté al nivel 10, puedes ignorar la Efectividad",
+        "fr": "Une fois son Équipement exclusif au niveau 10, tu peux ignorer l'Efficacité"
       }
     }
   ],
@@ -4919,7 +5047,9 @@
       ],
       "substats": "$heal",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -4960,7 +5090,9 @@
       ],
       "substats": "$heal",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -5001,7 +5133,9 @@
       ],
       "substats": "$heal",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     },
     {
@@ -5042,7 +5176,9 @@
       ],
       "substats": "$heal",
       "note": {
-        "en": "PvP : {I-T/Vanguard's Charm}"
+        "en": "PvP : {I-T/Vanguard's Charm}",
+        "es": "PvP : {I-T/Vanguard's Charm}",
+        "fr": "PvP : {I-T/Vanguard's Charm}"
       }
     }
   ],
@@ -5293,7 +5429,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "Critical Hit Chance only up to 50%"
+        "en": "Critical Hit Chance only up to 50%",
+        "es": "Tasa CRIT solo hasta el 50%",
+        "fr": "Taux CRIT jusqu'à 50% seulement"
       }
     }
   ],
@@ -5812,7 +5950,9 @@
       ],
       "substats": "$dpsEFF",
       "note": {
-        "en": "Effectiveness until ~270 or target reached"
+        "en": "Effectiveness until ~270 or target reached",
+        "es": "Efectividad hasta ~270 o hasta alcanzar el objetivo",
+        "fr": "Efficacité jusqu'à ~270 ou objectif atteint"
       }
     }
   ],
@@ -5905,7 +6045,9 @@
       ],
       "substats": "$dpsHPEff",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     },
     {
@@ -5942,7 +6084,9 @@
       ],
       "substats": "$dpsHPEff",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     },
     {
@@ -5979,7 +6123,9 @@
       ],
       "substats": "$dpsHPEff",
       "note": {
-        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs."
+        "en": "Try to add some attack if you play her in a dual attack team, that way she will land more DoTs.",
+        "es": "Intenta añadir algo de Ataque si la juegas en un equipo de doble ataque, así conseguirá aplicar más DoTs.",
+        "fr": "Essaie d'ajouter un peu d'attaque si tu la joues dans une équipe de double attaque, elle placera ainsi plus de DoTs."
       }
     },
     {
@@ -6124,7 +6270,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP : {I-T/Mage's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm} ou {I-T/Assassin's Charm}"
       }
     },
     {
@@ -6165,7 +6313,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP : {I-T/Mage's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm} ou {I-T/Assassin's Charm}"
       }
     },
     {
@@ -6244,7 +6394,9 @@
       ],
       "substats": "$critAtkspd",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP : {I-T/Mage's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm} ou {I-T/Assassin's Charm}"
       }
     },
     {
@@ -6277,7 +6429,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}"
+        "en": "PvP : {I-T/Mage's Charm} or {I-T/Assassin's Charm}",
+        "es": "PvP : {I-T/Mage's Charm} o {I-T/Assassin's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm} ou {I-T/Assassin's Charm}"
       }
     },
     {
@@ -6318,7 +6472,9 @@
       ],
       "substats": "$sdps",
       "note": {
-        "en": "You can pair {AS/Immunity} with {AS/Augmentation} or {AS/Critical Strike} as well"
+        "en": "You can pair {AS/Immunity} with {AS/Augmentation} or {AS/Critical Strike} as well",
+        "es": "También puedes emparejar a {AS/Immunity} con {AS/Augmentation} o {AS/Critical Strike}",
+        "fr": "Tu peux aussi associer {AS/Immunity} avec {AS/Augmentation} ou {AS/Critical Strike}"
       }
     }
   ],
@@ -7679,7 +7835,8 @@
         "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
-        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "es": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE"
       },
       "sets": [
         {
@@ -7728,7 +7885,8 @@
         "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
-        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "es": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE"
       },
       "sets": [
         {
@@ -7777,7 +7935,8 @@
         "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
-        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "es": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE"
       },
       "sets": [
         {
@@ -7826,7 +7985,8 @@
         "jp": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "kr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
         "zh": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
-        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE"
+        "fr": "{I-T/Vanguard's Charm} / {I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm} / {I-T/Sage's Charm} / {I-T/Executioner's Charm} / {I-T/Mage's Charm} : PvE",
+        "es": "{I-T/Vanguard's Charm}/{I-T/Mage's Charm} : PvP\n{I-T/Rogue's Charm}/{I-T/Sage's Charm}/{I-T/Executioner's Charm}/{I-T/Mage's Charm} : PvE"
       },
       "sets": [
         {
@@ -7925,7 +8085,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+        "es": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} DPS Principal",
+        "fr": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
     },
     {
@@ -7966,7 +8128,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+        "es": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} DPS Principal",
+        "fr": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
     },
     {
@@ -8007,7 +8171,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+        "es": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} DPS Principal",
+        "fr": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
     },
     {
@@ -8057,7 +8223,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+        "es": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} DPS Principal",
+        "fr": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
     },
     {
@@ -8082,7 +8250,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
+        "en": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS",
+        "es": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} DPS Principal",
+        "fr": "{EE/Core Fusion Lisha} Sub DPS, {EE/Lisha} Main DPS"
       }
     }
   ],
@@ -8307,7 +8477,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -8332,7 +8504,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -8357,7 +8531,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     },
     {
@@ -8382,7 +8558,9 @@
       ],
       "substats": "$dps",
       "note": {
-        "en": "PvP : {I-T/Mage's Charm}"
+        "en": "PvP : {I-T/Mage's Charm}",
+        "es": "PvP: {I-T/Mage's Charm}",
+        "fr": "PvP : {I-T/Mage's Charm}"
       }
     }
   ],
