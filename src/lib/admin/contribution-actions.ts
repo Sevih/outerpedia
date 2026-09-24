@@ -14,7 +14,7 @@
  */
 import type { CharacterCurated } from '@contracts';
 import { IS_DEV } from '@/lib/admin/guard';
-import type { Lang } from '@/lib/i18n/config';
+import { LANGS, type Lang } from '@/lib/i18n/config';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { applyTranslation } from '@/lib/admin/translate-fill';
 import {
@@ -36,7 +36,9 @@ import {
 
 export type ImportResult = { ok: true; summary: string } | { ok: false; errors: string[] };
 
-const TARGET_LANGS = ['jp', 'kr', 'zh', 'fr'] as const;
+// Toutes les langues du site sauf l'anglais (source) — dérivé, jamais recopié :
+// la liste figée avait oublié « es » le 23/09/2026.
+const TARGET_LANGS: readonly Lang[] = LANGS.filter((l) => l !== 'en');
 
 /**
  * Regénère sur place les langues d'une review depuis son EN. Renvoie le nb de

@@ -64,8 +64,7 @@ export function ItemCuratedEditor({
     try {
       const res = await fetch(`/api/admin/text/resolve?key=${encodeURIComponent(k)}`);
       const { text } = (await res.json().catch(() => ({}))) as { text?: LangDict | null };
-      if (text)
-        apply({ en: text.en ?? '', jp: text.jp ?? '', kr: text.kr ?? '', zh: text.zh ?? '' });
+      if (text) apply(Object.fromEntries(GAME_LANGS.map((l) => [l, text[l] ?? ''])));
       else setStatus({ kind: 'err', msg: `Text key not found: ${k}` });
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });

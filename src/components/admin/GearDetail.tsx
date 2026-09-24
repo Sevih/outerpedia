@@ -5,6 +5,7 @@
  */
 import { notFound } from 'next/navigation';
 import type { LangDict } from '@contracts';
+import { GAME_LANGS } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
 import type { GearKind } from '@/lib/admin/gear-rows';
 import { entityReview, type EquipmentEntityKind } from '@/lib/admin/review-store';
@@ -56,7 +57,9 @@ function plain(s: string): string {
 function Langs({ d }: { d: LangDict }) {
   return (
     <span className="text-content-subtle text-xs">
-      {(['jp', 'kr', 'zh'] as const).map((l) => (d[l] ? `${l}: ${d[l]}  ` : '')).join('')}
+      {GAME_LANGS.filter((l) => l !== 'en')
+        .map((l) => (d[l] ? `${l}: ${d[l]}  ` : ''))
+        .join('')}
     </span>
   );
 }

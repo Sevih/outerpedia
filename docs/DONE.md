@@ -43,6 +43,19 @@
   toutes lettres dans le titre. À savoir : « Chevalier de l'Espoir Météores » et
   « Tyrant bebé » sont les noms OFFICIELS, pas des coquilles. Les corps de guides
   (JSON et `labels.ts`) gardent leur formulation, boss compris.
+  Audit du lendemain côté extraction, à la question « et l'extraction ? » :
+  datagen et scripts ne portent plus aucune liste de langues ni nom de colonne
+  hors `lang.ts` ; trois écrans ADMIN, eux, recopiaient encore la liste — le
+  navigateur de tables masquait Korean/Japanese/China_* par une liste figée
+  (French et Spanish s'affichaient donc en plus), l'éditeur d'item curé
+  perdait fr/es en tirant un texte du jeu, le détail d'équipement n'affichait
+  que jp/kr/zh. Les trois dérivent désormais de `LANG_COLUMNS` / `GAME_LANGS`.
+  Le générateur du solver lit la colonne anglaise seule, comme avant : le
+  gear-solver est anglophone par construction, pas une régression. Les
+  traducteurs, ensuite : DeepL et Haiku connaissent fr/es (`translate-actions`),
+  et tous les éditeurs admin dérivent leurs cibles de `LANGS` — sauf l'import
+  de contributions, dont la liste figée s'arrêtait à `fr` : une review importée
+  n'aurait jamais eu d'espagnol. Dérivée elle aussi.
 
 - **Le jeu parle français et espagnol : six langues officielles, plus aucune
   communautaire.** Le client Steam du 22/09 ajoute deux colonnes à ses 15 tables

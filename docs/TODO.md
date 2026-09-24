@@ -146,7 +146,7 @@
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
       par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-- [ ] **Durées « 3d 4h 12m » en anglais dans les 5 langues, quatre copies**
+- [ ] **Durées « 3d 4h 12m » en anglais dans toutes les langues, quatre copies**
       (G23) : `BannerCountdown`, `BuffEventTimer`, `ServerResets`,
       `progress-tracker/tracker.ts`. `SingularityCountdown` a déjà tranché
       (numérique). Un `lib/format-duration.ts`.
