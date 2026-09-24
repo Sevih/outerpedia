@@ -8324,6 +8324,188 @@
       "substats": "$dps"
     }
   ],
+  "2700035": [
+    {
+      "name": "Speed",
+      "weapons": [
+        {
+          "id": "631",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1022",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "s4"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>CHC>CHD>DMG UP%"
+    },
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "631",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1022",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>CHC>CHD>DMG UP%"
+    },
+    {
+      "name": "Swift  mix",
+      "weapons": [
+        {
+          "id": "631",
+          "mainStat": "HP%"
+        },
+        {
+          "id": "16",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "783",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "788",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1040",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1795",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1800",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1017",
+          "mainStat": "SPD"
+        },
+        {
+          "id": "1035",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1012",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1022",
+          "mainStat": "ATK%"
+        }
+      ],
+      "talismans": ["$emrsv"],
+      "sets": [
+        {
+          "preset": "sw2a2"
+        },
+        {
+          "preset": "s2sw2"
+        },
+        {
+          "preset": "p2sw2"
+        }
+      ],
+      "substats": "SPD>ATK>EFF>CHC>CHD>DMG UP%"
+    }
+  ],
   "2700037": [
     {
       "name": "Speed",
