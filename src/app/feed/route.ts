@@ -2,6 +2,7 @@ import { DEFAULT_LANG, LANGUAGES } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { buildUrl } from '@/lib/site';
 import { guideUpdatedDate, listGuides } from '@/lib/data/guides';
+import { esc, rfc822 } from '@/lib/rss';
 
 /**
  * Flux RSS des guides (lien de la barre basse du footer, `/feed`). Route à la
@@ -14,21 +15,6 @@ import { guideUpdatedDate, listGuides } from '@/lib/data/guides';
  */
 export const revalidate = 86400;
 export const dynamic = 'force-static';
-
-/** Échappe les 5 entités XML — titres/descriptions sont du texte libre. */
-function esc(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
-/** `YYYY-MM-DD` → date RFC-822 (format attendu par les lecteurs RSS). */
-function rfc822(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toUTCString();
-}
 
 export async function GET() {
   const t = await getT(DEFAULT_LANG);

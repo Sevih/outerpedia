@@ -3,6 +3,7 @@ import { getT } from '@/i18n';
 import { buildUrl } from '@/lib/site';
 import { getChangelog } from '@/lib/data/changelog';
 import { changelogHref } from '@/components/changelog/presentation';
+import { esc, rfc822 } from '@/lib/rss';
 
 /**
  * Flux RSS du JOURNAL DU SITE (page `/changelog`). Route à la RACINE, sous
@@ -18,21 +19,6 @@ export const revalidate = 86400;
 export const dynamic = 'force-static';
 
 const LIMIT = 30;
-
-/** Échappe les 5 entités XML — titres/descriptions sont du texte libre. */
-function esc(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
-/** `YYYY-MM-DD` → date RFC-822 (format attendu par les lecteurs RSS). */
-function rfc822(date: string): string {
-  return new Date(`${date}T00:00:00Z`).toUTCString();
-}
 
 /** Puces → une description plate (markdown gras `**x**` aplati). */
 function describe(lines: string[]): string {
