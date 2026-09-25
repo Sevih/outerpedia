@@ -431,10 +431,12 @@ git push                                 # 3. sur une branche → PR vers main
 > avec le bump de version).
 
 > **Les téléchargeables partent en `Content-Disposition: attachment`.**
-> `assets:push` pose cet en-tête sur `images/download/`, `images/characters/full/`
-> et `audio/bgm/` : le `<a download>` des wallpapers et de l'OST est
-> cross-origin, le navigateur l'ignore et ouvrirait le fichier sans lui
-> (`<img>`/`<audio>` n'en sont pas gênés). Un en-tête S3 étant figé à l'upload,
+> `assets:push` pose cet en-tête sur `images/download/` et `audio/bgm/` : le
+> `<a download>` des wallpapers et de l'OST est cross-origin, le navigateur
+> l'ignore et ouvrirait le fichier sans lui (`<img>`/`<audio>` n'en sont pas
+> gênés). Pas sur `images/characters/full/` (full-arts affichés sur les fiches,
+> indexés par Google Images) : les HeroFullArt vivants se téléchargent par
+> `fetch → blob` côté client. Un en-tête S3 étant figé à l'upload,
 > le changer pour des objets déjà sur R2 passe par un re-push ciblé :
 > `pnpm assets:push --prefix=<préfixe>` (répétable, cf. l'en-tête du script)
 > plutôt que `--full`.

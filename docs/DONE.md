@@ -117,10 +117,13 @@
   OUVRAIT le fichier. Voie serveur retenue plutôt que `fetch → blob` :
   `scripts/assets-push.mjs` pousse désormais en trois lots d'en-têtes, les clés
   de `ATTACHMENT_PREFIXES` (`images/download/`, `images/characters/full/`,
-  `audio/bgm/`) recevant `attachment` en plus du Cache-Control. Le préfixe
-  `images/characters/full/` s'est ajouté à ceux que prévoyait le lot : c'est de
-  là que se téléchargent les HeroFullArt VIVANTS (`wallpaperDownload` réutilise
-  `img.full`), seul le namespace wallpaper n'aurait pas suffi. Nouvelle option
+  `audio/bgm/`) recevant `attachment` en plus du Cache-Control. Le lot avait
+  ajouté `images/characters/full/`, d'où se téléchargent les HeroFullArt
+  VIVANTS (`wallpaperDownload` réutilise `img.full`) — RETIRÉ à la relecture
+  (Sevih, même jour) : ce sont les full-arts affichés sur toutes les fiches, une
+  ouverture directe de l'URL téléchargerait au lieu d'afficher et Google Images
+  peut refuser d'indexer une pièce jointe ; ceux-là passent par `fetch → blob`
+  côté client (lot C3). Nouvelle option
   `--prefix=<p>` (répétable) qui re-pousse et repurge toutes les clés du staging
   sous un préfixe, pour réécrire un en-tête S3 figé sans `--full` ; documentée
   en tête du script et dans `datagen/README.md` (§ Publier). Vérifié : serveur

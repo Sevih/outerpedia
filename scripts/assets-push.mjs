@@ -11,12 +11,15 @@
  * cross-origin vers R2, et le navigateur IGNORE `download` hors même origine —
  * sans cet en-tête il ouvrait le fichier au lieu de l'enregistrer. Il ne gêne
  * pas l'affichage : `<img>` et `<audio>` l'ignorent (testé le 25/09 sous Firefox,
- * png/webp/mp3 cross-origin). `images/characters/full/` en est parce que les
- * HeroFullArt vivants se téléchargent depuis là (cf. `src/lib/wallpapers.ts`) ;
- * seule conséquence, une ouverture DIRECTE de l'URL télécharge au lieu
- * d'afficher. L'en-tête étant figé à l'upload, la mise en place des objets déjà
- * sur R2 se fait une fois par :
- *   pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/
+ * png/webp/mp3 cross-origin). PAS `images/characters/full/`, bien que les
+ * HeroFullArt vivants se téléchargent depuis là (cf. `src/lib/wallpapers.ts`) :
+ * ce sont les full-arts AFFICHÉS sur toutes les fiches perso — en `attachment`,
+ * une ouverture directe de l'URL (partage, onglet) téléchargerait au lieu
+ * d'afficher, et Google Images peut refuser d'indexer une pièce jointe. Le
+ * téléchargement des HeroFullArt vivants passe donc côté client (`fetch → blob`,
+ * cf. WallpapersGallery). L'en-tête étant figé à l'upload, la mise en place des
+ * objets déjà sur R2 se fait une fois par :
+ *   pnpm assets:push --prefix=images/download/ --prefix=audio/bgm/
  *
  * Pousse le staging local (`.assets-staging/`, produit par `assets:collect`) vers
  * le bucket R2 via rclone (S3), puis PURGE le cache edge Cloudflare des clés
@@ -93,7 +96,7 @@ const FORCE_PREFIXES = process.argv
   .map((a) => a.slice('--prefix='.length))
   .filter(Boolean);
 /** Namespaces servis en `attachment` (cf. en-tête du fichier). */
-const ATTACHMENT_PREFIXES = ['images/download/', 'images/characters/full/', 'audio/bgm/'];
+const ATTACHMENT_PREFIXES = ['images/download/', 'audio/bgm/'];
 const isAttachment = (/** @type {string} */ k) => ATTACHMENT_PREFIXES.some((p) => k.startsWith(p));
 
 // Quotes d'enrobage (convention dotenv) : `KEY="valeur"` → `valeur`. Même règle
