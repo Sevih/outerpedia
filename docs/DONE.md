@@ -7,6 +7,17 @@
 
 ## 2026-09-25
 
+- **Le pre-commit formate AVANT de linter** (lot A1 de la Dette). `format`
+  (`prettier --write`, `stage_fixed`) et `lint` (`eslint`) tournaient en
+  `parallel: true` sur les mêmes fichiers indexés : eslint pouvait lire un
+  fichier pendant que prettier le réécrivait, et linter une version non
+  formatée. Fait : `piped: true` (séquentiel, arrêt au premier échec) avec des
+  `priority` explicites (1 format, 2 lint) — l'ordre ne tient plus à l'ordre
+  alphabétique des noms ; `stage_fixed` conservé, pre-push inchangé. Vérifié
+  par un commit de test sur une branche jetable, dans un worktree séparé (pour
+  ne pas toucher au travail en cours de `main`) : un fichier mal formaté
+  portant un `var` est reformaté et ré-indexé, puis eslint bloque sur le
+  fichier FORMATÉ (`no-var`), HEAD inchangé ; worktree et branche supprimés.
 - **Les embeds Twitch jouent sur chaque sous-domaine de langue** (lot A4 de la
   Dette). `TWITCH_PARENTS` (`MultiVideoEmbed`) ne listait que
   `['outerpedia.com', 'localhost']` ; or Twitch exige en `parent` CHAQUE hôte

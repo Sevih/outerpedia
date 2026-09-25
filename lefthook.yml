@@ -2,15 +2,19 @@
 # But : vérifier le code AVANT chaque commit/push, automatiquement.
 
 pre-commit:
-  parallel: true
+  # Séquentiel, arrêt au premier échec : le lint doit lire les fichiers DÉJÀ
+  # formatés (en parallèle, eslint pouvait lire un fichier en pleine réécriture).
+  piped: true
   commands:
     # Formate les fichiers indexés, puis ré-indexe les corrections.
     format:
+      priority: 1
       glob: '*.{ts,tsx,js,mjs,json,css,md,yml,yaml}'
       run: pnpm prettier --write {staged_files}
       stage_fixed: true
     # Lint uniquement les fichiers TS/TSX indexés.
     lint:
+      priority: 2
       glob: '*.{ts,tsx}'
       run: pnpm eslint {staged_files}
 
