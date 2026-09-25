@@ -13,6 +13,12 @@
  * (accueil, /coupons, /event) ; un appel depuis un LAYOUT partagé doit passer
  * une valeur alignée sur l'ISR du site (86 400), sinon c'est tout le site qui
  * se régénère toutes les 10 minutes.
+ *
+ * `revalidate = 0` : lecture FRAÎCHE, sans cache Next ni cache Cloudflare (un
+ * paramètre unique fait manquer le cache de l'edge — vérifié le 25/09/2026 :
+ * MISS à chaque valeur neuve). Réservé aux appels internes peu fréquents (le
+ * bot Discord, une fois par minute) : une page publique ne doit jamais s'en
+ * servir, chaque visite irait chercher R2.
  */
 const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
@@ -29,7 +35,8 @@ const FETCH_TIMEOUT_MS = 3000;
 export async function loadRuntimeJson<T>(name: string, fallback: T, revalidate = 600): Promise<T> {
   if (IMG_BASE) {
     try {
-      const res = await fetch(`${IMG_BASE}/data/${name}`, {
+      const url = `${IMG_BASE}/data/${name}${revalidate === 0 ? `?fresh=${Date.now()}` : ''}`;
+      const res = await fetch(url, {
         next: { revalidate },
         signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       });

@@ -17,6 +17,9 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { listGuides } from '@/lib/data/guides';
+import { getChangelog, type ChangelogType } from '@/lib/data/changelog';
+import { getActiveCoupons } from '@/lib/home';
+import { changelogHref, changelogThumb } from '@/components/changelog/presentation';
 import {
   getAmuletFamilies,
   getEEViews,
@@ -46,6 +49,27 @@ export interface BotGuide {
   category: string;
   slug: string;
   title: string;
+}
+
+/** Un code promo ACTIF pour les annonces Discord — récompenses en texte EN. */
+export interface BotCoupon {
+  code: string;
+  start: string;
+  end: string;
+  rewards: { name: string; qty: string }[];
+}
+
+/** Une entrée PUBLIÉE du journal du site pour les annonces Discord. */
+export interface BotChangelogEntry {
+  date: string;
+  type: ChangelogType;
+  title: string;
+  /** Puces EN, markdown `**gras**` tel quel (Discord le rend). */
+  content: string[];
+  /** Chemin interne sans préfixe de langue (`/changelog` si l'entrée n'a pas de lien). */
+  href: string;
+  /** Vignette (même règle que la carte du site), chemin relatif comme les autres images. */
+  thumb?: string;
 }
 
 /** Un équipement pour /item — champs des embeds, tout est déjà du texte. */
@@ -86,6 +110,45 @@ export function buildBotGuides(): BotGuide[] {
   return listGuides()
     .filter((g) => !g.hidden)
     .map((g) => ({ category: g.category, slug: g.slug, title: g.title.en }));
+}
+
+/**
+ * Codes promo ACTIFS aujourd'hui (UTC) : le bot annonce un code quand il entre
+ * dans cette liste, donc un code saisi à l'avance part à sa date de début.
+ * Lecture FRAÎCHE de R2 : un code sauvé en admin part dans la minute.
+ */
+export async function buildBotCoupons(): Promise<BotCoupon[]> {
+  const { codes } = await getActiveCoupons('en', undefined, 0);
+  return codes.map((c) => ({
+    code: c.code,
+    start: c.start,
+    end: c.end,
+    rewards: c.rewards.map((r) => ({ name: r.item.name, qty: r.qty })),
+  }));
+}
+
+/** Nombre d'entrées servies : le bot n'annonce de toute façon que les plus récentes. */
+const BOT_CHANGELOG_LIMIT = 20;
+
+/** `img.*` préfixe la base R2 ; le contrat du bot veut le chemin nu (cf. en-tête). */
+const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
+const relativeImg = (src: string): string =>
+  IMG_BASE && src.startsWith(IMG_BASE) ? src.slice(IMG_BASE.length) : src;
+
+/** Entrées publiées du journal (brouillons et dates futures exclus par `getChangelog`). */
+export function buildBotChangelog(): BotChangelogEntry[] {
+  return getChangelog('en', { limit: BOT_CHANGELOG_LIMIT }).map((e) => {
+    const src = changelogThumb(e);
+    const thumb = src && relativeImg(src);
+    return {
+      date: e.date,
+      type: e.type,
+      title: e.title,
+      content: e.content,
+      href: changelogHref(e.link) ?? '/changelog',
+      ...(thumb ? { thumb } : {}),
+    };
+  });
 }
 
 const cap = (s: string): string => (s ? s[0]!.toUpperCase() + s.slice(1) : s);

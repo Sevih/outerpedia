@@ -14,4 +14,5 @@ export type RawCoupon = {
 
 const committed = couponsData as unknown as RawCoupon[];
 
-export const loadCoupons = (): Promise<RawCoupon[]> => loadRuntimeJson('coupons.json', committed);
+export const loadCoupons = (revalidate?: number): Promise<RawCoupon[]> =>
+  loadRuntimeJson('coupons.json', committed, revalidate);

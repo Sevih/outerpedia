@@ -109,13 +109,15 @@ function resolveReward(key: string, lang: Lang): InlineItem {
 /**
  * Codes promo ACTIFS aujourd'hui (récents d'abord), récompenses résolues. Rend
  * aussi le nombre total d'actifs (pour le lien « voir les N codes »).
+ * `revalidate` : cf. `loadRuntimeJson` (0 = lecture fraîche, bot uniquement).
  */
 export async function getActiveCoupons(
   lang: Lang,
   limit?: number,
+  revalidate?: number,
 ): Promise<{ codes: CouponVM[]; activeCount: number }> {
   const today = todayUTC();
-  const active = (await loadCoupons())
+  const active = (await loadCoupons(revalidate))
     .filter((c) => c.start <= today && c.end >= today)
     .sort((a, b) => b.start.localeCompare(a.start));
   const sliced = limit ? active.slice(0, limit) : active;

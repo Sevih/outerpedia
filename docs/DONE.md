@@ -7,6 +7,26 @@
 
 ## 2026-09-25
 
+- **Routes `/api/bot/coupons` et `/api/bot/changelog` : outerbot annonce sur
+  Discord chaque nouveau code promo et chaque nouvelle entrée du journal.** Le
+  bot interroge ces routes toutes les minutes et poste ce qu'il n'a pas encore
+  vu. C'est lui qui va chercher : l'admin tourne en dev sur le poste de Sevih
+  et ne voit pas le réseau Docker du VPS. Les routes appliquent les règles de
+  mise en ligne du site : `buildBotCoupons` ne sert que les codes ACTIFS (un
+  code saisi à l'avance est annoncé à sa date de début), `buildBotChangelog`
+  les entrées publiées (brouillons et dates futures exclus par
+  `getChangelog`), avec lien et vignette (`changelogThumb`, chemin rendu
+  relatif comme les autres images du contrat bot). Aucun cache sur les deux :
+  un code sauvé doit partir dans la minute. `loadRuntimeJson` accepte donc
+  `revalidate = 0`, qui lit R2 sans cache Next et avec un paramètre unique
+  pour manquer le cache Cloudflare — vérifié : sans paramètre `HIT` (copie de
+  459 s), avec un paramètre neuf `MISS` à chaque fois. Réservé au bot, écrit
+  dans le commentaire : une page publique qui s'en servirait irait chercher R2
+  à chaque visite. Pour la même raison, Caddy ferme les deux routes à Internet
+  (sevih-tool) ; le bot les appelle en direct sur `outerpedia:3000`. Le
+  journal reste lié au déploiement, choix de Sevih : une news pointe presque
+  toujours vers une page (perso, guide) qui n'existe qu'après le build.
+
 - **Site en 502 pendant ~2 h : `next` revenu à 16.3.0, et la CI démarre
   désormais l'image avant de la publier.** Le déploiement de `95d46ea2`
   (15h18) embarquait `next` 16.3.1 (lot A20 ci-dessous), qui exige
