@@ -460,8 +460,10 @@ Ce qui se passe tout seul, dans l'ordre :
    ne quitte jamais le poste.
 3. **Sur la PR** (CI, job `check`) : lint + typecheck + `next build` — la
    validation finale avant merge.
-4. **Au merge dans `main`** (CI) : build de l'**image Docker** → publication
-   sur **GHCR** → **déploiement automatique** sur le VPS en SSH
+4. **Au merge dans `main`** (CI) : build de l'**image Docker** → **test de
+   démarrage** (l'image est lancée et doit répondre 2xx/3xx sur l'accueil en
+   60 s, sinon rien n'est publié) → publication sur **GHCR** →
+   **déploiement automatique** sur le VPS en SSH
    (`docker compose pull && up -d`). On ne se connecte jamais au serveur :
    _merger dans `main`, c'est déployer_.
 

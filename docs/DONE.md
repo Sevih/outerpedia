@@ -7,6 +7,28 @@
 
 ## 2026-09-25
 
+- **Site en 502 pendant ~2 h : `next` revenu à 16.3.0, et la CI démarre
+  désormais l'image avant de la publier.** Le déploiement de `95d46ea2`
+  (15h18) embarquait `next` 16.3.1 (lot A20 ci-dessous), qui exige
+  `@swc/helpers` 0.5.23 au lieu de 0.5.15. Cette version ajoute à ses
+  `exports` une condition `"module-sync"` → `./esm/` ; Node 24 la suit même
+  dans un `require()`, mais le traçage de la sortie standalone de Next n'a
+  copié que `./cjs/` (vérifié dans l'image : pas de dossier `esm/`). Résultat :
+  `MODULE_NOT_FOUND` au lancement de `server.js`, conteneur en boucle
+  (115 redémarrages), Cloudflare en 502 sur tous les hôtes — avec une CI
+  verte, puisqu'elle construisait l'image sans jamais la lancer. Le TLS
+  (certificat d'origine refait le 23/09 pour `es`) n'y était pour rien : 502
+  et pas 526. Correctif en avant, sans retour arrière (décision Sevih) :
+  `next` 16.3.0 (`e0774b7c`), `eslint-config-next` laissé en 16.3.1 (lint
+  seulement) ; `dependabot.yml` ignore `next` 16.3.1 et elle seule, une 16.3.2
+  sera proposée. Puis `635522c0` : le job `docker` charge l'image dans le
+  runner au lieu de la pousser, la lance, exige une réponse 2xx/3xx sur
+  l'accueil en 60 s, et ne la pousse sur GHCR qu'ensuite — le deploy ne peut
+  plus tirer une image qui ne démarre pas. Le test, rejoué sur le VPS contre
+  l'image fautive, l'arrête en ~4 s sur le même `MODULE_NOT_FOUND`. Prod
+  rétablie à 17h21 (200 sur l'apex, `fr`, `es`, zéro redémarrage). Reste :
+  la PR dependabot #49, générée avant l'exclusion, porte sans doute `next`
+  16.3.1 — ne pas la merger telle quelle.
 - **Datagen : `loadTextIndex` mémoïsé, catalogue et équipement construits une
   seule fois par build** (lot A17). `loadTextIndex(table)` (`datagen/lib/text.ts`)
   relisait et ré-indexait sa table à chaque appel — 34 sites d'appel dans
@@ -56,7 +78,9 @@
   SANS `pnpm install` (interdit au lot) : **à Sevih de le lancer** ; le
   `pnpm-lock.yaml` DOIT bouger (il résout encore `next@16.3.0`, `@next/env` et
   les `@next/swc-*` en 16.3.0), à committer avec, et c'est la CI (build) qui
-  valide un `next` de patch. (3) La règle des locales : il n'existait plus de
+  valide un `next` de patch. **Annulé le jour même** : la CI a validé, la
+  prod a planté au démarrage — `next` est revenu à 16.3.0, cf. l'entrée
+  « Site en 502 » ci-dessus. (3) La règle des locales : il n'existait plus de
   commentaire « alignement par ligne » dans `src/i18n/locales/*.ts`, mais
   `CONVENTIONS.md` promettait « mêmes clés, même ordre, mêmes commentaires »,
   garantis par `keys.test.ts` — faux sur les deux derniers points : le test ne
