@@ -7,6 +7,32 @@
 
 ## 2026-09-25
 
+- **Filtres de classe et d'élément dans l'ordre du jeu** (lot A11). Les
+  pastilles de `/characters`, des tier lists, de most-used-units, de
+  l'équipement (armes/amulettes et EE) et du picker du team planner étaient
+  bâties depuis les données puis triées par `.sort()` : alphabétique (dark,
+  earth, fire… ; defender, healer, mage, ranger, striker) alors que le jeu a un
+  ordre, `CLASS_ORDER`/`ELEMENT_ORDER` de `src/lib/images.ts`. Nouveau helper
+  `inOrder(values, order)` à côté d'eux (distinct + rang canonique, l'inconnu
+  en fin, alphabétique ; testé dans `images.test.ts`), consommé par les cinq
+  browsers ; l'équipement perd sa copie locale `ELEMENT_ORDER =
+Object.keys(ELEMENT_HEX)`. `CLASS_SLUGS` n'a plus qu'une définition, dans
+  `images.ts`, dérivée de `CLASS_ORDER` (même liste) : `portrait-layout.ts` et
+  `parse-text.tsx` perdent la leur, `Portrait.tsx`/`portrait-canvas.ts`
+  l'importent de là, avec le commentaire sur les sprites demandés au slug du
+  site. `ELEMENTS` recopié (hero-tracker `index.tsx` et `HeroTrackerBrowser.tsx`,
+  `/dev/portrait`) remplacé par `ELEMENT_ORDER`, et deux commentaires orphelins
+  laissés par A3 (« Les cinq classes… ») retirés ou recadrés. Aucune donnée
+  persistée ne bouge : `filter-codec.ts` code par slug (bits hérités
+  intacts), la tier list met des slugs dans l'URL, le filtre du team planner est
+  un état local et son partage ne porte que les ids — ni l'un ni l'autre
+  n'écrit dans le localStorage. Vérifié sur le serveur de dev (HTML de
+  `/characters`, `/tierlistpve`, `/most-used-units`, `/equipment`) : fire,
+  water, earth, light, dark puis defender, striker, ranger, mage, healer ;
+  typecheck, lint, 1949 tests. Laissé : `ELEMENTS` de `/dev/tokens` (paires
+  slug/couleur, autre chose) et l'`ELEMENT_TEXT` local de `HeroTrackerBrowser`
+  (doublon d'`images.ts`, hors périmètre).
+
 - **Les derniers JSON committés écrits hors `formatJson` y passent** (lot A7,
   G52). `datagen/video-meta.ts` écrivait `JSON.stringify(…, null, 2)`,
   `scripts/get-news.ts` (`posts.json`, `buff-events.json`) aussi, et

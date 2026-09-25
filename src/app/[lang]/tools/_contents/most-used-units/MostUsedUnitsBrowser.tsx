@@ -4,7 +4,7 @@ import { useEffect, useDeferredValue, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
-import { img } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import {
   CharactersFiltersBar,
@@ -79,8 +79,22 @@ export function MostUsedUnitsBrowser({
   const hydrated = useRef(false);
   const lastUrl = useRef('');
 
-  const elements = useMemo(() => [...new Set(rows.map((r) => r.element))].sort(), [rows]);
-  const classes = useMemo(() => [...new Set(rows.map((r) => r.class))].sort(), [rows]);
+  const elements = useMemo(
+    () =>
+      inOrder(
+        rows.map((r) => r.element),
+        ELEMENT_ORDER,
+      ),
+    [rows],
+  );
+  const classes = useMemo(
+    () =>
+      inOrder(
+        rows.map((r) => r.class),
+        CLASS_ORDER,
+      ),
+    [rows],
+  );
   const rarities = useMemo(
     () => [...new Set(rows.map((r) => r.rarity))].sort((a, b) => b - a),
     [rows],

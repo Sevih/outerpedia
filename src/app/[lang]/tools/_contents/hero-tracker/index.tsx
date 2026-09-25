@@ -8,7 +8,7 @@ import type { HeroGrowthData } from '@datagen/generators/hero-growth';
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import { CLASS_ORDER } from '@/lib/images';
+import { CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { getCatalogEntry } from '@/lib/data/items';
 import {
   characterDisplayName,
@@ -69,10 +69,6 @@ function skillIcons(heroId: string): string[] {
   const owned = (characters[heroId]?.skills ?? []).map((id) => skills[id]).filter(Boolean);
   return SKILL_TYPES.map((type) => owned.find((s) => s.type === type)?.icon ?? '');
 }
-
-/** Les cinq éléments du jeu, dans l'ordre des écrans. */
-const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
-/** Les cinq classes, dans l'ordre des filtres. */
 
 const LABEL_KEYS = [
   'intro',
@@ -215,7 +211,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   // Les pièces se groupent par élément : leurs noms viennent du dictionnaire
   // système, comme partout ailleurs sur le site.
   const elementNames = Object.fromEntries(
-    ELEMENTS.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
+    ELEMENT_ORDER.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
   );
 
   const classNames = Object.fromEntries(

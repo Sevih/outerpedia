@@ -33,7 +33,6 @@ import {
   BADGE_BOX,
   bestFit,
   CLASS_BOX,
-  CLASS_SLUGS,
   cap,
   DEMI_BOX,
   DEMI_FONT,
@@ -57,7 +56,7 @@ import {
   type GameFont,
   type Rect,
 } from './portrait-layout';
-import { img } from '@/lib/images';
+import { img, CLASS_SLUGS } from '@/lib/images';
 import { transcendenceStars } from '@/lib/transcendence';
 
 /** L'état d'un portrait à peindre — le sous-ensemble des props de `Portrait`. */

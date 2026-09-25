@@ -80,13 +80,12 @@
  * le peintre canvas (`portrait-canvas`, pour l'export PNG du tier-list-maker)
  * lisent tous deux. Une transcription, deux rendus.
  */
-import { img } from '@/lib/images';
+import { img, CLASS_SLUGS } from '@/lib/images';
 import { transcendenceStars } from '@/lib/transcendence';
 import {
   BADGE_BOX,
   bestFit,
   CLASS_BOX,
-  CLASS_SLUGS,
   cap,
   DEMI_BOX,
   DEMI_FONT,

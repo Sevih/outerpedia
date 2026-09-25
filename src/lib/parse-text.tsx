@@ -18,7 +18,7 @@ import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
 import type { TFunction, TranslationKey } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { img, ELEMENT_TEXT, GRADE_TEXT } from '@/lib/images';
+import { img, CLASS_SLUGS, ELEMENT_TEXT, GRADE_TEXT } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
 import { statDesc, statName } from '@/lib/data/stat-glossary';
 import { SKILL_SHORTHAND, resolveSkillText, splitChainDual } from '@/lib/skills';
@@ -503,8 +503,7 @@ function itemChip(name: string, ctx: ParseCtx, k: number): ReactNode {
   );
 }
 
-/** Classes et sous-classes que l'i18n connaît (`sys.class.*`, `sys.subclass.*`). */
-const CLASS_SLUGS = new Set(['defender', 'striker', 'ranger', 'mage', 'healer']);
+/** Sous-classes que l'i18n connaît (`sys.subclass.*`) ; les classes, c'est `CLASS_SLUGS`. */
 const SUBCLASS_SLUGS = new Set([
   'attacker',
   'bruiser',

@@ -330,6 +330,25 @@ export const ELEMENT_ORDER = ['fire', 'water', 'earth', 'light', 'dark'] as cons
 /** Ordre canonique des classes : celui de l'enum du jeu (TextSystem `SYS_CLASS_*`). */
 export const CLASS_ORDER = ['defender', 'striker', 'ranger', 'mage', 'healer'] as const;
 
+/**
+ * Les slugs de classe du site, pour les gardes `has()` (portrait, balises inline).
+ * Le portrait demande son sprite au SLUG DU SITE, pas à l'énum du jeu (Defender,
+ * Attacker, Ranger, Mage, Priest) : le datagen publie `CT_Class_Attacker` sous
+ * `CT_Class_Striker` et `CT_Class_Priest` sous `CT_Class_Healer` (cf. la table de
+ * `datagen/assets/manifest`) — passer par l'énum donnait deux 404.
+ */
+export const CLASS_SLUGS: ReadonlySet<string> = new Set(CLASS_ORDER);
+
+/**
+ * Valeurs distinctes rangées selon un ordre canonique (`CLASS_ORDER`,
+ * `ELEMENT_ORDER`) — l'univers des pastilles d'un filtre bâti depuis les
+ * données. Une valeur hors de l'ordre passe après, alphabétique.
+ */
+export function inOrder(values: Iterable<string>, order: readonly string[]): string[] {
+  const rank = (v: string) => (order.includes(v) ? order.indexOf(v) : order.length);
+  return [...new Set(values)].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+}
+
 /** Couleur de texte par élément (tokens sémantiques, pas de couleur en dur). */
 export const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',

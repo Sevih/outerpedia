@@ -22,7 +22,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import LZString from 'lz-string';
 import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
-import { img, CHAIN_PILL, ELEMENT_ORDER } from '@/lib/images';
+import { img, CHAIN_PILL, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import {
@@ -343,7 +343,14 @@ function CharPicker({
   const [element, setElement] = useState<string | null>(null);
   const [cls, setCls] = useState<string | null>(null);
 
-  const classes = useMemo(() => [...new Set(chars.map((c) => c.cls))].sort(), [chars]);
+  const classes = useMemo(
+    () =>
+      inOrder(
+        chars.map((c) => c.cls),
+        CLASS_ORDER,
+      ),
+    [chars],
+  );
   const q = query.trim().toLowerCase();
   const shown = chars.filter(
     (c) =>

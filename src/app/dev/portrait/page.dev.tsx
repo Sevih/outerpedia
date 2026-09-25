@@ -25,7 +25,7 @@ import { Portrait } from '@/components/character/Portrait';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
 import { loadShortNames } from '@/lib/data/short-names';
 import { lRec } from '@/lib/i18n/localize';
-import { CLASS_ORDER } from '@/lib/images';
+import { CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { DEFAULT_LANG, GAME_LANGS } from '@/lib/i18n/config';
 import type { Character } from '@contracts';
 
@@ -74,9 +74,7 @@ function belowLabel(c: Character, px: number): string {
   return short && !fitsOnTwoLines(full, px + 24) ? short : full;
 }
 
-const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
-
-const BY_ELEMENT = ELEMENTS.map((e) => first((c) => c.element === e));
+const BY_ELEMENT = ELEMENT_ORDER.map((e) => first((c) => c.element === e));
 const BY_CLASS = CLASS_ORDER.map((k) => first((c) => c.class === k));
 const BY_RARITY = [1, 2, 3].map((r) => first((c) => c.rarity === r));
 

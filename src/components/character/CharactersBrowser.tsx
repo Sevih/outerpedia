@@ -15,6 +15,7 @@ import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFilter
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
 import { decodeFilters, encodeFilters } from './filters/filter-codec';
 import { shortShareUrl } from '@/lib/short-share';
+import { CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import type { EffectGroup } from '@/lib/data/effect-filters';
 
 /** Ligne allégée pour l'affichage + le filtrage. */
@@ -140,8 +141,9 @@ export function CharactersBrowser({
       [...new Set(rows.map((r) => r[key]).filter(Boolean) as string[])].sort(),
     [rows],
   );
-  const elements = useMemo(() => distinct('element'), [distinct]);
-  const classes = useMemo(() => distinct('class'), [distinct]);
+  // Éléments et classes : ordre du jeu, pas l'alphabet.
+  const elements = useMemo(() => inOrder(distinct('element'), ELEMENT_ORDER), [distinct]);
+  const classes = useMemo(() => inOrder(distinct('class'), CLASS_ORDER), [distinct]);
   const chains = useMemo(() => distinct('chainType'), [distinct]);
   const gifts = useMemo(() => distinct('gift'), [distinct]);
   const roles = useMemo(() => distinct('role'), [distinct]);

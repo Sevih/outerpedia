@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
-import { img, CLASS_ORDER, STAR_SPRITE } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER, STAR_SPRITE } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import {
   accountNeed,
@@ -881,7 +881,7 @@ function SummaryPanel({
       element: string | null;
       label: string;
       rows: typeof rows;
-    }[] = ELEMENTS.map((el) => ({
+    }[] = ELEMENT_ORDER.map((el) => ({
       key: el,
       element: el,
       label: elementNames[el] ?? el,
@@ -1994,8 +1994,7 @@ function NumberField({
 
 /* ─────────────────────────── Roster & état vide ─────────────────────────── */
 
-const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
-/** Les cinq classes et les trois raretés du jeu — filtres du roster suivi. */
+/** Les trois raretés du jeu — filtre du roster suivi. */
 const RARITIES = [3, 2, 1] as const;
 const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',
@@ -2044,7 +2043,7 @@ function RosterBar({
   return (
     <div className="border-line-subtle bg-surface-sunken flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border px-2.5 py-2">
       <span className="flex gap-1">
-        {ELEMENTS.map((el) => (
+        {ELEMENT_ORDER.map((el) => (
           <button
             key={el}
             type="button"
@@ -2165,7 +2164,7 @@ function HeroPicker({
         >
           {labels.axisAll}
         </button>
-        {ELEMENTS.map((el) => (
+        {ELEMENT_ORDER.map((el) => (
           <button
             key={el}
             type="button"

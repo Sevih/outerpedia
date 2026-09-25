@@ -16,7 +16,7 @@ import {
   ToolbarDivider,
 } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
-import { img } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { EECard, GearCard, SetCard, TalismanCard, shopIconSrc } from './cards';
 import type { EERow, GearRow, RowSource, SetRow } from './cards';
 
@@ -48,9 +48,6 @@ export interface BrowserLabels {
 function toggle<T>(list: T[], v: T): T[] {
   return list.includes(v) ? list.filter((x) => x !== v) : [...list, v];
 }
-
-/** Ordre d'affichage canonique des éléments (celui des pills characters). */
-const ELEMENT_ORDER = Object.keys(ELEMENT_HEX);
 
 /** Option du filtre source — boss (portrait, halo élémentaire), boutique
  * (sprite du jeu) ou libellé curé (pill texte) ; sélection MULTIPLE (OU). */
@@ -222,7 +219,14 @@ function GearTab({
   const [source, setSource] = useState<string[]>([]);
   const [mainStat, setMainStat] = useState('');
 
-  const classes = useMemo(() => [...new Set(rows.flatMap((r) => r.classLimits))].sort(), [rows]);
+  const classes = useMemo(
+    () =>
+      inOrder(
+        rows.flatMap((r) => r.classLimits),
+        CLASS_ORDER,
+      ),
+    [rows],
+  );
   const starOptions = useMemo(
     () => [...new Set(rows.map((r) => r.stars.at(-1) ?? 0))].filter(Boolean).sort((a, b) => a - b),
     [rows],
@@ -384,12 +388,20 @@ function EETab({ rows, labels }: { rows: EERow[]; labels: BrowserLabels }) {
   const [klass, setKlass] = useState<string[]>([]);
   const elementOptions = useMemo(
     () =>
-      [...new Set(rows.map((r) => r.element))].sort(
-        (a, b) => ELEMENT_ORDER.indexOf(a) - ELEMENT_ORDER.indexOf(b),
+      inOrder(
+        rows.map((r) => r.element),
+        ELEMENT_ORDER,
       ),
     [rows],
   );
-  const classes = useMemo(() => [...new Set(rows.map((r) => r.classType))].sort(), [rows]);
+  const classes = useMemo(
+    () =>
+      inOrder(
+        rows.map((r) => r.classType),
+        CLASS_ORDER,
+      ),
+    [rows],
+  );
   const filtered = rows.filter((r) => {
     const needle = q.trim().toLowerCase();
     return (

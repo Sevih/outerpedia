@@ -211,17 +211,6 @@ export const BADGE_BOX: Rect = { left: 129.5, top: 191, w: 34, h: 34 };
  * effets de texte — est rigoureusement identique dans les deux.
  */
 
-/**
- * Les classes que le portrait sait poser. Le prefab câble son `m_ClassObjs` dans
- * l'ordre de `CHARACTER_CLASS_TYPE` — Defender, Attacker, Ranger, Mage, Priest —
- * mais le sprite se demande au SLUG DU SITE, pas à l'énum du jeu : le datagen
- * publie `CT_Class_Attacker` sous la clé `CT_Class_Striker` et `CT_Class_Priest`
- * sous `CT_Class_Healer` (cf. la table de `datagen/assets/manifest`). Passer par
- * l'énum donnait deux 404 — c'est `img.boss(\`CT_Class_${cap(slug)}\`)` qu'il faut,
- * exactement comme la vignette carrée.
- */
-export const CLASS_SLUGS = new Set(['defender', 'striker', 'ranger', 'mage', 'healer']);
-
 export const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
 // --- `m_BestFit` -------------------------------------------------------------

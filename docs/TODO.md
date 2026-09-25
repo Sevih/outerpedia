@@ -150,15 +150,6 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Filtres de classe triés par ordre alphabétique** alors que le jeu a un
-      ordre (`CLASS_ORDER`, posé le 25/09 par le lot A3) : `/characters`, la
-      tier list, l'équipement, le team planner, most-used-units construisent
-      leurs filtres depuis les données, donc dans l'ordre des clés du glossaire.
-      Les aligner sur `CLASS_ORDER` ; même occasion pour `CLASS_SLUGS` en
-      double (`portrait-layout.ts`, `parse-text.tsx`) et `ELEMENTS` recopié
-      (hero-tracker, `/dev/portrait`) alors qu'`ELEMENT_ORDER` existe. Les bits
-      de `filter-codec.ts` gardent leur ordre hérité (liens partagés). Lot
-      délégable : prompt A11 dans lots-opus-2026-09-25.md.
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
@@ -167,8 +158,8 @@
       interne d'`InlineTextField` reste collé à la position ; il faut un id par
       bloc (G45).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
-      3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres FAIT
-      (`CLASS_ORDER`) — reste `CLASS_SLUGS` ×2 et `ELEMENTS` ×2, presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
+      3 barres élément/classe, `CLASSES` en dur ×4, `CLASS_SLUGS` ×2 et
+      `ELEMENTS` ×2 FAIT (`CLASS_ORDER`, `ELEMENT_ORDER`) — reste presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
       3 façons, `esc()`/`rfc822()` ×2 ; datagen : `isPermille` divergent,
       deux listes de shops permanents, « persos intégrés » ×4 lecteurs, paires
       classe/enum en dur après dérivation, rebuilds redondants ; familles
