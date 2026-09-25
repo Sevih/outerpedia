@@ -17,6 +17,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { itemChipByName } from '@/components/guides/editorial/banner/items';
 import { InlineIcon } from '@/components/inline/InlineIcon';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { SkillDescription } from '@/components/character/SkillDescription';
@@ -77,20 +78,6 @@ const CATALYST_ITEMS = catalogMaterials('material_equip_transcend', 'Catalyst');
 // substitution par arme) → sélection ÉDITORIALE des 4 génériques, non dérivable.
 const GLUNITE_ITEMS = ['Glunite', 'Refined Glunite', 'Event Glunite', 'Armor Glunite'];
 
-/** Index nom EN → item du catalogue (résout les items éditoriaux par nom). */
-const CATALOG_BY_NAME = (() => {
-  const m = new Map<
-    string,
-    { name: LocalizedText; icon: string; grade: string; desc?: LocalizedText }
-  >();
-  for (const e of Object.values(getCatalog())) {
-    const key = e.name.en?.trim().toLowerCase();
-    if (key && !m.has(key))
-      m.set(key, { name: e.name, icon: e.icon, grade: e.grade, desc: e.desc });
-  }
-  return m;
-})();
-
 /** Étiquette de rareté (comparaison d'enhancement) par grade dérivé. */
 const ENHANCE_LABEL: Record<string, LocalizedText> = {
   normal: LABELS.enhanceLabel_normal,
@@ -143,23 +130,10 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   for (const g of axWeapon.bonuses[0]?.grades ?? []) gradeColor[g.grade] = g.color;
   const GRADES = ['C', 'B', 'A', 'S', 'S+'];
 
-  /** Tuile depuis un nom d'item du catalogue ; texte brut si absent. */
-  const chipByName = (name: string, size = 22): ReactNode => {
-    const e = CATALOG_BY_NAME.get(name.trim().toLowerCase());
-    if (!e) return <span className="text-content">{name}</span>;
-    return (
-      <ItemInline
-        item={{
-          name: L(e.name),
-          iconSrc: img.item(e.icon),
-          grade: e.grade,
-          desc: e.desc && L(e.desc),
-        }}
-        size={size}
-        color="text-content"
-      />
-    );
-  };
+  /** Tuile depuis un nom d'item du catalogue ; nom inconnu = build cassé. */
+  const chipByName = (name: string, size = 22): ReactNode => (
+    <ItemInline item={itemChipByName(name, lang)} size={size} color="text-content" />
+  );
 
   /** Tuiles de matériaux d'ascension (icônes namespace équipement). */
   const matTiles = (mats: typeof axWeapon.activation.materials): ReactNode => (

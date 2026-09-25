@@ -17,6 +17,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { itemChipByName } from '@/components/guides/editorial/banner/items';
 import { StarIcon } from '@/components/guides/editorial/banner/StarText';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import {
@@ -36,19 +37,6 @@ import { AFFINITY_GIFTS, AFFINITY_REWARDS, TRANSCENDENCE_STEPS } from './editori
 const growth = growthRaw as HeroGrowthData;
 const RARITIES = ['1', '2', '3'] as const;
 
-/** Index nom EN → item du catalogue (résout les items éditoriaux par nom). */
-const CATALOG_BY_NAME = (() => {
-  const m = new Map<
-    string,
-    { name: LocalizedText; icon: string; grade: string; desc?: LocalizedText }
-  >();
-  for (const e of Object.values(getCatalog())) {
-    const key = e.name.en?.trim().toLowerCase();
-    if (key && !m.has(key))
-      m.set(key, { name: e.name, icon: e.icon, grade: e.grade, desc: e.desc });
-  }
-  return m;
-})();
 const catalogById = getCatalog();
 
 export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
@@ -84,23 +72,10 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
     );
   };
 
-  /** Tuile depuis un nom (items éditoriaux : gifts, vouchers) ; texte si absent. */
-  const chipByName = (name: string, size = 20): ReactNode => {
-    const e = CATALOG_BY_NAME.get(name.trim().toLowerCase());
-    if (!e) return <span>{name}</span>;
-    return (
-      <ItemInline
-        item={{
-          name: L(e.name),
-          iconSrc: img.item(e.icon),
-          grade: e.grade,
-          desc: e.desc && L(e.desc),
-        }}
-        size={size}
-        color="text-content"
-      />
-    );
-  };
+  /** Tuile depuis un nom (items éditoriaux : gifts, vouchers) ; nom inconnu = build cassé. */
+  const chipByName = (name: string, size = 20): ReactNode => (
+    <ItemInline item={itemChipByName(name, lang)} size={size} color="text-content" />
+  );
 
   const costList = (costs: ItemCost[]): ReactNode =>
     costs.length ? (

@@ -7,6 +7,53 @@
 
 ## 2026-09-25
 
+- **Admin : clés React stables sur les listes réordonnables** (lot A6, audit
+  G45). Les blocs de contenu d'`EventsEditor` et les choix des paliers de
+  priorité (`PriorityOrderEditor` de `PremiumLimitedParts`) étaient keyés par
+  index alors que `MoveButtons` les réordonne : React réconciliait par
+  POSITION, le nœud DOM (focus, bouton ▲/▼ pressé) restait sur place pendant
+  que la ligne partait. Le symptôme annoncé par l'audit, un texte
+  d'`InlineTextField` qui sauterait de bloc, ne peut en fait pas se produire
+  ici : `BlockEditor`, `LocalField` et `PickRow` sont entièrement contrôlés,
+  sans état propre. Le correctif reste celui de `lib/admin/keyed` : un `_key`
+  posé à la création (chargement ET ajout, `withKey`/`rowKey`) et porté par
+  l'objet en mémoire. Côté événements, `Row` type désormais ses blocs en
+  `Keyed<EventBlock>[]`, `setBlock` recopie la clé sur le bloc rendu par
+  l'éditeur, et `save` retire `_key` des lignes ET des blocs. Côté premium, le
+  nom du héros ne pouvait pas servir de clé (rien n'interdit un doublon dans
+  un palier pendant la saisie) : `keyOrder`/`unkeyOrder` décorent puis
+  nettoient les quatre paliers dans `PremiumLimitedEditor`, dans l'ordre des
+  clés du JSON (`first`, `second`, `third`, `transcend`, celui de
+  `premium-priorities.json`). Le JSON enregistré garde donc sa forme exacte :
+  `stripKey` supprime la clé ajoutée en dernier sans réordonner les champs.
+  Vérifié : `pnpm typecheck`, `pnpm lint` et `pnpm test` (1956 tests) verts ;
+  scénario manuel à faire au navigateur : focus dans un bloc, ▼, le focus
+  suit le bloc ; enregistrer, `git diff` du curé ne montre aucun `_key`.
+  Laissés : les étoiles d'`ImpactStars` (cinq boutons fixes) et les
+  `<option key={i}>` du sélecteur de review (options sans état, index = valeur
+  choisie) ; les jalons d'`EventsEditor` (`key={i}`) ne se réordonnent pas et
+  leurs champs sont contrôlés, la suppression d'un jalon n'y déplace aucun état.
+- **Guides `gear`, `heroes-growth`, `shop-purchase-priorities` : un seul index
+  « nom EN → item », qui jette** (lot B4, audit guides H5). Les trois guides
+  recopiaient une IIFE `CATALOG_BY_NAME` qui, sur un nom inconnu, rendait le
+  nom en texte brut sans rien dire : un item renommé par le jeu passait en prod
+  sans icône. Les trois copies sont supprimées au profit de `itemChipByName`
+  (`editorial/banner/items.ts`), qui jette et casse donc le build SSG. Il écarte
+  aussi les items `hidden` et déséchappe les `\n` des descriptions. Dans
+  `shop-purchase-priorities`, `itemCell` prend désormais un `InlineItem` tout
+  fait (dérivé ou résolu par nom) au lieu de six arguments ; un générique à
+  `label` reste en texte. _Nom corrigé_ : sur les 56 noms passés (hammers et
+  catalysts dérivés, glunites, Transistone, Ether, voucher, cadeaux
+  d'affinité, items event/resource), seul « Food » (resource) était inconnu.
+  Ce n'est pas un item mais une catégorie (le jeu n'a que « Steak Dish ») :
+  il reçoit un `label` dans `shop-editorial.json`, comme « Cosmetic » ou
+  « 5★ Equipment », ce qui garde l'affichage anglais et le traduit enfin.
+  Vérifié : aucun nom en doublon ni masqué dans le catalogue, donc des tuiles
+  identiques ; les trois guides rendus dans les six langues sans exception
+  (`panelFor` construit tous les onglets). typecheck, lint et tests verts
+  sur HEAD + ce diff seul. Laissé : `chipById` de `heroes-growth` (résolution
+  par id, pas par nom) retombe toujours sur l'id en texte ; `itemChipById`
+  existe, mais l'aligner sortait du périmètre de H5.
 - **`banner-mileage` : hash d'onglets alignés, une seule règle de table de
   butin, `stamp:guides` en pre-commit** (lot B8, audit guides H12, H13 et le
   « à faire » de H3). _Onglets_ : `#banner=pickup` ouvrait le Custom Rate Up,

@@ -151,10 +151,6 @@
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
-- [ ] Admin : `key={i}` sur des listes réordonnées par `MoveButtons`
-      (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) — l'état
-      interne d'`InlineTextField` reste collé à la position ; il faut un id par
-      bloc (G45).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
       3 barres élément/classe, `CLASSES` en dur ×4, `CLASS_SLUGS` ×2 et
       `ELEMENTS` ×2 FAIT (`CLASS_ORDER`, `ELEMENT_ORDER`) — reste presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
@@ -172,11 +168,6 @@
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **Quatre index « nom EN → item », trois avec repli muet** (H5) :
-      `gear`, `heroes-growth`, `shop-purchase-priorities` recopient une IIFE
-      `CATALOG_BY_NAME` qui rend un `<span>` texte sur un nom inconnu ;
-      `itemChipByName` (`editorial/banner/items.ts`) jette. Consommer
-      `itemChipByName` partout.
 - [ ] **152 couleurs Tailwind brutes dans 17 fichiers de guides** (H6) alors
       que `--ed-{sky,violet,emerald,amber,rose,cyan}` existent pour ça
       (`how-to-play` 23, `banner-mileage` 20, `roadmap-2026` 14 + 12 dans

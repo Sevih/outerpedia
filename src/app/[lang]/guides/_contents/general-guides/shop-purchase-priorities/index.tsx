@@ -17,10 +17,10 @@ import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { img } from '@/lib/images';
-import { ItemInline } from '@/components/inline/ItemInline';
+import { ItemInline, type InlineItem } from '@/components/inline/ItemInline';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout } from '@/components/guides/editorial/blocks';
-import { getCatalog } from '@/lib/data/items';
+import { itemChipByName } from '@/components/guides/editorial/banner/items';
 import type { LocalizedText, ShopPrioritiesData, ShopEntry, ShopPeriod } from '@contracts';
 import shopDataRaw from '@data/generated/shop-priorities.json';
 import { LABELS, SHOP_TABS } from './labels';
@@ -58,23 +58,6 @@ interface Row {
   limit: ReactNode;
   notes: ReactNode;
 }
-
-/**
- * Index nom EN → item du catalogue (icône/grade/desc), pour résoudre les items
- * ÉDITORIAUX (event/resource) transplantés par nom — même patron que parse-text.
- */
-const CATALOG_BY_NAME = (() => {
-  const m = new Map<
-    string,
-    { name: LocalizedText; icon: string; grade: string; desc?: LocalizedText }
-  >();
-  for (const e of Object.values(getCatalog())) {
-    const key = e.name.en?.trim().toLowerCase();
-    if (key && !m.has(key))
-      m.set(key, { name: e.name, icon: e.icon, grade: e.grade, desc: e.desc });
-  }
-  return m;
-})();
 
 export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang }) {
   const t = await getT(lang);
@@ -116,27 +99,19 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
    * (génériques event « Cosmetic », titre sans sprite). Suffixe « ×N » si le
    * gain est multiple et pas déjà dans le nom.
    */
-  const itemCell = (
-    name: string,
-    gives: number | undefined,
-    icon: string,
-    grade: string,
-    iconKind: 'item' | 'equipment',
-    desc?: string,
-  ): ReactNode => {
-    const suffix = gives ? givesSuffix(name, gives) : '';
-    if (!icon) {
+  const itemCell = (item: InlineItem, gives: number | undefined): ReactNode => {
+    const suffix = gives ? givesSuffix(item.name, gives) : '';
+    if (!item.iconSrc) {
       return (
         <span>
-          {name}
+          {item.name}
           {suffix && <span className="text-content-subtle">{suffix}</span>}
         </span>
       );
     }
-    const iconSrc = iconKind === 'equipment' ? img.equipment(icon) : img.item(icon);
     return (
       <span className="inline-flex items-center gap-1">
-        <ItemInline item={{ name, iconSrc, grade, desc }} size={22} color="text-content" />
+        <ItemInline item={item} size={22} color="text-content" />
         {suffix && <span className="text-content-subtle">{suffix}</span>}
       </span>
     );
@@ -145,7 +120,18 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
   /** Ligne d'un produit DÉRIVÉ (tuile du jeu, coût dans la monnaie du shop). */
   const derivedRow = (e: ShopEntry, currencyIcon: string): Row => ({
     priority: e.priority,
-    item: itemCell(L(e.name), e.gives, e.icon, e.grade, e.iconKind),
+    item: itemCell(
+      {
+        name: L(e.name),
+        iconSrc: !e.icon
+          ? ''
+          : e.iconKind === 'equipment'
+            ? img.equipment(e.icon)
+            : img.item(e.icon),
+        grade: e.grade,
+      },
+      e.gives,
+    ),
     cost: (
       <span className="inline-flex items-center gap-1 whitespace-nowrap">
         {fmt(e.cost)}
@@ -169,18 +155,14 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
 
   /** Ligne d'un item ÉDITORIAL (event/resource) : icône résolue par nom, monnaie par ligne. */
   const editorialRow = (it: EditorialItem): Row => {
-    // Générique (label) → texte ; sinon on résout l'item du catalogue par nom.
-    const hit = it.label ? undefined : CATALOG_BY_NAME.get(it.name.trim().toLowerCase());
-    const name = it.label ? L(it.label) : hit ? L(hit.name) : it.name;
+    // Générique (label) → texte ; sinon l'item du catalogue par nom (inconnu = build cassé).
     return {
       priority: it.priority,
       item: itemCell(
-        name,
+        it.label
+          ? { name: L(it.label), iconSrc: '', grade: 'normal' }
+          : itemChipByName(it.name, lang),
         it.gives,
-        hit?.icon ?? '',
-        hit?.grade ?? 'normal',
-        'item',
-        hit?.desc && L(hit.desc),
       ),
       cost: it.cost ? (
         it.cost.currency.toLowerCase() === 'tbd' ? (

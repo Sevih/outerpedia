@@ -217,6 +217,14 @@
     },
     {
       "name": "Food",
+      "label": {
+        "en": "Food",
+        "jp": "食べ物",
+        "kr": "음식",
+        "zh": "食物",
+        "fr": "Nourriture",
+        "es": "Comida"
+      },
       "priority": "C",
       "cost": {
         "currency": "TBD",
