@@ -41,7 +41,7 @@ import { localePath } from '@/lib/navigation';
 import { InlineIcon } from '@/components/inline/InlineIcon';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
-import { EffectIconTile } from '@/components/character/EffectChips';
+import { EffectIconTile, EffectTooltipBody } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
 import type { PassiveRef, Skill, LangDict } from '@contracts';
 import { getSkills } from '@/lib/data/skills';
@@ -87,14 +87,7 @@ function effectChip(side: 'buff' | 'debuff', key: string, ctx: ParseCtx, k: numb
   const desc = lRec(eff.desc, ctx.lang) || eff.desc.en;
   const isDebuff = side === 'debuff';
   const tooltip = (
-    <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-1.5">
-        {eff.icon && <EffectIconTile icon={eff.icon} isDebuff={isDebuff} className="h-6 w-6" />}
-        {/* Texte de tooltip sur surface sombre : tokens contenu (thème unique sombre). */}
-        <span className="text-content-strong text-sm font-bold">{label}</span>
-      </div>
-      {desc && <p className="text-content text-xs">{desc}</p>}
-    </div>
+    <EffectTooltipBody name={label} icon={eff.icon} isDebuff={isDebuff} desc={desc} />
   );
   return (
     <InlineIcon

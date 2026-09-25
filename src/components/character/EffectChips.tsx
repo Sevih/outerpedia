@@ -134,8 +134,11 @@ export interface NamedEffect {
   desc?: string;
 }
 
-/** Corps du tooltip d'un effet : icône + nom + description du jeu. */
-function EffectTooltipBody({ name, icon, isDebuff, desc }: NamedEffect) {
+/**
+ * Corps du tooltip d'un effet : icône + nom + description du jeu. Rendu UNIQUE
+ * des chips de skill ET des tags inline {B/…}/{D/…} (`parse-text`).
+ */
+export function EffectTooltipBody({ name, icon, isDebuff, desc }: NamedEffect) {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5">

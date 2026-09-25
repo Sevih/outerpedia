@@ -7,6 +7,31 @@
 
 ## 2026-09-25
 
+- **Tooltip des tags d'effet inline `{B/…}`/`{D/…}` : le corps partagé des
+  chips, plus une recopie** (lot A15). `effectChip` de `src/lib/parse-text.tsx`
+  recomposait à la main le tooltip d'effet (tuile d'icône, nom, description)
+  alors que `EffectTooltipBody` (`src/components/character/EffectChips.tsx`)
+  rend exactement ça pour les chips de skill ; la recopie avait déjà divergé :
+  la description y sortait BRUTE — les `\n` littéraux et les balises
+  `<color=#…>` du jeu s'affichaient tels quels (459 descs d'effet sur 197
+  effets portent des `\n`, 8 des `<color>` dans `glossaries.json`), là où la
+  chip les interprète (`whitespace-pre-line` + `renderGameColors`).
+  `EffectTooltipBody` est désormais exporté et `effectChip` le consomme
+  (`name`, `icon`, `isDebuff`, `desc` déjà résolus) ; les treize lignes de JSX
+  dupliquées disparaissent. Écart visuel, voulu par l'alignement : le texte de
+  la description passe de `text-content` (#fff) au `text-neutral-200` de la
+  chip ; le nom ne bouge pas (`text-content-strong` = blanc gras, comme
+  `text-white font-bold`), la tuile non plus (`h-6 w-6`, même recoloration).
+  Comparé sur le serveur de dev (payload RSC de `/characters/valentine`) : les
+  deux tooltips `{B/…}` de la fiche (« Increased Crit Hit Chance »,
+  « Increased Critical Damage ») sortent avec le balisage exact de la chip
+  (`flex flex-col gap-1` → tuile + `text-sm font-bold text-white` →
+  `text-xs whitespace-pre-line text-neutral-200`), plus aucune classe de
+  l'ancienne recopie. Vérifié : `pnpm typecheck` et `pnpm lint` muets,
+  `pnpm test` → « Tests 1981 passed (1981) ». Laissé : `text-white`/
+  `text-neutral-200` de `EffectTooltipBody` restent des couleurs brutes, sous
+  l'exception héritée du dossier `character/` (hors périmètre).
+
 - **Presse-papier : un hook `useCopyToClipboard` au lieu de huit copies à la
   main** (lot A13). `navigator.clipboard.writeText` était appelé en direct dans
   huit fichiers, chacun avec son `useState` « copié ! », son minuteur (parfois
