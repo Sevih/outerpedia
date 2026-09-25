@@ -7,9 +7,11 @@
  * une clé sans consommateur redevient un SIGNAL : vestige à purger, ou
  * faute de frappe entre le code et la locale.
  *
- * Deux gardes :
- *   1. clés identiques ×5 langues (une clé ajoutée dans une seule langue
- *      rendrait sa traduction silencieusement impossible) ;
+ * Deux gardes, et ce sont les SEULES : l'ordre des clés, les commentaires et
+ * les numéros de ligne ne sont ni alignés entre langues ni vérifiés ici
+ * (prettier replie les chaînes longues différemment selon la langue) :
+ *   1. clés identiques dans toutes les langues (une clé ajoutée dans une
+ *      seule langue rendrait sa traduction silencieusement impossible) ;
  *   2. chaque clé EN est consommée quelque part — en littéral, ou via un
  *      PRÉFIXE DYNAMIQUE détecté dans le code (`t(\`tools.\${slug}\`)`,
  *      `'guides.' + x`…). Les préfixes sont EXTRAITS du source, pas déclarés à

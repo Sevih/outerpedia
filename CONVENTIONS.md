@@ -109,11 +109,16 @@ l'entrée DONE ne cite pas le hash du commit, inconnu au moment de l'écrire.
   Alpha ») restent tels quels. Le mot de MODE suit la langue : anglais en
   français (« Guide Guild Raid … », comme les catégories), officiel en espagnol
   (« Incursión de Gremio », « Op. persecución », « Encargo Especial »).
-- Fichiers de locale : **mêmes clés, même ordre, mêmes commentaires** dans
-  toutes les langues — c'est `locales/keys.test.ts` qui le garantit (clés
-  identiques, chaque clé consommée). L'ancien « alignement par numéro de ligne »
-  n'est plus tenable : prettier replie les chaînes longues différemment selon la
-  langue.
+- Fichiers de locale : le contrat est **le même jeu de clés** dans toutes les
+  langues, et c'est `locales/keys.test.ts` qui le garde — rien d'autre : clés
+  identiques d'une langue à l'autre (ni absente, ni en trop), et chaque clé
+  consommée par le code. Ni l'ordre, ni les commentaires, ni les numéros de
+  ligne ne sont alignés ou vérifiés (au 2026-09-25 : en 1 438 lignes, fr 1 452,
+  zh 1 367 ; l'ordre des clés diverge de ~110 à ~290 lignes selon la langue) —
+  prettier replie les chaînes longues différemment selon la langue, et
+  l'« alignement par ligne » d'autrefois ne tenait plus. `en.ts` reste l'ordre
+  de référence : une clé nouvelle s'insère au même endroit partout, par
+  lisibilité, sans que rien ne l'impose.
 - Pas de clés i18n dupliquées — vérifier avant d'en créer.
 - Les balises inline (`{B/...}`, `{D/...}`, etc.) restent **identiques** dans
   toutes les langues.

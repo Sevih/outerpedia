@@ -2,9 +2,11 @@
 //
 // CONTRAT (gardé par locales/keys.test.ts depuis la fin du portage) :
 // chaque clé a un CONSOMMATEUR dans le code (littéral ou préfixe dynamique
-// détecté), et les 5 langues portent des clés IDENTIQUES. Une clé orpheline
+// détecté), et toutes les langues portent des clés IDENTIQUES. Une clé orpheline
 // fait échouer la suite — le pré-seed hérité est terminé, purgé le 22/07 (150
-// vestiges).
+// vestiges). C'est TOUT le contrat : ni l'ordre, ni les commentaires, ni les
+// lignes ne sont alignés entre langues (prettier replie les chaînes longues
+// différemment) ; ce fichier reste l'ordre de référence, par lisibilité.
 
 const en = {
   // Page 404

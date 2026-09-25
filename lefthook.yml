@@ -23,10 +23,12 @@ pre-commit:
       glob: '*.{ts,tsx,js,mjs,json,css,md,yml,yaml}'
       run: pnpm prettier --write {staged_files}
       stage_fixed: true
-    # Lint uniquement les fichiers TS/TSX indexés.
+    # Lint les fichiers indexés que `pnpm lint` (CI) couvre : les défauts
+    # d'ESLint flat (js/mjs/cjs) + ceux d'eslint-config-next (jsx/ts/tsx/mts/cts)
+    # — les `.mjs` de `scripts/` et les configs racine compris.
     lint:
       priority: 3
-      glob: '*.{ts,tsx}'
+      glob: '*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}'
       run: pnpm eslint {staged_files}
 
 pre-push:

@@ -7,6 +7,44 @@
 
 ## 2026-09-25
 
+- **Outillage : lint pre-commit aligné sur la CI, `next` et
+  `eslint-config-next` à la même version, règle des locales réécrite** (lot
+  A20). Trois incohérences. (1) Le `lint` pre-commit de `lefthook.yml` ne
+  voyait que `*.{ts,tsx}`, alors que `pnpm lint` (`eslint` nu, en CI) couvre
+  aussi les `.mjs` : mesuré avec `eslint --debug`, 1 141 fichiers lintés,
+  dont `eslint.config.mjs`, `postcss.config.mjs`, `scripts/assets-push.mjs` et
+  `scripts/r2-cors.mjs`. Le glob reprend exactement ce que la config couvre :
+  les défauts d'ESLint flat (`js`/`mjs`/`cjs`) plus ceux d'`eslint-config-next`
+  (`**/*.{js,jsx,mjs,ts,tsx,mts,cts}`), soit `*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}` ;
+  un `.mjs` indexé est désormais linté avant le commit plutôt qu'en CI.
+  (2) `package.json` portait `next` 16.3.0 et `eslint-config-next` 16.3.1
+  (bump dependabot du 21/08, `next` resté à son bump de sécurité) : aligné par
+  le HAUT, `next` passe à 16.3.1 (publiée, vérifié par `pnpm view`), plutôt que
+  de redescendre la config — dependabot l'aurait remontée la semaine suivante.
+  SANS `pnpm install` (interdit au lot) : **à Sevih de le lancer** ; le
+  `pnpm-lock.yaml` DOIT bouger (il résout encore `next@16.3.0`, `@next/env` et
+  les `@next/swc-*` en 16.3.0), à committer avec, et c'est la CI (build) qui
+  valide un `next` de patch. (3) La règle des locales : il n'existait plus de
+  commentaire « alignement par ligne » dans `src/i18n/locales/*.ts`, mais
+  `CONVENTIONS.md` promettait « mêmes clés, même ordre, mêmes commentaires »,
+  garantis par `keys.test.ts` — faux sur les deux derniers points : le test ne
+  compare que les ENSEMBLES de clés et leur consommation, et mesuré ce jour,
+  l'ordre des clés diverge de `en.ts` sur 111 (fr) à 293 (zh) lignes de diff,
+  les commentaires de 90 (en) à 78 (fr/jp/kr/zh). La règle dit maintenant ça
+  dans les trois fichiers qui l'énoncent (`CONVENTIONS.md`, l'en-tête de
+  `en.ts`, celui de `keys.test.ts`) : le contrat est le jeu de clés, rien
+  d'autre ; ordre, commentaires et lignes ne sont ni alignés ni vérifiés,
+  `en.ts` reste l'ordre de référence par lisibilité. Au passage, les « 5
+  langues » de ces deux en-têtes deviennent « toutes les langues » (il y en a
+  six depuis le 23/09). Vérifié : `pnpm typecheck` (sans erreur, dernière
+  ligne `tsc --noEmit … -p scripts/tsconfig.json`), `pnpm lint` (sans sortie
+  après `$ eslint`), `pnpm test` (`Tests 1985 passed (1985)`). Le hook n'a pas
+  été joué (commit d'essai interdit en parallèle) — test à faire par Sevih :
+  indexer une faute de lint volontaire dans `scripts/r2-cors.mjs` et vérifier
+  que `git commit` est bloqué par `lint`. Laissé : l'ordre des clés et les
+  commentaires désalignés entre locales (un réalignement serait un chantier à
+  part, et un test d'ordre dans `keys.test.ts` une décision).
+
 - **Datagen : le solver formate ses buffs par `lib/buff.ts`, le manifest
   dérive ses paires classe → sprite** (lot A16). `datagen/generators/solver.ts`
   recopiait `isPermille`, `fmtValue` et `findBuff` de `datagen/lib/buff.ts`
