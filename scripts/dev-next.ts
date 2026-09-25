@@ -26,8 +26,21 @@ const QUIET = /^\s*(GET|HEAD) \/images\/\S+ 200 in /;
 const ANSI = /\x1b\[[0-9;]*m/g;
 const isQuiet = (line: string) => QUIET.test(line.replace(ANSI, ''));
 
+// Plafond du tas V8 de `next dev`. Sans lui, Next le fixe à 50 % de la RAM
+// (~15 Go sur 31) et ne se relance qu'à 80 % de ce plafond : le serveur de dev
+// a grimpé à 19 Go de RSS et le noyau l'a tué en OOM, avec le scope VS Code
+// qui l'hébergeait. Avec un plafond bas, c'est Next qui se relance proprement
+// (« Server is approaching the used memory threshold, restarting... »).
+// Un `--max-old-space-size` déjà présent dans NODE_OPTIONS reste prioritaire.
+const HEAP_MB = 6144;
+const nodeOptions = process.env.NODE_OPTIONS ?? '';
+const env = /--max[-_]old[-_]space[-_]size/.test(nodeOptions)
+  ? process.env
+  : { ...process.env, NODE_OPTIONS: `${nodeOptions} --max-old-space-size=${HEAP_MB}`.trim() };
+
 const child = spawn(process.execPath, [nextBin, 'dev', ...process.argv.slice(2)], {
   stdio: ['inherit', 'pipe', 'inherit'],
+  env,
 });
 
 // Les chunks ne tombent pas sur des fins de ligne : on garde le reliquat.
