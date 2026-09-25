@@ -174,7 +174,7 @@ export function MostUsedUnitsBrowser({
 
       {/* Filtre par catégorie de guide */}
       <div className="border-line-subtle bg-surface-raised/60 space-y-2 rounded-xl border p-4">
-        <p className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
+        <p className="text-content-muted text-2xs text-center font-mono font-semibold tracking-[0.16em] uppercase">
           {labels.categoryFilter}
         </p>
         <div className="flex flex-wrap justify-center gap-2">
@@ -263,7 +263,7 @@ export function MostUsedUnitsBrowser({
                 {/* Nombre de guides */}
                 <div className="shrink-0 text-center">
                   <span className="text-2xl font-bold text-sky-400 md:text-3xl">{row.total}</span>
-                  <span className="text-content-subtle block text-[10px] tracking-wide uppercase">
+                  <span className="text-content-subtle text-2xs block tracking-wide uppercase">
                     {labels.guidesUnit}
                   </span>
                 </div>

@@ -295,7 +295,7 @@ export function TierListBrowser({
       {/* Sélecteur de transcendance — rangée centrée dédiée (PvE) */}
       {withTranscend && (
         <div className="border-line-subtle bg-surface-raised/60 flex flex-col items-center gap-2 rounded-xl border p-4">
-          <p className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
+          <p className="text-content-muted text-2xs text-center font-mono font-semibold tracking-[0.16em] uppercase">
             {labels.transcendLevel}
           </p>
           {/* Les pastilles peignent la RANGÉE DU JEU, pas un compte : le cran 5★ (le

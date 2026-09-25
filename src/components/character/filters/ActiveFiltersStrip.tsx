@@ -77,7 +77,7 @@ export function ActiveFiltersStrip({
         >
           {labels.sortRelease}
           {sort === 'release' && (
-            <span aria-hidden className="text-[10px] leading-none">
+            <span aria-hidden className="text-2xs leading-none">
               {releaseDesc ? '↓' : '↑'}
             </span>
           )}

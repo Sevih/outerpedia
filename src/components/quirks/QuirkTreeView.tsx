@@ -292,7 +292,7 @@ export function QuirkTreeView({
           </span>
           <span className="text-content-strong font-semibold">{strip(node.name)}</span>
           {node.type === 'main' && (
-            <span className="border-ed-sky/30 bg-ed-sky/10 text-ed-sky rounded border px-1.5 text-[10px] font-bold">
+            <span className="border-ed-sky/30 bg-ed-sky/10 text-ed-sky text-2xs rounded border px-1.5 font-bold">
               {labels.mainNode}
             </span>
           )}

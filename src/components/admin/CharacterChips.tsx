@@ -93,7 +93,7 @@ export function CharacterChips({
               />
             ) : (
               <div
-                className="border-line-subtle text-content-subtle flex items-center justify-center rounded-lg border p-1 text-center text-[10px]"
+                className="border-line-subtle text-content-subtle text-2xs flex items-center justify-center rounded-lg border p-1 text-center"
                 style={{ width: size, height: size }}
               >
                 {token.startsWith('{') ? 'tag' : token || '?'}

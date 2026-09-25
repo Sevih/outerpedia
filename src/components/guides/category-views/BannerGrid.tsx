@@ -91,7 +91,7 @@ export default async function BannerGrid({ lang, guides }: CategoryViewProps) {
                 un padding bas laisse déverser la ligne suivante à moitié rognée
                 sous les points de suspension. Trois lignes tiennent dans la carte
                 (300x128) : la description entière s'affiche au lieu d'être coupée. */}
-            <p className="text-content-muted absolute inset-x-0 bottom-1.5 line-clamp-3 px-3 text-[10px] drop-shadow-lg">
+            <p className="text-content-muted text-2xs absolute inset-x-0 bottom-1.5 line-clamp-3 px-3 drop-shadow-lg">
               {lRec(guide.description, lang)}
             </p>
           </Link>

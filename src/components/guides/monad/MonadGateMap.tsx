@@ -445,7 +445,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                       />
                       {giveLabel && (
                         <span
-                          className="ring-surface-sunken bg-monad-key-badge absolute -top-1 -right-1 z-20 flex h-5 w-5 items-center justify-center rounded-full text-[10px] leading-none shadow ring-1"
+                          className="ring-surface-sunken bg-monad-key-badge text-2xs absolute -top-1 -right-1 z-20 flex h-5 w-5 items-center justify-center rounded-full leading-none shadow ring-1"
                           title={giveLabel}
                         >
                           🔑
@@ -484,9 +484,9 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         className={`z-30 ml-3 max-w-25 text-left text-[11px] leading-tight wrap-break-word whitespace-pre-wrap ${style.textColor}`}
                       >
                         <div className="font-semibold">{typeLabel}</div>
-                        {nodeLabel && <div className="text-[10px] italic">{nodeLabel}</div>}
+                        {nodeLabel && <div className="text-2xs italic">{nodeLabel}</div>}
                         {giveLabel && (
-                          <div className="text-monad-key text-[10px] italic">🔑 {giveLabel}</div>
+                          <div className="text-monad-key text-2xs italic">🔑 {giveLabel}</div>
                         )}
                       </div>
                     </div>
@@ -702,7 +702,7 @@ function TrueEndingChoices({
                 </Fragment>
               ))}
               {group.length > 1 && (
-                <span className="border-monad-void-bd/60 bg-monad-void-bg/30 text-monad-void-text inline-flex items-center rounded border px-2 py-0.5 text-[10px] font-semibold">
+                <span className="border-monad-void-bd/60 bg-monad-void-bg/30 text-monad-void-text text-2xs inline-flex items-center rounded border px-2 py-0.5 font-semibold">
                   {strings.choiceDoesntMatter}
                 </span>
               )}

@@ -85,7 +85,7 @@ export function SearchPicker<T>({
               >
                 {renderIcon(o)}
                 <span className="text-content min-w-0 flex-1 truncate">{nameOf(o)}</span>
-                <span className="text-content-subtle font-mono text-[10px]">{idOf(o)}</span>
+                <span className="text-content-subtle text-2xs font-mono">{idOf(o)}</span>
               </button>
             </li>
           ))}

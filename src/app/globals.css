@@ -5,6 +5,12 @@
 @theme {
   --font-sans: var(--font-game), var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Taille sous `text-xs` (génère `text-2xs`) : 10px, la valeur arbitraire la
+     plus répandue du codebase. SANS `--text-2xs--line-height`, exprès : comme
+     `text-[10px]` qu'elle remplace, la classe ne pose que le font-size et
+     laisse l'interligne hérité (un line-height à la `text-xs` le changerait). */
+  --text-2xs: 0.625rem;
 }
 
 /* Utility explicite (auparavant, on s'appuyait sur le fallback de font-sans). */

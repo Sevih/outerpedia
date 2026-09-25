@@ -117,7 +117,7 @@ export function StatsRankingSection({
       {/* Base Stats */}
       <div className="card rounded-xl p-4">
         <div className="mb-3 flex items-baseline justify-between">
-          <h3 className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+          <h3 className="text-2xs font-mono font-semibold tracking-[0.18em] text-zinc-300 uppercase">
             {labels.title}
           </h3>
           <span className="flex items-center gap-3">
@@ -251,7 +251,7 @@ export function StatsRankingSection({
                       )}
                     </span>
                     <span
-                      className={`text-[10px] leading-none ${on ? 'text-amber-300' : 'text-zinc-400'}`}
+                      className={`text-2xs leading-none ${on ? 'text-amber-300' : 'text-zinc-400'}`}
                     >
                       Lv.{s.level}
                     </span>
@@ -300,7 +300,7 @@ export function StatsRankingSection({
       {/* Ranking + Gifts */}
       <div className="flex flex-col gap-4">
         <div className="card rounded-xl p-4">
-          <h3 className="mb-3 font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+          <h3 className="text-2xs mb-3 font-mono font-semibold tracking-[0.18em] text-zinc-300 uppercase">
             {labels.ranking}
           </h3>
           <div className="grid grid-cols-2 gap-3">
@@ -309,9 +309,7 @@ export function StatsRankingSection({
                 key={tc.label}
                 className="flex flex-col items-center gap-1 rounded-lg border border-white/6 bg-slate-900/40 p-3"
               >
-                <span className="text-[10px] tracking-wider text-zinc-400 uppercase">
-                  {tc.label}
-                </span>
+                <span className="text-2xs tracking-wider text-zinc-400 uppercase">{tc.label}</span>
                 {tc.rank ? (
                   <img
                     src={img.rank(tc.rank)}
@@ -330,7 +328,7 @@ export function StatsRankingSection({
 
         {gifts.length > 0 && (
           <div className="card rounded-xl p-4">
-            <h3 className="mb-3 font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+            <h3 className="text-2xs mb-3 font-mono font-semibold tracking-[0.18em] text-zinc-300 uppercase">
               {labels.gifts}
             </h3>
             <div className="grid grid-cols-4 gap-2">
@@ -341,7 +339,7 @@ export function StatsRankingSection({
                     size={48}
                     iconOnly
                   />
-                  <span className="w-full text-center text-[10px] leading-tight text-zinc-400">
+                  <span className="text-2xs w-full text-center leading-tight text-zinc-400">
                     {g.name}
                   </span>
                 </div>

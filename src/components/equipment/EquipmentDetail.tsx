@@ -216,7 +216,7 @@ function StepSlider({
   const color = ascended ? SING : accent;
   return (
     <div className="flex items-center gap-3">
-      <span className="text-content-muted w-24 shrink-0 text-[10px] tracking-wider uppercase">
+      <span className="text-content-muted text-2xs w-24 shrink-0 tracking-wider uppercase">
         {label}
       </span>
       <div className="relative flex h-6 flex-1 items-center rounded">
@@ -268,7 +268,7 @@ function TierTabs({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-content-muted w-24 shrink-0 text-[10px] tracking-wider uppercase">
+      <span className="text-content-muted text-2xs w-24 shrink-0 tracking-wider uppercase">
         {label}
       </span>
       <div className="flex flex-1 gap-1">
@@ -373,14 +373,14 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
           <div className="min-w-0">
             <div className="mb-1 flex flex-wrap items-center gap-2">
               <span
-                className="text-[10px] font-bold tracking-[0.2em] uppercase"
+                className="text-2xs font-bold tracking-[0.2em] uppercase"
                 style={{ color: accent }}
               >
                 {model.kind}
               </span>
               <span className="text-light text-xs">{'★'.repeat(model.star)}</span>
               {model.mode && (
-                <span className="border-line-subtle text-content-strong rounded border px-1.5 text-[10px] font-bold">
+                <span className="border-line-subtle text-content-strong text-2xs rounded border px-1.5 font-bold">
                   {model.mode}
                 </span>
               )}
@@ -429,7 +429,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
             )}
             {reforgeBase > 0 && (
               <div className="flex items-center gap-3 text-xs">
-                <span className="text-content-muted w-24 shrink-0 text-[10px] tracking-wider uppercase">
+                <span className="text-content-muted text-2xs w-24 shrink-0 tracking-wider uppercase">
                   {labels.reforge}
                 </span>
                 <FlashNum value={maxReforge} color={singColor} />
@@ -510,7 +510,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                       key={tag}
                       className="border-line-subtle bg-surface-base/40 min-w-60 flex-1 rounded-lg border p-3.5"
                     >
-                      <span className="border-buff/30 bg-buff/10 text-buff mb-2 inline-block rounded border px-1.5 py-0.5 text-[10px] font-bold uppercase">
+                      <span className="border-buff/30 bg-buff/10 text-buff text-2xs mb-2 inline-block rounded border px-1.5 py-0.5 font-bold uppercase">
                         {tag}
                       </span>
                       <SkillDescription desc={text} className="text-content-muted text-sm" />
@@ -585,7 +585,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
                       />
                       <div className="min-w-0 flex-1">
                         <div
-                          className="mb-1 text-[10px] tracking-wider uppercase"
+                          className="text-2xs mb-1 tracking-wider uppercase"
                           style={{ color: sel ? accent : undefined }}
                         >
                           {labels.pieces[p.slot] ?? p.slot}
@@ -793,7 +793,7 @@ const AX_COLOR: Record<string, string> = {
 
 function AxEyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="text-content-muted text-[10px] font-semibold tracking-[0.14em] uppercase">
+    <div className="text-content-muted text-2xs font-semibold tracking-[0.14em] uppercase">
       {children}
     </div>
   );
@@ -842,7 +842,7 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
       <table className="w-full text-sm">
         <thead>
           <tr>
-            <th className="text-content-subtle pb-1.5 text-left text-[10px] font-semibold tracking-wider uppercase">
+            <th className="text-content-subtle text-2xs pb-1.5 text-left font-semibold tracking-wider uppercase">
               {labels.step}
             </th>
             <th className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
@@ -926,7 +926,7 @@ function AxBonusRow({ bonus, sel }: { bonus: AscView['bonuses'][number]; sel: st
         <span className="font-mono text-sm font-bold tabular-nums" style={{ color: c }}>
           {g?.range ?? '—'}
           {split && (
-            <span className="text-content-subtle ml-1 text-[10px] font-normal">
+            <span className="text-content-subtle text-2xs ml-1 font-normal">
               ({bonus.splitLabels!.primary})
             </span>
           )}
@@ -934,13 +934,13 @@ function AxBonusRow({ bonus, sel }: { bonus: AscView['bonuses'][number]; sel: st
         {split && (
           <span className="font-mono text-sm font-bold tabular-nums" style={{ color: c }}>
             / {g!.rangeAlt}
-            <span className="text-content-subtle ml-1 text-[10px] font-normal">
+            <span className="text-content-subtle text-2xs ml-1 font-normal">
               ({bonus.splitLabels!.alt})
             </span>
           </span>
         )}
         {g && (
-          <span className="text-content-subtle ml-auto shrink-0 font-mono text-[10px] tabular-nums">
+          <span className="text-content-subtle text-2xs ml-auto shrink-0 font-mono tabular-nums">
             {g.rate}%
           </span>
         )}
@@ -1083,10 +1083,7 @@ function PassiveModules({
                 </div>
               )}
               {p.unlockLevel > 1 && (
-                <div
-                  className="mb-1 text-[10px] tracking-wider uppercase"
-                  style={{ color: accent }}
-                >
+                <div className="text-2xs mb-1 tracking-wider uppercase" style={{ color: accent }}>
                   +{p.unlockLevel}
                 </div>
               )}

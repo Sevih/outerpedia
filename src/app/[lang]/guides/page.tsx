@@ -71,7 +71,7 @@ export default async function GuidesLanding({ params }: { params: Promise<{ lang
         <p className="text-content-muted mx-auto mt-2 max-w-2xl text-sm">
           {t('page.guides.description')}
         </p>
-        <div className="text-content-subtle mt-3 flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] uppercase">
+        <div className="text-content-subtle text-2xs mt-3 flex items-center gap-2 font-mono tracking-[0.14em] uppercase">
           <span
             className="inline-block size-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]"
             aria-hidden

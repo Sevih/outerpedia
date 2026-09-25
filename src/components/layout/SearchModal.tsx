@@ -193,7 +193,7 @@ export function SearchModal({
             aria-label={strings.placeholder}
             className="text-content-strong placeholder:text-content-subtle min-w-0 flex-1 bg-transparent text-sm outline-none"
           />
-          <kbd className="border-line text-content-subtle hidden rounded border px-1.5 py-0.5 font-mono text-[10px] sm:inline-block">
+          <kbd className="border-line text-content-subtle text-2xs hidden rounded border px-1.5 py-0.5 font-mono sm:inline-block">
             Esc
           </kbd>
         </div>

@@ -74,7 +74,7 @@ export function Tile({ tile }: { tile: RouteTile }) {
               i > 0 ? 'border-line border-t' : ''
             }`}
           >
-            <span className="bg-surface-sunken text-content-strong rounded px-2 py-0.5 text-[10px] font-bold drop-shadow-lg sm:text-xs">
+            <span className="bg-surface-sunken text-content-strong text-2xs rounded px-2 py-0.5 font-bold drop-shadow-lg sm:text-xs">
               {s.label}
             </span>
           </Link>

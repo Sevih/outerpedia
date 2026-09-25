@@ -12,9 +12,7 @@ interface SideProps {
 function Side({ label, items, tone, sign }: SideProps) {
   return (
     <div className="card rounded-xl p-4">
-      <div
-        className={`mb-2.5 font-mono text-[10px] font-semibold tracking-[0.2em] uppercase ${tone}`}
-      >
+      <div className={`text-2xs mb-2.5 font-mono font-semibold tracking-[0.2em] uppercase ${tone}`}>
         {label}
       </div>
       {items.length > 0 ? (

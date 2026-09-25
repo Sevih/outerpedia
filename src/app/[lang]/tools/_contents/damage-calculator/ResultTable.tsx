@@ -64,7 +64,7 @@ export function ResultTable({
     <>
       <div className="flex items-center gap-2">
         <Eyebrow>{L.panels.result}</Eyebrow>
-        <span className="text-content-subtle font-mono text-[10px]">{L.report.branchesNote}</span>
+        <span className="text-content-subtle text-2xs font-mono">{L.report.branchesNote}</span>
       </div>
 
       {attacker && !dmgData && (
@@ -150,7 +150,7 @@ export function ResultTable({
                           <span className="border-line-subtle bg-surface-sunken/70 block h-7 w-7 rounded-md border" />
                         )}
                       </SkillIconTip>
-                      <span className="text-content-subtle font-mono text-[10px] font-bold">
+                      <span className="text-content-subtle text-2xs font-mono font-bold">
                         {sk.slot}
                         {sr?.burst !== undefined && <span className="text-warn"> B{sr.burst}</span>}
                       </span>
@@ -208,7 +208,7 @@ export function ResultTable({
                             ) : unsupported && (br !== 'miss' || branchOn.miss) ? (
                               <span
                                 title={L.report.unsupportedHint}
-                                className="text-content-muted cursor-help font-sans text-[10px] font-medium italic"
+                                className="text-content-muted text-2xs cursor-help font-sans font-medium italic"
                               >
                                 {L.report.unsupported}
                               </span>
@@ -258,7 +258,7 @@ export function ResultTable({
                                   className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
                                 />
                                 <span
-                                  className={`w-14 text-center font-mono text-[10px] ${
+                                  className={`text-2xs w-14 text-center font-mono ${
                                     delta === undefined
                                       ? 'text-content-subtle'
                                       : Math.abs(delta) <= DEFAULT_TOLERANCE
@@ -313,7 +313,7 @@ export function ResultTable({
                             {vars(L.report.dotTick, { n: d.damagePerTick.toLocaleString() })}
                           </span>
                           {d.applyProbability < 1 && (
-                            <span className="text-content-subtle text-[10px]">
+                            <span className="text-content-subtle text-2xs">
                               {vars(L.report.dotApply, {
                                 p: Math.round(d.applyProbability * 100),
                               })}
@@ -331,7 +331,7 @@ export function ResultTable({
                                 className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
                               />
                               <span
-                                className={`w-14 text-center font-mono text-[10px] ${
+                                className={`text-2xs w-14 text-center font-mono ${
                                   delta === undefined
                                     ? 'text-content-subtle'
                                     : Math.abs(delta) <= DEFAULT_TOLERANCE

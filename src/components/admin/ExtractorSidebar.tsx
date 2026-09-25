@@ -285,21 +285,17 @@ export function ExtractorSidebar({
                     <span className="text-content truncate">{r.name}</span>
                     <span className="flex shrink-0 items-center gap-1">
                       {r.status === 'new' && (
-                        <span className="bg-accent/15 text-accent rounded px-1 text-[10px]">
-                          new
-                        </span>
+                        <span className="bg-accent/15 text-accent text-2xs rounded px-1">new</span>
                       )}
                       {r.status === 'diff' && (
-                        <span className="bg-warn/15 text-warn rounded px-1 text-[10px]">
+                        <span className="bg-warn/15 text-warn text-2xs rounded px-1">
                           {r.count ? `${r.count} ` : ''}diff
                         </span>
                       )}
                       {r.status === 'ok' && (
-                        <span className="bg-success/15 text-success rounded px-1 text-[10px]">
-                          ok
-                        </span>
+                        <span className="bg-success/15 text-success text-2xs rounded px-1">ok</span>
                       )}
-                      {r.marker && <span className="text-accent text-[10px]">{r.marker}</span>}
+                      {r.marker && <span className="text-accent text-2xs">{r.marker}</span>}
                     </span>
                   </span>
                   <span className="text-content-subtle flex items-center gap-1 text-xs">

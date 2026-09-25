@@ -99,7 +99,7 @@ function StageTile({ stage, spoilers }: { stage: StageCard; spoilers: boolean })
       <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black/80" />
 
       <div className="absolute inset-x-0 top-0 space-y-0.5 p-2">
-        <p className="text-content-muted text-[10px] font-medium drop-shadow-lg">{stage.episode}</p>
+        <p className="text-content-muted text-2xs font-medium drop-shadow-lg">{stage.episode}</p>
         <p className="text-content-strong line-clamp-3 text-xs font-medium drop-shadow-lg">
           {stage.area}
         </p>

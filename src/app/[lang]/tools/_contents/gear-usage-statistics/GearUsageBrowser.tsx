@@ -95,7 +95,7 @@ export function GearUsageBrowser({
           >
             <span className="flex items-center gap-1.5">
               {labels.tabs[cat]}
-              <span className="text-content-subtle text-[10px]">({data[cat].length})</span>
+              <span className="text-content-subtle text-2xs">({data[cat].length})</span>
             </span>
           </FilterPill>
         ))}
@@ -180,7 +180,7 @@ export function GearUsageBrowser({
                 {/* Compte */}
                 <div className="min-w-12 shrink-0 text-center">
                   <span className="text-xl font-bold text-sky-400">{entry.count}</span>
-                  <span className="text-content-subtle block text-[10px] tracking-wide uppercase">
+                  <span className="text-content-subtle text-2xs block tracking-wide uppercase">
                     {labels.charsUnit}
                   </span>
                 </div>

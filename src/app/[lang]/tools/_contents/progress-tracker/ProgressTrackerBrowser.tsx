@@ -583,7 +583,7 @@ export function ProgressTrackerBrowser({
                             <span className="flex-1 text-sm">{labels.tasks[def.id]}</span>
                             {auto && (
                               <span
-                                className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase ${
+                                className={`text-2xs rounded px-1.5 py-0.5 font-semibold uppercase ${
                                   live
                                     ? 'bg-cat-emerald-fg/15 text-cat-emerald-fg'
                                     : 'text-content-subtle bg-surface-raised'

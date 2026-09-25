@@ -210,7 +210,7 @@ export function SettingsModal({
                       {isCurrent && (
                         <span
                           aria-hidden
-                          className="bg-accent text-accent-fg absolute top-1.5 right-1.5 flex size-4.5 items-center justify-center rounded-full text-[10px] font-bold"
+                          className="bg-accent text-accent-fg text-2xs absolute top-1.5 right-1.5 flex size-4.5 items-center justify-center rounded-full font-bold"
                         >
                           ✓
                         </span>
@@ -274,7 +274,7 @@ export function SettingsModal({
                     className="border-line text-content-subtle hover:border-line-strong hover:text-content-strong focus-visible:ring-ring flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition outline-none focus-visible:ring-2"
                   >
                     {strings.resetSkins}
-                    <span className="bg-surface-overlay text-content rounded-full px-1.5 text-[10px] leading-4">
+                    <span className="bg-surface-overlay text-content text-2xs rounded-full px-1.5 leading-4">
                       {overrides}
                     </span>
                   </button>
@@ -343,7 +343,7 @@ export function SettingsModal({
                           )}
                         </span>
                         <span
-                          className="text-content-muted line-clamp-2 min-h-[2.5em] w-full text-center text-[10px] leading-tight"
+                          className="text-content-muted text-2xs line-clamp-2 min-h-[2.5em] w-full text-center leading-tight"
                           title={c.name}
                         >
                           {c.name}

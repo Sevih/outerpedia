@@ -94,7 +94,7 @@ export function SkillIconTip({
       )}
       {bursts.map(({ i, b }) => (
         <div key={i} className={BURST_TIP_COLORS[i] ?? ''}>
-          <span className="font-mono text-[10px] font-bold">B{i + 1}</span>
+          <span className="text-2xs font-mono font-bold">B{i + 1}</span>
           <SkillDescription
             desc={lRec(b.desc, lang)}
             vars={levelAt(b.levels ?? [], lvl)?.vars}

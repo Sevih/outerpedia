@@ -187,7 +187,7 @@ function SelectGroup({
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
+      <span className="text-content-muted text-2xs text-center font-mono font-semibold tracking-[0.16em] uppercase">
         {label}
       </span>
       <select

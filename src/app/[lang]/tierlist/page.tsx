@@ -132,7 +132,7 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
         <p className="text-content-muted mx-auto mt-2 max-w-2xl text-sm">
           {t('page.tierlist.description').replace('{monthYear}', getMonthYear(lang))}
         </p>
-        <div className="text-content-subtle mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[10px] tracking-[0.14em] uppercase">
+        <div className="text-content-subtle text-2xs mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono tracking-[0.14em] uppercase">
           <span>
             {rankingsCount} {t('tierlist.versus.tools_count')}
           </span>

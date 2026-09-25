@@ -181,7 +181,8 @@
       deux listes de shops permanents, « persos intégrés » ×4 lecteurs, paires
       classe/enum en dur après dérivation, rebuilds redondants ; familles
       d'équipement rematérialisées à chaque appel ; 8 utilitaires morts dans
-      `globals.css` FAITS ; pas de `--text-2xs` pour les 349 `text-[10/11px]` ;
+      `globals.css` FAITS ; `--text-2xs` (10px) FAIT — restent 126
+      `text-[11px]` sans token ;
       schémas persistés non normalisés (tier-list-maker) ; Twitch `parent` sans
       les sous-domaines ; `lefthook` `parallel: true` format+lint.
 - [ ] **Lot non couvert à relancer** : `portrait-fx-*.ts` (WebGL). Les guides

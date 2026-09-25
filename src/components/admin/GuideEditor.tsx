@@ -342,7 +342,7 @@ export function GuideEditor({
             {v.group ? (
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-content text-sm font-medium">{groupLabel(v.group)}</span>
-                <span className="text-content-subtle font-mono text-[10px]">{v.group}</span>
+                <span className="text-content-subtle text-2xs font-mono">{v.group}</span>
                 <button
                   type="button"
                   className="text-content-muted hover:text-content text-xs underline"
@@ -908,7 +908,7 @@ export function GuideEditor({
               className={`rounded-md px-3 py-1 text-sm ${i === active ? 'bg-accent/20 text-accent font-semibold' : 'text-content-muted hover:bg-surface-overlay'}`}
             >
               {ver.key}
-              {i === 0 && <span className="text-content-subtle ml-1 text-[10px]">(recent)</span>}
+              {i === 0 && <span className="text-content-subtle text-2xs ml-1">(recent)</span>}
             </button>
           ))}
           <button

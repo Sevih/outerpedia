@@ -102,7 +102,7 @@ export function UtcDate({
         value={time}
         onChange={(e) => onChange(joinIso(day, e.target.value))}
       />
-      <span className="text-content-subtle text-[10px]">UTC</span>
+      <span className="text-content-subtle text-2xs">UTC</span>
     </label>
   );
 }

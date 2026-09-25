@@ -209,7 +209,7 @@ export function HeaderClient({
           >
             <SearchIcon size={14} />
             <span className="hidden lg:inline">{strings.search.short}</span>
-            <kbd className="border-line hidden rounded border px-1 py-0.5 font-mono text-[10px] lg:inline-block">
+            <kbd className="border-line text-2xs hidden rounded border px-1 py-0.5 font-mono lg:inline-block">
               ⌘K
             </kbd>
           </button>

@@ -163,7 +163,7 @@ export async function BossCard({
             des cartes qu'il surplombe. */}
         {view.archived && (
           <p className="border-warn/40 bg-warn/5 text-warn rounded-md border px-3 py-2 text-xs">
-            <span className="font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+            <span className="text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
               {t('guides.boss_display.archived')}
             </span>{' '}
             {/* La note humaine de l'archive PRIME quand elle existe : « avant la
@@ -194,7 +194,7 @@ export async function BossCard({
                   dit d'un badge, sinon deux cartes empilées se lisent comme
                   deux boss — et le lecteur cherche lequel il affronte. */}
               {role === 'add' && (
-                <span className="border-line-subtle bg-surface-sunken text-content rounded-full border px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+                <span className="border-line-subtle bg-surface-sunken text-content text-2xs rounded-full border px-2 py-0.5 font-mono font-semibold tracking-[0.14em] uppercase">
                   {t('guides.boss_display.add')}
                 </span>
               )}
@@ -218,7 +218,7 @@ export async function BossCard({
           (signal d'erreur de contenu, comme parse-text). */}
         {immunities.length > 0 && (
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+            <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
               {t('guides.boss_display.immunities')}
             </h3>
             <div className="flex flex-wrap items-center gap-1.5">
@@ -277,7 +277,7 @@ export async function BossCard({
 
         {cardSkills.length > 0 && (
           <div className="space-y-1.5">
-            <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+            <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
               {t('guides.boss_display.skills')}
             </h3>
             {compact ? (

@@ -1010,7 +1010,7 @@ function SummaryPanel({
             <div className="mt-2 space-y-2.5">
               {pieceGroups.map((g) => (
                 <div key={g.key}>
-                  <h4 className="text-content-subtle flex items-center gap-1 font-mono text-[10px] tracking-wide uppercase">
+                  <h4 className="text-content-subtle text-2xs flex items-center gap-1 font-mono tracking-wide uppercase">
                     {g.element && (
                       <img
                         src={img.element(g.element)}
@@ -1063,7 +1063,7 @@ function Tile({
 }) {
   return (
     <div className="border-line-subtle bg-surface-sunken rounded-lg border px-2 py-1.5">
-      <div className="text-content-muted truncate font-mono text-[10px] tracking-wide uppercase">
+      <div className="text-content-muted text-2xs truncate font-mono tracking-wide uppercase">
         {label}
       </div>
       <div
@@ -1401,12 +1401,10 @@ function HeroCard({
             <span className="text-content-strong block text-sm leading-tight font-semibold wrap-break-word">
               {hero.name}
               {hero.fusionLevels && (
-                <span className="text-accent ml-1.5 text-[10px] uppercase">
-                  {labels.coreFusion}
-                </span>
+                <span className="text-accent text-2xs ml-1.5 uppercase">{labels.coreFusion}</span>
               )}
               {!counted && (
-                <span className="text-content-subtle border-line-subtle ml-1.5 rounded border px-1 text-[10px] uppercase">
+                <span className="text-content-subtle border-line-subtle text-2xs ml-1.5 rounded border px-1 uppercase">
                   {labels.notCounted}
                 </span>
               )}
@@ -1490,7 +1488,7 @@ function HeroCard({
                           className="border-line-subtle bg-surface-sunken h-6.5 w-6.5 shrink-0 rounded border"
                         />
                       ) : (
-                        <span className="border-line-subtle bg-surface-sunken text-content-muted flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded border font-mono text-[10px]">
+                        <span className="border-line-subtle bg-surface-sunken text-content-muted text-2xs flex h-6.5 w-6.5 shrink-0 items-center justify-center rounded border font-mono">
                           {i === SKILL_SLOTS - 1 ? 'CP' : `S${i + 1}`}
                         </span>
                       )}
@@ -1701,7 +1699,7 @@ function Field({
     <div>
       <div className="mb-1.5 flex items-baseline justify-between gap-2">
         <span className="text-content-muted text-xs">{label}</span>
-        {hint && <span className="text-content-subtle font-mono text-[10px]">{hint}</span>}
+        {hint && <span className="text-content-subtle text-2xs font-mono">{hint}</span>}
         {value !== undefined && (
           <span className="font-mono text-xs font-semibold">
             <span className="text-content-strong">{value}</span>
@@ -1737,7 +1735,7 @@ function Rail({
   return (
     <span className="flex items-center gap-1.5">
       <span
-        className={`font-mono text-[10px] tracking-wide uppercase ${
+        className={`text-2xs font-mono tracking-wide uppercase ${
           aim ? 'text-accent/80' : 'text-content-subtle'
         }`}
       >
@@ -2089,7 +2087,7 @@ function RosterBar({
       <div className="flex-1" />
 
       <span className="flex flex-wrap items-center gap-1">
-        <span className="text-content-subtle font-mono text-[10px] tracking-wide uppercase">
+        <span className="text-content-subtle text-2xs font-mono tracking-wide uppercase">
           {labels.sort}
         </span>
         {sorts.map((s) => {

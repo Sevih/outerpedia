@@ -463,7 +463,7 @@ export function GearUsageFinderBrowser({
                         </span>
                       )}
                       {r.buildCount > 1 && (
-                        <span className="text-content-subtle block text-[10px]">
+                        <span className="text-content-subtle text-2xs block">
                           {r.buildCount} builds
                         </span>
                       )}

@@ -44,7 +44,7 @@ export function HomeHero({ strings }: { strings: HeroStrings }) {
         >
           <FaSearch className="text-content-subtle shrink-0" />
           <span className="text-content-subtle flex-1 truncate">{strings.searchPlaceholder}</span>
-          <kbd className="border-line bg-surface-raised text-content-muted hidden rounded border px-1.5 py-0.5 font-mono text-[10px] sm:inline">
+          <kbd className="border-line bg-surface-raised text-content-muted text-2xs hidden rounded border px-1.5 py-0.5 font-mono sm:inline">
             Ctrl+K
           </kbd>
         </button>

@@ -142,7 +142,7 @@ export function FlagshipCard({
           </>
         )}
         <div
-          className={`text-content-subtle absolute bottom-2 font-mono text-[10px] tracking-[0.14em] uppercase ${side === 'left' ? 'left-3' : 'right-3'}`}
+          className={`text-content-subtle text-2xs absolute bottom-2 font-mono tracking-[0.14em] uppercase ${side === 'left' ? 'left-3' : 'right-3'}`}
         >
           {previewLabel}
         </div>
@@ -151,7 +151,7 @@ export function FlagshipCard({
       {/* Bloc titre */}
       <div>
         <div
-          className={`font-mono text-[10px] font-semibold tracking-[0.18em] uppercase ${accent.text}`}
+          className={`text-2xs font-mono font-semibold tracking-[0.18em] uppercase ${accent.text}`}
         >
           {eyebrow}
         </div>

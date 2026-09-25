@@ -140,10 +140,8 @@ export function ItemsBrowser({ entries }: { entries: CatalogEntry[] }) {
                     className="text-content hover:text-accent"
                   >
                     {e.name}
-                    {e.curated && <span className="text-accent ml-1 text-[10px]">✎</span>}
-                    {e.hidden && (
-                      <span className="text-content-subtle ml-1 text-[10px]">hidden</span>
-                    )}
+                    {e.curated && <span className="text-accent text-2xs ml-1">✎</span>}
+                    {e.hidden && <span className="text-content-subtle text-2xs ml-1">hidden</span>}
                   </Link>
                 </td>
                 <td className="text-content-subtle px-2 py-1 text-xs">{e.type}</td>

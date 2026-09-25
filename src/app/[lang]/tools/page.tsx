@@ -67,7 +67,7 @@ export default async function ToolsPage({ params }: { params: Promise<{ lang: st
         <p className="text-content-muted mx-auto mt-2 max-w-2xl text-sm">
           {t('page.tools.description')}
         </p>
-        <p className="text-content-subtle mt-3 font-mono text-[10px] tracking-[0.14em] uppercase">
+        <p className="text-content-subtle text-2xs mt-3 font-mono tracking-[0.14em] uppercase">
           {t('tools.count').replace('{count}', String(total))}
         </p>
       </div>

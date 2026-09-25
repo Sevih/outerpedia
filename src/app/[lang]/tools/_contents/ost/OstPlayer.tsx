@@ -360,7 +360,7 @@ export function OstPlayer({
               >
                 {label}
                 <span
-                  className={`font-mono text-[10px] tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
+                  className={`text-2xs font-mono tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
                 >
                   {count}
                 </span>
@@ -564,7 +564,7 @@ export function OstPlayer({
               >
                 <RepeatGlyph className="size-4" />
                 {repeat === 'one' && (
-                  <span className="absolute -top-1 -right-1 text-[10px] font-bold">1</span>
+                  <span className="text-2xs absolute -top-1 -right-1 font-bold">1</span>
                 )}
               </button>
             </div>

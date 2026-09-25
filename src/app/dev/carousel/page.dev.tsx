@@ -162,7 +162,7 @@ function Strip({ count, legacy }: { count: number; legacy: boolean }) {
                   />
                 ))}
               </TeamSlotCarousel>
-              <p className="text-content-subtle pb-1 text-center font-mono text-[10px]">
+              <p className="text-content-subtle text-2xs pb-1 text-center font-mono">
                 poste {slot + 1} · {counts[slot]} opt.
               </p>
             </div>
@@ -266,7 +266,7 @@ export default async function DevCarouselPage({
                   <th key={v.px} className="border-line-subtle border px-3 py-1.5 text-left">
                     <span className="text-content-strong">{v.palier}</span>
                     <br />
-                    <span className="text-content-subtle font-mono text-[10px]">
+                    <span className="text-content-subtle text-2xs font-mono">
                       carte {v.card} · écart avant {LEGACY_GAP[i]}
                     </span>
                   </th>
@@ -292,10 +292,10 @@ export default async function DevCarouselPage({
                       >
                         {o} px
                         {applied !== o && (
-                          <span className="text-content-subtle ml-1 text-[10px]">→ {applied}</span>
+                          <span className="text-content-subtle text-2xs ml-1">→ {applied}</span>
                         )}
                         {collides && (
-                          <span className="ml-1 text-[10px]">
+                          <span className="text-2xs ml-1">
                             (chevauchait {2 * o - LEGACY_GAP[i]})
                           </span>
                         )}

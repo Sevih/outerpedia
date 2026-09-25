@@ -116,7 +116,7 @@ export function HeatSlider({
       aria-label={aria}
       disabled={delta < 0 ? selected === 0 : selected === last}
       onClick={() => onSelect(clamp(selected + delta))}
-      className="border-line bg-surface-base text-content hover:text-content-strong enabled:hover:border-line-strong flex h-7 w-6 shrink-0 items-center justify-center rounded border text-[10px] transition-colors disabled:opacity-30"
+      className="border-line bg-surface-base text-content hover:text-content-strong enabled:hover:border-line-strong text-2xs flex h-7 w-6 shrink-0 items-center justify-center rounded border transition-colors disabled:opacity-30"
     >
       {glyph}
     </button>

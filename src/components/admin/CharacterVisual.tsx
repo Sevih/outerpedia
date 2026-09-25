@@ -76,7 +76,7 @@ export function CharacterVisual({ char, tags }: { char: Character; tags?: string
               >
                 <img src={g.src} alt={g.label} className="max-h-full max-w-full object-contain" />
               </div>
-              <figcaption className="text-content-subtle text-center text-[10px] uppercase">
+              <figcaption className="text-content-subtle text-2xs text-center uppercase">
                 {g.label}
               </figcaption>
             </figure>

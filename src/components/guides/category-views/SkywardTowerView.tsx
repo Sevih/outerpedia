@@ -98,7 +98,7 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
       <GuideCardArt icon={guide.icon} alt={name} hoverScale />
       <div className="absolute inset-0 flex flex-col justify-between p-3">
         <p className="text-content-strong text-lg font-bold drop-shadow-lg">{name}</p>
-        <p className="text-content-muted line-clamp-3 text-[10px] drop-shadow-lg sm:text-xs">
+        <p className="text-content-muted text-2xs line-clamp-3 drop-shadow-lg sm:text-xs">
           {lRec(guide.description, lang)}
         </p>
       </div>
@@ -129,7 +129,7 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
         <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
       </div>
       <div className="absolute inset-x-0 bottom-0 p-2">
-        <p className="text-content-muted text-[10px] drop-shadow-lg sm:text-xs">
+        <p className="text-content-muted text-2xs drop-shadow-lg sm:text-xs">
           {lRec(guide.description, lang)}
         </p>
       </div>

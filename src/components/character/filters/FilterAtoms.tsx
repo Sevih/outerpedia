@@ -253,7 +253,7 @@ export function LogicToggle({
   return (
     <div
       role="radiogroup"
-      className="border-line-subtle bg-surface-sunken/70 inline-flex h-6.5 overflow-hidden rounded border font-mono text-[10px] tracking-wider"
+      className="border-line-subtle bg-surface-sunken/70 text-2xs inline-flex h-6.5 overflow-hidden rounded border font-mono tracking-wider"
     >
       {(['AND', 'OR'] as const).map((k, i) => {
         const on = k === value;
@@ -299,7 +299,7 @@ export function ToolbarDivider() {
 export function BarGroup({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-content-muted text-center font-mono text-[10px] font-semibold tracking-[0.16em] uppercase">
+      <span className="text-content-muted text-2xs text-center font-mono font-semibold tracking-[0.16em] uppercase">
         {label}
       </span>
       <div className="flex flex-wrap items-center justify-center gap-1">{children}</div>
@@ -361,7 +361,7 @@ export function Eyebrow({
 }) {
   return (
     <span
-      className={`text-content-subtle font-mono text-[10px] tracking-[0.16em] uppercase ${className ?? ''}`}
+      className={`text-content-subtle text-2xs font-mono tracking-[0.16em] uppercase ${className ?? ''}`}
     >
       {children}
     </span>

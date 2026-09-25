@@ -38,7 +38,7 @@ function EffectCell({ e }: { e?: MergedEffect }) {
             >
               {e.name.en || <span className="text-danger italic">no name</span>}
             </Link>
-            {e.irremovable && <span className="text-warn text-[10px] uppercase">irremovable</span>}
+            {e.irremovable && <span className="text-warn text-2xs uppercase">irremovable</span>}
           </div>
           <div className="text-content-subtle text-xs">
             <span className="font-mono">{e.id}</span>

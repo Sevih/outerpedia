@@ -300,7 +300,7 @@ function AdvancedButton({
             background: active ? '#0a0a0a' : TONE.cyan,
             color: active ? TONE.cyan : '#0a0a0a',
           }}
-          className="inline-flex h-4.5 min-w-4.5 items-center justify-center rounded-full px-1.5 font-mono text-[10px] font-bold"
+          className="text-2xs inline-flex h-4.5 min-w-4.5 items-center justify-center rounded-full px-1.5 font-mono font-bold"
         >
           {count}
         </span>

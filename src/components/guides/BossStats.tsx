@@ -216,7 +216,7 @@ export function BossStats({
                       height={20}
                     />
                   ) : (
-                    <span className="text-content w-5 shrink-0 text-center text-[10px] font-semibold">
+                    <span className="text-content text-2xs w-5 shrink-0 text-center font-semibold">
                       {label?.abbr ?? slug}
                     </span>
                   )}
@@ -238,7 +238,7 @@ export function BossStats({
 
       {passives.length > 0 && (
         <div className="space-y-1.5">
-          <h4 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+          <h4 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
             {labels.options}
           </h4>
           <div className="flex flex-wrap gap-1.5">
@@ -362,7 +362,7 @@ function RankSlider({
       labels={grades.map((g) => (
         <span
           key={g.name}
-          className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
+          className={`text-2xs absolute -translate-x-1/2 font-mono font-bold transition-colors ${
             g.indexes.includes(selected) ? 'text-accent' : 'text-content-strong'
           }`}
           style={{ left: `${g.mid * 100}%` }}

@@ -77,7 +77,7 @@ const toggleClass = (on: boolean): string =>
       : 'border-white/10 text-zinc-400 hover:bg-white/5'
   }`;
 
-const ROW_LABEL = 'w-13 shrink-0 text-[10px] tracking-wider text-zinc-200 uppercase';
+const ROW_LABEL = 'w-13 shrink-0 text-2xs tracking-wider text-zinc-200 uppercase';
 
 /** Légende des trois états, sous le titre « Flat or %? ». */
 const LEGEND: SubstatVerdictKind[] = ['pct', 'flat', 'close'];
@@ -94,7 +94,7 @@ function Badge({ kind, labels }: { kind: SubstatVerdictKind; labels: SubstatVerd
   return (
     <span
       aria-label={meaningOf(kind, labels)}
-      className={`inline-flex items-center rounded border px-1.5 py-px font-mono text-[10px] leading-4 font-semibold ${BADGE_CLASS[kind]}`}
+      className={`text-2xs inline-flex items-center rounded border px-1.5 py-px font-mono leading-4 font-semibold ${BADGE_CLASS[kind]}`}
     >
       {text}
     </span>
@@ -140,7 +140,7 @@ export function SubstatVerdictPanel({
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
       <div>{children(badge)}</div>
       <div className="flex flex-col gap-2.5 border-t border-white/6 pt-3 text-xs md:border-t-0 md:border-l md:pt-0 md:pl-5 lg:border-t lg:border-l-0 lg:pt-3 lg:pl-0">
-        <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+        <span className="text-2xs font-mono font-semibold tracking-[0.18em] text-zinc-300 uppercase">
           {labels.title}
         </span>
         {/* Légende des 3 états, EN TOUTES LETTRES à taille lisible — le badge

@@ -348,9 +348,7 @@ export function PullSimulatorBrowser({
                     />
                   </span>
                   <span className="text-xs font-medium text-red-300">{displayName(char)}</span>
-                  <span className="text-content-subtle text-[10px] group-hover:text-red-200">
-                    ✕
-                  </span>
+                  <span className="text-content-subtle text-2xs group-hover:text-red-200">✕</span>
                 </button>
               ))}
             </div>
@@ -558,11 +556,11 @@ export function PullSimulatorBrowser({
                         </FitText>
                       </>
                     ) : (
-                      <span className="text-content-subtle text-[10px]">{pull.rarity}★</span>
+                      <span className="text-content-subtle text-2xs">{pull.rarity}★</span>
                     )}
                   </div>
                   {pull.isFocus && (
-                    <span className="text-[10px] font-bold text-red-400">{labels.focus}</span>
+                    <span className="text-2xs font-bold text-red-400">{labels.focus}</span>
                   )}
                 </div>
               );
@@ -645,7 +643,7 @@ export function PullSimulatorBrowser({
                     {batch.map((pull, j) => (
                       <span
                         key={j}
-                        className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${
+                        className={`text-2xs inline-flex items-center rounded px-1.5 py-0.5 font-medium ${
                           pull.rarity === 3
                             ? pull.isFocus
                               ? 'bg-red-500/20 text-red-300 ring-1 ring-red-400/40'
@@ -701,7 +699,7 @@ function RarityBar({
   const pct = total > 0 ? (count / total) * 100 : 0;
   return (
     <div className="border-line-subtle bg-surface-raised/30 rounded-lg border p-2 text-center">
-      <p className="text-content-subtle text-[10px]">{label}</p>
+      <p className="text-content-subtle text-2xs">{label}</p>
       <p className="text-content text-sm font-bold">{count}</p>
       <div className="bg-surface-overlay mt-1 h-1.5 overflow-hidden rounded-full">
         <div
@@ -709,7 +707,7 @@ function RarityBar({
           style={{ width: `${pct}%` }}
         />
       </div>
-      <p className="text-content-subtle mt-0.5 text-[10px]">{pct.toFixed(1)}%</p>
+      <p className="text-content-subtle text-2xs mt-0.5">{pct.toFixed(1)}%</p>
     </div>
   );
 }

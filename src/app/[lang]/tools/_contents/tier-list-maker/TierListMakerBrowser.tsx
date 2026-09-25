@@ -451,7 +451,7 @@ const ItemView = memo(function ItemView({
       {showName && (
         <span
           lang="en"
-          className="text-content-muted mt-0.5 w-full text-center text-[10px] leading-tight hyphens-auto"
+          className="text-content-muted text-2xs mt-0.5 w-full text-center leading-tight hyphens-auto"
         >
           {shortLabel || label}
         </span>
@@ -459,7 +459,7 @@ const ItemView = memo(function ItemView({
       {skinLabel && (
         <span
           lang="en"
-          className="text-content-subtle mt-0.5 line-clamp-2 w-full text-center text-[10px] leading-tight"
+          className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight"
         >
           {skinLabel}
         </span>
@@ -552,7 +552,7 @@ const CardView = memo(function CardView({
         {badge && <img src={badge} alt="" aria-hidden className="absolute top-1 left-1 w-[60%]" />}
       </div>
       {skinLabel && (
-        <span className="text-content-subtle mt-0.5 line-clamp-2 w-full text-center text-[10px] leading-tight">
+        <span className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight">
           {skinLabel}
         </span>
       )}

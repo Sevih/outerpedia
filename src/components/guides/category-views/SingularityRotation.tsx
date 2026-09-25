@@ -317,7 +317,7 @@ function FeaturedBanner({
         <div className="flex shrink-0 flex-col items-end gap-1.5">
           <Identity monster={monster} size="md" />
           <span
-            className={`inline-flex items-center gap-1 font-mono text-[10px] font-semibold tracking-[0.14em] uppercase ${
+            className={`text-2xs inline-flex items-center gap-1 font-mono font-semibold tracking-[0.14em] uppercase ${
               isToday ? 'text-accent' : 'text-content-subtle'
             }`}
           >

@@ -139,7 +139,7 @@ export function WallpapersGallery({
             >
               {c.label}
               <span
-                className={`font-mono text-[10px] tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
+                className={`text-2xs font-mono tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
               >
                 {c.count}
               </span>
@@ -171,7 +171,7 @@ export function WallpapersGallery({
               loading="lazy"
               className={`size-full ${w.portrait ? 'object-contain' : 'object-cover'}`}
             />
-            <span className="bg-scrim/70 text-content absolute right-1 bottom-1 rounded px-1.5 py-0.5 font-mono text-[10px]">
+            <span className="bg-scrim/70 text-content text-2xs absolute right-1 bottom-1 rounded px-1.5 py-0.5 font-mono">
               {w.w}×{w.h}
             </span>
           </button>

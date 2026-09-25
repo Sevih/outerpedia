@@ -85,7 +85,7 @@ export function ToolsBrowser({
                 aria-hidden
               />
               <h2 className={`text-base font-semibold tracking-tight ${accent.text}`}>{g.label}</h2>
-              <span className="text-content-subtle ml-auto font-mono text-[10px] tracking-[0.12em] uppercase">
+              <span className="text-content-subtle text-2xs ml-auto font-mono tracking-[0.12em] uppercase">
                 {countLabel.replace('{count}', String(g.tools.length))}
               </span>
             </div>
@@ -131,7 +131,7 @@ function Tab({
       {accent && <span className={`size-1.5 rounded-full ${accent.dot}`} aria-hidden />}
       {label}
       <span
-        className={`font-mono text-[10px] tracking-wider ${
+        className={`text-2xs font-mono tracking-wider ${
           active ? (accent ? accent.tabActiveCount : 'text-content-muted') : 'text-content-subtle'
         }`}
       >

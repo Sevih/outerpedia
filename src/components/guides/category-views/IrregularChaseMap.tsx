@@ -116,7 +116,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
         {/* Pin décalé vers le bas en mobile (`mobileTop`) = le libellé passe
             SOUS la vignette, pour ne pas chevaucher le pin voisin. */}
         <span
-          className={`bg-surface-sunken/70 text-content-strong rounded px-2 py-0.5 text-[10px] font-bold whitespace-nowrap drop-shadow-lg lg:text-xs ${
+          className={`bg-surface-sunken/70 text-content-strong text-2xs rounded px-2 py-0.5 font-bold whitespace-nowrap drop-shadow-lg lg:text-xs ${
             pos.mobileTop !== undefined ? 'order-1 lg:-order-1' : ''
           }`}
         >
@@ -137,7 +137,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
         </span>
       </Link>
       {loot && (
-        <div className="bg-surface-sunken/80 hidden flex-col items-center gap-0.5 rounded px-2 py-1 text-[10px] lg:flex">
+        <div className="bg-surface-sunken/80 text-2xs hidden flex-col items-center gap-0.5 rounded px-2 py-1 lg:flex">
           {loot.currencies.map((c, i) => (
             <ItemInline
               key={i}

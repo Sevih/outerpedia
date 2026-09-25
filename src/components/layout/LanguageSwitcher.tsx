@@ -102,7 +102,7 @@ export function LanguageSwitcher({
   if (variant === 'mobile-chips') {
     return (
       <div>
-        <p className="text-content-subtle mb-2 font-mono text-[10px] tracking-widest uppercase">
+        <p className="text-content-subtle text-2xs mb-2 font-mono tracking-widest uppercase">
           {strings.language}
         </p>
         <div className="flex flex-wrap gap-1.5">
@@ -163,7 +163,7 @@ export function LanguageSwitcher({
 
       {open && (
         <div className="border-line bg-surface-raised absolute top-[calc(100%+6px)] right-0 z-70 w-60 rounded-lg border p-1.5 shadow-2xl">
-          <p className="text-content-subtle px-2.5 pt-1 pb-1 font-mono text-[10px] tracking-widest uppercase">
+          <p className="text-content-subtle text-2xs px-2.5 pt-1 pb-1 font-mono tracking-widest uppercase">
             {strings.language}
           </p>
           <ul role="listbox" className="flex flex-col">

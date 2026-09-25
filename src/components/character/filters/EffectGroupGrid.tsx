@@ -148,7 +148,7 @@ function CheckboxSelect({
         <span className={`font-semibold ${color}`}>{group.title}</span>
         <span className="flex items-center gap-1.5">
           {count > 0 && (
-            <span className={`rounded-full px-1.5 py-0.5 font-mono text-[10px] font-bold ${badge}`}>
+            <span className={`text-2xs rounded-full px-1.5 py-0.5 font-mono font-bold ${badge}`}>
               {count}
             </span>
           )}

@@ -477,7 +477,7 @@ function TierRow({
                     {(r.ee?.chips ?? []).map((c) => (
                       <span
                         key={c.ref}
-                        className={`rounded-full border px-1.5 py-px text-[10px] leading-4 ${
+                        className={`text-2xs rounded-full border px-1.5 py-px leading-4 ${
                           activeRefs.has(c.ref)
                             ? c.isDebuff
                               ? 'text-content-strong border-rose-500/60 bg-rose-500/10'

@@ -40,7 +40,7 @@ export function ScenariosPanel({
   return (
     <section className="border-line-subtle bg-surface-raised/60 space-y-3 rounded-xl border p-3.5">
       <div className="flex flex-wrap items-center gap-2.5">
-        <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
+        <span className="text-content-subtle text-2xs font-bold tracking-[0.14em] uppercase">
           Scénarios
         </span>
         <span
@@ -57,13 +57,13 @@ export function ScenariosPanel({
           type="button"
           onClick={() => setImportOpen((v) => !v)}
           title="coller le JSON ⧉ d'un testeur"
-          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+          className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent text-2xs h-6 cursor-pointer rounded border px-2 font-mono"
         >
           Importer
         </button>
         <span className="flex-1" />
         {flash && (
-          <span className="text-success border-success/40 bg-surface-sunken rounded-md border px-2.5 py-1 font-mono text-[10px]">
+          <span className="text-success border-success/40 bg-surface-sunken text-2xs rounded-md border px-2.5 py-1 font-mono">
             ✓ {flash}
           </span>
         )}
@@ -82,7 +82,7 @@ export function ScenariosPanel({
               type="button"
               onClick={importScenarios}
               disabled={!importTxt.trim()}
-              className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px] disabled:cursor-not-allowed disabled:opacity-35"
+              className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent text-2xs h-6 cursor-pointer rounded border px-2 font-mono disabled:cursor-not-allowed disabled:opacity-35"
             >
               Ajouter
             </button>
@@ -92,7 +92,7 @@ export function ScenariosPanel({
                 setImportOpen(false);
                 setImportTxt('');
               }}
-              className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+              className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger text-2xs h-6 cursor-pointer rounded border px-2 font-mono"
             >
               Annuler
             </button>
@@ -154,7 +154,7 @@ export function ScenariosPanel({
                       ) : isPending ? (
                         <span
                           title="chaîne de hits irrésolue (§ 12.4) — valeur gardée, le Δ attendra le moteur"
-                          className="text-warn cursor-help text-[10px]"
+                          className="text-warn text-2xs cursor-help"
                         >
                           § 12.4
                         </span>
@@ -169,7 +169,7 @@ export function ScenariosPanel({
                       <button
                         type="button"
                         onClick={() => loadSaved(s)}
-                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent text-2xs h-6 cursor-pointer rounded border px-2 font-mono"
                       >
                         Charger
                       </button>
@@ -177,7 +177,7 @@ export function ScenariosPanel({
                         type="button"
                         onClick={() => copyScenario(s)}
                         title="copier le JSON de fixture"
-                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-accent text-2xs h-6 cursor-pointer rounded border px-2 font-mono"
                       >
                         ⧉
                       </button>
@@ -185,7 +185,7 @@ export function ScenariosPanel({
                         type="button"
                         onClick={() => deleteScenario(s)}
                         title="supprimer"
-                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger h-6 cursor-pointer rounded border px-2 font-mono text-[10px]"
+                        className="border-line-subtle bg-surface-raised/70 text-content-muted hover:text-danger text-2xs h-6 cursor-pointer rounded border px-2 font-mono"
                       >
                         ✕
                       </button>

@@ -464,7 +464,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                       ] as const
                     ).map(([tier, p2, p4, cls]) => (
                       <div key={tier}>
-                        <span className="text-content-subtle mb-1 block text-[10px] font-bold tracking-wide">
+                        <span className="text-content-subtle text-2xs mb-1 block font-bold tracking-wide">
                           {tier}
                         </span>
                         <div className="space-y-1">
@@ -476,7 +476,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
                           ).map(([tag, v]) =>
                             v ? (
                               <div key={tag} className="flex gap-1.5">
-                                <span className="border-buff/30 bg-buff/10 text-buff h-fit shrink-0 rounded border px-1 text-[10px] font-bold">
+                                <span className="border-buff/30 bg-buff/10 text-buff text-2xs h-fit shrink-0 rounded border px-1 font-bold">
                                   {tag}
                                 </span>
                                 <SkillDescription desc={v} className={`${cls} inline`} />
@@ -620,7 +620,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
               <td className="text-content-strong px-3 py-2 font-mono font-semibold whitespace-nowrap">
                 +{s.to - 1} <span className="text-content-subtle">→</span> +{s.to}
                 {i === axWeapon.steps.length - 1 && (
-                  <span className="bg-singularity/15 text-singularity ml-1.5 rounded px-1 text-[10px] font-bold">
+                  <span className="bg-singularity/15 text-singularity text-2xs ml-1.5 rounded px-1 font-bold">
                     ★
                   </span>
                 )}

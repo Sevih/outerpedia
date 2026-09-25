@@ -137,7 +137,7 @@ function EntryRow({ entry, step, ctx }: { entry: RequirementEntry; step: number;
           <span className="text-content-strong text-xl leading-none font-bold tabular-nums">
             {parseText(spd, ctx)}
           </span>
-          <span className="text-content-muted text-[10px] font-semibold tracking-wide uppercase">
+          <span className="text-content-muted text-2xs font-semibold tracking-wide uppercase">
             SPD
           </span>
         </div>

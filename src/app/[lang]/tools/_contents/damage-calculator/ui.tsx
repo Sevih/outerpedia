@@ -20,7 +20,7 @@ export const vars = (template: string, values: Record<string, string | number>) 
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
+    <span className="text-content-subtle text-2xs font-bold tracking-[0.14em] uppercase">
       {children}
     </span>
   );
@@ -390,7 +390,7 @@ export function CharPicker({
                 >
                   <CharPortrait c={c} className="h-16 w-16" />
                 </span>
-                <span className="text-content-muted group-hover:text-content w-full text-center text-[10px] leading-tight wrap-break-word">
+                <span className="text-content-muted group-hover:text-content text-2xs w-full text-center leading-tight wrap-break-word">
                   {c.label}
                 </span>
               </button>
@@ -444,7 +444,7 @@ export function TranscendSlider({
         <button
           type="button"
           onClick={() => onIdx(Math.max(0, i - 1))}
-          className="border-line-subtle text-content-muted hover:bg-surface-raised/80 h-4 w-4 cursor-pointer rounded border text-[10px] leading-none"
+          className="border-line-subtle text-content-muted hover:bg-surface-raised/80 text-2xs h-4 w-4 cursor-pointer rounded border leading-none"
           aria-hidden
           tabIndex={-1}
         >
@@ -471,7 +471,7 @@ export function TranscendSlider({
         <button
           type="button"
           onClick={() => onIdx(Math.min(tiers.length - 1, i + 1))}
-          className="border-line-subtle text-content-muted hover:bg-surface-raised/80 h-4 w-4 cursor-pointer rounded border text-[10px] leading-none"
+          className="border-line-subtle text-content-muted hover:bg-surface-raised/80 text-2xs h-4 w-4 cursor-pointer rounded border leading-none"
           aria-hidden
           tabIndex={-1}
         >

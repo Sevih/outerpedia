@@ -269,12 +269,12 @@ export function ChangelogEditor({ initial }: { initial: ChangelogEntry[] }) {
                   brouillon
                 </label>
                 {r.draft && (
-                  <span className="text-content-subtle bg-surface-overlay rounded px-2 py-0.5 text-[10px] font-semibold uppercase">
+                  <span className="text-content-subtle bg-surface-overlay text-2xs rounded px-2 py-0.5 font-semibold uppercase">
                     caché
                   </span>
                 )}
                 {scheduled && (
-                  <span className="text-cat-amber-fg bg-cat-amber-fg/15 rounded px-2 py-0.5 text-[10px] font-semibold uppercase">
+                  <span className="text-cat-amber-fg bg-cat-amber-fg/15 text-2xs rounded px-2 py-0.5 font-semibold uppercase">
                     programmée
                   </span>
                 )}

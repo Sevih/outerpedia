@@ -74,7 +74,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         <Link
           href={'/admin' as Route}
           title="Admin"
-          className="text-content-subtle hover:text-content-strong mt-4 text-[10px] font-semibold tracking-widest uppercase [writing-mode:vertical-rl]"
+          className="text-content-subtle hover:text-content-strong text-2xs mt-4 font-semibold tracking-widest uppercase [writing-mode:vertical-rl]"
         >
           Admin
         </Link>
@@ -95,7 +95,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         <Link href={'/admin' as Route} className="text-content-strong font-semibold">
           Admin
         </Link>
-        <span className="bg-warn/15 text-warn rounded px-1.5 py-0.5 text-[10px] font-medium uppercase">
+        <span className="bg-warn/15 text-warn text-2xs rounded px-1.5 py-0.5 font-medium uppercase">
           dev only
         </span>
         <button
@@ -118,7 +118,7 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
         {sections.map((section) => (
           <div key={section.title} className="mt-4 mb-1 first:mt-1">
             {/* En-tête de SECTION : filet + fond léger → nettement distinct d'un item cliquable. */}
-            <p className="text-content-subtle bg-surface-overlay/40 border-line-subtle mb-1 border-y px-4 py-1 text-[10px] font-bold tracking-widest uppercase">
+            <p className="text-content-subtle bg-surface-overlay/40 border-line-subtle text-2xs mb-1 border-y px-4 py-1 font-bold tracking-widest uppercase">
               {section.title}
             </p>
             <ul>
@@ -138,11 +138,11 @@ export function AdminSidebar({ sections }: { sections: NavSection[] }) {
                       } ${item.soon ? 'opacity-40' : ''}`}
                     >
                       <span className="min-w-0 flex-1 truncate">{item.label}</span>
-                      {item.soon && <span className="text-content-subtle text-[10px]">soon</span>}
+                      {item.soon && <span className="text-content-subtle text-2xs">soon</span>}
                       {item.badge && item.badge.count > 0 && (
                         <span
                           title={item.badge.title}
-                          className={`rounded px-1.5 text-[10px] font-medium tabular-nums ${TONE[item.badge.tone]}`}
+                          className={`text-2xs rounded px-1.5 font-medium tabular-nums ${TONE[item.badge.tone]}`}
                         >
                           {item.badge.count}
                         </span>

@@ -97,7 +97,7 @@ export function ComicsGallery({
             >
               {l.label}
               <span
-                className={`font-mono text-[10px] tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
+                className={`text-2xs font-mono tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
               >
                 {l.count}
               </span>

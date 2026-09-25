@@ -188,7 +188,7 @@ export function EditorialPublicTool({
                         ?
                       </span>
                     )}
-                    <span className="text-content-strong w-full text-center text-[10px] leading-tight wrap-break-word">
+                    <span className="text-content-strong text-2xs w-full text-center leading-tight wrap-break-word">
                       {c.name}
                     </span>
                   </button>

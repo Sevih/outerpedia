@@ -7,6 +7,28 @@
 
 ## 2026-09-25
 
+- **Token de taille `--text-2xs` (10px) : les 224 `text-[10px]` passent en
+  `text-2xs`** (lot A5 de la Dette). Le système de tokens n'avait rien sous
+  `text-xs`, d'où ~350 tailles arbitraires dans `src/` : 224 `text-[10px]`
+  (dont un `sm:`) contre 126 `text-[11px]` (dont un `md:`). Fait : un
+  `--text-2xs: 0.625rem` dans le bloc `@theme` de `globals.css` — la
+  mécanique Tailwind v4 des `--text-*`, celle qui porte `text-xs` dans le
+  thème par défaut — puis un remplacement par script (`sed` sur les 80
+  fichiers concernés, préfixes de variante conservés). Le token est
+  volontairement SANS `--text-2xs--line-height` : compilé avec le Tailwind du
+  dépôt (4.3.3), `text-2xs` n'émet alors que `font-size`, exactement comme
+  `text-[10px]`, alors qu'un interligne à la `text-xs` aurait posé 16px
+  partout. L'ordre de cascade a été vérifié : `text-2xs` tombe au même rang
+  que `text-[10px]` face à `text-xs`/`text-sm` et `text-[11px]`, et aucun
+  élément ne le cumule avec une taille arbitraire qui trierait entre les deux
+  (`text-[10.5px]` ne cohabite jamais avec lui). Vérifié : zéro changement
+  visuel — une fiche perso (`/characters/valentine`), `/wallpapers` et
+  `/damage-calculator`, capturés par Firefox headless en 1280 et 390 de
+  large avant et après, donnent 0 pixel différent (`compare -metric AE`,
+  bruit de référence mesuré à 0 sur deux captures « avant ») ; le HTML servi
+  est identique à la classe près. Laissé : les 126 `text-[11px]` (valeur
+  minoritaire, hors périmètre) — et les `text-[9px]` (51), `text-[9.5px]`,
+  `text-[13px]`, `text-[10.5px]`… non comptés dans la demande.
 - **`esc()` et `rfc822()` mutualisés dans `src/lib/rss.ts`** (dette du rapport,
   lot A2, commit `6f07fe04` — entrée ajoutée après coup, l'agent avait commité
   sans). Les deux flux RSS (`/feed`, `/feed/changelog`) portaient chacun leur

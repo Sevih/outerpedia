@@ -59,7 +59,7 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
   const SourceCell = ({ s }: { s: TimegateSource }) => (
     <div className="flex flex-wrap items-center gap-1.5">
       <span
-        className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ring-1 ${BADGE[s.type]}`}
+        className={`text-2xs inline-flex items-center rounded px-1.5 py-0.5 font-medium ring-1 ${BADGE[s.type]}`}
       >
         {L(LABELS.badges[s.type])}
       </span>

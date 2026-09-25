@@ -210,9 +210,7 @@ export function InlineTextField({
                   className="hover:bg-surface-overlay text-content flex w-full items-center justify-between gap-2 rounded px-2 py-1 text-left text-xs"
                 >
                   <span className="truncate">{o.label}</span>
-                  <span className="text-content-subtle shrink-0 font-mono text-[10px]">
-                    {o.value}
-                  </span>
+                  <span className="text-content-subtle text-2xs shrink-0 font-mono">{o.value}</span>
                 </button>
               ))
             )}

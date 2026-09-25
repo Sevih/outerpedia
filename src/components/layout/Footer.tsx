@@ -130,7 +130,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
         </ul>
       </details>
       <div className="hidden md:block">
-        <p className="text-content-subtle mb-3 font-mono text-[10px] tracking-widest uppercase">
+        <p className="text-content-subtle text-2xs mb-3 font-mono tracking-widest uppercase">
           {title}
         </p>
         <ul className="flex flex-col gap-1">
@@ -150,7 +150,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
 function FooterLanguages({ lang, label }: { lang: Lang; label: string }) {
   return (
     <div>
-      <p className="text-content-subtle mb-2 font-mono text-[10px] tracking-widest uppercase">
+      <p className="text-content-subtle text-2xs mb-2 font-mono tracking-widest uppercase">
         {label}
       </p>
       <div className="flex flex-wrap gap-1.5">
@@ -235,11 +235,11 @@ export async function Footer() {
               />
               <div>
                 <p className="text-content-strong font-semibold tracking-wide">Outerpedia</p>
-                <p className="text-content-subtle font-mono text-[10px] tracking-widest uppercase">
+                <p className="text-content-subtle text-2xs font-mono tracking-widest uppercase">
                   v{appVersion}
                 </p>
                 <p
-                  className="text-content-subtle font-mono text-[10px] tracking-widest uppercase"
+                  className="text-content-subtle text-2xs font-mono tracking-widest uppercase"
                   title={`Game version ${gameVersion}`}
                 >
                   GV {gameVersion}
@@ -292,7 +292,7 @@ export async function Footer() {
 
         {/* Liens officiels Outerplane — bandeau distinct */}
         <div className="border-line-subtle mt-10 border-t pt-6">
-          <p className="text-content-subtle mb-3 font-mono text-[10px] tracking-widest uppercase">
+          <p className="text-content-subtle text-2xs mb-3 font-mono tracking-widest uppercase">
             {t('footer.col.official')} · Outerplane
           </p>
           <div className="flex flex-wrap gap-2">

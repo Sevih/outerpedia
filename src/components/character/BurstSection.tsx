@@ -41,7 +41,7 @@ export function BurstSection({ bursts }: { bursts: BurstCard[] }) {
 
           {/* Texte d'effet — zone basse */}
           <div className="absolute top-[48%] right-[10%] bottom-[5%] left-[5%] flex items-center overflow-y-auto px-1">
-            <div className="w-full text-center text-[10px] leading-tight text-zinc-200">
+            <div className="text-2xs w-full text-center leading-tight text-zinc-200">
               {burst.effect}
             </div>
           </div>

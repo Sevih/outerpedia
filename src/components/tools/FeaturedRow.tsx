@@ -23,11 +23,11 @@ export function FeaturedRow({ tools, strings }: { tools: ToolCardVM[]; strings: 
   return (
     <section aria-label={strings.featured} className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
-        <span className="text-content-muted font-mono text-[10px] font-semibold tracking-[0.18em] uppercase">
+        <span className="text-content-muted text-2xs font-mono font-semibold tracking-[0.18em] uppercase">
           {strings.featured}
         </span>
         <span className="bg-line-subtle h-px flex-1" aria-hidden />
-        <span className="text-content-subtle font-mono text-[10px] tracking-[0.12em] uppercase">
+        <span className="text-content-subtle text-2xs font-mono tracking-[0.12em] uppercase">
           {flagships.length} / {tools.length}
         </span>
       </div>
@@ -47,7 +47,7 @@ export function FeaturedRow({ tools, strings }: { tools: ToolCardVM[]; strings: 
                 <div className="flex items-center gap-2">
                   <span className={`size-1.5 rounded-full ${accent.dot}`} aria-hidden />
                   <span
-                    className={`font-mono text-[10px] font-semibold tracking-[0.16em] uppercase ${accent.text}`}
+                    className={`text-2xs font-mono font-semibold tracking-[0.16em] uppercase ${accent.text}`}
                   >
                     {tool.categoryLabel}
                   </span>

@@ -177,7 +177,7 @@ function GearGrid({
               />
             )}
           </span>
-          <span className="text-content-muted group-hover:text-content w-full text-center text-[10px] leading-tight wrap-break-word">
+          <span className="text-content-muted group-hover:text-content text-2xs w-full text-center leading-tight wrap-break-word">
             {it.label}
           </span>
         </button>
@@ -285,7 +285,7 @@ export function SetsSlot({
                   <span className="text-content min-w-0 flex-1 text-xs font-semibold wrap-break-word">
                     {view.label}
                   </span>
-                  <span className="border-line-subtle text-accent rounded border px-1.5 py-0.5 font-mono text-[10px] font-bold">
+                  <span className="border-line-subtle text-accent text-2xs rounded border px-1.5 py-0.5 font-mono font-bold">
                     {p === '2P' ? labels.equipment.p2 : labels.equipment.p4}
                   </span>
                   <Stepper
@@ -433,7 +433,7 @@ function StoryTargetBrowser({
                   <span className="font-semibold">
                     {labels.target.seasonTpl.replace('{n}', String(n))}
                   </span>
-                  <span className="text-content-subtle block text-[10px]">
+                  <span className="text-content-subtle text-2xs block">
                     {eps.size} × {labels.target.episode}
                   </span>
                 </span>
@@ -450,7 +450,7 @@ function StoryTargetBrowser({
               <button key={n} type="button" className={CARD} onClick={() => onEpisode(n)}>
                 {poster && <MonsterPortrait tg={poster} className="h-12 w-12" />}
                 <span className="min-w-0 flex-col">
-                  <span className="text-content-subtle block text-[10px] font-bold tracking-[0.14em] uppercase">
+                  <span className="text-content-subtle text-2xs block font-bold tracking-[0.14em] uppercase">
                     {labels.target.episode} {n}
                   </span>
                   <span className="truncate font-semibold">{list[0].story!.episodeName}</span>
@@ -470,7 +470,7 @@ function StoryTargetBrowser({
               >
                 {st.poster && <MonsterPortrait tg={st.poster} className="h-10 w-10" />}
                 <span className="min-w-0 flex-1 truncate font-semibold">{st.label}</span>
-                <span className="text-content-subtle text-[10px]" aria-hidden>
+                <span className="text-content-subtle text-2xs" aria-hidden>
                   {openStage === st.id ? '▾' : '▸'}
                 </span>
               </button>
@@ -507,7 +507,7 @@ function StoryTargetBrowser({
                                       </span>
                                     )}
                                   </span>
-                                  <span className="text-content-subtle block text-[10px]">
+                                  <span className="text-content-subtle text-2xs block">
                                     {labels.target.lv}
                                     {occ!.level}
                                   </span>
@@ -803,7 +803,7 @@ export function TargetPicker({
               >
                 <span className="min-w-0 flex-col">
                   <span className="font-semibold">{m.label}</span>
-                  <span className="text-content-subtle block text-[10px]">
+                  <span className="text-content-subtle text-2xs block">
                     {labels.target.monstersTpl.replace('{n}', String(countOf.get(m.value) ?? 0))}
                   </span>
                 </span>
@@ -821,7 +821,7 @@ export function TargetPicker({
               >
                 <span className="min-w-0 flex-col">
                   <span className="font-semibold">{o.value}</span>
-                  <span className="text-content-subtle block text-[10px]">
+                  <span className="text-content-subtle text-2xs block">
                     {labels.target.monstersTpl.replace('{n}', String(o.count))}
                   </span>
                 </span>
@@ -848,7 +848,7 @@ export function TargetPicker({
                       choisis (recherche) et le stage (Sevih 17/08/2026) — une
                       LIGNE repliée n'affiche pas le stage de sa carte témoin,
                       le sélecteur du panneau le choisit. */}
-                  <span className="text-content-subtle block truncate text-[10px]">
+                  <span className="text-content-subtle text-2xs block truncate">
                     {[
                       mode ? null : o.mode,
                       ...(o.path ?? []).slice(path.length),

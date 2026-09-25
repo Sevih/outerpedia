@@ -37,7 +37,7 @@ export function OtherRankingsRail({
             {heading}
           </h2>
         </div>
-        <span className="text-content-subtle font-mono text-[10px] tracking-[0.12em] uppercase">
+        <span className="text-content-subtle text-2xs font-mono tracking-[0.12em] uppercase">
           {countLabel}
         </span>
       </div>

@@ -55,7 +55,7 @@ export function LootPanel({
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-        <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+        <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
           {labels.title}
         </h3>
         {icons}

@@ -52,7 +52,7 @@ const WELL = 'border-line-subtle bg-surface-sunken/70 rounded-lg border';
 function SectionHead({ title, note }: { title: string; note: string }) {
   return (
     <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
-      <span className="text-content-muted font-mono text-[10px] font-bold tracking-[0.14em] uppercase">
+      <span className="text-content-muted text-2xs font-mono font-bold tracking-[0.14em] uppercase">
         {title}
       </span>
       <span className="text-content-subtle text-[11px]">{note}</span>
@@ -81,11 +81,11 @@ function Fold({
         onClick={onToggle}
         className={`hover:bg-surface-raised/60 flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left ${open ? 'border-line-subtle border-b' : ''}`}
       >
-        <span className={`text-[10px] ${open ? 'text-accent' : 'text-content-subtle'}`}>
+        <span className={`text-2xs ${open ? 'text-accent' : 'text-content-subtle'}`}>
           {open ? '▾' : '▸'}
         </span>
         <span className="text-content text-xs font-bold">{summary}</span>
-        {sub && <span className="text-content-subtle font-mono text-[10px]">{sub}</span>}
+        {sub && <span className="text-content-subtle text-2xs font-mono">{sub}</span>}
       </button>
       {open && children}
     </div>
@@ -97,7 +97,7 @@ function TraceList({ steps }: { steps: TraceStep[] }) {
   return (
     <ol className="space-y-1 px-3 py-2">
       {steps.map((s, i) => (
-        <li key={i} className="font-mono text-[10px] leading-relaxed">
+        <li key={i} className="text-2xs font-mono leading-relaxed">
           <span className="text-accent">{s.ref}</span>{' '}
           <span className="text-content font-sans text-[11px]">{s.label}</span>
           {s.unresolved && (
@@ -232,7 +232,7 @@ export function DebugHarness({
     <section className="border-line-subtle bg-surface-raised/60 space-y-3.5 rounded-xl border p-3.5">
       {/* ── En-tête : titre + badge DEV ONLY ── */}
       <div className="flex flex-wrap items-center gap-2.5">
-        <span className="text-content-subtle text-[10px] font-bold tracking-[0.14em] uppercase">
+        <span className="text-content-subtle text-2xs font-bold tracking-[0.14em] uppercase">
           Debug
         </span>
         <span className="text-warn border-warn/35 bg-warn/10 rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wide">
@@ -288,12 +288,12 @@ export function DebugHarness({
         {(ignored.length > 0 || (result && result.unresolvedFx.length > 0)) && (
           <div className={`${WELL} space-y-1 px-3 py-2`}>
             {ignored.map((line) => (
-              <p key={line} className="text-warn font-mono text-[10px]">
+              <p key={line} className="text-warn text-2xs font-mono">
                 ⚠ ignoré : {line}
               </p>
             ))}
             {result && result.unresolvedFx.length > 0 && (
-              <p className="text-warn font-mono text-[10px]">
+              <p className="text-warn text-2xs font-mono">
                 ⚠ chips sans magnitude standard (contribution 0) : {result.unresolvedFx.join(', ')}
               </p>
             )}
@@ -306,7 +306,7 @@ export function DebugHarness({
             <p className="text-content-subtle mb-1 font-mono text-[9px] tracking-wide uppercase">
               fiche → combat (§ 16.1)
             </p>
-            <p className="text-content-muted font-mono text-[10px] leading-relaxed">
+            <p className="text-content-muted text-2xs font-mono leading-relaxed">
               {Object.entries(result.combatStats)
                 .map(([slug, combat]) => {
                   const sheet = inputs.attacker?.sheet[slug] ?? 0;
@@ -316,7 +316,7 @@ export function DebugHarness({
             </p>
             {result.maxHpBuff && (
               <p
-                className={`mt-1 font-mono text-[10px] ${
+                className={`text-2xs mt-1 font-mono ${
                   result.maxHpBuff.sum > 0 ? 'text-content-muted' : 'text-warn'
                 }`}
               >
@@ -345,7 +345,7 @@ export function DebugHarness({
             {result.bossPassives.entries.map((e, i) => (
               <p
                 key={`${e.buffId}:${i}`}
-                className={`font-mono text-[10px] leading-relaxed ${
+                className={`text-2xs font-mono leading-relaxed ${
                   e.active ? 'text-content-muted' : 'text-content-subtle'
                 }`}
               >
@@ -359,13 +359,13 @@ export function DebugHarness({
               </p>
             ))}
             {result.bossPassives.unresolved.map((u, i) => (
-              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+              <p key={`u:${u.buffId}:${i}`} className="text-warn text-2xs font-mono">
                 ⚠ {u.buffId} : {u.reason} — contribution 0
               </p>
             ))}
             {result.bossPassives.entries.length === 0 &&
               result.bossPassives.unresolved.length === 0 && (
-                <p className="text-content-subtle font-mono text-[10px]">aucun passif statique</p>
+                <p className="text-content-subtle text-2xs font-mono">aucun passif statique</p>
               )}
           </div>
         )}
@@ -379,7 +379,7 @@ export function DebugHarness({
             {result.gearPassives.entries.map((e, i) => (
               <p
                 key={`${e.buffId}:${i}`}
-                className={`font-mono text-[10px] leading-relaxed ${
+                className={`text-2xs font-mono leading-relaxed ${
                   e.active ? 'text-content-muted' : 'text-content-subtle'
                 }`}
               >
@@ -397,20 +397,20 @@ export function DebugHarness({
               </p>
             ))}
             {result.gearPassives.dynamic.map((d, i) => (
-              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle font-mono text-[10px]">
+              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle text-2xs font-mono">
                 ⏱ [{d.source}] {d.buffId} · {d.buff.type} · proc {d.createType} — non simulé
                 (représenter l&apos;état par une chip)
               </p>
             ))}
             {result.gearPassives.unresolved.map((u, i) => (
-              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+              <p key={`u:${u.buffId}:${i}`} className="text-warn text-2xs font-mono">
                 ⚠ [{u.source}] {u.buffId} : {u.reason} — contribution 0
               </p>
             ))}
             {result.gearPassives.entries.length === 0 &&
               result.gearPassives.dynamic.length === 0 &&
               result.gearPassives.unresolved.length === 0 && (
-                <p className="text-content-subtle font-mono text-[10px]">aucun passif statique</p>
+                <p className="text-content-subtle text-2xs font-mono">aucun passif statique</p>
               )}
           </div>
         )}
@@ -424,7 +424,7 @@ export function DebugHarness({
             {result.kitPassives.entries.map((e, i) => (
               <p
                 key={`${e.buffId}:${i}`}
-                className={`font-mono text-[10px] leading-relaxed ${
+                className={`text-2xs font-mono leading-relaxed ${
                   e.active ? 'text-content-muted' : 'text-content-subtle'
                 }`}
               >
@@ -442,20 +442,20 @@ export function DebugHarness({
               </p>
             ))}
             {result.kitPassives.dynamic.map((d, i) => (
-              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle font-mono text-[10px]">
+              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle text-2xs font-mono">
                 ⏱ [{d.sourceId}] {d.buffId} · {d.buff.type} · proc {d.createType} — non simulé
                 (représenter l&apos;état par une chip)
               </p>
             ))}
             {result.kitPassives.unresolved.map((u, i) => (
-              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+              <p key={`u:${u.buffId}:${i}`} className="text-warn text-2xs font-mono">
                 ⚠ [{u.sourceId}] {u.buffId} : {u.reason} — contribution 0
               </p>
             ))}
             {result.kitPassives.entries.length === 0 &&
               result.kitPassives.dynamic.length === 0 &&
               result.kitPassives.unresolved.length === 0 && (
-                <p className="text-content-subtle font-mono text-[10px]">aucun passif statique</p>
+                <p className="text-content-subtle text-2xs font-mono">aucun passif statique</p>
               )}
           </div>
         )}
@@ -469,7 +469,7 @@ export function DebugHarness({
             {result.quirkPassives.entries.map((e, i) => (
               <p
                 key={`${e.buffId}:${i}`}
-                className={`font-mono text-[10px] leading-relaxed ${
+                className={`text-2xs font-mono leading-relaxed ${
                   e.active ? 'text-content-muted' : 'text-content-subtle'
                 }`}
               >
@@ -483,12 +483,12 @@ export function DebugHarness({
               </p>
             ))}
             {result.quirkPassives.dynamic.map((d, i) => (
-              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle font-mono text-[10px]">
+              <p key={`d:${d.buffId}:${i}`} className="text-content-subtle text-2xs font-mono">
                 ⏱ [nœud {d.sourceId}] {d.buffId} · {d.buff.type} · proc {d.createType} — non simulé
               </p>
             ))}
             {result.quirkPassives.unresolved.map((u, i) => (
-              <p key={`u:${u.buffId}:${i}`} className="text-warn font-mono text-[10px]">
+              <p key={`u:${u.buffId}:${i}`} className="text-warn text-2xs font-mono">
                 ⚠ [nœud {u.sourceId}] {u.buffId} : {u.reason} — contribution 0
               </p>
             ))}
@@ -512,7 +512,7 @@ export function DebugHarness({
               >
                 <div className="divide-line-subtle divide-y">
                   {s.hitsUnresolved && (
-                    <p className="text-warn px-3 py-2 font-mono text-[10px]">
+                    <p className="text-warn text-2xs px-3 py-2 font-mono">
                       ⚠ chaînes de hits irrésolues (§ 12.4) — dégâts non fiables
                     </p>
                   )}
@@ -525,17 +525,17 @@ export function DebugHarness({
                     <div key={st.chain}>
                       {s.report.states.length > 1 && (
                         <div className="border-line-subtle/60 flex items-baseline gap-2 border-b px-3 py-1.5">
-                          <span className="text-content font-mono text-[10px] font-bold">
+                          <span className="text-content text-2xs font-mono font-bold">
                             état : {st.chain}
                           </span>
-                          <span className="text-content-subtle font-mono text-[10px]">
+                          <span className="text-content-subtle text-2xs font-mono">
                             Σfacteur {st.totalFactor}
                             {st.clips && st.clips.length > 0 && (
                               <> ({st.clips.map((c) => c.totalFactor).join(' + ')} par clip)</>
                             )}
                           </span>
                           <span className="flex-1" />
-                          <span className="text-content-subtle font-mono text-[10px]">
+                          <span className="text-content-subtle text-2xs font-mono">
                             E[dégâts] = {st.expectedDamage}
                           </span>
                         </div>
@@ -550,11 +550,11 @@ export function DebugHarness({
                           <div key={b.branch} className="flex min-w-0 flex-col">
                             <div className="border-line-subtle/60 flex items-baseline gap-2 border-b px-3 py-2">
                               <span
-                                className={`font-mono text-[10px] font-bold tracking-wide ${BRANCH_STYLE[b.branch].cls}`}
+                                className={`text-2xs font-mono font-bold tracking-wide ${BRANCH_STYLE[b.branch].cls}`}
                               >
                                 {BRANCH_STYLE[b.branch].label}
                               </span>
-                              <span className="text-content-subtle font-mono text-[10px]">
+                              <span className="text-content-subtle text-2xs font-mono">
                                 P = {b.probability}
                               </span>
                               <span className="flex-1" />
@@ -577,7 +577,7 @@ export function DebugHarness({
                   {s.report.wgTrace && (
                     <div>
                       <div className="border-line-subtle/60 border-b px-3 py-1.5">
-                        <span className="text-content-subtle font-mono text-[10px] font-bold tracking-wide">
+                        <span className="text-content-subtle text-2xs font-mono font-bold tracking-wide">
                           JAUGE DE FAIBLESSE (§ 11)
                         </span>
                       </div>
@@ -593,7 +593,7 @@ export function DebugHarness({
       {/* ── Section 3 : fixtures COMMITTÉES (attendu / calculé / en jeu) ── */}
       <div className="space-y-2">
         <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
-          <span className="text-content-muted font-mono text-[10px] font-bold tracking-[0.14em] uppercase">
+          <span className="text-content-muted text-2xs font-mono font-bold tracking-[0.14em] uppercase">
             Fixtures committées
           </span>
           <span className="text-content-subtle text-[11px]">

@@ -96,7 +96,7 @@ export default async function ExtractorCharacterDetail({
       <SkillDescription
         desc={b.desc}
         vars={b.vars}
-        className="text-content w-full text-center text-[10px] leading-tight whitespace-pre-line"
+        className="text-content text-2xs w-full text-center leading-tight whitespace-pre-line"
       />
     ) : null,
   }));

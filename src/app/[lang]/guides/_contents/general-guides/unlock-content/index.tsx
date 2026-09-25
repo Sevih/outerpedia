@@ -168,7 +168,7 @@ function CategoryTable({
                         {i > 0 && <span className="text-content-muted mr-1 text-xs">{or}</span>}
                         {r.mode && (
                           <span
-                            className={`mr-1.5 rounded border px-1 py-px align-middle text-[10px] ${
+                            className={`text-2xs mr-1.5 rounded border px-1 py-px align-middle ${
                               r.mode === 'story'
                                 ? 'border-yellow-500/40 bg-yellow-500/10 text-yellow-300'
                                 : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'

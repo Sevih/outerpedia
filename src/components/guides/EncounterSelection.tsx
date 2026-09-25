@@ -72,7 +72,7 @@ export function EncounterTabs({ label, tabs }: { label: string; tabs: string[] }
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+      <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
         {label}
       </h3>
       <div
@@ -164,7 +164,7 @@ export function EncounterSlider({
   return (
     <div className="border-line-subtle bg-surface-raised flex flex-col gap-1 rounded-xl border px-3 py-3 lg:max-w-xl lg:flex-1">
       <div className="flex flex-wrap items-baseline gap-2">
-        <h3 className="text-content font-mono text-[10px] font-semibold tracking-[0.14em] uppercase">
+        <h3 className="text-content text-2xs font-mono font-semibold tracking-[0.14em] uppercase">
           {label}
         </h3>
         <span className="text-content-strong text-sm font-semibold">{titles[selected]}</span>
@@ -197,7 +197,7 @@ export function EncounterSlider({
         labels={ticks.map((tick, i) => (
           <span
             key={i}
-            className={`absolute -translate-x-1/2 font-mono text-[10px] font-bold transition-colors ${
+            className={`text-2xs absolute -translate-x-1/2 font-mono font-bold transition-colors ${
               i === selected ? 'text-accent' : 'text-content-muted'
             }`}
             style={{ left: `${(last > 0 ? i / last : 0) * 100}%` }}

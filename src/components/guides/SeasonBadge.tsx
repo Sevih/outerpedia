@@ -42,7 +42,7 @@ export async function SeasonBadge({ bossId, lang }: { bossId?: string; lang: Lan
 
   return (
     <span
-      className={`absolute top-1.5 right-2.5 rounded-full px-2 py-0.5 text-[10px] font-semibold drop-shadow-lg ${
+      className={`text-2xs absolute top-1.5 right-2.5 rounded-full px-2 py-0.5 font-semibold drop-shadow-lg ${
         state === 'live' ? 'bg-accent text-accent-fg' : 'bg-surface-overlay/80 text-content-muted'
       }`}
     >

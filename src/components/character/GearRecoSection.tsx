@@ -121,7 +121,7 @@ export function SlotCard({
           : undefined
       }
     >
-      <h4 className="mb-1 border-b border-white/6 pb-2 font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase">
+      <h4 className="text-2xs mb-1 border-b border-white/6 pb-2 font-mono font-semibold tracking-[0.18em] text-zinc-300 uppercase">
         {label}
       </h4>
       <div className="flex flex-col">{children}</div>
@@ -257,9 +257,7 @@ export function ItemRow({
       ))}
       {item.source && (item.source.bosses.length > 0 || item.source.label) && (
         <div className="flex flex-col gap-1 border-t border-white/10 pt-1.5">
-          <span className="text-[10px] tracking-wider text-zinc-400 uppercase">
-            {labels.source}
-          </span>
+          <span className="text-2xs tracking-wider text-zinc-400 uppercase">{labels.source}</span>
           {item.source.bosses.map((b) => (
             <span key={b.id} className="flex items-center gap-1.5 text-xs text-zinc-200">
               <img
@@ -622,7 +620,7 @@ export function SubstatPrioBar({
 }
 
 /** Étiquette de rangée / de bloc : la signature mono 10 px des cartes. */
-const ROW_LABEL = 'font-mono text-[10px] font-semibold tracking-[0.18em] text-zinc-300 uppercase';
+const ROW_LABEL = 'font-mono text-2xs font-semibold tracking-[0.18em] text-zinc-300 uppercase';
 
 /** Items d'une rangée : colonnes FIXES (auto-fill ≥ 13 rem) plutôt qu'un flux
  *  wrap — les rangées n'ont ni le même nombre d'items ni des noms de même

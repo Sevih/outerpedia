@@ -148,7 +148,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                 {average}
               </div>
               <StarRating rating={average} />
-              <span className="font-mono text-[10px] tracking-wider text-zinc-200 uppercase">
+              <span className="text-2xs font-mono tracking-wider text-zinc-200 uppercase">
                 {labels.count}
               </span>
             </div>

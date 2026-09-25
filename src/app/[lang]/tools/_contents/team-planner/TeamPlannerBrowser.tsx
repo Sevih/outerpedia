@@ -703,7 +703,7 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
                   />
                   {c.chainType && (
                     <span
-                      className={`absolute right-0 bottom-0 left-0 z-20 rounded-b px-0.5 py-0.5 text-center text-[8px] leading-tight font-semibold sm:text-[10px] ${
+                      className={`sm:text-2xs absolute right-0 bottom-0 left-0 z-20 rounded-b px-0.5 py-0.5 text-center text-[8px] leading-tight font-semibold ${
                         isValid
                           ? (CHAIN_PILL[c.chainType] ?? 'bg-surface-overlay text-content')
                           : 'bg-surface-overlay/80 text-content-subtle'

@@ -957,7 +957,7 @@ export function DamageCalculatorBrowser({
                     aria-label={`${L.affinity} ${affinityLvl}`}
                   />
                   <span className="text-content font-mono text-xs tabular-nums">{affinityLvl}</span>
-                  <span className="text-content-subtle font-mono text-[10px] tabular-nums">
+                  <span className="text-content-subtle text-2xs font-mono tabular-nums">
                     {affinityTier}/5
                   </span>
                 </div>
@@ -969,7 +969,7 @@ export function DamageCalculatorBrowser({
             {attacker && (
               <Card
                 title={L.stats.title}
-                right={<span className="text-content-subtle text-[10px]">{L.stats.sheetNote}</span>}
+                right={<span className="text-content-subtle text-2xs">{L.stats.sheetNote}</span>}
               >
                 <div className="grid grid-cols-2 gap-2">
                   {sheetFields.map((f) => (
@@ -1004,7 +1004,7 @@ export function DamageCalculatorBrowser({
                       className={`${wellClass} flex flex-col items-center gap-1.5 px-1 py-2`}
                       title={row.name}
                     >
-                      <span className="text-content-subtle font-mono text-[10px] font-bold">
+                      <span className="text-content-subtle text-2xs font-mono font-bold">
                         {row.slot}
                       </span>
                       {/* Icône décorative (le nom est le title du puits et
@@ -1719,7 +1719,7 @@ export function DamageCalculatorBrowser({
                       <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                         {L.context.mechanics}
                       </span>
-                      <p className="text-content-subtle text-[10px]">{L.context.mechanicsHint}</p>
+                      <p className="text-content-subtle text-2xs">{L.context.mechanicsHint}</p>
                       {statefulPassives.map((e) => {
                         const m = mechLabel(e);
                         const cond = mechCond(e);
@@ -1745,7 +1745,7 @@ export function DamageCalculatorBrowser({
                               </span>
                             )}
                             {cond && (
-                              <span className="text-content-subtle flex flex-wrap items-center gap-1 text-[10px]">
+                              <span className="text-content-subtle text-2xs flex flex-wrap items-center gap-1">
                                 — {cond.pre}
                                 {cond.ref && <EffectRefTag r={cond.ref} />}
                                 {cond.post}
@@ -1768,7 +1768,7 @@ export function DamageCalculatorBrowser({
                       <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                         {L.context.stackBuffs}
                       </span>
-                      <p className="text-content-subtle text-[10px]">{L.context.stackBuffsHint}</p>
+                      <p className="text-content-subtle text-2xs">{L.context.stackBuffsHint}</p>
                       {stackableDynamics.map((d) => {
                         const n = stackDecls[d.buffId] ?? 0;
                         const max = d.maxStacks ?? 1;
@@ -1789,7 +1789,7 @@ export function DamageCalculatorBrowser({
                                   {m.slot}
                                 </span>
                               )}
-                              <span className="text-content-subtle flex items-center gap-1 text-[10px]">
+                              <span className="text-content-subtle text-2xs flex items-center gap-1">
                                 —{d.targetClass && (L.context.classNames[d.targetClass] ?? '')}
                                 {eff.ref && <EffectRefTag r={eff.ref} />}
                                 {eff.what}
@@ -1861,7 +1861,7 @@ export function DamageCalculatorBrowser({
                       <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
                         {L.context.counters}
                       </span>
-                      <p className="text-content-subtle text-[10px]">{L.context.countersHint}</p>
+                      <p className="text-content-subtle text-2xs">{L.context.countersHint}</p>
                       {counterInputs.map((c) => (
                         <label
                           key={c.type}
@@ -2004,7 +2004,7 @@ export function DamageCalculatorBrowser({
                                   <span className="font-semibold">{p.name}</span>
                                   <span>{p.label}</span>
                                   {p.cond && (
-                                    <span className="text-[10px] opacity-75">· {p.cond}</span>
+                                    <span className="text-2xs opacity-75">· {p.cond}</span>
                                   )}
                                 </span>
                               ))}
@@ -2030,10 +2030,10 @@ export function DamageCalculatorBrowser({
                     effectives que le moteur consomme (spawn ou saisie). */}
                   <div className={`${wellClass} space-y-1.5 p-2.5`}>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-accent font-mono text-[10px] font-bold tracking-wide uppercase">
+                      <span className="text-accent text-2xs font-mono font-bold tracking-wide uppercase">
                         {L.stats.final}
                       </span>
-                      <span className="text-content-subtle text-[10px]">{L.stats.finalNote}</span>
+                      <span className="text-content-subtle text-2xs">{L.stats.finalNote}</span>
                     </div>
                     <div className="grid gap-x-4 gap-y-1.5 sm:grid-cols-2">
                       {(

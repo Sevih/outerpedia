@@ -29,7 +29,7 @@ function useCssVar(varName: string): string {
 function TokenTag({ v }: { v: string }) {
   const resolved = useCssVar(v);
   return (
-    <span className="border-line-subtle text-content-subtle inline-flex items-center gap-1.5 rounded border px-1.5 py-0.5 font-mono text-[10px]">
+    <span className="border-line-subtle text-content-subtle text-2xs inline-flex items-center gap-1.5 rounded border px-1.5 py-0.5 font-mono">
       <span
         className="border-line inline-block h-3 w-3 rounded-sm border"
         style={{ background: `var(${v})` }}
@@ -244,7 +244,7 @@ export default function TokensGallery() {
               <span className="text-monad-key inline-flex items-center gap-1">
                 🔑 Donne une clé
               </span>
-              <span className="bg-monad-key-badge flex h-5 w-5 items-center justify-center rounded-full text-[10px]">
+              <span className="bg-monad-key-badge text-2xs flex h-5 w-5 items-center justify-center rounded-full">
                 🔑
               </span>
             </div>
