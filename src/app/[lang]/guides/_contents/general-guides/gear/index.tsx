@@ -27,6 +27,9 @@ import {
   MiniPanel,
   DotList,
   NumberedList,
+  QACard,
+  TableShell,
+  GoldAmount,
 } from '@/components/guides/editorial/blocks';
 import { getCatalog } from '@/lib/data/items';
 import { getAscensionView, getEquipmentDetail } from '@/lib/data/equipment-detail';
@@ -87,7 +90,6 @@ const CATALOG_BY_NAME = (() => {
   }
   return m;
 })();
-const catalogById = getCatalog();
 
 /** Étiquette de rareté (comparaison d'enhancement) par grade dérivé. */
 const ENHANCE_LABEL: Record<string, LocalizedText> = {
@@ -95,6 +97,29 @@ const ENHANCE_LABEL: Record<string, LocalizedText> = {
   rare: LABELS.enhanceLabel_epic,
   unique: LABELS.enhanceLabel_legendary,
 };
+
+/** Carte de section des onglets. */
+function Card({ children }: { children: ReactNode }) {
+  return (
+    <div className="border-line bg-surface-raised/60 space-y-3 rounded-xl border p-4 md:p-5">
+      {children}
+    </div>
+  );
+}
+
+/** Titre de carte, numéroté en option. */
+function Heading({ n, children }: { n?: number; children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-2">
+      {n !== undefined && (
+        <span className="bg-ed-sky/10 border-ed-sky/30 text-ed-sky inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold">
+          {n}
+        </span>
+      )}
+      <span className="text-content-strong text-base font-semibold">{children}</span>
+    </div>
+  );
+}
 
 export default async function GearGuide({ lang }: { lang: Lang }) {
   const t = await getT(lang);
@@ -136,23 +161,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
     );
   };
 
-  const goldIcon = catalogById['SYS_ASSET_GOLD']?.icon;
-  const goldCell = (n: number): ReactNode => (
-    <span className="inline-flex items-center gap-1 whitespace-nowrap">
-      {goldIcon && (
-        <img
-          src={img.item(goldIcon)}
-          alt=""
-          aria-hidden
-          width={15}
-          height={15}
-          className="inline-block"
-        />
-      )}
-      {fmt(n)}
-    </span>
-  );
-
   /** Tuiles de matériaux d'ascension (icônes namespace équipement). */
   const matTiles = (mats: typeof axWeapon.activation.materials): ReactNode => (
     <span className="inline-flex flex-wrap items-center gap-2">
@@ -174,30 +182,6 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
     </span>
   );
 
-  const Card = ({ children }: { children: ReactNode }) => (
-    <div className="border-line bg-surface-raised/60 space-y-3 rounded-xl border p-4 md:p-5">
-      {children}
-    </div>
-  );
-  const Heading = ({ n, children }: { n?: number; children: ReactNode }) => (
-    <div className="flex items-center gap-2">
-      {n !== undefined && (
-        <span className="bg-ed-sky/10 border-ed-sky/30 text-ed-sky inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold">
-          {n}
-        </span>
-      )}
-      <span className="text-content-strong text-base font-semibold">{children}</span>
-    </div>
-  );
-
-  const TableShell = ({ head, children }: { head: ReactNode; children: ReactNode }) => (
-    <div className="border-line overflow-x-auto rounded-xl border">
-      <table className="w-full text-sm">
-        <thead className="bg-surface-sunken text-content-subtle text-xs">{head}</thead>
-        <tbody>{children}</tbody>
-      </table>
-    </div>
-  );
   const th = (label: ReactNode, cls = 'text-left') => (
     <th className={`px-3 py-2 font-medium ${cls}`}>{label}</th>
   );
@@ -596,7 +580,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
           <span className="text-content-subtle text-xs tracking-wide uppercase">
             {L(LABELS.ascension_activationCost)}
           </span>
-          {goldCell(axWeapon.activation.price)}
+          <GoldAmount value={axWeapon.activation.price} />
           {matTiles(axWeapon.activation.materials)}
         </div>
       </Card>
@@ -676,7 +660,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
         <Heading n={4}>{L(LABELS.ascension_rerollTitle)}</Heading>
         <Prose>{L(LABELS.ascension_rerollDesc)}</Prose>
         <div className="border-line-subtle bg-surface-overlay/40 flex flex-wrap items-center gap-4 rounded-lg border p-3">
-          {goldCell(axWeapon.reroll.price)}
+          <GoldAmount value={axWeapon.reroll.price} />
           {matTiles(axWeapon.reroll.materials)}
           <span className="text-success bg-success/10 rounded px-2 py-0.5 text-xs">
             {axWeapon.reroll.rate}%
@@ -772,52 +756,48 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   );
 
   // ═══════════════════════════════ Onglet : FAQ ═══════════════════════════════
-  const QA = ({ q, children }: { q: string; children: ReactNode }) => (
-    <div className="border-line-subtle bg-surface-raised/60 rounded-xl border px-4 py-3.5">
-      <h3 className="text-content-strong text-[15px] leading-snug font-semibold">{q}</h3>
-      <div className="text-content-muted mt-2 space-y-2 text-sm leading-relaxed">{children}</div>
-    </div>
-  );
   const faqPanel = (
     <div className="space-y-5 text-sm">
       <div className="space-y-2">
         <div className="text-content-strong text-sm font-semibold">
           {L(LABELS.faq_qualityTitle)}
         </div>
-        <QA q={L(LABELS.faq_legendaryOnly_q)}>
-          <p className="text-content m-0 font-semibold">{L(LABELS.faq_legendaryOnly_a1)}</p>
-          <p className="m-0">{L(LABELS.faq_legendaryOnly_a2)}</p>
-          <p className="m-0">{L(LABELS.faq_legendaryOnly_a3)}</p>
-        </QA>
-        <QA q={L(LABELS.faq_sixVsFive_q)}>
-          <p className="m-0">{L(LABELS.faq_sixVsFive_a1)}</p>
-          <p className="m-0">{L(LABELS.faq_sixVsFive_a2)}</p>
-          <p className="m-0">{L(LABELS.faq_sixVsFive_a3)}</p>
-        </QA>
+        <QACard accent="sky" question={L(LABELS.faq_legendaryOnly_q)}>
+          <p className="text-content m-0 text-sm leading-relaxed font-semibold">
+            {L(LABELS.faq_legendaryOnly_a1)}
+          </p>
+          <Prose>{L(LABELS.faq_legendaryOnly_a2)}</Prose>
+          <Prose>{L(LABELS.faq_legendaryOnly_a3)}</Prose>
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_sixVsFive_q)}>
+          <Prose>{L(LABELS.faq_sixVsFive_a1)}</Prose>
+          <Prose>{L(LABELS.faq_sixVsFive_a2)}</Prose>
+          <Prose>{L(LABELS.faq_sixVsFive_a3)}</Prose>
+        </QACard>
       </div>
 
       <div className="space-y-2">
         <div className="text-content-strong text-sm font-semibold">
           {L(LABELS.faq_upgradingTitle)}
         </div>
-        <QA q={L(LABELS.faq_transistoneUsage_q)}>
-          <p className="m-0">{L(LABELS.faq_transistoneUsage_a)}</p>
-        </QA>
-        <QA q={L(LABELS.faq_badMainStat_q)}>
-          <p className="m-0">{L(LABELS.faq_badMainStat_a)}</p>
-        </QA>
-        <QA q={L(LABELS.faq_badSubstats_q)}>
-          <p className="m-0">{P(LABELS.faq_badSubstats_a)}</p>
-        </QA>
+        <QACard accent="sky" question={L(LABELS.faq_transistoneUsage_q)}>
+          <Prose>{L(LABELS.faq_transistoneUsage_a)}</Prose>
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_badMainStat_q)}>
+          <Prose>{L(LABELS.faq_badMainStat_a)}</Prose>
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_badSubstats_q)}>
+          <Prose>{P(LABELS.faq_badSubstats_a)}</Prose>
+        </QACard>
       </div>
 
       <div className="space-y-2">
         <div className="text-content-strong text-sm font-semibold">
           {L(LABELS.faq_farmingTitle)}
         </div>
-        <QA q={L(LABELS.faq_howToGet_q)}>
-          <p className="m-0">{L(LABELS.faq_howToGet_intro)}</p>
-          <ol className="m-0 list-decimal space-y-1 pl-5">
+        <QACard accent="sky" question={L(LABELS.faq_howToGet_q)}>
+          <Prose>{L(LABELS.faq_howToGet_intro)}</Prose>
+          <ol className="text-content-muted m-0 list-decimal space-y-1 pl-5 text-sm leading-relaxed">
             <li>{L(LABELS.obt_farmBosses_desc)}</li>
             <li>
               {P(LABELS.obt_craftArmor_desc)} {L(LABELS.obt_craftArmor_warning)}
@@ -825,9 +805,9 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
             <li>{P(LABELS.obt_preciseCraft_desc)}</li>
             <li>{L(LABELS.obt_irregularBosses_desc)}</li>
           </ol>
-        </QA>
-        <QA q={L(LABELS.faq_dropBoost_q)}>
-          <p className="m-0">
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_dropBoost_q)}>
+          <Prose>
             {L(LABELS.obtaining_dropRateText_before)}
             <InlineIcon
               icon={img.item('EBT_WORLD_BOSS_TITLE')}
@@ -835,18 +815,18 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
               underline={false}
             />
             {L(LABELS.obtaining_dropRateText_after)}
-          </p>
-        </QA>
-        <QA q={L(LABELS.faq_limitedShop_q)}>
-          <p className="m-0">
+          </Prose>
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_limitedShop_q)}>
+          <Prose>
             {L(LABELS.obtaining_limitedShopsText_before)}
             {chipByName('Ether', 18)}
             {L(LABELS.obtaining_limitedShopsText_after)}
-          </p>
-        </QA>
-        <QA q={L(LABELS.faq_eventChests_q)}>
-          <p className="m-0">{L(LABELS.obtaining_eventChestsText)}</p>
-        </QA>
+          </Prose>
+        </QACard>
+        <QACard accent="sky" question={L(LABELS.faq_eventChests_q)}>
+          <Prose>{L(LABELS.obtaining_eventChestsText)}</Prose>
+        </QACard>
       </div>
     </div>
   );

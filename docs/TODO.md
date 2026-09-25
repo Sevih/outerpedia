@@ -209,9 +209,7 @@
       `CardArt`, `fusion.tsx`.
 - [ ] 92 chaînes courtes des `labels.ts` déjà dans les locales (H9) — deux
       vocabulaires pour un mot ; `t()` pour le chrome, `labels.ts` pour la
-      prose. `eslint-disable` évitable dans `ether-income/Calculator.tsx:217`
-      (H10). `QA` doublon de `QACard`, `Card`/`Heading`/`TableShell` définis
-      dans le corps du composant, `goldCell` ×2 (H11).
+      prose. (H10, H11 : FAIT le 25/09, lot A10.)
 - [ ] Hash d'onglets trompeurs de `banner-mileage` (`#banner=pickup` ouvre le
       custom…, H12) ; `reward`/`rewardWin` priorité inversée entre 3 sites
       (H13, sans effet aujourd'hui) ; à confirmer : doublon SEO

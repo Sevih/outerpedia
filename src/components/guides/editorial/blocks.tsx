@@ -8,6 +8,8 @@
  */
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import { img } from '@/lib/images';
+import { getCatalogEntry } from '@/lib/data/items';
 import { EDITORIAL_ACCENT, type EditorialAccent } from './accents';
 
 /** Titre de section : titre fort + double filet à l'accent. */
@@ -211,5 +213,38 @@ export function StepRows({ items }: { items: { accent: EditorialAccent; label: R
         );
       })}
     </div>
+  );
+}
+
+/** Tableau de guide : cadre arrondi à défilement horizontal, en-tête atténué. */
+export function TableShell({ head, children }: { head: ReactNode; children: ReactNode }) {
+  return (
+    <div className="border-line overflow-x-auto rounded-xl border">
+      <table className="w-full text-sm">
+        <thead className="bg-surface-sunken text-content-subtle text-xs">{head}</thead>
+        <tbody>{children}</tbody>
+      </table>
+    </div>
+  );
+}
+
+const GOLD_ICON = getCatalogEntry('SYS_ASSET_GOLD')?.icon;
+
+/** Montant d'or : icône de l'or (décorative, le nombre porte l'info) + nombre. */
+export function GoldAmount({ value }: { value: number }) {
+  return (
+    <span className="inline-flex items-center gap-1 whitespace-nowrap">
+      {GOLD_ICON && (
+        <img
+          src={img.item(GOLD_ICON)}
+          alt=""
+          aria-hidden
+          width={15}
+          height={15}
+          className="inline-block"
+        />
+      )}
+      {value.toLocaleString('en-US')}
+    </span>
   );
 }

@@ -6,7 +6,7 @@
  * ce composant ne fait que l'état des sélecteurs et l'arithmétique d'origine
  * (totaux quotidiens/hebdo/mensuels + projection jusqu'à une date).
  */
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { cn } from '@/lib/cn';
 
 export interface LadderOption {
@@ -177,18 +177,26 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
   const [stock, setStock] = useState(0);
 
   const league = model.worldBoss.leagues[leagueIdx];
-  const picked: Record<string, LadderOption | undefined> = {
-    arena: model.arena.options[arenaIdx],
-    guildRaid: model.guildRaid.options[guildIdx],
-    worldBoss: league?.options[wbIdx],
-    singularity: model.singularity.options[singIdx],
-  };
+  const picked: Record<string, LadderOption | undefined> = useMemo(
+    () => ({
+      arena: model.arena.options[arenaIdx],
+      guildRaid: model.guildRaid.options[guildIdx],
+      worldBoss: league?.options[wbIdx],
+      singularity: model.singularity.options[singIdx],
+    }),
+    [model, league, arenaIdx, guildIdx, wbIdx, singIdx],
+  );
 
   /** Montant effectif d'une ligne (palier sélectionné pour les `ranked`). */
-  const amountOf = (s: SourceRow): number =>
-    s.ranked ? (picked[s.ranked]?.ether ?? s.amount) : s.amount;
+  const amountOf = useCallback(
+    (s: SourceRow): number => (s.ranked ? (picked[s.ranked]?.ether ?? s.amount) : s.amount),
+    [picked],
+  );
   /** Contribution MENSUELLE (moyenne si la source n'a pas lieu chaque mois). */
-  const monthlyOf = (s: SourceRow): number => Math.round(amountOf(s) / (s.monthsPerCycle ?? 1));
+  const monthlyOf = useCallback(
+    (s: SourceRow): number => Math.round(amountOf(s) / (s.monthsPerCycle ?? 1)),
+    [amountOf],
+  );
   /** Libellé effectif (palier sélectionné entre parenthèses, inchangé). */
   const labelOf = (s: SourceRow): string => {
     if (!s.ranked) return s.label;
@@ -214,8 +222,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
       weeklyTotal: weeklyFromDaily + weeklySpike,
       monthlyTotal: Math.round((weeklyFromDaily * 30) / 7) + weeklySpike * 4 + monthlySpike,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- amountOf dérive des index sélectionnés
-  }, [model, arenaIdx, guildIdx, leagueIdx, wbIdx, singIdx]);
+  }, [model, amountOf, monthlyOf]);
 
   const projection = useMemo(() => {
     if (!target) return undefined;

@@ -19,7 +19,13 @@ import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { StarIcon } from '@/components/guides/editorial/banner/StarText';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
-import { Prose, Callout, DotList } from '@/components/guides/editorial/blocks';
+import {
+  Prose,
+  Callout,
+  DotList,
+  TableShell,
+  GoldAmount,
+} from '@/components/guides/editorial/blocks';
 import { getCatalog } from '@/lib/data/items';
 import { STAR_SPRITE } from '@/lib/images';
 import type { LocalizedText, HeroGrowthData, ItemRef, ItemCost } from '@contracts';
@@ -133,23 +139,6 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
     </span>
   );
 
-  const goldIcon = catalogById['SYS_ASSET_GOLD']?.icon;
-  const goldCell = (n: number): ReactNode => (
-    <span className="inline-flex items-center gap-1 whitespace-nowrap">
-      {goldIcon && (
-        <img
-          src={img.item(goldIcon)}
-          alt=""
-          aria-hidden
-          width={15}
-          height={15}
-          className="inline-block"
-        />
-      )}
-      {fmt(n)}
-    </span>
-  );
-
   /** Bonus de stat de base d'une étape de transcendance sans effet spécial. */
   const STAT_BONUS: LocalizedText = {
     en: 'base ATK / DEF / HP bonus',
@@ -159,15 +148,6 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
     fr: 'bonus de base ATK / DEF / HP',
     es: 'bono base de Ataque / Defensa / Vida',
   };
-
-  const TableShell = ({ head, children }: { head: ReactNode; children: ReactNode }) => (
-    <div className="border-line overflow-x-auto rounded-xl border">
-      <table className="w-full text-sm">
-        <thead className="bg-surface-sunken text-content-subtle text-xs">{head}</thead>
-        <tbody>{children}</tbody>
-      </table>
-    </div>
-  );
 
   const th = (label: ReactNode) => <th className="px-3 py-2 text-left font-medium">{label}</th>;
   const td = (v: ReactNode) => <td className="text-content px-3 py-2 align-top">{v}</td>;
@@ -237,7 +217,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
                       <span className="inline-flex items-center gap-1 whitespace-nowrap">
                         {chipById('30519', 18)} ×{s.pieces}
                       </span>
-                      {goldCell(s.gold)}
+                      <GoldAmount value={s.gold} />
                     </span>
                   ) : (
                     '—'
@@ -394,7 +374,9 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
         <tr key={row.level} className="border-line-subtle border-t">
           <td className="text-content px-3 py-2 font-medium">+{row.level}</td>
           {td(costList(row.materials))}
-          <td className="text-content px-3 py-2">{goldCell(row.gold)}</td>
+          <td className="text-content px-3 py-2">
+            <GoldAmount value={row.gold} />
+          </td>
           <td className="text-content px-3 py-2 text-center">
             {row.gemSlot > 0 ? `+${row.gemSlot}` : <span className="text-content-subtle">—</span>}
           </td>

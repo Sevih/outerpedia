@@ -7,6 +7,27 @@
 
 ## 2026-09-25
 
+- **Guides : un `eslint-disable` en moins, les doublons de gear/heroes-growth
+  mutualisés** (lot A10, H10 + H11). `ether-income/Calculator.tsx` taisait
+  `react-hooks/exhaustive-deps` sur `totals` parce que `amountOf` était une
+  fonction recréée à chaque rendu ; `picked` passe en `useMemo` (modèle,
+  ligue, quatre index), `amountOf`/`monthlyOf` en `useCallback`, et `totals`
+  dépend enfin de ce qu'il lit — formules inchangées. Dans `gear/index.tsx`,
+  `Card` et `Heading` étaient des composants définis DANS le corps (nouveau
+  type à chaque rendu, donc sous-arbre remonté) : sortis au niveau module.
+  `TableShell` et `goldCell`, copiés à l'identique dans `gear` et
+  `heroes-growth`, deviennent `TableShell` et `GoldAmount` dans
+  `components/guides/editorial/blocks.tsx` (l'or résout son icône par
+  `getCatalogEntry`, `catalogById` devenu mort dans `gear` est retiré). Le
+  `QA` local du FAQ de gear cède la place à `QACard` (accent `sky`), réponses
+  en `Prose` : CHANGEMENT VISUEL assumé (décision de Sevih) — pastille « Q »,
+  titre 17px, padding et écart entre paragraphes de `QACard`, comme
+  `beginner-faq`. Vérifié : typecheck, lint, 1946 tests ; les trois pages
+  servies en 200 par le dev, 31 et 4 icônes d'or rendues, en-têtes de
+  `TableShell` présents. Laissé : les helpers `th`/`td` locaux (fonctions,
+  pas composants) et `SubstatBar`/`Rarity`/`StarRow`, eux aussi définis dans
+  le corps mais hors de la liste du lot.
+
 - **`scripts/init.ps1` gate la chaîne data sur Steam et ne promeut plus sans
   revue** (lot A9, G18). Le script testait LDPlayer (`adb devices`) alors que
   `datagen:pull`/`datagen:dump` sont les scripts STEAM depuis le 26/08 : poste
