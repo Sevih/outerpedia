@@ -39,6 +39,7 @@ import { btn, input } from '../_ui';
 import { STARS, emptyReview, normalizeReview } from '@/lib/admin/review-shape';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 import { moveItem } from '@/lib/admin/reorder';
+import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import { MoveButtons } from '@/components/admin/MoveButtons';
 export { emptyReview, normalizeReview };
 
@@ -420,6 +421,31 @@ const TIERS = [
   { key: 'transcend', label: 'Transcendence priority' },
 ] as const;
 
+/**
+ * Ordre EN MÉMOIRE : chaque choix porte sa clé React stable (`_key`, cf.
+ * `lib/admin/keyed`) — les paliers se réordonnent, et le nom du héros ne suffit
+ * pas (rien n'interdit un doublon pendant la saisie). Posée au chargement par
+ * `keyOrder`, retirée par `unkeyOrder` avant l'enregistrement : le JSON écrit
+ * garde sa forme, ordre des clés compris.
+ */
+export type KeyedPriorityOrder = { [T in keyof PriorityOrderData]: Keyed<PriorityPickData>[] };
+/** Applique `f` à chaque choix des quatre paliers (ordre des clés = celui du JSON). */
+function mapPicks<A, B>(
+  o: { [T in keyof PriorityOrderData]: A[] },
+  f: (pick: A) => B,
+): { [T in keyof PriorityOrderData]: B[] } {
+  return {
+    first: o.first.map(f),
+    second: o.second.map(f),
+    third: o.third.map(f),
+    transcend: o.transcend.map(f),
+  };
+}
+export const keyOrder = (o: PriorityOrderData): KeyedPriorityOrder =>
+  mapPicks(o, (p) => withKey(p));
+export const unkeyOrder = (o: KeyedPriorityOrder): PriorityOrderData =>
+  mapPicks(o, (p) => stripKey(p));
+
 function PickRow({
   pick,
   charByName,
@@ -482,11 +508,11 @@ export function PriorityOrderEditor({
   charByName,
   onChange,
 }: {
-  order: PriorityOrderData;
+  order: KeyedPriorityOrder;
   charByName: Map<string, CharOption>;
-  onChange: (order: PriorityOrderData) => void;
+  onChange: (order: KeyedPriorityOrder) => void;
 }) {
-  const setTier = (tier: (typeof TIERS)[number]['key'], list: PriorityPickData[]) =>
+  const setTier = (tier: (typeof TIERS)[number]['key'], list: Keyed<PriorityPickData>[]) =>
     onChange({ ...order, [tier]: list });
 
   return (
@@ -500,7 +526,7 @@ export function PriorityOrderEditor({
             <div className="flex flex-col gap-2">
               {list.map((pick, i) => (
                 <PickRow
-                  key={i}
+                  key={pick._key}
                   pick={pick}
                   charByName={charByName}
                   index={i}
@@ -527,7 +553,7 @@ export function PriorityOrderEditor({
               viewOf={(name) => chipView(charByName.get(name))}
               onChange={(added) => {
                 const name = added[added.length - 1];
-                if (name) setTier(key, [...list, { name, stars: 3 }]);
+                if (name) setTier(key, [...list, { name, stars: 3, _key: rowKey() }]);
               }}
             />
             <p className="text-content-subtle text-[11px]">

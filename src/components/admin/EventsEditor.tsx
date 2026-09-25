@@ -20,7 +20,7 @@
 import { useState } from 'react';
 import { LANGS, LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { postJson } from '@/lib/admin/post-json';
-import { rowKey, stripKey } from '@/lib/admin/keyed';
+import { type Keyed, rowKey, stripKey, withKey } from '@/lib/admin/keyed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { applyTranslation, createFreshness } from '@/lib/admin/translate-fill';
 import { TRANSLATE_MSG } from '@/lib/admin/useAutoTranslate';
@@ -47,13 +47,18 @@ import { collectTexts } from '@/components/admin/events/event-text';
 import { moveItem } from '@/lib/admin/reorder';
 import { MoveButtons } from '@/components/admin/MoveButtons';
 
-type Row = EventEntry & { _key: string };
+// Les BLOCS portent aussi leur `_key` : ils se réordonnent (`MoveButtons`), et
+// keyés par index, l'état interne d'`InlineTextField` restait collé à la
+// POSITION — le texte en cours d'édition sautait d'un bloc à l'autre.
+type Row = Keyed<Omit<EventEntry, 'blocks'> & { blocks: Keyed<EventBlock>[] }>;
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 
 /* --- Éditeur principal ------------------------------------------------------ */
 
 export function EventsEditor({ initial }: { initial: EventEntry[] }) {
-  const [rows, setRows] = useState<Row[]>(() => initial.map((e) => ({ ...e, _key: rowKey() })));
+  const [rows, setRows] = useState<Row[]>(() =>
+    initial.map((e) => ({ ...e, _key: rowKey(), blocks: e.blocks.map((b) => withKey(b)) })),
+  );
   const [selected, setSelected] = useState<string | null>(() => (initial.length ? null : null));
   const [lang, setLang] = useState<Lang>('en');
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
@@ -69,7 +74,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
   const current = rows.find((r) => r._key === selected);
   const isEn = lang === 'en';
 
-  const update = (patch: Partial<EventEntry>) =>
+  const update = (patch: Partial<Omit<Row, '_key'>>) =>
     setRows((s) => s.map((r) => (r._key === selected ? { ...r, ...patch } : r)));
 
   function addEvent() {
@@ -84,7 +89,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
         title: {},
         start: `${day}T00:00:00Z`,
         end: `${day}T23:59:00Z`,
-        blocks: [emptyBlock('prose')],
+        blocks: [withKey(emptyBlock('prose'))],
         draft: true,
       },
     ]);
@@ -98,7 +103,9 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
 
   /* Blocs */
   const setBlock = (i: number, next: EventBlock) =>
-    update({ blocks: (current?.blocks ?? []).map((b, j) => (j === i ? next : b)) });
+    update({
+      blocks: (current?.blocks ?? []).map((b, j) => (j === i ? { ...next, _key: b._key } : b)),
+    });
   // Échange DÉLÉGUÉ (`lib/admin/reorder`) : la garde des extrémités s'écrivait ici
   // et une seconde fois dans les priorités de pull — deux copies qui ne divergent
   // que sur le cas limite, celui qui fabrique un `undefined` dans la liste.
@@ -145,7 +152,10 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
     setBusy(true);
     setStatus({ kind: 'idle' });
     try {
-      const payload = rows.map(stripKey);
+      const payload = rows.map((r) => ({
+        ...stripKey(r),
+        blocks: r.blocks.map((b) => stripKey(b)),
+      }));
       const res = await postJson<{ ok: boolean; publish?: { ok: boolean; error?: string } }>(
         '/api/admin/curated/events',
         payload,
@@ -386,7 +396,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
             <section className="space-y-3">
               <h2 className="text-content-strong text-sm font-semibold">Contenu</h2>
               {current.blocks.map((b, i) => (
-                <div key={i} className="border-line-subtle space-y-2 rounded-lg border p-3">
+                <div key={b._key} className="border-line-subtle space-y-2 rounded-lg border p-3">
                   <div className="flex items-center gap-2">
                     <span className="text-content-subtle text-xs font-semibold uppercase">
                       {BLOCK_LABEL[b.kind]}
@@ -423,7 +433,9 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
                       key={k}
                       type="button"
                       className={btn}
-                      onClick={() => update({ blocks: [...current.blocks, emptyBlock(k)] })}
+                      onClick={() =>
+                        update({ blocks: [...current.blocks, withKey(emptyBlock(k))] })
+                      }
                     >
                       + {BLOCK_LABEL[k]}
                     </button>

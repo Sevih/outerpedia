@@ -24,6 +24,8 @@ import {
   ReviewWorkbench,
   downloadJson,
   normalizeReview,
+  keyOrder,
+  unkeyOrder,
   type Bucket,
   type L,
 } from '@/components/admin/premium-limited/PremiumLimitedParts';
@@ -56,7 +58,10 @@ export function PremiumLimitedEditor({
   const [bucket, setBucket] = useState<Bucket>('premium');
   const [selected, setSelected] = useState<number | null>(null);
   const [reviews, setReviews] = useState<ReviewsBundle>(initial.reviews);
-  const [priorities, setPriorities] = useState(initial.priorities);
+  const [priorities, setPriorities] = useState(() => ({
+    premium: keyOrder(initial.priorities.premium),
+    limited: keyOrder(initial.priorities.limited),
+  }));
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
   const [trans, setTrans] = useState<'idle' | 'loading'>('idle');
@@ -122,7 +127,13 @@ export function PremiumLimitedEditor({
   async function save() {
     setState('saving');
     setError(null);
-    const data: PremiumLimitedData = { reviews, priorities };
+    const data: PremiumLimitedData = {
+      reviews,
+      priorities: {
+        premium: unkeyOrder(priorities.premium),
+        limited: unkeyOrder(priorities.limited),
+      },
+    };
     try {
       const res = await fetch('/api/admin/guides/general-guides/premium-limited', {
         method: 'POST',
