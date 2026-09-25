@@ -19,6 +19,9 @@
  *   pnpm stamp:guides --all DATE  baseline : force TOUS les guides à DATE (release)
  *   pnpm stamp:guides --check     n'écrit rien ; sort en code 1 si un bump manque
  *   pnpm stamp:guides --date DATE surcharge la date « aujourd'hui » (tests)
+ *   pnpm stamp:guides --staged    ne lit que l'INDEX (hook pre-commit lefthook) :
+ *                                 un guide modifié mais pas indexé ne part pas
+ *                                 dans le commit, son meta re-daté non plus
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -36,6 +39,7 @@ const flag = (f: string): string | null => {
   return i > -1 && argv[i + 1] ? argv[i + 1] : null;
 };
 const CHECK = argv.includes('--check');
+const STAGED = argv.includes('--staged');
 const ALL = flag('--all');
 // `--all` SANS date suivante dégradait SILENCIEUSEMENT en mode normal (bump des
 // seuls guides modifiés) au lieu de la baseline attendue → refus explicite.
@@ -55,6 +59,14 @@ if (!DATE_RE.test(TODAY)) {
 
 /** Fichiers modifiés (indexés + working tree), chemins POSIX relatifs au repo. */
 function gitChangedFiles(): Set<string> {
+  if (STAGED) {
+    // Index seul. `--no-renames` : un renommage sort en suppression + ajout,
+    // les deux chemins comptent comme pour `git status` ci-dessous.
+    const staged = execFileSync('git', ['diff', '--cached', '--name-only', '--no-renames', '-z'], {
+      encoding: 'utf8',
+    });
+    return new Set(staged.split('\0').filter(Boolean));
+  }
   const out = execFileSync('git', ['status', '--porcelain', '-z'], { encoding: 'utf8' });
   const files = new Set<string>();
   // Format -z : « XY <chemin>\0 ». Renommage/copie (X ou Y ∈ {R,C}) : DEUX
@@ -131,7 +143,8 @@ function relevantChange(g: GuideDir, changed: Set<string>, newestVersion: string
 /** Le diff indexé/working de meta.json ne touche-t-il QUE le champ `updated` ? */
 function onlyUpdatedChanged(metaPath: string): boolean {
   try {
-    const diff = execFileSync('git', ['diff', 'HEAD', '--unified=0', '--', metaPath], {
+    const base = STAGED ? ['diff', '--cached'] : ['diff', 'HEAD'];
+    const diff = execFileSync('git', [...base, '--unified=0', '--', metaPath], {
       encoding: 'utf8',
     });
     const changedLines = diff.split('\n').filter((l) => /^[+-]/.test(l) && !/^[+-]{3} /.test(l));

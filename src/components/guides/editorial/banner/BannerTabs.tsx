@@ -12,6 +12,11 @@ export interface BannerTabDef {
   /** URL complète du visuel de la carte (sprite ~206×94, `img.recruitSprite`). */
   imageSrc: string;
   content: ReactNode;
+  /**
+   * Anciens ids encore acceptés dans le hash (liens externes existants) — lus
+   * comme cet onglet ; un clic réécrit l'id courant.
+   */
+  legacyIds?: string[];
 }
 
 /**
@@ -27,7 +32,9 @@ export function BannerTabs({ tabs, urlKey }: { tabs: BannerTabDef[]; urlKey?: st
   // Lecture inconditionnelle (règle des hooks) ; ignorée sans `urlKey`. Snapshot
   // serveur `null` → premier rendu sur le 1er onglet, resync après hydratation.
   const hashValue = useUrlSlice('hashchange', () => (urlKey ? readHashParam(urlKey) : null));
-  const fromHash = hashValue && tabs.some((t) => t.id === hashValue) ? hashValue : null;
+  const fromHash = hashValue
+    ? (tabs.find((t) => t.id === hashValue || t.legacyIds?.includes(hashValue))?.id ?? null)
+    : null;
   const active = (urlKey ? fromHash : localTab) ?? tabs[0]?.id;
   const current = tabs.find((t) => t.id === active) ?? tabs[0];
 

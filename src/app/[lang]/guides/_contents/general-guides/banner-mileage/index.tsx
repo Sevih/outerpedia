@@ -155,10 +155,14 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
 
   const neutralBox = 'border-line-subtle bg-surface-raised/40 rounded-lg border p-3';
 
+  // Ids = la bannière RÉELLE de l'onglet. Les ids hérités (`pickup` ouvrait le
+  // custom, `new` le Rate Up, `fes` le Limited) restent lus pour les liens
+  // déjà partagés ; `pickup` ne peut donc désigner le Rate Up.
   const tabs: BannerTabDef[] = [
     /* ═══ Custom Rate Up ═══ */
     {
-      id: 'pickup',
+      id: 'custom',
+      legacyIds: ['pickup'],
       label: L(LABELS.pickup.label),
       ...tabVisual('custom'),
       content: (
@@ -199,7 +203,8 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
 
     /* ═══ Rate Up ═══ */
     {
-      id: 'new',
+      id: 'rate-up',
+      legacyIds: ['new'],
       label: L(LABELS.rateup.label),
       ...tabVisual('pickup'),
       content: (
@@ -260,7 +265,8 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
 
     /* ═══ Limited ═══ */
     {
-      id: 'fes',
+      id: 'limited',
+      legacyIds: ['fes'],
       label: L(LABELS.limited.label),
       ...tabVisual('limited'),
       content: (

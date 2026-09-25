@@ -7,6 +7,7 @@ import { hardestDifficultyLabel, type Encounter } from '@/lib/data/encounters';
 import { resolveSectionTitle, type SectionTitle } from '@/lib/data/guide-sections';
 import {
   lootDetails,
+  lootTableOf,
   pursuitLoot,
   type LootVariant,
   type ResolvedReward,
@@ -155,7 +156,7 @@ export async function EncounterBossGuide({ lang, guide }: GuideContentProps) {
         group={guide.group}
         lang={lang}
         afterStats={(e: Encounter) => {
-          const tableId = e.ref.rewardWin ?? e.ref.reward;
+          const tableId = lootTableOf(e.ref);
           if (!tableId) return null;
           const loot = pursuitLoot(tableId, lang);
           if (!loot.currencies.length && !loot.weapons.length && !loot.amulets.length) return null;

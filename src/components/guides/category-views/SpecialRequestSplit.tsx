@@ -6,7 +6,7 @@ import { img } from '@/lib/images';
 import type { Guide } from '@/lib/data/guides';
 import { getMonster } from '@/lib/data/monsters';
 import { encountersOfGroup, modeLabel } from '@/lib/data/encounters';
-import { lootSignature, type LootBadge } from '@/lib/data/rewards';
+import { lootSignature, lootTableOf, type LootBadge } from '@/lib/data/rewards';
 import { EmptyCategory } from './EmptyCategory';
 import { ModeColumns } from './ModeColumns';
 import type { CategoryViewProps } from './types';
@@ -45,7 +45,7 @@ export default async function SpecialRequestSplit({ lang, guides }: CategoryView
     // Signature de loot = pool du stage le plus HAUT (c'est lui qu'on farme).
     // Sans table (mode futur ?), la carte vit sans pastilles — rien à casser.
     const top = ladder[ladder.length - 1];
-    const tableId = top.ref.reward ?? top.ref.rewardWin;
+    const tableId = lootTableOf(top.ref);
     const sig = tableId
       ? lootSignature(tableId, lang)
       : { sets: [] as LootBadge[], stats: [] as LootBadge[] };

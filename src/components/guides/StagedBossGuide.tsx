@@ -9,7 +9,13 @@ import {
   groupCombatants,
   type Encounter,
 } from '@/lib/data/encounters';
-import { lootDetails, stageLoot, type LootBadge, type StageLootGear } from '@/lib/data/rewards';
+import {
+  lootDetails,
+  lootTableOf,
+  stageLoot,
+  type LootBadge,
+  type StageLootGear,
+} from '@/lib/data/rewards';
 import { getMonster, monsterDisplayNames, monsterIconSrc } from '@/lib/data/monsters';
 import { BossCard } from '@/components/guides/BossPanel';
 import { MonsterLineup } from '@/components/guides/MonsterLineup';
@@ -183,7 +189,7 @@ export async function StagedBossGuide({ lang, guide }: GuideContentProps) {
   // (seule l'étoile monte), à l'exception des stages 1-2 de deux échelles
   // récentes qui traînent en plus un pool générique d'anciens accessoires —
   // du bruit qu'on ne montre pas.
-  const topReward = encounters[encounters.length - 1].ref.reward;
+  const topReward = lootTableOf(encounters[encounters.length - 1].ref);
   const loot = topReward ? stageLoot(topReward, lang) : undefined;
   // Le DÉTAIL du même pool : les MiniCards de l'équipement (cf. `lootDetails`),
   // dépliées à la demande — les mêmes cartes que dans un build de perso.

@@ -8,7 +8,7 @@ import type { Guide } from '@/lib/data/guides';
 import { GUIDE_CATEGORIES, categoryArt } from '@/lib/data/guide-categories';
 import { getMonster, monsterThumb } from '@/lib/data/monsters';
 import { encountersOfGroup } from '@/lib/data/encounters';
-import { pursuitLoot, type LootVariant } from '@/lib/data/rewards';
+import { lootTableOf, pursuitLoot, type LootVariant } from '@/lib/data/rewards';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { Thumbnail } from '@/components/ui/Thumbnail';
 import { EmptyCategory } from './EmptyCategory';
@@ -93,7 +93,7 @@ function BossPin({ guide, lang, t }: { guide: Guide; lang: Lang; t: TFunction })
   const name = lRec(monster.name, lang) || monster.name.en;
   // Butin = le donjon le plus DUR de la poursuite (c'est lui qu'on farme).
   const top = ladder[ladder.length - 1];
-  const tableId = top.ref.rewardWin ?? top.ref.reward;
+  const tableId = lootTableOf(top.ref);
   const loot = tableId ? pursuitLoot(tableId, lang) : undefined;
   const collection = loot ? collectionName([...loot.weapons, ...loot.amulets]) : undefined;
   const pos = guide.mapPos;

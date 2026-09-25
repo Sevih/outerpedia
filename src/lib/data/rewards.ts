@@ -14,7 +14,13 @@
  */
 import glossariesData from '@data/generated/glossaries.json';
 import rewardTablesData from '@data/generated/reward-tables.json';
-import type { Glossaries, RewardEntry, RewardTable, RewardTablesFile } from '@contracts';
+import type {
+  DungeonRef,
+  Glossaries,
+  RewardEntry,
+  RewardTable,
+  RewardTablesFile,
+} from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
@@ -57,6 +63,18 @@ const REWARD_TABLES = rewardTablesData as unknown as RewardTablesFile;
  * avec le nom et la description OFFICIELS du jeu pour le tooltip.
  */
 const GOLD_KEY = 'SYS_ASSET_GOLD';
+
+/**
+ * LA table de butin d'un donjon — celle qu'on affiche et qu'on farme. Une
+ * poursuite irregular porte les deux champs : `reward` (7041…7043) est la
+ * table générique partagée par toutes les poursuites, `rewardWin` celle de
+ * victoire propre à CE boss (son pool d'équipement) → la spécifique d'abord.
+ * Les autres modes n'ont que `reward`. Trois vues tranchaient chacune à sa
+ * façon (dont une dans l'ordre inverse) : la règle vit ici, une fois.
+ */
+export function lootTableOf(ref: Pick<DungeonRef, 'reward' | 'rewardWin'>): string | undefined {
+  return ref.rewardWin ?? ref.reward;
+}
 
 export function getRewardTable(id: string): RewardTable {
   const table = REWARD_TABLES[id];

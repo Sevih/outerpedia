@@ -6,15 +6,26 @@ pre-commit:
   # formatés (en parallèle, eslint pouvait lire un fichier en pleine réécriture).
   piped: true
   commands:
+    # Re-date les guides dont un fichier indexé change (`meta.updated`, lu par le
+    # build qui ne voit pas git) : le stamp oublié à la main a laissé 20 guides
+    # datés avant leur dernier changement (audit guides, H3). `--staged` : l'index
+    # seul ; les meta re-datés partent dans le même commit (`stage_fixed`, et le
+    # script les indexe lui-même). `pnpm commit` passe `--no-verify` et stampe
+    # de son côté. Le `*` couvre `[lang]`, que le glob lirait comme une classe.
+    stamp-guides:
+      priority: 1
+      glob: 'src/app/*/guides/_contents/**'
+      run: pnpm stamp:guides --staged
+      stage_fixed: true
     # Formate les fichiers indexés, puis ré-indexe les corrections.
     format:
-      priority: 1
+      priority: 2
       glob: '*.{ts,tsx,js,mjs,json,css,md,yml,yaml}'
       run: pnpm prettier --write {staged_files}
       stage_fixed: true
     # Lint uniquement les fichiers TS/TSX indexés.
     lint:
-      priority: 2
+      priority: 3
       glob: '*.{ts,tsx}'
       run: pnpm eslint {staged_files}
 
