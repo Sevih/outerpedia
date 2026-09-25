@@ -219,6 +219,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
   return {
     bar: {
       searchPlaceholder: t('characters.filters.search_placeholder'),
+      clear: t('common.clear'),
       elements: t('filters.elements'),
       classes: t('filters.classes'),
       rarity: t('filters.rarity'),
@@ -245,6 +246,7 @@ function buildLabels(rows: CharacterRow[], lang: Lang, t: TFunction): Characters
     strip: {
       count: t('characters.filters.count'),
       emptyHint: t('characters.filters.empty_hint'),
+      remove: t('common.remove'),
       reset: t('characters.filters.reset'),
       copy: t('characters.filters.copy'),
       copied: t('common.copied'),

@@ -1,4 +1,4 @@
-import { getT } from '@/i18n';
+import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
@@ -7,7 +7,7 @@ import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadDataJson } from '@/lib/data/disk';
 import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
-import { img } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import eeItemsData from '@data/generated/equipment/ee.json';
 import { TierListMakerBrowser, type TierItem, type TlmLabels } from './TierListMakerBrowser';
 
@@ -118,6 +118,12 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
     .sort((a, b) => a.label.localeCompare(b.label));
 
   const labels: TlmLabels = {
+    elementNames: Object.fromEntries(
+      ELEMENT_ORDER.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
+    ),
+    classNames: Object.fromEntries(
+      CLASS_ORDER.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
+    ),
     tabs: {
       characters: t('tools.tier-list-maker.tab.characters'),
       ee: t('tools.tier-list-maker.tab.ee'),

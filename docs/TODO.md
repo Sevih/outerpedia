@@ -140,12 +140,6 @@
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
       par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-- [ ] **Chaînes UI en dur** (G24) : 24 sites dans les outils (dont des messages
-      d'erreur EN FRANÇAIS remontés tels quels par `roster-import.ts:108-113`,
-      « Failed to load track » dans l'OST, `fire`/`striker` bruts en `alt`/`title`
-      et dans le picker du hero-tracker) + 8 dans les composants (`ON`/`OFF`,
-      `aria-label` anglais, nombres en `toLocaleString('en')`). Liste complète
-      dans le rapport.
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 

@@ -23,6 +23,13 @@ const kr: Record<TranslationKey, string> = {
   'common.coming_soon': '곧 공개 예정.',
   'common.language': '언어',
   'common.copied': '복사됨!',
+  'common.close': '닫기',
+  'common.previous': '이전',
+  'common.next': '다음',
+  'common.clear': '지우기',
+  'common.remove': '제거',
+  'common.on': '켜짐',
+  'common.off': '꺼짐',
   'share.on': '{platform}에 공유',
   'share.copy_link': '링크 복사',
   'aria.toggle_menu': '메뉴 전환',
@@ -133,6 +140,7 @@ const kr: Record<TranslationKey, string> = {
   'page.tierlist.other_rankings': '기타 랭킹',
   'tierlist.transcend_level': '초월 레벨',
   'tierlist.characters_count': '캐릭터',
+  'tierlist.characters_total': '캐릭터 {count}명',
   'tierlist.disclaimer_pve':
     '이 티어 리스트는 전용 장비 Lv0을 보유한 것을 전제로 합니다. 강화가 해제되지 않은 경우 결과가 다를 수 있습니다. PvE 콘텐츠 전용입니다.',
   'tierlist.disclaimer_pvp':
@@ -150,7 +158,7 @@ const kr: Record<TranslationKey, string> = {
   'tierlist.versus.preview': '최상위 티어 미리보기',
   'tierlist.versus.units': '{count}명 평가',
   'tierlist.versus.view': '보기',
-  'tierlist.versus.tools_count': '랭킹',
+  'tierlist.versus.tools_count': '랭킹 {count}개',
   'page.tools.title': '아우터플레인 도구 & 유틸리티',
   'page.tools.description':
     '아우터플레인 도구: 장비 솔버, 팀 플래너, 뽑기 시뮬레이터, 진행 트래커 등.',
@@ -208,6 +216,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.mode_free.desc':
     '모든 장비와 가능한 스탯을 표시합니다. 각 빌드와의 매칭도에 따라 순위를 매깁니다.',
   'tools.gear-usage-finder.matches': '명의 캐릭터 일치',
+  'tools.gear-usage-finder.subs': '서브 스탯:',
+  'tools.gear-usage-finder.builds': '빌드 {count}개',
   'tools.gear-usage-finder.no_users': '조건에 맞는 캐릭터가 없습니다.',
   'tools.patch-history': '패치 & 개발자 노트',
   'tools.patch-history.desc': '패치 노트, 개발자 노트, 영웅 대전 등을 확인하세요.',
@@ -328,6 +338,10 @@ const kr: Record<TranslationKey, string> = {
   'tools.hero-tracker.importDone': '{count}명을 가져왔습니다',
   'tools.hero-tracker.importUnknown': '{count}개 항목 제외',
   'tools.hero-tracker.importEmpty': '이 파일에는 가져올 항목이 없습니다',
+  'tools.hero-tracker.importErrFormat': '로스터 파일이 아닙니다 (예상 형식 “{format}”)',
+  'tools.hero-tracker.importErrVersion':
+    '버전 {expected} 파일이 필요합니다 (이 파일은 버전 {actual})',
+  'tools.hero-tracker.importErrHeroes': '“heroes” 필드가 없습니다',
   'tools.hero-tracker.sort': '정렬',
   'tools.hero-tracker.sortNeed': '파밍량',
   'tools.hero-tracker.sortName': '이름',
@@ -1193,6 +1207,16 @@ const kr: Record<TranslationKey, string> = {
   'ost.keyboardShortcuts': '키보드 단축키',
   'ost.tabTracks': '트랙',
   'ost.tabArchived': '보관됨',
+  'ost.loadError': '트랙을 불러오지 못했습니다',
+  'ost.colTitle': '제목',
+  'ost.colDuration': '재생 시간',
+  'ost.colSize': '크기',
+  'ost.shuffle': '셔플',
+  'ost.repeat.off': '반복 끔',
+  'ost.repeat.all': '전체 반복',
+  'ost.repeat.one': '한 곡 반복',
+  'ost.mute': '음소거 (M)',
+  'ost.unmute': '음소거 해제 (M)',
   'ost.archivedNote':
     '이 트랙은 이후 업데이트에서 게임에서 삭제되었습니다. 보관용으로 여기에 남겨 두었습니다.',
   // Wallpapers

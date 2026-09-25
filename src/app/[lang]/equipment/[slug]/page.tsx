@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { normalizeLang } from '@/lib/i18n/config';
+import { LANGUAGES, normalizeLang } from '@/lib/i18n/config';
 import { getT, type TranslationKey } from '@/i18n';
 import { createPageMetadata, buildUrl } from '@/lib/seo';
 import { img } from '@/lib/images';
@@ -114,7 +114,7 @@ export default async function EquipmentDetailPage({
     <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
       <JsonLd data={jsonLd} />
       <BackLink href={localePath(lang, '/equipment')} label={labels.back} />
-      <EquipmentDetail model={model} labels={labels} />
+      <EquipmentDetail model={model} labels={labels} locale={LANGUAGES[lang].htmlLang} />
     </div>
   );
 }

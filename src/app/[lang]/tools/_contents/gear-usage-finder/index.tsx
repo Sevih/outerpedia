@@ -66,6 +66,8 @@ export default async function GearUsageFinder({ lang }: { lang: Lang }) {
     },
     matches: t('tools.gear-usage-finder.matches'),
     noUsers: t('tools.gear-usage-finder.no_users'),
+    subs: t('tools.gear-usage-finder.subs'),
+    builds: t('tools.gear-usage-finder.builds'),
   };
 
   return (

@@ -30,6 +30,18 @@ export default async function Ost({ lang }: { lang: Lang }) {
         tabTracks: t('ost.tabTracks'),
         tabArchived: t('ost.tabArchived'),
         archivedNote: t('ost.archivedNote'),
+        loadError: t('ost.loadError'),
+        colTitle: t('ost.colTitle'),
+        colDuration: t('ost.colDuration'),
+        colSize: t('ost.colSize'),
+        shuffle: t('ost.shuffle'),
+        repeat: {
+          off: t('ost.repeat.off'),
+          all: t('ost.repeat.all'),
+          one: t('ost.repeat.one'),
+        },
+        mute: t('ost.mute'),
+        unmute: t('ost.unmute'),
       }}
     />
   );

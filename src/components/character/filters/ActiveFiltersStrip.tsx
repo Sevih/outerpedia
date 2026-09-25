@@ -16,6 +16,8 @@ export interface StripLabels {
   /** Gabarit `{count}` — « N characters » (compte de résultats). */
   count: string;
   emptyHint: string;
+  /** Libellé accessible de la croix d'une pastille. */
+  remove: string;
   reset: string;
   copy: string;
   copied: string;
@@ -107,6 +109,7 @@ export function ActiveFiltersStrip({
             color={item.color}
             prefix={item.prefix}
             onRemove={item.onRemove}
+            removeLabel={labels.remove}
           />
         ))}
       </div>

@@ -89,7 +89,12 @@ export function GearSlot({
         </span>
       </div>
       <Modal open={open} onClose={close} title={placeholder}>
-        <SearchField value={search} onChange={setSearch} placeholder={labels.search} />
+        <SearchField
+          value={search}
+          onChange={setSearch}
+          placeholder={labels.search}
+          clearLabel={labels.clearSearch}
+        />
         {filtered.length ? (
           <GearGrid
             items={filtered.map((o) => ({
@@ -692,7 +697,12 @@ export function TargetPicker({
         )}
       </div>
       <Modal open={open} onClose={close} title={labels.panels.target}>
-        <SearchField value={search} onChange={setSearch} placeholder={labels.search} />
+        <SearchField
+          value={search}
+          onChange={setSearch}
+          placeholder={labels.search}
+          clearLabel={labels.clearSearch}
+        />
         {/* BREADCRUMB (Sevih 17/08/2026) : « ← Mode / Niveau 1 / … » sur TOUS
             les modes — en famille story les segments sont la saison et
             l'épisode (leur navigation vit ici, le browser est contrôlé). La

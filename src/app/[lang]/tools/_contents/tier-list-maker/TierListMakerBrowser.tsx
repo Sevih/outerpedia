@@ -66,6 +66,9 @@ export interface TierItem {
 
 export interface TlmLabels {
   tabs: Record<Tab, string>;
+  /** Noms localisés des éléments et des classes (`sys.*`), par slug. */
+  elementNames: Record<string, string>;
+  classNames: Record<string, string>;
   tags: Record<string, string>;
   sorts: Record<SortKey, string>;
   sizes: Record<IconSize, string>;
@@ -1847,11 +1850,11 @@ export function TierListMakerBrowser({
                       )
                     }
                     className="h-8 w-8 px-0"
-                    title={el}
+                    title={L.elementNames[el] ?? el}
                   >
                     <img
                       src={img.element(el)}
-                      alt={el}
+                      alt={L.elementNames[el] ?? el}
                       className="h-6 w-6"
                       width={24}
                       height={24}
@@ -1870,9 +1873,15 @@ export function TierListMakerBrowser({
                       )
                     }
                     className="h-8 w-8 px-0"
-                    title={cl}
+                    title={L.classNames[cl] ?? cl}
                   >
-                    <img src={img.klass(cl)} alt={cl} className="h-6 w-6" width={24} height={24} />
+                    <img
+                      src={img.klass(cl)}
+                      alt={L.classNames[cl] ?? cl}
+                      className="h-6 w-6"
+                      width={24}
+                      height={24}
+                    />
                   </FilterPill>
                 ))}
               </div>

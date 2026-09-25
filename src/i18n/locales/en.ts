@@ -30,6 +30,13 @@ const en = {
   'common.coming_soon': 'Coming soon.',
   'common.language': 'Language',
   'common.copied': 'Copied!',
+  'common.close': 'Close',
+  'common.previous': 'Previous',
+  'common.next': 'Next',
+  'common.clear': 'Clear',
+  'common.remove': 'Remove',
+  'common.on': 'ON',
+  'common.off': 'OFF',
   'share.on': 'Share on {platform}',
   'share.copy_link': 'Copy link',
   'aria.toggle_menu': 'Toggle menu',
@@ -141,6 +148,7 @@ const en = {
   'page.tierlist.other_rankings': 'Other Rankings',
   'tierlist.transcend_level': 'Transcendence Level',
   'tierlist.characters_count': 'characters',
+  'tierlist.characters_total': '{count} characters',
   'tierlist.disclaimer_pve':
     'This tier list assumes to have the Exclusive Equipment Lv0. Results may vary if upgrades are not unlocked. This list is for PvE content only.',
   'tierlist.disclaimer_pvp':
@@ -159,7 +167,7 @@ const en = {
   'tierlist.versus.preview': 'Top-of-tier preview',
   'tierlist.versus.units': '{count} units ranked',
   'tierlist.versus.view': 'View',
-  'tierlist.versus.tools_count': 'rankings',
+  'tierlist.versus.tools_count': '{count} rankings',
   'page.tools.title': 'Outerplane Tools & Utilities',
   'page.tools.description':
     'Outerplane tools: gear solver, team planner, pull simulator, progress tracker, and more.',
@@ -221,6 +229,8 @@ const en = {
   'tools.gear-usage-finder.mode_free.desc':
     'Shows all available items and their possible stats. Results are ranked by how well the piece matches each build.',
   'tools.gear-usage-finder.matches': 'matching characters',
+  'tools.gear-usage-finder.subs': 'Subs:',
+  'tools.gear-usage-finder.builds': '{count} builds',
   'tools.gear-usage-finder.no_users': 'No character matches these criteria.',
   'tools.patch-history': 'Patch & Dev Notes',
   'tools.patch-history.desc': 'Browse all patch notes, developer notes, hero compendium and more.',
@@ -346,6 +356,10 @@ const en = {
   'tools.hero-tracker.importDone': '{count} heroes imported',
   'tools.hero-tracker.importUnknown': '{count} entries left out',
   'tools.hero-tracker.importEmpty': 'Nothing to import in this file',
+  'tools.hero-tracker.importErrFormat': 'Not a roster file (expected format “{format}”)',
+  'tools.hero-tracker.importErrVersion':
+    'Version {expected} expected, this file is version {actual}',
+  'tools.hero-tracker.importErrHeroes': '“heroes” field missing',
   'tools.hero-tracker.sort': 'Sort',
   'tools.hero-tracker.sortNeed': 'To farm',
   'tools.hero-tracker.sortName': 'Name',
@@ -1234,6 +1248,16 @@ const en = {
   'ost.keyboardShortcuts': 'Keyboard shortcuts',
   'ost.tabTracks': 'Tracks',
   'ost.tabArchived': 'Archived',
+  'ost.loadError': 'Failed to load track',
+  'ost.colTitle': 'Title',
+  'ost.colDuration': 'Duration',
+  'ost.colSize': 'Size',
+  'ost.shuffle': 'Shuffle',
+  'ost.repeat.off': 'Repeat off',
+  'ost.repeat.all': 'Repeat all',
+  'ost.repeat.one': 'Repeat one',
+  'ost.mute': 'Mute (M)',
+  'ost.unmute': 'Unmute (M)',
   'ost.archivedNote':
     'These tracks were removed from the game in a later update. They are kept here as an archive.',
   // Wallpapers

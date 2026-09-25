@@ -1,5 +1,6 @@
-import { getT } from '@/i18n';
+import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
+import { CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { characterDisplayName, getAllCharacters } from '@/lib/data/characters';
 import { mergeStatusEffects } from '@/lib/data/effects';
 import { buildTeamKitView, dedupSkills, type TargetedChip } from '@/lib/skill-view';
@@ -143,6 +144,12 @@ export default async function TeamPlanner({ lang }: { lang: Lang }) {
     burstEffects: t('tools.team-planner.burst_effects'),
     dualAttackEffects: t('tools.team-planner.dual_attack_effects'),
     noEffects: t('tools.team-planner.no_effects'),
+    elementNames: Object.fromEntries(
+      ELEMENT_ORDER.map((e) => [e, t(`sys.element.${e}` as TranslationKey)]),
+    ),
+    classNames: Object.fromEntries(
+      CLASS_ORDER.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
+    ),
   };
 
   return <TeamPlannerBrowser chars={chars} fx={fxById} statuses={usedStatuses} labels={labels} />;

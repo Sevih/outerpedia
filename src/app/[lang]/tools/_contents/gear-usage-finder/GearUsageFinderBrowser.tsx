@@ -85,6 +85,10 @@ export interface FinderLabels {
   types: Record<EquipType, string>;
   matches: string;
   noUsers: string;
+  /** Préfixe du compte de substats trouvées (« Subs: 2/3 »). */
+  subs: string;
+  /** Gabarit `{count}` — nombre de builds du perso qui portent la pièce. */
+  builds: string;
 }
 
 interface MatchResult {
@@ -450,7 +454,7 @@ export function GearUsageFinderBrowser({
                       )}
                       {selectedSubs.length > 0 && (
                         <span className="text-content-muted block text-xs">
-                          Subs:{' '}
+                          {labels.subs}{' '}
                           <span
                             className={
                               r.matchedSubCount === selectedSubs.length
@@ -464,7 +468,7 @@ export function GearUsageFinderBrowser({
                       )}
                       {r.buildCount > 1 && (
                         <span className="text-content-subtle text-2xs block">
-                          {r.buildCount} builds
+                          {labels.builds.replace('{count}', String(r.buildCount))}
                         </span>
                       )}
                     </span>

@@ -150,9 +150,10 @@ function buildLabels(t: TFunction, mode: TierListMode, rows: TierListRow[]): Tie
   return {
     disclaimer: t(DISCLAIMER[mode]),
     ...(mode === 'pve' ? { transcendLevel: t('tierlist.transcend_level') } : {}),
-    charactersCount: t('tierlist.characters_count'),
+    charactersCount: t('tierlist.characters_total'),
     bar: {
       searchPlaceholder: t('characters.filters.search_placeholder'),
+      clear: t('common.clear'),
       elements: t('filters.elements'),
       classes: t('filters.classes'),
       rarity: t('filters.rarity'),

@@ -24,6 +24,13 @@ const es: Record<TranslationKey, string> = {
   'common.coming_soon': 'Próximamente.',
   'common.language': 'Idioma',
   'common.copied': '¡Copiado!',
+  'common.close': 'Cerrar',
+  'common.previous': 'Anterior',
+  'common.next': 'Siguiente',
+  'common.clear': 'Borrar',
+  'common.remove': 'Quitar',
+  'common.on': 'Activado',
+  'common.off': 'Desactivado',
   'share.on': 'Compartir en {platform}',
   'share.copy_link': 'Copiar enlace',
   'aria.toggle_menu': 'Alternar menú',
@@ -135,6 +142,7 @@ const es: Record<TranslationKey, string> = {
   'page.tierlist.other_rankings': 'Otros rankings',
   'tierlist.transcend_level': 'Nivel de Trascendencia',
   'tierlist.characters_count': 'personajes',
+  'tierlist.characters_total': '{count} personajes',
   'tierlist.disclaimer_pve':
     'Esta lista de tiers asume tener el Equipo exclusivo Nv0. Los resultados pueden variar si las mejoras no están desbloqueadas. Esta lista es solo para contenido PvE.',
   'tierlist.disclaimer_pvp':
@@ -153,7 +161,7 @@ const es: Record<TranslationKey, string> = {
   'tierlist.versus.preview': 'Vista previa de los mejores tiers',
   'tierlist.versus.units': '{count} unidades clasificadas',
   'tierlist.versus.view': 'Ver',
-  'tierlist.versus.tools_count': 'clasificaciones',
+  'tierlist.versus.tools_count': '{count} clasificaciones',
   'page.tools.title': 'Herramientas y Utilidades de Outerplane',
   'page.tools.description':
     'Herramientas de Outerplane: solucionador de equipo, planificador de equipos, simulador de tiradas, seguimiento de progreso y más.',
@@ -215,6 +223,8 @@ const es: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.mode_free.desc':
     'Muestra todos los objetos disponibles y sus estadísticas posibles. Los resultados se clasifican según qué tan bien encaja la pieza con cada construcción.',
   'tools.gear-usage-finder.matches': 'personajes que coinciden',
+  'tools.gear-usage-finder.subs': 'Subestadísticas:',
+  'tools.gear-usage-finder.builds': '{count} builds',
   'tools.gear-usage-finder.no_users': 'Ningún personaje coincide con estos criterios.',
   'tools.patch-history': 'Parches y Notas de Desarrollo',
   'tools.patch-history.desc':
@@ -344,6 +354,11 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.importDone': '{count} héroes importados',
   'tools.hero-tracker.importUnknown': '{count} entradas omitidas',
   'tools.hero-tracker.importEmpty': 'No hay nada que importar en este archivo',
+  'tools.hero-tracker.importErrFormat':
+    'No es un archivo de alineación (formato esperado «{format}»)',
+  'tools.hero-tracker.importErrVersion':
+    'Se esperaba la versión {expected}, este archivo es de la versión {actual}',
+  'tools.hero-tracker.importErrHeroes': 'Falta el campo «heroes»',
   'tools.hero-tracker.sort': 'Ordenar',
   'tools.hero-tracker.sortNeed': 'Para farmear',
   'tools.hero-tracker.sortName': 'Nombre',
@@ -1246,6 +1261,16 @@ const es: Record<TranslationKey, string> = {
   'ost.keyboardShortcuts': 'Atajos de teclado',
   'ost.tabTracks': 'Pistas',
   'ost.tabArchived': 'Archivadas',
+  'ost.loadError': 'No se pudo cargar la pista',
+  'ost.colTitle': 'Título',
+  'ost.colDuration': 'Duración',
+  'ost.colSize': 'Tamaño',
+  'ost.shuffle': 'Aleatorio',
+  'ost.repeat.off': 'Repetición desactivada',
+  'ost.repeat.all': 'Repetir todo',
+  'ost.repeat.one': 'Repetir una',
+  'ost.mute': 'Silenciar (M)',
+  'ost.unmute': 'Activar sonido (M)',
   'ost.archivedNote':
     'Estas pistas se retiraron del juego en una actualización posterior. Se conservan aquí como archivo.',
   // Wallpapers

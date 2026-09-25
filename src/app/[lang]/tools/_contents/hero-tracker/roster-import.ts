@@ -73,8 +73,22 @@ export interface ImportReport {
   unknown: string[];
 }
 
-const FORMAT = 'outerpedia:hero-tracker';
+export const FORMAT = 'outerpedia:hero-tracker';
 const VERSION = 1;
+
+/**
+ * Refus en bloc de l'import. Le module ne parle pas la langue de l'utilisateur :
+ * il jette un CODE (et ses paramètres), l'appelant le traduit.
+ */
+export class RosterImportError extends Error {
+  constructor(
+    readonly code: 'format' | 'version' | 'heroes',
+    readonly params: Record<string, string> = {},
+  ) {
+    super(`roster import: ${code}`);
+    this.name = 'RosterImportError';
+  }
+}
 
 const isObj = (v: unknown): v is Record<string, unknown> =>
   typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -105,12 +119,15 @@ function stepOf(stars: number[], star: unknown): number {
  */
 export function importRoster(raw: unknown, byId: Map<string, ImportHero>): ImportReport {
   if (!isObj(raw) || raw.format !== FORMAT) {
-    throw new Error(`format attendu « ${FORMAT} »`);
+    throw new RosterImportError('format', { format: FORMAT });
   }
   if (raw.version !== VERSION) {
-    throw new Error(`version ${VERSION} attendue, fichier en version ${String(raw.version)}`);
+    throw new RosterImportError('version', {
+      expected: String(VERSION),
+      actual: String(raw.version),
+    });
   }
-  if (!isObj(raw.heroes)) throw new Error('« heroes » manquant');
+  if (!isObj(raw.heroes)) throw new RosterImportError('heroes');
 
   const report: ImportReport = { heroes: {}, fused: {}, imported: 0, ignored: 0, unknown: [] };
 

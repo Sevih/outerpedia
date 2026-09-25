@@ -58,6 +58,9 @@ export default async function Wallpapers({ lang }: { lang: Lang }) {
         disclaimer2: t('wallpapers.disclaimer.line2'),
         contactLink: t('wallpapers.contactLink'),
         archivedNote: t('wallpapers.archivedNote'),
+        close: t('common.close'),
+        previous: t('common.previous'),
+        next: t('common.next'),
       }}
     />
   );

@@ -7,6 +7,40 @@
 
 ## 2026-09-25
 
+- **Chaînes UI en dur des outils et composants → `t()`** (lot B2, G24 de
+  `docs/audit/transverse.md`). Trente-deux sites affichaient de l'anglais — ou
+  du FRANÇAIS, pour les erreurs d'import du hero-tracker — quelle que soit la
+  langue. Outils : l'OST (`ost.loadError`, en-têtes `ost.colTitle/colDuration/
+colSize`, `ost.shuffle`, `ost.repeat.{off,all,one}`, `ost.mute/unmute`) ;
+  `roster-import.ts` jette désormais une `RosterImportError` à CODE
+  (`format`/`version`/`heroes` + paramètres) que `HeroTrackerBrowser` traduit
+  (`tools.hero-tracker.importErr*`), un JSON illisible prenant le message
+  « format » au lieu de l'erreur brute du parseur, et le roster vide ne passe
+  plus par un `throw` ; `title`/`alt` des pastilles élément/classe du
+  tier-list-maker et du team-planner sur `sys.element.*`/`sys.class.*` (le
+  vocabulaire des filtres `/characters`, déjà le modèle du hero-tracker, dont
+  le picker cité par l'audit était déjà corrigé) ; « Subs: » et « N builds »
+  du gear-usage-finder (`tools.gear-usage-finder.subs/builds`) ; `aria-label`
+  des lightbox wallpapers/4-comics (`common.close/previous/next`) et de la
+  croix de gear-usage-statistics (`common.clear`). Composants : `ON`/`OFF` des
+  quirks (`SubstatVerdict`, `StatsRankingSection` → `common.on/off`, repris
+  sur les valeurs existantes de `burst_off`) ; `SearchField` et `ActiveChip`
+  (`FilterAtoms`) exigent un `clearLabel`/`removeLabel`, fournis par leurs
+  huit appelants (`common.clear`, `common.remove` ; le calculateur, qui avait
+  déjà un `clear` pour vider un slot, prend `clearSearch`) ; concaténations
+  nombre + libellé en gabarits `{count}` (`tierlist.versus.tools_count`,
+  nouvelle `tierlist.characters_total` — `characters_count` reste l'unité
+  seule que gear-usage-statistics pose SOUS le nombre) ; prix et CP de
+  `StatsRankingSection` et `EquipmentDetail` en `toLocaleString(htmlLang)`
+  via une prop `locale`. `StarIcon` prend `aria-label="★"` plutôt qu'une clé :
+  il vit dans des textes éditoriaux sans `t()` à portée, et le lecteur d'écran
+  prononce le caractère dans sa propre langue. 23 clés nouvelles ×6 langues
+  (plus `tools_count` passée en gabarit), jp/kr/zh en traduction sobre. Vérifié : typecheck, lint, 1956 tests verts ; en dev,
+  `/fr/ost` rend « Durée », « Lecture aléatoire », « Couper le son (M) », et
+  `/fr/tierlist` « 3 classements ». Laissé (hors liste G24) :
+  `${n} ${labels.matches}` du gear-usage-finder (même concaténation),
+  `fmt` en `en-US` du hero-tracker, les boutons lecture/précédent/suivant de
+  l'OST sans libellé du tout (a11y, lot B6).
 - **Guides : couleurs Tailwind brutes → tokens éditoriaux `ed-*`** (lot B5,
   H6 de `docs/audit/guides.md`). Les guides écrivaient `text-sky-400`,
   `bg-rose-400/5`… alors que `--ed-*` (`globals.css`, exposés en

@@ -26,6 +26,14 @@ export interface OstStrings {
   tabTracks: string;
   tabArchived: string;
   archivedNote: string;
+  loadError: string;
+  colTitle: string;
+  colDuration: string;
+  colSize: string;
+  shuffle: string;
+  repeat: Record<Repeat, string>;
+  mute: string;
+  unmute: string;
 }
 
 type Repeat = 'off' | 'one' | 'all';
@@ -160,7 +168,7 @@ export function OstPlayer({
     const onCanPlay = () => setIsLoading(false);
     const onError = () => {
       setIsLoading(false);
-      setError('Failed to load track');
+      setError(strings.loadError);
     };
 
     el.addEventListener('timeupdate', onTime);
@@ -181,7 +189,7 @@ export function OstPlayer({
       el.removeEventListener('canplay', onCanPlay);
       el.removeEventListener('error', onError);
     };
-  }, [currentTrackIndex, shuffle, repeat, switchTrack, tracks]);
+  }, [currentTrackIndex, shuffle, repeat, switchTrack, tracks, strings.loadError]);
 
   useEffect(() => {
     const el = audioRef.current;
@@ -377,9 +385,9 @@ export function OstPlayer({
       <div className="mt-4">
         <div className="border-line text-content-subtle hidden grid-cols-[40px_1fr_70px_70px_50px] gap-4 border-b px-4 py-2 text-xs tracking-wider uppercase md:grid">
           <span>#</span>
-          <span>Title</span>
-          <span className="text-right">Duration</span>
-          <span className="text-right">Size</span>
+          <span>{strings.colTitle}</span>
+          <span className="text-right">{strings.colDuration}</span>
+          <span className="text-right">{strings.colSize}</span>
           <span />
         </div>
 
@@ -511,7 +519,7 @@ export function OstPlayer({
                 type="button"
                 onClick={() => setShuffle((s) => !s)}
                 className={`p-1 transition-colors ${shuffle ? 'text-sky-400' : 'text-content-muted hover:text-content-strong'}`}
-                title="Shuffle"
+                title={strings.shuffle}
               >
                 <ShuffleGlyph className="size-4" />
               </button>
@@ -560,7 +568,7 @@ export function OstPlayer({
                   setRepeat((r) => (r === 'off' ? 'all' : r === 'all' ? 'one' : 'off'))
                 }
                 className={`relative p-1 transition-colors ${repeat !== 'off' ? 'text-sky-400' : 'text-content-muted hover:text-content-strong'}`}
-                title={`Repeat ${repeat}`}
+                title={strings.repeat[repeat]}
               >
                 <RepeatGlyph className="size-4" />
                 {repeat === 'one' && (
@@ -582,7 +590,7 @@ export function OstPlayer({
                 type="button"
                 onClick={() => setIsMuted((m) => !m)}
                 className="text-content-muted hover:text-content-strong p-1 transition-colors"
-                title={isMuted ? 'Unmute (M)' : 'Mute (M)'}
+                title={isMuted ? strings.unmute : strings.mute}
               >
                 <VolumeGlyph
                   className="size-5"

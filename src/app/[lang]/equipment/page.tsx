@@ -215,6 +215,7 @@ export default async function EquipmentPage({ params }: { params: Promise<{ lang
       ee: t('equip.tab.ee'),
     },
     search: t('equip.filter.search'),
+    clear: t('common.clear'),
     class: t('equip.filter.class'),
     element: t('equip.filter.element'),
     source: t('equip.filter.source'),

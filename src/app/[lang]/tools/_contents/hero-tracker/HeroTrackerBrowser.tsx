@@ -21,7 +21,13 @@ import {
   type TrackedHero,
   type TranscendCost,
 } from './engine';
-import { importRoster, type HeroEntry, type ImportHero } from './roster-import';
+import {
+  FORMAT as ROSTER_FORMAT,
+  importRoster,
+  RosterImportError,
+  type HeroEntry,
+  type ImportHero,
+} from './roster-import';
 
 /**
  * Suivi de compte — écran CLIENT. L'état vit dans le localStorage (aucun
@@ -130,6 +136,10 @@ export interface HeroTrackerLabels {
   importDone: string;
   importUnknown: string;
   importEmpty: string;
+  /** Refus en bloc (codes de `RosterImportError`) — gabarits `{format}`, `{expected}`/`{actual}`. */
+  importErrFormat: string;
+  importErrVersion: string;
+  importErrHeroes: string;
   sort: string;
   sortNeed: string;
   sortName: string;
@@ -516,7 +526,10 @@ export function HeroTrackerBrowser({
           ]),
         );
         const r = importRoster(raw, byId);
-        if (r.imported === 0) throw new Error(labels.importEmpty);
+        if (r.imported === 0) {
+          setImportState({ ok: false, message: labels.importEmpty });
+          return;
+        }
         // Le roster est REMPLACÉ, pas fusionné : un import partiel qui laisserait
         // des héros d'une capture précédente donnerait un total invérifiable.
         setStore((prev) => ({ ...prev, heroes: r.heroes, fused: r.fused }));
@@ -531,7 +544,21 @@ export function HeroTrackerBrowser({
               : ''),
         });
       } catch (e) {
-        setImportState({ ok: false, message: e instanceof Error ? e.message : String(e) });
+        // Un JSON illisible n'est pas un roster non plus : même message que
+        // l'enveloppe inconnue, plutôt que l'erreur brute (anglaise) du parseur.
+        const err =
+          e instanceof RosterImportError
+            ? e
+            : new RosterImportError('format', { format: ROSTER_FORMAT });
+        const template = {
+          format: labels.importErrFormat,
+          version: labels.importErrVersion,
+          heroes: labels.importErrHeroes,
+        }[err.code];
+        setImportState({
+          ok: false,
+          message: template.replace(/\{(\w+)\}/g, (m, k: string) => err.params[k] ?? m),
+        });
       }
     },
     [heroes, ladder, asTracked, maxTarget, setStore, labels],

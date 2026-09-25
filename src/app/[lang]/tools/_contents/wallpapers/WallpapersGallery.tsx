@@ -29,6 +29,10 @@ export interface WallpaperStrings {
   disclaimer2: string;
   contactLink: string;
   archivedNote: string;
+  /** Libellés accessibles de la lightbox. */
+  close: string;
+  previous: string;
+  next: string;
 }
 
 const HELPSHIFT_URL = 'https://outerplane.helpshift.com/hc/en/4-outerplane/';
@@ -210,7 +214,7 @@ export function WallpapersGallery({
           <button
             type="button"
             onClick={close}
-            aria-label="Close"
+            aria-label={strings.close}
             className="text-content/70 hover:text-content absolute top-4 right-4 z-10 p-2 transition-colors"
           >
             <CloseGlyph className="size-8" />
@@ -227,7 +231,7 @@ export function WallpapersGallery({
                   e.stopPropagation();
                   nav(-1);
                 }}
-                aria-label="Previous"
+                aria-label={strings.previous}
                 className="text-content/50 hover:text-content absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10 rotate-180" />
@@ -238,7 +242,7 @@ export function WallpapersGallery({
                   e.stopPropagation();
                   nav(1);
                 }}
-                aria-label="Next"
+                aria-label={strings.next}
                 className="text-content/50 hover:text-content absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 transition-colors"
               >
                 <ChevronGlyph className="size-10" />

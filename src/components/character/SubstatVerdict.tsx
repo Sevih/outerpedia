@@ -34,6 +34,9 @@ export interface SubstatVerdictLabels {
   badgeEven: string;
   level: string;
   quirks: string;
+  /** État de l'interrupteur des quirks. */
+  on: string;
+  off: string;
   /** Une ligne de calcul par axe : `+{pct}% × {base} = +{equiv} vs +{flat}`. */
   calcLine: string;
   /** La base utilisée (`{level}`, `{awak}`) et ce qui n'y entre pas. */
@@ -183,7 +186,7 @@ export function SubstatVerdictPanel({
             onClick={() => setQuirksOn((v) => !v)}
             className={toggleClass(quirksOn)}
           >
-            {quirksOn ? 'ON' : 'OFF'}
+            {quirksOn ? labels.on : labels.off}
           </button>
         </div>
 

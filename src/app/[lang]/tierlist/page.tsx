@@ -133,9 +133,7 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
           {t('page.tierlist.description').replace('{monthYear}', getMonthYear(lang))}
         </p>
         <div className="text-content-subtle text-2xs mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono tracking-[0.14em] uppercase">
-          <span>
-            {rankingsCount} {t('tierlist.versus.tools_count')}
-          </span>
+          <span>{t('tierlist.versus.tools_count', { count: rankingsCount })}</span>
           <span aria-hidden>·</span>
           <span>{t('tierlist.versus.units').replace('{count}', String(unitCount))}</span>
         </div>
@@ -169,7 +167,7 @@ export default async function TierlistPage({ params }: { params: Promise<{ lang:
           <OtherRankingsRail
             tools={others}
             heading={t('page.tierlist.other_rankings')}
-            countLabel={`${others.length} ${t('tierlist.versus.tools_count')}`}
+            countLabel={t('tierlist.versus.tools_count', { count: others.length })}
           />
         </div>
       )}

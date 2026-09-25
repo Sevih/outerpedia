@@ -64,6 +64,7 @@ export default async function GearUsageStatistics({ lang }: { lang: Lang }) {
       talisman: t('tools.gear-usage-statistics.tab.talismans'),
     },
     charsUnit: t('tierlist.characters_count'),
+    clear: t('common.clear'),
   };
 
   return <GearUsageBrowser data={rows} labels={labels} />;

@@ -45,6 +45,7 @@ export default async function MostUsedUnits({ lang }: { lang: Lang }) {
   const labels: MostUsedLabels = {
     bar: {
       searchPlaceholder: t('characters.filters.search_placeholder'),
+      clear: t('common.clear'),
       elements: t('filters.elements'),
       classes: t('filters.classes'),
       rarity: t('filters.rarity'),

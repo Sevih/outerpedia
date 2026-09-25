@@ -338,7 +338,12 @@ export function CharPicker({
         )}
       </div>
       <Modal open={open} onClose={close} title={placeholder}>
-        <SearchField value={search} onChange={setSearch} placeholder={labels.search} />
+        <SearchField
+          value={search}
+          onChange={setSearch}
+          placeholder={labels.search}
+          clearLabel={labels.clearSearch}
+        />
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex gap-1.5">
             {ELEMENT_ORDER.map((el) => (

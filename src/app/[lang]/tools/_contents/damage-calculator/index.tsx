@@ -921,6 +921,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
 
   const labels: DcLabels = {
     search: t('common.search'),
+    clearSearch: t('common.clear'),
     select: t(k('common.select')),
     noMatches: t(k('common.no_matches')),
     disclaimer: t(k('disclaimer')),

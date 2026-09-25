@@ -54,6 +54,9 @@ export default async function Comics({ lang }: { lang: Lang }) {
       strings={{
         description: t('comics.description'),
         credit: t('comics.credit'),
+        close: t('common.close'),
+        previous: t('common.previous'),
+        next: t('common.next'),
       }}
     />
   );

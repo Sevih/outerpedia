@@ -77,6 +77,9 @@ export interface TpLabels {
   burstEffects: string;
   dualAttackEffects: string;
   noEffects: string;
+  /** Noms localisés des éléments et des classes (`sys.*`), par slug. */
+  elementNames: Record<string, string>;
+  classNames: Record<string, string>;
 }
 
 interface Props {
@@ -399,11 +402,17 @@ function CharPicker({
               <button
                 key={el}
                 type="button"
-                title={el}
+                title={labels.elementNames[el] ?? el}
                 onClick={() => setElement((v) => (v === el ? null : el))}
                 className={filterBtn(element === el)}
               >
-                <img src={img.element(el)} alt={el} className="h-5 w-5" width={20} height={20} />
+                <img
+                  src={img.element(el)}
+                  alt={labels.elementNames[el] ?? el}
+                  className="h-5 w-5"
+                  width={20}
+                  height={20}
+                />
               </button>
             ))}
           </div>
@@ -412,11 +421,17 @@ function CharPicker({
               <button
                 key={k}
                 type="button"
-                title={k}
+                title={labels.classNames[k] ?? k}
                 onClick={() => setCls((v) => (v === k ? null : k))}
                 className={filterBtn(cls === k)}
               >
-                <img src={img.klass(k)} alt={k} className="h-5 w-5" width={20} height={20} />
+                <img
+                  src={img.klass(k)}
+                  alt={labels.classNames[k] ?? k}
+                  className="h-5 w-5"
+                  width={20}
+                  height={20}
+                />
               </button>
             ))}
           </div>

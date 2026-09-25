@@ -23,6 +23,13 @@ const jp: Record<TranslationKey, string> = {
   'common.coming_soon': '近日公開',
   'common.language': '言語',
   'common.copied': 'コピー済み！',
+  'common.close': '閉じる',
+  'common.previous': '前へ',
+  'common.next': '次へ',
+  'common.clear': 'クリア',
+  'common.remove': '削除',
+  'common.on': 'オン',
+  'common.off': 'オフ',
   'share.on': '{platform}で共有',
   'share.copy_link': 'リンクをコピー',
   'aria.toggle_menu': 'メニュー切替',
@@ -134,6 +141,7 @@ const jp: Record<TranslationKey, string> = {
   'page.tierlist.other_rankings': 'その他のランキング',
   'tierlist.transcend_level': '超越レベル',
   'tierlist.characters_count': 'キャラクター',
+  'tierlist.characters_total': '{count}キャラクター',
   'tierlist.disclaimer_pve':
     'このティアリストは専用装備Lv0を所持していることを前提としています。強化が解放されていない場合、結果が異なる場合があります。PvEコンテンツ専用です。',
   'tierlist.disclaimer_pvp':
@@ -151,7 +159,7 @@ const jp: Record<TranslationKey, string> = {
   'tierlist.versus.preview': 'トップティアのプレビュー',
   'tierlist.versus.units': '{count}体ランク付け',
   'tierlist.versus.view': '見る',
-  'tierlist.versus.tools_count': 'ランキング',
+  'tierlist.versus.tools_count': '{count}件のランキング',
   'page.tools.title': 'アウタープレーン ツール & ユーティリティ',
   'page.tools.description':
     'アウタープレーンのツール：装備ソルバー、チームプランナー、ガチャシミュレーター、進捗トラッカーなど。',
@@ -211,6 +219,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.mode_free.desc':
     '全ての装備と使用可能なステータスを表示。各ビルドとの相性度でランキング。',
   'tools.gear-usage-finder.matches': '件のキャラクターが該当',
+  'tools.gear-usage-finder.subs': 'サブステータス:',
+  'tools.gear-usage-finder.builds': '{count}ビルド',
   'tools.gear-usage-finder.no_users': '条件に一致するキャラクターはいません。',
   'tools.patch-history': 'パッチ & 開発者ノート',
   'tools.patch-history.desc': 'パッチノート、開発者ノート、ヒーロー大全などを閲覧。',
@@ -335,6 +345,10 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.importDone': '{count}体をインポートしました',
   'tools.hero-tracker.importUnknown': '{count}件を除外',
   'tools.hero-tracker.importEmpty': 'このファイルにインポートできるものがありません',
+  'tools.hero-tracker.importErrFormat': 'ロスターファイルではありません（想定形式「{format}」）',
+  'tools.hero-tracker.importErrVersion':
+    'バージョン{expected}が必要です（このファイルはバージョン{actual}）',
+  'tools.hero-tracker.importErrHeroes': '「heroes」フィールドがありません',
   'tools.hero-tracker.sort': '並び替え',
   'tools.hero-tracker.sortNeed': '必要量',
   'tools.hero-tracker.sortName': '名前',
@@ -1206,6 +1220,16 @@ const jp: Record<TranslationKey, string> = {
   'ost.keyboardShortcuts': 'キーボードショートカット',
   'ost.tabTracks': 'トラック',
   'ost.tabArchived': 'アーカイブ',
+  'ost.loadError': 'トラックを読み込めませんでした',
+  'ost.colTitle': 'タイトル',
+  'ost.colDuration': '再生時間',
+  'ost.colSize': 'サイズ',
+  'ost.shuffle': 'シャッフル',
+  'ost.repeat.off': 'リピートオフ',
+  'ost.repeat.all': '全曲リピート',
+  'ost.repeat.one': '1曲リピート',
+  'ost.mute': 'ミュート (M)',
+  'ost.unmute': 'ミュート解除 (M)',
   'ost.archivedNote':
     'これらのトラックはその後のアップデートでゲームから削除されました。アーカイブとしてここに保存しています。',
   // Wallpapers

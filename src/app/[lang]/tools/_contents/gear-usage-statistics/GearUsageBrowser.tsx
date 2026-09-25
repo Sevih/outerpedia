@@ -41,6 +41,8 @@ export interface GearUsageLabels {
   tabs: Record<GearCategory, string>;
   /** Unité du compteur par ligne (« characters »). */
   charsUnit: string;
+  /** Libellé accessible de la croix d'effacement de la recherche. */
+  clear: string;
 }
 
 const CATEGORIES: GearCategory[] = ['weapon', 'amulet', 'set', 'talisman'];
@@ -124,7 +126,7 @@ export function GearUsageBrowser({
           <button
             type="button"
             onClick={() => setQ('')}
-            aria-label="clear"
+            aria-label={labels.clear}
             className="text-content-subtle hover:text-content-strong absolute right-2"
           >
             ×

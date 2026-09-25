@@ -298,7 +298,16 @@ function TierTabs({
 
 // --- vue principale --------------------------------------------------------------
 
-export function EquipmentDetail({ model, labels }: { model: DetailModel; labels: DetailLabels }) {
+export function EquipmentDetail({
+  model,
+  labels,
+  locale,
+}: {
+  model: DetailModel;
+  labels: DetailLabels;
+  /** Locale BCP 47 de la page (`htmlLang`) — séparateurs de milliers des prix. */
+  locale: string;
+}) {
   const accent = GRADE_VAR[model.grade] ?? GRADE_VAR.unique;
   const rules = model.rules;
   const useTiers = model.kind !== 'talisman' && model.kind !== 'ee';
@@ -721,7 +730,7 @@ export function EquipmentDetail({ model, labels }: { model: DetailModel; labels:
       {/* Ascension Singularity — ledger */}
       {model.canAscend && (
         <Module title={labels.ascension} span={2} ascension>
-          <AscensionLedger asc={model.ascension} labels={labels} />
+          <AscensionLedger asc={model.ascension} labels={labels} locale={locale} />
         </Module>
       )}
 
@@ -800,7 +809,15 @@ function AxEyebrow({ children }: { children: ReactNode }) {
 }
 
 /** Bande « Activation cost » : or + matériaux. */
-function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
+function AxActivationBand({
+  asc,
+  labels,
+  locale,
+}: {
+  asc: AscView;
+  labels: DetailLabels;
+  locale: string;
+}) {
   return (
     <div className="border-line-subtle bg-surface-base/40 rounded-xl border px-4 py-3.5">
       <div className="mb-3">
@@ -809,7 +826,7 @@ function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
         <span className="inline-flex items-center gap-1.5">
           <span className="text-stat-accent font-mono font-bold">
-            {asc.activation.price.toLocaleString('en')}
+            {asc.activation.price.toLocaleString(locale)}
           </span>
           <img src={img.gold()} alt="Gold" className="h-4.5 w-4.5" width={18} height={18} />
         </span>
@@ -832,7 +849,15 @@ function AxActivationBand({ asc, labels }: { asc: AscView; labels: DetailLabels 
  * la colonne n'affichait plus qu'une file de « 100 % ». Le `rate` reste dans la
  * donnée, il n'a simplement plus rien à dire au lecteur.
  */
-function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
+function AxStepsCard({
+  asc,
+  labels,
+  locale,
+}: {
+  asc: AscView;
+  labels: DetailLabels;
+  locale: string;
+}) {
   const headMats = asc.activation.materials;
   return (
     <div className="border-line-subtle bg-surface-base/40 rounded-xl border px-4 py-3.5">
@@ -876,7 +901,7 @@ function AxStepsCard({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
                 +{s.to}
               </td>
               <td className="text-stat-accent py-2 pl-2 text-right align-middle font-mono text-xs whitespace-nowrap tabular-nums">
-                {s.price.toLocaleString('en')}
+                {s.price.toLocaleString(locale)}
               </td>
               {headMats.map((hm) => {
                 const m = s.materials.find((x) => x.icon === hm.icon);
@@ -995,14 +1020,22 @@ function AxBonusColumn({ asc, labels }: { asc: AscView; labels: DetailLabels }) 
 type AscView = DetailModel['ascension'];
 
 /** Ledger complet : [activation + steps] | [colonne bonus]. */
-function AscensionLedger({ asc, labels }: { asc: AscView; labels: DetailLabels }) {
+function AscensionLedger({
+  asc,
+  labels,
+  locale,
+}: {
+  asc: AscView;
+  labels: DetailLabels;
+  locale: string;
+}) {
   return (
     <div
       className={`grid grid-cols-1 items-start gap-4 ${asc.bonuses.length ? 'md:grid-cols-2' : ''}`}
     >
       <div className="flex min-w-0 flex-col gap-4">
-        <AxActivationBand asc={asc} labels={labels} />
-        <AxStepsCard asc={asc} labels={labels} />
+        <AxActivationBand asc={asc} labels={labels} locale={locale} />
+        <AxStepsCard asc={asc} labels={labels} locale={locale} />
       </div>
       {asc.bonuses.length > 0 && (
         <div className="min-w-0">

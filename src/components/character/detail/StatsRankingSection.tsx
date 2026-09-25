@@ -38,6 +38,9 @@ export interface StatsRankingLabels {
   transcend: string;
   codex: string;
   quirks: string;
+  /** État de l'interrupteur des quirks. */
+  on: string;
+  off: string;
   /** Tooltip du CP (l'infobulle explique le contexte du calcul). */
   cpTitle: string;
 }
@@ -57,6 +60,7 @@ export function StatsRankingSection({
   tiers,
   gifts,
   labels,
+  locale,
 }: {
   steps: StatStepView[];
   /** Couches optionnelles (transcendance / codex / quirks), résolues côté serveur. */
@@ -72,6 +76,8 @@ export function StatsRankingSection({
   tiers: TierEntry[];
   gifts: GiftView[];
   labels: StatsRankingLabels;
+  /** Locale BCP 47 de la page (`htmlLang`) — séparateurs de milliers. */
+  locale: string;
 }) {
   const [idx, setIdx] = useState(Math.max(0, steps.length - 1));
   // Palier de transcendance : PILOTÉ par le TranscendSlider (contexte partagé).
@@ -133,7 +139,7 @@ export function StatsRankingSection({
                   width={16}
                   height={16}
                 />
-                {cp.toLocaleString('en')}
+                {cp.toLocaleString(locale)}
               </span>
             )}
             {step && <span className="text-xs text-zinc-400">Lv.{step.level}</span>}
@@ -214,7 +220,7 @@ export function StatsRankingSection({
                       : 'border-white/10 text-zinc-400 hover:bg-white/5'
                   }`}
                 >
-                  {quirksOn ? 'ON' : 'OFF'}
+                  {quirksOn ? labels.on : labels.off}
                 </button>
               </span>
             </div>
@@ -288,7 +294,7 @@ export function StatsRankingSection({
                     height={20}
                   />
                   <span className="text-zinc-100">
-                    {step.limitBreak.price.toLocaleString('en')}
+                    {step.limitBreak.price.toLocaleString(locale)}
                   </span>
                 </span>
               </div>

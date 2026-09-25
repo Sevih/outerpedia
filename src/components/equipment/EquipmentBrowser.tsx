@@ -24,6 +24,8 @@ import type { EERow, GearRow, RowSource, SetRow } from './cards';
 export interface BrowserLabels {
   tabs: { weapons: string; amulets: string; sets: string; talismans: string; ee: string };
   search: string;
+  /** Libellé accessible de la croix d'effacement de la recherche. */
+  clear: string;
   class: string;
   element: string;
   source: string;
@@ -249,7 +251,12 @@ function GearTab({
     <div className="space-y-4">
       <Toolbar count={filtered.length}>
         <div className="w-64 max-w-full">
-          <SearchField value={q} onChange={setQ} placeholder={labels.search} />
+          <SearchField
+            value={q}
+            onChange={setQ}
+            placeholder={labels.search}
+            clearLabel={labels.clear}
+          />
         </div>
         <ToolbarDivider />
         <BarGroup label={labels.class}>
@@ -321,7 +328,12 @@ function SetsTab({ rows, labels }: { rows: SetRow[]; labels: BrowserLabels }) {
     <div className="space-y-4">
       <Toolbar count={filtered.length}>
         <div className="w-64 max-w-full">
-          <SearchField value={q} onChange={setQ} placeholder={labels.search} />
+          <SearchField
+            value={q}
+            onChange={setQ}
+            placeholder={labels.search}
+            clearLabel={labels.clear}
+          />
         </div>
         {sources.length > 0 && (
           <>
@@ -357,7 +369,12 @@ function TalismansTab({ rows, labels }: { rows: GearRow[]; labels: BrowserLabels
     <div className="space-y-4">
       <Toolbar count={filtered.length}>
         <div className="w-64 max-w-full">
-          <SearchField value={q} onChange={setQ} placeholder={labels.search} />
+          <SearchField
+            value={q}
+            onChange={setQ}
+            placeholder={labels.search}
+            clearLabel={labels.clear}
+          />
         </div>
         <ToolbarDivider />
         <BarGroup label={labels.type}>
@@ -416,7 +433,12 @@ function EETab({ rows, labels }: { rows: EERow[]; labels: BrowserLabels }) {
     <div className="space-y-4">
       <Toolbar count={filtered.length}>
         <div className="w-64 max-w-full">
-          <SearchField value={q} onChange={setQ} placeholder={labels.search} />
+          <SearchField
+            value={q}
+            onChange={setQ}
+            placeholder={labels.search}
+            clearLabel={labels.clear}
+          />
         </div>
         <ToolbarDivider />
         <BarGroup label={labels.element}>

@@ -14,6 +14,8 @@ import type { FilterOption } from './AdvancedFiltersPanel';
 
 export interface FiltersBarLabels {
   searchPlaceholder: string;
+  /** Libellé accessible de la croix d'effacement de la recherche. */
+  clear: string;
   elements: string;
   classes: string;
   rarity: string;
@@ -100,6 +102,7 @@ export function CharactersFiltersBar({
           value={query}
           onChange={onQueryChange}
           placeholder={labels.searchPlaceholder}
+          clearLabel={labels.clear}
         />
         {onOpenAdvanced && (
           <AdvancedButton
@@ -172,6 +175,7 @@ export function CharactersFiltersBar({
             value={query}
             onChange={onQueryChange}
             placeholder={labels.searchPlaceholder}
+            clearLabel={labels.clear}
           />
         </div>
 

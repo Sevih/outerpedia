@@ -95,6 +95,7 @@ export interface TierListBrowserLabels {
   disclaimer: string;
   /** Titre du sélecteur de transcendance (PvE uniquement). */
   transcendLevel?: string;
+  /** Gabarit `{count}` — l'ordre nombre/libellé varie selon la langue. */
   charactersCount: string;
   bar: FiltersBarLabels;
   /** Options de rôle (valeur → libellé), ordre canonique — absent = pas de groupe. */
@@ -393,7 +394,7 @@ export function TierListBrowser({
 
       {/* Compteur */}
       <p className="text-content-subtle text-center text-xs">
-        {filtered.length} {labels.charactersCount}
+        {labels.charactersCount.replace('{count}', String(filtered.length))}
       </p>
     </div>
   );

@@ -263,6 +263,8 @@ export interface DcQuirkGroup {
 
 export interface DcLabels {
   search: string;
+  /** Libellé accessible de la croix d'effacement de la recherche. */
+  clearSearch: string;
   select: string;
   noMatches: string;
   /** Bandeau « outil pas fini » en tête de page (les résultats peuvent

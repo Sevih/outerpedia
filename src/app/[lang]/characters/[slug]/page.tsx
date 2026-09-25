@@ -381,8 +381,11 @@ export default async function CharacterDetail({
             transcend: t('page.character.toc.transcend'),
             codex: t('page.character.stats.codex'),
             quirks: t('page.character.stats.quirks'),
+            on: t('common.on'),
+            off: t('common.off'),
             cpTitle: t('page.character.cp_title'),
           }}
+          locale={LANGUAGES[lang].htmlLang}
         />
       ),
     });
@@ -497,6 +500,8 @@ export default async function CharacterDetail({
             badgeEven: t('page.character.gear.verdict.badge_even'),
             level: t('page.character.gear.verdict.level'),
             quirks: t('page.character.stats.quirks'),
+            on: t('common.on'),
+            off: t('common.off'),
             calcLine: t('page.character.gear.verdict.calc_line'),
             calcNote: t('page.character.gear.verdict.calc_note'),
             calcAwak: t('page.character.gear.verdict.calc_awak'),

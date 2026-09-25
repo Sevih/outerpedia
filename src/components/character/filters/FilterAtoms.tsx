@@ -202,11 +202,14 @@ export function ActiveChip({
   color = TONE.cyan,
   prefix,
   onRemove,
+  removeLabel,
 }: {
   label: React.ReactNode;
   color?: string;
   prefix?: string;
   onRemove: () => void;
+  /** Libellé accessible de la croix (localisé). */
+  removeLabel: string;
 }) {
   return (
     <span
@@ -227,7 +230,7 @@ export function ActiveChip({
       <button
         type="button"
         onClick={onRemove}
-        aria-label="remove"
+        aria-label={removeLabel}
         style={{ background: `${color}22` }}
         className="ml-0.5 inline-flex size-4 cursor-pointer items-center justify-center rounded-full transition hover:brightness-125"
       >
@@ -312,10 +315,13 @@ export function SearchField({
   value,
   onChange,
   placeholder,
+  clearLabel,
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  /** Libellé accessible de la croix d'effacement (localisé). */
+  clearLabel: string;
 }) {
   return (
     <div className="relative flex items-center">
@@ -340,7 +346,7 @@ export function SearchField({
         <button
           type="button"
           onClick={() => onChange('')}
-          aria-label="clear"
+          aria-label={clearLabel}
           className="text-content-subtle hover:text-content-strong absolute right-2"
         >
           ×
