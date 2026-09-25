@@ -141,9 +141,10 @@
       `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
       découpé en lots délégables (prompts A13–A20, B9, B10 dans
       lots-opus-2026-09-25.md) :
-      `loadTextIndex` sans cache et rebuilds redondants, 126 `text-[11px]`,
+      126 `text-[11px]`,
       4 modales/lightbox, 3 sélecteurs de perso et 3 barres élément/classe
-      (l'outillage, A20, est fait — reste à Sevih le `pnpm install` de
+      (le cache de `loadTextIndex` et les rebuilds redondants, A17, sont
+      faits ; l'outillage, A20, aussi — reste à Sevih le `pnpm install` de
       `next` 16.3.1, cf. DONE). Non découpés (à relire d'abord) : deux listes de
       shops permanents, « persos intégrés » ×4 lecteurs, `advOf`/`stripBrackets`
       dans `encounters.ts`, `pnpm dev` = `clean:all` (décision).

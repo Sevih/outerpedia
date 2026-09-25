@@ -344,8 +344,11 @@ function buildFusion(catalog: Record<string, CatalogEntry>): FusionEntry[] {
   return out.sort((a, b) => a.fusionId.localeCompare(b.fusionId));
 }
 
-export function buildHeroGrowth(): HeroGrowthData {
-  const catalog = buildItemCatalog();
+/** `catalog` fourni par `datagen:build` (construit une fois) ; sinon reconstruit ici. */
+export function buildHeroGrowth(inputs?: {
+  catalog?: Record<string, CatalogEntry>;
+}): HeroGrowthData {
+  const catalog = inputs?.catalog ?? buildItemCatalog();
   const exp = loadTable('ExpCharacterTemplet');
   return {
     limitBreak: buildLimitBreak(catalog),

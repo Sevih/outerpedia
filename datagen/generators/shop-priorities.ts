@@ -30,7 +30,7 @@ import { loadTextIndex, resolveText, hasText } from '../lib/text';
 import { loadTable, num, type Row } from '../lib/tables';
 import { readCuratedJson } from '../lib/json';
 import { buildItemCatalog, COSTUME_PREFIX, type CatalogEntry } from './item-catalog';
-import { buildEquipment } from './equipment';
+import { buildEquipment, type EquipmentData } from './equipment';
 
 /** Les 8 shops permanents dérivables : monnaie d'achat → clé de shop + asset monnaie. */
 const SHOPS: { key: string; buyType: string; currencyId: string }[] = [
@@ -171,7 +171,7 @@ export function goodsSlug(r: Row): string {
 }
 
 export type Icon = { icon: string; iconKind: 'item' | 'equipment'; grade: string };
-type Gear = { icon: string; grade: string };
+export type Gear = { icon: string; grade: string };
 const catIcon = (e: CatalogEntry | undefined): Icon => ({
   icon: e?.icon ?? '',
   iconKind: 'item',
@@ -202,9 +202,9 @@ export function iconOf(
   return catIcon(catalog[GOODS_ICON_ASSET[type] ?? '']);
 }
 
-/** Index id d'équipement → icône + grade, tous slots (namespace images/equipment). Partagé. */
-export function buildGearIcons(): Map<string, Gear> {
-  const eq = buildEquipment();
+/** Index id d'équipement → icône + grade, tous slots (namespace images/equipment). Partagé.
+ * `eq` fourni par `datagen:build` (le MÊME buildEquipment() que le reste du build). */
+export function buildGearIcons(eq: EquipmentData = buildEquipment()): Map<string, Gear> {
   const slots = [
     eq.weapon,
     eq.accessory,
@@ -224,11 +224,16 @@ export function buildGearIcons(): Map<string, Gear> {
   return out;
 }
 
-export function buildShopPriorities(): ShopPrioritiesData {
+/** Entrées optionnelles : `datagen:build` passe son catalogue et ses icônes
+ * d'équipement (construits une fois) ; en exécution directe, reconstruits ici. */
+export function buildShopPriorities(inputs?: {
+  catalog?: Record<string, CatalogEntry>;
+  gearIcons?: Map<string, Gear>;
+}): ShopPrioritiesData {
   const products = loadTable('ProductTemplet');
   const titems = loadTextIndex('TextItem');
-  const catalog = buildItemCatalog();
-  const gearIcons = buildGearIcons();
+  const catalog = inputs?.catalog ?? buildItemCatalog();
+  const gearIcons = inputs?.gearIcons ?? buildGearIcons();
   const curated =
     readCuratedJson<Record<string, ShopCurated>>('data/curated/shop-priorities.json') ?? {};
 

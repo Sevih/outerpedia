@@ -63,7 +63,7 @@ import { buildUnlockContent } from './generators/unlock-content';
 import { buildRecruit } from './generators/recruit';
 import { buildCharacterRelease } from './generators/character-release';
 import { buildEtherRankings } from './generators/ether-rankings';
-import { buildShopPriorities } from './generators/shop-priorities';
+import { buildGearIcons, buildShopPriorities } from './generators/shop-priorities';
 import { buildTimegateResources } from './generators/timegate-resources';
 import { buildHeroGrowth } from './generators/hero-growth';
 import { buildEffectGlossary, unknownFamilyTypes } from './lib/effects';
@@ -252,13 +252,16 @@ async function main(): Promise<void> {
   await writeJson('ether-rankings.json', buildEtherRankings());
   // Achats de shop par priorité (8 shops permanents dérivés ; éditorial curé) —
   // guide « Recommended Purchases by Shop ».
-  await writeJson('shop-priorities.json', buildShopPriorities());
+  // Catalogue et icônes d'équipement : les MÊMES que ci-dessus (source unique),
+  // passés plutôt que reconstruits par chaque générateur de guide.
+  const gearIcons = buildGearIcons(equipment);
+  await writeJson('shop-priorities.json', buildShopPriorities({ catalog, gearIcons }));
   // Ressources timegatées (shops dérivés + non-shop curé, totaux hebdo/mensuel) —
   // guide « Weekly & Monthly Reference Tables ».
-  await writeJson('timegate-resources.json', buildTimegateResources());
+  await writeJson('timegate-resources.json', buildTimegateResources({ catalog, gearIcons }));
   // Systèmes de croissance des héros (tables numériques dérivées : limit break,
   // skill upgrade, EE/talisman, XP food) — guide « Growth Systems ».
-  await writeJson('hero-growth.json', buildHeroGrowth());
+  await writeJson('hero-growth.json', buildHeroGrowth({ catalog }));
   // Rotation Monad Gate (groupes + cadence ; ancre curée), compositions des
   // tours et calendrier des contenus saisonniers — cf. en-têtes des générateurs.
   await writeJson('singularity.json', buildSingularity());

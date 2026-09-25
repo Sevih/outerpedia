@@ -35,7 +35,14 @@ import { isMain } from '../lib/is-main';
 import { loadTable, num, type Row } from '../lib/tables';
 import { readCuratedJson } from '../lib/json';
 import { buildItemCatalog, type CatalogEntry } from './item-catalog';
-import { computeAsOf, isCurrent, PERIOD, buildGearIcons, type ShopPeriod } from './shop-priorities';
+import {
+  computeAsOf,
+  isCurrent,
+  PERIOD,
+  buildGearIcons,
+  type Gear,
+  type ShopPeriod,
+} from './shop-priorities';
 
 /**
  * Shops retenus comme sources timegatées régulières. UN SHOP = UN ONGLET
@@ -196,10 +203,14 @@ function shopSourcesFor(
   return out;
 }
 
-export function buildTimegateResources(): TimegateResourcesData {
+/** Entrées optionnelles : mêmes que `buildShopPriorities` (fournies par `datagen:build`). */
+export function buildTimegateResources(inputs?: {
+  catalog?: Record<string, CatalogEntry>;
+  gearIcons?: Map<string, Gear>;
+}): TimegateResourcesData {
   const products = loadTable('ProductTemplet');
-  const catalog = buildItemCatalog();
-  const gearIcons = buildGearIcons();
+  const catalog = inputs?.catalog ?? buildItemCatalog();
+  const gearIcons = inputs?.gearIcons ?? buildGearIcons();
   const curated = readCuratedJson<TimegateCurated>('data/curated/timegate-resources.json');
   if (!curated) throw new Error('timegate : data/curated/timegate-resources.json absent');
 

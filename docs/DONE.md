@@ -7,6 +7,38 @@
 
 ## 2026-09-25
 
+- **Datagen : `loadTextIndex` mémoïsé, catalogue et équipement construits une
+  seule fois par build** (lot A17). `loadTextIndex(table)` (`datagen/lib/text.ts`)
+  relisait et ré-indexait sa table à chaque appel — 34 sites d'appel dans
+  `datagen/`, dont 18 sur `TextSystem` (46 ms l'index à froid,
+  17–19 ms pour `TextItem`/`TextSkill`). Il est désormais mémoïsé dans une `Map`
+  par table et colonne clé, invalidée par `tablesStamp([table])` (mtime du
+  fichier parsé, TTL 2 s — modèle `curatedKeyCache`), pour que le process
+  admin long-running suive un refresh `.gamedata`. Les index et leurs dicts
+  étant désormais PARTAGÉS, j'ai vérifié qu'aucun appelant ne les mute : les
+  retouches par langue (`fillPlaceholder`, `stripBrackets`…
+  d'`encounters.ts`, le repli des sauts de ligne d'`equipment.ts`) copient
+  toutes le dict avant d'écrire ; le commentaire du cache le rappelle. Côté
+  `build.ts`, il restait `buildEquipment` ×3 (le build, plus `buildGearIcons()`
+  appelé par `buildShopPriorities` ET `buildTimegateResources`) et
+  `buildItemCatalog` ×4 (le build, plus ces deux-là et `buildHeroGrowth`) : les
+  trois générateurs de guide prennent des entrées optionnelles
+  (`{ catalog, gearIcons }`, `{ catalog }` — même modèle que
+  `buildItemCatalog(inputs?)`), `buildGearIcons(eq = buildEquipment())` accepte
+  l'équipement déjà construit, et `build.ts` leur passe le catalogue et
+  l'équipement qu'il a déjà ; en exécution directe, rien ne change. Vérifié :
+  instantané de `data/extracted` avant, `pnpm datagen:build` après,
+  `diff -r` IDENTIQUE (le dossier est gitignoré, `git status` n'y aurait rien
+  vu ; deux builds de référence sont aussi identiques entre eux) et journal du
+  build identique hors tailles. Temps du build : 19,6 / 22,1 / 21,9 s avant,
+  23,0 / 21,2 / 20,2 s après — le gain se perd dans le bruit ; mesuré poste par
+  poste, un index chaud coûte 0 ms, un second `buildEquipment` 27 ms au lieu de
+  307 ms à froid, soit ~1 s économisée sur un build dominé par autre chose.
+  `pnpm typecheck` et `pnpm lint` sans sortie d'erreur, `pnpm test` : 169
+  fichiers, 1 985 tests passés. Laissé, hors périmètre : `buildCharacters()`
+  est lui aussi exécuté deux fois par build (`build.ts` puis
+  `buildCharacterRelease()`, non mémoïsé), et `datagen/assets/manifest.ts`
+  appelle encore `buildItemCatalog()` seul (hors `datagen:build`).
 - **Outillage : lint pre-commit aligné sur la CI, `next` et
   `eslint-config-next` à la même version, règle des locales réécrite** (lot
   A20). Trois incohérences. (1) Le `lint` pre-commit de `lefthook.yml` ne
