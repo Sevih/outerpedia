@@ -7,6 +7,27 @@
 
 ## 2026-09-25
 
+- **`retired` entre dans les contrats monstre et skill de monstre** (lot A8,
+  G51). `datagen/promote.ts` marque `retired: true` les entités que la
+  rétention garde (`applyRetention` sur `monsters.json`, `monster-skills.json`,
+  `encounters.json`), mais seul `DungeonRef` connaissait la clé : un monstre ou
+  un skill retiré du jeu portait un champ que ni le typage de l'app ni celui du
+  datagen ne voyaient. Fait : `retired?: boolean` sur `Monster`
+  (`datagen/extractor/specs/monster.ts`) ; pour les skills, une interface
+  `MonsterSkill extends Skill` dans `datagen/generators/monster-skills.ts`,
+  exportée par `datagen/contracts/index.ts`, où `MonsterSkillsFile` passe de
+  `Record<string, Skill>` à `Record<string, MonsterSkill>` — la clé n'entre
+  PAS dans le `Skill` partagé, que les skills persos (jamais retenus) ne
+  porteront pas. L'app consomme ces types via `@contracts` : pas de
+  `src/types`, rien d'autre à toucher. Déjà couverts, laissés tels quels :
+  `DungeonRef.retired` (encounters), les entrées de `wallpapers.ts` et
+  `bgm-mapping.ts` et leurs miroirs front (`WallpapersGallery.tsx`,
+  `OstPlayer.tsx`). Le validateur maison (`extractor/core/validate.ts`) ne
+  contrôle que les champs déclarés du schéma et ne tourne que sur la sortie
+  d'extracteur, jamais sur le promu : il accepte déjà la clé, le
+  `monsterSchema` n'a pas été touché. Types seuls, aucun `data/generated`
+  régénéré ; typecheck, lint et tests (1 946) verts.
+
 - **Token de taille `--text-2xs` (10px) : les 224 `text-[10px]` passent en
   `text-2xs`** (lot A5 de la Dette). Le système de tokens n'avait rien sous
   `text-xs`, d'où ~350 tailles arbitraires dans `src/` : 224 `text-[10px]`

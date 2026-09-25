@@ -103,6 +103,8 @@ export interface Monster {
   linkedTo?: string[];
   /** Déclencheurs d'enrage réels (RageTemplet) — cf. en-tête du fichier. */
   rage?: MonsterRage;
+  /** Posé par la rétention de promote, entité retirée du jeu. */
+  retired?: boolean;
 }
 
 /** Glossaire générique slug → libellé localisé. */

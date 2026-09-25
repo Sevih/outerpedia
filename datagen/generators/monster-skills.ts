@@ -19,6 +19,12 @@ import { loadTextIndex } from '../lib/text';
 import { groupBy, loadTable } from '../lib/tables';
 import { assembleSkill, type Skill, type SkillData } from './skills';
 
+/** Entrée de `monster-skills.json` : le contrat `Skill`, plus la marque d'archive. */
+export interface MonsterSkill extends Skill {
+  /** Posé par la rétention de promote, entité retirée du jeu. */
+  retired?: boolean;
+}
+
 export function buildMonsterSkills(): SkillData {
   const buffs = loadBuffIndex();
   const groups = loadBuffGroups();

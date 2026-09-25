@@ -165,9 +165,8 @@
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
-- [ ] `retired` posé par promote sur monsters/monster-skills/encounters alors
-      que seul `DungeonRef.retired` existe dans le contrat — clé fantôme au
-      premier retrait, que le validateur ne verra pas (G51) ; `comics.json`,
+- [ ] `retired` absent des contrats monsters/monster-skills (G51) FAIT ;
+      `comics.json`,
       `video-meta.json`, `posts.json` écrits hors `formatJson` (passe prettier
       par chance de forme, un tableau court le ferait échouer en CI) (G52).
 - [ ] Admin : `key={i}` sur des listes réordonnées par `MoveButtons`

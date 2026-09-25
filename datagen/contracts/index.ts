@@ -48,6 +48,7 @@ export type {
   SetComboPiece,
 } from '../curated/gear-reco';
 export type { Skill, SkillLevel } from '../generators/skills';
+export type { MonsterSkill } from '../generators/monster-skills';
 export type { DamageScaling, DamageScalingFile } from '../generators/damage-scaling';
 export type { CharacterEffects, CharactersListData } from '../generators/characters-list';
 export type { Item } from '../generators/items';
@@ -197,6 +198,7 @@ import type { Monster } from '../extractor/specs/monster';
 import type { DungeonRef, GuildRaidGeas, RankOption, RewardTable } from '../generators/encounters';
 import type { TranscendData } from '../extractor/transcend';
 import type { Skill } from '../generators/skills';
+import type { MonsterSkill } from '../generators/monster-skills';
 import type { CatalogEntry } from '../generators/item-catalog';
 import type {
   ArmorItem,
@@ -339,8 +341,8 @@ export type TranscendFile = TranscendData;
 export type SkillsFile = Record<string, Skill>;
 /** `data/generated/monsters.json` (mobs, élites, boss — filtrés par `type`) */
 export type MonstersFile = Record<string, Monster>;
-/** `data/generated/monster-skills.json` (même contrat `Skill` que les persos) */
-export type MonsterSkillsFile = Record<string, Skill>;
+/** `data/generated/monster-skills.json` (même contrat `Skill` que les persos, + `retired`) */
+export type MonsterSkillsFile = Record<string, MonsterSkill>;
 /**
  * `data/generated/encounters.json` — dictionnaire des DONJONS/STAGES référencés
  * par les `spawns` des monstres : mode (slug, titre dans `glossaries.modes`),
