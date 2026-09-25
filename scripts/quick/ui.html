@@ -519,10 +519,13 @@
         renderChips();
       };
 
+      // La liste vit sur R2 (le staff en ajoute depuis Discord) : l'écriture est
+      // conditionnelle à `couponsEtag`. Refusée si la liste a changé → recharger.
       async function save() {
         $('c-add').disabled = true;
-        await post('/api/coupons', state.coupons);
-        $('c-add').disabled = false;
+        const data = await post('/api/coupons', { list: state.coupons, etag: state.couponsEtag });
+        if (data.etag) state.couponsEtag = data.etag;
+        $('c-add').disabled = !state.couponsEtag;
       }
 
       $('c-add').onclick = async () => {
@@ -637,6 +640,10 @@
       // ---------------------------------------------------------- boot
       (async () => {
         state = await (await fetch('/api/state')).json();
+        if (state.couponsError) {
+          log([`${state.couponsError} — instantané local affiché, enregistrement bloqué.`], false);
+          $('c-add').disabled = true;
+        }
         $('env').textContent =
           `${state.hasR2 ? 'R2 ✓' : 'R2 ✗'} · ${state.hasYoutubeKey ? 'YouTube ✓' : 'YouTube ✗'}`;
         $('k-lang').innerHTML = state.langs.map((l) => `<option>${l}</option>`).join('');

@@ -9,14 +9,15 @@
  * de JSON.
  *
  * Ce module ne RÉIMPLÉMENTE rien : il rappelle les mêmes stores que les routes
- * admin (`saveCoupons`/`publishCoupons`, `collectComics`, `upsertCharacterCurated`,
+ * admin (`loadCouponsForEdit`/`saveCouponsLive`, `collectComics`, `upsertCharacterCurated`,
  * `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
  * sont résolus par tsx via tsconfig.
  *
  * CE QUI PART EN PROD, ET COMMENT :
- *   - codes promo : `coupons.json` est publié sur R2 et l'edge purgé
- *     (`runtime-publish`), les loaders runtime le servent → en ligne en ≤ 10 min,
- *     sans attendre le build ;
+ *   - codes promo : la liste VIVANTE est sur R2 (le staff en ajoute aussi depuis
+ *     Discord) ; l'écran la lit, puis l'écrit conditionnellement et purge
+ *     l'edge (`lib/data/live-coupons`) → en ligne tout de suite, sans build.
+ *     `coupons.json` committé n'en est que l'instantané ;
  *   - 4-comics : la galerie lit le manifeste R2 à la requête (cf. le docblock de
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti.
@@ -28,8 +29,11 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, resolve, sep } from 'node:path';
-import { loadCoupons, saveCoupons, type PromoCode } from '@/lib/admin/promo-banner-store';
-import { publishCoupons } from '@/lib/admin/runtime-publish';
+import {
+  loadCouponsForEdit,
+  saveCouponsLive,
+  type PromoCode,
+} from '@/lib/admin/promo-banner-store';
 import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
@@ -134,33 +138,32 @@ export function searchRewards(query: string): RewardOption[] {
   return rankItemMatches(rewardOptions(), query);
 }
 
-export const currentCoupons = (): PromoCode[] => loadCoupons();
+/** Liste vivante (R2) + son jeton de version ; rafraîchit l'instantané local. */
+export const currentCoupons = loadCouponsForEdit;
 
 /**
  * Enregistre la LISTE complète (même contrat que la route admin : l'écran est
- * l'éditeur, il renvoie son état), publie sur R2, puis committe.
+ * l'éditeur, il renvoie son état) sur R2 si personne ne l'a modifiée depuis
+ * `etag`, puis committe l'instantané.
  *
- * L'ordre compte : la validation d'abord (un coupon cassé part sinon en prod),
- * la publication ensuite, git en dernier — un échec de push laisse une prod
- * correcte et un fichier local juste, jamais l'inverse.
+ * L'ordre compte : R2 d'abord (validation comprise — c'est la prod), git
+ * ensuite. Un conflit n'écrit RIEN : l'écran recharge la liste.
  */
-export async function saveCouponList(list: PromoCode[]): Promise<Outcome> {
-  const errors = await saveCoupons(list);
-  if (errors.length) return { ok: false, log: errors };
+export async function saveCouponList(
+  list: PromoCode[],
+  etag: string,
+): Promise<Outcome & { etag?: string }> {
+  const res = await saveCouponsLive(list, etag);
+  if (!res.ok) return { ok: false, log: res.errors };
 
-  const log = [`${list.length} codes enregistrés.`];
-  const published = await publishCoupons();
-  log.push(
-    published.ok
-      ? `publié sur R2${published.purged ? ' + edge purgé' : ' (purge sautée : l’edge se rafraîchit seul en ≤ 10 min)'}.`
-      : `publication R2 KO : ${published.error}`,
-  );
-
+  const log = [
+    `${list.length} codes enregistrés sur R2${res.purged ? ' + edge purgé' : ` (${res.purgeError ?? 'edge non purgé'})`}.`,
+  ];
   const git = commitAndPush(
     ['data/curated/coupons.json'],
     'chore(coupons): mise à jour des codes promo',
   );
-  return { ok: published.ok && git.ok, log: [...log, ...git.log] };
+  return { ok: git.ok, etag: res.etag, log: [...log, ...git.log] };
 }
 
 // ---------------------------------------------------------------- comics -----

@@ -1,0 +1,87 @@
+/**
+ * LISTE VIVANTE des codes promo — la copie R2 (`data/coupons.json`) est la
+ * SOURCE DE VÉRITÉ depuis le 25/09/2026 : deux écrivains la modifient, l'admin
+ * local de Sevih et le staff via le bot Discord (`/coupon add|edit|remove`,
+ * route `/api/internal/coupons`). `data/curated/coupons.json` n'en est plus
+ * qu'un instantané (repli des lecteurs publics, historique git).
+ *
+ * Toute écriture est CONDITIONNELLE (ETag de la lecture) : un écrivain qui a lu
+ * une liste périmée est refusé au lieu d'écraser l'ajout de l'autre.
+ *
+ * Les lecteurs PUBLICS ne passent pas par ici : ils lisent l'URL du CDN
+ * (`lib/data/coupons` → `runtime-json`). Ce module lit l'API S3 directement,
+ * sans cache, et exige les identifiants R2.
+ */
+import {
+  applyCouponOp,
+  validateCoupons,
+  type CouponOp,
+  type PromoCode,
+} from '@/lib/data/promo-rules';
+import { getR2Object, purgeEdge, putR2Object, RUNTIME_CACHE_CONTROL } from '@/lib/r2';
+
+const KEY = 'data/coupons.json';
+
+export interface LiveCoupons {
+  list: PromoCode[];
+  /** Jeton de version à rendre à l'écriture. */
+  etag: string;
+}
+
+export async function readLiveCoupons(): Promise<LiveCoupons> {
+  const obj = await getR2Object(KEY);
+  if (!obj) throw new Error(`${KEY} absent de R2`);
+  const list = JSON.parse(obj.body) as unknown;
+  if (!Array.isArray(list)) throw new Error(`${KEY} : un tableau était attendu`);
+  return { list: list as PromoCode[], etag: obj.etag };
+}
+
+export type WriteResult =
+  | { ok: true; etag: string; purged: boolean; purgeError?: string }
+  | { ok: false; conflict: boolean; errors: string[] };
+
+const CONFLICT_MSG =
+  'The coupon list changed since it was loaded (someone else saved). Reload and retry.';
+
+/**
+ * Valide puis écrit `list` si la copie R2 est toujours celle de `etag`, puis
+ * purge l'edge. JSON simplement indenté : l'instantané local, lui, est réécrit
+ * au format canonique du repo par l'admin (`saveCoupons` → `writeJson`).
+ */
+export async function writeLiveCoupons(list: PromoCode[], etag: string): Promise<WriteResult> {
+  const errors = validateCoupons(list);
+  if (errors.length) return { ok: false, conflict: false, errors };
+
+  const put = await putR2Object(KEY, `${JSON.stringify(list, null, 2)}\n`, {
+    ifMatch: etag,
+    contentType: 'application/json; charset=utf-8',
+    cacheControl: RUNTIME_CACHE_CONTROL,
+  });
+  if (put === 'conflict') return { ok: false, conflict: true, errors: [CONFLICT_MSG] };
+
+  const purge = await purgeEdge(KEY);
+  return {
+    ok: true,
+    etag: put.etag,
+    purged: purge.purged,
+    ...(purge.error ? { purgeError: purge.error } : {}),
+  };
+}
+
+/** Tentatives d'une opération du bot quand un autre écrivain passe entre la lecture et l'écriture. */
+const OP_ATTEMPTS = 3;
+
+/**
+ * Opération unitaire (bot) : relit, applique, écrit. Contrairement à l'éditeur
+ * de l'admin, qui renvoie une liste ENTIÈRE et doit donc s'arrêter au conflit,
+ * une opération se RÉAPPLIQUE sans risque sur la liste fraîche : on réessaie.
+ */
+export async function applyLiveCouponOp(op: CouponOp): Promise<WriteResult> {
+  for (let attempt = 1; ; attempt++) {
+    const { list, etag } = await readLiveCoupons();
+    const applied = applyCouponOp(list, op);
+    if (!applied.ok) return { ok: false, conflict: false, errors: applied.errors };
+    const res = await writeLiveCoupons(applied.list, etag);
+    if (res.ok || !res.conflict || attempt >= OP_ATTEMPTS) return res;
+  }
+}

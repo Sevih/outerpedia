@@ -1,18 +1,26 @@
 import { NextResponse } from 'next/server';
-import { saveCoupons, type PromoCode } from '@/lib/admin/promo-banner-store';
-import { publishCoupons } from '@/lib/admin/runtime-publish';
+import { saveCouponsLive, type PromoCode } from '@/lib/admin/promo-banner-store';
 import { IS_DEV } from '@/lib/admin/guard';
-import { jsonArrayBody } from '@/lib/admin/route-body';
+import { jsonObjectBody } from '@/lib/admin/route-body';
 
-// Outil local : 403 en prod, écriture fichier seulement en dev. La sauvegarde
-// PUBLIE aussi la copie runtime sur R2 (un code part en prod sans redéploiement) ;
-// un échec de publication n'invalide pas l'écriture locale — il est relayé.
+// Outil local : 403 en prod. La liste VIVANTE est sur R2 (le staff en ajoute
+// depuis Discord) : l'écriture est conditionnelle au jeton `etag` rendu par la
+// page, et un conflit (409) n'écrit RIEN — l'éditeur demande de recharger.
 export async function POST(req: Request) {
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
-  const parsed = await jsonArrayBody<PromoCode>(req);
+  const parsed = await jsonObjectBody<{ list?: unknown; etag?: unknown }>(req);
   if (!parsed.ok) return parsed.res;
-  const body = parsed.body;
-  const errors = await saveCoupons(body);
-  if (errors.length) return NextResponse.json({ ok: false, errors }, { status: 400 });
-  return NextResponse.json({ ok: true, publish: await publishCoupons() });
+  const { list, etag } = parsed.body;
+  if (!Array.isArray(list) || typeof etag !== 'string' || !etag)
+    return NextResponse.json(
+      { ok: false, errors: ['{ list: PromoCode[], etag: string } attendu.'] },
+      { status: 400 },
+    );
+  const res = await saveCouponsLive(list as PromoCode[], etag);
+  if (!res.ok)
+    return NextResponse.json(
+      { ok: false, conflict: res.conflict, errors: res.errors },
+      { status: res.conflict ? 409 : 400 },
+    );
+  return NextResponse.json(res);
 }

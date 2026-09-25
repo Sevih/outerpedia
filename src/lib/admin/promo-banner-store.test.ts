@@ -14,14 +14,25 @@
  *
  * Écritures réelles dans un tmp via `sandbox()` (cf. `store-fixture`).
  */
-import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { sandbox } from './store-fixture';
 import type { Banner, PromoCode } from './promo-banner-store';
 
+// R2 simulé : ces tests portent sur le fichier LOCAL, pas sur le réseau.
+const live = vi.hoisted(() => ({ readLiveCoupons: vi.fn(), writeLiveCoupons: vi.fn() }));
+vi.mock('@/lib/data/live-coupons', () => live);
+
 const box = sandbox('promo-');
 // ⚠ APRÈS `sandbox()` : le store fige ses chemins au chargement.
-const { saveCoupons, loadCoupons, saveBanners, loadBanners, validateCoupons, validateBanners } =
-  await import('./promo-banner-store');
+const {
+  loadCoupons,
+  loadCouponsForEdit,
+  saveCouponsLive,
+  saveBanners,
+  loadBanners,
+  validateCoupons,
+  validateBanners,
+} = await import('./promo-banner-store');
 
 const COUPONS = 'data/curated/coupons.json';
 const BANNERS = 'data/curated/banner.json';
@@ -112,40 +123,53 @@ describe('validateBanners', () => {
   });
 });
 
-describe('saveCoupons', () => {
-  it('écrit la liste et la relit à l’identique', async () => {
-    expect(await saveCoupons([coupon()])).toEqual([]);
-    expect(loadCoupons()).toEqual([coupon()]);
+/**
+ * Coupons : la liste VIVANTE est sur R2 (`live-coupons`, simulé ici) ; le store
+ * n'écrit plus que l'INSTANTANÉ local, et seulement quand R2 a accepté.
+ */
+describe('coupons — liste vivante R2 et instantané local', () => {
+  beforeEach(() => {
+    live.readLiveCoupons.mockReset();
+    live.writeLiveCoupons.mockReset();
   });
 
-  it('REMPLACE la liste entière (ce n’est pas un merge)', async () => {
-    await box.put(COUPONS, [coupon({ code: 'VIEUX' }), coupon({ code: 'AUTRE' })]);
-    await saveCoupons([coupon({ code: 'SEUL' })]);
+  it('chargement : rend la liste R2 et son jeton, et rafraîchit l’instantané', async () => {
+    await box.put(COUPONS, [coupon({ code: 'VIEUX' })]);
+    live.readLiveCoupons.mockResolvedValue({ list: [coupon({ code: 'DU_STAFF' })], etag: '"e1"' });
 
-    const list = box.read<PromoCode[]>(COUPONS);
-    expect(list).toHaveLength(1);
-    expect(list[0].code).toBe('SEUL');
+    expect(await loadCouponsForEdit()).toEqual({
+      list: [coupon({ code: 'DU_STAFF' })],
+      etag: '"e1"',
+    });
+    expect(box.read<PromoCode[]>(COUPONS)).toEqual([coupon({ code: 'DU_STAFF' })]);
   });
 
-  it('n’écrit RIEN quand une SEULE entrée est fautive', async () => {
+  it('chargement : R2 illisible → instantané local SANS jeton (enregistrement bloqué)', async () => {
+    await box.put(COUPONS, [coupon({ code: 'LOCAL' })]);
+    live.readLiveCoupons.mockRejectedValue(new Error('réseau'));
+
+    const res = await loadCouponsForEdit();
+    expect(res.list).toEqual([coupon({ code: 'LOCAL' })]);
+    expect(res.etag).toBeNull();
+    expect(res.error).toContain('réseau');
+  });
+
+  it('enregistrement accepté par R2 → instantané réécrit à l’identique', async () => {
+    live.writeLiveCoupons.mockResolvedValue({ ok: true, etag: '"e2"', purged: true });
+    const list = [coupon({ code: 'A' }), coupon({ code: 'B' })];
+
+    expect((await saveCouponsLive(list, '"e1"')).ok).toBe(true);
+    expect(live.writeLiveCoupons).toHaveBeenCalledWith(list, '"e1"');
+    expect(box.read<PromoCode[]>(COUPONS)).toEqual(list);
+  });
+
+  it('conflit ou refus de R2 → l’instantané ne bouge PAS', async () => {
     await box.put(COUPONS, [coupon({ code: 'À GARDER' })]);
     const before = box.raw(COUPONS);
+    live.writeLiveCoupons.mockResolvedValue({ ok: false, conflict: true, errors: ['changed'] });
 
-    const errors = await saveCoupons([coupon(), coupon({ code: 'CASSÉ', end: 'jamais' })]);
-    expect(errors.length).toBeGreaterThan(0);
-    // Intact octet pour octet : la validation protège tout le fichier.
+    expect((await saveCouponsLive([coupon()], '"périmé"')).ok).toBe(false);
     expect(box.raw(COUPONS)).toBe(before);
-  });
-
-  it('accepte une liste VIDE (retirer tous les codes est légitime)', async () => {
-    await box.put(COUPONS, [coupon()]);
-    expect(await saveCoupons([])).toEqual([]);
-    expect(box.read<PromoCode[]>(COUPONS)).toEqual([]);
-  });
-
-  it('conserve l’ordre de la liste', async () => {
-    await saveCoupons([coupon({ code: 'A' }), coupon({ code: 'B' }), coupon({ code: 'C' })]);
-    expect(box.read<PromoCode[]>(COUPONS).map((c) => c.code)).toEqual(['A', 'B', 'C']);
   });
 
   it('`loadCoupons` renvoie [] si le fichier est absent', () => {
@@ -161,7 +185,7 @@ describe('saveBanners', () => {
 
   it('n’écrit QUE son fichier — les coupons ne bougent pas', async () => {
     // Deux stores, deux fichiers : une confusion de chemin serait invisible au rendu.
-    await saveCoupons([coupon()]);
+    await box.put(COUPONS, [coupon()]);
     const before = box.raw(COUPONS);
     await saveBanners([banner()]);
 
@@ -188,8 +212,9 @@ describe('saveBanners', () => {
   });
 
   it('ne laisse aucun temporaire derrière lui', async () => {
+    live.writeLiveCoupons.mockResolvedValue({ ok: true, etag: '"e"', purged: true });
     await saveBanners([banner()]);
-    await saveCoupons([coupon()]);
+    await saveCouponsLive([coupon()], '"e"');
     expect(box.leftovers()).toEqual([]);
   });
 });

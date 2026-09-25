@@ -7,6 +7,40 @@
 
 ## 2026-09-25
 
+- **Codes promo saisis par le staff depuis Discord (`/coupon add|edit|remove`
+  d'outerbot) : la copie R2 devient la SOURCE DE VÉRITÉ des coupons.** Deux
+  écrivains désormais — l'admin local de Sevih et le bot du staff. Avant, le
+  fichier local écrasait R2 à chaque Save admin, à chaque `pnpm quick` et à
+  chaque `pnpm images` (`assets:collect` le recopiait au staging) : un code
+  ajouté par le staff aurait disparu en silence. Maintenant :
+  `lib/data/live-coupons` lit la liste sur R2 avec son ETag et n'écrit que
+  CONDITIONNELLEMENT (`If-Match`) ; l'admin (`page.dev` + `PromoCodesEditor`)
+  et `pnpm quick` chargent la liste vivante (ce qui rafraîchit l'instantané
+  `data/curated/coupons.json`, par lequel les codes du staff entrent dans
+  git) et, si elle a changé entre-temps, refusent avec « recharger » au lieu
+  d'écraser. `assets:collect` ne copie plus `coupons.json` et retire l'ancienne
+  copie du staging (un `assets:push --full` l'aurait repoussée) ;
+  `publishCoupons` supprimé. Les règles (`validateCoupons`/`validateBanners`,
+  types) passent dans `lib/data/promo-rules`, pur, avec `applyCouponOp`
+  (add/edit/remove : code inconnu, code pris, renommage vers un code pris,
+  puis validation de toute la liste), pour que la prod valide comme l'admin.
+  Côté prod : `/api/internal/coupons` (GET liste, POST opération, relue et
+  réappliquée jusqu'à 3 fois en cas de conflit) et `/api/internal/coupons/rewards`
+  (recherche classée comme le picker admin, résolution de noms), derrière le
+  jeton `COUPON_API_SECRET` et fermées à Internet par Caddy ; ids de
+  récompense exigés au catalogue (les 102 coupons existants y sont tous).
+  `lib/r2` signe à la main en SigV4 (comme `r2-cors.mjs`, sans rclone, absent
+  du conteneur) et porte la purge edge, que `runtime-publish` réutilise ; la
+  garde Bearer à temps constant de `/api/revalidate` passe dans
+  `lib/internal-auth`, partagée. Piège trouvé au test réel contre R2 : `fetch`
+  demande une réponse compressée, R2 rend alors un ETag FAIBLE (`W/"…"`) que
+  `If-Match` ne reconnaît jamais — TOUTE réécriture était refusée ; la lecture
+  demande `identity` et retire `W/`. Rejoué contre la prod avec un contenu
+  identique : faux ETag 412, bon ETag accepté, contenu intact (102 coupons).
+  `pnpm typecheck`, `pnpm lint` propres ; `pnpm test` : 1 989 passés, 1 échec
+  préexistant et hors sujet (`wallpaper-versions`, seuil visuel — échoue sous
+  Windows, vert en CI).
+
 - **Routes `/api/bot/coupons` et `/api/bot/changelog` : outerbot annonce sur
   Discord chaque nouveau code promo et chaque nouvelle entrée du journal.** Le
   bot interroge ces routes toutes les minutes et poste ce qu'il n'a pas encore

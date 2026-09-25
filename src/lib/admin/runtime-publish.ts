@@ -1,8 +1,12 @@
 /**
  * PUBLICATION RUNTIME des JSON curés : pousse un fichier de `data/curated/` sur
  * R2 (namespace `data/`) et purge l'edge — appelée par la sauvegarde admin (et
- * l'ancien réimport). C'est ce qui permet aux loaders runtime de `lib/home` (coupons,
- * bannières) de servir une édition SANS redéploiement du site.
+ * l'ancien réimport). C'est ce qui permet aux loaders runtime de `lib/home`
+ * (bannières, événements) de servir une édition SANS redéploiement du site.
+ *
+ * PAS les coupons : depuis le 25/09/2026, leur copie R2 est la SOURCE DE VÉRITÉ
+ * (le staff en ajoute depuis Discord) et ne s'écrit que conditionnellement, par
+ * `lib/data/live-coupons` — pousser le fichier local l'écraserait.
  *
  * Mêmes conventions que `scripts/assets-push.mjs` (rclone spawn direct sans
  * shell, purge Cloudflare par API), avec deux différences assumées :
@@ -17,8 +21,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
-
-const CACHE_CONTROL = 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600';
+import { purgeEdge, RUNTIME_CACHE_CONTROL } from '@/lib/r2';
 
 /**
  * Fichiers curés publiés en runtime (`data/curated/<name>` → clé `data/<name>`).
@@ -26,7 +29,7 @@ const CACHE_CONTROL = 'public, max-age=300, s-maxage=600, stale-while-revalidate
  * (→ `pnpm images`) resynchronise R2 même quand une édition a contourné le
  * Save admin.
  */
-export const RUNTIME_DATA_FILES = ['coupons.json', 'banner.json', 'events.json'] as const;
+export const RUNTIME_DATA_FILES = ['banner.json', 'events.json'] as const;
 
 export interface RuntimePublishResult {
   ok: boolean;
@@ -58,7 +61,7 @@ async function publishRuntimeJson(name: string): Promise<RuntimePublishResult> {
       src,
       `:s3:${R2_BUCKET}/${key}`,
       '--header-upload',
-      `Cache-Control: ${CACHE_CONTROL}`,
+      `Cache-Control: ${RUNTIME_CACHE_CONTROL}`,
       '--s3-no-check-bucket',
     ],
     {
@@ -88,35 +91,10 @@ async function publishRuntimeJson(name: string): Promise<RuntimePublishResult> {
   }
 
   // Purge edge de la seule URL — sans jeton, le s-maxage court borne le retard.
-  const { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ZONE_ID, NEXT_PUBLIC_IMG_BASE } = process.env;
-  if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ZONE_ID || !NEXT_PUBLIC_IMG_BASE) {
-    return {
-      ok: true,
-      purged: false,
-      error: 'purge edge sautée (CLOUDFLARE_* absents) — visible en ≤ 20 min.',
-    };
-  }
-  try {
-    const r = await fetch(
-      `https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ files: [`${NEXT_PUBLIC_IMG_BASE}/${key}`] }),
-      },
-    );
-    if (!r.ok) return { ok: true, purged: false, error: `purge edge en échec (HTTP ${r.status}).` };
-  } catch (e) {
-    return { ok: true, purged: false, error: `purge edge en échec : ${(e as Error).message}` };
-  }
-  return { ok: true, purged: true };
+  const purge = await purgeEdge(key);
+  return { ok: true, ...purge };
 }
 
-export const publishCoupons = (): Promise<RuntimePublishResult> =>
-  publishRuntimeJson('coupons.json');
 export const publishBanners = (): Promise<RuntimePublishResult> =>
   publishRuntimeJson('banner.json');
 export const publishEvents = (): Promise<RuntimePublishResult> => publishRuntimeJson('events.json');

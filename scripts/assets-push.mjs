@@ -75,7 +75,7 @@ const BROWSER_TTL = (() => {
   return `${Math.round(s / 60)} min`;
 })();
 /**
- * Les JSON RUNTIME (`data/*` : coupons, bannières) sont de la donnée VIVE, pas
+ * Les JSON RUNTIME (`data/*` : bannières, événements) sont de la donnée VIVE, pas
  * des assets quasi-immuables : `s-maxage` court pour que l'edge se rafraîchisse
  * seul même sans purge — même en-tête que la publication admin directe
  * (src/lib/admin/runtime-publish, qui pousse ces mêmes clés au Save).

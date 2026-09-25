@@ -112,12 +112,18 @@ async function main(): Promise<void> {
     console.log('  fond portrait généré (rotation 90°)');
   }
 
-  // JSON RUNTIME (coupons, bannières) : copie de `data/curated/` vers le staging
-  // (`data/<name>`) — ainsi `pnpm commit` (→ pnpm images → assets:push, qui
-  // diffe et purge) resynchronise R2 même quand une édition a contourné le Save
-  // admin, qui publie déjà en direct (cf. src/lib/admin/runtime-publish).
+  // JSON RUNTIME (bannières, événements) : copie de `data/curated/` vers le
+  // staging (`data/<name>`) — ainsi `pnpm commit` (→ pnpm images → assets:push,
+  // qui diffe et purge) resynchronise R2 même quand une édition a contourné le
+  // Save admin, qui publie déjà en direct (cf. src/lib/admin/runtime-publish).
+  //
+  // PAS les coupons : leur copie R2 est la source de vérité (lib/data/live-coupons).
+  // Une copie laissée dans le staging par un ancien collect serait repoussée par
+  // `assets:push --full` ou `--prefix=data/` et écraserait la liste vivante :
+  // on la retire.
   {
     mkdirSync(resolve(STAGING_DIR, 'data'), { recursive: true });
+    rmSync(resolve(STAGING_DIR, 'data', 'coupons.json'), { force: true });
     let staged = 0;
     for (const name of RUNTIME_DATA_FILES) {
       const src = resolve('data/curated', name);
@@ -125,7 +131,7 @@ async function main(): Promise<void> {
       copyFileSync(src, resolve(STAGING_DIR, 'data', name));
       staged++;
     }
-    console.log(`  data runtime ${String(staged).padStart(5)} JSON copiés (coupons/bannières)`);
+    console.log(`  data runtime ${String(staged).padStart(5)} JSON copiés (bannières/événements)`);
   }
 
   mkdirSync(STAGING_DIR, { recursive: true });

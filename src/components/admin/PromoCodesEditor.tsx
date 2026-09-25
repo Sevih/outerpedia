@@ -35,13 +35,23 @@ const byStartDesc = (l: Row[]): Row[] =>
 /** Éditeur des codes promo (code, période, récompenses par item). */
 export function PromoCodesEditor({
   initial,
+  etag: initialEtag,
+  loadError,
   items,
 }: {
   initial: PromoCode[];
+  /** Version de la liste R2 lue ; `null` = R2 illisible, enregistrement bloqué. */
+  etag: string | null;
+  loadError?: string;
   items: ItemOption[];
 }) {
   const [rows, setRows] = useState<Row[]>(() => byStartDesc(initial.map(toRow)));
-  const [status, setStatus] = useState<Status>({ kind: 'idle' });
+  const [etag, setEtag] = useState(initialEtag);
+  const [status, setStatus] = useState<Status>(
+    loadError
+      ? { kind: 'err', msg: `${loadError} — instantané local affiché, enregistrement bloqué.` }
+      : { kind: 'idle' },
+  );
 
   const set = (i: number, patch: Partial<Row>) =>
     setRows((s) => s.map((r, j) => (j === i ? { ...r, ...patch } : r)));
@@ -63,19 +73,26 @@ export function PromoCodesEditor({
   const remove = (i: number) => setRows((s) => s.filter((_, j) => j !== i));
 
   async function save() {
+    if (!etag) return;
     setStatus({ kind: 'idle' });
     try {
+      // Écrit sur R2 (la liste vivante) PUIS l'instantané local. Un conflit
+      // (le staff a modifié la liste depuis Discord) lève : rien n'est écrit.
       const res = await postJson<{
         ok: boolean;
-        publish?: { ok: boolean; purged: boolean; error?: string };
-      }>('/api/admin/curated/coupons', rows.filter((r) => r.code.trim()).map(toPromo));
-      // La sauvegarde publie aussi la copie runtime R2 (live sans redéploiement) —
-      // un échec de publication est un AVERTISSEMENT, le fichier local est sauvé.
-      const p = res.publish;
-      if (p?.ok && p.purged) setStatus({ kind: 'ok', msg: 'Saved + publié (live ≤ 10 min)' });
-      else if (p?.ok) setStatus({ kind: 'ok', msg: `Saved + publié — ${p.error ?? ''}` });
-      else
-        setStatus({ kind: 'err', msg: `Saved local, publication R2 ratée : ${p?.error ?? '?'}` });
+        etag: string;
+        purged: boolean;
+        purgeError?: string;
+      }>('/api/admin/curated/coupons', {
+        list: rows.filter((r) => r.code.trim()).map(toPromo),
+        etag,
+      });
+      setEtag(res.etag);
+      setStatus(
+        res.purged
+          ? { kind: 'ok', msg: 'Enregistré + en ligne' }
+          : { kind: 'ok', msg: `Enregistré — ${res.purgeError ?? 'edge non purgé'}` },
+      );
     } catch (e) {
       setStatus({ kind: 'err', msg: (e as Error).message });
     }
@@ -88,7 +105,8 @@ export function PromoCodesEditor({
         <button
           type="button"
           onClick={save}
-          className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90"
+          disabled={!etag}
+          className="bg-accent text-accent-fg rounded-md px-4 py-2 text-sm font-semibold hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Save
         </button>

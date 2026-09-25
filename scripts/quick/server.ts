@@ -75,8 +75,11 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/state') {
+    const coupons = await currentCoupons();
     json(res, {
-      coupons: currentCoupons(),
+      coupons: coupons.list,
+      couponsEtag: coupons.etag,
+      couponsError: coupons.error,
       rewards: rewardOptions(),
       langs: COMIC_LANGS,
       targets: videoTargets(),
@@ -87,8 +90,10 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'POST' && url.pathname === '/api/coupons') {
-    const list = await body<PromoCode[]>(req);
-    json(res, await saveCouponList(list));
+    const { list, etag } = await body<{ list: PromoCode[]; etag: string | null }>(req);
+    if (!etag)
+      return json(res, { ok: false, log: ['Liste non chargée depuis R2 : recharger.'] }, 409);
+    json(res, await saveCouponList(list, etag));
     return;
   }
 

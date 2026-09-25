@@ -14,9 +14,9 @@
  * bloque en plus ce chemin côté Internet — le jeton est la troisième couche,
  * pas la seule.
  */
-import { timingSafeEqual } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
+import { refuseUnlessBearer } from '@/lib/internal-auth';
 
 /**
  * Routes dont le RENDU dépend de la date du jour. Y ajouter toute page qui
@@ -42,25 +42,10 @@ const TIME_SENSITIVE_ROUTES = [
   '/[lang]/event/[slug]',
 ] as const;
 
-/** Comparaison à temps constant (un `===` fuit la longueur du préfixe commun). */
-function secretMatches(provided: string, expected: string): boolean {
-  const a = Buffer.from(provided);
-  const b = Buffer.from(expected);
-  return a.length === b.length && timingSafeEqual(a, b);
-}
-
 export async function POST(request: Request): Promise<Response> {
-  const secret = process.env.REVALIDATE_SECRET;
   // Pas de secret = pas de revalidation. On ne dégrade PAS en route ouverte.
-  if (!secret) {
-    return NextResponse.json({ error: 'REVALIDATE_SECRET absent' }, { status: 503 });
-  }
-
-  const header = request.headers.get('authorization') ?? '';
-  const token = header.startsWith('Bearer ') ? header.slice(7) : '';
-  if (!token || !secretMatches(token, secret)) {
-    return NextResponse.json({ error: 'non autorisé' }, { status: 401 });
-  }
+  const refused = refuseUnlessBearer(request, 'REVALIDATE_SECRET');
+  if (refused) return refused;
 
   for (const route of TIME_SENSITIVE_ROUTES) revalidatePath(route, 'page');
 
