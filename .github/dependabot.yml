@@ -11,6 +11,15 @@ updates:
     groups:
       minor-and-patch:
         update-types: ['minor', 'patch']
+    # next 16.3.1 exige @swc/helpers 0.5.23, dont les exports ajoutent une
+    # condition "module-sync" → ./esm/. Node 24 la suit même en require(), mais
+    # le traçage de la sortie standalone ne copie que ./cjs/ : l'image plante au
+    # démarrage (MODULE_NOT_FOUND). Site down le 25/09/2026, next revenu à
+    # 16.3.0. Seule cette version est exclue — une 16.3.2 sera proposée, à
+    # vérifier en démarrant l'image avant de merger.
+    ignore:
+      - dependency-name: 'next'
+        versions: ['16.3.1']
     commit-message:
       prefix: 'chore(deps)'
 
