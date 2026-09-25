@@ -7,6 +7,19 @@
 
 ## 2026-09-25
 
+- **`visualDistance` (wallpaper-versions) ne verrouille plus le webp publié
+  sous Windows.** Le test « un ré-encodage passe SOUS le seuil » échouait en
+  local (Windows) et passait en CI (Linux) : sharp, ouvert par CHEMIN, laisse
+  le fichier tenu par le cache de libvips jusqu'à la fin du processus, et
+  Windows refuse alors de le réécrire ou de le supprimer (EPERM/UNKNOWN) — or
+  l'appelant compare justement la version publiée avant de l'écraser. La
+  fonction lit les deux fichiers (`readFile`) et donne leur CONTENU à sharp ;
+  un commentaire en garde la raison. Le test n'a pas changé : il était juste,
+  c'est le code qu'il testait qui gardait le fichier ouvert. Vérifié : test
+  3/3, plus aucun dossier temporaire résiduel ; `pnpm test` 1 990/1 990 sous
+  Windows ; prettier, lint et typecheck (projet et datagen) propres. `pnpm
+commit` n'est plus bloqué.
+
 - **Codes promo saisis par le staff depuis Discord (`/coupon add|edit|remove`
   d'outerbot) : la copie R2 devient la SOURCE DE VÉRITÉ des coupons.** Deux
   écrivains désormais — l'admin local de Sevih et le bot du staff. Avant, le

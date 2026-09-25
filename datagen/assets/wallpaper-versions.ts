@@ -29,6 +29,7 @@
  * suppose un staging qui reflète R2 (`pnpm assets:pull` sur une machine neuve).
  */
 import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { extname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 
@@ -74,12 +75,21 @@ export function nextVersion(category: string, base: string, root = EDITORIAL_WAL
  */
 export const MAD_THRESHOLD = 7;
 
-/** Écart visuel entre deux images (formats libres) : dimensions différentes → `Infinity`. */
+/**
+ * Écart visuel entre deux images (formats libres) : dimensions différentes → `Infinity`.
+ *
+ * sharp reçoit le CONTENU, jamais le chemin : ouvert par chemin, un webp reste
+ * tenu par le cache de libvips jusqu'à la fin du processus — sous Windows, il
+ * ne peut alors plus être réécrit ni supprimé (EPERM/UNKNOWN ; Linux, lui,
+ * laisse faire). Or l'appelant compare justement la version publiée AVANT de
+ * l'écraser.
+ */
 export async function visualDistance(a: string, b: string): Promise<number> {
-  const [ma, mb] = await Promise.all([sharp(a).metadata(), sharp(b).metadata()]);
+  const [da, db] = await Promise.all([readFile(a), readFile(b)]);
+  const [ma, mb] = await Promise.all([sharp(da).metadata(), sharp(db).metadata()]);
   if (ma.width !== mb.width || ma.height !== mb.height) return Infinity;
   const [A, B] = await Promise.all(
-    [a, b].map((p) => sharp(p).resize(64, 64, { fit: 'fill' }).ensureAlpha().raw().toBuffer()),
+    [da, db].map((d) => sharp(d).resize(64, 64, { fit: 'fill' }).ensureAlpha().raw().toBuffer()),
   );
   let sum = 0;
   for (let i = 0; i < A.length; i += 4) {
