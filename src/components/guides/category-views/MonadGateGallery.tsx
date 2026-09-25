@@ -35,7 +35,7 @@ export interface EndlessDepth {
 export function Tile({ tile }: { tile: RouteTile }) {
   // Le zoom au survol vit sur le WRAPPER (les voiles zooment avec l'art),
   // pas sur l'image — cf. GuideCardArt.
-  const bg = <GuideCardArt icon={tile.icon} alt={tile.name ?? ''} topVeil />;
+  const bg = <GuideCardArt icon={tile.icon} topVeil />;
   const header = (
     <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-2">
       <p className="text-content text-xs font-medium drop-shadow-lg">{tile.depthLabel}</p>

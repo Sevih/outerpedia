@@ -66,7 +66,8 @@ export function BannerTabs({ tabs, urlKey }: { tabs: BannerTabDef[]; urlKey?: st
               <span className="relative block h-23.5 w-51.5 overflow-hidden rounded-xl">
                 <img
                   src={tab.imageSrc}
-                  alt={tab.label}
+                  alt=""
+                  aria-hidden
                   width={206}
                   height={94}
                   className="h-full w-full object-contain"

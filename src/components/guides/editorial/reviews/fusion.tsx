@@ -28,12 +28,15 @@ export function FusionCostPills({
   lang,
   label,
   orLabel,
+  levelLabel,
 }: {
   info: FusionInfo;
   levels: number[];
   lang: Lang;
   label: string;
   orLabel: string;
+  /** « Lv {n} » localisé (gabarit de locale côté appelant). */
+  levelLabel: (lv: number) => string;
 }) {
   if (levels.length === 0) return null;
   const totals = new Map(fusionCumulativeCosts(info).map((c) => [c.level, c.total]));
@@ -50,7 +53,7 @@ export function FusionCostPills({
           <span key={lv} className="flex items-center gap-4">
             {i > 0 && <span className="text-content-subtle text-sm">{orLabel}</span>}
             <span className="flex items-center gap-3">
-              <span className="text-ed-purple-fg text-xl font-bold">Lv {lv}</span>
+              <span className="text-ed-purple-fg text-xl font-bold">{levelLabel(lv)}</span>
               <span className="flex items-center gap-1">
                 {core.iconSrc && (
                   <img
@@ -168,7 +171,8 @@ function EeMiniCard({
         />
         <img
           src={img.ee(side.characterId)}
-          alt={side.name}
+          alt=""
+          aria-hidden
           className="absolute inset-1 h-[calc(100%-8px)] w-[calc(100%-8px)] object-contain"
         />
       </span>

@@ -30,6 +30,7 @@ const jp: Record<TranslationKey, string> = {
   'common.remove': '削除',
   'common.on': 'オン',
   'common.off': 'オフ',
+  'common.cost': 'コスト：',
   'share.on': '{platform}で共有',
   'share.copy_link': 'リンクをコピー',
   'aria.toggle_menu': 'メニュー切替',
@@ -37,6 +38,7 @@ const jp: Record<TranslationKey, string> = {
   'aria.next_art': '次のイラスト',
   'aria.show_art': 'イラスト{n}を表示',
   'aria.star_rarity': '星{rarity}のレアリティ',
+  'aria.star_count': '星{n}',
   'video.by': '投稿者：{author}',
 
   // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts

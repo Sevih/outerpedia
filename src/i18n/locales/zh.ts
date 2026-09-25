@@ -30,6 +30,7 @@ const zh: Record<TranslationKey, string> = {
   'common.remove': '移除',
   'common.on': '开启',
   'common.off': '关闭',
+  'common.cost': '消耗：',
   'share.on': '分享到 {platform}',
   'share.copy_link': '复制链接',
   'aria.toggle_menu': '切换菜单',
@@ -37,6 +38,7 @@ const zh: Record<TranslationKey, string> = {
   'aria.next_art': '下一张立绘',
   'aria.show_art': '显示立绘 {n}',
   'aria.star_rarity': '{rarity}星稀有度',
+  'aria.star_count': '{n}星',
   'video.by': '作者：{author}',
 
   // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts

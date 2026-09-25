@@ -36,8 +36,10 @@ function Warning({ children }: { children: React.ReactNode }) {
 }
 
 export default function OuterplaneOnLinuxGuide() {
+  // Guide EN seul par choix : `lang="en"` pour que les lecteurs d'écran le
+  // lisent en anglais sur /fr, /jp… — `contents` ne change rien à la mise en page.
   return (
-    <>
+    <div lang="en" className="contents">
       {/* Disclaimer (ex-prop de GuideTemplate) */}
       <Warning>
         <strong>Important:</strong> This is an unofficial community guide, not endorsed or supported
@@ -244,6 +246,6 @@ export default function OuterplaneOnLinuxGuide() {
           </Warning>
         </aside>
       </div>
-    </>
+    </div>
   );
 }

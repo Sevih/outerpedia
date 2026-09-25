@@ -6,6 +6,7 @@
  */
 import type { Character } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
+import type { TFunction } from '@/i18n';
 import { img } from '@/lib/images';
 import { cn } from '@/lib/cn';
 import { getTranscendSweetspots } from '@/lib/data/char-progression';
@@ -13,9 +14,13 @@ import { renderGameColors } from '@/components/ui/GameText';
 import { StarIcon } from '@/components/guides/editorial/banner/StarText';
 
 /** Rangée de n étoiles jaunes (notes d'impact, cibles). */
-function StarRow({ count, size = 14 }: { count: number; size?: number }) {
+function StarRow({ count, t, size = 14 }: { count: number; t: TFunction; size?: number }) {
   return (
-    <span className="inline-flex items-center gap-0.5" role="img" aria-label={`${count} stars`}>
+    <span
+      className="inline-flex items-center gap-0.5"
+      role="img"
+      aria-label={t('aria.star_count', { n: count })}
+    >
       {Array.from({ length: count }, (_, i) => (
         <StarIcon key={i} size={size} />
       ))}
@@ -28,7 +33,7 @@ function StarRow({ count, size = 14 }: { count: number; size?: number }) {
  * « 5 (support) 6 (dps) ») — découpage inchangé : chaque nombre devient
  * une rangée d'étoiles, le texte restant est rendu tel quel.
  */
-function TargetDisplay({ value }: { value: string }) {
+function TargetDisplay({ value, t }: { value: string; t: TFunction }) {
   if (!value) return <span>—</span>;
   const parts = value.match(/\d+(?:\s*\([^)]*\))?|[^\d]+/g) ?? [];
   return (
@@ -39,7 +44,7 @@ function TargetDisplay({ value }: { value: string }) {
           const extra = part.replace(/^\d+\s*/, '');
           return (
             <div key={i}>
-              <StarRow count={num} /> {extra}
+              <StarRow count={num} t={t} /> {extra}
             </div>
           );
         }
@@ -50,7 +55,7 @@ function TargetDisplay({ value }: { value: string }) {
 }
 
 /** Cibles recommandées PvE / PvP (deux colonnes, icônes de nav du jeu). */
-export function RecoTargets({ pve, pvp }: { pve: string; pvp: string }) {
+export function RecoTargets({ pve, pvp, t }: { pve: string; pvp: string; t: TFunction }) {
   const cols = [
     { title: 'PvE', icon: img.navIcon('pve'), ring: 'border-ed-sky-deep/40', value: pve },
     { title: 'PvP', icon: img.navIcon('pvp'), ring: 'border-ed-rose-deep/40', value: pvp },
@@ -65,10 +70,10 @@ export function RecoTargets({ pve, pvp }: { pve: string; pvp: string }) {
               ring,
             )}
           >
-            <img src={icon} alt={title} className="h-full w-full object-contain p-2" />
+            <img src={icon} alt="" aria-hidden className="h-full w-full object-contain p-2" />
           </span>
           <span className="text-content-strong text-sm font-semibold">{title}</span>
-          <TargetDisplay value={value || '—'} />
+          <TargetDisplay value={value || '—'} t={t} />
         </div>
       ))}
     </div>
@@ -78,14 +83,22 @@ export function RecoTargets({ pve, pvp }: { pve: string; pvp: string }) {
 export type ImpactMap = Record<'3' | '4' | '5' | '6', { pve: string; pvp: string }>;
 
 /** Note (1-5, éditoriale) rendue en étoiles ; tout autre texte tel quel. */
-function ImpactCell({ value }: { value: string }) {
+function ImpactCell({ value, t }: { value: string; t: TFunction }) {
   const num = parseInt(value, 10);
-  if (!Number.isNaN(num) && String(num) === value.trim()) return <StarRow count={num} />;
+  if (!Number.isNaN(num) && String(num) === value.trim()) return <StarRow count={num} t={t} />;
   return <span>{value || '—'}</span>;
 }
 
 /** Impact de la transcendance : note PvE/PvP par étoile (3★→6★). */
-export function ImpactTable({ impact, starLabel }: { impact: ImpactMap; starLabel: string }) {
+export function ImpactTable({
+  impact,
+  starLabel,
+  t,
+}: {
+  impact: ImpactMap;
+  starLabel: string;
+  t: TFunction;
+}) {
   const rows = ['3', '4', '5', '6'] as const;
   return (
     <div className="overflow-x-auto">
@@ -101,13 +114,13 @@ export function ImpactTable({ impact, starLabel }: { impact: ImpactMap; starLabe
           {rows.map((r) => (
             <tr key={r} className="border-line-subtle border-t">
               <td className="py-1.5 pr-2">
-                <StarRow count={Number(r)} />
+                <StarRow count={Number(r)} t={t} />
               </td>
               <td className="py-1.5 pr-2">
-                <ImpactCell value={impact[r]?.pve ?? '—'} />
+                <ImpactCell value={impact[r]?.pve ?? '—'} t={t} />
               </td>
               <td className="py-1.5 pr-2">
-                <ImpactCell value={impact[r]?.pvp ?? '—'} />
+                <ImpactCell value={impact[r]?.pvp ?? '—'} t={t} />
               </td>
             </tr>
           ))}

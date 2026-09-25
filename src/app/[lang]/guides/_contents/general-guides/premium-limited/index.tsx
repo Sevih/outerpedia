@@ -101,13 +101,13 @@ export default async function PremiumLimitedGuide({ lang }: { lang: Lang }) {
                 <div className="text-content-strong mb-2 text-center text-sm font-semibold">
                   {L(LABELS.recommendedTargets)}
                 </div>
-                <RecoTargets pve={entry.recommendedPve} pvp={entry.recommendedPvp} />
+                <RecoTargets pve={entry.recommendedPve} pvp={entry.recommendedPvp} t={t} />
               </div>
               <div className="border-line-subtle rounded-md border p-3">
                 <div className="text-content-strong mb-2 text-center text-sm font-semibold">
                   {L(LABELS.transcendImpact)}
                 </div>
-                <ImpactTable impact={entry.impact} starLabel={L(LABELS.colStar)} />
+                <ImpactTable impact={entry.impact} starLabel={L(LABELS.colStar)} t={t} />
               </div>
             </div>
             <TranscendSweetspots character={g.character} lang={lang} />

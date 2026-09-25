@@ -451,7 +451,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
             <div className="space-y-2">
               <p className="m-0">{L(LABELS.changeAll_desc)}</p>
               <div className="flex items-center gap-2">
-                <span className="text-content-subtle">Cost:</span>
+                <span className="text-content-subtle">{t('common.cost')}</span>
                 {chipByName('Transistone (Total)', 20)}
               </div>
             </div>
@@ -460,7 +460,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
             <div className="space-y-2">
               <p className="m-0">{L(LABELS.selectChange_desc)}</p>
               <div className="flex items-center gap-2">
-                <span className="text-content-subtle">Cost:</span>
+                <span className="text-content-subtle">{t('common.cost')}</span>
                 {chipByName('Transistone (Individual)', 20)}
               </div>
             </div>

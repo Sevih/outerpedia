@@ -12,6 +12,7 @@ import Link from 'next/link';
 import type { Lang } from '@/lib/i18n/config';
 import { resolveGuideCharacter } from '@/lib/data/characters';
 import { img } from '@/lib/images';
+import { statAbbr } from '@/lib/stats';
 
 export interface TurnOrderStep {
   character: string;
@@ -58,7 +59,9 @@ export function TurnOrder({
                   ) : (
                     <span className="text-content-strong text-sm">{name}</span>
                   )}
-                  <span className="text-stat text-xs">{step.speed} SPD</span>
+                  <span className="text-stat text-xs">
+                    {step.speed} {statAbbr('spd')}
+                  </span>
                 </span>
               </div>
             </div>

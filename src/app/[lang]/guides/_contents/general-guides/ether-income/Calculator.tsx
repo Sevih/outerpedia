@@ -80,19 +80,20 @@ export interface CalculatorModel {
     defaultLeagueIdx: number;
   };
   singularity: { options: LadderOption[]; defaultIdx: number };
-  /** Icône de l'item Ether (résolue serveur). */
+  /** Icône et nom localisé de l'item Ether (résolus serveur). */
   etherIconSrc: string;
+  etherName: string;
 }
 
 // Locale FIXE : le rendu serveur (locale du process node) et le client (locale
 // du navigateur) doivent produire le même texte — sinon mismatch d'hydratation.
 const fmt = (n?: number): string => (n === undefined ? '–' : n.toLocaleString('en-US'));
 
-function EtherAmount({ value, icon }: { value: number; icon: string }) {
+function EtherAmount({ value, icon, name }: { value: number; icon: string; name: string }) {
   return (
     <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap">
       <span className="text-content-strong text-xs font-semibold tabular-nums">{fmt(value)}</span>
-      <img src={icon} alt="Ether" className="h-4 w-4 object-contain" width={16} height={16} />
+      <img src={icon} alt={name} className="h-4 w-4 object-contain" width={16} height={16} />
     </span>
   );
 }
@@ -248,7 +249,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
   const rankedSummary = [
     `${L.arena}: ${picked.arena?.label}`,
     `${L.guild}: ${picked.guildRaid?.label}`,
-    `WB: ${league?.name} ${picked.worldBoss?.label}`,
+    `${L.worldBoss}: ${league?.name} ${picked.worldBoss?.label}`,
     `${L.singularity}: ${picked.singularity?.label}`,
   ].join(' · ');
 
@@ -312,12 +313,20 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
           <div className="flex items-center gap-2">
             <span className="text-content-subtle w-16 shrink-0 whitespace-nowrap">{L.arena}</span>
             {select(arenaIdx, setArenaIdx, model.arena.options, 'w-40 min-w-36')}
-            <EtherAmount value={picked.arena?.ether ?? 0} icon={model.etherIconSrc} />
+            <EtherAmount
+              value={picked.arena?.ether ?? 0}
+              icon={model.etherIconSrc}
+              name={model.etherName}
+            />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-content-subtle w-16 shrink-0 whitespace-nowrap">{L.guild}</span>
             {select(guildIdx, setGuildIdx, model.guildRaid.options, 'w-44 min-w-40')}
-            <EtherAmount value={picked.guildRaid?.ether ?? 0} icon={model.etherIconSrc} />
+            <EtherAmount
+              value={picked.guildRaid?.ether ?? 0}
+              icon={model.etherIconSrc}
+              name={model.etherName}
+            />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-content-subtle w-16 shrink-0 whitespace-nowrap">
@@ -339,14 +348,22 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
               ))}
             </select>
             {league && select(wbIdx, setWbIdx, league.options, 'w-28 min-w-20')}
-            <EtherAmount value={picked.worldBoss?.ether ?? 0} icon={model.etherIconSrc} />
+            <EtherAmount
+              value={picked.worldBoss?.ether ?? 0}
+              icon={model.etherIconSrc}
+              name={model.etherName}
+            />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-content-subtle w-16 shrink-0 whitespace-nowrap">
               {L.singularity}
             </span>
             {select(singIdx, setSingIdx, model.singularity.options, 'w-44 min-w-40')}
-            <EtherAmount value={picked.singularity?.ether ?? 0} icon={model.etherIconSrc} />
+            <EtherAmount
+              value={picked.singularity?.ether ?? 0}
+              icon={model.etherIconSrc}
+              name={model.etherName}
+            />
           </div>
         </div>
       </details>

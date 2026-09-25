@@ -20,7 +20,7 @@ import type { TranslationKey } from '@/i18n';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { lRec } from '@/lib/i18n/localize';
 import { resolveGuideCharacter } from '@/lib/data/characters';
-import { STAT_ICON } from '@/lib/stats';
+import { STAT_ICON, statAbbr } from '@/lib/stats';
 import { img } from '@/lib/images';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 
@@ -138,7 +138,7 @@ function EntryRow({ entry, step, ctx }: { entry: RequirementEntry; step: number;
             {parseText(spd, ctx)}
           </span>
           <span className="text-content-muted text-2xs font-semibold tracking-wide uppercase">
-            SPD
+            {statAbbr('spd')}
           </span>
         </div>
       )}

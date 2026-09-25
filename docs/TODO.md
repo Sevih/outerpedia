@@ -171,16 +171,6 @@
       `MonadGateMap` (`#facc15`/`#fde047` = yellow-400/300) et
       `TowerCombatRoster` (`rgb(239 68 68)` = red-500) n'ont pas de token ;
       `BannerTabs`/`AdventureGrid` n'ont que du noir (ombre, dégradé).
-- [ ] Anglais en dur dans des rendus localisés (H7, reste) : « Cost: »
-      (`gear`), « Lv. 1 »/`orLabel="or"` (`core-fusion`), « Lv {lv} »
-      (`fusion.tsx`), « WB: »/`alt="Ether"` (`ether-income`), « SPD »
-      (`BuildRequirements`, `TurnOrder` — `statAbbr('spd')` existe),
-      `PERIOD_ABBR` D/W/M/O (`shop-purchase-priorities`), `aria-label` « N
-      stars » (`premium.tsx`), 5 `alt` de `roadmap-2026` ; `lang="en"` sur le
-      conteneur d'`outerplane-on-linux`.
-- [ ] `alt` contraires à la règle maison (H8) : `HeroReviewCard` (slugs bruts),
-      doublons icône+texte dans `premium.tsx`, `BannerTabs`, `LicenseTabs`,
-      `CardArt`, `fusion.tsx`.
 - [ ] À confirmer : doublon SEO `/<tour>/1` vs page de base, encart
       « annoncé juin, livré 8/09 » sur la roadmap (H14). (H12, H13 et le
       `stamp:guides` en pre-commit : FAIT le 25/09, lot B8.)

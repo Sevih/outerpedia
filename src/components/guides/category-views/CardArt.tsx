@@ -17,16 +17,15 @@ export const ART_TILE =
  * lisibilité du pied) + voile haut optionnel (lisibilité du header des cartes
  * hautes). `hoverScale` pose le zoom sur L'IMAGE (parent `group` requis) ;
  * les cartes qui zooment leurs voiles avec l'art le font sur leur wrapper.
+ * L'art est DÉCORATIF : chaque carte affiche son nom en texte par-dessus.
  */
 export function GuideCardArt({
   icon,
-  alt,
   topVeil = false,
   hoverScale = false,
 }: {
   /** Nom de sprite (namespace guides) — résolu par `img.guideIcon`. */
   icon: string;
-  alt: string;
   topVeil?: boolean;
   hoverScale?: boolean;
 }) {
@@ -34,7 +33,8 @@ export function GuideCardArt({
     <>
       <img
         src={img.guideIcon(icon)}
-        alt={alt}
+        alt=""
+        aria-hidden
         loading="lazy"
         className={cn(
           'absolute inset-0 h-full w-full object-cover',

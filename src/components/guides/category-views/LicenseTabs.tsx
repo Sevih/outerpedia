@@ -87,7 +87,8 @@ function WeeklyCard({ card }: { card: LicenseCard }) {
       <div className="group-hover:ring-select/50 relative aspect-150/260 w-full overflow-hidden rounded-lg transition-all group-hover:ring-1">
         <img
           src={card.src}
-          alt={card.name}
+          alt=""
+          aria-hidden
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />

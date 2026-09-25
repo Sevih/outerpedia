@@ -126,8 +126,8 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
             title: t('page.character.toc.ee'),
             base: t('tools.hero-tracker.base'),
             coreFusion: t('tools.hero-tracker.coreFusion'),
-            effect: 'Lv. 1',
-            effectMax: 'Lv. 10',
+            effect: t('tower.level', { n: 1 }),
+            effectMax: t('tower.level', { n: 10 }),
           }}
         />
         <FusionCostPills
@@ -135,7 +135,8 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
           levels={entry.recommendedLevels}
           lang={lang}
           label={L(LABELS.recommendedLevel)}
-          orLabel="or"
+          orLabel={t('monad.ui.or')}
+          levelLabel={(lv) => t('tower.level', { n: lv })}
         />
       </HeroReviewCard>
     );

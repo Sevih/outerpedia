@@ -9,14 +9,16 @@ import type { Route } from 'next';
 import type { ReactNode } from 'react';
 import type { Character } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
+import { getT, type TranslationKey } from '@/i18n';
 import { img } from '@/lib/images';
 import { localePath } from '@/lib/navigation';
 import { characterDisplayName, slugForId } from '@/lib/data/characters';
+import { tagLabel } from '@/lib/data/tags';
 
 /** Tags dont un sprite éditorial existe (images/ui/tags/<tag>.webp). */
 const TAG_SPRITES = new Set(['premium', 'festival', 'seasonal', 'collab', 'core-fusion']);
 
-export function HeroReviewCard({
+export async function HeroReviewCard({
   character,
   lang,
   children,
@@ -25,6 +27,7 @@ export function HeroReviewCard({
   lang: Lang;
   children: ReactNode;
 }) {
+  const t = await getT(lang);
   const name = characterDisplayName(character, lang);
   const slug = slugForId(character.id);
   const tag = (character.tags ?? []).find((t) => TAG_SPRITES.has(t));
@@ -53,7 +56,7 @@ export function HeroReviewCard({
           {tag && (
             <img
               src={img.tag(tag)}
-              alt={tag}
+              alt={tagLabel(tag, lang)}
               className="h-9 w-9 object-contain"
               width={36}
               height={36}
@@ -63,14 +66,14 @@ export function HeroReviewCard({
         <div className="flex items-center gap-1.5">
           <img
             src={img.element(character.element)}
-            alt={character.element}
+            alt={t(`sys.element.${character.element}` as TranslationKey)}
             className="h-6 w-6 drop-shadow-md"
             width={24}
             height={24}
           />
           <img
             src={img.klass(character.class)}
-            alt={character.class}
+            alt={t(`sys.class.${character.class}` as TranslationKey)}
             className="h-6 w-6 drop-shadow-md"
             width={24}
             height={24}

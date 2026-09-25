@@ -173,7 +173,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <div className="mb-4 flex justify-center">
           <ImageLightbox
             src={shot('road-quarter.webp')}
-            alt="2026 Quarterly Roadmap"
+            alt={L('quarterlyOverview')}
             caption={L('quarterlyOverview')}
             thumbnailClassName="max-h-64 w-auto"
           />
@@ -190,13 +190,13 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <div className="mb-4 flex flex-wrap justify-center gap-4">
           <ImageLightbox
             src={shot('road-j-m.webp')}
-            alt="January to March 2026 Updates"
+            alt={`${L('monthlyUpdates')} (${L('janMar')})`}
             caption={L('janMar')}
             thumbnailClassName="max-h-64 w-auto"
           />
           <ImageLightbox
             src={shot('road-a-j.webp')}
-            alt="April to July 2026 Updates"
+            alt={`${L('monthlyUpdates')} (${L('aprJul')})`}
             caption={L('aprJul')}
             thumbnailClassName="max-h-64 w-auto"
           />
@@ -222,7 +222,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <div className="mb-4 flex justify-center">
           <ImageLightbox
             src={shot('cf-snow-notia.webp')}
-            alt="Core Fusion Snow and Notia"
+            alt={L('cfSnowNotia')}
             caption={L('cfSnowNotia')}
             thumbnailClassName="max-h-64 w-auto"
           />
@@ -253,7 +253,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <div className="mb-4 flex justify-center">
           <ImageLightbox
             src={shot('dimension-singularity.webp')}
-            alt="Dimension Singularity"
+            alt={L('dsCaption')}
             caption={L('dsCaption')}
             thumbnailClassName="max-h-64 w-auto"
           />
@@ -270,7 +270,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <div className="mb-4 flex justify-center">
           <ImageLightbox
             src={shot('rta.webp')}
-            alt="RTA Real-Time Arena"
+            alt={L('rtaOverview')}
             caption={L('rtaOverview')}
             thumbnailClassName="max-h-64 w-auto"
           />

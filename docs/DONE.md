@@ -7,6 +7,56 @@
 
 ## 2026-09-25
 
+- **Guides : anglais en dur localisé et `alt` remis à la règle maison** (lot
+  B3, H7 et H8 de `docs/audit/guides.md`). H7 — deux clés neuves seulement,
+  dans les six locales : `common.cost` (« Cost: » de `gear`, deux sites ; aucun
+  « coût » générique n'existait) et `aria.star_count` (au pluriel ICU que
+  `makeT` résout déjà en en/fr/es ; « 星{n} », « 별 {n}개 », « {n}星 »),
+  qui remplace l'`aria-label` « N stars » de `StarRow` (`premium.tsx`, `t`
+  passé à `RecoTargets` et `ImpactTable` par `premium-limited`). Le reste
+  réutilise l'existant : `tower.level` pour « Lv. 1 »/« Lv. 10 » de
+  `EeComparison` et « Lv {lv} » de `FusionCostPills` (nouvelle prop
+  `levelLabel`, en anglais la pill passe de « Lv 5 » à « Lv. 5 », comme la
+  carte EE voisine), `monad.ui.or` pour `orLabel` (`core-fusion`),
+  `labels.worldBoss` (déjà `progress.task.world-boss`) pour « WB: » du résumé
+  d'`ether-income` (« WB: » devient « World Boss: » dans toutes les langues),
+  `statAbbr('spd')` dans `BuildRequirements` et `TurnOrder` (rendu identique,
+  SPD reste en anglais par convention de jargon). `alt="Ether"` : le nom
+  localisé de l'item, résolu serveur avec l'icône (`etherName` ajouté au
+  `CalculatorModel`) — l'icône porte seule l'information à côté du nombre.
+  `PERIOD_ABBR` de `shop-purchase-priorities` : la lettre suit la langue
+  (`periodAbbrD/W/M/O` dans `labels.ts` : fr Q/H/M/U, es D/S/M/U, jp 日/週/月/回,
+  kr 일/주/월/회, zh 日/周/月/次 ; en inchangé) et la légende se compose de la
+  même entrée (`periodD` ne porte plus que le nom, « {abbr} = {nom} ») : la
+  lettre de la cellule et celle de la légende ne peuvent plus diverger. Les six
+  `alt` de `roadmap-2026` (l'audit en comptait cinq) prennent la légende
+  localisée de leur image, précédée du titre de section pour les deux mois.
+  `outerplane-on-linux` : conteneur `<div lang="en" className="contents">` à la
+  place du fragment, sans effet de mise en page. H8 — `HeroReviewCard` devient
+  async (`getT`) : élément et classe par `sys.element.*`/`sys.class.*`, badge
+  de recrutement par `tagLabel` — localisés plutôt que muets, ces icônes
+  portent seules l'information. Doublons icône + texte rendus décoratifs
+  (`alt="" aria-hidden`) : icône PvE/PvP de `RecoTargets`, art des onglets de
+  `BannerTabs`, carte hebdo de `LicenseTabs` (la carte promotion garde son
+  `alt` : l'image est le seul contenu de son lien), EE de `EeMiniCard`
+  (`fusion.tsx`, nom lié juste à côté) ; `GuideCardArt` perd sa prop `alt`,
+  ses trois appelants (`MonadGateGallery`, `SkywardTowerView` ×2) écrivant tous
+  le nom par-dessus. Vérifié : `pnpm typecheck` et `pnpm lint` sans sortie
+  d'erreur (dernières lignes `$ tsc --noEmit && … -p scripts/tsconfig.json` et
+  `$ eslint`), `pnpm test` « Tests 1956 passed (1956) » ; rendu relu par `curl`
+  sur le serveur de dev en fr et jp pour `core-fusion` (« Niv. 5 », « ou » /
+  « Lv.5 », « または »), `shop-purchase-priorities` (« 3 / H » et légende
+  « Q = Quotidien · H = Hebdomadaire… » / « 週 = 毎週… »), `premium-limited`
+  (« 4 étoiles » / « 星4 », `alt` « Lumière », « プレミアムユニット »),
+  `ether-income` (« Éther », « World Boss: Ligue extrême… ») et `gear`
+  (« Coût : » / « コスト： »), plus `roadmap-2026` en jp et le `lang="en"` de
+  `outerplane-on-linux`. Laissé : l'`aria-label` « Zoom: {alt} »
+  d'`ImageLightbox` reste en anglais partout (aucun appelant ne passe
+  `strings`, aucune clé « zoom » — hors périmètre, à traiter pour tout le site) ;
+  `tower.level` s'écrit « Niv. » en fr quand `page.character.skill.level` dit
+  « Nv. » (incohérence préexistante). Traductions jp/kr/zh sobres, à relire :
+  « コスト： », « 消耗： », les lettres de période.
+
 - **`alt` et accessibilité des outils : règle maison appliquée, cliquables
   passés en boutons nommés** (lot B6, G37 et G38 de `docs/audit/transverse.md`).
   G37 : les `alt` contraires à la règle de `CONVENTIONS.md` (décoratif =

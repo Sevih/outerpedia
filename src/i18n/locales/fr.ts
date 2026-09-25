@@ -31,6 +31,7 @@ const fr: Record<TranslationKey, string> = {
   'common.remove': 'Retirer',
   'common.on': 'Activé',
   'common.off': 'Désactivé',
+  'common.cost': 'Coût :',
   'share.on': 'Partager sur {platform}',
   'share.copy_link': 'Copier le lien',
   'aria.toggle_menu': 'Basculer le menu',
@@ -38,6 +39,7 @@ const fr: Record<TranslationKey, string> = {
   'aria.next_art': 'Illustration suivante',
   'aria.show_art': "Afficher l'illustration {n}",
   'aria.star_rarity': 'Rareté {rarity} étoiles',
+  'aria.star_count': '{n, plural, one {# étoile} other {# étoiles}}',
   'video.by': 'par {author}',
 
   // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts

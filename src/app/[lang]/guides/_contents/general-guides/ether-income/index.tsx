@@ -169,6 +169,7 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
     'projectedTotal',
   ] as const;
 
+  const ether = itemChipByName('Ether', lang);
   const model: CalculatorModel = {
     labels: {
       ...(Object.fromEntries(labelKeys.map((k) => [k, L(LABELS[k])])) as Record<
@@ -196,7 +197,8 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
     guildRaid: { options: toOptions(RANKINGS.guildRaid.tiers, 'guild'), defaultIdx: guildDefault },
     worldBoss: { leagues, defaultLeagueIdx: leagueDefault },
     singularity: { options: toOptions(singTiers, 'sing'), defaultIdx: singDefault },
-    etherIconSrc: itemChipByName('Ether', lang).iconSrc,
+    etherIconSrc: ether.iconSrc,
+    etherName: ether.name,
   };
 
   return (

@@ -43,12 +43,20 @@ const PRIORITY_BADGE: Record<Priority, string> = {
   B: 'bg-amber-500/15 text-amber-300 ring-amber-500/40',
   C: 'bg-surface-sunken text-content-subtle ring-line-subtle',
 };
-const PERIOD_ABBR: Record<ShopPeriod, string> = {
-  daily: 'D',
-  weekly: 'W',
-  monthly: 'M',
-  'one-time': 'O',
+const PERIOD_ABBR: Record<ShopPeriod, keyof typeof LABELS> = {
+  daily: 'periodAbbrD',
+  weekly: 'periodAbbrW',
+  monthly: 'periodAbbrM',
+  'one-time': 'periodAbbrO',
 };
+
+/** Ordre de la légende : [abréviation, nom] par période. */
+const PERIODS = [
+  ['periodAbbrD', 'periodD'],
+  ['periodAbbrW', 'periodW'],
+  ['periodAbbrM', 'periodM'],
+  ['periodAbbrO', 'periodO'],
+] as const;
 
 /** Une ligne de table, forme commune au dérivé et à l'éditorial. */
 interface Row {
@@ -87,7 +95,7 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
   const limitNode = (count: number, period: ShopPeriod): ReactNode =>
     count > 0 ? (
       <span className="whitespace-nowrap">
-        {count} / {PERIOD_ABBR[period]}
+        {count} / {L(LABELS[PERIOD_ABBR[period]])}
       </span>
     ) : (
       <span className="text-content-subtle">—</span>
@@ -233,8 +241,8 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
       <span className="font-semibold">{L(LABELS.legendTitle)}</span> {L(LABELS.legendS)} ·{' '}
       {L(LABELS.legendA)} · {L(LABELS.legendB)} · {L(LABELS.legendC)}
       <br />
-      <span className="font-semibold">{L(LABELS.periodsTitle)}</span> {L(LABELS.periodD)} ·{' '}
-      {L(LABELS.periodW)} · {L(LABELS.periodM)} · {L(LABELS.periodO)}
+      <span className="font-semibold">{L(LABELS.periodsTitle)}</span>{' '}
+      {PERIODS.map(([abbr, name]) => `${L(LABELS[abbr])} = ${L(LABELS[name])}`).join(' · ')}
     </p>
   );
 

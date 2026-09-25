@@ -95,7 +95,7 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
       className="group ring-line-subtle hover:ring-select/50 relative h-32 w-full overflow-hidden rounded-lg ring-1 transition-all sm:w-75"
     >
-      <GuideCardArt icon={guide.icon} alt={name} hoverScale />
+      <GuideCardArt icon={guide.icon} hoverScale />
       <div className="absolute inset-0 flex flex-col justify-between p-3">
         <p className="text-content-strong text-lg font-bold drop-shadow-lg">{name}</p>
         <p className="text-content-muted text-2xs line-clamp-3 drop-shadow-lg sm:text-xs">
@@ -115,7 +115,7 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
       className={`group ring-line-subtle ${ART_TILE} ring-1 transition-all ${ring}`}
     >
-      <GuideCardArt icon={guide.icon} alt={name} topVeil hoverScale />
+      <GuideCardArt icon={guide.icon} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
         <img
           src={img.element(element)}

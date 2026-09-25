@@ -37,6 +37,7 @@ const en = {
   'common.remove': 'Remove',
   'common.on': 'ON',
   'common.off': 'OFF',
+  'common.cost': 'Cost:',
   'share.on': 'Share on {platform}',
   'share.copy_link': 'Copy link',
   'aria.toggle_menu': 'Toggle menu',
@@ -44,6 +45,7 @@ const en = {
   'aria.next_art': 'Next art',
   'aria.show_art': 'Show art {n}',
   'aria.star_rarity': '{rarity} star rarity',
+  'aria.star_count': '{n, plural, one {# star} other {# stars}}',
   'video.by': 'by {author}',
 
   // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts

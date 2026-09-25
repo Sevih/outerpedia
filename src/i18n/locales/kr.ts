@@ -30,6 +30,7 @@ const kr: Record<TranslationKey, string> = {
   'common.remove': '제거',
   'common.on': '켜짐',
   'common.off': '꺼짐',
+  'common.cost': '비용:',
   'share.on': '{platform}에 공유',
   'share.copy_link': '링크 복사',
   'aria.toggle_menu': '메뉴 전환',
@@ -37,6 +38,7 @@ const kr: Record<TranslationKey, string> = {
   'aria.next_art': '다음 일러스트',
   'aria.show_art': '일러스트 {n} 표시',
   'aria.star_rarity': '희귀도 {rarity}성',
+  'aria.star_count': '별 {n}개',
   'video.by': '제작: {author}',
 
   // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
