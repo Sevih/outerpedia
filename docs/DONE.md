@@ -7,6 +7,16 @@
 
 ## 2026-09-25
 
+- **`esc()` et `rfc822()` mutualisés dans `src/lib/rss.ts`** (dette du rapport,
+  lot A2, commit `6f07fe04` — entrée ajoutée après coup, l'agent avait commité
+  sans). Les deux flux RSS (`/feed`, `/feed/changelog`) portaient chacun leur
+  copie de l'échappement XML et de la date RFC 822 ; un module partagé, les
+  routes n'ont plus que l'import. Six tests (cinq entités, `&` d'abord, chaîne
+  vide, `YYYY-MM-DD` → `Wed, 23 Sep 2026 00:00:00 GMT`, entrée hors format).
+  Comportement conservé et documenté : la fonction n'accepte que `YYYY-MM-DD`
+  et rend « Invalid Date » sans lever sur autre chose — aucune source (dates des
+  guides, du changelog) n'est concernée. Preuve du refactor : les deux flux
+  récupérés par `curl` avant et après sont identiques octet pour octet.
 - **Le pre-commit formate AVANT de linter** (lot A1 de la Dette). `format`
   (`prettier --write`, `stage_fixed`) et `lint` (`eslint`) tournaient en
   `parallel: true` sur les mêmes fichiers indexés : eslint pouvait lire un
