@@ -8,12 +8,12 @@
     "es": "Outerplane en Linux"
   },
   "description": {
-    "en": "Quick guide to run Outerplane on Linux using Waydroid — includes translation layer, Google cert fix, anti-cheat & troubleshooting.",
-    "jp": "Waydroidを使用してLinuxでOuterplaneを実行するクイックガイド — 翻訳レイヤー、Google認証修正、アンチチート、トラブルシューティング。",
-    "kr": "Waydroid를 사용하여 Linux에서 Outerplane을 실행하는 빠른 가이드 — 번역 레이어, Google 인증 수정, 안티치트, 문제 해결.",
-    "zh": "使用Waydroid在Linux上运行Outerplane的快速指南 — 翻译层、Google认证修复、反作弊和故障排除。",
-    "fr": "Guide rapide pour lancer Outerplane sous Linux avec Waydroid — couche de traduction, correctif des certificats Google, anti-cheat et dépannage.",
-    "es": "Guía rápida para ejecutar Outerplane en Linux usando Waydroid — incluye capa de traducción, solución al certificado de Google, anti-cheat y solución de problemas."
+    "en": "Run Outerplane on Linux through Steam + Proton, with Waydroid as a fallback — translation layer, Google cert fix, anti-cheat & troubleshooting.",
+    "jp": "Steam + ProtonでLinuxでOuterplaneを実行するガイド。代替手段としてWaydroid — 翻訳レイヤー、Google認証修正、アンチチート、トラブルシューティング。",
+    "kr": "Steam + Proton으로 Linux에서 Outerplane을 실행하는 가이드, 대안으로 Waydroid — 번역 레이어, Google 인증 수정, 안티치트, 문제 해결.",
+    "zh": "通过Steam + Proton在Linux上运行Outerplane的指南，Waydroid作为备选 — 翻译层、Google认证修复、反作弊和故障排除。",
+    "fr": "Lancer Outerplane sous Linux avec Steam + Proton, Waydroid en repli — couche de traduction, correctif des certificats Google, anti-cheat et dépannage.",
+    "es": "Ejecuta Outerplane en Linux con Steam + Proton, con Waydroid como alternativa — capa de traducción, solución al certificado de Google, anti-cheat y solución de problemas."
   },
   "icon": "CM_EtcMenu_Azit",
   "author": "Daystars",

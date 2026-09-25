@@ -7,6 +7,39 @@
 
 ## 2026-09-25
 
+- **Guides `how-to-play` et `outerplane-on-linux` : le jeu est sur Steam,
+  Linux via Proton** (lot E1). Les deux guides disaient le PC réduit à Google
+  Play Games et Linux réduit à l'émulation Android, alors qu'OUTERPLANE est sorti
+  sur Steam (app 4247320, Windows seul, éditeur MAJOR9, 26/08/2026 — vérifié
+  par l'API `appdetails` du store) et que Sevih l'a fait tourner sous Fedora
+  avec Steam + Proton. `how-to-play` : carte « Steam (Windows) » en tête de la
+  section PC (même `PlatformCard`, `steamTitle`/`steamDesc`/`steamBtn` dans
+  les six langues de `strings.ts`, `LINKS.steam` vers la fiche officielle ;
+  pastille en `ed-sky`, bouton neutre `surface-overlay` comme la carte iOS), la
+  carte Google Play Games reformulée en alternative (`gpgDesc`), et
+  l'avertissement `pcWarning` recommande désormais « Steam ou Google Play Games
+  pour PC » au lieu de GPG seul ; les deux cartes sont groupées dans un
+  `space-y-4` comme la section mobile. `outerplane-on-linux` : section « Via
+  Steam (Proton) — recommended » EN PREMIER (`#steam-proton`, étapes
+  `#steam-1`…`#steam-4` : installer Steam — `dnf` via RPM Fusion ou Flatpak —,
+  activer Steam Play pour tous les titres dans Settings → Compatibility,
+  installer le jeu, lancer), puis « Fallback: Android emulation (Waydroid) »
+  (`#waydroid`) qui introduit les dix étapes d'origine, inchangées et aux mêmes
+  ancres ; `Step` prend un `id` optionnel pour ça. Disclaimer, héro, liens
+  rapides (deux entrées de plus) et encart « Waydroid Requirements » ajustés.
+  Les réglages précis ne sont PAS inventés : six `[À CONFIRMER : …]` (composant
+  `ToConfirm`, en `text-ed-amber` pour sauter aux yeux) attendent Sevih —
+  version de Fedora et GPU du test, paquet Steam utilisé, version de Proton,
+  réglage par jeu ou global, options de lancement, pièges du premier
+  lancement. `meta.json` des deux guides : descriptions six langues qui citent
+  Steam, `updated` re-daté par le hook `stamp:guides`. Vérifié : rendu 200 des
+  deux guides en `en` et `fr` sur le serveur local (carte Steam et lien, texte
+  GPG/avertissement dans la langue, ancres et les six placeholders présents),
+  `pnpm typecheck` sans erreur, `pnpm lint` (« $ eslint », aucune remontée),
+  `pnpm test` « Tests 1968 passed (1968) ». Laissé : `aboutDesc` dit encore
+  « RPG mobile » et la configuration minimale ne liste qu'Android/iOS (hors
+  périmètre) ; les couleurs brutes existantes des deux guides (H6) restent.
+
 - **Mode `path` : la langue tient d'une page à l'autre** (lot A12, signalé par
   Sevih le 25/09). En dev (`localhost:3000`) et sur le staging OVH, choisir le
   français puis cliquer n'importe quel lien ramenait à l'anglais : les liens

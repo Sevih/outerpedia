@@ -8,12 +8,12 @@
     "es": "Cómo jugar"
   },
   "description": {
-    "en": "Download guide and getting started tips for OUTERPLANE on mobile and PC.",
-    "jp": "モバイルとPCでのOUTERPLANEのダウンロードガイドと始め方のヒント。",
-    "kr": "모바일 및 PC에서 OUTERPLANE 다운로드 가이드 및 시작 팁.",
-    "zh": "OUTERPLANE 移动端和 PC 端下载指南及新手入门提示。",
-    "fr": "Guide de téléchargement et conseils pour bien débuter Outerplane sur mobile et PC.",
-    "es": "Guía de descarga y consejos para empezar en OUTERPLANE en móvil y PC."
+    "en": "Download guide and getting started tips for OUTERPLANE on mobile and PC (Steam, Google Play Games).",
+    "jp": "モバイルとPC（Steam、Google Play Games）でのOUTERPLANEのダウンロードガイドと始め方のヒント。",
+    "kr": "모바일 및 PC(Steam, Google Play Games)에서 OUTERPLANE 다운로드 가이드 및 시작 팁.",
+    "zh": "OUTERPLANE 移动端和 PC 端（Steam、Google Play游戏）下载指南及新手入门提示。",
+    "fr": "Guide de téléchargement et conseils pour bien débuter Outerplane sur mobile et PC (Steam, Google Play Games).",
+    "es": "Guía de descarga y consejos para empezar en OUTERPLANE en móvil y PC (Steam, Google Play Games)."
   },
   "icon": "CM_EtcMenu_Azit",
   "author": "Sevih",

@@ -10,7 +10,7 @@ import { lRec } from '@/lib/i18n/localize';
 import type { GuideContentProps } from '@/lib/data/guides';
 import { LINKS, LOCALIZED_LINKS, S } from './strings';
 
-/** Carte de plateforme (Android / iOS / Google Play Games). */
+/** Carte de plateforme (Android / iOS / Steam / Google Play Games). */
 function PlatformCard({
   badge,
   title,
@@ -123,26 +123,48 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
 
           <section id="pc-play">
             <h2 className="mb-3 text-xl font-semibold">{s('pcTitle')}</h2>
-            <PlatformCard
-              badge={
-                <Badge tone="bg-blue-600/20 text-blue-400">
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </Badge>
-              }
-              title={s('gpgTitle')}
-              desc={s('gpgDesc')}
-              btnLabel={s('gpgBtn')}
-              btnHref={LINKS.googleplaygames}
-              btnClass="bg-blue-600 hover:bg-blue-500"
-              note={s('gpgNote')}
-            />
+            <div className="space-y-4">
+              {/* Steam d'abord : sortie PC officielle (Windows) ; GPG devient l'alternative. */}
+              <PlatformCard
+                badge={
+                  <Badge tone="bg-ed-sky/15 text-ed-sky">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+                  </Badge>
+                }
+                title={s('steamTitle')}
+                desc={s('steamDesc')}
+                btnLabel={s('steamBtn')}
+                btnHref={LINKS.steam}
+                btnClass="bg-surface-overlay hover:bg-surface-sunken"
+              />
+              <PlatformCard
+                badge={
+                  <Badge tone="bg-blue-600/20 text-blue-400">
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </Badge>
+                }
+                title={s('gpgTitle')}
+                desc={s('gpgDesc')}
+                btnLabel={s('gpgBtn')}
+                btnHref={LINKS.googleplaygames}
+                btnClass="bg-blue-600 hover:bg-blue-500"
+                note={s('gpgNote')}
+              />
+            </div>
             <div className="border-warn/30 bg-warn/10 mt-4 rounded-lg border p-4 text-sm">
               <strong>{s('pcWarningLabel')}</strong> {s('pcWarning')}
             </div>
