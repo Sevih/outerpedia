@@ -15,6 +15,7 @@ import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFilter
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
 import { decodeFilters, encodeFilters } from './filters/filter-codec';
 import { shortShareUrl } from '@/lib/short-share';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { normalizeSearchText } from '@/lib/search-text';
 import { CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import type { EffectGroup } from '@/lib/data/effect-filters';
@@ -132,7 +133,7 @@ export function CharactersBrowser({
   const [releaseDesc, setReleaseDesc] = useState(true);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const { copy, copied } = useCopyToClipboard(1200);
   const hydrated = useRef(false);
   const lastUrl = useRef('');
 
@@ -383,12 +384,7 @@ export function CharactersBrowser({
   const copyShareUrl = () => {
     if (typeof window === 'undefined') return;
     // Lien court `/s/<id>` si le serveur répond, URL courante sinon.
-    void shortShareUrl().then((url) =>
-      navigator.clipboard.writeText(url).then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1200);
-      }),
-    );
+    void shortShareUrl().then(copy);
   };
 
   // ── Chips actifs ──

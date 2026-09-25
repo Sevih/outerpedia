@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import type { CouponVM } from '@/lib/home';
 
 /**
@@ -31,26 +31,9 @@ export function PromoCodes({
   viewAllHref: string;
   strings: PromoStrings;
 }) {
-  const [copied, setCopied] = useState<string | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { copy, copiedText: copied } = useCopyToClipboard(1500);
 
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-
-  const handleCopy = async (code: string) => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(code);
-      if (timer.current) clearTimeout(timer.current);
-      timer.current = setTimeout(() => setCopied(null), 1500);
-    } catch {
-      /* presse-papier indisponible (http, permission) — on n'échoue pas */
-    }
-  };
+  const handleCopy = (code: string) => void copy(code);
 
   return (
     <section>

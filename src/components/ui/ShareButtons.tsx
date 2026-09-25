@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useSyncExternalStore } from 'react';
+import { useSyncExternalStore } from 'react';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import type { Lang } from '@/lib/i18n/config';
 
 type Platform =
@@ -114,7 +115,7 @@ export function ShareButtons({
   lang: Lang;
   strings: ShareStrings;
 }) {
-  const [copied, setCopied] = useState(false);
+  const { copy, copied } = useCopyToClipboard(2000);
   // URL courante côté client, '' au SSR (pas de setState dans un effet).
   const url = useSyncExternalStore(
     noopSubscribe,
@@ -126,15 +127,7 @@ export function ShareButtons({
   const links = getShareLinks(shareText, url);
   const platforms = PLATFORMS_BY_LANG[lang];
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* noop */
-    }
-  };
+  const handleCopy = () => void copy(url);
 
   return (
     <div className="flex items-center gap-1.5">

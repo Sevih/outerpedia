@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { ItemInline } from '@/components/inline/ItemInline';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import type { CouponFullVM, CouponStatus } from '@/lib/home';
 
 /**
@@ -38,26 +38,9 @@ export function CouponsList({
   coupons: CouponFullVM[];
   strings: CouponsStrings;
 }) {
-  const [copied, setCopied] = useState<string | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { copy, copiedText: copied } = useCopyToClipboard(1500);
 
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current);
-    },
-    [],
-  );
-
-  const handleCopy = async (code: string) => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(code);
-      if (timer.current) clearTimeout(timer.current);
-      timer.current = setTimeout(() => setCopied(null), 1500);
-    } catch {
-      /* presse-papier indisponible — on n'échoue pas */
-    }
-  };
+  const handleCopy = (code: string) => void copy(code);
 
   const statusLabel = (s: CouponStatus) =>
     s === 'active' ? strings.active : s === 'upcoming' ? strings.upcoming : strings.expired;

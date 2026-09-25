@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { copyText } from '@/hooks/useCopyToClipboard';
 import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useStoredState } from '@/lib/client-storage';
 import { formatDuration, type DurationUnits } from '@/lib/format-duration';
@@ -384,7 +385,7 @@ export function ProgressTrackerBrowser({
               <label className="mb-2 block text-sm font-medium">{labels.export}</label>
               <button
                 onClick={() => {
-                  void navigator.clipboard.writeText(exportState(view, settings));
+                  void copyText(exportState(view, settings));
                   setShowExport(false);
                 }}
                 className="w-full rounded bg-blue-600 px-4 py-2 transition hover:bg-blue-700"

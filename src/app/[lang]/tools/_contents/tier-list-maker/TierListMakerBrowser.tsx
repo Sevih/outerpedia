@@ -17,6 +17,7 @@ import {
   FaGripVertical,
 } from 'react-icons/fa6';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { Portrait } from '@/components/character/Portrait';
@@ -718,9 +719,7 @@ export function TierListMakerBrowser({
   const [drag, setDrag] = useState<{ key: string; x: number; y: number } | null>(null);
   const [dropAt, setDropAt] = useState<{ tierId: string; index: number } | null>(null);
   const [colorRow, setColorRow] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
-  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => clearTimeout(copiedTimer.current ?? undefined), []);
+  const { copy, copied } = useCopyToClipboard(2000);
 
   // Deux lignes de nom distinctes : « noms » = toujours le nom du PERSO (un
   // skin affiche celui de son perso de base) ; « noms de skin » = le nom du
@@ -1145,14 +1144,7 @@ export function TierListMakerBrowser({
     } catch {
       // erreur réseau → on garde le lien long autoporté
     }
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      clearTimeout(copiedTimer.current ?? undefined);
-      copiedTimer.current = setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.prompt('', url);
-    }
+    if (!(await copy(url))) window.prompt('', url);
   };
 
   // ── Export PNG (reflète les réglages d'affichage à l'écran) ──

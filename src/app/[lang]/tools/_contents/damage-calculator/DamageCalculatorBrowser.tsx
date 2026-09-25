@@ -32,6 +32,7 @@ import { useMemo, useState, useEffect } from 'react';
 import LZString from 'lz-string';
 import { img, ELEMENT_ORDER } from '@/lib/images';
 import { useStoredState } from '@/lib/client-storage';
+import { copyText, useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { FilterPill } from '@/components/character/filters/FilterPill';
@@ -120,7 +121,7 @@ export function DamageCalculatorBrowser({
 }: Props) {
   const [tab, setTab] = useState<'calc' | 'settings'>('calc');
   // Feedback du bouton « copier le lien » (l'URL porte déjà tout le scénario).
-  const [copied, setCopied] = useState(false);
+  const { copy, copied } = useCopyToClipboard(1500);
   // État du SCÉNARIO + réglages de COMPTE + persistance `?z=` : tout vit
   // dans useScenarioState (découpage du 25/08/2026) — destructuré sous les MÊMES
   // noms que les anciens useState, le JSX ci-dessous n'a pas bougé.
@@ -691,9 +692,9 @@ export function DamageCalculatorBrowser({
       gameVersion: s.gameVersion,
       observed: [{ slot: s.slot, branch: s.branch, damage: s.real }],
     };
-    void navigator.clipboard
-      .writeText(JSON.stringify(fixture, null, 2))
-      .then(() => say('copié — coller dans src/lib/damage/fixtures/'));
+    void copyText(JSON.stringify(fixture, null, 2)).then(
+      (ok) => ok && say('copié — coller dans src/lib/damage/fixtures/'),
+    );
   };
 
   const deleteScenario = (s: SavedScenario) =>
@@ -880,12 +881,7 @@ export function DamageCalculatorBrowser({
           </button>
           <button
             type="button"
-            onClick={() => {
-              void navigator.clipboard.writeText(flushShareUrl()).then(() => {
-                setCopied(true);
-                window.setTimeout(() => setCopied(false), 1500);
-              });
-            }}
+            onClick={() => void copy(flushShareUrl())}
             className="border-line-subtle text-content-subtle hover:text-content h-7 cursor-pointer rounded-lg border border-dashed px-3 text-xs"
           >
             {copied ? L.toolbar.copied : L.toolbar.copy}

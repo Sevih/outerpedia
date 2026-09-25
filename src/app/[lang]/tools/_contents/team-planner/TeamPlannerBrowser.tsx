@@ -25,6 +25,7 @@ import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
 import { img, CHAIN_PILL, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { useDialogFocus } from '@/hooks/useDialogFocus';
 import {
   EffectChip,
@@ -495,9 +496,7 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
   const [pickerSlot, setPickerSlot] = useState<number | null>(null);
   const [selectedChainIndex, setSelectedChainIndex] = useState<number | null>(null);
   const [teamName, setTeamName] = useState('');
-  const [copied, setCopied] = useState(false);
-  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => clearTimeout(copiedTimer.current ?? undefined), []);
+  const { copy, copied } = useCopyToClipboard(1500);
 
   const byId = useMemo(() => new Map(chars.map((c) => [c.id, c])), [chars]);
   const fxOf = useCallback((id: string): TpFx => fx[id] ?? EMPTY_FX, [fx]);
@@ -576,19 +575,12 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
     const z = LZString.compressToEncodedURIComponent(JSON.stringify(compact));
     window.history.replaceState(null, '', `${window.location.pathname}?z=${z}`);
     // Lien court `/s/<id>` si le serveur répond, lien long `?z=` sinon.
-    void shortShareUrl().then((url) =>
-      navigator.clipboard
-        .writeText(url)
-        .then(() => {
-          setCopied(true);
-          clearTimeout(copiedTimer.current ?? undefined);
-          copiedTimer.current = setTimeout(() => setCopied(false), 1500);
-        })
-        // iOS refuse l'écriture hors geste utilisateur direct : sans `catch`,
-        // rejet non géré. L'URL est déjà dans la barre d'adresse (replaceState).
-        .catch(() => window.prompt('', url)),
-    );
-  }, [team, chainOrder, teamName]);
+    // iOS refuse l'écriture hors geste utilisateur direct : repli `prompt`.
+    // L'URL est déjà dans la barre d'adresse (replaceState).
+    void shortShareUrl().then(async (url) => {
+      if (!(await copy(url))) window.prompt('', url);
+    });
+  }, [team, chainOrder, teamName, copy]);
 
   const handleChainSlotClick = useCallback(
     (chainIndex: number) => {

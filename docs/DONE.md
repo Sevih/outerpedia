@@ -7,6 +7,38 @@
 
 ## 2026-09-25
 
+- **Presse-papier : un hook `useCopyToClipboard` au lieu de huit copies à la
+  main** (lot A13). `navigator.clipboard.writeText` était appelé en direct dans
+  huit fichiers, chacun avec son `useState` « copié ! », son minuteur (parfois
+  sans nettoyage au démontage : `ShareButtons`, `CharactersBrowser`,
+  `DamageCalculatorBrowser`) et sa gestion d'échec (rien, `catch` muet, rejet
+  non géré, `window.prompt`). Aucun hook n'existait dans `src/hooks/` :
+  `src/hooks/useCopyToClipboard.ts` expose `copyText(text) → Promise<boolean>`
+  (jamais de rejet ; repli `document.execCommand('copy')` sur une zone de texte
+  hors écran quand `navigator.clipboard` est absent — contexte non sécurisé,
+  dev servi en http sur le LAN —, focus rendu à l'élément d'avant) et
+  `useCopyToClipboard(resetMs)` → `{ copy, copied, copiedText }` : `copied`
+  retombe après `resetMs`, une nouvelle copie relance le délai, minuteur coupé
+  au démontage ; `copiedText` sert les listes où chaque code a son bouton
+  (`PromoCodes`, `CouponsList`). Chaque site garde son délai (2000 ms pour
+  `ShareButtons` et `tier-list-maker`, 1500 pour `PromoCodes`, `CouponsList`,
+  `damage-calculator` et `team-planner`, 1200 pour `CharactersBrowser`), ses
+  libellés et son rendu ; `tier-list-maker` et `team-planner` gardent leur
+  repli `window.prompt('', url)`, désormais sur `copy` → `false`. Les deux
+  copies sans retour visuel (export de `progress-tracker`, « ⧉ JSON » de
+  `damage-calculator`) passent par `copyText` seul : un état « copié » que
+  personne ne lit n'a pas lieu d'être ; le message « copié — coller dans… »
+  du calculateur ne s'affiche plus qu'en cas de succès (avant : rejet non
+  géré et pas de message). Test `useCopyToClipboard.test.tsx` (happy-dom,
+  rendu react-dom réel comme `useDialogFocus` — `@testing-library/react`
+  n'est pas installé) : écriture moderne, échec sans rejet, repli
+  `execCommand` sans textarea résiduelle, `copied` qui monte, retombe, est
+  relancé, et reste à `false` sur échec. `pnpm typecheck` et `pnpm lint`
+  muets (sortie vide après l'en-tête de commande), `pnpm test` : « Tests 1981
+  passed (1981) ». Aucun changement visuel : même JSX, mêmes délais. Laissé : rien dans le
+  périmètre ; `execCommand` est déprécié mais reste le seul repli hors
+  contexte sécurisé.
+
 - **Recherche de perso : une seule normalisation, `normalizeSearchText`, côté
   saisie ET côté index** (lot A14). La saisie des browsers se normalisait de
   trois façons : `normalizeSearchText` (`src/lib/search-text.ts`, NFKD + retrait
