@@ -2,7 +2,10 @@
  * Guide « Outerplane on Linux » — Steam + Proton en tête (le jeu est sur Steam
  * Windows depuis le 26/08/2026, testé par Sevih sous Fedora), puis le setup
  * Waydroid en repli (porté tel quel, contribution Daystars). Les
- * `[À CONFIRMER : …]` attendent les réglages exacts de Sevih. VOLONTAIREMENT EN ANGLAIS SEUL : guide technique de niche
+ * Réglages du test (25/09/2026, portable de Sevih) : Fedora 44, Intel UHD +
+ * GeForce RTX 4060 Max-Q (pilote NVIDIA 615), Steam en RPM, Proton Experimental
+ * global, aucun réglage par jeu, aucune option de lancement.
+ * VOLONTAIREMENT EN ANGLAIS SEUL : guide technique de niche
  * (commandes shell, public anglophone) — seuls le meta et le SEO sont
  * localisés. Server Component, aucune donnée de jeu.
  *
@@ -42,11 +45,6 @@ function Step({
       <div className="text-content-muted space-y-3 text-sm">{children}</div>
     </section>
   );
-}
-
-/** Placeholder à remplacer par un fait fourni par Sevih — voyant exprès. */
-function ToConfirm({ children }: { children: string }) {
-  return <span className="text-ed-amber font-semibold">[À CONFIRMER : {children}]</span>;
 }
 
 function Warning({ children }: { children: React.ReactNode }) {
@@ -100,8 +98,8 @@ export default function OuterplaneOnLinuxGuide() {
                 Steam
               </a>{' '}
               for Windows. Steam&apos;s Proton compatibility layer runs it on Linux, with no Android
-              emulation needed. Tested on Fedora (
-              <ToConfirm>version de Fedora et GPU du test</ToConfirm>).
+              emulation needed. Tested on Fedora 44, on a laptop with an Intel UHD iGPU and a
+              GeForce RTX 4060 Max-Q running the proprietary NVIDIA driver (615 series).
             </p>
           </section>
 
@@ -112,7 +110,9 @@ export default function OuterplaneOnLinuxGuide() {
             <p className="text-content-strong mt-2 font-semibold">Any distro (Flatpak):</p>
             <Code>{`flatpak install flathub com.valvesoftware.Steam`}</Code>
             <p>
-              <ToConfirm>paquet utilisé pour le test (RPM Fusion ou Flatpak)</ToConfirm>
+              The test used the RPM package (the same <code>steam</code> package is shipped by RPM
+              Fusion nonfree and by the Terra repository). The Flatpak should behave the same, but
+              it was not the tested path.
             </p>
           </Step>
 
@@ -123,7 +123,8 @@ export default function OuterplaneOnLinuxGuide() {
               restart Steam.
             </p>
             <p>
-              Proton version: <ToConfirm>version de Proton testée</ToConfirm>
+              Proton version: <strong>Proton Experimental</strong>, selected here as the global
+              default. No other Proton build was installed or needed.
             </p>
           </Step>
 
@@ -133,10 +134,12 @@ export default function OuterplaneOnLinuxGuide() {
               your library, then install it.
             </p>
             <p>
-              <ToConfirm>
-                réglage par jeu nécessaire ou non (Properties → Compatibility → Force the use of a
-                specific Steam Play compatibility tool)
-              </ToConfirm>
+              No per-game setting is needed: leave{' '}
+              <strong>
+                Properties → Compatibility → Force the use of a specific Steam Play compatibility
+                tool
+              </strong>{' '}
+              unchecked, the global Proton Experimental from step 2 applies.
             </p>
           </Step>
 
@@ -144,13 +147,14 @@ export default function OuterplaneOnLinuxGuide() {
             <p>
               Press <strong>Play</strong>.
             </p>
-            <p>
-              Launch options (Properties → General):{' '}
-              <ToConfirm>options de lancement, ou « none needed »</ToConfirm>
-            </p>
+            <p>Launch options (Properties → General): none needed, leave the field empty.</p>
             <Warning>
               <p>
-                Known pitfalls: <ToConfirm>pièges rencontrés au premier lancement</ToConfirm>
+                Known pitfalls: none on the test machine. The first launch is slower than the
+                following ones while Proton creates its prefix and Steam compiles shaders; that is
+                normal. If you plan to use community mods, they are Windows DLLs that need the
+                launch option <code>WINEDLLOVERRIDES=&quot;winhttp=n,b&quot; %command%</code> to
+                load under Proton, but the plain game does not.
               </p>
             </Warning>
           </Step>

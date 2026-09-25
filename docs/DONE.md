@@ -272,6 +272,12 @@ tsc --noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint`
   « RPG mobile » et la configuration minimale ne liste qu'Android/iOS (hors
   périmètre) ; les couleurs brutes existantes des deux guides (H6) restent.
 
+  Placeholders comblés le soir même par Fable, depuis la machine du test :
+  Fedora 44, Intel UHD + GeForce RTX 4060 Max-Q (pilote NVIDIA 615), Steam en
+  RPM, Proton Experimental en défaut global sans réglage par jeu, aucune option
+  de lancement, aucun piège hors la lenteur du premier lancement ; note sur
+  `WINEDLLOVERRIDES` pour les mods seulement. Le composant `ToConfirm` est retiré.
+
 - **Mode `path` : la langue tient d'une page à l'autre** (lot A12, signalé par
   Sevih le 25/09). En dev (`localhost:3000`) et sur le staging OVH, choisir le
   français puis cliquer n'importe quel lien ramenait à l'anglais : les liens
