@@ -27,6 +27,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { findBuff, formatRowValue } from '../lib/buff';
 import { loadTable, type Row } from '../lib/tables';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
@@ -116,25 +117,12 @@ function jsNum(x: number): string {
   return x === Math.trunc(x) ? String(Math.trunc(x)) : String(x);
 }
 
-function isPermille(buff: Row | null): boolean {
-  if (!buff) return false;
-  if (buff.ApplyingType === 'OAT_RATE') return true;
-  const st = buff.StatType ?? '';
-  if (st.includes('_RATE') || st.includes('_DMG')) return true;
-  const t = buff.Type ?? '';
-  // Déclencheur de contre-attaque (« Punishment ») : Value = CHANCE per-mille
-  // avec ST_NONE/OAT_NONE — sans cette règle il rendrait « 187 » au lieu de 18.7%.
-  if (t === 'BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER') return true;
-  return t === 'BT_ADDITIVE_TURN' || t.includes('_ENHANCE');
+/** Valeur formatée d'un buff (règle per-mille de `lib/buff.ts`), `?` si le buff manque. */
+function fmtValue(buff: Row | undefined): string {
+  return buff ? formatRowValue(buff) : '?';
 }
 
-function fmtValue(buff: Row | null): string {
-  if (!buff) return '?';
-  const v = Number.parseInt(buff.Value ?? '0', 10) || 0;
-  return isPermille(buff) ? `${jsNum(Math.abs(v) / 10)}%` : String(Math.abs(v));
-}
-
-function fmtTurn(buff: Row | null): string {
+function fmtTurn(buff: Row | undefined): string {
   const td = (buff?.TurnDuration ?? '').toString();
   return /^\d+$/.test(td) ? td : '?';
 }
@@ -489,22 +477,16 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   }
   for (const arr of buffLevelsByID.values()) arr.sort((a, b) => Number(a.Level) - Number(b.Level));
 
-  function findBuff(buffIdStr: string, level: number, index = 0): Row | null {
-    const ids = buffIdStr.split(',').map((s) => s.trim());
-    const target = index === 0 ? ids[0] : (ids[index] ?? `${ids[0]}_${index + 1}`);
-    const rows = buffLevelsByID.get(target) ?? [];
-    return rows.find((b) => Number(b.Level) === level) ?? null;
-  }
   function maxBuffLevel(buffIdStr: string): number {
     const first = buffIdStr.split(',')[0].trim();
     const rows = buffLevelsByID.get(first) ?? [];
     return rows.length ? Math.max(...rows.map((b) => Number(b.Level) || 1)) : 1;
   }
   function tokenValues(buffIdStr: string, level: number): Record<string, string> {
-    const b0 = findBuff(buffIdStr, level, 0);
-    const b2 = findBuff(buffIdStr, level, 1);
-    const b4 = findBuff(buffIdStr, level, 3);
-    const b5 = findBuff(buffIdStr, level, 4);
+    const b0 = findBuff(buffLevelsByID, buffIdStr, level, 0);
+    const b2 = findBuff(buffLevelsByID, buffIdStr, level, 1);
+    const b4 = findBuff(buffLevelsByID, buffIdStr, level, 3);
+    const b5 = findBuff(buffLevelsByID, buffIdStr, level, 4);
     const rate = b0 && b0.CreateRate ? `${jsNum(Number(b0.CreateRate) / 10)}%` : '?';
     const val = fmtValue(b0);
     const turn = fmtTurn(b0);

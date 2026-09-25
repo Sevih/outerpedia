@@ -418,6 +418,10 @@ export function buildAssetManifest(): AssetRequest[] {
       if (slug !== raw && !(slug in classEnum)) classEnum[slug] = cap(raw);
     }
   }
+  // Paires [slug affiché, enum du sprite] réutilisées par les vignettes MT_/CT_.
+  const classSprites = Object.keys(glossaries.classes).map(
+    (cl) => [cap(cl), classEnum[cl] ?? cap(cl)] as const,
+  );
   for (const cl of Object.keys(glossaries.classes))
     push({
       kind: 'image',
@@ -977,15 +981,10 @@ export function buildAssetManifest(): AssetRequest[] {
         domain: 'ui',
       });
     // Classes : la CLÉ porte le slug canonique du site, le CANDIDAT l'enum du
-    // jeu — même règle que `images/ui/class/IG_Turn_Class_*` plus haut, pour que
-    // `img.klass`-style `cap(slug)` marche sans table de traduction au rendu.
-    for (const [slug, enumName] of [
-      ['Striker', 'Attacker'],
-      ['Healer', 'Priest'],
-      ['Defender', 'Defender'],
-      ['Ranger', 'Ranger'],
-      ['Mage', 'Mage'],
-    ])
+    // jeu — mêmes paires (`classSprites`) que `images/ui/class/IG_Turn_Class_*`
+    // plus haut, pour que `img.klass`-style `cap(slug)` marche sans table de
+    // traduction au rendu.
+    for (const [slug, enumName] of classSprites)
       push({
         kind: 'image',
         key: `images/ui/boss/MT_Class_${slug}.webp`,
@@ -1036,13 +1035,7 @@ export function buildAssetManifest(): AssetRequest[] {
         candidates: [sprite],
         domain: 'ui',
       });
-    for (const [slug, enumName] of [
-      ['Striker', 'Attacker'],
-      ['Healer', 'Priest'],
-      ['Defender', 'Defender'],
-      ['Ranger', 'Ranger'],
-      ['Mage', 'Mage'],
-    ])
+    for (const [slug, enumName] of classSprites)
       push({
         kind: 'image',
         key: `images/ui/boss/CT_Class_${slug}.webp`,

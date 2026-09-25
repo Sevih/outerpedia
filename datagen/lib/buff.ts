@@ -61,8 +61,9 @@ export function formatRowValue(buff: Row): string {
  * Trouve la ligne d'un buff à un niveau donné.
  * `buffIdStr` peut être un CSV de plusieurs buffs ; `index` choisit lequel
  * (0 = principal ; sinon l'id en position `index`, ou `${id0}_${index+1}` en repli).
+ * Exposé pour le solver.
  */
-function findBuff(
+export function findBuff(
   buffsByID: Map<string, Row[]>,
   buffIdStr: string,
   level: number,

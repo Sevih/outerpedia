@@ -7,6 +7,44 @@
 
 ## 2026-09-25
 
+- **Datagen : le solver formate ses buffs par `lib/buff.ts`, le manifest
+  dérive ses paires classe → sprite** (lot A16). `datagen/generators/solver.ts`
+  recopiait `isPermille`, `fmtValue` et `findBuff` de `datagen/lib/buff.ts`
+  avec une règle DIVERGENTE (constat G11 de `docs/audit/transverse.md`) : seul
+  `BT_RUN_FIRST_SKILL_ON_TURN_END_DEFENDER` y passait en per-mille, là où
+  `lib/buff.ts` y met toutes les contre-attaques (`RUN_FIRST_SKILL`). Mesuré
+  avant de toucher (script jetable, les deux versions sur les 11 249 lignes de
+  `BuffTemplet`) : un seul écart, `trancendent_8_2000110_4` Lv1
+  (`BT_RUN_FIRST_SKILL_TO_HIGHEST_ATK_ON_TURN_END_TEAM`), `100%` contre `1000`
+  — tranché par Sevih pour la règle de `lib/buff.ts` (le 1000 est une
+  probabilité per-mille) ; `findBuff` identique sur les 49 824 appels
+  (id × niveau × index, plus tous les appels réels des options spéciales), et
+  zéro écart sur les valeurs que le solver rend effectivement. Désormais
+  `lib/buff.ts` exporte `findBuff`, le solver l'appelle sur son index et
+  formate par `formatRowValue` (exposé déjà pour le classifier) derrière un
+  `fmtValue` local de deux lignes qui garde le `?` du buff absent ; les deux
+  copies et l'`isPermille` divergent disparaissent. Dans
+  `datagen/assets/manifest.ts`, les vignettes `MT_Class_*` et `CT_Class_*`
+  recopiaient en dur cinq paires `['Striker', 'Attacker']`… juste après que
+  le fichier les a dérivées (`classEnum`, via `resolveClass` sur
+  `CharacterTemplet`) pour `IG_Turn_Class_*` : une liste `classSprites`
+  construite depuis `glossaries.classes` + `classEnum` sert maintenant les
+  deux boucles. Vérifié : sortie complète de `buildSolver` (tous fichiers +
+  `version`) identique octet pour octet avant/après, et son
+  `equipment-passives.json` égal à `data/extracted/solver` ;
+  `buildAssetManifest()` rend les mêmes 4 649 requêtes (clés ET candidats) —
+  seul l'ordre des dix vignettes de classe suit désormais celui du glossaire
+  (alphabétique, comme `IG_Turn_Class_*`), sans effet puisque `collect.ts`
+  regroupe par domaine et écrit un fichier par clé ; `pnpm typecheck` (dernière
+  ligne : `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc
+--noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint` (`$ eslint`,
+  sans sortie), `pnpm test` (`Tests  1985 passed (1985)`), dont
+  `solver.test.ts`. Laissé : le `fmtTurn` du solver reste une copie de celui
+  de `lib/buff.ts` (hors périmètre du lot ; même règle, mais il accepte le buff
+  absent), et son index `buffLevelsByID` n'est pas remplacé par
+  `loadBuffIndex()` — `deriveDmgScaling` le lit aussi, en casse stricte et trié
+  par niveau, ce qu'un changement d'index modifierait à côté.
+
 - **Storage client : `normalize` dans `StoreSpec`, appliqué à toute lecture**
   (lot A19). `readStored` (`src/lib/client-storage.ts`) rendait `data` TEL
   QUEL quand la version de l'enveloppe correspondait : un champ ajouté à un
