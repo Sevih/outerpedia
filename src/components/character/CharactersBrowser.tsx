@@ -15,6 +15,7 @@ import type { AdvancedPanelLabels, FilterOption } from './filters/AdvancedFilter
 import { ELEMENT_HEX, ROLE_HEX, RARITY_HEX, TONE } from './filters/FilterAtoms';
 import { decodeFilters, encodeFilters } from './filters/filter-codec';
 import { shortShareUrl } from '@/lib/short-share';
+import { normalizeSearchText } from '@/lib/search-text';
 import { CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import type { EffectGroup } from '@/lib/data/effect-filters';
 
@@ -264,7 +265,7 @@ export function CharactersBrowser({
 
   // ── Filtrage ──
   const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
+    const needle = normalizeSearchText(q);
     const elS = new Set(element);
     const clS = new Set(klass);
     const rS = new Set(rarity);

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
+import { normalizeSearchText } from '@/lib/search-text';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import type { GearCategory } from './usage';
 
@@ -68,7 +69,7 @@ export function GearUsageBrowser({
 
   const entries = useMemo(() => {
     const list = data[category];
-    const needle = query.normalize('NFKC').toLowerCase().trim();
+    const needle = normalizeSearchText(query);
     if (!needle) return list;
     return list.filter((e) => e.searchNames.some((n) => n.includes(needle)));
   }, [data, category, query]);

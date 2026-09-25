@@ -5,6 +5,7 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { img, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
+import { normalizeSearchText } from '@/lib/search-text';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import {
   CharactersFiltersBar,
@@ -148,7 +149,7 @@ export function MostUsedUnitsBrowser({
 
   // ── Filtrage (le total suit les catégories cochées) ──
   const filtered = useMemo(() => {
-    const needle = query.normalize('NFKC').toLowerCase().trim();
+    const needle = normalizeSearchText(query);
     const elS = new Set(element);
     const clS = new Set(klass);
     const rS = new Set(rarity);

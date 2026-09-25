@@ -1,6 +1,7 @@
 import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { normalizeSearchText } from '@/lib/search-text';
 import { characterDisplayName, getCharacter, slugForId } from '@/lib/data/characters';
 import { computeGearUsage, type GearCategory } from './usage';
 import { GearUsageBrowser, type GearUsageLabels, type GearUsageRow } from './GearUsageBrowser';
@@ -21,13 +22,7 @@ export default async function GearUsageStatistics({ lang }: { lang: Lang }) {
       usage[cat].map((e): GearUsageRow => ({
         key: e.key,
         name: lRec(e.name, lang) || e.name.en,
-        searchNames: [
-          ...new Set(
-            Object.values(e.name)
-              .map((n) => n.normalize('NFKC').toLowerCase().trim())
-              .filter(Boolean),
-          ),
-        ],
+        searchNames: [...new Set(Object.values(e.name).map(normalizeSearchText).filter(Boolean))],
         icon: e.icon,
         grade: e.grade,
         star: e.star,

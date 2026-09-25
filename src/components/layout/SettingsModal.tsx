@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { createPortal } from 'react-dom';
 import { img } from '@/lib/images';
+import { normalizeSearchText } from '@/lib/search-text';
 import { clearAllSkins, setAnimatedPortraits, setSkin, useSiteSettings } from '@/lib/site-settings';
 
 export interface SettingsStrings {
@@ -29,13 +30,6 @@ export interface SkinCatalogEntry {
   /** Les costumes AFFICHABLES (vignette vérifiée à l'extraction), triés. */
   options: { model: string; name: string }[];
 }
-
-/** Minuscule + sans diacritiques — même règle que la palette de recherche. */
-const norm = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '');
 
 /**
  * RÉGLAGES DU SITE — la modale du header. Deux réglages, un seul store
@@ -97,11 +91,11 @@ export function SettingsModal({
   useDialogFocus(dialogRef);
 
   const rows = useMemo(() => {
-    const q = norm(query.trim());
+    const q = normalizeSearchText(query);
     if (!q) return catalog;
     const toks = q.split(/\s+/);
     return catalog.filter((c) => {
-      const n = norm(c.name);
+      const n = normalizeSearchText(c.name);
       return toks.every((tk) => n.includes(tk));
     });
   }, [catalog, query]);

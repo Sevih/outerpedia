@@ -7,6 +7,41 @@
 
 ## 2026-09-25
 
+- **Recherche de perso : une seule normalisation, `normalizeSearchText`, côté
+  saisie ET côté index** (lot A14). La saisie des browsers se normalisait de
+  trois façons : `normalizeSearchText` (`src/lib/search-text.ts`, NFKD + retrait
+  des diacritiques, celle de la palette), des recopies
+  `normalize('NFKC').toLowerCase().trim()` (pull simulator, most-used units,
+  gear usage — index serveur et saisie —, tier lists, et surtout
+  `characterSearchNames` dans `src/lib/data/characters.ts`, l'index de tous les
+  browsers de persos), et un simple `trim().toLowerCase()` (liste des persos,
+  hero tracker, ranking helper, qui re-minusculaient en plus l'index). NFKC
+  garde les accents : « eclair » ne trouvait pas « Éclair » dans les browsers
+  alors que la palette le trouvait. Désormais `characterSearchNames` et l'index
+  du gear usage normalisent par `normalizeSearchText`, et les sept saisies qui
+  les filtrent (`PullSimulatorBrowser`, `MostUsedUnitsBrowser`,
+  `GearUsageBrowser`, `TierListBrowser`, `CharactersBrowser`,
+  `HeroTrackerBrowser`, `RankingHelperBrowser`) aussi — le `toLowerCase()`
+  redondant côté index est tombé. La recherche de skin de `SettingsModal`
+  avait sa propre copie en NFD (« même règle que la palette », ce qu'elle
+  n'était pas : pas de repli pleine chasse) : remplacée par la même fonction,
+  appliquée à la saisie et aux noms. La fonction n'a pas eu besoin d'être
+  étendue. Ce que NFKC apportait est couvert : NFKD replie aussi la
+  compatibilité (« ｱﾒ » = « アメ », « ＡＭＥ » = « ame », espace
+  idéographique rognée). Deux effets à connaître, symétriques donc sans match
+  perdu : le dakuten/handakuten est un diacritique Unicode, « カ » trouve donc
+  aussi « ガ » (comme un accent) ; le hangul sort décomposé en jamo des deux
+  côtés, la recherche par sous-chaîne marche à l'identique. Tests dans
+  `src/lib/search-text.test.ts` : pleine chasse (casse, espace), demi-chasse,
+  dakuten, hangul, et un bloc `characterSearchNames ↔ saisie` (accent présent
+  ou absent, casse, espaces, alias pleine chasse, dédoublonnage). Vérifié :
+  `pnpm typecheck` et `pnpm lint` muets, `pnpm test` → « Tests 1981 passed
+  (1981) ». Laissé : les recherches qui filtrent un libellé et non un index
+  `searchNames` restent en `trim().toLowerCase()` (sélecteurs de perso du
+  damage calculator, du team planner et du tier-list-maker — ce sont les
+  « trois sélecteurs » du lot B10, qui devrait les passer par la même
+  fonction —, équipement, patch history, étages de tour, admin).
+
 - **Guides `how-to-play` et `outerplane-on-linux` : le jeu est sur Steam,
   Linux via Proton** (lot E1). Les deux guides disaient le PC réduit à Google
   Play Games et Linux réduit à l'émulation Android, alors qu'OUTERPLANE est sorti

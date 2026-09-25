@@ -19,6 +19,7 @@ import type {
 } from '@contracts';
 import { DEFAULT_LANG, type Lang } from '@/lib/i18n/config';
 import { localePath } from '@/lib/navigation';
+import { normalizeSearchText } from '@/lib/search-text';
 
 const CHARACTERS = charactersData as unknown as CharactersFile;
 // Effets agrégés par perso (filtres liste) — fichier dédié, fusionné à la lecture.
@@ -187,7 +188,8 @@ export function getCharacterBySlug(slug: string): Character | undefined {
 
 /**
  * Noms RECHERCHABLES d'un perso (nom toutes langues + surnom + id + slug + alias
- * curés), normalisés NFKC/minuscules, dédupliqués — l'univers du champ recherche
+ * curés), normalisés par `normalizeSearchText` — la saisie qui les filtre DOIT
+ * passer par la même fonction —, dédupliqués : l'univers du champ recherche
  * des browsers (liste des persos, tier lists, most-used units). Les `aliases`
  * (fautes/abréviations, cf. `loadSearchAliases`) sont passés par l'appelant (chargés
  * une fois par page, pas une lecture disque par perso).
@@ -203,7 +205,7 @@ export function characterSearchNames(
     c.id,
     slugForId(c.id) ?? c.id,
   ];
-  return [...new Set(names.map((s) => s.normalize('NFKC').toLowerCase().trim()).filter(Boolean))];
+  return [...new Set(names.map(normalizeSearchText).filter(Boolean))];
 }
 
 /**

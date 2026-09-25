@@ -6,6 +6,7 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { img, CLASS_ORDER, ELEMENT_ORDER, STAR_SPRITE } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
+import { normalizeSearchText } from '@/lib/search-text';
 import {
   accountNeed,
   foodBreakdown,
@@ -712,7 +713,7 @@ export function HeroTrackerBrowser({
     [heroes, tracked, hidden],
   );
 
-  const q = query.trim().toLowerCase();
+  const q = normalizeSearchText(query);
   const pickable = useMemo(
     () =>
       heroes.filter(
@@ -723,7 +724,7 @@ export function HeroTrackerBrowser({
           !hidden.has(h.id) &&
           shown(h) &&
           (!element || h.element === element) &&
-          (!q || h.searchNames.some((n) => n.toLowerCase().includes(q))),
+          (!q || h.searchNames.some((n) => n.includes(q))),
       ),
     [heroes, tracked, hidden, shown, element, q],
   );

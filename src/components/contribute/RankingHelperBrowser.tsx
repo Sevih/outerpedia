@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { GameText } from '@/components/ui/GameText';
+import { normalizeSearchText } from '@/lib/search-text';
 import { TIERS, TIER_COLORS, tierListRankOrder, type Tier } from '@/components/tierlist/tiers';
 import type { RankingHelperRow } from '@/lib/contribute/ranking-helper-data';
 
@@ -56,11 +57,11 @@ export function RankingHelperBrowser({ rows }: { rows: RankingHelperRow[] }) {
   const byId = useMemo(() => new Map(rows.map((r) => [r.id, r])), [rows]);
   const selected = selectedId ? (byId.get(selectedId) ?? null) : null;
 
-  const q = query.trim().toLowerCase();
+  const q = normalizeSearchText(query);
   const matches = useMemo(() => {
     if (!q) return [];
     return rows
-      .filter((r) => r.searchNames.some((n) => n.toLowerCase().includes(q)))
+      .filter((r) => r.searchNames.some((n) => n.includes(q)))
       .sort((a, b) => a.name.localeCompare(b.name))
       .slice(0, 12);
   }, [rows, q]);

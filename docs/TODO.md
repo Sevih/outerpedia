@@ -140,9 +140,8 @@
       `CLASS_SLUGS`, `ELEMENTS`, `esc()`/`rfc822()`, Twitch `parent`, lefthook
       `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
       découpé en lots délégables (prompts A13–A20, B9, B10 dans
-      lots-opus-2026-09-25.md) : presse-papier ×8, recherche perso normalisée
-      de 3 façons, tooltip d'effet recomposé, `isPermille`/`fmtValue`/`findBuff`
-      recopiés dans `solver.ts`, paires classe/enum en dur dans `manifest.ts`,
+      lots-opus-2026-09-25.md) : presse-papier ×8, tooltip d'effet recomposé,
+      `isPermille`/`fmtValue`/`findBuff` recopiés dans `solver.ts`, paires classe/enum en dur dans `manifest.ts`,
       `loadTextIndex` sans cache et rebuilds redondants, 126 `text-[11px]`,
       schémas persistés non normalisés (tier-list-maker), glob lint sans
       `*.mjs` + `eslint-config-next` désaligné + règle « alignement par ligne »

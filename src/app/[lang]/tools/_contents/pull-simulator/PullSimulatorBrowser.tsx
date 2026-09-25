@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { FitText } from '@/components/ui/FitText';
+import { normalizeSearchText } from '@/lib/search-text';
 import {
   BANNER_TYPES,
   canUseMileage,
@@ -269,7 +270,7 @@ export function PullSimulatorBrowser({
   const pity = config.guarantee;
   const pityLeft = guaranteeLeft(session, config);
   const pityPercent = pity ? Math.min((session.pullsSinceGuarantee / pity.at) * 100, 100) : 0;
-  const needle = focusSearch.normalize('NFKC').toLowerCase().trim();
+  const needle = normalizeSearchText(focusSearch);
   const displayName = (c: GachaMinor) => (c.prefix ? `${c.prefix} ${c.name}` : c.name);
 
   return (
