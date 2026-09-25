@@ -7,6 +7,38 @@
 
 ## 2026-09-25
 
+- **Storage client : `normalize` dans `StoreSpec`, appliqué à toute lecture**
+  (lot A19). `readStored` (`src/lib/client-storage.ts`) rendait `data` TEL
+  QUEL quand la version de l'enveloppe correspondait : un champ ajouté à un
+  schéma sans bump de version arrivait `undefined` — pour une case à cocher,
+  `checked={undefined}` puis contrôlée, l'avertissement React et une case qui
+  cesse de répondre. Bumper la version pour un réglage se paierait en saisie
+  perdue. Le spec prend désormais une étape optionnelle `normalize(data) → T`,
+  appliquée à la version courante ET aux sorties de `migrate` et `fromLegacy`
+  (la valeur écrite au passage est la valeur normalisée), jamais au `fallback` ;
+  la lecture reste sans effet de bord, le stockage se répare à la prochaine
+  écriture. Le tier-list-maker branche son `coerceSettings` existant (champ par
+  champ, valeurs invalides écartées) — il ne servait qu'à la clé héritée
+  `tlm-settings`. Le hero-tracker avait le même trou colmaté À LA MAIN dans le
+  composant (un `useMemo` qui fusionnait `SPEC.fallback` à la lecture, un
+  setter enveloppé qui le refaisait à l'écriture) : remplacé par un `normalize`
+  `{ ...fallback, ...data }` dans son spec, les deux enveloppes retirées, le
+  commentaire déplacé avec. Vérifié : quatre tests ajoutés à
+  `client-storage.test.ts` (champ manquant à la version courante complété et
+  stockage non ré-écrit ; sortie de `migrate` et de `fromLegacy` normalisée et
+  écrite normalisée ; `normalize` jamais appelé sur le `fallback`) ;
+  `pnpm typecheck` (`tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json &&
+tsc --noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint`
+  (`eslint`, sans sortie), `pnpm test` (`Tests  1985 passed (1985)`). Aucun
+  changement visuel : les rendus lisent les mêmes valeurs, seul l'endroit où
+  les défauts sont fusionnés a bougé. Laissé : le progress tracker n'a pas le
+  trou (ses réglages passent par `normalizeSettings` dans le composant, sa
+  progression par `reconcileProgress`) et `site-settings.ts` coerce lui-même
+  après chaque `readStored` (`coerceSiteSettings`) — les y basculer serait un
+  refactor sans bug à la clé ; les stores du calculateur de dégâts sont des
+  primitives ou des `Record` sans champ à compléter, et ses scénarios sont
+  assainis au rendu.
+
 - **Tooltip des tags d'effet inline `{B/…}`/`{D/…}` : le corps partagé des
   chips, plus une recopie** (lot A15). `effectChip` de `src/lib/parse-text.tsx`
   recomposait à la main le tooltip d'effet (tuile d'icône, nom, description)

@@ -302,6 +302,14 @@ const SPEC: StoreSpec<TrackerState> = {
       hide2Star: false,
     };
   },
+  // Un état écrit AVANT l'ajout d'un réglage n'a pas son champ : il rendrait sa
+  // case NON CONTRÔLÉE (React proteste, la case cesse de répondre). On complète
+  // à la lecture, le stockage se répare au premier changement — bumper la
+  // version pour une case à cocher se paierait en saisie perdue.
+  normalize: (data) => ({
+    ...SPEC.fallback,
+    ...(data && typeof data === 'object' ? (data as Partial<TrackerState>) : {}),
+  }),
 };
 
 const fmt = (n: number): string => n.toLocaleString('en-US');
@@ -326,7 +334,7 @@ export function HeroTrackerBrowser({
   classNames,
   labels,
 }: HeroTrackerData) {
-  const [stored, writeStore, ready] = useStoredState(SPEC);
+  const [store, setStore, ready] = useStoredState(SPEC);
   const [query, setQuery] = useState('');
   const [axis, setAxis] = useState<NeedAxis | 'all'>('all');
   const [open, setOpen] = useState<string | null>(null);
@@ -339,20 +347,6 @@ export function HeroTrackerBrowser({
     rarity: null,
   });
   const [sort, setSort] = useState<{ by: SortKey; desc: boolean }>({ by: 'need', desc: true });
-
-  /**
-   * Le stockage peut venir d'un état écrit AVANT l'ajout d'un réglage : le champ
-   * manquant rendrait sa case NON CONTRÔLÉE (React proteste, et la case cesse de
-   * répondre). On complète donc aux DEUX bouts — à la lecture pour l'affichage,
-   * à l'écriture pour que le stockage se répare au premier changement. Bumper la
-   * version du schéma pour une case à cocher se paierait en saisie perdue.
-   */
-  const store = useMemo(() => ({ ...SPEC.fallback, ...stored }), [stored]);
-  const setStore = useCallback(
-    (fn: (prev: TrackerState) => TrackerState) =>
-      writeStore((prev) => fn({ ...SPEC.fallback, ...prev })),
-    [writeStore],
-  );
 
   const tracked = store.heroes;
   const heroById = useMemo(() => new Map(heroes.map((h) => [h.id, h])), [heroes]);

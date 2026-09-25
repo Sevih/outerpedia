@@ -43,6 +43,16 @@ export interface StoreSpec<T> {
   legacyKeys?: string[];
   /** Interprète le JSON d'une clé héritée → schéma courant (`undefined` = ignore). */
   fromLegacy?: (data: unknown, key: string) => T | undefined;
+  /**
+   * Complète/assainit TOUTE valeur lue du storage — version courante comprise,
+   * puis sortie de `migrate` et de `fromLegacy` (pas le `fallback`). Sans elle,
+   * une donnée à la version courante est rendue telle quelle : un champ ajouté
+   * au schéma sans bump de version arrive `undefined` (case à cocher qui passe
+   * de non contrôlée à contrôlée). Typiquement `{ ...DEFAULTS, ...data }`, en
+   * profondeur là où il le faut. Rien n'est ré-écrit à la lecture : le stockage
+   * se répare à la prochaine écriture.
+   */
+  normalize?: (data: unknown) => T;
 }
 
 /** Enveloppe stockée : la version voyage avec la donnée. */
@@ -73,20 +83,23 @@ function storage(): Storage | null {
 /**
  * Lit la valeur d'un spec. Ordre : clé courante (migrée si version antérieure,
  * et ré-écrite au passage) → clés héritées (absorbées : écrites sous la clé
- * courante, l'ancienne reste en place) → `fallback`. Ne jette jamais.
+ * courante, l'ancienne reste en place) → `fallback`. Toute valeur trouvée passe
+ * par `normalize` s'il est fourni. Ne jette jamais.
  */
 export function readStored<T>(spec: StoreSpec<T>): T {
   const ls = storage();
   if (!ls) return spec.fallback;
+  const normalize = (data: unknown): T => (spec.normalize ? spec.normalize(data) : (data as T));
 
   const env = parse(ls.getItem(spec.key));
   if (env && typeof env === 'object' && 'v' in env && 'data' in env) {
     const { v, data } = env as Envelope;
-    if (v === spec.version) return data as T;
+    if (v === spec.version) return normalize(data);
     const migrated = spec.migrate?.(data, v);
     if (migrated !== undefined) {
-      writeStored(spec, migrated);
-      return migrated;
+      const value = normalize(migrated);
+      writeStored(spec, value);
+      return value;
     }
     return spec.fallback;
   }
@@ -96,8 +109,9 @@ export function readStored<T>(spec: StoreSpec<T>): T {
     if (legacy === undefined) continue;
     const converted = spec.fromLegacy?.(legacy, key);
     if (converted !== undefined) {
-      writeStored(spec, converted);
-      return converted;
+      const value = normalize(converted);
+      writeStored(spec, value);
+      return value;
     }
   }
   return spec.fallback;

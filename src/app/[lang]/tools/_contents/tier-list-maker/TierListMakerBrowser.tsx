@@ -212,6 +212,8 @@ const SETTINGS_SPEC: StoreSpec<TlmSettings> = {
   fallback: SETTINGS_FALLBACK,
   legacyKeys: ['tlm-settings'],
   fromLegacy: (data) => (data && typeof data === 'object' ? coerceSettings(data) : undefined),
+  // Aussi à la version courante : un réglage ajouté sans bump arrive complété.
+  normalize: coerceSettings,
 };
 
 // ── Mutations de tiers ──

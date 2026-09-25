@@ -103,6 +103,59 @@ describe('readStored', () => {
   });
 });
 
+describe('readStored — normalize', () => {
+  const normalize = (data: unknown): Settings => ({
+    ...SPEC.fallback,
+    ...(data && typeof data === 'object' ? (data as Partial<Settings>) : {}),
+  });
+
+  it('version courante : un champ absent (ajouté sans bump) est complété par les défauts', () => {
+    const map = stubStorage();
+    map.set('outerpedia:test', JSON.stringify({ v: 2, data: { size: 64 } }));
+    expect(readStored(SPEC)).toEqual({ size: 64 }); // le trou, sans normalize
+    expect(readStored({ ...SPEC, normalize })).toEqual({ size: 64, names: true });
+    // Lecture sans effet de bord : le stockage se répare à la prochaine écriture.
+    expect(JSON.parse(map.get('outerpedia:test')!).data).toEqual({ size: 64 });
+  });
+
+  it('appliqué aussi à la sortie de migrate, et c’est la valeur normalisée qui est écrite', () => {
+    const map = stubStorage();
+    map.set('outerpedia:test', JSON.stringify({ v: 1, data: { iconSize: 32 } }));
+    const spec: StoreSpec<Settings> = {
+      ...SPEC,
+      migrate: (data) => ({ size: (data as { iconSize: number }).iconSize }) as Settings,
+      normalize,
+    };
+    expect(readStored(spec)).toEqual({ size: 32, names: true });
+    expect(JSON.parse(map.get('outerpedia:test')!)).toEqual({
+      v: 2,
+      data: { size: 32, names: true },
+    });
+  });
+
+  it('appliqué aussi à la sortie de fromLegacy', () => {
+    const map = stubStorage();
+    map.set('tlm-settings', JSON.stringify({ iconSize: 40 }));
+    const spec: StoreSpec<Settings> = {
+      ...SPEC,
+      legacyKeys: ['tlm-settings'],
+      fromLegacy: (data) => ({ size: (data as { iconSize: number }).iconSize }) as Settings,
+      normalize,
+    };
+    expect(readStored(spec)).toEqual({ size: 40, names: true });
+    expect(JSON.parse(map.get('outerpedia:test')!).data).toEqual({ size: 40, names: true });
+  });
+
+  it('pas appelé sur le fallback (rien de stocké, ou donnée illisible)', () => {
+    const map = stubStorage();
+    const spy = vi.fn(normalize);
+    expect(readStored({ ...SPEC, normalize: spy })).toBe(SPEC.fallback);
+    map.set('outerpedia:test', '{oops');
+    expect(readStored({ ...SPEC, normalize: spy })).toBe(SPEC.fallback);
+    expect(spy).not.toHaveBeenCalled();
+  });
+});
+
 describe('writeStored / clearStored', () => {
   it('quota plein → silencieux', () => {
     stubStorage();

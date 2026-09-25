@@ -143,7 +143,7 @@
       lots-opus-2026-09-25.md) :
       `isPermille`/`fmtValue`/`findBuff` recopiés dans `solver.ts`, paires classe/enum en dur dans `manifest.ts`,
       `loadTextIndex` sans cache et rebuilds redondants, 126 `text-[11px]`,
-      schémas persistés non normalisés (tier-list-maker), glob lint sans
+      glob lint sans
       `*.mjs` + `eslint-config-next` désaligné + règle « alignement par ligne »
       des locales à réécrire, 4 modales/lightbox, 3 sélecteurs de perso et 3
       barres élément/classe. Non découpés (à relire d'abord) : deux listes de
