@@ -32,6 +32,23 @@
   (changer d'onglet arrête la lecture : les index de lecture pointent dans une
   seule playlist), note explicative, clés i18n dans les six langues ; ④ les
   invariants de tri des deux catalogues acceptent le second segment archivé.
+- **Le TODO § Langues rattrapé par les faits** (Sevih : « dans les TODO y'a
+  déjà beaucoup de choses sur les nouvelles langues qui a été fait »). Deux des
+  trois items étaient faits sans avoir migré ici : ① **infra
+  `es.outerpedia.com`** — certificat d'origine régénéré avec `es` (sevih-tool
+  `8aa3e25`, 23/09), Caddyfile déployé, DNS en nuage orange : le site répond
+  200 avec `lang="es"` derrière les IP Cloudflare (vérifié le 25/09). Seul
+  reste le `127.0.0.1 es.outerpedia.local` du banc local, geste par machine
+  décrit dans `docs/procedure/test-subdomain-local.md` (absent du portable ce
+  jour) ; ② **doubleurs** — rendu vérifié en prod sur la fiche de K : « Doubleur
+  | Alejandro Saab » sur fr, « Actor de Voz | Alejandro Saab » sur es, le libellé
+  localisé suffit, pas de « VA. » à ajouter. Effet de bord à connaître : zh
+  affiche AUSSI le doubleur anglais (« 声优 | Alejandro Saab »), parce que
+  `lRec` replie une chaîne VIDE sur l'anglais depuis le 23/09 — la colonne zh
+  du jeu est vide, l'ancienne sentinelle « 0 » ne s'affichait pas. Acceptable
+  (le doublage anglais existe pour ce public aussi) ; à trancher autrement, ce
+  serait un cas particulier de la fiche, pas de `lRec`. Reste au TODO le seul
+  `China_Traditional`, porte laissée fermée volontairement.
 - **Et quand le jeu REMPLACE un asset sous le même nom : versions archivées
   `@n`** (Sevih : « ils ont fait des changements sur le perso 2000035, l'ancien
   artwork et wallpaper sont pas dispo ? »). Non : même clé R2, contenu écrasé

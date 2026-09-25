@@ -17,6 +17,10 @@
 > constats G1–G52) a ajouté sa propre section ci-dessous — ces items-là SONT
 > vérifiés contre le code (chaque Haute/Moyenne re-lu de première main ce
 > jour-là).
+> Le **25/09**, tri « délégable à un agent » : les items assez cadrés pour
+> partir à un agent Opus ont chacun leur brief autoportant dans
+> [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (A = petits, B = moyens,
+> C = gros mécaniques) ; le reste y est listé comme réservé à Sevih.
 
 ---
 
@@ -40,24 +44,14 @@
 
 ## 🌍 Langues — le jeu parle français et espagnol (23/09/2026)
 
-> Le code sait six langues depuis le 23/09 (cf. DONE) ; ce qui suit est ce qui
-> reste ENTRE ce commit et un `es.outerpedia.com` réellement servi.
+> Six langues dans le code depuis le 23/09, `es.outerpedia.com` servi depuis le
+> 25/09 (infra + doubleurs vérifiés, cf. DONE). Reste une porte laissée fermée :
 
-- [ ] **Infra `es.outerpedia.com`** (sevih-tool) — dans CET ordre, cf.
-      `docs/nuage-orange.md` : (1) régénérer le certificat d'origine Cloudflare
-      avec `es.outerpedia.com` (il énumère, pas de joker à cause de `zh`) et le
-      remplacer sur le VPS ; (2) déployer le `Caddyfile` (bloc déjà édité) ;
-      (3) créer l'enregistrement DNS `es` en nuage orange. Poste local :
-      `127.0.0.1 es.outerpedia.local` dans le fichier hosts (admin).
 - [ ] **`China_Traditional`** : les tables `Text*` la portent, remplie à 100 %,
       et le site ne la sert pas. Trancher un jour si un `zh-TW` a un public —
       ce serait une septième entrée dans `LANGUAGES` + `GAME_LANGS`, une locale
       UI de plus, un sous-domaine de plus (et la question du nuage gris, comme
       `zh`). Pas à l'ordre du jour, tracé pour ne pas le redécouvrir.
-- [ ] **Doubleurs** : le jeu n'a pas de doublage FR/ES ; la fiche affiche le
-      doubleur ANGLAIS sur les sites fr/es (colonne du jeu), vide pour zh (le
-      jeu dit « 0 »). Vérifier le rendu sur une fiche une fois promu — si un
-      libellé « VA. » doit accompagner ce repli, c'est côté front.
 
 ## 🧹 Dette code
 
