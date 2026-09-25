@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_LANG, isValidLang, langBySubdomain } from '@/lib/i18n/config';
+import { LANG_ROUTING } from '@/lib/site';
 
 /**
  * CSP : servie STATIQUEMENT par `next.config.ts` (headers globaux) ; le proxy ne
@@ -22,6 +23,13 @@ import { DEFAULT_LANG, isValidLang, langBySubdomain } from '@/lib/i18n/config';
  *   outerpedia.com/en/…          → redirige vers outerpedia.com/… (retire le défaut)
  * En dev (localhost, sans sous-domaine) : langue par défaut ; routing par PATH
  * (/jp/…) réservé au staging (`LANG_ROUTING=path`), le défaut sans préfixe.
+ *
+ * Mode `path` seulement : les liens internes sont SANS préfixe par construction
+ * (en prod, le sous-domaine porte la langue) — sans mémoire, chaque navigation
+ * retomberait sur le défaut. Le cookie `lang` la porte d'une page à l'autre :
+ *   /fr/…               → laisse passer, pose `lang=fr`
+ *   /… + cookie `lang=fr` → 307 vers /fr/… (état utilisateur, pas structure d'URL)
+ *   /en/…               → 308 vers /… ET efface le cookie (retour au défaut)
  */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -96,17 +104,52 @@ export function proxy(request: NextRequest) {
   if (firstSegment === DEFAULT_LANG) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.slice(`/${DEFAULT_LANG}`.length) || '/';
-    return NextResponse.redirect(url, 308);
+    const res = NextResponse.redirect(url, 308);
+    if (LANG_ROUTING === 'path') {
+      // C'est par /en/… que le switcher revient au défaut : sans l'effacement,
+      // la règle du cookie renverrait aussitôt /… vers l'ancienne langue. Le
+      // navigateur met une 308 en cache sans en-tête contraire — le retour
+      // suivant n'atteindrait plus le proxy et le cookie survivrait.
+      res.cookies.delete(LANG_COOKIE);
+      res.headers.set('Cache-Control', 'no-store');
+    }
+    return res;
   }
 
-  // Préfixe d'une autre langue (dev path-based) → laisse passer.
-  if (isValidLang(firstSegment)) return NextResponse.next();
+  // Préfixe d'une autre langue (dev path-based) → laisse passer, et la
+  // retient pour les liens sans préfixe qui suivront.
+  if (isValidLang(firstSegment)) {
+    const res = NextResponse.next();
+    if (LANG_ROUTING === 'path' && request.cookies.get(LANG_COOKIE)?.value !== firstSegment) {
+      res.cookies.set(LANG_COOKIE, firstSegment, LANG_COOKIE_OPTIONS);
+    }
+    return res;
+  }
+
+  // Pas de préfixe + langue retenue → vers le chemin préfixé. 307 TEMPORAIRE :
+  // c'est un état de CE visiteur, pas la structure de l'URL. La query suit
+  // (clone de `nextUrl`) ; le #hash ne traverse pas le serveur, le navigateur
+  // le garde sur une redirection.
+  const remembered = LANG_ROUTING === 'path' ? request.cookies.get(LANG_COOKIE)?.value : undefined;
+  if (remembered && remembered !== DEFAULT_LANG && isValidLang(remembered)) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${remembered}${pathname === '/' ? '' : pathname}`;
+    return NextResponse.redirect(url, 307);
+  }
 
   // Pas de préfixe → réécriture interne avec la langue par défaut.
   const url = request.nextUrl.clone();
   url.pathname = `/${DEFAULT_LANG}${pathname}`;
   return NextResponse.rewrite(url);
 }
+
+/** Langue retenue en mode `path` (cf. l'en-tête de `proxy`). */
+const LANG_COOKIE = 'lang';
+const LANG_COOKIE_OPTIONS = {
+  path: '/',
+  sameSite: 'lax',
+  maxAge: 60 * 60 * 24 * 365,
+} as const;
 
 /** Extrait le sous-domaine de l'hôte (« jp.outerpedia.com » → « jp »). */
 function extractSubdomain(host: string): string | null {

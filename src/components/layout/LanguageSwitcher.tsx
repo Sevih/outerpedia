@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import type { Route } from 'next';
-import { LANGUAGES, LANGS, DEFAULT_LANG, type Lang } from '@/lib/i18n/config';
+import { LANGUAGES, LANGS, type Lang } from '@/lib/i18n/config';
 import { buildUrl, LANG_ROUTING } from '@/lib/site';
 import { img } from '@/lib/images';
 
@@ -90,9 +90,10 @@ export function LanguageSwitcher({
       window.location.assign(buildUrl(target, stripped) + suffix);
       return;
     }
-    // Mode path (staging) : préfixe de chemin, défaut sans préfixe.
-    const base =
-      target === DEFAULT_LANG ? stripped : `/${target}${stripped === '/' ? '' : stripped}`;
+    // Mode path (dev + staging) : préfixe de chemin, y compris pour le défaut —
+    // c'est `/en/…` qui fait effacer au proxy le cookie de langue (puis 308 vers
+    // `/…`) ; poussé sans préfixe, `/…` serait renvoyé vers la langue retenue.
+    const base = `/${target}${stripped === '/' ? '' : stripped}`;
     router.push((base + suffix) as Route);
   };
 

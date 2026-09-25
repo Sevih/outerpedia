@@ -7,6 +7,43 @@
 
 ## 2026-09-25
 
+- **Mode `path` : la langue tient d'une page à l'autre** (lot A12, signalé par
+  Sevih le 25/09). En dev (`localhost:3000`) et sur le staging OVH, choisir le
+  français puis cliquer n'importe quel lien ramenait à l'anglais : les liens
+  internes sont sans préfixe PAR CONSTRUCTION (en prod le sous-domaine porte la
+  langue), et la fin de `src/proxy.ts` réécrivait tout chemin sans préfixe vers
+  `DEFAULT_LANG`. Correctif dans la branche « domaine racine » du proxy, active
+  seulement si `LANG_ROUTING === 'path'` (importé de `@/lib/site` ; constante
+  `NEXT_PUBLIC_*`, inlinée dans le bundle du proxy comme ailleurs) : un cookie
+  `lang` (path `/`, SameSite=Lax, un an). (1) `/fr/…` passe et pose `lang=fr` —
+  seulement si le cookie diffère, pour ne pas émettre un `Set-Cookie` à chaque
+  requête RSC. (2) Chemin sans préfixe + cookie valide ≠ défaut → 307 vers
+  `/<lang><chemin>`, query conservée (le `#hash` reste côté navigateur) ;
+  temporaire parce que c'est un état du visiteur. (3) `/en/…` garde sa 308 vers
+  `/…` mais efface le cookie, et porte `Cache-Control: no-store` : sans lui le
+  navigateur met la 308 en cache, le retour suivant à l'anglais n'atteindrait
+  plus le proxy et le cookie survivrait. Le `LanguageSwitcher`, en mode `path`,
+  pousse donc `/en<chemin>` pour l'anglais (et non `<chemin>`, que la règle 2
+  renverrait vers la langue retenue) ; l'import `DEFAULT_LANG` devenu inutile en
+  sort. Pas de boucle : la règle 2 ne voit que des chemins sans préfixe et ne
+  vise jamais le défaut. Mode sous-domaine intouché (hôte de langue détecté
+  avant, et aucune des trois règles hors `path`), chemins exclus en tête du
+  proxy inchangés. Vérifié : `src/proxy.test.ts` (neuf, 12 tests — les trois
+  règles, cookie non défaut remplacé par un autre préfixe, cookie invalide
+  ignoré, absence de boucle, exclusions, hôte `fr.outerpedia.com`, et apex en
+  `LANG_ROUTING=subdomain` via `vi.stubEnv` + import frais) ; `curl` sur le
+  serveur de dev qui tournait : `/fr/characters` → 200 + `Set-Cookie lang=fr`,
+  `/characters` avec le cookie → 307 `/fr/characters`, `/en/characters` → 308
+  `/characters` + cookie expiré + `no-store`. `pnpm typecheck` et `pnpm lint`
+  sans sortie d'erreur (dernière ligne : la commande elle-même), `pnpm test` :
+  « Test Files 168 passed (168) ». Aucun changement visuel. Reste à Sevih le
+  test au navigateur : sur `localhost:3000`, passer en fr, naviguer dans le
+  menu (la langue tient), revenir en en par le switcher (elle tient aussi),
+  puis refaire fr → en une seconde fois (c'est ce second retour que la 308 en
+  cache aurait cassé). Laissé : la doc du `LanguageSwitcher` dit encore
+  « subdomain (prod + dev local) » / « path (staging) » alors que le dev est en
+  `path` — hors périmètre.
+
 - **Plus aucun JSON de `data/` importé hors du data layer, et une règle eslint
   pour que ça tienne** (lot C1, G14 de `docs/audit/transverse.md`). CONVENTIONS
   l'interdisait déjà, mais 73 imports vivaient dans 38 fichiers (pages perso,

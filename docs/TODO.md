@@ -136,16 +136,6 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Mode `path` (dev `localhost:3000`, staging) : la langue retombe en
-      anglais à chaque changement de page** (Sevih, 25/09 — pas nouveau). Cause
-      : les liens internes sont sans préfixe de langue PAR CONSTRUCTION (en prod
-      le sous-domaine porte la langue), et en mode `path` le proxy réécrit tout
-      chemin sans préfixe vers `DEFAULT_LANG`. Correctif : cookie de langue posé
-      par le proxy en mode `path` seulement (préfixe vu → cookie ; pas de
-      préfixe + cookie ≠ défaut → redirection vers le chemin préfixé ; `/en/*`
-      → cookie effacé puis 308 vers `/*`, ce qui fait marcher le retour à
-      l'anglais du switcher). Prod sous-domaine intouchée. Lot délégable :
-      prompt A12 dans lots-opus-2026-09-25.md.
 - [ ] **Guides `how-to-play` et `outerplane-on-linux` : le jeu est sur Steam**
       (Sevih, 25/09). `how-to-play` ne présente que Android / iOS / Google Play
       Games pour le PC ; il faut ajouter la carte Steam (Windows) et dire que
