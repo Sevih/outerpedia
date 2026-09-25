@@ -21,7 +21,7 @@
  * jamais d'échec — le site rend simplement moins de VideoObject.
  */
 import { readFileSync } from 'node:fs';
-import { writeTextAtomic } from './lib/json';
+import { writeJson } from './lib/json';
 import { resolve } from 'node:path';
 import { envVar } from './lib/env';
 import { walkFiles } from './lib/fs';
@@ -132,7 +132,7 @@ export async function refreshVideoMeta(): Promise<void> {
 
   // Clés triées : diffs git stables.
   const sorted = Object.fromEntries(Object.entries(cache).sort(([a], [b]) => a.localeCompare(b)));
-  writeTextAtomic(OUTPUT, JSON.stringify(sorted, null, 2) + '\n');
+  await writeJson(OUTPUT, sorted);
   if (missing.length || ghosts.length) console.log(`✔ ${OUTPUT}`);
 }
 

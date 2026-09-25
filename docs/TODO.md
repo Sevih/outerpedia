@@ -162,10 +162,6 @@
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
-- [ ] `retired` absent des contrats monsters/monster-skills (G51) FAIT ;
-      `comics.json`,
-      `video-meta.json`, `posts.json` écrits hors `formatJson` (passe prettier
-      par chance de forme, un tableau court le ferait échouer en CI) (G52).
 - [ ] Admin : `key={i}` sur des listes réordonnées par `MoveButtons`
       (`EventsEditor.tsx:335,389`, `PremiumLimitedParts.tsx:503`) — l'état
       interne d'`InlineTextField` reste collé à la position ; il faut un id par

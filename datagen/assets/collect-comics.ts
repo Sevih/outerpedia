@@ -23,15 +23,7 @@
  *
  * Exécution : `pnpm assets:collect-comics` (ou via `pnpm images`).
  */
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-  statSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 // sharp 0.35 : typings en `export =` — le type `Sharp` s'importe nommé, l'accès
 // namespace `sharp.Sharp` ne compile plus.
@@ -39,6 +31,7 @@ import sharp, { type Sharp } from 'sharp';
 import { STAGING_DIR } from './stage';
 import { buildComics, removedStems, toNfc } from '../generators/comics';
 import { isMain } from '../lib/is-main';
+import { writeJson } from '../lib/json';
 
 const EDITORIAL = resolve('.editorial/comics');
 /** Seed committé : la trace VERSIONNÉE du pool complet (garde-fou, cf. plus bas). */
@@ -194,7 +187,9 @@ export async function collectComics(): Promise<{ made: number; skipped: number }
     }
   }
   mkdirSync(DEST, { recursive: true });
-  writeFileSync(join(DEST, 'comics.json'), JSON.stringify(manifest, null, 2) + '\n');
+  // Format canonique : `sync-comics-seed` en fait une copie octet pour octet
+  // dans `data/generated/comics.json`, que `prettier --check` contrôle.
+  await writeJson(join(DEST, 'comics.json'), manifest);
   return { made, skipped };
 }
 

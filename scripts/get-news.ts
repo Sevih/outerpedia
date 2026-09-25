@@ -20,7 +20,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { writeTextAtomic } from '../datagen/lib/json';
+import { formatJson, writeTextAtomic } from '../datagen/lib/json';
 import { readFile } from 'node:fs/promises';
 import { join, basename, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -336,9 +336,9 @@ function commitPatchNotes(files: string[]): void {
   }
 }
 
-/** Écrit en JSON indenté seulement si le contenu diffère (évite de churner le fichier committé). */
+/** Écrit au format canonique seulement si le contenu diffère (évite de churner le fichier committé). */
 async function writeJsonIfChanged(path: string, data: unknown): Promise<boolean> {
-  const json = JSON.stringify(data, null, 2) + '\n';
+  const json = await formatJson(data);
   let current: string | null = null;
   try {
     current = await readFile(path, 'utf-8');

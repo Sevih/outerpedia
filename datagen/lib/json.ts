@@ -101,11 +101,12 @@ let tmpSeq = 0;
 
 /**
  * Écriture ATOMIQUE d'un texte déjà formaté (tmp unique + rename) — le socle de
- * `writeJson`, exposé pour les écrivains qui ne passent pas par `formatJson`
- * (fichiers committés sous un autre format : `posts.json`, `pushed.json`,
- * `comics.json`, `video-meta.json`, les `meta.json` de guides, et surtout
- * `promote --apply` qui réécrit tout `data/generated/`). Même garantie : jamais
- * de fichier tronqué sur Ctrl-C.
+ * `writeJson`, exposé pour les écrivains qui ont déjà leur texte en main : copie
+ * octet pour octet (`comics.json` recopié du manifeste en ligne, `promote
+ * --apply` qui réécrit tout `data/generated/`), comparaison avant écriture
+ * (`posts.json` et `buff-events.json`, texte issu de `formatJson`), format
+ * propre (les `meta.json` de guides, prettier avec le `filepath` du fichier).
+ * Même garantie : jamais de fichier tronqué sur Ctrl-C.
  */
 export function writeTextAtomic(path: string, body: string): void {
   const tmp = `${path}.${process.pid}.${++tmpSeq}.tmp`;

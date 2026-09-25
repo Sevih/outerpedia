@@ -74,7 +74,8 @@ export function syncComicsSeed(paths: SyncPaths = DEFAULTS): SyncOutcome {
 
   // Copie OCTET POUR OCTET du manifeste confirmé : le repli et ce qui est servi
   // en ligne ne peuvent alors plus diverger d'une virgule. `collect-comics`
-  // écrit déjà en 2 espaces + newline finale, donc prettier reste content.
+  // écrit le manifeste par `writeJson` (format canonique), donc prettier reste
+  // content du repli quelle que soit la forme des données.
   const text = raw.toString('utf8');
   if (existsSync(paths.seed) && readFileSync(paths.seed, 'utf8') === text) return 'à jour';
   writeTextAtomic(paths.seed, text);

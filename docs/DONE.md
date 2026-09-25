@@ -7,6 +7,30 @@
 
 ## 2026-09-25
 
+- **Les derniers JSON committés écrits hors `formatJson` y passent** (lot A7,
+  G52). `datagen/video-meta.ts` écrivait `JSON.stringify(…, null, 2)`,
+  `scripts/get-news.ts` (`posts.json`, `buff-events.json`) aussi, et
+  `datagen/assets/collect-comics.ts` produisait le manifeste 4-comics de même
+  — manifeste que `sync-comics-seed` recopie octet pour octet dans
+  `data/generated/comics.json`. Tous passaient `prettier --check` par chance de
+  forme : le jour où un tableau court de primitives y entre, prettier le
+  recolle sur une ligne et la CI tombe. Aucun n'était délibérément hors format
+  (rien dans `.prettierignore` ne s'imposait) : `video-meta` et le manifeste
+  passent par `writeJson` (atomique en prime pour le manifeste, qui était un
+  `writeFileSync` nu), `writeJsonIfChanged` de get-news compare désormais au
+  texte de `formatJson`. Le repli comics reste une copie brute du manifeste en
+  ligne (décision de `sync-comics-seed` respectée) : il hérite du format
+  canonique à la source. Commentaires de `json.ts` (la liste des usagers de
+  `writeTextAtomic`, qui citait encore `pushed.json` et `video-meta.json`) et
+  de `sync-comics-seed.ts` réalignés. Vérifié : pour les six JSON concernés,
+  `formatJson(JSON.parse(fichier))` égale le fichier octet pour octet — donc
+  aucun diff de format, et le sha1 du manifeste inchangé (pas de re-push R2) ;
+  `pnpm datagen:video-meta` relancé (il a au passage récupéré la meta d'une
+  vidéo du 23/09 encore absente) ; `format:check`, typecheck, lint,
+  1946 tests. Laissé : `pushed.json` (`scripts/assets-push.mjs`, objet plat de
+  chaînes, toujours stable sous prettier) et le bump de `package.json` dans
+  `scripts/commit.ts`, eux aussi en `JSON.stringify` mais hors du lot.
+
 - **Guides : un `eslint-disable` en moins, les doublons de gear/heroes-growth
   mutualisés** (lot A10, H10 + H11). `ether-income/Calculator.tsx` taisait
   `react-hooks/exhaustive-deps` sur `totals` parce que `amountOf` était une
