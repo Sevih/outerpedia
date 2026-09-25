@@ -353,7 +353,26 @@ protections, dont deux automatiques :
 - **Rétention automatique** (`datagen:promote`) : un monstre/skill déjà validé
   n'est JAMAIS supprimé par la promotion, même si le jeu purge ses lignes
   (`monsters.json` / `monster-skills.json` / `encounters.json` sont à rétention
-  d'entités — le retrait reste une décision humaine, via git).
+  d'entités — le retrait reste une décision humaine, via git). Même régime, par
+  ENTRÉE, pour les **catalogues d'assets** `wallpapers.json` et
+  `bgm_mapping.json` (`RETAIN_CATALOGS`) : un wallpaper ou une piste que le jeu
+  retire de ses bundles quitte le pool extrait, donc la proposition — mais R2
+  le sert toujours (le push ne supprime rien). L'entrée validée est réinjectée
+  marquée `retired: true` et le front la range sous l'onglet « Archivés » de
+  son outil. Garde-fous : seulement si le fichier est dans `pushed.json`
+  (sinon lien mort) et si ce n'est pas l'asset d'un perso non intégré ; une
+  liste proposée VIDE (pool jamais scanné localement) laisse le validé intact.
+- **Versions archivées** (`assets/wallpaper-versions.ts`) : la rétention ne
+  peut rien contre un asset que le jeu REMPLACE sous le même nom (refonte de
+  2000035 le 22/09/2026 : même clé R2, ancien art écrasé). `assets:collect-wallpapers`
+  compare donc VISUELLEMENT (RGB prémultiplié, seuil calibré au-dessus du bruit
+  d'encodage) chaque fichier du pool jeu — et chaque full-art perso — à la copie
+  déjà en staging, la version publiée ; si elle diffère, cette copie devient
+  `<stem>@<n>` dans `.editorial/wallpapers/<cat>/` (pool durable, miroir R2
+  `editorial/`), que la collecte pousse à son tour et que le générateur émet
+  `retired`. C'est pour ça que cette collecte passe AVANT `assets:collect` dans
+  `pnpm images` — et qu'un staging à jour (`pnpm assets:pull` sur une machine
+  neuve) conditionne la détection.
 - **Versionnage au clic** (geste humain, à ton jugement — une maj sans impact
   guide ne se versionne pas) : sur la fiche `/admin/extractor/monsters/<id>`,
   deux boutons — **Enregistrer** (applique l'extraction fraîche de CE monstre)

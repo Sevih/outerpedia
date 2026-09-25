@@ -5,6 +5,59 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-25
+
+- **Un asset que le jeu retire ne disparaît plus du site — il passe en
+  « Archivés »** (Sevih : « si ils virent des wallpapers du jeu on les perd
+  aussi, probablement même chose pour les BGM »). Diagnostic confirmé : toute
+  la chaîne est dérivée du pool extrait, reconstruit de zéro à chaque patch
+  (`extract` vide `extracted/images`, `extract-wallpapers` et `extract-audio`
+  vident leur sortie), les générateurs scannent ce pool, et `promote` n'avait
+  de rétention que pour le trio monsters/skills/encounters. Le fichier, lui,
+  restait servi : le push R2 ne supprime jamais rien. Croisement du catalogue
+  avec `pushed.json` : quatre pertes réelles — `T_Event_BG_015/017/029` et
+  l'art de PNJ `IMG_3000032` (promotion du 08/09) ; les trois `IMG_27xxxxx`
+  sortis le 22/09 sont, eux, écartés par le filtre « perso non intégré », pas
+  par le jeu. Fait : ① `RETAIN_CATALOGS` dans `promote` — rétention par ENTRÉE
+  pour `wallpapers.json` (par catégorie, clé `f`) et `bgm_mapping.json` (clé
+  `file`), entrée réinjectée en fin de liste marquée `retired: true`, avec
+  trois garde-fous : hébergé (clé R2 dans `pushed.json`, sinon lien mort),
+  pas l'asset d'un perso non intégré, et une liste proposée VIDE = pool jamais
+  scanné localement → validé intact ; les retirées NON retenues sont nommées
+  dans l'écran de revue ; ② les quatre entrées perdues rétablies à la main dans
+  le validé (dimensions reprises de l'historique git), un dry-run `promote`
+  sur la proposition locale les retient bien (2 identiques) ; ③ front : onglet
+  « Archivés » en dernier dans `/wallpapers` (l'entrée garde son dossier de
+  service et son orientation d'origine) et playlist « Archivées » dans `/ost`
+  (changer d'onglet arrête la lecture : les index de lecture pointent dans une
+  seule playlist), note explicative, clés i18n dans les six langues ; ④ les
+  invariants de tri des deux catalogues acceptent le second segment archivé.
+- **Et quand le jeu REMPLACE un asset sous le même nom : versions archivées
+  `@n`** (Sevih : « ils ont fait des changements sur le perso 2000035, l'ancien
+  artwork et wallpaper sont pas dispo ? »). Non : même clé R2, contenu écrasé
+  par le push du 22/09, aucun versionnage côté R2, anciens bundles supprimés au
+  pull. L'ancien art n'a survécu que dans l'extraction Android du 25/08
+  (`.gamedata-android`). Recensement de ce patch, pools Android ↔ Steam
+  comparés pixel à pixel (le sha1 ne vaut rien : les pushs du 08/09 et du 22/09
+  ont remplacé ~1 800 clés pour 7 vrais changements, et les 92 BGM diffèrent
+  d'UN octet — autre ffmpeg) : refonte complète de 2000035 (full-art, cutin,
+  CG scénario `T_ScenarioCG_ELIZE_01`), retouche de son skin 2010035 (full-art,
+  cutin), et le même perso retouché en arrière-plan de `T_Event_BG_003` et de
+  `T_Event_Banner_Full_009` ; hors wallpapers, ses vignettes `CT_` et l'illust
+  de recrutement — servies vivantes seulement, pas d'archive. Fait : ① module
+  `assets/wallpaper-versions.ts` — nommage `<stem>@<n>`, numérotation, distance
+  visuelle (RGB prémultiplié par l'alpha : comparés bruts, les 222 full-arts
+  « différaient » tous, couleurs arbitraires sous les pixels transparents du
+  png ; prémultiplié, bruit ≤ 5,2, vrais changements ≥ 9,5, seuil 7) ;
+  ② `collect-wallpapers` compare pool et staging avant d'écraser, archive la
+  version publiée dans `.editorial/wallpapers/<cat>/` (durable, miroir R2), les
+  full-arts perso compris — d'où son passage AVANT `assets:collect` dans
+  `pnpm images` ; ③ le générateur émet ces archives `retired` (HeroFullArt
+  archivé servi depuis `download/HeroFullArt/`, webp seul), la clé R2 de la
+  rétention et `src/lib/wallpapers.ts` suivent ; ④ les sept anciennes versions
+  mises à l'abri depuis le pool Android, catalogue promu, staging prêt pour le
+  prochain `pnpm commit`.
+
 ## 2026-09-23
 
 - **L'éditorial parle aussi français et espagnol — le « repli EN » du matin n'a

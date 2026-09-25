@@ -1164,6 +1164,9 @@ const zh: Record<TranslationKey, string> = {
   'ost.disclaimer.line1': '这些原声音乐经权利方（Major9）许可，仅供个人非商业用途使用。',
   'ost.disclaimer.line2': '此内容可能应权利人的要求而被删除。',
   'ost.keyboardShortcuts': '键盘快捷键',
+  'ost.tabTracks': '曲目',
+  'ost.tabArchived': '已归档',
+  'ost.archivedNote': '这些曲目已在后续更新中从游戏移除，在此作为存档保留。',
   // Wallpapers
   'wallpapers.description': '浏览并下载异域战记官方艺术作品。点击任意图片即可预览并下载。',
   'wallpapers.download': '下载',
@@ -1175,6 +1178,8 @@ const zh: Record<TranslationKey, string> = {
   'wallpapers.cat.Full:Others': '其他',
   'wallpapers.cat.HeroFullArt': '同伴立绘',
   'wallpapers.cat.Cutin': '连携技能特写',
+  'wallpapers.cat.Archived': '已归档',
+  'wallpapers.archivedNote': '这些壁纸已在后续更新中从游戏移除，在此作为存档保留。',
   'wallpapers.disclaimer.line1': '这些素材已获得权利方（Major9）的许可，仅供个人使用。',
   'wallpapers.disclaimer.line2': '如需其他用途，请通过官方支持申请许可：',
   'wallpapers.contactLink': '官方支持',

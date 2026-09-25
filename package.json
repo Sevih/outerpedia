@@ -1,6 +1,6 @@
 {
   "name": "outerpedia",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "private": true,
   "packageManager": "pnpm@11.13.1",
   "engines": {
@@ -55,7 +55,7 @@
     "assets:push": "node scripts/assets-push.mjs",
     "assets:sync-comics-seed": "tsx datagen/assets/sync-comics-seed.ts",
     "assets:commit": "tsx scripts/commit-assets.ts",
-    "images": "pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-wallpapers && pnpm assets:collect-comics && pnpm editorial:push && pnpm assets:push && pnpm assets:sync-comics-seed && pnpm assets:commit",
+    "images": "pnpm assets:collect-wallpapers && pnpm assets:collect && pnpm assets:collect-audio && pnpm assets:collect-comics && pnpm editorial:push && pnpm assets:push && pnpm assets:sync-comics-seed && pnpm assets:commit",
     "datagen:face-layout": "python datagen/assets/extract-face-layout.py",
     "datagen:sprite-rect": "python datagen/assets/extract-sprite-rect.py",
     "datagen:portrait-fx": "python datagen/assets/extract-portrait-fx.py"

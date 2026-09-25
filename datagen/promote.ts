@@ -32,6 +32,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { isMain } from './lib/is-main';
 import { formatJson, writeTextAtomic } from './lib/json';
 import { GAME_LANGS, emptyDict } from './lib/lang';
+import { isUnreleasedCharacterAsset } from './lib/released';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
@@ -47,6 +48,138 @@ const DST = resolve('data/generated');
  * dev` ne promeut plus automatiquement — cf. scripts/dev-refresh.ts).
  */
 export const RETAIN_ENTITIES = new Set(['monsters.json', 'monster-skills.json', 'encounters.json']);
+
+/**
+ * CATALOGUES d'assets à rétention d'ENTRÉES : `wallpapers.json` et
+ * `bgm_mapping.json` ne sont pas des records d'entités mais des LISTES dérivées
+ * d'un pool extrait du jeu (`.gamedata/extracted/{wallpapers,audio}`), reconstruit
+ * de zéro à chaque patch. Un asset que le jeu retire de ses bundles sort donc du
+ * pool, puis du catalogue proposé — alors que son fichier, lui, est TOUJOURS
+ * servi (le push R2 ne supprime jamais rien, cf. scripts/assets-push.mjs). Vécu
+ * le 08/09/2026 : trois fonds d'événement (`T_Event_BG_015/017/029`) et l'art de
+ * PNJ `IMG_3000032` ont quitté `/wallpapers` sans que personne ne le décide.
+ *
+ * Même geste que `RETAIN_ENTITIES`, par entrée : une entrée validée que la
+ * proposition ne produit plus est réinjectée en FIN de sa liste, marquée
+ * `retired: true` — le front la range sous l'onglet « archivé » de son outil.
+ * Trois garde-fous propres aux assets :
+ *   - HÉBERGÉ : on ne retient qu'une entrée dont le fichier figure dans
+ *     `pushed.json` (le registre de ce qui est sur R2) — retenue sans fichier,
+ *     elle serait un lien mort ;
+ *   - PERSO INTÉGRÉ : `isUnreleasedCharacterAsset` s'applique aussi aux
+ *     retenues. C'est ce filtre — pas le jeu — qui a sorti `IMG_2710005` & co
+ *     le 22/09 : ces trois-là ne sont PAS à retenir ;
+ *   - LISTE VIDE : une liste proposée VIDE signifie « pool absent, jamais
+ *     scanné » (le générateur rend `[]` sans extraction locale), pas « tout
+ *     retiré » — le validé passe alors tel quel, sans marquage. Une liste
+ *     ABSENTE de la proposition (catégorie supprimée du générateur) n'est en
+ *     revanche pas retenue : c'est un choix de code, pas un retrait du jeu.
+ */
+type CatalogEntry = Record<string, unknown>;
+interface CatalogSpec {
+  /** Les listes du fichier (`name` = catégorie, ou '' pour un tableau nu). */
+  lists: (data: unknown) => Array<{ name: string; items: CatalogEntry[] }>;
+  /** Reconstruit le fichier à partir des listes (même forme que l'entrée). */
+  assemble: (lists: Array<{ name: string; items: CatalogEntry[] }>) => unknown;
+  /** Identité d'une entrée dans sa liste. */
+  key: (entry: CatalogEntry) => string;
+  /** Clé R2 du fichier servi — le garde-fou HÉBERGÉ la cherche dans `pushed.json`. */
+  hostedKey: (list: string, entry: CatalogEntry) => string;
+  /** Nom d'asset soumis au filtre perso (cf. `lib/released`), s'il y a lieu. */
+  characterAsset?: (entry: CatalogEntry) => string;
+}
+export const RETAIN_CATALOGS: Record<string, CatalogSpec> = {
+  'wallpapers.json': {
+    lists: (d) =>
+      Object.entries(d as Record<string, CatalogEntry[]>).map(([name, items]) => ({ name, items })),
+    assemble: (lists) => Object.fromEntries(lists.map((l) => [l.name, l.items])),
+    key: (e) => String(e.f),
+    // Mêmes chemins que `src/lib/wallpapers.ts` : HeroFullArt réutilise les
+    // full-arts perso (sauf ses versions archivées `@n`, dans le namespace
+    // wallpaper), les `Full:*` partagent le dossier `Full`.
+    hostedKey: (list, e) =>
+      list === 'HeroFullArt' && !/@\d+$/.test(String(e.f))
+        ? `images/characters/full/${e.f}.webp`
+        : `images/download/${list.startsWith('Full') ? 'Full' : list}/${e.f}.webp`,
+    characterAsset: (e) => String(e.f),
+  },
+  'bgm_mapping.json': {
+    lists: (d) => [{ name: '', items: d as CatalogEntry[] }],
+    assemble: (lists) => lists[0]?.items ?? [],
+    key: (e) => String(e.file),
+    hostedKey: (_list, e) => `audio/bgm/${e.file}.mp3`,
+  },
+};
+
+/** Clés de `pushed.json` (ce qui est sur R2), lues une fois par process. */
+let pushedKeys: Set<string> | undefined;
+function isPushed(key: string): boolean {
+  if (!pushedKeys) {
+    const path = resolve('datagen/assets/pushed.json');
+    pushedKeys = new Set(
+      existsSync(path)
+        ? Object.keys(JSON.parse(readFileSync(path, 'utf8')) as Record<string, string>)
+        : [],
+    );
+  }
+  return pushedKeys.has(key);
+}
+
+/** Garde-fous injectables de la rétention de catalogue (défauts = réels). */
+export interface CatalogGuards {
+  /** Le fichier est-il hébergé (clé R2 présente dans `pushed.json`) ? */
+  hosted?: (key: string) => boolean;
+  /** L'asset porte-t-il l'id d'un perso non intégré ? */
+  unreleased?: (stem: string) => boolean;
+}
+
+/**
+ * Cœur de la rétention de CATALOGUE (cf. `RETAIN_CATALOGS`) : pour chaque liste
+ * de la proposition, réinjecte en fin les entrées validées qu'elle ne porte plus,
+ * marquées `retired: true` — si leur fichier est hébergé et qu'elles ne sont pas
+ * l'asset d'un perso non intégré. Idempotent ; une entrée REVENUE dans la
+ * proposition reprend celle-ci (donc perd le flag). `retained` = clés retenues,
+ * `dropped` = clés retirées par le jeu mais NON retenues (avec le motif).
+ */
+export function applyCatalogRetention(
+  committed: unknown,
+  extracted: unknown,
+  spec: CatalogSpec,
+  guards: CatalogGuards = {},
+): { merged: unknown; retained: string[]; dropped: string[] } {
+  const hosted = guards.hosted ?? isPushed;
+  const unreleased = guards.unreleased ?? isUnreleasedCharacterAsset;
+  const committedLists = new Map(spec.lists(committed).map((l) => [l.name, l.items]));
+  const retained: string[] = [];
+  const dropped: string[] = [];
+  const label = (name: string, key: string) => (name ? `${name}/${key}` : key);
+
+  const lists = spec.lists(extracted).map(({ name, items }) => {
+    const prev = committedLists.get(name);
+    if (!prev?.length) return { name, items };
+    // Liste proposée vide = pool non scanné, pas un retrait : validé tel quel.
+    if (!items.length) return { name, items: prev };
+    const present = new Set(items.map(spec.key));
+    const extra: CatalogEntry[] = [];
+    for (const entry of prev) {
+      const key = spec.key(entry);
+      if (present.has(key)) continue;
+      if (!hosted(spec.hostedKey(name, entry))) {
+        dropped.push(`${label(name, key)} (absent de R2)`);
+        continue;
+      }
+      const asset = spec.characterAsset?.(entry);
+      if (asset && unreleased(asset)) {
+        dropped.push(`${label(name, key)} (perso non intégré)`);
+        continue;
+      }
+      retained.push(label(name, key));
+      extra.push({ ...entry, retired: true });
+    }
+    return { name, items: extra.length ? [...items, ...extra] : items };
+  });
+  return { merged: spec.assemble(lists), retained, dropped };
+}
 
 /**
  * Validés PURS, sans équivalent extrait PAR CONSTRUCTION — hors périmètre du
@@ -216,6 +349,8 @@ export interface PromoteOptions {
   apply?: boolean;
   /** Promotion ciblée : fichiers relatifs à `src` (cf. en-tête). */
   only?: ReadonlySet<string> | null;
+  /** Garde-fous de la rétention de catalogue (cf. `RETAIN_CATALOGS`) — tests. */
+  catalogGuards?: CatalogGuards;
 }
 
 export interface PromoteResult {
@@ -242,7 +377,7 @@ export interface PromoteResult {
  * en sortie code 1 ; les tests l'attrapent directement.
  */
 export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult> {
-  const { src = SRC, dst = DST, apply = false, only = null } = opts;
+  const { src = SRC, dst = DST, apply = false, only = null, catalogGuards } = opts;
 
   if (!existsSync(src)) {
     throw new Error('data/extracted/ absent — lance d’abord `pnpm datagen:build`.');
@@ -294,6 +429,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     // comparaison octet à octet ci-dessous ne voit que du contenu).
     let out = srcText;
     let retained: string[] = [];
+    let dropped: string[] = [];
     if (dstText !== undefined && RETAIN_ENTITIES.has(rel)) {
       const r = applyRetention(
         JSON.parse(dstText) as Record<string, unknown>,
@@ -301,6 +437,21 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
       );
       retained = r.retained;
       if (retained.length) out = await formatJson(r.merged);
+    } else if (dstText !== undefined && rel in RETAIN_CATALOGS) {
+      // Catalogues d'assets (wallpapers, OST) : rétention par ENTRÉE — un asset
+      // retiré du jeu reste servi (R2 ne supprime rien), donc reste catalogué.
+      const r = applyCatalogRetention(
+        JSON.parse(dstText) as unknown,
+        JSON.parse(srcText) as unknown,
+        RETAIN_CATALOGS[rel],
+        catalogGuards,
+      );
+      retained = r.retained;
+      dropped = r.dropped;
+      // Réécrit dès qu'une liste vide a été remplacée par le validé (pool non
+      // scanné) : `merged` peut alors différer de la proposition sans retenue.
+      if (JSON.stringify(r.merged) !== JSON.stringify(JSON.parse(srcText)))
+        out = await formatJson(r.merged);
     }
 
     // Garde perso : écarte les persos non intégrés, puis VERROUILLE — une réf
@@ -337,6 +488,9 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     }
     const notes =
       (retained.length ? ` · ${retained.length} retenue(s), jamais supprimées` : '') +
+      (dropped.length
+        ? ` · ${dropped.length} retirée(s) NON retenue(s) : ${dropped.join(', ')}`
+        : '') +
       (stripped.length
         ? ` · ${stripped.length} perso(s) non intégré(s) écarté(s) : ${stripped.join(', ')}`
         : '');

@@ -283,8 +283,9 @@ async function main(): Promise<void> {
   await writeJson('bgm_mapping.json', await buildBgmMapping());
   // Catalogue des wallpapers (/wallpapers) : pool jeu extrait (Cutin/Full/Banner/
   // Art — cf. extract-wallpapers) + HeroFullArt réutilisés + éditorial Outerpedia
-  // (.editorial/, gitignoré → présent seulement sur une machine qui l'a). Sync.
-  await writeJson('wallpapers.json', buildWallpapers());
+  // (.editorial/, gitignoré → présent seulement sur une machine qui l'a), plus
+  // les versions archivées `@n` (assets remplacés en place par le jeu).
+  await writeJson('wallpapers.json', await buildWallpapers());
 
   const equip: EquipmentFiles = equipment;
   const slots: (keyof EquipmentFiles)[] = [

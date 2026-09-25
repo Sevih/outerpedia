@@ -2,12 +2,17 @@
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { wallpaperSrc, wallpaperDownload } from '@/lib/wallpapers';
+import { ARCHIVED } from './archived';
 
 /** Une entrée wallpaper (schéma de `data/generated/wallpapers.json`). */
-interface Wallpaper {
+export interface Wallpaper {
   f: string;
   w: number;
   h: number;
+  /** Retiré du jeu, toujours servi (rétention de catalogue, cf. `promote`). */
+  retired?: boolean;
+  /** Catégorie d'ORIGINE d'une entrée de l'onglet archivé (dossier de service). */
+  cat?: string;
 }
 export type WallpapersData = Record<string, Wallpaper[]>;
 
@@ -23,6 +28,7 @@ export interface WallpaperStrings {
   disclaimer1: string;
   disclaimer2: string;
   contactLink: string;
+  archivedNote: string;
 }
 
 const HELPSHIFT_URL = 'https://outerplane.helpshift.com/hc/en/4-outerplane/';
@@ -48,13 +54,19 @@ export function WallpapersGallery({
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const isPortrait = PORTRAIT.has(selected);
+  // Une entrée archivée garde son dossier de service d'origine (`cat`) : c'est
+  // lui qui fait l'URL et l'orientation, pas l'onglet.
   const items = useMemo(
     () =>
-      (data[selected] ?? []).map((w) => ({
-        ...w,
-        src: wallpaperSrc(selected, w.f),
-        download: wallpaperDownload(selected, w.f),
-      })),
+      (data[selected] ?? []).map((w) => {
+        const cat = w.cat ?? selected;
+        return {
+          ...w,
+          portrait: PORTRAIT.has(cat),
+          src: wallpaperSrc(cat, w.f),
+          download: wallpaperDownload(cat, w.f),
+        };
+      }),
     [data, selected],
   );
 
@@ -103,6 +115,9 @@ export function WallpapersGallery({
       </div>
 
       <p className="text-content-muted mt-4 text-center text-sm">{strings.description}</p>
+      {selected === ARCHIVED && (
+        <p className="text-content-subtle mt-2 text-center text-xs">{strings.archivedNote}</p>
+      )}
 
       {/* Onglets de catégorie */}
       <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -147,14 +162,14 @@ export function WallpapersGallery({
             type="button"
             onClick={() => setLightbox(i)}
             className={`group border-line-subtle bg-surface-raised relative overflow-hidden rounded-lg border transition-all hover:scale-[1.02] hover:border-sky-500 ${
-              isPortrait ? 'aspect-3/4' : 'aspect-video'
+              w.portrait ? 'aspect-3/4' : 'aspect-video'
             }`}
           >
             <img
               src={w.src}
               alt={w.f}
               loading="lazy"
-              className={`size-full ${isPortrait ? 'object-contain' : 'object-cover'}`}
+              className={`size-full ${w.portrait ? 'object-contain' : 'object-cover'}`}
             />
             <span className="bg-scrim/70 text-content absolute right-1 bottom-1 rounded px-1.5 py-0.5 font-mono text-[10px]">
               {w.w}×{w.h}

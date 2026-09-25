@@ -1198,6 +1198,10 @@ const jp: Record<TranslationKey, string> = {
     'これらのサウンドトラックは権利者（Major9）の許可を得て、個人的な非商用利用のみを目的として提供されています。',
   'ost.disclaimer.line2': 'このコンテンツは権利者の要請により削除される場合があります。',
   'ost.keyboardShortcuts': 'キーボードショートカット',
+  'ost.tabTracks': 'トラック',
+  'ost.tabArchived': 'アーカイブ',
+  'ost.archivedNote':
+    'これらのトラックはその後のアップデートでゲームから削除されました。アーカイブとしてここに保存しています。',
   // Wallpapers
   'wallpapers.description':
     'アウタープレインの公式アートワークを閲覧・ダウンロードできます。画像をクリックしてプレビューとダウンロードができます。',
@@ -1210,6 +1214,9 @@ const jp: Record<TranslationKey, string> = {
   'wallpapers.cat.Full:Others': 'その他',
   'wallpapers.cat.HeroFullArt': 'ヒーロー',
   'wallpapers.cat.Cutin': 'カットイン',
+  'wallpapers.cat.Archived': 'アーカイブ',
+  'wallpapers.archivedNote':
+    'これらの壁紙はその後のアップデートでゲームから削除されました。アーカイブとしてここに保存しています。',
   'wallpapers.disclaimer.line1':
     'これらの素材は、権利者（Major9）の許可を得て、個人使用目的でのみ提供されています。',
   'wallpapers.disclaimer.line2': 'その他の使用については、こちらからお問い合わせください：',

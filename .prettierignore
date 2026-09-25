@@ -20,3 +20,9 @@ datagen/assets/face-icon-layout.json
 # l'extraction suivante les redéplierait — chacun défaisant l'autre. Celui-ci se
 # LIT, contrairement au précédent, d'où l'indentation à 2 espaces du script.
 datagen/assets/portrait-fx.json
+
+# Même cas encore (`damage/extract-anim-events.py`, UnityPy) : clips et
+# triggers d'animation par perso. Le script écrit un élément par ligne, prettier
+# recollait les tableaux courts — 38 000 lignes de diff à chaque extraction sans
+# qu'une valeur ait changé (constaté le 25/09/2026). Le format du script fait foi.
+datagen/damage/anim-events.json

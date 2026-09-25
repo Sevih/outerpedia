@@ -13,6 +13,8 @@ export interface BgmTrack {
   name_zh?: string;
   size: number;
   duration: number;
+  /** Retirée du jeu, toujours servie (rétention de catalogue, cf. `promote`). */
+  retired?: boolean;
 }
 
 export interface OstStrings {
@@ -21,9 +23,14 @@ export interface OstStrings {
   disclaimer1: string;
   disclaimer2: string;
   keyboardShortcuts: string;
+  tabTracks: string;
+  tabArchived: string;
+  archivedNote: string;
 }
 
 type Repeat = 'off' | 'one' | 'all';
+/** Les deux playlists : l'OST courante du jeu, et les pistes qu'il a retirées. */
+type Playlist = 'live' | 'archived';
 
 function formatTime(seconds: number): string {
   if (!isFinite(seconds) || isNaN(seconds)) return '0:00';
@@ -47,14 +54,23 @@ function trackName(track: BgmTrack, lang: Lang): string {
  */
 export function OstPlayer({
   lang,
-  tracks,
+  tracks: liveTracks,
+  archived = [],
   strings,
 }: {
   lang: Lang;
   tracks: BgmTrack[];
+  /** Pistes retirées du jeu (onglet « Archivées », absent si vide). */
+  archived?: BgmTrack[];
   strings: OstStrings;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Une playlist à la fois : les index de lecture (piste courante, historique
+  // du shuffle) pointent dans `tracks`, donc changer d'onglet = changer de
+  // playlist, lecture arrêtée — jamais un index de l'une lu dans l'autre.
+  const [playlist, setPlaylist] = useState<Playlist>('live');
+  const tracks = playlist === 'archived' ? archived : liveTracks;
 
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -70,6 +86,27 @@ export function OstPlayer({
   const [error, setError] = useState<string | null>(null);
 
   const currentTrack = currentTrackIndex !== null ? tracks[currentTrackIndex] : null;
+
+  const switchPlaylist = useCallback(
+    (next: Playlist) => {
+      if (next === playlist) return;
+      const el = audioRef.current;
+      if (el) {
+        el.pause();
+        el.removeAttribute('src');
+      }
+      setPlaylist(next);
+      setCurrentTrackIndex(null);
+      setIsPlaying(false);
+      setIsLoading(false);
+      setCurrentTime(0);
+      setDuration(0);
+      setError(null);
+      setPlayHistory([]);
+      setHistoryIndex(-1);
+    },
+    [playlist],
+  );
 
   const switchTrack = useCallback(
     (index: number) => {
@@ -299,6 +336,42 @@ export function OstPlayer({
         {strings.keyboardShortcuts}: Space &middot; &larr;&rarr; &middot; &uarr;&darr; &middot; M
         &middot; N/P
       </p>
+
+      {/* Playlists : OST courante / pistes retirées du jeu (si le jeu en a retiré) */}
+      {archived.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {(
+            [
+              ['live', strings.tabTracks, liveTracks.length],
+              ['archived', strings.tabArchived, archived.length],
+            ] as const
+          ).map(([key, label, count]) => {
+            const active = key === playlist;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => switchPlaylist(key)}
+                className={`inline-flex h-9 items-center gap-2 rounded-lg border px-3 text-sm transition ${
+                  active
+                    ? 'border-sky-500/60 bg-sky-500/10 font-medium text-sky-300'
+                    : 'border-line-subtle text-content-muted hover:text-content-strong'
+                }`}
+              >
+                {label}
+                <span
+                  className={`font-mono text-[10px] tracking-wider ${active ? 'text-sky-300/70' : 'text-content-subtle'}`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {playlist === 'archived' && (
+        <p className="text-content-subtle mt-2 text-xs">{strings.archivedNote}</p>
+      )}
 
       {/* Liste des pistes */}
       <div className="mt-4">

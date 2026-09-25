@@ -17,7 +17,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { formatJson } from './lib/json';
-import { applyRetention, completeLangDicts, promote, stripUnintegratedCharacters } from './promote';
+import {
+  RETAIN_CATALOGS,
+  applyCatalogRetention,
+  applyRetention,
+  completeLangDicts,
+  promote,
+  stripUnintegratedCharacters,
+} from './promote';
 import { emptyDict } from './lib/lang';
 
 let src: string;
@@ -132,6 +139,225 @@ describe('promote — rétention à l’apply', () => {
     await put(src, 'glossary.json', { kept: 2 });
     await promote({ src, dst, apply: true });
     expect(read(dst, 'glossary.json')).toEqual({ kept: 2 });
+  });
+});
+
+describe('applyCatalogRetention — cœur pur de la rétention de catalogue', () => {
+  const WP = RETAIN_CATALOGS['wallpapers.json'];
+  const BGM = RETAIN_CATALOGS['bgm_mapping.json'];
+  /** Garde-fous « tout est sur R2, aucun perso non intégré » (le cas nominal). */
+  const open = { hosted: () => true, unreleased: () => false };
+
+  it('réinjecte en fin de liste les wallpapers retirés du jeu, MARQUÉS retired', () => {
+    const committed = {
+      'Full:Events': [
+        { f: 'T_Event_BG_001', w: 2048, h: 1024 },
+        { f: 'T_Event_BG_015', w: 2048, h: 1024 },
+      ],
+      Banner: [{ f: 'T_Banner_A', w: 1, h: 1 }],
+    };
+    const extracted = {
+      'Full:Events': [
+        { f: 'T_Event_BG_001', w: 2048, h: 1024 },
+        { f: 'T_Event_BG_099', w: 2048, h: 1024 },
+      ],
+      Banner: [{ f: 'T_Banner_A', w: 1, h: 1 }],
+    };
+    const { merged, retained, dropped } = applyCatalogRetention(committed, extracted, WP, open);
+    expect(retained).toEqual(['Full:Events/T_Event_BG_015']);
+    expect(dropped).toEqual([]);
+    // La proposition fait foi ; la retenue arrive APRÈS, estampillée archive.
+    expect((merged as Record<string, unknown[]>)['Full:Events']).toEqual([
+      { f: 'T_Event_BG_001', w: 2048, h: 1024 },
+      { f: 'T_Event_BG_099', w: 2048, h: 1024 },
+      { f: 'T_Event_BG_015', w: 2048, h: 1024, retired: true },
+    ]);
+    expect((merged as Record<string, unknown[]>).Banner).toEqual(committed.Banner);
+  });
+
+  it('ne retient PAS une entrée dont le fichier n’est pas sur R2 (lien mort)', () => {
+    const committed = {
+      Banner: [
+        { f: 'T_Banner_A', w: 1, h: 1 },
+        { f: 'T_Banner_B', w: 1, h: 1 },
+      ],
+    };
+    const extracted = { Banner: [{ f: 'T_Banner_A', w: 1, h: 1 }] };
+    const hosted = (key: string) => key === 'images/download/Banner/T_Banner_A.webp';
+    const { merged, retained, dropped } = applyCatalogRetention(committed, extracted, WP, {
+      ...open,
+      hosted,
+    });
+    expect(retained).toEqual([]);
+    expect(dropped).toEqual(['Banner/T_Banner_B (absent de R2)']);
+    expect(merged).toEqual(extracted);
+  });
+
+  it('ne retient PAS l’asset d’un perso non intégré (c’est le filtre, pas le jeu, qui l’a sorti)', () => {
+    const committed = {
+      HeroFullArt: [
+        { f: 'IMG_3000032', w: 1, h: 1 },
+        { f: 'IMG_2710005', w: 1, h: 1 },
+      ],
+    };
+    const extracted = { HeroFullArt: [{ f: 'IMG_2000001', w: 1, h: 1 }] };
+    const { merged, retained, dropped } = applyCatalogRetention(committed, extracted, WP, {
+      ...open,
+      unreleased: (stem) => stem === 'IMG_2710005',
+    });
+    expect(retained).toEqual(['HeroFullArt/IMG_3000032']);
+    expect(dropped).toEqual(['HeroFullArt/IMG_2710005 (perso non intégré)']);
+    expect((merged as Record<string, unknown[]>).HeroFullArt).toEqual([
+      { f: 'IMG_2000001', w: 1, h: 1 },
+      { f: 'IMG_3000032', w: 1, h: 1, retired: true },
+    ]);
+  });
+
+  it('cherche le bon fichier R2 : HeroFullArt réutilise les full-arts, Full:* partage `Full`', () => {
+    const seen: string[] = [];
+    const hosted = (key: string) => (seen.push(key), true);
+    applyCatalogRetention(
+      {
+        HeroFullArt: [{ f: 'IMG_3000032', w: 1, h: 1 }],
+        'Full:Scenario': [{ f: 'T_ScenarioCG_A0106', w: 1, h: 1 }],
+        Cutin: [{ f: 'T_CutIn_2000001', w: 1, h: 1 }],
+      },
+      {
+        HeroFullArt: [{ f: 'x', w: 1, h: 1 }],
+        'Full:Scenario': [{ f: 'x', w: 1, h: 1 }],
+        Cutin: [{ f: 'x', w: 1, h: 1 }],
+      },
+      WP,
+      { hosted, unreleased: () => false },
+    );
+    expect(seen).toEqual([
+      'images/characters/full/IMG_3000032.webp',
+      'images/download/Full/T_ScenarioCG_A0106.webp',
+      'images/download/Cutin/T_CutIn_2000001.webp',
+    ]);
+  });
+
+  it('une version archivée `@n` de HeroFullArt vit dans le namespace wallpaper', () => {
+    const seen: string[] = [];
+    applyCatalogRetention(
+      { HeroFullArt: [{ f: 'IMG_2000035@1', w: 1, h: 1, retired: true }] },
+      { HeroFullArt: [{ f: 'IMG_2000035', w: 1, h: 1 }] },
+      WP,
+      { hosted: (k) => (seen.push(k), true), unreleased: () => false },
+    );
+    expect(seen).toEqual(['images/download/HeroFullArt/IMG_2000035@1.webp']);
+  });
+
+  it('liste proposée VIDE = pool non scanné : le validé passe tel quel, SANS marquage', () => {
+    const committed = { Cutin: [{ f: 'T_CutIn_2000001', w: 1, h: 1 }] };
+    const extracted = { Cutin: [] };
+    const { merged, retained } = applyCatalogRetention(committed, extracted, WP, open);
+    expect(retained).toEqual([]);
+    expect(merged).toEqual(committed);
+  });
+
+  it('idempotent ; une entrée REVENUE dans la proposition perd son flag', () => {
+    const committed = {
+      Art: [
+        { f: 'T_Demi_1', w: 1, h: 1 },
+        { f: 'T_Demi_2', w: 1, h: 1, retired: true },
+      ],
+    };
+    // 1) toujours absente : re-marquée à l'identique.
+    const again = applyCatalogRetention(
+      committed,
+      { Art: [{ f: 'T_Demi_1', w: 1, h: 1 }] },
+      WP,
+      open,
+    );
+    expect(again.merged).toEqual(committed);
+    // 2) revenue : la proposition fait foi, plus de flag.
+    const back = applyCatalogRetention(
+      committed,
+      {
+        Art: [
+          { f: 'T_Demi_1', w: 1, h: 1 },
+          { f: 'T_Demi_2', w: 1, h: 1 },
+        ],
+      },
+      WP,
+      open,
+    );
+    expect(back.retained).toEqual([]);
+    expect((back.merged as Record<string, unknown[]>).Art).toEqual([
+      { f: 'T_Demi_1', w: 1, h: 1 },
+      { f: 'T_Demi_2', w: 1, h: 1 },
+    ]);
+  });
+
+  it('bgm_mapping.json (tableau nu) : piste retirée retenue en fin, clé R2 `audio/bgm/<file>.mp3`', () => {
+    const committed = [
+      { file: 'Battle_01', name: 'Battle 01', size: 1, duration: 60 },
+      { file: 'Lobby_Old', name: 'Old Lobby', size: 1, duration: 60 },
+    ];
+    const extracted = [
+      { file: 'Battle_01', name: 'Battle 01', size: 1.1, duration: 61 },
+      { file: 'Battle_09', name: 'Battle 09', size: 1, duration: 60 },
+    ];
+    const seen: string[] = [];
+    const { merged, retained } = applyCatalogRetention(committed, extracted, BGM, {
+      hosted: (k) => (seen.push(k), true),
+      unreleased: () => false,
+    });
+    expect(seen).toEqual(['audio/bgm/Lobby_Old.mp3']);
+    expect(retained).toEqual(['Lobby_Old']);
+    expect(merged).toEqual([
+      ...extracted,
+      { file: 'Lobby_Old', name: 'Old Lobby', size: 1, duration: 60, retired: true },
+    ]);
+  });
+});
+
+describe('promote — rétention de catalogue à l’apply', () => {
+  const guards = { hosted: () => true, unreleased: () => false };
+
+  it('ne supprime JAMAIS un wallpaper validé que le jeu a retiré (wallpapers.json)', async () => {
+    await put(dst, 'wallpapers.json', {
+      Banner: [
+        { f: 'A', w: 1, h: 1 },
+        { f: 'B', w: 1, h: 1 },
+      ],
+    });
+    await put(src, 'wallpapers.json', {
+      Banner: [
+        { f: 'A', w: 1, h: 1 },
+        { f: 'C', w: 1, h: 1 },
+      ],
+    });
+    const res = await promote({ src, dst, apply: true, catalogGuards: guards });
+    expect(read(dst, 'wallpapers.json').Banner).toEqual([
+      { f: 'A', w: 1, h: 1 },
+      { f: 'C', w: 1, h: 1 },
+      { f: 'B', w: 1, h: 1, retired: true },
+    ]);
+    expect(res.diffs.join('\n')).toContain('1 retenue(s), jamais supprimées');
+  });
+
+  it('signale dans la revue une entrée retirée NON retenue (absente de R2)', async () => {
+    await put(dst, 'bgm_mapping.json', [{ file: 'X', name: 'X', size: 1, duration: 1 }]);
+    await put(src, 'bgm_mapping.json', [{ file: 'Y', name: 'Y', size: 1, duration: 1 }]);
+    const res = await promote({
+      src,
+      dst,
+      apply: true,
+      catalogGuards: { hosted: () => false, unreleased: () => false },
+    });
+    expect(read(dst, 'bgm_mapping.json')).toEqual([{ file: 'Y', name: 'Y', size: 1, duration: 1 }]);
+    expect(res.diffs.join('\n')).toContain('1 retirée(s) NON retenue(s) : X (absent de R2)');
+  });
+
+  it('un 2e apply après rétention de catalogue ne voit plus aucun diff', async () => {
+    await put(dst, 'wallpapers.json', { Art: [{ f: 'gone', w: 1, h: 1 }] });
+    await put(src, 'wallpapers.json', { Art: [{ f: 'new', w: 1, h: 1 }] });
+    await promote({ src, dst, apply: true, catalogGuards: guards });
+    const again = await promote({ src, dst, apply: true, catalogGuards: guards });
+    expect(again.diffs).toEqual([]);
+    expect(again.identical).toBe(1);
   });
 });
 

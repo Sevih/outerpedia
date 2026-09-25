@@ -1233,6 +1233,10 @@ const fr: Record<TranslationKey, string> = {
     "Ces bandes originales sont fournies à des fins personnelles et non commerciales uniquement, avec l'autorisation de l'ayant droit (Major9).",
   'ost.disclaimer.line2': 'Ce contenu peut être retiré sur demande du détenteur des droits.',
   'ost.keyboardShortcuts': 'Raccourcis clavier',
+  'ost.tabTracks': 'Pistes',
+  'ost.tabArchived': 'Archivées',
+  'ost.archivedNote':
+    'Ces pistes ont été retirées du jeu lors d’une mise à jour ultérieure. Elles sont conservées ici à titre d’archive.',
   // Wallpapers
   'wallpapers.description':
     "Parcourez et téléchargez les illustrations officielles d'Outerplane. Cliquez sur une image pour prévisualiser et télécharger.",
@@ -1245,6 +1249,9 @@ const fr: Record<TranslationKey, string> = {
   'wallpapers.cat.Full:Others': 'Autres',
   'wallpapers.cat.HeroFullArt': 'Héros',
   'wallpapers.cat.Cutin': 'Cutin',
+  'wallpapers.cat.Archived': 'Archivés',
+  'wallpapers.archivedNote':
+    'Ces fonds d’écran ont été retirés du jeu lors d’une mise à jour ultérieure. Ils sont conservés ici à titre d’archive.',
   'wallpapers.disclaimer.line1':
     "Ces éléments sont fournis à des fins personnelles uniquement, avec l'autorisation de l'ayant droit (Major9).",
   'wallpapers.disclaimer.line2':

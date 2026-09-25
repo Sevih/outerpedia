@@ -19,14 +19,25 @@ describe('wallpapers.json — invariants de catalogue', () => {
   });
 
   it('chaque entrée bien formée (f non vide, w/h numériques ≥ 0) et triée par f', () => {
+    // Deux segments par catégorie : les entrées VIVANTES (sortie du générateur,
+    // triées par f), puis les ARCHIVÉES (`retired`) — versions `@n` émises par
+    // le générateur, puis entrées retenues par `promote` dans l'ordre du validé.
+    // Jamais une vivante après une archivée ; le segment archivé n'est pas trié
+    // (deux provenances), mais chaque stem y est unique.
     const bad: string[] = [];
     for (const [cat, list] of Object.entries(data)) {
       let prev = '';
+      let inArchive = false;
+      const seen = new Set<string>();
       for (const w of list as Wallpaper[]) {
         if (!w.f) bad.push(`${cat} : entrée sans f`);
+        if (seen.has(w.f)) bad.push(`${cat}/${w.f} : doublon`);
+        seen.add(w.f);
         if (!(typeof w.w === 'number' && w.w >= 0)) bad.push(`${cat}/${w.f} : w ${w.w}`);
         if (!(typeof w.h === 'number' && w.h >= 0)) bad.push(`${cat}/${w.f} : h ${w.h}`);
-        if (w.f < prev) bad.push(`${cat} : ${prev} > ${w.f} (non trié)`);
+        if (w.retired) inArchive = true;
+        else if (inArchive) bad.push(`${cat}/${w.f} : vivante après une archivée`);
+        else if (w.f < prev) bad.push(`${cat} : ${prev} > ${w.f} (non trié)`);
         prev = w.f;
       }
     }

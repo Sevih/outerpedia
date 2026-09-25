@@ -53,6 +53,12 @@ export interface BgmTrack {
   size: number;
   /** Durée en secondes (1 décimale). */
   duration: number;
+  /**
+   * Retirée du jeu mais toujours servie par R2 — posé par la RÉTENTION de
+   * catalogue de `promote` (`RETAIN_CATALOGS`), jamais par ce générateur, qui
+   * ne voit que le pool courant. Le front la range sous l'onglet « Archivées ».
+   */
+  retired?: boolean;
 }
 
 /** Durée du mp3 via ffprobe (secondes, 1 décimale) — `null` si erreur de lecture. */

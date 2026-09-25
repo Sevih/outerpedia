@@ -1226,6 +1226,10 @@ const en = {
     'These soundtracks are provided for personal, non-commercial use only, with approval from the rightsholder (Major9).',
   'ost.disclaimer.line2': 'This content may be removed upon request from the rights holder.',
   'ost.keyboardShortcuts': 'Keyboard shortcuts',
+  'ost.tabTracks': 'Tracks',
+  'ost.tabArchived': 'Archived',
+  'ost.archivedNote':
+    'These tracks were removed from the game in a later update. They are kept here as an archive.',
   // Wallpapers
   'wallpapers.description':
     'Browse and download official Outerplane artworks. Click on any image to preview and download.',
@@ -1238,6 +1242,9 @@ const en = {
   'wallpapers.cat.Full:Others': 'Others',
   'wallpapers.cat.HeroFullArt': 'Heroes',
   'wallpapers.cat.Cutin': 'Cutin',
+  'wallpapers.cat.Archived': 'Archived',
+  'wallpapers.archivedNote':
+    'These wallpapers were removed from the game in a later update. They are kept here as an archive.',
   'wallpapers.disclaimer.line1':
     'These assets are provided for personal use only, with approval from the rightsholder (Major9).',
   'wallpapers.disclaimer.line2': 'For any other use, please request permission via',

@@ -73,11 +73,18 @@ describe('bgm_mapping.json — invariants de forme et d’ordre', () => {
     expect(bad).toEqual([]);
   });
 
-  it('trié par `byFileNameCI` sur le fichier', () => {
+  it('trié par `byFileNameCI` sur le fichier — pistes vivantes, puis archivées', () => {
+    // Les pistes `retired` (retirées du jeu, réinjectées en fin par la rétention
+    // de catalogue de `promote`) forment un second segment trié, après les vivantes.
     const bad: string[] = [];
-    for (let i = 1; i < tracks.length; i++)
-      if (byFileNameCI(tracks[i - 1].file, tracks[i].file) > 0)
-        bad.push(`${tracks[i - 1].file} > ${tracks[i].file}`);
+    const firstRetired = tracks.findIndex((t) => t.retired);
+    const live = firstRetired === -1 ? tracks : tracks.slice(0, firstRetired);
+    const archived = firstRetired === -1 ? [] : tracks.slice(firstRetired);
+    if (archived.some((t) => !t.retired)) bad.push('piste vivante après une archivée');
+    for (const seg of [live, archived])
+      for (let i = 1; i < seg.length; i++)
+        if (byFileNameCI(seg[i - 1].file, seg[i].file) > 0)
+          bad.push(`${seg[i - 1].file} > ${seg[i].file}`);
     expect(bad).toEqual([]);
   });
 });

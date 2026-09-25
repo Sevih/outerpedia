@@ -1238,6 +1238,10 @@ const es: Record<TranslationKey, string> = {
   'ost.disclaimer.line2':
     'Este contenido puede ser eliminado bajo solicitud del titular de derechos.',
   'ost.keyboardShortcuts': 'Atajos de teclado',
+  'ost.tabTracks': 'Pistas',
+  'ost.tabArchived': 'Archivadas',
+  'ost.archivedNote':
+    'Estas pistas se retiraron del juego en una actualización posterior. Se conservan aquí como archivo.',
   // Wallpapers
   'wallpapers.description':
     'Explora y descarga obras de arte oficiales de Outerplane. Haz clic en cualquier imagen para previsualizar y descargar.',
@@ -1250,6 +1254,9 @@ const es: Record<TranslationKey, string> = {
   'wallpapers.cat.Full:Others': 'Otros',
   'wallpapers.cat.HeroFullArt': 'Héroes',
   'wallpapers.cat.Cutin': 'Cutin',
+  'wallpapers.cat.Archived': 'Archivados',
+  'wallpapers.archivedNote':
+    'Estos fondos de pantalla se retiraron del juego en una actualización posterior. Se conservan aquí como archivo.',
   'wallpapers.disclaimer.line1':
     'Estos recursos se proporcionan solo para uso personal, con aprobación del titular de derechos (Major9).',
   'wallpapers.disclaimer.line2': 'Para cualquier otro uso, por favor solicita permiso a través de',
