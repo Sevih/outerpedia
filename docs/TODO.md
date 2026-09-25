@@ -153,6 +153,15 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
+- [ ] **Filtres de classe triés par ordre alphabétique** alors que le jeu a un
+      ordre (`CLASS_ORDER`, posé le 25/09 par le lot A3) : `/characters`, la
+      tier list, l'équipement, le team planner, most-used-units construisent
+      leurs filtres depuis les données, donc dans l'ordre des clés du glossaire.
+      Les aligner sur `CLASS_ORDER` ; même occasion pour `CLASS_SLUGS` en
+      double (`portrait-layout.ts`, `parse-text.tsx`) et `ELEMENTS` recopié
+      (hero-tracker, `/dev/portrait`) alors qu'`ELEMENT_ORDER` existe. Les bits
+      de `filter-codec.ts` gardent leur ordre hérité (liens partagés). Lot
+      délégable : prompt A11 dans lots-opus-2026-09-25.md.
 - [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
       boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
       team-planner, galeries (G38).
