@@ -37,14 +37,6 @@ export const LABELS = {
     fr: 'Limit Break',
     es: 'Limit Break',
   },
-  tabTranscendence: {
-    en: 'Transcendence',
-    jp: '超越',
-    kr: '초월',
-    zh: '超越',
-    fr: 'Transcendance',
-    es: 'Trascendencia',
-  },
   tabAffinity: {
     en: 'Affinity',
     jp: '親密度',
@@ -140,7 +132,6 @@ export const LABELS = {
     fr: 'Plage de Lv.',
     es: 'Rango de niveles',
   },
-  colGold: { en: 'Gold', jp: 'ゴールド', kr: '골드', zh: '金币', fr: 'Gold', es: 'Oro' },
 
   // ---- Transcendence
   transcendenceDesc1: {
@@ -210,7 +201,6 @@ export const LABELS = {
     fr: "Le niveau maximum d'Affinity est de 100. Atteindre certains niveaux octroie des récompenses de palier supplémentaires :",
     es: 'El Nivel de Afinidad máximo es 100. Alcanzar ciertos niveles otorga recompensas adicionales por hito:',
   },
-  colLevel: { en: 'Level', jp: 'レベル', kr: '레벨', zh: '等级', fr: 'Niveau', es: 'Nivel' },
   colReward: { en: 'Reward', jp: '報酬', kr: '보상', zh: '奖励', fr: 'Récompense', es: 'Premio' },
   rewardStats: {
     en: 'Some stats increased',

@@ -5,6 +5,7 @@
  * strings.ts), aucune donnée de jeu. Le layout d'origine est conservé (héro, deux
  * colonnes, sidebar liens rapides / officiel / communauté) sur nos tokens.
  */
+import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import type { GuideContentProps } from '@/lib/data/guides';
 import { LINKS, LOCALIZED_LINKS, S } from './strings';
@@ -61,7 +62,8 @@ function Badge({ tone, children }: { tone: string; children: React.ReactNode }) 
   );
 }
 
-export default function HowToPlayGuide({ lang }: GuideContentProps) {
+export default async function HowToPlayGuide({ lang }: GuideContentProps) {
+  const t = await getT(lang);
   const s = (key: keyof typeof S) => lRec(S[key], lang);
   return (
     <>
@@ -210,9 +212,9 @@ export default function HowToPlayGuide({ lang }: GuideContentProps) {
           </div>
 
           <div className="rounded-lg border border-blue-600/40 bg-blue-600/10 p-4">
-            <h4 className="mb-2 font-semibold">{s('sidebarOfficial')}</h4>
+            <h4 className="mb-2 font-semibold">{t('footer.official_website')}</h4>
             <a
-              href={lRec(LOCALIZED_LINKS.officialwebsite, lang)}
+              href={t('link.officialwebsite')}
               target="_blank"
               rel="noopener noreferrer"
               className="text-content-strong inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold transition hover:bg-blue-500"

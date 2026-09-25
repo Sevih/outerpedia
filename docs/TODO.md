@@ -184,9 +184,6 @@
 - [ ] `alt` contraires à la règle maison (H8) : `HeroReviewCard` (slugs bruts),
       doublons icône+texte dans `premium.tsx`, `BannerTabs`, `LicenseTabs`,
       `CardArt`, `fusion.tsx`.
-- [ ] 92 chaînes courtes des `labels.ts` déjà dans les locales (H9) — deux
-      vocabulaires pour un mot ; `t()` pour le chrome, `labels.ts` pour la
-      prose. (H10, H11 : FAIT le 25/09, lot A10.)
 - [ ] À confirmer : doublon SEO `/<tour>/1` vs page de base, encart
       « annoncé juin, livré 8/09 » sur la roadmap (H14). (H12, H13 et le
       `stamp:guides` en pre-commit : FAIT le 25/09, lot B8.)

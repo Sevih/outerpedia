@@ -86,31 +86,4 @@ export const LABELS = {
     fr: 'Bonus de Transcendance',
     es: 'Bono de Trascendencia',
   },
-
-  exclusiveEquipment: {
-    en: 'Exclusive Equipment',
-    jp: '専用装備',
-    kr: '전용 장비',
-    zh: '专属装备',
-    fr: 'Exclusive Equipment',
-    es: 'Equipo Exclusivo',
-  },
-
-  oldEE: {
-    en: 'Base',
-    jp: '通常',
-    kr: '기본',
-    zh: '基础',
-    fr: 'Base',
-    es: 'Base',
-  },
-
-  newEE: {
-    en: 'Core Fusion',
-    jp: 'コアフュージョン',
-    kr: '코어 퓨전',
-    zh: '核心融合',
-    fr: 'Core Fusion',
-    es: 'Fusión Core',
-  },
 } as const satisfies Record<string, LocalizedText>;

@@ -18,14 +18,6 @@ export const LABELS = {
   },
 
   /* ═══ Chrome de page ═══ */
-  onThisPage: {
-    en: 'On this page',
-    jp: 'このページの内容',
-    kr: '이 페이지에서',
-    zh: '本页内容',
-    fr: 'Sur cette page',
-    es: 'En esta página',
-  },
   startHere: {
     en: 'Start here',
     jp: 'まずここから',

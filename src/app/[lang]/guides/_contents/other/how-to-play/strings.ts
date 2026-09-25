@@ -274,14 +274,6 @@ export const S = {
     fr: 'Premiers pas',
     es: 'Primeros pasos',
   },
-  sidebarOfficial: {
-    en: 'Official Website',
-    jp: '公式サイト',
-    kr: '공식 웹사이트',
-    zh: '官网',
-    fr: 'Site officiel',
-    es: 'Sitio web oficial',
-  },
   // Libellé volontairement neutre : le site officiel a déjà changé de main une
   // fois (VAGames → Major9), inutile d'y recâbler un nom d'éditeur.
   sidebarOfficialBtn: {
@@ -320,13 +312,5 @@ export const LOCALIZED_LINKS = {
     zh: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
     fr: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
     es: 'https://outerplane.helpshift.com/hc/en/4-outerplane/',
-  },
-  officialwebsite: {
-    en: 'https://outerplane.vagames.kr/index_en.html',
-    jp: 'https://outerplane.vagames.kr/index_ja.html',
-    kr: 'https://outerplane.vagames.kr/index.html',
-    zh: 'https://outerplane.vagames.kr/index_en.html',
-    fr: 'https://outerplane.vagames.kr/index_en.html',
-    es: 'https://outerplane.vagames.kr/index_en.html',
   },
 } as const satisfies Record<string, Text>;

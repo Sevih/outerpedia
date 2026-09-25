@@ -77,9 +77,9 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
         <table className="border-line mx-auto w-auto rounded-md border text-center text-sm">
           <thead className="bg-surface-raised">
             <tr>
-              <th className={TH}>{L(LABELS.thSource)}</th>
-              <th className={TH}>{L(LABELS.thCharacters)}</th>
-              <th className={TH}>{L(LABELS.thDetails)}</th>
+              <th className={TH}>{t('equip.detail.source')}</th>
+              <th className={TH}>{t('nav.characters')}</th>
+              <th className={TH}>{t('guides.rewards.details')}</th>
             </tr>
           </thead>
           <tbody>
@@ -124,7 +124,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
             <tr>
               <th className={TH}>{L(LABELS.thRecommended)}</th>
               <th className={TH}>{L(LABELS.thFreeAvailable)}</th>
-              <th className={TH}>{L(LABELS.thDetails)}</th>
+              <th className={TH}>{t('guides.rewards.details')}</th>
             </tr>
           </thead>
           <tbody>

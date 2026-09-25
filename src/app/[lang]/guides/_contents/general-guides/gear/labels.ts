@@ -44,14 +44,6 @@ export const LABELS = {
     fr: 'Upgrade du Gear',
     es: 'Mejorando Gear',
   },
-  tab_ascension: {
-    en: 'Singularity Ascension',
-    jp: '特異点昇華',
-    kr: '특이점 승화',
-    zh: '奇点升华',
-    fr: 'Singularity Ascension',
-    es: 'Ascensión de Singularidad',
-  },
   tab_obtaining: {
     en: 'Obtaining Gear',
     jp: '装備入手',
@@ -655,14 +647,6 @@ export const LABELS = {
     fr: 'Boost de Main Stat immédiat (par rapport à la valeur standard +10)',
     es: 'Aumento inmediato de la Estadística Principal (frente al valor estándar +10)',
   },
-  ascension_activationCost: {
-    en: 'Activation cost',
-    jp: '活性化コスト',
-    kr: '활성화 비용',
-    zh: '激活消耗',
-    fr: "Coût d'activation",
-    es: 'Costo de activación',
-  },
   ascension_stepsTitle: {
     en: 'Enhancement +11 → +15',
     jp: '強化 +11 → +15',
@@ -681,15 +665,6 @@ export const LABELS = {
     zh: '激活后，可通过 5 个阶段将装备从 +10 提升至 +15。每一阶段消耗金币和奇点材料，且必定成功。最终阶段还会解锁随机额外效果（武器/饰品为攻击系，防具为防御系）。',
     fr: "Une fois activée, vous pouvez enhance le gear de +10 à +15 en 5 étapes. Chaque étape consomme du Gold et des matériaux Singularity, et réussit toujours. La dernière étape débloque aussi un bonus effect aléatoire (offensif pour Weapon/Accessory, défensif pour les pièces d'Armor).",
     es: 'Una vez activado, puedes mejorar el gear de +10 a +15 en 5 pasos. Cada paso consume Oro + materiales de Singularidad y siempre tiene éxito. El paso final también desbloquea un efecto bonus aleatorio (ofensivo para Arma/Accesorio, defensivo para piezas de Armadura).',
-  },
-  ascensionTable_step: { en: 'Step', jp: '段階', kr: '단계', zh: '阶段', fr: 'Étape', es: 'Paso' },
-  ascensionTable_gold: {
-    en: 'Gold',
-    jp: 'ゴールド',
-    kr: '골드',
-    zh: '金币',
-    fr: 'Gold',
-    es: 'Oro',
   },
   ascensionTable_materials: {
     en: 'Materials',
@@ -763,14 +738,6 @@ export const LABELS = {
     zh: 'F/W/E ≈ 抽中火/水/地 · L/D ≈ 抽中光/暗。',
     fr: 'F/W/E ≈ tiré vs Fire/Water/Earth · L/D ≈ tiré vs Light/Dark.',
     es: 'F/W/E ≈ obtenido vs Fuego/Agua/Tierra · L/D ≈ obtenido vs Luz/Oscuro.',
-  },
-  ascensionBonus_effect: {
-    en: 'Effect',
-    jp: '効果',
-    kr: '효과',
-    zh: '效果',
-    fr: 'Effet',
-    es: 'Efecto',
   },
   ascensionBonus_chance: {
     en: 'Pool chance',

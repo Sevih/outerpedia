@@ -268,7 +268,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
       <TableShell
         head={
           <tr>
-            {th(L(LABELS.colLevel))}
+            {th(t('tools.hero-tracker.level'))}
             {th(L(LABELS.colReward))}
           </tr>
         }
@@ -340,7 +340,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
         <tr>
           {th('Lv.')}
           {th(L(LABELS.colMaterials))}
-          {th(L(LABELS.colGold))}
+          {th(t('tools.hero-tracker.gold'))}
           {th(L(LABELS.colGemSlot))}
         </tr>
       }
@@ -398,7 +398,7 @@ export default async function HeroesGrowthGuide({ lang }: { lang: Lang }) {
   const tabs: TabItem[] = [
     { key: 'leveling', label: L(LABELS.tabLeveling), content: levelingPanel },
     { key: 'limit-break', label: L(LABELS.tabLimitBreak), content: limitBreakPanel },
-    { key: 'transcendence', label: L(LABELS.tabTranscendence), content: transcendencePanel },
+    { key: 'transcendence', label: t('page.character.toc.transcend'), content: transcendencePanel },
     { key: 'affinity', label: L(LABELS.tabAffinity), content: affinityPanel },
     { key: 'skills', label: L(LABELS.tabSkills), content: skillPanel },
     { key: 'special-equip', label: L(LABELS.tabSpecialEquip), content: specialEquipPanel },

@@ -9,6 +9,7 @@
 import etherRankingsData from '@data/generated/ether-rankings.json';
 import type { EtherRankTier, EtherRankingsData, LocalizedText } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
+import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { localePath } from '@/lib/navigation';
 import { Prose } from '@/components/guides/editorial/blocks';
@@ -42,6 +43,7 @@ const COUPON_LINK_LABEL: LocalizedText = {
 };
 
 export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
+  const t = await getT(lang);
   const L = (m: LocalizedText): string => lRec(m, lang) || m.en || '';
   const tpl = (m: LocalizedText, vars: Record<string, string | number>): string =>
     Object.entries(vars).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, String(v)), L(m));
@@ -143,19 +145,13 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
     'advancedAdjustments',
     'arena',
     'guild',
-    'worldBoss',
     'singularity',
     'tableDaily',
     'tableWeekly',
     'tableMonthly',
-    'source',
-    'daily',
-    'weekly',
-    'monthly',
     'weeklyApprox',
     'monthlyApprox',
     'monthlyApprox4',
-    'notes',
     'dailySubtotal',
     'weeklySubtotal',
     'monthlySubtotal',
@@ -174,9 +170,19 @@ export default async function EtherIncomeGuide({ lang }: { lang: Lang }) {
   ] as const;
 
   const model: CalculatorModel = {
-    labels: Object.fromEntries(
-      labelKeys.map((k) => [k, L(LABELS[k])]),
-    ) as CalculatorModel['labels'],
+    labels: {
+      ...(Object.fromEntries(labelKeys.map((k) => [k, L(LABELS[k])])) as Record<
+        (typeof labelKeys)[number],
+        string
+      >),
+      // Chrome partagé avec le reste du site : clés i18n, pas de libellé local.
+      worldBoss: t('progress.task.world-boss'),
+      source: t('equip.detail.source'),
+      daily: t('home.resets.daily'),
+      weekly: t('home.resets.weekly'),
+      monthly: t('home.resets.monthly'),
+      notes: t('page.character.gear.note'),
+    },
     daily: DAILY_SOURCES.map(toRow),
     weekly: WEEKLY_SOURCES.map(toRow),
     monthly: MONTHLY_SOURCES.map(toRow),

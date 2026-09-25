@@ -51,31 +51,6 @@ export const LABELS = {
     es: 'Los héroes de la Tienda del Gremio tardan más de 5 semanas en desbloquearse. Prioriza obtenerlos del Custom Banner para el progreso temprano, luego usa la Tienda del Gremio para la trascendencia.',
   },
 
-  thSource: {
-    en: 'Source',
-    jp: '入手先',
-    kr: '획득처',
-    zh: '获取途径',
-    fr: 'Source',
-    es: 'Fuente',
-  },
-  thCharacters: {
-    en: 'Characters',
-    jp: 'キャラクター',
-    kr: '캐릭터',
-    zh: '角色',
-    fr: 'Personnages',
-    es: 'Personajes',
-  },
-  thDetails: {
-    en: 'Details',
-    jp: '詳細',
-    kr: '상세',
-    zh: '详情',
-    fr: 'Details',
-    es: 'Detalles',
-  },
-
   chooseOne: {
     en: 'Choose one',
     jp: '1人選ぶ',

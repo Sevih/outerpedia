@@ -75,31 +75,8 @@ export const LABELS = {
     },
   } satisfies Record<string, LocalizedText>,
 
+  // Source / Weekly / Monthly : chrome, via t() (equip.detail.source, home.resets.*).
   headers: {
-    source: {
-      en: 'Source',
-      jp: '獲得先',
-      kr: '획득처',
-      zh: '获取途径',
-      fr: 'Source',
-      es: 'Fuente',
-    },
-    weekly: {
-      en: 'Weekly',
-      jp: 'ウィークリー',
-      kr: '주간',
-      zh: '每周',
-      fr: 'Hebdo',
-      es: 'Semanal',
-    },
-    monthly: {
-      en: 'Monthly',
-      jp: 'マンスリー',
-      kr: '월간',
-      zh: '每月',
-      fr: 'Mensuel',
-      es: 'Mensual',
-    },
     total: { en: 'Total', jp: '合計', kr: '합계', zh: '总计', fr: 'Total', es: 'Total' },
     grandTotal: {
       en: 'Grand Total (Monthly)',

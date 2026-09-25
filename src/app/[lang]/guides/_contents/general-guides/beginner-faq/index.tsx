@@ -152,7 +152,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
       <Prose>{L(LABELS.intro)}</Prose>
 
       <TocBar
-        ariaLabel={L(LABELS.onThisPage)}
+        ariaLabel={t('page.character.toc.on_this_page')}
         sections={SECTIONS.map((s) => ({ id: s.id, accent: s.accent, label: L(s.label) }))}
       />
 

@@ -123,9 +123,9 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
           fusionId={pair.fusion.id}
           lang={lang}
           labels={{
-            title: L(LABELS.exclusiveEquipment),
-            base: L(LABELS.oldEE),
-            coreFusion: L(LABELS.newEE),
+            title: t('page.character.toc.ee'),
+            base: t('tools.hero-tracker.base'),
+            coreFusion: t('tools.hero-tracker.coreFusion'),
             effect: 'Lv. 1',
             effectMax: 'Lv. 10',
           }}

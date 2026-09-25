@@ -51,16 +51,6 @@ const MAX_TIER = Math.max(
   ),
 );
 
-/** En-tête de colonne « Main Stat » du tableau d'ascension (ajout récent). */
-const MAIN_STAT_LABEL: LocalizedText = {
-  en: 'Main Stat',
-  jp: 'メインステ',
-  kr: '메인 스탯',
-  zh: '主属性',
-  fr: 'Main Stat',
-  es: 'Main Stat',
-};
-
 /** Matériaux d'un `subType` du catalogue, triés par rareté (par nom EN). */
 function catalogMaterials(subType: string, contains?: string): string[] {
   return Object.values(getCatalog())
@@ -488,7 +478,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
     <TableShell
       head={
         <tr>
-          {th(L(LABELS.ascensionBonus_effect))}
+          {th(t('equip.detail.effect'))}
           {th(L(LABELS.ascensionBonus_chance), 'text-center')}
           {th(L(LABELS.ascensionBonus_range), 'text-center')}
         </tr>
@@ -552,7 +542,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
         />
         <div className="border-line-subtle bg-surface-overlay/40 flex flex-wrap items-center gap-4 rounded-lg border p-3">
           <span className="text-content-subtle text-xs tracking-wide uppercase">
-            {L(LABELS.ascension_activationCost)}
+            {t('equip.detail.activation_cost')}
           </span>
           <GoldAmount value={axWeapon.activation.price} />
           {matTiles(axWeapon.activation.materials)}
@@ -566,10 +556,10 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
         <TableShell
           head={
             <tr>
-              {th(L(LABELS.ascensionTable_step))}
-              {th(L(LABELS.ascensionTable_gold), 'text-right')}
+              {th(t('equip.detail.step'))}
+              {th(t('tools.hero-tracker.gold'), 'text-right')}
               {th(L(LABELS.ascensionTable_materials))}
-              {th(L(MAIN_STAT_LABEL), 'text-center')}
+              {th(t('page.character.ee.main_stat'), 'text-center')}
             </tr>
           }
         >
@@ -808,7 +798,7 @@ export default async function GearGuide({ lang }: { lang: Lang }) {
   const tabs: TabItem[] = [
     { key: 'basics', label: L(LABELS.tab_basics), content: basicsPanel },
     { key: 'upgrading', label: L(LABELS.tab_upgrading), content: upgradingPanel },
-    { key: 'ascension', label: L(LABELS.tab_ascension), content: ascensionPanel },
+    { key: 'ascension', label: t('equip.detail.ascension'), content: ascensionPanel },
     { key: 'obtaining', label: L(LABELS.tab_obtaining), content: obtainingPanel },
     { key: 'faq', label: L(LABELS.tab_faq), content: faqPanel },
   ];

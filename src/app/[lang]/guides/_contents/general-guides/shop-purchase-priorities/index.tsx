@@ -199,12 +199,14 @@ export default async function ShopPurchasePrioritiesGuide({ lang }: { lang: Lang
         <table className="w-full text-sm">
           <thead className="bg-surface-sunken text-content-subtle text-xs">
             <tr>
-              <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colPriority)}</th>
+              <th className="px-2.5 py-1.5 text-left font-medium">{t('equip.detail.priority')}</th>
               <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colItem)}</th>
               <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colCost)}</th>
               <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colLimit)}</th>
               {hasNotes && (
-                <th className="px-2.5 py-1.5 text-left font-medium">{L(LABELS.colNotes)}</th>
+                <th className="px-2.5 py-1.5 text-left font-medium">
+                  {t('page.character.gear.note')}
+                </th>
               )}
             </tr>
           </thead>

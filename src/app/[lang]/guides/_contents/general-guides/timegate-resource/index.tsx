@@ -13,6 +13,7 @@
  */
 import type { ReactNode } from 'react';
 import type { Lang } from '@/lib/i18n/config';
+import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
@@ -38,7 +39,8 @@ const BADGE: Record<SourceType, string> = {
   craft: 'bg-surface-sunken text-content-subtle ring-line-subtle',
 };
 
-export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
+export default async function TimegateResourceGuide({ lang }: { lang: Lang }) {
+  const t = await getT(lang);
   const L = (m: LocalizedText): string => lRec(m, lang) || m.en || '';
   const fmt = (n: number): string => n.toLocaleString('en-US');
 
@@ -95,9 +97,9 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
         <table className="w-full text-sm">
           <thead className="bg-surface-sunken text-content-subtle text-xs">
             <tr>
-              <th className="px-3 py-2 text-left font-medium">{L(LABELS.headers.source)}</th>
-              <th className="px-3 py-2 text-center font-medium">{L(LABELS.headers.weekly)}</th>
-              <th className="px-3 py-2 text-center font-medium">{L(LABELS.headers.monthly)}</th>
+              <th className="px-3 py-2 text-left font-medium">{t('equip.detail.source')}</th>
+              <th className="px-3 py-2 text-center font-medium">{t('home.resets.weekly')}</th>
+              <th className="px-3 py-2 text-center font-medium">{t('home.resets.monthly')}</th>
             </tr>
           </thead>
           <tbody>
@@ -164,7 +166,7 @@ export default function TimegateResourceGuide({ lang }: { lang: Lang }) {
   return (
     <>
       <Prose>{L(LABELS.intro)}</Prose>
-      <SegmentedTabs tabs={tabs} ariaLabel={L(LABELS.headers.source)} urlKey="tab" variant="game" />
+      <SegmentedTabs tabs={tabs} ariaLabel={t('equip.detail.source')} urlKey="tab" variant="game" />
     </>
   );
 }

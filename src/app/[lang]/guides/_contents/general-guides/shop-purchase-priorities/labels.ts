@@ -96,14 +96,6 @@ export const LABELS = {
     fr: 'O = Unique',
     es: 'O = Una vez',
   },
-  colPriority: {
-    en: 'Priority',
-    jp: '優先度',
-    kr: '우선순위',
-    zh: '优先级',
-    fr: 'Priorité',
-    es: 'Prioridad',
-  },
   colItem: {
     en: 'Item',
     jp: 'アイテム',
@@ -135,14 +127,6 @@ export const LABELS = {
     zh: '限制',
     fr: 'Limite',
     es: 'Límite',
-  },
-  colNotes: {
-    en: 'Notes',
-    jp: '備考',
-    kr: '비고',
-    zh: '备注',
-    fr: 'Notes',
-    es: 'Notas',
   },
   seeGearUsageFinder: {
     en: 'See Gear Usage Finder to check which characters your gear matches.',
