@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { emptyDict } from '@datagen/lib/lang';
-import type { Glossaries, Skill } from '@contracts';
-import glossariesData from '@data/generated/glossaries.json';
-import skillsData from '@data/generated/skills.json';
+import type { Skill } from '@contracts';
+import { getGlossaries } from '@/lib/data/glossaries';
+import { getSkills } from '@/lib/data/skills';
 import {
   buildBurstViews,
   buildChainView,
@@ -24,8 +24,8 @@ import {
  * en synthétique et on ANCRE les cas positifs sur le glossaire committé (une clé
  * tooltip réelle) — la suite tourne donc sans `.gamedata`.
  */
-const G = glossariesData as unknown as Glossaries;
-const SKILLS = skillsData as unknown as Record<string, Skill>;
+const G = getGlossaries();
+const SKILLS = getSkills();
 // Deux tooltips du glossaire committé : n'importe lequel produit une chip (la
 // résolution ne teste que l'appartenance à l'index). Calculés, pas codés en dur.
 const REAL_TOOLTIP = Object.keys(G.effectByTooltip)[0];

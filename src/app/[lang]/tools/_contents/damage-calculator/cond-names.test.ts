@@ -8,13 +8,12 @@
  * AUSSI les `tooltipId` des DoT (lignes DoT de la table Résultat).
  */
 import { describe, expect, it } from 'vitest';
-import buffsData from '@data/generated/damage/buffs.json';
-import glossariesData from '@data/generated/glossaries.json';
-import type { DamageBuffsData } from '@/lib/damage/inputs';
+import { getDamageBuffs } from '@/lib/data/damage-buffs';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { buildEffectRefs, type CondNameGlossary } from './cond-names';
 
-const buffs = buffsData as unknown as DamageBuffsData;
-const gloss = glossariesData as unknown as CondNameGlossary;
+const buffs = getDamageBuffs();
+const gloss: CondNameGlossary = getGlossaries();
 
 describe('buildEffectRefs — références d’effets des conditions et des DoT', () => {
   const refs = buildEffectRefs(buffs, gloss, 'en');

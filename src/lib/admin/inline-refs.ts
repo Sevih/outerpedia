@@ -8,8 +8,8 @@
  * La VALIDATION et l'APERÇU fidèle restent côté serveur (`checkText`/`parseText`
  * via la server action `renderInlinePreview`) ; ici on ne sert que la saisie assistée.
  */
-import type { Glossaries } from '@contracts';
 import { loadDataJson } from '@/lib/data/disk';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { curatedKeyIndex, resolveEffectKey } from '@/lib/data/effects';
 import { getAllCharacters, characterDisplayName } from '@/lib/data/characters';
 import {
@@ -109,7 +109,7 @@ export function effectRefsFromKeys(
 
 /** Clés éditoriales d'effet d'un côté : glossaire `effectByKey` + créations curées. */
 function effectRefs(side: 'buff' | 'debuff'): RefItem[] {
-  const G = loadDataJson<Glossaries>('generated/glossaries.json');
+  const G = getGlossaries();
   const keys = new Set<string>(Object.keys(G.effectByKey?.[side] ?? {}));
   // Créations curées adressées par `keys` (mécaniques sans texte de jeu).
   for (const sk of curatedKeyIndex().bySideKey.keys()) {

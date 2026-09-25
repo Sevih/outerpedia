@@ -1,6 +1,6 @@
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import wallpapersData from '@data/generated/wallpapers.json';
+import { getWallpapers } from '@/lib/data/wallpapers';
 import { ARCHIVED } from './archived';
 import { WallpapersGallery, type Wallpaper, type WallpapersData } from './WallpapersGallery';
 
@@ -29,7 +29,7 @@ const CATEGORY_ORDER = [
  */
 export default async function Wallpapers({ lang }: { lang: Lang }) {
   const t = await getT(lang);
-  const source = wallpapersData as WallpapersData;
+  const source: WallpapersData = getWallpapers();
 
   const data: WallpapersData = {};
   const archived: Wallpaper[] = [];

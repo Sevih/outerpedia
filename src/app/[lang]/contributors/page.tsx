@@ -4,19 +4,9 @@ import { getT } from '@/i18n';
 import { createPageMetadata } from '@/lib/seo';
 import { parseText } from '@/lib/parse-text';
 import { img } from '@/lib/images';
-import contributors from '@data/curated/contributors.json';
+import { getContributors } from '@/lib/data/contributors';
 
 export const revalidate = 86400;
-
-/** Un contributeur (curé) — `favoriteCharacter` porte des tags inline `{P/…}`. */
-interface Contributor {
-  id: string;
-  name: string;
-  role: string;
-  avatar: string;
-  favoriteCharacter?: string;
-  quote?: string;
-}
 
 export async function generateMetadata({
   params,
@@ -56,7 +46,7 @@ export default async function ContributorsPage({ params }: { params: Promise<{ l
       </p>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {(contributors as Contributor[]).map((c) => (
+        {getContributors().map((c) => (
           <div key={c.id} className="border-line-subtle bg-surface-raised rounded-lg border p-6">
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-4">

@@ -26,7 +26,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { buildEffectGroups, canonicalizeKeys } from '@/lib/data/effect-filters';
 import { img } from '@/lib/images';
 import { STAT_ICON } from '@/lib/stats';
-import glossariesData from '@data/generated/glossaries.json';
+import { getGlossaries } from '@/lib/data/glossaries';
 
 export const revalidate = 86400;
 
@@ -71,8 +71,7 @@ const TEAM_BONUS_ORDER = [
 ];
 
 /** Libellés localisés des gifts (present_0X → nom), depuis le glossaire. */
-const GIFT_NAMES =
-  (glossariesData as { gifts?: Record<string, Record<string, string>> }).gifts ?? {};
+const GIFT_NAMES: Record<string, Record<string, string>> = getGlossaries().gifts ?? {};
 
 export async function generateMetadata({
   params,

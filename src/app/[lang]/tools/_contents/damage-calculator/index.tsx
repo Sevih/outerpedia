@@ -17,14 +17,15 @@ import {
 import {
   difficultyLabel,
   encounterSpawnContexts,
+  getEncounters,
   modeLabel,
   storyFamilyOf,
   type Encounter,
 } from '@/lib/data/encounters';
 import { getMonster } from '@/lib/data/monsters';
 import { getTranscendTiers } from '@/lib/data/char-progression';
-import progressionData from '@data/generated/progression.json';
-import damageGrowthData from '@data/generated/damage/growth.json';
+import { getProgression } from '@/lib/data/progression';
+import { getDamageGrowth } from '@/lib/data/damage-growth';
 import { statName } from '@/lib/data/stat-glossary';
 import { SHEET_FIELDS, TARGET_FIELDS } from '@/lib/damage/scenario';
 import { presetSpawnStats } from '@/lib/damage/preset-target';
@@ -36,22 +37,14 @@ import type { ActiveBuff } from '@/lib/damage/aggregate';
 import { loadDataJson } from '@/lib/data/disk';
 import { burstSkills, dedupSkills } from '@/lib/skill-view';
 import { img } from '@/lib/images';
-import type {
-  BuffValues,
-  DamageScalingFile,
-  EncountersFile,
-  LangDict,
-  QuirksData,
-  Skill,
-} from '@contracts';
-import scalingData from '@data/generated/damage-scaling.json';
-import passivesData from '@data/generated/equipment/passives.json';
-import eeRawData from '@data/generated/equipment/ee.json';
-import poolsData from '@data/generated/equipment/pools.json';
-import setsRawData from '@data/generated/equipment/sets.json';
-import glossariesData from '@data/generated/glossaries.json';
-import encountersData from '@data/generated/encounters.json';
-import quirksRaw from '@data/generated/quirks.json';
+import type { BuffValues, EncountersFile, LangDict, Skill } from '@contracts';
+import { getDamageScaling } from '@/lib/data/damage-scaling';
+import { getEquipmentPassives } from '@/lib/data/equipment-passives';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
+import { getEquipmentPools } from '@/lib/data/equipment-pools';
+import { getEquipmentSets } from '@/lib/data/equipment-sets';
+import { getGlossaries } from '@/lib/data/glossaries';
+import { getQuirks } from '@/lib/data/quirks';
 import { DamageCalculatorBrowser } from './DamageCalculatorBrowser';
 import {
   type DcBossPassive,
@@ -85,9 +78,9 @@ import {
  *   - monad hors périmètre.
  */
 
-const SCALING = scalingData as unknown as DamageScalingFile;
-const DUNGEONS = encountersData as unknown as EncountersFile;
-const QUIRKS = quirksRaw as unknown as QuirksData;
+const SCALING = getDamageScaling();
+const DUNGEONS = getEncounters();
+const QUIRKS = getQuirks();
 
 // Les QUATRE gros JSON (skills 5,9 Mo, monster-skills 9 Mo, damage/targets,
 // damage/buffs — ~23 Mo au total) sont lus au DISQUE (`loadDataJson`, cache
@@ -109,7 +102,7 @@ interface PassiveEntry {
   values: BuffValues[];
   levels: number[];
 }
-const PASSIVES = passivesData as unknown as Record<string, PassiveEntry>;
+const PASSIVES: Record<string, PassiveEntry> = getEquipmentPassives();
 
 // Mains d'EE (pools résolus) : seuls `buff`/`levels`/`label` servent ici.
 interface PoolRow {
@@ -117,24 +110,24 @@ interface PoolRow {
   levels?: number[];
   label?: LangDict;
 }
-const EE_RAW = eeRawData as unknown as Record<string, { options: string[] }>;
-const POOLS = poolsData as unknown as Record<string, PoolRow[]>;
+const EE_RAW: Record<string, { options: string[] }> = getEquipmentEe();
+const POOLS: Record<string, PoolRow[]> = getEquipmentPools();
 
 // Sets bruts : la CLASSIFICATION (« proportional to missing Health ») se fait
 // sur le texte EN — l'affichage reste localisé via getSetViews.
 interface SetEffectRaw {
   desc?: LangDict;
 }
-const SETS_RAW = setsRawData as unknown as Record<
+const SETS_RAW: Record<
   string,
   { tiers: { '2p'?: SetEffectRaw | null; '4p'?: SetEffectRaw | null }[] }
->;
+> = getEquipmentSets();
 /** Effet de set fonction des PV manquants → l'UI demande les PV actuels. */
 const HP_SCALED_SET = /missing Health/i;
 
 // Glossaire des effets : les buffs/débuffs STANDARDISÉS du jeu (nom, desc à
 // magnitude fixe, icône IG_Buff_*).
-const GLOSS = glossariesData as unknown as {
+const GLOSS: {
   effects: Record<string, { name: LangDict; desc: LangDict; icon: string }>;
   /** Réf de tooltip → id d'effet canonique (pont du nommage des conditions). */
   effectByTooltip: Record<string, string>;
@@ -150,7 +143,7 @@ const GLOSS = glossariesData as unknown as {
   guildRaidSeasons?: Record<string, LangDict>;
   /** Titres localisés des modes (repli si une famille manquait au glossaire). */
   modes?: Record<string, LangDict>;
-};
+} = getGlossaries();
 
 /**
  * Buffs/débuffs de scénario PROPOSÉS : uniquement ceux qui pèsent sur les
@@ -1083,16 +1076,12 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
   // les 11 paliers du jeu) : taux ‰ appliqués sur la stat de BASE seule, HORS
   // multiplicateur de buffs (CalcFinalStat, spec formule § 3) — même donnée
   // que la fiche perso (progression.json, extraction de CharacterArchiveStatTemplet).
-  const codexTiers = (progressionData as { codex: { atk: number; def: number; hp: number }[] })
-    .codex;
+  const codexTiers = getProgression().codex;
 
   // Buffs MAX_HP (spec formule § 16.2), résolus de la donnée damage — jamais
   // codés en dur : guilde indexée PAR NIVEAU ([0] = sans guilde), titre
   // « Premium Body » (somme des lignes hors guilde — une seule en 1.4.9).
-  const damageGrowth = damageGrowthData as {
-    guildMaxHp: { level: number; maxHpValue: number }[];
-    titleMaxHp: { maxHpValue: number }[];
-  };
+  const damageGrowth = getDamageGrowth();
   const guildTiers: number[] = [0];
   for (const tier of damageGrowth.guildMaxHp) {
     guildTiers[tier.level] = tier.maxHpValue;

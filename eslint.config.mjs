@@ -47,6 +47,13 @@ const ADMIN_SHIPS_TO_PROD = [
 ];
 const ADMIN_BOUNDARY_MSG =
   "Frontière admin/ : ce module n'est pas censé partir en production. Les exceptions assumées sont listées dans ADMIN_SHIPS_TO_PROD (eslint.config.mjs) — avant d'y ajouter la tienne, vérifie qu'elle ne porte ni secret ni garde IS_DEV, sinon extrais la brique partagée.";
+// DATA LAYER (CONVENTIONS.md § Données, audit G14) : un JSON de `data/` ne
+// s'importe QUE dans `src/lib/data/**`, où un accesseur par fichier porte le
+// type et le mode de chargement (import statique, disque, runtime R2). Avant la
+// règle, 40+ sites l'importaient en direct, chacun avec son `as unknown as`, et
+// le même fichier y était chargé de deux façons.
+const DATA_LAYER_MSG =
+  "JSON de data/ importé hors du data layer. Passe par (ou crée) son accesseur dans src/lib/data — un module par fichier, pour que le graphe client n'emporte que ce qu'il lit.";
 const SHARED_BRICK_MSG =
   "Ce dossier de briques est PARTAGÉ avec les outils publics de contribution : tout ce qui s'y trouve part dans le bundle de production. Interdit d'y importer un module porteur de secret (server actions `*-actions`) ou dont la sûreté repose sur IS_DEV. Sors la fonction concernée dans un module admin-only, hors de ce dossier (cf. premium-limited-translate.ts).";
 
@@ -189,6 +196,23 @@ const eslintConfig = defineConfig([
             },
           ],
         },
+      ],
+    },
+  },
+  {
+    // Garde-fou du data layer (cf. DATA_LAYER_MSG) — BLOQUANT, partout sauf
+    // `src/lib/data/**`, tests compris. Règle CŒUR `no-restricted-imports` et
+    // non la variante typescript-eslint : les blocs `admin/` ci-dessus tiennent
+    // déjà celle-ci, et en flat config un second bloc sur la MÊME règle
+    // remplacerait leurs options au lieu de s'y ajouter.
+    // Limite : aucune des deux ne voit un `import()` dynamique. Les chargements
+    // à la demande vivent aussi dans le data layer (`damage-tables.ts`,
+    // `patch-legacy.ts`), mais seule la revue le garantit.
+    ignores: ['src/lib/data/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        { patterns: [{ group: ['@data/*', '@data/generated/*'], message: DATA_LAYER_MSG }] },
       ],
     },
   },

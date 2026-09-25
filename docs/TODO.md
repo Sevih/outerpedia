@@ -134,13 +134,6 @@
       `pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/`
       (~800 Mo), puis `curl -I` d'un png pour voir l'en-tête.
 
-### Lot 3 — régler à la source
-
-- [ ] **40+ imports directs de `@data/*` hors data layer** (G14), interdit par
-      CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
-      (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
-      par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,

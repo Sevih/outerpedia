@@ -51,6 +51,11 @@ export interface Encounter {
   monsters: DungeonMonster[];
 }
 
+/** Le fichier complet (id de donjon → donjon), archives sans monstres comprises. */
+export function getEncounters(): EncountersFile {
+  return DUNGEONS;
+}
+
 export function getEncounter(id: string): DungeonRef | undefined {
   return DUNGEONS[id];
 }

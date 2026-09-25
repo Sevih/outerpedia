@@ -1,10 +1,7 @@
 import JsonLd from '@/components/seo/JsonLd';
 import { buildVideoObjectJsonLd } from '@/lib/seo';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
-import videoMetaData from '@data/generated/video-meta.json';
-
-type VideoMeta = { uploadDate: string; title: string; author: string };
-const VIDEO_META = videoMetaData as Record<string, VideoMeta>;
+import { getVideoMeta } from '@/lib/data/video-meta';
 
 /**
  * JSON-LD VideoObject des vidéos embarquées — le pendant SEO de
@@ -18,7 +15,7 @@ const VIDEO_META = videoMetaData as Record<string, VideoMeta>;
  */
 export function VideoJsonLd({ videos }: { videos: VideoItem[] }) {
   const nodes = videos.flatMap((v) => {
-    const meta = VIDEO_META[v.id];
+    const meta = getVideoMeta(v.id);
     const node = buildVideoObjectJsonLd({
       platform: v.platform,
       id: v.id,

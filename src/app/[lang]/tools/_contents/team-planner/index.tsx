@@ -6,9 +6,9 @@ import { mergeStatusEffects } from '@/lib/data/effects';
 import { buildTeamKitView, dedupSkills, type TargetedChip } from '@/lib/skill-view';
 import { isDebuffEffect, type StatusMap } from '@/components/character/EffectChips';
 import type { Skill } from '@contracts';
-import skillsData from '@data/generated/skills.json';
-import eeData from '@data/generated/equipment/ee.json';
-import passivesData from '@data/generated/equipment/passives.json';
+import { getSkills } from '@/lib/data/skills';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
+import { getEquipmentPassives } from '@/lib/data/equipment-passives';
 import { TeamPlannerBrowser, type TpChar, type TpFx, type TpLabels } from './TeamPlannerBrowser';
 
 /**
@@ -25,9 +25,9 @@ import { TeamPlannerBrowser, type TpChar, type TpFx, type TpLabels } from './Tea
 
 type RawEffect = NonNullable<Skill['effects']>[number];
 
-const SKILLS = skillsData as unknown as Record<string, Skill>;
-const EE = eeData as unknown as Record<string, { character?: string; passives?: { id: string }[] }>;
-const PASSIVES = passivesData as unknown as Record<string, { effects?: RawEffect[] }>;
+const SKILLS = getSkills();
+const EE: Record<string, { character?: string; passives?: { id: string }[] }> = getEquipmentEe();
+const PASSIVES: Record<string, { effects?: RawEffect[] }> = getEquipmentPassives();
 
 /** Cible alliée hors soi (l'équipe, un allié, le prochain de la chaîne…). */
 const isTeamTarget = (t: string): boolean =>

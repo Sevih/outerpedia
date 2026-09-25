@@ -11,9 +11,9 @@
  * fixtures et le wrapper l'utilisent ; le client passe par les props).
  */
 
-import damageEquipment from '@data/generated/damage/equipment.json';
-import poolsData from '@data/generated/equipment/pools.json';
-import talismanRawData from '@data/generated/equipment/talisman.json';
+import { getDamageEquipment } from '@/lib/data/damage-equipment';
+import { getEquipmentPools } from '@/lib/data/equipment-pools';
+import { getEquipmentTalismans } from '@/lib/data/equipment-talisman';
 import { getCharacter } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
@@ -21,9 +21,8 @@ import {
   getWeaponFamilies,
   type GearFamily,
 } from '@/lib/data/equipment';
-import type { DamageEquipmentData } from './inputs';
 
-const EQUIPMENT = damageEquipment as unknown as DamageEquipmentData;
+const EQUIPMENT = getDamageEquipment();
 
 /** Groupes d'options uniques (damage) d'un ensemble de membres de famille. */
 export function uniqueGroupsOf(memberIds: string[]): string[] {
@@ -91,8 +90,8 @@ export const TALIS_STAT_SLUG: Record<string, string> = {
 interface TalisPoolRow {
   buff?: string;
 }
-const POOLS = poolsData as unknown as Record<string, TalisPoolRow[]>;
-const TALISMAN_RAW = talismanRawData as unknown as Record<string, { options?: string[] }>;
+const POOLS: Record<string, TalisPoolRow[]> = getEquipmentPools();
+const TALISMAN_RAW: Record<string, { options?: string[] }> = getEquipmentTalismans();
 
 /**
  * Main stats de talisman RÉELLES (union des pools, mêmes 9 stats à tous les

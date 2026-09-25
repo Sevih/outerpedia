@@ -21,11 +21,9 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import { getItemEntry } from '@/lib/data/item-catalog';
-import { loadRuntimeJson } from '@/lib/data/runtime-json';
 import type { InlineItem } from '@/components/inline/ItemInline';
-import bannersData from '@data/curated/banner.json';
-import couponsData from '@data/curated/coupons.json';
-import buffData from '@data/patch-notes/buff-events.json';
+import { loadBanners } from '@/lib/data/banners';
+import { loadCoupons, type RawCoupon } from '@/lib/data/coupons';
 import { serverNow } from '@/lib/time';
 
 /** Une bannière active, prête pour `CharacterCard` + son compte à rebours. */
@@ -54,20 +52,9 @@ export interface CouponVM {
   rewards: CouponReward[];
 }
 
-export interface BuffScheduleEntry {
-  date: string;
-  type: string;
-  raw: string;
-}
-
-type RawCoupon = { code: string; description: Record<string, string>; start: string; end: string };
-/** Entrée de `data/curated/banner.json` (le `name` est un confort d'admin). */
-type RawBanner = { id: string; name: string; start: string; end: string };
-
-const loadCoupons = (): Promise<RawCoupon[]> =>
-  loadRuntimeJson('coupons.json', couponsData as unknown as RawCoupon[]);
-const loadBanners = (): Promise<RawBanner[]> =>
-  loadRuntimeJson('banner.json', bannersData as RawBanner[]);
+// Planning de buff quotidien (dérivé des posts par `get-news`) : servi par son
+// accesseur, ré-exporté pour l'accueil.
+export { getBuffSchedule, type BuffScheduleEntry } from '@/lib/data/buff-events';
 
 /** Jour courant `YYYY-MM-DD` en UTC (les fenêtres actives sont en jours UTC). */
 function todayUTC(): string {
@@ -177,9 +164,4 @@ export async function getAllCoupons(lang: Lang): Promise<CouponFullVM[]> {
         qty,
       })),
     }));
-}
-
-/** Planning de buff quotidien (dérivé des posts par `get-news`). */
-export function getBuffSchedule(): BuffScheduleEntry[] {
-  return ((buffData as { schedule?: BuffScheduleEntry[] }).schedule ?? []).slice();
 }

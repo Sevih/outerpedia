@@ -22,15 +22,18 @@ import {
   type StatusMapI18n,
 } from '@/lib/data/effects';
 import { loadDataJson } from '@/lib/data/disk';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { isDebuffEffect } from '@/components/character/EffectChips';
 import type { ClientEffect, StatusMap } from '@/components/character/EffectChips';
 import type { ChainLevel } from '@/components/character/ChainDualSection';
 
-// Glossaire et curation lus au DISQUE (cache mtime), pas importés : ces
-// fichiers sont réécrits par l'admin en cours de session — un import statique
-// les mettrait dans le graphe de modules et chaque save recompilerait le site
-// (cf. src/lib/data/disk.ts). Ce module est donc SERVEUR uniquement.
-const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json');
+// Curation lue au DISQUE (cache mtime), pas importée : ces fichiers sont
+// réécrits par l'admin en cours de session — un import statique les mettrait
+// dans le graphe de modules et chaque save recompilerait le site (cf.
+// src/lib/data/disk.ts). Ce module est donc SERVEUR uniquement. Le glossaire,
+// lui, passe par son accesseur (import statique) : `effects.ts`, importé
+// ci-dessus, l'a déjà mis dans le graphe — cf. l'en-tête de `glossaries.ts`.
+const G = getGlossaries;
 /** Curation d'AFFICHAGE des kits monstres (cf. doc dans le fichier). Un buff
  * PARTAGÉ entre kits jumeaux peut lister plusieurs porteurs candidats — le
  * premier présent dans le kit l'emporte. `chipAdd` AJOUTE des chips (réfs

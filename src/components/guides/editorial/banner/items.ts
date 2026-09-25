@@ -9,9 +9,9 @@ import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
 import type { InlineItem } from '@/components/inline/ItemInline';
-import itemsData from '@data/generated/items.json';
+import { getCatalog } from '@/lib/data/items';
 
-const ITEMS = itemsData as unknown as Record<string, CatalogEntry>;
+const ITEMS = getCatalog();
 
 function toChip(
   entry: Pick<CatalogEntry, 'name' | 'desc' | 'icon' | 'grade'>,

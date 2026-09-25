@@ -7,6 +7,69 @@
 
 ## 2026-09-25
 
+- **Plus aucun JSON de `data/` importé hors du data layer, et une règle eslint
+  pour que ça tienne** (lot C1, G14 de `docs/audit/transverse.md`). CONVENTIONS
+  l'interdisait déjà, mais 73 imports vivaient dans 38 fichiers (pages perso,
+  six guides, huit outils, `parse-text`, `game-tokens`, `transcendence`, `home`,
+  `preset-gear`, deux pages admin, sept tests), chacun avec son propre
+  `as unknown as`. Correctif en trois temps. (1) Un accesseur par fichier dans
+  `src/lib/data`, sur le modèle d'`items.ts`/`recruit.ts` (import statique,
+  constante typée par le contrat, `getX()`) : 34 modules neufs (`glossaries`,
+  `skills`, `transcend`, `progression`, `hero-growth`, `quirks`,
+  `equipment-{ee,sets,passives,pools,talisman,weapon,accessory,enhance,break-limits}`,
+  `damage-{growth,equipment,buffs,scaling}`, `wallpapers`, `comics`, `bgm`,
+  `video-meta`, `ee-effects`, `contributors`, `banners`, `coupons`,
+  `buff-events`, `patch-posts`…), plus `getEncounters()` dans
+  `encounters.ts`. Les accesseurs existants servent quand ils suffisent :
+  `getCatalog()` (`items.ts`) et `getCharacter()` (`characters.ts`, pour le
+  suivi de compte). **Un module par JSON, pas de regroupement** : un composant
+  `use client` qui importe un accesseur emporte tout le module, donc tous ses
+  JSON ; séparés, le graphe de chaque page contient exactement les fichiers
+  qu'il contenait avant. Les chargements à la demande restent des `import()`
+  dynamiques, déplacés dans `damage-tables.ts` (les cinq tables du moteur et
+  `skill-descs`) et `patch-legacy.ts` (archive Smilegate) : des chunks séparés
+  comme avant, la mémoïsation reste chez l'appelant. Les types de fichier
+  portés par un consommateur sont passés dans l'accesseur (`Contributor`,
+  `RawBanner`, `RawCoupon`, `BuffScheduleEntry`, ré-exporté par `home.ts`). (2)
+  Chaque import remplacé ; là où le consommateur gardait volontairement une
+  forme réduite (« seuls `buff`/`levels`/`label` servent ici »), le cast devient
+  une annotation vérifiée par tsc, qui a validé toutes les formes (y compris
+  `SkillTip`, qui n'a plus de cast). (3) `no-restricted-imports` sur `@data/*`
+  et `@data/generated/*`, en `error`, partout sauf `src/lib/data/**` (tests,
+  pages admin et `datagen/` compris). C'est la règle CŒUR, pas la variante
+  typescript-eslint : les deux blocs de la frontière `admin/` tiennent déjà
+  celle-ci, et en flat config un bloc de plus sur la même règle remplaçait
+  leurs options. Testée sur des fichiers d'essai : bloque `src/lib`, `src/app`,
+  un `.test.ts`, un `.dev.tsx`, `datagen/` ; laisse passer `src/lib/data/` et
+  ses sous-dossiers. **`glossaries.json` : un seul mode, l'import statique via
+  `getGlossaries()`.** `monsters.ts`, `skill-view.ts` et `admin/inline-refs.ts`
+  le lisaient au disque pour qu'un « Enregistrer » de l'extracteur (qui
+  réécrit `.effects`) ne recompile pas les routes. Ça ne protégeait de rien :
+  les trois importent `effects.ts`, qui importe le fichier statiquement (comme
+  une dizaine d'autres modules du data layer). Le fichier était donc déjà dans
+  le graphe, et le disque n'ajoutait qu'une seconde copie parsée de 1,8 Mo,
+  qui pouvait diverger de l'autre le temps d'un save. L'inverse (tout au
+  disque) est impossible : `game-tokens` et les outils le lisent depuis des
+  modules sans `node:fs`. Raisonnement écrit en tête de `glossaries.ts`,
+  commentaires de `monsters.ts` et `skill-view.ts` corrigés. Vérifié :
+  `pnpm typecheck` passe (sortie vide), `pnpm lint` passe (`$ eslint`, sortie
+  vide), `pnpm test` → `Tests  1956 passed (1956)`. Pas de `next build` : le
+  build est réservé à la CI (CLAUDE.md, un build local casse les types du
+  dev). À la place, sur le serveur dev déjà lancé : 24 pages touchées rendues
+  en 200 sans marqueur d'erreur (accueil, `/characters`, fiches en/fr,
+  `/contributors`, `/coupons`, `/tierlist`, les six guides, les huit outils,
+  `/fr/damage-calculator`, `/contribute/ranking-helper`, extracteur admin
+  d'un perso). Rendu identique par construction : chaque accesseur rend
+  l'objet même que l'import, le changement ne touche que l'indirection.
+  Laissé, hors périmètre : la règle ne voit pas les `import()` dynamiques (ni
+  la variante typescript-eslint : aucun `ImportExpression` dans les deux),
+  seule la revue les garde dans le data layer. Dans `src/lib/data`, une
+  dizaine de modules importent encore `glossaries.json` sans passer par
+  l'accesseur (même mode, donc sans effet ; à convertir en passant). Deux
+  autres fichiers restent lus de deux façons : `encounters.json` (disque dans
+  `monsters.ts`, statique dans `encounters.ts`) et `skills.json`, lu au disque
+  par le wrapper du calculateur, statique partout ailleurs.
+
 - **Guides : anglais en dur localisé et `alt` remis à la règle maison** (lot
   B3, H7 et H8 de `docs/audit/guides.md`). H7 — deux clés neuves seulement,
   dans les six locales : `common.cost` (« Cost: » de `gear`, deux sites ; aucun

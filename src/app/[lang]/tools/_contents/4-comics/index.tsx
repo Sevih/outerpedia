@@ -1,6 +1,6 @@
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import comicsFallback from '@data/generated/comics.json';
+import { getCommittedComics } from '@/lib/data/comics';
 import { ComicsGallery, type ComicsData } from './ComicsGallery';
 
 /** Langues d'origine des BD (ordre d'affichage des onglets). */
@@ -28,7 +28,7 @@ async function loadComics(): Promise<ComicsData> {
       /* R2 injoignable OU trop lent → repli committé */
     }
   }
-  return comicsFallback as ComicsData;
+  return getCommittedComics();
 }
 
 /**

@@ -7,7 +7,7 @@
  * vide = libre) et les main stats disponibles (filtrage du select). Les sets
  * restent lus à plat (pas de famille).
  */
-import setsData from '@data/generated/equipment/sets.json';
+import { getEquipmentSets } from '@/lib/data/equipment-sets';
 import {
   getWeaponFamilies,
   getAmuletFamilies,
@@ -92,6 +92,6 @@ export function gearSelectOptions() {
     weapons: familyOptions(getWeaponFamilies()),
     amulets: familyOptions(getAmuletFamilies()),
     talismans: familyOptions(getTalismanFamilies()),
-    sets: toOptions(setsData as unknown as EquipJson),
+    sets: toOptions(getEquipmentSets()),
   };
 }

@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import type { Glossaries } from '@contracts';
-import glossariesData from '@data/generated/glossaries.json';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { splitGameTokens, type GameToken } from '@/lib/game-tokens';
 
-const G = glossariesData as unknown as Glossaries;
+const G = getGlossaries();
 const tokens = (parts: (string | GameToken)[]) =>
   parts.filter((p): p is GameToken => typeof p !== 'string');
 

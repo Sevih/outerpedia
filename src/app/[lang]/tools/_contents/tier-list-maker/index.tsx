@@ -8,7 +8,7 @@ import { loadDataJson } from '@/lib/data/disk';
 import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
-import eeItemsData from '@data/generated/equipment/ee.json';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
 import { TierListMakerBrowser, type TierItem, type TlmLabels } from './TierListMakerBrowser';
 
 /**
@@ -109,7 +109,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
     }
   }
 
-  const ee: TierItem[] = Object.values(eeItemsData as Record<string, EeEntry>)
+  const ee: TierItem[] = Object.values<EeEntry>(getEquipmentEe())
     .map((e) => ({
       key: `e${e.character}`,
       label: lRec(e.name, lang),

@@ -24,6 +24,7 @@ import { levelAt } from '@/lib/skills';
 import { lRec } from '@/lib/i18n/localize';
 import type { Lang } from '@/lib/i18n/config';
 import type { SkillBuffVars } from '@contracts';
+import { loadSkillDescs } from '@/lib/data/damage-tables';
 import type { DcSkillRow } from './contracts';
 
 /** Miroir minimal d'une entrée de la projection (la vérité : datagen). */
@@ -37,9 +38,9 @@ let descs: Record<string, DescEntry> | null = null;
 let pending: Promise<void> | null = null;
 function ensureDescs(): Promise<void> {
   if (descs) return Promise.resolve();
-  pending ??= import('@data/generated/damage/skill-descs.json')
+  pending ??= loadSkillDescs()
     .then((m) => {
-      descs = (m.default as unknown as { skills: Record<string, DescEntry> }).skills;
+      descs = m.skills;
     })
     .catch(() => {
       pending = null; // retentera au prochain survol

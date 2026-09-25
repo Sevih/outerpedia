@@ -1,6 +1,6 @@
 import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import bgmData from '@data/generated/bgm_mapping.json';
+import { getBgmTracks } from '@/lib/data/bgm';
 import { OstPlayer, type BgmTrack } from './OstPlayer';
 
 /**
@@ -15,7 +15,7 @@ import { OstPlayer, type BgmTrack } from './OstPlayer';
  */
 export default async function Ost({ lang }: { lang: Lang }) {
   const t = await getT(lang);
-  const all = bgmData as BgmTrack[];
+  const all: BgmTrack[] = getBgmTracks();
   return (
     <OstPlayer
       lang={lang}

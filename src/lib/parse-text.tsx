@@ -43,15 +43,15 @@ import { ItemInline } from '@/components/inline/ItemInline';
 import { StatInline } from '@/components/inline/StatInline';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { renderGameColors } from '@/components/ui/GameText';
-import type { CatalogEntry, PassiveRef, Skill, LangDict } from '@contracts';
-import skillsData from '@data/generated/skills.json';
-import eeData from '@data/generated/equipment/ee.json';
-import itemsData from '@data/generated/items.json';
+import type { PassiveRef, Skill, LangDict } from '@contracts';
+import { getSkills } from '@/lib/data/skills';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
+import { getCatalog } from '@/lib/data/items';
 
-const SKILLS = skillsData as unknown as Record<string, Skill>;
-const EE = eeData as unknown as Record<string, { name: LangDict }>;
+const SKILLS = getSkills();
+const EE: Record<string, { name: LangDict }> = getEquipmentEe();
 // Catalogue d'items UNIFIÉ (items + monnaies + costumes + curé baked).
-const ITEMS = itemsData as unknown as Record<string, CatalogEntry>;
+const ITEMS = getCatalog();
 
 export interface ParseCtx {
   lang: Lang;

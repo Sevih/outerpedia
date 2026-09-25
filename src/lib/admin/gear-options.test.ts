@@ -13,15 +13,15 @@
  * multi-classes ajoutée par un patch.
  */
 import { describe, expect, it } from 'vitest';
-import weaponData from '@data/generated/equipment/weapon.json';
-import accessoryData from '@data/generated/equipment/accessory.json';
-import talismanData from '@data/generated/equipment/talisman.json';
+import { getEquipmentWeapons } from '@/lib/data/equipment-weapon';
+import { getEquipmentAccessories } from '@/lib/data/equipment-accessory';
+import { getEquipmentTalismans } from '@/lib/data/equipment-talisman';
 import { gearSelectOptions, type GearOption } from './gear-options';
 
-const table = {
-  ...(weaponData as Record<string, { classLimit?: string | null; name?: { en?: string } }>),
-  ...(accessoryData as Record<string, { classLimit?: string | null; name?: { en?: string } }>),
-  ...(talismanData as Record<string, { classLimit?: string | null; name?: { en?: string } }>),
+const table: Record<string, { classLimit?: string | null; name?: { en?: string } }> = {
+  ...getEquipmentWeapons(),
+  ...getEquipmentAccessories(),
+  ...getEquipmentTalismans(),
 };
 
 const options = gearSelectOptions();

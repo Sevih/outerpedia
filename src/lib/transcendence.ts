@@ -19,14 +19,15 @@
  * IL EST CLIENT-SÛR, et c'était la seule objection sérieuse à ce branchement :
  * `transcend.json` fait 30 ko bruts mais 745 OCTETS gzippés — il est massivement
  * répétitif — quand la table à la main en pesait ~1 ko de source. Le surcoût réel
- * pour le navigateur est de l'ordre du néant. Il n'importe QUE ce fichier, jamais
- * `char-progression` (qui traîne 6 Mo de skills/items) : c'est ce qui lui permet
- * d'être lu par un composant `use client`, cf. le même souci dans `lib/images`.
+ * pour le navigateur est de l'ordre du néant. Il ne tire QUE ce fichier (via son
+ * accesseur `@/lib/data/transcend`), jamais `char-progression` (qui traîne 6 Mo
+ * de skills/items) : c'est ce qui lui permet d'être lu par un composant
+ * `use client`, cf. le même souci dans `lib/images`.
  */
-import type { TranscendData, TranscendStep } from '@contracts';
-import transcendData from '@data/generated/transcend.json';
+import type { TranscendStep } from '@contracts';
+import { getTranscend } from '@/lib/data/transcend';
 
-const TRANSCEND = transcendData as unknown as TranscendData;
+const TRANSCEND = getTranscend();
 
 /**
  * `CHARACTER_STAR_COLOR` du jeu, dans le SUFFIXE du sprite (`CM_icon_star_*`).

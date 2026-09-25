@@ -1,15 +1,7 @@
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import postsData from '@data/patch-notes/posts.json';
-import {
-  PatchHistoryBrowser,
-  type PatchHistoryLabels,
-  type PatchPost,
-} from './PatchHistoryBrowser';
-
-interface RawPost extends PatchPost {
-  lang: string;
-}
+import { getPatchPosts } from '@/lib/data/patch-posts';
+import { PatchHistoryBrowser, type PatchHistoryLabels } from './PatchHistoryBrowser';
 
 const TYPES = [
   'update',
@@ -36,7 +28,7 @@ const TYPES = [
 export default async function PatchHistory({ lang }: { lang: Lang }) {
   const t = await getT(lang);
   const effectiveLang = (['en', 'jp', 'kr'] as Lang[]).includes(lang) ? lang : 'en';
-  const posts = (postsData.posts as RawPost[])
+  const posts = getPatchPosts()
     .filter((p) => p.lang === effectiveLang)
     .map(({ id, date, slug, type, title, content }) => ({ id, date, slug, type, title, content }));
 

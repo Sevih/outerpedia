@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import encounters from '@data/generated/encounters.json';
+import { getEncounters } from '@/lib/data/encounters';
 import { expandRankContexts, statAt, type SpawnContext } from '@/lib/monster-stats';
 import type { DungeonRank } from '@contracts';
 
@@ -56,8 +56,8 @@ describe('expandRankContexts — barre de palier vs PV de boss', () => {
 });
 
 describe('encounters.json — le contrat de `DungeonRank.hp` tient sur TOUTE la donnée', () => {
-  const scored = Object.entries(encounters as Record<string, { ranks?: DungeonRank[] }>).flatMap(
-    ([id, d]) => (d.ranks ?? []).map((r, i) => ({ id, i, r })),
+  const scored = Object.entries(getEncounters()).flatMap(([id, d]) =>
+    (d.ranks ?? []).map((r, i) => ({ id, i, r })),
   );
 
   it('tout palier à tranche FERMÉE : hp === max − min + 1 (borne basse absente = 0)', () => {

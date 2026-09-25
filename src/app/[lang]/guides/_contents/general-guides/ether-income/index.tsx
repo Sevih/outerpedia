@@ -6,8 +6,8 @@
  * structurellement (data.ts) : leurs montants suivent le jeu, pas l'éditorial
  * (dont guild raid et world boss étaient périmés — doublés depuis).
  */
-import etherRankingsData from '@data/generated/ether-rankings.json';
-import type { EtherRankTier, EtherRankingsData, LocalizedText } from '@contracts';
+import { getEtherRankings } from '@/lib/data/ether-rankings';
+import type { EtherRankTier, LocalizedText } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
@@ -30,7 +30,7 @@ import {
   type SourceRow,
 } from './Calculator';
 
-const RANKINGS = etherRankingsData as unknown as EtherRankingsData;
+const RANKINGS = getEtherRankings();
 
 /** « voir plus ici » du lien coupons (verbatim). */
 const COUPON_LINK_LABEL: LocalizedText = {

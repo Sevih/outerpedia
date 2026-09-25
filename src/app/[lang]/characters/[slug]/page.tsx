@@ -79,14 +79,14 @@ import {
   type EeCardView,
 } from '@/components/character/detail/EeTranscendSection';
 import { ProsConsSection } from '@/components/character/detail/ProsConsSection';
-import type { Glossaries, LangDict, Skill } from '@contracts';
-import charactersMeta from '@data/generated/glossaries.json';
-import skillsData from '@data/generated/skills.json';
-import eeData from '@data/generated/equipment/ee.json';
+import type { LangDict, Skill } from '@contracts';
+import { getGlossaries } from '@/lib/data/glossaries';
+import { getSkills } from '@/lib/data/skills';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
 
-const G = charactersMeta as unknown as Glossaries;
-const SKILLS = skillsData as unknown as Record<string, Skill>;
-const EE = eeData as unknown as Record<string, { name: LangDict; grade: string }>;
+const G = getGlossaries();
+const SKILLS = getSkills();
+const EE: Record<string, { name: LangDict; grade: string }> = getEquipmentEe();
 
 export function generateStaticParams() {
   const slugs = listCharacterSlugs();

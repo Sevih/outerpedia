@@ -30,11 +30,11 @@ import {
 import { getCatalog } from '@/lib/data/items';
 import { STAR_SPRITE } from '@/lib/images';
 import type { LocalizedText, HeroGrowthData, ItemRef, ItemCost } from '@contracts';
-import growthRaw from '@data/generated/hero-growth.json';
+import { getHeroGrowth } from '@/lib/data/hero-growth';
 import { LABELS, GEAR_POINTS } from './labels';
 import { AFFINITY_GIFTS, AFFINITY_REWARDS, TRANSCENDENCE_STEPS } from './editorial';
 
-const growth = growthRaw as HeroGrowthData;
+const growth = getHeroGrowth();
 const RARITIES = ['1', '2', '3'] as const;
 
 const catalogById = getCatalog();

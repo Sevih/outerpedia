@@ -13,8 +13,7 @@
  * dans `data/curated/characters.json`.
  */
 import { describe, expect, it } from 'vitest';
-import type { TranscendData } from '@contracts';
-import transcendData from '@data/generated/transcend.json';
+import { getTranscend } from '@/lib/data/transcend';
 import {
   transcendenceFullSteps,
   transcendenceLabel,
@@ -24,7 +23,7 @@ import {
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { atStep } from './TierListBrowser';
 
-const TRANSCEND = transcendData as unknown as TranscendData;
+const TRANSCEND = getTranscend();
 
 /** La rareté de référence du sélecteur : la seule à porter des teintes. */
 const R = 3;

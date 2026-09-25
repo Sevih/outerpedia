@@ -21,8 +21,8 @@ import { ItemInline, type InlineItem } from '@/components/inline/ItemInline';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout } from '@/components/guides/editorial/blocks';
 import { itemChipByName } from '@/components/guides/editorial/banner/items';
-import type { LocalizedText, ShopPrioritiesData, ShopEntry, ShopPeriod } from '@contracts';
-import shopDataRaw from '@data/generated/shop-priorities.json';
+import type { LocalizedText, ShopEntry, ShopPeriod } from '@contracts';
+import { getShopPriorities } from '@/lib/data/shop-priorities';
 import { LABELS, SHOP_TABS } from './labels';
 import {
   SHOP_NOTES,
@@ -32,7 +32,7 @@ import {
   type EditorialItem,
 } from './editorial';
 
-const shopData = shopDataRaw as ShopPrioritiesData;
+const shopData = getShopPriorities();
 const WHERE = 'shop-purchase-priorities';
 
 type Priority = 'S' | 'A' | 'B' | 'C';

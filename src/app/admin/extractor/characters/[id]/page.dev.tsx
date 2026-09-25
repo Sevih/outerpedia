@@ -29,14 +29,14 @@ import { tagDef, tagLabel } from '@/lib/data/tags';
 import { getCharacterCurated } from '@/lib/data/curated';
 import { entityReview, extractedBundle } from '@/lib/admin/review-store';
 import { diffLabels, skillLabel } from '@/lib/admin/diff-labels';
-import type { Glossaries, LocalizedText, Skill } from '@contracts';
-import glossariesData from '@data/generated/glossaries.json';
-import committedSkillsData from '@data/generated/skills.json';
-import setsData from '@data/generated/equipment/sets.json';
+import type { LocalizedText, Skill } from '@contracts';
+import { getGlossaries } from '@/lib/data/glossaries';
+import { getSkills } from '@/lib/data/skills';
+import { getEquipmentSets } from '@/lib/data/equipment-sets';
 
-const G = glossariesData as unknown as Glossaries;
-const COMMITTED_SKILLS = committedSkillsData as unknown as Record<string, Skill>;
-const SETS = setsData as unknown as Record<string, { name: LocalizedText }>;
+const G = getGlossaries();
+const COMMITTED_SKILLS = getSkills();
+const SETS: Record<string, { name: LocalizedText }> = getEquipmentSets();
 
 /**
  * VUE EXTRACTOR d'un perso : l'extraction FRAÎCHE (la proposition) + le contrôle

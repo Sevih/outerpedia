@@ -1,10 +1,3 @@
-import heroGrowthData from '@data/generated/hero-growth.json';
-import progressionData from '@data/generated/progression.json';
-import transcendData from '@data/generated/transcend.json';
-import eeData from '@data/generated/equipment/ee.json';
-import skillsData from '@data/generated/skills.json';
-import charactersData from '@data/generated/characters.json';
-import type { HeroGrowthData } from '@datagen/generators/hero-growth';
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
@@ -13,9 +6,15 @@ import { getCatalogEntry } from '@/lib/data/items';
 import {
   characterDisplayName,
   characterSearchNames,
+  getCharacter,
   getCharacterListItems,
   slugForId,
 } from '@/lib/data/characters';
+import { getHeroGrowth } from '@/lib/data/hero-growth';
+import { getProgression } from '@/lib/data/progression';
+import { getTranscend } from '@/lib/data/transcend';
+import { getEquipmentEe } from '@/lib/data/equipment-ee';
+import { getSkills } from '@/lib/data/skills';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { tagsInGroup } from '@/lib/data/tags';
 import {
@@ -33,7 +32,7 @@ import type { LimitBreakCost } from './engine';
  * et pré-traduit les libellés. Tout le reste — l'état du compte — vit côté client.
  */
 
-const growth = heroGrowthData as unknown as HeroGrowthData;
+const growth = getHeroGrowth();
 
 /** `progression.limitBreak` est indexé `${rareté}_${élément}` (mémoire par élément). */
 interface ProgressionLimitBreakStep {
@@ -43,30 +42,27 @@ interface ProgressionLimitBreakStep {
   recallItemId: string;
   price: number;
 }
-const progressionLimitBreak = progressionData.limitBreak as unknown as Record<
-  string,
-  ProgressionLimitBreakStep[]
->;
+const progressionLimitBreak: Record<string, ProgressionLimitBreakStep[]> =
+  getProgression().limitBreak;
 
-const transcend = transcendData as unknown as {
+const transcend: {
   byStar: Record<string, TranscendStep[]>;
   overrides: Record<string, TranscendStep[]>;
-};
+} = getTranscend();
 
 /** Équipements exclusifs, indexés par héros — un par personnage, fusionnés inclus. */
-const exclusiveEquip = eeData as unknown as Record<
+const exclusiveEquip: Record<
   string,
   { name: Record<string, string>; icon: string; grade: string }
->;
-const skills = skillsData as unknown as Record<string, { type: string; icon?: string }>;
-const characters = charactersData as unknown as Record<string, { skills: string[]; ee?: string }>;
+> = getEquipmentEe();
+const skills: Record<string, { type: string; icon?: string }> = getSkills();
 
 /** Les quatre slots qui se montent, DANS l'ordre où l'écran les affiche. */
 const SKILL_TYPES = ['first', 'second', 'ultimate', 'chain_passive'] as const;
 
 /** Icônes des quatre skills améliorables d'un héros (vide si le type manque). */
 function skillIcons(heroId: string): string[] {
-  const owned = (characters[heroId]?.skills ?? []).map((id) => skills[id]).filter(Boolean);
+  const owned = (getCharacter(heroId)?.skills ?? []).map((id) => skills[id]).filter(Boolean);
   return SKILL_TYPES.map((type) => owned.find((s) => s.type === type)?.icon ?? '');
 }
 
@@ -148,7 +144,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
 
   /** Un EE prêt au rendu (tuile à cadre de rareté), ou rien s'il n'existe pas. */
   const eeAsset = (heroId: string): ItemAsset | null => {
-    const eeId = characters[heroId]?.ee;
+    const eeId = getCharacter(heroId)?.ee;
     const e = eeId ? exclusiveEquip[eeId] : undefined;
     return e ? { name: lRec(e.name, lang) || e.name.en, icon: e.icon, grade: e.grade } : null;
   };

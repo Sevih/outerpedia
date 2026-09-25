@@ -16,6 +16,7 @@ import { resolve } from 'node:path';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { loadDataJson } from '@/lib/data/disk';
+import { getGlossaries } from '@/lib/data/glossaries';
 import { buildBossView, type BossView } from '@/lib/data/boss-view';
 import { liveKitSources, type KitSources } from '@/lib/skill-view';
 import { img } from '@/lib/images';
@@ -30,7 +31,9 @@ const MONSTERS = (): MonstersFile => loadDataJson<MonstersFile>('generated/monst
 const SKILLS = (): MonsterSkillsFile =>
   loadDataJson<MonsterSkillsFile>('generated/monster-skills.json');
 const DUNGEONS = (): EncountersFile => loadDataJson<EncountersFile>('generated/encounters.json');
-const G = (): Glossaries => loadDataJson<Glossaries>('generated/glossaries.json');
+// Le glossaire, lui, passe par son accesseur (import statique) : il est déjà
+// dans le graphe via `effects.ts`, cf. l'en-tête de `glossaries.ts`.
+const G = getGlossaries;
 
 /**
  * ID ÉPINGLÉ : `<id>@<n>` désigne un ÉTAT FIGÉ du boss, archivé par le bouton

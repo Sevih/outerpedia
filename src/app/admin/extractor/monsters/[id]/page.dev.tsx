@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Route } from 'next';
-import glossariesJson from '@data/generated/glossaries.json';
-import type { Glossaries, Skill } from '@datagen/contracts';
+import type { Skill } from '@datagen/contracts';
 import { EntityDiffPanel } from '@/components/admin/EntityDiffPanel';
 import { MonsterActions } from '@/components/admin/MonsterActions';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
@@ -28,10 +27,11 @@ import {
   tooltipName,
 } from '@/lib/admin/monster-store';
 import { extractedMonsterBundle } from '@/lib/admin/review-store';
+import { getGlossaries } from '@/lib/data/glossaries';
 
 export const dynamic = 'force-dynamic';
 
-const glossaries = glossariesJson as unknown as Glossaries;
+const glossaries = getGlossaries();
 
 /** Fiche extracteur d'un monstre : extraction fraîche, diff, actions — MÊMES
  * composants que la fiche perso (SkillCard + chips d'effets). */

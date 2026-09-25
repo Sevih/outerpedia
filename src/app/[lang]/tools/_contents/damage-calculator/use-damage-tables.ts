@@ -10,6 +10,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { type DamageData } from '@/lib/damage/inputs';
+import { loadDamageTables } from '@/lib/data/damage-tables';
 import type { Props } from './contracts';
 
 export function useDamageTables({
@@ -35,22 +36,8 @@ export function useDamageTables({
     const scnsWaiting = devMode && savedScnsLen > 0;
     if ((!attackerId && !scnsWaiting) || dmgData || dmgErr || dmgLoading.current) return;
     dmgLoading.current = true;
-    void Promise.all([
-      import('@data/generated/damage/characters.json'),
-      import('@data/generated/damage/growth.json'),
-      import('@data/generated/damage/buffs.json'),
-      import('@data/generated/damage/targets.json'),
-      import('@data/generated/damage/equipment.json'),
-    ])
-      .then(([c, g, b, t, q]) => {
-        setDmgData({
-          characters: c.default,
-          growth: g.default,
-          buffs: b.default,
-          targets: t.default,
-          equipment: q.default,
-        } as unknown as DamageData);
-      })
+    void loadDamageTables()
+      .then(setDmgData)
       .catch((e: unknown) => setDmgErr(e instanceof Error ? e.message : String(e)));
     // `savedScnsLen` : les scénarios arrivent APRÈS montage (hydratation
     // localStorage de useStoredState) — l'effet doit re-tirer à ce moment-là.

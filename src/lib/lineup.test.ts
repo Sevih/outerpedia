@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import encountersData from '@data/generated/encounters.json';
+import { getEncounters } from '@/lib/data/encounters';
 import { lineupRows, rowMode, type LineupEntry } from '@/lib/lineup';
 
 /**
@@ -75,9 +75,7 @@ describe('lineupRows — les modes à stages font entrer et sortir les monstres'
 
 describe('la règle couvre les compositions RÉELLES de la donnée', () => {
   it('toute rencontre du jeu se range sans cas particulier', () => {
-    const dungeons = Object.values(
-      encountersData as Record<string, { monsters?: { role: 'boss' | 'add' }[] }>,
-    );
+    const dungeons = Object.values(getEncounters());
     const modes = new Set<string>();
     for (const d of dungeons) {
       if (!d.monsters?.length) continue;

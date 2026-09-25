@@ -3,6 +3,7 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { prefixAssetSrcs } from '@/lib/images';
+import { loadLegacyPosts } from '@/lib/data/patch-legacy';
 
 export type Era = 'major9' | 'smilegate';
 
@@ -62,9 +63,7 @@ const POSTS_PER_PAGE = 10;
 // qui y pointe). Promesse mémoïsée — un seul fetch quoi qu'il arrive.
 let legacyPromise: Promise<PatchPost[]> | null = null;
 function loadLegacy(): Promise<PatchPost[]> {
-  legacyPromise ??= import('@data/patch-notes/legacy-posts.json').then(
-    (m) => (m.default as { posts: PatchPost[] }).posts,
-  );
+  legacyPromise ??= loadLegacyPosts();
   return legacyPromise;
 }
 

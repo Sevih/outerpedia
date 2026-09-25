@@ -22,12 +22,11 @@
  * « Enemy Mage DMG ») — la détection ne peut donc pas se limiter aux passages
  * colorés. Et zéro faux positif : aucun de ces mots n'apparaît dans un autre sens.
  */
-import type { Glossaries } from '@contracts';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
-import glossariesData from '@data/generated/glossaries.json';
+import { getGlossaries } from '@/lib/data/glossaries';
 
-const G = glossariesData as unknown as Glossaries;
+const G = getGlossaries();
 
 export type GameTokenKind = 'element' | 'class';
 

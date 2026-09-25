@@ -19,17 +19,11 @@ import { img } from '@/lib/images';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose } from '@/components/guides/editorial/blocks';
-import type {
-  LocalizedText,
-  TimegateResourcesData,
-  TimegateItem,
-  TimegateSource,
-  SourceType,
-} from '@contracts';
-import timegateRaw from '@data/generated/timegate-resources.json';
+import type { LocalizedText, TimegateItem, TimegateSource, SourceType } from '@contracts';
+import { getTimegateResources } from '@/lib/data/timegate-resources';
 import { LABELS } from './labels';
 
-const data = timegateRaw as TimegateResourcesData;
+const data = getTimegateResources();
 
 /** Badge par type de source — accents emerald/sky/amber (autorisés) + neutre. */
 const BADGE: Record<SourceType, string> = {

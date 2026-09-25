@@ -35,21 +35,16 @@ import {
 import { getCatalog } from '@/lib/data/items';
 import { getAscensionView, getEquipmentDetail } from '@/lib/data/equipment-detail';
 import { GRADE_RANK } from '@/lib/data/gear-order';
-import type { LocalizedText, EnhanceRules } from '@contracts';
-import enhanceRaw from '@data/generated/equipment/enhance.json';
-import breakLimitsRaw from '@data/generated/equipment/breakLimits.json';
+import type { LocalizedText } from '@contracts';
+import { getEnhanceRules } from '@/lib/data/equipment-enhance';
+import { getBreakLimits } from '@/lib/data/equipment-break-limits';
 import { LABELS } from './labels';
 import { PropertyDiagram } from './PropertyDiagram';
 
-const rules = enhanceRaw as unknown as EnhanceRules;
+const rules = getEnhanceRules();
 
 /** Palier de breakthrough max (T0 → T4) — dérivé du nb de facteurs breakLimits. */
-const MAX_TIER = Math.max(
-  0,
-  ...Object.values(breakLimitsRaw as Record<string, { factors: number[] }>).map(
-    (b) => b.factors.length,
-  ),
-);
+const MAX_TIER = Math.max(0, ...Object.values(getBreakLimits()).map((b) => b.factors.length));
 
 /** Matériaux d'un `subType` du catalogue, triés par rareté (par nom EN). */
 function catalogMaterials(subType: string, contains?: string): string[] {

@@ -15,8 +15,8 @@ import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout, MiniPanel, QACard } from '@/components/guides/editorial/blocks';
 import type { EditorialAccent } from '@/components/guides/editorial/accents';
-import type { LocalizedText, QuirksData } from '@contracts';
-import quirksRaw from '@data/generated/quirks.json';
+import type { LocalizedText } from '@contracts';
+import { getQuirks } from '@/lib/data/quirks';
 import { LABELS, TERMS, ICON_TERM } from './labels';
 import { QuirkTrees, type LocalCategory } from '@/components/quirks/QuirkTrees';
 import {
@@ -26,7 +26,7 @@ import {
   quirkTreeSubLabel,
 } from '@/components/quirks/localize';
 
-const quirks = quirksRaw as unknown as QuirksData;
+const quirks = getQuirks();
 
 /** Nom localisé des catégories (par clé de groupe). */
 const CATEGORY_TERM: Record<string, keyof typeof TERMS> = {

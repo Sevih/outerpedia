@@ -7,8 +7,7 @@ import {
 import { characterTags, loadCuratedCharacters } from '@/lib/data/curated';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { getEEViews, resolvePassives } from '@/lib/data/equipment';
-import eeEffectsData from '@data/generated/ee-effects.json';
-import type { EeEffectsData } from '@datagen/generators/ee-effects';
+import { getEeEffects } from '@/lib/data/ee-effects';
 
 /**
  * Données de l'outil de contribution « ranking helper » (`/contribute/
@@ -25,7 +24,7 @@ import type { EeEffectsData } from '@datagen/generators/ee-effects';
  * `datagen/generators/ee-effects.ts`.
  */
 
-const EE_EFFECTS = eeEffectsData as EeEffectsData;
+const EE_EFFECTS = getEeEffects();
 
 export interface RankingHelperEE {
   name: string;
