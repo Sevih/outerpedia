@@ -128,7 +128,8 @@
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
 - [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : FAIT côté
-      code le 25/09 (`assets:push` pose `attachment`, cf. DONE). Reste le re-push
+      code le 25/09 (`assets:push` pose `attachment`, cf. DONE ; HeroFullArt
+      vivants de `/wallpapers` par `fetch → blob`, lot C3). Reste le re-push
       des objets déjà sur R2, à lancer par Sevih :
       `pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/`
       (~800 Mo), puis `curl -I` d'un png pour voir l'en-tête.

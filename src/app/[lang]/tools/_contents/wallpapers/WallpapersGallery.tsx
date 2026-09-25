@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { wallpaperSrc, wallpaperDownload } from '@/lib/wallpapers';
+import { wallpaperSrc, wallpaperDownload, reusesHeroArt } from '@/lib/wallpapers';
 import { ARCHIVED } from './archived';
 
 /** Une entrée wallpaper (schéma de `data/generated/wallpapers.json`). */
@@ -37,6 +37,28 @@ const HELPSHIFT_URL = 'https://outerplane.helpshift.com/hc/en/4-outerplane/';
 const PORTRAIT = new Set(['HeroFullArt', 'Cutin']);
 
 /**
+ * Enregistre `url` sous `filename` via `fetch → blob → object URL` : l'attribut
+ * `download` est ignoré en cross-origin, et le full-art perso n'est pas servi en
+ * attachment (cf. `reusesHeroArt`). Repli : ouverture simple si le fetch échoue.
+ */
+async function downloadViaBlob(url: string, filename: string): Promise<void> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const objectUrl = URL.createObjectURL(await res.blob());
+    const a = document.createElement('a');
+    a.href = objectUrl;
+    a.download = filename;
+    a.click();
+    // Révocation différée : une révocation synchrone peut couper l'enregistrement
+    // sous certains navigateurs.
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  } catch {
+    window.location.assign(url);
+  }
+}
+
+/**
  * Galerie de wallpapers : onglets de catégorie, grille cliquable (badge de
  * résolution) et lightbox (navigation clavier + téléchargement). Porté tel quel
  * réhabillé sur nos tokens (accent ciel conservé, autorisé hors `guides/**`).
@@ -65,6 +87,7 @@ export function WallpapersGallery({
           portrait: PORTRAIT.has(cat),
           src: wallpaperSrc(cat, w.f),
           download: wallpaperDownload(cat, w.f),
+          blobDownload: reusesHeroArt(cat, w.f),
         };
       }),
     [data, selected],
@@ -242,6 +265,14 @@ export function WallpapersGallery({
             <a
               href={current.download}
               download
+              onClick={
+                current.blobDownload
+                  ? (e) => {
+                      e.preventDefault();
+                      void downloadViaBlob(current.download, `${current.f}.webp`);
+                    }
+                  : undefined
+              }
               className="text-content inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-sky-500"
             >
               <DownloadGlyph className="size-5" />

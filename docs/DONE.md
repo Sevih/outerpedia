@@ -7,6 +7,28 @@
 
 ## 2026-09-25
 
+- **Wallpapers : les HeroFullArt vivants s'enregistrent au lieu de s'ouvrir**
+  (lot C3, suite de C2 / G19). C2 sert `images/download/*` et `audio/bgm/*` en
+  `Content-Disposition: attachment`, mais laisse volontairement
+  `images/characters/full/` en inline (full-arts des fiches, indexés par Google
+  Images) ; or les HeroFullArt VIVANTS de `/wallpapers` se téléchargent depuis
+  là (`wallpaperDownload` renvoie `img.full`), et un `<a download>`
+  cross-origin est ignoré par le navigateur : le bouton de la lightbox ouvrait
+  l'image. `reusesHeroArt` (`src/lib/wallpapers.ts`), déjà la règle interne
+  « HeroFullArt sans suffixe `@n` », est désormais exporté et documenté ;
+  `WallpapersGallery.tsx` en tire un drapeau `blobDownload` par entrée et, pour
+  elles seules, intercepte le clic : `fetch → blob → URL.createObjectURL →
+<a download="<f>.webp">`, object URL révoquée une seconde après le clic,
+  repli sur `location.assign(url)` (l'ouverture d'avant) si le fetch échoue.
+  Archives `@n`, cutins et autres catégories gardent le `<a download>` direct.
+  CORS vérifié : `curl` avec `Origin: https://outerpedia.com` sur
+  `img.outerpedia.com` renvoie `access-control-allow-origin: *` pour un
+  full-art, une archive `@1` et un cutin. Typecheck, lint, 1956 tests verts.
+  Laissé : les objets déjà sur R2 n'ont pas encore l'en-tête `attachment`
+  (re-push de C2 toujours à jouer, cf. TODO), donc cutins et archives
+  s'ouvrent encore d'ici là ; le clic réel dans la lightbox reste à faire à la
+  main.
+
 - **Admin : clés React stables sur les listes réordonnables** (lot A6, audit
   G45). Les blocs de contenu d'`EventsEditor` et les choix des paliers de
   priorité (`PriorityOrderEditor` de `PremiumLimitedParts`) étaient keyés par

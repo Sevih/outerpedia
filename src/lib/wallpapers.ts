@@ -16,8 +16,13 @@ const BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
 
 /** `IMG_2000035@1` : version archivée (cf. datagen/assets/wallpaper-versions). */
 const isArchivedVersion = (f: string): boolean => /@\d+$/.test(f);
-/** HeroFullArt VIVANT = full-art perso réutilisé ; archivé = namespace wallpaper. */
-const reusesHeroArt = (category: string, f: string): boolean =>
+/**
+ * HeroFullArt VIVANT = full-art perso réutilisé ; archivé = namespace wallpaper.
+ * Le vivant est servi SANS `Content-Disposition: attachment` (full-arts des
+ * fiches, indexés par Google Images) : un `<a download>` cross-origin l'ouvre au
+ * lieu de l'enregistrer, d'où le téléchargement par blob côté galerie.
+ */
+export const reusesHeroArt = (category: string, f: string): boolean =>
   category === 'HeroFullArt' && !isArchivedVersion(f);
 
 /** Dossier de service d'une catégorie (les `Full:*` partagent le dossier `Full`). */
