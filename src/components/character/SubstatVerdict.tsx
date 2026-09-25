@@ -96,6 +96,7 @@ function Badge({ kind, labels }: { kind: SubstatVerdictKind; labels: SubstatVerd
   const text = kind === 'pct' ? '%' : kind === 'flat' ? labels.badgeFlat : labels.badgeEven;
   return (
     <span
+      role="img"
       aria-label={meaningOf(kind, labels)}
       className={`text-2xs inline-flex items-center rounded border px-1.5 py-px font-mono leading-4 font-semibold ${BADGE_CLASS[kind]}`}
     >

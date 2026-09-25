@@ -248,7 +248,7 @@ export default async function ExtractorCharacterDetail({
       {burstCards.length > 0 && (
         <section className="space-y-2">
           <h2 className="text-content-strong text-xs font-semibold uppercase">Burst</h2>
-          <BurstSection bursts={burstCards} />
+          <BurstSection bursts={burstCards} label="Burst" />
         </section>
       )}
       {chainView && (

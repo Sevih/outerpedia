@@ -59,6 +59,8 @@ export interface DetailLabels {
   andMore: string;
   activationCost: string;
   stepCosts: string;
+  /** `alt` de l'icône d'or — seule à dire ce que compte le nombre à côté. */
+  gold: string;
   /** Légende de la plage des substats (« min → max »). */
   substatsRange: string;
   /** En-tête de colonne du tableau des coûts par palier. */
@@ -828,7 +830,7 @@ function AxActivationBand({
           <span className="text-stat-accent font-mono font-bold">
             {asc.activation.price.toLocaleString(locale)}
           </span>
-          <img src={img.gold()} alt="Gold" className="h-4.5 w-4.5" width={18} height={18} />
+          <img src={img.gold()} alt={labels.gold} className="h-4.5 w-4.5" width={18} height={18} />
         </span>
         {asc.activation.materials.map((m) => (
           <span key={m.icon} className="inline-flex items-center gap-1.5">
@@ -873,7 +875,7 @@ function AxStepsCard({
             <th className="pb-1.5 pl-2 text-right text-xs whitespace-nowrap">
               <img
                 src={img.gold()}
-                alt="Gold"
+                alt={labels.gold}
                 className="inline h-4.5 w-4.5"
                 width={18}
                 height={18}

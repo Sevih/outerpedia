@@ -39,7 +39,8 @@ export function InlineIcon({
         <span className="relative inline-block shrink-0" style={{ width: size, height: size }}>
           <img
             src={icon}
-            alt={label}
+            alt=""
+            aria-hidden
             className={`absolute inset-0 h-full w-full object-contain ${imageClassName ?? ''}`}
           />
         </span>

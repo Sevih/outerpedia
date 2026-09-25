@@ -408,6 +408,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.tier-list-maker.move_up': '上へ移動',
   'tools.tier-list-maker.move_down': '下へ移動',
   'tools.tier-list-maker.drag_row': 'ドラッグして並べ替え',
+  'tools.tier-list-maker.place_in_tier': '選択中のアイテムをティア {tier} に配置',
+  'tools.tier-list-maker.place_in_pool': '選択中のアイテムをランク外に戻す',
   'tools.tier-list-maker.color': '行の色',
   'tools.tier-list-maker.reset': 'リセット',
   'tools.tier-list-maker.share': 'リンクをコピー',
@@ -1230,6 +1232,8 @@ const jp: Record<TranslationKey, string> = {
   'ost.repeat.one': '1曲リピート',
   'ost.mute': 'ミュート (M)',
   'ost.unmute': 'ミュート解除 (M)',
+  'ost.play': '再生',
+  'ost.pause': '一時停止',
   'ost.archivedNote':
     'これらのトラックはその後のアップデートでゲームから削除されました。アーカイブとしてここに保存しています。',
   // Wallpapers

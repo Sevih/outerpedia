@@ -72,7 +72,8 @@ export function EquipmentIcon({
       {classType && (
         <img
           src={img.klass(classType)}
-          alt={classType}
+          alt=""
+          aria-hidden
           title={classType}
           className="absolute top-[30%] right-[2%] h-[24%] w-[24%]"
         />

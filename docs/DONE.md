@@ -7,6 +7,87 @@
 
 ## 2026-09-25
 
+- **`alt` et accessibilité des outils : règle maison appliquée, cliquables
+  passés en boutons nommés** (lot B6, G37 et G38 de `docs/audit/transverse.md`).
+  G37 : les `alt` contraires à la règle de `CONVENTIONS.md` (décoratif =
+  `alt="" aria-hidden`). Doublons icône + texte rendus muets :
+  `OverviewSection` (élément, classe, sous-classe), `InlineIcon`, `SkillCard`,
+  `SkillsSection` (flèche « → » et icônes de l'ordre de montée), `ItemInline`
+  (l'`alt` ne reste qu'en `iconOnly`, où le nom n'est pas écrit). Étoiles de la
+  fiche perso : un `alt="star"` par étoile faisait annoncer « star » N fois ;
+  elles passent muettes et la rangée porte une phrase `sr-only`
+  (`aria.star_rarity`, le gabarit que `CharacterCard` emploie déjà). Anglais en
+  dur localisé : CP (`alt` = `page.character.cp_title`, déjà l'infobulle), Or
+  dans `StatsRankingSection` et `EquipmentDetail` (clé existante
+  `tools.hero-tracker.gold`, celle que B7 a aussi retenue ; `labels.gold` ajouté
+  aux deux interfaces), carte de burst (prop `label` = `page.character.toc.burst`,
+  `"Burst"` littéral dans l'extracteur admin), glyphe de rang de
+  `TierListBrowser` (`alt={tier}`, comme la légende, plutôt que « Tier S »).
+  Slugs bruts rendus muets, sur le précédent déjà écrit dans `Thumbnail` (mieux
+  se taire que dire le slug anglais à un lecteur japonais) : bandeau « boss » de
+  `Thumbnail`, badge de recrutement de `CharacterCard` et `CharacterPortrait`,
+  icône de classe d'`EquipmentIcon` (l'audit cite `EquipmentIcon.tsx:562,589`,
+  lignes inexistantes, le fichier en fait 120 : lu comme `alt={classType}`, le
+  seul slug brut du composant). `SubstatVerdict` : `role="img"` sur le badge
+  qui portait un `aria-label` sans rôle. `TierListMakerBrowser` : `lang="en"`
+  retiré des noms localisés (ils prennent la langue de la page, césure
+  `hyphens-auto` comprise). G38 : progress-tracker, le libellé de chaque tâche
+  (`TaskItem`, `VHTTaskItem`) devient un `<button type="button">` sans
+  gestionnaire propre, dont le clic remonte au `onClick` de la ligne, qui ne
+  peut pas être un bouton puisqu'elle contient la case à cocher ; la carte
+  Precise Craft devient un `<button aria-pressed>` (`w-full text-left` pour
+  garder la boîte du `<div>`). OST : même montage pour le titre de piste (la
+  ligne contient le lien de téléchargement ; `<p>` → `<span className="block">`,
+  un `<p>` n'a pas sa place dans un bouton), Précédent, Lecture/Pause et Suivant
+  nommés (`common.previous`/`next`, nouvelles `ost.play`/`ost.pause`), lien de
+  téléchargement nommé et visible au focus (`focus-visible:opacity-100`).
+  Team-planner : croix de retrait nommée (« Retirer — <perso> ») et visible au
+  focus (l'audit la notait `opacity-0` hors survol) ; le picker devient une
+  vraie boîte de dialogue (`role="dialog"`, `aria-modal`, `useDialogFocus` avec
+  focus initial sur la recherche, Échap) et sa croix est nommée
+  (`common.close`). Galeries (wallpapers, 4-comics) : la lightbox prend
+  `role="dialog"` et `useDialogFocus` (entrée, piège et retour du focus ; Échap
+  et flèches étaient déjà écoutés), le clic sur le fond restant un raccourci
+  souris. Tier-list-maker, qui n'avait aucun placement au clavier : items
+  (`ItemView`, `CardView`) en `<button>` nommés (`aria-label` = nom affiché,
+  `aria-pressed` = sélection), sélection clavier sur `detail === 0` (le tap
+  souris sélectionne déjà au `pointerup`, le compter au clic le désélectionnerait) ;
+  les zones ne peuvent pas être des boutons (elles contiennent les items), d'où
+  un bouton « placer ici » par tier et pour le pool, rendu tant qu'un item est
+  sélectionné, `sr-only` et visible au seul focus (nouvelles
+  `tools.tier-list-maker.place_in_tier`/`place_in_pool`) ; une sélection au
+  clavier envoie le focus sur le premier d'entre eux (ils précèdent le pool
+  dans le DOM, Tab ne les atteindrait pas), un placement le rend à l'item
+  placé. `tapZone` délègue à un `placeSelected` commun aux deux chemins. Les
+  quatre clés sont dans les six locales ; jp/kr/zh en traduction sobre. Pas de
+  changement visuel pour la souris : classes gardées, et mesure headless des
+  boutons convertis (fond transparent, bordure et padding nuls, police et
+  interligne hérités, largeur égale à la cellule d'origine : titre OST 570 px =
+  la colonne `1fr`) ; seuls ajouts visibles, au focus clavier : lien de
+  téléchargement, croix de retrait, bouton de placement. Vérifié :
+  `pnpm typecheck` (`tsc --noEmit && … -p scripts/tsconfig.json`, sans
+  erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` (`Tests 1956
+passed (1956)`) ; test clavier en Firefox headless (WebDriver BiDi) sur le
+  serveur de dev : OST, 24 Tab jusqu'au premier titre de piste, activation →
+  la piste joue et sa ligne passe active, Tab suivant → lien « Download —
+  Thema - Base » ; tier-list-maker, 94 Tab jusqu'au premier item du pool
+  (« Adelie », `aria-pressed=false`), activation → `true` et focus sur
+  « Place the selected item in tier S », Tab puis Shift+Tab y reviennent,
+  activation → l'item est dans le tier S, le focus dessus, plus aucun bouton de
+  placement ; zéro erreur console. Limite du banc : Firefox headless n'active
+  pas un bouton sur Entrée, pas même Shuffle, déjà présent (fenêtre sans focus
+  système, `:focus-visible` jamais vrai) ; l'Entrée est donc jouée par
+  `activeElement.click()`, le clic `detail = 0` que le navigateur émet pour
+  Entrée ou Espace. À rejouer par Sevih à la vraie touche, en regardant les
+  états de focus (les classes `focus:`/`focus-visible:` sont bien générées
+  dans le CSS servi). Laissé : la barre de progression de l'OST (`<div
+onClick>` de seek, non citée ; il faudrait un `role="slider"`, et ←/→
+  déplacent déjà la lecture), les pastilles de couleur du tier-list-maker (non
+  citées, sans nom), l'`aria-label` « N stars » en anglais d'`EquipmentIcon`
+  (hors liste), le nom de la lightbox des galeries (le nom de fichier, faute
+  de titre traduit), et le badge de recrutement désormais muet (une étiquette
+  localisée demanderait la langue dans `CharacterCard`/`CharacterPortrait`).
+
 - **Chrome des guides éditoriaux passé par `t()`, `labels.ts` rendu à la
   prose** (lot B7, H9 de `docs/audit/guides.md`). L'audit comptait 92 chaînes
   courtes des `labels.ts` déjà présentes dans les locales : deux vocabulaires

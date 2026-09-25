@@ -25,6 +25,7 @@ import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
 import { img, CHAIN_PILL, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import {
   EffectChip,
   EffectIconBadge,
@@ -64,6 +65,9 @@ export interface TpLabels {
   teamNamePlaceholder: string;
   emptySlot: string;
   pickCharacter: string;
+  /** Noms accessibles des boutons icône (croix du slot, fermeture du picker). */
+  remove: string;
+  close: string;
   search: string;
   all: string;
   reset: string;
@@ -152,6 +156,7 @@ function TeamSlot({
   statuses,
   isTop,
   emptyAlt,
+  removeLabel,
   onClick,
   onRemove,
 }: {
@@ -160,6 +165,7 @@ function TeamSlot({
   statuses: StatusMap;
   isTop: boolean;
   emptyAlt: string;
+  removeLabel: string;
   onClick: () => void;
   onRemove: () => void;
 }) {
@@ -195,9 +201,12 @@ function TeamSlot({
             e.stopPropagation();
             onRemove();
           }}
-          className="bg-danger-deep absolute -top-1 -right-1 z-20 rounded-full p-1 text-red-200 opacity-0 shadow transition-opacity group-hover:opacity-100"
+          aria-label={`${removeLabel} — ${char.label}`}
+          // `focus-visible` : masquée hors survol, la croix restait invisible
+          // pour qui y arrivait au clavier.
+          className="bg-danger-deep absolute -top-1 -right-1 z-20 rounded-full p-1 text-red-200 opacity-0 shadow transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
         >
-          <FaXmark className="h-3 w-3" />
+          <FaXmark className="h-3 w-3" aria-hidden />
         </button>
       )}
       {selfRefs.length > 0 && (
@@ -343,6 +352,9 @@ function CharPicker({
   onClose: () => void;
 }) {
   const [query, setQuery] = useState('');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  useDialogFocus(dialogRef, { initial: searchRef, onEscape: onClose });
   const [element, setElement] = useState<string | null>(null);
   const [cls, setCls] = useState<string | null>(null);
 
@@ -371,7 +383,13 @@ function CharPicker({
     }`;
 
   return (
+    // Le clic sur le fond reste un raccourci souris ; au clavier, Échap et la
+    // croix nommée ferment, et le focus est tenu dans la boîte (`useDialogFocus`).
     <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={labels.pickCharacter}
       className="bg-scrim/60 fixed inset-0 z-100 flex items-center justify-center p-4"
       onClick={onClose}
     >
@@ -384,14 +402,16 @@ function CharPicker({
           <button
             type="button"
             onClick={onClose}
+            aria-label={labels.close}
             className="text-content-muted hover:text-content rounded p-1 transition"
           >
-            <FaXmark />
+            <FaXmark aria-hidden />
           </button>
         </div>
         <div className="flex flex-wrap items-center gap-2 px-4 py-3">
           <input
             value={query}
+            ref={searchRef}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={labels.search}
             autoFocus
@@ -617,6 +637,7 @@ export function TeamPlannerBrowser({ chars, fx, statuses, labels: L }: Props) {
       statuses={statuses}
       isTop={idx === 0}
       emptyAlt={L.emptySlot}
+      removeLabel={L.remove}
       onClick={() => setPickerSlot(idx)}
       onRemove={() => handleRemove(idx)}
     />

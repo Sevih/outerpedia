@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { comicSrc, comicThumbSrc } from '@/lib/comics';
 
 /** Catalogue des BD par langue d'origine (schéma de `comics.json`). */
@@ -70,6 +71,10 @@ export function ComicsGallery({
   }, [lightbox, close, nav]);
 
   const current = lightbox !== null ? items[lightbox] : null;
+  // Échap et les flèches sont déjà écoutés au niveau `document` (ci-dessus) :
+  // le hook n'apporte que l'entrée, le piège et le retour du focus.
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, { active: current !== null });
 
   return (
     <div className="mx-auto max-w-5xl">
@@ -136,7 +141,13 @@ export function ComicsGallery({
 
       {/* Lightbox */}
       {current && (
+        // Le clic sur le fond reste un raccourci souris ; au clavier, Échap et
+        // la croix nommée ferment.
         <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={current.stem}
           className="bg-scrim/95 fixed inset-0 z-100 flex items-center justify-center p-4"
           onClick={close}
         >

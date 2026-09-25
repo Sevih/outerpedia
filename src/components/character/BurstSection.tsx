@@ -14,7 +14,14 @@ export interface BurstCard {
  * Composant SERVEUR — les effets arrivent pré-rendus.
  * Rappel jeu : burst 1+2 dès l'obtention, burst 3 à la transcendance 5★.
  */
-export function BurstSection({ bursts }: { bursts: BurstCard[] }) {
+export function BurstSection({
+  bursts,
+  label,
+}: {
+  bursts: BurstCard[];
+  /** « Burst » localisé : le niveau n'est écrit que dans le cadre de la carte. */
+  label: string;
+}) {
   if (!bursts.length) return null;
 
   return (
@@ -28,7 +35,7 @@ export function BurstSection({ bursts }: { bursts: BurstCard[] }) {
           {/* Cadre de la carte (fond du jeu) */}
           <img
             src={img.burstCard(burst.level)}
-            alt={`Burst ${burst.level}`}
+            alt={`${label} ${burst.level}`}
             className="pointer-events-none absolute inset-0 h-full w-full object-contain"
           />
 

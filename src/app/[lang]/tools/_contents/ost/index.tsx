@@ -42,6 +42,10 @@ export default async function Ost({ lang }: { lang: Lang }) {
         },
         mute: t('ost.mute'),
         unmute: t('ost.unmute'),
+        play: t('ost.play'),
+        pause: t('ost.pause'),
+        previous: t('common.previous'),
+        next: t('common.next'),
       }}
     />
   );

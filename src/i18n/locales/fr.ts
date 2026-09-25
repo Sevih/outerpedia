@@ -422,6 +422,8 @@ const fr: Record<TranslationKey, string> = {
   'tools.tier-list-maker.move_up': 'Monter',
   'tools.tier-list-maker.move_down': 'Descendre',
   'tools.tier-list-maker.drag_row': 'Glisser pour réordonner',
+  'tools.tier-list-maker.place_in_tier': "Placer l'élément sélectionné dans le tier {tier}",
+  'tools.tier-list-maker.place_in_pool': "Retirer l'élément sélectionné du classement",
   'tools.tier-list-maker.color': 'Couleur de la ligne',
   'tools.tier-list-maker.reset': 'Réinitialiser',
   'tools.tier-list-maker.share': 'Copier le lien',
@@ -1265,6 +1267,8 @@ const fr: Record<TranslationKey, string> = {
   'ost.repeat.one': 'Répéter la piste',
   'ost.mute': 'Couper le son (M)',
   'ost.unmute': 'Rétablir le son (M)',
+  'ost.play': 'Lecture',
+  'ost.pause': 'Pause',
   'ost.archivedNote':
     'Ces pistes ont été retirées du jeu lors d’une mise à jour ultérieure. Elles sont conservées ici à titre d’archive.',
   // Wallpapers

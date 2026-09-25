@@ -34,6 +34,11 @@ export interface OstStrings {
   repeat: Record<Repeat, string>;
   mute: string;
   unmute: string;
+  /** Noms accessibles des boutons icône du lecteur. */
+  play: string;
+  pause: string;
+  previous: string;
+  next: string;
 }
 
 type Repeat = 'off' | 'one' | 'all';
@@ -431,14 +436,17 @@ export function OstPlayer({
                   )}
                 </div>
 
-                {/* Titre */}
-                <div className="min-w-0">
-                  <p
-                    className={`truncate text-sm md:text-base ${isActive ? 'font-medium text-sky-400' : 'text-content-strong'}`}
+                {/* Titre — le point d'entrée CLAVIER de la ligne : un bouton sans
+                    gestionnaire propre, dont le clic (souris, Entrée, Espace)
+                    remonte au `onClick` de la ligne. La ligne ne peut pas être
+                    elle-même un bouton, elle contient le lien de téléchargement. */}
+                <button type="button" className="w-full min-w-0 text-left">
+                  <span
+                    className={`block truncate text-sm md:text-base ${isActive ? 'font-medium text-sky-400' : 'text-content-strong'}`}
                   >
                     {trackName(track, lang)}
-                  </p>
-                </div>
+                  </span>
+                </button>
 
                 {/* Durée (desktop) */}
                 <div className="text-content-muted hidden text-right text-sm md:block">
@@ -457,9 +465,10 @@ export function OstPlayer({
                   <a
                     href={audioUrl.bgm(track.file)}
                     download={`${track.file}.mp3`}
-                    className="text-content-subtle p-2 opacity-0 transition-opacity group-hover:opacity-100 hover:text-sky-400"
+                    className="text-content-subtle p-2 opacity-0 transition-opacity group-hover:opacity-100 hover:text-sky-400 focus-visible:opacity-100"
                     onClick={(e) => e.stopPropagation()}
                     title={`${strings.download} (${track.size.toFixed(1)} MB)`}
+                    aria-label={`${strings.download} — ${trackName(track, lang)}`}
                   >
                     <DownloadGlyph className="size-4" />
                   </a>
@@ -533,6 +542,7 @@ export function OstPlayer({
                   currentTrackIndex === null ||
                   (currentTrackIndex === 0 && !shuffle && repeat !== 'all')
                 }
+                aria-label={strings.previous}
                 className="text-content-muted hover:text-content-strong p-1 transition-colors disabled:opacity-30"
               >
                 <PrevGlyph className="size-5" />
@@ -541,6 +551,7 @@ export function OstPlayer({
                 type="button"
                 onClick={() => currentTrackIndex !== null && playTrack(currentTrackIndex)}
                 disabled={currentTrackIndex === null || isLoading}
+                aria-label={isPlaying ? strings.pause : strings.play}
                 className="bg-content-strong text-surface-base rounded-full p-2 transition-transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
               >
                 {isLoading ? (
@@ -558,6 +569,7 @@ export function OstPlayer({
                   currentTrackIndex === null ||
                   (currentTrackIndex === tracks.length - 1 && !shuffle && repeat !== 'all')
                 }
+                aria-label={strings.next}
                 className="text-content-muted hover:text-content-strong p-1 transition-colors disabled:opacity-30"
               >
                 <NextGlyph className="size-5" />

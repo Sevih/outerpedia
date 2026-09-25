@@ -81,6 +81,9 @@ export interface TlmLabels {
   moveUp: string;
   moveDown: string;
   dragRow: string;
+  /** Boutons de placement clavier (`{tier}` = libellé de la ligne). */
+  placeInTier: string;
+  placeInPool: string;
   color: string;
   reset: string;
   share: string;
@@ -377,6 +380,8 @@ type ItemViewProps = {
   showClass: boolean;
   showRarity: boolean;
   onPointerDown: (e: React.PointerEvent, key: string) => void;
+  /** Sélection au CLAVIER (Entrée / Espace) — la souris passe par `onPointerDown`. */
+  onKeySelect: (key: string) => void;
 };
 
 const ItemView = memo(function ItemView({
@@ -392,12 +397,20 @@ const ItemView = memo(function ItemView({
   showClass,
   showRarity,
   onPointerDown,
+  onKeySelect,
 }: ItemViewProps) {
   const s = ITEM_SIZES[size];
   return (
-    <div
+    // Un bouton pour le CLAVIER : `detail === 0` signe un clic né d'Entrée ou
+    // d'Espace — le tap souris/tactile, lui, sélectionne déjà au `pointerup`
+    // (le compter ici le désélectionnerait aussitôt).
+    <button
+      type="button"
       data-item-key={item.key}
       onPointerDown={(e) => onPointerDown(e, item.key)}
+      onClick={(e) => e.detail === 0 && onKeySelect(item.key)}
+      aria-label={label}
+      aria-pressed={selected}
       title={item.label}
       className={`relative flex shrink-0 cursor-grab touch-none flex-col items-center select-none ${showName || skinLabel ? s.col : ''} ${dimmed ? 'opacity-30' : ''}`}
     >
@@ -452,22 +465,16 @@ const ItemView = memo(function ItemView({
         ) : null}
       </div>
       {showName && (
-        <span
-          lang="en"
-          className="text-content-muted text-2xs mt-0.5 w-full text-center leading-tight hyphens-auto"
-        >
+        <span className="text-content-muted text-2xs mt-0.5 w-full text-center leading-tight hyphens-auto">
           {shortLabel || label}
         </span>
       )}
       {skinLabel && (
-        <span
-          lang="en"
-          className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight"
-        >
+        <span className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight">
           {skinLabel}
         </span>
       )}
-    </div>
+    </button>
   );
 });
 
@@ -505,6 +512,8 @@ type CardViewProps = {
   showStars: boolean;
   showBadge: boolean;
   onPointerDown: (e: React.PointerEvent, key: string) => void;
+  /** Sélection au CLAVIER (Entrée / Espace) — la souris passe par `onPointerDown`. */
+  onKeySelect: (key: string) => void;
 };
 
 const CardView = memo(function CardView({
@@ -520,12 +529,18 @@ const CardView = memo(function CardView({
   showStars,
   showBadge,
   onPointerDown,
+  onKeySelect,
 }: CardViewProps) {
   const badge = showBadge ? recruitBadge(item.tags) : null;
   return (
-    <div
+    // Bouton clavier : même règle que `ItemView`.
+    <button
+      type="button"
       data-item-key={item.key}
       onPointerDown={(e) => onPointerDown(e, item.key)}
+      onClick={(e) => e.detail === 0 && onKeySelect(item.key)}
+      aria-label={skinLabel ?? label}
+      aria-pressed={selected}
       title={skinLabel ?? label}
       className={[
         CARD_SIZES[size],
@@ -559,7 +574,7 @@ const CardView = memo(function CardView({
           {skinLabel}
         </span>
       )}
-    </div>
+    </button>
   );
 });
 
@@ -971,9 +986,8 @@ export function TierListMakerBrowser({
   useEffect(() => cleanupPointer, [cleanupPointer]);
 
   // ── Toucher-placer : taper un tier / le pool avec un item sélectionné ──
-  const tapZone = useCallback(
-    (e: React.MouseEvent, action: 'pool' | string) => {
-      if ((e.target as HTMLElement).closest('[data-item-key]')) return; // géré par l'item
+  const placeSelected = useCallback(
+    (action: 'pool' | string) => {
       if (!selectedKey) return;
       if (action === 'pool') setTiers((prev) => removeKey(prev, selectedKey));
       else setTiers((prev) => placeKey(prev, selectedKey, action, null));
@@ -981,6 +995,38 @@ export function TierListMakerBrowser({
     },
     [selectedKey],
   );
+  const tapZone = useCallback(
+    (e: React.MouseEvent, action: 'pool' | string) => {
+      if ((e.target as HTMLElement).closest('[data-item-key]')) return; // géré par l'item
+      placeSelected(action);
+    },
+    [placeSelected],
+  );
+  // Le même placement au CLAVIER : les zones ne peuvent pas être des boutons
+  // (elles contiennent les items, eux-mêmes boutons), d'où un bouton dédié par
+  // zone, rendu tant qu'un item est sélectionné et visible au seul focus. Le
+  // focus suit ensuite l'item placé — sans quoi il retomberait sur `<body>`.
+  const placeByKeyboard = (e: React.MouseEvent, action: 'pool' | string) => {
+    e.stopPropagation();
+    const key = selectedKey;
+    placeSelected(action);
+    if (key)
+      requestAnimationFrame(() =>
+        document.querySelector<HTMLElement>(`[data-item-key="${CSS.escape(key)}"]`)?.focus(),
+      );
+  };
+  // Sélection au clavier : le focus saute au premier bouton de placement (le
+  // tier du haut) — ils précèdent le pool dans l'ordre du DOM, Tab depuis un item
+  // du pool ne les atteindrait jamais. Désélection : plus de bouton, rien ne bouge.
+  const keySelect = useCallback(
+    (key: string) => {
+      handleTap(key);
+      requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-place]')?.focus());
+    },
+    [handleTap],
+  );
+  const placeBtnClass =
+    'sr-only focus:not-sr-only focus:rounded focus:bg-amber-400 focus:px-2 focus:py-1 focus:text-xs focus:font-semibold focus:text-[#1a1a1a]';
 
   // ── Opérations sur les lignes ──
   const updateTier = (id: string, patch: Partial<Tier>) =>
@@ -1682,6 +1728,16 @@ export function TierListMakerBrowser({
                     data-items
                     className="bg-surface-sunken/60 flex min-h-15 flex-1 flex-wrap content-start gap-1 p-1.5"
                   >
+                    {selectedKey && (
+                      <button
+                        type="button"
+                        data-place
+                        onClick={(e) => placeByKeyboard(e, tier.id)}
+                        className={placeBtnClass}
+                      >
+                        {L.placeInTier.replace('{tier}', tier.label || String(idx + 1))}
+                      </button>
+                    )}
                     {(() => {
                       const showMarker = !!drag && dropAt?.tierId === tier.id;
                       const markerIdx = dropAt?.index ?? -1;
@@ -1720,6 +1776,7 @@ export function TierListMakerBrowser({
                               showStars={showRarity}
                               showBadge={showCardTags}
                               onPointerDown={onItemPointerDown}
+                              onKeySelect={keySelect}
                             />,
                           );
                         } else {
@@ -1738,6 +1795,7 @@ export function TierListMakerBrowser({
                               showClass={showClass}
                               showRarity={showRarity}
                               onPointerDown={onItemPointerDown}
+                              onKeySelect={keySelect}
                             />,
                           );
                         }
@@ -1932,6 +1990,16 @@ export function TierListMakerBrowser({
             onClick={(e) => tapZone(e, 'pool')}
             className="border-line bg-surface-sunken/40 mt-4 flex min-h-20 flex-wrap content-start justify-center gap-1.5 rounded-lg border border-dashed p-3"
           >
+            {selectedKey && (
+              <button
+                type="button"
+                data-place
+                onClick={(e) => placeByKeyboard(e, 'pool')}
+                className={placeBtnClass}
+              >
+                {L.placeInPool}
+              </button>
+            )}
             {poolItems.length === 0 ? (
               <p className="text-content-subtle py-6 text-sm">
                 {placed.size > 0 &&
@@ -1960,6 +2028,7 @@ export function TierListMakerBrowser({
                   showClass={showClass}
                   showRarity={showRarity}
                   onPointerDown={onItemPointerDown}
+                  onKeySelect={keySelect}
                 />
               ))
             )}

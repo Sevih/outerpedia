@@ -418,6 +418,8 @@ const en = {
   'tools.tier-list-maker.move_up': 'Move up',
   'tools.tier-list-maker.move_down': 'Move down',
   'tools.tier-list-maker.drag_row': 'Drag to reorder',
+  'tools.tier-list-maker.place_in_tier': 'Place the selected item in tier {tier}',
+  'tools.tier-list-maker.place_in_pool': 'Unrank the selected item',
   'tools.tier-list-maker.color': 'Row color',
   'tools.tier-list-maker.reset': 'Reset',
   'tools.tier-list-maker.share': 'Copy link',
@@ -1258,6 +1260,8 @@ const en = {
   'ost.repeat.one': 'Repeat one',
   'ost.mute': 'Mute (M)',
   'ost.unmute': 'Unmute (M)',
+  'ost.play': 'Play',
+  'ost.pause': 'Pause',
   'ost.archivedNote':
     'These tracks were removed from the game in a later update. They are kept here as an archive.',
   // Wallpapers

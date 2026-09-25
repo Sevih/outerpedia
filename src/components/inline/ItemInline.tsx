@@ -54,7 +54,8 @@ export function ItemInline({
         {item.iconSrc && (
           <img
             src={item.iconSrc}
-            alt={item.name}
+            alt={iconOnly ? item.name : ''}
+            aria-hidden={!iconOnly || undefined}
             width={size}
             height={size}
             className="absolute inset-0 h-full w-full object-contain"

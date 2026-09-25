@@ -127,6 +127,8 @@ export default async function TeamPlanner({ lang }: { lang: Lang }) {
     teamNamePlaceholder: t('tools.team-planner.team_name.placeholder'),
     emptySlot: t('tools.team-planner.empty_slot'),
     pickCharacter: t('tools.team-planner.pick_character'),
+    remove: t('common.remove'),
+    close: t('common.close'),
     search: t('common.search'),
     all: t('common.all'),
     reset: t('tools.team-planner.reset'),

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { wallpaperSrc, wallpaperDownload, reusesHeroArt } from '@/lib/wallpapers';
 import { ARCHIVED } from './archived';
 
@@ -119,6 +120,10 @@ export function WallpapersGallery({
   }, [lightbox, close, nav]);
 
   const current = lightbox !== null ? items[lightbox] : null;
+  // Échap et les flèches sont déjà écoutés au niveau `document` (ci-dessus) :
+  // le hook n'apporte que l'entrée, le piège et le retour du focus.
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, { active: current !== null });
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -207,7 +212,13 @@ export function WallpapersGallery({
 
       {/* Lightbox */}
       {current && (
+        // Le clic sur le fond reste un raccourci souris ; au clavier, Échap et
+        // la croix nommée ferment.
         <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={current.f}
           className="bg-scrim/95 fixed inset-0 z-100 flex items-center justify-center p-4"
           onClick={close}
         >

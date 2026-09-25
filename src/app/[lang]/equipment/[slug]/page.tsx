@@ -92,6 +92,7 @@ export default async function EquipmentDetailPage({
     andMore: t('equip.detail.and_more'),
     activationCost: t('equip.detail.activation_cost'),
     stepCosts: t('equip.detail.step_costs'),
+    gold: t('tools.hero-tracker.gold'),
     substatsRange: t('equip.detail.minmax'),
     step: t('equip.detail.step'),
     grade: t('equip.detail.grade'),

@@ -43,6 +43,8 @@ export interface StatsRankingLabels {
   off: string;
   /** Tooltip du CP (l'infobulle explique le contexte du calcul). */
   cpTitle: string;
+  /** `alt` de l'icône d'or — seule à dire ce que compte le nombre à côté. */
+  gold: string;
 }
 
 export interface TierEntry {
@@ -134,7 +136,7 @@ export function StatsRankingSection({
               >
                 <img
                   src={img.power()}
-                  alt="CP"
+                  alt={labels.cpTitle}
                   className="h-4 w-4 object-contain"
                   width={16}
                   height={16}
@@ -288,7 +290,7 @@ export function StatsRankingSection({
                 <span className="flex items-center gap-1.5">
                   <img
                     src={img.gold()}
-                    alt="Gold"
+                    alt={labels.gold}
                     className="h-5 w-5 object-contain"
                     width={20}
                     height={20}

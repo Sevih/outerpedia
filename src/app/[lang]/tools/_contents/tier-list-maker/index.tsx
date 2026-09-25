@@ -156,6 +156,8 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
     moveUp: t('tools.tier-list-maker.move_up'),
     moveDown: t('tools.tier-list-maker.move_down'),
     dragRow: t('tools.tier-list-maker.drag_row'),
+    placeInTier: t('tools.tier-list-maker.place_in_tier'),
+    placeInPool: t('tools.tier-list-maker.place_in_pool'),
     color: t('tools.tier-list-maker.color'),
     reset: t('tools.tier-list-maker.reset'),
     share: t('tools.tier-list-maker.share'),

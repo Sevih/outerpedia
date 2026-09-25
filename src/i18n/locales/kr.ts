@@ -399,6 +399,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.tier-list-maker.move_up': '위로 이동',
   'tools.tier-list-maker.move_down': '아래로 이동',
   'tools.tier-list-maker.drag_row': '드래그하여 순서 변경',
+  'tools.tier-list-maker.place_in_tier': '선택한 항목을 {tier} 티어에 배치',
+  'tools.tier-list-maker.place_in_pool': '선택한 항목을 평가에서 제외',
   'tools.tier-list-maker.color': '행 색상',
   'tools.tier-list-maker.reset': '초기화',
   'tools.tier-list-maker.share': '링크 복사',
@@ -1217,6 +1219,8 @@ const kr: Record<TranslationKey, string> = {
   'ost.repeat.one': '한 곡 반복',
   'ost.mute': '음소거 (M)',
   'ost.unmute': '음소거 해제 (M)',
+  'ost.play': '재생',
+  'ost.pause': '일시정지',
   'ost.archivedNote':
     '이 트랙은 이후 업데이트에서 게임에서 삭제되었습니다. 보관용으로 여기에 남겨 두었습니다.',
   // Wallpapers

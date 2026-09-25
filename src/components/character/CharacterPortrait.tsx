@@ -154,7 +154,8 @@ export function CharacterPortrait({
         {badge && (
           <img
             src={img.recruitTag(badge)}
-            alt={badge}
+            alt=""
+            aria-hidden
             className="absolute top-0 left-0 z-10 w-[68%] drop-shadow-md"
           />
         )}

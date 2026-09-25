@@ -143,9 +143,6 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] `alt` contraires à la règle maison (18 sites, G37) ; `<div onClick>` et
-      boutons icône sans nom dans progress-tracker, OST, tier-list-maker,
-      team-planner, galeries (G38).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
       3 barres élément/classe, `CLASSES` en dur ×4, `CLASS_SLUGS` ×2 et
       `ELEMENTS` ×2 FAIT (`CLASS_ORDER`, `ELEMENT_ORDER`) — reste presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de

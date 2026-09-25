@@ -190,7 +190,8 @@ export function CharacterCard({
       {badgeTag && (
         <img
           src={img.recruitTag(badgeTag)}
-          alt={badgeTag}
+          alt=""
+          aria-hidden
           className="absolute top-0 left-0 z-10 w-[60%] drop-shadow-md"
         />
       )}

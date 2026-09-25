@@ -485,7 +485,8 @@ export function Thumbnail(props: ThumbnailProps) {
       {showBoss && (
         <img
           src={skin.boss}
-          alt="boss"
+          alt=""
+          aria-hidden
           className="absolute"
           style={corner('top-left', BANNER)}
           loading="lazy"

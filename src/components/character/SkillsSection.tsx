@@ -45,11 +45,18 @@ export function SkillsSection({
             {priority.steps.map((step, i) => (
               <Fragment key={i}>
                 {i > 0 && (
-                  <img src={img.chainArrow()} alt="→" width={24} height={24} className="mt-2.5" />
+                  <img
+                    src={img.chainArrow()}
+                    alt=""
+                    aria-hidden
+                    width={24}
+                    height={24}
+                    className="mt-2.5"
+                  />
                 )}
                 <span className="flex flex-col items-center gap-1">
                   {step.icon && (
-                    <img src={img.skill(step.icon)} alt={step.name} width={36} height={36} />
+                    <img src={img.skill(step.icon)} alt="" aria-hidden width={36} height={36} />
                   )}
                   <span className="text-xs font-semibold text-yellow-300">{step.name}</span>
                 </span>

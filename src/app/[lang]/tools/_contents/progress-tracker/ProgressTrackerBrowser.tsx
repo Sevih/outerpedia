@@ -1004,11 +1004,15 @@ function TaskItem({
         onClick={(e) => e.stopPropagation()}
         className="size-5 shrink-0 cursor-pointer accent-sky-500"
       />
-      <span
-        className={`flex-1 ${completed ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
+      {/* Le libellé est le point d'entrée CLAVIER du +1 : un bouton sans
+          gestionnaire propre, dont le clic remonte au `onClick` de la ligne (qui
+          ne peut pas être un bouton, elle contient la case à cocher). */}
+      <button
+        type="button"
+        className={`flex-1 cursor-pointer text-left ${completed ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
       >
         <TaskLabel def={def} completed={completed} labels={labels} assets={assets} />
-      </span>
+      </button>
       <span className="text-content-muted text-sm">
         {count}/{max}
       </span>
@@ -1053,11 +1057,13 @@ function VHTTaskItem({
           onClick={(e) => e.stopPropagation()}
           className="size-5 shrink-0 cursor-pointer accent-sky-500"
         />
-        <span
-          className={`flex-1 ${fullyCompleted ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
+        {/* Point d'entrée clavier du +1, comme dans `TaskItem`. */}
+        <button
+          type="button"
+          className={`flex-1 cursor-pointer text-left ${fullyCompleted ? 'text-content-subtle line-through' : 'text-content'} group-hover:text-content-strong transition`}
         >
           {labels.tasks[def.id]}
-        </span>
+        </button>
         <span className="text-xs text-cyan-400/80">
           {labels.vhtFloors} 1-{phase * 5}
         </span>
@@ -1350,8 +1356,10 @@ function PreciseCraftSection({
         />
         <h3 className="text-lg font-semibold text-purple-400">{labels.preciseCraft}</h3>
       </div>
-      <div
-        className={`flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-all ${
+      <button
+        type="button"
+        aria-pressed={completed}
+        className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-left transition-all ${
           completed
             ? 'bg-surface-raised/30 opacity-60'
             : available
@@ -1394,7 +1402,7 @@ function PreciseCraftSection({
             <div className="mt-1 text-xs text-purple-400">{labels.availableNow}</div>
           )}
         </div>
-      </div>
+      </button>
     </div>
   );
 }

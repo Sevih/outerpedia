@@ -352,7 +352,7 @@ export function TierListBrowser({
                 <div className="flex min-h-20 w-16 shrink-0 items-center justify-center md:w-20">
                   <img
                     src={img.rank(tier)}
-                    alt={`Tier ${tier}`}
+                    alt={tier}
                     className="size-12 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:size-14"
                     width={48}
                     height={48}

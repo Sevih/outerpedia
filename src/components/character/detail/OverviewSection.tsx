@@ -118,23 +118,26 @@ export async function OverviewSection(p: OverviewProps) {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span className="inline-flex items-center gap-0.5">
               {[...Array(p.rarity)].map((_, i) => (
-                <img key={i} src={p.starSrc} alt="star" width={20} height={20} />
+                <img key={i} src={p.starSrc} alt="" aria-hidden width={20} height={20} />
               ))}
+              {/* Une phrase pour la rangée entière : un `alt` par étoile ferait
+                  annoncer « star » autant de fois que la rareté. */}
+              <span className="sr-only">{t('aria.star_rarity', { rarity: p.rarity })}</span>
             </span>
             <span className="h-4.5 w-px bg-white/15" />
             <span
               className={`inline-flex items-center gap-1.5 text-sm font-medium ${p.element.textClass}`}
             >
-              <img src={p.element.iconSrc} alt={p.element.label} width={22} height={22} />
+              <img src={p.element.iconSrc} alt="" aria-hidden width={22} height={22} />
               {p.element.label}
             </span>
             <span className="inline-flex items-center gap-1.5 text-sm text-zinc-200">
-              <img src={p.klass.iconSrc} alt={p.klass.label} width={22} height={22} />
+              <img src={p.klass.iconSrc} alt="" aria-hidden width={22} height={22} />
               {p.klass.label}
             </span>
             {p.subClass && (
               <span className="inline-flex items-center gap-1.5 text-sm text-zinc-400">
-                <img src={p.subClass.iconSrc} alt={p.subClass.label} width={22} height={22} />
+                <img src={p.subClass.iconSrc} alt="" aria-hidden width={22} height={22} />
                 {p.subClass.label}
               </span>
             )}

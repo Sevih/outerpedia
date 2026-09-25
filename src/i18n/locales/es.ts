@@ -419,6 +419,8 @@ const es: Record<TranslationKey, string> = {
   'tools.tier-list-maker.move_up': 'Mover arriba',
   'tools.tier-list-maker.move_down': 'Mover abajo',
   'tools.tier-list-maker.drag_row': 'Arrastra para reordenar',
+  'tools.tier-list-maker.place_in_tier': 'Colocar el elemento seleccionado en el tier {tier}',
+  'tools.tier-list-maker.place_in_pool': 'Quitar el elemento seleccionado de la clasificación',
   'tools.tier-list-maker.color': 'Color de fila',
   'tools.tier-list-maker.reset': 'Reiniciar',
   'tools.tier-list-maker.share': 'Copiar enlace',
@@ -1271,6 +1273,8 @@ const es: Record<TranslationKey, string> = {
   'ost.repeat.one': 'Repetir una',
   'ost.mute': 'Silenciar (M)',
   'ost.unmute': 'Activar sonido (M)',
+  'ost.play': 'Reproducir',
+  'ost.pause': 'Pausa',
   'ost.archivedNote':
     'Estas pistas se retiraron del juego en una actualización posterior. Se conservan aquí como archivo.',
   // Wallpapers

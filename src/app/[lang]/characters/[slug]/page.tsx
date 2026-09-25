@@ -384,6 +384,7 @@ export default async function CharacterDetail({
             on: t('common.on'),
             off: t('common.off'),
             cpTitle: t('page.character.cp_title'),
+            gold: t('tools.hero-tracker.gold'),
           }}
           locale={LANGUAGES[lang].htmlLang}
         />
@@ -467,7 +468,7 @@ export default async function CharacterDetail({
       anchor: 'burst',
       title: t('page.character.toc.burst'),
       row: 'kit',
-      body: <BurstSection bursts={burstCards} />,
+      body: <BurstSection bursts={burstCards} label={t('page.character.toc.burst')} />,
     });
   }
   if (chainView) {

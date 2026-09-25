@@ -391,6 +391,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.tier-list-maker.move_up': '上移',
   'tools.tier-list-maker.move_down': '下移',
   'tools.tier-list-maker.drag_row': '拖动以重新排序',
+  'tools.tier-list-maker.place_in_tier': '将所选项目放入 {tier} 行',
+  'tools.tier-list-maker.place_in_pool': '将所选项目移出评级',
   'tools.tier-list-maker.color': '行颜色',
   'tools.tier-list-maker.reset': '重置',
   'tools.tier-list-maker.share': '复制链接',
@@ -1195,6 +1197,8 @@ const zh: Record<TranslationKey, string> = {
   'ost.repeat.one': '单曲循环',
   'ost.mute': '静音 (M)',
   'ost.unmute': '取消静音 (M)',
+  'ost.play': '播放',
+  'ost.pause': '暂停',
   'ost.archivedNote': '这些曲目已在后续更新中从游戏移除，在此作为存档保留。',
   // Wallpapers
   'wallpapers.description': '浏览并下载异域战记官方艺术作品。点击任意图片即可预览并下载。',
