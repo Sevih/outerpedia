@@ -110,10 +110,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Construite et CHARGÉE dans le Docker du runner, pas encore poussée :
+      # l'image ne part sur GHCR (donc en prod, le deploy tire `latest`)
+      # qu'après avoir démarré ci-dessous.
       - uses: docker/build-push-action@v7
         with:
           context: .
-          push: true
+          load: true
+          push: false
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
@@ -125,6 +129,36 @@ jobs:
           # couches de l'image finale. On perd le cache du `pnpm install`
           # (~40 s au build suivant), on gagne ~4 min d'export : large positif.
           cache-to: type=gha,mode=min
+
+      # Le build peut réussir et l'image planter au lancement : le 25/09/2026,
+      # next 16.3.1 a produit une sortie standalone sans ./esm/ de
+      # @swc/helpers → MODULE_NOT_FOUND au démarrage, conteneur en boucle, site
+      # en 502 — avec une CI toute verte. On lance donc l'image telle quelle
+      # (sans base : l'app dégrade proprement sans les variables DB) et on
+      # exige une réponse 2xx/3xx sur la page d'accueil.
+      - name: Test de démarrage de l'image
+        run: |
+          image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          docker run -d --name smoke -p 3000:3000 "$image"
+          code=000
+          for i in $(seq 1 30); do
+            if [ "$(docker inspect -f '{{.State.Running}}' smoke)" != true ]; then
+              echo "::error::Le conteneur s'est arrêté au démarrage"
+              docker logs smoke
+              exit 1
+            fi
+            code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: outerpedia.com' http://localhost:3000/ || true)
+            case "$code" in
+              2??|3??) echo "Réponse $code après ~$((i * 2)) s"; docker logs --tail 20 smoke; exit 0 ;;
+            esac
+            sleep 2
+          done
+          echo "::error::Aucune réponse 2xx/3xx en 60 s (dernier code : $code)"
+          docker logs smoke
+          exit 1
+
+      - name: Publication sur GHCR
+        run: docker push --all-tags "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
 
   # Déploiement automatique sur le VPS (après build de l'image).
   deploy:
