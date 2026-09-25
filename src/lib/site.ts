@@ -17,7 +17,7 @@
  * le staging est en `NODE_ENV=production` mais doit router par chemin (l'hôte
  * OVH ne sait pas servir `jp.vps-….ovh.net`). Bascule : docs/procedure/bascule-domaine.md
  */
-import { DEFAULT_LANG, LANGUAGES, normalizeLang, type Lang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, LANGS, LANGUAGES, normalizeLang, type Lang } from '@/lib/i18n/config';
 
 export type LangRouting = 'path' | 'subdomain';
 
@@ -75,4 +75,16 @@ export function buildUrl(lang: Lang, path = ''): string {
   return safeLang === DEFAULT_LANG
     ? `${SITE_ORIGIN}${segment}`
     : `${SITE_ORIGIN}/${safeLang}${segment}`;
+}
+
+/**
+ * Hôtes (sans port) que CE déploiement sert, pour qui doit les ÉNUMÉRER (le
+ * `parent` du lecteur Twitch) : celui de chaque langue, DÉRIVÉ de `buildUrl` —
+ * l'apex seul en routage par chemin, l'apex + un sous-domaine par langue en
+ * routage par sous-domaine — plus `www`, servi comme l'apex dans ce profil-là.
+ */
+export function siteHosts(): string[] {
+  const hosts = LANGS.map((l) => new URL(buildUrl(l)).hostname);
+  if (LANG_ROUTING === 'subdomain') hosts.push(`www.${ORIGIN.hostname}`);
+  return [...new Set(hosts)];
 }

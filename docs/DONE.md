@@ -7,6 +7,20 @@
 
 ## 2026-09-25
 
+- **Les embeds Twitch jouent sur chaque sous-domaine de langue** (lot A4 de la
+  Dette). `TWITCH_PARENTS` (`MultiVideoEmbed`) ne listait que
+  `['outerpedia.com', 'localhost']` ; or Twitch exige en `parent` CHAQUE hôte
+  qui embarque le lecteur, et refuse de jouer ailleurs : rien ne jouait sur
+  `jp.` `kr.` `zh.` `fr.` `es.` ni `www.`. Fait : `siteHosts()` dans
+  `src/lib/site.ts` DÉRIVE les hôtes de `buildUrl` — la même source que les
+  canonicals, le hreflang et le sitemap, donc une langue ajoutée à `LANGUAGES`
+  y arrive seule — avec `www` en routage par sous-domaine ; le composant y
+  ajoute `localhost`. Selon le profil baké : prod = apex + `www` + les cinq
+  sous-domaines ; banc local = les hôtes `outerpedia.local` (sans le port) ;
+  routage par chemin = l'hôte de l'origine seul (le staging OVH, que l'ancienne
+  liste oubliait aussi). Vérifié : trois tests `siteHosts` dans `site.test.ts`
+  (un par profil, `es.` et `fr.outerpedia.com` présents en prod), et l'URL du
+  lecteur relue en rendant le composant avec le profil prod.
 - **Un asset que le jeu retire ne disparaît plus du site — il passe en
   « Archivés »** (Sevih : « si ils virent des wallpapers du jeu on les perd
   aussi, probablement même chose pour les BGM »). Diagnostic confirmé : toute

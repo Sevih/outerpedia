@@ -1,5 +1,6 @@
 'use client';
 
+import { siteHosts } from '@/lib/site';
 import { Tabs } from './Tabs';
 
 /**
@@ -18,7 +19,12 @@ export interface VideoItem {
   label?: string;
 }
 
-const TWITCH_PARENTS = ['outerpedia.com', 'localhost'];
+/**
+ * Twitch exige en `parent` CHAQUE hôte qui embarque le lecteur, sinon il refuse
+ * de jouer : les hôtes du déploiement (apex, `www`, sous-domaines de langue —
+ * `outerpedia.local` et consorts sur le banc local) + `localhost` (dev sans Caddy).
+ */
+const TWITCH_PARENTS = [...new Set([...siteHosts(), 'localhost'])];
 
 function embedUrl(v: VideoItem): string {
   switch (v.platform) {

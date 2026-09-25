@@ -62,3 +62,43 @@ describe('buildUrl — routage par SOUS-DOMAINE (prod finale)', () => {
     expect(buildUrl('jp', '/x')).toBe('https://jp.outerpedia.com/x');
   });
 });
+
+describe('siteHosts — hôtes à énumérer (parent Twitch)', () => {
+  it('prod (sous-domaines) : apex, www et chaque sous-domaine de langue', async () => {
+    const { siteHosts } = await loadSite({
+      NEXT_PUBLIC_SITE_ORIGIN: 'https://outerpedia.com',
+      NEXT_PUBLIC_LANG_ROUTING: 'subdomain',
+    });
+    const hosts = siteHosts();
+    expect(hosts).toContain('es.outerpedia.com');
+    expect(hosts).toContain('fr.outerpedia.com');
+    expect(hosts.toSorted()).toEqual(
+      [
+        'outerpedia.com',
+        'www.outerpedia.com',
+        'jp.outerpedia.com',
+        'kr.outerpedia.com',
+        'zh.outerpedia.com',
+        'fr.outerpedia.com',
+        'es.outerpedia.com',
+      ].toSorted(),
+    );
+  });
+
+  it('banc local : les hôtes outerpedia.local, sans le port', async () => {
+    const { siteHosts } = await loadSite({
+      NEXT_PUBLIC_SITE_ORIGIN: 'https://outerpedia.local:8443',
+      NEXT_PUBLIC_LANG_ROUTING: 'subdomain',
+    });
+    expect(siteHosts()).toContain('es.outerpedia.local');
+    expect(siteHosts()).toContain('www.outerpedia.local');
+  });
+
+  it('routage par chemin : le seul hôte de l’origine, sans www ni sous-domaine', async () => {
+    const { siteHosts } = await loadSite({
+      NEXT_PUBLIC_SITE_ORIGIN: 'http://localhost:3000',
+      NEXT_PUBLIC_LANG_ROUTING: 'path',
+    });
+    expect(siteHosts()).toEqual(['localhost']);
+  });
+});
