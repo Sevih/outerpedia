@@ -95,7 +95,7 @@ export default async function FreeHeroesStartBannerGuide({ lang }: { lang: Lang 
                   <td className={`${TD} text-content max-w-90 text-left text-sm`}>
                     {entry.pickType === 'one' && (
                       <div className="mb-2 text-center">
-                        <span className="text-lg font-bold text-amber-400 [text-shadow:0_0_10px_rgba(251,191,36,0.8)]">
+                        <span className="text-ed-amber text-lg font-bold [text-shadow:0_0_10px_rgba(251,191,36,0.8)]">
                           {L(LABELS.chooseOne)}
                         </span>
                       </div>

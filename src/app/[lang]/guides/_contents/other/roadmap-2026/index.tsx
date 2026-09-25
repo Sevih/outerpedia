@@ -44,7 +44,7 @@ const shot = (file: string) => img.guideShot(SLUG, file);
 function QuarterCard({ data, lang }: { data: RoadmapQuarter; lang: Lang }) {
   return (
     <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
-      <div className="mb-2 text-2xl font-bold text-sky-400">{data.quarter}</div>
+      <div className="text-ed-sky mb-2 text-2xl font-bold">{data.quarter}</div>
       <div className="text-content-muted mb-3 text-sm">{lRec(data.title, lang)}</div>
       <ul className="text-content-subtle space-y-1 text-xs">
         {data.items.map((item, i) => (
@@ -277,7 +277,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
-            <h4 className="mb-2 font-semibold text-cyan-400">{L('tacticsLeague')}</h4>
+            <h4 className="text-ed-cyan mb-2 font-semibold">{L('tacticsLeague')}</h4>
             <ul className="text-content-muted space-y-1 text-sm">
               {TACTICS_LEAGUE_RULES.map((r, i) => (
                 <li key={i}>• {lRec(r, lang)}</li>

@@ -403,7 +403,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
                   {item.couponHref && (
                     <>
                       {' — '}
-                      <a href={item.couponHref} className="text-rose-400 underline">
+                      <a href={item.couponHref} className="text-ed-rose underline">
                         {item.couponLabel}
                       </a>
                     </>

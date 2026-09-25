@@ -169,11 +169,17 @@
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **152 couleurs Tailwind brutes dans 17 fichiers de guides** (H6) alors
-      que `--ed-{sky,violet,emerald,amber,rose,cyan}` existent pour ça
-      (`how-to-play` 23, `banner-mileage` 20, `roadmap-2026` 14 + 12 dans
-      `data.ts`, `outerplane-on-linux` 14, `daily-stamina` 13…) ; SVG en dur
-      dans `MonadGateMap`, `TowerCombatRoster`, `BannerTabs`, `AdventureGrid`.
+- [ ] **Couleurs Tailwind brutes des guides (H6) : FAIT pour les nuances qui
+      ont un token** (56 sur 152, lot B5). Reste 96 occurrences SANS token de
+      même valeur — le choix d'en créer (ou d'accepter un écart visible) est à
+      trancher : `blue-*` (how-to-play, roadmap), `amber-500`/`emerald-500`
+      (fonds et anneaux de pastilles), `green-*`, `yellow-*`, `red-*`,
+      `purple-400/500/600/700/900` (dont les accents d'ÉLÉMENT de
+      `roadmap-2026/data.ts`), nuances -200/-300 sans `-soft`
+      (`sky-300`, `emerald-300`, `amber-300`, `rose-200`, `cyan-200`…). SVG :
+      `MonadGateMap` (`#facc15`/`#fde047` = yellow-400/300) et
+      `TowerCombatRoster` (`rgb(239 68 68)` = red-500) n'ont pas de token ;
+      `BannerTabs`/`AdventureGrid` n'ont que du noir (ombre, dégradé).
 - [ ] Anglais en dur dans des rendus localisés (H7, reste) : « Cost: »
       (`gear`), « Lv. 1 »/`orLabel="or"` (`core-fusion`), « Lv {lv} »
       (`fusion.tsx`), « WB: »/`alt="Ether"` (`ether-income`), « SPD »

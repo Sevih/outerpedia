@@ -71,7 +71,7 @@ export default function HowToPlayGuide({ lang }: GuideContentProps) {
         <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            {s('heroTitle')} <span className="text-sky-400">OUTERPLANE</span>
+            {s('heroTitle')} <span className="text-ed-sky">OUTERPLANE</span>
           </h2>
           <p className="text-content-muted mt-2 text-sm">{s('heroSubtitle')}</p>
         </div>
@@ -178,7 +178,7 @@ export default function HowToPlayGuide({ lang }: GuideContentProps) {
                 href={lRec(LOCALIZED_LINKS.helpshift, lang)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline"
+                className="text-ed-sky underline"
               >
                 {s('supportHelp')}
               </a>
@@ -192,17 +192,17 @@ export default function HowToPlayGuide({ lang }: GuideContentProps) {
             <h4 className="mb-2 font-semibold">{s('sidebarQuicklinks')}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#mobile-download" className="text-sky-400 hover:underline">
+                <a href="#mobile-download" className="text-ed-sky hover:underline">
                   {s('sidebarMobile')}
                 </a>
               </li>
               <li>
-                <a href="#pc-play" className="text-sky-400 hover:underline">
+                <a href="#pc-play" className="text-ed-sky hover:underline">
                   {s('sidebarPc')}
                 </a>
               </li>
               <li>
-                <a href="#getting-started" className="text-sky-400 hover:underline">
+                <a href="#getting-started" className="text-ed-sky hover:underline">
                   {s('sidebarStart')}
                 </a>
               </li>

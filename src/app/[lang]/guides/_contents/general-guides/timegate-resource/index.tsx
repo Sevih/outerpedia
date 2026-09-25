@@ -34,7 +34,7 @@ const data = timegateRaw as TimegateResourcesData;
 const BADGE: Record<SourceType, string> = {
   mission: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/40',
   guild: 'bg-amber-500/15 text-amber-300 ring-amber-500/40',
-  shop: 'bg-sky-500/15 text-sky-300 ring-sky-500/40',
+  shop: 'bg-ed-sky-deep/15 text-sky-300 ring-ed-sky-deep/40',
   craft: 'bg-surface-sunken text-content-subtle ring-line-subtle',
 };
 

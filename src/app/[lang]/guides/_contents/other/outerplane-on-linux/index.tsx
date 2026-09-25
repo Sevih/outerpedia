@@ -94,7 +94,7 @@ export default function OuterplaneOnLinuxGuide() {
                 href="https://docs.waydro.id/usage/install-on-desktops"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline"
+                className="text-ed-sky underline"
               >
                 Waydroid docs
               </a>{' '}
@@ -123,7 +123,7 @@ export default function OuterplaneOnLinuxGuide() {
                 href="https://www.google.com/android/uncertified/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-400 underline"
+                className="text-ed-sky underline"
               >
                 google.com/android/uncertified
               </a>
@@ -198,27 +198,27 @@ export default function OuterplaneOnLinuxGuide() {
             <h4 className="mb-2 font-semibold">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#step-1" className="text-sky-400 hover:underline">
+                <a href="#step-1" className="text-ed-sky hover:underline">
                   Prerequisites
                 </a>
               </li>
               <li>
-                <a href="#step-2" className="text-sky-400 hover:underline">
+                <a href="#step-2" className="text-ed-sky hover:underline">
                   Install Waydroid
                 </a>
               </li>
               <li>
-                <a href="#step-4" className="text-sky-400 hover:underline">
+                <a href="#step-4" className="text-ed-sky hover:underline">
                   Translation Layer
                 </a>
               </li>
               <li>
-                <a href="#step-5" className="text-sky-400 hover:underline">
+                <a href="#step-5" className="text-ed-sky hover:underline">
                   Google Cert Fix
                 </a>
               </li>
               <li>
-                <a href="#step-8" className="text-sky-400 hover:underline">
+                <a href="#step-8" className="text-ed-sky hover:underline">
                   Anti-Cheat
                 </a>
               </li>

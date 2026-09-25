@@ -23,7 +23,7 @@ export function rich(text: string): ReactNode {
         <a
           key={i}
           href={href}
-          className="text-sky-400 underline"
+          className="text-ed-sky underline"
           {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         >
           {label}

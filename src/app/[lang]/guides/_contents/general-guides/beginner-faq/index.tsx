@@ -74,7 +74,7 @@ const SECTIONS = [
 
 /** Pastille d'étoiles de transcendance (4★, 5★, 6★) des listes de dupes. */
 function StarChip({ label }: { label: string }) {
-  return <span className="mr-1 font-semibold text-amber-400">{label}</span>;
+  return <span className="text-ed-amber mr-1 font-semibold">{label}</span>;
 }
 
 /** Mention inline d'un boss : vignette + nom éditorial. Id inconnu = build cassé. */
@@ -201,7 +201,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
                   {L(LABELS.premiumBannerDesc)}
                   <Link
                     href={premiumLimitedHref}
-                    className="text-amber-400 underline underline-offset-2"
+                    className="text-ed-amber underline underline-offset-2"
                   >
                     {L(LABELS.dedicatedGuide)}
                   </Link>
@@ -242,7 +242,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
               />
               <Prose>
                 {L(LABELS.premiumLimitedLead)}
-                <strong className="font-semibold text-amber-400">{L(LABELS.premium)}</strong>
+                <strong className="text-ed-amber font-semibold">{L(LABELS.premium)}</strong>
                 {L(LABELS.andKwa)}
                 <strong className={`font-semibold ${EDITORIAL_ACCENT.violet.text}`}>
                   {L(LABELS.limited)}
@@ -250,7 +250,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
                 {L(LABELS.premiumLimitedTranscend)}
                 <Link
                   href={premiumLimitedHref}
-                  className="text-violet-400 underline underline-offset-2"
+                  className="text-ed-violet underline underline-offset-2"
                 >
                   {L(LABELS.here)}
                 </Link>
@@ -332,7 +332,7 @@ export default async function BeginnerFaqGuide({ lang }: { lang: Lang }) {
 
             <QACard accent="amber" question={L(LABELS.gearWorthKeeping)}>
               <Callout accent="rose">
-                <strong className="font-semibold text-rose-400">{L(LABELS.dontThrowBlues)}</strong>
+                <strong className="text-ed-rose font-semibold">{L(LABELS.dontThrowBlues)}</strong>
               </Callout>
               <Prose>{L(LABELS.epicGearStaple)}</Prose>
               <Prose>{L(LABELS.gearReforge)}</Prose>

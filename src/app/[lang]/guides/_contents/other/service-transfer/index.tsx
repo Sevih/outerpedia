@@ -159,7 +159,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
                 </ol>
                 <div className="mt-2">
                   {s('recoveryStep2Email')}&nbsp;
-                  <a href={`mailto:${RECOVERY_LINKS.email}`} className="text-sky-400 underline">
+                  <a href={`mailto:${RECOVERY_LINKS.email}`} className="text-ed-sky underline">
                     {RECOVERY_LINKS.email}
                   </a>
                   <br />
@@ -168,7 +168,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
                     href={RECOVERY_LINKS.helpshift}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sky-400 underline"
+                    className="text-ed-sky underline"
                   >
                     {RECOVERY_LINKS.helpshift}
                   </a>

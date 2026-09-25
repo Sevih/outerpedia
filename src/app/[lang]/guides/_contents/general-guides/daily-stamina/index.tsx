@@ -31,7 +31,7 @@ const GEAR_SOURCES: { collection: string; bossIds: string[] }[] = [
 /** Pastille de coût en stamina (le chip ambré). */
 function CostPill({ children }: { children: ReactNode }) {
   return (
-    <span className="w-fit rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
+    <span className="text-ed-amber w-fit rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-xs">
       {children}
     </span>
   );
@@ -43,8 +43,8 @@ function NumBadge({ n, size = 'md' }: { n: number; size?: 'md' | 'sm' }) {
     <span
       className={
         size === 'md'
-          ? 'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-sky-500/40 bg-sky-500/15 text-sm font-bold text-sky-400'
-          : 'flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-sky-500/40 bg-sky-500/15 text-xs font-bold text-sky-400'
+          ? 'border-ed-sky-deep/40 bg-ed-sky-deep/15 text-ed-sky flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-bold'
+          : 'border-ed-sky-deep/40 bg-ed-sky-deep/15 text-ed-sky flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold'
       }
       aria-hidden
     >
@@ -189,13 +189,13 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
         <p className="m-0 mb-2">{L(LABELS.notYetEndgame)}</p>
         <ul className="m-0 list-disc space-y-1 pl-5">
           <li>
-            <strong className="font-semibold text-amber-400 underline">
+            <strong className="text-ed-amber font-semibold underline">
               {L(LABELS.heading_farmStage12)}
             </strong>
             {P(LABELS.body_farmStage12)}
           </li>
           <li>
-            <strong className="font-semibold text-amber-400 underline">
+            <strong className="text-ed-amber font-semibold underline">
               {L(LABELS.heading_hardModeStoryBossesAlt)}
             </strong>
             {L(LABELS.body_hardModeStoryAlt_prefix)}
@@ -213,7 +213,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
       {/* ── Pro tips ── */}
       <Callout accent="amber">
         {'⚠️ '}
-        <strong className="font-semibold text-amber-400 underline">
+        <strong className="text-ed-amber font-semibold underline">
           {L(LABELS.avoidReceiveAll)}
         </strong>
         {L(LABELS.body_avoidReceiveAll)}

@@ -7,6 +7,29 @@
 
 ## 2026-09-25
 
+- **Guides : couleurs Tailwind brutes → tokens éditoriaux `ed-*`** (lot B5,
+  H6 de `docs/audit/guides.md`). Les guides écrivaient `text-sky-400`,
+  `bg-rose-400/5`… alors que `--ed-*` (`globals.css`, exposés en
+  `--color-ed-*`) portent ces mêmes teintes, modèle `stats/index.tsx` via
+  `EDITORIAL_ACCENT`. Règle appliquée : ne remplacer que l'égalité EXACTE de
+  valeur, vérifiée contre `tailwindcss/theme.css` — `-{sky,amber,rose,cyan,
+violet,emerald}-400` → `-ed-<teinte>`, `sky-500` → `ed-sky-deep`,
+  `violet-200` → `ed-violet-soft`, et les tokens à usage dédié seulement là
+  où l'usage colle (`ed-pink` pour le type « limited » de `banner-mileage`,
+  `ed-purple-fg` pour les changements de skill de `core-fusion`). 56
+  occurrences dans 14 fichiers, opacités conservées. Pas de changement
+  visible : les tokens ne varient pas selon le thème (aucun bloc clair/sombre
+  dans `globals.css`), les valeurs oklch sont identiques, et le CSS servi par
+  le dev (`daily-stamina`, `banner-mileage`, `how-to-play`, rendus en 200)
+  compile bien `text-ed-*`, `ring-ed-sky-deep/40`… en `var(--ed-*)` /
+  `color-mix` identiques. Laissé, faute de token de même valeur : 96
+  occurrences (bleus, verts, jaunes, rouges, `amber-500`/`emerald-500`,
+  violets hors fusion dont les accents d'ÉLÉMENT de `roadmap-2026/data.ts`,
+  nuances -200/-300 sans `-soft`), le halo `rgba(251,191,36,0.8)` de
+  `free-heroes-start-banner` (le `--ed-amber-glow` est à 0.6), et les SVG
+  (`MonadGateMap` jaune, `TowerCombatRoster` rouge ; noir seul dans
+  `BannerTabs`/`AdventureGrid`) — le reste est listé dans `TODO.md`.
+
 - **Wallpapers : les HeroFullArt vivants s'enregistrent au lieu de s'ouvrir**
   (lot C3, suite de C2 / G19). C2 sert `images/download/*` et `audio/bgm/*` en
   `Content-Disposition: attachment`, mais laisse volontairement

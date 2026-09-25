@@ -102,7 +102,9 @@ export default async function CoreFusionGuide({ lang }: { lang: Lang }) {
         </p>
         {changeRows.length > 0 && (
           <div className="space-y-2">
-            <h4 className="m-0 text-sm font-semibold text-purple-300">{L(LABELS.skillChanges)}</h4>
+            <h4 className="text-ed-purple-fg m-0 text-sm font-semibold">
+              {L(LABELS.skillChanges)}
+            </h4>
             <SkillChangeRows rows={changeRows} />
           </div>
         )}

@@ -154,7 +154,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
         {data.story && data.story.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelStory, lang)} </span>
-            <span className="text-sky-400">{data.story.map((s) => lRec(s, lang)).join(' • ')}</span>
+            <span className="text-ed-sky">{data.story.map((s) => lRec(s, lang)).join(' • ')}</span>
           </div>
         )}
         {data.content && data.content.length > 0 && (
@@ -258,7 +258,7 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
               key={c.label.en}
               className="border-line-subtle bg-surface-raised rounded-lg border p-4 text-center"
             >
-              <div className="text-3xl font-bold text-sky-400">{c.value}</div>
+              <div className="text-ed-sky text-3xl font-bold">{c.value}</div>
               <div className="text-content-muted mt-1 text-xs">{lRec(c.label, lang)}</div>
             </div>
           ))}
@@ -334,7 +334,7 @@ export default async function Roadmap2026SecondHalfGuide({ lang }: GuideContentP
                   key={g.heading.en}
                   className="border-line-subtle bg-surface-raised rounded-lg border p-4"
                 >
-                  <h4 className="mb-2 font-semibold text-cyan-400">{lRec(g.heading, lang)}</h4>
+                  <h4 className="text-ed-cyan mb-2 font-semibold">{lRec(g.heading, lang)}</h4>
                   <ul className="text-content-muted space-y-1 text-sm">
                     {g.lines.map((line, i) => (
                       <li key={i}>• {lRec(line, lang)}</li>

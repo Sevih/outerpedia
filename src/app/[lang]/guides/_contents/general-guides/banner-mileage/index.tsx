@@ -177,7 +177,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             <Prose>{L(LABELS.pickup.desc)}</Prose>
             <div className={neutralBox}>
               <p className="text-content m-0 text-sm">
-                <span className="font-semibold text-amber-400">
+                <span className="text-ed-amber font-semibold">
                   {L(LABELS.pickup.example_label)}
                 </span>
                 {L(LABELS.pickup.example_before)}
@@ -218,7 +218,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
           <div className={neutralBox}>
             <p className="text-content m-0 text-sm">
               {L(LABELS.rateup.desc)}
-              <span className="font-semibold text-amber-400">{L(LABELS.rateup.desc_duration)}</span>
+              <span className="text-ed-amber font-semibold">{L(LABELS.rateup.desc_duration)}</span>
               {L(LABELS.rateup.desc_after)}
             </p>
           </div>
@@ -247,8 +247,8 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             subtext={L(LABELS.premium.subtext)}
             guarantee={L(LABELS.premium.pity)}
           />
-          <div className="rounded-lg border border-violet-400/25 bg-violet-400/5 p-3">
-            <p className="m-0 text-sm text-violet-200">
+          <div className="border-ed-violet/25 bg-ed-violet/5 rounded-lg border p-3">
+            <p className="text-ed-violet-soft m-0 text-sm">
               <span className="font-semibold">{L(LABELS.premium.desc_bold)}</span>
               {L(LABELS.premium.desc)}
             </p>
@@ -278,7 +278,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             guarantee={L(LABELS.limited.pity)}
           />
           <div className="space-y-3">
-            <div className="rounded-lg border border-rose-400/25 bg-rose-400/5 p-3">
+            <div className="border-ed-rose/25 bg-ed-rose/5 rounded-lg border p-3">
               <p className="m-0 mb-3 text-sm text-rose-200">
                 <span className="font-semibold">{L(LABELS.limited.desc_bold)}</span>
                 {L(LABELS.limited.desc)}
@@ -286,8 +286,8 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
               <div className="space-y-2 text-xs">
                 {(
                   [
-                    ['type_limited_label', 'type_limited_desc', 'text-pink-400'],
-                    ['type_seasonal_label', 'type_seasonal_desc', 'text-emerald-400'],
+                    ['type_limited_label', 'type_limited_desc', 'text-ed-pink'],
+                    ['type_seasonal_label', 'type_seasonal_desc', 'text-ed-emerald'],
                     ['type_collab_label', 'type_collab_desc', 'text-red-400'],
                   ] as const
                 ).map(([labelKey, descKey, color]) => (
@@ -303,7 +303,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             <div className={neutralBox}>
               <p className="text-content m-0 text-xs">
                 {L(LABELS.limited.duration_before)}
-                <span className="font-semibold text-amber-400">
+                <span className="text-ed-amber font-semibold">
                   {L(LABELS.limited.duration_value)}
                 </span>
                 {L(LABELS.limited.duration_after)}
@@ -311,7 +311,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
             </div>
           </div>
           <div>
-            <p className="mb-2 text-sm font-semibold text-amber-400">
+            <p className="text-ed-amber mb-2 text-sm font-semibold">
               {L(LABELS.limited.heroes_list_title)}
             </p>
             <LimitedHeroesList lang={lang} collabNames={COLLAB_NAMES} />
@@ -343,7 +343,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
               </p>
               <p className="text-content-subtle m-0 mt-2 text-xs">{L(LABELS.supply.unlock)}</p>
             </div>
-            <div className="rounded-lg border border-cyan-400/25 bg-cyan-400/5 p-3">
+            <div className="border-ed-cyan/25 bg-ed-cyan/5 rounded-lg border p-3">
               <p className="m-0 text-sm text-cyan-200">
                 <span className="font-semibold">{L(LABELS.supply.settings_label)}</span>{' '}
                 {L(LABELS.supply.settings)}
@@ -376,7 +376,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
       <Prose>{L(LABELS.intro_p1)}</Prose>
       <Prose>
         {L(LABELS.intro_p2_before)}
-        <span className="text-amber-400 underline">{L(LABELS.intro_p2_highlight)}</span>
+        <span className="text-ed-amber underline">{L(LABELS.intro_p2_highlight)}</span>
         {L(LABELS.intro_p2_mid)}
         <strong className="text-content-strong">{L(LABELS.intro_p2_bold)}</strong>
         {L(LABELS.intro_p2_after)}
