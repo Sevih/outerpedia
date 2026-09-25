@@ -127,9 +127,11 @@
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-- [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : `download`
-      cross-origin vers R2 sans `Content-Disposition` (vérifié `curl -I`).
-      Poser `attachment` sur R2 (`audio/bgm/*`, wallpapers) ou `fetch → blob`.
+- [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : FAIT côté
+      code le 25/09 (`assets:push` pose `attachment`, cf. DONE). Reste le re-push
+      des objets déjà sur R2, à lancer par Sevih :
+      `pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/`
+      (~800 Mo), puis `curl -I` d'un png pour voir l'en-tête.
 
 ### Lot 3 — régler à la source
 

@@ -2,6 +2,21 @@
  * PUSH des assets : `pnpm assets:push`.
  *   `--full`        re-pousse tout (ignore l'état local).
  *   `--purge-only`  repurge l'edge sans rien uploader (réglage Cloudflare changé).
+ *   `--prefix=<p>`  re-pousse (et repurge) TOUTES les clés du staging sous `<p>`,
+ *                   changées ou non — répétable. Pour réécrire les en-têtes S3
+ *                   d'un seul namespace sans le `--full` global.
+ *
+ * `Content-Disposition: attachment` sur les fichiers TÉLÉCHARGEABLES
+ * (`ATTACHMENT_PREFIXES`) : le `<a download>` des wallpapers et de l'OST pointe
+ * cross-origin vers R2, et le navigateur IGNORE `download` hors même origine —
+ * sans cet en-tête il ouvrait le fichier au lieu de l'enregistrer. Il ne gêne
+ * pas l'affichage : `<img>` et `<audio>` l'ignorent (testé le 25/09 sous Firefox,
+ * png/webp/mp3 cross-origin). `images/characters/full/` en est parce que les
+ * HeroFullArt vivants se téléchargent depuis là (cf. `src/lib/wallpapers.ts`) ;
+ * seule conséquence, une ouverture DIRECTE de l'URL télécharge au lieu
+ * d'afficher. L'en-tête étant figé à l'upload, la mise en place des objets déjà
+ * sur R2 se fait une fois par :
+ *   pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/
  *
  * Pousse le staging local (`.assets-staging/`, produit par `assets:collect`) vers
  * le bucket R2 via rclone (S3), puis PURGE le cache edge Cloudflare des clés
@@ -72,6 +87,14 @@ const FULL = process.argv.includes('--full');
  * Rule…) : l'edge garde ses réponses un an (`s-maxage`), en-têtes d'alors inclus.
  */
 const PURGE_ONLY = process.argv.includes('--purge-only');
+/** `--prefix=<p>` (répétable) : clés re-poussées sans condition. */
+const FORCE_PREFIXES = process.argv
+  .filter((a) => a.startsWith('--prefix='))
+  .map((a) => a.slice('--prefix='.length))
+  .filter(Boolean);
+/** Namespaces servis en `attachment` (cf. en-tête du fichier). */
+const ATTACHMENT_PREFIXES = ['images/download/', 'images/characters/full/', 'audio/bgm/'];
+const isAttachment = (/** @type {string} */ k) => ATTACHMENT_PREFIXES.some((p) => k.startsWith(p));
 
 // Quotes d'enrobage (convention dotenv) : `KEY="valeur"` → `valeur`. Même règle
 // que `datagen/lib/env.ts` (un .mjs ne peut pas l'importer sans loader TS).
@@ -148,12 +171,14 @@ const baseline = /** @type {Record<string, string>} */ (FULL ? {} : pushed);
 
 const added = [];
 const changed = [];
+const forced = [];
 for (const [key, hash] of current) {
   if (!(key in baseline)) added.push(key);
   else if (baseline[key] !== hash) changed.push(key);
+  else if (FORCE_PREFIXES.some((p) => key.startsWith(p))) forced.push(key);
 }
 // `--purge-only` : rien à envoyer, on repurge l'intégralité du staging.
-const toPush = PURGE_ONLY ? [...current.keys()] : [...added, ...changed];
+const toPush = PURGE_ONLY ? [...current.keys()] : [...added, ...changed, ...forced];
 
 if (!toPush.length) {
   console.log(`R2 déjà à jour — ${current.size} assets, rien à pousser.`);
@@ -171,22 +196,33 @@ if (PURGE_ONLY) {
   );
 } else {
   console.log(
-    `${added.length} ajoutée(s), ${changed.length} modifiée(s) → ${toPush.length} à pousser.`,
+    `${added.length} ajoutée(s), ${changed.length} modifiée(s)` +
+      (forced.length ? `, ${forced.length} forcée(s) par --prefix` : '') +
+      ` → ${toPush.length} à pousser.`,
   );
 }
 
 // --- upload ---------------------------------------------------------------------
 
 if (!PURGE_ONLY) {
-  // Deux lots car deux Cache-Control : la donnée vive (`data/*`) et le reste.
+  // Un lot par jeu d'en-têtes : la donnée vive (`data/*`), les téléchargeables
+  // (`attachment`) et le reste.
   // `--files-from` : la liste EST la décision. `--no-traverse` n'énumère pas la
   // destination, `--ignore-times` ne compare rien — c'est notre état qui tranche,
   // pas un aller-retour avec R2.
+  const assets = toPush.filter((k) => !k.startsWith('data/'));
   const batches = [
-    { keys: toPush.filter((k) => !k.startsWith('data/')), header: CACHE_CONTROL },
-    { keys: toPush.filter((k) => k.startsWith('data/')), header: CACHE_CONTROL_DATA },
+    { keys: assets.filter((k) => !isAttachment(k)), headers: [`Cache-Control: ${CACHE_CONTROL}`] },
+    {
+      keys: assets.filter(isAttachment),
+      headers: [`Cache-Control: ${CACHE_CONTROL}`, 'Content-Disposition: attachment'],
+    },
+    {
+      keys: toPush.filter((k) => k.startsWith('data/')),
+      headers: [`Cache-Control: ${CACHE_CONTROL_DATA}`],
+    },
   ];
-  for (const { keys, header } of batches) {
+  for (const { keys, headers } of batches) {
     if (!keys.length) continue;
     const listFile = resolve(STAGING, '.push-list.txt');
     writeFileSync(listFile, keys.join('\n') + '\n');
@@ -201,8 +237,7 @@ if (!PURGE_ONLY) {
         listFile,
         '--no-traverse',
         '--ignore-times',
-        '--header-upload',
-        `Cache-Control: ${header}`,
+        ...headers.flatMap((h) => ['--header-upload', h]),
         '--s3-no-check-bucket',
         '--transfers',
         '16',

@@ -7,6 +7,27 @@
 
 ## 2026-09-25
 
+- **Boutons « Télécharger » : `Content-Disposition: attachment` au push R2**
+  (lot C2, G19). Les `<a download>` des wallpapers (`WallpapersGallery`) et de
+  l'OST (`OstPlayer`) pointent cross-origin vers `img.outerpedia.com` : le
+  navigateur ignore alors `download` et, faute d'en-tête `Content-Disposition`,
+  OUVRAIT le fichier. Voie serveur retenue plutôt que `fetch → blob` :
+  `scripts/assets-push.mjs` pousse désormais en trois lots d'en-têtes, les clés
+  de `ATTACHMENT_PREFIXES` (`images/download/`, `images/characters/full/`,
+  `audio/bgm/`) recevant `attachment` en plus du Cache-Control. Le préfixe
+  `images/characters/full/` s'est ajouté à ceux que prévoyait le lot : c'est de
+  là que se téléchargent les HeroFullArt VIVANTS (`wallpaperDownload` réutilise
+  `img.full`), seul le namespace wallpaper n'aurait pas suffi. Nouvelle option
+  `--prefix=<p>` (répétable) qui re-pousse et repurge toutes les clés du staging
+  sous un préfixe, pour réécrire un en-tête S3 figé sans `--full` ; documentée
+  en tête du script et dans `datagen/README.md` (§ Publier). Vérifié : serveur
+  local cross-origin renvoyant `attachment` + Firefox headless, `<img>` png et
+  webp et `<audio>` mp3 chargent normalement (l'en-tête n'est honoré que pour
+  une navigation) ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts. Laissé :
+  le push lui-même, non lancé (re-push ~800 Mo, commande dans `docs/TODO.md`) ;
+  conséquence assumée, ouvrir directement l'URL d'un full-art télécharge au lieu
+  d'afficher.
+
 - **Filtres de classe et d'élément dans l'ordre du jeu** (lot A11). Les
   pastilles de `/characters`, des tier lists, de most-used-units, de
   l'équipement (armes/amulettes et EE) et du picker du team planner étaient
