@@ -8,7 +8,7 @@
  * mécanique, contenu inchangé).
  */
 import { useState, useEffect, type ReactNode } from 'react';
-import { img, ELEMENT_ORDER, transcendStarRow } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER, transcendStarRow } from '@/lib/images';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
@@ -156,9 +156,6 @@ export function Modal({
     </div>
   );
 }
-
-/** Classes du jeu, dans l'ordre des filtres (mêmes pastilles que /characters). */
-const CLASS_ORDER = ['defender', 'striker', 'ranger', 'mage', 'healer'];
 
 /**
  * Case carrée de slot (façon jeu) : contenu quand c'est équipé, « ? » sinon —

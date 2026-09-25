@@ -19,7 +19,7 @@
  * métadonnées résolues au build. `img` est un simple constructeur de chemins.
  */
 import { useState, type ReactNode } from 'react';
-import { img } from '@/lib/images';
+import { img, CLASS_ORDER } from '@/lib/images';
 import { restrictionState, type RestrictionRule } from '@/lib/tower-restrictions';
 import { RosterGroupCard, type RosterGroupCardCharacter } from './RosterGroupCard';
 
@@ -44,7 +44,7 @@ export interface RosterLabels {
 /** Le vocabulaire des cibles, par colonne — noms de classe = ceux des persos. */
 const VOCAB = {
   element: ['fire', 'water', 'earth', 'light', 'dark'],
-  class: ['striker', 'defender', 'ranger', 'mage', 'healer'],
+  class: CLASS_ORDER,
   star: ['1', '2', '3'],
 } as const;
 

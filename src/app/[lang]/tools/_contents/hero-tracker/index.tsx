@@ -8,6 +8,7 @@ import type { HeroGrowthData } from '@datagen/generators/hero-growth';
 import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { CLASS_ORDER } from '@/lib/images';
 import { getCatalogEntry } from '@/lib/data/items';
 import {
   characterDisplayName,
@@ -72,7 +73,6 @@ function skillIcons(heroId: string): string[] {
 /** Les cinq éléments du jeu, dans l'ordre des écrans. */
 const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
 /** Les cinq classes, dans l'ordre des filtres. */
-const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'] as const;
 
 const LABEL_KEYS = [
   'intro',
@@ -219,7 +219,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   );
 
   const classNames = Object.fromEntries(
-    CLASSES.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
+    CLASS_ORDER.map((c) => [c, t(`sys.class.${c}` as TranslationKey)]),
   );
 
   // Le groupe « limité » (festival/seasonal/collab) se lit ICI : le glossaire

@@ -166,8 +166,8 @@
       interne d'`InlineTextField` reste collé à la position ; il faut un id par
       bloc (G45).
 - [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
-      3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres,
-      presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
+      3 barres élément/classe, `CLASSES` en dur ×4 avec deux ordres FAIT
+      (`CLASS_ORDER`) — reste `CLASS_SLUGS` ×2 et `ELEMENTS` ×2, presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
       3 façons, `esc()`/`rfc822()` ×2 ; datagen : `isPermille` divergent,
       deux listes de shops permanents, « persos intégrés » ×4 lecteurs, paires
       classe/enum en dur après dérivation, rebuilds redondants ; familles

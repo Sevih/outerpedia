@@ -7,6 +7,7 @@ import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { ClassIconPill } from '@/components/character/filters/FilterAtoms';
+import { CLASS_ORDER } from '@/lib/images';
 import type { RawFinderBuild } from './finder';
 
 const EQUIP_TYPES = ['weapon', 'amulet', 'set'] as const;
@@ -14,8 +15,6 @@ export type EquipType = (typeof EQUIP_TYPES)[number];
 
 type Mode = 'reco' | 'free';
 const MODES: Mode[] = ['reco', 'free'];
-
-const CLASSES = ['striker', 'defender', 'ranger', 'healer', 'mage'] as const;
 
 /** Ordres canoniques d'affichage des mains (ordre conservé). */
 const WEAPON_MAIN_ORDER = ['ATK%', 'HP%', 'DEF%'];
@@ -150,7 +149,7 @@ export function GearUsageFinderBrowser({
 }) {
   const [mode, setMode] = useState<Mode>('reco');
   const [equipType, setEquipType] = useState<EquipType>('weapon');
-  const [classFilter, setClassFilter] = useState<string>(CLASSES[0]);
+  const [classFilter, setClassFilter] = useState<string>('striker');
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [mainStat, setMainStat] = useState<string | null>(null);
   const [selectedSubs, setSelectedSubs] = useState<string[]>([]);
@@ -340,7 +339,7 @@ export function GearUsageFinderBrowser({
               active={equipType === type}
               onClick={() => {
                 setEquipType(type);
-                setClassFilter(CLASSES[0]);
+                setClassFilter('striker');
                 resetSelection();
               }}
               className="h-9 px-4"
@@ -356,7 +355,7 @@ export function GearUsageFinderBrowser({
         <>
           <Step label={labels.stepClass}>
             <div className="flex flex-wrap justify-center gap-2">
-              {CLASSES.map((cls) => (
+              {CLASS_ORDER.map((cls) => (
                 <ClassIconPill
                   key={cls}
                   classType={cls}

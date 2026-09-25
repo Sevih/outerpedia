@@ -17,7 +17,7 @@ import {
   FaGripVertical,
 } from 'react-icons/fa6';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
-import { img, ELEMENT_ORDER } from '@/lib/images';
+import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { Portrait } from '@/components/character/Portrait';
 import {
@@ -148,7 +148,6 @@ const SORT_KEYS: SortKey[] = ['default', 'name', 'rarity', 'element'];
  * free) — le même que celui des badges de carte partout ailleurs.
  */
 const FILTER_TAGS = ['premium', 'festival', 'seasonal', 'collab', 'free'];
-const CLASSES = ['striker', 'defender', 'ranger', 'healer', 'mage'];
 const RARITIES = [1, 2, 3];
 
 // ── Réglages d'affichage (persistés — clé héritée `tlm-settings` absorbée) ──
@@ -1861,7 +1860,7 @@ export function TierListMakerBrowser({
                 ))}
               </div>
               <div className="flex gap-1.5">
-                {CLASSES.map((cl) => (
+                {CLASS_ORDER.map((cl) => (
                   <FilterPill
                     key={cl}
                     active={classFilter.includes(cl)}

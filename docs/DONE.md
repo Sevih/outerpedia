@@ -74,6 +74,20 @@
   rétention et `src/lib/wallpapers.ts` suivent ; ④ les sept anciennes versions
   mises à l'abri depuis le pool Android, catalogue promu, staging prêt pour le
   prochain `pnpm commit`.
+- **Un seul ordre des classes : `CLASS_ORDER`** (dette du rapport, lot A3). La
+  liste était recopiée en dur dans sept fichiers, avec trois ordres différents ;
+  le glossaire, lui, n'en porte aucun (clés alphabétiques). L'ordre retenu est
+  celui de l'enum du jeu, lisible dans TextSystem (`SYS_CLASS_*` et
+  `SYS_CLASS_PASSIVE_*`) : defender, striker, ranger, mage, healer. Constante
+  typée à côté d'`ELEMENT_ORDER` dans `src/lib/images.ts`, consommée par
+  hero-tracker (×2), gear-usage-finder, tier-list-maker, damage-calculator,
+  `TowerCombatRoster` et `/dev/portrait`. Aucune persistance ne dépendait de
+  l'ordre (les filtres stockent le slug) ; seul l'ordre des pastilles change. Le
+  gear-usage-finder garde Striker par défaut, écrit en dur plutôt que dérivé de
+  la première entrée. Restent pour un lot à part : `CLASS_SLUGS` en double
+  (`portrait-layout.ts`, `parse-text.tsx`), `ELEMENTS` recopié (hero-tracker,
+  `/dev/portrait`), les filtres triés alphabétiquement depuis les données ; les
+  bits de `filter-codec.ts` gardent leur ordre hérité (liens partagés).
 
 ## 2026-09-23
 

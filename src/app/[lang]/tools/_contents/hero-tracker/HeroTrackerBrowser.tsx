@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
-import { img, STAR_SPRITE } from '@/lib/images';
+import { img, CLASS_ORDER, STAR_SPRITE } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import {
   accountNeed,
@@ -1998,7 +1998,6 @@ function NumberField({
 
 const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
 /** Les cinq classes et les trois raretés du jeu — filtres du roster suivi. */
-const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'] as const;
 const RARITIES = [3, 2, 1] as const;
 const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',
@@ -2061,7 +2060,7 @@ function RosterBar({
       </span>
 
       <span className="flex gap-1">
-        {CLASSES.map((cl) => (
+        {CLASS_ORDER.map((cl) => (
           <button
             key={cl}
             type="button"

@@ -327,6 +327,9 @@ export const GRADE_TEXT: Record<string, string> = {
 /** Ordre canonique des éléments (menus du jeu) — tri des vues élémentaires. */
 export const ELEMENT_ORDER = ['fire', 'water', 'earth', 'light', 'dark'] as const;
 
+/** Ordre canonique des classes : celui de l'enum du jeu (TextSystem `SYS_CLASS_*`). */
+export const CLASS_ORDER = ['defender', 'striker', 'ranger', 'mage', 'healer'] as const;
+
 /** Couleur de texte par élément (tokens sémantiques, pas de couleur en dur). */
 export const ELEMENT_TEXT: Record<string, string> = {
   fire: 'text-fire',
