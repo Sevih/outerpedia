@@ -32,6 +32,12 @@ const zh: Record<TranslationKey, string> = {
   'aria.star_rarity': '{rarity}星稀有度',
   'video.by': '作者：{author}',
 
+  // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
+  'duration.day': '{n}天',
+  'duration.hour': '{n}小时',
+  'duration.minute': '{n}分',
+  'duration.second': '{n}秒',
+
   // Contributors
   'contributors.title': '贡献者',
   'contributors.description':

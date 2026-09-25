@@ -32,6 +32,12 @@ const jp: Record<TranslationKey, string> = {
   'aria.star_rarity': '星{rarity}のレアリティ',
   'video.by': '投稿者：{author}',
 
+  // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
+  'duration.day': '{n}日',
+  'duration.hour': '{n}時間',
+  'duration.minute': '{n}分',
+  'duration.second': '{n}秒',
+
   // Contributors
   'contributors.title': 'コントリビューター',
   'contributors.description':

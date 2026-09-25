@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { LANGUAGES, type Lang } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
 import { useNow } from '@/hooks/useNow';
+import { formatDuration, type DurationUnits } from '@/lib/format-duration';
 import type { BuffScheduleEntry } from '@/lib/home';
 
 /**
@@ -54,22 +55,12 @@ export interface BuffStrings {
   nextOn: string;
   showAll: string;
   showLess: string;
+  units: DurationUnits;
 }
 
 /** `YYYY-MM-DD` d'une date, en UTC (les buffs suivent le calendrier UTC). */
 function utcKey(d: Date): string {
   return d.toISOString().slice(0, 10);
-}
-
-function formatDuration(ms: number): string {
-  if (ms <= 0) return '0s';
-  const days = Math.floor(ms / 86400000);
-  const hours = Math.floor((ms % 86400000) / 3600000);
-  const minutes = Math.floor((ms % 3600000) / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  if (days > 0) return `${days}d ${hours}h ${minutes}m`;
-  if (hours > 0) return `${hours}h ${minutes}m`;
-  return `${minutes}m ${seconds}s`;
 }
 
 export function BuffEventTimer({
@@ -122,7 +113,10 @@ export function BuffEventTimer({
         </p>
         {hasToday && (
           <span className="text-content-muted font-mono text-xs tabular-nums">
-            {strings.changesIn.replace('{time}', formatDuration(msToReset))}
+            {strings.changesIn.replace(
+              '{time}',
+              formatDuration(msToReset, strings.units, { seconds: true, maxUnits: 2 }),
+            )}
           </span>
         )}
       </div>

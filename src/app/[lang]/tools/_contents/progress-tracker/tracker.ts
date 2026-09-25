@@ -454,16 +454,6 @@ export function getStats(
   return stats;
 }
 
-/** « 2d 4h 12m » / « 4h 12m » jusqu'au timestamp. */
-export function formatTimeUntil(timestamp: number, now: number): string {
-  const diff = timestamp - now;
-  if (diff <= 0) return '0h 0m';
-  const days = Math.floor(diff / DAY_MS);
-  const hours = Math.floor((diff % DAY_MS) / 3_600_000);
-  const minutes = Math.floor((diff % 3_600_000) / 60_000);
-  return days > 0 ? `${days}d ${hours}h ${minutes}m` : `${hours}h ${minutes}m`;
-}
-
 /* ------------------------------------------------------------------------ */
 /* Storage : specs courants + interprétation de l'ancien schéma              */
 /* ------------------------------------------------------------------------ */

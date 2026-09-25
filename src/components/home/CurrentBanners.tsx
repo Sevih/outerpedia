@@ -1,5 +1,6 @@
 import type { Lang } from '@/lib/i18n/config';
 import { CharacterCard } from '@/components/character/CharacterCard';
+import type { DurationUnits } from '@/lib/format-duration';
 import { getActiveBanners } from '@/lib/home';
 import { BannerCountdown, BannerWrapper } from './BannerCountdown';
 
@@ -13,11 +14,13 @@ export async function CurrentBanners({
   title,
   endsInLabel,
   starAria,
+  durationUnits,
 }: {
   lang: Lang;
   title: string;
   endsInLabel: string;
   starAria: string;
+  durationUnits: DurationUnits;
 }) {
   const banners = await getActiveBanners(lang);
   if (banners.length === 0) return null;
@@ -40,7 +43,12 @@ export async function CurrentBanners({
                 href={b.href}
                 starAriaLabel={starAria}
               />
-              <BannerCountdown endDate={b.end} element={b.element} endsInLabel={endsInLabel} />
+              <BannerCountdown
+                endDate={b.end}
+                element={b.element}
+                endsInLabel={endsInLabel}
+                units={durationUnits}
+              />
             </div>
           </BannerWrapper>
         ))}

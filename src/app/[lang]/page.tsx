@@ -13,6 +13,7 @@ import { PromoCodes } from '@/components/home/PromoCodes';
 import { BeginnerGuides } from '@/components/home/BeginnerGuides';
 import { RecentUpdates } from '@/components/home/RecentUpdates';
 import { getChangelog } from '@/lib/data/changelog';
+import { durationUnits } from '@/lib/format-duration';
 
 export const revalidate = 86400;
 
@@ -59,6 +60,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const buffLabels = Object.fromEntries(
     BUFF_TYPES.map((ty) => [ty, t(`buff.type.${ty}` as TranslationKey)]),
   );
+  const units = durationUnits(t);
 
   return (
     <>
@@ -89,6 +91,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               title={t('home.section.banners')}
               endsInLabel={t('home.banner.ends_in')}
               starAria={t('aria.star_rarity')}
+              durationUnits={units}
             />
             <section>
               <h2 className="text-content-strong mb-6 text-2xl font-bold">
@@ -102,6 +105,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     weekly: t('home.resets.weekly'),
                     monthly: t('home.resets.monthly'),
                   }}
+                  units={units}
                 />
                 <BuffEventTimer
                   schedule={buffSchedule}
@@ -116,6 +120,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     nextOn: t('home.buff.next_on'),
                     showAll: t('home.buff.show_all'),
                     showLess: t('home.buff.show_less'),
+                    units,
                   }}
                 />
               </div>

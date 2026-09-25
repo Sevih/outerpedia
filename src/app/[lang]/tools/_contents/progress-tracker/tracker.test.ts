@@ -14,7 +14,6 @@ import {
   coerceProgress,
   createDefaultSettings,
   exportState,
-  formatTimeUntil,
   getNextPreciseCraftTime,
   getNextReset,
   getNextVHTUnlockTime,
@@ -296,12 +295,6 @@ describe('mutations groupées et stats', () => {
     expect(getStats(crafted, s, WED).monthly.completed).toBe(1);
     const swept = withSweepToggled(base, s, WED);
     expect(getStats(swept, s, WED).daily.completed).toBe(7);
-  });
-
-  it('formatTimeUntil', () => {
-    expect(formatTimeUntil(WED + 2 * DAY + 4 * 3_600_000 + 12 * 60_000, WED)).toBe('2d 4h 12m');
-    expect(formatTimeUntil(WED + 90 * 60_000, WED)).toBe('1h 30m');
-    expect(formatTimeUntil(WED - 1, WED)).toBe('0h 0m');
   });
 });
 

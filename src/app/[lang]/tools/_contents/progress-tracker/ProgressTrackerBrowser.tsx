@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useStoredState } from '@/lib/client-storage';
+import { formatDuration, type DurationUnits } from '@/lib/format-duration';
 import {
   SWEEPABLE_TASK_IDS,
   TASK_DEFINITIONS,
@@ -17,7 +18,6 @@ import {
   SETTINGS_SPEC,
   createDefaultSettings,
   exportState,
-  formatTimeUntil,
   getNextPreciseCraftTime,
   getNextReset,
   getNextVHTUnlockTime,
@@ -60,6 +60,7 @@ export interface TrackerLabels {
   resetAll: string;
   resetConfirm: string;
   resetsIn: string;
+  duration: DurationUnits;
   export: string;
   import: string;
   copyToClipboard: string;
@@ -259,9 +260,9 @@ export function ProgressTrackerBrowser({
 
   const stats = getStats(view, settings, now);
   const resetTimes: Record<TaskType, string> = {
-    daily: formatTimeUntil(getNextReset('daily', now), now),
-    weekly: formatTimeUntil(getNextReset('weekly', now), now),
-    monthly: formatTimeUntil(getNextReset('monthly', now), now),
+    daily: formatDuration(getNextReset('daily', now) - now, labels.duration),
+    weekly: formatDuration(getNextReset('weekly', now) - now, labels.duration),
+    monthly: formatDuration(getNextReset('monthly', now) - now, labels.duration),
   };
   const cycles: TaskType[] = ['daily', 'weekly', 'monthly'];
 
@@ -1075,7 +1076,7 @@ function VHTTaskItem({
             />
           </svg>
           <span>
-            {labels.vhtNextUnlock}: {formatTimeUntil(nextUnlock, now)}
+            {labels.vhtNextUnlock}: {formatDuration(nextUnlock - now, labels.duration)}
           </span>
         </div>
       )}
@@ -1386,7 +1387,7 @@ function PreciseCraftSection({
           </span>
           {nextTime && (
             <div className="text-content-subtle mt-1 text-xs">
-              {labels.availableIn}: {formatTimeUntil(nextTime, now)}
+              {labels.availableIn}: {formatDuration(nextTime - now, labels.duration)}
             </div>
           )}
           {available && view.preciseCraft.completedAt === null && (

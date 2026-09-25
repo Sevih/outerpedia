@@ -33,6 +33,12 @@ const fr: Record<TranslationKey, string> = {
   'aria.star_rarity': 'Rareté {rarity} étoiles',
   'video.by': 'par {author}',
 
+  // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
+  'duration.day': '{n}j',
+  'duration.hour': '{n}h',
+  'duration.minute': '{n}min',
+  'duration.second': '{n}s',
+
   // Contributors
   'contributors.title': 'Contributeurs Outerpedia',
   'contributors.description':

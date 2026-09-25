@@ -32,6 +32,12 @@ const kr: Record<TranslationKey, string> = {
   'aria.star_rarity': '희귀도 {rarity}성',
   'video.by': '제작: {author}',
 
+  // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
+  'duration.day': '{n}일',
+  'duration.hour': '{n}시간',
+  'duration.minute': '{n}분',
+  'duration.second': '{n}초',
+
   // Contributors
   'contributors.title': '기여자',
   'contributors.description':

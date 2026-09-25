@@ -2,6 +2,7 @@ import { getT, type TranslationKey } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
 import { getCatalog } from '@/lib/data/items';
 import { img } from '@/lib/images';
+import { durationUnits } from '@/lib/format-duration';
 import {
   ProgressTrackerBrowser,
   type TrackerAssets,
@@ -89,6 +90,7 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     resetAll: t('progress.resetAll'),
     resetConfirm: t('progress.resetConfirm'),
     resetsIn: t('progress.resetsIn'),
+    duration: durationUnits(t),
     export: t('progress.export'),
     import: t('progress.import'),
     copyToClipboard: t('progress.copyToClipboard'),

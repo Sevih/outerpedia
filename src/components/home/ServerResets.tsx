@@ -1,6 +1,7 @@
 'use client';
 
 import { useNow } from '@/hooks/useNow';
+import { formatDuration, type DurationUnits } from '@/lib/format-duration';
 
 /**
  * Comptes à rebours des resets serveur (daily 00:00 UTC, weekly lundi, monthly
@@ -32,23 +33,14 @@ function computeTimers(now: number): ResetTimers {
   };
 }
 
-function formatTime(ms: number): string {
-  if (ms <= 0) return '0s';
-  const days = Math.floor(ms / 86400000);
-  const hours = Math.floor((ms % 86400000) / 3600000);
-  const minutes = Math.floor((ms % 3600000) / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  if (days > 0) return `${days}d ${hours}h ${minutes}m`;
-  if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
-  return `${minutes}m ${seconds}s`;
-}
-
 export function ServerResets({
   title,
   labels,
+  units,
 }: {
   title: string;
   labels: { daily: string; weekly: string; monthly: string };
+  units: DurationUnits;
 }) {
   const now = useNow();
   const timers = now === null ? null : computeTimers(now);
@@ -68,7 +60,9 @@ export function ServerResets({
           {ms === undefined ? (
             <span className="bg-surface-raised inline-block h-5 w-24 rounded" />
           ) : (
-            <span className="text-content font-mono text-sm tabular-nums">{formatTime(ms)}</span>
+            <span className="text-content font-mono text-sm tabular-nums">
+              {formatDuration(ms, units, { seconds: true })}
+            </span>
           )}
         </div>
       ))}

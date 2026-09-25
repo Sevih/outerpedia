@@ -139,10 +139,6 @@
       CONVENTIONS : `skills.json`, `equipment/ee.json`, `glossaries.json`
       (chargé en statique ici, au disque là), 6 guides, 5 outils… Un accesseur
       par fichier dans `src/lib/data` + règle eslint `no-restricted-imports`.
-- [ ] **Durées « 3d 4h 12m » en anglais dans toutes les langues, quatre copies**
-      (G23) : `BannerCountdown`, `BuffEventTimer`, `ServerResets`,
-      `progress-tracker/tracker.ts`. `SingularityCountdown` a déjà tranché
-      (numérique). Un `lib/format-duration.ts`.
 - [ ] **Chaînes UI en dur** (G24) : 24 sites dans les outils (dont des messages
       d'erreur EN FRANÇAIS remontés tels quels par `roster-import.ts:108-113`,
       « Failed to load track » dans l'OST, `fire`/`striker` bruts en `alt`/`title`
@@ -199,12 +195,9 @@
 - [ ] 92 chaînes courtes des `labels.ts` déjà dans les locales (H9) — deux
       vocabulaires pour un mot ; `t()` pour le chrome, `labels.ts` pour la
       prose. (H10, H11 : FAIT le 25/09, lot A10.)
-- [ ] Hash d'onglets trompeurs de `banner-mileage` (`#banner=pickup` ouvre le
-      custom…, H12) ; `reward`/`rewardWin` priorité inversée entre 3 sites
-      (H13, sans effet aujourd'hui) ; à confirmer : doublon SEO
-      `/<tour>/1` vs page de base, encart « annoncé juin, livré 8/09 » sur la
-      roadmap (H14). Rendre `stamp:guides` automatique (hook pre-commit) pour
-      que H3 ne se reproduise pas.
+- [ ] À confirmer : doublon SEO `/<tour>/1` vs page de base, encart
+      « annoncé juin, livré 8/09 » sur la roadmap (H14). (H12, H13 et le
+      `stamp:guides` en pre-commit : FAIT le 25/09, lot B8.)
 
 ---
 

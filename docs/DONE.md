@@ -7,6 +7,62 @@
 
 ## 2026-09-25
 
+- **`banner-mileage` : hash d'onglets alignés, une seule règle de table de
+  butin, `stamp:guides` en pre-commit** (lot B8, audit guides H12, H13 et le
+  « à faire » de H3). _Onglets_ : `#banner=pickup` ouvrait le Custom Rate Up,
+  `new` le Rate Up, `fes` le Limited ; les ids suivent désormais la bannière
+  réelle (`custom`, `rate-up`, `limited`, `premium` et `supply` inchangés).
+  `BannerTabDef` gagne `legacyIds`, lus par `BannerTabs` comme l'onglet
+  courant : les liens déjà partagés ouvrent toujours le bon onglet, un clic
+  réécrit l'id neuf. `pickup` ne pouvait donc pas devenir l'id du Rate Up (il
+  désignerait deux onglets). _Butin_ : `SpecialRequestSplit` lisait
+  `reward ?? rewardWin`, `EncounterBossGuide` et `IrregularChaseMap`
+  l'inverse, `StagedBossGuide` `reward` seul. Les données tranchent : seules
+  les 12 poursuites irregular portent les deux, `reward` (7041…7043) y est la
+  table générique partagée, `rewardWin` celle du boss. `lootTableOf(ref)`
+  (`lib/data/rewards.ts`) pose `rewardWin ?? reward` et sert les quatre sites ;
+  rien ne change à l'écran, d'où `rewards.test.ts` qui fige la règle. _Stamp_ :
+  commande `stamp-guides` en tête du pre-commit lefthook (glob
+  `src/app/*/guides/_contents/**`, le `*` couvrant `[lang]` que le glob lirait
+  comme une classe ; `stage_fixed`). Le script lisait `git status`, donc aussi
+  le NON indexé : en hook, il aurait re-daté et indexé le meta d'un guide
+  modifié mais hors du commit. Nouveau `--staged` (index seul, via
+  `git diff --cached`), que le hook passe. Vérifié sur un commit jetable
+  (branche supprimée) : `quirk/labels.ts` indexé → `quirk/meta.json` re-daté au
+  25/09 et embarqué ; `gear`, modifié mais non indexé, laissé tel quel.
+  `pnpm commit` garde son étape stamp (il committe en `--no-verify`).
+  Typecheck, lint et 1 956 tests verts. Laissé : le H14 de l'audit (doublon SEO
+  `/<tour>/1`, encart roadmap), qui n'était pas dans le lot.
+
+- **Durées des comptes à rebours localisées : `lib/format-duration.ts`**
+  (lot B1, G23). Quatre copies d'un formatage anglais (« 3d 4h 12m ») servaient
+  dans toutes les langues : `BannerCountdown`, `BuffEventTimer`, `ServerResets`
+  et `formatTimeUntil` du progress tracker. Elles cèdent la place à une fonction
+  pure `formatDuration(ms, units, { seconds, maxUnits })` : unités consécutives
+  depuis la plus grande non nulle (le zéro central de « 1d 0h 5m » reste),
+  troncature et jamais arrondi (un compte à rebours n'annonce pas une minute
+  qui n'y est plus), `0` de la plus petite unité quand c'est écoulé. Des deux
+  voies évaluées en tête du fichier, `Intl.NumberFormat` en `unitDisplay:
+'narrow'` est écartée : le CLDR y rend le japonais en « 3d 4h 12m » (le
+  `short`, « 3 日 4 時間 12 分 », est espacé et long), et la sortie dépend de la
+  version ICU du moteur. Retenues : quatre clés `duration.day/hour/minute/second`
+  (gabarits `{n}…`) dans les six locales — « 3j 4h 12min », « 3日 4時間 12分 »,
+  « 3일 4시간 12분 », « 3天 4小时 12分 ». Les locales n'étant pas dans le bundle
+  client, `durationUnits(t)` les résout au serveur et les composants les
+  reçoivent en prop (`units` via `page.tsx` et `CurrentBanners`, `strings.units`
+  pour le buff, `labels.duration` pour le tracker) — d'où `units` à la place du
+  `lang` prévu. Formes conservées site par site : bannière `maxUnits: 2`, buff
+  `seconds` + `maxUnits: 2`, resets `seconds`, tracker par défaut ; seul écart,
+  le tracker passe de « 0h 12m » à « 12m » sous l'heure. `SingularityCountdown`
+  (numérique `hh:mm:ss`) n'est pas touché. Vérifié : `format-duration.test.ts`
+  (0 jour, 1 jour, troncature des minutes, formes des quatre sites, chaque
+  langue ; le test `formatTimeUntil` du tracker y migre), typecheck, lint, 1956
+  tests ; serveur de dev arrêté, l'accueil a été rendu fr et jp sous happy-dom
+  (test jetable, supprimé) : « Se termine dans 3j 13h », « 13h 12min 9s »,
+  « 終了まで 3日 13時間 », « あと 13時間 12分 で更新 ». Laissé : l'espace entre
+  unités est gardé en japonais et en chinois (lisibilité du compteur), à
+  resserrer si Sevih préfère « 3日4時間 ».
+
 - **Boutons « Télécharger » : `Content-Disposition: attachment` au push R2**
   (lot C2, G19). Les `<a download>` des wallpapers (`WallpapersGallery`) et de
   l'OST (`OstPlayer`) pointent cross-origin vers `img.outerpedia.com` : le

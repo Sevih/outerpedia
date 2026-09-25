@@ -39,6 +39,12 @@ const en = {
   'aria.star_rarity': '{rarity} star rarity',
   'video.by': 'by {author}',
 
+  // Durées (comptes à rebours) — gabarits, cf. lib/format-duration.ts
+  'duration.day': '{n}d',
+  'duration.hour': '{n}h',
+  'duration.minute': '{n}m',
+  'duration.second': '{n}s',
+
   // Contributors
   'contributors.title': 'Outerpedia Contributors',
   'contributors.description':
