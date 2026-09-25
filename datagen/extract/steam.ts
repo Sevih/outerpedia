@@ -30,6 +30,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { isMain } from '../lib/is-main';
 
 /** AppID Steam d'OUTERPLANE. */
 export const STEAM_APPID = 4247320;
@@ -197,4 +198,14 @@ export function installedResVersion(install: SteamInstall): string | null {
   const text = readFileSync(manifest, 'utf-8');
   const m = /"version"\s*:\s*"([^"]+)"\s*\}\s*$/.exec(text.slice(-256));
   return m ? m[1] : null;
+}
+
+// Exécution directe = la SONDE de `scripts/init.ps1`, qui gate la chaîne data
+// sur cette détection plutôt que de refaire registre + `.vdf` en PowerShell.
+// Code 0 = trouvé (racine sur stdout), 2 = introuvable ; tout autre code est un
+// échec de la sonde elle-même, que l'appelant distingue d'un jeu absent.
+if (isMain(import.meta.url)) {
+  const install = findSteamInstall();
+  if (install) console.log(install.root);
+  process.exit(install ? 0 : 2);
 }

@@ -127,9 +127,6 @@
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-- [ ] **`scripts/init.ps1` teste LDPlayer mais lance la chaîne Steam, puis
-      promeut sans revue** (G18) : gater sur `findSteamInstall`, remplacer
-      `datagen:regen` par `datagen:patch`.
 - [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : `download`
       cross-origin vers R2 sans `Content-Disposition` (vérifié `curl -I`).
       Poser `attachment` sur R2 (`audio/bgm/*`, wallpapers) ou `fetch → blob`.

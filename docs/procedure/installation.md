@@ -21,15 +21,17 @@ powershell -ExecutionPolicy Bypass -File scripts\init.ps1
 
 [`scripts/init.ps1`](../../scripts/init.ps1) est un orchestrateur mince : il
 enchaîne les commandes ci-dessous (`corepack`, `pnpm`, `pnpm datagen:*`) et
-**auto-installe via winget** ce qui manque — `nvm-windows`, le runtime **.NET**
-(Il2CppDumper) et `rclone` — en rafraîchissant le PATH dans la foulée. Il pose
+**auto-installe via winget** ce qui manque — `nvm-windows`, le runtime **.NET 10**
+(ilspycmd, `datagen:dump`) et `rclone` — en rafraîchissant le PATH dans la foulée. Il pose
 aussi **UnityPy** (`datagen/requirements.txt`) si python est présent — il
 n'installe pas python lui-même, l'étape qu'il sert étant facultative (§1).
 
 Ce qui reste **irréductiblement manuel** : `git` (il a fallu cloner ce repo pour
-avoir le script), le `.env.local` (§2.1), et un **émulateur LDPlayer lancé avec
-le jeu installé + connecté** (source des données ; sinon le pipeline data est
-sauté proprement, à relancer une fois l'émulateur prêt).
+avoir le script), le `.env.local` (§2.1), et le **client Steam d'OUTERPLANE
+installé et lancé une fois** (source des données, détectée par `findSteamInstall` ;
+sinon le pipeline data est sauté proprement, à relancer une fois le jeu prêt).
+La chaîne data passe par `datagen:patch` : promote y tourne à blanc, le diff se
+revoit avant tout `pnpm datagen:promote --apply`.
 
 > **Lance-le en utilisateur NORMAL (pas administrateur).** Un `git clone` ou un
 > `init.ps1` exécuté en admin rend `.git` et les fichiers générés possédés par

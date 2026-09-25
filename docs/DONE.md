@@ -7,6 +7,33 @@
 
 ## 2026-09-25
 
+- **`scripts/init.ps1` gate la chaîne data sur Steam et ne promeut plus sans
+  revue** (lot A9, G18). Le script testait LDPlayer (`adb devices`) alors que
+  `datagen:pull`/`datagen:dump` sont les scripts STEAM depuis le 26/08 : poste
+  Steam sans émulateur = pipeline sauté, émulateur allumé = Steam tiré quand
+  même. Et il finissait par `datagen:regen` (`build && promote --apply`), qui
+  écrivait `data/generated` sans la revue promise. Fait : la sonde n'est pas
+  réécrite en PowerShell mais APPELÉE — `datagen/extract/steam.ts` gagne un
+  point d'entrée direct (racine sur stdout, code 0 trouvé, 2 introuvable ;
+  tout autre code = la sonde a planté, message distinct dans le script), et
+  `Find-SteamGame` remplace `Get-AdbExe`/`Test-Emulator`. La chaîne devient
+  `datagen:patch` (refresh : pull, re-dump si le code a changé, extract…
+  build, promote EN DRY-RUN, damage) puis `assets:pull`, précédée de
+  `datagen:dump` seulement tant que `<gamedata>/apk/dumped/.dump-stamp.json`
+  manque : sans empreinte `refresh` ne dumpe pas (`codeChanged` → null) alors
+  que `build` lit `dump.cs`, et le dump lit l'install, donc peut précéder le
+  pull. Message final : le diff promote est à revoir, `damage` écrit en direct
+  (git diff). En cohérence avec `package.json` : le runtime winget passe de
+  .NET 8 (Il2CppDumper, chaîne Android) à .NET 10 (ilspycmd de
+  `datagen:dump`), avec un test `dotnet --list-runtimes` — `Install-Tool`
+  prend pour cela un bloc de présence optionnel, un runtime 8 seul passant le
+  test de commande. `installation.md` §0 et `installation-express.md` disent
+  Steam au lieu de LDPlayer. Vérifié : sonde jouée sous Linux (0 + racine ;
+  2 avec `OUTERPLANE_STEAM_DIR` bidon), BOM UTF-8 et fins LF conservés ; le
+  `.ps1` n'a pas pu être exécuté ici (pas de `pwsh`), relu ligne à ligne.
+  Laissé : le reste d'`installation.md` (§1, §2.2, §4) décrit encore la chaîne
+  Android (LDPlayer, Il2CppDumper) — à réécrire à part.
+
 - **`retired` entre dans les contrats monstre et skill de monstre** (lot A8,
   G51). `datagen/promote.ts` marque `retired: true` les entités que la
   rétention garde (`applyRetention` sur `monsters.json`, `monster-skills.json`,

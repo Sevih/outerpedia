@@ -9,8 +9,9 @@
     1. prérequis (fail-fast avec message si un secret / outil lourd manque) ;
     2. toolchain : Node 24 (nvm) → pnpm 11.13 (corepack) → `pnpm install` ;
     3. rclone (fetch des outils datamine depuis R2), installé via winget si absent ;
-    4. pipeline data : pull → dump → extract → regen → assets:collect
-       (nécessite LDPlayer lancé + jeu installé ; sauté proprement sinon).
+    4. pipeline data : [premier dump] → patch (pull → extract → … → promote en
+       DRY, la revue reste humaine) → assets:pull
+       (nécessite le client Steam d'OUTERPLANE installé ; sauté proprement sinon).
 
   VOLONTAIREMENT MINCE : il ne fait qu'APPELER les commandes déjà existantes
   (`corepack`, `pnpm`, `pnpm datagen:*`). Toute la logique fragile (adb, chemins
@@ -84,15 +85,16 @@ function Test-Admin {
 }
 
 # Installe un outil via winget s'il manque, puis rafraîchit l'env pour le rendre
-# visible dans la session. No-op s'il est déjà présent.
-function Install-Tool ([string]$probe, [string]$wingetId, [string]$label) {
-  if (Have $probe) { Info "$label présent."; return }
+# visible dans la session. No-op s'il est déjà présent. `$ok` = test de présence
+# quand celle de la commande ne suffit pas (une version précise).
+function Install-Tool ([string]$probe, [string]$wingetId, [string]$label, [scriptblock]$ok = { Have $probe }) {
+  if (& $ok) { Info "$label présent."; return }
   if (-not (Have 'winget')) { Warn "$label absent et winget introuvable — installe-le à la main."; return }
   Warn "$label absent — installation via winget ($wingetId)."
   & winget install --id $wingetId -e --accept-source-agreements --accept-package-agreements
   Update-SessionEnv
-  if (-not (Have $probe)) { [void](Add-WingetExeToPath "$probe.exe") }
-  if (Have $probe) { Info "$label disponible." }
+  if (-not (& $ok)) { [void](Add-WingetExeToPath "$probe.exe") }
+  if (& $ok) { Info "$label disponible." }
   else { Warn "$label installé mais pas visible dans la session — rouvre un terminal et relance (idempotent)." }
 }
 
@@ -118,7 +120,7 @@ if (-not (Test-Path (Join-Path $RepoRoot 'package.json'))) {
 
 # --- 1b. Outils système auto-installables (winget) -----------------------------
 # git : normalement DÉJÀ là (il a fallu cloner ce repo) — no-op. nvm-windows,
-# .NET (Il2CppDumper) et rclone (fetch R2) sont installés s'ils manquent.
+# .NET 10 (ilspycmd, `datagen:dump`) et rclone (fetch R2) sont installés s'ils manquent.
 
 Say 'Outils système (winget)'
 if (Test-Admin) {
@@ -126,7 +128,11 @@ if (Test-Admin) {
 }
 Install-Tool 'git'    'Git.Git'                    'git'
 Install-Tool 'nvm'    'CoreyButler.NVMforWindows'  'nvm-windows'
-Install-Tool 'dotnet' 'Microsoft.DotNet.Runtime.8' '.NET 8 runtime (Il2CppDumper)'
+# ilspycmd cible net10.0 : un `dotnet` qui n'aurait que le runtime 8 passerait le
+# simple test de commande, puis `datagen:dump` échouerait.
+Install-Tool 'dotnet' 'Microsoft.DotNet.Runtime.10' '.NET 10 runtime (ilspycmd)' {
+  (Have 'dotnet') -and [bool](& dotnet --list-runtimes | Select-String '^Microsoft\.NETCore\.App 10\.')
+}
 Install-Tool 'rclone' 'Rclone.Rclone'              'rclone'
 
 # --- 1c. Outillage python (étapes datagen) -------------------------------------
@@ -197,47 +203,60 @@ if ($SkipToolchain) {
   Run 'pnpm' @('install')
 }
 
-# --- 3. Pipeline data (émulateur requis) ---------------------------------------
+# --- 3. Pipeline data (client Steam requis) ------------------------------------
 
-function Get-AdbExe {
-  if ($env:ADB_PATH) { return $env:ADB_PATH }
-  if (Have 'adb') { return 'adb' }
-  $ld = 'C:\LDPlayer\LDPlayer9\adb.exe'
-  if (Test-Path $ld) { return $ld }
-  return $null
+# Sonde : APPELLE `findSteamInstall` (datagen/extract/steam.ts, exécuté seul) au
+# lieu de refaire registre + libraryfolders.vdf + appmanifest ici — la même
+# vérité que `datagen:pull`. 0 = trouvé (racine sur stdout), 2 = introuvable,
+# autre = la sonde elle-même a échoué (node_modules absent après -SkipToolchain…).
+function Find-SteamGame {
+  if (-not (Have 'pnpm')) { return @{ Code = -1; Root = $null } }
+  $out = & pnpm exec tsx datagen/extract/steam.ts
+  return @{ Code = $LASTEXITCODE; Root = ($out | Select-Object -Last 1) }
 }
 
-function Test-Emulator {
-  $adb = Get-AdbExe
-  if (-not $adb) { return $false }
-  # PS 5.1 : `2>$null` sur un exe natif enveloppe chaque ligne stderr en
-  # ErrorRecord — avec l'EAP global 'Stop', le stderr BÉNIN d'adb (« daemon
-  # not running; starting now ») devenait une exception → émulateur déclaré
-  # absent à tort au premier lancement, pipeline data sauté. EAP local
-  # 'Continue' (portée fonction) : l'enveloppe reste non-terminante.
-  $ErrorActionPreference = 'Continue'
-  try {
-    $out = & $adb devices 2>$null
-    return @($out | Where-Object { $_ -match 'device$' -and $_ -notmatch 'List of devices' }).Count -gt 0
-  } catch { return $false }
-}
-
+# `datagen:patch` = refresh.ts : pull → re-dump SI le code du jeu a changé →
+# extract → convert → étapes python → build → promote en DRY-RUN → damage. La
+# donnée committée fait foi : promote n'écrit PAS data/generated, il affiche le
+# diff à revoir (`pnpm datagen:promote --apply` pour le valider) ; seul damage y
+# écrit en direct, sa revue étant le diff git. `regen` (build + promote --apply)
+# écrivait tout sans revue.
+#
+# `datagen:dump` n'est joué que pour le PREMIER dump : sans empreinte, refresh
+# ne décide pas de dumper (cf. `codeChanged`), or `build` lit dump.cs. Ensuite,
+# c'est patch qui re-dumpe quand il le faut. Il lit l'install, pas le miroir :
+# il peut précéder le pull.
+#
 # assets:pull (pas assets:collect) : on récupère l'ensemble d'images PUBLIÉ sur R2
 # — ce que le site sert réellement, curés/manuels inclus. assets:collect ne
 # régénère QUE les sprites extraits du jeu et rate ces assets-là. (collect+push
 # reste le flux de PUBLICATION quand on datamine du nouveau, cf. newPatch.md.)
-$dataCmds = @('datagen:pull', 'datagen:dump', 'datagen:extract', 'datagen:convert', 'datagen:regen', 'assets:pull')
+$gamedataRoot = if ($env:GAMEDATA_ROOT) { $env:GAMEDATA_ROOT } else { '.gamedata' }
+$dumpStamp = [IO.Path]::Combine($RepoRoot, $gamedataRoot, 'apk', 'dumped', '.dump-stamp.json')
+$dataCmds = @(
+  if (-not (Test-Path $dumpStamp)) { 'datagen:dump' }
+  'datagen:patch'
+  'assets:pull'
+)
 
 if ($SkipData) {
   Say 'Données (sauté : -SkipData)'
-} elseif (-not (Test-Emulator)) {
-  Say 'Données'
-  Warn "Émulateur non détecté (LDPlayer lancé + jeu installé requis). Pipeline data sauté."
-  Info "Une fois l'émulateur prêt, relance simplement ce script, ou à la main :"
-  foreach ($c in $dataCmds) { Info "  pnpm $c" }
 } else {
-  Say 'Données (émulateur détecté)'
-  foreach ($c in $dataCmds) { Run 'pnpm' @($c) }
+  Say 'Données'
+  $steam = Find-SteamGame
+  if ($steam.Code -eq 0) {
+    Info "OUTERPLANE (Steam) : $($steam.Root)"
+    foreach ($c in $dataCmds) { Run 'pnpm' @($c) }
+    Info "Revue : promote a tourné à blanc, data/generated inchangé hors damage (voir git diff). Pour valider : pnpm datagen:promote --apply"
+  } else {
+    if ($steam.Code -eq 2) {
+      Warn "OUTERPLANE (Steam) introuvable — jeu installé et lancé une fois requis (ou OUTERPLANE_STEAM_DIR). Pipeline data sauté."
+    } else {
+      Warn "Sonde Steam en échec (code $($steam.Code)) — pnpm install fait ? Pipeline data sauté."
+    }
+    Info "Une fois le jeu prêt, relance simplement ce script, ou à la main :"
+    foreach ($c in $dataCmds) { Info "  pnpm $c" }
+  }
 }
 
 # --- Fin -----------------------------------------------------------------------

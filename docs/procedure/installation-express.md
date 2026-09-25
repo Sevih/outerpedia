@@ -5,7 +5,7 @@ Explications : [installation.md](installation.md).
 ## Prérequis manuels
 
 1. Installer **git**.
-2. Lancer **LDPlayer** + Outerplane **installé et connecté**.
+2. Installer **OUTERPLANE sur Steam** et le lancer une fois (patch en place).
 3. Récupérer **`.env.local`** (gestionnaire de mots de passe / backup).
 
 ## Depuis zéro
