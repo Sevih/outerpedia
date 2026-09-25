@@ -131,22 +131,25 @@
       code le 25/09 (`assets:push` pose `attachment`, cf. DONE ; HeroFullArt
       vivants de `/wallpapers` par `fetch → blob`, lot C3). Reste le re-push
       des objets déjà sur R2, à lancer par Sevih :
-      `pnpm assets:push --prefix=images/download/ --prefix=images/characters/full/ --prefix=audio/bgm/`
+      `pnpm assets:push --prefix=images/download/ --prefix=audio/bgm/`
       (~800 Mo), puis `curl -I` d'un png pour voir l'en-tête.
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Dette** (rapport § Dette) : 4 modales/lightbox, 3 sélecteurs de perso,
-      3 barres élément/classe, `CLASSES` en dur ×4, `CLASS_SLUGS` ×2 et
-      `ELEMENTS` ×2 FAIT (`CLASS_ORDER`, `ELEMENT_ORDER`) — reste presse-papier ×4, tooltip d'effet recomposé, recherche perso normalisée de
-      3 façons, `esc()`/`rfc822()` ×2 ; datagen : `isPermille` divergent,
-      deux listes de shops permanents, « persos intégrés » ×4 lecteurs, paires
-      classe/enum en dur après dérivation, rebuilds redondants ; familles
-      d'équipement rematérialisées à chaque appel ; 8 utilitaires morts dans
-      `globals.css` FAITS ; `--text-2xs` (10px) FAIT — restent 126
-      `text-[11px]` sans token ;
-      schémas persistés non normalisés (tier-list-maker) ; Twitch `parent` sans
-      les sous-domaines ; `lefthook` `parallel: true` format+lint.
+- [ ] **Dette** (rapport § Dette) — le 25/09, lots A1–A11 ont soldé `CLASSES`,
+      `CLASS_SLUGS`, `ELEMENTS`, `esc()`/`rfc822()`, Twitch `parent`, lefthook
+      `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
+      découpé en lots délégables (prompts A13–A20, B9, B10 dans
+      lots-opus-2026-09-25.md) : presse-papier ×8, recherche perso normalisée
+      de 3 façons, tooltip d'effet recomposé, `isPermille`/`fmtValue`/`findBuff`
+      recopiés dans `solver.ts`, paires classe/enum en dur dans `manifest.ts`,
+      `loadTextIndex` sans cache et rebuilds redondants, 126 `text-[11px]`,
+      schémas persistés non normalisés (tier-list-maker), glob lint sans
+      `*.mjs` + `eslint-config-next` désaligné + règle « alignement par ligne »
+      des locales à réécrire, 4 modales/lightbox, 3 sélecteurs de perso et 3
+      barres élément/classe. Non découpés (à relire d'abord) : deux listes de
+      shops permanents, « persos intégrés » ×4 lecteurs, `advOf`/`stripBrackets`
+      dans `encounters.ts`, `pnpm dev` = `clean:all` (décision).
 - [ ] **Lot non couvert à relancer** : `portrait-fx-*.ts` (WebGL). Les guides
       sont audités (09/09, [audit/guides.md](./audit/guides.md)) ; les 18
       générateurs sont en cours.
