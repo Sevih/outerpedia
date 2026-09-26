@@ -37,7 +37,14 @@ export async function readLiveCoupons(): Promise<LiveCoupons> {
 }
 
 export type WriteResult =
-  | { ok: true; etag: string; purged: boolean; purgeError?: string }
+  | {
+      ok: true;
+      etag: string;
+      purged: boolean;
+      /** Le CDN sert déjà la nouvelle version (purge propagée). */
+      edgeFresh: boolean;
+      purgeError?: string;
+    }
   | { ok: false; conflict: boolean; errors: string[] };
 
 const CONFLICT_MSG =
@@ -60,12 +67,47 @@ export async function writeLiveCoupons(list: PromoCode[], etag: string): Promise
   if (put === 'conflict') return { ok: false, conflict: true, errors: [CONFLICT_MSG] };
 
   const purge = await purgeEdge(KEY);
+  const edgeFresh = purge.purged && (await waitForEdge(put.etag));
   return {
     ok: true,
     etag: put.etag,
     purged: purge.purged,
+    edgeFresh,
     ...(purge.error ? { purgeError: purge.error } : {}),
   };
+}
+
+/** Attente maximale de la propagation de la purge Cloudflare. */
+const EDGE_WAIT_MS = 10_000;
+const EDGE_POLL_MS = 500;
+
+/**
+ * Attend que le CDN serve la version qu'on vient d'écrire. La purge Cloudflare
+ * met quelques secondes à se propager : une page régénérée juste après relit
+ * l'ANCIENNE copie et la remet en cache 10 min de chaque côté (constaté en
+ * recette : `/coupon remove` écrit à 07:55:35, le CDN servait la copie de
+ * 07:55:14, mise en cache APRÈS la suppression). D'où l'attente, AVANT que
+ * l'appelant n'expire les pages.
+ *
+ * En GET, comme la page : un HEAD passe à travers le cache (`DYNAMIC`) et
+ * répondrait « à jour » pendant que le GET sert encore l'ancienne copie.
+ */
+async function waitForEdge(etag: string): Promise<boolean> {
+  const base = process.env.NEXT_PUBLIC_IMG_BASE;
+  if (!base) return false;
+  const want = etag.replace(/^W\//, '').replace(/"/g, '');
+  const deadline = Date.now() + EDGE_WAIT_MS;
+  while (Date.now() < deadline) {
+    const res = await fetch(`${base}/${KEY}`, {
+      cache: 'no-store',
+      signal: AbortSignal.timeout(3000),
+    }).catch(() => undefined);
+    await res?.body?.cancel().catch(() => {});
+    const got = res?.headers.get('etag')?.replace(/^W\//, '').replace(/"/g, '');
+    if (got === want) return true;
+    await new Promise((r) => setTimeout(r, EDGE_POLL_MS));
+  }
+  return false;
 }
 
 /** Tentatives d'une opération du bot quand un autre écrivain passe entre la lecture et l'écriture. */

@@ -7,6 +7,18 @@
 
 ## 2026-09-26
 
+- **`/coupon remove` restait visible sur le site : la page était régénérée
+  avant que la purge Cloudflare ne soit propagée.** Constaté en recette, juste
+  après le correctif ci-dessous : R2 sans le code (écrit à 07:55:35 UTC), mais
+  le CDN servait en `HIT` la copie de 07:55:14, mise en cache APRÈS la
+  suppression. La purge met quelques secondes à se propager ; la page,
+  régénérée aussitôt, relisait l'ancienne copie et la remettait en cache
+  (10 min au CDN, 10 min dans Next). L'édition d'avant n'était passée que par
+  chance. `writeLiveCoupons` attend donc, après la purge, que le CDN serve
+  l'ETag écrit (GET toutes les 500 ms, 10 s au plus) — en GET comme la page :
+  un HEAD passe à travers le cache (`DYNAMIC`) et aurait répondu « à jour ».
+  La route n'expire les pages qu'ensuite.
+
 - **`/coupon` du staff : la page `/coupons` et l'accueil se mettent à jour
   tout de suite, plus jusqu'à ~20 min plus tard.** Constaté en recette : un
   `/coupon edit` était bien sur R2 à 07:29:15 UTC, la page servait encore
