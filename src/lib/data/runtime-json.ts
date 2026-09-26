@@ -32,12 +32,19 @@ const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE ?? '';
  */
 const FETCH_TIMEOUT_MS = 3000;
 
+/**
+ * Étiquette de cache de la lecture de `name` : une écriture faite DANS le
+ * process de prod (route interne des coupons) l'invalide, avec les pages qui
+ * s'en servent — sans quoi la page garde l'ancienne copie jusqu'à 20 min.
+ */
+export const runtimeJsonTag = (name: string): string => `runtime-json:${name}`;
+
 export async function loadRuntimeJson<T>(name: string, fallback: T, revalidate = 600): Promise<T> {
   if (IMG_BASE) {
     try {
       const url = `${IMG_BASE}/data/${name}${revalidate === 0 ? `?fresh=${Date.now()}` : ''}`;
       const res = await fetch(url, {
-        next: { revalidate },
+        next: { revalidate, tags: [runtimeJsonTag(name)] },
         signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
       });
       if (res.ok) return (await res.json()) as T;

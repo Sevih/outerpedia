@@ -5,6 +5,20 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-26
+
+- **`/coupon` du staff : la page `/coupons` et l'accueil se mettent à jour
+  tout de suite, plus jusqu'à ~20 min plus tard.** Constaté en recette : un
+  `/coupon edit` était bien sur R2 à 07:29:15 UTC, la page servait encore
+  l'ancienne récompense une minute plus tard. La purge Cloudflare ne vide que
+  le CDN ; le process Next garde, lui, sa lecture de R2 (cache de données,
+  600 s) et les pages rendues (ISR). La lecture runtime porte désormais une
+  étiquette (`runtimeJsonTag`), et `/api/internal/coupons` l'expire
+  immédiatement après chaque écriture réussie (`revalidateTag(…, { expire: 0 })`),
+  puis `revalidatePath` sur `/[lang]/coupons` et `/[lang]`. Limite : une
+  sauvegarde depuis l'admin LOCAL n'atteint pas ce process, elle garde le
+  délai d'avant (≤ 20 min).
+
 ## 2026-09-25
 
 - **`visualDistance` (wallpaper-versions) ne verrouille plus le webp publié

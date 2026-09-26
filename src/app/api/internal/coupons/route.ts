@@ -1,4 +1,6 @@
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
+import { runtimeJsonTag } from '@/lib/data/runtime-json';
 import { refuseUnlessBearer } from '@/lib/internal-auth';
 import { applyLiveCouponOp, readLiveCoupons } from '@/lib/data/live-coupons';
 import { getItemEntry } from '@/lib/data/item-catalog';
@@ -17,6 +19,9 @@ import type { CouponOp, PromoCode } from '@/lib/data/promo-rules';
 export const dynamic = 'force-dynamic';
 
 const SECRET = 'COUPON_API_SECRET';
+
+/** Pages qui affichent les coupons : `/coupons` et l'accueil (codes actifs). */
+const COUPON_PAGES = ['/[lang]/coupons', '/[lang]'] as const;
 
 const rewardName = (id: string): string => getItemEntry(id)?.name.en ?? id;
 
@@ -96,5 +101,12 @@ export async function POST(request: Request) {
       { ok: false, errors: res.errors },
       { status: res.conflict ? 409 : 400 },
     );
+
+  // La purge Cloudflare ne vide que le CDN : ce process garde, lui, la lecture
+  // de R2 ET les pages rendues (ISR) jusqu'à ~20 min. On les expire ici, tout
+  // de suite, pour que « live on the site » soit vrai (constaté en recette :
+  // edit sur R2, page inchangée une minute plus tard).
+  revalidateTag(runtimeJsonTag('coupons.json'), { expire: 0 });
+  for (const page of COUPON_PAGES) revalidatePath(page, 'page');
   return NextResponse.json({ ok: true, purged: res.purged });
 }
