@@ -772,8 +772,11 @@
     {
       "title": {
         "en": "D.Saeran solo",
-        "es": "D.Saeran en solitario",
-        "fr": "D.Saeran solo"
+        "jp": "D.セイラン ソロ",
+        "kr": "D.세이란 솔로",
+        "zh": "D.萨伊蓝 单人",
+        "fr": "D.Saeran solo",
+        "es": "D.Saeran en solitario"
       },
       "element": "dark",
       "slots": [["Demiurge Saeran"], ["Stella"], ["Anarky"], ["Monad Iota"]],
@@ -867,7 +870,7 @@
       ],
       "video": {
         "platform": "youtube",
-        "id": "Me8K-FL9q68",
+        "id": "eD-C-rxEs0Y",
         "title": "D.Saeran solo"
       },
       "geasActive": {
