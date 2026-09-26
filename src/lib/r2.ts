@@ -142,11 +142,17 @@ export async function putR2Object(
  * renvoie l'échec en clair — sans purge, le `s-maxage` court borne le retard.
  */
 export async function purgeEdge(key: string): Promise<{ purged: boolean; error?: string }> {
-  const { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ZONE_ID, NEXT_PUBLIC_IMG_BASE } = process.env;
+  const { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ZONE_ID } = process.env;
+  // En TOUTES LETTRES, jamais par déstructuration : Next ne grave une
+  // `NEXT_PUBLIC_*` dans le code au build que sous cette forme, et l'image de
+  // prod ne la porte pas à l'exécution. Déstructurée, elle valait `undefined`
+  // en prod : la purge était sautée en silence (constaté en recette, 26/09).
+  const NEXT_PUBLIC_IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE;
   if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ZONE_ID || !NEXT_PUBLIC_IMG_BASE) {
     return {
       purged: false,
-      error: 'purge edge sautée (CLOUDFLARE_* absents) — visible en ≤ 20 min.',
+      error:
+        'purge edge sautée (CLOUDFLARE_* ou NEXT_PUBLIC_IMG_BASE absents) — visible en ≤ 20 min.',
     };
   }
   try {

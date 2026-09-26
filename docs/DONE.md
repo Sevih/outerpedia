@@ -7,6 +7,20 @@
 
 ## 2026-09-26
 
+- **La purge Cloudflare des coupons n'était JAMAIS faite en prod.**
+  `purgeEdge` (`lib/r2`) lisait `NEXT_PUBLIC_IMG_BASE` par déstructuration de
+  `process.env` ; Next ne grave une `NEXT_PUBLIC_*` dans le code au build que
+  sous la forme `process.env.NEXT_PUBLIC_X`, et l'image de prod ne la porte
+  pas à l'exécution (seul le stage `builder` du Dockerfile la définit). Elle
+  valait donc `undefined` : purge sautée en silence, et l'attente du CDN
+  (entrée suivante) sautée avec elle. Un ajout paraissait instantané (rien
+  en cache), une édition ou une suppression restait invisible jusqu'à 20 min.
+  Prouvé en recette : R2 à jour à 08:17:26 UTC, CDN en `HIT` sur la copie de
+  08:16:58 ; la même purge lancée à la main avec le jeton de prod → `MISS`
+  puis la bonne version en 1 s. Lecture en toutes lettres, commentaire à
+  l'appui ; et `/api/internal/coupons` écrit un avertissement dans les logs
+  quand la purge ou sa propagation échoue, au lieu de se taire.
+
 - **`/coupon remove` restait visible sur le site : la page était régénérée
   avant que la purge Cloudflare ne soit propagée.** Constaté en recette, juste
   après le correctif ci-dessous : R2 sans le code (écrit à 07:55:35 UTC), mais

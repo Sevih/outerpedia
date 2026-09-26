@@ -106,6 +106,13 @@ export async function POST(request: Request) {
   // de R2 ET les pages rendues (ISR) jusqu'à ~20 min. On les expire ici, tout
   // de suite, pour que « live on the site » soit vrai (constaté en recette :
   // edit sur R2, page inchangée une minute plus tard).
+  // Un échec ici ne bloque rien (le code EST enregistré), mais le site suivra
+  // en retard : on le dit dans les logs du conteneur plutôt que de se taire.
+  if (!res.purged || !res.edgeFresh)
+    console.warn(
+      `[coupons] ${op.action} enregistré, mais le CDN n'est pas à jour` +
+        (res.purgeError ? ` : ${res.purgeError}` : ' (purge non propagée en 10 s)'),
+    );
   revalidateTag(runtimeJsonTag('coupons.json'), { expire: 0 });
   for (const page of COUPON_PAGES) revalidatePath(page, 'page');
   return NextResponse.json({ ok: true, purged: res.purged });
