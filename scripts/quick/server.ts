@@ -35,6 +35,7 @@ import {
   searchVideos,
   videoTargets,
   type ComicUpload,
+  type Report,
 } from './actions';
 import { COMIC_LANGS } from '@datagen/generators/comics';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
@@ -63,6 +64,37 @@ const json = (res: ServerResponse, data: unknown, status = 200): void => {
   res.writeHead(status, { 'content-type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(data));
 };
+
+/**
+ * Réponse en NDJSON — une ligne JSON par étape, ÉCRITE DÈS QU'ELLE ARRIVE, puis
+ * une dernière ligne `{ done: … }` qui porte le résultat complet.
+ *
+ * Les trois gestes prennent des dizaines de secondes (conversion webp, deux
+ * poussées R2, purge d'edge, push git) et leur journal existait déjà — mais
+ * rendu en BLOC au retour, il ne s'affichait qu'une fois tout fini. L'onglet
+ * montrait donc un texte figé pendant deux minutes, sans rien qui distingue une
+ * étape lente d'un plantage.
+ *
+ * `setNoDelay` : sans lui, Nagle peut garder une ligne de 40 octets le temps
+ * d'en accumuler d'autres — c'est-à-dire exactement le temps qu'on veut couvrir.
+ */
+async function stream<T>(res: ServerResponse, run: (report: Report) => Promise<T>): Promise<void> {
+  res.socket?.setNoDelay(true);
+  res.writeHead(200, {
+    'content-type': 'application/x-ndjson; charset=utf-8',
+    'cache-control': 'no-store',
+  });
+  const line = (o: unknown): void => void res.write(`${JSON.stringify(o)}\n`);
+  try {
+    line({ done: await run((step, doing) => line(doing ? { step, doing: true } : { step })) });
+  } catch (e: unknown) {
+    // Les en-têtes sont partis : plus question de répondre en 500, l'échec passe
+    // par le journal comme le reste (le `catch` de `createServer` ne pourrait
+    // plus qu'échouer sur des en-têtes déjà envoyés).
+    line({ done: { ok: false, log: [String(e)] } });
+  }
+  res.end();
+}
 
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? '/', `http://localhost:${PORT}`);
@@ -93,13 +125,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const { list, etag } = await body<{ list: PromoCode[]; etag: string | null }>(req);
     if (!etag)
       return json(res, { ok: false, log: ['Liste non chargée depuis R2 : recharger.'] }, 409);
-    json(res, await saveCouponList(list, etag));
+    await stream(res, (report) => saveCouponList(list, etag, report));
     return;
   }
 
   if (req.method === 'POST' && url.pathname === '/api/comics') {
     const { lang, files } = await body<{ lang: string; files: ComicUpload[] }>(req);
-    json(res, await addComics(lang as (typeof COMIC_LANGS)[number], files));
+    await stream(res, (report) => addComics(lang as (typeof COMIC_LANGS)[number], files, report));
     return;
   }
 
@@ -123,7 +155,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     );
     const parsed = parseTarget(target);
     if (!parsed) return json(res, { ok: false, log: [`Cible inconnue : ${target}`] }, 400);
-    json(res, await addVideo(parsed, input, label));
+    await stream(res, (report) => addVideo(parsed, input, label, report));
     return;
   }
 

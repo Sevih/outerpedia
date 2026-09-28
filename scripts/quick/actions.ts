@@ -55,6 +55,38 @@ export interface Outcome {
   log: string[];
 }
 
+/**
+ * Envoi d'une ligne À L'INSTANT où elle est écrite (cf. `stream` dans
+ * server.ts). Sans lui, le journal n'existait qu'au RETOUR : déposer une
+ * 4-comic enchaîne conversion webp, deux poussées R2, une purge d'edge et un
+ * push git — deux minutes pendant lesquelles l'onglet affichait un texte figé,
+ * où rien ne distingue « ça avance » de « c'est mort » (constat Sevih du
+ * 28/09 : cru bloqué, ça ne l'était pas).
+ */
+export type Report = (line: string, doing?: boolean) => void;
+
+/**
+ * Journal à deux temps, parce qu'une ligne n'a pas la même valeur selon qu'elle
+ * ANNONCE ou CONSTATE :
+ *   - `doing` — l'étape commence. Streamée seulement : elle ne dit rien du
+ *     résultat et n'a donc rien à faire dans l'`Outcome` relu après coup. C'est
+ *     elle qui porte l'information utile ici, une étape ne se signalant sinon
+ *     qu'une fois FINIE — soit, pour la plus lente, après la longue attente
+ *     qu'il s'agit d'expliquer.
+ *   - `done` — l'étape est passée. Streamée ET gardée.
+ */
+function journal(report?: Report) {
+  const lines: string[] = [];
+  return {
+    lines,
+    doing: (line: string): void => report?.(line, true),
+    done: (line: string): void => {
+      lines.push(line);
+      report?.(line);
+    },
+  };
+}
+
 const EDITORIAL_COMICS = resolve('.editorial/comics');
 const CONTENTS_DIR = resolve('src/app/[lang]/guides/_contents');
 
@@ -78,8 +110,9 @@ const CONTENTS_DIR = resolve('src/app/[lang]/guides/_contents');
  * `tsc --noEmit` triple — une minute d'attente pour des fichiers qu'aucun type
  * ne peut casser. Dès qu'un chemin n'est pas un `.json`, les hooks tournent.
  */
-export function commitAndPush(paths: string[], message: string): Outcome {
-  const log: string[] = [];
+export function commitAndPush(paths: string[], message: string, report?: Report): Outcome {
+  const j = journal(report);
+  const log = j.lines;
   const run = (args: string[]): { ok: boolean; out: string } => {
     const r = spawnSync('git', args, { encoding: 'utf8' });
     const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim();
@@ -97,8 +130,9 @@ export function commitAndPush(paths: string[], message: string): Outcome {
   const hooks = dataOnly ? ['--no-verify'] : [];
   const commit = run(['commit', ...hooks, '-m', message]);
   if (!commit.ok) return { ok: false, log: [`git commit a échoué : ${commit.out}`] };
-  log.push(`git : ${message}`);
+  j.done(`git : ${message}`);
 
+  j.doing('git push');
   const push = run(['push', ...hooks]);
   // Le commit, lui, EST passé : le dire, sinon on croit avoir tout perdu et on
   // ressaisit la même chose. Le cas courant est une branche en retard.
@@ -111,7 +145,7 @@ export function commitAndPush(paths: string[], message: string): Outcome {
         'Corriger avec `git pull --rebase` puis `git push`.',
       ],
     };
-  log.push('poussé — la CI build et déploie.');
+  j.done('poussé — la CI build et déploie.');
   return { ok: true, log };
 }
 
@@ -152,16 +186,22 @@ export const currentCoupons = loadCouponsForEdit;
 export async function saveCouponList(
   list: PromoCode[],
   etag: string,
+  report?: Report,
 ): Promise<Outcome & { etag?: string }> {
+  const j = journal(report);
+  const log = j.lines;
+
+  j.doing('enregistrement sur R2, puis purge de l’edge');
   const res = await saveCouponsLive(list, etag);
   if (!res.ok) return { ok: false, log: res.errors };
-
-  const log = [
+  j.done(
     `${list.length} codes enregistrés sur R2${res.purged ? ' + edge purgé' : ` (${res.purgeError ?? 'edge non purgé'})`}.`,
-  ];
+  );
+
   const git = commitAndPush(
     ['data/curated/coupons.json'],
     'chore(coupons): mise à jour des codes promo',
+    report,
   );
   return { ok: git.ok, etag: res.etag, log: [...log, ...git.log] };
 }
@@ -188,39 +228,48 @@ export interface ComicUpload {
  * `assets:push` reste appelé en entier : il est incrémental (diff sha1 contre
  * `pushed.json`), donc seules les nouvelles clés partent réellement.
  */
-export async function addComics(lang: ComicLang, files: ComicUpload[]): Promise<Outcome> {
+export async function addComics(
+  lang: ComicLang,
+  files: ComicUpload[],
+  report?: Report,
+): Promise<Outcome> {
   if (!COMIC_LANGS.includes(lang)) return { ok: false, log: [`Langue inconnue : ${lang}`] };
   if (!files.length) return { ok: false, log: ['Aucun fichier.'] };
 
   const dir = resolve(EDITORIAL_COMICS, lang);
   mkdirSync(dir, { recursive: true });
 
-  const log: string[] = [];
+  const j = journal(report);
+  const log = j.lines;
   for (const f of files) {
     const name = safeName(f.name);
     if (!name) return { ok: false, log: [`Nom de fichier refusé : ${f.name}`] };
     writeFileSync(resolve(dir, name), Buffer.from(f.data, 'base64'));
-    log.push(`déposé : ${lang}/${name}`);
+    j.done(`déposé : ${lang}/${name}`);
   }
 
+  j.doing('conversion webp');
   const made = await collectComics();
-  log.push(`conversion webp : ${made.made} produites, ${made.skipped} déjà à jour.`);
+  j.done(`conversion webp : ${made.made} produites, ${made.skipped} déjà à jour.`);
 
+  j.doing('sauvegarde des originaux sur R2 (editorial:push)');
   pushEditorial();
-  log.push('originaux sauvegardés sur R2 (editorial:push).');
+  j.done('originaux sauvegardés sur R2 (editorial:push).');
 
+  j.doing('push R2 du staging, puis purge de l’edge — l’étape la plus lente');
   const push = spawnSync(process.execPath, [resolve('scripts/assets-push.mjs')], {
     encoding: 'utf8',
   });
   if (push.status !== 0)
     return { ok: false, log: [...log, `assets:push a échoué : ${(push.stderr ?? '').trim()}`] };
-  log.push('poussé sur R2 — la galerie lit le manifeste à la requête.');
+  j.done('poussé sur R2 — la galerie lit le manifeste à la requête.');
 
-  log.push(`repli committé : ${syncComicsSeed()}.`);
+  j.done(`repli committé : ${syncComicsSeed()}.`);
 
   const git = commitAndPush(
     ['data/generated/comics.json', 'datagen/assets/pushed.json'],
     'chore(assets): nouvelles 4-comics',
+    report,
   );
   return { ok: git.ok, log: [...log, ...git.log] };
 }
@@ -310,14 +359,19 @@ export async function addVideo(
   target: VideoTarget,
   input: string,
   label?: string,
+  report?: Report,
 ): Promise<Outcome> {
   const id = youtubeId(input);
   if (!id) return { ok: false, log: [`Id YouTube illisible : ${input}`] };
 
+  const j = journal(report);
+  const log = j.lines;
+
+  j.doing('métadonnées YouTube');
   const meta = (await fetchMeta([id]))[id];
   if (!meta) return { ok: false, log: [`YouTube ne connaît pas ${id} (ou la clé API manque).`] };
 
-  const log = [`${meta.title} — ${meta.author}`];
+  j.done(`${meta.title} — ${meta.author}`);
   const touched: string[] = [];
 
   if (target.kind === 'character') {
@@ -340,7 +394,7 @@ export async function addVideo(
     });
     if (errors.length) return { ok: false, log: [...log, ...errors] };
     touched.push('data/curated/characters.json');
-    log.push(`ajoutée au perso ${target.id}.`);
+    j.done(`ajoutée au perso ${target.id}.`);
   } else {
     const path = guideVideosPath(target);
     if (!path)
@@ -364,13 +418,14 @@ export async function addVideo(
       },
     ]);
     touched.push(path);
-    log.push(`ajoutée au guide ${target.category}/${target.slug}.`);
+    j.done(`ajoutée au guide ${target.category}/${target.slug}.`);
   }
 
+  j.doing('rafraîchissement du cache video-meta');
   await refreshVideoMeta();
   touched.push('data/generated/video-meta.json');
-  log.push('cache video-meta rafraîchi.');
+  j.done('cache video-meta rafraîchi.');
 
-  const git = commitAndPush(touched, `feat(videos): ${meta.title}`);
+  const git = commitAndPush(touched, `feat(videos): ${meta.title}`, report);
   return { ok: git.ok, log: [...log, ...git.log] };
 }

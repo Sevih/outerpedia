@@ -254,6 +254,20 @@
       #log .ko {
         color: var(--danger);
       }
+      /* Étape en cours : le sablier bat, donc on voit que ça travaille même quand
+         l'étape dure une minute et n'a encore rien à raconter. */
+      #log .run::before {
+        content: '⟳ ';
+        animation: pulse 1.2s ease-in-out infinite;
+      }
+      #log .run {
+        font-style: italic;
+      }
+      @keyframes pulse {
+        50% {
+          opacity: 0.35;
+        }
+      }
       .cands {
         display: grid;
         gap: 8px;
@@ -405,19 +419,67 @@
       let pending = []; // récompenses du code en cours de saisie
       let files = []; // planches choisies, {name, data}
 
-      const log = (lines, ok) => {
-        $('log').innerHTML = lines
-          .map((l) => `<div class="${ok ? 'ok' : 'ko'}">${l.replace(/</g, '&lt;')}</div>`)
-          .join('');
+      /**
+       * `ok` à `undefined` = opération EN COURS : les lignes restent neutres,
+       * elles ne sont ni un succès ni un échec tant que rien n'est tranché.
+       * `doing` est l'étape commencée, affichée en dernière ligne et remplacée
+       * par la suivante — l'empiler doublerait la longueur du journal.
+       */
+      const log = (lines, ok, doing) => {
+        const cls = ok === undefined ? '' : ok ? 'ok' : 'ko';
+        const esc = (l) => String(l).replace(/</g, '&lt;');
+        $('log').innerHTML =
+          lines.map((l) => `<div class="${cls}">${esc(l)}</div>`).join('') +
+          (doing ? `<div class="run">${esc(doing)}</div>` : '');
       };
 
+      /**
+       * Lit la réponse AU FIL (NDJSON, cf. `stream` dans server.ts) : chaque
+       * étape s'affiche dès qu'elle est franchie. Le journal existait déjà mais
+       * arrivait d'un bloc au retour — déposer une 4-comic laissait donc deux
+       * minutes de texte figé, où rien ne distinguait une étape lente d'un
+       * plantage.
+       *
+       * Une réponse JSON d'une seule pièce (un 409 d'etag, `/api/quit`) n'a ni
+       * `step` ni `done` : elle EST le résultat. Les deux formes se lisent donc
+       * ici, plutôt qu'en tenant à jour la liste des routes qui streament.
+       */
       async function post(path, payload) {
         const res = await fetch(path, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        const data = await res.json();
+        const reader = res.body.getReader();
+        const dec = new TextDecoder();
+        const steps = [];
+        let doing = null;
+        let done = null;
+        let buf = '';
+
+        const eat = (raw) => {
+          if (!raw.trim()) return;
+          const m = JSON.parse(raw);
+          if (m.done) done = m.done;
+          else if (m.doing) doing = m.step;
+          else if (m.step !== undefined) {
+            steps.push(m.step);
+            doing = null;
+          } else done = m;
+          log(steps, done ? done.ok : undefined, doing);
+        };
+
+        for (;;) {
+          const { value, done: end } = await reader.read();
+          if (end) break;
+          buf += dec.decode(value, { stream: true });
+          const parts = buf.split('\n');
+          buf = parts.pop(); // ligne encore incomplète : elle attend la suite
+          for (const p of parts) eat(p);
+        }
+        eat(buf); // réponse sans saut de ligne final (JSON d'une seule pièce)
+
+        const data = done ?? { ok: false, log: ['réponse interrompue'] };
         log(data.log ?? [data.error ?? 'erreur'], data.ok);
         return data;
       }
@@ -585,7 +647,7 @@
       $('k-send').onclick = async () => {
         if (!files.length) return log(['Aucune planche choisie.'], false);
         $('k-send').disabled = true;
-        log(['conversion + push R2 en cours…'], true);
+        log([], undefined, 'envoi des planches au serveur');
         const r = await post('/api/comics', { lang: $('k-lang').value, files });
         if (r.ok) {
           files = [];
@@ -620,7 +682,7 @@
       $('v-add').onclick = async () => {
         if (!$('v-input').value.trim()) return log(['URL ou id requis.'], false);
         $('v-add').disabled = true;
-        log(['résolution YouTube + commit en cours…'], true);
+        log([], undefined, 'envoi au serveur');
         const r = await post('/api/video', {
           target: $('v-target').value,
           input: $('v-input').value.trim(),
