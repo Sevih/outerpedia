@@ -11,7 +11,7 @@
  *     │  dump (→ dump.cs)
  *     └─ si tiré : extract → convert → face-layout(py) → sprite-rect(py) →
  *        font-metrics(py) → build → promote[ --apply] → damage → [collect]
- *   [getNews]  ← optionnel (fetch web, indépendant du datamine)
+ *   [getNews]  ← optionnel (fetch web, indépendant du datamine) — NON BLOQUANT
  *
  * La chaîne gatée est DÉCLARÉE (`genSteps`), pas écrite en ligne droite : c'est
  * ce qui permet de la désigner étape par étape — pour le pré-vol comme pour la
@@ -211,6 +211,32 @@ export function dumpDecision(i: {
 function step(label: string, file: string, args: string[] = []): void {
   console.log(`\n▶ ${label}`);
   execFileSync(process.execPath, [TSX_CLI, resolve(file), ...args], { stdio: 'inherit' });
+}
+
+/**
+ * getNews est le SEUL appel réseau de la chaîne, et il vise un WordPress tiers
+ * qui tombe, répond 5xx et DÉMÉNAGE (hôte renommé `…vagames.co.kr` →
+ * `…major7.kr` fin 09/2026, qui a cassé tous les `pnpm dev` d'un coup). Le
+ * laisser lever bloquait le démarrage alors que le site tourne très bien sur
+ * `data/patch-notes` COMMITTÉ : on avertit fort, et on continue.
+ *
+ * `pnpm getNews` lancé seul, lui, sort toujours en échec — c'est là qu'on veut
+ * qu'un scrape raté se voie (et que la CI le voie).
+ */
+function warnNewsFailed(e: unknown): void {
+  const status = (e as { status?: number } | null)?.status;
+  const bar = '─'.repeat(72);
+  const lines = [
+    bar,
+    `getNews A ÉCHOUÉ${status != null ? ` (code ${status})` : ''} — les patch notes ne sont PAS à jour.`,
+    "Cause : voir l'erreur imprimée juste au-dessus.",
+    '',
+    'Le dev démarre quand même, sur data/patch-notes committé.',
+    'Hors ligne → normal. Sinon vérifier WP_API dans scripts/get-news.ts :',
+    "l'hôte du WordPress officiel a déjà déménagé une fois.",
+    bar,
+  ];
+  console.warn(`\n${lines.map((l) => `⚠  ${l}`.trimEnd()).join('\n')}\n`);
 }
 
 /**
@@ -548,7 +574,10 @@ export type RefreshOptions = {
   apply?: boolean;
   /** Rejouer `assets:collect` (staging des images). */
   collect?: boolean;
-  /** Rejouer `getNews` (toujours, indépendant du pull). */
+  /**
+   * Rejouer `getNews` (toujours, indépendant du pull). BEST EFFORT : un échec
+   * avertit fort et laisse la chaîne finir — cf. `warnNewsFailed`.
+   */
   news?: boolean;
   /** Source de jeu (défaut : `DATAGEN_SOURCE`, sinon steam ; android = secours). */
   source?: SourceName;
@@ -676,8 +705,15 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
     if (hasGamedata && prevSig === null) writeFileSync(stampPath(), currentSig);
   }
 
-  // 3) News — optionnel (fetch web, indépendant du jeu).
-  if (news) step('getNews', 'scripts/get-news.ts');
+  // 3) News — optionnel (fetch web, indépendant du jeu), et NON BLOQUANT :
+  // le réseau ou le site officiel ne doivent pas empêcher `pnpm dev` de démarrer.
+  if (news) {
+    try {
+      step('getNews', 'scripts/get-news.ts');
+    } catch (e) {
+      warnNewsFailed(e);
+    }
+  }
 }
 
 /** `--source steam` ou `--source=steam` dans argv, sinon undefined. PUR. */

@@ -27,7 +27,7 @@ import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 import sharp from 'sharp';
 
-const WP_API = 'https://annoucements.outerplane.vagames.co.kr/wp-json/wp/v2/posts';
+const WP_API = 'https://annoucements.outerplane.major7.kr/wp-json/wp/v2/posts';
 const USER_AGENT = 'Outerpedia/1.0 (https://outerpedia.com; community wiki)';
 const DELAY_API = 500;
 const DELAY_IMAGE = 150;

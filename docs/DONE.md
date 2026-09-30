@@ -5,6 +5,25 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-09-30
+
+- **Le WordPress officiel a déménagé : `pnpm dev` ne démarrait plus.**
+  L'hôte des annonces est passé de `annoucements.outerplane.vagames.co.kr`
+  (désormais NXDOMAIN) à `annoucements.outerplane.major7.kr` —
+  `getNews` mourait sur un `ENOTFOUND`, et `dev-refresh` avec lui.
+  C'est le MÊME WordPress : les ids de catégories de `CATEGORY_TYPE_MAP`
+  sont identiques sur le nouvel hôte (11/26/28 en parents, 18/20/22/43/145/148
+  et leurs déclinaisons -kr/-jp), donc les ids de posts aussi et l'incrémental
+  repart sans re-scraper. Une seule constante à changer (`WP_API`) : les
+  images des posts déjà stockés sont réécrites en `/images/patch-notes/<hash>`,
+  et l'ancien hôte n'était ni dans la CSP ni dans le Caddyfile.
+- **`getNews` ne casse plus `pnpm dev`.** C'est le seul appel réseau de la
+  chaîne, vers un site tiers qui tombe, répond 5xx et déménage ; le site, lui,
+  tourne très bien sur `data/patch-notes` committé. L'étape est passée en
+  best effort dans `datagen/refresh.ts` : gros avertissement et on continue.
+  `pnpm getNews` lancé seul continue de sortir en échec — c'est là qu'un
+  scrape raté doit se voir.
+
 ## 2026-09-26
 
 - **La purge Cloudflare des coupons n'était JAMAIS faite en prod.**
