@@ -304,13 +304,24 @@ export async function TowerGuide({ lang, guide, floor }: GuideContentProps & { f
     },
   ];
 
-  // Boss + adds de l'étage : la vague du boss de son donjon (boss d'abord).
+  // Boss + adds de l'étage : la vague du boss de son donjon (boss d'abord),
+  // précédée des boss des vagues antérieures.
   const ref = getEncounter(floorData.dungeon);
   const wave = ref?.monsters?.length
     ? bossWaveMonsters({ id: floorData.dungeon, ref, monsters: ref.monsters })
     : [];
   const boss = wave.find((m) => m.role === 'boss') ?? wave[0];
-  const adds = boss ? wave.filter((m) => m !== boss) : [];
+  // Les BOSS des vagues précédentes se préparent autant que le dernier : le
+  // 35 du hard ouvre sur Epsilon (vague 1) avant Vlada (vague 2), et ne garder
+  // que la vague finale le faisait disparaître du guide. Ils passent en tête
+  // des adds, dans l'ordre du combat ; la piétaille des vagues d'escorte, elle,
+  // reste écartée (cf. `bossWaveMonsters`).
+  const earlierBosses = boss
+    ? (ref?.monsters ?? []).filter(
+        (m) => m.role === 'boss' && m.wave !== boss.wave && m.id !== boss.id,
+      )
+    : [];
+  const adds = boss ? [...earlierBosses, ...wave.filter((m) => m !== boss)] : [];
 
   const editorial = content?.floors?.[String(current)];
   const roster = buildRoster(editorial?.recommended);

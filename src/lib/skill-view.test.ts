@@ -310,6 +310,17 @@ describe('immunityChipEffects', () => {
     const { unresolved } = immunityChipEffects({ buffImmune: [numbered] });
     expect(unresolved).not.toContain(numbered);
   });
+
+  it('résout un type sans clé générée par le pont curé, et le fond dans son tooltip', () => {
+    // Dégâts fixes : encodés en reverse-heal, sans texte dans les tables — seul
+    // `keys` de effects.json les relie au statut 75, que le tooltip affiche déjà.
+    const { effects, unresolved } = immunityChipEffects({
+      immuneTooltips: ['75'],
+      buffImmune: ['BT_REVERSE_HEAL_BASED_TARGET', 'BT_REVERSE_HEAL_BASED_CASTER'],
+    });
+    expect(unresolved).toEqual([]);
+    expect(effects.map((e) => e.tooltip)).toEqual(['75']);
+  });
 });
 
 describe('buildChainView', () => {

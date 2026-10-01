@@ -525,8 +525,8 @@ export function monsterSkillViews(
  *     via `effectByKey` — côté DEBUFF uniquement d'abord (une immunité protège
  *     d'un debuff), y compris la forme SANS CHIFFRES (`BT_COOL2_CHARGE` est la
  *     déclinaison « skill 2 » de `BT_COOL_CHARGE` → « Cooldown Increase », PAS
- *     le buff « Cooldown Reduction ») ; le côté buff n'est qu'un dernier
- *     recours ;
+ *     le buff « Cooldown Reduction ») ; le côté buff n'est qu'un repli, et le
+ *     pont curé par type (`curatedCreationFor`) le dernier recours ;
  *   - `statBuffImmune` : baisses de stats (`ST_ATK`…) via la clé composite
  *     `BT_STAT|<ST_X>` du même glossaire.
  * Dédup par effet CANONIQUE (un tooltip et son type pointent le même statut).
@@ -557,11 +557,18 @@ export function immunityChipEffects(
   for (const type of m.buffImmune ?? []) {
     // Déclinaisons numérotées (par slot de skill) → même mécanique de base.
     const base = type.replace(/\d+/g, '');
+    // Dernier recours : le pont CURÉ par type (`keys` de effects.json), le même
+    // que les chips de skill — une mécanique sans texte dans les tables n'a
+    // aucune clé au glossaire généré (`BT_REVERSE_HEAL_BASED_*` = « Fixed
+    // Damage » : 56 monstres affichaient les deux types bruts en rouge, à côté
+    // de l'icône que leur tooltip 75 donnait déjà).
     const id =
       g.effectByKey.debuff[type] ??
       g.effectByKey.debuff[base] ??
       g.effectByKey.buff[type] ??
-      g.effectByKey.buff[base];
+      g.effectByKey.buff[base] ??
+      curatedCreationFor('debuff', type, src) ??
+      curatedCreationFor('debuff', base, src);
     if (!id || !push(id)) unresolved.push(type);
   }
   for (const st of m.statBuffImmune ?? []) {
