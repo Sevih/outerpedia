@@ -27,8 +27,8 @@
  * bâti garde ses propres copies de tout ça.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { basename, resolve, sep } from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { basename, resolve } from 'node:path';
 import {
   loadCouponsForEdit,
   saveCouponsLive,
@@ -38,6 +38,7 @@ import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
+import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 import { listGuides } from '@/lib/data/guides';
@@ -47,7 +48,6 @@ import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
 import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
-import { writeJson } from '@datagen/lib/json';
 
 /** Journal rendu tel quel dans l'interface (une ligne = une étape). */
 export interface Outcome {
@@ -88,7 +88,6 @@ function journal(report?: Report) {
 }
 
 const EDITORIAL_COMICS = resolve('.editorial/comics');
-const CONTENTS_DIR = resolve('src/app/[lang]/guides/_contents');
 
 // ---------------------------------------------------------------- git --------
 
@@ -333,20 +332,6 @@ export function youtubeId(input: string): string | null {
   return m ? m[1] : null;
 }
 
-/**
- * `videos.json` d'un guide, CONFINÉ sous `_contents` — `null` si le couple
- * catégorie/slug s'en échappe. Même idiome que `guideDir` (guide-store) : la
- * garde est structurelle, il faut traiter le `null`.
- */
-function guideVideosPath(t: Extract<VideoTarget, { kind: 'guide' }>): string | null {
-  const dir = resolve(CONTENTS_DIR, t.category, t.slug);
-  if (!dir.startsWith(CONTENTS_DIR + sep)) return null;
-  const full = t.version
-    ? resolve(dir, 'versions', t.version, 'videos.json')
-    : resolve(dir, 'videos.json');
-  return full.startsWith(CONTENTS_DIR + sep) ? full : null;
-}
-
 export const searchVideos = (query: string) => searchOfficial(query);
 
 /**
@@ -396,29 +381,20 @@ export async function addVideo(
     touched.push('data/curated/characters.json');
     j.done(`ajoutée au perso ${target.id}.`);
   } else {
-    const path = guideVideosPath(target);
-    if (!path)
-      return {
-        ok: false,
-        log: [...log, `Chemin de guide invalide : ${target.category}/${target.slug}`],
-      };
-    const list = existsSync(path)
-      ? (JSON.parse(readFileSync(path, 'utf8')) as Array<{ id: string }>)
-      : [];
-    if (list.some((v) => v.id === id))
-      return { ok: false, log: [...log, 'Déjà présente sur ce guide.'] };
-    await writeJson(path, [
-      ...list,
-      {
-        platform: 'youtube',
-        id,
-        title: meta.title,
-        author: meta.author,
-        ...(label ? { label } : {}),
-      },
-    ]);
-    touched.push(path);
-    j.done(`ajoutée au guide ${target.category}/${target.slug}.`);
+    // Le FICHIER dépend de la famille du guide (content.json, config.json d'une
+    // version, ou videos.json), et le store est seul à le savoir — c'est pour
+    // avoir recalculé ce chemin ici qu'on écrivait des vidéos que la page ne lit
+    // pas. Même principe que les persos, qui passent par `upsertCharacterCurated`.
+    const added = await appendGuideVideo(target.category, target.slug, target.version, {
+      platform: 'youtube',
+      id,
+      title: meta.title,
+      author: meta.author,
+      ...(label ? { label } : {}),
+    });
+    if (!added.path) return { ok: false, log: [...log, ...added.errors] };
+    touched.push(added.path);
+    j.done(`ajoutée au guide ${target.category}/${target.slug} (${added.path}).`);
   }
 
   j.doing('rafraîchissement du cache video-meta');

@@ -1,6 +1,7 @@
 'use client';
 
 import { siteHosts } from '@/lib/site';
+import { cleanVideoTitle } from '@/lib/video-title';
 import { Tabs } from './Tabs';
 
 /**
@@ -44,7 +45,7 @@ function VideoPane({ video, byLabel }: { video: VideoItem; byLabel: string }) {
     <div className="space-y-2">
       {(video.author || video.title) && (
         <div className="text-content-muted flex flex-wrap items-center gap-3 text-xs">
-          <span className="text-content-strong font-medium">{video.title}</span>
+          <span className="text-content-strong font-medium">{cleanVideoTitle(video.title)}</span>
           {video.author && <span>{byLabel.replace('{author}', video.author)}</span>}
         </div>
       )}
@@ -80,7 +81,7 @@ export function MultiVideoEmbed({
     <Tabs
       tabs={videos.map((v) => ({
         id: `${v.platform}-${v.id}`,
-        label: v.label ?? v.title,
+        label: v.label ?? cleanVideoTitle(v.title),
         content: <VideoPane video={v} byLabel={byLabel} />,
       }))}
     />

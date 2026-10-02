@@ -5,6 +5,54 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-02
+
+- **Une vidéo sur quatre n'était jamais affichée, et le fichier où elle dormait
+  disait pourquoi.** Signalé par Sevih sur
+  `dimensional-singularity/planet-purification-unit` : quatre vidéos renseignées,
+  trois à l'écran. Le plafond de trois était une COÏNCIDENCE — `content.json` en
+  contenait trois, et la quatrième attendait dans un `videos.json` que ce guide
+  ne lit pas. Le fichier lu dépend de la famille : `content.json#videos`
+  (dimensional-singularity), `versions/<clé>/config.json#videos`
+  (joint-challenge, world-boss) ou `videos.json` à la racine (special-request,
+  irregular, license). `quick` écrivait un `videos.json` pour TOUT LE MONDE : bon
+  pour 40 guides sur 66, silencieusement perdu pour les 15 de la famille
+  `content` — et le même sort attendait les 11 versionnés, personne n'ayant
+  encore essayé. L'outil annonçait « ajoutée au guide », la poussait sur R2 et en
+  prod, et la page n'en montrait rien. Le discriminant existait pourtant
+  (`spec.contentFile`, `spec.versioned`) et l'admin le respectait : `quick` avait
+  RECALCULÉ le chemin au lieu de passer par le store. L'écriture retourne donc là
+  où cette connaissance vit — `appendGuideVideo`, ciblée (un ajout de vidéo n'a
+  pas à réécrire le reste du guide) — et `guideVideosPath` disparaît de `quick`,
+  comme les persos passent par `upsertCharacterCurated`. Les deux vidéos égarées
+  (planet-purification-unit, android-sphinx) sont rapatriées PAR cette fonction,
+  et leurs `videos.json` parasites supprimés.
+- **Trouvé en chemin, et plus grave : une sauvegarde de guide depuis l'admin
+  pouvait effacer de la prose traduite.** `writeRecommended` jetait tout groupe de
+  recommandation sans personnage — y compris celui dont le TEXTE est le contenu :
+  le slot libre « Pick 3. Any 6★ Ranger/Vanguard works… » d'`urd-dark`, 1105
+  octets en six langues, que l'éditeur n'affiche pas davantage. Ouvrir ce guide et
+  sauvegarder l'aurait supprimé sans un mot. Le filtre épargne désormais un groupe
+  porteur de texte. Aller-retour du brouillon mesuré sur les 347 fichiers de
+  guides : 1 divergent avant, 0 après.
+- **Les deux invariants sont gravés** (`guide-videos.test`), parce que ni l'un ni
+  l'autre n'a de symptôme : aucune vidéo ne dort dans un fichier que son guide ne
+  lit pas, et l'aller-retour du brouillon ne perd rien. Vérifié qu'ils ÉCHOUENT
+  pour de vrai (un `videos.json` égaré recréé le temps d'un test).
+- **Les titres de vidéos sont nettoyés À L'AFFICHAGE** (`lib/video-title`) : les
+  créateurs y mettent de quoi être trouvés — le nom du jeu, celui du mode — mots
+  que la page dit déjà et qui coûtent la moitié de la place. « Dimensional
+  Singularity KSAI - Regina/Roxie Team | Outerplane » tient en « KSAI -
+  Regina/Roxie Team ». Sur les 215 titres en base, 123 nettoyés et 43 → 33
+  caractères de moyenne. La donnée garde le titre d'origine (SEO, nom accessible
+  de l'iframe), et le `label` manuel reste prioritaire. Les motifs sont DÉRIVÉS
+  des `label.en` de `GUIDE_CATEGORIES`, jamais recopiés : un mode ajouté sera
+  nettoyé sans que personne y pense. Deux gardes que la mesure a réclamées : un
+  motif qui CLÔT la phrase sans séparateur devant lui est épargné (sinon « …
+  Testing, and New World Boss » finissait sur « … and New »), et un titre qui
+  n'est que du bruit se garde entier. Restent trois titres d'un créateur qui écrit
+  « DIMENSION SINGULARITY BOSS » — hors liste officielle, pas deviné.
+
 ## 2026-09-30
 
 - **Le WordPress officiel a déménagé : `pnpm dev` ne démarrait plus.**

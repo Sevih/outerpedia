@@ -13,7 +13,7 @@
  * sur la donnée réelle) ; le build la revérifie au rendu.
  */
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
-import { resolve, sep } from 'node:path';
+import { relative, resolve, sep } from 'node:path';
 import { writeJson } from '@datagen/lib/json';
 import { getGuide, readGuideFile, readGuideVersionFile } from '@/lib/data/guides';
 import {
@@ -66,6 +66,78 @@ interface GuideStrings {
 async function writeOrRemove(path: string, data: unknown): Promise<void> {
   if (data === null) rmSync(path, { force: true });
   else await writeJson(path, data);
+}
+
+/**
+ * Ajoute UNE vidéo à un guide, DANS LE FICHIER QUE CE GUIDE LIT — qui n'est pas
+ * le même selon la famille :
+ *   - `content.json` → clé `videos` (dimensional-singularity) ;
+ *   - `versions/<clé>/config.json` → clé `videos` (joint-challenge, world-boss) ;
+ *   - `videos.json` à la racine (special-request, irregular, license).
+ *
+ * Elle existe parce que `quick` écrivait un `videos.json` pour TOUT LE MONDE : la
+ * vidéo partait sur R2 et en prod, l'outil annonçait « ajoutée au guide », et la
+ * page n'en montrait jamais rien — deux vidéos ainsi perdues sur
+ * dimensional-singularity, et le même sort attendait les guides versionnés.
+ * L'endroit se déduit de la `spec`, qui le savait déjà : il n'y avait qu'à le
+ * demander ici plutôt qu'à le redevenir ailleurs.
+ *
+ * Écriture CIBLÉE (on relit, on ajoute, on réécrit) et non reconstruction depuis
+ * un brouillon : un ajout de vidéo n'a aucune raison de réécrire le reste du
+ * guide.
+ *
+ * Rend le chemin RELATIF au dépôt du fichier touché (à committer), ou les écarts.
+ */
+export async function appendGuideVideo(
+  category: string,
+  slug: string,
+  version: string | undefined,
+  video: VideoItem,
+): Promise<{ path?: string; errors: string[] }> {
+  const spec = guideSpec(category);
+  if (!spec) return { errors: [`Non-editable category : ${category}`] };
+  if (!spec.videos) return { errors: [`Cette catégorie n'accepte pas de vidéo : ${category}`] };
+
+  const base = guideDir(category, slug);
+  if (!base) return { errors: outsideError(category, slug) };
+  if (!existsSync(base)) return { errors: [`Guide folder missing : ${category}/${slug}`] };
+
+  const rel = (p: string): string => relative(process.cwd(), p).split(sep).join('/');
+  const already = (list: VideoItem[] | undefined): boolean =>
+    (list ?? []).some((v) => v.id === video.id);
+
+  if (spec.contentFile) {
+    const file = resolve(base, 'content.json');
+    const content = readGuideFileAt<{ videos?: VideoItem[] }>(file);
+    if (!content) return { errors: [`content.json manquant : ${category}/${slug}`] };
+    if (already(content.videos)) return { errors: ['Déjà présente sur ce guide.'] };
+    await writeJson(file, { ...content, videos: [...(content.videos ?? []), video] });
+    return { path: rel(file), errors: [] };
+  }
+
+  if (spec.versioned) {
+    if (!version) return { errors: [`Guide versionné : une version est requise (${category}).`] };
+    if (!VERSION_KEY_RE.test(version)) return { errors: [`Invalid version key : “${version}”.`] };
+    const file = resolve(base, 'versions', version, 'config.json');
+    if (!file.startsWith(base + sep)) return { errors: outsideError(category, slug) };
+    const config = readGuideFileAt<RawConfig>(file) ?? {};
+    if (already(config.videos)) return { errors: ['Déjà présente sur cette version.'] };
+    await writeJson(file, { ...config, videos: [...(config.videos ?? []), video] });
+    return { path: rel(file), errors: [] };
+  }
+
+  const file = resolve(base, 'videos.json');
+  const list = readGuideFileAt<VideoItem[]>(file) ?? [];
+  if (already(list)) return { errors: ['Déjà présente sur ce guide.'] };
+  await writeJson(file, [...list, video]);
+  return { path: rel(file), errors: [] };
+}
+
+/** Lit un JSON de guide par CHEMIN (le cache mtime de `readGuideFile` s'indexe,
+ *  lui, sur un guide + un nom de fichier, et ne sait pas viser une version). */
+function readGuideFileAt<T>(path: string): T | undefined {
+  if (!existsSync(path)) return undefined;
+  return JSON.parse(readFileSync(path, 'utf8')) as T;
 }
 
 /** Lit un guide (versionné ou plat) dans le modèle plat éditable. */

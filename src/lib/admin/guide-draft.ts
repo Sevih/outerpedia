@@ -296,7 +296,13 @@ const writeRecommended = (reco: RecoGroupDraft[]): RecommendedGroupRaw[] | null 
       characters: cleanNames(g.characters),
       ...(g.reason ? { reason: g.reason } : {}),
     }))
-    .filter((g) => g.characters.length);
+    // Un groupe VIDE est une ligne ouverte puis abandonnée dans l'éditeur, et
+    // n'a rien à faire dans le fichier — SAUF s'il porte un texte : le slot
+    // libre (« Pick 3. Any 6★ Ranger/Vanguard works… » sur urd-dark) est un
+    // groupe sans personnage dont la consigne EST le contenu. Le filtre nu
+    // l'effaçait, avec ses six traductions, à la première sauvegarde du guide
+    // depuis l'admin — en silence, l'éditeur ne l'affichant pas davantage.
+    .filter((g) => g.characters.length || hasText(g.reason));
   return kept.length ? kept : null;
 };
 
