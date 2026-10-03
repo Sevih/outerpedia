@@ -633,6 +633,15 @@ def extract(effects: list[str]) -> dict:
     }
 
 
+def unextracted(data: dict) -> dict[str, list[str]]:
+    """`nom d'effet → CharacterID` pour les effets de `byCharacter` absents d'`effects`."""
+    out: dict[str, list[str]] = {}
+    for cid, name in data['byCharacter'].items():
+        if name not in data['effects']:
+            out.setdefault(name, []).append(cid)
+    return out
+
+
 def main() -> None:
     args = sys.argv[1:]
     if args == ['--all']:
@@ -660,6 +669,16 @@ def main() -> None:
     )
     for n in data['textures']:
         print(f'  {n}.png')
+    # Un effet que la table NOMME (`byCharacter`, relevé entier) sans que cette
+    # passe ait sorti son prefab : le moteur ne le connaît pas, `fxOf` rend
+    # undefined et la carte reste un portrait statique — rien ne le dit à l'écran.
+    # C'est ce qui arrive quand le jeu ajoute un effet : il reste hors de
+    # `DEFAULT_EFFECTS` tant que personne ne l'y inscrit. Le test de contrat
+    # (`src/components/character/portrait-fx.test.ts`) casse sur le même cas.
+    for name, ids in sorted(unextracted(data).items()):
+        print(f'  ! {name} : nommé par le jeu ({", ".join(ids)}) mais pas extrait — '
+              f'le moteur ne le rendra pas')
+        print(f'    (ajouter « {name.removeprefix(EFFECT_PREFIX)} » à DEFAULT_EFFECTS pour le servir)')
 
 
 if __name__ == '__main__':

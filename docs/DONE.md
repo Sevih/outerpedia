@@ -7,6 +7,97 @@
 
 ## 2026-10-04
 
+- **Lot B15 : le moteur des portraits animés a ses tests, et la table que le
+  pipeline régénère a un contrat — P4 est clos** (Opus, audit
+  `docs/audit/portrait-fx.md`). Le quoi : la décision « rendable ou refusé »
+  sort de `mountPortraitFx` et devient `layerVerdict` dans
+  `portrait-fx-sim.ts` — une fonction pure qui rend, pour UN émetteur, le
+  calque à poser (`mesh` avec sa maille, `quad`, `billboard`, chacun avec son
+  matériau), l'émetteur passé sans un mot (`skipped`, avec un `why`) ou le
+  refus et son message de console (`refused`) ; le montage l'appelle et ne
+  décide plus rien. Deux fichiers de tests : `portrait-fx-sim.test.ts` (101
+  tests) et `portrait-fx.test.ts` (8 tests, le contrat). Et
+  `extract-portrait-fx.py` avertit, en fin de passe, de tout effet que
+  `byCharacter` nomme sans que son prefab soit sorti. Le pourquoi : 2 100
+  lignes de moteur n'avaient que `portrait-layout.test.ts` ; surtout,
+  `portrait-fx.json` est régénéré par `refresh` à chaque patch et committé
+  sans que rien le confronte à ce que le moteur accepte — un effet ajouté
+  par le jeu restait hors de `DEFAULT_EFFECTS` sans un mot, un mot-clé de
+  shader nouveau finissait en `console.error` sur une carte qui reste un
+  portrait normal. Le lot passe en premier pour protéger F8, F9 et F10. Le
+  comment : les règles sont DÉPLACÉES, pas réécrites — même ordre (inactif
+  ou sans matériau, matériau absent, mots-clés, blend, puis maille /
+  calque-quad / billboard / mode inconnu), mêmes messages au caractère
+  près ; `BLEND_SRC` et son commentaire suivent la règle dans
+  `portrait-fx-sim`, `portrait-fx-gl` n'importe plus ni `unsupportedKeywords`
+  ni `isQuadLayer` ni `unsupportedBillboard`. La table est un paramètre de
+  `layerVerdict` (défaut : `PORTRAIT_FX`) pour que les refus se testent sur
+  des matériaux fabriqués. Les tests du simulateur parcourent la table
+  committée par FAMILLE (les 15 émetteurs que le montage simule), jamais
+  par nom de prefab, et tirent leurs cas limites d'un émetteur de la table
+  modifié d'un champ : déterminisme à graine fixée et divergence à graine
+  différente ; bornes sur 12 s à 60 Hz (jamais plus que `maxParticles` ni
+  que débit × vie la plus longue, plafond ATTEINT quand le débit le
+  dépasse — les étoiles à 10/s pour 25 places —, âge dans [0, 1[, tuile
+  dans la feuille UV, tailles positives, rien de non fini) ; vie d'une
+  particule entre les deux bornes de `startLifetime` (émetteur ramené à
+  une place, écart entre naissances) ; `prewarm` (régime dès la première
+  image, sinon image vide et première naissance à 1/débit) ; pas de retour
+  en arrière (une pause fige) ; un saut de 600 s ne fait rien diverger ;
+  et les cas que le rapport cite — `evalGradient` Blend et Fixed,
+  `evalCurve` (Hermite, pente infinie, choix du segment), `frameAge`
+  (rebouclage dans `ringBufferLoopRange`, plage vide, vie nulle,
+  `simulationSpeed`), `isQuadLayer` (le patron et douze écarts),
+  `unsupportedBillboard` (onze refus, chacun avec son motif exact),
+  `fxBleed` (le débord enveloppe chaque sommet de maille, chaque
+  calque-quad et chaque quad simulé, trois graines). Le contrat passe les
+  37 émetteurs des dix effets par `layerVerdict` et compare ce qui n'est
+  pas posé à `NOT_RENDERED`, une liste nommée et commentée, VIDE
+  aujourd'hui (le rapport disait 0 refus, c'est confirmé) : tout nouveau
+  refus casse le test, et une entrée qui n'est plus refusée aussi. Même
+  régime pour `NOT_EXTRACTED` (effets nommés par `byCharacter` sans
+  prefab, vide : 28 lignes, dix effets, tous extraits). S'y ajoutent
+  `colorSpace === 'linear'`, au moins un calque rendable par effet, une
+  fiche pour chaque texture citée (40 sur 40), et des mailles qui tiennent
+  dans le `Uint16Array` du montage sans indice orphelin. Côté python, la
+  ligne suit la forme des deux avertissements déjà présents dans le script
+  (`  ! …`, puis le geste entre parenthèses) : nom de l'effet, persos qui
+  le portent, et le suffixe à ajouter à `DEFAULT_EFFECTS`. La
+  vérification : l'ancienne décision, recopiée de `git show HEAD`, rejouée
+  contre `layerVerdict` sur les 37 émetteurs × 31 variantes (inactif, sans
+  matériau, matériau ou maille absents, mode de rendu changé, forme
+  retirée, rafale, et chacun des 20 matériaux de la table) — 1 147 cas, 0
+  écart (505 mailles, 345 billboards, 47 quads, 118 refus, 132 passés).
+  Six mutations du moteur, chacune rattrapée puis annulée : un mot-clé
+  retiré de `SUPPORTED_KEYWORDS` (contrat), plafond `<=` au lieu de `<`,
+  marge de débord nulle, graine ignorée, `prewarm` ignoré, mort retardée
+  de 20 %. Le script python : compilé (`py_compile`), et `unextracted`
+  jouée hors extraction sur la table committée (rien) puis sur une table
+  où deux persos portent un `_2000125` inventé (une ligne, les deux
+  identifiants, le suffixe). `pnpm typecheck` (rien après l'écho
+  `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0), `pnpm lint` (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  2179 passed (2179)`, 181 fichiers). Zéro changement de rendu :
+  ce qui a été comparé est la DÉCISION (les 1 147 cas), pas l'image — une
+  capture Firefox sans tête de `/dev/AnimatedPortrait` sur le serveur déjà
+  ouvert rend la page, mais elle part au chargement, avant que l'effet
+  soit dessiné : elle ne prouve rien dans un sens ni dans l'autre. Ce qui
+  est laissé : un coup d'œil de Sevih sur `/dev/AnimatedPortrait` (les dix
+  effets posés, console muette) ; l'extraction n'a pas été lancée, c'était
+  la consigne, donc l'avertissement n'a jamais tourné dans `refresh` ; il
+  ne couvre que l'effet non extrait — un mot-clé ou un module nouveau se
+  voit au test de contrat, pas dans le script, qui devrait sinon recopier
+  la liste du moteur. P6 n'est PAS traité alors que le rapport dit que la
+  fonction pure le règle : elle le rend possible (préparer les calques
+  avant `getContext`, ne pas inscrire un `NO_FX`), mais c'est un
+  changement d'ordre dans le montage, hors de ce lot. Les trois `skipped`
+  autres qu'« inactif » restent muets au montage, comme avant — P7. Si F10
+  change la signature de `createBillboardSim` (graine partagée), les
+  tests de déterminisme sont à suivre. Repéré hors périmètre, non
+  touché : le commentaire de `datagen/refresh.ts` au-dessus de l'étape
+  dit « les 9 effets SERVIS » pour une liste de dix, et l'en-tête de
+  `portrait-fx.ts` compte « 25 personnages » et « les 25 lignes » pour 28.
+
 - **Lot A27 : titres et descriptions mesurés sur le site servi — 179 pages
   sur 574 hors bornes, presque toutes par gabarit** (Opus). Le quoi :
   `scripts/seo-lengths.ts` (`pnpm exec tsx scripts/seo-lengths.ts`, `--host`

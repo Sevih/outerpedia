@@ -70,14 +70,13 @@
  *      c'est LUI qu'on a rapatrié dans le canvas.
  */
 import { img } from '@/lib/images';
-import { PORTRAIT_FX, unsupportedKeywords, type FxEmitter, type FxMaterial } from './portrait-fx';
+import { PORTRAIT_FX, type FxEmitter, type FxMaterial } from './portrait-fx';
 import {
   createBillboardSim,
   evalMinMax,
   frameAge,
   fxBleed,
-  isQuadLayer,
-  unsupportedBillboard,
+  layerVerdict,
   type BillboardSim,
 } from './portrait-fx-sim';
 
@@ -504,46 +503,33 @@ export function mountPortraitFx(
   }
 
   // --- géométrie — pure, elle survit aux pertes de contexte -----------------------
-  const { frame, holder, meshes, materials, textures: texMeta } = PORTRAIT_FX;
+  const { frame, holder, textures: texMeta } = PORTRAIT_FX;
   const bleed = fxBleed(effectName);
   const spanW = frame.w * (1 + 2 * bleed.x);
   const spanH = frame.h * (1 + 2 * bleed.y);
-
-  // Le blend est celui du MATÉRIAU (`_SrcBlend`/`_DstBlend`), pas une constante :
-  // les cadres mélangent en `SrcAlpha One`, les glints de `star` en `One One`.
-  // La destination reste `One` partout — c'est elle qui rend l'ordre de tirage
-  // indifférent pour la couleur, et un matériau qui demanderait autre chose est
-  // refusé plutôt qu'approché. Le facteur source, lui, s'applique DANS le shader
-  // (`uSrcAlphaBlend`) : la sortie est prémultipliée, et son canal alpha porte
-  // l'occlusion du canvas, pas l'alpha du matériau — cf. la fin de `FRAG`.
-  const BLEND_SRC = new Set([1, 5]);
 
   const prepared: Layer[] = [];
   const needed = new Set<string>();
 
   for (const e of effect.emitters) {
     if (only && !only.includes(e.name)) continue;
-    if (!e.active || !e.material) continue;
-    const mat = materials[e.material];
-    if (!mat) continue;
-    const missing = unsupportedKeywords(mat);
-    if (missing.length) {
-      onError(`${mat.name} : branche(s) de shader non transcrite(s) — ${missing.join(', ')}`);
+    // Rendable ou refusé : la décision est PURE et vit dans `portrait-fx-sim`
+    // (`layerVerdict`), où le test de contrat la rejoue sur toute la table.
+    const verdict = layerVerdict(e);
+    if (verdict.kind === 'skipped') continue;
+    if (verdict.kind === 'refused') {
+      onError(verdict.reason);
       continue;
     }
-    if (!BLEND_SRC.has(mat.floats._SrcBlend ?? 5) || (mat.floats._DstBlend ?? 1) !== 1) {
-      onError(`${mat.name} : blend ${mat.floats._SrcBlend}/${mat.floats._DstBlend} non transcrit`);
-      continue;
-    }
+    const mat = verdict.material;
 
     // L'origine de l'émetteur dans le cadre : le holder, décalé par l'origine du
     // prefab puis par la position du nœud. Y est déjà en sens CSS dans la table.
     const ox = holder.x + effect.origin[0] + e.pos[0];
     const oy = holder.y + effect.origin[1] + e.pos[1];
 
-    if (e.renderMode === 4 && e.mesh) {
-      const mesh = meshes[e.mesh];
-      if (!mesh) continue;
+    if (verdict.kind === 'mesh') {
+      const { mesh } = verdict;
       const data = new Float32Array(mesh.v.length * 4);
       for (let i = 0; i < mesh.v.length; i++) {
         data[i * 4] = mesh.v[i][0];
@@ -571,7 +557,7 @@ export function mountPortraitFx(
           1 - (2 * (oy + bleed.y * frame.h)) / spanH,
         ],
       });
-    } else if (e.renderMode === 0 && isQuadLayer(e)) {
+    } else if (verdict.kind === 'quad') {
       // Un CALQUE-QUAD (cf. `isQuadLayer`) : même patron qu'un calque-maille —
       // une particule éternelle, l'âge par `frameAge` — mais la géométrie est le
       // quad unitaire du billboard, UV pleins, v = 0 en BAS comme les mailles.
@@ -599,12 +585,7 @@ export function mountPortraitFx(
           1 - (2 * (oy + bleed.y * frame.h)) / spanH,
         ],
       });
-    } else if (e.renderMode === 0) {
-      const reason = unsupportedBillboard(e);
-      if (reason) {
-        onError(`${e.name} : émetteur non simulable — ${reason}`);
-        continue;
-      }
+    } else {
       prepared.push({
         kind: 'billboard',
         emitter: e,
@@ -616,9 +597,6 @@ export function mountPortraitFx(
         ox,
         oy,
       });
-    } else {
-      onError(`${e.name} : renderMode ${e.renderMode} non transcrit`);
-      continue;
     }
     for (const slot of SLOTS) if (mat.textures[slot]) needed.add(mat.textures[slot].tex);
   }

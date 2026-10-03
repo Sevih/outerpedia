@@ -52,7 +52,15 @@
  * `autoRandomSeed` est VRAI sur ces émetteurs : le jeu lui-même tire une graine
  * par session. Notre aléa par montage est donc conforme, pas un écart.
  */
-import { PORTRAIT_FX, type FxEmitter, type Gradient, type MinMaxGradient } from './portrait-fx';
+import {
+  PORTRAIT_FX,
+  unsupportedKeywords,
+  type FxEmitter,
+  type FxMaterial,
+  type FxMesh,
+  type Gradient,
+  type MinMaxGradient,
+} from './portrait-fx';
 
 /** Une clé d'`AnimationCurve` Unity, telle que la table la porte. */
 interface CurveKey {
@@ -354,6 +362,78 @@ export function isQuadLayer(e: FxEmitter): boolean {
     e.startRotationMode === 0 &&
     e.startSizeMode === 0
   );
+}
+
+// --- rendable ou refusé -----------------------------------------------------------
+
+/**
+ * Le blend est celui du MATÉRIAU (`_SrcBlend`/`_DstBlend`), pas une constante :
+ * les cadres mélangent en `SrcAlpha One`, les glints de `star` en `One One`.
+ * La destination reste `One` partout — c'est elle qui rend l'ordre de tirage
+ * indifférent pour la couleur, et un matériau qui demanderait autre chose est
+ * refusé plutôt qu'approché. Le facteur source, lui, s'applique DANS le shader
+ * (`uSrcAlphaBlend`) : la sortie est prémultipliée, et son canal alpha porte
+ * l'occlusion du canvas, pas l'alpha du matériau — cf. la fin de `FRAG` (`portrait-fx-gl`).
+ */
+const BLEND_SRC = new Set([1, 5]);
+
+/**
+ * Ce que le montage fait d'UN émetteur : le calque qu'il pose (`mesh`, `quad`,
+ * `billboard`), l'émetteur qu'il passe sans un mot (`skipped`), ou le refus
+ * qu'il remonte (`refused`, avec le message de la console).
+ *
+ * `skipped` n'est pas un refus : un nœud inactif n'est pas dessiné par le jeu
+ * non plus. Les trois autres motifs (émetteur sans matériau, matériau ou maille
+ * absents de la table) sont des trous de l'extraction que le montage tait —
+ * `why` existe pour que le test de contrat, lui, les nomme.
+ */
+export type LayerVerdict =
+  | { kind: 'mesh'; material: FxMaterial; mesh: FxMesh }
+  | { kind: 'quad' | 'billboard'; material: FxMaterial }
+  | { kind: 'skipped'; why: 'inactive' | 'no-material' | 'unknown-material' | 'unknown-mesh' }
+  | { kind: 'refused'; reason: string };
+
+/**
+ * RENDABLE OU REFUSÉ — la décision de `mountPortraitFx`, sortie du montage pour
+ * être jouable sans navigateur : c'est elle que `portrait-fx.test.ts` passe sur
+ * toute la table committée, que le pipeline régénère à chaque patch.
+ *
+ * L'ordre des contrôles est celui du montage, et il compte : le matériau
+ * (mots-clés, blend) est jugé AVANT la forme de l'émetteur, donc un émetteur
+ * deux fois fautif ne remonte que le premier refus.
+ */
+export function layerVerdict(
+  e: FxEmitter,
+  table: Pick<typeof PORTRAIT_FX, 'materials' | 'meshes'> = PORTRAIT_FX,
+): LayerVerdict {
+  if (!e.active) return { kind: 'skipped', why: 'inactive' };
+  if (!e.material) return { kind: 'skipped', why: 'no-material' };
+  const mat = table.materials[e.material];
+  if (!mat) return { kind: 'skipped', why: 'unknown-material' };
+  const missing = unsupportedKeywords(mat);
+  if (missing.length)
+    return {
+      kind: 'refused',
+      reason: `${mat.name} : branche(s) de shader non transcrite(s) — ${missing.join(', ')}`,
+    };
+  if (!BLEND_SRC.has(mat.floats._SrcBlend ?? 5) || (mat.floats._DstBlend ?? 1) !== 1)
+    return {
+      kind: 'refused',
+      reason: `${mat.name} : blend ${mat.floats._SrcBlend}/${mat.floats._DstBlend} non transcrit`,
+    };
+
+  if (e.renderMode === 4 && e.mesh) {
+    const mesh = table.meshes[e.mesh];
+    return mesh ? { kind: 'mesh', material: mat, mesh } : { kind: 'skipped', why: 'unknown-mesh' };
+  }
+  if (e.renderMode === 0 && isQuadLayer(e)) return { kind: 'quad', material: mat };
+  if (e.renderMode === 0) {
+    const reason = unsupportedBillboard(e);
+    return reason
+      ? { kind: 'refused', reason: `${e.name} : émetteur non simulable — ${reason}` }
+      : { kind: 'billboard', material: mat };
+  }
+  return { kind: 'refused', reason: `${e.name} : renderMode ${e.renderMode} non transcrit` };
 }
 
 /** Une particule prête à dessiner — unités du CADRE, relatives à l'émetteur, Y vers le HAUT. */

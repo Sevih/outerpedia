@@ -131,12 +131,6 @@ Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
       ici. Publier `autoRandomSeed`/`randomSeed`, partager la graine au
       montage, corriger les deux commentaires qui disent l'inverse. À
       confirmer sur une capture du jeu.
-- [ ] **Tests du moteur et contrat de la table (P4, lot B15)** : rien ne teste
-      `portrait-fx-sim` (pur) ni ne confronte `portrait-fx.json` — régénéré
-      par `refresh` — à ce que le moteur accepte ; un effet ajouté par le jeu
-      reste hors de `DEFAULT_EFFECTS` sans un mot. Test de contrat + tests du
-      simulateur + avertissement dans le script ; suppose de sortir de
-      `mountPortraitFx` la décision « rendable ou refusé » en fonction pure.
 
 ---
 
