@@ -334,10 +334,17 @@ export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean 
     // directement, et ce diff se revoit avec le reste. Le script lance lui-même
     // `extract-anim-events.py` (UnityPy) avec sa propre annonce de saut — c'est
     // pourquoi il n'a pas de champ `py` ici.
+    // EN DRY, promote n'a PAS écrit data/generated : `--from-extracted` fait lire
+    // à `skill-descs.ts` la proposition du run (data/extracted), sinon les descs
+    // resteraient celles d'avant le patch à côté de tables fraîches — deux
+    // versions sous un seul `resVersion`. L'argument entre dans la clé du
+    // checkpoint, comme `--apply` pour promote : une reprise relancée avec
+    // `--apply` rejoue damage sur le validé.
     {
       id: 'damage',
       label: 'damage   (anim-events + tables moteur → data/generated/damage)',
       file: 'datagen/damage/build.ts',
+      args: o.apply ? [] : ['--from-extracted'],
     },
     ...(o.collect
       ? [

@@ -7,6 +7,83 @@
 
 ## 2026-10-03
 
+- **Lot F7 : dry-run — `skill-descs` lit la proposition du run, plus le
+  `skills.json` d'avant le patch (constat G12)** (Fable). Le quoi : quand la
+  chaîne refresh promeut en DRY (`pnpm dev`, `pnpm datagen:patch` sans
+  `--apply`), l'étape `damage` reçoit `--from-extracted` et `buildSkillDescs`
+  lit `skills.json` ET `characters.json` dans `data/extracted` (la proposition
+  que `datagen:build` vient d'écrire) au lieu de `data/generated`, que promote
+  n'a pas touché. Avec `--apply`, `pnpm damage:build` seul et `sync-derived`,
+  rien ne change : le validé. Le pourquoi : les six autres tables damage sortent
+  des tables fraîches du jeu ; en dry, la projection des descs restait sur le
+  `skills.json` d'avant, donc un même run écrivait dans `data/generated/damage/`
+  les facteurs du patch et les descs d'avant, sous un seul `resVersion`, et
+  `damage-data.test.ts` restait vert puisqu'il compare au même `skills.json`
+  committé. Le choix entre les deux correctifs de l'audit : « ne jouer `damage`
+  que si `apply` » défait la raison documentée dans `refresh.ts` — les DEUX
+  points d'entrée sont en dry, l'étape ne tournerait donc plus jamais dans le
+  flux courant et on rouvrirait le trou du patch 1.4.15 (damage resté sur
+  l'ancienne `resVersion`), `sync-derived` ne rattrapant ni un patch qui ne
+  promeut rien de la couche dérivée ni `anim-events.json` (il saute la
+  ré-extraction). Lire la proposition garde la décision telle qu'écrite : damage
+  tourne en dry, écrit directement, son diff se revoit avec le reste. Le
+  comment : `datagen/refresh.ts` (`genSteps` pose `args: ['--from-extracted']`
+  sur `damage` quand `apply` est faux — l'argument entre dans la clé du
+  checkpoint, comme `--apply` pour promote, donc une reprise relancée avec
+  `--apply` rejoue damage sur le validé) ; `datagen/damage/build.ts`
+  (`buildDamageArtifacts({ wikiDir })`, une ligne
+  `▷ skill-descs lit data/extracted/` à la console quand ce n'est pas le
+  validé) ;
+  `datagen/damage/skill-descs.ts` (`buildSkillDescs({ wikiDir })`, `wikiDirOf`
+  pur, en-tête réécrit). Les deux fichiers viennent du MÊME dossier : lire les
+  descs dans la proposition et la liste de skills du perso dans le validé
+  aurait refait deux versions. Le filtre de roster (`roster.ts`), lui, reste sur
+  `data/generated/characters.json` : c'est une preuve d'intégration, pas une
+  version, et un perso non intégré de la proposition ne sort toujours pas.
+  Tests : `datagen/damage/skill-descs.test.ts` (nouveau — deux dossiers
+  temporaires, validé d'avant le patch et proposition d'après : en dry aucune
+  desc ni var d'avant, l'ultimate ajouté par le patch est là, le perso non
+  intégré n'y est pas, et le validé reste lu tel quel hors dry) et un cas dans
+  `datagen/refresh.test.ts` (le dossier que désignent les arguments de `damage`
+  est la proposition en dry, le validé avec `--apply`, clés de checkpoint
+  distinctes). Vérification : lecture seule sur la donnée réelle, sans lancer
+  la chaîne — `buildSkillDescs` depuis `data/generated` puis depuis
+  `data/extracted` (dont le `characters.json` DIFFÈRE du validé, il porte les
+  persos non intégrés) rend les deux fois les 780 skills du
+  `damage/skill-descs.json` committé, à l'octet : le correctif ne produit aucun
+  diff tant que la proposition et le validé disent la même chose, et la garde
+  de roster tient sur la vraie proposition. `pnpm typecheck` : silencieux
+  (dernière ligne `tsc --noEmit -p scripts/tsconfig.json`) ; `pnpm lint` :
+  silencieux (`$ eslint`) ; `pnpm test` : `Test Files 177 passed (177)`,
+  `Tests 2043 passed (2043)`. Conséquence à connaître : après un dry sur un
+  patch qui change le texte ou les vars d'un skill du roster,
+  `damage-data.test.ts` (« résout EXACTEMENT comme le catalogue ») passe au
+  ROUGE tant que `data/generated/skills.json` n'est pas promu — c'est le signal
+  qui manquait (damage en avance sur le wiki), et `pnpm commit` le verra ; il
+  repasse au vert après `pnpm datagen:promote --apply` (ou un
+  `git checkout data/generated/damage` si le patch ne doit pas partir). Test
+  manuel à jouer par Sevih, sur la machine de datamine : (1) sans patch en
+  attente, `pnpm datagen:patch --no-pull --force` — la console affiche
+  `▷ skill-descs lit data/extracted/` sous l'étape damage et
+  `git diff --stat data/generated/damage/skill-descs.json` est vide ; (2) au
+  prochain patch qui touche un skill du roster, après `pnpm dev`,
+  `git diff data/generated/damage/skill-descs.json` montre les MÊMES descs que
+  la revue dry de promote annonce pour `skills.json`, puis
+  `pnpm datagen:promote --apply` laisse ce fichier inchangé (`sync-derived` le
+  re-dérive du validé, désormais identique) ; (3) pour le voir sans attendre un
+  patch : modifier à la main une desc `en` d'un skill du roster dans
+  `data/extracted/skills.json` (gitignoré),
+  `pnpm damage:build --skip-anim --from-extracted` → le diff de `skill-descs.json` porte cette desc et
+  `pnpm test` rougit ; `pnpm damage:build --skip-anim` → diff vide. Laissé, hors
+  périmètre : la même famille HORS dry — une intégration ciblée (admin) passe
+  par `sync-derived`, qui relit le validé : tant qu'un rework de la proposition
+  n'est pas intégré, `damage/characters.json` porte ses facteurs (tables
+  fraîches) et `skill-descs.json` son ancien texte, et un dry suivant remet le
+  nouveau. C'est la conséquence de l'intégration délibérée par entité, pas du
+  dry : à trancher (damage doit-il suivre les tables ou le validé pour un perso
+  dont le rework n'est pas intégré ?). `targets.ts` ne lit du validé que sa
+  garde (`encounters.json`), comme le roster : rien à changer.
+
 - **Lot F6 : scaling des dégâts — une seule règle pour damage-scaling et le
   solver, celle du kit principal (constat G11)** (Fable). Le quoi :
   `datagen/lib/kit-scaling.ts` porte `kitScaling()`, la seule fonction qui

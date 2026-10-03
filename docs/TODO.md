@@ -56,10 +56,6 @@
       prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
       `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de
       perso : la bulle s'ouvre ; le toucher encore : la fiche s'ouvre.
-- [ ] **`pnpm dev` (dry) écrit `data/generated/damage/` avec `skill-descs`
-      bâti sur l'ANCIEN `skills.json`** (G12) : artefacts de deux versions
-      estampillés du nouveau `resVersion`. Ne jouer `damage` que si `apply`, ou
-      lire depuis `data/extracted` en dry — lot F7.
 - [ ] **`pnpm commit` fait `git add -A`** (G17), ce que CONVENTIONS.md interdit
       (`commit.ts:288`, après un `pnpm format` sur tout le repo) ;
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins

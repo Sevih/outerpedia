@@ -26,7 +26,7 @@ import { buildDamageEquipment } from './equipment';
 import { buildDamageTargets } from './targets';
 import { buildDamageBuffs } from './buffs';
 import { buildDamageConfig } from './config';
-import { buildSkillDescs } from './skill-descs';
+import { WIKI_GENERATED, buildSkillDescs, wikiDirOf } from './skill-descs';
 
 const OUT = resolve('data/generated/damage');
 
@@ -36,8 +36,14 @@ const OUT = resolve('data/generated/damage');
  * et prend `anim-events.json` committé tel quel — le bon réglage quand seuls
  * les artefacts WIKI ont bougé (intégration/promotion : les bundles du jeu,
  * eux, n'ont pas changé). Le défaut (`anim: true`) reste celui du patch.
+ * `wikiDir` = dossier des artefacts wiki lus par `skill-descs.ts` : le validé
+ * par défaut, la proposition quand la chaîne refresh promeut en dry (cf. son
+ * en-tête).
  */
-export async function buildDamageArtifacts(opts: { anim?: boolean } = {}): Promise<void> {
+export async function buildDamageArtifacts(
+  opts: { anim?: boolean; wikiDir?: string } = {},
+): Promise<void> {
+  const { wikiDir = WIKI_GENERATED } = opts;
   const version = buildGameVersion();
   if (!version) {
     throw new Error(
@@ -89,9 +95,12 @@ export async function buildDamageArtifacts(opts: { anim?: boolean } = {}): Promi
   await write('targets.json', targetsData);
   await write('buffs.json', buffsData);
   await write('config.json', { config: buildDamageConfig() });
-  // Projection UI (descs de popover) — dérivée des artefacts wiki committés
+  // Projection UI (descs de popover) — dérivée des artefacts wiki de `wikiDir`
   // (cf. en-tête de skill-descs.ts : régénérer APRÈS datagen:build).
-  await write('skill-descs.json', buildSkillDescs());
+  if (wikiDir !== WIKI_GENERATED) {
+    console.log(`▷ skill-descs lit ${wikiDir}/ (promote en dry : data/generated n'est pas promu).`);
+  }
+  await write('skill-descs.json', buildSkillDescs({ wikiDir }));
   if (buffsData.unresolved.length) {
     console.warn(
       `⚠ ${buffsData.unresolved.length} BuffID référencés mais absents de BuffTemplet ` +
@@ -123,7 +132,10 @@ export async function buildDamageArtifacts(opts: { anim?: boolean } = {}): Promi
 }
 
 if (isMain(import.meta.url)) {
-  buildDamageArtifacts({ anim: !process.argv.includes('--skip-anim') }).catch((e) => {
+  buildDamageArtifacts({
+    anim: !process.argv.includes('--skip-anim'),
+    wikiDir: wikiDirOf(process.argv.slice(2)),
+  }).catch((e) => {
     console.error(`\n\x1b[31mErreur : ${e?.message ?? e}\x1b[0m`);
     process.exit(1);
   });

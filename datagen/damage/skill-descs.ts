@@ -4,11 +4,20 @@
  * au rendu) + vars par niveau ÉLAGUÉES aux seuls placeholders que la desc
  * référence (`[Buff_C/V/T_<id>]`).
  *
- * SOURCE : les artefacts wiki committés (`data/generated/skills.json`,
- * `data/generated/characters.json`) — la desc templetée et l'extraction des
- * vars (c/v/t) vivent dans le générateur skills, on ne les réimplémente pas.
- * Dépendance d'ordre assumée : régénérer via `damage:build` APRÈS un
- * `datagen:build` qui a rafraîchi skills.json.
+ * SOURCE : les artefacts wiki (`skills.json`, `characters.json`) — la desc
+ * templetée et l'extraction des vars (c/v/t) vivent dans le générateur skills,
+ * on ne les réimplémente pas. Dépendance d'ordre assumée : régénérer via
+ * `damage:build` APRÈS un `datagen:build` qui a rafraîchi skills.json.
+ *
+ * QUEL DOSSIER (`wikiDir`) : le VALIDÉ `data/generated` par défaut
+ * (`damage:build` seul, `sync-derived` après une intégration) ; la PROPOSITION
+ * `data/extracted` quand la chaîne refresh promeut en DRY (`--from-extracted`,
+ * posé par `genSteps`). Les autres tables damage sortent des tables FRAÎCHES du
+ * jeu : en dry, `data/generated/skills.json` n'est pas promu, et le lire
+ * donnait des artefacts de DEUX versions sous un seul `resVersion` (les
+ * facteurs du patch, les descs d'avant). Les deux fichiers viennent du MÊME
+ * dossier ; le filtre de roster (`roster.ts`), lui, reste sur le validé — un
+ * perso non intégré de la proposition ne sort jamais.
  *
  * POURQUOI une projection : l'UI chargeait le catalogue entier côté client
  * (5,9 Mo — revue 18/08/2026) pour lire desc+vars de ~6 skills ; ici on émet
@@ -64,14 +73,24 @@ function referencedIds(desc: Record<string, string>): Set<string> {
   return out;
 }
 
-export function buildSkillDescs(): SkillDescsData {
-  const skills = JSON.parse(readFileSync(resolve('data/generated/skills.json'), 'utf8')) as Record<
+/** Le validé : la source des artefacts wiki hors chaîne refresh en dry. */
+export const WIKI_GENERATED = 'data/generated';
+/** La proposition de `datagen:build` — celle du run, que promote en dry n'écrit pas. */
+export const WIKI_EXTRACTED = 'data/extracted';
+/** Flag de `damage/build.ts` : lire les artefacts wiki dans la proposition. */
+export const FROM_EXTRACTED_FLAG = '--from-extracted';
+
+/** Dossier des artefacts wiki désigné par les arguments de `damage/build.ts`. PUR. */
+export const wikiDirOf = (argv: string[]): string =>
+  argv.includes(FROM_EXTRACTED_FLAG) ? WIKI_EXTRACTED : WIKI_GENERATED;
+
+export function buildSkillDescs(opts: { wikiDir?: string } = {}): SkillDescsData {
+  const { wikiDir = WIKI_GENERATED } = opts;
+  const skills = JSON.parse(readFileSync(resolve(wikiDir, 'skills.json'), 'utf8')) as Record<
     string,
     WikiSkill
   >;
-  const charsRaw = JSON.parse(
-    readFileSync(resolve('data/generated/characters.json'), 'utf8'),
-  ) as unknown;
+  const charsRaw = JSON.parse(readFileSync(resolve(wikiDir, 'characters.json'), 'utf8')) as unknown;
   const chars: WikiCharacter[] = Array.isArray(charsRaw)
     ? (charsRaw as WikiCharacter[])
     : Object.values(charsRaw as Record<string, WikiCharacter>);

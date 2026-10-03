@@ -17,6 +17,7 @@ import {
   resumeDecision,
   stepKey,
 } from './refresh';
+import { WIKI_EXTRACTED, WIKI_GENERATED, wikiDirOf } from './damage/skill-descs';
 
 const base = { hasGamedata: true, force: false, changed: false, prevSig: 'A', currentSig: 'A' };
 
@@ -168,12 +169,28 @@ describe('genSteps — la chaîne déclarée', () => {
     // Le 25/08/2026, `datagen:patch` avait tout rafraîchi (listings ASM
     // compris) SAUF les tables du moteur damage, restées sur l'ancienne
     // resVersion : le pipeline damage n'était pas dans la chaîne. Après
-    // promote parce que skill-descs.ts lit les artefacts wiki promus.
+    // promote parce que skill-descs.ts lit les artefacts wiki promus (avec
+    // `--apply` ; en dry, la proposition — cf. le test suivant).
     const ids = dry.map((s) => s.id);
     expect(ids.indexOf('damage')).toBeGreaterThan(ids.indexOf('promote'));
     // Pas de champ `py` : build.ts lance et annonce LUI-MÊME extract-anim-events
     // (doctrine lib/python.ts — sauté si non outillé, fatal si le script casse).
     expect(dry.find((s) => s.id === 'damage')!.py).toBeUndefined();
+  });
+
+  it('`damage` en dry lit les artefacts wiki de la PROPOSITION, pas du validé non promu', () => {
+    // Constat G12 : en dry, promote n'écrit pas data/generated — `skill-descs`
+    // y lisait donc le skills.json d'AVANT le patch, à côté de tables damage
+    // fraîches : deux versions sous un seul resVersion. Le dossier lu suit ce
+    // que promote a fait du run (cf. skill-descs.test pour la lecture elle-même).
+    const applied = genSteps({ apply: true, collect: false });
+    const damageArgs = (steps: typeof dry) => steps.find((s) => s.id === 'damage')!.args ?? [];
+    expect(wikiDirOf(damageArgs(dry))).toBe(WIKI_EXTRACTED);
+    expect(wikiDirOf(damageArgs(applied))).toBe(WIKI_GENERATED);
+    // Clés DISTINCTES au checkpoint, comme promote : une reprise relancée avec
+    // `--apply` ne doit pas garder un damage bâti sur la proposition.
+    expect(stepKey(dry.find((s) => s.id === 'damage')!)).toBe('damage --from-extracted');
+    expect(stepKey(applied.find((s) => s.id === 'damage')!)).toBe('damage');
   });
 
   it('chaque étape python déclare le module dont ELLE dépend', () => {
