@@ -7,6 +7,37 @@
 
 ## 2026-10-03
 
+- **S1 traité : la limitation de débit lit l'IP posée par Caddy, la Map est
+  bornée — et la prémisse de l'audit était fausse** (Fable, `ok` de Sevih).
+  Testé sur un Caddy 2.10 local avant d'écrire : sans `trusted_proxies`, Caddy
+  ÉCRASE le `X-Forwarded-For` du client par l'IP du pair, il ne le fait pas
+  suivre. La limite n'était donc pas contournable ; le défaut réel était
+  l'inverse — derrière Cloudflare, l'app ne voyait que l'IP de l'edge, un
+  quota COMMUN à tous les visiteurs du même edge sur `/api/tierlist` et
+  `/api/shortlink`. Correctif en deux dépôts. `sevih-tool/stack/Caddyfile` :
+  plages Cloudflare en `trusted_proxies`, `client_ip_headers
+CF-Connecting-IP`, et un snippet `client_ip` importé dans chaque
+  `reverse_proxy` vers l'app, qui pose `X-Real-Client-IP {client_ip}` en
+  écrasement ET remet `X-Forwarded-For/Host/Proto` à leur valeur d'avant —
+  se fier à Cloudflare laissait passer un `X-Forwarded-Host` inventé par le
+  visiteur (constaté au test). Ici : `clientIp` lit `x-real-client-ip`, repli
+  sur la DERNIÈRE valeur de `x-forwarded-for` (celle du proxy), donc l'ordre de
+  déploiement est libre ; `createRateLimiter` borne sa Map (`maxEntries`,
+  expirées puis plus anciennes) ; `rate-limit.test.ts`, 7 tests. Vérifié en
+  local sur le bloc global et le snippet exacts : pair hors Cloudflare avec
+  tous les en-têtes forgés → l'app reçoit l'IP du pair ; pair de confiance →
+  la valeur de `CF-Connecting-IP`. PAS vérifié : le chemin réel en prod (IP
+  vue par Caddy dans Docker). Reste à Sevih : sur le VPS, `git pull` puis
+  `docker compose up -d --force-recreate caddy`.
+- **Suite du tri avec Sevih** (Fable). Sortis du TODO : la boucle de revue du
+  hero-tracker (« on le laisse comme ça », la section Pages manquantes part
+  avec) ; `pnpm dev` = `clean:all` (voulu) ; les deux listes de shops
+  permanents (relues : elles diffèrent par décision documentée, 8 shops par
+  monnaie contre 7 onglets d'échange, ce n'est pas un doublon). Cinq prompts
+  de plus : B14 (descriptions meta dédiées des outils, le sous-titre visible
+  ne bouge pas), A25 (utilitaires recopiés d'`encounters.ts`), F5/F6/F7 (G10,
+  G11, G12 pour un agent Fable). G4 : le correctif des chips est en prod
+  depuis le 09/09, reste le test sur téléphone.
 - **Tri du reste du TODO avec Sevih, deuxième série de lots écrite** (Fable).
   Sortis du TODO : `China_Traditional` (« on s'en fiche », la section Langues
   part avec) ; H14 — le doublon SEO `/<tour>/1` n'en est pas un, l'étage se

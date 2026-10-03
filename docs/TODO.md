@@ -21,24 +21,10 @@
 > été délégués et soldés (table des commits, leçons et préambule réutilisable
 > dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
 > ci-dessous demande une décision, un test physique ou une relecture d'abord ;
-> une deuxième série de lots (A22–A24, B12, B13, F1–F4) est écrite au même
+> une deuxième série de lots (A22–A25, B12–B14, F1–F7) est écrite au même
 > endroit.
 
 ---
-
-## 📄 Pages manquantes (inventaire layout du 2026-07-17)
-
-> Cibles du header/footer posés le 17/07 (contrat `src/lib/nav.ts`) — 404
-> ASSUMÉES le temps du portage. L'historique des portages (19-21/07) vit dans
-> DONE. (Le pré-seed des clés de locale est TERMINÉ et purgé — une clé sans
-> consommateur fait désormais échouer `locales/keys.test.ts`.)
-
-- [ ] **`/tools` — hero-tracker : boucle de revue Sevih** (V2 livrée le 12/08 au
-      périmètre in-game qu'il a dicté, cf. DONE — page PUBLIÉE le 12/08 sur ordre
-      de Sevih). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
-      retirera des trucs à la fin ») ; (2) VÉRIFIER quel barème de limit break
-      s'applique à un Core Fusion — l'outil prend sa rareté AFFICHÉE (3★ pour
-      CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée.
 
 ## 🧹 Dette code
 
@@ -66,15 +52,11 @@
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
 > éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
 
-- [ ] **Reste du lot « titles/descriptions courts » : re-mesurer, puis les
-      descriptions d'OUTILS** — le gros est traité le 03/08 (cf. DONE : titles
-      des fiches perso/équipement/outils enrichis, 53 descriptions de guides
-      dédupliquées). Restent : (1) re-passer Sitebulb pour re-compter ce qui
-      est encore court après ces deux lots ; (2) les descriptions des ~17 pages
-      d'outils (une phrase, honnête mais courte) — ARBITRAGE REQUIS : la même
-      chaîne i18n (`tools.<slug>.desc`) sert AUSSI de sous-titre visible dans
-      ToolShell et sur la landing /tools — l'allonger pour le SEO change
-      l'écran. Options : découpler (clé meta dédiée) ou assumer le texte court.
+- [ ] **Reste du lot « titles/descriptions courts »** — le gros est traité
+      le 03/08 (cf. DONE). Restent : (1) les descriptions des ~17 pages
+      d'outils : décision Sevih 03/10, une clé meta DÉDIÉE, le sous-titre
+      visible (`tools.<slug>.desc`) ne bouge pas — lot B14 ; (2) re-passer
+      Sitebulb ensuite pour re-compter ce qui est encore court.
 
 ## 🔎 Audit transverse du 07/09 (constats G1–G52)
 
@@ -82,8 +64,8 @@
 > lignes exactes, les vérifications et les correctifs détaillés ; ici, le « à
 > faire » en clair, par lot. Le calculateur de dégâts (D1–D5) et la découpe des
 > gros composants ne sont PAS ici : ils ont déjà leur item ou leur backlog.
-> **S1** (limitation de débit sur `X-Forwarded-For`) est re-vérifié TOUJOURS
-> OUVERT — cf. `audit/plateforme.md`, le correctif dépend du `Caddyfile`.
+> **S1** (limitation de débit) est TRAITÉ le 03/10 côté code, cf. DONE ; reste à
+> recréer le conteneur Caddy sur le VPS.
 
 ### Lot 2 — métier, données, outillage
 
@@ -92,21 +74,23 @@
       (`RecruitGroupTemplet` → `RecruitGradeRecipeTemplet` →
       `RecruitRecipeTemplet`) donne le pool de chaque type de bannière ; le
       générateur ne l'émet pas encore et le simulateur trie par tags.
-- [ ] Chips à lien au toucher : VALIDER sur téléphone le « second tap =
-      navigation » posé le 09/09 (G4).
+- [ ] Chips à lien au toucher (G4) : le « second tap = navigation » est en
+      prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
+      `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de
+      perso : la bulle s'ouvre ; le toucher encore : la fiche s'ouvre.
 - [ ] **Tours very hard : 12 formations ALTERNATIVES émises comme une vague de
       35 monstres** (G10) : `encounters.ts:975-1015` aplatit ce que `towers.ts`
       sait être un pool tiré au hasard (vérifié sur 40103001). C'est exactement
       la confusion que la note « Tours : waves ≠ encounters » ci-dessous
-      interdit. Reprendre la règle de `towers.ts` dans la passe donjon.
+      interdit. Reprendre la règle de `towers.ts` dans la passe donjon — lot F5.
 - [ ] **Deux générateurs dérivent le scaling des dégâts avec des règles
       différentes** (G11) : `damage-scaling.ts:64-92` vs `solver.ts:719-777` —
       Leo, Sterope, Tamara, Kuro divergent. Une seule fonction dans
-      `datagen/lib/`.
+      `datagen/lib/` — lot F6.
 - [ ] **`pnpm dev` (dry) écrit `data/generated/damage/` avec `skill-descs`
       bâti sur l'ANCIEN `skills.json`** (G12) : artefacts de deux versions
       estampillés du nouveau `resVersion`. Ne jouer `damage` que si `apply`, ou
-      lire depuis `data/extracted` en dry.
+      lire depuis `data/extracted` en dry — lot F7.
 - [ ] **`pnpm commit` fait `git add -A`** (G17), ce que CONVENTIONS.md interdit
       (`commit.ts:288`, après un `pnpm format` sur tout le repo) ;
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
@@ -130,10 +114,10 @@
       (lot A23) ;
       (2) les pastilles de rareté maison du tier-list-maker (`FilterPill`
       « 3★ ») et du hero-tracker, alors que `StarPill` existe — elles voisinent
-      maintenant avec les pastilles de la brique (lot A24) ; (3) non découpés, à relire
-      d'abord : deux listes de shops permanents, « persos intégrés » ×4
-      lecteurs, `advOf`/`stripBrackets` dans `encounters.ts`, `pnpm dev` =
-      `clean:all` (décision).
+      maintenant avec les pastilles de la brique (lot A24) ; (3) `stripBrackets`/`stripDecoBrackets` et
+      `advOf` recopiés dans `encounters.ts` (lot A25) ; (4) « persos
+      intégrés » lu à quatre endroits avec quatre comportements d'erreur :
+      dette froide, à arbitrer avant d'unifier.
 - [ ] **Audit à faire** : `portrait-fx-*.ts` (WebGL), hors de la passe
       transverse du 07/09 — lot F4, agent Fable.
 

@@ -20,7 +20,7 @@
 >   limitation de débit, socle de partage MySQL, couche d'accès aux données,
 >   i18n, `next.config.ts` (constats **S1–S9**, 2026-08-28). Un seul constat
 >   Haute : **S1**, la limitation de débit s'appuie sur `X-Forwarded-For`, que
->   le client contrôle.
+>   le client contrôle (traité le 03/10, prémisse corrigée : cf. le rapport).
 >
 > - [transverse.md](./transverse.md) — **tout le repo en une passe**
 >   (constats **G1–G52**, 2026-09-07) : générateurs `datagen/generators/`

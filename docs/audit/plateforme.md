@@ -42,6 +42,19 @@ contrôle.
 
 ## S1 — Limitation de débit contournable, et Map non bornée · **Haute** · sécurité
 
+> **Traité le 03/10/2026, et la prémisse corrigée.** Testé sur un Caddy 2.10
+> local : sans `trusted_proxies`, Caddy NE fait PAS suivre le
+> `X-Forwarded-For` du client, il l'ÉCRASE par l'IP du pair. La première valeur
+> n'était donc pas forgeable et la Map ne pouvait pas être gonflée par cette
+> voie. Le défaut réel était l'inverse : derrière Cloudflare, l'app ne voyait
+> que l'IP de l'edge, soit un quota COMMUN à tous les visiteurs du même edge
+> (`zh`, en direct, avait déjà la bonne IP). Correctif appliqué : Caddy déclare
+> les plages Cloudflare (`trusted_proxies` + `client_ip_headers
+CF-Connecting-IP`) et pose `X-Real-Client-IP {client_ip}` en écrasement ;
+> `clientIp` ne lit que lui, avec la dernière valeur de `X-Forwarded-For` en
+> repli ; la Map est bornée ; `rate-limit.test.ts` existe. Le texte ci-dessous
+> est l'analyse d'origine, gardée pour l'historique.
+
 `clientIp()` ([`src/lib/rate-limit.ts:26`](../../src/lib/rate-limit.ts)) prend la
 **première** valeur de `x-forwarded-for`. Or ni Cloudflare ni Caddy ne
 _remplacent_ cet en-tête : ils **ajoutent** l'IP du pair à la valeur reçue. La
