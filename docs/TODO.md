@@ -17,10 +17,10 @@
 > constats G1–G52) a ajouté sa propre section ci-dessous — ces items-là SONT
 > vérifiés contre le code (chaque Haute/Moyenne re-lu de première main ce
 > jour-là).
-> Le **25/09**, tri « délégable à un agent » : les items assez cadrés pour
-> partir à un agent Opus ont chacun leur brief autoportant dans
-> [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (A = petits, B = moyens,
-> C = gros mécaniques) ; le reste y est listé comme réservé à Sevih.
+> Le **25/09** et le **03/10**, 38 items assez cadrés pour un agent Opus ont
+> été délégués et soldés (table des commits, leçons et préambule réutilisable
+> dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
+> ci-dessous demande une décision, un test physique ou une relecture d'abord.
 
 ---
 
@@ -36,11 +36,7 @@
       de Sevih). RESTE : (1) arbitrer les axes réellement utiles (Sevih : « on
       retirera des trucs à la fin ») ; (2) VÉRIFIER quel barème de limit break
       s'applique à un Core Fusion — l'outil prend sa rareté AFFICHÉE (3★ pour
-      CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée ;
-      (3) `pnpm images` au prochain passage : le PNG de `CM_EtcMenu_Colleague`
-      (og:image de la page) et les `PI_*` des pièces ne sont que dans le staging
-      local — le manifest les demande déjà, aucune curation à faire (sa source
-      était fausse jusqu'au 13/08, cf. DONE ; il est produit depuis).
+      CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée.
 
 ## 🌍 Langues — le jeu parle français et espagnol (23/09/2026)
 
@@ -98,8 +94,6 @@
 > **S1** (limitation de débit sur `X-Forwarded-For`) est re-vérifié TOUJOURS
 > OUVERT — cf. `audit/plateforme.md`, le correctif dépend du `Caddyfile`.
 
-### Lot 1 — huit bugs invisibles depuis un poste de dev EN/desktop (une soirée)
-
 ### Lot 2 — métier, données, outillage
 
 - [ ] Pull simulator : vérifier le pool HORS-FOCUS des bannières
@@ -139,32 +133,24 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Dette** (rapport § Dette) — le 25/09, lots A1–A11 ont soldé `CLASSES`,
-      `CLASS_SLUGS`, `ELEMENTS`, `esc()`/`rfc822()`, Twitch `parent`, lefthook
-      `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
-      découpé en lots délégables (prompts A13–A20, B9, B10 dans
-      lots-opus-2026-09-25.md) : plus rien — les pastilles élément/classe
-      et la recherche des 3 sélecteurs de perso et des barres de filtre des
-      outils, B10, sont FAITES le 03/10 (restent, par décision, les trois
-      coquilles de picker ; et les pastilles de rareté maison du
-      tier-list-maker et du hero-tracker, cf. DONE)
-      (le cache de `loadTextIndex` et les rebuilds redondants, A17, sont
-      faits ; le token `--text-3xs` pour les 126 tailles de 11px, A18,
-      aussi ; les 4 modales/lightbox des outils, B9, aussi — reste la
-      cinquième, celle de `damage-calculator/ui.tsx` ; l'outillage, A20, aussi — `next` revenu à 16.3.0 après la
-      panne du 25/09, cf. DONE). Non découpés (à relire d'abord) : deux listes de
-      shops permanents, « persos intégrés » ×4 lecteurs, `advOf`/`stripBrackets`
-      dans `encounters.ts`, `pnpm dev` = `clean:all` (décision).
-- [ ] **Lot non couvert à relancer** : `portrait-fx-*.ts` (WebGL). Les guides
-      sont audités (09/09, [audit/guides.md](./audit/guides.md)) ; les 18
-      générateurs sont en cours.
+- [ ] **Dette** (rapport § Dette) — les lots du 25/09 et du 03/10 ont soldé
+      tout ce qui était découpé (cf. DONE). Reste : (1) la cinquième modale,
+      celle de `damage-calculator/ui.tsx`, à passer sur `components/ui/Modal` ;
+      (2) les pastilles de rareté maison du tier-list-maker (`FilterPill`
+      « 3★ ») et du hero-tracker, alors que `StarPill` existe — elles voisinent
+      maintenant avec les pastilles de la brique ; (3) non découpés, à relire
+      d'abord : deux listes de shops permanents, « persos intégrés » ×4
+      lecteurs, `advOf`/`stripBrackets` dans `encounters.ts`, `pnpm dev` =
+      `clean:all` (décision).
+- [ ] **Audit à faire** : `portrait-fx-*.ts` (WebGL), hors de la passe
+      transverse du 07/09.
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **Couleurs Tailwind brutes des guides (H6) : FAIT pour les nuances qui
-      ont un token** (56 sur 152, lot B5). Reste 96 occurrences SANS token de
-      même valeur — le choix d'en créer (ou d'accepter un écart visible) est à
-      trancher : `blue-*` (how-to-play, roadmap), `amber-500`/`emerald-500`
+- [ ] **Couleurs Tailwind brutes des guides (H6)** : 96 occurrences SANS
+      token de même valeur (les 56 qui en avaient un sont passées, lot B5) —
+      créer des tokens ou accepter un écart visible, à trancher :
+      `blue-*` (how-to-play, roadmap), `amber-500`/`emerald-500`
       (fonds et anneaux de pastilles), `green-*`, `yellow-*`, `red-*`,
       `purple-400/500/600/700/900` (dont les accents d'ÉLÉMENT de
       `roadmap-2026/data.ts`), nuances -200/-300 sans `-soft`
@@ -173,8 +159,7 @@
       `TowerCombatRoster` (`rgb(239 68 68)` = red-500) n'ont pas de token ;
       `BannerTabs`/`AdventureGrid` n'ont que du noir (ombre, dégradé).
 - [ ] À confirmer : doublon SEO `/<tour>/1` vs page de base, encart
-      « annoncé juin, livré 8/09 » sur la roadmap (H14). (H12, H13 et le
-      `stamp:guides` en pre-commit : FAIT le 25/09, lot B8.)
+      « annoncé juin, livré 8/09 » sur la roadmap (H14).
 
 ---
 

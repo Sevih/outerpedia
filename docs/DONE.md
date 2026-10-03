@@ -84,16 +84,21 @@
   du team-planner (« sans nouvelle prop » : non fait) ; la `Modal` locale de
   `damage-calculator/ui.tsx`, déjà notée par B9.
 
-- **Relecture des lots A18, B9, B11, A21 et solde de G19** (Fable). Les quatre
-  commits tiennent leur périmètre, `pnpm typecheck`, `pnpm lint` et
-  `pnpm test` passent sur l'ensemble (173 fichiers, 2 003 tests). A18 : zéro
-  `text-[11px]` restant, le diff ne porte que le remplacement et le tri des
-  classes par prettier. B11/A21 : recompte indépendant sur `_contents` et
-  `data/curated`, 104 blocs partiels avant, 0 après ; aucun nouvel écart de
-  balises — les 25 blocs divergents relevés existaient avant les deux lots,
-  ils partent au TODO. G19 : le re-push R2 des préfixes `images/download/` et
-  `audio/bgm/` a été lancé par Sevih le 25/09 et l'en-tête `attachment`
-  vérifié, l'item sort du TODO. Reste B10, arrêté sur une décision de rendu.
+- **Relecture des cinq derniers lots Opus (A18, B9, B11, A21, B10), solde de
+  G19, ménage du TODO et du fichier des lots** (Fable). Chaque commit tient
+  son périmètre, aucun ne touche `package.json` ; `pnpm typecheck`,
+  `pnpm lint` et `pnpm test` passent sur l'ensemble (173 fichiers, 2 003
+  tests). A18 : zéro `text-[11px]` restant. B11/A21 : recompte indépendant,
+  104 blocs partiels avant, 0 après, aucun nouvel écart de balises — les 25
+  blocs divergents relevés existaient avant, ils partent au TODO. B10 : rendu
+  des pastilles changé sur décision de Sevih, écrans à regarder listés dans
+  son entrée. G19 : re-push R2 lancé par Sevih le 25/09, en-tête `attachment`
+  vérifié, l'item sort du TODO. Ménage : le TODO perd ses mentions « FAIT »,
+  une section vide et le point `pnpm images` du hero-tracker (les assets sont
+  poussés) ; `lots-opus-2026-09-25.md` ne garde que le message de lancement,
+  la table des 38 commits, les leçons et le préambule commun, qui interdit
+  désormais de toucher aux versions (panne du 25/09) ; ici, les deux titres
+  `## 2026-08-26` n'en font plus qu'un.
 - **Guides : `jp`/`kr`/`zh` écrits dans les 84 blocs éditoriaux qui n'avaient
   que `en`/`fr`/`es` — 22 fichiers de `_contents`** (lot B11, pendant d'A21
   côté guides). Le quoi : la passe qui a donné `fr` et `es` à du contenu resté
@@ -2225,8 +2230,6 @@ datagen:patch-steam`. Tourné pour de vrai : miroir 18 Go, dump, listings,
   spec damage sur le C# maintenant (prématuré avant la bascule) ; un MITM PC
   pour le gear-solver (BestHTTP a sa propre pile TLS, un plugin Mono est la
   voie, autre projet). Le suivi de la bascule est dans TODO.
-
-## 2026-08-26
 
 - **Spec damage MIGRÉE de l'ASM Android au C# du client Steam — section par
   section, 17 sections relues, 14 listings ajoutés au manifeste (113).** Le
