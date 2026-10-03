@@ -1,6 +1,56 @@
 {
   "posts": [
     {
+      "id": 11628,
+      "date": "2026-10-02",
+      "modified": "2026-10-02T10:06:43",
+      "slug": "hero-demiurge-lambda",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Hero] Demiurge Lambda",
+      "content": "<figure class=\"size-full\"><img width=\"1080\" height=\"1080\" src=\"/images/patch-notes/216bab01f1060a7b.webp\" alt=\"\"></figure>\n\n\n\n<figure class=\"size-full\"><img width=\"1080\" height=\"1350\" src=\"/images/patch-notes/9973c373157919f2.webp\" alt=\"\"></figure>\n"
+    },
+    {
+      "id": 11616,
+      "date": "2026-10-02",
+      "modified": "2026-10-02T09:12:18",
+      "slug": "%f0%9f%93%85-october-2026-calendar-wallpaper-released",
+      "lang": "en",
+      "type": "notice",
+      "title": "📅 October 2026 Calendar Wallpaper Released!",
+      "content": "<p>Celebrating the 1st Service Transfer Anniversary!<br>Download the OUTERPLANE October 2026 mobile wallpaper 🌸<br>Start the new month with OUTERPLANE 💙</p>\n\n\n\n<p>▼ Choose your size<br><a href=\"https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ\">https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ</a></p>\n\n\n\n<figure class=\"size-large\"><img width=\"1440\" height=\"2560\" src=\"/images/patch-notes/e8d5027ae789a392.webp\" alt=\"\"></figure>\n"
+    },
+    {
+      "id": 11620,
+      "date": "2026-10-02",
+      "modified": "2026-10-02T10:05:32",
+      "slug": "%eb%8f%99%eb%a3%8c-%eb%8d%b0%eb%af%b8%ec%9a%b0%eb%a5%b4%ea%b3%a0%ec%8a%a4-%eb%9e%8c%eb%8b%a4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[동료] 데미우르고스 람다",
+      "content": "<figure class=\"size-full\"><img width=\"1080\" height=\"1080\" src=\"/images/patch-notes/4b3876f1dafc7a8a.webp\" alt=\"\"></figure>\n\n\n\n<figure class=\"size-full\"><img width=\"1080\" height=\"1350\" src=\"/images/patch-notes/a640fe51e1462632.webp\" alt=\"\"></figure>\n"
+    },
+    {
+      "id": 11613,
+      "date": "2026-10-02",
+      "modified": "2026-10-02T09:10:40",
+      "slug": "%f0%9f%93%85-2026%eb%85%84-10%ec%9b%94-%eb%8b%ac%eb%a0%a5-%eb%b0%b0%ea%b2%bd%ed%99%94%eb%a9%b4-%ea%b3%b5%ea%b0%9c",
+      "lang": "kr",
+      "type": "notice",
+      "title": "📅 2026년 10월 달력 배경화면 공개!",
+      "content": "<p>서비스 이관 1주년 기념!<br>모바일 배경화면으로 사용 가능한<br>아우터플레인 달력을 만나보세요 🌸</p>\n\n\n\n<p>▼ 사이즈별로 확인하기<br><a href=\"https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ\">https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ</a></p>\n\n\n\n<figure class=\"size-large\"><img width=\"1440\" height=\"2560\" src=\"/images/patch-notes/e8d5027ae789a392.webp\" alt=\"\"></figure>\n"
+    },
+    {
+      "id": 11618,
+      "date": "2026-10-02",
+      "modified": "2026-10-02T09:13:17",
+      "slug": "2026%e5%b9%b410%e6%9c%88%e3%81%ae%e3%82%ab%e3%83%ac%e3%83%b3%e3%83%80%e3%83%bc%e5%a3%81%e7%b4%99%e3%82%92%e3%83%97%e3%83%ac%e3%82%bc%e3%83%b3%e3%83%88%f0%9f%8e%81",
+      "lang": "jp",
+      "type": "notice",
+      "title": "2026年10月のカレンダー壁紙をプレゼント🎁",
+      "content": "<p>✨移管1周年記念！✨<br>『アウタープレーン』2026年10月のスマホ壁紙を公開しました🌸<br>10月もぜひ、アウタープレーンをお楽しみください💙</p>\n\n\n\n<p>▼ サイズ別壁紙はこちら<br><a href=\"https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ\">https://drive.google.com/drive/u/0/folders/1cxTn-1fK05ls_WTsPRUygihE7IjxXgsQ</a></p>\n\n\n\n<figure class=\"size-large\"><img width=\"1440\" height=\"2560\" src=\"/images/patch-notes/e8d5027ae789a392.webp\" alt=\"\"></figure>\n"
+    },
+    {
       "id": 11580,
       "date": "2026-09-29",
       "modified": "2026-09-30T03:22:17",
@@ -123,12 +173,12 @@
     {
       "id": 11459,
       "date": "2026-09-22",
-      "modified": "2026-09-29T07:13:34",
+      "modified": "2026-10-02T05:59:15",
       "slug": "0922ike",
       "lang": "en",
       "type": "known-issue",
-      "title": "[Issues] Known Issues (9/22 Maintenance) (Added 9/29 04:46 UTC)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about issues that have been identified. Our apologies for the trouble while we work on fixing these issues.<br><br><strong>1. An issue where the mission name is not displayed in the mission completion notification at the bottom left of the screen when completing a Dimensional Singularity Stamina mission<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong><s>2. An issue where the purchase quantity slider is not displayed when purchasing Pieces of Resonance Rin or Pieces of Resonance Eliza in the Hero Piece Shop</s><br></strong>→ Fixed in the September 22, 2026 rolling patch.</p>\n\n\n\n<p><strong><s>3. An issue where attempting to claim rewards from the Point Exchange in Irregular Extermination displays a response failure message, disconnects the player from the server, and returns them to the title screen</s><br></strong>→ Fixed in the September 22, 2026 rolling patch.<br><br><strong>4. An issue where the Resonance Eliza Transcendence Pack cannot be purchased on Google Play or the App Store.<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong><s>5. An issue where rewards cannot be obtained after manually clearing or skipping a battle at an exploration node in Terminus Isle</s><br></strong>→ Fixed in the September 23, 2026 rolling patch.<br><br><strong>6. An issue in Mirsha Settlement Support where Demiurge Contract Missions end before the Check-In is completed, or where the number of obtainable Pieces is insufficient even after completing the Check-In<br></strong><strong>→ We plan to fix this issue. Once we have identified the affected accounts, we will send out the missing Pieces in batches.</strong><br><br><strong>7. An issue where Discord is not applied properly when Ryu Lion is included in the formation in Real Time Arena<br></strong>→ Currently under investigation<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding these issues via this notice.</p>\n\n\n\n<p>Thank you.</p>\n"
+      "title": "[Issues] Known Issues (9/22 Maintenance) (Added 10/2 05:58 UTC)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about issues that have been identified. Our apologies for the trouble while we work on fixing these issues.<br><br><strong>1. An issue where the mission name is not displayed in the mission completion notification at the bottom left of the screen when completing a Dimensional Singularity Stamina mission<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong><s>2. An issue where the purchase quantity slider is not displayed when purchasing Pieces of Resonance Rin or Pieces of Resonance Eliza in the Hero Piece Shop</s><br></strong>→ Fixed in the September 22, 2026 rolling patch.</p>\n\n\n\n<p><strong><s>3. An issue where attempting to claim rewards from the Point Exchange in Irregular Extermination displays a response failure message, disconnects the player from the server, and returns them to the title screen</s><br></strong>→ Fixed in the September 22, 2026 rolling patch.<br><br><strong>4. An issue where the Resonance Eliza Transcendence Pack cannot be purchased on Google Play or the App Store.<br></strong>→ Currently under investigation</p>\n\n\n\n<p><strong><s>5. An issue where rewards cannot be obtained after manually clearing or skipping a battle at an exploration node in Terminus Isle</s><br></strong>→ Fixed in the September 23, 2026 rolling patch.<br><br><strong>6. An issue in Mirsha Settlement Support where Demiurge Contract Missions end before the Check-In is completed, or where the number of obtainable Pieces is insufficient even after completing the Check-In<br></strong><strong>→ We plan to fix this issue. Once we have identified the affected accounts, we will send out the missing Pieces in batches.</strong><br><br><strong>7. An issue where Discord is not applied properly when Ryu Lion is included in the formation in Real Time Arena<br></strong>→ Currently under investigation<br><br><strong>8. An issue where attempting to purchase two or more Pieces at once in the Hero Piece Shop displays a “Request Failed” pop-up and prevents the purchase<br></strong>→ Currently under investigation<br><br>Once again we apologize for any inconvenience caused.<br>We will continue to inform our Masters regarding these issues via this notice.</p>\n\n\n\n<p>Thank you.</p>\n"
     },
     {
       "id": 11452,
@@ -163,12 +213,12 @@
     {
       "id": 11457,
       "date": "2026-09-22",
-      "modified": "2026-09-29T07:13:02",
+      "modified": "2026-10-02T05:58:31",
       "slug": "0922ikk",
       "lang": "kr",
       "type": "known-issue",
-      "title": "[이슈] 9/22 업데이트 이후 확인된 현상 (9/29 13:46 추가)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><strong>1. 차원의 특이점 행동력 미션 완료 시 화면 좌측 하단의 미션 완료 알림에 미션명이 표시되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong><s>2. 동료 조각 상점에서 레조넌스 린 및 레조넌스 엘리제의 조각 구매 시 구매 수량 조절 슬라이드가 노출되지 않는 현상</s><br></strong>→ 2026/09/22 무점검 패치를 통해 수정되었습니다.</p>\n\n\n\n<p><strong><s>3. 이레귤러 섬멸전 포인트 교환소에서 보상 수령 시도 시 ‘응답 실패’ 팝업이 표시되고, 서버 연결이 끊어진 후 타이틀 화면으로 돌아가는 현상</s><br></strong>→ 2026/09/22 무점검 패치를 통해 수정되었습니다.<br><br><strong>4. Google Play 및 App Store에서 ‘레조넌스 엘리제 초월 패키지’를 구매할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong><s>5. 멸망의 섬 탐사 스팟에서 적 발견 후 수동 전투 또는 스킵 시 보상을 획득할 수 없는 현상</s><br></strong>→ 2026/09/23 무점검 패치를 통해 수정되었습니다.</p>\n\n\n\n<p><strong>6.데미우르고스 블라다 코스튬 [첫 바캉스 블라다]를 착용 할수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong>7. 메르샤 정착 지원에서 데미우르고스 계약 미션이 출석 미션 완료 전 종료되거나, 출석 미션을 모두 완료해도 획득 가능한 조각 수량이 부족한 현상<br>→ </strong>해당 현상은 수정 예정이며, 대상 계정 확인 후 미획득 조각을 순차적으로 지급할 예정입니다.<br><br><strong>8. 실시간 대전에서 류리온 편성 시 불협화음이 정상적으로 적용되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n\n\n\n<p></p>\n"
+      "title": "[이슈] 9/22 업데이트 이후 확인된 현상 (10/2 14:58 추가)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><strong>1. 차원의 특이점 행동력 미션 완료 시 화면 좌측 하단의 미션 완료 알림에 미션명이 표시되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong><s>2. 동료 조각 상점에서 레조넌스 린 및 레조넌스 엘리제의 조각 구매 시 구매 수량 조절 슬라이드가 노출되지 않는 현상</s><br></strong>→ 2026/09/22 무점검 패치를 통해 수정되었습니다.</p>\n\n\n\n<p><strong><s>3. 이레귤러 섬멸전 포인트 교환소에서 보상 수령 시도 시 ‘응답 실패’ 팝업이 표시되고, 서버 연결이 끊어진 후 타이틀 화면으로 돌아가는 현상</s><br></strong>→ 2026/09/22 무점검 패치를 통해 수정되었습니다.<br><br><strong>4. Google Play 및 App Store에서 ‘레조넌스 엘리제 초월 패키지’를 구매할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong><s>5. 멸망의 섬 탐사 스팟에서 적 발견 후 수동 전투 또는 스킵 시 보상을 획득할 수 없는 현상</s><br></strong>→ 2026/09/23 무점검 패치를 통해 수정되었습니다.</p>\n\n\n\n<p><strong>6.데미우르고스 블라다 코스튬 [첫 바캉스 블라다]를 착용 할수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong>7. 메르샤 정착 지원에서 데미우르고스 계약 미션이 출석 미션 완료 전 종료되거나, 출석 미션을 모두 완료해도 획득 가능한 조각 수량이 부족한 현상<br>→ </strong>해당 현상은 수정 예정이며, 대상 계정 확인 후 미획득 조각을 순차적으로 지급할 예정입니다.<br><br><strong>8. 실시간 대전에서 류리온 편성 시 불협화음이 정상적으로 적용되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br><strong>9. 동료 조각 상점에서 조각 구매 수량을 2개 이상 설정하여 구매 시 ‘요청 실패’ 팝업이 노출되며 구매할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.<br><br>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.<br><br>감사합니다.</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11450,
@@ -203,12 +253,12 @@
     {
       "id": 11466,
       "date": "2026-09-22",
-      "modified": "2026-09-29T07:08:38",
+      "modified": "2026-10-02T05:59:54",
       "slug": "0922ikj",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (9/22)（9/29 13:46 追記)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br><br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1. 次元の特異点の活力消費ミッション達成時、画面左下に表示される完了ミッションの名称が表示されない現象<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong><s>2. 仲間ピースショップにて「レゾナンス・リン」及び「レゾナンス・エリーゼ」のピース購入の際、数量調整のスライドが表示されない現象</s><br></strong>→ 26/09/22データ更新にて修正されました。<br><br><strong><s>3. イレギュラー殲滅戦の【ポイント交換所】で報酬を受け取ろうとすると、「応答失敗」画面が表示され、サーバーとの接続が切断された後、タイトル画面に戻される現象<br></s></strong>→ 26/09/22データ更新にて修正されました。<br><br><strong>4. Google PlayおよびApp Storeにて、「レゾナンス・エリゼ超越パック」を購入できない現象<br></strong>→<strong>Google Play</strong>にて購入できるようになりました。App Storeにて解決後、再度お知らせいたします。（9/23 14:27 <a href=\"https://annoucements.outerplane.major7.kr/wp-admin/post.php?post=11323&amp;action=edit\">追記)</a></p>\n\n\n\n<p><s><strong>5. テルミナス島探査の戦闘スポットで敵を発見した後、手動戦闘またはスキップを行った際、報酬を獲得できない現象</strong>（9/23 14:27 追記)<br></s>→ 26/09/23データ更新にて修正されました。</p>\n\n\n\n<p>6.デミウルゴス・ヴラダのスキン「初めてのバカンス・ヴラダ」が装着できない現象（9/23 18:04 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p>7.<strong>「メルシャ初心者応援」にて、「デミウルゴス契約」ミッションがログインミッションの完了前に終了する、またはログインミッションをすべて完了しても獲得可能なピース数が不足する現象</strong>（9/29 13:46 追記)<br>→ 本現象は修正を予定しており、対象アカウントを確認後、未獲得分のピースを順次配布する予定です。</p>\n\n\n\n<p>8.<strong>ワールドアリーナにて「リュー・リオン」を編成した際、「不協和音」の効果が正常に適用されない現象</strong>（9/29 13:46 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p></p>\n\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
+      "title": "【不具合】現在確認されている不具合について (9/22)（10/2 14:58 追記)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。<br><br>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。<br><br><strong>1. 次元の特異点の活力消費ミッション達成時、画面左下に表示される完了ミッションの名称が表示されない現象<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong><s>2. 仲間ピースショップにて「レゾナンス・リン」及び「レゾナンス・エリーゼ」のピース購入の際、数量調整のスライドが表示されない現象</s><br></strong>→ 26/09/22データ更新にて修正されました。<br><br><strong><s>3. イレギュラー殲滅戦の【ポイント交換所】で報酬を受け取ろうとすると、「応答失敗」画面が表示され、サーバーとの接続が切断された後、タイトル画面に戻される現象<br></s></strong>→ 26/09/22データ更新にて修正されました。<br><br><strong>4. Google PlayおよびApp Storeにて、「レゾナンス・エリゼ超越パック」を購入できない現象<br></strong>→<strong>Google Play</strong>にて購入できるようになりました。App Storeにて解決後、再度お知らせいたします。（9/23 14:27 <a href=\"https://annoucements.outerplane.major7.kr/wp-admin/post.php?post=11323&amp;action=edit\">追記)</a></p>\n\n\n\n<p><s><strong>5. テルミナス島探査の戦闘スポットで敵を発見した後、手動戦闘またはスキップを行った際、報酬を獲得できない現象</strong>（9/23 14:27 追記)<br></s>→ 26/09/23データ更新にて修正されました。</p>\n\n\n\n<p>6.デミウルゴス・ヴラダのスキン「初めてのバカンス・ヴラダ」が装着できない現象（9/23 18:04 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p>7.<strong>「メルシャ初心者応援」にて、「デミウルゴス契約」ミッションがログインミッションの完了前に終了する、またはログインミッションをすべて完了しても獲得可能なピース数が不足する現象</strong>（9/29 13:46 追記)<br>→ 本現象は修正を予定しており、対象アカウントを確認後、未獲得分のピースを順次配布する予定です。</p>\n\n\n\n<p>8.<strong>ワールドアリーナにて「リュー・リオン」を編成した際、「不協和音」の効果が正常に適用されない現象</strong>（9/29 13:46 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p></p>\n\n\n\n<p>9.<strong>ピースショップにて、ピースの購入数量を2個以上に設定した状態で購入しようとすると、「リクエスト失敗」ポップアップが表示され、購入できない現象</strong>（10/2 14:58 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11454,
