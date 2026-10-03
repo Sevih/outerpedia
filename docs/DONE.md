@@ -7,6 +7,14 @@
 
 ## 2026-10-03
 
+- **Relecture de A25, F6 et F7 : les 52 lots sont faits** (Fable). Contrôles
+  verts (177 fichiers, 2 043 tests), promote à blanc sans écart, aucun lot ne
+  touche `package.json`. A25 : `encounters.json` identique. F6 :
+  `damage-scaling.json` perd quatre persos (Leo, Sterope, Tamara, Kuro), le
+  raisonnement par les tables est dans son entrée et tient — les buffs en
+  cause ne pèsent que sur l'attaque de soutien, ou sur une stat jamais lue en
+  combat. F7 : le test manuel du dry-run reste à jouer par Sevih, décrit dans
+  son entrée.
 - **Lot F7 : dry-run — `skill-descs` lit la proposition du run, plus le
   `skills.json` d'avant le patch (constat G12)** (Fable). Le quoi : quand la
   chaîne refresh promeut en DRY (`pnpm dev`, `pnpm datagen:patch` sans
