@@ -29,6 +29,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { findBuff, formatRowValue } from '../lib/buff';
 import { loadTable, type Row } from '../lib/tables';
+import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
 import {
@@ -706,23 +707,26 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
     ST_BUFF_CHANCE: 'eff',
     ST_CRITICAL_RATE: 'crc',
   };
-  // Scan des scalings : S1/S2/S3 + Skill_8 (transcendance — le eff-scaling de
-  // Nella vit dans les buffs PARTAGÉS trancendent_8_owner_*) + les PASSIFS
-  // Skill_22 (classe — les swaps de Domine/Skadi/Anarky) et Skill_23 (core — Epsilon). PAS les skills
-  // de SOUTIEN (backup, Skill_9/10) : leurs OWNER_STAT propres (Tamara
-  // `_backup_1_1` spd 1500) sont les attaques de soutien, pas le kit principal —
-  // l'ancienne référence ne les comptait pas. noCrit, lui, se cherche sur TOUS les
-  // Skill_* (le `_passive` de Rhona vit hors S1-S3).
-  const MAIN_SKILL_COLS = ['Skill_1', 'Skill_2', 'Skill_3', 'Skill_8', 'Skill_22', 'Skill_23'];
+  // dmgStat/dmgSec : la règle vit dans lib/kit-scaling.ts, PARTAGÉE avec
+  // damage-scaling (kit principal, buffs posés sur soi) ; ici on ne fait que
+  // projeter dans les clés du contrat — une stat hors de SCALING_STAT_TO_KEY
+  // n'a pas de clé chez gear-solver, elle tombe. noCrit, lui, se cherche sur
+  // TOUS les Skill_* (le `_passive` de Rhona vit hors S1-S3).
+  const kitTables = loadKitScalingTables();
   const ALL_SKILL_COLS = Array.from({ length: 23 }, (_, i) => `Skill_${i + 1}`);
   function deriveDmgScaling(c: Row): {
     dmgStat?: string;
     dmgSec?: { stat: string; ratio: number }[];
     noCrit?: boolean;
   } {
-    let dmgStat: string | null = null;
+    const scaling = kitScaling(c, kitTables);
+    const swapKey = SCALING_STAT_TO_KEY[scaling.attackStat ?? ''];
+    const dmgStat = swapKey === 'def' || swapKey === 'hp' ? swapKey : null;
+    const dmgSec = scaling.bonus.flatMap(({ stat, ratio }) => {
+      const key = SCALING_STAT_TO_KEY[stat];
+      return key ? [{ stat: key, ratio }] : [];
+    });
     let noCrit = false;
-    const secMax = new Map<string, number>();
     const forEachBuff = (cols: string[], fn: (b: Row) => void): void => {
       for (const col of cols) {
         const sid = c[col];
@@ -740,23 +744,12 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
         }
       }
     };
-    forEachBuff(MAIN_SKILL_COLS, (b) => {
-      const key = SCALING_STAT_TO_KEY[b.StatType ?? ''];
-      if (!key) return;
-      if (b.Type === 'BT_SWAP_STAT_ATTACK') {
-        if (key === 'def' || key === 'hp') dmgStat = key;
-      } else if (b.Type === 'BT_DMG_OWNER_STAT') {
-        const ratio = Number(b.Value) / 1000;
-        if (ratio > 0) secMax.set(key, Math.max(secMax.get(key) ?? 0, ratio));
-      }
-    });
     forEachBuff(ALL_SKILL_COLS, (b) => {
       if (b.StatType === 'ST_CRITICAL_RATE' && Number(b.Value) <= -1000) noCrit = true;
     });
-    const dmgSec = secMax.size > 0 ? [...secMax].map(([stat, ratio]) => ({ stat, ratio })) : null;
     return {
       ...(dmgStat ? { dmgStat } : {}),
-      ...(dmgSec ? { dmgSec } : {}),
+      ...(dmgSec.length ? { dmgSec } : {}),
       ...(noCrit ? { noCrit: true } : {}),
     };
   }

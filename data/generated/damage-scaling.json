@@ -56,9 +56,6 @@
   "2000041": {
     "bonusStats": ["speed"]
   },
-  "2000042": {
-    "bonusStats": ["def"]
-  },
   "2000043": {
     "dot": true
   },
@@ -78,14 +75,8 @@
   "2000056": {
     "dot": true
   },
-  "2000057": {
-    "bonusStats": ["hp"]
-  },
   "2000058": {
     "dot": true
-  },
-  "2000060": {
-    "bonusStats": ["speed"]
   },
   "2000062": {
     "dot": true
@@ -113,9 +104,6 @@
   },
   "2000077": {
     "attackStat": "def"
-  },
-  "2000079": {
-    "bonusStats": ["get_gold_rate"]
   },
   "2000080": {
     "attackStat": "hp"

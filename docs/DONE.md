@@ -7,6 +7,69 @@
 
 ## 2026-10-03
 
+- **Lot F6 : scaling des dégâts — une seule règle pour damage-scaling et le
+  solver, celle du kit principal (constat G11)** (Fable). Le quoi :
+  `datagen/lib/kit-scaling.ts` porte `kitScaling()`, la seule fonction qui
+  répond à « quelles stats pilotent les dégâts de ce perso »
+  (`BT_SWAP_STAT_ATTACK`, `BT_DMG_OWNER_STAT`) ; `generators/damage-scaling.ts`
+  en tire `attackStat`/`bonusStats`, `generators/solver.ts` en tire
+  `dmgStat`/`dmgSec`, chacun ne faisant plus que projeter dans son vocabulaire
+  (slugs du wiki, clés du contrat gear-solver). Le pourquoi : les deux
+  générateurs lisaient les mêmes faits avec deux règles (Skill_1..23, groupes
+  expansés, sans filtre de cible, contre S1/S2/S3/8/22/23 avec
+  `TargetType = ME`), et le calculateur demandait DEF, HP ou SPD à trois persos
+  dont aucune ligne du rapport ne s'en sert. Le comment : diff refait sur les
+  129 `CT_PC` à identité propre, 38 portent un swap ou un bonus de stat, QUATRE
+  divergent — les quatre de l'audit, pas un de plus — et les tables tranchent
+  chaque cas pour la règle du solver :
+
+  | Perso             | Buff en cause        | Ce que disent les tables                                                                                                                                                                                                                 | `damage-scaling.json` avant     | après  | solver avant / après |
+  | ----------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ------ | -------------------- |
+  | Leo (2000042)     | `2000042_backup_1_1` | `BT_DMG_OWNER_STAT` DEF 200 ‰ porté par Skill_10 seul, `CallerSkillType = SKT_BACKUP_AERIAL,SKT_BACKUP_GROUND` : ne pèse que sur l'attaque de soutien                                                                                    | `bonusStats: ["def"]`           | absent | rien / rien          |
+  | Sterope (2000057) | `2000057_backup_1_1` | idem, HP 20 ‰, Skill_9 et Skill_10                                                                                                                                                                                                       | `bonusStats: ["hp"]`            | absent | rien / rien          |
+  | Tamara (2000060)  | `2000060_backup_1_1` | idem, SPD 1500 ‰, Skill_9 et Skill_10                                                                                                                                                                                                    | `bonusStats: ["speed"]`         | absent | rien / rien          |
+  | Kuro (2000079)    | `2000079_2_8`        | `BT_DMG_OWNER_STAT` sur `ST_GET_GOLD_RATE` × 1000 ‰, cible `MY_TEAM` ; `2000079_2_9` est un `BT_STAT` `ST_GET_GOLD_RATE` +100 à 3 stacks — c'est le « +10 % de dégâts, 3 stacks max » de la description du S2, un compteur, pas une stat | `bonusStats: ["get_gold_rate"]` | absent | rien / rien          |
+
+  Pour les trois premiers, le jeu gate le buff par `IsCallerSkillType`
+  (`docs/specs/damage-formula.md` § 15) et le moteur du calculateur lui donne
+  déjà « contribution 0 » (`REPORT_SKILL_TYPES` de `src/lib/damage/gear.ts` :
+  S1/S2/S3 + bursts) : la stat était demandée puis ignorée. Pour Kuro, la spec
+  § 16 range `ST_GET_GOLD_RATE` dans « jamais en combat » et la fiche n'a pas ce
+  champ — le calculateur écartait déjà le slug à l'intersection avec la fiche.
+  La règle retenue est donc celle du solver (colonnes du kit principal, buffs
+  posés sur soi, ratio = plus haut niveau, valeur > 0), à UN ajout près, repris
+  de damage-scaling : l'expansion des `BT_GROUP`, qu'aucun perso n'exerce
+  aujourd'hui (les deux sorties le prouvent) mais sans laquelle un swap logé
+  dans un groupe serait invisible des deux côtés. Contrôle croisé sur le
+  roster : le critère « colonne » et le critère du binaire (`CallerSkillType`)
+  coïncident partout — les 70 lignes de buff de Skill_9/10 sont toutes
+  réservées au soutien, aucune des 235 du kit principal et des bursts ne l'est.
+  `lostHpDmg` et `dot` restent sur leur parcours d'origine dans
+  `damage-scaling.ts` (tout le kit, sans filtre de cible : un DoT vise
+  l'ennemi) ; `noCrit` reste dans le solver. Vérification : `pnpm
+datagen:build` puis `pnpm datagen:promote` à blanc — « 64 identique(s), 1
+  différent(s) », `damage-scaling.json −4 (2000042, 2000057, 2000060,
+2000079)` ; `--apply` joué, `data/generated/solver/` et
+  `data/generated/damage/` re-dérivés à l'identique (`git status` ne montre que
+  `damage-scaling.json`, 12 lignes en moins ; les 42 fixtures damage restent
+  exactes). `datagen/lib/kit-scaling.test.ts` fixe les quatre cas sur leurs
+  lignes de table recopiées, plus les passifs 8/22/23, le ratio max et
+  l'enfant de groupe. `pnpm typecheck` : `tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json` (aucune
+  erreur) ; `pnpm lint` : `$ eslint` (aucune sortie) ; `pnpm test` : `Tests
+2037 passed (2037)`. Changement visible, voulu : le calculateur ne demande
+  plus la DEF à Leo, le HP à Sterope, la SPD à Tamara ; rien d'autre ne bouge
+  (comparé : le diff de `damage-scaling.json`, seule entrée de `statKeysFor`).
+  Laissé : (1) Astei (2000058) n'a de `dot` que par ses skills de soutien — le
+  calculateur lui demande l'EFF pour un DoT qu'il ne ligne pas ; même famille,
+  mais hors du constat (le solver n'a pas ce fait, donc pas de seconde règle à
+  fusionner) ; (2) le commentaire de `statKeysFor`
+  (`damage-calculator/index.tsx`) cite encore `get_gold_rate` comme exemple
+  de slug écarté, que plus rien n'émet ; (3) le critère reste la COLONNE, pas
+  `CallerSkillType` : ils coïncident aujourd'hui, un buff de soutien logé un
+  jour dans un passif principal passerait — l'en-tête de `kit-scaling.ts`
+  dit où regarder.
+
 - **Lot A25 : `encounters.ts` — les deux paires d'utilitaires recopiés n'en
   font plus qu'une chacune (dette de l'audit transverse)** (Opus). Le quoi :
   `stripDecoBrackets` et `advOf` sont deux fonctions de MODULE dans

@@ -56,10 +56,6 @@
       prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
       `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de
       perso : la bulle s'ouvre ; le toucher encore : la fiche s'ouvre.
-- [ ] **Deux générateurs dérivent le scaling des dégâts avec des règles
-      différentes** (G11) : `damage-scaling.ts:64-92` vs `solver.ts:719-777` —
-      Leo, Sterope, Tamara, Kuro divergent. Une seule fonction dans
-      `datagen/lib/` — lot F6.
 - [ ] **`pnpm dev` (dry) écrit `data/generated/damage/` avec `skill-descs`
       bâti sur l'ANCIEN `skills.json`** (G12) : artefacts de deux versions
       estampillés du nouveau `resVersion`. Ne jouer `damage` que si `apply`, ou
