@@ -21,7 +21,7 @@
 > été délégués et soldés (table des commits, leçons et préambule réutilisable
 > dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
 > ci-dessous demande une décision, un test physique ou une relecture d'abord ;
-> restent trois lots écrits au même endroit (A25, F6, F7).
+> restent deux lots écrits au même endroit (F6, F7).
 
 ---
 
@@ -72,10 +72,10 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Dette** (rapport § Dette) — reste : (1) `stripBrackets` /
-      `stripDecoBrackets` et `advOf` recopiés dans `encounters.ts` (lot A25) ;
-      (2) « persos intégrés » lu à quatre endroits avec quatre comportements
-      d'erreur : dette froide, à arbitrer avant d'unifier.
+- [ ] **Dette** (rapport § Dette) — reste : « persos intégrés » lu à quatre
+      endroits avec quatre comportements d'erreur : dette froide, à arbitrer
+      avant d'unifier. (Les utilitaires recopiés d'`encounters.ts` : FAIT le
+      03/10, lot A25.)
 
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 

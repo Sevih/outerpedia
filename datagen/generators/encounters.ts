@@ -654,6 +654,31 @@ function stripUnfilledPlaceholder(dict: LangDict): LangDict {
   return out;
 }
 
+/**
+ * Retire les crochets DÉCORATIFS qui entourent un titre entier, langue par
+ * langue : `[…]` (« [Monad Gate] », titres kr) ou `【…】` (titres jp). Sert aux
+ * titres de ContentLock comme à ceux des saisons de guild raid.
+ */
+function stripDecoBrackets(dict: LangDict): LangDict {
+  const out = { ...dict };
+  for (const lang of Object.keys(out) as Array<keyof LangDict>) {
+    const m = /^[[【](.+)[\]】]$/.exec(out[lang] ?? '');
+    if (m) out[lang] = m[1];
+  }
+  return out;
+}
+
+/** Advantage rates d'une ligne (mêmes colonnes `SpawnAdvantageRate_*` dans
+ * `DungeonTemplet` et dans les tables de mode) ; `undefined` si aucun. */
+function advOf(r: Record<string, string | undefined>): DungeonAdv | undefined {
+  const adv: DungeonAdv = {};
+  if (num(r.SpawnAdvantageRate_Atk)) adv.atk = num(r.SpawnAdvantageRate_Atk);
+  if (num(r.SpawnAdvantageRate_Def)) adv.def = num(r.SpawnAdvantageRate_Def);
+  if (num(r.SpawnAdvantageRate_HP)) adv.hp = num(r.SpawnAdvantageRate_HP);
+  if (num(r.SpawnAdvantageRate_Spd)) adv.spd = num(r.SpawnAdvantageRate_Spd);
+  return Object.keys(adv).length ? adv : undefined;
+}
+
 /** Contexte de résolution des TITRES de mode (index TextSystem normalisé,
  * titres ContentLock, curation mode-titles.json) — partagé entre le glossaire
  * `modes` de buildEncounters et `modeTitleKey` (sources.ts). */
@@ -685,14 +710,6 @@ function titleContext(): ModeTitleContext {
   // (débarrassés d'éventuels crochets décoratifs : « [Monad Gate] »).
   const keysByNorm = new Map<string, string>();
   for (const k of tsys.keys()) if (!keysByNorm.has(normKey(k))) keysByNorm.set(normKey(k), k);
-  const stripBrackets = (t: LangDict): LangDict => {
-    const out = { ...t };
-    for (const lang of Object.keys(out) as Array<keyof LangDict>) {
-      const m = /^\[(.+)\]$/.exec(out[lang] ?? '');
-      if (m) out[lang] = m[1];
-    }
-    return out;
-  };
   const contentTitles: ContentTitle[] = [];
   for (const c of loadTable('ContentLockTemplet')) {
     if (!c.ContentType || !c.TextID || c.TextID === '0') continue;
@@ -701,7 +718,7 @@ function titleContext(): ModeTitleContext {
     contentTitles.push({
       norm: normKey(c.ContentType),
       tokens: c.ContentType.split('_'),
-      text: stripBrackets(text),
+      text: stripDecoBrackets(text),
       key: c.TextID,
     });
   }
@@ -871,14 +888,6 @@ export function buildEncounters(): EncountersData {
   const grTitleStr = new Map<string, string>();
   for (const r of loadTable('GuildRaidTemplet'))
     if (r.ID && r.TitleStr) grTitleStr.set(r.ID, r.TitleStr);
-  const stripDecoBrackets = (d: LangDict): LangDict => {
-    const out = { ...d };
-    for (const l of Object.keys(out) as Array<keyof LangDict>) {
-      const m = /^[[【](.+)[\]】]$/.exec(out[l] ?? '');
-      if (m) out[l] = m[1];
-    }
-    return out;
-  };
   const guildRaidSeasons: Record<string, LangDict> = {};
   for (const r of loadTable('GuildRaidGradeTemplet')) {
     const key = grTitleStr.get(r.GuildRaidID ?? '');
@@ -1171,12 +1180,8 @@ export function buildEncounters(): EncountersData {
     // Butin répétable du donjon (table mutualisée, cf. rewardTables).
     const reward = resolveReward(d.RewardID);
     if (reward) ref.reward = reward;
-    const adv: DungeonAdv = {};
-    if (num(d.SpawnAdvantageRate_Atk)) adv.atk = num(d.SpawnAdvantageRate_Atk);
-    if (num(d.SpawnAdvantageRate_Def)) adv.def = num(d.SpawnAdvantageRate_Def);
-    if (num(d.SpawnAdvantageRate_HP)) adv.hp = num(d.SpawnAdvantageRate_HP);
-    if (num(d.SpawnAdvantageRate_Spd)) adv.spd = num(d.SpawnAdvantageRate_Spd);
-    if (Object.keys(adv).length) ref.adv = adv;
+    const adv = advOf(d);
+    if (adv) ref.adv = adv;
     dungeons[d.ID] = ref;
 
     // Spawns INVERSES dédupliqués par (monstre, niveau) — `found` peut porter
@@ -1200,16 +1205,6 @@ export function buildEncounters(): EncountersData {
   // Les stats du templet ne suffisent pas : chaque mode « spécial » redéfinit la
   // rencontre dans SA table — PV réels, niveau par palier, advantage rates
   // propres, passifs additionnels. Tout est raccroché ici au donjon.
-
-  /** Advantage rates d'une ligne de table de mode (mêmes colonnes partout). */
-  const advOf = (r: Record<string, string | undefined>): DungeonAdv | undefined => {
-    const adv: DungeonAdv = {};
-    if (num(r.SpawnAdvantageRate_Atk)) adv.atk = num(r.SpawnAdvantageRate_Atk);
-    if (num(r.SpawnAdvantageRate_Def)) adv.def = num(r.SpawnAdvantageRate_Def);
-    if (num(r.SpawnAdvantageRate_HP)) adv.hp = num(r.SpawnAdvantageRate_HP);
-    if (num(r.SpawnAdvantageRate_Spd)) adv.spd = num(r.SpawnAdvantageRate_Spd);
-    return Object.keys(adv).length ? adv : undefined;
-  };
 
   /** Ligne de palier (schéma partagé guild dungeon / world boss / singularity /
    * event challenge : MinDamage..MaxDamage → BaseLevel/TransLevel/MaxHP/adv/OptionID). */

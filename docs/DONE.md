@@ -7,6 +7,37 @@
 
 ## 2026-10-03
 
+- **Lot A25 : `encounters.ts` — les deux paires d'utilitaires recopiés n'en
+  font plus qu'une chacune (dette de l'audit transverse)** (Opus). Le quoi :
+  `stripDecoBrackets` et `advOf` sont deux fonctions de MODULE dans
+  `datagen/generators/encounters.ts`, à côté de `fillPlaceholder` et
+  `stripUnfilledPlaceholder` ; les fermetures locales `stripBrackets` (dans
+  `titleContext`), `stripDecoBrackets` et `advOf` (dans `buildEncounters`)
+  disparaissent, ainsi que le bloc en ligne qui construisait `adv` pour chaque
+  donjon. Le pourquoi : deux copies du même geste divergent en silence —
+  `stripBrackets` ne retirait que `[…]` quand sa jumelle retirait aussi
+  `【…】`, et le bloc en ligne relisait à la main les quatre colonnes
+  `SpawnAdvantageRate_*` que `advOf` lit déjà pour les tables de mode. Le
+  comment : la version unique des crochets est la plus large (`[…]` et
+  `【…】`), celle d'`advOf` garde son paramètre à valeurs optionnelles (les
+  lignes de mode ne sont pas toutes des `Row`, `tsc` l'a rappelé) et le site
+  donjon devient `const adv = advOf(d); if (adv) ref.adv = adv;`. Le risque
+  annoncé était réel et mesuré : sur 28 titres de ContentLock, UN est entouré
+  de crochets, `SYS_MONAD_GATE_CONTENTS_NAME` (`MONADGATE`), en `[…]` pour
+  en/kr/fr/es et en `【…】` pour jp/zh — ces deux langues gardaient donc leurs
+  crochets dans l'index des titres, plus maintenant. La sortie n'en dépend
+  pas : les deux modes monad sont curés dans `mode-titles.json`
+  (`monad_battle_1` → `SYS_MONAD_GATE`, `monad_battle_2` →
+  `SYS_SINGULARITY_MAIN_TITLE`), le résolveur automatique ne sert jamais ce
+  titre. La vérification : `pnpm datagen:build` puis `pnpm datagen:promote`
+  à blanc sur le code final — « 65 identique(s), 0 différent(s) », rien à
+  appliquer, `data/generated/` intact ; `pnpm typecheck` (les trois `tsc`
+  sans sortie), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` (175
+  fichiers, 2 029 tests). Aucun rendu concerné, rien comparé à l'écran.
+  Laissé : si la curation de `monad_battle_1` saute un jour, le titre
+  automatique sortira sans crochets en jp/zh comme ailleurs — c'est le
+  comportement voulu, mais ce serait un changement de sortie à lire au
+  promote.
 - **Relecture de B13 et F5** (Fable). Contrôles verts (175 fichiers, 2 029
   tests), promote à blanc sans écart. F5 : `encounters.json` ne change que
   sur les 20 étages very hard (`40103001`–`40103020`), comparé donjon par
