@@ -7,6 +7,19 @@
 
 ## 2026-10-03
 
+- **Relecture de la deuxième série : A22, A23, A24, B12, B14, F1, F2, F3, F4**
+  (Fable). `pnpm typecheck`, `pnpm lint`, `pnpm test` passent sur l'ensemble
+  (175 fichiers, 2 013 tests) ; aucun lot ne touche `package.json`. Découpes
+  F1–F3 : comparaison ligne à ligne des dossiers avant/après — aucune ligne
+  de code perdue hors re-coupes de prettier, les lignes apparues sont les
+  signatures et props des sections extraites ; clés de stockage identiques.
+  Le rendu et le comportement à l'écran ne sont PAS vérifiés, c'est à Sevih.
+  A22 : recompte indépendant, 10 blocs divergents restants, tous nommés dans
+  le test. B12 : 25 tokens, les accents d'élément des roadmaps laissés.
+  Incident : l'index git partagé a fait partir le diff de B12 dans le commit
+  titré A23 (`bf01106b`) ; rien de perdu, le préambule impose désormais un
+  contrôle de l'index et un commit en une seule commande. Restent B13, A25,
+  F5, F6, F7, un à la fois.
 - **Lot F1 : `HeroTrackerBrowser.tsx` découpé — 2 246 → 221 lignes, dix
   fichiers, zéro retranscription** (Fable). Le quoi : le composant client
   géant du hero-tracker éclaté sur le modèle du damage calculator du 25/08

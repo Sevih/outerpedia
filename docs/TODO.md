@@ -21,8 +21,7 @@
 > été délégués et soldés (table des commits, leçons et préambule réutilisable
 > dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
 > ci-dessous demande une décision, un test physique ou une relecture d'abord ;
-> une deuxième série de lots (A22–A25, B12–B14, F1–F7) est écrite au même
-> endroit.
+> restent cinq lots écrits au même endroit (B13, A25, F5, F6, F7).
 
 ---
 
@@ -38,10 +37,9 @@
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
 > éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
 
-- [ ] **Reste du lot « titles/descriptions courts »** — le gros est traité
-      le 03/08 (cf. DONE). (1) Les descriptions des 18 pages d'outils : FAIT
-      (lot B14, clé `tools.<slug>.meta_description`, cf. DONE 03/10). Reste :
-      (2) re-passer Sitebulb pour re-compter ce qui est encore court.
+- [ ] **Re-passer Sitebulb** pour re-compter les titles/descriptions encore
+      courts : les fiches (03/08) et les 18 pages d'outils (lot B14, 03/10)
+      sont traitées, cf. DONE.
 
 ## 🔎 Audit transverse du 07/09 (constats G1–G52)
 
@@ -84,13 +82,10 @@
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
-- [ ] **Dette** (rapport § Dette) — les lots du 25/09 et du 03/10 ont soldé
-      tout ce qui était découpé (cf. DONE). Reste : (1) la cinquième modale,
-      celle de `damage-calculator/ui.tsx` : FAIT (lot A23, cf. DONE) ;
-      (2) `stripBrackets`/`stripDecoBrackets` et
-      `advOf` recopiés dans `encounters.ts` (lot A25) ; (3) « persos
-      intégrés » lu à quatre endroits avec quatre comportements d'erreur :
-      dette froide, à arbitrer avant d'unifier.
+- [ ] **Dette** (rapport § Dette) — reste : (1) `stripBrackets` /
+      `stripDecoBrackets` et `advOf` recopiés dans `encounters.ts` (lot A25) ;
+      (2) « persos intégrés » lu à quatre endroits avec quatre comportements
+      d'erreur : dette froide, à arbitrer avant d'unifier.
 
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
@@ -127,8 +122,8 @@ Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **Couleurs Tailwind brutes des guides (H6) : FAIT** pour le corps des
-      guides (lots B5 puis B12, 25 tokens `ed-*` créés). Reste, laissé exprès
+- [ ] **Couleurs Tailwind brutes des guides (H6)** — le corps des guides est
+      traité (lots B5 et B12, cf. DONE). Reste, laissé exprès
       et à trancher : les 18 classes du champ `accent` des cartes personnage
       (`roadmap-2026/data.ts`, `roadmap-2026-h2/data.ts`) — accents d'ÉLÉMENT
       en -700/-900/-300 sans token d'élément de même valeur, plus l'accent
