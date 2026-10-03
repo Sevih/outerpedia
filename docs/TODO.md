@@ -37,9 +37,9 @@
 > Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
 > éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
 
-- [ ] **Re-passer Sitebulb** pour re-compter les titles/descriptions encore
-      courts : les fiches (03/08) et les 18 pages d'outils (lot B14, 03/10)
-      sont traitées, cf. DONE.
+- [ ] **Titres et descriptions courts** : à mesurer directement sur le site
+      en ligne (décision Sevih 03/10, plus de Sitebulb) — lot A27, qui écrit
+      le rapport et remplace cet item par ce qu'il trouve.
 
 ## 🔎 Audit transverse du 07/09 (constats G1–G52)
 
@@ -52,29 +52,15 @@
 
 ### Lot 2 — métier, données, outillage
 
-- [ ] Chips à lien au toucher (G4) : le « second tap = navigation » est en
-      prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
-      `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de
-      perso : la bulle s'ouvre ; le toucher encore : la fiche s'ouvre.
-- [ ] **`pnpm commit` fait `git add -A`** (G17), ce que CONVENTIONS.md interdit
-      (`commit.ts:288`, après un `pnpm format` sur tout le repo) ;
-      `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
-      que le flux a produits + `git add -u` derrière confirmation. Trancher
-      aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-
-### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
-
-- [ ] **Dette** (rapport § Dette) — reste : « persos intégrés » lu à quatre
-      endroits avec quatre comportements d'erreur : dette froide, à arbitrer
-      avant d'unifier. (Les utilitaires recopiés d'`encounters.ts` : FAIT le
-      03/10, lot A25.)
+- [ ] Chips à lien au toucher (G4) : CORRIGÉ le 03/10 (cf. DONE), à revoir
+      sur téléphone une fois poussé — premier appui la bulle, second la fiche.
 
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
 Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
 Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
 
-- [ ] **Éviction et remontage dans la même image (P1)** : une carte vivante
+- [ ] **Éviction et remontage dans la même image (P1, lot F8)** : une carte vivante
       hors écran, évincée par le callback d'une voisine puis remontée par le
       sien dans la même tâche, appelle `restoreContext()` avant que
       `webglcontextlost` soit distribué — refus muet, carte statique jusqu'au
@@ -83,19 +69,19 @@ Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
       `IntersectionObserver` partagé (drapeaux d'abord, montages, une éviction
       — règle aussi le plafond dépassé de P5), et un `restoreContext` rejoué
       après l'événement dans `onLost`.
-- [ ] **18 Mo de textures GPU par carte `_Demi` (P2)** : chaque contexte
+- [ ] **18 Mo de textures GPU par carte `_Demi` (P2, lot F9)** : chaque contexte
       monte sa copie ; `T_FX_Crystal_001_A` (2048², 887 Ko à télécharger) en
       fait 16 à elle seule, pour l'effet de 16 persos. **Décision Sevih** :
       plafonner la taille à l'extraction (fidélité à comparer sur la page de
       contrôle) ; le correctif de fond — un contexte partagé pour toutes les
       cartes — est un chantier, il emporterait P1, P5 et P6.
-- [ ] **Graines des particules (P3)** : `autoRandomSeed` est FAUX sur huit
+- [ ] **Graines des particules (P3, lot F10)** : `autoRandomSeed` est FAUX sur huit
       émetteurs ; `star` et `star (1)` de `_2000093`, `_2000110`, `_2000114`
       partagent la graine 0, donc étoile et halo naissent ensemble en jeu, pas
       ici. Publier `autoRandomSeed`/`randomSeed`, partager la graine au
       montage, corriger les deux commentaires qui disent l'inverse. À
       confirmer sur une capture du jeu.
-- [ ] **Tests du moteur et contrat de la table (P4)** : rien ne teste
+- [ ] **Tests du moteur et contrat de la table (P4, lot B15)** : rien ne teste
       `portrait-fx-sim` (pur) ni ne confronte `portrait-fx.json` — régénéré
       par `refresh` — à ce que le moteur accepte ; un effet ajouté par le jeu
       reste hors de `DEFAULT_EFFECTS` sans un mot. Test de contrat + tests du
@@ -104,14 +90,10 @@ Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **Couleurs Tailwind brutes des guides (H6)** — le corps des guides est
-      traité (lots B5 et B12, cf. DONE). Reste, laissé exprès
-      et à trancher : les 18 classes du champ `accent` des cartes personnage
-      (`roadmap-2026/data.ts`, `roadmap-2026-h2/data.ts`) — accents d'ÉLÉMENT
-      en -700/-900/-300 sans token d'élément de même valeur, plus l'accent
-      `sky` de Titia (sans élément) ; et les SVG `MonadGateMap`
-      (`#facc15`/`#fde047`) et `TowerCombatRoster` (`rgb(239 68 68)`), aux
-      valeurs de Tailwind v3, qu'aucun token n'égale.
+- [ ] **Couleurs Tailwind brutes des guides (H6)** — reste les accents
+      d'élément des deux roadmaps et deux SVG. Décision Sevih 03/10 : on
+      uniformise sur les tokens existants, changement de teinte accepté —
+      lot A26.
 
 ---
 

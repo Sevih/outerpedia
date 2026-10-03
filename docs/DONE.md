@@ -7,6 +7,32 @@
 
 ## 2026-10-03
 
+- **Chips à lien au toucher : le second tap navigue enfin (G4)** (Fable).
+  Sevih l'a essayé sur téléphone : la bulle s'ouvrait, le second appui ne
+  menait pas à la fiche. Reproduit dans un test (séquence d'événements d'un
+  navigateur mobile, `pointerdown` compris) : la couche de fermeture de Radix
+  (`DismissableLayer`) referme la bulle dès le `pointerdown` hors du contenu,
+  donc AUSSI quand le doigt se pose sur le déclencheur ; `handleTap` trouvait
+  la bulle fermée au `touchend`, la rouvrait avec `preventDefault`, et le
+  lien ne recevait jamais son clic. Le correctif du 09/09 était juste sur le
+  papier, il n'avait jamais été joué sur un appareil. `InlineTooltip.tsx` :
+  `onPointerDownOutside` ignore un appui sur le déclencheur. Même cause, autre
+  symptôme corrigé : un chip SANS lien se rouvrait au second tap au lieu de se
+  fermer. `InlineTooltip.test.tsx`, 3 tests, rouges sans le correctif. Reste à
+  revoir sur téléphone une fois poussé.
+- **`pnpm commit` montre ce qui part avant le `git add -A` (G17)** (Fable,
+  proposition validée par Sevih). Après le message, le script liste les
+  fichiers modifiés et, à part, les NOUVEAUX fichiers jamais suivis, puis
+  demande confirmation (`--yes` la saute) ; un « non » n'a rien publié ni
+  modifié. `CONVENTIONS.md` nomme l'exception. Essayé en `--dry-run`.
+- **Fin du tri avec Sevih** (Fable). « Persos intégrés » sort du TODO : relu,
+  ce n'est pas une dette — trois lecteurs de `characters.json` (`promote`,
+  `lib/released`, `damage/roster`) ont chacun besoin d'une forme différente
+  et suivent la même règle documentée (pas de fichier = pas de filtre) ; seul
+  l'avertissement diffère. Sitebulb abandonné, la mesure se fera sur le site
+  en ligne (lot A27). Couleurs restantes : on uniformise sur les tokens
+  existants (lot A26). Les quatre constats Moyenne de l'audit portraits
+  deviennent B15, F8, F9, F10.
 - **Relecture de A25, F6 et F7 : les 52 lots sont faits** (Fable). Contrôles
   verts (177 fichiers, 2 043 tests), promote à blanc sans écart, aucun lot ne
   touche `package.json`. A25 : `encounters.json` identique. F6 :
