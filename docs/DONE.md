@@ -63,9 +63,9 @@
   | 4-comics              | 144 | 164 | 158 |  62 |  77 |  41 |
   | ost                   | 150 | 177 | 167 |  85 |  83 |  51 |
 
-  Vérification : `pnpm typecheck` → `$ tsc --noEmit && tsc --noEmit -p
-datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json` (sortie 0,
-  tsc muet) ; `pnpm lint` → `$ eslint` (sortie 0, muet) ; `pnpm test` →
+  Vérification : `pnpm typecheck` → la ligne de commande seule, les trois
+  `tsc --noEmit` muets, sortie 0 ; `pnpm lint` → `$ eslint`, muet, sortie 0 ;
+  `pnpm test` →
   `Tests  2013 passed (2013)`, 175 fichiers, `keys.test.ts` compris (parité
   des six langues, et les 18 clés consommées par le préfixe dynamique
   `tools.${slug}`). Script jetable (hors dépôt) : les six locales de l'arbre
@@ -73,8 +73,8 @@ datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json` (sortie 0,
   existante modifiée, donc `tools.<slug>` et `tools.<slug>.desc` identiques
   pour les 19 entrées de `_index.json` ; nom du jeu compté une fois dans
   chacune des 108 chaînes ; anglais min 141, max 157. Lu au `curl` sur le
-  serveur déjà lancé (`/team-planner`, `/fr/ost`, `/jp/event`) : `<meta
-name="description">` et `og:description` portent le nouveau texte, le `<p>`
+  serveur déjà lancé (`/team-planner`, `/fr/ost`, `/jp/event`) : la balise
+  meta `description` et `og:description` portent le nouveau texte, le `<p>`
   sous le `<h1>` porte toujours `.desc`. Aucun changement visuel. Laissé :
   (1) le JSON-LD `ItemList` des quatre classements
   (`_shared/TierListTool.tsx`) lit encore `.desc` — ce n'est ni de

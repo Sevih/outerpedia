@@ -184,26 +184,38 @@ const es: Record<TranslationKey, string> = {
   'tools.most-used-units': 'Unidades más usadas',
   'tools.most-used-units.desc':
     'Descubre qué personajes se recomiendan con más frecuencia en las guías del juego.',
+  'tools.most-used-units.meta_description':
+    'Descubre qué personajes de Outerplane recomiendan más nuestras guías: una clasificación por número de guías, con un filtro por categoría de guía.',
   'tools.most-used-units.guides_count': '{count} guías',
   'tools.most-used-units.category_filter': 'Categoría de Guía',
   'tools.tierlistpve': 'Tier List - PvE',
   'tools.tierlistpve.desc':
     'Tier list de PvE de Outerplane — mejores personajes para aventura, jefes, incursiones y contenido de endgame.',
+  'tools.tierlistpve.meta_description':
+    'Tier list de PvE de Outerplane: cada personaje clasificado para aventura, jefes, incursiones y endgame, por nivel de trascendencia, con filtros de elemento, clase y rol.',
   'tools.tierlistpvp': 'Tier List - PvP',
   'tools.tierlistpvp.desc': 'Tier list de PvP de Outerplane — mejores personajes para arena.',
+  'tools.tierlistpvp.meta_description':
+    'Tier list de PvP de Outerplane: cada personaje clasificado para la arena, con trascendencia de 6 estrellas y equipo exclusivo +10, con filtros de elemento y clase.',
   'tools.ee-priority-base': 'Prioridad EE (Base)',
   'tools.ee-priority-base.desc':
     'Clasificación de equipo exclusivo (EE) según su utilidad e impacto en nivel 0. No se consideran efectos +10.',
+  'tools.ee-priority-base.meta_description':
+    'Clasificación del equipo exclusivo (EE) de Outerplane según la utilidad de su efecto base en nivel 0, para elegir qué EE desbloquear primero.',
   'tools.ee-priority-base.disclaimer':
     'Esta clasificación ayuda a decidir qué Equipo Exclusivo (EE) desbloquear primero, basándose solo en efectos base de nivel 0. No se consideran efectos de bonificación +10.',
   'tools.ee-priority-plus10': 'Prioridad EE (+10)',
   'tools.ee-priority-plus10.desc':
     'Clasificación de equipo exclusivo (EE) según su potencial total en mejora +10.',
+  'tools.ee-priority-plus10.meta_description':
+    'Clasificación del equipo exclusivo (EE) de Outerplane con mejora +10, incluidos todos los efectos adicionales, para elegir qué EE mejorar al máximo.',
   'tools.ee-priority-plus10.disclaimer':
     'Esta clasificación evalúa el Equipo Exclusivo (EE) en mejora +10, incluyendo todos los efectos de bonificación. Úsala para priorizar qué EE mejorar completamente.',
   'tools.gear-usage-statistics': 'Estadísticas de Uso de Equipo',
   'tools.gear-usage-statistics.desc':
     'Descubre las armas, accesorios y sets más recomendados en compilaciones.',
+  'tools.gear-usage-statistics.meta_description':
+    'Las armas, accesorios, conjuntos de armadura y talismanes que más aparecen en las builds recomendadas de Outerplane, con los personajes que usan cada uno.',
   'tools.gear-usage-statistics.disclaimer1':
     'Las estadísticas siguientes se basan solo en compilaciones recomendadas por Evamains.',
   'tools.gear-usage-statistics.tab.weapons': 'Armas',
@@ -213,6 +225,8 @@ const es: Record<TranslationKey, string> = {
   'tools.gear-usage-finder': 'Buscador de Uso de Equipo',
   'tools.gear-usage-finder.desc':
     '¿No sabes qué personaje puede usar tu equipo? Encuentra la mejor opción según el equipamiento.',
+  'tools.gear-usage-finder.meta_description':
+    '¿Quién puede usar esa pieza de equipo? Indica tipo, estadística principal, subestadísticas y conjunto para ver los personajes de Outerplane cuya build recomendada coincide.',
   'tools.gear-usage-finder.step_type': 'Tipo de Equipo',
   'tools.gear-usage-finder.step_class': 'Clase',
   'tools.gear-usage-finder.step_mainstat': 'Estadística Principal',
@@ -231,6 +245,8 @@ const es: Record<TranslationKey, string> = {
   'tools.patch-history': 'Parches y Notas de Desarrollo',
   'tools.patch-history.desc':
     'Explora todas las notas de parche, notas de desarrollo, compendio de héroes y más.',
+  'tools.patch-history.meta_description':
+    'Archivo de noticias oficiales de Outerplane: notas de parche, notas de desarrollo, compendio de héroes, eventos y avisos, desde 2023 hasta la última actualización.',
   'tools.patch-history.era.major9': 'Major9 (Oct 2025+)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': 'Actualización',
@@ -255,6 +271,8 @@ const es: Record<TranslationKey, string> = {
   'tools.pull-simulator': 'Simulador de Invocación',
   'tools.pull-simulator.desc':
     'Simula invocaciones de gacha para todos los banners. Prueba tu suerte con el sistema de millaje incluido.',
+  'tools.pull-simulator.meta_description':
+    'Simula el reclutamiento de Outerplane en los banners de Aumento de Tasa, Premium y Limitado: elige tus héroes de enfoque, invoca x1 o x10 y sigue millaje, éter gastado y resultados.',
   'tools.pull-simulator.banner.custom': 'Todos los Héroes',
   'tools.pull-simulator.banner.rateup': 'Aumento de Tasa',
   'tools.pull-simulator.banner.premium': 'Premium',
@@ -287,14 +305,24 @@ const es: Record<TranslationKey, string> = {
   'tools.progress-tracker': 'Rastreador de Progreso',
   'tools.progress-tracker.desc':
     'Rastrea tu progreso: tareas diarias/semanales/mensuales, compras de tienda y fabricación.',
+  'tools.progress-tracker.meta_description':
+    'Lista de control para tu rutina en Outerplane: tareas diarias, semanales y mensuales, compras de tienda y fabricación. El progreso se guarda en tu navegador y es exportable.',
   'tools.wallpapers': 'Fondos de Pantalla',
   'tools.wallpapers.desc': 'Explora y descarga ilustraciones y fondos de pantalla oficiales.',
+  'tools.wallpapers.meta_description':
+    'Descarga ilustraciones oficiales de Outerplane como fondo de pantalla: arte completo de héroes, cut-ins, ilustraciones de historia y eventos, banners y más.',
   'tools.4-comics': 'Cómics de 4 Viñetas',
   'tools.4-comics.desc': 'Lee los cómics oficiales de 4 viñetas en varios idiomas.',
+  'tools.4-comics.meta_description':
+    'Lee los cómics oficiales de 4 viñetas de Outerplane reunidos en una galería, en inglés, japonés o coreano, con un visor para pasar de una tira a la siguiente.',
   'tools.ost': 'Banda Sonora',
   'tools.ost.desc': 'Escucha y descarga la banda sonora oficial.',
+  'tools.ost.meta_description':
+    'Escucha la banda sonora de Outerplane en tu navegador: la música del juego en un solo reproductor, con modo aleatorio, repetición, atajos de teclado y descarga en MP3.',
   'tools.event': 'Eventos Comunitarios',
   'tools.event.desc': 'Explora eventos comunitarios: torneos, concursos, sorteos y más.',
+  'tools.event.meta_description':
+    'Eventos comunitarios para los jugadores de Outerplane: torneos, concursos y otras actividades, con fechas, organizador y estado (en curso, próximamente o finalizado).',
   'tools.event.filter.type': 'Tipo',
   'tools.event.filter.status': 'Estado',
   'tools.event.type.tournament': 'Torneo',
@@ -314,6 +342,8 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker': 'Seguimiento de Héroes',
   'tools.hero-tracker.desc':
     'Haz seguimiento de cada Héroe y lista los materiales que aún necesitas.',
+  'tools.hero-tracker.meta_description':
+    'Registra el estado de cada uno de tus héroes de Outerplane (nivel, habilidades, afinidad, trascendencia, equipo exclusivo) y obtén los materiales que aún te faltan.',
   'tools.hero-tracker.intro':
     'Establece dónde está cada Héroe y dónde quieres que esté: la herramienta lista qué falta por farmear. Todo se guarda en tu navegador.',
   'tools.hero-tracker.search': 'Buscar un Héroe…',
@@ -385,6 +415,8 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.notCounted': 'no contado',
   'tools.team-planner': 'Planificador de Equipo',
   'tools.team-planner.desc': 'Crea y comparte composiciones de equipo para cualquier contenido.',
+  'tools.team-planner.meta_description':
+    'Forma un equipo de cuatro héroes de Outerplane, define el orden de cadena, revisa los buffs y debuffs que aporta y comparte la composición con un enlace.',
   'tools.team-planner.empty_slot': 'Ranura Vacía',
   'tools.team-planner.add_character': 'Haz clic para añadir un personaje',
   'tools.team-planner.pick_character': 'Elige un personaje',
@@ -408,6 +440,8 @@ const es: Record<TranslationKey, string> = {
   'tools.tier-list-maker': 'Creador de Listas de Tiers',
   'tools.tier-list-maker.desc':
     'Crea y comparte tu propia lista de tier de Outerplane — clasifica personajes, equipo exclusivo y jefes, luego comparte un enlace o exporta una imagen.',
+  'tools.tier-list-maker.meta_description':
+    'Crea tu propia tier list de Outerplane: arrastra personajes, equipo exclusivo o jefes a cada tier y luego compártela con un enlace o expórtala como imagen.',
   'tools.tier-list-maker.tab.characters': 'Personajes',
   'tools.tier-list-maker.tab.ee': 'Equipo Exclusivo',
   'tools.tier-list-maker.tab.bosses': 'Jefes',
@@ -466,6 +500,8 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator': 'Calculadora de Daño',
   'tools.damage-calculator.desc':
     'Calcula el daño que tus personajes infligen, basándose en la fórmula de daño del juego. Elige atacante, objetivo, equipo y bonos para ver el resultado.',
+  'tools.damage-calculator.meta_description':
+    'Estima el daño que inflige un personaje de Outerplane con la fórmula del juego: elige atacante, objetivo, equipo y buffs, y consulta el resultado.',
   'tools.damage-calculator.disclaimer':
     'En desarrollo — la calculadora sigue en desarrollo activo. Los resultados pueden diferir del valor en el juego.',
   'tools.damage-calculator.settings.title': 'Configuración de Cuenta',

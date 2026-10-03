@@ -180,24 +180,36 @@ const kr: Record<TranslationKey, string> = {
   // ─── Tools ──────────────────────────────────────────────────────────────
   'tools.most-used-units': '자주 사용되는 유닛',
   'tools.most-used-units.desc': '공략 가이드에서 가장 많이 추천되는 캐릭터를 확인하세요.',
+  'tools.most-used-units.meta_description':
+    '아우터플레인 공략 가이드에서 가장 자주 추천되는 캐릭터를 가이드 수 순위로 확인하세요. 가이드 카테고리별로 필터링할 수 있습니다.',
   'tools.most-used-units.guides_count': '{count}개 가이드',
   'tools.most-used-units.category_filter': '가이드 카테고리',
   'tools.tierlistpve': '티어 리스트 - PvE',
   'tools.tierlistpve.desc':
     '아우터플레인 PvE 티어 리스트 — 모험, 보스, 레이드, 엔드게임 콘텐츠 최적 캐릭터.',
+  'tools.tierlistpve.meta_description':
+    '아우터플레인 PvE 티어 리스트. 모험, 보스, 레이드, 엔드게임 콘텐츠 기준으로 모든 캐릭터를 초월 레벨별로 평가했습니다. 속성, 클래스, 역할로 필터링할 수 있습니다.',
   'tools.tierlistpvp': '티어 리스트 - PvP',
   'tools.tierlistpvp.desc': '아우터플레인 PvP 티어 리스트 — 아레나 최적 캐릭터.',
+  'tools.tierlistpvp.meta_description':
+    '아우터플레인 PvP 티어 리스트. 6성 초월과 전용 장비 +10을 기준으로 아레나에서의 모든 캐릭터를 평가했습니다. 속성과 클래스로 필터링할 수 있습니다.',
   'tools.ee-priority-base': 'EE 우선순위 (기본)',
   'tools.ee-priority-base.desc':
     '레벨 0 기준 전용 장비(EE)의 유용성과 영향력에 따른 순위. +10 효과는 고려되지 않습니다.',
+  'tools.ee-priority-base.meta_description':
+    '아우터플레인 전용 장비(EE)를 레벨 0 기본 효과의 유용성 기준으로 평가한 순위입니다. 어떤 영웅의 전용 장비를 먼저 해금할지 참고하세요.',
   'tools.ee-priority-base.disclaimer':
     '이 순위는 레벨 0 기본 효과만을 기준으로 어떤 전용 장비(EE)를 먼저 해제할지 결정하는 데 도움을 줍니다. +10 보너스 효과는 고려되지 않습니다.',
   'tools.ee-priority-plus10': 'EE 우선순위 (+10)',
   'tools.ee-priority-plus10.desc': '+10 강화 시 전용 장비(EE)의 전체 잠재력에 따른 순위.',
+  'tools.ee-priority-plus10.meta_description':
+    '아우터플레인 전용 장비(EE)를 +10 강화 시 모든 보너스 효과를 포함해 평가한 순위입니다. 어떤 전용 장비를 끝까지 강화할지 참고하세요.',
   'tools.ee-priority-plus10.disclaimer':
     '이 순위는 +10 강화 시 모든 보너스 효과를 포함하여 전용 장비(EE)를 평가합니다. 어떤 EE를 우선적으로 최대 강화할지 참고하세요.',
   'tools.gear-usage-statistics': '장비 사용 통계',
   'tools.gear-usage-statistics.desc': '빌드에서 가장 추천되는 무기, 악세서리, 세트를 확인하세요.',
+  'tools.gear-usage-statistics.meta_description':
+    '아우터플레인 추천 빌드에 가장 많이 쓰이는 무기, 악세서리, 방어구 세트, 탈리스만을 사용하는 캐릭터와 함께 확인하세요.',
   'tools.gear-usage-statistics.disclaimer1': '아래 통계는 Evamains 추천 빌드만을 기반으로 합니다.',
   'tools.gear-usage-statistics.tab.weapons': '무기',
   'tools.gear-usage-statistics.tab.amulets': '악세서리',
@@ -206,6 +218,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.gear-usage-finder': '장비 사용 검색',
   'tools.gear-usage-finder.desc':
     '장비에 맞는 캐릭터를 모르겠나요? 장비 기반으로 최적의 캐릭터를 찾아보세요.',
+  'tools.gear-usage-finder.meta_description':
+    '이 장비를 누구에게 줘야 할까요? 장비 종류, 메인 스탯, 서브 스탯, 세트를 선택하면 추천 빌드가 일치하는 아우터플레인 캐릭터를 보여줍니다.',
   'tools.gear-usage-finder.step_type': '장비 유형',
   'tools.gear-usage-finder.step_class': '클래스',
   'tools.gear-usage-finder.step_mainstat': '메인 스탯',
@@ -223,6 +237,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.no_users': '조건에 맞는 캐릭터가 없습니다.',
   'tools.patch-history': '패치 & 개발자 노트',
   'tools.patch-history.desc': '패치 노트, 개발자 노트, 영웅 대전 등을 확인하세요.',
+  'tools.patch-history.meta_description':
+    '아우터플레인 공식 소식 아카이브. 패치 노트, 개발자 노트, 영웅 대전, 이벤트, 공지를 2023년 출시부터 최신 업데이트까지 확인할 수 있습니다.',
   'tools.patch-history.era.major9': 'Major9 (2025년 10월~)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': '업데이트',
@@ -243,6 +259,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.coupon-codes.desc': '유효, 만료, 예정된 프로모 코드를 모두 확인하세요. 정기 업데이트.',
   'tools.pull-simulator': '뽑기 시뮬레이터',
   'tools.pull-simulator.desc': '모든 배너의 가챠를 시뮬레이션하세요. 마일리지 시스템 포함.',
+  'tools.pull-simulator.meta_description':
+    '아우터플레인 뽑기를 픽업, 프리미엄, 한정 배너에서 시뮬레이션하세요. 픽업 캐릭터를 고르고 1회 또는 10연 뽑기를 돌리며 마일리지, 소모 에테르, 결과를 확인할 수 있습니다.',
   'tools.pull-simulator.banner.custom': '전체 영웅',
   'tools.pull-simulator.banner.rateup': '픽업',
   'tools.pull-simulator.banner.premium': '프리미엄',
@@ -274,14 +292,24 @@ const kr: Record<TranslationKey, string> = {
   'tools.pull-simulator.never': 'N/A',
   'tools.progress-tracker': '진행 트래커',
   'tools.progress-tracker.desc': '일일/주간/월간 과제, 상점 구매, 제작을 추적하세요.',
+  'tools.progress-tracker.meta_description':
+    '아우터플레인 일과 체크리스트. 일일, 주간, 월간 과제와 상점 구매, 제작을 관리하세요. 진행 상황은 브라우저에 저장되며 내보낼 수 있습니다.',
   'tools.wallpapers': '배경화면',
   'tools.wallpapers.desc': '공식 아트워크와 배경화면을 다운로드하세요.',
+  'tools.wallpapers.meta_description':
+    '아우터플레인 공식 아트워크를 둘러보고 배경화면으로 다운로드하세요. 영웅 풀 아트, 컷인, 시나리오 및 이벤트 일러스트, 배너 등을 제공합니다.',
   'tools.4-comics': '4컷 만화',
   'tools.4-comics.desc': '공식 4컷 만화를 다양한 언어로 감상하세요.',
+  'tools.4-comics.meta_description':
+    '아우터플레인 공식 4컷 만화를 한 갤러리에서 감상하세요. 영어, 일본어, 한국어판을 제공하며 뷰어에서 이전·다음 화로 이동할 수 있습니다.',
   'tools.ost': '사운드트랙',
   'tools.ost.desc': '공식 OST를 듣고 다운로드하세요.',
+  'tools.ost.meta_description':
+    '아우터플레인 사운드트랙을 브라우저에서 감상하세요. 게임 음악을 하나의 플레이어에 모았으며 셔플, 반복, 키보드 단축키, MP3 다운로드를 지원합니다.',
   'tools.event': '커뮤니티 이벤트',
   'tools.event.desc': '커뮤니티 이벤트를 확인하세요: 토너먼트, 콘테스트, 경품 이벤트 등.',
+  'tools.event.meta_description':
+    '아우터플레인 플레이어를 위한 커뮤니티 이벤트 목록. 토너먼트, 콘테스트 등의 일정, 주최자, 진행 상태(진행 중, 예정, 종료)를 확인하세요.',
   'tools.event.filter.type': '유형',
   'tools.event.filter.status': '상태',
   'tools.event.type.tournament': '토너먼트',
@@ -299,6 +327,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.event.empty': '현재 이벤트가 없습니다.',
   'tools.hero-tracker': '영웅 트래커',
   'tools.hero-tracker.desc': '영웅별 육성 현황을 기록하고 필요한 재료를 정리합니다.',
+  'tools.hero-tracker.meta_description':
+    '아우터플레인 영웅별 육성 현황(레벨, 스킬, 호감도, 초월, 전용 장비)을 기록하면 아직 모아야 할 재료를 정리해 줍니다.',
   'tools.hero-tracker.intro':
     '각 영웅의 현재 상태와 목표를 입력하면 남은 재료를 알려줍니다. 모든 데이터는 브라우저에만 저장됩니다.',
   'tools.hero-tracker.search': '영웅 검색…',
@@ -368,6 +398,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.hero-tracker.notCounted': '합산 제외',
   'tools.team-planner': '팀 플래너',
   'tools.team-planner.desc': '모든 콘텐츠에 맞는 팀 구성을 만들고 공유하세요.',
+  'tools.team-planner.meta_description':
+    '아우터플레인 4인 팀을 구성하고 체인 순서를 정하세요. 팀이 제공하는 버프와 디버프를 확인하고 링크로 구성을 공유할 수 있습니다.',
   'tools.team-planner.empty_slot': '빈 슬롯',
   'tools.team-planner.add_character': '클릭하여 캐릭터 추가',
   'tools.team-planner.pick_character': '캐릭터 선택',
@@ -389,6 +421,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.tier-list-maker': '티어 리스트 메이커',
   'tools.tier-list-maker.desc':
     '나만의 아우터플레인 티어 리스트를 만들고 공유하세요. 캐릭터, 전용 장비, 보스를 평가하고 링크를 공유하거나 이미지로 내보낼 수 있습니다.',
+  'tools.tier-list-maker.meta_description':
+    '나만의 아우터플레인 티어 리스트를 만들어 보세요. 캐릭터, 전용 장비, 보스를 드래그해 티어에 배치하고 링크로 공유하거나 이미지로 내보낼 수 있습니다.',
   'tools.tier-list-maker.tab.characters': '캐릭터',
   'tools.tier-list-maker.tab.ee': '전용 장비',
   'tools.tier-list-maker.tab.bosses': '보스',
@@ -446,6 +480,8 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator': '데미지 계산기',
   'tools.damage-calculator.desc':
     '게임 내 공식에 따라 캐릭터가 입히는 데미지를 계산합니다. 공격자, 대상, 장비, 버프를 선택하여 결과를 확인하세요.',
+  'tools.damage-calculator.meta_description':
+    '아우터플레인 캐릭터가 입히는 데미지를 게임 내 공식으로 추정합니다. 공격자, 대상, 장비, 버프를 선택하면 결과를 확인할 수 있습니다.',
   'tools.damage-calculator.disclaimer':
     '개발 중 — 계산기는 아직 개발 중입니다. 결과가 인게임 수치와 다를 수 있습니다.',
   'tools.damage-calculator.settings.title': '계정 설정',

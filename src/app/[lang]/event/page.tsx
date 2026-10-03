@@ -29,7 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     lang,
     path: '/event',
     title: t('page.tool.meta_title').replace('{title}', t('tools.event')),
-    description: t('tools.event.desc'),
+    // Clé meta dédiée, comme les outils du routeur à plat ; le sous-titre
+    // visible plus bas garde `tools.event.desc`.
+    description: t('tools.event.meta_description'),
     ...(tool && { ogImage: img.toolIconPng(tool.icon) }),
   });
 }

@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     lang,
     path: `/${slug}`,
     title: t('page.tool.meta_title').replace('{title}', title),
-    description: t(`tools.${slug}.desc` as TranslationKey),
+    // Clé meta DÉDIÉE : `.desc` reste le sous-titre visible (ToolShell, cartes
+    // de `/tools`), trop court pour un résultat de recherche.
+    description: t(`tools.${slug}.meta_description` as TranslationKey),
     // Carte de partage = l'icône de l'outil (celle de la landing), en PNG
     // (Discord/OG digèrent mal le WebP — collecte dans le manifeste d'assets).
     ogImage: img.toolIconPng(tool.icon),

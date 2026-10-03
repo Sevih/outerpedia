@@ -181,25 +181,37 @@ const jp: Record<TranslationKey, string> = {
   // ─── Tools ──────────────────────────────────────────────────────────────
   'tools.most-used-units': '使用率の高いユニット',
   'tools.most-used-units.desc': '攻略ガイドで最も推奨されているキャラクターを確認。',
+  'tools.most-used-units.meta_description':
+    'アウタープレーンの攻略ガイドで最も多く推奨されているキャラクターを、ガイド数順のランキングで確認。ガイドのカテゴリーで絞り込めます。',
   'tools.most-used-units.guides_count': '{count}ガイド',
   'tools.most-used-units.category_filter': 'ガイドカテゴリ',
   'tools.tierlistpve': 'ティアリスト - PvE',
   'tools.tierlistpve.desc':
     'アウタープレーン PvEティアリスト — 冒険、ボス、レイド、エンドコンテンツに最適なキャラクター。',
+  'tools.tierlistpve.meta_description':
+    'アウタープレーンのPvEティアリスト。冒険、ボス、レイド、エンドコンテンツ向けに全キャラクターを超越レベル別にランク付け。属性・クラス・役割で絞り込めます。',
   'tools.tierlistpvp': 'ティアリスト - PvP',
   'tools.tierlistpvp.desc':
     'アウタープレーン PvPティアリスト — アリーナ攻撃・防衛に最適なキャラクター。',
+  'tools.tierlistpvp.meta_description':
+    'アウタープレーンのPvPティアリスト。超越6星と専用装備+10を前提に、アリーナ向けに全キャラクターをランク付け。属性・クラスで絞り込めます。',
   'tools.ee-priority-base': 'EE優先度（ベース）',
   'tools.ee-priority-base.desc':
     'レベル0時の有用性と影響度に基づく専用装備（EE）ランキング。+10効果は考慮されていません。',
+  'tools.ee-priority-base.meta_description':
+    'アウタープレーンの専用装備（EE）を、レベル0の基本効果の有用性でランク付け。どのヒーローの専用装備を先に解放するかの参考に。',
   'tools.ee-priority-base.disclaimer':
     'このランキングは、レベル0の基本効果のみに基づいて、どの専用装備（EE）を最初に解放すべきかを判断するためのものです。+10ボーナス効果は考慮されていません。',
   'tools.ee-priority-plus10': 'EE優先度（+10）',
   'tools.ee-priority-plus10.desc': '+10強化時のフルポテンシャルに基づく専用装備（EE）ランキング。',
+  'tools.ee-priority-plus10.meta_description':
+    'アウタープレーンの専用装備（EE）を、+10強化時の全ボーナス効果込みでランク付け。どの専用装備を最大まで強化するかの参考に。',
   'tools.ee-priority-plus10.disclaimer':
     'このランキングは+10強化時の専用装備（EE）を評価し、全ボーナス効果を含みます。どのEEを優先的に最大強化すべきかの参考にしてください。',
   'tools.gear-usage-statistics': '装備使用統計',
   'tools.gear-usage-statistics.desc': 'ビルドで最も推奨される武器・アクセサリー・セットを確認。',
+  'tools.gear-usage-statistics.meta_description':
+    'アウタープレーンの推奨ビルドで最も採用されている武器・アクセサリー・防具セット・タリスマンを、使用キャラクターとあわせて確認できます。',
   'tools.gear-usage-statistics.disclaimer1':
     '以下の統計はEvamainsの推奨ビルドのみに基づいています。',
   'tools.gear-usage-statistics.tab.weapons': '武器',
@@ -209,6 +221,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.gear-usage-finder': '装備使用検索',
   'tools.gear-usage-finder.desc':
     '装備に合うキャラクターがわからない？装備から最適なキャラを検索。',
+  'tools.gear-usage-finder.meta_description':
+    'この装備は誰に使える？装備の種類、メインステータス、サブステータス、セットを選ぶと、推奨ビルドが一致するアウタープレーンのキャラクターを一覧表示します。',
   'tools.gear-usage-finder.step_type': '装備タイプ',
   'tools.gear-usage-finder.step_class': 'クラス',
   'tools.gear-usage-finder.step_mainstat': 'メインステータス',
@@ -226,6 +240,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.no_users': '条件に一致するキャラクターはいません。',
   'tools.patch-history': 'パッチ & 開発者ノート',
   'tools.patch-history.desc': 'パッチノート、開発者ノート、ヒーロー大全などを閲覧。',
+  'tools.patch-history.meta_description':
+    'アウタープレーン公式のお知らせアーカイブ。パッチノート、開発者ノート、ヒーロー大全、イベント、告知を、2023年のリリースから最新アップデートまで閲覧できます。',
   'tools.patch-history.era.major9': 'Major9（2025年10月〜）',
   'tools.patch-history.era.smilegate': 'Smilegate（2023〜2025）',
   'tools.patch-history.type.update': 'アップデート',
@@ -247,6 +263,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.coupon-codes.desc': '有効・期限切れ・今後のプロモコードを一覧。随時更新。',
   'tools.pull-simulator': 'ガチャシミュレーター',
   'tools.pull-simulator.desc': '全バナーのガチャをシミュレート。マイレージシステム対応。',
+  'tools.pull-simulator.meta_description':
+    'アウタープレーンのガチャをピックアップ、プレミアム、限定バナーでシミュレート。ピックアップキャラを選んで単発または10連を引き、マイレージ、消費エーテル、結果を確認できます。',
   'tools.pull-simulator.banner.custom': '全英雄',
   'tools.pull-simulator.banner.rateup': 'ピックアップ',
   'tools.pull-simulator.banner.premium': 'プレミアム',
@@ -279,14 +297,24 @@ const jp: Record<TranslationKey, string> = {
   'tools.progress-tracker': '進捗トラッカー',
   'tools.progress-tracker.desc':
     'デイリー・ウィークリー・マンスリータスク、ショップ購入、製作を管理。',
+  'tools.progress-tracker.meta_description':
+    'アウタープレーンの日課チェックリスト。デイリー・ウィークリー・マンスリータスク、ショップ購入、製作を管理できます。進捗はブラウザに保存され、エクスポートも可能です。',
   'tools.wallpapers': '壁紙',
   'tools.wallpapers.desc': '公式アートワークや壁紙をダウンロード。',
+  'tools.wallpapers.meta_description':
+    'アウタープレーンの公式アートワークを閲覧し、壁紙としてダウンロードできます。ヒーローのフルアート、カットイン、シナリオやイベントのイラスト、バナーなど。',
   'tools.4-comics': '4コマ漫画',
   'tools.4-comics.desc': '公式4コマ漫画を多言語で閲覧。',
+  'tools.4-comics.meta_description':
+    'アウタープレーン公式4コマ漫画をひとつのギャラリーで閲覧。英語・日本語・韓国語版があり、ビューアーで前後の話に移動できます。',
   'tools.ost': 'サウンドトラック',
   'tools.ost.desc': '公式OSTを視聴・ダウンロード。',
+  'tools.ost.meta_description':
+    'アウタープレーンのサウンドトラックをブラウザで視聴。ゲーム内の楽曲をひとつのプレイヤーにまとめ、シャッフル、リピート、キーボードショートカット、MP3ダウンロードに対応。',
   'tools.event': 'コミュニティイベント',
   'tools.event.desc': 'コミュニティイベントを閲覧：大会、コンテスト、プレゼント企画など。',
+  'tools.event.meta_description':
+    'アウタープレーンのプレイヤー向けコミュニティイベント一覧。大会、コンテストなどを、開催日程、主催者、開催状況（開催中・予定・終了）とともに確認できます。',
   'tools.event.filter.type': 'タイプ',
   'tools.event.filter.status': 'ステータス',
   'tools.event.type.tournament': '大会',
@@ -304,6 +332,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.event.empty': '現在イベントはありません。',
   'tools.hero-tracker': 'ヒーロートラッカー',
   'tools.hero-tracker.desc': '各ヒーローの育成状況を記録し、必要な素材を一覧表示します。',
+  'tools.hero-tracker.meta_description':
+    'アウタープレーンの各ヒーローの育成状況（レベル、スキル、好感度、超越、専用装備）を記録すると、残り必要な素材を一覧表示します。',
   'tools.hero-tracker.intro':
     '各ヒーローの現在の状態と目標を入力すると、残り必要な素材が表示されます。データはブラウザ内にのみ保存されます。',
   'tools.hero-tracker.search': 'ヒーローを検索…',
@@ -375,6 +405,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.hero-tracker.notCounted': '集計対象外',
   'tools.team-planner': 'チームプランナー',
   'tools.team-planner.desc': 'あらゆるコンテンツ向けのチーム編成を作成・共有。',
+  'tools.team-planner.meta_description':
+    'アウタープレーンの4人チームを編成し、チェイン順序を設定。チームが持つバフ・デバフを確認して、編成をリンクで共有できます。',
   'tools.team-planner.empty_slot': '空きスロット',
   'tools.team-planner.add_character': 'クリックしてキャラクターを追加',
   'tools.team-planner.pick_character': 'キャラクターを選択',
@@ -397,6 +429,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.tier-list-maker': 'ティアリストメーカー',
   'tools.tier-list-maker.desc':
     '自分だけのアウタープレインのティアリストを作成して共有しましょう。キャラクター、専用装備、ボスをランク付けし、リンクを共有したり画像として書き出したりできます。',
+  'tools.tier-list-maker.meta_description':
+    '自分だけのアウタープレーンのティアリストを作成。キャラクター、専用装備、ボスをドラッグして各ティアに配置し、リンクで共有したり画像として書き出したりできます。',
   'tools.tier-list-maker.tab.characters': 'キャラクター',
   'tools.tier-list-maker.tab.ee': '専用装備',
   'tools.tier-list-maker.tab.bosses': 'ボス',
@@ -455,6 +489,8 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator': 'ダメージ計算機',
   'tools.damage-calculator.desc':
     'キャラクターが与えるダメージをゲーム内の計算式に基づいて算出します。攻撃側、対象、装備、バフを選択して結果を確認してください。',
+  'tools.damage-calculator.meta_description':
+    'アウタープレーンのキャラクターが与えるダメージを、ゲーム内の計算式に基づいて試算。攻撃側、対象、装備、バフを選ぶと結果が表示されます。',
   'tools.damage-calculator.disclaimer':
     '開発中 — 計算機はまだ開発の途中です。結果はゲーム内の値と異なる場合があります。',
   'tools.damage-calculator.settings.title': 'アカウント設定',

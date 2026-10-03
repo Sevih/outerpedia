@@ -53,10 +53,9 @@
 > éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
 
 - [ ] **Reste du lot « titles/descriptions courts »** — le gros est traité
-      le 03/08 (cf. DONE). Restent : (1) les descriptions des ~17 pages
-      d'outils : décision Sevih 03/10, une clé meta DÉDIÉE, le sous-titre
-      visible (`tools.<slug>.desc`) ne bouge pas — lot B14 ; (2) re-passer
-      Sitebulb ensuite pour re-compter ce qui est encore court.
+      le 03/08 (cf. DONE). (1) Les descriptions des 18 pages d'outils : FAIT
+      (lot B14, clé `tools.<slug>.meta_description`, cf. DONE 03/10). Reste :
+      (2) re-passer Sitebulb pour re-compter ce qui est encore court.
 
 ## 🔎 Audit transverse du 07/09 (constats G1–G52)
 

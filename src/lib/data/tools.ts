@@ -2,7 +2,8 @@
  * Accès au DOMAINE OUTILS (`data/curated/tools/_categories.json` + `_index.json`).
  * Liste curée éditoriale (pas de la donnée de jeu) → import statique figé.
  * Les libellés (catégorie, titre, description d'outil) vivent en i18n
- * (`tools.category.<slug>`, `tools.<slug>`, `tools.<slug>.desc`).
+ * (`tools.category.<slug>`, `tools.<slug>`, `tools.<slug>.desc` — sous-titre
+ * visible — et `tools.<slug>.meta_description`, lue par la seule metadata).
  */
 import categoriesData from '@data/curated/tools/_categories.json';
 import indexData from '@data/curated/tools/_index.json';

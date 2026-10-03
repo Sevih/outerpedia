@@ -192,26 +192,38 @@ const en = {
   'tools.most-used-units': 'Most Used Units',
   'tools.most-used-units.desc':
     'Discover which characters are most frequently recommended across game guides.',
+  'tools.most-used-units.meta_description':
+    'See which Outerplane characters our guides recommend most often: a ranking by number of guides, with a filter by guide category to narrow it to one mode.',
   'tools.most-used-units.guides_count': '{count} guides',
   'tools.most-used-units.category_filter': 'Guide Category',
   'tools.tierlistpve': 'Tier List - PvE',
   'tools.tierlistpve.desc':
     'Outerplane PvE tier list — best characters for adventure, bosses, raids, and endgame content.',
+  'tools.tierlistpve.meta_description':
+    'Outerplane PvE tier list: every character ranked for adventure, bosses, raids and endgame, by transcendence level, with element, class and role filters.',
   'tools.tierlistpvp': 'Tier List - PvP',
   'tools.tierlistpvp.desc': 'Outerplane PvP tier list — best characters for arena.',
+  'tools.tierlistpvp.meta_description':
+    'Outerplane PvP tier list: every character ranked for the arena, assuming 6-star transcendence and +10 exclusive equipment, with element and class filters.',
   'tools.ee-priority-base': 'EE Priority (Base)',
   'tools.ee-priority-base.desc':
     'A ranking of exclusive equipment (EE) based on their usefulness and impact at level 0. +10 effects are not considered.',
+  'tools.ee-priority-base.meta_description':
+    "Ranking of Outerplane exclusive equipment (EE) by how useful its base effect is at level 0, to help you choose which hero's EE to unlock first.",
   'tools.ee-priority-base.disclaimer':
     'This ranking helps decide which Exclusive Equipment (EE) to unlock first, based on level 0 base effects only. +10 bonus effects are not considered.',
   'tools.ee-priority-plus10': 'EE Priority (+10)',
   'tools.ee-priority-plus10.desc':
     'A ranking of exclusive equipment (EE) based on their full potential at +10 enhancement.',
+  'tools.ee-priority-plus10.meta_description':
+    'Ranking of Outerplane exclusive equipment (EE) at +10 enhancement, all bonus effects included, to help you choose which EE to upgrade all the way.',
   'tools.ee-priority-plus10.disclaimer':
     'This ranking evaluates Exclusive Equipment (EE) at +10 enhancement, including all bonus effects. Use this to prioritize which EE to fully upgrade.',
   'tools.gear-usage-statistics': 'Gear Usage Statistics',
   'tools.gear-usage-statistics.desc':
     'Discover the most recommended weapons, accessories and sets in builds.',
+  'tools.gear-usage-statistics.meta_description':
+    'Which weapons, accessories, armor sets and talismans appear most in recommended Outerplane builds, with the characters that use each of them.',
   'tools.gear-usage-statistics.disclaimer1':
     'The statistics below are based on Evamains recommended builds only.',
   'tools.gear-usage-statistics.tab.weapons': 'Weapons',
@@ -221,6 +233,8 @@ const en = {
   'tools.gear-usage-finder': 'Gear Usage Finder',
   'tools.gear-usage-finder.desc':
     'Unsure which character can use your gear? Find the best match based on equipment.',
+  'tools.gear-usage-finder.meta_description':
+    'Not sure who can use a piece of gear? Enter its type, main stat, substats and set to list the Outerplane characters whose recommended builds match.',
   'tools.gear-usage-finder.step_type': 'Equipment Type',
   'tools.gear-usage-finder.step_class': 'Class',
   'tools.gear-usage-finder.step_mainstat': 'Main Stat',
@@ -238,6 +252,8 @@ const en = {
   'tools.gear-usage-finder.no_users': 'No character matches these criteria.',
   'tools.patch-history': 'Patch & Dev Notes',
   'tools.patch-history.desc': 'Browse all patch notes, developer notes, hero compendium and more.',
+  'tools.patch-history.meta_description':
+    'Archive of official Outerplane news: patch notes, developer notes, hero compendium, events and notices, from the 2023 launch to the latest update.',
   'tools.patch-history.era.major9': 'Major9 (Oct 2025+)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': 'Update',
@@ -260,6 +276,8 @@ const en = {
   'tools.pull-simulator': 'Pull Simulator',
   'tools.pull-simulator.desc':
     'Simulate gacha pulls for all banners. Test your luck with mileage system included.',
+  'tools.pull-simulator.meta_description':
+    'Simulate Outerplane recruitment on Rate Up, Premium and Limited banners: pick your focus heroes, pull x1 or x10, and follow mileage, ether spent and results.',
   'tools.pull-simulator.banner.custom': 'All Heroes',
   'tools.pull-simulator.banner.rateup': 'Rate Up',
   'tools.pull-simulator.banner.premium': 'Premium',
@@ -292,14 +310,24 @@ const en = {
   'tools.progress-tracker': 'Progress Tracker',
   'tools.progress-tracker.desc':
     'Track your progress: daily/weekly/monthly tasks, shop purchases, and crafts.',
+  'tools.progress-tracker.meta_description':
+    'Checklist for your Outerplane routine: daily, weekly and monthly tasks, shop purchases and crafts. Progress is saved in your browser and can be exported.',
   'tools.wallpapers': 'Wallpapers',
   'tools.wallpapers.desc': 'Browse and download official artworks and wallpapers.',
+  'tools.wallpapers.meta_description':
+    'Browse and download official Outerplane artwork to use as wallpapers: hero full art, cut-ins, story and event illustrations, banners and more.',
   'tools.4-comics': '4-Cut Comics',
   'tools.4-comics.desc': 'Read the official 4-cut comics in multiple languages.',
+  'tools.4-comics.meta_description':
+    'Read the official Outerplane 4-cut comics in a single gallery, in English, Japanese or Korean, with a viewer to move from one strip to the next.',
   'tools.ost': 'Soundtrack',
   'tools.ost.desc': 'Listen to and download the official OST.',
+  'tools.ost.meta_description':
+    "Listen to the Outerplane soundtrack in your browser: the game's music tracks in one player, with shuffle, repeat, keyboard shortcuts and MP3 download.",
   'tools.event': 'Community Events',
   'tools.event.desc': 'Browse community events: tournaments, contests, giveaways, and more.',
+  'tools.event.meta_description':
+    'Community events for Outerplane players: tournaments, contests and other activities, each with its dates, organizer and status: ongoing, upcoming or ended.',
   'tools.event.filter.type': 'Type',
   'tools.event.filter.status': 'Status',
   'tools.event.type.tournament': 'Tournament',
@@ -318,6 +346,8 @@ const en = {
   'tools.event.empty': 'No events at the moment.',
   'tools.hero-tracker': 'Hero Tracker',
   'tools.hero-tracker.desc': 'Track each hero and list the materials you still need.',
+  'tools.hero-tracker.meta_description':
+    'Record where each of your Outerplane heroes stands (level, skills, affinity, transcendence, exclusive equipment) and get the materials left to farm.',
   'tools.hero-tracker.intro':
     'Set where each hero stands and where you want them: the tool lists what is left to farm. Everything stays in your browser.',
   'tools.hero-tracker.search': 'Search a hero…',
@@ -388,6 +418,8 @@ const en = {
   'tools.hero-tracker.notCounted': 'not counted',
   'tools.team-planner': 'Team Planner',
   'tools.team-planner.desc': 'Build and share team compositions for any content.',
+  'tools.team-planner.meta_description':
+    'Build a four-hero Outerplane team, set the chain attack order, check the buffs and debuffs the team brings, and share the composition with a link.',
   'tools.team-planner.empty_slot': 'Empty Slot',
   'tools.team-planner.add_character': 'Click to add a character',
   'tools.team-planner.pick_character': 'Pick a character',
@@ -410,6 +442,8 @@ const en = {
   'tools.tier-list-maker': 'Tier List Maker',
   'tools.tier-list-maker.desc':
     'Build and share your own Outerplane tier list — rank characters, exclusive equipment and bosses, then share a link or export an image.',
+  'tools.tier-list-maker.meta_description':
+    'Make your own Outerplane tier list: drag characters, exclusive equipment or bosses into tiers, then share it with a link or export it as an image.',
   'tools.tier-list-maker.tab.characters': 'Characters',
   'tools.tier-list-maker.tab.ee': 'Exclusive Equipment',
   'tools.tier-list-maker.tab.bosses': 'Bosses',
@@ -467,6 +501,8 @@ const en = {
   'tools.damage-calculator': 'Damage Calculator',
   'tools.damage-calculator.desc':
     'Calculate the damage your characters deal, based on the in-game damage formula. Pick attacker, target, gear and buffs to see the result.',
+  'tools.damage-calculator.meta_description':
+    'Estimate the damage an Outerplane character deals using the in-game formula: choose the attacker, the target, gear and buffs, then read the result.',
   'tools.damage-calculator.disclaimer':
     'Work in progress — the calculator is still under active development. Results may differ from the in-game value.',
   'tools.damage-calculator.settings.title': 'Account Settings',

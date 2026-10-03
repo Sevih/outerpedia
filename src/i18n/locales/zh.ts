@@ -178,22 +178,34 @@ const zh: Record<TranslationKey, string> = {
   // ─── Tools ──────────────────────────────────────────────────────────────
   'tools.most-used-units': '常用角色',
   'tools.most-used-units.desc': '查看本站攻略最常用的角色。',
+  'tools.most-used-units.meta_description':
+    '查看本站异域战记攻略中最常被推荐的角色：按攻略数量排名，并可按攻略类别筛选。',
   'tools.most-used-units.guides_count': '{count}篇攻略',
   'tools.most-used-units.category_filter': '攻略分类',
   'tools.tierlistpve': '节奏榜 - PvE',
   'tools.tierlistpve.desc': '异域战记PvE节奏榜 —— 攻略主线、首领、团本、毕业副本的最佳角色。',
+  'tools.tierlistpve.meta_description':
+    '异域战记PvE节奏榜：按超越等级为所有角色在主线、首领、团本和毕业副本中的表现评级，可按属性、战斗类型和角色定位筛选。',
   'tools.tierlistpvp': '节奏榜 - PvP',
   'tools.tierlistpvp.desc': '异域战记PvP节奏榜 —— 称霸竞技场的最佳角色。',
+  'tools.tierlistpvp.meta_description':
+    '异域战记PvP节奏榜：以6星超越和专属装备+10为前提，为所有角色在竞技场中的表现评级，可按属性和战斗类型筛选。',
   'tools.ee-priority-base': '专属装备优先级（基础）',
   'tools.ee-priority-base.desc': '基于专属装备0级，即解锁的实用性和影响力排名。不考虑升级。',
+  'tools.ee-priority-base.meta_description':
+    '异域战记专属装备优先级：按0级基础效果的实用性排名，帮助你决定先解锁哪位角色的专属装备。',
   'tools.ee-priority-base.disclaimer':
     '此排名根据0级基础效果帮助决定优先解锁的专属装备。不考虑10级的额外效果。',
   'tools.ee-priority-plus10': '专属装备优先级（满级）',
   'tools.ee-priority-plus10.desc': '基于专属装备+10强化后满级的完整潜力排名。',
+  'tools.ee-priority-plus10.meta_description':
+    '异域战记专属装备优先级：按+10强化后包含全部额外效果的表现排名，帮助你决定优先把哪件专属装备强化到满级。',
   'tools.ee-priority-plus10.disclaimer':
     '此排名评估+10强化后包含所有额外效果的专属装备以帮助决定满级强化方向。',
   'tools.gear-usage-statistics': '装备使用统计',
   'tools.gear-usage-statistics.desc': '查看角色最常推荐的武器、饰品和套装。',
+  'tools.gear-usage-statistics.meta_description':
+    '查看异域战记推荐配装中最常出现的武器、饰品、防具套装和护身符，以及使用它们的角色。',
   'tools.gear-usage-statistics.disclaimer1': '以下统计仅基于Evamains的推荐配装。',
   'tools.gear-usage-statistics.tab.weapons': '武器',
   'tools.gear-usage-statistics.tab.amulets': '饰品',
@@ -201,6 +213,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.gear-usage-statistics.tab.talismans': '护身符',
   'tools.gear-usage-finder': '装备使用查找',
   'tools.gear-usage-finder.desc': '不确定哪个角色能用你的装备？定制装备找到最佳匹配。',
+  'tools.gear-usage-finder.meta_description':
+    '不确定手里的装备该给谁？选择装备类型、主属性、副属性和套装，即可列出推荐配装与之匹配的异域战记角色。',
   'tools.gear-usage-finder.step_type': '装备类型',
   'tools.gear-usage-finder.step_class': '战斗类型条件',
   'tools.gear-usage-finder.step_mainstat': '可用主属性',
@@ -217,6 +231,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.no_users': '没有角色符合这些条件。',
   'tools.patch-history': '更新公告 & 开发者笔记',
   'tools.patch-history.desc': '浏览所有更新、公告、开发者笔记、花絮等。',
+  'tools.patch-history.meta_description':
+    '异域战记官方资讯存档：更新说明、开发者笔记、同伴介绍、活动和公告，从2023年上线到最新更新均可浏览。',
   'tools.patch-history.era.major9': 'Major9（2025年10月起）',
   'tools.patch-history.era.smilegate': 'Smilegate（2023–2025）',
   'tools.patch-history.type.update': '更新',
@@ -237,6 +253,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.coupon-codes.desc': '定期更新所有有效、过期和即将推出的兑换码。',
   'tools.pull-simulator': '抽卡模拟器',
   'tools.pull-simulator.desc': '模拟各卡池的抽卡。包含指定招募系统。',
+  'tools.pull-simulator.meta_description':
+    '模拟异域战记的概率提升招募、创世之神招募和限定卡池：选择目标角色，单抽或十连，并查看指定招募进度、以太消耗和抽卡结果。',
   'tools.pull-simulator.banner.custom': '全角色',
   'tools.pull-simulator.banner.rateup': '概率提升招募',
   'tools.pull-simulator.banner.premium': '创世之神招募',
@@ -268,14 +286,24 @@ const zh: Record<TranslationKey, string> = {
   'tools.pull-simulator.never': 'N/A',
   'tools.progress-tracker': '进度追踪器',
   'tools.progress-tracker.desc': '追踪每日/每周/每月的任务、商店购买和道具制作。',
+  'tools.progress-tracker.meta_description':
+    '异域战记日常清单：追踪每日、每周、每月任务，以及商店购买和道具制作。进度保存在浏览器中，并可导出。',
   'tools.wallpapers': '壁纸',
   'tools.wallpapers.desc': '浏览和下载官方美术作品和壁纸。',
+  'tools.wallpapers.meta_description':
+    '浏览并下载异域战记官方美术作品作为壁纸：同伴立绘、连携技能特写、剧情与活动插画、横幅等。',
   'tools.4-comics': '四格漫画',
   'tools.4-comics.desc': '阅读英、日、韩版本的官方四格漫画。',
+  'tools.4-comics.meta_description':
+    '在一个画廊中阅读异域战记官方四格漫画，提供英、日、韩版本，并可在查看器中前后翻阅。',
   'tools.ost': '原声带',
   'tools.ost.desc': '收听和下载游戏内音乐。',
+  'tools.ost.meta_description':
+    '在浏览器中收听异域战记原声带：游戏音乐集中在一个播放器里，支持随机播放、循环、键盘快捷键和MP3下载。',
   'tools.event': '社区活动',
   'tools.event.desc': '浏览社区活动：锦标赛、比赛、赠品等。',
+  'tools.event.meta_description':
+    '面向异域战记玩家的社区活动：锦标赛、比赛及其他活动，并列出日期、主办方和状态（进行中、即将开始、已结束）。',
   'tools.event.filter.type': '类型',
   'tools.event.filter.status': '状态',
   'tools.event.type.tournament': '锦标赛',
@@ -293,6 +321,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.event.empty': '目前没有活动。',
   'tools.hero-tracker': '英雄养成追踪',
   'tools.hero-tracker.desc': '记录每位英雄的养成进度，列出还缺少的材料。',
+  'tools.hero-tracker.meta_description':
+    '记录每位异域战记英雄的养成进度（等级、技能、好感度、超越、专属装备），并列出还需要收集的材料。',
   'tools.hero-tracker.intro':
     '填写每位英雄的当前状态和目标，工具会列出还需要farm的材料。所有数据仅保存在浏览器中。',
   'tools.hero-tracker.search': '搜索英雄…',
@@ -360,6 +390,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.hero-tracker.notCounted': '不计入',
   'tools.team-planner': '队伍规划器',
   'tools.team-planner.desc': '配置队伍并分享。',
+  'tools.team-planner.meta_description':
+    '配置异域战记四人队伍，设定连携技能顺序，查看队伍提供的增益与减益，并通过链接分享阵容。',
   'tools.team-planner.empty_slot': '空位',
   'tools.team-planner.add_character': '点击添加角色',
   'tools.team-planner.pick_character': '选择角色',
@@ -381,6 +413,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.tier-list-maker': '梯队表制作器',
   'tools.tier-list-maker.desc':
     '创建并分享你自己的异域战记梯队表——为角色、专属装备和首领评级，然后分享链接或导出为图片。',
+  'tools.tier-list-maker.meta_description':
+    '制作你自己的异域战记梯队表：将角色、专属装备或首领拖入各个梯队，然后通过链接分享或导出为图片。',
   'tools.tier-list-maker.tab.characters': '角色',
   'tools.tier-list-maker.tab.ee': '专属装备',
   'tools.tier-list-maker.tab.bosses': '首领',
@@ -438,6 +472,8 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator': '伤害计算器',
   'tools.damage-calculator.desc':
     '根据游戏内公式计算角色造成的伤害。选择攻击者、目标、装备和增益来查看结果。',
+  'tools.damage-calculator.meta_description':
+    '根据游戏内公式估算异域战记角色造成的伤害：选择攻击者、目标、装备和增益，即可查看结果。',
   'tools.damage-calculator.disclaimer':
     '开发中 — 伤害计算器仍在开发中，结果可能与游戏内数值存在偏差。',
   'tools.damage-calculator.settings.title': '账户设置',
