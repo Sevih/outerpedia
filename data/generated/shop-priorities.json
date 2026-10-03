@@ -2318,7 +2318,12 @@
           },
           "priority": "S",
           "notes": {
-            "en": "Only until you finish Adventure License Quirk then ignore it."
+            "en": "Only until you finish Adventure License Quirk then ignore it.",
+            "jp": "冒険者ライセンスのギアスを完成させるまでのみ購入し、その後は無視してよい。",
+            "kr": "모험 라이선스 기아스를 완료할 때까지만 구매하고, 그 이후에는 무시하세요.",
+            "zh": "仅在完成冒险许可证天赋之前购买，之后可忽略。",
+            "es": "Solo hasta que termines el Quirk de la Licencia de aventura, luego ignóralo.",
+            "fr": "Seulement jusqu'à ce que tu termines le Quirk de la Licence aventure, ensuite ignore-le."
           }
         },
         {
