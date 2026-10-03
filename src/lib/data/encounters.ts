@@ -129,13 +129,47 @@ export function encountersOfIds(ids: readonly string[]): Encounter[] {
  * Le boss d'abord, ses renforts ensuite (décision d'affichage : la donnée du jeu
  * liste parfois l'add en premier). `wave` n'est émis que sur les donjons
  * multi-vagues : absent, tout le donjon est la vague du boss.
+ *
+ * Sur un donjon à POOL, la vague se lit dans UNE formation (`formation`, le
+ * numéro de la donnée ; par défaut la première) — cf. `encounterFormations`.
  */
-export function bossWaveMonsters(e: Encounter): DungeonMonster[] {
-  const waves = e.monsters.filter((m) => m.role === 'boss').map((m) => m.wave);
+export function bossWaveMonsters(e: Encounter, formation?: number): DungeonMonster[] {
+  const monsters = formationMonsters(e, formation);
+  const waves = monsters.filter((m) => m.role === 'boss').map((m) => m.wave);
   const last = waves[waves.length - 1];
-  return e.monsters
+  return monsters
     .filter((m) => m.wave === last)
     .sort((a, b) => Number(a.role === 'add') - Number(b.role === 'add'));
+}
+
+/**
+ * LES FORMATIONS ALTERNATIVES d'un donjon — ce que le jeu peut aligner.
+ *
+ * Un étage de la tour very hard n'a pas UNE composition : son groupe de spawn
+ * est un POOL, le jeu y tire une formation au hasard à chaque tentative
+ * (`DungeonMonster.formation`). Lire `e.monsters` d'un bloc y ferait combattre
+ * douze boss et vingt-six adds à la fois — un combat qui n'existe pas. Tout
+ * lecteur qui montre « le combat » passe donc par ici et en présente UNE à la
+ * fois, jamais la somme.
+ *
+ * Une entrée par formation, dans l'ordre du jeu ; un monstre sans `formation`
+ * (engagé à coup sûr) appartient à toutes. Un donjon sans pool — tous sauf les
+ * 20 étages very hard — rend sa seule composition : `[e.monsters]`.
+ */
+export function encounterFormations(e: Encounter): DungeonMonster[][] {
+  const numbers = [...new Set(e.monsters.flatMap((m) => m.formation ?? []))];
+  if (!numbers.length) return [e.monsters];
+  return numbers.map((n) =>
+    e.monsters.filter((m) => m.formation === undefined || m.formation === n),
+  );
+}
+
+/** Les monstres d'UNE formation (numéro de la donnée) — par défaut la première. */
+function formationMonsters(e: Encounter, formation?: number): DungeonMonster[] {
+  const n = formation ?? e.monsters.find((m) => m.formation !== undefined)?.formation;
+  return n === undefined
+    ? e.monsters
+    : e.monsters.filter((m) => m.formation === undefined || m.formation === n);
 }
 
 /**
@@ -358,9 +392,12 @@ export function groupCombatants(group: string, lang: Lang): GroupCombatant[] {
     // pas à documenter — le combat qu'on vient préparer est celui du boss et
     // de ceux qui se battent À CÔTÉ de lui (le core de Sacreed, Mek'Ril).
     // `wave` n'est émis que sur les donjons multi-vagues : absent, tout passe.
-    const mainWave = e.monsters.find((m) => m.role === 'boss' && m.hpLines)?.wave;
+    // Même règle pour `formation` (donjon à pool) : un stage montre UNE
+    // formation, celle de son boss principal — jamais la somme du pool, qui
+    // alignerait un principal par formation là où la carte en attend un seul.
+    const mainBoss = e.monsters.find((m) => m.role === 'boss' && m.hpLines);
     e.monsters.forEach((m, slot) => {
-      if (m.wave !== mainWave) return;
+      if (m.wave !== mainBoss?.wave || m.formation !== mainBoss?.formation) return;
       const monster = getMonster(m.id);
       if (!monster) {
         throw new Error(

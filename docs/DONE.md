@@ -7,6 +7,74 @@
 
 ## 2026-10-03
 
+- **Lot F5 : les étages very hard des tours sortent en formations
+  alternatives, plus en une vague de 35 monstres (G10)** (Opus). Le quoi :
+  `DungeonMonster` gagne `formation?: number` (forme validée par Sevih avant
+  toute modification), et les lecteurs de rencontres présentent UNE formation à
+  la fois. Le pourquoi : `towers.ts` savait qu'un groupe de spawn à plusieurs
+  lignes est un POOL dont le jeu tire une formation au hasard ; la passe donjon
+  d'`encounters.ts` aplatissait ces lignes en une seule vague et additionnait
+  les `count` — exactement la confusion que la note « Tours : waves ≠
+  encounters » du TODO interdit. La mesure, faite sur les tables AVANT de
+  corriger : `DungeonSpawnTemplet` compte 4 groupes multi-lignes sur 7 829
+  (`401030001` à `401030004`, de 12, 4, 3 et 2 lignes), référencés par les 20
+  donjons `DM_TOWER_VERY_HARD` (`40103001`–`40103020`) et par eux seuls ;
+  aucun des 29 autres modes n'en a (654 story, 652 event, 523 remains, 500
+  tours élémentaires… tous à zéro), aucun donjon ne mêle pool et vagues, et la
+  chaîne `ChangeSpawnGroupID` des world boss ne pointe que des groupes à une
+  ligne. Lus à la main : `40103001` (groupe `401030001`, 12 lignes d'un boss
+  `CT_BOSS_MONSTER` et de 0 à 3 adds, toutes niveau 100, 30 barres de vie),
+  `40103003` (`401030002`, 4 lignes, dont une qui aligne 3 × l'add `40103052`),
+  `40103020` (`401030004`, 2 lignes, un `CT_AREA_BOSS_MONSTER` et un add
+  chacune). Le comment — générateur : `isFormationPool(rows)` (une ligne = une
+  vague, plusieurs = un pool), exportée par `encounters.ts`, est LA règle des
+  deux générateurs ; `towers.ts` l'appelle à la place de son test en ligne,
+  sans autre changement. La passe donjon garde le pool comme UNE vague mais
+  numérote ses lignes : `formation` (1-based, lignes vides non comptées, donc
+  formation N = `encounters[N-1]` de `towers.json`) entre dans la clé de dédup,
+  si bien que `count` vaut DANS la formation et qu'un add commun à deux
+  formations a une entrée par formation ; émis seulement sur les monstres d'un
+  pool, `wave` inchangé ; un donjon qui mêlerait pool et vagues avertit, comme
+  dans `towers.ts`. Lecteurs (`src/lib/data/encounters.ts`) :
+  `encounterFormations(e)` rend les formations d'un donjon (`[e.monsters]`
+  hors pool) ; `bossWaveMonsters(e, formation?)` lit la vague du boss dans une
+  formation, la première par défaut ; `groupCombatants` ne garde, par stage,
+  que la formation de son boss principal. Le picker du calculateur n'avait rien
+  à changer et c'est vérifié : hors histoire il ne liste que les boss, et
+  chaque formation en aligne exactement un, distinct des autres — une ligne =
+  une formation ; un commentaire le dit dans `damage-calculator/index.tsx`, un
+  test le garde. Le diff de la donnée (`pnpm datagen:build`, `promote` à blanc
+  puis `--apply`) : `encounters.json` seul, 20 donjons, tous
+  `tower_very_hard`, champ `monsters` seul ; les 1 956 autres sont identiques
+  et rien d'autre n'en dérive. Exemple, `40103001` — avant : 35 entrées sans
+  `wave`, dont `40103026`, `40103027` et `40103028` marqués `count: 2` ;
+  après : 38 entrées en 12 formations de 2, 1, 4, 4, 4, 4, 3, 3, 4, 4, 2 et 3
+  monstres, aucun `count` (`40103026` apparaît en formations 3 et 8). Seul
+  `count` restant sur ces étages : `40103052` × 3 en formation 3 du groupe
+  `401030002`. Vérification : comparé avant/après les 171 lignes de boss que
+  le picker tire des 20 étages (mêmes ids, niveaux et barres de vie, même
+  ordre) et l'ensemble des monstres par donjon (inchangé, donc `targets.ts` et
+  les spawns inverses aussi) ; les formations d'`encounters.json` égalent
+  celles de `towers.json` sur les 20 étages. Tests : `isFormationPool` en
+  synthétique ; `40103001` fixé (12 formations, 38 entrées, un boss par
+  formation), `count` par formation, émission sur les seuls very hard en
+  tout-ou-rien, égalité avec `towers.json` (dans
+  `datagen/generators/encounters.test.ts`) ; `encounterFormations`,
+  `bossWaveMonsters` et l'invariant du picker
+  (`src/lib/data/encounters.test.ts`). `pnpm typecheck` : les trois
+  `tsc --noEmit` (racine, `datagen`, `scripts`) sans erreur ; `pnpm lint` :
+  `eslint`, sans sortie ; `pnpm test` : `Test Files 175 passed (175)`,
+  `Tests 2029 passed (2029)`.
+  Laissé : `BossEncounters` rend par défaut tout `e.monsters` — sans effet
+  aujourd'hui (aucun guide ne désigne un étage very hard par `group` ou
+  `dungeons`, la vue very hard de `TowerGuide` lit `towers.json`), à passer par
+  `encounterFormations` le jour où un guide le fait ; le picker VISUEL de
+  l'histoire (vagues) ne sait pas afficher un pool, et aucun stage d'histoire
+  n'en est un — le test « seuls les very hard » casse si le jeu en ajoute un
+  ailleurs ; `formationOf` (`towers.ts`) et la boucle de slots
+  d'`encounters.ts` lisent les mêmes colonnes `ID0..3` sans être fusionnées
+  (ce serait réécrire `towers.ts`).
+
 - **Lot B13 : le pull simulator tire dans les pools du jeu, plus dans un tri
   par tags (G9, fin)** (Opus). Le quoi : `recruit.json` porte désormais, pour
   chaque bannière de persos, son pool HORS FOCUS par rareté, et le simulateur

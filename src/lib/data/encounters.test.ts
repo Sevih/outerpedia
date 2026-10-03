@@ -10,9 +10,12 @@ import zh from '@/i18n/locales/zh';
 import fr from '@/i18n/locales/fr';
 import es from '@/i18n/locales/es';
 import {
+  bossWaveMonsters,
   difficultyLabel,
+  encounterFormations,
   encounterSpawnContexts,
   encountersOfGroup,
+  encountersOfIds,
   groupCombatants,
   hardestDifficultyLabel,
 } from '@/lib/data/encounters';
@@ -234,6 +237,53 @@ describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les bo
           }
         }
       }
+    }
+  });
+});
+
+describe('formations alternatives — la tour very hard se lit une formation à la fois', () => {
+  /** Skyward very hard 1F : un pool de 12 formations (38 entrées en tout). */
+  const [vh1] = encountersOfIds(['40103001']);
+  const pooled = Object.entries(encountersData as unknown as Record<string, DungeonRef>)
+    .filter(([, d]) => d.monsters?.some((m) => m.formation !== undefined))
+    .map(([id]) => id);
+
+  it('un donjon à pool rend ses formations, jamais leur somme', () => {
+    const formations = encounterFormations(vh1);
+    expect(formations.map((f) => f.length)).toEqual([2, 1, 4, 4, 4, 4, 3, 3, 4, 4, 2, 3]);
+    // Rien n'est perdu ni compté deux fois : les formations se partagent le donjon.
+    expect(formations.flat()).toHaveLength(vh1.monsters.length);
+  });
+
+  it('un donjon sans pool rend sa seule composition, telle quelle', () => {
+    const [annihilator] = encountersOfGroup(JC_ANNIHILATOR);
+    expect(encounterFormations(annihilator)).toEqual([annihilator.monsters]);
+  });
+
+  it('la vague du boss est celle d’UNE formation — la première par défaut', () => {
+    expect(bossWaveMonsters(vh1).map((m) => m.id)).toEqual(['40103001', '40103022']);
+    expect(bossWaveMonsters(vh1, 3).map((m) => m.id)).toEqual([
+      '40103003',
+      '40103026',
+      '40103027',
+      '40103028',
+    ]);
+    expect(bossWaveMonsters(vh1, 2)).toHaveLength(1);
+  });
+
+  it('une formation = UN boss, distinct des autres : une ligne du picker par formation', () => {
+    // Le calculateur liste les boss d'un donjon (`<donjon>:<boss>`) : sur un
+    // pool, cela ne présente une formation à la fois que si chaque formation
+    // aligne exactement un boss et qu'aucun boss ne sert deux formations.
+    expect(pooled).toHaveLength(20);
+    for (const e of encountersOfIds(pooled)) {
+      const bosses = encounterFormations(e).map((f) => f.filter((m) => m.role === 'boss'));
+      expect(
+        bosses.every((b) => b.length === 1),
+        e.id,
+      ).toBe(true);
+      const ids = bosses.map((b) => b[0].id);
+      expect(new Set(ids).size, e.id).toBe(ids.length);
     }
   });
 });

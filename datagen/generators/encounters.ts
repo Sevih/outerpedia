@@ -178,9 +178,21 @@ export interface DungeonMonster {
    */
   wave?: number;
   /**
-   * Exemplaires ENGAGÉS de ce monstre dans SA vague, à ce niveau (absent = 1)
-   * — story 1-1 aligne 2 × le même loup en vague 1 (remarque Sevih
-   * 06/08/2026) : l'UI des vagues affiche « ×2 », jamais une carte muette.
+   * FORMATION ALTERNATIVE (1-based) : rang de la ligne du monstre dans un
+   * groupe de spawn qui est un POOL (`isFormationPool`) — le jeu tire UNE
+   * formation au hasard à chaque tentative, elles ne s'affrontent JAMAIS
+   * ensemble. Même numérotation que `TowerFloor.encounters` de `towers.json`
+   * (formation N = `encounters[N-1]`). ÉMIS SEULEMENT sur les monstres d'un
+   * pool (les 20 étages de la tour very hard) — absent = monstre engagé à
+   * coup sûr dans sa vague. La dédup est PAR FORMATION : un monstre commun à
+   * plusieurs formations a une entrée par formation.
+   */
+  formation?: number;
+  /**
+   * Exemplaires ENGAGÉS de ce monstre dans SA vague (et sa formation), à ce
+   * niveau (absent = 1) — story 1-1 aligne 2 × le même loup en vague 1
+   * (remarque Sevih 06/08/2026) : l'UI des vagues affiche « ×2 », jamais une
+   * carte muette.
    */
   count?: number;
 }
@@ -568,6 +580,18 @@ function resolveModeTitle(
  */
 export function spawnGroupIds(d: Row): string[] {
   return [d.SpawnID_Pos0, d.SpawnID_Pos1, d.SpawnID_Pos2].flatMap((v) => splitCsv(v));
+}
+
+/**
+ * Un groupe de spawn à PLUSIEURS lignes est un POOL de formations
+ * ALTERNATIVES : le jeu en tire UNE au hasard à chaque tentative (constaté en
+ * jeu par Sevih sur la tour very hard). Un groupe à une ligne est une vague
+ * jouée telle quelle. LA règle, partagée par `towers.ts` (`waves` vs
+ * `encounters`) et par la passe donjon d'ici (`DungeonMonster.formation`) —
+ * mesuré le 03/10/2026 : 4 groupes sur 7 829, tous very hard.
+ */
+export function isFormationPool(rows: Row[]): boolean {
+  return rows.length > 1;
 }
 
 /**
@@ -965,44 +989,59 @@ export function buildEncounters(): EncountersData {
     const groupIds = [...new Set([...spawnGroupIds(d), ...(wbLeague.get(d.ID)?.chain ?? [])])];
     if (!groupIds.length) continue;
 
-    // Monstres du donjon, dédupliqués par (VAGUE, monstre, niveau) : un mob
-    // répété DANS sa vague porte `count` (story 1-1 aligne 2 × le même loup —
-    // remarque Sevih 06/08/2026, l'UI des vagues doit le montrer) ; répété sur
-    // PLUSIEURS vagues, une entrée par vague. Une VAGUE = un groupe de spawn
-    // qui engage (a des lignes), dans l'ordre de `groupIds` (positions puis
-    // chaîne) — cf. doc de `DungeonMonster.wave`.
-    const seen = new Map<
-      string,
-      { id: string; level: number; hpLines?: number; wave: number; count: number }
-    >();
-    const found: Array<{
+    // Monstres du donjon, dédupliqués par (VAGUE, FORMATION, monstre, niveau) :
+    // un mob répété DANS sa vague porte `count` (story 1-1 aligne 2 × le même
+    // loup — remarque Sevih 06/08/2026, l'UI des vagues doit le montrer) ;
+    // répété sur PLUSIEURS vagues, une entrée par vague. Une VAGUE = un groupe
+    // de spawn qui engage (a des lignes), dans l'ordre de `groupIds` (positions
+    // puis chaîne) — cf. doc de `DungeonMonster.wave`. Un groupe POOL
+    // (`isFormationPool`) reste UNE vague, mais ses lignes sont des formations
+    // ALTERNATIVES : chacune garde son numéro, rien ne s'additionne de l'une à
+    // l'autre (la very hard 1F sortait une vague de 35 monstres pour 12
+    // formations de 1 à 4) — cf. doc de `DungeonMonster.formation`.
+    type Found = {
       id: string;
       level: number;
       hpLines?: number;
       wave: number;
+      formation?: number;
       count: number;
-    }> = [];
+    };
+    const seen = new Map<string, Found>();
+    const found: Found[] = [];
     let wave = 0;
+    let pooled = false;
     for (const g of groupIds) {
       const rows = spawnsByGroup.get(g) ?? [];
       if (!rows.length) continue; // groupe sans spawn : n'engage rien, ne compte pas
       wave++;
+      const pool = isFormationPool(rows);
+      if (pool) pooled = true;
+      // Une ligne VIDE n'est pas une formation (même filtre que `towers.ts`) :
+      // le numéro ne compte que les lignes qui alignent quelqu'un.
+      let formation = 0;
       for (const w of rows) {
+        let counted = false;
         for (let i = 0; i < 4; i++) {
           for (const mid of splitCsv(w[`ID${i}`] ?? '')) {
+            if (pool && !counted) {
+              formation++;
+              counted = true;
+            }
             const level = num(w[`Level${i}`]);
-            const key = `${wave}|${mid}|${level}`;
+            const key = `${wave}|${formation}|${mid}|${level}`;
             const prev = seen.get(key);
             if (prev) {
               prev.count++;
               continue;
             }
             const hpLines = num(w.HPLineCount);
-            const entry = {
+            const entry: Found = {
               id: mid,
               level,
               wave,
               count: 1,
+              ...(pool ? { formation } : {}),
               ...(hpLines > 1 ? { hpLines } : {}),
             };
             seen.set(key, entry);
@@ -1011,6 +1050,10 @@ export function buildEncounters(): EncountersData {
         }
       }
     }
+    // Même garde que `towers.ts` : aucun donjon ne mêle vagues et pool
+    // aujourd'hui — le jour où un le fait, les lecteurs sont à revoir.
+    if (pooled && wave > 1)
+      console.warn(`⚠ encounters : ${d.ID} mélange vagues et pool aléatoire — modèle à revoir.`);
     if (!found.length) continue;
     const waveCount = wave;
 
@@ -1060,6 +1103,7 @@ export function buildEncounters(): EncountersData {
       ...(f.hpLines ? { hpLines: f.hpLines } : {}),
       role: monsterTypeById.get(f.id) === 'CT_MONSTER' ? ('add' as const) : ('boss' as const),
       ...(waveCount > 1 ? { wave: f.wave } : {}),
+      ...(f.formation ? { formation: f.formation } : {}),
       ...(f.count > 1 ? { count: f.count } : {}),
     }));
     // Story / Origin Story : saison, épisode (AreaTemplet) et numéro du stage

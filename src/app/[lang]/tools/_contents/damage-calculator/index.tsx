@@ -705,7 +705,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
     const dungeonName = lRec(ref.name, lang) || ref.name.en;
     // STORY : TOUS les monstres du stage sont ciblables (les vagues du picker
     // visuel — demande Sevih 06/08/2026) ; ailleurs, les boss seuls comme
-    // avant (le visuel propre de ces modes viendra plus tard).
+    // avant (le visuel propre de ces modes viendra plus tard). Sur un étage à
+    // POOL (tour very hard, `DungeonMonster.formation`), chaque formation
+    // aligne exactement UN boss : une ligne du picker = une formation
+    // alternative, jamais leur somme (gardé par `encounters.test.ts`).
     const fam = storyFamilyOf(ref.mode);
     // Boss FINAL du donjon (vague la plus haute) — l'« affiche » qui nomme la
     // carte de niveau 2 des Special Request. Même logique que `posterOf` du

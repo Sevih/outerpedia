@@ -56,11 +56,6 @@
       prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
       `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de
       perso : la bulle s'ouvre ; le toucher encore : la fiche s'ouvre.
-- [ ] **Tours very hard : 12 formations ALTERNATIVES émises comme une vague de
-      35 monstres** (G10) : `encounters.ts:975-1015` aplatit ce que `towers.ts`
-      sait être un pool tiré au hasard (vérifié sur 40103001). C'est exactement
-      la confusion que la note « Tours : waves ≠ encounters » ci-dessous
-      interdit. Reprendre la règle de `towers.ts` dans la passe donjon — lot F5.
 - [ ] **Deux générateurs dérivent le scaling des dégâts avec des règles
       différentes** (G11) : `damage-scaling.ts:64-92` vs `solver.ts:719-777` —
       Leo, Sterope, Tamara, Kuro divergent. Une seule fonction dans

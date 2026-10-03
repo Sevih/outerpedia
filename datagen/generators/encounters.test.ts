@@ -20,9 +20,12 @@ import encountersData from '../../data/generated/encounters.json';
 import glossariesData from '../../data/generated/glossaries.json';
 import rewardTablesData from '../../data/generated/reward-tables.json';
 import monstersData from '../../data/generated/monsters.json';
+import towersData from '../../data/generated/towers.json';
 import type { Row } from '../lib/tables';
+import type { TowersData } from './towers';
 import {
   dungeonSpawnedMonsters,
+  isFormationPool,
   spawnGroupIds,
   spawnUnits,
   type DungeonMonster,
@@ -43,6 +46,14 @@ describe('spawnGroupIds — positions CSV', () => {
 
   it('colonnes absentes → aucun groupe (pas de crash)', () => {
     expect(spawnGroupIds({})).toEqual([]);
+  });
+});
+
+describe('isFormationPool — un groupe multi-lignes est un pool de formations', () => {
+  it('une ligne = une vague jouée telle quelle ; plusieurs = formations ALTERNATIVES', () => {
+    expect(isFormationPool([])).toBe(false);
+    expect(isFormationPool([{ ID0: 'a' }])).toBe(false);
+    expect(isFormationPool([{ ID0: 'a' }, { ID0: 'b' }])).toBe(true);
   });
 });
 
@@ -173,12 +184,83 @@ describe('encounters.json — invariants référentiels', () => {
       const seen = new Set<string>();
       for (const m of ms) {
         if (m.count !== undefined && m.count < 2) bad.push(`${id} : count ${m.count} sérialisé`);
-        const key = `${m.wave ?? 1}|${m.id}|${m.level}`;
+        // Dans un pool, l'unité de dédup est la FORMATION (cf. test suivant).
+        const key = `${m.wave ?? 1}|${m.formation ?? 0}|${m.id}|${m.level}`;
         if (seen.has(key)) bad.push(`${id} : doublon intra-vague ${key}`);
         seen.add(key);
       }
     }
     expect(bad).toEqual([]);
+  });
+
+  describe('formations alternatives — un pool n’est pas une vague (tour very hard)', () => {
+    /** Formations d'un donjon : numéro → unités `id@niveau`, `count` déplié. */
+    const formationsOf = (d: DungeonRef): string[][] => {
+      const out: string[][] = [];
+      for (const m of (d.monsters ?? []) as DungeonMonster[]) {
+        if (m.formation === undefined) continue;
+        const units = (out[m.formation - 1] ??= []);
+        for (let i = 0; i < (m.count ?? 1); i++) units.push(`${m.id}@${m.level}`);
+      }
+      return out;
+    };
+    const pooled = dungeonEntries.filter(([, d]) =>
+      ((d.monsters ?? []) as DungeonMonster[]).some((m) => m.formation !== undefined),
+    );
+
+    it('40103001 (very hard 1F) : 12 formations de 1 à 4 monstres, pas une vague de 35', () => {
+      // Le cas qui a révélé le défaut : les 12 lignes du groupe 401030001
+      // sortaient aplaties en UNE vague de 35 entrées, trois adds marqués
+      // « ×2 » parce qu'ils servent dans deux formations.
+      const ms = dungeons['40103001'].monsters as DungeonMonster[];
+      expect(formationsOf(dungeons['40103001']).map((f) => f.length)).toEqual([
+        2, 1, 4, 4, 4, 4, 3, 3, 4, 4, 2, 3,
+      ]);
+      expect(ms).toHaveLength(38);
+      expect(ms.every((m) => m.wave === undefined && m.count === undefined)).toBe(true);
+      // Un add commun à deux formations a UNE entrée par formation.
+      expect(ms.filter((m) => m.id === '40103026').map((m) => m.formation)).toEqual([3, 8]);
+      // Chaque formation aligne exactement un boss.
+      for (let n = 1; n <= 12; n++)
+        expect(ms.filter((m) => m.formation === n && m.role === 'boss')).toHaveLength(1);
+    });
+
+    it('`count` vaut DANS la formation : 40103003 aligne 3 × le même add en formation 3', () => {
+      const ms = dungeons['40103003'].monsters as DungeonMonster[];
+      expect(ms.find((m) => m.formation === 3 && m.id === '40103052')?.count).toBe(3);
+    });
+
+    it('émis sur les seuls étages very hard, tout-ou-rien, numéros 1..N en ordre', () => {
+      // Un pool ailleurs que sur la tour very hard = donnée du jeu nouvelle :
+      // les lecteurs (`encounterFormations`, picker du calculateur) sont à
+      // revoir avant de laisser passer.
+      expect(pooled).toHaveLength(20);
+      const bad: string[] = [];
+      for (const [id, d] of pooled) {
+        const ms = d.monsters as DungeonMonster[];
+        if (d.mode !== 'tower_very_hard') bad.push(`${id} : pool en mode ${d.mode}`);
+        if (ms.some((m) => m.formation === undefined)) bad.push(`${id} : mélange avec/sans`);
+        let prev = 1;
+        for (const m of ms) {
+          const n = m.formation ?? 0;
+          if (n !== prev && n !== prev + 1) bad.push(`${id} : formation ${prev} → ${n}`);
+          prev = n;
+        }
+      }
+      expect(bad).toEqual([]);
+    });
+
+    it('mêmes formations que `towers.json` (`encounters`), étage par étage', () => {
+      // Deux générateurs, UNE règle (`isFormationPool`) : ils ne peuvent plus
+      // raconter deux compositions différentes du même étage.
+      const floors = (towersData as unknown as TowersData).tower_very_hard.floors;
+      expect(floors.map((f) => f.dungeon).sort()).toEqual(pooled.map(([id]) => id).sort());
+      for (const f of floors) {
+        const expected = (f.encounters ?? []).map((u) => u.map((x) => `${x.id}@${x.level}`).sort());
+        const actual = formationsOf(dungeons[f.dungeon]).map((u) => [...u].sort());
+        expect(actual, f.dungeon).toEqual(expected);
+      }
+    });
   });
 
   it('spawns inverses : chaque spawn d’un monstre pointe un donjon extrait', () => {

@@ -48,7 +48,7 @@ import { slugEnum } from '../lib/enums';
 import { isMain } from '../lib/is-main';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
-import { spawnGroupIds } from './encounters';
+import { isFormationPool, spawnGroupIds } from './encounters';
 
 /** Un monstre d'une vague (niveau RÉEL de la rencontre). */
 export interface TowerUnit {
@@ -230,7 +230,7 @@ export function buildTowers(): TowersData {
       .flat()
       .map(formationOf)
       .filter((f) => f.length);
-    if (groups.some((rows) => rows.length > 1)) {
+    if (groups.some(isFormationPool)) {
       if (groups.length > 1)
         console.warn(`⚠ towers : ${d.ID} mélange vagues et pool aléatoire — modèle à revoir.`);
       return { encounters: formations };
