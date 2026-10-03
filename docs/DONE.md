@@ -7,6 +7,68 @@
 
 ## 2026-10-04
 
+- **Lot A27 : titres et descriptions mesurés sur le site servi — 179 pages
+  sur 574 hors bornes, presque toutes par gabarit** (Opus). Le quoi :
+  `scripts/seo-lengths.ts` (`pnpm exec tsx scripts/seo-lengths.ts`, `--host`
+  pour une autre langue) lit le sitemap de l'hôte, récupère chaque page,
+  relève `<title>` et `<meta name="description">`, classe (titre sous 30 ou
+  au-delà de 60 caractères, description sous 70 ou au-delà de 160, champ
+  absent, doublon exact) et écrit un rapport Markdown daté dans
+  `docs/seo&audit/`, groupé par gabarit d'URL (`/characters/*`,
+  `/guides/*/*`, `/*` pour les pages à un segment), avec les dix pires de
+  chaque groupe. Le pourquoi : Sitebulb est abandonné (décision Sevih du
+  03/10), l'item « titres et descriptions courts » du TODO attendait une
+  mesure faite sur ce que le site répond. Le comment : aucune dépendance
+  nouvelle, `package.json` intact — `fetch` de Node, extraction par
+  expressions régulières (les `<title>` des `<svg>`, les `<script>` et les
+  commentaires sont écartés d'abord, et on ne se limite pas au `<head>` :
+  Next peut diffuser les métadonnées dans le corps), entités décodées en une
+  passe, longueurs en points de code. Retenue : quatre requêtes de front,
+  `User-Agent` `outerpedia-seo-lengths/1.0 (…mesure interne…)`, arrêt net au
+  premier 429 et au second 5xx de la collecte (le premier est rejoué une
+  fois après cinq secondes ; une erreur réseau compte comme un 5xx), aucun
+  rapport écrit dans ce cas. Pour un hôte de langue, le script prend
+  l'alternate `xhtml:link` du sitemap qui porte son origine. « Les pires »
+  se classent par un score documenté dans `classify` : 2 par champ absent,
+  l'écart relatif à la borne, 0,5 par doublon. Le rapport sort déjà formaté
+  par prettier. Ce qu'il a trouvé (hôte anglais, lancé UNE fois, 574 pages
+  en 41 s, toutes en 200) : aucun champ absent, aucun doublon ; 115 titres
+  trop longs (82 fiches d'équipement, 14 fiches perso, 19 guides), 9 trop
+  courts (8 catégories de guides, `/changelog`), 29 descriptions trop
+  courtes (21 guides `adventure-license`, 7 outils et `/event`), 42 trop
+  longues (29 guides, 12 équipements, 1 événement). L'item du TODO est
+  remplacé par sept lignes, une par constat, chacune remontée à sa source
+  dans le code et qualifiée : gabarit i18n (`page.equipment.title_suffix`,
+  `page.character.sr_suffix`, libellé de catégorie seul) donc mécanisable,
+  ou texte de `meta.json` donc éditorial — le préambule du TODO disait
+  « pas mécanisable », la mesure dit l'inverse : les 124 écarts de titre
+  tiennent tous à un gabarit ou à une clé i18n, seules les descriptions
+  (hors les 12 de l'équipement) sont du texte à réécrire. Les
+  répartitions par catégorie de guides ont été recomptées hors ligne sur
+  les `meta.json` (21 courtes, 24 longues à la source plus 5
+  `special-request` qui ne débordent que par le préfixe du nom de boss :
+  29, comme en ligne). La vérification : `scripts/seo-lengths.test.ts`, 24
+  tests sans réseau — HTML en dur pour l'extraction, bornes exactes et à un
+  caractère près pour le classement, faux `fetch` pour la collecte (jamais
+  plus de quatre de front, arrêt au 429, 5xx rejoué puis arrêt) ; extraction
+  comparée à `grep` sur deux pages enregistrées avant le lancement.
+  `pnpm typecheck` (rien après l'écho
+  `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0), `pnpm lint` (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  2171 passed (2171)`, 180 fichiers). Aucun changement visuel :
+  rien sous `src/` n'est touché. Ce qui est laissé : RIEN n'est corrigé,
+  c'était la consigne ; `vitest.config.ts` gagne `scripts` dans son
+  `include` (les scripts n'avaient aucun test, celui-ci n'aurait pas
+  tourné) ; `docs/seo&audit` est ignoré par git (`.gitignore`, ligne des
+  exports Sitebulb), donc le rapport
+  `titres-descriptions-outerpedia.com-2026-10-04.md` reste LOCAL à ce poste
+  — je n'ai ni forcé l'ajout ni touché au `.gitignore`, les chiffres sont
+  dans le TODO et le rapport se régénère ; à Sevih de dire s'il doit être
+  versionné. Les cinq autres langues ne sont pas mesurées, et les bornes en
+  caractères valent pour l'alphabet latin : en jp/kr/zh un caractère occupe
+  le double, elles seront à revoir avant de lire le rapport. Hors périmètre,
+  vu en passant : la description d'une page d'événement reprend le `summary`
+  entier, sans plafond.
 - **Lot A26 : les accents des cartes personnage des deux roadmaps se dérivent
   de l'élément, deux SVG passent sur les tokens — H6 est clos** (Opus, reste
   de B12). Le quoi : les 18 classes écrites à la main dans le champ `accent`

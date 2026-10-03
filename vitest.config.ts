@@ -15,6 +15,6 @@ export default defineConfig({
     // Environnement Node par défaut (tests de logique / transforms de données).
     // Pour tester des composants React plus tard : passer en 'jsdom' + plugin react.
     environment: 'node',
-    include: ['{src,datagen}/**/*.test.{ts,tsx}'],
+    include: ['{src,datagen,scripts}/**/*.test.{ts,tsx}'],
   },
 });

@@ -32,14 +32,64 @@
 > (**D1–D5**). Bilan, y compris les constats tombés à la vérification, dans
 > [DONE.md](./DONE.md).
 
-### Lots de fond SEO/perf (audit Sitebulb 20/07 — non urgents)
+### Lots de fond SEO/perf (mesure du 04/10 sur le site servi — non urgents)
 
-> Le gros de l'audit est traité (cf. DONE 20-22/07). Ce qui suit est du VOLUME
-> éditorial, pas du bug — ce n'est pas mécanisable. Détail : `docs/seo&audit/`.
+> Mesuré par `scripts/seo-lengths.ts` (lot A27) sur l'hôte anglais : 574 pages
+> du sitemap, 179 avec un écart ; aucun titre ni description absent, aucun
+> doublon exact. Bornes : titre 30 à 60 caractères, description 70 à 160.
+> Rapport, avec les dix pires par type de page :
+> `docs/seo&audit/titres-descriptions-outerpedia.com-2026-10-04.md` (dossier
+> hors git, se régénère par `pnpm exec tsx scripts/seo-lengths.ts`). Les cinq
+> autres langues ont les mêmes gabarits et se mesurent par `--host` — des
+> textes plus longs en fr/es, d'autres bornes utiles en jp/kr/zh. Presque tout
+> tient à un GABARIT, pas à du volume éditorial ; rien n'est corrigé, chaque
+> gabarit à raccourcir est un choix de formule.
 
-- [ ] **Titres et descriptions courts** : à mesurer directement sur le site
-      en ligne (décision Sevih 03/10, plus de Sitebulb) — lot A27, qui écrit
-      le rapport et remplace cet item par ce qu'il trouve.
+- [ ] **Fiches d'équipement (`/equipment/*`, 288 pages)** — MÉCANISABLE.
+      82 titres au-delà de 60 (jusqu'à 77) : le gabarit
+      `{nom} — Outerplane {type} | Outerpedia` (`page.equipment.title_suffix`)
+      coûte 46 caractères pour un « Exclusive Equipment », donc tout nom de
+      plus de 14 caractères déborde. 12 descriptions au-delà de 160, jusqu'à
+      166 : la phrase de `page.equipment.meta_description` fait 131 caractères
+      hors nom, six de moins règlent les douze. À trancher : ce qu'on retire
+      du titre quand il déborde (« Outerplane », ou « | Outerpedia »).
+- [ ] **Fiches de personnage (`/characters/*`, 128 pages)** — MÉCANISABLE.
+      14 titres au-delà de 60 (jusqu'à 76), les versions à nom long (Core
+      Fusion…, saisonniers) : gabarit
+      `{nom} — Outerplane {élément} {classe} Guide | Outerpedia`
+      (`page.character.sr_suffix`). Descriptions toutes dans les bornes (114 à
+      144). Même arbitrage que l'équipement.
+- [ ] **Guides, titres (`/guides/*/*`, 118 pages)** — MÉCANISABLE, avec une
+      réserve. 19 titres au-delà de 60 (jusqu'à 74) : le suffixe de catégorie
+      de `generateMetadata` a été posé exprès le 22/07 pour rendre les titres
+      uniques — c'est « | Outerpedia » qu'on peut lâcher, pas lui.
+- [ ] **Guides, descriptions courtes** — semi-mécanisable. 21 descriptions
+      sous 70 (44 à 69), toutes dans `adventure-license` (21 guides sur 26) :
+      une phrase type recopiée dans chaque `meta.json` (« Tips and advice to
+      succeed against X »). Une phrase plus riche par famille (promotion,
+      conquête hebdo), dans les six langues.
+- [ ] **Guides, descriptions longues** — VOLUME ÉDITORIAL. 29 descriptions
+      au-delà de 160 (jusqu'à 218). 24 sont longues dans le `meta.json`
+      lui-même : `dimensional-singularity` 15 sur 15, `special-request` 4,
+      `general-guides` 2, `other` 2, `adventure` 1. Les 5 autres sont des
+      `special-request` (151 à 160 à la source) qui ne débordent que par le
+      préfixe « {boss} — » de `generateMetadata`. À réécrire à la main, ou à
+      accepter : un moteur coupe une description trop longue, la page n'y
+      perd que la fin de la phrase.
+- [ ] **Catégories de guides (`/guides/*`, 11 pages)** — MÉCANISABLE. 8 titres
+      sous 30 (22 à 28) : le titre est le seul libellé de la catégorie
+      (« Adventure | Outerpedia »). Un gabarit du genre « {catégorie} Guides —
+      Outerplane » les sort tous ; descriptions bonnes (96 à 150).
+- [ ] **Pages à un segment (`/*`, 28 pages)** — petit volume éditorial. 8
+      descriptions sous 70 (40 à 68) : sept outils (`/ost`, `/team-planner`,
+      `/4-comics`, `/tierlistpvp`, `/wallpapers`, `/hero-tracker`,
+      `/patch-history`) et `/event`, une clé `tools.<slug>.meta_description`
+      chacun, six langues. 1 titre sous 30 : `/changelog` (« Changelog |
+      Outerpedia », 22), clé `changelog.title`, qui sert aussi de `<h1>`.
+- [ ] **Événements (`/event/*`, 1 page)** — éditorial, une ligne :
+      `/event/20260324-video` reprend le `summary` de l'événement (211
+      caractères) comme description. Soit un résumé plus court, soit une coupe
+      dans `generateMetadata` pour les suivants.
 
 ## 🔎 Audit transverse du 07/09 (constats G1–G52)
 
