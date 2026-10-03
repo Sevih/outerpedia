@@ -7,6 +7,16 @@
 
 ## 2026-10-03
 
+- **Relecture des lots A18, B9, B11, A21 et solde de G19** (Fable). Les quatre
+  commits tiennent leur périmètre, `pnpm typecheck`, `pnpm lint` et
+  `pnpm test` passent sur l'ensemble (173 fichiers, 2 003 tests). A18 : zéro
+  `text-[11px]` restant, le diff ne porte que le remplacement et le tri des
+  classes par prettier. B11/A21 : recompte indépendant sur `_contents` et
+  `data/curated`, 104 blocs partiels avant, 0 après ; aucun nouvel écart de
+  balises — les 25 blocs divergents relevés existaient avant les deux lots,
+  ils partent au TODO. G19 : le re-push R2 des préfixes `images/download/` et
+  `audio/bgm/` a été lancé par Sevih le 25/09 et l'en-tête `attachment`
+  vérifié, l'item sort du TODO. Reste B10, arrêté sur une décision de rendu.
 - **Guides : `jp`/`kr`/`zh` écrits dans les 84 blocs éditoriaux qui n'avaient
   que `en`/`fr`/`es` — 22 fichiers de `_contents`** (lot B11, pendant d'A21
   côté guides). Le quoi : la passe qui a donné `fr` et `es` à du contenu resté

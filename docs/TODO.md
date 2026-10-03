@@ -127,12 +127,15 @@
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-- [ ] **Boutons « Télécharger » qui ouvrent le fichier** (G19) : FAIT côté
-      code le 25/09 (`assets:push` pose `attachment`, cf. DONE ; HeroFullArt
-      vivants de `/wallpapers` par `fetch → blob`, lot C3). Reste le re-push
-      des objets déjà sur R2, à lancer par Sevih :
-      `pnpm assets:push --prefix=images/download/ --prefix=audio/bgm/`
-      (~800 Mo), puis `curl -I` d'un png pour voir l'en-tête.
+- [ ] **Balises inline qui divergent entre langues** (relevé du 03/10, à la
+      relecture de B11/A21) : 25 blocs où `jp`/`kr`/`zh` ne portent pas les
+      mêmes balises que `en` — le plus souvent l'anglais qui écrit un nom en
+      clair là où les trois autres le balisent (`{P/Ember}`, `{E/Earth}`…).
+      Rien de cassé au rendu, mais le lecteur anglais perd le chip. 10 blocs
+      dans `guild-raid/frost-legion` (`2026-09` et `2025-11`), 2 dans
+      `data/curated/characters.json`, le reste par un dans les guides.
+      Baliser l'anglais (et `fr`/`es` s'ils suivent l'anglais), puis poser un
+      test de parité des balises : aucun ne l'attrape aujourd'hui.
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
