@@ -348,7 +348,8 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                   const shouldDim = showOnlyTruePath && !isTrue && !isAlt;
                   const { fromX, fromY, toX, toY } = edgeGeom(edge);
                   const midX = fromX + (toX - fromX) / 2;
-                  const stroke = showOnlyTruePath && (isTrue || isAlt) ? '#facc15' : 'white';
+                  const stroke =
+                    showOnlyTruePath && (isTrue || isAlt) ? 'var(--ed-yellow)' : 'white';
                   return (
                     <path
                       key={`p-${idx}`}
@@ -372,7 +373,14 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                   const cy = (fromY + toY) / 2;
                   return (
                     <g key={`l-${idx}`} className="pointer-events-none">
-                      <circle cx={cx} cy={cy} r="9" fill="#fde047" stroke="black" strokeWidth="1" />
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r="9"
+                        fill="var(--ed-yellow-fg)"
+                        stroke="black"
+                        strokeWidth="1"
+                      />
                       <text
                         x={cx}
                         y={cy + 3}

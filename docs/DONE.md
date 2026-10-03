@@ -5,6 +5,61 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-04
+
+- **Lot A26 : les accents des cartes personnage des deux roadmaps se dérivent
+  de l'élément, deux SVG passent sur les tokens — H6 est clos** (Opus, reste
+  de B12). Le quoi : les 18 classes écrites à la main dans le champ `accent`
+  de `roadmap-2026/data.ts` (12) et `roadmap-2026-h2/data.ts` (6) —
+  `purple`/`blue`/`red`/`sky` en -700/50, -900/20, -300 — et trois couleurs
+  de SVG (`#facc15`, `#fde047` dans `MonadGateMap`, `rgb(239 68 68)` deux
+  fois dans `TowerCombatRoster`). Le pourquoi : décision Sevih du 03/10, on
+  uniformise sur les tokens qui existent, changement de teinte accepté ;
+  aucun token créé. Le comment : le champ `accent` DISPARAÎT du type et des
+  six entrées. Chaque carte porte déjà le slug d'élément de son perso (celui
+  du tag `{E/…}`) : `NewCharacterCard` en tire son bord et son fond par
+  `ELEMENT_CARD`, nouvelle table de `src/lib/images.ts` posée à côté de
+  `ELEMENT_TEXT` et `ELEMENT_RING` (`border-fire/50 bg-fire/20` et ses
+  quatre sœurs, opacités d'origine gardées, classes en littéral pour
+  Tailwind), et son titre par `ELEMENT_TEXT`. Titia, sans élément annoncé,
+  prend la famille `ed-sky` dans la carte de `roadmap-2026-h2` :
+  `border-ed-sky/50 bg-ed-sky/20`, titre `text-ed-sky-fg` — le sky-300
+  d'avant, seul des 18 à ne pas bouger. SVG : `var(--ed-yellow)` (chemin
+  « true path ») et `var(--ed-yellow-fg)` (pastille du cadenas) dans
+  `MonadGateMap` ; `var(--danger-strong)` pour la croix d'un perso exclu
+  dans `TowerCombatRoster` — le token que le même fichier donne déjà au
+  bouton « ban », et le même cran rouge-500 que la valeur écrite à la main.
+  Ce qui change à l'œil : les cartes passent des teintes Tailwind sombres
+  aux teintes d'élément du site (`--dark-elem` `#cc5de8`, `--water`
+  `#4dabf7`, `--fire` `#ff6b6b`), fond plus clair et plus saturé qu'un
+  -900/20 ; les SVG passent des valeurs Tailwind v3 à celles de la v4
+  (`#facc15` → `#fdc700`, `#fde047` → `#ffdf20`, `#ef4444` → `#fb2c36`). La
+  vérification : `pnpm typecheck` (rien après l'écho
+  `tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  code 0), `pnpm lint` (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  2046 passed (2046)`, 178 fichiers). Recompté par script (jetable,
+  non commité) sur `src/app/[lang]/guides/_contents/` et
+  `src/components/guides/` : 18 classes Tailwind brutes avant, ZÉRO après ;
+  les quatre occurrences de SVG visées, zéro après. Lu sur le dev déjà lancé
+  (`curl`, les deux roadmaps en 200) : quatre cartes en `dark-elem` (2),
+  `water`, `fire` d'un côté, Titia en `ed-sky` et Core Fusion · Rin en
+  `water` de l'autre, aucun `undefined` dans un attribut de classe, et les
+  classes nouvelles compilent dans le CSS servi en
+  `color-mix(in oklab, var(--…) N%, transparent)`. PAS regardé à l'œil — les
+  écrans à voir : `/guides/other/roadmap-2026` (les quatre cartes « nouveaux
+  personnages »), `/guides/other/roadmap-2026-h2` (Titia et Rin), un guide
+  Monad Gate avec « true path » coché (chemin jaune, cadenas), un guide de
+  tour dont le roster a un perso exclu (croix rouge). Laissé, hors
+  périmètre et non touché : les hex que B12 listait déjà
+  (`rgba(251,191,36,0.8)` de `free-heroes-start-banner`, `#0e7ecc` de
+  `TowerGuide.tsx`, `#a1a1aa` de `guide-accents.ts`), les `white`/`black`
+  nommés de `MonadGateMap`, et les ombres `#000`/`#fff` de
+  `GeasUnlockList`, `BannerTabs`, `SingularityRotation`. Un faux pas à ne
+  pas refaire : le décompte « avant » a été pris par un `git stash` suivi
+  d'un `git stash pop` dans l'arbre partagé, ce qui a retiré une seconde le
+  fichier en cours d'un autre lot (`portrait-fx-sim.ts`) ; il est revenu
+  intact, pile vide — `git show HEAD:<fichier>` aurait suffi.
+
 ## 2026-10-03
 
 - **Chips à lien au toucher : le second tap navigue enfin (G4)** (Fable).

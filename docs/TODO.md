@@ -88,13 +88,6 @@ Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
       simulateur + avertissement dans le script ; suppose de sortir de
       `mountPortraitFx` la décision « rendable ou refusé » en fonction pure.
 
-### Audit du code des guides (09/09, H5–H14 — ce qui reste)
-
-- [ ] **Couleurs Tailwind brutes des guides (H6)** — reste les accents
-      d'élément des deux roadmaps et deux SVG. Décision Sevih 03/10 : on
-      uniformise sur les tokens existants, changement de teinte accepté —
-      lot A26.
-
 ---
 
 ## 📌 Notes de référence (à ne pas perdre)

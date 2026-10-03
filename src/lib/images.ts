@@ -367,6 +367,15 @@ export const ELEMENT_RING: Record<string, string> = {
   dark: 'hover:ring-dark-elem',
 };
 
+/** Carte teintée (bord + fond) par élément — son titre prend `ELEMENT_TEXT`. */
+export const ELEMENT_CARD: Record<string, string> = {
+  fire: 'border-fire/50 bg-fire/20',
+  water: 'border-water/50 bg-water/20',
+  earth: 'border-earth/50 bg-earth/20',
+  light: 'border-light/50 bg-light/20',
+  dark: 'border-dark-elem/50 bg-dark-elem/20',
+};
+
 /** Pastille (bg+texte) par type de chaîne. */
 export const CHAIN_PILL: Record<string, string> = {
   start: 'bg-chain-start/15 text-chain-start',

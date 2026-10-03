@@ -87,7 +87,6 @@ export interface NewCharacterData {
    */
   element?: string;
   classType?: string;
-  accent: { border: string; bg: string; text: string };
   date: Text;
   /** Fichiers de `data/editorial/guides/roadmap-2026-h2/`. */
   images: string[];
@@ -428,7 +427,6 @@ export const RELEASE_PLAN_NOTES: Text[] = [
 export const NEW_CHARACTERS: NewCharacterData[] = [
   {
     name: 'Titia',
-    accent: { border: 'border-sky-700/50', bg: 'bg-sky-900/20', text: 'text-sky-300' },
     date: {
       en: 'September 8',
       jp: '9月8日',
@@ -443,7 +441,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Core Fusion · Rin',
     element: 'water',
     classType: 'striker',
-    accent: { border: 'border-blue-700/50', bg: 'bg-blue-900/20', text: 'text-blue-300' },
     date: {
       en: 'September 8',
       jp: '9月8日',

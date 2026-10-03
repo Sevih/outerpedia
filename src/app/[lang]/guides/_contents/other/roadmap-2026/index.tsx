@@ -14,7 +14,7 @@
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { img } from '@/lib/images';
+import { ELEMENT_CARD, ELEMENT_TEXT, img } from '@/lib/images';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { resolveGuideCharacter } from '@/lib/data/characters';
 import type { GuideContentProps } from '@/lib/data/guides';
@@ -116,9 +116,10 @@ function NewCharacterCard({
   const noteText = data.note ? lRec(data.note, lang) : '';
 
   return (
-    <div className={`rounded-lg border ${data.accent.border} ${data.accent.bg} flex gap-4 p-4`}>
+    // L'accent de la carte se dérive de l'élément du perso.
+    <div className={`rounded-lg border ${ELEMENT_CARD[data.element]} flex gap-4 p-4`}>
       <div className="flex-1">
-        <h4 className={`mb-2 font-semibold ${data.accent.text}`}>{data.name}</h4>
+        <h4 className={`mb-2 font-semibold ${ELEMENT_TEXT[data.element]}`}>{data.name}</h4>
         <p className="text-content-muted mb-2 text-sm">
           {parseText(`{E/${data.element}} {C/${data.classType}}`, ctx)}
         </p>

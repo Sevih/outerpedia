@@ -33,7 +33,6 @@ export interface NewCharacterData {
   /** Slugs (tags parse-text `{E/…}` / `{C/…}`). */
   element: string;
   classType: string;
-  accent: { border: string; bg: string; text: string };
   pve: Text | null;
   pvp: Text | null;
   note?: Text;
@@ -944,7 +943,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Monad Iota',
     element: 'dark',
     classType: 'ranger',
-    accent: { border: 'border-purple-700/50', bg: 'bg-purple-900/20', text: 'text-purple-300' },
     pve: {
       en: 'Various buff to Dark Type allies, Exclusive Hard CC (Stun, Freeze, etc.), Combination attack and Penetration buff to Dark Type Allies',
       jp: '闇属性味方への各種バフ、専用ハードCC（スタン、凍結など）、闇属性味方への連携攻撃と貫通バフ',
@@ -967,7 +965,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Premine (Freemine)',
     element: 'water',
     classType: 'healer',
-    accent: { border: 'border-blue-700/50', bg: 'bg-blue-900/20', text: 'text-blue-300' },
     pve: {
       en: 'Immunity & Shield, Combination attack and Shielded allies dmg increase, When hit applies debuff "Freeze" and turn gauge increase',
       jp: '免疫＆シールド、連携攻撃とシールド味方のダメージ増加、被弾時「凍結」デバフ付与とターンゲージ増加',
@@ -990,7 +987,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Eris',
     element: 'fire',
     classType: 'striker',
-    accent: { border: 'border-red-700/50', bg: 'bg-red-900/20', text: 'text-red-300' },
     pve: {
       en: 'VS Irregular Monsters char, Many debuffs and debuff number count DMG increase, Fire Type Attacker allies buff',
       jp: 'VS不規則モンスター特化、多数のデバフとデバフ数に応じたダメージ増加、火属性アタッカー味方へのバフ',
@@ -1013,7 +1009,6 @@ export const NEW_CHARACTERS: NewCharacterData[] = [
     name: 'Gnosis Domine',
     element: 'dark',
     classType: 'mage',
-    accent: { border: 'border-purple-700/50', bg: 'bg-purple-900/20', text: 'text-purple-300' },
     pve: null,
     pvp: null,
     note: {

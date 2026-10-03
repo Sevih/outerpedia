@@ -21,7 +21,7 @@
 import type { Lang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
-import { img } from '@/lib/images';
+import { ELEMENT_CARD, ELEMENT_TEXT, img } from '@/lib/images';
 import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { resolveGuideCharacter } from '@/lib/data/characters';
 import { getAllCoupons } from '@/lib/home';
@@ -179,10 +179,14 @@ function NewCharacterCard({
   lang: Lang;
   ctx: ParseCtx;
 }) {
+  // L'accent se dérive de l'élément ; un perso sans élément annoncé (Titia)
+  // prend la famille `ed-sky`.
+  const card = data.element ? ELEMENT_CARD[data.element] : 'border-ed-sky/50 bg-ed-sky/20';
+  const title = data.element ? ELEMENT_TEXT[data.element] : 'text-ed-sky-fg';
   return (
-    <div className={`rounded-lg border ${data.accent.border} ${data.accent.bg} flex gap-4 p-4`}>
+    <div className={`rounded-lg border ${card} flex gap-4 p-4`}>
       <div className="flex-1">
-        <h4 className={`mb-1 font-semibold ${data.accent.text}`}>{data.name}</h4>
+        <h4 className={`mb-1 font-semibold ${title}`}>{data.name}</h4>
         <p className="text-content-subtle mb-2 text-xs">{lRec(data.date, lang)}</p>
         {data.element && data.classType && (
           <p className="text-content-muted mb-2 text-sm">

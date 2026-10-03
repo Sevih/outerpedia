@@ -200,7 +200,7 @@ export function TowerCombatRoster({
                         y1="12"
                         x2="88"
                         y2="88"
-                        stroke="rgb(239 68 68)"
+                        stroke="var(--danger-strong)"
                         strokeWidth="9"
                         strokeLinecap="round"
                       />
@@ -209,7 +209,7 @@ export function TowerCombatRoster({
                         y1="12"
                         x2="12"
                         y2="88"
-                        stroke="rgb(239 68 68)"
+                        stroke="var(--danger-strong)"
                         strokeWidth="9"
                         strokeLinecap="round"
                       />
