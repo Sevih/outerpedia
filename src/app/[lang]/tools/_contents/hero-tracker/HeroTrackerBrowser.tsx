@@ -7,6 +7,7 @@ import {
   ClassIconPill,
   ElementIconPill,
   SearchField,
+  StarPill,
 } from '@/components/character/filters/FilterAtoms';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { img, CLASS_ORDER, ELEMENT_ORDER, STAR_SPRITE } from '@/lib/images';
@@ -95,6 +96,8 @@ export interface HeroTrackerLabels {
   search: string;
   /** Nom accessible de la croix d'effacement de la recherche (`common.clear`). */
   clearSearch: string;
+  /** Nom accessible d'une pastille de rareté (`aria.star_rarity`, `{rarity}` = étoiles). */
+  starAria: string;
   untrack: string;
   level: string;
   skills: string;
@@ -2049,13 +2052,6 @@ function RosterBar({
   classNames: Record<string, string>;
   labels: HeroTrackerLabels;
 }) {
-  const chip = (active: boolean) =>
-    `flex h-7 items-center justify-center gap-1 rounded-md border px-1.5 transition-colors ${
-      active
-        ? 'border-accent bg-accent/15'
-        : 'border-line-subtle hover:border-line opacity-70 hover:opacity-100'
-    }`;
-
   const sorts: { key: SortKey; label: string }[] = [
     { key: 'need', label: labels.sortNeed },
     { key: 'level', label: labels.level },
@@ -2093,14 +2089,13 @@ function RosterBar({
 
       <span className="flex gap-1">
         {RARITIES.map((r) => (
-          <button
+          <StarPill
             key={r}
-            type="button"
+            stars={r}
+            active={filters.rarity === r}
             onClick={() => onFilters({ ...filters, rarity: filters.rarity === r ? null : r })}
-            className={`${chip(filters.rarity === r)} text-warn text-3xs font-mono`}
-          >
-            {r}★
-          </button>
+            ariaLabel={labels.starAria.replace('{rarity}', String(r))}
+          />
         ))}
       </span>
 

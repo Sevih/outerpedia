@@ -23,6 +23,7 @@ import {
   ClassIconPill,
   ElementIconPill,
   SearchField,
+  StarPill,
 } from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { Portrait } from '@/components/character/Portrait';
@@ -81,6 +82,8 @@ export interface TlmLabels {
   search: string;
   /** Nom accessible de la croix d'effacement de la recherche. */
   clearSearch: string;
+  /** Nom accessible d'une pastille de rareté (`{rarity}` = nombre d'étoiles). */
+  starAria: string;
   hint: string;
   titlePlaceholder: string;
   addRow: string;
@@ -1931,17 +1934,15 @@ export function TierListMakerBrowser({
               </div>
               <div className="flex gap-1.5">
                 {RARITIES.map((r) => (
-                  <FilterPill
+                  <StarPill
                     key={r}
+                    stars={r}
                     active={rarityFilter.includes(r)}
                     onClick={() =>
                       setRarityFilter((f) => (f.includes(r) ? f.filter((x) => x !== r) : [...f, r]))
                     }
-                    className="h-8 px-2"
-                    title={`${r}★`}
-                  >
-                    <span className="text-xs leading-none font-semibold">{r}★</span>
-                  </FilterPill>
+                    ariaLabel={L.starAria.replace('{rarity}', String(r))}
+                  />
                 ))}
               </div>
               <div className="flex flex-wrap justify-center gap-1.5">

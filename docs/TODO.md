@@ -112,10 +112,8 @@
       tout ce qui était découpé (cf. DONE). Reste : (1) la cinquième modale,
       celle de `damage-calculator/ui.tsx`, à passer sur `components/ui/Modal`
       (lot A23) ;
-      (2) les pastilles de rareté maison du tier-list-maker (`FilterPill`
-      « 3★ ») et du hero-tracker, alors que `StarPill` existe — elles voisinent
-      maintenant avec les pastilles de la brique (lot A24) ; (3) `stripBrackets`/`stripDecoBrackets` et
-      `advOf` recopiés dans `encounters.ts` (lot A25) ; (4) « persos
+      (2) `stripBrackets`/`stripDecoBrackets` et
+      `advOf` recopiés dans `encounters.ts` (lot A25) ; (3) « persos
       intégrés » lu à quatre endroits avec quatre comportements d'erreur :
       dette froide, à arbitrer avant d'unifier.
 - [ ] **Audit à faire** : `portrait-fx-*.ts` (WebGL), hors de la passe

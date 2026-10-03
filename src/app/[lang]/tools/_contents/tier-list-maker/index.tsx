@@ -149,6 +149,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
     },
     search: t('tools.tier-list-maker.search'),
     clearSearch: t('common.clear'),
+    starAria: t('aria.star_rarity'),
     hint: t('tools.tier-list-maker.hint'),
     titlePlaceholder: t('tools.tier-list-maker.title_placeholder'),
     addRow: t('tools.tier-list-maker.add_row'),

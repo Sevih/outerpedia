@@ -7,6 +7,43 @@
 
 ## 2026-10-03
 
+- **Lot A24 : les pastilles de rareté du tier-list-maker et du hero-tracker
+  passent sur `StarPill`** (Opus). Le quoi : B10 avait posé `ElementIconPill` /
+  `ClassIconPill` dans les quatre outils et laissé la rareté maison, qui
+  voisinait depuis avec la brique sur la même ligne — des `FilterPill` « 3★ »
+  en texte dans `tier-list-maker/TierListMakerBrowser.tsx`, des puces `h-7`
+  jaunes en `font-mono` dans la `RosterBar` de
+  `hero-tracker/HeroTrackerBrowser.tsx`. Les deux rendent maintenant
+  `StarPill` de `FilterAtoms.tsx`, celle de `/characters` et `/equipment` :
+  sprites d'étoile, bordure et halo teintés par `RARITY_HEX` quand la pastille
+  est active. Le pourquoi : une seule brique par ligne de filtres ; le
+  changement de rendu est celui que Sevih a accepté le 03/10 (le rendu des
+  briques fait foi). Le comment : `StarPill` n'a pas de prop `size` et n'en
+  reçoit pas — elle fait `h-8`, soit les 32 px d'une `IconPill` en `sm`, donc
+  elle est DÉJÀ à la taille des voisines ; aucune prop ajoutée. La logique
+  reste chez l'appelant, inchangée : multi-sélection et ordre `[1, 2, 3]` au
+  tier-list-maker, sélection simple (recliquer désélectionne) et ordre
+  `[3, 2, 1]` au hero-tracker. `StarPill` exige un nom accessible : les deux
+  `index.tsx` passent un label `starAria` lu sur la clé EXISTANTE
+  `aria.star_rarity` (celle de `/characters`), aucune clé créée. Le helper
+  `chip` de `RosterBar` ne servait qu'à ces puces : retiré avec elles. Les
+  pastilles de tri et les tags (`FilterPill`) ne bougent pas. Vérification :
+  `pnpm typecheck`, `pnpm lint` (sorties vides, code 0), `pnpm test`
+  (`Tests 2010 passed (2010)`, 174 fichiers) ; sur le serveur de dev de Sevih,
+  le HTML servi de `/tier-list-maker` et `/fr/tier-list-maker` porte bien trois
+  `StarPill` (`aria-label` « 3 star rarity » / « Rareté 3 étoiles », `h-8`,
+  `aria-pressed`). PAS vérifié : le hero-tracker à l'écran — sa `RosterBar`
+  n'existe qu'une fois des héros suivis, donc jamais dans le HTML servi — ni
+  aucun des deux à l'œil. Écrans à regarder : `/tier-list-maker`, onglet
+  Personnages, la ligne élément / classe / rareté / tags sous la recherche
+  (desktop : colonne de droite ; mobile : sous les rangs), une rareté cochée
+  puis deux ; `/hero-tracker` avec au moins un héros suivi, la barre du
+  roster, une rareté cochée puis recliquée. Laissé : l'infobulle `title`
+  « 3★ » du tier-list-maker disparaît (`StarPill` n'a pas de `title`, le nom
+  accessible la remplace pour les lecteurs d'écran) ; au hero-tracker la
+  rangée de filtres gagne 4 px de haut (puces `h-7` → pastilles `h-8`, comme
+  les icônes voisines) ; `aria.star_rarity` dit « Rareté 1 étoiles » en
+  français au singulier, clé partagée avec `/characters`, hors périmètre.
 - **S1 traité : la limitation de débit lit l'IP posée par Caddy, la Map est
   bornée — et la prémisse de l'audit était fausse** (Fable, `ok` de Sevih).
   Testé sur un Caddy 2.10 local avant d'écrire : sans `trusted_proxies`, Caddy

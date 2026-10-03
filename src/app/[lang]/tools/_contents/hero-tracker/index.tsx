@@ -226,6 +226,7 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
       LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
     ),
     clearSearch: t('common.clear'),
+    starAria: t('aria.star_rarity'),
   } as unknown as HeroTrackerLabels;
 
   return (
