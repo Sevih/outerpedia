@@ -7,6 +7,12 @@
 
 ## 2026-10-03
 
+- **Relecture de B13 et F5** (Fable). Contrôles verts (175 fichiers, 2 029
+  tests), promote à blanc sans écart. F5 : `encounters.json` ne change que
+  sur les 20 étages very hard (`40103001`–`40103020`), comparé donjon par
+  donjon contre la version d'avant ; l'étage 1 porte 12 formations au lieu
+  d'une vague de 35. B13 : les quatre bannières de persos ont leur pool par
+  rareté. Rendu du picker de cible et du pull simulator non regardé à l'écran.
 - **Lot F5 : les étages very hard des tours sortent en formations
   alternatives, plus en une vague de 35 monstres (G10)** (Opus). Le quoi :
   `DungeonMonster` gagne `formation?: number` (forme validée par Sevih avant

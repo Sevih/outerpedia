@@ -21,7 +21,7 @@
 > été délégués et soldés (table des commits, leçons et préambule réutilisable
 > dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
 > ci-dessous demande une décision, un test physique ou une relecture d'abord ;
-> restent cinq lots écrits au même endroit (B13, A25, F5, F6, F7).
+> restent trois lots écrits au même endroit (A25, F6, F7).
 
 ---
 
