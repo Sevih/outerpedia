@@ -9,7 +9,8 @@ import { monsterIconSrc } from '@/lib/data/monsters';
 import type { Monster } from '@contracts';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
 import { getEquipmentEe } from '@/lib/data/equipment-ee';
-import { TierListMakerBrowser, type TierItem, type TlmLabels } from './TierListMakerBrowser';
+import { TierListMakerBrowser } from './TierListMakerBrowser';
+import type { TierItem, TlmLabels } from './contracts';
 
 /**
  * Tier List Maker — wrapper SERVEUR : construit les trois pools (personnages +

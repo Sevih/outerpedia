@@ -40,7 +40,8 @@
       DONE 25/08) ; le même motif « un composant client géant qui tient tout »
       existe encore sur `hero-tracker/HeroTrackerBrowser.tsx` (2 113 l. —
       désormais le plus gros fichier du repo),
-      `tier-list-maker/TierListMakerBrowser.tsx` (1 939 l.) et
+      `tier-list-maker/TierListMakerBrowser.tsx` (**FAIT le 03/10, lot F2** :
+      2 143 → 408 l., cf. DONE) et
       `progress-tracker/ProgressTrackerBrowser.tsx` (1 384 l.). Dette FROIDE —
       aucun des trois n'est en souffrance active. Méthode qui a marché sur le
       calculateur, si utile : découpe par script de tranches de lignes (zéro

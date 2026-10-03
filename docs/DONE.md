@@ -7,6 +7,73 @@
 
 ## 2026-10-03
 
+- **Lot F2 : `TierListMakerBrowser.tsx` découpé — 2 143 → 408 lignes, onze
+  fichiers, zéro retranscription** (Fable). Le quoi : le composant client
+  géant du tier-list-maker éclaté sur le modèle du damage calculator du 25/08
+  (types et contrats, store, opérations, briques UI, hooks `use-*`, sections) ;
+  le `Browser` garde la composition et le câblage. Le pourquoi : dernière
+  dette « un composant qui tient tout » avec le hero-tracker et le
+  progress-tracker, réservée à Sevih jusqu'à la décision du 03/10. Le comment :
+  un SCRIPT de tranches de lignes lu sur `HEAD` (27 tranches, 2 088 des 2 143
+  lignes — le reste : les 38 lignes de l'ancien bloc d'imports et 17 lignes
+  vides ; aucune ligne en double), en trois étapes, `pnpm typecheck` /
+  `pnpm lint` / `pnpm test` verts après CHACUNE. Les seules retouches DANS une
+  tranche : 27 mots `export`. Tout le reste de ce qui est neuf est de
+  l'enveloppe — en-têtes, imports, signatures et types de props, objets de
+  retour des hooks, les trois appels de section. La carte, avant : un fichier,
+  `TierListMakerBrowser.tsx` 2 143 l. Après : `contracts.ts` 139 (types du
+  pont serveur → client `TierItem` / `TlmLabels`, `Tab` / `IconSize` /
+  `SortKey`, constantes, `safeFileStem`, `makeDefaultTiers`), `stores.ts` 67
+  (`TlmSettings`, `SETTINGS_SPEC`), `tier-ops.ts` 108 (mutations immuables des
+  tiers, `rowIndexAtY`, `computeDrop`), `ui.tsx` 421 (`ItemView`, `CardView`,
+  `TierLabel`, `DropPreview`, `SettingRow`, `ToolbarButton`, `RowBtn`,
+  `recruitBadge`, tailles), `use-tier-list-state.ts` 308 (titre + tiers, cycle
+  URL `?s=` / `?z=`, sélection, glisser-déposer des items et des lignes,
+  toucher-placer et clavier), `use-pool.ts` 104 (onglet, recherche, filtres,
+  tri, `placed`, `poolItems`), `use-export-png.ts` 413 (`wrapLabel` + l'export
+  canvas), `Toolbar.tsx` 202, `TierRows.tsx` 294, `PoolPanel.tsx` 270,
+  `TierListMakerBrowser.tsx` 408 (répertoire des items, `canon`, réglages,
+  opérations de ligne, export / import JSON, partage, composition) ;
+  `index.tsx` importe ses deux types de `contracts.ts`. Trois choix à
+  connaître : (1) l'état de la liste et les gestes vivent dans UN hook, pas
+  deux — séparés, `setTiers` devenait un paramètre et `exhaustive-deps`
+  imposait de toucher trois tableaux de dépendances ; (2) deux états purement
+  locaux sont descendus avec leur JSX, `showSettings` dans `Toolbar` et
+  `colorRow` dans `TierRows` ; (3) l'ordre des effets est conservé
+  (`useStoredState`, `useCopyToClipboard`, puis hydratation, synchro d'URL,
+  blocage du `touchmove`, fins de drag). Clés de stockage
+  (`outerpedia:tier-list-maker:settings`, `tlm-settings` héritée), format `?z=`
+  et `share-codec.ts` intouchés ; `share-codec.test.ts` reste à côté du code
+  qu'il couvre. Ce qui a été comparé pour dire que rien ne bouge : (a) par
+  diff, chaque tranche d'origine se retrouve dans son fichier de destination
+  espaces mis à part (25 sur 27 strictement ; les deux autres, `tier-ops.ts` et
+  `PoolPanel.tsx`, aux virgules et parenthèses près que prettier pose en
+  repliant une ligne) ; (b) un harnais happy-dom jetable, HORS dépôt, qui
+  monte le `Browser` sur des props figées et joue trois scénarios (lien long
+  `?z=` et réglages par défaut, lien court `?s=` et réglages hérités, liste
+  vierge) — 238 relevés du DOM après chaque geste (réglages, couleurs,
+  commandes et poignée de ligne, recherche, tris, filtres, onglets, sélection
+  et placement clavier, tap, glissé souris, appui long tactile, partage,
+  import JSON valide et cassé, reset, démontage), avec l'URL, le focus, le
+  `localStorage`, les `fetch`, le presse-papier, le JSON exporté et les 917
+  opérations canvas de l'export PNG : 119 199 lignes, IDENTIQUES à l'octet avant
+  et après chacune des trois étapes ; (c) le HTML servi par le serveur de dev
+  déjà ouvert sur `/tier-list-maker` dans les six langues, identique hors
+  `<script>` (seul le `?v=` des chunks change). Vérification :
+  `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, sortie 0),
+  `pnpm lint` (`eslint`, sortie 0), `pnpm test` (`Tests 2013 passed (2013)`).
+  Laissé : aucune comparaison de pixels dans un vrai navigateur (happy-dom ne
+  met rien en page ; les classes et le DOM étant identiques, le coup d'œil
+  reste à Sevih) ; le harnais n'est pas commité (il stubbe canvas, images et
+  pointeur, ce n'est pas un test à garder tel quel). Vu en passant, PAS
+  corrigé : `importJson` ne dédoublonne pas les clés — un JSON édité à la
+  main qui cite deux fois le même item le range deux fois (clés React en
+  double), et le lien partagé se décode alors en une AUTRE liste (reproduit
+  sur le codec : `c2000004` revient en `c2000001`) ; le commentaire « Ids de
+  tiers DÉTERMINISTES » est posé au-dessus de `safeFileStem` au lieu de
+  `makeDefaultTiers` (déplacé tel quel dans `contracts.ts`) ; les pastilles de
+  la palette de couleurs sont des boutons sans nom accessible ; le TODO
+  annonçait 1 939 lignes pour un fichier qui en faisait 2 143.
 - **Lot F4 : audit des portraits animés `portrait-fx-*` — sain, aucun Haute,
   dix constats P1–P10** (Fable, aucun code modifié). Le quoi : le rapport
   `docs/audit/portrait-fx.md`, sa ligne dans l'index `docs/audit/README.md`,

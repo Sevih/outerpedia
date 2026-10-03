@@ -1,659 +1,23 @@
 'use client';
 
-import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  FaPlus,
-  FaTrash,
-  FaChevronUp,
-  FaChevronDown,
-  FaXmark,
-  FaImage,
-  FaLink,
-  FaArrowRotateLeft,
-  FaCheck,
-  FaGear,
-  FaFileExport,
-  FaFileImport,
-  FaGripVertical,
-} from 'react-icons/fa6';
-import { useStoredState, type StoreSpec } from '@/lib/client-storage';
+import { useCallback, useMemo, useRef } from 'react';
+import { useStoredState } from '@/lib/client-storage';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
+import { TIER_PALETTE, buildCanon, encodeState, type Tier } from './share-codec';
 import {
-  ClassIconPill,
-  ElementIconPill,
-  SearchField,
-  StarPill,
-} from '@/components/character/filters/FilterAtoms';
-import { FilterPill } from '@/components/character/filters/FilterPill';
-import { Portrait } from '@/components/character/Portrait';
-import {
-  drawPortrait,
-  portraitHeight,
-  portraitSources,
-  resolvePortraitFonts,
-  type PortraitPaint,
-} from '@/components/character/portrait-canvas';
-import { TIER_PALETTE, buildCanon, decodeState, encodeState, type Tier } from './share-codec';
-
-// ── Types ──
-
-/** Item rangeable — noms DÉJÀ localisés par le wrapper serveur. */
-export interface TierItem {
-  key: string;
-  label: string;
-  /** Nom court d'affichage (curé), si présent. */
-  short?: string;
-  /** Vignette carrée (face icon / EE / portrait de boss). */
-  img: string;
-  /**
-   * Id du modèle (perso ou costume) dont on peut peindre le PORTRAIT du jeu —
-   * absent pour les EE et les boss, qui n'en ont pas, et c'est ce qui décide qu'un
-   * item est rangeable en mode « cartes ».
-   *
-   * L'ID et non l'URL : le mode « cartes » ne colle plus une image, il rend le
-   * `Portrait` transcrit du prefab, qui compose lui-même ses sources.
-   */
-  cardId?: string;
-  /**
-   * Titre du jeu au-dessus du nom (`Text_Demi`) — le nickname des persos qui
-   * l'affichent, cf. `characterNamePrefix`. Le portrait l'écrit dans un champ à
-   * part ; `label` reste donc le nom NU.
-   */
-  prefix?: string;
-  element?: string;
-  cls?: string;
-  rarity?: number;
-  tags?: string[];
-  isSkin?: boolean;
-  /** Costume : nom du perso de base (affiché quand « noms de skin » est off). */
-  baseLabel?: string;
-  baseShort?: string;
-}
-
-export interface TlmLabels {
-  tabs: Record<Tab, string>;
-  /** Noms localisés des éléments et des classes (`sys.*`), par slug. */
-  elementNames: Record<string, string>;
-  classNames: Record<string, string>;
-  tags: Record<string, string>;
-  sorts: Record<SortKey, string>;
-  sizes: Record<IconSize, string>;
-  search: string;
-  /** Nom accessible de la croix d'effacement de la recherche. */
-  clearSearch: string;
-  /** Nom accessible d'une pastille de rareté (`{rarity}` = nombre d'étoiles). */
-  starAria: string;
-  hint: string;
-  titlePlaceholder: string;
-  addRow: string;
-  clearRow: string;
-  deleteRow: string;
-  moveUp: string;
-  moveDown: string;
-  dragRow: string;
-  /** Boutons de placement clavier (`{tier}` = libellé de la ligne). */
-  placeInTier: string;
-  placeInPool: string;
-  color: string;
-  reset: string;
-  share: string;
-  copied: string;
-  exportPng: string;
-  noResults: string;
-  emptyPool: string;
-  confirmReset: string;
-  confirmClearRow: string;
-  confirmDeleteRow: string;
-  settings: string;
-  iconSize: string;
-  showNames: string;
-  showElement: string;
-  showClass: string;
-  showRarity: string;
-  showCards: string;
-  cardSize: string;
-  showCardTags: string;
-  showSkins: string;
-  showSkinNames: string;
-  skinsOnly: string;
-  exportJson: string;
-  importJson: string;
-  importError: string;
-  exportBlocked: string;
-  sort: string;
-}
-
-type Tab = 'characters' | 'ee' | 'bosses';
-type IconSize = 's' | 'm' | 'l';
-type SortKey = 'default' | 'name' | 'rarity' | 'element';
-
-// ── Constantes ──
-
-const DEFAULT_LABELS = ['S', 'A', 'B', 'C', 'D'];
-
-// Ids de tiers DÉTERMINISTES : ce code tourne au SSR et à l'hydratation, un id
-// aléatoire ici créerait un mismatch.
-/**
- * Nom de fichier d'export depuis le titre. `\p{L}\p{N}` : `[^\w-]` retirait tout
- * caractère non ASCII — un titre japonais donnait `_.png`.
- */
-function safeFileStem(title: string): string {
-  const stem = title
-    .trim()
-    .replace(/[^\p{L}\p{N}_-]+/gu, '_')
-    .replace(/^_+|_+$/g, '');
-  return stem || 'tier-list';
-}
-
-function makeDefaultTiers(): Tier[] {
-  return DEFAULT_LABELS.map((label, i) => ({
-    id: `t${i}`,
-    label,
-    color: TIER_PALETTE[i],
-    items: [],
-  }));
-}
-
-const DRAG_THRESHOLD = 6;
-const TOUCH_HOLD_MS = 220;
-
-const SORT_KEYS: SortKey[] = ['default', 'name', 'rarity', 'element'];
-/**
- * Tags de perso exposés en filtres de pool, dans l'ORDRE CANONIQUE du
- * glossaire (`data/curated/tags.json` : premium, festival, seasonal, collab,
- * free) — le même que celui des badges de carte partout ailleurs.
- */
-const FILTER_TAGS = ['premium', 'festival', 'seasonal', 'collab', 'free'];
-const RARITIES = [1, 2, 3];
-
-// ── Réglages d'affichage (persistés — clé héritée `tlm-settings` absorbée) ──
-
-interface TlmSettings {
-  iconSize: IconSize;
-  showNames: boolean;
-  showElement: boolean;
-  showClass: boolean;
-  showRarity: boolean;
-  showSkins: boolean;
-  showSkinNames: boolean;
-  showCards: boolean;
-  cardSize: IconSize;
-  showCardTags: boolean;
-}
-
-const SETTINGS_FALLBACK: TlmSettings = {
-  iconSize: 'm',
-  showNames: false,
-  showElement: false,
-  showClass: false,
-  showRarity: false,
-  showSkins: false,
-  showSkinNames: true,
-  showCards: false,
-  cardSize: 'm',
-  showCardTags: false,
-};
-
-/** Normalise des réglages de provenance quelconque (`tlm-settings` héritée incluse
- *  — mêmes champs, on ne garde que les valeurs valides). */
-function coerceSettings(raw: unknown): TlmSettings {
-  const d = (raw && typeof raw === 'object' ? raw : {}) as Partial<TlmSettings>;
-  const size = (v: unknown): IconSize | undefined =>
-    v === 's' || v === 'm' || v === 'l' ? v : undefined;
-  const bool = (v: unknown, fallback: boolean) => (typeof v === 'boolean' ? v : fallback);
-  return {
-    iconSize: size(d.iconSize) ?? 'm',
-    showNames: bool(d.showNames, false),
-    showElement: bool(d.showElement, false),
-    showClass: bool(d.showClass, false),
-    showRarity: bool(d.showRarity, false),
-    showSkins: bool(d.showSkins, false),
-    showSkinNames: bool(d.showSkinNames, true),
-    showCards: bool(d.showCards, false),
-    cardSize: size(d.cardSize) ?? 'm',
-    showCardTags: bool(d.showCardTags, false),
-  };
-}
-
-const SETTINGS_SPEC: StoreSpec<TlmSettings> = {
-  key: 'outerpedia:tier-list-maker:settings',
-  version: 1,
-  fallback: SETTINGS_FALLBACK,
-  legacyKeys: ['tlm-settings'],
-  fromLegacy: (data) => (data && typeof data === 'object' ? coerceSettings(data) : undefined),
-  // Aussi à la version courante : un réglage ajouté sans bump arrive complété.
-  normalize: coerceSettings,
-};
-
-// ── Mutations de tiers ──
-
-function removeKey(tiers: Tier[], key: string): Tier[] {
-  return tiers.map((t) => ({ ...t, items: t.items.filter((k) => k !== key) }));
-}
-
-/** Retire `key` partout puis l'insère dans `tierId` (avant `beforeKey`, ou à la fin). */
-function placeKey(tiers: Tier[], key: string, tierId: string, beforeKey: string | null): Tier[] {
-  const cleaned = removeKey(tiers, key);
-  const idx = cleaned.findIndex((t) => t.id === tierId);
-  if (idx < 0) return cleaned;
-  const items = [...cleaned[idx].items];
-  let pos = items.length;
-  if (beforeKey) {
-    const bi = items.indexOf(beforeKey);
-    if (bi >= 0) pos = bi;
-  }
-  items.splice(pos, 0, key);
-  cleaned[idx] = { ...cleaned[idx], items };
-  return cleaned;
-}
-
-/** Déplace `key` dans `tierId` à un index d'insertion VISUEL (calculé contre la
- *  liste rendue, qui contient encore l'item traîné). */
-function moveKeyToVisualIndex(tiers: Tier[], key: string, tierId: string, vIndex: number): Tier[] {
-  const ti = tiers.findIndex((t) => t.id === tierId);
-  const oldPos = ti >= 0 ? tiers[ti].items.indexOf(key) : -1;
-  // Retirer la clé d'abord décale d'un cran les positions suivantes du même tier.
-  const target = oldPos >= 0 && oldPos < vIndex ? vIndex - 1 : vIndex;
-  const cleaned = removeKey(tiers, key);
-  const ci = cleaned.findIndex((t) => t.id === tierId);
-  if (ci < 0) return cleaned;
-  const items = [...cleaned[ci].items];
-  items.splice(Math.max(0, Math.min(target, items.length)), 0, key);
-  cleaned[ci] = { ...cleaned[ci], items };
-  return cleaned;
-}
-
-/** Index d'insertion parmi les lignes de tier pour un Y de pointeur (0..count). */
-function rowIndexAtY(y: number): number {
-  const rows = Array.from(document.querySelectorAll('[data-tier-id]'));
-  for (let i = 0; i < rows.length; i++) {
-    const r = rows[i].getBoundingClientRect();
-    if (y < r.top + r.height / 2) return i;
-  }
-  return rows.length;
-}
-
-/** Déplace la ligne `id` à l'index d'insertion `vIndex` ; rend la MÊME référence
- *  quand rien ne change (un drag en cours ne re-rend pas pour rien). */
-function moveRowToIndex(tiers: Tier[], id: string, vIndex: number): Tier[] {
-  const from = tiers.findIndex((t) => t.id === id);
-  if (from < 0) return tiers;
-  const target = Math.max(0, Math.min(from < vIndex ? vIndex - 1 : vIndex, tiers.length - 1));
-  if (target === from) return tiers;
-  const next = [...tiers];
-  const [row] = next.splice(from, 1);
-  next.splice(target, 0, row);
-  return next;
-}
-
-type DropTarget = { type: 'pool' } | { type: 'tier'; tierId: string; index: number };
-
-/** Résout ce qui est sous le pointeur en cible de drop. Sert à l'indicateur
- *  d'insertion ET au drop réel — ils ne peuvent pas diverger. L'index est la
- *  position de trou parmi les items du tier. */
-function computeDrop(x: number, y: number): DropTarget | null {
-  const el = document.elementFromPoint(x, y) as HTMLElement | null;
-  const zone = el?.closest('[data-drop]');
-  if (!zone) return null;
-  if (zone.getAttribute('data-drop') === 'pool') return { type: 'pool' };
-  const tierId = zone.getAttribute('data-tier-id');
-  if (!tierId) return null;
-  const box = zone.querySelector('[data-items]');
-  const els = box ? Array.from(box.querySelectorAll<HTMLElement>('[data-item-key]')) : [];
-  let index = els.length;
-  for (let i = 0; i < els.length; i++) {
-    const r = els[i].getBoundingClientRect();
-    if (y < r.top) {
-      index = i;
-      break;
-    }
-    if (y <= r.bottom && x < r.left + r.width / 2) {
-      index = i;
-      break;
-    }
-  }
-  return { type: 'tier', tierId, index };
-}
-
-/** Retour à la ligne glouton pour du texte canvas ; coupe au caractère un mot trop long. */
-function wrapLabel(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
-  const lines: string[] = [];
-  let line = '';
-  const addChars = (chunk: string) => {
-    for (const ch of chunk) {
-      if (line && ctx.measureText(line + ch).width > maxWidth) {
-        lines.push(line);
-        line = ch;
-      } else line += ch;
-    }
-  };
-  text
-    .trim()
-    .split(/\s+/)
-    .filter(Boolean)
-    .forEach((word, i) => {
-      if (i > 0) {
-        if (line && ctx.measureText(`${line} ${word}`).width > maxWidth) {
-          lines.push(line);
-          line = '';
-        } else if (line) line += ' ';
-      }
-      addChars(word);
-    });
-  if (line) lines.push(line);
-  return lines.length ? lines : [''];
-}
-
-/**
- * Badge de recrutement pour un jeu de tags — MÊME règle que les cartes de
- * perso : les `tags` arrivent déjà triés canoniquement (`characterTags` →
- * `sortTags`), donc le premier qui a une icône fait le badge. L'ordre en dur
- * qui vivait ici contredisait celui du glossaire.
- */
-function recruitBadge(tags?: string[]): string | null {
-  const tag = tags?.find((t) => FILTER_TAGS.includes(t));
-  return tag ? img.tag(tag) : null;
-}
-
-// ── Vignette d'item ──
-
-const ITEM_SIZES: Record<IconSize, { box: string; col: string }> = {
-  s: { box: 'h-9 w-9 sm:h-11 sm:w-11', col: 'w-9 sm:w-11' },
-  m: { box: 'h-12 w-12 sm:h-14 sm:w-14', col: 'w-12 sm:w-14' },
-  l: { box: 'h-16 w-16 sm:h-20 sm:w-20', col: 'w-16 sm:w-20' },
-};
-
-/**
- * Largeurs des cartes de la grille rangée. La HAUTEUR ne s'écrit plus ici : c'est
- * `Portrait` qui porte le ratio du cadre du jeu (180×344), et il n'était pas celui
- * qu'on posait — `aspect-[120/231]` valait 0,5195 quand le prefab dit 0,5233, soit
- * un cadre étiré de 0,7 % que l'`object-cover` rattrapait en ROGNANT l'art.
- */
-const CARD_SIZES: Record<IconSize, string> = {
-  s: 'w-[66px]',
-  m: 'w-25',
-  l: 'w-30',
-};
-/** Les mêmes largeurs en pixels — l'export PNG et l'aperçu de glissé en ont besoin. */
-const CARD_PX: Record<IconSize, number> = { s: 66, m: 100, l: 120 };
-
-type ItemViewProps = {
-  item: TierItem;
-  selected: boolean;
-  dimmed: boolean;
-  /** Nom du PERSO (toggle « noms ») — pour un skin, celui du perso de base. */
-  label: string;
-  shortLabel?: string;
-  /** Nom du SKIN, en ligne dédiée sous le portrait (toggle « noms de skin »). */
-  skinLabel?: string;
-  size: IconSize;
-  showName: boolean;
-  showElement: boolean;
-  showClass: boolean;
-  showRarity: boolean;
-  onPointerDown: (e: React.PointerEvent, key: string) => void;
-  /** Sélection au CLAVIER (Entrée / Espace) — la souris passe par `onPointerDown`. */
-  onKeySelect: (key: string) => void;
-};
-
-const ItemView = memo(function ItemView({
-  item,
-  selected,
-  dimmed,
-  label,
-  shortLabel,
-  skinLabel,
-  size,
-  showName,
-  showElement,
-  showClass,
-  showRarity,
-  onPointerDown,
-  onKeySelect,
-}: ItemViewProps) {
-  const s = ITEM_SIZES[size];
-  return (
-    // Un bouton pour le CLAVIER : `detail === 0` signe un clic né d'Entrée ou
-    // d'Espace — le tap souris/tactile, lui, sélectionne déjà au `pointerup`
-    // (le compter ici le désélectionnerait aussitôt).
-    <button
-      type="button"
-      data-item-key={item.key}
-      onPointerDown={(e) => onPointerDown(e, item.key)}
-      onClick={(e) => e.detail === 0 && onKeySelect(item.key)}
-      aria-label={label}
-      aria-pressed={selected}
-      title={item.label}
-      className={`relative flex shrink-0 cursor-grab touch-none flex-col items-center select-none ${showName || skinLabel ? s.col : ''} ${dimmed ? 'opacity-30' : ''}`}
-    >
-      <div
-        className={[
-          s.box,
-          'relative rounded-md transition',
-          selected ? 'ring-2 ring-amber-400' : 'ring-line hover:ring-line-strong ring-1',
-        ].join(' ')}
-      >
-        <img
-          src={item.img}
-          alt={label}
-          draggable={false}
-          loading="lazy"
-          className="bg-surface-overlay h-full w-full rounded-md object-cover"
-          onError={(e) => {
-            e.currentTarget.style.visibility = 'hidden';
-          }}
-        />
-        {showElement && item.element && (
-          <img
-            src={img.element(item.element)}
-            alt=""
-            aria-hidden
-            className="absolute -top-1 -right-1 h-[40%] w-[40%] drop-shadow-md"
-          />
-        )}
-        {showClass && item.cls && (
-          <img
-            src={img.klass(item.cls)}
-            alt=""
-            aria-hidden
-            className="absolute top-[42%] right-0 h-[28%] w-[28%] drop-shadow-md"
-          />
-        )}
-        {showRarity && item.rarity ? (
-          <span className="absolute inset-x-0 bottom-0.5 flex items-center justify-center">
-            {Array.from({ length: item.rarity }, (_, i) => (
-              <img
-                key={i}
-                src={img.star()}
-                alt=""
-                aria-hidden
-                className="h-3 w-3 drop-shadow-md"
-                style={{ marginLeft: i ? -3 : 0 }}
-                width={12}
-                height={12}
-              />
-            ))}
-          </span>
-        ) : null}
-      </div>
-      {showName && (
-        <span className="text-content-muted text-2xs mt-0.5 w-full text-center leading-tight hyphens-auto">
-          {shortLabel || label}
-        </span>
-      )}
-      {skinLabel && (
-        <span className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight">
-          {skinLabel}
-        </span>
-      )}
-    </button>
-  );
-});
-
-// ── Carte pleine (grille rangée en mode « cartes ») ──
-
-/**
- * LA CARTE, C'EST LE PORTRAIT DU JEU — plus le chrome de l'outil.
- *
- * Elle en portait une IMITATION : l'art collé en `object-cover` dans un cadre au
- * mauvais ratio, les étoiles empilées à la verticale sans le rail sombre ni les six
- * creux, la classe à 26 % de la largeur et l'élément à 24 % (le prefab dit 20,6 %
- * et 25,6 %, et ils ne sont PAS alignés l'un sur l'autre), le nom posé sur un
- * dégradé qui n'existe pas dans le prefab (`LowBg` y est inactif), et pas de titre
- * du tout. Trois transcriptions manuscrites du même nœud vivaient sur le site ; il
- * n'en reste qu'une, et elle est lue au prefab.
- *
- * Les réglages de l'outil se traduisent en props du portrait plutôt qu'en calques
- * dessinés à côté : l'élément et la classe se coupent en n'étant pas passés, le nom
- * par `hideName`, les étoiles par `hideStars`. Seul le badge de recrutement reste
- * posé PAR-DESSUS — c'est une convention éditoriale du site, le jeu n'en a pas sur
- * ce nœud (cf. `CharacterCard`, qui fait exactement pareil).
- */
-type CardViewProps = {
-  item: TierItem;
-  selected: boolean;
-  dimmed: boolean;
-  /** Nom du perso de base — rendu SUR la carte. */
-  label: string;
-  /** Nom du costume — rendu SOUS la carte quand présent. */
-  skinLabel?: string;
-  size: IconSize;
-  showName: boolean;
-  showElement: boolean;
-  showClass: boolean;
-  showStars: boolean;
-  showBadge: boolean;
-  onPointerDown: (e: React.PointerEvent, key: string) => void;
-  /** Sélection au CLAVIER (Entrée / Espace) — la souris passe par `onPointerDown`. */
-  onKeySelect: (key: string) => void;
-};
-
-const CardView = memo(function CardView({
-  item,
-  selected,
-  dimmed,
-  label,
-  skinLabel,
-  size,
-  showName,
-  showElement,
-  showClass,
-  showStars,
-  showBadge,
-  onPointerDown,
-  onKeySelect,
-}: CardViewProps) {
-  const badge = showBadge ? recruitBadge(item.tags) : null;
-  return (
-    // Bouton clavier : même règle que `ItemView`.
-    <button
-      type="button"
-      data-item-key={item.key}
-      onPointerDown={(e) => onPointerDown(e, item.key)}
-      onClick={(e) => e.detail === 0 && onKeySelect(item.key)}
-      aria-label={skinLabel ?? label}
-      aria-pressed={selected}
-      title={skinLabel ?? label}
-      className={[
-        CARD_SIZES[size],
-        'relative flex shrink-0 cursor-grab touch-none flex-col items-center select-none',
-        dimmed ? 'opacity-30' : '',
-      ].join(' ')}
-    >
-      <div
-        className={[
-          'relative w-full overflow-hidden rounded transition',
-          selected ? 'ring-2 ring-amber-400' : 'ring-line-subtle ring-1',
-        ].join(' ')}
-      >
-        <Portrait
-          id={item.cardId!}
-          name={label}
-          prefix={item.prefix}
-          rarity={item.rarity ?? 1}
-          element={showElement ? item.element : undefined}
-          cls={showClass ? item.cls : undefined}
-          hideName={!showName}
-          hideStars={!showStars}
-          className="w-full"
-        />
-        {/* Le badge de recrutement — le seul calque qui reste par-dessus : c'est
-            une convention du site, pas du prefab (cf. `CharacterCard`). */}
-        {badge && <img src={badge} alt="" aria-hidden className="absolute top-1 left-1 w-[60%]" />}
-      </div>
-      {skinLabel && (
-        <span className="text-content-subtle text-2xs mt-0.5 line-clamp-2 w-full text-center leading-tight">
-          {skinLabel}
-        </span>
-      )}
-    </button>
-  );
-});
-
-// ── Label de tier (textarea auto-grandissant) ──
-
-function TierLabel({
-  value,
-  onChange,
-  onClick,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-  onClick: (e: React.MouseEvent) => void;
-}) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  // Redimensionné au contenu au montage et à chaque changement (y compris à
-  // l'hydratation d'une liste partagée).
-  useEffect(() => {
-    const el = ref.current;
-    if (el) {
-      el.style.height = 'auto';
-      el.style.height = `${el.scrollHeight}px`;
-    }
-  }, [value]);
-  return (
-    <textarea
-      ref={ref}
-      value={value}
-      rows={1}
-      maxLength={60}
-      onChange={(e) => onChange(e.target.value)}
-      onClick={onClick}
-      placeholder="…"
-      className="w-full resize-none overflow-hidden bg-transparent text-center text-base leading-tight font-bold wrap-break-word text-[#1a1a1a] placeholder-[#1a1a1a]/40 focus:outline-none"
-    />
-  );
-}
-
-/** Aperçu estompé de l'item traîné, au point d'insertion pendant un drag. */
-function DropPreview({
-  src,
-  size,
-  card,
-}: {
-  src: string | undefined;
-  size: IconSize;
-  card?: boolean;
-}) {
-  // Le cadre du jeu (180×344) quand c'est une carte, sinon la boîte carrée.
-  const sizeCls = card ? `${CARD_SIZES[size]} aspect-180/344` : ITEM_SIZES[size].box;
-  return (
-    <div
-      className={`${sizeCls} shrink-0 overflow-hidden rounded-md border-2 border-dashed border-amber-400/80 bg-amber-400/10`}
-    >
-      {src && (
-        <img
-          src={src}
-          alt=""
-          aria-hidden
-          draggable={false}
-          className="h-full w-full rounded-md object-cover opacity-40"
-        />
-      )}
-    </div>
-  );
-}
+  makeDefaultTiers,
+  safeFileStem,
+  type Tab,
+  type TierItem,
+  type TlmLabels,
+} from './contracts';
+import { SETTINGS_SPEC, type TlmSettings } from './stores';
+import { useTierListState } from './use-tier-list-state';
+import { usePool } from './use-pool';
+import { useExportPng } from './use-export-png';
+import { Toolbar } from './Toolbar';
+import { TierRows } from './TierRows';
+import { PoolPanel } from './PoolPanel';
 
 // ── Composant principal ──
 
@@ -693,21 +57,6 @@ export function TierListMakerBrowser({
   // Index stable par type — compacité et stabilité du lien de partage.
   const canon = useMemo(() => buildCanon(characters, ee, bosses), [characters, ee, bosses]);
 
-  // État du tableau
-  const [title, setTitle] = useState('');
-  const [tiers, setTiers] = useState<Tier[]>(makeDefaultTiers);
-
-  // État du pool
-  const [tab, setTab] = useState<Tab>('characters');
-  const [rawQuery, setRawQuery] = useState('');
-  const query = useDeferredValue(rawQuery);
-  const [elementFilter, setElementFilter] = useState<string[]>([]);
-  const [classFilter, setClassFilter] = useState<string[]>([]);
-  const [rarityFilter, setRarityFilter] = useState<number[]>([]);
-  const [tagFilter, setTagFilter] = useState<string[]>([]);
-  const [skinsOnly, setSkinsOnly] = useState(false);
-  const [sort, setSort] = useState<SortKey>('default');
-
   // Réglages d'affichage persistés (un seul objet — cf. SETTINGS_SPEC).
   const [settings, setSettings] = useStoredState(SETTINGS_SPEC);
   const {
@@ -724,14 +73,53 @@ export function TierListMakerBrowser({
   } = settings;
   const patchSettings = (patch: Partial<TlmSettings>) =>
     setSettings((prev) => ({ ...prev, ...patch }));
-  const [showSettings, setShowSettings] = useState(false);
-
-  // État d'interaction
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [drag, setDrag] = useState<{ key: string; x: number; y: number } | null>(null);
-  const [dropAt, setDropAt] = useState<{ tierId: string; index: number } | null>(null);
-  const [colorRow, setColorRow] = useState<string | null>(null);
   const { copy, copied } = useCopyToClipboard(2000);
+
+  // État de la liste (titre, tiers, cycle URL `?s=` / `?z=`) et interactions
+  // (sélection, glisser-déposer, toucher-placer) : dans useTierListState
+  // (découpage du 03/10/2026) — destructuré sous les MÊMES noms que les anciens
+  // useState / useCallback.
+  const {
+    title,
+    setTitle,
+    tiers,
+    setTiers,
+    shareBaselineRef,
+    selectedKey,
+    setSelectedKey,
+    drag,
+    dropAt,
+    rowDragActive,
+    onRowHandlePointerDown,
+    onItemPointerDown,
+    tapZone,
+    placeByKeyboard,
+    keySelect,
+    placeBtnClass,
+  } = useTierListState({ canon });
+
+  // Pool (onglet, recherche, filtres, tri) et ses dérivés : dans usePool.
+  const {
+    tab,
+    setTab,
+    rawQuery,
+    setRawQuery,
+    query,
+    elementFilter,
+    setElementFilter,
+    classFilter,
+    setClassFilter,
+    rarityFilter,
+    setRarityFilter,
+    tagFilter,
+    setTagFilter,
+    skinsOnly,
+    setSkinsOnly,
+    sort,
+    setSort,
+    placed,
+    poolItems,
+  } = usePool({ sourceByTab, tiers, showSkins });
 
   // Deux lignes de nom distinctes : « noms » = toujours le nom du PERSO (un
   // skin affiche celui de son perso de base) ; « noms de skin » = le nom du
@@ -742,302 +130,6 @@ export function TierListMakerBrowser({
     (it: TierItem) => (it.isSkin && showSkinNames ? (it.short ?? it.label) : undefined),
     [showSkinNames],
   );
-
-  // ── Hydratation depuis l'URL / synchro de l'URL ──
-  const didHydrate = useRef(false);
-  const lastUrlRef = useRef('');
-  // Payload d'une liste ouverte par lien court `?s=` — conservé jusqu'à la
-  // première édition pour que la barre d'adresse garde le lien compact.
-  const shareBaselineRef = useRef<string | null>(null);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    if (didHydrate.current) return;
-    didHydrate.current = true;
-
-    const apply = (z: string | null, fromShortLink = false) => {
-      const decoded = decodeState(z, canon);
-      if (decoded && decoded.tiers.length) {
-        setTitle(decoded.title);
-        setTiers(decoded.tiers);
-        if (fromShortLink && z) shareBaselineRef.current = z;
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const shortId = params.get('s');
-    if (shortId) {
-      fetch(`/api/tierlist/${encodeURIComponent(shortId)}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((data: { z?: unknown } | null) => {
-          if (typeof data?.z === 'string') apply(data.z, true);
-        })
-        .catch(() => {})
-        .finally(() => setHydrated(true));
-    } else {
-      const z = params.get('z');
-      // Différé en microtâche : même chemin asynchrone que la branche `?s=`
-      // (pas de setState synchrone dans un effet — rendus en cascade).
-      void Promise.resolve().then(() => {
-        apply(z);
-        setHydrated(true);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- hydratation unique
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    const handle = setTimeout(() => {
-      const z = encodeState(title, tiers, canon);
-      // Liste inchangée encore sous son lien court → ne pas toucher l'URL.
-      if (shareBaselineRef.current === z) return;
-      const path = window.location.pathname;
-      const isPristine = !title && tiers.every((t) => t.items.length === 0);
-      const next = isPristine ? path : `${path}?z=${z}`;
-      if (lastUrlRef.current !== next) {
-        lastUrlRef.current = next;
-        // replaceState ne met à jour QUE la barre d'adresse — pas de fetch RSC,
-        // pas de re-rendu (contrairement à router.replace).
-        window.history.replaceState(window.history.state, '', next);
-      }
-    }, 400);
-    return () => clearTimeout(handle);
-  }, [hydrated, title, tiers, canon]);
-
-  // ── Dérivés : clés placées + pool ──
-  const placed = useMemo(() => new Set(tiers.flatMap((t) => t.items)), [tiers]);
-
-  const poolItems = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const filtered = sourceByTab[tab].filter((it) => {
-      if (placed.has(it.key)) return false;
-      // « Skins seulement » outrepasse le masquage par défaut des skins : le
-      // filtre marche même quand le réglage est décoché.
-      if (skinsOnly) {
-        if (!it.isSkin) return false;
-      } else if (it.isSkin && !showSkins) return false;
-      if (elementFilter.length && (!it.element || !elementFilter.includes(it.element)))
-        return false;
-      if (classFilter.length && (!it.cls || !classFilter.includes(it.cls))) return false;
-      if (rarityFilter.length && (it.rarity === undefined || !rarityFilter.includes(it.rarity)))
-        return false;
-      if (tagFilter.length && !it.tags?.some((tg) => tagFilter.includes(tg))) return false;
-      if (q && !`${it.label} ${it.baseLabel ?? ''}`.toLowerCase().includes(q)) return false;
-      return true;
-    });
-    if (sort === 'default') return filtered;
-    const arr = [...filtered];
-    if (sort === 'name') arr.sort((a, b) => a.label.localeCompare(b.label));
-    else if (sort === 'rarity')
-      arr.sort((a, b) => (b.rarity ?? 0) - (a.rarity ?? 0) || a.label.localeCompare(b.label));
-    else if (sort === 'element')
-      arr.sort(
-        (a, b) =>
-          ELEMENT_ORDER.indexOf((a.element ?? '') as (typeof ELEMENT_ORDER)[number]) -
-            ELEMENT_ORDER.indexOf((b.element ?? '') as (typeof ELEMENT_ORDER)[number]) ||
-          a.label.localeCompare(b.label),
-      );
-    return arr;
-  }, [
-    sourceByTab,
-    tab,
-    placed,
-    query,
-    elementFilter,
-    classFilter,
-    rarityFilter,
-    tagFilter,
-    showSkins,
-    skinsOnly,
-    sort,
-  ]);
-
-  // ── Glisser-déposer (pointer events, souris + tactile) ──
-  const startRef = useRef<{ x: number; y: number; key: string } | null>(null);
-  const armedRef = useRef(false);
-  const draggingRef = useRef(false);
-  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Réordonnancement des lignes par poignée
-  const rowDragId = useRef<string | null>(null);
-  const rowDraggingRef = useRef(false);
-  const [rowDragActive, setRowDragActive] = useState<string | null>(null);
-
-  // Bloque le défilement de page pendant un drag actif (tactile).
-  useEffect(() => {
-    const block = (e: TouchEvent) => {
-      if (draggingRef.current || rowDraggingRef.current) e.preventDefault();
-    };
-    document.addEventListener('touchmove', block, { passive: false });
-    return () => document.removeEventListener('touchmove', block);
-  }, []);
-
-  // Fin du drag de LIGNE en cours (ou rien). Tenue dans un ref pour que le
-  // démontage puisse la jouer : le drag d'ITEM a son `cleanupPointer`, celui
-  // des lignes laissait ses écouteurs `window` derrière lui.
-  const endRowDragRef = useRef<(() => void) | null>(null);
-  useEffect(() => () => endRowDragRef.current?.(), []);
-
-  const onRowHandlePointerDown = useCallback((e: React.PointerEvent, id: string) => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    e.stopPropagation();
-    rowDragId.current = id;
-    rowDraggingRef.current = true;
-    setRowDragActive(id);
-    const onMove = (ev: PointerEvent) => {
-      if (rowDragId.current)
-        setTiers((prev) => moveRowToIndex(prev, rowDragId.current!, rowIndexAtY(ev.clientY)));
-    };
-    const onEnd = () => {
-      endRowDragRef.current = null;
-      rowDragId.current = null;
-      rowDraggingRef.current = false;
-      setRowDragActive(null);
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onEnd);
-      window.removeEventListener('pointercancel', onEnd);
-    };
-    endRowDragRef.current = onEnd;
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onEnd);
-    window.addEventListener('pointercancel', onEnd);
-  }, []);
-
-  const updateDragOver = useCallback((x: number, y: number) => {
-    const d = computeDrop(x, y);
-    setDropAt(d && d.type === 'tier' ? { tierId: d.tierId, index: d.index } : null);
-  }, []);
-
-  const handleDrop = useCallback((key: string, x: number, y: number) => {
-    const d = computeDrop(x, y);
-    if (!d) return;
-    if (d.type === 'pool') setTiers((prev) => removeKey(prev, key));
-    else setTiers((prev) => moveKeyToVisualIndex(prev, key, d.tierId, d.index));
-  }, []);
-
-  const handleTap = useCallback((key: string) => {
-    setSelectedKey((cur) => (cur === key ? null : key));
-  }, []);
-
-  const endPointer = useRef<((e: PointerEvent) => void) | null>(null);
-  const movePointer = useRef<((e: PointerEvent) => void) | null>(null);
-
-  const cleanupPointer = useCallback(() => {
-    if (holdTimer.current) {
-      clearTimeout(holdTimer.current);
-      holdTimer.current = null;
-    }
-    if (movePointer.current) window.removeEventListener('pointermove', movePointer.current);
-    if (endPointer.current) {
-      window.removeEventListener('pointerup', endPointer.current);
-      window.removeEventListener('pointercancel', endPointer.current);
-    }
-    startRef.current = null;
-    armedRef.current = false;
-    draggingRef.current = false;
-  }, []);
-
-  const onItemPointerDown = useCallback(
-    (e: React.PointerEvent, key: string) => {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      startRef.current = { x: e.clientX, y: e.clientY, key };
-      draggingRef.current = false;
-      armedRef.current = e.pointerType === 'mouse';
-
-      const onMove = (ev: PointerEvent) => {
-        const s = startRef.current;
-        if (!s) return;
-        const dist = Math.hypot(ev.clientX - s.x, ev.clientY - s.y);
-        if (!armedRef.current) {
-          // Tactile avant la fin de l'appui long : bouger = défilement.
-          if (dist > 10) cleanupPointer();
-          return;
-        }
-        if (!draggingRef.current) {
-          if (dist < DRAG_THRESHOLD) return;
-          draggingRef.current = true;
-        }
-        setDrag({ key: s.key, x: ev.clientX, y: ev.clientY });
-        updateDragOver(ev.clientX, ev.clientY);
-      };
-
-      const onEnd = (ev: PointerEvent) => {
-        const s = startRef.current;
-        const wasDragging = draggingRef.current;
-        cleanupPointer();
-        setDrag(null);
-        setDropAt(null);
-        if (!s) return;
-        if (wasDragging) handleDrop(s.key, ev.clientX, ev.clientY);
-        else handleTap(s.key);
-      };
-
-      movePointer.current = onMove;
-      endPointer.current = onEnd;
-      window.addEventListener('pointermove', onMove);
-      window.addEventListener('pointerup', onEnd);
-      window.addEventListener('pointercancel', onEnd);
-
-      if (e.pointerType !== 'mouse') {
-        holdTimer.current = setTimeout(() => {
-          armedRef.current = true;
-          draggingRef.current = true;
-          const s = startRef.current;
-          if (s) {
-            setDrag({ key: s.key, x: s.x, y: s.y });
-            updateDragOver(s.x, s.y);
-          }
-        }, TOUCH_HOLD_MS);
-      }
-    },
-    [cleanupPointer, handleDrop, handleTap, updateDragOver],
-  );
-
-  useEffect(() => cleanupPointer, [cleanupPointer]);
-
-  // ── Toucher-placer : taper un tier / le pool avec un item sélectionné ──
-  const placeSelected = useCallback(
-    (action: 'pool' | string) => {
-      if (!selectedKey) return;
-      if (action === 'pool') setTiers((prev) => removeKey(prev, selectedKey));
-      else setTiers((prev) => placeKey(prev, selectedKey, action, null));
-      setSelectedKey(null);
-    },
-    [selectedKey],
-  );
-  const tapZone = useCallback(
-    (e: React.MouseEvent, action: 'pool' | string) => {
-      if ((e.target as HTMLElement).closest('[data-item-key]')) return; // géré par l'item
-      placeSelected(action);
-    },
-    [placeSelected],
-  );
-  // Le même placement au CLAVIER : les zones ne peuvent pas être des boutons
-  // (elles contiennent les items, eux-mêmes boutons), d'où un bouton dédié par
-  // zone, rendu tant qu'un item est sélectionné et visible au seul focus. Le
-  // focus suit ensuite l'item placé — sans quoi il retomberait sur `<body>`.
-  const placeByKeyboard = (e: React.MouseEvent, action: 'pool' | string) => {
-    e.stopPropagation();
-    const key = selectedKey;
-    placeSelected(action);
-    if (key)
-      requestAnimationFrame(() =>
-        document.querySelector<HTMLElement>(`[data-item-key="${CSS.escape(key)}"]`)?.focus(),
-      );
-  };
-  // Sélection au clavier : le focus saute au premier bouton de placement (le
-  // tier du haut) — ils précèdent le pool dans l'ordre du DOM, Tab depuis un item
-  // du pool ne les atteindrait jamais. Désélection : plus de bouton, rien ne bouge.
-  const keySelect = useCallback(
-    (key: string) => {
-      handleTap(key);
-      requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-place]')?.focus());
-    },
-    [handleTap],
-  );
-  const placeBtnClass =
-    'sr-only focus:not-sr-only focus:rounded focus:bg-amber-400 focus:px-2 focus:py-1 focus:text-xs focus:font-semibold focus:text-[#1a1a1a]';
 
   // ── Opérations sur les lignes ──
   const updateTier = (id: string, patch: Partial<Tier>) =>
@@ -1159,313 +251,8 @@ export function TierListMakerBrowser({
     if (!(await copy(url))) window.prompt('', url);
   };
 
-  // ── Export PNG (reflète les réglages d'affichage à l'écran) ──
-  const exportPng = useCallback(async () => {
-    // Géométrie : vignette carrée sans cartes, cadre du jeu sinon — le RATIO DU
-    // PREFAB (180×344), pas le 120×231 que cet export supposait.
-    const ICON = { s: 56, m: 76, l: 100 }[iconSize];
-    const CARD_W = CARD_PX[cardSize];
-    const cellW = showCards ? CARD_W : ICON;
-    const cellH = showCards ? Math.round(portraitHeight(CARD_W)) : ICON;
-    const PER_ROW = 12,
-      PAD = 20,
-      LABEL_W = 110;
-    const LABEL_PAD = 8,
-      LINE_H = 24,
-      LABEL_FONT = '700 20px system-ui, sans-serif';
-    const NAME_PX = Math.max(10, Math.round(cellW * 0.16));
-    const NAME_LH = NAME_PX + 2;
-    const NAME_FONT = `500 ${NAME_PX}px system-ui, sans-serif`;
-
-    const load = (src: string) =>
-      new Promise<HTMLImageElement | null>((resolve) => {
-        const im = new Image();
-        im.crossOrigin = 'anonymous'; // canvas propre pour toBlob (assets R2)
-        im.onload = () => resolve(im);
-        im.onerror = () => resolve(null);
-        im.src = src;
-      });
-
-    /**
-     * L'ÉTAT DE PORTRAIT d'un item, dérivé UNE FOIS des réglages — la même valeur
-     * sert à lister les images à précharger et à les peindre. Deux dérivations
-     * séparées, c'était la panne naturelle de cet export : un calque dessiné sans
-     * avoir été chargé ne peint rien, en silence.
-     */
-    const paintOf = (it: TierItem): PortraitPaint => ({
-      id: it.cardId!,
-      name: labelFor(it),
-      prefix: it.prefix,
-      rarity: it.rarity ?? 1,
-      element: showElement ? it.element : undefined,
-      cls: showClass ? it.cls : undefined,
-      hideName: !showNames,
-      hideStars: !showRarity,
-    });
-    const isCardItem = (it: TierItem) => !!(showCards && it.cardId);
-
-    // Toutes les URLs : vignettes + les overlays que les réglages demandent.
-    const urls = new Set<string>();
-    for (const tr of tiers)
-      for (const k of tr.items) {
-        const it = itemMap.get(k);
-        if (!it) continue;
-        if (isCardItem(it)) {
-          for (const u of portraitSources(paintOf(it))) urls.add(u);
-          if (showCardTags) {
-            const b = recruitBadge(it.tags);
-            if (b) urls.add(b);
-          }
-          continue;
-        }
-        urls.add(it.img);
-        if (showElement && it.element) urls.add(img.element(it.element));
-        if (showClass && it.cls) urls.add(img.klass(it.cls));
-        if (showRarity) urls.add(img.star());
-      }
-    const loaded = new Map<string, HTMLImageElement>();
-    await Promise.all(
-      [...urls].map(async (u) => {
-        const im = await load(u);
-        if (im) loaded.set(u, im);
-      }),
-    );
-    // Les polices du jeu : le canvas ne résout pas une variable CSS, et
-    // `next/font` en `preload: false` n'a rien téléchargé tant qu'aucun portrait
-    // n'a été peint à l'écran (cf. `resolvePortraitFonts`).
-    const gameFonts = showCards ? await resolvePortraitFonts() : null;
-
-    const canvas = document.createElement('canvas');
-    // willReadFrequently force un canvas CPU : readback plus rapide, et
-    // contourne les drivers GPU cassés qui rendent une image vide.
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
-
-    // Pré-wrap des noms : la hauteur d'une ligne de tier s'adapte au plus long.
-    // Deux lignes possibles sous une cellule — nom du PERSO (toggle « noms »)
-    // et nom du COSTUME (toggle « noms de skin ») — même règle que l'écran,
-    // tuiles comme cartes.
-    //
-    // Une carte n'écrit PAS son nom dessous : le portrait le porte DANS le cadre,
-    // avec son titre, exactement comme à l'écran. Le nom du costume, lui, reste en
-    // dessous dans les deux modes — le jeu n'a pas de champ pour lui.
-    ctx.font = NAME_FONT;
-    const baseNameLines = new Map<string, string[]>();
-    const skinNameLines = new Map<string, string[]>();
-    for (const tr of tiers)
-      for (const k of tr.items) {
-        const it = itemMap.get(k);
-        if (!it) continue;
-        if (showNames && !isCardItem(it))
-          baseNameLines.set(k, wrapLabel(ctx, shortFor(it) ?? labelFor(it), cellW - 2));
-        if (it.isSkin && showSkinNames)
-          skinNameLines.set(k, wrapLabel(ctx, it.short ?? it.label, cellW - 2));
-      }
-    const cellTotalH = tiers.map((tr) => {
-      const maxBase = Math.max(0, ...tr.items.map((k) => baseNameLines.get(k)?.length ?? 0));
-      const maxSkin = Math.max(0, ...tr.items.map((k) => skinNameLines.get(k)?.length ?? 0));
-      const extra = maxBase || maxSkin ? (maxBase + maxSkin) * NAME_LH + 4 : 0;
-      return cellH + extra;
-    });
-
-    ctx.font = LABEL_FONT;
-    const labelLines = tiers.map((tr) => wrapLabel(ctx, tr.label, LABEL_W - LABEL_PAD * 2));
-    const rowHeights = tiers.map((tr, i) => {
-      const itemsH = Math.max(1, Math.ceil(tr.items.length / PER_ROW)) * cellTotalH[i];
-      const labelH = labelLines[i].length * LINE_H + LABEL_PAD * 2;
-      return Math.max(itemsH, labelH);
-    });
-
-    const titleH = title.trim() ? 56 : 0;
-    const contentW = LABEL_W + PER_ROW * cellW;
-    const footerH = 30;
-    const width = PAD * 2 + contentW;
-    const height = PAD * 2 + titleH + rowHeights.reduce((a, b) => a + b, 0) + footerH;
-
-    // Netteté sans dépasser la taille max d'un canvas (export silencieusement
-    // vide au-delà).
-    const MAX_SIDE = 8192;
-    let scale = Math.min(window.devicePixelRatio || 1, 2);
-    scale = Math.max(0.5, Math.min(scale, MAX_SIDE / width, MAX_SIDE / height));
-    canvas.width = Math.floor(width * scale);
-    canvas.height = Math.floor(height * scale);
-    ctx.scale(scale, scale);
-
-    ctx.fillStyle = '#0b1120';
-    ctx.fillRect(0, 0, width, height);
-
-    const drawCover = (im: HTMLImageElement, dx: number, dy: number, dw: number, dh: number) => {
-      const sc = Math.max(dw / im.width, dh / im.height);
-      const sw = dw / sc,
-        sh = dh / sc;
-      ctx.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, dx, dy, dw, dh);
-    };
-    const drawContain = (im: HTMLImageElement, dx: number, dy: number, d: number) => {
-      const k = Math.min(d / im.width, d / im.height);
-      const w = im.width * k,
-        h = im.height * k;
-      ctx.drawImage(im, dx + (d - w) / 2, dy + (d - h) / 2, w, h);
-    };
-    /** Les lignes de nom SOUS une cellule — nom du perso puis nom du costume. */
-    const drawNamesBelow = (key: string, cellX: number, cellY: number) => {
-      ctx.font = NAME_FONT;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      let ty = cellY + cellH + 2;
-      const bn = baseNameLines.get(key) ?? [];
-      if (bn.length) {
-        ctx.fillStyle = '#d4d4d8';
-        bn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
-        ty += bn.length * NAME_LH;
-      }
-      const sn = skinNameLines.get(key) ?? [];
-      if (sn.length) {
-        ctx.fillStyle = '#a1a1aa';
-        sn.forEach((ln, i) => ctx.fillText(ln, cellX + cellW / 2, ty + i * NAME_LH));
-      }
-    };
-
-    let y = PAD;
-    if (titleH) {
-      ctx.fillStyle = '#fafafa';
-      ctx.font = '700 30px system-ui, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(title.trim(), width / 2, y + titleH / 2);
-      y += titleH;
-    }
-
-    tiers.forEach((tr, ti) => {
-      const rh = rowHeights[ti];
-      // Cellule de label — wrap, centrée verticalement
-      ctx.fillStyle = tr.color;
-      ctx.fillRect(PAD, y, LABEL_W, rh);
-      ctx.fillStyle = '#1a1a1a';
-      ctx.font = LABEL_FONT;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      const lines = labelLines[ti];
-      const startY = y + (rh - lines.length * LINE_H) / 2 + LINE_H / 2;
-      lines.forEach((ln, i) => ctx.fillText(ln, PAD + LABEL_W / 2, startY + i * LINE_H));
-      // Fond de la rangée d'items
-      ctx.fillStyle = '#131c2e';
-      ctx.fillRect(PAD + LABEL_W, y, PER_ROW * cellW, rh);
-      // Items
-      tr.items.forEach((k, idx) => {
-        const it = itemMap.get(k);
-        if (!it) return;
-        const isCard = isCardItem(it);
-        const cellX = PAD + LABEL_W + (idx % PER_ROW) * cellW;
-        const cellY = y + Math.floor(idx / PER_ROW) * cellTotalH[ti];
-
-        // ── Mode CARTES : le portrait du jeu, peint par le même relevé que le
-        // rendu à l'écran (`portrait-canvas`). Aucune géométrie ici. ──
-        if (isCard) {
-          drawPortrait(
-            ctx,
-            { x: cellX, y: cellY, w: cellW, h: cellH },
-            paintOf(it),
-            loaded,
-            gameFonts,
-          );
-          // Le badge de recrutement PAR-DESSUS — convention du site, pas du
-          // prefab, exactement comme à l'écran.
-          if (showCardTags) {
-            const badgeSrc = recruitBadge(it.tags);
-            const bd = badgeSrc ? loaded.get(badgeSrc) : null;
-            if (bd) {
-              const bw = cellW * 0.6;
-              ctx.drawImage(bd, cellX, cellY, bw, (bw * bd.height) / bd.width);
-            }
-          }
-          drawNamesBelow(k, cellX, cellY);
-          return;
-        }
-
-        // ── Mode VIGNETTES : inchangé (la vignette carrée reste à porter). ──
-        const im = loaded.get(it.img);
-        if (!im) return;
-        const pad = 3;
-        const boxW = cellW - pad * 2;
-        const boxH = cellH - pad * 2;
-        const bx = cellX + pad,
-          by = cellY + pad;
-        ctx.save();
-        ctx.beginPath();
-        ctx.roundRect(bx, by, boxW, boxH, 6);
-        ctx.clip();
-        drawCover(im, bx, by, boxW, boxH);
-        ctx.restore();
-        {
-          if (showElement && it.element) {
-            const el = loaded.get(img.element(it.element));
-            if (el) {
-              const s = boxW * 0.4;
-              drawContain(el, bx + boxW - s, by, s);
-            }
-          }
-          if (showClass && it.cls) {
-            const cl = loaded.get(img.klass(it.cls));
-            if (cl) {
-              const s = boxW * 0.28;
-              drawContain(cl, bx + boxW - s, by + boxW * 0.4, s);
-            }
-          }
-          if (showRarity && it.rarity) {
-            const star = loaded.get(img.star());
-            if (star) {
-              const s = boxW * 0.2;
-              let sx = bx + (boxW - it.rarity * s) / 2;
-              const sy = by + boxW - s - 2;
-              for (let r = 0; r < it.rarity; r++) {
-                drawContain(star, sx, sy, s);
-                sx += s;
-              }
-            }
-          }
-        }
-        drawNamesBelow(k, cellX, cellY);
-      });
-      y += rh;
-    });
-
-    ctx.fillStyle = '#71717a';
-    ctx.font = '500 15px system-ui, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('outerpedia.com', width - PAD, y + footerH / 2);
-
-    // Garde-fou : readback vide (canvas GPU cassé, navigateur anti-empreinte
-    // qui neutralise le canvas, image R2 sans CORS) → message clair plutôt
-    // qu'un PNG vide téléchargé en silence.
-    try {
-      if (ctx.getImageData(5, 5, 1, 1).data[3] === 0) {
-        window.alert(L.exportBlocked);
-        return;
-      }
-    } catch {
-      window.alert(L.exportBlocked);
-      return;
-    }
-
-    try {
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          window.alert(L.exportBlocked);
-          return;
-        }
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${safeFileStem(title)}.png`;
-        a.click();
-        URL.revokeObjectURL(url);
-      }, 'image/png');
-    } catch {
-      // un canvas « taint » jette ici — le dire plutôt que d'échouer muet
-      window.alert(L.exportBlocked);
-    }
-  }, [
+  // ── Export PNG (reflète les réglages d'affichage à l'écran) : dans useExportPng ──
+  const exportPng = useExportPng({
     tiers,
     title,
     itemMap,
@@ -1480,8 +267,8 @@ export function TierListMakerBrowser({
     showSkinNames,
     labelFor,
     shortFor,
-    L.exportBlocked,
-  ]);
+    labels: L,
+  });
 
   // ── Rendu ──
   // Compte les persos de BASE — les costumes sont un extra opt-in masqué par défaut.
@@ -1495,142 +282,19 @@ export function TierListMakerBrowser({
   return (
     <div className="mx-auto max-w-7xl">
       {/* Titre + barre d'outils */}
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder={L.titlePlaceholder}
-          maxLength={100}
-          className="border-line bg-surface-raised/60 text-content-strong placeholder-content-subtle w-full rounded-lg border px-3 py-2 text-lg font-semibold focus:border-sky-500 focus:outline-none sm:max-w-sm"
-        />
-        <div className="flex flex-wrap gap-2">
-          <ToolbarButton onClick={copyLink} icon={copied ? <FaCheck /> : <FaLink />}>
-            {copied ? L.copied : L.share}
-          </ToolbarButton>
-          <ToolbarButton onClick={exportPng} icon={<FaImage />}>
-            {L.exportPng}
-          </ToolbarButton>
-          <div className="relative">
-            <ToolbarButton onClick={() => setShowSettings((v) => !v)} icon={<FaGear />}>
-              {L.settings}
-            </ToolbarButton>
-            {showSettings && (
-              <>
-                <div className="fixed inset-0 z-40" onClick={() => setShowSettings(false)} />
-                <div className="border-line bg-surface-raised absolute right-0 z-50 mt-2 w-60 rounded-lg border p-3 text-sm shadow-xl">
-                  <p className="text-content-muted mb-1 text-xs tracking-wide uppercase">
-                    {L.iconSize}
-                  </p>
-                  <div className="mb-3 flex gap-1.5">
-                    {(['s', 'm', 'l'] as IconSize[]).map((sz) => (
-                      <button
-                        key={sz}
-                        type="button"
-                        onClick={() => patchSettings({ iconSize: sz })}
-                        className={[
-                          'flex-1 rounded px-2 py-1 text-xs font-medium transition',
-                          iconSize === sz
-                            ? 'bg-accent text-accent-fg'
-                            : 'bg-surface-overlay text-content-muted hover:bg-surface-overlay/70',
-                        ].join(' ')}
-                      >
-                        {L.sizes[sz]}
-                      </button>
-                    ))}
-                  </div>
-                  <SettingRow
-                    label={L.showNames}
-                    checked={showNames}
-                    onChange={(v) => patchSettings({ showNames: v })}
-                  />
-                  <SettingRow
-                    label={L.showElement}
-                    checked={showElement}
-                    onChange={(v) => patchSettings({ showElement: v })}
-                  />
-                  <SettingRow
-                    label={L.showClass}
-                    checked={showClass}
-                    onChange={(v) => patchSettings({ showClass: v })}
-                  />
-                  <SettingRow
-                    label={L.showRarity}
-                    checked={showRarity}
-                    onChange={(v) => patchSettings({ showRarity: v })}
-                  />
-                  <div className="border-line/60 mt-2 border-t pt-2">
-                    <SettingRow
-                      label={L.showSkins}
-                      checked={showSkins}
-                      onChange={(v) => patchSettings({ showSkins: v })}
-                    />
-                    <SettingRow
-                      label={L.showSkinNames}
-                      checked={showSkinNames}
-                      onChange={(v) => patchSettings({ showSkinNames: v })}
-                    />
-                  </div>
-                  <div className="border-line/60 mt-2 border-t pt-2">
-                    <SettingRow
-                      label={L.showCards}
-                      checked={showCards}
-                      onChange={(v) => patchSettings({ showCards: v })}
-                    />
-                    {showCards && (
-                      <>
-                        <p className="text-content-muted mb-1 text-xs tracking-wide uppercase">
-                          {L.cardSize}
-                        </p>
-                        <div className="mb-3 flex gap-1.5">
-                          {(['s', 'm', 'l'] as IconSize[]).map((sz) => (
-                            <button
-                              key={sz}
-                              type="button"
-                              onClick={() => patchSettings({ cardSize: sz })}
-                              className={[
-                                'flex-1 rounded px-2 py-1 text-xs font-medium transition',
-                                cardSize === sz
-                                  ? 'bg-accent text-accent-fg'
-                                  : 'bg-surface-overlay text-content-muted hover:bg-surface-overlay/70',
-                              ].join(' ')}
-                            >
-                              {L.sizes[sz]}
-                            </button>
-                          ))}
-                        </div>
-                        <SettingRow
-                          label={L.showCardTags}
-                          checked={showCardTags}
-                          onChange={(v) => patchSettings({ showCardTags: v })}
-                        />
-                      </>
-                    )}
-                  </div>
-                  <div className="border-line/60 flex gap-2 border-t pt-3">
-                    <button
-                      type="button"
-                      onClick={exportJson}
-                      className="bg-surface-overlay text-content hover:bg-surface-overlay/70 flex flex-1 items-center justify-center gap-1.5 rounded px-2 py-1.5 text-xs"
-                    >
-                      <FaFileExport /> {L.exportJson}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => importInputRef.current?.click()}
-                      className="bg-surface-overlay text-content hover:bg-surface-overlay/70 flex flex-1 items-center justify-center gap-1.5 rounded px-2 py-1.5 text-xs"
-                    >
-                      <FaFileImport /> {L.importJson}
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-          <ToolbarButton onClick={resetAll} icon={<FaArrowRotateLeft />} danger>
-            {L.reset}
-          </ToolbarButton>
-        </div>
-      </div>
+      <Toolbar
+        title={title}
+        setTitle={setTitle}
+        copyLink={copyLink}
+        copied={copied}
+        exportPng={exportPng}
+        settings={settings}
+        patchSettings={patchSettings}
+        exportJson={exportJson}
+        importInputRef={importInputRef}
+        resetAll={resetAll}
+        labels={L}
+      />
 
       <input
         ref={importInputRef}
@@ -1649,378 +313,78 @@ export function TierListMakerBrowser({
       <div className="lg:flex lg:items-start lg:gap-4">
         <div className="lg:min-w-0 lg:flex-1">
           {/* Lignes de tiers */}
-          <div className="border-line overflow-hidden rounded-lg border">
-            {tiers.map((tier, idx) => {
-              const isOver = dropAt?.tierId === tier.id;
-              return (
-                <div
-                  key={tier.id}
-                  data-drop="tier"
-                  data-tier-id={tier.id}
-                  onClick={(e) => tapZone(e, tier.id)}
-                  className={[
-                    'border-line/60 flex border-b transition-colors last:border-b-0',
-                    rowDragActive === tier.id
-                      ? 'relative z-10 ring-2 ring-amber-400 ring-inset'
-                      : '',
-                    isOver
-                      ? 'bg-amber-400/10'
-                      : selectedKey
-                        ? 'hover:bg-surface-overlay/40 cursor-pointer'
-                        : '',
-                  ].join(' ')}
-                >
-                  {/* Cellule de label */}
-                  <div
-                    className="relative flex w-16 shrink-0 items-center justify-center p-1 sm:w-28"
-                    style={{ backgroundColor: tier.color }}
-                  >
-                    <TierLabel
-                      value={tier.label}
-                      onChange={(value) => updateTier(tier.id, { label: value })}
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setColorRow(colorRow === tier.id ? null : tier.id);
-                      }}
-                      title={L.color}
-                      className="absolute right-0.5 bottom-0.5 h-4 w-4 rounded-full border border-[#1a1a1a]/40 bg-[#1a1a1a]/20"
-                    />
-                    {colorRow === tier.id && (
-                      <>
-                        <div
-                          className="fixed inset-0 z-40"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setColorRow(null);
-                          }}
-                        />
-                        <div
-                          className="border-line bg-surface-raised absolute top-full left-1/2 z-50 mt-1 -translate-x-1/2 rounded-lg border p-2 shadow-xl"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <div className="grid grid-cols-6 gap-1">
-                            {TIER_PALETTE.map((c) => (
-                              <button
-                                key={c}
-                                type="button"
-                                onClick={() => {
-                                  updateTier(tier.id, { color: c });
-                                  setColorRow(null);
-                                }}
-                                className="border-line h-6 w-6 rounded border"
-                                style={{ backgroundColor: c }}
-                              />
-                            ))}
-                          </div>
-                          <input
-                            type="color"
-                            value={tier.color}
-                            onChange={(e) => updateTier(tier.id, { color: e.target.value })}
-                            className="mt-2 h-7 w-full cursor-pointer rounded bg-transparent"
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Zone d'items */}
-                  <div
-                    data-items
-                    className="bg-surface-sunken/60 flex min-h-15 flex-1 flex-wrap content-start gap-1 p-1.5"
-                  >
-                    {selectedKey && (
-                      <button
-                        type="button"
-                        data-place
-                        onClick={(e) => placeByKeyboard(e, tier.id)}
-                        className={placeBtnClass}
-                      >
-                        {L.placeInTier.replace('{tier}', tier.label || String(idx + 1))}
-                      </button>
-                    )}
-                    {(() => {
-                      const showMarker = !!drag && dropAt?.tierId === tier.id;
-                      const markerIdx = dropAt?.index ?? -1;
-                      const dragIt = drag ? itemMap.get(drag.key) : undefined;
-                      const useCardForDrag = showCards && !!dragIt?.cardId;
-                      const dragImg = useCardForDrag ? img.portrait(dragIt!.cardId!) : dragIt?.img;
-                      const marker = (
-                        <DropPreview
-                          key="drop-marker"
-                          src={dragImg}
-                          size={useCardForDrag ? cardSize : iconSize}
-                          card={useCardForDrag}
-                        />
-                      );
-                      const nodes: React.ReactNode[] = [];
-                      tier.items.forEach((key, i) => {
-                        if (showMarker && i === markerIdx) nodes.push(marker);
-                        const it = itemMap.get(key);
-                        if (!it) return;
-                        if (showCards && it.cardId) {
-                          nodes.push(
-                            <CardView
-                              key={key}
-                              item={it}
-                              selected={selectedKey === key}
-                              dimmed={drag?.key === key}
-                              /* Carte : nom du perso de base SUR la carte ; le
-                                 nom du costume sous la carte, au toggle
-                                 « noms de skin » — même règle qu'en tuiles. */
-                              label={it.baseLabel ?? it.label}
-                              skinLabel={skinLabelFor(it)}
-                              size={cardSize}
-                              showName={showNames}
-                              showElement={showElement}
-                              showClass={showClass}
-                              showStars={showRarity}
-                              showBadge={showCardTags}
-                              onPointerDown={onItemPointerDown}
-                              onKeySelect={keySelect}
-                            />,
-                          );
-                        } else {
-                          nodes.push(
-                            <ItemView
-                              key={key}
-                              item={it}
-                              selected={selectedKey === key}
-                              dimmed={drag?.key === key}
-                              label={labelFor(it)}
-                              shortLabel={shortFor(it)}
-                              skinLabel={skinLabelFor(it)}
-                              size={iconSize}
-                              showName={showNames}
-                              showElement={showElement}
-                              showClass={showClass}
-                              showRarity={showRarity}
-                              onPointerDown={onItemPointerDown}
-                              onKeySelect={keySelect}
-                            />,
-                          );
-                        }
-                      });
-                      if (showMarker && markerIdx >= tier.items.length) nodes.push(marker);
-                      return nodes;
-                    })()}
-                  </div>
-
-                  {/* Commandes de ligne */}
-                  <div className="border-line/60 bg-surface-sunken/60 flex shrink-0 flex-col items-center justify-center gap-1 border-l px-1.5">
-                    <button
-                      type="button"
-                      onPointerDown={(e) => onRowHandlePointerDown(e, tier.id)}
-                      onClick={(e) => e.stopPropagation()}
-                      title={L.dragRow}
-                      className="text-content-subtle hover:bg-surface-overlay hover:text-content-strong flex h-6 w-6 cursor-grab touch-none items-center justify-center rounded text-sm transition"
-                    >
-                      <FaGripVertical />
-                    </button>
-                    <RowBtn onClick={() => moveRow(idx, -1)} disabled={idx === 0} title={L.moveUp}>
-                      <FaChevronUp />
-                    </RowBtn>
-                    <RowBtn
-                      onClick={() => moveRow(idx, 1)}
-                      disabled={idx === tiers.length - 1}
-                      title={L.moveDown}
-                    >
-                      <FaChevronDown />
-                    </RowBtn>
-                    <RowBtn
-                      onClick={() => clearRow(tier.id)}
-                      disabled={tier.items.length === 0}
-                      title={L.clearRow}
-                    >
-                      <FaXmark />
-                    </RowBtn>
-                    <RowBtn
-                      onClick={() => deleteRow(tier.id)}
-                      disabled={tiers.length <= 1}
-                      title={L.deleteRow}
-                      danger
-                    >
-                      <FaTrash />
-                    </RowBtn>
-                    <RowBtn onClick={() => addRow(idx)} title={L.addRow}>
-                      <FaPlus />
-                    </RowBtn>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <TierRows
+            tiers={tiers}
+            dropAt={dropAt}
+            drag={drag}
+            rowDragActive={rowDragActive}
+            selectedKey={selectedKey}
+            itemMap={itemMap}
+            iconSize={iconSize}
+            showNames={showNames}
+            showElement={showElement}
+            showClass={showClass}
+            showRarity={showRarity}
+            showCards={showCards}
+            cardSize={cardSize}
+            showCardTags={showCardTags}
+            labelFor={labelFor}
+            shortFor={shortFor}
+            skinLabelFor={skinLabelFor}
+            tapZone={tapZone}
+            placeByKeyboard={placeByKeyboard}
+            placeBtnClass={placeBtnClass}
+            onItemPointerDown={onItemPointerDown}
+            keySelect={keySelect}
+            onRowHandlePointerDown={onRowHandlePointerDown}
+            updateTier={updateTier}
+            moveRow={moveRow}
+            clearRow={clearRow}
+            deleteRow={deleteRow}
+            addRow={addRow}
+            labels={L}
+          />
         </div>
 
         {/* Pool — panneau latéral en desktop, empilé en dessous en mobile */}
-        <div className="mt-6 lg:sticky lg:top-4 lg:mt-0 lg:max-h-[calc(100dvh-1.5rem)] lg:w-96 lg:shrink-0 lg:self-start lg:overflow-y-auto">
-          {/* Onglets */}
-          <div className="mb-3 flex flex-wrap justify-center gap-2">
-            {TABS.map(({ id, count }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setTab(id)}
-                className={[
-                  'rounded-lg px-3 py-1.5 text-sm font-medium transition',
-                  tab === id
-                    ? 'bg-accent text-accent-fg'
-                    : 'bg-surface-overlay text-content-muted hover:bg-surface-overlay/70',
-                ].join(' ')}
-              >
-                {L.tabs[id]}
-                <span className="ml-1.5 text-xs opacity-60">{count}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Recherche + filtres */}
-          <SearchField
-            value={rawQuery}
-            onChange={setRawQuery}
-            placeholder={L.search}
-            clearLabel={L.clearSearch}
-          />
-          <div className="mt-2 flex items-center justify-center gap-2">
-            <label className="text-content-muted text-xs">{L.sort}</label>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
-              className="border-line bg-surface-overlay text-content rounded border px-2 py-1 text-xs focus:border-sky-500 focus:outline-none"
-            >
-              {SORT_KEYS.map((k) => (
-                <option key={k} value={k}>
-                  {L.sorts[k]}
-                </option>
-              ))}
-            </select>
-          </div>
-          {tab === 'characters' && (
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
-              <div className="flex gap-1.5">
-                {ELEMENT_ORDER.map((el) => (
-                  <ElementIconPill
-                    key={el}
-                    element={el}
-                    active={elementFilter.includes(el)}
-                    onClick={() =>
-                      setElementFilter((f) =>
-                        f.includes(el) ? f.filter((x) => x !== el) : [...f, el],
-                      )
-                    }
-                    size="sm"
-                    title={L.elementNames[el]}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-1.5">
-                {CLASS_ORDER.map((cl) => (
-                  <ClassIconPill
-                    key={cl}
-                    classType={cl}
-                    active={classFilter.includes(cl)}
-                    onClick={() =>
-                      setClassFilter((f) =>
-                        f.includes(cl) ? f.filter((x) => x !== cl) : [...f, cl],
-                      )
-                    }
-                    size="sm"
-                    title={L.classNames[cl]}
-                  />
-                ))}
-              </div>
-              <div className="flex gap-1.5">
-                {RARITIES.map((r) => (
-                  <StarPill
-                    key={r}
-                    stars={r}
-                    active={rarityFilter.includes(r)}
-                    onClick={() =>
-                      setRarityFilter((f) => (f.includes(r) ? f.filter((x) => x !== r) : [...f, r]))
-                    }
-                    ariaLabel={L.starAria.replace('{rarity}', String(r))}
-                  />
-                ))}
-              </div>
-              <div className="flex flex-wrap justify-center gap-1.5">
-                {FILTER_TAGS.map((tg) => (
-                  <FilterPill
-                    key={tg}
-                    active={tagFilter.includes(tg)}
-                    onClick={() =>
-                      setTagFilter((f) => (f.includes(tg) ? f.filter((x) => x !== tg) : [...f, tg]))
-                    }
-                    className="h-8 px-2"
-                    title={L.tags[tg]}
-                  >
-                    <span className="text-xs leading-none font-medium">{L.tags[tg]}</span>
-                  </FilterPill>
-                ))}
-                <FilterPill
-                  active={skinsOnly}
-                  onClick={() => setSkinsOnly((v) => !v)}
-                  className="h-8 px-2"
-                  title={L.skinsOnly}
-                >
-                  <span className="text-xs leading-none font-medium">{L.skinsOnly}</span>
-                </FilterPill>
-              </div>
-            </div>
-          )}
-
-          {/* Grille du pool (cible de drop pour dé-ranger) */}
-          <div
-            data-drop="pool"
-            onClick={(e) => tapZone(e, 'pool')}
-            className="border-line bg-surface-sunken/40 mt-4 flex min-h-20 flex-wrap content-start justify-center gap-1.5 rounded-lg border border-dashed p-3"
-          >
-            {selectedKey && (
-              <button
-                type="button"
-                data-place
-                onClick={(e) => placeByKeyboard(e, 'pool')}
-                className={placeBtnClass}
-              >
-                {L.placeInPool}
-              </button>
-            )}
-            {poolItems.length === 0 ? (
-              <p className="text-content-subtle py-6 text-sm">
-                {placed.size > 0 &&
-                query.trim() === '' &&
-                elementFilter.length === 0 &&
-                classFilter.length === 0 &&
-                rarityFilter.length === 0 &&
-                tagFilter.length === 0 &&
-                !skinsOnly
-                  ? L.emptyPool
-                  : L.noResults}
-              </p>
-            ) : (
-              poolItems.map((it) => (
-                <ItemView
-                  key={it.key}
-                  item={it}
-                  selected={selectedKey === it.key}
-                  dimmed={drag?.key === it.key}
-                  label={labelFor(it)}
-                  shortLabel={shortFor(it)}
-                  skinLabel={skinLabelFor(it)}
-                  size={iconSize}
-                  showName={showNames}
-                  showElement={showElement}
-                  showClass={showClass}
-                  showRarity={showRarity}
-                  onPointerDown={onItemPointerDown}
-                  onKeySelect={keySelect}
-                />
-              ))
-            )}
-          </div>
-        </div>
+        <PoolPanel
+          TABS={TABS}
+          tab={tab}
+          setTab={setTab}
+          rawQuery={rawQuery}
+          setRawQuery={setRawQuery}
+          query={query}
+          sort={sort}
+          setSort={setSort}
+          elementFilter={elementFilter}
+          setElementFilter={setElementFilter}
+          classFilter={classFilter}
+          setClassFilter={setClassFilter}
+          rarityFilter={rarityFilter}
+          setRarityFilter={setRarityFilter}
+          tagFilter={tagFilter}
+          setTagFilter={setTagFilter}
+          skinsOnly={skinsOnly}
+          setSkinsOnly={setSkinsOnly}
+          placed={placed}
+          poolItems={poolItems}
+          selectedKey={selectedKey}
+          drag={drag}
+          iconSize={iconSize}
+          showNames={showNames}
+          showElement={showElement}
+          showClass={showClass}
+          showRarity={showRarity}
+          labelFor={labelFor}
+          shortFor={shortFor}
+          skinLabelFor={skinLabelFor}
+          tapZone={tapZone}
+          placeByKeyboard={placeByKeyboard}
+          placeBtnClass={placeBtnClass}
+          onItemPointerDown={onItemPointerDown}
+          keySelect={keySelect}
+          labels={L}
+        />
       </div>
 
       {/* Fantôme de drag */}
@@ -2040,104 +404,5 @@ export function TierListMakerBrowser({
         </div>
       )}
     </div>
-  );
-}
-
-// ── Petites briques UI ──
-
-function SettingRow({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: (value: boolean) => void;
-}) {
-  return (
-    <label className="mb-2 flex cursor-pointer items-center justify-between">
-      <span className="text-content">{label}</span>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="size-4 accent-sky-500"
-      />
-    </label>
-  );
-}
-
-function ToolbarButton({
-  onClick,
-  icon,
-  children,
-  danger,
-}: {
-  onClick: () => void;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-  danger?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={[
-        'inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition',
-        danger
-          ? 'bg-danger-deep/40 hover:bg-danger-deep/70 text-red-200'
-          : 'bg-surface-overlay text-content hover:bg-surface-overlay/70',
-      ].join(' ')}
-    >
-      {icon}
-      {children}
-    </button>
-  );
-}
-
-/**
- * Bouton de commande de ligne — inactivé par `aria-disabled`, JAMAIS par
- * l'attribut `disabled` : Firefox RESTAURE l'état des contrôles de formulaire
- * au rechargement (F5), donc un bouton que le JS avait activé après coup (une
- * ligne remplie par le `?z=` de l'URL) revient activé AVANT l'hydratation —
- * React voit un DOM qui ne correspond plus à son rendu et crie au mismatch.
- * Rien à restaurer ici : l'attribut ne bouge plus, la garde est dans le
- * `onClick` (le `stopPropagation` reste inconditionnel, sinon un clic sur un
- * bouton inactif retomberait sur le `onClick` de la ligne).
- */
-function RowBtn({
-  onClick,
-  disabled,
-  title,
-  children,
-  danger,
-}: {
-  onClick: () => void;
-  disabled?: boolean;
-  title: string;
-  children: React.ReactNode;
-  danger?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        if (disabled) return;
-        onClick();
-      }}
-      aria-disabled={!!disabled}
-      title={title}
-      className={[
-        'flex h-6 w-6 items-center justify-center rounded text-sm transition',
-        disabled
-          ? 'text-content-subtle/40 cursor-not-allowed'
-          : danger
-            ? 'text-danger hover:bg-danger-deep/40'
-            : 'text-content-muted hover:bg-surface-overlay hover:text-content-strong',
-      ].join(' ')}
-    >
-      {children}
-    </button>
   );
 }
