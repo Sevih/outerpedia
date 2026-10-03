@@ -486,6 +486,43 @@ export default function TokensGallery() {
             texte de callout), <code>-faint</code> (-100), <code>-deep</code> (-500, anneaux
             PvE/PvP), purple/pink.
           </p>
+          {/* Hors EDITORIAL_ACCENT : les teintes et crans du corps des guides. */}
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
+            {[
+              '--color-ed-blue',
+              '--color-ed-green',
+              '--color-ed-orange',
+              '--color-ed-purple',
+              '--color-ed-red',
+              '--color-ed-yellow',
+              '--color-ed-cyan-soft',
+              '--color-ed-rose-soft',
+              '--color-ed-amber-fg',
+              '--color-ed-emerald-fg',
+              '--color-ed-sky-fg',
+              '--color-ed-violet-fg',
+              '--color-ed-yellow-fg',
+              '--color-ed-pink-fg',
+              '--color-ed-amber-deep',
+              '--color-ed-emerald-deep',
+              '--color-ed-blue-deep',
+              '--color-ed-green-deep',
+              '--color-ed-yellow-deep',
+              '--color-ed-blue-solid',
+              '--color-ed-green-solid',
+              '--color-ed-purple-solid',
+              '--color-ed-pink-dim',
+              '--color-ed-pink-shade',
+              '--color-ed-red-shade',
+            ].map((t) => (
+              <TokenTag key={t} v={t} />
+            ))}
+          </div>
+          <p className="text-content-subtle text-3xs mt-2">
+            Corps des guides : teintes hors palette (blue, green, orange, purple, red, yellow) et
+            crans <code>-fg</code> (-300), <code>-solid</code> (-600, aplat de bouton),{' '}
+            <code>-dim</code> (-700), <code>-shade</code> (-900).
+          </p>
         </section>
       </div>
     </div>

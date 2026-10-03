@@ -131,7 +131,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
       <h4 className="border-line-subtle text-content-strong mb-3 border-b pb-2 text-lg font-semibold">
         {lRec(data.month, lang)}
         {data.highlights.length > 0 && (
-          <span className="ml-2 text-sm text-yellow-400">
+          <span className="text-ed-yellow ml-2 text-sm">
             ({data.highlights.map((h) => lRec(h, lang)).join(', ')})
           </span>
         )}
@@ -140,7 +140,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
         {data.newCharacters && data.newCharacters.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelNewCharacters, lang)} </span>
-            <span className="font-semibold text-purple-400">
+            <span className="text-ed-purple font-semibold">
               {data.newCharacters.map((c) => lRec(c, lang)).join(', ')}
             </span>
           </div>
@@ -148,7 +148,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
         {data.coreFusions && data.coreFusions.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelCoreFusion, lang)} </span>
-            <span className="font-semibold text-pink-400">{data.coreFusions.join(', ')}</span>
+            <span className="text-ed-pink font-semibold">{data.coreFusions.join(', ')}</span>
           </div>
         )}
         {data.story && data.story.length > 0 && (

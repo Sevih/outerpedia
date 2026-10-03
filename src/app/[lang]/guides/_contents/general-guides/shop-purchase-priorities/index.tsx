@@ -38,9 +38,9 @@ const WHERE = 'shop-purchase-priorities';
 type Priority = 'S' | 'A' | 'B' | 'C';
 const PRIORITY_RANK: Record<Priority, number> = { S: 0, A: 1, B: 2, C: 3 };
 const PRIORITY_BADGE: Record<Priority, string> = {
-  S: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/40',
-  A: 'bg-ed-sky-deep/15 text-sky-300 ring-ed-sky-deep/40',
-  B: 'bg-amber-500/15 text-amber-300 ring-amber-500/40',
+  S: 'bg-ed-emerald-deep/15 text-ed-emerald-fg ring-ed-emerald-deep/40',
+  A: 'bg-ed-sky-deep/15 text-ed-sky-fg ring-ed-sky-deep/40',
+  B: 'bg-ed-amber-deep/15 text-ed-amber-fg ring-ed-amber-deep/40',
   C: 'bg-surface-sunken text-content-subtle ring-line-subtle',
 };
 const PERIOD_ABBR: Record<ShopPeriod, keyof typeof LABELS> = {

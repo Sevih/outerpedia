@@ -61,7 +61,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
       <h4 className="border-line-subtle text-content-strong mb-3 border-b pb-2 text-lg font-semibold">
         {lRec(data.month, lang)}
         {data.highlights.length > 0 && (
-          <span className="ml-2 text-sm text-yellow-400">
+          <span className="text-ed-yellow ml-2 text-sm">
             ({data.highlights.map((h) => lRec(h, lang)).join(', ')})
           </span>
         )}
@@ -70,7 +70,7 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
         {data.newCharacters && data.newCharacters.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelNewCharacters, lang)} </span>
-            <span className="font-semibold text-purple-400">
+            <span className="text-ed-purple font-semibold">
               {data.newCharacters.map((c) => lRec(c, lang)).join(', ')}
             </span>
           </div>
@@ -78,13 +78,13 @@ function MonthCard({ data, lang }: { data: MonthlyUpdate; lang: Lang }) {
         {data.coreFusions && data.coreFusions.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelCoreFusion, lang)} </span>
-            <span className="font-semibold text-pink-400">{data.coreFusions.join(', ')}</span>
+            <span className="text-ed-pink font-semibold">{data.coreFusions.join(', ')}</span>
           </div>
         )}
         {data.balance && data.balance.length > 0 && (
           <div>
             <span className="text-content-muted">{lRec(LABELS.labelBalance, lang)} </span>
-            <span className="text-orange-400">
+            <span className="text-ed-orange">
               {data.balance.map((b) => lRec(b, lang)).join(', ')}
             </span>
           </div>
@@ -126,12 +126,12 @@ function NewCharacterCard({
           <ul className="text-content-subtle space-y-1 text-xs">
             {pveText && (
               <li>
-                <span className="text-green-400">PVE:</span> {pveText}
+                <span className="text-ed-green">PVE:</span> {pveText}
               </li>
             )}
             {pvpText && (
               <li>
-                <span className="text-red-400">PVP:</span> {pvpText}
+                <span className="text-ed-red">PVP:</span> {pvpText}
               </li>
             )}
           </ul>
@@ -285,7 +285,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
             </ul>
           </div>
           <div className="border-line-subtle bg-surface-raised rounded-lg border p-4">
-            <h4 className="mb-2 font-semibold text-yellow-400">{L('mastersLeague')}</h4>
+            <h4 className="text-ed-yellow mb-2 font-semibold">{L('mastersLeague')}</h4>
             <ul className="text-content-muted space-y-1 text-sm">
               {MASTERS_LEAGUE_RULES.map((r, i) => (
                 <li key={i}>• {lRec(r, lang)}</li>
@@ -308,7 +308,7 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
         <ul className="text-content list-disc space-y-2 pl-6">
           {DEMIURGE_LIMITED_PLANS.map((plan, i) => (
             <li key={i}>
-              <span className="font-semibold text-yellow-400">{lRec(plan.label, lang)}</span>{' '}
+              <span className="text-ed-yellow font-semibold">{lRec(plan.label, lang)}</span>{' '}
               {lRec(plan.text, lang)}
             </li>
           ))}
@@ -317,8 +317,8 @@ export default async function Roadmap2026Guide({ lang }: GuideContentProps) {
 
       <section>
         <h2 className="mb-3 text-xl font-semibold">{L('coupon')}</h2>
-        <div className="rounded-lg border border-pink-700/50 bg-linear-to-r from-pink-900/30 to-red-900/30 p-4">
-          <p className="mb-2 font-mono text-2xl font-bold text-pink-300">{COUPON_DATA.code}</p>
+        <div className="border-ed-pink-dim/50 from-ed-pink-shade/30 to-ed-red-shade/30 rounded-lg border bg-linear-to-r p-4">
+          <p className="text-ed-pink-fg mb-2 font-mono text-2xl font-bold">{COUPON_DATA.code}</p>
           <ul className="text-content-muted text-sm">
             {COUPON_DATA.rewards.map((r, i) => (
               <li key={i}>• {lRec(r, lang)}</li>

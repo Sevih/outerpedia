@@ -170,8 +170,8 @@ function CategoryTable({
                           <span
                             className={`text-2xs mr-1.5 rounded border px-1 py-px align-middle ${
                               r.mode === 'story'
-                                ? 'border-yellow-500/40 bg-yellow-500/10 text-yellow-300'
-                                : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+                                ? 'border-ed-yellow-deep/40 bg-ed-yellow-deep/10 text-ed-yellow-fg'
+                                : 'border-ed-emerald-deep/40 bg-ed-emerald-deep/10 text-ed-emerald-fg'
                             }`}
                           >
                             {lRec(r.mode === 'story' ? LABELS.modeStory : LABELS.modeOrigin, lang)}

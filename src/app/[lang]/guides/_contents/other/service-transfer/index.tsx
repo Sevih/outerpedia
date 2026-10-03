@@ -58,8 +58,8 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
     <>
       {/* Héro */}
       <section className="border-line-subtle from-surface-raised/60 via-surface-raised to-surface-raised/60 relative mb-8 overflow-hidden rounded-xl border bg-linear-to-br p-6 md:p-8">
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl" />
+        <div className="bg-ed-blue-deep/10 absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl" />
+        <div className="bg-ed-amber-deep/10 absolute -bottom-24 -left-24 h-64 w-64 rounded-full blur-3xl" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight md:text-3xl">{s('heroTitle')}</h2>
           <p className="text-content-muted mt-2">{s('heroSubtitle')}</p>
@@ -91,7 +91,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
               {steps.map((step, idx) => (
                 <li key={idx}>
                   <div className="border-line-subtle bg-surface-raised flex items-start gap-3 rounded-lg border p-3">
-                    <div className="text-content-strong flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold">
+                    <div className="text-content-strong bg-ed-blue-solid flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-bold">
                       {idx + 1}
                     </div>
                     <p className="text-content">{step}</p>
@@ -140,7 +140,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
           <section id="recovery">
             <h2 className="mb-3 text-xl font-semibold">{s('recoveryTitle')}</h2>
             <div className="text-content space-y-3 text-sm">
-              <div className="rounded-lg border border-blue-600/40 bg-blue-600/10 p-4">
+              <div className="border-ed-blue-solid/40 bg-ed-blue-solid/10 rounded-lg border p-4">
                 <p className="font-semibold">{s('recoveryStep1Title')}</p>
                 <p>{rich(s('recoveryStep1Text'))}</p>
                 <p className="text-content-muted mt-1">{s('recoveryStep1Note')}</p>
@@ -209,7 +209,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
             </ul>
           </div>
 
-          <div className="rounded-lg border border-blue-600/40 bg-blue-600/10 p-4">
+          <div className="border-ed-blue-solid/40 bg-ed-blue-solid/10 rounded-lg border p-4">
             <h4 className="mb-2 font-semibold">{s('officialTitle')}</h4>
             <div className="space-y-3">
               {OFFICIAL_LINKS.map(({ key, href }) => (
@@ -218,7 +218,7 @@ export default function ServiceTransferGuide({ lang }: GuideContentProps) {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-content-strong inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold transition hover:bg-blue-500"
+                  className="text-content-strong bg-ed-blue-solid hover:bg-ed-blue-deep inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold transition"
                 >
                   {s(key)}
                 </a>

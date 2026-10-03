@@ -96,22 +96,12 @@
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-- [ ] **Balises inline qui divergent entre langues** (lot A22 ; relevé du
-      03/10, à la relecture de B11/A21) : 25 blocs où `jp`/`kr`/`zh` ne portent pas les
-      mêmes balises que `en` — le plus souvent l'anglais qui écrit un nom en
-      clair là où les trois autres le balisent (`{P/Ember}`, `{E/Earth}`…).
-      Rien de cassé au rendu, mais le lecteur anglais perd le chip. 10 blocs
-      dans `guild-raid/frost-legion` (`2026-09` et `2025-11`), 2 dans
-      `data/curated/characters.json`, le reste par un dans les guides.
-      Baliser l'anglais (et `fr`/`es` s'ils suivent l'anglais), puis poser un
-      test de parité des balises : aucun ne l'attrape aujourd'hui.
 
 ### Au fil de l'eau (G26–G52 et dette — en passant sur les fichiers)
 
 - [ ] **Dette** (rapport § Dette) — les lots du 25/09 et du 03/10 ont soldé
       tout ce qui était découpé (cf. DONE). Reste : (1) la cinquième modale,
-      celle de `damage-calculator/ui.tsx`, à passer sur `components/ui/Modal`
-      (lot A23) ;
+      celle de `damage-calculator/ui.tsx` : FAIT (lot A23, cf. DONE) ;
       (2) `stripBrackets`/`stripDecoBrackets` et
       `advOf` recopiés dans `encounters.ts` (lot A25) ; (3) « persos
       intégrés » lu à quatre endroits avec quatre comportements d'erreur :
@@ -121,17 +111,14 @@
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
-- [ ] **Couleurs Tailwind brutes des guides (H6)** : 96 occurrences SANS
-      token de même valeur (les 56 qui en avaient un sont passées, lot B5) —
-      décision Sevih 03/10 : on CRÉE les tokens, lot B12. Familles :
-      `blue-*` (how-to-play, roadmap), `amber-500`/`emerald-500`
-      (fonds et anneaux de pastilles), `green-*`, `yellow-*`, `red-*`,
-      `purple-400/500/600/700/900` (dont les accents d'ÉLÉMENT de
-      `roadmap-2026/data.ts`), nuances -200/-300 sans `-soft`
-      (`sky-300`, `emerald-300`, `amber-300`, `rose-200`, `cyan-200`…). SVG :
-      `MonadGateMap` (`#facc15`/`#fde047` = yellow-400/300) et
-      `TowerCombatRoster` (`rgb(239 68 68)` = red-500) n'ont pas de token ;
-      `BannerTabs`/`AdventureGrid` n'ont que du noir (ombre, dégradé).
+- [ ] **Couleurs Tailwind brutes des guides (H6) : FAIT** pour le corps des
+      guides (lots B5 puis B12, 25 tokens `ed-*` créés). Reste, laissé exprès
+      et à trancher : les 18 classes du champ `accent` des cartes personnage
+      (`roadmap-2026/data.ts`, `roadmap-2026-h2/data.ts`) — accents d'ÉLÉMENT
+      en -700/-900/-300 sans token d'élément de même valeur, plus l'accent
+      `sky` de Titia (sans élément) ; et les SVG `MonadGateMap`
+      (`#facc15`/`#fde047`) et `TowerCombatRoster` (`rgb(239 68 68)`), aux
+      valeurs de Tailwind v3, qu'aucun token n'égale.
 
 ---
 

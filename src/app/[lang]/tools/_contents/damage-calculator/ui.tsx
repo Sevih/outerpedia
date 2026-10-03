@@ -7,7 +7,7 @@
  * `DamageCalculatorBrowser.tsx` le 25/08/2026 (découpage
  * mécanique, contenu inchangé).
  */
-import { useState, useEffect, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { img, CLASS_ORDER, ELEMENT_ORDER, transcendStarRow } from '@/lib/images';
 import { EffectIconTile } from '@/components/character/EffectChips';
 import {
@@ -15,6 +15,7 @@ import {
   ElementIconPill,
   SearchField,
 } from '@/components/character/filters/FilterAtoms';
+import { Modal } from '@/components/ui/Modal';
 import { Thumbnail } from '@/components/ui/Thumbnail';
 import type { DcChar, DcEffectRef, DcLabels, DcTarget, DcTranscendTier } from './contracts';
 
@@ -110,11 +111,13 @@ export function Stepper({
 
 /** Dropdown générique : bouton d'ancrage + recherche + liste déroulante. */
 /**
- * Popup de sélection (façon pool du tier-list-maker, mais en modale) :
- * voile plein écran, panneau centré, Échap / clic hors panneau pour fermer.
- * Le contenu (recherche, filtres, grille de tuiles) vient de l'appelant.
+ * Popup de sélection (façon pool du tier-list-maker, mais en modale) : la
+ * barre de titre, la croix et le corps défilant, posés DANS la brique `Modal`
+ * — qui tient le voile, la boîte nommée, le focus, Échap et le clic hors
+ * panneau. Le contenu (recherche, filtres, grille de tuiles) vient de
+ * l'appelant.
  */
-export function Modal({
+export function PickerModal({
   open,
   onClose,
   title,
@@ -125,38 +128,32 @@ export function Modal({
   title: string;
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [open, onClose]);
   if (!open) return null;
   return (
-    <div
-      className="bg-scrim/60 fixed inset-0 z-100 flex items-center justify-center p-4 backdrop-blur-sm"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+    <Modal
+      label={title}
+      onClose={onClose}
+      className="border-line-subtle bg-surface-raised flex max-h-[85dvh] w-full max-w-2xl flex-col rounded-xl border shadow-2xl"
     >
-      <div className="border-line-subtle bg-surface-raised flex max-h-[85dvh] w-full max-w-2xl flex-col rounded-xl border shadow-2xl">
-        <div className="border-line-subtle flex items-center gap-2 border-b px-3.5 py-2.5">
-          <Eyebrow>{title}</Eyebrow>
-          <span className="flex-1" />
-          <button
-            type="button"
-            className="text-content-subtle hover:text-danger cursor-pointer text-sm"
-            onClick={onClose}
-            aria-label="✕"
-          >
-            ✕
-          </button>
-        </div>
-        <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-3.5">{children}</div>
+      {/* Le flou du fond est propre à ces popups, le voile de la brique n'en a
+          pas : une couche plein écran glissée SOUS le panneau (`-z-10`) le
+          porte. Elle laisse passer la souris — un clic à côté du panneau
+          atteint le voile, qui ferme. */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 backdrop-blur-sm" />
+      <div className="border-line-subtle flex items-center gap-2 border-b px-3.5 py-2.5">
+        <Eyebrow>{title}</Eyebrow>
+        <span className="flex-1" />
+        <button
+          type="button"
+          className="text-content-subtle hover:text-danger cursor-pointer text-sm"
+          onClick={onClose}
+          aria-label="✕"
+        >
+          ✕
+        </button>
       </div>
-    </div>
+      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-3.5">{children}</div>
+    </Modal>
   );
 }
 
@@ -340,7 +337,7 @@ export function CharPicker({
           <span className="text-content-subtle min-w-0 text-sm wrap-break-word">{placeholder}</span>
         )}
       </div>
-      <Modal open={open} onClose={close} title={placeholder}>
+      <PickerModal open={open} onClose={close} title={placeholder}>
         <SearchField
           value={search}
           onChange={setSearch}
@@ -403,7 +400,7 @@ export function CharPicker({
         ) : (
           <NoMatches label={labels.noMatches} />
         )}
-      </Modal>
+      </PickerModal>
     </>
   );
 }

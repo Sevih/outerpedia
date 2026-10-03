@@ -37,7 +37,7 @@ function Step({
   return (
     <section id={id} className="space-y-3">
       <h2 className="text-xl font-semibold">
-        <span className="text-content-strong mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-green-600 text-sm font-bold">
+        <span className="text-content-strong bg-ed-green-solid mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold">
           {n}
         </span>
         {title}
@@ -67,11 +67,11 @@ export default function OuterplaneOnLinuxGuide() {
 
       {/* Héro */}
       <section className="border-line-subtle from-surface-raised/60 via-surface-raised to-surface-raised/60 relative mb-8 overflow-hidden rounded-xl border bg-linear-to-br p-6 md:p-8">
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-green-500/10 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="bg-ed-green-deep/10 absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl" />
+        <div className="bg-ed-blue-deep/10 absolute -bottom-24 -left-24 h-64 w-64 rounded-full blur-3xl" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-            Outerplane on <span className="text-green-400">Linux</span>
+            Outerplane on <span className="text-ed-green">Linux</span>
           </h2>
           <p className="text-content-muted mt-2 text-sm">
             Outerplane is on Steam for Windows: on Linux, Steam + Proton runs it directly. Waydroid
@@ -176,11 +176,11 @@ export default function OuterplaneOnLinuxGuide() {
                 <strong>Wayland compositor</strong> — GNOME / Plasma 6 / Sway
               </li>
               <li>
-                X11: run a nested Wayland session via <code className="text-green-400">cage</code>
+                X11: run a nested Wayland session via <code className="text-ed-green">cage</code>
               </li>
               <li>
-                Kernel modules: <code className="text-green-400">binder_linux</code> +{' '}
-                <code className="text-green-400">ashmem_linux</code> (via <code>linux-zen</code> or{' '}
+                Kernel modules: <code className="text-ed-green">binder_linux</code> +{' '}
+                <code className="text-ed-green">ashmem_linux</code> (via <code>linux-zen</code> or{' '}
                 <code>waydroid-dkms</code>)
               </li>
             </ul>

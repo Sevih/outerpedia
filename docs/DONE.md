@@ -7,6 +7,210 @@
 
 ## 2026-10-03
 
+- **Lot A22 : balises inline alignées entre les six langues, et un test de
+  parité qui garde la suite** (Opus). Le quoi : le relevé refait donne 602 JSON
+  (`src/app/[lang]/guides/_contents` + `data/curated`), 2 866 blocs localisés,
+  25 divergents — le chiffre du 03/10 n'avait pas bougé ; `gear-reco.json`
+  compté (4 blocs, 0 divergent) et non modifié. 15 blocs corrigés, 10 laissés.
+  Le pourquoi : rien ne casse au rendu, mais la langue qui écrit « Ember » là
+  où les autres écrivent `{P/Ember}` perd le chip et son lien, et aucun test ne
+  le voyait. Le comment : correction dans le seul cas sûr du lot — une langue
+  écrit en clair le nom de l'entité qu'une autre balise au même endroit ; le
+  nom est remplacé par la balise, identique partout, la phrase n'est pas
+  réécrite. Corrigés, `en`/`fr`/`es` sauf mention : `data/curated/characters.json`
+  `2000020.prosCons.pros[5]` et `2000073.prosCons.pros[1]` (« earth » / « terre »
+  / « Tierra » → `{E/Earth}`) ; `adventure-license/promote-dstella/recommended.json`
+  `[0].reason` (ici c'est `jp`/`kr`/`zh` qui écrivaient « 固定ダメージ » /
+  « 고정 피해 » / « 固定伤害 », nom exact de l'effet → `{D/BT_FIXED_DAMAGE}`) ;
+  `dimensional-singularity/abomination-hunter-belial/content.json`
+  `tips[1].items[1]` (premier « Freeze » / « Congelación » → `{D/BT_FREEZE}`) ;
+  `dimensional-singularity/frozen-dragon-of-phantasm-harshna/content.json`
+  `teams[0].groups[1].reason` (« defender » / « défenseur » / « defensor » →
+  `{C/Defender}`) ; `guild-raid/frost-legion/versions/2025-11/main.json`
+  `teams[3].notes[5].ul[4]` et `teams[3].notes[10].ul[0|1|5]`, puis les quatre
+  mêmes phrases dans `versions/2026-09/main.json` (`teams[3].notes[3].ul[4]`,
+  `teams[3].notes[8].ul[0|1|5]`) : « Ember » → `{P/Ember}`, « Liselotte » →
+  `{P/Liselotte}` ; `skyward-tower/very-hard-tower/content.json`, raisons
+  `control-and-focus-the-core-to-pr` et `control-since-she-lack-of-immuni`
+  (« stun » / « aturdimiento », et « 스턴 » en `kr` → `{D/BT_STUN}`, que `jp`
+  et `zh` portaient déjà). Lecture retenue du « nom exact », à défaire si elle
+  déplaît : le mot en clair désigne l'entité même que l'autre langue balise,
+  sans exiger qu'il soit lettre pour lettre le libellé du chip — « Freeze »
+  s'affiche maintenant « Frozen » / « Gelé » / « Cong. », « stun » s'affiche
+  « Stunned » / « Étourdi » / « Aturdido », et le « défenseur » français devient
+  « Defender » (ce que `CONVENTIONS.md` demande de toute façon aux classes en
+  français). C'est l'usage du reste du corpus (« hard CC like `{D/BT_STUN}` »,
+  « will `{D/BT_FREEZE}` your team »). Le test :
+  `src/lib/data/inline-tag-parity.test.ts`, à côté de `guides.test.ts` ; il lit
+  les JSON des deux racines (`gear-reco.json` compris, en lecture), prend les
+  langues dans `LANGS` et la forme d'une balise dans `TAG_REGEX`, désormais
+  exportée de `src/lib/parse-text.tsx` (seul changement de code). Trois cas :
+  le scan ne tourne pas à vide, aucun bloc ne diverge hors de la liste
+  `KNOWN_DIVERGENCES`, et chaque exception diverge ENCORE (une exception
+  devenue fausse fait échouer, pour que la liste ne pourrisse pas). Aucun
+  effectif figé. Vérification : `pnpm typecheck` et `pnpm lint` (sorties vides,
+  code 0), `pnpm test` (`Tests  2013 passed (2013)`, 175 fichiers) ; le script
+  jetable (non commité) affiche « 10 exceptions, 0 divergence(s) hors
+  exceptions » ; le test échoue bien quand on lui retire une exception (essai
+  sur une copie temporaire, supprimée : les deux cas rouges attendus) ; sur le
+  serveur de dev de Sevih, `/fr/guides/dimensional-singularity/frozen-dragon-of-phantasm-harshna`
+  sert « Autre option de [Defender] viable. » et
+  `/jp/guides/adventure-license/promote-dstella` un chip devant
+  « チェーンユニット ». Rien regardé à l'œil. Laissé, parce que les langues n'y
+  disent pas la même chose et que choisir est une décision éditoriale — dans
+  les dix cas `fr` et `es` suivent `en`, `jp`/`kr`/`zh` s'écartent ensemble, et
+  chacun figure dans `KNOWN_DIVERGENCES` (chemins sous `_contents/`) :
+  (1) `adventure/S1-9-5/content.json` `tips[1]` — `en` liste
+  `{D/BT_STEAL_BUFF} {D/BT_SEALED} {D/BT_REMOVE_BUFF} {D/BT_REDISTRIBUTE_BUFF}`,
+  `jp`/`kr`/`zh` s'arrêtent à trois ; (2) et (3)
+  `dimensional-singularity/skuld-dark/content.json` et `skuld-light/content.json`
+  `intro` — `en` « heroes slower than Skuld », `jp`/`kr`/`zh` « les alliés dont
+  la `{S/SPD}` est plus lente que Skuld », une `{S/SPD}` de plus ; (4)
+  `general-guides/premium-limited/premium-reviews.json` `premium[1].review` —
+  `en` « wants as many in the team as possible », `jp`/`kr`/`zh` explicitent
+  « autant d'alliés `{E/Dark}` que possible » ; (5)
+  `guild-raid/frost-legion/versions/2025-11/main.json` `teams[4].notes[8].ul[4]`
+  et (6) `versions/2026-09/main.json`
+  `teams[4].requirements.entries[0].notes[5]` — `en` « dual attacks with
+  `{P/Maxie}`, not `{P/Akari}` », `jp`/`kr`/`zh` s'arrêtent à `{P/Maxie}` ;
+  (7) et (8) `joint-challenge/deep-sea-guardian/versions/2026-01/recommended.json`
+  et `versions/2026-06/recommended.json` `[3].reason` — `en`
+  « `{B/BT_STAT|ST_COUNTER_RATE}` buff (boss is fast) », `jp`/`kr`/`zh` « un
+  `{C/Striker}` qui a `{B/BT_STAT|ST_COUNTER_RATE}` » ; (9)
+  `special-request/beatles/recommended.json` `[2].reason` — `en` « `{C/Healer}`
+  to keep the team alive », `jp`/`kr`/`zh` « un healer `{E/Fire}` qui maintient
+  l'équipe en vie », la classe en clair (« ヒーラー » / « 힐러 » / « 治疗者 ») :
+  le bloc est laissé entier plutôt que corrigé à moitié ; (10)
+  `special-request/glicys/recommended.json` `[1].reason` — `en` « `{C/Healer}`
+  options », `jp`/`kr`/`zh` « un `{C/Healer}` `{E/Earth}` qui a
+  `{B/BT_IMMUNE}` ». Vu en passant, hors périmètre : dans les deux blocs
+  Liselotte/EE de frost-legion, `jp`/`kr`/`zh` n'ont pas la dernière phrase de
+  l'anglais (« If you build some speed on Ember anyway… ») — le second
+  « Ember » y reste donc en clair en `en`/`fr`/`es`, la parité des balises
+  étant atteinte sans lui ; même chose pour le second « Freeze » de Belial,
+  que `jp` écrit lui aussi en clair. Le test ne couvre que les JSON : les
+  textes localisés portés par des `.ts` (`labels.ts`, `data.ts`, `content.ts`
+  des guides généraux) n'ont pas été relevés.
+- **Lot B12 : les 78 dernières couleurs Tailwind brutes du corps des guides
+  passent sur des tokens `ed-*` créés pour elles** (Opus, H6, suite de B5). Le
+  quoi : B5 n'avait remplacé que les nuances qui avaient déjà un token de même
+  valeur et laissé 96 occurrences ; décision Sevih du 03/10, on crée les
+  tokens. Inventaire refait par script (jetable, non commité) sur
+  `src/app/[lang]/guides/_contents/` et `src/components/guides/`, valeurs lues
+  dans `tailwindcss/theme.css` : 96 occurrences, 37 valeurs distinctes, 12
+  fichiers, zéro dans `src/components/guides/`. 25 tokens nouveaux dans
+  `globals.css` (`--ed-*` + `--color-ed-*`), soit pile le garde-fou du lot, un
+  par valeur, OKLCH strictement égal à celui de Tailwind v4 : six teintes hors
+  de la palette à 6 au cran -400 (`ed-blue`, `ed-green`, `ed-orange`,
+  `ed-purple`, `ed-red`, `ed-yellow`), `-soft` (-200) pour `cyan` et `rose`,
+  `-fg` (-300) pour `amber`, `emerald`, `sky`, `violet`, `yellow`, `pink`,
+  `-deep` (-500) pour `amber`, `emerald`, `blue`, `green`, `yellow`, et trois
+  suffixes INVENTÉS faute de voisin : `-solid` (-600, l'aplat des boutons et
+  pastilles : `blue`, `green`, `purple`), `-dim` (-700, `pink`) et `-shade`
+  (-900, `pink`, `red`) pour l'encart coupon de `roadmap-2026`. Le -300 prend
+  `-fg` et non `-soft` : `-soft` est déjà le -200 de quatre de ces teintes, et
+  `ed-purple-fg` comme toute la famille `cat-*-fg` sont des -300. Deux valeurs
+  avaient DÉJÀ un token que B5 jugeait trop dédié : `pink-400` → `ed-pink`
+  (libellé « core fusions » des deux roadmaps) et `purple-500` →
+  `ed-purple-bd` (halo et survol de bouton de `how-to-play`) — réemployés
+  plutôt que doublés, commentaires élargis. 78 occurrences remplacées dans dix
+  `index.tsx` (`how-to-play` 18, `roadmap-2026` 12, `service-transfer` 9,
+  `shop-purchase-priorities`, `timegate-resource`, `outerplane-on-linux` 7,
+  `banner-mileage`, `unlock-content` 6, `daily-stamina`, `roadmap-2026-h2` 3),
+  opacités conservées ; la page `src/app/dev/tokens/page.dev.tsx` liste les 25
+  nouveaux sous les annexes existantes, et l'en-tête de la famille dans
+  `globals.css` donne l'échelle complète. Le pourquoi : une seule source pour
+  les teintes éditoriales, un rethème futur ne passe plus par les guides. La
+  vérification : `pnpm typecheck` (rien après l'écho des trois `tsc --noEmit`,
+  code 0), `pnpm lint` (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests 2013 passed (2013)`, 175 fichiers) ; le script recompte 18
+  occurrences, toutes dans les deux
+  `data.ts` laissés exprès ; zéro changement visuel comparé sur le CSS servi
+  par le dev avant et après (`how-to-play`, `shop-purchase-priorities`,
+  `roadmap-2026`, rendus en 200) : les 43 classes distinctes remplacées
+  compilent, au nom de variable près, la même déclaration (`var(--ed-…)` ou
+  `color-mix(in oklab, var(--ed-…) N%, transparent)`, dégradé et `:hover`
+  compris), chaque `--ed-*` valant le `--color-*` qu'il remplace. Seul écart,
+  le même que pour tous les `ed-*/N` existants : sans support de `color-mix`,
+  le repli est le token opaque au lieu du mélange sRGB pré-calculé. PAS
+  regardé à l'œil. Laissé exprès : (1) les 18 occurrences du champ `accent`
+  des cartes personnage, `roadmap-2026/data.ts` (12) et
+  `roadmap-2026-h2/data.ts` (6) — accents d'ÉLÉMENT (`purple`/`blue`/`red`
+  -700, -900, -300), aucun token d'élément (`--fire` `#ff6b6b`, `--water`
+  `#4dabf7`, `--dark-elem` `#cc5de8`) n'a ces valeurs ; l'accent `sky` de
+  Titia, sans élément, vit dans le même champ et reste avec les autres — le
+  passer seul en tokens demanderait deux crans de plus (`sky-700`, `sky-900`),
+  soit 27, au-delà du garde-fou : à trancher avec le reste du champ ; (2) les
+  SVG : `MonadGateMap` (`#facc15`, `#fde047`) et `TowerCombatRoster`
+  (`rgb(239 68 68)`) portent les valeurs de Tailwind v3, pas celles de la v4
+  (`yellow-400` = `#fdc700`, `yellow-300` = `#ffdf20`, `red-500` =
+  `#fb2c36`) : aucun token créé n'a exactement ces valeurs ; (3) le halo
+  `rgba(251,191,36,0.8)` de `free-heroes-start-banner`, déjà listé par B5.
+  Repéré hors périmètre, non touché : `#0e7ecc` dans `TowerGuide.tsx`,
+  `#a1a1aa` dans `guide-accents.ts`, et `--color-ed-violet-soft` absent de la
+  liste de la page des tokens.
+
+- **Lot A23 : la cinquième modale, celle du damage calculator, passe sur la
+  brique `Modal`** (Opus). Le quoi : `damage-calculator/ui.tsx` gardait sa
+  propre `Modal` (`open`/`onClose`/`title`) — voile, Échap écouté sur
+  `document`, fermeture au `mousedown` sur le voile — et c'était la moins bien
+  tenue des cinq : ni `role="dialog"`, ni nom, ni focus. Elle devient
+  `PickerModal`, un mince composant local qui pose DANS `Modal` de
+  `src/components/ui/Modal.tsx` ce que la brique n'a pas : la prop `open`, la
+  barre de titre (`Eyebrow` + croix) et le corps défilant. Les trois sites la
+  consomment sous son nouveau nom, mêmes props : `CharPicker` dans `ui.tsx`,
+  `GearSlot` et `TargetPicker` dans `target-pickers.tsx`. Le pourquoi : le
+  voile, la boîte nommée, le focus, Échap et le clic à côté n'ont plus qu'une
+  écriture pour les outils (suite de B9). Le comment : aucune prop ajoutée à la
+  brique. Le renommage évite deux `Modal` aux contrats différents dans le même
+  fichier (l'une s'ouvre par `open`, l'autre par son montage). Le flou du fond
+  (`backdrop-blur-sm`) n'existe que sur ces popups et le voile de la brique
+  n'en a pas : il est porté par une couche locale plein écran glissée sous le
+  panneau (`fixed inset-0 -z-10`, `pointer-events-none`, `aria-hidden`), qui
+  laisse passer la souris jusqu'au voile. Le focus initial est celui de la
+  brique par défaut, le premier focusable, donc la croix — pas la recherche :
+  `SearchField` n'expose pas de ref, et y entrer ouvrirait le clavier sur
+  mobile, ce qui changerait l'écran. Quatre écarts de comportement, ceux que
+  le lot demande (tout vient de la brique) : (1) la boîte est annoncée —
+  `role="dialog"`, `aria-modal`, `aria-label` = le titre ; (2) le focus entre
+  (sur la croix), boucle au Tab et revient à la case qui a ouvert — avant il
+  restait sur la case, derrière le voile, et Tab sortait de la boîte ; (3) le
+  clic à côté ferme au `click` (au relâchement) et non plus au `mousedown` :
+  un glisser parti du panneau — une sélection de texte dans la recherche — et
+  relâché sur le voile ferme désormais la boîte, comme dans les quatre autres
+  modales ; (4) Échap est consommée (`preventDefault`) et cède la main à une
+  boîte ouverte par-dessus qui l'a déjà prise. Vérification : `pnpm typecheck`
+  (la ligne des trois `tsc --noEmit`, rien d'autre, code 0), `pnpm lint`
+  (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  2013 passed (2013)`, 175 fichiers) ;
+  le serveur de dev de Sevih sert `/damage-calculator` en 200 avec le code
+  modifié. Comparé avant / après, par un harnais vitest happy-dom jetable (non
+  commité) qui monte les trois sites entiers, la version de `HEAD` à côté de
+  la nouvelle : DOM fermé et DOM refermé identiques octet pour octet ; DOM
+  ouvert identique à deux écarts près, les mêmes sur les trois sites — le
+  voile gagne `role`/`aria-modal`/`aria-label` et perd `backdrop-blur-sm`, que
+  reprend la couche ajoutée en tête du panneau. Comportements relevés sur les
+  trois sites : ouverture (voile présent) ; focus initial (case → croix) ; Tab
+  sur le dernier focusable (sortait → revient à la croix) ; clic dans le
+  panneau (reste ouvert, avant comme après) ; Échap depuis le `body` (ferme,
+  avant comme après) ; clic à côté (fermait au `mousedown` → ferme au
+  `click`) ; croix (ferme) ; retour du focus (sur la case après Échap, clic à
+  côté et croix). Rendu : le DOM ouvert des trois sites, avant et après, posé
+  sur un fond chargé avec `globals.css` compilé par `@tailwindcss/postcss`,
+  capturé par Firefox headless en 1280×900 — trois paires de PNG identiques
+  octet pour octet. PAS prouvé : le flou lui-même. Firefox headless ne rend
+  pas `backdrop-filter` (un témoin sans la classe sort la même image), donc
+  ces captures valent pour le panneau, le voile et la mise en page, pas pour
+  le flou ; il tient au raisonnement — le voile est une couleur uniforme, le
+  flouter avec la page ou le poser sur la page floutée donne la même image —
+  et reste à regarder. Écrans à regarder : `/damage-calculator`, la case de
+  l'attaquant, une case d'arme ou d'accessoire, la case de la cible — fond
+  flouté derrière le panneau, clic à côté, Échap, Tab, retour du focus sur la
+  case. Laissé : la croix garde `aria-label="✕"`, qui n'est pas un nom (il
+  faudrait faire descendre un libellé jusqu'aux trois sites) ; le flou reste
+  propre au damage calculator, les quatre autres modales n'en ont pas —
+  l'ôter ici ou le porter dans la brique est une décision d'apparence ; le
+  commentaire orphelin « Dropdown générique » au-dessus du composant.
 - **Lot A24 : les pastilles de rareté du tier-list-maker et du hero-tracker
   passent sur `StarPill`** (Opus). Le quoi : B10 avait posé `ElementIconPill` /
   `ClassIconPill` dans les quatre outils et laissé la rareté maison, qui

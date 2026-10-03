@@ -210,7 +210,10 @@
      opacités côté classe), -glow = halo des puces (rgba hérité = -400 à 0.6). Crans
      annexes des bannières/reviews : -soft (-200, texte clair sur callout),
      -faint (-100, anneau au survol), -deep (-500, anneaux PvE/PvP), purple/pink.
-     Valeurs OKLCH EXACTES de Tailwind v4 ; glows = rgba hérités verbatim. */
+     Valeurs OKLCH EXACTES de Tailwind v4 ; glows = rgba hérités verbatim.
+     Échelle complète d'une teinte, du clair au foncé : -faint (-100), -soft
+     (-200), -fg (-300), base (-400), -deep (-500), -solid (-600), -dim (-700),
+     -shade (-900) — seuls les crans qu'un guide emploie existent. */
   --ed-sky: oklch(74.6% 0.16 232.661);
   --ed-violet: oklch(70.2% 0.183 293.541);
   --ed-emerald: oklch(76.5% 0.177 163.223);
@@ -230,9 +233,37 @@
   --ed-amber-faint: oklch(96.2% 0.059 95.617); /* amber-100 : anneau d'onglet au survol */
   --ed-sky-deep: oklch(68.5% 0.169 237.323); /* sky-500 : anneau PvE (review premium) */
   --ed-rose-deep: oklch(64.5% 0.246 16.439); /* rose-500 : anneau PvP */
-  --ed-pink: oklch(71.8% 0.202 349.761); /* pink-400 : héros « limited » */
+  --ed-pink: oklch(71.8% 0.202 349.761); /* pink-400 : héros « limited », core fusions */
   --ed-purple-fg: oklch(82.7% 0.119 306.383); /* purple-300 : texte review fusion */
-  --ed-purple-bd: oklch(62.7% 0.265 303.9); /* purple-500 : bord/fond review fusion */
+  --ed-purple-bd: oklch(62.7% 0.265 303.9); /* purple-500 : bord/fond (review fusion, boutons) */
+  /* Teintes hors palette à 6 et crans manquants — les couleurs que le corps des
+     guides écrivait en Tailwind brut (how-to-play, roadmaps, pastilles de
+     priorité…). Hors EDITORIAL_ACCENT : pas de -glow, pas de callout. */
+  --ed-blue: oklch(70.7% 0.165 254.624); /* blue-400 */
+  --ed-green: oklch(79.2% 0.209 151.711); /* green-400 */
+  --ed-orange: oklch(75% 0.183 55.934); /* orange-400 */
+  --ed-purple: oklch(71.4% 0.203 305.504); /* purple-400 */
+  --ed-red: oklch(70.4% 0.191 22.216); /* red-400 */
+  --ed-yellow: oklch(85.2% 0.199 91.936); /* yellow-400 */
+  --ed-cyan-soft: oklch(91.7% 0.08 205.041); /* cyan-200 */
+  --ed-rose-soft: oklch(89.2% 0.058 10.001); /* rose-200 */
+  --ed-amber-fg: oklch(87.9% 0.169 91.605); /* amber-300 : texte de pastille */
+  --ed-emerald-fg: oklch(84.5% 0.143 164.978); /* emerald-300 */
+  --ed-sky-fg: oklch(82.8% 0.111 230.318); /* sky-300 */
+  --ed-violet-fg: oklch(81.1% 0.111 293.571); /* violet-300 */
+  --ed-yellow-fg: oklch(90.5% 0.182 98.111); /* yellow-300 */
+  --ed-pink-fg: oklch(82.3% 0.12 346.018); /* pink-300 */
+  --ed-amber-deep: oklch(76.9% 0.188 70.08); /* amber-500 : fond/anneau de pastille */
+  --ed-emerald-deep: oklch(69.6% 0.17 162.48); /* emerald-500 */
+  --ed-blue-deep: oklch(62.3% 0.214 259.815); /* blue-500 : survol de bouton */
+  --ed-green-deep: oklch(72.3% 0.219 149.579); /* green-500 */
+  --ed-yellow-deep: oklch(79.5% 0.184 86.047); /* yellow-500 */
+  --ed-blue-solid: oklch(54.6% 0.245 262.881); /* blue-600 : aplat de bouton */
+  --ed-green-solid: oklch(62.7% 0.194 149.214); /* green-600 */
+  --ed-purple-solid: oklch(55.8% 0.288 302.321); /* purple-600 */
+  --ed-pink-dim: oklch(52.5% 0.223 3.958); /* pink-700 : bord de l'encart coupon */
+  --ed-pink-shade: oklch(40.8% 0.153 2.432); /* pink-900 : dégradé de l'encart coupon */
+  --ed-red-shade: oklch(39.6% 0.141 25.723); /* red-900 */
 
   /* Voile du fond de page */
   --page-veil: rgba(0, 0, 0, 0.4);
@@ -370,6 +401,31 @@
   --color-ed-pink: var(--ed-pink);
   --color-ed-purple-fg: var(--ed-purple-fg);
   --color-ed-purple-bd: var(--ed-purple-bd);
+  --color-ed-blue: var(--ed-blue);
+  --color-ed-green: var(--ed-green);
+  --color-ed-orange: var(--ed-orange);
+  --color-ed-purple: var(--ed-purple);
+  --color-ed-red: var(--ed-red);
+  --color-ed-yellow: var(--ed-yellow);
+  --color-ed-cyan-soft: var(--ed-cyan-soft);
+  --color-ed-rose-soft: var(--ed-rose-soft);
+  --color-ed-amber-fg: var(--ed-amber-fg);
+  --color-ed-emerald-fg: var(--ed-emerald-fg);
+  --color-ed-sky-fg: var(--ed-sky-fg);
+  --color-ed-violet-fg: var(--ed-violet-fg);
+  --color-ed-yellow-fg: var(--ed-yellow-fg);
+  --color-ed-pink-fg: var(--ed-pink-fg);
+  --color-ed-amber-deep: var(--ed-amber-deep);
+  --color-ed-emerald-deep: var(--ed-emerald-deep);
+  --color-ed-blue-deep: var(--ed-blue-deep);
+  --color-ed-green-deep: var(--ed-green-deep);
+  --color-ed-yellow-deep: var(--ed-yellow-deep);
+  --color-ed-blue-solid: var(--ed-blue-solid);
+  --color-ed-green-solid: var(--ed-green-solid);
+  --color-ed-purple-solid: var(--ed-purple-solid);
+  --color-ed-pink-dim: var(--ed-pink-dim);
+  --color-ed-pink-shade: var(--ed-pink-shade);
+  --color-ed-red-shade: var(--ed-red-shade);
 }
 
 /*

@@ -31,7 +31,7 @@ const GEAR_SOURCES: { collection: string; bossIds: string[] }[] = [
 /** Pastille de coût en stamina (le chip ambré). */
 function CostPill({ children }: { children: ReactNode }) {
   return (
-    <span className="text-ed-amber w-fit rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-xs">
+    <span className="text-ed-amber border-ed-amber-deep/20 bg-ed-amber-deep/10 w-fit rounded-full border px-2 py-0.5 text-xs">
       {children}
     </span>
   );
@@ -123,7 +123,9 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
         <div className="flex gap-4">
           <NumBadge n={1} />
           <div className="min-w-0 flex-1 space-y-3">
-            <div className="text-lg font-semibold text-sky-300">{L(LABELS.heading_dailySweep)}</div>
+            <div className="text-ed-sky-fg text-lg font-semibold">
+              {L(LABELS.heading_dailySweep)}
+            </div>
             <p className="text-content m-0 text-sm">{L(LABELS.body_dailySweep)}</p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {SWEEP_ROWS.map((row, i) => (

@@ -12,7 +12,15 @@ import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { SearchField } from '@/components/character/filters/FilterAtoms';
 import { GameText } from '@/components/ui/GameText';
 import type { DcGear, DcLabels, DcSet, DcTarget, SetPick } from './contracts';
-import { Eyebrow, Modal, MonsterPortrait, NoMatches, ROW_CLASS, SlotTile, Stepper } from './ui';
+import {
+  Eyebrow,
+  MonsterPortrait,
+  NoMatches,
+  PickerModal,
+  ROW_CLASS,
+  SlotTile,
+  Stepper,
+} from './ui';
 
 /** Slot d'arme/accessoire : picker + breakthrough T0–T4 + texte du passif
  *  (variante de CLASSE de l'attaquant quand la famille en a). */
@@ -88,7 +96,7 @@ export function GearSlot({
           {value ? value.label : placeholder}
         </span>
       </div>
-      <Modal open={open} onClose={close} title={placeholder}>
+      <PickerModal open={open} onClose={close} title={placeholder}>
         <SearchField
           value={search}
           onChange={setSearch}
@@ -115,7 +123,7 @@ export function GearSlot({
         ) : (
           <NoMatches label={labels.noMatches} />
         )}
-      </Modal>
+      </PickerModal>
       {value && tiers && (
         <GameText
           text={tiers[tier] || labels.equipment.noPassive}
@@ -693,7 +701,7 @@ export function TargetPicker({
           </span>
         )}
       </div>
-      <Modal open={open} onClose={close} title={labels.panels.target}>
+      <PickerModal open={open} onClose={close} title={labels.panels.target}>
         <SearchField
           value={search}
           onChange={setSearch}
@@ -871,7 +879,7 @@ export function TargetPicker({
         ) : (
           <NoMatches label={labels.noMatches} />
         )}
-      </Modal>
+      </PickerModal>
     </>
   );
 }

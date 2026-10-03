@@ -69,8 +69,8 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
     <>
       {/* Héro */}
       <section className="border-line-subtle from-surface-raised/60 via-surface-raised to-surface-raised/60 relative mb-8 overflow-hidden rounded-xl border bg-linear-to-br p-6 md:p-8">
-        <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-500/10 blur-3xl" />
+        <div className="bg-ed-blue-deep/10 absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl" />
+        <div className="bg-ed-purple-bd/10 absolute -bottom-24 -left-24 h-64 w-64 rounded-full blur-3xl" />
         <div className="relative">
           <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
             {s('heroTitle')} <span className="text-ed-sky">OUTERPLANE</span>
@@ -92,7 +92,7 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
             <div className="space-y-4">
               <PlatformCard
                 badge={
-                  <Badge tone="bg-green-600/20 text-green-400">
+                  <Badge tone="bg-ed-green-solid/20 text-ed-green">
                     <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.523 15.34l-.758-.758-4.243 4.243-9.9-9.9L1.208 10.34l11.314 11.315L17.523 15.34zM3.172 10.34L1.758 8.926 12.522 0l10.764 8.926-1.414 1.414-9.35-7.752-9.35 7.752z" />
                     </svg>
@@ -102,7 +102,7 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
                 desc={s('androidDesc')}
                 btnLabel={s('androidBtn')}
                 btnHref={LINKS.playstore}
-                btnClass="bg-green-600 hover:bg-green-500"
+                btnClass="bg-ed-green-solid hover:bg-ed-green-deep"
               />
               <PlatformCard
                 badge={
@@ -146,7 +146,7 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
               />
               <PlatformCard
                 badge={
-                  <Badge tone="bg-blue-600/20 text-blue-400">
+                  <Badge tone="bg-ed-blue-solid/20 text-ed-blue">
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -161,7 +161,7 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
                 desc={s('gpgDesc')}
                 btnLabel={s('gpgBtn')}
                 btnHref={LINKS.googleplaygames}
-                btnClass="bg-blue-600 hover:bg-blue-500"
+                btnClass="bg-ed-blue-solid hover:bg-ed-blue-deep"
                 note={s('gpgNote')}
               />
             </div>
@@ -233,26 +233,26 @@ export default async function HowToPlayGuide({ lang }: GuideContentProps) {
             </ul>
           </div>
 
-          <div className="rounded-lg border border-blue-600/40 bg-blue-600/10 p-4">
+          <div className="border-ed-blue-solid/40 bg-ed-blue-solid/10 rounded-lg border p-4">
             <h4 className="mb-2 font-semibold">{t('footer.official_website')}</h4>
             <a
               href={t('link.officialwebsite')}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-content-strong inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold transition hover:bg-blue-500"
+              className="text-content-strong bg-ed-blue-solid hover:bg-ed-blue-deep inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold transition"
             >
               {s('sidebarOfficialBtn')}
             </a>
           </div>
 
-          <div className="rounded-lg border border-purple-600/40 bg-purple-600/10 p-4">
+          <div className="border-ed-purple-solid/40 bg-ed-purple-solid/10 rounded-lg border p-4">
             <h4 className="mb-2 font-semibold">{s('sidebarCommunity')}</h4>
             <div className="space-y-2">
               <a
                 href={LINKS.discord}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-content-strong inline-flex w-full items-center justify-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold transition hover:bg-purple-500"
+                className="text-content-strong bg-ed-purple-solid hover:bg-ed-purple-bd inline-flex w-full items-center justify-center rounded-md px-3 py-2 text-sm font-semibold transition"
               >
                 Discord
               </a>

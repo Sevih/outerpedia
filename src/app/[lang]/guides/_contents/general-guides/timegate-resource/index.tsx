@@ -27,9 +27,9 @@ const data = getTimegateResources();
 
 /** Badge par type de source — accents emerald/sky/amber (autorisés) + neutre. */
 const BADGE: Record<SourceType, string> = {
-  mission: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/40',
-  guild: 'bg-amber-500/15 text-amber-300 ring-amber-500/40',
-  shop: 'bg-ed-sky-deep/15 text-sky-300 ring-ed-sky-deep/40',
+  mission: 'bg-ed-emerald-deep/15 text-ed-emerald-fg ring-ed-emerald-deep/40',
+  guild: 'bg-ed-amber-deep/15 text-ed-amber-fg ring-ed-amber-deep/40',
+  shop: 'bg-ed-sky-deep/15 text-ed-sky-fg ring-ed-sky-deep/40',
   craft: 'bg-surface-sunken text-content-subtle ring-line-subtle',
 };
 

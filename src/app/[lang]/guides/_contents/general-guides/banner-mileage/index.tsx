@@ -252,7 +252,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
               <span className="font-semibold">{L(LABELS.premium.desc_bold)}</span>
               {L(LABELS.premium.desc)}
             </p>
-            <p className="m-0 mt-2 text-xs text-violet-300">
+            <p className="text-ed-violet-fg m-0 mt-2 text-xs">
               <StarText text={L(LABELS.premium.note)} />
             </p>
           </div>
@@ -279,7 +279,7 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
           />
           <div className="space-y-3">
             <div className="border-ed-rose/25 bg-ed-rose/5 rounded-lg border p-3">
-              <p className="m-0 mb-3 text-sm text-rose-200">
+              <p className="text-ed-rose-soft m-0 mb-3 text-sm">
                 <span className="font-semibold">{L(LABELS.limited.desc_bold)}</span>
                 {L(LABELS.limited.desc)}
               </p>
@@ -288,14 +288,14 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
                   [
                     ['type_limited_label', 'type_limited_desc', 'text-ed-pink'],
                     ['type_seasonal_label', 'type_seasonal_desc', 'text-ed-emerald'],
-                    ['type_collab_label', 'type_collab_desc', 'text-red-400'],
+                    ['type_collab_label', 'type_collab_desc', 'text-ed-red'],
                   ] as const
                 ).map(([labelKey, descKey, color]) => (
                   <div key={labelKey} className="flex items-start gap-2">
                     <span className={`min-w-17.5 font-semibold ${color}`}>
                       {L(LABELS.limited[labelKey])}
                     </span>
-                    <span className="text-rose-200">{L(LABELS.limited[descKey])}</span>
+                    <span className="text-ed-rose-soft">{L(LABELS.limited[descKey])}</span>
                   </div>
                 ))}
               </div>
@@ -344,11 +344,11 @@ export default async function BannerMileageGuide({ lang }: { lang: Lang }) {
               <p className="text-content-subtle m-0 mt-2 text-xs">{L(LABELS.supply.unlock)}</p>
             </div>
             <div className="border-ed-cyan/25 bg-ed-cyan/5 rounded-lg border p-3">
-              <p className="m-0 text-sm text-cyan-200">
+              <p className="text-ed-cyan-soft m-0 text-sm">
                 <span className="font-semibold">{L(LABELS.supply.settings_label)}</span>{' '}
                 {L(LABELS.supply.settings)}
               </p>
-              <p className="m-0 mt-2 text-sm text-cyan-200">
+              <p className="text-ed-cyan-soft m-0 mt-2 text-sm">
                 {L(LABELS.supply.select_before)}
                 <strong className="text-ed-amber">{L(LABELS.supply.select_bold)}</strong>
                 {L(LABELS.supply.select_after)}
