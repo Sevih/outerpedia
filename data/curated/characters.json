@@ -238,6 +238,9 @@
         "heroes": ["2000084", "2000060", "2000103", "2000037"],
         "reason": {
           "en": "{B/BT_CALL_BACKUP}",
+          "jp": "{B/BT_CALL_BACKUP}",
+          "kr": "{B/BT_CALL_BACKUP}",
+          "zh": "{B/BT_CALL_BACKUP}",
           "es": "{B/BT_CALL_BACKUP}",
           "fr": "{B/BT_CALL_BACKUP}"
         }
@@ -1052,6 +1055,9 @@
       "cons": [
         {
           "en": "-",
+          "jp": "-",
+          "kr": "-",
+          "zh": "-",
           "es": "-",
           "fr": "-"
         }
@@ -2288,6 +2294,9 @@
       "cons": [
         {
           "en": "-",
+          "jp": "-",
+          "kr": "-",
+          "zh": "-",
           "es": "-",
           "fr": "-"
         }
@@ -3307,6 +3316,9 @@
         "heroes": ["2000084"],
         "reason": {
           "en": "{B/BT_CALL_BACKUP}",
+          "jp": "{B/BT_CALL_BACKUP}",
+          "kr": "{B/BT_CALL_BACKUP}",
+          "zh": "{B/BT_CALL_BACKUP}",
           "es": "{B/BT_CALL_BACKUP}",
           "fr": "{B/BT_CALL_BACKUP}"
         }
@@ -3620,6 +3632,9 @@
         "heroes": ["2000064", "2000079", "2000082", "2000081", "2000094", "2000107"],
         "reason": {
           "en": "{D/BT_EXTEND_DEBUFF}",
+          "jp": "{D/BT_EXTEND_DEBUFF}",
+          "kr": "{D/BT_EXTEND_DEBUFF}",
+          "zh": "{D/BT_EXTEND_DEBUFF}",
           "es": "{D/BT_EXTEND_DEBUFF}",
           "fr": "{D/BT_EXTEND_DEBUFF}"
         }
@@ -3905,6 +3920,9 @@
         "heroes": ["2000101"],
         "reason": {
           "en": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
+          "jp": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
+          "kr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
+          "zh": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
           "es": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}",
           "fr": "{B/BT_STAT|ST_CRITICAL_RATE} {B/BT_STAT|ST_CRITICAL_DMG_RATE} {B/BT_STAT|ST_ATK} {B/BT_COOL_CHARGE}"
         }
@@ -4766,6 +4784,9 @@
         "heroes": ["2000101"],
         "reason": {
           "en": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
+          "jp": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
+          "kr": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
+          "zh": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
           "es": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} y {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}",
           "fr": "{B/BT_STAT|ST_CRITICAL_RATE}, {B/BT_STAT|ST_CRITICAL_DMG_RATE} & {B/BT_STAT|ST_ATK}, {B/BT_COOL_CHARGE}"
         }

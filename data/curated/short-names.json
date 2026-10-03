@@ -3,43 +3,57 @@
     "en": "Tamamo",
     "jp": "タマモ",
     "kr": "타마모",
-    "zh": "玉藻"
+    "zh": "玉藻",
+    "fr": "Tamamo",
+    "es": "Tamamo"
   },
   "2000085": {
     "en": "S.Regina",
     "jp": "プールレジーナ",
     "kr": "풀장 레지나",
-    "zh": "泳池蕾吉纳"
+    "zh": "泳池蕾吉纳",
+    "fr": "S.Regina",
+    "es": "S.Regina"
   },
   "2000086": {
     "en": "E.Tamamo",
     "jp": "三世タマモ",
     "kr": "삼세 타마모",
-    "zh": "三世玉藻"
+    "zh": "三世玉藻",
+    "fr": "E.Tamamo",
+    "es": "E.Tamamo"
   },
   "2000093": {
     "en": "H.Dianne",
     "jp": "聖夜ダイアン",
     "kr": "성야 다이안",
-    "zh": "圣诞黛安"
+    "zh": "圣诞黛安",
+    "fr": "H.Dianne",
+    "es": "H.Dianne"
   },
   "2000106": {
     "en": "S.Ember",
     "jp": "青雲エンバー",
     "kr": "청운 엠버",
-    "zh": "青云炎珀"
+    "zh": "青云炎珀",
+    "fr": "S.Ember",
+    "es": "S.Ember"
   },
   "2000109": {
     "en": "G.Viella",
     "jp": "グノビエラ",
     "kr": "그노 비엘라",
-    "zh": "诺希比埃拉"
+    "zh": "诺希比埃拉",
+    "fr": "G.Viella",
+    "es": "G.Viella"
   },
   "2000114": {
     "en": "MR.Skadi",
     "jp": "ミッドスカディ",
     "kr": "미드 스카디",
-    "zh": "午夜斯卡蒂"
+    "zh": "午夜斯卡蒂",
+    "fr": "MR.Skadi",
+    "es": "MR.Skadi"
   },
   "2000121": {
     "en": "H.Delta"
@@ -48,18 +62,24 @@
     "en": "CF Veronica",
     "jp": "コアヴェロニカ",
     "kr": "코어 베로니카",
-    "zh": "核心维罗妮卡"
+    "zh": "核心维罗妮卡",
+    "fr": "CF Veronica",
+    "es": "CF Veronica"
   },
   "2700043": {
     "en": "CF Eternal",
     "jp": "コアエターナル",
     "kr": "코어 이터널",
-    "zh": "核心伊特诺"
+    "zh": "核心伊特诺",
+    "fr": "CF Eternal",
+    "es": "CF Eternal"
   },
   "2700070": {
     "en": "CF Epsilon",
     "jp": "コアイプシロン",
     "kr": "코어 엡실론",
-    "zh": "核心埃普西隆"
+    "zh": "核心埃普西隆",
+    "fr": "CF Epsilon",
+    "es": "CF Epsilon"
   }
 }

@@ -7,6 +7,66 @@
 
 ## 2026-10-03
 
+- **`data/curated` : les langues manquantes complétées dans les deux sens —
+  22 blocs, quatre fichiers** (lot A21, pendant de B11 côté curés). Le quoi :
+  une passe de traduction avait donné `fr`/`es` à des blocs sans jamais écrire
+  `jp`/`kr`/`zh`, et `short-names.json` portait le trou inverse ; `lRec`
+  repliant sur l'anglais, rien ne cassait et aucun test ne le voyait.
+  Inventaire refait par script (un bloc = un objet à clé `en` ; `gear-reco.json`
+  exclu sans l'ouvrir) : les chiffres du 26/09 tiennent, 10 blocs dans le
+  sens 1, 10 entrées dans le sens 2. Sens 1 — `characters.json` (7) : cinq
+  `reason` de synergie faites de balises seules (`{B/BT_CALL_BACKUP}`,
+  `{D/BT_EXTEND_DEBUFF}`, les quatre buffs de 2000096 et 2000119) et deux
+  `cons` réduits à « - » (2000037, 2000065) ; rien à traduire, les trois
+  langues reprennent l'anglais à l'identique (le « & » de 2000119 compris, que
+  le `fr` garde aussi). `changelog.json` (2 titres) : « Resonance Eliza » →
+  `レゾナンス・エリーゼ` / `레조넌스 엘리제` / `共鸣伊莉莎` (surnom + nom de
+  `data/generated/characters.json`, id 2700035, à la forme de l'entrée
+  « Resonance Rin » voisine) et « Knight of Hope Meteos » → `光明の騎士・メテウス`
+  / `광명의 기사 메테우스` / `光明骑士梅修斯` (le nom du jeu, `monsters.json`).
+  Écart au décompte, assumé : ces deux entrées portaient aussi un `content`
+  en `en`/`fr`/`es` seuls — un TABLEAU, donc invisible à la définition « clé
+  `en` de type string » — complété dans le même geste (un titre japonais sur
+  un texte anglais n'aurait rien réparé), phrases calquées sur les entrées
+  voisines, mode = `共同作戦` / `합동 챌린지` / `联合挑战` comme le `meta.json`
+  du guide et les locales. `shop-priorities.json` (1) : la note de
+  `al/item-24003/weekly`, avec le vocabulaire des locales (`冒険者ライセンス` +
+  `ギアス`, `모험 라이선스` + `기아스`, `冒险许可证` + `天赋`). Sens 2 —
+  `short-names.json` : `fr` et `es` = l'abréviation anglaise pour les dix
+  entrées (« S.Regina », « CF Veronica »…). Vérifié contre
+  `data/generated/characters.json` : le NOM des dix persos est le même en
+  `en`, `fr` et `es` (seuls les surnoms divergent, et l'initiale du préfixe
+  est une abréviation communautaire, pas le surnom du jeu) ; c'est aussi la
+  décision du 23/09 écrite en tête de `src/lib/data/short-names.ts`. Rendu
+  inchangé en `fr`/`es` (la valeur écrite est celle du repli). Ordre des
+  clés : `jp`, `kr`, `zh` insérés juste après `en` sans réordonner l'existant
+  (`en, jp, kr, zh, es, fr`, comme les synergies voisines) ; `fr`, `es`
+  ajoutés après `zh` dans `short-names.json`. Écriture par script jetable
+  (`JSON.stringify` + `prettier`, qui redonne les quatre fichiers à l'octet
+  près avant modification : le diff ne porte que les lignes ajoutées).
+  Vérifié, deux scripts jetables non commités : (1) recompte sur les quatre
+  fichiers, tableaux compris — 0 bloc sans `jp`/`kr`/`zh`, 0 sans `fr`/`es` ;
+  (2) les 22 blocs touchés (7 + 4 + 1 + 10, comparés à `HEAD`) portent les six
+  langues, le même multiensemble de balises dans chacune, des tableaux de même
+  longueur, et aucune langue déjà présente n'a bougé — 0 écart.
+  `pnpm typecheck` : les trois `tsc --noEmit` sans une ligne, code 0.
+  `pnpm lint` : `$ eslint`, rien d'autre, code 0. `pnpm test` :
+  `Tests  5 failed | 1999 passed (2004)` — les cinq échecs sont tous dans
+  `src/__b9_snapshot.test.tsx`, fichier non suivi d'un lot voisin (`path`
+  undefined), pas dans ce lot ; le
+  même run sans ce fichier donne `Tests  1999 passed (1999)`, 172 fichiers.
+  Laissé : `gear-reco.json` (hors périmètre, pas ouvert) ; `H.Delta`
+  (2000121), en anglais seul, repli assumé. Repéré hors périmètre, non
+  touché : le `fr` du changelog écrit « Knight of Hope Meteos » et
+  « Resonance Eliza » quand le jeu dit « Chevalier de l'Espoir Météores » et
+  « Résonance » ; le `zh` du `meta.json` de `joint-challenge/koh-meteos`
+  (`希望骑士梅特乌斯`) et celui de l'entrée « Resonance Rin » (`共鸣凛`) ne sont
+  pas les noms du jeu (`光明骑士梅修斯`, `琳`) ; le Joint Challenge a trois noms
+  japonais dans le dépôt (`共同作戦`, `合同チャレンジ` dans `jp.ts`,
+  `共同チャレンジ`/`ジョイントチャレンジ` dans une entrée du changelog) ; et
+  l'en-tête de `short-names.ts` dit que les entrées « ne portent qu'`en` »
+  alors que dix portent `jp`/`kr`/`zh` (désormais les six).
+
 - **Token de taille `--text-3xs` (11px) : les 126 tailles arbitraires de 11px
   passent en `text-3xs`** (lot A18 de la Dette, même recette que A5 pour
   `--text-2xs`). Fait : un `--text-3xs: 0.6875rem` dans le bloc `@theme` de

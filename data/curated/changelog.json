@@ -66,11 +66,19 @@
     "type": "character",
     "title": {
       "en": "Resonance Eliza",
+      "jp": "レゾナンス・エリーゼ",
+      "kr": "레조넌스 엘리제",
+      "zh": "共鸣伊莉莎",
       "es": "Resonancia Eliza",
       "fr": "Resonance Eliza"
     },
     "content": {
       "en": ["Resonance Eliza has been added to the database with full skills and stats."],
+      "jp": [
+        "レゾナンス・エリーゼが、スキルとステータスをすべて含めてデータベースに追加されました。"
+      ],
+      "kr": ["레조넌스 엘리제가 모든 스킬과 능력치를 갖춘 상태로 데이터베이스에 추가되었습니다."],
+      "zh": ["共鸣伊莉莎已连同其全部技能和属性数据一并添加至数据库中。"],
       "es": [
         "Resonancia Eliza ha sido añadida a la base de datos con todas sus skills y estadísticas."
       ],
@@ -112,11 +120,17 @@
     "type": "update",
     "title": {
       "en": "Knight of Hope Meteos",
+      "jp": "光明の騎士・メテウス",
+      "kr": "광명의 기사 메테우스",
+      "zh": "光明骑士梅修斯",
       "es": "Caballero de la Esperanza Meteos",
       "fr": "Knight of Hope Meteos"
     },
     "content": {
       "en": ["Knight of Hope Meteos Joint Challenge Guide updated for September 2026 version."],
+      "jp": ["光明の騎士・メテウス 共同作戦ガイドが2026年9月版に更新されました。"],
+      "kr": ["광명의 기사 메테우스 합동 챌린지 가이드가 2026년 9월 버전으로 업데이트되었습니다."],
+      "zh": ["光明骑士梅修斯联合挑战指南已更新至2026年9月版本。"],
       "es": [
         "Guía del Desafío conjunto Caballero de la Esperanza Meteos actualizada para la versión de septiembre 2026."
       ],
