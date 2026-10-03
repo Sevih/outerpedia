@@ -7,6 +7,57 @@
 
 ## 2026-10-03
 
+- **Les quatre modales/lightbox des outils passent par une brique partagée,
+  `Modal` / `Lightbox`** (`src/components/ui/Modal.tsx`, lot B9 de la Dette).
+  Quoi : la `Modal` locale du progress-tracker (export/import, réglages), le
+  `CharPicker` du team-planner et les lightbox des wallpapers et des 4-comics
+  réécrivaient chacun le même voile — `fixed inset-0 z-100`, `role="dialog"`,
+  `aria-modal`, nom, `useDialogFocus`, Échap, clic sur le fond — et les deux
+  galeries dupliquaient en plus la croix, le compteur, les deux flèches et
+  leurs glyphes. Pourquoi : quatre copies d'un même contrat d'accessibilité
+  dérivent (G22 avait dû les reprendre une par une). Comment : un `Overlay`
+  privé tient le voile, le rôle, le focus (le hook de G22, inchangé), Échap, le
+  clic sur le voile et, à la demande, le verrou du scroll de fond ; `Modal`
+  (voile 60 %) y pose un panneau dont les classes restent à l'appelant
+  (`className`) plus un `initialFocus` ; `Lightbox` (voile 95 %, scroll
+  verrouillé) y pose la croix nommée, un `counter` et, si `onNavigate` est
+  fourni, les deux flèches — `CloseGlyph` et `ChevronGlyph` n'existent plus
+  que là. Les quatre sites la consomment ; la navigation CLAVIER ←/→ reste dans
+  les deux galeries, avec l'index. Trois écarts de comportement, tous
+  invisibles à l'écran : Échap s'écoute sur `document` pour les quatre (c'était
+  déjà le cas des galeries ; pour le tracker et le picker, la touche ne se perd
+  plus quand un clic sur une zone non focusable a renvoyé le focus au `body`),
+  une touche Échap déjà prise par une boîte ouverte par-dessus
+  (`defaultPrevented`) n'en ferme plus deux, et le scroll de fond retrouve sa
+  valeur d'AVANT l'ouverture au lieu d'être remis à vide. Le clic sur le voile
+  garde sa mécanique (le contenu arrête la propagation), donc aucun clic ne
+  ferme ou ne garde ouvert autrement qu'avant. Vérifié : `pnpm typecheck` (les
+  trois `tsc --noEmit`, sans une ligne de sortie, code 0), `pnpm lint`
+  (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  2003 passed (2003)`, 173 fichiers, dont le nouveau
+  `Modal.test.tsx` : boîte nommée, voile qui ferme et panneau qui ne ferme
+  pas, Échap depuis le `body`, Échap déjà prise, verrou du scroll rendu,
+  flèches qui naviguent sans fermer). Rendu
+  identique, mais PAS par captures d'écran : rien n'écoutait sur :3000, et les
+  quatre boîtes ne s'ouvrent qu'au clic (pas de HTML de prod à comparer).
+  Comparé à la place, ce qui décide du rendu : (1) le DOM — un harnais vitest
+  happy-dom jetable (non commité) monte les quatre composants entiers, ouvre
+  chaque boîte et sérialise la boîte, la page autour, l'élément qui a le focus
+  et `body.style.overflow`, dans 13 états (tracker : export + les cinq onglets
+  des réglages ; picker ; wallpapers et 4-comics : série à plusieurs images,
+  après une flèche du clavier, image seule sans flèches) — `diff -r` avant /
+  après : 39 fichiers identiques octet pour octet ; (2) le CSS —
+  `globals.css` compilé par `@tailwindcss/postcss` sur l'arbre de `HEAD`, puis
+  sur `HEAD` + les cinq fichiers du lot : 275 550 octets, `cmp` identique.
+  Même DOM, même CSS : il reste à Sevih un coup d'œil réel aux quatre outils
+  (ouvrir, Tab, Échap, clic sur le fond, ←/→ dans les galeries). Laissé, hors
+  périmètre : `ImageLightbox`, `SearchModal` et `SettingsModal` gardent leur
+  propre voile (le lot nommait quatre sites) ; la `Modal` de
+  `damage-calculator/ui.tsx` est une cinquième copie, et la moins bien tenue —
+  ni `role="dialog"`, ni focus, croix nommée `aria-label="✕"` ; `InfoGlyph`
+  reste dupliqué entre les deux galeries (il sert au bandeau, pas à la
+  lightbox) ; le picker garde son en-tête et sa croix `FaXmark`.
+
 - **`data/curated` : les langues manquantes complétées dans les deux sens —
   22 blocs, quatre fichiers** (lot A21, pendant de B11 côté curés). Le quoi :
   une passe de traduction avait donné `fr`/`es` à des blocs sans jamais écrire

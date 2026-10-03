@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { Modal } from '@/components/ui/Modal';
 import { copyText } from '@/hooks/useCopyToClipboard';
-import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useStoredState } from '@/lib/client-storage';
 import { formatDuration, type DurationUnits } from '@/lib/format-duration';
 import {
@@ -136,6 +136,9 @@ function progressColor(percent: number): { bar: string; border: string; glow: st
 }
 
 const DAY_MS = 86_400_000;
+
+/** Panneau des deux modales (export/import, réglages) — seule la largeur change. */
+const MODAL_PANEL = 'bg-surface-raised max-h-[80vh] w-full overflow-y-auto rounded-lg p-6';
 
 /** Anti double-tap (200 ms) — les lignes se cliquent en rafale sur mobile. */
 let lastClick = 0;
@@ -373,6 +376,7 @@ export function ProgressTrackerBrowser({
       {showExport && (
         <Modal
           label={labels.exportImport}
+          className={`${MODAL_PANEL} max-w-md`}
           onClose={() => {
             setShowExport(false);
             setImportData('');
@@ -427,7 +431,11 @@ export function ProgressTrackerBrowser({
 
       {/* Modale réglages */}
       {showSettings && (
-        <Modal label={labels.settingsTitle} onClose={() => setShowSettings(false)} wide>
+        <Modal
+          label={labels.settingsTitle}
+          className={`${MODAL_PANEL} max-w-2xl`}
+          onClose={() => setShowSettings(false)}
+        >
           <h3 className="mb-4 text-xl font-bold">{labels.settingsTitle}</h3>
           <div className="border-line mb-6 flex gap-0.5 border-b pb-2 md:gap-2">
             {(['display', 'game', 'content', 'craft', 'shop'] as SettingsTab[]).map((tab) => (
@@ -715,41 +723,6 @@ export function ProgressTrackerBrowser({
 }
 
 /* ─── Briques ─────────────────────────────────────────────────────────────── */
-
-function Modal({
-  children,
-  onClose,
-  label,
-  wide = false,
-}: {
-  children: ReactNode;
-  onClose: () => void;
-  /** Nom accessible de la boîte (son titre). */
-  label: string;
-  wide?: boolean;
-}) {
-  // Une vraie boîte de dialogue : rôle, nom, focus qui entre/boucle/revient,
-  // Échap — avant, un simple `<div>` cliquable sans clavier.
-  const dialogRef = useRef<HTMLDivElement>(null);
-  useDialogFocus(dialogRef, { onEscape: onClose });
-  return (
-    <div
-      ref={dialogRef}
-      role="dialog"
-      aria-modal="true"
-      aria-label={label}
-      className="bg-scrim/60 fixed inset-0 z-100 flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      <div
-        className={`bg-surface-raised max-h-[80vh] w-full overflow-y-auto rounded-lg p-6 ${wide ? 'max-w-2xl' : 'max-w-md'}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
 
 function ActionButton({
   icon,

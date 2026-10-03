@@ -141,10 +141,11 @@
       `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
       découpé en lots délégables (prompts A13–A20, B9, B10 dans
       lots-opus-2026-09-25.md) :
-      4 modales/lightbox, 3 sélecteurs de perso et 3 barres élément/classe
+      3 sélecteurs de perso et 3 barres élément/classe
       (le cache de `loadTextIndex` et les rebuilds redondants, A17, sont
       faits ; le token `--text-3xs` pour les 126 tailles de 11px, A18,
-      aussi ; l'outillage, A20, aussi — `next` revenu à 16.3.0 après la
+      aussi ; les 4 modales/lightbox des outils, B9, aussi — reste la
+      cinquième, celle de `damage-calculator/ui.tsx` ; l'outillage, A20, aussi — `next` revenu à 16.3.0 après la
       panne du 25/09, cf. DONE). Non découpés (à relire d'abord) : deux listes de
       shops permanents, « persos intégrés » ×4 lecteurs, `advOf`/`stripBrackets`
       dans `encounters.ts`, `pnpm dev` = `clean:all` (décision).

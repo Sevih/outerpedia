@@ -25,8 +25,8 @@ import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
 import { img, CHAIN_PILL, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import { Modal } from '@/components/ui/Modal';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import { useDialogFocus } from '@/hooks/useDialogFocus';
 import {
   EffectChip,
   EffectIconBadge,
@@ -353,9 +353,7 @@ function CharPicker({
   onClose: () => void;
 }) {
   const [query, setQuery] = useState('');
-  const dialogRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  useDialogFocus(dialogRef, { initial: searchRef, onEscape: onClose });
   const [element, setElement] = useState<string | null>(null);
   const [cls, setCls] = useState<string | null>(null);
 
@@ -384,105 +382,98 @@ function CharPicker({
     }`;
 
   return (
-    // Le clic sur le fond reste un raccourci souris ; au clavier, Échap et la
-    // croix nommée ferment, et le focus est tenu dans la boîte (`useDialogFocus`).
-    <div
-      ref={dialogRef}
-      role="dialog"
-      aria-modal="true"
-      aria-label={labels.pickCharacter}
-      className="bg-scrim/60 fixed inset-0 z-100 flex items-center justify-center p-4"
-      onClick={onClose}
+    // Le focus entre sur la recherche ; la croix nommée ferme, comme Échap et
+    // le clic sur le voile (tenus par `Modal`).
+    <Modal
+      label={labels.pickCharacter}
+      onClose={onClose}
+      initialFocus={searchRef}
+      className="border-line bg-surface-raised flex max-h-[85vh] w-full max-w-2xl flex-col rounded-xl border shadow-2xl"
     >
-      <div
-        className="border-line bg-surface-raised flex max-h-[85vh] w-full max-w-2xl flex-col rounded-xl border shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="border-line/60 flex items-center justify-between border-b px-4 py-3">
-          <h3 className="text-content-strong text-base font-bold">{labels.pickCharacter}</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label={labels.close}
-            className="text-content-muted hover:text-content rounded p-1 transition"
-          >
-            <FaXmark aria-hidden />
-          </button>
-        </div>
-        <div className="flex flex-wrap items-center gap-2 px-4 py-3">
-          <input
-            value={query}
-            ref={searchRef}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={labels.search}
-            autoFocus
-            className="border-line bg-surface-overlay/60 text-content placeholder-content-subtle min-w-40 flex-1 rounded-lg border px-3 py-1.5 text-sm focus:border-sky-500 focus:outline-none"
-          />
-          <div className="flex gap-1">
-            {ELEMENT_ORDER.map((el) => (
-              <button
-                key={el}
-                type="button"
-                title={labels.elementNames[el] ?? el}
-                onClick={() => setElement((v) => (v === el ? null : el))}
-                className={filterBtn(element === el)}
-              >
-                <img
-                  src={img.element(el)}
-                  alt={labels.elementNames[el] ?? el}
-                  className="h-5 w-5"
-                  width={20}
-                  height={20}
-                />
-              </button>
-            ))}
-          </div>
-          <div className="flex gap-1">
-            {classes.map((k) => (
-              <button
-                key={k}
-                type="button"
-                title={labels.classNames[k] ?? k}
-                onClick={() => setCls((v) => (v === k ? null : k))}
-                className={filterBtn(cls === k)}
-              >
-                <img
-                  src={img.klass(k)}
-                  alt={labels.classNames[k] ?? k}
-                  className="h-5 w-5"
-                  width={20}
-                  height={20}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="grid grid-cols-4 gap-2 overflow-y-auto px-4 pb-4 sm:grid-cols-6">
-          {shown.map((c) => (
+      <div className="border-line/60 flex items-center justify-between border-b px-4 py-3">
+        <h3 className="text-content-strong text-base font-bold">{labels.pickCharacter}</h3>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={labels.close}
+          className="text-content-muted hover:text-content rounded p-1 transition"
+        >
+          <FaXmark aria-hidden />
+        </button>
+      </div>
+      <div className="flex flex-wrap items-center gap-2 px-4 py-3">
+        <input
+          value={query}
+          ref={searchRef}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={labels.search}
+          autoFocus
+          className="border-line bg-surface-overlay/60 text-content placeholder-content-subtle min-w-40 flex-1 rounded-lg border px-3 py-1.5 text-sm focus:border-sky-500 focus:outline-none"
+        />
+        <div className="flex gap-1">
+          {ELEMENT_ORDER.map((el) => (
             <button
-              key={c.id}
+              key={el}
               type="button"
-              onClick={() => onPick(c)}
-              className="hover:bg-surface-overlay/70 rounded-lg p-1 transition"
+              title={labels.elementNames[el] ?? el}
+              onClick={() => setElement((v) => (v === el ? null : el))}
+              className={filterBtn(element === el)}
             >
-              <CharacterPortrait
-                id={c.id}
-                name={c.label}
-                element={c.element}
-                classType={c.cls}
-                rarity={c.rarity}
-                size={64}
+              <img
+                src={img.element(el)}
+                alt={labels.elementNames[el] ?? el}
+                className="h-5 w-5"
+                width={20}
+                height={20}
               />
             </button>
           ))}
-          {!shown.length && (
-            <p className="text-content-subtle col-span-full py-6 text-center text-sm">
-              {labels.all}: 0
-            </p>
-          )}
+        </div>
+        <div className="flex gap-1">
+          {classes.map((k) => (
+            <button
+              key={k}
+              type="button"
+              title={labels.classNames[k] ?? k}
+              onClick={() => setCls((v) => (v === k ? null : k))}
+              className={filterBtn(cls === k)}
+            >
+              <img
+                src={img.klass(k)}
+                alt={labels.classNames[k] ?? k}
+                className="h-5 w-5"
+                width={20}
+                height={20}
+              />
+            </button>
+          ))}
         </div>
       </div>
-    </div>
+      <div className="grid grid-cols-4 gap-2 overflow-y-auto px-4 pb-4 sm:grid-cols-6">
+        {shown.map((c) => (
+          <button
+            key={c.id}
+            type="button"
+            onClick={() => onPick(c)}
+            className="hover:bg-surface-overlay/70 rounded-lg p-1 transition"
+          >
+            <CharacterPortrait
+              id={c.id}
+              name={c.label}
+              element={c.element}
+              classType={c.cls}
+              rarity={c.rarity}
+              size={64}
+            />
+          </button>
+        ))}
+        {!shown.length && (
+          <p className="text-content-subtle col-span-full py-6 text-center text-sm">
+            {labels.all}: 0
+          </p>
+        )}
+      </div>
+    </Modal>
   );
 }
 

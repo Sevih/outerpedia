@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { useDialogFocus } from '@/hooks/useDialogFocus';
+import { useState, useMemo, useCallback, useEffect } from 'react';
+import { Lightbox } from '@/components/ui/Modal';
 import { wallpaperSrc, wallpaperDownload, reusesHeroArt } from '@/lib/wallpapers';
 import { ARCHIVED } from './archived';
 
@@ -104,26 +104,19 @@ export function WallpapersGallery({
     [items.length],
   );
 
+  // La lightbox (`Lightbox`) tient Échap, le focus et le scroll de fond ; les
+  // flèches du clavier restent ici, avec l'index.
   useEffect(() => {
     if (lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowLeft') nav(-1);
+      if (e.key === 'ArrowLeft') nav(-1);
       else if (e.key === 'ArrowRight') nav(1);
     };
     document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
-    };
-  }, [lightbox, close, nav]);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [lightbox, nav]);
 
   const current = lightbox !== null ? items[lightbox] : null;
-  // Échap et les flèches sont déjà écoutés au niveau `document` (ci-dessus) :
-  // le hook n'apporte que l'entrée, le piège et le retour du focus.
-  const dialogRef = useRef<HTMLDivElement>(null);
-  useDialogFocus(dialogRef, { active: current !== null });
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -212,55 +205,13 @@ export function WallpapersGallery({
 
       {/* Lightbox */}
       {current && (
-        // Le clic sur le fond reste un raccourci souris ; au clavier, Échap et
-        // la croix nommée ferment.
-        <div
-          ref={dialogRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label={current.f}
-          className="bg-scrim/95 fixed inset-0 z-100 flex items-center justify-center p-4"
-          onClick={close}
+        <Lightbox
+          label={current.f}
+          onClose={close}
+          labels={strings}
+          counter={`${lightbox! + 1} / ${items.length}`}
+          onNavigate={items.length > 1 ? nav : undefined}
         >
-          <button
-            type="button"
-            onClick={close}
-            aria-label={strings.close}
-            className="text-content/70 hover:text-content absolute top-4 right-4 z-10 p-2 transition-colors"
-          >
-            <CloseGlyph className="size-8" />
-          </button>
-          <div className="text-content/70 absolute top-4 left-4 z-10 text-sm">
-            {lightbox! + 1} / {items.length}
-          </div>
-
-          {items.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nav(-1);
-                }}
-                aria-label={strings.previous}
-                className="text-content/50 hover:text-content absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 transition-colors"
-              >
-                <ChevronGlyph className="size-10 rotate-180" />
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nav(1);
-                }}
-                aria-label={strings.next}
-                className="text-content/50 hover:text-content absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 transition-colors"
-              >
-                <ChevronGlyph className="size-10" />
-              </button>
-            </>
-          )}
-
           <img
             src={current.src}
             alt={current.f}
@@ -294,7 +245,7 @@ export function WallpapersGallery({
               {strings.download}
             </a>
           </div>
-        </div>
+        </Lightbox>
       )}
     </div>
   );
@@ -317,38 +268,6 @@ function InfoGlyph({ className }: { className?: string }) {
         strokeLinejoin="round"
         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       />
-    </svg>
-  );
-}
-function CloseGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-      aria-hidden
-    >
-      <path d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
-}
-function ChevronGlyph({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-      aria-hidden
-    >
-      <path d="M9 5l7 7-7 7" />
     </svg>
   );
 }
