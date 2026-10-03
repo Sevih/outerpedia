@@ -7,6 +7,83 @@
 
 ## 2026-10-03
 
+- **Lot F1 : `HeroTrackerBrowser.tsx` découpé — 2 246 → 221 lignes, dix
+  fichiers, zéro retranscription** (Fable). Le quoi : le composant client
+  géant du hero-tracker éclaté sur le modèle du damage calculator du 25/08
+  (types et contrats, store, briques UI, hooks `use-*`, sections) ; le
+  `Browser` garde la composition et le câblage. Le pourquoi : troisième et
+  dernier « composant qui tient tout » après F2 et F3 — l'item du TODO, soldé
+  sur ses trois fichiers, est retiré. Le comment : un SCRIPT de tranches de
+  lignes lu sur une copie figée de l'original (17 tranches, 2 194 des 2 246
+  lignes — le reste : les 36 lignes de l'ancien bloc d'imports et 16 lignes
+  vides ; aucune ligne en double), en trois étapes — (1) contrats, store,
+  briques ; (2) sections ; (3) hooks —, `pnpm typecheck` / `pnpm lint` /
+  `pnpm test` verts après CHACUNE. Les seules retouches DANS une tranche :
+  30 mots `export`. Le reste de ce qui est neuf est de l'enveloppe —
+  en-têtes, imports, signatures des deux hooks, leurs objets de retour, leur
+  destructuration dans le `Browser`, et six lignes ajoutées à son docblock
+  pour dire où tout est parti. La carte, avant : un fichier,
+  `HeroTrackerBrowser.tsx` 2 246 l. Après : `contracts.ts` 227 (types du
+  pont serveur → client `HeroRow` / `HeroTrackerData` / `HeroTrackerLabels` /
+  `TranscendStep` / `ItemAsset`, `TrackerState`, `SortKey` / `RosterFilters`
+  / `BoolSetting`, constantes de règle, `piecesApart`), `stores.ts` 69
+  (`SPEC` : clé `outerpedia:hero-tracker`, version 2, migration v1,
+  `normalize` — inchangés), `ui.tsx` 341 (`fmt` / `short` / `starLabel`,
+  `Field`, `Rail`, `PieceIcon`, `NeedChip`, `replace`, `Scale`, `Stepper`,
+  `Presets`, `NumberField`), `use-tracker-state.ts` 327 (le store, les états
+  de session, les barèmes rendus au moteur, `needs` / `total`, `update` /
+  `toggle` / `onImport`), `use-roster-view.ts` 221 (liste de courses,
+  roster filtré puis trié, gel de l'ordre, tiroir « ajouter »),
+  `SummaryPanel.tsx` 265, `Settings.tsx` 181, `HeroCard.tsx` 474,
+  `roster.tsx` 243 (`RosterBar`, `HeroPicker`, `EmptyState`),
+  `HeroTrackerBrowser.tsx` 221 ; `index.tsx` ne change que d'import (ses
+  quatre types viennent de `contracts.ts`). `engine.ts`, `roster-import.ts`
+  et leurs tests ne bougent pas : ils couvrent du code qui n'a pas bougé.
+  L'état sort en DEUX hooks destructurés sous les MÊMES noms, le JSX du
+  `Browser` est sa tranche d'origine ; seule adaptation, comme `savedScnsLen`
+  le 25/08 : ce que les dérivés de `use-roster-view` lisaient dans la portée
+  du composant leur arrive en paramètres, sous les mêmes noms (quatorze
+  valeurs sorties de `use-tracker-state`, passées telles quelles — mêmes
+  références, donc mêmes dépendances de `useMemo`, et l'ordre des hooks React
+  est celui de l'original). Ce qui a été comparé pour dire que rien ne
+  bouge : (a) un vérificateur relit les fichiers SUR DISQUE après prettier et
+  retrouve chaque tranche au caractère près, à l'`export` près, chaque ligne
+  de l'original partie une fois et une seule ; (b) un harnais jetable, hors
+  dépôt, monte sous happy-dom l'ORIGINAL (la copie figée) et le découpé avec
+  les vraies props du wrapper serveur, leur joue la même suite d'actions
+  tirées au hasard d'une graine (clics, maj+clics, appuis longs de 480 ms,
+  cases, saisies, six imports de roster dont quatre refusés et un vide,
+  remise à zéro)
+  et compare le DOM entier ET la valeur du localStorage après CHAQUE action :
+  3 076 états sur huit départs (store vide, store riche en anglais et en
+  français, store v1 à migrer, store illisible, version inconnue), tous
+  identiques, `console.error` muet des deux côtés ; un témoin négatif (barème
+  d'XP amputé d'un niveau) est bien vu dès le premier état ; (c) le HTML
+  servi par le serveur de dev déjà ouvert sur `/hero-tracker`, arbre
+  découpé, contient au caractère près le rendu serveur de l'ORIGINAL dans
+  les six langues. Vérification :
+  `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, sortie 0),
+  `pnpm lint` (`eslint`, sortie 0), `pnpm test` (`Tests 2013 passed (2013)`).
+  Laissé : aucune comparaison de
+  pixels dans un vrai navigateur (happy-dom ne met rien en page ; DOM et
+  classes étant identiques, le coup d'œil reste à Sevih) ; le harnais n'est
+  pas commité (il tire ses actions au hasard et dure quatre minutes, ce
+  n'est pas un test à garder tel quel) ; les saisies au clavier dans les
+  champs de niveau y sont rares (16 en tout — ils n'existent que carte
+  dépliée). Vu en passant, PAS corrigé : plats et cadeaux sont nommés
+  par `b.entry.name.en` dans la liste de courses et sur les puces de besoin
+  (quatre endroits), donc en anglais dans les six langues alors que la table
+  porte les six noms et que les autres items arrivent traduits du wrapper ;
+  le tri par besoin dit ranger un héros fini « DERRIÈRE, quel que soit le
+  sens », mais sa valeur −1 le place en TÊTE dès qu'on reclique le critère
+  pour passer en croissant ; deux docblocks sont posés au-dessus du mauvais
+  voisin (« Un héros DÉCOMPTÉ » coiffe `shown` au lieu de `counted`,
+  « L'ORDRE est figé » coiffe `liveSorted` au lieu de `sortedRows`), déplacés
+  tels quels ; `docs/audit/transverse.md` cite `HeroTrackerBrowser.tsx:1975`,
+  `:1223` et `:2165`, des lignes qui vivent maintenant dans `ui.tsx`,
+  `Settings.tsx` et `roster.tsx` (audit daté, non retouché) ; le TODO
+  annonçait 2 113 lignes et le lot 2 251 pour un fichier qui en faisait
+  2 246.
 - **Lot F3 : `ProgressTrackerBrowser.tsx` découpé — 1 435 → 230 lignes, huit
   fichiers, zéro retranscription** (Fable). Le quoi : le composant client
   géant du progress tracker éclaté sur le modèle du damage calculator du 25/08

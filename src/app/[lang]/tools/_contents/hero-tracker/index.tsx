@@ -17,13 +17,8 @@ import { getEquipmentEe } from '@/lib/data/equipment-ee';
 import { getSkills } from '@/lib/data/skills';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { tagsInGroup } from '@/lib/data/tags';
-import {
-  HeroTrackerBrowser,
-  type HeroRow,
-  type HeroTrackerLabels,
-  type ItemAsset,
-  type TranscendStep,
-} from './HeroTrackerBrowser';
+import { HeroTrackerBrowser } from './HeroTrackerBrowser';
+import type { HeroRow, HeroTrackerLabels, ItemAsset, TranscendStep } from './contracts';
 import type { LimitBreakCost } from './engine';
 
 /**
