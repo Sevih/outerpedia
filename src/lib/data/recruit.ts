@@ -1,10 +1,16 @@
 /**
  * Accès au DOMAINE RECRUTEMENT (`data/generated/recruit.json`) : pool du
- * Custom Recruit, taux/coûts par type de bannière, apparitions bannière des
- * persos limited. Donnée générée → import statique figé (même choix que
+ * Custom Recruit, taux/coûts et pool hors focus par type de bannière,
+ * apparitions bannière des persos limited. Donnée générée → import statique figé (même choix que
  * characters.ts).
  */
-import type { RecruitBanner, RecruitData, RecruitKind, RecruitKindInfo } from '@contracts';
+import type {
+  RecruitBanner,
+  RecruitData,
+  RecruitKind,
+  RecruitKindInfo,
+  RecruitPoolTier,
+} from '@contracts';
 import recruitData from '@data/generated/recruit.json';
 
 const RECRUIT = recruitData as unknown as RecruitData;
@@ -14,6 +20,15 @@ let customSet: Set<string> | undefined;
 /** Le perso (id) est-il recrutable au Custom Recruit ? */
 export function isInCustomRecruitPool(id: string): boolean {
   return (customSet ??= new Set(RECRUIT.customPool)).has(id);
+}
+
+/**
+ * Pool HORS FOCUS d'un type de bannière : qui peut sortir, un palier par
+ * rareté (3★ d'abord), vedette de la bannière exclue. Vide pour `equipment`,
+ * qui tire des objets.
+ */
+export function getRecruitPool(kind: RecruitKind): RecruitPoolTier[] {
+  return getRecruitKind(kind).pool ?? [];
 }
 
 /** Fiche taux/coûts d'un type de bannière — inconnu = bug de données, on jette. */

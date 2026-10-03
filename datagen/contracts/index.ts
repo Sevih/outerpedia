@@ -98,6 +98,7 @@ export type {
   RecruitDrop,
   RecruitKind,
   RecruitKindInfo,
+  RecruitPoolTier,
   RecruitRate,
 } from '../generators/recruit';
 export type { CharacterReleaseFile } from '../generators/character-release';

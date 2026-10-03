@@ -20,6 +20,14 @@
  *                 même convention AT_↔SYS_ASSET que buildAssetTypes), pulls
  *                 gratuits, et coût mileage (ProductTemplet PC_MILEAGE — mode
  *                 des PriceValue sur les persos du type).
+ *                 Les bannières de persos portent en plus leur POOL HORS
+ *                 FOCUS (`pool`) : qui peut sortir à chaque rareté, par le
+ *                 même chemin que customPool (palier CHARACTER →
+ *                 RecruitRecipeTemplet.CharacterID), palier vedette
+ *                 (`_TITLE_05`) exclu. La colonne `Rate` (poids du perso DANS
+ *                 son palier) n'est émise que là où elle départage : au
+ *                 Demiurge, les premium pèsent 1 contre 2 pour les autres ;
+ *                 partout ailleurs elle vaut 1 pour tous, donc tirage uniforme.
  *   banners     — TOUTES les apparitions bannière à pickup de perso
  *                 (SEASONAL/OUTER_FES + leurs SELECTION) : release/rerun des
  *                 limited se DÉRIVENT (data/banner.json était maintenu à la
@@ -30,7 +38,8 @@
  *                 disparues, et toute disparition non archivée/assumée casse
  *                 la génération (cf. mergeArchivedBanners).
  *
- * Un PickupID de bannière inconnu de CharacterTemplet casse la génération.
+ * Un PickupID de bannière inconnu de CharacterTemplet casse la génération,
+ * comme un CharacterID de pool (custom ou hors focus).
  */
 import type { LangDict } from '../lib/lang';
 import { DUMP_PATH, assetTypeKeys } from '../lib/dump';
@@ -71,6 +80,19 @@ export interface RecruitRate {
   drops?: RecruitDrop[];
 }
 
+/** Un palier du pool hors focus d'une bannière : qui sort à cette rareté. */
+export interface RecruitPoolTier {
+  /** Rareté de base des persos du palier (`BasicStar`). */
+  rarity: 1 | 2 | 3;
+  /** Ids de perso, triés. */
+  characterIds: string[];
+  /**
+   * Poids de tirage DANS le palier (colonne `Rate`), par id de perso. Présent
+   * seulement quand ils ne sont pas tous égaux ; absent = tirage uniforme.
+   */
+  weights?: Record<string, number>;
+}
+
 /**
  * Les types de bannière documentés par les guides. `equipment` (Dimensional
  * Supply) tire de l'ÉQUIPEMENT, pas des persos : ses paliers sont des recettes
@@ -83,6 +105,11 @@ export interface RecruitKindInfo {
   /** Groupe de référence (le plus récent du type) — pour audit. */
   groupId: string;
   rates: RecruitRate[];
+  /**
+   * Pool hors focus, un palier par rareté (3★ d'abord), vedette exclue. Absent
+   * de `equipment`, qui ne tire pas de persos.
+   */
+  pool?: RecruitPoolTier[];
   /** Prix éther d'un tirage / de dix. */
   price1: number;
   price10: number;
@@ -214,6 +241,49 @@ function buildCustomPool(groups: Row[], gradeRecipes: Row[]): string[] {
   return [...pool].sort((a, b) => a.localeCompare(b));
 }
 
+/** Palier VEDETTE d'une bannière (le pickup) — il n'est pas du pool hors focus. */
+const FEATURED_TITLE = 'SYS_RECRUIT_RATEINFO_TITLE_05';
+
+/**
+ * Pool hors focus d'un groupe : ses paliers CHARACTER sauf la vedette, chacun
+ * avec ses persos (`RecruitRecipeTemplet`). La rareté d'un palier est le
+ * `BasicStar` de ses lignes — un palier qui en mélange deux, ou deux paliers
+ * de même rareté, ne se lisent plus « un pool par rareté » : on jette.
+ */
+export function poolOf(gradeRecipes: Row[], recipes: Row[], groupId: string): RecruitPoolTier[] {
+  const tiers: RecruitPoolTier[] = [];
+  for (const grade of gradeRecipes) {
+    if (grade.GroupID !== groupId || grade.RecipeType !== 'CHARACTER') continue;
+    if (grade.Title === FEATURED_TITLE) continue;
+    const rows = recipes
+      .filter((r) => r.GradeGroupID === grade.ID)
+      .sort((a, b) => a.CharacterID.localeCompare(b.CharacterID));
+    const stars = [...new Set(rows.map((r) => num(r.BasicStar)))];
+    const rarity = stars[0];
+    if (stars.length !== 1 || (rarity !== 1 && rarity !== 2 && rarity !== 3)) {
+      throw new Error(
+        `recruit : palier ${grade.ID} (groupe ${groupId}) — rareté illisible (BasicStar : ${stars.join(', ') || 'aucune ligne'})`,
+      );
+    }
+    if (tiers.some((t) => t.rarity === rarity)) {
+      throw new Error(`recruit : groupe ${groupId} — deux paliers hors focus de rareté ${rarity}`);
+    }
+    const characterIds = rows.map((r) => r.CharacterID);
+    if (new Set(characterIds).size !== characterIds.length) {
+      throw new Error(`recruit : palier ${grade.ID} (groupe ${groupId}) — perso en double`);
+    }
+    const uniform = new Set(rows.map((r) => num(r.Rate))).size === 1;
+    tiers.push({
+      rarity,
+      characterIds,
+      ...(uniform
+        ? {}
+        : { weights: Object.fromEntries(rows.map((r) => [r.CharacterID, num(r.Rate)])) }),
+    });
+  }
+  return tiers.sort((a, b) => b.rarity - a.rarity);
+}
+
 /** Options de `ratesOf` — au-delà de deux, les positionnels deviennent illisibles. */
 export interface RatesOptions {
   /**
@@ -321,6 +391,7 @@ export function buildRecruit(): RecruitData {
   const groups = loadTable('RecruitGroupTemplet');
   const gradeRecipes = loadTable('RecruitGradeRecipeTemplet');
   const knownChars = new Set(loadTable('CharacterTemplet').map((c) => c.ID));
+  const recipes = loadTable('RecruitRecipeTemplet');
   const itemRecipes = loadTable('RecruitItemRecipeTemplet');
   // `IT_EQUIP` separe la piece d'equipement du lot nomme : c'est la seule chose
   // qui les distingue, ItemTemplet portant les deux.
@@ -401,6 +472,15 @@ export function buildRecruit(): RecruitData {
       .sort((a, b) => (a.StartDate ?? '').localeCompare(b.StartDate ?? ''));
     const ref = candidates[candidates.length - 1];
     if (!ref) throw new Error(`recruit : aucun groupe pour le type « ${kind} »`);
+    const pool = kind === 'equipment' ? undefined : poolOf(gradeRecipes, recipes, ref.ID);
+    const unknownInPool = (pool ?? [])
+      .flatMap((t) => t.characterIds)
+      .filter((id) => !knownChars.has(id));
+    if (unknownInPool.length) {
+      throw new Error(
+        `recruit : CharacterID inconnus dans le pool « ${kind} » (groupe ${ref.ID}) — ${unknownInPool.join(', ')}`,
+      );
+    }
     kinds.push({
       kind,
       groupId: ref.ID,
@@ -409,6 +489,7 @@ export function buildRecruit(): RecruitData {
         itemRecipes,
         isEquip,
       }),
+      ...(pool ? { pool } : {}),
       price1: num(ref.Price_1),
       price10: num(ref.Price_10),
       ...(ticketIdOf(ref, 'RecruitTicketID')

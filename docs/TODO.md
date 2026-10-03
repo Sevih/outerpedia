@@ -52,11 +52,6 @@
 
 ### Lot 2 — métier, données, outillage
 
-- [ ] Pull simulator : pool HORS-FOCUS lu dans les tables du jeu (G9, reste)
-      — lot B13. Trouvé le 03/10 : le chemin de `customPool`
-      (`RecruitGroupTemplet` → `RecruitGradeRecipeTemplet` →
-      `RecruitRecipeTemplet`) donne le pool de chaque type de bannière ; le
-      générateur ne l'émet pas encore et le simulateur trie par tags.
 - [ ] Chips à lien au toucher (G4) : le « second tap = navigation » est en
       prod depuis le 09/09, jamais essayé sur un vrai téléphone. Sur
       `outerpedia.com/guides/guild-raid/frost-legion`, toucher un nom de

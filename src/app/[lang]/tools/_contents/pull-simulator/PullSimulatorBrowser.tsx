@@ -19,7 +19,7 @@ import {
 
 export type GachaCategory = 'normal' | 'premium' | 'limited';
 
-/** Perso mineur (rareté 1-2) : juste de quoi afficher un résultat. */
+/** Un perso tel qu'il s'affiche dans un résultat (toute rareté). */
 export interface GachaMinor {
   id: string;
   name: string;
@@ -31,18 +31,25 @@ export interface GachaMinor {
   rarity: number;
 }
 
-/** Perso 3★ tirable, catégorisé pour les pools de bannière. */
+/** Perso 3★ sélectionnable comme vedette, catégorisé par tags. */
 export interface GachaChar extends GachaMinor {
   category: GachaCategory;
-  /**
-   * Recrutable au Custom Recruit (`recruit.json.customPool`, donnée du jeu).
-   * Orthogonal à `category` : le jeu n'y met ni les derniers sortis ni certains
-   * premium — 35 des 91 3★ en sont absents (audit 07/09).
-   */
-  inCustomPool: boolean;
   /** Noms recherchables normalisés (toutes langues + alias). */
   searchNames: string[];
 }
+
+/** Un perso du pool hors focus et son poids de tirage DANS son palier. */
+export interface GachaPoolEntry {
+  id: string;
+  weight: number;
+}
+
+/**
+ * Pool hors focus d'une bannière, par rareté — lu dans `recruit.json` (les
+ * tables du jeu), pas déduit des tags : le jeu n'y met ni les derniers sortis,
+ * ni les persos offerts, ni tous les 1★/2★ du catalogue.
+ */
+export type GachaPool = Record<1 | 2 | 3, GachaPoolEntry[]>;
 
 export interface PullSimLabels {
   banners: Record<BannerType, string>;
@@ -79,32 +86,12 @@ const BANNER_FOCUS_CATEGORY: Record<BannerType, GachaCategory | null> = {
   limited: 'limited',
 };
 
-/**
- * Catégories présentes dans le pool hors focus. `custom` ne se décide PAS par
- * catégorie mais par `inCustomPool` (cf. `pullPool`) — la liste ici dit
- * seulement quelles catégories la bannière peut contenir.
- */
-const BANNER_POOL: Record<BannerType, Set<GachaCategory>> = {
-  custom: new Set(['normal', 'premium', 'limited']),
-  rateup: new Set(['normal']),
-  premium: new Set(['normal', 'premium']),
-  limited: new Set(['normal']),
-};
-
 /** Nombre de focus autorisés par bannière. */
 const BANNER_FOCUS_COUNT: Record<BannerType, number> = {
   custom: 0,
   rateup: 1,
   premium: 1,
   limited: 1,
-};
-
-/** Poids de sélection hors focus par catégorie (inchangés). */
-const BANNER_CATEGORY_WEIGHT: Record<BannerType, Record<GachaCategory, number>> = {
-  custom: { normal: 1, premium: 1, limited: 1 },
-  rateup: { normal: 1, premium: 1, limited: 1 },
-  premium: { normal: 1, premium: 0.5, limited: 1 },
-  limited: { normal: 1, premium: 1, limited: 1 },
 };
 
 /**
@@ -124,13 +111,17 @@ const RARITY_GLOW: Record<1 | 2 | 3, string> = {
 const FOCUS_STYLE =
   'ring-2 ring-red-400/60 border-red-500/50 bg-red-900/20 shadow-[0_0_12px_rgba(248,113,113,0.3)]';
 
-/** Tirage au sort pondéré par catégorie. */
-function weightedPick(pool: GachaChar[], weights: Record<GachaCategory, number>): GachaChar {
-  const total = pool.reduce((sum, c) => sum + weights[c.category], 0);
+/**
+ * Tirage au sort dans un palier, pondéré par le poids du jeu (colonne `Rate`).
+ * Le jeu ne départage qu'au Demiurge (premium à 1, les autres à 2) ; partout
+ * ailleurs les poids sont égaux et le tirage est uniforme.
+ */
+function weightedPick(pool: GachaPoolEntry[]): GachaPoolEntry {
+  const total = pool.reduce((sum, e) => sum + e.weight, 0);
   let roll = Math.random() * total;
-  for (const c of pool) {
-    roll -= weights[c.category];
-    if (roll <= 0) return c;
+  for (const e of pool) {
+    roll -= e.weight;
+    if (roll <= 0) return e;
   }
   return pool[pool.length - 1];
 }
@@ -146,14 +137,17 @@ type ResolvedPull = PullResult & { charId: string | null };
  */
 export function PullSimulatorBrowser({
   characters,
-  pool1,
-  pool2,
+  others,
+  pools,
   labels,
   configs,
 }: {
+  /** Vedettes sélectionnables (3★ du catalogue). */
   characters: GachaChar[];
-  pool1: GachaMinor[];
-  pool2: GachaMinor[];
+  /** Ce qui sort des pools sans être une vedette possible (affichage seul). */
+  others: GachaMinor[];
+  /** Pool hors focus de chaque bannière, LU dans `recruit.json`. */
+  pools: Record<BannerType, GachaPool>;
   labels: PullSimLabels;
   /** Taux et coûts DÉRIVÉS de `recruit.json` par le wrapper serveur. */
   configs: Record<BannerType, BannerConfig>;
@@ -168,19 +162,11 @@ export function PullSimulatorBrowser({
   const config = configs[bannerType];
   const maxFocus = BANNER_FOCUS_COUNT[bannerType];
   const focusCategory = BANNER_FOCUS_CATEGORY[bannerType];
-  const poolCategories = BANNER_POOL[bannerType];
-  const weights = BANNER_CATEGORY_WEIGHT[bannerType];
+  const pool = pools[bannerType];
 
   const focusPool = useMemo(
     () => (focusCategory === null ? [] : characters.filter((c) => c.category === focusCategory)),
     [characters, focusCategory],
-  );
-  const pullPool = useMemo(
-    () =>
-      characters.filter((c) =>
-        bannerType === 'custom' ? c.inCustomPool : poolCategories.has(c.category),
-      ),
-    [characters, poolCategories, bannerType],
   );
   const focusChars = useMemo(
     () =>
@@ -192,10 +178,9 @@ export function PullSimulatorBrowser({
   // Index id → perso (résolution des cartes de résultat).
   const charById = useMemo(() => {
     const m = new Map<string, GachaMinor>();
-    for (const list of [characters, pool1, pool2] as GachaMinor[][])
-      for (const c of list) m.set(c.id, c);
+    for (const list of [characters, others] as GachaMinor[][]) for (const c of list) m.set(c.id, c);
     return m;
-  }, [characters, pool1, pool2]);
+  }, [characters, others]);
 
   // La bannière custom n'a pas de focus ; les autres en exigent au moins un.
   const canPull = maxFocus === 0 || focusChars.length > 0;
@@ -219,20 +204,17 @@ export function PullSimulatorBrowser({
     [bannerType],
   );
 
-  // Qui sort : rareté 1/2 au hasard des pools mineurs ; 3★ focus parmi les
-  // vedettes choisies, sinon tirage pondéré du pool hors focus.
+  // Qui sort : le focus parmi les vedettes choisies ; sinon tirage pondéré dans
+  // le palier de la rareté tirée, vedettes choisies retirées (le jeu ne laisse
+  // pas la vedette dans son propre pool hors focus).
   const resolveChar = useCallback(
     (pull: PullResult): string | null => {
-      if (pull.rarity === 1)
-        return pool1.length ? pool1[Math.floor(Math.random() * pool1.length)].id : null;
-      if (pull.rarity === 2)
-        return pool2.length ? pool2[Math.floor(Math.random() * pool2.length)].id : null;
       if (pull.isFocus && focusChars.length > 0)
         return focusChars[Math.floor(Math.random() * focusChars.length)].id;
-      const offPool = pullPool.filter((c) => !selectedIds.includes(c.id));
-      return offPool.length ? weightedPick(offPool, weights).id : null;
+      const offPool = pool[pull.rarity].filter((e) => !selectedIds.includes(e.id));
+      return offPool.length ? weightedPick(offPool).id : null;
     },
-    [pool1, pool2, focusChars, pullPool, selectedIds, weights],
+    [focusChars, pool, selectedIds],
   );
 
   // Les tirages se calculent HORS des updaters (un updater doit être pur :

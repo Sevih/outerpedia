@@ -7,6 +7,81 @@
 
 ## 2026-10-03
 
+- **Lot B13 : le pull simulator tire dans les pools du jeu, plus dans un tri
+  par tags (G9, fin)** (Opus). Le quoi : `recruit.json` porte désormais, pour
+  chaque bannière de persos, son pool HORS FOCUS par rareté, et le simulateur
+  le lit au lieu de le deviner. Le pourquoi : le simulateur décidait qui sort
+  hors focus par les tags (`premium`, famille `limited`, sinon `normal`) et
+  par deux tables en dur (`BANNER_POOL`, `BANNER_CATEGORY_WEIGHT`), et
+  remplissait les 1★/2★ avec TOUT le catalogue ; le jeu, lui, a un pool
+  explicite par bannière, que la donnée n'exposait que pour le Custom Recruit
+  (`customPool`). Le comment — générateur (`datagen/generators/recruit.ts`) :
+  `poolOf(gradeRecipes, recipes, groupId)`, pur et exporté, suit le chemin de
+  `buildCustomPool` (paliers `CHARACTER` du groupe →
+  `RecruitRecipeTemplet.CharacterID`) en sautant le palier vedette
+  (`SYS_RECRUIT_RATEINFO_TITLE_05`) ; la rareté d'un palier est le `BasicStar`
+  de ses lignes ; un palier vide, à raretés mêlées, à perso en double, ou deux
+  paliers de même rareté cassent la génération, comme un id absent de
+  `CharacterTemplet`. Chaque entrée de `kinds` gagne `pool`
+  (`RecruitPoolTier[]` : `rarity`, `characterIds` triés, `weights?`), lu sur
+  son groupe de référence ; `equipment` n'en a pas. La colonne `Rate` n'est
+  émise (`weights`, par id) que là où elle départage : UN seul palier, le 3★
+  du Demiurge (11 premium à 1, 58 autres à 2) ; sur les onze autres paliers
+  elle vaut 1 pour tous et n'est PAS émise. Type exporté par `@contracts`, doc
+  d'en-tête à jour. Régénération : au premier `pnpm datagen:promote` à blanc,
+  `items.json` et `shop-priorities.json` différaient aussi (traductions des
+  curés commitées mais jamais régénérées) — arrêt, rien promu ; une fois ces
+  deux écarts promus par Fable (`b0b0c7ff`), le promote à blanc ne montrait
+  plus que `recruit.json` (`64 identique(s), 1 différent(s)`), promu par
+  `pnpm datagen:promote --apply` ; hors `pool`, le fichier est identique
+  (`customPool`, `banners` et les cinq fiches comparés champ à champ).
+  Simulateur : accesseur `getRecruitPool(kind)` dans `src/lib/data/recruit.ts`
+  ; `index.tsx` passe au client `pools` (par bannière et par rareté, des
+  `{ id, weight }`, poids 1 quand le jeu n'en publie pas) et `others` (de quoi
+  afficher ce qui sort sans être une vedette possible) à la place de `pool1` /
+  `pool2` ; `PullSimulatorBrowser.tsx` perd `BANNER_POOL`,
+  `BANNER_CATEGORY_WEIGHT` et `inCustomPool`, et `weightedPick` pondère par le
+  poids du jeu. Les poids par catégorie ne survivent donc que là où le jeu les
+  justifie : premium moitié moins probable au Demiurge (1 contre 2 — le même
+  rapport que l'ancien 0,5 en dur) ; partout ailleurs, tirage UNIFORME dans le
+  palier. Le choix de la vedette n'a pas bougé (3★ hors fusion, catégorie par
+  tags), et la vedette choisie reste retirée du pool hors focus — vérifié sur
+  les tables : dans les 45 groupes à vedette, elle n'est jamais dans son
+  propre palier 3★. Ce qui entre et sort, par rapport au tri par tags (rien
+  n'entre nulle part) — 3★ : Custom 56 → 56, inchangé (il lisait déjà
+  `customPool`) ; Rate Up 63 → 58, sortent Maxwell, Leo, Titia, Resonance Rin,
+  Resonance Eliza ; Premium 75 → 69, sortent les cinq mêmes et Demiurge Saeran
+  ; Limited 63 → 57, sortent les cinq mêmes et Lambda. 2★ : 25 → 20 sur les
+  quatre bannières, sortent K, Snow, Lisha, Eva, Pesketh. 1★ : 9 → 5 sur les
+  quatre, sortent Bleu, Guizam, Flamberge, Orox. Les pools 2★ et 1★ sont les
+  mêmes d'une bannière à l'autre. La vérification : `pnpm typecheck` — rien
+  après la ligne de commande, code 0 ; `pnpm lint` — `$ eslint`, code 0 ;
+  `pnpm test` — `Test Files  175 passed (175)`, `Tests  2020 passed (2020)`.
+  `recruit.test.ts` gagne trois tests synthétiques de `poolOf` (vedette, autre
+  groupe et recettes `ASSET` écartés ; poids émis seulement s'ils départagent ;
+  les quatre cas qui jettent) et quatre invariants sur le fichier commité
+  (paliers 3/2/1 par bannière et aucun pour `equipment` ; ids triés, uniques,
+  connus de `characters.json` et de la rareté du palier ; poids couvrant leur
+  palier ; pool du Custom égal à `customPool`). Sur le serveur de dev déjà
+  lancé, `curl /pull-simulator` rend 200 et le payload porte `pools` (58
+  entrées au poids 2, 282 au poids 1) et 25 `others`, plus de `pool1` ni
+  d'`inCustomPool`. Aucun changement visuel : le diff de
+  `PullSimulatorBrowser.tsx` s'arrête avant le `return`, le JSX n'a pas une
+  ligne modifiée ; le rendu à l'écran et un tirage réel ne sont PAS vérifiés
+  dans un navigateur. Laissé : (1) **Demiurge Saeran ne sort plus hors focus
+  en Premium quand on choisit une autre vedette** — elle est la vedette du
+  groupe de référence (10017), donc hors de son pool, alors que les onze
+  autres bannières Demiurge du jeu l'ont au poids 1 ; le groupe de référence
+  seul ne permet pas de la remettre, il faudrait émettre le pool par vedette
+  (ou l'union des groupes du type), c'est une décision. (2) Lambda est dans le
+  pool du Rate Up et pas dans celui du Limited : le groupe de référence
+  limited (5014, 14/07) est plus vieux que celui du pickup (124, 22/09) ;
+  Anarky est en Rate Up et en Limited mais pas au Custom — ce sont les tables.
+  (3) Les vedettes sélectionnables viennent toujours des tags, comme demandé :
+  on peut donc mettre en vedette Rate Up un perso que le jeu ne tire pas
+  (Maxwell, Leo, Titia). (4) `customPool` fait double emploi avec le `pool` de
+  la fiche `custom` ; gardé, un guide le lit, et un test verrouille leur
+  égalité.
 - **Relecture de la deuxième série : A22, A23, A24, B12, B14, F1, F2, F3, F4**
   (Fable). `pnpm typecheck`, `pnpm lint`, `pnpm test` passent sur l'ensemble
   (175 fichiers, 2 013 tests) ; aucun lot ne touche `package.json`. Découpes

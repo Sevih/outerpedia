@@ -2,14 +2,16 @@
  * Tests du générateur recruit — les DEUX registres actés (TODO 17/07) :
  *
  *   1. CŒURS PURS en synthétique : `ratesOf` (la vraie logique — des POIDS
- *      bruts normalisés en %, filtrés par groupe et par type de recette) et
- *      `isoDate` (troncature de la date du jeu). Aucune table requise.
+ *      bruts normalisés en %, filtrés par groupe et par type de recette),
+ *      `poolOf` (le pool hors focus d'un groupe : vedette exclue, un palier
+ *      par rareté, poids émis seulement s'ils départagent) et `isoDate`
+ *      (troncature de la date du jeu). Aucune table requise.
  *
  *   2. INVARIANTS RÉFÉRENTIELS sur `data/generated/recruit.json` committé
  *      (modèle encounters.test.ts) : les 5 types documentés, des taux qui
- *      somment à 100 %, et chaque perso (pool custom, pickup bannière) doit
- *      exister dans characters.json. Une dérive rendrait un guide de bannière
- *      faux sans aucun symptôme.
+ *      somment à 100 %, et chaque perso (pool custom, pool hors focus, pickup
+ *      bannière) doit exister dans characters.json. Une dérive rendrait un
+ *      guide de bannière ou le pull simulator faux sans aucun symptôme.
  *
  * La suite tourne SANS `.gamedata` (contrainte CI) : rien ici n'appelle
  * `buildRecruit()` ni `loadTable`.
@@ -20,7 +22,7 @@ import charactersData from '../../data/generated/characters.json';
 import itemsData from '../../data/generated/items.json';
 import type { LangDict } from '../lib/lang';
 import type { Row } from '../lib/tables';
-import { isoDate, ratesOf, type RecruitData, type RecruitKind } from './recruit';
+import { isoDate, poolOf, ratesOf, type RecruitData, type RecruitKind } from './recruit';
 
 // ─── 1. Cœurs purs (synthétique) ─────────────────────────────────────────────
 
@@ -134,6 +136,67 @@ describe('ratesOf — poids normalisés en %', () => {
   });
 });
 
+describe('poolOf — pool hors focus d’un groupe', () => {
+  const tier = (ID: string, Title: string, RecipeType = 'CHARACTER', GroupID = 'g'): Row => ({
+    ID,
+    GroupID,
+    RecipeType,
+    Title,
+  });
+  const grades: Row[] = [
+    tier('focus', 'SYS_RECRUIT_RATEINFO_TITLE_05'),
+    tier('one', 'SYS_RECRUIT_RATEINFO_TITLE_01'),
+    tier('three', 'SYS_RECRUIT_RATEINFO_TITLE_03'),
+    tier('asset', 'SYS_RECRUIT_RATEINFO_TITLE_03', 'ASSET'),
+    tier('elsewhere', 'SYS_RECRUIT_RATEINFO_TITLE_03', 'CHARACTER', 'other'),
+  ];
+  const row = (GradeGroupID: string, CharacterID: string, BasicStar: string, Rate = '1'): Row => ({
+    GradeGroupID,
+    CharacterID,
+    BasicStar,
+    Rate,
+  });
+
+  it('vedette, autre groupe et recettes non-CHARACTER écartés ; 3★ d’abord, ids triés', () => {
+    const recipes: Row[] = [
+      row('focus', 'c9', '3'),
+      row('three', 'c2', '3'),
+      row('three', 'c1', '3'),
+      row('one', 'c5', '1'),
+      row('asset', 'c7', '3'),
+      row('elsewhere', 'c8', '3'),
+    ];
+    expect(poolOf(grades, recipes, 'g')).toEqual([
+      { rarity: 3, characterIds: ['c1', 'c2'] },
+      { rarity: 1, characterIds: ['c5'] },
+    ]);
+  });
+
+  it('poids : émis par perso quand ils départagent, absents quand ils sont égaux', () => {
+    const recipes: Row[] = [
+      row('three', 'c2', '3', '2'),
+      row('three', 'c1', '3', '1'),
+      row('one', 'c5', '1', '4'),
+      row('one', 'c6', '1', '4'),
+    ];
+    const [three, one] = poolOf(grades, recipes, 'g');
+    expect(three.weights).toEqual({ c1: 1, c2: 2 });
+    expect(one.weights).toBeUndefined();
+  });
+
+  it('palier illisible → jette (vide, raretés mêlées, doublon, deux paliers de même rareté)', () => {
+    expect(() => poolOf(grades, [row('three', 'c1', '3')], 'g')).toThrow(/rareté illisible/); // « one » est vide
+    const base = [row('one', 'c5', '1')];
+    expect(() =>
+      poolOf(grades, [...base, row('three', 'c1', '3'), row('three', 'c2', '2')], 'g'),
+    ).toThrow(/rareté illisible/);
+    expect(() =>
+      poolOf(grades, [...base, row('three', 'c1', '3'), row('three', 'c1', '3')], 'g'),
+    ).toThrow(/en double/);
+    expect(() => poolOf(grades, [...base, row('three', 'c1', '1')], 'g')).toThrow(/deux paliers/);
+  });
+});
+
 // ─── 2. Invariants sur la donnée committée ───────────────────────────────────
 
 const recruit = recruitData as unknown as RecruitData;
@@ -147,6 +210,57 @@ describe('recruit.json — pool custom', () => {
     expect([...recruit.customPool].sort((a, b) => a.localeCompare(b))).toEqual(recruit.customPool);
     const orphans = recruit.customPool.filter((id) => !characterIds.has(id));
     expect(orphans).toEqual([]);
+  });
+});
+
+describe('recruit.json — pool hors focus par type', () => {
+  const characters = charactersData as unknown as Record<string, { rarity: number }>;
+  const poolOfKind = (kind: RecruitKind) => recruit.kinds.find((k) => k.kind === kind)?.pool;
+
+  it('un palier 3★/2★/1★ par bannière de persos, aucun pour equipment', () => {
+    for (const kind of ['custom', 'pickup', 'premium', 'limited'] as const) {
+      expect(poolOfKind(kind)?.map((t) => t.rarity)).toEqual([3, 2, 1]);
+    }
+    expect(poolOfKind('equipment')).toBeUndefined();
+  });
+
+  it('ids triés, sans doublon, connus de characters.json et de la rareté du palier', () => {
+    const bad: string[] = [];
+    for (const k of recruit.kinds) {
+      for (const t of k.pool ?? []) {
+        const ids = t.characterIds;
+        if (!ids.length) bad.push(`${k.kind}/${t.rarity}★ : palier vide`);
+        if ([...ids].sort((a, b) => a.localeCompare(b)).join() !== ids.join())
+          bad.push(`${k.kind}/${t.rarity}★ : non trié`);
+        if (new Set(ids).size !== ids.length) bad.push(`${k.kind}/${t.rarity}★ : doublon`);
+        for (const id of ids) {
+          if (!characters[id]) bad.push(`${k.kind}/${t.rarity}★ : perso inconnu ${id}`);
+          else if (characters[id].rarity !== t.rarity)
+            bad.push(`${k.kind}/${t.rarity}★ : ${id} est un ${characters[id].rarity}★`);
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('poids : couvrent exactement leur palier, positifs, et départagent vraiment', () => {
+    const bad: string[] = [];
+    for (const k of recruit.kinds) {
+      for (const t of k.pool ?? []) {
+        if (!t.weights) continue;
+        const values = Object.values(t.weights);
+        if (Object.keys(t.weights).sort().join() !== [...t.characterIds].sort().join())
+          bad.push(`${k.kind}/${t.rarity}★ : poids ≠ ids du palier`);
+        if (values.some((v) => !(v > 0))) bad.push(`${k.kind}/${t.rarity}★ : poids ≤ 0`);
+        if (new Set(values).size < 2) bad.push(`${k.kind}/${t.rarity}★ : poids tous égaux`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  it('le pool du Custom Recruit est `customPool`, palier par palier', () => {
+    const ids = (poolOfKind('custom') ?? []).flatMap((t) => t.characterIds);
+    expect([...ids].sort((a, b) => a.localeCompare(b))).toEqual(recruit.customPool);
   });
 });
 

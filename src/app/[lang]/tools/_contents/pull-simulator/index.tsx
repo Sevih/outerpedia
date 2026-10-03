@@ -1,73 +1,95 @@
 import { getT } from '@/i18n';
 import type { Lang } from '@/lib/i18n/config';
-import { characterNamePrefix, characterSearchNames, getAllCharacters } from '@/lib/data/characters';
+import type { Character } from '@contracts';
+import {
+  characterNamePrefix,
+  characterSearchNames,
+  getAllCharacters,
+  getCharacter,
+} from '@/lib/data/characters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { hasTagInGroup } from '@/lib/data/tags';
-import { getRecruitKind, isInCustomRecruitPool } from '@/lib/data/recruit';
+import { getRecruitKind, getRecruitPool } from '@/lib/data/recruit';
 import { BANNER_TYPES, RECRUIT_KIND_OF, bannerConfigOf, type BannerConfig } from '@/lib/gacha';
 import {
   PullSimulatorBrowser,
   type GachaChar,
   type GachaMinor,
+  type GachaPool,
   type PullSimLabels,
 } from './PullSimulatorBrowser';
 
 /**
- * Pull Simulator — wrapper SERVEUR : construit les pools de gacha depuis le
- * catalogue de persos (noms/préfixes localisés, recherche multilingue). Les
- * entités core-fusion sont EXCLUES : elles ne se tirent pas, elles se
- * fusionnent. Rareté 1/2 = pools mineurs (remplissage des résultats), rareté 3
- * = pool principal, catégorisé par tags : `premium`, la FAMILLE `limited` du
- * glossaire (festival/seasonal/collab — la bannière limitée les tire tous les
- * trois), puis le reste. Les tirages eux-mêmes vivent dans `@/lib/gacha`.
+ * Pull Simulator — wrapper SERVEUR. Deux listes, deux sources :
  *
- * Les configs de bannière (taux, coûts, mileage, garantie du x10) se DÉRIVENT
- * ici de `recruit.json` et descendent en props : le moteur reste pur, et le
- * bundle client n'embarque pas la donnée générée.
+ *   - les VEDETTES sélectionnables viennent du catalogue (noms/préfixes
+ *     localisés, recherche multilingue) : les 3★ hors core-fusion — elles ne se
+ *     tirent pas, elles se fusionnent —, catégorisés par tags : `premium`, la
+ *     FAMILLE `limited` du glossaire (festival/seasonal/collab — la bannière
+ *     limitée les tire tous les trois), puis le reste ;
+ *   - le pool HORS FOCUS de chaque bannière (3★, 2★, 1★) vient des tables du
+ *     jeu (`recruit.json`, `getRecruitPool`), avec le poids de chaque perso
+ *     dans son palier — 1 pour tous quand le jeu n'en publie pas.
+ *
+ * Les tirages eux-mêmes vivent dans `@/lib/gacha`. Les configs de bannière
+ * (taux, coûts, mileage, garantie du x10) se DÉRIVENT ici de `recruit.json` et
+ * descendent en props, comme les pools : le moteur reste pur, et le bundle
+ * client n'embarque pas la donnée générée.
  */
 export default async function PullSimulator({ lang }: { lang: Lang }) {
   const t = await getT(lang);
   const aliases = loadSearchAliases();
 
-  const characters: GachaChar[] = [];
-  const pool1: GachaMinor[] = [];
-  const pool2: GachaMinor[] = [];
+  const minorOf = (c: Character): GachaMinor => ({
+    id: c.id,
+    name: (c.name as Record<string, string>)[lang] ?? c.name.en,
+    prefix: characterNamePrefix(c, lang) ?? undefined,
+    element: c.element,
+    cls: c.class,
+    rarity: c.rarity,
+  });
 
+  const characters: GachaChar[] = [];
   for (const c of getAllCharacters()) {
-    if (c.originalCharacter) continue;
-    const minor: GachaMinor = {
-      id: c.id,
-      name: (c.name as Record<string, string>)[lang] ?? c.name.en,
-      prefix: characterNamePrefix(c, lang) ?? undefined,
-      element: c.element,
-      cls: c.class,
-      rarity: c.rarity,
-    };
-    if (c.rarity === 1) {
-      pool1.push(minor);
-      continue;
-    }
-    if (c.rarity === 2) {
-      pool2.push(minor);
-      continue;
-    }
+    if (c.originalCharacter || c.rarity !== 3) continue;
     const category = c.tags?.includes('premium')
       ? 'premium'
       : hasTagInGroup(c.tags ?? [], 'limited')
         ? 'limited'
         : 'normal';
     characters.push({
-      ...minor,
+      ...minorOf(c),
       category,
-      inCustomPool: isInCustomRecruitPool(c.id),
       searchNames: characterSearchNames(c, aliases[c.id]),
     });
   }
+  characters.sort((a, b) => a.name.localeCompare(b.name));
 
-  const byName = (a: GachaMinor, b: GachaMinor) => a.name.localeCompare(b.name);
-  characters.sort(byName);
-  pool1.sort(byName);
-  pool2.sort(byName);
+  const pools = Object.fromEntries(
+    BANNER_TYPES.map((type) => {
+      const pool: GachaPool = { 1: [], 2: [], 3: [] };
+      for (const tier of getRecruitPool(RECRUIT_KIND_OF[type])) {
+        pool[tier.rarity] = tier.characterIds.map((id) => ({
+          id,
+          weight: tier.weights?.[id] ?? 1,
+        }));
+      }
+      return [type, pool];
+    }),
+  ) as Record<(typeof BANNER_TYPES)[number], GachaPool>;
+
+  // De quoi AFFICHER ce qui sort des pools sans être une vedette possible : les
+  // 1★ et 2★, et tout 3★ que le catalogue des vedettes ne porte pas.
+  const displayable = new Set(characters.map((c) => c.id));
+  const others: GachaMinor[] = [];
+  for (const pool of Object.values(pools)) {
+    for (const { id } of [...pool[1], ...pool[2], ...pool[3]]) {
+      if (displayable.has(id)) continue;
+      displayable.add(id);
+      const c = getCharacter(id);
+      if (c) others.push(minorOf(c));
+    }
+  }
 
   const labels: PullSimLabels = {
     banners: {
@@ -108,8 +130,8 @@ export default async function PullSimulator({ lang }: { lang: Lang }) {
   return (
     <PullSimulatorBrowser
       characters={characters}
-      pool1={pool1}
-      pool2={pool2}
+      others={others}
+      pools={pools}
       labels={labels}
       configs={configs}
     />
