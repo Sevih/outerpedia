@@ -42,7 +42,8 @@
       désormais le plus gros fichier du repo),
       `tier-list-maker/TierListMakerBrowser.tsx` (**FAIT le 03/10, lot F2** :
       2 143 → 408 l., cf. DONE) et
-      `progress-tracker/ProgressTrackerBrowser.tsx` (1 384 l.). Dette FROIDE —
+      `progress-tracker/ProgressTrackerBrowser.tsx` (**FAIT le 03/10, lot F3** :
+      1 435 → 230 l., cf. DONE). Dette FROIDE —
       aucun des trois n'est en souffrance active. Méthode qui a marché sur le
       calculateur, si utile : découpe par script de tranches de lignes (zéro
       retranscription), hook d'état destructuré sous les MÊMES noms (le JSX ne

@@ -7,6 +7,65 @@
 
 ## 2026-10-03
 
+- **Lot F3 : `ProgressTrackerBrowser.tsx` découpé — 1 435 → 230 lignes, huit
+  fichiers, zéro retranscription** (Fable). Le quoi : le composant client
+  géant du progress tracker éclaté sur le modèle du damage calculator du 25/08
+  (contrats, briques UI, hook d'état `use-*`, sections) ; le `Browser` garde
+  la composition et le câblage — boutons d'action, résumé par cycle, listes,
+  ouverture des deux modales. Le pourquoi : troisième et dernier fichier de la
+  dette « un composant qui tient tout », réservée à Sevih jusqu'à la décision
+  du 03/10 (le TODO le donnait à 1 384 l., il en faisait 1 435). Le comment :
+  un SCRIPT de tranches de lignes lu sur `HEAD`, en quatre étapes, `pnpm
+typecheck` / `pnpm lint` / `pnpm test` verts après CHACUNE. Carte, anciennes
+  lignes → fichier (lignes après prettier) : 43–123 → `contracts.ts` (91 :
+  `TrackerItem`, `TrackerLabels`, `TrackerAssets`, `SettingsTab` ; `index.tsx`
+  y prend désormais ses types) ; 125–136, 140–141 et 727–944 → `ui.tsx` (246 :
+  `progressColor`, `MODAL_PANEL`, `ActionButton`, `SettingToggle`, `TabCard`,
+  `SummaryBadge`, `SectionHeader`, `TaskLabel`) ; 946–1301 → `TaskList.tsx`
+  (384 : `TaskItem`, `VHTTaskItem`, `TaskList`) ; 1303–1382 →
+  `PreciseCraftSection.tsx` (91) ; 143–150 et 174–255 → `use-tracker-state.ts`
+  (148 : `debounced` puis `useTrackerState` — stockage, horloge, `settings` et
+  `view`, état d'interface, `increment` / `toggle` / `toggleEnabled` /
+  `handleImport`, destructuré dans le `Browser` sous les MÊMES noms) ; 377–429
+  → `ExportModal.tsx` (90) ; 434–719, 138 (`DAY_MS`) et 1384–1435
+  (`EnabledTaskPicker`) → `SettingsModal.tsx` (393) ; 152–173 et 256–376
+  restent dans `ProgressTrackerBrowser.tsx` (230), avec la destructuration du
+  hook et les deux appels de modales. 1 673 lignes au total pour 1 435 :
+  l'écart, ce sont les en-têtes, les imports et les signatures de props des
+  deux modales. Retouches DANS une tranche : onze mots `export`, quatre
+  espaces d'indentation retirés au JSX des deux modales, et un `<p>` que
+  prettier a replié sur une ligne une fois désindenté ; le bandeau « Briques »
+  disparaît, le docblock du `Browser` gagne six lignes qui disent où vit quoi.
+  Aucun identifiant renommé ; `tracker.ts`, `tasks.ts` et `tracker.test.ts`
+  intouchés (le test couvre `tracker.ts`, qui ne bouge pas), donc clés de
+  stockage et schéma persisté tels quels. Vérification, trois comparaisons :
+  (1) par diff — les lignes de l'original contre celles des huit fichiers,
+  espaces de tête ignorés : ne diffèrent que les imports, les `export`, les
+  docblocks, les signatures, les deux appels de modales et le `<p>` replié ;
+  (2) par exécution — un banc happy-dom hors dépôt monte l'ancien composant
+  (`HEAD`) et le nouveau et leur joue la même séquence pseudo-aléatoire, 24
+  graines × 500 gestes (boutons, cases, radios, saisie des jours et de
+  l'import, Échap, clic sur le voile, sauts d'horloge de 1 min à 9 j,
+  `confirm` tiré au sort) : après chacun des 12 000 gestes, DOM entier,
+  `localStorage` et texte parti au presse-papier identiques ; 2 099 états
+  distincts, 1 521 pas modale ouverte, les cinq onglets de réglages, l'export,
+  l'erreur d'import, le mode onglets et le mode page unique traversés — seul «
+  aucune tâche » n'est pas atteint (les permanentes l'empêchent) ; (3) sur le
+  serveur de dev déjà ouvert, `curl /progress-tracker` rend 200, le titre et
+  le squelette d'attente (le rendu utile est client, d'où le banc). `pnpm
+typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`, sortie 0), `pnpm
+lint` (`eslint`, sortie 0), `pnpm test` (`Tests 2013 passed (2013)`). Vérif
+  visuelle de la page = Sevih. Laissé, vu en passant et NON corrigé : (a)
+  `SectionHeader` (mode page unique) fabrique la couleur de son anneau par
+  `colors.bar.replace('bg-', 'text-')`, que Tailwind ne peut pas lire : dans
+  la CSS servie en dev, seule la teinte rouge existe en classe nue (elle est
+  écrite ailleurs), les quatre autres paliers n'ont que leur variante `hover:`
+  — l'anneau ne serait donc coloré que sous 25 %, à confirmer à l'écran ; (b)
+  `debounced` tient UN horodatage de module pour tous les gestes : deux lignes
+  différentes touchées à moins de 200 ms, la seconde est avalée ; (c) le banc
+  n'est pas committé — vitest tourne en environnement `node`, sans test de
+  composant, et en poser un est une décision d'outillage.
+
 - **Lot F2 : `TierListMakerBrowser.tsx` découpé — 2 143 → 408 lignes, onze
   fichiers, zéro retranscription** (Fable). Le quoi : le composant client
   géant du tier-list-maker éclaté sur le modèle du damage calculator du 25/08

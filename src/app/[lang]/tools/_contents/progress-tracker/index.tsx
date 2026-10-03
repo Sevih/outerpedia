@@ -3,11 +3,8 @@ import type { Lang } from '@/lib/i18n/config';
 import { getCatalog } from '@/lib/data/items';
 import { img } from '@/lib/images';
 import { durationUnits } from '@/lib/format-duration';
-import {
-  ProgressTrackerBrowser,
-  type TrackerAssets,
-  type TrackerLabels,
-} from './ProgressTrackerBrowser';
+import { ProgressTrackerBrowser } from './ProgressTrackerBrowser';
+import type { TrackerAssets, TrackerLabels } from './contracts';
 import { TASK_DEFINITIONS, TASK_TYPES } from './tasks';
 import type { SeasonWindows } from './tracker';
 import { playableWindowsFrom } from '@/lib/data/content-schedule';
