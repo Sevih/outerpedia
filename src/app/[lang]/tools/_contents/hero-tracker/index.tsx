@@ -221,9 +221,12 @@ export default async function HeroTracker({ lang }: { lang: Lang }) {
   // est un fichier, et le browser est un composant client.
   const limitedTags = tagsInGroup('limited');
 
-  const labels = Object.fromEntries(
-    LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
-  ) as unknown as HeroTrackerLabels;
+  const labels = {
+    ...Object.fromEntries(
+      LABEL_KEYS.map((k) => [k, t(`tools.hero-tracker.${k}` as TranslationKey)]),
+    ),
+    clearSearch: t('common.clear'),
+  } as unknown as HeroTrackerLabels;
 
   return (
     <HeroTrackerBrowser

@@ -19,6 +19,11 @@ import {
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { img, CLASS_ORDER, ELEMENT_ORDER } from '@/lib/images';
+import {
+  ClassIconPill,
+  ElementIconPill,
+  SearchField,
+} from '@/components/character/filters/FilterAtoms';
 import { FilterPill } from '@/components/character/filters/FilterPill';
 import { Portrait } from '@/components/character/Portrait';
 import {
@@ -74,6 +79,8 @@ export interface TlmLabels {
   sorts: Record<SortKey, string>;
   sizes: Record<IconSize, string>;
   search: string;
+  /** Nom accessible de la croix d'effacement de la recherche. */
+  clearSearch: string;
   hint: string;
   titlePlaceholder: string;
   addRow: string;
@@ -1868,12 +1875,11 @@ export function TierListMakerBrowser({
           </div>
 
           {/* Recherche + filtres */}
-          <input
-            type="search"
+          <SearchField
             value={rawQuery}
-            onChange={(e) => setRawQuery(e.target.value)}
+            onChange={setRawQuery}
             placeholder={L.search}
-            className="border-line bg-surface-raised/60 placeholder-content-subtle w-full rounded-lg border px-3 py-2 text-sm focus:border-sky-500 focus:outline-none"
+            clearLabel={L.clearSearch}
           />
           <div className="mt-2 flex items-center justify-center gap-2">
             <label className="text-content-muted text-xs">{L.sort}</label>
@@ -1893,48 +1899,34 @@ export function TierListMakerBrowser({
             <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
               <div className="flex gap-1.5">
                 {ELEMENT_ORDER.map((el) => (
-                  <FilterPill
+                  <ElementIconPill
                     key={el}
+                    element={el}
                     active={elementFilter.includes(el)}
                     onClick={() =>
                       setElementFilter((f) =>
                         f.includes(el) ? f.filter((x) => x !== el) : [...f, el],
                       )
                     }
-                    className="h-8 w-8 px-0"
-                    title={L.elementNames[el] ?? el}
-                  >
-                    <img
-                      src={img.element(el)}
-                      alt={L.elementNames[el] ?? el}
-                      className="h-6 w-6"
-                      width={24}
-                      height={24}
-                    />
-                  </FilterPill>
+                    size="sm"
+                    title={L.elementNames[el]}
+                  />
                 ))}
               </div>
               <div className="flex gap-1.5">
                 {CLASS_ORDER.map((cl) => (
-                  <FilterPill
+                  <ClassIconPill
                     key={cl}
+                    classType={cl}
                     active={classFilter.includes(cl)}
                     onClick={() =>
                       setClassFilter((f) =>
                         f.includes(cl) ? f.filter((x) => x !== cl) : [...f, cl],
                       )
                     }
-                    className="h-8 w-8 px-0"
-                    title={L.classNames[cl] ?? cl}
-                  >
-                    <img
-                      src={img.klass(cl)}
-                      alt={L.classNames[cl] ?? cl}
-                      className="h-6 w-6"
-                      width={24}
-                      height={24}
-                    />
-                  </FilterPill>
+                    size="sm"
+                    title={L.classNames[cl]}
+                  />
                 ))}
               </div>
               <div className="flex gap-1.5">

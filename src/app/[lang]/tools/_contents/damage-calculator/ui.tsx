@@ -10,8 +10,11 @@
 import { useState, useEffect, type ReactNode } from 'react';
 import { img, CLASS_ORDER, ELEMENT_ORDER, transcendStarRow } from '@/lib/images';
 import { EffectIconTile } from '@/components/character/EffectChips';
-import { SearchField } from '@/components/character/filters/FilterAtoms';
-import { FilterPill } from '@/components/character/filters/FilterPill';
+import {
+  ClassIconPill,
+  ElementIconPill,
+  SearchField,
+} from '@/components/character/filters/FilterAtoms';
 import { Thumbnail } from '@/components/ui/Thumbnail';
 import type { DcChar, DcEffectRef, DcLabels, DcTarget, DcTranscendTier } from './contracts';
 
@@ -347,28 +350,24 @@ export function CharPicker({
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex gap-1.5">
             {ELEMENT_ORDER.map((el) => (
-              <FilterPill
+              <ElementIconPill
                 key={el}
+                element={el}
                 active={elements.includes(el)}
                 onClick={() => toggle(setElements, el)}
-                className="h-8 w-8 px-0"
-                title={el}
-              >
-                <img src={img.element(el)} alt={el} className="h-5 w-5" width={20} height={20} />
-              </FilterPill>
+                size="sm"
+              />
             ))}
           </div>
           <div className="flex gap-1.5">
             {CLASS_ORDER.map((cl) => (
-              <FilterPill
+              <ClassIconPill
                 key={cl}
+                classType={cl}
                 active={classes.includes(cl)}
                 onClick={() => toggle(setClasses, cl)}
-                className="h-8 w-8 px-0"
-                title={cl}
-              >
-                <img src={img.klass(cl)} alt={cl} className="h-5 w-5" width={20} height={20} />
-              </FilterPill>
+                size="sm"
+              />
             ))}
           </div>
         </div>

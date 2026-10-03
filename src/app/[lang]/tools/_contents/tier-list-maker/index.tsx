@@ -148,6 +148,7 @@ export default async function TierListMaker({ lang }: { lang: Lang }) {
       l: t('tools.tier-list-maker.size_l'),
     },
     search: t('tools.tier-list-maker.search'),
+    clearSearch: t('common.clear'),
     hint: t('tools.tier-list-maker.hint'),
     titlePlaceholder: t('tools.tier-list-maker.title_placeholder'),
     addRow: t('tools.tier-list-maker.add_row'),

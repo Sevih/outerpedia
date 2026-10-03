@@ -130,6 +130,7 @@ export default async function TeamPlanner({ lang }: { lang: Lang }) {
     remove: t('common.remove'),
     close: t('common.close'),
     search: t('common.search'),
+    clearSearch: t('common.clear'),
     all: t('common.all'),
     reset: t('tools.team-planner.reset'),
     share: t('tools.team-planner.share'),

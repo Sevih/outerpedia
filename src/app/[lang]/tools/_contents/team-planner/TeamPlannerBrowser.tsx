@@ -25,6 +25,11 @@ import { FaArrowRotateLeft, FaCheck, FaLink, FaXmark } from 'react-icons/fa6';
 import { img, CHAIN_PILL, CLASS_ORDER, ELEMENT_ORDER, inOrder } from '@/lib/images';
 import { shortShareUrl } from '@/lib/short-share';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import {
+  ClassIconPill,
+  ElementIconPill,
+  SearchField,
+} from '@/components/character/filters/FilterAtoms';
 import { Modal } from '@/components/ui/Modal';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import {
@@ -70,6 +75,8 @@ export interface TpLabels {
   remove: string;
   close: string;
   search: string;
+  /** Nom accessible de la croix d'effacement de la recherche. */
+  clearSearch: string;
   all: string;
   reset: string;
   share: string;
@@ -353,7 +360,8 @@ function CharPicker({
   onClose: () => void;
 }) {
   const [query, setQuery] = useState('');
-  const searchRef = useRef<HTMLInputElement>(null);
+  // `SearchField` n'expose pas son champ : le ref se prend sur l'enveloppe.
+  const searchRef = useRef<HTMLInputElement | null>(null);
   const [element, setElement] = useState<string | null>(null);
   const [cls, setCls] = useState<string | null>(null);
 
@@ -373,13 +381,6 @@ function CharPicker({
       (!cls || c.cls === cls) &&
       (!q || c.label.toLowerCase().includes(q)),
   );
-
-  const filterBtn = (selected: boolean) =>
-    `flex h-8 w-8 items-center justify-center rounded-lg transition ${
-      selected
-        ? 'bg-accent/25 ring-accent ring-2'
-        : 'bg-surface-overlay hover:bg-surface-overlay/70'
-    }`;
 
   return (
     // Le focus entre sur la recherche ; la croix nommée ferme, comme Échap et
@@ -402,50 +403,41 @@ function CharPicker({
         </button>
       </div>
       <div className="flex flex-wrap items-center gap-2 px-4 py-3">
-        <input
-          value={query}
-          ref={searchRef}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={labels.search}
-          autoFocus
-          className="border-line bg-surface-overlay/60 text-content placeholder-content-subtle min-w-40 flex-1 rounded-lg border px-3 py-1.5 text-sm focus:border-sky-500 focus:outline-none"
-        />
+        <div
+          ref={(node) => {
+            searchRef.current = node?.querySelector('input') ?? null;
+          }}
+          className="min-w-40 flex-1"
+        >
+          <SearchField
+            value={query}
+            onChange={setQuery}
+            placeholder={labels.search}
+            clearLabel={labels.clearSearch}
+          />
+        </div>
         <div className="flex gap-1">
           {ELEMENT_ORDER.map((el) => (
-            <button
+            <ElementIconPill
               key={el}
-              type="button"
-              title={labels.elementNames[el] ?? el}
+              element={el}
+              active={element === el}
               onClick={() => setElement((v) => (v === el ? null : el))}
-              className={filterBtn(element === el)}
-            >
-              <img
-                src={img.element(el)}
-                alt={labels.elementNames[el] ?? el}
-                className="h-5 w-5"
-                width={20}
-                height={20}
-              />
-            </button>
+              size="sm"
+              title={labels.elementNames[el]}
+            />
           ))}
         </div>
         <div className="flex gap-1">
           {classes.map((k) => (
-            <button
+            <ClassIconPill
               key={k}
-              type="button"
-              title={labels.classNames[k] ?? k}
+              classType={k}
+              active={cls === k}
               onClick={() => setCls((v) => (v === k ? null : k))}
-              className={filterBtn(cls === k)}
-            >
-              <img
-                src={img.klass(k)}
-                alt={labels.classNames[k] ?? k}
-                className="h-5 w-5"
-                width={20}
-                height={20}
-              />
-            </button>
+              size="sm"
+              title={labels.classNames[k]}
+            />
           ))}
         </div>
       </div>

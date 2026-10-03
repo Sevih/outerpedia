@@ -3,6 +3,11 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import type { FusionLevelStep } from '@datagen/generators/hero-growth';
 import { CharacterPortrait } from '@/components/character/CharacterPortrait';
+import {
+  ClassIconPill,
+  ElementIconPill,
+  SearchField,
+} from '@/components/character/filters/FilterAtoms';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { img, CLASS_ORDER, ELEMENT_ORDER, STAR_SPRITE } from '@/lib/images';
 import { useStoredState, type StoreSpec } from '@/lib/client-storage';
@@ -88,6 +93,8 @@ export interface ItemAsset {
 export interface HeroTrackerLabels {
   intro: string;
   search: string;
+  /** Nom accessible de la croix d'effacement de la recherche (`common.clear`). */
+  clearSearch: string;
   untrack: string;
   level: string;
   skills: string;
@@ -837,6 +844,7 @@ export function HeroTrackerBrowser({
             onQuery={setQuery}
             element={element}
             onElement={setElement}
+            elementNames={elementNames}
             onToggle={toggle}
             labels={labels}
           />
@@ -2018,13 +2026,6 @@ function NumberField({
 
 /** Les trois raretés du jeu — filtre du roster suivi. */
 const RARITIES = [3, 2, 1] as const;
-const ELEMENT_TEXT: Record<string, string> = {
-  fire: 'text-fire',
-  water: 'text-water',
-  earth: 'text-earth',
-  light: 'text-light',
-  dark: 'text-dark-elem',
-};
 
 /**
  * Barre du roster suivi : filtrer (élément / classe / rareté) et choisir l'ordre.
@@ -2066,29 +2067,27 @@ function RosterBar({
     <div className="border-line-subtle bg-surface-sunken flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border px-2.5 py-2">
       <span className="flex gap-1">
         {ELEMENT_ORDER.map((el) => (
-          <button
+          <ElementIconPill
             key={el}
-            type="button"
-            title={elementNames[el] ?? el}
+            element={el}
+            active={filters.element === el}
             onClick={() => onFilters({ ...filters, element: filters.element === el ? null : el })}
-            className={chip(filters.element === el)}
-          >
-            <img src={img.element(el)} alt={elementNames[el] ?? el} width={18} height={18} />
-          </button>
+            size="sm"
+            title={elementNames[el]}
+          />
         ))}
       </span>
 
       <span className="flex gap-1">
         {CLASS_ORDER.map((cl) => (
-          <button
+          <ClassIconPill
             key={cl}
-            type="button"
-            title={classNames[cl] ?? cl}
+            classType={cl}
+            active={filters.class === cl}
             onClick={() => onFilters({ ...filters, class: filters.class === cl ? null : cl })}
-            className={chip(filters.class === cl)}
-          >
-            <img src={img.klass(cl)} alt={classNames[cl] ?? cl} width={18} height={18} />
-          </button>
+            size="sm"
+            title={classNames[cl]}
+          />
         ))}
       </span>
 
@@ -2146,6 +2145,7 @@ function HeroPicker({
   onQuery,
   element,
   onElement,
+  elementNames,
   onToggle,
   labels,
 }: {
@@ -2154,6 +2154,7 @@ function HeroPicker({
   onQuery: (v: string) => void;
   element: string | null;
   onElement: (v: string | null) => void;
+  elementNames: Record<string, string>;
   onToggle: (hero: HeroRow) => void;
   labels: HeroTrackerLabels;
 }) {
@@ -2165,16 +2166,17 @@ function HeroPicker({
           {labels.untracked.replace('{count}', String(rows.length))}
         </span>
         <div className="flex-1" />
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => onQuery(e.target.value)}
-          placeholder={labels.search}
-          className="border-line-subtle bg-surface-raised text-content-strong placeholder:text-content-subtle focus:border-accent h-8 w-full min-w-0 rounded-lg border px-2.5 text-xs outline-none sm:w-52"
-        />
+        <div className="w-full min-w-0 sm:w-52">
+          <SearchField
+            value={query}
+            onChange={onQuery}
+            placeholder={labels.search}
+            clearLabel={labels.clearSearch}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-1">
+      <div className="flex flex-wrap items-center gap-1">
         <button
           type="button"
           onClick={() => onElement(null)}
@@ -2187,16 +2189,14 @@ function HeroPicker({
           {labels.axisAll}
         </button>
         {ELEMENT_ORDER.map((el) => (
-          <button
+          <ElementIconPill
             key={el}
-            type="button"
+            element={el}
+            active={element === el}
             onClick={() => onElement(element === el ? null : el)}
-            className={`text-3xs rounded-md border px-2 py-1 capitalize transition-colors ${
-              element === el ? 'border-accent bg-accent/15' : 'border-line-subtle hover:border-line'
-            } ${ELEMENT_TEXT[el]}`}
-          >
-            {el}
-          </button>
+            size="sm"
+            title={elementNames[el]}
+          />
         ))}
       </div>
 

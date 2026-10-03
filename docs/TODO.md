@@ -143,8 +143,11 @@
       `CLASS_SLUGS`, `ELEMENTS`, `esc()`/`rfc822()`, Twitch `parent`, lefthook
       `parallel`, `--text-2xs`, les utilitaires morts de `globals.css`. Reste,
       découpé en lots délégables (prompts A13–A20, B9, B10 dans
-      lots-opus-2026-09-25.md) :
-      3 sélecteurs de perso et 3 barres élément/classe
+      lots-opus-2026-09-25.md) : plus rien — les pastilles élément/classe
+      et la recherche des 3 sélecteurs de perso et des barres de filtre des
+      outils, B10, sont FAITES le 03/10 (restent, par décision, les trois
+      coquilles de picker ; et les pastilles de rareté maison du
+      tier-list-maker et du hero-tracker, cf. DONE)
       (le cache de `loadTextIndex` et les rebuilds redondants, A17, sont
       faits ; le token `--text-3xs` pour les 126 tailles de 11px, A18,
       aussi ; les 4 modales/lightbox des outils, B9, aussi — reste la

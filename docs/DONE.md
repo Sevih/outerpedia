@@ -7,6 +7,83 @@
 
 ## 2026-10-03
 
+- **Les pastilles élément/classe et la recherche des quatre outils passent
+  par les briques de `/characters` : `ElementIconPill`, `ClassIconPill`,
+  `SearchField`** (`src/components/character/filters/FilterAtoms.tsx`, lot B10
+  de la Dette). Quoi, inventaire d'abord. Trois sélecteurs de perso : le
+  `CharPicker` du team-planner (modale partagée, sélection SIMPLE, persos déjà
+  posés exclus, classes présentes par `inOrder`), le `CharPicker` du
+  damage-calculator (`ui.tsx` : ancre `SlotTile` + modale locale, sélection
+  MULTIPLE, anneau sur le perso choisi), le `HeroPicker` du hero-tracker
+  (panneau en ligne, élément seul avec un bouton « Tous »). Et les barres :
+  le pool du tier-list-maker (multiple, plus rareté, tags et tri), la
+  `RosterBar` du hero-tracker (simple, plus rareté et tri), l'élément de la
+  cible manuelle du damage-calculator (simple), plus celles des trois pickers.
+  Aucune ne recopiait un ordre — `ELEMENT_ORDER` / `CLASS_ORDER` de
+  `lib/images` partout, déjà. Ce que chaque copie fait de PLUS que la brique
+  est de l'état ou de la logique d'appelant (simple ou multiple, tri, rareté,
+  tags, exclusion) : la pastille ne reçoit que `active` et `onClick`, donc
+  AUCUNE prop nouvelle. En revanche aucune copie ne RENDAIT comme la brique :
+  quatre habillages (`FilterPill` carrée ciel au damage-calculator et au
+  tier-list-maker, bouton à anneau accent au team-planner, puce de 28 px à
+  bordure accent et puces de texte coloré au hero-tracker) et quatre champs de
+  recherche. « La copie disparaît » et « rendu identique » s'excluaient :
+  question posée, décision Sevih du 03/10 — changement visuel ACCEPTÉ pour les
+  pastilles et la recherche seulement, les trois coquilles de picker restent
+  telles quelles (`CharactersFiltersBar` est une toolbar de page, elle ne
+  tient pas dans une modale). Pourquoi : quatre vocabulaires pour le même
+  geste, alors que `/characters`, `/equipment`, les tier lists,
+  gear-usage-finder et most-used-units parlent déjà celui-là. Comment : les
+  boucles restent où elles étaient, leur contenu devient
+  `<ElementIconPill size="sm">` / `<ClassIconPill size="sm">` avec le nom
+  localisé en `title` là où l'outil l'avait (team-planner, tier-list-maker,
+  hero-tracker — le `HeroPicker` reçoit `elementNames` pour ça) ; les trois
+  `<input>` maison deviennent `SearchField`, dont la croix prend
+  `common.clear` par un nouveau libellé `clearSearch` (aucune clé i18n
+  ajoutée). Team-planner : `SearchField` n'expose pas son champ, et la modale
+  doit y poser le focus — le ref d'`initialFocus` se prend sur une enveloppe
+  (`querySelector('input')`), l'`autoFocus` devenu inutile part. Disparus avec
+  les copies : `filterBtn` (team-planner), la copie locale d'`ELEMENT_TEXT`
+  (hero-tracker), l'import de `FilterPill` dans les deux fichiers du
+  damage-calculator. Ce qui change à l'écran, partout pareil : pastille de
+  32 px bordée sur fond `surface-sunken`, sprite de 18 px (20 ou 24 avant),
+  active = halo à la couleur de l'ÉLÉMENT (cyan pour une classe) au lieu du
+  ciel ou de l'accent, `aria-pressed` et nom accessible ; recherche de 36 px
+  avec loupe et croix. Vérifié : `pnpm typecheck` (les trois `tsc --noEmit`,
+  sans une ligne de sortie, code 0), `pnpm lint` (`$ eslint`, rien d'autre,
+  code 0),
+  `pnpm test` (`Tests  2003 passed (2003)`, 173 fichiers). PAS de captures
+  avant/après : rien n'écoutait sur :3000. À la place, un harnais vitest
+  happy-dom jetable (non commité) monte le team-planner entier, ouvre le
+  picker et constate : focus sur le champ de recherche, sept pastilles nommées
+  « Feu… Healer » de 32 px, sélection simple (l'eau remplace le feu), grille
+  filtrée puis rendue. Les trois autres outils n'ont que la relecture du diff
+  (boucles, `onClick` et états inchangés ligne pour ligne).
+  **Écrans à regarder** (desktop puis mobile) : (1) `/tools/team-planner` —
+  clic sur un slot vide : le curseur est dans la recherche, la croix l'efface,
+  une seule pastille active par rangée ; sur mobile la rangée recherche + dix
+  pastilles passe à la ligne ; (2) `/tools/damage-calculator` — le picker de
+  l'attaquant, d'un allié et de la cible « personnage » (plusieurs pastilles
+  actives à la fois), puis la cible MANUELLE : rangée « Élément », une seule
+  active ; (3) `/tools/tier-list-maker` — pool, onglet des personnages : la
+  recherche (la croix native du `type="search"` laisse la place à celle de la
+  brique) et les pastilles élément/classe À CÔTÉ des pastilles de rareté et de
+  tags, restées `FilterPill` ciel — deux vocabulaires sur une même ligne ;
+  (4) `/tools/hero-tracker` — la barre du roster : pastilles de 32 px à côté
+  des puces de rareté et de tri restées à 28 px ; puis « ajouter un héros » :
+  recherche plus haute (36 px, texte `sm` au lieu de `xs`), et le bouton
+  texte « Tous » à côté de cinq pastilles icône qui remplacent les mots
+  `fire`…`dark` colorés (jamais traduits). Laissé, hors périmètre : les trois
+  coquilles de picker (décision) ; les raretés maison du tier-list-maker
+  (`FilterPill` « 3★ ») et du hero-tracker (puce), alors que `StarPill`
+  existe — c'est ce qui fait les deux voisinages ci-dessus ; le bouton
+  « Tous » du `HeroPicker`, redondant (recliquer la pastille désélectionne,
+  comme dans la `RosterBar`) ; les pastilles du damage-calculator gardent le
+  slug anglais en infobulle, comme avant (`DcLabels` n'a pas de noms
+  d'élément) ; un `ref` sur `SearchField` remplacerait proprement l'enveloppe
+  du team-planner (« sans nouvelle prop » : non fait) ; la `Modal` locale de
+  `damage-calculator/ui.tsx`, déjà notée par B9.
+
 - **Relecture des lots A18, B9, B11, A21 et solde de G19** (Fable). Les quatre
   commits tiennent leur périmètre, `pnpm typecheck`, `pnpm lint` et
   `pnpm test` passent sur l'ensemble (173 fichiers, 2 003 tests). A18 : zéro

@@ -35,7 +35,7 @@ import { useStoredState } from '@/lib/client-storage';
 import { copyText, useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { EquipmentIcon } from '@/components/equipment/EquipmentIcon';
 import { EffectIconTile } from '@/components/character/EffectChips';
-import { FilterPill } from '@/components/character/filters/FilterPill';
+import { ElementIconPill } from '@/components/character/filters/FilterAtoms';
 import { GameText } from '@/components/ui/GameText';
 import { SkillIconTip } from './SkillTip';
 import {
@@ -1351,21 +1351,13 @@ export function DamageCalculatorBrowser({
                     </span>
                     <div className="flex gap-1.5">
                       {ELEMENT_ORDER.map((el) => (
-                        <FilterPill
+                        <ElementIconPill
                           key={el}
+                          element={el}
                           active={tgtElement === el}
                           onClick={() => setTgtElement(tgtElement === el ? null : el)}
-                          className="h-8 w-8 px-0"
-                          title={el}
-                        >
-                          <img
-                            src={img.element(el)}
-                            alt={el}
-                            className="h-5 w-5"
-                            width={20}
-                            height={20}
-                          />
-                        </FilterPill>
+                          size="sm"
+                        />
                       ))}
                     </div>
                   </div>
