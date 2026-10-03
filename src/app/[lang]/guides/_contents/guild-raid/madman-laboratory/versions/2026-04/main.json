@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Full Earth Team",
-        "es": "Equipo Full Tierra",
-        "fr": "Équipe Full Terre"
+        "jp": "フル地属性編成",
+        "kr": "풀 지속성 팀",
+        "zh": "全土属性队伍",
+        "fr": "Équipe Full Terre",
+        "es": "Equipo Full Tierra"
       },
       "element": "earth",
       "slots": [
@@ -114,8 +117,11 @@
     {
       "title": {
         "en": "Mage Team",
-        "es": "Equipo Mago",
-        "fr": "Équipe Mage"
+        "jp": "魔法型編成",
+        "kr": "마법형 팀",
+        "zh": "魔法型队伍",
+        "fr": "Équipe Mage",
+        "es": "Equipo Mago"
       },
       "element": "dark",
       "slots": [
@@ -266,8 +272,11 @@
     {
       "title": {
         "en": "Revenge Mage Team",
-        "es": "Equipo Revenge Mage",
-        "fr": "Équipe Mage Revenge"
+        "jp": "リベンジ魔法型編成",
+        "kr": "복수 마법형 팀",
+        "zh": "复仇魔法型队伍",
+        "fr": "Équipe Mage Revenge",
+        "es": "Equipo Revenge Mage"
       },
       "slots": [["Viella"], ["Kuro"], ["Maxwell"], ["Demiurge Luna"]],
       "geasActive": {
@@ -445,8 +454,11 @@
     {
       "title": {
         "en": "Ryu Revenge Team",
-        "es": "Equipo Ryu Revenge",
-        "fr": "Équipe Ryu Revenge"
+        "jp": "Ryuリベンジ編成",
+        "kr": "Ryu 복수 팀",
+        "zh": "Ryu复仇队伍",
+        "fr": "Équipe Ryu Revenge",
+        "es": "Equipo Ryu Revenge"
       },
       "slots": [
         ["Charlotte"],

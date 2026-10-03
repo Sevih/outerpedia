@@ -19,8 +19,11 @@
     "title": {
       "title": {
         "en": "Rhona Chain Strategy",
-        "es": "Estrategia de Cadena de Rhona",
-        "fr": "Stratégie Chain de Rhona"
+        "jp": "Rhonaチェーン戦略",
+        "kr": "Rhona 체인 전략",
+        "zh": "Rhona连携策略",
+        "fr": "Stratégie Chain de Rhona",
+        "es": "Estrategia de Cadena de Rhona"
       }
     },
     "slots": [

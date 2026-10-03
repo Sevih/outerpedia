@@ -27,8 +27,11 @@
     "title": {
       "title": {
         "en": "Ember Team",
-        "es": "Equipo Ember",
-        "fr": "Équipe Ember"
+        "jp": "Ember編成",
+        "kr": "Ember 팀",
+        "zh": "Ember队伍",
+        "fr": "Équipe Ember",
+        "es": "Equipo Ember"
       }
     },
     "slots": [["Ember"]]

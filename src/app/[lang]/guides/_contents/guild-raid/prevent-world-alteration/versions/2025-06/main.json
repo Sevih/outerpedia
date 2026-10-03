@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Water Striker",
-        "es": "Atacante de Agua",
-        "fr": "Striker Eau"
+        "jp": "水属性・攻撃型",
+        "kr": "수속성 공격형",
+        "zh": "水属性攻击型",
+        "fr": "Striker Eau",
+        "es": "Atacante de Agua"
       },
       "element": "water",
       "slots": [
@@ -23,8 +26,11 @@
     {
       "title": {
         "en": "Water Mage",
-        "es": "Mago de Agua",
-        "fr": "Mage Eau"
+        "jp": "水属性・魔法型",
+        "kr": "수속성 마법형",
+        "zh": "水属性魔法型",
+        "fr": "Mage Eau",
+        "es": "Mago de Agua"
       },
       "element": "water",
       "slots": [
@@ -43,8 +49,11 @@
     {
       "title": {
         "en": "GBeth",
-        "es": "GBeth",
-        "fr": "GBeth"
+        "jp": "GBeth",
+        "kr": "GBeth",
+        "zh": "GBeth",
+        "fr": "GBeth",
+        "es": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],

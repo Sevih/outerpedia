@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Light",
-        "es": "Luz",
-        "fr": "Lumière"
+        "jp": "光属性",
+        "kr": "명속성",
+        "zh": "光属性",
+        "fr": "Lumière",
+        "es": "Luz"
       },
       "element": "light",
       "slots": [["Anarky"], ["Dianne"], ["Demiurge Luna"], ["Mystic Sage Ame"]],
@@ -66,8 +69,11 @@
     {
       "title": {
         "en": "Ember",
-        "es": "Ember",
-        "fr": "Ember"
+        "jp": "Ember",
+        "kr": "Ember",
+        "zh": "Ember",
+        "fr": "Ember",
+        "es": "Ember"
       },
       "element": "fire",
       "slots": [
@@ -96,13 +102,19 @@
             "notes": [
               {
                 "en": "166+ SPD at stage 10+ — 156 works if paired with a Healer granting +10 passive speed at 6★ transcendence.",
-                "es": "166+ SPD en la etapa 10+ — 156 funciona si se combina con un Sanador que otorgue +10 de velocidad pasiva a 6★ de trascendencia.",
-                "fr": "166+ SPD au stage 10+ — 156 fonctionne si combiné avec un Healer accordant +10 vitesse passive à 6★ transcendance."
+                "jp": "ステージ10以上でSPD 166以上 — 6★超越でパッシブ速度+10を付与するヒーラーと組めば156でも可。",
+                "kr": "스테이지 10 이상에서 SPD 166 이상 — 6★ 초월 시 패시브로 속도 +10을 부여하는 힐러와 함께라면 156도 가능.",
+                "zh": "10阶段以上需要166以上SPD — 若搭配6★超越时提供被动+10速度的治疗，156也可以。",
+                "fr": "166+ SPD au stage 10+ — 156 fonctionne si combiné avec un Healer accordant +10 vitesse passive à 6★ transcendance.",
+                "es": "166+ SPD en la etapa 10+ — 156 funciona si se combina con un Sanador que otorgue +10 de velocidad pasiva a 6★ de trascendencia."
               },
               {
                 "en": "{I-A/Unholy Exsultet} with ATK% main stat for bigger shields; prioritize ATK and SPD substats, with enough Effectiveness to land debuffs (use the +Effectiveness geas rather than an Effectiveness accessory).",
-                "es": "{I-A/Unholy Exsultet} con ATK% como stat principal para escudos más grandes; prioriza los sub-stats de ATK y SPD, con suficiente Efectividad para aplicar debuffs (usa el geas de +Efectividad en lugar de un accesorio de Efectividad).",
-                "fr": "{I-A/Unholy Exsultet} avec ATK% en main stat pour de plus gros shields ; priorise les sub-stats ATK et SPD, avec assez d'Efficacité pour placer les debuffs (utilise le geas +Efficacité plutôt qu'un accessoire d'Efficacité)."
+                "jp": "シールドを大きくするためATK%メインの{I-A/Unholy Exsultet}。サブステはATKとSPDを優先し、デバフを当てられるだけの効果命中を確保（効果命中アクセサリーではなく効果命中+ギアスを使用）。",
+                "kr": "실드를 키우기 위해 ATK% 메인 옵션의 {I-A/Unholy Exsultet}. 부옵션은 ATK와 SPD를 우선하고, 디버프를 적중시킬 만큼의 효과 적중을 확보 (효과 적중 악세서리 대신 효과 적중+ 기어스 사용).",
+                "zh": "使用ATK%主属性的{I-A/Unholy Exsultet}以获得更大的护盾；副属性优先ATK和SPD，并保证足够的效果命中以施加减益（使用效果命中+契约，而非效果命中饰品）。",
+                "fr": "{I-A/Unholy Exsultet} avec ATK% en main stat pour de plus gros shields ; priorise les sub-stats ATK et SPD, avec assez d'Efficacité pour placer les debuffs (utilise le geas +Efficacité plutôt qu'un accessoire d'Efficacité).",
+                "es": "{I-A/Unholy Exsultet} con ATK% como stat principal para escudos más grandes; prioriza los sub-stats de ATK y SPD, con suficiente Efectividad para aplicar debuffs (usa el geas de +Efectividad en lugar de un accesorio de Efectividad)."
               }
             ]
           }
@@ -112,31 +124,46 @@
         {
           "p": {
             "en": "Sacrifice options — use a {C/Mage} to tank the stun; the others can hold charms:",
-            "es": "Opciones de sacrificio — usa un {C/Mage} para tanquear el aturdimiento; los demás pueden llevar amuletos:",
-            "fr": "Options de sacrifice — utilise un {C/Mage} pour tank le stun ; les autres peuvent porter des charms :"
+            "jp": "犠牲キャラの選択肢 — {C/Mage}でスタンを受け、他のキャラはチャームを装備可能：",
+            "kr": "희생 캐릭터 선택지 — {C/Mage}로 스턴을 받고, 나머지는 참을 장착할 수 있습니다:",
+            "zh": "牺牲角色选项 — 用{C/Mage}承受眩晕，其他角色可以装备护符：",
+            "fr": "Options de sacrifice — utilise un {C/Mage} pour tank le stun ; les autres peuvent porter des charms :",
+            "es": "Opciones de sacrificio — usa un {C/Mage} para tanquear el aturdimiento; los demás pueden llevar amuletos:"
           }
         },
         {
           "ul": [
             {
               "en": "{P/Liselotte}: +10 SPD and damage reduction while shielded (her EE); can hold {I-A/Starlight Road}. Best option for this slot thanks to her EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} and {P/Viella} also work.",
-              "es": "{P/Liselotte}: +10 SPD y reducción de daño mientras esté protegida (su EE); puede llevar {I-A/Starlight Road}. Mejor opción para este slot gracias a su EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} y {P/Viella} también funcionan.",
-              "fr": "{P/Liselotte} : +10 SPD et réduction des dégâts tant qu'elle est protégée par un shield (son EE) ; peut porter {I-A/Starlight Road}. Meilleure option pour ce slot grâce à son EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} et {P/Viella} fonctionnent aussi."
+              "jp": "{P/Liselotte}：SPD+10、シールド中はダメージ軽減（EE効果）。{I-A/Starlight Road}を装備可能。EEのおかげでこの枠の最有力候補 — {P/Demiurge Delta}、{P/Dianne}、{P/Mene}、{P/Viella}も可。",
+              "kr": "{P/Liselotte}: SPD +10, 실드 보유 중 피해 감소(EE 효과). {I-A/Starlight Road} 장착 가능. EE 덕분에 이 자리의 최적 선택지 — {P/Demiurge Delta}, {P/Dianne}, {P/Mene}, {P/Viella}도 가능.",
+              "zh": "{P/Liselotte}：SPD+10，持有护盾时获得减伤（EE效果）；可装备{I-A/Starlight Road}。凭借EE是该位置的最佳选择 — {P/Demiurge Delta}、{P/Dianne}、{P/Mene}和{P/Viella}也可以。",
+              "fr": "{P/Liselotte} : +10 SPD et réduction des dégâts tant qu'elle est protégée par un shield (son EE) ; peut porter {I-A/Starlight Road}. Meilleure option pour ce slot grâce à son EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} et {P/Viella} fonctionnent aussi.",
+              "es": "{P/Liselotte}: +10 SPD y reducción de daño mientras esté protegida (su EE); puede llevar {I-A/Starlight Road}. Mejor opción para este slot gracias a su EE — {P/Demiurge Delta}, {P/Dianne}, {P/Mene} y {P/Viella} también funcionan."
             },
             {
               "en": "{P/Christina}: -30% damage reduction, holding a T4 {I-A/Charmer's Golden Chalice} — drop it if Ember doesn't fall below 50% HP on turn 1.",
-              "es": "{P/Christina}: -30% de reducción de daño, llevando un {I-A/Charmer's Golden Chalice} T4 — quítalo si Ember no baja del 50% de HP en el turno 1.",
-              "fr": "{P/Christina} : -30% de réduction des dégâts, en portant un {I-A/Charmer's Golden Chalice} T4 — retire-le si Ember ne descend pas sous 50% HP au tour 1."
+              "jp": "{P/Christina}：ダメージ軽減-30%、T4 {I-A/Charmer's Golden Chalice}を装備 — ターン1でEmberのHPが50%を下回らないなら外してください。",
+              "kr": "{P/Christina}: 피해 감소 -30%, T4 {I-A/Charmer's Golden Chalice} 장착 — 턴 1에 Ember의 HP가 50% 아래로 떨어지지 않는다면 빼세요.",
+              "zh": "{P/Christina}：减伤-30%，装备T4 {I-A/Charmer's Golden Chalice} — 如果Ember在第1回合生命值不会低于50%，可将其卸下。",
+              "fr": "{P/Christina} : -30% de réduction des dégâts, en portant un {I-A/Charmer's Golden Chalice} T4 — retire-le si Ember ne descend pas sous 50% HP au tour 1.",
+              "es": "{P/Christina}: -30% de reducción de daño, llevando un {I-A/Charmer's Golden Chalice} T4 — quítalo si Ember no baja del 50% de HP en el turno 1."
             },
             {
               "en": "{P/Kuro}: tanks the stun, resets the boss's action bar on turn 1 and self-revives, so Ember only needs to tank her S3 before her shield is up (268+ Effectiveness).",
-              "es": "{P/Kuro}: tanquea el aturdimiento, reinicia la barra de acción del jefe en el turno 1 y se auto-revive, así Ember solo necesita tanquear su S3 antes de que su escudo esté activo (268+ Efectividad).",
-              "fr": "{P/Kuro} : tank le stun, réinitialise la barre d'action du boss au tour 1 et se ressuscite elle-même, donc Ember n'a besoin de tank son S3 qu'avant que son shield ne soit actif (268+ Efficacité)."
+              "jp": "{P/Kuro}：スタンを受け、ターン1でボスの行動ゲージをリセットし、自己蘇生するため、Emberはシールドを張る前にS3を耐えるだけで済みます（効果命中268以上）。",
+              "kr": "{P/Kuro}: 스턴을 받고, 턴 1에 보스의 행동 게이지를 초기화하며 스스로 부활하므로, Ember는 실드가 생기기 전에 S3만 버티면 됩니다 (효과 적중 268 이상).",
+              "zh": "{P/Kuro}：承受眩晕，在第1回合重置Boss的行动值并自我复活，因此Ember只需在护盾生效前扛住S3（效果命中268以上）。",
+              "fr": "{P/Kuro} : tank le stun, réinitialise la barre d'action du boss au tour 1 et se ressuscite elle-même, donc Ember n'a besoin de tank son S3 qu'avant que son shield ne soit actif (268+ Efficacité).",
+              "es": "{P/Kuro}: tanquea el aturdimiento, reinicia la barra de acción del jefe en el turno 1 y se auto-revive, así Ember solo necesita tanquear su S3 antes de que su escudo esté activo (268+ Efectividad)."
             },
             {
               "en": "{P/Ritri}, {P/Demiurge Drakhan} and {P/Omega Nadja}: damage reduction, can hold {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} also lands Irregular Infection on turn 1 for a damage debuff).",
-              "es": "{P/Ritri}, {P/Demiurge Drakhan} y {P/Omega Nadja}: reducción de daño, pueden llevar {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} también aplica Infección Irregular en el turno 1 para un debuff de daño).",
-              "fr": "{P/Ritri}, {P/Demiurge Drakhan} et {P/Omega Nadja} : réduction des dégâts, peuvent porter {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} place aussi Infection Irrégulière au tour 1 pour un debuff de dégâts)."
+              "jp": "{P/Ritri}、{P/Demiurge Drakhan}、{P/Omega Nadja}：ダメージ軽減、{I-A/Charmer's Golden Chalice}を装備可能（{P/Omega Nadja}はターン1でIrregular Infectionも付与し、ダメージデバフになります）。",
+              "kr": "{P/Ritri}, {P/Demiurge Drakhan}, {P/Omega Nadja}: 피해 감소, {I-A/Charmer's Golden Chalice} 장착 가능 ({P/Omega Nadja}는 턴 1에 Irregular Infection도 부여해 피해 디버프를 겁니다).",
+              "zh": "{P/Ritri}、{P/Demiurge Drakhan}和{P/Omega Nadja}：减伤，可装备{I-A/Charmer's Golden Chalice}（{P/Omega Nadja}还能在第1回合施加Irregular Infection，带来伤害减益）。",
+              "fr": "{P/Ritri}, {P/Demiurge Drakhan} et {P/Omega Nadja} : réduction des dégâts, peuvent porter {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} place aussi Infection Irrégulière au tour 1 pour un debuff de dégâts).",
+              "es": "{P/Ritri}, {P/Demiurge Drakhan} y {P/Omega Nadja}: reducción de daño, pueden llevar {I-A/Charmer's Golden Chalice} ({P/Omega Nadja} también aplica Infección Irregular en el turno 1 para un debuff de daño)."
             }
           ]
         },
@@ -161,8 +188,11 @@
     {
       "title": {
         "en": "Burn Team",
-        "es": "Equipo de Quemadura",
-        "fr": "Équipe Burn"
+        "jp": "バーン編成",
+        "kr": "화상 팀",
+        "zh": "燃烧队伍",
+        "fr": "Équipe Burn",
+        "es": "Equipo de Quemadura"
       },
       "icon": "IG_Buff_Dot_Burn",
       "slots": [
@@ -189,8 +219,11 @@
             "notes": [
               {
                 "en": "Can use a slower build with EE+10 to chain skill earlier and boost team AP.",
-                "es": "Se puede usar un build más lento con EE+10 para encadenar skills antes y aumentar el AP del equipo.",
-                "fr": "Peut utiliser un build plus lent avec EE+10 pour enchaîner le skill plus tôt et booster les PA de l'équipe."
+                "jp": "EE+10で遅いビルドにしてチェインスキルを早め、チームAPをブースト可能。",
+                "kr": "EE+10으로 느린 빌드를 사용해 체인 스킬을 빨리 쓰고 팀 AP를 부스트 가능.",
+                "zh": "可用EE+10慢速配装提前使用连携技并提升团队AP。",
+                "fr": "Peut utiliser un build plus lent avec EE+10 pour enchaîner le skill plus tôt et booster les PA de l'équipe.",
+                "es": "Se puede usar un build más lento con EE+10 para encadenar skills antes y aumentar el AP del equipo."
               }
             ]
           },
@@ -233,8 +266,11 @@
             "notes": [
               {
                 "en": "Uses {I-W/Phantasm Necrosis} to lower her speed.",
-                "es": "Usa {I-W/Phantasm Necrosis} para reducir su velocidad.",
-                "fr": "Utilise {I-W/Phantasm Necrosis} pour réduire sa vitesse."
+                "jp": "{I-W/Phantasm Necrosis}で自身の速度を下げます。",
+                "kr": "{I-W/Phantasm Necrosis}로 자신의 속도를 낮춥니다.",
+                "zh": "使用{I-W/Phantasm Necrosis}降低自身速度。",
+                "fr": "Utilise {I-W/Phantasm Necrosis} pour réduire sa vitesse.",
+                "es": "Usa {I-W/Phantasm Necrosis} para reducir su velocidad."
               }
             ]
           }
@@ -272,8 +308,11 @@
     {
       "title": {
         "en": "Burn Team (Stage 20+)",
-        "es": "Equipo de Quemadura (Etapa 20+)",
-        "fr": "Équipe Burn (Stage 20+)"
+        "jp": "バーン編成（ステージ20以上）",
+        "kr": "화상 팀 (스테이지 20 이상)",
+        "zh": "燃烧队伍（20阶段以上）",
+        "fr": "Équipe Burn (Stage 20+)",
+        "es": "Equipo de Quemadura (Etapa 20+)"
       },
       "icon": "IG_Buff_Dot_Burn",
       "slots": [["Maxie"], ["Roxie"], ["Vlada"], ["Omega Nadja"]],
@@ -335,15 +374,21 @@
         {
           "p": {
             "en": "Designed for especially high-level stages (20+) over the previous team, where {P/Core Fusion Veronica} doesn't provide enough damage reduction to keep the team alive — especially if the boss crits someone on turn 1.",
-            "es": "Diseñado para etapas de nivel especialmente alto (20+) por encima del equipo anterior, donde {P/Core Fusion Veronica} no ofrece suficiente reducción de daño para mantener vivo al equipo — especialmente si el jefe hace un crítico a alguien en el turno 1.",
-            "fr": "Conçue pour les stages particulièrement élevés (20+) par rapport à l'équipe précédente, où {P/Core Fusion Veronica} ne fournit pas assez de réduction des dégâts pour garder l'équipe en vie — surtout si le boss crit quelqu'un au tour 1."
+            "jp": "前の編成に代わる、特に高ステージ（20以上）向けの編成。そこでは{P/Core Fusion Veronica}のダメージ軽減だけではチームを生存させられません — 特にターン1でボスが誰かにクリティカルを出した場合。",
+            "kr": "이전 팀 대신 쓰는, 특히 높은 스테이지(20 이상)를 위한 편성입니다. 그 구간에서는 {P/Core Fusion Veronica}의 피해 감소만으로 팀을 살리기에 부족합니다 — 특히 턴 1에 보스가 누군가에게 치명타를 터뜨리는 경우.",
+            "zh": "针对特别高的阶段（20以上）设计，用以取代上一支队伍 — 在这些阶段{P/Core Fusion Veronica}提供的减伤不足以保住队伍，尤其是Boss在第1回合暴击某个角色时。",
+            "fr": "Conçue pour les stages particulièrement élevés (20+) par rapport à l'équipe précédente, où {P/Core Fusion Veronica} ne fournit pas assez de réduction des dégâts pour garder l'équipe en vie — surtout si le boss crit quelqu'un au tour 1.",
+            "es": "Diseñado para etapas de nivel especialmente alto (20+) por encima del equipo anterior, donde {P/Core Fusion Veronica} no ofrece suficiente reducción de daño para mantener vivo al equipo — especialmente si el jefe hace un crítico a alguien en el turno 1."
           }
         },
         {
           "p": {
             "en": "The -30% Max HP geas is turned OFF here, but you can turn it on if all your units survive a turn-1 crit, or to gamble for more points (the boss crit rate is 10%, but it feels much lower).",
-            "es": "El geas de -30% HP máx. está DESACTIVADO aquí, pero puedes activarlo si todas tus unidades sobreviven a un crítico en el turno 1, o para arriesgarte a conseguir más puntos (la tasa de crítico del jefe es del 10%, pero se siente mucho más baja).",
-            "fr": "Le geas -30% HP Max est désactivé ici, mais tu peux l'activer si toutes tes unités survivent à un crit au tour 1, ou pour tenter plus de points (le taux de crit du boss est de 10%, mais il semble bien plus bas)."
+            "jp": "ここでは最大HP-30%のギアスをオフにしていますが、全ユニットがターン1のクリティカルを耐えられるなら、またはより多くのポイントを狙って賭けるならオンにしても構いません（ボスのクリティカル率は10%ですが、体感ではもっと低いです）。",
+            "kr": "여기서는 최대 체력 -30% 기어스를 꺼 두었지만, 모든 유닛이 턴 1의 치명타를 버틴다면, 혹은 더 많은 포인트를 노리고 도박하려면 켜도 됩니다 (보스의 치명타 확률은 10%지만 체감은 훨씬 낮습니다).",
+            "zh": "这里关闭了最大生命值-30%的契约，但如果所有单位都能扛住第1回合的暴击，或想赌一把争取更多分数，也可以开启（Boss暴击率为10%，但体感要低得多）。",
+            "fr": "Le geas -30% HP Max est désactivé ici, mais tu peux l'activer si toutes tes unités survivent à un crit au tour 1, ou pour tenter plus de points (le taux de crit du boss est de 10%, mais il semble bien plus bas).",
+            "es": "El geas de -30% HP máx. está DESACTIVADO aquí, pero puedes activarlo si todas tus unidades sobreviven a un crítico en el turno 1, o para arriesgarte a conseguir más puntos (la tasa de crítico del jefe es del 10%, pero se siente mucho más baja)."
           }
         }
       ],

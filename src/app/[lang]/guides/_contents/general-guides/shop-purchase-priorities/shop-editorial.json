@@ -198,6 +198,9 @@
       },
       "notes": {
         "en": "You can ignore it if it doesn't have a unique passive like Sacreed Edge weapon",
+        "jp": "Sacreed Edge武器のような固有パッシブがなければ無視して構いません",
+        "kr": "Sacreed Edge 무기처럼 고유 패시브가 없다면 무시해도 됩니다",
+        "zh": "如果没有像Sacreed Edge武器那样的独特被动，可以忽略",
         "fr": "Vous pouvez l'ignorer s'il n'a pas de passive unique comme la weapon Sacreed Edge.",
         "es": "Puedes ignorarlo si no tiene una pasiva única como el arma Sacreed Edge"
       }
@@ -211,6 +214,9 @@
       },
       "notes": {
         "en": "Ignore if you didn't buy any equipment from the shop.",
+        "jp": "ショップで装備を購入していない場合は無視してください。",
+        "kr": "상점에서 장비를 구매하지 않았다면 무시하세요.",
+        "zh": "如果没有在商店购买任何装备，可以忽略。",
         "fr": "Ignorez si vous n'avez acheté aucun équipement du shop.",
         "es": "Ignora si no compraste ningún equipo en la tienda."
       }

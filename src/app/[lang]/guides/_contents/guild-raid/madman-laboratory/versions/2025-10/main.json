@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Full Earth Team",
-        "es": "Equipo Full Tierra",
-        "fr": "Équipe Full Terre"
+        "jp": "フル地属性編成",
+        "kr": "풀 지속성 팀",
+        "zh": "全土属性队伍",
+        "fr": "Équipe Full Terre",
+        "es": "Equipo Full Tierra"
       },
       "element": "earth",
       "slots": [
@@ -39,8 +42,11 @@
     {
       "title": {
         "en": "Mage Team",
-        "es": "Equipo Mago",
-        "fr": "Équipe Mage"
+        "jp": "魔法型編成",
+        "kr": "마법형 팀",
+        "zh": "魔法型队伍",
+        "fr": "Équipe Mage",
+        "es": "Equipo Mago"
       },
       "element": "dark",
       "slots": [

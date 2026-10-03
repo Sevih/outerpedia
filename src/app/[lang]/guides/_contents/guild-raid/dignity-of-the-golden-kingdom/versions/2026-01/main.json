@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Light",
-        "es": "Luz",
-        "fr": "Lumière"
+        "jp": "光属性",
+        "kr": "명속성",
+        "zh": "光属性",
+        "fr": "Lumière",
+        "es": "Luz"
       },
       "element": "light",
       "slots": [
@@ -38,8 +41,11 @@
     {
       "title": {
         "en": "Ember",
-        "es": "Ember",
-        "fr": "Ember"
+        "jp": "Ember",
+        "kr": "Ember",
+        "zh": "Ember",
+        "fr": "Ember",
+        "es": "Ember"
       },
       "element": "fire",
       "slots": [["Ember"]],
@@ -109,8 +115,11 @@
     {
       "title": {
         "en": "GBeth",
-        "es": "GBeth",
-        "fr": "GBeth"
+        "jp": "GBeth",
+        "kr": "GBeth",
+        "zh": "GBeth",
+        "fr": "GBeth",
+        "es": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Kuro"], ["Akari"], ["Gnosis Beth"], ["Monad Eva"]],
@@ -127,8 +136,11 @@
     {
       "title": {
         "en": "Burn Team",
-        "es": "Equipo de Quemadura",
-        "fr": "Équipe Burn"
+        "jp": "バーン編成",
+        "kr": "화상 팀",
+        "zh": "燃烧队伍",
+        "fr": "Équipe Burn",
+        "es": "Equipo de Quemadura"
       },
       "icon": "IG_Buff_Dot_Burn",
       "slots": [

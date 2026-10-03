@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Water Striker",
-        "es": "Atacante de Agua",
-        "fr": "Striker Eau"
+        "jp": "水属性・攻撃型",
+        "kr": "수속성 공격형",
+        "zh": "水属性攻击型",
+        "fr": "Striker Eau",
+        "es": "Atacante de Agua"
       },
       "element": "water",
       "slots": [
@@ -21,22 +24,31 @@
         {
           "p": {
             "en": "There is some wiggle room to go slightly faster or slower than the speeds listed, as long as it results in the same move order throughout the entire fight as shown in the video.",
-            "es": "Hay cierto margen para ir un poco más rápido o más lento que las velocidades indicadas, siempre que se mantenga el mismo orden de movimiento durante todo el combate como se muestra en el video.",
-            "fr": "Il y a une certaine marge de manœuvre pour aller légèrement plus vite ou plus lentement que les vitesses indiquées, tant que cela produit le même ordre de passage tout au long du combat, comme montré dans la vidéo."
+            "jp": "動画と同じ行動順が戦闘全体を通して保たれる限り、記載の速度より多少速くても遅くても調整の余地があります。",
+            "kr": "영상과 동일한 행동 순서가 전투 내내 유지된다면, 기재된 속도보다 약간 빠르거나 느려도 조정 여지가 있습니다.",
+            "zh": "只要整场战斗的行动顺序与视频中一致，速度可以比所列数值略快或略慢，有一定调整空间。",
+            "fr": "Il y a une certaine marge de manœuvre pour aller légèrement plus vite ou plus lentement que les vitesses indiquées, tant que cela produit le même ordre de passage tout au long du combat, comme montré dans la vidéo.",
+            "es": "Hay cierto margen para ir un poco más rápido o más lento que las velocidades indicadas, siempre que se mantenga el mismo orden de movimiento durante todo el combate como se muestra en el video."
           }
         },
         {
           "p": {
             "en": "Run uses a 5★ Poolside Trickster Regina and a 6★ Summer Knight's Dream Ember. Results may vary with different transcendence levels.",
-            "es": "La ejecución usa a Traviesa del borde de la piscina Regina 5★ y a Sueño del Caballero de Verano Ember 6★. Los resultados pueden variar con diferentes niveles de trascendencia.",
-            "fr": "L'exécution utilise une Farceur de la Piscine Regina 5★ et un Le Rêve du Chevalier d'Été Ember 6★. Les résultats peuvent varier avec des niveaux de transcendance différents."
+            "jp": "このランでは5★ Poolside Trickster Reginaと6★ Summer Knight's Dream Emberを使用しています。超越段階が異なると結果が変わる場合があります。",
+            "kr": "이 런은 5★ Poolside Trickster Regina와 6★ Summer Knight's Dream Ember를 사용합니다. 초월 단계가 다르면 결과가 달라질 수 있습니다.",
+            "zh": "本次通关使用5★ Poolside Trickster Regina和6★ Summer Knight's Dream Ember。超越等级不同，结果可能有所差异。",
+            "fr": "L'exécution utilise une Farceur de la Piscine Regina 5★ et un Le Rêve du Chevalier d'Été Ember 6★. Les résultats peuvent varier avec des niveaux de transcendance différents.",
+            "es": "La ejecución usa a Traviesa del borde de la piscina Regina 5★ y a Sueño del Caballero de Verano Ember 6★. Los resultados pueden variar con diferentes niveles de trascendencia."
           }
         },
         {
           "p": {
             "en": "Poolside Trickster Regina may not proc Enrage on the boss even when dealing over 50k damage — this seems to happen when her S1 AoE hits the orbs, so target the boss with her S1 instead.",
-            "es": "Traviesa del borde de la piscina Regina puede no activar Enrage en el jefe incluso al infligir más de 50k de daño — esto parece ocurrir cuando su S1 AoE golpea los orbes, así que apunta al jefe con su S1 en su lugar.",
-            "fr": "Farceur de la Piscine Regina peut ne pas déclencher l'Enrage sur le Chef même en infligeant plus de 50k dégâts — cela semble se produire quand son S1 AoE touche les orbes, donc ciblez plutôt le Chef avec son S1."
+            "jp": "Poolside Trickster Reginaは5万以上のダメージを与えてもボスの激怒を発動させないことがあります — S1のAoEがオーブに当たったときに起こるようなので、S1はボスを対象にしてください。",
+            "kr": "Poolside Trickster Regina는 5만 이상의 피해를 줘도 보스의 격노를 발동시키지 못할 수 있습니다 — S1의 AoE가 오브에 맞을 때 발생하는 것으로 보이니, S1은 보스를 대상으로 사용하세요.",
+            "zh": "Poolside Trickster Regina即使造成超过5万伤害，也可能无法触发Boss的狂暴 — 这似乎发生在她的S1 AoE打到球上时，因此请用S1瞄准Boss。",
+            "fr": "Farceur de la Piscine Regina peut ne pas déclencher l'Enrage sur le Chef même en infligeant plus de 50k dégâts — cela semble se produire quand son S1 AoE touche les orbes, donc ciblez plutôt le Chef avec son S1.",
+            "es": "Traviesa del borde de la piscina Regina puede no activar Enrage en el jefe incluso al infligir más de 50k de daño — esto parece ocurrir cuando su S1 AoE golpea los orbes, así que apunta al jefe con su S1 en su lugar."
           }
         }
       ],
@@ -55,13 +67,19 @@
             "notes": [
               {
                 "en": "268 effectiveness without {I-W/Briareos's Recklessness [Ranger]}",
-                "es": "268 de efectividad sin {I-W/Briareos's Recklessness [Ranger]}",
-                "fr": "268 d'Efficacité sans {I-W/Briareos's Recklessness [Ranger]}"
+                "jp": "{I-W/Briareos's Recklessness [Ranger]}なしで効果命中268",
+                "kr": "{I-W/Briareos's Recklessness [Ranger]} 없이 효과 적중 268",
+                "zh": "不带{I-W/Briareos's Recklessness [Ranger]}时需要268效果命中",
+                "fr": "268 d'Efficacité sans {I-W/Briareos's Recklessness [Ranger]}",
+                "es": "268 de efectividad sin {I-W/Briareos's Recklessness [Ranger]}"
               },
               {
                 "en": "Alternatively you can Burst 3 before her S3 for the effectiveness buff, but you'll then have to skip S2 or S1 on {P/Poolside Trickster Regina} when the boss is broken",
-                "es": "Alternativamente puedes usar Burst 3 antes de su S3 para obtener el bono de efectividad, pero luego tendrás que saltarte S2 o S1 en {P/Poolside Trickster Regina} cuando el jefe esté roto",
-                "fr": "Vous pouvez aussi Burst 3 avant son S3 pour le bonus d'Efficacité, mais vous devrez alors passer S2 ou S1 sur {P/Poolside Trickster Regina} quand le Chef est cassé"
+                "jp": "あるいは、S3の前にバースト3を使って効果命中バフを得ることもできますが、その場合ボスのブレイク中に{P/Poolside Trickster Regina}のS2かS1を見送る必要があります",
+                "kr": "또는 S3 전에 버스트 3을 사용해 효과 적중 버프를 받을 수도 있지만, 그러면 보스가 브레이크 상태일 때 {P/Poolside Trickster Regina}의 S2나 S1을 건너뛰어야 합니다",
+                "zh": "也可以在她的S3之前使用爆发3来获得效果命中增益，但这样在Boss被击破时就必须跳过{P/Poolside Trickster Regina}的S2或S1",
+                "fr": "Vous pouvez aussi Burst 3 avant son S3 pour le bonus d'Efficacité, mais vous devrez alors passer S2 ou S1 sur {P/Poolside Trickster Regina} quand le Chef est cassé",
+                "es": "Alternativamente puedes usar Burst 3 antes de su S3 para obtener el bono de efectividad, pero luego tendrás que saltarte S2 o S1 en {P/Poolside Trickster Regina} cuando el jefe esté roto"
               }
             ]
           },
@@ -78,23 +96,35 @@
             "notes": [
               {
                 "en": "If 5★ or higher, level her EE a few levels at minimum until you can use Burst 3 on her last turn",
-                "es": "Si es 5★ o superior, sube su EE al menos unos niveles hasta que puedas usar Burst 3 en su último turno",
-                "fr": "Si 5★ ou plus, montez son EE de quelques niveaux au minimum jusqu'à pouvoir utiliser Burst 3 lors de son dernier tour"
+                "jp": "5★以上の場合、最後のターンにバースト3を使えるようになるまで、最低でもEEを数レベル上げてください",
+                "kr": "5★ 이상이라면, 마지막 턴에 버스트 3을 쓸 수 있을 때까지 최소한 EE를 몇 레벨 올리세요",
+                "zh": "若为5★或以上，至少将她的EE提升几级，直到能在她的最后一回合使用爆发3",
+                "fr": "Si 5★ ou plus, montez son EE de quelques niveaux au minimum jusqu'à pouvoir utiliser Burst 3 lors de son dernier tour",
+                "es": "Si es 5★ o superior, sube su EE al menos unos niveles hasta que puedas usar Burst 3 en su último turno"
               },
               {
                 "en": "{AS/Revenge} is best, even if you have to use a {S/SPD} accessory over a Penetration accessory",
-                "es": "{AS/Revenge} es lo mejor, incluso si tienes que usar un accesorio {S/SPD} en lugar de un accesorio de Penetración",
-                "fr": "{AS/Revenge} est le meilleur choix, même s'il faut utiliser un accessoire {S/SPD} plutôt qu'un accessoire de Pénétration"
+                "jp": "{AS/Revenge}が最適です。貫通アクセサリーの代わりに{S/SPD}アクセサリーを使うことになっても同様です",
+                "kr": "{AS/Revenge}가 가장 좋습니다. 관통 악세서리 대신 {S/SPD} 악세서리를 써야 하더라도 마찬가지입니다",
+                "zh": "{AS/Revenge}最佳，即使因此需要用{S/SPD}饰品代替穿透饰品",
+                "fr": "{AS/Revenge} est le meilleur choix, même s'il faut utiliser un accessoire {S/SPD} plutôt qu'un accessoire de Pénétration",
+                "es": "{AS/Revenge} es lo mejor, incluso si tienes que usar un accesorio {S/SPD} en lugar de un accesorio de Penetración"
               },
               {
                 "en": "With very fast gear, {AS/Revenge} with a Penetration accessory is possible while still hitting the minimum {S/SPD} to outspeed the boss on turn 1",
-                "es": "Con equipo muy rápido, es posible usar {AS/Revenge} con un accesorio de Penetración mientras se sigue alcanzando el mínimo de {S/SPD} para superar en velocidad al jefe en el turno 1",
-                "fr": "Avec un gear très rapide, {AS/Revenge} avec un accessoire de Pénétration est possible tout en atteignant le minimum de {S/SPD} pour dépasser en vitesse le Chef au tour 1"
+                "jp": "非常に速い装備があれば、{AS/Revenge}に貫通アクセサリーを合わせつつ、ターン1でボスより先に動くための最低{S/SPD}も確保できます",
+                "kr": "매우 빠른 장비가 있다면, {AS/Revenge}에 관통 악세서리를 쓰면서도 턴 1에 보스보다 먼저 행동하기 위한 최소 {S/SPD}를 맞출 수 있습니다",
+                "zh": "装备速度非常高时，可以使用{AS/Revenge}搭配穿透饰品，同时仍达到第1回合比Boss先行动所需的最低{S/SPD}",
+                "fr": "Avec un gear très rapide, {AS/Revenge} avec un accessoire de Pénétration est possible tout en atteignant le minimum de {S/SPD} pour dépasser en vitesse le Chef au tour 1",
+                "es": "Con equipo muy rápido, es posible usar {AS/Revenge} con un accesorio de Penetración mientras se sigue alcanzando el mínimo de {S/SPD} para superar en velocidad al jefe en el turno 1"
               },
               {
                 "en": "If using {AS/Revenge}, try to stay below 160 resilience to always get burned.",
-                "es": "Si usas {AS/Revenge}, intenta mantenerte por debajo de 160 de Resiliencia para quemarte siempre.",
-                "fr": "Si vous utilisez {AS/Revenge}, essayez de rester en dessous de 160 de Résilience pour toujours être brûlé."
+                "jp": "{AS/Revenge}を使う場合、必ずバーンを受けるよう根性は160未満に抑えてください。",
+                "kr": "{AS/Revenge}를 사용한다면, 항상 화상에 걸리도록 효과저항을 160 미만으로 유지하세요.",
+                "zh": "若使用{AS/Revenge}，尽量将效果抵抗保持在160以下，以确保每次都被燃烧。",
+                "fr": "Si vous utilisez {AS/Revenge}, essayez de rester en dessous de 160 de Résilience pour toujours être brûlé.",
+                "es": "Si usas {AS/Revenge}, intenta mantenerte por debajo de 160 de Resiliencia para quemarte siempre."
               }
             ]
           },
@@ -112,18 +142,27 @@
             "notes": [
               {
                 "en": "2-set {AS/Bursting} with 5★ transcendence minimum to Burst 1 on turn 1",
-                "es": "Set 2 piezas {AS/Bursting} con 5★ de trascendencia mínimo para Burst 1 en el turno 1",
-                "fr": "Set 2 pièces {AS/Bursting} avec transcendance 5★ minimum pour Burst 1 au tour 1"
+                "jp": "ターン1でバースト1を使うため、{AS/Bursting}2セットと最低5★超越",
+                "kr": "턴 1에 버스트 1을 쓰기 위해 {AS/Bursting} 2세트와 최소 5★ 초월",
+                "zh": "2件套{AS/Bursting}，至少5★超越，以便在第1回合使用爆发1",
+                "fr": "Set 2 pièces {AS/Bursting} avec transcendance 5★ minimum pour Burst 1 au tour 1",
+                "es": "Set 2 piezas {AS/Bursting} con 5★ de trascendencia mínimo para Burst 1 en el turno 1"
               },
               {
                 "en": "Use {I-T/Sage's Charm}. {I-T/Rogue's Charm} will not proc on targets with invulnerability.",
-                "es": "Usa {I-T/Sage's Charm}. {I-T/Rogue's Charm} no se activará en objetivos con invulnerabilidad.",
-                "fr": "Utilisez {I-T/Sage's Charm}. {I-T/Rogue's Charm} ne se déclenchera pas sur les cibles invulnérables."
+                "jp": "{I-T/Sage's Charm}を使用してください。{I-T/Rogue's Charm}は無敵状態の対象には発動しません。",
+                "kr": "{I-T/Sage's Charm}을 사용하세요. {I-T/Rogue's Charm}은 무적 상태의 대상에게 발동하지 않습니다.",
+                "zh": "使用{I-T/Sage's Charm}。{I-T/Rogue's Charm}对无敌状态的目标不会触发。",
+                "fr": "Utilisez {I-T/Sage's Charm}. {I-T/Rogue's Charm} ne se déclenchera pas sur les cibles invulnérables.",
+                "es": "Usa {I-T/Sage's Charm}. {I-T/Rogue's Charm} no se activará en objetivos con invulnerabilidad."
               },
               {
                 "en": "Use the {I-A/Chalice of Longing} {S/SPD} accessory",
-                "es": "Usa el accesorio {I-A/Chalice of Longing} {S/SPD}",
-                "fr": "Utilisez l'accessoire {I-A/Chalice of Longing} {S/SPD}"
+                "jp": "{I-A/Chalice of Longing}（{S/SPD}アクセサリー）を使用",
+                "kr": "{I-A/Chalice of Longing} {S/SPD} 악세서리 사용",
+                "zh": "使用{I-A/Chalice of Longing} {S/SPD}饰品",
+                "fr": "Utilisez l'accessoire {I-A/Chalice of Longing} {S/SPD}",
+                "es": "Usa el accesorio {I-A/Chalice of Longing} {S/SPD}"
               }
             ]
           },
@@ -139,23 +178,35 @@
             "notes": [
               {
                 "en": "{AS/Patience} or {AS/Defense} set",
-                "es": "Set {AS/Patience} o {AS/Defense}",
-                "fr": "Set {AS/Patience} ou {AS/Defense}"
+                "jp": "{AS/Patience}または{AS/Defense}セット",
+                "kr": "{AS/Patience} 또는 {AS/Defense} 세트",
+                "zh": "{AS/Patience}或{AS/Defense}套装",
+                "fr": "Set {AS/Patience} ou {AS/Defense}",
+                "es": "Set {AS/Patience} o {AS/Defense}"
               },
               {
                 "en": "If using {AS/Patience}, there's still a chance you resist the burn",
-                "es": "Si usas {AS/Patience}, todavía hay una posibilidad de resistir la quemadura",
-                "fr": "Si vous utilisez {AS/Patience}, il y a toujours une chance de résister au burn"
+                "jp": "{AS/Patience}を使う場合でも、バーンを抵抗してしまう可能性があります",
+                "kr": "{AS/Patience}를 사용해도 화상을 저항할 가능성은 남아 있습니다",
+                "zh": "若使用{AS/Patience}，仍有可能抵抗燃烧",
+                "fr": "Si vous utilisez {AS/Patience}, il y a toujours une chance de résister au burn",
+                "es": "Si usas {AS/Patience}, todavía hay una posibilidad de resistir la quemadura"
               },
               {
                 "en": "{AS/Defense} set has more consistent results but lower potential than {AS/Patience}",
-                "es": "El set {AS/Defense} tiene resultados más consistentes pero menor potencial que {AS/Patience}",
-                "fr": "Le set {AS/Defense} donne des résultats plus constants mais un potentiel inférieur à {AS/Patience}"
+                "jp": "{AS/Defense}セットは結果が安定しますが、{AS/Patience}より伸びしろは低めです",
+                "kr": "{AS/Defense} 세트는 결과가 더 안정적이지만 {AS/Patience}보다 잠재력은 낮습니다",
+                "zh": "{AS/Defense}套装结果更稳定，但上限低于{AS/Patience}",
+                "fr": "Le set {AS/Defense} donne des résultats plus constants mais un potentiel inférieur à {AS/Patience}",
+                "es": "El set {AS/Defense} tiene resultados más consistentes pero menor potencial que {AS/Patience}"
               },
               {
                 "en": "Use {I-T/Rogue's Charm} or {I-T/Sage's Charm}",
-                "es": "Usa {I-T/Rogue's Charm} o {I-T/Sage's Charm}",
-                "fr": "Utilisez {I-T/Rogue's Charm} ou {I-T/Sage's Charm}"
+                "jp": "{I-T/Rogue's Charm}または{I-T/Sage's Charm}を使用",
+                "kr": "{I-T/Rogue's Charm} 또는 {I-T/Sage's Charm} 사용",
+                "zh": "使用{I-T/Rogue's Charm}或{I-T/Sage's Charm}",
+                "fr": "Utilisez {I-T/Rogue's Charm} ou {I-T/Sage's Charm}",
+                "es": "Usa {I-T/Rogue's Charm} o {I-T/Sage's Charm}"
               }
             ]
           }
@@ -171,8 +222,11 @@
     {
       "title": {
         "en": "Water Mage",
-        "es": "Mago de Agua",
-        "fr": "Mage Eau"
+        "jp": "水属性・魔法型",
+        "kr": "수속성 마법형",
+        "zh": "水属性魔法型",
+        "fr": "Mage Eau",
+        "es": "Mago de Agua"
       },
       "element": "water",
       "slots": [["Edelweiss"], ["Roxie"], ["Fortuna"], ["Core Fusion Veronica"]],
@@ -226,6 +280,9 @@
         {
           "p": {
             "en": "TIP: On turn 1, target the boss (not the orbs) with Edelweiss's and Core Fusion Veronica's S3. These AoE skills deal less damage to the orbs when aimed directly at them, so the damage to the orbs may not be enough otherwise.",
+            "jp": "ヒント: ターン1では、EdelweissとCore Fusion VeronicaのS3はオーブではなくボスを対象にしてください。これらのAoEスキルはオーブを直接狙うとオーブへのダメージが下がるため、そうしないとオーブへのダメージが足りなくなる場合があります。",
+            "kr": "팁: 턴 1에는 Edelweiss와 Core Fusion Veronica의 S3을 오브가 아닌 보스에게 사용하세요. 이 AoE 스킬들은 오브를 직접 노리면 오브에 주는 피해가 줄어들기 때문에, 그렇게 하지 않으면 오브에 주는 피해가 부족할 수 있습니다.",
+            "zh": "提示：第1回合时，Edelweiss和Core Fusion Veronica的S3请瞄准Boss（而不是球）。这些AoE技能直接瞄准球时对球造成的伤害更低，否则对球的伤害可能不够。",
             "fr": "ASTUCE : au tour 1, ciblez le boss (et non les orbs) avec le S3 d'Edelweiss et de Core Fusion Veronica. Ces compétences de zone infligent moins de dégâts aux orbs lorsqu'elles les visent directement, sinon les dégâts sur les orbs risquent d'être insuffisants.",
             "es": "CONSEJO: En el turno 1, apunta al jefe (no a los orbes) con el S3 de Edelweiss y Core Fusion Veronica. Estos skills AoE hacen menos daño a los orbes cuando se apuntan directamente a ellos, así que de otro modo el daño a los orbes podría no ser suficiente."
           }
@@ -364,8 +421,11 @@
     {
       "title": {
         "en": "GBeth",
-        "es": "GBeth",
-        "fr": "GBeth"
+        "jp": "GBeth",
+        "kr": "GBeth",
+        "zh": "GBeth",
+        "fr": "GBeth",
+        "es": "GBeth"
       },
       "icon": "IG_Buff_2100092",
       "slots": [["Gnosis Beth"], ["Maxie"], ["Monad Eva"], ["Akari"]],

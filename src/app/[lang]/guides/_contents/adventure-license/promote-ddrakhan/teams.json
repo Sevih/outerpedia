@@ -21,8 +21,11 @@
     "title": {
       "title": {
         "en": "Safe Team",
-        "es": "Equipo seguro",
-        "fr": "Équipe sûre"
+        "jp": "安定編成",
+        "kr": "안정 팀",
+        "zh": "稳定队伍",
+        "fr": "Équipe sûre",
+        "es": "Equipo seguro"
       }
     },
     "slots": [["Monad Eva"], ["Nella"], ["Gnosis Viella"], ["Summer Knight's Dream Ember"]],

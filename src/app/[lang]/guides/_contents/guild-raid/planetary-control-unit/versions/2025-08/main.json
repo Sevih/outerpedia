@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Solo Ember",
-        "es": "Ember en solitario",
-        "fr": "Ember solo"
+        "jp": "Emberソロ",
+        "kr": "Ember 솔로",
+        "zh": "Ember单人",
+        "fr": "Ember solo",
+        "es": "Ember en solitario"
       },
       "element": "fire",
       "slots": [["Ember"]],
@@ -21,8 +24,11 @@
     {
       "title": {
         "en": "Burn",
-        "es": "Quemadura",
-        "fr": "Burn"
+        "jp": "バーン",
+        "kr": "화상",
+        "zh": "燃烧",
+        "fr": "Burn",
+        "es": "Quemadura"
       },
       "icon": "IG_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],

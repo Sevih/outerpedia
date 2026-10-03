@@ -7,6 +7,74 @@
 
 ## 2026-10-03
 
+- **Guides : `jp`/`kr`/`zh` écrits dans les 84 blocs éditoriaux qui n'avaient
+  que `en`/`fr`/`es` — 22 fichiers de `_contents`** (lot B11, pendant d'A21
+  côté guides). Le quoi : la passe qui a donné `fr` et `es` à du contenu resté
+  en anglais seul n'a jamais écrit les trois autres langues ; `lRec` repliant
+  sur l'anglais, rien ne cassait, mais un lecteur japonais, coréen ou chinois
+  lisait un titre d'équipe ou une note en anglais au milieu d'une page
+  traduite, et aucun test ne le voyait. Inventaire refait par script sur les
+  577 JSON de `src/app/[lang]/guides/_contents/` (un bloc = un objet à clé
+  `en` de type string ; à compléter = au moins une autre langue ET aucune des
+  trois) : les chiffres du 26/09 tiennent, 84 blocs dans 22 fichiers — 13
+  `main.json` de guild raid (`prevent-world-alteration/versions/2026-06` 20,
+  `dignity-of-the-golden-kingdom/versions/2026-08` 15, `frost-legion` `2026-09`
+  et `2025-11` 5 chacun, les neuf autres de 2 à 4), les 8 `teams.json`
+  d'`adventure-license` (1 chacun) et `shop-editorial.json` (2). Aucun bloc
+  partiel (une ou deux des trois langues), aucun bloc à `en` tableau. Les
+  blocs en anglais SEUL ne sont pas touchés (repli assumé). Le comment : 56
+  textes anglais distincts (les titres « Burn Team », « Solo Ember »,
+  « GBeth »… reviennent d'une version archivée à l'autre, même traduction
+  partout), traduits avec le vocabulaire déjà en place dans les blocs voisins
+  des mêmes fichiers — `編成` / `팀` / `队伍` pour une équipe, `ギアス` /
+  `기어스` / `契约`, `効果命中` / `효과 적중` / `效果命中`, `根性` / `효과저항`
+  / `效果抵抗`, `バースト` / `버스트` / `爆发`, `バーン` / `화상` / `燃烧`,
+  `オーブ` / `오브` / `球` — et les noms officiels des locales pour classes et
+  éléments (`sys.class.*`, `sys.element.*` : « Water Striker » →
+  `水属性・攻撃型` / `수속성 공격형` / `水属性攻击型`, « No Ranger » →
+  `スピード型なし` / `속도형 없음` / `无速度型`). Jargon laissé en anglais
+  comme le veut `CONVENTIONS.md` (SPD, ATK, AoE, EE, AP, S1/S2/S3, T4). Noms
+  de persos et d'items écrits en clair hors balise laissés tels quels (Ember,
+  GBeth, G.Beth, Rhona, Ryu, Mero + Claire, Poolside Trickster Regina, Summer
+  Knight's Dream Ember, Edelweiss, Core Fusion Veronica, Sacreed Edge), et de
+  même « Irregular Infection », nom d'effet en clair — resté en anglais faute
+  de balise, à signaler si on veut le nom du jeu. Trois titres sont donc
+  identiques dans les six langues (« Ember », « GBeth », « Mero + Claire »).
+  Ordre des clés : `en, jp, kr, zh, fr, es`, celui de TOUS les blocs complets
+  des 22 fichiers — les blocs touchés étaient en `en, es, fr` pour la plupart,
+  `fr` et `es` y changent donc de ligne sans changer de valeur. Écriture par
+  script jetable en édition de LIGNES (pas de `JSON.stringify` : il ne
+  redonne qu'un des 22 fichiers à l'octet près, prettier gardant les tableaux
+  courts sur une ligne) ; le script refuse d'écrire si, hors `jp`/`kr`/`zh`
+  ajoutés, le JSON relu diffère de l'original. `prettier --check` passe sur
+  les 22. Vérifié, scripts jetables non commités : (1) recompte — 0 bloc
+  restant, 0 fichier ; (2) les 84 blocs touchés portent les six langues dans
+  l'ordre attendu et, pour les 20 qui ont des balises, exactement la même
+  SUITE de balises dans chacune (même multiensemble ET même ordre) — 0 écart.
+  `pnpm typecheck` : les trois `tsc --noEmit` sans une ligne, code 0.
+  `pnpm lint` : `$ eslint`, rien d'autre, code 0. `pnpm test` :
+  `Tests  2003 passed (2003)`, 173 fichiers (un premier run avait 1 fichier
+  en échec de chargement sur 173, 1999 tests verts : un fichier de test non
+  suivi d'un lot voisin en cours d'écriture, vert au run suivant). Aucun
+  changement visuel en `en`/`fr`/`es` : valeurs inchangées, vérifié par le
+  garde du script. Seul effet de bord, voulu par le dépôt : le hook
+  `stamp-guides` du pre-commit a passé `updated` au 2026-10-03 dans les 14
+  `meta.json` des guides touchés (8 adventure-license, la boutique, 5 guild
+  raids), embarqués dans le commit par le hook, pas par moi — la date
+  affichée de ces guides bouge. Laissé : rien dans le périmètre JSON. Repéré hors
+  périmètre, non touché : (a) le même contrôle de balises étendu aux blocs
+  déjà complets trouve 23 blocs dans 14 fichiers de `_contents` dont
+  `jp`/`kr`/`zh` n'ont pas le multiensemble de balises de l'anglais (dont 5
+  dans `frost-legion/versions/2025-11/main.json` et 5 dans `2026-09`, équipes
+  « Solo Ember » et « Safe Burn Team ») — traductions antérieures qui ont
+  balisé ou débalisé un nom, à reprendre dans un lot à part avec un test qui
+  le garde ; (b) `general-guides/unlock-content/index.tsx` l. 86 et 90, un
+  repli de code `{ en: '?', es: '?', fr: '?' }` sans les trois autres langues
+  — pas de l'éditorial, rendu identique partout ; (c)
+  `general-guides/banner-mileage/index.tsx` l. 106, `AND` porte `en`, `zh`,
+  `es`, `fr` sans `jp` ni `kr` (hors définition du lot : une des trois est
+  là).
+
 - **Les quatre modales/lightbox des outils passent par une brique partagée,
   `Modal` / `Lightbox`** (`src/components/ui/Modal.tsx`, lot B9 de la Dette).
   Quoi : la `Modal` locale du progress-tracker (export/import, réglages), le

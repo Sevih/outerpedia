@@ -3,8 +3,11 @@
     "title": {
       "title": {
         "en": "Team 1 – Reliable Clear",
-        "es": "Equipo 1 – Clear confiable",
-        "fr": "Équipe 1 – Clear fiable"
+        "jp": "チーム1 – 安定クリア",
+        "kr": "팀 1 – 안정 클리어",
+        "zh": "队伍1 – 稳定通关",
+        "fr": "Équipe 1 – Clear fiable",
+        "es": "Equipo 1 – Clear confiable"
       }
     },
     "slots": [

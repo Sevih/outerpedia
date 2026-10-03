@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Solo Ember",
-        "es": "Ember en solitario",
-        "fr": "Ember solo"
+        "jp": "Emberソロ",
+        "kr": "Ember 솔로",
+        "zh": "Ember单人",
+        "fr": "Ember solo",
+        "es": "Ember en solitario"
       },
       "element": "fire",
       "slots": [["Ember"]],
@@ -98,8 +101,11 @@
     {
       "title": {
         "en": "Burn Team",
-        "es": "Equipo de Quemadura",
-        "fr": "Équipe Burn"
+        "jp": "バーン編成",
+        "kr": "화상 팀",
+        "zh": "燃烧队伍",
+        "fr": "Équipe Burn",
+        "es": "Equipo de Quemadura"
       },
       "icon": "IG_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],
@@ -266,8 +272,11 @@
     {
       "title": {
         "en": "Mero + Claire",
-        "es": "Mero + Claire",
-        "fr": "Mero + Claire"
+        "jp": "Mero + Claire",
+        "kr": "Mero + Claire",
+        "zh": "Mero + Claire",
+        "fr": "Mero + Claire",
+        "es": "Mero + Claire"
       },
       "element": "fire",
       "slots": [["Mero"], ["Claire"]],
@@ -400,8 +409,11 @@
     {
       "title": {
         "en": "Burn Team (Revenge)",
-        "es": "Equipo Quemadura (Venganza)",
-        "fr": "Équipe Burn (Revenge)"
+        "jp": "バーン編成（リベンジ）",
+        "kr": "화상 팀 (복수)",
+        "zh": "燃烧队伍（复仇）",
+        "fr": "Équipe Burn (Revenge)",
+        "es": "Equipo Quemadura (Venganza)"
       },
       "icon": "IG_Buff_detonate",
       "slots": [["Maxie"], ["Roxie"], ["Akari"], ["Vlada"]],

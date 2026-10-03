@@ -3,8 +3,11 @@
     {
       "title": {
         "en": "Full Dark",
-        "es": "Todo Oscuro",
-        "fr": "Full Ténèbres"
+        "jp": "フル闇属性",
+        "kr": "풀 암속성",
+        "zh": "全暗属性",
+        "fr": "Full Ténèbres",
+        "es": "Todo Oscuro"
       },
       "element": "dark",
       "slots": [["Omega Nadja"], ["Maxwell"], ["Demiurge Astei"], ["Sterope"]],
@@ -90,8 +93,11 @@
     {
       "title": {
         "en": "Classic G.Beth",
-        "es": "G.Beth Clásica",
-        "fr": "G.Beth classique"
+        "jp": "クラシックG.Beth",
+        "kr": "클래식 G.Beth",
+        "zh": "常规G.Beth",
+        "fr": "G.Beth classique",
+        "es": "G.Beth Clásica"
       },
       "element": "light",
       "slots": [["Monad Eva"], ["Gnosis Beth"]],
@@ -131,8 +137,11 @@
     {
       "title": {
         "en": "Burn Team",
-        "es": "Equipo de Quemadura",
-        "fr": "Équipe Burn"
+        "jp": "バーン編成",
+        "kr": "화상 팀",
+        "zh": "燃烧队伍",
+        "fr": "Équipe Burn",
+        "es": "Equipo de Quemadura"
       },
       "element": "fire",
       "slots": [["Monad Eva"], ["Maxie"], ["Vlada", "Parti"], ["Ember", "Bell Cranel"]],
@@ -218,8 +227,11 @@
     {
       "title": {
         "en": "Solo Ember",
-        "es": "Ember en solitario",
-        "fr": "Ember solo"
+        "jp": "Emberソロ",
+        "kr": "Ember 솔로",
+        "zh": "Ember单人",
+        "fr": "Ember solo",
+        "es": "Ember en solitario"
       },
       "element": "fire",
       "slots": [["Ember"], ["Liselotte", "Ritri"], ["Omega Nadja"], ["Demiurge Drakhan"]],
@@ -495,8 +507,11 @@
     {
       "title": {
         "en": "Safe Burn Team",
-        "es": "Equipo de Quemadura Seguro",
-        "fr": "Équipe Burn sécurisée"
+        "jp": "安定バーン編成",
+        "kr": "안정 화상 팀",
+        "zh": "稳定燃烧队伍",
+        "fr": "Équipe Burn sécurisée",
+        "es": "Equipo de Quemadura Seguro"
       },
       "element": "fire",
       "slots": [["Monad Eva"], ["Maxie"], ["Akari"], ["Vlada"]],
