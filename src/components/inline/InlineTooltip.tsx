@@ -87,6 +87,15 @@ export function InlineTooltip({
           side="top"
           align="center"
           sideOffset={6}
+          // Radix ferme la bulle dès le `pointerdown` hors du contenu — donc
+          // AUSSI quand le doigt se pose sur le déclencheur pour le second tap :
+          // `handleTap` la trouvait fermée, la rouvrait, et le lien ne
+          // naviguait jamais. Le déclencheur gère lui-même son ouverture ; un
+          // appui dessus n'est pas un « dehors ».
+          onPointerDownOutside={(e) => {
+            const target = e.detail.originalEvent.target;
+            if (target instanceof Node && triggerRef.current?.contains(target)) e.preventDefault();
+          }}
           className={`border-line z-80 max-w-70 rounded border px-3 py-2 shadow-lg ${bg}`}
         >
           {content}
