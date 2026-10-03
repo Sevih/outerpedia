@@ -49,12 +49,12 @@
           "es": "Aplica {D/BT_FREEZE} en el jefe para activar el efecto de +100% de daño recibido de Hunting Time."
         },
         {
-          "en": "Reapply Freeze every turn since the boss self-cleanses 1 debuff per turn — bring multiple Freeze sources or a frequent reapplier.",
+          "en": "Reapply {D/BT_FREEZE} every turn since the boss self-cleanses 1 debuff per turn — bring multiple Freeze sources or a frequent reapplier.",
           "jp": "ボスは毎ターン弱体効果を1個解除するため、毎ターン{D/BT_FREEZE}を再付与する必要がある。複数の凍結源、または頻繁に再付与できるユニットを採用する。",
           "kr": "보스가 매턴 약화 효과 1개를 해제하므로 {D/BT_FREEZE}를 매턴 재부여해야 합니다. 여러 빙결 소스나 빈번한 재부여 캐릭터를 채용하세요.",
           "zh": "Boss每回合解除1个弱化效果，因此需要每回合重新附加{D/BT_FREEZE}——携带多个冰冻来源或可频繁重附加的角色。",
-          "fr": "Réappliquez Freeze chaque tour puisque le Boss purifie 1 debuff par tour — emmenez plusieurs sources de Freeze ou un personnage capable de le réappliquer fréquemment.",
-          "es": "Reaplica Congelación cada turno ya que el jefe se autopurifica 1 debuff por turno — trae múltiples fuentes de Congelación o un reaplicador frecuente."
+          "fr": "Réappliquez {D/BT_FREEZE} chaque tour puisque le Boss purifie 1 debuff par tour — emmenez plusieurs sources de Freeze ou un personnage capable de le réappliquer fréquemment.",
+          "es": "Reaplica {D/BT_FREEZE} cada turno ya que el jefe se autopurifica 1 debuff por turno — trae múltiples fuentes de Congelación o un reaplicador frecuente."
         }
       ]
     },

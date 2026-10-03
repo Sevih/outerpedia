@@ -145,12 +145,12 @@
       "es": "{P/Delta} puede combinarse con {P/Cindy}, {P/Dianne} y/o {P/Fran} (EE+10)."
     },
     "control-and-focus-the-core-to-pr": {
-      "en": "Control and focus the core to prevent {P/Poolside Trickster Regina} to play. Both priority reductions and stun.",
+      "en": "Control and focus the core to prevent {P/Poolside Trickster Regina} to play. Both priority reductions and {D/BT_STUN}.",
       "jp": "{P/Poolside Trickster Regina}に行動させないよう、コアを制圧・集中攻撃しましょう。行動順低下と{D/BT_STUN}の両方を使います。",
-      "kr": "{P/Poolside Trickster Regina}이(가) 행동하지 못하도록 코어를 제압하고 집중 공격하세요. 행동 순서 감소와 스턴 모두 활용합니다.",
+      "kr": "{P/Poolside Trickster Regina}이(가) 행동하지 못하도록 코어를 제압하고 집중 공격하세요. 행동 순서 감소와 {D/BT_STUN} 모두 활용합니다.",
       "zh": "控制并集火核心,避免{P/Poolside Trickster Regina}行动。行动顺序降低和{D/BT_STUN}都要使用。",
-      "fr": "Contrôlez et focus le core pour empêcher {P/Poolside Trickster Regina} de jouer. À la fois réduction de priority et stun.",
-      "es": "Controla y enfoca el núcleo para evitar que {P/Poolside Trickster Regina} actúe. Tanto reducciones de prioridad como aturdimiento."
+      "fr": "Contrôlez et focus le core pour empêcher {P/Poolside Trickster Regina} de jouer. À la fois réduction de priority et {D/BT_STUN}.",
+      "es": "Controla y enfoca el núcleo para evitar que {P/Poolside Trickster Regina} actúe. Tanto reducciones de prioridad como {D/BT_STUN}."
     },
     "best-way-is-by-using-action-gaug": {
       "en": "Best way is by using {B/BT_ACTION_GAUGE}, {D/BT_ACTION_GAUGE} and hard CC like {D/BT_STUN}, {D/BT_FREEZE} and {D/BT_GOLDEN_CURSE}.",
@@ -233,12 +233,12 @@
       "es": "O fuerza bruta con tus unidades DPS más fuertes"
     },
     "control-since-she-lack-of-immuni": {
-      "en": "Control since she lack of immunity towards any stun.",
+      "en": "Control since she lack of immunity towards any {D/BT_STUN}.",
       "jp": "{D/BT_STUN}に対する耐性がないので、行動制御しましょう。",
-      "kr": "어떤 스턴에도 면역이 없으므로 행동을 제어하세요.",
+      "kr": "어떤 {D/BT_STUN}에도 면역이 없으므로 행동을 제어하세요.",
       "zh": "她对任何{D/BT_STUN}都没有免疫,进行控制即可。",
-      "fr": "Soit en contrôle, car elle n'a aucune immunité face au stun.",
-      "es": "Control, ya que carece de inmunidad ante cualquier aturdimiento."
+      "fr": "Soit en contrôle, car elle n'a aucune immunité face au {D/BT_STUN}.",
+      "es": "Control, ya que carece de inmunidad ante cualquier {D/BT_STUN}."
     },
     "units-with-stat-in-their-kits": {
       "en": "Units with {B/BT_STAT|ST_COUNTER_RATE} in their kits",

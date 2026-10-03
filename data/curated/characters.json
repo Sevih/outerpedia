@@ -467,12 +467,12 @@
           "es": "puede aumentar su propia prioridad con {SK/Alice|S2}, proporcionando una transición fluida a {SK/Alice|S3}"
         },
         {
-          "en": "can boost earth allies outgoing damage with {D/EXECUTION_TIME}",
+          "en": "can boost {E/Earth} allies outgoing damage with {D/EXECUTION_TIME}",
           "jp": "{D/EXECUTION_TIME}で{E/Earth}属性味方の与ダメージを増加",
           "kr": "{D/EXECUTION_TIME}로 {E/Earth} 속성 아군의 피해량 증가",
           "zh": "通过{D/EXECUTION_TIME}提升{E/Earth}属性队友的输出伤害",
-          "fr": "peut augmenter les dégâts infligés des alliés terre avec {D/EXECUTION_TIME}",
-          "es": "puede aumentar el daño saliente de los aliados de Tierra con {D/EXECUTION_TIME}"
+          "fr": "peut augmenter les dégâts infligés des alliés {E/Earth} avec {D/EXECUTION_TIME}",
+          "es": "puede aumentar el daño saliente de los aliados de {E/Earth} con {D/EXECUTION_TIME}"
         },
         {
           "en": "If the enemy unit is {E/Water}, {SK/Alice|S2} does an additional effect of {D/BT_STAT|ST_SPEED}",
@@ -2687,12 +2687,12 @@
           "es": "{SK/Vlada|S3} se reinicia cada vez que muere una unidad enemiga, perfecto para limpiar oleadas"
         },
         {
-          "en": "{SK/Vlada|S2} detonates {D/BT_DOT_BURN} with increase damage(50%), 20% more if the enemy unit is earth",
+          "en": "{SK/Vlada|S2} detonates {D/BT_DOT_BURN} with increase damage(50%), 20% more if the enemy unit is {E/Earth}",
           "jp": "{SK/Vlada|S2}は{D/BT_DOT_BURN}を起爆しダメージ50%増加、{E/Earth}属性の敵にはさらに20%増加",
           "kr": "{SK/Vlada|S2}는 {D/BT_DOT_BURN}을 폭발시켜 피해 50% 증가, 적이 {E/Earth} 속성이면 20% 추가",
           "zh": "{SK/Vlada|S2}引爆{D/BT_DOT_BURN}并增加50%伤害，对{E/Earth}属性敌人额外增加20%",
-          "fr": "{SK/Vlada|S2} fait exploser {D/BT_DOT_BURN} avec des dégâts accrus (50 %), 20 % de plus si l'unité ennemie est de l'élément Terre",
-          "es": "{SK/Vlada|S2} detona {D/BT_DOT_BURN} con daño aumentado (50%), 20% más si la unidad enemiga es de Tierra"
+          "fr": "{SK/Vlada|S2} fait exploser {D/BT_DOT_BURN} avec des dégâts accrus (50 %), 20 % de plus si l'unité ennemie est de l'élément {E/Earth}",
+          "es": "{SK/Vlada|S2} detona {D/BT_DOT_BURN} con daño aumentado (50%), 20% más si la unidad enemiga es de {E/Earth}"
         },
         {
           "en": "all skills ignore target's resilience",

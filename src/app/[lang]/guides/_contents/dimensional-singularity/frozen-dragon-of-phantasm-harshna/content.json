@@ -69,12 +69,12 @@
             "Core Fusion Veronica"
           ],
           "reason": {
-            "en": "Other viable defender option.",
+            "en": "Other viable {C/Defender} option.",
             "jp": "他の{C/Defender}の選択肢。",
             "kr": "다른 가능한 {C/Defender} 선택지.",
             "zh": "其他可选的{C/Defender}。",
-            "fr": "Autre option de défenseur viable.",
-            "es": "Otra opción viable de defensor."
+            "fr": "Autre option de {C/Defender} viable.",
+            "es": "Otra opción viable de {C/Defender}."
           }
         },
         {

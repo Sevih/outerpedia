@@ -578,7 +578,9 @@ const TAG_MAP: Record<string, TagHandler> = {
   SKB: (v, _ctx, k) => pendingChip(v, k),
 };
 
-const TAG_REGEX = /\{((?:[BDSCEPL])|EE|AS|SKB|SK|I-(?:W|A|T|I))\/([^}]+)\}/g;
+/** Forme d'une balise inline — exportée pour le test de parité entre langues
+ * (`data/inline-tag-parity.test.ts`), qui doit compter ce que le rendu voit. */
+export const TAG_REGEX = /\{((?:[BDSCEPL])|EE|AS|SKB|SK|I-(?:W|A|T|I))\/([^}]+)\}/g;
 
 // --- Contrôle des tags (outil admin) -------------------------------------------
 

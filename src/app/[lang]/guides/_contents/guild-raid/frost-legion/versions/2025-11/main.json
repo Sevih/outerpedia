@@ -375,12 +375,12 @@
               "es": "{P/Ritri} - Reducción de daño pasiva"
             },
             {
-              "en": "{P/Liselotte} with EE - Passive damage reduction with shield. Her passive speed boost (+5 at 4★ or +10 at 6★) only reduces damage if the boost puts Ember above desired speed. If you build some speed on Ember anyway, she won't reduce your damage.",
+              "en": "{P/Liselotte} with EE - Passive damage reduction with shield. Her passive speed boost (+5 at 4★ or +10 at 6★) only reduces damage if the boost puts {P/Ember} above desired speed. If you build some speed on Ember anyway, she won't reduce your damage.",
               "jp": "EE付き{P/Liselotte} - シールド付きパッシブダメージ軽減。パッシブ速度ブースト（4★で+5、6★で+10）は{P/Ember}が望む速度を超える場合のみダメージを減らす",
               "kr": "EE 장착 {P/Liselotte} - 실드와 패시브 피해 감소. 패시브 속도 부스트(4★에서 +5, 6★에서 +10)는 부스트가 {P/Ember}를 원하는 속도 이상으로 올릴 때만 피해 감소",
               "zh": "带EE的{P/Liselotte} - 护盾被动减伤。被动速度加成（4★时+5，6★时+10）只有在加成使{P/Ember}超过期望速度时才会减少伤害",
-              "fr": "{P/Liselotte} avec EE — Réduction de dégâts passive avec bouclier. Son boost de vitesse passif (+5 à 4★ ou +10 à 6★) ne réduit les dégâts que si le boost place Ember au-dessus de la vitesse souhaitée. Si vous mettez de toute façon de la vitesse sur Ember, elle ne réduira pas vos dégâts.",
-              "es": "{P/Liselotte} con EE - Reducción de daño pasiva con escudo. Su aumento de velocidad pasivo (+5 a 4★ o +10 a 6★) solo reduce el daño si el aumento pone a Ember por encima de la velocidad deseada. Si de todos modos construyes algo de velocidad en Ember, no reducirá tu daño."
+              "fr": "{P/Liselotte} avec EE — Réduction de dégâts passive avec bouclier. Son boost de vitesse passif (+5 à 4★ ou +10 à 6★) ne réduit les dégâts que si le boost place {P/Ember} au-dessus de la vitesse souhaitée. Si vous mettez de toute façon de la vitesse sur Ember, elle ne réduira pas vos dégâts.",
+              "es": "{P/Liselotte} con EE - Reducción de daño pasiva con escudo. Su aumento de velocidad pasivo (+5 a 4★ o +10 a 6★) solo reduce el daño si el aumento pone a {P/Ember} por encima de la velocidad deseada. Si de todos modos construyes algo de velocidad en Ember, no reducirá tu daño."
             }
           ]
         },
@@ -445,20 +445,20 @@
         {
           "ul": [
             {
-              "en": "Put {P/Liselotte} in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give Liselotte first turn",
+              "en": "Put {P/Liselotte} in front row (first slot) to reduce turn 1 RNG - If both hit 100% priority at the same time, it will always give {P/Liselotte} first turn",
               "jp": "{P/Liselotte}を前列（最初のスロット）に配置してターン1のRNGを減らす - 両方が同時に100%優先度に達した場合、常に{P/Liselotte}が先に行動",
               "kr": "{P/Liselotte}를 앞줄(첫 번째 슬롯)에 배치해 1턴 RNG 감소 - 둘 다 동시에 100% 우선도에 도달하면 항상 {P/Liselotte}가 먼저 행동",
               "zh": "把{P/Liselotte}放在前排（第一个位置）以减少第1回合RNG - 如果两者同时达到100%优先级，总是{P/Liselotte}先行动",
-              "fr": "Placez {P/Liselotte} en première ligne (premier emplacement) pour réduire le RNG du tour 1 — si les deux atteignent 100% de priorité en même temps, Liselotte jouera toujours en premier",
-              "es": "Pon a {P/Liselotte} en la fila delantera (primer puesto) para reducir el RNG del turno 1 - Si ambos alcanzan 100% de prioridad al mismo tiempo, siempre le dará el primer turno a Liselotte"
+              "fr": "Placez {P/Liselotte} en première ligne (premier emplacement) pour réduire le RNG du tour 1 — si les deux atteignent 100% de priorité en même temps, {P/Liselotte} jouera toujours en premier",
+              "es": "Pon a {P/Liselotte} en la fila delantera (primer puesto) para reducir el RNG del turno 1 - Si ambos alcanzan 100% de prioridad al mismo tiempo, siempre le dará el primer turno a {P/Liselotte}"
             },
             {
-              "en": "Low speed but faster than Ember (130ish speed at max)",
+              "en": "Low speed but faster than {P/Ember} (130ish speed at max)",
               "jp": "低速度だが{P/Ember}より速い（最大130程度）",
               "kr": "낮은 속도지만 {P/Ember}보다 빠르게(최대 130 정도)",
               "zh": "低速度但比{P/Ember}快（最高130左右）",
-              "fr": "Vitesse faible mais plus rapide qu'Ember (environ 130 de vitesse au maximum)",
-              "es": "Velocidad baja pero más rápida que Ember (unos 130 de velocidad al máximo)"
+              "fr": "Vitesse faible mais plus rapide qu'{P/Ember} (environ 130 de vitesse au maximum)",
+              "es": "Velocidad baja pero más rápida que {P/Ember} (unos 130 de velocidad al máximo)"
             },
             {
               "en": "0 crit, 0 accuracy, 0 resilience",
@@ -485,12 +485,12 @@
               "es": "Usa Vanguard Charm"
             },
             {
-              "en": "On her turn: Use Burst S3 or Burst 2 to top up Ember's health before the burn damage so you survive",
+              "en": "On her turn: Use Burst S3 or Burst 2 to top up {P/Ember}'s health before the burn damage so you survive",
               "jp": "ターン時：バーンダメージ前にバーストS3またはバースト2で{P/Ember}のHPを回復",
               "kr": "자기 턴: 화상 피해 전에 버스트 S3 또는 버스트 2로 {P/Ember} HP 회복",
               "zh": "轮到她时：在燃烧伤害前用爆发S3或爆发2回复{P/Ember}的血量",
-              "fr": "À son tour : utilisez le Burst S3 ou le Burst 2 pour remonter les HP d'Ember avant les dégâts de burn afin de survivre",
-              "es": "En su turno: usa Burst S3 o Burst 2 para rellenar la vida de Ember antes del daño de quemadura para sobrevivir"
+              "fr": "À son tour : utilisez le Burst S3 ou le Burst 2 pour remonter les HP d'{P/Ember} avant les dégâts de burn afin de survivre",
+              "es": "En su turno: usa Burst S3 o Burst 2 para rellenar la vida de {P/Ember} antes del daño de quemadura para sobrevivir"
             },
             {
               "en": "She'll die before her second turn",
