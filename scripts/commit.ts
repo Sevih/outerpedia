@@ -12,6 +12,11 @@
  *   3. message de commit (prompt)
  *   4. images → assets:collect + assets:push (R2)   ← AVANT le push git,
  *      car « merger/pousser = déployer » et la prod lit R2.
+ *   3b. REVUE de ce qui partira : liste des fichiers modifiés et, à part, des
+ *       NOUVEAUX fichiers (non suivis), puis confirmation. Le `git add -A` de
+ *       l'étape 5 embarque tout le working tree — c'est voulu pour ce flux,
+ *       mais pas à l'aveugle (audit G17 : un fichier d'un travail en cours à
+ *       côté partait en prod sans que personne ne l'ait vu).
  *   5. git add -A → commit → push (branche courante)
  *
  * PAS de `next build` : c'est le boulot de la CI (un build local casse les types,
@@ -28,6 +33,7 @@
  *                     le prochain push « normal » embarquera tout)
  *   --skip-controls   saute les contrôles (à tes risques)
  *   --msg "<texte>"   message de commit (skip le prompt)
+ *   --yes             saute la confirmation de la revue (la liste s'affiche quand même)
  */
 import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -54,6 +60,7 @@ const NO_CI = has('--no-ci');
 const SKIP_CI_TAG = '[skip ci]';
 const SKIP_CONTROLS = has('--skip-controls');
 const FORCE_MSG = val('--msg');
+const YES = has('--yes');
 
 const PKG = resolve('package.json');
 
@@ -80,6 +87,22 @@ function sh(cmd: string): void {
 /** Sortie capturée (pour parser), sans dry-run. */
 function shOut(cmd: string): string {
   return execSync(cmd, { encoding: 'utf-8' }).trim();
+}
+
+/**
+ * Trie la sortie de `git status --porcelain` : fichiers déjà suivis (modifiés,
+ * supprimés, renommés) d'un côté, NOUVEAUX (`??`) de l'autre — ceux-là sont
+ * ceux qu'un `git add -A` embarque sans que personne ne les ait jamais vus.
+ */
+function pendingFiles(porcelain: string): { tracked: string[]; untracked: string[] } {
+  const tracked: string[] = [];
+  const untracked: string[] = [];
+  for (const line of porcelain.split('\n')) {
+    if (!line.trim()) continue;
+    const file = line.slice(3);
+    (line.startsWith('??') ? untracked : tracked).push(file);
+  }
+  return { tracked, untracked };
 }
 
 /** Sortie capturée, `null` si la commande échoue (stderr avalé). */
@@ -248,6 +271,34 @@ async function main(): Promise<void> {
       process.exit(0);
     }
     if (NO_CI && !msg.includes(SKIP_CI_TAG)) msg = `${msg} ${SKIP_CI_TAG}`;
+
+    // 3b) REVUE — ce que le `git add -A` embarquera. Ici et pas juste avant le
+    // commit : c'est le dernier prompt possible (stdin est libéré ensuite), et
+    // un « non » ne laisse rien de publié ni de modifié. Les étapes suivantes
+    // n'ajoutent que leurs propres fichiers d'état (meta des guides re-datés,
+    // `pushed.json`, package.json bumpé).
+    // Sortie BRUTE (pas `shOut`, qui rogne l'espace de tête de la première
+    // ligne : ` M fichier` y perdrait une colonne).
+    const { tracked, untracked } = pendingFiles(
+      execSync('git status --porcelain', { encoding: 'utf-8' }),
+    );
+    if (tracked.length || untracked.length) {
+      console.log(`\n▶ ce commit embarquera ${tracked.length + untracked.length} fichier(s)`);
+      for (const f of tracked) console.log(`  \x1b[90m${f}\x1b[0m`);
+      if (untracked.length) {
+        console.log(
+          `\x1b[33m  dont ${untracked.length} NOUVEAU(X), jamais suivi(s) par git :\x1b[0m`,
+        );
+        for (const f of untracked) console.log(`  \x1b[33m+ ${f}\x1b[0m`);
+      }
+      if (!YES) {
+        const ok = (await ask(rl, 'Tout embarquer ? [o/N] ')).toLowerCase();
+        if (ok !== 'o' && ok !== 'oui' && ok !== 'y') {
+          console.log('Abandon — rien de publié, rien de modifié.');
+          process.exit(0);
+        }
+      }
+    }
   } finally {
     // On LIBÈRE stdin AVANT de spawn git : un readline encore ouvert perturbe
     // les hooks git (spinner lefthook / TTY) et peut figer le commit.

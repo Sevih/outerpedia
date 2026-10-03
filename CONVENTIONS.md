@@ -38,6 +38,10 @@ un dossier entier embarque le travail en cours d'à côté. Et jamais de fichier
 moitié stagé : combiné à prettier au pre-commit, lefthook peut échouer à
 restaurer son stash et perdre les modifications non stagées.
 
+Seule exception : `pnpm commit`, le flux de publication, fait un `git add -A`
+— après avoir AFFICHÉ ce qui partira (nouveaux fichiers à part) et demandé
+confirmation. Tout commit à la main, et tout commit d'agent, stage par chemins.
+
 **Un commit de travail embarque la mise à jour de [docs/DONE.md](./docs/DONE.md)**
 (et le retrait de l'item dans [docs/TODO.md](./docs/TODO.md)) : le suivi part
 avec le changement qu'il décrit, pas dans un commit de docs séparé. Corollaire :
