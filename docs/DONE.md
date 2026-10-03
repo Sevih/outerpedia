@@ -7,6 +7,88 @@
 
 ## 2026-10-03
 
+- **Lot B14 : une description meta dédiée pour les dix-huit pages d'outils**
+  (Opus). Le quoi : nouvelle clé `tools.<slug>.meta_description` dans les six
+  locales (18 outils × 6 langues, 108 chaînes), lue par la SEULE metadata ;
+  `tools.<slug>.desc` reste le sous-titre visible et n'a pas bougé d'une
+  lettre. Le pourquoi : `.desc` servait aux deux — une phrase courte, bonne
+  sous un `<h1>` ou sur une carte de `/tools`, trop courte pour un résultat de
+  recherche (« Listen to and download the official OST. », 40 caractères) ;
+  décision Sevih du 03/10, on ne rallonge pas le sous-titre, on sépare.
+  L'inventaire : `.desc` n'alimentait `createPageMetadata` qu'à DEUX endroits —
+  `src/app/[lang]/[slug]/page.tsx` (les 17 outils du registre) et
+  `src/app/[lang]/event/page.tsx` (`/event`, route dédiée). Les deux lisent
+  maintenant la clé meta ; leur `ToolShell` garde `.desc`. `coupon-codes`
+  n'a PAS de clé : `/coupons` tire déjà sa description de
+  `page.coupons.description`, une clé de plus serait morte (`/tools` et
+  `/tierlist` ont de même leur `page.*.description`). Les autres lecteurs de
+  `.desc` sont de l'affichage et n'ont pas été touchés : cartes de
+  `tools/page.tsx`, rail et cartes phares de `tierlist/page.tsx`. Le nom :
+  `meta_description` et non `meta_desc`, comme les deux voisines
+  (`page.equipment.meta_description`, `page.character.meta_description`). Les
+  textes : anglais de 141 à 157 caractères, écrits outil ouvert (wrapper,
+  libellés et page rendue), ce que l'outil fait et rien qu'il ne fasse pas —
+  filtres réels des tier lists, les trois langues des 4-cut comics, le
+  téléchargement MP3 du jukebox, l'export du progress tracker, le partage par
+  lien du team planner ; « Estimate » pour le damage calculator, dont le
+  bandeau dit que le résultat peut différer du jeu ; `/event` annonce
+  « tournaments, contests and other activities », les trois types du curé,
+  pas les « giveaways » du sous-titre. Le nom du jeu une fois par chaîne, dans
+  la langue (Outerplane, アウタープレーン, 아우터플레인, 异域战记) ; vocabulaire
+  repris des libellés de chaque locale (Mileage / millaje / マイレージ / 指定招募,
+  bannières, transcendance, équipement exclusif). `fr` et `es` resserrés
+  après une première passe à 190-195 caractères. Commentaire de tête de
+  `src/lib/data/tools.ts` complété (il liste les clés i18n d'un outil).
+  Longueurs (caractères ; `jp`/`kr`/`zh` en pleine chasse, d'où les chiffres
+  bas) :
+
+  | Outil                 |  en |  fr |  es |  jp |  kr |  zh |
+  | --------------------- | --: | --: | --: | --: | --: | --: |
+  | most-used-units       | 153 | 149 | 145 |  66 |  72 |  38 |
+  | tierlistpve           | 152 | 172 | 169 |  78 |  95 |  59 |
+  | tierlistpvp           | 154 | 158 | 163 |  71 |  86 |  56 |
+  | ee-priority-base      | 143 | 148 | 141 |  63 |  78 |  44 |
+  | ee-priority-plus10    | 146 | 150 | 148 |  63 |  78 |  53 |
+  | gear-usage-statistics | 141 | 153 | 154 |  67 |  67 |  41 |
+  | gear-usage-finder     | 147 | 165 | 172 |  76 |  79 |  50 |
+  | damage-calculator     | 147 | 169 | 146 |  67 |  75 |  43 |
+  | pull-simulator        | 157 | 172 | 181 |  87 |  98 |  59 |
+  | progress-tracker      | 153 | 170 | 173 |  82 |  79 |  49 |
+  | hero-tracker          | 148 | 163 | 164 |  63 |  68 |  47 |
+  | team-planner          | 146 | 162 | 153 |  61 |  72 |  43 |
+  | tier-list-maker       | 146 | 162 | 155 |  79 |  84 |  47 |
+  | patch-history         | 146 | 167 | 163 |  80 |  82 |  51 |
+  | event                 | 155 | 163 | 166 |  76 |  79 |  53 |
+  | wallpapers            | 142 | 168 | 156 |  76 |  79 |  44 |
+  | 4-comics              | 144 | 164 | 158 |  62 |  77 |  41 |
+  | ost                   | 150 | 177 | 167 |  85 |  83 |  51 |
+
+  Vérification : `pnpm typecheck` → `$ tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json` (sortie 0,
+  tsc muet) ; `pnpm lint` → `$ eslint` (sortie 0, muet) ; `pnpm test` →
+  `Tests  2013 passed (2013)`, 175 fichiers, `keys.test.ts` compris (parité
+  des six langues, et les 18 clés consommées par le préfixe dynamique
+  `tools.${slug}`). Script jetable (hors dépôt) : les six locales de l'arbre
+  comparées à celles de `HEAD` — 18 clés ajoutées par langue, AUCUNE valeur
+  existante modifiée, donc `tools.<slug>` et `tools.<slug>.desc` identiques
+  pour les 19 entrées de `_index.json` ; nom du jeu compté une fois dans
+  chacune des 108 chaînes ; anglais min 141, max 157. Lu au `curl` sur le
+  serveur déjà lancé (`/team-planner`, `/fr/ost`, `/jp/event`) : `<meta
+name="description">` et `og:description` portent le nouveau texte, le `<p>`
+  sous le `<h1>` porte toujours `.desc`. Aucun changement visuel. Laissé :
+  (1) le JSON-LD `ItemList` des quatre classements
+  (`_shared/TierListTool.tsx`) lit encore `.desc` — ce n'est ni de
+  l'affichage ni `createPageMetadata`, le lot ne le nommait pas : à trancher ;
+  (2) `fr`/`es` montent à 177 et 181 caractères, un moteur les coupera plus
+  tôt que l'anglais — la fin de phrase est le détail, pas l'essentiel ;
+  (3) `jp`/`kr`/`zh` traduits sobrement, à relire par un locuteur ; la
+  description PvP reprend l'hypothèse du bandeau de la page (« 6-star
+  transcends », EE +10) sans que j'aie recoupé `PVP_TRANSCEND = 9` ;
+  (4) repéré, hors périmètre : `tools.tier-list-maker.desc` écrit
+  « アウタープレイン » en `jp` quand toute la locale écrit « アウタープレーン », et
+  les `.desc` espagnols écrivent « compilaciones » et « Bonos » là où
+  CONVENTIONS garde build et buff ; (5) re-passer Sitebulb reste au TODO.
+
 - **Lot A22 : balises inline alignées entre les six langues, et un test de
   parité qui garde la suite** (Opus). Le quoi : le relevé refait donne 602 JSON
   (`src/app/[lang]/guides/_contents` + `data/curated`), 2 866 blocs localisés,
@@ -148,7 +230,12 @@
   `rgba(251,191,36,0.8)` de `free-heroes-start-banner`, déjà listé par B5.
   Repéré hors périmètre, non touché : `#0e7ecc` dans `TowerGuide.tsx`,
   `#a1a1aa` dans `guide-accents.ts`, et `--color-ed-violet-soft` absent de la
-  liste de la page des tokens.
+  liste de la page des tokens. Le diff de ce lot n'a PAS de commit à lui : il
+  est parti dans celui du lot A23 (« modale du damage calculator sur la brique
+  Modal »), dont le `git commit` est passé entre le `git add` de B12 et son
+  propre commit et a emporté ses fichiers indexés (les dix `index.tsx`, leurs
+  `meta.json` re-datés, `globals.css`, la page des tokens, `DONE.md`,
+  `TODO.md`) — l'index git est partagé entre lots parallèles.
 
 - **Lot A23 : la cinquième modale, celle du damage calculator, passe sur la
   brique `Modal`** (Opus). Le quoi : `damage-calculator/ui.tsx` gardait sa
