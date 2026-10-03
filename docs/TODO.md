@@ -105,8 +105,39 @@
       `advOf` recopiés dans `encounters.ts` (lot A25) ; (3) « persos
       intégrés » lu à quatre endroits avec quatre comportements d'erreur :
       dette froide, à arbitrer avant d'unifier.
-- [ ] **Audit à faire** : `portrait-fx-*.ts` (WebGL), hors de la passe
-      transverse du 07/09 — lot F4, agent Fable.
+
+### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
+
+Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
+Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
+
+- [ ] **Éviction et remontage dans la même image (P1)** : une carte vivante
+      hors écran, évincée par le callback d'une voisine puis remontée par le
+      sien dans la même tâche, appelle `restoreContext()` avant que
+      `webglcontextlost` soit distribué — refus muet, carte statique jusqu'au
+      prochain cycle. Reproduit sur `/dev/AnimatedPortrait` (Firefox le
+      tolère) ; **à confirmer sur Chrome**. Correctif : UN
+      `IntersectionObserver` partagé (drapeaux d'abord, montages, une éviction
+      — règle aussi le plafond dépassé de P5), et un `restoreContext` rejoué
+      après l'événement dans `onLost`.
+- [ ] **18 Mo de textures GPU par carte `_Demi` (P2)** : chaque contexte
+      monte sa copie ; `T_FX_Crystal_001_A` (2048², 887 Ko à télécharger) en
+      fait 16 à elle seule, pour l'effet de 16 persos. **Décision Sevih** :
+      plafonner la taille à l'extraction (fidélité à comparer sur la page de
+      contrôle) ; le correctif de fond — un contexte partagé pour toutes les
+      cartes — est un chantier, il emporterait P1, P5 et P6.
+- [ ] **Graines des particules (P3)** : `autoRandomSeed` est FAUX sur huit
+      émetteurs ; `star` et `star (1)` de `_2000093`, `_2000110`, `_2000114`
+      partagent la graine 0, donc étoile et halo naissent ensemble en jeu, pas
+      ici. Publier `autoRandomSeed`/`randomSeed`, partager la graine au
+      montage, corriger les deux commentaires qui disent l'inverse. À
+      confirmer sur une capture du jeu.
+- [ ] **Tests du moteur et contrat de la table (P4)** : rien ne teste
+      `portrait-fx-sim` (pur) ni ne confronte `portrait-fx.json` — régénéré
+      par `refresh` — à ce que le moteur accepte ; un effet ajouté par le jeu
+      reste hors de `DEFAULT_EFFECTS` sans un mot. Test de contrat + tests du
+      simulateur + avertissement dans le script ; suppose de sortir de
+      `mountPortraitFx` la décision « rendable ou refusé » en fonction pure.
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 

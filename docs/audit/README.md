@@ -34,6 +34,12 @@
 >   `components/guides/**`, constats **H1–H14**, 2026-09-09) : sain, aucun
 >   Haute ; fusions de la roadmap, 404 de la tour very hard, dates `updated` en
 >   retard, « by » non localisé — traités le jour même.
+>
+> - [portrait-fx.md](./portrait-fx.md) — les portraits animés WebGL
+>   (`portrait-fx*.ts`, `AnimatedPortrait`, `extract-portrait-fx.py`, constats
+>   **P1–P10**, 2026-10-03, mesuré à l'écran sous Firefox) : sain, aucun
+>   Haute ; une course éviction/remontage, 18 Mo de textures par carte `_Demi`,
+>   des graines de particules que le jeu fixe, et un moteur sans test.
 
 ## Verdict croisé
 

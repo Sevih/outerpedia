@@ -7,6 +7,42 @@
 
 ## 2026-10-03
 
+- **Lot F4 : audit des portraits animés `portrait-fx-*` — sain, aucun Haute,
+  dix constats P1–P10** (Fable, aucun code modifié). Le quoi : le rapport
+  `docs/audit/portrait-fx.md`, sa ligne dans l'index `docs/audit/README.md`,
+  et les quatre Moyenne en items au TODO à la place de « Audit à faire ». Le
+  pourquoi : c'était le « Non couvert » de la passe transverse du 07/09 —
+  2 100 lignes de WebGL (`portrait-fx.ts`, `-gl.ts`, `-sim.ts`), leur montage
+  `AnimatedPortrait.tsx` et l'extraction `extract-portrait-fx.py`. Le comment :
+  lecture complète des neuf fichiers ; la table `portrait-fx.json` passée au
+  script, puis aux vraies fonctions du simulateur sous `tsx` ; le bundle
+  `prefabs/character/ui_effect` relu en lecture seule (UnityPy) pour ce que
+  l'extraction aplatit ; et une mesure à l'écran, Firefox 156 sans tête sur
+  `/dev/AnimatedPortrait` du serveur déjà ouvert (profil jetable, sonde
+  passive). Ce qui tient, mesuré : 4 contextes pour 4 cartes à l'écran sur 27,
+  8 au repos (= `LIVE_CAP`), 0 boucle hors écran, une seule image sous
+  `prefers-reduced-motion`, une carte évincée ressuscite, console muette sur
+  les dix effets ; CORS du bucket sain (`*` avec et sans `Origin`). Ce qui
+  sort : **P1** une carte évincée puis remontée dans la même image appelle
+  `restoreContext()` avant l'événement de perte et reste éteinte (reproduit ;
+  Firefox le tolère, Chrome à confirmer) ; **P2** chaque carte monte sa copie
+  des textures — 18 Mo pour `_Demi` (16 persos), dont 16 pour
+  `T_FX_Crystal_001_A` en 2048² ; **P3** `autoRandomSeed` est faux sur huit
+  émetteurs, les paires étoile/halo de trois effets partagent une graine en
+  jeu et pas ici, deux commentaires affirment le contraire ; **P4** aucun
+  test sur le moteur ni contrat sur la table que `refresh` régénère. Basse :
+  plafond dépassé (pic mesuré 11) et observateur qui ne lit que sa première
+  entrée, sorties d'échec qui laissent un contexte, trous dans « refuser
+  plutôt que rendre de travers » (aucun actif, vérifié sur table et bundle),
+  `by_character()` qui rend `{}`, commentaires périmés (PNG/WebP, 25/124).
+  Vérification : `pnpm typecheck` (`tsc --noEmit … -p scripts/tsconfig.json`,
+  sortie 0), `pnpm lint` (`eslint`, sortie 0), `pnpm test`
+  (`Tests 2013 passed (2013)`). Laissé : rien n'est corrigé, c'est le contrat
+  du lot ; Chrome, Safari et le mobile ne sont pas mesurés (pas sur ce poste),
+  la fidélité du shader au GLSL du jeu n'a pas été recollationnée. Hors
+  périmètre, vu en passant : `CLAUDE.md` nomme `extract-face-layout.py`
+  « unique exception python » alors que `refresh` en lance quatre
+  (face-layout, sprite-rect, portrait-fx, font-metrics).
 - **Lot B14 : une description meta dédiée pour les dix-huit pages d'outils**
   (Opus). Le quoi : nouvelle clé `tools.<slug>.meta_description` dans les six
   locales (18 outils × 6 langues, 108 chaînes), lue par la SEULE metadata ;
