@@ -20,7 +20,9 @@
 > Le **25/09** et le **03/10**, 38 items assez cadrés pour un agent Opus ont
 > été délégués et soldés (table des commits, leçons et préambule réutilisable
 > dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
-> ci-dessous demande une décision, un test physique ou une relecture d'abord.
+> ci-dessous demande une décision, un test physique ou une relecture d'abord ;
+> une deuxième série de lots (A22–A24, B12, B13, F1–F4) est écrite au même
+> endroit.
 
 ---
 
@@ -38,17 +40,6 @@
       s'applique à un Core Fusion — l'outil prend sa rareté AFFICHÉE (3★ pour
       CF Snow, dont la base est 2★), ce qui est un choix, pas une donnée.
 
-## 🌍 Langues — le jeu parle français et espagnol (23/09/2026)
-
-> Six langues dans le code depuis le 23/09, `es.outerpedia.com` servi depuis le
-> 25/09 (infra + doubleurs vérifiés, cf. DONE). Reste une porte laissée fermée :
-
-- [ ] **`China_Traditional`** : les tables `Text*` la portent, remplie à 100 %,
-      et le site ne la sert pas. Trancher un jour si un `zh-TW` a un public —
-      ce serait une septième entrée dans `LANGUAGES` + `GAME_LANGS`, une locale
-      UI de plus, un sous-domaine de plus (et la question du nuage gris, comme
-      `zh`). Pas à l'ordre du jour, tracé pour ne pas le redécouvrir.
-
 ## 🧹 Dette code
 
 > L'audit du 07/08 est **entièrement traité** — hors volet damage, qui a son
@@ -56,8 +47,8 @@
 > (**D1–D5**). Bilan, y compris les constats tombés à la vérification, dans
 > [DONE.md](./DONE.md).
 
-- [ ] **Découper les gros composants client des autres outils — RÉSERVÉ SEVIH
-      (décision 25/08 : pas un lot agent).** Le damage calculator a eu ce
+- [ ] **Découper les gros composants client des autres outils — lots F1, F2,
+      F3 pour un agent Fable (décision Sevih 03/10 ; réservé jusque-là).** Le damage calculator a eu ce
       traitement le 25/08 (`DamageCalculatorBrowser` 4 983 → 2 147 lignes,
       éclaté en types / stores / briques UI / hooks d'état / sections — cf.
       DONE 25/08) ; le même motif « un composant client géant qui tient tout »
@@ -96,11 +87,11 @@
 
 ### Lot 2 — métier, données, outillage
 
-- [ ] Pull simulator : vérifier le pool HORS-FOCUS des bannières
-      rateup/premium/limited contre le jeu (G9, reste). BLOQUÉ côté données :
-      `recruit.json` n'expose que `customPool` ; il faudrait que le générateur
-      `recruit.ts` émette aussi le pool de chaque `kind` (RecruitGroupTemplet)
-      avant de pouvoir comparer.
+- [ ] Pull simulator : pool HORS-FOCUS lu dans les tables du jeu (G9, reste)
+      — lot B13. Trouvé le 03/10 : le chemin de `customPool`
+      (`RecruitGroupTemplet` → `RecruitGradeRecipeTemplet` →
+      `RecruitRecipeTemplet`) donne le pool de chaque type de bannière ; le
+      générateur ne l'émet pas encore et le simulateur trie par tags.
 - [ ] Chips à lien au toucher : VALIDER sur téléphone le « second tap =
       navigation » posé le 09/09 (G4).
 - [ ] **Tours very hard : 12 formations ALTERNATIVES émises comme une vague de
@@ -121,8 +112,8 @@
       `datagen/README.md:400` recommande `git add <dossier>`. Stager les chemins
       que le flux a produits + `git add -u` derrière confirmation. Trancher
       aussi : `revert` accepté par `commit.ts` mais absent de CONVENTIONS.
-- [ ] **Balises inline qui divergent entre langues** (relevé du 03/10, à la
-      relecture de B11/A21) : 25 blocs où `jp`/`kr`/`zh` ne portent pas les
+- [ ] **Balises inline qui divergent entre langues** (lot A22 ; relevé du
+      03/10, à la relecture de B11/A21) : 25 blocs où `jp`/`kr`/`zh` ne portent pas les
       mêmes balises que `en` — le plus souvent l'anglais qui écrit un nom en
       clair là où les trois autres le balisent (`{P/Ember}`, `{E/Earth}`…).
       Rien de cassé au rendu, mais le lecteur anglais perd le chip. 10 blocs
@@ -135,21 +126,22 @@
 
 - [ ] **Dette** (rapport § Dette) — les lots du 25/09 et du 03/10 ont soldé
       tout ce qui était découpé (cf. DONE). Reste : (1) la cinquième modale,
-      celle de `damage-calculator/ui.tsx`, à passer sur `components/ui/Modal` ;
+      celle de `damage-calculator/ui.tsx`, à passer sur `components/ui/Modal`
+      (lot A23) ;
       (2) les pastilles de rareté maison du tier-list-maker (`FilterPill`
       « 3★ ») et du hero-tracker, alors que `StarPill` existe — elles voisinent
-      maintenant avec les pastilles de la brique ; (3) non découpés, à relire
+      maintenant avec les pastilles de la brique (lot A24) ; (3) non découpés, à relire
       d'abord : deux listes de shops permanents, « persos intégrés » ×4
       lecteurs, `advOf`/`stripBrackets` dans `encounters.ts`, `pnpm dev` =
       `clean:all` (décision).
 - [ ] **Audit à faire** : `portrait-fx-*.ts` (WebGL), hors de la passe
-      transverse du 07/09.
+      transverse du 07/09 — lot F4, agent Fable.
 
 ### Audit du code des guides (09/09, H5–H14 — ce qui reste)
 
 - [ ] **Couleurs Tailwind brutes des guides (H6)** : 96 occurrences SANS
       token de même valeur (les 56 qui en avaient un sont passées, lot B5) —
-      créer des tokens ou accepter un écart visible, à trancher :
+      décision Sevih 03/10 : on CRÉE les tokens, lot B12. Familles :
       `blue-*` (how-to-play, roadmap), `amber-500`/`emerald-500`
       (fonds et anneaux de pastilles), `green-*`, `yellow-*`, `red-*`,
       `purple-400/500/600/700/900` (dont les accents d'ÉLÉMENT de
@@ -158,8 +150,6 @@
       `MonadGateMap` (`#facc15`/`#fde047` = yellow-400/300) et
       `TowerCombatRoster` (`rgb(239 68 68)` = red-500) n'ont pas de token ;
       `BannerTabs`/`AdventureGrid` n'ont que du noir (ombre, dégradé).
-- [ ] À confirmer : doublon SEO `/<tour>/1` vs page de base, encart
-      « annoncé juin, livré 8/09 » sur la roadmap (H14).
 
 ---
 

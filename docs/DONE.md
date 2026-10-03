@@ -7,6 +7,17 @@
 
 ## 2026-10-03
 
+- **Tri du reste du TODO avec Sevih, deuxième série de lots écrite** (Fable).
+  Sortis du TODO : `China_Traditional` (« on s'en fiche », la section Langues
+  part avec) ; H14 — le doublon SEO `/<tour>/1` n'en est pas un, l'étage se
+  canonicalise vers son guide depuis le 22/07 (`canonicalPath`, hreflang
+  compris), et l'encart de la roadmap part avec. Décidés : les couleurs sans
+  token des guides, on crée les tokens (lot B12) ; la découpe des gros
+  composants part à un agent Fable (F1–F3) ; l'audit `portrait-fx` aussi
+  (F4). Trouvé : les pools hors-focus du pull simulator (G9) se lisent dans
+  les tables par le même chemin que `customPool` — pickup 58 3★, premium 69,
+  limited 57, contre un tri par tags aujourd'hui (lot B13). Neuf prompts dans
+  `lots-opus-2026-09-25.md`, avec l'ordre de lancement.
 - **Les pastilles élément/classe et la recherche des quatre outils passent
   par les briques de `/characters` : `ElementIconPill`, `ClassIconPill`,
   `SearchField`** (`src/components/character/filters/FilterAtoms.tsx`, lot B10
