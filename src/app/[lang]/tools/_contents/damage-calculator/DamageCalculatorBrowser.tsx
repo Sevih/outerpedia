@@ -1115,7 +1115,7 @@ export function DamageCalculatorBrowser({
                               {ee.name}
                             </p>
                             {eeOwned && ee.dmgMain && (
-                              <p className="text-accent font-mono text-[11px] font-bold tabular-nums">
+                              <p className="text-accent text-3xs font-mono font-bold tabular-nums">
                                 {ee.dmgMain.label} +{(ee.dmgMain.levels[eeLevel] ?? 0) / 10}%
                               </p>
                             )}
@@ -1141,14 +1141,14 @@ export function DamageCalculatorBrowser({
                               </span>
                               <GameText
                                 text={row.html}
-                                className={`min-w-0 flex-1 text-[11px] leading-relaxed whitespace-pre-line ${eeOwned && active ? 'text-content-muted' : 'text-content-subtle'}`}
+                                className={`text-3xs min-w-0 flex-1 leading-relaxed whitespace-pre-line ${eeOwned && active ? 'text-content-muted' : 'text-content-subtle'}`}
                               />
                             </div>
                           );
                         })}
                       </>
                     ) : (
-                      <p className="text-content-subtle text-[11px]">{L.equipment.eeNone}</p>
+                      <p className="text-content-subtle text-3xs">{L.equipment.eeNone}</p>
                     )}
                   </div>
 
@@ -1217,7 +1217,7 @@ export function DamageCalculatorBrowser({
                         {talisman.text && (
                           <GameText
                             text={talisman.text}
-                            className={`text-[11px] leading-relaxed whitespace-pre-line ${talismanOn ? 'text-content-muted' : 'text-content-subtle opacity-60'}`}
+                            className={`text-3xs leading-relaxed whitespace-pre-line ${talismanOn ? 'text-content-muted' : 'text-content-subtle opacity-60'}`}
                           />
                         )}
                       </>
@@ -2057,7 +2057,7 @@ export function DamageCalculatorBrowser({
                             {col.title}
                           </span>
                           {col.fields.map((f) => (
-                            <span key={f.key} className="flex items-baseline gap-2 text-[11px]">
+                            <span key={f.key} className="text-3xs flex items-baseline gap-2">
                               <span className="text-content-subtle truncate">{f.label}</span>
                               <span className="flex-1" />
                               <span

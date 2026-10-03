@@ -152,7 +152,7 @@ export function SettingsModal({
             </h2>
             {/* Fil d'Ariane du niveau 2 : le nom du perso est le titre, la
                 section d'origine reste lisible en dessous. */}
-            {edited && <div className="text-content-subtle text-[11px]">{strings.skins}</div>}
+            {edited && <div className="text-content-subtle text-3xs">{strings.skins}</div>}
           </div>
           <button
             type="button"

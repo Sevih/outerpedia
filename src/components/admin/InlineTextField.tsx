@@ -158,7 +158,7 @@ export function InlineTextField({
               setPicker(picker?.type === tk.type ? null : tk);
               setQuery('');
             }}
-            className={`rounded border px-1.5 py-0.5 text-[11px] ${
+            className={`text-3xs rounded border px-1.5 py-0.5 ${
               picker?.type === tk.type
                 ? 'border-accent text-accent'
                 : 'border-line-subtle text-content-subtle hover:text-content-strong'
@@ -174,13 +174,13 @@ export function InlineTextField({
         <div className="border-line bg-surface-raised space-y-1.5 rounded-md border p-2">
           {picker.type === 'SK' && (
             <div className="flex items-center gap-1">
-              <span className="text-content-subtle text-[11px] uppercase">Slot</span>
+              <span className="text-content-subtle text-3xs uppercase">Slot</span>
               {SK_SLOTS.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => setSkSlot(s)}
-                  className={`rounded px-1.5 py-0.5 text-[11px] ${
+                  className={`text-3xs rounded px-1.5 py-0.5 ${
                     skSlot === s
                       ? 'bg-accent/20 text-accent'
                       : 'text-content-muted hover:bg-surface-overlay'
@@ -257,7 +257,7 @@ export function InlineTextField({
       {errors.length > 0 && (
         <ul className="space-y-0.5">
           {errors.map((c, i) => (
-            <li key={i} className="text-danger text-[11px]">
+            <li key={i} className="text-danger text-3xs">
               <span className="font-mono">{c.tag}</span> — {c.reason}
             </li>
           ))}

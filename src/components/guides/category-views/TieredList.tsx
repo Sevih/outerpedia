@@ -36,7 +36,7 @@ export default async function TieredList({ lang, guides }: CategoryViewProps) {
               className="bg-accent absolute -bottom-px left-0 h-0.5 w-12 rounded-full"
               aria-hidden
             />
-            <span className="text-accent font-mono text-[11px] font-semibold tracking-[0.18em] uppercase">
+            <span className="text-accent text-3xs font-mono font-semibold tracking-[0.18em] uppercase">
               {tier.label}
             </span>
           </header>

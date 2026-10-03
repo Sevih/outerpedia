@@ -225,14 +225,14 @@ export function CharacterKitEditor({
                     title={`${c.ref} — hidden here (chipHide)`}
                     className="border-line flex items-center gap-1 rounded-md border border-dashed py-0.5 pr-1 pl-1 opacity-50"
                   >
-                    <span className="text-content-subtle text-[11px] font-semibold line-through">
+                    <span className="text-content-subtle text-3xs font-semibold line-through">
                       {c.name}
                     </span>
                     <button
                       type="button"
                       onClick={() => restoreChip(card.id, c.ref)}
                       title="Restore the chip"
-                      className="text-content-subtle hover:text-content ml-0.5 rounded px-0.5 text-[11px] leading-none"
+                      className="text-content-subtle hover:text-content text-3xs ml-0.5 rounded px-0.5 leading-none"
                     >
                       ↺
                     </button>
@@ -244,7 +244,7 @@ export function CharacterKitEditor({
                         type="button"
                         onClick={() => hideChip(card.id, c.ref)}
                         title="Hide on this card (chipHide)"
-                        className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
+                        className="text-3xs ml-0.5 rounded px-0.5 leading-none opacity-60 hover:opacity-100"
                       >
                         ✕
                       </button>
@@ -269,7 +269,7 @@ export function CharacterKitEditor({
                         type="button"
                         onClick={() => removeAdd(card.id, ref)}
                         title="Remove (chipAdd)"
-                        className="ml-0.5 rounded px-0.5 text-[11px] leading-none opacity-60 hover:opacity-100"
+                        className="text-3xs ml-0.5 rounded px-0.5 leading-none opacity-60 hover:opacity-100"
                       >
                         ✕
                       </button>

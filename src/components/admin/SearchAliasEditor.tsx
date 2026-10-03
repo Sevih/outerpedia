@@ -131,7 +131,7 @@ export function SearchAliasEditor({
             }}
           />
         </div>
-        <p className="text-content-subtle mt-1 text-[11px]">
+        <p className="text-content-subtle text-3xs mt-1">
           A <span className="text-warn">yellow</span> alias is already covered by the name/nickname
           — usually not needed.
         </p>

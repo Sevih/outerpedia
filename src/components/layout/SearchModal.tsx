@@ -205,7 +205,7 @@ export function SearchModal({
           ) : (
             groups.map((group) => (
               <div key={group.kind} className="py-1">
-                <div className="text-content-subtle px-4 pb-1 text-[11px] font-semibold tracking-wide uppercase">
+                <div className="text-content-subtle text-3xs px-4 pb-1 font-semibold tracking-wide uppercase">
                   {KIND_LABEL[group.kind]}
                 </div>
                 {group.items.map((entry) => {

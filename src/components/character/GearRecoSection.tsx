@@ -507,7 +507,7 @@ function ComboLineView({
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
       <SetTiles piece={head} idx={0} />
       <SetName piece={head} effects={effects} labels={labels} />
-      {head.count >= 4 && <span className="text-[11px] text-zinc-400">· {labels.piece4}</span>}
+      {head.count >= 4 && <span className="text-3xs text-zinc-400">· {labels.piece4}</span>}
       {tails.length > 0 && (
         <>
           <span className="px-1 text-zinc-200">+</span>

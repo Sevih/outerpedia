@@ -230,7 +230,7 @@ export function EventsEditor({ initial }: { initial: EventEntry[] }) {
                     <span className="text-content-strong block truncate">
                       {r.title.en || r.slug || '(sans titre)'}
                     </span>
-                    <span className="text-content-subtle text-[11px]">
+                    <span className="text-content-subtle text-3xs">
                       {st}
                       {r.draft ? ' · brouillon' : ''}
                     </span>

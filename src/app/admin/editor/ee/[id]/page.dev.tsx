@@ -84,7 +84,7 @@ export default async function EditorEeDetail({ params }: { params: Promise<{ id:
                 className="border-line-subtle rounded-lg border p-3"
               >
                 <div className="mb-1 flex items-center gap-2">
-                  <span className="bg-surface-base text-content-subtle rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold">
+                  <span className="bg-surface-base text-content-subtle text-3xs rounded px-1.5 py-0.5 font-mono font-semibold">
                     {p.unlockLevel <= 1 ? 'Unlock' : `+${p.unlockLevel}`}
                   </span>
                   <span className="text-content-strong text-sm font-semibold">{p.name}</span>

@@ -305,7 +305,7 @@ export function EtherCalculator({ model }: { model: CalculatorModel }) {
         <summary className="text-content cursor-pointer px-3 py-2 text-xs select-none">
           <span className="font-medium">{L.advancedAdjustments}</span>
           <br />
-          <span className="text-content-subtle ml-2 inline-block align-middle text-[11px]">
+          <span className="text-content-subtle text-3xs ml-2 inline-block align-middle">
             ({rankedSummary})
           </span>
         </summary>

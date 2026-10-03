@@ -115,7 +115,7 @@ export function Callout({
       )}
     >
       {label && (
-        <div className={cn('mb-1.5 font-mono text-[11px] font-bold tracking-wide', a.text)}>
+        <div className={cn('text-3xs mb-1.5 font-mono font-bold tracking-wide', a.text)}>
           {label}
         </div>
       )}
@@ -159,7 +159,7 @@ export function NumberedList({ accent, items }: { accent: EditorialAccent; items
         <li key={i} className="flex items-start gap-3">
           <span
             className={cn(
-              'mt-0.5 inline-flex h-5.5 w-5.5 shrink-0 items-center justify-center rounded-md border font-mono text-[11px] font-bold',
+              'text-3xs mt-0.5 inline-flex h-5.5 w-5.5 shrink-0 items-center justify-center rounded-md border font-mono font-bold',
               a.chipBg,
               a.chipBorder,
               a.text,
@@ -200,7 +200,7 @@ export function StepRows({ items }: { items: { accent: EditorialAccent; label: R
           <div key={i} className="bg-surface-overlay/50 flex items-center gap-3 px-3.5 py-2.5">
             <span
               className={cn(
-                'shrink-0 rounded-md border px-2 py-1 font-mono text-[11px] leading-none font-bold',
+                'text-3xs shrink-0 rounded-md border px-2 py-1 font-mono leading-none font-bold',
                 a.chipBg,
                 a.chipBorder,
                 a.text,

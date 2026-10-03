@@ -140,7 +140,7 @@ export function NoteField({
         />
         <button
           type="button"
-          className="text-content-subtle mt-1 text-[11px] hover:underline"
+          className="text-content-subtle text-3xs mt-1 hover:underline"
           onClick={() => setEditing(false)}
         >
           done

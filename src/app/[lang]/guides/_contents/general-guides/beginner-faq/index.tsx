@@ -120,7 +120,7 @@ function GearRarityTable({
             </span>
           </span>
           <span
-            className={`rounded-md border px-2 py-1 font-mono text-[11px] font-semibold ${COLOR[r.color]} ${CHIP[r.color]}`}
+            className={`text-3xs rounded-md border px-2 py-1 font-mono font-semibold ${COLOR[r.color]} ${CHIP[r.color]}`}
           >
             {r.ticks}
           </span>

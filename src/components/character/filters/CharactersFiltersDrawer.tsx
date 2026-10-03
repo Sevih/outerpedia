@@ -100,7 +100,7 @@ export function CharactersFiltersDrawer({
           <button
             type="button"
             onClick={onResetAll}
-            className="text-content-muted hover:text-content-strong text-[11px] transition"
+            className="text-content-muted hover:text-content-strong text-3xs transition"
           >
             {drawerLabels.reset}
           </button>

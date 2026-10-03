@@ -141,7 +141,7 @@ export function ActiveGeasRow({ geas, lang, t }: { geas: GeasRef[]; lang: Lang; 
               className="border-line-subtle bg-surface-raised inline-flex items-center gap-1 rounded-full border py-0.5 pr-2 pl-0.5"
             >
               <GeasIcon geas={r.geas} size={24} />
-              <span className={`text-[11px] font-bold ${bonus ? 'text-buff' : 'text-debuff'}`}>
+              <span className={`text-3xs font-bold ${bonus ? 'text-buff' : 'text-debuff'}`}>
                 {formatPoints(r.geas.points)}
               </span>
             </span>
@@ -370,7 +370,7 @@ export function GeasTable({
                 className="border-line-subtle bg-surface-raised inline-flex items-center gap-1 rounded-full border py-0.5 pr-2 pl-0.5"
               >
                 <GeasIcon geas={r.geas} size={24} />
-                <span className={`text-[11px] font-bold ${bonus ? 'text-buff' : 'text-debuff'}`}>
+                <span className={`text-3xs font-bold ${bonus ? 'text-buff' : 'text-debuff'}`}>
                   {formatPoints(r.geas.points)}
                 </span>
               </span>

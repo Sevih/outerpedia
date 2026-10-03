@@ -82,7 +82,7 @@ export function SkillIconTip({
     .filter((x): x is { i: number; b: DescEntry } => Boolean(x.b?.desc));
   const content = (
     <div className="w-60 space-y-1.5 text-left">
-      <p className="text-content text-[11px] font-semibold">
+      <p className="text-content text-3xs font-semibold">
         {row.name} <span className="text-content-subtle font-mono font-normal">Lv {lvl}</span>
       </p>
       {desc && (
@@ -90,7 +90,7 @@ export function SkillIconTip({
           desc={desc}
           vars={levelAt(sk?.levels ?? [], lvl)?.vars}
           lang={lang}
-          className="text-content-muted text-[11px] whitespace-pre-line"
+          className="text-content-muted text-3xs whitespace-pre-line"
         />
       )}
       {bursts.map(({ i, b }) => (
@@ -100,7 +100,7 @@ export function SkillIconTip({
             desc={lRec(b.desc, lang)}
             vars={levelAt(b.levels ?? [], lvl)?.vars}
             lang={lang}
-            className="text-[11px] whitespace-pre-line"
+            className="text-3xs whitespace-pre-line"
           />
         </div>
       ))}

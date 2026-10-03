@@ -583,7 +583,7 @@ export function GearRecoEditor({
                     key={l}
                     type="button"
                     onClick={() => setNoteLang(l)}
-                    className={`px-2 py-0.5 text-[11px] ${l === noteLang ? 'bg-accent/20 text-accent' : 'text-content-muted hover:bg-surface-overlay'}`}
+                    className={`text-3xs px-2 py-0.5 ${l === noteLang ? 'bg-accent/20 text-accent' : 'text-content-muted hover:bg-surface-overlay'}`}
                   >
                     {l}
                   </button>

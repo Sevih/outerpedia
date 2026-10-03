@@ -59,7 +59,7 @@ export function BeginnerGuides({
                 href={localePath(lang, `/guides/${CATEGORY}/${guide.slug}`) as Route}
                 className="hover:bg-surface-muted flex h-full items-start gap-3 px-3 py-2.5 transition md:flex-col md:items-stretch md:gap-2 md:p-4"
               >
-                <span className="text-accent shrink-0 font-mono text-xs font-semibold tracking-wider uppercase md:text-[11px]">
+                <span className="text-accent md:text-3xs shrink-0 font-mono text-xs font-semibold tracking-wider uppercase">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div className="min-w-0">

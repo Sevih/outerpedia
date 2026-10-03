@@ -938,7 +938,7 @@ function SummaryPanel({
     >
       <summary className="bg-surface-overlay border-line-subtle flex cursor-pointer list-none items-center gap-3 border-b px-3 py-2 [&::-webkit-details-marker]:hidden">
         <span className="min-w-0 flex-1">
-          <span className="text-content-muted block font-mono text-[11px] tracking-wide uppercase">
+          <span className="text-content-muted text-3xs block font-mono tracking-wide uppercase">
             {labels.needTitle} ·{' '}
             {labels.trackedCount.replace('{count}', String(total.heroes.length))}
           </span>
@@ -985,7 +985,7 @@ function SummaryPanel({
                 key={a}
                 type="button"
                 onClick={() => onAxis(a)}
-                className={`rounded-md px-2 py-0.5 text-[11px] transition-colors ${
+                className={`text-3xs rounded-md px-2 py-0.5 transition-colors ${
                   axis === a
                     ? 'bg-surface-overlay text-content-strong font-semibold'
                     : 'text-content-muted hover:text-content-strong'
@@ -1021,12 +1021,12 @@ function SummaryPanel({
         )}
 
         {total.affinityPoints > 0 && (
-          <p className="text-content-subtle text-[11px]">{labels.giftNoteBonus}</p>
+          <p className="text-content-subtle text-3xs">{labels.giftNoteBonus}</p>
         )}
 
         {pieceGroups.length > 0 && (
           <div className="border-line-subtle bg-surface-sunken rounded-lg border border-dashed p-2.5">
-            <h3 className="text-content-muted font-mono text-[11px] tracking-wide uppercase">
+            <h3 className="text-content-muted text-3xs font-mono tracking-wide uppercase">
               {labels.piecesNote}
             </h3>
             <div className="mt-2 space-y-2.5">
@@ -1058,7 +1058,7 @@ function SummaryPanel({
                         className="border-line-subtle bg-surface-raised flex flex-col items-center gap-0.5 rounded-lg border px-1 py-1.5"
                       >
                         <PieceIcon id={r.id} large />
-                        <span className="text-content-strong font-mono text-[11px] font-semibold">
+                        <span className="text-content-strong text-3xs font-mono font-semibold">
                           ×{fmt(r.count)}
                         </span>
                       </li>
@@ -1143,7 +1143,7 @@ function Settings({
             la colonne pour dire deux fois la même chose sur deux raretés. */}
         <div>
           <h3 className="text-content-strong text-xs font-semibold">{labels.rarityRules}</h3>
-          <table className="mt-1.5 w-full text-[11px]">
+          <table className="text-3xs mt-1.5 w-full">
             <thead>
               <tr className="text-content-subtle">
                 <th />
@@ -1179,7 +1179,7 @@ function Settings({
 
         <div>
           <h3 className="text-content-strong text-xs font-semibold">{labels.settingsFusion}</h3>
-          <p className="text-content-subtle mt-0.5 text-[11px]">{labels.settingsFusionHint}</p>
+          <p className="text-content-subtle text-3xs mt-0.5">{labels.settingsFusionHint}</p>
           <ul className="mt-1.5 space-y-1">
             {fusionPairs.map(({ base }) => {
               const isFused = Boolean(store.fused[base.id]);
@@ -1204,7 +1204,7 @@ function Settings({
                             fused: { ...prev.fused, [base.id]: value },
                           }))
                         }
-                        className={`rounded-full border px-2 py-0.5 text-[11px] transition-colors ${
+                        className={`text-3xs rounded-full border px-2 py-0.5 transition-colors ${
                           isFused === value
                             ? 'border-accent bg-accent/15 text-content-strong'
                             : 'border-line-subtle text-content-muted hover:bg-line/40'
@@ -1222,9 +1222,9 @@ function Settings({
 
         <div className="border-line-subtle border-t pt-2.5">
           <h3 className="text-content-strong text-xs font-semibold">{labels.importTitle}</h3>
-          <p className="text-content-subtle mt-0.5 text-[11px]">{labels.importHint}</p>
+          <p className="text-content-subtle text-3xs mt-0.5">{labels.importHint}</p>
           <div className="mt-1.5 flex flex-wrap items-center gap-2">
-            <label className="border-line text-content-muted hover:border-accent hover:text-accent cursor-pointer rounded border px-2 py-1 text-[11px] transition-colors">
+            <label className="border-line text-content-muted hover:border-accent hover:text-accent text-3xs cursor-pointer rounded border px-2 py-1 transition-colors">
               {labels.importPick}
               <input
                 type="file"
@@ -1241,7 +1241,7 @@ function Settings({
             </label>
             {importState && (
               <span
-                className={`text-[11px] ${importState.ok ? 'text-success' : 'text-danger'}`}
+                className={`text-3xs ${importState.ok ? 'text-success' : 'text-danger'}`}
                 role="status"
               >
                 {importState.message}
@@ -1259,7 +1259,7 @@ function Settings({
               if (window.confirm(labels.resetConfirm))
                 setStore((prev) => ({ ...prev, heroes: {}, fused: {} }));
             }}
-            className="border-line text-content-muted hover:border-danger hover:text-danger rounded border px-2 py-1 text-[11px] transition-colors"
+            className="border-line text-content-muted hover:border-danger hover:text-danger text-3xs rounded border px-2 py-1 transition-colors"
           >
             {labels.reset}
           </button>
@@ -1432,7 +1432,7 @@ function HeroCard({
               )}
             </span>
             <span
-              className={`mt-0.5 block font-mono text-[11px] ${done ? 'text-success' : 'text-content-muted'}`}
+              className={`text-3xs mt-0.5 block font-mono ${done ? 'text-success' : 'text-content-muted'}`}
             >
               {summary}
             </span>
@@ -1642,14 +1642,14 @@ function HeroCard({
           {/* ── Ce qui manque à CE héros ── */}
           <div className="border-line-subtle mt-3.5 border-t pt-2.5">
             <div className="flex items-center gap-2">
-              <h4 className="text-content-muted font-mono text-[11px] tracking-wide uppercase">
+              <h4 className="text-content-muted text-3xs font-mono tracking-wide uppercase">
                 {need && !done ? labels.heroNeeds : labels.doneHero}
               </h4>
               <div className="flex-1" />
               <button
                 type="button"
                 onClick={onUntrack}
-                className="border-line-subtle text-content-muted hover:border-danger hover:text-danger rounded border px-2 py-0.5 text-[11px] transition-colors"
+                className="border-line-subtle text-content-muted hover:border-danger hover:text-danger text-3xs rounded border px-2 py-0.5 transition-colors"
               >
                 {labels.untrack}
               </button>
@@ -1684,7 +1684,7 @@ function HeroCard({
                     className="border-line-subtle bg-surface-sunken flex items-center gap-1.5 rounded-lg border py-1 pr-2 pl-1"
                   >
                     <PieceIcon id={hero.id} />
-                    <span className="text-content-strong font-mono text-[11px] font-semibold">
+                    <span className="text-content-strong text-3xs font-mono font-semibold">
                       ×{need.pieces}
                     </span>
                   </span>
@@ -1795,7 +1795,7 @@ function NeedChip({ asset, count }: { asset?: ItemAsset; count: number }) {
       className="border-line-subtle bg-surface-sunken flex items-center gap-1.5 rounded-lg border py-1 pr-2 pl-1"
     >
       <EquipmentIcon src={img.item(asset.icon)} grade={asset.grade} alt={asset.name} size={22} />
-      <span className="text-content-strong font-mono text-[11px] font-semibold">×{count}</span>
+      <span className="text-content-strong text-3xs font-mono font-semibold">×{count}</span>
     </span>
   );
 }
@@ -1887,7 +1887,7 @@ function Scale({
             type="button"
             {...press(v)}
             aria-label={String(render ? render(v) : v)}
-            className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-px rounded-md border font-mono text-[11px] leading-none font-semibold transition-colors ${
+            className={`text-3xs flex min-w-0 flex-1 flex-col items-center justify-center gap-px rounded-md border font-mono leading-none font-semibold transition-colors ${
               icon ? 'h-10' : 'h-9'
             } ${tint} ${
               // Le cran visé porte un liseré, même s'il est déjà acquis.
@@ -1961,7 +1961,7 @@ function Presets({
           key={v}
           type="button"
           onClick={() => onPick(v)}
-          className={`h-9 min-w-10 rounded-lg border px-2 font-mono text-[11px] transition-colors ${
+          className={`text-3xs h-9 min-w-10 rounded-lg border px-2 font-mono transition-colors ${
             active === v
               ? picked
               : 'border-line-subtle bg-surface-sunken text-content-muted hover:border-line'
@@ -2098,7 +2098,7 @@ function RosterBar({
             key={r}
             type="button"
             onClick={() => onFilters({ ...filters, rarity: filters.rarity === r ? null : r })}
-            className={`${chip(filters.rarity === r)} text-warn font-mono text-[11px]`}
+            className={`${chip(filters.rarity === r)} text-warn text-3xs font-mono`}
           >
             {r}★
           </button>
@@ -2124,7 +2124,7 @@ function RosterBar({
                   active ? { by: s.key, desc: !sort.desc } : { by: s.key, desc: SORT_DESC[s.key] },
                 )
               }
-              className={`h-7 rounded-md border px-2 text-[11px] transition-colors ${
+              className={`text-3xs h-7 rounded-md border px-2 transition-colors ${
                 active
                   ? 'border-accent bg-accent/15 text-accent font-semibold'
                   : 'border-line-subtle text-content-muted hover:border-line'
@@ -2161,7 +2161,7 @@ function HeroPicker({
     <div className="border-line-subtle bg-surface-sunken space-y-2.5 rounded-xl border p-3">
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-content-strong text-sm font-semibold">{labels.addHero}</h3>
-        <span className="text-content-subtle font-mono text-[11px]">
+        <span className="text-content-subtle text-3xs font-mono">
           {labels.untracked.replace('{count}', String(rows.length))}
         </span>
         <div className="flex-1" />
@@ -2178,7 +2178,7 @@ function HeroPicker({
         <button
           type="button"
           onClick={() => onElement(null)}
-          className={`rounded-md border px-2 py-1 text-[11px] transition-colors ${
+          className={`text-3xs rounded-md border px-2 py-1 transition-colors ${
             element === null
               ? 'border-accent bg-accent/15 text-accent font-semibold'
               : 'border-line-subtle text-content-muted hover:border-line'
@@ -2191,7 +2191,7 @@ function HeroPicker({
             key={el}
             type="button"
             onClick={() => onElement(element === el ? null : el)}
-            className={`rounded-md border px-2 py-1 text-[11px] capitalize transition-colors ${
+            className={`text-3xs rounded-md border px-2 py-1 capitalize transition-colors ${
               element === el ? 'border-accent bg-accent/15' : 'border-line-subtle hover:border-line'
             } ${ELEMENT_TEXT[el]}`}
           >

@@ -104,7 +104,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
   return (
     <div>
       <details className="group border-line-subtle border-b md:hidden">
-        <summary className="text-content flex cursor-pointer list-none items-center justify-between py-3 font-mono text-[11px] tracking-widest uppercase">
+        <summary className="text-content text-3xs flex cursor-pointer list-none items-center justify-between py-3 font-mono tracking-widest uppercase">
           {title}
           <svg
             width="12"
@@ -320,7 +320,7 @@ export async function Footer() {
         </p>
 
         {/* Barre basse */}
-        <div className="text-content-subtle mt-6 flex flex-col gap-3 py-5 font-mono text-[11px] sm:flex-row sm:items-center sm:gap-5">
+        <div className="text-content-subtle text-3xs mt-6 flex flex-col gap-3 py-5 font-mono sm:flex-row sm:items-center sm:gap-5">
           <span>© {new Date().getFullYear()} Outerpedia</span>
           <Link href={localePath(lang, '/legal')} className="hover:text-content-strong transition">
             {t('footer.legal_notice')}

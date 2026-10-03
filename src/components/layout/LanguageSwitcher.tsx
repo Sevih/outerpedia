@@ -198,7 +198,7 @@ export function LanguageSwitcher({
               );
             })}
           </ul>
-          <p className="border-line text-content-subtle mt-1 border-t px-2.5 pt-2 pb-1 text-[11px] leading-snug">
+          <p className="border-line text-content-subtle text-3xs mt-1 border-t px-2.5 pt-2 pb-1 leading-snug">
             <span className="text-warn">●</span> {strings.communityNote}
           </p>
         </div>

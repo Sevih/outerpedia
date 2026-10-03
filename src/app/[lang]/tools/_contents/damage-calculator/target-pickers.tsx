@@ -119,7 +119,7 @@ export function GearSlot({
       {value && tiers && (
         <GameText
           text={tiers[tier] || labels.equipment.noPassive}
-          className="text-content-muted text-[11px] leading-relaxed whitespace-pre-line"
+          className="text-content-muted text-3xs leading-relaxed whitespace-pre-line"
         />
       )}
     </div>
@@ -303,10 +303,7 @@ export function SetsSlot({
                     format={(v) => `T${v}`}
                   />
                 </div>
-                <GameText
-                  text={effect}
-                  className="text-content-muted text-[11px] leading-relaxed"
-                />
+                <GameText text={effect} className="text-content-muted text-3xs leading-relaxed" />
               </div>
             );
           })}
@@ -507,7 +504,7 @@ function StoryTargetBrowser({
                                     {/* Exemplaires multiples dans la vague
                                         (story 1-1 : 2 × le même loup). */}
                                     {(occ!.count ?? 1) > 1 && (
-                                      <span className="text-content-muted shrink-0 text-[11px] font-bold">
+                                      <span className="text-content-muted text-3xs shrink-0 font-bold">
                                         ×{occ!.count}
                                       </span>
                                     )}
@@ -686,7 +683,7 @@ export function TargetPicker({
             <span className="text-content block text-sm font-semibold wrap-break-word">
               {value.name}
             </span>
-            <span className="text-content-subtle block text-[11px] wrap-break-word">
+            <span className="text-content-subtle text-3xs block wrap-break-word">
               {[...(value.path ?? []), value.label].join(' · ')}
             </span>
           </span>

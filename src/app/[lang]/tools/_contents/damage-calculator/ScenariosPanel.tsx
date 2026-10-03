@@ -49,7 +49,7 @@ export function ScenariosPanel({
         >
           HARNAIS
         </span>
-        <span className="text-content-subtle text-[11px]">
+        <span className="text-content-subtle text-3xs">
           un scénario = une ligne (le « + » d&apos;une cellule Résultat) · calculé REJOUÉ à
           l&apos;affichage · ⧉ = fixture à committer dans src/lib/damage/fixtures/
         </span>
@@ -75,7 +75,7 @@ export function ScenariosPanel({
             onChange={(e) => setImportTxt(e.target.value)}
             placeholder="coller ici le JSON ⧉ d'un testeur (une fixture, ou un tableau de fixtures)"
             rows={5}
-            className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent w-full rounded border px-2 py-1.5 font-mono text-[11px] outline-none"
+            className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent text-3xs w-full rounded border px-2 py-1.5 font-mono outline-none"
           />
           <div className="flex gap-1.5">
             <button
@@ -134,7 +134,7 @@ export function ScenariosPanel({
                 return (
                   <div
                     key={scnKey(s)}
-                    className="grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] items-center gap-2 px-3 py-1.5 font-mono text-[11px]"
+                    className="text-3xs grid grid-cols-[minmax(0,3fr)_110px_110px_70px_150px] items-center gap-2 px-3 py-1.5 font-mono"
                   >
                     <span className="text-content truncate font-sans text-xs">
                       {s.atk} <span className="text-content-subtle">vs</span> {s.tgt}{' '}
@@ -195,7 +195,7 @@ export function ScenariosPanel({
               })}
           </div>
         ) : (
-          <p className="text-content-subtle px-3 py-3 text-[11px]">
+          <p className="text-content-subtle text-3xs px-3 py-3">
             aucun scénario — saisir « en jeu » puis cliquer « + » dans la table Résultat
           </p>
         )}

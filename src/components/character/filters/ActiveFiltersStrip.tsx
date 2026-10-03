@@ -118,7 +118,7 @@ export function ActiveFiltersStrip({
         <button
           type="button"
           onClick={onResetAll}
-          className="border-line-subtle bg-surface-sunken/70 text-content-muted hover:border-line hover:text-content-strong inline-flex h-6.5 items-center gap-1.5 rounded-md border px-2.5 text-[11px] transition"
+          className="border-line-subtle bg-surface-sunken/70 text-content-muted hover:border-line hover:text-content-strong text-3xs inline-flex h-6.5 items-center gap-1.5 rounded-md border px-2.5 transition"
         >
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <path
@@ -133,7 +133,7 @@ export function ActiveFiltersStrip({
         <button
           type="button"
           onClick={onCopyShareUrl}
-          className="border-accent/40 bg-accent/15 text-accent hover:bg-accent/25 inline-flex h-6.5 items-center gap-1.5 rounded-md border px-2.5 text-[11px] transition"
+          className="border-accent/40 bg-accent/15 text-accent hover:bg-accent/25 text-3xs inline-flex h-6.5 items-center gap-1.5 rounded-md border px-2.5 transition"
         >
           <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
             <path

@@ -5,6 +5,58 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-03
+
+- **Token de taille `--text-3xs` (11px) : les 126 tailles arbitraires de 11px
+  passent en `text-3xs`** (lot A18 de la Dette, même recette que A5 pour
+  `--text-2xs`). Fait : un `--text-3xs: 0.6875rem` dans le bloc `@theme` de
+  `globals.css`, volontairement SANS `--text-3xs--line-height` — compilée par
+  le Tailwind du dépôt (4.3.3), la classe n'émet que `font-size`, comme la
+  valeur arbitraire qu'elle remplace — puis un remplacement par script (`sed`
+  sur les 46 fichiers de `src/` concernés, 126 occurrences, le préfixe du seul
+  `md:` conservé : `text-xs … md:text-3xs` dans `BeginnerGuides.tsx`, où
+  l'interligne de `text-xs` reste donc en place), et `prettier` pour le tri
+  des classes. Zéro occurrence de l'ancienne classe dans `src/`. Le nom est
+  celui de l'audit et de la demande ; il ne suit pas l'échelle (`text-3xs`,
+  11px, est plus GRAND que `text-2xs`, 10px) et le commentaire de
+  `globals.css` le dit. Cascade : `text-3xs` reste après `text-xs`/`text-sm`/
+  `text-2xs` et avant `text-[12.5px]`/`[13px]`/`[17px]`, comme avant, mais il
+  passe désormais AVANT `text-[8px]`, `[9px]`, `[9.5px]`, `[10.5px]` que
+  l'ancienne classe suivait ; vérifié qu'aucun élément ne cumule `text-3xs`
+  avec l'une d'elles (ni sur une même ligne, ni par constante interpolée, ni
+  dans un `cn(...)` multi-ligne). Vérifié : `pnpm typecheck` (les trois
+  `tsc --noEmit` — racine, `datagen`, `scripts` — sans une ligne de sortie,
+  code 0), `pnpm lint` (`$ eslint`, rien d'autre, code 0), `pnpm test`
+  (`Tests  1999 passed (1999)`, 172 fichiers). Zéro changement visuel, mais PAS sur le serveur de dev : rien
+  n'écoutait sur :3000. Comparé à la place : le HTML de PROD de cinq pages
+  (`/characters/valentine`, `/wallpapers`, `/damage-calculator` — celles d'A5
+  — plus l'accueil, pour le `md:`, et `/changelog`, 152 éléments en 11px),
+  scripts retirés, avec `globals.css` compilé localement par
+  `@tailwindcss/postcss` avant puis après le lot (et la classe remplacée dans
+  le HTML « après ») ; Firefox headless en 1280 et 390 de large, fenêtre de
+  12 000 px de haut, chaque « après » encadré de deux « avant » : 0 pixel
+  différent partout (`compare -metric AE`), sauf 43 pixels une fois sur
+  `/changelog` en 390 (une image de 54 px, bruit de chargement : trois
+  recaptures « après » redonnent 0). Limite : sans JS, les parties rendues
+  côté client (le calculateur lui-même, l'admin, les pages `dev/`) ne sont pas
+  dans ces captures ; elles ne reposent que sur l'égalité des règles CSS
+  compilées. Écart à la consigne, à savoir : mon `pnpm exec prettier` a
+  déclenché le contrôle de dépendances de pnpm 11, donc un `pnpm install`
+  implicite — `node_modules` portait `next` 16.3.1, il est revenu au 16.3.0 du
+  lockfile, et le `prepare` a rejoué `lefthook install` (hooks pre-commit et
+  pre-push resynchronisés). Aucun fichier suivi n'a bougé ; la suite est
+  passée par `node_modules/.bin/prettier`. Effet de bord du commit, non
+  demandé mais voulu par le dépôt : deux des fichiers touchés sont des guides
+  (`beginner-faq/index.tsx`, `ether-income/Calculator.tsx`), le hook
+  `stamp-guides` a donc re-daté leur `meta.json` (`updated` du 25/09 au
+  03/10) alors que leur contenu n'a pas changé — laissé tel quel, le retirer
+  ferait échouer `stamp:guides --check`. Laissé : les autres tailles
+  arbitraires (`text-[9px]`, `[8px]`, `[9.5px]`, `[10.5px]`, `[12.5px]`,
+  `[13px]`, `[17px]`), hors lot ; et, repéré en passant, Tailwind scanne aussi
+  `docs/` — une classe citée dans un `.md` reste émise dans le CSS (c'est le
+  cas des anciennes `text-[10px]` et `text-[11px]`, règles mortes de quelques
+  octets).
+
 ## 2026-10-02
 
 - **Une vidéo sur quatre n'était jamais affichée, et le fichier où elle dormait

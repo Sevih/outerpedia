@@ -32,7 +32,7 @@ export async function EventBanner({ lang }: { lang: Lang }) {
             className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 transition-opacity hover:opacity-80"
           >
             <span
-              className={`rounded px-1.5 py-0.5 text-[11px] font-semibold tracking-wide uppercase ${EVENT_STATUS_BADGE[e.status]}`}
+              className={`text-3xs rounded px-1.5 py-0.5 font-semibold tracking-wide uppercase ${EVENT_STATUS_BADGE[e.status]}`}
             >
               {t(`tools.event.status.${e.status}`)}
             </span>

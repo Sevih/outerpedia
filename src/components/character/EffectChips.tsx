@@ -213,7 +213,7 @@ export function EffectPillShell({
       }`}
     >
       {icon && <EffectIconTile icon={icon} isDebuff={isDebuff} className="h-5 w-5" />}
-      <span className="text-[11px] font-semibold text-white">{name}</span>
+      <span className="text-3xs font-semibold text-white">{name}</span>
       {children}
     </span>
   );
@@ -236,7 +236,7 @@ export function EffectChip({ effect, statuses }: { effect: ClientEffect; statuse
   const pill = (
     <span className={`flex items-center gap-1 rounded-md py-0.5 pr-1.5 pl-0.5 ${bg}`}>
       {icon && <EffectIconTile icon={icon} isDebuff={isDebuff} className="h-5 w-5" />}
-      <span className="text-[11px] font-semibold text-white">{label}</span>
+      <span className="text-3xs font-semibold text-white">{label}</span>
     </span>
   );
 

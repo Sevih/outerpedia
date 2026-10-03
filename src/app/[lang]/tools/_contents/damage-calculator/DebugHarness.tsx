@@ -55,7 +55,7 @@ function SectionHead({ title, note }: { title: string; note: string }) {
       <span className="text-content-muted text-2xs font-mono font-bold tracking-[0.14em] uppercase">
         {title}
       </span>
-      <span className="text-content-subtle text-[11px]">{note}</span>
+      <span className="text-content-subtle text-3xs">{note}</span>
     </div>
   );
 }
@@ -99,7 +99,7 @@ function TraceList({ steps }: { steps: TraceStep[] }) {
       {steps.map((s, i) => (
         <li key={i} className="text-2xs font-mono leading-relaxed">
           <span className="text-accent">{s.ref}</span>{' '}
-          <span className="text-content font-sans text-[11px]">{s.label}</span>
+          <span className="text-content text-3xs font-sans">{s.label}</span>
           {s.unresolved && (
             <span className="text-warn border-warn/35 bg-warn/10 ml-1.5 rounded border px-1 py-px text-[9px] font-bold">
               unresolved § 12
@@ -250,7 +250,7 @@ export function DebugHarness({
         open={!!open.state}
         onToggle={() => toggle('state')}
       >
-        <pre className="text-content-muted overflow-x-auto px-3 py-2 font-mono text-[11px] leading-relaxed">
+        <pre className="text-content-muted text-3xs overflow-x-auto px-3 py-2 font-mono leading-relaxed">
           {JSON.stringify(state, null, 2)}
         </pre>
       </Fold>
@@ -264,24 +264,22 @@ export function DebugHarness({
 
         {/* État du branchement : chargement, erreurs, scénario incomplet. */}
         {!data && !dataErr && (
-          <p className={`${WELL} text-content-subtle px-3 py-3 text-[11px]`}>
+          <p className={`${WELL} text-content-subtle text-3xs px-3 py-3`}>
             chargement des tables damage (characters/growth/buffs)…
           </p>
         )}
         {dataErr && (
-          <p className={`${WELL} text-danger px-3 py-3 font-mono text-[11px]`}>
+          <p className={`${WELL} text-danger text-3xs px-3 py-3 font-mono`}>
             tables damage : {dataErr}
           </p>
         )}
         {data && (!inputs.attacker || !inputs.target) && (
-          <p className={`${WELL} text-content-subtle px-3 py-3 text-[11px]`}>
+          <p className={`${WELL} text-content-subtle text-3xs px-3 py-3`}>
             scénario incomplet — choisir un attaquant ET une cible (preset ou élément manuel)
           </p>
         )}
         {engineErr && (
-          <p className={`${WELL} text-danger px-3 py-3 font-mono text-[11px]`}>
-            moteur : {engineErr}
-          </p>
+          <p className={`${WELL} text-danger text-3xs px-3 py-3 font-mono`}>moteur : {engineErr}</p>
         )}
 
         {/* Ce que le moteur v1 IGNORE ou ne résout PAS — jamais tu. */}
@@ -517,7 +515,7 @@ export function DebugHarness({
                     </p>
                   )}
                   {s.report.defenderInvincible && (
-                    <p className="text-content-subtle px-3 py-2 text-[11px]">
+                    <p className="text-content-subtle text-3xs px-3 py-2">
                       défenseur invincible — branches non émises, seule la jauge est servie (§ 11)
                     </p>
                   )}
@@ -565,7 +563,7 @@ export function DebugHarness({
                             {b.trace ? (
                               <TraceList steps={b.trace} />
                             ) : (
-                              <p className="text-content-subtle px-3 py-3 text-[11px]">
+                              <p className="text-content-subtle text-3xs px-3 py-3">
                                 trace absente
                               </p>
                             )}
@@ -596,7 +594,7 @@ export function DebugHarness({
           <span className="text-content-muted text-2xs font-mono font-bold tracking-[0.14em] uppercase">
             Fixtures committées
           </span>
-          <span className="text-content-subtle text-[11px]">
+          <span className="text-content-subtle text-3xs">
             src/lib/damage/fixtures/* · rejouées par fixtures.test.ts (vitest, sans UI)
           </span>
           <span className="flex-1" />
@@ -648,7 +646,7 @@ export function DebugHarness({
                   return (
                     <div
                       key={`${f.name}:${o.slot}:${o.branch}:${i}`}
-                      className="grid grid-cols-[minmax(0,3fr)_80px_90px_110px_110px_70px_50px] items-baseline gap-2 px-3 py-1.5 font-mono text-[11px]"
+                      className="text-3xs grid grid-cols-[minmax(0,3fr)_80px_90px_110px_110px_70px_50px] items-baseline gap-2 px-3 py-1.5 font-mono"
                     >
                       <span className="text-content truncate font-sans text-xs">
                         {f.name}{' '}
@@ -684,7 +682,7 @@ export function DebugHarness({
                 });
               })
             ) : (
-              <p className="text-content-subtle px-3 py-3 text-[11px]">
+              <p className="text-content-subtle text-3xs px-3 py-3">
                 aucun fixture — sauvegarder un scénario corrigé puis « ⧉ JSON » (liste des
                 scénarios) → coller dans src/lib/damage/fixtures/ et l&apos;importer dans
                 fixtures/index.ts

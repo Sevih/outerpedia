@@ -45,12 +45,12 @@ export function MonsterSkillBody({
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <h4 className="text-content-strong text-sm font-semibold">{skill.name}</h4>
         {lv?.cool ? (
-          <span className="border-line-subtle bg-surface-base text-content rounded border px-1.5 py-0.5 text-[11px]">
+          <span className="border-line-subtle bg-surface-base text-content text-3xs rounded border px-1.5 py-0.5">
             {labels.cooldown} {lv.cool}
           </span>
         ) : null}
         {skill.targetLabel && (
-          <span className="border-line-subtle bg-surface-base text-content rounded border px-1.5 py-0.5 text-[11px]">
+          <span className="border-line-subtle bg-surface-base text-content text-3xs rounded border px-1.5 py-0.5">
             {skill.targetLabel}
           </span>
         )}

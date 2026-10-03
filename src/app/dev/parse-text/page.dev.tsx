@@ -98,7 +98,7 @@ export default async function ParseTextBench() {
             <h2 className="text-content-strong text-sm font-semibold tracking-wide uppercase">
               {g.title}
             </h2>
-            {g.note && <p className="text-content-subtle mt-1 mb-2 text-[11px]">{g.note}</p>}
+            {g.note && <p className="text-content-subtle text-3xs mt-1 mb-2">{g.note}</p>}
             <div className="mt-2">
               {g.tags.map((tag) => (
                 <Row key={tag} src={tag} rendered={parseText(tag, ctx)} />

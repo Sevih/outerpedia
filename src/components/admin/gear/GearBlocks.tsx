@@ -78,7 +78,7 @@ export function MainStatPicker({
     set(selected.includes(s) ? selected.filter((x) => x !== s) : [...selected, s]);
   const extras = selected.filter((s) => !available.includes(s));
   if (!available.length && !selected.length)
-    return <span className="text-content-subtle px-1 text-[11px]">choose equipment</span>;
+    return <span className="text-content-subtle text-3xs px-1">choose equipment</span>;
   return (
     <div className="flex flex-wrap items-center gap-1">
       {available.map((s) => (
@@ -86,7 +86,7 @@ export function MainStatPicker({
           key={s}
           type="button"
           onClick={() => toggle(s)}
-          className={`rounded border px-1.5 py-0.5 text-[11px] ${
+          className={`text-3xs rounded border px-1.5 py-0.5 ${
             selected.includes(s)
               ? 'border-accent text-accent'
               : 'border-line-subtle text-content-subtle hover:text-content'
@@ -101,7 +101,7 @@ export function MainStatPicker({
           type="button"
           onClick={() => toggle(s)}
           title="Value outside pool — click to remove"
-          className="border-danger/50 text-danger rounded border px-1.5 py-0.5 text-[11px]"
+          className="border-danger/50 text-danger text-3xs rounded border px-1.5 py-0.5"
         >
           {s} ✕
         </button>

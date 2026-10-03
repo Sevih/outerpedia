@@ -158,7 +158,7 @@ export function ReviewsSection({ reviews, hex, dateLocale, labels }: Props) {
                 const pct = reviews.length ? (count / reviews.length) * 100 : 0;
                 return (
                   <div key={star} className="grid grid-cols-[28px_1fr_36px] items-center gap-2.5">
-                    <span className="font-mono text-[11px] text-zinc-400">{star}★</span>
+                    <span className="text-3xs font-mono text-zinc-400">{star}★</span>
                     <span className="h-1.5 overflow-hidden rounded-full bg-white/5">
                       <span
                         className="block h-full"

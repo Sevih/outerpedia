@@ -288,13 +288,13 @@ export function MostUsedUnitsBrowser({
                   {visiblePills.map(([cat]) => (
                     <span
                       key={cat}
-                      className="bg-surface-sunken/70 text-content-muted rounded px-2 py-0.5 text-[11px]"
+                      className="bg-surface-sunken/70 text-content-muted text-3xs rounded px-2 py-0.5"
                     >
                       {labels.categories[cat] ?? cat}
                     </span>
                   ))}
                   {extraCount > 0 && (
-                    <span className="bg-surface-sunken/70 text-content-subtle rounded px-2 py-0.5 text-[11px]">
+                    <span className="bg-surface-sunken/70 text-content-subtle text-3xs rounded px-2 py-0.5">
                       +{extraCount}
                     </span>
                   )}

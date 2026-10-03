@@ -458,7 +458,7 @@ export function EquipmentDetail({
                   onClick={toggleAscend}
                   disabled={!ascended && !canAscendNow}
                   aria-pressed={ascended}
-                  className="flex h-7 flex-1 items-center justify-center gap-1.5 rounded text-[11px] font-bold tracking-wider uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+                  className="text-3xs flex h-7 flex-1 items-center justify-center gap-1.5 rounded font-bold tracking-wider uppercase transition-colors disabled:cursor-not-allowed disabled:opacity-40"
                   style={{
                     border: `1px solid ${SING}`,
                     background: ascended
@@ -689,7 +689,7 @@ export function EquipmentDetail({
         {subPool ? (
           <Module title={labels.substats}>
             <div className="flex flex-col gap-2">
-              <p className="text-content-subtle text-[11px]">{labels.substatsRange}</p>
+              <p className="text-content-subtle text-3xs">{labels.substatsRange}</p>
               <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                 {effectivePool.map((s) => (
                   <div

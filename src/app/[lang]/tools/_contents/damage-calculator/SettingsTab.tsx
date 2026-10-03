@@ -48,7 +48,7 @@ export function SettingsTab({
         <div className="flex items-center gap-3">
           {/* La courbe est indexée PAR NIVEAU : [0] = niveau 0 (0 %),
                 [1..11] = les 11 paliers du jeu. */}
-          <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+          <span className="text-content-muted text-3xs min-w-0 flex-1 font-mono tabular-nums">
             {codexLvl > 0 && codexTiers[codexLvl]
               ? ['atk', 'def', 'hp']
                   .map(
@@ -74,7 +74,7 @@ export function SettingsTab({
       <Card title={L.settings.guild}>
         <div className="flex items-center gap-3">
           {/* Indexé PAR NIVEAU : [0] = sans guilde (0 %), [1..10] = paliers. */}
-          <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+          <span className="text-content-muted text-3xs min-w-0 flex-1 font-mono tabular-nums">
             {guildLvl > 0 && guildTiers[guildLvl] ? `HP +${guildTiers[guildLvl]}%` : '—'}
           </span>
           <Stepper
@@ -92,7 +92,7 @@ export function SettingsTab({
             que les fixtures disent s'il matche quelque part. */}
       <Card title={L.settings.premium}>
         <label className="flex cursor-pointer items-center gap-3">
-          <span className="text-content-muted min-w-0 flex-1 font-mono text-[11px] tabular-nums">
+          <span className="text-content-muted text-3xs min-w-0 flex-1 font-mono tabular-nums">
             {premiumOn && titleHpPct > 0 ? `HP +${titleHpPct}%` : '—'}
           </span>
           <input
@@ -149,7 +149,7 @@ export function SettingsTab({
                     {/* À 0 : aperçu de l'effet Lv1 (le nœud dit ce qu'il ferait). */}
                     <GameText
                       text={n.texts[Math.max(1, lvl) - 1] ?? ''}
-                      className="text-content-muted text-[11px] leading-relaxed whitespace-pre-line"
+                      className="text-content-muted text-3xs leading-relaxed whitespace-pre-line"
                     />
                   </div>
                   <Stepper

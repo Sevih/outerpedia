@@ -44,7 +44,7 @@ export function TowerAddsSelector({ adds }: { adds: TowerAdd[] }) {
                 ].join(' ')}
               >
                 {a.thumb && <Thumbnail {...a.thumb} kind="monster" className="h-11 w-11" />}
-                <span className="text-content-muted max-w-14 truncate text-[11px] leading-tight">
+                <span className="text-content-muted text-3xs max-w-14 truncate leading-tight">
                   {a.name}
                 </span>
               </button>

@@ -481,7 +481,7 @@ export default function MonadGateMap({ nodes, edges, lang, strings }: Props) {
                         />
                       </div>
                       <div
-                        className={`z-30 ml-3 max-w-25 text-left text-[11px] leading-tight wrap-break-word whitespace-pre-wrap ${style.textColor}`}
+                        className={`text-3xs z-30 ml-3 max-w-25 text-left leading-tight wrap-break-word whitespace-pre-wrap ${style.textColor}`}
                       >
                         <div className="font-semibold">{typeLabel}</div>
                         {nodeLabel && <div className="text-2xs italic">{nodeLabel}</div>}

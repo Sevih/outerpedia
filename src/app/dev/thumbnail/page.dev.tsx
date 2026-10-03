@@ -142,7 +142,7 @@ function Cell({
   return (
     <figure className="flex w-28 flex-col items-center gap-2">
       <div className="pt-2 pr-2">{children}</div>
-      <figcaption className="text-content-muted text-center text-[11px] leading-tight">
+      <figcaption className="text-content-muted text-3xs text-center leading-tight">
         <span className="text-content block truncate" title={title}>
           {title}
         </span>
@@ -273,7 +273,7 @@ export default function ThumbnailDev() {
                   className={s.cls}
                 />
               </div>
-              <figcaption className="text-content-muted font-mono text-[11px]">{s.px}px</figcaption>
+              <figcaption className="text-content-muted text-3xs font-mono">{s.px}px</figcaption>
             </figure>
           ))}
         </div>

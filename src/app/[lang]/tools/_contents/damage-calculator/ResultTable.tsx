@@ -68,7 +68,7 @@ export function ResultTable({
       </div>
 
       {attacker && !dmgData && (
-        <p className={`text-center text-[11px] ${dmgErr ? 'text-danger' : 'text-content-subtle'}`}>
+        <p className={`text-3xs text-center ${dmgErr ? 'text-danger' : 'text-content-subtle'}`}>
           {dmgErr ? L.report.tablesError : L.report.loading}
         </p>
       )}
@@ -255,7 +255,7 @@ export function ResultTable({
                                   }
                                   inputMode="numeric"
                                   placeholder="en jeu"
-                                  className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
+                                  className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent text-3xs h-6 w-24 rounded border px-1.5 text-right font-mono outline-none"
                                 />
                                 <span
                                   className={`text-2xs w-14 text-center font-mono ${
@@ -328,7 +328,7 @@ export function ResultTable({
                                 }
                                 inputMode="numeric"
                                 placeholder="en jeu"
-                                className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent h-6 w-24 rounded border px-1.5 text-right font-mono text-[11px] outline-none"
+                                className="border-line-subtle bg-surface-sunken/70 text-content focus:border-accent text-3xs h-6 w-24 rounded border px-1.5 text-right font-mono outline-none"
                               />
                               <span
                                 className={`text-2xs w-14 text-center font-mono ${
@@ -366,7 +366,7 @@ export function ResultTable({
           </div>
 
           {supportSkills.length > 0 && (
-            <p className="text-content-subtle text-center text-[11px]">
+            <p className="text-content-subtle text-3xs text-center">
               {vars(L.report.supportSkills, {
                 names: supportSkills.map((s) => s.name).join(', '),
               })}

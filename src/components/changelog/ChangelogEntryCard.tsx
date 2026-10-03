@@ -46,7 +46,7 @@ export function ChangelogEntryCard({
       <div className="min-w-0 flex-1">
         <div className="mb-1.5 flex flex-wrap items-center gap-2.5">
           <span
-            className={`rounded px-2 py-0.5 text-[11px] font-semibold tracking-wide uppercase ${CHANGELOG_TYPE_BADGE[entry.type]}`}
+            className={`text-3xs rounded px-2 py-0.5 font-semibold tracking-wide uppercase ${CHANGELOG_TYPE_BADGE[entry.type]}`}
           >
             {t(`changelog.type.${entry.type}` as TranslationKey)}
           </span>

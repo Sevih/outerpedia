@@ -556,7 +556,7 @@ export function PriorityOrderEditor({
                 if (name) setTier(key, [...list, { name, stars: 3, _key: rowKey() }]);
               }}
             />
-            <p className="text-content-subtle text-[11px]">
+            <p className="text-content-subtle text-3xs">
               Pick a hero from the list — or type a name + Enter — to add it to this tier.
             </p>
           </div>

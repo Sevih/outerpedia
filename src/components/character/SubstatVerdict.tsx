@@ -198,7 +198,7 @@ export function SubstatVerdictPanel({
               <div key={axis} className="flex items-center gap-2">
                 <span className="w-8 shrink-0 text-sm text-zinc-200">{axis}</span>
                 <Badge kind={v.kind} labels={labels} />
-                <span className="font-mono text-[11px] text-zinc-400 tabular-nums">
+                <span className="text-3xs font-mono text-zinc-400 tabular-nums">
                   {fill(labels.calcLine, {
                     pct: fmt(v.pctTick),
                     base: v.sumFlat,
@@ -208,7 +208,7 @@ export function SubstatVerdictPanel({
                 </span>
               </div>
             ))}
-            <p className="text-[11px] leading-snug text-zinc-400">
+            <p className="text-3xs leading-snug text-zinc-400">
               {fill(labels.calcNote, { level, awak: quirksOn ? labels.calcAwak : '' })}
               {breakevens && ` ${fill(labels.calcBreakeven, { list: breakevens })}`}
             </p>

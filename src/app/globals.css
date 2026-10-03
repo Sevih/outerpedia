@@ -11,6 +11,13 @@
      `text-[10px]` qu'elle remplace, la classe ne pose que le font-size et
      laisse l'interligne hérité (un line-height à la `text-xs` le changerait). */
   --text-2xs: 0.625rem;
+
+  /* 11px, l'autre taille arbitraire répandue (génère `text-3xs`) : même
+     recette, SANS `--text-3xs--line-height`, la classe ne pose que le
+     font-size, comme la valeur arbitraire qu'elle remplace. Le nom vient de
+     l'audit et ne suit pas l'échelle : `text-3xs` (11px) est PLUS GRAND que
+     `text-2xs` (10px). */
+  --text-3xs: 0.6875rem;
 }
 
 /* Utility explicite (auparavant, on s'appuyait sur le fallback de font-sans). */

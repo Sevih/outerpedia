@@ -89,7 +89,7 @@ function Node({ token, label }: { token: string; label: string }) {
         className="border-on-vivid/30 h-8 w-8 rounded-full border"
         style={{ background: `var(${token})` }}
       />
-      <span className="text-[11px] font-semibold" style={{ color: `var(${token})` }}>
+      <span className="text-3xs font-semibold" style={{ color: `var(${token})` }}>
         {label}
       </span>
     </div>
@@ -177,7 +177,7 @@ export default function TokensGallery() {
               {['--color-danger', '--color-danger-strong', '--color-danger-deep'].map((t) => (
                 <span key={t} className="h-5 w-10 rounded" style={{ background: `var(${t})` }} />
               ))}
-              <span className="text-content-subtle text-[11px]">rampe danger</span>
+              <span className="text-content-subtle text-3xs">rampe danger</span>
             </div>
           </div>
         </Demo>
@@ -443,7 +443,7 @@ export default function TokensGallery() {
               </span>
             ))}
           </div>
-          <p className="text-content-subtle mt-3 text-[11px]">
+          <p className="text-content-subtle text-3xs mt-3">
             Chaque catégorie : <code>-fg</code> (texte) + <code>-bd</code> (fond/bord à opacités) +{' '}
             <code>-glow</code> (ombre au survol). <code>other</code> = neutre.
           </p>
@@ -481,7 +481,7 @@ export default function TokensGallery() {
               <TokenTag key={t} v={t} />
             ))}
           </div>
-          <p className="text-content-subtle mt-2 text-[11px]">
+          <p className="text-content-subtle text-3xs mt-2">
             Base <code>-400</code> + <code>-glow</code> (puce) ; annexes : <code>-soft</code> (-200,
             texte de callout), <code>-faint</code> (-100), <code>-deep</code> (-500, anneaux
             PvE/PvP), purple/pink.
