@@ -7,6 +7,101 @@
 
 ## 2026-10-04
 
+- **Lot F8 : une carte évincée puis remontée dans la même image ne reste plus
+  éteinte — un seul observateur pour toutes les cartes, et un `restoreContext`
+  rejoué après la perte ; P1 et P5 sont clos** (Fable, audit
+  `docs/audit/portrait-fx.md`). Le quoi : `AnimatedPortrait.tsx` n'ouvre plus un
+  `IntersectionObserver` par carte mais UN pour toutes (`onIntersect`), et
+  `portrait-fx-gl.ts` rejoue son `restoreContext` quand la perte lui arrive
+  après coup (`awaitingRestore` dans `onLost`). Le pourquoi : avec un
+  observateur par carte, les callbacks d'une même image se suivent dans une
+  même tâche et chacun ne connaît que sa carte — celui d'une carte qui entre
+  évinçait une voisine vivante que son propre callback, juste après,
+  remontait : `restoreContext()` avant que `webglcontextlost` soit distribué,
+  que Blink refuse en silence, et la carte restait statique à l'écran. La
+  reproduction, AVANT d'écrire (Firefox 156 sans tête piloté en WebDriver
+  BiDi, 1280×800, `/dev/AnimatedPortrait` du serveur ouvert sur :3000, sonde
+  qui journalise callbacks d'observateur, `getContext`, `loseContext`,
+  `restoreContext` et les deux événements) : descente par pas de 60 px
+  jusqu'à l'éviction des cartes 0 et 1 (y = 1740, dix contextes créés, huit
+  vivants), puis saut en haut. L'ordre est bien celui de l'audit — callback
+  de 0 : restauration de 0, `loseContext` sur 2 ; callback de 1 : restauration
+  de 1, `loseContext` sur 3 ; callbacks de 2 puis 3 : `getContext` rend le
+  contexte perdu, `restoreContext` ; et les `webglcontextlost` de 2 et 3
+  n'arrivent que 9 à 13 ms plus tard. Firefox restaure quand même (240 `draw`
+  par seconde, quatre cartes). Pas de Chrome sur ce poste : la règle de Blink
+  (fait n° 2 de l'en-tête du moteur — refus muet tant que la perte n'a pas été
+  distribuée ET annulée) a été ÉMULÉE dans la sonde, et là le défaut est
+  entier : deux restaurations refusées, les cartes 2 et 3 perdues, 120 `draw`
+  par seconde au lieu de 240. La cause est donc celle du rapport. Le comment,
+  deux écarts au correctif proposé, tous deux dans son intention. (1)
+  L'observateur partagé traite le lot d'une image en quatre temps : tous les
+  drapeaux `onScreen` (la DERNIÈRE entrée d'une cible l'emporte — le `([e])`
+  d'avant gardait la première), puis l'éviction, UNE fois, qui fait la place
+  des cartes à monter, puis les montages, puis les boucles. L'audit écrivait
+  « monte, puis évince » : évincer d'abord donne la même garantie (une victime
+  est hors écran d'après les drapeaux à jour, donc jamais une carte du lot qui
+  entre) et tient en plus le plafond PENDANT le callback — monter d'abord
+  laissait le pic de P5 intact (mesuré avant : 9 à la descente, 10 au saut ;
+  après : 8 et 8). Au-delà de huit cartes à l'écran le plafond se dépasse
+  toujours, c'est voulu et écrit sur `evict`. (2) La ceinture de `onLost`
+  n'est pas inconditionnelle : elle ne rejoue que si la session a été montée
+  sur un contexte perdu et attend encore son `webglcontextrestored` — la perte
+  reçue est alors l'écho du `loseContext` de la session précédente. Une perte
+  spontanée sur une session vivante n'est pas rejouée : sa restauration
+  appartient au navigateur, et la spec fait d'un `restoreContext` sur un
+  contexte qu'on n'a pas perdu soi-même une INVALID_OPERATION. Le rejeu passe
+  par `setTimeout(0)`, pas par l'écouteur ni une microtâche (l'autorisation
+  n'est levée qu'au retour du dispatch). La vérification, même banc, règle de
+  Blink émulée : la ceinture SEULE (observateurs d'origine) — refus, rejeu
+  après l'événement, les deux cartes restaurées, 240 `draw` par seconde ; le
+  tout — au saut, un seul callback de dix entrées, éviction de 4 et 5,
+  restauration de 0 et 1, les cartes 2 et 3 jamais touchées, aucun refus.
+  Page entière (descente et remontée douces, sept sauts, molette rapide —
+  66 lots) : 0 `restoreContext` avant sa perte, 0 éviction d'une carte à
+  l'écran, 0 carte à l'écran sans contexte en fin de lot, jamais plus de
+  contextes vivants que max(8, cartes à l'écran) — pic de 9 là où neuf cartes
+  sont dans la marge —, 60 `draw` par seconde et par carte à l'écran aux dix
+  arrêts (0, 240, 360, 540), et trois lots portaient deux entrées pour la même
+  cible (le cas de P5 existe). Démontage : 9 contextes vivants, navigation
+  client vers `/dev/portrait` → 9 `loseContext`, 0 vivant, 0 `draw` ; retour
+  arrière → 9 contextes neufs, 9 vivants. `prefers-reduced-motion` : un
+  `getContext` et un `draw` par carte, puis 0 par seconde, y compris après un
+  saut ; capture de la carte `_Demi` figée identique à l'octet avant et après
+  le lot (PNG 208×367) — c'est ce qui a été comparé pour « le rendu d'une
+  carte visible ne change pas », le code de dessin n'étant pas touché. Sans
+  WebGL (`webgl.disabled`) : aucun contexte, aucune exception, le refus
+  « WebGL2 indisponible » comme avant. `pnpm typecheck` : les trois
+  `tsc --noEmit` sans erreur ; `pnpm lint` : `eslint` sans sortie ;
+  `pnpm test` : `Tests 2179 passed (2179)`, les 109 du lot B15 compris.
+  **Scénario de contrôle, à jouer par Sevih sur Chrome ET Firefox** : ouvrir
+  `/dev/AnimatedPortrait` (fenêtre d'ordinateur, vers 1280×800), attendre que
+  la carte `_Demi` s'anime ; descendre à la molette jusqu'à ce que la rangée
+  `_2000086 — voile, cadres et étincelles` (cinquième titre, trois cartes)
+  entre par le bas de la fenêtre, et PAS plus loin — la section `_2000093` ne
+  doit pas approcher du bas : c'est l'instant où les deux premières cartes de
+  la page (`_Demi` et la première `_Dungeon`) sont évincées alors que les
+  deux autres `_Dungeon` vivent encore ; appuyer sur Début, puis regarder la
+  rangée `_Dungeon` (les trois cartes sous le deuxième titre — à 800 px de
+  haut elle est sous le pli, la faire monter d'un cran de molette). On doit
+  voir les quatre cartes animées dans la seconde (cadres qui défilent, halos
+  et glints). Le défaut, c'était la deuxième et la troisième `_Dungeon`
+  nues — le portrait sans son effet — à côté de la première animée, et qui
+  le restaient tant qu'on ne les avait pas fait évincer puis revenir. À
+  rejouer deux ou trois fois, puis en ouvrant une autre page depuis ce point
+  et en revenant par le retour arrière ; console sans erreur `portrait-fx`.
+  Laissé : Chrome lui-même (le refus y reste déduit et émulé, pas mesuré —
+  c'est l'objet du scénario ; l'observateur partagé retire le déclencheur, la
+  ceinture n'y sera donc plus sollicitée par ce geste) ; un double montage
+  occasionnel sous `prefers-reduced-motion` (2 lancements sur 11, après le
+  lot : l'effet se remonte quand `reduced` bascule après la première
+  notification de l'observateur — la dépendance `reduced` de l'effet est la
+  même qu'avant, mais le cas n'a pas été revu sur le code d'origine ; une
+  seule image dessinée dans les deux cas, et c'est un remontage hors lot
+  d'observateur, celui que la ceinture couvre) ; P6, inchangé (une poignée
+  `NO_FX` compte toujours dans le plafond et relogue son refus à chaque
+  retour) ; les compteurs périmés de P9 dans ces deux fichiers.
+
 - **Lot B15 : le moteur des portraits animés a ses tests, et la table que le
   pipeline régénère a un contrat — P4 est clos** (Opus, audit
   `docs/audit/portrait-fx.md`). Le quoi : la décision « rendable ou refusé »

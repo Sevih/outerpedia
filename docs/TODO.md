@@ -108,17 +108,12 @@
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
 Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
-Les Basse (P5–P10) et la dette se traitent en passant sur les fichiers.
+Les Basse (P6–P10 ; P5 est partie avec P1) et la dette se traitent en passant
+sur les fichiers.
 
-- [ ] **Éviction et remontage dans la même image (P1, lot F8)** : une carte vivante
-      hors écran, évincée par le callback d'une voisine puis remontée par le
-      sien dans la même tâche, appelle `restoreContext()` avant que
-      `webglcontextlost` soit distribué — refus muet, carte statique jusqu'au
-      prochain cycle. Reproduit sur `/dev/AnimatedPortrait` (Firefox le
-      tolère) ; **à confirmer sur Chrome**. Correctif : UN
-      `IntersectionObserver` partagé (drapeaux d'abord, montages, une éviction
-      — règle aussi le plafond dépassé de P5), et un `restoreContext` rejoué
-      après l'événement dans `onLost`.
+- [ ] Éviction et remontage dans la même image (P1, et P5 au passage — lot
+      F8) : CORRIGÉ le 04/10 (cf. DONE), à contrôler sur Chrome ET Firefox —
+      le scénario est dans l'entrée DONE.
 - [ ] **18 Mo de textures GPU par carte `_Demi` (P2, lot F9)** : chaque contexte
       monte sa copie ; `T_FX_Crystal_001_A` (2048², 887 Ko à télécharger) en
       fait 16 à elle seule, pour l'effet de 16 persos. **Décision Sevih** :

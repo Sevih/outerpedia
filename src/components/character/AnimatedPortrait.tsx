@@ -45,36 +45,108 @@ import { fxBleed } from './portrait-fx-sim';
  */
 const LIVE_CAP = 8;
 
-interface LiveFx {
+/** Une carte animée telle que l'observateur partagé la voit. */
+interface Card {
+  /** Dernier état rendu par l'observateur. */
   onScreen: boolean;
   /** Rang de dernière apparition — le plus petit part en premier. */
   seq: number;
+  /** Crée (ou ressuscite) le contexte de la carte. */
+  mount: () => void;
+  /** Rend le contexte : c'est l'éviction, et le démontage. */
   release: () => void;
+  /** Accorde la boucle à l'état courant (écran, onglet, mouvement réduit). */
+  apply: () => void;
 }
-const live = new Set<LiveFx>();
+/** Les cartes observées, par canvas. */
+const cards = new Map<Element, Card>();
+/** Celles qui tiennent un contexte — c'est elles que le plafond compte. */
+const live = new Set<Card>();
 let seqCounter = 0;
 
 /**
- * Ramène le nombre de contextes vivants sous le plafond.
+ * Ramène le nombre de contextes vivants sous le plafond, en gardant `incoming`
+ * places pour les cartes que l'appelant s'apprête à monter.
  *
  * On ne libère QUE des cartes hors écran, jamais une carte visible : une carte
- * libérée ne se ranime qu'au prochain franchissement de son observateur, donc en
- * sacrifier une qui est déjà à l'écran la laisserait éteinte tant qu'on ne
- * scrolle pas. Si tout est visible, on dépasse le plafond plutôt que d'éteindre
- * ce que le lecteur regarde — cas qui ne se produit qu'avec plus de {@link
- * LIVE_CAP} portraits animés simultanément à l'écran.
+ * libérée ne se ranime qu'à son prochain franchissement, donc en sacrifier une
+ * qui est déjà à l'écran la laisserait éteinte tant qu'on ne scrolle pas. Si
+ * tout est visible, on dépasse le plafond plutôt que d'éteindre ce que le
+ * lecteur regarde — cas qui ne se produit qu'avec plus de {@link LIVE_CAP}
+ * portraits animés simultanément à l'écran.
  */
-function evict(): void {
-  while (live.size > LIVE_CAP) {
-    let victim: LiveFx | undefined;
-    for (const e of live) {
+function evict(incoming: number): void {
+  while (live.size + incoming > LIVE_CAP) {
+    let victim: Card | undefined;
+    for (const c of live) {
       // Le plus anciennement vu parmi ceux qui ne sont pas à l'écran.
-      if (!e.onScreen && (!victim || e.seq < victim.seq)) victim = e;
+      if (!c.onScreen && (!victim || c.seq < victim.seq)) victim = c;
     }
     if (!victim) return;
     live.delete(victim);
     victim.release();
   }
+}
+
+/**
+ * UN SEUL OBSERVATEUR POUR TOUTES LES CARTES, et c'est ce qui rend l'éviction
+ * sûre. Avec un observateur par carte, les callbacks d'une même image se
+ * suivaient dans une même tâche, chacun ne connaissant que SA carte : celui
+ * d'une carte qui entre évinçait une voisine vivante dont le callback n'avait
+ * pas encore dit qu'elle entrait aussi, et ce callback-là la remontait aussitôt
+ * — `restoreContext` avant que `webglcontextlost` soit distribué, que Blink
+ * refuse en silence (cf. `onLost` de `portrait-fx-gl`). La carte restait
+ * éteinte, à l'écran.
+ *
+ * Ici le lot entier d'une image arrive d'un coup, et l'ordre fait la garantie :
+ *
+ *   1. TOUS les drapeaux `onScreen` d'abord ;
+ *   2. l'éviction, UNE fois, qui fait la place des cartes à monter — une victime
+ *      est hors écran d'après les drapeaux à jour, donc jamais une carte de ce
+ *      lot qui entre ;
+ *   3. les montages, ensuite seulement : le nombre de contextes vivants ne
+ *      dépasse plus le plafond le temps d'un callback (un saut d'une rangée en
+ *      montait quatre AVANT d'en rendre quatre) ;
+ *   4. les boucles.
+ */
+function onIntersect(entries: IntersectionObserverEntry[]): void {
+  const touched = new Set<Card>();
+  for (const e of entries) {
+    // Absente : démontée entre la mise en file de l'entrée et ce callback.
+    const card = cards.get(e.target);
+    if (!card) continue;
+    // Deux franchissements de la même carte peuvent s'accumuler dans un lot ;
+    // les entrées sont en ordre chronologique, la DERNIÈRE l'emporte.
+    card.onScreen = e.isIntersecting;
+    touched.add(card);
+  }
+
+  const toMount: Card[] = [];
+  for (const card of touched) {
+    if (!card.onScreen) continue;
+    card.seq = ++seqCounter;
+    if (!live.has(card)) toMount.push(card);
+  }
+  evict(toMount.length);
+  for (const card of toMount) {
+    card.mount();
+    live.add(card);
+  }
+  for (const card of touched) card.apply();
+}
+
+let observer: IntersectionObserver | undefined;
+
+function observe(canvas: Element, card: Card): void {
+  observer ??= new IntersectionObserver(onIntersect, { rootMargin: '128px' });
+  cards.set(canvas, card);
+  observer.observe(canvas);
+}
+
+function unobserve(canvas: Element, card: Card): void {
+  observer?.unobserve(canvas);
+  cards.delete(canvas);
+  live.delete(card);
 }
 
 export interface AnimatedPortraitProps extends Omit<PortraitProps, 'fx'> {
@@ -148,61 +220,45 @@ function PortraitFxCanvas({
     if (!canvas) return;
 
     let fx: PortraitFxHandle | undefined;
-    let entry: LiveFx | undefined;
     let visible = document.visibilityState === 'visible';
-    let onScreen = false;
 
-    const apply = () => fx?.setRunning(!reduced && visible && onScreen);
-    const onVisibility = () => {
-      visible = document.visibilityState === 'visible';
-      apply();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
-
-    const drop = () => {
-      fx?.destroy();
-      fx = undefined;
-      entry = undefined;
-    };
-
-    // LE CONTEXTE N'EST CRÉÉ QU'À L'ENTRÉE À L'ÉCRAN. Il reste ensuite en place
+    // LE CONTEXTE N'EST CRÉÉ QU'À L'ENTRÉE À L'ÉCRAN — c'est l'observateur
+    // partagé qui appelle `mount` (cf. `onIntersect`). Il reste ensuite en place
     // tant qu'il n'est pas évincé : le détruire à chaque sortie ferait payer un
     // rechargement complet à chaque va-et-vient de scroll.
-    const io = new IntersectionObserver(
-      ([e]) => {
-        onScreen = e.isIntersecting;
-        if (onScreen && !fx) {
-          fx = mountPortraitFx(canvas, {
-            effect,
-            art,
-            // Le moteur logge déjà chaque refus en console (`mountPortraitFx`
-            // préfixe et fait `console.error` AVANT de relayer) : ce rapporteur
-            // ne sert qu'aux pages qui veulent AFFICHER le refus.
-            onError: (m) => report.current?.(m),
-            only,
-            autoplay: !reduced,
-          });
-          entry = { onScreen: true, seq: ++seqCounter, release: drop };
-          live.add(entry);
-        }
-        if (entry) {
-          entry.onScreen = onScreen;
-          if (onScreen) entry.seq = ++seqCounter;
-        }
-        // APRÈS avoir mis à jour le statut : une carte qui vient de sortir de
-        // l'écran doit pouvoir être la victime de ce tour-ci.
-        evict();
-        apply();
+    const card: Card = {
+      onScreen: false,
+      seq: 0,
+      mount: () => {
+        fx = mountPortraitFx(canvas, {
+          effect,
+          art,
+          // Le moteur logge déjà chaque refus en console (`mountPortraitFx`
+          // préfixe et fait `console.error` AVANT de relayer) : ce rapporteur
+          // ne sert qu'aux pages qui veulent AFFICHER le refus.
+          onError: (m) => report.current?.(m),
+          only,
+          autoplay: !reduced,
+        });
       },
-      { rootMargin: '128px' },
-    );
-    io.observe(canvas);
+      release: () => {
+        fx?.destroy();
+        fx = undefined;
+      },
+      apply: () => fx?.setRunning(!reduced && visible && card.onScreen),
+    };
+
+    const onVisibility = () => {
+      visible = document.visibilityState === 'visible';
+      card.apply();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    observe(canvas, card);
 
     return () => {
       document.removeEventListener('visibilitychange', onVisibility);
-      io.disconnect();
-      if (entry) live.delete(entry);
-      drop();
+      unobserve(canvas, card);
+      card.release();
     };
   }, [effect, art, reduced, only]);
 

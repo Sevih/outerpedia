@@ -1070,15 +1070,39 @@ export function mountPortraitFx(
     if (!paused) raf = requestAnimationFrame(draw);
   }
 
+  // Vrai entre un montage sur contexte PERDU et le `webglcontextrestored` qui lui
+  // répond : tant qu'il l'est, rien ne dit que notre `restoreContext` a été entendu.
+  let awaitingRestore = false;
+
   // La perte arrête la boucle SANS toucher à `paused` ni à `elapsed` : l'état
   // demandé par l'appelant et le temps écoulé survivent, la restauration les
   // retrouve tels quels.
   const onLost = () => {
     live = false;
     cancelAnimationFrame(raf);
+    // UNE PERTE REÇUE PENDANT QU'ON ATTEND LA RESTAURATION est l'écho du
+    // `loseContext` de la session précédente : le canvas a été recyclé avant que
+    // son `webglcontextlost` soit distribué (l'événement est mis en file), donc le
+    // `restoreContext` du montage est parti trop tôt — et Blink le refuse en
+    // silence tant que l'événement n'a pas été distribué ET annulé (fait n° 2 de
+    // l'en-tête). On le rejoue donc APRÈS la distribution : ni ici dans
+    // l'écouteur, ni en microtâche — l'autorisation n'est levée qu'au retour du
+    // dispatch. Une perte SPONTANÉE (session montée sur un contexte vivant, ou
+    // déjà restaurée) n'en reçoit pas : sa restauration appartient au navigateur.
+    if (awaitingRestore) {
+      setTimeout(() => {
+        if (disposed || !awaitingRestore || !gl.isContextLost()) return;
+        try {
+          LOSE_EXT.get(canvas)?.restoreContext();
+        } catch {
+          // Perte non restaurable (GPU mort) : le repli <img> de `Portrait` reste.
+        }
+      }, 0);
+    }
   };
   const onRestored = () => {
     if (disposed) return;
+    awaitingRestore = false;
     if (!buildGL()) return;
     cancelAnimationFrame(raf);
     last = 0;
@@ -1095,7 +1119,9 @@ export function mountPortraitFx(
     // rendrait null — cf. l'en-tête) ; la construction viendra de
     // `webglcontextrestored`. Sans instance retenue (perte spontanée avant tout
     // montage), on s'en remet à la restauration du navigateur, que le même
-    // écouteur attrape.
+    // écouteur attrape. Si la perte n'a pas encore été distribuée, cet appel est
+    // refusé : `onLost` le rejoue (cf. `awaitingRestore`).
+    awaitingRestore = true;
     try {
       LOSE_EXT.get(canvas)?.restoreContext();
     } catch {
