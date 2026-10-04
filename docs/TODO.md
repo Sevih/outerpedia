@@ -9,6 +9,9 @@
 
 > Mesure : `pnpm exec tsx scripts/seo-lengths.ts` (bornes : titre 30 à 60
 > caractères, description 70 à 160). Rapport dans `docs/seo&audit/`.
+> Deux lots écrits le 04/10 dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) :
+> A29 (code et locales) et B16 (`meta.json` des guides), lançables ensemble.
+> Les six titres de fiches de 61 à 64 caractères sont acceptés tels quels.
 
 - [ ] **Titres encore au-delà de 60 SANS le suffixe (7 pages, 61 à 64)** — À
       TRANCHER. Le nom et le gabarit débordent à eux seuls, « | Outerpedia »
