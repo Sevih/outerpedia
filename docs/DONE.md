@@ -7,6 +7,18 @@
 
 ## 2026-10-04
 
+- **SEO clos : titres et descriptions mesurés sur les six hôtes servis**
+  (Sevih a poussé, CI verte, mesure Fable par `scripts/seo-lengths.ts`, en
+  largeur). 574 pages par hôte, aucune description au-delà de 160, aucun
+  titre ni description absent, aucun doublon. Pages avec écart : `en` 6
+  (179 le matin), `fr` 22, `es` 10, `jp` 9, `kr` 9, `zh` 31. Ce qui reste est
+  ACCEPTÉ par Sevih le 04/10 : les titres au-delà de 60 débordent par le nom
+  seul (`en` 6, `fr` 22 dont onze Équipements exclusifs — « EE » rejeté, il
+  changerait 128 titres —, `es` 10, `jp` 5, `kr` 1) ; les descriptions sous
+  70 en largeur (`zh` 28, `kr` 7, `jp` 4) ne sont pas enrichies, l'anglais
+  n'en dit pas plus ; huit titres sous 30 (`zh` 6, `kr` 1, `jp` 1) laissés.
+  L'inventaire à la source annonçait `kr` 8 et `zh` 28 : la mesure servie en
+  trouve 9 et 31, écart non analysé. La section SEO sort du TODO.
 - **Relecture de B17 et B18 : SEO des cinq autres langues** (Fable). Lots 62
   et 63 : B17 `f401897f` (largeur d'affichage dans `src/lib/seo.ts`, le
   script et les règles de suffixe, de préfixe et de coupe sur la même unité),
