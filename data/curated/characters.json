@@ -4985,6 +4985,8 @@
     ]
   },
   "2700035": {
+    "rank": "A",
+    "rankPvp": "S",
     "role": "support",
     "skillPriority": {
       "first": 2,
