@@ -7,6 +7,19 @@
 
 ## 2026-10-04
 
+- **Relecture de B17 et B18 : SEO des cinq autres langues** (Fable). Lots 62
+  et 63 : B17 `f401897f` (largeur d'affichage dans `src/lib/seo.ts`, le
+  script et les règles de suffixe, de préfixe et de coupe sur la même unité),
+  B18 `1d254a23` (41 `meta.json`, cinq locales, `guide-categories.ts`).
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts (181 fichiers, 2 229
+  tests), aucun lot ne touche `package.json`. Recompte indépendant des 149
+  descriptions de guides avec `displayWidth` : plus aucune au-delà de 160
+  en `en`, `jp`, `kr`, `zh` ; il en restait QUATRE que B18 n'avait pas vues
+  (`monad-gate/depth4-route1` et `route2`, `fr` 166/165 et `es` 173) —
+  condensées ici, 157 et 156. Sous 70 : `zh` 47, `kr` 5, `jp` 4 à la source,
+  laissées par B18 parce que l'anglais n'en dit pas plus (au TODO, à
+  trancher). Rien n'est mesuré sur les hôtes servis tant que ce n'est pas en
+  ligne.
 - **Lot B18 : SEO, titres et descriptions hors bornes en fr, es, jp, kr, zh —
   plus aucune description au-delà de 160 dans les cinq langues, les fiches de
   personnage chinoises et coréennes repassent 70, deux gabarits de titre
