@@ -7,6 +7,147 @@
 
 ## 2026-10-04
 
+- **Ménage du TODO et du fichier des lots : ce qui est fait vient ici**
+  (décision Sevih : le TODO ne porte que le « à faire », le fichier des lots
+  que l'outil ; les notes et le suivi vivent dans ce journal). Trois blocs en
+  sortent, recopiés ci-dessous tels quels.
+
+  **Table des 59 lots délégués (25/09, 03/10, 04/10)** — A, B, C : agents
+  Opus ; F : agents Fable.
+
+  | Lot                                                                                                                       | Commit                                          |
+  | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+  | A1 · Lefthook : format avant lint                                                                                         | `33872c70`                                      |
+  | A2 · `esc()` / `rfc822()` mutualisés                                                                                      | `6f07fe04` (entrée DONE dans `f68ac573`)        |
+  | A3 · `CLASS_ORDER`, ordre de l'enum du jeu                                                                                | `eb5aa4bc`                                      |
+  | A4 · Parents Twitch dérivés des hôtes servis                                                                              | `d5b5373e`                                      |
+  | A5 · Token `--text-2xs` (10px), 227 `text-[10px]` remplacés                                                               | `a29aad26`                                      |
+  | A7 · JSON écrits par `formatJson` (video-meta, manifeste 4-comics, posts)                                                 | `62f936bd`                                      |
+  | A8 · `retired` dans les types Monster et MonsterSkill                                                                     | `1a129dc5`                                      |
+  | A9 · `init.ps1` gaté sur Steam, `datagen:patch`                                                                           | `edc5c9db`                                      |
+  | A10 · eslint-disable du calculateur Ether retiré, doublons de guides mutualisés                                           | `e5f4d516`                                      |
+  | A11 · Filtres de classe et d'élément dans l'ordre du jeu, `CLASS_SLUGS`/`ELEMENTS` dérivés                                | `21ab190c`                                      |
+  | A6 · Clés React stables sur les listes réordonnables de l'admin                                                           | `0b8e6f5a`                                      |
+  | B1 · `format-duration.ts`, durées localisées via clés i18n                                                                | `18af8b77`                                      |
+  | B4 · `itemChipByName` partout, fin du repli muet                                                                          | `8b2fe3ec`                                      |
+  | B8 · banner-mileage : hash, `lootTableOf`, `stamp:guides` en pre-commit                                                   | `acd34fcf`                                      |
+  | C2 · `Content-Disposition: attachment` au push R2, option `--prefix` (re-push à lancer)                                   | `12e24098`                                      |
+  | B2 · Chaînes UI en dur des outils et composants passées par `t()`                                                         | `db47ce45`                                      |
+  | B5 · Couleurs brutes des guides → tokens `ed-*` (56/152 ; les 96 sans token listées au TODO)                              | `07bce0a4`                                      |
+  | C3 · HeroFullArt vivants téléchargés par `fetch → blob`                                                                   | `70bc8fe9`                                      |
+  | B3 · Anglais en dur des guides localisé, `alt` conformes                                                                  | `76b259b1`                                      |
+  | B6 · `alt` et cliquables des outils en boutons nommés                                                                     | `fe209497`                                      |
+  | B7 · Chrome des `labels.ts` passé par `t()` quand la clé existe                                                           | `a029a42b`                                      |
+  | C1 · Accesseurs par fichier dans `src/lib/data` + règle eslint bloquante (branche `refactor/data-layer-imports`)          | `c8dcbb25`                                      |
+  | A12 · Cookie de langue en mode `path`, tests du proxy                                                                     | `cf3023cc`                                      |
+  | E1 · Steam dans `how-to-play`, Steam + Proton en tête du guide Linux (placeholders à remplir)                             | `e0884893`                                      |
+  | A13 · Hook `useCopyToClipboard`, huit sites                                                                               | `b5cf0fe4`                                      |
+  | A14 · `normalizeSearchText` unique, saisie et index                                                                       | `b43058e1`                                      |
+  | A15 · Tooltip des tags d'effet par `EffectTooltipBody`                                                                    | `285add90`                                      |
+  | A16 · Solver formate par `lib/buff`, manifest dérive les paires classe                                                    | `3de05164`                                      |
+  | A17 · `loadTextIndex` mémoïsé, catalogue et équipement construits une fois                                                | `bbac8f50`                                      |
+  | A19 · Étape `normalize` de `StoreSpec` sur toute lecture                                                                  | `8b50f9cf`                                      |
+  | A20 · Glob lint aligné, next 16.3.1, règle des locales réécrite (lockfile dans le commit suivant)                         | `f68a73ba`                                      |
+  | A18 · Token `--text-3xs` (11px), 126 `text-[11px]` remplacés                                                              | `22a2d478`                                      |
+  | B9 · Brique `Modal`/`Lightbox` dans `components/ui`, quatre modales des outils branchées                                  | `3a83afe0`                                      |
+  | B11 · jp/kr/zh des 84 blocs éditoriaux des guides                                                                         | `d218c04c`                                      |
+  | A21 · `data/curated` dans les six langues (12 blocs jp/kr/zh, fr/es des noms courts)                                      | `c3608cd6`                                      |
+  | B10 · Pastilles élément/classe et recherche de quatre outils sur les briques de `/characters`                             | `353f1521`                                      |
+  | A22 · Balises inline alignées (15 blocs), test de parité, 10 divergences nommées                                          | `ac511d9e`                                      |
+  | A23 · Cinquième modale (`damage-calculator/ui.tsx`) sur la brique `Modal`                                                 | `bf01106b`                                      |
+  | A24 · Pastilles de rareté du tier-list-maker et du hero-tracker sur `StarPill`                                            | `4536c72b`                                      |
+  | B12 · 25 tokens `ed-*` créés, 78 couleurs brutes des guides remplacées                                                    | `bf01106b` (commit titré A23 ; note `41a065d4`) |
+  | B14 · Description meta dédiée des 18 pages d'outils, six langues                                                          | `176340e3`                                      |
+  | F4 · Audit `portrait-fx` : P1–P10, aucune Haute, quatre Moyenne au TODO                                                   | `d755f822`                                      |
+  | F1 · `HeroTrackerBrowser.tsx` découpé, 2 246 → 221 lignes                                                                 | `f35e0f5a`                                      |
+  | F2 · `TierListMakerBrowser.tsx` découpé, 2 143 → 408 lignes                                                               | `c5bd7d0f`                                      |
+  | F3 · `ProgressTrackerBrowser.tsx` découpé, 1 435 → 230 lignes                                                             | `bf6cc622`                                      |
+  | B13 · Pull simulator : pool hors focus de chaque bannière lu dans les tables                                              | `95b2c16b`                                      |
+  | F5 · Tours very hard : formations numérotées (`formation`) sur les 20 étages, lecteurs une formation à la fois            | `318c0e41`                                      |
+  | A25 · `encounters.ts` : `stripDecoBrackets` et `advOf` en une copie, sortie identique                                     | `42439a40`                                      |
+  | F6 · Scaling des dégâts : une règle `kitScaling` pour les deux générateurs, 4 persos sortent de `damage-scaling.json`     | `54f10485`                                      |
+  | F7 · Dry-run : `skill-descs` lit la proposition du run, artefacts damage d'une seule version                              | `8b8116ad`                                      |
+  | A26 · Accents des roadmaps dérivés de l'élément, deux SVG sur les tokens existants (H6 clos)                              | `33fee31d`                                      |
+  | A27 · `scripts/seo-lengths` : titres et descriptions mesurés sur le site servi, 179 pages sur 574 hors bornes             | `d22c19ba`                                      |
+  | B15 · Portraits : décision « rendable » en fonction pure, tests du simulateur, contrat de la table (P4)                   | `a0a02536`                                      |
+  | F8 · Portraits : un seul observateur pour toutes les cartes, `restoreContext` rejoué (P1, P5)                             | `df372c95`                                      |
+  | F9 · Portraits : plafond de taille des textures à l'extraction (512 par défaut), comparaison sur la page de contrôle (P2) | `498294d8`                                      |
+  | F10 · Portraits : graine partagée au montage, `autoRandomSeed`/`randomSeed` publiés dans la table (P3)                    | `27d5a341`                                      |
+  | A28 · « \| Outerpedia » retiré des titres au-delà de 60 caractères, description des fiches d'équipement raccourcie        | `d230fd94`                                      |
+
+  Leçons reprises dans le préambule :
+
+  - A2 a commité sans entrée DONE ; tous ont demandé qui commite et quoi
+    indexer.
+  - A3 s'est arrêté sur l'ordre des classes, B10 sur un rendu qui ne pouvait pas
+    rester identique : bonne réaction, une question et une recommandation.
+  - A1 a testé son hook dans un worktree (`pnpm install`, hooks git redirigés) ;
+    B8 a fait un commit d'essai qui a embarqué les fichiers indexés des autres
+    lots. Un test de hook se fait seul, par Sevih.
+  - Série du 03/10 : l'index git est PARTAGÉ entre les lots parallèles. Le
+    `git commit` d'A23 a emporté les fichiers que B12 venait d'indexer : le diff
+    de B12 est dans le commit titré A23. Et celui qui commite `docs/DONE.md`
+    prend les entrées pas encore commitées des autres. Rien de perdu, mais le
+    préambule impose maintenant de vérifier l'index et de commiter en une seule
+    commande.
+  - A20 a monté `next` en 16.3.1 au lieu de descendre le plugin de lint ; la
+    relecture l'a validé sur typecheck, lint et tests, et la prod est tombée
+    deux heures (image qui ne démarre pas). Un agent ne touche plus aux
+    versions, et la CI lance l'image avant de la publier.
+
+  **État des mesures au 04/10.** SEO, `scripts/seo-lengths.ts` sur l'hôte
+  anglais en ligne après le lot A28 : 574 pages du sitemap, 67 avec un écart
+  (179 avant), aucun titre ni description absent, aucun doublon exact ; les
+  cinq autres langues ont les mêmes gabarits et se mesurent par `--host`.
+  Audits : les constats Haute et Moyenne sont soldés hors ce que le TODO
+  porte encore ; les Basse (G26–G52, P6–P10) se traitent en passant sur les
+  fichiers, les rapports de `docs/audit/` font foi. Portraits animés : P1 à
+  P5 corrigés, validés à l'écran et en ligne.
+
+  **Notes de référence, sorties du TODO** (des règles, pas des tâches — à
+  relire avant de toucher aux domaines qu'elles nomment) :
+
+  - **Damage calculator : SURTOUT NE PAS se baser sur la V2** (décision Sevih
+    22/07 : le calculateur V2 est foireux) — exception à la règle « V2 =
+    oracle », conception V3 native. Vaut pour toute évolution future du moteur
+    (l'outil est PUBLIC depuis le 25/08, item de portage soldé — cf. DONE).
+
+  - **Warnings Turbopack au build (« overly broad patterns » sur guides.ts,
+    « unexpected file in NFT list ») : BÉNINS, mesurés le 26/07.** Le scan FS des
+    guides fait tracer tout le projet → ~16 Mo embarqués à tort dans l'image
+    (src 11 Mo + datagen 3 Mo + docs 1,4 Mo), négligeable vs les 1,6 Go du
+    `.next` légitime (1584 pages SSG). Le runtime, lui, est garanti par
+    `outputFileTracingIncludes`. Si le temps de build ou l'image dérivent un
+    jour : annotations `/*turbopackIgnore: true*/` sur les `resolve()` de
+    guides.ts (sans risque, l'inclusion étant déclarée à la main).
+
+  - **Assets d'événement : rien à pousser à la main.** La collecte
+    (`datagen/assets/manifest.ts`, PAS `collect.ts` qui n'indexe que les sprites du
+    jeu) est DATA-DRIVEN sur le curé : ajouter un événement en admin suffit, il n'y a
+    aucune liste d'assets à tenir. `pnpm images` enchaîne collect + audio +
+    wallpapers + comics + push — ce n'est pas une commande « événements », elle
+    pousse TOUT ce qui est en attente.
+  - **Guide porté → son boss doit exister** : chaque `meta.bossId` d'un guide doit
+    être dans `monsters.json`, sinon le rendu JETTE. Extraction à la demande
+    (`pnpm datagen:extract-entity`).
+  - **Jointure guide↔saison** : par le monstre réellement combattu
+    (`meta.bossId` ↔ `season.monsters`), JAMAIS par la colonne `boss` (id
+    canonique d'affichage). Gravée dans `content-schedule.test.ts`.
+  - `battleEnd` ≠ `end` : un boss peut être « en saison » sans être combattable.
+  - Le statut « en cours » se calcule CÔTÉ CLIENT (`SeasonBadge`) — pages ISR 24 h.
+  - Tours : `waves` = formations successives ; `encounters` = pools alternatifs
+    (very hard) — ne jamais confondre.
+  - Sécurité vérifiée saine à l'audit 17/07 (ne pas re-auditer sans raison) :
+    routes admin doublement gardées (`.dev.*` hors build prod + `IS_DEV`),
+    `/api/revalidate` en Bearer temps constant sans dégradation, anti-path-
+    traversal correct sur `images/[...path]`, `.env.local` ignoré et non tracké,
+    aucun secret committé/loggé, `.dockerignore` exclut `.env*`.
+  - **Frontière `admin/`** : le chemin ne garantit rien, 6 modules shippent en prod
+    (liste blanche BLOQUANTE `ADMIN_SHIPS_TO_PROD` dans `eslint.config.mjs`, audit
+    F2). Les dossiers de briques `components/admin/editorial/` et
+    `premium-limited/` ne peuvent pas importer de secret : c'est vérifié par eslint,
+    pas par convention.
+
 - **Contrôles après mise en ligne** : chips au toucher (G4) et sélecteur
   d'étage du calculateur validés par Sevih, sur téléphone et à l'écran.
   `scripts/seo-lengths.ts` rejoué sur le site servi : 574 pages, 67 avec

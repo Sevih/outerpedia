@@ -1,28 +1,14 @@
 # TODO
 
-> Le « à faire » uniquement — le « fait » migre dans [DONE.md](./DONE.md)
-> (décision Sevih 2026-07-17) ; une section vidée est retirée, son bilan vit
-> là-bas.
-> État de référence : **04/10/2026**. Les constats Haute et Moyenne des audits
-> ([audit/](./audit/README.md)) sont soldés, hors ce qui figure ci-dessous ;
-> les Basse (G26–G52, P6–P10) se traitent en passant sur les fichiers, les
-> rapports font foi. 59 items ont été délégués à des agents entre le 25/09 et
-> le 04/10 (table des commits,
-> leçons et préambule réutilisable dans
-> [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste est du
-> SEO non urgent, un chantier portraits et un test à jouer au prochain patch.
+> Le « à faire » uniquement. Le « fait », son contexte et les notes vont dans
+> [DONE.md](./DONE.md) ; une section vidée est retirée.
 
 ---
 
-## 🔎 SEO — titres et descriptions (mesure du 04/10 sur le site servi, non urgent)
+## 🔎 SEO — titres et descriptions (non urgent)
 
-> Mesuré par `scripts/seo-lengths.ts` sur l'hôte anglais EN LIGNE, après le
-> lot A28 : 574 pages du sitemap, 67 avec un écart (179 avant) ; aucun titre
-> ni description absent, aucun doublon exact. Bornes : titre 30 à 60
-> caractères, description 70 à 160. Rapport, avec les dix pires par type de
-> page : `docs/seo&audit/titres-descriptions-outerpedia.com-2026-10-04.md`
-> (dossier hors git, se régénère par `pnpm exec tsx scripts/seo-lengths.ts`).
-> Les cinq autres langues ont les mêmes gabarits et se mesurent par `--host`.
+> Mesure : `pnpm exec tsx scripts/seo-lengths.ts` (bornes : titre 30 à 60
+> caractères, description 70 à 160). Rapport dans `docs/seo&audit/`.
 
 - [ ] **Titres encore au-delà de 60 SANS le suffixe (7 pages, 61 à 64)** — À
       TRANCHER. Le nom et le gabarit débordent à eux seuls, « | Outerpedia »
@@ -67,8 +53,7 @@
 
 ## 🎴 Portraits animés
 
-> Audit du 03/10 ([audit/portrait-fx.md](./audit/portrait-fx.md)) : P1 à P5
-> corrigés, validés à l'écran et en ligne le 04/10.
+> Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
 
 - [ ] **Un contexte WebGL partagé par toutes les cartes** — le chantier de
       fond que l'audit désigne : chaque carte monte aujourd'hui son contexte
@@ -82,48 +67,3 @@
       joué sans tirer les données du jeu. Test manuel décrit dans l'entrée
       DONE du lot F7 (03/10) — un run à blanc ne doit plus laisser
       d'artefact damage bâti sur le `skills.json` d'avant le patch.
-
----
-
-## 📌 Notes de référence (à ne pas perdre)
-
-- **Damage calculator : SURTOUT NE PAS se baser sur la V2** (décision Sevih
-  22/07 : le calculateur V2 est foireux) — exception à la règle « V2 =
-  oracle », conception V3 native. Vaut pour toute évolution future du moteur
-  (l'outil est PUBLIC depuis le 25/08, item de portage soldé — cf. DONE).
-
-- **Warnings Turbopack au build (« overly broad patterns » sur guides.ts,
-  « unexpected file in NFT list ») : BÉNINS, mesurés le 26/07.** Le scan FS des
-  guides fait tracer tout le projet → ~16 Mo embarqués à tort dans l'image
-  (src 11 Mo + datagen 3 Mo + docs 1,4 Mo), négligeable vs les 1,6 Go du
-  `.next` légitime (1584 pages SSG). Le runtime, lui, est garanti par
-  `outputFileTracingIncludes`. Si le temps de build ou l'image dérivent un
-  jour : annotations `/*turbopackIgnore: true*/` sur les `resolve()` de
-  guides.ts (sans risque, l'inclusion étant déclarée à la main).
-
-- **Assets d'événement : rien à pousser à la main.** La collecte
-  (`datagen/assets/manifest.ts`, PAS `collect.ts` qui n'indexe que les sprites du
-  jeu) est DATA-DRIVEN sur le curé : ajouter un événement en admin suffit, il n'y a
-  aucune liste d'assets à tenir. `pnpm images` enchaîne collect + audio +
-  wallpapers + comics + push — ce n'est pas une commande « événements », elle
-  pousse TOUT ce qui est en attente.
-- **Guide porté → son boss doit exister** : chaque `meta.bossId` d'un guide doit
-  être dans `monsters.json`, sinon le rendu JETTE. Extraction à la demande
-  (`pnpm datagen:extract-entity`).
-- **Jointure guide↔saison** : par le monstre réellement combattu
-  (`meta.bossId` ↔ `season.monsters`), JAMAIS par la colonne `boss` (id
-  canonique d'affichage). Gravée dans `content-schedule.test.ts`.
-- `battleEnd` ≠ `end` : un boss peut être « en saison » sans être combattable.
-- Le statut « en cours » se calcule CÔTÉ CLIENT (`SeasonBadge`) — pages ISR 24 h.
-- Tours : `waves` = formations successives ; `encounters` = pools alternatifs
-  (very hard) — ne jamais confondre.
-- Sécurité vérifiée saine à l'audit 17/07 (ne pas re-auditer sans raison) :
-  routes admin doublement gardées (`.dev.*` hors build prod + `IS_DEV`),
-  `/api/revalidate` en Bearer temps constant sans dégradation, anti-path-
-  traversal correct sur `images/[...path]`, `.env.local` ignoré et non tracké,
-  aucun secret committé/loggé, `.dockerignore` exclut `.env*`.
-- **Frontière `admin/`** : le chemin ne garantit rien, 6 modules shippent en prod
-  (liste blanche BLOQUANTE `ADMIN_SHIPS_TO_PROD` dans `eslint.config.mjs`, audit
-  F2). Les dossiers de briques `components/admin/editorial/` et
-  `premium-limited/` ne peuvent pas importer de secret : c'est vérifié par eslint,
-  pas par convention.
