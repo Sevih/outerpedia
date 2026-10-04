@@ -7,18 +7,19 @@
 
 ## 🔎 SEO — les cinq autres langues
 
-> L'anglais est dans les bornes (lots A28, A29, B16, cf. DONE). Les autres
-> hôtes n'ont jamais été mesurés sur le site servi.
+> Mesuré le 04/10 sur les cinq hôtes servis (574 pages chacun, rapports dans
+> `docs/seo&audit/`). Deux lots écrits, l'un après l'autre : B17 puis B18.
 
-- [ ] **Mesurer `fr`, `es`, `jp`, `kr`, `zh`** une fois A29 et B16 en ligne :
-      `pnpm exec tsx scripts/seo-lengths.ts --host https://fr.outerpedia.com`
-      (et les quatre autres). Déjà connu, relevé le 04/10 dans les `meta.json`
-      des guides que B16 n'a pas touchés (leur anglais était bon) :
-      descriptions au-delà de 160 en `es` (43 guides) et `fr` (25), surtout
-      `adventure` ; au-delà de 80 en `kr` (25) et `jp` (9) — borne à 80 parce
-      que ces caractères sont deux fois plus larges, c'est un choix, pas une
-      règle du jeu. Les titres par langue sont inconnus tant que la mesure
-      n'est pas faite.
+- [ ] **Mesure en largeur pour `jp`, `kr`, `zh` (lot B17)** : le script les
+      classe presque toutes « trop courtes » (522, 496, 570 pages) parce qu'il
+      compte des caractères, alors qu'un caractère large occupe deux fois la
+      place d'une lettre. Faux problème tant que la mesure n'est pas refaite
+      en largeur ; la règle « | Outerpedia saute quand le titre déborde »
+      suit la même mesure.
+- [ ] **Textes hors bornes (lot B18)** : `fr` 22 titres au-delà de 60 et 46
+      descriptions au-delà de 160 ; `es` 12 titres et 65 descriptions ; `jp`,
+      `kr`, `zh` selon ce que B17 laisse. Guides (`meta.json`), pages à un
+      segment et catégories (locales), gabarits des fiches.
 
 ## 🎴 Portraits animés
 
