@@ -600,6 +600,7 @@ const en = {
   'tools.damage-calculator.target.dungeon': 'Dungeon',
   'tools.damage-calculator.target.stage': 'Stage',
   'tools.damage-calculator.target.rank': 'Rank',
+  'tools.damage-calculator.target.floor': 'Floor',
   'tools.damage-calculator.target.fight': 'Fight {n}',
   'tools.damage-calculator.target.boss_flag': 'Boss',
   'tools.damage-calculator.target.break_flag': 'Target broken (weakness gauge destroyed)',

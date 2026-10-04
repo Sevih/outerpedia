@@ -740,6 +740,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       const grStage = isGrBoss
         ? Number(/^stage_(\d+)$/.exec(ref.difficulty?.key ?? '')?.[1] ?? 0)
         : 0;
+      // TOUR : le même monstre revient d'un étage à l'autre — une LIGNE par
+      // monstre (dans son mode, et son élément pour les tours élémentaires),
+      // le sélecteur du panneau cible choisit l'étage (Sevih 04/10/2026).
+      const towerFloor = ref.mode.startsWith('tower') && ref.floor != null ? ref.floor : undefined;
       const spawnCtxs = encounterSpawnContexts(e, mon, lang, { overgrade: true });
       // Échelle par RANGS (world boss, Singularité… — paliers de dégâts
       // cumulés) vs par STAGES : le libellé du sélecteur du panneau cible
@@ -759,8 +763,10 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // templeté via `s.stage` des contextes d'overgrade).
         const label = isGrBoss
           ? t('guides.difficulty.stage', { n: String(s.stage ?? grStage) })
-          : (s.stageLabel ??
-            (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''));
+          : towerFloor != null
+            ? floorTpl.replace('{n}', String(towerFloor)) + (i ? ` #${i + 1}` : '')
+            : (s.stageLabel ??
+              (s.rank ? `Rank ${s.rank}` : s.stage ? `#${s.stage}` : i ? `#${i + 1}` : ''));
         const stats: DcSpawn['stats'] = presetSpawnStats(monster, s);
         return { ...(label ? { label } : {}), level: s.level, stats };
       });
@@ -811,6 +817,13 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
         // d'une même ligne en une carte, le sélecteur de stage bascule d'une
         // entrée à l'autre.
         ...(isGrBoss && ref.group ? { line: ref.group, stage: grStage } : {}),
+        ...(towerFloor != null
+          ? {
+              line: `${ref.mode}:${ref.element ?? ''}:${mon.id}`,
+              stage: towerFloor,
+              floors: true,
+            }
+          : {}),
         ...(ranked ? { ranked: true } : {}),
         ...(monsterHasRage(mon.id) ? { hasRage: true } : {}),
         ...(passives.length ? { passives } : {}),
@@ -978,6 +991,7 @@ export default async function DamageCalculator({ lang }: { lang: Lang }) {
       lv: t(k('target.lv_prefix')),
       stage: t(k('target.stage')),
       rank: t(k('target.rank')),
+      floor: t(k('target.floor')),
       fight: t(k('target.fight')),
       bossFlag: t(k('target.boss_flag')),
       breakFlag: t(k('target.break_flag')),

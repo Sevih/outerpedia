@@ -106,23 +106,14 @@
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
 Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
-Les Basse (P6–P10 ; P5 est partie avec P1) et la dette se traitent en passant
-sur les fichiers.
+P1, P3, P4 et P5 sont corrigés et validés à l'écran (04/10, cf. DONE). Les
+Basse (P6–P10) et la dette se traitent en passant sur les fichiers.
 
-- [ ] Éviction et remontage dans la même image (P1, et P5 au passage — lot
-      F8) : CORRIGÉ le 04/10 (cf. DONE), à contrôler sur Chrome ET Firefox —
-      le scénario est dans l'entrée DONE.
 - [ ] 18 Mo de textures GPU par carte `_Demi` (P2, lot F9) : plafond à 512
-      PRÉPARÉ le 04/10 (cf. DONE), rien n'est encore réduit. Reste à Sevih :
-      comparer sur `/dev/AnimatedPortrait#plafond`, puis
-      `pnpm datagen:portrait-fx` et `pnpm images`. Le correctif de fond — un
-      contexte partagé pour toutes les cartes — reste un chantier, il
-      emporterait P6.
-- [ ] Graines des particules (P3, lot F10) : CORRIGÉ le 04/10 (cf. DONE) —
-      l'étoile et son halo partagent leur graine au montage. Reste à Sevih :
-      comparer Dianne, Ame et Skadi à une capture du jeu sur
-      `/dev/AnimatedPortrait` (étoile et halo synchrones) ; le doute sur
-      `randomSeed = 0` est dans l'entrée DONE.
+      prêt, rendu validé par Sevih le 04/10 sur la page de contrôle. Reste à
+      lancer : `pnpm datagen:portrait-fx`, puis `pnpm images`. Le correctif de
+      fond — un contexte partagé pour toutes les cartes — reste un chantier,
+      il emporterait P6.
 
 ---
 

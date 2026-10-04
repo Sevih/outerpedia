@@ -605,6 +605,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.dungeon': 'Dungeon',
   'tools.damage-calculator.target.stage': 'Stage',
   'tools.damage-calculator.target.rank': 'Rang',
+  'tools.damage-calculator.target.floor': 'Étage',
   'tools.damage-calculator.target.fight': 'Combat {n}',
   'tools.damage-calculator.target.boss_flag': 'Boss',
   'tools.damage-calculator.target.break_flag': 'Cible en break (jauge détruite)',

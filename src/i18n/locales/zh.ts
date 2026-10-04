@@ -568,6 +568,7 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.dungeon': '副本',
   'tools.damage-calculator.target.stage': '关卡',
   'tools.damage-calculator.target.rank': '等级',
+  'tools.damage-calculator.target.floor': '层',
   'tools.damage-calculator.target.fight': '战斗 {n}',
   'tools.damage-calculator.target.boss_flag': '首领',
   'tools.damage-calculator.target.break_flag': '目标处于击破状态（弱点槽已破坏）',

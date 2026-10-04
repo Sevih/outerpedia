@@ -196,12 +196,19 @@ export interface DcTarget {
    * monstre) distinct, mais c'est LE MÊME combat — le picker replie la ligne
    * en une carte et le panneau cible propose un sélecteur de stage qui
    * bascule d'une entrée à l'autre (Sevih 17/08/2026, comme la Singularité).
+   * Les TOURS ont aussi leur ligne, par monstre : le même boss revient d'un
+   * étage à l'autre (very hard : 21 monstres pour 171 apparitions), une carte
+   * par monstre et le sélecteur choisit l'étage (cf. `floors`).
    * Le dernier stage du main boss porte en plus les stages d'overgrade dans
    * ses `spawns` (jusqu'au grade 100, borne du jeu).
    */
   line?: string;
-  /** N° de stage templeté de l'entrée dans sa ligne (guild raid). */
+  /** N° de stage templeté de l'entrée dans sa ligne (guild raid), ou n°
+   *  d'ÉTAGE (ligne de tour) — c'est l'ordre du sélecteur. */
   stage?: number;
+  /** La ligne est celle d'une TOUR : un monstre replié sur ses étages (mode →
+   *  monstre → étage, Sevih 04/10/2026) — le sélecteur titre « Floor ». */
+  floors?: boolean;
   /** Échelle par RANGS (world boss, Singularité — paliers de dégâts cumulés
    *  PENDANT le combat) : le sélecteur du panneau titre « Rank », pas
    *  « Stage ». */
@@ -312,6 +319,8 @@ export interface DcLabels {
     stage: string;
     /** Titre du sélecteur des échelles par RANGS (world boss, Singularité). */
     rank: string;
+    /** Titre du sélecteur d'une ligne de TOUR (un monstre, ses étages). */
+    floor: string;
     fight: string;
     bossFlag: string;
     breakFlag: string;

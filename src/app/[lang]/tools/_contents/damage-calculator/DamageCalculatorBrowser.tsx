@@ -1267,14 +1267,15 @@ export function DamageCalculatorBrowser({
                   {target && (
                     <>
                       {target.line ? (
-                        // LIGNE de guild raid : un seul sélecteur de stage qui
+                        // LIGNE (guild raid, ou monstre de tour replié sur ses
+                        // étages) : un seul sélecteur de stage qui
                         // traverse les entrées de la ligne (chaque stage est
                         // un donjon/monstre distinct → bascule de targetId) et
                         // finit sur les stages d'OVERGRADE (spawns du dernier
                         // stage templeté du main boss → bascule de spawnIdx).
                         <label className="block space-y-1">
                           <span className="text-content-subtle font-mono text-[9px] tracking-wide uppercase">
-                            {L.target.stage}
+                            {target.floors ? L.target.floor : L.target.stage}
                           </span>
                           <select
                             value={`${target.id}|${spawnIdx}`}

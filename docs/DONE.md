@@ -7,6 +7,25 @@
 
 ## 2026-10-04
 
+- **Calculateur de dégâts : une carte par monstre de tour, l'étage se choisit
+  ensuite** (Fable, relevé par Sevih au contrôle des lots). Le picker de cible
+  listait un monstre de tour autant de fois qu'il a d'étages : en very hard,
+  171 entrées pour 21 monstres (chaque étage tire dans un pool commun), 169
+  pour 100 en tour normale. Sevih : « mode → monstre → étage, un peu comme les
+  special request ». Le mécanisme existait pour le guild raid (`DcTarget.line` :
+  le picker replie une ligne en une carte, le panneau cible porte le
+  sélecteur) ; `index.tsx` donne maintenant une ligne à chaque monstre de tour
+  (`<mode>:<élément>:<id>`, ordonnée par `floor`), ses spawns sont étiquetés
+  « Floor N » et le sélecteur titre « Floor » (`floors`, clé
+  `tools.damage-calculator.target.floor` dans les six langues). Les ids de
+  cible ne changent pas, donc les scénarios sauvegardés non plus. Vérifié sur
+  la page servie en local : very hard 21 cartes, tour 100, hard 45,
+  élémentaires 59 à 94 ; `40103001` porte les étages 1, 2, 4, 6, 7, 9, 11,
+  12, 14, 16, 17, 19. `pnpm typecheck`, `pnpm lint`, `pnpm test` (2 191)
+  verts. Pas regardé à l'écran.
+- **Contrôles de Sevih sur la série** : outils découpés, roadmaps, pull
+  simulator et portraits animés validés à l'écran ; le plafond des textures
+  (F9) accepté, l'extraction reste à lancer.
 - **Relecture de F9, F10 et A28 : les 59 lots sont faits** (Fable). Contrôles
   verts (181 fichiers, 2 191 tests), aucun lot ne touche `package.json`.
   A28 : la règle tient dans `createPageMetadata` ; 115 titres trop longs

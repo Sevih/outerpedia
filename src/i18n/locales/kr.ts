@@ -577,6 +577,7 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.dungeon': '던전',
   'tools.damage-calculator.target.stage': '스테이지',
   'tools.damage-calculator.target.rank': '랭크',
+  'tools.damage-calculator.target.floor': '층',
   'tools.damage-calculator.target.fight': '전투 {n}',
   'tools.damage-calculator.target.boss_flag': '보스',
   'tools.damage-calculator.target.break_flag': '대상 브레이크 상태(약점 게이지 파괴)',

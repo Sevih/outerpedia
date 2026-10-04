@@ -601,6 +601,7 @@ const es: Record<TranslationKey, string> = {
   'tools.damage-calculator.target.dungeon': 'Calabozo',
   'tools.damage-calculator.target.stage': 'Fase',
   'tools.damage-calculator.target.rank': 'Rango',
+  'tools.damage-calculator.target.floor': 'Piso',
   'tools.damage-calculator.target.fight': 'Combate {n}',
   'tools.damage-calculator.target.boss_flag': 'Jefe',
   'tools.damage-calculator.target.break_flag':
