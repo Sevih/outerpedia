@@ -2,7 +2,7 @@
  * quick — le petit outil de tous les jours (`pnpm quick`, ou l'icône du bureau).
  *
  * Un serveur HTTP local de quelques routes et UNE page : mettre à jour un code
- * promo, déposer une 4-comic, ajouter une vidéo. Rien d'autre. Le panneau admin
+ * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs. Rien d'autre. Le panneau admin
  * complet reste la référence pour tout le reste — il exige `pnpm dev`, donc un
  * `clean:all` et un refresh complet des données du jeu, ce qui n'a aucun sens
  * pour changer quatre lignes de JSON.
@@ -29,12 +29,15 @@ import {
   addVideo,
   currentCoupons,
   parseTarget,
+  rankState,
   rewardOptions,
   saveCouponList,
+  saveRanks,
   searchRewards,
   searchVideos,
   videoTargets,
   type ComicUpload,
+  type RankChange,
   type Report,
 } from './actions';
 import { COMIC_LANGS } from '@datagen/generators/comics';
@@ -69,7 +72,7 @@ const json = (res: ServerResponse, data: unknown, status = 200): void => {
  * Réponse en NDJSON — une ligne JSON par étape, ÉCRITE DÈS QU'ELLE ARRIVE, puis
  * une dernière ligne `{ done: … }` qui porte le résultat complet.
  *
- * Les trois gestes prennent des dizaines de secondes (conversion webp, deux
+ * Les gestes prennent des dizaines de secondes (conversion webp, deux
  * poussées R2, purge d'edge, push git) et leur journal existait déjà — mais
  * rendu en BLOC au retour, il ne s'affichait qu'une fois tout fini. L'onglet
  * montrait donc un texte figé pendant deux minutes, sans rien qui distingue une
@@ -156,6 +159,19 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const parsed = parseTarget(target);
     if (!parsed) return json(res, { ok: false, log: [`Cible inconnue : ${target}`] }, 400);
     await stream(res, (report) => addVideo(parsed, input, label, report));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/ranks') {
+    // À part de `/api/state` : celui-ci attend R2 (les codes promo), et l'onglet
+    // se recharge après chaque enregistrement — le disque fait foi.
+    json(res, rankState());
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/ranks') {
+    const { changes } = await body<{ changes: RankChange[] }>(req);
+    await stream(res, (report) => saveRanks(changes, report));
     return;
   }
 

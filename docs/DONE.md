@@ -7,6 +7,85 @@
 
 ## 2026-10-04
 
+- **`pnpm quick` : un quatrième onglet « Rangs » pour les rangs et rôles des
+  persos et les rangs des EE** (lot B19, demande Sevih du 04/10). Régler un
+  rang demandait l'admin complet, donc `pnpm dev` et son refresh ; l'onglet
+  le fait depuis la page de tous les jours. Un tableau des 128 persos (nom,
+  élément, classe, rareté lus par `getCharacterListItems`) avec cinq menus par
+  ligne — rôle, PvE, PvP, EE base, EE +10, les deux derniers seulement si le
+  perso a un EE (`getEEViews`) — et une ligne dépliable par perso pour
+  `rankByTranscend` / `roleByTranscend` : un rang PvE et un rôle par palier
+  plein (3★, 4★, 5★, 6★), vide = palier non noté. La pastille de la ligne
+  repliée dit quelles tables portent quels paliers (« rang pve 3★ 4★ · rôle
+  6★ »), une clé héritée hors paliers pleins y figure et s'affiche en lecture
+  seule dans le dépliage. Recherche par nom, filtre par rang (avec le choix de
+  la colonne : PvE, PvP, EE base, EE +10, et « sans rang »), par rôle, « par
+  transcendance », « modifiés ». Rien ne s'écrit à la sélection : la cellule
+  est surlignée, le compteur de la barre (collée en haut au défilement) dit
+  combien, « Enregistrer » envoie le lot, « Annuler » le vide ; un choix
+  ramené à sa valeur d'origine n'est plus compté. Le tableau n'est redessiné
+  que quand un filtre change, sinon la ligne qu'on vient de régler sortirait
+  du filtre sous le curseur.
+  Le comment : la logique est `planRankChanges` (`scripts/quick/actions.ts`),
+  PURE — elle reçoit l'état du disque et le lot, rend les entrées complètes à
+  écrire et les cellules refusées. L'entrée existante est reprise, seuls
+  `rank`, `rankPvp`, `role` et les deux tables bougent ; un champ ajouté prend
+  sa place dans l'ordre du fichier au lieu de tomber après `videos` (diff
+  d'une ligne). Côté EE le patch reprend `chipHide`/`chipAdd` du disque, parce
+  que `upsertEeCurated` attend l'état complet de ses quatre champs et les
+  effacerait. Une cellule dont le disque ne porte plus la valeur chargée par
+  la page est refusée et nommée dans le journal (« REFUSÉ — Dianne · PvE à
+  5★ : la page avait « S », le disque porte « A » »), un palier comptant pour
+  une cellule ; si le disque porte déjà la valeur voulue il n'y a rien à
+  faire ni à refuser. Valeur hors liste, palier non plein, perso inconnu, EE
+  absent : refusés aussi. `saveRanks` relit le disque, écrit par
+  `upsertCharacterCurated` et `upsertEeCurated` (jamais le JSON en direct),
+  puis `commitAndPush` sur les seuls fichiers touchés, message
+  `chore(tierlist): rangs et rôles — <trois noms> et N autres`. Un refus
+  n'arrête pas le lot : le reste part, le journal sort en rouge, la page relit
+  le disque et cercle les cellules refusées, qui montrent la valeur du disque.
+  Routes `GET` et `POST /api/ranks` dans `server.ts`, le POST par le même
+  `stream` NDJSON que les autres gestes ; l'état des rangs est à part de
+  `/api/state`, qui attend R2.
+  Les listes valides ont UNE source : `src/components/tierlist/tiers.ts` porte
+  désormais `EE_TIERS` (S→D), `CURATED_ROLES` et `CURATED_STEPS` à côté de
+  `TIERS`, et `CharacterCuratedEditor` comme `EeCuratedEditor` les importent
+  au lieu de tenir leur copie — mêmes valeurs, même ordre, aucun changement
+  d'écran dans l'admin (comparé liste par liste).
+  Vérification : `pnpm typecheck` (les trois `tsc --noEmit` — racine,
+  `datagen`, `scripts` — sortie 0, aucune erreur), `pnpm lint` (`eslint`,
+  sortie 0), `pnpm test` (`Test Files 182 passed (182)`,
+  `Tests 2251 passed (2251)`), dont les 22 cas de
+  `scripts/quick/actions.test.ts` : champs préservés, rang vidé, champ ajouté
+  à sa place, conflit refusé seul, valeur déjà sur disque, EE sans entrée et
+  perso sans EE, palier ajouté / changé / vidé, dernière clé retirée = champ
+  supprimé, clé héritée conservée, table non touchée intacte, disque non
+  muté. Serveur lancé SANS fenêtre sur un autre port (`QUICK_PORT=4799` et
+  `--no-open`) et lu en GET seulement : `/` rend
+  l'onglet, `/api/ranks` rend 128 lignes et les listes. Le script de la page a
+  été joué dans happy-dom contre un `fetch` simulé (sonde jetable, non
+  committée) : filtres comptés contre la donnée (25 S en PvE, 14 S en EE +10,
+  37 sans rang PvP, 26 sustain, 16 par transcendance), dépliage, surlignage,
+  compteur, refus cerclé, annulation. Aucun enregistrement réel, `data/curated/`
+  intact.
+  À jouer par Sevih : `pnpm quick`, onglet « Rangs », chercher un perso,
+  changer son rang PvE et le rang +10 de son EE (deux cellules surlignées,
+  « 2 cellules modifiées »), « Enregistrer » ; le journal doit lister les deux
+  lignes puis `git : chore(tierlist): rangs et rôles — <nom>` et « poussé »,
+  et `git show --stat` ne porter que `characters.json` et `equipment.json`,
+  une ligne chacun. Puis déplier un des 16 persos à pastille, vider un palier,
+  enregistrer : la clé doit partir de `rankByTranscend`, les autres rester.
+  Laissé : aucun vrai navigateur n'a rendu l'onglet (mise en page et barre
+  collante à regarder) ; les 128 persos ont tous un EE aujourd'hui, les deux
+  colonnes masquées ne sont donc couvertes que par le test ; un enregistrement
+  à moitié refusé répond `ok: false` alors que le reste est poussé — c'est
+  voulu, pour que le refus se voie. Hors périmètre, repéré : `build()` de
+  `CharacterCuratedEditor` reprend `prosCons` mais pas `synergies`, donc un
+  « Save » depuis la fiche admin d'un perso qui en porte les efface (lu dans
+  le code, non rejoué) ; `TierListBrowser` (`TRANSCEND_STEPS`) et
+  `TierListTool` (`ROLE_ORDER`) tiennent encore leur propre liste de paliers
+  et de rôles ; le `.desktop` posé par `quick:install` dit toujours « trois
+  gestes ».
 - **SEO clos : titres et descriptions mesurés sur les six hôtes servis**
   (Sevih a poussé, CI verte, mesure Fable par `scripts/seo-lengths.ts`, en
   largeur). 574 pages par hôte, aucune description au-delà de 160, aucun

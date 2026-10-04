@@ -1,8 +1,8 @@
 /**
- * quick/actions — les TROIS gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les QUATRE gestes du quotidien, sortis du panneau admin.
  *
- * Mettre à jour un code promo, déposer une 4-comic ou ajouter une vidéo ne
- * demandait jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
+ * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo ou régler
+ * un rang ne demandait jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
  * dans l'admin. Des minutes de pipeline de données pour changer quatre lignes
@@ -10,7 +10,7 @@
  *
  * Ce module ne RÉIMPLÉMENTE rien : il rappelle les mêmes stores que les routes
  * admin (`loadCouponsForEdit`/`saveCouponsLive`, `collectComics`, `upsertCharacterCurated`,
- * `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
+ * `upsertEeCurated`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
  * sont résolus par tsx via tsconfig.
  *
  * CE QUI PART EN PROD, ET COMMENT :
@@ -20,9 +20,10 @@
  *     `coupons.json` committé n'en est que l'instantané ;
  *   - 4-comics : la galerie lit le manifeste R2 à la requête (cf. le docblock de
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
- *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti.
+ *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
+ *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists).
  *
- * Les TROIS poussent quand même avec la CI (cf. `commitAndPush`) : R2 avance la
+ * Les QUATRE poussent quand même avec la CI (cf. `commitAndPush`) : R2 avance la
  * mise en ligne de la donnée vive, il ne dispense pas du déploiement — le site
  * bâti garde ses propres copies de tout ça.
  */
@@ -38,11 +39,23 @@ import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
+import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
+import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
 import { listGuides } from '@/lib/data/guides';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
+import { transcendenceLabel } from '@/lib/transcendence';
+import {
+  CURATED_ROLES,
+  CURATED_STEPS,
+  CURATED_STEP_RARITY,
+  EE_TIERS,
+  TIERS,
+} from '@/components/tierlist/tiers';
+import type { CharacterCurated } from '@contracts';
+import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { collectComics } from '@datagen/assets/collect-comics';
 import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
@@ -95,7 +108,7 @@ const EDITORIAL_COMICS = resolve('.editorial/comics');
  * Committe et pousse des chemins EXPLICITES (jamais `git add -A` : un dossier
  * entier embarquerait le travail en cours d'à côté — cf. CONVENTIONS.md).
  *
- * PAS de « [skip ci] », pour AUCUN des trois gestes (décision Sevih) : R2 met
+ * PAS de « [skip ci] », pour AUCUN des gestes (décision Sevih) : R2 met
  * bien la donnée vive en ligne sans build, mais le site DÉPLOYÉ en garde des
  * copies cuites — le repli committé des 4-comics, les pages qui lisent les
  * coupons au rendu. Sauter le build les laissait en retard jusqu'au prochain
@@ -404,4 +417,338 @@ export async function addVideo(
 
   const git = commitAndPush(touched, `feat(videos): ${meta.title}`, report);
   return { ok: git.ok, log: [...log, ...git.log] };
+}
+
+// ---------------------------------------------------------- rangs et rôles ---
+
+/**
+ * Les colonnes de l'onglet « Rangs ». Cinq valeurs simples par perso, et deux
+ * tables `palier → valeur` (PvE seulement) dont CHAQUE palier est une cellule.
+ */
+export const RANK_FIELDS = [
+  'rank',
+  'rankPvp',
+  'role',
+  'eeRank',
+  'eeRank10',
+  'rankByTranscend',
+  'roleByTranscend',
+] as const;
+export type RankField = (typeof RANK_FIELDS)[number];
+
+/** Ce que chaque colonne accepte — `''` (cellule vidée) en plus, partout. */
+const FIELD_VALUES: Record<RankField, readonly string[]> = {
+  rank: TIERS,
+  rankPvp: TIERS,
+  role: CURATED_ROLES,
+  eeRank: EE_TIERS,
+  eeRank10: EE_TIERS,
+  rankByTranscend: TIERS,
+  roleByTranscend: CURATED_ROLES,
+};
+
+/** Libellé d'une colonne dans le journal. */
+const FIELD_LABELS: Record<RankField, string> = {
+  rank: 'PvE',
+  rankPvp: 'PvP',
+  role: 'rôle',
+  eeRank: 'EE base',
+  eeRank10: 'EE +10',
+  rankByTranscend: 'PvE',
+  roleByTranscend: 'rôle',
+};
+
+const STEP_KEYS = CURATED_STEPS.map(String);
+const isTable = (f: RankField): f is 'rankByTranscend' | 'roleByTranscend' =>
+  f === 'rankByTranscend' || f === 'roleByTranscend';
+const isEe = (f: RankField): f is 'eeRank' | 'eeRank10' => f === 'eeRank' || f === 'eeRank10';
+
+/**
+ * Une cellule modifiée. `from` est la valeur que la page AVAIT CHARGÉE, `to`
+ * celle choisie ; `''` = cellule vide des deux côtés. `step` (clé `TransStar`)
+ * désigne le palier quand `field` est une des deux tables.
+ */
+export interface RankChange {
+  id: string;
+  field: RankField;
+  step?: string;
+  from: string;
+  to: string;
+}
+
+/** L'état du disque contre lequel un lot de changements s'applique. */
+export interface RankDisk {
+  /** `data/curated/characters.json`. */
+  curated: Record<string, CharacterCurated>;
+  /** Section `ee` de `data/curated/equipment.json` (clé = id de perso). */
+  ee: Record<string, EquipmentCuratedEntry>;
+  /** Ids des persos intégrés, et de ceux qui ont un EE. */
+  roster: ReadonlySet<string>;
+  eeOwners: ReadonlySet<string>;
+}
+
+export interface RankPlan {
+  /** Entrées COMPLÈTES à passer à `upsertCharacterCurated`. */
+  characters: Record<string, CharacterCurated>;
+  /** Patchs COMPLETS à passer à `upsertEeCurated` (chips reprises du disque). */
+  ee: Record<string, EeCuratedPatch>;
+  applied: RankChange[];
+  /** Cellules écartées, avec la raison dite à l'écran. */
+  refused: { change: RankChange; reason: string }[];
+}
+
+/**
+ * Ordre dans lequel une entrée curée range ses champs (celui du fichier). Un
+ * champ AJOUTÉ prend sa place au lieu de tomber en queue d'entrée, après les
+ * vidéos : le diff d'un rang PvP posé reste une ligne, là où on l'attend.
+ */
+const CURATED_ORDER = [
+  'rank',
+  'rankPvp',
+  'role',
+  'tags',
+  'skillPriority',
+  'rankByTranscend',
+  'roleByTranscend',
+];
+
+/** `entry` avec `key` posé (à sa place s'il est nouveau) ou retiré (`undefined`). */
+function withField(
+  entry: CharacterCurated,
+  key: keyof CharacterCurated,
+  value: string | Record<string, string> | undefined,
+): CharacterCurated {
+  const rest = Object.entries(entry).filter(([k]) => k !== key);
+  if (value === undefined) return Object.fromEntries(rest) as CharacterCurated;
+  if (key in entry) return { ...entry, [key]: value } as CharacterCurated;
+  const rankOf = (k: string): number => {
+    const i = CURATED_ORDER.indexOf(k);
+    return i < 0 ? CURATED_ORDER.length : i;
+  };
+  const at = rest.findIndex(([k]) => rankOf(k) > rankOf(key));
+  rest.splice(at < 0 ? rest.length : at, 0, [key, value]);
+  return Object.fromEntries(rest) as CharacterCurated;
+}
+
+/** Valeur d'une cellule sur le disque (`''` = vide). */
+function diskValue(disk: RankDisk, c: RankChange): string {
+  if (isEe(c.field)) return disk.ee[c.id]?.[c.field === 'eeRank' ? 'rank' : 'rank10'] ?? '';
+  const entry = disk.curated[c.id];
+  if (isTable(c.field)) return entry?.[c.field]?.[c.step ?? ''] ?? '';
+  return entry?.[c.field] ?? '';
+}
+
+/**
+ * Applique un lot de cellules modifiées à l'état du disque — PURE : rien n'est
+ * lu ni écrit ici, `saveRanks` s'en charge autour.
+ *
+ * Le contrat tient en trois règles :
+ *   - l'entrée EXISTANTE est reprise, seuls les champs réglés par l'onglet
+ *     bougent (`tags`, `skillPriority`, `videos`, `prosCons`, `synergies`, les
+ *     chips des EE… repartent tels quels) ;
+ *   - une cellule dont la valeur sur disque n'est plus `from` est REFUSÉE :
+ *     quelqu'un l'a changée depuis le chargement de la page, et l'écraser ferait
+ *     disparaître son réglage sans un mot. Si le disque porte déjà `to`, il n'y
+ *     a rien à faire ni à refuser ;
+ *   - les deux tables sont des ESCALIERS (cf. `atStep`) : un palier vidé retire
+ *     sa clé, la dernière clé retirée retire le champ, et une clé héritée hors
+ *     des paliers pleins n'est ni proposée ni touchée.
+ */
+export function planRankChanges(disk: RankDisk, changes: RankChange[]): RankPlan {
+  const plan: RankPlan = { characters: {}, ee: {}, applied: [], refused: [] };
+
+  for (const change of changes) {
+    const refuse = (reason: string): void => void plan.refused.push({ change, reason });
+    const { id, field, step, to } = change;
+
+    if (!RANK_FIELDS.includes(field)) {
+      refuse('colonne inconnue');
+      continue;
+    }
+    if (!disk.roster.has(id)) {
+      refuse('perso inconnu');
+      continue;
+    }
+    if (to !== '' && !FIELD_VALUES[field].includes(to)) {
+      refuse(`« ${to} » n'est pas une valeur de cette colonne`);
+      continue;
+    }
+    if (isTable(field) && !STEP_KEYS.includes(step ?? '')) {
+      refuse(`le palier « ${step ?? ''} » ne se cure pas`);
+      continue;
+    }
+    if (isEe(field) && !disk.eeOwners.has(id)) {
+      refuse("ce perso n'a pas d'EE");
+      continue;
+    }
+
+    const current = diskValue(disk, change);
+    if (current === to) continue;
+    if (current !== change.from) {
+      refuse(
+        `la page avait « ${change.from || 'vide'} », le disque porte « ${current || 'vide'} »`,
+      );
+      continue;
+    }
+
+    if (isEe(field)) {
+      const entry = disk.ee[id] ?? {};
+      // Le store prend l'état COMPLET de ses quatre champs : un patch sans les
+      // chips les effacerait. On repart donc de l'entrée du disque.
+      const patch = (plan.ee[id] ??= {
+        rank: entry.rank,
+        rank10: entry.rank10,
+        chipHide: entry.chipHide,
+        chipAdd: entry.chipAdd,
+      });
+      patch[field === 'eeRank' ? 'rank' : 'rank10'] = to;
+    } else {
+      const entry = plan.characters[id] ?? disk.curated[id] ?? {};
+      if (isTable(field)) {
+        const table = { ...entry[field] };
+        if (to) table[step!] = to;
+        else delete table[step!];
+        plan.characters[id] = withField(
+          entry,
+          field,
+          Object.keys(table).length ? table : undefined,
+        );
+      } else {
+        plan.characters[id] = withField(entry, field, to || undefined);
+      }
+    }
+    plan.applied.push(change);
+  }
+  return plan;
+}
+
+export interface RankRow {
+  id: string;
+  /** Nom COMPLET en anglais, comme la cible des vidéos (cf. `videoTargets`). */
+  name: string;
+  element: string;
+  class: string;
+  rarity: number;
+  hasEe: boolean;
+  rank: string;
+  rankPvp: string;
+  role: string;
+  eeRank: string;
+  eeRank10: string;
+  rankByTranscend: Record<string, string>;
+  roleByTranscend: Record<string, string>;
+}
+
+function rankDisk(): RankDisk {
+  return {
+    curated: loadCuratedCharacters(),
+    ee: loadEquipmentEditorial().ee,
+    roster: new Set(getCharacterListItems().map((c) => c.id)),
+    eeOwners: new Set(getEEViews().map((e) => e.characterId)),
+  };
+}
+
+/**
+ * L'onglet « Rangs » : tout le roster avec ses réglages, lus du disque à
+ * l'instant, et les listes que les menus proposent (celles de l'admin).
+ */
+export function rankState() {
+  const disk = rankDisk();
+  const rows: RankRow[] = getCharacterListItems().map((c) => {
+    const cu = disk.curated[c.id] ?? {};
+    const ee = disk.ee[c.id] ?? {};
+    return {
+      id: c.id,
+      name: characterDisplayName(c),
+      element: c.element,
+      class: c.class,
+      rarity: c.rarity,
+      hasEe: disk.eeOwners.has(c.id),
+      rank: cu.rank ?? '',
+      rankPvp: cu.rankPvp ?? '',
+      role: cu.role ?? '',
+      eeRank: ee.rank ?? '',
+      eeRank10: ee.rank10 ?? '',
+      rankByTranscend: cu.rankByTranscend ?? {},
+      roleByTranscend: cu.roleByTranscend ?? {},
+    };
+  });
+  return {
+    rows,
+    tiers: TIERS,
+    eeTiers: EE_TIERS,
+    roles: CURATED_ROLES,
+    steps: STEP_KEYS.map((key) => ({
+      key,
+      label: transcendenceLabel(CURATED_STEP_RARITY, Number(key)),
+    })),
+  };
+}
+
+/**
+ * Enregistre un lot de cellules : relecture du disque, plan (`planRankChanges`),
+ * écriture par les DEUX stores de l'admin, puis un seul commit poussé sur les
+ * fichiers réellement touchés.
+ *
+ * Une cellule refusée n'arrête pas le lot : les autres partent, et `refused`
+ * dit à la page lesquelles marquer. Un lot où rien ne passe n'écrit ni ne
+ * committe rien.
+ */
+export async function saveRanks(
+  changes: RankChange[],
+  report?: Report,
+): Promise<Outcome & { refused: Pick<RankChange, 'id' | 'field' | 'step'>[] }> {
+  if (!Array.isArray(changes) || !changes.length)
+    return { ok: false, log: ['Aucune modification à enregistrer.'], refused: [] };
+
+  const j = journal(report);
+  const log = j.lines;
+  const names = new Map(getCharacterListItems().map((c) => [c.id, characterDisplayName(c)]));
+  const cell = (c: RankChange): string => {
+    const step = isTable(c.field)
+      ? ` à ${transcendenceLabel(CURATED_STEP_RARITY, Number(c.step))}`
+      : '';
+    return `${names.get(c.id) ?? c.id} · ${FIELD_LABELS[c.field] ?? c.field}${step}`;
+  };
+
+  const plan = planRankChanges(rankDisk(), changes);
+  const refused = plan.refused.map(({ change }) => change);
+  for (const r of plan.refused) j.done(`REFUSÉ — ${cell(r.change)} : ${r.reason}.`);
+
+  const touched = new Set<string>();
+  const failed = new Set<string>();
+  for (const [id, entry] of Object.entries(plan.characters)) {
+    const errors = await upsertCharacterCurated(id, entry);
+    if (errors.length) {
+      failed.add(id);
+      for (const e of errors) j.done(`REFUSÉ — ${names.get(id) ?? id} : ${e}`);
+    } else touched.add('data/curated/characters.json');
+  }
+  for (const [id, patch] of Object.entries(plan.ee)) {
+    const errors = await upsertEeCurated(id, patch);
+    if (errors.length) {
+      // L'EE et le perso sont deux fichiers : seul le côté fautif est écarté.
+      failed.add(`ee:${id}`);
+      for (const e of errors) j.done(`REFUSÉ — EE de ${names.get(id) ?? id} : ${e}`);
+    } else touched.add('data/curated/equipment.json');
+  }
+
+  const lost = (c: RankChange): boolean => failed.has(isEe(c.field) ? `ee:${c.id}` : c.id);
+  const written = plan.applied.filter((c) => !lost(c));
+  refused.push(...plan.applied.filter(lost));
+  for (const c of written) j.done(`${cell(c)} : ${c.from || 'vide'} → ${c.to || 'vide'}`);
+
+  const keys = refused.map(({ id, field, step }) => ({ id, field, step }));
+  if (!touched.size)
+    return refused.length
+      ? { ok: false, log: [...log, 'Rien à enregistrer.'], refused: keys }
+      : { ok: true, log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'], refused: [] };
+
+  const who = [...new Set(written.map((c) => names.get(c.id) ?? c.id))];
+  const git = commitAndPush(
+    [...touched],
+    `chore(tierlist): rangs et rôles — ${who.slice(0, 3).join(', ')}${who.length > 3 ? ` et ${who.length - 3} autres` : ''}`,
+    report,
+  );
+  return { ok: git.ok && !refused.length, log: [...log, ...git.log], refused: keys };
 }

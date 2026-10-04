@@ -5,11 +5,18 @@ import type { CharacterCurated, CuratedRole, SkillPriority, VideoRef } from '@co
 import { postJson } from '@/lib/admin/post-json';
 import { rowKey } from '@/lib/admin/keyed';
 import { VideoCurator } from './VideoCurator';
-import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
+import { transcendenceLabel } from '@/lib/transcendence';
+import {
+  CURATED_ROLES,
+  CURATED_STEPS,
+  CURATED_STEP_RARITY,
+  TIERS,
+} from '@/components/tierlist/tiers';
 import { field, label } from './_ui';
 
-const ROLES: Array<'' | CuratedRole> = ['', 'dps', 'support', 'sustain'];
-const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
+// Listes partagées avec l'onglet « Rangs » de `pnpm quick` (cf. `tiers.ts`).
+const ROLES: Array<'' | CuratedRole> = ['', ...CURATED_ROLES];
+const RANKS: string[] = ['', ...TIERS];
 /**
  * LES PALIERS SÉLECTIONNABLES — les vrais (`TransStar`), lus dans la table du jeu.
  *
@@ -24,8 +31,8 @@ const RANKS = ['', 'S', 'A', 'B', 'C', 'D', 'E'];
  * cette liste reste éditable et enregistrable — l'option de repli plus bas — et
  * `atStep` la respecte côté rendu.
  */
-const STAR_RARITY = 3;
-const STARS = transcendenceFullSteps(STAR_RARITY).map(String);
+const STAR_RARITY = CURATED_STEP_RARITY;
+const STARS = CURATED_STEPS.map(String);
 /**
  * Tags ÉDITABLES ici = les tags HUMAINS. Il n'y en a qu'un.
  *
