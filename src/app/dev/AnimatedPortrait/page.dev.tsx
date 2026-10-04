@@ -13,6 +13,8 @@
  *
  * Composant SERVEUR — la table est lue directement ; seul le canvas est client.
  */
+import Link from 'next/link';
+import type { Route } from 'next';
 import { AnimatedPortrait } from '@/components/character/AnimatedPortrait';
 import { Portrait } from '@/components/character/Portrait';
 import { PORTRAIT_FX } from '@/components/character/portrait-fx';
@@ -179,6 +181,55 @@ const SIZES = [
 ];
 
 /**
+ * LE PLAFOND DE TAILLE DES TEXTURES — le miroir, côté page, de `DEFAULT_MAX_SIZE`
+ * d'`extract-portrait-fx.py`. La page ne réduit rien : elle SIMULE le plafond
+ * sur les fichiers servis (`fxTexCap`), pour qu'on juge la fidélité avant de
+ * rejouer l'extraction. `?cap=` essaie une autre valeur.
+ */
+const TEX_CAP = 512;
+const TEX_CAPS = [256, 512, 1024];
+
+/** Mo de GPU d'une texture montée en RGBA 8 bits ; une chaîne de mips ajoute un tiers. */
+const gpuMb = (w: number, h: number, mips: number) =>
+  (w * h * 4 * (mips > 1 ? 4 / 3 : 1)) / 2 ** 20;
+
+/** Les textures qu'un effet monte : tous les slots des matériaux de ses émetteurs. */
+function texturesOf(fx: string): Set<string> {
+  const out = new Set<string>();
+  for (const e of PORTRAIT_FX.effects[fx]?.emitters ?? []) {
+    const m = e.material ? PORTRAIT_FX.materials[e.material] : undefined;
+    for (const slot of Object.values(m?.textures ?? {})) out.add(slot.tex);
+  }
+  return out;
+}
+
+/**
+ * Les textures SERVIES au-dessus du plafond, la plus chère d'abord, chacune avec
+ * ce que le plafond en ferait (moitiés successives, comme l'extraction) et un
+ * porteur pour la montrer. Vide une fois l'extraction rejouée : la table porte
+ * alors les tailles réduites, et il n'y a plus rien à comparer.
+ */
+function overCap(cap: number) {
+  return Object.entries(PORTRAIT_FX.textures)
+    .filter(([, t]) => Math.max(t.w, t.h) > cap)
+    .map(([tex, t]) => {
+      const div = 2 ** Math.ceil(Math.log2(Math.max(t.w, t.h) / cap));
+      const fxs = SERVED.filter((fx) => texturesOf(fx).has(tex));
+      return {
+        tex,
+        from: `${t.w}×${t.h}`,
+        to: `${Math.ceil(t.w / div)}×${Math.ceil(t.h / div)}`,
+        mbFrom: gpuMb(t.w, t.h, t.mips),
+        mbTo: gpuMb(Math.ceil(t.w / div), Math.ceil(t.h / div), t.mips),
+        fxs,
+        carriers: CARRIERS.filter((c) => fxs.includes(c.fx)).length,
+        subject: fxs.map((fx) => CARRIERS.find((c) => c.fx === fx && c.char)?.char).find(Boolean),
+      };
+    })
+    .sort((a, b) => b.mbFrom - a.mbFrom);
+}
+
+/**
  * Ce que le désassemblage et les prefabs tranchent, et qu'aucun rendu ne montre.
  * Gardé sur la page parce que ce sont les affirmations les plus faciles à
  * contredire d'un coup d'œil au jeu — donc celles qui méritent d'être exposées.
@@ -268,7 +319,15 @@ function Figure({ label, children }: { label: string; children: React.ReactNode 
   );
 }
 
-export default function DevAnimatedPortrait() {
+export default async function DevAnimatedPortrait({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const asked = Number((await searchParams).cap);
+  const cap = TEX_CAPS.includes(asked) ? asked : TEX_CAP;
+  const capped = overCap(cap);
+
   return (
     <div className="bg-surface-base text-content min-h-screen p-6">
       <header className="mb-8">
@@ -641,6 +700,91 @@ export default function DevAnimatedPortrait() {
             </Figure>
           ))}
         </div>
+      </section>
+
+      <section id="plafond" className="mb-8">
+        <h2 className="text-content-strong font-semibold">
+          Plafond des textures — la même carte, servie puis plafonnée à {cap}
+        </h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Chaque carte animée monte SA copie de toutes ses textures, non compressées : c’est la
+          taille des fichiers qui fait le poids GPU. L’extraction plafonne donc le plus grand côté (
+          <code>--max-size</code>, {TEX_CAP} par défaut). À gauche la texture telle qu’elle est
+          servie aujourd’hui, à droite le plafond SIMULÉ sur le même fichier : le GPU échantillonne
+          le niveau de mip que l’extraction écrira (moyenne de blocs, par moitiés). À la plus grande
+          taille du site (<code>w-38</code>, 152 px) — c’est là que ça se juge. Essayer :{' '}
+          {TEX_CAPS.map((c) => (
+            <Link
+              key={c}
+              href={`/dev/AnimatedPortrait?cap=${c}#plafond` as Route}
+              className={c === cap ? 'text-content-strong mr-2 font-semibold' : 'mr-2 underline'}
+            >
+              {c}
+            </Link>
+          ))}
+        </p>
+        {capped.length === 0 ? (
+          <p className="text-content-muted text-sm">
+            Aucune texture servie ne dépasse {cap} : l’extraction a été rejouée, il n’y a plus rien
+            à comparer.
+          </p>
+        ) : (
+          <>
+            <div className="mb-4 overflow-x-auto">
+              <table className="w-full min-w-2xl text-left text-sm">
+                <thead className="text-content-subtle border-line-subtle border-b">
+                  <tr>
+                    <th className="py-2 pr-4 font-medium">Texture</th>
+                    <th className="py-2 pr-4 font-medium">Taille</th>
+                    <th className="py-2 pr-4 font-medium">GPU par carte</th>
+                    <th className="py-2 pr-4 font-medium">Effets</th>
+                    <th className="py-2 font-medium">Porteurs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {capped.map((r) => (
+                    <tr key={r.tex} className="border-line-subtle/50 border-b">
+                      <td className="text-content-strong py-1.5 pr-4 font-mono text-xs">{r.tex}</td>
+                      <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                        {r.from} → {r.to}
+                      </td>
+                      <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                        {r.mbFrom.toFixed(1)} → {r.mbTo.toFixed(1)} Mo
+                      </td>
+                      <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                        {r.fxs.map((fx) => fx.replace('FX_UI_Character_List_', '_')).join(' ')}
+                      </td>
+                      <td className="text-content-muted py-1.5 font-mono text-xs">{r.carriers}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="flex flex-wrap items-end gap-6">
+              {capped.flatMap((r) =>
+                r.subject
+                  ? [undefined, cap].map((texCap) => (
+                      <Figure
+                        key={`${r.tex}-${texCap ?? 'servie'}`}
+                        label={`${r.tex} · ${texCap ? r.to : r.from}`}
+                      >
+                        <AnimatedPortrait
+                          id={r.subject!.id}
+                          name={name(r.subject!)}
+                          rarity={r.subject!.rarity}
+                          element={r.subject!.element}
+                          cls={r.subject!.class}
+                          level={100}
+                          fxTexCap={texCap}
+                          className="w-38"
+                        />
+                      </Figure>
+                    ))
+                  : [],
+              )}
+            </div>
+          </>
+        )}
       </section>
 
       <section className="mb-8">

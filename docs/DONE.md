@@ -7,6 +7,68 @@
 
 ## 2026-10-04
 
+- **Lot F9 : les textures des portraits animés sont plafonnées à 512 à
+  l'extraction — `_Demi` passera de 18 à 3 Mo de GPU par carte ; préparé, pas
+  encore rejoué (P2)** (Fable, audit `docs/audit/portrait-fx.md`). La mesure
+  d'abord, sur la table du jour : 40 textures, 41,7 Mo si on les montait
+  toutes, et QUATRE seulement dépassent 512 — `T_FX_Crystal_001_A` (2048²,
+  16,0 Mo de GPU, 887 068 octets, les 16 porteurs de `_Demi`),
+  `T_5040030_Snow` (1024², 4,0 Mo, 392 058 octets, `_2000093`),
+  `T_FX_Atlas_01` (1024², 4,0 Mo, 378 636 octets, 8 porteurs sur six effets) et
+  `T_FX_Waves_Sharp` (1024², 4,0 Mo, 103 310 octets, `_Seasonal`) ; viennent
+  ensuite cinq 512² à mips (1,33 Mo) et deux sans (1,0 Mo), le reste pèse moins
+  de 0,5 Mo. Le quoi : `datagen/assets/extract-portrait-fx.py` reçoit
+  `DEFAULT_MAX_SIZE = 512` et `--max-size N` (0 = aucun plafond) ; au-dessus,
+  `shrink` écrit le niveau de mip du jeu qui tient dessous — moyenne de blocs
+  par moitiés, en lumière linéaire pour une texture marquée sRGB (comme le GPU
+  qui linéarise avant de filtrer), directe pour l'alpha et les données, canal
+  par canal sans prémultiplier. La fiche porte la taille du FICHIER (`w`, `h`),
+  `gameSize` garde celle du jeu, `mips` raccourcit d'autant
+  (`FxTexture` de `portrait-fx.ts`). Le pourquoi de 512 : une carte du site
+  fait au plus 152 px CSS (`w-38`, seul montage : `CharacterCard`) et le moteur
+  plafonne le dpr à 2, soit 304 × 581 pixels d'appareil — une 512 étalée sur la
+  carte y garde un texel par pixel. Pour comparer avant de valider :
+  `mountPortraitFx` prend `texCap` (`fxTexCap` sur `AnimatedPortrait`), qui
+  SIMULE le plafond sur le fichier servi en faisant commencer l'échantillonnage
+  au niveau de mip correspondant (`TEXTURE_BASE_LEVEL`) — la même opération que
+  `shrink`, sans le fichier ; `/dev/AnimatedPortrait#plafond` pose une paire
+  servie/plafonnée par texture touchée, à `w-38`, avec la table des tailles et
+  des Mo, et `?cap=256|512|1024` essaie une autre valeur. La vérification :
+  Firefox 157 sans tête, dpr 2, temps et aléa figés, tampons des canvas lus et
+  différenciés au pixel — à 512, `_Demi` (Crystal) s'écarte de 3/255 au plus,
+  `_Seasonal` (Waves) de 1/255, `_2000093` et `_Dungeon` ne bougent que sur les
+  rayons des glints de la planche (79/255 au pire, 0,2 % des pixels au-dessus
+  de 2/255) : rien de visible à cette taille, particules au maximum de leur
+  plage comprises. À 256 en revanche `_Resonance` change franchement (6 % des
+  pixels, jusqu'à 134/255) et l'écart sur les glints double : 512 est le
+  dernier cran gratuit. `shrink` rend la référence en pur Python à 0 près, et
+  le GPU de ce poste fabrique bien ses mips sRGB en linéaire (damier noir/blanc
+  → 187, 188 ici). `pnpm typecheck` : sortie vide après
+  `tsc --noEmit -p scripts/tsconfig.json` ; `pnpm lint` : `$ eslint`, rien ;
+  `pnpm test` : `Tests  2184 passed (2184)`. Aucun changement visuel sur le
+  site : rien n'est réduit tant que l'extraction n'est pas rejouée, et `texCap`
+  n'est passé que par la page de contrôle. Gain attendu, par carte vivante : `_Demi` 18,0 → 3,0
+  Mo (huit cartes : 144 → 24) et 1 154 308 → 488 080 octets au premier
+  passage ; `_2000093` 9,9 → 3,9 Mo et 1 007 058 → 571 282 octets ; `_Dungeon`,
+  `_Seasonal`, `_2000086`, `_2000106`, `_2000110`, `_2000114` perdent 3,0 Mo
+  chacun (entre 67 et 236 Ko de moins) ; `_Resonance` et `_2000121` ne
+  bougent pas. Les quatre fichiers : 1 761 072 → 591 872 octets. Laissé à
+  Sevih, dans l'ordre : (1) regarder `/dev/AnimatedPortrait#plafond` — la
+  planche `T_FX_Atlas_01` est la seule où l'écart se mesure, c'est elle qu'il
+  faut juger (si elle gêne, `--max-size 1024` l'épargne mais laisse `_Demi` à
+  6 Mo) ; (2) `pnpm datagen:portrait-fx` (réécrit `portrait-fx.json` et les
+  quatre PNG du pool ; la section de la page se vide alors d'elle-même) ;
+  (3) `pnpm images` (le staging refait les quatre WebP sur leur empreinte, le
+  push purge l'edge) ; le cache navigateur d'un jour fait le reste. Pas fait :
+  Chrome (absent du poste), et le rendu avec les VRAIS fichiers réduits —
+  l'équivalence avec l'aperçu est établie par les deux contrôles ci-dessus,
+  pas par une capture. Repéré hors périmètre : le montage télécharge et monte
+  aussi les textures des slots ÉTEINTS (`needed` de `portrait-fx-gl.ts` ne lit
+  pas les mots-clés) — `Noise88` sur `_Resonance`, `T_FX_Noise_38` sur
+  `_2000121`, `T_Fx_Mask_10_Vertical` sur `_2000110`/`_2000114`, 0,5 à 1,3 Mo
+  par carte pour rien ; à `?cap=256` la page pose douze paires, soit 24
+  contextes — Firefox les tient, Chrome en perdra ; et l'en-tête du script dit
+  encore « PNG jusqu'au bucket » (P9).
 - **Relecture de A26, A27, B15 et F8** (Fable). Contrôles verts (181 fichiers,
   2 179 tests), aucun lot ne touche `package.json`. A26 : plus aucune couleur
   brute dans le périmètre de H6, recompté. A27 : `vitest.config.ts` inclut

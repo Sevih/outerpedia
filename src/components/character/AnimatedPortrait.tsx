@@ -168,6 +168,11 @@ export interface AnimatedPortraitProps extends Omit<PortraitProps, 'fx'> {
   onFxError?: (message: string) => void;
   /** N'afficher que ces calques, par nom de nœud — page de contrôle uniquement. */
   fxEmitters?: readonly string[];
+  /**
+   * Simule le plafond de taille des textures (plus grand côté, en texels) —
+   * page de contrôle uniquement, cf. `texCap` de `mountPortraitFx`.
+   */
+  fxTexCap?: number;
 }
 
 /**
@@ -189,12 +194,14 @@ function PortraitFxCanvas({
   bleed,
   onFxError,
   only,
+  texCap,
 }: {
   effect: string;
   art: string;
   bleed: { x: number; y: number };
   onFxError?: (m: string) => void;
   only?: readonly string[];
+  texCap?: number;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [reduced, setReduced] = useState(false);
@@ -239,6 +246,7 @@ function PortraitFxCanvas({
           onError: (m) => report.current?.(m),
           only,
           autoplay: !reduced,
+          texCap,
         });
       },
       release: () => {
@@ -260,7 +268,7 @@ function PortraitFxCanvas({
       unobserve(canvas, card);
       card.release();
     };
-  }, [effect, art, reduced, only]);
+  }, [effect, art, reduced, only, texCap]);
 
   return (
     <canvas
@@ -297,6 +305,7 @@ export function AnimatedPortrait({
   fxId,
   onFxError,
   fxEmitters,
+  fxTexCap,
   ...props
 }: AnimatedPortraitProps) {
   const name = effect ?? fxNameOf(fxId ?? props.id);
@@ -321,6 +330,7 @@ export function AnimatedPortrait({
             bleed={bleed}
             onFxError={onFxError}
             only={only}
+            texCap={fxTexCap}
           />
         ) : undefined
       }

@@ -164,14 +164,23 @@ export interface FxMesh {
 }
 
 export interface FxTexture {
+  /** Taille du FICHIER servi — celle que le moteur monte au GPU. */
   w: number;
   h: number;
+  /**
+   * Taille dans le jeu, quand l'extraction a réduit le fichier sous son plafond
+   * (`DEFAULT_MAX_SIZE` d'`extract-portrait-fx.py`) ; absente sinon.
+   */
+  gameSize?: [number, number];
   /** 0 = Repeat, 1 = Clamp, 2 = Mirror. */
   wrapU: number;
   wrapV: number;
   /** 0 = Point, 1 = Bilinear, 2 = Trilinear. */
   filter: number;
-  /** Nombre de niveaux du jeu. 1 = AUCUN mip, et il faut alors n'en fabriquer aucun. */
+  /**
+   * Nombre de niveaux du jeu, comptés depuis celui qu'on sert. 1 = AUCUN mip, et
+   * il faut alors n'en fabriquer aucun.
+   */
   mips: number;
   /** 1 = la texture est marquée sRGB, donc linéarisée à l'échantillonnage. */
   srgb: number;

@@ -116,12 +116,12 @@ sur les fichiers.
 - [ ] Éviction et remontage dans la même image (P1, et P5 au passage — lot
       F8) : CORRIGÉ le 04/10 (cf. DONE), à contrôler sur Chrome ET Firefox —
       le scénario est dans l'entrée DONE.
-- [ ] **18 Mo de textures GPU par carte `_Demi` (P2, lot F9)** : chaque contexte
-      monte sa copie ; `T_FX_Crystal_001_A` (2048², 887 Ko à télécharger) en
-      fait 16 à elle seule, pour l'effet de 16 persos. **Décision Sevih** :
-      plafonner la taille à l'extraction (fidélité à comparer sur la page de
-      contrôle) ; le correctif de fond — un contexte partagé pour toutes les
-      cartes — est un chantier, il emporterait P1, P5 et P6.
+- [ ] 18 Mo de textures GPU par carte `_Demi` (P2, lot F9) : plafond à 512
+      PRÉPARÉ le 04/10 (cf. DONE), rien n'est encore réduit. Reste à Sevih :
+      comparer sur `/dev/AnimatedPortrait#plafond`, puis
+      `pnpm datagen:portrait-fx` et `pnpm images`. Le correctif de fond — un
+      contexte partagé pour toutes les cartes — reste un chantier, il
+      emporterait P6.
 - [ ] **Graines des particules (P3, lot F10)** : `autoRandomSeed` est FAUX sur huit
       émetteurs ; `star` et `star (1)` de `_2000093`, `_2000110`, `_2000114`
       partagent la graine 0, donc étoile et halo naissent ensemble en jeu, pas

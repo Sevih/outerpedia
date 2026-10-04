@@ -52,6 +52,7 @@ Usage :
     python extract-portrait-fx.py              # les effets par défaut (cf. DEFAULT_EFFECTS)
     python extract-portrait-fx.py Demi Synchro # d'autres, par suffixe de nom
     python extract-portrait-fx.py --all        # tout le bundle
+    python extract-portrait-fx.py --max-size 1024  # autre plafond de texture (0 = aucun)
 """
 
 from __future__ import annotations
@@ -63,6 +64,7 @@ from pathlib import Path
 from typing import Any
 
 import UnityPy
+from PIL import Image
 from UnityPy.helpers.MeshHelper import MeshHandler
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -101,6 +103,25 @@ EFFECT_PREFIX = 'FX_UI_Character_List_'
 #: pour en servir un de plus — le reste du script est data-driven.
 DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', 'Resonance', '2000086',
                    '2000093', '2000106', '2000110', '2000114', '2000121']
+
+#: PLAFOND du plus grand côté d'une texture, en texels (`--max-size`, 0 = aucun).
+#:
+#: Chaque carte animée monte SA copie de toutes ses textures, non compressées
+#: (un contexte WebGL ne partage rien) : c'est la taille du fichier qui fait le
+#: poids GPU, pas ce qu'on en voit. `T_FX_Crystal_001_A` (2048²) coûtait 16 Mo
+#: par carte `_Demi` pour un nuage étiré une fois sur une vignette.
+#:
+#: POURQUOI 512. Une carte du site fait au plus 152 px CSS de large (`w-38` de
+#: `CharacterCard`) et le moteur plafonne le dpr à 2 : 304 × 581 pixels
+#: d'appareil. Une texture de 512 étalée sur la carte y garde donc au moins un
+#: texel par pixel en largeur (0,9 en hauteur, 1,8 pour celles que leur `_ST`
+#: tuile deux fois) — rien à gagner au-dessus. Mesuré sur la page de contrôle
+#: (`/dev/AnimatedPortrait#plafond`, Firefox, dpr 2, image figée) : les trois
+#: nuages plafonnés rendent la même image à 3/255 près ; seule la planche
+#: `T_FX_Atlas_01` bouge, sur les rayons des glints, sans que ça se voie à cette
+#: taille. À 256 en revanche `_Resonance` change franchement et l'écart sur
+#: les glints double : 512 est le dernier cran gratuit.
+DEFAULT_MAX_SIZE = 512
 
 
 def bundle_path(name: str) -> Path:
@@ -353,22 +374,80 @@ def read_material(fx: Bundle, pid: int, tex_index: dict, wanted_tex: dict) -> di
     }
 
 
-def read_texture(fx: Bundle, name: str, src: str, pid: int, cache: dict) -> dict:
+def halvings(w: int, h: int, max_size: int) -> int:
+    """Combien de fois diviser par deux pour que le plus grand côté tienne sous le plafond."""
+    n = 0
+    while max_size and max(w, h) >> n > max_size:
+        n += 1
+    return n
+
+
+def _srgb_to_linear(c: float) -> float:
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+
+def _linear_to_srgb(c: float) -> float:
+    return c * 12.92 if c <= 0.0031308 else 1.055 * c ** (1 / 2.4) - 0.055
+
+
+# sRGB 8 bits → lumière linéaire sur 16 bits, et retour : la moyenne se fait
+# entre les deux, en flottant.
+_DECODE = [_srgb_to_linear(i / 255) * 65535 for i in range(256)]
+_ENCODE = [round(_linear_to_srgb(i / 65535) * 255) for i in range(65536)]
+
+
+def shrink(image: Image.Image, levels: int, srgb: bool) -> Image.Image:
+    """Le niveau de mip `levels` de l'image : moyenne de blocs de 2^levels texels.
+
+    C'est ce que le GPU lirait si la texture avait une chaîne de mips, et c'est ce
+    que la page de contrôle simule (`texCap` de `portrait-fx-gl`) : le fichier
+    réduit doit rendre la MÊME image que la carte qu'on a validée à l'écran.
+
+    Une texture marquée sRGB se moyenne en LUMIÈRE LINÉAIRE, comme le GPU qui la
+    linéarise avant de filtrer : moyenner les valeurs encodées assombrit — et
+    `_MainStrength` multiplie l'écart. L'alpha et les textures de données sont des
+    nombres, pas des couleurs : moyenne directe. Canal par canal, sans
+    prémultiplier : le shader lit `rgb` et `a` séparément, et le filtrage
+    bilinéaire du jeu ne prémultiplie pas non plus.
+    """
+    factor = 1 << levels
+    bands = []
+    for band, channel in zip(image.getbands(), image.split()):
+        if srgb and band != 'A':
+            linear = channel.point(_DECODE, 'F').reduce(factor)
+            # +0,5 : `convert('I')` tronque.
+            channel = linear.point(lambda v: v + 0.5).convert('I').point(_ENCODE, 'L')
+        else:
+            channel = channel.reduce(factor)
+        bands.append(channel)
+    return Image.merge(image.mode, bands)
+
+
+def read_texture(fx: Bundle, name: str, src: str, pid: int, cache: dict, max_size: int) -> dict:
     """Écrit le PNG dans le pool d'images et renvoie sa fiche (taille, wrap, filtre).
 
     Le mode de répétition compte autant que les pixels : tout le mouvement de ces
     calques est un défilement d'UV hors de [0,1]. Un `wrap` mal repris fige l'effet.
+
+    Au-dessus de `max_size`, c'est un niveau de mip du jeu qu'on écrit (cf.
+    `DEFAULT_MAX_SIZE`, `shrink`) : la fiche porte alors la taille du FICHIER —
+    celle que le site monte — et `gameSize` garde celle du jeu.
     """
     b = fx if pid in fx.by_pid else cache.setdefault(src, Bundle(src))
     tex = b.by_pid[pid].read()
+    tt = b.read(pid)
+    image = tex.image
+    levels = halvings(tex.m_Width, tex.m_Height, max_size)
+    if levels:
+        image = shrink(image, levels, srgb=tt.get('m_ColorSpace') == 1)
     OUT_TEX.mkdir(parents=True, exist_ok=True)
     dest = OUT_TEX / f'{name}.png'
-    tex.image.save(dest)
-    tt = b.read(pid)
+    image.save(dest)
     st = tt.get('m_TextureSettings', {})
     return {
-        'w': tex.m_Width,
-        'h': tex.m_Height,
+        'w': image.width,
+        'h': image.height,
+        **({'gameSize': [tex.m_Width, tex.m_Height]} if levels else {}),
         # 0 = Repeat, 1 = Clamp, 2 = Mirror (UnityEngine.TextureWrapMode).
         'wrapU': st.get('m_WrapU'),
         'wrapV': st.get('m_WrapV'),
@@ -376,8 +455,9 @@ def read_texture(fx: Bundle, name: str, src: str, pid: int, cache: dict) -> dict
         'filter': st.get('m_FilterMode'),
         # 1 = AUCUN mip. Cinq des huit textures de `_Demi` sont dans ce cas, et ça
         # se voit : minifier un bruit de 512 à travers une chaîne de mips que le
-        # jeu n'a pas le lisse jusqu'à le faire disparaître.
-        'mips': tt.get('m_MipCount'),
+        # jeu n'a pas le lisse jusqu'à le faire disparaître. Une texture réduite
+        # EST le niveau `levels` du jeu : sa chaîne raccourcit d'autant.
+        'mips': max(1, tt.get('m_MipCount', 1) - levels),
         # 1 = sRGB. Le projet tourne en Linear color space (`m_ActiveColorSpace = 1`
         # de `globalgamemanagers`) : le GPU linéarise donc ces textures À
         # L'ÉCHANTILLONNAGE, et tout le shader travaille en lumière linéaire.
@@ -583,7 +663,7 @@ def by_character() -> dict[str, str]:
 # --- assemblage ------------------------------------------------------------------
 
 
-def extract(effects: list[str]) -> dict:
+def extract(effects: list[str], max_size: int = DEFAULT_MAX_SIZE) -> dict:
     fx = Bundle(FX_BUNDLE)
     tex_index = texture_index(bundle_deps(FX_BUNDLE))
 
@@ -618,7 +698,8 @@ def extract(effects: list[str]) -> dict:
 
     tex_cache: dict[str, Bundle] = {}
     textures = {
-        n: read_texture(fx, n, src, pid, tex_cache) for n, (src, pid) in sorted(wanted_tex.items())
+        n: read_texture(fx, n, src, pid, tex_cache, max_size)
+        for n, (src, pid) in sorted(wanted_tex.items())
     }
 
     return {
@@ -644,6 +725,13 @@ def unextracted(data: dict) -> dict[str, list[str]]:
 
 def main() -> None:
     args = sys.argv[1:]
+    max_size = DEFAULT_MAX_SIZE
+    if '--max-size' in args:
+        i = args.index('--max-size')
+        if i + 1 >= len(args) or not args[i + 1].isdigit():
+            sys.exit('--max-size attend un nombre de texels (0 = aucun plafond)')
+        max_size = int(args[i + 1])
+        del args[i:i + 2]
     if args == ['--all']:
         fx = Bundle(FX_BUNDLE)
         effects = sorted(
@@ -656,7 +744,7 @@ def main() -> None:
     else:
         effects = args or DEFAULT_EFFECTS
 
-    data = extract(effects)
+    data = extract(effects, max_size)
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     # Même discipline d'écriture que `extract-face-layout.py` : LF et saut final,
     # sinon un diff de plusieurs milliers de lignes réapparaît à chaque patch sans
@@ -667,8 +755,9 @@ def main() -> None:
         f'{len(data["effects"])} effet(s) · {len(data["materials"])} matériaux · '
         f'{len(data["meshes"])} mailles · {len(data["textures"])} textures → {OUT_JSON.name}'
     )
-    for n in data['textures']:
-        print(f'  {n}.png')
+    for n, t in data['textures'].items():
+        game = t.get('gameSize')
+        print(f'  {n}.png' + (f'  {game[0]}×{game[1]} → {t["w"]}×{t["h"]}' if game else ''))
     # Un effet que la table NOMME (`byCharacter`, relevé entier) sans que cette
     # passe ait sorti son prefab : le moteur ne le connaît pas, `fxOf` rend
     # undefined et la carte reste un portrait statique — rien ne le dit à l'écran.

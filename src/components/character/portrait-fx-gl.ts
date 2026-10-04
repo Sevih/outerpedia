@@ -435,6 +435,15 @@ export interface PortraitFxOptions {
    * la même chose), donc on la fige au lieu de la ralentir.
    */
   autoplay?: boolean;
+  /**
+   * SIMULE le plafond de taille de l'extraction (`--max-size` d'
+   * `extract-portrait-fx.py`) sur une texture servie plus grande : plus grand
+   * côté en texels. Existe pour la page de contrôle, qui pose la même carte
+   * avec et sans — on juge la fidélité AVANT de réduire les fichiers. Ne libère
+   * aucune mémoire (la texture monte entière, cf. `upload`) : le gain, lui, ne
+   * vient que des fichiers réduits.
+   */
+  texCap?: number;
 }
 
 /**
@@ -459,7 +468,7 @@ const LOSE_EXT = new WeakMap<HTMLCanvasElement, WEBGL_lose_context>();
 
 export function mountPortraitFx(
   canvas: HTMLCanvasElement,
-  { effect: effectName, art, onError: report, only, autoplay = true }: PortraitFxOptions,
+  { effect: effectName, art, onError: report, only, autoplay = true, texCap }: PortraitFxOptions,
 ): PortraitFxHandle {
   const onError = (m: string) => {
     console.error(`portrait-fx [${effectName}] : ${m}`);
@@ -652,6 +661,7 @@ export function mountPortraitFx(
   function upload(
     image: HTMLImageElement,
     meta?: { wrapU: number; wrapV: number; filter: number; mips: number; srgb?: number },
+    cap?: number,
   ) {
     const tex = gl!.createTexture()!;
     gl!.bindTexture(gl!.TEXTURE_2D, tex);
@@ -669,7 +679,14 @@ export function mountPortraitFx(
     // AUCUN (`m_MipCount = 1`) : leur en fabriquer lisserait un bruit de 512 sur un
     // ruban de 13 unités jusqu'à l'effacer. Le jeu, lui, échantillonne le niveau 0.
     const mips = (meta?.mips ?? 1) > 1;
-    if (mips) gl!.generateMipmap(gl!.TEXTURE_2D);
+    // LE PLAFOND SIMULÉ. L'extraction réduit par moitiés, en moyenne de blocs
+    // (`shrink` d'`extract-portrait-fx.py`) — elle écrit donc le niveau de mip
+    // `drop` de la texture du jeu. On le fabrique ici et on y fait COMMENCER
+    // l'échantillonnage : même image qu'un fichier réduit, sans le fichier.
+    const side = Math.max(image.naturalWidth, image.naturalHeight);
+    const drop = cap && side > cap ? Math.ceil(Math.log2(side / cap)) : 0;
+    if (mips || drop) gl!.generateMipmap(gl!.TEXTURE_2D);
+    if (drop) gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_BASE_LEVEL, drop);
     // `FilterMode.Bilinear` d'Unity = bilinéaire DANS un niveau, saut sec entre
     // niveaux ; `Trilinear` interpole aussi entre les niveaux.
     const tri = (meta?.filter ?? 1) >= 2;
@@ -819,7 +836,7 @@ export function mountPortraitFx(
 
     byName.clear();
     artTex = null;
-    for (const [name, image] of decoded) byName.set(name, upload(image, texMeta[name]));
+    for (const [name, image] of decoded) byName.set(name, upload(image, texMeta[name], texCap));
     if (artImage) artTex = upload(artImage, ART_META);
 
     live = true;
@@ -1159,7 +1176,7 @@ export function mountPortraitFx(
     ...[...needed].map((name) =>
       load(img.portraitFx(name), (image) => {
         decoded.set(name, image);
-        if (live) byName.set(name, upload(image, texMeta[name]));
+        if (live) byName.set(name, upload(image, texMeta[name], texCap));
       }),
     ),
     load(art, (image) => {
