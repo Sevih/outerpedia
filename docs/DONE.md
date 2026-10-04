@@ -7,6 +7,13 @@
 
 ## 2026-10-04
 
+- **Relecture de A26, A27, B15 et F8** (Fable). Contrôles verts (181 fichiers,
+  2 179 tests), aucun lot ne touche `package.json`. A26 : plus aucune couleur
+  brute dans le périmètre de H6, recompté. A27 : `vitest.config.ts` inclut
+  désormais `scripts/` ; le rapport est hors git, les écarts sont au TODO par
+  gabarit. B15 puis F8 dans l'ordre prévu. Rien n'est regardé à l'écran : les
+  deux roadmaps (teintes changées, voulu) et le scénario Chrome/Firefox de F8
+  restent à Sevih.
 - **Lot F8 : une carte évincée puis remontée dans la même image ne reste plus
   éteinte — un seul observateur pour toutes les cartes, et un `restoreContext`
   rejoué après la perte ; P1 et P5 sont clos** (Fable, audit
