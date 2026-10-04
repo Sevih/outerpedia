@@ -8,18 +8,18 @@
 ## 🔎 SEO — les cinq autres langues
 
 > Mesuré le 04/10 sur les cinq hôtes servis (574 pages chacun, rapports dans
-> `docs/seo&audit/`). Deux lots écrits, l'un après l'autre : B17 puis B18.
+> `docs/seo&audit/`). La mesure se fait en LARGEUR depuis le lot B17 (un
+> caractère large compte 2) ; reste B18, les textes.
 
-- [ ] **Mesure en largeur pour `jp`, `kr`, `zh` (lot B17)** : le script les
-      classe presque toutes « trop courtes » (522, 496, 570 pages) parce qu'il
-      compte des caractères, alors qu'un caractère large occupe deux fois la
-      place d'une lettre. Faux problème tant que la mesure n'est pas refaite
-      en largeur ; la règle « | Outerpedia saute quand le titre déborde »
-      suit la même mesure.
 - [ ] **Textes hors bornes (lot B18)** : `fr` 22 titres au-delà de 60 et 46
-      descriptions au-delà de 160 ; `es` 12 titres et 65 descriptions ; `jp`,
-      `kr`, `zh` selon ce que B17 laisse. Guides (`meta.json`), pages à un
-      segment et catégories (locales), gabarits des fiches.
+      descriptions au-delà de 160 ; `es` 12 titres et 65 descriptions. En
+      largeur, estimé par B17 depuis les rapports (détail dans son entrée
+      DONE du 04/10) : `jp` 5 à 7 pages, `kr` une dizaine, `zh` 140 à 175
+      dont une centaine par le seul gabarit de description des fiches de
+      personnage. Guides (`meta.json`), pages à un segment et catégories
+      (locales), gabarits des fiches. À remesurer sur les hôtes une fois B17
+      en ligne : les titres trop larges ne se lisent pas dans les rapports
+      du 04/10.
 
 ## 🎴 Portraits animés
 

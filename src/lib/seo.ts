@@ -26,23 +26,73 @@ export function getMonthYear(lang: Lang): string {
 }
 
 const SITE_NAME = 'Outerpedia';
+
 /**
- * Longueur maximale d'un titre, en caractères : au-delà, un moteur le coupe.
- * C'est la borne que mesure `scripts/seo-lengths.ts`, qui l'importe d'ici.
+ * Plages Unicode des caractères LARGES ou pleine chasse : chacun occupe, dans un
+ * résultat de recherche, la place de deux lettres latines. Bornes incluses,
+ * noms des blocs Unicode. Tout le reste compte 1 — y compris les emoji et la
+ * ponctuation de largeur « ambiguë » (« — », « … », « · », guillemets courbes),
+ * pour qu'un texte latin mesure exactement son nombre de caractères.
+ */
+const WIDE_RANGES: ReadonlyArray<readonly [number, number]> = [
+  [0x1100, 0x115f], // Hangul Jamo, consonnes initiales
+  [0x2e80, 0x2fdf], // CJK Radicals Supplement, Kangxi Radicals
+  [0x2ff0, 0x303e], // Ideographic Description, CJK Symbols and Punctuation (、。「」〜)
+  [0x3040, 0x30ff], // Hiragana, Katakana (dont « ・ » et « ー »)
+  [0x3100, 0x312f], // Bopomofo
+  [0x3130, 0x318f], // Hangul Compatibility Jamo
+  [0x3190, 0x31ff], // Kanbun, Bopomofo Extended, CJK Strokes, Katakana Phonetic Extensions
+  [0x3200, 0x33ff], // Enclosed CJK Letters and Months, CJK Compatibility
+  [0x3400, 0x4dbf], // CJK Unified Ideographs Extension A
+  [0x4e00, 0x9fff], // CJK Unified Ideographs
+  [0xa960, 0xa97f], // Hangul Jamo Extended-A
+  [0xac00, 0xd7a3], // Hangul Syllables
+  [0xf900, 0xfaff], // CJK Compatibility Ideographs
+  [0xfe10, 0xfe19], // Vertical Forms
+  [0xfe30, 0xfe6f], // CJK Compatibility Forms, Small Form Variants
+  // Halfwidth and Fullwidth Forms : la moitié pleine chasse seulement (！，：（）
+  // ＡＢＣ ～ puis ￥ ￦). Les katakana et hangul demi-chasse (U+FF61–FFDC)
+  // restent à 1.
+  [0xff01, 0xff60],
+  [0xffe0, 0xffe6],
+  [0x1b000, 0x1b16f], // Kana Supplement, Kana Extended-A, Small Kana Extension
+  [0x20000, 0x3fffd], // CJK Unified Ideographs Extensions B et suivantes (plans 2 et 3)
+];
+
+/**
+ * Largeur d'affichage d'un texte, en lettres latines : un caractère large ou
+ * pleine chasse (cf. `WIDE_RANGES`) compte 2, tout autre point de code 1. C'est
+ * l'unité des bornes SEO, ici et dans `scripts/seo-lengths.ts` : une description
+ * japonaise de 60 caractères est aussi large qu'une anglaise de 120.
+ */
+export function displayWidth(text: string): number {
+  let width = 0;
+  for (const char of text) {
+    const code = char.codePointAt(0) ?? 0;
+    // Sous U+1100, rien n'est large : le latin ne parcourt pas les plages.
+    const wide = code >= 0x1100 && WIDE_RANGES.some(([min, max]) => code >= min && code <= max);
+    width += wide ? 2 : 1;
+  }
+  return width;
+}
+
+/**
+ * Largeur maximale d'un titre (cf. `displayWidth`) : au-delà, un moteur le
+ * coupe. C'est la borne que mesure `scripts/seo-lengths.ts`, qui l'importe d'ici.
  */
 export const TITLE_MAX_LENGTH = 60;
 
 /**
  * Vrai quand « {titre} | Outerpedia » déborde de `TITLE_MAX_LENGTH`. Compté en
- * points de code, comme la mesure : un kanji hors BMP vaut un caractère.
+ * largeur, comme la mesure : un titre japonais de 24 caractères déborde déjà.
  */
 function siteSuffixOverflows(title: string): boolean {
-  return [...`${title} | ${SITE_NAME}`].length > TITLE_MAX_LENGTH;
+  return displayWidth(`${title} | ${SITE_NAME}`) > TITLE_MAX_LENGTH;
 }
 
 /**
- * Longueur maximale d'une description, en caractères : même rôle que
- * `TITLE_MAX_LENGTH`, même importateur (`scripts/seo-lengths.ts`).
+ * Largeur maximale d'une description : même rôle que `TITLE_MAX_LENGTH`, même
+ * unité, même importateur (`scripts/seo-lengths.ts`).
  */
 export const DESCRIPTION_MAX_LENGTH = 160;
 
@@ -86,40 +136,47 @@ export function guideCategoryTitle(label: string, t: TFunction): string {
 /**
  * « {préfixe} — {description} », sauf quand le préfixe fait déborder de
  * `DESCRIPTION_MAX_LENGTH` : il saute alors, comme le nom du site dans un titre
- * trop long. Compté en points de code, comme la mesure. Une description déjà
- * trop longue seule sort telle quelle — la raccourcir est un travail
- * d'écriture, pas de gabarit.
+ * trop long. Compté en largeur, comme la mesure. Une description déjà trop
+ * longue seule sort telle quelle — la raccourcir est un travail d'écriture, pas
+ * de gabarit.
  */
 export function prefixedDescription(prefix: string, description: string): string {
   const full = `${prefix} — ${description}`;
-  return [...full].length > DESCRIPTION_MAX_LENGTH ? description : full;
+  return displayWidth(full) > DESCRIPTION_MAX_LENGTH ? description : full;
 }
 
 /** Ponctuation qu'on ne laisse pas pendre devant les points de suspension. */
 const TRAILING_PUNCTUATION = /[\s,;:.!?—–\-、。，；：！？]+$/u;
 /**
- * Recul maximal, en caractères, pour trouver une limite de mot. Au-delà, le
- * texte n'en a pas à cet endroit (japonais, chinois : une espace toutes les
- * quelques phrases) et y reculer jetterait la moitié de la description.
+ * Recul maximal, en largeur, pour trouver une limite de mot. Au-delà, le texte
+ * n'en a pas à cet endroit (japonais, chinois : une espace toutes les quelques
+ * phrases) et y reculer jetterait la moitié de la description.
  */
 const WORD_BOUNDARY_WINDOW = 30;
 
 /**
- * Coupe une description trop longue à la dernière limite de mot qui tient dans
- * `max`, points de suspension compris. Sous la borne, le texte sort intact.
- * Sans limite de mot à portée (cf. `WORD_BOUNDARY_WINDOW`), la coupe tombe au
- * caractère.
+ * Coupe une description trop large à la dernière limite de mot qui tient dans
+ * `max` (une largeur, cf. `displayWidth`), points de suspension compris. Sous la
+ * borne, le texte sort intact. Sans limite de mot à portée (cf.
+ * `WORD_BOUNDARY_WINDOW`), la coupe tombe au caractère.
  */
 export function truncateDescription(text: string, max = DESCRIPTION_MAX_LENGTH): string {
   const chars = [...text.trim()];
-  if (chars.length <= max) return chars.join('');
-  // `max - 1` : la place de « … ».
-  const head = chars.slice(0, max - 1);
+  if (displayWidth(text.trim()) <= max) return chars.join('');
+  // `max - 1` : la place de « … ». `cut` = premier caractère qui n'y tient plus.
+  let cut = 0;
+  for (let width = 0; cut < chars.length; cut++) {
+    width += displayWidth(chars[cut]);
+    if (width > max - 1) break;
+  }
+  const head = chars.slice(0, cut);
   // Le caractère suivant est une espace : la coupe tombe déjà entre deux mots.
   let end = head.length;
-  if (!/\s/u.test(chars[max - 1])) {
+  if (!/\s/u.test(chars[cut])) {
     const lastSpace = head.findLastIndex((c) => /\s/u.test(c));
-    if (lastSpace !== -1 && head.length - lastSpace <= WORD_BOUNDARY_WINDOW) end = lastSpace;
+    if (lastSpace !== -1 && displayWidth(head.slice(lastSpace).join('')) <= WORD_BOUNDARY_WINDOW) {
+      end = lastSpace;
+    }
   }
   return `${head.slice(0, end).join('').replace(TRAILING_PUNCTUATION, '')}…`;
 }
@@ -175,8 +232,8 @@ type PageMetadataOptions = {
  * NB : pas de `keywords` — la balise meta keywords est ignorée par les moteurs.
  *
  * TITRE TROP LONG : quand « {titre} | Outerpedia » déborde de
- * `TITLE_MAX_LENGTH`, c'est le nom du site qu'on lâche, jamais un morceau du
- * titre (décision du 2026-10-04). Le `<title>` sort alors en `absolute`, qui
+ * `TITLE_MAX_LENGTH` (en largeur, cf. `displayWidth`), c'est le nom du site
+ * qu'on lâche, jamais un morceau du titre (décision du 2026-10-04). Le `<title>` sort alors en `absolute`, qui
  * court-circuite le gabarit « %s | Outerpedia » du layout, et `og:title` /
  * `twitter:title` suivent. Sous la borne, rien ne bouge.
  */

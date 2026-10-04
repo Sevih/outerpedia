@@ -11,8 +11,11 @@
  *      `User-Agent` qui dit qui il est, arrêt net au premier 429 ou au second
  *      5xx (un 5xx isolé est rejoué une fois, après une pause) ;
  *   3. relève `<title>` et `<meta name="description">` et classe : titre de
- *      moins de 30 ou de plus de 60 caractères, description de moins de 70 ou
- *      de plus de 160, description absente, doublons exacts ;
+ *      moins de 30 ou de plus de 60 de LARGEUR, description de moins de 70 ou
+ *      de plus de 160, description absente, doublons exacts. Largeur et non
+ *      nombre de caractères : un kanji, un kana, un hangul ou un signe pleine
+ *      chasse compte 2 (`displayWidth` de `src/lib/seo.ts`), sans quoi le
+ *      japonais, le coréen et le chinois sortent tous « trop courts » ;
  *   4. écrit un rapport Markdown daté dans `docs/seo&audit/`, groupé par type
  *      de page, avec les dix pires de chaque groupe.
  *
@@ -27,7 +30,7 @@ import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { format as prettierFormat, resolveConfig } from 'prettier';
 import { isMain } from '@datagen/lib/is-main';
-import { DESCRIPTION_MAX_LENGTH, TITLE_MAX_LENGTH } from '@/lib/seo';
+import { DESCRIPTION_MAX_LENGTH, TITLE_MAX_LENGTH, displayWidth } from '@/lib/seo';
 import { writeTextAtomic } from '../datagen/lib/json';
 
 const DEFAULT_HOST = 'https://outerpedia.com';
@@ -42,14 +45,15 @@ const RETRY_DELAY_MS = 5000;
 const TIMEOUT_MS = 30_000;
 /** Lignes par tableau du rapport : les pires, pas les milliers. */
 const WORST = 10;
-/** Au-delà, une cellule de tableau est coupée (une description de 400
- * caractères rend le tableau illisible ; sa longueur reste affichée). */
+/** Au-delà, en caractères, une cellule de tableau est coupée (une description
+ * de 400 caractères rend le tableau illisible ; sa largeur reste affichée). */
 const CELL_MAX = 200;
 
 /**
- * Bornes en caractères (entités décodées, espaces repliés). Le plafond du titre
- * est celui de `createPageMetadata`, qui retire « | Outerpedia » au-delà ; celui
- * de la description, celui des coupes de `src/lib/seo.ts`.
+ * Bornes en LARGEUR d'affichage (entités décodées, espaces repliés ; cf.
+ * `textWidth`). Le plafond du titre est celui de `createPageMetadata`, qui
+ * retire « | Outerpedia » au-delà ; celui de la description, celui des coupes
+ * de `src/lib/seo.ts`.
  */
 export const LIMITS = {
   title: { min: 30, max: TITLE_MAX_LENGTH },
@@ -94,8 +98,9 @@ export type PageMeta = { url: string; title: string | null; description: string 
 export type MeasuredPage = PageMeta & {
   /** Type de page, cf. `pageGroup`. */
   group: string;
-  titleLength: number;
-  descriptionLength: number;
+  /** Largeurs d'affichage (cf. `textWidth`), 0 pour un champ absent. */
+  titleWidth: number;
+  descriptionWidth: number;
   issues: Issue[];
   /** Gravité cumulée, pour classer « les pires » (cf. `classify`). */
   score: number;
@@ -142,9 +147,13 @@ function cleanText(raw: string): string | null {
   return text === '' ? null : text;
 }
 
-/** Longueur en CARACTÈRES (points de code) : un emoji ou un kanji hors BMP compte pour un. */
-export function textLength(text: string | null): number {
-  return text === null ? 0 : [...text].length;
+/**
+ * LARGEUR d'affichage, la mesure de `src/lib/seo.ts` : un caractère large ou
+ * pleine chasse (kanji, kana, hangul…) compte 2, tout autre point de code 1 —
+ * un texte latin mesure donc son nombre de caractères, emoji compris.
+ */
+export function textWidth(text: string | null): number {
+  return text === null ? 0 : displayWidth(text);
 }
 
 const ATTR_RE = /([^\s"'=<>/]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/g;
@@ -255,9 +264,9 @@ function duplicates(pages: PageMeta[], pick: (p: PageMeta) => string | null): Du
 }
 
 /** Écart RELATIF à la borne franchie (0 dans la plage) : 15 pour 30 vaut 80 pour 160. */
-function deviation(length: number, { min, max }: { min: number; max: number }): number {
-  if (length < min) return (min - length) / min;
-  if (length > max) return (length - max) / max;
+function deviation(width: number, { min, max }: { min: number; max: number }): number {
+  if (width < min) return (min - width) / min;
+  if (width > max) return (width - max) / max;
   return 0;
 }
 
@@ -266,7 +275,7 @@ function deviation(length: number, { min, max }: { min: number; max: number }): 
  * espaces) sur deux URLs, tous groupes confondus.
  *
  * `score` ordonne « les pires » : 2 par champ absent (pire que n'importe quelle
- * longueur), l'écart relatif à la borne pour un champ trop court ou trop long,
+ * largeur), l'écart relatif à la borne pour un champ trop court ou trop long,
  * 0,5 par doublon — un doublon de bonne longueur passe après un titre de trois
  * caractères, avant un titre à 29.
  */
@@ -277,8 +286,8 @@ export function classify(metas: PageMeta[]): Classification {
   const dupDescription = new Set(duplicateDescriptions.map((d) => d.text));
 
   const pages = metas.map((meta): MeasuredPage => {
-    const titleLength = textLength(meta.title);
-    const descriptionLength = textLength(meta.description);
+    const titleWidth = textWidth(meta.title);
+    const descriptionWidth = textWidth(meta.description);
     const issues: Issue[] = [];
     let score = 0;
 
@@ -286,9 +295,9 @@ export function classify(metas: PageMeta[]): Classification {
       issues.push('title-missing');
       score += 2;
     } else {
-      if (titleLength < LIMITS.title.min) issues.push('title-short');
-      if (titleLength > LIMITS.title.max) issues.push('title-long');
-      score += deviation(titleLength, LIMITS.title);
+      if (titleWidth < LIMITS.title.min) issues.push('title-short');
+      if (titleWidth > LIMITS.title.max) issues.push('title-long');
+      score += deviation(titleWidth, LIMITS.title);
       if (dupTitle.has(meta.title)) {
         issues.push('title-duplicate');
         score += 0.5;
@@ -299,9 +308,9 @@ export function classify(metas: PageMeta[]): Classification {
       issues.push('description-missing');
       score += 2;
     } else {
-      if (descriptionLength < LIMITS.description.min) issues.push('description-short');
-      if (descriptionLength > LIMITS.description.max) issues.push('description-long');
-      score += deviation(descriptionLength, LIMITS.description);
+      if (descriptionWidth < LIMITS.description.min) issues.push('description-short');
+      if (descriptionWidth > LIMITS.description.max) issues.push('description-long');
+      score += deviation(descriptionWidth, LIMITS.description);
       if (dupDescription.has(meta.description)) {
         issues.push('description-duplicate');
         score += 0.5;
@@ -311,8 +320,8 @@ export function classify(metas: PageMeta[]): Classification {
     return {
       ...meta,
       group: pageGroup(meta.url),
-      titleLength,
-      descriptionLength,
+      titleWidth,
+      descriptionWidth,
       issues: ISSUES.filter((i) => issues.includes(i)),
       score,
     };
@@ -440,9 +449,9 @@ function median(values: number[]): number {
   return sorted.length % 2 ? sorted[mid] : Math.round((sorted[mid - 1] + sorted[mid]) / 2);
 }
 
-/** « min / médiane / max » des longueurs présentes (les absents ne comptent pas). */
-function spread(lengths: number[]): string {
-  const present = lengths.filter((n) => n > 0);
+/** « min / médiane / max » des largeurs présentes (les absents ne comptent pas). */
+function spread(widths: number[]): string {
+  const present = widths.filter((n) => n > 0);
   if (present.length === 0) return '—';
   return `${Math.min(...present)} / ${median(present)} / ${Math.max(...present)}`;
 }
@@ -484,7 +493,12 @@ export function renderReport(input: {
     '> ne pas éditer à la main, relancer. Mesuré sur le site servi, page par page',
     '> depuis son sitemap.',
     '>',
-    `> Bornes, en caractères : titre ${LIMITS.title.min} à ${LIMITS.title.max},`,
+    '> Ce rapport mesure une LARGEUR d’affichage, pas un nombre de caractères : un',
+    '> caractère large ou pleine chasse (kanji, kana, hangul, ponctuation pleine',
+    '> chasse) compte 2, tout autre 1. Un texte latin mesure donc son nombre de',
+    '> caractères.',
+    '>',
+    `> Bornes, en largeur : titre ${LIMITS.title.min} à ${LIMITS.title.max},`,
     `> description ${LIMITS.description.min} à ${LIMITS.description.max}. Doublon = texte exactement`,
     '> identique sur deux URLs. Type de page = gabarit d’URL ; `/*` réunit les pages',
     '> à un seul segment (accueil, listes, outils).',
@@ -511,8 +525,8 @@ export function renderReport(input: {
     lines.push(
       `## \`${g.name}\` — ${g.pages.length} page(s), ${flagged.length} avec écart`,
       '',
-      `Longueurs (min / médiane / max) : titre ${spread(g.pages.map((p) => p.titleLength))} ;`,
-      `description ${spread(g.pages.map((p) => p.descriptionLength))}.`,
+      `Largeurs (min / médiane / max) : titre ${spread(g.pages.map((p) => p.titleWidth))} ;`,
+      `description ${spread(g.pages.map((p) => p.descriptionWidth))}.`,
       '',
     );
     if (flagged.length === 0) {
@@ -524,13 +538,13 @@ export function renderReport(input: {
     lines.push(
       flagged.length > WORST ? `Les ${WORST} pires sur ${flagged.length} :` : 'Toutes les pages :',
       '',
-      '| Page | Titre | Car. | Description | Car. | Écarts |',
+      '| Page | Titre | Larg. | Description | Larg. | Écarts |',
       '| --- | --- | ---: | --- | ---: | --- |',
       ...flagged
         .slice(0, WORST)
         .map(
           (p) =>
-            `| \`${pathOf(p.url)}\` | ${cell(p.title)} | ${p.titleLength} | ${cell(p.description)} | ${p.descriptionLength} | ${p.issues.map((i) => ISSUE_LABEL[i]).join(', ')} |`,
+            `| \`${pathOf(p.url)}\` | ${cell(p.title)} | ${p.titleWidth} | ${cell(p.description)} | ${p.descriptionWidth} | ${p.issues.map((i) => ISSUE_LABEL[i]).join(', ')} |`,
         ),
       '',
     );

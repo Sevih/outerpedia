@@ -8,7 +8,7 @@ import {
   pageGroup,
   parseSitemap,
   renderReport,
-  textLength,
+  textWidth,
   type Fetched,
   type PageMeta,
 } from './seo-lengths';
@@ -86,11 +86,17 @@ describe('extractMeta', () => {
   });
 });
 
-describe('textLength', () => {
-  it('compte des caractères, pas des unités UTF-16', () => {
-    expect(textLength(null)).toBe(0);
-    expect(textLength('abc')).toBe(3);
-    expect(textLength('🔥a')).toBe(2);
+describe('textWidth', () => {
+  it('latin : compte des caractères, pas des unités UTF-16', () => {
+    expect(textWidth(null)).toBe(0);
+    expect(textWidth('abc')).toBe(3);
+    expect(textWidth('🔥a')).toBe(2);
+  });
+
+  it('un caractère large (kanji, kana, hangul, pleine chasse) compte 2', () => {
+    expect(textWidth('攻略ガイド')).toBe(10);
+    expect(textWidth('공략 가이드')).toBe(11);
+    expect(textWidth('异域战记 Outerplane')).toBe(19);
   });
 });
 
@@ -163,6 +169,27 @@ describe('classify', () => {
     ).toEqual([
       ['title-short', 'description-short'],
       ['title-long', 'description-long'],
+    ]);
+  });
+
+  it('mesure en largeur : les mêmes bornes pour 15 à 30 kana que pour 30 à 60 lettres', () => {
+    const { pages } = classify([
+      page('https://x.test/a', chars(15, 'あ'), chars(35, 'あ')),
+      page('https://x.test/b', chars(30, 'い'), chars(80, 'い')),
+      page('https://x.test/c', chars(14, 'う'), chars(34, 'う')),
+      page('https://x.test/d', chars(31, '가'), chars(81, '가')),
+    ]);
+    expect(pages.map((p) => p.issues)).toEqual([
+      [],
+      [],
+      ['title-short', 'description-short'],
+      ['title-long', 'description-long'],
+    ]);
+    expect(pages.map((p) => [p.titleWidth, p.descriptionWidth])).toEqual([
+      [30, 70],
+      [60, 160],
+      [28, 68],
+      [62, 162],
     ]);
   });
 
@@ -313,6 +340,10 @@ describe('renderReport', () => {
     });
 
     expect(report).toContain('# Titres et descriptions — x.test, 2026-10-04');
+    // L'en-tête dit l'unité : une largeur, pas un nombre de caractères.
+    expect(report).toContain('> Ce rapport mesure une LARGEUR d’affichage');
+    expect(report).toContain('> Bornes, en largeur : titre 30 à 60,');
+    expect(report).toContain('| Page | Titre | Larg. | Description | Larg. | Écarts |');
     expect(report).toContain('17 URL(s) au sitemap, 16 mesurée(s), 1 non mesurée(s)');
     expect(report).toContain('## `/characters/*` — 14 page(s), 14 avec écart');
     expect(report).toContain('Les 10 pires sur 14 :');

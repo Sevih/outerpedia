@@ -7,6 +7,118 @@
 
 ## 2026-10-04
 
+- **Lot B17 : SEO, les langues à caractères larges mesurées en LARGEUR —
+  `displayWidth`, le script et les trois règles de gabarit sur la même
+  unité** (Opus). Le pourquoi : sur `jp`, `kr` et `zh` le rapport du 04/10
+  classait 522, 496 et 570 pages sur 574 « trop courtes », parce que les
+  bornes (titre 30 à 60, description 70 à 160) comptaient des caractères alors
+  qu'un kanji, un kana ou un hangul occupe la place de deux lettres. Aucun
+  texte réécrit, aucune clé de locale : c'est le lot B18.
+  **1. La fonction** (`src/lib/seo.ts`) : `displayWidth(text)` compte 2 pour un
+  caractère large ou pleine chasse, 1 pour tout autre point de code. Les
+  plages sont dans `WIDE_RANGES`, une par ligne avec le nom de ses blocs
+  Unicode : Hangul Jamo (consonnes initiales), radicaux CJK, CJK Symbols and
+  Punctuation (、。「」), Hiragana et Katakana (dont « ・ » et « ー »),
+  Bopomofo, Hangul Compatibility Jamo, Enclosed CJK et CJK Compatibility, CJK
+  Unified Ideographs avec l'extension A, Hangul Syllables, CJK Compatibility
+  Ideographs et Forms, la moitié pleine chasse de Halfwidth and Fullwidth
+  Forms (！，：（）ＡＢＣ, ￥), Kana Supplement, et les plans 2 et 3
+  (extensions B et suivantes). Sans dépendance. Comptent 1, par choix écrit
+  dans le commentaire : les emoji (la consigne les range dans « les autres »,
+  et le test existant `🔥a` = 2 reste vrai), les katakana demi-chasse, et la
+  ponctuation de largeur « ambiguë » (« — », « … », « · », guillemets
+  courbes) — un texte latin mesure donc exactement son nombre de caractères.
+  **2. Le script** (`scripts/seo-lengths.ts`) mesure avec cette fonction et
+  les MÊMES bornes : `textLength` devient `textWidth`, les champs
+  `titleLength`/`descriptionLength` de `MeasuredPage` deviennent
+  `titleWidth`/`descriptionWidth`, et le rapport le dit — un paragraphe en
+  tête (« Ce rapport mesure une LARGEUR d’affichage… »), « Bornes, en
+  largeur », « Largeurs (min / médiane / max) », colonnes « Larg. ». La coupe
+  des cellules à 200 reste en caractères (lisibilité du tableau).
+  **3. Les règles de gabarit** passent à la largeur par la même fonction :
+  `siteSuffixOverflows` (A28), `prefixedDescription` et `truncateDescription`
+  (A29). Conséquence voulue, application de la décision du 04/10 aux langues
+  larges : un titre japonais perd « | Outerpedia » dès 24 caractères larges
+  (48 + 13 = 61), une description d'événement est coupée à 79 kana et « … ».
+  Dans `truncateDescription`, la fenêtre de recul vers une limite de mot
+  (`WORD_BOUNDARY_WINDOW`, 30) devient elle aussi une largeur : 15 caractères
+  larges, la même proportion de la description qu'en latin — c'est ma lecture
+  de « par la même fonction », à défaire si Sevih la voulait en caractères.
+  Les noms `TITLE_MAX_LENGTH` et `DESCRIPTION_MAX_LENGTH` ne changent pas
+  (importés par le script et les tests), leur commentaire dit l'unité.
+  **Ce qui reste hors bornes en largeur**, estimé par script jetable depuis
+  les rapports du 04/10 de `docs/seo&audit/` (pas de nouveau crawl). Limite de
+  la méthode : un rapport ne donne le texte que des dix pires pages de chaque
+  type, plus min / médiane / max en caractères. Les 151 lignes listées de
+  `jp`, `kr` et `zh` sont recomptées exactement (suffixe retiré quand la
+  nouvelle règle le retire) ; le reste est projeté par le rapport
+  largeur/caractère de ces lignes (descriptions : 1,7 à 2,0 en japonais, 1,5
+  à 1,7 en coréen, 1,7 à 2,0 en chinois). Le haut de la distribution (titres
+  et descriptions trop LARGES) n'est pas dans les rapports, qui ne listaient
+  que des « trop courtes » : c'est le point faible de l'estimation. Pour les
+  guides, recoupé avec les `meta.json` (149 à la source, 118 au sitemap).
+
+  | Type de page (pages)  | `jp` (522 avant)                  | `kr` (496 avant)                  | `zh` (570 avant)                          |
+  | --------------------- | --------------------------------- | --------------------------------- | ----------------------------------------- |
+  | `/equipment/*` (288)  | 0 (descriptions 94 à ~125)        | 0 (85 à ~110)                     | 0 (74 à ~100)                             |
+  | `/characters/*` (128) | 0 (descriptions 79 à ~107)        | 2 (`rin`, `shu` : 69, à un près)  | ~100 à 115 (63 à 69, médiane ~67)         |
+  | `/guides/*/*` (118)   | ~5 (4 descriptions < 70, 1 > 160) | ~5 (5 descriptions < 70)          | ~30 à 47 descriptions < 70, 2 titres < 30 |
+  | `/*` (28)             | 0 listée ; 1 ou 2 possibles > 160 | 2 (`/changelog`, `/contributors`) | ~6 à 8                                    |
+  | `/guides/*` (11)      | 0                                 | 1 (`skyward-tower`, 62)           | 4                                         |
+  | `/event/*` (1)        | 0                                 | 0                                 | 0                                         |
+  | **Total (574)**       | **~5 à 7**                        | **~10**                           | **~140 à 175**                            |
+
+  Le détail, pour B18. `jp`, guides : `skyward-tower/hard-tower` (titre 29,
+  description 60), `special-request/beatles` (63 servie, 52 à la source),
+  `skyward-tower/normal-tower` (65), `general-guides/unlock-content` (68), et
+  `special-request/meteos` trop large à la source (166). `kr`, guides :
+  `beatles` (60), `unlock-content` (60), `normal-tower` (61),
+  `general-guides/core-fusion` (61), `hard-tower` (64) ; pages à un segment :
+  la description de `/changelog` (65) et le titre de `/contributors` (28).
+  `zh` : les fiches de personnage sont UN gabarit (« {nom}（{élément}
+  {classe}）— … », 33 à 41 caractères, il en faut 37 pour atteindre 70) — une
+  phrase à allonger, pas cent textes ; les guides courts à la source sont 28
+  `monad-gate` (63 à 69), 8 `skyward-tower`, 6 `general-guides`, 4
+  `joint-challenge` et `beatles` ; catégories : `other` (42),
+  `general-guides` (52), `skyward-tower` (54), `irregular-extermination`
+  (64) ; pages à un segment : `/guides` (titre 25, description 62),
+  `/contributors` (titre 23), `/coupons` (62), `/tools` (64), `/tierlist`
+  (52), `/changelog` (48). Les titres au-delà de 60 une fois le suffixe
+  retiré ne se comptent pas depuis ces rapports : à lire dans la prochaine
+  mesure des hôtes, après mise en ligne. Sur `en`, `fr` et `es`, les 106
+  lignes listées mesurent en largeur exactement leur nombre de caractères :
+  rien ne change.
+  **La vérification** : 14 tests nouveaux, 7 adaptés. `src/lib/seo.test.ts`
+  — `displayWidth` (latin, japonais, coréen, chinois dont un idéogramme hors
+  BMP, formes pleine chasse et katakana demi-chasse, mélange, emoji), le
+  suffixe du titre à 23 et 24 kana, `prefixedDescription` à 159 et 161 de
+  large, `truncateDescription` (80 caractères larges tiennent, le 81e coupe ;
+  fenêtre de recul à 14 et 15 kana ; coréen coupé à l'espace) ; les 12
+  catégories × 6 langues tiennent toujours entre 30 et 60, mesurées en largeur
+  (`jp` 46 à 59, `kr` 44 à 53, `zh` 43 à 55, suffixe gardé partout).
+  `scripts/seo-lengths.test.ts` — `textWidth`, `classify` aux bornes avec des
+  kana et des hangul, l'en-tête du rapport. Les tests latins des règles d'A28
+  et A29 sont verts sans retouche ; les quatre qui posaient un caractère large
+  (`𠮷`, `あ`, `序文`) disaient l'ancienne unité et sont réécrits en largeur,
+  le cas « hors BMP = un caractère » passant sur un emoji. `pnpm typecheck`
+  (`$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit
+-p scripts/tsconfig.json`, sans erreur), `pnpm lint` (`$ eslint`, sans
+  sortie), `pnpm test` (`Test Files 181 passed (181)`, `Tests 2229 passed
+(2229)`). Aucun changement visuel : seules des balises du `<head>` bougent,
+  et seulement là où un caractère large est servi. Treize pages `/jp/…` lues
+  une par une au `curl` sur le `localhost:3000` de Sevih (le script complet
+  n'a pas été lancé) : `characters/ais-wallenstein` sort sans suffixe à 58
+  (71 avec), `characters/ame` le garde (49), `guides/adventure-license` aussi
+  (59) ; `event/20260324-video` est coupée à 160 de large (87 caractères) ;
+  `guides/special-request/glicys` perd son préfixe de boss (153 sans, 164
+  avec) ; `equipment/original-sin` 39 et 94, `tierlist` 55 et 94.
+  **Laissé** : aucun texte (B18), ni la mesure des hôtes servis, qui n'ont pas
+  ce commit. Repéré hors périmètre, non touché : la description de
+  `/characters` sert le jeton `{monthYear}` tel quel, non remplacé, dans les
+  six langues (« Updated {monthYear}. », « {monthYear}更新。 ») — vu au
+  `curl` ; la clé voisine de `/equipment` porte le même jeton, pas vérifiée.
+  L'item B17 sort du TODO, la ligne B18 y reprend les chiffres ci-dessus.
+
 - **Relecture de A29 et B16 : le SEO anglais est dans les bornes** (Fable).
   Lots 60 et 61 de la série : A29 `f1919818` (gabarits de titre des
   catégories de guides et de `/changelog`, description d'événement coupée,

@@ -3,6 +3,7 @@ import {
   createPageMetadata,
   TITLE_MAX_LENGTH,
   DESCRIPTION_MAX_LENGTH,
+  displayWidth,
   mentionsName,
   scopedTitle,
   guideCategoryTitle,
@@ -36,6 +37,51 @@ import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categor
  * d'URL est déjà couvert par `site.test.ts`), on ne teste ici que la LOGIQUE des
  * builders.
  */
+
+describe('displayWidth — largeur d’affichage, un caractère large compte 2', () => {
+  it('latin : un par caractère, accents et ponctuation compris', () => {
+    expect(displayWidth('')).toBe(0);
+    expect(displayWidth('Outerpedia')).toBe(10);
+    expect(displayWidth('Guías « général » — été…')).toBe(24);
+  });
+
+  it('japonais : kanji, hiragana, katakana et ponctuation idéographique comptent 2', () => {
+    expect(displayWidth('攻略')).toBe(4);
+    expect(displayWidth('あめ')).toBe(4);
+    expect(displayWidth('ガイド')).toBe(6);
+    // « ー » et « ・ » sont dans le bloc Katakana ; « 、 » « 。 » « 「 » « 」 » dans
+    // CJK Symbols and Punctuation.
+    expect(displayWidth('スキル・ビルド、「ティア」。')).toBe(28);
+  });
+
+  it('coréen : chaque syllabe hangul compte 2, l’espace entre deux mots 1', () => {
+    expect(displayWidth('가이드')).toBe(6);
+    expect(displayWidth('공략 가이드')).toBe(11);
+  });
+
+  it('chinois : idéogrammes et ponctuation pleine chasse comptent 2', () => {
+    expect(displayWidth('异域战记')).toBe(8);
+    expect(displayWidth('技能，装备：（推荐）！')).toBe(22);
+    // Extension B, hors BMP : un point de code, deux de large.
+    expect(displayWidth('𠮷')).toBe(2);
+  });
+
+  it('formes pleine chasse à 2, katakana demi-chasse à 1', () => {
+    expect(displayWidth('ＡＢＣ１２３')).toBe(12);
+    expect(displayWidth('ｶﾞｲﾄﾞ')).toBe(5);
+  });
+
+  it('mélange : la somme des deux mesures', () => {
+    // 2 kana + « — Outerplane » entre espaces (14) + 6 caractères larges.
+    expect(displayWidth('あめ — Outerplane 地属性魔法型')).toBe(4 + 14 + 12);
+    expect(displayWidth('世界Boss攻略')).toBe(4 + 4 + 4);
+  });
+
+  it('emoji : un point de code, une largeur — ni deux unités UTF-16, ni caractère large', () => {
+    expect(displayWidth('🔥')).toBe(1);
+    expect(displayWidth('🔥a')).toBe(2);
+  });
+});
 
 describe('createPageMetadata — canonical & hreflang', () => {
   it('canonical = URL de la langue courante ; alternates = toutes les langues + x-default', () => {
@@ -135,11 +181,28 @@ describe('createPageMetadata — titre, OG, Twitter, robots', () => {
       expect(meta.twitter?.title).toBe(title);
     });
 
-    it('compte en points de code : un caractère hors BMP vaut un, pas deux', () => {
-      // « 𠮷 » pèse deux unités UTF-16 : compté en `.length`, ce titre déborderait.
-      const { title, meta } = withTotal(TITLE_MAX_LENGTH, '𠮷');
+    it('compte en points de code : un caractère hors BMP étroit vaut un, pas deux', () => {
+      // « 🔥 » pèse deux unités UTF-16 : compté en `.length`, ce titre déborderait.
+      const { title, meta } = withTotal(TITLE_MAX_LENGTH, '🔥');
       expect(meta.title).toBe(title);
       expect(meta.openGraph?.title).toBe(`${title}${SUFFIX}`);
+    });
+
+    it('compte en LARGEUR : un caractère large vaut deux', () => {
+      const meta = (title: string) =>
+        createPageMetadata({ lang: 'jp', path: '/x', title, description: 'D' });
+      // 23 kana = 46 de large, 59 avec le suffixe : il reste.
+      const fits = 'あ'.repeat(23);
+      expect(meta(fits).title).toBe(fits);
+      expect(meta(fits).openGraph?.title).toBe(`${fits}${SUFFIX}`);
+      // 24 kana = 48, 61 avec le suffixe — 37 caractères seulement : il saute.
+      const overflows = 'あ'.repeat(24);
+      expect(meta(overflows).title).toEqual({ absolute: overflows });
+      expect(meta(overflows).openGraph?.title).toBe(overflows);
+      expect(meta(overflows).twitter?.title).toBe(overflows);
+      // Hangul et idéogrammes, hors BMP compris, pareil.
+      expect(meta('가'.repeat(24)).openGraph?.title).toBe('가'.repeat(24));
+      expect(meta('𠮷'.repeat(24)).openGraph?.title).toBe('𠮷'.repeat(24));
     });
 
     it('title === SITE_NAME : jamais suffixé, et pas d’`absolute`', () => {
@@ -305,7 +368,7 @@ describe('guideCategoryTitle — gabarit des pages de catégorie', () => {
   });
 
   it.each(LANGS)(
-    '%s : chaque catégorie tient entre 30 et TITLE_MAX_LENGTH, nom du site compris',
+    '%s : chaque catégorie tient entre 30 et TITLE_MAX_LENGTH de large, nom du site compris',
     (lang) => {
       const t = makeT(LOCALES[lang]);
       for (const slug of GUIDE_CATEGORY_SLUGS) {
@@ -318,8 +381,8 @@ describe('guideCategoryTitle — gabarit des pages de catégorie', () => {
           description: 'D',
         }).openGraph?.title as string;
         expect(served, `${lang} ${slug}`).toBe(`${title} | Outerpedia`);
-        expect([...served].length, `${lang} ${slug} : ${served}`).toBeGreaterThanOrEqual(30);
-        expect([...served].length, `${lang} ${slug} : ${served}`).toBeLessThanOrEqual(
+        expect(displayWidth(served), `${lang} ${slug} : ${served}`).toBeGreaterThanOrEqual(30);
+        expect(displayWidth(served), `${lang} ${slug} : ${served}`).toBeLessThanOrEqual(
           TITLE_MAX_LENGTH,
         );
       }
@@ -346,6 +409,15 @@ describe('prefixedDescription — le préfixe saute quand il fait déborder', ()
   it('description déjà trop longue : rendue telle quelle, sans préfixe ni coupe', () => {
     const description = fill(DESCRIPTION_MAX_LENGTH + 20);
     expect(prefixedDescription('Boss', description)).toBe(description);
+  });
+
+  it('compte en largeur : un préfixe et une description larges pèsent double', () => {
+    // « ボス — » pèse 7 de large (deux kana, trois caractères étroits) : avec 76
+    // kana (152) on est à 159, avec 77 (154) à 161 — pour 82 caractères.
+    const fits = 'あ'.repeat(76);
+    expect(prefixedDescription('ボス', fits)).toBe(`ボス — ${fits}`);
+    const overflows = 'あ'.repeat(77);
+    expect(prefixedDescription('ボス', overflows)).toBe(overflows);
   });
 });
 
@@ -376,19 +448,47 @@ describe('truncateDescription — coupe à la limite de mot', () => {
     expect(truncateDescription('heroes — showcases and guides', 12)).toBe('heroes…');
   });
 
+  it('compte en largeur : 80 caractères larges tiennent, le 81e fait couper', () => {
+    const exact = 'あ'.repeat(DESCRIPTION_MAX_LENGTH / 2);
+    expect(truncateDescription(exact)).toBe(exact);
+    // 79 kana (158) et « … » (1) : un 80e porterait le tout à 161.
+    const cut = truncateDescription('あ'.repeat(DESCRIPTION_MAX_LENGTH / 2 + 1));
+    expect(cut).toBe(`${'あ'.repeat(DESCRIPTION_MAX_LENGTH / 2 - 1)}…`);
+    expect(displayWidth(cut)).toBeLessThanOrEqual(DESCRIPTION_MAX_LENGTH);
+  });
+
   it('texte sans espaces (japonais, chinois) : coupe au caractère', () => {
     const cut = truncateDescription('あ'.repeat(200));
-    expect(cut).toBe(`${'あ'.repeat(DESCRIPTION_MAX_LENGTH - 1)}…`);
+    expect(cut).toBe(`${'あ'.repeat(DESCRIPTION_MAX_LENGTH / 2 - 1)}…`);
   });
 
   it('une espace lointaine n’est pas une limite de mot : pas de recul au-delà de la fenêtre', () => {
     const cut = truncateDescription(`序文 ${'あ'.repeat(200)}`);
-    expect([...cut].length).toBe(DESCRIPTION_MAX_LENGTH);
+    // « 序文 » et l'espace (5), 77 kana (154), « … » : 160 de large.
+    expect(cut).toBe(`序文 ${'あ'.repeat(77)}…`);
+    expect(displayWidth(cut)).toBe(DESCRIPTION_MAX_LENGTH);
   });
 
-  it('compte en points de code : un caractère hors BMP vaut un', () => {
-    const cut = truncateDescription('𠮷'.repeat(DESCRIPTION_MAX_LENGTH + 5));
-    expect([...cut].length).toBe(DESCRIPTION_MAX_LENGTH);
+  it('la fenêtre de recul est une largeur : 15 caractères larges, pas 30', () => {
+    // L'espace est à 14 kana de la coupe (29 de large avec elle) : on y recule.
+    const near = `${'あ'.repeat(65)} ${'い'.repeat(40)}`;
+    expect(truncateDescription(near)).toBe(`${'あ'.repeat(65)}…`);
+    // À 15 kana (31 de large) : trop loin, la coupe tombe au caractère.
+    const far = `${'あ'.repeat(64)} ${'い'.repeat(40)}`;
+    expect(truncateDescription(far)).toBe(`${'あ'.repeat(64)} ${'い'.repeat(15)}…`);
+  });
+
+  it('coréen : la coupe recule à l’espace entre deux mots', () => {
+    const cut = truncateDescription('가이드 '.repeat(40).trim());
+    expect(cut.endsWith('가이드…')).toBe(true);
+    expect(displayWidth(cut)).toBeLessThanOrEqual(DESCRIPTION_MAX_LENGTH);
+  });
+
+  it('compte en points de code : un caractère hors BMP large vaut deux, étroit un', () => {
+    const wide = truncateDescription('𠮷'.repeat(DESCRIPTION_MAX_LENGTH));
+    expect([...wide].length).toBe(DESCRIPTION_MAX_LENGTH / 2);
+    const narrow = truncateDescription('🔥'.repeat(DESCRIPTION_MAX_LENGTH + 5));
+    expect([...narrow].length).toBe(DESCRIPTION_MAX_LENGTH);
   });
 });
 
