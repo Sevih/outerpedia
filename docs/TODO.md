@@ -1,52 +1,28 @@
 # TODO
 
 > Le « à faire » uniquement — le « fait » migre dans [DONE.md](./DONE.md)
-> (décision Sevih 2026-07-17). Réécrit le **2026-07-17** après audit complet du
-> code, puis nettoyé les 18, 19, 20, 21 et **26/07** : à chaque passe, le « fait »
-> migre dans DONE et les sections vidées sont retirées — leur bilan vit là-bas, le
-> garder ici en produirait une copie qui finirait par mentir.
-> Le **24/08**, l'item PRIO (Dimensional Supply au guide des bannières) est parti
-> dans DONE avec la refonte in-game qu'il attendait, et sa section — vide — a
-> suivi.
-> État de référence : **26/07** — la migration du 24/08 n'était PAS une passe de
-> relecture, les items ci-dessous n'ont pas été re-vérifiés contre le code depuis.
-> Re-vérifier chaque item contre le code au moment de le traiter (le 26/07, cette
-> relecture a corrigé deux chiffres périmés — cf. l'item SEO ; l'autre, le
-> CHANGELOG, est tranché depuis : gelé, cf. DONE 03/08).
-> Le **07/09**, l'audit transverse ([audit/transverse.md](./audit/transverse.md),
-> constats G1–G52) a ajouté sa propre section ci-dessous — ces items-là SONT
-> vérifiés contre le code (chaque Haute/Moyenne re-lu de première main ce
-> jour-là).
-> Le **25/09** et le **03/10**, 38 items assez cadrés pour un agent Opus ont
-> été délégués et soldés (table des commits, leçons et préambule réutilisable
-> dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste
-> ci-dessous demande une décision, un test physique ou une relecture d'abord ;
-> restent deux lots écrits au même endroit (F6, F7).
+> (décision Sevih 2026-07-17) ; une section vidée est retirée, son bilan vit
+> là-bas.
+> État de référence : **04/10/2026**. Les constats Haute et Moyenne des audits
+> ([audit/](./audit/README.md)) sont soldés, hors ce qui figure ci-dessous ;
+> les Basse (G26–G52, P6–P10) se traitent en passant sur les fichiers, les
+> rapports font foi. 59 items ont été délégués à des agents entre le 25/09 et
+> le 04/10 (table des commits,
+> leçons et préambule réutilisable dans
+> [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)). Ce qui reste est du
+> SEO non urgent, un chantier portraits et un test à jouer au prochain patch.
 
 ---
 
-## 🧹 Dette code
+## 🔎 SEO — titres et descriptions (mesure du 04/10 sur le site servi, non urgent)
 
-> L'audit du 07/08 est **entièrement traité** — hors volet damage, qui a son
-> backlog séparé : [audit/damage-calculator.md](./audit/damage-calculator.md)
-> (**D1–D5**). Bilan, y compris les constats tombés à la vérification, dans
-> [DONE.md](./DONE.md).
-
-### Lots de fond SEO/perf (mesure du 04/10 sur le site servi — non urgents)
-
-> Mesuré par `scripts/seo-lengths.ts` (lot A27) sur l'hôte anglais : 574 pages
-> du sitemap, 179 avec un écart ; aucun titre ni description absent, aucun
-> doublon exact. Bornes : titre 30 à 60 caractères, description 70 à 160.
-> Rapport, avec les dix pires par type de page :
-> `docs/seo&audit/titres-descriptions-outerpedia.com-2026-10-04.md` (dossier
-> hors git, se régénère par `pnpm exec tsx scripts/seo-lengths.ts`). Les cinq
-> autres langues ont les mêmes gabarits et se mesurent par `--host` — des
-> textes plus longs en fr/es, d'autres bornes utiles en jp/kr/zh. Presque tout
-> tient à un GABARIT, pas à du volume éditorial. Décision Sevih 04/10 : quand
-> un titre déborde, on retire « | Outerpedia » — FAIT le 04/10 (lot A28, cf.
-> DONE) : 115 titres au-delà de 60 tombent à 7, les 12 descriptions trop
-> longues des fiches d'équipement à 0. Mesuré sur le serveur local ; la mesure
-> sur le site servi est à refaire après déploiement.
+> Mesuré par `scripts/seo-lengths.ts` sur l'hôte anglais EN LIGNE, après le
+> lot A28 : 574 pages du sitemap, 67 avec un écart (179 avant) ; aucun titre
+> ni description absent, aucun doublon exact. Bornes : titre 30 à 60
+> caractères, description 70 à 160. Rapport, avec les dix pires par type de
+> page : `docs/seo&audit/titres-descriptions-outerpedia.com-2026-10-04.md`
+> (dossier hors git, se régénère par `pnpm exec tsx scripts/seo-lengths.ts`).
+> Les cinq autres langues ont les mêmes gabarits et se mesurent par `--host`.
 
 - [ ] **Titres encore au-delà de 60 SANS le suffixe (7 pages, 61 à 64)** — À
       TRANCHER. Le nom et le gabarit débordent à eux seuls, « | Outerpedia »
@@ -89,21 +65,23 @@
       caractères) comme description. Soit un résumé plus court, soit une coupe
       dans `generateMetadata` pour les suivants.
 
-## 🔎 Audit transverse du 07/09 (constats G1–G52)
+## 🎴 Portraits animés
 
-> Source : [audit/transverse.md](./audit/transverse.md) — le rapport porte les
-> lignes exactes, les vérifications et les correctifs détaillés ; ici, le « à
-> faire » en clair, par lot. Le calculateur de dégâts (D1–D5) et la découpe des
-> gros composants ne sont PAS ici : ils ont déjà leur item ou leur backlog.
-> **S1** (limitation de débit) est traité et déployé (04/10, cf. DONE).
+> Audit du 03/10 ([audit/portrait-fx.md](./audit/portrait-fx.md)) : P1 à P5
+> corrigés, validés à l'écran et en ligne le 04/10.
 
-### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
+- [ ] **Un contexte WebGL partagé par toutes les cartes** — le chantier de
+      fond que l'audit désigne : chaque carte monte aujourd'hui son contexte
+      et sa copie des textures (3 Mo par carte `_Demi` depuis le plafond à
+      512, 18 avant). Il emporterait P6. Les constats Basse (P6–P10) se
+      traitent en passant sur les fichiers.
 
-Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
-P1 à P5 sont corrigés, validés à l'écran et en ligne (04/10, cf. DONE). Les
-Basse (P6–P10) et la dette se traitent en passant sur les fichiers ; le
-contexte WebGL partagé entre cartes reste un chantier à part (il emporterait
-P6).
+## 🧪 À jouer au prochain patch
+
+- [ ] **Dry-run du flux patch (lot F7, G12)** : le correctif n'a pas pu être
+      joué sans tirer les données du jeu. Test manuel décrit dans l'entrée
+      DONE du lot F7 (03/10) — un run à blanc ne doit plus laisser
+      d'artefact damage bâti sur le `skills.json` d'avant le patch.
 
 ---
 
