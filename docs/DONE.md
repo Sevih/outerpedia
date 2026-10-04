@@ -7,6 +7,18 @@
 
 ## 2026-10-04
 
+- **Mise en ligne de la série : site, textures plafonnées, Caddy (S1)** (Sevih,
+  contrôle Fable). `pnpm datagen:portrait-fx` puis `pnpm images` : les quatre
+  textures servies par R2 font 512×512 (vérifié sur `img.outerpedia.com`), la
+  table régénérée est commitée. Push d'outerpedia, CI verte (l'image démarre
+  avant d'être publiée). Sur le VPS, `git pull` de `sevih-tool` et
+  `docker compose up -d --force-recreate caddy` : les logs ne montrent aucune
+  erreur de configuration. Contrôlé de l'extérieur : les six hôtes répondent
+  200 (`zh` compris, en direct), `www` redirige en 301, `/api/revalidate` et
+  `/api/internal/*` rendent 404, `/botapi/health` 200, et un
+  `X-Forwarded-Host` forgé sur `zh` n'est repris nulle part dans la page. Non
+  contrôlé : le quota par visiteur lui-même (il faudrait écrire en prod pour
+  le déclencher).
 - **Calculateur de dégâts : une carte par monstre de tour, l'étage se choisit
   ensuite** (Fable, relevé par Sevih au contrôle des lots). Le picker de cible
   listait un monstre de tour autant de fois qu'il a d'étages : en very hard,

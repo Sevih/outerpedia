@@ -95,8 +95,7 @@
 > lignes exactes, les vérifications et les correctifs détaillés ; ici, le « à
 > faire » en clair, par lot. Le calculateur de dégâts (D1–D5) et la découpe des
 > gros composants ne sont PAS ici : ils ont déjà leur item ou leur backlog.
-> **S1** (limitation de débit) est TRAITÉ le 03/10 côté code, cf. DONE ; reste à
-> recréer le conteneur Caddy sur le VPS.
+> **S1** (limitation de débit) est traité et déployé (04/10, cf. DONE).
 
 ### Lot 2 — métier, données, outillage
 
@@ -106,14 +105,10 @@
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
 Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
-P1, P3, P4 et P5 sont corrigés et validés à l'écran (04/10, cf. DONE). Les
-Basse (P6–P10) et la dette se traitent en passant sur les fichiers.
-
-- [ ] 18 Mo de textures GPU par carte `_Demi` (P2, lot F9) : plafond à 512
-      prêt, rendu validé par Sevih le 04/10 sur la page de contrôle. Reste à
-      lancer : `pnpm datagen:portrait-fx`, puis `pnpm images`. Le correctif de
-      fond — un contexte partagé pour toutes les cartes — reste un chantier,
-      il emporterait P6.
+P1 à P5 sont corrigés, validés à l'écran et en ligne (04/10, cf. DONE). Les
+Basse (P6–P10) et la dette se traitent en passant sur les fichiers ; le
+contexte WebGL partagé entre cartes reste un chantier à part (il emporterait
+P6).
 
 ---
 
