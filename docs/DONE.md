@@ -7,6 +7,11 @@
 
 ## 2026-10-04
 
+- **Contrôles après mise en ligne** : chips au toucher (G4) et sélecteur
+  d'étage du calculateur validés par Sevih, sur téléphone et à l'écran.
+  `scripts/seo-lengths.ts` rejoué sur le site servi : 574 pages, 67 avec
+  écart (179 avant A28) ; titres au-delà de 60 : 7 (115 avant), les sept
+  attendus ; descriptions des fiches d'équipement : 0 au-delà de 160.
 - **Mise en ligne de la série : site, textures plafonnées, Caddy (S1)** (Sevih,
   contrôle Fable). `pnpm datagen:portrait-fx` puis `pnpm images` : les quatre
   textures servies par R2 font 512×512 (vérifié sur `img.outerpedia.com`), la

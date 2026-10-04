@@ -97,11 +97,6 @@
 > gros composants ne sont PAS ici : ils ont déjà leur item ou leur backlog.
 > **S1** (limitation de débit) est traité et déployé (04/10, cf. DONE).
 
-### Lot 2 — métier, données, outillage
-
-- [ ] Chips à lien au toucher (G4) : CORRIGÉ le 03/10 (cf. DONE), à revoir
-      sur téléphone une fois poussé — premier appui la bulle, second la fiche.
-
 ### Audit des portraits animés (03/10, P1–P10 — les quatre Moyenne)
 
 Rapport : [`docs/audit/portrait-fx.md`](./audit/portrait-fx.md). Aucun Haute.
