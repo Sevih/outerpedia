@@ -50,7 +50,7 @@ function installLinux(): void {
 Type=Application
 Name=Outerpedia quick
 GenericName=Codes promo, 4-comics, vidéos
-Comment=Les trois gestes du quotidien, sans lancer le serveur de dev
+Comment=Les quatre gestes du quotidien, sans lancer le serveur de dev
 Exec=${resolve(repo, 'scripts/quick/launch.sh')}
 Path=${repo}
 Icon=${PNG}

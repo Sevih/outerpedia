@@ -7,6 +7,26 @@
 
 ## 2026-10-04
 
+- **Relecture de B19 : l'onglet « Rangs » de `pnpm quick`** (Fable). Lot 64,
+  `d9d99ba0`. `pnpm typecheck`, `pnpm lint`, `pnpm test` verts (182 fichiers,
+  2 251 tests), `package.json` intact, script de `ui.html` contrôlé par
+  `node --check`. Essai indépendant sur la vraie donnée, écriture simulée
+  HORS du dépôt (même `writeJson` que le store) : réécrire
+  `characters.json` sans changement le rend à l'octet près ; un lot de huit
+  cellules (rang changé, rang PvP posé, palier ajouté, palier vidé, palier
+  changé, rang d'EE avec chips) ne produit que les lignes attendues, les
+  chips de l'EE repartent dans le patch, et les deux cellules piégées (valeur
+  de départ fausse, palier 5 non plein) sont refusées avec leur raison.
+  Corrigé dans la foulée, sur le signalement du lot : `build()` de
+  `CharacterCuratedEditor` ne reprenait pas `synergies`, donc un « Save » de
+  l'onglet « Manual fields » de l'admin effaçait les synergies du perso (25
+  en portent ; la route passe l'entrée telle quelle à un store qui remplace)
+  — elles sont maintenant préservées comme les pros/cons. Le `.desktop` de
+  `quick:install` dit « quatre gestes » (à reposer par `pnpm quick:install`
+  pour que le libellé change). Laissé : `TRANSCEND_STEPS` et `ROLE_ORDER`
+  gardent leur liste propre dans les deux composants de tier list ; aucun
+  navigateur n'a rendu l'onglet ni joué un enregistrement réel — premier
+  essai par Sevih, scénario dans l'entrée du lot ci-dessous.
 - **`pnpm quick` : un quatrième onglet « Rangs » pour les rangs et rôles des
   persos et les rangs des EE** (lot B19, demande Sevih du 04/10). Régler un
   rang demandait l'admin complet, donc `pnpm dev` et son refresh ; l'onglet

@@ -175,6 +175,9 @@ export function CharacterCuratedEditor({
     if (Object.keys(rankMap).length) c.rankByTranscend = rankMap;
     const roleMap = toMap(roleByT);
     if (Object.keys(roleMap).length) c.roleByTranscend = roleMap;
+    // Synergies : éditées par l'outil dédié, préservées ici comme les pros/cons
+    // (le store REMPLACE l'entrée : un champ non repris est effacé).
+    if (initial.synergies) c.synergies = initial.synergies;
     return c;
   }
 
