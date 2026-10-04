@@ -74,16 +74,16 @@ const es: Record<TranslationKey, string> = {
   // Page metadata
   'page.home.title': 'Outerpedia — Wiki y Base de Datos de Outerplane',
   'page.home.description':
-    'Outerpedia es una wiki y base de datos impulsada por la comunidad para Outerplane. Encuentra construcciones de personajes, listas de clasificación, guías, recomendaciones de equipo y más.',
+    'Outerpedia es una wiki y base de datos de la comunidad de Outerplane. Encuentra builds de personajes, tier lists, guías, recomendaciones de equipo y más.',
   'page.characters.title': 'Base de Datos de Personajes de Outerplane',
   'page.characters.description':
-    'Explora todos los personajes de Outerplane. Filtra por elemento, clase y rareza. Visualiza habilidades, estadísticas y detalles de equipo. Actualizado {monthYear}.',
+    'Explora todos los personajes de Outerplane. Filtra por elemento, clase y rareza. Consulta habilidades, estadísticas y equipo. Actualizado {monthYear}.',
   'page.equipments.title': 'Base de Datos de Equipo de Outerplane',
   'page.equipments.description':
-    'Explora todas las armas, accesorios, talismanes y conjuntos de armadura de Outerplane. Compara estadísticas y encuentra el mejor equipo para tus personajes. Actualizado {monthYear}.',
+    'Armas, accesorios, talismanes y conjuntos de armadura de Outerplane: compara estadísticas y encuentra el mejor equipo. Actualizado {monthYear}.',
   'page.equipment.meta_description':
     '{name} — estadísticas principales y secundarias, efectos pasivos, ascenso y dónde obtenerlo en Outerplane. Ficha en Outerpedia.',
-  'page.equipment.title_suffix': ' — {type} de Outerplane',
+  'page.equipment.title_suffix': ' — {type} Outerplane',
   'page.equipment.kind.weapon': 'Arma',
   'page.equipment.kind.amulet': 'Accesorio',
   'page.equipment.kind.talisman': 'Talismán',
@@ -193,11 +193,11 @@ const es: Record<TranslationKey, string> = {
   'tools.tierlistpve.desc':
     'Tier list de PvE de Outerplane — mejores personajes para aventura, jefes, incursiones y contenido de endgame.',
   'tools.tierlistpve.meta_description':
-    'Tier list de PvE de Outerplane: cada personaje clasificado para aventura, jefes, incursiones y endgame, por nivel de trascendencia, con filtros de elemento, clase y rol.',
+    'Tier list PvE de Outerplane: cada personaje clasificado para aventura, jefes, incursiones y endgame, por trascendencia, con filtros de elemento, clase y rol.',
   'tools.tierlistpvp': 'Tier List - PvP',
   'tools.tierlistpvp.desc': 'Tier list de PvP de Outerplane — mejores personajes para arena.',
   'tools.tierlistpvp.meta_description':
-    'Tier list de PvP de Outerplane: cada personaje clasificado para la arena, con trascendencia de 6 estrellas y equipo exclusivo +10, con filtros de elemento y clase.',
+    'Tier list PvP de Outerplane: cada personaje clasificado para la arena, con trascendencia de 6 estrellas y equipo exclusivo +10, con filtros de elemento y clase.',
   'tools.ee-priority-base': 'Prioridad EE (Base)',
   'tools.ee-priority-base.desc':
     'Clasificación de equipo exclusivo (EE) según su utilidad e impacto en nivel 0. No se consideran efectos +10.',
@@ -227,7 +227,7 @@ const es: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.desc':
     '¿No sabes qué personaje puede usar tu equipo? Encuentra la mejor opción según el equipamiento.',
   'tools.gear-usage-finder.meta_description':
-    '¿Quién puede usar esa pieza de equipo? Indica tipo, estadística principal, subestadísticas y conjunto para ver los personajes de Outerplane cuya build recomendada coincide.',
+    '¿Quién puede usar ese equipo? Indica tipo, estadística principal, subestadísticas y conjunto para ver los héroes de Outerplane cuya build recomendada coincide.',
   'tools.gear-usage-finder.step_type': 'Tipo de Equipo',
   'tools.gear-usage-finder.step_class': 'Clase',
   'tools.gear-usage-finder.step_mainstat': 'Estadística Principal',
@@ -247,7 +247,7 @@ const es: Record<TranslationKey, string> = {
   'tools.patch-history.desc':
     'Explora todas las notas de parche, notas de desarrollo, compendio de héroes y más.',
   'tools.patch-history.meta_description':
-    'Archivo de noticias oficiales de Outerplane: notas de parche, notas de desarrollo, compendio de héroes, eventos y avisos, desde 2023 hasta la última actualización.',
+    'Archivo de noticias oficiales de Outerplane: notas de parche, notas de desarrollo, compendio de héroes, eventos y avisos, de 2023 a la última actualización.',
   'tools.patch-history.era.major9': 'Major9 (Oct 2025+)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': 'Actualización',
@@ -273,7 +273,7 @@ const es: Record<TranslationKey, string> = {
   'tools.pull-simulator.desc':
     'Simula invocaciones de gacha para todos los banners. Prueba tu suerte con el sistema de millaje incluido.',
   'tools.pull-simulator.meta_description':
-    'Simula el reclutamiento de Outerplane en los banners de Aumento de Tasa, Premium y Limitado: elige tus héroes de enfoque, invoca x1 o x10 y sigue millaje, éter gastado y resultados.',
+    'Simula el reclutamiento de Outerplane en banners Aumento de Tasa, Premium y Limitado: elige héroes de enfoque, tira x1 o x10 y sigue millaje, éter y resultados.',
   'tools.pull-simulator.banner.custom': 'Todos los Héroes',
   'tools.pull-simulator.banner.rateup': 'Aumento de Tasa',
   'tools.pull-simulator.banner.premium': 'Premium',
@@ -307,7 +307,7 @@ const es: Record<TranslationKey, string> = {
   'tools.progress-tracker.desc':
     'Rastrea tu progreso: tareas diarias/semanales/mensuales, compras de tienda y fabricación.',
   'tools.progress-tracker.meta_description':
-    'Lista de control para tu rutina en Outerplane: tareas diarias, semanales y mensuales, compras de tienda y fabricación. El progreso se guarda en tu navegador y es exportable.',
+    'Lista de control de tu rutina en Outerplane: tareas diarias, semanales y mensuales, tienda y fabricación. Progreso guardado en tu navegador, exportable.',
   'tools.wallpapers': 'Fondos de Pantalla',
   'tools.wallpapers.desc': 'Explora y descarga ilustraciones y fondos de pantalla oficiales.',
   'tools.wallpapers.meta_description':
@@ -319,11 +319,11 @@ const es: Record<TranslationKey, string> = {
   'tools.ost': 'Banda Sonora',
   'tools.ost.desc': 'Escucha y descarga la banda sonora oficial.',
   'tools.ost.meta_description':
-    'Escucha la banda sonora de Outerplane en tu navegador: la música del juego en un solo reproductor, con modo aleatorio, repetición, atajos de teclado y descarga en MP3.',
+    'Escucha la banda sonora de Outerplane en tu navegador: la música del juego en un reproductor con modo aleatorio, repetición, atajos de teclado y descarga MP3.',
   'tools.event': 'Eventos Comunitarios',
   'tools.event.desc': 'Explora eventos comunitarios: torneos, concursos, sorteos y más.',
   'tools.event.meta_description':
-    'Eventos comunitarios para los jugadores de Outerplane: torneos, concursos y otras actividades, con fechas, organizador y estado (en curso, próximamente o finalizado).',
+    'Eventos comunitarios de jugadores de Outerplane: torneos, concursos y otras actividades, con fechas, organizador y estado (en curso, próximamente o finalizado).',
   'tools.event.filter.type': 'Tipo',
   'tools.event.filter.status': 'Estado',
   'tools.event.type.tournament': 'Torneo',
@@ -344,7 +344,7 @@ const es: Record<TranslationKey, string> = {
   'tools.hero-tracker.desc':
     'Haz seguimiento de cada Héroe y lista los materiales que aún necesitas.',
   'tools.hero-tracker.meta_description':
-    'Registra el estado de cada uno de tus héroes de Outerplane (nivel, habilidades, afinidad, trascendencia, equipo exclusivo) y obtén los materiales que aún te faltan.',
+    'Registra el estado de tus héroes de Outerplane (nivel, habilidades, afinidad, trascendencia, equipo exclusivo) y obtén los materiales que aún te faltan.',
   'tools.hero-tracker.intro':
     'Establece dónde está cada Héroe y dónde quieres que esté: la herramienta lista qué falta por farmear. Todo se guarda en tu navegador.',
   'tools.hero-tracker.search': 'Buscar un Héroe…',
@@ -1180,8 +1180,8 @@ const es: Record<TranslationKey, string> = {
 
   // Character detail page
   'page.character.meta_description':
-    '{name} ({element} {classType}) — desglose de habilidades, equipo exclusivo, compilaciones de equipo recomendadas y clasificación de nivel en Outerpedia.',
-  'page.character.sr_suffix': ' — Guía {element} {classType} de Outerplane',
+    '{name} ({element} {classType}) — desglose de habilidades, equipo exclusivo, builds recomendadas y ranking de tier en Outerpedia.',
+  'page.character.sr_suffix': ' — Guía Outerplane {element} {classType}',
   'page.character.cp_title': 'Poder de Combate (sin equipo, hab. Niv. 5)',
   'page.character.toc.overview': 'Descripción general',
   'page.character.toc.on_this_page': 'En esta página',

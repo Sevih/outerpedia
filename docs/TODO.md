@@ -9,17 +9,23 @@
 
 > Mesuré le 04/10 sur les cinq hôtes servis (574 pages chacun, rapports dans
 > `docs/seo&audit/`). La mesure se fait en LARGEUR depuis le lot B17 (un
-> caractère large compte 2) ; reste B18, les textes.
+> caractère large compte 2) ; les textes sont passés par le lot B18 (détail
+> et listes dans son entrée DONE du 04/10).
 
-- [ ] **Textes hors bornes (lot B18)** : `fr` 22 titres au-delà de 60 et 46
-      descriptions au-delà de 160 ; `es` 12 titres et 65 descriptions. En
-      largeur, estimé par B17 depuis les rapports (détail dans son entrée
-      DONE du 04/10) : `jp` 5 à 7 pages, `kr` une dizaine, `zh` 140 à 175
-      dont une centaine par le seul gabarit de description des fiches de
-      personnage. Guides (`meta.json`), pages à un segment et catégories
-      (locales), gabarits des fiches. À remesurer sur les hôtes une fois B17
-      en ligne : les titres trop larges ne se lisent pas dans les rapports
-      du 04/10.
+- [ ] **Remesurer les cinq hôtes une fois B17 et B18 en ligne**
+      (`pnpm exec tsx scripts/seo-lengths.ts --host https://<langue>.outerpedia.com`).
+      Attendu, d'après l'inventaire à la source : aucune description au-delà
+      de 160 ; pages avec écart dans les bornes titre 60 / description 70 à
+      160 : `fr` 22, `es` 10, `jp` 9, `kr` 8, `zh` 28.
+- [ ] **Restes de B18, à trancher** : (1) titres français des Équipements
+      exclusifs, onze au-delà de 60 dont quatre de 67 à 77 par la longueur du
+      nom du jeu — « EE Outerplane » les ferait rentrer mais sort « Équipement
+      exclusif » des 128 titres ; (2) descriptions sous 70 laissées parce que
+      l'anglais ne dit rien de plus : `zh` 28, `kr` 7, `jp` 4 — les enrichir,
+      c'est écrire plus que l'anglais ; (3) titres sous 30, hors bornes du
+      lot : `zh` 6, `kr` 1, `jp` 1. Les autres titres au-delà de 60 (`fr` 11,
+      `es` 10, `jp` 5, `kr` 1) débordent de 1 à 14 par le nom seul, acceptés
+      comme les six anglais.
 
 ## 🎴 Portraits animés
 

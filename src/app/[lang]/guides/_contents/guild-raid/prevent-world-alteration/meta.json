@@ -13,10 +13,10 @@
     "kr": "세계변용 저지 길드 레이드 공략: 보스 메커닉, 기어스, 추천 캐릭터, 팀 구성, 양 페이즈 전술 팁.",
     "zh": "阻止世界改变 公会突袭首领攻略：首领机制、契约、推荐角色、队伍配置与两阶段战术提示。",
     "fr": "Guide du boss Guild Raid Prévenir l'altération du monde : mécaniques, geas, personnages recommandés, équipes et conseils pour les deux phases.",
-    "es": "Guía del jefe del Incursión de Gremio para Evita Alteración Mundial: mecánicas del jefe, desbloqueo de geas, personajes recomendados, composiciones de equipo y consejos tácticos para ambas fases."
+    "es": "Guía de Incursión de Gremio: Evita Alteración Mundial — mecánicas del jefe, desbloqueos de geas, héroes recomendados, equipos y consejos para ambas fases."
   },
   "icon": "T_GuildRaid_002",
   "author": "Sevih",
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "bossId": "440600010"
 }

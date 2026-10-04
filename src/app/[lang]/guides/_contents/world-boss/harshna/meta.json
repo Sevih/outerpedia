@@ -13,10 +13,10 @@
     "kr": "월드 보스 사백룡 하르슈나 공략 가이드 — 1팀은 디버프 없이, 2팀이 디버프를 담당. 페이즈별 편성, 익스트림 리그까지.",
     "zh": "世界Boss死魄龙赫索纳攻略指南 — 一队保持无debuff，二队负责挂debuff：分阶段编成，直至极限联赛。",
     "fr": "Guide du world boss Harshna, dragon revenant — équipe 1 sans debuff, équipe 2 qui les porte : compositions phase par phase jusqu'à l'Extreme League.",
-    "es": "Guía del jefe mundial Dragón Revenant Harshna — mantén al equipo 1 libre de debuffs, deja que el equipo 2 cargue con los debuffs: equipos fase por fase hasta la Liga Extrema."
+    "es": "Guía del jefe mundial Dragón Revenant Harshna — mantén al equipo 1 sin debuffs y que el equipo 2 cargue con ellos: equipos fase por fase hasta la Liga Extrema."
   },
   "icon": "T_Banner_World_Boss_06",
   "author": "Sevih",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "bossId": "4086029"
 }

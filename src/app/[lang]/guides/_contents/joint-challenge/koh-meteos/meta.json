@@ -13,10 +13,10 @@
     "kr": "광명의 기사 메테우스 합동 챌린지 보스 공략: 보스 메커닉, 추천 캐릭터, 팀 구성, 전술 팁.",
     "zh": "希望骑士梅特乌斯联合挑战首领攻略：首领机制、推荐角色、队伍配置与战术提示。",
     "fr": "Guide du boss Joint Challenge Chevalier de l'Espoir Météores : mécaniques, personnages recommandés, équipes et conseils tactiques.",
-    "es": "Guía del jefe del Desafío Conjunto para el Caballero de la Esperanza Meteos: mecánicas del jefe, personajes recomendados, configuraciones de equipo y consejos tácticos."
+    "es": "Guía del jefe del Desafío Conjunto para el Caballero de la Esperanza Meteos: mecánicas del jefe, personajes recomendados, equipos y consejos tácticos."
   },
   "icon": "T_Banner_Event_Boss_05",
   "author": "Arabyss / Sevih / Shiraen",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "bossId": "4176152"
 }

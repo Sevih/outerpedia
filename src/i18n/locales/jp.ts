@@ -265,7 +265,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.pull-simulator': 'ガチャシミュレーター',
   'tools.pull-simulator.desc': '全バナーのガチャをシミュレート。マイレージシステム対応。',
   'tools.pull-simulator.meta_description':
-    'アウタープレーンのガチャをピックアップ、プレミアム、限定バナーでシミュレート。ピックアップキャラを選んで単発または10連を引き、マイレージ、消費エーテル、結果を確認できます。',
+    'アウタープレーンのガチャをピックアップ、プレミアム、限定バナーでシミュレート。ピックアップキャラを選んで単発か10連を引き、マイレージ、消費エーテル、結果を確認。',
   'tools.pull-simulator.banner.custom': '全英雄',
   'tools.pull-simulator.banner.rateup': 'ピックアップ',
   'tools.pull-simulator.banner.premium': 'プレミアム',
@@ -299,7 +299,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.progress-tracker.desc':
     'デイリー・ウィークリー・マンスリータスク、ショップ購入、製作を管理。',
   'tools.progress-tracker.meta_description':
-    'アウタープレーンの日課チェックリスト。デイリー・ウィークリー・マンスリータスク、ショップ購入、製作を管理できます。進捗はブラウザに保存され、エクスポートも可能です。',
+    'アウタープレーンの日課チェックリスト。デイリー・ウィークリー・マンスリータスク、ショップ購入、製作を管理。進捗はブラウザに保存され、エクスポートも可能です。',
   'tools.wallpapers': '壁紙',
   'tools.wallpapers.desc': '公式アートワークや壁紙をダウンロード。',
   'tools.wallpapers.meta_description':
@@ -311,7 +311,7 @@ const jp: Record<TranslationKey, string> = {
   'tools.ost': 'サウンドトラック',
   'tools.ost.desc': '公式OSTを視聴・ダウンロード。',
   'tools.ost.meta_description':
-    'アウタープレーンのサウンドトラックをブラウザで視聴。ゲーム内の楽曲をひとつのプレイヤーにまとめ、シャッフル、リピート、キーボードショートカット、MP3ダウンロードに対応。',
+    'アウタープレーンのサウンドトラックをブラウザで視聴。ゲーム内の楽曲をプレイヤーにまとめ、シャッフル、リピート、キーボードショートカット、MP3ダウンロードに対応。',
   'tools.event': 'コミュニティイベント',
   'tools.event.desc': 'コミュニティイベントを閲覧：大会、コンテスト、プレゼント企画など。',
   'tools.event.meta_description':

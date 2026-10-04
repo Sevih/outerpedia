@@ -13,11 +13,11 @@
     "kr": "이레귤러 토벌: 이레귤러 퀸 공략 — 디버프 상태에서만 약점 게이지를 깎을 수 있지만, 디버프를 걸 때마다 반격이 날아온다. 팀 편성과 공략 팁.",
     "zh": "异型怪讨伐：异型怪女王攻略 — 只有在debuff状态下才能削其弱点条，但每次上debuff都会触发反击。队伍编成与实用技巧。",
     "fr": "Guide Pursuit : Reine irrégulière (Irregular Extermination) — sa jauge ne s'entame que debuffée, mais chaque debuff déclenche son counter. Équipes et astuces.",
-    "es": "Guía de Op. persecución: Reina Irregular (Exterminio Irregular) — solo recibe daño de gauge mientras esté bajo debuff, pero cada debuff activa su contraataque. Equipos y consejos."
+    "es": "Guía de Op. persecución: Reina Irregular (Exterminio Irregular) — solo recibe daño de gauge mientras esté bajo debuff, pero cada debuff activa su contraataque."
   },
   "icon": "CM_Irregular_Infiltrate",
   "author": "Sevih / Shiraen",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "order": 4,
   "bossId": "51202004",
   "mapPos": {

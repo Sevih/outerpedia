@@ -9,15 +9,15 @@
   },
   "description": {
     "en": "Blazing Knight Meteos (Fire) Identification Special Request — an AoE counter every 5 hits and permanent heal Seal: duals, chains, and few debuffs. Teams & tips.",
-    "jp": "特別依頼・正体究明「火炎の騎士メテウス」攻略ガイド — 5回被弾ごとに全体カウンター、回復は永続封印。デュアル・チェイン中心でデバフは控えめに。おすすめ編成と攻略のコツ。",
+    "jp": "特別依頼・正体究明「火炎の騎士メテウス」攻略 — 5回被弾ごとに全体カウンター、回復は永続封印。デュアル・チェイン中心でデバフは控えめに。おすすめ編成と攻略のコツ。",
     "kr": "특별 의뢰 정체 규명: 화염기사 메테우스 공략 — 5회 피격마다 광역 반격, 회복은 영구 봉인. 듀얼·체인 위주로 디버프는 최소화. 추천 팀 편성과 공략 팁.",
     "zh": "特殊委托·身份确认：火焰骑士梅修斯攻略 — 每受击5次触发群体反击，治疗被永久封印：以双人/连锁攻击为主，少上debuff。推荐队伍与实用技巧。",
-    "fr": "Special Request Identification : Météos, le Chevalier Flamboyant (Fire) — counter AoE toutes les 5 attaques et Seal des soins permanent : duals, chains, peu de debuffs. Équipes et astuces.",
-    "es": "Encargo esp.: Identificación de Caballero Ardiente Meteos (Fuego) — un contraataque AoE cada 5 golpes y un Sello de curación permanente: duales, cadenas y pocos debuffs. Equipos y consejos."
+    "fr": "Special Request Identification : Météos, le Chevalier Flamboyant (Fire) — counter AoE tous les 5 coups, Seal de soin permanent : duals, chains, peu de debuffs.",
+    "es": "Encargo esp.: Identificación de Caballero Ardiente Meteos (Fuego) — contraataque AoE cada 5 golpes y curación siempre sellada: duales, cadenas y pocos debuffs."
   },
   "icon": "CLG_Raid_Weapon_Fire",
   "author": "Arabyss & Kilvanoshei",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "order": 3,
   "bossId": "407600262",
   "group": "raid_2:SYS_RAID_2_DUNGEON_F"

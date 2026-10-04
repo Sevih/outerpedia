@@ -7,6 +7,201 @@
 
 ## 2026-10-04
 
+- **Lot B18 : SEO, titres et descriptions hors bornes en fr, es, jp, kr, zh —
+  plus aucune description au-delà de 160 dans les cinq langues, les fiches de
+  personnage chinoises et coréennes repassent 70, deux gabarits de titre
+  espagnols raccourcis** (Opus). Le pourquoi : la mesure du 04/10 sur les
+  hôtes servis comptait 46 descriptions trop longues en français, 65 en
+  espagnol, et le lot B17 venait de montrer ce que la largeur laisse hors
+  bornes en japonais, coréen et chinois. Bornes du lot, en largeur
+  (`displayWidth`) : titre 60, description 70 à 160. L'anglais n'est pas
+  touché, ni une langue déjà dans ses bornes, ni le code : 41 `meta.json` de
+  `src/app/[lang]/guides/_contents/` (champ `description` seul),
+  `src/lib/data/guide-categories.ts` (14 `desc`) et cinq locales (`fr` 16
+  clés, `es` 15, `jp` 3, `kr` 2, `zh` 2) ; aucune clé nouvelle, aucune balise
+  inline. Le hook `stamp-guides` date de lui-même `updated` sur les 41 guides
+  au commit.
+  **L'inventaire** est refait à la source par script jetable, sans crawl : il
+  recompose le titre et la description de chaque page du sitemap (573 hors
+  l'événement, six langues) avec les mêmes fonctions que les pages
+  (`scopedTitle`, `prefixedDescription`, `guideCategoryTitle`, règle du
+  suffixe « | Outerpedia »), la couche de données et les locales. Il retombe
+  pile sur le relevé des hôtes : `fr` 22 titres (16 + 4 + 1 + 1) et 46
+  descriptions (23 + 16 + 7), `es` 12 titres (7 + 4 + 1) et 65 descriptions
+  (41 + 12 + 7 + 5). Pour `jp`, `kr`, `zh`, il corrige l'estimation de B17
+  (qui ne voyait pas le haut de la distribution) : `jp` 5 titres et 4
+  descriptions trop larges, `kr` 1 et 1, `zh` 0 et 0 ; descriptions sous 70 :
+  `jp` 4, `kr` 9, `zh` 120.
+
+  Descriptions hors bornes, avant → après (« c. » = sous 70, sinon au-delà
+  de 160) :
+
+  | Type de page (pages)  | `fr`       | `es`       | `jp`             | `kr`                   | `zh`               |
+  | --------------------- | ---------- | ---------- | ---------------- | ---------------------- | ------------------ |
+  | `/equipment/*` (288)  | 0          | 0          | 0                | 0                      | 0                  |
+  | `/characters/*` (128) | 0          | 5 → 0      | 0                | 2 c. → 0               | 92 c. → 0          |
+  | `/guides/*/*` (118)   | 23 → 0     | 41 → 0     | 1 → 0 ; 4 c. → 4 | 5 c. → 5               | 19 c. → 19         |
+  | `/*` (28)             | 16 → 0     | 12 → 0     | 3 → 0            | 1 → 0 ; 1 c. → 1       | 5 c. → 5           |
+  | `/guides/*` (11)      | 7 → 0      | 7 → 0      | 0                | 1 c. → 1               | 4 c. → 4           |
+  | **Total**             | **46 → 0** | **65 → 0** | **4 → 0, 4 c.**  | **1 → 0, 9 c. → 7 c.** | **120 c. → 28 c.** |
+
+  Titres au-delà de 60, avant → après :
+
+  | Type de page    | `fr`        | `es`        | `jp`      | `kr`      | `zh` |
+  | --------------- | ----------- | ----------- | --------- | --------- | ---- |
+  | `/equipment/*`  | 16 → 16     | 7 → 5       | 0         | 0         | 0    |
+  | `/characters/*` | 4 → 4       | 4 → 4       | 3 → 3     | 0         | 0    |
+  | `/guides/*/*`   | 1 → 1       | 1 → 1       | 2 → 2     | 1 → 1     | 0    |
+  | `/*`            | 1 → 1       | 0           | 0         | 0         | 0    |
+  | **Total**       | **22 → 22** | **12 → 10** | **5 → 5** | **1 → 1** | 0    |
+
+  Pages avec au moins un écart dans les bornes du lot : `fr` 68 → 22, `es`
+  73 → 10, `jp` 13 → 9, `kr` 11 → 8, `zh` 120 → 28.
+  **1. Descriptions trop longues, condensées dans la langue** (règle 1). Le
+  nom du boss, du mode et de l'outil reste partout ; c'est la queue générique
+  qui se réduit ou saute, comme au lot B16 (« Mécaniques, équipe et astuces. »
+  → « Mécaniques et astuces. » ou « Astuces. », « Mecánicas, equipo y consejos
+  de clear. » → « Mecánicas y consejos. » ou « Consejos. »), puis les
+  tournures (« même à travers l'Immunité » → « malgré l'Immunité », « golpean
+  desproporcionadamente duro » → « pegan durísimo »). Guides : 23 en français
+  (`adventure` 12, `special-request` 5, `general-guides` 3,
+  `irregular-extermination` 3), 41 en espagnol (`adventure` 18, `guild-raid`
+  5, `special-request` 5, `irregular-extermination` 4, `world-boss` 4,
+  `general-guides` 3, `joint-challenge` 1, `other` 1), 1 en japonais
+  (`special-request/meteos`, 166 → 160 : « 攻略ガイド » → « 攻略 ») ; après :
+  `fr` 154 à 160, `es` 143 à 160. Catégories de guides (`desc` de
+  `guide-categories.ts`) : les sept mêmes en français et en espagnol
+  (`adventure-license`, `guild-raid`, `world-boss`,
+  `dimensional-singularity`, `joint-challenge`, `special-request`,
+  `irregular-extermination`), 161 à 201 → 140 à 160. Pages à un segment
+  (locales) : `page.home.description`, `page.characters.description`,
+  `page.equipments.description`, `tools.event.meta_description` et les
+  `tools.<slug>.meta_description` de douze outils en français, de huit en
+  espagnol ; `ost`, `pull-simulator`, `progress-tracker` en japonais (164 à
+  172 → 156 à 160), `pull-simulator` en coréen (166 → 158). Gabarit
+  `page.character.meta_description` espagnol : 5 fiches à 163–177 → toutes à
+  112–153 (« compilaciones de equipo recomendadas y clasificación de nivel »,
+  deux calques, → « builds recomendadas y ranking de tier »).
+  Ce que la condensation a coûté, pour la relecture. Perdent toute leur queue
+  « équipes et astuces » : `ars-nova` et `meteos` en français ; en espagnol
+  les cinq `special-request`, les quatre `pursuit-*` et `S3-7-10`.
+  `pull-simulator` dit « ether » pour « ether dépensé » (fr) et « éter » pour
+  « éter gastado » (es) ; `ost` (fr) perd « les musiques du jeu dans » ;
+  `patch-history` (fr) dit « à aujourd'hui » pour « à la dernière mise à
+  jour » ; `progress-tracker` dit « boutique » / « tienda » pour les achats ;
+  la liste d'équipement espagnole perd « para tus personajes », celle des
+  personnages « detalles de » ; `gear` (fr) dit « upgrade » pour « systèmes
+  d'upgrade », `quirk` « chaque arbre » pour « chaque arbre de quirks » ; les
+  catégories françaises perdent leurs verbes (« apprenez les… ») et
+  « configurations d'équipe optimales » devient « équipes optimales ». En
+  espagnol, les cinq `guild-raid` prennent une phrase commune (« Guía de
+  Incursión de Gremio: {boss} — mecánicas del jefe, desbloqueos de geas,
+  héroes recomendados, equipos y consejos para ambas fases. », « personajes »
+  → « héroes », « consejos tácticos » → « consejos »), et l'accueil dit
+  « builds de personajes, tier lists » (jargon gardé en anglais, CONVENTIONS)
+  pour « construcciones de personajes, listas de clasificación ». Repris au
+  passage, dans les lignes réécrites seulement : trois en-têtes espagnols
+  remis sur la forme de leurs voisins (« El jefe Vlada de S2 Difícil 7-10 » →
+  « Jefe S2 Difícil 7-10 Vlada », `S2-9-10`, `S3-1-10`), celui de `sacreed`
+  aligné sur `grand-calamari` (« Encargo esp.: Estudio ecología de … »), et
+  deux contresens (`S2-7-10` « héroes que no infligen Quemadura » → « héroes
+  sin Quemadura » ; `grand-calamari` « la eliminación de bonos es inmune » →
+  « inmune a la eliminación de bonos »). `/characters` et `/equipment`
+  servent toujours le jeton `{monthYear}` tel quel (bug connu, hors lot) :
+  les quatre textes réécrits gardent de la marge pour le jour où il sera
+  remplacé (143 à 154 avec le jeton, « septiembre de 2026 » en ajoute 7).
+  **2. Descriptions trop courtes** (règle 2 : enrichir seulement si l'anglais
+  dit plus). L'anglais des fiches de personnage finit par « tier ranking on
+  Outerpedia », que le chinois et le coréen n'avaient pas : « … 、Outerpedia
+  节奏榜排名。 » (63–78 → 74–89, 92 fiches sous 70 → 0) et « … Outerpedia
+  티어 랭킹. » (69–89 → 80–100, `rin` et `shu` rentrent). `/tierlist` en
+  chinois disait « classement des personnages et d'autres contenus » là où
+  l'anglais dit « par rôle et type de contenu » : « 按定位与内容类型为全部角色
+  排名 », 52 → 64, encore courte. Partout ailleurs le texte anglais ne dit
+  rien de plus : laissé, listé plus bas.
+  **3. Titres** (règle 3). En espagnol les deux gabarits de fiche portaient un
+  « de » de plus que l'anglais : `page.equipment.title_suffix`
+  « — {type} de Outerplane » → « — {type} Outerplane » et
+  `page.character.sr_suffix` « — Guía {element} {classType} de Outerplane » →
+  « — Guía Outerplane {element} {classType} » (la forme du gabarit français).
+  Équipement : 7 → 5 (`pulverization-set` et `the-supreme-witchs-companion`
+  rentrent à 59, les cinq autres tombent à 61–62) ; personnages : 70–74 →
+  67–71, toujours quatre. `sr_suffix` est aussi le suffixe du `<h1>` pour
+  lecteur d'écran, qui suit. En français rien ne se raccourcit : les deux
+  gabarits ont exactement la longueur des anglais (« — Équipement exclusif
+  Outerplane » = « — Outerplane Exclusive Equipment », 33), ce sont les noms
+  du jeu qui débordent. `page.equipment.kind.*` n'est pas touché.
+  **Ce qui reste hors bornes, et pourquoi.**
+  _Titres au-delà de 60, par la seule longueur du nom_ (même décision que
+  les six anglais). `fr`, 16 fiches d'équipement : onze Équipements
+  exclusifs — `the-book-of-folk-and-tall-tales` 77, `path-of-endless-hunger`
+  72, `secret-cooking-utensils` 68, `secret-sword-teru-teru-bouzu` 67,
+  `receptionists-essentials` et `modded-assault-weapon` 65,
+  `iron-fan-of-ferocity` et `primordial-gargantua` 64,
+  `the-supreme-witchs-companion` 62, `knights-special-great-sword`,
+  `scepter-of-the-golden-king` 61 — et cinq accessoires
+  (`steel-necklace-settlement-support` 66, `briareoss-ambition-*` 62 à 65) ;
+  quatre personnages (`holy-nights-blessing-dianne` 66,
+  `kitsune-of-eternity-tamamo-no-mae` et `summer-knights-dream-ember` 65,
+  `poolside-trickster-regina` 61) ; le guide
+  `frozen-dragon-of-phantasm-harshna` (61, nom du boss + catégorie) ;
+  `/gear-usage-statistics` (61, le libellé visible de l'outil). Les quatre
+  premiers Équipements exclusifs passent de 7 à 17 caractères, plus que
+  « quelques » : ce sont des noms du jeu de 34 à 44 caractères, dont
+  plusieurs bégaient (« Chemin de la faim sans fin et sans fin. », « Cuisson
+  secrète Utensiles Utensiles »). La seule formule plus courte serait « EE
+  Outerplane », qui ferait rentrer les onze mais retirerait « Équipement
+  exclusif » des 128 titres de la famille : pas retenue, à trancher par
+  Sevih. `es` : cinq équipements à 61–62, les quatre mêmes personnages à
+  67–71 (noms de 35 à 39 caractères), `ppu-epsilon-al` 61. `jp` : trois
+  personnages à 61–63 (`poolside-trickster-regina`, `midnight-rush-skadi`,
+  `core-fusion-notia`), `adventure-license/promote-ddrakhan` 61, et
+  `adventure/S2-10-10` à 74 (70 en coréen) : deux noms de boss derrière le
+  préfixe « シーズン2(ハード) » / « 시즌 2 Part1 하드 » que portent tous les
+  guides de la saison — c'est le `title` du `meta.json`, affiché sur les
+  cartes, pas un gabarit.
+  _Descriptions sous 70 où l'anglais ne dit rien de plus_ (laissées, règle
+  2). `jp` : `unlock-content` 68, `normal-tower` 65, `beatles` 63 (52 à la
+  source), `hard-tower` 60. `kr` : `/changelog` 65, la catégorie
+  `skyward-tower` 62, `hard-tower` 64, `core-fusion` et `normal-tower` 61,
+  `unlock-content` et `beatles` 60. `zh`, 28 : cinq pages à un segment
+  (`/tierlist` 64, `/tools` 64, `/guides` 62, `/coupons` 62, `/changelog`
+  48), quatre catégories (`irregular-extermination` 64, `skyward-tower` 54,
+  `general-guides` 52, `other` 42) et 19 guides — huit `skyward-tower` (49 à
+  64), six `general-guides` (45 à 56), quatre `joint-challenge` (64 à 69),
+  `beatles` 51. Le chinois dit en 30 caractères ce que l'anglais dit en 100 :
+  les amener à 70 demande d'écrire plus que l'anglais, donc une décision.
+  _Titres sous 30_ : hors des bornes du lot (« titre 60 »), relevés pour
+  mémoire — `zh` `/contributors` 23, `/guides` 25, `hard-tower` et
+  `very-hard-tower` 27, `how-to-play` et `grand-calamari` 28 ; `kr`
+  `/contributors` 28 ; `jp` `hard-tower` 29.
+  **La vérification** : le script d'application remplace la chaîne exacte
+  (les fichiers gardent leur format, `prettier --check` vert sur les 47),
+  refuse une balise inline et contrôle chaque texte contre 70–160 avant
+  d'écrire ; l'inventaire rejoué après donne les tableaux ci-dessus, et
+  l'anglais y est identique avant et après. `pnpm typecheck` (`$ tsc --noEmit
+&& tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+scripts/tsconfig.json`, sans erreur), `pnpm lint` (`$ eslint`, sans sortie),
+  `pnpm test` (`Test Files 181 passed (181)`, `Tests 2229 passed (2229)`).
+  Six pages lues au `curl` sur le `localhost:3000` de Sevih, conformes à
+  l'inventaire : `es/characters/poolside-trickster-regina` (titre 71 sans
+  suffixe, description 153), `zh/characters/ame`,
+  `es/equipment/pulverization-set` (59), `fr/guides/joint-challenge`,
+  `es/guides/guild-raid/frost-legion`, `jp/guides/special-request/meteos`.
+  Mesuré à la source, pas sur les hôtes, qui n'ont ni B17 ni ce commit.
+  Changement visuel : le texte lui-même là où la description s'affiche —
+  cartes de guides et de catégories, sous-titre de `/characters` et
+  `/equipment` (fr, es) et de `/tierlist` (zh). Lu dans le code, pas regardé
+  à l'écran.
+  **Laissé, hors périmètre** : la description chinoise de
+  `general-guides/unlock-content` finit par une virgule (« …的列表， ») ; les
+  descriptions espagnoles des guides `adventure` mêlent « Hard » et
+  « Difícil », « medidor », « barra » et « gauge » ; les descriptions
+  françaises gardent les éléments en anglais (« (Dark) », « (Fire) »), déjà
+  noté au lot B16 ; le jeton `{monthYear}` de `/characters` et `/equipment`.
+  Au TODO, l'item B18 devient ce qui reste : la remesure des hôtes et les
+  trois points à trancher.
+
 - **Lot B17 : SEO, les langues à caractères larges mesurées en LARGEUR —
   `displayWidth`, le script et les trois règles de gabarit sur la même
   unité** (Opus). Le pourquoi : sur `jp`, `kr` et `zh` le rapport du 04/10

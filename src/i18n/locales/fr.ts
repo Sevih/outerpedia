@@ -74,13 +74,13 @@ const fr: Record<TranslationKey, string> = {
   // Page metadata
   'page.home.title': 'Outerpedia — Wiki et base de données Outerplane',
   'page.home.description':
-    "Outerpedia est un wiki et une base de données communautaires dédiés à Outerplane. Trouvez des builds de personnages, des tier lists, des guides, des recommandations d'équipement, et plus encore.",
+    "Outerpedia, le wiki et la base de données communautaires d'Outerplane : builds de personnages, tier lists, guides, recommandations d'équipement et plus encore.",
   'page.characters.title': 'Base de données des personnages Outerplane',
   'page.characters.description':
-    "Parcourez tous les personnages d'Outerplane. Filtrez par élément, classe et rareté. Consultez les compétences, statistiques et détails d'équipement. Mis à jour {monthYear}.",
+    "Tous les personnages d'Outerplane : filtrez par élément, classe et rareté, consultez compétences, statistiques et équipement. Mis à jour {monthYear}.",
   'page.equipments.title': "Base de données de l'équipement Outerplane",
   'page.equipments.description':
-    "Explorez toutes les armes, accessoires, talismans et sets d'armure d'Outerplane. Comparez les statistiques et trouvez le meilleur équipement pour vos personnages. Mis à jour {monthYear}.",
+    "Armes, accessoires, talismans et sets d'armure d'Outerplane : comparez les stats et trouvez le meilleur équipement pour vos héros. Mis à jour {monthYear}.",
   'page.equipment.meta_description':
     "{name} — stat principale et substats, effets passifs, ascension et où l'obtenir dans Outerplane. Fiche sur Outerpedia.",
   'page.equipment.title_suffix': ' — {type} Outerplane',
@@ -193,7 +193,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.tierlistpve.desc':
     "Tier list PvE Outerplane — les meilleurs personnages pour l'aventure, les Boss, les Raid et le contenu de fin de jeu.",
   'tools.tierlistpve.meta_description':
-    "Tier list PvE d'Outerplane : chaque personnage classé pour l'aventure, les boss, les raids et le endgame, par niveau de transcendance, avec filtres élément, classe et rôle.",
+    "Tier list PvE d'Outerplane : chaque personnage classé pour aventure, boss, raids et endgame, par niveau de transcendance, avec filtres élément, classe et rôle.",
   'tools.tierlistpvp': 'Tier List - PvP',
   'tools.tierlistpvp.desc': "Tier list PvP Outerplane — les meilleurs personnages pour l'arène.",
   'tools.tierlistpvp.meta_description':
@@ -227,7 +227,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.gear-usage-finder.desc':
     "Vous ne savez pas quel personnage peut utiliser votre équipement ? Trouvez la meilleure correspondance selon l'équipement.",
   'tools.gear-usage-finder.meta_description':
-    "À qui donner une pièce d'équipement ? Indiquez type, stat principale, sous-stats et set pour lister les personnages d'Outerplane dont le build recommandé correspond.",
+    "À qui donner cet équipement ? Indiquez type, stat principale, substats et set pour lister les personnages d'Outerplane dont le build recommandé correspond.",
   'tools.gear-usage-finder.step_type': "Type d'équipement",
   'tools.gear-usage-finder.step_class': 'Classe',
   'tools.gear-usage-finder.step_mainstat': 'Stat principale',
@@ -247,7 +247,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.patch-history.desc':
     'Parcourez toutes les patch notes, notes des développeurs, compendium des héros et plus encore.',
   'tools.patch-history.meta_description':
-    "Archive des actualités officielles d'Outerplane : patch notes, notes des développeurs, compendium des héros, événements et annonces, de 2023 à la dernière mise à jour.",
+    "Archive des actualités officielles d'Outerplane : patch notes, notes des développeurs, compendium des héros, événements et annonces, de 2023 à aujourd'hui.",
   'tools.patch-history.era.major9': 'Major9 (oct. 2025+)',
   'tools.patch-history.era.smilegate': 'Smilegate (2023–2025)',
   'tools.patch-history.type.update': 'Mise à jour',
@@ -273,7 +273,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.pull-simulator.desc':
     'Simulez les pulls Gacha pour toutes les banners. Testez votre chance avec le système de Mileage inclus.',
   'tools.pull-simulator.meta_description':
-    "Simulez le recrutement d'Outerplane sur les banners Rate Up, Premium et Limité : choisissez vos héros focus, tirez en x1 ou x10, suivez Mileage, ether dépensé et résultats.",
+    "Simulez le recrutement d'Outerplane en banner Rate Up, Premium ou Limité : choisissez vos héros focus, tirez x1 ou x10, suivez Mileage, ether et résultats.",
   'tools.pull-simulator.banner.custom': 'Tous les héros',
   'tools.pull-simulator.banner.rateup': 'Rate Up',
   'tools.pull-simulator.banner.premium': 'Premium',
@@ -308,24 +308,24 @@ const fr: Record<TranslationKey, string> = {
   'tools.progress-tracker.desc':
     'Suivez votre progression : tâches quotidiennes/hebdomadaires/mensuelles, achats en boutique et crafts.',
   'tools.progress-tracker.meta_description':
-    'Checklist de votre routine Outerplane : tâches quotidiennes, hebdomadaires et mensuelles, achats en boutique et crafts. Progression gardée dans le navigateur, exportable.',
+    'Checklist de votre routine Outerplane : tâches quotidiennes, hebdomadaires et mensuelles, boutique et crafts. Progression gardée dans le navigateur, exportable.',
   'tools.wallpapers': "Fonds d'écran",
   'tools.wallpapers.desc': "Parcourez et téléchargez les illustrations et fonds d'écran officiels.",
   'tools.wallpapers.meta_description':
-    "Téléchargez les illustrations officielles d'Outerplane en fond d'écran : full art des héros, cut-ins, illustrations de scénario et d'événements, banners et plus encore.",
+    "Téléchargez les illustrations officielles d'Outerplane en fond d'écran : full art des héros, cut-ins, illustrations d'histoire et d'événements, banners et plus.",
   'tools.4-comics': '4-Cut Comics',
   'tools.4-comics.desc': 'Lisez les 4-cut comics officiels en plusieurs langues.',
   'tools.4-comics.meta_description':
-    "Lisez les 4-cut comics officiels d'Outerplane réunis dans une galerie, en anglais, japonais ou coréen, avec une visionneuse pour passer d'une planche à la suivante.",
+    "Lisez les 4-cut comics officiels d'Outerplane dans une galerie, en anglais, japonais ou coréen, avec une visionneuse pour passer d'une planche à la suivante.",
   'tools.ost': 'Bande originale',
   'tools.ost.desc': "Écoutez et téléchargez l'OST officielle.",
   'tools.ost.meta_description':
-    "Écoutez la bande originale d'Outerplane dans votre navigateur : les musiques du jeu dans un lecteur avec lecture aléatoire, répétition, raccourcis clavier et téléchargement MP3.",
+    "Écoutez la bande originale d'Outerplane dans votre navigateur : un lecteur avec lecture aléatoire, répétition, raccourcis clavier et téléchargement MP3.",
   'tools.event': 'Événements communautaires',
   'tools.event.desc':
     'Parcourez les événements communautaires : tournois, concours, giveaways, et plus encore.',
   'tools.event.meta_description':
-    "Les événements communautaires des joueurs d'Outerplane : tournois, concours et autres activités, avec dates, organisateur et statut (en cours, à venir ou terminé).",
+    "Événements communautaires des joueurs d'Outerplane : tournois, concours et autres activités, avec dates, organisateur et statut (en cours, à venir ou terminé).",
   'tools.event.filter.type': 'Type',
   'tools.event.filter.status': 'Statut',
   'tools.event.type.tournament': 'Tournoi',
@@ -346,7 +346,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.hero-tracker.desc':
     'Suivez chaque héros et listez les matériaux qu’il vous reste à farmer.',
   'tools.hero-tracker.meta_description':
-    "Notez où en est chacun de vos héros d'Outerplane (niveau, compétences, affinité, transcendance, équipement exclusif) et obtenez les matériaux qu'il reste à farmer.",
+    "Notez où en est chacun de vos héros d'Outerplane (niveau, compétences, affinité, transcendance, équipement exclusif) et obtenez les matériaux restant à farmer.",
   'tools.hero-tracker.intro':
     'Indiquez où en est chaque héros et où vous voulez l’emmener : l’outil liste ce qu’il reste à farmer. Tout reste dans votre navigateur.',
   'tools.hero-tracker.search': 'Rechercher un héros…',
@@ -419,7 +419,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.team-planner.desc':
     "Construisez et partagez des compositions d'équipe pour tout type de contenu.",
   'tools.team-planner.meta_description':
-    "Composez une équipe de quatre héros d'Outerplane, réglez l'ordre de chaîne, vérifiez les buffs et debuffs qu'elle apporte, et partagez la composition par un lien.",
+    "Composez une équipe de quatre héros d'Outerplane, réglez l'ordre de chaîne, vérifiez les buffs et debuffs qu'elle apporte et partagez la composition par lien.",
   'tools.team-planner.empty_slot': 'Emplacement vide',
   'tools.team-planner.add_character': 'Cliquez pour ajouter un personnage',
   'tools.team-planner.pick_character': 'Choisir un personnage',
@@ -445,7 +445,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.tier-list-maker.desc':
     'Créez et partagez votre propre tier list Outerplane — classez les personnages, les équipements exclusifs et les boss, puis partagez un lien ou exportez une image.',
   'tools.tier-list-maker.meta_description':
-    'Créez votre propre tier list Outerplane : glissez personnages, équipements exclusifs ou boss dans les tiers, puis partagez-la par un lien ou exportez-la en image.',
+    'Créez votre propre tier list Outerplane : glissez personnages, équipements exclusifs ou boss dans les tiers, puis partagez-la par lien ou exportez-la en image.',
   'tools.tier-list-maker.tab.characters': 'Personnages',
   'tools.tier-list-maker.tab.ee': 'Équipements exclusifs',
   'tools.tier-list-maker.tab.bosses': 'Boss',
@@ -505,7 +505,7 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.desc':
     "Calculez les dégâts infligés par vos personnages, d'après la formule du jeu. Choisissez l'attaquant, la cible, l'équipement et les buffs pour voir le résultat.",
   'tools.damage-calculator.meta_description':
-    "Estimez les dégâts qu'inflige un personnage d'Outerplane d'après la formule du jeu : choisissez l'attaquant, la cible, l'équipement et les buffs, puis lisez le résultat.",
+    "Estimez les dégâts d'un personnage d'Outerplane d'après la formule du jeu : choisissez l'attaquant, la cible, l'équipement et les buffs, puis lisez le résultat.",
   'tools.damage-calculator.disclaimer':
     'En cours de développement — le calculateur est encore en chantier. Les résultats peuvent différer de la valeur en jeu.',
   'tools.damage-calculator.settings.title': 'Paramètres du compte',

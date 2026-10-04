@@ -13,11 +13,11 @@
     "kr": "스토리 S4 하드 2-10 보스 변이된 와이브르 공략 — 버프가 많을수록 공수 모두 강해진다. 끊임없이 버프를 제거해 약화시킬 것. 기믹과 클리어 팁.",
     "zh": "主线S4困难2-10 Boss变异双足飞龙攻略 — 增益越多输出与减伤越强：不停驱散是唯一解。机制、队伍与通关技巧。",
     "fr": "S4 Hard 2-10 Défense du sanctuaire : Wyvre mutante — plus il a de buffs, plus il tape et encaisse : dispel sans relâche. Mécaniques, équipe et astuces.",
-    "es": "S4 Hard 2-10 Defensa del santuario — el Wyvre Mutado crece con cada bono que posee, haciendo y mitigando más daño: quítaselos sin descanso. Mecánicas, equipo y consejos."
+    "es": "S4 Hard 2-10 Defensa del santuario — el Wyvre Mutado crece con cada bono que tiene, hace y mitiga más daño: quítaselos sin parar. Mecánicas, equipo y consejos."
   },
   "icon": "T_DungeonArea_31",
   "author": "Sevih",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "order": 402,
   "bossId": "4314003",
   "dungeons": ["140214", "141210"]

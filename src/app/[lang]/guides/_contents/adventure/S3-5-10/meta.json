@@ -12,12 +12,12 @@
     "jp": "ストーリーS3ハード5-10ボス「レジーナ＆ヒルデ」攻略 — 会心が刺さると大惨事、しかも敵は10行動ごとに激怒。会心率デバフとテンポ管理が鍵。クリアのコツ。",
     "kr": "스토리 S3 하드 5-10 보스 레지나&힐데 공략 — 치명타가 터지면 치명적, 10행동마다 격노까지. 치명률 디버프와 템포 관리가 핵심. 클리어 팁.",
     "zh": "主线S3困难5-10 Boss蕾吉纳&希尔德攻略 — 其暴击伤害极高，且每10次行动狂暴一次：控制其暴击率与节奏。机制与通关技巧。",
-    "fr": "Boss S3 Hard 5-10 : Regina & Hilde — ses crits font très mal et elle enrage toutes les 10 actions : contrôlez son taux critique et le tempo. Mécaniques et astuces.",
-    "es": "Jefe S3 Difícil 5-10 Regina & Hilde — sus críticos golpean desproporcionadamente duro y entra en furia cada 10 acciones tuyas: controla la tasa CRIT y el ritmo. Consejos y equipo."
+    "fr": "Boss S3 Hard 5-10 : Regina & Hilde — ses crits font très mal, enrage toutes les 10 actions : contrôlez son taux critique et le tempo. Mécaniques et astuces.",
+    "es": "Jefe S3 Difícil 5-10 Regina & Hilde — sus críticos pegan durísimo y entra en furia cada 10 acciones tuyas: controla la tasa CRIT y el ritmo. Consejos y equipo."
   },
   "icon": "T_DungeonArea_25",
   "author": "Sevih",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "order": 305,
   "bossId": "4500293",
   "dungeons": ["130513", "131510"]

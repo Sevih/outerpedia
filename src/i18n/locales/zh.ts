@@ -138,7 +138,7 @@ const zh: Record<TranslationKey, string> = {
   'equip.detail.source': '获取途径',
   'page.tierlist.title': '异域战记 节奏榜',
   'page.tierlist.meta_title': '异域战记 节奏榜 – {monthYear}',
-  'page.tierlist.description': '异域战记节奏榜：角色和其他内容排名。{monthYear}更新。',
+  'page.tierlist.description': '异域战记节奏榜：按定位与内容类型为全部角色排名。{monthYear}更新。',
   'page.tierlist.other_rankings': '其他排行',
   'tierlist.transcend_level': '超越等级',
   'tierlist.characters_count': '角色',
@@ -1107,7 +1107,7 @@ const zh: Record<TranslationKey, string> = {
 
   // Character detail page
   'page.character.meta_description':
-    '{name}（{element} {classType}）— 技能详解、专属装备、推荐配装、节奏榜排名。',
+    '{name}（{element} {classType}）— 技能详解、专属装备、推荐配装、Outerpedia 节奏榜排名。',
   'page.character.sr_suffix': ' — Outerplane {element} {classType} 攻略',
   'page.character.cp_title': '战斗力（无装备，技能Lv5）',
   'page.character.toc.overview': '概览',
