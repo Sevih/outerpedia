@@ -8,7 +8,8 @@
 ## 🧰 Outil quick
 
 - [ ] **Onglet « Rangs » dans `pnpm quick`** (demande Sevih 04/10) : régler
-      les rangs PvE/PvP des persos et base/+10 des EE sans lancer l'admin
+      les rangs PvE/PvP et le rôle des persos, leurs surcharges par
+      transcendance, et les rangs base/+10 des EE sans lancer l'admin
       complet — les quatre pages de tier list en dépendent. Lot B19, écrit
       dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
 
