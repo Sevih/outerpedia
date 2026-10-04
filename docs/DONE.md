@@ -7,6 +7,84 @@
 
 ## 2026-10-04
 
+- **Lot A28 : « | Outerpedia » saute quand le titre déborde de 60 caractères
+  — 115 titres trop longs tombent à 7, et la description des fiches
+  d'équipement rentre dans 160 en anglais, français et espagnol** (Opus,
+  décision Sevih du 04/10 : c'est le nom du site qu'on lâche, ni
+  « Outerplane » ni le suffixe de catégorie des guides). Le quoi : la règle vit
+  à un seul endroit, `createPageMetadata` (`src/lib/seo.ts`). Quand
+  `{titre} | Outerpedia` dépasse `TITLE_MAX_LENGTH` (60, constante exportée),
+  le `<title>` sort en `title: { absolute }` — qui court-circuite le gabarit
+  `%s | Outerpedia` de `src/app/[lang]/layout.tsx` — et `og:title` /
+  `twitter:title` sortent sans suffixe eux aussi ; à 60 pile et en dessous,
+  rien ne change, et le titre qui EST le nom du site reste tel quel. La
+  longueur se compte en points de code, comme la mesure (un kanji hors BMP vaut
+  un). `scripts/seo-lengths.ts` importe la constante pour `LIMITS.title.max` :
+  `seo.ts` ne tire ni `server-only` ni rien de Next à l'exécution (un import
+  de type, `site.ts` qui lit l'environnement, `images.ts`, `time.ts`), le
+  script et ses tests tournent avec. Les pages qui posent `title` à la main :
+  les cinq de `/contribute` (noindex, hors sitemap) font 31 à 53 caractères
+  suffixe compris, l'accueil pose déjà son `absolute` ; aucune ne déborde,
+  aucune n'est touchée. Descriptions des fiches d'équipement
+  (`page.equipment.meta_description`), mesurées sur les 288 fiches avec le nom
+  de chaque langue : en anglais la phrase passe de 131 à 121 caractères hors
+  nom (« Full equipment breakdown » devient « Full breakdown »), 12 fiches
+  au-delà de 160 → 0, maximum 156. En français elle faisait 151 hors nom et
+  266 fiches sur 288 débordaient (jusqu'à 195, nom de 44 caractères) ; en
+  espagnol 158, et les 288 débordaient (jusqu'à 197, nom de 39). Sept
+  caractères n'y suffisaient pas, la phrase est réécrite : « {name} — stat
+  principale et substats, effets passifs, ascension et où l'obtenir dans
+  Outerplane. Fiche sur Outerpedia. » (112 hors nom, maximum 156) et « {name}
+  — estadísticas principales y secundarias, efectos pasivos, ascenso y dónde
+  obtenerlo en Outerplane. Ficha en Outerpedia. » (121, maximum 160 pile). Y
+  sont partis le « statistiques » générique qui doublait la suite, et
+  « d'équipement complète » / « completo de equipo » ; « substats » est le
+  libellé de la fiche française. À relire par Sevih, c'est plus qu'une coupe.
+  Japonais, coréen, chinois : 52, 56 et 43 hors nom, maximum 70, 72 et 58,
+  rien ne déborde, rien n'est touché. La mesure : `scripts/seo-lengths.ts`,
+  lancé avec `--host http://localhost:3000`, s'est arrêté deux fois sur sa
+  garde (second 5xx vers la 350e page) — le `next dev --webpack` de Sevih
+  redémarre de lui-même sous cette charge. La mesure a donc été prise par
+  une collecte jetable qui réutilise `crawl`, `classify` et `renderReport` du
+  script, deux requêtes de front et une lecture qui attend le retour du
+  serveur : 574 pages sur 574, une seule attente. L'avant est reconstitué (un
+  titre sorti sans suffixe le portait) et retombe sur les chiffres du rapport
+  du site servi. Titres au-delà de 60, avant → après : `/equipment/*` 82 → 4,
+  `/characters/*` 14 → 2, `/guides/*/*` 19 → 1, `/guides/*`, `/*` et
+  `/event/*` 0 → 0 ; total 115 → 7, soit 567 titres sur 574 sous la borne
+  haute. Descriptions au-delà de 160 sur `/equipment/*` : 12 → 0 (125 à 156).
+  Débordent ENCORE sans le suffixe, non touchés (c'est un autre choix, item au
+  TODO) : « The Book of Folk and Tall Tales — Outerplane Exclusive Equipment »
+  (64), « Kitsune of Eternity Tamamo-no-Mae — Outerplane Earth Mage Guide »
+  (63), « Secret Sword, Teru Teru Bouzu — Outerplane Exclusive Equipment » et
+  « The Supreme Witch's Companion — Outerplane Exclusive Equipment » (62),
+  « Knight's Special Great Sword — Outerplane Exclusive Equipment », « Summer
+  Knight's Dream Ember — Outerplane Water Defender Guide » et « Knight of Hope
+  Meteos Joint Challenge Guide — Joint Challenge » (61). La vérification :
+  cinq tests dans `src/lib/seo.test.ts` (sous la borne, pile dessus,
+  au-dessus, points de code, `title === SITE_NAME`) ; `pnpm typecheck` (les
+  trois `tsc --noEmit` — racine, `datagen`, `scripts` — sans erreur),
+  `pnpm lint` (`$ eslint`, sans sortie), `pnpm test`
+  (`Test Files 181 passed (181)`, `Tests 2184 passed (2184)`).
+  Aucun changement visuel : seules des balises du `<head>` bougent, comparées
+  par `curl` sur `/equipment/machiavelli` (57, suffixe gardé),
+  `/equipment/steel-sword-settlement-support` (suffixe retiré des trois
+  titres), `/characters/k`, `/guides/special-request/grand-calamari` et
+  `/equipment`. Ce qui reste : la mesure sur le site servi, à refaire après
+  déploiement (`pnpm exec tsx scripts/seo-lengths.ts`), et les titres des cinq
+  autres langues, qui suivent la même règle mais n'ont pas été collectés. Au
+  TODO, les items équipement, personnages et titres de guides sortent,
+  remplacés par celui des sept titres ; « Catégories de guides » reste — ses
+  8 titres sont trop COURTS (sous 30), la règle n'y fait rien. Repéré hors
+  périmètre, non touché : `/characters` et `/equipment` servent « Updated
+  {monthYear}. » tel quel dans leur description (`page.characters.description`,
+  `page.equipments.description` — le jeton n'est remplacé que sur
+  `/tierlist`) ; les 8 descriptions courtes de l'item « Pages à un segment »
+  n'apparaissent plus sur le serveur local (lot B14, pas encore déployé le
+  jour de la mesure), reste `/changelog` ; et les descriptions d'équipement
+  en japonais, coréen et chinois sont sous 70 pour presque toutes les fiches,
+  borne pensée pour l'alphabet latin.
+
 - **Lot F9 : les textures des portraits animés sont plafonnées à 512 à
   l'extraction — `_Demi` passera de 18 à 3 Mo de GPU par carte ; préparé, pas
   encore rejoué (P2)** (Fable, audit `docs/audit/portrait-fx.md`). La mesure

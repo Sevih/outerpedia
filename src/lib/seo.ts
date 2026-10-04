@@ -26,6 +26,20 @@ export function getMonthYear(lang: Lang): string {
 
 const SITE_NAME = 'Outerpedia';
 /**
+ * Longueur maximale d'un titre, en caractères : au-delà, un moteur le coupe.
+ * C'est la borne que mesure `scripts/seo-lengths.ts`, qui l'importe d'ici.
+ */
+export const TITLE_MAX_LENGTH = 60;
+
+/**
+ * Vrai quand « {titre} | Outerpedia » déborde de `TITLE_MAX_LENGTH`. Compté en
+ * points de code, comme la mesure : un kanji hors BMP vaut un caractère.
+ */
+function siteSuffixOverflows(title: string): boolean {
+  return [...`${title} | ${SITE_NAME}`].length > TITLE_MAX_LENGTH;
+}
+
+/**
  * Carte de partage par défaut — passe par la base R2, comme toute image du site.
  * Elle était écrite en chemin racine (`/images/…`), donc résolue contre le
  * domaine du site : ça marchait en dev (une route y sert `.assets-staging/`) et
@@ -74,6 +88,12 @@ type PageMetadataOptions = {
 /**
  * Métadonnées complètes d'une page (title/desc/OG/Twitter/hreflang/robots).
  * NB : pas de `keywords` — la balise meta keywords est ignorée par les moteurs.
+ *
+ * TITRE TROP LONG : quand « {titre} | Outerpedia » déborde de
+ * `TITLE_MAX_LENGTH`, c'est le nom du site qu'on lâche, jamais un morceau du
+ * titre (décision du 2026-10-04). Le `<title>` sort alors en `absolute`, qui
+ * court-circuite le gabarit « %s | Outerpedia » du layout, et `og:title` /
+ * `twitter:title` suivent. Sous la borne, rien ne bouge.
  */
 export function createPageMetadata({
   lang,
@@ -88,7 +108,8 @@ export function createPageMetadata({
 }: PageMetadataOptions): Metadata {
   const url = buildUrl(lang, path);
   const canonicalUrl = canonicalPath ? buildUrl(lang, canonicalPath) : url;
-  const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+  const bare = siteSuffixOverflows(title);
+  const fullTitle = bare || title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const isDefault = ogImage === DEFAULT_OG_IMAGE;
   const { width, height } =
     ogImageSize ?? (isDefault ? { width: 1200, height: 630 } : { width: 150, height: 150 });
@@ -112,7 +133,7 @@ export function createPageMetadata({
     : { ...ogBase, type: 'website' };
 
   return {
-    title,
+    title: bare ? { absolute: title } : title,
     description,
     alternates: { canonical: canonicalUrl, languages: buildAlternates(canonicalPath ?? path) },
     openGraph,

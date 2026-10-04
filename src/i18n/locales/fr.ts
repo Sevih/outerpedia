@@ -81,7 +81,7 @@ const fr: Record<TranslationKey, string> = {
   'page.equipments.description':
     "Explorez toutes les armes, accessoires, talismans et sets d'armure d'Outerplane. Comparez les statistiques et trouvez le meilleur équipement pour vos personnages. Mis à jour {monthYear}.",
   'page.equipment.meta_description':
-    "{name} — statistiques, stat principale et secondaires, effets passifs, ascension et où l'obtenir dans Outerplane. Fiche d'équipement complète sur Outerpedia.",
+    "{name} — stat principale et substats, effets passifs, ascension et où l'obtenir dans Outerplane. Fiche sur Outerpedia.",
   'page.equipment.title_suffix': ' — {type} Outerplane',
   'page.equipment.kind.weapon': 'Arme',
   'page.equipment.kind.amulet': 'Accessoire',

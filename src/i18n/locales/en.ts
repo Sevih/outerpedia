@@ -89,7 +89,7 @@ const en = {
   'page.equipments.description':
     'Explore all Outerplane weapons, accessories, talismans, and armor sets. Compare stats and find the best gear for your characters. Updated {monthYear}.',
   'page.equipment.meta_description':
-    '{name} — stats, main and substats, passive effects, ascension, and where to get it in Outerplane. Full equipment breakdown on Outerpedia.',
+    '{name} — stats, main and substats, passive effects, ascension, and where to get it in Outerplane. Full breakdown on Outerpedia.',
   'page.equipment.title_suffix': ' — Outerplane {type}',
   'page.equipment.kind.weapon': 'Weapon',
   'page.equipment.kind.amulet': 'Accessory',

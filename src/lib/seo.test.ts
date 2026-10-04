@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   createPageMetadata,
+  TITLE_MAX_LENGTH,
   getMonthYear,
   buildSiteJsonLd,
   buildBreadcrumbJsonLd,
@@ -85,6 +86,58 @@ describe('createPageMetadata — titre, OG, Twitter, robots', () => {
       description: 'D',
     });
     expect(home.openGraph?.title).toBe('Outerpedia');
+  });
+
+  describe('titre trop long : « | Outerpedia » saute au-delà de TITLE_MAX_LENGTH', () => {
+    const SUFFIX = ' | Outerpedia';
+    /** Métadonnées d'un titre qui, suffixé, fait `total` caractères. */
+    const withTotal = (total: number, char = 'a') => {
+      const title = char.repeat(total - SUFFIX.length);
+      return {
+        title,
+        meta: createPageMetadata({ lang: 'en', path: '/x', title, description: 'D' }),
+      };
+    };
+
+    it('sous la borne : titre nu pour le gabarit du layout, OG et Twitter suffixés', () => {
+      const { title, meta } = withTotal(TITLE_MAX_LENGTH - 1);
+      expect(meta.title).toBe(title);
+      expect(meta.openGraph?.title).toBe(`${title}${SUFFIX}`);
+      expect(meta.twitter?.title).toBe(`${title}${SUFFIX}`);
+    });
+
+    it('pile sur la borne : rien ne change', () => {
+      const { title, meta } = withTotal(TITLE_MAX_LENGTH);
+      expect(meta.title).toBe(title);
+      expect(meta.openGraph?.title).toBe(`${title}${SUFFIX}`);
+      expect(meta.twitter?.title).toBe(`${title}${SUFFIX}`);
+    });
+
+    it('au-dessus : `absolute` court-circuite le gabarit, OG et Twitter sans suffixe', () => {
+      const { title, meta } = withTotal(TITLE_MAX_LENGTH + 1);
+      expect(meta.title).toEqual({ absolute: title });
+      expect(meta.openGraph?.title).toBe(title);
+      expect(meta.twitter?.title).toBe(title);
+    });
+
+    it('compte en points de code : un caractère hors BMP vaut un, pas deux', () => {
+      // « 𠮷 » pèse deux unités UTF-16 : compté en `.length`, ce titre déborderait.
+      const { title, meta } = withTotal(TITLE_MAX_LENGTH, '𠮷');
+      expect(meta.title).toBe(title);
+      expect(meta.openGraph?.title).toBe(`${title}${SUFFIX}`);
+    });
+
+    it('title === SITE_NAME : jamais suffixé, et pas d’`absolute`', () => {
+      const meta = createPageMetadata({
+        lang: 'en',
+        path: '/',
+        title: 'Outerpedia',
+        description: 'D',
+      });
+      expect(meta.title).toBe('Outerpedia');
+      expect(meta.openGraph?.title).toBe('Outerpedia');
+      expect(meta.twitter?.title).toBe('Outerpedia');
+    });
   });
 
   it('image OG par défaut = 1200×630 + carte Twitter large', () => {

@@ -43,28 +43,23 @@
 > autres langues ont les mêmes gabarits et se mesurent par `--host` — des
 > textes plus longs en fr/es, d'autres bornes utiles en jp/kr/zh. Presque tout
 > tient à un GABARIT, pas à du volume éditorial. Décision Sevih 04/10 : quand
-> un titre déborde, on retire « | Outerpedia » — lot A28, qui traite les
-> titres des quatre groupes « mécanisables » et les descriptions des fiches
-> d'équipement.
+> un titre déborde, on retire « | Outerpedia » — FAIT le 04/10 (lot A28, cf.
+> DONE) : 115 titres au-delà de 60 tombent à 7, les 12 descriptions trop
+> longues des fiches d'équipement à 0. Mesuré sur le serveur local ; la mesure
+> sur le site servi est à refaire après déploiement.
 
-- [ ] **Fiches d'équipement (`/equipment/*`, 288 pages)** — MÉCANISABLE.
-      82 titres au-delà de 60 (jusqu'à 77) : le gabarit
-      `{nom} — Outerplane {type} | Outerpedia` (`page.equipment.title_suffix`)
-      coûte 46 caractères pour un « Exclusive Equipment », donc tout nom de
-      plus de 14 caractères déborde. 12 descriptions au-delà de 160, jusqu'à
-      166 : la phrase de `page.equipment.meta_description` fait 131 caractères
-      hors nom, six de moins règlent les douze. À trancher : ce qu'on retire
-      du titre quand il déborde (« Outerplane », ou « | Outerpedia »).
-- [ ] **Fiches de personnage (`/characters/*`, 128 pages)** — MÉCANISABLE.
-      14 titres au-delà de 60 (jusqu'à 76), les versions à nom long (Core
-      Fusion…, saisonniers) : gabarit
-      `{nom} — Outerplane {élément} {classe} Guide | Outerpedia`
-      (`page.character.sr_suffix`). Descriptions toutes dans les bornes (114 à
-      144). Même arbitrage que l'équipement.
-- [ ] **Guides, titres (`/guides/*/*`, 118 pages)** — MÉCANISABLE, avec une
-      réserve. 19 titres au-delà de 60 (jusqu'à 74) : le suffixe de catégorie
-      de `generateMetadata` a été posé exprès le 22/07 pour rendre les titres
-      uniques — c'est « | Outerpedia » qu'on peut lâcher, pas lui.
+- [ ] **Titres encore au-delà de 60 SANS le suffixe (7 pages, 61 à 64)** — À
+      TRANCHER. Le nom et le gabarit débordent à eux seuls, « | Outerpedia »
+      est déjà retiré (lot A28) : `/equipment/the-book-of-folk-and-tall-tales`
+      (64), `/equipment/secret-sword-teru-teru-bouzu` et
+      `/equipment/the-supreme-witchs-companion` (62),
+      `/equipment/knights-special-great-sword` (61),
+      `/characters/kitsune-of-eternity-tamamo-no-mae` (63),
+      `/characters/summer-knights-dream-ember` (61),
+      `/guides/joint-challenge/koh-meteos` (61 — « Joint Challenge » y est deux
+      fois, dans le titre du guide et dans le suffixe de catégorie). Ce qu'on
+      retire alors (« Outerplane », le type, « Guide ») est un autre choix que
+      celui du 04/10 ; ou on accepte, un moteur coupe la fin.
 - [ ] **Guides, descriptions courtes** — semi-mécanisable. 21 descriptions
       sous 70 (44 à 69), toutes dans `adventure-license` (21 guides sur 26) :
       une phrase type recopiée dans chaque `meta.json` (« Tips and advice to
@@ -81,7 +76,8 @@
 - [ ] **Catégories de guides (`/guides/*`, 11 pages)** — MÉCANISABLE. 8 titres
       sous 30 (22 à 28) : le titre est le seul libellé de la catégorie
       (« Adventure | Outerpedia »). Un gabarit du genre « {catégorie} Guides —
-      Outerplane » les sort tous ; descriptions bonnes (96 à 150).
+      Outerplane » les sort tous ; descriptions bonnes (96 à 150). Pas dans
+      le lot A28 : sa règle retire un suffixe, elle n'allonge rien.
 - [ ] **Pages à un segment (`/*`, 28 pages)** — petit volume éditorial. 8
       descriptions sous 70 (40 à 68) : sept outils (`/ost`, `/team-planner`,
       `/4-comics`, `/tierlistpvp`, `/wallpapers`, `/hero-tracker`,
