@@ -42,8 +42,10 @@
 > hors git, se régénère par `pnpm exec tsx scripts/seo-lengths.ts`). Les cinq
 > autres langues ont les mêmes gabarits et se mesurent par `--host` — des
 > textes plus longs en fr/es, d'autres bornes utiles en jp/kr/zh. Presque tout
-> tient à un GABARIT, pas à du volume éditorial ; rien n'est corrigé, chaque
-> gabarit à raccourcir est un choix de formule.
+> tient à un GABARIT, pas à du volume éditorial. Décision Sevih 04/10 : quand
+> un titre déborde, on retire « | Outerpedia » — lot A28, qui traite les
+> titres des quatre groupes « mécanisables » et les descriptions des fiches
+> d'équipement.
 
 - [ ] **Fiches d'équipement (`/equipment/*`, 288 pages)** — MÉCANISABLE.
       82 titres au-delà de 60 (jusqu'à 77) : le gabarit
