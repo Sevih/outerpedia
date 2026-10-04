@@ -7,6 +7,14 @@
 
 ## 2026-10-04
 
+- **Relecture de F9, F10 et A28 : les 59 lots sont faits** (Fable). Contrôles
+  verts (181 fichiers, 2 191 tests), aucun lot ne touche `package.json`.
+  A28 : la règle tient dans `createPageMetadata` ; 115 titres trop longs
+  → 7, qui débordent encore sans le suffixe. F10 : la table committée ne
+  reçoit que les deux champs de graine, 37 émetteurs, rien d'autre. F9 :
+  rien n'est extrait ni poussé, le plafond attend le jugement de Sevih sur la
+  page de contrôle. À noter : la mesure d'A28 sur `localhost:3000` a fait
+  redémarrer deux fois le serveur de dev de Sevih.
 - **Lot F10 : portraits animés — l'étoile et son halo naissent ensemble quand
   le jeu fixe la graine (P3 de l'audit)** (Fable). Le pourquoi : deux
   commentaires affirmaient qu'`autoRandomSeed` est vrai sur tous les émetteurs
