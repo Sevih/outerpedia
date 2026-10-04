@@ -118,12 +118,11 @@ sur les fichiers.
       `pnpm datagen:portrait-fx` et `pnpm images`. Le correctif de fond — un
       contexte partagé pour toutes les cartes — reste un chantier, il
       emporterait P6.
-- [ ] **Graines des particules (P3, lot F10)** : `autoRandomSeed` est FAUX sur huit
-      émetteurs ; `star` et `star (1)` de `_2000093`, `_2000110`, `_2000114`
-      partagent la graine 0, donc étoile et halo naissent ensemble en jeu, pas
-      ici. Publier `autoRandomSeed`/`randomSeed`, partager la graine au
-      montage, corriger les deux commentaires qui disent l'inverse. À
-      confirmer sur une capture du jeu.
+- [ ] Graines des particules (P3, lot F10) : CORRIGÉ le 04/10 (cf. DONE) —
+      l'étoile et son halo partagent leur graine au montage. Reste à Sevih :
+      comparer Dianne, Ame et Skadi à une capture du jeu sur
+      `/dev/AnimatedPortrait` (étoile et halo synchrones) ; le doute sur
+      `randomSeed = 0` est dans l'entrée DONE.
 
 ---
 

@@ -7,6 +7,78 @@
 
 ## 2026-10-04
 
+- **Lot F10 : portraits animés — l'étoile et son halo naissent ensemble quand
+  le jeu fixe la graine (P3 de l'audit)** (Fable). Le pourquoi : deux
+  commentaires affirmaient qu'`autoRandomSeed` est vrai sur tous les émetteurs
+  simulés, donc qu'une graine tirée par émetteur à chaque montage est
+  conforme ; le bundle dit l'inverse pour huit d'entre eux. Constat revérifié
+  sur la donnée avant d'y toucher : `autoRandomSeed`/`randomSeed` relus dans
+  `prefabs/character/ui_effect` pour les 37 émetteurs des dix effets — 29
+  sont à `true`, et les huit `false` sont bien ceux du rapport, tous à
+  `randomSeed = 0` : `star` et `star (1)` de `_2000093`, `_2000110`,
+  `_2000114`, et le seul `star (1)` de `_2000106` et `_2000121`. Sur les trois
+  premiers les deux émetteurs sont des jumeaux (même forme, même cadence, même
+  vie) que seuls la taille et le matériau distinguent : à graine commune
+  Unity leur fait tirer la même suite, à graines séparées on avait 25 étoiles
+  et 25 halos sans rapport. Le comment : `extract-portrait-fx.py` publie les
+  deux champs par émetteur, juste après `prewarm` ; `FxEmitter`
+  (`portrait-fx.ts`) les porte ; `portrait-fx-sim.ts` gagne `mountSeeds`, une
+  fonction pure qui rend la graine de chaque émetteur d'UN montage — une
+  neuve par émetteur quand `autoRandomSeed` est vrai (comme avant), une seule
+  par valeur de `randomSeed` quand il est faux, que les émetteurs concernés
+  partagent ; `mountPortraitFx` (`portrait-fx-gl.ts`) en crée une par montage
+  et y prend ses graines au lieu de `Math.random()`. La graine partagée est
+  TIRÉE par montage, pas lue dans le prefab (c'est le correctif du rapport) :
+  `mulberry32` n'est pas le générateur d'Unity, rejouer la valeur 0 ne
+  rendrait pas la pluie du jeu, seulement la même sur toutes les cartes — on
+  transcrit l'accord entre émetteurs, pas la suite. Les commentaires faux
+  sont corrigés : l'en-tête de `portrait-fx-sim.ts`, celui du montage dans
+  `portrait-fx-gl.ts`, la ligne de `mulberry32`, et — troisième exemplaire de
+  la même phrase, hors des deux cités — la note « ce qui reste incertain » de
+  la page `/dev/AnimatedPortrait` (`page.dev.tsx`). LA TABLE EST RETOUCHÉE
+  SANS REJOUER L'EXTRACTION : `datagen/assets/portrait-fx.json` reçoit les
+  deux champs sur ses 37 émetteurs (74 lignes ajoutées, rien d'autre ne
+  bouge), aux valeurs lues dans le bundle par un script jetable. Rejouer
+  `pnpm datagen:portrait-fx` aurait aussi appliqué le plafond de textures du
+  lot F9, que Sevih n'a pas encore arbitré ; contrôle fait à la place :
+  `read_emitter` du script modifié, rejoué en lecture seule sur les dix
+  effets, rend exactement les émetteurs de la table committée, ordre des
+  clés compris — la prochaine extraction ne produira donc aucun diff sur ces
+  champs. Tests : `portrait-fx-sim.test.ts` gagne un bloc `mountSeeds` (sept
+  cas) — une graine par émetteur en automatique, le partage par `randomSeed`
+  en fixe, une graine différente d'un montage à l'autre, et sur les trois
+  paires de la table : mêmes naissances et mêmes âges particule par particule
+  sur 12 s, moins d'une unité d'écart au premier pas de vie, et le même
+  émetteur sous une graine à lui n'a plus rien de commun. Contre-épreuve :
+  en remettant une graine par émetteur dans `mountSeeds`, quatre de ces cas
+  cassent. Mesuré au passage : à graine commune l'écart étoile/halo vaut 2 à
+  3 unités en moyenne sur la vie (carte de 180) et jusqu'à 21 en fin de vie,
+  contre 79 en moyenne à graines séparées — la naissance coïncide, puis la
+  traînée, qui pèse la taille du quad (approximation n° 2 de l'en-tête),
+  écarte un peu les deux. Vérification : `pnpm typecheck` (dernière ligne
+  `$ tsc --noEmit && … -p scripts/tsconfig.json`, sortie 0), `pnpm lint`
+  (`$ eslint`, sortie 0), `pnpm test` (`Tests 2191 passed (2191)`, 181
+  fichiers). Aucun autre
+  changement visuel : les 29 émetteurs automatiques tirent toujours une
+  graine chacun, et les `star (1)` seuls de `_2000106` et `_2000121` aussi
+  (un seul émetteur à graine fixée, rien à partager) ; comparé à la lecture
+  du code et par les tests, PAS à l'écran — je n'ai pas ouvert la page. Ce
+  que je ne peux pas vérifier, et qui reste à Sevih : le rendu en jeu. Trois
+  persos à comparer à une capture du jeu sur `/dev/AnimatedPortrait` : Dianne
+  (2000093), Ame (2000110), Skadi (2000114). À y voir : chaque glint net posé
+  SUR son halo, les deux apparaissant au même endroit au même instant et
+  montant ensemble (un léger décalage en fin de vie est attendu ici, cf. la
+  mesure) ; l'inverse — étoiles et halos semés indépendamment — voudrait dire
+  que le jeu ne partage pas la graine. Le doute est réel : la déduction
+  repose sur la sémantique d'Unity, et la doc de `ParticleSystem.randomSeed`
+  d'avant l'arrivée d'`autoRandomSeed` (4.x à 5.2) disait qu'une graine à 0
+  est « assigned a random value on awake » ; si la version du jeu a gardé ce
+  comportement, `autoRandomSeed = false` avec `randomSeed = 0` tirerait
+  quand même une graine par système et l'ancien rendu était le bon — il
+  suffirait alors de ne partager que les graines non nulles dans
+  `mountSeeds`. Laissé hors périmètre : le rapport
+  `docs/audit/portrait-fx.md` n'est pas annoté, comme pour F8 et F9.
+
 - **Lot A28 : « | Outerpedia » saute quand le titre déborde de 60 caractères
   — 115 titres trop longs tombent à 7, et la description des fiches
   d'équipement rentre dans 160 en anglais, français et espagnol** (Opus,

@@ -80,6 +80,13 @@ export interface FxEmitter {
   simulationSpeed: number;
   looping: boolean;
   prewarm: boolean;
+  /**
+   * Vrai = le jeu tire une graine à chaque lecture, `randomSeed` ne compte pas.
+   * Faux = le système rejoue `randomSeed` ; deux émetteurs qui portent la MÊME
+   * tirent alors la même suite (cf. `mountSeeds`, `portrait-fx-sim`).
+   */
+  autoRandomSeed: boolean;
+  randomSeed: number;
   /** 0 = désactivé, 1 = pause en fin de vie, 2 = la vie REBOUCLE. Cf. l'en-tête. */
   ringBufferMode: number;
   ringBufferLoopRange: [number, number];

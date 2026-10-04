@@ -9,6 +9,7 @@ import {
   fxBleed,
   isQuadLayer,
   layerVerdict,
+  mountSeeds,
   unsupportedBillboard,
 } from './portrait-fx-sim';
 
@@ -543,6 +544,95 @@ describe('createBillboardSim', () => {
       expect(p.age01).toBeLessThan(1);
       expect(Number.isFinite(p.x) && Number.isFinite(p.y)).toBe(true);
     }
+  });
+});
+
+describe('mountSeeds', () => {
+  /** Un tirage qui se compte — 1, 2, 3… : chaque graine neuve se voit. */
+  const counter = () => {
+    let n = 0;
+    return () => ++n;
+  };
+  const fixed = (randomSeed: number): FxEmitter => ({
+    ...BILLBOARD,
+    autoRandomSeed: false,
+    randomSeed,
+  });
+  /**
+   * Les paires de la table que le jeu fait tirer ENSEMBLE : deux billboards d'un
+   * même effet, à graine fixée et commune (l'étoile et son halo).
+   */
+  const PAIRS = EFFECTS.flatMap(([effect, { emitters }]) => {
+    const held = emitters.filter((e) => !e.autoRandomSeed && layerVerdict(e).kind === 'billboard');
+    return held.flatMap((a, i) =>
+      held
+        .slice(i + 1)
+        .filter((b) => b.randomSeed === a.randomSeed)
+        .map((b) => ({ a, b, id: `${effect} : ${a.name} / ${b.name}` })),
+    );
+  });
+
+  it('à graine automatique, chaque émetteur tire la sienne', () => {
+    const seedOf = mountSeeds(counter());
+    const auto = { ...BILLBOARD, autoRandomSeed: true };
+    expect([seedOf(auto), seedOf(auto), seedOf(auto)]).toEqual([1, 2, 3]);
+  });
+
+  it('à graine fixée, les émetteurs d’un montage partagent la leur, par `randomSeed`', () => {
+    const seedOf = mountSeeds(counter());
+    const zero = seedOf(fixed(0));
+    expect(seedOf({ ...BILLBOARD, autoRandomSeed: true })).not.toBe(zero);
+    expect(seedOf(fixed(0))).toBe(zero);
+    // Une autre graine fixée est un autre tirage, partagé à son tour.
+    const seven = seedOf(fixed(7));
+    expect(seven).not.toBe(zero);
+    expect(seedOf(fixed(7))).toBe(seven);
+    expect(seedOf(fixed(0))).toBe(zero);
+  });
+
+  it('la graine partagée est tirée PAR MONTAGE : deux cartes, deux pluies', () => {
+    const draw = counter();
+    expect(mountSeeds(draw)(fixed(0))).not.toBe(mountSeeds(draw)(fixed(0)));
+    // Sans tirage injecté : un entier 32 bits non signé, celui que `mulberry32` attend.
+    const seed = mountSeeds()(fixed(0));
+    expect(Number.isInteger(seed) && seed >= 0 && seed < 0x100000000).toBe(true);
+  });
+
+  it('la table porte des paires à graine commune (sinon le cas suivant tourne à vide)', () => {
+    expect(PAIRS.length).toBeGreaterThan(0);
+  });
+
+  it.each(PAIRS)('étoile et halo naissent ENSEMBLE — $id', ({ a, b }) => {
+    const seedOf = mountSeeds(counter());
+    const simA = createBillboardSim(a, seedOf(a));
+    const simB = createBillboardSim(b, seedOf(b));
+    // Le même émetteur sous une graine à lui : ce que le montage faisait avant.
+    const apart = createBillboardSim(b, seedOf({ ...b, autoRandomSeed: true }));
+    let together = true;
+    let newborn = 0;
+    let gap = 0;
+    let strangers = false;
+    for (let t = 0; t < 12; t += FRAME) {
+      const pa = simA.at(t);
+      const pb = simB.at(t);
+      const pc = apart.at(t);
+      // Mêmes naissances, mêmes vies : les deux pluies ont le même âge, particule
+      // par particule, d'un bout à l'autre.
+      together &&= pa.length === pb.length && pa.every((p, i) => p.age01 === pb[i].age01);
+      strangers ||= pa.length !== pc.length || pa.some((p, i) => p.age01 !== pc[i].age01);
+      // Et le même point de naissance. Ensuite la traînée, qui pèse la TAILLE du
+      // quad, les écarte un peu : c'est à la naissance que la paire se juge.
+      for (let i = 0; i < Math.min(pa.length, pb.length); i++) {
+        if (pa[i].age01 * lifeMin(a) > MAX_STEP) continue;
+        newborn++;
+        gap = Math.max(gap, Math.hypot(pa[i].x - pb[i].x, pa[i].y - pb[i].y));
+      }
+    }
+    expect(together).toBe(true);
+    expect(newborn).toBeGreaterThan(0);
+    // En unités du cadre (180 de large) : moins d'une unité au premier pas.
+    expect(gap).toBeLessThan(1);
+    expect(strangers).toBe(true);
   });
 });
 

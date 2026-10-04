@@ -49,8 +49,12 @@
  *      0,6-0,8, gardent alors leur rapport ×2 exact). Unity ne dit pas si les
  *      axes tirent ensemble ou séparément.
  *
- * `autoRandomSeed` est VRAI sur ces émetteurs : le jeu lui-même tire une graine
- * par session. Notre aléa par montage est donc conforme, pas un écart.
+ * LA GRAINE suit `autoRandomSeed`, émetteur par émetteur. Vrai (le cas courant) :
+ * le jeu lui-même tire une graine par lecture, notre aléa par montage est donc
+ * conforme, pas un écart. FAUX sur huit `star` (`_2000093`, `_2000106`,
+ * `_2000110`, `_2000114`, `_2000121`) : le système rejoue `randomSeed`, et les
+ * émetteurs d'un effet qui portent la même tirent la même suite — c'est
+ * `mountSeeds` qui la leur fait partager.
  */
 import {
   PORTRAIT_FX,
@@ -471,7 +475,7 @@ interface Particle {
   phase: number;
 }
 
-/** Le générateur déterministe usuel — une graine par montage, comme `autoRandomSeed`. */
+/** Le générateur déterministe usuel — sa graine vient de `mountSeeds`. */
 function mulberry32(seed: number): () => number {
   let a = seed >>> 0;
   return () => {
@@ -479,6 +483,41 @@ function mulberry32(seed: number): () => number {
     let t = Math.imul(a ^ (a >>> 15), 1 | a);
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * LES GRAINES D'UN MONTAGE : à chaque émetteur la sienne, sauf ceux que le jeu
+ * fait tirer ENSEMBLE.
+ *
+ * `autoRandomSeed` vrai : une graine neuve par émetteur, comme le jeu en tire
+ * une par lecture. `autoRandomSeed` FAUX : le système rejoue `randomSeed`, donc
+ * deux émetteurs qui portent la même tirent la même suite. C'est le cas du
+ * `star` et du `star (1)` de `_2000093`, `_2000110` et `_2000114` (graine 0 des
+ * deux côtés) : des JUMEAUX — même forme, même cadence, même vie, même frein —
+ * que seuls la taille et le matériau distinguent, l'étoile nette et son halo.
+ * À graine commune chaque étoile naît SOUS son halo ; à graines séparées, 25
+ * étoiles et 25 halos sans rapport.
+ *
+ * La graine partagée est TIRÉE par montage, pas lue : `mulberry32` n'est pas le
+ * générateur d'Unity, rejouer la valeur du prefab ne rendrait pas la pluie du
+ * jeu, seulement la même sur toutes les cartes. Ce qu'on transcrit, c'est
+ * l'ACCORD entre émetteurs. Déduit de la sémantique d'Unity, pas d'une capture.
+ *
+ * `draw` n'est injectable que pour les tests.
+ */
+export function mountSeeds(
+  draw: () => number = () => (Math.random() * 0x100000000) >>> 0,
+): (e: FxEmitter) => number {
+  const shared = new Map<number, number>();
+  return (e) => {
+    if (e.autoRandomSeed) return draw();
+    let seed = shared.get(e.randomSeed);
+    if (seed === undefined) {
+      seed = draw();
+      shared.set(e.randomSeed, seed);
+    }
+    return seed;
   };
 }
 

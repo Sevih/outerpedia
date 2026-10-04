@@ -569,6 +569,15 @@ def read_emitter(fx: Bundle, go: dict, rt: dict, mats: dict, meshes: dict,
         'simulationSpeed': r(ps['simulationSpeed']),
         'looping': bool(ps['looping']),
         'prewarm': bool(ps['prewarm']),
+        # La GRAINE de l'aléa. `autoRandomSeed` vrai = une graine tirée à chaque
+        # lecture, et `randomSeed` ne compte pas. Faux = le système rejoue
+        # `randomSeed` — et deux émetteurs qui portent la MÊME tirent la même
+        # suite : le `star` et le `star (1)` de `_2000093`, jumeaux à la taille
+        # et au matériau près, font alors naître chaque étoile SOUS son halo.
+        # VARIE PAR ÉMETTEUR (faux sur huit `star` au patch du 08/09/2026) : le
+        # taire laissait le moteur tirer les deux à part.
+        'autoRandomSeed': bool(ps['autoRandomSeed']),
+        'randomSeed': ps['randomSeed'],
         # 0 = désactivé, 1 = pause en fin de vie, 2 = LA VIE REBOUCLE. C'est ce 2
         # qui fait des calques de cadre un effet permanent malgré `looping = false`.
         'ringBufferMode': ps['ringBufferMode'],

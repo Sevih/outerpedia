@@ -77,6 +77,7 @@ import {
   frameAge,
   fxBleed,
   layerVerdict,
+  mountSeeds,
   type BillboardSim,
 } from './portrait-fx-sim';
 
@@ -519,6 +520,7 @@ export function mountPortraitFx(
 
   const prepared: Layer[] = [];
   const needed = new Set<string>();
+  const seedOf = mountSeeds();
 
   for (const e of effect.emitters) {
     if (only && !only.includes(e.name)) continue;
@@ -600,9 +602,9 @@ export function mountPortraitFx(
         emitter: e,
         material: mat,
         order: e.sortingOrder,
-        // La graine par montage est CONFORME : `autoRandomSeed` est vrai côté
-        // jeu, chaque session y tire la sienne.
-        sim: createBillboardSim(e, (Math.random() * 0x100000000) >>> 0),
+        // Une graine par montage — PARTAGÉE entre les émetteurs dont le jeu
+        // fixe la graine (`autoRandomSeed` faux) : l'étoile naît sous son halo.
+        sim: createBillboardSim(e, seedOf(e)),
         ox,
         oy,
       });
