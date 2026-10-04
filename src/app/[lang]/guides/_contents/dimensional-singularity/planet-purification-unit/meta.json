@@ -8,15 +8,15 @@
     "es": "Unidad de purificación planetaria"
   },
   "description": {
-    "en": "Planet Purification Unit (Fire), Dimensional Singularity — bring Water Strikers and a Defender; immune to DoTs, CC and buff removal, Fixed damage capped. Skills, teams & strategies.",
+    "en": "Planet Purification Unit (Fire) Dimensional Singularity guide — bring Water Strikers and a Defender; immune to DoTs, CC and dispels, Fixed damage capped.",
     "jp": "次元特異点「惑星浄化ユニット」攻略 — 水属性ストライカー＋ディフェンダー編成がほぼ必須。DoT・行動妨害・バフ解除は全て無効。スキル・編成・攻略法。",
-    "kr": "차원 특이점: 행성 정화 유닛 공략 — 수속성 스트라이커+디펜더 조합이 사실상 필수. 도트·군중 제어·버프 해제 모두 면역. 스킬, 팀 편성, 공략법.",
+    "kr": "차원 특이점: 행성 정화 유닛 공략 — 수속성 스트라이커+디펜더 조합이 사실상 필수. 도트·군중 제어·버프 해제 모두 면역.",
     "zh": "次元奇点：净化行星单位攻略 — 强烈偏向水属性突击手+防御者编成；免疫持续伤害、控制与驱散，固定伤害有上限。技能、队伍编成与策略。",
-    "fr": "Singularité Dimensionnelle : Unité de purification planétaire (Fire) — équipe Water Striker avec Defender ; immunisé aux DoT, au contrôle et au dispel, dégâts fixes plafonnés. Compétences, équipes et stratégies.",
-    "es": "Unidad de purificación planetaria (Fuego), Singularidad Dimensional — lleva Atacantes de Agua y un Defensor; inmune a DoT, CC y eliminación de bonos, daño Fijo limitado. Skills, equipos y estrategias."
+    "fr": "Singularité Dimensionnelle : Unité de purification planétaire (Fire) — Strikers Water avec un Defender ; immunisé aux DoT, CC et dispel, dégâts fixes plafonnés.",
+    "es": "Unidad de purificación planetaria (Fuego), Singularidad Dimensional — Atacantes de Agua + Defensor; inmune a DoT, CC y eliminación de bonos, daño Fijo limitado."
   },
   "icon": "CM_Gate_Icon_Monad",
   "author": "Sevih",
-  "updated": "2026-10-02",
+  "updated": "2026-10-04",
   "bossId": "60000002"
 }

@@ -8,16 +8,16 @@
     "es": "Ascenso: Demiurgo Drakhan"
   },
   "description": {
-    "en": "Tips and advice to succeed against Demiurge Drakhan",
-    "jp": "デミウルゴス ドレイカーンを成功させるためのヒントとアドバイス",
-    "kr": "데미우르고스 드레이칸을 성공시키기 위한 팁과 조언",
-    "zh": "成功挑战创世之神 德雷坎的提示和建议",
-    "fr": "Conseils et astuces pour réussir contre Démiurge Drakhan",
-    "es": "Consejos y trucos para tener éxito contra Demiurgo Drakhan"
+    "en": "Demiurge Drakhan Promotion Challenge guide (Adventure License): the rank-up fight's mechanics, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスの昇級チャレンジ「デミウルゴス ドレイカーン」攻略 — 昇級戦のギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 승급 챌린지 데미우르고스 드레이칸 공략 — 승급전 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·晋升挑战：创世之神 德雷坎攻略 — 晋升战机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Promotion Challenge (Adventure License) : Démiurge Drakhan — mécaniques du combat de promotion, héros recommandés et compositions d'équipe.",
+    "es": "Guía del Desafío de ascenso (Licencia aventura): Demiurgo Drakhan — mecánicas del combate, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_2000063_Lock",
   "author": "Shiraen",
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "bossId": "50000004",
   "group": "adventure_challenge:70600102"
 }

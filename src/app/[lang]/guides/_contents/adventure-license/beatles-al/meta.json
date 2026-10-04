@@ -8,16 +8,16 @@
     "es": "Dek'ril & Mek'ril"
   },
   "description": {
-    "en": "Guide and advice to clear the Weekly Conquest - Dek'ril & Mek'ril",
-    "jp": "ウィークリー討伐 - メグリル&デグリル クリアガイドとアドバイス",
-    "kr": "주간토벌 - 데그릴&메그릴 클리어 가이드 및 조언",
-    "zh": "周常征服 - 德克利尔&梅克利尔通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Dek'ril & Mek'ril",
-    "es": "Guía y consejos para superar la Misión Conquista Semanal - Dek'ril & Mek'ril"
+    "en": "Dek'ril & Mek'ril Weekly Conquest guide (Adventure License): boss mechanics to play around, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスのウィークリー討伐「メグリル＆デグリル」攻略 — ボスのギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 주간토벌 데그릴&메그릴 공략 — 보스 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·每周讨伐：泰格里尔&梅格里尔攻略 — Boss机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Weekly Conquest (Adventure License) : Dek'ril & Mek'ril — mécaniques du boss, héros recommandés et compositions d'équipe.",
+    "es": "Guía de Conquista Semanal (Licencia aventura): Dek'ril & Mek'ril — mecánicas del jefe, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_4076003_4076004",
   "author": "Shiraen",
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "bossId": "51000007",
   "group": "adventure_mission:70600003"
 }

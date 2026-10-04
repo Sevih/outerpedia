@@ -8,16 +8,16 @@
     "es": "Ascenso: Demiurgo Stella"
   },
   "description": {
-    "en": "Tips and advice to succeed against Demiurge Stella",
-    "jp": "デミウルゴス ステラを成功させるためのヒントとアドバイス",
-    "kr": "데미우르고스 스텔라를 성공시키기 위한 팁과 조언",
-    "zh": "成功挑战创世之神 斯黛拉的提示和建议",
-    "fr": "Conseils et astuces pour réussir contre Démiurge Stella",
-    "es": "Consejos y trucos para tener éxito contra Demiurgo Stella"
+    "en": "Demiurge Stella Promotion Challenge guide (Adventure License): the rank-up fight's mechanics, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスの昇級チャレンジ「デミウルゴス ステラ」攻略 — 昇級戦のギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 승급 챌린지 데미우르고스 스텔라 공략 — 승급전 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·晋升挑战：创世之神 斯黛拉攻略 — 晋升战机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Promotion Challenge (Adventure License) : Démiurge Stella — mécaniques du combat de promotion, héros recommandés et compositions d'équipe.",
+    "es": "Guía del Desafío de ascenso (Licencia aventura): Demiurgo Stella — mecánicas del combate, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_2000053_Lock",
   "author": "Shiraen",
-  "updated": "2026-10-03",
+  "updated": "2026-10-04",
   "bossId": "50000001",
   "group": "adventure_challenge:70600100"
 }

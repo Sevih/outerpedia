@@ -8,16 +8,16 @@
     "es": "Traje de Asalto Ful.Mi.NATION"
   },
   "description": {
-    "en": "Guide and advice to clear the Weekly Conquest - Ful.Mi.NATION Assault Suit",
-    "jp": "ウィークリー討伐 - イエクスプローの重装機兵 クリアガイドとアドバイス",
-    "kr": "주간토벌 - 이엑스플로 중장기병 클리어 가이드 및 조언",
-    "zh": "周常征服 - 爆破重装突击装甲通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Ful.Mi.NATION Assault Suit",
-    "es": "Guía y consejos para superar la Misión Conquista Semanal - Traje de Asalto Ful.Mi.NATION"
+    "en": "Ful.Mi.NATION Assault Suit Weekly Conquest guide (Adventure License): boss mechanics to play around, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスのウィークリー討伐「イエクスプローの重装機兵」攻略 — ボスのギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 주간토벌 이엑스플로 중장기병 공략 — 보스 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·每周讨伐：伊克斯普洛重骑兵攻略 — Boss机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Weekly Conquest (Adventure License) : Ful.Mi.NATION Assault Suit — mécaniques du boss, héros recommandés et compositions d'équipe.",
+    "es": "Guía de Conquista Semanal (Licencia aventura): Traje de Asalto Ful.Mi.NATION — mecánicas del jefe, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_4044005",
   "author": "Shiraen",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "bossId": "51000029",
   "group": "adventure_mission:70600016"
 }

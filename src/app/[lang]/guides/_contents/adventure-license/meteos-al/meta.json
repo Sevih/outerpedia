@@ -8,16 +8,16 @@
     "es": "Caballero Ardiente Meteos"
   },
   "description": {
-    "en": "Guide and advice to clear the Weekly Conquest - Blazing Knight Meteos",
-    "jp": "ウィークリー討伐 - 火炎の騎士メテウス クリアガイドとアドバイス",
-    "kr": "주간토벌 - 화염기사 메테우스 클리어 가이드 및 조언",
-    "zh": "周常征服 - 烈焰骑士梅特乌斯通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Météos, le Chevalier Flamboyant",
-    "es": "Guía y consejos para completar la Misión Conquista Semanal - Caballero Ardiente Meteos"
+    "en": "Blazing Knight Meteos Weekly Conquest guide (Adventure License): boss mechanics to play around, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスのウィークリー討伐「火炎の騎士メテウス」攻略 — ボスのギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 주간토벌 화염기사 메테우스 공략 — 보스 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·每周讨伐：火焰骑士梅修斯攻略 — Boss机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Weekly Conquest (Adventure License) : Météos, le Chevalier Flamboyant — mécaniques du boss, héros recommandés et compositions d'équipe.",
+    "es": "Guía de Conquista Semanal (Licencia aventura): Caballero Ardiente Meteos — mecánicas del jefe, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_4076002",
   "author": "Shiraen",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "bossId": "51000012",
   "group": "adventure_mission:70600005"
 }

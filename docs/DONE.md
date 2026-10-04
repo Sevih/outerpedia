@@ -7,6 +7,110 @@
 
 ## 2026-10-04
 
+- **Lot B16 : SEO, descriptions des guides dans les bornes — les 21 trop
+  courtes d'`adventure-license` et les 24 trop longues à la source** (Opus).
+  Seul le champ `description` de 50 `meta.json` de
+  `src/app/[lang]/guides/_contents/` change de ma main : 265 textes réécrits
+  sur 300, ni code ni locale ; le hook `stamp-guides` a de lui-même daté
+  `updated` au 04/10 sur 48 d'entre eux au commit. Le pourquoi : la mesure du 04/10
+  comptait 21 descriptions de guides sous 70 caractères et 24 au-delà de 160
+  dans le fichier lui-même, ce que le lot A29 ne pouvait pas régler côté code.
+  L'inventaire a été refait par script jetable (chaque `meta.json`, six
+  langues, longueur en points de code) : mêmes chiffres que le TODO.
+  **1. Trop courtes (`adventure-license`, 26 guides).** Les 26 sont des pages
+  `EncounterBossGuide` : une intro, les mécaniques du boss (`tips.json`), les
+  héros recommandés (`recommended.json`), une à trois équipes (`teams.json`),
+  parfois une vidéo — ouverts : `amadeus-al`, `ziggsaron-al`,
+  `promote-dastei`, plus les intros des cinq autres promotions. Deux familles,
+  lues dans `group` : `adventure_mission:*` (20, Weekly Conquest) et
+  `adventure_challenge:*` (6, Promotion Challenge). Une phrase par famille,
+  qui nomme le boss, le mode, et ce que la page contient réellement :
+  « {boss} Weekly Conquest guide (Adventure License): boss mechanics to play
+  around, recommended heroes and team compositions. » et « {boss} Promotion
+  Challenge guide (Adventure License): the rank-up fight's mechanics,
+  recommended heroes and team compositions. » — 120 à 148 en anglais. Le nom
+  du boss vient du `title` du même fichier, langue par langue (pour une
+  promotion, ce qui suit « Promotion : ») : les anciennes descriptions
+  portaient des noms qui n'étaient pas ceux du titre (zh « 阿玛迪乌斯 » pour
+  « 阿玛迪斯 », jp « 氷の女王グリシス » pour « グリシス »). Les noms de modes
+  sont ceux du jeu (`glossaries.json`, `encounters.json`) : ウィークリー討伐 et
+  昇級チャレンジ, 주간토벌 et 승급 챌린지, 每周讨伐 et 晋升挑战 (l'ancien
+  « 周常征服 » n'était pas le terme du jeu), Conquista Semanal et Desafío de
+  ascenso ; en français le mode reste en anglais (CONVENTIONS). Le nom de la
+  catégorie est le libellé de `guide-categories.ts`. La phrase est posée sur
+  les 26, y compris les cinq qui passaient déjà 70 (71 à 80) avec la même
+  phrase type : une phrase « par famille » qui en laisserait cinq sur l'ancien
+  modèle n'en serait pas une — c'est ma lecture de la consigne, à défaire si
+  Sevih voulait strictement 21.
+  **2. Trop longues (24 guides).** Condensées sous 155 en anglais, sous 160 en
+  français et en espagnol, à 80 au plus en japonais, coréen et chinois ; une
+  langue déjà dans sa borne n'est pas touchée (d'où 8 japonais et 3 chinois
+  seulement sur les 15 `dimensional-singularity`). La phrase de mécanique est
+  gardée, c'est la queue générique qui saute (« Skills, teams &
+  strategies. », « Compétences, équipes et stratégies. », « スキル・編成・
+  攻略法。 »…) ; en anglais le mot « guide » remonte dans l'en-tête
+  (« Chimera (Earth) Dimensional Singularity guide — … »). Le nom du boss et
+  celui du mode restent partout. Repris au passage, dans les lignes
+  réécrites seulement : `urd-*` en espagnol disait « Singularidad » tout
+  court et `vi-e-11-a` « Dimensional Singularity » en anglais (→ « Singularidad
+  Dimensional ») ; Skuld, Urd et Verdandi reprennent le nom du titre du
+  fichier (« (Ténèbres) », « (Lumière) », « (빛) » et non « (Dark) »,
+  « (Light) », « (광) »), comme « La sombra de Shichifuja » ; deux contresens
+  espagnols (`blazing-knight-meteos` « nunca dejes que lo mate »,
+  `verdandi-*` « evita la Inmunidad en la banca »).
+
+  | Catégorie (guides)             | en                | fr                | es                | jp             | kr             | zh             |
+  | ------------------------------ | ----------------- | ----------------- | ----------------- | -------------- | -------------- | -------------- |
+  | `adventure-license` (26)       | 44–80 → 120–148   | 50–92 → 114–150   | 50–102 → 120–157  | 25–37 → 52–67  | 22–32 → 54–65  | 15–26 → 40–50  |
+  | `dimensional-singularity` (15) | 161–218 → 138–154 | 185–250 → 149–160 | 169–253 → 138–160 | 67–106 → 67–80 | 84–123 → 69–80 | 56–89 → 56–78  |
+  | `special-request` (4)          | 161–168 → 150–154 | 159–184 → 155–160 | 177–206 → 154–160 | 75–85 → 75–79  | 83–96 → 77–80  | 61–69 (intact) |
+  | `general-guides` (2)           | 172–202 → 153–154 | 189–254 → 156–159 | 200–222 → 154–159 | 85–89 → 79–80  | 91–96 → 79–80  | 65–70 (intact) |
+  | `other` (2)                    | 167–190 → 148–154 | 199–218 → 155–160 | 192–229 → 159–160 | 77–92 → 77–78  | 80–92 → 78–80  | 51–69 (intact) |
+  | `adventure` (1, `S3-4-10`)     | 164 → 152         | 163 → 158         | 190 → 154         | 80 (intact)    | 95 → 78        | 75 (intact)    |
+
+  **Aucune des 50 ne reste hors borne**, dans aucune des six langues ;
+  plusieurs sont pile dessus (160 en français ou en espagnol, 80 en coréen).
+  Ce que la condensation a coûté, pour la relecture : `chimera`
+  (Singularité) perd le chiffre du plafond (« capped at 50000 » → « capped »,
+  le chinois le garde) et l'accroche « a Fire headcount check » ;
+  `timegate-resource` perd « per-source amounts and monthly totals »
+  (« with totals » en anglais, plus rien en français ni en espagnol, entier en
+  japonais et en coréen) ; `heroes-growth` dit « in-game costs » pour
+  « game-derived costs » ; `roadmap-2026` perd « and more » et, en français
+  et en espagnol, le mot « plans » devant Core Fusion ; `roadmap-2026-h2`
+  perd « Full recap of », et la date s'écrit court en espagnol et en coréen
+  (« 14/8/2026 », « 2026.8.14 ») ; les quatre `special-request` gardent
+  « Teams & tips. » en anglais mais le perdent en français et en espagnol ;
+  `S3-4-10` perd « completo » en espagnol. Les quatre `special-request`
+  rentrent aussi une fois passées par `prefixedDescription` (A29) : `glicys`
+  reprend son préfixe (9 + 151 = 160), les trois autres sortent sans.
+  **La vérification** : le script jetable applique par remplacement de la
+  ligne exacte (le fichier garde son format prettier, l'ordre des clés et les
+  autres champs), refuse une balise inline, et contrôle chaque langue contre
+  sa borne avant d'écrire ; inventaire rejoué après : 0 description sous 70 et
+  0 au-delà de 160 en anglais sur les 149 guides. Mesuré à la source, pas sur
+  le site servi : `scripts/seo-lengths.ts` lit la prod, qui n'a pas ce
+  commit. `prettier --check` sur les 50 fichiers, `pnpm typecheck` (les trois
+  `tsc --noEmit`, sans erreur), `pnpm lint` (`$ eslint`, sans sortie),
+  `pnpm test` (`Test Files 181 passed (181)`, `Tests 2215 passed (2215)`).
+  Aucun changement visuel hors le texte lui-même : la description ne sert
+  pas qu'au SEO, elle s'affiche aussi, coupée à deux lignes, sur les cartes de
+  `GuideCard`, `SingularityRotation`, `TieredList` et `RelatedGuides` — pas
+  dans la vue `adventure-license`, qui ne la montre pas. Lu dans le code, pas
+  regardé à l'écran : à voir par Sevih.
+  **Laissé, hors périmètre** : 44 autres guides ont une description anglaise
+  dans la borne mais débordent ailleurs — 43 en espagnol (jusqu'à 213), 25 en
+  français (jusqu'à 188), 25 en coréen (jusqu'à 97), 9 en japonais (jusqu'à 95) ; surtout `adventure` (19), puis `guild-raid`, `special-request` (les
+  cinq du point 3 de la consigne, intacts : 165 à 200 en français et en
+  espagnol), `world-boss`, `irregular-extermination`, `general-guides`
+  (`gear`, `quirk`, `stats`), `monad-gate`, `joint-challenge`, `other`
+  (`outerplane-on-linux`). Les hôtes de langue ne sont pas mesurés par le
+  rapport, et le TODO ne les comptait pas : un lot à part si Sevih le veut.
+  Les descriptions françaises gardent les éléments en anglais (« (Fire) »,
+  « (Water) ») là où CONVENTIONS les veut en français : pas corrigé, ce
+  serait une passe sur tous les guides. Les deux items sortent du TODO, et la
+  section SEO avec eux.
+
 - **Lot A29 : SEO, ce qui se règle dans le code et les locales — gabarit des
   catégories de guides, titre de `/changelog`, coupe de la description d'un
   événement, préfixe du boss et catégorie répétée dans les guides** (Opus).

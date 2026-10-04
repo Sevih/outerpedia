@@ -8,16 +8,16 @@
     "es": "Gustav"
   },
   "description": {
-    "en": "Guide and advice to clear the Weekly Conquest - Gustav",
-    "jp": "ウィークリー討伐 - グスタフ クリアガイドとアドバイス",
-    "kr": "주간토벌 - 구스타프 클리어 가이드 및 조언",
-    "zh": "周常征服 - 古斯塔夫通关指南和建议",
-    "fr": "Guide et conseils pour réussir le Weekly Conquest — Gustav",
-    "es": "Guía y consejos para completar la Misión Conquista Semanal - Gustav"
+    "en": "Gustav Weekly Conquest guide (Adventure License): boss mechanics to play around, recommended heroes and team compositions.",
+    "jp": "冒険者ライセンスのウィークリー討伐「グスタフ」攻略 — ボスのギミックと対策、おすすめヒーローと編成を紹介。",
+    "kr": "모험 라이선스 주간토벌 구스타프 공략 — 보스 기믹과 대처법, 추천 영웅과 팀 편성을 정리했습니다.",
+    "zh": "冒险许可证·每周讨伐：古斯塔夫攻略 — Boss机制与应对思路、推荐角色与队伍编成。",
+    "fr": "Guide Weekly Conquest (Adventure License) : Gustav — mécaniques du boss, héros recommandés et compositions d'équipe.",
+    "es": "Guía de Conquista Semanal (Licencia aventura): Gustav — mecánicas del jefe, héroes recomendados y composiciones de equipo."
   },
   "icon": "T_Licence_4024001",
   "author": "Shiraen",
-  "updated": "2026-09-23",
+  "updated": "2026-10-04",
   "bossId": "51000013",
   "group": "adventure_mission:70600006"
 }
