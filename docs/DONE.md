@@ -7,6 +7,21 @@
 
 ## 2026-10-04
 
+- **Relecture de A29 et B16 : le SEO anglais est dans les bornes** (Fable).
+  Lots 60 et 61 de la série : A29 `f1919818` (gabarits de titre des
+  catégories de guides et de `/changelog`, description d'événement coupée,
+  préfixe du boss et catégorie répétée retirés quand ils font déborder), B16
+  `1e54728d` (descriptions de 50 `meta.json` de guides, six langues).
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts (181 fichiers, 2 215
+  tests), aucun lot ne touche `package.json`. Recompte indépendant sur les 50
+  fichiers de B16 : aucune description hors bornes, dans aucune langue (`en`
+  120 à 154, `fr`/`es` jusqu'à 160, `jp`/`kr`/`zh` jusqu'à 80). Les six
+  titres de fiches de 61 à 64 caractères sont acceptés tels quels (décision
+  prise par Fable, annoncée à Sevih). Le point « huit descriptions courtes »
+  d'A29 n'avait plus lieu d'être : les clés de B14 étaient en ligne, l'item
+  datait de la mesure d'avant déploiement. Trouvé en recomptant, hors
+  périmètre des deux lots : les AUTRES langues débordent dans des guides dont
+  l'anglais est bon — au TODO, à mesurer sur les hôtes servis.
 - **Lot B16 : SEO, descriptions des guides dans les bornes — les 21 trop
   courtes d'`adventure-license` et les 24 trop longues à la source** (Opus).
   Seul le champ `description` de 50 `meta.json` de

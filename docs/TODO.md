@@ -5,6 +5,21 @@
 
 ---
 
+## 🔎 SEO — les cinq autres langues
+
+> L'anglais est dans les bornes (lots A28, A29, B16, cf. DONE). Les autres
+> hôtes n'ont jamais été mesurés sur le site servi.
+
+- [ ] **Mesurer `fr`, `es`, `jp`, `kr`, `zh`** une fois A29 et B16 en ligne :
+      `pnpm exec tsx scripts/seo-lengths.ts --host https://fr.outerpedia.com`
+      (et les quatre autres). Déjà connu, relevé le 04/10 dans les `meta.json`
+      des guides que B16 n'a pas touchés (leur anglais était bon) :
+      descriptions au-delà de 160 en `es` (43 guides) et `fr` (25), surtout
+      `adventure` ; au-delà de 80 en `kr` (25) et `jp` (9) — borne à 80 parce
+      que ces caractères sont deux fois plus larges, c'est un choix, pas une
+      règle du jeu. Les titres par langue sont inconnus tant que la mesure
+      n'est pas faite.
+
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
