@@ -55,6 +55,7 @@ const jp: Record<TranslationKey, string> = {
 
   // Changelog
   'changelog.title': '更新履歴',
+  'changelog.meta_title': '更新履歴 — サイトの最新アップデート',
   'changelog.description':
     'Outerpedia の更新情報（ガイド、キャラクター、ツールなど）を確認できます。',
   'changelog.view_full': 'すべての更新履歴を見る',
@@ -770,6 +771,9 @@ const jp: Record<TranslationKey, string> = {
   'page.guides.title': 'アウタープレーン 攻略ガイド',
   'page.guides.description':
     'アウタープレーン攻略ガイド。冒険ステージ、ボス戦、ギルドレイド、ワールドボス、初心者向けのヒント。',
+  'page.guides.category.meta_title': '{category} 攻略ガイド — アウタープレーン',
+  'page.guides.category.meta_title_bare': '{category} — アウタープレーン攻略',
+  'page.guides.category.meta_title_word': 'ガイド',
   'page.guides.list': 'ガイド一覧',
   'page.guide.by': '著者: {author}',
   'page.guide.updated': '{date} 更新',

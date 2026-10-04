@@ -7,6 +7,113 @@
 
 ## 2026-10-04
 
+- **Lot A29 : SEO, ce qui se règle dans le code et les locales — gabarit des
+  catégories de guides, titre de `/changelog`, coupe de la description d'un
+  événement, préfixe du boss et catégorie répétée dans les guides** (Opus).
+  Six points, chacun avec son avant → après, mesuré page par page au `curl`
+  sur le `localhost:3000` de Sevih (hôte anglais ; le script complet n'a pas
+  été lancé, il fait redémarrer le serveur de dev). Les règles nouvelles vivent
+  dans `src/lib/seo.ts`, à côté de celle d'A28, et la borne des descriptions y
+  devient une constante, `DESCRIPTION_MAX_LENGTH` (160), que
+  `scripts/seo-lengths.ts` importe pour `LIMITS.description.max` comme il le
+  fait déjà pour le titre.
+  **1. Catégories de guides** (`src/app/[lang]/guides/[category]/page.tsx`) :
+  le titre n'était que le libellé (« Adventure | Outerpedia », 22). Il passe
+  par `guideCategoryTitle` et trois clés dans les six langues :
+  `page.guides.category.meta_title` (« {category} Guides — Outerplane »,
+  « Guides {category} — Outerplane », « Guías de {category} — Outerplane »,
+  « {category} 攻略ガイド — アウタープレーン », « {category} 공략 가이드 —
+  아우터플레인 », « {category}攻略指南 — 异域战记 Outerplane »),
+  `…meta_title_bare` (le même sans le mot, pour un libellé qui dit déjà
+  « guides » : « Other Guides — Outerplane » et non « Other Guides Guides »)
+  et `…meta_title_word` (le mot à chercher dans le libellé, par langue :
+  Guides, Guías, ガイド, 가이드, 攻略). Le `<h1>`, le fil d'Ariane et le
+  JSON-LD gardent le libellé seul. Les 12 catégories du code (11 au sitemap),
+  nom du site compris : anglais 22 à 36 → 38 à 56 (8 sous 30 → 0), français 39
+  à 56, espagnol 37 à 59, japonais 31 à 38, coréen 31 à 36, chinois 35 à 41 ;
+  tout tient entre 30 et 60 dans les six langues, et un test le garde. En
+  chinois le nom latin du jeu suit « 异域战记 » : sans lui les titres restaient
+  sous 30, et c'est un terme que les joueurs cherchent — à relire par Sevih,
+  comme les gabarits japonais et coréen.
+  **2. `/changelog`** : « Changelog | Outerpedia » (22) → « Changelog — Latest
+  Site Updates | Outerpedia » (44) par une clé dédiée, `changelog.meta_title`
+  (fr « Journal des modifications du site » 46, es « Registro de cambios del
+  sitio » 42, jp 32, kr 32, zh 33). `changelog.title` ne bouge pas : `<h1>`,
+  nav, pied de page, flux RSS et JSON-LD le lisent toujours.
+  **3. Pages à un segment, 8 descriptions courtes** : rien à corriger. Les huit
+  clés `tools.<slug>.meta_description` du lot B14 existent dans les six
+  langues et sont lues (`[lang]/[slug]/page.tsx` pour les sept outils,
+  `[lang]/event/page.tsx` pour `/event`) ; le chiffre du TODO datait d'avant
+  la mise en ligne de B14. Le rapport du site servi du 04/10 ne compte plus
+  aucune description courte sur `/*`, et le serveur local répond 150 (`/ost`),
+  146 (`/team-planner`), 144 (`/4-comics`), 154 (`/tierlistpvp`), 142
+  (`/wallpapers`), 148 (`/hero-tracker`), 146 (`/patch-history`), 155
+  (`/event`).
+  **4. Page d'un événement** : la description de la metadata passe par
+  `truncateDescription` — coupe à la dernière limite de mot qui tient dans
+  160, « … » compris, ponctuation pendante retirée ; un texte sans espace à
+  moins de 30 caractères de la coupe (japonais, chinois) est coupé au
+  caractère plutôt que ramené à sa dernière espace, qui peut être à cent
+  caractères de là. `/event/20260324-video` : 211 → 160 (« …and
+  entertainment! Send us… ») ; français 258 → 155, espagnol 256 → 153 ;
+  japonais, coréen, chinois sous la borne, intacts. Le résumé affiché dans la
+  page reste entier.
+  **5. Guides `special-request`** : `prefixedDescription` pose « {boss} — »
+  sauf quand il fait déborder de 160, auquel cas la description du `meta.json`
+  sort seule. En anglais, les cinq qui ne débordaient que par le préfixe
+  rentrent : `amadeus` 162 → 152, `ars-nova` 167 → 156, `grand-calamari` 168 →
+  151, `meteos` 184 → 160, `sacreed` 178 → 159. Les quatre trop longues à la
+  source perdent le préfixe sans rentrer (`chimera` 184 → 161, `guardian`
+  183 → 161, `glicys` 171 → 162, `tyrant` 185 → 168) : c'est le lot B16.
+  **6. Catégorie répétée** : `scopedTitle(titre, catégorie, profondeur)`
+  remplace le « {titre} — {catégorie} » écrit dans `generateMetadata`
+  (`guides/[category]/[slug]/page.tsx`) ; quand le titre nomme déjà la
+  catégorie, à la casse près, elle ne se répète pas (la profondeur d'un Monad
+  Gate, elle, reste). `/guides/joint-challenge/koh-meteos` : « Knight of Hope
+  Meteos Joint Challenge Guide — Joint Challenge » (61, sans le nom du site) →
+  « Knight of Hope Meteos Joint Challenge Guide | Outerpedia » (56). La règle
+  étant générale, elle touche 11 guides en anglais, tous entre 32 et 59 après
+  : les cinq `guild-raid` (« Frost Legion Guild Raid Guide — Guild Raid »
+  55 → 42 ; les quatre autres gardent leur longueur, le nom du site reprend la
+  place de la catégorie), les quatre `joint-challenge` (50 à 61 → 45 à 56) et deux
+  `skyward-tower` (« Skyward Tower: Hard » 48 → 32, « Very Hard » 53 → 37).
+  Sur les six langues : 62 titres changent ; en français et en espagnol tous
+  sortent entre 33 et 60, et ceux qui dépassaient 60 nom du site retiré y
+  rentrent — sept en espagnol (64 à 79), deux en français (63 et 70).
+  **Ce que la règle ne fait pas, et pourquoi.** Un titre qui n'est QUE le nom
+  de sa catégorie la garde : `/guides/skyward-tower/normal-tower` reste
+  « Skyward Tower — Skyward Tower | Outerpedia » (42). Sans elle il tombait à
+  « Skyward Tower | Outerpedia », 26, un écart « titre sous 30 » tout neuf ;
+  le vrai remède est le titre du guide lui-même (« Skyward Tower: Normal »,
+  comme ses deux voisins), dans son `meta.json` — pas ce lot. À trancher par
+  Sevih. En japonais, coréen et chinois, 19 titres de guides sont sous 30
+  après la règle (20 à 29 ; 5 l'étaient déjà), la borne étant pensée pour
+  l'alphabet latin et ces hôtes n'étant pas mesurés.
+  **La vérification** : 24 tests dans `src/lib/seo.test.ts` (`mentionsName`,
+  `scopedTitle` dont le cas du titre égal à la catégorie et celui de la
+  profondeur, `guideCategoryTitle` dont les 12 catégories × 6 langues entre 30
+  et `TITLE_MAX_LENGTH`, `prefixedDescription` à la borne, pile dessus et
+  au-delà, `truncateDescription` : limite de mot, coupe pile entre deux mots,
+  ponctuation, texte sans espaces, points de code) ; `pnpm typecheck`
+  (les trois `tsc --noEmit` — racine, `datagen`, `scripts` — sans erreur),
+  `pnpm lint` (`$ eslint`, sans sortie),
+  `pnpm test` (`Test Files 181 passed (181)`, `Tests 2215 passed (2215)`).
+  Aucun changement visuel : seules des balises du `<head>` bougent, aucun
+  composant de page n'est touché. Relevés au `curl` : le `<title>` et la
+  description de 10 pages avant, de 20 après (quatre catégories, `/changelog`,
+  les huit pages du point 3, l'événement, deux `special-request`,
+  `koh-meteos`, `frost-legion`, deux tours), et leurs `<h1>`, qui portent
+  toujours le libellé ou le titre seul. Au TODO, quatre items sortent (titres
+  au-delà de 60 : les six fiches sont acceptées telles quelles, décision
+  Sevih ; catégories ; pages à un segment ; événements) et « descriptions
+  longues » passe de 29 à 24. Ce qui reste : la mesure sur le site servi après
+  déploiement. Repéré hors périmètre, non touché : les
+  `tools.<slug>.meta_description` de ces huit pages dépassent 160 en français
+  (162 à 177, sauf `tierlistpvp` à 158) et pour cinq d'entre elles en espagnol
+  (163 à 167), hôtes non mesurés ; et, préfixe retiré, les neuf descriptions
+  `special-request` citées restent au-delà de 160 à la source pour huit
+  d'entre elles en français et les neuf en espagnol — matière du lot B16.
+
 - **Ménage du TODO et du fichier des lots : ce qui est fait vient ici**
   (décision Sevih : le TODO ne porte que le « à faire », le fichier des lots
   que l'outil ; les notes et le suivi vivent dans ce journal). Trois blocs en

@@ -6,6 +6,7 @@
  * redupliquer la logique d'URL/langue. Porté puis adapté à la config actuelle.
  */
 import type { Metadata } from 'next';
+import type { TFunction } from '@/i18n';
 import { LANGUAGES, LANGS, DEFAULT_LANG, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { img } from '@/lib/images';
 import { getBaseUrl, buildUrl, CANONICAL_ORIGIN } from '@/lib/site';
@@ -37,6 +38,90 @@ export const TITLE_MAX_LENGTH = 60;
  */
 function siteSuffixOverflows(title: string): boolean {
   return [...`${title} | ${SITE_NAME}`].length > TITLE_MAX_LENGTH;
+}
+
+/**
+ * Longueur maximale d'une description, en caractères : même rôle que
+ * `TITLE_MAX_LENGTH`, même importateur (`scripts/seo-lengths.ts`).
+ */
+export const DESCRIPTION_MAX_LENGTH = 160;
+
+/** Vrai quand `text` porte déjà `name`, à la casse près. */
+export function mentionsName(text: string, name: string): boolean {
+  const needle = name.trim().toLowerCase();
+  return needle !== '' && text.toLowerCase().includes(needle);
+}
+
+/**
+ * « {titre} — {portée} » : la portée (le libellé de catégorie d'un guide) sépare
+ * deux pages de même titre. Quand le titre la nomme déjà (« Frost Legion Guild
+ * Raid Guide » dans Guild Raid), elle ne se répète pas : il ne reste que
+ * `detail` (la profondeur d'un Monad Gate), ou rien.
+ *
+ * Un titre qui n'est QUE la portée la garde : seul, il ne resterait qu'un
+ * libellé nu (« Skyward Tower », 26 caractères avec le nom du site, sous la
+ * borne basse de la mesure). C'est alors le titre du guide qu'il faut enrichir,
+ * pas le gabarit.
+ */
+export function scopedTitle(title: string, scope: string, detail?: string): string {
+  const same = title.trim().toLowerCase() === scope.trim().toLowerCase();
+  const parts = [!same && mentionsName(title, scope) ? '' : scope, detail ?? ''].filter(Boolean);
+  return parts.length > 0 ? `${title} — ${parts.join(' ')}` : title;
+}
+
+/**
+ * Titre d'une page de catégorie de guides. Le libellé seul (« Adventure ») est
+ * trop court pour un résultat de recherche : le gabarit lui ajoute « Guides »
+ * et le nom du jeu. Un libellé qui dit déjà « guides » (« Other Guides »,
+ * « Guides généraux ») prend le gabarit sans le mot — c'est la clé
+ * `meta_title_word` qui dit, par langue, quel mot chercher.
+ */
+export function guideCategoryTitle(label: string, t: TFunction): string {
+  const template = mentionsName(label, t('page.guides.category.meta_title_word'))
+    ? 'page.guides.category.meta_title_bare'
+    : 'page.guides.category.meta_title';
+  return t(template, { category: label });
+}
+
+/**
+ * « {préfixe} — {description} », sauf quand le préfixe fait déborder de
+ * `DESCRIPTION_MAX_LENGTH` : il saute alors, comme le nom du site dans un titre
+ * trop long. Compté en points de code, comme la mesure. Une description déjà
+ * trop longue seule sort telle quelle — la raccourcir est un travail
+ * d'écriture, pas de gabarit.
+ */
+export function prefixedDescription(prefix: string, description: string): string {
+  const full = `${prefix} — ${description}`;
+  return [...full].length > DESCRIPTION_MAX_LENGTH ? description : full;
+}
+
+/** Ponctuation qu'on ne laisse pas pendre devant les points de suspension. */
+const TRAILING_PUNCTUATION = /[\s,;:.!?—–\-、。，；：！？]+$/u;
+/**
+ * Recul maximal, en caractères, pour trouver une limite de mot. Au-delà, le
+ * texte n'en a pas à cet endroit (japonais, chinois : une espace toutes les
+ * quelques phrases) et y reculer jetterait la moitié de la description.
+ */
+const WORD_BOUNDARY_WINDOW = 30;
+
+/**
+ * Coupe une description trop longue à la dernière limite de mot qui tient dans
+ * `max`, points de suspension compris. Sous la borne, le texte sort intact.
+ * Sans limite de mot à portée (cf. `WORD_BOUNDARY_WINDOW`), la coupe tombe au
+ * caractère.
+ */
+export function truncateDescription(text: string, max = DESCRIPTION_MAX_LENGTH): string {
+  const chars = [...text.trim()];
+  if (chars.length <= max) return chars.join('');
+  // `max - 1` : la place de « … ».
+  const head = chars.slice(0, max - 1);
+  // Le caractère suivant est une espace : la coupe tombe déjà entre deux mots.
+  let end = head.length;
+  if (!/\s/u.test(chars[max - 1])) {
+    const lastSpace = head.findLastIndex((c) => /\s/u.test(c));
+    if (lastSpace !== -1 && head.length - lastSpace <= WORD_BOUNDARY_WINDOW) end = lastSpace;
+  }
+  return `${head.slice(0, end).join('').replace(TRAILING_PUNCTUATION, '')}…`;
 }
 
 /**

@@ -64,6 +64,7 @@ const en = {
 
   // Changelog
   'changelog.title': 'Changelog',
+  'changelog.meta_title': 'Changelog — Latest Site Updates',
   'changelog.description':
     'Track all updates made to Outerpedia: guides, characters, tools, and more.',
   'changelog.view_full': 'View full changelog',
@@ -787,6 +788,9 @@ const en = {
   'page.guides.title': 'Outerplane Guides',
   'page.guides.description':
     'Outerplane guides for adventure stages, boss fights, guild raids, world bosses, and beginner tips.',
+  'page.guides.category.meta_title': '{category} Guides — Outerplane',
+  'page.guides.category.meta_title_bare': '{category} — Outerplane',
+  'page.guides.category.meta_title_word': 'Guides',
   'page.guides.list': 'Guide List',
   'page.guide.by': 'By {author}',
   'page.guide.updated': 'Updated {date}',

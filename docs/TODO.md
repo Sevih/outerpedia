@@ -9,50 +9,22 @@
 
 > Mesure : `pnpm exec tsx scripts/seo-lengths.ts` (bornes : titre 30 à 60
 > caractères, description 70 à 160). Rapport dans `docs/seo&audit/`.
-> Deux lots écrits le 04/10 dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) :
-> A29 (code et locales) et B16 (`meta.json` des guides), lançables ensemble.
+> Le lot A29 (code et locales) est fait ; reste le lot B16 (`meta.json` des
+> guides), écrit dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
 > Les six titres de fiches de 61 à 64 caractères sont acceptés tels quels.
 
-- [ ] **Titres encore au-delà de 60 SANS le suffixe (7 pages, 61 à 64)** — À
-      TRANCHER. Le nom et le gabarit débordent à eux seuls, « | Outerpedia »
-      est déjà retiré (lot A28) : `/equipment/the-book-of-folk-and-tall-tales`
-      (64), `/equipment/secret-sword-teru-teru-bouzu` et
-      `/equipment/the-supreme-witchs-companion` (62),
-      `/equipment/knights-special-great-sword` (61),
-      `/characters/kitsune-of-eternity-tamamo-no-mae` (63),
-      `/characters/summer-knights-dream-ember` (61),
-      `/guides/joint-challenge/koh-meteos` (61 — « Joint Challenge » y est deux
-      fois, dans le titre du guide et dans le suffixe de catégorie). Ce qu'on
-      retire alors (« Outerplane », le type, « Guide ») est un autre choix que
-      celui du 04/10 ; ou on accepte, un moteur coupe la fin.
 - [ ] **Guides, descriptions courtes** — semi-mécanisable. 21 descriptions
       sous 70 (44 à 69), toutes dans `adventure-license` (21 guides sur 26) :
       une phrase type recopiée dans chaque `meta.json` (« Tips and advice to
       succeed against X »). Une phrase plus riche par famille (promotion,
       conquête hebdo), dans les six langues.
-- [ ] **Guides, descriptions longues** — VOLUME ÉDITORIAL. 29 descriptions
-      au-delà de 160 (jusqu'à 218). 24 sont longues dans le `meta.json`
-      lui-même : `dimensional-singularity` 15 sur 15, `special-request` 4,
-      `general-guides` 2, `other` 2, `adventure` 1. Les 5 autres sont des
-      `special-request` (151 à 160 à la source) qui ne débordent que par le
-      préfixe « {boss} — » de `generateMetadata`. À réécrire à la main, ou à
+- [ ] **Guides, descriptions longues** — VOLUME ÉDITORIAL. 24 descriptions
+      au-delà de 160 (jusqu'à 218), longues dans le `meta.json` lui-même :
+      `dimensional-singularity` 15 sur 15, `special-request` 4,
+      `general-guides` 2, `other` 2, `adventure` 1. À réécrire à la main, ou à
       accepter : un moteur coupe une description trop longue, la page n'y
-      perd que la fin de la phrase.
-- [ ] **Catégories de guides (`/guides/*`, 11 pages)** — MÉCANISABLE. 8 titres
-      sous 30 (22 à 28) : le titre est le seul libellé de la catégorie
-      (« Adventure | Outerpedia »). Un gabarit du genre « {catégorie} Guides —
-      Outerplane » les sort tous ; descriptions bonnes (96 à 150). Pas dans
-      le lot A28 : sa règle retire un suffixe, elle n'allonge rien.
-- [ ] **Pages à un segment (`/*`, 28 pages)** — petit volume éditorial. 8
-      descriptions sous 70 (40 à 68) : sept outils (`/ost`, `/team-planner`,
-      `/4-comics`, `/tierlistpvp`, `/wallpapers`, `/hero-tracker`,
-      `/patch-history`) et `/event`, une clé `tools.<slug>.meta_description`
-      chacun, six langues. 1 titre sous 30 : `/changelog` (« Changelog |
-      Outerpedia », 22), clé `changelog.title`, qui sert aussi de `<h1>`.
-- [ ] **Événements (`/event/*`, 1 page)** — éditorial, une ligne :
-      `/event/20260324-video` reprend le `summary` de l'événement (211
-      caractères) comme description. Soit un résumé plus court, soit une coupe
-      dans `generateMetadata` pour les suivants.
+      perd que la fin de la phrase. (Les 5 `special-request` qui ne
+      débordaient que par le préfixe « {boss} — » : FAIT, lot A29.)
 
 ## 🎴 Portraits animés
 

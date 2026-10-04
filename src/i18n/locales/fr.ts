@@ -56,6 +56,7 @@ const fr: Record<TranslationKey, string> = {
 
   // Changelog
   'changelog.title': 'Journal des modifications',
+  'changelog.meta_title': 'Journal des modifications du site',
   'changelog.description':
     'Suivez toutes les mises à jour apportées à Outerpedia : guides, personnages, outils, et plus encore.',
   'changelog.view_full': 'Voir le journal complet',
@@ -794,6 +795,9 @@ const fr: Record<TranslationKey, string> = {
   'page.guides.title': 'Guides Outerplane',
   'page.guides.description':
     "Guides Outerplane pour les étapes d'aventure, les combats de Boss, les Guild Raid, les World Boss et les conseils débutants.",
+  'page.guides.category.meta_title': 'Guides {category} — Outerplane',
+  'page.guides.category.meta_title_bare': '{category} — Outerplane',
+  'page.guides.category.meta_title_word': 'Guides',
   'page.guides.list': 'Liste des guides',
   'page.guide.by': 'Par {author}',
   'page.guide.updated': 'Mis à jour {date}',

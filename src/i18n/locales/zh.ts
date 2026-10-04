@@ -55,6 +55,7 @@ const zh: Record<TranslationKey, string> = {
 
   // Changelog
   'changelog.title': '更新日志',
+  'changelog.meta_title': '更新日志 — 攻略、角色与工具的最新更新',
   'changelog.description': '追踪Outerpedia全部更新改动——攻略、角色、工具等。',
   'changelog.view_full': '查看完整更新日志',
   'changelog.type.guide': '攻略',
@@ -746,6 +747,9 @@ const zh: Record<TranslationKey, string> = {
   'tools.damage-calculator.report.unsupported_hint': '尚未提取命中链，此行暂时无法计算',
   'page.guides.title': '异域战记攻略',
   'page.guides.description': '异域战记攻略：冒险关卡、Boss战、公会突袭、世界首领、新手攻略。',
+  'page.guides.category.meta_title': '{category}攻略指南 — 异域战记 Outerplane',
+  'page.guides.category.meta_title_bare': '{category} — 异域战记 Outerplane',
+  'page.guides.category.meta_title_word': '攻略',
   'page.guides.list': '攻略列表',
   'page.guide.by': '作者： {author}',
   'page.guide.updated': '{date} 更新',

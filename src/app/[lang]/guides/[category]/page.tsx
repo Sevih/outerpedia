@@ -9,6 +9,7 @@ import {
   buildUrl,
   buildBreadcrumbJsonLd,
   buildItemListJsonLd,
+  guideCategoryTitle,
 } from '@/lib/seo';
 import JsonLd from '@/components/seo/JsonLd';
 import { localePath } from '@/lib/navigation';
@@ -38,10 +39,12 @@ export async function generateMetadata({
   const lang = normalizeLang(raw);
   if (!isGuideCategory(category)) return {};
   const cat = GUIDE_CATEGORIES[category];
+  const t = await getT(lang);
   return createPageMetadata({
     lang,
     path: `/guides/${category}`,
-    title: lRec(cat.label, lang),
+    // Le `<h1>` garde le libellé seul ; le titre de la metadata passe par un gabarit.
+    title: guideCategoryTitle(lRec(cat.label, lang), t),
     description: lRec(cat.desc, lang),
   });
 }

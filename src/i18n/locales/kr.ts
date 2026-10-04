@@ -55,6 +55,7 @@ const kr: Record<TranslationKey, string> = {
 
   // Changelog
   'changelog.title': '변경 로그',
+  'changelog.meta_title': '변경 로그 — 사이트 최신 업데이트',
   'changelog.description': 'Outerpedia의 모든 업데이트(가이드, 캐릭터, 도구 등)를 확인하세요.',
   'changelog.view_full': '전체 변경 로그 보기',
   'changelog.type.guide': '가이드',
@@ -760,6 +761,9 @@ const kr: Record<TranslationKey, string> = {
   'page.guides.title': '아우터플레인 공략 가이드',
   'page.guides.description':
     '아우터플레인 공략 가이드. 모험 스테이지, 보스전, 길드 레이드, 월드 보스, 초보자 팁.',
+  'page.guides.category.meta_title': '{category} 공략 가이드 — 아우터플레인',
+  'page.guides.category.meta_title_bare': '{category} — 아우터플레인 공략',
+  'page.guides.category.meta_title_word': '가이드',
   'page.guides.list': '가이드 목록',
   'page.guide.by': '작성자: {author}',
   'page.guide.updated': '{date} 업데이트',

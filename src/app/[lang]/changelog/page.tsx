@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return createPageMetadata({
     lang,
     path: '/changelog',
-    title: t('changelog.title'),
+    // Clé dédiée : `changelog.title` est le `<h1>` (et le libellé de nav), trop
+    // court pour un titre de résultat de recherche.
+    title: t('changelog.meta_title'),
     description: t('changelog.description'),
   });
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
-import { createPageMetadata } from '@/lib/seo';
+import { createPageMetadata, prefixedDescription, scopedTitle } from '@/lib/seo';
 import { GUIDE_CATEGORIES, type GuideCategory } from '@/lib/data/guide-categories';
 import {
   getGuide,
@@ -55,7 +55,8 @@ export async function generateMetadata({
 
   // Catégorie `bossTitle` : le SEO titre sur le boss, comme la page —
   // « Nom du boss — Special Request » et la description préfixée de son nom
-  // (le reste de la phrase vient du meta, déjà localisé par mode).
+  // (le reste de la phrase vient du meta, déjà localisé par mode). Le préfixe
+  // saute quand il fait déborder la description (cf. `prefixedDescription`).
   const bossName =
     (GUIDE_CATEGORIES[guide.category] as GuideCategory).bossTitle && boss
       ? lRec(boss.name, lang) || boss.name.en
@@ -68,18 +69,17 @@ export async function generateMetadata({
   // plus les MÊMES zones à chaque profondeur — « Land of Snow and Steel » existe
   // en Depth 3 puis 6→10, 29 guides pour 5 titres : là, seule la profondeur
   // tranche. Effet de bord voulu : des titres plus longs (578 URLs étaient sous
-  // la longueur utile).
+  // la longueur utile). Un titre qui nomme déjà sa catégorie (« … Joint
+  // Challenge Guide ») ne la reçoit pas une seconde fois (cf. `scopedTitle`).
   const catLabel = lRec(GUIDE_CATEGORIES[guide.category].label, lang);
-  const scope = guide.depth
-    ? `${catLabel} ${t('guides.monad_gate.depth', { n: guide.depth })}`
-    : catLabel;
+  const depth = guide.depth ? t('guides.monad_gate.depth', { n: guide.depth }) : undefined;
 
   return createPageMetadata({
     lang,
     path: `/guides/${category}/${slug}`,
-    title: `${bossName ?? lRec(guide.title, lang)} — ${scope}`,
+    title: scopedTitle(bossName ?? lRec(guide.title, lang), catLabel, depth),
     description: bossName
-      ? `${bossName} — ${lRec(guide.description, lang)}`
+      ? prefixedDescription(bossName, lRec(guide.description, lang))
       : lRec(guide.description, lang),
     ...(guide.ogImage ? { ogImage: guideOgImage(guide) } : {}),
     ...portrait,

@@ -27,7 +27,7 @@ import { mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { format as prettierFormat, resolveConfig } from 'prettier';
 import { isMain } from '@datagen/lib/is-main';
-import { TITLE_MAX_LENGTH } from '@/lib/seo';
+import { DESCRIPTION_MAX_LENGTH, TITLE_MAX_LENGTH } from '@/lib/seo';
 import { writeTextAtomic } from '../datagen/lib/json';
 
 const DEFAULT_HOST = 'https://outerpedia.com';
@@ -48,11 +48,12 @@ const CELL_MAX = 200;
 
 /**
  * Bornes en caractères (entités décodées, espaces repliés). Le plafond du titre
- * est celui de `createPageMetadata`, qui retire « | Outerpedia » au-delà.
+ * est celui de `createPageMetadata`, qui retire « | Outerpedia » au-delà ; celui
+ * de la description, celui des coupes de `src/lib/seo.ts`.
  */
 export const LIMITS = {
   title: { min: 30, max: TITLE_MAX_LENGTH },
-  description: { min: 70, max: 160 },
+  description: { min: 70, max: DESCRIPTION_MAX_LENGTH },
 } as const;
 
 export type Issue =

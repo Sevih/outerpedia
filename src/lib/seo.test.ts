@@ -2,6 +2,12 @@ import { describe, expect, it } from 'vitest';
 import {
   createPageMetadata,
   TITLE_MAX_LENGTH,
+  DESCRIPTION_MAX_LENGTH,
+  mentionsName,
+  scopedTitle,
+  guideCategoryTitle,
+  prefixedDescription,
+  truncateDescription,
   getMonthYear,
   buildSiteJsonLd,
   buildBreadcrumbJsonLd,
@@ -12,7 +18,16 @@ import {
   buildFaqJsonLd,
 } from '@/lib/seo';
 import { buildUrl, CANONICAL_ORIGIN } from '@/lib/site';
-import { LANGS, LANGUAGES, DEFAULT_LANG } from '@/lib/i18n/config';
+import { LANGS, LANGUAGES, DEFAULT_LANG, type Lang } from '@/lib/i18n/config';
+import { lRec } from '@/lib/i18n/localize';
+import { makeT, type Messages } from '@/i18n';
+import en from '@/i18n/locales/en';
+import fr from '@/i18n/locales/fr';
+import es from '@/i18n/locales/es';
+import jp from '@/i18n/locales/jp';
+import kr from '@/i18n/locales/kr';
+import zh from '@/i18n/locales/zh';
+import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 
 /**
  * `seo.ts` — builders de métadonnées et de JSON-LD. On dérive les URLs attendues
@@ -223,6 +238,157 @@ describe('createPageMetadata — titre, OG, Twitter, robots', () => {
     expect(og.type).toBe('article');
     expect(og).not.toHaveProperty('publishedTime');
     expect(og).not.toHaveProperty('authors');
+  });
+});
+
+describe('mentionsName', () => {
+  it('à la casse près, où que le nom soit dans le texte', () => {
+    expect(mentionsName('Frost Legion Guild Raid Guide', 'Guild Raid')).toBe(true);
+    expect(mentionsName('Autres guides', 'Guides')).toBe(true);
+    expect(mentionsName('総合ガイド', 'ガイド')).toBe(true);
+    expect(mentionsName('Adventure', 'Guides')).toBe(false);
+  });
+
+  it('un nom vide ne se trouve nulle part', () => {
+    expect(mentionsName('Adventure', '')).toBe(false);
+    expect(mentionsName('Adventure', '  ')).toBe(false);
+  });
+});
+
+describe('scopedTitle — la portée ne se répète pas', () => {
+  it('titre qui ne nomme pas sa catégorie : « titre — portée »', () => {
+    expect(scopedTitle('Drakhan', 'World Boss')).toBe('Drakhan — World Boss');
+  });
+
+  it('titre qui la nomme déjà : la portée saute', () => {
+    expect(scopedTitle('Knight of Hope Meteos Joint Challenge Guide', 'Joint Challenge')).toBe(
+      'Knight of Hope Meteos Joint Challenge Guide',
+    );
+    // À la casse près.
+    expect(scopedTitle('Guide joint challenge Shichifuja', 'Joint Challenge')).toBe(
+      'Guide joint challenge Shichifuja',
+    );
+  });
+
+  it('le détail (profondeur) suit la portée, et reste seul quand elle saute', () => {
+    expect(scopedTitle('Land of Snow and Steel', 'Monad Gate', 'Depth 6')).toBe(
+      'Land of Snow and Steel — Monad Gate Depth 6',
+    );
+    expect(scopedTitle('Monad Gate: Land of Snow', 'Monad Gate', 'Depth 6')).toBe(
+      'Monad Gate: Land of Snow — Depth 6',
+    );
+  });
+
+  it('titre qui n’est QUE la portée : elle reste, sinon il ne dit plus quelle page', () => {
+    expect(scopedTitle('Skyward Tower', 'Skyward Tower')).toBe('Skyward Tower — Skyward Tower');
+    expect(scopedTitle('Skyward Tower: Hard', 'Skyward Tower')).toBe('Skyward Tower: Hard');
+  });
+});
+
+describe('guideCategoryTitle — gabarit des pages de catégorie', () => {
+  const LOCALES = { en, fr, es, jp, kr, zh } as unknown as Record<Lang, Messages>;
+
+  it('ajoute « Guides » et le nom du jeu au libellé', () => {
+    const t = makeT(LOCALES.en);
+    expect(guideCategoryTitle('Adventure', t)).toBe('Adventure Guides — Outerplane');
+    expect(guideCategoryTitle('Adventure', makeT(LOCALES.fr))).toBe(
+      'Guides Adventure — Outerplane',
+    );
+  });
+
+  it('un libellé qui dit déjà « guides » ne le reçoit pas une seconde fois', () => {
+    expect(guideCategoryTitle('Other Guides', makeT(LOCALES.en))).toBe('Other Guides — Outerplane');
+    expect(guideCategoryTitle('Autres guides', makeT(LOCALES.fr))).toBe(
+      'Autres guides — Outerplane',
+    );
+    expect(guideCategoryTitle('Otras Guías', makeT(LOCALES.es))).toBe('Otras Guías — Outerplane');
+  });
+
+  it.each(LANGS)(
+    '%s : chaque catégorie tient entre 30 et TITLE_MAX_LENGTH, nom du site compris',
+    (lang) => {
+      const t = makeT(LOCALES[lang]);
+      for (const slug of GUIDE_CATEGORY_SLUGS) {
+        const title = guideCategoryTitle(lRec(GUIDE_CATEGORIES[slug].label, lang), t);
+        // `og:title` porte le titre tel qu'il est servi, suffixe compris.
+        const served = createPageMetadata({
+          lang,
+          path: `/guides/${slug}`,
+          title,
+          description: 'D',
+        }).openGraph?.title as string;
+        expect(served, `${lang} ${slug}`).toBe(`${title} | Outerpedia`);
+        expect([...served].length, `${lang} ${slug} : ${served}`).toBeGreaterThanOrEqual(30);
+        expect([...served].length, `${lang} ${slug} : ${served}`).toBeLessThanOrEqual(
+          TITLE_MAX_LENGTH,
+        );
+      }
+    },
+  );
+});
+
+describe('prefixedDescription — le préfixe saute quand il fait déborder', () => {
+  const fill = (length: number) => 'd'.repeat(length);
+
+  it('sous la borne et pile dessus : « préfixe — description »', () => {
+    expect(prefixedDescription('Amadeus', 'Teams & tips.')).toBe('Amadeus — Teams & tips.');
+    // « Boss — » pèse 7 caractères.
+    const exact = prefixedDescription('Boss', fill(DESCRIPTION_MAX_LENGTH - 7));
+    expect(exact.startsWith('Boss — ')).toBe(true);
+    expect(exact).toHaveLength(DESCRIPTION_MAX_LENGTH);
+  });
+
+  it('un caractère de trop : la description sort seule', () => {
+    const description = fill(DESCRIPTION_MAX_LENGTH - 6);
+    expect(prefixedDescription('Boss', description)).toBe(description);
+  });
+
+  it('description déjà trop longue : rendue telle quelle, sans préfixe ni coupe', () => {
+    const description = fill(DESCRIPTION_MAX_LENGTH + 20);
+    expect(prefixedDescription('Boss', description)).toBe(description);
+  });
+});
+
+describe('truncateDescription — coupe à la limite de mot', () => {
+  it('sous la borne et pile dessus : intact', () => {
+    expect(truncateDescription('Short summary.')).toBe('Short summary.');
+    const exact = 'a'.repeat(DESCRIPTION_MAX_LENGTH);
+    expect(truncateDescription(exact)).toBe(exact);
+  });
+
+  it('au-delà : dernier mot entier qui tient, puis « … », jamais plus que la borne', () => {
+    expect(truncateDescription('alpha beta gamma delta', 12)).toBe('alpha beta…');
+    const long = 'word '.repeat(60).trim();
+    const cut = truncateDescription(long);
+    expect([...cut].length).toBeLessThanOrEqual(DESCRIPTION_MAX_LENGTH);
+    expect(cut.endsWith('word…')).toBe(true);
+  });
+
+  it('coupe qui tombe pile entre deux mots : le mot entier est gardé', () => {
+    // « alpha beta » = 10 caractères, l'espace suit : il reste la place de « … ».
+    expect(truncateDescription('alpha beta gamma', 11)).toBe('alpha beta…');
+  });
+
+  it('la ponctuation ne pend pas devant les points de suspension', () => {
+    expect(truncateDescription('guides, and more! Send us your videos', 20)).toBe(
+      'guides, and more…',
+    );
+    expect(truncateDescription('heroes — showcases and guides', 12)).toBe('heroes…');
+  });
+
+  it('texte sans espaces (japonais, chinois) : coupe au caractère', () => {
+    const cut = truncateDescription('あ'.repeat(200));
+    expect(cut).toBe(`${'あ'.repeat(DESCRIPTION_MAX_LENGTH - 1)}…`);
+  });
+
+  it('une espace lointaine n’est pas une limite de mot : pas de recul au-delà de la fenêtre', () => {
+    const cut = truncateDescription(`序文 ${'あ'.repeat(200)}`);
+    expect([...cut].length).toBe(DESCRIPTION_MAX_LENGTH);
+  });
+
+  it('compte en points de code : un caractère hors BMP vaut un', () => {
+    const cut = truncateDescription('𠮷'.repeat(DESCRIPTION_MAX_LENGTH + 5));
+    expect([...cut].length).toBe(DESCRIPTION_MAX_LENGTH);
   });
 });
 

@@ -18,7 +18,7 @@ import { LANGS, normalizeLang } from '@/lib/i18n/config';
 import { getT } from '@/i18n';
 import { lRec } from '@/lib/i18n/localize';
 import { img } from '@/lib/images';
-import { buildBreadcrumbJsonLd, createPageMetadata } from '@/lib/seo';
+import { buildBreadcrumbJsonLd, createPageMetadata, truncateDescription } from '@/lib/seo';
 import { buildUrl } from '@/lib/site';
 import { IS_DEV } from '@/lib/admin/guard';
 import {
@@ -61,7 +61,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     lang,
     path: `/event/${slug}`,
     title: lRec(event.title, lang),
-    description: lRec(event.summary, lang),
+    // Le résumé est écrit pour la page, sans borne : la metadata le coupe, la
+    // page l'affiche en entier.
+    description: truncateDescription(lRec(event.summary, lang)),
     ...(event.cover && { ogImage: img.asset(event.cover) }),
   });
 }
