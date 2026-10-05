@@ -13,7 +13,9 @@
       fond que l'audit désigne : chaque carte monte aujourd'hui son contexte
       et sa copie des textures (3 Mo par carte `_Demi` depuis le plafond à
       512, 18 avant). Il emporterait P6. Les constats Basse (P6–P10) se
-      traitent en passant sur les fichiers.
+      traitent en passant sur les fichiers. Lot F11 (agent Fable, seul,
+      serveur de dev ouvert sur :3000 pour ses mesures), écrit dans
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
 
 ## 🧪 À jouer au prochain patch
 
