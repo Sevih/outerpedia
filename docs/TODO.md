@@ -23,6 +23,17 @@
       (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
       `ui/shop/al` du manifeste d'assets.
 
+## 🧰 Outil quick
+
+- [ ] **Onglet « Discord » : dates Discord, anciens résumés, « copier la
+      demande »** (demandes de Sevih du 05/10 au soir) : un bouton « date »
+      qui pose un `<t:…>` depuis une date UTC, l'import de ses anciens TL;DR
+      appariés à leur note, et un bouton qui prépare la demande à coller dans
+      claude.ai pour un premier jet (pas d'API). Lot B24 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus). Après le
+      premier import : Fable lit `.quick/discord-history.json` et affine
+      `scripts/quick/discord-prompt.md` avec ce que Sevih garde et écarte.
+
 ## 🖥️ Deux PC, un serveur de dev
 
 - [ ] **Fixe (Windows)** — le code y est depuis le push du 05/10 (`c9f3ccfb`,
