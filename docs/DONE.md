@@ -7,6 +7,21 @@
 
 ## 2026-10-05
 
+- **Relecture de B24 : dates Discord, anciens résumés et « copier la
+  demande »** (Fable). Lot 71, `a63ee74b`. Périmètre tenu (`scripts/quick/`,
+  `.gitignore` pour `/.quick/`, les docs ; `package.json` et les gardes de
+  `server.ts` intacts), TODO relu (son item passe à « reste »), aucun appel
+  réseau ajouté hors Discord, `pnpm typecheck`, `pnpm lint`, `pnpm test`
+  verts sur HEAD (187 fichiers, 2 585 tests). Essai indépendant, outil lancé
+  sans fenêtre, jeton vide, boucle locale, autre port : `<t:1791590400:F>` et
+  `:R` rendus en pastille (fuseau du poste, instant UTC en `title`), laissés
+  en texte dans du code ou avec un style inconnu ; la demande pour la note
+  11653 se construit (52 599 caractères, consignes, texte de la note sans
+  balise ni entité, gabarit, « 0 exemple » sans historique) ; l'import
+  répond « jeton absent » et n'écrit rien. Vu sans gravité : un horodatage
+  au contenu non numérique dont le milieu est un code d'emoji (`<t:abc:F>`)
+  voit ce code converti — personne n'écrit ça. Non vérifié par personne :
+  l'import réel, le presse-papiers, le formulaire « date » — essai de Sevih.
 - **`pnpm quick`, onglet « Discord » : dates au format Discord, import des
   anciens résumés appariés à leur note, et « copier la demande »** (Opus, lot
   B24, demandes de Sevih du 05/10 au soir après ses premiers envois réels ;
