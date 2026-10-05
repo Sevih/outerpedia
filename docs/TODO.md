@@ -8,10 +8,15 @@
 ## 🩹 Patch du 06/10
 
 - [ ] **Feuille de route** : [patch-2026-10-06.md](./patch-2026-10-06.md) —
-      Demiurge Lambda, équilibrage de Sigma, tours à 150 étages et Universal
-      Tower, restrictions de la tour Hard, fin de l'Adventure License
-      (décision à prendre), planning Dimensional Singularity, Joint Challenge
-      Annihilator.
+      Demiurge Lambda, équilibrage de Sigma, contrôle des tours à 150 étages,
+      guide de la Universal Tower, révision du Joint Challenge Annihilator,
+      quantités hebdomadaires de Dimensional Singularity. La préparation du
+      05/10 est commitée en local : ne pas pousser (ni `pnpm quick`) avant
+      le patch.
+- [ ] **Fin de l'Adventure License** : les guides sont masqués ; ce qui cite
+      encore le mode (tracker, guides généraux, quirks, calculateur) est le
+      lot B20 de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), à
+      lancer après le `pnpm dev` du patch (Opus, seul).
 
 ## 🎴 Portraits animés
 

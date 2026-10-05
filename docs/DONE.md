@@ -7,6 +7,46 @@
 
 ## 2026-10-05
 
+- **Préparation du patch du 06/10 : feuille de route, et tout ce qui pouvait
+  se faire sans les données** (Fable, à la demande de Sevih ; cinq commits
+  locaux, À NE PAS POUSSER avant le patch — un enregistrement `pnpm quick`
+  pousse tout `main`). La note de patch (post 11653) croisée avec le site
+  donne `docs/patch-2026-10-06.md`. Ce que la lecture du code a établi : les
+  tours (étages, compositions, restrictions) et le planning de Dimensional
+  Singularity sont générés depuis les tables — rien à écrire à la main pour
+  les 150 étages, les restrictions assouplies de la tour Hard ou le
+  cinquième jour. Mais le site supposait les valeurs d'aujourd'hui à
+  plusieurs endroits qui auraient cassé ou menti demain, tous corrigés :
+  (1) Dimensional Singularity, `ea51254f` — `buildWeek` coupait à
+  `slice(0, battleDays)` : à 5 jours pour 4 boss, le dimanche n'avait pas de
+  boss et la page aurait mis en avant celui du mercredi ; `bossesByDay` rend
+  toujours autant de boss que de jours, le dernier tenant les jours restants
+  (la note : « Light or Dark on Saturday and Sunday ») ; le suivi de
+  progression lisait « mercredi à samedi » en dur, il suit
+  `isSingularityBattleDay` ; textes en six langues ; les tests ne citent
+  plus 4, et passent rejoués avec un planning simulé à 5 jours (`vi.mock`
+  du JSON, sonde non commitée). (2) Tours, `d5625730` — le générateur
+  IGNORAIT une tour du mode élémentaire sans élément déclaré (cent
+  avertissements, pas de tour) : la Universal Tower y serait passée ; elle
+  est gardée sous le jeton de son `NameID` (`towerNameToken`), la vue de
+  catégorie l'affiche après les cinq éléments, et `towers.test.ts` ne fige
+  plus « 8 tours » ni « 100 étages ». Hypothèse non vérifiable avant les
+  données : qu'elle arrive sous `DM_TOWER_ELEMENT` ; sous un mode à elle,
+  le générateur la sort déjà mais la vue ne la range nulle part. (3)
+  Joint Challenge, `35878f38` — `versions/2026-10` d'Annihilator créée par
+  `addGuideVersion`, la fonction de l'op `add-version` de l'admin, appelée
+  hors serveur de dev ; contenu identique à `2026-05`, à réviser. (4)
+  Adventure License, `a967c11d` — les 26 guides masqués (`hidden`), comme
+  Monad Gate le 22/09 ; `guides.test.ts` contrôle la liste complète,
+  `encounters.test.ts` saute ses invariants si le jeu retire les donjons.
+  Le reste (tracker, guides généraux, quirks, calculateur, sources
+  d'équipement) dépend de ce que les données retirent : lot B20, écrit,
+  gardé par `battleDays: 5`. `pnpm typecheck`, `pnpm lint`, `pnpm test`
+  verts à chaque commit (184 fichiers, 2 309 tests au dernier). Laissé à
+  demain, dans la feuille : les quantités hebdomadaires qui supposaient 4
+  jours de Singularity (`timegate-resources.json`, `core-fusion`,
+  `ether-income`), le guide de la Universal Tower, et ce que deviennent les
+  guides masqués si les donjons sortent des tables.
 - **Relecture de F12 : un nouvel effet de portrait arrive sans geste
   manuel** (Fable). Lot 66, `1ed83bc1`. `pnpm typecheck`, `pnpm lint`,
   `pnpm test` verts sur HEAD (184 fichiers, 2 300 tests), `package.json`
