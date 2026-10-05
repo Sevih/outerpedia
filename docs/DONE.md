@@ -7,6 +7,25 @@
 
 ## 2026-10-05
 
+- **Relecture de F11 : le contexte WebGL partagé** (Fable). Lot 65,
+  `6b64c526`. Rendu `bloque` d'abord, sur le garde-fou de cadence que le
+  prompt posait ; levé par Sevih après son contrôle à l'écran sur Chrome ET
+  Firefox (le trou que l'agent ne pouvait pas fermer : pas de Chrome sur le
+  poste). Pourquoi la levée tient : les deux cas touchés sont le navigateur
+  de mesure lui-même (Firefox sans tête compose en logiciel — et
+  `/characters` n'y bouge pas, 13,5 → 13,8 images/s) et NVIDIA sous Linux à
+  dpr 2 au-delà d'une quinzaine de cartes (fenêtre de 3 000 px de haut) ; à
+  12 cartes du site tout tient à 60, le réglage est éteint par défaut, et
+  l'ancien moteur dépassait à 17 cartes ce que Chrome accorde de contextes.
+  Contrôles relancés sur HEAD : `pnpm typecheck`, `pnpm lint`, `pnpm test`
+  verts (183 fichiers, 2 277 tests), `package.json` intact, plus aucune
+  trace de `LIVE_CAP`, `RESTORABLE`, `LOSE_EXT` ni `restoreContext` dans
+  `src/`. Rattrapé : le commit avait emporté du TODO l'item du lot F12
+  (écrit pendant que F11 tournait, son édition du fichier datait d'avant) —
+  remis. Rapport d'audit annoté (ce qui est traité, par quel lot, ce qui
+  reste). Leçon pour les prompts : un garde-fou chiffré doit nommer la
+  configuration qui compte (un vrai compositeur GPU, les cartes du site),
+  sinon c'est le banc de mesure qui le déclenche.
 - **Lot F11 : portraits animés — un seul contexte WebGL pour toutes les
   cartes. Image identique au pixel, 27 contextes → 1, chaque texture montée
   une fois ; le garde-fou de cadence du lot est touché dans deux

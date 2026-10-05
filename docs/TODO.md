@@ -9,6 +9,13 @@
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
 
+- [ ] **Un nouvel effet arrive sans geste manuel** (demande Sevih 05/10) :
+      aujourd'hui il faut l'inscrire dans `DEFAULT_EFFECTS`, sinon il n'est
+      pas extrait et `pnpm test` bloque le patch. Cible : extrait d'office,
+      servi s'il est entièrement rendable, sinon portrait statique et signalé
+      par le refresh, sans rien bloquer. Solde P8 au passage. Lot F12 (agent
+      Fable, seul), écrit dans
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
 - [ ] **Constats Basse restants de l'audit** : P7 (trous dans « refuser
       plutôt que rendre de travers »), P8 (`by_character()` rend `{}` sans
       la table parsée), P10 (coût par image : `SUPERSAMPLE` à dpr 2,

@@ -22,6 +22,15 @@
 > faits « mesurés » de l'en-tête de `portrait-fx-gl` le sont sur Chrome/ANGLE),
 > un vrai téléphone, une comparaison image contre le jeu. Ce qui en dépend est
 > marqué « à confirmer ».
+>
+> **Suites** (détail dans [DONE.md](../DONE.md)) : P1 et P5 traités par
+> l'observateur partagé (lot F8, 03/10), P4 par les tests et le contrat de
+> la table (lot B15), P2 par le plafond des textures à 512 (lot F9) puis par
+> le contexte WebGL partagé, qui emporte aussi P6 (lot F11, 05/10 — plus de
+> plafond de contextes, plus d'éviction ; les passages du rapport qui les
+> décrivent valent pour l'état du 03/10), P3 par les graines partagées (lot
+> F10). Restent ouverts : P7, P8, P10, et de P9 les compteurs hors des
+> fichiers réécrits.
 
 ## État de référence
 
