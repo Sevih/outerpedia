@@ -23,6 +23,15 @@
       (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
       `ui/shop/al` du manifeste d'assets.
 
+## 🧰 Outil quick
+
+- [ ] **Onglet « Discord » dans `pnpm quick`** (demande Sevih 05/10) : écrire
+      un message (résumé de note de patch), le voir comme Discord le rendra à
+      côté de la note officielle, et le faire poster par le bot — appel direct
+      à l'API Discord avec le jeton du bot dans `.env.local` (décision du
+      05/10). Lot B21 de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md)
+      (Opus). Le jeton ne s'ajoute au poste qu'après relecture du lot.
+
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
