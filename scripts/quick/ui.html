@@ -97,6 +97,7 @@
       }
       input,
       select,
+      textarea,
       button.action {
         background: #11131a;
         border: 1px solid var(--line);
@@ -106,7 +107,8 @@
         font: inherit;
       }
       input:focus,
-      select:focus {
+      select:focus,
+      textarea:focus {
         outline: 1px solid var(--accent);
       }
       .row {
@@ -131,7 +133,8 @@
         opacity: 0.5;
         cursor: progress;
       }
-      button.ghost {
+      button.ghost,
+      a.ghost {
         background: none;
         border: 1px solid var(--line);
         color: var(--muted);
@@ -368,6 +371,516 @@
         color: var(--muted);
         font-size: 11px;
       }
+      /* Onglet « Discord » : la note officielle à gauche, l'éditeur et son aperçu
+         à droite ; l'une sous l'autre quand la fenêtre est étroite. */
+      .cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      a.ghost {
+        display: inline-block;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      #d-frame {
+        width: 100%;
+        height: 72vh;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+      }
+      #d-text {
+        display: block;
+        width: 100%;
+        min-height: 300px;
+        resize: vertical;
+        font:
+          13px/1.5 ui-monospace,
+          monospace;
+      }
+      /* Outils d'édition : la barre au-dessus de la zone de texte, le sélecteur
+         d'emojis qui s'ouvre sous elle, et la liste d'autocomplétion posée au
+         curseur — tous placés par rapport à `.edit`. */
+      .edit {
+        position: relative;
+      }
+      .tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 6px;
+      }
+      .tools button {
+        min-width: 30px;
+        padding: 3px 7px;
+        color: var(--text);
+        white-space: nowrap;
+      }
+      .tools button:hover,
+      .tools button[aria-expanded='true'] {
+        border-color: var(--accent);
+      }
+      .tools .sep {
+        width: 1px;
+        margin: 2px 4px;
+        background: var(--line);
+      }
+      /* Ancre sans hauteur : le sélecteur recouvre la zone de texte, il ne la
+         pousse pas. */
+      .pop {
+        position: relative;
+      }
+      #d-picker {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        right: 0;
+        width: min(430px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+      }
+      #d-picker[hidden],
+      #d-complete[hidden] {
+        display: none;
+      }
+      #d-picker-q {
+        width: 100%;
+      }
+      #d-picker-list {
+        max-height: 320px;
+        margin-top: 8px;
+        overflow-y: auto;
+        scrollbar-color: var(--line) transparent;
+        scrollbar-width: thin;
+      }
+      #d-picker-list h3 {
+        margin: 8px 0 4px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      #d-picker-list p.hint {
+        margin: 0;
+      }
+      /* Titre d'une section repliable (les standards) : un bouton sans habillage. */
+      #d-picker-list h3 button {
+        padding: 0;
+        background: none;
+        border: none;
+        color: inherit;
+        font: inherit;
+        text-transform: inherit;
+        cursor: pointer;
+      }
+      #d-picker-list h3 button:hover {
+        color: var(--text);
+      }
+      /* Serveurs dont on prend les emojis : une case chacun, sur une ligne qui
+         se replie. */
+      .d-servers {
+        margin-bottom: 12px;
+      }
+      .d-servers p.hint {
+        margin: 4px 0 0;
+      }
+      .d-servers a {
+        color: var(--accent);
+      }
+      #d-emoji-guilds,
+      .d-mode {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px 16px;
+      }
+      .d-mode {
+        margin-bottom: 8px;
+      }
+      #d-emoji-guilds label.check,
+      .d-mode label.check {
+        padding: 2px 0;
+        color: var(--text);
+      }
+      #d-emoji-guilds label.check {
+        white-space: normal;
+      }
+      #d-emoji-guilds small {
+        color: var(--muted);
+      }
+      #d-emoji-guilds small.ko {
+        color: var(--danger);
+      }
+      /* Formulaire du mode embed : tout y est facultatif. */
+      #d-embed {
+        margin-bottom: 10px;
+        padding: 10px 10px 4px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      #d-embed[hidden] {
+        display: none;
+      }
+      #d-embed .row {
+        margin-bottom: 8px;
+      }
+      #d-embed input:not([type='color']),
+      #d-embed textarea {
+        display: block;
+        width: 100%;
+      }
+      #d-embed textarea {
+        min-height: 54px;
+        resize: vertical;
+      }
+      #d-embed input[type='color'] {
+        display: block;
+        width: 46px;
+        height: 34px;
+        padding: 2px;
+      }
+      .d-btn-row {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 4px;
+      }
+      .d-btn-row[hidden] {
+        display: none;
+      }
+      .d-btn-row input:first-child {
+        flex: 1 1 34%;
+      }
+      .d-btn-row input:last-child {
+        flex: 2 1 66%;
+      }
+      /* Palette : toujours visible, sans défilement — elle se replie sur
+         plusieurs lignes quand la colonne est étroite. */
+      #d-palette {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px 14px;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      #d-palette .grp {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1px;
+      }
+      #d-palette .grp > span {
+        margin-right: 4px;
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      #d-palette .em {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
+      #d-palette .em img {
+        width: 22px;
+        height: 22px;
+      }
+      #d-palette-missing {
+        margin: 0 0 6px;
+      }
+      #d-palette-missing:empty {
+        display: none;
+      }
+      .em-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+      }
+      .em {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .em:hover,
+      .em.first {
+        background: #2b3040;
+        border-color: var(--line);
+      }
+      .em img,
+      #d-complete img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        vertical-align: middle;
+      }
+      #d-complete {
+        position: absolute;
+        z-index: 6;
+        min-width: 210px;
+        margin: 0;
+        padding: 4px;
+        list-style: none;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+        font-size: 13px;
+      }
+      #d-complete li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #d-complete li[aria-selected='true'] {
+        background: #2b3550;
+      }
+      #d-complete .face {
+        width: 24px;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+      }
+      #tab-discord .bar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 8px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      #tab-discord .bar span {
+        margin-right: auto;
+      }
+      #tab-discord button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      #tab-discord .warn {
+        color: var(--warn);
+      }
+      #tab-discord .ko {
+        color: var(--danger);
+      }
+      #d-status a {
+        color: var(--accent);
+      }
+      /* Aperçu : couleurs, tailles et marges du thème sombre de Discord. Le HTML
+         vient de `renderDiscord` (scripts/quick/discord.ts). */
+      .dc-cut {
+        margin: 10px 0 4px;
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .dc {
+        background: #313338;
+        color: #dbdee1;
+        border-radius: 6px;
+        padding: 12px 16px;
+        font:
+          16px/1.375 'gg sans',
+          'Noto Sans',
+          'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .dc h1,
+      .dc h2,
+      .dc h3 {
+        margin: 16px 0 8px;
+        color: #f2f3f5;
+        font-weight: 700;
+        line-height: 1.375;
+      }
+      .dc h1 {
+        font-size: 24px;
+      }
+      .dc h2 {
+        font-size: 20px;
+      }
+      .dc h3 {
+        font-size: 16px;
+      }
+      .dc > :first-child {
+        margin-top: 0;
+      }
+      .dc .sub {
+        color: #949ba4;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .dc blockquote {
+        margin: 0;
+        padding: 0 8px 0 12px;
+        border-left: 4px solid #4e5058;
+        border-radius: 2px;
+      }
+      .dc ul {
+        margin: 4px 0 0 16px;
+        padding: 0;
+        list-style: disc outside;
+      }
+      .dc ul ul {
+        list-style-type: circle;
+      }
+      .dc li {
+        margin-bottom: 4px;
+      }
+      .dc a {
+        color: #00a8fc;
+        text-decoration: none;
+      }
+      .dc a:hover {
+        text-decoration: underline;
+      }
+      .dc code {
+        background: #2b2d31;
+        border-radius: 3px;
+        padding: 0 0.2em;
+        font:
+          85%/1.3 ui-monospace,
+          Consolas,
+          monospace;
+      }
+      .dc pre {
+        margin: 6px 0 0;
+        background: #2b2d31;
+        border: 1px solid #1e1f22;
+        border-radius: 4px;
+        padding: 0.5em;
+        white-space: pre-wrap;
+      }
+      .dc pre code {
+        background: none;
+        padding: 0;
+      }
+      .dc img.emoji {
+        width: 1.375em;
+        height: 1.375em;
+        vertical-align: bottom;
+        object-fit: contain;
+      }
+      .dc .spoiler {
+        background: #1e1f22;
+        border-radius: 3px;
+      }
+      .dc .mention {
+        background: #3c4270;
+        color: #c9cdfb;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      /* `:nom:` resté en toutes lettres : rouge = faute de frappe (bloque
+         l'envoi), ambre = emoji du serveur qu'on ne peut pas vérifier sans jeton. */
+      .dc .bad {
+        background: #da373c;
+        color: #fff;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      .dc .wait {
+        color: #f0b232;
+        border-bottom: 1px dashed #f0b232;
+      }
+      /* Mode embed : la carte de `renderEmbed` — barre de couleur à gauche (sa
+         couleur est posée en ligne), vignette à droite, image dessous, pied,
+         boutons de lien sous la carte, texte du message au-dessus. */
+      .dc-above {
+        margin-bottom: 4px;
+      }
+      .dc-above > :first-child,
+      .dc-embed-desc > :first-child {
+        margin-top: 0;
+      }
+      .dc-embed {
+        max-width: 520px;
+        padding: 8px 16px 16px 12px;
+        background: #2b2d31;
+        border-left: 4px solid #1e1f22;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .dc-embed-head {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .dc-embed-text {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .dc-embed-title {
+        margin-top: 8px;
+        color: #f2f3f5;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .dc-embed-desc {
+        margin-top: 8px;
+      }
+      .dc-embed code,
+      .dc-embed pre {
+        background: #1e1f22;
+      }
+      .dc-embed-thumb {
+        flex: 0 0 auto;
+        width: 80px;
+        height: 80px;
+        margin-top: 8px;
+        border-radius: 4px;
+        object-fit: contain;
+      }
+      .dc-embed-image {
+        display: block;
+        max-width: 100%;
+        max-height: 300px;
+        margin-top: 16px;
+        border-radius: 4px;
+      }
+      .dc-embed-footer {
+        margin-top: 8px;
+        color: #b5bac1;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .dc-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .dc a.dc-button {
+        padding: 6px 14px;
+        background: #4e5058;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .dc a.dc-button::after {
+        content: ' ↗';
+      }
     </style>
   </head>
   <body>
@@ -382,6 +895,7 @@
       <button data-tab="comics" aria-selected="false">4-comics</button>
       <button data-tab="videos" aria-selected="false">Vidéos</button>
       <button data-tab="ranks" aria-selected="false">Rangs</button>
+      <button data-tab="discord" aria-selected="false">Discord</button>
     </nav>
 
     <main>
@@ -538,6 +1052,172 @@
             </thead>
             <tbody id="r-list"></tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- discord -->
+      <section id="tab-discord" hidden>
+        <h2>Message Discord</h2>
+        <p class="hint">
+          Posté par le bot Outerpedia dans le salon choisi, sans qu'aucune mention ne notifie. Ce
+          geste ne committe et ne pousse rien. <span class="warn" id="d-hint"></span>
+        </p>
+        <div class="cols">
+          <div>
+            <div class="row">
+              <div>
+                <label>Note officielle</label
+                ><select id="d-note"></select>
+              </div>
+              <div style="flex: 0 0 auto">
+                <a class="ghost" id="d-open" target="_blank" rel="noopener noreferrer"
+                  >ouvrir l'original</a
+                >
+              </div>
+            </div>
+            <!-- HTML scrapé, pas le nôtre : bac à sable sans `allow-scripts`, doublé
+                 d'une CSP dans le document (cf. `noteSrcdoc`). -->
+            <iframe
+              id="d-frame"
+              title="Note officielle"
+              sandbox="allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
+          </div>
+          <div>
+            <div class="row">
+              <div>
+                <label>Serveur</label
+                ><select id="d-guild"></select>
+              </div>
+              <div>
+                <label>Salon</label
+                ><select id="d-channel"></select>
+              </div>
+              <div style="flex: 0 0 auto">
+                <label class="check"
+                  ><input type="checkbox" id="d-noembed" checked /> sans aperçu des liens<span
+                    id="d-noembed-why"
+                  ></span
+                ></label>
+              </div>
+            </div>
+            <!-- Les serveurs dont on prend les emojis : ceux dont le bot est
+                 membre, une case chacun. Les salons, eux, viennent du seul
+                 serveur où l'on poste. -->
+            <div class="d-servers">
+              <label>Prendre les emojis de</label>
+              <div id="d-emoji-guilds"></div>
+              <p class="hint" id="d-external"></p>
+              <p class="hint">
+                <a id="d-invite" target="_blank" rel="noopener noreferrer" hidden
+                  >inviter le bot sur un autre serveur</a
+                >
+                <button class="ghost" id="d-reload">recharger la liste</button>
+              </p>
+            </div>
+            <div class="d-mode" role="radiogroup" aria-label="Forme du message">
+              <label class="check"
+                ><input type="radio" name="d-mode" value="simple" checked /> Message simple</label
+              >
+              <label class="check"><input type="radio" name="d-mode" value="embed" /> Embed</label>
+            </div>
+            <!-- Mode embed : le texte de l'éditeur est la DESCRIPTION ; ce
+                 formulaire porte le reste. Les plafonds sont ceux de Discord,
+                 vérifiés côté serveur après conversion des emojis. -->
+            <div id="d-embed" hidden>
+              <div class="row">
+                <div style="flex: 3 1 200px">
+                  <label>Titre (256 caractères au plus)</label
+                  ><input id="e-title" type="text" autocomplete="off" />
+                </div>
+                <div style="flex: 3 1 200px">
+                  <label>Lien du titre</label
+                  ><input id="e-url" type="url" autocomplete="off" placeholder="https://" />
+                </div>
+                <div style="flex: 0 0 auto">
+                  <label>Barre</label><input id="e-color" type="color" />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label>Vignette, en haut à droite (adresse d'image)</label
+                  ><input id="e-thumb" type="url" autocomplete="off" placeholder="https://" />
+                </div>
+                <div>
+                  <label>Image, en bas (adresse d'image)</label
+                  ><input id="e-image" type="url" autocomplete="off" placeholder="https://" />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label>Texte au-dessus de l'embed (2 000 au plus)</label
+                  ><textarea id="e-content" spellcheck="false"></textarea>
+                </div>
+                <div>
+                  <label>Pied (2 048 au plus, sans emoji de serveur)</label
+                  ><textarea id="e-footer" spellcheck="false"></textarea>
+                </div>
+              </div>
+              <label>Boutons de lien sous le message (cinq au plus, libellé de 80 au plus)</label>
+              <div id="e-buttons"></div>
+            </div>
+            <div class="edit">
+              <!-- Chaque bouton agit sur la sélection de la zone de texte ; la
+                   logique est dans `discord-editor.mjs`, testée à part. -->
+              <div class="tools" id="d-tools" role="toolbar" aria-label="Mise en forme">
+                <button class="ghost" data-tool="bold" title="Gras (Ctrl+B)"><b>G</b></button>
+                <button class="ghost" data-tool="italic" title="Italique (Ctrl+I)"><i>I</i></button>
+                <button class="ghost" data-tool="underline" title="Souligné (Ctrl+U)">
+                  <u>S</u>
+                </button>
+                <button class="ghost" data-tool="strike" title="Barré"><s>B</s></button>
+                <button class="ghost" data-tool="code" title="Code en ligne">&lt;&gt;</button>
+                <button class="ghost" data-tool="spoiler" title="Masqué (spoiler)">||</button>
+                <button class="ghost" data-tool="link" title="Lien (Ctrl+K)">lien</button>
+                <span class="sep"></span>
+                <button class="ghost" data-tool="h1" title="Titre 1">T1</button>
+                <button class="ghost" data-tool="h2" title="Titre 2">T2</button>
+                <button class="ghost" data-tool="h3" title="Titre 3">T3</button>
+                <button class="ghost" data-tool="sub" title="Sous-texte (petit, gris)">-#</button>
+                <button class="ghost" data-tool="quote" title="Citation">&gt;</button>
+                <button class="ghost" data-tool="list" title="Liste à puces">•</button>
+                <button class="ghost" data-tool="codeblock" title="Bloc de code">```</button>
+                <span class="sep"></span>
+                <button class="ghost" id="d-emoji" title="Emojis" aria-expanded="false">🙂</button>
+              </div>
+              <div class="pop">
+                <div id="d-picker" hidden>
+                  <input
+                    id="d-picker-q"
+                    type="search"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="Chercher un emoji — Entrée insère le premier, Échap ferme"
+                  />
+                  <div id="d-picker-list"></div>
+                </div>
+              </div>
+              <!-- Palette : les emojis de `discord-palette.json`, posés d'un clic. -->
+              <div id="d-palette" aria-label="Palette d'emojis"></div>
+              <p class="hint" id="d-palette-missing"></p>
+              <textarea
+                id="d-text"
+                spellcheck="false"
+                placeholder="# :scroll: PATCH NOTES — TL;DR"
+              ></textarea>
+              <ul id="d-complete" role="listbox" hidden></ul>
+            </div>
+            <div class="bar">
+              <span id="d-count"></span>
+              <button class="ghost" id="d-template">Insérer le gabarit</button>
+              <button class="ghost" id="d-new" hidden>Nouveau message</button>
+              <button class="action" id="d-update" hidden>Mettre à jour le message posté</button>
+              <button class="action" id="d-send" disabled>Envoyer</button>
+            </div>
+            <p class="hint" id="d-status"></p>
+            <label>Aperçu — tel que Discord le rendra</label>
+            <div id="d-preview"></div>
+          </div>
         </div>
       </section>
 
@@ -1054,6 +1734,935 @@
         if (edits.size) e.preventDefault();
       };
 
+      // ------------------------------------------------------- discord
+      // Brouillon, serveur, salon, cases, mode et messages postés survivent au
+      // rechargement. Tout passe par `mem` : un stockage refusé (navigation
+      // privée) ne doit pas casser l'onglet. `null` efface.
+      const mem = {
+        get(key, fallback) {
+          try {
+            const v = localStorage.getItem(`quick.discord.${key}`);
+            return v === null ? fallback : JSON.parse(v);
+          } catch {
+            return fallback;
+          }
+        },
+        set(key, value) {
+          try {
+            if (value === null) localStorage.removeItem(`quick.discord.${key}`);
+            else localStorage.setItem(`quick.discord.${key}`, JSON.stringify(value));
+          } catch {}
+        },
+      };
+
+      let dState = {
+        hasToken: false,
+        hint: null,
+        guilds: null,
+        defaultGuild: null,
+        invite: null,
+        notes: [],
+        standard: [],
+        palette: { groups: [], error: null },
+      };
+      // Le serveur où l'on poste : le dernier choisi (au premier lancement,
+      // celui de DISCORD_GUILD_ID), et ses salons.
+      let dGuild = String(mem.get('guild', '') ?? '');
+      let dChannels = [];
+      let dChannelsError = null;
+      // Les serveurs dont on prend les emojis. `null` : rien n'a encore été
+      // coché à la main — le choix SUIT alors le serveur où l'on poste.
+      const savedEmojiGuilds = mem.get('emojiGuilds', null);
+      let dEmojiGuilds = Array.isArray(savedEmojiGuilds) ? savedEmojiGuilds.map(String) : null;
+      // Emojis lus cette session, par serveur : { emojis } ou { emojis: [], error }.
+      const gEmojis = new Map();
+      let dMode = mem.get('mode', 'simple') === 'embed' ? 'embed' : 'simple';
+      // Dernier aperçu rendu par le serveur ; `null` pendant qu'un autre arrive —
+      // on n'envoie pas sur la foi d'un découpage qui n'est plus celui du texte.
+      let dPreview = null;
+      // Gabarit portant le lien de la note choisie : { simple, embed: { text, buttons } }.
+      let dTemplate = null;
+      // Après un envoi COMPLET : { guildId, guildName, channelId, channelName,
+      // ids, urls, mode } — ce que « Mettre à jour » modifie en place, LÀ où
+      // c'est parti et dans le mode où c'est parti.
+      let posted = mem.get('posted', null);
+      // Après un envoi INTERROMPU : la même chose avec `total` — le prochain
+      // clic reprend au message fautif, dans le même salon et le même mode.
+      let partial = mem.get('partial', null);
+      let dBusy = false;
+
+      const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
+      const sendJson = async (path, payload) =>
+        (
+          await fetch(path, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(payload),
+          })
+        ).json();
+
+      const guildName = (id) =>
+        dState.guilds?.find((g) => g.id === id)?.name ?? 'un serveur inconnu';
+      /** Les serveurs cochés que le bot connaît, dans l'ordre de la liste. */
+      const checkedGuilds = () => {
+        const ids = dEmojiGuilds ?? (dGuild ? [dGuild] : []);
+        return (dState.guilds ?? []).filter((g) => ids.includes(g.id)).map((g) => g.id);
+      };
+      const channelOf = (id) => dChannels.find((c) => c.id === id);
+      /** Le serveur et le salon choisis, avec leurs noms (gardés avec les ids postés). */
+      const here = () => {
+        const c = channelOf($('d-channel').value);
+        return {
+          guildId: dGuild,
+          guildName: guildName(dGuild),
+          channelId: c?.id ?? '',
+          channelName: c?.name ?? '',
+        };
+      };
+      const whereLabel = (w) =>
+        `#${w.channelName || channelOf(w.channelId)?.name || 'salon inconnu'} (${w.guildName || guildName(w.guildId)})`;
+      const MODE_NAME = { simple: 'message simple', embed: 'embed' };
+
+      // -- formulaire d'embed --
+      const E_FIELDS = {
+        title: 'e-title',
+        url: 'e-url',
+        color: 'e-color',
+        thumbnail: 'e-thumb',
+        image: 'e-image',
+        footer: 'e-footer',
+        content: 'e-content',
+      };
+      const BUTTON_MAX = 5;
+      // Couleur par défaut de la barre : le jeton `--accent` du site.
+      const EMBED_COLOR = '#38bdf8';
+      $('e-buttons').innerHTML = Array.from(
+        { length: BUTTON_MAX },
+        (_, i) =>
+          `<div class="d-btn-row"><input type="text" autocomplete="off" placeholder="Libellé du bouton ${i + 1}" /><input type="url" autocomplete="off" placeholder="https://" /></div>`,
+      ).join('');
+      const buttonRows = () => [...$('e-buttons').children];
+
+      function readEmbed() {
+        const form = {};
+        for (const [key, id] of Object.entries(E_FIELDS)) form[key] = $(id).value;
+        form.buttons = buttonRows().map((r) => ({
+          label: r.children[0].value,
+          url: r.children[1].value,
+        }));
+        return form;
+      }
+      /** Une rangée de bouton ne se montre que si la précédente est entamée. */
+      function showButtonRows() {
+        let open = true;
+        for (const r of buttonRows()) {
+          r.hidden = !open;
+          open = open && Boolean(r.children[0].value.trim() || r.children[1].value.trim());
+        }
+      }
+      function writeButtons(buttons) {
+        buttonRows().forEach((r, i) => {
+          r.children[0].value = buttons[i]?.label ?? '';
+          r.children[1].value = buttons[i]?.url ?? '';
+        });
+        showButtonRows();
+      }
+      function writeEmbed(form) {
+        for (const [key, id] of Object.entries(E_FIELDS))
+          $(id).value = typeof form?.[key] === 'string' ? form[key] : '';
+        // Un sélecteur de couleur vidé retombe sur le noir, pas sur « rien » :
+        // la couleur par défaut se pose donc ici, pas après coup.
+        $('e-color').value = /^#[0-9a-f]{6}$/i.test(form?.color ?? '') ? form.color : EMBED_COLOR;
+        writeButtons(Array.isArray(form?.buttons) ? form.buttons : []);
+      }
+
+      /** Ce que la page joint à CHAQUE demande : le serveur local ne retient rien. */
+      const draft = () => ({
+        text: $('d-text').value,
+        mode: dMode,
+        embed: readEmbed(),
+        guildId: dGuild,
+        emojiGuilds: checkedGuilds(),
+      });
+
+      /** Sous la liste des serveurs : ce qu'il faut pour qu'un emoji externe s'affiche. */
+      function renderExternal() {
+        const c = channelOf($('d-channel').value);
+        $('d-external').innerHTML = checkedGuilds().some((id) => id !== dGuild)
+          ? 'Emoji d’un autre serveur que celui où l’on poste : il ne s’affiche que si le bot a « Utiliser des emojis externes » dans le salon — sinon Discord l’écrit en toutes lettres, sans erreur.' +
+            (c?.externalEmojis === false
+              ? ` <span class="ko">Le bot ne l’a PAS dans #${esc(c.name)}.</span>`
+              : c?.externalEmojis === true
+                ? ` Il l’a dans #${esc(c.name)}.`
+                : '')
+          : '';
+      }
+
+      function refreshDiscord() {
+        const p = dPreview;
+        const embed = dMode === 'embed';
+        // Envoi interrompu : serveur, salon et mode restent ceux de la reprise.
+        const locked = Boolean(partial);
+        $('d-guild').disabled = $('d-channel').disabled = locked;
+        if (partial) $('d-channel').value = partial.channelId;
+        for (const r of document.getElementsByName('d-mode')) {
+          r.checked = r.value === dMode;
+          r.disabled = locked;
+        }
+        const channel = $('d-channel').value;
+        $('d-embed').hidden = !embed;
+        // En mode embed le drapeau n'est JAMAIS posé : il masquerait l'embed.
+        $('d-noembed').disabled = embed;
+        $('d-noembed-why').textContent = embed
+          ? ' — inactif en mode embed : il masquerait l’embed lui-même'
+          : '';
+        renderExternal();
+
+        $('d-count').textContent = !p
+          ? '…'
+          : embed
+            ? `description : ${p.length}${p.messages > 1 ? ` caractères · ${p.messages} messages (${p.limit} au plus par embed)` : ` / ${p.limit} caractères`} · textes de l’embed${p.messages > 1 ? ' le plus chargé' : ''} : ${p.total} / 6000`
+            : p.messages > 1
+              ? `${p.length} caractères · ${p.messages} messages (2000 au plus chacun)`
+              : `${p.length} / 2000 caractères`;
+
+        // Un message posté se met à jour LÀ où il est parti, et dans son mode.
+        const away = posted && (posted.guildId !== dGuild || posted.channelId !== channel);
+        const otherMode = posted && posted.mode !== dMode;
+
+        // Ce qui retient l'envoi, dans l'ordre où il faut s'en occuper.
+        const hasText = Boolean($('d-text').value.trim());
+        const silent = !hasText && p?.blocker === 'Message vide.';
+        const why = dState.hint
+          ? ['warn', dState.hint]
+          : p?.blocker && !silent
+            ? ['ko', p.blocker]
+            : posted || partial
+              ? null
+              : !dGuild
+                ? ['warn', 'Choisir un serveur.']
+                : !channel
+                  ? ['warn', dChannelsError ?? 'Choisir un salon.']
+                  : null;
+        // Signalé, pas bloquant : la permission se lit, elle ne se garantit pas.
+        const c = channelOf(channel);
+        const foreign =
+          p?.external?.length && c?.externalEmojis === false
+            ? `<span class="warn">${esc(p.external.map((n) => `:${n}:`).join(', '))} : pris sur un autre serveur, et le bot n’a pas « Utiliser des emojis externes » dans #${esc(c.name)} — Discord l’écrirait en toutes lettres.</span> `
+            : '';
+        const links = (urls) =>
+          urls.map((u, i) => `<a href="${esc(u)}" target="_blank">message ${i + 1}</a>`).join(', ');
+        $('d-status').innerHTML =
+          (why ? `<span class="${why[0]}">${esc(why[1])}</span> ` : '') +
+          foreign +
+          (posted
+            ? `Posté dans ${esc(whereLabel(posted))} : ${links(posted.urls)}. ` +
+              (away
+                ? '<span class="warn">Pour le mettre à jour, reviens à ce serveur et à ce salon</span> ; « Nouveau message » pour en poster un autre.'
+                : otherMode
+                  ? `<span class="warn">Il est parti en « ${MODE_NAME[posted.mode]} » et ne change pas de mode : repasse-y pour le mettre à jour</span> ; « Nouveau message » pour en poster un autre.`
+                  : '« Mettre à jour » le modifie en place ; « Nouveau message » pour en poster un autre.')
+            : partial
+              ? `Envoi interrompu dans ${esc(whereLabel(partial))} : ${plural(partial.ids.length, 'message')} sur ${partial.total} en place. « Reprendre » poste la suite sans les renvoyer.`
+              : '');
+
+        const blocked = dBusy || !dState.hasToken || !p || Boolean(p.blocker);
+        $('d-send').disabled = blocked || !dGuild || !channel || Boolean(posted);
+        $('d-send').textContent = partial
+          ? `Reprendre l'envoi (message ${partial.ids.length + 1}/${partial.total})`
+          : 'Envoyer';
+        $('d-update').hidden = !posted;
+        $('d-update').disabled = blocked || Boolean(away || otherMode);
+        $('d-new').hidden = !posted && !partial;
+      }
+
+      // Le rendu vient du serveur (`/api/discord/preview`) : c'est la fonction
+      // testée, et le même découpage que l'envoi. Seule la DERNIÈRE frappe compte.
+      let dSeq = 0;
+      let dTimer = 0;
+      async function previewDiscord() {
+        const mine = ++dSeq;
+        const data = await sendJson('/api/discord/preview', draft());
+        if (mine !== dSeq) return;
+        dPreview = data;
+        $('d-preview').innerHTML = data.html || '<div class="dc-cut">rien à afficher</div>';
+        refreshDiscord();
+      }
+      /** Le brouillon a changé : l'aperçu en cours ne vaut plus, un autre est demandé. */
+      function staleDiscord() {
+        dPreview = null;
+        refreshDiscord();
+        clearTimeout(dTimer);
+        dTimer = setTimeout(previewDiscord, 250);
+      }
+
+      $('d-text').oninput = () => {
+        mem.set('draft', $('d-text').value);
+        staleDiscord();
+      };
+      $('d-embed').oninput = () => {
+        mem.set('embed', readEmbed());
+        showButtonRows();
+        staleDiscord();
+      };
+      for (const r of document.getElementsByName('d-mode'))
+        r.onchange = () => {
+          dMode = r.value === 'embed' ? 'embed' : 'simple';
+          mem.set('mode', dMode);
+          staleDiscord();
+        };
+
+      let dNoteSeq = 0;
+      async function loadNote() {
+        const id = $('d-note').value;
+        if (!id) return;
+        const mine = ++dNoteSeq;
+        const data = await (await fetch(`/api/discord/note?id=${encodeURIComponent(id)}`)).json();
+        if (mine !== dNoteSeq) return;
+        if (data.error) return log([data.error], false);
+        $('d-frame').srcdoc = data.srcdoc;
+        $('d-open').href = data.url;
+        dTemplate = { simple: data.template, embed: data.embedTemplate };
+      }
+      $('d-note').onchange = loadNote;
+
+      // -- serveur où poster, salons, serveurs d'emojis --
+      // Salons du serveur choisi, groupés par catégorie dans l'ordre de Discord.
+      // Le serveur local les lit une fois par serveur et par session.
+      let dChannelSeq = 0;
+      async function loadChannels() {
+        const mine = ++dChannelSeq;
+        const got =
+          dGuild && dState.hasToken
+            ? await (
+                await fetch(`/api/discord/channels?guild=${encodeURIComponent(dGuild)}`)
+              ).json()
+            : {};
+        if (mine !== dChannelSeq) return;
+        dChannels = got.channels ?? [];
+        dChannelsError = got.error ?? null;
+        const option = (c) =>
+          `<option value="${esc(c.id)}">#${esc(c.name)}${c.announcement ? ' (annonces)' : ''}</option>`;
+        // Suites de salons d'une même catégorie (deux catégories peuvent porter
+        // le même nom : on ne regroupe pas par nom).
+        const runs = [];
+        for (const c of dChannels) {
+          const last = runs[runs.length - 1];
+          if (last && last.category === c.category) last.options += option(c);
+          else runs.push({ category: c.category, options: option(c) });
+        }
+        // AUCUN salon n'est choisi d'office : le premier envoi demande de le faire.
+        $('d-channel').innerHTML =
+          '<option value="">— choisir un salon —</option>' +
+          runs
+            .map((r) =>
+              r.category
+                ? `<optgroup label="${esc(r.category)}">${r.options}</optgroup>`
+                : r.options,
+            )
+            .join('');
+        const saved = partial ? partial.channelId : mem.get('channel', '');
+        if (channelOf(saved)) $('d-channel').value = saved;
+        refreshDiscord();
+      }
+
+      /** Les cases « prendre les emojis de », avec ce que chaque serveur a rendu. */
+      function renderEmojiGuilds() {
+        const on = new Set(checkedGuilds());
+        const guilds = dState.guilds ?? [];
+        $('d-emoji-guilds').innerHTML = guilds.length
+          ? guilds
+              .map((g) => {
+                const got = gEmojis.get(g.id);
+                const note = !on.has(g.id)
+                  ? ''
+                  : !got
+                    ? '<small>…</small>'
+                    : got.error
+                      ? `<small class="ko">${esc(got.error)}</small>`
+                      : `<small>${plural(got.emojis.length, 'emoji')}</small>`;
+                return `<label class="check"><input type="checkbox" data-guild="${esc(g.id)}"${on.has(g.id) ? ' checked' : ''} /> ${esc(g.name)} ${note}</label>`;
+              })
+              .join('')
+          : `<small>${dState.hasToken ? 'liste des serveurs non lue' : 'indisponible sans jeton'}</small>`;
+        renderExternal();
+      }
+
+      /**
+       * Lit les emojis des serveurs COCHÉS que la page n'a pas encore — un
+       * serveur décoché n'est jamais lu, un serveur lu ne l'est pas deux fois.
+       * Un refus est gardé et affiché à côté de sa case, sans gêner les autres.
+       */
+      async function loadEmojis() {
+        const need = checkedGuilds().filter((id) => !gEmojis.has(id));
+        renderEmojiGuilds();
+        if (need.length && dState.hasToken) {
+          const data = await sendJson('/api/discord/emojis', { guilds: need });
+          for (const g of data.guilds ?? []) gEmojis.set(g.id, g);
+        }
+        renderEmojiGuilds();
+        renderPalette();
+      }
+
+      $('d-guild').onchange = async () => {
+        dGuild = $('d-guild').value;
+        mem.set('guild', dGuild);
+        // Changer de serveur vide le salon : il se rechoisit, il ne se devine pas.
+        mem.set('channel', '');
+        await Promise.all([loadChannels(), loadEmojis()]);
+        await previewDiscord();
+      };
+      $('d-channel').onchange = () => {
+        mem.set('channel', $('d-channel').value);
+        refreshDiscord();
+      };
+      $('d-noembed').onchange = () => mem.set('noEmbeds', $('d-noembed').checked);
+
+      $('d-emoji-guilds').onchange = async (e) => {
+        const box = e.target.closest('input[data-guild]');
+        if (!box) return;
+        const id = box.dataset.guild;
+        // Dès qu'une case est touchée, le choix est le sien : il ne suit plus
+        // le serveur où l'on poste.
+        const on = new Set(checkedGuilds());
+        if (box.checked) on.add(id);
+        else on.delete(id);
+        dEmojiGuilds = [...on];
+        mem.set('emojiGuilds', dEmojiGuilds);
+        // Recoché après un échec : on redemande.
+        if (gEmojis.get(id)?.error) gEmojis.delete(id);
+        await loadEmojis();
+        await previewDiscord();
+      };
+
+      /**
+       * La liste des serveurs du bot, puis les salons et les emojis qui en
+       * dépendent. `reload` (« recharger la liste ») : le serveur local oublie
+       * tout ce qu'il a lu de Discord, la page aussi — un serveur où le bot
+       * vient d'être invité apparaît sans redémarrer l'outil.
+       */
+      async function loadServers(reload) {
+        dState = await (await fetch(`/api/discord/state${reload ? '?reload=1' : ''}`)).json();
+        if (reload) gEmojis.clear();
+        $('d-hint').textContent = [dState.hint, dState.palette?.error].filter(Boolean).join(' — ');
+        const guilds = dState.guilds ?? [];
+        // Messages gardés par une version d'avant le choix du serveur : ils
+        // sont partis sur celui de DISCORD_GUILD_ID, en message simple.
+        for (const w of [posted, partial])
+          if (w && !w.guildId && dState.defaultGuild)
+            Object.assign(w, { guildId: dState.defaultGuild, mode: w.mode ?? 'simple' });
+        if (partial) {
+          dGuild = partial.guildId;
+          dMode = partial.mode === 'embed' ? 'embed' : 'simple';
+        } else if (!guilds.some((g) => g.id === dGuild)) dGuild = dState.defaultGuild ?? '';
+        $('d-guild').innerHTML =
+          '<option value="">— choisir un serveur —</option>' +
+          guilds.map((g) => `<option value="${esc(g.id)}">${esc(g.name)}</option>`).join('');
+        $('d-guild').value = dGuild;
+        $('d-invite').hidden = !dState.invite;
+        if (dState.invite) $('d-invite').href = dState.invite;
+        await Promise.all([loadChannels(), loadEmojis()]);
+      }
+      $('d-reload').onclick = async () => {
+        $('d-reload').disabled = true;
+        try {
+          await loadServers(true);
+          await previewDiscord();
+        } catch (e) {
+          log([`Liste des serveurs illisible : ${e}`], false);
+        } finally {
+          $('d-reload').disabled = false;
+        }
+      };
+
+      $('d-template').onclick = () => {
+        if (!dTemplate) return log(['Choisir une note officielle d’abord.'], false);
+        const embed = dMode === 'embed';
+        const filled =
+          $('d-text').value.trim() || (embed && readEmbed().buttons.some((b) => b.label || b.url));
+        const ask = embed
+          ? 'Remplacer le brouillon et les boutons par le gabarit ?'
+          : 'Remplacer le brouillon par le gabarit ?';
+        if (filled && !confirm(ask)) return;
+        // En mode embed, « Full Patch Note » est un bouton de lien, pas un sous-texte.
+        if (embed) {
+          writeButtons(dTemplate.embed.buttons);
+          mem.set('embed', readEmbed());
+        }
+        $('d-text').value = embed ? dTemplate.embed.text : dTemplate.simple;
+        $('d-text').oninput();
+      };
+
+      $('d-send').onclick = async () => {
+        if (!dPreview) return;
+        const where = partial ?? here();
+        const left = dPreview.messages - (partial ? partial.ids.length : 0);
+        const ask =
+          `Poster ${plural(left, 'message')}${dMode === 'embed' ? ' (embed)' : ''} dans ${whereLabel(where)} ?` +
+          (partial ? `\n(reprise : ${plural(partial.ids.length, 'message')} déjà en place)` : '');
+        if (!confirm(ask)) return;
+        dBusy = true;
+        refreshDiscord();
+        log([], undefined, 'envoi à Discord');
+        try {
+          const r = await post('/api/discord/send', {
+            ...draft(),
+            guildId: where.guildId,
+            channelId: where.channelId,
+            suppressEmbeds: $('d-noembed').checked,
+            already: partial ? partial.ids : [],
+            total: partial ? partial.total : undefined,
+          });
+          const kept = {
+            guildId: where.guildId,
+            guildName: where.guildName,
+            channelId: where.channelId,
+            channelName: where.channelName,
+            mode: dMode,
+          };
+          if (r.ok) {
+            posted = { ...kept, ids: r.ids, urls: r.urls };
+            partial = null;
+          } else if (r.ids?.length) {
+            // Le compte d'ORIGINE reste la référence d'une reprise, même si le
+            // serveur vient de refuser parce que le découpage a changé.
+            partial = { ...kept, ids: r.ids, total: partial ? partial.total : r.total };
+          }
+          mem.set('posted', posted);
+          mem.set('partial', partial);
+        } finally {
+          dBusy = false;
+          refreshDiscord();
+        }
+      };
+
+      $('d-update').onclick = async () => {
+        if (!posted || !dPreview) return;
+        const ask = `Modifier en place ${plural(posted.ids.length, 'message')} dans ${whereLabel(posted)} ?`;
+        if (!confirm(ask)) return;
+        dBusy = true;
+        refreshDiscord();
+        log([], undefined, 'modification dans Discord');
+        try {
+          // Le serveur et le salon CHOISIS partent avec ceux d'origine : le
+          // serveur local refuse s'ils diffèrent, comme il refuse un autre mode.
+          await post('/api/discord/edit', {
+            ...draft(),
+            channelId: $('d-channel').value,
+            ids: posted.ids,
+            suppressEmbeds: $('d-noembed').checked,
+            posted: { guildId: posted.guildId, channelId: posted.channelId, mode: posted.mode },
+          });
+        } finally {
+          dBusy = false;
+          refreshDiscord();
+        }
+      };
+
+      $('d-new').onclick = () => {
+        if (
+          partial &&
+          !confirm('Oublier l’envoi interrompu ? Les messages déjà postés restent dans Discord.')
+        )
+          return;
+        posted = partial = null;
+        mem.set('posted', null);
+        mem.set('partial', null);
+        refreshDiscord();
+      };
+
+      // -- outils d'édition : barre, sélecteur d'emojis, autocomplétion --
+      // La logique (ce que chaque outil fait du texte et de la sélection, le
+      // filtre des emojis, la détection du `:xx` à compléter) est PURE et vit
+      // dans `discord-editor.mjs`, que les tests importent aussi. Ici, rien que
+      // le branchement sur la page.
+      let editor = null;
+      const editorReady = import('/discord-editor.mjs').then(
+        (m) => (editor = m),
+        (e) => log([`Outils d’édition illisibles : ${e}`], false),
+      );
+
+      const editState = () => ({
+        text: $('d-text').value,
+        start: $('d-text').selectionStart,
+        end: $('d-text').selectionEnd,
+      });
+
+      /**
+       * Pose le résultat d'un outil dans la zone de texte. PAS en réécrivant
+       * `value` : l'historique d'annulation du navigateur serait vidé, et
+       * Ctrl+Z ne rendrait plus rien. `execCommand('insertText')` est la seule
+       * écriture qu'il y range — donnée en UN remplacement (`diffEdit`), donc
+       * défaite d'un seul Ctrl+Z. L'événement `input` qu'elle émet enregistre
+       * le brouillon et relance l'aperçu, comme une frappe.
+       */
+      let applying = false;
+      function applyEdit(edit) {
+        const ta = $('d-text');
+        const d = editor.diffEdit(ta.value, edit.text);
+        applying = true;
+        try {
+          ta.focus();
+          if (d) {
+            ta.setSelectionRange(d.from, d.to);
+            const done = d.insert
+              ? document.execCommand('insertText', false, d.insert)
+              : document.execCommand('delete');
+            if (!done || ta.value !== edit.text) {
+              // Navigateur sans `execCommand` : le texte passe, sans annulation.
+              ta.value = edit.text;
+              ta.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+          }
+          ta.setSelectionRange(edit.start, edit.end);
+        } finally {
+          applying = false;
+        }
+        closeComplete();
+      }
+
+      function runTool(tool) {
+        if (!editor) return;
+        const e = editState();
+        if (tool !== 'link') return applyEdit(editor.applyTool(e, tool));
+        // Le lien : un second clic le défait ; sinon il lui faut une adresse,
+        // sauf si la sélection en est déjà une.
+        const link = editor.linkAt(e);
+        if (link) return applyEdit(editor.unlink(e, link));
+        let url = '';
+        if (!editor.isUrl(e.text.slice(e.start, e.end))) {
+          url = prompt('Adresse du lien', 'https://');
+          if (url === null) return $('d-text').focus();
+        }
+        applyEdit(editor.insertLink(e, url));
+      }
+
+      // `mousedown` retenu : le clic ne prend pas le focus à la zone de texte,
+      // dont la sélection reste à l'écran.
+      $('d-tools').onmousedown = (e) => e.preventDefault();
+      $('d-tools').onclick = (e) => {
+        const b = e.target.closest('button[data-tool]');
+        if (b) runTool(b.dataset.tool);
+      };
+
+      // Emojis : ceux des serveurs COCHÉS (lus avec le jeton seulement, par
+      // `/api/discord/emojis`) réunis dans l'ordre de la liste — un même nom sur
+      // deux serveurs, le premier gagne, comme à l'envoi — et la table standard.
+      const emojiLists = () => ({
+        guild: editor.mergeGuildEmojis(
+          checkedGuilds().map((id) => ({
+            id,
+            name: guildName(id),
+            emojis: gEmojis.get(id)?.emojis ?? [],
+          })),
+        ),
+        standard: dState.standard ?? [],
+      });
+      const savedRecent = mem.get('recentEmojis', []);
+      let recent = Array.isArray(savedRecent)
+        ? savedRecent.filter((n) => typeof n === 'string')
+        : [];
+
+      /** Un emoji à l'écran : l'image du CDN de Discord, ou son caractère. */
+      const emojiFace = (em) =>
+        em.id
+          ? `<img alt="" loading="lazy" src="https://cdn.discordapp.com/emojis/${esc(em.id)}.${em.animated ? 'gif' : 'webp'}?size=48">`
+          : esc(em.char);
+
+      /** Écrit `:nom:` — au curseur, ou à la place du `:xx` tapé (`from`). */
+      function useEmoji(em, from) {
+        applyEdit(editor.insertEmoji(editState(), em.name, from));
+        recent = editor.pushRecent(recent, em.name);
+        mem.set('recentEmojis', recent);
+      }
+
+      // Palette : les emojis de `discord-palette.json`, toujours sous la main.
+      // Un nom que ni un serveur coché ni la table standard ne porte n'est pas
+      // un bouton — il est nommé dessous, pour être corrigé dans le fichier.
+      let paletteItems = [];
+      function renderPalette() {
+        if (!editor) return;
+        const { groups, missing } = editor.resolvePalette(
+          dState.palette?.groups ?? [],
+          emojiLists(),
+        );
+        paletteItems = [];
+        $('d-palette').innerHTML = groups
+          .map(
+            (g) =>
+              `<div class="grp"><span>${esc(g.label)}</span>${g.items
+                .map((em) => {
+                  const i = paletteItems.push(em) - 1;
+                  return `<button class="em" data-i="${i}" title=":${esc(em.name)}:">${emojiFace(em)}</button>`;
+                })
+                .join('')}</div>`,
+          )
+          .join('');
+        // Sans jeton, ou tant qu'un serveur coché n'est pas lu, « absent » ne
+        // veut pas encore dire « mal nommé ».
+        const unread = !dState.hasToken || checkedGuilds().some((id) => !gEmojis.get(id)?.emojis);
+        $('d-palette-missing').textContent = missing.length
+          ? `absents${unread ? ' (emojis de serveur non lus)' : ''} : ${missing.join(', ')} — ni sur un serveur coché ni standard ; les noms se corrigent dans scripts/quick/discord-palette.json`
+          : '';
+      }
+      // `mousedown` retenu, comme pour la barre : la zone de texte garde sa sélection.
+      $('d-palette').onmousedown = (e) => e.preventDefault();
+      $('d-palette').onclick = (e) => {
+        const b = e.target.closest('button.em');
+        const em = b && paletteItems[Number(b.dataset.i)];
+        if (em && editor) useEmoji(em);
+      };
+
+      // Sélecteur. `offered` : les emojis qu'il affiche, dans l'ordre — Entrée
+      // prend le premier. Les standards (des centaines) ne sont pas déroulés
+      // d'office : par la recherche, ou en dépliant leur section (état retenu).
+      let offered = [];
+      let standardOpen = mem.get('standardOpen', false) === true;
+      function renderPicker() {
+        const q = $('d-picker-q').value;
+        const lists = emojiLists();
+        offered = [];
+        const grid = (items) =>
+          `<div class="em-grid">${items
+            .map((em) => {
+              const i = offered.push(em) - 1;
+              return `<button class="em${i ? '' : ' first'}" data-i="${i}" title=":${esc(em.name)}:">${emojiFace(em)}</button>`;
+            })
+            .join('')}</div>`;
+        const none = (why) => `<p class="hint">${esc(why)}</p>`;
+        // Section d'un serveur vide : dire pourquoi.
+        const noGuild = (id) => {
+          const got = gEmojis.get(id);
+          return q.trim() && got?.emojis?.length
+            ? 'Aucun emoji à ce nom.'
+            : got?.error
+              ? `Emojis indisponibles — ${got.error}.`
+              : !got
+                ? 'Emojis non lus.'
+                : got.emojis.length
+                  ? 'Ses emojis portent tous le nom d’un emoji d’un serveur coché avant lui.'
+                  : 'Ce serveur n’a pas d’emoji.';
+        };
+
+        const guilds = checkedGuilds().map((id) => ({ id, name: guildName(id) }));
+        const sections = editor.pickerSections(lists, guilds, q, recent, standardOpen);
+        $('d-picker-list').innerHTML =
+          (guilds.length
+            ? ''
+            : none(
+                dState.hint
+                  ? `Emojis de serveur indisponibles — ${dState.hint}.`
+                  : 'Aucun serveur coché : seuls les emojis standard sont proposés.',
+              )) +
+          sections
+            .map((sec) => {
+              if (sec.key === 'standard' && !q.trim())
+                return (
+                  `<h3><button data-fold aria-expanded="${!sec.folded}">${sec.folded ? '▸' : '▾'} Standards (${lists.standard.length})</button></h3>` +
+                  (sec.folded ? '' : grid(sec.items))
+                );
+              const empty =
+                sec.key === 'standard'
+                  ? 'Aucun emoji standard à ce nom.'
+                  : noGuild(sec.key.slice('guild:'.length));
+              return `<h3>${esc(sec.title)}</h3>${sec.items.length ? grid(sec.items) : none(empty)}`;
+            })
+            .join('');
+      }
+
+      function closePicker(refocus) {
+        $('d-picker').hidden = true;
+        $('d-emoji').setAttribute('aria-expanded', 'false');
+        if (refocus) $('d-text').focus();
+      }
+      function openPicker() {
+        if (!editor) return;
+        closeComplete();
+        $('d-picker').hidden = false;
+        $('d-emoji').setAttribute('aria-expanded', 'true');
+        $('d-picker-q').value = '';
+        renderPicker();
+        $('d-picker-q').focus();
+      }
+      function pickEmoji(i) {
+        const em = offered[i];
+        if (!em) return;
+        closePicker(false);
+        useEmoji(em);
+      }
+      $('d-emoji').onclick = () => ($('d-picker').hidden ? openPicker() : closePicker(true));
+      $('d-picker-q').oninput = renderPicker;
+      $('d-picker-q').onkeydown = (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closePicker(true);
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          pickEmoji(0);
+        }
+      };
+      $('d-picker-list').onclick = (e) => {
+        if (e.target.closest('[data-fold]')) {
+          standardOpen = !standardOpen;
+          mem.set('standardOpen', standardOpen);
+          return renderPicker();
+        }
+        const b = e.target.closest('button.em');
+        if (b) pickEmoji(Number(b.dataset.i));
+      };
+      // Un clic ailleurs le referme.
+      document.addEventListener('mousedown', (e) => {
+        if (!$('d-picker').hidden && !e.target.closest('#d-picker, #d-emoji')) closePicker(false);
+      });
+
+      // Autocomplétion : `:` et deux lettres ouvrent la liste. `items` vide =
+      // fermée, et les touches ne sont alors PAS interceptées (un Entrée reste
+      // un saut de ligne).
+      let complete = { from: 0, items: [], index: 0 };
+      function closeComplete() {
+        complete = { from: 0, items: [], index: 0 };
+        $('d-complete').hidden = true;
+      }
+
+      /**
+       * Où tombe, dans la zone de texte, le caractère n° `at` (coin bas-gauche,
+       * en pixels) ? Le navigateur ne le dit pas : le texte qui le précède est
+       * recopié dans un calque invisible de même police et de même largeur, et
+       * on mesure où il s'arrête.
+       */
+      function caretPoint(ta, at) {
+        const cs = getComputedStyle(ta);
+        const ghost = document.createElement('div');
+        for (const p of [
+          'fontFamily',
+          'fontSize',
+          'fontWeight',
+          'fontStyle',
+          'lineHeight',
+          'letterSpacing',
+          'tabSize',
+          'paddingTop',
+          'paddingRight',
+          'paddingBottom',
+          'paddingLeft',
+        ])
+          ghost.style[p] = cs[p];
+        Object.assign(ghost.style, {
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          visibility: 'hidden',
+          boxSizing: 'border-box',
+          width: `${ta.clientWidth}px`,
+          whiteSpace: 'pre-wrap',
+          overflowWrap: 'break-word',
+        });
+        ghost.textContent = ta.value.slice(0, at);
+        const mark = document.createElement('span');
+        mark.textContent = '​';
+        ghost.append(mark);
+        ta.parentNode.append(ghost);
+        const point = {
+          left: ta.offsetLeft + ta.clientLeft + mark.offsetLeft - ta.scrollLeft,
+          top: ta.offsetTop + ta.clientTop + mark.offsetTop + mark.offsetHeight - ta.scrollTop,
+        };
+        ghost.remove();
+        return point;
+      }
+
+      function renderComplete() {
+        $('d-complete').innerHTML = complete.items
+          .map(
+            (em, i) =>
+              `<li role="option" data-i="${i}" aria-selected="${i === complete.index}"><span class="face">${emojiFace(em)}</span>:${esc(em.name)}:</li>`,
+          )
+          .join('');
+      }
+      function refreshComplete() {
+        const ta = $('d-text');
+        const q =
+          editor && ta.selectionStart === ta.selectionEnd
+            ? editor.emojiQueryAt(ta.value, ta.selectionStart)
+            : null;
+        const items = q ? editor.searchEmojis(emojiLists(), q.query, recent, 8) : [];
+        if (!items.length) return closeComplete();
+        complete = { from: q.from, items, index: 0 };
+        renderComplete();
+        // Sous le `:` qui ouvre le code, sans sortir de l'éditeur par la droite.
+        const list = $('d-complete');
+        list.hidden = false;
+        const at = caretPoint(ta, q.from);
+        const room = ta.parentNode.clientWidth - list.offsetWidth;
+        list.style.left = `${Math.max(0, Math.min(at.left, room))}px`;
+        list.style.top = `${at.top + 2}px`;
+      }
+      function pickComplete(i) {
+        const em = complete.items[i];
+        const from = complete.from;
+        closeComplete();
+        if (em) useEmoji(em, from);
+      }
+
+      $('d-text').addEventListener('input', () => {
+        if (!applying) refreshComplete();
+      });
+      $('d-text').addEventListener('blur', closeComplete);
+      // `mousedown` retenu : cliquer une ligne ne retire pas le focus à la zone
+      // de texte (ce qui fermerait la liste avant le clic).
+      $('d-complete').onmousedown = (e) => e.preventDefault();
+      $('d-complete').onclick = (e) => {
+        const li = e.target.closest('li');
+        if (li) pickComplete(Number(li.dataset.i));
+      };
+
+      $('d-text').onkeydown = (e) => {
+        if (e.isComposing) return;
+        if (complete.items.length) {
+          if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            const n = complete.items.length;
+            complete.index = (complete.index + (e.key === 'ArrowDown' ? 1 : n - 1)) % n;
+            return renderComplete();
+          }
+          if (e.key === 'Enter' || e.key === 'Tab') {
+            e.preventDefault();
+            return pickComplete(complete.index);
+          }
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            return closeComplete();
+          }
+          // Le curseur s'en va : la liste ne le suit pas.
+          if (['ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(e.key))
+            closeComplete();
+        }
+        const tool = editor?.shortcutTool(e);
+        if (tool) {
+          e.preventDefault();
+          runTool(tool);
+        }
+      };
+
+      async function loadDiscord() {
+        // Le brouillon d'abord : il doit revenir même si l'état ne se charge pas.
+        $('d-text').value = mem.get('draft', '');
+        $('d-noembed').checked = mem.get('noEmbeds', true);
+        writeEmbed(mem.get('embed', null));
+        refreshDiscord();
+
+        // La palette et le sélecteur ont besoin du module d'édition.
+        await editorReady;
+        await loadServers(false);
+        $('d-note').innerHTML = dState.notes
+          .map((n) => `<option value="${esc(n.id)}">${esc(n.date)} · ${esc(n.title)}</option>`)
+          .join('');
+        // La note de patch la plus récente sous la main : c'est elle qu'on résume.
+        const patch = dState.notes.find((n) => n.type === 'update');
+        if (patch) $('d-note').value = patch.id;
+
+        await Promise.all([loadNote(), previewDiscord()]);
+      }
+
       // Arrêt : lancé par l'icône, l'outil n'a aucune fenêtre pour le faire.
       $('quit').onclick = async () => {
         await post('/api/quit', {});
@@ -1064,6 +2673,7 @@
       // ---------------------------------------------------------- boot
       // Les rangs se lisent du disque : ils n'attendent pas R2 comme `/api/state`.
       loadRanks().catch((e) => log([`Rangs illisibles : ${e}`], false));
+      loadDiscord().catch((e) => log([`Onglet Discord illisible : ${e}`], false));
 
       (async () => {
         state = await (await fetch('/api/state')).json();

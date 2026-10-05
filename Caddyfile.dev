@@ -1,10 +1,17 @@
 # HTTPS local pour le DEV en mode sous-domaines (outerpedia.local — cf.
-# docs/procedure/test-subdomain-local.md). Lancé automatiquement par `pnpm dev`
-# (concurrently). NE CONCERNE QUE LE POSTE LOCAL : le Caddy du VPS vit dans
-# sevih-tool/stack/Caddyfile, et ni la CI ni l'image Docker ne lisent ce fichier.
+# docs/procedure/test-subdomain-local.md). Lancé par `scripts/dev-caddy.mjs`
+# (`pnpm dev`, `pnpm dev:caddy`, ou le service de session). NE CONCERNE QUE LE
+# POSTE LOCAL : le Caddy du VPS vit dans sevih-tool/stack/Caddyfile, et ni la CI
+# ni l'image Docker ne lisent ce fichier.
 #
-# Pré-requis poste : entrées 127.0.0.1 dans le fichier hosts pour l'apex + les
-# sous-domaines, CA locale Caddy de confiance (`caddy trust`).
+# Pré-requis poste : entrées 127.0.0.1 dans le fichier hosts pour l'apex, les
+# sous-domaines et `quick.outerpedia.local`, CA locale Caddy de confiance
+# (`caddy trust`).
+#
+# DEUX PC, UN SERVEUR : chaque site vise d'abord le serveur LOCAL, puis ceux de
+# l'autre PC (OUTERPEDIA_PEERS / QUICK_PEERS, posés par dev-caddy.mjs depuis
+# DEV_PEERS de `.env.local` ; vides = comportement d'avant). Le PC qui lance
+# `pnpm dev` sert donc les deux, et chacun garde ses hosts et SA CA.
 #
 # OUTERPEDIA_PORT : 3000 (dev, défaut) — exporter 3100 pour proxifier un build
 # de test (`next start`, mode A de la procédure).
@@ -20,7 +27,28 @@
 		level WARN
 	}
 }
+# Le premier amont qui répond sert. Un amont en échec est remis à l'essai au
+# bout de 2 s : un Next local qui redémarre reprend la main aussitôt, et le PC
+# qui regarde ne paie qu'une connexion refusée (quelques µs) toutes les 2 s.
+# Pas de sonde active : elle ferait compiler des pages au serveur de dev.
+(bascule) {
+	lb_policy first
+	lb_try_duration 2s
+	fail_duration 2s
+	transport http {
+		dial_timeout 1s
+	}
+}
 outerpedia.local, jp.outerpedia.local, kr.outerpedia.local, zh.outerpedia.local, fr.outerpedia.local, es.outerpedia.local, www.outerpedia.local {
 	tls internal
-	reverse_proxy localhost:{$OUTERPEDIA_PORT:3000}
+	reverse_proxy localhost:{$OUTERPEDIA_PORT:3000} {$OUTERPEDIA_PEERS} {
+		import bascule
+	}
+}
+# `pnpm quick` (scripts/quick/server.ts) : même bascule, sur son port interne.
+quick.outerpedia.local {
+	tls internal
+	reverse_proxy 127.0.0.1:{$QUICK_PORT:4747} {$QUICK_PEERS} {
+		import bascule
+	}
 }

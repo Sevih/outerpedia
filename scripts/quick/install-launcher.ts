@@ -49,8 +49,8 @@ function installLinux(): void {
     `[Desktop Entry]
 Type=Application
 Name=Outerpedia quick
-GenericName=Codes promo, 4-comics, vidéos
-Comment=Les quatre gestes du quotidien, sans lancer le serveur de dev
+GenericName=Codes promo, 4-comics, vidéos, rangs, message Discord
+Comment=Les cinq gestes du quotidien, sans lancer le serveur de dev
 Exec=${resolve(repo, 'scripts/quick/launch.sh')}
 Path=${repo}
 Icon=${PNG}
@@ -105,7 +105,8 @@ function installWindows(): void {
       QUICK_TARGET: target,
       QUICK_CWD: repo,
       QUICK_ICON: icon,
-      QUICK_DESC: 'Codes promo, 4-comics, vidéos — sans lancer le serveur de dev',
+      QUICK_DESC:
+        'Codes promo, 4-comics, vidéos, rangs, message Discord — sans lancer le serveur de dev',
     },
   });
   if (res.status !== 0)
