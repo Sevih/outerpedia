@@ -6,14 +6,14 @@ import { findCharacterByName } from '@/lib/data/characters';
 /**
  * Catégories comptées (ordre d'affichage des pills et des sections) — celles
  * dont les guides recommandent des persos. `general-guides`, `monad-gate` et
- * `other` sont hors périmètre (comme avant : pas de reco par perso exploitable).
+ * `other` sont hors périmètre (comme avant : pas de reco par perso exploitable),
+ * `adventure-license` aussi depuis la fermeture du mode au patch du 06/10/2026.
  */
 export const USAGE_CATEGORIES = [
   'world-boss',
   'joint-challenge',
   'guild-raid',
   'adventure',
-  'adventure-license',
   'special-request',
   'irregular-extermination',
   'dimensional-singularity',

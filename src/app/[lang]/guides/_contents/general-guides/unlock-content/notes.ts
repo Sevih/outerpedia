@@ -348,28 +348,6 @@ export const ENTRIES: GuideEntry[] = [
   {
     source: 'auto',
     category: 'gamemodes',
-    contentType: 'ADVENTURE_LICENSE',
-    // officialName: "Adventure License"
-    description: {
-      en: 'Weekly challenge mode with various rewards',
-      jp: '様々な報酬があるウィークリーチャレンジモード',
-      kr: '다양한 보상이 있는 주간 챌린지 모드',
-      zh: '有各种奖励的每周挑战模式',
-      fr: 'Mode challenge hebdomadaire avec récompenses variées',
-      es: 'Modo de desafío semanal con varias recompensas',
-    },
-    customNote: {
-      en: 'Any one of the listed Hard-season finals satisfies the unlock',
-      jp: '記載のいずれか1つのハード最終ステージで解放',
-      kr: '나열된 하드 시즌 최종 중 하나만 클리어하면 해금',
-      zh: '清完所列任一硬核赛季终章即可解锁',
-      fr: 'Un seul des stages finaux Hard listés suffit pour débloquer',
-      es: 'Cualquiera de las finales de temporada difícil listadas satisface el desbloqueo',
-    },
-  },
-  {
-    source: 'auto',
-    category: 'gamemodes',
     contentType: 'PVP',
     // officialName: "Arena"
     description: {
