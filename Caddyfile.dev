@@ -31,10 +31,18 @@
 # bout de 2 s : un Next local qui redémarre reprend la main aussitôt, et le PC
 # qui regarde ne paie qu'une connexion refusée (quelques µs) toutes les 2 s.
 # Pas de sonde active : elle ferait compiler des pages au serveur de dev.
+#
+# `request_buffers` : sur le PC qui regarde, la première requête après 2 s de
+# calme retente l'amont local, échoue, puis REJOUE vers l'autre PC. Sans
+# tampon, le corps d'un POST est déjà fermé au second essai : Caddy rendait un
+# 502 vide (« réponse interrompue » dans quick, enregistrement perdu dans
+# l'admin), alors que les GET passaient. Le corps est donc gardé en mémoire le
+# temps du rejeu ; au-delà de 64 Mo, pas de rejeu.
 (bascule) {
 	lb_policy first
 	lb_try_duration 2s
 	fail_duration 2s
+	request_buffers 64MB
 	transport http {
 		dial_timeout 1s
 	}
