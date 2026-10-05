@@ -7,6 +7,28 @@
 
 ## 2026-10-05
 
+- **Relecture de B20 et B21** (Fable). Lots 67 et 68 : B20 `2c58b4a2` (fin
+  de l'Adventure License dans le suivi de progression et les guides `quirk`,
+  `daily-stamina`, `shop-purchase-priorities`), B21 `454ae182` (onglet
+  « Discord » de `pnpm quick`). `pnpm typecheck`, `pnpm lint`, `pnpm test`
+  verts sur HEAD (185 fichiers, 2 385 tests), `package.json` intact, diffs de
+  `docs/TODO.md` relus (rien d'emporté). B20 : ce qui cite encore le mode
+  après son passage est le hors-périmètre décidé (calculateur → lot F13,
+  sources d'équipement, vue et fiche de la catégorie masquée, roadmap) et
+  des commentaires. B21 : aucun appel git dans `discord.ts` (le geste ne
+  committe ni ne pousse), jeton gardé dans l'objet de session et gommé de
+  toute ligne de journal (`scrub`), `allowed_mentions.parse` vide sur chaque
+  message. Essai indépendant, outil démarré sans fenêtre sur un autre port
+  et SANS jeton : l'état répond « jeton absent », le preview rend
+  l'exemple de Sevih (titres, sous-texte, lien masqué, liste, citation,
+  emojis standard convertis, HTML échappé), marque `:dark:` `:ranger:`
+  `:tactician:` « inconnu sans jeton » et bloque l'envoi, la note 11653
+  sort avec son gabarit et un cadre sans script. Le lien officiel est bâti
+  sur `annoucements.outerplane.major7.kr`, l'hôte que lit `get-news` — pas
+  l'ancien `vagames.co.kr` des messages d'août. Non vérifié par personne :
+  un envoi réel, le rendu de l'onglet dans un navigateur, les emojis du
+  serveur. Premier essai par Sevih, dans un salon de test, une fois le
+  jeton posé dans `.env.local`.
 - **`pnpm quick` : un cinquième onglet « Discord », pour écrire un message
   et le faire poster par le bot** (Opus, lot B21, demande Sevih du 05/10 ;
   commit local, À NE PAS POUSSER avant le patch du 06/10). Le résumé d'une
