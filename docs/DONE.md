@@ -7,6 +7,23 @@
 
 ## 2026-10-05
 
+- **Onglet Discord de quick : « Copier le message » pour poster soi-même,
+  et consignes alignées sur la version de Sevih** (Fable). Deux retours sur
+  le second jet. (1) Les couleurs marchent quand le bot poste, pas quand
+  Sevih colle le texte lui-même : le brouillon ne porte pas les ESC des
+  blocs `ansi`, que le bot ajoute à l'envoi. Un bouton « Copier le
+  message » met dans le presse-papiers le brouillon avec ses ESC
+  (`restoreAnsi`, déménagée dans `discord-editor.mjs` pour que la page et
+  `discord.ts` partagent la même fonction) ; codes d'emoji et horodatages
+  restent tels quels, Discord les convertit au collage. (2) Sevih a réécrit
+  le jet tel qu'il l'aurait posté ; `discord-prompt.md` suit ses écarts :
+  rien sur ce que fait un héros, ni règle de recrutement même modifiée ; sur
+  un patch ordinaire pas de section Content, les contenus datés viennent
+  sous le héros en lignes à libellé gras, le reste en puces ; deux ou trois
+  changements de système au plus, dits au plus court ; pas de section de
+  correctifs par défaut. Vérifié : typecheck, lint, tests verts, script de
+  la page et module passés à `node --check`. Non vérifié : le bouton dans un
+  navigateur et le collage dans Discord — essai de Sevih.
 - **Onglet Discord de quick, après le premier jet réel de Sevih : couleurs
   des blocs `ansi`, dates sans heure, consignes resserrées** (Fable). Son
   premier jet (note du 06/10, via claude.ai) avait trois défauts. (1) Trop

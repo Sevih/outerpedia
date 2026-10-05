@@ -1369,6 +1369,16 @@
               <label title="Anciens résumés joints en exemple, les plus récents d'abord"
                 >exemples <input id="d-request-k" type="number" min="0" max="6" step="1" value="3"
               /></label>
+              <!-- Pour poster SOI-MÊME : le brouillon tel quel (codes d'emoji et
+                   horodatages compris), avec les caractères d'échappement des
+                   couleurs que le bot ajoute, lui, tout seul à l'envoi. -->
+              <button
+                class="ghost"
+                id="d-copy"
+                title="Copie le brouillon pour le coller toi-même dans Discord, couleurs des blocs ansi comprises"
+              >
+                Copier le message
+              </button>
               <button class="ghost" id="d-new" hidden>Nouveau message</button>
               <button class="action" id="d-update" hidden>Mettre à jour le message posté</button>
               <button class="action" id="d-send" disabled>Envoyer</button>
@@ -2692,6 +2702,33 @@
       document.addEventListener('mousedown', (e) => {
         if (!$('d-stamp').hidden && !e.target.closest('#d-stamp, #d-date')) closeStamp(false);
       });
+
+      // « Copier le message » : Sevih poste lui-même. Le texte du brouillon ne
+      // porte pas les ESC des couleurs (invisibles, perdus au collage) ; le bot
+      // les remet à l'envoi, ce bouton les remet dans le presse-papiers.
+      $('d-copy').onclick = async () => {
+        if (!editor) return;
+        const text = editor.restoreAnsi($('d-text').value.replace(/\r\n?/g, '\n'));
+        if (!text.trim()) return log(['Rien à copier : le brouillon est vide.'], false);
+        let copied = true;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          copied = false;
+        }
+        const box = $('d-request-text');
+        box.value = copied ? '' : text;
+        box.hidden = copied;
+        if (!copied) {
+          box.focus();
+          box.select();
+        }
+        $('d-request-info').innerHTML =
+          (copied
+            ? 'Message copié'
+            : '<span class="warn">Presse-papiers refusé : copie le texte ci-dessous à la main (Ctrl+C)</span>') +
+          ` — ${text.length.toLocaleString('fr-FR')} caractères, couleurs comprises. À coller dans Discord : les <code>:codes:</code> d’emoji et les dates y sont convertis à l’envoi.`;
+      };
 
       // « convertir les dates » : chaque `AAAA-MM-JJ HH:MM UTC` du brouillon
       // devient un horodatage — la forme sous laquelle un modèle écrit ses dates.

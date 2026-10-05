@@ -37,6 +37,7 @@
  */
 import shortcodes from './discord-shortcodes.json';
 import type { Outcome, Report } from './actions';
+import { restoreAnsi } from './discord-editor.mjs';
 
 export const DISCORD_API = 'https://discord.com/api/v10';
 /** Plafond de Discord par message. */
@@ -284,19 +285,8 @@ export interface Prepared extends Converted, Split {
   length: number;
 }
 
-/**
- * Rétablit le caractère d'échappement des couleurs dans les blocs ```ansi.
- *
- * Discord colore un bloc `ansi` par des séquences `ESC[1;36m` — et ESC (U+001B)
- * est invisible : un copier-coller ou un modèle rendent `[1;36m` SANS lui, que
- * Discord affiche alors en toutes lettres. Dans un bloc `ansi`, et là seulement,
- * une séquence `[…m` de codes numériques qui n'a pas son ESC le retrouve.
- */
-export function restoreAnsi(text: string): string {
-  return text.replace(/```ansi\n[\s\S]*?```/g, (block) =>
-    block.replace(/(?<!\u001b)\[(\d{1,2}(?:;\d{1,2})*)m/g, '\u001b[$1m'),
-  );
-}
+// `restoreAnsi` vit dans `discord-editor.mjs` : la page s'en sert aussi (« copier le message »).
+export { restoreAnsi };
 
 /** Le texte de l'éditeur → ce qui part : couleurs rétablies, emojis convertis PUIS découpage. */
 export function prepare(text: string, guild: GuildEmojis, partial = false): Prepared {

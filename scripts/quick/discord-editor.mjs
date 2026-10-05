@@ -823,3 +823,23 @@ export function convertDates(edit) {
     invalid,
   };
 }
+
+// ----------------------------------------------------------- couleurs ansi ---
+
+/**
+ * Rétablit le caractère d'échappement des couleurs dans les blocs ```ansi.
+ *
+ * Discord colore un bloc `ansi` par des séquences `ESC[1;36m` — et ESC (U+001B)
+ * est invisible : un copier-coller ou un modèle rendent `[1;36m` SANS lui, que
+ * Discord affiche alors en toutes lettres. Dans un bloc `ansi`, et là seulement,
+ * une séquence `[…m` de codes numériques qui n'a pas son ESC le retrouve.
+ *
+ * Sert à l'envoi par le bot (`prepare`) et à « copier le message », quand
+ * Sevih poste lui-même : son collage doit porter les ESC, lui aussi.
+ * @param {string} text
+ */
+export function restoreAnsi(text) {
+  return text.replace(/```ansi\n[\s\S]*?```/g, (block) =>
+    block.replace(/(?<!\u001b)\[(\d{1,2}(?:;\d{1,2})*)m/g, '\u001b[$1m'),
+  );
+}
