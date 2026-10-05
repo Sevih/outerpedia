@@ -11,7 +11,7 @@
  * tout leur sous-arbre à CHAQUE frappe. Dans un fichier séparé, l'erreur devient
  * impossible à commettre par distraction.
  *
- * Rappel du modèle : sur les 8 shops DÉRIVÉS du jeu, le factuel (icône, nom,
+ * Rappel du modèle : sur les 7 shops DÉRIVÉS du jeu, le factuel (icône, nom,
  * coût, limite) est en LECTURE SEULE — seules la priorité S/A/B/C et les notes
  * sont curées. Les shops ÉDITORIAUX, eux, sont éditables de bout en bout.
  */
@@ -41,16 +41,7 @@ export const PERIODS = ['daily', 'weekly', 'monthly', 'one-time'] as const;
 export type Period = (typeof PERIODS)[number];
 
 /** Onglets dérivés (dans l'ordre du guide) + note de shop associée. */
-export const DERIVED_ORDER = [
-  'guild',
-  'joint',
-  'friend',
-  'arena',
-  'stars',
-  'worldboss',
-  'al',
-  'survey',
-];
+export const DERIVED_ORDER = ['guild', 'joint', 'friend', 'arena', 'stars', 'worldboss', 'survey'];
 export const DERIVED_LABEL: Record<string, string> = {
   guild: 'Guild',
   joint: 'Joint Challenge',
@@ -58,7 +49,6 @@ export const DERIVED_LABEL: Record<string, string> = {
   arena: 'Arena',
   stars: "Star's Memory",
   worldboss: 'World Boss',
-  al: 'Adventure License',
   survey: 'Survey Hub',
 };
 

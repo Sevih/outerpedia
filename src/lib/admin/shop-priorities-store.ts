@@ -2,7 +2,7 @@
  * Édition des PRIORITÉS DE SHOP (guide shop-purchase-priorities) — ADMIN local.
  *
  * Deux surfaces, deux stockages (cf. le guide) :
- *   - 8 shops DÉRIVÉS du jeu : seuls priorité S/A/B/C + notes sont curés, dans
+ *   - 7 shops DÉRIVÉS du jeu : seuls priorité S/A/B/C + notes sont curés, dans
  *     l'overlay `data/curated/shop-priorities.json`, keyé par le slug STABLE
  *     `shop/<goods>/<période>` (insensible au prix/rotation). Le factuel
  *     (nom/coût/limite) vient de `ProductTemplet` — jamais curé.

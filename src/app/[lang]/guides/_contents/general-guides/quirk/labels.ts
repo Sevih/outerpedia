@@ -42,14 +42,6 @@ export const TERMS = {
     fr: 'Utility',
     es: 'Utilidad',
   },
-  adventureLicense: {
-    en: 'Adventure License',
-    jp: '冒険者ライセンス',
-    kr: '모험 라이선스',
-    zh: '冒险许可证',
-    fr: 'Adventure License',
-    es: 'Licencia aventura',
-  },
 } satisfies Record<string, LocalizedText>;
 
 /** {ICON_XXX} → terme de catégorie. */
@@ -58,7 +50,6 @@ export const ICON_TERM: Record<string, keyof typeof TERMS> = {
   ICON_CE: 'classEnhancement',
   ICON_EE: 'elementEnhancement',
   ICON_U: 'utility',
-  ICON_AL: 'adventureLicense',
 };
 
 export const LABELS = {
@@ -130,12 +121,12 @@ export const LABELS = {
     es: 'Después de completar la Temporada 1, etapa 9-5: La Responsabilidad del Culpable, desbloquearás el sistema de Quirk.',
   },
   introP2: {
-    en: 'Quirks are a permanent, account-wide enhancement system available in the Base → Quirk menu. They provide additional stats for your heroes or utility effects for your account, and are unlocked using materials such as {I-I/Proof of Destiny}, {I-I/Token of Connection}, and {I-I/Proof of Worth}.',
-    jp: 'ギフトは、アジト→ギフトメニューで利用できる永続的なアカウント全体の強化システムです。ヒーローに追加ステータスやアカウントに実用的な効果を提供し、{I-I/Proof of Destiny}、{I-I/Token of Connection}、{I-I/Proof of Worth}などの素材で解放されます。',
-    kr: '기프트는 아지트 → 기프트 메뉴에서 사용할 수 있는 영구적인 계정 전체 강화 시스템입니다. 영웅에게 추가 스탯이나 계정에 유틸리티 효과를 제공하며, {I-I/Proof of Destiny}, {I-I/Token of Connection}, {I-I/Proof of Worth} 등의 재료로 해금됩니다.',
-    zh: '天赋是一个永久的全账户强化系统，可在基地→天赋菜单中使用。它为英雄提供额外属性或账户效益效果，使用{I-I/Proof of Destiny}、{I-I/Token of Connection}和{I-I/Proof of Worth}等材料解锁。',
-    fr: "Les Quirks sont un système d'amélioration permanent et global au compte, disponible dans Base → Quirk menu. Ils fournissent des stats supplémentaires pour vos Héros ou des effets utility pour votre compte, et se débloquent avec des matériaux comme {I-I/Proof of Destiny}, {I-I/Token of Connection} et {I-I/Proof of Worth}.",
-    es: 'Los Quirks son un sistema de mejora permanente a nivel de cuenta disponible en el menú Base → Quirk. Proporcionan estadísticas adicionales para tus héroes o efectos de utilidad para tu cuenta, y se desbloquean usando materiales como {I-I/Proof of Destiny}, {I-I/Token of Connection} y {I-I/Proof of Worth}.',
+    en: 'Quirks are a permanent, account-wide enhancement system available in the Base → Quirk menu. They provide additional stats for your heroes or utility effects for your account, and are unlocked using materials such as {I-I/Proof of Destiny} and {I-I/Token of Connection}.',
+    jp: 'ギフトは、アジト→ギフトメニューで利用できる永続的なアカウント全体の強化システムです。ヒーローに追加ステータスやアカウントに実用的な効果を提供し、{I-I/Proof of Destiny}、{I-I/Token of Connection}などの素材で解放されます。',
+    kr: '기프트는 아지트 → 기프트 메뉴에서 사용할 수 있는 영구적인 계정 전체 강화 시스템입니다. 영웅에게 추가 스탯이나 계정에 유틸리티 효과를 제공하며, {I-I/Proof of Destiny}, {I-I/Token of Connection} 등의 재료로 해금됩니다.',
+    zh: '天赋是一个永久的全账户强化系统，可在基地→天赋菜单中使用。它为英雄提供额外属性或账户效益效果，使用{I-I/Proof of Destiny}和{I-I/Token of Connection}等材料解锁。',
+    fr: "Les Quirks sont un système d'amélioration permanent et global au compte, disponible dans Base → Quirk menu. Ils fournissent des stats supplémentaires pour vos Héros ou des effets utility pour votre compte, et se débloquent avec des matériaux comme {I-I/Proof of Destiny} et {I-I/Token of Connection}.",
+    es: 'Los Quirks son un sistema de mejora permanente a nivel de cuenta disponible en el menú Base → Quirk. Proporcionan estadísticas adicionales para tus héroes o efectos de utilidad para tu cuenta, y se desbloquean usando materiales como {I-I/Proof of Destiny} y {I-I/Token of Connection}.',
   },
 
   catCounteract: {
@@ -170,14 +161,6 @@ export const LABELS = {
     fr: "bonus à l'échelle du compte (gain d'EXP, drop rate, coût de crafting, etc.)",
     es: 'bonos a nivel de cuenta (ganancia de EXP, tasa de drop, costo de crafteo, etc.)',
   },
-  catAdventure: {
-    en: 'bonuses that only apply in Adventure License mode',
-    jp: '冒険者ライセンスモードでのみ適用されるボーナス',
-    kr: '모험 라이선스 모드에서만 적용되는 보너스',
-    zh: '仅在冒险许可证模式中生效的加成',
-    fr: "bonus qui ne s'appliquent qu'en mode Adventure License",
-    es: 'bonos que solo se aplican en el modo Licencia aventura',
-  },
 
   howP1: {
     en: 'Each category has Main Nodes and Sub-Nodes. You must upgrade the main node to unlock its sub-nodes.',
@@ -188,12 +171,12 @@ export const LABELS = {
     es: 'Cada categoría tiene Nodos Principales y Subnodos. Debes mejorar el nodo principal para desbloquear sus subnodos.',
   },
   howP2: {
-    en: 'You need 5 points in a main node to unlock all sub-nodes (except {ICON_AL}, which requires level 9).',
-    jp: '全てのサブノードを解放するにはメインノードに5ポイント必要です（{ICON_AL}を除く、レベル9が必要）。',
-    kr: '모든 서브 노드를 해금하려면 메인 노드에 5포인트가 필요합니다 ({ICON_AL} 제외, 레벨 9 필요).',
-    zh: '需要主节点5点才能解锁所有子节点（{ICON_AL}除外，需要9级）。',
-    fr: 'Vous avez besoin de 5 points dans un main node pour débloquer tous les sub-nodes (sauf {ICON_AL}, qui requiert le niveau 9).',
-    es: 'Necesitas 5 puntos en un nodo principal para desbloquear todos los subnodos (excepto {ICON_AL}, que requiere nivel 9).',
+    en: 'You need 5 points in a main node to unlock all sub-nodes.',
+    jp: '全てのサブノードを解放するにはメインノードに5ポイント必要です。',
+    kr: '모든 서브 노드를 해금하려면 메인 노드에 5포인트가 필요합니다.',
+    zh: '需要主节点5点才能解锁所有子节点。',
+    fr: 'Vous avez besoin de 5 points dans un main node pour débloquer tous les sub-nodes.',
+    es: 'Necesitas 5 puntos en un nodo principal para desbloquear todos los subnodos.',
   },
   howP3: {
     en: 'Some nodes are more valuable than others. You can skip early nodes like {C/Healer}, {C/Defender}, {C/Ranger} ({C/Ranger|Tactician}), {S/DMG RED%} and {S/RES} quirks.',
@@ -235,14 +218,6 @@ export const LABELS = {
     zh: '最后考虑{ICON_U}天赋，提供全账户加成如经验获取、掉落率、制作折扣——最值得注意的是体力上限增加。虽然体力上限提升是该类别中最有价值的特权，但效益天赋整体在前期优先级仍然较低。',
     fr: "Enfin, regardez les Quirks {ICON_U}, qui offrent des bonus à l'échelle du compte comme le gain d'EXP, drop rate, discounts de crafting et surtout une augmentation de votre stamina cap. Bien que le boost de stamina cap soit l'avantage le plus impactant de cette catégorie, les Utility Quirks dans leur ensemble restent une priorité moindre en early.",
     es: 'Finalmente, considera los quirks de {ICON_U}, que ofrecen bonificaciones a nivel de cuenta como ganancia de EXP, tasa de drop, descuentos de crafteo — y sobre todo, un aumento al límite de vigor. Aunque el aumento del límite de vigor es la ventaja más impactante de esta categoría, los quirks de Utilidad en general siguen siendo una prioridad baja al principio del juego.',
-  },
-  priorityP4: {
-    en: "As for the {ICON_AL} tree: this is an endgame system and shouldn't be your early focus. It's also the only tree that requires {I-I/Proof of Worth}, which is exclusively obtained from Adventure License mode.",
-    jp: '{ICON_AL}ツリーについて：これはエンドゲームシステムであり、序盤の焦点にすべきではありません。また、{I-I/Proof of Worth}を必要とする唯一のツリーであり、冒険者ライセンスモードでのみ入手できます。',
-    kr: '{ICON_AL} 트리에 대해: 이것은 엔드게임 시스템이므로 초반에 집중해서는 안 됩니다. 또한 {I-I/Proof of Worth}가 필요한 유일한 트리이며, 모험 라이선스 모드에서만 획득할 수 있습니다.',
-    zh: '关于{ICON_AL}树：这是终局系统，不应作为前期重点。它也是唯一需要{I-I/Proof of Worth}的树，该材料仅从冒险许可证模式获取。',
-    fr: "Concernant l'arbre {ICON_AL} : c'est un système d'endgame qui ne devrait pas être votre focus early. C'est aussi le seul arbre qui nécessite des {I-I/Proof of Worth}, exclusivement obtenus du mode Adventure License.",
-    es: 'En cuanto al árbol de {ICON_AL}: es un sistema de endgame y no debería ser tu prioridad temprana. También es el único árbol que requiere {I-I/Proof of Worth}, que se obtiene exclusivamente en el modo Licencia aventura.',
   },
 
   exampleIntro: {
@@ -318,14 +293,6 @@ export const LABELS = {
     fr: 'Non. La plupart des main nodes doivent être upgrade à 5/10, ce qui débloque tous les sub-nodes. Concentrez-vous sur les sub-nodes en early car ils offrent généralement une meilleure valeur par point.',
     es: 'No. La mayoría de los nodos principales deberían mejorarse a 5/10 — esto desbloquea todos los subnodos. Enfócate primero en los subnodos, ya que suelen ofrecer mejor valor por punto.',
   },
-  faqSubnodesP2: {
-    en: 'The exception is the {ICON_AL} tree, which requires level 9 in the main node to unlock sub-nodes.',
-    jp: '例外は{ICON_AL}ツリーで、サブノードを解放するにはメインノードをレベル9にする必要があります。',
-    kr: '예외는 {ICON_AL} 트리로, 서브 노드를 해금하려면 메인 노드를 레벨 9까지 올려야 합니다.',
-    zh: '{ICON_AL}树是例外，需要主节点达到9级才能解锁子节点。',
-    fr: "L'exception est l'arbre {ICON_AL}, qui nécessite le niveau 9 du main node pour débloquer les sub-nodes.",
-    es: 'La excepción es el árbol de {ICON_AL}, que requiere nivel 9 en el nodo principal para desbloquear los subnodos.',
-  },
   faqSkipTitle: {
     en: 'Are there any nodes I should skip?',
     jp: 'スキップすべきノードはありますか？',
@@ -397,14 +364,6 @@ export const LABELS = {
     zh: '{I-I/Token of Connection} — 主要通过终点岛获取',
     fr: '{I-I/Token of Connection} — principalement obtenu via Terminus Isle',
     es: '{I-I/Token of Connection} — se obtiene principalmente en Terminus Isle',
-  },
-  faqMaterialProofWorth: {
-    en: '{I-I/Proof of Worth} — exclusively obtained from Adventure License shop',
-    jp: '{I-I/Proof of Worth} — 冒険者ライセンスショップでのみ入手',
-    kr: '{I-I/Proof of Worth} — 모험 라이선스 상점에서만 획득',
-    zh: '{I-I/Proof of Worth} — 仅从冒险许可证商店获取',
-    fr: "{I-I/Proof of Worth} — exclusivement obtenu dans l'Adventure License Shop",
-    es: '{I-I/Proof of Worth} — se obtiene exclusivamente en la tienda de Licencia aventura',
   },
 
   // ── Onglet Arbres ──

@@ -4,7 +4,7 @@
  * Éditeur des PRIORITÉS DE SHOP (guide shop-purchase-priorities) — dev-only.
  *
  * Deux surfaces, une seule UI en onglets :
- *   - 8 shops DÉRIVÉS du jeu : le factuel (icône/nom/coût/limite) est en LECTURE
+ *   - 7 shops DÉRIVÉS du jeu : le factuel (icône/nom/coût/limite) est en LECTURE
  *     SEULE ; on ne cure que priorité S/A/B/C + notes (overlay curé keyé par slug
  *     stable). Sauvegarde → régénère `data/generated/shop-priorities.json`.
  *   - shops ÉDITORIAUX (Event, Resource, Supply, Rico) + notes de shop : tout est

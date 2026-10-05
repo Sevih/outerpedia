@@ -1,6 +1,6 @@
 /**
  * Libellés du guide « Recommended Purchases by Shop » — transplantés VERBATIM
- * de l'ancien site. Les 8 shops permanents « à monnaie » DÉRIVENT du jeu
+ * de l'ancien site. Les 7 shops permanents « à monnaie » DÉRIVENT du jeu
  * (data/generated/shop-priorities.json) ; ces libellés ne portent que la
  * présentation (légende de priorité, colonnes, noms d'onglets) et le contenu
  * ÉDITORIAL des shops non dérivés (cf. editorial.ts).
@@ -271,17 +271,6 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
       zh: '世界首领',
       fr: 'World Boss',
       es: 'Jefe mundial',
-    },
-  },
-  {
-    key: 'al',
-    label: {
-      en: 'Adventure License',
-      jp: '冒険ライセンス',
-      kr: '모험 라이선스',
-      zh: '冒险执照',
-      fr: 'Adventure License',
-      es: 'Licencia aventura',
     },
   },
   {

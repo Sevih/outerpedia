@@ -54,8 +54,6 @@ export interface UserSettings {
    * aussi la stamina des pubs AUTOMATIQUEMENT → tâche ad-stamina masquée.
    */
   hasVeronicaPremiumPack: boolean;
-  /** Adventure license : combats par étage (× 3 étages). */
-  adventureLicenseCombatsPerStage: 2 | 3 | 4;
   /** Tour élémentaire finie une fois pour toutes → tâche masquée. */
   hasCompletedElementalTower: boolean;
   /** Tous les héros réguliers en 6★ → tâche doppelganger masquée. */
@@ -106,12 +104,10 @@ export function normalizeSettings(raw: unknown): UserSettings {
     enabledTasks[type] = validIds.filter((id) => enabled.has(id));
   }
 
-  const combats = d.adventureLicenseCombatsPerStage;
   return {
     enabledTasks,
     hasTerminusSupportPack: d.hasTerminusSupportPack === true,
     hasVeronicaPremiumPack: d.hasVeronicaPremiumPack === true,
-    adventureLicenseCombatsPerStage: combats === 3 || combats === 4 ? combats : 2,
     hasCompletedElementalTower: d.hasCompletedElementalTower === true,
     hasAllRegularHeroesSixStar: d.hasAllRegularHeroesSixStar === true,
     // Défaut ACTIF, y compris pour un réglage stocké d'avant l'option : sans
@@ -130,7 +126,6 @@ export function getTaskMaxCount(taskId: string, type: TaskType, settings: UserSe
   if (taskId === 'terminus-isle') return settings.hasTerminusSupportPack ? 2 : 1;
   if (taskId === 'hypnotic-frog-hall' || taskId === 'ark-raid')
     return settings.hasVeronicaPremiumPack ? 4 : 3;
-  if (taskId === 'adventure-license') return settings.adventureLicenseCombatsPerStage * 3;
   return TASK_DEFINITIONS[type][taskId]?.maxCount ?? 1;
 }
 

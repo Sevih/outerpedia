@@ -122,28 +122,6 @@ export function SettingsModal({
               })
             }
           />
-          <div className="bg-surface-overlay rounded-lg p-4">
-            <div className="mb-3">
-              <span className="font-medium">{labels.adventureLicense}</span>
-              <p className="text-content-muted mt-1 text-sm">{labels.adventureLicenseDesc}</p>
-            </div>
-            <div className="space-y-2">
-              {([2, 3, 4] as const).map((n) => (
-                <label key={n} className="flex cursor-pointer items-center gap-3">
-                  <input
-                    type="radio"
-                    name="adventureLicense"
-                    checked={settings.adventureLicenseCombatsPerStage === n}
-                    onChange={() =>
-                      setSettings({ ...settings, adventureLicenseCombatsPerStage: n })
-                    }
-                    className="size-4 accent-sky-500"
-                  />
-                  <span className="text-sm">{labels.adventureLicenseCombats[n]}</span>
-                </label>
-              ))}
-            </div>
-          </div>
           <SettingToggle
             checked={settings.hasCompletedElementalTower}
             title={labels.elementalTowerCompleted}

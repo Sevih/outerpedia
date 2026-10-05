@@ -6,7 +6,7 @@
  *
  * La DONNÉE vit dans `shop-editorial.json` (éditable via /admin/guides,
  * general-guides) ; ce module n'en porte plus que les TYPES et la lecture typée.
- * Les 8 shops permanents « à monnaie », eux, dérivent du jeu
+ * Les 7 shops permanents « à monnaie », eux, dérivent du jeu
  * (`data/generated/shop-priorities.json`, priorité/notes dans l'overlay curé).
  */
 import type { LocalizedText } from '@contracts';

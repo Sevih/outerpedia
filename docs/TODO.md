@@ -14,12 +14,14 @@
       05/10 est commitée en local : ne pas pousser (ni `pnpm quick`) avant
       le patch.
 - [ ] **Fin de l'Adventure License** : guides masqués, mode sorti de
-      `most-used-units` et de `unlock-content`. Restent deux lots de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) : **B20** (suivi de
-      progression, guides `quirk`, `daily-stamina`,
-      `shop-purchase-priorities` — Opus, seul, lançable dès la veille) et
-      **F13** (calculateur de dégâts — agent Fable dédié, seul, après le
-      `pnpm dev` du patch).
+      `most-used-units`, de `unlock-content`, du suivi de progression et des
+      guides `quirk`, `daily-stamina`, `shop-purchase-priorities` (lot B20,
+      FAIT le 05/10). Reste le lot **F13** de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (calculateur de
+      dégâts — agent Fable dédié, seul, après le `pnpm dev` du patch), et
+      après ce `pnpm dev` : les priorités des produits arrivés au Survey Hub
+      (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
+      `ui/shop/al` du manifeste d'assets.
 
 ## 🎴 Portraits animés
 

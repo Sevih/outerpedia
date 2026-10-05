@@ -48,9 +48,6 @@ export interface TrackerLabels {
   availableNow: string;
   vhtFloors: string;
   vhtNextUnlock: string;
-  adventureLicense: string;
-  adventureLicenseDesc: string;
-  adventureLicenseCombats: Record<2 | 3 | 4, string>;
   terminusSupportPack: string;
   terminusSupportPackDesc: string;
   veronicaPremiumPack: string;

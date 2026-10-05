@@ -1,8 +1,8 @@
 /**
  * Guide « Shop Purchase Priorities » — un onglet par shop.
  *
- * Les 8 shops permanents « à monnaie » (guild, joint, friend, arena, stars,
- * worldboss, adventure-license, survey) DÉRIVENT du jeu
+ * Les 7 shops permanents « à monnaie » (guild, joint, friend, arena, stars,
+ * worldboss, survey) DÉRIVENT du jeu
  * (data/generated/shop-priorities.json) : noms/coûts/limites toujours à jour
  * (c'était ~1000 lignes codées en dur, déjà périmées). Seule la priorité S/A/B/C
  * et les notes sont éditoriales (overlay curé, fusionné au build). Les shops

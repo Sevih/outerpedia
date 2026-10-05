@@ -7,6 +7,97 @@
 
 ## 2026-10-05
 
+- **Fin de l'Adventure License : le mode sort du suivi de progression et de
+  trois guides généraux** (Opus, lot B20 ; commit local, À NE PAS POUSSER
+  avant le patch du 06/10). Le patch ferme le mode, retire et rembourse son
+  arbre de quirks, vide sa boutique ; les 26 guides étaient déjà masqués, il
+  restait ce qui le citait comme vivant. Tout est écrit pour se rendre avec
+  les données d'aujourd'hui (qui portent encore le mode) comme avec celles
+  de demain. (1) Suivi de progression — la tâche hebdomadaire
+  `adventure-license`, le réglage `adventureLicenseCombatsPerStage`
+  (`tracker.ts`, `contracts.ts`, le bloc radio de `SettingsModal.tsx`), les
+  lignes `shop-weekly-al-proof-of-worth` et `shop-weekly-al-gem-chest`,
+  l'icône `progress.shop.adventure-license` et sept clés `progress.*` (six
+  locales) sont retirés. Lignes Survey Hub au niveau de la note (section 7
+  du post 11653) : `Transistone (Individual)` et `Transistone (Total)` 2 → 4
+  par mois, `Refined Glunite` 5 → 8 par mois, et une ligne hebdomadaire
+  nouvelle `shop-weekly-survey-gem-chest` (`Stage 5–6 Gem Chest`, 2 par
+  semaine, sous-catégorie et icône des lignes Survey Hub existantes). État
+  déjà stocké chez un visiteur : rien à migrer, les deux filtres existants
+  suffisent — `normalizeSettings` ne recopie que les champs qu'elle connaît
+  et ne garde que les ids définis, `syncProgressWithSettings` reconstruit
+  chaque liste depuis les ids actifs ; quatre tests nouveaux dans
+  `tracker.test.ts` le figent (réglages et progression d'avant la fermeture,
+  import d'un export d'avant, quantités Survey Hub). La Dimensional
+  Singularity n'est pas touchée. (2) `general-guides/quirk` — catégorie
+  `adventure`, terme `{ICON_AL}`, sa description, le paragraphe de priorité
+  (« only tree that requires Proof of Worth »), l'exception au niveau 9 (dans
+  « How It Works » et dans la FAQ) et la ligne de matériau Proof of Worth
+  retirés en six langues ; l'intro ne cite plus que Proof of Destiny et
+  Token of Connection. Le guide ne déroule plus `quirks.json` tel quel : il
+  filtre sur les catégories qu'il sait nommer, donc le groupe `adventure`
+  encore présent aujourd'hui est ignoré (onglet des arbres et catalogue des
+  matériaux compris) et son départ demain ne change rien. Contrôlé dans la
+  table : les quatre catégories restantes débloquent tous leurs sous-nœuds
+  au niveau 5 du nœud principal et ne coûtent que les deux matériaux cités.
+  (3) `general-guides/daily-stamina` — la carte de priorité 5 et sa mention
+  dans le total, six langues. Les chiffres tiennent : 510 = 480
+  (Identification) + 30 (Terminus Isle), 990 avec Ecology Study ; le mode
+  n'était que dans la liste « + … ». Deux références d'item à parse-text
+  strict (`License Point`, `Adventurer Chest`) partent avec la carte : elles
+  auraient cassé le rendu si ces items quittent le catalogue. (4)
+  `general-guides/shop-purchase-priorities` — retiré à la source : la ligne
+  `al` du générateur `shop-priorities.ts` (qui JETTE sur un shop sans
+  produit courant : le refresh de demain aurait planté dessus), l'onglet de
+  `labels.ts`, les douze entrées `al/…` du curé, et `al` dans l'ordre et les
+  libellés de l'éditeur admin (`ShopBlocks.tsx`).
+  `data/generated/shop-priorities.json` régénéré (`pnpm datagen:build`, puis
+  `pnpm datagen:promote --only shop-priorities.json --apply`, rien d'autre
+  de promu) : comparé avant d'appliquer, identique à l'ancien hors la
+  section `al` (12 produits). Les commentaires qui comptaient « 8 shops »
+  disent 7. `updated` des trois guides au 05/10. Vérification :
+  `pnpm typecheck` (dernière ligne : la commande
+  `tsc --noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint`
+  (`eslint`, sans sortie), `pnpm test`
+  (« Tests 2313 passed (2313) », 184 fichiers). Serveur de dev
+  lu une fois : `/guides/general-guides/quirk` (aussi en `fr` et `jp`),
+  `/guides/general-guides/daily-stamina`,
+  `/guides/general-guides/shop-purchase-priorities` et `/progress-tracker`
+  (l'outil est servi à la racine, `/tools/progress-tracker` rend 404) → 200,
+  aucune mention du mode, le coffre de gemmes présent avec son sprite. Seul
+  changement visuel, demandé : une carte de moins dans `daily-stamina` (la
+  grille à deux colonnes finit sur une carte seule). Ce que rend encore
+  `grep -ri "adventure.license\|license point\|proof of worth"` sur `src` et
+  `data/curated`, hors des 26 guides — le hors-périmètre décidé : calculateur
+  (`damage-calculator/index.tsx`, `src/lib/damage/**`, la clé
+  `tools.damage-calculator.settings.quirk_adventure_license`, lot F13),
+  `roadmap-2026-h2`, l'outillage des pages masquées (`guide-categories.ts`,
+  `category-views/`, `guide-accents.ts`, `BossStats.tsx`, `monster-stats.ts`,
+  `[slug]/page.tsx`, les clés `guides.adventure_license.*`,
+  `mode-titles.json`, l'admin des guides, `guides.test.ts`,
+  `encounters.test.ts`, `video-title.test.ts`), les sources d'équipement
+  (`equip.source.adventure_license`, `equipment.ts`, `cards.tsx`,
+  `EquipmentBrowser.tsx`) ; et, hors liste mais laissés en connaissance de
+  cause : `data/curated/changelog.json` (journal historique),
+  `SYS_ASSET_ADVENTURE_LICENSE` dans `data/curated/items.json` (icône de la
+  monnaie, les sources d'équipement s'en servent), un commentaire de
+  `most-used-units/usage.ts`, et mes propres commentaires et tests
+  (`tasks.ts`, `quirk/index.tsx`, `tracker.test.ts`). Laissé : aucune
+  priorité inventée pour les douze produits qui arrivent ou changent au
+  Survey Hub (éditorial de Sevih, ils sortiront « à trancher » au build) ;
+  l'icône d'onglet `ui/shop/al` reste dans `datagen/assets/manifest.ts`
+  (hors `src`, touche à la collecte d'assets) ; un visiteur qui avait déjà
+  des réglages stockés ne voit pas la nouvelle ligne du coffre cochée
+  d'office — c'est la règle de toute nouvelle ligne de boutique (liste
+  stockée respectée), pas reportée depuis l'ancienne ligne ; dans la FAQ du
+  guide quirk, « Most main nodes should be upgraded to 5/10 » est resté tel
+  quel (conseil, il ne compte pas l'arbre retiré). À confirmer au refresh de
+  demain : `quirks.json` perd le groupe `adventure` (le guide n'y verra
+  aucune différence, le calculateur si — F13), plus aucun produit courant en
+  `PBT_ADVENTURE_LICENSE`, les produits du Survey Hub portent bien 4 / 4 / 8
+  par mois et le coffre 2 par semaine, et `Stage 5–6 Gem Chest` garde ce nom
+  anglais au catalogue (le tracker le résout par nom ; sinon la ligne
+  s'affiche sans sprite).
 - **Préparation du patch du 06/10 : feuille de route, et tout ce qui pouvait
   se faire sans les données** (Fable, à la demande de Sevih ; cinq commits
   locaux, À NE PAS POUSSER avant le patch — un enregistrement `pnpm quick`

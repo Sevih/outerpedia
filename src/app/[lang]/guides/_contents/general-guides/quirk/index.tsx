@@ -15,7 +15,7 @@ import { parseText, type ParseCtx } from '@/lib/parse-text';
 import { SegmentedTabs, type TabItem } from '@/components/guides/SegmentedTabs';
 import { Prose, Callout, MiniPanel, QACard } from '@/components/guides/editorial/blocks';
 import type { EditorialAccent } from '@/components/guides/editorial/accents';
-import type { LocalizedText } from '@contracts';
+import type { LocalizedText, QuirksData } from '@contracts';
 import { getQuirks } from '@/lib/data/quirks';
 import { LABELS, TERMS, ICON_TERM } from './labels';
 import { QuirkTrees, type LocalCategory } from '@/components/quirks/QuirkTrees';
@@ -26,29 +26,34 @@ import {
   quirkTreeSubLabel,
 } from '@/components/quirks/localize';
 
-const quirks = getQuirks();
-
 /** Nom localisé des catégories (par clé de groupe). */
 const CATEGORY_TERM: Record<string, keyof typeof TERMS> = {
   pve: 'counteractStrongEnemies',
   class: 'classEnhancement',
   elemental: 'elementEnhancement',
   utility: 'utility',
-  adventure: 'adventureLicense',
 };
 const CATEGORY_ACCENT: Record<string, EditorialAccent> = {
   pve: 'rose',
   class: 'amber',
   elemental: 'sky',
   utility: 'emerald',
-  adventure: 'violet',
 };
 const CATEGORY_DESC: Record<string, LocalizedText> = {
   pve: LABELS.catCounteract,
   class: LABELS.catClass,
   elemental: LABELS.catElement,
   utility: LABELS.catUtility,
-  adventure: LABELS.catAdventure,
+};
+
+/**
+ * Les catégories que le guide présente. Un groupe de la table sans libellé ici
+ * est IGNORÉ, pas affiché sans titre : l'arbre de l'Adventure License a été
+ * retiré du jeu (et remboursé) au patch du 06/10/2026, et `quirks.json` le
+ * porte tant que le refresh ne l'en a pas sorti.
+ */
+const quirks: QuirksData = {
+  categories: getQuirks().categories.filter((c) => c.key in CATEGORY_TERM),
 };
 
 export default async function QuirkGuide({ lang }: { lang: Lang }) {
@@ -114,7 +119,7 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
         <h3 className="text-content-strong font-semibold">{L(LABELS.howItWorks)}</h3>
         <ul className="text-content list-disc space-y-1.5 pl-5">
           <li>{L(LABELS.howP1)}</li>
-          <li>{PQ(LABELS.howP2)}</li>
+          <li>{L(LABELS.howP2)}</li>
           <li>{P(LABELS.howP3)}</li>
           <li>{P(LABELS.howP4)}</li>
         </ul>
@@ -125,7 +130,6 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
         <Prose>{PQ(LABELS.priorityP1)}</Prose>
         <Prose>{PQ(LABELS.priorityP2)}</Prose>
         <Prose>{PQ(LABELS.priorityP3)}</Prose>
-        <Prose>{PQ(LABELS.priorityP4)}</Prose>
       </div>
 
       <Callout accent="sky" label={L(LABELS.earlyGameExample)}>
@@ -163,7 +167,6 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
       </QACard>
       <QACard accent="amber" question={L(LABELS.faqSubnodesTitle)}>
         <Prose>{L(LABELS.faqSubnodesP1)}</Prose>
-        <Prose>{PQ(LABELS.faqSubnodesP2)}</Prose>
       </QACard>
       <QACard accent="rose" question={L(LABELS.faqSkipTitle)}>
         <Prose>{L(LABELS.faqSkipIntro)}</Prose>
@@ -178,7 +181,6 @@ export default async function QuirkGuide({ lang }: { lang: Lang }) {
         <ul className="text-content list-disc space-y-1 pl-5">
           <li>{P(LABELS.faqMaterialProofDestiny)}</li>
           <li>{P(LABELS.faqMaterialTokenConnection)}</li>
-          <li>{P(LABELS.faqMaterialProofWorth)}</li>
         </ul>
       </QACard>
     </div>

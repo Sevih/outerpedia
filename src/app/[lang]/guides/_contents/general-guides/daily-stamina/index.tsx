@@ -1,6 +1,6 @@
 /**
  * Guide « Daily Stamina Burn » — la roadmap quotidienne de dépense de stamina
- * (5 priorités numérotées + suggestions hors endgame + pro tips).
+ * (4 priorités numérotées + suggestions hors endgame + pro tips).
  *
  * Server Component : contenu verbatim (labels.ts) sur les primitives
  * éditoriales ; parse-text STRICT (une référence d'item morte casse le build).
@@ -96,7 +96,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
     </div>
   );
 
-  /** Carte de priorité 2..5 (grille) : numéro + titre + coût + corps. */
+  /** Carte de priorité 2..4 (grille) : numéro + titre + coût + corps. */
   const priorityCard = (
     n: number,
     heading: LocalizedText,
@@ -137,7 +137,7 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* ── 2-5. Autres priorités ── */}
+      {/* ── 2-4. Autres priorités ── */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {priorityCard(
           2,
@@ -172,12 +172,6 @@ export default async function DailyStaminaGuide({ lang }: { lang: Lang }) {
           LABELS.heading_towerFloors,
           LABELS.cost_towerFloors,
           P(LABELS.body_towerFloors),
-        )}
-        {priorityCard(
-          5,
-          LABELS.heading_adventureLicense,
-          LABELS.cost_adventureLicense,
-          <span className="whitespace-pre-line">{P(LABELS.body_adventureLicense)}</span>,
         )}
       </div>
 

@@ -63,7 +63,6 @@ describe('réglages', () => {
     expect(s.enabledTasks.daily).toContain('shop-daily-free-gift');
     expect(s.enabledTasks.weekly).toContain('craft-weekly-blue-stardust');
     expect(s.enabledTasks.daily).not.toContain('joint-challenge');
-    expect(s.adventureLicenseCombatsPerStage).toBe(2);
     expect(s.displayMode).toBe('tabs');
   });
 
@@ -75,7 +74,6 @@ describe('réglages', () => {
         weekly: ['arena-battle'],
         monthly: ['skyward-tower-100'],
       },
-      adventureLicenseCombatsPerStage: 99,
     });
     expect(s.enabledTasks.daily).not.toContain('vieux-contenu-disparu');
     expect(s.enabledTasks.daily).toContain('story-hard');
@@ -85,12 +83,11 @@ describe('réglages', () => {
     );
     // les entrées boutique désactivées RESTENT désactivées
     expect(s.enabledTasks.daily).not.toContain('shop-daily-free-gift');
-    expect(s.adventureLicenseCombatsPerStage).toBe(2);
     // idempotence
     expect(normalizeSettings(s)).toEqual(s);
   });
 
-  it('getTaskMaxCount : modulé par les packs et le réglage licence', () => {
+  it('getTaskMaxCount : modulé par les packs', () => {
     const base = createDefaultSettings();
     expect(getTaskMaxCount('terminus-isle', 'daily', base)).toBe(1);
     expect(
@@ -104,14 +101,6 @@ describe('réglages', () => {
         settingsWith({ hasVeronicaPremiumPack: true }),
       ),
     ).toBe(4);
-    expect(getTaskMaxCount('adventure-license', 'weekly', base)).toBe(6);
-    expect(
-      getTaskMaxCount(
-        'adventure-license',
-        'weekly',
-        settingsWith({ adventureLicenseCombatsPerStage: 4 }),
-      ),
-    ).toBe(12);
     expect(getTaskMaxCount('story-hard', 'daily', base)).toBe(30);
   });
 });
@@ -375,6 +364,67 @@ describe('interprétation de l’ancien schéma et import/export', () => {
     expect(imported.progress.daily['story-hard'].count).toBe(3);
     expect(imported.settings).toBeNull();
     expect(importState('{pas du json')).toBeNull();
+  });
+});
+
+// L'Adventure License a fermé au patch du 06/10/2026 : sa tâche hebdomadaire,
+// son réglage « combats par étage » et les deux lignes de sa boutique sont
+// sortis des définitions. Un visiteur revient avec un état stocké qui les porte
+// encore — rien ne doit planter, et aucune ligne sans définition ne doit rester.
+describe('état stocké d’avant la fermeture de l’Adventure License', () => {
+  const GONE = ['adventure-license', 'shop-weekly-al-proof-of-worth', 'shop-weekly-al-gem-chest'];
+  const current = createDefaultSettings();
+  const storedSettings = {
+    ...current,
+    enabledTasks: { ...current.enabledTasks, weekly: [...GONE, ...current.enabledTasks.weekly] },
+    adventureLicenseCombatsPerStage: 4,
+  };
+  const storedProgress = {
+    ...reconcileProgress(EMPTY_PROGRESS, current, WED),
+    weekly: {
+      ...reconcileProgress(EMPTY_PROGRESS, current, WED).weekly,
+      'adventure-license': { count: 9, lastUpdated: WED },
+      'shop-weekly-al-proof-of-worth': { count: 25, lastUpdated: WED },
+      'shop-weekly-al-gem-chest': { count: 2, lastUpdated: WED },
+    },
+  };
+
+  it('réglages : les ids disparus et le réglage licence sont écartés', () => {
+    const s = normalizeSettings(storedSettings);
+    for (const id of GONE) expect(s.enabledTasks.weekly).not.toContain(id);
+    expect(s).not.toHaveProperty('adventureLicenseCombatsPerStage');
+    expect(s).toEqual(current);
+  });
+
+  it('progression : aucune ligne fantôme, le reste de la semaine est conservé', () => {
+    const s = normalizeSettings(storedSettings);
+    const withArena = {
+      ...storedProgress,
+      weekly: { ...storedProgress.weekly, 'arena-battle': { count: 12, lastUpdated: WED } },
+    };
+    const view = reconcileProgress(withArena, s, WED);
+    for (const id of GONE) expect(view.weekly[id]).toBeUndefined();
+    expect(view.weekly['arena-battle'].count).toBe(12);
+    // Les stats ne comptent que des tâches définies.
+    expect(getStats(view, s, WED).weekly.total).toBe(Object.keys(view.weekly).length);
+    expect(Object.keys(view.weekly).every((id) => s.enabledTasks.weekly.includes(id))).toBe(true);
+  });
+
+  it('import d’un export d’avant la fermeture : même tri', () => {
+    const imported = importState(exportState(storedProgress, storedSettings as UserSettings))!;
+    expect(imported.settings).toEqual(current);
+    const view = reconcileProgress(imported.progress, imported.settings!, WED);
+    for (const id of GONE) expect(view.weekly[id]).toBeUndefined();
+  });
+
+  it('le coffre de gemmes se suit désormais au Survey Hub, 2 par semaine', () => {
+    expect(current.enabledTasks.weekly).toContain('shop-weekly-survey-gem-chest');
+    expect(getTaskMaxCount('shop-weekly-survey-gem-chest', 'weekly', current)).toBe(2);
+    expect(getTaskMaxCount('shop-monthly-survey-transistone-individual', 'monthly', current)).toBe(
+      4,
+    );
+    expect(getTaskMaxCount('shop-monthly-survey-transistone-total', 'monthly', current)).toBe(4);
+    expect(getTaskMaxCount('shop-monthly-survey-glunite', 'monthly', current)).toBe(8);
   });
 });
 

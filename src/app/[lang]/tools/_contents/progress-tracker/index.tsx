@@ -26,7 +26,6 @@ const SHOP_CURRENCY_ICONS: Record<string, string> = {
   'progress.shop.joint-challenge': 'TI_Item_BossEvent_Coin_01',
   'progress.shop.guild-shop': 'CM_Goods_Guild_Coin',
   'progress.shop.world-boss': 'TI_Item_World_Boss',
-  'progress.shop.adventure-license': 'TI_Licence',
   'progress.shop.survey-hub': 'TI_Item_Research_Point',
 };
 
@@ -106,13 +105,6 @@ export default async function ProgressTracker({ lang }: { lang: Lang }) {
     availableNow: t('progress.availableNow'),
     vhtFloors: t('progress.vht.floors'),
     vhtNextUnlock: t('progress.vht.nextUnlock'),
-    adventureLicense: t('progress.adventureLicense'),
-    adventureLicenseDesc: t('progress.adventureLicenseDesc'),
-    adventureLicenseCombats: {
-      2: t('progress.adventureLicenseCombats2'),
-      3: t('progress.adventureLicenseCombats3'),
-      4: t('progress.adventureLicenseCombats4'),
-    },
     terminusSupportPack: t('progress.terminusSupportPack'),
     terminusSupportPackDesc: t('progress.terminusSupportPackDesc'),
     veronicaPremiumPack: t('progress.veronicaPremiumPack'),

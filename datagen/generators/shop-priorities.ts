@@ -8,7 +8,10 @@
  * l'éditorial (priorité S/A/B/C + notes) vit dans l'overlay curé
  * `data/curated/shop-priorities.json`, keyé par un slug STABLE (cf. plus bas).
  *
- * Huit shops permanents « à monnaie » sont dérivés (un `ProductBuyType` chacun).
+ * Sept shops permanents « à monnaie » sont dérivés (un `ProductBuyType` chacun).
+ * L'Adventure License en était un huitième (`PBT_ADVENTURE_LICENSE`) : le mode
+ * et sa boutique ont fermé au patch du 06/10/2026, une partie de ses produits
+ * est passée au Survey Hub.
  * Les shops variables (Event, Rico, Supply, General/Resource) restent éditoriaux
  * dans le guide — contenu qui change à chaque event ou sélection curée, pas un
  * shop entier à refléter.
@@ -32,7 +35,7 @@ import { readCuratedJson } from '../lib/json';
 import { buildItemCatalog, COSTUME_PREFIX, type CatalogEntry } from './item-catalog';
 import { buildEquipment, type EquipmentData } from './equipment';
 
-/** Les 8 shops permanents dérivables : monnaie d'achat → clé de shop + asset monnaie. */
+/** Les 7 shops permanents dérivables : monnaie d'achat → clé de shop + asset monnaie. */
 const SHOPS: { key: string; buyType: string; currencyId: string }[] = [
   { key: 'guild', buyType: 'PBT_GUILD_COIN', currencyId: 'SYS_ASSET_GUILD_COIN' },
   { key: 'joint', buyType: 'PBT_EVENT_BOSS_COIN', currencyId: 'SYS_ASSET_EVENT_BOSS_COIN' },
@@ -40,7 +43,6 @@ const SHOPS: { key: string; buyType: string; currencyId: string }[] = [
   { key: 'arena', buyType: 'PBT_PVP', currencyId: 'SYS_ASSET_PVP_POINT' },
   { key: 'stars', buyType: 'PBT_MEMORY_STAR', currencyId: 'SYS_ASSET_MEMORY_STAR' },
   { key: 'worldboss', buyType: 'PBT_WORLD_BOSS_COIN', currencyId: 'SYS_ASSET_WORLD_BOSS_COIN' },
-  { key: 'al', buyType: 'PBT_ADVENTURE_LICENSE', currencyId: 'SYS_ASSET_ADVENTURE_LICENSE' },
   { key: 'survey', buyType: 'PBT_RESEARCH', currencyId: 'SYS_ASSET_RESEARCH' },
 ];
 

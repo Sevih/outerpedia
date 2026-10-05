@@ -15,6 +15,11 @@
  * devenue celle de la Dimensional Singularity (cf. le guide `ether-income`).
  * La définition part avec ses cinq clés `progress.task.*` ; git les garde.
  *
+ * Et le 06/10 pour la tâche hebdomadaire `adventure-license`, son réglage
+ * « combats par étage » et les deux lignes de sa boutique : le mode a fermé.
+ * Un état stocké qui porte encore ces ids les perd à la lecture
+ * (`normalizeSettings`, `syncProgressWithSettings`).
+ *
  * Libellé d'une tâche : les entrées AVEC `shopItemKey` sont libellées par
  * l'item du catalogue (résolu côté serveur, nom localisé + sprite) ; les
  * autres par la clé i18n `progress.task.<id>`. On stockait avant un `labelKey`
@@ -221,8 +226,6 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
 
 export const WEEKLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('weekly', {
   'arena-battle': { category: 'task', permanent: true, maxCount: 30 },
-  // Dynamique : 2/3/4 combats par étage (réglage) × 3 étages = 6/9/12
-  'adventure-license': { category: 'task', permanent: true, maxCount: 12 },
   // Premium Shop > Normal > Daily/Weekly/Monthly
   'shop-weekly-free-gift': {
     category: 'shop',
@@ -395,24 +398,15 @@ export const WEEKLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('we
     shopItemKey: 'Transistone (Total)',
     shopItemQuantity: 1,
   },
-  // Adventurer Shop > Adventure License
-  'shop-weekly-al-proof-of-worth': {
+  // Adventurer Shop > Survey Hub (le coffre y est passé à la fermeture de
+  // l'Adventure License, patch du 06/10/2026)
+  'shop-weekly-survey-gem-chest': {
     category: 'shop',
     permanent: true,
-    icon: 'TI_Licence',
-    maxCount: 25,
-    shopCategory: 'progress.shop.adventurer-shop',
-    shopSubcategory: 'progress.shop.adventure-license',
-    shopItemKey: 'Proof of Worth',
-    shopItemQuantity: 1,
-  },
-  'shop-weekly-al-gem-chest': {
-    category: 'shop',
-    permanent: true,
-    icon: 'TI_Licence',
+    icon: 'TI_Item_Research_Point',
     maxCount: 2,
     shopCategory: 'progress.shop.adventurer-shop',
-    shopSubcategory: 'progress.shop.adventure-license',
+    shopSubcategory: 'progress.shop.survey-hub',
     shopItemKey: 'Stage 5–6 Gem Chest',
     shopItemQuantity: 1,
   },
@@ -671,7 +665,7 @@ export const MONTHLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('m
     category: 'shop',
     permanent: true,
     icon: 'TI_Item_Research_Point',
-    maxCount: 2,
+    maxCount: 4,
     shopCategory: 'progress.shop.adventurer-shop',
     shopSubcategory: 'progress.shop.survey-hub',
     shopItemKey: 'Transistone (Individual)',
@@ -681,7 +675,7 @@ export const MONTHLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('m
     category: 'shop',
     permanent: true,
     icon: 'TI_Item_Research_Point',
-    maxCount: 2,
+    maxCount: 4,
     shopCategory: 'progress.shop.adventurer-shop',
     shopSubcategory: 'progress.shop.survey-hub',
     shopItemKey: 'Transistone (Total)',
@@ -691,7 +685,7 @@ export const MONTHLY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('m
     category: 'shop',
     permanent: true,
     icon: 'TI_Item_Research_Point',
-    maxCount: 5,
+    maxCount: 8,
     shopCategory: 'progress.shop.adventurer-shop',
     shopSubcategory: 'progress.shop.survey-hub',
     shopItemKey: 'Refined Glunite',
