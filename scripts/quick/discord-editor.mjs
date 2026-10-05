@@ -768,15 +768,17 @@ export function insertTimestamp(edit, unix, style = 'f') {
 const CODE_SPAN = /```[\s\S]*?```|``[^\n]+?``|`[^`\n]+`/g;
 
 /**
- * Une date écrite pour être convertie. Le suffixe ` UTC` est EXIGÉ — une date
- * nue reste du texte — et `UTC+2` n'est pas de l'UTC.
+ * Une date écrite pour être convertie, avec ou sans heure. Le suffixe ` UTC`
+ * est EXIGÉ — une date nue reste du texte — et `UTC+2` n'est pas de l'UTC.
  */
-const UTC_STAMP = /(?<!\d)(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}) UTC(?![\w+]|-\d)/g;
+const UTC_STAMP = /(?<!\d)(\d{4}-\d{2}-\d{2})(?: (\d{2}:\d{2}))? UTC(?![\w+]|-\d)/g;
 
 /**
  * Remplace dans tout le texte chaque `AAAA-MM-JJ HH:MM UTC` par `<t:…:f>` —
  * c'est sous cette forme qu'un modèle écrit ses dates, lui qui ne sait pas
- * calculer un instant Unix. Hors du code ; une date qui n'existe pas est
+ * calculer un instant Unix. Une date SANS heure (`AAAA-MM-JJ UTC`) devient une
+ * date seule, `<t:…:D>`, posée à MIDI UTC : à minuit, les lecteurs à l'ouest
+ * de Greenwich liraient la veille. Hors du code ; une date qui n'existe pas est
  * laissée telle quelle et rendue dans `invalid`. La sélection suit son texte.
  * @param {Edit} edit
  * @returns {{ edit: Edit, count: number, invalid: string[] }}
@@ -792,12 +794,12 @@ export function convertDates(edit) {
   let at = 0;
   for (const m of text.matchAll(UTC_STAMP)) {
     if (code.some(([a, b]) => m.index >= a && m.index < b)) continue;
-    const unix = utcToUnix(m[1], m[2]);
+    const unix = utcToUnix(m[1], m[2] ?? '12:00');
     if (unix === null) {
       invalid.push(m[0]);
       continue;
     }
-    const stamp = `<t:${unix}:f>`;
+    const stamp = `<t:${unix}:${m[2] ? 'f' : 'D'}>`;
     out += text.slice(at, m.index) + stamp;
     at = m.index + m[0].length;
     done.push({ from: m.index, to: at, length: stamp.length });

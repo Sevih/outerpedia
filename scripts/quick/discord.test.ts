@@ -73,6 +73,7 @@ import {
   prepareEmbed,
   previewHtml,
   renderDiscord,
+  restoreAnsi,
   renderEmbed,
   requestExamples,
   requestNote,
@@ -3500,5 +3501,39 @@ describe('la demande à coller dans claude.ai', () => {
     // Seul point du fichier lié au code : le reste se retouche librement.
     const prompt = readFileSync(resolve(import.meta.dirname, 'discord-prompt.md'), 'utf8');
     expect(prompt).toContain('YYYY-MM-DD HH:MM UTC');
+  });
+});
+
+describe('blocs ansi — les couleurs que Discord peint', () => {
+  const ESC = '\u001b';
+  const bare = '```ansi\n[1;32mSIGMA[0m\n[1;36mS1  [0m Damage +30%\n```';
+
+  it('`restoreAnsi` rend son ESC à chaque séquence d’un bloc ansi, et à elles seules', () => {
+    const fixed = restoreAnsi(bare);
+    expect(fixed).toBe(
+      `\`\`\`ansi\n${ESC}[1;32mSIGMA${ESC}[0m\n${ESC}[1;36mS1  ${ESC}[0m Damage +30%\n\`\`\``,
+    );
+    // Déjà en place : rien n'est doublé.
+    expect(restoreAnsi(fixed)).toBe(fixed);
+    // Hors d'un bloc ansi, `[1m` est du texte ; un crochet ordinaire aussi.
+    expect(restoreAnsi('[1;32m hors bloc\n```js\na[0m\n```')).toBe(
+      '[1;32m hors bloc\n```js\na[0m\n```',
+    );
+    expect(restoreAnsi('```ansi\n[Luna] x[12]\n```')).toBe('```ansi\n[Luna] x[12]\n```');
+  });
+
+  it('`prepare` envoie le bloc avec ses ESC, comptés dans la longueur', () => {
+    const p = prepare(bare, null);
+    expect(p.content).toBe(restoreAnsi(bare));
+    expect(p.length).toBe(bare.length + 4);
+  });
+
+  it('l’aperçu peint gras et couleur, retire les séquences, échappe le texte', () => {
+    const html = renderDiscord(restoreAnsi('```ansi\n[1;32mSIGMA[0m <b>\n```'));
+    expect(html).toBe(
+      '<pre><code><span style="color:#859900;font-weight:700;">SIGMA</span> &lt;b&gt;</code></pre>',
+    );
+    // Un bloc d'un autre langage garde ses crochets tels quels.
+    expect(renderDiscord('```js\n[1;32mx\n```')).toBe('<pre><code>[1;32mx</code></pre>');
   });
 });

@@ -284,9 +284,23 @@ export interface Prepared extends Converted, Split {
   length: number;
 }
 
-/** Le texte de l'éditeur → ce qui part : emojis convertis PUIS découpage. */
+/**
+ * Rétablit le caractère d'échappement des couleurs dans les blocs ```ansi.
+ *
+ * Discord colore un bloc `ansi` par des séquences `ESC[1;36m` — et ESC (U+001B)
+ * est invisible : un copier-coller ou un modèle rendent `[1;36m` SANS lui, que
+ * Discord affiche alors en toutes lettres. Dans un bloc `ansi`, et là seulement,
+ * une séquence `[…m` de codes numériques qui n'a pas son ESC le retrouve.
+ */
+export function restoreAnsi(text: string): string {
+  return text.replace(/```ansi\n[\s\S]*?```/g, (block) =>
+    block.replace(/(?<!\u001b)\[(\d{1,2}(?:;\d{1,2})*)m/g, '\u001b[$1m'),
+  );
+}
+
+/** Le texte de l'éditeur → ce qui part : couleurs rétablies, emojis convertis PUIS découpage. */
 export function prepare(text: string, guild: GuildEmojis, partial = false): Prepared {
-  const converted = convertEmojis(text.replace(/\r\n?/g, '\n'), guild, partial);
+  const converted = convertEmojis(restoreAnsi(text.replace(/\r\n?/g, '\n')), guild, partial);
   const content = converted.content.trim();
   return { ...converted, content, length: content.length, ...splitMessage(converted.content) };
 }
@@ -576,6 +590,51 @@ function blocks(lines: string[], marks: Marks, code: string[], quoted: boolean):
   return html;
 }
 
+/** Les huit couleurs de texte d'un bloc `ansi`, telles que Discord les peint. */
+const ANSI_COLORS: Record<number, string> = {
+  30: '#4f545c',
+  31: '#dc322f',
+  32: '#859900',
+  33: '#b58900',
+  34: '#268bd2',
+  35: '#d33682',
+  36: '#2aa198',
+  37: '#ffffff',
+};
+
+/**
+ * Un bloc `ansi` comme Discord l'affiche : gras (1), souligné (4), couleur de
+ * texte (30 à 37), remise à zéro (0). Les couleurs de fond (40 à 47) ne sont
+ * pas peintes dans l'aperçu ; toute séquence est retirée du texte affiché.
+ */
+function ansiHtml(body: string): string {
+  let html = '';
+  let bold = false;
+  let underline = false;
+  let color = '';
+  for (const part of body.split(/(\u001b\[[\d;]*m)/)) {
+    const seq = /^\u001b\[([\d;]*)m$/.exec(part);
+    if (seq) {
+      for (const n of (seq[1] || '0').split(';').map(Number)) {
+        if (n === 0) {
+          bold = underline = false;
+          color = '';
+        } else if (n === 1) bold = true;
+        else if (n === 4) underline = true;
+        else if (ANSI_COLORS[n]) color = ANSI_COLORS[n];
+      }
+      continue;
+    }
+    if (!part) continue;
+    const style =
+      (color ? `color:${color};` : '') +
+      (bold ? 'font-weight:700;' : '') +
+      (underline ? 'text-decoration:underline;' : '');
+    html += style ? `<span style="${style}">${escapeHtml(part)}</span>` : escapeHtml(part);
+  }
+  return html;
+}
+
 /**
  * Rend un message comme Discord l'affichera — HTML sûr, à poser dans un
  * conteneur `.dc` (les styles sont dans `ui.html`). Reçoit le texte DÉJÀ
@@ -583,7 +642,7 @@ function blocks(lines: string[], marks: Marks, code: string[], quoted: boolean):
  *
  * Couvert : titres `#` `##` `###`, sous-texte `-# `, citations `> ` et `>>> `,
  * listes `- ` / `* ` imbriquées, gras, italique, souligné, barré, spoiler, code
- * en ligne et en bloc, liens masqués, URL nues, sauts de ligne tels quels,
+ * en ligne et en bloc (couleurs d'un bloc `ansi` comprises), liens masqués, URL nues, sauts de ligne tels quels,
  * horodatages `<t:…>` (hors du code, comme les emojis ; cf. `formatTimestamp`).
  * Pas couvert (rendu en texte) : listes numérotées, mise en forme à cheval sur
  * plusieurs lignes.
@@ -592,8 +651,9 @@ export function renderDiscord(content: string, marks: Marks = {}): string {
   const code: string[] = [];
   const text = content
     .replace(PRIVATE, '')
-    .replace(/```(?:[A-Za-z0-9_+-]*\n)?([\s\S]*?)```/g, (_, body: string) => {
-      code.push(escapeHtml(body.replace(/\n$/, '')));
+    .replace(/```(?:([A-Za-z0-9_+-]*)\n)?([\s\S]*?)```/g, (_, lang: string, body: string) => {
+      const inner = body.replace(/\n$/, '');
+      code.push(lang === 'ansi' ? ansiHtml(inner) : escapeHtml(inner));
       return `${BLOCK}${code.length - 1}${BLOCKED}`;
     });
   return blocks(text.split('\n'), marks, code, false);
@@ -792,7 +852,7 @@ export function prepareEmbed(
     return '';
   };
 
-  const description = convertEmojis(lf(text), guild, partial);
+  const description = convertEmojis(restoreAnsi(lf(text)), guild, partial);
   note(description);
   const split = splitMessage(description.content, EMBED_DESCRIPTION_LIMIT);
 

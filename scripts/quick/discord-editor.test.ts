@@ -849,4 +849,24 @@ describe('horodatages — « convertir les dates »', () => {
     });
     expect(convertDates(once.edit)).toEqual({ edit: once.edit, count: 0, invalid: [] });
   });
+
+  it('une date SANS heure devient une date seule, posée à midi UTC', () => {
+    const r = convertDates({
+      text: 'Bingo : 2026-10-06 UTC ~ 2026-10-20 23:59 UTC',
+      start: 0,
+      end: 0,
+    });
+    expect(r.count).toBe(2);
+    // Midi UTC : le même jour de calendrier de UTC-12 à UTC+11.
+    expect(r.edit.text).toBe(
+      `Bingo : <t:${Date.UTC(2026, 9, 6, 12) / 1000}:D> ~ <t:${Date.UTC(2026, 9, 20, 23, 59) / 1000}:f>`,
+    );
+    // Sans le suffixe, une date nue reste du texte ; dans du code aussi.
+    expect(convertDates({ text: '2026-10-06 et `2026-10-06 UTC`', start: 0, end: 0 }).count).toBe(
+      0,
+    );
+    expect(convertDates({ text: '2026-02-30 UTC', start: 0, end: 0 }).invalid).toEqual([
+      '2026-02-30 UTC',
+    ]);
+  });
 });

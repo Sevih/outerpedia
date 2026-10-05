@@ -7,6 +7,26 @@
 
 ## 2026-10-05
 
+- **Onglet Discord de quick, après le premier jet réel de Sevih : couleurs
+  des blocs `ansi`, dates sans heure, consignes resserrées** (Fable). Son
+  premier jet (note du 06/10, via claude.ai) avait trois défauts. (1) Trop
+  long : `discord-prompt.md` pose maintenant la longueur en première règle
+  (un seul message de 2 000 caractères, 3 500 au plus si plusieurs héros
+  sont rééquilibrés, une ligne par item, cinq items par section, quatre
+  correctifs au plus) et l'ordre dans lequel couper. (2) Les couleurs ne
+  marchaient pas : Discord colore un bloc `ansi` par `ESC[1;36m`, et ESC est
+  invisible — un modèle ou un copier-coller rendent `[1;36m` sans lui.
+  `restoreAnsi` le rétablit dans les blocs `ansi`, et là seulement, avant
+  conversion des emojis et découpage (`prepare`, `prepareEmbed`) ; l'aperçu
+  peint gras, souligné et les huit couleurs de texte (`ansiHtml`). (3) Des
+  dates restaient en texte : celles sans heure, que mes consignes laissaient
+  nues. `convertDates` prend aussi `AAAA-MM-JJ UTC` et en fait une date
+  seule (`<t:…:D>`) posée à MIDI UTC, pour que personne ne lise la veille ;
+  les consignes exigent le suffixe ` UTC` sur toute date et interdisent les
+  dates dans du code. Tests ajoutés des trois ; typecheck, lint, tests verts
+  (187 fichiers, 2 589 tests). Non vérifié : le rendu des couleurs par
+  Discord lui-même et un second jet avec les nouvelles consignes — essai de
+  Sevih.
 - **Onglet Discord de quick : consignes de la demande tirées des résumés
   réels, et appariement par le chemin du lien** (Fable, suite de B24 après
   le premier import de Sevih). L'import du salon d'annonces d'EvaMains a
