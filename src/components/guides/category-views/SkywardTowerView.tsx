@@ -52,13 +52,16 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
     );
 
   // Section ÉLÉMENTAIRE, dans l'ordre canonique des éléments (Fire…Dark).
+  // Une tour de ce menu SANS élément (la Universal Tower, ouverte à tous) y
+  // figure aussi, en dernier : filtrée sur `element`, elle n'apparaissait nulle
+  // part alors que son guide existait.
+  const rank = (element?: string) => {
+    const i = ELEMENT_ORDER.indexOf(element as (typeof ELEMENT_ORDER)[number]);
+    return i < 0 ? ELEMENT_ORDER.length : i;
+  };
   const elemental = placed
-    .filter((p) => p.tower.mode === TOWER_ELEMENT_MODE && p.tower.element)
-    .sort(
-      (a, b) =>
-        ELEMENT_ORDER.indexOf(a.tower.element as (typeof ELEMENT_ORDER)[number]) -
-        ELEMENT_ORDER.indexOf(b.tower.element as (typeof ELEMENT_ORDER)[number]),
-    );
+    .filter((p) => p.tower.mode === TOWER_ELEMENT_MODE)
+    .sort((a, b) => rank(a.tower.element) - rank(b.tower.element));
 
   return (
     <div className="space-y-8">
@@ -78,7 +81,7 @@ export default async function SkywardTowerView({ lang, guides }: CategoryViewPro
           <h2 className="mb-4">{t('guides.skyward_tower.elemental')}</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {elemental.map(({ guide, tower }) => (
-              <ElementalCard key={guide.slug} guide={guide} lang={lang} element={tower.element!} />
+              <ElementalCard key={guide.slug} guide={guide} lang={lang} element={tower.element} />
             ))}
           </div>
         </section>
@@ -107,9 +110,9 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
 }
 
 /** Tour élémentaire : carte haute, icône + nom d'élément en tête, accent coloré. */
-function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; element: string }) {
+function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; element?: string }) {
   const name = lRec(guide.title, lang);
-  const ring = ELEMENT_RING[element] ?? 'hover:ring-select/50';
+  const ring = (element && ELEMENT_RING[element]) || 'hover:ring-select/50';
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
@@ -117,15 +120,17 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
     >
       <GuideCardArt icon={guide.icon} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
-        <img
-          src={img.element(element)}
-          alt=""
-          aria-hidden
-          loading="lazy"
-          className="h-4 w-4 drop-shadow-lg"
-          width={16}
-          height={16}
-        />
+        {element && (
+          <img
+            src={img.element(element)}
+            alt=""
+            aria-hidden
+            loading="lazy"
+            className="h-4 w-4 drop-shadow-lg"
+            width={16}
+            height={16}
+          />
+        )}
         <p className="text-content line-clamp-1 text-xs font-medium drop-shadow-lg">{name}</p>
       </div>
       <div className="absolute inset-x-0 bottom-0 p-2">

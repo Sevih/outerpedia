@@ -28,11 +28,16 @@ const tower = (key: string): Tower => {
   return t!;
 };
 
+const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'] as const;
+
 describe('towers.json — invariants structurels', () => {
-  it('8 tours : les 3 difficultés puis les 5 élémentaires', () => {
-    expect(TOWER_KEYS).toHaveLength(8);
+  // Ni le nombre de tours ni celui des étages élémentaires ne sont écrits en
+  // dur : le patch du 06/10/2026 ajoute une tour (Universal Tower) et porte les
+  // élémentaires de 100 à 150 étages — un « 8 » ou un « 100 » ici bloquait le patch.
+  it('les 3 difficultés d’abord, puis les tours du menu élémentaire (les 5 éléments au moins)', () => {
     expect(TOWER_KEYS.slice(0, 3)).toEqual([...TOWER_DIFFICULTY_MODES]);
-    for (const k of TOWER_KEYS.slice(3)) expect(k).toMatch(/^tower_element_/);
+    for (const k of TOWER_KEYS.slice(3)) expect(k).toMatch(/^tower_/);
+    for (const el of ELEMENTS) expect(TOWER_KEYS).toContain(`${TOWER_ELEMENT_MODE}_${el}`);
     expect(isTowerKey('tower_hard')).toBe(true);
     expect(isTowerKey('fire-tower')).toBe(false); // ancien slug, plus une clé
   });
@@ -52,8 +57,10 @@ describe('towers.json — invariants structurels', () => {
     expect(tower('tower').floors).toHaveLength(100);
     expect(tower('tower_hard').floors).toHaveLength(40);
     expect(tower('tower_very_hard').floors).toHaveLength(20);
-    for (const el of ['fire', 'water', 'earth', 'light', 'dark'])
-      expect(tower(`tower_element_${el}`).floors).toHaveLength(100);
+    // Les cinq élémentaires montent ensemble : même hauteur, jamais sous 100.
+    const heights = ELEMENTS.map((el) => tower(`${TOWER_ELEMENT_MODE}_${el}`).floors.length);
+    expect(new Set(heights).size, heights.join(',')).toBe(1);
+    expect(heights[0]).toBeGreaterThanOrEqual(100);
   });
 
   it('chaque étage a UNE composition : waves OU encounters, jamais les deux', () => {

@@ -19,9 +19,21 @@ import towersData from '../../data/generated/towers.json';
 import encountersData from '../../data/generated/encounters.json';
 import monstersData from '../../data/generated/monsters.json';
 import type { Row } from '../lib/tables';
-import { formationOf, type TowersData } from './towers';
+import { formationOf, towerNameToken, type TowersData } from './towers';
 
 // ─── 1. Cœur pur (synthétique) ───────────────────────────────────────────────
+
+describe('towerNameToken — le jeton d’une tour dans son NameID', () => {
+  it('rend le mot juste avant le numéro d’étage, en minuscules', () => {
+    expect(towerNameToken('SYS_INFINITE_DUNGEON_FIRE_01')).toBe('fire');
+    expect(towerNameToken('SYS_INFINITE_DUNGEON_ALL_100')).toBe('all');
+  });
+
+  it('rend undefined quand le NameID ne finit pas par un jeton et un numéro', () => {
+    expect(towerNameToken('SYS_INFINITE_DUNGEON')).toBeUndefined();
+    expect(towerNameToken('')).toBeUndefined();
+  });
+});
 
 describe('formationOf — slots ID0..3 → unités', () => {
   it('lit les 4 slots, chacun avec son niveau', () => {

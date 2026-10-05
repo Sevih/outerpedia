@@ -50,6 +50,15 @@ import { loadTextIndex, resolveText } from '../lib/text';
 import { groupBy, indexBy, loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { isFormationPool, spawnGroupIds } from './encounters';
 
+/**
+ * Le jeton qui distingue une tour dans son `NameID` — le mot juste avant le
+ * numéro d'étage (`SYS_INFINITE_DUNGEON_FIRE_01` → `fire`). Sert de clé à une
+ * tour du mode élémentaire dont le jeton n'est PAS un élément déclaré.
+ */
+export function towerNameToken(nameId: string): string | undefined {
+  return /_([A-Za-z]+)_\d+\s*$/.exec(nameId)?.[1]?.toLowerCase();
+}
+
 /** Un monstre d'une vague (niveau RÉEL de la rencontre). */
 export interface TowerUnit {
   id: string;
@@ -247,11 +256,21 @@ export function buildTowers(): TowersData {
     let element: string | undefined;
     if (mode === 'tower_element') {
       element = elementOf(d.NameID ?? '');
-      if (!element) {
+      const sub = element ?? towerNameToken(d.NameID ?? '');
+      if (!sub) {
         console.warn(`⚠ towers : élément introuvable pour ${d.ID} (${d.NameID}).`);
         continue;
       }
-      key = `${mode}_${element}`;
+      key = `${mode}_${sub}`;
+      // Une tour du menu élémentaire SANS élément déclaré (la « Universal
+      // Tower » du patch du 06/10/2026, ouverte à tous les éléments) : on la
+      // garde sous le jeton de son NameID au lieu de l'ignorer — ignorée, elle
+      // disparaissait du site sans autre trace que cent lignes d'avertissement.
+      if (!element && !towers[key])
+        console.warn(
+          `⚠ towers : « ${key} » n'a pas d'élément déclaré (${d.NameID}) — gardée comme ` +
+            `tour sans élément ; vérifier sa clé avant de lui écrire un guide.`,
+        );
     }
 
     let tower = towers[key];
