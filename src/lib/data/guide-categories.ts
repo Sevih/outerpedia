@@ -264,12 +264,12 @@ export const GUIDE_CATEGORIES = {
     icon: 'CM_Gate_Icon_Monad',
     info: {
       intro: {
-        en: 'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Saturday, and your daily score determines your ranking and rewards.',
-        jp: '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から土曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
-        kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 토요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
-        zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周六，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
-        fr: 'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au samedi, et votre score quotidien détermine votre classement et vos récompenses.',
-        es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a sábado, y tu puntuación diaria determina tu clasificación y recompensas.',
+        en: 'Dimensional Singularity is an endgame mode accessible from Monad Gate by switching to Dimensional Singularity Mode. A different Singularity boss is active each day from Wednesday to Sunday, and your daily score determines your ranking and rewards.',
+        jp: '次元特異点はモナドゲートから「次元特異点モード」に切り替えてアクセスするエンドコンテンツです。水曜から日曜まで、毎日異なる特異点ボスが出現し、その日のスコアによってランキングと報酬が決まります。',
+        kr: '차원 특이점은 모나드 게이트에서 「차원 특이점 모드」로 전환하여 접근하는 엔드 콘텐츠입니다. 수요일부터 일요일까지 매일 다른 특이점 보스가 등장하며, 일일 점수에 따라 랭킹과 보상이 결정됩니다.',
+        zh: '次元奇点是从单子门切换至「次元奇点模式」进入的终局内容。每周三到周日，每天会出现不同的奇点Boss，当日分数将决定排名与奖励。',
+        fr: 'Dimensional Singularity est un mode de fin de jeu accessible depuis Monad Gate en passant en Dimensional Singularity Mode. Un Boss Singularity différent est actif chaque jour du mercredi au dimanche, et votre score quotidien détermine votre classement et vos récompenses.',
+        es: 'La Singularidad Dimensional es un modo de fin de juego accesible desde Puerta Monad al cambiar al Modo Singularidad Dimensional. Un jefe de Singularidad diferente está activo cada día de miércoles a domingo, y tu puntuación diaria determina tu clasificación y recompensas.',
       },
       unlock: {
         en: 'Unlock condition: clear Monad Gate Depth 1 True Ending.',
@@ -280,12 +280,12 @@ export const GUIDE_CATEGORIES = {
         es: 'Condición de desbloqueo: completa el Final Verdadero de la Profundidad 1 de Puerta Monad.',
       },
       schedule: {
-        en: 'Open every week from Wednesday 00:00 UTC to Saturday 23:59 UTC. The target boss changes daily at 00:00 UTC. 1 entry per day.',
-        jp: '毎週水曜00:00 UTCから土曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日1回挑戦可能。',
-        kr: '매주 수요일 00:00 UTC부터 토요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 1회 도전 가능.',
-        zh: '每周三00:00 UTC至周六23:59 UTC开放。目标Boss每日00:00 UTC更换。每日1次挑战机会。',
-        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au samedi 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 1 entrée par jour.',
-        es: 'Abierto cada semana de miércoles 00:00 UTC a sábado 23:59 UTC. El jefe objetivo cambia diariamente a las 00:00 UTC. 1 entrada por día.',
+        en: 'Open every week from Wednesday 00:00 UTC to Sunday 23:59 UTC. The target boss changes daily at 00:00 UTC. 1 entry per day.',
+        jp: '毎週水曜00:00 UTCから日曜23:59 UTCまで開放。対象ボスは毎日00:00 UTCに変化。1日1回挑戦可能。',
+        kr: '매주 수요일 00:00 UTC부터 일요일 23:59 UTC까지 개방. 대상 보스는 매일 00:00 UTC에 변경. 1일 1회 도전 가능.',
+        zh: '每周三00:00 UTC至周日23:59 UTC开放。目标Boss每日00:00 UTC更换。每日1次挑战机会。',
+        fr: 'Ouvert chaque semaine du mercredi 00:00 UTC au dimanche 23:59 UTC. Le Boss cible change chaque jour à 00:00 UTC. 1 entrée par jour.',
+        es: 'Abierto cada semana de miércoles 00:00 UTC a domingo 23:59 UTC. El jefe objetivo cambia diariamente a las 00:00 UTC. 1 entrada por día.',
       },
       features: [
         {

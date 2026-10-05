@@ -765,7 +765,7 @@ const zh: Record<TranslationKey, string> = {
   'guides.singularity.week.live': '进行中 · {dow}',
   'guides.singularity.timer.next': '距下次重置 {time}',
   'guides.singularity.timer.opens': '{time} 后开启',
-  'guides.singularity.week.tagline': '周三至周六每日一个首领，北京时间 08:00 更换。',
+  'guides.singularity.week.tagline': '周三至周日每日一个首领，北京时间 08:00 更换。',
   'guides.singularity.week.today': '今日',
   'guides.singularity.next_week.title': '下一轮',
   'guides.singularity.next_week.tagline':
@@ -1317,7 +1317,7 @@ const zh: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': '元素之塔',
   'progress.task.memorial-match': '纪念赛',
   'progress.task.ad-stamina': '广告体力',
-  'progress.task.dimensional-singularity': '次元奇点 (周三~周六)',
+  'progress.task.dimensional-singularity': '次元奇点 (周三~周日)',
   'progress.task.shop-daily-free-gift': '每日免费礼物',
   'progress.task.shop-weekly-free-gift': '每周免费礼物',
   'progress.task.shop-monthly-free-gift': '每月免费礼物',

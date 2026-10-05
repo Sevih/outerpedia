@@ -813,7 +813,7 @@ const es: Record<TranslationKey, string> = {
   'guides.singularity.timer.next': 'Próximo reinicio en {time}',
   'guides.singularity.timer.opens': 'Se abre en {time}',
   'guides.singularity.week.tagline':
-    'Un jefe por día, miércoles a sábado. El objetivo cambia a las 00:00 UTC.',
+    'Un jefe por día, miércoles a domingo. El objetivo cambia a las 00:00 UTC.',
   'guides.singularity.week.today': 'Hoy',
   'guides.singularity.next_week.title': 'Próxima rotación',
   'guides.singularity.next_week.tagline':
@@ -1399,7 +1399,7 @@ const es: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': 'Torre Elemental',
   'progress.task.memorial-match': 'Combate Conmemorativo',
   'progress.task.ad-stamina': 'Vigor por Anuncio',
-  'progress.task.dimensional-singularity': 'Singularidad Dimensional (Mié–Sáb)',
+  'progress.task.dimensional-singularity': 'Singularidad Dimensional (Mié–Dom)',
   'progress.task.shop-daily-free-gift': 'Regalo gratis diario',
   'progress.task.shop-weekly-free-gift': 'Regalo gratis semanal',
   'progress.task.shop-monthly-free-gift': 'Regalo gratis mensual',

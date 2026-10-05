@@ -1,11 +1,15 @@
 /**
  * DIMENSIONAL SINGULARITY — rotation hebdomadaire des boss.
  *
- * Le mode tourne par SEMAINES : un groupe de 4 boss par semaine, cyclant sur
- * les 6 groupes. La semaine ouvre le mercredi ; les 4 jours suivants sont des
- * jours de COMBAT (un boss par jour, dans l'ordre `order` — confirmé en jeu),
- * puis viennent 3 jours de RÉCOMPENSE (dim→mar) où plus aucun boss n'est
- * combattable.
+ * Le mode tourne par SEMAINES : un groupe de boss par semaine, cyclant sur les
+ * groupes. La semaine ouvre le mercredi ; viennent `battleDays` jours de
+ * COMBAT (un boss par jour, dans l'ordre `order` — confirmé en jeu), puis
+ * `rewardDays` jours de RÉCOMPENSE où plus aucun boss n'est combattable.
+ *
+ * LES DEUX DURÉES VIENNENT DES TABLES DU JEU (`schedule`, cf. le générateur) et
+ * rien ici ne les suppose : 4 + 3 jusqu'au patch du 06/10/2026, 5 + 2 ensuite
+ * (mer→dim, puis lun→mar). Un groupe peut porter MOINS de boss que de jours de
+ * combat — cf. `bossesByDay`.
  *
  * ⚠️ On affichait autre chose avant : les 3 premiers boss étaient donnés comme
  * disponibles du mercredi au vendredi et le 4e le samedi seulement
@@ -45,9 +49,9 @@ export interface SingularityGroup {
 interface Schedule {
   /** Jour d'ouverture (`wed`). */
   startDow: string;
-  /** Jours de COMBAT (4) — un boss par jour. */
+  /** Jours de COMBAT — un boss par jour. */
   battleDays: number;
-  /** Jours de RÉCOMPENSE (3) — aucun boss combattable. */
+  /** Jours de RÉCOMPENSE — aucun boss combattable. */
   rewardDays: number;
   /** Ancre curée : ce groupe a ouvert sa semaine à cette date. */
   anchor: { date: string; group: number };
@@ -107,7 +111,7 @@ export interface SingularityState {
   /** Boss combattable aujourd'hui, `undefined` en phase de récompense. */
   today?: SingularityBoss;
   /**
-   * `true` en phase de récompense (dim→mar) : aucun boss n'est combattable et
+   * `true` en phase de récompense : aucun boss n'est combattable et
    * `week` est donc la semaine À VENIR, pas celle en cours.
    */
   betweenWeeks: boolean;
@@ -137,13 +141,40 @@ function groupAtWeek(weekIndex: number): SingularityGroup {
   return GROUPS[i];
 }
 
+/**
+ * Le boss de CHAQUE jour de combat, dans l'ordre `order` — toujours
+ * `battleDays` entrées, pour qu'aucun jour de combat ne reste sans boss.
+ *
+ * Quand le groupe porte moins de boss que la semaine n'a de jours de combat, le
+ * DERNIER tient les jours restants. C'est ce que la note du patch du
+ * 06/10/2026 annonce en passant de 4 à 5 jours : « Earth on Wednesday, Water on
+ * Thursday, Fire on Friday, and Light or Dark on Saturday and Sunday » — le
+ * boss lumière/ténèbres du groupe, déjà le dernier, fait le samedi ET le
+ * dimanche. Si les tables livrent un cinquième boss par groupe, il prend son
+ * jour tout seul et cette règle ne joue plus.
+ */
+export function bossesByDay(bosses: SingularityBoss[], battleDays: number): SingularityBoss[] {
+  const ordered = [...bosses].sort((a, b) => a.order - b.order);
+  if (!ordered.length) return [];
+  return Array.from({ length: battleDays }, (_, i) => ordered[Math.min(i, ordered.length - 1)]);
+}
+
+/**
+ * `now` tombe-t-il un jour de COMBAT ? Même horloge que `singularityStateAt`
+ * (jours UTC comptés depuis l'ancre), sans dérouler la semaine — c'est ce que
+ * lit le suivi de progression pour montrer ou cacher la tâche du jour.
+ */
+export function isSingularityBattleDay(now: number): boolean {
+  const sinceAnchor = utcDay(now) - ANCHOR_DAY;
+  const dayInWeek = ((sinceAnchor % 7) + 7) % 7;
+  return dayInWeek < SCHEDULE.battleDays;
+}
+
 /** Déroule une semaine de rotation (ses jours de combat), vue depuis `today`. */
 function buildWeek(weekIndex: number, todayDay: number): SingularityWeek {
   const start = ANCHOR_DAY + weekIndex * 7;
   const group = groupAtWeek(weekIndex);
-  const bosses = [...group.bosses].sort((a, b) => a.order - b.order);
-
-  const days: SingularityDay[] = bosses.slice(0, SCHEDULE.battleDays).map((boss, i) => {
+  const days: SingularityDay[] = bossesByDay(group.bosses, SCHEDULE.battleDays).map((boss, i) => {
     const day = start + i;
     return {
       date: isoOfDay(day),
@@ -189,7 +220,7 @@ export function singularityGroups(): SingularityGroup[] {
   return GROUPS;
 }
 
-/** Nombre de jours de combat par semaine (4). */
+/** Nombre de jours de combat par semaine (lu dans les tables du jeu). */
 export function singularityBattleDays(): number {
   return SCHEDULE.battleDays;
 }

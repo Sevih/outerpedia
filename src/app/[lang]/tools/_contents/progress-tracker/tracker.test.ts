@@ -123,10 +123,12 @@ describe('disponibilité calendaire', () => {
     expect(activeTaskIds('daily', done, WED)).not.toContain('elemental-tower');
   });
 
-  it('singularité dimensionnelle : mercredi → samedi seulement', () => {
+  // Le lundi est un jour de récompense à 4 comme à 5 jours de combat (le
+  // dimanche, lui, a changé de camp au patch du 06/10/2026).
+  it('singularité dimensionnelle : les jours de combat seulement', () => {
     const s = createDefaultSettings();
     expect(activeTaskIds('daily', s, WED)).toContain('dimensional-singularity');
-    expect(activeTaskIds('daily', s, SUN)).not.toContain('dimensional-singularity');
+    expect(activeTaskIds('daily', s, MON)).not.toContain('dimensional-singularity');
   });
 
   it('ad stamina masquée avec le pack premium Veronica (stamina auto-réclamée)', () => {
@@ -416,9 +418,9 @@ describe('contenus saisonniers — auto-détection', () => {
   it('n’affecte AUCUNE tâche non saisonnière (les filtres habituels tiennent)', () => {
     const ids = activeTaskIds('daily', auto, WED, windows);
     expect(ids).toContain('story-hard');
-    // Singularité : ouverte mercredi, fermée dimanche — inchangé par l'auto.
+    // Singularité : ouverte mercredi, fermée lundi — inchangé par l'auto.
     expect(ids).toContain('dimensional-singularity');
-    expect(activeTaskIds('daily', auto, SUN, windows)).not.toContain('dimensional-singularity');
+    expect(activeTaskIds('daily', auto, MON, windows)).not.toContain('dimensional-singularity');
   });
 
   it('la progression suit : la tâche entre puis sort du suivi avec sa saison', () => {

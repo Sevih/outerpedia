@@ -780,7 +780,7 @@ const kr: Record<TranslationKey, string> = {
   'guides.singularity.timer.next': '다음 초기화까지 {time}',
   'guides.singularity.timer.opens': '{time} 후 시작',
   'guides.singularity.week.tagline':
-    '수요일부터 토요일까지 하루에 한 보스. 대상은 00:00 UTC에 바뀝니다.',
+    '수요일부터 일요일까지 하루에 한 보스. 대상은 00:00 UTC에 바뀝니다.',
   'guides.singularity.week.today': '오늘',
   'guides.singularity.next_week.title': '다음 로테이션',
   'guides.singularity.next_week.tagline':
@@ -1343,7 +1343,7 @@ const kr: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': '엘레멘탈 타워',
   'progress.task.memorial-match': '메모리얼 대전',
   'progress.task.ad-stamina': '광고 스태미나',
-  'progress.task.dimensional-singularity': '차원 특이점 (수~토)',
+  'progress.task.dimensional-singularity': '차원 특이점 (수~일)',
   'progress.task.shop-daily-free-gift': '일일 무료 선물',
   'progress.task.shop-weekly-free-gift': '주간 무료 선물',
   'progress.task.shop-monthly-free-gift': '월간 무료 선물',

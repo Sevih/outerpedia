@@ -452,12 +452,12 @@ export const SOURCE_LABELS: Record<string, LocalizedText> = {
     es: 'Recompensa de clasificación del Boss mundial',
   },
   'daily.singularityRanking': {
-    en: 'Dimensional Singularity Daily Ranking (Wed–Sat)',
-    jp: '次元特異点 デイリーランキング (水〜土)',
-    kr: '차원 특이점 일일 랭킹 (수~토)',
-    zh: '次元奇点每日排名 (周三~周六)',
-    fr: 'Classement Quotidien Dimensional Singularity (Mer-Sam)',
-    es: 'Clasificación diaria de Singularidad Dimensional (miércoles-sábado)',
+    en: 'Dimensional Singularity Daily Ranking (Wed–Sun)',
+    jp: '次元特異点 デイリーランキング (水〜日)',
+    kr: '차원 특이점 일일 랭킹 (수~일)',
+    zh: '次元奇点每日排名 (周三~周日)',
+    fr: 'Classement Quotidien Dimensional Singularity (Mer-Dim)',
+    es: 'Clasificación diaria de Singularidad Dimensional (miércoles-domingo)',
   },
 };
 

@@ -789,7 +789,7 @@ const jp: Record<TranslationKey, string> = {
   'guides.singularity.week.live': '開催中 · {dow}',
   'guides.singularity.timer.next': '次のリセットまで {time}',
   'guides.singularity.timer.opens': '{time} 後に開始',
-  'guides.singularity.week.tagline': '水曜から土曜まで、1日1体。対象は00:00 UTCに切り替わります。',
+  'guides.singularity.week.tagline': '水曜から日曜まで、1日1体。対象は00:00 UTCに切り替わります。',
   'guides.singularity.week.today': '本日',
   'guides.singularity.next_week.title': '次のローテーション',
   'guides.singularity.next_week.tagline':
@@ -1357,7 +1357,7 @@ const jp: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': 'エレメンタルタワー',
   'progress.task.memorial-match': 'メモリアル対戦',
   'progress.task.ad-stamina': '広告スタミナ',
-  'progress.task.dimensional-singularity': '次元特異点 (水〜土)',
+  'progress.task.dimensional-singularity': '次元特異点 (水〜日)',
   'progress.task.shop-daily-free-gift': 'デイリープレゼント',
   'progress.task.shop-weekly-free-gift': 'ウィークリー無料プレゼント',
   'progress.task.shop-monthly-free-gift': 'マンスリー無料プレゼント',

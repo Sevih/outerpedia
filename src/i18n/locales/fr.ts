@@ -814,7 +814,7 @@ const fr: Record<TranslationKey, string> = {
   'guides.singularity.timer.next': 'Prochain reset dans {time}',
   'guides.singularity.timer.opens': 'Ouvre dans {time}',
   'guides.singularity.week.tagline':
-    'Un boss par jour, du mercredi au samedi. La cible change à 00:00 UTC.',
+    'Un boss par jour, du mercredi au dimanche. La cible change à 00:00 UTC.',
   'guides.singularity.week.today': 'Aujourd’hui',
   'guides.singularity.next_week.title': 'Prochaine rotation',
   'guides.singularity.next_week.tagline':
@@ -1396,7 +1396,7 @@ const fr: Record<TranslationKey, string> = {
   'progress.task.elemental-tower': 'Elemental Tower',
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
-  'progress.task.dimensional-singularity': 'Dimensional Singularity (mer.–sam.)',
+  'progress.task.dimensional-singularity': 'Dimensional Singularity (mer.–dim.)',
   'progress.task.shop-daily-free-gift': 'Cadeau gratuit quotidien',
   'progress.task.shop-weekly-free-gift': 'Cadeau gratuit hebdomadaire',
   'progress.task.shop-monthly-free-gift': 'Cadeau gratuit mensuel',

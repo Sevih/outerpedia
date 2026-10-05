@@ -12,6 +12,7 @@
  */
 
 import type { StoreSpec } from '@/lib/client-storage';
+import { isSingularityBattleDay } from '@/lib/data/singularity';
 import {
   TASK_DEFINITIONS,
   TASK_TYPES,
@@ -141,10 +142,13 @@ export function isTaskCompleted(task: TaskProgress, maxCount: number): boolean {
 /* Disponibilité calendaire                                                  */
 /* ------------------------------------------------------------------------ */
 
-/** Singularité dimensionnelle : ouverte mercredi 00:00 → samedi 23:59 UTC. */
+/**
+ * Singularité dimensionnelle : ouverte les jours de COMBAT de sa rotation,
+ * dont le nombre vient des tables du jeu (mer→sam jusqu'au patch du
+ * 06/10/2026, mer→dim ensuite) — pas d'une liste de jours écrite ici.
+ */
 export function isDimensionalSingularityActive(now: number): boolean {
-  const day = new Date(now).getUTCDay();
-  return day >= 3 && day <= 6;
+  return isSingularityBattleDay(now);
 }
 
 /**

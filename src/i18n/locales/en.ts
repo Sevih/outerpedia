@@ -807,7 +807,7 @@ const en = {
   'guides.singularity.timer.next': 'Next reset in {time}',
   'guides.singularity.timer.opens': 'Opens in {time}',
   'guides.singularity.week.tagline':
-    'One boss per day, Wednesday to Saturday. The target changes at 00:00 UTC.',
+    'One boss per day, Wednesday to Sunday. The target changes at 00:00 UTC.',
   'guides.singularity.week.today': 'Today',
   'guides.singularity.next_week.title': 'Next rotation',
   'guides.singularity.next_week.tagline':
@@ -1387,7 +1387,7 @@ const en = {
   'progress.task.elemental-tower': 'Elemental Tower',
   'progress.task.memorial-match': 'Memorial Match',
   'progress.task.ad-stamina': 'Ad Stamina',
-  'progress.task.dimensional-singularity': 'Dimensional Singularity (Wed–Sat)',
+  'progress.task.dimensional-singularity': 'Dimensional Singularity (Wed–Sun)',
   'progress.task.shop-daily-free-gift': 'Daily Free Gift',
   'progress.task.shop-weekly-free-gift': 'Weekly Free Gift',
   'progress.task.shop-monthly-free-gift': 'Monthly Free Gift',

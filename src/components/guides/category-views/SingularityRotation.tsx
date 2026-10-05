@@ -25,12 +25,13 @@ import type { CategoryViewProps } from './types';
  * (`meta.bossId`) — aucun mapping manuel.
  *
  * Écarts ASSUMÉS avec l'ancienne vue, tous des corrections :
- *  - un boss PAR JOUR (mer→sam), pas « trois du mer au ven + un le samedi » ;
- *  - la section ne DISPARAÎT PAS du dimanche au mardi (elle bascule sur la
+ *  - un boss PAR JOUR de combat (leur nombre vient des tables du jeu), pas
+ *    « trois du mer au ven + un le samedi » ;
+ *  - la section ne DISPARAÎT PAS en phase de récompense (elle bascule sur la
  *    rotation à venir) ;
  *  - pas de mise en avant « boss du week-end » en ambre : ce concept n'existait
  *    que parce que l'ancien modèle était faux ;
- *  - sur mobile, les trois autres jours restent VISIBLES (ils étaient masqués).
+ *  - sur mobile, les autres jours restent VISIBLES (ils étaient masqués).
  *
  * Le rendu dépend du JOUR → la route est purgée chaque nuit (`/api/revalidate`).
  */
@@ -333,7 +334,8 @@ function FeaturedBanner({
 /**
  * Les AUTRES jours de la semaine : tout tient SUR la bannière — jour, classe et
  * élément en haut à droite, nom en bas à droite. C'est la géométrie du jeu, et
- * la seule qui laisse trois cartes tenir dans la colonne sans l'allonger.
+ * la seule qui laisse les autres jours (trois, quatre depuis le patch du
+ * 06/10/2026) tenir dans la colonne sans trop l'allonger.
  * L'art est clair : le nom se pose avec une ombre portée, pas un voile — le voile
  * mangerait l'illustration, qui est justement ce qui identifie le boss.
  */

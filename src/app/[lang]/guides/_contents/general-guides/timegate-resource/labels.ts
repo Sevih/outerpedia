@@ -221,12 +221,12 @@ export const LABELS = {
       es: 'Singularidad Dimensional — Misiones Semanales',
     },
     'singularity-daily-run': {
-      en: 'Dimensional Singularity — Daily Run (Wed–Sat)',
-      jp: '次元特異点 デイリー参加 (水〜土)',
-      kr: '차원 특이점 일일 참여 (수~토)',
-      zh: '次元奇点 每日参与 (周三~周六)',
-      fr: 'Singularité dimensionnelle — Run quotidien (Mer–Sam)',
-      es: 'Singularidad Dimensional — Ejecución Diaria (Mié–Sáb)',
+      en: 'Dimensional Singularity — Daily Run (Wed–Sun)',
+      jp: '次元特異点 デイリー参加 (水〜日)',
+      kr: '차원 특이점 일일 참여 (수~일)',
+      zh: '次元奇点 每日参与 (周三~周日)',
+      fr: 'Singularité dimensionnelle — Run quotidien (Mer–Dim)',
+      es: 'Singularidad Dimensional — Ejecución Diaria (Mié–Dom)',
     },
     'singularity-daily-ranking': {
       en: 'Dimensional Singularity — Daily Ranking',
