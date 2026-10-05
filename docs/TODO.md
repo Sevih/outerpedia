@@ -13,10 +13,13 @@
       quantités hebdomadaires de Dimensional Singularity. La préparation du
       05/10 est commitée en local : ne pas pousser (ni `pnpm quick`) avant
       le patch.
-- [ ] **Fin de l'Adventure License** : les guides sont masqués ; ce qui cite
-      encore le mode (tracker, guides généraux, quirks, calculateur) est le
-      lot B20 de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), à
-      lancer après le `pnpm dev` du patch (Opus, seul).
+- [ ] **Fin de l'Adventure License** : guides masqués, mode sorti de
+      `most-used-units` et de `unlock-content`. Restent deux lots de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) : **B20** (suivi de
+      progression, guides `quirk`, `daily-stamina`,
+      `shop-purchase-priorities` — Opus, seul, lançable dès la veille) et
+      **F13** (calculateur de dégâts — agent Fable dédié, seul, après le
+      `pnpm dev` du patch).
 
 ## 🎴 Portraits animés
 
