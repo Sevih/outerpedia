@@ -34,6 +34,17 @@
   branche Windows de `--install` et tout le côté fixe (aucun accès), et la
   nouvelle ligne `dev` (jamais lancée par un agent). Procédure :
   [test-subdomain-local.md](./procedure/test-subdomain-local.md).
+- **Relecture de B23 : serveur au choix, palette et embeds de l'onglet
+  Discord** (Fable). Lot 70, `a48f1749`. Périmètre tenu (`scripts/quick/` et
+  les docs, `package.json` intact), TODO relu (seul son item en sort),
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (187 fichiers,
+  2 524 tests). Essai indépendant, outil démarré sans fenêtre, sur un autre
+  port, jeton VIDE : l'état rend la palette (4 groupes, sans erreur) et
+  aucun serveur, l'aperçu d'un embed (titre, couleur, description avec
+  titre et emoji standard) se rend côté serveur, l'envoi répond « jeton
+  absent ». Non vérifié par personne : tout ce qui parle à Discord (liste
+  des serveurs, emojis des serveurs cochés, lien d'invitation, envoi d'un
+  embed, boutons de lien) et le rendu de la palette — essai de Sevih.
 - **`pnpm quick`, onglet « Discord » : le serveur où l'on poste se choisit,
   les emojis se prennent sur les serveurs cochés, une palette toujours
   visible, et un mode embed** (Opus, lot B23, retours de Sevih du 05/10 après
