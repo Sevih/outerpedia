@@ -5,6 +5,14 @@
 
 ---
 
+## 🩹 Patch du 06/10
+
+- [ ] **Feuille de route** : [patch-2026-10-06.md](./patch-2026-10-06.md) —
+      Demiurge Lambda, équilibrage de Sigma, tours à 150 étages et Universal
+      Tower, restrictions de la tour Hard, fin de l'Adventure License
+      (décision à prendre), planning Dimensional Singularity, Joint Challenge
+      Annihilator.
+
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
