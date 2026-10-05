@@ -26,6 +26,7 @@ import { describe, expect, it } from 'vitest';
 import shortcodes from './discord-shortcodes.json';
 import palette from './discord-palette.json';
 import {
+  FINAL_CHECK_MARK,
   BUTTON_MAX,
   DISCORD_API,
   EMBED_COLOR,
@@ -3501,6 +3502,25 @@ describe('la demande à coller dans claude.ai', () => {
     // Seul point du fichier lié au code : le reste se retouche librement.
     const prompt = readFileSync(resolve(import.meta.dirname, 'discord-prompt.md'), 'utf8');
     expect(prompt).toContain('YYYY-MM-DD HH:MM UTC');
+  });
+});
+
+describe('demande de premier jet — le rappel final', () => {
+  const note = { title: 'T', date: '2026-10-05', url: 'https://x/', text: 'NOTE' };
+  it('la partie des consignes après la marque vient en DERNIER, après le gabarit', () => {
+    const r = draftRequest({
+      instructions: `RÈGLES\n\n${FINAL_CHECK_MARK}\n\nRAPPEL`,
+      examples: [],
+      note,
+      template: 'GABARIT',
+    });
+    expect(r.text.startsWith('RÈGLES\n\n<note_to_summarize>')).toBe(true);
+    expect(r.text.endsWith('<template>\nGABARIT\n</template>\n\nRAPPEL')).toBe(true);
+    expect(r.text).not.toContain(FINAL_CHECK_MARK);
+  });
+  it('sans marque, rien n’est ajouté', () => {
+    const r = draftRequest({ instructions: 'RÈGLES', examples: [], note, template: 'GABARIT' });
+    expect(r.text.endsWith('<template>\nGABARIT\n</template>')).toBe(true);
   });
 });
 

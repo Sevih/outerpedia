@@ -784,11 +784,16 @@ describe('horodatages — « convertir les dates »', () => {
     });
   });
 
-  it('le suffixe ` UTC` est EXIGÉ : rien d’autre n’est converti', () => {
+  it('le suffixe ` UTC` est facultatif ; un AUTRE fuseau ou une autre écriture ne se convertit pas', () => {
+    // Un modèle oublie le suffixe une fois sur deux : les dates d'une note sont en UTC.
+    expect(convert('‹›2026-10-10 00:00').text).toBe(`‹›<t:${OCT_10}:f>`);
+    expect(convert('‹›2026-10-10 ~ 2026-10-10 00:00').text).toBe(
+      `‹›<t:${OCT_10 + 12 * 3600}:D> ~ <t:${OCT_10}:f>`,
+    );
     for (const kept of [
-      '‹›2026-10-10 00:00',
-      '‹›2026-10-10',
       '‹›2026-10-10 00:00 CEST',
+      '‹›2026-10-10 KST',
+      '‹›2026-10-10-beta',
       '‹›2026-10-10 00:00 UTC+2',
       '‹›2026-10-10 00:00 UTC-5',
       '‹›2026-10-10 00:00UTC',
@@ -861,10 +866,11 @@ describe('horodatages — « convertir les dates »', () => {
     expect(r.edit.text).toBe(
       `Bingo : <t:${Date.UTC(2026, 9, 6, 12) / 1000}:D> ~ <t:${Date.UTC(2026, 9, 20, 23, 59) / 1000}:f>`,
     );
-    // Sans le suffixe, une date nue reste du texte ; dans du code aussi.
-    expect(convertDates({ text: '2026-10-06 et `2026-10-06 UTC`', start: 0, end: 0 }).count).toBe(
+    // Dans du code, rien ; hors du code, une date nue se convertit aussi.
+    expect(convertDates({ text: '`2026-10-06 UTC` et `2026-10-06`', start: 0, end: 0 }).count).toBe(
       0,
     );
+    expect(convertDates({ text: 'le 2026-10-06.', start: 0, end: 0 }).count).toBe(1);
     expect(convertDates({ text: '2026-02-30 UTC', start: 0, end: 0 }).invalid).toEqual([
       '2026-02-30 UTC',
     ]);

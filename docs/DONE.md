@@ -7,6 +7,33 @@
 
 ## 2026-10-05
 
+- **Onglet Discord de quick : « Proposer un brouillon » — le premier jet
+  rédigé par Claude Code sans fenêtre, sous l'abonnement** (Fable, demande
+  de Sevih : automatiser le copier-coller vers claude.ai sans payer l'API,
+  compatible Windows pour le fixe). `scripts/quick/claude-draft.ts` lance
+  `claude -p` (modèle `sonnet`, `QUICK_DRAFT_MODEL` pour en changer, sans
+  outil, sans session gardée, dans un dossier vide), lui donne la demande
+  sur l'entrée standard (130 000 caractères ne tiennent pas sur une ligne de
+  commande Windows) et rend le message ; la route `/api/discord/draft`
+  construit la MÊME demande que « Copier la demande », et la page pose le
+  jet dans le brouillon (Ctrl+Z rend l'ancien) puis convertit les dates.
+  La clé d'API ne doit jamais arriver à la commande, sinon elle l'emporte
+  sur l'abonnement et facture : `childEnv` retire de son environnement
+  toutes les variables de `.env.local` et toute clé Anthropic (testé). Sous
+  Windows, `claude` peut être un `.cmd` : la commande passe par
+  l'interpréteur, écrite d'une pièce, sans rien qui vienne de la page.
+  `--effort medium` est dit : hérité d'une session Claude Code ouverte
+  autour, un effort élevé a fait dépasser 4 minutes à mon premier essai.
+  Deux ajustements tirés des jets obtenus : le suffixe ` UTC` devient
+  FACULTATIF à la conversion des dates (les modèles l'oublient ; un autre
+  fuseau reste non converti), et les consignes gagnent un RAPPEL FINAL,
+  placé après le gabarit (`FINAL_CHECK_MARK`) — les règles du début
+  cédaient devant les exemples. Essais RÉELS sur le portable, note 11653,
+  par la route du serveur : 13 à 25 s par jet, le dernier à 1 733
+  caractères, sans correctifs ni règle de recrutement ; cinq appels ont
+  compté dans le quota de l'abonnement. Typecheck, lint, tests verts. Non
+  vérifié : la branche Windows (jamais lancée) et le bouton dans un
+  navigateur — essai de Sevih.
 - **Onglet Discord de quick : « Copier le message » pour poster soi-même,
   et consignes alignées sur la version de Sevih** (Fable). Deux retours sur
   le second jet. (1) Les couleurs marchent quand le bot poste, pas quand

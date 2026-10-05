@@ -1302,7 +1302,7 @@
                 <button
                   class="ghost"
                   id="d-dates"
-                  title="Convertit chaque « AAAA-MM-JJ HH:MM UTC » (date et heure) ou « AAAA-MM-JJ UTC » (date seule) du brouillon en horodatage Discord"
+                  title="Convertit chaque « AAAA-MM-JJ HH:MM » (date et heure) ou « AAAA-MM-JJ » (date seule) du brouillon en horodatage Discord — lues en UTC, comme dans la note"
                 >
                   convertir les dates
                 </button>
@@ -1356,6 +1356,16 @@
             <div class="bar">
               <span id="d-count"></span>
               <button class="ghost" id="d-template">Insérer le gabarit</button>
+              <!-- Le premier jet rédigé par Claude Code sans fenêtre, sous
+                   l'abonnement (jamais par la clé d'API) : la même demande que
+                   « Copier la demande », sans le copier-coller. -->
+              <button
+                class="ghost"
+                id="d-draft"
+                title="Claude Code rédige un premier jet du résumé à partir de la note choisie, puis les dates sont converties"
+              >
+                Proposer un brouillon
+              </button>
               <!-- Le texte à coller dans claude.ai pour un premier jet : consignes,
                    exemples tirés des anciens résumés, la note choisie, le gabarit.
                    Rien ne part d'ici vers un modèle. -->
@@ -2388,6 +2398,32 @@
         $('d-request-k').value = requestCount();
         mem.set('requestExamples', requestCount());
       };
+      $('d-draft').onclick = async () => {
+        const noteId = $('d-note').value;
+        if (!noteId) return log(['Choisir une note officielle d’abord.'], false);
+        if (!editor) return;
+        // Demandé AVANT : inutile de faire rédiger un jet qu'on ne posera pas.
+        if (
+          $('d-text').value.trim() &&
+          !confirm('Remplacer le brouillon par le premier jet de Claude ?')
+        )
+          return;
+        $('d-draft').disabled = true;
+        log([], undefined, 'demande à Claude');
+        try {
+          const r = await post('/api/discord/draft', { noteId, examples: requestCount() });
+          if (!r.ok || !r.text) return;
+          // Par `applyEdit` : Ctrl+Z rend l'ancien brouillon. Puis les dates,
+          // que le modèle écrit en clair faute de savoir les calculer.
+          applyEdit({ text: r.text, start: r.text.length, end: r.text.length });
+          const d = editor.convertDates(editState());
+          if (d.count) applyEdit(d.edit);
+          $('d-request-info').textContent =
+            `Premier jet posé — ${r.text.length.toLocaleString('fr-FR')} caractères, ${d.count} date${d.count > 1 ? 's' : ''} convertie${d.count > 1 ? 's' : ''}. À relire contre la note avant d’envoyer.`;
+        } finally {
+          $('d-draft').disabled = false;
+        }
+      };
       $('d-request').onclick = async () => {
         const noteId = $('d-note').value;
         if (!noteId) return log(['Choisir une note officielle d’abord.'], false);
@@ -2741,7 +2777,7 @@
         $('d-dates-info').textContent =
           (r.count
             ? `${r.count} date${s(r.count)} convertie${s(r.count)} en horodatage Discord.`
-            : 'Aucune date convertie : la forme attendue est « AAAA-MM-JJ HH:MM UTC », suffixe compris.') +
+            : 'Aucune date convertie : la forme attendue est « AAAA-MM-JJ » ou « AAAA-MM-JJ HH:MM », lue en UTC.') +
           (r.invalid.length
             ? ` Laissée${s(r.invalid.length)} telle${s(r.invalid.length)} quelle${s(r.invalid.length)}, la date n’existe pas : ${r.invalid.join(', ')}.`
             : '');

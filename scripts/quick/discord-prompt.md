@@ -32,3 +32,14 @@ Rules
 
 - Invent nothing: every fact comes from the note to summarize. When unsure whether something matters, leave it out.
 - Follow the examples' brevity: a summary is a fraction of the note, never a rewrite of it.
+
+=== FINAL CHECK ===
+
+Before replying, check your draft against this list and fix it. The examples are older and looser than the rules given at the top: wherever they disagree, the rules win.
+
+- Count the characters: 2,000 at most in total. If over, cut — shop lines, minor adjustments and bug fixes first.
+- No hero role or kit, no recruitment rule or guarantee, no one-time reward or compensation.
+- At most 3 system-change lines, each as short as it can be said.
+- No Bug Fixes section unless a combat mechanic behaved wrong for most players.
+- No section beyond the template's, except for a big one-off; no separate Content section on an ordinary patch.
+- Every date reads `YYYY-MM-DD UTC` or `YYYY-MM-DD HH:MM UTC`, outside any code.

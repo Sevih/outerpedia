@@ -69,6 +69,7 @@ import {
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
 import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
+import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
 
 // Les stores lisent `process.env` (écrits pour Next, qui charge .env.local seul).
@@ -221,6 +222,42 @@ async function stream<T>(res: ServerResponse, run: (report: Report) => Promise<T
     line({ done: { ok: false, log: [String(e)] } });
   }
   res.end();
+}
+
+interface RequestBody {
+  noteId?: unknown;
+  examples?: unknown;
+}
+
+/** La demande de premier jet pour une note : consignes, exemples, note, gabarit. */
+async function requestFor(b: RequestBody) {
+  const posts = await patchPosts();
+  const post = posts.find((p) => p.lang === 'en' && String(p.id) === String(b.noteId ?? ''));
+  if (!post) return { error: 'note inconnue', status: 404 };
+  let instructions: string;
+  try {
+    instructions = readFileSync(PROMPT, 'utf8');
+  } catch (e: unknown) {
+    return { error: `scripts/quick/discord-prompt.md illisible : ${String(e)}`, status: 500 };
+  }
+  const wanted = Number.isInteger(b.examples)
+    ? Math.min(REQUEST_EXAMPLES_MAX, Math.max(0, Number(b.examples)))
+    : REQUEST_EXAMPLES;
+  const history = readHistory();
+  const state = historyState(history);
+  return {
+    ...draftRequest({
+      instructions,
+      examples: requestExamples(history, posts, wanted, String(post.id)),
+      note: requestNote(post),
+      template: patchTemplate(officialUrl(post)),
+    }),
+    wanted,
+    budget: REQUEST_BUDGET,
+    // De quoi dire POURQUOI il n'y a pas d'exemple, le cas échéant.
+    summaries: state.count,
+    paired: state.paired,
+  };
 }
 
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
@@ -380,34 +417,21 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/discord/request') {
     // « copier la demande » : le texte à coller dans claude.ai. Tout vient du
     // disque — consignes, historique, notes — et RIEN ne part sur le réseau.
-    const b = await body<{ noteId?: unknown; examples?: unknown }>(req);
-    const posts = await patchPosts();
-    const post = posts.find((p) => p.lang === 'en' && String(p.id) === String(b.noteId ?? ''));
-    if (!post) return json(res, { error: 'note inconnue' }, 404);
-    let instructions: string;
-    try {
-      instructions = readFileSync(PROMPT, 'utf8');
-    } catch (e: unknown) {
-      return json(res, { error: `scripts/quick/discord-prompt.md illisible : ${String(e)}` }, 500);
-    }
-    const wanted = Number.isInteger(b.examples)
-      ? Math.min(REQUEST_EXAMPLES_MAX, Math.max(0, Number(b.examples)))
-      : REQUEST_EXAMPLES;
-    const history = readHistory();
-    const state = historyState(history);
-    json(res, {
-      ...draftRequest({
-        instructions,
-        examples: requestExamples(history, posts, wanted, String(post.id)),
-        note: requestNote(post),
-        template: patchTemplate(officialUrl(post)),
-      }),
-      wanted,
-      budget: REQUEST_BUDGET,
-      // De quoi dire POURQUOI il n'y a pas d'exemple, le cas échéant.
-      summaries: state.count,
-      paired: state.paired,
-    });
+    const r = await requestFor(await body<RequestBody>(req));
+    json(res, 'error' in r ? { error: r.error } : r, 'error' in r ? r.status : 200);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/draft') {
+    // « proposer un brouillon » : la MÊME demande, donnée à Claude Code lancé
+    // sans fenêtre, sous l'abonnement de Sevih (cf. `claude-draft.ts`).
+    const r = await requestFor(await body<RequestBody>(req));
+    if ('error' in r) return json(res, { ok: false, log: [r.error] }, r.status);
+    const model = draftModel(process.env.QUICK_DRAFT_MODEL);
+    const env = childEnv(process.env, Object.keys(loadEnvLocal()));
+    await stream(res, (report) =>
+      proposeDraft(r.text, { run: (prompt) => runClaude(prompt, { model, env }), model }, report),
+    );
     return;
   }
 

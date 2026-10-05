@@ -2298,13 +2298,21 @@ export interface DraftRequest {
   dropped: number;
 }
 
+/** Dans `discord-prompt.md`, la ligne qui sépare les consignes du rappel final. */
+export const FINAL_CHECK_MARK = '=== FINAL CHECK ===';
+
 /**
  * La demande à coller dans claude.ai pour un premier jet — AUCUN appel réseau
  * ici, ni ailleurs : Sevih la colle lui-même, sous son abonnement.
  *
  * Dans l'ordre : les consignes (`discord-prompt.md`), les exemples — du plus
  * ancien au plus récent, chacun « note officielle » puis « résumé posté » —, la
- * note à résumer, le gabarit. `examples` arrive du plus récent au plus ancien :
+ * note à résumer, le gabarit, puis le RAPPEL FINAL : la partie des consignes
+ * qui suit la ligne `FINAL_CHECK_MARK`. Placé en dernier, après 100 000
+ * caractères de notes, c'est lui qu'un modèle a sous les yeux en écrivant —
+ * les règles du début, seules, cédaient devant les exemples (jets trop longs,
+ * correctifs et règles de recrutement gardés malgré la consigne).
+ * `examples` arrive du plus récent au plus ancien :
  * au-delà de `budget` caractères, les plus anciens sautent d'abord. La note à
  * résumer ne se raccourcit pas : sans exemple, la demande peut encore dépasser.
  */
@@ -2315,7 +2323,8 @@ export function draftRequest(input: {
   template: string;
   budget?: number;
 }): DraftRequest {
-  const { instructions, examples, note, template, budget = REQUEST_BUDGET } = input;
+  const { examples, note, template, budget = REQUEST_BUDGET } = input;
+  const [instructions, closing = ''] = input.instructions.split(FINAL_CHECK_MARK);
   const cited = (tag: string, n: RequestNote): string =>
     `<${tag}>\nTitle: ${n.title}\nDate: ${n.date}\nURL: ${n.url}\n\n${n.text}\n</${tag}>`;
   const build = (kept: readonly RequestExample[]): string =>
@@ -2332,6 +2341,7 @@ export function draftRequest(input: {
         : '',
       cited('note_to_summarize', note),
       `<template>\n${template}\n</template>`,
+      closing.trim(),
     ]
       .filter(Boolean)
       .join('\n\n');

@@ -769,14 +769,18 @@ const CODE_SPAN = /```[\s\S]*?```|``[^\n]+?``|`[^`\n]+`/g;
 
 /**
  * Une date écrite pour être convertie, avec ou sans heure. Le suffixe ` UTC`
- * est EXIGÉ — une date nue reste du texte — et `UTC+2` n'est pas de l'UTC.
+ * est FACULTATIF : les dates d'une note sont en UTC, et un modèle l'oublie une
+ * fois sur deux — exigé, il laissait la moitié des dates en texte. Une date
+ * suivie d'un AUTRE fuseau (`UTC+2`, `KST`, tout sigle en capitales) n'est pas
+ * convertie.
  */
-const UTC_STAMP = /(?<!\d)(\d{4}-\d{2}-\d{2})(?: (\d{2}:\d{2}))? UTC(?![\w+]|-\d)/g;
+const UTC_STAMP =
+  /(?<![\d-])(\d{4}-\d{2}-\d{2})(?: (\d{2}:\d{2}))?(?: UTC(?![\w+]|-\d)|(?![\w:-]| \d{2}:\d{2}| ?[A-Z]{2,5}\b))/g;
 
 /**
- * Remplace dans tout le texte chaque `AAAA-MM-JJ HH:MM UTC` par `<t:…:f>` —
+ * Remplace dans tout le texte chaque `AAAA-MM-JJ HH:MM` (` UTC` ou rien) par `<t:…:f>` —
  * c'est sous cette forme qu'un modèle écrit ses dates, lui qui ne sait pas
- * calculer un instant Unix. Une date SANS heure (`AAAA-MM-JJ UTC`) devient une
+ * calculer un instant Unix. Une date SANS heure (`AAAA-MM-JJ`) devient une
  * date seule, `<t:…:D>`, posée à MIDI UTC : à minuit, les lecteurs à l'ouest
  * de Greenwich liraient la veille. Hors du code ; une date qui n'existe pas est
  * laissée telle quelle et rendue dans `invalid`. La sélection suit son texte.
