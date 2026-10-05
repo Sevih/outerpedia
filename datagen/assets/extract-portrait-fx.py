@@ -48,10 +48,18 @@ de quantification de 1/255 par texture ressort à ~0,27 à l'écran — soit du 
 franc sur un dégradé. La clé du manifest porte donc `.png`, ce qui suffit à
 `stage.ts` pour rester sans perte.
 
+QUELS EFFETS. Aucune liste à tenir : sans argument, le script sort les effets que la
+table du jeu NOMME et dont le prefab existe dans le bundle (cf. `table_effects`). Un
+effet qui arrive avec un patch est donc extrait d'office ; c'est le moteur qui décide
+ensuite s'il sait le poser en entier (`effectVerdict`, `portrait-fx-sim.ts`), et le
+refresh qui le dit (`portrait-fx-report.ts`). Un effet nommé sans prefab, ou dont la
+lecture lève, n'arrête rien : il est écarté, nommé dans `notExtracted`, et son
+porteur garde un portrait statique.
+
 Usage :
-    python extract-portrait-fx.py              # les effets par défaut (cf. DEFAULT_EFFECTS)
-    python extract-portrait-fx.py Demi Synchro # d'autres, par suffixe de nom
-    python extract-portrait-fx.py --all        # tout le bundle
+    python extract-portrait-fx.py              # les effets que la table du jeu nomme
+    python extract-portrait-fx.py Demi Synchro # ceux-là seulement, par suffixe de nom (travail à la main)
+    python extract-portrait-fx.py --all        # tout le bundle (idem)
     python extract-portrait-fx.py --max-size 1024  # autre plafond de texture (0 = aucun)
 """
 
@@ -98,11 +106,6 @@ OUT_TEX = (
 FX_BUNDLE = 'prefabs/character/ui_effect'
 PAGE_BUNDLE = 'prefabs/ui/cuicharactermainpage'
 EFFECT_PREFIX = 'FX_UI_Character_List_'
-
-#: Les effets rendus par le site. Élargir cette liste est le SEUL geste à faire
-#: pour en servir un de plus — le reste du script est data-driven.
-DEFAULT_EFFECTS = ['Demi', 'Dungeon', 'Seasonal', 'Resonance', '2000086',
-                   '2000093', '2000106', '2000110', '2000114', '2000121']
 
 #: PLAFOND du plus grand côté d'une texture, en texels (`--max-size`, 0 = aucun).
 #:
@@ -221,14 +224,19 @@ def read_holder() -> dict:
     }
 
 
+def previous_table() -> dict:
+    """Le JSON committé — ce que le dernier passage a publié —, ou `{}` s'il n'y en a pas."""
+    if not OUT_JSON.exists():
+        return {}
+    try:
+        return json.loads(OUT_JSON.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+
+
 def previous_color_space() -> str:
     """`colorSpace` déjà résolu dans le JSON committé, ou `unknown` s'il n'y en a pas."""
-    if not OUT_JSON.exists():
-        return 'unknown'
-    try:
-        return json.loads(OUT_JSON.read_text(encoding='utf-8')).get('colorSpace', 'unknown')
-    except (OSError, ValueError):
-        return 'unknown'
+    return previous_table().get('colorSpace', 'unknown')
 
 
 def color_space_of(path: Path) -> str | None:
@@ -647,7 +655,7 @@ def read_emitter(fx: Bundle, go: dict, rt: dict, mats: dict, meshes: dict,
 # --- qui porte quel effet ---------------------------------------------------------
 
 
-def by_character() -> dict[str, str]:
+def by_character() -> dict[str, str] | None:
     """`CharacterID → ThumbnailEffect`, la table du jeu, ENTIÈRE.
 
     On publie les 25 lignes même quand on n'en rend qu'une poignée : la table dit
@@ -658,44 +666,91 @@ def by_character() -> dict[str, str]:
     contrôle pour la grille publique, est un champ de `characters.json` — le
     datagen lit déjà cette table pour `showNickName` (cf. `specs/character.ts`).
     Le mettre ici évite d'ouvrir un contrat de données pour une page /dev.
+
+    Rend None quand la table parsée MANQUE, ou ne nomme aucun effet (un parse
+    raté y ressemble, un jeu qui retire toutes ses parures non) : ce n'est pas
+    « personne n'a d'effet », c'est « on ne sait pas », et l'appelant garde alors
+    ce que le JSON committé disait — même traitement que le `colorSpace`.
     """
     if not EXTRA_TABLE.exists():
-        return {}
+        return None
     table = json.loads(EXTRA_TABLE.read_text(encoding='utf-8'))
     return {
         row['CharacterID']: row['ThumbnailEffect']
         for row in table['rows']
         if row.get('ThumbnailEffect')
-    }
+    } or None
+
+
+def prefabs_in(fx: Bundle) -> list[str]:
+    """Les prefabs d'effet du bundle : ses GameObjects RACINES au nom d'effet."""
+    return sorted(
+        go['m_Name']
+        for go in (o.read_typetree() for o in fx.objs if o.type.name == 'GameObject')
+        if go.get('m_Name', '').startswith(EFFECT_PREFIX)
+        and fx.component(go, 'RectTransform')
+        and not fx.component(go, 'RectTransform')['m_Father']['m_PathID']
+    )
+
+
+def table_effects(carriers: dict[str, str], previous: dict) -> list[str]:
+    """Les effets que la table NOMME, dans l'ordre où le JSON les publie.
+
+    Ceux du JSON committé d'abord, à LEUR place, puis les nouveaux dans l'ordre de
+    la table du jeu : un effet qui arrive s'ajoute en queue (effets, matériaux,
+    mailles) au lieu de rebattre tout le fichier — le diff d'un patch ne montre
+    que ce que le patch apporte.
+    """
+    named = list(dict.fromkeys(carriers.values()))
+    kept = [name for name in previous.get('effects', {}) if name in named]
+    return kept + [name for name in named if name not in kept]
 
 
 # --- assemblage ------------------------------------------------------------------
 
 
-def extract(effects: list[str], max_size: int = DEFAULT_MAX_SIZE) -> dict:
-    fx = Bundle(FX_BUNDLE)
+def extract(fx: Bundle, effects: list[str], carriers: dict[str, str],
+            max_size: int = DEFAULT_MAX_SIZE) -> dict:
+    """La table, pour les prefabs `effects` (noms PLEINS) et les porteurs `carriers`.
+
+    UN EFFET QUI NE SE LIT PAS N'ARRÊTE PAS LES AUTRES. Prefab absent du bundle,
+    mode de dégradé inconnu, texture irrésolue : l'effet est écarté EN ENTIER (ce
+    qu'il avait déjà versé dans les matériaux, mailles et textures est retiré) et
+    son motif publié dans `notExtracted`. Depuis que les effets ne sont plus
+    choisis à la main, lever ici ferait échouer le refresh d'un patch pour une
+    parure — alors que la carte, elle, sait très bien rester statique.
+    """
     tex_index = texture_index(bundle_deps(FX_BUNDLE))
 
     mats: dict[int, dict] = {}
     meshes: dict[int, dict] = {}
     wanted_tex: dict[str, tuple[str, int]] = {}
     out_effects: dict[str, Any] = {}
+    not_extracted: dict[str, str] = {}
 
-    for suffix in effects:
-        name = f'{EFFECT_PREFIX}{suffix}'
+    for name in effects:
         gos = fx.gameobjects(name)
         if not gos:
-            raise RuntimeError(f'effet « {name} » absent du bundle {FX_BUNDLE}')
+            not_extracted[name] = f'sans prefab dans le bundle {FX_BUNDLE}'
+            continue
         go = gos[0]
         root_rt = fx.component(go, 'RectTransform')
 
+        before = [set(mats), set(meshes), set(wanted_tex)]
         emitters = []
-        for child in root_rt.get('m_Children', []):
-            crt = fx.read(child['m_PathID'])
-            cgo = fx.read(crt['m_GameObject']['m_PathID'])
-            e = read_emitter(fx, cgo, crt, mats, meshes, tex_index, wanted_tex)
-            if e:
-                emitters.append(e)
+        try:
+            for child in root_rt.get('m_Children', []):
+                crt = fx.read(child['m_PathID'])
+                cgo = fx.read(crt['m_GameObject']['m_PathID'])
+                e = read_emitter(fx, cgo, crt, mats, meshes, tex_index, wanted_tex)
+                if e:
+                    emitters.append(e)
+        except RuntimeError as err:
+            for pool, kept in zip((mats, meshes, wanted_tex), before):
+                for key in set(pool) - kept:
+                    del pool[key]
+            not_extracted[name] = f'extraction refusée — {err}'
+            continue
 
         out_effects[name] = {
             # Le nœud racine ne dessine rien (émission coupée) ; seule sa POSITION
@@ -715,11 +770,14 @@ def extract(effects: list[str], max_size: int = DEFAULT_MAX_SIZE) -> dict:
         'frame': {'w': 180, 'h': 344},
         'colorSpace': read_color_space(),
         'holder': read_holder(),
-        'byCharacter': by_character(),
+        'byCharacter': carriers,
         'effects': out_effects,
         'materials': {m['name']: m for m in mats.values()},
         'meshes': {m['name']: m for m in meshes.values()},
         'textures': textures,
+        # `effet → motif` pour ceux qu'on a voulu sortir sans y parvenir. La clé
+        # n'existe que s'il y en a : c'est l'exception, pas un champ de la table.
+        **({'notExtracted': not_extracted} if not_extracted else {}),
     }
 
 
@@ -741,19 +799,34 @@ def main() -> None:
             sys.exit('--max-size attend un nombre de texels (0 = aucun plafond)')
         max_size = int(args[i + 1])
         del args[i:i + 2]
-    if args == ['--all']:
-        fx = Bundle(FX_BUNDLE)
-        effects = sorted(
-            go['m_Name'][len(EFFECT_PREFIX):]
-            for go in (o.read_typetree() for o in fx.objs if o.type.name == 'GameObject')
-            if go.get('m_Name', '').startswith(EFFECT_PREFIX)
-            and fx.component(go, 'RectTransform')
-            and not fx.component(go, 'RectTransform')['m_Father']['m_PathID']
-        )
-    else:
-        effects = args or DEFAULT_EFFECTS
 
-    data = extract(effects, max_size)
+    fx = Bundle(FX_BUNDLE)
+    previous = previous_table()
+    carriers = by_character()
+    if carriers is None:
+        # P8 de l'audit : sans la table parsée, on réécrivait `byCharacter` à
+        # vide et plus aucun perso n'avait d'effet. On garde ce qui est committé.
+        carriers = previous.get('byCharacter') or {}
+        print(f'  ! {EXTRA_TABLE.name} absente ou sans effet — porteurs et liste '
+              f"d'effets conservés du JSON committé ({len(carriers)} ligne(s))")
+        named = list(previous.get('effects', {}))
+    else:
+        named = table_effects(carriers, previous)
+
+    if args == ['--all']:
+        effects = prefabs_in(fx)
+    elif args:
+        effects = [f'{EFFECT_PREFIX}{suffix}' for suffix in args]
+    else:
+        effects = named
+        # Rien à sortir alors que personne n'a restreint la passe : la table et le
+        # JSON committé manquent tous deux, ou le bundle n'a plus aucun des
+        # prefabs nommés. Écrire quand même publierait une table vide.
+        if not any(fx.gameobjects(name) for name in effects):
+            sys.exit(f'Aucun effet à extraire ({len(effects)} nommé(s), aucun dans '
+                     f'{FX_BUNDLE}) — {OUT_JSON.name} laissé tel quel')
+
+    data = extract(fx, effects, carriers, max_size)
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     # Même discipline d'écriture que `extract-face-layout.py` : LF et saut final,
     # sinon un diff de plusieurs milliers de lignes réapparaît à chaque patch sans
@@ -767,16 +840,21 @@ def main() -> None:
     for n, t in data['textures'].items():
         game = t.get('gameSize')
         print(f'  {n}.png' + (f'  {game[0]}×{game[1]} → {t["w"]}×{t["h"]}' if game else ''))
+    for name in data['effects']:
+        if name not in previous.get('effects', {}):
+            print(f'  + {name} : nouvel effet extrait')
     # Un effet que la table NOMME (`byCharacter`, relevé entier) sans que cette
-    # passe ait sorti son prefab : le moteur ne le connaît pas, `fxOf` rend
-    # undefined et la carte reste un portrait statique — rien ne le dit à l'écran.
-    # C'est ce qui arrive quand le jeu ajoute un effet : il reste hors de
-    # `DEFAULT_EFFECTS` tant que personne ne l'y inscrit. Le test de contrat
-    # (`src/components/character/portrait-fx.test.ts`) casse sur le même cas.
-    for name, ids in sorted(unextracted(data).items()):
-        print(f'  ! {name} : nommé par le jeu ({", ".join(ids)}) mais pas extrait — '
-              f'le moteur ne le rendra pas')
-        print(f'    (ajouter « {name.removeprefix(EFFECT_PREFIX)} » à DEFAULT_EFFECTS pour le servir)')
+    # passe l'ait sorti : la carte de ses porteurs reste un portrait statique, et
+    # rien ne le dit à l'écran. C'est dit ici, et redit avec le verdict du moteur
+    # par `portrait-fx-report.ts`, le pas suivant du refresh.
+    refused = data.get('notExtracted', {})
+    missing = unextracted(data)
+    for name, ids in sorted(missing.items()):
+        why = refused.get(name, 'hors de cette passe (effets nommés en argument)')
+        print(f'  ! {name} : nommé par le jeu ({", ".join(ids)}) mais pas extrait — {why}')
+    for name, why in sorted(refused.items()):
+        if name not in missing:
+            print(f'  ! {name} : demandé mais pas extrait — {why}')
 
 
 if __name__ == '__main__':

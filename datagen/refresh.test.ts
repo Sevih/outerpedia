@@ -193,6 +193,15 @@ describe('genSteps — la chaîne déclarée', () => {
     expect(stepKey(applied.find((s) => s.id === 'damage')!)).toBe('damage');
   });
 
+  it('le rapport des effets de portrait suit IMMÉDIATEMENT leur extraction', () => {
+    // Il juge la table que `portrait-fx` vient d'écrire : placé avant, il
+    // rapporterait celle du patch précédent ; et c'est une étape TS, donc jouée
+    // même quand l'extraction python est sautée (elle relit alors le JSON committé).
+    const ids = dry.map((s) => s.id);
+    expect(ids[ids.indexOf('portrait-fx') + 1]).toBe('portrait-fx-report');
+    expect(dry.find((s) => s.id === 'portrait-fx-report')!.py).toBeUndefined();
+  });
+
   it('chaque étape python déclare le module dont ELLE dépend', () => {
     expect(dry.filter((s) => s.py).map((s) => [s.id, s.py])).toEqual([
       ['face-layout', 'UnityPy'],

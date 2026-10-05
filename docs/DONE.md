@@ -7,6 +7,130 @@
 
 ## 2026-10-05
 
+- **Lot F12 : portraits animés — un effet qui arrive est extrait, jugé et
+  servi (ou mis en attente) sans aucun geste ; plus rien ne bloque un patch
+  pour une parure** (Fable, demande Sevih du 05/10 ; solde P8 de
+  `docs/audit/portrait-fx.md`). Le pourquoi : `_Resonance` « se servait tel
+  quel » et a quand même coûté trois gestes — l'inscrire dans
+  `DEFAULT_EFFECTS` (sinon pas extrait, et `pnpm test` cassait sur
+  `NOT_EXTRACTED`), inscrire un éventuel refus dans `NOT_RENDERED`, écrire sa
+  section sur la page de contrôle. Le quoi, en cinq points. (1) EXTRACTION
+  SANS LISTE : `extract-portrait-fx.py` n'a plus de `DEFAULT_EFFECTS` ; sans
+  argument il sort les effets que `CharacterExtraTemplet.ThumbnailEffect`
+  nomme (`table_effects` : ceux du JSON committé d'abord, à leur place, les
+  nouveaux en queue dans l'ordre de la table — le diff d'un patch ne montre
+  que ce qu'il apporte). Les arguments et `--all` restent pour le travail à
+  la main. Table parsée absente ou sans aucun effet : `by_character()` rend
+  `None` et le script garde le `byCharacter` et la liste d'effets du JSON
+  committé, en le disant (P8) ; rien à extraire du tout : il sort en erreur
+  SANS écrire. Un effet nommé sans prefab, ou dont la lecture lève (mode de
+  dégradé inconnu, texture irrésolue), est écarté SEUL — ses matériaux,
+  mailles et textures déjà versés sont retirés — et son motif publié dans
+  une clé `notExtracted` qui n'existe que s'il y en a : depuis que les
+  effets ne sont plus choisis à la main, lever là aurait fait échouer le
+  refresh d'un patch. (2) SERVI SEULEMENT SI ENTIER : `effectVerdict(nom)`
+  dans `portrait-fx-sim.ts`, à côté de `layerVerdict`, pure et mémoïsée par
+  nom d'effet — `served` si tous les calques actifs passent, `held` avec une
+  ligne `effet/calque — motif` par calque refusé (ou « aucun calque
+  rendable »), `not-extracted` sinon. `AnimatedPortrait` la consulte avant
+  de poser son canvas : un effet en attente ne monte ni canvas ni contexte,
+  la carte est le portrait statique. `fxOf` la consulte aussi, et a
+  déménagé de `portrait-fx.ts` vers `portrait-fx-sim.ts` pour ça (l'inverse
+  aurait fait un import circulaire) ; `portrait-fx-gl.ts` n'est pas touché,
+  `AnimatedPortrait` étant le seul appelant de `mountPortraitFx`.
+  `NOT_RENDERED` quitte le fichier de test pour le moteur et change de
+  sens : la liste des refus ACCEPTÉS (servir l'effet sans ce calque), lue
+  par `effectVerdict` et par le test — vide aujourd'hui. (3) LE TEST DE
+  CONTRAT (`portrait-fx.test.ts`) ne casse plus sur un effet nouveau,
+  rendable ou non ; il casse encore sur une table vide, un espace
+  colorimétrique non linéaire, une texture sans fiche, une maille
+  incohérente, un refus accepté qui n'en est plus un, et — la régression
+  demandée — un effet servi dont la fiche n'a pas changé et que le moteur
+  ne servirait plus. Pour celle-là, pas de liste à la main : un RELEVÉ
+  `datagen/assets/portrait-fx-served.json` (`effet servi → empreinte de sa
+fiche` : ses émetteurs, leurs matériaux, leurs mailles), écrit par le pas
+  de rapport. Empreinte identique et effet plus servi = le moteur a
+  régressé, le test casse ; fiche changée par un patch = l'effet sort du
+  relevé sans rien casser. Le pas ne retire jamais du relevé un effet à
+  fiche inchangée (il blanchirait la régression au premier refresh) ;
+  resserrer le moteur exprès se valide par
+  `pnpm tsx datagen/assets/portrait-fx-report.ts --accept`. (4) ÇA SE VOIT :
+  nouveau pas `portrait-fx-report` dans `refresh.ts`, juste après
+  `portrait-fx`, en TypeScript parce qu'il importe le verdict du moteur au
+  lieu de le recopier en Python (`datagen/assets/portrait-fx-report.ts`,
+  `fxReport` pure). Face à la table du dernier commit (`git show HEAD:`),
+  il dit `+ <effet> (porteur(s) …) — NOUVEAU, servi tel quel`, `… — NOUVEAU,
+en attente : <effet>/<calque> — <motif de layerVerdict>`, `… — pas
+extrait : <motif>`, un nouveau porteur d'un effet déjà servi, et redit en
+  `!` tout effet en attente ou pas extrait tant qu'il le reste (« servi
+  jusqu'ici » si le patch vient de le faire tomber). Il ne fait jamais
+  échouer la chaîne, et `refresh()` reprend les mêmes lignes en DERNIÈRE
+  ligne du run (« ◆ Portraits animés — à lire »), génération jouée ou non.
+  (5) PAGE DE CONTRÔLE (`/dev/AnimatedPortrait`) : tout effet de la table
+  sans section écrite reçoit une section générée (porteurs, portrait
+  statique et carte animée, calques avec le verdict du moteur) ; une
+  section « Effets que le site ne pose pas » liste les effets en attente
+  ou pas extraits avec leur motif et dit où transcrire ; la colonne État
+  du tableau des porteurs distingue « en attente » de « non extrait ». Les
+  sections existantes n'ont pas bougé. Vérification : `pnpm typecheck`
+  (dernière ligne : `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json
+&& tsc --noEmit -p scripts/tsconfig.json`, sans erreur), `pnpm lint`
+  (`$ eslint`, sans sortie), `pnpm test` (`Test Files  184 passed (184)`,
+  `Tests  2300 passed (2300)` — 23 tests de plus : `effectVerdict`,
+  `fxReport`, `nextSnapshot`, `fingerprint`, l'ordre du pas dans la chaîne).
+  La table committée n'a pas changé d'un octet : extraction rejouée sur
+  `.gamedata` dans un dossier temporaire (script chargé par un banc qui
+  détourne `OUT_JSON`, `OUT_TEX` et la table parsée), `cmp` identique —
+  avant le lot, après, et sans table parsée (cas d). Simulation de
+  l'arrivée, sans toucher aux fichiers committés : (a) une copie de la
+  table parsée où un perso de plus nomme `_Synchro`, le seul prefab du
+  bundle que personne ne porte — l'extraction le sort d'office (11 effets,
+  les dix premiers à leur place, matériaux communs identiques), le rapport
+  dit « NOUVEAU, servi tel quel » ; (b) la même table, `_POLAR_UV_ON`
+  ajouté à un matériau de `_Synchro` — « NOUVEAU, en attente :
+  FX_UI_Character_List_Synchro/inner — FX_UI_Syncro_Frame : branche(s) de
+  shader non transcrite(s) — _POLAR_UV_ON » ; (c) un perso qui nomme
+  `FX_UI_Character_List_Bidon` — extraction en code 0, « pas extrait : sans
+  prefab dans le bundle », dix effets inchangés ; plus un effet dont la
+  lecture lève en cours de route (`_Seasonal`, deuxième émetteur) — écarté
+  seul, aucun matériau orphelin. Sur chacune de ces tables, les tests du
+  dépôt rejoués par un alias de `vitest` qui remplace le JSON : verts, et
+  `AnimatedPortrait` rendu côté serveur pose un canvas en (a), aucun en (b)
+  et (c) ; la page de contrôle rendue de même montre sa section générée et
+  sa liste d'attente. Ce banc a trouvé trois de mes propres tests qui
+  auraient cassé à l'arrivée d'un effet en attente (ordre des lignes —
+  les clés numériques d'un objet JS se trient seules —, une exigence « tout
+  est servi ») : corrigés. `/dev/AnimatedPortrait` lu une fois sur :3000 :
+  200, 27 canvas comme avant, « Aucun : les 10 effets que la table nomme
+  sont servis entiers ». Aucun contrôle visuel : le rendu n'est pas touché
+  (`portrait-fx-gl.ts` intact, table identique). CE QUE SEVIH FAIT QUAND UN
+  EFFET ARRIVE — servi tel quel : rien ; le lire dans la dernière ligne du
+  refresh, le regarder sur `/dev/AnimatedPortrait` (section générée) et le
+  confronter au jeu. En attente : rien ne casse, le perso a son portrait
+  statique ; le motif est dans le refresh et sur la page (« Effets que le
+  site ne pose pas ») — transcrire ce qu'il nomme (une branche de shader :
+  `portrait-fx-gl.ts` et `SUPPORTED_KEYWORDS` de `portrait-fx.ts` ; un
+  module ou un mode : `portrait-fx-sim.ts`), ou recopier la ligne dans
+  `NOT_RENDERED` pour servir l'effet sans ce calque. Pas extrait : lire le
+  motif — « sans prefab dans le bundle » : vérifier que le pull a bien tiré
+  `prefabs/character/ui_effect` ;
+  « extraction refusée — … » : c'est l'extracteur qui ne sait pas lire
+  l'effet, à compléter dans `extract-portrait-fx.py`. Ce que le prochain
+  patch prouvera et que je n'ai pas pu prouver : la chaîne `refresh`
+  entière sur un vrai effet neuf (le pas et le récapitulatif ont été joués
+  seuls et sur des tables simulées, pas `pnpm dev`, interdit), la collecte
+  et le push R2 des textures d'un effet extrait d'office, et l'image d'un
+  effet « servi tel quel » face au jeu. Laissé : « servi tel quel » vaut ce
+  que valent les gardes de `layerVerdict`, et P7 (hors périmètre) y laisse
+  un trou — un calque-maille passe toujours ; `_Synchro` en simulation
+  sort « servi » alors que son `inner` porte une feuille UV 5×5 à tuile
+  aléatoire que le moteur ne transcrit pas (noté au TODO, P7). Pas de
+  script `package.json` pour le pas (fichier interdit) : `pnpm tsx
+datagen/assets/portrait-fx-report.ts`. `pnpm datagen:portrait-fx` lancé
+  seul ne met pas le relevé à jour — sans conséquence (un effet hors relevé
+  n'est pas jugé), le refresh suivant le fait. L'en-tête de la page compte
+  toujours les sections écrites (`SERVED.length`), pas les effets servis ;
+  les compteurs périmés de P9 dans le script et `refresh.ts` restent.
 - **Relecture de F11 : le contexte WebGL partagé** (Fable). Lot 65,
   `6b64c526`. Rendu `bloque` d'abord, sur le garde-fou de cadence que le
   prompt posait ; levé par Sevih après son contrôle à l'écran sur Chrome ET

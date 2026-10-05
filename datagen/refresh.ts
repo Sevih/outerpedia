@@ -34,6 +34,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { portraitFxRecap } from './assets/portrait-fx-report';
 import { isMain } from './lib/is-main';
 import { ANDROID_GAMEDATA_ROOT, gamedata, gamedataRoot } from './lib/paths';
 import { pythonToolingMissing } from './lib/python';
@@ -292,10 +293,10 @@ export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean 
       file: 'datagen/assets/extract-sprite-rect.py',
       py: 'UnityPy',
     },
-    // SANS ARGUMENT = `DEFAULT_EFFECTS`, les 9 effets SERVIS par le site —
-    // exactement ce que porte le `portrait-fx.json` committé. Surtout pas `--all` :
-    // il sortirait les dix effets du bundle, donc des textures que le manifeste ne
-    // demande pas. Hors pipeline jusqu'ici alors que sa sortie est COMMITTÉE :
+    // SANS ARGUMENT = les effets que la table du jeu NOMME, sans liste à tenir :
+    // un effet qui arrive avec un patch est extrait d'office. Surtout pas `--all` :
+    // il sortirait aussi les prefabs qu'aucun perso ne porte, donc des textures
+    // que le site ne sert pas. Hors pipeline jusqu'ici alors que sa sortie est COMMITTÉE :
     // `manifest.ts` réclamait ses 38 textures sur TOUTES les machines, mais seule
     // celle où on l'avait lancé à la main savait les produire (34 « sprite
     // introuvable » sur le portable, 14/08). Le `colorSpace` qu'il écrit vient
@@ -306,6 +307,16 @@ export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean 
       label: 'portrait-fx (prefabs → portrait-fx.json + textures)',
       file: 'datagen/assets/extract-portrait-fx.py',
       py: 'UnityPy',
+    },
+    // Le VERDICT du moteur sur la table que l'étape précédente vient d'écrire :
+    // quel effet est nouveau, lequel est servi tel quel, lequel reste en attente
+    // et pourquoi. En TS parce que le verdict est celui du moteur (`effectVerdict`),
+    // pas une copie python. Ne fait JAMAIS échouer la chaîne : un effet en attente
+    // est un portrait statique, pas une panne — `refresh` le redit en fin de run.
+    {
+      id: 'portrait-fx-report',
+      label: 'portrait-fx-report (effets nouveaux, servis ou en attente)',
+      file: 'datagen/assets/portrait-fx-report.ts',
     },
     // Celle-ci ne lit PAS `.gamedata` mais `src/fonts/` (committé) : elle tourne
     // donc même sans machine de datamine, et ne change que si une police change.
@@ -721,6 +732,18 @@ export async function refresh(opts: RefreshOptions = {}): Promise<void> {
       warnNewsFailed(e);
     }
   }
+
+  // 4) Récapitulatif — les effets de portrait que le patch apporte, et ceux que
+  // le site ne sert pas. Rien de tout ça n'a fait échouer la chaîne (un effet en
+  // attente est un portrait statique) : c'est donc ICI, en dernière ligne, que ça
+  // se lit. Relu du disque face au dernier commit, génération jouée ou non — un
+  // effet en attente se rappelle à chaque refresh tant qu'il le reste.
+  const fxLines = portraitFxRecap();
+  if (fxLines.length)
+    console.log(
+      `\n◆ Portraits animés — à lire (rien n'est bloqué, cf. /dev/AnimatedPortrait) :\n` +
+        fxLines.map((l) => `   ${l}`).join('\n'),
+    );
 }
 
 /** `--source steam` ou `--source=steam` dans argv, sinon undefined. PUR. */

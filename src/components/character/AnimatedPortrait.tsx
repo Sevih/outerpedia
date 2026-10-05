@@ -8,7 +8,9 @@
  * `CUICharacterThumbnail.SetEffect` instancie pour les personnages qui en
  * portent un (`CharacterExtraTemplet.ThumbnailEffect`). Un perso sans effet rend
  * EXACTEMENT le portrait statique — pas de canvas, pas de contexte WebGL, pas de
- * boucle.
+ * boucle. Un perso dont l'effet n'est pas SERVI aussi (`effectVerdict` : prefab
+ * pas extrait, ou un calque que le moteur ne transcrit pas) : un effet se pose
+ * entier ou pas du tout.
  *
  * POURQUOI UN CANVAS ET PAS DU CSS. L'animation du jeu n'est pas une transition :
  * c'est un shader qui fait défiler quatre textures et multiplie leurs
@@ -34,10 +36,10 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { img } from '@/lib/images';
 import { Portrait, type PortraitProps } from './Portrait';
-import { fxNameOf, PORTRAIT_FX } from './portrait-fx';
+import { fxNameOf } from './portrait-fx';
 import { mountPortraitFx, type PortraitFxHandle } from './portrait-fx-gl';
 import { lastByTarget } from './portrait-fx-pool';
-import { fxBleed } from './portrait-fx-sim';
+import { effectVerdict, fxBleed } from './portrait-fx-sim';
 
 /** Une carte animée telle que l'observateur partagé la voit. */
 interface Card {
@@ -255,11 +257,12 @@ export function AnimatedPortrait({
   ...props
 }: AnimatedPortraitProps) {
   const name = effect ?? fxNameOf(fxId ?? props.id);
-  // Un nom d'effet que la table connaît mais qu'on n'a pas extrait ne rend rien :
-  // c'est un palier de portage, pas une absence d'effet. `portrait-fx-gl` le dirait
-  // aussi, mais autant ne pas poser un canvas pour l'entendre.
-  const known = name ? Boolean(PORTRAIT_FX.effects[name]) : false;
-  const bleed = useMemo(() => (known && name ? fxBleed(name) : { x: 0, y: 0 }), [known, name]);
+  // Un effet qui n'est pas SERVI — pas extrait, ou en attente d'un calque que le
+  // moteur ne transcrit pas — ne pose ni canvas ni contexte : la carte est le
+  // portrait statique. `mountPortraitFx` en rendrait la moitié rendable ; c'est
+  // ici qu'on décide de ne pas le lui demander (verdict mémoïsé par nom d'effet).
+  const served = name ? effectVerdict(name).kind === 'served' : false;
+  const bleed = useMemo(() => (served && name ? fxBleed(name) : { x: 0, y: 0 }), [served, name]);
   // La liste de calques arrive en LITTÉRAL depuis la page de contrôle : neuve à
   // chaque rendu, elle remonterait l'effet en boucle. On la stabilise sur son
   // CONTENU, pas sur son identité.
@@ -269,7 +272,7 @@ export function AnimatedPortrait({
     <Portrait
       {...props}
       fx={
-        known && name ? (
+        served && name ? (
           <PortraitFxCanvas
             effect={name}
             art={img.portrait(props.id)}

@@ -193,7 +193,7 @@ export interface FxTexture {
   srgb: number;
 }
 
-interface FxTable {
+export interface FxTable {
   frame: { w: number; h: number };
   /**
    * `ColorSpace` du projet du jeu, lu dans `globalgamemanagers`. `linear` ici —
@@ -210,6 +210,12 @@ interface FxTable {
   materials: Record<string, FxMaterial>;
   meshes: Record<string, FxMesh>;
   textures: Record<string, FxTexture>;
+  /**
+   * `effet → motif` pour les effets que l'extraction a voulu sortir sans y
+   * parvenir (prefab absent du bundle, lecture qui lève). Absente tant qu'il
+   * n'y en a aucun — le cas ordinaire.
+   */
+  notExtracted?: Record<string, string>;
 }
 
 export const PORTRAIT_FX = FX as unknown as FxTable;
@@ -219,18 +225,9 @@ export function fxNameOf(characterId: string): string | undefined {
   return PORTRAIT_FX.byCharacter[characterId];
 }
 
-/**
- * L'effet d'un personnage, s'il en a un ET qu'il est extrait.
- *
- * Les deux conditions sont distinctes et il faut les garder distinctes : un perso
- * peut porter un `ThumbnailEffect` que la table connaît mais dont le prefab n'a
- * pas encore été sorti (`extract-portrait-fx.py` ne sort que les effets servis).
- * Confondre les deux ferait passer un palier de portage pour une absence d'effet.
- */
-export function fxOf(characterId: string) {
-  const name = fxNameOf(characterId);
-  return name ? PORTRAIT_FX.effects[name] : undefined;
-}
+// L'effet SERVI d'un personnage, c'est `fxOf` — dans `portrait-fx-sim`, parce
+// qu'il lui faut le verdict du moteur (`effectVerdict`) : porter un nom d'effet
+// et avoir un effet posé sont deux choses, et ce fichier-ci ne rend rien.
 
 /**
  * LES BRANCHES DU SHADER QUE LE PORTAGE A LUES, et elles seules.

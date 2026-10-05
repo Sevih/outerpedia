@@ -1,43 +1,28 @@
 import { describe, expect, it } from 'vitest';
-import { fxNameOf, fxOf, PORTRAIT_FX } from './portrait-fx';
-import { layerVerdict } from './portrait-fx-sim';
+import { fingerprint } from '@datagen/assets/portrait-fx-report';
+import SNAPSHOT from '@datagen/assets/portrait-fx-served.json';
+import { fxNameOf, PORTRAIT_FX, type FxTable } from './portrait-fx';
+import { effectVerdict, fxOf, NOT_RENDERED, notRendered } from './portrait-fx-sim';
 
 /**
  * LE CONTRAT ENTRE LA TABLE ET LE MOTEUR.
  *
  * `portrait-fx.json` est régénéré par `refresh` à chaque patch du jeu et committé
- * tel quel. Le moteur, lui, ne rend que ce qu'il a transcrit et REFUSE le reste
- * en `console.error` — la carte reste alors un portrait parfaitement normal, donc
- * personne ne le voit. Ce test est l'endroit où ça se voit : il passe la table
- * committée par la décision même du montage (`layerVerdict`) et casse sur tout
- * refus qui n'est pas NOMMÉ ci-dessous.
+ * tel quel : l'extraction sort tout effet que le jeu nomme, sans liste à tenir.
+ * Le moteur, lui, ne sert un effet que s'il sait le poser EN ENTIER
+ * (`effectVerdict`) ; sinon le perso garde son portrait statique.
  *
- * Quand il casse après un patch, deux issues, et c'est une décision à prendre,
- * pas un test à faire taire : porter ce que le jeu demande (ajouter le suffixe à
- * `DEFAULT_EFFECTS` dans `extract-portrait-fx.py`, transcrire la branche de
- * shader ou le module), ou inscrire le refus dans la liste avec sa raison.
- * Une entrée qui n'est PLUS refusée casse aussi : les listes disent l'état du
- * jour, pas un historique.
- */
-
-/**
- * Les effets que le jeu NOMME (`byCharacter`) sans que leur prefab soit extrait :
- * `fxOf` rend `undefined`, le perso garde un portrait statique.
+ * UN EFFET QUI ARRIVE NE CASSE DONC RIEN ICI, qu'il soit rendable ou non : ce
+ * n'est pas une panne, et un patch ne doit pas attendre une parure. Ça se lit
+ * ailleurs — le rapport du refresh (`datagen/assets/portrait-fx-report.ts`) et la
+ * page `/dev/AnimatedPortrait`.
  *
- * Vide au 2026-10-04 : les dix effets des 28 lignes sont extraits et servis.
+ * Ce test casse sur ce qui EST une panne : une table vide ou dans le mauvais
+ * espace colorimétrique, une texture ou une maille incohérente, un refus accepté
+ * qui n'en est plus un, et un effet que le moteur a cessé de servir alors que sa
+ * fiche n'a pas bougé (le relevé `portrait-fx-served.json`, écrit par le rapport
+ * du refresh — jamais à la main).
  */
-const NOT_EXTRACTED: string[] = [];
-
-/**
- * Ce que le moteur ne pose PAS aujourd'hui, nommément : une ligne
- * `effet/émetteur — motif` par émetteur, le motif tel que `layerVerdict` le rend
- * (le message de la console pour un refus, `passé : <motif>` pour un émetteur que
- * le montage tait). Un nœud inactif n'y figure pas : le jeu ne le dessine pas
- * non plus.
- *
- * Vide au 2026-10-04 : les 37 émetteurs des dix effets sont tous posés.
- */
-const NOT_RENDERED: string[] = [];
 
 const { byCharacter, effects, materials, meshes, textures } = PORTRAIT_FX;
 const EFFECTS = Object.entries(effects);
@@ -52,40 +37,34 @@ describe('portrait-fx.json — le contrat avec le moteur', () => {
     expect(Object.keys(byCharacter).length).toBeGreaterThan(0);
   });
 
-  it('tout effet nommé par le jeu a son prefab extrait, sauf ceux de NOT_EXTRACTED', () => {
-    const missing = [...new Set(Object.values(byCharacter))].filter((name) => !effects[name]);
-    expect(missing.sort()).toEqual([...NOT_EXTRACTED].sort());
-  });
-
-  it('`fxOf` rend l’effet de chaque personnage servi', () => {
+  it('`fxOf` rend l’effet d’un personnage s’il est SERVI, et rien sinon', () => {
     for (const [id, name] of Object.entries(byCharacter)) {
       expect(fxNameOf(id)).toBe(name);
-      if (!NOT_EXTRACTED.includes(name)) expect(fxOf(id), id).toBe(effects[name]);
+      const served = effectVerdict(name).kind === 'served';
+      expect(fxOf(id), id).toBe(served ? effects[name] : undefined);
     }
     expect(fxNameOf('0')).toBeUndefined();
     expect(fxOf('0')).toBeUndefined();
   });
 
-  it('tout émetteur actif est posé par le montage, sauf ceux de NOT_RENDERED', () => {
-    const notRendered: string[] = [];
-    for (const [effect, { emitters }] of EFFECTS) {
-      for (const e of emitters) {
-        const verdict = layerVerdict(e);
-        if (verdict.kind === 'refused') notRendered.push(`${effect}/${e.name} — ${verdict.reason}`);
-        else if (verdict.kind === 'skipped' && verdict.why !== 'inactive')
-          notRendered.push(`${effect}/${e.name} — passé : ${verdict.why}`);
-      }
-    }
-    expect(notRendered.sort()).toEqual([...NOT_RENDERED].sort());
+  it('tout refus ACCEPTÉ (NOT_RENDERED) est encore un refus', () => {
+    // La liste dit l'état du jour : une ligne que le moteur pose désormais, ou
+    // dont l'effet a quitté la table, se retire.
+    const refused = EFFECTS.flatMap(([name]) => notRendered(name));
+    expect(NOT_RENDERED.filter((line) => !refused.includes(line))).toEqual([]);
   });
 
-  it('chaque effet garde au moins un calque rendable', () => {
-    // Sans quoi le montage rend « aucun calque rendable » et la carte reste statique.
-    const empty = EFFECTS.filter(
-      ([, { emitters }]) =>
-        !emitters.some((e) => ['mesh', 'quad', 'billboard'].includes(layerVerdict(e).kind)),
-    ).map(([name]) => name);
-    expect(empty).toEqual([]);
+  it('un effet servi au dernier relevé, fiche inchangée, est toujours servi', () => {
+    // Le relevé porte l'empreinte de la fiche de chaque effet servi. Empreinte
+    // identique et effet plus servi : c'est le MOTEUR qui a changé (un mot-clé
+    // retiré, une garde resserrée), pas le jeu — une fiche que le patch a
+    // touchée, elle, n'est pas jugée ici. Voulu ? `--accept`, cf. le rapport.
+    expect(Object.keys(SNAPSHOT).length).toBeGreaterThan(0);
+    const lost = Object.entries(SNAPSHOT as Record<string, string>)
+      .filter(([name, print]) => fingerprint(PORTRAIT_FX, name) === print)
+      .map(([name]) => ({ name, verdict: effectVerdict(name) }))
+      .filter(({ verdict }) => verdict.kind !== 'served');
+    expect(lost).toEqual([]);
   });
 
   it('toute texture citée par un matériau a sa fiche', () => {
@@ -111,5 +90,106 @@ describe('portrait-fx.json — le contrat avec le moteur', () => {
         mesh.name,
       ).toBe(true);
     }
+  });
+});
+
+/**
+ * L'ARRIVÉE D'UN EFFET, jouée sur une copie de la table : un perso de plus
+ * (`CARRIER`) qui nomme `ARRIVING`, calqué sur un effet servi du jour — choisi
+ * par sa forme, pas par son nom, pour qu'un prefab renommé ne casse rien ici.
+ */
+const ARRIVING = 'FX_UI_Character_List_Arrivant';
+const CARRIER = '9999901';
+const MODEL = EFFECTS.find(
+  ([name, fx]) =>
+    effectVerdict(name).kind === 'served' && fx.emitters.filter((e) => e.active).length >= 2,
+)![1];
+
+function arrival(change?: (table: FxTable) => void): FxTable {
+  const table = structuredClone(PORTRAIT_FX);
+  table.effects[ARRIVING] = structuredClone(MODEL);
+  table.byCharacter[CARRIER] = ARRIVING;
+  change?.(table);
+  return table;
+}
+
+/** Donne au premier calque actif de l'effet un matériau qui demande `_POLAR_UV_ON`. */
+function refuseOneLayer(table: FxTable): string {
+  const layer = table.effects[ARRIVING].emitters.find((e) => e.active)!;
+  const mat = structuredClone(table.materials[layer.material!]);
+  mat.name = `${mat.name}_Polar`;
+  mat.keywords = [...mat.keywords, '_POLAR_UV_ON'];
+  table.materials[mat.name] = mat;
+  layer.material = mat.name;
+  return `${ARRIVING}/${layer.name} — ${mat.name} : branche(s) de shader non transcrite(s) — _POLAR_UV_ON`;
+}
+
+describe('effectVerdict — servi entier, ou pas servi', () => {
+  it('un effet qui arrive entièrement rendable est servi, sans rien inscrire', () => {
+    const table = arrival();
+    expect(effectVerdict(ARRIVING, table)).toEqual({ kind: 'served' });
+    // …et il ne change le sort d'aucun autre.
+    for (const [name] of EFFECTS)
+      expect(effectVerdict(name, table).kind, name).toBe(effectVerdict(name).kind);
+  });
+
+  it('un seul calque refusé met TOUT l’effet en attente, avec le motif du moteur', () => {
+    let reason = '';
+    const table = arrival((t) => (reason = refuseOneLayer(t)));
+    // Les autres calques restent rendables : c'est bien « pas à moitié ».
+    expect(table.effects[ARRIVING].emitters.filter((e) => e.active).length).toBeGreaterThan(1);
+    expect(effectVerdict(ARRIVING, table)).toEqual({ kind: 'held', reasons: [reason] });
+    for (const [name] of EFFECTS)
+      expect(effectVerdict(name, table).kind, name).toBe(effectVerdict(name).kind);
+  });
+
+  it('un refus ACCEPTÉ sert l’effet sans ce calque', () => {
+    let reason = '';
+    const table = arrival((t) => (reason = refuseOneLayer(t)));
+    expect(effectVerdict(ARRIVING, table, [reason])).toEqual({ kind: 'served' });
+    // Accepter le refus d'un AUTRE calque ne lève rien.
+    expect(effectVerdict(ARRIVING, table, [`${ARRIVING}/autre — motif`]).kind).toBe('held');
+  });
+
+  it('un trou de l’extraction (matériau absent de la table) met aussi en attente', () => {
+    const table = arrival((t) => {
+      t.effects[ARRIVING].emitters.find((e) => e.active)!.material = 'M_Absent';
+    });
+    const layer = table.effects[ARRIVING].emitters.find((e) => e.active)!.name;
+    expect(effectVerdict(ARRIVING, table)).toEqual({
+      kind: 'held',
+      reasons: [`${ARRIVING}/${layer} — passé : unknown-material`],
+    });
+  });
+
+  it('un effet sans aucun calque rendable est en attente, pas servi à vide', () => {
+    const table = arrival((t) => {
+      for (const e of t.effects[ARRIVING].emitters) e.active = false;
+    });
+    expect(effectVerdict(ARRIVING, table)).toEqual({
+      kind: 'held',
+      reasons: [`${ARRIVING} — aucun calque rendable`],
+    });
+  });
+
+  it('un effet nommé sans prefab extrait n’est pas servi, et dit pourquoi', () => {
+    const table = arrival((t) => {
+      delete t.effects[ARRIVING];
+    });
+    expect(effectVerdict(ARRIVING, table)).toEqual({
+      kind: 'not-extracted',
+      reason: 'absent de portrait-fx.json',
+    });
+    table.notExtracted = { [ARRIVING]: 'sans prefab dans le bundle prefabs/character/ui_effect' };
+    expect(effectVerdict(ARRIVING, table)).toEqual({
+      kind: 'not-extracted',
+      reason: 'sans prefab dans le bundle prefabs/character/ui_effect',
+    });
+  });
+
+  it('le verdict de la table du site est calculé UNE fois par effet', () => {
+    const [name] = EFFECTS[0];
+    expect(effectVerdict(name)).toBe(effectVerdict(name));
+    expect(effectVerdict('FX_Inconnu')).toBe(effectVerdict('FX_Inconnu'));
   });
 });

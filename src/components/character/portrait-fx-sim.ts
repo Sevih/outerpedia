@@ -57,11 +57,13 @@
  * `mountSeeds` qui la leur fait partager.
  */
 import {
+  fxNameOf,
   PORTRAIT_FX,
   unsupportedKeywords,
   type FxEmitter,
   type FxMaterial,
   type FxMesh,
+  type FxTable,
   type Gradient,
   type MinMaxGradient,
 } from './portrait-fx';
@@ -399,8 +401,8 @@ export type LayerVerdict =
 
 /**
  * RENDABLE OU REFUSÉ — la décision de `mountPortraitFx`, sortie du montage pour
- * être jouable sans navigateur : c'est elle que `portrait-fx.test.ts` passe sur
- * toute la table committée, que le pipeline régénère à chaque patch.
+ * être jouable sans navigateur : c'est elle qu'`effectVerdict` passe sur tous
+ * les calques d'un effet pour décider s'il est servi.
  *
  * L'ordre des contrôles est celui du montage, et il compte : le matériau
  * (mots-clés, blend) est jugé AVANT la forme de l'émetteur, donc un émetteur
@@ -438,6 +440,112 @@ export function layerVerdict(
       : { kind: 'billboard', material: mat };
   }
   return { kind: 'refused', reason: `${e.name} : renderMode ${e.renderMode} non transcrit` };
+}
+
+// --- servi entier, ou pas servi ---------------------------------------------------
+
+/**
+ * LES REFUS ACCEPTÉS — les calques qu'on a DÉCIDÉ de ne pas poser, l'effet étant
+ * servi sans eux. Une ligne `effet/émetteur — motif` par calque, le motif tel
+ * que `layerVerdict` le rend (le message de la console pour un refus,
+ * `passé : <motif>` pour un émetteur que le montage tait).
+ *
+ * Ce n'est PAS la liste de ce qui reste à transcrire : un effet dont un calque
+ * actif est refusé se met en attente tout seul (`effectVerdict`), sans rien
+ * inscrire nulle part. On n'écrit ici qu'une décision — « ce calque ne compte
+ * pas, sers l'effet quand même » — et le test de contrat casse sur une ligne
+ * qui n'est plus un refus : la liste dit l'état du jour, pas un historique.
+ *
+ * Vide au 2026-10-05 : les dix effets du jeu sont servis entiers.
+ */
+export const NOT_RENDERED: readonly string[] = [];
+
+/** Ce qu'`effectVerdict` lit d'une table — celle du site, ou une table d'essai. */
+export type FxVerdictTable = Pick<FxTable, 'effects' | 'materials' | 'meshes' | 'notExtracted'>;
+
+/**
+ * Les émetteurs ACTIFS d'un effet que le montage ne poserait pas, une ligne
+ * `effet/émetteur — motif` chacun. Un nœud inactif n'y figure pas : le jeu ne le
+ * dessine pas non plus.
+ */
+export function notRendered(effectName: string, table: FxVerdictTable = PORTRAIT_FX): string[] {
+  const out: string[] = [];
+  for (const e of table.effects[effectName]?.emitters ?? []) {
+    const verdict = layerVerdict(e, table);
+    if (verdict.kind === 'refused') out.push(`${effectName}/${e.name} — ${verdict.reason}`);
+    else if (verdict.kind === 'skipped' && verdict.why !== 'inactive')
+      out.push(`${effectName}/${e.name} — passé : ${verdict.why}`);
+  }
+  return out;
+}
+
+/**
+ * Ce que le site fait d'UN effet : le servir (`served`), le tenir en attente
+ * (`held`, avec chaque calque qui manque et son motif), ou constater qu'il n'est
+ * pas dans la table (`not-extracted`).
+ */
+export type EffectVerdict =
+  | { kind: 'served' }
+  | { kind: 'held'; reasons: string[] }
+  | { kind: 'not-extracted'; reason: string };
+
+/** Les verdicts de la table du site, par nom d'effet — elle ne change pas en cours de page. */
+const verdicts = new Map<string, EffectVerdict>();
+
+/**
+ * SERVI SEULEMENT SI ENTIER. Un effet n'est posé que si TOUS ses calques actifs
+ * passent `layerVerdict` (ou figurent dans les refus acceptés). Un seul calque
+ * refusé — branche de shader, module ou mode non transcrit — et le personnage
+ * garde son portrait statique : un effet amputé de son voile ou de ses étoiles
+ * n'est pas « presque le jeu », c'est autre chose que le jeu.
+ *
+ * C'est CALCULÉ, donc un effet qui arrive avec un patch n'attend personne : il
+ * est servi s'il est entier, en attente sinon, et dans les deux cas rien n'est à
+ * inscrire. Un effet sans aucun calque rendable est en attente aussi — le
+ * montage n'aurait rien à dessiner.
+ *
+ * `table` et `accepted` ne sont passés que par les tests et par le rapport du
+ * refresh (`datagen/assets/portrait-fx-report.ts`), qui juge une table fraîche.
+ */
+export function effectVerdict(
+  effectName: string,
+  table: FxVerdictTable = PORTRAIT_FX,
+  accepted: readonly string[] = NOT_RENDERED,
+): EffectVerdict {
+  const memo = table === PORTRAIT_FX && accepted === NOT_RENDERED;
+  const known = memo ? verdicts.get(effectName) : undefined;
+  if (known) return known;
+
+  let verdict: EffectVerdict;
+  const effect = table.effects[effectName];
+  if (!effect) {
+    verdict = {
+      kind: 'not-extracted',
+      reason: table.notExtracted?.[effectName] ?? 'absent de portrait-fx.json',
+    };
+  } else {
+    const reasons = notRendered(effectName, table).filter((line) => !accepted.includes(line));
+    const drawn = effect.emitters.some((e) =>
+      ['mesh', 'quad', 'billboard'].includes(layerVerdict(e, table).kind),
+    );
+    if (!reasons.length && !drawn) reasons.push(`${effectName} — aucun calque rendable`);
+    verdict = reasons.length ? { kind: 'held', reasons } : { kind: 'served' };
+  }
+  if (memo) verdicts.set(effectName, verdict);
+  return verdict;
+}
+
+/**
+ * L'effet d'un personnage, s'il en porte un ET qu'il est servi.
+ *
+ * Les deux conditions sont distinctes et il faut les garder distinctes : un perso
+ * peut porter un `ThumbnailEffect` (`fxNameOf`) que le site ne pose pas — prefab
+ * pas extrait, ou effet en attente. Confondre les deux ferait passer un palier
+ * de portage pour une absence d'effet.
+ */
+export function fxOf(characterId: string) {
+  const name = fxNameOf(characterId);
+  return name && effectVerdict(name).kind === 'served' ? PORTRAIT_FX.effects[name] : undefined;
 }
 
 /** Une particule prête à dessiner — unités du CADRE, relatives à l'émetteur, Y vers le HAUT. */

@@ -29,7 +29,11 @@
 > le contexte WebGL partagé, qui emporte aussi P6 (lot F11, 05/10 — plus de
 > plafond de contextes, plus d'éviction ; les passages du rapport qui les
 > décrivent valent pour l'état du 03/10), P3 par les graines partagées (lot
-> F10). Restent ouverts : P7, P8, P10, et de P9 les compteurs hors des
+> F10), P8 et la liste en dur de P4 (`DEFAULT_EFFECTS`) par l'extraction
+> pilotée par la table du jeu (lot F12, 05/10 — un effet n'est plus servi
+> que s'il est entier, et le test de contrat ne casse plus sur un effet qui
+> arrive). Restent ouverts : P7 — devenu le garde-fou de « servi tel quel »,
+> cf. l'entrée DONE du lot F12 —, P10, et de P9 les compteurs hors des
 > fichiers réécrits.
 
 ## État de référence

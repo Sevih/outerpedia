@@ -116,6 +116,15 @@ PRÉSERVE la valeur déjà committée au lieu d'écrire `unknown` — sans ce fi
 câbler l'étape aurait suffi à effacer l'effet du site depuis une machine sans
 dump.
 
+Depuis le 2026-10-05 il n'a plus de liste d'effets à tenir : sans argument, il
+sort ceux que `CharacterExtraTemplet` NOMME et dont le prefab existe, et garde
+les porteurs du JSON committé si la table parsée manque. Un pas TS le suit dans
+`refresh`, `portrait-fx-report.ts` : il dit ce que le moteur fait de chaque
+effet (servi tel quel, en attente d'une transcription, pas extrait) et tient le
+relevé `portrait-fx-served.json`. Ni l'un ni l'autre ne fait échouer un patch
+pour un effet qui arrive — un effet que le site ne sait pas poser en entier
+reste un portrait statique, et le refresh le redit en dernière ligne.
+
 Les quatre premiers sont :
 
 - **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /

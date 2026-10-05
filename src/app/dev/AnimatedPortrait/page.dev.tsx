@@ -17,7 +17,8 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { AnimatedPortrait } from '@/components/character/AnimatedPortrait';
 import { Portrait } from '@/components/character/Portrait';
-import { PORTRAIT_FX } from '@/components/character/portrait-fx';
+import { PORTRAIT_FX, type FxEmitter } from '@/components/character/portrait-fx';
+import { effectVerdict, layerVerdict } from '@/components/character/portrait-fx-sim';
 import { characterNamePrefix, getAllCharacters } from '@/lib/data/characters';
 import { lRec } from '@/lib/i18n/localize';
 import type { Character } from '@contracts';
@@ -43,7 +44,11 @@ const FX2000110 = 'FX_UI_Character_List_2000110';
 const FX2000114 = 'FX_UI_Character_List_2000114';
 const FX2000121 = 'FX_UI_Character_List_2000121';
 const RESONANCE = 'FX_UI_Character_List_Resonance';
-/** Les effets servis, dans l'ordre du portage — la table par calque les déroule tous. */
+/**
+ * Les effets qui ont leur section ÉCRITE À LA MAIN ci-dessous, dans l'ordre du
+ * portage — la table par calque les déroule tous. Un effet que le jeu apporte
+ * ensuite n'a pas à s'y inscrire pour paraître : cf. `UNWRITTEN`.
+ */
 const SERVED = [
   DEMI,
   DUNGEON,
@@ -73,9 +78,37 @@ const CARRIERS = Object.entries(PORTRAIT_FX.byCharacter)
     fx,
     short: fx.replace('FX_UI_Character_List_', ''),
     char: ROSTER.find((c) => c.id === id),
-    served: Boolean(PORTRAIT_FX.effects[fx]),
+    state: effectVerdict(fx).kind,
   }))
   .sort((a, b) => a.short.localeCompare(b.short) || a.id.localeCompare(b.id));
+
+/** Tout effet que la table porte ou nomme, extrait ou non. */
+const ALL_FX = [
+  ...new Set([...Object.keys(PORTRAIT_FX.effects), ...Object.values(PORTRAIT_FX.byCharacter)]),
+];
+/**
+ * LES EFFETS SANS SECTION ÉCRITE : arrivés avec un patch, extraits d'office, et
+ * que personne n'a encore décrits. Chacun reçoit une section GÉNÉRÉE (porteurs,
+ * carte, calques et leur verdict) — la page les montre sans qu'on y touche.
+ */
+const UNWRITTEN = ALL_FX.filter((fx) => !SERVED.includes(fx));
+/** Les effets que le site ne POSE pas (en attente, ou pas extraits), avec le verdict du moteur. */
+const NOT_SERVED = ALL_FX.map((fx) => ({ fx, verdict: effectVerdict(fx) })).filter(
+  ({ verdict }) => verdict.kind !== 'served',
+);
+
+const shortFx = (fx: string) => fx.replace('FX_UI_Character_List_', '_');
+
+/** Ce que le montage fait d'un calque, en une ligne — le verdict du moteur, pas une relecture. */
+function layerState(e: FxEmitter): { ok: boolean; text: string } {
+  const verdict = layerVerdict(e);
+  if (verdict.kind === 'refused') return { ok: false, text: `refusé — ${verdict.reason}` };
+  if (verdict.kind === 'skipped')
+    return verdict.why === 'inactive'
+      ? { ok: true, text: 'inactif — le jeu ne le dessine pas non plus' }
+      : { ok: false, text: `passé — ${verdict.why}` };
+  return { ok: true, text: `posé (${verdict.kind})` };
+}
 
 /** Les sujets rendus : des porteurs des effets servis, réellement au roster. */
 const DEMI_SUBJECTS = CARRIERS.filter((c) => c.short === 'Demi' && c.char).map((c) => c.char!);
@@ -674,6 +707,160 @@ export default async function DevAnimatedPortrait({
         </section>
       ))}
 
+      {UNWRITTEN.map((fx) => {
+        const verdict = effectVerdict(fx);
+        const carriers = CARRIERS.filter((c) => c.fx === fx);
+        const subject = carriers.find((c) => c.char)?.char;
+        const emitters = PORTRAIT_FX.effects[fx]?.emitters ?? [];
+        return (
+          <section key={fx} className="mb-8">
+            <h2 className="text-content-strong font-semibold">
+              <code>{shortFx(fx)}</code> — sans section écrite ·{' '}
+              {verdict.kind === 'served' ? (
+                <span className="text-emerald-400">servi tel quel</span>
+              ) : (
+                <span className="text-amber-400">
+                  {verdict.kind === 'held' ? 'en attente' : 'pas extrait'}
+                </span>
+              )}
+            </h2>
+            <p className="text-content-muted mb-3 max-w-3xl text-sm">
+              Arrivé après les sections ci-dessus : celle-ci est GÉNÉRÉE depuis la table, rien n’a
+              été inscrit pour qu’elle paraisse. Porteurs :{' '}
+              {carriers.length
+                ? carriers.map((c) => (c.char ? `${name(c.char)} (${c.id})` : c.id)).join(', ')
+                : 'aucun'}
+              .{' '}
+              {verdict.kind === 'served'
+                ? 'Tous ses calques actifs passent le moteur : il est posé sans aucun geste — reste à le confronter au jeu.'
+                : 'Le site ne le pose pas : la carte de droite reste le portrait statique. Motif plus bas, section « Effets que le site ne pose pas ».'}
+            </p>
+            {subject ? (
+              <div className="mb-3 flex flex-wrap items-end gap-6">
+                <Figure label="Portrait (statique)">
+                  <Portrait
+                    id={subject.id}
+                    name={name(subject)}
+                    rarity={subject.rarity}
+                    element={subject.element}
+                    cls={subject.class}
+                    level={100}
+                    className="w-45"
+                  />
+                </Figure>
+                <Figure label="AnimatedPortrait">
+                  <AnimatedPortrait
+                    id={subject.id}
+                    name={name(subject)}
+                    rarity={subject.rarity}
+                    element={subject.element}
+                    cls={subject.class}
+                    level={100}
+                    className="w-45"
+                  />
+                </Figure>
+              </div>
+            ) : (
+              <p className="text-content-subtle mb-3 text-sm">
+                Aucun porteur au roster du site : pas de carte à montrer.
+              </p>
+            )}
+            {emitters.length > 0 && (
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-2xl text-left text-sm">
+                  <thead className="text-content-subtle border-line-subtle border-b">
+                    <tr>
+                      <th className="py-2 pr-4 font-medium">Calque</th>
+                      <th className="py-2 pr-4 font-medium">Maille</th>
+                      <th className="py-2 pr-4 font-medium">Matériau</th>
+                      <th className="py-2 pr-4 font-medium">Mots-clés</th>
+                      <th className="py-2 font-medium">Verdict du moteur</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {emitters.map((e) => {
+                      const state = layerState(e);
+                      return (
+                        <tr key={e.name} className="border-line-subtle/50 border-b align-top">
+                          <td className="text-content-strong py-1.5 pr-4 font-mono text-xs">
+                            {e.name}
+                          </td>
+                          <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                            {e.mesh ?? 'billboard'}
+                          </td>
+                          <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                            {e.material ?? '—'}
+                          </td>
+                          <td className="text-content-muted py-1.5 pr-4 font-mono text-xs">
+                            {(e.material
+                              ? PORTRAIT_FX.materials[e.material]
+                              : undefined
+                            )?.keywords.map((k) => (
+                              <div key={k}>{k}</div>
+                            ))}
+                          </td>
+                          <td
+                            className={`py-1.5 font-mono text-xs ${state.ok ? 'text-emerald-400' : 'text-amber-400'}`}
+                          >
+                            {state.text}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        );
+      })}
+
+      <section id="en-attente" className="mb-8">
+        <h2 className="text-content-strong font-semibold">Effets que le site ne pose pas</h2>
+        <p className="text-content-muted mb-3 max-w-3xl text-sm">
+          Un effet n’est servi que si TOUS ses calques actifs passent le moteur (
+          <code>effectVerdict</code>, <code>portrait-fx-sim</code>) : sinon le personnage garde son
+          portrait statique, plutôt qu’un effet amputé. C’est calculé — rien n’est inscrit nulle
+          part, et le refresh le redit à chaque passage. Pour le servir : transcrire ce que le motif
+          nomme (une branche de shader dans <code>portrait-fx-gl</code> et{' '}
+          <code>SUPPORTED_KEYWORDS</code>, un module ou un mode dans <code>portrait-fx-sim</code>),
+          ou décider de le servir sans ce calque en recopiant la ligne dans{' '}
+          <code>NOT_RENDERED</code>.
+        </p>
+        {NOT_SERVED.length === 0 ? (
+          <p className="text-content-muted text-sm">
+            Aucun : les {ALL_FX.length} effets que la table nomme sont servis entiers.
+          </p>
+        ) : (
+          <ul className="space-y-2">
+            {NOT_SERVED.map(({ fx, verdict }) => (
+              <li key={fx} className="border-line-subtle bg-surface-raised rounded-lg border p-3">
+                <div className="text-content-strong font-mono text-xs">
+                  {shortFx(fx)} ·{' '}
+                  <span className="text-amber-400">
+                    {verdict.kind === 'held' ? 'en attente' : 'pas extrait'}
+                  </span>{' '}
+                  · porteurs :{' '}
+                  {CARRIERS.filter((c) => c.fx === fx)
+                    .map((c) => c.id)
+                    .join(', ') || 'aucun'}
+                </div>
+                {(verdict.kind === 'held'
+                  ? verdict.reasons
+                  : verdict.kind === 'not-extracted'
+                    ? [verdict.reason]
+                    : []
+                ).map((reason) => (
+                  <div key={reason} className="text-content-muted mt-1 font-mono text-xs">
+                    {reason}
+                  </div>
+                ))}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
       <section className="mb-8">
         <h2 className="text-content-strong font-semibold">Quatre tailles</h2>
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
@@ -912,10 +1099,12 @@ export default async function DevAnimatedPortrait({
                   <td className="py-1.5 font-mono text-xs">
                     {!c.char ? (
                       <span className="text-content-subtle">skin — pas une fiche du site</span>
-                    ) : c.served ? (
+                    ) : c.state === 'served' ? (
                       <span className="text-emerald-400">rendu</span>
                     ) : (
-                      <span className="text-amber-400">non extrait</span>
+                      <span className="text-amber-400">
+                        {c.state === 'held' ? 'en attente' : 'non extrait'}
+                      </span>
                     )}
                   </td>
                 </tr>
