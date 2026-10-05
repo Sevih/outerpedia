@@ -25,13 +25,13 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Onglet « Discord » : emojis de son propre serveur** (retour de Sevih
-      05/10) : choisir les serveurs dont l'onglet prend les emojis (le sien,
-      qui porte classes, éléments et sous-classes, plutôt qu'EvaMains), et ne
-      plus dérouler tous les standards. Lot A30 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus). Hors
-      outil : le bot doit être membre de ce serveur et avoir « Utiliser des
-      emojis externes » dans le salon visé.
+- [ ] **Onglet « Discord » : serveur au choix, palette d'emojis, embeds**
+      (retours de Sevih du 05/10 après ses essais) : choisir le serveur où
+      poster et ceux dont on prend les emojis, une palette toujours visible
+      (éléments, classes, sous-classes, six icônes génériques) au lieu d'une
+      liste à faire défiler, et un mode embed (titre lié, couleur, vignette,
+      image, pied, boutons de lien). Lot B23 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus).
 
 ## 🎴 Portraits animés
 
