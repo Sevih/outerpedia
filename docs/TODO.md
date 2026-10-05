@@ -23,6 +23,14 @@
       (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
       `ui/shop/al` du manifeste d'assets.
 
+## 🧰 Outil quick
+
+- [ ] **Onglet « Discord » : outils d'édition** (demande Sevih 05/10, après
+      son premier essai) : barre d'outils (gras, titres, listes, citation,
+      lien…), sélecteur d'emojis (ceux du serveur et les standards), et
+      autocomplétion des `:codes:` à la frappe. Lot B22 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus).
+
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
