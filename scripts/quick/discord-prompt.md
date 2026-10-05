@@ -24,7 +24,7 @@ What to keep, and how much (observed in the examples: each pairs an official not
 - Balance adjustments are the one place for detail: per hero, one line per changed skill, labelled the short way (`S1`, `S2`, `S3`, `S2B1` for a burst level, `T4`–`T6` for transcendence, `EE` / `EE10` for exclusive equipment, `Chn` for chain), each reduced to its effect. Put them in a code block per the examples.
 - Shop: only what a free player would notice (a Battle Pass and its costume, a change to an in-game currency shop). Paid packages, step-ups and "sales end" lists are dropped.
 - Minor notices (hero added to chat or to a side mode, recurring mission or capsule events): dropped, or one line at most when tied to a major event.
-- Bug fixes: no section by default. Keep one only when a fix changes how combat or progression works for most players — two short lines at most.
+- Bug fixes: only the ones worth a player's attention — a combat mechanic that behaved wrong, something most players ran into. Up to 4, close to the note's wording as in the examples. When none qualifies (shop pop-ups, costume or display glitches, one hero in one mode, compensation notices), drop the section entirely.
 - Adjustments other than balance: only what changes a player's routine or resources. Cosmetic additions (lobby backgrounds, galleries) and "hero added to <side mode>" lines are dropped.
 - A coupon code given by the note goes on the last line.
 
