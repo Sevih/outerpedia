@@ -23,16 +23,6 @@
       (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
       `ui/shop/al` du manifeste d'assets.
 
-## 🧰 Outil quick
-
-- [ ] **Onglet « Discord » : serveur au choix, palette d'emojis, embeds**
-      (retours de Sevih du 05/10 après ses essais) : choisir le serveur où
-      poster et ceux dont on prend les emojis, une palette toujours visible
-      (éléments, classes, sous-classes, six icônes génériques) au lieu d'une
-      liste à faire défiler, et un mode embed (titre lié, couleur, vignette,
-      image, pied, boutons de lien). Lot B23 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus).
-
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).

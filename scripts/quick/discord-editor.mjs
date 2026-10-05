@@ -1,7 +1,7 @@
 /**
  * quick/discord-editor — les outils d'édition de l'onglet « Discord » : la barre
- * (gras, titres, liste, lien…), le sélecteur d'emojis et l'autocomplétion des
- * `:codes:`.
+ * (gras, titres, liste, lien…), la palette d'emojis toujours visible, le
+ * sélecteur d'emojis et l'autocomplétion des `:codes:`.
  *
  * UN FICHIER, DEUX LECTEURS : la page le charge tel quel
  * (`import('/discord-editor.mjs')`, servi par `server.ts`) et les tests
@@ -21,8 +21,20 @@
  */
 
 /**
- * Un emoji proposé : du serveur (`id`, image du CDN) ou standard (`char`).
- * @typedef {{ name: string, id?: string, animated?: boolean, char?: string }} Emoji
+ * Un emoji proposé : d'un serveur (`id`, image du CDN ; `guildId` dit lequel)
+ * ou standard (`char`).
+ * @typedef {{ name: string, id?: string, animated?: boolean, char?: string, guildId?: string }} Emoji
+ */
+
+/**
+ * Un serveur coché et ses emojis, tels que `/api/discord/emojis` les rend.
+ * @typedef {{ id: string, name: string, emojis: readonly Emoji[] }} EmojiGuild
+ */
+
+/**
+ * Les deux listes où l'on cherche : `guild`, les emojis des serveurs cochés
+ * réunis (`mergeGuildEmojis`), et `standard`.
+ * @typedef {{ guild: readonly Emoji[], standard: readonly Emoji[] }} EmojiLists
  */
 
 // ----------------------------------------------------------- en ligne --------
@@ -470,6 +482,27 @@ export function diffEdit(before, after) {
 export const RECENT_MAX = 10;
 
 /**
+ * Les emojis des serveurs cochés en UNE liste, dans l'ordre des serveurs, chacun
+ * marqué du sien (`guildId`). Un même nom sur deux serveurs → le premier gagne,
+ * comme à l'envoi (`mergeEmojis` de `discord.ts`) : l'autre ne pourrait pas
+ * s'écrire, il n'est donc pas proposé.
+ * @param {readonly EmojiGuild[]} guilds
+ * @returns {Emoji[]}
+ */
+export function mergeGuildEmojis(guilds) {
+  const seen = new Set();
+  /** @type {Emoji[]} */
+  const out = [];
+  for (const g of guilds)
+    for (const e of g.emojis) {
+      if (seen.has(e.name)) continue;
+      seen.add(e.name);
+      out.push({ ...e, guildId: g.id });
+    }
+  return out;
+}
+
+/**
  * Filtre UNE liste par nom, sans égard à la casse : le nom exact, puis ceux qui
  * COMMENCENT par la recherche, puis ceux qui la contiennent. À égalité, les
  * derniers utilisés d'abord (du plus récent au plus ancien), puis l'ordre de la
@@ -500,7 +533,7 @@ export function matchEmojis(list, query, recent = []) {
 /**
  * Les emojis qui répondent à une recherche, ceux du SERVEUR d'abord — c'est
  * aussi l'ordre dans lequel un `:nom:` est résolu à l'envoi (`convertEmojis`).
- * @param {{ guild: readonly Emoji[], standard: readonly Emoji[] }} lists
+ * @param {EmojiLists} lists
  * @param {string} query
  * @param {readonly string[]} [recent]
  * @param {number} [limit]
@@ -517,13 +550,85 @@ export function searchEmojis(lists, query, recent = [], limit = Infinity) {
  * Les derniers emojis utilisés, du plus récent au plus ancien — ceux qui
  * existent encore. Un nom porté par le serveur ET par la table standard est
  * celui du serveur, comme à l'envoi.
- * @param {{ guild: readonly Emoji[], standard: readonly Emoji[] }} lists
+ * @param {EmojiLists} lists
  * @param {readonly string[]} recent
  * @returns {Emoji[]}
  */
 export function recentEmojis(lists, recent) {
   const all = [...lists.guild, ...lists.standard];
   return recent.flatMap((name) => all.find((e) => e.name === name) ?? []);
+}
+
+/**
+ * Ce que le sélecteur affiche, section par section. Sans recherche : les
+ * récents, puis UNE section par serveur coché (`key` : `guild:<id>`) ; les
+ * standards ne sont PAS déroulés d'office — ils sont des centaines — et leur
+ * section reste repliée (`folded`) tant que `standardOpen` est faux. Avec une
+ * recherche : ce qui y répond, serveurs d'abord, standards compris.
+ * @param {EmojiLists} lists
+ * @param {readonly { id: string, name: string }[]} guilds Les serveurs cochés, dans l'ordre.
+ * @param {string} query
+ * @param {readonly string[]} recent
+ * @param {boolean} standardOpen
+ * @returns {{ key: string, title: string, items: Emoji[], folded?: boolean }[]}
+ */
+export function pickerSections(lists, guilds, query, recent, standardOpen) {
+  const searching = Boolean(query.trim());
+  /** @type {{ key: string, title: string, items: Emoji[], folded?: boolean }[]} */
+  const sections = [];
+  if (!searching) {
+    const used = recentEmojis(lists, recent);
+    if (used.length) sections.push({ key: 'recent', title: 'Récents', items: used });
+  }
+  for (const g of guilds)
+    sections.push({
+      key: `guild:${g.id}`,
+      title: g.name,
+      items: matchEmojis(
+        lists.guild.filter((e) => e.guildId === g.id),
+        query,
+        recent,
+      ),
+    });
+  sections.push(
+    searching || standardOpen
+      ? { key: 'standard', title: 'Standards', items: matchEmojis(lists.standard, query, recent) }
+      : { key: 'standard', title: 'Standards', items: [], folded: true },
+  );
+  return sections;
+}
+
+/**
+ * La palette toujours visible : pour chaque groupe de `discord-palette.json`,
+ * les emojis que ses noms désignent — sur un serveur coché d'abord (nom exact,
+ * puis à la casse près), dans la table standard sinon : l'ordre dans lequel un
+ * `:nom:` est résolu à l'envoi. Un nom que rien ne porte n'est PAS un bouton :
+ * il revient dans `missing`, pour être corrigé dans le fichier. Un groupe sans
+ * aucun bouton tombe.
+ * @param {readonly { label: string, names: readonly string[] }[]} groups
+ * @param {EmojiLists} lists
+ * @returns {{ groups: { label: string, items: Emoji[] }[], missing: string[] }}
+ */
+export function resolvePalette(groups, lists) {
+  const find = (/** @type {string} */ name) => {
+    const low = name.toLowerCase();
+    return (
+      lists.guild.find((e) => e.name === name) ??
+      lists.guild.find((e) => e.name.toLowerCase() === low) ??
+      lists.standard.find((e) => e.name === low)
+    );
+  };
+  /** @type {string[]} */
+  const missing = [];
+  const resolved = groups.map((g) => ({
+    label: g.label,
+    items: g.names.flatMap((name) => {
+      const emoji = find(name);
+      if (!emoji) missing.push(name);
+      return emoji ?? [];
+    }),
+  }));
+  return { groups: resolved.filter((g) => g.items.length), missing };
 }
 
 /**

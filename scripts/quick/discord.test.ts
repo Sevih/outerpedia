@@ -2,13 +2,15 @@
  * Contrat de l'onglet « Discord » de `pnpm quick` (`discord.ts`).
  *
  * Ce geste écrit dans un salon PUBLIC, au nom du bot : ce qui raterait ici se
- * lirait là-bas. Quatre choses à ne pas laisser partir —
+ * lirait là-bas. Cinq choses à ne pas laisser partir —
  *   - un emoji resté en toutes lettres (`:scrol:`), ou un message coupé au
  *     milieu d'une ligne ;
  *   - un doublon : un envoi repris après un échec ne reposte pas ce qui est
  *     déjà en place ;
  *   - une mention qui notifie ;
- *   - le jeton du bot, dans un journal ou une réponse de route.
+ *   - le jeton du bot, dans un journal ou une réponse de route ;
+ *   - un message sur le MAUVAIS serveur : celui où l'on poste se choisit, et un
+ *     message posté ne se modifie que là où il est parti.
  *
  * AUCUN appel à Discord : `fetch` et `sleep` sont simulés (`harness`).
  */
@@ -16,42 +18,80 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import shortcodes from './discord-shortcodes.json';
+import palette from './discord-palette.json';
 import {
+  BUTTON_MAX,
   DISCORD_API,
-  GUILD_HINT,
+  EMBED_COLOR,
+  EMBED_DESCRIPTION_LIMIT,
+  EMBED_TOTAL_LIMIT,
+  EMPTY_EMBED,
   MESSAGE_LIMIT,
   OFFICIAL_HOST,
   TOKEN_HINT,
   blocker,
   buildRequest,
+  canUseExternalEmojis,
   convertEmojis,
+  convertPlain,
   discordSession,
   editMessages,
+  embedBlocker,
+  embedBody,
+  embedColor,
+  embedForm,
+  embedPreviewHtml,
+  embedTemplate,
+  embedTotal,
+  inviteUrl,
+  isHttpUrl,
   latestNotes,
-  loadGuild,
+  mergeEmojis,
   messageBody,
   noteSrcdoc,
   officialUrl,
+  parsePalette,
   patchTemplate,
   prepare,
+  prepareEmbed,
   renderDiscord,
+  renderEmbed,
   scrub,
   sendMessages,
   sortChannels,
   splitMessage,
   standardEmojis,
+  type BotAccess,
   type DiscordDeps,
+  type Draft,
+  type EditRequest,
+  type EmbedForm,
   type GuildEmoji,
   type NotePost,
+  type SendRequest,
 } from './discord';
 
 const TOKEN = 'MTIzNDU2.FAKE-token_for.tests';
+const BOT_ID = '900000000000000001';
+/** Le serveur de `DISCORD_GUILD_ID` — le bot n'y est ni propriétaire ni administrateur. */
 const GUILD_ID = '100000000000000001';
+/** Un second serveur, plus récent : celui de Sevih, dont le bot est propriétaire. */
+const HOME_GUILD = '100000000000000002';
+/** Un serveur qui refuse ses emojis (403). */
+const LOCKED_GUILD = '100000000000000003';
 const CHANNEL = '200000000000000001';
 const OTHER_CHANNEL = '200000000000000002';
+/** Le salon du second serveur. */
+const HOME_CHANNEL = '200000000000000003';
 const DARK = '300000000000000001';
 const RANGER = '300000000000000002';
 const PARTY = '300000000000000003';
+/** Sur le second serveur : un `dark` en double, et un `tactician` qu'il est seul à avoir. */
+const HOME_DARK = '300000000000000011';
+const TACTICIAN = '300000000000000012';
+const BOT_ROLE = '600000000000000001';
+/** Bit « Utiliser des emojis externes ». */
+const EXTERNAL = String(1 << 18);
 
 const EMOJIS = new Map<string, GuildEmoji>([
   ['dark', { id: DARK, name: 'dark', animated: false }],
@@ -121,26 +161,92 @@ function harness(
   return { deps, calls, sleeps };
 }
 
-/** Un Discord docile : rend la liste du serveur et accepte tout message. */
+/**
+ * Un Discord docile : le bot est membre de trois serveurs, chacun rend ses
+ * salons et ses emojis (sauf `LOCKED_GUILD`, qui refuse les siens), et tout
+ * message est accepté. Sur `GUILD_ID` le bot n'a « emojis externes » que dans
+ * `CHANNEL`, par une dérogation de son rôle.
+ */
 function discord(call: Call, n: number): { status: number; body?: unknown } {
-  if (call.url.endsWith('/emojis'))
+  const path = call.url.slice(DISCORD_API.length);
+  if (path === '/users/@me')
+    return { status: 200, body: { id: BOT_ID, username: 'Outerpedia', bot: true } };
+  if (path === '/users/@me/guilds')
+    return {
+      status: 200,
+      body: [
+        // Discord en dit plus (icône, bannière, fonctions) : la page n'en voit rien.
+        { id: GUILD_ID, name: 'EvaMains', owner: false, permissions: '2048', icon: 'abc' },
+        { id: HOME_GUILD, name: 'Chez Sevih', owner: true, permissions: '0', features: [] },
+        { id: LOCKED_GUILD, name: 'Fermé', owner: false, permissions: '2048' },
+      ],
+    };
+  const guild = /^\/guilds\/(\d+)\/(emojis|channels|members\/\d+)$/.exec(path);
+  if (guild?.[2] === 'emojis') {
+    if (guild[1] === LOCKED_GUILD)
+      return { status: 403, body: { message: 'Missing Access', code: 50001 } };
+    if (guild[1] === HOME_GUILD)
+      return {
+        status: 200,
+        body: [
+          { id: TACTICIAN, name: 'tactician' },
+          { id: HOME_DARK, name: 'dark' },
+        ],
+      };
     return {
       status: 200,
       body: [...EMOJIS.values(), { id: '300000000000000009', name: 'gone', available: false }],
     };
-  if (call.url.endsWith('/channels'))
+  }
+  if (guild?.[2] === 'channels') {
+    if (guild[1] === HOME_GUILD)
+      return { status: 200, body: [{ id: HOME_CHANNEL, type: 0, name: 'test', position: 0 }] };
     return {
       status: 200,
       body: [
         { id: '400000000000000001', type: 4, name: 'News', position: 0 },
-        { id: CHANNEL, type: 5, name: 'patch-notes', position: 0, parent_id: '400000000000000001' },
-        { id: OTHER_CHANNEL, type: 0, name: 'bot-test', position: 3 },
+        {
+          id: CHANNEL,
+          type: 5,
+          name: 'patch-notes',
+          position: 0,
+          parent_id: '400000000000000001',
+          permission_overwrites: [{ id: BOT_ROLE, type: 0, allow: EXTERNAL, deny: '0' }],
+        },
+        { id: OTHER_CHANNEL, type: 0, name: 'bot-test', position: 3, permission_overwrites: [] },
       ],
     };
+  }
+  if (guild) return { status: 200, body: { roles: [BOT_ROLE], user: { id: BOT_ID } } };
   return { status: 200, body: { id: `50000000000000000${n}` } };
 }
 
 const posts = (calls: Call[]): Call[] => calls.filter((c) => c.method !== 'GET');
+const gets = (calls: Call[]): string[] =>
+  calls.filter((c) => c.method === 'GET').map((c) => c.url.slice(DISCORD_API.length));
+
+/** Ce que la page joint à chaque demande : par défaut, on poste sur `GUILD_ID` avec ses emojis. */
+const draft = (text: string, over: Partial<Draft> = {}): Draft => ({
+  text,
+  mode: 'simple',
+  embed: EMPTY_EMBED,
+  guildId: GUILD_ID,
+  emojiGuilds: [GUILD_ID],
+  ...over,
+});
+const toSend = (text: string, over: Partial<SendRequest> = {}): SendRequest => ({
+  ...draft(text),
+  channelId: CHANNEL,
+  suppressEmbeds: true,
+  ...over,
+});
+const toEdit = (text: string, ids: string[], over: Partial<EditRequest> = {}): EditRequest => ({
+  ...toSend(text),
+  ids,
+  posted: { guildId: GUILD_ID, channelId: CHANNEL, mode: 'simple' },
+  ...over,
+});
+const form = (over: Partial<EmbedForm> = {}): EmbedForm => ({ ...EMPTY_EMBED, ...over });
 
 // ---------------------------------------------------------------- rendu ------
 
@@ -355,6 +461,66 @@ describe('convertEmojis', () => {
       '[x](https://ex.com/a)📜',
     );
   });
+
+  it('liste partielle (un serveur coché pas encore lu) : un nom inconnu attend, il n’est pas une faute', () => {
+    expect(convertEmojis(':dark: :tactician:', EMOJIS, true)).toEqual({
+      content: `<:dark:${DARK}> :tactician:`,
+      unknown: [],
+      pending: ['tactician'],
+    });
+  });
+});
+
+describe('mergeEmojis — plusieurs serveurs', () => {
+  const home: GuildEmoji[] = [
+    { id: TACTICIAN, name: 'tactician', animated: false },
+    { id: HOME_DARK, name: 'dark', animated: false },
+  ];
+
+  it('dans l’ordre donné : un même nom sur deux serveurs, le premier gagne', () => {
+    const first = mergeEmojis([[...EMOJIS.values()], home]);
+    expect(first.get('dark')?.id).toBe(DARK);
+    expect(first.get('tactician')?.id).toBe(TACTICIAN);
+    expect(mergeEmojis([home, [...EMOJIS.values()]]).get('dark')?.id).toBe(HOME_DARK);
+    expect(convertEmojis(':dark: :tactician:', first).content).toBe(
+      `<:dark:${DARK}> <:tactician:${TACTICIAN}>`,
+    );
+  });
+
+  it('à la casse près aussi, le premier gagne — mais le nom exact passe devant', () => {
+    const table = mergeEmojis([
+      [{ id: DARK, name: 'Dark', animated: false }],
+      [{ id: HOME_DARK, name: 'DARK', animated: false }],
+    ]);
+    expect(convertEmojis(':dark:', table).content).toBe(`<:Dark:${DARK}>`);
+    expect(convertEmojis(':DARK:', table).content).toBe(`<:DARK:${HOME_DARK}>`);
+  });
+
+  it('aucun serveur : la table est vide, pas inconnue — un nom de serveur est une faute', () => {
+    expect(convertEmojis(':scroll: :dark:', mergeEmojis([]))).toEqual({
+      content: '📜 :dark:',
+      unknown: ['dark'],
+      pending: [],
+    });
+  });
+});
+
+describe('convertPlain — là où Discord n’affiche pas les emojis de serveur', () => {
+  it('convertit les standards, laisse et NOMME les codes de serveur', () => {
+    expect(convertPlain(':scroll: Outerpedia :dark: :Ranger: :scrol:', EMOJIS)).toEqual({
+      content: '📜 Outerpedia :dark: :Ranger: :scrol:',
+      server: ['dark', 'Ranger'],
+      unknown: ['scrol'],
+      pending: [],
+    });
+    // Sans liste des serveurs, on ne sait pas : rien n'est accusé.
+    expect(convertPlain(':dark:', null)).toEqual({
+      content: ':dark:',
+      server: [],
+      unknown: [],
+      pending: ['dark'],
+    });
+  });
 });
 
 describe('table des codes standard', () => {
@@ -562,7 +728,9 @@ describe('splitMessage', () => {
 describe('blocker', () => {
   it('nomme l’emoji fautif, et laisse passer un texte propre', () => {
     expect(blocker(prepare(SAMPLE, EMOJIS))).toBeNull();
-    expect(blocker(prepare(':scrol: :dark:', EMOJIS))).toMatch(/^Emoji inconnu : :scrol: —/);
+    expect(blocker(prepare(':scrol: :dark:', EMOJIS))).toMatch(
+      /^Emoji inconnu : :scrol: — ni sur les serveurs cochés ni dans la table standard/,
+    );
     expect(blocker(prepare(':dark:', null))).toMatch(/^Emojis du serveur non chargés : :dark:/);
   });
 });
@@ -616,8 +784,13 @@ describe('buildRequest / messageBody', () => {
 
 // ------------------------------------------------------------------ envoi ----
 
+/** Les corps d'un envoi en message simple, un par morceau. */
+const bodies = (chunks: string[], suppressEmbeds = true, edit = false): unknown[] =>
+  chunks.map((c) => messageBody(c, suppressEmbeds, edit));
+
 describe('sendMessages', () => {
-  const input = { channelId: CHANNEL, chunks: ['un', 'deux', 'trois'], suppressEmbeds: true };
+  const chunks = ['un', 'deux', 'trois'];
+  const input = { guildId: GUILD_ID, channelId: CHANNEL, bodies: bodies(chunks) };
 
   it('poste dans l’ordre, espacé d’une seconde, et rend le lien de chaque message', async () => {
     const { deps, calls, sleeps } = harness(discord);
@@ -628,7 +801,7 @@ describe('sendMessages', () => {
       Array(3).fill(['POST', `https://discord.com/api/v10/channels/${CHANNEL}/messages`]),
     );
     expect(calls.map((c) => c.body)).toEqual(
-      input.chunks.map((content) => ({ content, allowed_mentions: { parse: [] }, flags: 4 })),
+      chunks.map((content) => ({ content, allowed_mentions: { parse: [] }, flags: 4 })),
     );
     for (const c of calls) expect(c.headers.Authorization).toBe(`Bot ${TOKEN}`);
     expect(sleeps).toEqual([1000, 1000]);
@@ -649,7 +822,7 @@ describe('sendMessages', () => {
     const { deps, calls, sleeps } = harness((call, n) =>
       n === 1 ? { status: 429, body: { retry_after: 0.65 } } : discord(call, n),
     );
-    const out = await sendMessages(deps, { ...input, chunks: ['un'] });
+    const out = await sendMessages(deps, { ...input, bodies: bodies(['un']) });
     expect(out.ok).toBe(true);
     expect(calls).toHaveLength(2);
     expect(calls[1].body).toEqual(calls[0].body);
@@ -658,7 +831,7 @@ describe('sendMessages', () => {
 
   it('un second 429 de suite est un échec — pas de boucle', async () => {
     const { deps, calls } = harness(() => ({ status: 429, body: { retry_after: 2 } }));
-    const out = await sendMessages(deps, { ...input, chunks: ['un'] });
+    const out = await sendMessages(deps, { ...input, bodies: bodies(['un']) });
     expect(out.ok).toBe(false);
     expect(calls).toHaveLength(2);
     expect(out.log[0]).toMatch(/^ÉCHEC au message 1\/1 — Discord a répondu 429/);
@@ -703,6 +876,7 @@ describe('sendMessages', () => {
     });
     expect(done.log).toEqual(['Tous les morceaux sont déjà postés.']);
     expect((await sendMessages(deps, { ...input, channelId: '../guilds/1' })).ok).toBe(false);
+    expect((await sendMessages(deps, { ...input, guildId: 'x' })).ok).toBe(false);
     expect((await sendMessages(deps, { ...input, already: ['1/../2'] })).ok).toBe(false);
     expect(calls).toEqual([]);
   });
@@ -727,10 +901,10 @@ describe('editMessages', () => {
   it('modifie en place, morceau par morceau (`PATCH`)', async () => {
     const { deps, calls, sleeps } = harness(discord);
     const out = await editMessages(deps, {
+      guildId: GUILD_ID,
       channelId: CHANNEL,
       ids,
-      chunks: ['un corrigé', 'deux'],
-      suppressEmbeds: false,
+      bodies: bodies(['un corrigé', 'deux'], false, true),
     });
 
     expect(calls.map((c) => [c.method, c.url])).toEqual(
@@ -754,10 +928,10 @@ describe('editMessages', () => {
   it('refuse si le nombre de morceaux a changé — ni suppression ni repost', async () => {
     const { deps, calls } = harness(discord);
     const out = await editMessages(deps, {
+      guildId: GUILD_ID,
       channelId: CHANNEL,
       ids,
-      chunks: ['un', 'deux', 'trois'],
-      suppressEmbeds: true,
+      bodies: bodies(['un', 'deux', 'trois'], true, true),
     });
     expect(out.ok).toBe(false);
     expect(out.log[0]).toMatch(
@@ -772,10 +946,10 @@ describe('editMessages', () => {
       body: { message: 'Unknown Message', code: 10008 },
     }));
     const out = await editMessages(deps, {
+      guildId: GUILD_ID,
       channelId: CHANNEL,
       ids,
-      chunks: ['un', 'deux'],
-      suppressEmbeds: true,
+      bodies: bodies(['un', 'deux'], true, true),
     });
     expect(calls).toHaveLength(1);
     expect(out.log).toEqual([
@@ -787,7 +961,7 @@ describe('editMessages', () => {
 
 // ---------------------------------------------------------------- serveur ----
 
-describe('loadGuild / sortChannels', () => {
+describe('sortChannels', () => {
   it('range les salons comme la liste de Discord, texte et annonces seulement', () => {
     expect(
       sortChannels([
@@ -812,25 +986,77 @@ describe('loadGuild / sortChannels', () => {
       { id: '17', name: 'b', category: 'Community', announcement: false },
     ]);
   });
+});
 
-  it('lit emojis et salons en deux GET, sans les emojis indisponibles', async () => {
-    const { deps, calls } = harness(discord);
-    const res = await loadGuild(deps);
-    expect(calls.map((c) => [c.method, c.url])).toEqual([
-      ['GET', `https://discord.com/api/v10/guilds/${GUILD_ID}/emojis`],
-      ['GET', `https://discord.com/api/v10/guilds/${GUILD_ID}/channels`],
-    ]);
-    if (!res.ok) throw new Error(res.error);
-    expect([...res.data.emojis.keys()]).toEqual(['dark', 'ranger', 'party']);
-    expect(res.data.channels.map((c) => c.name)).toEqual(['bot-test', 'patch-notes']);
+describe('canUseExternalEmojis — la permission du bot dans UN salon', () => {
+  const ADMIN = String(1 << 3);
+  const access = (over: Partial<BotAccess> = {}): BotAccess => ({
+    guildId: GUILD_ID,
+    owner: false,
+    permissions: 2048n,
+    roles: [BOT_ROLE],
+    userId: BOT_ID,
+    ...over,
+  });
+  const role = (id: string, allow: string, deny: string) => ({ id, type: 0, allow, deny });
+  const member = (id: string, allow: string, deny: string) => ({ id, type: 1, allow, deny });
+
+  it('sans dérogation : les permissions du serveur', () => {
+    expect(canUseExternalEmojis(access(), [])).toBe(false);
+    expect(canUseExternalEmojis(access({ permissions: BigInt(EXTERNAL) | 2048n }), [])).toBe(true);
+    // Une dérogation qui ne touche pas ce bit ne change rien.
+    expect(canUseExternalEmojis(access(), [role(BOT_ROLE, '2048', '1024')])).toBe(false);
   });
 
-  it('sans jeton ou sans serveur : dit ce qui manque, sans appeler', async () => {
-    const none = harness(discord, { token: undefined });
-    expect(await loadGuild(none.deps)).toEqual({ ok: false, error: TOKEN_HINT });
-    const half = harness(discord, { guildId: undefined });
-    expect(await loadGuild(half.deps)).toEqual({ ok: false, error: GUILD_HINT });
-    expect([...none.calls, ...half.calls]).toEqual([]);
+  it('propriétaire et administrateur passent outre les dérogations', () => {
+    const denied = [role(GUILD_ID, '0', EXTERNAL), member(BOT_ID, '0', EXTERNAL)];
+    expect(canUseExternalEmojis(access({ owner: true, permissions: null }), denied)).toBe(true);
+    expect(canUseExternalEmojis(access({ permissions: BigInt(ADMIN) }), denied)).toBe(true);
+  });
+
+  it('dérogations dans l’ordre : @everyone, puis les rôles du bot, puis le bot', () => {
+    const granted = access({ permissions: BigInt(EXTERNAL) });
+    // `@everyone` porte l'id du serveur.
+    expect(canUseExternalEmojis(granted, [role(GUILD_ID, '0', EXTERNAL)])).toBe(false);
+    expect(canUseExternalEmojis(access(), [role(GUILD_ID, EXTERNAL, '0')])).toBe(true);
+    // Un rôle du bot rend ce que `@everyone` retire ; le rôle d'un autre, non.
+    expect(
+      canUseExternalEmojis(granted, [role(GUILD_ID, '0', EXTERNAL), role(BOT_ROLE, EXTERNAL, '0')]),
+    ).toBe(true);
+    expect(
+      canUseExternalEmojis(granted, [
+        role(GUILD_ID, '0', EXTERNAL),
+        role('600000000000000099', EXTERNAL, '0'),
+      ]),
+    ).toBe(false);
+    // Entre deux rôles du bot, l'accord l'emporte sur le refus.
+    expect(
+      canUseExternalEmojis(access({ roles: [BOT_ROLE, '600000000000000002'] }), [
+        role(BOT_ROLE, '0', EXTERNAL),
+        role('600000000000000002', EXTERNAL, '0'),
+      ]),
+    ).toBe(true);
+    // La dérogation du bot lui-même a le dernier mot.
+    expect(
+      canUseExternalEmojis(granted, [role(BOT_ROLE, EXTERNAL, '0'), member(BOT_ID, '0', EXTERNAL)]),
+    ).toBe(false);
+    expect(canUseExternalEmojis(granted, [member('900000000000000099', '0', EXTERNAL)])).toBe(true);
+  });
+
+  it('dès qu’il manque de quoi trancher : `null`, on ne devine pas', () => {
+    expect(canUseExternalEmojis(access({ permissions: null }), [])).toBeNull();
+    expect(canUseExternalEmojis(access(), undefined)).toBeNull();
+    // Rôles non lus, et une dérogation de rôle touche ce bit.
+    expect(
+      canUseExternalEmojis(access({ roles: null }), [role(BOT_ROLE, EXTERNAL, '0')]),
+    ).toBeNull();
+    expect(
+      canUseExternalEmojis(access({ userId: null }), [member(BOT_ID, EXTERNAL, '0')]),
+    ).toBeNull();
+    // Rôles non lus, mais aucune dérogation de rôle ne touche ce bit : on sait.
+    expect(canUseExternalEmojis(access({ roles: null }), [role(BOT_ROLE, '2048', '0')])).toBe(
+      false,
+    );
   });
 });
 
@@ -844,57 +1070,285 @@ describe('discordSession — sans jeton', () => {
     expect(await session.state()).toEqual({
       hasToken: false,
       hint: 'jeton absent : ajoute DISCORD_BOT_TOKEN à .env.local',
-      channels: null,
-      emojiCount: 0,
-      emojis: [],
+      guilds: null,
+      defaultGuild: null,
+      invite: null,
     });
+    expect(await session.state(true)).toMatchObject({ hasToken: false, guilds: null });
+    expect(await session.channels(GUILD_ID)).toEqual({ error: TOKEN_HINT });
+    expect(await session.emojis([GUILD_ID])).toEqual({ guilds: [] });
 
-    const preview = session.preview(`${patchTemplate('https://ex.com/note/')}\n- :dark: Lambda`);
+    const preview = session.preview(
+      draft(`${patchTemplate('https://ex.com/note/')}\n- :dark: Lambda`),
+    );
     expect(preview.messages).toBe(1);
+    expect(preview.limit).toBe(MESSAGE_LIMIT);
     expect(preview.unknown).toEqual([]);
     expect(preview.pending).toEqual(['dark']);
     expect(preview.html).toContain('<h1>📜 PATCH NOTES — TL;DR</h1>');
     expect(preview.html).toContain('<h2>⚖️ Adjustments</h2>');
     expect(preview.html).toContain('<span class="wait" title="inconnu sans jeton">:dark:</span>');
 
-    const sent = await session.send({ text: 'x', channelId: CHANNEL, suppressEmbeds: true });
+    const sent = await session.send(toSend('x'));
     expect(sent).toEqual({ ok: false, log: [TOKEN_HINT], ids: [], urls: [], total: 0 });
-    const edited = await session.edit({
-      text: 'x',
-      channelId: CHANNEL,
-      suppressEmbeds: true,
-      ids: ['500000000000000001'],
-    });
+    const edited = await session.edit(toEdit('x', ['500000000000000001']));
     expect(edited.log).toEqual([TOKEN_HINT]);
 
     expect(calls).toEqual([]);
   });
 });
 
-describe('discordSession — avec jeton', () => {
-  it('lit le serveur UNE fois, puis convertit ses emojis', async () => {
+describe('discordSession — les serveurs du bot', () => {
+  it('l’état rend leur liste — nom et id, RIEN d’autre —, le serveur par défaut et le lien d’invitation', async () => {
     const { deps, calls } = harness(discord);
     const session = discordSession(deps);
 
     const state = await session.state();
-    expect(state.hasToken).toBe(true);
-    expect(state.hint).toBeNull();
-    expect(state.emojiCount).toBe(3);
-    expect(state.channels?.map((c) => c.id)).toEqual([OTHER_CHANNEL, CHANNEL]);
-    await session.state();
-    expect(calls).toHaveLength(2);
+    expect(state).toEqual({
+      hasToken: true,
+      hint: null,
+      guilds: [
+        { id: GUILD_ID, name: 'EvaMains' },
+        { id: HOME_GUILD, name: 'Chez Sevih' },
+        { id: LOCKED_GUILD, name: 'Fermé' },
+      ],
+      // `DISCORD_GUILD_ID` : le choix du premier lancement, rien de plus.
+      defaultGuild: GUILD_ID,
+      invite: `https://discord.com/oauth2/authorize?client_id=${BOT_ID}&scope=bot&permissions=0`,
+    });
+    expect(JSON.stringify(state)).not.toContain(TOKEN);
+    expect(inviteUrl('42')).toBe(
+      'https://discord.com/oauth2/authorize?client_id=42&scope=bot&permissions=0',
+    );
 
-    const preview = session.preview(SAMPLE);
-    expect(preview.blocker).toBeNull();
-    expect(preview.pending).toEqual([]);
-    expect(preview.length).toBe(prepare(SAMPLE, EMOJIS).length);
-    expect(preview.html).toContain(`/emojis/${DARK}.webp`);
-    expect(preview.html).toMatch(/^<div class="dc-cut">message 1\/1 · \d+ caractères<\/div>/);
+    // Lue une fois : ni salon ni emoji tant que la page ne les demande pas.
+    await session.state();
+    expect(gets(calls)).toEqual(['/users/@me', '/users/@me/guilds']);
   });
 
-  it('rend la liste des emojis du serveur — nom, id, animé, et RIEN d’autre', async () => {
-    // Discord en dit plus sur un emoji (qui l'a créé, quels rôles y ont droit) :
-    // la page n'a besoin que de quoi l'afficher et l'écrire.
+  it('un `DISCORD_GUILD_ID` absent, ou qui n’est pas un serveur du bot : aucun serveur par défaut', async () => {
+    for (const guildId of [undefined, '100000000000000099']) {
+      const { deps } = harness(discord, { guildId });
+      const state = await discordSession(deps).state();
+      expect(state.hint).toBeNull();
+      expect(state.defaultGuild).toBeNull();
+      expect(state.guilds).toHaveLength(3);
+    }
+  });
+
+  it('« recharger la liste » relit les serveurs, et oublie salons et emojis lus', async () => {
+    let invited = false;
+    const { deps, calls } = harness((call, n) => {
+      const r = discord(call, n);
+      if (invited && call.url.endsWith('/users/@me/guilds'))
+        (r.body as unknown[]).push({ id: '100000000000000004', name: 'Nouveau' });
+      return r;
+    });
+    const session = discordSession(deps);
+    await session.state();
+    await session.channels(HOME_GUILD);
+    await session.emojis([HOME_GUILD]);
+    calls.length = 0;
+
+    invited = true;
+    expect((await session.state()).guilds).toHaveLength(3);
+    expect(calls).toEqual([]);
+    expect((await session.state(true)).guilds?.map((g) => g.name)).toContain('Nouveau');
+    await session.channels(HOME_GUILD);
+    await session.emojis([HOME_GUILD]);
+    // L'id du bot, lui, ne change pas : il n'est pas redemandé.
+    expect(gets(calls)).toEqual([
+      '/users/@me/guilds',
+      `/guilds/${HOME_GUILD}/channels`,
+      `/guilds/${HOME_GUILD}/emojis`,
+    ]);
+  });
+
+  it('un chargement raté n’est pas retenu : l’état suivant réessaie', async () => {
+    let down = true;
+    const { deps, calls } = harness((call, n) => (down ? { status: 500 } : discord(call, n)));
+    const session = discordSession(deps);
+    expect(await session.state()).toMatchObject({ hint: 'Discord a répondu 500', guilds: null });
+    down = false;
+    expect((await session.state()).hint).toBeNull();
+    expect(gets(calls)).toEqual(['/users/@me', '/users/@me', '/users/@me/guilds']);
+  });
+});
+
+describe('discordSession — le serveur où l’on poste', () => {
+  it('rend les salons du serveur demandé, avec la permission d’emojis externes de chacun', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+
+    expect(await session.channels(GUILD_ID)).toEqual({
+      channels: [
+        // Aucune permission au niveau du serveur, aucune dérogation ici.
+        {
+          id: OTHER_CHANNEL,
+          name: 'bot-test',
+          category: '',
+          announcement: false,
+          externalEmojis: false,
+        },
+        // Accordée par une dérogation du rôle du bot.
+        {
+          id: CHANNEL,
+          name: 'patch-notes',
+          category: 'News',
+          announcement: true,
+          externalEmojis: true,
+        },
+      ],
+    });
+    // Propriétaire : tout lui est permis, ses rôles ne sont pas lus.
+    expect(await session.channels(HOME_GUILD)).toEqual({
+      channels: [
+        { id: HOME_CHANNEL, name: 'test', category: '', announcement: false, externalEmojis: true },
+      ],
+    });
+    expect(gets(calls)).toEqual([
+      '/users/@me',
+      '/users/@me/guilds',
+      `/guilds/${GUILD_ID}/channels`,
+      `/guilds/${GUILD_ID}/members/${BOT_ID}`,
+      `/guilds/${HOME_GUILD}/channels`,
+    ]);
+  });
+
+  it('les salons sont lus UNE fois par serveur et par session, même demandés en même temps', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    await Promise.all([session.channels(GUILD_ID), session.channels(GUILD_ID)]);
+    await session.channels(HOME_GUILD);
+    await session.channels(GUILD_ID);
+    await session.channels(HOME_GUILD);
+    expect(gets(calls).filter((path) => path.endsWith('/channels'))).toEqual([
+      `/guilds/${GUILD_ID}/channels`,
+      `/guilds/${HOME_GUILD}/channels`,
+    ]);
+  });
+
+  it('les rôles du bot illisibles : les salons sortent quand même, permission « inconnue » là où ils comptent', async () => {
+    const { deps } = harness((call, n) =>
+      call.url.includes('/members/') ? { status: 403 } : discord(call, n),
+    );
+    const res = await discordSession(deps).channels(GUILD_ID);
+    if ('error' in res) throw new Error(res.error);
+    expect(res.channels.map((c) => [c.name, c.externalEmojis])).toEqual([
+      ['bot-test', false],
+      ['patch-notes', null],
+    ]);
+  });
+
+  it('refuse un serveur dont le bot n’est pas membre — rien n’est lu, rien ne part', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const unknown = '100000000000000099';
+
+    expect(await session.channels(unknown)).toEqual({
+      error: expect.stringMatching(/^Serveur inconnu du bot/),
+    });
+    const sent = await session.send(toSend('ok', { guildId: unknown }));
+    expect(sent.ok).toBe(false);
+    expect(sent.log[0]).toMatch(/^Serveur inconnu du bot/);
+    // Un identifiant qui n'en est pas un ne finit pas dans une adresse.
+    expect((await session.send(toSend('ok', { guildId: `${GUILD_ID}/../x` }))).ok).toBe(false);
+    expect(gets(calls)).toEqual(['/users/@me', '/users/@me/guilds']);
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('refuse un salon qui n’appartient pas au serveur annoncé', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+
+    // Le salon existe — sur l'AUTRE serveur.
+    for (const req of [
+      toSend('ok', { guildId: HOME_GUILD, channelId: CHANNEL }),
+      toSend('ok', { guildId: GUILD_ID, channelId: HOME_CHANNEL }),
+      toSend('ok', { channelId: '200000000000000099' }),
+    ])
+      expect((await session.send(req)).log).toEqual([
+        'Ce salon n’appartient pas au serveur choisi : choisis-en un de la liste.',
+      ]);
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('poste sur le serveur choisi, pas sur celui de `DISCORD_GUILD_ID`', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const sent = await session.send(
+      toSend('bonjour', { guildId: HOME_GUILD, channelId: HOME_CHANNEL, emojiGuilds: [] }),
+    );
+    expect(sent.ok).toBe(true);
+    expect(posts(calls).map((c) => c.url)).toEqual([
+      `https://discord.com/api/v10/channels/${HOME_CHANNEL}/messages`,
+    ]);
+    expect(sent.urls).toEqual([
+      `https://discord.com/channels/${HOME_GUILD}/${HOME_CHANNEL}/${sent.ids[0]}`,
+    ]);
+  });
+
+  it('un message posté ne se modifie que LÀ où il est parti : refus hors du serveur et du salon d’origine', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const sent = await session.send(toSend('v1'));
+    expect(sent.ok).toBe(true);
+    const origin = { guildId: GUILD_ID, channelId: CHANNEL, mode: 'simple' as const };
+
+    // La page a changé de serveur, ou de salon : on ne modifie rien ailleurs.
+    for (const elsewhere of [
+      { guildId: HOME_GUILD, channelId: HOME_CHANNEL },
+      { guildId: GUILD_ID, channelId: OTHER_CHANNEL },
+    ]) {
+      const out = await session.edit(toEdit('v2', sent.ids, { ...elsewhere, posted: origin }));
+      expect(out.ok).toBe(false);
+      expect(out.log[0]).toMatch(
+        /^Modification refusée : ce message n’est pas parti du serveur et du salon choisis/,
+      );
+      expect(out.ids).toEqual(sent.ids);
+    }
+    expect(posts(calls)).toHaveLength(1);
+
+    // Revenu à l'origine : la modification passe.
+    const edited = await session.edit(toEdit('v2', sent.ids, { posted: origin }));
+    expect(edited.ok).toBe(true);
+    expect(posts(calls)[1].url).toBe(
+      `https://discord.com/api/v10/channels/${CHANNEL}/messages/${sent.ids[0]}`,
+    );
+  });
+});
+
+describe('discordSession — les serveurs dont on prend les emojis', () => {
+  it('ne lit que les serveurs cochés, UNE fois chacun par session', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+
+    const first = await session.emojis([GUILD_ID]);
+    expect(first).toEqual({
+      guilds: [
+        {
+          id: GUILD_ID,
+          // Nom, id, animé — triés par nom, sans l'emoji indisponible.
+          emojis: [
+            { id: DARK, name: 'dark', animated: false },
+            { id: PARTY, name: 'party', animated: true },
+            { id: RANGER, name: 'ranger', animated: false },
+          ],
+        },
+      ],
+    });
+    await Promise.all([session.emojis([GUILD_ID]), session.emojis([GUILD_ID, HOME_GUILD])]);
+    await session.emojis([HOME_GUILD, GUILD_ID]);
+    // Un envoi les relit dans le cache, pas sur le réseau.
+    await session.send(toSend(':dark:', { emojiGuilds: [GUILD_ID, HOME_GUILD] }));
+    expect(gets(calls).filter((path) => path.endsWith('/emojis'))).toEqual([
+      `/guilds/${GUILD_ID}/emojis`,
+      `/guilds/${HOME_GUILD}/emojis`,
+    ]);
+  });
+
+  it('ne rend d’un emoji que son nom, son id et s’il est animé', async () => {
+    // Discord en dit plus (qui l'a créé, quels rôles y ont droit).
     const { deps } = harness((call, n) =>
       call.url.endsWith('/emojis')
         ? {
@@ -915,35 +1369,158 @@ describe('discordSession — avec jeton', () => {
           }
         : discord(call, n),
     );
-    const state = await discordSession(deps).state();
-    expect(state.emojis).toEqual([
-      { id: DARK, name: 'Dark', animated: false },
-      { id: PARTY, name: 'party', animated: true },
-      { id: RANGER, name: 'ranger', animated: false },
+    const out = await discordSession(deps).emojis([GUILD_ID]);
+    expect(out.guilds).toEqual([
+      {
+        id: GUILD_ID,
+        emojis: [
+          { id: DARK, name: 'Dark', animated: false },
+          { id: PARTY, name: 'party', animated: true },
+          { id: RANGER, name: 'ranger', animated: false },
+        ],
+      },
     ]);
-    expect(state.emojiCount).toBe(3);
-    expect(JSON.stringify(state)).not.toContain(TOKEN);
+    expect(JSON.stringify(out)).not.toContain(TOKEN);
   });
 
-  it('un chargement raté n’est pas retenu : l’état suivant réessaie', async () => {
-    let down = true;
-    const { deps, calls } = harness((call, n) => (down ? { status: 500 } : discord(call, n)));
+  it('résout dans l’ordre de la LISTE des serveurs : un nom en double, le premier coché gagne', async () => {
+    const { deps } = harness(discord);
     const session = discordSession(deps);
-    expect((await session.state()).hint).toBe('Discord a répondu 500');
-    down = false;
-    expect((await session.state()).hint).toBeNull();
-    expect(calls).toHaveLength(3);
+    // Demandés à l'envers : c'est l'ordre de la liste qui compte.
+    const loaded = await session.emojis([HOME_GUILD, GUILD_ID]);
+    expect(loaded.guilds.map((g) => g.id)).toEqual([GUILD_ID, HOME_GUILD]);
+
+    const both = session.preview(
+      draft(':dark: :tactician: :scroll:', { emojiGuilds: [HOME_GUILD, GUILD_ID] }),
+    );
+    expect(both.blocker).toBeNull();
+    expect(both.html).toContain(`/emojis/${DARK}.webp`);
+    expect(both.html).not.toContain(HOME_DARK);
+    expect(both.html).toContain(`/emojis/${TACTICIAN}.webp`);
+    // `tactician` vient d'un autre serveur que celui où l'on poste ; `dark`, non.
+    expect(both.external).toEqual(['tactician']);
+
+    // Le premier décoché, le second prend le nom.
+    const home = session.preview(draft(':dark:', { emojiGuilds: [HOME_GUILD] }));
+    expect(home.html).toContain(`/emojis/${HOME_DARK}.webp`);
+    expect(home.external).toEqual(['dark']);
+    // On poste CHEZ lui : son emoji n'y est plus externe.
+    expect(
+      session.preview(draft(':dark:', { guildId: HOME_GUILD, emojiGuilds: [HOME_GUILD] })).external,
+    ).toEqual([]);
   });
 
-  it('un emoji inconnu, un salon hors liste ou un texte vide bloquent AVANT tout envoi', async () => {
+  it('un serveur décoché n’existe plus : son emoji redevient une faute, qui bloque', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    await session.emojis([GUILD_ID, HOME_GUILD]);
+
+    const preview = session.preview(draft(':dark: :tactician:'));
+    expect(preview.unknown).toEqual(['tactician']);
+    expect(preview.pending).toEqual([]);
+    expect(preview.blocker).toMatch(/^Emoji inconnu : :tactician: — ni sur les serveurs cochés/);
+    expect((await session.send(toSend(':tactician:'))).log[0]).toMatch(/^Emoji inconnu/);
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('aucun serveur coché : seuls les emojis standard passent', async () => {
     const { deps, calls } = harness(discord);
     const session = discordSession(deps);
     await session.state();
-    const send = (text: string, channelId = CHANNEL) =>
-      session.send({ text, channelId, suppressEmbeds: true });
+
+    const preview = session.preview(draft(':scroll: :dark:', { emojiGuilds: [] }));
+    expect(preview.html).toContain('📜');
+    expect(preview.unknown).toEqual(['dark']);
+    expect(preview.pending).toEqual([]);
+
+    const sent = await session.send(toSend(':scroll: ok', { emojiGuilds: [] }));
+    expect(sent.ok).toBe(true);
+    expect(posts(calls)[0].body).toMatchObject({ content: '📜 ok' });
+    // Aucune liste d'emojis n'a été lue.
+    expect(gets(calls).filter((path) => path.endsWith('/emojis'))).toEqual([]);
+  });
+
+  it('un serveur qui refuse est dit en clair, n’est pas redemandé, et ne bloque pas les autres', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+
+    const out = await session.emojis([LOCKED_GUILD, GUILD_ID]);
+    expect(out.guilds).toEqual([
+      expect.objectContaining({ id: GUILD_ID, emojis: expect.arrayContaining([]) }),
+      {
+        id: LOCKED_GUILD,
+        emojis: [],
+        error:
+          'Discord a répondu 403 : Missing Access (code 50001) — le bot n’a pas accès à ce serveur',
+      },
+    ]);
+    expect(out.guilds[0].error).toBeUndefined();
+    expect((await session.emojis([LOCKED_GUILD])).guilds[0].error).toMatch(/403/);
+
+    // Ses emojis ne viendront pas : un nom inconnu est une faute, pas une attente.
+    const picked = { emojiGuilds: [LOCKED_GUILD, GUILD_ID] };
+    const preview = session.preview(draft(':dark: :nope:', picked));
+    expect(preview.html).toContain(`/emojis/${DARK}.webp`);
+    expect(preview.unknown).toEqual(['nope']);
+    expect((await session.send(toSend(':dark:', picked))).ok).toBe(true);
+    expect(gets(calls).filter((path) => path.endsWith('/emojis'))).toEqual([
+      `/guilds/${GUILD_ID}/emojis`,
+      `/guilds/${LOCKED_GUILD}/emojis`,
+    ]);
+  });
+
+  it('une panne passagère n’est pas un refus : elle est dite, et la demande suivante réessaie', async () => {
+    let down = true;
+    const { deps, calls } = harness((call, n) =>
+      down && call.url.endsWith('/emojis') ? { status: 500 } : discord(call, n),
+    );
+    const session = discordSession(deps);
+    expect((await session.emojis([GUILD_ID])).guilds).toEqual([
+      { id: GUILD_ID, emojis: [], error: 'Discord a répondu 500' },
+    ]);
+    // Coché mais pas lu : son emoji attend, il n'est pas accusé.
+    const waiting = session.preview(draft(':dark:'));
+    expect(waiting.pending).toEqual(['dark']);
+    expect(waiting.blocker).toMatch(/^Emojis du serveur non chargés : :dark:/);
+    expect((await session.send(toSend(':dark:'))).ok).toBe(false);
+
+    down = false;
+    expect((await session.emojis([GUILD_ID])).guilds[0].emojis).toHaveLength(3);
+    expect(session.preview(draft(':dark:')).blocker).toBeNull();
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('un serveur inconnu du bot dans les cases cochées est ignoré', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    expect(await session.emojis(['100000000000000099', `${GUILD_ID}/../x`])).toEqual({
+      guilds: [],
+    });
+    expect(gets(calls)).toEqual(['/users/@me', '/users/@me/guilds']);
+  });
+});
+
+describe('discordSession — message simple', () => {
+  it('le preview rend ce que l’envoi poste', async () => {
+    const { deps } = harness(discord);
+    const session = discordSession(deps);
+    await session.emojis([GUILD_ID]);
+
+    const preview = session.preview(draft(SAMPLE));
+    expect(preview.blocker).toBeNull();
+    expect(preview.pending).toEqual([]);
+    expect(preview.external).toEqual([]);
+    expect(preview.length).toBe(prepare(SAMPLE, EMOJIS).length);
+    expect(preview.html).toContain(`/emojis/${DARK}.webp`);
+    expect(preview.html).toMatch(/^<div class="dc-cut">message 1\/1 · \d+ caractères<\/div>/);
+  });
+
+  it('un emoji inconnu ou un texte vide bloquent AVANT tout envoi', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const send = (text: string) => session.send(toSend(text));
 
     expect((await send(':scrol: oups')).log[0]).toMatch(/^Emoji inconnu : :scrol:/);
-    expect((await send('ok', '200000000000000099')).log).toEqual(['Choisis un salon de la liste.']);
     expect((await send('  ')).log).toEqual(['Message vide.']);
     expect((await send('a'.repeat(2001))).log[0]).toMatch(/^La ligne 1 fait 2001 caractères/);
     expect(posts(calls)).toEqual([]);
@@ -952,21 +1529,15 @@ describe('discordSession — avec jeton', () => {
   it('envoie ce que le preview montre, puis le modifie en place', async () => {
     const { deps, calls } = harness(discord);
     const session = discordSession(deps);
-    await session.state();
 
-    const sent = await session.send({ text: SAMPLE, channelId: CHANNEL, suppressEmbeds: true });
+    const sent = await session.send(toSend(SAMPLE));
     expect(sent.ok).toBe(true);
     expect(sent.total).toBe(1);
     expect(posts(calls).map((c) => c.body)).toEqual([
       { content: prepare(SAMPLE, EMOJIS).content, allowed_mentions: { parse: [] }, flags: 4 },
     ]);
 
-    const edited = await session.edit({
-      text: SAMPLE.replace('crash', 'freeze'),
-      channelId: CHANNEL,
-      suppressEmbeds: true,
-      ids: sent.ids,
-    });
+    const edited = await session.edit(toEdit(SAMPLE.replace('crash', 'freeze'), sent.ids));
     expect(edited.ok).toBe(true);
     const patch = posts(calls)[1];
     expect([patch.method, patch.url]).toEqual([
@@ -979,14 +1550,9 @@ describe('discordSession — avec jeton', () => {
   it('reprise refusée si le découpage n’est plus celui de l’envoi interrompu', async () => {
     const { deps, calls } = harness(discord);
     const session = discordSession(deps);
-    await session.state();
-    const out = await session.send({
-      text: 'un seul message',
-      channelId: CHANNEL,
-      suppressEmbeds: true,
-      already: ['500000000000000001'],
-      total: 2,
-    });
+    const out = await session.send(
+      toSend('un seul message', { already: ['500000000000000001'], total: 2 }),
+    );
     expect(out.ok).toBe(false);
     expect(out.log[0]).toMatch(/^Reprise refusée : l’envoi interrompu comptait 2 messages/);
     // Les ids déjà postés reviennent : la page ne les oublie pas.
@@ -1003,11 +1569,14 @@ describe('le jeton ne sort pas', () => {
 
   it('ni dans une ligne de journal, ni dans une réponse de route — même si Discord ou `fetch` le renvoient', async () => {
     // Le pire cas : chaque message d'erreur qui revient CONTIENT le jeton.
+    let posted = 0;
     const leaky = harness((call, n) => {
+      if (call.url.endsWith(`/guilds/${LOCKED_GUILD}/emojis`))
+        return { status: 403, body: { message: `No access with ${TOKEN}`, code: 50001 } };
       if (call.method === 'GET') return discord(call, n);
       if (call.method === 'PATCH')
         return { status: 400, body: { message: `bad header Bot ${TOKEN}`, code: 50035 } };
-      return n === 4
+      return ++posted === 2
         ? { status: 403, body: { message: `Missing Access for ${TOKEN}`, code: 50001 } }
         : discord(call, n);
     });
@@ -1017,19 +1586,13 @@ describe('le jeton ne sort pas', () => {
     const two = `${'a'.repeat(1500)}\n${'b'.repeat(1500)}`;
 
     seen.push(await session.state());
-    seen.push(session.preview(`${SAMPLE}\n${TOKEN}`));
-    const sent = await session.send(
-      { text: two, channelId: CHANNEL, suppressEmbeds: true },
-      report,
-    );
+    seen.push(session.preview(draft(`${SAMPLE}\n${TOKEN}`)));
+    seen.push(await session.channels(GUILD_ID));
+    seen.push(await session.emojis([GUILD_ID, LOCKED_GUILD]));
+    const sent = await session.send(toSend(two), report);
     seen.push(sent);
-    seen.push(
-      await session.edit(
-        { text: two, channelId: CHANNEL, suppressEmbeds: true, ids: [...sent.ids, sent.ids[0]] },
-        report,
-      ),
-    );
-    seen.push(await session.edit({ text: two, channelId: CHANNEL, suppressEmbeds: true, ids: [] }));
+    seen.push(await session.edit(toEdit(two, [...sent.ids, sent.ids[0]]), report));
+    seen.push(await session.edit(toEdit(two, [])));
 
     const thrown = harness(discord, {
       fetch: async (_url, init) => {
@@ -1038,19 +1601,21 @@ describe('le jeton ne sort pas', () => {
     });
     const broken = discordSession(thrown.deps);
     seen.push(await broken.state());
+    seen.push(await broken.channels(GUILD_ID));
     seen.push(
       await sendMessages(
         thrown.deps,
-        { channelId: CHANNEL, chunks: ['x'], suppressEmbeds: true },
+        { guildId: GUILD_ID, channelId: CHANNEL, bodies: bodies(['x']) },
         report,
       ),
     );
 
-    // Le scénario a bien traversé les trois fuites possibles…
+    // Le scénario a bien traversé les fuites possibles…
     const all = JSON.stringify(seen);
     expect(sent.ok).toBe(false);
     expect(all).toContain('Missing Access for «jeton»');
     expect(all).toContain('bad header Bot «jeton»');
+    expect(all).toContain('No access with «jeton»');
     expect(all).toContain('connect failed with headers');
     // … et le jeton n'est nulle part, hormis dans le texte que l'auteur a tapé
     // lui-même (le preview rend ce qu'on lui donne).
@@ -1061,6 +1626,633 @@ describe('le jeton ne sort pas', () => {
       expect(c.headers.Authorization).toBe(`Bot ${TOKEN}`);
       expect(c.url).not.toContain(TOKEN);
     }
+  });
+});
+
+// ---------------------------------------------------------------- embed ------
+
+/** Un formulaire rempli de bout en bout. */
+const FULL = form({
+  title: ':scroll: Patch notes',
+  url: 'https://ex.com/note/',
+  color: '#ff8800',
+  thumbnail: 'https://ex.com/thumb.png',
+  image: 'https://ex.com/banner.png',
+  footer: 'Outerpedia :star:',
+  content: ':dark: New patch',
+  buttons: [
+    { label: 'Full Patch Note', url: 'https://ex.com/note/' },
+    { label: ':scroll: Wiki', url: 'https://outerpedia.com/' },
+  ],
+});
+
+describe('prepareEmbed — le texte de l’éditeur devient la description', () => {
+  it('un seul embed : chaque champ du formulaire à sa place, emojis convertis', () => {
+    const p = prepareEmbed('## :star: Banners\n- :dark: Lambda', FULL, EMOJIS);
+    expect(p.invalid).toEqual([]);
+    expect(p.messages).toEqual([
+      {
+        content: `<:dark:${DARK}> New patch`,
+        title: '📜 Patch notes',
+        url: 'https://ex.com/note/',
+        description: `## ⭐ Banners\n- <:dark:${DARK}> Lambda`,
+        color: 0xff8800,
+        thumbnail: 'https://ex.com/thumb.png',
+        image: 'https://ex.com/banner.png',
+        // Dans le pied et les libellés, les standards seulement.
+        footer: 'Outerpedia ⭐',
+        buttons: [
+          { label: 'Full Patch Note', url: 'https://ex.com/note/' },
+          { label: '📜 Wiki', url: 'https://outerpedia.com/' },
+        ],
+      },
+    ]);
+    // Longueurs APRÈS conversion : `:dark:` fait 26 caractères une fois parti.
+    expect(p.length).toBe(p.messages[0].description.length);
+    expect(p.total).toBe(
+      '📜 Patch notes'.length + p.messages[0].description.length + 'Outerpedia ⭐'.length,
+    );
+    expect(embedBlocker(p)).toBeNull();
+  });
+
+  it('tout est facultatif : la description seule, ou un titre seul', () => {
+    const alone = prepareEmbed('Bonjour', EMPTY_EMBED, EMOJIS);
+    expect(alone.messages).toEqual([
+      {
+        content: '',
+        title: '',
+        url: '',
+        description: 'Bonjour',
+        color: embedColor(EMBED_COLOR),
+        thumbnail: '',
+        image: '',
+        footer: '',
+        buttons: [],
+      },
+    ]);
+    expect(embedBlocker(alone)).toBeNull();
+
+    const bare = prepareEmbed('  ', form({ title: 'Annonce' }), EMOJIS);
+    expect(bare.messages.map((m) => [m.title, m.description])).toEqual([['Annonce', '']]);
+    expect(embedBlocker(bare)).toBeNull();
+  });
+
+  it('rien du tout : message vide ; un texte du dessus ou un bouton sans carte : embed vide', () => {
+    expect(embedBlocker(prepareEmbed('', EMPTY_EMBED, EMOJIS))).toBe('Message vide.');
+    for (const lone of [
+      form({ content: 'dessus' }),
+      form({ buttons: [{ label: 'x', url: 'https://ex.com/' }] }),
+    ])
+      expect(embedBlocker(prepareEmbed('', lone, EMOJIS))).toMatch(/^Embed vide : /);
+  });
+
+  it('4 096 caractères de description : un embed ; 4 097 : deux, coupés au saut de ligne', () => {
+    const line = (n: number): string => 'x'.repeat(n);
+    const fits = prepareEmbed(
+      `${line(2000)}\n${line(2095)}`.padEnd(EMBED_DESCRIPTION_LIMIT, 'y'),
+      EMPTY_EMBED,
+      EMOJIS,
+    );
+    expect(fits.length).toBe(4096);
+    expect(fits.messages).toHaveLength(1);
+
+    const over = prepareEmbed(`${line(2000)}\n${line(2096)}`, EMPTY_EMBED, EMOJIS);
+    expect(over.length).toBe(4097);
+    expect(over.messages.map((m) => m.description.length)).toEqual([2000, 2096]);
+    expect(embedBlocker(over)).toBeNull();
+
+    // Plus long qu'un MESSAGE simple (2 000), mais pas qu'une description.
+    expect(prepareEmbed(line(3000), EMPTY_EMBED, EMOJIS).messages).toHaveLength(1);
+  });
+
+  it('une ligne seule de plus de 4 096 caractères : refus, ligne nommée', () => {
+    const p = prepareEmbed(`ok\n${'x'.repeat(4097)}`, EMPTY_EMBED, EMOJIS);
+    expect(p.messages).toEqual([]);
+    expect(embedBlocker(p)).toMatch(
+      /^La ligne 2 fait 4097 caractères à elle seule : Discord en accepte 4096 par description d’embed/,
+    );
+  });
+
+  it('compte la description APRÈS conversion des emojis', () => {
+    // 200 lignes de 12 caractères tapés : 2 599 à l'écran, 6 599 une fois converties.
+    const text = Array.from({ length: 200 }, () => ':dark: texte').join('\n');
+    expect(text.length).toBeLessThan(EMBED_DESCRIPTION_LIMIT);
+    const p = prepareEmbed(text, EMPTY_EMBED, EMOJIS);
+    expect(p.length).toBe(6599);
+    expect(p.messages).toHaveLength(2);
+    for (const m of p.messages)
+      expect(m.description.length).toBeLessThanOrEqual(EMBED_DESCRIPTION_LIMIT);
+  });
+
+  it('plusieurs embeds : titre, lien, vignette et texte du dessus sur le PREMIER ; image, pied et boutons sur le DERNIER ; même couleur', () => {
+    const section = (name: string): string => `## ${name}\n${'x'.repeat(3000)}`;
+    const p = prepareEmbed([section('A'), section('B'), section('C')].join('\n'), FULL, EMOJIS);
+    expect(p.invalid).toEqual([]);
+    expect(p.messages).toHaveLength(3);
+    const [first, middle, last] = p.messages;
+
+    // Coupé de préférence AVANT un `## `, comme un message simple.
+    expect(p.messages.map((m) => m.description.slice(0, 4))).toEqual(['## A', '## B', '## C']);
+
+    expect(first).toMatchObject({
+      content: `<:dark:${DARK}> New patch`,
+      title: '📜 Patch notes',
+      url: 'https://ex.com/note/',
+      thumbnail: 'https://ex.com/thumb.png',
+      image: '',
+      footer: '',
+      buttons: [],
+    });
+    expect(middle).toMatchObject({
+      content: '',
+      title: '',
+      url: '',
+      thumbnail: '',
+      image: '',
+      footer: '',
+      buttons: [],
+    });
+    expect(last).toMatchObject({
+      content: '',
+      title: '',
+      url: '',
+      thumbnail: '',
+      image: 'https://ex.com/banner.png',
+      footer: 'Outerpedia ⭐',
+    });
+    expect(last.buttons).toHaveLength(2);
+    expect(p.messages.map((m) => m.color)).toEqual([0xff8800, 0xff8800, 0xff8800]);
+    // Le total affiché est celui de l'embed le plus chargé.
+    expect(p.total).toBe(Math.max(...p.messages.map(embedTotal)));
+  });
+
+  it('6 000 caractères pour l’ensemble des textes d’un embed : au-delà, refus chiffré', () => {
+    const fits = form({ title: 't'.repeat(256), footer: 'f'.repeat(1744) });
+    const ok = prepareEmbed('d'.repeat(4000), fits, EMOJIS);
+    expect(ok.total).toBe(EMBED_TOTAL_LIMIT);
+    expect(embedBlocker(ok)).toBeNull();
+
+    const over = prepareEmbed('d'.repeat(4000), { ...fits, footer: 'f'.repeat(1745) }, EMOJIS);
+    expect(over.total).toBe(6001);
+    expect(embedBlocker(over)).toBe(
+      'Embed : 6001 caractères de texte en tout (titre, description, pied), Discord en accepte 6000. Raccourcis le pied ou le titre.',
+    );
+
+    // Découpé : c'est l'embed fautif qui est nommé (le dernier porte le pied).
+    const split = prepareEmbed(
+      `${'a'.repeat(4000)}\n${'b'.repeat(4000)}`,
+      form({ footer: 'f'.repeat(2048) }),
+      EMOJIS,
+    );
+    expect(embedBlocker(split)).toMatch(/^Embed du message 2\/2 : 6048 caractères de texte/);
+  });
+
+  it.each([
+    ['Titre', { title: 't'.repeat(257) }, /^Titre : 257 caractères, Discord en accepte 256\.$/],
+    ['Pied', { footer: 'f'.repeat(2049) }, /^Pied : 2049 caractères, Discord en accepte 2048\.$/],
+    [
+      'Texte du dessus',
+      { content: 'c'.repeat(2001) },
+      /^Texte au-dessus de l’embed : 2001 caractères, Discord en accepte 2000\.$/,
+    ],
+    [
+      'Libellé',
+      { buttons: [{ label: 'l'.repeat(81), url: 'https://ex.com/' }] },
+      /^Bouton 1, libellé : 81 caractères, Discord en accepte 80\.$/,
+    ],
+  ])('%s trop long : refus, champ nommé', (_name, over, message) => {
+    expect(embedBlocker(prepareEmbed('texte', form(over), EMOJIS))).toMatch(message);
+  });
+
+  it('le titre se compte emojis convertis : 250 caractères tapés peuvent en faire trop', () => {
+    const title = `${'t'.repeat(244)}:dark:`;
+    expect(title.length).toBe(250);
+    expect(embedBlocker(prepareEmbed('x', form({ title }), EMOJIS))).toBe(
+      'Titre : 270 caractères, Discord en accepte 256.',
+    );
+  });
+
+  it.each([
+    ['Lien du titre', { title: 'T', url: 'javascript:alert(1)' }],
+    ['Vignette', { thumbnail: 'ex.com/thumb.png' }],
+    ['Image', { image: 'ftp://ex.com/banner.png' }],
+    ['Bouton 1, adresse', { buttons: [{ label: 'Wiki', url: 'outerpedia.com' }] }],
+    [
+      'Bouton 2, adresse',
+      {
+        buttons: [
+          { label: 'a', url: 'https://ex.com/' },
+          { label: 'b', url: 'data:text/html,x' },
+        ],
+      },
+    ],
+  ])('%s : une adresse qui n’est pas du http(s) bloque l’envoi, champ nommé', (name, over) => {
+    const p = prepareEmbed('texte', form(over), EMOJIS);
+    expect(embedBlocker(p)).toMatch(
+      new RegExp(`^${name} : « .+ » n’est pas une adresse http\\(s\\)\\.$`),
+    );
+    // Le champ refusé ne part pas dans le rendu non plus.
+    expect(JSON.stringify(p.messages)).not.toMatch(/javascript:|ftp:|data:/);
+  });
+
+  it('`isHttpUrl` : http et https, rien d’autre', () => {
+    for (const ok of ['https://ex.com/a?b=c#d', 'http://localhost:3000/', 'HTTPS://EX.COM'])
+      expect(isHttpUrl(ok)).toBe(true);
+    for (const no of ['', 'ex.com', '//ex.com', 'https://', 'https://ex.com/a b', 'mailto:a@b.c'])
+      expect(isHttpUrl(no)).toBe(false);
+  });
+
+  it('un lien de titre sans titre est refusé plutôt qu’oublié en silence', () => {
+    expect(embedBlocker(prepareEmbed('x', form({ url: 'https://ex.com/' }), EMOJIS))).toBe(
+      'Lien du titre : il lui faut un titre.',
+    );
+  });
+
+  it('boutons : cinq au plus, les rangées vides passées, une rangée à moitié remplie nommée', () => {
+    const b = (i: number) => ({ label: `B${i}`, url: `https://ex.com/${i}` });
+    const empty = { label: ' ', url: '' };
+    const five = prepareEmbed(
+      'x',
+      form({ buttons: [b(1), empty, b(2), b(3), b(4), b(5)] }),
+      EMOJIS,
+    );
+    expect(five.invalid).toEqual([]);
+    expect(five.messages[0].buttons.map((x) => x.label)).toEqual(['B1', 'B2', 'B3', 'B4', 'B5']);
+    expect(BUTTON_MAX).toBe(5);
+
+    const six = prepareEmbed('x', form({ buttons: [1, 2, 3, 4, 5, 6].map(b) }), EMOJIS);
+    expect(embedBlocker(six)).toBe('Boutons : 6 remplis, Discord en accepte 5.');
+
+    // La numérotation est celle de l'écran, rangées vides comprises.
+    expect(
+      embedBlocker(
+        prepareEmbed('x', form({ buttons: [b(1), empty, { label: 'Wiki', url: '' }] }), EMOJIS),
+      ),
+    ).toBe('Bouton 3 : adresse manquante.');
+    expect(
+      embedBlocker(
+        prepareEmbed('x', form({ buttons: [{ label: '', url: 'https://ex.com/' }] }), EMOJIS),
+      ),
+    ).toBe('Bouton 1 : libellé manquant.');
+  });
+
+  it('emojis : convertis dans la description, le titre et le texte du dessus ; un code de serveur dans le pied ou un libellé est signalé, PAS converti', () => {
+    const p = prepareEmbed(
+      ':dark: desc',
+      form({ title: ':ranger: titre', content: ':party: dessus', footer: 'pied :dark: :bug:' }),
+      EMOJIS,
+    );
+    expect(p.messages[0]).toMatchObject({
+      description: `<:dark:${DARK}> desc`,
+      title: `<:ranger:${RANGER}> titre`,
+      content: `<a:party:${PARTY}> dessus`,
+      footer: 'pied :dark: 🐛',
+    });
+    expect(embedBlocker(p)).toBe(
+      'Pied : :dark: — Discord n’y affiche pas les emojis de serveur, retire ce code.',
+    );
+
+    const label = prepareEmbed(
+      'x',
+      form({ buttons: [{ label: ':dark: :ranger: Wiki', url: 'https://ex.com/' }] }),
+      EMOJIS,
+    );
+    expect(embedBlocker(label)).toBe(
+      'Bouton 1 : :dark:, :ranger: — Discord n’y affiche pas les emojis de serveur, retire ces codes.',
+    );
+  });
+
+  it('un emoji inconnu bloque où qu’il soit ; sans jeton il attend', () => {
+    for (const where of ['title', 'content', 'footer'] as const)
+      expect(embedBlocker(prepareEmbed('x', form({ [where]: ':scrol:' }), EMOJIS))).toMatch(
+        /^Emoji inconnu : :scrol:/,
+      );
+    expect(embedBlocker(prepareEmbed(':scrol:', EMPTY_EMBED, EMOJIS))).toMatch(/^Emoji inconnu/);
+    const waiting = prepareEmbed(':dark:', form({ title: ':ranger:', footer: ':party:' }), null);
+    expect(waiting.pending).toEqual(['dark', 'ranger', 'party']);
+    expect(embedBlocker(waiting)).toMatch(/^Emojis du serveur non chargés/);
+  });
+
+  it('couleur : `#rrggbb` → l’entier ; toute autre écriture → le jeton `--accent` du site', () => {
+    expect(embedColor('#ff8800')).toBe(0xff8800);
+    expect(embedColor('00FF00')).toBe(0x00ff00);
+    for (const odd of ['', 'red', '#fff', '#gggggg']) expect(embedColor(odd)).toBe(0x38bdf8);
+    const css = readFileSync(resolve(import.meta.dirname, '../../src/app/globals.css'), 'utf8');
+    expect(css).toContain(`--accent: ${EMBED_COLOR};`);
+  });
+
+  it('`embedForm` : ce qui arrive de la page est ramené à du texte', () => {
+    expect(embedForm(null)).toEqual(EMPTY_EMBED);
+    expect(
+      embedForm({
+        title: 'T',
+        url: 42,
+        color: '',
+        footer: ['x'],
+        buttons: [{ label: 'a', url: 'https://ex.com/', style: 1 }, 'nope', { label: 7 }],
+        extra: true,
+      }),
+    ).toEqual({
+      ...EMPTY_EMBED,
+      title: 'T',
+      buttons: [
+        { label: 'a', url: 'https://ex.com/' },
+        { label: '', url: '' },
+        { label: '', url: '' },
+      ],
+    });
+    expect(embedForm({ buttons: 'x' }).buttons).toEqual([]);
+  });
+});
+
+describe('embedBody — le corps de la requête', () => {
+  const [full] = prepareEmbed('## Desc', FULL, EMOJIS).messages;
+
+  it('chaque champ à sa place ; boutons de style « lien » dans une rangée ; aucune mention ne notifie', () => {
+    expect(embedBody(full)).toEqual({
+      content: `<:dark:${DARK}> New patch`,
+      embeds: [
+        {
+          title: '📜 Patch notes',
+          url: 'https://ex.com/note/',
+          description: '## Desc',
+          color: 0xff8800,
+          thumbnail: { url: 'https://ex.com/thumb.png' },
+          image: { url: 'https://ex.com/banner.png' },
+          footer: { text: 'Outerpedia ⭐' },
+        },
+      ],
+      components: [
+        {
+          type: 1,
+          components: [
+            { type: 2, style: 5, label: 'Full Patch Note', url: 'https://ex.com/note/' },
+            { type: 2, style: 5, label: '📜 Wiki', url: 'https://outerpedia.com/' },
+          ],
+        },
+      ],
+      allowed_mentions: { parse: [] },
+    });
+  });
+
+  it('un champ vide n’est pas écrit', () => {
+    const [bare] = prepareEmbed('Bonjour', EMPTY_EMBED, EMOJIS).messages;
+    expect(embedBody(bare)).toEqual({
+      embeds: [{ description: 'Bonjour', color: 0x38bdf8 }],
+      allowed_mentions: { parse: [] },
+    });
+  });
+
+  it('à la modification tout est écrit : un texte du dessus ou des boutons retirés ne restent pas en place', () => {
+    const [bare] = prepareEmbed('Bonjour', EMPTY_EMBED, EMOJIS).messages;
+    expect(embedBody(bare, true)).toEqual({
+      content: '',
+      embeds: [{ description: 'Bonjour', color: 0x38bdf8 }],
+      components: [],
+      allowed_mentions: { parse: [] },
+      flags: 0,
+    });
+  });
+
+  it('le drapeau « sans aperçu des liens » n’est JAMAIS posé : il masquerait l’embed', () => {
+    expect(embedBody(full)).not.toHaveProperty('flags');
+    expect(embedBody(full, true).flags).toBe(0);
+  });
+});
+
+describe('renderEmbed — la carte comme Discord l’affiche', () => {
+  const [full] = prepareEmbed('## :star: Banners\n- **Lambda** :dark:', FULL, EMOJIS).messages;
+  const html = renderEmbed(full);
+
+  it('barre de couleur, titre cliquable, description en markdown, vignette, image, pied, boutons, texte au-dessus', () => {
+    expect(html).toBe(
+      `<div class="dc-above"><div class="ln"><img class="emoji" alt=":dark:" title=":dark:" src="https://cdn.discordapp.com/emojis/${DARK}.webp?size=48"> New patch</div></div>` +
+        '<div class="dc-embed" style="border-left-color:#ff8800">' +
+        '<div class="dc-embed-head"><div class="dc-embed-text">' +
+        '<div class="dc-embed-title"><a href="https://ex.com/note/" target="_blank" rel="noopener noreferrer">📜 Patch notes</a></div>' +
+        `<div class="dc-embed-desc"><h2>⭐ Banners</h2><ul><li><strong>Lambda</strong> <img class="emoji" alt=":dark:" title=":dark:" src="https://cdn.discordapp.com/emojis/${DARK}.webp?size=48"></li></ul></div>` +
+        '</div><img class="dc-embed-thumb" alt="" src="https://ex.com/thumb.png"></div>' +
+        '<img class="dc-embed-image" alt="" src="https://ex.com/banner.png">' +
+        '<div class="dc-embed-footer">Outerpedia ⭐</div>' +
+        '</div>' +
+        '<div class="dc-buttons">' +
+        '<a class="dc-button" href="https://ex.com/note/" target="_blank" rel="noopener noreferrer">Full Patch Note</a>' +
+        '<a class="dc-button" href="https://outerpedia.com/" target="_blank" rel="noopener noreferrer">📜 Wiki</a>' +
+        '</div>',
+    );
+  });
+
+  it('sans lien le titre n’est pas cliquable ; un champ absent ne laisse rien', () => {
+    const [bare] = prepareEmbed(
+      'Bonjour',
+      form({ title: 'Annonce', color: '#000001' }),
+      EMOJIS,
+    ).messages;
+    expect(renderEmbed(bare)).toBe(
+      '<div class="dc-embed" style="border-left-color:#000001">' +
+        '<div class="dc-embed-head"><div class="dc-embed-text">' +
+        '<div class="dc-embed-title">Annonce</div>' +
+        '<div class="dc-embed-desc"><div class="ln">Bonjour</div></div>' +
+        '</div></div></div>',
+    );
+  });
+
+  it('ce qui est tapé dans le formulaire ne produit JAMAIS de balise ni d’attribut', () => {
+    const hostile = '"><script>alert(1)</script><img src=x onerror=alert(1)>';
+    const p = prepareEmbed(
+      hostile,
+      form({
+        title: hostile,
+        url: `https://ex.com/?q="onmouseover="alert(1)`,
+        thumbnail: `https://ex.com/t.png"onerror="alert(1)`,
+        image: `https://ex.com/i.png?a='b'&c=<d>`,
+        footer: hostile,
+        content: hostile,
+        color: '#123456"><script>',
+        buttons: [{ label: hostile, url: `https://ex.com/"><script>` }],
+      }),
+      EMOJIS,
+    );
+    const out = embedPreviewHtml(p);
+    expect(out).not.toMatch(/<script|<img src=x/);
+    // Aucune adresse ne ferme son attribut.
+    expect(out).not.toMatch(/(?:href|src)="[^"]*"(?:on\w+|>?<script)/);
+    const tags = [...out.matchAll(/<([a-z0-9]+)(?:\s[^<>]*)?>/gi)].map((m) => m[1]);
+    expect(new Set(tags)).toEqual(new Set(['div', 'a', 'img']));
+    // Une couleur qui n'en est pas une retombe sur celle par défaut.
+    expect(out).toContain('style="border-left-color:#38bdf8"');
+  });
+
+  it('le preview : un cadre par message, avec ses longueurs', () => {
+    const p = prepareEmbed(
+      `${'a'.repeat(4000)}\n${'b'.repeat(4000)}`,
+      form({ title: 'T' }),
+      EMOJIS,
+    );
+    const out = embedPreviewHtml(p);
+    expect(out).toContain(
+      '<div class="dc-cut">message 1/2 · embed · description 4000 caractères · textes 4001</div>',
+    );
+    expect(out).toContain(
+      '<div class="dc-cut">message 2/2 · embed · description 4000 caractères · textes 4000</div>',
+    );
+    expect(out.match(/class="dc-embed"/g)).toHaveLength(2);
+    expect(out.match(/class="dc-embed-title"/g)).toHaveLength(1);
+  });
+});
+
+describe('discordSession — mode embed', () => {
+  const embedDraft = { mode: 'embed' as const, embed: FULL };
+  const origin = { guildId: GUILD_ID, channelId: CHANNEL, mode: 'embed' as const };
+
+  it('le preview rend la carte, ses longueurs et ses plafonds', async () => {
+    const { deps } = harness(discord);
+    const session = discordSession(deps);
+    await session.emojis([GUILD_ID]);
+
+    const preview = session.preview(draft('## Desc :dark:', embedDraft));
+    expect(preview).toMatchObject({
+      messages: 1,
+      limit: EMBED_DESCRIPTION_LIMIT,
+      length: `## Desc <:dark:${DARK}>`.length,
+      blocker: null,
+      unknown: [],
+      pending: [],
+    });
+    expect(preview.total).toBe(preview.length + '📜 Patch notes'.length + 'Outerpedia ⭐'.length);
+    expect(preview.html).toContain('class="dc-embed"');
+    expect(preview.html).toContain('class="dc-button"');
+
+    // Un champ invalide bloque, nommé.
+    expect(
+      session.preview(draft('x', { mode: 'embed', embed: form({ image: 'banner.png' }) })).blocker,
+    ).toBe('Image : « banner.png » n’est pas une adresse http(s).');
+  });
+
+  it('envoie ce que le preview montre — sans JAMAIS le drapeau d’aperçu, même case cochée', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+
+    const sent = await session.send(
+      toSend('## Desc :dark:', { ...embedDraft, suppressEmbeds: true }),
+    );
+    expect(sent.ok).toBe(true);
+    expect(sent.total).toBe(1);
+    const [message] = prepareEmbed('## Desc :dark:', FULL, EMOJIS).messages;
+    expect(posts(calls).map((c) => [c.method, c.url, c.body])).toEqual([
+      ['POST', `https://discord.com/api/v10/channels/${CHANNEL}/messages`, embedBody(message)],
+    ]);
+    expect(posts(calls)[0].body).not.toHaveProperty('flags');
+    expect(posts(calls)[0].body).toMatchObject({ allowed_mentions: { parse: [] } });
+  });
+
+  it('un champ invalide bloque AVANT tout envoi', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const bad = form({ title: 'T', url: 'pas une adresse' });
+    const out = await session.send(toSend('x', { mode: 'embed', embed: bad }));
+    expect(out.log).toEqual(['Lien du titre : « pas une adresse » n’est pas une adresse http(s).']);
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('« Mettre à jour » modifie les embeds en place — même nombre de messages exigé', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const two = `## A\n${'a'.repeat(3000)}\n## B\n${'b'.repeat(3000)}`;
+    const sent = await session.send(toSend(two, embedDraft));
+    expect(sent.ids).toHaveLength(2);
+
+    // Boutons retirés entre-temps : la modification les efface du dernier message.
+    const lighter = { ...FULL, buttons: [] };
+    const edited = await session.edit(
+      toEdit(two.replace('## B', '## B2'), sent.ids, {
+        mode: 'embed',
+        embed: lighter,
+        posted: origin,
+      }),
+    );
+    expect(edited.ok).toBe(true);
+    const patches = posts(calls).slice(2);
+    expect(patches.map((c) => [c.method, c.url])).toEqual(
+      sent.ids.map((id) => [
+        'PATCH',
+        `https://discord.com/api/v10/channels/${CHANNEL}/messages/${id}`,
+      ]),
+    );
+    const messages = prepareEmbed(two.replace('## B', '## B2'), lighter, EMOJIS).messages;
+    expect(patches.map((c) => c.body)).toEqual(messages.map((m) => embedBody(m, true)));
+    expect(patches[1].body).toMatchObject({ content: '', components: [], flags: 0 });
+
+    const grown = await session.edit(
+      toEdit(`${two}\n## C\n${'c'.repeat(3000)}`, sent.ids, { ...embedDraft, posted: origin }),
+    );
+    expect(grown.ok).toBe(false);
+    expect(grown.log[0]).toMatch(
+      /^Modification refusée : 2 messages sont postés, le texte en fait maintenant 3\./,
+    );
+    expect(posts(calls)).toHaveLength(4);
+  });
+
+  it('refuse de changer de mode sur un message déjà posté, dans un sens comme dans l’autre', async () => {
+    const { deps, calls } = harness(discord);
+    const session = discordSession(deps);
+    const simple = await session.send(toSend('Bonjour'));
+    const embed = await session.send(toSend('Bonjour', embedDraft));
+    expect([simple.ok, embed.ok]).toEqual([true, true]);
+
+    const toEmbed = await session.edit(toEdit('Bonjour', simple.ids, embedDraft));
+    expect(toEmbed.ok).toBe(false);
+    expect(toEmbed.log).toEqual([
+      'Modification refusée : le message est parti en « message simple », l’éditeur est en « embed ». Un message posté ne change pas de mode — repasse en « message simple », ou « Nouveau message ».',
+    ]);
+    const toSimple = await session.edit(toEdit('Bonjour', embed.ids, { posted: origin }));
+    expect(toSimple.log[0]).toMatch(/^Modification refusée : le message est parti en « embed »/);
+    expect(toSimple.ids).toEqual(embed.ids);
+    expect(posts(calls)).toHaveLength(2);
+  });
+});
+
+// ---------------------------------------------------------------- palette ----
+
+describe('parsePalette — `discord-palette.json`', () => {
+  it('le fichier livré : quatre groupes, les noms du jeu et les six icônes du gabarit', () => {
+    const { groups, error } = parsePalette(palette);
+    expect(error).toBeNull();
+    expect(groups.map((g) => [g.label, g.names.length])).toEqual([
+      ['Éléments', 5],
+      ['Classes', 5],
+      ['Sous-classes', 10],
+      ['Génériques', 6],
+    ]);
+    // Les génériques sont les icônes de section du gabarit : des emojis standard.
+    const standard = new Set(standardEmojis().map((e) => e.name));
+    for (const name of groups[3].names) expect(standard.has(name)).toBe(true);
+    for (const name of groups[3].names)
+      expect(patchTemplate('https://ex.com/')).toContain(`:${name}:`);
+  });
+
+  it('garde ce qui est lisible et dit ce qui ne l’est pas, sans tomber', () => {
+    expect(
+      parsePalette({
+        groups: [
+          { label: 'Éléments', names: ['dark', ':fire:', ' Light ', 'pas un nom', 7] },
+          { names: ['x'] },
+          { label: 'Vide' },
+        ],
+      }),
+    ).toEqual({
+      groups: [
+        { label: 'Éléments', names: ['dark', 'fire', 'Light'] },
+        { label: '', names: ['x'] },
+      ],
+      error:
+        'discord-palette.json : nom illisible "pas un nom", nom illisible 7, groupe 3 sans « names ».',
+    });
+    for (const broken of [null, [], { groups: 'x' }, 'texte'])
+      expect(parsePalette(broken)).toEqual({
+        groups: [],
+        error: 'discord-palette.json : il manque la liste « groups ».',
+      });
   });
 });
 
@@ -1140,5 +2332,28 @@ describe('notes officielles', () => {
     ]);
     // Aucun de ses codes n'attend la liste du serveur.
     expect(prepare(patchTemplate('https://ex.com/note/'), null).pending).toEqual([]);
+  });
+
+  it('en mode embed, « Full Patch Note » est un bouton de lien, plus un sous-texte', () => {
+    const template = embedTemplate('https://ex.com/note/');
+    expect(template).toEqual({
+      text: [
+        '# :scroll: PATCH NOTES — TL;DR',
+        '## :star: Banners & Dungeons',
+        '## :crossed_swords: Content',
+        '## :scales: Adjustments',
+        '## :moneybag: Shop',
+        '## :bug: Bug Fixes',
+      ].join('\n'),
+      buttons: [{ label: 'Full Patch Note', url: 'https://ex.com/note/' }],
+    });
+    const p = prepareEmbed(template.text, form({ buttons: template.buttons }), null);
+    expect(embedBlocker(p)).toBeNull();
+    expect(embedBody(p.messages[0]).components).toEqual([
+      {
+        type: 1,
+        components: [{ type: 2, style: 5, label: 'Full Patch Note', url: 'https://ex.com/note/' }],
+      },
+    ]);
   });
 });

@@ -7,6 +7,172 @@
 
 ## 2026-10-05
 
+- **`pnpm quick`, onglet « Discord » : le serveur où l'on poste se choisit,
+  les emojis se prennent sur les serveurs cochés, une palette toujours
+  visible, et un mode embed** (Opus, lot B23, retours de Sevih du 05/10 après
+  ses essais ; commit local, À NE PAS POUSSER avant le patch du 06/10).
+  L'onglet des lots B21/B22 ne connaissait que le serveur de
+  `DISCORD_GUILD_ID` (EvaMains) : ses salons, ses emojis, tous déroulés dans
+  le sélecteur. Or Sevih poste d'abord sur son serveur perso, ses emojis de
+  classe, d'élément et de sous-classe sont sur CE serveur-là, il ne veut pas
+  faire défiler une liste pour les trouver, et il veut des embeds (« un bot
+  peut faire des embeds, des jolis liens »).
+  AVANT TOUTE CHOSE, hors de l'outil, pour que ses emojis marchent : (a) si
+  son serveur n'est pas dans la liste « Serveur », c'est que le bot n'en est
+  pas membre — cliquer « inviter le bot sur un autre serveur » sous la liste
+  (le lien porte l'id du bot, lu chez Discord, `permissions=0`), choisir le
+  serveur, puis « recharger la liste » ; (b) sur EvaMains, donner au rôle du
+  bot « Utiliser des emojis externes » dans le salon visé : sans elle Discord
+  ne renvoie AUCUNE erreur, il écrit `:dark:` en toutes lettres.
+  (0) Le serveur où l'on poste : un sélecteur « Serveur » devant celui du
+  salon, rempli par `GET /users/@me/guilds`. `DISCORD_GUILD_ID` n'est plus que
+  le choix du premier lancement (absent ou inconnu du bot : aucun serveur
+  choisi, ce n'est plus une erreur) ; le dernier serveur choisi est retenu
+  avec son dernier salon. Changer de serveur relit ses salons (une fois par
+  serveur et par session) et VIDE le salon : il se rechoisit. Le serveur part
+  avec chaque demande ; le serveur local refuse un serveur dont le bot n'est
+  pas membre (« Serveur inconnu du bot ») et un salon qui n'est pas dans la
+  liste de CE serveur. Un message posté garde son serveur, son salon et son
+  mode (avec leurs noms, pour le dire à l'écran) : si le serveur ou le salon
+  choisis ne sont plus ceux-là, « Mettre à jour » s'éteint, la ligne d'état
+  dit d'y revenir, et le serveur local refuse de son côté (la demande porte
+  l'origine ET le choix courant) — rien n'est jamais modifié ailleurs. Un
+  envoi interrompu verrouille serveur, salon et mode jusqu'à la reprise.
+  (1)(2) Les emojis : sous les sélecteurs, « Prendre les emojis de », une case
+  par serveur du bot. Tant qu'aucune case n'a été touchée, seul le serveur où
+  l'on poste est coché et ce choix le SUIT ; dès la première case touchée, le
+  choix est retenu tel quel. Les emojis d'un serveur ne sont lus que s'il est
+  coché, une fois par session ; son compte s'affiche à côté de sa case, et un
+  refus (403, 404) y est écrit en rouge sans gêner les autres. Conversion,
+  preview, envoi, modification, sélecteur, autocomplétion et palette ne
+  connaissent que les serveurs cochés, dans l'ORDRE DE LA LISTE (celui de
+  Discord, du serveur le plus ancien au plus récent) : un même nom sur deux
+  serveurs, le premier gagne, et le second n'est pas proposé. Le serveur local
+  ne retient rien de ce choix — la page joint les serveurs cochés à chaque
+  preview, envoi et modification ; il garde seulement ce qu'il a LU de Discord
+  (liste des serveurs, salons et emojis par serveur). Un serveur coché pas
+  encore lu laisse un nom inconnu « en attente » plutôt que de l'accuser ; un
+  serveur qui a refusé ne compte plus, et aucun serveur coché ne laisse passer
+  que les standards.
+  (3) Emojis externes : dès qu'un serveur coché n'est pas celui où l'on poste,
+  une ligne le dit sous la liste. La permission se lit sans appel fragile :
+  les permissions du bot sur le serveur viennent de la liste des serveurs,
+  les dérogations de chaque salon de la liste des salons, ses rôles d'un seul
+  `GET /guilds/{id}/members/{bot}` (sauté s'il est propriétaire ou
+  administrateur). `canUseExternalEmojis` applique le calcul documenté par
+  Discord réduit à ce bit (`@everyone`, rôles du bot, bot) et répond `null`
+  dès qu'il manque de quoi trancher — rien n'est alors affirmé. La ligne dit
+  « Il l'a dans #salon » ou, en rouge, « Le bot ne l'a PAS dans #salon », et
+  si le texte emploie bien un emoji externe la ligne d'état les nomme. C'est
+  un signalement, pas un blocage.
+  (4) La palette : entre la barre d'outils et la zone de texte, sans
+  défilement (elle se replie sur deux lignes), quatre groupes — éléments,
+  classes, sous-classes, génériques — un clic posant `:nom: ` au curseur. La
+  liste vit dans `scripts/quick/discord-palette.json` (`groups` : `label`,
+  `names`), relu à chaque chargement de la page : les noms livrés sont ceux du
+  JEU (`data/generated/characters.json`), à corriger à la main si les emojis
+  du serveur s'appellent autrement. Un nom se résout comme à l'envoi (serveur
+  coché, à la casse près, puis standard) ; celui que rien ne porte n'est pas
+  un bouton, il est nommé dessous (« absents : … »). À savoir : `fire` et
+  `mage` existent aussi en standard (🔥, 🧙) — sans emoji de serveur à ce nom,
+  le bouton montre le standard au lieu de tomber dans « absents ». Le
+  sélecteur complet reste derrière 🙂 : récents, une section par serveur
+  coché, et les 571 standards dans une section REPLIÉE par défaut (état
+  retenu) — ils sortent par la recherche et l'autocomplétion.
+  (5) Sous la liste : le lien d'invitation (id lu par `GET /users/@me`, écrit
+  nulle part dans le dépôt) et « recharger la liste », qui fait oublier au
+  serveur local TOUT ce qu'il a lu de Discord (serveurs, salons, emojis,
+  refus) — c'est aussi le moyen de relire une permission ou un emoji qu'on
+  vient de changer.
+  (6) Embeds : un choix « Message simple / Embed », retenu. En mode embed le
+  texte de l'éditeur est la DESCRIPTION et un formulaire porte le reste, tout
+  facultatif : titre, lien du titre, couleur de la barre (par défaut le jeton
+  `--accent` du site, `#38bdf8`), vignette, image, texte au-dessus (le
+  `content`), pied, et cinq boutons de lien au plus (composants de style
+  lien dans une rangée : aucune écoute côté bot). Plafonds de Discord vérifiés
+  APRÈS conversion des emojis et affichés : 4 096 pour la description, 6 000
+  pour les textes d'un embed (titre + description + pied), puis 256, 2 048,
+  2 000 ou 80 selon le champ. Au-delà de 4 096, même découpage que le
+  message simple (`splitMessage`,
+  jamais dans une ligne, de préférence avant un `## `), un embed par
+  message : titre, lien, vignette et texte du dessus sur le premier ; image,
+  pied et boutons sur le dernier ; même couleur. Un champ refusé — trop long,
+  adresse qui n'est pas du http(s), bouton à moitié rempli, plus de cinq
+  boutons, lien de titre sans titre, plus de 6 000 — bloque l'envoi en étant
+  NOMMÉ (« Bouton 3 : adresse manquante. »). Le drapeau « sans aperçu des
+  liens » n'est jamais posé (case éteinte, qui dit pourquoi). « Mettre à
+  jour » marche en embed (même nombre de messages ; texte du dessus et
+  boutons retirés sont bien effacés) et refuse de changer de mode. Le gabarit,
+  en embed, perd sa ligne `-#` et pose « Full Patch Note » en bouton. Le
+  preview rend la carte : barre de couleur, titre cliquable, description en
+  markdown, vignette à droite, image, pied, boutons dessous, texte au-dessus
+  (`renderEmbed`, pure, côté serveur).
+  LE POINT À VÉRIFIER AU PREMIER ENVOI : les titres `#`/`##` et le sous-texte
+  `-#` DANS une description d'embed. Le preview les rend comme dans un
+  message ; rien ici ne prouve que Discord en fait autant. S'il les affiche
+  en toutes lettres, le dire : le gabarit d'embed et le rendu seront à revoir.
+  Le comment : `discord.ts` gagne `mergeEmojis`, `convertPlain`,
+  `prepareEmbed` / `embedBlocker` / `embedBody` / `renderEmbed`,
+  `canUseExternalEmojis`, `parsePalette`, et une session réécrite
+  (`state`, `channels`, `emojis`, `preview`, `send`, `edit`) ;
+  `sendMessages` / `editMessages` reçoivent le serveur et des corps de
+  requête tout faits. `discord-editor.mjs` gagne `mergeGuildEmojis`,
+  `pickerSections`, `resolvePalette`. `server.ts` : routes
+  `/api/discord/channels` et `/emojis`, `?reload=1` sur l'état, qui ne rend
+  des serveurs que nom et id. `ui.html` : le branchement.
+  Choix faits sans que le lot les tranche, à relire. (a) Dans le pied et les
+  libellés de bouton, les standards SONT convertis ; un code de serveur y
+  bloque l'envoi (signalé et non converti, comme demandé — mais bloquant,
+  puisqu'il partirait en toutes lettres). (b) Au-delà de 6 000 : refus
+  chiffré, pas de redécoupage automatique. (c) Mise à jour hors de l'origine :
+  refusée, plutôt que renvoyée d'office vers le salon d'origine comme le
+  faisait B21 pour un simple changement de salon. (d) Un refus d'emojis
+  (403/404) est retenu jusqu'à « recharger la liste », pour ne pas le
+  redemander à chaque frappe. (e) À casse près, le premier nom de la table
+  gagne désormais (c'était le dernier) : nécessaire à « le premier serveur
+  gagne ». (f) `GUILD_HINT` disparaît.
+  Vérification : `pnpm typecheck` (les trois `tsc --noEmit`, sortie 0, aucune
+  ligne d'erreur), `pnpm lint` (`eslint`, sortie 0), `pnpm test`
+  (`Test Files 186 passed (186)`, `Tests 2520 passed (2520)`) — dont les 139
+  cas de `discord.test.ts` (palette ; corps de la requête d'un embed champ
+  par champ, 4 096 et 6 000, répartition sur plusieurs embeds, chaque adresse
+  invalide, drapeau jamais posé, boutons, modification en place, refus de
+  changer de mode, carte rendue à la lettre et entrées hostiles ; serveur
+  inconnu, salon d'un autre serveur, modification hors de l'origine, salons
+  et emojis lus une fois ; ordre, nom en double, serveur décoché, refusé,
+  aucun coché ; état sans rien d'autre que nom et id ; la permission, cas par
+  cas ; le jeton absent de toute réponse) et les 68 de
+  `discord-editor.test.ts` (fusion des serveurs, sections du sélecteur —
+  standards absents par défaut, présents à la recherche et à
+  l'autocomplétion —, palette : groupes, absent listé et non proposé,
+  insertion). `node --check` du script de la page et du module. AUCUN appel
+  à discord.com : outil lancé sans fenêtre sur le port 4823 avec
+  `DISCORD_BOT_TOKEN=` vide, état vérifié d'abord (« jeton absent »), puis
+  les routes lues (salons et emojis refusés sans jeton, preview des deux
+  modes, envoi et modification refusés). La page jouée dans happy-dom contre
+  la VRAIE session branchée sur un Discord simulé (sonde jetable, non
+  committée) : serveur par défaut, changement de serveur, cases, refus en
+  clair, palette, envoi simple, mise à jour éteinte ailleurs, mode embed,
+  gabarit, champ invalide, envoi et `PATCH` d'un embed, sélecteur,
+  rechargement — elle a trouvé une couleur de barre par défaut noire,
+  corrigée. Quatre captures dans un Firefox sans tête, contre le même
+  simulé et des images locales : message simple, embed, sélecteur ouvert,
+  fenêtre de 700 px.
+  Pas vu : Discord lui-même. Ni un envoi, ni un embed réel, ni les boutons,
+  ni les vrais emojis, ni la permission lue sur un vrai serveur ; les clics
+  dans un navigateur réel (les captures sont immobiles) ; Chrome.
+  Scénario d'essai : choisir son serveur et un salon de test ; cliquer
+  `:dark:` dans la palette, écrire deux mots, « Envoyer » en message simple,
+  comparer au preview ; « Nouveau message », passer en « Embed », « Insérer
+  le gabarit », donner un titre et son lien, une image, vérifier le bouton
+  « Full Patch Note », « Envoyer », comparer au preview — titres et
+  sous-texte surtout ; corriger un mot, « Mettre à jour ». Puis choisir
+  EvaMains, cocher son serveur perso, et lire la ligne des emojis externes
+  pour le salon visé.
+  Laissé : `.env.example` présente encore `DISCORD_GUILD_ID` comme LE serveur
+  (hors périmètre : ce lot ne touche que `scripts/quick/` et les docs) ; au
+  plus 200 serveurs lus (une page) ; pas d'auteur ni de champs dans l'embed ;
+  le sélecteur de couleur n'a pas de « sans couleur ».
 - **Relecture de B22 : outils d'édition de l'onglet Discord** (Fable). Lot
   69, `be742707`. `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD
   (186 fichiers, 2 445 tests), `package.json` intact, TODO relu. Essai

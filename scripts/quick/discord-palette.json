@@ -1,0 +1,26 @@
+{
+  "_doc": "Palette de l'onglet Discord de `pnpm quick` : les emojis posés d'un clic, toujours visibles entre la barre d'outils et la zone de texte. À retoucher à la main — la page relit ce fichier à chaque chargement. Chaque nom est celui d'un emoji d'un serveur coché (« prendre les emojis de ») ou d'un emoji standard de `discord-shortcodes.json`, écrit sans les deux-points. Les trois premiers groupes portent les noms du JEU (`data/generated/characters.json`) : si les emojis du serveur s'appellent autrement, corriger ici. Un nom que rien ne porte n'est pas un bouton : l'onglet le liste sous la palette (« absents : … »).",
+  "groups": [
+    { "label": "Éléments", "names": ["fire", "water", "earth", "light", "dark"] },
+    { "label": "Classes", "names": ["striker", "defender", "ranger", "healer", "mage"] },
+    {
+      "label": "Sous-classes",
+      "names": [
+        "attacker",
+        "bruiser",
+        "enchanter",
+        "phalanx",
+        "reliever",
+        "sage",
+        "sweeper",
+        "tactician",
+        "vanguard",
+        "wizard"
+      ]
+    },
+    {
+      "label": "Génériques",
+      "names": ["scroll", "star", "crossed_swords", "scales", "moneybag", "bug"]
+    }
+  ]
+}

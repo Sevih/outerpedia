@@ -1,6 +1,6 @@
 /**
  * Contrat des outils d'édition de l'onglet « Discord » (`discord-editor.mjs`) :
- * la barre, le sélecteur d'emojis, l'autocomplétion.
+ * la barre, la palette, le sélecteur d'emojis, l'autocomplétion.
  *
  * Tout y est pur — texte et sélection en entrée, texte et sélection en sortie —
  * et se lit donc à l'œil : dans les cas ci-dessous `‹` et `›` bornent la
@@ -23,8 +23,11 @@ import {
   isUrl,
   linkAt,
   matchEmojis,
+  mergeGuildEmojis,
+  pickerSections,
   pushRecent,
   recentEmojis,
+  resolvePalette,
   searchEmojis,
   shortcutTool,
   toggleCodeBlock,
@@ -438,6 +441,157 @@ describe('emojis — filtre du sélecteur et de l’autocomplétion', () => {
     const full = Array.from({ length: RECENT_MAX }, (_, i) => `e${i}`);
     expect(RECENT_MAX).toBe(10);
     expect(pushRecent(full, 'neuf')).toEqual(['neuf', ...full.slice(0, 9)]);
+  });
+});
+
+describe('emojis — plusieurs serveurs cochés', () => {
+  const eva = {
+    id: '100000000000000001',
+    name: 'EvaMains',
+    emojis: [
+      { name: 'dark', id: '300000000000000001', animated: false },
+      { name: 'party', id: '300000000000000003', animated: true },
+    ],
+  };
+  const home = {
+    id: '100000000000000002',
+    name: 'Chez Sevih',
+    emojis: [
+      { name: 'dark', id: '300000000000000011', animated: false },
+      { name: 'Tactician', id: '300000000000000012', animated: false },
+    ],
+  };
+  const standard = [
+    { name: 'scroll', char: '📜' },
+    { name: 'star', char: '⭐' },
+    { name: 'party_popper', char: '🎉' },
+  ];
+  const ids = (list: { id?: string }[]): (string | undefined)[] => list.map((e) => e.id);
+
+  it('réunis dans l’ordre des serveurs, chacun marqué du sien ; un nom en double, le premier gagne', () => {
+    expect(mergeGuildEmojis([eva, home])).toEqual([
+      { ...eva.emojis[0], guildId: eva.id },
+      { ...eva.emojis[1], guildId: eva.id },
+      // Le `dark` du second serveur ne pourrait pas s'écrire : il n'est pas proposé.
+      { ...home.emojis[1], guildId: home.id },
+    ]);
+    expect(ids(mergeGuildEmojis([home, eva]))).toEqual([
+      '300000000000000011',
+      '300000000000000012',
+      '300000000000000003',
+    ]);
+    // Serveur décoché : ses emojis ne sont plus là. Aucun serveur : rien.
+    expect(ids(mergeGuildEmojis([home]))).toEqual(['300000000000000011', '300000000000000012']);
+    expect(mergeGuildEmojis([])).toEqual([]);
+  });
+
+  const lists = { guild: mergeGuildEmojis([eva, home]), standard };
+  const guilds = [eva, home];
+  const shape = (sections: ReturnType<typeof pickerSections>) =>
+    sections.map((s) => [s.key, s.title, s.items.map((e) => e.name), Boolean(s.folded)]);
+
+  it('le sélecteur : une section par serveur, et les standards ABSENTS de la grille par défaut', () => {
+    expect(shape(pickerSections(lists, guilds, '', [], false))).toEqual([
+      [`guild:${eva.id}`, 'EvaMains', ['dark', 'party'], false],
+      [`guild:${home.id}`, 'Chez Sevih', ['Tactician'], false],
+      // Repliée : aucun des standards n'est déroulé.
+      ['standard', 'Standards', [], true],
+    ]);
+  });
+
+  it('les récents d’abord ; la section des standards se déplie, et le reste', () => {
+    expect(shape(pickerSections(lists, guilds, '', ['star', 'Tactician', 'gone'], true))).toEqual([
+      ['recent', 'Récents', ['star', 'Tactician'], false],
+      [`guild:${eva.id}`, 'EvaMains', ['dark', 'party'], false],
+      [`guild:${home.id}`, 'Chez Sevih', ['Tactician'], false],
+      ['standard', 'Standards', ['scroll', 'star', 'party_popper'], false],
+    ]);
+  });
+
+  it('une recherche trouve les standards, section repliée ou non — serveurs d’abord, sans les récents', () => {
+    for (const open of [false, true])
+      expect(shape(pickerSections(lists, guilds, 'part', ['star'], open))).toEqual([
+        [`guild:${eva.id}`, 'EvaMains', ['party'], false],
+        [`guild:${home.id}`, 'Chez Sevih', [], false],
+        ['standard', 'Standards', ['party_popper'], false],
+      ]);
+  });
+
+  it('l’autocomplétion propose toujours les standards', () => {
+    expect(searchEmojis(lists, 'sc', [], 8)).toEqual([standard[0]]);
+    expect(searchEmojis(lists, 'pa', [], 8).map((e) => e.name)).toEqual(['party', 'party_popper']);
+  });
+
+  it('aucun serveur coché : il ne reste que les standards', () => {
+    const none = { guild: mergeGuildEmojis([]), standard };
+    expect(shape(pickerSections(none, [], '', [], false))).toEqual([
+      ['standard', 'Standards', [], true],
+    ]);
+    expect(searchEmojis(none, 'da', [], 8)).toEqual([]);
+    expect(searchEmojis(none, 'st', [], 8)).toEqual([standard[1]]);
+  });
+});
+
+describe('palette — les emojis toujours sous la main', () => {
+  const guild = mergeGuildEmojis([
+    {
+      id: '100000000000000002',
+      name: 'Chez Sevih',
+      emojis: [
+        { name: 'dark', id: '300000000000000011', animated: false },
+        { name: 'Striker', id: '300000000000000013', animated: false },
+        { name: 'star', id: '300000000000000014', animated: false },
+      ],
+    },
+  ]);
+  const standard = [
+    { name: 'scroll', char: '📜' },
+    { name: 'star', char: '⭐' },
+    { name: 'fire', char: '🔥' },
+  ];
+  const groups = [
+    { label: 'Éléments', names: ['fire', 'water', 'dark'] },
+    { label: 'Classes', names: ['striker', 'defender'] },
+    { label: 'Sous-classes', names: ['sweeper', 'wizard'] },
+    { label: 'Génériques', names: ['scroll', 'star'] },
+  ];
+
+  it('chaque groupe garde ses noms dans l’ordre ; un serveur coché passe devant un standard, à la casse près', () => {
+    const palette = resolvePalette(groups, { guild, standard });
+    expect(palette.groups.map((g) => [g.label, g.items.map((e) => e.id ?? e.char)])).toEqual([
+      ['Éléments', ['🔥', '300000000000000011']],
+      // `striker` désigne l'emoji `Striker` du serveur.
+      ['Classes', ['300000000000000013']],
+      // `star` existe des deux côtés : celui du serveur, comme à l'envoi.
+      ['Génériques', ['📜', '300000000000000014']],
+    ]);
+  });
+
+  it('un nom que rien ne porte est LISTÉ, pas proposé — et un groupe sans bouton tombe', () => {
+    const palette = resolvePalette(groups, { guild, standard });
+    expect(palette.missing).toEqual(['water', 'defender', 'sweeper', 'wizard']);
+    const offered = palette.groups.flatMap((g) => g.items.map((e) => e.name.toLowerCase()));
+    for (const name of palette.missing) expect(offered).not.toContain(name);
+    expect(palette.groups.map((g) => g.label)).not.toContain('Sous-classes');
+  });
+
+  it('sans emoji de serveur (jeton absent, rien de coché) : les standards seuls', () => {
+    const palette = resolvePalette(groups, { guild: [], standard });
+    expect(palette.groups.map((g) => [g.label, g.items.map((e) => e.name)])).toEqual([
+      ['Éléments', ['fire']],
+      ['Génériques', ['scroll', 'star']],
+    ]);
+    expect(palette.missing).toEqual(['water', 'dark', 'striker', 'defender', 'sweeper', 'wizard']);
+    expect(resolvePalette([], { guild, standard })).toEqual({ groups: [], missing: [] });
+  });
+
+  it('un clic insère `:nom: ` au curseur — le nom que porte le serveur, et l’aperçu le rend', () => {
+    const [, classes] = resolvePalette(groups, { guild, standard }).groups;
+    const after = insertEmoji(ed('## ‹›Banners'), classes.items[0].name);
+    expect(show(after)).toBe('## :Striker: ‹›Banners');
+    // À la place de la sélection, sans doubler l'espace qui suit.
+    const [elements] = resolvePalette(groups, { guild, standard }).groups;
+    expect(show(insertEmoji(ed('a ‹ici› b'), elements.items[1].name))).toBe('a :dark: ‹›b');
   });
 });
 

@@ -44,11 +44,16 @@ import {
 } from './actions';
 import {
   discordSession,
+  embedForm,
+  embedTemplate,
   latestNotes,
   noteSrcdoc,
   officialUrl,
+  parsePalette,
   patchTemplate,
   standardEmojis,
+  type Draft,
+  type Mode,
   type NotePost,
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
@@ -61,8 +66,20 @@ const PORT = Number(process.env.QUICK_PORT ?? 4747);
 const UI = resolve(import.meta.dirname, 'ui.html');
 /** Les outils d'édition de l'onglet Discord : un module que la page importe tel quel. */
 const EDITOR = resolve(import.meta.dirname, 'discord-editor.mjs');
+/** La palette d'emojis de l'onglet Discord, retouchée à la main. */
+const PALETTE = resolve(import.meta.dirname, 'discord-palette.json');
 
-// Le jeton du bot reste dans cet objet : aucune route ne le renvoie.
+/** Relue à chaque état, comme la page : la retoucher et rafraîchir suffit. */
+function palette(): ReturnType<typeof parsePalette> {
+  try {
+    return parsePalette(JSON.parse(readFileSync(PALETTE, 'utf8')));
+  } catch (e: unknown) {
+    return { groups: [], error: `discord-palette.json illisible : ${String(e)}` };
+  }
+}
+
+// Le jeton du bot reste dans cet objet : aucune route ne le renvoie. Le
+// serveur de `DISCORD_GUILD_ID` n'est que celui proposé au premier lancement.
 const discord = discordSession({
   token: process.env.DISCORD_BOT_TOKEN || undefined,
   guildId: process.env.DISCORD_GUILD_ID || undefined,
@@ -92,6 +109,20 @@ const IMAGE_TYPES = new Map([
 
 const strings = (v: unknown): string[] =>
   Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+
+const mode = (v: unknown): Mode => (v === 'embed' ? 'embed' : 'simple');
+
+/**
+ * Ce que la page joint à CHAQUE demande de l'onglet Discord : le texte, le mode
+ * et son formulaire, le serveur où poster, les serveurs dont on prend les emojis.
+ */
+const draft = (b: Record<string, unknown>): Draft => ({
+  text: String(b.text ?? ''),
+  mode: mode(b.mode),
+  embed: embedForm(b.embed),
+  guildId: String(b.guildId ?? ''),
+  emojiGuilds: strings(b.emojiGuilds),
+});
 
 /** Corps JSON, plafonné — une planche de BD en base64 pèse déjà ~600 Ko. */
 const MAX_BODY = 64 * 1024 * 1024;
@@ -231,11 +262,26 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/discord/state') {
+    // `?reload=1` : le bouton « recharger la liste » — tout ce qui a été lu de
+    // Discord est oublié et relu.
     json(res, {
-      ...(await discord.state()),
+      ...(await discord.state(url.searchParams.has('reload'))),
       notes: latestNotes(await patchPosts()),
       standard: standardEmojis(),
+      palette: palette(),
     });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/discord/channels') {
+    json(res, await discord.channels(url.searchParams.get('guild') ?? ''));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/emojis') {
+    // Les emojis des serveurs COCHÉS, et d'eux seuls ; chacun lu une fois.
+    const { guilds } = await body<{ guilds?: unknown }>(req);
+    json(res, await discord.emojis(strings(guilds)));
     return;
   }
 
@@ -244,7 +290,12 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const post = (await patchPosts()).find((p) => p.lang === 'en' && String(p.id) === id);
     if (!post) return json(res, { error: 'note inconnue' }, 404);
     const link = officialUrl(post);
-    json(res, { url: link, srcdoc: noteSrcdoc(post.content), template: patchTemplate(link) });
+    json(res, {
+      url: link,
+      srcdoc: noteSrcdoc(post.content),
+      template: patchTemplate(link),
+      embedTemplate: embedTemplate(link),
+    });
     return;
   }
 
@@ -271,8 +322,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // Rendu ICI, pas dans la page : une seule implémentation du markdown de
     // Discord, celle que les tests couvrent — et la même conversion d'emojis
     // et le même découpage que l'envoi.
-    const { text } = await body<{ text?: unknown }>(req);
-    json(res, discord.preview(String(text ?? '')));
+    json(res, discord.preview(draft(await body<Record<string, unknown>>(req))));
     return;
   }
 
@@ -281,7 +331,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     await stream(res, (report) =>
       discord.send(
         {
-          text: String(b.text ?? ''),
+          ...draft(b),
           channelId: String(b.channelId ?? ''),
           suppressEmbeds: b.suppressEmbeds !== false,
           already: strings(b.already),
@@ -295,13 +345,23 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/discord/edit') {
     const b = await body<Record<string, unknown>>(req);
+    const posted = (b.posted && typeof b.posted === 'object' ? b.posted : {}) as Record<
+      string,
+      unknown
+    >;
     await stream(res, (report) =>
       discord.edit(
         {
-          text: String(b.text ?? ''),
+          ...draft(b),
           channelId: String(b.channelId ?? ''),
           suppressEmbeds: b.suppressEmbeds !== false,
           ids: strings(b.ids),
+          // Où et comment le message est parti : la page l'a gardé à l'envoi.
+          posted: {
+            guildId: String(posted.guildId ?? ''),
+            channelId: String(posted.channelId ?? ''),
+            mode: mode(posted.mode),
+          },
         },
         report,
       ),
