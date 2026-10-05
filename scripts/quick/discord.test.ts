@@ -39,6 +39,7 @@ import {
   sendMessages,
   sortChannels,
   splitMessage,
+  standardEmojis,
   type DiscordDeps,
   type GuildEmoji,
   type NotePost,
@@ -429,6 +430,28 @@ describe('table des codes standard', () => {
       pushpin: ['1f4cc'],
       link: ['1f517'],
     });
+  });
+
+  it('se donne au sélecteur dans l’ordre du fichier, nom et caractère', () => {
+    const list = standardEmojis();
+    expect(list).toHaveLength(Object.keys(table).length);
+    // Les noms tout en chiffres passent devant : JS range ainsi les clés d'un objet.
+    expect(list.slice(0, 4)).toEqual([
+      { name: '100', char: '💯' },
+      { name: '1234', char: '🔢' },
+      { name: 'scroll', char: '📜' },
+      { name: 'star', char: '⭐' },
+    ]);
+    // Quelques codes ajoutés pour le sélecteur, au point de code près.
+    const points = (name: string): string[] =>
+      [...table[name]].map((c) => c.codePointAt(0)!.toString(16));
+    expect(points('bulb')).toEqual(['1f4a1']);
+    expect(points('skull_crossbones')).toEqual(['2620', 'fe0f']);
+    expect(points('left_right_arrow')).toEqual(['2194', 'fe0f']);
+    expect(points('hash')).toEqual(['23', 'fe0f', '20e3']);
+    expect(points('pirate_flag')).toEqual(['1f3f4', '200d', '2620', 'fe0f']);
+    // `:flag_xx:` reste calculé : aucun code de la table ne le masque.
+    expect(Object.keys(table).filter((name) => /^flag_[a-z]{2}$/.test(name))).toEqual([]);
   });
 
   it('chaque valeur est UN emoji complet (sélecteur de variante compris)', () => {
@@ -823,6 +846,7 @@ describe('discordSession — sans jeton', () => {
       hint: 'jeton absent : ajoute DISCORD_BOT_TOKEN à .env.local',
       channels: null,
       emojiCount: 0,
+      emojis: [],
     });
 
     const preview = session.preview(`${patchTemplate('https://ex.com/note/')}\n- :dark: Lambda`);
@@ -866,6 +890,39 @@ describe('discordSession — avec jeton', () => {
     expect(preview.length).toBe(prepare(SAMPLE, EMOJIS).length);
     expect(preview.html).toContain(`/emojis/${DARK}.webp`);
     expect(preview.html).toMatch(/^<div class="dc-cut">message 1\/1 · \d+ caractères<\/div>/);
+  });
+
+  it('rend la liste des emojis du serveur — nom, id, animé, et RIEN d’autre', async () => {
+    // Discord en dit plus sur un emoji (qui l'a créé, quels rôles y ont droit) :
+    // la page n'a besoin que de quoi l'afficher et l'écrire.
+    const { deps } = harness((call, n) =>
+      call.url.endsWith('/emojis')
+        ? {
+            status: 200,
+            body: [
+              {
+                id: RANGER,
+                name: 'ranger',
+                animated: false,
+                available: true,
+                roles: ['600000000000000001'],
+                user: { id: '700000000000000001', username: 'sevih' },
+              },
+              { id: PARTY, name: 'party', animated: true, managed: false },
+              { id: DARK, name: 'Dark', require_colons: true },
+              { id: '300000000000000009', name: 'gone', available: false },
+            ],
+          }
+        : discord(call, n),
+    );
+    const state = await discordSession(deps).state();
+    expect(state.emojis).toEqual([
+      { id: DARK, name: 'Dark', animated: false },
+      { id: PARTY, name: 'party', animated: true },
+      { id: RANGER, name: 'ranger', animated: false },
+    ]);
+    expect(state.emojiCount).toBe(3);
+    expect(JSON.stringify(state)).not.toContain(TOKEN);
   });
 
   it('un chargement raté n’est pas retenu : l’état suivant réessaie', async () => {

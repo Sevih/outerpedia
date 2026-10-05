@@ -59,6 +59,19 @@ export type GuildEmojis = ReadonlyMap<string, GuildEmoji> | null;
  */
 const STANDARD = new Map(Object.entries(shortcodes as Record<string, string>));
 
+/** Un emoji standard tel que le sélecteur de la page le montre. */
+export interface StandardEmoji {
+  name: string;
+  char: string;
+}
+
+/**
+ * La table standard pour le sélecteur et l'autocomplétion de la page, dans
+ * l'ordre du fichier (à ceci près que JS range devant les noms tout en chiffres).
+ */
+export const standardEmojis = (): StandardEmoji[] =>
+  [...STANDARD].map(([name, char]) => ({ name, char }));
+
 /** `v` (propriétés de chaînes) n'est pas dans la cible TS du dépôt : via le constructeur. */
 const RGI_EMOJI = new RegExp('^\\p{RGI_Emoji}$', 'v');
 
@@ -859,6 +872,11 @@ export interface DiscordState {
   /** Salons où poster ; `null` tant que le serveur n'est pas lu. */
   channels: Channel[] | null;
   emojiCount: number;
+  /**
+   * Emojis du serveur, par nom, pour le sélecteur de la page (image :
+   * `cdn.discordapp.com/emojis/<id>`). Vide tant que le serveur n'est pas lu.
+   */
+  emojis: GuildEmoji[];
 }
 
 export interface Preview {
@@ -934,6 +952,11 @@ export function discordSession(deps: DiscordDeps) {
         hint,
         channels: guild?.channels ?? null,
         emojiCount: guild?.emojis.size ?? 0,
+        // Recopiés champ par champ : rien d'autre de ce que Discord renvoie
+        // d'un emoji n'a à atteindre la page.
+        emojis: [...(guild?.emojis.values() ?? [])]
+          .map(({ id, name, animated }) => ({ id, name, animated }))
+          .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase(), 'en')),
       };
     },
 

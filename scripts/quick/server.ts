@@ -48,6 +48,7 @@ import {
   noteSrcdoc,
   officialUrl,
   patchTemplate,
+  standardEmojis,
   type NotePost,
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
@@ -58,6 +59,8 @@ for (const [k, v] of Object.entries(loadEnvLocal())) process.env[k] ??= v;
 
 const PORT = Number(process.env.QUICK_PORT ?? 4747);
 const UI = resolve(import.meta.dirname, 'ui.html');
+/** Les outils d'édition de l'onglet Discord : un module que la page importe tel quel. */
+const EDITOR = resolve(import.meta.dirname, 'discord-editor.mjs');
 
 // Le jeton du bot reste dans cet objet : aucune route ne le renvoie.
 const discord = discordSession({
@@ -150,6 +153,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     return;
   }
 
+  if (req.method === 'GET' && url.pathname === '/discord-editor.mjs') {
+    // Relu à chaque requête, comme la page ; `no-store` : un module est mis en
+    // cache par son adresse, et rafraîchir doit suffire là aussi.
+    res.writeHead(200, {
+      'content-type': 'text/javascript; charset=utf-8',
+      'cache-control': 'no-store',
+    });
+    res.end(readFileSync(EDITOR, 'utf8'));
+    return;
+  }
+
   if (req.method === 'GET' && url.pathname === '/api/state') {
     const coupons = await currentCoupons();
     json(res, {
@@ -217,7 +231,11 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/discord/state') {
-    json(res, { ...(await discord.state()), notes: latestNotes(await patchPosts()) });
+    json(res, {
+      ...(await discord.state()),
+      notes: latestNotes(await patchPosts()),
+      standard: standardEmojis(),
+    });
     return;
   }
 

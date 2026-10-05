@@ -7,6 +7,130 @@
 
 ## 2026-10-05
 
+- **`pnpm quick`, onglet « Discord » : une barre d'outils, un sélecteur
+  d'emojis et l'autocomplétion des `:codes:`** (Opus, lot B22, demande Sevih
+  du 05/10 après son premier essai : « avoir les outils d'édition, d'émoticône
+  etc. » ; commit local, À NE PAS POUSSER avant le patch du 06/10). L'éditeur
+  du lot B21 était une zone de texte nue, où le markdown et les codes se
+  tapaient à la main.
+  Où vit la logique, et pourquoi : dans un module neuf,
+  `scripts/quick/discord-editor.mjs`, que la page charge tel quel
+  (`import('/discord-editor.mjs')`, nouvelle route de `server.ts`, relue à
+  chaque requête comme `ui.html`, `no-store`) et que les tests importent. Un
+  `.mjs` en JavaScript nu typé par JSDoc, parce que l'outil n'a ni build ni
+  transpileur — un `.ts` n'arriverait pas au navigateur, une copie dans
+  `ui.html` ne serait pas testée ; `scripts/tsconfig.json` (`checkJs`) le
+  contrôle déjà. Tout y est pur : texte et sélection en entrée, texte et
+  sélection en sortie, rien du DOM. `ui.html` ne porte que le branchement.
+  (1) La barre, au-dessus de la zone de texte : G, I, S, B barré, `<>`, `||`,
+  lien, puis T1 T2 T3, `-#`, `>`, `•`, bloc de code, puis 🙂. En ligne (gras
+  `**`, italique `*`, souligné `__`, barré `~~`, code, masqué `||`) : la
+  sélection est entourée et reste sélectionnée, sans ses blancs de bord
+  (`*mot *` n'est pas un italique pour Discord) ni le marqueur de sa ligne
+  (`- **puce**`, pas `**- puce**`) ; sans sélection, le marqueur vide avec le
+  curseur dedans ; un second clic retire le marqueur, qu'il soit autour de la
+  sélection ou dans ses bords. Gras et italique partagent l'étoile sans se
+  confondre (`**mot**` mis en italique donne `***mot***`, dont on retire l'un
+  ou l'autre). Sur plusieurs lignes chaque ligne est traitée pour elle-même —
+  l'aperçu ne rend pas une mise en forme à cheval sur un saut de ligne — et le
+  marqueur n'est retiré que si toutes le portent. De ligne (`#`, `##`, `###`,
+  `-#`, `>`, `-`, chacun suivi d'une espace) : toutes les lignes touchées,
+  lignes vides passées, en bascule (posé partout si une seule ne l'a pas,
+  retiré si toutes l'ont) ; titre, sous-texte et puce s'excluent et se
+  remplacent, la citation entoure le reste (`> ## Titre`) ; une puce garde son
+  retrait, un titre le perd (un titre en retrait n'en est pas un) ; sur une
+  ligne vide le marqueur est posé, curseur derrière. Bloc de code : les lignes
+  entières entre deux clôtures sur leur propre ligne, ou un bloc vide au
+  curseur ; un second clic les retire. Lien : la sélection devient le texte et
+  l'adresse est demandée (`prompt`, `https://` ajouté devant un hôte nu,
+  blancs et parenthèse fermante encodés) ; une sélection qui EST une adresse
+  devient l'URL, sans invite, curseur dans les crochets ; un second clic sur
+  le texte d'un lien ou sur le lien entier le défait. Raccourcis Ctrl+B,
+  Ctrl+I, Ctrl+U, Ctrl+K (Cmd sur Mac), seuls — AltGr et Ctrl+Maj+I sont
+  laissés au navigateur. L'annulation : chaque outil est posé par
+  `document.execCommand('insertText')` (ou `delete`), la seule écriture que le
+  navigateur range dans son historique, en UN remplacement calculé par
+  `diffEdit` (le plus petit, jamais au milieu d'un emoji) — donc un Ctrl+Z par
+  clic ; l'événement `input` qu'elle émet enregistre le brouillon et relance
+  l'aperçu comme une frappe. Le masqué `||…||` était déjà rendu par l'aperçu
+  du lot B21 (fond sombre) : rien d'ajouté au rendu, mais chaque outil est
+  maintenant repassé par `renderDiscord` dans les tests.
+  (2) Le sélecteur, ouvert par 🙂 sous la barre : « Récents » (dix au plus,
+  `localStorage`, absents pendant une recherche), « Serveur » par l'image du
+  CDN de Discord (`.webp`, `.gif` pour un animé), « Standards » par leur
+  caractère ; la recherche filtre les deux à la frappe, Entrée insère le
+  premier affiché (surligné), Échap ou un clic ailleurs ferme ; l'emoji choisi
+  s'écrit `:nom:` suivi d'une espace à la place de la sélection, et le
+  sélecteur se referme. `/api/discord/state` rend pour cela `emojis` (nom, id,
+  drapeau animé, recopiés champ par champ et triés par nom — rien d'autre de
+  ce que Discord dit d'un emoji, et jamais le jeton ; `emojiCount` est resté)
+  et `standard` (la table, par `standardEmojis`). Sans jeton, la section du
+  serveur dit pourquoi elle est vide (« Emojis du serveur indisponibles —
+  jeton absent : … ») et les standards servent. `discord-shortcodes.json`
+  passe de 212 à 571 codes (flèches, carrés et pastilles, visages, mains,
+  animaux, météo, fêtes, objets, cartes, drapeaux blanc, noir, pirate) :
+  chaque caractère a été confronté à son nom Unicode (`unicodedata` de Python,
+  les 359 relus un à un), et le test existant les passe tous par
+  `\p{RGI_Emoji}`. Les `:flag_xx:` restent calculés et ne sont pas dans le
+  sélecteur.
+  (3) L'autocomplétion : `:` suivi de deux lettres ouvre sous le `:` une liste
+  de huit emojis au plus ; flèches pour choisir, Entrée ou Tab pour compléter
+  (`:nom:` et une espace, sans doubler celle qui suit), Échap pour fermer,
+  clic sur une ligne. Fermée, elle n'intercepte AUCUNE touche : Entrée reste
+  un saut de ligne. Elle ne s'ouvre ni collée à un mot (`10:30`, `Note:ab`),
+  ni derrière un code déjà fermé (`:scroll:ab`), ni au milieu d'un nom, ni
+  dans une adresse, ni dans du code. La liste est placée par un calque
+  invisible de même police et de même largeur que la zone de texte, où l'on
+  mesure la place du `:`.
+  Un choix à relire : l'ordre des emojis. Le lot dit « serveur puis standard,
+  préfixe avant sous-chaîne, récents » ; retenu dans cet ordre de priorité —
+  le serveur d'abord (c'est aussi l'ordre de résolution à l'envoi), puis dans
+  chaque liste le nom exact, le préfixe, la sous-chaîne, et à égalité les
+  derniers utilisés. Conséquence : `star` propose un `:superstar:` du serveur
+  avant le ⭐ standard.
+  Ce qui ne change pas : conversion des emojis, découpage, envoi, modification
+  en place, journal — aucun défaut trouvé, rien touché. Vérification :
+  `pnpm typecheck` (les trois `tsc --noEmit`, sortie 0, aucune ligne
+  d'erreur), `pnpm lint` (`eslint`, sortie 0, aucun avertissement),
+  `pnpm test` (`Test Files 186 passed (186)`, `Tests 2445 passed (2445)`),
+  dont les 58 cas de `scripts/quick/discord-editor.test.ts` — pour chaque
+  outil poser, retirer, changer de niveau, plusieurs lignes, sélection vide,
+  ligne vide ; le lien ; `diffEdit` rejoué sur chaque cas des outils ; le
+  filtre (serveur d'abord, exact, préfixe, sous-chaîne, récents) ; la
+  détection du `:xx` — et deux cas de plus dans `discord.test.ts` (la liste
+  d'emojis de l'état sans champ en trop, la table donnée au sélecteur). Le
+  script de la page passe `node --check` une fois extrait (il y a trouvé une
+  variable `shown` en double avec l'onglet Rangs, corrigée). Joué dans
+  happy-dom contre un `fetch` simulé (sonde jetable, non committée), serveur
+  simulé puis sans jeton : clic et raccourcis, sélecteur (ordre, images du
+  serveur, recherche, Entrée, récents, Échap, clic ailleurs), autocomplétion
+  (serveur d'abord, flèches, Entrée, Tab, Échap, Entrée non interceptée une
+  fois fermée). Puis dans un VRAI Firefox sans tête piloté en WebDriver BiDi,
+  contre l'outil lancé sur le port 4813 avec `DISCORD_BOT_TOKEN=` vide (état
+  vérifié d'abord : « jeton absent », aucun appel à Discord, aucun envoi) :
+  frappe réelle, clic sur G puis Ctrl+Z NATIF qui défait le clic d'un coup et
+  Ctrl+Maj+Z qui le refait, Ctrl+B/I/U pris par la page (Ctrl+U n'ouvre pas le
+  code source), trois outils défaits par trois Ctrl+Z, suppression d'un titre
+  annulable, Ctrl+K qui ouvre l'invite « Adresse du lien », liste
+  d'autocomplétion mesurée sous la deuxième ligne au droit du `:` (à 3 px
+  près), sélecteur sous la barre et dans la colonne, 571 standards ; trois
+  captures regardées (barre, liste, sélecteur).
+  Pas vu : les emojis RÉELS du serveur (leurs images du CDN, leur nombre dans
+  la grille — jamais chargés, faute de jeton) ; Chrome, absent du poste ; une
+  fenêtre réelle plutôt que sans tête (les mêmes raccourcis face aux menus du
+  navigateur) ; un écran étroit, où la barre passe sur deux lignes. Essai de
+  Sevih en cinq gestes : (a) « Insérer le gabarit », sélectionner « TL;DR », G
+  ou Ctrl+B — gras dans l'aperçu — puis Ctrl+Z ; (b) curseur sur une ligne
+  vide, T2, taper un titre, T3 le remplace, T3 encore le retire, puis trois
+  lignes sélectionnées et `•` ; (c) sélectionner un mot, « lien » (Ctrl+K),
+  coller une adresse, puis « lien » de nouveau sur le mot pour le défaire ;
+  (d) 🙂, vérifier la section « Serveur » et ses images, taper `dark`, Entrée —
+  l'aperçu montre l'emoji — et rouvrir pour voir « Récents » ; (e) taper `:sc`
+  dans le texte, flèches, Tab, puis Entrée seule pour le saut de ligne.
+  Laissé : « Insérer le gabarit » réécrit `value` et vide donc l'historique
+  d'annulation (comportement du lot B21, hors périmètre) ; le sélecteur se
+  referme après chaque emoji ; les listes numérotées n'ont pas de bouton
+  (l'aperçu ne les rend pas).
 - **Relecture de B20 et B21** (Fable). Lots 67 et 68 : B20 `2c58b4a2` (fin
   de l'Adventure License dans le suivi de progression et les guides `quirk`,
   `daily-stamina`, `shop-purchase-priorities`), B21 `454ae182` (onglet
