@@ -1738,12 +1738,25 @@ export function groupSummaries(messages: readonly RawMessage[]): FoundSummary[] 
   return found.reverse();
 }
 
-/** Une adresse sans sa barre finale : la seule différence qu'on pardonne à un lien. */
-const bareUrl = (url: string): string => url.replace(/\/+$/, '');
+/**
+ * Ce qui identifie une note dans son adresse : le CHEMIN, sans barre finale.
+ * L'hôte ne compte pas — l'éditeur a changé de domaine (`vagames.co.kr` puis
+ * `major7.kr`) et les anciens résumés pointent sur l'ancien : comparés par
+ * l'adresse entière, ils retombaient sur la date, donc sur l'avis de
+ * maintenance du même jour.
+ */
+const bareUrl = (url: string): string => {
+  try {
+    return new URL(url).pathname.replace(/\/+$/, '');
+  } catch {
+    return url.replace(/\/+$/, '');
+  }
+};
 
 /**
  * La note officielle d'un résumé. D'abord par le LIEN : le gabarit de Sevih
- * porte l'adresse de la note (`officialUrl`), en sous-texte ou en bouton. Sinon
+ * porte l'adresse de la note (`officialUrl`), en sous-texte ou en bouton — on
+ * en compare le chemin, quel que soit le domaine (cf. `bareUrl`). Sinon
  * la note en anglais la plus proche publiée dans les quatre jours qui précèdent
  * le résumé — à date égale la note de patch passe devant, puis la plus récente.
  * `null` sinon : tout résumé n'est pas tiré d'une note.

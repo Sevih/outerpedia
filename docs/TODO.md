@@ -25,15 +25,13 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Onglet « Discord » : dates Discord, anciens résumés, « copier la
-      demande »** — code FAIT (lot B24, cf. [DONE.md](./DONE.md)). Reste :
-      (a) Sevih active « Message Content Intent » dans le portail développeur
-      Discord (l'application → Bot → Privileged Gateway Intents), puis joue
-      dans un vrai navigateur ce qu'aucun agent n'a pu jouer : l'import réel
-      de ses anciens résumés, le presse-papiers de « copier la demande », le
-      formulaire « date » ; (b) après le premier import, Fable lit
-      `.quick/discord-history.json` et affine
-      `scripts/quick/discord-prompt.md` avec ce que Sevih garde et écarte.
+- [ ] **Onglet « Discord », suites du lot B24** : (a) Sevih essaie dans un
+      vrai navigateur le presse-papiers de « copier la demande » et le
+      formulaire « date » ; (b) les consignes de
+      `scripts/quick/discord-prompt.md` sont tirées de DEUX résumés seulement
+      (01/06 et 11/08/2026, les seuls du salon dont la première ligne porte
+      « TL;DR ») : à corriger par Sevih après son premier jet réel, et à
+      élargir si d'anciens résumés ont un autre titre.
 
 ## 🖥️ Deux PC, un serveur de dev
 

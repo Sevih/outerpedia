@@ -2906,6 +2906,13 @@ describe('historique — retrouver les résumés dans un salon', () => {
     // Le lien l'emporte sur la date, et sur une autre adresse sans rapport.
     expect(at('2026-10-05', ['https://outerpedia.com/', NOTE_0922.url])).toEqual(NOTE_0922);
     expect(at('2026-10-05', [NOTE_0922.url.slice(0, -1)])).toEqual(NOTE_0922);
+    // L'éditeur a changé de domaine : un ancien lien s'apparie par son CHEMIN,
+    // au lieu de retomber sur la date (et sur l'avis de maintenance du jour).
+    expect(
+      at('2026-01-01', [
+        NOTE_0922.url.replace(OFFICIAL_HOST, 'annoucements.outerplane.vagames.co.kr'),
+      ]),
+    ).toEqual(NOTE_0922);
     // Une note dans une autre langue ne s'apparie pas, même par son lien.
     expect(at('2026-01-01', [`https://${OFFICIAL_HOST}/2026/10/05/1006pne-kr/`])).toBeNull();
     // Par la date : le jour même, puis jusqu'à quatre jours après la note.

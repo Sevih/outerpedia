@@ -7,6 +7,26 @@
 
 ## 2026-10-05
 
+- **Onglet Discord de quick : consignes de la demande tirées des résumés
+  réels, et appariement par le chemin du lien** (Fable, suite de B24 après
+  le premier import de Sevih). L'import du salon d'annonces d'EvaMains a
+  rendu 2 résumés (01/06 et 11/08/2026). Celui d'août était apparié à l'avis
+  de maintenance du jour : son lien pointe sur l'ancien domaine de l'éditeur
+  (`vagames.co.kr`), l'adresse entière ne correspondait donc à aucune note,
+  et le repli par la date départageait deux publications `update` du même
+  jour par l'id. `notePairer` compare désormais le CHEMIN du lien, quel que
+  soit l'hôte (test ajouté) ; le fichier local a été ré-apparié par la
+  fonction corrigée, sans rappeler Discord. `discord-prompt.md` décrit ce
+  que ces deux paires montrent, section par section de note : un héros =
+  une ligne (nom, emojis d'élément, de classe et de sous-classe, un
+  sous-texte au plus), un contenu daté = son nom et sa période, un
+  changement de système = son effet chiffré, les équilibrages en détail par
+  compétence, la boutique réduite à ce qu'un joueur gratuit remarque, les
+  correctifs gardés, packages et mécaniques de recrutement écartés ; les
+  sections du gabarit s'omettent ou s'étendent selon le patch. Ce sont MES
+  lectures de deux messages, pas des règles dictées par Sevih. Vérifié :
+  typecheck, lint, tests de `scripts/` verts ; la demande pour la note 11653
+  se construit avec les deux exemples (130 594 caractères).
 - **Relecture de B24 : dates Discord, anciens résumés et « copier la
   demande »** (Fable). Lot 71, `a63ee74b`. Périmètre tenu (`scripts/quick/`,
   `.gitignore` pour `/.quick/`, les docs ; `package.json` et les gardes de
