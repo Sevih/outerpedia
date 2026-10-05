@@ -23,6 +23,19 @@
       (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
       `ui/shop/al` du manifeste d'assets.
 
+## 🖥️ Deux PC, un serveur de dev
+
+- [ ] **Fixe (Windows), après le push du patch** : `git pull`, puis les quatre
+      étapes de [la procédure](./procedure/test-subdomain-local.md) (ligne
+      `DEV_PEERS`, ligne hosts `quick.outerpedia.local`, `pnpm
+  dev:caddy:install`, règle de pare-feu). La branche Windows de
+      l'installeur n'a jamais tourné : vérifier qu'un `caddy.exe` répond après
+      une réouverture de session, puis les deux sens (fixe lance / portable
+      regarde, et l'inverse)
+- [ ] **Portable** : lignes hosts `quick.outerpedia.local` et
+      `es.outerpedia.local` (absente), puis valider la nouvelle ligne `dev` au
+      prochain `pnpm dev`
+
 ## 🎴 Portraits animés
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).

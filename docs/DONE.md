@@ -7,6 +7,33 @@
 
 ## 2026-10-05
 
+- **Deux PC, un serveur de dev : `outerpedia.local` et
+  `quick.outerpedia.local` servis par le poste qui lance** (Fable, demande de
+  Sevih du 05/10 ; commit local, à ne pas pousser avant le patch). Jusqu'ici
+  le fixe voyait le dev du portable par un tunnel SSH (`localhost:3000`, sans
+  sous-domaines). Désormais un Caddy tourne en permanence sur chaque poste et
+  son `reverse_proxy` vise le serveur local, puis celui de l'autre PC
+  (`lb_policy first`, amont en échec remis à l'essai après 2 s, pas de sonde
+  active qui ferait compiler Next) : chacun garde ses hosts en `127.0.0.1` et
+  sa CA, rien à partager. `scripts/dev-caddy.mjs` (du `.mjs` sans dépendance :
+  `clean:all` supprime `node_modules`) tient ce Caddy : il n'en lance jamais
+  un second, fait relire la config à celui qui tourne, prend le relais quand
+  il s'arrête ; `--install` le démarre à l'ouverture de session (unité systemd
+  utilisateur, `.vbs` du dossier Démarrage sous Windows). La ligne `dev` de
+  `package.json` l'appelle à la place de `caddy run` — `clean:all` inchangé.
+  Les adresses des deux postes vivent dans `DEV_PEERS` (`.env.local`, même
+  ligne partout, chacun retire les siennes). quick s'ouvre au réseau seulement
+  si `DEV_PEERS` existe, et gagne deux gardes (`scripts/quick/lan.ts`,
+  testées) : adresse (boucle locale ou poste déclaré) et `Origin` des
+  écritures — cette dernière ferme un trou qui existait déjà, une page d'un
+  autre site pouvait viser `localhost:4747` et déclencher un commit poussé.
+  Vérifié sur le portable : bascule (amont local fermé, pair injoignable →
+  Next, 0,5 s puis 3 ms), service installé, Caddy du `pnpm dev` en cours
+  rechargé, site et quick en 200 sur le 443 avec la CA locale, refus 403
+  d'une adresse non déclarée et d'une origine étrangère. NON vérifié : la
+  branche Windows de `--install` et tout le côté fixe (aucun accès), et la
+  nouvelle ligne `dev` (jamais lancée par un agent). Procédure :
+  [test-subdomain-local.md](./procedure/test-subdomain-local.md).
 - **`pnpm quick`, onglet « Discord » : le serveur où l'on poste se choisit,
   les emojis se prennent sur les serveurs cochés, une palette toujours
   visible, et un mode embed** (Opus, lot B23, retours de Sevih du 05/10 après

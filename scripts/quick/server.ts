@@ -57,12 +57,19 @@ import {
   type NotePost,
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
+import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
 
 // Les stores lisent `process.env` (écrits pour Next, qui charge .env.local seul).
 for (const [k, v] of Object.entries(loadEnvLocal())) process.env[k] ??= v;
 
 const PORT = Number(process.env.QUICK_PORT ?? 4747);
+/**
+ * Les postes de dev (`DEV_PEERS`, cf. scripts/dev-caddy.mjs). Déclarés, quick
+ * écoute sur le réseau pour que le Caddy de l'autre PC le relaie ; sinon il
+ * reste sur la boucle locale. Les gardes sont dans `lan.ts`.
+ */
+const PEERS = parsePeers(process.env.DEV_PEERS);
 const UI = resolve(import.meta.dirname, 'ui.html');
 /** Les outils d'édition de l'onglet Discord : un module que la page importe tel quel. */
 const EDITOR = resolve(import.meta.dirname, 'discord-editor.mjs');
@@ -400,6 +407,22 @@ function openBrowser(): void {
 }
 
 const server = createServer((req, res) => {
+  if (!isAllowedRemote(req.socket.remoteAddress, PEERS)) {
+    json(
+      res,
+      { ok: false, log: ['adresse refusée : quick ne répond qu’aux postes de DEV_PEERS'] },
+      403,
+    );
+    return;
+  }
+  if (req.method !== 'GET' && !isAllowedOrigin(req.headers.origin, PORT)) {
+    json(
+      res,
+      { ok: false, log: ['origine refusée : cette requête ne vient pas de la page de quick'] },
+      403,
+    );
+    return;
+  }
   route(req, res).catch((e: unknown) => json(res, { ok: false, log: [String(e)] }, 500));
 });
 
@@ -413,7 +436,9 @@ server.on('error', (e: NodeJS.ErrnoException) => {
   throw e;
 });
 
-server.listen(PORT, '127.0.0.1', () => {
+server.listen(PORT, PEERS.length ? '0.0.0.0' : '127.0.0.1', () => {
   console.log(`quick → http://localhost:${PORT}/`);
+  if (PEERS.length)
+    console.log(`        https://${QUICK_HOST}/ depuis les deux PC (${PEERS.join(', ')})`);
   if (!process.argv.includes('--no-open')) openBrowser();
 });
