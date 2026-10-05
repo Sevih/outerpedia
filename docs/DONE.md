@@ -7,6 +7,22 @@
 
 ## 2026-10-05
 
+- **Relecture de F12 : un nouvel effet de portrait arrive sans geste
+  manuel** (Fable). Lot 66, `1ed83bc1`. `pnpm typecheck`, `pnpm lint`,
+  `pnpm test` verts sur HEAD (184 fichiers, 2 300 tests), `package.json`
+  intact, `portrait-fx.json` absent du commit (la table n'a pas bougé). Lu :
+  `effectVerdict` (servi seulement si tous les calques actifs passent, verdict
+  mémoïsé, `AnimatedPortrait` ne pose ni canvas ni contexte pour un effet en
+  attente), `NOT_RENDERED` passé du test au moteur comme liste des refus
+  ACCEPTÉS, `portrait-fx-served.json` (empreinte de chaque effet servi : le
+  test casse si un effet servi ne l'est plus alors que sa fiche n'a pas
+  changé), le TODO (item retiré, contrôle du premier patch ajouté). La limite
+  que le lot dit lui-même et qu'il faut retenir : « servi tel quel » vaut ce
+  que valent les gardes de `layerVerdict`, et P7 y laisse un trou — un
+  calque-maille passe toujours ; `_Synchro`, joué en simulation, sortirait
+  servi avec une feuille UV à tuile aléatoire que le moteur ne transcrit
+  pas. Tant que P7 est ouvert, un effet annoncé « servi tel quel » se
+  confronte au jeu sur `/dev/AnimatedPortrait` avant de pousser.
 - **Lot F12 : portraits animés — un effet qui arrive est extrait, jugé et
   servi (ou mis en attente) sans aucun geste ; plus rien ne bloque un patch
   pour une parure** (Fable, demande Sevih du 05/10 ; solde P8 de
