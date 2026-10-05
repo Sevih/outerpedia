@@ -16,6 +16,12 @@
       traitent en passant sur les fichiers. Lot F11 (agent Fable, seul,
       serveur de dev ouvert sur :3000 pour ses mesures), écrit dans
       [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
+- [ ] **Un nouvel effet arrive sans geste manuel** (demande Sevih 05/10) :
+      aujourd'hui il faut l'inscrire dans `DEFAULT_EFFECTS`, sinon il n'est
+      pas extrait et `pnpm test` bloque le patch. Cible : extrait d'office,
+      servi s'il est entièrement rendable, sinon portrait statique et signalé
+      par le refresh, sans rien bloquer. Lot F12 (agent Fable, APRÈS F11),
+      écrit dans [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md).
 
 ## 🧪 À jouer au prochain patch
 
