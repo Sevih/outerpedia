@@ -695,3 +695,129 @@ export function insertEmoji(edit, name, from = edit.start) {
     end: caret,
   };
 }
+
+// ---------------------------------------------------------- horodatages ------
+
+/**
+ * Les formats d'un horodatage Discord `<t:instant:format>` que le formulaire
+ * propose, dans son ordre. Discord rend l'instant dans le fuseau et la langue de
+ * CHAQUE lecteur ; `f` est aussi ce qu'il prend quand le format manque.
+ */
+export const TIMESTAMP_STYLES = /** @type {readonly (readonly [string, string])[]} */ ([
+  ['d', 'date courte'],
+  ['D', 'date longue'],
+  ['t', 'heure'],
+  ['f', 'date et heure'],
+  ['F', 'jour, date et heure'],
+  ['R', 'relatif'],
+]);
+
+/**
+ * L'instant Unix, en secondes, d'une date (`AAAA-MM-JJ`) et d'une heure
+ * (`HH:MM`) données en UTC — celles d'une note officielle. `null` pour une date
+ * qui n'existe pas : `Date.UTC` reporterait ce qui déborde (le 30 février y
+ * devient le 2 mars), on relit donc ce qu'il a compris.
+ * @param {string} date
+ * @param {string} [time]
+ * @returns {number | null}
+ */
+export function utcToUnix(date, time = '00:00') {
+  const d = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+  const t = /^(\d{2}):(\d{2})$/.exec(time);
+  if (!d || !t) return null;
+  const [year, month, day, hour, minute] = [d[1], d[2], d[3], t[1], t[2]].map(Number);
+  if (hour > 23 || minute > 59) return null;
+  const at = new Date(Date.UTC(year, month - 1, day, hour, minute));
+  if (at.getUTCFullYear() !== year || at.getUTCMonth() !== month - 1 || at.getUTCDate() !== day)
+    return null;
+  return at.getTime() / 1000;
+}
+
+/**
+ * La date que la sélection désigne — `AAAA-MM-JJ` ou `AAAA-MM-JJ HH:MM`, suivie
+ * ou non de ` UTC` — avec ses bornes, blancs de bord exclus : le formulaire
+ * s'ouvre prérempli, et l'horodatage prend sa place. `null` si la sélection
+ * n'est pas une date (même impossible : le formulaire le dira).
+ * @param {Edit} edit
+ * @returns {{ date: string, time: string, start: number, end: number } | null}
+ */
+export function dateAt(edit) {
+  const selected = edit.text.slice(edit.start, edit.end);
+  const m = /^(\s*)(\d{4}-\d{2}-\d{2})(?: (\d{2}:\d{2}))?(?: UTC)?\s*$/.exec(selected);
+  if (!m) return null;
+  const start = edit.start + m[1].length;
+  return { date: m[2], time: m[3] ?? '00:00', start, end: start + selected.trim().length };
+}
+
+/**
+ * Écrit `<t:instant:format>` à la place de la sélection (au curseur s'il n'y en
+ * a pas), curseur après.
+ * @param {Edit} edit
+ * @param {number} unix
+ * @param {string} [style]
+ * @returns {Edit}
+ */
+export function insertTimestamp(edit, unix, style = 'f') {
+  const { text, start, end } = edit;
+  const code = `<t:${unix}:${style}>`;
+  const caret = start + code.length;
+  return { text: text.slice(0, start) + code + text.slice(end), start: caret, end: caret };
+}
+
+/** Blocs et extraits de code : Discord n'y rend pas un horodatage, on n'y convertit rien. */
+const CODE_SPAN = /```[\s\S]*?```|``[^\n]+?``|`[^`\n]+`/g;
+
+/**
+ * Une date écrite pour être convertie. Le suffixe ` UTC` est EXIGÉ — une date
+ * nue reste du texte — et `UTC+2` n'est pas de l'UTC.
+ */
+const UTC_STAMP = /(?<!\d)(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}) UTC(?![\w+]|-\d)/g;
+
+/**
+ * Remplace dans tout le texte chaque `AAAA-MM-JJ HH:MM UTC` par `<t:…:f>` —
+ * c'est sous cette forme qu'un modèle écrit ses dates, lui qui ne sait pas
+ * calculer un instant Unix. Hors du code ; une date qui n'existe pas est
+ * laissée telle quelle et rendue dans `invalid`. La sélection suit son texte.
+ * @param {Edit} edit
+ * @returns {{ edit: Edit, count: number, invalid: string[] }}
+ */
+export function convertDates(edit) {
+  const { text } = edit;
+  const code = [...text.matchAll(CODE_SPAN)].map((m) => [m.index, m.index + m[0].length]);
+  /** @type {{ from: number, to: number, length: number }[]} */
+  const done = [];
+  /** @type {string[]} */
+  const invalid = [];
+  let out = '';
+  let at = 0;
+  for (const m of text.matchAll(UTC_STAMP)) {
+    if (code.some(([a, b]) => m.index >= a && m.index < b)) continue;
+    const unix = utcToUnix(m[1], m[2]);
+    if (unix === null) {
+      invalid.push(m[0]);
+      continue;
+    }
+    const stamp = `<t:${unix}:f>`;
+    out += text.slice(at, m.index) + stamp;
+    at = m.index + m[0].length;
+    done.push({ from: m.index, to: at, length: stamp.length });
+  }
+  out += text.slice(at);
+
+  // Une position garde sa place ; prise dans une date convertie, elle vient
+  // au bout de l'horodatage.
+  const move = (/** @type {number} */ p) => {
+    let shift = 0;
+    for (const d of done) {
+      if (p <= d.from) break;
+      if (p < d.to) return d.from + shift + d.length;
+      shift += d.length - (d.to - d.from);
+    }
+    return p + shift;
+  };
+  return {
+    edit: { text: out, start: move(edit.start), end: move(edit.end) },
+    count: done.length,
+    invalid,
+  };
+}

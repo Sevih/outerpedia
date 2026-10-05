@@ -450,7 +450,95 @@
         box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
       }
       #d-picker[hidden],
+      #d-stamp[hidden],
       #d-complete[hidden] {
+        display: none;
+      }
+      /* Formulaire d'horodatage : même panneau que le sélecteur, posé à gauche. */
+      #d-stamp {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        width: min(470px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+      }
+      #d-stamp .row {
+        margin-bottom: 0;
+      }
+      #d-stamp input,
+      #d-stamp select {
+        width: 100%;
+      }
+      #d-stamp .bar {
+        margin-bottom: 0;
+      }
+      #d-dates-info {
+        margin: 0 0 6px;
+      }
+      #d-dates-info:empty,
+      #d-request-info:empty {
+        display: none;
+      }
+      /* Anciens résumés importés, sous la note : l'état, et la liste repliée. */
+      .d-history {
+        margin-top: 12px;
+      }
+      .d-history p.hint {
+        margin: 0 0 4px;
+      }
+      #d-history-list summary {
+        color: var(--muted);
+        font-size: 12px;
+        cursor: pointer;
+      }
+      #d-history-list ul {
+        max-height: 260px;
+        margin: 6px 0 0;
+        padding: 0;
+        overflow-y: auto;
+        list-style: none;
+        font-size: 12px;
+        scrollbar-color: var(--line) transparent;
+        scrollbar-width: thin;
+      }
+      #d-history-list li {
+        padding: 3px 0;
+        border-top: 1px solid var(--line);
+        overflow-wrap: anywhere;
+      }
+      #d-history-list small {
+        display: block;
+        color: var(--muted);
+      }
+      /* « Copier la demande » : le nombre d'exemples, et le texte à copier à la
+         main quand le presse-papiers se refuse. */
+      #tab-discord .bar label {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin: 0;
+      }
+      #d-request-k {
+        width: 52px;
+      }
+      #d-request-info {
+        margin: 0 0 6px;
+      }
+      #d-request-text {
+        display: block;
+        width: 100%;
+        height: 160px;
+        margin-bottom: 8px;
+        font:
+          12px/1.4 ui-monospace,
+          monospace;
+      }
+      #d-request-text[hidden] {
         display: none;
       }
       #d-picker-q {
@@ -791,6 +879,12 @@
         border-radius: 3px;
         padding: 0 2px;
       }
+      /* Horodatage `<t:…>` : la pastille grise de Discord, l'instant UTC au survol. */
+      .dc .ts {
+        background: #3f4248;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
       /* `:nom:` resté en toutes lettres : rouge = faute de frappe (bloque
          l'envoi), ambre = emoji du serveur qu'on ne peut pas vérifier sans jeton. */
       .dc .bad {
@@ -1082,6 +1176,18 @@
               title="Note officielle"
               sandbox="allow-popups allow-popups-to-escape-sandbox"
             ></iframe>
+            <!-- Les résumés déjà postés, relus du salon choisi et appariés à leur
+                 note (`.quick/discord-history.json`) : les exemples de « copier
+                 la demande ». L'import ne fait que lire. -->
+            <div class="d-history">
+              <label>Mes anciens résumés</label>
+              <p class="hint" id="d-history-state"></p>
+              <button class="ghost" id="d-history-import">importer mes anciens résumés</button>
+              <details id="d-history-list" hidden>
+                <summary>voir la liste</summary>
+                <ul></ul>
+              </details>
+            </div>
           </div>
           <div>
             <div class="row">
@@ -1184,8 +1290,48 @@
                 <button class="ghost" data-tool="codeblock" title="Bloc de code">```</button>
                 <span class="sep"></span>
                 <button class="ghost" id="d-emoji" title="Emojis" aria-expanded="false">🙂</button>
+                <span class="sep"></span>
+                <button
+                  class="ghost"
+                  id="d-date"
+                  title="Horodatage Discord : une date UTC, affichée à chacun dans son fuseau"
+                  aria-expanded="false"
+                >
+                  date
+                </button>
+                <button
+                  class="ghost"
+                  id="d-dates"
+                  title="Convertit chaque « AAAA-MM-JJ HH:MM UTC » du brouillon en horodatage Discord"
+                >
+                  convertir les dates
+                </button>
               </div>
+              <p class="hint" id="d-dates-info"></p>
               <div class="pop">
+                <!-- Horodatage `<t:instant:format>` : la date et l'heure sont
+                     celles de la note officielle, donc en UTC. -->
+                <div id="d-stamp" hidden>
+                  <div class="row">
+                    <div>
+                      <label>Date — UTC, comme dans la note</label
+                      ><input id="d-stamp-date" type="date" />
+                    </div>
+                    <div>
+                      <label>Heure — UTC, comme dans la note</label
+                      ><input id="d-stamp-time" type="time" value="00:00" />
+                    </div>
+                    <div>
+                      <label>Format</label
+                      ><select id="d-stamp-style"></select>
+                    </div>
+                  </div>
+                  <div class="bar">
+                    <span id="d-stamp-info"></span>
+                    <button class="ghost" id="d-stamp-cancel">Annuler</button>
+                    <button class="action" id="d-stamp-ok">Insérer</button>
+                  </div>
+                </div>
                 <div id="d-picker" hidden>
                   <input
                     id="d-picker-q"
@@ -1210,10 +1356,25 @@
             <div class="bar">
               <span id="d-count"></span>
               <button class="ghost" id="d-template">Insérer le gabarit</button>
+              <!-- Le texte à coller dans claude.ai pour un premier jet : consignes,
+                   exemples tirés des anciens résumés, la note choisie, le gabarit.
+                   Rien ne part d'ici vers un modèle. -->
+              <button
+                class="ghost"
+                id="d-request"
+                title="Prépare la demande à coller dans claude.ai pour un premier jet du résumé"
+              >
+                Copier la demande
+              </button>
+              <label title="Anciens résumés joints en exemple, les plus récents d'abord"
+                >exemples <input id="d-request-k" type="number" min="0" max="6" step="1" value="3"
+              /></label>
               <button class="ghost" id="d-new" hidden>Nouveau message</button>
               <button class="action" id="d-update" hidden>Mettre à jour le message posté</button>
               <button class="action" id="d-send" disabled>Envoyer</button>
             </div>
+            <p class="hint" id="d-request-info"></p>
+            <textarea id="d-request-text" readonly hidden spellcheck="false"></textarea>
             <p class="hint" id="d-status"></p>
             <label>Aperçu — tel que Discord le rendra</label>
             <div id="d-preview"></div>
@@ -1764,6 +1925,8 @@
         notes: [],
         standard: [],
         palette: { groups: [], error: null },
+        history: { count: 0, paired: 0, last: null, importedAt: null, items: [] },
+        requestExamples: { default: 3, max: 6 },
       };
       // Le serveur où l'on poste : le dernier choisi (au premier lancement,
       // celui de DISCORD_GUILD_ID), et ses salons.
@@ -1952,9 +2115,14 @@
             : '';
         const links = (urls) =>
           urls.map((u, i) => `<a href="${esc(u)}" target="_blank">message ${i + 1}</a>`).join(', ');
+        // Signalé, pas bloquant non plus : un horodatage là où Discord ne le rend pas.
+        const warned = (p?.warnings ?? [])
+          .map((w) => `<span class="warn">${esc(w)}</span> `)
+          .join('');
         $('d-status').innerHTML =
           (why ? `<span class="${why[0]}">${esc(why[1])}</span> ` : '') +
           foreign +
+          warned +
           (posted
             ? `Posté dans ${esc(whereLabel(posted))} : ${links(posted.urls)}. ` +
               (away
@@ -1974,6 +2142,7 @@
         $('d-update').hidden = !posted;
         $('d-update').disabled = blocked || Boolean(away || otherMode);
         $('d-new').hidden = !posted && !partial;
+        $('d-history-import').disabled = dBusy;
       }
 
       // Le rendu vient du serveur (`/api/discord/preview`) : c'est la fonction
@@ -1998,6 +2167,7 @@
 
       $('d-text').oninput = () => {
         mem.set('draft', $('d-text').value);
+        $('d-dates-info').textContent = '';
         staleDiscord();
       };
       $('d-embed').oninput = () => {
@@ -2193,6 +2363,117 @@
         $('d-text').oninput();
       };
 
+      // -- la demande à coller dans claude.ai --
+      // Le texte est bâti par le serveur local (`/api/discord/request`), du
+      // disque seul : consignes, exemples, note choisie, gabarit. Ici : le
+      // presse-papiers, et ce qu'on en dit.
+      const requestCount = () => {
+        const { max } = dState.requestExamples;
+        // Champ vidé : le nombre par défaut, pas zéro.
+        const typed = String($('d-request-k').value).trim();
+        const v = typed ? Number(typed) : NaN;
+        return Number.isInteger(v) ? Math.min(max, Math.max(0, v)) : dState.requestExamples.default;
+      };
+      $('d-request-k').onchange = () => {
+        $('d-request-k').value = requestCount();
+        mem.set('requestExamples', requestCount());
+      };
+      $('d-request').onclick = async () => {
+        const noteId = $('d-note').value;
+        if (!noteId) return log(['Choisir une note officielle d’abord.'], false);
+        $('d-request').disabled = true;
+        try {
+          const r = await sendJson('/api/discord/request', { noteId, examples: requestCount() });
+          if (r.error) return log([r.error], false);
+          let copied = true;
+          try {
+            await navigator.clipboard.writeText(r.text);
+          } catch {
+            copied = false;
+          }
+          // Presse-papiers refusé : le texte est là, sélectionné, à copier à la main.
+          const box = $('d-request-text');
+          box.value = copied ? '' : r.text;
+          box.hidden = copied;
+          if (!copied) {
+            box.focus();
+            box.select();
+          }
+          const size = (n) => n.toLocaleString('fr-FR');
+          const examples = r.examples
+            ? plural(r.examples, 'exemple') +
+              (r.examples < r.wanted && !r.dropped ? ` (${r.wanted} demandés)` : '')
+            : !r.wanted
+              ? 'sans exemple (0 demandé)'
+              : !r.summaries
+                ? 'aucun exemple : importe d’abord tes anciens résumés'
+                : !r.paired
+                  ? 'aucun exemple : aucun résumé importé n’est apparié à sa note'
+                  : 'aucun exemple';
+          const dropped = r.dropped
+            ? ` — ${plural(r.dropped, 'exemple')} parmi les plus anciens ${r.dropped > 1 ? 'ont' : 'a'} sauté : la demande dépassait ${size(r.budget)} caractères`
+            : '';
+          const over =
+            r.length > r.budget
+              ? ` — <span class="ko">la note à elle seule dépasse ${size(r.budget)} caractères</span>`
+              : '';
+          $('d-request-info').innerHTML =
+            (copied
+              ? 'Demande copiée'
+              : '<span class="warn">Presse-papiers refusé : copie le texte ci-dessous à la main (Ctrl+C)</span>') +
+            ` — ${size(r.length)} caractères, ${esc(examples)}${esc(dropped)}${over}. À coller dans claude.ai ; le brouillon rendu se colle ici, puis « convertir les dates ».`;
+        } finally {
+          $('d-request').disabled = false;
+        }
+      };
+
+      // -- anciens résumés --
+      const isoDay = (iso) => String(iso ?? '').slice(0, 10);
+      function renderHistory() {
+        const h = dState.history;
+        const s = (n) => (n > 1 ? 's' : '');
+        $('d-history-state').textContent = h.count
+          ? `${h.count} résumé${s(h.count)} importé${s(h.count)} (dernier : ${isoDay(h.last)}), ${h.paired} apparié${s(h.paired)} à ${h.paired > 1 ? 'leur' : 'sa'} note` +
+            (h.importedAt ? ` — import du ${isoDay(h.importedAt)}.` : '.')
+          : 'Aucun résumé importé : « copier la demande » part sans exemple.';
+        $('d-history-list').hidden = !h.count;
+        $('d-history-list').querySelector('ul').innerHTML = h.items
+          .map(
+            (i) =>
+              `<li>${esc(isoDay(i.date))} · ${esc(i.first)}<small>${i.note ? `note : ${esc(i.note)}` : 'sans note appariée'}</small></li>`,
+          )
+          .join('');
+      }
+      $('d-history-import').onclick = async () => {
+        const where = here();
+        // Sans jeton il n'y a ni serveur ni salon à choisir : le serveur local le dira.
+        if (dState.hasToken && (!where.guildId || !where.channelId))
+          return log(['Choisir le serveur et le salon dont lire l’historique.'], false);
+        if (
+          dState.hasToken &&
+          !confirm(
+            `Lire l’historique de ${whereLabel(where)} pour y retrouver mes anciens résumés ?\n(lecture seule : les 1 000 messages les plus récents au plus, rien n’est posté)`,
+          )
+        )
+          return;
+        dBusy = true;
+        refreshDiscord();
+        log([], undefined, 'lecture de l’historique du salon');
+        try {
+          const r = await post('/api/discord/history', {
+            guildId: where.guildId,
+            channelId: where.channelId,
+          });
+          if (r.history) {
+            dState.history = r.history;
+            renderHistory();
+          }
+        } finally {
+          dBusy = false;
+          refreshDiscord();
+        }
+      };
+
       $('d-send').onclick = async () => {
         if (!dPreview) return;
         const where = partial ?? here();
@@ -2343,6 +2624,90 @@
       $('d-tools').onclick = (e) => {
         const b = e.target.closest('button[data-tool]');
         if (b) runTool(b.dataset.tool);
+      };
+
+      // Horodatages. « date » ouvre un petit formulaire — date et heure en UTC,
+      // celles de la note — et pose `<t:instant:format>` à la place de la
+      // sélection ; une sélection qui EST une date le préremplit. La conversion
+      // est dans `discord-editor.mjs` (`utcToUnix`), testée à part.
+      let stampAt = { start: 0, end: 0 };
+      function stampUnix() {
+        return editor.utcToUnix($('d-stamp-date').value, $('d-stamp-time').value || '00:00');
+      }
+      function renderStamp() {
+        const unix = stampUnix();
+        $('d-stamp-info').textContent =
+          unix === null ? 'date ou heure à compléter' : `<t:${unix}:${$('d-stamp-style').value}>`;
+        $('d-stamp-ok').disabled = unix === null;
+      }
+      function closeStamp(refocus) {
+        $('d-stamp').hidden = true;
+        $('d-date').setAttribute('aria-expanded', 'false');
+        if (refocus) $('d-text').focus();
+      }
+      function openStamp() {
+        if (!editor) return;
+        closeComplete();
+        closePicker(false);
+        const e = editState();
+        const found = editor.dateAt(e);
+        stampAt = found ?? e;
+        // Sans date sélectionnée : aujourd'hui (UTC), à minuit.
+        $('d-stamp-date').value = found?.date ?? new Date().toISOString().slice(0, 10);
+        $('d-stamp-time').value = found?.time ?? '00:00';
+        $('d-stamp').hidden = false;
+        $('d-date').setAttribute('aria-expanded', 'true');
+        renderStamp();
+        // Une date impossible (le 30 février) : le champ la refuse, on dit laquelle.
+        if (found && stampUnix() === null)
+          $('d-stamp-info').textContent = `« ${found.date} ${found.time} » n’existe pas`;
+        $('d-stamp-date').focus();
+      }
+      function insertStamp() {
+        const unix = stampUnix();
+        if (unix === null) return renderStamp();
+        closeStamp(false);
+        applyEdit(
+          editor.insertTimestamp(
+            { text: $('d-text').value, start: stampAt.start, end: stampAt.end },
+            unix,
+            $('d-stamp-style').value,
+          ),
+        );
+      }
+      $('d-date').onclick = () => ($('d-stamp').hidden ? openStamp() : closeStamp(true));
+      $('d-stamp').oninput = renderStamp;
+      $('d-stamp-ok').onclick = insertStamp;
+      $('d-stamp-cancel').onclick = () => closeStamp(true);
+      $('d-stamp').onkeydown = (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeStamp(true);
+        } else if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+          // Entrée dans un champ insère ; sur un bouton, elle reste son clic.
+          e.preventDefault();
+          insertStamp();
+        }
+      };
+      document.addEventListener('mousedown', (e) => {
+        if (!$('d-stamp').hidden && !e.target.closest('#d-stamp, #d-date')) closeStamp(false);
+      });
+
+      // « convertir les dates » : chaque `AAAA-MM-JJ HH:MM UTC` du brouillon
+      // devient un horodatage — la forme sous laquelle un modèle écrit ses dates.
+      $('d-dates').onclick = () => {
+        if (!editor) return;
+        const r = editor.convertDates(editState());
+        if (r.count) applyEdit(r.edit);
+        const s = (n) => (n > 1 ? 's' : '');
+        // Après `applyEdit` : sa frappe simulée vient d'effacer cette ligne.
+        $('d-dates-info').textContent =
+          (r.count
+            ? `${r.count} date${s(r.count)} convertie${s(r.count)} en horodatage Discord.`
+            : 'Aucune date convertie : la forme attendue est « AAAA-MM-JJ HH:MM UTC », suffixe compris.') +
+          (r.invalid.length
+            ? ` Laissée${s(r.invalid.length)} telle${s(r.invalid.length)} quelle${s(r.invalid.length)}, la date n’existe pas : ${r.invalid.join(', ')}.`
+            : '');
       };
 
       // Emojis : ceux des serveurs COCHÉS (lus avec le jeton seulement, par
@@ -2652,7 +3017,17 @@
 
         // La palette et le sélecteur ont besoin du module d'édition.
         await editorReady;
+        if (editor)
+          $('d-stamp-style').innerHTML = editor.TIMESTAMP_STYLES.map(
+            ([style, label]) =>
+              `<option value="${style}"${style === 'f' ? ' selected' : ''}>${style} — ${label}</option>`,
+          ).join('');
         await loadServers(false);
+        renderHistory();
+        // Nombre d'exemples de « copier la demande » : le dernier choisi.
+        $('d-request-k').max = dState.requestExamples.max;
+        $('d-request-k').value = mem.get('requestExamples', dState.requestExamples.default);
+        $('d-request-k').value = requestCount();
         $('d-note').innerHTML = dState.notes
           .map((n) => `<option value="${esc(n.id)}">${esc(n.date)} · ${esc(n.title)}</option>`)
           .join('');

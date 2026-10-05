@@ -10,16 +10,20 @@
  * est repassé par `renderDiscord`), et un second clic défait le premier.
  */
 import { describe, expect, it } from 'vitest';
-import { renderDiscord } from './discord';
+import { formatTimestamp, renderDiscord } from './discord';
 import {
   INLINE,
   LINE,
   RECENT_MAX,
+  TIMESTAMP_STYLES,
   applyTool,
+  convertDates,
+  dateAt,
   diffEdit,
   emojiQueryAt,
   insertEmoji,
   insertLink,
+  insertTimestamp,
   isUrl,
   linkAt,
   matchEmojis,
@@ -34,6 +38,7 @@ import {
   toggleInline,
   toggleLine,
   unlink,
+  utcToUnix,
 } from './discord-editor.mjs';
 
 interface Edit {
@@ -663,5 +668,185 @@ describe('emojis — insertion', () => {
 
   it('une espace déjà là n’est pas doublée', () => {
     expect(show(insertEmoji(ed('## :st‹› Banners'), 'star', 3))).toBe('## :star: ‹›Banners');
+  });
+});
+
+// ---------------------------------------------------------- horodatages ------
+
+/** Le 10 octobre 2026 à minuit UTC. */
+const OCT_10 = 1791590400;
+/** Une horloge fixée : l'aperçu ne lit ni l'heure ni le fuseau de la machine. */
+const CLOCK = { now: OCT_10 * 1000, timeZone: 'UTC', locale: 'en-GB' };
+
+describe('horodatages — une date UTC → un instant Unix', () => {
+  it('UTC strict : la date et l’heure de la note, sans fuseau de la machine', () => {
+    expect(utcToUnix('2026-10-10')).toBe(OCT_10);
+    expect(utcToUnix('2026-10-10', '00:00')).toBe(OCT_10);
+    expect(utcToUnix('2026-10-06', '06:30')).toBe(Date.UTC(2026, 9, 6, 6, 30) / 1000);
+    expect(utcToUnix('2026-12-31', '23:59')).toBe(Date.UTC(2026, 11, 31, 23, 59) / 1000);
+    // Avant 1970 : un instant négatif, que Discord accepte.
+    expect(utcToUnix('1969-12-31', '23:59')).toBe(-60);
+    // Le 29 février n'existe que les années bissextiles.
+    expect(utcToUnix('2028-02-29')).toBe(Date.UTC(2028, 1, 29) / 1000);
+  });
+
+  it.each([
+    ['2026-02-30', '00:00', 'le 30 février'],
+    ['2026-02-29', '00:00', 'le 29 février d’une année ordinaire'],
+    ['2026-04-31', '00:00', 'le 31 avril'],
+    ['2026-13-01', '00:00', 'le mois 13'],
+    ['2026-00-10', '00:00', 'le mois 0'],
+    ['2026-10-00', '00:00', 'le jour 0'],
+    ['2026-10-10', '24:00', '24 heures'],
+    ['2026-10-10', '12:60', '60 minutes'],
+    ['2026-10-10', '6:30', 'une heure à un chiffre'],
+    ['2026-1-5', '00:00', 'une date mal écrite'],
+    ['10/10/2026', '00:00', 'une date dans un autre ordre'],
+    ['', '00:00', 'rien'],
+    ['0050-01-01', '00:00', 'une année que `Date.UTC` lirait 1950'],
+  ])('refuse %s %s — %s', (date, time) => {
+    expect(utcToUnix(date, time)).toBeNull();
+  });
+
+  it('la sélection qui EST une date préremplit le formulaire, blancs de bord exclus', () => {
+    expect(dateAt(ed('le ‹2026-10-06› à'))).toEqual({
+      date: '2026-10-06',
+      time: '00:00',
+      start: 3,
+      end: 13,
+    });
+    expect(dateAt(ed('‹2026-10-06 06:30›'))).toMatchObject({ date: '2026-10-06', time: '06:30' });
+    expect(dateAt(ed('‹2026-10-06 06:30 UTC›'))).toMatchObject({
+      time: '06:30',
+      start: 0,
+      end: 20,
+    });
+    expect(dateAt(ed('‹2026-10-06 UTC›'))).toMatchObject({ date: '2026-10-06', time: '00:00' });
+    // Sélection débordant d'une espace de chaque côté : seule la date sera remplacée.
+    expect(dateAt(ed('le‹ 2026-10-06 06:30 ›à'))).toEqual({
+      date: '2026-10-06',
+      time: '06:30',
+      start: 3,
+      end: 19,
+    });
+    // Une date impossible reste une date : c'est le formulaire qui la refusera.
+    expect(dateAt(ed('‹2026-02-30›'))).toMatchObject({ date: '2026-02-30' });
+    for (const other of ['‹›', '‹demain›', '‹2026-10-06 à 6 h›', '‹le 2026-10-06›', '‹06:30›'])
+      expect(dateAt(ed(other)), other).toBeNull();
+  });
+
+  it('insère `<t:instant:format>` au curseur, ou à la place de la sélection', () => {
+    expect(show(insertTimestamp(ed('Pickup: ‹›'), OCT_10, 'F'))).toBe(`Pickup: <t:${OCT_10}:F>‹›`);
+    expect(show(insertTimestamp(ed('le ‹2026-10-10› à'), OCT_10))).toBe(`le <t:${OCT_10}:f>‹› à`);
+    // De la sélection au résultat : la date choisie dans le texte devient l'horodatage.
+    const e = ed('Ends ‹2026-10-10 00:00 UTC›.');
+    const found = dateAt(e)!;
+    const unix = utcToUnix(found.date, found.time)!;
+    expect(show(insertTimestamp({ ...e, start: found.start, end: found.end }, unix, 'R'))).toBe(
+      `Ends <t:${OCT_10}:R>‹›.`,
+    );
+  });
+
+  it('les six formats du formulaire sont ceux que l’aperçu sait rendre, `f` compris', () => {
+    expect(TIMESTAMP_STYLES.map(([style]) => style)).toEqual(['d', 'D', 't', 'f', 'F', 'R']);
+    for (const [style, label] of TIMESTAMP_STYLES) {
+      expect(label).not.toBe('');
+      expect(formatTimestamp(OCT_10, style, CLOCK), style).not.toBeNull();
+      expect(
+        renderDiscord(insertTimestamp(ed('‹›'), OCT_10, style).text, { clock: CLOCK }),
+      ).toMatch(
+        /^<div class="ln"><span class="ts" title="2026-10-10T00:00:00.000Z">[^<]+<\/span><\/div>$/,
+      );
+    }
+  });
+});
+
+describe('horodatages — « convertir les dates »', () => {
+  const convert = (marked: string) => {
+    const r = convertDates(ed(marked));
+    return { text: show(r.edit), count: r.count, invalid: r.invalid };
+  };
+
+  it('remplace chaque `AAAA-MM-JJ HH:MM UTC` par `<t:…:f>`, et dit combien', () => {
+    const draft = [
+      '- Pickup: 2026-10-10 00:00 UTC ~ 2026-10-27 03:59 UTC',
+      '- Maintenance (2026-10-06 06:30 UTC)‹›',
+    ].join('\n');
+    const end = Date.UTC(2026, 9, 27, 3, 59) / 1000;
+    const maintenance = Date.UTC(2026, 9, 6, 6, 30) / 1000;
+    expect(convert(draft)).toEqual({
+      text: [
+        `- Pickup: <t:${OCT_10}:f> ~ <t:${end}:f>`,
+        `- Maintenance (<t:${maintenance}:f>)‹›`,
+      ].join('\n'),
+      count: 3,
+      invalid: [],
+    });
+  });
+
+  it('le suffixe ` UTC` est EXIGÉ : rien d’autre n’est converti', () => {
+    for (const kept of [
+      '‹›2026-10-10 00:00',
+      '‹›2026-10-10',
+      '‹›2026-10-10 00:00 CEST',
+      '‹›2026-10-10 00:00 UTC+2',
+      '‹›2026-10-10 00:00 UTC-5',
+      '‹›2026-10-10 00:00UTC',
+      '‹›2026-10-10T00:00 UTC',
+      '‹›10/10/2026 00:00 UTC',
+      '‹›12026-10-10 00:00 UTC',
+      '‹›2026-10-10 00:00 UTCX',
+    ])
+      expect(convert(kept), kept).toEqual({ text: kept, count: 0, invalid: [] });
+    // La ponctuation qui suit ne gêne pas.
+    expect(convert('‹›(2026-10-10 00:00 UTC).').text).toBe(`‹›(<t:${OCT_10}:f>).`);
+    expect(convert('‹›2026-10-10 00:00 UTC - end').text).toBe(`‹›<t:${OCT_10}:f> - end`);
+  });
+
+  it('une date qui n’existe pas est laissée, et nommée', () => {
+    expect(
+      convert('‹›2026-02-30 10:00 UTC puis 2026-10-10 00:00 UTC, 2026-10-10 24:00 UTC'),
+    ).toEqual({
+      text: `‹›2026-02-30 10:00 UTC puis <t:${OCT_10}:f>, 2026-10-10 24:00 UTC`,
+      count: 1,
+      invalid: ['2026-02-30 10:00 UTC', '2026-10-10 24:00 UTC'],
+    });
+  });
+
+  it('rien n’est converti dans du code : Discord n’y rend pas un horodatage', () => {
+    const text = [
+      '`2026-10-10 00:00 UTC`',
+      '```',
+      '2026-10-10 00:00 UTC',
+      '```',
+      '2026-10-10 00:00 UTC‹›',
+    ].join('\n');
+    expect(convert(text)).toEqual({
+      text: text.replace('2026-10-10 00:00 UTC‹›', `<t:${OCT_10}:f>‹›`),
+      count: 1,
+      invalid: [],
+    });
+  });
+
+  it('la sélection suit son texte ; prise dans une date, elle vient au bout de l’horodatage', () => {
+    expect(convert('a 2026-10-10 00:00 UTC ‹mot› 2026-10-10 00:00 UTC z').text).toBe(
+      `a <t:${OCT_10}:f> ‹mot› <t:${OCT_10}:f> z`,
+    );
+    expect(convert('‹a› 2026-10-10 00:00 UTC').text).toBe(`‹a› <t:${OCT_10}:f>`);
+    expect(convert('2026-10-‹10 00›:00 UTC z').text).toBe(`<t:${OCT_10}:f>‹› z`);
+    expect(convert('‹2026-10-10 00:00 UTC›').text).toBe(`‹<t:${OCT_10}:f>›`);
+  });
+
+  it('ce qui est converti se voit dans l’aperçu, et un second clic ne change plus rien', () => {
+    const once = convertDates(ed('Ends 2026-10-10 00:00 UTC‹›'));
+    expect(renderDiscord(once.edit.text, { clock: CLOCK })).toBe(
+      `<div class="ln">Ends <span class="ts" title="2026-10-10T00:00:00.000Z">${formatTimestamp(OCT_10, 'f', CLOCK)}</span></div>`,
+    );
+    expect(diffEdit('Ends 2026-10-10 00:00 UTC', once.edit.text)).toEqual({
+      from: 5,
+      to: 25,
+      insert: `<t:${OCT_10}:f>`,
+    });
+    expect(convertDates(once.edit)).toEqual({ edit: once.edit, count: 0, invalid: [] });
   });
 });

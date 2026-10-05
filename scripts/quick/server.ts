@@ -15,16 +15,17 @@
  * `.env.local` est chargé à la main (tsx ne le fait pas, contrairement à Next) :
  * sans R2_* la publication des codes promo est sautée, sans YOUTUBE_API_KEY
  * l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
- * l'onglet Discord rédige et prévisualise mais n'envoie pas (cf. `discord.ts`).
+ * l'onglet Discord rédige et prévisualise mais n'envoie pas, et n'importe pas
+ * les anciens résumés (cf. `discord.ts`).
  *
  * DÉJÀ LANCÉ : le port est tenu par l'instance précédente, on se contente
  * d'ouvrir le navigateur dessus. Double-cliquer l'icône deux fois ne crée donc
  * pas deux serveurs.
  */
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
-import { extname, resolve } from 'node:path';
+import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   addComics,
@@ -43,16 +44,26 @@ import {
   type Report,
 } from './actions';
 import {
+  REQUEST_BUDGET,
+  REQUEST_EXAMPLES,
+  REQUEST_EXAMPLES_MAX,
   discordSession,
+  draftRequest,
   embedForm,
   embedTemplate,
+  historyState,
   latestNotes,
+  mergeHistory,
   noteSrcdoc,
   officialUrl,
+  parseHistory,
   parsePalette,
   patchTemplate,
+  requestExamples,
+  requestNote,
   standardEmojis,
   type Draft,
+  type HistoryFile,
   type Mode,
   type NotePost,
 } from './discord';
@@ -83,6 +94,37 @@ function palette(): ReturnType<typeof parsePalette> {
   } catch (e: unknown) {
     return { groups: [], error: `discord-palette.json illisible : ${String(e)}` };
   }
+}
+
+/**
+ * Les consignes de « copier la demande », relues à chaque clic : un fichier
+ * versionné que Sevih retouche à la main.
+ */
+const PROMPT = resolve(import.meta.dirname, 'discord-prompt.md');
+/**
+ * Les anciens résumés importés de Discord, appariés à leur note — donnée
+ * LOCALE (`.quick/` est hors de git) : ni jeton ni rien d'autre que ces paires.
+ */
+const HISTORY = resolve('.quick/discord-history.json');
+
+/** Absent ou illisible : pas d'historique — un nouvel import le refait. */
+function readHistory(): HistoryFile | null {
+  try {
+    return parseHistory(JSON.parse(readFileSync(HISTORY, 'utf8')));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Écrit à côté puis RENOMME (atomique sur un même disque) : une coupure en
+ * cours d'écriture ne laisse pas un historique tronqué à la place du bon.
+ */
+function writeHistory(history: HistoryFile): void {
+  mkdirSync(dirname(HISTORY), { recursive: true });
+  const tmp = `${HISTORY}.${process.pid}.tmp`;
+  writeFileSync(tmp, `${JSON.stringify(history, null, 2)}\n`);
+  renameSync(tmp, HISTORY);
 }
 
 // Le jeton du bot reste dans cet objet : aucune route ne le renvoie. Le
@@ -276,6 +318,8 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       notes: latestNotes(await patchPosts()),
       standard: standardEmojis(),
       palette: palette(),
+      history: historyState(readHistory()),
+      requestExamples: { default: REQUEST_EXAMPLES, max: REQUEST_EXAMPLES_MAX },
     });
     return;
   }
@@ -302,6 +346,67 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       srcdoc: noteSrcdoc(post.content),
       template: patchTemplate(link),
       embedTemplate: embedTemplate(link),
+    });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/discord/history') {
+    // L'état lu dans le fichier : rien n'est demandé à Discord.
+    json(res, historyState(readHistory()));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/history') {
+    // « importer mes anciens résumés » : LIT l'historique du salon choisi, et
+    // n'écrit que `.quick/discord-history.json`.
+    const b = await body<Record<string, unknown>>(req);
+    const posts = await patchPosts();
+    await stream(res, async (report) => {
+      const out = await discord.history(
+        { guildId: String(b.guildId ?? ''), channelId: String(b.channelId ?? '') },
+        posts,
+        report,
+      );
+      if (!out.history) return { ok: out.ok, log: out.log };
+      const merged = mergeHistory(readHistory(), out.history);
+      writeHistory(merged);
+      const written = `écrit dans .quick/discord-history.json — ${merged.summaries.length} résumé(s) en tout.`;
+      report(written);
+      return { ok: true, log: [...out.log, written], history: historyState(merged) };
+    });
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/request') {
+    // « copier la demande » : le texte à coller dans claude.ai. Tout vient du
+    // disque — consignes, historique, notes — et RIEN ne part sur le réseau.
+    const b = await body<{ noteId?: unknown; examples?: unknown }>(req);
+    const posts = await patchPosts();
+    const post = posts.find((p) => p.lang === 'en' && String(p.id) === String(b.noteId ?? ''));
+    if (!post) return json(res, { error: 'note inconnue' }, 404);
+    let instructions: string;
+    try {
+      instructions = readFileSync(PROMPT, 'utf8');
+    } catch (e: unknown) {
+      return json(res, { error: `scripts/quick/discord-prompt.md illisible : ${String(e)}` }, 500);
+    }
+    const wanted = Number.isInteger(b.examples)
+      ? Math.min(REQUEST_EXAMPLES_MAX, Math.max(0, Number(b.examples)))
+      : REQUEST_EXAMPLES;
+    const history = readHistory();
+    const state = historyState(history);
+    json(res, {
+      ...draftRequest({
+        instructions,
+        examples: requestExamples(history, posts, wanted, String(post.id)),
+        note: requestNote(post),
+        template: patchTemplate(officialUrl(post)),
+      }),
+      wanted,
+      budget: REQUEST_BUDGET,
+      // De quoi dire POURQUOI il n'y a pas d'exemple, le cas échéant.
+      summaries: state.count,
+      paired: state.paired,
     });
     return;
   }

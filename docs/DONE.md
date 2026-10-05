@@ -7,6 +7,133 @@
 
 ## 2026-10-05
 
+- **`pnpm quick`, onglet « Discord » : dates au format Discord, import des
+  anciens résumés appariés à leur note, et « copier la demande »** (Opus, lot
+  B24, demandes de Sevih du 05/10 au soir après ses premiers envois réels ;
+  commit local, pas de push). Trois aides à la rédaction du résumé de patch,
+  qui ne changent rien à ce qui part ni à la façon dont ça part.
+  AVANT LE PREMIER IMPORT, hors de l'outil : activer « Message Content
+  Intent » dans le portail développeur Discord (l'application → Bot →
+  Privileged Gateway Intents). Sans lui Discord rend VIDE, sans erreur, le
+  contenu des messages que le bot n'a pas écrits — donc tous les résumés que
+  Sevih a tapés en son nom ; l'import le détecte, s'arrête et le redit.
+  **(1) Horodatages.** Les dates d'une note officielle sont en UTC ; un
+  `<t:instant:format>` s'affiche à chaque lecteur dans son fuseau et sa
+  langue. Barre d'outils : « date » ouvre un petit formulaire (date, heure —
+  libellées « UTC, comme dans la note », 00:00 par défaut —, format parmi
+  `d` `D` `t` `f` `F` `R`, `f` par défaut) et pose l'horodatage à la place de
+  la sélection ; une sélection qui EST une date (`AAAA-MM-JJ`,
+  `AAAA-MM-JJ HH:MM`, suivie ou non de ` UTC`) le préremplit. « convertir les
+  dates » remplace dans tout le brouillon chaque `AAAA-MM-JJ HH:MM UTC` par
+  `<t:…:f>` et dit combien : suffixe EXIGÉ (`UTC+2`, `CEST`, une date nue ne
+  bougent pas), rien dans du code, une date impossible laissée et nommée. La
+  conversion est `utcToUnix` (`discord-editor.mjs`) : `Date.UTC` puis
+  relecture de ce qu'il a compris — il reporterait le 30 février au 2 mars —
+  d'où le refus du 30/02, de 24:00, du mois 13, d'une année à deux chiffres.
+  L'aperçu (`renderDiscord`, `formatTimestamp`) rend la pastille de Discord
+  par `Intl.DateTimeFormat` dans le fuseau et la langue du poste, l'instant
+  UTC en ISO dans `title` ; `R` passe par `Intl.RelativeTimeFormat` contre un
+  « maintenant » injecté (`Clock`, donné par `deps.clock` — la session le lit
+  de la machine, les tests le fixent). Style inconnu, instant non numérique,
+  code en ligne ou en bloc : laissé en texte. Ce qui part est inchangé :
+  `<t:…>` est une quatrième forme protégée du motif `SHORTCODE` (sans elle le
+  `:100:` de `<t:100:R>` devenait 💯), et le découpage ne coupait déjà
+  qu'entre deux lignes. En mode embed, Discord ne rend l'horodatage que dans
+  la description et le texte du dessus : l'aperçu le laisse en toutes
+  lettres dans le titre, le pied et les libellés de bouton, et une ligne
+  d'avertissement (`warnings`, non bloquante) nomme le champ.
+  **(2) Anciens résumés.** Sous la note, « importer mes anciens résumés »
+  lit l'historique du serveur et du salon CHOISIS (confirmation qui nomme le
+  salon) : `GET /channels/{id}/messages?limit=100` paginé par `before`,
+  plafonné à `HISTORY_MAX_MESSAGES` (1 000), espacé d'une seconde et sous la
+  même gestion des 429 que l'envoi (`call`), journal en flux — pages lues,
+  résumés repérés. Un résumé s'ouvre par un message dont la première ligne
+  contient `TL;DR` (casse indifférente), ou, sans contenu, par un embed dont
+  le titre ou la description le contient (le bot en mode embed : titre puis
+  description) ; sa suite — le découpage à 2 000 — est faite des messages du
+  même auteur qui le suivent SANS interruption, dans les cinq minutes de
+  l'ouverture, et qui n'ouvrent pas eux-mêmes un résumé. Appariement
+  (`notePairer`) : d'abord par le lien — celui du texte, ou le bouton de lien
+  d'un embed, comparé à `officialUrl` des notes EN, barre finale ignorée —,
+  sinon la note EN la plus proche des quatre jours qui précèdent (à date
+  égale la note de patch d'abord), sinon `note: null`. Écrit dans
+  `.quick/discord-history.json` (`.quick/` ajouté à `.gitignore`), forme
+  demandée, du plus récent au plus ancien, écriture atomique (fichier voisin
+  puis renommage) ; `mergeHistory` remplace les entrées du même premier
+  message et garde toutes les autres. Le texte passe par `scrub` avant le
+  disque. Trois silences de Discord ne sont pas pris pour « aucun résumé » :
+  plus de la moitié des messages de membres revenus vides (arrêt dès la
+  page lue, marche à suivre pour l'intent, rien d'écrit) ; un 403 de code
+  50001 ou 50013 (nomme « Voir le salon » et « Voir les anciens messages ») ;
+  une liste vide (Discord la rend telle quelle sans ce second droit). L'onglet
+  montre l'état lu dans le fichier — « N résumés importés (dernier : date),
+  M appariés à leur note » — et la liste repliée (date, première ligne,
+  titre de la note).
+  **(3) « Copier la demande ».** À côté de « Insérer le gabarit » : le texte
+  à coller dans claude.ai, sous l'abonnement de Sevih — AUCUN appel réseau,
+  aucune clé d'API, tout vient du disque. Dans l'ordre : les consignes de
+  `scripts/quick/discord-prompt.md` (nouveau, relu à chaque clic), les
+  exemples (les K résumés appariés les plus récents, K = 3, champ de 0 à 6
+  mémorisé ; chacun « note officielle » puis « résumé posté »), la note
+  choisie (titre, date, adresse, texte), le gabarit `patchTemplate`. Le texte
+  d'une note est `noteText`, pur, sans DOM ni dépendance : un titre par ligne
+  (`## `), une ligne par paragraphe, puces en `- `, une ligne par rangée de
+  tableau, ses cellules jointes par « | », images, vidéos et cadres retirés,
+  entités décodées, jamais deux lignes vides de suite — la note du 06/10 passe de
+  307 698 caractères de HTML à 51 543 de texte. Au-delà de
+  `REQUEST_BUDGET` (400 000) les exemples les plus anciens sautent d'abord,
+  et l'onglet le dit, comme il dit la taille et, sans historique, « aucun
+  exemple : importe d'abord tes anciens résumés ». Presse-papiers refusé :
+  le texte s'affiche dans une zone sélectionnée. `discord-prompt.md` est
+  court et en anglais — rôle, sections du gabarit, ne garder que ce que les
+  exemples gardent, ne rien inventer, emojis en `:nom:`, dates en
+  `YYYY-MM-DD HH:MM UTC`, le message seul dans un bloc de code — et ne porte
+  AUCUNE préférence de Sevih.
+  Choix faits dans la lettre du lot, à relire : la fusion par premier message
+  garde aussi les résumés que le plafond ne fait plus relire (et donc un
+  résumé supprimé depuis dans Discord, jusqu'à suppression du fichier) ; par
+  la date, une notice publiée entre la note de patch et le résumé passerait
+  devant elle (règle « la plus proche » appliquée telle quelle) ; le résumé
+  de la note À RÉSUMER n'est pas pris en exemple (il serait la réponse) ; les
+  exemples sont montrés tels qu'on les taperait (`summaryDraft` : emojis de
+  serveur et standards en `:nom:`, horodatages en `… UTC`), puisque c'est la
+  forme demandée au modèle ; un autocollant ou un message système ne compte
+  pas parmi les messages « vides » ; l'aperçu rend aussi le style `T`, que le
+  formulaire ne propose pas.
+  Tests (`discord.test.ts`, `discord-editor.test.ts`, +61 tests) : conversion
+  de dates et ses treize refus, sélection préremplie, « convertir les dates »
+  (suffixe exigé, code, dates impossibles, sélection qui suit) ; rendu des six
+  styles avec un « maintenant » fixé, fuseau et langue donnés ; `<t:…>` intact
+  après conversion des emojis et dans le corps envoyé ; découpage à 2 000 et
+  à 4 096 qui ne coupe pas un horodatage, pour chaque position de la coupe ;
+  avertissement en mode embed ; un historique factice de 230 messages sur
+  trois pages (regroupement, suite interrompue, six minutes, embed du bot,
+  appariement par lien puis par date), plafond de 1 000, 429, arrêt sur
+  contenus vides et son seuil, 403, liste vide, refus sans jeton et hors
+  serveur, jeton absent du journal et de l'historique ; fusion, relecture et
+  état du fichier ; texte d'une note synthétique, de la note réelle 11653 et
+  de toutes les notes EN de `posts.json` ; exemples et budget de la demande.
+  `pnpm typecheck` : sans erreur, dernière ligne la commande elle-même
+  (`tsc --noEmit -p scripts/tsconfig.json` en fin de chaîne) ; `pnpm lint` :
+  `$ eslint`, sans erreur ; `pnpm test` : `Tests 2585 passed (2585)`,
+  187 fichiers. Essai de l'outil, jeton VIDE, port 4790, boucle locale :
+  l'aperçu de `<t:1791590400:F>` rend la pastille « samedi 10 octobre 2026 à
+  02:00 » (instant ISO au survol) et le laisse tel quel dans du code ; en
+  embed le titre le garde en toutes lettres avec son avertissement ; la
+  demande se construit pour la note 11653, 52 599 caractères, sans exemple ;
+  l'import répond « jeton absent : ajoute DISCORD_BOT_TOKEN à .env.local »
+  et n'écrit rien ; le script de la page se compile et tous ses identifiants
+  existent. Le quick de Sevih (4747) n'a pas été touché, discord.com jamais
+  appelé. Aucun changement visuel hors des ajouts : seuls deux boutons de
+  barre, le bloc sous la note, un bouton et un champ près du gabarit.
+  LAISSÉ À SEVIH, jamais joué dans un vrai navigateur ni contre Discord :
+  l'import réel (intent, droits du bot, forme exacte de ses anciens
+  messages), le presse-papiers, le formulaire de date et son
+  préremplissage. Laissé aussi : en mode embed la demande porte toujours le
+  gabarit du message simple (le lot dit `patchTemplate`) ; `discord.ts` et son
+  test font près de 2 700 et 3 500 lignes, un module à part pour l'historique
+  et la demande se discuterait ; `discord-prompt.md` s'affine à la relecture,
+  une fois l'historique importé.
 - **Bascule entre deux PC : un POST depuis le PC qui regarde rendait un 502
   vide** (Fable, correctif du montage du jour ; `645e87d6`, poussé à part).
   Vu par Sevih au premier envoi Discord depuis le fixe : « réponse

@@ -28,6 +28,11 @@ next-env.d.ts
 # fichier, route /api/dev/damage-scenarios) — donnée locale, jamais committée.
 /.dev/
 
+# Données locales de `pnpm quick` : les anciens résumés Discord importés,
+# appariés à leur note (`.quick/discord-history.json`) — relus de Discord à la
+# demande, jamais committés.
+/.quick/
+
 # Tests / couverture
 /coverage
 

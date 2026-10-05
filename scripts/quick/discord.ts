@@ -28,6 +28,11 @@
  *     retient RIEN d'autre : le serveur où poster, les serveurs dont on prend
  *     les emojis et le mode arrivent de la page avec chaque demande.
  *
+ * À côté de l'envoi, deux aides à la rédaction du résumé de patch, qui ne font
+ * que LIRE : `importHistory` relit les résumés déjà postés et les apparie à leur
+ * note officielle, `draftRequest` en fait la demande à coller dans claude.ai
+ * pour un premier jet (aucun appel à un modèle d'ici).
+ *
  * Ce geste ne committe et ne pousse RIEN, contrairement aux quatre autres.
  */
 import shortcodes from './discord-shortcodes.json';
@@ -123,11 +128,13 @@ export interface Converted {
 const CODE = /```[\s\S]*?```|``[^\n]+?``|`[^`\n]+`/g;
 
 /**
- * Trois formes, dans l'ordre : une URL (laissée intacte — `:a:` dans un chemin
- * n'est pas un emoji), un emoji de serveur DÉJÀ écrit en `<:nom:id>`, un code
+ * Quatre formes, dans l'ordre : une URL (laissée intacte — `:a:` dans un chemin
+ * n'est pas un emoji), un emoji de serveur DÉJÀ écrit en `<:nom:id>`, un
+ * horodatage `<t:instant:format>` (son `:100:` n'est pas le code de 💯), un code
  * `:nom:` à résoudre.
  */
-const SHORTCODE = /https?:\/\/[^\s)>]+|<a?:\w{2,32}:\d{17,20}>|:([A-Za-z0-9_+-]{1,32}):/g;
+const SHORTCODE =
+  /https?:\/\/[^\s)>]+|<a?:\w{2,32}:\d{17,20}>|<t:-?\d+(?::[A-Za-z])?>|:([A-Za-z0-9_+-]{1,32}):/g;
 
 /**
  * La table par nom en minuscules, bâtie à la première demande. Dans l'ordre de
@@ -313,10 +320,80 @@ const ESCAPES: Record<string, string> = {
 };
 export const escapeHtml = (s: string): string => s.replace(/[&<>"']/g, (c) => ESCAPES[c]);
 
-/** Noms à signaler dans le rendu (cf. `Converted`). */
+/**
+ * L'horloge d'un rendu : les horodatages `<t:…>` s'affichent dans UN fuseau et
+ * UNE langue, et le style relatif se compte depuis UN instant. Tout est donné,
+ * rien n'est lu de la machine ici : le rendu reste pur.
+ */
+export interface Clock {
+  /** « Maintenant », en millisecondes. */
+  now: number;
+  /** Fuseau IANA ; absent : celui du poste. */
+  timeZone?: string;
+  /** Langue (`fr`, `en-GB`…) ; absente : celle du poste. */
+  locale?: string;
+}
+
+/** Ce que le rendu reçoit en plus du texte : les noms à signaler (cf. `Converted`), et l'horloge. */
 export interface Marks {
   unknown?: readonly string[];
   pending?: readonly string[];
+  /** Absente : l'heure, le fuseau et la langue du poste. */
+  clock?: Clock;
+}
+
+/** Les styles de Discord, en options d'`Intl.DateTimeFormat` ; `R` est à part. */
+const TIMESTAMP_FORMATS: Record<string, Intl.DateTimeFormatOptions> = {
+  t: { timeStyle: 'short' },
+  T: { timeStyle: 'medium' },
+  d: { dateStyle: 'short' },
+  D: { dateStyle: 'long' },
+  f: { dateStyle: 'long', timeStyle: 'short' },
+  F: { dateStyle: 'full', timeStyle: 'short' },
+};
+
+/** Unités du style relatif, de la plus grande à la plus petite, en secondes. */
+const RELATIVE_UNITS: readonly (readonly [Intl.RelativeTimeFormatUnit, number])[] = [
+  ['year', 365 * 86400],
+  ['month', 30 * 86400],
+  ['day', 86400],
+  ['hour', 3600],
+  ['minute', 60],
+  ['second', 1],
+];
+
+/** Un horodatage Discord dans un texte qui part : `<t:instant>` ou `<t:instant:format>`. */
+const TIMESTAMP = /<t:-?\d+(?::[A-Za-z])?>/;
+
+/**
+ * Le texte d'un horodatage `<t:unix:style>` tel que Discord l'affiche — à ceci
+ * près que Discord prend le fuseau et la langue de chaque LECTEUR, et nous ceux
+ * de l'horloge donnée. `null` : Discord le laisserait en toutes lettres (style
+ * inconnu, instant hors du calendrier).
+ *
+ * `R` prend la plus grande unité entamée (« il y a 3 jours », « dans 2 heures ») ;
+ * Discord arrondit un peu autrement près des bornes (45 jours y font « un
+ * mois »), l'aperçu n'a pas à le suivre à l'unité près.
+ */
+export function formatTimestamp(unix: number, style: string, clock: Clock): string | null {
+  const ms = unix * 1000;
+  // Au-delà, `Date` n'a plus d'instant à donner.
+  if (!Number.isFinite(ms) || Math.abs(ms) > 8.64e15) return null;
+  if (style === 'R') {
+    const seconds = Math.round((ms - clock.now) / 1000);
+    const [unit, size] =
+      RELATIVE_UNITS.find(([, s]) => Math.abs(seconds) >= s) ??
+      RELATIVE_UNITS[RELATIVE_UNITS.length - 1];
+    return new Intl.RelativeTimeFormat(clock.locale, { numeric: 'always' }).format(
+      Math.round(seconds / size),
+      unit,
+    );
+  }
+  if (!Object.hasOwn(TIMESTAMP_FORMATS, style)) return null;
+  return new Intl.DateTimeFormat(clock.locale, {
+    ...TIMESTAMP_FORMATS[style],
+    timeZone: clock.timeZone,
+  }).format(ms);
 }
 
 // Zone à usage privé : bornes des morceaux déjà rendus, qu'aucune règle
@@ -332,8 +409,12 @@ const PRIVATE = /[\uE000-\uE003]/g;
  * Mise en forme d'UNE ligne. Le texte est ÉCHAPPÉ D'ABORD : tout ce qui suit
  * travaille sur du HTML inerte, et le seul balisage produit vient d'ici (d'où
  * les `&lt;`…`&gt;` dans les motifs, à la place des chevrons).
+ *
+ * `timestamps` à `false` : là où Discord ne rend PAS les horodatages (le titre
+ * d'un embed), ils restent en toutes lettres.
  */
-function inline(raw: string, marks: Marks): string {
+function inline(raw: string, marks: Marks, timestamps = true): string {
+  const clock = marks.clock ?? { now: Date.now() };
   const kept: string[] = [];
   const hold = (html: string): string => `${HOLD}${kept.push(html) - 1}${HELD}`;
 
@@ -367,6 +448,19 @@ function inline(raw: string, marks: Marks): string {
       hold(
         `<img class="emoji" alt=":${name}:" title=":${name}:" src="https://cdn.discordapp.com/emojis/${id}.${a ? 'gif' : 'webp'}?size=48">`,
       ),
+    )
+    // Horodatage : la pastille de Discord, l'instant UTC au survol. Un style
+    // inconnu reste en texte, comme chez lui.
+    .replace(
+      /&lt;t:(-?\d+)(?::([A-Za-z]))?&gt;/g,
+      (whole, unix: string, style: string | undefined) => {
+        const shown = timestamps ? formatTimestamp(Number(unix), style ?? 'f', clock) : null;
+        return shown === null
+          ? whole
+          : hold(
+              `<span class="ts" title="${new Date(Number(unix) * 1000).toISOString()}">${escapeHtml(shown)}</span>`,
+            );
+      },
     )
     .replace(/&lt;(@[!&]?|#)(\d{17,20})&gt;/g, (_, kind: string, id: string) =>
       hold(`<span class="mention">${kind[0]}${id}</span>`),
@@ -489,9 +583,10 @@ function blocks(lines: string[], marks: Marks, code: string[], quoted: boolean):
  *
  * Couvert : titres `#` `##` `###`, sous-texte `-# `, citations `> ` et `>>> `,
  * listes `- ` / `* ` imbriquées, gras, italique, souligné, barré, spoiler, code
- * en ligne et en bloc, liens masqués, URL nues, sauts de ligne tels quels.
+ * en ligne et en bloc, liens masqués, URL nues, sauts de ligne tels quels,
+ * horodatages `<t:…>` (hors du code, comme les emojis ; cf. `formatTimestamp`).
  * Pas couvert (rendu en texte) : listes numérotées, mise en forme à cheval sur
- * plusieurs lignes, horodatages `<t:…>`.
+ * plusieurs lignes.
  */
 export function renderDiscord(content: string, marks: Marks = {}): string {
   const code: string[] = [];
@@ -505,13 +600,14 @@ export function renderDiscord(content: string, marks: Marks = {}): string {
 }
 
 /** Le preview complet : un cadre par message, avec sa coupure et sa longueur. */
-export function previewHtml(p: Prepared): string {
+export function previewHtml(p: Prepared, clock?: Clock): string {
   const n = p.chunks.length;
+  const marks: Marks = { unknown: p.unknown, pending: p.pending, clock };
   return p.chunks
     .map(
       (chunk, i) =>
         `<div class="dc-cut">message ${i + 1}/${n} · ${chunk.length} caractères</div>` +
-        `<div class="dc">${renderDiscord(chunk, p)}</div>`,
+        `<div class="dc">${renderDiscord(chunk, marks)}</div>`,
     )
     .join('');
 }
@@ -615,6 +711,8 @@ export interface PreparedEmbed {
   pending: string[];
   /** Champs refusés, chacun NOMMÉ : le premier bloque l'envoi. */
   invalid: string[];
+  /** À signaler sans bloquer : ce qui partira, mais ne s'affichera pas comme on le croit. */
+  warnings: string[];
   /** Découpage impossible (une ligne dépasse à elle seule) : rien ne part. */
   error?: string;
 }
@@ -638,6 +736,10 @@ export const embedTotal = (m: EmbedMessage): number =>
  *
  * Un champ refusé (trop long, adresse qui n'est pas du http, bouton à moitié
  * rempli) est vidé du rendu et NOMMÉ dans `invalid`.
+ *
+ * Horodatages : Discord les rend dans la description et le texte du dessus, pas
+ * dans le titre, le pied ni un libellé de bouton — un `<t:…>` posé là part tel
+ * quel et s'affiche en toutes lettres : `warnings` le dit, sans bloquer.
  */
 export function prepareEmbed(
   text: string,
@@ -648,6 +750,15 @@ export function prepareEmbed(
   const unknown = new Set<string>();
   const pending = new Set<string>();
   const invalid: string[] = [];
+  const warnings: string[] = [];
+  /** Champ où Discord ne rend pas les horodatages. */
+  const unstamped = (s: string, where: string): string => {
+    if (TIMESTAMP.test(s))
+      warnings.push(
+        `${where} : Discord n’y rend pas les horodatages — ce <t:…> s’y afficherait en toutes lettres. Il n’est rendu que dans la description et le texte du dessus.`,
+      );
+    return s;
+  };
   const note = (c: Converted): void => {
     for (const n of c.unknown) unknown.add(n);
     for (const n of c.pending) pending.add(n);
@@ -686,7 +797,10 @@ export function prepareEmbed(
   const split = splitMessage(description.content, EMBED_DESCRIPTION_LIMIT);
 
   // Un titre tient sur une ligne.
-  const title = within(rich(form.title).replace(/\s*\n\s*/g, ' '), EMBED_TITLE_LIMIT, 'Titre');
+  const title = unstamped(
+    within(rich(form.title).replace(/\s*\n\s*/g, ' '), EMBED_TITLE_LIMIT, 'Titre'),
+    'Titre',
+  );
   let url = link(form.url, 'Lien du titre');
   if (url && !form.title.trim()) {
     invalid.push('Lien du titre : il lui faut un titre.');
@@ -694,7 +808,7 @@ export function prepareEmbed(
   }
   const thumbnail = link(form.thumbnail, 'Vignette');
   const image = link(form.image, 'Image');
-  const footer = within(plain(form.footer, 'Pied'), EMBED_FOOTER_LIMIT, 'Pied');
+  const footer = unstamped(within(plain(form.footer, 'Pied'), EMBED_FOOTER_LIMIT, 'Pied'), 'Pied');
   const content = within(rich(form.content), MESSAGE_LIMIT, 'Texte au-dessus de l’embed');
 
   const filled = form.buttons
@@ -712,7 +826,7 @@ export function prepareEmbed(
     );
     if (!b.label) invalid.push(`${b.where} : libellé manquant.`);
     else if (!b.url) invalid.push(`${b.where} : adresse manquante.`);
-    if (label && href) buttons.push({ label, url: href });
+    if (label && href) buttons.push({ label: unstamped(label, `${b.where}, libellé`), url: href });
   }
 
   // Sans description, la carte peut encore porter un titre, une image, un pied.
@@ -749,6 +863,7 @@ export function prepareEmbed(
     unknown: [...unknown],
     pending: [...pending],
     invalid,
+    warnings,
     ...(split.error ? { error: split.error } : {}),
   };
 }
@@ -778,8 +893,10 @@ export function renderEmbed(m: EmbedMessage, marks: Marks = {}): string {
   const img = (url: string, cls: string): string =>
     url ? `<img class="${cls}" alt="" src="${escapeHtml(url)}">` : '';
 
+  // Ni le titre, ni le pied, ni un libellé de bouton ne rendent un horodatage.
+  const heading = inline(m.title, marks, false);
   const title = m.title
-    ? `<div class="dc-embed-title">${m.url ? anchor(m.url, '', inline(m.title, marks)) : inline(m.title, marks)}</div>`
+    ? `<div class="dc-embed-title">${m.url ? anchor(m.url, '', heading) : heading}</div>`
     : '';
   const description = m.description
     ? `<div class="dc-embed-desc">${renderDiscord(m.description, marks)}</div>`
@@ -804,13 +921,14 @@ export function renderEmbed(m: EmbedMessage, marks: Marks = {}): string {
 }
 
 /** Le preview d'un envoi en mode embed : un cadre par message, avec ses longueurs. */
-export function embedPreviewHtml(p: PreparedEmbed): string {
+export function embedPreviewHtml(p: PreparedEmbed, clock?: Clock): string {
   const n = p.messages.length;
+  const marks: Marks = { unknown: p.unknown, pending: p.pending, clock };
   return p.messages
     .map(
       (m, i) =>
         `<div class="dc-cut">message ${i + 1}/${n} · embed · description ${m.description.length} caractères · textes ${embedTotal(m)}</div>` +
-        `<div class="dc">${renderEmbed(m, p)}</div>`,
+        `<div class="dc">${renderEmbed(m, marks)}</div>`,
     )
     .join('');
 }
@@ -925,6 +1043,8 @@ export interface DiscordDeps {
   guildId: string | undefined;
   fetch: FetchLike;
   sleep: (ms: number) => Promise<void>;
+  /** L'horloge du rendu et de l'import ; absente : celle du poste (les tests la fixent). */
+  clock?: () => Clock;
 }
 
 type Method = 'GET' | 'POST' | 'PATCH';
@@ -1473,6 +1593,692 @@ export async function editMessages(
   return { ok: true, log: j.lines, ids, urls };
 }
 
+// ------------------------------------------------------------ historique -----
+
+/** Messages demandés par page : le plafond de Discord. */
+const HISTORY_PAGE = 100;
+/** Plafond d'UN import : dix pages, les plus récentes. */
+export const HISTORY_MAX_MESSAGES = 1000;
+/** La suite d'un résumé : les messages du même auteur dans ce délai. */
+const CONTINUATION_MS = 5 * 60 * 1000;
+/** Sans lien, la note d'un résumé est la plus proche publiée dans ces jours-là. */
+const PAIR_DAYS = 4;
+const DAY_MS = 86_400_000;
+
+/** Ce qu'on lit d'un message rendu par Discord. */
+export interface RawMessage {
+  id: string;
+  /** 0 : message ordinaire, 19 : réponse ; le reste est du système (arrivée, épingle…). */
+  type?: number;
+  content?: string;
+  /** Instant d'envoi, en ISO. */
+  timestamp?: string;
+  author?: { id?: string; username?: string; global_name?: string | null; bot?: boolean };
+  embeds?: { title?: string; description?: string; url?: string }[];
+  attachments?: unknown[];
+  sticker_items?: unknown[];
+  components?: { components?: { url?: string }[] }[];
+}
+
+/** La note officielle d'un résumé. */
+export interface SummaryNote {
+  id: string;
+  date: string;
+  title: string;
+  url: string;
+}
+
+/** Un résumé déjà posté, recollé s'il était découpé, et sa note. */
+export interface PastSummary {
+  /** Les messages qui le portent, dans l'ordre. */
+  ids: string[];
+  /** Instant du premier, en ISO. */
+  date: string;
+  author: string;
+  text: string;
+  note: SummaryNote | null;
+}
+
+/** `.quick/discord-history.json` : les paires (note officielle → résumé de Sevih). */
+export interface HistoryFile {
+  importedAt: string;
+  /** Le serveur et le salon du DERNIER import. */
+  guildId: string;
+  channelId: string;
+  /** Du plus récent au plus ancien. */
+  summaries: PastSummary[];
+}
+
+/** Un résumé repéré dans un salon, avant appariement : `links` porte ses adresses. */
+export interface FoundSummary extends Omit<PastSummary, 'note'> {
+  links: string[];
+}
+
+const TLDR = /tl;dr/i;
+
+/** Ordre des identifiants de Discord : ils grandissent avec le temps. */
+const bySnowflake = (a: string, b: string): number =>
+  BigInt(a) < BigInt(b) ? -1 : BigInt(a) > BigInt(b) ? 1 : 0;
+
+/** L'instant d'un message : celui que Discord donne, sinon celui que son id encode. */
+function sentAt(m: RawMessage): number {
+  const given = Date.parse(m.timestamp ?? '');
+  return Number.isNaN(given) ? Number((BigInt(m.id) >> 22n) + 1_420_070_400_000n) : given;
+}
+
+/** Le texte d'un message : son contenu, sinon celui de ses embeds — titre puis description. */
+function messageText(m: RawMessage): string {
+  const content = (m.content ?? '').trim();
+  if (content) return content;
+  return (m.embeds ?? [])
+    .flatMap((e) => [e.title ?? '', e.description ?? ''])
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .join('\n');
+}
+
+/**
+ * Ce message OUVRE-t-il un résumé ? Sa première ligne contient `TL;DR` — ou,
+ * s'il n'a pas de contenu (le bot en mode embed), le titre ou la description
+ * d'un de ses embeds.
+ */
+function opensSummary(m: RawMessage): boolean {
+  const content = (m.content ?? '').trim();
+  if (content) return TLDR.test(content.split('\n', 1)[0]);
+  return (m.embeds ?? []).some((e) => TLDR.test(e.title ?? '') || TLDR.test(e.description ?? ''));
+}
+
+/** Les adresses d'un message : celles de son texte, le lien de ses embeds, ses boutons de lien. */
+function messageLinks(m: RawMessage, text: string): string[] {
+  return [
+    ...(text.match(/https?:\/\/[^\s<>()[\]]+/g) ?? []),
+    ...(m.embeds ?? []).map((e) => e.url ?? ''),
+    ...(m.components ?? []).flatMap((row) => (row.components ?? []).map((c) => c.url ?? '')),
+  ].filter(Boolean);
+}
+
+/**
+ * Les résumés d'une suite de messages (dans n'importe quel ordre), du plus
+ * récent au plus ancien.
+ *
+ * Un résumé s'OUVRE par un message dont la première ligne contient `TL;DR`,
+ * quel que soit son auteur (Sevih en son nom, ou le bot). Sa SUITE — le
+ * découpage à 2 000 caractères — est faite des messages qui le suivent sans
+ * interruption : même auteur, dans les cinq minutes de l'ouverture, et qui
+ * n'ouvrent pas eux-mêmes un résumé. Le tout est recollé par un saut de ligne.
+ */
+export function groupSummaries(messages: readonly RawMessage[]): FoundSummary[] {
+  const ordered = [...messages].sort((a, b) => bySnowflake(a.id, b.id));
+  const found: FoundSummary[] = [];
+  for (let i = 0; i < ordered.length; i++) {
+    const first = ordered[i];
+    if (!opensSummary(first)) continue;
+    const opened = sentAt(first);
+    const texts = [messageText(first)];
+    const ids = [first.id];
+    const links = messageLinks(first, texts[0]);
+    for (let next = ordered[i + 1]; next; next = ordered[i + 1]) {
+      const same = Boolean(first.author?.id) && next.author?.id === first.author?.id;
+      if (!same || sentAt(next) - opened > CONTINUATION_MS || opensSummary(next)) break;
+      i++;
+      const text = messageText(next);
+      links.push(...messageLinks(next, text));
+      if (!text) continue;
+      texts.push(text);
+      ids.push(next.id);
+    }
+    found.push({
+      ids,
+      date: new Date(opened).toISOString(),
+      author: first.author?.global_name || first.author?.username || first.author?.id || '',
+      text: texts.join('\n'),
+      links,
+    });
+  }
+  return found.reverse();
+}
+
+/** Une adresse sans sa barre finale : la seule différence qu'on pardonne à un lien. */
+const bareUrl = (url: string): string => url.replace(/\/+$/, '');
+
+/**
+ * La note officielle d'un résumé. D'abord par le LIEN : le gabarit de Sevih
+ * porte l'adresse de la note (`officialUrl`), en sous-texte ou en bouton. Sinon
+ * la note en anglais la plus proche publiée dans les quatre jours qui précèdent
+ * le résumé — à date égale la note de patch passe devant, puis la plus récente.
+ * `null` sinon : tout résumé n'est pas tiré d'une note.
+ *
+ * Rend la fonction d'appariement : la table des adresses n'est bâtie qu'une fois.
+ */
+export function notePairer(
+  posts: readonly NotePost[],
+): (summary: Pick<FoundSummary, 'links' | 'date'>) => SummaryNote | null {
+  const en = posts.filter((p) => p.lang === 'en');
+  const byUrl = new Map(en.map((p) => [bareUrl(officialUrl(p)), p]));
+  const ref = (p: NotePost): SummaryNote => ({
+    id: String(p.id),
+    date: p.date,
+    title: p.title,
+    url: officialUrl(p),
+  });
+  return (summary) => {
+    for (const link of summary.links) {
+      const linked = byUrl.get(bareUrl(link));
+      if (linked) return ref(linked);
+    }
+    // Les notes sont datées au jour : on compare des jours (UTC), pas des instants.
+    const day = Date.parse(summary.date.slice(0, 10));
+    const near = en
+      .map((p) => ({ p, age: (day - Date.parse(p.date)) / DAY_MS }))
+      .filter(({ age }) => age >= 0 && age <= PAIR_DAYS)
+      .sort(
+        (a, b) =>
+          a.age - b.age ||
+          Number(b.p.type === 'update') - Number(a.p.type === 'update') ||
+          Number(b.p.id) - Number(a.p.id),
+      );
+    return near.length ? ref(near[0].p) : null;
+  };
+}
+
+/** Les mêmes codes d'erreur quand on lit l'HISTORIQUE d'un salon : les droits qu'il faut. */
+const HISTORY_RIGHTS =
+  'il manque au bot, dans ce salon, « Voir le salon » ou « Voir les anciens messages »';
+const HISTORY_HINTS: Record<number, string> = {
+  10003: 'salon inconnu',
+  50001: HISTORY_RIGHTS,
+  50013: HISTORY_RIGHTS,
+};
+
+const INTENT_HELP =
+  'Discord ne donne le contenu des messages des AUTRES qu’aux bots qui ont l’intent « Message Content » : sans lui il rend un contenu vide, sans erreur. À activer dans le portail développeur Discord (discord.com/developers) : l’application → Bot → Privileged Gateway Intents → « Message Content Intent », enregistrer, puis relancer l’import.';
+
+/** Un message ordinaire d'un membre revenu VIDE : ni contenu, ni embed, ni pièce jointe. */
+const isMemberMessage = (m: RawMessage): boolean =>
+  !m.author?.bot && (m.type === undefined || m.type === 0 || m.type === 19);
+const isEmpty = (m: RawMessage): boolean =>
+  !(m.content ?? '').trim() &&
+  !m.embeds?.length &&
+  !m.attachments?.length &&
+  !m.sticker_items?.length;
+
+/** Résultat d'un import : l'historique du salon lu, ou `null` si rien n'est à écrire. */
+export interface HistoryOutcome extends Outcome {
+  history: HistoryFile | null;
+}
+
+/**
+ * Lit l'historique d'un salon — les `HISTORY_MAX_MESSAGES` messages les plus
+ * récents, par pages de cent, espacées comme les messages d'un envoi — et en
+ * tire les résumés, appariés à leur note. Ne lit QUE : rien n'est posté, rien
+ * n'est écrit (le disque est l'affaire de `server.ts`).
+ *
+ * Deux silences de Discord à ne pas prendre pour « aucun résumé » : sans
+ * l'intent « Message Content », le contenu des messages des autres revient
+ * VIDE (l'import s'arrête dès que c'est le cas de plus de la moitié de ceux
+ * des membres) ; sans « Voir les anciens messages », la liste revient vide.
+ */
+export async function importHistory(
+  deps: DiscordDeps,
+  input: { guildId: string; channelId: string },
+  posts: readonly NotePost[],
+  report?: Report,
+): Promise<HistoryOutcome> {
+  const { guildId, channelId } = input;
+  const refuse = (line: string): HistoryOutcome => ({ ok: false, log: [line], history: null });
+  if (!deps.token) return refuse(TOKEN_HINT);
+  if (!SNOWFLAKE.test(guildId) || !SNOWFLAKE.test(channelId))
+    return refuse('Identifiant de serveur ou de salon invalide.');
+
+  const j = journal(report, deps.token);
+  const stop = (...lines: string[]): HistoryOutcome => {
+    for (const line of lines) j.done(line);
+    j.done('Rien n’a été écrit.');
+    return { ok: false, log: j.lines, history: null };
+  };
+  const read: RawMessage[] = [];
+
+  for (let page = 1; read.length < HISTORY_MAX_MESSAGES; page++) {
+    if (page > 1) await deps.sleep(SPACING_MS);
+    j.doing(`lecture de la page ${page}`);
+    const limit = Math.min(HISTORY_PAGE, HISTORY_MAX_MESSAGES - read.length);
+    const before = read.length ? `&before=${read[read.length - 1].id}` : '';
+    const res = await call<RawMessage[]>(
+      deps,
+      'GET',
+      `/channels/${channelId}/messages?limit=${limit}${before}`,
+      undefined,
+      HISTORY_HINTS,
+    );
+    if (!res.ok) return stop(`ÉCHEC à la page ${page} — ${res.error}`);
+    const got = (Array.isArray(res.data) ? res.data : []).filter((m) =>
+      SNOWFLAKE.test(String(m?.id)),
+    );
+    // Discord rend du plus récent au plus ancien : le dernier lu borne la page suivante.
+    read.push(...got.sort((a, b) => bySnowflake(b.id, a.id)));
+    j.done(
+      `page ${page} : ${got.length} message${got.length > 1 ? 's' : ''} (${read.length} en tout), ${read.filter(opensSummary).length} résumé(s) repéré(s)`,
+    );
+
+    const members = read.filter(isMemberMessage);
+    const empty = members.filter(isEmpty).length;
+    if (empty * 2 > members.length)
+      return stop(
+        `Import arrêté : ${empty} des ${members.length} messages de membres lus reviennent VIDES (ni contenu, ni embed, ni pièce jointe).`,
+        INTENT_HELP,
+      );
+    if (got.length < limit) break;
+  }
+
+  if (!read.length)
+    return stop(
+      `Aucun message lu : le salon est vide, ou ${HISTORY_RIGHTS} (sans ce dernier droit, Discord rend une liste vide, sans erreur).`,
+    );
+
+  const pair = notePairer(posts);
+  const summaries = groupSummaries(read).map(({ links, ...s }): PastSummary => ({
+    ...s,
+    // Ceinture et bretelles : rien d'un message ne doit porter le jeton jusqu'au disque.
+    text: scrub(s.text, deps.token),
+    note: pair({ links, date: s.date }),
+  }));
+  const paired = summaries.filter((s) => s.note).length;
+  j.done(
+    `${read.length} messages lus${read.length >= HISTORY_MAX_MESSAGES ? ` (le plafond d’un import : les ${HISTORY_MAX_MESSAGES} plus récents)` : ''} : ${summaries.length} résumé${summaries.length > 1 ? 's' : ''}, dont ${paired} apparié${paired > 1 ? 's' : ''} à ${paired > 1 ? 'leur' : 'sa'} note.`,
+  );
+  return {
+    ok: true,
+    log: j.lines,
+    history: {
+      importedAt: new Date(deps.clock?.().now ?? Date.now()).toISOString(),
+      guildId,
+      channelId,
+      summaries,
+    },
+  };
+}
+
+/**
+ * L'historique après un import : les résumés lus REMPLACENT ceux du même
+ * premier message, tous les autres sont gardés — ceux d'un autre salon, et ceux
+ * que le plafond d'un import ne fait plus lire. Du plus récent au plus ancien.
+ */
+export function mergeHistory(previous: HistoryFile | null, imported: HistoryFile): HistoryFile {
+  const fresh = new Set(imported.summaries.map((s) => s.ids[0]));
+  const kept = (previous?.summaries ?? []).filter((s) => !fresh.has(s.ids[0]));
+  return {
+    ...imported,
+    summaries: [...imported.summaries, ...kept].sort(
+      (a, b) => b.date.localeCompare(a.date) || bySnowflake(b.ids[0], a.ids[0]),
+    ),
+  };
+}
+
+/**
+ * `.quick/discord-history.json` tel qu'il est sur le disque → l'historique, ou
+ * `null` s'il n'en est pas un. Une entrée illisible tombe, les autres restent.
+ */
+export function parseHistory(raw: unknown): HistoryFile | null {
+  const o = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  if (!Array.isArray(o.summaries)) return null;
+  const text = (v: unknown): string => (typeof v === 'string' ? v : '');
+  const summaries = o.summaries.flatMap((entry: unknown): PastSummary[] => {
+    const s = (entry && typeof entry === 'object' ? entry : {}) as Record<string, unknown>;
+    const ids = (Array.isArray(s.ids) ? s.ids : []).filter(
+      (id: unknown): id is string => typeof id === 'string' && SNOWFLAKE.test(id),
+    );
+    if (!ids.length || !text(s.text) || !text(s.date)) return [];
+    const n = (s.note && typeof s.note === 'object' ? s.note : null) as Record<
+      string,
+      unknown
+    > | null;
+    return [
+      {
+        ids,
+        date: text(s.date),
+        author: text(s.author),
+        text: text(s.text),
+        note: n?.id
+          ? { id: String(n.id), date: text(n.date), title: text(n.title), url: text(n.url) }
+          : null,
+      },
+    ];
+  });
+  return {
+    importedAt: text(o.importedAt),
+    guildId: text(o.guildId),
+    channelId: text(o.channelId),
+    summaries,
+  };
+}
+
+/** Ce que l'onglet montre de l'historique : les comptes, et une ligne par résumé. */
+export interface HistoryState {
+  count: number;
+  paired: number;
+  /** Instant du résumé le plus récent ; `null` sans résumé. */
+  last: string | null;
+  importedAt: string | null;
+  items: { date: string; first: string; note: string | null }[];
+}
+
+export function historyState(history: HistoryFile | null): HistoryState {
+  const summaries = history?.summaries ?? [];
+  return {
+    count: summaries.length,
+    paired: summaries.filter((s) => s.note).length,
+    last: summaries[0]?.date ?? null,
+    importedAt: history?.importedAt || null,
+    items: summaries.map((s) => ({
+      date: s.date,
+      first: s.text.split('\n', 1)[0].slice(0, 140),
+      note: s.note?.title ?? null,
+    })),
+  };
+}
+
+// ------------------------------------------------- la demande à copier -------
+
+/**
+ * Au-delà, la demande ne se colle plus d'une pièce dans claude.ai : les
+ * exemples les plus anciens sautent d'abord.
+ */
+export const REQUEST_BUDGET = 400_000;
+/** Exemples joints par défaut, et le plus que le champ de la page accepte. */
+export const REQUEST_EXAMPLES = 3;
+export const REQUEST_EXAMPLES_MAX = 6;
+
+const ENTITIES: Record<string, string> = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
+};
+
+function decodeEntities(s: string): string {
+  return s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (whole, code: string) => {
+    if (code[0] !== '#') {
+      const name = code.toLowerCase();
+      return Object.hasOwn(ENTITIES, name) ? ENTITIES[name] : whole;
+    }
+    const n = /^#x/i.test(code) ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+    return n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : whole;
+  });
+}
+
+/** Les attributs d'une balise — une valeur entre guillemets peut porter des chevrons. */
+const ATTRS = String.raw`(?:"[^"]*"|'[^']*'|[^'">])*`;
+/**
+ * Dans l'ordre : un commentaire ; un élément dont le contenu n'est pas du texte
+ * à lire (script, style, cadre, vidéo), pris d'un bloc jusqu'à sa fermeture ;
+ * une balise, ouvrante ou fermante ; du texte ; un chevron perdu.
+ */
+const HTML_TOKEN = new RegExp(
+  String.raw`<!--[\s\S]*?-->` +
+    String.raw`|<(script|style|iframe|video)\b${ATTRS}>[\s\S]*?<\/\1>` +
+    String.raw`|<(\/?)([A-Za-z][A-Za-z0-9]*)\b${ATTRS}>` +
+    String.raw`|[^<]+|<`,
+  'gi',
+);
+/** Ce qui finit la ligne en cours, sans rien de plus. */
+const BLOCKS = new Set([
+  'p',
+  'div',
+  'figure',
+  'figcaption',
+  'blockquote',
+  'section',
+  'article',
+  'ul',
+  'ol',
+  'thead',
+  'tbody',
+  'tfoot',
+]);
+
+/**
+ * Le TEXTE d'une note officielle — son HTML WordPress, tel que `get-news` le
+ * range — pour le donner à lire à un modèle : un titre par ligne (`## `), une
+ * ligne par paragraphe, les puces en `- ` (retrait de deux espaces par niveau),
+ * une ligne par rangée de tableau, ses cellules jointes par ` | ` (ce qui s'y
+ * trouvait sur plusieurs lignes par ` / `), le texte barré entre `~~`, les
+ * images et les vidéos retirées, les entités décodées, jamais deux lignes vides
+ * de suite. Ni DOM ni dépendance : les balises sont lues au fil du texte.
+ */
+export function noteText(html: string): string {
+  const out: string[] = [];
+  /** Ligne en cours, et ce qui l'ouvre (`## `, `- `). */
+  let text = '';
+  let lead = '';
+  /** Rangée et cellule de tableau en cours ; `depth` : tableaux ouverts. */
+  let row: string[] | null = null;
+  let cell: string | null = null;
+  let depth = 0;
+  const lists: { ordered: boolean; n: number }[] = [];
+  let videoLink = false;
+
+  const tidy = (s: string): string => s.replace(/\s+/g, ' ').trim();
+  /** Finit la ligne — dans une cellule, tout tient sur UNE ligne : un séparateur à la place. */
+  const end = (): void => {
+    if (cell !== null) {
+      cell += ' / ';
+      return;
+    }
+    const line = tidy(text);
+    if (line) {
+      out.push(lead + line);
+      lead = '';
+    }
+    text = '';
+  };
+  const blank = (): void => {
+    end();
+    if (cell === null && out.length && out[out.length - 1] !== '') out.push('');
+  };
+  const write = (s: string): void => {
+    if (cell !== null) cell += s;
+    else text += s;
+  };
+  const closeCell = (): void => {
+    if (cell === null || !row) return;
+    row.push(
+      tidy(cell)
+        .replace(/(?:\/ )+/g, '/ ')
+        .replace(/^(?:\/ )+|(?: \/)+$/g, '')
+        .trim(),
+    );
+    cell = null;
+  };
+
+  for (const token of html.matchAll(HTML_TOKEN)) {
+    const name = token[3]?.toLowerCase();
+    if (name === undefined) {
+      // Du texte (ou un chevron perdu) ; un commentaire ou un élément sauté tombent.
+      const readable = token[0] === '<' || !token[0].startsWith('<');
+      if (readable && !videoLink) write(decodeEntities(token[0]));
+      continue;
+    }
+    const closing = token[2] === '/';
+
+    if (name === 'table') {
+      // Un tableau DANS une cellule n'ouvre pas de rangées à lui : il s'y aplatit.
+      if (closing) depth = Math.max(0, depth - 1);
+      else depth++;
+      if (depth > (closing ? 0 : 1)) end();
+      else blank();
+    } else if (depth > 1 && (name === 'tr' || name === 'td' || name === 'th')) {
+      end();
+    } else if (name === 'tr') {
+      closeCell();
+      if (closing && row?.some(Boolean)) out.push(row.join(' | '));
+      row = closing ? null : [];
+    } else if (name === 'td' || name === 'th') {
+      closeCell();
+      if (!closing && row) cell = '';
+    } else if (/^h[1-6]$/.test(name)) {
+      if (closing) end();
+      else blank();
+      lead = closing || cell !== null ? '' : `${'#'.repeat(Number(name[1]))} `;
+    } else if (name === 'li') {
+      end();
+      lead = '';
+      if (!closing) {
+        const list = lists[lists.length - 1];
+        const mark = list?.ordered ? `${++list.n}. ` : '- ';
+        if (cell !== null) cell += mark;
+        else lead = '  '.repeat(Math.max(0, lists.length - 1)) + mark;
+      }
+    } else if (name === 'hr') {
+      blank();
+    } else if (name === 'br') {
+      end();
+    } else if (name === 's' || name === 'del' || name === 'strike') {
+      write('~~');
+    } else if (name === 'a') {
+      // Le lien que `get-news` pose à la place d'une vidéo : un nom de fichier, rien à lire.
+      videoLink = !closing && /\bclass="[^"]*\bpn-video-link\b/.test(token[0]);
+    } else if (BLOCKS.has(name)) {
+      if (name === 'ul' || name === 'ol') {
+        end();
+        if (closing) lists.pop();
+        else lists.push({ ordered: name === 'ol', n: 0 });
+      } else end();
+    }
+    // Le reste (gras, couleur, lien…) ne porte que du texte : la balise tombe.
+  }
+  end();
+  while (out[out.length - 1] === '') out.pop();
+  return out.join('\n');
+}
+
+/** Les caractères de la table standard → leur code, le premier nom du fichier gagnant. */
+const STANDARD_NAMES = new Map<string, string>();
+for (const [name, char] of STANDARD) if (!STANDARD_NAMES.has(char)) STANDARD_NAMES.set(char, name);
+/** Les plus longs d'abord : un emoji composé ne doit pas être lu par son premier morceau. */
+const STANDARD_CHARS = new RegExp(
+  [...STANDARD_NAMES.keys()]
+    .sort((a, b) => b.length - a.length)
+    .map((c) => c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|'),
+  'g',
+);
+
+/**
+ * Un résumé posté, tel qu'il S'ÉCRIRAIT dans l'éditeur : les emojis en `:nom:`
+ * (ceux d'un serveur comme les standards) et les horodatages en
+ * `AAAA-MM-JJ HH:MM UTC`. C'est la forme demandée au modèle : les exemples la
+ * lui montrent.
+ */
+export function summaryDraft(text: string): string {
+  return text
+    .replace(/<a?:(\w{2,32}):\d{17,20}>/g, ':$1:')
+    .replace(/<t:(-?\d+)(?::[A-Za-z])?>/g, (whole, unix: string) => {
+      const ms = Number(unix) * 1000;
+      return Math.abs(ms) > 8.64e15
+        ? whole
+        : `${new Date(ms).toISOString().slice(0, 16).replace('T', ' ')} UTC`;
+    })
+    .replace(STANDARD_CHARS, (char) => `:${STANDARD_NAMES.get(char)}:`);
+}
+
+/** Une note telle que la demande la cite. */
+export interface RequestNote {
+  title: string;
+  date: string;
+  url: string;
+  text: string;
+}
+
+/** Un exemple : la note officielle, et le résumé que Sevih en a posté. */
+export interface RequestExample {
+  note: RequestNote;
+  summary: string;
+}
+
+export const requestNote = (post: NotePost): RequestNote => ({
+  title: post.title,
+  date: post.date,
+  url: officialUrl(post),
+  text: noteText(post.content),
+});
+
+/**
+ * Les `count` résumés appariés les plus récents, du plus récent au plus ancien,
+ * chacun avec le texte de sa note. Est passé : un résumé sans note, un résumé
+ * dont la note n'est plus dans `posts`, et celui de la note À RÉSUMER (`skip`)
+ * — il serait la réponse, pas un exemple.
+ */
+export function requestExamples(
+  history: HistoryFile | null,
+  posts: readonly NotePost[],
+  count: number,
+  skip?: string,
+): RequestExample[] {
+  const en = new Map(posts.filter((p) => p.lang === 'en').map((p) => [String(p.id), p]));
+  const examples: RequestExample[] = [];
+  for (const s of history?.summaries ?? []) {
+    if (examples.length >= count) break;
+    const post = s.note && s.note.id !== skip ? en.get(s.note.id) : undefined;
+    if (post) examples.push({ note: requestNote(post), summary: summaryDraft(s.text) });
+  }
+  return examples;
+}
+
+export interface DraftRequest {
+  text: string;
+  /** Taille de la demande, en caractères. */
+  length: number;
+  /** Exemples joints, et ceux que le budget a fait sauter. */
+  examples: number;
+  dropped: number;
+}
+
+/**
+ * La demande à coller dans claude.ai pour un premier jet — AUCUN appel réseau
+ * ici, ni ailleurs : Sevih la colle lui-même, sous son abonnement.
+ *
+ * Dans l'ordre : les consignes (`discord-prompt.md`), les exemples — du plus
+ * ancien au plus récent, chacun « note officielle » puis « résumé posté » —, la
+ * note à résumer, le gabarit. `examples` arrive du plus récent au plus ancien :
+ * au-delà de `budget` caractères, les plus anciens sautent d'abord. La note à
+ * résumer ne se raccourcit pas : sans exemple, la demande peut encore dépasser.
+ */
+export function draftRequest(input: {
+  instructions: string;
+  examples: readonly RequestExample[];
+  note: RequestNote;
+  template: string;
+  budget?: number;
+}): DraftRequest {
+  const { instructions, examples, note, template, budget = REQUEST_BUDGET } = input;
+  const cited = (tag: string, n: RequestNote): string =>
+    `<${tag}>\nTitle: ${n.title}\nDate: ${n.date}\nURL: ${n.url}\n\n${n.text}\n</${tag}>`;
+  const build = (kept: readonly RequestExample[]): string =>
+    [
+      instructions.trim(),
+      kept.length
+        ? `<examples>\n${[...kept]
+            .reverse()
+            .map(
+              (e) =>
+                `<example>\n${cited('official_note', e.note)}\n<posted_summary>\n${e.summary}\n</posted_summary>\n</example>`,
+            )
+            .join('\n')}\n</examples>`
+        : '',
+      cited('note_to_summarize', note),
+      `<template>\n${template}\n</template>`,
+    ]
+      .filter(Boolean)
+      .join('\n\n');
+
+  let kept = examples.length;
+  let text = build(examples);
+  while (text.length > budget && kept > 0) text = build(examples.slice(0, --kept));
+  return { text, length: text.length, examples: kept, dropped: examples.length - kept };
+}
+
 // ---------------------------------------------------------------- palette ----
 
 /** Un groupe de la palette : son libellé, et les noms d'emojis qu'il propose. */
@@ -1557,6 +2363,8 @@ export interface Preview {
   external: string[];
   /** Pourquoi ce texte ne peut pas partir (`null` = il peut). */
   blocker: string | null;
+  /** À signaler sans bloquer (un horodatage là où Discord ne le rend pas). */
+  warnings: string[];
 }
 
 export interface SendRequest extends Draft {
@@ -1708,13 +2516,15 @@ export function discordSession(deps: DiscordDeps) {
     return [...names];
   }
 
+  const clock = (): Clock => deps.clock?.() ?? { now: Date.now() };
+
   function plan(draft: Draft, suppressEmbeds: boolean): Plan {
     const { table, partial } = tableOf(draft.emojiGuilds);
     if (draft.mode === 'embed') {
       const p = prepareEmbed(draft.text, draft.embed, table, partial);
       return {
         preview: {
-          html: embedPreviewHtml(p),
+          html: embedPreviewHtml(p, clock()),
           messages: p.messages.length,
           length: p.length,
           limit: EMBED_DESCRIPTION_LIMIT,
@@ -1726,6 +2536,7 @@ export function discordSession(deps: DiscordDeps) {
             draft.guildId,
           ),
           blocker: embedBlocker(p),
+          warnings: p.warnings,
         },
         bodies: (edit) => p.messages.map((m) => embedBody(m, edit)),
       };
@@ -1733,7 +2544,7 @@ export function discordSession(deps: DiscordDeps) {
     const p = prepare(draft.text, table, partial);
     return {
       preview: {
-        html: previewHtml(p),
+        html: previewHtml(p, clock()),
         messages: p.chunks.length,
         length: p.length,
         limit: MESSAGE_LIMIT,
@@ -1741,6 +2552,7 @@ export function discordSession(deps: DiscordDeps) {
         pending: p.pending,
         external: external(p.chunks, draft.guildId),
         blocker: blocker(p),
+        warnings: [],
       },
       bodies: (edit) => p.chunks.map((chunk) => messageBody(chunk, suppressEmbeds, edit)),
     };
@@ -1824,6 +2636,28 @@ export function discordSession(deps: DiscordDeps) {
         report,
       );
       return { ...out, total };
+    },
+
+    /**
+     * Les anciens résumés du salon choisi, appariés à leur note (`importHistory`).
+     * Comme pour un envoi : le serveur est un de ceux du bot, et le salon est à
+     * ce serveur. Ne fait que LIRE.
+     */
+    async history(
+      req: { guildId: string; channelId: string },
+      posts: readonly NotePost[],
+      report?: Report,
+    ): Promise<HistoryOutcome> {
+      const refusal = (line: string): HistoryOutcome => ({
+        ok: false,
+        log: [scrub(line, deps.token)],
+        history: null,
+      });
+      if (!deps.token) return refusal(TOKEN_HINT);
+      const list = await channelsOf(req.guildId);
+      if (!list.ok) return refusal(list.error);
+      if (!list.data.some((c) => c.id === req.channelId)) return refusal(FOREIGN_CHANNEL);
+      return importHistory(deps, req, posts, report);
     },
 
     async edit(req: EditRequest, report?: Report): Promise<SendOutcome> {

@@ -12,6 +12,12 @@
  *   - un message sur le MAUVAIS serveur : celui où l'on poste se choisit, et un
  *     message posté ne se modifie que là où il est parti.
  *
+ * Deux aides à la rédaction s'y ajoutent, qui ne font que LIRE : l'import des
+ * résumés déjà postés (appariés à leur note officielle) et la demande à coller
+ * dans claude.ai. Là, ce qui raterait serait un historique faux — un résumé
+ * recollé de travers, apparié à la mauvaise note — ou un contenu vide pris pour
+ * « aucun résumé ».
+ *
  * AUCUN appel à Discord : `fetch` et `sleep` sont simulés (`harness`).
  */
 import { readFileSync } from 'node:fs';
@@ -26,8 +32,10 @@ import {
   EMBED_DESCRIPTION_LIMIT,
   EMBED_TOTAL_LIMIT,
   EMPTY_EMBED,
+  HISTORY_MAX_MESSAGES,
   MESSAGE_LIMIT,
   OFFICIAL_HOST,
+  REQUEST_BUDGET,
   TOKEN_HINT,
   blocker,
   buildRequest,
@@ -35,6 +43,7 @@ import {
   convertEmojis,
   convertPlain,
   discordSession,
+  draftRequest,
   editMessages,
   embedBlocker,
   embedBody,
@@ -43,31 +52,48 @@ import {
   embedPreviewHtml,
   embedTemplate,
   embedTotal,
+  formatTimestamp,
+  groupSummaries,
+  historyState,
+  importHistory,
   inviteUrl,
   isHttpUrl,
   latestNotes,
   mergeEmojis,
+  mergeHistory,
   messageBody,
+  notePairer,
   noteSrcdoc,
+  noteText,
   officialUrl,
+  parseHistory,
   parsePalette,
   patchTemplate,
   prepare,
   prepareEmbed,
+  previewHtml,
   renderDiscord,
   renderEmbed,
+  requestExamples,
+  requestNote,
   scrub,
   sendMessages,
   sortChannels,
   splitMessage,
   standardEmojis,
+  summaryDraft,
   type BotAccess,
+  type Clock,
   type DiscordDeps,
   type Draft,
   type EditRequest,
   type EmbedForm,
   type GuildEmoji,
+  type HistoryFile,
   type NotePost,
+  type PastSummary,
+  type RawMessage,
+  type RequestExample,
   type SendRequest,
 } from './discord';
 
@@ -2355,5 +2381,1117 @@ describe('notes officielles', () => {
         components: [{ type: 2, style: 5, label: 'Full Patch Note', url: 'https://ex.com/note/' }],
       },
     ]);
+  });
+});
+
+// ----------------------------------------------------------- horodatages -----
+
+/** Le 10 octobre 2026 à minuit UTC — 2 h du matin à Paris. */
+const OCT_10 = 1791590400;
+const HOUR = 3_600_000;
+/** Une horloge fixée : ni l'heure, ni le fuseau, ni la langue de la machine. */
+const clockAt = (now: number, timeZone = 'Europe/Paris'): Clock => ({
+  now,
+  timeZone,
+  locale: 'en-GB',
+});
+const PARIS = clockAt(OCT_10 * 1000 - 72 * HOUR);
+const stamp = (text: string): string =>
+  `<span class="ts" title="2026-10-10T00:00:00.000Z">${text}</span>`;
+
+describe('horodatages — ce que l’aperçu montre', () => {
+  it('les six styles, dans le fuseau et la langue donnés, contre un « maintenant » fixé', () => {
+    const shown = (style: string, clock = PARIS): string | null =>
+      formatTimestamp(OCT_10, style, clock);
+    expect(shown('d')).toBe('10/10/2026');
+    expect(shown('D')).toBe('10 October 2026');
+    expect(shown('t')).toBe('02:00');
+    // Le mot de liaison (« at », ou une virgule) dépend de la version d'ICU.
+    expect(shown('f')).toMatch(/^10 October 2026(?: at|,) 02:00$/);
+    expect(shown('F')).toMatch(/^Saturday,? 10 October 2026(?: at|,) 02:00$/);
+    expect(shown('R')).toBe('in 3 days');
+
+    // Le même instant, lu ailleurs : la veille au soir à New York.
+    expect(shown('f', clockAt(0, 'America/New_York'))).toMatch(/^9 October 2026(?: at|,) 20:00$/);
+    expect(shown('t', clockAt(0, 'UTC'))).toBe('00:00');
+    // Et dans une autre langue.
+    expect(formatTimestamp(OCT_10, 'D', { now: 0, timeZone: 'UTC', locale: 'fr' })).toBe(
+      '10 octobre 2026',
+    );
+  });
+
+  it('`R` se compte depuis « maintenant », dans la plus grande unité entamée', () => {
+    const from = (ms: number): string | null =>
+      formatTimestamp(OCT_10, 'R', clockAt(OCT_10 * 1000 + ms));
+    expect(from(-30_000)).toBe('in 30 seconds');
+    expect(from(-5 * 60_000)).toBe('in 5 minutes');
+    expect(from(-2 * HOUR)).toBe('in 2 hours');
+    expect(from(2 * HOUR)).toBe('2 hours ago');
+    expect(from(10 * 24 * HOUR)).toBe('10 days ago');
+    expect(from(60 * 24 * HOUR)).toBe('2 months ago');
+    expect(from(800 * 24 * HOUR)).toBe('2 years ago');
+    expect(from(0)).toBe('in 0 seconds');
+  });
+
+  it('style inconnu, instant hors du calendrier : `null` — Discord le laisse en texte', () => {
+    expect(formatTimestamp(OCT_10, 'x', PARIS)).toBeNull();
+    expect(formatTimestamp(OCT_10, 'constructor', PARIS)).toBeNull();
+    expect(formatTimestamp(1e16, 'f', PARIS)).toBeNull();
+    expect(formatTimestamp(Number.NaN, 'f', PARIS)).toBeNull();
+    // Le style que le formulaire ne propose pas, mais que Discord connaît.
+    expect(formatTimestamp(OCT_10, 'T', PARIS)).toBe('02:00:00');
+  });
+
+  it('rend une pastille, l’instant UTC en ISO au survol ; sans style, `f`', () => {
+    const marks = { clock: PARIS };
+    expect(renderDiscord(`<t:${OCT_10}:D>`, marks)).toBe(
+      `<div class="ln">${stamp('10 October 2026')}</div>`,
+    );
+    expect(renderDiscord(`Ends <t:${OCT_10}:R> (<t:${OCT_10}:t>).`, marks)).toBe(
+      `<div class="ln">Ends ${stamp('in 3 days')} (${stamp('02:00')}).</div>`,
+    );
+    expect(renderDiscord(`<t:${OCT_10}>`, marks)).toBe(renderDiscord(`<t:${OCT_10}:f>`, marks));
+    // Dans un titre, une puce, une citation, du gras : partout où le texte est mis en forme.
+    expect(renderDiscord(`## Pickup <t:${OCT_10}:d>`, marks)).toBe(
+      `<h2>Pickup ${stamp('10/10/2026')}</h2>`,
+    );
+    expect(renderDiscord(`- **<t:${OCT_10}:d>**`, marks)).toBe(
+      `<ul><li><strong>${stamp('10/10/2026')}</strong></li></ul>`,
+    );
+    expect(renderDiscord(`> <t:${OCT_10}:d>`, marks)).toBe(
+      `<blockquote><div class="ln">${stamp('10/10/2026')}</div></blockquote>`,
+    );
+    // Un instant négatif (avant 1970) est un instant comme un autre.
+    expect(renderDiscord('<t:-60:t>', { clock: clockAt(0, 'UTC') })).toBe(
+      '<div class="ln"><span class="ts" title="1969-12-31T23:59:00.000Z">23:59</span></div>',
+    );
+  });
+
+  it('style inconnu ou instant non numérique : laissé en texte, échappé', () => {
+    for (const text of [`<t:${OCT_10}:x>`, '<t:demain:f>', '<t::f>', `<t:${OCT_10}:ff>`, '<t:>'])
+      expect(renderDiscord(text, { clock: PARIS }), text).toBe(
+        `<div class="ln">${text.replace('<', '&lt;').replace('>', '&gt;')}</div>`,
+      );
+  });
+
+  it('rien n’est rendu dans du code, en ligne ou en bloc — même règle que les emojis', () => {
+    const code = `<t:${OCT_10}:f>`;
+    const escaped = `&lt;t:${OCT_10}:f&gt;`;
+    expect(renderDiscord(`\`${code}\` ${code}`, { clock: PARIS })).toBe(
+      `<div class="ln"><code>${escaped}</code> ${stamp(formatTimestamp(OCT_10, 'f', PARIS)!)}</div>`,
+    );
+    expect(renderDiscord(`\`\`\`\n${code}\n\`\`\``, { clock: PARIS })).toBe(
+      `<pre><code>${escaped}</code></pre>`,
+    );
+  });
+
+  it('sans horloge donnée, celle du poste : la pastille est rendue quand même', () => {
+    expect(renderDiscord(`<t:${OCT_10}:R>`)).toMatch(
+      /^<div class="ln"><span class="ts" title="2026-10-10T00:00:00\.000Z">[^<]+<\/span><\/div>$/,
+    );
+  });
+});
+
+describe('horodatages — ce qui part', () => {
+  it('`<t:…>` est envoyé tel quel : ni la conversion des emojis ni le découpage ne l’abîment', () => {
+    // `:100:` et `:1234:` sont des codes standard (💯, 🔢) : pas dans un horodatage.
+    const text = `<t:${OCT_10}:F> :scroll: <t:100:R> <t:1234> :100: :dark:`;
+    const converted = convertEmojis(text, EMOJIS);
+    expect(converted).toEqual({
+      content: `<t:${OCT_10}:F> 📜 <t:100:R> <t:1234> 💯 <:dark:${DARK}>`,
+      unknown: [],
+      pending: [],
+    });
+    // Sans liste du serveur non plus, rien n'y est pris pour un code à vérifier.
+    expect(convertEmojis(`<t:${OCT_10}:F>`, null)).toEqual({
+      content: `<t:${OCT_10}:F>`,
+      unknown: [],
+      pending: [],
+    });
+    const p = prepare(text, EMOJIS);
+    expect(blocker(p)).toBeNull();
+    expect(p.chunks).toEqual([converted.content]);
+    expect(messageBody(p.chunks[0], true).content).toBe(converted.content);
+    // L'aperçu échappe pour AFFICHER ; ce qui part ne l'est pas.
+    expect(previewHtml(p, PARIS)).toContain(stamp(formatTimestamp(OCT_10, 'F', PARIS)!));
+    expect(p.chunks[0]).not.toContain('&lt;');
+  });
+
+  it('le découpage ne coupe jamais au milieu d’un `<t:…>` : il ne coupe qu’entre deux lignes', () => {
+    const code = `<t:${OCT_10}:f>`;
+    const whole = (chunk: string): boolean =>
+      chunk.replaceAll(code, '').search(/<t:|:f>|\d{10}/) < 0;
+    // Toutes les longueurs de ligne autour de la limite : la coupe tombe tour à
+    // tour avant, dans et après l'horodatage de la ligne qui ne rentre plus.
+    for (let pad = 0; pad <= code.length + 2; pad++) {
+      const line = `- ${'x'.repeat(40 + pad)} ${code} ~ ${code}`;
+      const text = Array.from({ length: 60 }, () => line).join('\n');
+      const p = prepare(text, EMOJIS);
+      expect(p.error).toBeUndefined();
+      expect(p.chunks.length).toBeGreaterThan(1);
+      for (const c of p.chunks) {
+        expect(c.length).toBeLessThanOrEqual(MESSAGE_LIMIT);
+        expect(whole(c), `pad ${pad}`).toBe(true);
+      }
+      expect(p.chunks.join('\n')).toBe(text);
+
+      const e = prepareEmbed(Array.from({ length: 120 }, () => line).join('\n'), form(), EMOJIS);
+      expect(e.messages.length).toBeGreaterThan(1);
+      for (const m of e.messages) {
+        expect(m.description.length).toBeLessThanOrEqual(EMBED_DESCRIPTION_LIMIT);
+        expect(whole(m.description), `embed, pad ${pad}`).toBe(true);
+      }
+    }
+  });
+});
+
+describe('horodatages — en mode embed', () => {
+  const code = `<t:${OCT_10}:d>`;
+
+  it('rendus dans la description et le texte du dessus ; ailleurs en toutes lettres, et signalés', () => {
+    const p = prepareEmbed(
+      `Ends ${code}`,
+      form({
+        title: `Patch ${code}`,
+        footer: `Posted ${code}`,
+        content: `Live ${code}`,
+        buttons: [
+          { label: `Until ${code}`, url: 'https://ex.com/a' },
+          { label: 'Full Patch Note', url: 'https://ex.com/b' },
+        ],
+      }),
+      EMOJIS,
+    );
+    // Signalé, PAS bloquant : le message part, tel quel.
+    expect(embedBlocker(p)).toBeNull();
+    expect(p.invalid).toEqual([]);
+    expect(p.warnings).toHaveLength(3);
+    expect(p.warnings[0]).toMatch(/^Titre : Discord n’y rend pas les horodatages/);
+    expect(p.warnings[1]).toMatch(/^Pied : /);
+    expect(p.warnings[2]).toMatch(/^Bouton 1, libellé : /);
+    expect(embedBody(p.messages[0])).toMatchObject({
+      content: `Live ${code}`,
+      embeds: [
+        { title: `Patch ${code}`, description: `Ends ${code}`, footer: { text: `Posted ${code}` } },
+      ],
+    });
+
+    const html = renderEmbed(p.messages[0], { clock: PARIS });
+    const text = `&lt;t:${OCT_10}:d&gt;`;
+    expect(html).toContain(
+      `<div class="dc-above"><div class="ln">Live ${stamp('10/10/2026')}</div>`,
+    );
+    expect(html).toContain(
+      `<div class="dc-embed-desc"><div class="ln">Ends ${stamp('10/10/2026')}</div></div>`,
+    );
+    expect(html).toContain(`<div class="dc-embed-title">Patch ${text}</div>`);
+    expect(html).toContain(`<div class="dc-embed-footer">Posted ${text}</div>`);
+    expect(html).toContain(`>Until ${text}</a>`);
+    expect(html.split('class="ts"').length - 1).toBe(2);
+  });
+
+  it('rien à signaler quand ils sont à leur place', () => {
+    const p = prepareEmbed(`Ends ${code}`, form({ title: 'Patch', content: code }), EMOJIS);
+    expect(p.warnings).toEqual([]);
+  });
+
+  it('la session rend avec SON horloge, et porte l’avertissement jusqu’à la page', async () => {
+    const { deps } = harness(discord, { clock: () => PARIS });
+    const session = discordSession(deps);
+    await session.emojis([GUILD_ID]);
+
+    const simple = session.preview(draft(`Ends <t:${OCT_10}:R>`));
+    expect(simple.html).toContain(stamp('in 3 days'));
+    expect(simple.warnings).toEqual([]);
+    expect(simple.blocker).toBeNull();
+
+    const embed = session.preview(
+      draft(`Ends <t:${OCT_10}:R>`, { mode: 'embed', embed: form({ title: code }) }),
+    );
+    expect(embed.html).toContain(stamp('in 3 days'));
+    expect(embed.blocker).toBeNull();
+    expect(embed.warnings).toHaveLength(1);
+    expect(embed.warnings[0]).toMatch(/^Titre : /);
+  });
+});
+
+// ------------------------------------------------------------ historique -----
+
+/** Sevih, en son nom ; un autre membre ; le bot. */
+const SEVIH = { id: '800000000000000001', username: 'sevih', global_name: 'Sevih' };
+const MEMBER = { id: '800000000000000002', username: 'someone' };
+const BOT = { id: BOT_ID, username: 'Outerpedia', bot: true };
+
+/** Un message : son rang fait son id, et l'ordre des ids suit celui du temps. */
+const messageId = (n: number): string => String(700000000000000000n + BigInt(n));
+const message = (n: number, at: string, over: Partial<RawMessage> = {}): RawMessage => ({
+  id: messageId(n),
+  type: 0,
+  content: `message ${n}`,
+  timestamp: at,
+  author: MEMBER,
+  embeds: [],
+  attachments: [],
+  ...over,
+});
+
+/** Les notes officielles de l'essai — celles de l'été, pour l'appariement par la date. */
+const note = (over: Partial<NotePost>): NotePost => ({
+  id: 1,
+  date: '2026-01-01',
+  slug: 's',
+  lang: 'en',
+  type: 'notice',
+  title: 't',
+  content: '<p>c</p>',
+  ...over,
+});
+const NOTES: NotePost[] = [
+  note({ id: 11653, date: '2026-10-05', slug: '1006pne', type: 'update', title: '10/06 Patch' }),
+  note({ id: 11654, date: '2026-10-05', slug: '1006pne-kr', lang: 'kr', title: '패치' }),
+  note({ id: 11400, date: '2026-09-21', slug: '0922pne', type: 'update', title: '09/22 Patch' }),
+  note({ id: 11300, date: '2026-08-13', slug: 'after', title: 'Publiée APRÈS le résumé' }),
+  note({ id: 11210, date: '2026-08-11', slug: 'notice', title: 'Notice du même jour' }),
+  note({ id: 11200, date: '2026-08-11', slug: '0811pne', type: 'update', title: '08/11 Patch' }),
+  note({ id: 11190, date: '2026-08-10', slug: 'older', title: 'La veille' }),
+  note({ id: 11000, date: '2026-07-01', slug: 'far', type: 'update', title: 'Trop loin' }),
+];
+
+/**
+ * Un salon de 230 messages — trois pages — où cinq résumés se cachent dans le
+ * bavardage, chacun avec ce qui pourrait le faire lire de travers.
+ */
+function channelHistory(): RawMessage[] {
+  const day = (d: string, time: string): string => `${d}T${time}.000Z`;
+  const special = new Map<number, RawMessage>([
+    // (1) Sans lien, ni note à moins de quatre jours : gardé, sans note.
+    [
+      5,
+      message(5, day('2026-06-01', '10:00:00'), {
+        author: SEVIH,
+        content: 'Quick TL;DR — maintenance tonight',
+      }),
+    ],
+    // (2) `tl;dr` en minuscules, sans lien : apparié par la DATE.
+    [
+      20,
+      message(20, day('2026-08-12', '09:00:00'), {
+        author: SEVIH,
+        content: 'tl;dr of the stream: nothing new\n- see you',
+      }),
+    ],
+    // `TL;DR` ailleurs que sur la première ligne : pas un résumé.
+    [
+      30,
+      message(30, day('2026-08-20', '09:00:00'), { author: SEVIH, content: 'Hello\nTL;DR inside' }),
+    ],
+    // (3) Posté par Sevih, découpé en deux messages ; le lien SANS sa barre finale.
+    [
+      110,
+      message(110, day('2026-09-22', '08:00:00'), {
+        author: SEVIH,
+        content: `# 📜 PATCH NOTES — TL;DR\n-# [Full Patch Note](https://${OFFICIAL_HOST}/2026/09/21/0922pne)\n## ⭐ Banners\n- <:dark:${DARK}> Lambda`,
+      }),
+    ],
+    [
+      111,
+      message(111, day('2026-09-22', '08:00:01'), {
+        author: SEVIH,
+        content: '## 🐛 Bug Fixes\n- Fixed a crash',
+      }),
+    ],
+    // Un autre répond : la suite s'arrête là, même si Sevih reparle dans les cinq minutes.
+    [112, message(112, day('2026-09-22', '08:01:00'), { content: 'gg' })],
+    [113, message(113, day('2026-09-22', '08:02:00'), { author: SEVIH, content: 'thanks' })],
+    // (4) Un résumé, puis le même auteur SIX minutes plus tard : pas sa suite.
+    [
+      150,
+      message(150, day('2026-09-25', '08:00:00'), {
+        author: SEVIH,
+        content: 'Hotfix TL;DR\n- one fix',
+      }),
+    ],
+    [
+      151,
+      message(151, day('2026-09-25', '08:06:00'), { author: SEVIH, content: 'unrelated, later' }),
+    ],
+    // (5) Posté par le BOT en mode embed, sur deux messages : sans contenu, le
+    // lien de la note est un bouton. Un second résumé ouvert dans la foulée
+    // n'est pas sa suite.
+    [
+      220,
+      message(220, day('2026-10-05', '12:00:00'), {
+        author: BOT,
+        content: '',
+        embeds: [{ title: '📜 Patch notes', description: '# PATCH NOTES — TL;DR\n## ⭐ Banners' }],
+      }),
+    ],
+    [
+      221,
+      message(221, day('2026-10-05', '12:00:01'), {
+        author: BOT,
+        content: '',
+        embeds: [{ description: '## 🐛 Bug Fixes' }],
+        components: [{ components: [{ url: `https://${OFFICIAL_HOST}/2026/10/05/1006pne/` }] }],
+      }),
+    ],
+    [
+      222,
+      message(222, day('2026-10-05', '12:00:30'), {
+        author: BOT,
+        content: '',
+        embeds: [{ title: 'TL;DR — hotfix', description: 'one line' }],
+      }),
+    ],
+    // Un message système d'un membre (épingle) : vide par nature, il ne compte pas.
+    [225, message(225, day('2026-10-05', '13:00:00'), { type: 6, content: '', author: SEVIH })],
+  ]);
+  return Array.from(
+    { length: 230 },
+    (_, i) => special.get(i + 1) ?? message(i + 1, day('2026-05-01', '00:00:00')),
+  );
+}
+
+/** Un Discord qui rend l'historique d'un salon comme le vrai : du plus récent au plus ancien, par `before`. */
+function historyOf(all: readonly RawMessage[]) {
+  const newest = [...all].sort((a, b) => (BigInt(a.id) < BigInt(b.id) ? 1 : -1));
+  return (call: Call, n: number): { status: number; body?: unknown } => {
+    const m = /^\/channels\/(\d+)\/messages\?limit=(\d+)(?:&before=(\d+))?$/.exec(
+      call.url.slice(DISCORD_API.length),
+    );
+    if (!m || call.method !== 'GET') return discord(call, n);
+    const from = m[3] ? newest.findIndex((x) => x.id === m[3]) + 1 : 0;
+    return { status: 200, body: newest.slice(from, from + Number(m[2])) };
+  };
+}
+
+const NOW = Date.parse('2026-10-05T20:00:00.000Z');
+const WHERE = { guildId: GUILD_ID, channelId: CHANNEL };
+const pages = (calls: Call[]): string[] =>
+  gets(calls).filter((path) => path.startsWith('/channels/'));
+
+describe('historique — retrouver les résumés dans un salon', () => {
+  const NOTE_0922 = {
+    id: '11400',
+    date: '2026-09-21',
+    title: '09/22 Patch',
+    url: `https://${OFFICIAL_HOST}/2026/09/21/0922pne/`,
+  };
+  const NOTE_1006 = {
+    id: '11653',
+    date: '2026-10-05',
+    title: '10/06 Patch',
+    url: `https://${OFFICIAL_HOST}/2026/10/05/1006pne/`,
+  };
+
+  it('lit page par page (`before`), espacé d’une seconde, et rend les résumés appariés, du plus récent au plus ancien', async () => {
+    const { deps, calls, sleeps } = harness(historyOf(channelHistory()), {
+      clock: () => clockAt(NOW),
+    });
+    const lines: string[] = [];
+    const doing: string[] = [];
+    const out = await importHistory(deps, WHERE, NOTES, (line, d) =>
+      (d ? doing : lines).push(line),
+    );
+
+    // Trois pages : la dernière, incomplète, arrête la lecture.
+    expect(pages(calls)).toEqual([
+      `/channels/${CHANNEL}/messages?limit=100`,
+      `/channels/${CHANNEL}/messages?limit=100&before=${messageId(131)}`,
+      `/channels/${CHANNEL}/messages?limit=100&before=${messageId(31)}`,
+    ]);
+    expect(calls.every((c) => c.method === 'GET')).toBe(true);
+    expect(sleeps).toEqual([1000, 1000]);
+
+    expect(out.ok).toBe(true);
+    expect(out.history).toEqual({
+      importedAt: '2026-10-05T20:00:00.000Z',
+      guildId: GUILD_ID,
+      channelId: CHANNEL,
+      summaries: [
+        {
+          ids: [messageId(222)],
+          date: '2026-10-05T12:00:30.000Z',
+          author: 'Outerpedia',
+          text: 'TL;DR — hotfix\none line',
+          // Sans lien : la note la plus proche des quatre jours d'avant.
+          note: NOTE_1006,
+        },
+        {
+          ids: [messageId(220), messageId(221)],
+          date: '2026-10-05T12:00:00.000Z',
+          author: 'Outerpedia',
+          text: '📜 Patch notes\n# PATCH NOTES — TL;DR\n## ⭐ Banners\n## 🐛 Bug Fixes',
+          note: NOTE_1006,
+        },
+        {
+          ids: [messageId(150)],
+          date: '2026-09-25T08:00:00.000Z',
+          author: 'Sevih',
+          text: 'Hotfix TL;DR\n- one fix',
+          note: NOTE_0922,
+        },
+        {
+          ids: [messageId(110), messageId(111)],
+          date: '2026-09-22T08:00:00.000Z',
+          author: 'Sevih',
+          text: `# 📜 PATCH NOTES — TL;DR\n-# [Full Patch Note](https://${OFFICIAL_HOST}/2026/09/21/0922pne)\n## ⭐ Banners\n- <:dark:${DARK}> Lambda\n## 🐛 Bug Fixes\n- Fixed a crash`,
+          note: NOTE_0922,
+        },
+        {
+          ids: [messageId(20)],
+          date: '2026-08-12T09:00:00.000Z',
+          author: 'Sevih',
+          text: 'tl;dr of the stream: nothing new\n- see you',
+          // Deux notes du 11/08 : la note de patch passe devant ; celle du 13 est postérieure.
+          note: {
+            id: '11200',
+            date: '2026-08-11',
+            title: '08/11 Patch',
+            url: `https://${OFFICIAL_HOST}/2026/08/11/0811pne/`,
+          },
+        },
+        {
+          ids: [messageId(5)],
+          date: '2026-06-01T10:00:00.000Z',
+          author: 'Sevih',
+          text: 'Quick TL;DR — maintenance tonight',
+          note: null,
+        },
+      ],
+    });
+
+    // Le journal, en flux : les pages lues, les résumés trouvés.
+    expect(doing).toEqual(['lecture de la page 1', 'lecture de la page 2', 'lecture de la page 3']);
+    expect(lines).toEqual(out.log);
+    expect(out.log).toEqual([
+      'page 1 : 100 messages (100 en tout), 3 résumé(s) repéré(s)',
+      'page 2 : 100 messages (200 en tout), 4 résumé(s) repéré(s)',
+      'page 3 : 30 messages (230 en tout), 6 résumé(s) repéré(s)',
+      '230 messages lus : 6 résumés, dont 5 appariés à leur note.',
+    ]);
+  });
+
+  it('`groupSummaries` : l’ordre d’arrivée ne compte pas, un auteur sans id ne recolle rien', () => {
+    const shuffled = [...channelHistory()].sort((a, b) =>
+      a.id.slice(-1).localeCompare(b.id.slice(-1)),
+    );
+    expect(groupSummaries(shuffled).map((s) => s.ids)).toEqual([
+      [messageId(222)],
+      [messageId(220), messageId(221)],
+      [messageId(150)],
+      [messageId(110), messageId(111)],
+      [messageId(20)],
+      [messageId(5)],
+    ]);
+    // Les adresses d'un résumé : son texte, et les boutons de ses messages.
+    expect(groupSummaries(shuffled)[1].links).toEqual([
+      `https://${OFFICIAL_HOST}/2026/10/05/1006pne/`,
+    ]);
+    const anonymous = [
+      message(1, '2026-09-22T08:00:00.000Z', { author: {}, content: 'TL;DR' }),
+      message(2, '2026-09-22T08:00:01.000Z', { author: {}, content: 'suite ?' }),
+    ];
+    expect(groupSummaries(anonymous).map((s) => s.text)).toEqual(['TL;DR']);
+    // Sans `timestamp`, l'instant est celui que l'id encode.
+    expect(groupSummaries([{ id: '1297000000000000000', content: 'TL;DR' }])[0].date).toBe(
+      new Date(Number((1297000000000000000n >> 22n) + 1420070400000n)).toISOString(),
+    );
+  });
+
+  it('`notePairer` : le lien d’abord, barre finale ignorée ; sinon la date, quatre jours au plus', () => {
+    const pair = notePairer(NOTES);
+    const at = (date: string, links: string[] = []) =>
+      pair({ date: `${date}T12:00:00.000Z`, links });
+    // Le lien l'emporte sur la date, et sur une autre adresse sans rapport.
+    expect(at('2026-10-05', ['https://outerpedia.com/', NOTE_0922.url])).toEqual(NOTE_0922);
+    expect(at('2026-10-05', [NOTE_0922.url.slice(0, -1)])).toEqual(NOTE_0922);
+    // Une note dans une autre langue ne s'apparie pas, même par son lien.
+    expect(at('2026-01-01', [`https://${OFFICIAL_HOST}/2026/10/05/1006pne-kr/`])).toBeNull();
+    // Par la date : le jour même, puis jusqu'à quatre jours après la note.
+    expect(at('2026-09-21')).toEqual(NOTE_0922);
+    expect(at('2026-09-25')).toEqual(NOTE_0922);
+    expect(at('2026-09-26')).toBeNull();
+    // Jamais une note publiée APRÈS le résumé.
+    expect(at('2026-09-20')).toBeNull();
+    expect(at('2026-08-10')?.id).toBe('11190');
+  });
+
+  it('plafonné à 1 000 messages, les plus récents', async () => {
+    const all = Array.from({ length: 1500 }, (_, i) => message(i + 1, '2026-05-01T00:00:00.000Z'));
+    all[1499] = message(1500, '2026-10-05T12:00:00.000Z', {
+      author: SEVIH,
+      content: 'TL;DR récent',
+    });
+    // Hors de portée : il faudrait une onzième page.
+    all[10] = message(11, '2026-01-05T12:00:00.000Z', { author: SEVIH, content: 'TL;DR ancien' });
+    const { deps, calls } = harness(historyOf(all));
+    const out = await importHistory(deps, WHERE, NOTES);
+
+    expect(HISTORY_MAX_MESSAGES).toBe(1000);
+    expect(pages(calls)).toHaveLength(10);
+    expect(out.ok).toBe(true);
+    expect(out.history?.summaries.map((s) => s.text)).toEqual(['TL;DR récent']);
+    expect(out.log.at(-1)).toBe(
+      '1000 messages lus (le plafond d’un import : les 1000 plus récents) : 1 résumé, dont 1 apparié à sa note.',
+    );
+  });
+
+  it('un 429 est attendu puis la page relue, comme à l’envoi', async () => {
+    const reply = historyOf(channelHistory());
+    const { deps, calls, sleeps } = harness((call, n) =>
+      n === 2 ? { status: 429, body: { retry_after: 0.5 } } : reply(call, n),
+    );
+    const out = await importHistory(deps, WHERE, NOTES);
+    expect(out.ok).toBe(true);
+    expect(out.history?.summaries).toHaveLength(6);
+    // Quatre appels pour trois pages ; l'attente du 429 entre les deux espacements.
+    expect(pages(calls)).toHaveLength(4);
+    expect(sleeps).toEqual([1000, 500, 1000]);
+  });
+});
+
+describe('historique — les silences de Discord', () => {
+  it('contenus VIDES (intent « Message Content » absent) : l’import s’arrête et dit quoi activer', async () => {
+    // Ce que Discord rend sans l'intent : les messages du bot entiers, ceux des
+    // membres vidés de leur contenu — sans la moindre erreur.
+    const blind = channelHistory().map((m) =>
+      m.author?.bot ? m : { ...m, content: '', embeds: [], attachments: [] },
+    );
+    const { deps, calls } = harness(historyOf(blind));
+    const out = await importHistory(deps, WHERE, NOTES);
+
+    expect(out.ok).toBe(false);
+    expect(out.history).toBeNull();
+    // Arrêté dès la première page : les neuf autres ne sont pas demandées.
+    expect(pages(calls)).toHaveLength(1);
+    expect(out.log[1]).toBe(
+      'Import arrêté : 96 des 96 messages de membres lus reviennent VIDES (ni contenu, ni embed, ni pièce jointe).',
+    );
+    expect(out.log[2]).toContain('« Message Content »');
+    expect(out.log[2]).toContain(
+      'l’application → Bot → Privileged Gateway Intents → « Message Content Intent »',
+    );
+    expect(out.log.at(-1)).toBe('Rien n’a été écrit.');
+  });
+
+  it('la moitié tout juste, une image seule, un message système : ce n’est pas ce silence-là', async () => {
+    const half = [
+      message(1, '2026-09-01T00:00:00.000Z', { content: '' }),
+      message(2, '2026-09-01T00:00:01.000Z', { content: '' }),
+      message(3, '2026-09-01T00:00:02.000Z', { content: '', attachments: [{ id: '1' }] }),
+      message(4, '2026-09-01T00:00:03.000Z', { content: '', sticker_items: [{ id: '1' }] }),
+      message(5, '2026-09-01T00:00:04.000Z', { content: '', type: 7 }),
+      message(6, '2026-09-01T00:00:05.000Z', { author: BOT, content: '' }),
+      message(7, '2026-09-22T08:00:00.000Z', { author: SEVIH, content: 'TL;DR' }),
+    ];
+    const out = await importHistory(harness(historyOf(half)).deps, WHERE, NOTES);
+    expect(out.ok).toBe(true);
+    expect(out.history?.summaries).toHaveLength(1);
+
+    // Un vide de plus : trois messages de membres sur six, la moitié tout juste — on continue.
+    const exactly = [...half, message(8, '2026-09-23T00:00:00.000Z', { content: ' ' })];
+    expect((await importHistory(harness(historyOf(exactly)).deps, WHERE, NOTES)).ok).toBe(true);
+    // Encore un : quatre sur sept, la majorité y est.
+    const most = [...exactly, message(9, '2026-09-24T00:00:00.000Z', { content: '' })];
+    const stopped = await importHistory(harness(historyOf(most)).deps, WHERE, NOTES);
+    expect(stopped.ok).toBe(false);
+    expect(stopped.log[1]).toMatch(/^Import arrêté : 4 des 7 messages de membres lus/);
+  });
+
+  it.each([50001, 50013])(
+    'refus d’accès (403, code %i) : les droits manquants sont nommés',
+    async (code) => {
+      const { deps, calls } = harness((call, n) =>
+        call.url.includes('/messages')
+          ? { status: 403, body: { message: 'Missing Access', code } }
+          : discord(call, n),
+      );
+      const out = await importHistory(deps, WHERE, NOTES);
+      expect(out.ok).toBe(false);
+      expect(out.history).toBeNull();
+      expect(pages(calls)).toHaveLength(1);
+      expect(out.log[0]).toBe(
+        `ÉCHEC à la page 1 — Discord a répondu 403 : Missing Access (code ${code}) — il manque au bot, dans ce salon, « Voir le salon » ou « Voir les anciens messages »`,
+      );
+    },
+  );
+
+  it('liste vide : le salon l’est, ou « Voir les anciens messages » manque — dit, pas tu', async () => {
+    const out = await importHistory(harness(historyOf([])).deps, WHERE, NOTES);
+    expect(out.ok).toBe(false);
+    expect(out.log[1]).toMatch(/^Aucun message lu : le salon est vide, ou il manque au bot/);
+    expect(out.log[1]).toContain('« Voir les anciens messages »');
+  });
+
+  it('des messages mais aucun résumé : un import réussi, et vide', async () => {
+    const quiet = [message(1, '2026-09-01T00:00:00.000Z'), message(2, '2026-09-01T00:00:01.000Z')];
+    const out = await importHistory(harness(historyOf(quiet)).deps, WHERE, NOTES);
+    expect(out).toMatchObject({ ok: true, history: { summaries: [] } });
+    expect(out.log.at(-1)).toBe('2 messages lus : 0 résumé, dont 0 apparié à sa note.');
+  });
+});
+
+describe('historique — la session', () => {
+  it('sans jeton : « jeton absent », et RIEN ne part sur le réseau', async () => {
+    const { deps, calls } = harness(historyOf(channelHistory()), { token: undefined });
+    const refusal = { ok: false, log: [TOKEN_HINT], history: null };
+    expect(await importHistory(deps, WHERE, NOTES)).toEqual(refusal);
+    expect(await discordSession(deps).history(WHERE, NOTES)).toEqual(refusal);
+    expect(calls).toEqual([]);
+  });
+
+  it('ne lit que le salon d’un serveur du bot — et ne poste rien', async () => {
+    const { deps, calls } = harness(historyOf(channelHistory()));
+    const session = discordSession(deps);
+
+    const stranger = await session.history({ ...WHERE, guildId: '100000000000000099' }, NOTES);
+    expect(stranger).toMatchObject({ ok: false, history: null });
+    expect(stranger.log[0]).toMatch(/^Serveur inconnu du bot/);
+    // `HOME_CHANNEL` existe, mais sur l'autre serveur.
+    const foreign = await session.history({ ...WHERE, channelId: HOME_CHANNEL }, NOTES);
+    expect(foreign.log).toEqual([
+      'Ce salon n’appartient pas au serveur choisi : choisis-en un de la liste.',
+    ]);
+    expect(pages(calls)).toEqual([]);
+    expect(
+      (await importHistory(deps, { ...WHERE, channelId: `${CHANNEL}/../x` }, NOTES)).log,
+    ).toEqual(['Identifiant de serveur ou de salon invalide.']);
+    expect(pages(calls)).toEqual([]);
+
+    const out = await session.history(WHERE, NOTES);
+    expect(out.ok).toBe(true);
+    expect(out.history?.summaries).toHaveLength(6);
+    expect(pages(calls)).toHaveLength(3);
+    expect(posts(calls)).toEqual([]);
+  });
+
+  it('le jeton ne va ni au journal ni à l’historique, même si Discord ou un message le renvoient', async () => {
+    const leaky = harness(
+      historyOf([
+        message(1, '2026-09-22T08:00:00.000Z', { author: SEVIH, content: `TL;DR\nfuite ${TOKEN}` }),
+      ]),
+    );
+    const seen: string[] = [];
+    const kept = await importHistory(leaky.deps, WHERE, NOTES, (line) => void seen.push(line));
+    expect(kept.history?.summaries[0].text).toBe('TL;DR\nfuite «jeton»');
+
+    const refused = harness(() => ({
+      status: 403,
+      body: { message: `Missing Access for ${TOKEN}`, code: 50001 },
+    }));
+    const failed = await importHistory(refused.deps, WHERE, NOTES, (line) => void seen.push(line));
+    expect(failed.log[0]).toContain('Missing Access for «jeton»');
+
+    expect(JSON.stringify([kept, failed, seen])).not.toContain(TOKEN);
+    for (const c of [...leaky.calls, ...refused.calls]) {
+      expect(c.headers.Authorization).toBe(`Bot ${TOKEN}`);
+      expect(c.url).not.toContain(TOKEN);
+    }
+  });
+});
+
+describe('historique — le fichier', () => {
+  const summary = (first: number, date: string, over: Partial<PastSummary> = {}): PastSummary => ({
+    ids: [messageId(first)],
+    date,
+    author: 'Sevih',
+    text: `TL;DR ${first}`,
+    note: null,
+    ...over,
+  });
+  const file = (summaries: PastSummary[], over: Partial<HistoryFile> = {}): HistoryFile => ({
+    importedAt: '2026-10-01T00:00:00.000Z',
+    guildId: GUILD_ID,
+    channelId: CHANNEL,
+    summaries,
+    ...over,
+  });
+  const NOTE = { id: '11400', date: '2026-09-21', title: '09/22 Patch', url: 'https://ex.com/n/' };
+
+  it('un nouvel import remplace les résumés du même premier message, et garde tous les autres', () => {
+    const before = file([
+      summary(900, '2026-09-30T08:00:00.000Z', { text: 'autre salon' }),
+      summary(110, '2026-09-22T08:00:00.000Z', { text: 'avant correction' }),
+      summary(20, '2026-08-12T09:00:00.000Z', { text: 'trop ancien pour être relu' }),
+    ]);
+    const imported = file(
+      [
+        summary(220, '2026-10-05T12:00:00.000Z'),
+        summary(110, '2026-09-22T08:00:00.000Z', { text: 'corrigé', note: NOTE }),
+      ],
+      { importedAt: '2026-10-05T20:00:00.000Z', guildId: HOME_GUILD, channelId: HOME_CHANNEL },
+    );
+    const merged = mergeHistory(before, imported);
+    // L'en-tête est celui du dernier import ; les résumés, du plus récent au plus ancien.
+    expect(merged).toMatchObject({
+      importedAt: '2026-10-05T20:00:00.000Z',
+      guildId: HOME_GUILD,
+      channelId: HOME_CHANNEL,
+    });
+    expect(merged.summaries.map((s) => [s.ids[0], s.text])).toEqual([
+      [messageId(220), 'TL;DR 220'],
+      [messageId(900), 'autre salon'],
+      [messageId(110), 'corrigé'],
+      [messageId(20), 'trop ancien pour être relu'],
+    ]);
+    // Sans fichier : l'import tel quel.
+    expect(mergeHistory(null, imported)).toEqual(imported);
+    // Refait à l'identique, il ne change rien.
+    expect(mergeHistory(merged, imported)).toEqual(merged);
+  });
+
+  it('`parseHistory` : relit ce qui a été écrit, garde ce qui est lisible, refuse ce qui n’en est pas un', () => {
+    const written = file([
+      summary(220, '2026-10-05T12:00:00.000Z', { note: NOTE }),
+      summary(110, '2026-09-22T08:00:00.000Z'),
+    ]);
+    expect(parseHistory(JSON.parse(JSON.stringify(written)))).toEqual(written);
+    // Ni jeton ni rien d'autre : le fichier ne porte que ces champs.
+    expect(Object.keys(written).sort()).toEqual([
+      'channelId',
+      'guildId',
+      'importedAt',
+      'summaries',
+    ]);
+
+    for (const junk of [null, 'x', [], {}, { summaries: 'x' }])
+      expect(parseHistory(junk)).toBeNull();
+    const damaged = parseHistory({
+      importedAt: 3,
+      summaries: [
+        written.summaries[1],
+        { ids: [], date: 'x', text: 'sans message' },
+        { ids: ['pas-un-id'], date: 'x', text: 'x' },
+        { ids: [messageId(1)], date: '2026-01-01T00:00:00.000Z', text: '' },
+        'x',
+        null,
+      ],
+    });
+    expect(damaged).toEqual({
+      importedAt: '',
+      guildId: '',
+      channelId: '',
+      summaries: [written.summaries[1]],
+    });
+  });
+
+  it('l’état pour l’onglet : les comptes, le dernier, une ligne par résumé', () => {
+    const state = historyState(
+      file([
+        summary(220, '2026-10-05T12:00:00.000Z', {
+          text: `# 📜 PATCH NOTES — TL;DR\n${'x'.repeat(500)}`,
+          note: NOTE,
+        }),
+        summary(110, '2026-09-22T08:00:00.000Z'),
+      ]),
+    );
+    expect(state).toEqual({
+      count: 2,
+      paired: 1,
+      last: '2026-10-05T12:00:00.000Z',
+      importedAt: '2026-10-01T00:00:00.000Z',
+      items: [
+        {
+          date: '2026-10-05T12:00:00.000Z',
+          first: '# 📜 PATCH NOTES — TL;DR',
+          note: '09/22 Patch',
+        },
+        { date: '2026-09-22T08:00:00.000Z', first: 'TL;DR 110', note: null },
+      ],
+    });
+    expect(historyState(null)).toEqual({
+      count: 0,
+      paired: 0,
+      last: null,
+      importedAt: null,
+      items: [],
+    });
+  });
+});
+
+// ------------------------------------------------- la demande à copier -------
+
+describe('texte d’une note officielle', () => {
+  it('un titre par ligne, les puces en `- `, les rangées jointes par ` | `, les images retirées', () => {
+    const html = [
+      '<figure class="size-full"><img width="658" height="200" src="/images/patch-notes/a.webp" alt="bannière"></figure>',
+      '<p>Hello, Masters.<br>This is GM Ame.</p>',
+      '',
+      '',
+      '<hr>',
+      '<h2 style="color:#244a73;"><strong>1. New&nbsp;Hero &amp; Banner</strong></h2>',
+      '<p>* Pickup: <strong>10/06</strong> ~ <s>10/20</s> 10/27</p>',
+      '<ul><li>First<ul><li>Nested &lt;one&gt;</li><li>Nested two</li></ul></li><li><p>Second</p></li></ul>',
+      '<ol><li>One</li><li>Two</li></ol>',
+      '<figure><table style="width:100%"><thead><tr><td><strong>Skill</strong></td><th>Effect</th></tr></thead>',
+      '<tbody><tr><td rowspan="2">Burst</td><td>Line one<br>Line two</td></tr>',
+      '<tr><td><p>DMG &quot;up&quot;</p><ul><li>a</li><li>b</li></ul></td></tr>',
+      '<tr><td>&nbsp;</td><td></td></tr></tbody></table></figure>',
+      '<!-- un commentaire -->',
+      '<div data-tpl="<video src=x> Sorry </video>" class="wp">After the table</div>',
+      '<p><a href="https://ex.com/v.mp4" target="_blank" class="pn-video-link">▶ v.mp4</a></p>',
+      '<p>See <a href="https://ex.com/">the notice</a>. It&#39;s &#x2714; 5 &lt; 6</p>',
+      '<div><iframe src="https://www.youtube.com/embed/x" title="Trailer"></iframe></div>',
+      '<h1>Thank you.</h1>',
+    ].join('\n');
+    expect(noteText(html).split('\n')).toEqual([
+      'Hello, Masters.',
+      'This is GM Ame.',
+      '',
+      '## 1. New Hero & Banner',
+      '* Pickup: 10/06 ~ ~~10/20~~ 10/27',
+      '- First',
+      '  - Nested <one>',
+      '  - Nested two',
+      '- Second',
+      '1. One',
+      '2. Two',
+      '',
+      'Skill | Effect',
+      'Burst | Line one / Line two',
+      'DMG "up" / - a / - b',
+      '',
+      'After the table',
+      "See the notice. It's ✔ 5 < 6",
+      '',
+      '# Thank you.',
+    ]);
+    expect(noteText('')).toBe('');
+    expect(noteText('<p> </p><figure><img src="x"></figure>')).toBe('');
+  });
+
+  const posts = (
+    JSON.parse(
+      readFileSync(resolve(import.meta.dirname, '../../data/patch-notes/posts.json'), 'utf8'),
+    ) as { posts: NotePost[] }
+  ).posts.filter((p) => p.lang === 'en');
+
+  it('une note réelle de `posts.json` : la note de patch du 06/10', () => {
+    const post = posts.find((p) => String(p.id) === '11653');
+    expect(post, 'la note 11653 n’est plus dans posts.json').toBeDefined();
+    const text = noteText(post!.content);
+    const lines = text.split('\n');
+
+    expect(lines.slice(0, 2)).toEqual(['Hello, Masters.', 'This is GM Ame.']);
+    expect(lines).toContain('## 1. New Demiurge Hero [Demiurge Lambda] Arrives');
+    expect(lines).toContain('Skill Name | Cooldown | Skill Effect');
+    expect(lines).toContain('* Name: Demiurge Lambda');
+    expect(lines.at(-1)).toBe('Thank you.');
+    // Chaque titre de la note est sur sa ligne, à lui seul.
+    const headings = [...post!.content.matchAll(/<h2\b/g)].length;
+    expect(headings).toBeGreaterThan(5);
+    expect(lines.filter((l) => l.startsWith('## '))).toHaveLength(headings);
+    // Le balisage est parti — il pesait cinq fois le texte.
+    expect(text.length).toBeLessThan(post!.content.length / 4);
+    expect(text.length).toBeGreaterThan(20_000);
+    // Rien de la note de travail (titre, date, adresse) n'y manque pour la demande.
+    expect(requestNote(post!)).toEqual({
+      title: '10/06(Tue) Patch Note',
+      date: '2026-10-05',
+      url: `https://${OFFICIAL_HOST}/2026/10/05/1006pne/`,
+      text,
+    });
+  });
+
+  it('toutes les notes en anglais : ni balise, ni entité, ni lignes vides de suite', () => {
+    expect(posts.length).toBeGreaterThan(300);
+    for (const post of posts) {
+      const text = noteText(post.content);
+      const where = `note ${post.id}`;
+      expect(text, where).not.toMatch(
+        /<\/|<(?:p|br|td|tr|th|li|ul|ol|div|img|span|strong|figure|table|a|h[1-6])[\s>]/,
+      );
+      expect(text, where).not.toMatch(/style="|class="|&nbsp;|&amp;|&quot;/);
+      expect(text, where).not.toMatch(/\n\n\n|^\n|\n$/);
+    }
+  });
+});
+
+describe('la demande à coller dans claude.ai', () => {
+  const posted = (
+    first: number,
+    date: string,
+    noteId: string | null,
+    text: string,
+  ): PastSummary => ({
+    ids: [messageId(first)],
+    date,
+    author: 'Sevih',
+    text,
+    note: noteId ? { id: noteId, date: '2026-01-01', title: 't', url: 'https://ex.com/' } : null,
+  });
+  const HISTORY: HistoryFile = {
+    importedAt: '2026-10-05T20:00:00.000Z',
+    guildId: GUILD_ID,
+    channelId: CHANNEL,
+    summaries: [
+      posted(220, '2026-10-05T12:00:00.000Z', '11653', '# 📜 TL;DR du 06/10'),
+      posted(150, '2026-09-25T08:00:00.000Z', null, 'Hotfix TL;DR sans note'),
+      posted(110, '2026-09-22T08:00:00.000Z', '11400', `# 📜 TL;DR du 22/09 <:dark:${DARK}>`),
+      posted(90, '2026-09-01T08:00:00.000Z', '99999', 'TL;DR d’une note disparue'),
+      posted(20, '2026-08-12T09:00:00.000Z', '11200', 'tl;dr du 11/08'),
+      posted(5, '2026-07-02T09:00:00.000Z', '11000', 'tl;dr de juillet'),
+    ],
+  };
+
+  it('un résumé posté redevient ce qu’on taperait : emojis en `:nom:`, dates en `… UTC`', () => {
+    expect(
+      summaryDraft(
+        `# 📜 PATCH NOTES — TL;DR\n- <:dark:${DARK}> <a:party:${PARTY}> ⚔️ ⚖️ until <t:${OCT_10}:F> (<t:${OCT_10}>)`,
+      ),
+    ).toBe(
+      '# :scroll: PATCH NOTES — TL;DR\n- :dark: :party: :crossed_swords: :scales: until 2026-10-10 00:00 UTC (2026-10-10 00:00 UTC)',
+    );
+    // Aller et retour : ce que le modèle rendra sous cette forme se reconvertit.
+    const draft = summaryDraft(convertEmojis(SAMPLE, EMOJIS).content);
+    expect(draft).toBe(SAMPLE);
+  });
+
+  it('les exemples : les résumés APPARIÉS les plus récents, sauf celui de la note à résumer', () => {
+    const titles = (count: number, skip?: string): string[] =>
+      requestExamples(HISTORY, NOTES, count, skip).map((e) => e.note.title);
+    expect(titles(3)).toEqual(['10/06 Patch', '09/22 Patch', '08/11 Patch']);
+    expect(titles(6)).toEqual(['10/06 Patch', '09/22 Patch', '08/11 Patch', 'Trop loin']);
+    expect(titles(0)).toEqual([]);
+    // Résumer la note du 06/10 : son propre résumé serait la réponse, pas un exemple.
+    expect(titles(2, '11653')).toEqual(['09/22 Patch', '08/11 Patch']);
+    expect(requestExamples(null, NOTES, 3)).toEqual([]);
+
+    const [first, second] = requestExamples(HISTORY, NOTES, 2);
+    expect(first).toEqual({
+      note: {
+        title: '10/06 Patch',
+        date: '2026-10-05',
+        url: `https://${OFFICIAL_HOST}/2026/10/05/1006pne/`,
+        text: 'c',
+      },
+      summary: '# :scroll: TL;DR du 06/10',
+    });
+    expect(second.summary).toBe('# :scroll: TL;DR du 22/09 :dark:');
+  });
+
+  const example = (n: number, size = 10): RequestExample => ({
+    note: {
+      title: `Note ${n}`,
+      date: '2026-01-01',
+      url: `https://ex.com/${n}/`,
+      text: `note ${n} ${'n'.repeat(size)}`,
+    },
+    summary: `résumé ${n}`,
+  });
+  const NOTE = {
+    title: 'À résumer',
+    date: '2026-10-05',
+    url: 'https://ex.com/now/',
+    text: 'le texte',
+  };
+  const TEMPLATE = patchTemplate('https://ex.com/now/');
+
+  it('dans l’ordre : consignes, exemples (note puis résumé posté), note choisie, gabarit', () => {
+    const r = draftRequest({
+      instructions: '\nLes consignes.\n\n',
+      examples: [example(3), example(2), example(1)],
+      note: NOTE,
+      template: TEMPLATE,
+    });
+    expect(r).toMatchObject({ examples: 3, dropped: 0, length: r.text.length });
+    // Les exemples arrivent du plus récent au plus ancien ; ils se lisent dans l'ordre du temps.
+    const block = (n: number): string =>
+      [
+        '<example>',
+        '<official_note>',
+        `Title: Note ${n}`,
+        'Date: 2026-01-01',
+        `URL: https://ex.com/${n}/`,
+        '',
+        `note ${n} nnnnnnnnnn`,
+        '</official_note>',
+        '<posted_summary>',
+        `résumé ${n}`,
+        '</posted_summary>',
+        '</example>',
+      ].join('\n');
+    expect(r.text).toBe(
+      [
+        'Les consignes.',
+        '',
+        '<examples>',
+        block(1),
+        block(2),
+        block(3),
+        '</examples>',
+        '',
+        '<note_to_summarize>',
+        'Title: À résumer',
+        'Date: 2026-10-05',
+        'URL: https://ex.com/now/',
+        '',
+        'le texte',
+        '</note_to_summarize>',
+        '',
+        '<template>',
+        TEMPLATE,
+        '</template>',
+      ].join('\n'),
+    );
+  });
+
+  it('sans historique : la demande part sans exemples', () => {
+    const r = draftRequest({
+      instructions: 'Les consignes.',
+      examples: [],
+      note: NOTE,
+      template: TEMPLATE,
+    });
+    expect(r).toMatchObject({ examples: 0, dropped: 0 });
+    expect(r.text).not.toContain('<examples>');
+    expect(r.text.startsWith('Les consignes.\n\n<note_to_summarize>\n')).toBe(true);
+    expect(r.text.endsWith(`<template>\n${TEMPLATE}\n</template>`)).toBe(true);
+  });
+
+  it('au-delà du budget, les exemples les plus anciens sautent d’abord', () => {
+    expect(REQUEST_BUDGET).toBe(400_000);
+    const examples = [
+      example(4, 150_000),
+      example(3, 150_000),
+      example(2, 150_000),
+      example(1, 150_000),
+    ];
+    const input = { instructions: 'Les consignes.', examples, note: NOTE, template: TEMPLATE };
+
+    // Quatre exemples de 150 000 caractères : deux tiennent, les deux plus récents.
+    const r = draftRequest(input);
+    expect(r).toMatchObject({ examples: 2, dropped: 2 });
+    expect(r.length).toBeLessThanOrEqual(REQUEST_BUDGET);
+    expect(r.text).toContain('Title: Note 4');
+    expect(r.text).toContain('Title: Note 3');
+    expect(r.text).not.toContain('Title: Note 2');
+    expect(r.text).not.toContain('Title: Note 1');
+
+    // Tout juste dans le budget : rien ne saute ; un caractère de moins, le plus ancien saute.
+    const two = draftRequest({ ...input, examples: examples.slice(0, 2) });
+    expect(
+      draftRequest({ ...input, examples: examples.slice(0, 2), budget: two.length }),
+    ).toMatchObject({ examples: 2, dropped: 0 });
+    const tight = draftRequest({
+      ...input,
+      examples: examples.slice(0, 2),
+      budget: two.length - 1,
+    });
+    expect(tight).toMatchObject({ examples: 1, dropped: 1 });
+    expect(tight.text).toContain('Title: Note 4');
+
+    // La note à résumer ne se raccourcit pas : sans exemple, la demande part quand même.
+    const huge = draftRequest({ ...input, budget: 10 });
+    expect(huge).toMatchObject({ examples: 0, dropped: 4 });
+    expect(huge.text).toContain('<note_to_summarize>');
+    expect(huge.length).toBeGreaterThan(10);
+  });
+
+  it('les consignes livrées demandent les dates sous la forme que « convertir les dates » reconnaît', () => {
+    // Seul point du fichier lié au code : le reste se retouche librement.
+    const prompt = readFileSync(resolve(import.meta.dirname, 'discord-prompt.md'), 'utf8');
+    expect(prompt).toContain('YYYY-MM-DD HH:MM UTC');
   });
 });

@@ -26,12 +26,13 @@
 ## 🧰 Outil quick
 
 - [ ] **Onglet « Discord » : dates Discord, anciens résumés, « copier la
-      demande »** (demandes de Sevih du 05/10 au soir) : un bouton « date »
-      qui pose un `<t:…>` depuis une date UTC, l'import de ses anciens TL;DR
-      appariés à leur note, et un bouton qui prépare la demande à coller dans
-      claude.ai pour un premier jet (pas d'API). Lot B24 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus). Après le
-      premier import : Fable lit `.quick/discord-history.json` et affine
+      demande »** — code FAIT (lot B24, cf. [DONE.md](./DONE.md)). Reste :
+      (a) Sevih active « Message Content Intent » dans le portail développeur
+      Discord (l'application → Bot → Privileged Gateway Intents), puis joue
+      dans un vrai navigateur ce qu'aucun agent n'a pu jouer : l'import réel
+      de ses anciens résumés, le presse-papiers de « copier la demande », le
+      formulaire « date » ; (b) après le premier import, Fable lit
+      `.quick/discord-history.json` et affine
       `scripts/quick/discord-prompt.md` avec ce que Sevih garde et écarte.
 
 ## 🖥️ Deux PC, un serveur de dev
