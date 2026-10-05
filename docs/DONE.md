@@ -7,6 +7,18 @@
 
 ## 2026-10-05
 
+- **Bascule entre deux PC : un POST depuis le PC qui regarde rendait un 502
+  vide** (Fable, correctif du montage du jour ; `645e87d6`, poussé à part).
+  Vu par Sevih au premier envoi Discord depuis le fixe : « réponse
+  interrompue ». Sur le PC qui regarde, la première requête après 2 s de
+  calme retente l'amont local, échoue, et Caddy la rejoue vers l'autre poste
+  — mais le corps d'un POST est fermé dès le premier essai, le second part
+  vide et échoue. Les GET passaient, d'où un site qui « marche » et des
+  enregistrements (quick, admin) perdus. Reproduit sur un banc à part (POST
+  après pause : 502 sans tampon, 200 avec, y compris 2,7 Mo), corrigé par
+  `request_buffers 64MB` dans `Caddyfile.dev`. Mon essai du matin n'avait
+  joué que des GET et un POST sans pause : un montage à rejeu se teste avec
+  une écriture APRÈS le délai de remise à l'essai.
 - **Deux PC, un serveur de dev : `outerpedia.local` et
   `quick.outerpedia.local` servis par le poste qui lance** (Fable, demande de
   Sevih du 05/10 ; commit local, à ne pas pousser avant le patch). Jusqu'ici
