@@ -139,43 +139,49 @@ describe('difficultyLabel — le texte du jeu, sinon la locale, jamais une clé'
  *  - un stage n'est pas un grade : lui donner un `name` le ferait passer pour
  *    tel, et le badge (`CM_Event_Rank_<name>`) serait une image morte.
  */
-describe('adventure license — des stages numérotés, dédupliqués, croissants', () => {
-  const AL = Object.values(encountersData as Record<string, DungeonRef>).filter(
-    (d) => d.mode === 'adventure_mission' || d.mode === 'adventure_challenge',
-  );
+const AL = Object.values(encountersData as Record<string, DungeonRef>).filter(
+  (d) => d.mode === 'adventure_mission' || d.mode === 'adventure_challenge',
+);
 
-  it('tout palier porte un STAGE et aucun nom de grade (pas de badge à inventer)', () => {
-    expect(AL).toHaveLength(29);
-    for (const d of AL) {
-      expect(d.ranks?.length, d.name.en).toBeGreaterThan(0);
-      for (const r of d.ranks!) {
-        expect(r.stage, d.name.en).toBeGreaterThan(0);
-        expect(r.name, d.name.en).toBeUndefined();
+// Le mode ferme au patch du 06/10/2026. Tant que ses donjons restent dans les
+// tables, ces invariants tiennent ; s'ils en sortent, il n'y a plus rien à
+// contrôler ici — et ce n'est pas à ce test de bloquer le patch (ce que
+// deviennent les 26 guides masqués se décide alors, cf. docs/patch-2026-10-06.md).
+describe.skipIf(AL.length === 0)(
+  'adventure license — des stages numérotés, dédupliqués, croissants',
+  () => {
+    it('tout palier porte un STAGE et aucun nom de grade (pas de badge à inventer)', () => {
+      for (const d of AL) {
+        expect(d.ranks?.length, d.name.en).toBeGreaterThan(0);
+        for (const r of d.ranks!) {
+          expect(r.stage, d.name.en).toBeGreaterThan(0);
+          expect(r.name, d.name.en).toBeUndefined();
+        }
       }
-    }
-  });
+    });
 
-  it('les stages sont uniques et croissants, et ne commencent pas tous à 1', () => {
-    for (const d of AL) {
-      const stages = d.ranks!.map((r) => r.stage!);
-      expect(new Set(stages).size, `${d.name.en} : doublons`).toBe(stages.length);
-      expect(stages, `${d.name.en} : ordre`).toEqual([...stages].sort((a, b) => a - b));
-    }
-    // Anubis (70600018) n'existe qu'en fin d'échelle : 8, 9, 10.
-    const anubis = (encountersData as Record<string, DungeonRef>)['70600018'];
-    expect(anubis.ranks!.map((r) => r.stage)).toEqual([8, 9, 10]);
-    // Masterless (70600000), lui, est là dès le premier stage.
-    const masterless = (encountersData as Record<string, DungeonRef>)['70600000'];
-    expect(masterless.ranks!.map((r) => r.stage)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  });
+    it('les stages sont uniques et croissants, et ne commencent pas tous à 1', () => {
+      for (const d of AL) {
+        const stages = d.ranks!.map((r) => r.stage!);
+        expect(new Set(stages).size, `${d.name.en} : doublons`).toBe(stages.length);
+        expect(stages, `${d.name.en} : ordre`).toEqual([...stages].sort((a, b) => a - b));
+      }
+      // Anubis (70600018) n'existe qu'en fin d'échelle : 8, 9, 10.
+      const anubis = (encountersData as Record<string, DungeonRef>)['70600018'];
+      expect(anubis.ranks!.map((r) => r.stage)).toEqual([8, 9, 10]);
+      // Masterless (70600000), lui, est là dès le premier stage.
+      const masterless = (encountersData as Record<string, DungeonRef>)['70600000'];
+      expect(masterless.ranks!.map((r) => r.stage)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
 
-  it('le stage fixe le niveau du boss — plus le stage est haut, plus il est fort', () => {
-    for (const d of AL) {
-      const levels = d.ranks!.map((r) => r.level!);
-      expect(levels, `${d.name.en} : niveaux`).toEqual([...levels].sort((a, b) => a - b));
-    }
-  });
-});
+    it('le stage fixe le niveau du boss — plus le stage est haut, plus il est fort', () => {
+      for (const d of AL) {
+        const levels = d.ranks!.map((r) => r.level!);
+        expect(levels, `${d.name.en} : niveaux`).toEqual([...levels].sort((a, b) => a - b));
+      }
+    });
+  },
+);
 
 describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les boss', () => {
   const WB_GROUPS = GROUPS.filter((g) => g.startsWith('world_boss:'));

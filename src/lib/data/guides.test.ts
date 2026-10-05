@@ -163,7 +163,15 @@ describe('irregular-extermination — les guides désignent des combats réels',
  * préfixe du slug) et qu'on refuse de rouvrir.
  */
 describe('adventure-license — les guides désignent des combats réels', () => {
-  const guides = listGuidesByCategory('adventure-license');
+  // Mode fermé par le patch du 06/10/2026 : ses guides sont MASQUÉS (`hidden`,
+  // comme Monad Gate) mais toujours servis en accès direct — on les contrôle
+  // donc depuis la liste complète, pas depuis celle des guides visibles.
+  const guides = listGuides().filter((g) => g.category === 'adventure-license');
+
+  it('la catégorie est masquée : plus aucun guide visible', () => {
+    expect(listGuidesByCategory('adventure-license')).toEqual([]);
+    for (const g of guides) expect(g.hidden, g.slug).toBe(true);
+  });
 
   it('les 26 licences portées, chacune sur un combat solitaire et peuplé', () => {
     expect(guides).toHaveLength(26);

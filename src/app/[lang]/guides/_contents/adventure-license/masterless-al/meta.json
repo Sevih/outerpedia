@@ -17,7 +17,8 @@
   },
   "icon": "T_Licence_4076006",
   "author": "Shiraen",
-  "updated": "2026-10-04",
+  "updated": "2026-10-05",
+  "hidden": true,
   "bossId": "51000001",
   "group": "adventure_mission:70600000"
 }
