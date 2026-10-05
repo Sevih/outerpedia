@@ -5,6 +5,272 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-05
+
+- **Lot F11 : portraits animés — un seul contexte WebGL pour toutes les
+  cartes. Image identique au pixel, 27 contextes → 1, chaque texture montée
+  une fois ; le garde-fou de cadence du lot est touché dans deux
+  configurations, commité quand même sur décision de Sevih du 05/10, après
+  son contrôle sur Chrome et Firefox** (Fable, audit
+  `docs/audit/portrait-fx.md` : P2, et P6 qui tombe avec). Le quoi :
+  `portrait-fx-gl.ts` ne crée plus un contexte WebGL2 par carte mais UN
+  pour la page, sur un canvas hors document, à la première
+  carte qui se monte — donc à sa première entrée à l'écran ; réglage éteint
+  ou aucun perso à effet : ni contexte ni boucle, comme avant. Les deux
+  programmes y sont compilés une fois, chaque maille et chaque texture
+  montée une fois, effets ET art, quel que soit le nombre de cartes qui la
+  lisent. Chaque carte garde son canvas, en 2D : à chaque image le moteur la
+  rend dans le contexte partagé (mêmes trois passes, même cible linéaire à
+  la taille exacte de la carte — une par TAILLE désormais, plus une par
+  carte) puis recopie le rectangle dans son canvas, dans la même tâche. Une
+  seule boucle `requestAnimationFrame` dessine toutes les cartes animées et
+  s'arrête quand il n'y en a plus : hors écran, onglet caché, une image puis
+  rien sous `prefers-reduced-motion`. `AnimatedPortrait.tsx` perd
+  `LIVE_CAP`, l'éviction et la résurrection ; l'observateur partagé reste et
+  ne décide plus que de qui est dessiné ; l'onglet et le mouvement réduit
+  sont écoutés une fois pour la page, plus une fois par carte (le double
+  montage sous mouvement réduit relevé par F8 disparaît : basculer le
+  réglage système ne remonte plus rien, la carte se fige sur son image).
+  `RESTORABLE`, `LOSE_EXT`, `restoreContext` et `awaitingRestore`
+  disparaissent. Nouveau fichier `portrait-fx-pool.ts`, pur : le cache de
+  textures à compteur de références, la boucle, le dernier mot d'un lot
+  d'observateur. Vu des pages rien ne change : `AnimatedPortrait` et ses
+  props (`effect`, `fxId`, `onFxError`, `fxEmitters`, `fxTexCap`),
+  `SettingsPortrait`, le chunk paresseux ; `mountPortraitFx` perd son option
+  `autoplay` (une carte naît en pause et reçoit quand même son image), son
+  seul appelant est `AnimatedPortrait`. Le pourquoi : un contexte WebGL ne
+  partage rien, donc chaque carte rechargeait et montait SA copie de toutes
+  ses textures, et un plafond de 8 contextes évinçait puis ressuscitait les
+  cartes au fil du défilement — plafond dépassé dès que plus de huit cartes
+  sont à l'écran (12 contextes vivants sur `/characters` trié par sortie,
+  pic à 22 en défilant, 26 dans une fenêtre haute). La règle de libération
+  (`createRefCache`) : une texture vit tant qu'une carte MONTÉE la tient, à
+  l'écran ou non ; rendue par la dernière, elle attend dix secondes
+  (`TEXTURE_GRACE_MS`) avant d'être détruite — un changement de filtre
+  démonte une carte `_Demi` et en monte une autre dans le même rendu, sans
+  sursis les textures de l'effet seraient détruites puis remontées à chaque
+  clic ; quand il ne reste plus rien, le contexte lui-même est rendu
+  (`loseContext`), la prochaine carte en crée un neuf. La perte du contexte
+  par le NAVIGATEUR reste un cas normal : écouteur posé à la création
+  (annulation de `webglcontextlost`), `buildGL` rebâtit programmes, mailles
+  et textures depuis les caches CPU sans repasser par le réseau, et les
+  cartes gardent leur dernière image, qui est dans leur canvas 2D. P6 est
+  traité : les calques sont préparés AVANT tout contexte, une poignée
+  inerte n'est inscrite nulle part, et un refus n'est dit qu'une fois à la
+  console (`say`) — sans WebGL, cinq cartes montées donnent une seule ligne
+  `portrait-fx : WebGL2 indisponible`, zéro contexte, et un seul canvas a
+  reçu un contexte 2D ; `onFxError`, lui, reste appelé pour chaque carte. De
+  P9, seuls les compteurs des lignes réécrites sont retirés.
+
+  Le report, choisi sur mesure (banc synthétique : rendu GL trivial, douze
+  canvas de 382×764 px, Firefox 157, GPU NVIDIA, WebRender matériel ; ms
+  passées dans la boucle par image / images par seconde) :
+
+  | Façon d'amener l'image dans le canvas de la carte               |      ms |     i/s |
+  | --------------------------------------------------------------- | ------: | ------: |
+  | douze canvas WebGL, un contexte chacun (l'ancien montage)       |    0,03 |      60 |
+  | `clearRect` + `drawImage` d'un rectangle du tampon (RETENU)     |     0,3 |      60 |
+  | `drawImage` sous l'opération `copy`                             |    15,3 |      60 |
+  | `transferToImageBitmap` + `bitmaprenderer`                      | 17 à 20 | 38 à 44 |
+  | atlas, UNE capture par image, puis douze copies                 |      30 |      33 |
+  | tampon redimensionné à la taille de chaque carte (deux tailles) |      42 |      24 |
+
+  `drawImage`, donc, et sans l'opération `copy` : sous ce pilote Firefox ne
+  l'accélère pas et relit le tampon WebGL vers le CPU à chaque carte (le
+  premier jet du lot l'utilisait : 46 images/s sur `/characters` à dpr 2 —
+  c'est le garde-fou du lot qui l'a fait trouver). `transferToImageBitmap`
+  relit lui aussi, prend le tampon entier, et n'existe pour WebGL que sur
+  `OffscreenCanvas`. Chaque `drawImage` relit le tampon ENTIER quel que soit
+  le rectangle demandé (d'où l'échec de l'atlas) : le tampon partagé part
+  de 1×1 et ne fait que grandir, à la taille de la plus grande carte vue.
+
+  CE QUI N'A PAS BOUGÉ : les quatre sources GLSL (pas un octet), l'ordre des
+  passes et la chaîne linéaire → sRGB, `mountSeeds`, les tailles, `fxBleed`,
+  `SUPERSAMPLE`, le plafond de dpr, `portrait-fx.json`,
+  `extract-portrait-fx.py`, les types de `portrait-fx.ts`, `layerVerdict`.
+  Chaque carte garde SON temps (il part à sa première image et s'arrête
+  hors écran) : la boucle est commune, mais mettre les cartes en phase
+  changerait l'image. Ajouter un effet se fait toujours au même endroit :
+  (1) son suffixe dans `DEFAULT_EFFECTS` d'`extract-portrait-fx.py`, puis
+  `pnpm datagen:portrait-fx` et `pnpm images` ; (2) si
+  `portrait-fx.test.ts` casse sur un refus, la branche de shader se
+  transcrit dans `FRAG` avec son uniforme (`buildGL` et `draw` de
+  `portrait-fx-gl.ts`) et son mot-clé dans `SUPPORTED_KEYWORDS`, un module
+  d'émetteur dans `portrait-fx-sim.ts` ; (3) rien à faire pour le contexte
+  partagé — textures et mailles nouvelles entrent dans le cache à leur
+  premier montage — et l'effet prend sa section sur `/dev/AnimatedPortrait`.
+
+  La vérification de l'IMAGE. Référence capturée AVANT d'écrire une ligne,
+  sur le serveur ouvert sur :3000 : Firefox 157 sans tête (profil jetable,
+  WebDriver BiDi), `/dev/AnimatedPortrait` dans une fenêtre assez haute pour
+  que les 27 canvas — les dix effets et leurs calques isolés — soient à
+  l'écran ensemble, `requestAnimationFrame` remplacé par une file jouée à
+  la main (pas de 1/60 s) et l'aléa du moteur figé ; tampons des canvas lus
+  au pixel à t = 0, 1 s et 3 s. Deux passes de référence identiques (162
+  fichiers sur 162) : le banc se reproduit lui-même. Après : quatre
+  configurations — sans tête à dpr 1, à dpr 2, à dpr 1 avec une autre
+  graine (rendu WebGL par le GPU Intel), et avec le compositeur matériel
+  sur le GPU NVIDIA — soit 324 tampons (7,6 millions de pixels par
+  configuration à dpr 1, 30,3 à dpr 2) : **identiques à l'octet, les 324**.
+  Les CAPTURES D'ÉCRAN des mêmes cartes, elles, diffèrent sur 48 des 81 à
+  dpr 1 (16 cartes) et 18 des 81 à dpr 2 : 13 à 15/255 au pire, 0,34 à
+  0,43/255 en moyenne, 0,3 à 0,7 % des pixels de ces captures au-delà de
+  5/255 — invisible côte à côte à ×3. Expliqué : ce sont exactement les
+  cartes dont la boîte CSS, fractionnaire (191,083 × 350,833 px), s'arrondit
+  à une hauteur qui n'est PAS celle du tampon (350 px pour 351). Le
+  compositeur comprime alors le canvas d'un pixel, et il ne rééchantillonne
+  pas un canvas WebGL comme un canvas 2D. Témoin hors moteur : les mêmes
+  octets dans un canvas WebGL et dans un canvas 2D, même boîte — 16/255
+  d'écart quand la boîte arrondie fait 350 px pour un tampon de 351, zéro
+  quand elle en fait 351 ou qu'elle est entière. L'étirement d'un pixel
+  existait avant le lot (hors périmètre, cf. plus bas) ; seule sa phase
+  change.
+
+  Le tableau avant/après. Compteurs, identiques sans tête et avec GPU :
+
+  | `/dev/AnimatedPortrait`, 1280×800, descente lente puis saut en haut |    Avant |  Après |
+  | ------------------------------------------------------------------- | -------: | -----: |
+  | contextes créés (27 canvas) / appels à `getContext('webgl2')`       |  27 / 31 |  1 / 1 |
+  | contextes vivants au repos / au pic                                 |    8 / 9 |  1 / 1 |
+  | pertes provoquées / restaurations                                   |   23 / 4 |  0 / 0 |
+  | montages de texture : total / au pire pour une URL (50 URL)         | 218 / 20 | 50 / 1 |
+  | textures et cibles montées en fin de parcours (estimation)          |    57 Mo |  25 Mo |
+  | callbacks `requestAnimationFrame` par seconde, 4 puis 12 cartes     | 240, 720 | 60, 60 |
+
+  | `/characters?sort=release`, réglage allumé, 1600×1200, toute la page |        Avant |      Après |
+  | -------------------------------------------------------------------- | -----------: | ---------: |
+  | contextes créés / vivants / au pic                                   | 27 / 12 / 22 |  1 / 1 / 1 |
+  | montages de texture : total / au pire pour une URL (67 URL)          |     391 / 39 |     67 / 1 |
+  | textures et cibles montées au retour en haut, dpr 1 / dpr 2          | 123 / 217 Mo | 29 / 43 Mo |
+
+  Cadence et temps d'une image (images par seconde · ms passées dans la
+  boucle du moteur par image, moyenne sur 5 à 6 s ; « banc » =
+  `/dev/AnimatedPortrait`, dont les cartes de 180 px sont plus grandes que
+  celles du site) :
+
+  | Compositeur, dpr            | Page          | Cartes | Avant       | Après               |
+  | --------------------------- | ------------- | -----: | ----------- | ------------------- |
+  | GPU Intel (Mesa), dpr 2     | banc          |      4 | 59,9 · 0,27 | 59,9 · 0,39         |
+  |                             | banc          |     12 | 60,1 · 0,92 | 60,0 · 1,23         |
+  |                             | `/characters` |     12 | 60,0 · 0,74 | 60,0 · 1,08         |
+  |                             | `/characters` |     17 | 60,0 · 1,13 | 59,9 · 1,51         |
+  | GPU Intel (Mesa), dpr 1     | `/characters` |     26 | 60,0 · 1,47 | 59,8 · 1,87         |
+  | GPU NVIDIA, dpr 1           | banc          |      4 | 59,9 · 0,21 | 60,1 · 0,40         |
+  |                             | banc          |     12 | 59,1 · 1,01 | 60,0 · 1,31         |
+  |                             | `/characters` |     12 | 60,0 · 0,67 | 60,0 · 1,06         |
+  |                             | `/characters` |     26 | 59,7 · 1,56 | 60,0 · 1,79         |
+  | GPU NVIDIA, dpr 2           | banc          |      4 | 59,9 · 0,23 | 59,9 · 0,36         |
+  |                             | banc          |     12 | 59,9 · 0,88 | **47,1** · 1,34     |
+  |                             | `/characters` |     12 | 60,1 · 0,74 | 60,0 · 1,08         |
+  |                             | `/characters` |     17 | 60,0 · 1,11 | **48,8** · 1,65     |
+  | sans tête (logiciel), dpr 1 | banc          |      4 | 60,1 · 0,23 | 60,1 · **6,5**      |
+  |                             | banc          |     12 | 57,8 · 1,00 | **42,3** · **20,9** |
+  |                             | `/characters` |     12 | 13,5 · 0,94 | 13,8 · **19,6**     |
+
+  LE GARDE-FOU DU LOT (« si le report coûte au point de perdre les 60
+  images/s là où elles tenaient, ne commite pas ») EST TOUCHÉ, deux fois.
+  (a) Dans le banc que le lot prescrit, Firefox sans tête : il compose en
+  LOGICIEL (`WebRender (Software)`, lu par Marionette), aucun canvas n'y est
+  accéléré, donc chaque copie est une relecture GPU → CPU dans la boucle —
+  1,7 ms par carte ; à douze cartes le banc passe de 57,8 à 42,3 images/s.
+  `/characters` n'y bouge pas (13,5 → 13,8) parce que l'ancien moteur y était
+  déjà étranglé par le compositeur, qui relisait lui-même douze canvas
+  WebGL. (b) Avec un vrai compositeur GPU — mesuré dans un KWin virtuel
+  isolé, WebRender matériel vérifié — tout tient sur Intel/Mesa,
+  jusqu'à 17 cartes à dpr 2 et 26 à dpr 1 ; sur le pilote NVIDIA sous
+  Linux, tout tient à dpr 1 et à douze cartes du site à dpr 2, mais la
+  copie y plafonne vers 4 millions de pixels par image (elle sort de la
+  boucle, pas du CPU) : 17 cartes du site à dpr 2 (fenêtre de 3 000 px de
+  haut) tombent de 60 à 48,8 images/s, douze cartes du banc de 59,9 à 47,1.
+  Aux deux points que le lot nomme, 4 et 12 cartes, la vraie page tient
+  donc partout où un GPU compose ; ce qui est perdu l'est sans GPU, et sur
+  NVIDIA/Linux au-delà d'une quinzaine de cartes en haute densité. En face :
+  à 17 cartes l'ancien moteur tenait 17 contextes WebGL, au-delà de ce que
+  Chrome accorde à une page. Le lot a donc été rendu sans commit, avec ces
+  chiffres et la recommandation de commiter tel quel une fois Chrome
+  contrôlé. DÉCISION DE SEVIH, le 05/10 : commiter — il a joué le contrôle
+  sur Chrome et sur Firefox, « ça marche bien sur les deux ». Si le plafond
+  NVIDIA gêne un jour, la parade est dans la boucle (ne dessiner qu'une
+  carte sur deux par image quand les images arrivent en retard) et c'est un
+  choix de comportement, pas un correctif à glisser ici.
+
+  Les scénarios, rejoués avec le compositeur GPU. Celui de F8 (descente par
+  pas de 60 px jusqu'à y = 1740, saut en haut, puis six sauts) : toutes les
+  cartes à l'écran sont pleines ET animées à chaque arrêt, un contexte, une
+  texture montée par URL, console muette. Perte du contexte unique
+  (`WEBGL_lose_context`) : la boucle s'arrête, les quatre cartes gardent
+  leur image ; deux cartes entrées à l'écran PENDANT la perte attendent
+  (leur `<img>` tient la place) ; à la restauration les cinq sont pleines
+  et animées, sans une requête de plus ; un second cycle passe de même.
+  Onglet caché : 0 image demandée, images gardées, reprise au retour.
+  `prefers-reduced-motion` : une image par carte entrée, puis plus aucun
+  `requestAnimationFrame` (trois appels en tout pour six cartes). Sans
+  WebGL : cf. P6 plus haut. `/characters` : filtre posé puis retiré dans le
+  sursis — aucune texture remontée ; posé plus de dix secondes — 26
+  textures rendues, puis remontées au retrait ; réglage éteint — plus de
+  boucle, puis après le sursis toutes les textures détruites et le contexte
+  rendu ; rallumé — un contexte neuf, douze cartes animées.
+  `/dev/AnimatedPortrait?cap=256` : 51 canvas pleins, un contexte, console
+  muette (une texture plafonnée monte à part de sa version servie : la clé
+  du cache porte le plafond).
+
+  Les tests : `portrait-fx-pool.test.ts`, 26 tests sur ce qui est devenu
+  pur — le cache (création au premier preneur, rien de rendu tant qu'une
+  carte tient, sursis à la milliseconde, reprise dans le sursis, une
+  minuterie qui revient pour la plus jeune, signal du cache vide), la
+  boucle (une image même en pause puis plus rien, UNE demande d'image par
+  tour quel que soit le nombre de cartes, le temps de chaque carte, le trou
+  borné à 100 ms, la pause qui ne compte pas, l'arrêt et son signal, la
+  perte et la reprise, le dessin refusé, la carte retirée pendant l'image)
+  et `lastByTarget`. Contre-épreuve : dix mutations de `portrait-fx-pool`,
+  toutes rattrapées — une ne l'était pas au premier jet, le test du dessin
+  refusé a été durci et la règle précisée (une image refusée ne compte pas
+  ET n'est pas rattrapée). Le RENDU GL lui-même n'est pas testé : il est
+  contrôlé au pixel, ci-dessus. `pnpm typecheck` :
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sortie 0 ; `pnpm lint` : `$ eslint`, rien d'autre ; `pnpm test` :
+  `Tests  2277 passed (2277)`, 183 fichiers.
+
+  Ce que les mesures de Firefox ne prouvent pas : **Chrome** (le
+  navigateur de la plupart des visiteurs, absent du poste de mesure ; s'y
+  jouent la copie WebGL → canvas 2D et les deux faits de l'en-tête du
+  moteur sur la perte de contexte, qui en viennent) — contrôlé à l'écran
+  par Sevih le 05/10, sans chiffre de cadence relevé ici ; **Safari**, **un
+  téléphone** et Windows (où Firefox passe par ANGLE) restent non vus.
+  **Le scénario de contrôle, joué par Sevih sur Chrome ET Firefox le 05/10
+  sur le serveur de dev** (verdict : ça marche bien sur les deux) : allumer
+  « portraits animés » dans les réglages du site, ouvrir `/characters`,
+  trier par sortie. (1) La première rangée s'anime, console
+  sans ligne `portrait-fx`. (2) Défiler jusqu'en bas à la molette puis
+  touche Début : toutes les cartes à effet de l'écran bougent dans la
+  seconde, aucune nue (le portrait sans sa parure). (3) Poser le filtre
+  Fire puis le retirer, une fois aussitôt, une fois en attendant plus de
+  dix secondes : les cartes reviennent animées. (4) Passer dix secondes
+  sur un autre onglet et revenir : l'animation reprend sans saut. (5)
+  Comparer une carte `_Demi` (Stella) avec la prod, côte à côte au même
+  zoom : même liseré rouge, même voile, pas de frange claire autour. (6)
+  La cadence — coller dans la console, douze cartes à l'écran :
+  `(()=>{let n=0,late=0,last=0,t0=performance.now();const f=t=>{if(last&&t-last>20)late++;last=t;n++;performance.now()-t0<5000?requestAnimationFrame(f):console.log(n/5,'images/s,',late,'en retard')};requestAnimationFrame(f)})()`
+  — attendu : la fréquence de l'écran et zéro ou presque en retard, comme
+  avec le réglage éteint.
+
+  Le commit porte `portrait-fx-gl.ts`, `AnimatedPortrait.tsx`,
+  `portrait-fx-pool.ts` et son test,
+  `src/app/dev/AnimatedPortrait/page.dev.tsx` (textes seulement : plus de
+  plafond de contextes à décrire, l'item « contexte partagé » sort de « ce
+  qui reste »), cette entrée et le TODO, où l'item sort et où les constats
+  Basse restants prennent leur ligne. Laissé, hors périmètre : le
+  tampon d'une carte prend `clientWidth` arrondi quand sa boîte est
+  fractionnaire, d'où l'étirement d'un pixel par le compositeur relevé plus
+  haut — déjà là avant, à traiter à part si on veut un pixel net ; les
+  textures des slots éteints sont toujours chargées (relevé par F9) ; les
+  commentaires que le contexte partagé rend inexacts hors des fichiers du
+  lot — `extract-portrait-fx.py` (« chaque carte animée monte SA copie »),
+  `Portrait.tsx` (« il tient un contexte », « 25 personnages sur 124 ») ;
+  P7, P8 et P10, dont le premier levier (`SUPERSAMPLE = 1` dès dpr 2)
+  diviserait par quatre le remplissage, pas la copie ; le rapport d'audit
+  n'est pas annoté.
+
 ## 2026-10-04
 
 - **Relecture de B19 : l'onglet « Rangs » de `pnpm quick`** (Fable). Lot 64,

@@ -5,148 +5,115 @@
  *
  * `Portrait` reste ce qu'il est : un composant SERVEUR qui ne sait que poser la
  * chrome. Ce fichier-ci n'ajoute qu'un calque, celui que
- * `CUICharacterThumbnail.SetEffect` instancie pour 25 personnages sur 124
- * (`CharacterExtraTemplet.ThumbnailEffect`). Un perso sans effet rend EXACTEMENT
- * le portrait statique — pas de canvas, pas de contexte WebGL, pas de boucle.
+ * `CUICharacterThumbnail.SetEffect` instancie pour les personnages qui en
+ * portent un (`CharacterExtraTemplet.ThumbnailEffect`). Un perso sans effet rend
+ * EXACTEMENT le portrait statique — pas de canvas, pas de contexte WebGL, pas de
+ * boucle.
  *
  * POURQUOI UN CANVAS ET PAS DU CSS. L'animation du jeu n'est pas une transition :
  * c'est un shader qui fait défiler quatre textures et multiplie leurs
  * échantillons par 70. Le GLSL compilé étant lisible dans les bundles, on le
  * rejoue (`portrait-fx-gl`) au lieu d'en approcher le rendu.
  *
- * CE QUE CE FICHIER DÉCIDE, ET QUE LE MOTEUR NE PEUT PAS DÉCIDER :
+ * Le canvas d'une carte est en 2D : c'est `portrait-fx-gl` qui rend TOUTES les
+ * cartes dans un seul contexte WebGL et recopie chaque image dans le canvas de
+ * la sienne. Il n'y a donc plus de nombre de contextes à tenir, ni de carte à
+ * évincer.
  *
+ * CE QUE CE FICHIER DÉCIDE, ET QUE LE MOTEUR NE PEUT PAS DÉCIDER — qui est
+ * dessiné :
+ *
+ *   - une carte ne se monte qu'à sa PREMIÈRE entrée à l'écran. Tant qu'aucune
+ *     carte animée n'y est entrée, il n'existe ni contexte ni boucle ;
+ *   - hors écran ou onglet caché, elle n'est plus dessinée (elle garde sa
+ *     dernière image, et son temps s'arrête) ;
  *   - `prefers-reduced-motion` fige l'effet au lieu de le supprimer. Il ne PORTE
  *     aucune information — c'est une parure de rareté, que les étoiles et les
  *     tags disent déjà — donc une image fixe suffit et rien ne se perd.
- *   - hors écran ou onglet caché, la boucle s'arrête.
- *   - le nombre de contextes WebGL VIVANTS est plafonné (cf. `LIVE_CAP`).
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { img } from '@/lib/images';
 import { Portrait, type PortraitProps } from './Portrait';
 import { fxNameOf, PORTRAIT_FX } from './portrait-fx';
 import { mountPortraitFx, type PortraitFxHandle } from './portrait-fx-gl';
+import { lastByTarget } from './portrait-fx-pool';
 import { fxBleed } from './portrait-fx-sim';
-
-/**
- * COMBIEN DE CONTEXTES WebGL ON GARDE VIVANTS, toutes cartes confondues.
- *
- * Ce n'est pas un réglage de confort : un navigateur ne tient qu'une quinzaine
- * de contextes à la fois et, au-delà, PERD les plus anciens en silence — la
- * carte du haut de page se vide pendant qu'on scrolle. Or quinze personnages
- * portent `_Demi` : une grille les demanderait tous d'un coup.
- *
- * On plafonne donc nous-mêmes, et on libère par ORDRE DE DERNIÈRE APPARITION à
- * l'écran plutôt qu'au hasard du navigateur. Une carte libérée n'est pas perdue :
- * son prochain passage à l'écran RESSUSCITE son contexte — un canvas ne rend
- * jamais qu'un seul contexte, même perdu, et c'est `mountPortraitFx` qui le
- * restaure (les textures, elles, restent dans le cache HTTP).
- */
-const LIVE_CAP = 8;
 
 /** Une carte animée telle que l'observateur partagé la voit. */
 interface Card {
   /** Dernier état rendu par l'observateur. */
   onScreen: boolean;
-  /** Rang de dernière apparition — le plus petit part en premier. */
-  seq: number;
-  /** Crée (ou ressuscite) le contexte de la carte. */
-  mount: () => void;
-  /** Rend le contexte : c'est l'éviction, et le démontage. */
-  release: () => void;
-  /** Accorde la boucle à l'état courant (écran, onglet, mouvement réduit). */
+  /**
+   * Monte l'effet si la carte vient d'entrer à l'écran pour la première fois,
+   * puis accorde son animation à l'état courant (écran, onglet, mouvement réduit).
+   */
   apply: () => void;
 }
 /** Les cartes observées, par canvas. */
 const cards = new Map<Element, Card>();
-/** Celles qui tiennent un contexte — c'est elles que le plafond compte. */
-const live = new Set<Card>();
-let seqCounter = 0;
 
-/**
- * Ramène le nombre de contextes vivants sous le plafond, en gardant `incoming`
- * places pour les cartes que l'appelant s'apprête à monter.
- *
- * On ne libère QUE des cartes hors écran, jamais une carte visible : une carte
- * libérée ne se ranime qu'à son prochain franchissement, donc en sacrifier une
- * qui est déjà à l'écran la laisserait éteinte tant qu'on ne scrolle pas. Si
- * tout est visible, on dépasse le plafond plutôt que d'éteindre ce que le
- * lecteur regarde — cas qui ne se produit qu'avec plus de {@link LIVE_CAP}
- * portraits animés simultanément à l'écran.
- */
-function evict(incoming: number): void {
-  while (live.size + incoming > LIVE_CAP) {
-    let victim: Card | undefined;
-    for (const c of live) {
-      // Le plus anciennement vu parmi ceux qui ne sont pas à l'écran.
-      if (!c.onScreen && (!victim || c.seq < victim.seq)) victim = c;
-    }
-    if (!victim) return;
-    live.delete(victim);
-    victim.release();
-  }
+// L'état de la PAGE, le même pour toutes les cartes : un écouteur pour toutes,
+// posé à la première carte et retiré avec la dernière.
+let tabVisible = true;
+let reducedMotion = false;
+let unwatchPage: (() => void) | undefined;
+
+function applyAll(): void {
+  for (const card of cards.values()) card.apply();
+}
+
+function watchPage(): () => void {
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const onMotion = () => {
+    reducedMotion = motion.matches;
+    applyAll();
+  };
+  const onVisibility = () => {
+    tabVisible = document.visibilityState === 'visible';
+    applyAll();
+  };
+  onMotion();
+  onVisibility();
+  motion.addEventListener('change', onMotion);
+  document.addEventListener('visibilitychange', onVisibility);
+  return () => {
+    motion.removeEventListener('change', onMotion);
+    document.removeEventListener('visibilitychange', onVisibility);
+  };
 }
 
 /**
- * UN SEUL OBSERVATEUR POUR TOUTES LES CARTES, et c'est ce qui rend l'éviction
- * sûre. Avec un observateur par carte, les callbacks d'une même image se
- * suivaient dans une même tâche, chacun ne connaissant que SA carte : celui
- * d'une carte qui entre évinçait une voisine vivante dont le callback n'avait
- * pas encore dit qu'elle entrait aussi, et ce callback-là la remontait aussitôt
- * — `restoreContext` avant que `webglcontextlost` soit distribué, que Blink
- * refuse en silence (cf. `onLost` de `portrait-fx-gl`). La carte restait
- * éteinte, à l'écran.
- *
- * Ici le lot entier d'une image arrive d'un coup, et l'ordre fait la garantie :
- *
- *   1. TOUS les drapeaux `onScreen` d'abord ;
- *   2. l'éviction, UNE fois, qui fait la place des cartes à monter — une victime
- *      est hors écran d'après les drapeaux à jour, donc jamais une carte de ce
- *      lot qui entre ;
- *   3. les montages, ensuite seulement : le nombre de contextes vivants ne
- *      dépasse plus le plafond le temps d'un callback (un saut d'une rangée en
- *      montait quatre AVANT d'en rendre quatre) ;
- *   4. les boucles.
+ * UN SEUL OBSERVATEUR POUR TOUTES LES CARTES. Il ne décide plus que d'une
+ * chose : qui est à l'écran, donc qui est dessiné. Le lot d'une image arrive
+ * d'un coup, et c'est le DERNIER état de chaque carte qui compte
+ * (`lastByTarget`) — deux franchissements peuvent s'y accumuler.
  */
 function onIntersect(entries: IntersectionObserverEntry[]): void {
-  const touched = new Set<Card>();
-  for (const e of entries) {
+  for (const [target, onScreen] of lastByTarget(entries)) {
     // Absente : démontée entre la mise en file de l'entrée et ce callback.
-    const card = cards.get(e.target);
+    const card = cards.get(target);
     if (!card) continue;
-    // Deux franchissements de la même carte peuvent s'accumuler dans un lot ;
-    // les entrées sont en ordre chronologique, la DERNIÈRE l'emporte.
-    card.onScreen = e.isIntersecting;
-    touched.add(card);
+    card.onScreen = onScreen;
+    card.apply();
   }
-
-  const toMount: Card[] = [];
-  for (const card of touched) {
-    if (!card.onScreen) continue;
-    card.seq = ++seqCounter;
-    if (!live.has(card)) toMount.push(card);
-  }
-  evict(toMount.length);
-  for (const card of toMount) {
-    card.mount();
-    live.add(card);
-  }
-  for (const card of touched) card.apply();
 }
 
 let observer: IntersectionObserver | undefined;
 
 function observe(canvas: Element, card: Card): void {
+  unwatchPage ??= watchPage();
   observer ??= new IntersectionObserver(onIntersect, { rootMargin: '128px' });
   cards.set(canvas, card);
   observer.observe(canvas);
 }
 
-function unobserve(canvas: Element, card: Card): void {
+function unobserve(canvas: Element): void {
   observer?.unobserve(canvas);
   cards.delete(canvas);
-  live.delete(card);
+  if (!cards.size) {
+    unwatchPage?.();
+    unwatchPage = undefined;
+  }
 }
 
 export interface AnimatedPortraitProps extends Omit<PortraitProps, 'fx'> {
@@ -204,9 +171,8 @@ function PortraitFxCanvas({
   texCap?: number;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const [reduced, setReduced] = useState(false);
   // Le rapporteur d'erreur arrive souvent en fonction inline : le mettre dans les
-  // dépendances du montage remonterait le contexte à chaque rendu du parent. On le
+  // dépendances du montage remonterait l'effet à chaque rendu du parent. On le
   // tient donc à jour à part — et jamais pendant le rendu, où toucher une ref est
   // interdit.
   const report = useRef(onFxError);
@@ -215,60 +181,40 @@ function PortraitFxCanvas({
   }, [onFxError]);
 
   useEffect(() => {
-    const q = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const sync = () => setReduced(q.matches);
-    sync();
-    q.addEventListener('change', sync);
-    return () => q.removeEventListener('change', sync);
-  }, []);
-
-  useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
 
     let fx: PortraitFxHandle | undefined;
-    let visible = document.visibilityState === 'visible';
 
-    // LE CONTEXTE N'EST CRÉÉ QU'À L'ENTRÉE À L'ÉCRAN — c'est l'observateur
-    // partagé qui appelle `mount` (cf. `onIntersect`). Il reste ensuite en place
-    // tant qu'il n'est pas évincé : le détruire à chaque sortie ferait payer un
-    // rechargement complet à chaque va-et-vient de scroll.
     const card: Card = {
       onScreen: false,
-      seq: 0,
-      mount: () => {
-        fx = mountPortraitFx(canvas, {
-          effect,
-          art,
-          // Le moteur logge déjà chaque refus en console (`mountPortraitFx`
-          // préfixe et fait `console.error` AVANT de relayer) : ce rapporteur
-          // ne sert qu'aux pages qui veulent AFFICHER le refus.
-          onError: (m) => report.current?.(m),
-          only,
-          autoplay: !reduced,
-          texCap,
-        });
+      apply: () => {
+        // L'EFFET N'EST MONTÉ QU'À L'ENTRÉE À L'ÉCRAN — c'est là que le moteur
+        // charge ses textures, et crée le contexte partagé s'il n'existe pas. Il
+        // reste ensuite monté jusqu'au démontage de la carte : le défaire à
+        // chaque sortie ferait payer un remontage à chaque va-et-vient de scroll.
+        if (card.onScreen && !fx) {
+          fx = mountPortraitFx(canvas, {
+            effect,
+            art,
+            // Le moteur logge déjà chaque refus en console (une fois, cf. `say`
+            // de `portrait-fx-gl`) : ce rapporteur ne sert qu'aux pages qui
+            // veulent AFFICHER le refus.
+            onError: (m) => report.current?.(m),
+            only,
+            texCap,
+          });
+        }
+        fx?.setRunning(card.onScreen && tabVisible && !reducedMotion);
       },
-      release: () => {
-        fx?.destroy();
-        fx = undefined;
-      },
-      apply: () => fx?.setRunning(!reduced && visible && card.onScreen),
     };
-
-    const onVisibility = () => {
-      visible = document.visibilityState === 'visible';
-      card.apply();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
     observe(canvas, card);
 
     return () => {
-      document.removeEventListener('visibilitychange', onVisibility);
-      unobserve(canvas, card);
-      card.release();
+      unobserve(canvas);
+      fx?.destroy();
     };
-  }, [effect, art, reduced, only, texCap]);
+  }, [effect, art, only, texCap]);
 
   return (
     <canvas
@@ -282,7 +228,7 @@ function PortraitFxCanvas({
       // LA TAILLE EST EXPLICITE, ET C'EST VITAL : un canvas est un élément
       // REMPLACÉ, donc en `position:absolute` ses `width/height:auto` valent sa
       // taille INTRINSÈQUE (ses attributs) — pas l'étirement entre insets
-      // qu'obtiendrait un div. Or `mountPortraitFx` écrit les attributs depuis
+      // qu'obtiendrait un div. Or le moteur écrit les attributs depuis
       // `clientWidth` : un canvas laissé en auto suit alors sa propre écriture et
       // enfle de ×dpr PAR FRAME, jusqu'à crever `MAX_TEXTURE_SIZE` (vécu — c'était
       // le « aucune cible linéaire acceptée en 23086×11566 »).
@@ -293,9 +239,9 @@ function PortraitFxCanvas({
         width: pct(1 + 2 * bleed.x),
         height: pct(1 + 2 * bleed.y),
       }}
-      // Aucun `mix-blend-mode` : le canvas peint l'art LUI-MÊME et l'effet s'y
-      // ajoute en lumière linéaire. Un mélange CSS l'aurait fait en sRGB, ce qui
-      // n'est pas la même opération (cf. l'en-tête de `portrait-fx-gl`).
+      // Aucun `mix-blend-mode` : le canvas reçoit l'art ET l'effet, que le moteur
+      // a additionnés en lumière linéaire. Un mélange CSS l'aurait fait en sRGB,
+      // ce qui n'est pas la même opération (cf. l'en-tête de `portrait-fx-gl`).
     />
   );
 }
@@ -311,11 +257,11 @@ export function AnimatedPortrait({
   const name = effect ?? fxNameOf(fxId ?? props.id);
   // Un nom d'effet que la table connaît mais qu'on n'a pas extrait ne rend rien :
   // c'est un palier de portage, pas une absence d'effet. `portrait-fx-gl` le dirait
-  // aussi, mais autant ne pas monter un contexte WebGL pour l'entendre.
+  // aussi, mais autant ne pas poser un canvas pour l'entendre.
   const known = name ? Boolean(PORTRAIT_FX.effects[name]) : false;
   const bleed = useMemo(() => (known && name ? fxBleed(name) : { x: 0, y: 0 }), [known, name]);
   // La liste de calques arrive en LITTÉRAL depuis la page de contrôle : neuve à
-  // chaque rendu, elle remonterait le contexte en boucle. On la stabilise sur son
+  // chaque rendu, elle remonterait l'effet en boucle. On la stabilise sur son
   // CONTENU, pas sur son identité.
   const onlyKey = fxEmitters?.join(',');
   const only = useMemo(() => (onlyKey ? onlyKey.split(',') : undefined), [onlyKey]);

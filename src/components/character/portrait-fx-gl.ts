@@ -22,39 +22,71 @@
  *
  * D'où la chaîne en trois temps, qui n'existe QUE pour ça :
  *   1. les textures montent en `SRGB8_ALPHA8` — le GPU rend des valeurs linéaires ;
- *   2. tout se dessine dans une cible qui TIENT du linéaire (cf. `buildGL`), où le
+ *   2. tout se dessine dans une cible qui TIENT du linéaire (cf. `targetOf`), où le
  *      mélange additif se fait donc en linéaire, comme le `Blend SrcAlpha One`
  *      du jeu ;
- *   3. une passe de report encode en sRGB vers le canvas, une seule fois.
+ *   3. une passe de report encode en sRGB, une seule fois.
  *
- * L'ART DU PORTRAIT EST PEINT DANS LE CANVAS, et pas laissé au `<img>` en dessous.
+ * L'ART DU PORTRAIT EST PEINT PAR LE MOTEUR, et pas laissé au `<img>` en dessous.
  * C'est le prix du point précédent : l'effet s'AJOUTE à l'art, et cette addition
  * doit avoir lieu en linéaire. Un `mix-blend-mode: plus-lighter` l'aurait faite en
  * sRGB — donc pas la même. Le `<img>` de `Portrait` reste dessous, comme repli
  * quand WebGL manque.
  *
- * LE CONTEXTE EST PÉRISSABLE, ET C'EST UN CAS NORMAL, pas une panne. L'éviction
- * d'`AnimatedPortrait` perd les contextes VOLONTAIREMENT (`loseContext`), et le
- * navigateur perd les siens tout seul (Memory Saver au retour d'onglet, reset du
- * pilote). Deux faits mesurés — sur Chrome/ANGLE, pas supposés — dictent la
- * structure du montage :
+ * UN SEUL CONTEXTE WebGL POUR TOUTES LES CARTES DE LA PAGE. Un contexte ne
+ * partage rien avec un autre : tant que chaque carte avait le sien, chacune
+ * rechargeait et montait SA copie de toutes ses textures (3 Mo pour `_Demi`,
+ * l'effet de seize personnages), et un navigateur ne tient qu'une quinzaine de
+ * contextes — il fallait en plafonner le nombre, évincer, ressusciter. Ici :
+ *
+ *   - le contexte vit sur un canvas HORS du document, créé à la première carte
+ *     qui se monte (donc à sa première entrée à l'écran) et jamais avant ;
+ *   - les deux programmes sont compilés une fois, chaque maille et CHAQUE
+ *     TEXTURE montée une fois, effets et art confondus, quel que soit le nombre
+ *     de cartes qui la lisent — la règle qui les rend est dans `portrait-fx-pool`
+ *     (`createRefCache`) : plus aucune carte montée ne la lit, depuis dix
+ *     secondes. Quand il ne reste rien, le contexte lui-même est rendu ;
+ *   - chaque carte garde un canvas à elle, mais en 2D : à chaque image le moteur
+ *     rend la carte dans le contexte partagé, puis COPIE le résultat dans son
+ *     canvas (`drawImage`, dans la même tâche — le tampon WebGL n'est pas
+ *     conservé d'une tâche à l'autre). La copie est un report d'octets : les deux
+ *     canvas sont en sRGB et en alpha prémultiplié, et la carte est vidée avant
+ *     de recevoir son rectangle — ni conversion, ni mélange avec l'image
+ *     précédente, donc ni frange ni second encodage ;
+ *   - UNE boucle `requestAnimationFrame` dessine toutes les cartes animées
+ *     (`createFrameLoop`), et s'arrête quand il n'y en a plus.
+ *
+ * `drawImage` plutôt que `transferToImageBitmap` + `bitmaprenderer`, mesure à
+ * l'appui (Firefox, douze cartes à dpr 2) : le transfert relit le tampon vers le
+ * CPU à chaque carte — 20 ms par image, 38 images/s — quand la copie tient en
+ * 0,3 ms. Il prend en outre le tampon ENTIER du contexte, qu'il faudrait
+ * redimensionner à chaque carte (elles n'ont pas la même taille, le débord
+ * dépend de l'effet ; 3,5 ms par redimensionnement), et n'existe pour WebGL que
+ * sur `OffscreenCanvas`, absent de Safari avant la version 17.
+ *
+ * CE QUE LA COPIE COÛTE dépend de ce que le navigateur sait garder sur le GPU.
+ * Quand il le sait (Firefox sur Mesa : 60 images/s à dix-sept cartes en dpr 2,
+ * une milliseconde de boucle), elle ne se mesure pas. Quand il ne le sait pas,
+ * chaque copie repasse par le CPU : compositeur logiciel (≈ 1,7 ms par carte,
+ * dans la boucle), pilote NVIDIA sous Linux (hors de la boucle, mais le débit
+ * plafonne vers 4 millions de pixels par image — au-delà, la cadence tombe).
+ * Un canvas WebGL par carte ne payait rien de tel : c'est le prix du partage.
+ *
+ * LE CONTEXTE EST PÉRISSABLE, ET C'EST UN CAS NORMAL, pas une panne : le
+ * navigateur perd les siens tout seul (retour d'onglet, reset du pilote). Deux
+ * faits mesurés — sur Chrome/ANGLE, pas supposés — en dictent le traitement :
  *
  *   1. un canvas ne rend jamais qu'UN contexte : après une perte, `getContext`
- *      rend le MÊME objet, perdu. Le remontage d'une carte évincée doit donc le
- *      RESSUSCITER (`restoreContext`), pas en attendre un neuf ;
- *   2. `restoreContext` est MUET si `webglcontextlost` n'a pas été annulé — et
- *      c'est `destroy()` qui perd le contexte, donc l'événement part quand les
- *      écouteurs de la session sont déjà retirés. L'annulation est donc posée par
- *      un écouteur qui SURVIT au démontage (cf. `RESTORABLE`) ;
- *   3. sur un contexte perdu, `getExtension` rend NULL — y compris pour
- *      `WEBGL_lose_context`. L'extension qui sait ressusciter doit donc être
- *      RETENUE pendant que le contexte est vivant (cf. `LOSE_EXT`) : la demander
- *      au remontage d'un canvas recyclé rend null, et un `?.` par-dessus en
- *      ferait un non-geste silencieux — c'est arrivé.
+ *      rend le MÊME objet, perdu. On n'en crée donc pas un neuf : on garde le
+ *      canvas et on attend `webglcontextrestored` ;
+ *   2. la restauration n'a lieu QUE si `webglcontextlost` a été annulé
+ *      (`preventDefault`). L'écouteur est posé à la création du contexte et vit
+ *      aussi longtemps que lui.
  *
- * Tout ce qui vit dans le GPU se reconstruit via `buildGL`, au montage et à
- * chaque `webglcontextrestored`, depuis des caches CPU (géométrie, images
- * décodées) — une restauration ne repasse pas par le réseau.
+ * Tout ce qui vit dans le GPU se reconstruit alors via `buildGL` depuis des
+ * caches CPU (géométrie, images décodées) — une restauration ne repasse pas par
+ * le réseau. Entre-temps les cartes GARDENT LEUR DERNIÈRE IMAGE : elle est dans
+ * leur canvas 2D, que la perte ne touche pas.
  *
  * DEUX ÉCARTS ASSUMÉS, notés sur `/dev/AnimatedPortrait` :
  *
@@ -71,6 +103,7 @@
  */
 import { img } from '@/lib/images';
 import { PORTRAIT_FX, type FxEmitter, type FxMaterial } from './portrait-fx';
+import { createFrameLoop, createRefCache } from './portrait-fx-pool';
 import {
   createBillboardSim,
   evalMinMax,
@@ -364,6 +397,31 @@ function link(
   return null;
 }
 
+/**
+ * La géométrie d'un calque de cadre, PARTAGÉE par toutes les cartes qui le
+ * posent : les sommets viennent de la table, pas de la carte.
+ */
+interface Geometry {
+  /** Sommets entrelacés (x, y, u, v) et triangles — la matière du VAO, côté CPU. */
+  data: Float32Array;
+  indices: Uint16Array;
+  /** Créé au premier tirage ; un VAO ne survit ni à une perte ni à la fin du contexte. */
+  vao: WebGLVertexArrayObject | null;
+}
+
+/** Les géométries déjà dépliées, par maille de la table — plus `quad`, le quad plein. */
+const GEOMETRY = new Map<string, Geometry>();
+
+function geometryOf(key: string, build: () => [Float32Array, Uint16Array]): Geometry {
+  let g = GEOMETRY.get(key);
+  if (!g) {
+    const [data, indices] = build();
+    g = { data, indices, vao: null };
+    GEOMETRY.set(key, g);
+  }
+  return g;
+}
+
 /** Un calque de CADRE (`renderMode = 4`) : la maille du prefab, posée une fois. */
 interface MeshLayer {
   kind: 'mesh';
@@ -371,20 +429,15 @@ interface MeshLayer {
   material: FxMaterial;
   /** `m_SortingOrder` — l'ordre de tirage entre émetteurs. */
   order: number;
-  /** Sommets entrelacés (x, y, u, v) et triangles — la matière du VAO, côté CPU. */
-  data: Float32Array;
-  indices: Uint16Array;
-  /** Recréé par `buildGL` : un VAO ne survit pas à une perte de contexte. */
-  vao: WebGLVertexArrayObject | null;
-  count: number;
+  geometry: Geometry;
   /** Position/échelle de la maille vers le clip — constante, calculée une fois. */
   xform: [number, number, number, number];
 }
 
 /**
  * Un émetteur BILLBOARD (`renderMode = 0`) : des quads dont `portrait-fx-sim`
- * calcule vie, position et taille — l'état vit côté CPU et SURVIT donc aux
- * pertes de contexte, seul le dessin se rejoue.
+ * calcule vie, position et taille — l'état vit côté CPU, par carte, et SURVIT
+ * donc aux pertes de contexte, seul le dessin se rejoue.
  */
 interface BillboardLayer {
   kind: 'billboard';
@@ -400,7 +453,11 @@ interface BillboardLayer {
 type Layer = MeshLayer | BillboardLayer;
 
 export interface PortraitFxHandle {
-  /** Coupe ou relance la boucle SANS perdre le contexte ni le temps écoulé. */
+  /**
+   * Anime ou fige la carte, SANS perdre son temps écoulé. Une carte figée garde
+   * son image ; une carte jamais animée en reçoit quand même une, dès ses
+   * textures prêtes.
+   */
   setRunning(on: boolean): void;
   destroy(): void;
 }
@@ -412,7 +469,7 @@ export interface PortraitFxOptions {
   /** Nom du prefab d'effet (`FX_UI_Character_List_*`). */
   effect: string;
   /**
-   * URL de l'art du portrait. Le canvas le PEINT, il ne se contente pas de le
+   * URL de l'art du portrait. Le moteur le PEINT, il ne se contente pas de le
    * survoler : l'effet s'ajoute à lui en lumière linéaire, ce qu'un mélange CSS
    * ne sait pas faire (cf. l'en-tête).
    */
@@ -421,7 +478,8 @@ export interface PortraitFxOptions {
    * Remonte les refus : WebGL absent, branche de shader non transcrite, texture
    * 404. TOUT refus passe aussi par la console, qu'on écoute ou non — un effet
    * qui ne se monte pas laisse un portrait parfaitement normal à l'écran, donc
-   * rien ne signalerait la panne si personne n'écoutait.
+   * rien ne signalerait la panne si personne n'écoutait. La console ne le dit
+   * qu'UNE fois (cf. `say`) ; ce rapporteur, lui, est appelé pour chaque carte.
    */
   onError?: (message: string) => void;
   /**
@@ -429,13 +487,6 @@ export interface PortraitFxOptions {
    * contrôle, qui montre chaque calque isolément : le jeu, lui, les pose tous.
    */
   only?: readonly string[];
-  /**
-   * `false` : dessiner UNE image dès les textures prêtes, puis s'arrêter. C'est
-   * ce que veut `prefers-reduced-motion` — la parure reste visible, elle ne
-   * bouge plus. Elle ne porte aucune information (les étoiles et les tags disent
-   * la même chose), donc on la fige au lieu de la ralentir.
-   */
-  autoplay?: boolean;
   /**
    * SIMULE le plafond de taille de l'extraction (`--max-size` d'
    * `extract-portrait-fx.py`) sur une texture servie plus grande : plus grand
@@ -448,77 +499,48 @@ export interface PortraitFxOptions {
 }
 
 /**
- * Les canvas déjà armés contre la perte de contexte.
- *
- * L'écouteur qui ANNULE `webglcontextlost` doit SURVIVRE au démontage : c'est
- * `destroy()` qui perd le contexte (éviction), donc l'événement part quand les
- * écouteurs de la session sont déjà retirés — et un événement non annulé rend
- * `restoreContext()` définitivement muet (mesuré sur Chrome/ANGLE). Posé une
- * seule fois par canvas, jamais retiré.
+ * UN REFUS N'EST DIT QU'UNE FOIS À LA CONSOLE. Douze cartes qui portent le même
+ * effet refusé, ou une page entière sans WebGL2, diraient sinon douze fois la
+ * même chose — et le rediraient à chaque remontage.
  */
-const RESTORABLE = new WeakSet<HTMLCanvasElement>();
+const said = new Set<string>();
 
-/**
- * L'extension `WEBGL_lose_context` de chaque canvas, RETENUE pendant que son
- * contexte est vivant. Sur un contexte perdu, `getExtension` rend null — la
- * résurrection d'un canvas recyclé par l'éviction ne peut donc passer que par
- * l'instance retenue au montage précédent (elle survit aux pertes et aux
- * restaurations : mesuré sur deux cycles complets).
- */
-const LOSE_EXT = new WeakMap<HTMLCanvasElement, WEBGL_lose_context>();
+function say(scope: string, message: string): void {
+  const line = scope ? `portrait-fx [${scope}] : ${message}` : `portrait-fx : ${message}`;
+  if (said.has(line)) return;
+  said.add(line);
+  console.error(line);
+}
 
-export function mountPortraitFx(
-  canvas: HTMLCanvasElement,
-  { effect: effectName, art, onError: report, only, autoplay = true, texCap }: PortraitFxOptions,
-): PortraitFxHandle {
-  const onError = (m: string) => {
-    console.error(`portrait-fx [${effectName}] : ${m}`);
-    report?.(m);
-  };
+/** Ce que le contexte partagé ne saura JAMAIS faire ici (WebGL2 absent, shader refusé). */
+let refusal: string | null = null;
 
+// --- les calques d'une carte — purs, ils ne touchent pas au contexte ----------------
+
+interface Prepared {
+  layers: Layer[];
+  /** Les textures d'effet que les calques citent, par nom de la table. */
+  needed: Set<string>;
+  bleed: { x: number; y: number };
+  /** Le cadre plus son débord, en unités du cadre. */
+  spanW: number;
+  spanH: number;
+  /** L'art occupe le cadre EXACT à l'intérieur du canvas, débord compris. */
+  artRect: [number, number, number, number];
+}
+
+function prepare(
+  effectName: string,
+  only: readonly string[] | undefined,
+  onError: (m: string) => void,
+): Prepared {
   const effect = PORTRAIT_FX.effects[effectName];
-  let disposed = false;
-  let raf = 0;
-
-  if (!effect) {
-    onError(`effet « ${effectName} » absent de portrait-fx.json (non extrait ?)`);
-    return NO_FX;
-  }
-  if (PORTRAIT_FX.colorSpace !== 'linear') {
-    // Se tromper d'espace ne se voit pas « un peu » : en gamma, le liseré part à
-    // 8,75 et blanchit la carte. Mieux vaut ne rien poser.
-    onError(`espace colorimétrique « ${PORTRAIT_FX.colorSpace} » non transcrit`);
-    return NO_FX;
-  }
-
-  const gl = canvas.getContext('webgl2', {
-    alpha: true,
-    premultipliedAlpha: true,
-    // Le MSAA du canvas ne servirait à rien : tout est dessiné hors écran puis
-    // reporté. C'est `SUPERSAMPLE` qui tient les bords.
-    antialias: false,
-    preserveDrawingBuffer: false,
-  });
-  if (!gl) {
-    onError('WebGL2 indisponible');
-    return NO_FX;
-  }
-  if (!RESTORABLE.has(canvas)) {
-    canvas.addEventListener('webglcontextlost', (e) => e.preventDefault());
-    RESTORABLE.add(canvas);
-  }
-  if (!gl.isContextLost()) {
-    const lose = gl.getExtension('WEBGL_lose_context');
-    if (lose) LOSE_EXT.set(canvas, lose);
-  }
-
-  // --- géométrie — pure, elle survit aux pertes de contexte -----------------------
-  const { frame, holder, textures: texMeta } = PORTRAIT_FX;
+  const { frame, holder } = PORTRAIT_FX;
   const bleed = fxBleed(effectName);
   const spanW = frame.w * (1 + 2 * bleed.x);
   const spanH = frame.h * (1 + 2 * bleed.y);
 
-  const prepared: Layer[] = [];
+  const layers: Layer[] = [];
   const needed = new Set<string>();
   const seedOf = mountSeeds();
 
@@ -541,26 +563,25 @@ export function mountPortraitFx(
 
     if (verdict.kind === 'mesh') {
       const { mesh } = verdict;
-      const data = new Float32Array(mesh.v.length * 4);
-      for (let i = 0; i < mesh.v.length; i++) {
-        data[i * 4] = mesh.v[i][0];
-        data[i * 4 + 1] = mesh.v[i][1];
-        data[i * 4 + 2] = mesh.uv[i][0];
-        data[i * 4 + 3] = mesh.uv[i][1];
-      }
       // La maille est multipliée par la TAILLE de la particule (`startSize`) puis
       // par l'échelle du transform — `scalingMode = Hierarchy` : les deux comptent.
       const sx = e.startSize * e.scale[0];
       const sy = e.startSize * e.scale[1];
-      prepared.push({
+      layers.push({
         kind: 'mesh',
         emitter: e,
         material: mat,
         order: e.sortingOrder,
-        data,
-        indices: new Uint16Array(mesh.i),
-        vao: null,
-        count: mesh.i.length,
+        geometry: geometryOf(`mesh:${e.mesh}`, () => {
+          const data = new Float32Array(mesh.v.length * 4);
+          for (let i = 0; i < mesh.v.length; i++) {
+            data[i * 4] = mesh.v[i][0];
+            data[i * 4 + 1] = mesh.v[i][1];
+            data[i * 4 + 2] = mesh.uv[i][0];
+            data[i * 4 + 3] = mesh.uv[i][1];
+          }
+          return [data, new Uint16Array(mesh.i)];
+        }),
         xform: [
           (2 * sx) / spanW,
           (2 * sy) / spanH,
@@ -578,17 +599,15 @@ export function mountPortraitFx(
       // carte de 344 qu'à cette condition.
       const sx = e.startSize * e.scale[0];
       const sy = (e.size3D ? e.startSizeY : e.startSize) * e.scale[1];
-      prepared.push({
+      layers.push({
         kind: 'mesh',
         emitter: e,
         material: mat,
         order: e.sortingOrder,
-        data: new Float32Array([
-          -0.5, -0.5, 0, 0, 0.5, -0.5, 1, 0, -0.5, 0.5, 0, 1, 0.5, 0.5, 1, 1,
+        geometry: geometryOf('quad', () => [
+          new Float32Array([-0.5, -0.5, 0, 0, 0.5, -0.5, 1, 0, -0.5, 0.5, 0, 1, 0.5, 0.5, 1, 1]),
+          new Uint16Array([0, 1, 2, 2, 1, 3]),
         ]),
-        indices: new Uint16Array([0, 1, 2, 2, 1, 3]),
-        vao: null,
-        count: 6,
         xform: [
           (2 * sx) / spanW,
           (2 * sy) / spanH,
@@ -597,7 +616,7 @@ export function mountPortraitFx(
         ],
       });
     } else {
-      prepared.push({
+      layers.push({
         kind: 'billboard',
         emitter: e,
         material: mat,
@@ -613,24 +632,117 @@ export function mountPortraitFx(
   }
   // `m_SortingOrder` d'abord (10 met `atlas` et `star` au-dessus des cadres),
   // ordre du prefab ensuite — le tri de JS est stable.
-  prepared.sort((a, b) => a.order - b.order);
+  layers.sort((a, b) => a.order - b.order);
 
-  if (!prepared.length) {
-    onError(`aucun calque rendable dans « ${effectName} »`);
-    return NO_FX;
+  return {
+    layers,
+    needed,
+    bleed,
+    spanW,
+    spanH,
+    artRect: [
+      (2 * frame.w) / spanW,
+      (2 * frame.h) / spanH,
+      (2 * bleed.x * frame.w) / spanW - 1,
+      (2 * bleed.y * frame.h) / spanH - 1,
+    ],
+  };
+}
+
+// --- le contexte partagé ----------------------------------------------------------
+
+type TexMeta = { wrapU: number; wrapV: number; filter: number; mips: number; srgb?: number };
+
+/** L'art est POSÉ, pas répété : `CLAMP_TO_EDGE`, et pas de mips (il est
+ * dessiné à sa taille, jamais minifié au-delà du sur-échantillonnage). */
+const ART_META: TexMeta = { wrapU: 1, wrapV: 1, filter: 1, mips: 1 };
+
+/**
+ * Combien de temps une texture que plus aucune carte ne lit reste montée. Dix
+ * secondes couvrent un changement de filtre et un aller-retour de page ; au-delà,
+ * la garder ne servirait qu'une page qu'on a quittée.
+ */
+const TEXTURE_GRACE_MS = 10_000;
+
+/** UNE texture du cache : son image décodée (CPU) et sa copie montée (GPU). */
+interface TexEntry {
+  src: string;
+  meta: TexMeta | undefined;
+  cap: number | undefined;
+  /** Le cache CPU — c'est lui qui rebâtit le GPU après une perte, sans réseau. */
+  image: HTMLImageElement | null;
+  /** Null tant que l'image charge, ou que le contexte est perdu. */
+  tex: WebGLTexture | null;
+  failed: boolean;
+  /** Rendue par le cache : une image qui arrive après coup ne monte plus rien. */
+  dead: boolean;
+  /** Tenue quand l'image est arrivée — ou qu'on sait qu'elle n'arrivera pas. */
+  settled: Promise<void>;
+}
+
+/** Une cible linéaire, par TAILLE de carte (cf. `targetOf`). */
+interface Target {
+  fbo: WebGLFramebuffer;
+  tex: WebGLTexture;
+  w: number;
+  h: number;
+  /** Servie pendant l'image en cours — une cible qui passe une image sans servir est rendue. */
+  used: boolean;
+}
+
+/** Une carte, vue du moteur. */
+interface Session extends Prepared {
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
+  /** Les textures d'effet de la carte, par nom de la table. */
+  tex: Map<string, TexEntry>;
+  art: TexEntry | null;
+  onError: (m: string) => void;
+}
+
+interface Shared {
+  mount(
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    prepared: Prepared,
+    art: string,
+    texCap: number | undefined,
+    onError: (m: string) => void,
+  ): PortraitFxHandle;
+}
+
+let shared: Shared | null = null;
+
+/**
+ * Crée LE contexte de la page et tout ce que les cartes y partagent — ou rend
+ * null en posant `refusal` : sans WebGL2, ou sur un shader refusé, aucune carte
+ * ne retentera.
+ */
+function createShared(): Shared | null {
+  // Hors du document : personne ne le voit, il n'est que la table de travail
+  // dont chaque carte recopie son rectangle. Il part de 1×1 et non des 300×150
+  // d'un canvas neuf : `draw` le fait grandir à la taille de la plus grande
+  // carte, et chaque copie relit le tampon ENTIER — un pixel de trop se paie à
+  // chaque carte et à chaque image.
+  const canvas = document.createElement('canvas');
+  canvas.width = 1;
+  canvas.height = 1;
+  const context = canvas.getContext('webgl2', {
+    alpha: true,
+    premultipliedAlpha: true,
+    // Le MSAA du canvas ne servirait à rien : tout est dessiné hors écran puis
+    // reporté. C'est `SUPERSAMPLE` qui tient les bords.
+    antialias: false,
+    preserveDrawingBuffer: false,
+  });
+  if (!context) {
+    refusal = 'WebGL2 indisponible';
+    say('', refusal);
+    return null;
   }
+  const gl: WebGL2RenderingContext = context;
 
-  /** L'art occupe le cadre EXACT à l'intérieur du canvas, débord compris. */
-  const ART_RECT: [number, number, number, number] = [
-    (2 * frame.w) / spanW,
-    (2 * frame.h) / spanH,
-    (2 * bleed.x * frame.w) / spanW - 1,
-    (2 * bleed.y * frame.h) / spanH - 1,
-  ];
-
-  // --- images décodées — cache CPU, une restauration ne re-télécharge rien --------
-  const decoded = new Map<string, HTMLImageElement>();
-  let artImage: HTMLImageElement | null = null;
+  const { frame, textures: texMeta } = PORTRAIT_FX;
 
   // --- ressources GPU — tout ce qui meurt avec le contexte ------------------------
   let live = false;
@@ -644,39 +756,32 @@ export function mountPortraitFx(
   } = { rect: null, tex: null, encode: null };
   let quadVao: WebGLVertexArrayObject | null = null;
   let bbVao: WebGLVertexArrayObject | null = null;
-  const byName = new Map<string, WebGLTexture>();
-  let artTex: WebGLTexture | null = null;
   /** Le « white » d'Unity : TOUT slot du shader a `white` pour défaut (relevé dans
    * `m_ParsedForm`), et `_2000106` s'en sert — son `inner` n'a PAS de `_MainTex`.
    * Un sampler non lié rendrait noir (spec WebGL2), donc alpha = main.r = 0 :
    * calque invisible au lieu du voile du jeu. */
   let whiteTex: WebGLTexture | null = null;
   let FORMATS: [number, string][] = [];
-  let fbo: WebGLFramebuffer | null = null;
-  let fboTex: WebGLTexture | null = null;
-  let fboW = 0;
-  let fboH = 0;
   let format: number | null = null;
   let formatLabel = '';
-  let targetFailed = false;
+  const targets = new Map<string, Target>();
+  /** Les tailles qu'aucun format n'a acceptées sur CE contexte, avec le motif. */
+  const refusedSizes = new Map<string, string>();
+  let sessions = 0;
 
-  function upload(
-    image: HTMLImageElement,
-    meta?: { wrapU: number; wrapV: number; filter: number; mips: number; srgb?: number },
-    cap?: number,
-  ) {
-    const tex = gl!.createTexture()!;
-    gl!.bindTexture(gl!.TEXTURE_2D, tex);
-    gl!.pixelStorei(gl!.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+  function upload(image: HTMLImageElement, meta?: TexMeta, cap?: number) {
+    const tex = gl.createTexture()!;
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
     // Unity garde l'origine des UV EN BAS ; le DOM la met en haut.
-    gl!.pixelStorei(gl!.UNPACK_FLIP_Y_WEBGL, true);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     // `SRGB8_ALPHA8` : c'est le GPU qui linéarise, comme dans le jeu — pour les
     // textures que le jeu MARQUE sRGB (les huit de `_Demi` le sont, l'art aussi).
     // Une texture marquée data (`srgb = 0` dans la table) monterait brute.
-    const internal = meta?.srgb === 0 ? gl!.RGBA8 : gl!.SRGB8_ALPHA8;
-    gl!.texImage2D(gl!.TEXTURE_2D, 0, internal, gl!.RGBA, gl!.UNSIGNED_BYTE, image);
-    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_S, wrapOf(gl!, meta?.wrapU ?? 1));
-    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_T, wrapOf(gl!, meta?.wrapV ?? 1));
+    const internal = meta?.srgb === 0 ? gl.RGBA8 : gl.SRGB8_ALPHA8;
+    gl.texImage2D(gl.TEXTURE_2D, 0, internal, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrapOf(gl, meta?.wrapU ?? 1));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrapOf(gl, meta?.wrapV ?? 1));
     // LES MIPS DU JEU, ET PAS D'AUTRES. Cinq des huit textures de `_Demi` n'en ont
     // AUCUN (`m_MipCount = 1`) : leur en fabriquer lisserait un bruit de 512 sur un
     // ruban de 13 unités jusqu'à l'effacer. Le jeu, lui, échantillonne le niveau 0.
@@ -687,50 +792,118 @@ export function mountPortraitFx(
     // l'échantillonnage : même image qu'un fichier réduit, sans le fichier.
     const side = Math.max(image.naturalWidth, image.naturalHeight);
     const drop = cap && side > cap ? Math.ceil(Math.log2(side / cap)) : 0;
-    if (mips || drop) gl!.generateMipmap(gl!.TEXTURE_2D);
-    if (drop) gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_BASE_LEVEL, drop);
+    if (mips || drop) gl.generateMipmap(gl.TEXTURE_2D);
+    if (drop) gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_BASE_LEVEL, drop);
     // `FilterMode.Bilinear` d'Unity = bilinéaire DANS un niveau, saut sec entre
     // niveaux ; `Trilinear` interpole aussi entre les niveaux.
     const tri = (meta?.filter ?? 1) >= 2;
-    gl!.texParameteri(
-      gl!.TEXTURE_2D,
-      gl!.TEXTURE_MIN_FILTER,
-      mips ? (tri ? gl!.LINEAR_MIPMAP_LINEAR : gl!.LINEAR_MIPMAP_NEAREST) : gl!.LINEAR,
+    gl.texParameteri(
+      gl.TEXTURE_2D,
+      gl.TEXTURE_MIN_FILTER,
+      mips ? (tri ? gl.LINEAR_MIPMAP_LINEAR : gl.LINEAR_MIPMAP_NEAREST) : gl.LINEAR,
     );
-    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MAG_FILTER, gl!.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     return tex;
   }
 
-  /** L'art est POSÉ, pas répété : `CLAMP_TO_EDGE`, et pas de mips (il est
-   * dessiné à sa taille, jamais minifié au-delà du sur-échantillonnage). */
-  const ART_META = { wrapU: 1, wrapV: 1, filter: 1, mips: 1 };
+  // --- textures — UNE par image, quel que soit le nombre de cartes ------------------
+  const textures = createRefCache<TexEntry>({
+    graceMs: TEXTURE_GRACE_MS,
+    dispose(entry) {
+      entry.dead = true;
+      if (entry.tex && live) gl.deleteTexture(entry.tex);
+      entry.tex = null;
+      entry.image = null;
+    },
+    // Plus une texture, donc plus une carte depuis `TEXTURE_GRACE_MS` : le
+    // contexte lui-même est rendu. La prochaine carte en créera un neuf.
+    onEmpty() {
+      if (!sessions) teardown();
+    },
+    host: {
+      now: () => performance.now(),
+      defer: (fn, ms) => setTimeout(fn, ms),
+      cancel: (handle) => clearTimeout(handle as ReturnType<typeof setTimeout>),
+    },
+  });
+
+  /**
+   * Prend une référence sur une texture, en lançant son chargement si personne
+   * ne la tenait. La clé porte tout ce qui change l'objet GPU : l'image, et le
+   * plafond simulé (`texCap`, page de contrôle) qui déplace son niveau de base.
+   */
+  function acquire(key: string, src: string, meta?: TexMeta, cap?: number): TexEntry {
+    return textures.acquire(key, () => {
+      const entry: TexEntry = {
+        src,
+        meta,
+        cap,
+        image: null,
+        tex: null,
+        failed: false,
+        dead: false,
+        settled: Promise.resolve(),
+      };
+      entry.settled = new Promise<void>((done) => {
+        const image = new Image();
+        // R2 sert les images sur un autre domaine que le site : sans CORS, le
+        // canvas serait « teinté » et `texImage2D` refusé.
+        image.crossOrigin = 'anonymous';
+        image.onload = () => {
+          if (!entry.dead) {
+            // L'image rejoint le cache CPU, et monte au GPU tout de suite si le
+            // contexte est vivant — sinon `buildGL` la montera à la restauration.
+            entry.image = image;
+            if (live) entry.tex = upload(image, meta, cap);
+          }
+          done();
+        };
+        image.onerror = () => {
+          entry.failed = true;
+          done();
+        };
+        image.src = src;
+      });
+      return entry;
+    });
+  }
 
   function buildVao(data: Float32Array, indices: Uint16Array): WebGLVertexArrayObject {
-    const vao = gl!.createVertexArray()!;
-    gl!.bindVertexArray(vao);
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, gl!.createBuffer());
-    gl!.bufferData(gl!.ARRAY_BUFFER, data, gl!.STATIC_DRAW);
-    gl!.enableVertexAttribArray(0);
-    gl!.vertexAttribPointer(0, 2, gl!.FLOAT, false, 16, 0);
-    gl!.enableVertexAttribArray(1);
-    gl!.vertexAttribPointer(1, 2, gl!.FLOAT, false, 16, 8);
-    gl!.bindBuffer(gl!.ELEMENT_ARRAY_BUFFER, gl!.createBuffer());
-    gl!.bufferData(gl!.ELEMENT_ARRAY_BUFFER, indices, gl!.STATIC_DRAW);
-    gl!.bindVertexArray(null);
+    const vao = gl.createVertexArray()!;
+    gl.bindVertexArray(vao);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 16, 0);
+    gl.enableVertexAttribArray(1);
+    gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 16, 8);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+    gl.bindVertexArray(null);
     return vao;
   }
 
   /**
-   * (RE)CONSTRUIT tout ce qui vit dans le GPU — au montage, puis à chaque
+   * (RE)CONSTRUIT tout ce qui vit dans le GPU — à la création, puis à chaque
    * `webglcontextrestored`. Programmes, emplacements d'uniformes, VAOs, textures
-   * (depuis le cache d'images) et l'état de la cible : un `format` choisi sur un
+   * (depuis le cache d'images) et l'état des cibles : un `format` choisi sur un
    * contexte mort ne dit rien du vivant, il repart à zéro comme le reste.
    */
   function buildGL(): boolean {
     live = false;
-    fxProg = link(gl!, VERT, FRAG, ['aPos', 'aUV'], 'effet', onError);
-    quadProg = link(gl!, QUAD_VERT, QUAD_FRAG, ['aPos'], 'quad', onError);
-    if (!fxProg || !quadProg) return false;
+    const problems: string[] = [];
+    const onError = (m: string) => problems.push(m);
+    fxProg = link(gl, VERT, FRAG, ['aPos', 'aUV'], 'effet', onError);
+    quadProg = link(gl, QUAD_VERT, QUAD_FRAG, ['aPos'], 'quad', onError);
+    if (!fxProg || !quadProg) {
+      // Sur un contexte perdu, tout échoue sans rien dire de la cause : ce n'est
+      // pas un refus, la restauration rejouera la construction.
+      if (!gl.isContextLost()) {
+        refusal = problems.join(' ; ') || 'programmes refusés';
+        say('', refusal);
+      }
+      return false;
+    }
 
     // Les emplacements d'uniformes, résolus UNE fois par contexte :
     // `getUniformLocation` est une requête au pilote, et la boucle en ferait une
@@ -757,53 +930,54 @@ export function mountPortraitFx(
         'uAlphaTexOn',
         'uSrcAlphaBlend',
         ...SLOTS.flatMap((s) => [UNIFORM_OF[s], ST_OF[s], SPEED_OF[s]]),
-      ].map((n) => [n, gl!.getUniformLocation(fxProg!, n)]),
+      ].map((n) => [n, gl.getUniformLocation(fxProg!, n)]),
     ) as Record<string, WebGLUniformLocation | null>;
     Q = {
-      rect: gl!.getUniformLocation(quadProg, 'uRect'),
-      tex: gl!.getUniformLocation(quadProg, 'uTex'),
-      encode: gl!.getUniformLocation(quadProg, 'uEncode'),
+      rect: gl.getUniformLocation(quadProg, 'uRect'),
+      tex: gl.getUniformLocation(quadProg, 'uTex'),
+      encode: gl.getUniformLocation(quadProg, 'uEncode'),
     };
 
-    for (const p of prepared) if (p.kind === 'mesh') p.vao = buildVao(p.data, p.indices);
+    // Les mailles se remontent au premier tirage qui les demande (cf. `draw`).
+    for (const g of GEOMETRY.values()) g.vao = null;
 
     // Le quad unitaire : [0,1]² en attribut, placé par `uRect`.
-    quadVao = gl!.createVertexArray()!;
-    gl!.bindVertexArray(quadVao);
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, gl!.createBuffer());
-    gl!.bufferData(gl!.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 1, 1]), gl!.STATIC_DRAW);
-    gl!.enableVertexAttribArray(0);
-    gl!.vertexAttribPointer(0, 2, gl!.FLOAT, false, 8, 0);
-    gl!.bindVertexArray(null);
+    quadVao = gl.createVertexArray()!;
+    gl.bindVertexArray(quadVao);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0, 1, 0, 0, 1, 1, 1]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 8, 0);
+    gl.bindVertexArray(null);
 
     // Le quad des billboards : aPos CENTRÉ (±0,5) pour tourner autour du centre
     // de la particule, aUV en [0,1]² — même origine bas-gauche que les mailles.
-    bbVao = gl!.createVertexArray()!;
-    gl!.bindVertexArray(bbVao);
-    gl!.bindBuffer(gl!.ARRAY_BUFFER, gl!.createBuffer());
-    gl!.bufferData(
-      gl!.ARRAY_BUFFER,
+    bbVao = gl.createVertexArray()!;
+    gl.bindVertexArray(bbVao);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
       new Float32Array([-0.5, -0.5, 0, 0, 0.5, -0.5, 1, 0, -0.5, 0.5, 0, 1, 0.5, 0.5, 1, 1]),
-      gl!.STATIC_DRAW,
+      gl.STATIC_DRAW,
     );
-    gl!.enableVertexAttribArray(0);
-    gl!.vertexAttribPointer(0, 2, gl!.FLOAT, false, 16, 0);
-    gl!.enableVertexAttribArray(1);
-    gl!.vertexAttribPointer(1, 2, gl!.FLOAT, false, 16, 8);
-    gl!.bindVertexArray(null);
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 16, 0);
+    gl.enableVertexAttribArray(1);
+    gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 16, 8);
+    gl.bindVertexArray(null);
 
     // Le blanc vaut 1,0 dans les deux espaces : RGBA8 suffit, rien à linéariser.
-    whiteTex = gl!.createTexture()!;
-    gl!.bindTexture(gl!.TEXTURE_2D, whiteTex);
-    gl!.texImage2D(
-      gl!.TEXTURE_2D,
+    whiteTex = gl.createTexture()!;
+    gl.bindTexture(gl.TEXTURE_2D, whiteTex);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
       0,
-      gl!.RGBA8,
+      gl.RGBA8,
       1,
       1,
       0,
-      gl!.RGBA,
-      gl!.UNSIGNED_BYTE,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
       new Uint8Array([255, 255, 255, 255]),
     );
 
@@ -823,120 +997,146 @@ export function mountPortraitFx(
     // Aucun des deux : on ne dessine RIEN. Un `RGBA8` linéaire tiendrait l'écran
     // mais mentirait sur les ombres, et un effet faux vaut moins que pas d'effet.
     const HDR =
-      gl!.getExtension('EXT_color_buffer_half_float') ?? gl!.getExtension('EXT_color_buffer_float');
+      gl.getExtension('EXT_color_buffer_half_float') ?? gl.getExtension('EXT_color_buffer_float');
     FORMATS = [
-      ...(HDR ? ([[gl!.RGBA16F, 'RGBA16F']] as [number, string][]) : []),
-      [gl!.SRGB8_ALPHA8, 'SRGB8_ALPHA8'],
+      ...(HDR ? ([[gl.RGBA16F, 'RGBA16F']] as [number, string][]) : []),
+      [gl.SRGB8_ALPHA8, 'SRGB8_ALPHA8'],
     ];
-    fbo = null;
-    fboTex = null;
-    fboW = 0;
-    fboH = 0;
     format = null;
     formatLabel = '';
-    targetFailed = false;
+    targets.clear();
+    refusedSizes.clear();
 
-    byName.clear();
-    artTex = null;
-    for (const [name, image] of decoded) byName.set(name, upload(image, texMeta[name], texCap));
-    if (artImage) artTex = upload(artImage, ART_META);
+    for (const entry of textures.values())
+      entry.tex = entry.image ? upload(entry.image, entry.meta, entry.cap) : null;
 
     live = true;
     return true;
   }
 
-  function ensureTarget(w: number, h: number): boolean {
+  /**
+   * La cible linéaire d'une carte de `w`×`h` pixels sur-échantillonnés — UNE PAR
+   * TAILLE, pas une par carte : seize cartes `_Demi` de la même grille dessinent
+   * tour à tour dans la même. Elle est à la taille EXACTE de la carte, comme
+   * quand chaque carte avait la sienne : le report l'échantillonne aux mêmes
+   * coordonnées, donc rend les mêmes pixels.
+   *
+   * Une cible ne vit que tant qu'elle sert : `sweepTargets` rend après chaque
+   * image celles qu'elle n'a pas utilisées, `dropTargets` les rend toutes quand
+   * la boucle s'arrête. En recréer une coûte une allocation, pas un chargement.
+   */
+  function targetOf(w: number, h: number): Target | null {
+    const key = `${w}x${h}`;
+    const known = targets.get(key);
+    if (known) {
+      known.used = true;
+      return known;
+    }
     // Sur un contexte perdu, tout statut est du bruit : on se tait — ce n'est pas
     // aux formats de porter le chapeau, et `webglcontextrestored` reconstruira.
-    if (gl!.isContextLost()) return false;
-    if (targetFailed) return false;
-    if (fboW === w && fboH === h) return true;
-    if (fboTex) gl!.deleteTexture(fboTex);
-    if (fbo) gl!.deleteFramebuffer(fbo);
-    fboW = w;
-    fboH = h;
+    if (gl.isContextLost() || refusedSizes.has(key)) return null;
 
-    // Le format n'est cherché qu'UNE fois par contexte : un redimensionnement ne
+    // Le format n'est cherché qu'UNE fois par contexte : une autre taille ne
     // rejoue pas l'essai, un pilote ne change pas d'avis en cours de route.
     const tried: string[] = [];
     for (const [fmt, label] of format ? [[format, formatLabel] as [number, string]] : FORMATS) {
-      fboTex = gl!.createTexture();
-      gl!.bindTexture(gl!.TEXTURE_2D, fboTex);
-      gl!.texStorage2D(gl!.TEXTURE_2D, 1, fmt, w, h);
+      const tex = gl.createTexture()!;
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texStorage2D(gl.TEXTURE_2D, 1, fmt, w, h);
       // `getError` dit POURQUOI (taille invalide, mémoire) là où le statut du
       // framebuffer ne dit que « incomplet » — la différence entre un rapport
       // actionnable et un code nu.
-      const err = gl!.getError();
-      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MIN_FILTER, gl!.LINEAR);
-      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MAG_FILTER, gl!.LINEAR);
-      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_S, gl!.CLAMP_TO_EDGE);
-      gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_T, gl!.CLAMP_TO_EDGE);
-      fbo = gl!.createFramebuffer();
-      gl!.bindFramebuffer(gl!.FRAMEBUFFER, fbo);
-      gl!.framebufferTexture2D(gl!.FRAMEBUFFER, gl!.COLOR_ATTACHMENT0, gl!.TEXTURE_2D, fboTex, 0);
-      const st = gl!.checkFramebufferStatus(gl!.FRAMEBUFFER);
-      gl!.bindFramebuffer(gl!.FRAMEBUFFER, null);
-      if (st === gl!.FRAMEBUFFER_COMPLETE) {
+      const err = gl.getError();
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      const fbo = gl.createFramebuffer()!;
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      const st = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      if (st === gl.FRAMEBUFFER_COMPLETE) {
         format = fmt;
         formatLabel = label;
-        return true;
+        const target: Target = { fbo, tex, w, h, used: true };
+        targets.set(key, target);
+        return target;
       }
       tried.push(`${label} → 0x${st.toString(16)}${err ? ` (glError 0x${err.toString(16)})` : ''}`);
-      gl!.deleteTexture(fboTex);
-      gl!.deleteFramebuffer(fbo);
-      fboTex = null;
-      fbo = null;
+      gl.deleteTexture(tex);
+      gl.deleteFramebuffer(fbo);
     }
     // Une perte survenue PENDANT l'essai rendrait n'importe quoi : même silence
     // qu'en tête, et pas de condamnation — le contexte suivant retentera.
-    if (gl!.isContextLost()) {
-      fboW = 0;
-      fboH = 0;
-      return false;
-    }
-    targetFailed = true;
-    onError(`aucune cible linéaire acceptée en ${w}×${h} (${tried.join(', ')})`);
-    return false;
+    if (gl.isContextLost()) return null;
+    refusedSizes.set(key, `aucune cible linéaire acceptée en ${w}×${h} (${tried.join(', ')})`);
+    return null;
   }
 
-  // --- boucle -----------------------------------------------------------------------
-  // `elapsed` survit aux pauses ET aux pertes de contexte : reprendre à zéro
-  // ferait sauter l'effet, alors que celui du jeu est continu et sans état.
-  let elapsed = 0;
-  let last = 0;
-  let paused = !autoplay;
-  let ready = false;
+  function freeTarget(key: string, target: Target): void {
+    targets.delete(key);
+    if (!live) return;
+    gl.deleteTexture(target.tex);
+    gl.deleteFramebuffer(target.fbo);
+  }
 
-  function draw(now: number) {
-    if (disposed || !gl || !live || gl.isContextLost()) return;
-    elapsed += last ? Math.min(now - last, 100) / 1000 : 0;
-    last = now;
-    const t = elapsed;
+  function sweepTargets(): void {
+    for (const [key, target] of targets) {
+      if (target.used) target.used = false;
+      else freeTarget(key, target);
+    }
+  }
+
+  function dropTargets(): void {
+    for (const [key, target] of targets) freeTarget(key, target);
+  }
+
+  // --- le dessin d'UNE carte --------------------------------------------------------
+  function draw(s: Session, t: number): boolean {
+    if (!live || gl.isContextLost()) return false;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
-    const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width = w;
-      canvas.height = h;
+    const w = Math.max(1, Math.round(s.canvas.clientWidth * dpr));
+    const h = Math.max(1, Math.round(s.canvas.clientHeight * dpr));
+    const target = targetOf(w * SUPERSAMPLE, h * SUPERSAMPLE);
+    if (!target) {
+      // Taille refusée pour de bon (et non contexte perdu) : la carte ne se
+      // dessinera jamais, elle sort de la boucle — le <img> de `Portrait` reste.
+      const reason = refusedSizes.get(`${w * SUPERSAMPLE}x${h * SUPERSAMPLE}`);
+      if (reason) {
+        s.onError(reason);
+        loop.remove(s);
+      }
+      return false;
     }
-    if (!ensureTarget(w * SUPERSAMPLE, h * SUPERSAMPLE)) return;
+    // Le tampon partagé ne fait que GRANDIR, à la taille de la plus grande carte
+    // vue : chacune s'y dessine dans son coin (0, 0), jamais redimensionné par
+    // carte — ce serait une réallocation par carte et par image.
+    if (canvas.width < w || canvas.height < h) {
+      canvas.width = Math.max(canvas.width, w);
+      canvas.height = Math.max(canvas.height, h);
+    }
+    if (s.canvas.width !== w || s.canvas.height !== h) {
+      s.canvas.width = w;
+      s.canvas.height = h;
+    }
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
-    gl.viewport(0, 0, fboW, fboH);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+    gl.viewport(0, 0, target.w, target.h);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.DEPTH_TEST);
 
     // 1. L'ART, opaque, à la place exacte du cadre.
-    if (artTex) {
+    if (s.art?.tex) {
       gl.disable(gl.BLEND);
       gl.useProgram(quadProg);
       gl.bindVertexArray(quadVao);
-      gl.uniform4f(Q.rect, ART_RECT[0], ART_RECT[1], ART_RECT[2], ART_RECT[3]);
+      gl.uniform4f(Q.rect, s.artRect[0], s.artRect[1], s.artRect[2], s.artRect[3]);
       gl.uniform1i(Q.encode, 0);
       gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, artTex);
+      gl.bindTexture(gl.TEXTURE_2D, s.art.tex);
       gl.uniform1i(Q.tex, 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
@@ -952,7 +1152,7 @@ export function mountPortraitFx(
     gl.useProgram(fxProg);
     gl.uniform1f(U.uTime, t);
 
-    for (const p of prepared) {
+    for (const p of s.layers) {
       const { emitter: e, material: m } = p;
       gl.uniform1i(U.uSrcAlphaBlend, (m.floats._SrcBlend ?? 5) === 5 ? 1 : 0);
       const col = m.vectors._Color ?? [1, 1, 1, 1];
@@ -981,7 +1181,7 @@ export function mountPortraitFx(
         gl.activeTexture(gl.TEXTURE0 + unit);
         // Slot non câblé → le « white » du shader ; câblé mais pas encore chargé
         // → null (noir), l'état transitoire du chargement, jamais un flash blanc.
-        gl.bindTexture(gl.TEXTURE_2D, decl ? (byName.get(decl.tex) ?? null) : whiteTex);
+        gl.bindTexture(gl.TEXTURE_2D, decl ? (s.tex.get(decl.tex)?.tex ?? null) : whiteTex);
         gl.uniform1i(U[UNIFORM_OF[slot]], unit);
         const sp = m.vectors[SPEED_PROP[slot]] ?? [0, 0, 0, 0];
         gl.uniform2f(U[SPEED_OF[slot]], sp[0], sp[1]);
@@ -1003,7 +1203,9 @@ export function mountPortraitFx(
         const age = frameAge(e, t);
         const start = evalMinMax(e.startColor, age);
         const over = e.colorOverLifetime ? evalMinMax(e.colorOverLifetime, age) : [1, 1, 1, 1];
-        gl.bindVertexArray(p.vao);
+        const g = p.geometry;
+        g.vao ??= buildVao(g.data, g.indices);
+        gl.bindVertexArray(g.vao);
         SLOTS.forEach((slot) => {
           const st = m.textures[slot]?.st ?? [1, 1, 0, 0];
           gl.uniform4f(U[ST_OF[slot]], st[0], st[1], st[2], st[3]);
@@ -1017,7 +1219,7 @@ export function mountPortraitFx(
           lin(start[2] * over[2]),
           start[3] * over[3],
         );
-        gl.drawElements(gl.TRIANGLES, p.count, gl.UNSIGNED_SHORT, 0);
+        gl.drawElements(gl.TRIANGLES, g.indices.length, gl.UNSIGNED_SHORT, 0);
       } else {
         // Un tirage par particule : la couleur vient des dégradés à SON âge (avec
         // SES tirages de naissance), la tuile de la feuille UV se compose avec le
@@ -1027,8 +1229,8 @@ export function mountPortraitFx(
         if (!parts.length) continue;
         gl.bindVertexArray(bbVao);
         const [tilesX, tilesY] = p.sim.tiles;
-        const kx = 2 / spanW;
-        const ky = 2 / spanH;
+        const kx = 2 / s.spanW;
+        const ky = 2 / s.spanH;
         for (const bp of parts) {
           const start = evalMinMax(e.startColor, bp.age01, bp.lerpStart);
           const over = e.colorOverLifetime
@@ -1062,15 +1264,16 @@ export function mountPortraitFx(
           gl.uniform4f(U.uM, kx * cos * bp.w, ky * sin * bp.w, -kx * sin * bp.h, ky * cos * bp.h);
           gl.uniform2f(
             U.uT,
-            (2 * (p.ox + bp.x + bleed.x * frame.w)) / spanW - 1,
-            1 - (2 * (p.oy - bp.y + bleed.y * frame.h)) / spanH,
+            (2 * (p.ox + bp.x + s.bleed.x * frame.w)) / s.spanW - 1,
+            1 - (2 * (p.oy - bp.y + s.bleed.y * frame.h)) / s.spanH,
           );
           gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         }
       }
     }
 
-    // 3. LE REPORT sur le canvas, avec le SEUL encodage sRGB de la chaîne.
+    // 3. LE REPORT dans le tampon partagé, avec le SEUL encodage sRGB de la
+    //    chaîne — dans le coin (0, 0), à la taille exacte de la carte.
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, w, h);
     gl.disable(gl.BLEND);
@@ -1081,140 +1284,177 @@ export function mountPortraitFx(
     gl.uniform4f(Q.rect, 2, 2, -1, -1);
     gl.uniform1i(Q.encode, 1);
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, fboTex);
+    gl.bindTexture(gl.TEXTURE_2D, target.tex);
     gl.uniform1i(Q.tex, 0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     gl.bindVertexArray(null);
 
-    if (!paused) raf = requestAnimationFrame(draw);
+    // 4. LA COPIE dans le canvas de la carte, dans la même tâche : le tampon
+    //    WebGL n'est garanti que jusqu'à la fin de celle-ci. Le canvas est VIDÉ
+    //    puis reçoit le rectangle : sur du transparent, le mélange par défaut
+    //    (`source-over`, en alpha prémultiplié) rend la source telle quelle —
+    //    rien de l'image précédente ne reste sous les bords translucides du
+    //    débord. Le coin (0, 0) de WebGL est en BAS du tampon, celui d'un canvas
+    //    2D en haut : d'où l'ordonnée de la source.
+    //
+    //    PAS l'opération `copy`, qui dit pourtant la même chose en un appel :
+    //    Firefox ne l'accélère pas, et retombe alors sur une relecture du tampon
+    //    WebGL vers le CPU à CHAQUE carte — mesuré, 1,3 ms par carte à dpr 2,
+    //    soit 46 images/s pour douze cartes là où ce tracé-ci en tient 60.
+    s.ctx.clearRect(0, 0, w, h);
+    s.ctx.drawImage(canvas, 0, canvas.height - h, w, h, 0, 0, w, h);
+    return true;
   }
 
-  // Vrai entre un montage sur contexte PERDU et le `webglcontextrestored` qui lui
-  // répond : tant qu'il l'est, rien ne dit que notre `restoreContext` a été entendu.
-  let awaitingRestore = false;
+  // --- la boucle — une pour toutes les cartes ---------------------------------------
+  const loop = createFrameLoop<Session>(
+    {
+      request: (cb) => requestAnimationFrame(cb),
+      cancel: (id) => cancelAnimationFrame(id),
+    },
+    draw,
+    { afterFrame: sweepTargets, onIdle: dropTargets },
+  );
 
-  // La perte arrête la boucle SANS toucher à `paused` ni à `elapsed` : l'état
-  // demandé par l'appelant et le temps écoulé survivent, la restauration les
-  // retrouve tels quels.
-  const onLost = () => {
+  // --- perte et restauration du contexte ----------------------------------------------
+  // La perte arrête la boucle SANS toucher aux cartes : leur état (animée ou
+  // non, temps écoulé, simulation) et leur dernière image survivent, la
+  // restauration les retrouve tels quels.
+  const onLost = (e: Event) => {
+    // Sans cette annulation le navigateur ne restaure JAMAIS (fait n° 2 de l'en-tête).
+    e.preventDefault();
     live = false;
-    cancelAnimationFrame(raf);
-    // UNE PERTE REÇUE PENDANT QU'ON ATTEND LA RESTAURATION est l'écho du
-    // `loseContext` de la session précédente : le canvas a été recyclé avant que
-    // son `webglcontextlost` soit distribué (l'événement est mis en file), donc le
-    // `restoreContext` du montage est parti trop tôt — et Blink le refuse en
-    // silence tant que l'événement n'a pas été distribué ET annulé (fait n° 2 de
-    // l'en-tête). On le rejoue donc APRÈS la distribution : ni ici dans
-    // l'écouteur, ni en microtâche — l'autorisation n'est levée qu'au retour du
-    // dispatch. Une perte SPONTANÉE (session montée sur un contexte vivant, ou
-    // déjà restaurée) n'en reçoit pas : sa restauration appartient au navigateur.
-    if (awaitingRestore) {
-      setTimeout(() => {
-        if (disposed || !awaitingRestore || !gl.isContextLost()) return;
-        try {
-          LOSE_EXT.get(canvas)?.restoreContext();
-        } catch {
-          // Perte non restaurable (GPU mort) : le repli <img> de `Portrait` reste.
-        }
-      }, 0);
-    }
+    // Les cibles sont mortes avec le contexte : on oublie leurs poignées.
+    targets.clear();
+    loop.suspend();
   };
   const onRestored = () => {
-    if (disposed) return;
-    awaitingRestore = false;
-    if (!buildGL()) return;
-    cancelAnimationFrame(raf);
-    last = 0;
-    // Même en pause, une image : c'est la règle du kickoff, la restauration n'y
-    // déroge pas (`draw` s'arrête seul quand `paused`).
-    if (ready) raf = requestAnimationFrame(draw);
+    if (buildGL()) loop.resume();
   };
   canvas.addEventListener('webglcontextlost', onLost);
   canvas.addEventListener('webglcontextrestored', onRestored);
 
-  if (gl.isContextLost()) {
-    // Canvas recyclé par l'éviction : `getContext` a rendu le MÊME contexte,
-    // perdu. On le ressuscite via l'extension RETENUE (la demander maintenant
-    // rendrait null — cf. l'en-tête) ; la construction viendra de
-    // `webglcontextrestored`. Sans instance retenue (perte spontanée avant tout
-    // montage), on s'en remet à la restauration du navigateur, que le même
-    // écouteur attrape. Si la perte n'a pas encore été distribuée, cet appel est
-    // refusé : `onLost` le rejoue (cf. `awaitingRestore`).
-    awaitingRestore = true;
-    try {
-      LOSE_EXT.get(canvas)?.restoreContext();
-    } catch {
-      // Perte non restaurable (GPU mort) : le repli <img> de `Portrait` reste.
-    }
-  } else if (!buildGL()) {
-    // Échec sur un contexte VIVANT : une vraie panne (transcription, pilote),
-    // déjà rapportée par `link`. Rien ne se dessinera jamais ici.
+  /** Rend le contexte : plus aucune carte, plus aucune texture en sursis. */
+  function teardown(): void {
     canvas.removeEventListener('webglcontextlost', onLost);
     canvas.removeEventListener('webglcontextrestored', onRestored);
+    textures.clear();
+    live = false;
+    targets.clear();
+    for (const g of GEOMETRY.values()) g.vao = null;
+    // `loseContext` libère le GPU sans attendre le ramasse-miettes. Sur un
+    // contexte déjà perdu l'extension est null : il n'y a plus rien à rendre.
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    if (shared === self) shared = null;
+  }
+
+  const self: Shared = {
+    mount(card, ctx, prepared, art, texCap, onError) {
+      const session: Session = {
+        ...prepared,
+        canvas: card,
+        ctx,
+        tex: new Map(),
+        art: null,
+        onError,
+      };
+      const keys: string[] = [];
+      for (const name of prepared.needed) {
+        const key = `fx|${name}|${texCap ?? 0}`;
+        keys.push(key);
+        session.tex.set(name, acquire(key, img.portraitFx(name), texMeta[name], texCap));
+      }
+      const artKey = `art|${art}`;
+      keys.push(artKey);
+      session.art = acquire(artKey, art, ART_META);
+
+      let disposed = false;
+      sessions++;
+      loop.add(session);
+      const entries = [...session.tex.values(), session.art];
+      void Promise.all(entries.map((e) => e.settled)).then(() => {
+        if (disposed) return;
+        for (const e of entries) if (e.failed) onError(`image introuvable : ${e.src}`);
+        // La carte doit une image dès maintenant, MÊME en pause : sinon un effet
+        // figé par `prefers-reduced-motion`, ou sorti de l'écran avant la fin de
+        // ses chargements, resterait un canvas vide (cf. `createFrameLoop`).
+        loop.ready(session);
+      });
+
+      return {
+        setRunning(on: boolean) {
+          if (!disposed) loop.setRunning(session, on);
+        },
+        destroy() {
+          if (disposed) return;
+          disposed = true;
+          sessions--;
+          loop.remove(session);
+          // Rendues au cache, pas détruites : c'est lui qui applique le sursis.
+          for (const key of keys) textures.release(key);
+        },
+      };
+    },
+  };
+
+  if (!buildGL()) {
+    // Échec sur un contexte VIVANT : une vraie panne (transcription, pilote),
+    // dite par `buildGL`. Rien ne se dessinera jamais sur cette page.
+    teardown();
+    return null;
+  }
+  return self;
+}
+
+/**
+ * Monte l'effet d'UNE carte : `canvas` est le sien, en 2D — le moteur y recopie
+ * à chaque image ce qu'il a rendu dans le contexte partagé.
+ *
+ * Tout ce qui peut se décider SANS contexte l'est avant d'en créer un : un effet
+ * absent de la table, ou dont aucun calque n'est rendable, ne coûte ni contexte
+ * ni chargement, et sa poignée inerte n'est inscrite nulle part.
+ */
+export function mountPortraitFx(
+  canvas: HTMLCanvasElement,
+  { effect: effectName, art, onError: report, only, texCap }: PortraitFxOptions,
+): PortraitFxHandle {
+  const onError = (m: string) => {
+    say(effectName, m);
+    report?.(m);
+  };
+
+  if (!PORTRAIT_FX.effects[effectName]) {
+    onError(`effet « ${effectName} » absent de portrait-fx.json (non extrait ?)`);
+    return NO_FX;
+  }
+  if (PORTRAIT_FX.colorSpace !== 'linear') {
+    // Se tromper d'espace ne se voit pas « un peu » : en gamma, le liseré part à
+    // 8,75 et blanchit la carte. Mieux vaut ne rien poser.
+    onError(`espace colorimétrique « ${PORTRAIT_FX.colorSpace} » non transcrit`);
     return NO_FX;
   }
 
-  function load(src: string, onDone: (image: HTMLImageElement) => void) {
-    return new Promise<void>((done) => {
-      const image = new Image();
-      // R2 sert les images sur un autre domaine que le site : sans CORS, le canvas
-      // serait « teinté » et `texImage2D` refusé.
-      image.crossOrigin = 'anonymous';
-      image.onload = () => {
-        if (!disposed) onDone(image);
-        done();
-      };
-      image.onerror = () => {
-        onError(`image introuvable : ${src}`);
-        done();
-      };
-      image.src = src;
-    });
+  const prepared = prepare(effectName, only, onError);
+  if (!prepared.layers.length) {
+    onError(`aucun calque rendable dans « ${effectName} »`);
+    return NO_FX;
   }
 
-  // Chaque image rejoint le cache CPU, et monte au GPU tout de suite si le
-  // contexte est vivant — sinon `buildGL` la montera à la restauration.
-  const loads = [
-    ...[...needed].map((name) =>
-      load(img.portraitFx(name), (image) => {
-        decoded.set(name, image);
-        if (live) byName.set(name, upload(image, texMeta[name], texCap));
-      }),
-    ),
-    load(art, (image) => {
-      artImage = image;
-      if (live) artTex = upload(image, ART_META);
-    }),
-  ];
-
-  void Promise.all(loads).then(() => {
-    if (disposed) return;
-    ready = true;
-    // Une image est tirée MÊME en pause : sinon un effet monté hors écran, ou
-    // figé par `prefers-reduced-motion`, resterait un canvas vide.
-    raf = requestAnimationFrame(draw);
-  });
-
-  return {
-    setRunning(on: boolean) {
-      if (paused === !on) return; // déjà dans l'état demandé
-      paused = !on;
-      cancelAnimationFrame(raf);
-      // `last` remis à zéro : le temps ne s'écoule pas pendant la pause, sinon
-      // reprendre ferait sauter l'effet de toute la durée passée hors écran.
-      last = 0;
-      if (on && ready && !disposed) raf = requestAnimationFrame(draw);
-    },
-    destroy() {
-      disposed = true;
-      cancelAnimationFrame(raf);
-      canvas.removeEventListener('webglcontextlost', onLost);
-      canvas.removeEventListener('webglcontextrestored', onRestored);
-      // `loseContext` LIBÈRE le GPU mais laisse le canvas ressuscitable : le
-      // prochain montage récupérera ce même contexte et le restaurera — grâce à
-      // l'écouteur permanent de `RESTORABLE` et à l'extension retenue dans
-      // `LOSE_EXT`, qui restent tous deux en place.
-      LOSE_EXT.get(canvas)?.loseContext();
-    },
-  };
+  // Le refus du contexte est déjà à la console (une fois) : les cartes suivantes
+  // ne font que le relayer à qui veut l'afficher.
+  if (refusal) {
+    report?.(refusal);
+    return NO_FX;
+  }
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    onError('contexte 2D indisponible sur le canvas de la carte');
+    return NO_FX;
+  }
+  shared ??= createShared();
+  if (!shared) {
+    if (refusal) report?.(refusal);
+    return NO_FX;
+  }
+  return shared.mount(canvas, ctx, prepared, art, texCap, onError);
 }

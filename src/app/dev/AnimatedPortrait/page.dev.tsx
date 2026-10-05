@@ -8,8 +8,8 @@
  * peut trancher d'un coup d'œil à l'écran des personnages.
  *
  * Elle porte aussi ce qui ne se voit PAS sur un rendu : les branches du shader
- * qu'on a relues et celles qu'on n'a pas, le plafond de contextes WebGL, et ce
- * que le désassemblage a tranché. C'est le tableau de bord du portage.
+ * qu'on a relues et celles qu'on n'a pas, le plafond de taille des textures, et
+ * ce que le désassemblage a tranché. C'est le tableau de bord du portage.
  *
  * Composant SERVEUR — la table est lue directement ; seul le canvas est client.
  */
@@ -168,10 +168,11 @@ const LAST_FOUR: {
 /**
  * Les QUATRE paliers responsives de `CharacterCard` — mêmes libellés que
  * `/dev/portrait`. La taille du prefab (`w-45`) n'y est pas : c'est celle des
- * sections du haut. La page pose plus de portraits animés que le plafond de 8
- * contextes WebGL : l'éviction peut donc jouer au défilement — mais elle ne
- * frappe que HORS écran, et la carte évincée ressuscite en revenant. Une carte
- * qu'on regarde ne s'éteint jamais.
+ * sections du haut. La page pose bien plus de portraits animés qu'un navigateur
+ * ne tient de contextes WebGL, de tailles et d'effets mêlés : ils se dessinent
+ * tous dans le MÊME contexte (`portrait-fx-gl`), et c'est ce qui en fait un
+ * banc — un contexte créé, une texture montée par image, aucune carte à évincer
+ * en défilant.
  */
 const SIZES = [
   { label: 'w-20 · 80 px · <640', cls: 'w-20' },
@@ -296,7 +297,7 @@ const FROM_BINARY: { k: string; v: string }[] = [
 /** Ce qui reste incertain — listé à part, jamais noyé dans le reste. */
 const UNSURE: string[] = [
   'LES PARTICULES SONT APPROCHÉES, PAS CLONÉES. Trois écarts au ParticleSystem d’Unity, déclarés en tête de `portrait-fx-sim` : le bruit Perlin interne (le relevé dit un champ STATIQUE, `scrollSpeed = 0` : rendu par deux sinus déphasés échantillonnés le long du CHEMIN parcouru — une dérive de 0,05 u/s au plus, jamais une oscillation sur l’horloge, que le jeu n’a pas), le frein (`dampen` s’applique là-bas PAR IMAGE de simulation, rendu par convergence calée sur 60 pas/s ; `drag` suit la reconstruction publique `drag × π·(taille/2)² × vitesse²`, drapeaux `multiplyDragBy…` honorés, mais Unity ne documente pas sa formule ni s’il prend la taille de naissance ou celle du moment), et `size3D` dont on suppose que les axes tirent le MÊME aléa — les plages de `star`, ×2 exactes, gardent alors leur rapport. L’aléa par montage, lui, suit `autoRandomSeed` : vrai côté jeu sur la plupart des émetteurs, une graine par émetteur est alors conforme ; FAUX sur huit `star`, et ceux qui portent la même graine la partagent ici aussi — l’étoile et son halo de `_2000093`, `_2000110` et `_2000114` naissent ensemble. Déduit de la sémantique d’Unity : à confirmer sur une capture du jeu.',
-  'LE TEMPS D’ORIGINE. `_Time` du jeu compte depuis le chargement de la scène et est PARTAGÉ par tous les effets : deux cartes de la même page y sont donc en phase. Ici chaque canvas compte depuis son propre montage, donc deux cartes montées à des instants différents sont déphasées. Invisible sur une carte seule, visible sur une rangée — et c’est un des arguments pour le contexte partagé ci-dessous.',
+  'LE TEMPS D’ORIGINE. `_Time` du jeu compte depuis le chargement de la scène et est PARTAGÉ par tous les effets : deux cartes de la même page y sont donc en phase. Ici chaque carte compte depuis sa première image, et son temps s’arrête hors écran : deux cartes montées à des instants différents sont déphasées. Invisible sur une carte seule, visible sur une rangée. Le contexte est désormais partagé et la boucle commune, mais chaque carte a GARDÉ son temps — les mettre en phase changerait l’image, c’est un choix à faire, plus un chantier (`createFrameLoop`, `portrait-fx-pool`).',
   'L’ÉCHELLE DU NŒUD RACINE. Les prefabs du bundle ont tous un `m_LocalScale` de (0, 0, 0) sur leur racine (revérifié sur `_Resonance` à son arrivée), ce qui écraserait tout. C’est de l’état d’éditeur : `UIParticle` pose l’échelle au runtime et son `m_Scale3D` vaut (1, 1, 1). La géométrie le confirme (le cadre tombe juste au pixel), mais c’est une déduction, pas un relevé.',
   'LE FILTRAGE ENTRE NIVEAUX. Le nombre de mips vient désormais du jeu (`m_MipCount`), et les cinq textures qui n’en ont aucun n’en reçoivent plus. Reste que `FilterMode.Bilinear` est rendu en `LINEAR_MIPMAP_NEAREST` pour les trois qui en ont : c’est la lecture usuelle de l’énum, pas une mesure, et Unity ne dit pas s’il génère les mêmes niveaux que `generateMipmap`.',
   'LA CHROME EN DOM. Étoiles, niveau, nom et badges sont posés par-dessus le canvas, donc composés par le navigateur en sRGB, quand le jeu les mélange en linéaire comme le reste. Ils sont opaques ou presque, là où les deux espaces coïncident — mais leurs bords antialiasés, eux, diffèrent d’un cheveu.',
@@ -305,7 +306,6 @@ const UNSURE: string[] = [
 /** Ce qui n'est pas fait, et qu'il vaut mieux écrire que sous-entendre. */
 const TODO: string[] = [
   '`_Synchro` — ÉCARTÉ, pas oublié (décision du 10/08/2026). Ce n’est pas la parure d’un personnage : `CUICharacterThumbnail.SetSynchroEffect()` (sans paramètre, hors `ThumbnailEffect`) le pose sur la vignette de N’IMPORTE QUEL perso placé dans le Synchro Device — un état du COMPTE joueur, que le site n’a pas et n’aura pas. Relevé quand même pour mémoire : deux calques de cadre bleus (0,102 ; 0,275 ; 0,802), zéro émetteur, mais une feuille UV 5×5 à tuile ALÉATOIRE sur un calque-maille et le matériau `M_FX_UI_Char_out_UI` sur la troisième maille du bundle — deux choses que le moteur ne transcrit pas, et n’aura pas à transcrire. Les branches du shader jamais rencontrées (`_POLAR_UV_ON`, `_DISSOLVE_UV_ON`) restent non transcrites — aucun des effets servis ne les demande, et chaque refus est LOUD : un calque non transcrit ne se rend pas à moitié, il se dit.',
-  'UN CONTEXTE WebGL PARTAGÉ. Aujourd’hui, un contexte par carte, plafonné à 8 et recyclé par ordre de dernière apparition — ça tient une page, pas une grille de 124 personnages dont 15 animés. Un seul contexte qui peindrait toutes les cartes lèverait le plafond ET le déphasage noté plus haut.',
   'LE PASSAGE DANS `characters.json`. La table `byCharacter` vit dans `portrait-fx.json` parce qu’une page /dev ne justifie pas d’ouvrir un contrat de données. Le jour où l’effet sort d’ici, sa place est un champ de perso — le datagen lit déjà `CharacterExtraTemplet` pour `showNickName`.',
   'LE `Dim` DU PORTRAIT STATIQUE. Sans rapport avec l’effet, mais vu en lisant l’ordre des nœuds : dans le prefab, `Dim` est le 2ᵉ enfant de `CharacterInfo`, donc SOUS le rail d’étoiles, l’élément, la classe et le niveau. `Portrait` le rend en dernier, donc par-dessus tout. À vérifier en jeu avant de toucher quoi que ce soit.',
 ];
@@ -707,12 +707,14 @@ export default async function DevAnimatedPortrait({
           Plafond des textures — la même carte, servie puis plafonnée à {cap}
         </h2>
         <p className="text-content-muted mb-3 max-w-3xl text-sm">
-          Chaque carte animée monte SA copie de toutes ses textures, non compressées : c’est la
-          taille des fichiers qui fait le poids GPU. L’extraction plafonne donc le plus grand côté (
-          <code>--max-size</code>, {TEX_CAP} par défaut). À gauche la texture telle qu’elle est
-          servie aujourd’hui, à droite le plafond SIMULÉ sur le même fichier : le GPU échantillonne
-          le niveau de mip que l’extraction écrira (moyenne de blocs, par moitiés). À la plus grande
-          taille du site (<code>w-38</code>, 152 px) — c’est là que ça se juge. Essayer :{' '}
+          Une texture n’est montée qu’une fois pour toutes les cartes qui la lisent, mais non
+          compressée : c’est la taille des fichiers qui fait le poids GPU (ici la carte plafonnée
+          monte la sienne à part, le plafond simulé déplaçant le niveau de base de la texture).
+          L’extraction plafonne donc le plus grand côté (<code>--max-size</code>, {TEX_CAP} par
+          défaut). À gauche la texture telle qu’elle est servie aujourd’hui, à droite le plafond
+          SIMULÉ sur le même fichier : le GPU échantillonne le niveau de mip que l’extraction écrira
+          (moyenne de blocs, par moitiés). À la plus grande taille du site (<code>w-38</code>, 152
+          px) — c’est là que ça se juge. Essayer :{' '}
           {TEX_CAPS.map((c) => (
             <Link
               key={c}
@@ -736,7 +738,7 @@ export default async function DevAnimatedPortrait({
                   <tr>
                     <th className="py-2 pr-4 font-medium">Texture</th>
                     <th className="py-2 pr-4 font-medium">Taille</th>
-                    <th className="py-2 pr-4 font-medium">GPU par carte</th>
+                    <th className="py-2 pr-4 font-medium">GPU</th>
                     <th className="py-2 pr-4 font-medium">Effets</th>
                     <th className="py-2 font-medium">Porteurs</th>
                   </tr>
