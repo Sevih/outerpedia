@@ -2,7 +2,8 @@
  * quick — le petit outil de tous les jours (`pnpm quick`, ou l'icône du bureau).
  *
  * Un serveur HTTP local de quelques routes et UNE page : mettre à jour un code
- * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs. Rien d'autre. Le panneau admin
+ * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, écrire un
+ * message Discord que le bot poste. Rien d'autre. Le panneau admin
  * complet reste la référence pour tout le reste — il exige `pnpm dev`, donc un
  * `clean:all` et un refresh complet des données du jeu, ce qui n'a aucun sens
  * pour changer quatre lignes de JSON.
@@ -13,16 +14,17 @@
  *
  * `.env.local` est chargé à la main (tsx ne le fait pas, contrairement à Next) :
  * sans R2_* la publication des codes promo est sautée, sans YOUTUBE_API_KEY
- * l'onglet vidéos ne résout plus les métadonnées.
+ * l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
+ * l'onglet Discord rédige et prévisualise mais n'envoie pas (cf. `discord.ts`).
  *
  * DÉJÀ LANCÉ : le port est tenu par l'instance précédente, on se contente
  * d'ouvrir le navigateur dessus. Double-cliquer l'icône deux fois ne crée donc
  * pas deux serveurs.
  */
 import { spawn } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
-import { resolve } from 'node:path';
+import { extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   addComics,
@@ -40,6 +42,14 @@ import {
   type RankChange,
   type Report,
 } from './actions';
+import {
+  discordSession,
+  latestNotes,
+  noteSrcdoc,
+  officialUrl,
+  patchTemplate,
+  type NotePost,
+} from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
 
@@ -48,6 +58,37 @@ for (const [k, v] of Object.entries(loadEnvLocal())) process.env[k] ??= v;
 
 const PORT = Number(process.env.QUICK_PORT ?? 4747);
 const UI = resolve(import.meta.dirname, 'ui.html');
+
+// Le jeton du bot reste dans cet objet : aucune route ne le renvoie.
+const discord = discordSession({
+  token: process.env.DISCORD_BOT_TOKEN || undefined,
+  guildId: process.env.DISCORD_GUILD_ID || undefined,
+  fetch,
+  sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
+});
+
+/**
+ * Les notes officielles, chargées à la PREMIÈRE demande de l'onglet Discord :
+ * 7 Mo de JSON que les quatre autres gestes ne lisent jamais, et qui n'ont pas
+ * à peser sur le démarrage.
+ */
+let notePosts: Promise<NotePost[]> | null = null;
+const patchPosts = (): Promise<NotePost[]> =>
+  (notePosts ??= import('@/lib/data/patch-posts').then((m) => m.getPatchPosts()));
+
+/** Images des notes : `get-news` les dépose ici, `pnpm images` les pousse sur R2. */
+const NOTE_IMAGES = resolve('.assets-staging/images/patch-notes');
+const IMG_BASE = process.env.NEXT_PUBLIC_IMG_BASE || 'https://img.outerpedia.com';
+const IMAGE_TYPES = new Map([
+  ['.webp', 'image/webp'],
+  ['.png', 'image/png'],
+  ['.jpg', 'image/jpeg'],
+  ['.jpeg', 'image/jpeg'],
+  ['.gif', 'image/gif'],
+]);
+
+const strings = (v: unknown): string[] =>
+  Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
 
 /** Corps JSON, plafonné — une planche de BD en base64 pèse déjà ~600 Ko. */
 const MAX_BODY = 64 * 1024 * 1024;
@@ -172,6 +213,81 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/ranks') {
     const { changes } = await body<{ changes: RankChange[] }>(req);
     await stream(res, (report) => saveRanks(changes, report));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/discord/state') {
+    json(res, { ...(await discord.state()), notes: latestNotes(await patchPosts()) });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/discord/note') {
+    const id = url.searchParams.get('id');
+    const post = (await patchPosts()).find((p) => p.lang === 'en' && String(p.id) === id);
+    if (!post) return json(res, { error: 'note inconnue' }, 404);
+    const link = officialUrl(post);
+    json(res, { url: link, srcdoc: noteSrcdoc(post.content), template: patchTemplate(link) });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname.startsWith('/images/patch-notes/')) {
+    // Les images du cadre de la note. Le staging local d'abord : une note
+    // scrapée ce matin n'est pas encore sur R2 (elle y part avec `pnpm commit`).
+    // Sinon leur origine publique, par redirection — rien n'est relayé d'ici.
+    const name = url.pathname.slice('/images/patch-notes/'.length);
+    const type = IMAGE_TYPES.get(extname(name).toLowerCase());
+    if (!type || !/^[A-Za-z0-9_-][A-Za-z0-9._-]*$/.test(name))
+      return json(res, { error: 'image inconnue' }, 404);
+    const file = resolve(NOTE_IMAGES, name);
+    if (existsSync(file)) {
+      res.writeHead(200, { 'content-type': type, 'cache-control': 'max-age=3600' });
+      res.end(readFileSync(file));
+    } else {
+      res.writeHead(302, { location: `${IMG_BASE}/images/patch-notes/${name}` });
+      res.end();
+    }
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/preview') {
+    // Rendu ICI, pas dans la page : une seule implémentation du markdown de
+    // Discord, celle que les tests couvrent — et la même conversion d'emojis
+    // et le même découpage que l'envoi.
+    const { text } = await body<{ text?: unknown }>(req);
+    json(res, discord.preview(String(text ?? '')));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/send') {
+    const b = await body<Record<string, unknown>>(req);
+    await stream(res, (report) =>
+      discord.send(
+        {
+          text: String(b.text ?? ''),
+          channelId: String(b.channelId ?? ''),
+          suppressEmbeds: b.suppressEmbeds !== false,
+          already: strings(b.already),
+          total: typeof b.total === 'number' ? b.total : undefined,
+        },
+        report,
+      ),
+    );
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/discord/edit') {
+    const b = await body<Record<string, unknown>>(req);
+    await stream(res, (report) =>
+      discord.edit(
+        {
+          text: String(b.text ?? ''),
+          channelId: String(b.channelId ?? ''),
+          suppressEmbeds: b.suppressEmbeds !== false,
+          ids: strings(b.ids),
+        },
+        report,
+      ),
+    );
     return;
   }
 

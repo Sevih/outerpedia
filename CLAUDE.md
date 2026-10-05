@@ -34,9 +34,10 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
   `next dev`.
 - `pnpm quick` — l'outil de tous les jours (`scripts/quick/`, icône posée par
   `pnpm quick:install` sur le poste courant : `.desktop` sous Linux, menu
-  Démarrer sous Windows) : code promo, 4-comic, vidéo, rangs. Quatre gestes,
-  une page, pas de Next ni de refresh. **Ne pas le lancer non plus** — il
-  ouvre un navigateur et publie sur R2 ; c'est Sevih qui s'en sert.
+  Démarrer sous Windows) : code promo, 4-comic, vidéo, rangs, message Discord
+  posté par le bot. Cinq gestes, une page, pas de Next ni de refresh. **Ne pas
+  le lancer non plus** — il ouvre un navigateur, publie sur R2 et poste sur
+  Discord ; c'est Sevih qui s'en sert.
 - `pnpm commit` — publication guidée : contrôles (format/lint/typecheck/test) →
   bump de version → images R2 → commit + push (`scripts/commit.ts`).
 - `pnpm build` — le build prod, **réservé à la CI** (un build local casse les

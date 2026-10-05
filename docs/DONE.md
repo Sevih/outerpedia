@@ -7,6 +7,130 @@
 
 ## 2026-10-05
 
+- **`pnpm quick` : un cinquième onglet « Discord », pour écrire un message
+  et le faire poster par le bot** (Opus, lot B21, demande Sevih du 05/10 ;
+  commit local, À NE PAS POUSSER avant le patch du 06/10). Le résumé d'une
+  note de patch se tapait à la main dans Discord ; il se rédige maintenant
+  dans l'outil, à côté de la note, et c'est le bot Outerpedia qui le poste.
+  Transport décidé par Sevih : l'API REST de Discord en direct
+  (`https://discord.com/api/v10`, `fetch` de Node, aucune dépendance, rien
+  dans `outerbot` ni dans la stack), avec `DISCORD_BOT_TOKEN` et
+  `DISCORD_GUILD_ID` lus dans `.env.local` (documentés dans `.env.example`).
+  L'écran : deux colonnes. À gauche la liste des 40 dernières notes en
+  anglais de `data/patch-notes/posts.json` (date et titre, la note de patch
+  la plus récente choisie d'office), le lien « ouvrir l'original » et le
+  HTML de la note dans une `iframe` en `srcdoc` sous `sandbox` sans
+  `allow-scripts`, doublée d'une CSP dans le document (`default-src 'none'`,
+  images et vidéos seules) ; ses images viennent du staging local quand il
+  les a (`.assets-staging/images/patch-notes/`, servi par l'outil : une note
+  scrapée le matin n'est pas encore sur R2), sinon de `img.outerpedia.com`
+  par redirection. À droite le salon, la case « sans aperçu des liens », la
+  zone de texte, puis l'aperçu sur le fond sombre de Discord.
+  Le comment : toute la logique est dans `scripts/quick/discord.ts`, en trois
+  étages. (1) Le texte, en fonctions pures — `convertEmojis`, `splitMessage`,
+  `renderDiscord` — réunies par `prepare`, que le preview ET l'envoi
+  appellent : ce que l'écran montre est ce qui part. Emojis : `:nom:` du
+  serveur devient `<:nom:id>` (`<a:nom:id>` s'il est animé) et s'affiche par
+  son image du CDN, `:nom:` standard devient son caractère (table
+  `discord-shortcodes.json`, 212 codes aux noms de Discord — `:calendar:` y
+  est 📆, 📅 s'appelle `:date:` — plus les drapeaux `:flag_xx:`), tout autre
+  `:nom:` est rouge dans l'aperçu et BLOQUE l'envoi, nommé ; sans jeton les
+  emojis du serveur sont marqués « inconnu sans jeton » sans compter pour une
+  faute. Rien n'est converti dans du code, dans une URL, ni dans « 10:30:00 ».
+  Longueur comptée après conversion (`:dark:` fait 26 caractères une fois
+  parti), en unités UTF-16, donc jamais moins que le compte de Discord ; au-delà
+  de 2 000 le message est découpé, jamais au milieu d'une ligne, de
+  préférence juste avant un `## `, sinon au dernier saut de ligne qui rentre ;
+  une ligne seule trop longue refuse l'envoi en la nommant. Rendu : titres
+  `#` `##` `###`, sous-texte `-# `, citations `> ` et `>>> `, listes `- ` /
+  `* ` imbriquées, gras, italique, souligné, barré, spoiler, code en ligne et
+  en bloc, liens masqués (chevrons compris), URL nues, sauts de ligne ; le
+  texte est échappé d'abord, seul notre balisage sort. (2) Les requêtes —
+  `buildRequest` est le seul endroit où le jeton s'écrit (en-tête
+  `Authorization: Bot …`), `messageBody` pose `allowed_mentions: { parse: [] }`
+  (aucune mention ne notifie) et le drapeau 4 quand la case est cochée ;
+  `sendMessages` poste dans l'ordre, une seconde entre deux, attend un 429
+  (`retry_after`) et le retente une fois, s'arrête au premier échec et rend
+  les ids partis ; `editMessages` fait les `PATCH`. (3) `discordSession`
+  tient la liste du serveur (emojis, salons texte et annonces triés comme
+  dans Discord, par catégorie), lue une fois, et rend ce que les routes de
+  `server.ts` renvoient (`/api/discord/state`, `note`, `preview`, `send`,
+  `edit`, ces deux dernières en NDJSON comme les autres gestes, avec le lien
+  de chaque message). Toute ligne de journal et toute erreur passent par
+  `scrub`, qui retirerait le jeton s'il s'y glissait. Côté page (`ui.html`) :
+  aucun salon par défaut, le dernier choisi retenu ; « Envoyer » éteint tant
+  qu'il manque le jeton, le salon, du texte, ou qu'un emoji est inconnu ;
+  confirmation avec le salon et le nombre de messages ; après un échec le
+  bouton devient « Reprendre l'envoi (message k/n) », salon verrouillé, et
+  ne reposte pas ce qui est en place ; après un envoi complet « Mettre à
+  jour le message posté » modifie en place et refuse si le nombre de
+  morceaux a changé (ni suppression ni repost), « Nouveau message » oublie
+  les ids ; brouillon, salon, case et ids en `localStorage` ; « Insérer le
+  gabarit » pose les sept lignes avec le lien de la note choisie. Ce geste
+  ne committe et ne pousse rien. `CLAUDE.md` dit cinq gestes, le libellé de
+  `install-launcher.ts` aussi (`pnpm quick:install` à repasser pour le voir).
+  Deux écarts au texte du lot, à relire. (a) Le site ne construit NULLE PART
+  l'adresse officielle d'un post : `patch-history` rend le contenu scrapé
+  sans lien vers l'original, et `get-news` ne demande pas le champ `link`.
+  Le motif `https://annoucements.outerplane.major7.kr/<AAAA>/<MM>/<JJ>/<slug>/`
+  est relevé dans la donnée : les notes se citent entre elles, et les 63
+  liens de cette forme dont le post cité est dans `posts.json` portent tous
+  la date et le slug stockés, sans contre-exemple (`officialUrl`, hôte
+  vérifié par test contre `WP_API` de `get-news.ts`). Aucune requête au site
+  officiel pour le confirmer. (b) Le « sample de Sevih » n'était pas joint :
+  la fixture est le gabarit rempli, avec chaque construction citée.
+  Vérification : `pnpm typecheck` (les trois `tsc --noEmit` — racine,
+  `datagen`, `scripts` — sortie 0, aucune erreur), `pnpm lint` (`eslint`,
+  sortie 0), `pnpm test` (`Test Files 185 passed (185)`,
+  `Tests 2385 passed (2385)`), dont les 72 cas de
+  `scripts/quick/discord.test.ts` : chaque construction du markdown,
+  l'échappement (neuf entrées hostiles, aucune balise qui ne soit la nôtre),
+  le sample rendu en entier, les emojis (serveur, animé, standard, inconnu,
+  sans jeton, code et URL intacts), la table (les 31 codes demandés au point
+  de code près, et chaque valeur contre `\p{RGI_Emoji}`, donc entière et
+  avec son sélecteur de variante), le découpage (1 999, 2 000, 2 001, coupe
+  avant `## `, section plus longue qu'un message), les requêtes, puis
+  l'enchaînement contre un `fetch` simulé : succès, 429 puis succès, double
+  429, échec au deuxième morceau puis reprise sans doublon, modification en
+  place, refus si le nombre de morceaux change, et le jeton absent de toute
+  ligne de journal et de toute réponse de session même quand Discord ou
+  `fetch` le renvoient dans leur erreur (le test tombe si `scrub` est
+  neutralisé, essayé). Outil lancé sans fenêtre (`QUICK_PORT=4811`,
+  `--no-open`), sans jeton sur le poste : `/` rend l'onglet,
+  `/api/discord/state` répond « jeton absent : ajoute DISCORD_BOT_TOKEN à
+  .env.local » avec 40 notes, la note 11653 rend son cadre et son lien,
+  l'image locale sort en 200, l'absente en 302 vers R2, une remontée de
+  chemin en 404, le preview rend le gabarit (📜 ⭐ ⚔️ ⚖️ 💰 🐛), l'envoi est
+  refusé. Le script de la page a été joué dans happy-dom contre un `fetch`
+  simulé (sonde jetable, non committée) : sans jeton, envoi puis mise à jour
+  puis nouveau message, échec au deuxième de trois puis reprise (postés :
+  a, b refusé, b, c).
+  Pour s'en servir : le jeton est celui d'outerbot, secret
+  `OUTERBOT_DISCORD_TOKEN` de la stack, à recopier dans `.env.local` sous
+  `DISCORD_BOT_TOKEN`, avec `DISCORD_GUILD_ID` (mode développeur de Discord,
+  clic droit sur le serveur, « Copier l'identifiant ») ; relancer quick. Dans
+  le salon visé le bot doit avoir « Voir le salon » et « Envoyer des
+  messages » ; « Intégrer des liens » seulement si la case est décochée et
+  qu'on veut les aperçus ; rien de plus pour les emojis du serveur ni pour
+  modifier ses propres messages. Sans la permission, Discord répond 403 et le
+  journal le dit (« permission manquante dans ce salon »). Premier essai :
+  choisir un salon de TEST, insérer le gabarit, le remplir avec `:dark:` ou
+  `:ranger:`, comparer l'aperçu puis envoyer et comparer le message posté à
+  l'aperçu (titres, sous-texte, listes, citation, emojis, absence d'aperçu du
+  lien) ; corriger une faute et « Mettre à jour » ; « Nouveau message » ;
+  seulement ensuite le vrai salon.
+  Ce que personne n'a vérifié : aucun appel réel à Discord (ni lecture ni
+  envoi : le jeton n'est pas sur le poste), donc ni le 429 réel, ni l'ordre
+  des salons contre la vraie liste, ni les permissions ; aucun vrai
+  navigateur (mise en page des deux colonnes, cadre de la note, fidélité des
+  tailles et des marges de l'aperçu, qui restent une imitation). Laissé : les
+  listes numérotées, la mise en forme à cheval sur plusieurs lignes et les
+  horodatages `<t:…>` sortent en texte dans l'aperçu ; un bloc de code plus
+  long qu'un message serait coupé dedans ; un emoji du serveur homonyme d'un
+  standard gagne (ordre du lot) ; une réponse coupée en plein envoi laisse la
+  page sans les ids — regarder le salon avant de recliquer. Hors périmètre,
+  repéré : stocker le `link` de WordPress dans `get-news` rendrait l'adresse
+  officielle exacte au lieu de déduite.
 - **Fin de l'Adventure License : le mode sort du suivi de progression et de
   trois guides généraux** (Opus, lot B20 ; commit local, À NE PAS POUSSER
   avant le patch du 06/10). Le patch ferme le mode, retire et rembourse son

@@ -97,6 +97,7 @@
       }
       input,
       select,
+      textarea,
       button.action {
         background: #11131a;
         border: 1px solid var(--line);
@@ -106,7 +107,8 @@
         font: inherit;
       }
       input:focus,
-      select:focus {
+      select:focus,
+      textarea:focus {
         outline: 1px solid var(--accent);
       }
       .row {
@@ -131,7 +133,8 @@
         opacity: 0.5;
         cursor: progress;
       }
-      button.ghost {
+      button.ghost,
+      a.ghost {
         background: none;
         border: 1px solid var(--line);
         color: var(--muted);
@@ -368,6 +371,186 @@
         color: var(--muted);
         font-size: 11px;
       }
+      /* Onglet « Discord » : la note officielle à gauche, l'éditeur et son aperçu
+         à droite ; l'une sous l'autre quand la fenêtre est étroite. */
+      .cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+      a.ghost {
+        display: inline-block;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      #d-frame {
+        width: 100%;
+        height: 72vh;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+      }
+      #d-text {
+        display: block;
+        width: 100%;
+        min-height: 300px;
+        resize: vertical;
+        font:
+          13px/1.5 ui-monospace,
+          monospace;
+      }
+      #tab-discord .bar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 8px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      #tab-discord .bar span {
+        margin-right: auto;
+      }
+      #tab-discord button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      #tab-discord .warn {
+        color: var(--warn);
+      }
+      #tab-discord .ko {
+        color: var(--danger);
+      }
+      #d-status a {
+        color: var(--accent);
+      }
+      /* Aperçu : couleurs, tailles et marges du thème sombre de Discord. Le HTML
+         vient de `renderDiscord` (scripts/quick/discord.ts). */
+      .dc-cut {
+        margin: 10px 0 4px;
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .dc {
+        background: #313338;
+        color: #dbdee1;
+        border-radius: 6px;
+        padding: 12px 16px;
+        font:
+          16px/1.375 'gg sans',
+          'Noto Sans',
+          'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .dc h1,
+      .dc h2,
+      .dc h3 {
+        margin: 16px 0 8px;
+        color: #f2f3f5;
+        font-weight: 700;
+        line-height: 1.375;
+      }
+      .dc h1 {
+        font-size: 24px;
+      }
+      .dc h2 {
+        font-size: 20px;
+      }
+      .dc h3 {
+        font-size: 16px;
+      }
+      .dc > :first-child {
+        margin-top: 0;
+      }
+      .dc .sub {
+        color: #949ba4;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .dc blockquote {
+        margin: 0;
+        padding: 0 8px 0 12px;
+        border-left: 4px solid #4e5058;
+        border-radius: 2px;
+      }
+      .dc ul {
+        margin: 4px 0 0 16px;
+        padding: 0;
+        list-style: disc outside;
+      }
+      .dc ul ul {
+        list-style-type: circle;
+      }
+      .dc li {
+        margin-bottom: 4px;
+      }
+      .dc a {
+        color: #00a8fc;
+        text-decoration: none;
+      }
+      .dc a:hover {
+        text-decoration: underline;
+      }
+      .dc code {
+        background: #2b2d31;
+        border-radius: 3px;
+        padding: 0 0.2em;
+        font:
+          85%/1.3 ui-monospace,
+          Consolas,
+          monospace;
+      }
+      .dc pre {
+        margin: 6px 0 0;
+        background: #2b2d31;
+        border: 1px solid #1e1f22;
+        border-radius: 4px;
+        padding: 0.5em;
+        white-space: pre-wrap;
+      }
+      .dc pre code {
+        background: none;
+        padding: 0;
+      }
+      .dc img.emoji {
+        width: 1.375em;
+        height: 1.375em;
+        vertical-align: bottom;
+        object-fit: contain;
+      }
+      .dc .spoiler {
+        background: #1e1f22;
+        border-radius: 3px;
+      }
+      .dc .mention {
+        background: #3c4270;
+        color: #c9cdfb;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      /* `:nom:` resté en toutes lettres : rouge = faute de frappe (bloque
+         l'envoi), ambre = emoji du serveur qu'on ne peut pas vérifier sans jeton. */
+      .dc .bad {
+        background: #da373c;
+        color: #fff;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      .dc .wait {
+        color: #f0b232;
+        border-bottom: 1px dashed #f0b232;
+      }
     </style>
   </head>
   <body>
@@ -382,6 +565,7 @@
       <button data-tab="comics" aria-selected="false">4-comics</button>
       <button data-tab="videos" aria-selected="false">Vidéos</button>
       <button data-tab="ranks" aria-selected="false">Rangs</button>
+      <button data-tab="discord" aria-selected="false">Discord</button>
     </nav>
 
     <main>
@@ -538,6 +722,65 @@
             </thead>
             <tbody id="r-list"></tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- discord -->
+      <section id="tab-discord" hidden>
+        <h2>Message Discord</h2>
+        <p class="hint">
+          Posté par le bot Outerpedia dans le salon choisi, sans qu'aucune mention ne notifie. Ce
+          geste ne committe et ne pousse rien. <span class="warn" id="d-hint"></span>
+        </p>
+        <div class="cols">
+          <div>
+            <div class="row">
+              <div>
+                <label>Note officielle</label
+                ><select id="d-note"></select>
+              </div>
+              <div style="flex: 0 0 auto">
+                <a class="ghost" id="d-open" target="_blank" rel="noopener noreferrer"
+                  >ouvrir l'original</a
+                >
+              </div>
+            </div>
+            <!-- HTML scrapé, pas le nôtre : bac à sable sans `allow-scripts`, doublé
+                 d'une CSP dans le document (cf. `noteSrcdoc`). -->
+            <iframe
+              id="d-frame"
+              title="Note officielle"
+              sandbox="allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
+          </div>
+          <div>
+            <div class="row">
+              <div>
+                <label>Salon</label
+                ><select id="d-channel"></select>
+              </div>
+              <div style="flex: 0 0 auto">
+                <label class="check"
+                  ><input type="checkbox" id="d-noembed" checked /> sans aperçu des liens</label
+                >
+              </div>
+            </div>
+            <textarea
+              id="d-text"
+              spellcheck="false"
+              placeholder="# :scroll: PATCH NOTES — TL;DR"
+            ></textarea>
+            <div class="bar">
+              <span id="d-count"></span>
+              <button class="ghost" id="d-template">Insérer le gabarit</button>
+              <button class="ghost" id="d-new" hidden>Nouveau message</button>
+              <button class="action" id="d-update" hidden>Mettre à jour le message posté</button>
+              <button class="action" id="d-send" disabled>Envoyer</button>
+            </div>
+            <p class="hint" id="d-status"></p>
+            <label>Aperçu — tel que Discord le rendra</label>
+            <div id="d-preview"></div>
+          </div>
         </div>
       </section>
 
@@ -1054,6 +1297,249 @@
         if (edits.size) e.preventDefault();
       };
 
+      // ------------------------------------------------------- discord
+      // Brouillon, salon, case et messages postés survivent au rechargement.
+      // Tout passe par `mem` : un stockage refusé (navigation privée) ne doit
+      // pas casser l'onglet. `null` efface.
+      const mem = {
+        get(key, fallback) {
+          try {
+            const v = localStorage.getItem(`quick.discord.${key}`);
+            return v === null ? fallback : JSON.parse(v);
+          } catch {
+            return fallback;
+          }
+        },
+        set(key, value) {
+          try {
+            if (value === null) localStorage.removeItem(`quick.discord.${key}`);
+            else localStorage.setItem(`quick.discord.${key}`, JSON.stringify(value));
+          } catch {}
+        },
+      };
+
+      let dState = { hasToken: false, hint: null, channels: null, notes: [] };
+      // Dernier aperçu rendu par le serveur ; `null` pendant qu'un autre arrive —
+      // on n'envoie pas sur la foi d'un découpage qui n'est plus celui du texte.
+      let dPreview = null;
+      let dTemplate = ''; // gabarit portant le lien de la note choisie
+      // Après un envoi COMPLET : { channelId, ids, urls } — ce que « Mettre à
+      // jour » modifie en place.
+      let posted = mem.get('posted', null);
+      // Après un envoi INTERROMPU : { channelId, ids, total } — le prochain clic
+      // reprend au message fautif, dans le même salon.
+      let partial = mem.get('partial', null);
+      let dBusy = false;
+
+      const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
+      const channelLabel = (id) => {
+        const c = dState.channels?.find((x) => x.id === id);
+        return c ? `#${c.name}${c.category ? ` (${c.category})` : ''}` : 'un salon inconnu';
+      };
+
+      function refreshDiscord() {
+        const p = dPreview;
+        if (partial) $('d-channel').value = partial.channelId;
+        $('d-channel').disabled = Boolean(partial);
+        const channel = $('d-channel').value;
+
+        $('d-count').textContent = !p
+          ? '…'
+          : p.messages > 1
+            ? `${p.length} caractères · ${p.messages} messages (2000 au plus chacun)`
+            : `${p.length} / 2000 caractères`;
+
+        // Ce qui retient l'envoi, dans l'ordre où il faut s'en occuper.
+        const hasText = Boolean($('d-text').value.trim());
+        const why = dState.hint
+          ? ['warn', dState.hint]
+          : p?.blocker && hasText
+            ? ['ko', p.blocker]
+            : !posted && !partial && !channel
+              ? ['warn', 'Choisir un salon.']
+              : null;
+        const links = (urls) =>
+          urls.map((u, i) => `<a href="${esc(u)}" target="_blank">message ${i + 1}</a>`).join(', ');
+        $('d-status').innerHTML =
+          (why ? `<span class="${why[0]}">${esc(why[1])}</span> ` : '') +
+          (posted
+            ? `Posté dans ${esc(channelLabel(posted.channelId))} : ${links(posted.urls)}. « Mettre à jour » le modifie en place ; « Nouveau message » pour en poster un autre.`
+            : partial
+              ? `Envoi interrompu dans ${esc(channelLabel(partial.channelId))} : ${plural(partial.ids.length, 'message')} sur ${partial.total} en place. « Reprendre » poste la suite sans les renvoyer.`
+              : '');
+
+        const blocked = dBusy || !dState.hasToken || !dState.channels || !p || Boolean(p.blocker);
+        $('d-send').disabled = blocked || !channel || Boolean(posted);
+        $('d-send').textContent = partial
+          ? `Reprendre l'envoi (message ${partial.ids.length + 1}/${partial.total})`
+          : 'Envoyer';
+        $('d-update').hidden = !posted;
+        $('d-update').disabled = blocked;
+        $('d-new').hidden = !posted && !partial;
+      }
+
+      // Le rendu vient du serveur (`/api/discord/preview`) : c'est la fonction
+      // testée, et le même découpage que l'envoi. Seule la DERNIÈRE frappe compte.
+      let dSeq = 0;
+      let dTimer = 0;
+      async function previewDiscord() {
+        const mine = ++dSeq;
+        const res = await fetch('/api/discord/preview', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ text: $('d-text').value }),
+        });
+        const data = await res.json();
+        if (mine !== dSeq) return;
+        dPreview = data;
+        $('d-preview').innerHTML = data.html || '<div class="dc-cut">rien à afficher</div>';
+        refreshDiscord();
+      }
+
+      $('d-text').oninput = () => {
+        mem.set('draft', $('d-text').value);
+        dPreview = null;
+        refreshDiscord();
+        clearTimeout(dTimer);
+        dTimer = setTimeout(previewDiscord, 250);
+      };
+
+      let dNoteSeq = 0;
+      async function loadNote() {
+        const id = $('d-note').value;
+        if (!id) return;
+        const mine = ++dNoteSeq;
+        const data = await (await fetch(`/api/discord/note?id=${encodeURIComponent(id)}`)).json();
+        if (mine !== dNoteSeq) return;
+        if (data.error) return log([data.error], false);
+        $('d-frame').srcdoc = data.srcdoc;
+        $('d-open').href = data.url;
+        dTemplate = data.template;
+      }
+      $('d-note').onchange = loadNote;
+
+      $('d-channel').onchange = () => {
+        mem.set('channel', $('d-channel').value);
+        refreshDiscord();
+      };
+      $('d-noembed').onchange = () => mem.set('noEmbeds', $('d-noembed').checked);
+
+      $('d-template').onclick = () => {
+        if (!dTemplate) return log(['Choisir une note officielle d’abord.'], false);
+        if ($('d-text').value.trim() && !confirm('Remplacer le brouillon par le gabarit ?')) return;
+        $('d-text').value = dTemplate;
+        $('d-text').oninput();
+      };
+
+      $('d-send').onclick = async () => {
+        if (!dPreview) return;
+        const channelId = partial ? partial.channelId : $('d-channel').value;
+        const left = dPreview.messages - (partial ? partial.ids.length : 0);
+        const ask =
+          `Poster ${plural(left, 'message')} dans ${channelLabel(channelId)} ?` +
+          (partial ? `\n(reprise : ${plural(partial.ids.length, 'message')} déjà en place)` : '');
+        if (!confirm(ask)) return;
+        dBusy = true;
+        refreshDiscord();
+        log([], undefined, 'envoi à Discord');
+        try {
+          const r = await post('/api/discord/send', {
+            text: $('d-text').value,
+            channelId,
+            suppressEmbeds: $('d-noembed').checked,
+            already: partial ? partial.ids : [],
+            total: partial ? partial.total : undefined,
+          });
+          if (r.ok) {
+            posted = { channelId, ids: r.ids, urls: r.urls };
+            partial = null;
+          } else if (r.ids?.length) {
+            // Le compte d'ORIGINE reste la référence d'une reprise, même si le
+            // serveur vient de refuser parce que le découpage a changé.
+            partial = { channelId, ids: r.ids, total: partial ? partial.total : r.total };
+          }
+          mem.set('posted', posted);
+          mem.set('partial', partial);
+        } finally {
+          dBusy = false;
+          refreshDiscord();
+        }
+      };
+
+      $('d-update').onclick = async () => {
+        if (!posted || !dPreview) return;
+        const ask = `Modifier en place ${plural(posted.ids.length, 'message')} dans ${channelLabel(posted.channelId)} ?`;
+        if (!confirm(ask)) return;
+        dBusy = true;
+        refreshDiscord();
+        log([], undefined, 'modification dans Discord');
+        try {
+          await post('/api/discord/edit', {
+            text: $('d-text').value,
+            channelId: posted.channelId,
+            ids: posted.ids,
+            suppressEmbeds: $('d-noembed').checked,
+          });
+        } finally {
+          dBusy = false;
+          refreshDiscord();
+        }
+      };
+
+      $('d-new').onclick = () => {
+        if (
+          partial &&
+          !confirm('Oublier l’envoi interrompu ? Les messages déjà postés restent dans Discord.')
+        )
+          return;
+        posted = partial = null;
+        mem.set('posted', null);
+        mem.set('partial', null);
+        refreshDiscord();
+      };
+
+      async function loadDiscord() {
+        // Le brouillon d'abord : il doit revenir même si l'état ne se charge pas.
+        $('d-text').value = mem.get('draft', '');
+        $('d-noembed').checked = mem.get('noEmbeds', true);
+
+        dState = await (await fetch('/api/discord/state')).json();
+        $('d-hint').textContent = dState.hint ?? '';
+        $('d-note').innerHTML = dState.notes
+          .map((n) => `<option value="${esc(n.id)}">${esc(n.date)} · ${esc(n.title)}</option>`)
+          .join('');
+        // La note de patch la plus récente sous la main : c'est elle qu'on résume.
+        const patch = dState.notes.find((n) => n.type === 'update');
+        if (patch) $('d-note').value = patch.id;
+
+        // Salons dans l'ordre de Discord, groupés par catégorie. AUCUN n'est
+        // choisi d'office : le premier envoi demande de le faire.
+        const channels = dState.channels ?? [];
+        const option = (c) =>
+          `<option value="${esc(c.id)}">#${esc(c.name)}${c.announcement ? ' (annonces)' : ''}</option>`;
+        // Suites de salons d'une même catégorie (deux catégories peuvent porter
+        // le même nom : on ne regroupe pas par nom).
+        const runs = [];
+        for (const c of channels) {
+          const last = runs[runs.length - 1];
+          if (last && last.category === c.category) last.options += option(c);
+          else runs.push({ category: c.category, options: option(c) });
+        }
+        $('d-channel').innerHTML =
+          '<option value="">— choisir un salon —</option>' +
+          runs
+            .map((r) =>
+              r.category
+                ? `<optgroup label="${esc(r.category)}">${r.options}</optgroup>`
+                : r.options,
+            )
+            .join('');
+        const saved = mem.get('channel', '');
+        if (channels.some((c) => c.id === saved)) $('d-channel').value = saved;
+
+        await Promise.all([loadNote(), previewDiscord()]);
+      }
+
       // Arrêt : lancé par l'icône, l'outil n'a aucune fenêtre pour le faire.
       $('quit').onclick = async () => {
         await post('/api/quit', {});
@@ -1064,6 +1550,7 @@
       // ---------------------------------------------------------- boot
       // Les rangs se lisent du disque : ils n'attendent pas R2 comme `/api/state`.
       loadRanks().catch((e) => log([`Rangs illisibles : ${e}`], false));
+      loadDiscord().catch((e) => log([`Onglet Discord illisible : ${e}`], false));
 
       (async () => {
         state = await (await fetch('/api/state')).json();
