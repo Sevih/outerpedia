@@ -7,6 +7,18 @@
 
 ## 2026-10-05
 
+- **Relecture de B22 : outils d'édition de l'onglet Discord** (Fable). Lot
+  69, `be742707`. `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD
+  (186 fichiers, 2 445 tests), `package.json` intact, TODO relu. Essai
+  indépendant, outil démarré sans fenêtre, sur un autre port et avec un
+  jeton VIDE dans l'environnement (le vrai est maintenant dans
+  `.env.local`) : l'état répond « jeton absent » et rend 571 emojis
+  standard, aucun du serveur ; `/discord-editor.mjs` est servi en
+  `text/javascript` et passe `node --check`, le script de la page aussi ;
+  ni la page ni le module ne portent le jeton ; la table des codes n'a ni
+  valeur vide ni valeur ASCII. Non vérifié par personne : la barre, le
+  sélecteur et l'autocomplétion dans un vrai navigateur, et la liste des
+  emojis du serveur — essai de Sevih.
 - **`pnpm quick`, onglet « Discord » : une barre d'outils, un sélecteur
   d'emojis et l'autocomplétion des `:codes:`** (Opus, lot B22, demande Sevih
   du 05/10 après son premier essai : « avoir les outils d'édition, d'émoticône
