@@ -7,6 +7,45 @@
 
 ## 2026-10-06
 
+- **Petits restes du patch du 06/10 : libellés du Survey Hub,
+  `GIT_TERMINAL_PROMPT=0` sur la carte « Patch », en-tête de `commit.ts`**
+  (Opus, lot A28 ; les trois points laissés par la relecture de B26, A26, A27
+  et F14). (1) `shop-purchase-priorities/labels.ts`, bloc `survey` : jp/kr/zh
+  portaient une transcription (« サーベイハブ / 서베이 허브 / 调查中心 ») au
+  lieu du nom du jeu ; ils reprennent ceux de la clé `progress.shop.survey-hub`
+  (調査支援所 / 조사 지원소 / 调查支援所, `SYS_SHOP_TAP_TYPE_RESEARCH`).
+  en/fr/es inchangés ; aucun test ne figeait l'ancien libellé (`git grep` des
+  trois chaînes : plus rien hors ce journal et `beginner-faq`, cf. plus bas).
+  (2) `src/lib/admin/patch-runner.ts` : les commandes de la carte héritaient
+  de `process.env` tel quel, donc du terminal du serveur de dev — git y
+  demande ses identifiants sur `/dev/tty`, pas sur stdin (déjà `ignore`) : un
+  `git fetch` ou un `git push` pouvait attendre une saisie que la page ne voit
+  pas, verrou tenu. `spawnLauncher` passe maintenant `patchEnv()` =
+  `process.env` + `GIT_TERMINAL_PROMPT: '0'` ; posé dans le lanceur, seul
+  point de passage, donc pour promote, commit et push sans qu'un geste puisse
+  l'oublier (`pnpm commit --no-push` fait lui aussi un `git fetch` au pré-vol,
+  et la variable descend par héritage jusqu'aux `execSync` de `commit.ts`).
+  Avec elle git échoue aussitôt et son message part dans le journal. Pour le
+  tester sans rien lancer, `spawnLauncher` est exporté et prend un `spawn`
+  injectable (défaut : le vrai) ; un test dans `patch-runner.test.ts` — `spawn`
+  factice, deux commandes (`git fetch`, `pnpm commit`) : `shell: false`,
+  variable à `'0'` même si le terminal la portait à `1`, reste de
+  l'environnement gardé, `process.env` du serveur intact. (3)
+  `scripts/commit.ts` : l'en-tête (`--bump`) et le commentaire de
+  `CONVENTIONAL_HELP` disaient que l'accueil de l'admin « lance la
+  publication » ; depuis B26 il COMMITE par ce script (`--no-push`) et pousse
+  d'un second geste — les deux phrases le disent, rien d'autre n'a bougé dans
+  le fichier. Vérification : `pnpm typecheck` (dernière ligne : l'écho de la
+  commande, les trois `tsc --noEmit` sans une erreur), `pnpm lint`
+  (`$ eslint`, sans sortie), `pnpm test` (`Tests 2677 passed (2677)`, 193
+  fichiers — 2676 + le nouveau). Visuel : seuls les trois libellés du guide changent, en jp/kr/zh.
+  Laissé : pas d'essai réel d'un fetch sans identifiant à travers la carte (à
+  jouer par Sevih s'il veut le voir : `git credential reject` n'est pas un
+  geste d'agent) ; la variable ne couvre ni une passphrase SSH ni un
+  `GIT_ASKPASS` graphique (origin est en HTTPS via `gh`, sans objet
+  aujourd'hui) ; hors périmètre, la même transcription « サーベイハブ / 서베이
+  허브 » subsiste dans la PROSE de `beginner-faq/content.ts` (deux réponses,
+  jp et kr) ; `images/ui/shop/al.webp` reste sur R2, à Sevih.
 - **Patch du 06/10/2026 (client 1.4.18) intégré — `b92cd44d`, version
   1.7.5** (Sevih + Fable ; feuille de route `docs/patch-2026-10-06.md`
   supprimée avec cette entrée, selon la convention). Le commit est le PREMIER

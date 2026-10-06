@@ -35,7 +35,8 @@
  *   --msg "<texte>"   message de commit (skip le prompt)
  *   --bump <niveau>   patch | minor | major (skip le prompt du bump) — avec
  *                     --msg et --yes, plus aucune question : c'est ainsi que
- *                     l'accueil de l'admin lance la publication
+ *                     l'accueil de l'admin commite, avec --no-push ; le push
+ *                     est son second geste, à part
  *   --yes             saute la confirmation de la revue (la liste s'affiche quand même)
  */
 import { execSync } from 'node:child_process';
@@ -69,7 +70,8 @@ const YES = has('--yes');
 const PKG = resolve('package.json');
 
 // Le format exigé (`CONVENTIONAL`) vit dans `patch-commands` : l'accueil de
-// l'admin valide le message avec la même expression avant de lancer ce script.
+// l'admin valide le message avec la même expression avant de commiter par ce
+// script (`--no-push` ; il pousse ensuite, d'un second geste).
 const CONVENTIONAL_HELP =
   'Format attendu : type(portée): description — ex. « feat(guides): carte Monad Gate ».\n' +
   'Types : feat fix docs chore refactor perf test style ci build revert.';

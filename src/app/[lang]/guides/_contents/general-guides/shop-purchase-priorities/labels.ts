@@ -277,9 +277,9 @@ export const SHOP_TABS: { key: string; label: LocalizedText }[] = [
     key: 'survey',
     label: {
       en: 'Survey Hub',
-      jp: 'サーベイハブ',
-      kr: '서베이 허브',
-      zh: '调查中心',
+      jp: '調査支援所',
+      kr: '조사 지원소',
+      zh: '调查支援所',
       fr: 'Survey Hub',
       es: 'Centro de Encuestas',
     },

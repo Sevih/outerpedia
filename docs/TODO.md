@@ -20,11 +20,9 @@
       Sevih tranche ; mineure = une ligne dans `isMinorField`. Le flag `art`
       qui apparaît sur un costume existant, idem. Même mécanique possible
       pour monstres et équipement (écrans et staging manquent).
-- [ ] **Petits restes** : libellés jp/kr/zh du Survey Hub dans
-      `shop-purchase-priorities/labels.ts`, `GIT_TERMINAL_PROMPT=0` sur les
-      commandes de la carte Patch, en-tête de `commit.ts` — lot A28 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus), peut
-      tourner avec F15. Reste à Sevih : `images/ui/shop/al.webp` encore sur R2.
+- [ ] **Petits restes** : FAIT (lot A28 — libellés du Survey Hub,
+      `GIT_TERMINAL_PROMPT=0`, en-tête de `commit.ts`). Reste à Sevih :
+      `images/ui/shop/al.webp` encore sur R2.
 
 ## 🧰 Outil quick
 

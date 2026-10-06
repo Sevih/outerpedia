@@ -1,15 +1,20 @@
 /**
  * Contrat du verrou « un seul travail à la fois », du lancement de pnpm sans
- * shell et de la séquence du push. Aucune commande n'est lancée :
- * `streamPatchCommand` et `streamPatchPush` ne sont exercés que sur leur REFUS,
- * qui rend la main avant tout `spawn`, et `pushBranch` sur un lanceur factice.
+ * shell, de l'environnement des commandes et de la séquence du push. Aucune
+ * commande n'est lancée : `streamPatchCommand` et `streamPatchPush` ne sont
+ * exercés que sur leur REFUS, qui rend la main avant tout `spawn`, `pushBranch`
+ * sur un lanceur factice, et le lanceur réel sur un `spawn` factice.
  */
+import type { SpawnOptions, spawn } from 'node:child_process';
+import { EventEmitter } from 'node:events';
+import { PassThrough } from 'node:stream';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   acquirePatchJob,
   pnpmInvocation,
   pushBranch,
   runningPatchJob,
+  spawnLauncher,
   streamPatchCommand,
   streamPatchPush,
   type LaunchResult,
@@ -162,6 +167,60 @@ describe('pushBranch (lanceur factice)', () => {
       error: 'spawn git ENOENT',
     });
     expect(await run()).toEqual({ ok: false, error: 'spawn git ENOENT' });
+  });
+});
+
+describe('spawnLauncher (spawn factice)', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  /** Note ce que `spawn` reçoit, puis rend un enfant qui écrit `stdout` et sort en 0. */
+  const fakeSpawn = (stdout: string) => {
+    const spawned: Array<{ command: string; args: readonly string[]; options: SpawnOptions }> = [];
+    const spawnFn = ((command: string, args: readonly string[], options: SpawnOptions) => {
+      spawned.push({ command, args, options });
+      const child = Object.assign(new EventEmitter(), {
+        stdout: new PassThrough(),
+        stderr: new PassThrough(),
+      });
+      child.stdout.on('end', () => setImmediate(() => child.emit('close', 0)));
+      child.stdout.end(stdout);
+      child.stderr.end();
+      return child;
+    }) as unknown as typeof spawn;
+    return { spawned, spawnFn };
+  };
+
+  it('toute commande part sans shell, avec l’environnement du serveur et GIT_TERMINAL_PROMPT=0', async () => {
+    // Le reste de l'environnement suit ; une valeur héritée du terminal est écrasée.
+    vi.stubEnv('PATCH_RUNNER_TEMOIN', 'gardé');
+    vi.stubEnv('GIT_TERMINAL_PROMPT', '1');
+    const { spawned, spawnFn } = fakeSpawn('abc123\n');
+    const said: string[] = [];
+    const launch = spawnLauncher((line) => said.push(line), spawnFn);
+
+    expect(await launch('git', ['fetch', 'origin', 'main'])).toEqual({
+      code: 0,
+      stdout: 'abc123\n',
+    });
+    // pnpm aussi : `pnpm commit` lance ses propres `git fetch`.
+    await launch('pnpm', ['commit', '--no-push']);
+
+    expect(spawned.map((s) => [s.command, ...s.args].join(' '))).toEqual([
+      'git fetch origin main',
+      'pnpm commit --no-push',
+    ]);
+    for (const { options } of spawned) {
+      expect(options.shell).toBe(false);
+      expect(options.env).toMatchObject({
+        GIT_TERMINAL_PROMPT: '0',
+        PATCH_RUNNER_TEMOIN: 'gardé',
+      });
+    }
+    expect(said).toEqual(['abc123', 'abc123']);
+    // L'environnement du serveur, lui, n'est pas touché.
+    expect(process.env.GIT_TERMINAL_PROMPT).toBe('1');
   });
 });
 

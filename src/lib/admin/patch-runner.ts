@@ -111,18 +111,32 @@ const toDone = ({ code, error }: LaunchResult): PatchDone =>
   error ? { ok: false, error } : { ok: code === 0, code };
 
 /**
- * Le lanceur réel : `spawn` sans shell, à la racine du dépôt, avec
- * l'environnement du serveur ; stdout et stderr vont, mêlés, dans le journal.
+ * L'environnement des commandes : celui du serveur, plus `GIT_TERMINAL_PROMPT=0`.
+ * Elles héritent du terminal du serveur de dev, et git y demande ses
+ * identifiants en direct (`/dev/tty`, pas stdin) : un `git fetch` ou un
+ * `git push` y attendrait une saisie que la page ne voit pas, verrou tenu. Avec
+ * la variable il échoue aussitôt, et son message part dans le journal. Posée
+ * pour TOUTES les commandes : `pnpm commit` lance lui-même des `git fetch`.
  */
-const spawnLauncher =
-  (say: (line: string) => void): PatchLauncher =>
+const patchEnv = (base: NodeJS.ProcessEnv = process.env): NodeJS.ProcessEnv => ({
+  ...base,
+  GIT_TERMINAL_PROMPT: '0',
+});
+
+/**
+ * Le lanceur réel : `spawn` sans shell, à la racine du dépôt, avec
+ * l'environnement du serveur (`patchEnv`) ; stdout et stderr vont, mêlés, dans
+ * le journal. `spawnFn` n'est remplacé que par les tests.
+ */
+export const spawnLauncher =
+  (say: (line: string) => void, spawnFn: typeof spawn = spawn): PatchLauncher =>
   (command, args) =>
     new Promise((resolve) => {
       let stdout = '';
       try {
-        const child = spawn(command, [...args], {
+        const child = spawnFn(command, [...args], {
           cwd: process.cwd(),
-          env: process.env,
+          env: patchEnv(),
           shell: false,
           stdio: ['ignore', 'pipe', 'pipe'],
           windowsHide: true,
