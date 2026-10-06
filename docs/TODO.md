@@ -29,13 +29,6 @@
 
 ## 🛠️ Admin
 
-- [ ] **Revue d'extraction : les retouches mineures passent sans
-      ré-intégration** (retours de Sevih du 06/10) : costume déplacé ou
-      ajouté, nom ou description reformulés sans nombre changé → classe
-      « mineur », bouton qui les applique, images du costume mises en place
-      sans ré-intégrer le perso. Lot F14 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Fable), après F13.
-
 ## 🧰 Outil quick
 
 - [ ] **Onglet « Discord », suites du lot B24** : (a) Sevih essaie dans un

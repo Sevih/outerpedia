@@ -1,6 +1,6 @@
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { extractedCharacter, reviewTarget } from '@/lib/admin/review-store';
+import { extractedCharacter, reviewEntities, reviewTarget } from '@/lib/admin/review-store';
 import { img } from '@/lib/images';
 import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
 
@@ -10,7 +10,8 @@ export interface SidebarRow {
   element: string;
   class: string;
   rarity: number;
-  status: 'new' | 'diff' | 'ok';
+  /** `minor` = retouche mineure ou typo seule : s'applique sans ré-intégrer. */
+  status: 'new' | 'diff' | 'minor' | 'ok';
   diffCount: number;
   curated: boolean;
 }
@@ -25,6 +26,14 @@ export function buildCharacterRows(): SidebarRow[] {
   const curated = loadCuratedCharacters();
   const review = reviewTarget('character');
   const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
+  // Statut de revue par perso modifié : `diff` (vrai écart, à ré-intégrer) ou
+  // `minor` (retouche mineure ou typo — « Appliquer les retouches mineures »
+  // de la page index suffit).
+  const statusOf = new Map(
+    reviewEntities(review.diff)
+      .filter((e) => e.status === 'diff' || e.status === 'minor' || e.status === 'typo')
+      .map((e) => [e.key, e.status === 'diff' ? ('diff' as const) : ('minor' as const)]),
+  );
 
   return [
     // Nouveaux : extraits, pas encore committés (ex. Lambda, non « sorti »).
@@ -49,7 +58,7 @@ export function buildCharacterRows(): SidebarRow[] {
       element: c.element,
       class: c.class,
       rarity: c.rarity,
-      status: (diffCounts.has(c.id) ? 'diff' : 'ok') as SidebarRow['status'],
+      status: statusOf.get(c.id) ?? ('ok' as const),
       diffCount: diffCounts.get(c.id) ?? 0,
       curated: Boolean(curated[c.id] && Object.keys(curated[c.id]).length),
     })),

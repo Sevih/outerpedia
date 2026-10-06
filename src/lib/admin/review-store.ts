@@ -6,7 +6,7 @@
  */
 import {
   acceptTarget,
-  acceptTypos,
+  acceptMinor,
   entityReview,
   reviewAll,
   reviewBuckets,
@@ -54,7 +54,7 @@ export type {
 };
 export {
   acceptTarget,
-  acceptTypos,
+  acceptMinor,
   entityReview,
   extractedBundle,
   extractedCharacter,

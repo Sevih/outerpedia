@@ -481,6 +481,74 @@ describe('promote — garde perso à l’apply', () => {
   });
 });
 
+describe('promote — images des persos intégrés modifiés', () => {
+  /** Un perso intégré modifié (2000001), un inchangé (2000002), un non intégré (2400015, écarté). */
+  async function seed(): Promise<void> {
+    await put(dst, 'characters.json', {
+      2000001: {
+        id: '2000001',
+        name: { en: 'A' },
+        costumes: [{ id: '1', model: '2010001', sort: 1 }],
+      },
+      2000002: { id: '2000002', name: { en: 'B' } },
+    });
+    await put(src, 'characters.json', {
+      2000001: {
+        id: '2000001',
+        name: { en: 'A' },
+        costumes: [
+          { id: '1', model: '2010001', sort: 1 },
+          { id: '2', model: '2020001', sort: 2 },
+        ],
+      },
+      2000002: { id: '2000002', name: { en: 'B' } },
+      2400015: { id: '2400015', name: { en: 'C' } },
+    });
+  }
+
+  it('stage les SEULS persos intégrés dont l’entrée change, APRÈS l’écriture', async () => {
+    await seed();
+    const calls: Array<{ ids: string[]; dir: string; written: Record<string, unknown> }> = [];
+    const res = await promote({
+      src,
+      dst,
+      apply: true,
+      stageCharacters: async (ids, dir) => {
+        calls.push({ ids, dir, written: read(dir, 'characters.json') });
+        return { staged: 3, restaged: 0, present: 0, missing: [] };
+      },
+    });
+    // ni 2000002 (inchangé) ni 2400015 (non intégré, écarté par la garde perso)
+    expect(res.changedCharacters).toEqual(['2000001']);
+    expect(calls).toHaveLength(1);
+    expect(calls[0].ids).toEqual(['2000001']);
+    expect(calls[0].dir).toBe(dst);
+    // Le staging lit le validé DÉJÀ écrit : le costume ajouté y est.
+    expect((calls[0].written[2000001] as { costumes: unknown[] }).costumes).toHaveLength(2);
+    expect(calls[0].written[2400015]).toBeUndefined();
+    expect(res.assets?.staged).toBe(3);
+  });
+
+  it('dry-run : persos modifiés listés, jamais stagés ; sans hook, rien non plus', async () => {
+    await seed();
+    let called = 0;
+    const dry = await promote({
+      src,
+      dst,
+      stageCharacters: async () => {
+        called++;
+        return { staged: 0, restaged: 0, present: 0, missing: [] };
+      },
+    });
+    expect(dry.changedCharacters).toEqual(['2000001']);
+    expect(called).toBe(0);
+    expect(dry.assets).toBeUndefined();
+    const applied = await promote({ src, dst, apply: true });
+    expect(applied.changedCharacters).toEqual(['2000001']);
+    expect(applied.assets).toBeUndefined();
+  });
+});
+
 describe('promote — stabilité au re-run', () => {
   it('un 2e apply ne voit plus aucun diff (y compris avec rétention)', async () => {
     await put(dst, 'monsters.json', { boss_old: { name: 'Old' } });

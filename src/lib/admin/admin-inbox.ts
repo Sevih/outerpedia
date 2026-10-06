@@ -42,7 +42,7 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
   { id: 'item', label: 'Item', href: '/admin/extractor/items' },
 ];
 
-const EMPTY: DiffBuckets = { new: 0, diff: 0, typo: 0, removed: 0 };
+const EMPTY: DiffBuckets = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
 
 /**
  * Diff « jeu ↔ site » par entité, MÉMOÏSÉ À LA REQUÊTE (`cache()`).
@@ -68,7 +68,11 @@ export const entityBuckets = cache((): Map<string, DiffBuckets> => {
 /** Buckets d'une entité (jamais undefined — tout à zéro si inconnue). */
 export const bucketsOf = (id: string): DiffBuckets => entityBuckets().get(id) ?? EMPTY;
 
-/** Total « à traiter » d'un bucket : le typo, cosmétique, en est exclu. */
+/**
+ * Total « à traiter » d'un bucket : le typo (cosmétique) et le mineur (texte
+ * reformulé, costume ajouté — s'applique d'un geste, sans arbitrage) en sont
+ * exclus.
+ */
 export const actionableCount = (b: DiffBuckets): number => b.new + b.diff + b.removed;
 
 export type InboxTone = 'danger' | 'warn' | 'muted';
@@ -108,7 +112,7 @@ export function readAssetsReport(): {
  *   1 — entité `diff`/`removed` : le site sert une donnée fausse ou disparue ;
  *   2 — entité `new` : du contenu du jeu manque au site ;
  *   3 — asset manquant du pool : une image ne sera pas servie ;
- *   4 — `typo` seul : cosmétique, jamais urgent.
+ *   4 — `minor`/`typo` seuls : retouches à appliquer d'un geste, jamais urgent.
  * Rien à signaler → tableau vide (la page affiche l'état « rien à traiter »).
  */
 export function buildInbox(): InboxItem[] {
@@ -138,11 +142,13 @@ export function buildInbox(): InboxItem[] {
   for (const e of EXTRACTOR_ENTITIES) {
     const b = bucketsOf(e.id);
     const act = actionableCount(b);
-    if (!act && !b.typo) continue;
+    const soft = b.minor + b.typo;
+    if (!act && !soft) continue;
     const parts: string[] = [];
     if (b.new) parts.push(`${b.new} new`);
     if (b.diff) parts.push(`${b.diff} diff`);
     if (b.removed) parts.push(`${b.removed} removed`);
+    if (b.minor) parts.push(`${b.minor} minor`);
     if (b.typo) parts.push(`${b.typo} typo`);
     const severe = b.diff > 0 || b.removed > 0;
     items.push({
@@ -152,7 +158,7 @@ export function buildInbox(): InboxItem[] {
       href: e.href,
       tone: act === 0 ? 'muted' : severe ? 'danger' : 'warn',
       rank: act === 0 ? 4 : severe ? 1 : 2,
-      count: act || b.typo,
+      count: act || soft,
     });
   }
 

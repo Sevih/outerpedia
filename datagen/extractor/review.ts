@@ -10,10 +10,14 @@
  */
 import { resolve } from 'node:path';
 import { readCuratedJson, writeJson } from '../lib/json';
+import { changedIntegratedIds, stageCharacterAssets } from '../assets/stage-characters';
+import type { StageResult } from '../assets/stage';
+import { buildSkills } from '../generators/skills';
 import {
   diffBuckets,
   diffEntity,
   diffRecords,
+  isMinorEntity,
   isTypoEntity,
   type DiffBuckets,
   type FieldDiff,
@@ -23,20 +27,24 @@ import { getTarget, TARGETS, type GeneratedTarget } from './targets';
 
 const GENERATED = resolve('data/generated');
 
-function readCommitted(file: string): Record<string, unknown> {
+type Dict = Record<string, unknown>;
+
+// `dir` injectable sur les lectures/écritures : les tests d'`acceptMinorIn`
+// travaillent sur un dossier temporaire, jamais sur le vrai `data/generated`.
+function readCommitted(file: string, dir = GENERATED): Dict {
   // Committé ABSENT (cible jamais générée) → `{}` : tout est vu comme « new »,
   // cas normal. Committé PRÉSENT mais CASSÉ → `readCuratedJson` LÈVE en nommant
   // le fichier — jamais un `{}` silencieux qui ferait voir TOUTES les entités
   // comme « new » (diff faussé) et, au `writeBack` d'une cible à `subKey`,
   // ÉCRASERAIT les autres clés du fichier partagé (audit X2).
-  return readCuratedJson<Record<string, unknown>>(resolve(GENERATED, file)) ?? {};
+  return readCuratedJson<Dict>(resolve(dir, file)) ?? {};
 }
 
 /** Committé de la cible — sous-objet `subKey` extrait si fichier partagé. */
-function committedOf(target: GeneratedTarget): Record<string, unknown> {
-  const raw = readCommitted(target.file);
+function committedOf(target: GeneratedTarget, dir = GENERATED): Dict {
+  const raw = readCommitted(target.file, dir);
   if (!target.subKey) return raw;
-  return (raw[target.subKey] as Record<string, unknown>) ?? {};
+  return (raw[target.subKey] as Dict) ?? {};
 }
 
 /**
@@ -44,13 +52,13 @@ function committedOf(target: GeneratedTarget): Record<string, unknown> {
  * fichier partagé (`subKey`) : on relit le fichier et on n'écrase QUE ce
  * sous-objet, en préservant le reste (les autres clés du glossaire).
  */
-async function writeBack(target: GeneratedTarget, data: Record<string, unknown>): Promise<void> {
-  const path = resolve(GENERATED, target.file);
+async function writeBack(target: GeneratedTarget, data: Dict, dir = GENERATED): Promise<void> {
+  const path = resolve(dir, target.file);
   if (!target.subKey) {
     await writeJson(path, data);
     return;
   }
-  await writeJson(path, { ...readCommitted(target.file), [target.subKey]: data });
+  await writeJson(path, { ...readCommitted(target.file, dir), [target.subKey]: data });
 }
 
 export interface TargetReview {
@@ -65,12 +73,17 @@ export function reviewTotals(diff: RecordDiff): number {
   return diff.added.length + diff.removed.length + diff.changed.length;
 }
 
-/** Répartition new / diff / typo / removed d'une revue (pour la matrice admin). */
+/** Répartition new / diff / minor / typo / removed d'une revue (pour la matrice admin). */
 export function reviewBuckets(diff: RecordDiff): DiffBuckets {
   return diffBuckets(diff);
 }
 
-export type ReviewEntityStatus = 'new' | 'diff' | 'typo' | 'removed';
+/**
+ * `minor` = retouche mineure (texte reformulé, costume ajouté ou déplacé — cf.
+ * `isMinorEntity`), `typo` = coquille pure ; les deux s'appliquent d'un geste
+ * (`acceptMinor`) sans ré-intégrer l'entité.
+ */
+export type ReviewEntityStatus = 'new' | 'diff' | 'minor' | 'typo' | 'removed';
 
 /** Une entité de la revue, statut déjà classé (pour la liste filtrable). */
 export interface ReviewEntity {
@@ -80,13 +93,13 @@ export interface ReviewEntity {
   fields: FieldDiff[];
 }
 
-/** Aplati un `RecordDiff` en liste d'entités classées new / diff / typo / removed. */
+/** Aplati un `RecordDiff` en liste d'entités classées new / diff / minor / typo / removed. */
 export function reviewEntities(diff: RecordDiff): ReviewEntity[] {
   return [
     ...diff.added.map((key): ReviewEntity => ({ key, status: 'new', fields: [] })),
     ...diff.changed.map((e): ReviewEntity => ({
       key: e.key,
-      status: isTypoEntity(e) ? 'typo' : 'diff',
+      status: isTypoEntity(e) ? 'typo' : isMinorEntity(e) ? 'minor' : 'diff',
       fields: e.fields,
     })),
     ...diff.removed.map((key): ReviewEntity => ({ key, status: 'removed', fields: [] })),
@@ -155,36 +168,105 @@ function runReview(target: GeneratedTarget): TargetReview {
   };
 }
 
+/** Bilan d'une écriture de cible : images mises en place (cible des persos seulement). */
+export interface AcceptReport {
+  assets?: StageResult;
+}
+
+/**
+ * Images des persos INTÉGRÉS que l'écriture vient de modifier — l'étape 5 de
+ * l'intégration, restreinte à `ids` (cf. `assets/stage-characters.ts`) : un
+ * costume ajouté a son full art et le visage de son apparence sans qu'on
+ * ré-intègre personne. Autres cibles : rien (`undefined`). Les icônes de skills
+ * viennent du catalogue frais, comme à l'intégration.
+ */
+async function stageChangedCharacters(
+  target: GeneratedTarget,
+  ids: string[],
+  characters: Dict,
+): Promise<StageResult | undefined> {
+  if (target.id !== 'character' || !ids.length) return undefined;
+  return stageCharacterAssets(
+    ids,
+    characters,
+    buildSkills().skills as unknown as Record<string, Dict>,
+  );
+}
+
 /**
  * VALIDE une cible : écrit l'extraction fraîche dans `data/generated/<file>`,
  * au format CANONIQUE de `build.ts` (cf. `lib/json`). Cible à `subKey` : seul
  * ce sous-objet est réécrit (le reste du fichier est préservé). L'utilisateur
  * committe ensuite via git. NB : les sorties transverses (relations…) restent
- * du ressort de `pnpm datagen:build`.
+ * du ressort de `pnpm datagen:build`. Cible des persos : met aussi en place
+ * les images des persos déjà intégrés dont l'entrée change (les nouveaux,
+ * non intégrés, ne sont jamais stagés par ici).
  */
-export async function acceptTarget(id: string): Promise<void> {
-  const target = getTarget(id);
-  if (!target) throw new Error(`cible inconnue : ${id}`);
-  await writeBack(target, target.build());
-}
-
-/**
- * Applique UNIQUEMENT les corrections typographiques : remplace, dans le
- * committé, les seules entités dont TOUS les champs changés sont typo (le reste
- * — vrais écarts, nouveaux, disparus — est laissé tel quel, à arbitrer). Renvoie
- * le nombre d'entités corrigées.
- */
-export async function acceptTypos(id: string): Promise<number> {
+export async function acceptTarget(id: string): Promise<AcceptReport> {
   const target = getTarget(id);
   if (!target) throw new Error(`cible inconnue : ${id}`);
   const committed = committedOf(target);
   const fresh = target.build();
-  const typoKeys = diffRecords(committed, fresh)
-    .changed.filter(isTypoEntity)
-    .map((e) => e.key);
-  if (!typoKeys.length) return 0;
+  await writeBack(target, fresh);
+  const assets = await stageChangedCharacters(
+    target,
+    changedIntegratedIds(committed, fresh),
+    fresh,
+  );
+  return { assets };
+}
+
+/**
+ * Cœur PUR de l'application des retouches : fusionne dans `committed` les
+ * seules entités de `fresh` dont TOUS les champs changés sont typo ou mineurs
+ * (le reste — vrais écarts, nouveaux, disparus — est laissé tel quel, à
+ * arbitrer). Les clés sont rendues par sorte, pour le compte rendu.
+ */
+export function mergeMinor(
+  committed: Dict,
+  fresh: Dict,
+): { merged: Dict; typo: string[]; minor: string[] } {
+  const typo: string[] = [];
+  const minor: string[] = [];
+  for (const e of diffRecords(committed, fresh).changed) {
+    if (isTypoEntity(e)) typo.push(e.key);
+    else if (isMinorEntity(e)) minor.push(e.key);
+  }
   const merged = { ...committed };
-  for (const k of typoKeys) merged[k] = fresh[k];
-  await writeBack(target, merged);
-  return typoKeys.length;
+  for (const k of [...typo, ...minor]) merged[k] = fresh[k];
+  return { merged, typo, minor };
+}
+
+/**
+ * Applique les retouches mineures (typo comprises) d'une cible dans `dir` :
+ * n'écrit que si au moins une entité est concernée. Séparé du wrapper pour
+ * être testable sur un dossier temporaire (l'écriture est destructive).
+ */
+export async function acceptMinorIn(
+  dir: string,
+  target: GeneratedTarget,
+): Promise<{ typo: string[]; minor: string[] }> {
+  const { merged, typo, minor } = mergeMinor(committedOf(target, dir), target.build());
+  if (typo.length + minor.length) await writeBack(target, merged, dir);
+  return { typo, minor };
+}
+
+/** Bilan d'`acceptMinor` : entités appliquées par sorte, images mises en place. */
+export interface MinorReport extends AcceptReport {
+  typo: number;
+  minor: number;
+}
+
+/**
+ * Applique UNIQUEMENT les retouches mineures et les corrections typographiques
+ * (« Appliquer les retouches mineures » de la revue) — remplace l'ancien
+ * `acceptTypos`, qui ne prenait que les coquilles. Cible des persos : met en
+ * place les images des persos touchés (costume ajouté → son full art).
+ */
+export async function acceptMinor(id: string): Promise<MinorReport> {
+  const target = getTarget(id);
+  if (!target) throw new Error(`cible inconnue : ${id}`);
+  const { typo, minor } = await acceptMinorIn(GENERATED, target);
+  const assets = await stageChangedCharacters(target, [...typo, ...minor], committedOf(target));
+  return { typo: typo.length, minor: minor.length, assets };
 }

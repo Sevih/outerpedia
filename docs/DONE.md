@@ -79,7 +79,9 @@ typecheck` (sans erreur), `pnpm lint` (`$ eslint`, rien), `pnpm test`
     possible pour les monstres et l'équipement (la classification est déjà
     générique — `name`/`nickname`/`desc` —, ce sont les écrans et le staging
     qui manquent) ; le flag `art` qui apparaît sur un costume existant reste un
-    écart, à trancher.
+    écart, à trancher. NB : cette entrée est partie dans le commit du lot A27
+    (`0132cd05`, index partagé, DONE indexé par lui pendant que F14 attendait) ;
+    le code, lui, est dans le commit F14 qui suit.
 - **Sources d'équipement : le Survey Hub remplace l'Adventure License**
   (Opus, lot A27). Le patch 1.4.18 a fermé l'Adventure License et déplacé ses
   huit équipements au Survey Hub, mais `equipment/sources.json` disait encore

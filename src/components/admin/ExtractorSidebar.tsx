@@ -26,7 +26,8 @@ export interface ExtractorRow {
   badgeIcon?: string;
   /** Étoiles (rareté), si pertinent. */
   stars?: number;
-  status?: 'new' | 'diff' | 'ok';
+  /** `minor` : retouche mineure ou typo seule (s'applique sans ré-intégrer). */
+  status?: 'new' | 'diff' | 'minor' | 'ok';
   /** Compteur d'écarts (diff extraction, anomalies…), affiché sur le badge. */
   count?: number;
   /** Petit glyphe accent après le statut (ex. « ✎ » = entité curée). */
@@ -51,7 +52,7 @@ export interface TagFilter {
   options: Array<{ value: string; label: string }>;
 }
 
-const FILTERS = ['all', 'diff', 'new', 'ok'] as const;
+const FILTERS = ['all', 'diff', 'minor', 'new', 'ok'] as const;
 type Filter = (typeof FILTERS)[number];
 
 /** Au-delà, on demande d'affiner (les monstres = 4382 lignes). */
@@ -105,6 +106,7 @@ export function ExtractorSidebar({
       // revue), sinon dérivés des lignes.
       diff: counts ? counts.diff : rows.filter((r) => r.status === 'diff').length,
       new: counts ? counts.new : rows.filter((r) => r.status === 'new').length,
+      minor: rows.filter((r) => r.status === 'minor').length,
     }),
     [rows, counts],
   );
@@ -124,7 +126,8 @@ export function ExtractorSidebar({
           (r.sub ?? '').toLowerCase().includes(s),
       )
       .sort((a, b) => {
-        const p = (r: ExtractorRow) => (r.status === 'diff' ? 0 : r.status === 'new' ? 1 : 2);
+        const p = (r: ExtractorRow) =>
+          r.status === 'diff' ? 0 : r.status === 'new' ? 1 : r.status === 'minor' ? 2 : 3;
         if (p(a) !== p(b)) return p(a) - p(b);
         if ((a.count ?? 0) !== (b.count ?? 0)) return (b.count ?? 0) - (a.count ?? 0);
         return a.id.localeCompare(b.id, undefined, { numeric: true });
@@ -159,6 +162,7 @@ export function ExtractorSidebar({
               >
                 {stats.new} new
               </span>
+              {stats.minor > 0 && <span className="text-content-muted">{stats.minor} minor</span>}
             </>
           )}
         </div>
@@ -170,7 +174,7 @@ export function ExtractorSidebar({
         />
         {hasStatus && (
           <div className="flex gap-1">
-            {FILTERS.map((f) => (
+            {FILTERS.filter((f) => f !== 'minor' || stats.minor > 0).map((f) => (
               <button
                 key={f}
                 type="button"
@@ -290,6 +294,11 @@ export function ExtractorSidebar({
                       {r.status === 'diff' && (
                         <span className="bg-warn/15 text-warn text-2xs rounded px-1">
                           {r.count ? `${r.count} ` : ''}diff
+                        </span>
+                      )}
+                      {r.status === 'minor' && (
+                        <span className="bg-content-muted/15 text-content-muted text-2xs rounded px-1">
+                          {r.count ? `${r.count} ` : ''}minor
                         </span>
                       )}
                       {r.status === 'ok' && (

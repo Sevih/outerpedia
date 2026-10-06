@@ -15,16 +15,34 @@ type Filter = 'all' | Status;
 const BADGE: Record<Status, { label: string; cls: string }> = {
   new: { label: 'new', cls: 'text-warn' },
   diff: { label: 'diff', cls: 'text-danger' },
+  // Retouche mineure (texte reformulé sans nombre changé, costume ajouté ou
+  // déplacé) : couleur discrète, comme la typo — rien à arbitrer.
+  minor: { label: 'minor', cls: 'text-content-muted' },
   typo: { label: 'typo', cls: 'text-content-subtle' },
   removed: { label: 'removed', cls: 'text-danger' },
 };
 
+/** Bilan d'images d'une écriture (cible des persos), tel que la route le rend. */
+interface Assets {
+  staged: number;
+  restaged: number;
+  present: number;
+  missing: Array<{ key: string; reason: string }>;
+}
+
+const assetsSummary = (a?: Assets): string =>
+  a
+    ? ` · images: ${a.staged} produced, ${a.restaged} remade, ${a.present} already there` +
+      (a.missing.length ? `, ${a.missing.length} missing` : '')
+    : '';
+
 /**
  * Revue d'extraction d'UNE cible (committé ↔ extraction fraîche), filtrable par
- * statut. `new`/`diff`/`typo`/`disparu` classés côté serveur. Deux gestes :
+ * statut. `new`/`diff`/`minor`/`typo`/`disparu` classés côté serveur. Deux gestes :
  *   - « Valider toute l'extraction » = promote (écrit le fichier entier) ;
- *   - « Corriger les typos » = n'applique QUE les coquilles (guillemets,
- *     ponctuation…), laissant les vrais écarts à arbitrer.
+ *   - « Appliquer les retouches mineures » = n'applique QUE les entités
+ *     mineures (texte reformulé, costume ajouté ou déplacé) et les coquilles
+ *     (guillemets, ponctuation…), laissant les vrais écarts à arbitrer.
  * L'utilisateur committe ensuite via git.
  */
 export function ExtractorReview({
@@ -47,7 +65,7 @@ export function ExtractorReview({
 }) {
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>('all');
-  const [busy, setBusy] = useState<null | 'all' | 'typos'>(null);
+  const [busy, setBusy] = useState<null | 'all' | 'minor'>(null);
   const [msg, setMsg] = useState<{ tone: 'ok' | 'err'; text: string } | null>(null);
   const [rowBusy, setRowBusy] = useState<string | null>(null);
   const [rowMsg, setRowMsg] = useState<Record<string, { tone: 'ok' | 'err'; text: string }>>({});
@@ -81,6 +99,7 @@ export function ExtractorReview({
     all: entities.length,
     new: buckets.new,
     diff: buckets.diff,
+    minor: buckets.minor,
     typo: buckets.typo,
     removed: buckets.removed,
   };
@@ -89,20 +108,23 @@ export function ExtractorReview({
     [entities, filter],
   );
 
-  async function accept(mode: 'all' | 'typos') {
+  async function accept(mode: 'all' | 'minor') {
     setBusy(mode);
     setMsg(null);
     try {
-      const res = await postJson<{ fixed?: number }>(
+      const res = await postJson<{ typo?: number; minor?: number; assets?: Assets }>(
         `/api/admin/review/${id}`,
-        mode === 'typos' ? { mode: 'typos' } : undefined,
+        mode === 'minor' ? { mode: 'minor' } : undefined,
       );
+      // L'écran dit combien d'entités de chaque sorte il a appliquées.
       setMsg({
         tone: 'ok',
         text:
-          mode === 'typos'
-            ? `${res.fixed ?? 0} typo(s) fixed in ${file} — commit via git.`
-            : `Extraction confirmed in ${file} — commit via git.`,
+          (mode === 'minor'
+            ? `${res.minor ?? 0} minor + ${res.typo ?? 0} typo applied in ${file}`
+            : `Extraction confirmed in ${file}`) +
+          assetsSummary(res.assets) +
+          ' — commit via git.',
       });
       router.refresh();
     } catch (e) {
@@ -113,6 +135,7 @@ export function ExtractorReview({
   }
 
   const total = buckets.new + buckets.diff + buckets.removed;
+  const soft = buckets.minor + buckets.typo;
 
   return (
     <div className="space-y-4">
@@ -130,18 +153,20 @@ export function ExtractorReview({
             >
               {busy === 'all' ? '…' : 'Confirm the whole extraction'}
             </button>
-            {buckets.typo > 0 && (
+            {soft > 0 && (
               <button
                 type="button"
-                onClick={() => accept('typos')}
+                onClick={() => accept('minor')}
                 disabled={busy !== null}
                 className="border-line hover:border-accent rounded-md border px-3 py-1.5 text-sm disabled:opacity-50"
               >
-                {busy === 'typos' ? '…' : `Fix typos (${buckets.typo})`}
+                {busy === 'minor' ? '…' : `Apply minor changes (${soft})`}
               </button>
             )}
             <span className="text-content-subtle text-xs">
-              {total} real difference(s){buckets.typo > 0 && ` · ${buckets.typo} typo`}
+              {total} real difference(s)
+              {buckets.minor > 0 && ` · ${buckets.minor} minor`}
+              {buckets.typo > 0 && ` · ${buckets.typo} typo`}
             </span>
           </>
         )}
@@ -155,7 +180,7 @@ export function ExtractorReview({
       {/* Filtres */}
       {entities.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
-          {(['all', 'new', 'diff', 'typo', 'removed'] as const)
+          {(['all', 'new', 'diff', 'minor', 'typo', 'removed'] as const)
             .filter((f) => f === 'all' || counts[f] > 0)
             .map((f) => (
               <button

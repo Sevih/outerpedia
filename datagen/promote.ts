@@ -33,6 +33,8 @@ import { isMain } from './lib/is-main';
 import { formatJson, writeTextAtomic } from './lib/json';
 import { GAME_LANGS, emptyDict } from './lib/lang';
 import { isUnreleasedCharacterAsset } from './lib/released';
+import { changedIntegratedIds, stageCharacterAssets } from './assets/stage-characters';
+import type { StageResult } from './assets/stage';
 
 const SRC = resolve('data/extracted');
 const DST = resolve('data/generated');
@@ -351,6 +353,13 @@ export interface PromoteOptions {
   only?: ReadonlySet<string> | null;
   /** Garde-fous de la rétention de catalogue (cf. `RETAIN_CATALOGS`) — tests. */
   catalogGuards?: CatalogGuards;
+  /**
+   * Staging des images des persos INTÉGRÉS dont l'entrée change dans
+   * `characters.json` (cf. `assets/stage-characters.ts`), appelé APRÈS les
+   * écritures avec ces ids et le dossier validé. Injecté par le CLI à l'apply ;
+   * absent = pas de staging (dry-run, tests).
+   */
+  stageCharacters?: (ids: string[], dst: string) => Promise<StageResult>;
 }
 
 export interface PromoteResult {
@@ -369,6 +378,14 @@ export interface PromoteResult {
    * sortie ne bloque ni `pnpm dev` (dry-run) ni la promotion en lot.
    */
   violations: string[];
+  /**
+   * Persos INTÉGRÉS dont l'entrée de `characters.json` change (après garde
+   * perso) — ceux dont les images sont mises en place à l'apply, sans
+   * ré-intégration (costume ajouté → son full art).
+   */
+  changedCharacters: string[];
+  /** Bilan du staging de ces persos (apply avec `stageCharacters` seulement). */
+  assets?: StageResult;
 }
 
 /**
@@ -377,7 +394,7 @@ export interface PromoteResult {
  * en sortie code 1 ; les tests l'attrapent directement.
  */
 export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult> {
-  const { src = SRC, dst = DST, apply = false, only = null, catalogGuards } = opts;
+  const { src = SRC, dst = DST, apply = false, only = null, catalogGuards, stageCharacters } = opts;
 
   if (!existsSync(src)) {
     throw new Error('data/extracted/ absent — lance d’abord `pnpm datagen:build`.');
@@ -415,6 +432,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   const diffs: string[] = [];
   const strippedAll = new Set<string>();
   const violations: string[] = [];
+  let changedCharacters: string[] = [];
   // Écritures DIFFÉRÉES à après le verrou perso : une promotion refusée ne
   // laisse RIEN d'écrit (tout-ou-rien), jamais un validé à moitié promu.
   const pending: Array<{ path: string; text: string }> = [];
@@ -499,6 +517,15 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         ? `NOUVEAU fichier${notes}`
         : entityDiff(JSON.parse(dstText) as unknown, JSON.parse(out) as unknown) + notes;
     diffs.push(`  ${rel.padEnd(34)} ${label}`);
+    // Persos intégrés modifiés : après la garde perso (`out` est déjà écarté),
+    // donc jamais un non intégré ; après le verrou, donc jamais sur un fichier
+    // retenu. Leurs images sont mises en place à l'apply, ci-dessous.
+    if (rel === 'characters.json' && dstText !== undefined) {
+      changedCharacters = changedIntegratedIds(
+        JSON.parse(dstText) as Record<string, unknown>,
+        JSON.parse(out) as Record<string, unknown>,
+      );
+    }
     if (apply) pending.push({ path: dstPath, text: out });
   }
 
@@ -514,10 +541,26 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     writeTextAtomic(path, text); // un Ctrl-C ici ne laisse pas un generated tronqué
   }
 
+  // Images des persos intégrés modifiés — la même étape 5 que l'intégration,
+  // restreinte à ces ids (cf. stage-characters.ts) : un costume ajouté par le
+  // jeu a son full art sans qu'on ré-intègre personne. Lit le validé qu'on
+  // vient d'écrire.
+  let assets: StageResult | undefined;
+  if (apply && changedCharacters.length && stageCharacters) {
+    assets = await stageCharacters(changedCharacters, dst);
+  }
+
   console.log(
     `promotion extrait → validé : ${identical} identique(s), ${diffs.length} différent(s)`,
   );
   for (const d of diffs) console.log(d);
+  if (assets) {
+    console.log(
+      `  images : ${changedCharacters.length} perso(s) intégré(s) modifié(s) (${changedCharacters.join(', ')}) — ` +
+        `${assets.staged} produite(s), ${assets.restaged} refaite(s), ${assets.present} déjà là, ${assets.missing.length} manquante(s)`,
+    );
+    for (const m of assets.missing) console.log(`    ⚠ ${m.key} — ${m.reason}`);
+  }
   // Fichiers validés sans équivalent extrait : jamais supprimés d'office —
   // signalés pour décision humaine (entité retirée du jeu ? renommage ?).
   for (const rel of orphans)
@@ -536,7 +579,35 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         : '\n(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
     );
   }
-  return { identical, diffs, orphans, strippedCharacters: [...strippedAll].sort(), violations };
+  return {
+    identical,
+    diffs,
+    orphans,
+    strippedCharacters: [...strippedAll].sort(),
+    violations,
+    changedCharacters,
+    assets,
+  };
+}
+
+/**
+ * Staging RÉEL des persos intégrés modifiés (CLI) : perso et icônes de skills
+ * lus dans le validé qu'on vient d'écrire (`skills.json` promu dans le même
+ * lot ; absent en `--only characters.json` → icônes de skills non demandées,
+ * elles sont déjà là).
+ */
+async function stageIntegratedCharacters(ids: string[], dst: string): Promise<StageResult> {
+  const readJson = (rel: string): Record<string, unknown> => {
+    const path = join(dst, rel);
+    return existsSync(path)
+      ? (JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>)
+      : {};
+  };
+  return stageCharacterAssets(
+    ids,
+    readJson('characters.json'),
+    readJson('skills.json') as Record<string, Record<string, unknown>>,
+  );
 }
 
 async function main(): Promise<void> {
@@ -552,7 +623,11 @@ async function main(): Promise<void> {
     console.error('--only : au moins un fichier attendu (relatif à data/extracted).');
     process.exit(1);
   }
-  const result = await promote({ apply, only });
+  const result = await promote({
+    apply,
+    only,
+    stageCharacters: apply ? stageIntegratedCharacters : undefined,
+  });
 
   // RE-DÉRIVATION (cf. datagen/sync-derived.ts) : un apply qui a changé la
   // donnée intégrée doit rejouer damage + solver, qui la LISENT. `--skip-sync`
