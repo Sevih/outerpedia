@@ -7,6 +7,34 @@
 
 ## 2026-10-06
 
+- **Table du jour — patch 1.4.18 et neuf lots, tous relus** (Fable). Le fil :
+  `pnpm dev` au matin, intégration et promotions (entrée « Patch du
+  06/10/2026 »), clôture et publication par la carte Patch de l'admin, puis
+  les suites. Aucun lot en attente ce soir ; le fichier des lots ne garde que
+  l'outil. Les entrées détaillées suivent, plus récentes d'abord.
+
+  | Lot · objet                                                              | Commit     |
+  | ------------------------------------------------------------------------ | ---------- |
+  | F13 · calculateur sans l'arbre de quirks de l'Adventure License          | `17db2fec` |
+  | B25 · carte « Patch » de l'accueil admin (promouvoir, publier)           | `bae54e94` |
+  | B26 · carte « Patch » : commiter (`--no-push`) et pousser séparés        | `8dde0ef8` |
+  | A26 · liste des effets de l'admin : recherche par nom                    | `5bfb5b4b` |
+  | A27 · sources d'équipement : Survey Hub remplace l'Adventure License     | `0132cd05` |
+  | F14 · revue d'extraction : classe « mineur », images sans ré-intégration | `6779bd4a` |
+  | — · patch du 06/10 (données, guide Universal Tower, journal), 1.7.5      | `b92cd44d` |
+  | A28 · libellés Survey Hub, `GIT_TERMINAL_PROMPT=0`, en-tête commit.ts    | `bb942a7f` |
+  | F15 · portraits animés : gardes P7, compteurs P9                         | `f5566d83` |
+  | — · provenance d'un costume = retouche mineure (décision Sevih)          | `45ae2f3f` |
+  | — · `ENGINE_GAME_VERSION` 1.4.18                                         | `fda2ee33` |
+  | B27 · classe « mineur » pour les monstres, images monstres/équipement    | `7a04538e` |
+
+  Leçons du jour, à retenir : le dump du jeu peut être rafraîchi dans la
+  matinée (rejouer le dry-run de promote avant de clore ; ne pas nommer un
+  guide d'après une première traduction) ; quick pousse `main` à chaque
+  enregistrement, même un jour de patch ; le signal « damage en avance sur le
+  wiki » de `damage-data.test` ne regarde que l'anglais ; l'index git partagé
+  déplace les entrées DONE d'un commit de lot à l'autre, sans perte.
+
 - **Relecture de B27 : 80 lots, aucun en attente** (Fable). `7a04538e`,
   périmètre propre (17 fichiers, tree propre, aucun staging réel : les
   fichiers d'`.assets-staging` datent d'avant). Typecheck, lint,
