@@ -63,10 +63,9 @@ const equipmentIds = new Set(
     eeData,
   ].flatMap((t) => Object.keys(t as Record<string, unknown>)),
 );
-// `adventure_license` : TOLÉRANCE DE TRANSITION — le générateur ne l'émet plus
-// (boutique fermée le 06/10/2026), mais le `sources.json` committé le porte
-// jusqu'à la promotion de l'extraction. À retirer une fois promu.
-const VALID_SHOPS = new Set(['survey', 'event_shop', 'adventure_license']);
+// Boutiques permanentes connues du générateur (`shopSlug`) : l'Adventure
+// License n'en est plus une depuis sa fermeture le 06/10/2026.
+const VALID_SHOPS = new Set(['survey', 'event_shop']);
 const entries = Object.entries(sources);
 
 describe('sources.json — invariants référentiels', () => {

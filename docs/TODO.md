@@ -13,19 +13,6 @@
       quantités hebdomadaires de Dimensional Singularity. La préparation du
       05/10 est commitée en local : ne pas pousser (ni `pnpm quick`) avant
       le patch.
-- [ ] **Fin de l'Adventure License** : guides masqués, mode sorti de
-      `most-used-units`, de `unlock-content`, du suivi de progression et des
-      guides `quirk`, `daily-stamina`, `shop-purchase-priorities` (lot B20,
-      FAIT le 05/10) ; calculateur de dégâts sans l'arbre de quirks du mode
-      (lot F13, FAIT le 06/10 — `quirks.json` à promouvoir depuis l'admin,
-      FAIT le 06/10, `quirks.json` promu, tolérance retirée). Priorités du
-      Survey Hub : FAIT le 06/10 (9 produits curés). Sources d'équipement
-      (`survey` à la place d'`adventure_license`, icône `ui/shop/al` sortie
-      du manifeste) : lot A27, FAIT le 06/10 côté code. Reste : promouvoir
-      `equipment/sources.json` depuis l'admin AVANT de pousser (d'ici là
-      `/equipment` affiche le slug brut `adventure_license` pour les huit
-      objets), puis retirer la tolérance `adventure_license` de
-      `VALID_SHOPS` dans `datagen/generators/sources.test.ts`.
 
 ## 🛠️ Admin
 

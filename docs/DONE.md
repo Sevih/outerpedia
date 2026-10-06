@@ -7,6 +7,27 @@
 
 ## 2026-10-06
 
+- **Relecture de B26, A26, A27 et F14 : 77 lots** (Fable). Les quatre
+  commits (`8dde0ef8`, `5bfb5b4b`, `0132cd05`, `6779bd4a`) ont un périmètre
+  propre — aucun fichier du patch en cours emporté ; l'index partagé a encore
+  déplacé des entrées DONE (A26 dans le commit B26, F14 dans le commit A27),
+  sans perte. Sur HEAD : typecheck, lint, `Tests 2676 passed (2676)`, 193
+  fichiers. B26 : GET `push` à travers Caddy liste les quatre commits en
+  avance, `publishArgs` porte `--no-push`, `pushRefusal` pur ; rien poussé
+  (`main` devant de 4). A26 : `/admin/editor/effects` en 200 avec le champ de
+  recherche, page restée serveur, catalogue client ; `effect-search.ts` pur.
+  A27 : `equipment/sources.json` promu dans la foulée (8 objets
+  `adventure_license` → `survey`), tolérance `adventure_license` retirée de
+  `VALID_SHOPS` ; le filtre « produits courants » ajouté hors lettre du lot est
+  gardé (sans lui, huit pièces 5★ retirées en 12/2025 redevenaient « Survey
+  Hub »). F14 : classification relue — `TEXT_KEYS`, alignement par `id` des
+  listes d'objets, apparence d'un costume ajouté ; sur les données du jour,
+  Eva et Luna passent en `minor` ; à trancher par Sevih : `costumes[#].source`
+  (`package_shop`/`battlepass` → `shop`, quatre persos) reste `diff` par la
+  règle du doute. Laissé des agents, non bloquant : B26 sans
+  `GIT_TERMINAL_PROMPT=0` sur fetch/push ; A26 : saisie hors URL ; A27 :
+  `images/ui/shop/al.webp` toujours sur R2, libellés jp/kr/zh du Survey Hub
+  dans `shop-purchase-priorities/labels.ts` différents du jeu.
 - **Revue d'extraction : les retouches mineures (costumes, textes) passent
   sans ré-intégration** (Fable, lot F14, retours de Sevih du 06/10). Un perso
   intégré dont le jeu ajoute un costume ou reformule un texte passait en
