@@ -7,6 +7,18 @@
 
 ## 2026-10-06
 
+- **Relecture de B25 : carte « Patch » de l'accueil admin** (Fable). Lot 73,
+  `bae54e94`, périmètre propre (onze fichiers, rien des fichiers du patch en
+  cours dans le working tree), entrée DONE complète, TODO nettoyé. Rejoué à
+  travers Caddy (`https://outerpedia.local/api/admin/patch/…`) : GET `commit`
+  (le `git status --short` du jour, ligne à ligne, `done ok`), GET `promote`
+  (dry-run réel, « 65 identiques, 0 différent, 2400015 écarté »), POST `commit`
+  avec un message sans préfixe → 400 sans rien lancer. Rien n'a été poussé
+  (`main` devant de 42, version 1.7.4 intacte). Relu : `patch-runner.ts`
+  (spawn sans shell, verrou sur `globalThis`, le travail survit à la fermeture
+  de l'onglet), `patch-commands.ts` (le message refuse `" $ \` \ %`parce que`commit.ts`le remet dans un shell en aval — choix de l'agent, gardé),`commit.ts` (`--bump` lu en tête, une valeur inconnue arrête avant le
+  pré-vol). Jamais cliqué : les deux POST réels ; le premier essai sera la
+  publication du patch du 06/10 par Sevih depuis la page.
 - **Accueil de l'admin : carte « Patch », la promotion de l'extraction et la
   publication lancées de la page** (Opus, lot B25, demande de Sevih du
   06/10). Le jour d'un patch, l'intégration des persos et la validation des
