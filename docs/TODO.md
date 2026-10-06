@@ -32,13 +32,6 @@
       sans ré-intégrer le perso. Lot F14 de
       [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Fable), après F13.
 
-- [ ] **Accueil de l'admin : deux boutons, « Promouvoir l'extraction » et
-      « Publier les données »** (demande de Sevih du 06/10) : la promotion et
-      `pnpm commit` lancés depuis la page, sortie au fil de l'eau, dry-run et
-      revue avant confirmation, flag `--bump` ajouté à `commit.ts`. Lot B25 de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus), pas en
-      même temps que F14.
-
 ## 🧰 Outil quick
 
 - [ ] **Onglet « Discord », suites du lot B24** : (a) Sevih essaie dans un

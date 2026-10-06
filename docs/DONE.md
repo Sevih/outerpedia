@@ -7,6 +7,65 @@
 
 ## 2026-10-06
 
+- **Accueil de l'admin : carte « Patch », la promotion de l'extraction et la
+  publication lancées de la page** (Opus, lot B25, demande de Sevih du
+  06/10). Le jour d'un patch, l'intégration des persos et la validation des
+  cibles se font dans l'admin, puis il fallait revenir au terminal pour
+  `pnpm datagen:promote --apply` et `pnpm commit` : ce sont maintenant deux
+  boutons de `/admin` (`src/components/admin/PatchCard.tsx`, posée entre
+  l'inbox et la couverture dans `page.dev.tsx`), avec la sortie de la
+  commande au fil de l'eau. « Promouvoir l'extraction » affiche d'abord le
+  dry-run, puis « Appliquer la promotion » lance l'apply ; « Publier les
+  données » prend un message (préfixe conventionnel exigé, vérifié à la
+  frappe) et un bump patch/minor/major, affiche `git status --short` (les
+  `??` en couleur d'alerte, le compte dessous), puis « Confirmer la
+  publication » lance `pnpm commit --msg … --bump … --yes` ; une ligne
+  rappelle que publier pousse R2 puis `main`, donc déploie. Quatre routes
+  dev (`src/app/api/admin/patch/{promote,commit}/route.dev.ts`, GET = revue
+  sans effet, POST = le geste, 403 hors dev) répondent en NDJSON, une ligne
+  `{ line }` par ligne de sortie puis `{ done: { ok, code } }` — le principe
+  de `stream()` de quick en `ReadableStream`. `src/lib/admin/patch-runner.ts`
+  lance par `spawn` sans shell, à la racine, avec l'environnement du
+  serveur ; pnpm est relancé par son script JS (`npm_execpath`, posé par
+  `pnpm dev`) avec le node courant, parce que `pnpm` est un `.cmd` sous
+  Windows et qu'un `.cmd` exige un interpréteur. Un seul travail à la fois,
+  les deux revues comprises : verrou en mémoire sur `globalThis` (une
+  variable de module est remise à zéro au rechargement à chaud), second clic
+  refusé en 409 « déjà en cours — <le travail> ». Fermer l'onglet ne tue PAS
+  la commande : couper `pnpm commit` entre le push R2 et le push git est
+  précisément ce que son pré-vol cherche à éviter. `scripts/commit.ts` gagne
+  `--bump patch|minor|major`, qui saute le prompt du bump ; une valeur
+  inconnue ou absente arrête le script avant le pré-vol. La validation
+  (`src/lib/admin/patch-commands.ts`, pur, partagé par la page, la route et
+  le script) : préfixe conventionnel, une ligne, 200 caractères, bump parmi
+  trois. Deux choix à moi, à relire : (1) l'expression `CONVENTIONAL` a
+  quitté `commit.ts` pour ce module, pour n'exister qu'une fois ; (2) le
+  message refuse aussi le guillemet double, `$`, l'accent grave, la barre
+  oblique inverse et `%` — la route le passe bien en argument,
+  mais `commit.ts` le remet ensuite dans un shell (`git commit -m "…"` par
+  `execSync`), que je n'ai pas touché (hors périmètre). Le serveur tourne
+  avec `FORCE_COLOR=3` : les séquences ANSI sont retirées du journal. Joué,
+  sans effet :
+  `pnpm commit --dry-run --msg "test(admin): essai" --bump patch --yes` au
+  terminal (1.7.4 → 1.7.5 annoncé, `package.json` intact) puis par le lanceur
+  des routes dans un script hors dépôt, sous `NODE_ENV=development` et
+  `FORCE_COLOR=3` (226 lignes, zéro ANSI, verrou rendu) ; `--bump gros`
+  (sortie 1) ; sur le serveur de :3000, GET `promote` (le rapport du
+  terminal, 53 identiques / 12 différents, 2400015 écarté, lignes reçues au
+  fil), GET `commit` (175 fichiers, comme `git status --short`), un second
+  GET pendant le dry-run (409), POST `commit` avec un message sans préfixe et
+  avec un corps illisible (400, rien lancé), et `/admin` relu par `curl` (la
+  carte et ses deux boutons y sont). `pnpm test` hérite du
+  `NODE_ENV=development` du serveur quand la page publie : la suite rend le
+  même résultat dans les deux environnements (mesuré). Typecheck (les trois
+  `tsc --noEmit`, sortie 0), lint (`$ eslint`, sortie 0), tests
+  (`Tests 2625 passed (2625)`, 190 fichiers, dont 27 tests nouveaux :
+  validation, `--bump`, verrou, découpage en lignes). NON vérifié : la carte dans un navigateur
+  (aucun clic), les deux POST réels (interdits au lot — ni apply ni
+  publication lancés), le flux à travers Caddy (`outerpedia.local`, essais
+  faits sur `localhost:3000`), la branche Windows. Laissé : la page ne
+  propose pas le « 0) inchangée » du prompt (le lot demande trois bumps), et
+  un redémarrage du serveur pendant un travail perd le verrou.
 - **Relecture de F13 : l'arbre de quirks de l'Adventure License sort du
   calculateur et du générateur** (Fable). Lot 72, `17db2fec`. Périmètre tenu
   (moteur `src/lib/damage`, réglage du calculateur, six locales, générateur

@@ -33,6 +33,9 @@
  *                     le prochain push « normal » embarquera tout)
  *   --skip-controls   saute les contrôles (à tes risques)
  *   --msg "<texte>"   message de commit (skip le prompt)
+ *   --bump <niveau>   patch | minor | major (skip le prompt du bump) — avec
+ *                     --msg et --yes, plus aucune question : c'est ainsi que
+ *                     l'accueil de l'admin lance la publication
  *   --yes             saute la confirmation de la revue (la liste s'affiche quand même)
  */
 import { execSync } from 'node:child_process';
@@ -40,6 +43,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
+import { CONVENTIONAL, parseBumpFlag } from '@/lib/admin/patch-commands';
 
 const argv = process.argv.slice(2);
 const has = (f: string): boolean => argv.includes(f);
@@ -64,13 +68,8 @@ const YES = has('--yes');
 
 const PKG = resolve('package.json');
 
-/**
- * Format de message exigé (conventional commits, garde-fou 2026-07-16) : le
- * CHANGELOG se reconstruit du log git — « import MG », « guild raid & tower »
- * y ont creusé des trous impossibles à combler après coup (commits poussés).
- */
-const CONVENTIONAL =
-  /^(feat|fix|docs|chore|refactor|perf|test|style|ci|build|revert)(\([^)]+\))?!?: .+/;
+// Le format exigé (`CONVENTIONAL`) vit dans `patch-commands` : l'accueil de
+// l'admin valide le message avec la même expression avant de lancer ce script.
 const CONVENTIONAL_HELP =
   'Format attendu : type(portée): description — ex. « feat(guides): carte Monad Gate ».\n' +
   'Types : feat fix docs chore refactor perf test style ci build revert.';
@@ -167,6 +166,9 @@ async function ask(rl: readline.Interface, q: string): Promise<string> {
 async function main(): Promise<void> {
   if (DRY_RUN) console.log('\x1b[33m[DRY RUN]\x1b[0m\n');
 
+  // Lu en TÊTE : un `--bump` mal tapé s'arrête avant le pré-vol et les contrôles.
+  const forcedBump = parseBumpFlag(argv);
+
   const branch = shOut('git rev-parse --abbrev-ref HEAD');
 
   // 0) PRÉ-VOL — en TÊTE : inutile de dérouler 12 s de contrôles et deux
@@ -232,8 +234,14 @@ async function main(): Promise<void> {
     if (!m) throw new Error(`Version invalide dans package.json : "${pkg.version}"`);
     let [maj, min, pat] = [Number(m[1]), Number(m[2]), Number(m[3])];
     console.log(`\nVersion actuelle : \x1b[36m${pkg.version}\x1b[0m`);
-    console.log('  1) patch (fix)   2) minor (feature)   3) major (breaking)   0) inchangée');
-    const choice = await ask(rl, 'Bump : ');
+    let choice: string;
+    if (forcedBump) {
+      choice = { patch: '1', minor: '2', major: '3' }[forcedBump];
+      console.log(`Bump : ${forcedBump} (--bump)`);
+    } else {
+      console.log('  1) patch (fix)   2) minor (feature)   3) major (breaking)   0) inchangée');
+      choice = await ask(rl, 'Bump : ');
+    }
     if (choice === '1') pat += 1;
     else if (choice === '2') {
       min += 1;

@@ -7,6 +7,7 @@ import { loadCuratedCharacters } from '@/lib/data/curated';
 import { getMergedEffects, loadCuratedEffects } from '@/lib/data/effects';
 import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
 import { buildInbox, readAssetsReport, type InboxTone } from '@/lib/admin/admin-inbox';
+import { PatchCard } from '@/components/admin/PatchCard';
 
 // Accueil = tableau de bord, extraction fraîche, jamais prérendu.
 export const dynamic = 'force-dynamic';
@@ -140,6 +141,12 @@ export default function AdminHome() {
             ))}
           </ul>
         )}
+      </section>
+
+      {/* PATCH — les deux gestes de fin de patch, lancés d'ici plutôt que du terminal. */}
+      <section className="space-y-2">
+        <h2 className="text-content-strong text-sm font-semibold uppercase">Patch</h2>
+        <PatchCard />
       </section>
 
       {/* COUVERTURE éditoriale — informative (pas une TODO). */}
