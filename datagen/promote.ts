@@ -34,6 +34,7 @@ import { formatJson, writeTextAtomic } from './lib/json';
 import { GAME_LANGS, emptyDict } from './lib/lang';
 import { isUnreleasedCharacterAsset } from './lib/released';
 import { changedIntegratedIds, stageCharacterAssets } from './assets/stage-characters';
+import { stageEntityAssets, stagesEntityAssets } from './assets/stage-entities';
 import type { StageResult } from './assets/stage';
 
 const SRC = resolve('data/extracted');
@@ -360,6 +361,13 @@ export interface PromoteOptions {
    * absent = pas de staging (dry-run, tests).
    */
   stageCharacters?: (ids: string[], dst: string) => Promise<StageResult>;
+  /**
+   * Même hook pour les MONSTRES et l'ÉQUIPEMENT (cf. `assets/stage-entities.ts`) :
+   * appelé APRÈS les écritures, une fois par fichier à images dont des entités
+   * déjà validées changent, avec ce fichier (relatif), leurs ids et le dossier
+   * validé. Injecté par le CLI à l'apply ; absent = pas de staging.
+   */
+  stageEntities?: (file: string, ids: string[], dst: string) => Promise<StageResult>;
 }
 
 export interface PromoteResult {
@@ -386,6 +394,14 @@ export interface PromoteResult {
   changedCharacters: string[];
   /** Bilan du staging de ces persos (apply avec `stageCharacters` seulement). */
   assets?: StageResult;
+  /**
+   * Monstres et équipements DÉJÀ VALIDÉS dont l'entrée change, par fichier
+   * (`monsters.json`, `equipment/weapon.json`…) — ceux dont la vignette ou la
+   * tuile est mise en place à l'apply. Un fichier sans entité modifiée n'y est pas.
+   */
+  changedEntities: Record<string, string[]>;
+  /** Bilan du staging de ces entités, par fichier (apply avec `stageEntities` seulement). */
+  entityAssets?: Record<string, StageResult>;
 }
 
 /**
@@ -394,7 +410,15 @@ export interface PromoteResult {
  * en sortie code 1 ; les tests l'attrapent directement.
  */
 export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult> {
-  const { src = SRC, dst = DST, apply = false, only = null, catalogGuards, stageCharacters } = opts;
+  const {
+    src = SRC,
+    dst = DST,
+    apply = false,
+    only = null,
+    catalogGuards,
+    stageCharacters,
+    stageEntities,
+  } = opts;
 
   if (!existsSync(src)) {
     throw new Error('data/extracted/ absent — lance d’abord `pnpm datagen:build`.');
@@ -433,6 +457,7 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   const strippedAll = new Set<string>();
   const violations: string[] = [];
   let changedCharacters: string[] = [];
+  const changedEntities: Record<string, string[]> = {};
   // Écritures DIFFÉRÉES à après le verrou perso : une promotion refusée ne
   // laisse RIEN d'écrit (tout-ou-rien), jamais un validé à moitié promu.
   const pending: Array<{ path: string; text: string }> = [];
@@ -526,6 +551,17 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         JSON.parse(out) as Record<string, unknown>,
       );
     }
+    // Monstres et équipements déjà validés modifiés : même règle — après la
+    // garde et le verrou (un fichier retenu n'arrive pas ici), jamais une
+    // entité nouvelle. Une entité RETENUE qui prend son `retired` compte comme
+    // modifiée : sans effet, sa vignette est déjà là.
+    if (stagesEntityAssets(rel) && dstText !== undefined) {
+      const ids = changedIntegratedIds(
+        JSON.parse(dstText) as Record<string, unknown>,
+        JSON.parse(out) as Record<string, unknown>,
+      );
+      if (ids.length) changedEntities[rel] = ids;
+    }
     if (apply) pending.push({ path: dstPath, text: out });
   }
 
@@ -549,6 +585,15 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
   if (apply && changedCharacters.length && stageCharacters) {
     assets = await stageCharacters(changedCharacters, dst);
   }
+  // Vignettes des monstres et tuiles des équipements modifiés (cf.
+  // stage-entities.ts), fichier par fichier, sur le validé qu'on vient d'écrire.
+  let entityAssets: Record<string, StageResult> | undefined;
+  if (apply && stageEntities) {
+    for (const [file, ids] of Object.entries(changedEntities)) {
+      entityAssets ??= {};
+      entityAssets[file] = await stageEntities(file, ids, dst);
+    }
+  }
 
   console.log(
     `promotion extrait → validé : ${identical} identique(s), ${diffs.length} différent(s)`,
@@ -560,6 +605,13 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
         `${assets.staged} produite(s), ${assets.restaged} refaite(s), ${assets.present} déjà là, ${assets.missing.length} manquante(s)`,
     );
     for (const m of assets.missing) console.log(`    ⚠ ${m.key} — ${m.reason}`);
+  }
+  for (const [file, res] of Object.entries(entityAssets ?? {})) {
+    console.log(
+      `  images : ${file} — ${changedEntities[file].length} entité(s) validée(s) modifiée(s) — ` +
+        `${res.staged} produite(s), ${res.restaged} refaite(s), ${res.present} déjà là, ${res.missing.length} manquante(s)`,
+    );
+    for (const m of res.missing) console.log(`    ⚠ ${m.key} — ${m.reason}`);
   }
   // Fichiers validés sans équivalent extrait : jamais supprimés d'office —
   // signalés pour décision humaine (entité retirée du jeu ? renommage ?).
@@ -587,6 +639,8 @@ export async function promote(opts: PromoteOptions = {}): Promise<PromoteResult>
     violations,
     changedCharacters,
     assets,
+    changedEntities,
+    entityAssets,
   };
 }
 
@@ -610,6 +664,27 @@ async function stageIntegratedCharacters(ids: string[], dst: string): Promise<St
   );
 }
 
+/**
+ * Staging RÉEL des monstres et équipements validés modifiés (CLI) : entités et
+ * catalogue des passifs lus dans le validé qu'on vient d'écrire. Le manifest
+ * global, qui tranche ce qui est demandé, lit lui aussi le validé.
+ */
+async function stageValidatedEntities(
+  file: string,
+  ids: string[],
+  dst: string,
+): Promise<StageResult> {
+  const readJson = (rel: string): Record<string, unknown> => {
+    const path = join(dst, rel);
+    return existsSync(path)
+      ? (JSON.parse(readFileSync(path, 'utf8')) as Record<string, unknown>)
+      : {};
+  };
+  return stageEntityAssets(file, ids, readJson(file), {
+    passives: () => readJson('equipment/passives.json') as Record<string, { icon?: unknown }>,
+  });
+}
+
 async function main(): Promise<void> {
   const apply = process.argv.includes('--apply');
   // `--only a.json b.json` : promotion ciblée (cf. en-tête). La liste s'arrête
@@ -627,6 +702,7 @@ async function main(): Promise<void> {
     apply,
     only,
     stageCharacters: apply ? stageIntegratedCharacters : undefined,
+    stageEntities: apply ? stageValidatedEntities : undefined,
   });
 
   // RE-DÉRIVATION (cf. datagen/sync-derived.ts) : un apply qui a changé la

@@ -81,9 +81,10 @@ export function ExtractorSidebar({
    * Compteurs AUTORITAIRES de la revue (par ENTITÉ), affichés tels quels dans
    * l'en-tête. À fournir quand une ligne ≠ une entité de revue (équipement :
    * une ligne = une FAMILLE, la revue est par item) — sinon l'en-tête
-   * contredirait la page index. Absent → compteurs dérivés des lignes.
+   * contredirait la page index. Absent → compteurs dérivés des lignes ;
+   * `minor` aussi quand il n'est pas fourni (monstres : périmètre du site).
    */
-  counts?: { new: number; diff: number };
+  counts?: { new: number; diff: number; minor?: number };
   /** Côté du portrait en px (les overlays élément/classe suivent, le badge
    * BOSS garde sa taille). */
   iconSize?: number;
@@ -106,7 +107,7 @@ export function ExtractorSidebar({
       // revue), sinon dérivés des lignes.
       diff: counts ? counts.diff : rows.filter((r) => r.status === 'diff').length,
       new: counts ? counts.new : rows.filter((r) => r.status === 'new').length,
-      minor: rows.filter((r) => r.status === 'minor').length,
+      minor: counts?.minor ?? rows.filter((r) => r.status === 'minor').length,
     }),
     [rows, counts],
   );

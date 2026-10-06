@@ -549,6 +549,109 @@ describe('promote — images des persos intégrés modifiés', () => {
   });
 });
 
+describe('promote — images des monstres et équipements validés modifiés', () => {
+  /**
+   * `monsters.json` : un monstre modifié (4000001), un inchangé, un NOUVEAU
+   * (4000009) et un RETENU (4000003, absent de la proposition). `weapon.json` :
+   * une arme modifiée. `glossaries.json` change aussi, mais n'a pas d'images.
+   */
+  async function seed(): Promise<void> {
+    await put(dst, 'monsters.json', {
+      4000001: { id: '4000001', name: { en: 'Old name' }, icon: '4000001' },
+      4000002: { id: '4000002', name: { en: 'Same' }, icon: '4000002' },
+      4000003: { id: '4000003', name: { en: 'Purged' }, icon: '4000003' },
+    });
+    await put(src, 'monsters.json', {
+      4000001: { id: '4000001', name: { en: 'New name' }, icon: '4000001' },
+      4000002: { id: '4000002', name: { en: 'Same' }, icon: '4000002' },
+      4000009: { id: '4000009', name: { en: 'Brand new' }, icon: '4000009' },
+    });
+    await put(dst, 'equipment/weapon.json', {
+      w1: { name: { en: 'Sword' }, icon: 'TI_Equipment_Weapon_06' },
+      w2: { name: { en: 'Axe' }, icon: 'TI_Equipment_Weapon_05' },
+    });
+    await put(src, 'equipment/weapon.json', {
+      w1: { name: { en: 'Sword' }, icon: 'TI_Equipment_Weapon_07' },
+      w2: { name: { en: 'Axe' }, icon: 'TI_Equipment_Weapon_05' },
+    });
+    await put(dst, 'glossaries.json', { classes: { striker: { en: 'Striker' } } });
+    await put(src, 'glossaries.json', { classes: { striker: { en: 'Attacker' } } });
+  }
+
+  it('stage, par fichier, les SEULES entités validées dont l’entrée change, APRÈS l’écriture', async () => {
+    await seed();
+    const calls: Array<{ file: string; ids: string[]; dir: string; written: unknown }> = [];
+    const res = await promote({
+      src,
+      dst,
+      apply: true,
+      stageEntities: async (file, ids, dir) => {
+        calls.push({ file, ids, dir, written: read(dir, file)[ids[0]] });
+        return { staged: ids.length, restaged: 0, present: 0, missing: [] };
+      },
+    });
+    // 4000002 inchangé, 4000009 nouveau : jamais stagés. 4000003 est RETENU —
+    // il prend `retired`, donc « change » ; sa vignette, elle, est déjà là.
+    expect(res.changedEntities).toEqual({
+      'equipment/weapon.json': ['w1'],
+      'monsters.json': ['4000001', '4000003'],
+    });
+    expect(calls.map((c) => c.file).sort()).toEqual(['equipment/weapon.json', 'monsters.json']);
+    for (const c of calls) expect(c.dir).toBe(dst);
+    // Le staging lit le validé DÉJÀ écrit.
+    const monsters = calls.find((c) => c.file === 'monsters.json')!;
+    expect(monsters.ids).toEqual(['4000001', '4000003']);
+    expect((monsters.written as { name: { en: string } }).name.en).toBe('New name');
+    const weapons = calls.find((c) => c.file === 'equipment/weapon.json')!;
+    expect((weapons.written as { icon: string }).icon).toBe('TI_Equipment_Weapon_07');
+    expect(res.entityAssets).toEqual({
+      'equipment/weapon.json': { staged: 1, restaged: 0, present: 0, missing: [] },
+      'monsters.json': { staged: 2, restaged: 0, present: 0, missing: [] },
+    });
+  });
+
+  it('dry-run : entités modifiées listées, jamais stagées ; sans hook, rien non plus', async () => {
+    await seed();
+    let called = 0;
+    const dry = await promote({
+      src,
+      dst,
+      stageEntities: async () => {
+        called++;
+        return { staged: 0, restaged: 0, present: 0, missing: [] };
+      },
+    });
+    expect(Object.keys(dry.changedEntities).sort()).toEqual([
+      'equipment/weapon.json',
+      'monsters.json',
+    ]);
+    expect(called).toBe(0);
+    expect(dry.entityAssets).toBeUndefined();
+    const applied = await promote({ src, dst, apply: true });
+    expect(applied.changedEntities['monsters.json']).toEqual(['4000001', '4000003']);
+    expect(applied.entityAssets).toBeUndefined();
+  });
+
+  it('fichier NOUVEAU ou identique : aucune entité « modifiée », hook jamais appelé', async () => {
+    await put(src, 'monsters.json', { 4000001: { id: '4000001', icon: '4000001' } });
+    await put(dst, 'equipment/weapon.json', { w1: { icon: 'TI_Equipment_Weapon_06' } });
+    await put(src, 'equipment/weapon.json', { w1: { icon: 'TI_Equipment_Weapon_06' } });
+    let called = 0;
+    const res = await promote({
+      src,
+      dst,
+      apply: true,
+      stageEntities: async () => {
+        called++;
+        return { staged: 0, restaged: 0, present: 0, missing: [] };
+      },
+    });
+    expect(res.changedEntities).toEqual({});
+    expect(called).toBe(0);
+    expect(res.entityAssets).toBeUndefined();
+  });
+});
+
 describe('promote — stabilité au re-run', () => {
   it('un 2e apply ne voit plus aucun diff (y compris avec rétention)', async () => {
     await put(dst, 'monsters.json', { boss_old: { name: 'Old' } });

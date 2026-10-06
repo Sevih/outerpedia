@@ -7,6 +7,104 @@
 
 ## 2026-10-06
 
+- **Lot B27 : revue d'extraction — la classe « mineur » sur la page des
+  monstres, et les images des monstres et de l'équipement modifiés** (Opus,
+  lot B27 de `docs/lots-opus-2026-09-25.md` ; ce que F14 avait laissé). Le
+  pourquoi : F14 a donné aux persos une troisième classe d'écart et le staging
+  de leurs images, mais la page des monstres — qui ne passe pas par
+  `ExtractorReview` — montrait toujours tout écart en `diff`, sans geste
+  groupé, et ni un monstre ni un équipement dont l'entrée change n'avait sa
+  vignette ou sa tuile mise en place (`integrateMonster` : « pas d'images ici
+  »). Le quoi, en quatre points. (1) PAGE DES MONSTRES
+  (`src/app/admin/extractor/monsters/page.dev.tsx`) : la case « Changed »
+  devient « Diff » (vrais écarts) et « Minor » (`n`, suivi de `+ m typo`), la
+  grille passe de quatre à cinq cases ; bloc « Apply minor changes » avec
+  `AcceptTargetButton` en mode `minor` (libellé `Apply (n)`, rafraîchit la
+  page), affiché seulement s'il y en a. `monster-rows.ts` range `minor` et
+  `typo` sous `minor` par un cœur pur `monsterRowStatuses(diff)`, comme
+  `character-rows.ts` ; un monstre `diff` ou `new` garde son statut. La
+  sidebar savait déjà montrer `minor` (F14) ; choix à moi, à relire : son
+  compteur d'en-tête suit le PÉRIMÈTRE DU SITE comme `diff` et `new` —
+  `siteMonsterCounts()` rend aussi `minor` (mineur et typo), `counts.minor`
+  est optionnel dans `ExtractorSidebar.tsx`, les sidebars d'équipement ne le
+  passent pas et restent dérivées de leurs lignes. Le `(n)` du bouton, lui,
+  compte toute l'extraction : c'est ce que le geste écrit. (2) MANIFEST
+  (`datagen/assets/manifest.ts`) : `monsterAssetRequests(m, { domain, png })`
+  et `equipmentAssetRequests(it, { og, passives })` extraites, et
+  `buildAssetManifest` les appelle lui-même dans les six blocs de vignettes
+  (rencontres, boss de guides, variantes, tours, Singularity, et les boss des
+  sources d'équipement par la même fabrique de clé `bossIconRequest`) et dans
+  les blocs équipement et gear reco — plus aucune clé
+  `images/ui/boss/MT_<icon>` ni `images/equipment/<icon>` écrite ailleurs. Un
+  monstre à icône « 2… » ne demande rien par cette fonction (modèle de perso :
+  face icon du domaine perso, laissée telle quelle dans le bloc des
+  rencontres) ; cadres, classes, éléments et icônes de skills restent aux
+  blocs. (3) STAGING RESTREINT, nouveau module
+  `datagen/assets/stage-entities.ts` sur le modèle de `stage-characters.ts`
+  (inchangé) : `stageEntityAssets(file, ids, entities, deps)` — pour un
+  fichier à images (`monsters.json`, les huit tables d'équipement,
+  `sets.json`) et des ids, les demandes de CES entités, dédupliquées, puis
+  `stageAssets` ; id inconnu ignoré, manifest, passifs, index et dépôt
+  injectables. Choix à moi, à relire, sur « png si le manifeste la demande
+  aussi » : chaque clé de l'entité (webp, PNG og, icônes de ses passifs) n'est
+  stagée que si `buildAssetManifest()` la demande aussi, et c'est la demande
+  du manifest qui part. Sans ce filtre il fallait recopier ici les règles «
+  boss de guide » et « objet à page détail », et le webp lui-même aurait été
+  déposé pour les 212 monstres à vignette propre (sur 3 180) qu'aucune page ne
+  sert — des images que `assets:collect` ne demande pas et que `assets:push`
+  enverrait. Coût : un manifest par geste (~0,6 s), lu sur le validé qu'on
+  vient d'écrire. (4) BRANCHEMENTS : `review.ts` —
+  `stageChangedEntities(target, ids, entities, deps)` remplace le branchement
+  restreint aux persos, appelé après `acceptTarget` et `acceptMinor` ; persos
+  comme avant, monstres et cibles d'équipement reconnus au fichier de la
+  cible, effets et items rien. `promote.ts` — hook
+  `stageEntities(file, ids, dst)` à côté de `stageCharacters`, même règle :
+  `changedEntities` (par
+  fichier) calculé après la garde perso et le verrou, staging après les
+  écritures, une ligne de bilan par fichier dans la sortie, rien en dry-run ni
+  sans hook ; le CLI l'injecte à l'apply. Les pièces d'armure sans cible de
+  revue (`helmet`, `gloves`, `shoes`) en profitent aussi ; un monstre RETENU
+  qui prend son `retired` compte comme modifié, sans effet. Tests :
+  `monster-rows.test.ts` (nouveau — mineur et typo rangés, `diff` et `new`
+  intacts), `stage-entities.test.ts` (nouveau — ids restreints, PNG seulement
+  quand le manifest le demande, dédup, id inconnu, monstre hors manifest,
+  icône de perso, passifs de l'objet seul, set), `manifest-entities.test.ts`
+  (nouveau — les deux fonctions, et l'équivalence sur le catalogue du jour :
+  les clés `images/ui/boss/MT_<chiffres>` et `images/equipment/*` du manifest
+  comparées à un oracle qui réécrit à la main les règles des blocs d'avant ;
+  sauté sans les tables du jeu), `review.test.ts` (branchement par cible, sur
+  les cibles réelles du registre), `promote.test.ts` (hook appelé par fichier
+  après l'écriture, jamais pour un nouveau ni un inchangé, jamais en dry-run).
+  Vérifié à la main, sans écrire dans `data/generated` ni stager : manifest
+  complet vidé avant et après l'extraction des fonctions puis comparé par
+  `cmp` — identique à l'octet, 4 701 demandes, même ordre et mêmes domaines
+  (452 clés `MT_`, dont 15 calques partagés ; 391 clés d'équipement).
+  `reviewEntities` par script jetable : contre le working tree (patch promu ce
+  06/10), les sept cibles sont à jour — monstres 4 848, EE 129, armes 345,
+  amulettes 422, armures 544, talismans 82, sets 21 inchangés, donc zéro
+  `diff`, `minor` ou `typo` à citer. Contre le validé d'avant le patch
+  (`fb808749`) : monstres 337 `new` et 175 `diff`, aucun mineur ; EE 1 `new`
+  et 5 `minor` (`2000017`, `2000032`, `2000033`, `2000055`, `2000098` : un mot
+  doublé retiré du nom français) ; armes 22 `minor` ; amulettes 70 `minor` ;
+  armures 6 `minor` (`5265`, `5269`, `5273`, `5277`, `5281`, `5285`) ;
+  talismans rien ; sets 1 `minor` (`16`, `tiers[0].4p.desc.fr`) — que des noms
+  français reformulés. Sur ces mêmes écarts, dépôt factice, le staging
+  restreint aurait demandé 58 images pour les 175 monstres, 6 pour les EE, 19
+  pour les armes, 32 pour les amulettes, 7 pour les armures, 1 pour le set.
+  Vérification : `pnpm typecheck` (dernière ligne, l'écho de la commande :
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, rien), `pnpm test`
+  (`Tests 2728 passed (2728)`, 196 fichiers). NON vu à l'écran : aucun
+  serveur de dev ne tournait
+  (`:3000` fermé, 502 de Caddy sur `outerpedia.local`) — la page des monstres
+  et sa sidebar ne sont tenues que par le typecheck et les tests ; rien
+  d'autre ne change visuellement, les sidebars et pages des autres cibles
+  n'ont pas été touchées. Laissé : les icônes de skills d'un monstre (le lot
+  ne demande que la vignette) ; la re-dérivation damage/solver après « Apply
+  minor changes » ou « Accept » (aucune des deux ne l'a jamais lancée, hors
+  périmètre) ; le manifest par défaut lit toujours `data/generated` du dépôt,
+  même si `promote` reçoit un `dst` de test — sans objet pour le CLI. Test à
+  jouer par Sevih au prochain patch : item ajouté au TODO.
 - **Audit des portraits animés soldé ; suites quick/Discord closes** (Sevih).
   P10 (coût par image) : mesuré sur le téléphone de Sevih, ça tient — clos
   sans correctif, leviers laissés dans `docs/audit/portrait-fx.md`, dont

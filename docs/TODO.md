@@ -15,15 +15,22 @@
       décider si le `damage-calculator` modélise [Tower Administrator]
       (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
 - [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
-      un costume existant reste un écart — à trancher au premier cas. La
-      classe « mineur » pour les monstres (page) et le staging d'images des
-      monstres et de l'équipement : lot **B27** de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus, seul).
+      un costume existant reste un écart — à trancher au premier cas.
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
 ## 🧪 À jouer au prochain patch
 
+- [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
+      premier patch qui en apporte, `/admin/extractor/monsters` — cases Diff
+      et Minor, « Apply minor changes (n) », badge `minor` discret dans la
+      sidebar — puis le bouton, sur les monstres ou une page d'équipement :
+      le message doit finir par le bilan d'images
+      (`images: … produced, … already there`). Idem à
+      `pnpm datagen:promote --apply` : une ligne
+      `images : monsters.json — n entité(s) validée(s) modifiée(s) — …` par
+      fichier touché. Page jamais vue à l'écran par l'agent (pas de serveur
+      de dev) : entrée DONE du lot B27 (06/10).
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
       apporte un effet, contrôler la dernière ligne du refresh (« ◆ Portraits
       animés — à lire ») — l'effet y est nommé avec ses porteurs, « servi tel

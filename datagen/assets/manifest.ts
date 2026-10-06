@@ -337,6 +337,91 @@ export function skillIconsOf(c: Record<string, unknown>, skills: Dict): string[]
   return ids.map((sid) => skills[sid]?.icon).filter((i): i is string => Boolean(i));
 }
 
+/**
+ * Vignette de boss `MT_<icon>` sous `images/ui/boss/` — LA fabrique de ces clés
+ * (monstres, boss des sources d'équipement), pour qu'elles ne s'écrivent qu'ici.
+ */
+function bossIconRequest(icon: string, domain: string, ext: 'webp' | 'png' = 'webp'): AssetRequest {
+  return {
+    kind: 'image',
+    key: `images/ui/boss/MT_${icon}.${ext}`,
+    candidates: [`MT_${icon}`],
+    domain,
+  };
+}
+
+export interface MonsterAssetOptions {
+  /** Domaine du rapport de collecte (défaut `ui` ; `guides` pour les boss de guides). */
+  domain?: string;
+  /** Variante PNG (og:image d'un guide de boss, aperçus Discord/OG). */
+  png?: boolean;
+}
+
+/**
+ * Besoins d'UN monstre (réutilisé par le manifest global ET le staging restreint
+ * de `stage-entities.ts`) : sa vignette `MT_<icon>` — webp, plus le PNG quand
+ * `png`. Rien sans icône, ni pour une icône « 2… » : c'est un modèle de perso,
+ * dont la face icon relève du domaine perso. Les calques PARTAGÉS de la vignette
+ * (cadres, classes, éléments) et les icônes de skills ne dépendent pas d'un
+ * monstre : ils restent aux blocs du manifest.
+ */
+export function monsterAssetRequests(
+  m: { icon?: unknown },
+  opts: MonsterAssetOptions = {},
+): AssetRequest[] {
+  const { icon } = m;
+  if (typeof icon !== 'string' || !icon || icon.startsWith('2')) return [];
+  const domain = opts.domain ?? 'ui';
+  const out = [bossIconRequest(icon, domain)];
+  if (opts.png) out.push(bossIconRequest(icon, domain, 'png'));
+  return out;
+}
+
+/**
+ * Tuile d'équipement sous `images/equipment/` — webp, plus la variante PNG
+ * (og:image des pages détail, aperçus Discord/OG) quand `og`. Icône absente →
+ * rien. Sert aussi aux icônes qui partagent ce namespace sans être un
+ * équipement (matériaux d'ascension).
+ */
+function equipmentIconRequests(icon: unknown, og = false): AssetRequest[] {
+  if (typeof icon !== 'string' || !icon) return [];
+  const request = (ext: 'webp' | 'png'): AssetRequest => ({
+    kind: 'image',
+    key: `images/equipment/${icon}.${ext}`,
+    candidates: [icon],
+    domain: 'equipment',
+  });
+  return og ? [request('webp'), request('png')] : [request('webp')];
+}
+
+export interface EquipmentAssetOptions {
+  /** Variante PNG de la tuile (og:image) — les objets qui ont une page détail. */
+  og?: boolean;
+  /**
+   * Catalogue des passifs (`equipment/passives.json`) : fourni, les icônes des
+   * passifs DE CET objet (`passives[].id`) suivent sa tuile.
+   */
+  passives?: Record<string, { icon?: unknown } | undefined>;
+}
+
+/**
+ * Besoins d'UN équipement — arme, amulette, talisman, pièce d'armure, EE ou
+ * set (réutilisé par le manifest global ET le staging restreint de
+ * `stage-entities.ts`) : sa tuile, puis les icônes de ses passifs si le
+ * catalogue est fourni.
+ */
+export function equipmentAssetRequests(
+  it: Record<string, unknown>,
+  opts: EquipmentAssetOptions = {},
+): AssetRequest[] {
+  const out = equipmentIconRequests(it.icon, opts.og);
+  if (opts.passives) {
+    for (const ref of (it.passives as { id: string }[] | undefined) ?? [])
+      out.push(...equipmentIconRequests(opts.passives[ref.id]?.icon));
+  }
+  return out;
+}
+
 export function buildAssetManifest(): AssetRequest[] {
   const characters = load('characters.json');
   const skills = load('skills.json');
@@ -355,6 +440,9 @@ export function buildAssetManifest(): AssetRequest[] {
       seen.add(r.key);
       out.push(r);
     }
+  };
+  const pushAll = (requests: AssetRequest[]) => {
+    for (const r of requests) push(r);
   };
 
   // --- Personnages (+ leurs skills) ------------------------------------------
@@ -555,33 +643,15 @@ export function buildAssetManifest(): AssetRequest[] {
       ee: load('equipment/ee.json'),
     };
     const passives = load('equipment/passives.json') as Record<string, { icon?: string }>;
-    const pushItem = (icon: unknown) => {
-      if (typeof icon === 'string' && icon)
-        push({
-          kind: 'image',
-          key: `images/equipment/${icon}.webp`,
-          candidates: [icon],
-          domain: 'equipment',
-        });
-    };
-    // Variante PNG : og:image des pages détail équipement (aperçus Discord/OG).
-    const pushOgItem = (icon: unknown) => {
-      pushItem(icon);
-      if (typeof icon === 'string' && icon)
-        push({
-          kind: 'image',
-          key: `images/equipment/${icon}.png`,
-          candidates: [icon],
-          domain: 'equipment',
-        });
-    };
-    const passiveIcons = new Set<string>();
-    const collectPassives = (it: Record<string, unknown>) => {
-      for (const ref of (it.passives as { id: string }[] | undefined) ?? []) {
-        const p = passives[ref.id];
-        if (p?.icon) passiveIcons.add(p.icon);
-      }
-    };
+    // Les demandes d'UN objet viennent de `equipmentAssetRequests` (la même
+    // fonction que le staging restreint) ; `og` = variante PNG, og:image des
+    // pages détail équipement (aperçus Discord/OG).
+    const pushOgItem = (it: Record<string, unknown>) =>
+      pushAll(equipmentAssetRequests(it, { og: true }));
+    // Objets dont les icônes de passifs sont demandées — posées APRÈS toutes
+    // les tuiles (plus bas), dans l'ordre où les objets sont rencontrés ici.
+    const withPassives: Record<string, unknown>[] = [];
+    const collectPassives = (it: Record<string, unknown>) => withPassives.push(it);
     // Familles de wiki (la règle d'affichabilité vit dans families.json).
     const families = load('equipment/families.json') as unknown as Record<
       'weapon' | 'accessory' | 'talisman',
@@ -597,7 +667,7 @@ export function buildAssetManifest(): AssetRequest[] {
         for (const id of f.ids) {
           const it = tables[slot][id];
           if (it.star !== top.star) continue;
-          pushOgItem(it.icon);
+          pushOgItem(it);
           // Passifs de CHAQUE variante (Briareos/Gorgon en ont un par classe).
           collectPassives(it);
         }
@@ -607,7 +677,7 @@ export function buildAssetManifest(): AssetRequest[] {
     for (const it of Object.values(tables.ee)) collectPassives(it);
     for (const slot of ['helmet', 'armor', 'gloves', 'shoes'] as const) {
       for (const it of Object.values(tables[slot])) {
-        if (it.grade === 'unique' && Number(it.star) >= 6) pushOgItem(it.icon);
+        if (it.grade === 'unique' && Number(it.star) >= 6) pushOgItem(it);
       }
     }
     // TOUTES les icônes d'équipement (webp) : les sprites sont des tuiles de
@@ -625,10 +695,11 @@ export function buildAssetManifest(): AssetRequest[] {
       'shoes',
       'ee',
     ] as const) {
-      for (const it of Object.values(tables[slot])) pushItem(it.icon);
+      for (const it of Object.values(tables[slot])) pushAll(equipmentAssetRequests(it));
     }
-    for (const s of Object.values(load('equipment/sets.json'))) pushItem(s.icon);
-    for (const icon of passiveIcons) pushItem(icon);
+    for (const s of Object.values(load('equipment/sets.json'))) pushAll(equipmentAssetRequests(s));
+    // Icônes des passifs : la tuile de l'objet, déjà posée, est dédoublonnée.
+    for (const it of withPassives) pushAll(equipmentAssetRequests(it, { passives }));
     // Icônes de stats du jeu (table unique STAT_ICON — src/lib/stats) + icône
     // du Combat Power (fiche perso).
     for (const sprite of new Set([...Object.values(STAT_ICON), 'CM_Icon_Power']))
@@ -658,19 +729,13 @@ export function buildAssetManifest(): AssetRequest[] {
         ...enh.singularity.activation.materials,
         ...enh.singularity.steps.flatMap((s) => s.materials),
       ])
-        pushItem(m.icon);
+        pushAll(equipmentIconRequests(m.icon));
     }
     // Boss des sources d'obtention (résolus par le build depuis le curé).
     // `icon` = FaceIconID BRUT (même convention que monsters.json) — le
     // préfixe sprite `MT_` s'applique ici, comme au rendu.
     for (const b of Object.values(load('equipment/bosses.json'))) {
-      if (typeof b.icon === 'string' && b.icon)
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${b.icon}.webp`,
-          candidates: [`MT_${b.icon}`],
-          domain: 'ui',
-        });
+      if (typeof b.icon === 'string' && b.icon) push(bossIconRequest(b.icon, 'ui'));
     }
   }
 
@@ -722,16 +787,7 @@ export function buildAssetManifest(): AssetRequest[] {
         b.sets?.forEach((c) => c.pieces?.forEach((p) => wantedSets.add(p.set)));
       }
     for (const [kind, ids] of Object.entries(wanted) as [keyof typeof tables, Set<string>][])
-      for (const id of ids) {
-        const icon = tables[kind][id]?.icon;
-        if (icon)
-          push({
-            kind: 'image',
-            key: `images/equipment/${icon}.webp`,
-            candidates: [icon],
-            domain: 'equipment',
-          });
-      }
+      for (const id of ids) pushAll(equipmentAssetRequests(tables[kind][id] ?? {}));
     for (const id of wantedSets) {
       const icon = setsTable[id]?.icon;
       if (icon)
@@ -945,13 +1001,7 @@ export function buildAssetManifest(): AssetRequest[] {
           id: m.icon,
           domain: 'characters',
         });
-      else
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${m.icon}.webp`,
-          candidates: [`MT_${m.icon}`],
-          domain: 'ui',
-        });
+      else pushAll(monsterAssetRequests(m));
     }
     // Fonds des vignettes MONSTRE (at_thumbnailmonsterruntime) : Normal / Magic
     // / Rare, posés SOUS le portrait (`img.monsterSlotByType`), même namespace
@@ -1221,24 +1271,11 @@ export function buildAssetManifest(): AssetRequest[] {
       if (!g.bossId) continue;
       const m = monsters[g.bossId];
       if (!m) continue;
-      if (m.icon && !m.icon.startsWith('2')) {
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${m.icon}.webp`,
-          candidates: [`MT_${m.icon}`],
-          domain: 'guides',
-        });
-        // Variante PNG : og:image du guide de boss (aperçus Discord/OG), même
-        // convention que les faceicons de persos et les EE. Tirée UNIQUEMENT ici,
-        // pour les boss qu'un guide couvre — la bibliothèque Singularity affiche
-        // aussi des boss sans guide, qui n'ont donc pas de carte à partager.
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${m.icon}.png`,
-          candidates: [`MT_${m.icon}`],
-          domain: 'guides',
-        });
-      }
+      // Variante PNG : og:image du guide de boss (aperçus Discord/OG), même
+      // convention que les faceicons de persos et les EE. Tirée UNIQUEMENT ici,
+      // pour les boss qu'un guide couvre — la bibliothèque Singularity affiche
+      // aussi des boss sans guide, qui n'ont donc pas de carte à partager.
+      pushAll(monsterAssetRequests(m, { domain: 'guides', png: true }));
       for (const sid of m.skills ?? []) {
         const icon = monsterSkills[sid]?.icon;
         if (icon)
@@ -1313,13 +1350,7 @@ export function buildAssetManifest(): AssetRequest[] {
       for (const id of variants) {
         const m = monsters[id];
         if (!m) continue;
-        if (m.icon && !m.icon.startsWith('2'))
-          push({
-            kind: 'image',
-            key: `images/ui/boss/MT_${m.icon}.webp`,
-            candidates: [`MT_${m.icon}`],
-            domain: 'guides',
-          });
+        pushAll(monsterAssetRequests(m, { domain: 'guides' }));
         for (const sid of m.skills ?? []) {
           const icon = monsterSkills[sid]?.icon;
           if (icon)
@@ -1368,13 +1399,7 @@ export function buildAssetManifest(): AssetRequest[] {
       if (!m) continue;
       // Icône commençant par « 2 » = modèle de perso réutilisé → face icon déjà
       // produite par le domaine perso (même règle que les blocs de boss).
-      if (m.icon && !m.icon.startsWith('2'))
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${m.icon}.webp`,
-          candidates: [`MT_${m.icon}`],
-          domain: 'guides',
-        });
+      pushAll(monsterAssetRequests(m, { domain: 'guides' }));
       for (const sid of m.skills ?? []) {
         const icon = monsterSkills[sid]?.icon;
         if (icon)
@@ -1404,16 +1429,8 @@ export function buildAssetManifest(): AssetRequest[] {
       groups: { bosses: { monsters: string[]; thumbnail?: string; banner?: string }[] }[];
     };
     const bosses = rotation.groups.flatMap((g) => g.bosses);
-    for (const id of new Set(bosses.flatMap((b) => b.monsters))) {
-      const icon = monsters[id]?.icon;
-      if (icon && !icon.startsWith('2'))
-        push({
-          kind: 'image',
-          key: `images/ui/boss/MT_${icon}.webp`,
-          candidates: [`MT_${icon}`],
-          domain: 'guides',
-        });
-    }
+    for (const id of new Set(bosses.flatMap((b) => b.monsters)))
+      pushAll(monsterAssetRequests(monsters[id] ?? {}, { domain: 'guides' }));
     // Art DÉDIÉ du mode (bannière large + avatar rond), nommé par la table
     // elle-même : on ne fabrique aucun nom de fichier. Sprites distincts du
     // portrait `MT_<icon>` ci-dessus (cadrages différents), donc pas des

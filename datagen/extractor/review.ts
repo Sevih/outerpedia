@@ -11,6 +11,7 @@
 import { resolve } from 'node:path';
 import { readCuratedJson, writeJson } from '../lib/json';
 import { changedIntegratedIds, stageCharacterAssets } from '../assets/stage-characters';
+import { stageEntityAssets, stagesEntityAssets } from '../assets/stage-entities';
 import type { StageResult } from '../assets/stage';
 import { buildSkills } from '../generators/skills';
 import {
@@ -168,29 +169,50 @@ function runReview(target: GeneratedTarget): TargetReview {
   };
 }
 
-/** Bilan d'une écriture de cible : images mises en place (cible des persos seulement). */
+/**
+ * Bilan d'une écriture de cible : images mises en place (cibles des persos, des
+ * monstres et de l'équipement — `undefined` pour les autres).
+ */
 export interface AcceptReport {
   assets?: StageResult;
 }
 
+/** Stagers d'une cible — injectables pour tester le branchement sans rien stager. */
+export interface StageChangedDeps {
+  /** Persos (défaut : `stageCharacterAssets`, icônes de skills du catalogue frais). */
+  characters?: (ids: string[], characters: Dict) => Promise<StageResult>;
+  /** Monstres et équipement (défaut : `stageEntityAssets`). */
+  entities?: (file: string, ids: string[], entities: Dict) => Promise<StageResult>;
+}
+
 /**
- * Images des persos INTÉGRÉS que l'écriture vient de modifier — l'étape 5 de
- * l'intégration, restreinte à `ids` (cf. `assets/stage-characters.ts`) : un
- * costume ajouté a son full art et le visage de son apparence sans qu'on
- * ré-intègre personne. Autres cibles : rien (`undefined`). Les icônes de skills
- * viennent du catalogue frais, comme à l'intégration.
+ * Images des entités DÉJÀ VALIDÉES que l'écriture vient de modifier, restreintes
+ * à `ids` et lues dans `entities` (le contenu écrit) :
+ *   - persos : l'étape 5 de l'intégration (cf. `assets/stage-characters.ts`) —
+ *     un costume ajouté a son full art et le visage de son apparence sans
+ *     qu'on ré-intègre personne ; icônes de skills du catalogue frais, comme à
+ *     l'intégration ;
+ *   - monstres et équipement (reconnus au fichier de la cible) : vignette
+ *     `MT_`, tuile et icônes de passifs (cf. `assets/stage-entities.ts`).
+ * Autres cibles (effets, items), ou aucun id : rien (`undefined`).
  */
-async function stageChangedCharacters(
+export async function stageChangedEntities(
   target: GeneratedTarget,
   ids: string[],
-  characters: Dict,
+  entities: Dict,
+  deps: StageChangedDeps = {},
 ): Promise<StageResult | undefined> {
-  if (target.id !== 'character' || !ids.length) return undefined;
-  return stageCharacterAssets(
-    ids,
-    characters,
-    buildSkills().skills as unknown as Record<string, Dict>,
-  );
+  if (!ids.length) return undefined;
+  if (target.id === 'character') {
+    const stage =
+      deps.characters ??
+      ((i: string[], c: Dict) =>
+        stageCharacterAssets(i, c, buildSkills().skills as unknown as Record<string, Dict>));
+    return stage(ids, entities);
+  }
+  if (stagesEntityAssets(target.file))
+    return (deps.entities ?? stageEntityAssets)(target.file, ids, entities);
+  return undefined;
 }
 
 /**
@@ -198,9 +220,9 @@ async function stageChangedCharacters(
  * au format CANONIQUE de `build.ts` (cf. `lib/json`). Cible à `subKey` : seul
  * ce sous-objet est réécrit (le reste du fichier est préservé). L'utilisateur
  * committe ensuite via git. NB : les sorties transverses (relations…) restent
- * du ressort de `pnpm datagen:build`. Cible des persos : met aussi en place
- * les images des persos déjà intégrés dont l'entrée change (les nouveaux,
- * non intégrés, ne sont jamais stagés par ici).
+ * du ressort de `pnpm datagen:build`. Cibles des persos, des monstres et de
+ * l'équipement : met aussi en place les images des entités déjà validées dont
+ * l'entrée change (les nouvelles ne sont jamais stagées par ici).
  */
 export async function acceptTarget(id: string): Promise<AcceptReport> {
   const target = getTarget(id);
@@ -208,11 +230,7 @@ export async function acceptTarget(id: string): Promise<AcceptReport> {
   const committed = committedOf(target);
   const fresh = target.build();
   await writeBack(target, fresh);
-  const assets = await stageChangedCharacters(
-    target,
-    changedIntegratedIds(committed, fresh),
-    fresh,
-  );
+  const assets = await stageChangedEntities(target, changedIntegratedIds(committed, fresh), fresh);
   return { assets };
 }
 
@@ -260,13 +278,14 @@ export interface MinorReport extends AcceptReport {
 /**
  * Applique UNIQUEMENT les retouches mineures et les corrections typographiques
  * (« Appliquer les retouches mineures » de la revue) — remplace l'ancien
- * `acceptTypos`, qui ne prenait que les coquilles. Cible des persos : met en
- * place les images des persos touchés (costume ajouté → son full art).
+ * `acceptTypos`, qui ne prenait que les coquilles. Cibles des persos, des
+ * monstres et de l'équipement : met en place les images des entités touchées
+ * (costume ajouté → son full art).
  */
 export async function acceptMinor(id: string): Promise<MinorReport> {
   const target = getTarget(id);
   if (!target) throw new Error(`cible inconnue : ${id}`);
   const { typo, minor } = await acceptMinorIn(GENERATED, target);
-  const assets = await stageChangedCharacters(target, [...typo, ...minor], committedOf(target));
+  const assets = await stageChangedEntities(target, [...typo, ...minor], committedOf(target));
   return { typo: typo.length, minor: minor.length, assets };
 }

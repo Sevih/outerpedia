@@ -9,7 +9,7 @@
  *     + adds rattachés — cf. `siteMonsterIds`) ;
  *   - tags = slugs des MODES DE JEU où le monstre spawne (select).
  */
-import { reviewTarget } from '@/lib/admin/review-store';
+import { reviewEntities, reviewTarget, type TargetReview } from '@/lib/admin/review-store';
 import {
   freshEncounters,
   freshMonsters,
@@ -26,12 +26,30 @@ export interface MonsterRowsResult {
   modeOptions: Array<{ value: string; label: string }>;
 }
 
+/**
+ * Statut de revue par monstre, comme `character-rows.ts` : `new` (extrait, pas
+ * encore validé), `diff` (vrai écart, à enregistrer depuis sa fiche) ou `minor`
+ * (retouche mineure ou typo seule — « Apply minor changes » de la page index
+ * suffit). Un monstre absent de la table est à jour (`ok`) ; un disparu n'a
+ * pas de ligne.
+ */
+export function monsterRowStatuses(
+  diff: TargetReview['diff'],
+): Map<string, 'new' | 'diff' | 'minor'> {
+  const statuses = new Map<string, 'new' | 'diff' | 'minor'>();
+  for (const e of reviewEntities(diff)) {
+    if (e.status === 'removed') continue;
+    statuses.set(e.key, e.status === 'typo' ? 'minor' : e.status);
+  }
+  return statuses;
+}
+
 export function buildMonsterRows(): MonsterRowsResult {
   const fresh = freshMonsters();
   const enc = freshEncounters();
   const site = siteMonsterIds();
   const review = reviewTarget('monster');
-  const added = new Set(review.diff.added);
+  const statusOf = monsterRowStatuses(review.diff);
   const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
 
   const modeLabel = (mode: string): string => enc.modes[mode]?.en ?? mode;
@@ -94,7 +112,7 @@ export function buildMonsterRows(): MonsterRowsResult {
         classIcon: img.klass(m.class),
         badgeIcon: monsterBossBadgeSrc(m.type),
         stars: m.rarity,
-        status: added.has(m.id) ? 'new' : diffCounts.has(m.id) ? 'diff' : 'ok',
+        status: statusOf.get(m.id) ?? 'ok',
         count: diffCounts.get(m.id) ?? 0,
         flags: site.has(m.id) ? ['site'] : [],
         tags: modes,

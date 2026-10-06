@@ -6,7 +6,7 @@ import { postJson } from '@/lib/admin/post-json';
 
 type Status = { kind: 'idle' | 'busy' | 'ok' | 'err'; msg?: string };
 
-/** Bilan d'images d'une écriture (cible des persos), tel que la route le rend. */
+/** Bilan d'images d'une écriture (persos, monstres, équipement), tel que la route le rend. */
 interface Assets {
   staged: number;
   restaged: number;
@@ -25,9 +25,10 @@ const assetsSummary = (a?: Assets): string =>
  * L'utilisateur committe ensuite via git. Validation par fichier (tout-ou-rien),
  * car l'extraction est déterministe. En mode `minor`, n'applique QUE les
  * retouches mineures et les coquilles (cf. `acceptMinor`), et dit combien
- * d'entités de chaque sorte sont passées. Sur la cible des persos, les deux
- * modes mettent en place les images des persos intégrés modifiés (costume
- * ajouté → son full art) — le bilan suit le message.
+ * d'entités de chaque sorte sont passées. Sur les cibles des persos, des
+ * monstres et de l'équipement, les deux modes mettent en place les images des
+ * entités déjà validées modifiées (costume ajouté → son full art) — le bilan
+ * suit le message.
  */
 export function AcceptTargetButton({
   id,

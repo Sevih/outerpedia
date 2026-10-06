@@ -6,8 +6,9 @@ import { optionalJsonObject } from '@/lib/admin/route-body';
 // Outil local : 403 en prod, écriture fichier seulement en dev.
 // Corps optionnel `{ mode: 'minor' }` → n'applique QUE les retouches mineures
 // et les corrections typographiques (sinon : valide toute l'extraction de la
-// cible). Les deux rendent `assets` (images mises en place) sur la cible des
-// persos ; `minor` rend aussi le compte d'entités appliquées par sorte.
+// cible). Les deux rendent `assets` (images mises en place) sur les cibles des
+// persos, des monstres et de l'équipement ; `minor` rend aussi le compte
+// d'entités appliquées par sorte.
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!IS_DEV) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
