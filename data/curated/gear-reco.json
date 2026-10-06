@@ -6580,7 +6580,7 @@
       "substats": "DEF>EFF>CHC>HP=SPD=CHD=DMG RED%>DMG UP%"
     },
     {
-      "name": "Pen Immu",
+      "name": "Def Immu",
       "weapons": [
         {
           "id": "17",
