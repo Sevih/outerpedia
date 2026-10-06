@@ -1,6 +1,76 @@
 {
   "posts": [
     {
+      "id": 11759,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:15:24",
+      "slug": "notice-10-6tue-sequential-rolling-patch",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 10/6(Tue) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>We will carry out a patch for fixing issues in the game.<br>Please note that players may experience some server instability during this time, but players can continue to play.<br><br>We kindly ask for your understanding. Please see below for more information.</p>\n\n\n\n<p>◈ Patch Schedule</p>\n\n\n\n<ul>\n<li>10/6(Tue) 10:00 ~ 10:30 (UTC)</li>\n\n\n\n<li>It will be applied sequentially within the specified timeframe.</li>\n</ul>\n\n\n\n<p>◈ Details</p>\n\n\n\n<ol>\n<li>An issue where an incorrect icon appears in the buff area after purchasing the Terminus Isle Exploration Support Pack</li>\n\n\n\n<li>An issue where some visual effects are not displayed when entering battle with Demiurge Lambda</li>\n\n\n\n<li>An issue where some visual effects are displayed incorrectly when using Dimensional Supply with the minimum download installed</li>\n</ol>\n\n\n\n<p>◈ Notice</p>\n\n\n\n<ul>\n<li>Players may experience some server instability.</li>\n\n\n\n<li>After restart, you will be able to access the game’s improved function.</li>\n</ul>\n\n\n\n<p>We sincerely apologize for any inconvenience caused.<br>We will continue doing our best to provide you with the best service possible.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11734,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:11:40",
+      "slug": "1006kie",
+      "lang": "en",
+      "type": "known-issue",
+      "title": "[Issues] Known Issues (10/6 Maintenance)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about an issue that has been identified. We apologize for the inconvenience.</p>\n\n\n\n<p><strong>1. An issue where an incorrect icon appears in the buff area after purchasing the Terminus Isle Exploration Support Pack<br></strong>→ We are currently investigating this issue.<br><br><strong>2. An issue where some visual effects are not displayed when entering battle with Demiurge Lambda<br></strong>→ We are currently investigating this issue.<br><br><strong>3. An issue where some visual effects are displayed incorrectly when using Dimensional Supply with the minimum download installed<br></strong>→ We are currently investigating this issue.<br><br>We will work to resolve this issue as quickly as possible and provide updates in this notice if there are any changes.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11678,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T08:00:38",
+      "slug": "1006bnpe",
+      "lang": "en",
+      "type": "event",
+      "title": "[In-game Buff & Push Event] Details (2026/10/06~2026/10/20)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/25b09b1207952fcd.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters!</p>\n\n\n\n<p>From 2026/10/06 To 2026/10/20, special buff and push event will be taking place in OUTERPLANE!<br>▼</p>\n\n\n\n<figure><table><tbody><tr><td data-align=\"center\">Date</td><td data-align=\"center\">UTC</td><td data-align=\"center\">Buff</td><td data-align=\"center\">Push</td></tr><tr><td data-align=\"center\">10/06(Tue)</td><td data-align=\"center\">After Maintenance ~ 23:59</td><td data-align=\"center\">Hypnotic Frog Hall: Increased Food Rewards by 100%</td><td>Stamina 150 + Frog Hall Ticket x1 + Ark Raid Ticket x1</td></tr><tr><td data-align=\"center\">10/07(Wed)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Hypnotic Frog Hall: Increased Gold Rewards by 100%</td><td>Stamina 150 + Master’s Hammer x15 + Legendary Reforge Catalyst x10</td></tr><tr><td data-align=\"center\">10/08(Thu)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Ark Raid: Increased Item Rewards by 100%</td><td>Stamina 150 + Frog Hall Ticket x1 + Ark Raid Ticket x1</td></tr><tr><td data-align=\"center\">10/09(Fri)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Challenge! Special Request: Ecology Study Drop Rate +30%</td><td data-align=\"center\">Stamina 150 + Basic Skill Manual x3 + Frog Hall Ticket x1</td></tr><tr><td data-align=\"center\">10/10(Sat)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">[Doppelgänger Hunt] Increases piece received by +1</td><td data-align=\"center\">Stamina 200 + Frog Hall Ticket x1 + Special Recruitment Ticket (Event) x5</td></tr><tr><td data-align=\"center\">10/11(Sun)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Kate’s Workshop Crafting Gold 30% Discount Event</td><td data-align=\"center\">Stamina 200 + Frog Hall Ticket x1 + Dimensional Supply Ticket (Event) x5</td></tr><tr><td data-align=\"center\">10/12(Mon)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Challenge! Special Request: Identification Drop Rate +30%</td><td data-align=\"center\">Stamina 150 + Epic Quality Present Selection Chest x10 + Ark Raid Ticket x1</td></tr><tr><td data-align=\"center\">10/13(Tue)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Hypnotic Frog Hall: Increased Food Rewards by 100%</td><td data-align=\"center\">Stamina 150 + Frog Hall Ticket x1 + Ark Raid Ticket x1</td></tr><tr><td data-align=\"center\">10/14(Wed)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Hypnotic Frog Hall: Increased Gold Rewards by 100%</td><td data-align=\"center\">Stamina 150 + Master’s Hammer x15 + Legendary Reforge Catalyst x10</td></tr><tr><td data-align=\"center\">10/15(Thu)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Ark Raid: Increased Item Rewards by 100%</td><td data-align=\"center\">Stamina 150 + Frog Hall Ticket x1 + Ark Raid Ticket x1</td></tr><tr><td data-align=\"center\">10/16(Fri)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Challenge! Special Request: Ecology Study Drop Rate +30%</td><td data-align=\"center\">Stamina 150 + Basic Skill Manual x3 + Frog Hall Ticket x1</td></tr><tr><td data-align=\"center\">10/17(Sat)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">[Origin Story] Survey Points x2</td><td data-align=\"center\">Stamina 200 + Frog Hall Ticket x1 + Special Recruitment Ticket (Event) x5</td></tr><tr><td data-align=\"center\">10/18(Sun)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">[Doppelgänger Hunt] Increases piece received by +1</td><td data-align=\"center\">Stamina 200 + Frog Hall Ticket x1 + Dimensional Supply Ticket (Event) x5</td></tr><tr><td data-align=\"center\">10/19(Mon)</td><td data-align=\"center\">00:00 ~ 23:59</td><td data-align=\"center\">Challenge! Special Request: Identification Drop Rate +30%</td><td data-align=\"center\">Stamina 150 + Epic Quality Present Selection Chest x10 + Ark Raid Ticket x1</td></tr></tbody></table></figure>\n\n\n\n<p>Thank You.</p>\n"
+    },
+    {
+      "id": 11756,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:14:46",
+      "slug": "%ea%b3%b5%ec%a7%80-10-6%ed%99%94-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 10/6(화) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다.<br>패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다.</p>\n\n\n\n<p>자세한 내용은 아래에서 확인해 주시기 바랍니다.</p>\n\n\n\n<p>◈ 패치 진행 일정</p>\n\n\n\n<ul>\n<li>10/6(화) 19:00 ~ 19:30 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</li>\n</ul>\n\n\n\n<p>◈ 내용<br><br>1. 멸망의 섬 탐사 지원팩 구매 후 버프 영역에 비정상적인 아이콘이 노출되는 현상</p>\n\n\n\n<p>2. 데미우르고스 람다 전투 진입 시 일부 연출 이펙트가 노출되지 않는 현상<br><br>3. 최소 다운로드 상태에서 차원 물자 호출 진행 시 일부 연출 그래픽이 비정상적으로 노출되는 현상</p>\n\n\n\n<ol start=\"2\"></ol>\n\n\n\n<p>◈ 유의사항</p>\n\n\n\n<ul>\n<li>패치 진행하는 동안 접속 불안정 현상이 있을 수 있습니다.</li>\n\n\n\n<li>재접속 후 개선된 내용을 이용할 수 있습니다.</li>\n</ul>\n\n\n\n<p>이용에 불편을 드려 대단히 죄송합니다.<br>보다 쾌적하고 안정적인 환경을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br>감사합니다.<br></p>\n"
+    },
+    {
+      "id": 11732,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:10:48",
+      "slug": "%ec%9d%b4%ec%8a%88-10-6-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%9d%b4%ed%9b%84-%ed%99%95%ec%9d%b8%eb%90%9c-%ed%98%84%ec%83%81",
+      "lang": "kr",
+      "type": "known-issue",
+      "title": "[이슈] 10/6 업데이트 이후 확인된 현상",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><strong>1. 멸망의 섬 탐사 지원팩 구매 후 버프 영역에 비정상적인 아이콘이 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>2. 데미우르고스 람다 전투 진입 시 일부 연출 이펙트가 노출되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>3. 최소 다운로드 상태에서 차원 물자 호출 진행 시 일부 연출 그래픽이 비정상적으로 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n"
+    },
+    {
+      "id": 11762,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:15:59",
+      "slug": "%e3%80%90%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b%e3%80%91%e3%83%87%e3%83%bc%e3%82%bf%e6%9b%b4%e6%96%b0%e4%bd%9c%e6%a5%ad%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b10-6",
+      "lang": "jp",
+      "type": "event",
+      "title": "【お知らせ】データ更新作業のお知らせ(10/6)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>10/6(火)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n\n\n<p>◈データ更新実施時間<br>: 10/6(火) 19:00 ~ 19:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈更新内容</p>\n\n\n\n<ol>\n<li>「テルミナス島探査応援パック」の購入後、バフ表示欄に本来とは異なるアイコンが表示される現象</li>\n\n\n\n<li>「基本データダウンロード」のみを行った状態で「次元物資召喚」を行うと、一部の演出グラフィックが正常に表示されない現象</li>\n\n\n\n<li>「デミウルゴス・ラムダ」戦闘開始時、一部の演出エフェクトが正常に表示されない現象</li>\n</ol>\n\n\n\n<p>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・更新された再ログイン後、修正された内容をご利用いただけます。</p>\n\n\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
+    },
+    {
+      "id": 11736,
+      "date": "2026-10-06",
+      "modified": "2026-10-06T10:13:35",
+      "slug": "%e3%80%90%e4%b8%8d%e5%85%b7%e5%90%88%e3%80%91%e7%8f%be%e5%9c%a8%e7%a2%ba%e8%aa%8d%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e4%b8%8d%e5%85%b7%e5%90%88%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-10-6",
+      "lang": "jp",
+      "type": "known-issue",
+      "title": "【不具合】現在確認されている不具合について (10/6)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n\n\n\n<p><strong>1. 「テルミナス島探査応援パック」の購入後、バフ表示欄に本来とは異なるアイコンが表示される現象<br></strong>→ 現在、本現象について調査を行っております。<br><br><strong>2. 「基本データダウンロード」のみを行った状態で「次元物資召喚」を行うと、一部の演出グラフィックが正常に表示されない現象<br></strong>→ 現在、本現象について調査を行っております。<br><br><strong>3. 「デミウルゴス・ラムダ」戦闘開始時、一部の演出エフェクトが正常に表示されない現象<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n"
+    },
+    {
       "id": 11653,
       "date": "2026-10-05",
       "modified": "2026-10-06T04:57:29",
