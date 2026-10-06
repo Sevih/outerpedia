@@ -7,6 +7,22 @@
 
 ## 2026-10-06
 
+- **Relecture de F13 : l'arbre de quirks de l'Adventure License sort du
+  calculateur et du générateur** (Fable). Lot 72, `17db2fec`. Périmètre tenu
+  (moteur `src/lib/damage`, réglage du calculateur, six locales, générateur
+  et test des quirks, `growth.ts`, docs), `package.json` intact, TODO relu
+  (son commit a emporté les seize lignes de la section Admin — F14, B25 —
+  écrites pendant qu'il tournait : voulu, ce sont des items à faire).
+  Référence de 100 configurations rejouées, identiques au chiffre près hors
+  licence. `pnpm typecheck`, `pnpm lint` verts sur HEAD ; `pnpm test` : un
+  échec préexistant hors périmètre, `damage-data.test.ts` (projection des
+  descs ≠ catalogue) — c'était `data/generated/damage` bâti au refresh sur
+  l'extraction d'avant promotion : rejoué `pnpm damage:build` sur les
+  données promues, 42 fixtures exactes, test vert. Suites faites ici :
+  `quirks.json` promu seul (`promote --only quirks.json --apply`, quatre
+  catégories) et la tolérance `adventure` retirée de `quirks.test.ts`, comme
+  l'entrée du lot le demandait. Reste de la ligne du patch : les sources
+  d'équipement `adventure_license` et l'icône d'onglet `ui/shop/al`.
 - **Calculateur de dégâts : l'arbre de quirks de l'Adventure License sort du
   réglage, du moteur et du générateur** (lot F13, Fable). Le patch du 06/10
   ferme le mode et rembourse l'arbre. Ce que les DONNÉES portaient au
