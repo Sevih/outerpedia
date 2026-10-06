@@ -7,6 +7,23 @@
 
 ## 2026-10-06
 
+- **Hotfix du soir, resVersion 1.11.402 — ressources seulement, premier
+  passage réel de la carte « Patch »** (Sevih + Fable). Le jeu télécharge ses
+  ressources lui-même : un premier `pnpm dev` n'a rien vu (bundles « à jour »,
+  dernier fichier du jeu à 08:04) ; après lancement du jeu, 26 bundles, et le
+  dry-run ne porte que `game-version.json` et `wallpapers.json` — toutes les
+  tables identiques, donc ni intégration ni retouche mineure à appliquer (les
+  contrôles 🧪 B27 et F12 du TODO attendent un patch qui change des textes ou
+  apporte un effet). Arrivés : quatre CG de scénario (`T_ScenarioCG_E3702`,
+  `E3709`, `E3712`, `E3715`), 771 → 775 wallpapers, aucun retiré ; deux
+  sprites d'UI refaits. `pnpm assets:collect-wallpapers` par Fable (10 copiés),
+  puis les trois boutons de la carte, pour la première fois en vrai :
+  « Promouvoir » (dry-run puis apply — 2 fichiers, `solver/` re-dérivé, dry-run
+  à zéro ensuite), « Commiter » (`68448492`, 1.7.6, 11 fichiers, tree vide, les
+  8 fichiers des CG poussés sur R2), « Pousser » (CI `37494996340` verte,
+  `/wallpapers` en 200). Rien pour le journal ni le bot. À retenir pour la
+  procédure : **lancer le jeu avant `pnpm datagen:patch`**, c'est lui qui
+  rapatrie la resVersion — pas Steam.
 - **Table du jour — patch 1.4.18 et neuf lots, tous relus** (Fable). Le fil :
   `pnpm dev` au matin, intégration et promotions (entrée « Patch du
   06/10/2026 »), clôture et publication par la carte Patch de l'admin, puis
