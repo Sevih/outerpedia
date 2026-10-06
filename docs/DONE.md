@@ -30,8 +30,8 @@
   commits locaux sur `main`, CI annulée par Sevih — à retenir : quick pousse,
   même un jour de patch) ; rangs et fiche curée complète plus tard, sur
   retour des joueurs ; absente des pools de `recruit.json` par construction
-  (la vedette n'est jamais dans le pool, le pull-simulator la prendra par le
-  tag `premium` de sa fiche curée). Sigma : buffs mis à jour par Sevih
+  (la vedette n'est jamais dans le pool ; le pull-simulator la propose comme
+  vedette Demiurge par son tag `premium`, automatique, déjà porté). Sigma : buffs mis à jour par Sevih
   (effets curés : tag `unique` sur Sigma, Lambda, 2000035, le boss 2700035 ;
   `SYS_BUFF_STACK_UP` masqué) ; curé (rang, pros/cons) et [Tower
   Administrator] dans le calculateur remis à plus tard. Nouveaux types de buff
