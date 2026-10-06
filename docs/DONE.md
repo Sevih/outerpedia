@@ -7,6 +7,15 @@
 
 ## 2026-10-06
 
+- **Audit des portraits animés soldé ; suites quick/Discord closes** (Sevih).
+  P10 (coût par image) : mesuré sur le téléphone de Sevih, ça tient — clos
+  sans correctif, leviers laissés dans `docs/audit/portrait-fx.md`, dont
+  l'en-tête dit maintenant « plus rien d'ouvert » (P1–P10 : B15, F9, F10,
+  F11, F12, F15, et cette mesure). Onglet Discord de quick (suites de B24) :
+  le TL;DR du patch du 06/10 a été fabriqué et posté la veille avec « copier
+  la demande », le brouillon et le formulaire de dates dans un vrai
+  navigateur — l'item est clos, les consignes de `discord-prompt.md` ont été
+  affinées sur ce premier jet réel (entrée du 05/10).
 - **Deux PC, un serveur : le fixe est posé, les deux sens validés** (Sevih +
   Fable). Côté fixe (Windows), Sevih a passé les quatre étapes de
   `docs/procedure/test-subdomain-local.md` (ligne `DEV_PEERS`, hosts,

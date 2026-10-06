@@ -32,9 +32,12 @@
 > F10), P8 et la liste en dur de P4 (`DEFAULT_EFFECTS`) par l'extraction
 > pilotée par la table du jeu (lot F12, 05/10 — un effet n'est plus servi
 > que s'il est entier, et le test de contrat ne casse plus sur un effet qui
-> arrive). Restent ouverts : P7 — devenu le garde-fou de « servi tel quel »,
-> cf. l'entrée DONE du lot F12 —, P10, et de P9 les compteurs hors des
-> fichiers réécrits.
+> arrive), P7 et P9 par les gardes du moteur et de l'extraction et le retrait
+> des compteurs (lot F15, 06/10 — `_Synchro` sort désormais `notExtracted`),
+> P10 clos sans correctif le 06/10 : 60 i/s tenues sur le téléphone de Sevih,
+> les leviers (`SUPERSAMPLE`, `ResizeObserver`, instanciation) restent notés
+> ci-dessous pour le jour où une mesure dit le contraire. **Plus rien
+> d'ouvert.**
 
 ## État de référence
 

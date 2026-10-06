@@ -15,29 +15,12 @@
       décider si le `damage-calculator` modélise [Tower Administrator]
       (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
 - [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
-      un costume existant reste un écart — à trancher au premier cas. Même
-      mécanique « mineur » possible pour monstres et équipement (la
-      classification est générique ; écrans et staging manquent).
+      un costume existant reste un écart — à trancher au premier cas. La
+      classe « mineur » pour les monstres (page) et le staging d'images des
+      monstres et de l'équipement : lot **B27** de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus, seul).
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
-
-## 🧰 Outil quick
-
-- [ ] **Onglet « Discord », suites du lot B24** : (a) Sevih essaie dans un
-      vrai navigateur le presse-papiers de « copier la demande » et le
-      formulaire « date » ; (b) les consignes de
-      `scripts/quick/discord-prompt.md` sont tirées de DEUX résumés seulement
-      (01/06 et 11/08/2026, les seuls du salon dont la première ligne porte
-      « TL;DR ») : à corriger par Sevih après son premier jet réel, et à
-      élargir si d'anciens résumés ont un autre titre.
-
-## 🎴 Portraits animés
-
-> Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
-
-- [ ] **Constat Basse restant de l'audit** : P10 (coût par image :
-      `SUPERSAMPLE` à dpr 2, `clientWidth` relu à chaque image, instanciation
-      des billboards), lot à écrire, à confirmer sur mobile d'abord.
 
 ## 🧪 À jouer au prochain patch
 
