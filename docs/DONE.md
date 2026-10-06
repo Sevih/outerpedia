@@ -7,6 +7,20 @@
 
 ## 2026-10-06
 
+- **Deux PC, un serveur : le fixe est posé, les deux sens validés** (Sevih +
+  Fable). Côté fixe (Windows), Sevih a passé les quatre étapes de
+  `docs/procedure/test-subdomain-local.md` (ligne `DEV_PEERS`, hosts,
+  `pnpm dev:caddy:install`, règle de pare-feu). Vérifié depuis le portable,
+  sans rien y lancer : `https://outerpedia.local/`, `es.` et
+  `quick.outerpedia.local` (dont `/api/ranks`, garde `DEV_PEERS` du quick du
+  fixe) répondent en 200 par le second amont `192.168.1.54` — le sens « le
+  fixe lance, le portable regarde », qui manquait (l'inverse avait été validé
+  le matin). La branche Windows de l'installeur, jamais essayée : après un
+  REDÉMARRAGE du fixe, son 443 répond (502 propre de Caddy, rien ne tourne
+  derrière) 90 s plus tard sans aucun geste — c'est le `.vbs` du dossier
+  Démarrage. Sur le portable, les lignes hosts `quick.` et `es.` sont là (les
+  curl passent) et la nouvelle ligne `dev` a tourné au `pnpm dev` du patch.
+  Section « Deux PC » du TODO vidée.
 - **Relecture de F15 : 79 lots, aucun en attente** (Fable). `f5566d83`,
   périmètre propre (neuf fichiers de code et de tests ; ni `portrait-fx.json`
   ni `portrait-fx-served.json` dans le commit — l'invariant « la table ne
