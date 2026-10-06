@@ -21,12 +21,10 @@
       qui apparaît sur un costume existant, idem. Même mécanique possible
       pour monstres et équipement (écrans et staging manquent).
 - [ ] **Petits restes** : libellés jp/kr/zh du Survey Hub dans
-      `shop-purchase-priorities/labels.ts` (サーベイハブ / 서베이 허브 /
-      调查中心) différents du jeu (調査支援所 / 조사 지원소 / 调查支援所) ;
-      `images/ui/shop/al.webp` encore sur R2 ; routes `push`/`commit` de la
-      carte Patch sans `GIT_TERMINAL_PROMPT=0` (un identifiant demandé y
-      attendrait) ; en-tête de `commit.ts` qui dit encore que l'accueil
-      « lance la publication ».
+      `shop-purchase-priorities/labels.ts`, `GIT_TERMINAL_PROMPT=0` sur les
+      commandes de la carte Patch, en-tête de `commit.ts` — lot A28 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus), peut
+      tourner avec F15. Reste à Sevih : `images/ui/shop/al.webp` encore sur R2.
 
 ## 🧰 Outil quick
 
@@ -57,14 +55,14 @@ dev:caddy:install`, règle de pare-feu). La branche Windows de
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
 
 - [ ] **Constats Basse restants de l'audit** : P7 (trous dans « refuser
-      plutôt que rendre de travers » — à remonter depuis le lot F12 : un
-      effet qui arrive est servi dès que `layerVerdict` passe, et un
-      calque-maille y passe TOUJOURS ; `_Synchro`, joué en simulation, sort
-      « servi tel quel » avec sa feuille UV 5×5 à tuile aléatoire non
-      transcrite), P10 (coût par image : `SUPERSAMPLE` à dpr 2,
-      `clientWidth` relu à chaque image, instanciation des billboards) ; de
-      P9, les compteurs périmés hors des fichiers du lot F11 (`Portrait.tsx`,
-      `portrait-fx.ts`, `extract-portrait-fx.py`, `refresh.ts`).
+      plutôt que rendre de travers » — un calque-maille passe TOUJOURS ;
+      `_Synchro`, joué en simulation, sort « servi tel quel » avec sa feuille
+      UV 5×5 à tuile aléatoire non transcrite) et les compteurs périmés de
+      P9 : lot **F15** de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Fable, seul sur
+      les fichiers de portrait). Puis P10 (coût par image : `SUPERSAMPLE` à
+      dpr 2, `clientWidth` relu à chaque image, instanciation des
+      billboards), lot à écrire après F15, à confirmer sur mobile.
 
 ## 🧪 À jouer au prochain patch
 
