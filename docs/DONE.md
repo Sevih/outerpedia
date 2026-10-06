@@ -7,6 +7,65 @@
 
 ## 2026-10-06
 
+- **Patch du 06/10/2026 (client 1.4.18) intégré — `b92cd44d`, version
+  1.7.5** (Sevih + Fable ; feuille de route `docs/patch-2026-10-06.md`
+  supprimée avec cette entrée, selon la convention). Le commit est le PREMIER
+  passé par la carte « Patch » de l'admin (« Commiter », lot B26) : contrôles,
+  bump, push R2, `git add -A`, 179 fichiers, tree propre derrière. Données :
+  `pnpm dev` au matin, puis promotion en TROIS fois — l'extraction du patch
+  (Lambda intégrée par l'admin, `quirks.json` sans `adventure`, 150 étages,
+  Hard assouplie, `singularity.json` à 5 jours de combat et 5 boss par
+  groupe), une seconde après un RAFRAÎCHISSEMENT du dump dans la matinée
+  (textes anglais corrigés : « Universal Tower » et non « Tower of Myriad
+  Forms », la ressource de Lambda « Light of the Deep Sea » et non « Hope in
+  the Abyss », « Tower Administrator » et non « Keeper of the Tower » pour
+  Sigma — leçon : rejouer le dry-run de promote avant de clore, et ne pas
+  nommer un guide d'après une première traduction), une troisième pour le curé
+  du jour (priorités du Survey Hub, quantités de la singularité, familles de
+  buffs) ; `equipment/sources.json` (A27) promu à part. `data/generated/damage`
+  rebâti après promotion (le refresh l'avait bâti sur la proposition d'avant :
+  l'item 🧪 F7 du TODO a re-mordu, il y reste). Lambda (2000124) : intégrée,
+  date de sortie `2026-10-06`, costume Moon Bunny avec ses images, effet de
+  portrait `_Demi`, rôle DPS posé par quick (ce geste a POUSSÉ tous les
+  commits locaux sur `main`, CI annulée par Sevih — à retenir : quick pousse,
+  même un jour de patch) ; rangs et fiche curée complète plus tard, sur
+  retour des joueurs ; absente des pools de `recruit.json` par construction
+  (la vedette n'est jamais dans le pool, le pull-simulator la prendra par le
+  tag `premium` de sa fiche curée). Sigma : buffs mis à jour par Sevih
+  (effets curés : tag `unique` sur Sigma, Lambda, 2000035, le boss 2700035 ;
+  `SYS_BUFF_STACK_UP` masqué) ; curé (rang, pros/cons) et [Tower
+  Administrator] dans le calculateur remis à plus tard. Nouveaux types de buff
+  du client : `BT_STACK`/`BT_STACK_CHANGE` (ressource à cumuls de Lambda) →
+  `resource`, `BT_STACK_STAT` → `stat`, `BT_IMMEDIATELY_ALL_CAP` (boss) →
+  `dmg_reduce`, dans `effect-families.json`. Universal Tower : clé
+  `tower_element_none` (mode `tower_element`, pas d'élément, pas
+  d'affaiblissement, 100 étages), guide `skyward-tower/universal-tower`
+  (titres des six langues du jeu, descriptions de Fable, icône
+  `T_Tower_Elemental_Neutral` du jeu), pastille `CM_Element_Neutral` sur la
+  carte de catégorie (`img.elementNeutral()`, entrée dédiée du manifeste — le
+  jeu n'a pas de `IG_Turn_Element_None`). Dimensional Singularity : rotation à
+  5 jours générée (le 5ᵉ boss prend le dimanche), gains JOURNALIERS ×5/4 dans
+  `timegate-resources.json` (daily-run 20→25, 160→200, 200→250, 100→125 ;
+  classement quotidien [20,240]→[25,300], [40,160]→[50,200], [20,160]→[25,200]
+  ; rang et mission hebdo inchangés), `ether-income` 4→5 jours ; aucun texte
+  « 4 jours » dans `core-fusion`, la feuille de route se trompait. Progress
+  tracker : tour élémentaire 5→10 entrées. Survey Hub : 9 produits sans
+  priorité curés (coffre de gemmes et les 4 pièces Burst en A, talismans,
+  épée et collier d'Aventurier en C — décision de Sevih). Adventure License :
+  les donjons sont encore dans les tables, les 26 guides masqués se rendent ;
+  l'arbre de quirks est refusé par le client (`CheckNodeApply`), suivi par
+  F13. Joint Challenge Annihilator : version `2026-10` créée, contenu
+  conservé tel quel (décision de Sevih). Journal : trois entrées du 06/10
+  (`character` Lambda, `guide` Universal Tower, `update` Annihilator) — c'est
+  ce qu'outerbot annoncera dans #announcements une fois le nouveau conteneur
+  en ligne (il lit `/api/bot/changelog` du site déployé, jamais le dépôt).
+  Écarté de la feuille de route : « refonte des produits Ether » (la note n'a
+  pas de section boutique, c'était « New Packages », payant) et la récompense
+  de premier achat (aucun guide ne la documente). Contrôles à l'écran de
+  Sevih : tours (Hard, déblocage), singularité un dimanche simulé, portrait
+  animé de Lambda, carte Patch. Reste à pousser (« Pousser », premier essai
+  réel) : c'est le push qui déploie et qui livre aussi `solver/*` à l'app
+  gear-solver (elle lit `main` à chaque lancement).
 - **Relecture de B26, A26, A27 et F14 : 77 lots** (Fable). Les quatre
   commits (`8dde0ef8`, `5bfb5b4b`, `0132cd05`, `6779bd4a`) ont un périmètre
   propre — aucun fichier du patch en cours emporté ; l'index partagé a encore

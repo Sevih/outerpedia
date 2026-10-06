@@ -5,16 +5,28 @@
 
 ---
 
-## 🩹 Patch du 06/10
+## 🎮 Suites du patch du 06/10 (entrée DONE du 06/10)
 
-- [ ] **Feuille de route** : [patch-2026-10-06.md](./patch-2026-10-06.md) —
-      Demiurge Lambda, équilibrage de Sigma, contrôle des tours à 150 étages,
-      guide de la Universal Tower, révision du Joint Challenge Annihilator,
-      quantités hebdomadaires de Dimensional Singularity. La préparation du
-      05/10 est commitée en local : ne pas pousser (ni `pnpm quick`) avant
-      le patch.
-
-## 🛠️ Admin
+- [ ] **Demiurge Lambda, sur retour des joueurs** : rangs (quick, onglet
+      « Rangs » — PvE, PvP, EE base et +10) et fiche curée (tags dont
+      `premium`, qui la rend sélectionnable comme vedette Demiurge dans le
+      `pull-simulator` ; pros/cons, synergies), ligne de `premium-limited`.
+- [ ] **Sigma, après équilibrage** : curé à revoir (rang, pros/cons) ; et
+      décider si le `damage-calculator` modélise [Tower Administrator]
+      (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
+- [ ] **Revue d'extraction (suite de F14)** : la provenance d'un costume qui
+      change (`costumes[#].source`, `package_shop`/`battlepass` → `shop` :
+      Dianne, Vlada, Dahlia, Titia) reste un écart par la règle du doute —
+      Sevih tranche ; mineure = une ligne dans `isMinorField`. Le flag `art`
+      qui apparaît sur un costume existant, idem. Même mécanique possible
+      pour monstres et équipement (écrans et staging manquent).
+- [ ] **Petits restes** : libellés jp/kr/zh du Survey Hub dans
+      `shop-purchase-priorities/labels.ts` (サーベイハブ / 서베이 허브 /
+      调查中心) différents du jeu (調査支援所 / 조사 지원소 / 调查支援所) ;
+      `images/ui/shop/al.webp` encore sur R2 ; routes `push`/`commit` de la
+      carte Patch sans `GIT_TERMINAL_PROMPT=0` (un identifiant demandé y
+      attendrait) ; en-tête de `commit.ts` qui dit encore que l'accueil
+      « lance la publication ».
 
 ## 🧰 Outil quick
 
