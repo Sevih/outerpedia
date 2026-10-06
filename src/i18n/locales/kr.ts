@@ -95,7 +95,7 @@ const kr: Record<TranslationKey, string> = {
   'equip.filter.all': '전체',
   'equip.filter.type': '유형',
   'equip.source.event_shop': '이벤트 상점',
-  'equip.source.adventure_license': '모험 라이선스',
+  'equip.source.survey': '조사 지원소',
   'equip.set.2piece': '2세트',
   'equip.set.4piece': '4세트',
   'equip.filter.source': '출처',

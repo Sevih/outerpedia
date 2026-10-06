@@ -96,7 +96,7 @@ const jp: Record<TranslationKey, string> = {
   'equip.filter.all': '全て',
   'equip.filter.type': 'タイプ',
   'equip.source.event_shop': 'イベントショップ',
-  'equip.source.adventure_license': '冒険者ライセンス',
+  'equip.source.survey': '調査支援所',
   'equip.set.2piece': '2セット',
   'equip.set.4piece': '4セット',
   'equip.filter.source': 'ソース',

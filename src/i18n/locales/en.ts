@@ -105,7 +105,7 @@ const en = {
   'equip.filter.all': 'All',
   'equip.filter.type': 'Type',
   'equip.source.event_shop': 'Event Shop',
-  'equip.source.adventure_license': 'Adventure License',
+  'equip.source.survey': 'Survey Hub',
   'equip.set.2piece': '2 pieces',
   'equip.set.4piece': '4 pieces',
   'equip.filter.source': 'Source',

@@ -95,7 +95,7 @@ const zh: Record<TranslationKey, string> = {
   'equip.filter.all': '全部',
   'equip.filter.type': '类型',
   'equip.source.event_shop': '活动商店',
-  'equip.source.adventure_license': '冒险许可证',
+  'equip.source.survey': '调查支援所',
   'equip.set.2piece': '2件套',
   'equip.set.4piece': '4件套',
   'equip.filter.source': '来源',

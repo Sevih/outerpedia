@@ -24,7 +24,7 @@ import { validate, type Schema } from '../extractor/core/validate';
 export interface EquipmentSource {
   /** Ids de boss (`MonsterTemplet`) droppant l'item. */
   bosses?: string[];
-  /** Slugs de boutique (`event_shop`, `adventure_license`) — MÊME vocabulaire
+  /** Slugs de boutique (`event_shop`, `survey`) — MÊME vocabulaire
    * que l'extraction (`sources.json`), jamais de texte libre pour une boutique
    * connue : le filtre de /equipment dédoublonne par slug. */
   shops?: string[];

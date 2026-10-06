@@ -370,7 +370,7 @@ export function accessoryMainStats(id: string): { grade: string; stats: string[]
 /** Source d'obtention résolue (boss matérialisés + boutiques). */
 export interface ResolvedSource {
   bosses: (Boss & { id: string })[];
-  /** Slugs de boutique EXTRAITS (`adventure_license`, `event_shop`) — i18n côté page. */
+  /** Slugs de boutique EXTRAITS (`survey`, `event_shop`) — i18n côté page. */
   shops: string[];
   /** Libellé curé (texte libre, complément non extractible). */
   label?: string;
@@ -378,7 +378,7 @@ export interface ResolvedSource {
 
 /** Slugs de boutique connus → clé de libellé localisé. */
 const SHOP_SOURCE_KEYS = {
-  adventure_license: 'equip.source.adventure_license',
+  survey: 'equip.source.survey',
   event_shop: 'equip.source.event_shop',
 } as const;
 

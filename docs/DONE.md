@@ -7,6 +7,151 @@
 
 ## 2026-10-06
 
+- **Revue d'extraction : les retouches mineures (costumes, textes) passent
+  sans ré-intégration** (Fable, lot F14, retours de Sevih du 06/10). Un perso
+  intégré dont le jeu ajoute un costume ou reformule un texte passait en
+  `diff` rouge, et le seul geste était « Intégrer », qui refaisait toute
+  l'intégration ; « Valider toute l'extraction » écrivait le fichier sans
+  poser les images du nouveau costume. (1) Troisième classe d'écart dans
+  `datagen/extractor/core/changes.ts` : `isMinorField`/`isMinorEntity`
+  (`isTypoEntity` reste, englobé). Est mineur : un champ typo ; un champ de
+  TEXTE reformulé — clés tenues à UN endroit, `TEXT_KEYS` = `name`,
+  `nickname`, `desc`, `story`, relevées sur les specs et les cibles — dont les
+  suites de chiffres (`numberSequence` : `%`, `.`, `,` intérieurs, pleine
+  largeur ramenée par NFKC) sont identiques dans l'ordre, langue par langue ;
+  sous `costumes` : costume ajouté, `sort`, `name` — un costume retiré reste
+  un écart, et `source`, `icon`, `grade`, `art` aussi (règle « en cas de doute,
+  pas mineur »). `voiceActor` et `immuneTooltips` (des réfs) sont exclus
+  volontairement. Deux choix à moi, à relire : (a) le moteur de diff aligne
+  désormais une liste d'objets à `id` unique PAR ID (`costumes[#109]`,
+  `passives[#1001]`) au lieu de l'index — sans ça, un costume inséré ou
+  déplacé produisait une cascade de `id`/`model`/`icon` décalés sur tous les
+  suivants, illisible et inclassable ; les listes de scalaires et les objets
+  sans `id` restent par index ; (b) l'apparence qui accompagne un costume
+  ajouté (`appearances[3]: → 2040084`, ou la liste entière pour un premier
+  skin) est mineure SEULEMENT si sa valeur est le `model`/`fusionModel` d'un
+  costume ajouté dans le même écart — sinon, le cas motivant (Eva, Luna)
+  restait `diff`. (2) Revue : statut `minor` dans `ReviewEntityStatus`,
+  compteur `minor` dans `DiffBuckets`, badge discret et filtre dans
+  `ExtractorReview.tsx` ; « Fix typos » devient « Apply minor changes (n) »
+  (libellés dans la langue de l'écran, anglais comme ses voisins) et le
+  message dit `N minor + M typo applied` plus le bilan d'images ;
+  `acceptMinor` remplace `acceptTypos` (plus aucun appelant ; cœur pur
+  `mergeMinor`, écriture `acceptMinorIn(dir, target)` injectable) ; la route
+  `review/[id]` prend `{ mode: 'minor' }`. Comme `ExtractorReview` ne sert pas
+  aux persos, la page index `extractor/characters` gagne les cases Diff et
+  Minor et un bloc « Apply minor changes » (`AcceptTargetButton` en mode
+  `minor`, qui rafraîchit la page), et la sidebar (`character-rows.ts`,
+  `ExtractorSidebar.tsx`) montre `minor` en couleur discrète au lieu de `diff`
+  — filtre et compteur n'apparaissent que s'il y en a, les autres sidebars
+  sont visuellement inchangées. L'inbox compte `minor` comme la typo (non
+  urgent, exclu du badge « à traiter »). (3) Images : nouveau module
+  `datagen/assets/stage-characters.ts` — `stageCharacterAssets(ids, chars,
+skills, deps)` rejoue l'étape 5 de l'intégration (`characterAssetRequests`
+  → `stageAssets`) pour ces ids seulement, demandes dédupliquées, id inconnu
+  du committé ignoré (garde perso) ; branché après `acceptMinor` et
+  `acceptTarget` sur la cible des persos (ids présents des deux côtés dont
+  l'entrée change, jamais un nouveau), et dans `promote --apply` via un hook
+  `stageCharacters` injecté par le CLI (`changedCharacters` calculé après la
+  garde perso et le verrou, staging après les écritures, bilan dans la sortie
+  ; absent = rien, dry-run et tests). (4) Tests : `changes.test.ts`
+  (reformulation = mineur, nombre changé = diff, costume ajouté/réordonné =
+  mineur, retiré = diff, stat en chaîne = diff, apparence seule = diff,
+  alignement par id), `review.test.ts` (nouveau : classement, `mergeMinor`,
+  `acceptMinorIn` sur un committé factice n'écrit que typo + mineur, cible à
+  `subKey` préservée), `stage-characters.test.ts` (nouveau : ids restreints,
+  full art du costume, dédup, garde), `promote.test.ts` (hook appelé après
+  l'écriture avec le seul perso intégré modifié, jamais en dry-run). Vérifié à
+  la main, sans écrire dans `data/generated` : revue de la cible `character`
+  par script jetable. Contre le working tree (déjà promu ce 06/10) : rien que
+  `2400015` en `new`. Contre `characters.json` de HEAD (`210d5313`) : 7 `diff`
+  → 5 `diff` + 2 `minor` — Eva `2000084` (costume 109 « Adorable Moon Bunny »
+  - apparence 2040084) et Luna `2000119` (costumes 106/110 « Moon Bunny » +
+    apparences 2020119/2020120), relus : des ajouts de costume, rien d'autre.
+    Restent `diff` : Sigma `2000052` (chaîne et skills, vrai écart) et QUATRE
+    persos dont le seul champ est `costumes[#].source` (`package_shop` ou
+    `battlepass` → `shop` : Dianne, Vlada, Dahlia, Titia) — la provenance d'un
+    costume n'est pas dans la liste, règle du doute appliquée ; si Sevih la juge
+    mineure, c'est une ligne dans `isMinorField`. Vérification : `pnpm
+typecheck` (sans erreur), `pnpm lint` (`$ eslint`, rien), `pnpm test`
+    (`Tests 2676 passed (2676)`). Laissé : la garde perso de `promote.ts`,
+    l'intégration elle-même, le calculateur (hors périmètre) ; même mécanique
+    possible pour les monstres et l'équipement (la classification est déjà
+    générique — `name`/`nickname`/`desc` —, ce sont les écrans et le staging
+    qui manquent) ; le flag `art` qui apparaît sur un costume existant reste un
+    écart, à trancher.
+- **Sources d'équipement : le Survey Hub remplace l'Adventure License**
+  (Opus, lot A27). Le patch 1.4.18 a fermé l'Adventure License et déplacé ses
+  huit équipements au Survey Hub, mais `equipment/sources.json` disait encore
+  `shops: ["adventure_license"]` : `ProductTemplet` garde les 12 anciens
+  produits `PBT_ADVENTURE_LICENSE`, et `shopSlug` ne connaissait pas
+  `PBT_RESEARCH`. (1) `shopSlug` (`datagen/generators/sources.ts`) rend
+  `survey` pour `PBT_RESEARCH` et plus rien pour `PBT_ADVENTURE_LICENSE` ; les
+  pièces d'événement sont inchangées. (2) AJOUT QUI N'ÉTAIT PAS DANS LE LOT, à
+  relire : la passe 3 ne retient du Survey Hub que ses produits COURANTS
+  (`computeAsOf` / `isCurrent` de `shop-priorities`, la règle que
+  `timegate-resources` partage déjà). La première régénération, sans ce
+  filtre, donnait 16 objets `survey` et non 8 : les 70 lignes `PBT_RESEARCH`
+  ne sont pas la boutique d'aujourd'hui, 38 sont closes (une au 01/12/2025,
+  35 au 30/12/2025 — la première génération de la boutique —, deux au
+  21/04/2026) et 32 courantes (24 ouvertes le 30/12/2025 plus les huit
+  arrivées de l'Adventure License, sans dates). Les produits 5003 à 5010 de
+  la génération close vendaient huit pièces 5★ Legendary — Etheric Helmet /
+  Chest Armor / Gloves / Boots of Attack (3020, 5020, 7020, 9020) et of
+  Critical Hit (3092, 5092, 7092, 9092) — qui seraient redevenues « Survey
+  Hub » dix mois après leur retrait, alors qu'elles n'ont aucune source
+  aujourd'hui. Les boutiques d'événement restent sans filtre de date (leurs
+  lignes sont datées par événement, la source reste vraie une fois
+  l'événement fini ; 36 objets `event_shop` avant comme après). Pour revenir
+  à la lettre du lot : retirer la ligne
+  `if (slug === 'survey' && !isCurrent(p, asOf, maxYear)) continue;`.
+  (3) Côté site : clé `equip.source.survey` à la place de
+  `equip.source.adventure_license` dans les six locales, avec les valeurs de
+  `progress.shop.survey-hub` déjà en place (jp 調査支援所, kr 조사 지원소,
+  zh 调查支援所 = `SYS_SHOP_TAP_TYPE_RESEARCH` du jeu ; fr « Survey Hub » et
+  es « Centro de Encuestas » suivent le site — l'onglet du jeu dit « Hub
+  d'étude » / « Hub estudio », ses quêtes « Centro de Encuestas ») ;
+  `SHOP_SOURCE_KEYS` (`src/lib/data/equipment.ts`) ; `shopIconSrc('survey')`
+  → `img.shopIcon('survey')` (`cards.tsx`, l'icône d'onglet du guide des
+  boutiques) ; queue du filtre `s:survey` (`EquipmentBrowser.tsx`) ; `'al'`
+  sorti des icônes d'onglet de `datagen/assets/manifest.ts`
+  (`data/editorial/ui/shop_al.webp` reste, pool figé).
+  `grep -rn adventure_license src datagen` avant retrait : rien d'autre que
+  ces usages,
+  les clés `guides.adventure_license.*` et `AdventureLicense.tsx`, non
+  touchés. (4) Tests : `shopSlug` (`PBT_RESEARCH` → `survey`,
+  `PBT_ADVENTURE_LICENSE` → null, event coin inchangé) ; `VALID_SHOPS` gagne
+  `survey` et GARDE `adventure_license` en tolérance de transition, le
+  `sources.json` committé le portant jusqu'à la promotion (même geste que la
+  tolérance `adventure` de `quirks.test.ts`). Régénération :
+  `pnpm datagen:build` (deux fois, avant et après le filtre), puis
+  `data/extracted/equipment/sources.json` contre `data/generated` — 180
+  entrées des deux côtés, 172 identiques, 8 différentes, toutes
+  `{"bosses":[],"shops":["adventure_license"]}` →
+  `{"bosses":[],"shops":["survey"]}` : 780 Adventurer's Sword, 1792
+  Adventurer's Necklace, 3336 / 5336 / 7336 / 9336 (6★ Legendary [Burst]),
+  10996 et 10997 (talismans). AUCUN autre objet ne gagne `survey` : les
+  coffres de sélection 6★ du Survey Hub (30271 à 30276, 30326) sont des
+  objets, pas des équipements, donc ni dans `sources.json` ni dans le
+  navigateur. Vérification : `pnpm lint` → `$ eslint` (code 0) ; `pnpm test`
+  → `Tests  2676 passed (2676)`, 193 fichiers ; `pnpm typecheck` ÉCHOUE dans
+  l'arborescence partagée, sur le seul fichier en cours d'un autre lot
+  (`datagen/extractor/core/changes.test.ts(294,9)`, erreur TS2353, « 'id'
+  does not exist in type 'EntityDiff' », F14) — rejoué sur une copie de HEAD plus
+  le seul diff d'A27 (`git archive` dans le scratchpad, pas de worktree) :
+  les trois `tsc --noEmit` passent, code 0, sans sortie. Rien de visuel
+  comparé au-delà de la source : sur :3000, `/equipment` rend aujourd'hui le
+  slug brut `adventure_license` (12 occurrences, sans icône) pour ces huit
+  objets, puisque la clé est partie et que la donnée servie n'est pas encore
+  promue ; « Survey Hub » et son icône n'apparaîtront qu'après promotion.
+  Laissé : la promotion d'`equipment/sources.json` (Sevih, depuis l'admin, À
+  FAIRE AVANT DE POUSSER), puis le retrait de la tolérance de `VALID_SHOPS` ;
+  `images/ui/shop/al.webp` déjà poussé sur R2, non retiré. Commit :
+  `manifest.ts` portait un hunk non commité d'un autre travail (pastille
+  `CM_Element_Neutral` de l'Universal Tower) — seul le retrait de `'al'` est
+  indexé, ce hunk reste dans le working tree. Repéré hors périmètre : le
+  `labels.ts` du guide shop-purchase-priorities nomme le Survey Hub
+  « サーベイハブ / 서베이 허브 / 调查中心 », pas comme le jeu.
 - **Admin, carte « Patch » : commiter et pousser sont deux gestes (lot B26)**
   (Opus, demande de Sevih du 06/10). Le bouton « Publier les données » de B25
   lançait `pnpm commit --msg … --bump … --yes`, donc contrôles, bump, push R2,

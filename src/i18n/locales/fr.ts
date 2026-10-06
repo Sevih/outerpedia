@@ -97,7 +97,7 @@ const fr: Record<TranslationKey, string> = {
   'equip.filter.all': 'Tous',
   'equip.filter.type': 'Type',
   'equip.source.event_shop': "Boutique d'événement",
-  'equip.source.adventure_license': 'Adventure License',
+  'equip.source.survey': 'Survey Hub',
   'equip.set.2piece': '2 pièces',
   'equip.set.4piece': '4 pièces',
   'equip.filter.source': 'Source',

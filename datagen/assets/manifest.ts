@@ -1612,7 +1612,6 @@ export function buildAssetManifest(): AssetRequest[] {
     'arena',
     'stars',
     'worldboss',
-    'al',
     'survey',
     'resource',
   ])

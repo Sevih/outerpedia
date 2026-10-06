@@ -16,14 +16,23 @@
  * spawne une variante du même boss, on garde l'id le plus élevé).
  *
  * Passe 3 — BOUTIQUES : `ProductTemplet` vend des équipements (`PGT_ITEM`) ;
- * la monnaie (`ProductBuyType`) identifie la boutique : Adventure License
- * (permanente) et pièces d'événement (`PBT_[ALWAYS_]EVENT_COIN_*`).
+ * la monnaie (`ProductBuyType`) identifie la boutique : Survey Hub
+ * (`PBT_RESEARCH`, permanente) et pièces d'événement
+ * (`PBT_[ALWAYS_]EVENT_COIN_*`). L'Adventure License n'en est plus une : la
+ * boutique a fermé au patch du 06/10/2026 et ses équipements sont passés au
+ * Survey Hub, mais `ProductTemplet` garde ses anciens produits
+ * (`PBT_ADVENTURE_LICENSE`) — ignorés ici. Le Survey Hub est une boutique
+ * PERMANENTE : seuls ses produits COURANTS comptent (règle et ancre `asOf` de
+ * `shop-priorities`), la table gardant aussi sa première génération, close le
+ * 30/12/2025. Les boutiques d'événement, elles, restent une source une fois
+ * l'événement fini — pas de filtre de date.
  *
  * LIMITE : les achats aux monnaies génériques (cristaux…) ne nomment pas une
  * « source » utile → non extraits, complétés par la couche curée.
  */
 import { groupBy, loadTable, splitCsv } from '../lib/tables';
 import { dungeonSpawnedMonsters, modeTitleKey } from './encounters';
+import { computeAsOf, isCurrent } from './shop-priorities';
 
 export type ItemSources = Record<string, { bosses: string[]; shops?: string[] }>;
 
@@ -51,7 +60,7 @@ const CHASE_TITLE_KEY = 'SYS_IRREGULAR_EXTERMINATION';
 /** ProductBuyType → slug de boutique (clé i18n `equip.source.<slug>`). */
 export function shopSlug(buyType: string | undefined): string | null {
   if (!buyType) return null;
-  if (buyType === 'PBT_ADVENTURE_LICENSE') return 'adventure_license';
+  if (buyType === 'PBT_RESEARCH') return 'survey';
   if (/^PBT_(ALWAYS_)?EVENT_COIN/.test(buyType)) return 'event_shop';
   return null;
 }
@@ -128,11 +137,16 @@ export function buildItemSources(): ItemSourcesResult {
     }
   }
 
-  // Passe 3 : boutiques (Adventure License, boutiques d'événement).
+  // Passe 3 : boutiques (Survey Hub, boutiques d'événement).
   const shopsByItem = new Map<string, Set<string>>();
-  for (const p of loadTable('ProductTemplet')) {
+  const products = loadTable('ProductTemplet');
+  const { asOf, maxYear } = computeAsOf(products);
+  for (const p of products) {
     const slug = shopSlug(p.ProductBuyType);
     if (!slug) continue;
+    // Survey Hub : produits courants seulement (cf. en-tête) — sans ce filtre,
+    // les pièces 5★ retirées le 30/12/2025 redeviendraient « Survey Hub ».
+    if (slug === 'survey' && !isCurrent(p, asOf, maxYear)) continue;
     for (const [type, goods] of [
       [p.ProductGoodsType, p.ProductGoodsID],
       [p.ProductGoodsType2, p.ProductGoodsID2],

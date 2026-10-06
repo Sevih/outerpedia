@@ -33,7 +33,7 @@ export interface RowSource {
 
 /** Icône d'une boutique source (slug extrait → sprite du jeu déjà poussé). */
 export function shopIconSrc(slug: string): string | undefined {
-  if (slug === 'adventure_license') return img.guideIcon('CM_Adventure_License');
+  if (slug === 'survey') return img.shopIcon('survey');
   if (slug === 'event_shop') return img.navIcon('CM_Shop_Shortcuts_EventShop');
   return undefined;
 }

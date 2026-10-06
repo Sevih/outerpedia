@@ -30,10 +30,14 @@ import { shopSlug, type ItemSources } from './sources';
 // ─── 1. Cœur pur (synthétique) ───────────────────────────────────────────────
 
 describe('shopSlug — ProductBuyType → boutique', () => {
-  it('licence d’aventure et pièces d’événement (avec/sans ALWAYS)', () => {
-    expect(shopSlug('PBT_ADVENTURE_LICENSE')).toBe('adventure_license');
+  it('Survey Hub et pièces d’événement (avec/sans ALWAYS)', () => {
+    expect(shopSlug('PBT_RESEARCH')).toBe('survey');
     expect(shopSlug('PBT_EVENT_COIN_1')).toBe('event_shop');
     expect(shopSlug('PBT_ALWAYS_EVENT_COIN_2')).toBe('event_shop');
+  });
+
+  it('Adventure License : boutique fermée (06/10/2026), ses produits restés en table ne sont plus une source', () => {
+    expect(shopSlug('PBT_ADVENTURE_LICENSE')).toBeNull();
   });
 
   it('monnaies génériques / absent → null (pas une source utile)', () => {
@@ -59,7 +63,10 @@ const equipmentIds = new Set(
     eeData,
   ].flatMap((t) => Object.keys(t as Record<string, unknown>)),
 );
-const VALID_SHOPS = new Set(['adventure_license', 'event_shop']);
+// `adventure_license` : TOLÉRANCE DE TRANSITION — le générateur ne l'émet plus
+// (boutique fermée le 06/10/2026), mais le `sources.json` committé le porte
+// jusqu'à la promotion de l'extraction. À retirer une fois promu.
+const VALID_SHOPS = new Set(['survey', 'event_shop', 'adventure_license']);
 const entries = Object.entries(sources);
 
 describe('sources.json — invariants référentiels', () => {

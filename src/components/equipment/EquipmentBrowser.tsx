@@ -70,7 +70,7 @@ const SOURCE_TAIL = [
   'b:51202002', // Blockbuster
   'b:51202003', // Mutated Wyvre
   'b:51202004', // Irregular Queen
-  's:adventure_license',
+  's:survey',
   's:event_shop',
 ];
 
