@@ -20,9 +20,8 @@
       Sevih tranche ; mineure = une ligne dans `isMinorField`. Le flag `art`
       qui apparaît sur un costume existant, idem. Même mécanique possible
       pour monstres et équipement (écrans et staging manquent).
-- [ ] **Petits restes** : FAIT (lot A28 — libellés du Survey Hub,
-      `GIT_TERMINAL_PROMPT=0`, en-tête de `commit.ts`). Reste à Sevih :
-      `images/ui/shop/al.webp` encore sur R2.
+- [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
+      encore dans le bucket, plus référencé — à retirer (Sevih).
 
 ## 🧰 Outil quick
 

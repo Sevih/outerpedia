@@ -7,6 +7,14 @@
 
 ## 2026-10-06
 
+- **Relecture de A28 : 78 lots** (Fable). `bb942a7f`, périmètre propre (sept
+  fichiers, dont `meta.json` du guide des boutiques pour sa date). Libellés
+  jp/kr/zh du Survey Hub = ceux du jeu ; `GIT_TERMINAL_PROMPT=0` posé par
+  `patchEnv` sur toutes les commandes de la carte Patch, lanceur injectable
+  testé ; en-tête de `commit.ts` à jour. Typecheck, lint, `Tests 2677 passed`.
+  Dans la foulée, à la demande de Sevih : la version `2026-10` du Joint
+  Challenge Annihilator reçoit sa vidéo (`ioSTA6N3bIU`, Very Hard, chaîne
+  Outerpedia) à la place de celle de mai, dans `versions/2026-10/config.json`.
 - **Petits restes du patch du 06/10 : libellés du Survey Hub,
   `GIT_TERMINAL_PROMPT=0` sur la carte « Patch », en-tête de `commit.ts`**
   (Opus, lot A28 ; les trois points laissés par la relecture de B26, A26, A27
