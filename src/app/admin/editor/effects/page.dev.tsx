@@ -1,8 +1,6 @@
-import Link from 'next/link';
-import type { Route } from 'next';
-import { getMergedEffects, type MergedEffect } from '@/lib/data/effects';
-import { NewEffectForm } from '@/components/admin/NewEffectForm';
-import { EffectIconTile } from '@/components/character/EffectChips';
+import { getMergedEffects, liveEffectSources, type MergedEffect } from '@/lib/data/effects';
+import { EffectsCatalog, type EffectRow } from '@/components/admin/EffectsCatalog';
+import { effectHaystack } from '@/lib/admin/effect-search';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,43 +21,42 @@ function pairKey(e: MergedEffect): string {
   return base ? `${base}${e.irremovable ? '|irr' : ''}` : '';
 }
 
-/** Une cellule du catalogue : icône, nom (lien éditeur), badges d'état. */
-function EffectCell({ e }: { e?: MergedEffect }) {
-  if (!e) return <td className="px-3 py-1.5" />;
-  return (
-    <td className="px-3 py-1.5">
-      <div className="flex items-center gap-2">
-        {e.icon && <EffectIconTile icon={e.icon} isDebuff={e.isDebuff} />}
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-baseline gap-x-1.5">
-            <Link
-              href={`/admin/editor/effects/${encodeURIComponent(e.id)}` as Route}
-              className="text-content-strong hover:text-accent font-medium"
-            >
-              {e.name.en || <span className="text-danger italic">no name</span>}
-            </Link>
-            {e.irremovable && <span className="text-warn text-2xs uppercase">irremovable</span>}
-          </div>
-          <div className="text-content-subtle text-xs">
-            <span className="font-mono">{e.id}</span>
-            <span> · {e.origin}</span>
-            {e.icon ? (
-              e.iconEditorial ? (
-                <span className="text-warn"> · wiki</span>
-              ) : (
-                <span className="text-success"> · game</span>
-              )
-            ) : (
-              <span className="text-danger"> · no icon</span>
-            )}
-            {e.tag ? ` · ${e.tag}` : ''}
-            {e.overridden && e.origin !== 'curated' ? ' · curated' : ''}
-            {e.hidden ? ' · hidden' : ''}
-          </div>
-        </div>
-      </div>
-    </td>
-  );
+/**
+ * Clés éditoriales par id d'effet : l'index généré (`BT_*`, les deux côtés)
+ * puis les `keys` curées. `MergedEffect` ne les porte pas — la recherche si.
+ */
+function keysByEffect(): Map<string, Set<string>> {
+  const src = liveEffectSources();
+  const out = new Map<string, Set<string>>();
+  const add = (id: string, key: string) => {
+    const set = out.get(id) ?? new Set<string>();
+    set.add(key);
+    out.set(id, set);
+  };
+  for (const side of Object.values(src.byKey)) {
+    for (const [key, id] of Object.entries(side)) add(id, key);
+  }
+  for (const [id, c] of Object.entries(src.curated)) {
+    for (const key of c.keys ?? []) add(id, key);
+  }
+  return out;
+}
+
+/** Ligne du catalogue : ce que le composant client affiche et cherche. */
+function toRow(e: MergedEffect, keys: Map<string, Set<string>>): EffectRow {
+  return {
+    id: e.id,
+    name: e.name.en ?? '',
+    icon: e.icon,
+    isDebuff: e.isDebuff,
+    origin: e.origin,
+    iconEditorial: e.iconEditorial,
+    irremovable: e.irremovable,
+    tag: e.tag,
+    overridden: e.overridden,
+    hidden: e.hidden,
+    haystack: effectHaystack({ id: e.id, keys: [...(keys.get(e.id) ?? [])], name: e.name }),
+  };
 }
 
 /** Catalogue éditorial des effets : appariement buff/debuff + création/curation. */
@@ -73,8 +70,6 @@ export default async function EditorEffectsCatalog({
   const noDescCount = all.filter((e) => !e.desc.en).length;
   // Filtre « sans description » : n'affiche que les effets à documenter.
   const effects = noDescOnly ? all.filter((e) => !e.desc.en) : all;
-  const curated = effects.filter((e) => e.overridden).length;
-  const noName = effects.filter((e) => !e.name.en).length;
 
   // Appariement : par clé normalisée, on zippe buffs et debuffs ; l'excédent
   // (et les clés à un seul côté) part dans les orphelins.
@@ -111,77 +106,20 @@ export default async function EditorEffectsCatalog({
   orphanBuffs.push(...unnamed.filter((e) => !e.isDebuff));
   orphanDebuffs.push(...unnamed.filter((e) => e.isDebuff));
 
-  const orphanRows = Math.max(orphanBuffs.length, orphanDebuffs.length);
+  // Le serveur lit et range ; la recherche (au fil de la frappe) et les
+  // compteurs de ce qui reste affiché sont au composant client.
+  const keys = keysByEffect();
+  const row = (e: MergedEffect) => toRow(e, keys);
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-content-strong text-xl font-semibold">Editor · Effect</h1>
-          <p className="text-content-muted text-sm">
-            {effects.length} effects ({effects.filter((e) => e.origin === 'tooltip').length}{' '}
-            statuses + {effects.filter((e) => e.origin === 'type').length} mechanics +{' '}
-            {effects.filter((e) => e.origin === 'curated').length} creations) · {curated} curated
-            {noName ? ` · ${noName} no name` : ''}
-            {' · '}
-            <Link
-              href={
-                (noDescOnly
-                  ? '/admin/editor/effects'
-                  : '/admin/editor/effects?filter=no-desc') as Route
-              }
-              className={noDescOnly ? 'text-accent underline' : 'text-warn hover:underline'}
-            >
-              {noDescCount} no description{noDescOnly ? ' (filtered — show all)' : ''}
-            </Link>
-            {' · '}
-            <Link
-              href={'/admin/extractor/effects' as Route}
-              className="text-content-subtle hover:underline"
-            >
-              regression control (Extractor) →
-            </Link>
-          </p>
-        </div>
-        <NewEffectForm basePath="/admin/editor/effects" />
-      </div>
-
-      {/* Catalogue : paires buff ↔ debuff (miroirs), puis orphelins alphabétiques */}
-      <section className="border-line-subtle bg-surface-raised overflow-x-auto rounded-lg border">
-        <table className="w-full text-sm">
-          <thead className="text-content-subtle text-left text-xs uppercase">
-            <tr className="border-line-subtle border-b">
-              <th className="text-success w-1/2 px-3 py-2 font-medium">Buff</th>
-              <th className="text-danger w-1/2 px-3 py-2 font-medium">Debuff</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pairs.map(({ buff, debuff }) => (
-              <tr key={buff.id} className="border-line-subtle hover:bg-surface-base border-t">
-                <EffectCell e={buff} />
-                <EffectCell e={debuff} />
-              </tr>
-            ))}
-            <tr className="border-line-subtle border-t">
-              <td
-                colSpan={2}
-                className="text-content-subtle bg-surface-base px-3 py-1.5 text-xs font-semibold uppercase"
-              >
-                No mirror ({orphanBuffs.length + orphanDebuffs.length})
-              </td>
-            </tr>
-            {Array.from({ length: orphanRows }, (_, i) => (
-              <tr
-                key={orphanBuffs[i]?.id ?? orphanDebuffs[i]?.id ?? i}
-                className="border-line-subtle hover:bg-surface-base border-t"
-              >
-                <EffectCell e={orphanBuffs[i]} />
-                <EffectCell e={orphanDebuffs[i]} />
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-    </div>
+    <EffectsCatalog
+      catalog={{
+        pairs: pairs.map(({ buff, debuff }) => ({ buff: row(buff), debuff: row(debuff) })),
+        orphanBuffs: orphanBuffs.map(row),
+        orphanDebuffs: orphanDebuffs.map(row),
+      }}
+      noDescOnly={noDescOnly}
+      noDescCount={noDescCount}
+    />
   );
 }

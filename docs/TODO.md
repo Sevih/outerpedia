@@ -18,10 +18,14 @@
       guides `quirk`, `daily-stamina`, `shop-purchase-priorities` (lot B20,
       FAIT le 05/10) ; calculateur de dégâts sans l'arbre de quirks du mode
       (lot F13, FAIT le 06/10 — `quirks.json` à promouvoir depuis l'admin,
-      puis retirer la tolérance `adventure` de `quirks.test.ts`). Reste,
-      après le `pnpm dev` du patch : les priorités des produits arrivés au
-      Survey Hub (éditorial, admin), les sources d'équipement du mode,
-      l'icône d'onglet `ui/shop/al` du manifeste d'assets.
+      FAIT le 06/10, `quirks.json` promu, tolérance retirée). Priorités du
+      Survey Hub : FAIT le 06/10 (9 produits curés). Sources d'équipement
+      (`survey` à la place d'`adventure_license`, icône `ui/shop/al` sortie
+      du manifeste) : lot A27, FAIT le 06/10 côté code. Reste : promouvoir
+      `equipment/sources.json` depuis l'admin AVANT de pousser (d'ici là
+      `/equipment` affiche le slug brut `adventure_license` pour les huit
+      objets), puis retirer la tolérance `adventure_license` de
+      `VALID_SHOPS` dans `datagen/generators/sources.test.ts`.
 
 ## 🛠️ Admin
 

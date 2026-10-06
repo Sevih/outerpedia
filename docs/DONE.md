@@ -112,15 +112,17 @@
   `st_atk` → 5, `brule` → Burned (×2), `UNCOUNTER` → la création. Visuel :
   rien d'autre ne change — JSX de l'en-tête et du tableau comparé ligne à
   ligne à l'ancien, seuls ajouts le champ et une ligne « No matching
-  effect. » quand rien ne reste. `pnpm typecheck` : sorti en 0, dernière
-  ligne l'écho de la commande, les trois `tsc --noEmit` (racine, `datagen`,
-  `scripts`), sans une erreur ; `pnpm lint` : sorti en 0, `$ eslint` ;
-  `pnpm test` : rouge au moment de rendre, `Tests 4 failed | 2661 passed
-(2665)` — les quatre échecs sont dans `datagen/extractor/`
-  (`core/changes.test.ts`, `review.test.ts`, seau `minor`), que modifie un
-  autre lot en cours dans le working tree ; ce dossier écarté
-  (`vitest run --exclude 'datagen/extractor/**'`), `Tests 2596 passed (2596)`
-  sur 186 fichiers. Rien de ces tests ne lit un fichier de
+  effect. » quand rien ne reste. `pnpm lint` : sorti en 0, `$ eslint`.
+  `pnpm typecheck` : sorti en 0 à la première passe (dernière ligne, l'écho
+  des trois `tsc --noEmit`), puis rouge au moment de rendre sur trois
+  erreurs, toutes dans les fichiers qu'un autre lot modifie en ce moment
+  dans le working tree partagé (`datagen/extractor/review.ts` TS2345,
+  `src/components/admin/ExtractorReview.tsx` TS2741 deux fois, `minor`
+  manquant) — aucune dans les quatre fichiers de ce lot. `pnpm test` : même
+  cause, `Tests 4 failed | 2661 passed (2665)`, les quatre échecs dans
+  `datagen/extractor/` (`core/changes.test.ts`, `review.test.ts`) ; ce
+  dossier écarté (`vitest run --exclude 'datagen/extractor/**'`),
+  `Tests 2596 passed (2596)` sur 186 fichiers, et ces tests ne lisent rien de
   celui-ci. Laissé : le filtrage n'a pas été joué dans un navigateur (pas de
   `pnpm dev` ni de navigateur côté agent) — à taper une fois ; la saisie
   n'est pas gardée dans l'URL, et le libellé du bouton « Créer un effet »
