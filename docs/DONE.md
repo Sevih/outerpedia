@@ -7,6 +7,21 @@
 
 ## 2026-10-06
 
+- **Relecture de B27 : 80 lots, aucun en attente** (Fable). `7a04538e`,
+  périmètre propre (17 fichiers, tree propre, aucun staging réel : les
+  fichiers d'`.assets-staging` datent d'avant). Typecheck, lint,
+  `Tests 2728 passed (2728)`. Équivalence du manifeste vérifiée autrement que
+  par son test : `pnpm assets:collect` rejoué, chaque domaine « n requis ·
+  n déjà là · 0 produits » (equipment 391, ui 637, characters 1652…) — la
+  refonte en `monsterAssetRequests`/`equipmentAssetRequests` ne demande ni
+  plus ni moins qu'avant. Choix de l'agent gardés : le staging restreint ne
+  dépose que ce que `buildAssetManifest()` demande aussi (sinon 212 vignettes
+  de monstres qu'aucune page ne sert partaient sur R2), et le compteur de la
+  sidebar suit le périmètre du site. Page des monstres lue sur un Next lancé
+  pour l'occasion (cases Diff/Minor, bloc « Apply minor changes »), que
+  l'agent n'avait pas pu voir. Contrôle en situation au prochain patch : item
+  🧪 du TODO (bilan d'images en fin de message, lignes `images : …` du
+  promote).
 - **Lot B27 : revue d'extraction — la classe « mineur » sur la page des
   monstres, et les images des monstres et de l'équipement modifiés** (Opus,
   lot B27 de `docs/lots-opus-2026-09-25.md` ; ce que F14 avait laissé). Le
