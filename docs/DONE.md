@@ -7,6 +7,125 @@
 
 ## 2026-10-06
 
+- **Admin, carte « Patch » : commiter et pousser sont deux gestes (lot B26)**
+  (Opus, demande de Sevih du 06/10). Le bouton « Publier les données » de B25
+  lançait `pnpm commit --msg … --bump … --yes`, donc contrôles, bump, push R2,
+  commit ET push git : un clic déployait. Il devient « Commiter » — même
+  formulaire, même revue `git status --short`, même route POST `commit`, mais
+  `publishArgs` (`src/lib/admin/patch-commands.ts`) ajoute `--no-push` : tout
+  se fait sauf le push git (les images partent toujours sur R2, c'est voulu),
+  et sa ligne de rappel dit que le commit reste local, sans déploiement.
+  Nouveau bouton « Pousser » dans `src/components/admin/PatchCard.tsx`, avec
+  sa route `src/app/api/admin/patch/push/route.dev.ts` (dev, 403 sinon,
+  NDJSON, même verrou). GET = la revue, `git log --oneline @{upstream}..HEAD`
+  : la carte compte les commits en avance (« N commit(s) en avance
+  partiront ») ou dit « rien à pousser », et « Confirmer le push » est alors
+  inactif. POST = le push, sans corps lu : la branche vient de
+  `git rev-parse --abbrev-ref HEAD` côté serveur, rien de la page n'entre
+  dans un argument. La séquence est celle de `commit.ts` — `git fetch origin
+<branche>`, `git rev-parse --verify origin/<branche>`, comparaison, puis
+  `git push --no-verify origin <branche>` — et une branche en retard rend
+  `done.ok=false` avec le compte et le remède (`git pull --rebase`), sans
+  lancer le push. `preflight` de `commit.ts` n'est pas réutilisable (le script
+  s'exécute à l'import et sort par `process.exit`) : la décision est une
+  fonction pure, `pushRefusal`, sur la sortie de
+  `git rev-list --left-right --count HEAD...origin/<branche>`
+  (`parseAheadBehind`), et l'enchaînement est `pushBranch` dans
+  `src/lib/admin/patch-runner.ts`, qui reçoit son lanceur en paramètre. Pour
+  cela `streamPatchCommand` est devenu un cas de `streamPatchJob` (un travail
+  = une fonction qui écrit dans le journal et lance ses commandes) : le
+  verrou, le flux et le `spawn` sans shell sont les mêmes, extraits, et les
+  deux routes de B25 passent par ce chemin. Comme `commit.ts`, origin
+  injoignable ou branche encore absente d'origin ne bloque pas (« rien à
+  comparer », le push rend son propre échec). Trois choix à moi, à relire :
+  (1) une comparaison ILLISIBLE refuse le push, là où `commit.ts` la lit comme
+  « à jour » — pousser déploie ; (2) un HEAD détaché, ou un nom de branche à
+  tiret de tête ou à espace, est refusé avant toute commande ; (3) un POST
+  avec zéro commit en avance n'est pas refusé côté serveur (seul le bouton
+  est inactif) : `git push` répond « Everything up-to-date ». Joué, sans
+  effet : `pnpm commit --dry-run --msg "test(admin): essai" --bump patch
+--yes --no-push` au terminal (pré-vol « à jour » deux fois, 1.7.4 → 1.7.5
+  annoncé, étape du push : « [no-push] pas de push. », HEAD et `package.json`
+  intacts) ; sur le serveur de :3000, GET `push` (200, l'écho puis `done ok`,
+  zéro commit en avance ce jour — `main` est à jour, donc le cas « rien à
+  pousser »), GET `commit` (202 lignes, comme `git status --short`), GET
+  `promote` (dry-run, 64 identiques / 1 différent), POST `commit` sans
+  préfixe (400, rien lancé), et `/admin` relu par `curl` (« Commiter »,
+  « Pousser », plus de « Publier les données »). Le POST `push` n'a tourné
+  QUE sur un lanceur factice, dans les tests : ordre des cinq commandes et
+  branche injectée, en retard → refus sans push, comparaison en échec, HEAD
+  détaché, origin injoignable, branche absente d'origin, `git` introuvable.
+  Aucun `git push`, aucun `pnpm commit` réel, aucun `--apply`. Tests des deux
+  fichiers : 46 (27 avant), dont les arguments du commit avec `--no-push`.
+  Lint : `$ eslint`, sortie 0. Typecheck et suite complète ne sont PAS verts
+  dans le working tree partagé, par le lot F14 en cours et non par ce lot :
+  `tsc` s'arrête sur `src/lib/admin/admin-inbox.ts(45,7): error TS2741`
+  (`minor` manquant dans `DiffBuckets`, seule erreur des trois projets) et
+  `pnpm test` rend `Tests 4 failed | 2661 passed (2665)`, les quatre dans
+  `datagen/extractor/` (`review.test.ts`, `core/changes.test.ts`). NON
+  vérifié : la carte dans un navigateur (aucun clic), le POST `push` réel et
+  le POST `commit` réel (interdits au lot), le cas « N commits en avance »
+  sur le serveur (rien n'était en avance), Windows. Laissé : l'en-tête de
+  `commit.ts` dit encore que l'accueil « lance la publication » (hors
+  périmètre) ; la revue du GET lit la référence de suivi LOCALE, sans
+  `fetch` (c'est le POST qui rafraîchit) ; `git fetch`/`git push` héritent
+  du terminal du serveur, sans `GIT_TERMINAL_PROMPT=0` — un identifiant
+  demandé y attendrait. L'item de `docs/TODO.md`, jamais commité, est retiré
+  dans le working tree ; le fichier n'est PAS dans ce commit — son seul
+  écart restant est le paragraphe A27, qui n'est pas à moi.
+
+- **Admin, liste des effets : recherche par nom (lot A26)** (Opus). Retour de
+  Sevih du 06/10 : dans `/admin/editor/effects`, plus de deux cents effets
+  rangés par paires buff/debuff et un seul filtre (`?filter=no-desc`) — pour
+  en retrouver un, il fallait faire défiler. Un champ de recherche est posé
+  entre l'en-tête et le tableau et filtre au fil de la frappe, sans
+  rechargement : un effet reste s'il contient la saisie dans son `id`, dans
+  l'une de ses clés éditoriales ou dans son nom, quelle que soit la langue,
+  casse et accents repliés. Une paire reste entière dès qu'un de ses deux
+  membres correspond (on cherche un effet, on veut voir son miroir) ; les
+  deux colonnes « No mirror » se filtrent chacune de son côté. Les compteurs
+  d'en-tête (effets, statuses / mechanics / creations, curated, no name) et
+  « No mirror (N) » comptent ce qui est affiché, miroir gardé compris ; le
+  nombre du lien « no description » reste le total, puisqu'il annonce ce que
+  le filtre montrera. Comment : la page (`page.dev.tsx`) reste un composant
+  serveur — elle lit (`getMergedEffects`), applique `no-desc`, apparie et
+  trie comme avant, puis passe des lignes sérialisables au nouveau composant
+  client `src/components/admin/EffectsCatalog.tsx`, qui porte l'en-tête, le
+  champ et le tableau (la cellule y est déplacée telle quelle). `no-desc`
+  s'applique donc AVANT la recherche et les deux se combinent ; pas de route
+  API. `MergedEffect` ne porte pas de `keys`, contrairement à ce que disait
+  le lot : la page les reconstitue par id depuis `liveEffectSources()` —
+  l'index généré `effectByKey` des deux côtés (les `BT_*`) plus les `keys`
+  curées — sans toucher à `effects.ts`. La correspondance est pure, dans
+  `src/lib/admin/effect-search.ts` : `effectHaystack` (le serveur y
+  normalise une fois id, clés et noms, un champ par ligne),
+  `effectMatches`, `filterEffectCatalog` ; la normalisation est
+  `normalizeSearchText`, celle de la palette du site. Vérification :
+  `effect-search.test.ts`, 11 tests (casse, accents dans la saisie comme
+  dans le nom, clé `BT_*` entière ou en morceau, noms jp/kr/zh, id, deux
+  champs voisins jamais recollés, paire gardée par un seul membre, colonnes
+  indépendantes, saisie vide). Page lue sur le serveur de dev de Sevih
+  (`curl` sur `:3000`) : 200, « 212 effects (188 statuses + 12 mechanics + 12
+  creations) · 42 curated », 212 lignes dans la charge utile ; avec
+  `?filter=no-desc`, « 8 effects », le filtre tient. Recherches rejouées sur
+  les bottes de foin servies : `priority` → 4 effets, `BT_ACTION_GAUGE` → 4,
+  `st_atk` → 5, `brule` → Burned (×2), `UNCOUNTER` → la création. Visuel :
+  rien d'autre ne change — JSX de l'en-tête et du tableau comparé ligne à
+  ligne à l'ancien, seuls ajouts le champ et une ligne « No matching
+  effect. » quand rien ne reste. `pnpm typecheck` : sorti en 0, dernière
+  ligne l'écho de la commande, les trois `tsc --noEmit` (racine, `datagen`,
+  `scripts`), sans une erreur ; `pnpm lint` : sorti en 0, `$ eslint` ;
+  `pnpm test` : rouge au moment de rendre, `Tests 4 failed | 2661 passed
+(2665)` — les quatre échecs sont dans `datagen/extractor/`
+  (`core/changes.test.ts`, `review.test.ts`, seau `minor`), que modifie un
+  autre lot en cours dans le working tree ; ce dossier écarté
+  (`vitest run --exclude 'datagen/extractor/**'`), `Tests 2596 passed (2596)`
+  sur 186 fichiers. Rien de ces tests ne lit un fichier de
+  celui-ci. Laissé : le filtrage n'a pas été joué dans un navigateur (pas de
+  `pnpm dev` ni de navigateur côté agent) — à taper une fois ; la saisie
+  n'est pas gardée dans l'URL, et le libellé du bouton « Créer un effet »
+  reste en français au milieu d'une page anglaise (`NewEffectForm`, hors
+  périmètre).
 - **Relecture de B25 : carte « Patch » de l'accueil admin** (Fable). Lot 73,
   `bae54e94`, périmètre propre (onze fichiers, rien des fichiers du patch en
   cours dans le working tree), entrée DONE complète, TODO nettoyé. Rejoué à

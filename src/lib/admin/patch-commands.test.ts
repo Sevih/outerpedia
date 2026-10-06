@@ -1,17 +1,27 @@
 /**
  * Contrat du côté PUR des gestes « patch » de l'accueil admin : ce qui sépare
- * une saisie de la page d'un argument de `pnpm commit`. Aucune commande n'est
- * lancée ici — la publication pousse R2 et `main`.
+ * une saisie de la page d'un argument de `pnpm commit`, et la décision du
+ * pré-vol avant le push. Aucune commande n'est lancée ici — le commit pousse
+ * R2, le push déploie.
  */
 import { describe, expect, it } from 'vitest';
 import {
   COMMIT_MESSAGE_MAX,
+  CURRENT_BRANCH_ARGS,
+  PUSH_REVIEW_ARGS,
   commitMessageError,
   createLineSplitter,
   isBump,
+  parseAheadBehind,
   parseBumpFlag,
   parsePublishRequest,
   publishArgs,
+  pushArgs,
+  pushBranchError,
+  pushCompareArgs,
+  pushFetchArgs,
+  pushRefusal,
+  pushVerifyArgs,
   stripAnsi,
 } from './patch-commands';
 
@@ -99,7 +109,87 @@ describe('publishArgs', () => {
       '--bump',
       'patch',
       '--yes',
+      '--no-push',
     ]);
+  });
+
+  it('ne pousse jamais : --no-push part quel que soit le bump', () => {
+    for (const bump of ['patch', 'minor', 'major'] as const)
+      expect(publishArgs({ message: 'chore(data): patch', bump })).toContain('--no-push');
+  });
+});
+
+describe('arguments du push', () => {
+  it('lit la branche et la revue sans rien recevoir', () => {
+    expect(CURRENT_BRANCH_ARGS).toEqual(['rev-parse', '--abbrev-ref', 'HEAD']);
+    expect(PUSH_REVIEW_ARGS).toEqual(['log', '--oneline', '@{upstream}..HEAD']);
+  });
+
+  it('injecte la branche d’UNE pièce dans chaque commande', () => {
+    expect(pushFetchArgs('main')).toEqual(['fetch', 'origin', 'main']);
+    expect(pushVerifyArgs('main')).toEqual(['rev-parse', '--verify', 'origin/main']);
+    expect(pushCompareArgs('main')).toEqual([
+      'rev-list',
+      '--left-right',
+      '--count',
+      'HEAD...origin/main',
+    ]);
+    expect(pushArgs('main')).toEqual(['push', '--no-verify', 'origin', 'main']);
+    expect(pushArgs('feat/admin-auth')).toEqual([
+      'push',
+      '--no-verify',
+      'origin',
+      'feat/admin-auth',
+    ]);
+  });
+});
+
+describe('pushBranchError', () => {
+  it('accepte un nom de branche', () => {
+    for (const branch of ['main', 'feat/admin-auth', 'fix-1.7.4'])
+      expect(pushBranchError(branch)).toBeNull();
+  });
+
+  it('refuse un HEAD détaché ou une sortie vide', () => {
+    for (const branch of ['', 'HEAD']) expect(pushBranchError(branch)).toMatch(/HEAD détaché/);
+  });
+
+  it('refuse ce que git lirait comme une option ou comme deux arguments', () => {
+    for (const branch of ['--force', '-f', 'main --force', 'main\nautre'])
+      expect(pushBranchError(branch)).toMatch(/refusé/);
+  });
+});
+
+describe('parseAheadBehind', () => {
+  it('lit « en avance, en retard » de git rev-list --left-right --count', () => {
+    expect(parseAheadBehind('42\t0\n')).toEqual({ ahead: 42, behind: 0 });
+    expect(parseAheadBehind('0\t3')).toEqual({ ahead: 0, behind: 3 });
+    expect(parseAheadBehind('1 2')).toEqual({ ahead: 1, behind: 2 });
+  });
+
+  it('rend null sur toute autre sortie', () => {
+    for (const out of ['', '42', 'fatal: bad revision', '1\t2\t3', '-1\t0'])
+      expect(parseAheadBehind(out)).toBeNull();
+  });
+});
+
+describe('pushRefusal (pré-vol de commit.ts)', () => {
+  it('laisse partir une branche à jour, en avance ou non', () => {
+    expect(pushRefusal('main', '42\t0\n')).toBeNull();
+    expect(pushRefusal('main', '0\t0\n')).toBeNull();
+  });
+
+  it('refuse une branche en retard, avec le compte et le remède', () => {
+    const refusal = pushRefusal('main', '2\t3\n');
+    expect(refusal).toMatch(/origin\/main a 3 commit\(s\)/);
+    expect(refusal).toMatch(/rien n'a été poussé/);
+    expect(refusal).toMatch(/git pull --rebase origin main/);
+    expect(pushRefusal('main', '0\t1')).toMatch(/1 commit\(s\)/);
+  });
+
+  it('refuse quand la comparaison est illisible', () => {
+    for (const out of ['', 'fatal: bad revision'])
+      expect(pushRefusal('main', out)).toMatch(/illisible — rien n'a été poussé/);
   });
 });
 

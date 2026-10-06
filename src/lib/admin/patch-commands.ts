@@ -1,7 +1,8 @@
 /**
- * Les deux gestes « patch » de l'accueil admin — promouvoir l'extraction
- * (`pnpm datagen:promote`) et publier (`pnpm commit`) — côté PUR : ce que la
- * page, les routes et `scripts/commit.ts` doivent dire de la même façon.
+ * Les trois gestes « patch » de l'accueil admin — promouvoir l'extraction
+ * (`pnpm datagen:promote`), commiter (`pnpm commit --no-push`) et pousser
+ * (`git push`) — côté PUR : ce que la page, les routes et `scripts/commit.ts`
+ * doivent dire de la même façon.
  *
  * Aucun import Node ici : le composant client valide le message avec la même
  * fonction que la route, et `commit.ts` lit `--bump` avec le même parseur. Le
@@ -66,13 +67,13 @@ export function commitMessageError(message: unknown): string | null {
   return null;
 }
 
-/** Une publication demandée par la page, validée. */
+/** Un commit demandé par la page, validé. */
 export interface PublishRequest {
   message: string;
   bump: Bump;
 }
 
-/** Valide le corps du POST de publication : la demande, ou le motif du refus. */
+/** Valide le corps du POST de commit : la demande, ou le motif du refus. */
 export function parsePublishRequest(
   body: unknown,
 ): { ok: true; request: PublishRequest } | { ok: false; error: string } {
@@ -85,7 +86,11 @@ export function parsePublishRequest(
   return { ok: true, request: { message: message as string, bump } };
 }
 
-/** Arguments de `pnpm` pour une publication — un élément par argument, jamais une chaîne. */
+/**
+ * Arguments de `pnpm` pour le commit — un élément par argument, jamais une
+ * chaîne. `--no-push` : `commit.ts` fait tout (contrôles, bump, images sur R2,
+ * commit) SAUF le push git, qui déploie et reste un geste à part (`pushArgs`).
+ */
 export const publishArgs = ({ message, bump }: PublishRequest): string[] => [
   'commit',
   '--msg',
@@ -93,7 +98,69 @@ export const publishArgs = ({ message, bump }: PublishRequest): string[] => [
   '--bump',
   bump,
   '--yes',
+  '--no-push',
 ];
+
+/**
+ * Le push, commande par commande (arguments de `git`). La branche vient de
+ * `CURRENT_BRANCH_ARGS`, lue par le SERVEUR : rien de la page n'entre ici.
+ */
+export const CURRENT_BRANCH_ARGS: readonly string[] = ['rev-parse', '--abbrev-ref', 'HEAD'];
+
+/** La revue avant le push : les commits locaux en avance sur la branche suivie. */
+export const PUSH_REVIEW_ARGS: readonly string[] = ['log', '--oneline', '@{upstream}..HEAD'];
+
+export const pushFetchArgs = (branch: string): string[] => ['fetch', 'origin', branch];
+
+export const pushVerifyArgs = (branch: string): string[] => [
+  'rev-parse',
+  '--verify',
+  `origin/${branch}`,
+];
+
+/** Rend « <en avance>\t<en retard> », lu par `parseAheadBehind`. */
+export const pushCompareArgs = (branch: string): string[] => [
+  'rev-list',
+  '--left-right',
+  '--count',
+  `HEAD...origin/${branch}`,
+];
+
+/** `--no-verify` comme `commit.ts` : les contrôles ont tourné avant le commit. */
+export const pushArgs = (branch: string): string[] => ['push', '--no-verify', 'origin', branch];
+
+/**
+ * Motif du refus d'une branche à pousser, ou `null`. `HEAD` est ce que
+ * `git rev-parse --abbrev-ref` rend sur un HEAD détaché ; le tiret de tête
+ * ferait lire le nom comme une option par `git`.
+ */
+export function pushBranchError(branch: string): string | null {
+  if (!branch || branch === 'HEAD') return 'aucune branche courante (HEAD détaché ?).';
+  if (branch.startsWith('-') || /\s/.test(branch)) return `nom de branche refusé : « ${branch} ».`;
+  return null;
+}
+
+/** Lit la sortie de `git rev-list --left-right --count HEAD...origin/<branche>`. */
+export function parseAheadBehind(output: string): { ahead: number; behind: number } | null {
+  const m = output.trim().match(/^(\d+)\s+(\d+)$/);
+  return m ? { ahead: Number(m[1]), behind: Number(m[2]) } : null;
+}
+
+/**
+ * Le pré-vol de `commit.ts`, côté décision : motif du refus de pousser, ou
+ * `null`. Une branche EN RETARD sur origin ne part pas — le push serait refusé
+ * de toute façon, autant le dire avant, avec le remède. Une sortie illisible
+ * refuse aussi : pousser déploie, on ne part pas sans avoir pu comparer.
+ */
+export function pushRefusal(branch: string, revList: string): string | null {
+  const counts = parseAheadBehind(revList);
+  if (!counts) return `comparaison avec origin/${branch} illisible — rien n'a été poussé.`;
+  if (!counts.behind) return null;
+  return (
+    `origin/${branch} a ${counts.behind} commit(s) que tu n'as pas — rien n'a été poussé. ` +
+    `Intègre-les (git pull --rebase origin ${branch}), puis relance.`
+  );
+}
 
 /**
  * Une ligne du flux NDJSON des routes `/api/admin/patch/*` : une ligne de
@@ -101,6 +168,9 @@ export const publishArgs = ({ message, bump }: PublishRequest): string[] => [
  */
 export type PatchEvent =
   { line: string } | { done: { ok: boolean; code?: number | null; error?: string } };
+
+/** L'issue d'un travail : le contenu de la ligne `done`. */
+export type PatchDone = Extract<PatchEvent, { done: unknown }>['done'];
 
 const ANSI = /\u001b\[[0-9;?]*[ -/]*[@-~]/g;
 

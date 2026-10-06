@@ -1,24 +1,37 @@
 /**
  * LANCEMENT des gestes « patch » de l'accueil admin (dev uniquement) : une
- * commande du dépôt, sa sortie relayée ligne à ligne en NDJSON — même principe
- * que `stream()` de `scripts/quick/server.ts`, en `ReadableStream`.
+ * commande du dépôt (ou, pour le push, une courte séquence), sa sortie relayée
+ * ligne à ligne en NDJSON — même principe que `stream()` de
+ * `scripts/quick/server.ts`, en `ReadableStream`.
  *
  * Trois garanties :
  *  - PAS de shell : la commande et ses arguments vont tels quels à `spawn`, rien
  *    de ce qui vient de la page n'est interpolé dans une chaîne ;
  *  - UN SEUL travail à la fois (`acquirePatchJob`) : la promotion réécrit
- *    `data/generated`, la publication le lit, le committe et le pousse ;
+ *    `data/generated`, le commit le lit et l'enregistre, le push l'envoie ;
  *  - un travail lancé VA AU BOUT : fermer l'onglet ne le tue pas. Couper
  *    `pnpm commit` entre le push R2 et le push git laisserait la prod servir
  *    des images que le dépôt n'enregistre pas (cf. `preflight` de `commit.ts`).
  */
 import { spawn } from 'node:child_process';
-import { createLineSplitter, stripAnsi, type PatchEvent } from './patch-commands';
+import {
+  CURRENT_BRANCH_ARGS,
+  createLineSplitter,
+  pushArgs,
+  pushBranchError,
+  pushCompareArgs,
+  pushFetchArgs,
+  pushRefusal,
+  pushVerifyArgs,
+  stripAnsi,
+  type PatchDone,
+  type PatchEvent,
+} from './patch-commands';
 
 /**
  * Le verrou vit sur `globalThis` : en dev, Next recharge les modules à chaud et
  * compile chaque route à part — une variable de module serait remise à zéro, ou
- * dédoublée entre `promote` et `commit`, pendant qu'un travail tourne.
+ * dédoublée entre `promote`, `commit` et `push`, pendant qu'un travail tourne.
  */
 const SLOT = Symbol.for('outerpedia.admin.patch-job');
 const slot = globalThis as unknown as Record<symbol, string | undefined>;
@@ -77,12 +90,64 @@ export interface PatchCommand {
   args: string[];
 }
 
+/** Ce qu'une commande lancée a rendu : son code de sortie et sa sortie standard. */
+export interface LaunchResult {
+  /** `null` si la commande n'a pas pu être lancée (cf. `error`) ou a été tuée. */
+  code: number | null;
+  stdout: string;
+  error?: string;
+}
+
 /**
- * Lance la commande à la racine du dépôt, avec l'environnement du serveur, et
- * rend sa sortie (stdout et stderr mêlés) en flux NDJSON, close par `done`.
- * Un travail déjà en cours → 409, rien n'est lancé.
+ * Lance UNE commande et attend sa fin. Le vrai lanceur (`spawnLauncher`) relaie
+ * aussi la sortie dans le journal ; les tests en injectent un factice.
  */
-export function streamPatchCommand({ label, display, command, args }: PatchCommand): Response {
+export type PatchLauncher = (command: string, args: readonly string[]) => Promise<LaunchResult>;
+
+/** Un travail : il écrit dans le journal (`say`), lance ses commandes, rend l'issue. */
+export type PatchJob = (say: (line: string) => void, launch: PatchLauncher) => Promise<PatchDone>;
+
+const toDone = ({ code, error }: LaunchResult): PatchDone =>
+  error ? { ok: false, error } : { ok: code === 0, code };
+
+/**
+ * Le lanceur réel : `spawn` sans shell, à la racine du dépôt, avec
+ * l'environnement du serveur ; stdout et stderr vont, mêlés, dans le journal.
+ */
+const spawnLauncher =
+  (say: (line: string) => void): PatchLauncher =>
+  (command, args) =>
+    new Promise((resolve) => {
+      let stdout = '';
+      try {
+        const child = spawn(command, [...args], {
+          cwd: process.cwd(),
+          env: process.env,
+          shell: false,
+          stdio: ['ignore', 'pipe', 'pipe'],
+          windowsHide: true,
+        });
+        for (const out of [child.stdout, child.stderr]) {
+          const lines = createLineSplitter((line) => say(stripAnsi(line)));
+          out.setEncoding('utf8');
+          out.on('data', lines.push);
+          out.on('end', lines.flush);
+        }
+        child.stdout.on('data', (chunk: string) => {
+          stdout += chunk;
+        });
+        child.on('error', (e) => resolve({ code: null, stdout, error: e.message }));
+        child.on('close', (code) => resolve({ code, stdout }));
+      } catch (e) {
+        resolve({ code: null, stdout, error: (e as Error).message });
+      }
+    });
+
+/**
+ * Déroule `job` sous le verrou et rend son journal en flux NDJSON, clos par
+ * `done`. Un travail déjà en cours → 409, rien n'est lancé.
+ */
+function streamPatchJob(label: string, job: PatchJob): Response {
   const release = acquirePatchJob(label);
   if (!release) return refusePatchJob(`déjà en cours — ${runningPatchJob()}`, 409);
 
@@ -100,10 +165,7 @@ export function streamPatchCommand({ label, display, command, args }: PatchComma
           listening = false;
         }
       };
-      let finished = false;
-      const finish = (done: Extract<PatchEvent, { done: unknown }>['done']): void => {
-        if (finished) return;
-        finished = true;
+      const finish = (done: PatchDone): void => {
         release();
         send({ done });
         if (!listening) return;
@@ -114,26 +176,10 @@ export function streamPatchCommand({ label, display, command, args }: PatchComma
         }
       };
 
-      send({ line: `$ ${display}` });
-      try {
-        const child = spawn(command, args, {
-          cwd: process.cwd(),
-          env: process.env,
-          shell: false,
-          stdio: ['ignore', 'pipe', 'pipe'],
-          windowsHide: true,
-        });
-        for (const out of [child.stdout, child.stderr]) {
-          const lines = createLineSplitter((line) => send({ line: stripAnsi(line) }));
-          out.setEncoding('utf8');
-          out.on('data', lines.push);
-          out.on('end', lines.flush);
-        }
-        child.on('error', (e) => finish({ ok: false, error: e.message }));
-        child.on('close', (code) => finish({ ok: code === 0, code }));
-      } catch (e) {
-        finish({ ok: false, error: (e as Error).message });
-      }
+      const say = (line: string): void => send({ line });
+      job(say, spawnLauncher(say)).then(finish, (e: unknown) =>
+        finish({ ok: false, error: (e as Error).message }),
+      );
     },
     cancel() {
       listening = false;
@@ -141,3 +187,51 @@ export function streamPatchCommand({ label, display, command, args }: PatchComma
   });
   return new Response(body, { headers: HEADERS });
 }
+
+/**
+ * Lance la commande à la racine du dépôt, avec l'environnement du serveur, et
+ * rend sa sortie (stdout et stderr mêlés) en flux NDJSON, close par `done`.
+ * Un travail déjà en cours → 409, rien n'est lancé.
+ */
+export function streamPatchCommand({ label, display, command, args }: PatchCommand): Response {
+  return streamPatchJob(label, async (say, launch) => {
+    say(`$ ${display}`);
+    return toDone(await launch(command, args));
+  });
+}
+
+/**
+ * Le push, par la séquence de `commit.ts` : la branche courante, lue ICI, puis
+ * son pré-vol (`preflight` — non importable : `commit.ts` s'exécute à l'import
+ * et sort par `process.exit`), puis `git push`. Origin injoignable ou branche
+ * encore absente d'origin : rien à comparer, on pousse, comme `commit.ts` — le
+ * push dira lui-même ce qui ne va pas. Branche en retard : refus, rien ne part.
+ */
+export const pushBranch: PatchJob = async (say, launch) => {
+  const git = (args: readonly string[]): Promise<LaunchResult> => {
+    say(`$ git ${args.join(' ')}`);
+    return launch('git', args);
+  };
+
+  const head = await git(CURRENT_BRANCH_ARGS);
+  if (head.code !== 0)
+    return { ok: false, error: 'branche courante illisible — rien n’a été poussé.' };
+  const branch = head.stdout.trim();
+  const branchError = pushBranchError(branch);
+  if (branchError) return { ok: false, error: `${branchError} Rien n’a été poussé.` };
+
+  if ((await git(pushFetchArgs(branch))).code !== 0)
+    say(`origin/${branch} injoignable ou inexistant — rien à comparer.`);
+  else if ((await git(pushVerifyArgs(branch))).code !== 0)
+    say(`${branch} n'existe pas encore sur origin — rien à comparer.`);
+  else {
+    const refusal = pushRefusal(branch, (await git(pushCompareArgs(branch))).stdout);
+    if (refusal) return { ok: false, error: refusal };
+    say(`origin/${branch} : à jour.`);
+  }
+
+  return toDone(await git(pushArgs(branch)));
+};
+
+/** Le push en flux NDJSON, sous le même verrou que les autres gestes. */
+export const streamPatchPush = (): Response => streamPatchJob('push de la branche', pushBranch);

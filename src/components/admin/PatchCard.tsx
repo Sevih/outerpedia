@@ -7,10 +7,10 @@ import {
   COMMIT_MESSAGE_MAX,
   commitMessageError,
   type Bump,
+  type PatchDone,
   type PatchEvent,
 } from '@/lib/admin/patch-commands';
 
-type Done = Extract<PatchEvent, { done: unknown }>['done'];
 type Outcome = { ok: boolean; text: string };
 
 const btn =
@@ -21,16 +21,20 @@ const field =
   'border-line-subtle bg-surface text-content rounded-md border px-2 py-2 text-sm disabled:opacity-50';
 
 /**
- * Les deux gestes de fin de patch, lancés de l'accueil au lieu du terminal :
- * promouvoir l'extraction (`pnpm datagen:promote --apply`) et publier
- * (`pnpm commit`). Chacun montre d'abord ce qu'il fera — le dry-run de la
- * promotion, la liste de `git status` — et ne part qu'après confirmation. La
- * sortie de la commande défile dans le journal (NDJSON, cf. `patch-runner`).
+ * Les trois gestes de fin de patch, lancés de l'accueil au lieu du terminal :
+ * promouvoir l'extraction (`pnpm datagen:promote --apply`), commiter
+ * (`pnpm commit --no-push` : R2 compris, sans push git) et pousser (`git push`,
+ * qui déploie). Chacun montre d'abord ce qu'il fera — le dry-run de la
+ * promotion, la liste de `git status`, les commits en avance — et ne part
+ * qu'après confirmation. La sortie de la commande défile dans le journal
+ * (NDJSON, cf. `patch-runner`).
  */
 export function PatchCard() {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
-  const [pending, setPending] = useState<'promote' | 'commit' | null>(null);
+  const [pending, setPending] = useState<'promote' | 'commit' | 'push' | null>(null);
+  // Commits locaux en avance, comptés à la revue du push.
+  const [ahead, setAhead] = useState(0);
   const [lines, setLines] = useState<string[]>([]);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [message, setMessage] = useState('');
@@ -56,7 +60,7 @@ export function PatchCard() {
     setOutcome(null);
     setLines([]);
     const out: string[] = [];
-    let done: Done | null = null;
+    let done: PatchDone | null = null;
     try {
       const res = await fetch(url, init);
       if (!res.body) throw new Error('réponse sans corps');
@@ -87,7 +91,7 @@ export function PatchCard() {
     } catch (e) {
       done = { ok: false, error: (e as Error).message };
     }
-    const result: Done = done ?? { ok: false, error: 'réponse interrompue' };
+    const result: PatchDone = done ?? { ok: false, error: 'réponse interrompue' };
     setOutcome({
       ok: result.ok,
       text: result.ok
@@ -124,13 +128,31 @@ export function PatchCard() {
     setPending('commit');
   }
 
-  async function publish() {
+  async function commit() {
     const { ok } = await run('/api/admin/patch/commit', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ message: trimmed, bump }),
     });
     if (ok) router.refresh();
+  }
+
+  async function previewPush() {
+    const { ok, out } = await run('/api/admin/patch/push');
+    if (!ok) return;
+    // `out[0]` est l'écho de la commande ; le reste, une ligne par commit.
+    const commits = out.slice(1).filter((l) => l.trim()).length;
+    setOutcome({
+      ok: true,
+      text: commits ? `${commits} commit(s) en avance partiront` : 'rien à pousser',
+    });
+    setAhead(commits);
+    setPending('push');
+  }
+
+  // Aucun corps : la branche poussée est celle du dépôt, lue par le serveur.
+  async function push() {
+    await run('/api/admin/patch/push', { method: 'POST' });
   }
 
   const locked = busy || pending !== null;
@@ -178,14 +200,24 @@ export function PatchCard() {
             onClick={previewCommit}
             disabled={locked || !trimmed || messageError !== null}
           >
-            Publier les données
+            Commiter
           </button>
         </div>
         {messageError && <p className="text-danger text-xs">{messageError}</p>}
         <p className="text-content-subtle text-xs">
-          Publier = <code>pnpm commit</code> : contrôles, images poussées sur R2, puis commit et
-          push de <code>main</code> — donc déploiement de la prod.
+          Commiter = <code>pnpm commit --no-push</code> : contrôles, images poussées sur R2, puis
+          commit enregistré en local — rien n&apos;est déployé.
         </p>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="button" className={btn} onClick={previewPush} disabled={locked}>
+          Pousser
+        </button>
+        <span className="text-content-subtle min-w-0 flex-1 basis-64 text-xs">
+          <code>git push</code> — les commits en avance s&apos;affichent d&apos;abord. Pousser{' '}
+          <code>main</code> = déployer la prod.
+        </span>
       </div>
 
       {pending === 'promote' && (
@@ -205,11 +237,27 @@ export function PatchCard() {
       {pending === 'commit' && (
         <div className="border-danger/40 flex flex-wrap items-center gap-3 rounded-md border p-3">
           <span className="text-content min-w-0 flex-1 basis-64 text-sm">
-            Tout ce qui est listé ci-dessous part avec « {trimmed} » (bump {bump}), sur R2 puis sur{' '}
-            <code>main</code> : la prod se déploie.
+            Tout ce qui est listé ci-dessous part avec « {trimmed} » (bump {bump}) : images sur R2,
+            commit en local. Rien n&apos;est poussé, la prod ne bouge pas.
           </span>
-          <button type="button" className={btn} onClick={publish}>
-            Confirmer la publication
+          <button type="button" className={btn} onClick={commit}>
+            Confirmer le commit
+          </button>
+          <button type="button" className={ghost} onClick={() => setPending(null)}>
+            Annuler
+          </button>
+        </div>
+      )}
+      {pending === 'push' && (
+        <div className="border-danger/40 flex flex-wrap items-center gap-3 rounded-md border p-3">
+          <span className="text-content min-w-0 flex-1 basis-64 text-sm">
+            {ahead
+              ? `Les ${ahead} commit(s) listés ci-dessous partent sur origin. `
+              : 'Rien à pousser : aucun commit local en avance. '}
+            Pousser <code>main</code> = déployer la prod.
+          </span>
+          <button type="button" className={btn} onClick={push} disabled={ahead === 0}>
+            Confirmer le push
           </button>
           <button type="button" className={ghost} onClick={() => setPending(null)}>
             Annuler

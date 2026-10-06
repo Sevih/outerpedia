@@ -1,14 +1,19 @@
 /**
- * Contrat du verrou « un seul travail à la fois » et du lancement de pnpm sans
- * shell. Aucune commande n'est lancée : `streamPatchCommand` n'est exercé que
- * sur son REFUS, qui rend la main avant tout `spawn`.
+ * Contrat du verrou « un seul travail à la fois », du lancement de pnpm sans
+ * shell et de la séquence du push. Aucune commande n'est lancée :
+ * `streamPatchCommand` et `streamPatchPush` ne sont exercés que sur leur REFUS,
+ * qui rend la main avant tout `spawn`, et `pushBranch` sur un lanceur factice.
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   acquirePatchJob,
   pnpmInvocation,
+  pushBranch,
   runningPatchJob,
   streamPatchCommand,
+  streamPatchPush,
+  type LaunchResult,
+  type PatchLauncher,
 } from './patch-runner';
 
 describe('acquirePatchJob', () => {
@@ -61,6 +66,102 @@ describe('acquirePatchJob', () => {
     });
     // Le refus n'a ni pris ni rendu le verrou du travail en cours.
     expect(runningPatchJob()).toBe('promotion de l’extraction');
+  });
+
+  it('streamPatchPush passe par le même verrou : 409 pendant un commit', async () => {
+    take('commit des données');
+    const res = streamPatchPush();
+    expect(res.status).toBe(409);
+    expect(JSON.parse(await res.text())).toEqual({
+      done: { ok: false, error: 'déjà en cours — commit des données' },
+    });
+    expect(runningPatchJob()).toBe('commit des données');
+  });
+});
+
+describe('pushBranch (lanceur factice)', () => {
+  const ok = (stdout = ''): LaunchResult => ({ code: 0, stdout });
+  const ko = (code = 1): LaunchResult => ({ code, stdout: '' });
+
+  /** Rejoue les réponses dans l'ordre et note chaque commande demandée. */
+  const fake = (...answers: LaunchResult[]) => {
+    const calls: string[] = [];
+    const said: string[] = [];
+    const launch: PatchLauncher = async (command, args) => {
+      calls.push([command, ...args].join(' '));
+      const answer = answers.shift();
+      if (!answer) throw new Error(`commande inattendue : ${calls.at(-1)}`);
+      return answer;
+    };
+    return { calls, said, run: () => pushBranch((line) => said.push(line), launch) };
+  };
+
+  it('branche à jour : pré-vol puis push de la branche lue par git', async () => {
+    const { calls, said, run } = fake(ok('main\n'), ok(), ok('abc123\n'), ok('42\t0\n'), ok());
+    expect(await run()).toEqual({ ok: true, code: 0 });
+    expect(calls).toEqual([
+      'git rev-parse --abbrev-ref HEAD',
+      'git fetch origin main',
+      'git rev-parse --verify origin/main',
+      'git rev-list --left-right --count HEAD...origin/main',
+      'git push --no-verify origin main',
+    ]);
+    // Le journal fait écho à chaque commande, et dit l'issue du pré-vol.
+    expect(said.filter((l) => l.startsWith('$ '))).toEqual(calls.map((c) => `$ ${c}`));
+    expect(said).toContain('origin/main : à jour.');
+  });
+
+  it('branche en retard : refus motivé, le push n’est jamais lancé', async () => {
+    const { calls, run } = fake(ok('main\n'), ok(), ok('abc123\n'), ok('2\t3\n'));
+    const done = await run();
+    expect(done.ok).toBe(false);
+    expect(done.error).toMatch(/origin\/main a 3 commit\(s\).*rien n'a été poussé/);
+    expect(calls.some((c) => c.startsWith('git push'))).toBe(false);
+  });
+
+  it('comparaison en échec : refus, le push n’est jamais lancé', async () => {
+    const { calls, run } = fake(ok('main\n'), ok(), ok('abc123\n'), ko(128));
+    const done = await run();
+    expect(done).toMatchObject({ ok: false });
+    expect(done.error).toMatch(/illisible/);
+    expect(calls).toHaveLength(4);
+  });
+
+  it('HEAD détaché ou branche illisible : rien n’est lancé après la lecture', async () => {
+    const detached = fake(ok('HEAD\n'));
+    expect(await detached.run()).toMatchObject({ ok: false });
+    expect(detached.calls).toEqual(['git rev-parse --abbrev-ref HEAD']);
+
+    const unreadable = fake(ko(128));
+    expect((await unreadable.run()).error).toMatch(/branche courante illisible/);
+    expect(unreadable.calls).toHaveLength(1);
+  });
+
+  it('origin injoignable : rien à comparer, le push part et rend son propre échec', async () => {
+    const { calls, said, run } = fake(ok('main\n'), ko(128), ko(128));
+    expect(await run()).toEqual({ ok: false, code: 128 });
+    expect(calls).toEqual([
+      'git rev-parse --abbrev-ref HEAD',
+      'git fetch origin main',
+      'git push --no-verify origin main',
+    ]);
+    expect(said).toContain('origin/main injoignable ou inexistant — rien à comparer.');
+  });
+
+  it('branche absente d’origin : rien à comparer, le push la crée', async () => {
+    const { calls, run } = fake(ok('feat/x\n'), ok(), ko(128), ok());
+    expect(await run()).toEqual({ ok: true, code: 0 });
+    expect(calls.at(-1)).toBe('git push --no-verify origin feat/x');
+    expect(calls.some((c) => c.includes('rev-list'))).toBe(false);
+  });
+
+  it('git introuvable au push : l’erreur du lancement remonte', async () => {
+    const { run } = fake(ok('main\n'), ok(), ok('abc123\n'), ok('1\t0\n'), {
+      code: null,
+      stdout: '',
+      error: 'spawn git ENOENT',
+    });
+    expect(await run()).toEqual({ ok: false, error: 'spawn git ENOENT' });
   });
 });
 
