@@ -151,6 +151,32 @@ describe('effectVerdict — servi entier, ou pas servi', () => {
     expect(effectVerdict(ARRIVING, table, [`${ARRIVING}/autre — motif`]).kind).toBe('held');
   });
 
+  it('un calque de cadre à feuille UV — le cas `_Synchro` — met l’effet en attente', () => {
+    // Une planche 5×5 à tuile tirée par particule, sur une MAILLE : le montage
+    // n'a ni tirage ni tuile pour un calque de cadre, il la rendrait entière.
+    let layer = '';
+    const table = arrival((t) => {
+      const e = t.effects[ARRIVING].emitters.find((x) => x.active && x.renderMode === 4)!;
+      layer = e.name;
+      e.textureSheet = {
+        mode: 0,
+        timeMode: 0,
+        tilesX: 5,
+        tilesY: 5,
+        frameOverTime: { minMaxState: 3, scalar: 0, minScalar: 0.9999 },
+        startFrame: { minMaxState: 0, scalar: 0, minScalar: 0 },
+        animationType: 0,
+        rowMode: 1,
+      };
+    });
+    expect(effectVerdict(ARRIVING, table)).toEqual({
+      kind: 'held',
+      reasons: [
+        `${ARRIVING}/${layer} — ${layer} : calque de cadre non transcrit — feuille UV 5×5 sur un calque de cadre`,
+      ],
+    });
+  });
+
   it('un trou de l’extraction (matériau absent de la table) met aussi en attente', () => {
     const table = arrival((t) => {
       t.effects[ARRIVING].emitters.find((e) => e.active)!.material = 'M_Absent';

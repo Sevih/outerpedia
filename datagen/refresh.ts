@@ -297,7 +297,7 @@ export function genSteps(o: { apply: boolean; collect: boolean; force?: boolean 
     // un effet qui arrive avec un patch est extrait d'office. Surtout pas `--all` :
     // il sortirait aussi les prefabs qu'aucun perso ne porte, donc des textures
     // que le site ne sert pas. Hors pipeline jusqu'ici alors que sa sortie est COMMITTÉE :
-    // `manifest.ts` réclamait ses 38 textures sur TOUTES les machines, mais seule
+    // `manifest.ts` réclamait ses textures sur TOUTES les machines, mais seule
     // celle où on l'avait lancé à la main savait les produire (34 « sprite
     // introuvable » sur le portable, 14/08). Le `colorSpace` qu'il écrit vient
     // désormais du jeu installé (`datagen:dump`), et à défaut est PRÉSERVÉ — sans

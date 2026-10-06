@@ -4,8 +4,9 @@
  * `portrait-layout` porte la géométrie du portrait STATIQUE. Ce module-ci porte
  * le nœud que cette transcription laisse vide : `FX_Holder`, soit
  * `CUICharacterThumbnail.m_EffectHolder`. `SetEffect` y instancie un prefab dont
- * le NOM vient de `CharacterExtraTemplet.ThumbnailEffect` — 25 personnages sur
- * 124 en ont un, pour dix prefabs.
+ * le NOM vient de `CharacterExtraTemplet.ThumbnailEffect` — une minorité de
+ * personnages en ont un, pour une poignée de prefabs, et les deux comptes
+ * grandissent avec les patchs (`byCharacter` et `effects` de la table les disent).
  *
  * LA TABLE EST GÉNÉRÉE, pas écrite : `datagen/assets/extract-portrait-fx.py` la
  * tire des bundles. Elle n'a rien à faire en dur ici, contrairement aux rects de
@@ -109,7 +110,10 @@ export interface FxEmitter {
   startSpeed: number;
   startSpeedMin: number;
   startSpeedMode: number;
-  /** Rotation initiale du quad, radians, axe Z seul (`rotation3D` faux partout). */
+  /**
+   * Rotation initiale du quad, radians, axe Z seul — l'extraction écarte un
+   * effet dont `rotation3D` activerait X ou Y, que la fiche ne porte pas.
+   */
   startRotation: number;
   startRotationMin: number;
   startRotationMode: number;
@@ -204,7 +208,7 @@ export interface FxTable {
   colorSpace: 'linear' | 'gamma' | 'unknown';
   /** Rect résolu de `FX_Holder` dans le cadre, en coordonnées CSS. */
   holder: { x: number; y: number; w: number; h: number };
-  /** `CharacterID → nom d'effet`, les 25 lignes du jeu. */
+  /** `CharacterID → nom d'effet`, TOUTES les lignes du jeu — servies ou non. */
   byCharacter: Record<string, string>;
   effects: Record<string, { origin: [number, number]; emitters: FxEmitter[] }>;
   materials: Record<string, FxMaterial>;
@@ -238,8 +242,9 @@ export function fxNameOf(characterId: string): string | undefined {
  * devinerait d'un nom de propriété. Un matériau qui demanderait autre chose est
  * REFUSÉ plutôt que rendu de travers : c'est ce que dit `unsupportedKeywords`.
  *
- * Les huit effets restants en auront besoin (`_POLAR_UV_ON` et `_DISSOLVE_UV_ON`
- * notamment) ; ce sera le moment de relire les variantes correspondantes.
+ * Un effet qui arriverait avec une autre branche (`_POLAR_UV_ON`,
+ * `_DISSOLVE_UV_ON`…) se met en attente tout seul (`effectVerdict`) ; ce sera
+ * le moment de relire la variante correspondante.
  */
 export const SUPPORTED_KEYWORDS = new Set([
   '_MAIN_CONTRAST_ON',

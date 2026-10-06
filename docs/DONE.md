@@ -7,6 +7,146 @@
 
 ## 2026-10-06
 
+- **Lot F15 : portraits animés — les trous de « refuser plutôt que rendre de
+  travers » fermés (P7) et les compteurs périmés retirés (P9)** (Fable, lot
+  F15 de `docs/lots-opus-2026-09-25.md` ; solde P7 et P9 de
+  `docs/audit/portrait-fx.md`). Le pourquoi : depuis F12 un effet qui arrive
+  est servi dès que ses calques actifs passent `layerVerdict`, et P7 disait où
+  cette garde laissait passer des réglages que le moteur n'honore pas — un
+  calque-maille passait TOUJOURS, et `_Synchro` joué en simulation sortait «
+  servi » avec une feuille UV 5×5 à tuile tirée que la maille ne montre pas.
+  Le quoi, en cinq points. (1) GARDES DU MOTEUR (`portrait-fx-sim.ts`),
+  décidées réglage par réglage en relisant `prepare` et `draw` de
+  `portrait-fx-gl.ts`. Nouvelle `unsupportedFrameLayer` pour les calques de
+  cadre — maille ET calque-quad, que `layerVerdict` appelle une fois la
+  famille reconnue : refus sur la rotation du nœud (`uM` n'est qu'une
+  diagonale), un `startRotation` actif (valeur en état 0, l'une des bornes en
+  état 3, toute courbe — `startRotationMin` vaut 2π sur tous les calques du
+  jeu et ne compte pas en état 0), l'absence de ring buffer (`ringBufferMode ≠
+2` : la particule meurt, le montage dessine toujours — honoré à moitié, donc
+  refusé ; le commentaire de `frameAge` le dit désormais), une couleur tirée à
+  la naissance (`startColor` ou `colorOverLifetime` en mode 2, 3 ou 4 : le
+  montage rendrait le milieu du dégradé), et toute feuille UV (une maille n'a
+  pas de tuile — le cas `_Synchro`). `unsupportedBillboard` gagne :
+  `simulationSpeed ≠ 1` (le pas de temps l'ignore), les scalaires de départ en
+  état de courbe (`startLifetime`, `startSize`, `startSizeY` si `size3D`,
+  `startSpeed`, `startRotation` — `mmScalar` les prenait pour des constantes),
+  un BoxShell NON plat (le shell d'une boîte sans épaisseur est la boîte ;
+  celui d'une boîte pleine n'est que sa surface), la rotation de la forme
+  (`m_Rotation`), une feuille UV par rangée (`animationType ≠ 0`, rangée fixe
+  ou tirée non lue), un `startFrame` actif, un bruit qui défile (`scrollSpeed`
+  actif — l'approximation n° 1 suppose un champ statique). PAS de garde sur ce
+  que le moteur honore déjà : la rotation du nœud d'un billboard (quaternion
+  appliqué aux positions), `simulationSpeed` d'un calque de cadre (`frameAge`
+  divise la vie, le `_Time` du shader est l'horloge comme au jeu), les courbes
+  de `frameOverTime` et de `limitVelocity.magnitude` (`evalMinMaxCurve`), la
+  rotation sur la vie en états 0 et 3. (2) GARDES DE L'EXTRACTION
+  (`extract-portrait-fx.py`) : `check_flattened`, appelée par `read_emitter`,
+  lève sur ce que la fiche aplatirait en silence — `rateOverTime` hors état 0,
+  `rateOverDistance` actif, une rafale au compte en courbe ou tiré, ou à
+  probabilité < 1, `gravityModifier` hors état 0, `rotation3D` avec un axe X
+  ou Y actif (la fiche ne porte que Z), `randomizeRotationDirection`, et tout
+  module actif hors des dix que la fiche sait porter (`KNOWN_MODULES` : les
+  sept publiés bruts plus `InitialModule`, `EmissionModule`, `ColorModule`) ;
+  `extract` lève aussi sur un enfant du prefab qui a lui-même des enfants.
+  Toutes ces levées prennent le chemin posé par F12 : l'effet est écarté SEUL,
+  motif dans `notExtracted`, matériaux et mailles retirés, jamais une sortie
+  en erreur du refresh. (3) INVARIANT tenu : les dix effets restent `served` —
+  le test du relevé `portrait-fx-served.json` est vert SANS toucher au
+  fichier, et un test ajouté vérifie qu'aucun calque actif de la table n'est
+  refusé ; `pnpm datagen:portrait-fx` rejoué sur `.gamedata` :
+  `portrait-fx.json` absent du `git diff --stat` (sept fichiers de code, 376
+  insertions, 35 suppressions, la table n'a pas bougé d'un octet). (4) TESTS :
+  une fiche factice par garde — huit cas de plus sur `unsupportedBillboard`,
+  neuf sur `unsupportedFrameLayer` (dont la planche 5×5 à tuile tirée), deux
+  refus par `layerVerdict` (maille sans ring buffer ; quad à nœud tourné,
+  reconnu par `isQuadLayer` PUIS refusé sans retomber dans la simulation), et
+  dans `portrait-fx.test.ts` un effet qui arrive avec cette feuille sur sa
+  maille → `held`, motif `calque de cadre non transcrit — feuille UV 5×5 sur
+un calque de cadre`. Le patron de quad du test de `layerVerdict` est corrigé
+  au passage (nœud à l'identité, sans planche : c'est le `web` de `_2000086`
+  tel qu'il est, pas l'`atlas` tourné de −90°). Côté extraction, pas de pytest
+  dans le dépôt : banc joué à la main sur le `star` de `_Dungeon` modifié d'un
+  champ — chaque garde refuse et dit quoi, `rotation3D` à axes X/Y nuls passe,
+  un petit-enfant greffé sur `atlas` écarte `_Dungeon` seul et `_Demi` sort
+  avec ses deux matériaux, rien d'orphelin. ET `_SYNCHRO` POUR DE VRAI : table
+  parsée copiée avec un porteur de plus, extraction dans un dossier temporaire
+  — il sort `notExtracted` dès l'extraction, « inner : rotation3D :
+  startRotationY actif(s), la fiche ne porte que Z » (ses deux calques sont
+  tournés de π sur Y, que la fiche ne portait pas : un cadre en miroir), les
+  dix autres identiques (effets, matériaux, mailles comparés). Sa feuille UV,
+  elle, est tenue par l'équivalent des tests. (5) P9, dans les mêmes fichiers
+  seulement : « 25 personnages sur 124 », « les 25 lignes », « les huit effets
+  restants », « dix prefabs », « `rotation3D` faux partout »
+  (`portrait-fx.ts`, `extract-portrait-fx.py`), « 25 sur 124 » et « 99 sur 124
+  » (`Portrait.tsx`), « 38 textures » (`refresh.ts`), et l'en-tête du script
+  qui disait « la clé du manifest porte `.png` » : elle porte `.webp` sans
+  perte (`manifest.ts`, `lossless: true`, que `stage.ts` honore) — la règle
+  est gardée (sans perte à cause de `_MainStrength = 70`), le format corrigé.
+  `AnimatedPortrait.tsx` n'avait plus aucun compteur (réécrit par F11).
+  Vérification : `pnpm typecheck` (dernière ligne `$ tsc --noEmit && tsc
+--noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` (`Test
+Files  193 passed (193)`, `Tests  2701 passed (2701)`). Aucun changement
+  visuel : `portrait-fx-gl.ts` n'est pas touché, la table est identique, les
+  dix verdicts identiques ; `/dev/AnimatedPortrait` lu sur :3000 (200, 27
+  canvas comme avant, « Aucun : les 10 effets que la table nomme sont servis
+  entiers »). Laissé, et pourquoi : les voisins de la même famille que P7 ne
+  nomme pas et qui restent lus par leur scalaire — `limitVelocity.drag`,
+  `noise.strength`, `noise.positionAmount` (états 0 partout aujourd'hui),
+  `sphericalDirectionAmount`, `randomPositionAmount` et `alignToDirection` de
+  la forme (nuls partout), `scalingMode ≠ 0` — hors périmètre, à prendre le
+  jour où un effet les porte ; le compteur « 21 persos sur 124 » du nickname
+  dans `Portrait.tsx` (pas un compteur de portrait animé) ;
+  `docs/audit/portrait-fx.md` pas annoté (c'est la relecture qui le fait) ;
+  P10 reste au TODO, lot à écrire. - **Relecture de A28 : 78 lots** (Fable).
+  `bb942a7f`, périmètre propre (sept fichiers, dont `meta.json` du guide des
+  boutiques pour sa date). Libellés jp/kr/zh du Survey Hub = ceux du jeu ;
+  `GIT_TERMINAL_PROMPT=0` posé par `patchEnv` sur toutes les commandes de la
+  carte Patch, lanceur injectable testé ; en-tête de `commit.ts` à jour.
+  Typecheck, lint, `Tests 2677 passed`. Dans la foulée, à la demande de Sevih
+  : la version `2026-10` du Joint Challenge Annihilator reçoit sa vidéo
+  (`ioSTA6N3bIU`, Very Hard, chaîne Outerpedia) à la place de celle de mai,
+  dans `versions/2026-10/config.json`. - **Petits restes du patch du 06/10 :
+  libellés du Survey Hub, `GIT_TERMINAL_PROMPT=0` sur la carte « Patch »,
+  en-tête de `commit.ts`** (Opus, lot A28 ; les trois points laissés par la
+  relecture de B26, A26, A27 et F14). (1)
+  `shop-purchase-priorities/labels.ts`, bloc `survey` : jp/kr/zh portaient une
+  transcription (« サーベイハブ / 서베이 허브 / 调查中心 ») au lieu du nom du jeu ; ils
+  reprennent ceux de la clé `progress.shop.survey-hub` (調査支援所 / 조사 지원소 /
+  调查支援所, `SYS_SHOP_TAP_TYPE_RESEARCH`). en/fr/es inchangés ; aucun test ne
+  figeait l'ancien libellé (`git grep` des trois chaînes : plus rien hors ce
+  journal et `beginner-faq`, cf. plus bas). (2)
+  `src/lib/admin/patch-runner.ts` : les commandes de la carte héritaient de
+  `process.env` tel quel, donc du terminal du serveur de dev — git y demande
+  ses identifiants sur `/dev/tty`, pas sur stdin (déjà `ignore`) : un `git
+fetch` ou un `git push` pouvait attendre une saisie que la page ne voit pas,
+  verrou tenu. `spawnLauncher` passe maintenant `patchEnv()` = `process.env` +
+  `GIT_TERMINAL_PROMPT: '0'` ; posé dans le lanceur, seul point de passage,
+  donc pour promote, commit et push sans qu'un geste puisse l'oublier (`pnpm
+commit --no-push` fait lui aussi un `git fetch` au pré-vol, et la variable
+  descend par héritage jusqu'aux `execSync` de `commit.ts`). Avec elle git
+  échoue aussitôt et son message part dans le journal. Pour le tester sans
+  rien lancer, `spawnLauncher` est exporté et prend un `spawn` injectable
+  (défaut : le vrai) ; un test dans `patch-runner.test.ts` — `spawn` factice,
+  deux commandes (`git fetch`, `pnpm commit`) : `shell: false`, variable à
+  `'0'` même si le terminal la portait à `1`, reste de l'environnement gardé,
+  `process.env` du serveur intact. (3) `scripts/commit.ts` : l'en-tête
+  (`--bump`) et le commentaire de `CONVENTIONAL_HELP` disaient que l'accueil
+  de l'admin « lance la publication » ; depuis B26 il COMMITE par ce script
+  (`--no-push`) et pousse d'un second geste — les deux phrases le disent, rien
+  d'autre n'a bougé dans le fichier. Vérification : `pnpm typecheck` (dernière
+  ligne : l'écho de la commande, les trois `tsc --noEmit` sans une erreur),
+  `pnpm lint` (`$ eslint`, sans sortie), `pnpm test` (`Tests 2677 passed
+(2677)`, 193 fichiers — 2676 + le nouveau). Visuel : seuls les trois
+  libellés du guide changent, en jp/kr/zh. Laissé : pas d'essai réel d'un
+  fetch sans identifiant à travers la carte (à jouer par Sevih s'il veut le
+  voir : `git credential reject` n'est pas un geste d'agent) ; la variable ne
+  couvre ni une passphrase SSH ni un `GIT_ASKPASS` graphique (origin est en
+  HTTPS via `gh`, sans objet aujourd'hui) ; hors périmètre, la même
+  transcription « サーベイハブ / 서베이 허브 » subsiste dans la PROSE de
+  `beginner-faq/content.ts` (deux réponses, jp et kr) ;
+  `images/ui/shop/al.webp` reste sur R2, à Sevih.
 - **Relecture de A28 : 78 lots** (Fable). `bb942a7f`, périmètre propre (sept
   fichiers, dont `meta.json` du guide des boutiques pour sa date). Libellés
   jp/kr/zh du Survey Hub = ceux du jeu ; `GIT_TERMINAL_PROMPT=0` posé par

@@ -246,7 +246,7 @@ export interface PortraitProps {
   className?: string;
   /**
    * Le contenu de `FX_Holder` (`m_EffectHolder`) — l'effet ANIMÉ que `SetEffect`
-   * instancie pour 25 personnages sur 124.
+   * instancie pour une minorité de personnages (`byCharacter` de `portrait-fx`).
    *
    * Une PROP et non un calque en dur, parce que cet effet est du WebGL : il tient
    * un contexte, une boucle et des textures, donc un composant CLIENT, quand ce
@@ -299,7 +299,7 @@ export function Portrait({
       />
 
       {/* `FX_Holder` — à sa place du prefab : au-dessus de l'art, sous tout le
-          reste. Vide pour 99 personnages sur 124. */}
+          reste. Vide pour la plupart des personnages. */}
       {fx}
 
       {/* LE RAIL D'ÉTOILES — le slot sombre, six creux, puis les allumées. */}

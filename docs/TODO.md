@@ -51,15 +51,11 @@ dev:caddy:install`, règle de pare-feu). La branche Windows de
 
 > Rapport : [audit/portrait-fx.md](./audit/portrait-fx.md).
 
-- [ ] **Constats Basse restants de l'audit** : P7 (trous dans « refuser
-      plutôt que rendre de travers » — un calque-maille passe TOUJOURS ;
-      `_Synchro`, joué en simulation, sort « servi tel quel » avec sa feuille
-      UV 5×5 à tuile aléatoire non transcrite) et les compteurs périmés de
-      P9 : lot **F15** de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Fable, seul sur
-      les fichiers de portrait). Puis P10 (coût par image : `SUPERSAMPLE` à
-      dpr 2, `clientWidth` relu à chaque image, instanciation des
-      billboards), lot à écrire après F15, à confirmer sur mobile.
+- [ ] **Constat Basse restant de l'audit** : P10 (coût par image :
+      `SUPERSAMPLE` à dpr 2, `clientWidth` relu à chaque image, instanciation
+      des billboards), lot à écrire — P7 et P9 sont FAITS (lot F15, 06/10 :
+      gardes du moteur et de l'extraction, compteurs retirés) —, à confirmer
+      sur mobile.
 
 ## 🧪 À jouer au prochain patch
 

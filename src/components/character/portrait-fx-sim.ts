@@ -88,6 +88,8 @@ interface MinMaxCurveRaw {
 interface ShapeRaw {
   type: number;
   m_Position: { x: number; y: number; z: number };
+  /** Euler, degrés — la simulation ne tourne PAS la zone de naissance : non nul = refus. */
+  m_Rotation: { x: number; y: number; z: number };
   m_Scale: { x: number; y: number; z: number };
   randomDirectionAmount: number;
 }
@@ -100,6 +102,9 @@ interface SheetRaw {
   cycles: number;
   frameOverTime: MinMaxCurveRaw;
   startFrame: MinMaxCurveRaw;
+  /** 0 = planche entière, 1 = UNE rangée (choisie par `rowMode` : 0 fixe, 1 aléatoire). */
+  animationType: number;
+  rowMode: number;
 }
 
 interface LimitVelocityRaw {
@@ -259,9 +264,27 @@ function evalMinMaxCurve(c: MinMaxCurveRaw, t: number, lerp: number): number {
   }
 }
 
-/** Le trio plat de la table (`valeur`, `…Min`, `…Mode`) tiré avec l'aléa `u`. */
+/**
+ * Le trio plat de la table (`valeur`, `…Min`, `…Mode`) tiré avec l'aléa `u`.
+ *
+ * Ne sait lire que les états 0 (constante) et 3 (tirage entre deux constantes) ;
+ * un état de COURBE (1, 2) sortirait la constante en silence — c'est
+ * `unsupportedBillboard` qui le refuse avant qu'on arrive ici.
+ */
 function mmScalar(value: number, min: number, mode: number, u: number): number {
   return mode === 3 ? min + (value - min) * u : value;
+}
+
+/** Vrai si le trio plat peut rendre AUTRE CHOSE que zéro — une courbe compte pour active. */
+function mmActive(value: number, min: number, mode: number): boolean {
+  if (mode === 0) return value !== 0;
+  if (mode === 3) return value !== 0 || min !== 0;
+  return true;
+}
+
+/** Même question sur un `MinMaxCurve` brut (`scalar`, `minScalar`, `minMaxState`). */
+function rawActive(c: MinMaxCurveRaw | undefined): boolean {
+  return !!c && mmActive(c.scalar, c.minScalar, c.minMaxState);
 }
 
 /**
@@ -270,7 +293,8 @@ function mmScalar(value: number, min: number, mode: number, u: number): number {
  * `ringBufferMode = 2` fait reboucler la vie dans `ringBufferLoopRange` au lieu
  * de tuer la particule : l'âge est donc un modulo, pas une rampe qui s'arrête.
  * Un émetteur SANS ring buffer garde la rampe bornée à 1 — la particule meurt,
- * et c'est à l'appelant de cesser de la dessiner.
+ * et le montage, lui, dessinerait à jamais : `unsupportedFrameLayer` REFUSE un
+ * tel calque de cadre, la rampe bornée ne sert qu'aux tests.
  */
 export function frameAge(e: FxEmitter, time: number): number {
   const life = e.startLifetime / (e.simulationSpeed || 1);
@@ -315,11 +339,36 @@ function rotateInv(q: Quat, v: Vec3): Vec3 {
  */
 export function unsupportedBillboard(e: FxEmitter): string | null {
   const missing: string[] = [];
+  // `simulationSpeed` n'entre que dans la vie maximale (`maxLife`) : le pas de
+  // temps, lui, est celui de l'horloge — une vitesse autre que 1 rendrait une
+  // pluie trop lente ou trop rapide, pas celle du jeu.
+  if (e.simulationSpeed !== 1) missing.push(`simulationSpeed ${e.simulationSpeed}`);
+  // Les scalaires de départ se tirent par `mmScalar`, qui ne lit que les états
+  // 0 et 3 : une COURBE y passerait pour sa constante.
+  const curved = (
+    [
+      ['startLifetime', e.startLifetimeMode],
+      ['startSize', e.startSizeMode],
+      ['startSizeY', e.size3D ? e.startSizeYMode : 0],
+      ['startSpeed', e.startSpeedMode],
+      ['startRotation', e.startRotationMode],
+    ] as const
+  ).filter(([, mode]) => mode !== 0 && mode !== 3);
+  for (const [name, mode] of curved) missing.push(`${name} en courbe (état ${mode})`);
   const shape = e.shape as ShapeRaw | undefined;
   if (!shape) missing.push('émission sans ShapeModule');
   else if (shape.type !== 15 && shape.type !== 5)
     missing.push(`forme ${shape.type} (seul le Box est transcrit)`);
-  else if (shape.randomDirectionAmount) missing.push('randomDirectionAmount');
+  else {
+    // Le shell d'une boîte SANS épaisseur est la boîte elle-même (cf. `spawn`) ;
+    // celui d'une boîte pleine n'est que sa surface, qu'on ne tire pas.
+    const { x, y, z } = shape.m_Scale;
+    if (shape.type === 15 && x && y && z) missing.push('BoxShell non plat (shell non transcrit)');
+    if (shape.randomDirectionAmount) missing.push('randomDirectionAmount');
+    // La zone de naissance est posée dans le repère du nœud, jamais tournée en plus.
+    const rot = shape.m_Rotation;
+    if (rot && (rot.x || rot.y || rot.z)) missing.push('rotation de la forme (m_Rotation)');
+  }
   if (e.emission.bursts.length) missing.push('rafales (bursts)');
   // La rotation sur la vie est transcrite quand c'est une vitesse CONSTANTE par
   // particule (état 0 ou 3) — c'est le cas des flocons de `_2000093` (±1,22 rad/s).
@@ -332,12 +381,54 @@ export function unsupportedBillboard(e: FxEmitter): string | null {
   const sheet = e.textureSheet as SheetRaw | undefined;
   if (sheet && (sheet.mode !== 0 || sheet.timeMode !== 0))
     missing.push(`feuille UV mode ${sheet.mode}/${sheet.timeMode}`);
+  // La tuile vient de `frameOverTime` seul, sur la planche ENTIÈRE : une rangée
+  // choisie (`animationType = 1`, fixe ou tirée) et un décalage de départ ne
+  // sont pas lus.
+  if (sheet?.animationType)
+    missing.push(
+      `feuille UV par rangée (animationType ${sheet.animationType}, rowMode ${sheet.rowMode})`,
+    );
+  if (sheet && rawActive(sheet.startFrame)) missing.push('startFrame');
   const lim = e.limitVelocity as LimitVelocityRaw | undefined;
   if (lim?.separateAxis) missing.push('limite de vitesse par axe');
   const noise = e.noise as NoiseRaw | undefined;
   if (noise && (noise.separateAxes || noise.remapEnabled)) missing.push('bruit par axe ou remappé');
+  // Le bruit est échantillonné sur le CHEMIN parcouru, en champ statique
+  // (approximation n° 1 de l'en-tête) : un champ qui défile n'a pas d'équivalent.
+  if (noise && rawActive(noise.scrollSpeed)) missing.push('bruit défilant (scrollSpeed)');
   const size = e.sizeOverLifetime as SizeOverLifetimeRaw | undefined;
   if (size?.separateAxes) missing.push('taille sur la vie par axe');
+  return missing.length ? missing.join(', ') : null;
+}
+
+/**
+ * Ce qu'un CALQUE DE CADRE — maille (`renderMode = 4`) ou calque-quad — demande
+ * que le montage ne transcrit pas, ou null s'il se pose tel quel. Le montage
+ * (`prepare`, `draw` de `portrait-fx-gl`) pose la géométrie à plat (`uM` est une
+ * diagonale), à l'âge de `frameAge`, à la couleur des dégradés pris EN LEUR
+ * MILIEU, et sans feuille UV : tout ce qui sort de là serait rendu de travers,
+ * donc refusé — même politique qu'`unsupportedBillboard`. Un calque-maille
+ * passait jusque-là sans contrôle (P7 de l'audit).
+ *
+ * `_Synchro` est le cas vécu : son `inner` porte une feuille UV 5×5 dont la
+ * tuile est tirée par particule, que la maille ne saurait pas montrer.
+ */
+export function unsupportedFrameLayer(e: FxEmitter): string | null {
+  const missing: string[] = [];
+  const [qx, qy, qz] = e.rotation;
+  if (Math.abs(qx) + Math.abs(qy) + Math.abs(qz) > 1e-6)
+    missing.push(`rotation du nœud (${e.rotation.join(', ')})`);
+  if (mmActive(e.startRotation, e.startRotationMin, e.startRotationMode))
+    missing.push('startRotation');
+  // Sans vie rebouclée, la particule MEURT : le montage, lui, dessine toujours.
+  if (e.ringBufferMode !== 2) missing.push(`sans ring buffer (ringBufferMode ${e.ringBufferMode})`);
+  // Les modes 2 à 4 tirent la couleur à la naissance ; le montage n'a pas de
+  // tirage pour une particule unique et rendrait le milieu du dégradé.
+  if (e.startColor.mode >= 2) missing.push(`startColor aléatoire (mode ${e.startColor.mode})`);
+  if (e.colorOverLifetime && e.colorOverLifetime.mode >= 2)
+    missing.push(`colorOverLifetime aléatoire (mode ${e.colorOverLifetime.mode})`);
+  const sheet = e.textureSheet as SheetRaw | undefined;
+  if (sheet) missing.push(`feuille UV ${sheet.tilesX}×${sheet.tilesY} sur un calque de cadre`);
   return missing.length ? missing.join(', ') : null;
 }
 
@@ -406,7 +497,10 @@ export type LayerVerdict =
  *
  * L'ordre des contrôles est celui du montage, et il compte : le matériau
  * (mots-clés, blend) est jugé AVANT la forme de l'émetteur, donc un émetteur
- * deux fois fautif ne remonte que le premier refus.
+ * deux fois fautif ne remonte que le premier refus. Puis chaque famille a sa
+ * garde — `unsupportedFrameLayer` pour les calques de cadre (maille et quad),
+ * `unsupportedBillboard` pour les pluies — et un réglage ACTIF que le montage
+ * n'honore pas est un refus, jamais une tolérance.
  */
 export function layerVerdict(
   e: FxEmitter,
@@ -430,9 +524,18 @@ export function layerVerdict(
 
   if (e.renderMode === 4 && e.mesh) {
     const mesh = table.meshes[e.mesh];
-    return mesh ? { kind: 'mesh', material: mat, mesh } : { kind: 'skipped', why: 'unknown-mesh' };
+    if (!mesh) return { kind: 'skipped', why: 'unknown-mesh' };
+    const reason = unsupportedFrameLayer(e);
+    return reason
+      ? { kind: 'refused', reason: `${e.name} : calque de cadre non transcrit — ${reason}` }
+      : { kind: 'mesh', material: mat, mesh };
   }
-  if (e.renderMode === 0 && isQuadLayer(e)) return { kind: 'quad', material: mat };
+  if (e.renderMode === 0 && isQuadLayer(e)) {
+    const reason = unsupportedFrameLayer(e);
+    return reason
+      ? { kind: 'refused', reason: `${e.name} : calque de cadre non transcrit — ${reason}` }
+      : { kind: 'quad', material: mat };
+  }
   if (e.renderMode === 0) {
     const reason = unsupportedBillboard(e);
     return reason

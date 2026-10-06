@@ -11,6 +11,7 @@ import {
   layerVerdict,
   mountSeeds,
   unsupportedBillboard,
+  unsupportedFrameLayer,
 } from './portrait-fx-sim';
 
 /**
@@ -268,6 +269,10 @@ describe('isQuadLayer', () => {
 
 describe('unsupportedBillboard', () => {
   const shape = BILLBOARD.shape as Record<string, unknown>;
+  /** Un émetteur à planche de la table, et son bruit : la base des cas de feuille UV. */
+  const SHEETED = BILLBOARDS.find(({ e }) => e.textureSheet)!.e;
+  const sheet = SHEETED.textureSheet as Record<string, unknown>;
+  const noise = BILLBOARD.noise as Record<string, unknown>;
   const curve = (minMaxState: number) => ({ curve: { minMaxState }, separateAxes: false });
 
   it('accepte la base des cas limites', () => {
@@ -306,6 +311,40 @@ describe('unsupportedBillboard', () => {
       { sizeOverLifetime: { separateAxes: true } },
       'taille sur la vie par axe',
     ],
+    // Les trous de P7 : des réglages que la simulation ignorait en silence.
+    ['une vitesse de simulation', { simulationSpeed: 2 }, 'simulationSpeed 2'],
+    ['une taille en courbe', { startSizeMode: 1 }, 'startSize en courbe (état 1)'],
+    ['une vie en deux courbes', { startLifetimeMode: 2 }, 'startLifetime en courbe (état 2)'],
+    [
+      'une hauteur en courbe (size3D)',
+      { size3D: true, startSizeYMode: 1 },
+      'startSizeY en courbe (état 1)',
+    ],
+    [
+      'un BoxShell épais',
+      { shape: { ...shape, type: 15, m_Scale: { x: 2, y: 1, z: 2 } } },
+      'BoxShell non plat (shell non transcrit)',
+    ],
+    [
+      'une forme tournée',
+      { shape: { ...shape, m_Rotation: { x: 0, y: 45, z: 0 } } },
+      'rotation de la forme (m_Rotation)',
+    ],
+    [
+      'une feuille UV par rangée tirée',
+      { textureSheet: { ...sheet, animationType: 1, rowMode: 1 } },
+      'feuille UV par rangée (animationType 1, rowMode 1)',
+    ],
+    [
+      'un décalage de tuile',
+      { textureSheet: { ...sheet, startFrame: { minMaxState: 0, scalar: 0.25, minScalar: 0 } } },
+      'startFrame',
+    ],
+    [
+      'un bruit qui défile',
+      { noise: { ...noise, scrollSpeed: { minMaxState: 3, scalar: 0, minScalar: 0.5 } } },
+      'bruit défilant (scrollSpeed)',
+    ],
   ])('refuse et DIT quoi — %s', (_label, over, reason) => {
     expect(unsupportedBillboard({ ...BILLBOARD, ...over })).toBe(reason);
   });
@@ -315,9 +354,85 @@ describe('unsupportedBillboard', () => {
     expect(unsupportedBillboard({ ...BILLBOARD, rotationOverLifetime: curve(3) })).toBeNull();
   });
 
+  it('une hauteur en courbe ne compte que si `size3D` la lit ; un Box plein tient en toute épaisseur', () => {
+    expect(unsupportedBillboard({ ...BILLBOARD, size3D: false, startSizeYMode: 1 })).toBeNull();
+    const full = { ...shape, type: 5, m_Scale: { x: 2, y: 1, z: 2 } };
+    expect(unsupportedBillboard({ ...BILLBOARD, shape: full })).toBeNull();
+    // Un `startFrame` tiré entre deux zéros, ou un défilement nul, restent inactifs.
+    const still = { ...sheet, startFrame: { minMaxState: 3, scalar: 0, minScalar: 0 } };
+    expect(unsupportedBillboard({ ...BILLBOARD, textureSheet: still })).toBeNull();
+  });
+
   it('cumule les motifs d’un émetteur plusieurs fois fautif', () => {
     const e = { ...BILLBOARD, velocityOverLifetime: {}, limitVelocity: { separateAxis: true } };
     expect(unsupportedBillboard(e)).toBe('velocityOverLifetime, limite de vitesse par axe');
+  });
+});
+
+describe('unsupportedFrameLayer', () => {
+  /** Un calque de cadre de la table — le premier émetteur est l'`inner` d'un effet servi. */
+  const FRAME = EMITTERS.find(({ e }) => layerVerdict(e).kind === 'mesh')!.e;
+
+  it('accepte les calques de cadre de la table', () => {
+    expect(unsupportedFrameLayer(FRAME)).toBeNull();
+    // `startRotationMin` vaut 2π sur tous les calques du jeu : en état 0, seule
+    // la valeur compte, et elle est nulle.
+    expect(FRAME.startRotationMode).toBe(0);
+    expect(FRAME.startRotation).toBe(0);
+  });
+
+  it.each<[string, Partial<FxEmitter>, string]>([
+    [
+      'un nœud tourné',
+      { rotation: [0, 0.7071, 0, 0.7071] },
+      'rotation du nœud (0, 0.7071, 0, 0.7071)',
+    ],
+    ['une rotation initiale', { startRotation: 0.5 }, 'startRotation'],
+    [
+      'une rotation initiale tirée',
+      { startRotation: 0, startRotationMin: 3.14, startRotationMode: 3 },
+      'startRotation',
+    ],
+    ['une rotation en courbe', { startRotation: 0, startRotationMode: 1 }, 'startRotation'],
+    ['pas de ring buffer', { ringBufferMode: 0 }, 'sans ring buffer (ringBufferMode 0)'],
+    ['une pause en fin de vie', { ringBufferMode: 1 }, 'sans ring buffer (ringBufferMode 1)'],
+    [
+      'une couleur de départ aléatoire',
+      { startColor: { mode: 4, maxGradient: { rgb: [], a: [] } } },
+      'startColor aléatoire (mode 4)',
+    ],
+    [
+      'une couleur sur la vie tirée entre deux dégradés',
+      { colorOverLifetime: { mode: 3 } },
+      'colorOverLifetime aléatoire (mode 3)',
+    ],
+    // Le cas `_Synchro` : une planche 5×5 à tuile tirée, sur une maille.
+    [
+      'une feuille UV',
+      {
+        textureSheet: {
+          mode: 0,
+          timeMode: 0,
+          tilesX: 5,
+          tilesY: 5,
+          frameOverTime: { minMaxState: 3, scalar: 0, minScalar: 0.9999 },
+          startFrame: { minMaxState: 0, scalar: 0, minScalar: 0 },
+          animationType: 0,
+          rowMode: 1,
+        },
+      },
+      'feuille UV 5×5 sur un calque de cadre',
+    ],
+  ])('refuse et DIT quoi — %s', (_label, over, reason) => {
+    expect(unsupportedFrameLayer({ ...FRAME, ...over })).toBe(reason);
+  });
+
+  it('cumule les motifs, et une couleur sur la vie en dégradé simple passe', () => {
+    const e = { ...FRAME, ringBufferMode: 0, startColor: { mode: 2, min: [0], max: [1] } };
+    expect(unsupportedFrameLayer(e)).toBe(
+      'sans ring buffer (ringBufferMode 0), startColor aléatoire (mode 2)',
+    );
+    expect(unsupportedFrameLayer({ ...FRAME, colorOverLifetime: { mode: 1 } })).toBeNull();
   });
 });
 
@@ -340,20 +455,42 @@ describe('layerVerdict', () => {
     expect(layerVerdict(meshLayer, table(m))).toEqual({ kind: 'mesh', material: m, mesh });
   });
 
+  /** Le patron du `web` de `_2000086` : à plat (nœud à l'identité), sans planche. */
+  const quad: FxEmitter = {
+    ...billboard,
+    rotation: [0, 0, 0, 1],
+    shape: undefined,
+    textureSheet: undefined,
+    emission: { rateOverTime: 0, bursts: [{ count: 1 }] },
+    ringBufferMode: 2,
+    startSpeed: 0,
+    startSpeedMode: 0,
+    startRotation: 0,
+    startRotationMode: 0,
+    startSizeMode: 0,
+  };
+
   it('pose un calque-quad et un billboard', () => {
-    const quad: FxEmitter = {
-      ...billboard,
-      shape: undefined,
-      emission: { rateOverTime: 0, bursts: [{ count: 1 }] },
-      ringBufferMode: 2,
-      startSpeed: 0,
-      startSpeedMode: 0,
-      startRotation: 0,
-      startRotationMode: 0,
-      startSizeMode: 0,
-    };
     expect(layerVerdict(quad, table()).kind).toBe('quad');
     expect(layerVerdict(billboard, table()).kind).toBe('billboard');
+  });
+
+  it('refuse un calque de cadre — maille ou quad — avec le motif de sa garde', () => {
+    expect(layerVerdict({ ...meshLayer, name: 'inner', ringBufferMode: 0 }, table())).toEqual({
+      kind: 'refused',
+      reason: 'inner : calque de cadre non transcrit — sans ring buffer (ringBufferMode 0)',
+    });
+    // Le quad est reconnu (`isQuadLayer`) puis refusé : il ne retombe pas dans
+    // la simulation, qui ignorerait la rotation du nœud.
+    expect(layerVerdict({ ...quad, name: 'web', rotation: [0, 1, 0, 0] }, table())).toEqual({
+      kind: 'refused',
+      reason: 'web : calque de cadre non transcrit — rotation du nœud (0, 1, 0, 0)',
+    });
+  });
+
+  it('ne refuse AUCUN calque actif de la table du jour (les gardes n’ont pas de faux positif)', () => {
+    const refused = EMITTERS.filter(({ e }) => e.active && layerVerdict(e).kind === 'refused');
+    expect(refused.map(({ id }) => id)).toEqual([]);
   });
 
   it('passe sans un mot ce que le jeu ne dessine pas ou que la table ne porte pas', () => {

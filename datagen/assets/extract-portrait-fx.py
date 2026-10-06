@@ -41,12 +41,12 @@ SORTIES
   - les textures en PNG dans le pool d'images du jeu
     (`.gamedata/extracted/images/…/ui_effect/`), d'où `manifest.ts` les demande.
 
-POURQUOI DU PNG ET PAS DU WEBP. C'est la seule famille d'assets du site qui reste en
-PNG jusqu'au bucket, et ce n'est pas un oubli : le shader multiplie trois échantillons
-puis amplifie par `_MainStrength`, qui vaut 70 sur `M_FX_UI_Char_out_Demi`. Une erreur
-de quantification de 1/255 par texture ressort à ~0,27 à l'écran — soit du banding
-franc sur un dégradé. La clé du manifest porte donc `.png`, ce qui suffit à
-`stage.ts` pour rester sans perte.
+POURQUOI SANS PERTE, DE BOUT EN BOUT. Le PNG n'est que le format du pool ; sur le
+bucket, `manifest.ts` demande ces textures en `.webp` SANS PERTE (`lossless`, que
+`stage.ts` honore), et ce n'est pas un détail : le shader multiplie trois
+échantillons puis amplifie par `_MainStrength`, qui vaut 70 sur
+`M_FX_UI_Char_out_Demi`. Une erreur de quantification de 1/255 par texture ressort
+à ~0,27 à l'écran — soit du banding franc sur un dégradé.
 
 QUELS EFFETS. Aucune liste à tenir : sans argument, le script sort les effets que la
 table du jeu NOMME et dont le prefab existe dans le bundle (cf. `table_effects`). Un
@@ -527,17 +527,85 @@ def min_max_gradient(m: dict) -> dict:
     return out
 
 
+#: Les modules d'un `ParticleSystem` que la fiche SAIT porter : les sept publiés
+#: bruts (cf. la boucle de `read_emitter`), plus les trois qu'elle aplatit en
+#: champs (`InitialModule`, `EmissionModule`, `ColorModule`). Tout autre module
+#: ACTIF (forces, collisions, traînées, sous-émetteurs…) changerait le rendu sans
+#: qu'aucune clé ne le dise : il écarte l'effet.
+KNOWN_MODULES = frozenset({
+    'InitialModule', 'EmissionModule', 'ColorModule',
+    'ShapeModule', 'SizeModule', 'RotationModule', 'UVModule', 'NoiseModule',
+    'VelocityModule', 'ClampVelocityModule',
+})
+
+
+def mm_active(c: dict) -> bool:
+    """Un `MinMaxCurve` qui peut rendre AUTRE CHOSE que zéro — une courbe compte pour actif."""
+    state = c['minMaxState']
+    if state == 0:
+        return c['scalar'] != 0
+    if state == 3:
+        return c['scalar'] != 0 or c['minScalar'] != 0
+    return True
+
+
+def check_flattened(node: str, ps: dict) -> None:
+    """CE QUE LA FICHE APLATIT doit l'être SANS PERTE — sinon on lève.
+
+    `rateOverTime`, `gravityModifier` et le compte des rafales ne sont publiés que
+    par leur scalaire, `startRotation` que sur l'axe Z, et les modules hors de
+    `KNOWN_MODULES` pas du tout : tant que le jeu n'y met que des constantes, la
+    fiche dit vrai. Le jour où un prefab y met une courbe, un tirage, un axe ou un
+    module de plus, publier le scalaire ferait rendre l'effet DE TRAVERS sans
+    qu'aucun garde du moteur (`layerVerdict`) puisse le voir, la table ne portant
+    pas l'information. D'où la levée : l'effet est écarté avec son motif
+    (`notExtracted`), et la carte reste un portrait statique — même politique que
+    `min_max_gradient`. (P7 de l'audit.)
+    """
+    init = ps['InitialModule']
+    em = ps['EmissionModule']
+    faults: list[str] = []
+    if em['rateOverTime']['minMaxState'] != 0:
+        faults.append(f"rateOverTime en courbe ou tiré (état {em['rateOverTime']['minMaxState']})")
+    if mm_active(em.get('rateOverDistance', {'minMaxState': 0, 'scalar': 0})):
+        faults.append('rateOverDistance actif')
+    for i, b in enumerate(em.get('m_Bursts', [])):
+        if b['countCurve']['minMaxState'] != 0:
+            faults.append(f"rafale {i} : compte en courbe ou tiré (état {b['countCurve']['minMaxState']})")
+        if b.get('probability', 1.0) < 1:
+            faults.append(f"rafale {i} : probabilité {b['probability']}")
+    if init['gravityModifier']['minMaxState'] != 0:
+        faults.append(f"gravityModifier en courbe ou tiré (état {init['gravityModifier']['minMaxState']})")
+    if init.get('rotation3D'):
+        axes = [k for k in ('startRotationX', 'startRotationY') if mm_active(init[k])]
+        if axes:
+            faults.append(f"rotation3D : {', '.join(axes)} actif(s), la fiche ne porte que Z")
+    if init.get('randomizeRotationDirection'):
+        faults.append(f"randomizeRotationDirection {init['randomizeRotationDirection']}")
+    for key, mod in ps.items():
+        if key.endswith('Module') and isinstance(mod, dict) and mod.get('enabled') \
+                and key not in KNOWN_MODULES:
+            faults.append(f'module {key} actif, non publié')
+    if faults:
+        raise RuntimeError(f"{node} : {' ; '.join(faults)}")
+
+
 def read_emitter(fx: Bundle, go: dict, rt: dict, mats: dict, meshes: dict,
                  tex_index: dict, wanted_tex: dict) -> dict | None:
     """Un nœud de l'effet, avec ce que son `ParticleSystem` a d'ACTIF.
 
-    Renvoie None pour un nœud qui n'émet rien (le nœud RACINE des dix prefabs a son
+    Renvoie None pour un nœud qui n'émet rien (le nœud RACINE des prefabs a son
     `EmissionModule` coupé : il ne sert que de porteur au `UIParticle`).
+
+    Lève (`RuntimeError`) sur ce que la fiche APLATIRAIT en silence — cf.
+    `check_flattened` : l'effet est alors écarté seul par `extract`, jamais publié
+    avec un scalaire qui mentirait.
     """
     ps = fx.component(go, 'ParticleSystem')
     psr = fx.component(go, 'ParticleSystemRenderer')
     if not ps or not ps['EmissionModule']['enabled']:
         return None
+    check_flattened(go['m_Name'], ps)
 
     init = ps['InitialModule']
     em = ps['EmissionModule']
@@ -658,7 +726,7 @@ def read_emitter(fx: Bundle, go: dict, rt: dict, mats: dict, meshes: dict,
 def by_character() -> dict[str, str] | None:
     """`CharacterID → ThumbnailEffect`, la table du jeu, ENTIÈRE.
 
-    On publie les 25 lignes même quand on n'en rend qu'une poignée : la table dit
+    On publie TOUTES les lignes, servies ou non : la table dit
     ce que le JEU fait, et une liste tronquée laisserait croire qu'un perso non
     servi n'a pas d'effet. C'est au rendu de savoir ce qu'il sait poser.
 
@@ -714,7 +782,8 @@ def extract(fx: Bundle, effects: list[str], carriers: dict[str, str],
     """La table, pour les prefabs `effects` (noms PLEINS) et les porteurs `carriers`.
 
     UN EFFET QUI NE SE LIT PAS N'ARRÊTE PAS LES AUTRES. Prefab absent du bundle,
-    mode de dégradé inconnu, texture irrésolue : l'effet est écarté EN ENTIER (ce
+    mode de dégradé inconnu, texture irrésolue, réglage que la fiche aplatirait
+    (`check_flattened`), petit-enfant : l'effet est écarté EN ENTIER (ce
     qu'il avait déjà versé dans les matériaux, mailles et textures est retiré) et
     son motif publié dans `notExtracted`. Depuis que les effets ne sont plus
     choisis à la main, lever ici ferait échouer le refresh d'un patch pour une
@@ -742,6 +811,13 @@ def extract(fx: Bundle, effects: list[str], carriers: dict[str, str],
             for child in root_rt.get('m_Children', []):
                 crt = fx.read(child['m_PathID'])
                 cgo = fx.read(crt['m_GameObject']['m_PathID'])
+                # Seuls les enfants DIRECTS sont lus : un petit-enfant serait un
+                # émetteur de plus que la fiche tairait — l'effet est écarté.
+                if crt.get('m_Children'):
+                    raise RuntimeError(
+                        f"{cgo['m_Name']} : {len(crt['m_Children'])} petit(s)-enfant(s) du "
+                        'prefab, que la lecture ne descend pas'
+                    )
                 e = read_emitter(fx, cgo, crt, mats, meshes, tex_index, wanted_tex)
                 if e:
                     emitters.append(e)
