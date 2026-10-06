@@ -1,4 +1,4 @@
-// CBuff$$OnCreate — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
+// CBuff$$OnCreate — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CBuff.cs.
 
 	public bool OnCreate()
@@ -102,7 +102,7 @@
 		case BUFF_TYPE.BT_REVERSE_HEAL_BASED_TARGET:
 		case BUFF_TYPE.BT_REVERSE_HEAL_BASED_TARGET_ABLE_KILL:
 		{
-			bool flag2 = Type == BUFF_TYPE.BT_REVERSE_HEAL_BASED_TARGET_ABLE_KILL;
+			bool flag3 = Type == BUFF_TYPE.BT_REVERSE_HEAL_BASED_TARGET_ABLE_KILL;
 			if (Owner.FindBuffByType(BUFF_TYPE.BT_INVINCIBLE) != null)
 			{
 				Owner.PlayBuffEffect(null, null, new Symbol("SYS_BUFF_INVINCIBLE"), _IsDebuff: false);
@@ -117,7 +117,7 @@
 			{
 				Owner.AddHP(-num);
 			}
-			else if (flag2)
+			else if (flag3)
 			{
 				Owner.AddHP(-num);
 				TrySetDieByReverseHeal();
@@ -170,10 +170,10 @@
 			break;
 		case BUFF_TYPE.BT_REMOVE_DEATH:
 		{
-			CBuff cBuff5 = Owner.FindBuffByType(BUFF_TYPE.BT_DEATH);
-			if (cBuff5 != null)
+			CBuff cBuff6 = Owner.FindBuffByType(BUFF_TYPE.BT_DEATH);
+			if (cBuff6 != null)
 			{
-				Owner.RemoveBuff(cBuff5);
+				Owner.RemoveBuff(cBuff6);
 			}
 			break;
 		}
@@ -192,11 +192,11 @@
 			{
 				if (Templet.ToolTipID != 0)
 				{
-					CBuff cBuff4 = (IsDebuff ? Owner.FindBuffByType(BUFF_TYPE.BT_STAT_DEBUFF_ENHANCE) : Owner.FindBuffByType(BUFF_TYPE.BT_STAT_BUFF_ENHANCE));
-					if (cBuff4 != null)
+					CBuff cBuff3 = (IsDebuff ? Owner.FindBuffByType(BUFF_TYPE.BT_STAT_DEBUFF_ENHANCE) : Owner.FindBuffByType(BUFF_TYPE.BT_STAT_BUFF_ENHANCE));
+					if (cBuff3 != null)
 					{
 						IsUseInstanceValue = true;
-						InstanceValue = CCommonDefine.ApplyRate(Value, cBuff4.Value);
+						InstanceValue = CCommonDefine.ApplyRate(Value, cBuff3.Value);
 					}
 				}
 			}
@@ -208,7 +208,7 @@
 			else if (Type == BUFF_TYPE.BT_STAT_OWNER_LOST_HP_RATE_HALF)
 			{
 				IsUseInstanceValue = true;
-				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, (long)Owner.CharacterData.MaxHP);
+				int nHP = (int)Math.Clamp(2L * (long)Owner.HP - Owner.CharacterData.MaxHP, 0L, Owner.CharacterData.MaxHP);
 				InstanceValue = Owner.GetLostHPRateValue(nHP, Value);
 			}
 			if (STAT_TYPE.ST_HP == StatType)
@@ -263,6 +263,22 @@
 		case BUFF_TYPE.BT_AP_CHARGE:
 			Owner.AP += num;
 			break;
+		case BUFF_TYPE.BT_STACK_STAT:
+			RefreshStackStat();
+			break;
+		case BUFF_TYPE.BT_STACK_CHANGE:
+		{
+			CBuff buffByToolTipID = Owner.GetBuffByToolTipID(Templet.ToolTipID, BUFF_TYPE.BT_STACK);
+			if (buffByToolTipID != null)
+			{
+				int stackCount = buffByToolTipID.Templet.StackCount;
+				int num7 = buffByToolTipID.StackCount + num;
+				buffByToolTipID.StackCount = ((0 < stackCount) ? Mathf.Clamp(num7, 0, stackCount) : Mathf.Max(0, num7));
+				Owner.RefreshStackStatBuffs(Templet.ToolTipID);
+				Owner.UpdateBuffIcon();
+			}
+			break;
+		}
 		case BUFF_TYPE.BT_REMOVE_BUFF:
 			if (Owner.RemoveBuffs(_IsDebuff: false, num) && (Object)(object)Caster != (Object)null)
 			{
@@ -297,10 +313,10 @@
 				{
 					if (!text3.IsNullOrEmpty())
 					{
-						CBuff cBuff7 = Owner.FindBuff(text3);
-						if (cBuff7 != null)
+						CBuff cBuff5 = Owner.FindBuff(text3);
+						if (cBuff5 != null)
 						{
-							Owner.RemoveBuff(cBuff7);
+							Owner.RemoveBuff(cBuff5);
 							Owner.CharacterData.SetStatDirty();
 						}
 					}
@@ -322,30 +338,30 @@
 			break;
 		case BUFF_TYPE.BT_STEAL_BUFF:
 		{
-			List<CBuff> buffList3 = Owner.GetBuffList(_IsDeBuff: false);
-			if (buffList3.IsNullOrEmpty())
+			List<CBuff> buffList2 = Owner.GetBuffList(_IsDeBuff: false);
+			if (buffList2.IsNullOrEmpty())
 			{
 				break;
 			}
-			int num7 = 0;
-			foreach (CBuff item in buffList3)
+			int num8 = 0;
+			foreach (CBuff item in buffList2)
 			{
 				if (!item.IsIgnoreInterruption)
 				{
-					CBuff cBuff6 = CBuffManager.Instance.CreateBuffInstance();
-					if (cBuff6.Initialize(item.Templet, Caster, Caster, _IsIgnoreCheckCondition: true, item.RemainTurnCont))
+					CBuff cBuff4 = CBuffManager.Instance.CreateBuffInstance();
+					if (cBuff4.Initialize(item.Templet, Caster, Caster, _IsIgnoreCheckCondition: true, item.RemainTurnCont))
 					{
-						cBuff6.Run();
-						cBuff6.RemainTurnCont = item.RemainTurnCont;
-						Caster.AddBuff(cBuff6);
-						num7++;
+						cBuff4.Run();
+						cBuff4.RemainTurnCont = item.RemainTurnCont;
+						Caster.AddBuff(cBuff4);
+						num8++;
 					}
 					else
 					{
-						CBuffManager.Instance.ReleaseBuff(cBuff6);
+						CBuffManager.Instance.ReleaseBuff(cBuff4);
 					}
 					Owner.RemoveBuff(item);
-					if (num7 >= Value)
+					if (num8 >= Value)
 					{
 						break;
 					}
@@ -356,59 +372,59 @@
 		case BUFF_TYPE.BT_REDISTRIBUTE_BUFF:
 		{
 			CDebug.Log("start BUFF_TYPE.BT_REDISTRIBUTE_BUFF");
-			List<CBuff> buffList2 = Owner.GetBuffList(_IsDeBuff: false);
-			if (buffList2.IsNullOrEmpty())
+			List<CBuff> buffList = Owner.GetBuffList(_IsDeBuff: false);
+			if (buffList.IsNullOrEmpty())
 			{
 				CDebug.Log("BuffList.IsNullOrEmpty");
 				break;
 			}
-			buffList2 = buffList2.Where((CBuff d) => !d.IsIgnoreInterruption && d.Templet.ToolTipID != 0).ToList();
-			if (buffList2.IsNullOrEmpty())
+			buffList = buffList.Where((CBuff d) => !d.IsIgnoreInterruption && d.Templet.ToolTipID != 0).ToList();
+			if (buffList.IsNullOrEmpty())
 			{
 				CDebug.Log("no IsIgnoreInterruption BuffList.IsNullOrEmpty");
 				break;
 			}
-			buffList2.Sort((CBuff x, CBuff y) => x.Templet.ToolTipID.CompareTo(y.Templet.ToolTipID));
-			buffList2 = buffList2.Take(Value).ToList();
-			foreach (CBuff item2 in buffList2)
+			buffList.Sort((CBuff x, CBuff y) => x.Templet.ToolTipID.CompareTo(y.Templet.ToolTipID));
+			buffList = buffList.Take(Value).ToList();
+			foreach (CBuff item2 in buffList)
 			{
-				bool flag3 = false;
+				bool flag2 = false;
 				List<CCharacterBattle> list4 = new List<CCharacterBattle>(Caster.GetTeam().m_MemberList);
-				for (int num6 = list4.Count - 1; num6 > 0; num6--)
+				for (int num4 = list4.Count - 1; num4 > 0; num4--)
 				{
-					int battleRandomRange3 = CFormula.GetBattleRandomRange(0, num6);
+					int battleRandomRange2 = CFormula.GetBattleRandomRange(0, num4);
 					List<CCharacterBattle> list5 = list4;
-					int index = num6;
+					int index = num4;
 					List<CCharacterBattle> list6 = list4;
-					int k = battleRandomRange3;
-					CCharacterBattle cCharacterBattle = list4[battleRandomRange3];
-					CCharacterBattle cCharacterBattle2 = list4[num6];
+					int index2 = battleRandomRange2;
+					CCharacterBattle cCharacterBattle = list4[battleRandomRange2];
+					CCharacterBattle cCharacterBattle2 = list4[num4];
 					CCharacterBattle cCharacterBattle3 = (list5[index] = cCharacterBattle);
-					cCharacterBattle3 = (list6[k] = cCharacterBattle2);
+					cCharacterBattle3 = (list6[index2] = cCharacterBattle2);
 				}
 				foreach (CCharacterBattle item3 in list4)
 				{
 					if (!((Object)(object)item3 == (Object)null))
 					{
-						CBuff cBuff3 = CBuffManager.Instance.CreateBuffInstance();
-						if (cBuff3.Initialize(item2.Templet, Caster, item3, _IsIgnoreCheckCondition: true, item2.RemainTurnCont))
+						CBuff cBuff2 = CBuffManager.Instance.CreateBuffInstance();
+						if (cBuff2.Initialize(item2.Templet, Caster, item3, _IsIgnoreCheckCondition: true, item2.RemainTurnCont))
 						{
-							cBuff3.Run();
-							cBuff3.RemainTurnCont = item2.RemainTurnCont;
-							item3.AddBuff(cBuff3);
-							flag3 = true;
+							cBuff2.Run();
+							cBuff2.RemainTurnCont = item2.RemainTurnCont;
+							item3.AddBuff(cBuff2);
+							flag2 = true;
 							CDebug.Log("BT_REDISTRIBUTE_BUFF buffID : " + item2.Templet.BuffID + " to characterID : " + item3.ID);
 							break;
 						}
-						CBuffManager.Instance.ReleaseBuff(cBuff3);
+						CBuffManager.Instance.ReleaseBuff(cBuff2);
 					}
 				}
-				if (!flag3)
+				if (!flag2)
 				{
 					CDebug.Log("BT_REDISTRIBUTE_BUFF buffID : " + item2.Templet.BuffID + ". Create Fail.");
 				}
 			}
-			foreach (CBuff item4 in buffList2)
+			foreach (CBuff item4 in buffList)
 			{
 				Owner.RemoveBuff(item4);
 			}
@@ -427,18 +443,18 @@
 				CBuffToolTipTemplet buffToolTipTemplet = CTempletManager.Instance.GetBuffToolTipTemplet(item5.Templet.ToolTipID);
 				if (buffToolTipTemplet != null && buffToolTipTemplet.ConvertToID > 0)
 				{
-					CBuff cBuff2 = CBuffManager.Instance.CreateBuffInstance();
-					cBuff2.Templet = item5.Templet.CopyForChangeDebuff(buffToolTipTemplet.ConvertToID);
-					if (cBuff2.Initialize(cBuff2.Templet, Caster, item5.Owner, _IsIgnoreCheckCondition: true))
+					CBuff cBuff = CBuffManager.Instance.CreateBuffInstance();
+					cBuff.Templet = item5.Templet.CopyForChangeDebuff(buffToolTipTemplet.ConvertToID);
+					if (cBuff.Initialize(cBuff.Templet, Caster, item5.Owner, _IsIgnoreCheckCondition: true))
 					{
-						cBuff2.Caster = Caster;
-						cBuff2.Run();
-						cBuff2.RemainTurnCont = item5.RemainTurnCont;
-						Owner.AddBuff(cBuff2);
+						cBuff.Caster = Caster;
+						cBuff.Run();
+						cBuff.RemainTurnCont = item5.RemainTurnCont;
+						Owner.AddBuff(cBuff);
 					}
 					else
 					{
-						CBuffManager.Instance.ReleaseBuff(cBuff2);
+						CBuffManager.Instance.ReleaseBuff(cBuff);
 					}
 					Owner.RemoveBuff(item5);
 				}
@@ -451,13 +467,13 @@
 			{
 				break;
 			}
-			List<CBuff> buffList = Caster.GetBuffList(_IsDeBuff: false);
-			if (buffList.IsNullOrEmpty())
+			List<CBuff> buffList3 = Caster.GetBuffList(_IsDeBuff: false);
+			if (buffList3.IsNullOrEmpty())
 			{
 				break;
 			}
-			int num4 = 0;
-			foreach (CBuff item6 in buffList)
+			int num9 = 0;
+			foreach (CBuff item6 in buffList3)
 			{
 				if (item6 == null || item6.RemainTurnCont <= 0 || item6.Templet.ToolTipID <= 0)
 				{
@@ -466,17 +482,17 @@
 				CToolTipGroupTemplet toolTipMemberTemplet = CTempletManager.Instance.GetToolTipMemberTemplet(Templet.Value);
 				if (toolTipMemberTemplet != null && !toolTipMemberTemplet.ToolTipMemberList.IsNullOrEmpty() && toolTipMemberTemplet.ToolTipMemberList.Contains(item6.Templet.ToolTipID))
 				{
-					CBuff cBuff = CBuffManager.Instance.CreateBuffInstance();
-					if (cBuff.Initialize(item6.Templet, Caster, Owner, _IsIgnoreCheckCondition: false, Templet.TurnDuration))
+					CBuff cBuff7 = CBuffManager.Instance.CreateBuffInstance();
+					if (cBuff7.Initialize(item6.Templet, Caster, Owner, _IsIgnoreCheckCondition: false, Templet.TurnDuration))
 					{
-						cBuff.Run();
-						cBuff.RemainTurnCont = Templet.TurnDuration;
-						Owner.AddBuff(cBuff);
-						num4++;
+						cBuff7.Run();
+						cBuff7.RemainTurnCont = Templet.TurnDuration;
+						Owner.AddBuff(cBuff7);
+						num9++;
 					}
 					else
 					{
-						CBuffManager.Instance.ReleaseBuff(cBuff);
+						CBuffManager.Instance.ReleaseBuff(cBuff7);
 					}
 				}
 			}
@@ -583,17 +599,17 @@
 				}
 				return result;
 			}
-			int battleRandomRange2 = CFormula.GetBattleRandomRange(0, 999);
+			int battleRandomRange3 = CFormula.GetBattleRandomRange(0, 999);
 			int num5 = 0;
-			for (int l = 0; l < buffGroupTemplet2.Child_Rates.Length; l++)
+			for (int num6 = 0; num6 < buffGroupTemplet2.Child_Rates.Length; num6++)
 			{
-				num5 += buffGroupTemplet2.Child_Rates[l];
-				if (battleRandomRange2 < num5)
+				num5 += buffGroupTemplet2.Child_Rates[num6];
+				if (battleRandomRange3 < num5)
 				{
-					CBuffTemplet buffTemplet4 = CBuffTempletContainer.Instance.GetBuffTemplet(buffGroupTemplet2.Child_BIDs[l], Templet.Level);
+					CBuffTemplet buffTemplet4 = CBuffTempletContainer.Instance.GetBuffTemplet(buffGroupTemplet2.Child_BIDs[num6], Templet.Level);
 					if (buffTemplet4 == null)
 					{
-						CDebug.LogErrorFormat("ChildBuffTemplet not Found!! [{0}][{1}]", buffGroupTemplet2.Child_BIDs[l], Templet.Level);
+						CDebug.LogErrorFormat("ChildBuffTemplet not Found!! [{0}][{1}]", buffGroupTemplet2.Child_BIDs[num6], Templet.Level);
 						return false;
 					}
 					CBuffManager.Instance.CreateBuff(buffTemplet4, Caster, Owner, _bTargetEnemyOnly: false);

@@ -5144,6 +5144,48 @@
         "def": 35
       }
     },
+    "2000124": {
+      "2": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 20
+      },
+      "3": {
+        "atk": 22,
+        "def": 14,
+        "buff_chance": 30
+      },
+      "4": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "5": {
+        "atk": 33,
+        "def": 21,
+        "buff_chance": 30
+      },
+      "6": {
+        "hp": 448,
+        "def": 135,
+        "speed": 4
+      },
+      "7": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      },
+      "8": {
+        "atk": 33,
+        "dmg_reduce_rate": 20,
+        "hp": 224
+      },
+      "9": {
+        "atk": 33,
+        "def": 21,
+        "hp": 224
+      }
+    },
     "2000129": {
       "2": {
         "hp": 88,
@@ -6216,6 +6258,11 @@
       "mode": "rate",
       "value": 100
     },
+    "2000124": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
+    },
     "2010001": {
       "stat": "def",
       "mode": "rate",
@@ -6406,6 +6453,11 @@
       "mode": "rate",
       "value": 100
     },
+    "2010100": {
+      "stat": "hp",
+      "mode": "rate",
+      "value": 100
+    },
     "2010107": {
       "stat": "atk",
       "mode": "rate",
@@ -6465,6 +6517,11 @@
       "stat": "atk",
       "mode": "rate",
       "value": 100
+    },
+    "2010124": {
+      "stat": "critical_rate",
+      "mode": "flat",
+      "value": 50
     },
     "2020019": {
       "stat": "critical_rate",
@@ -6571,6 +6628,16 @@
       "mode": "flat",
       "value": 50
     },
+    "2020119": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2020120": {
+      "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
     "2030019": {
       "stat": "critical_rate",
       "mode": "flat",
@@ -6608,6 +6675,11 @@
     },
     "2040065": {
       "stat": "atk",
+      "mode": "rate",
+      "value": 100
+    },
+    "2040084": {
+      "stat": "hp",
       "mode": "rate",
       "value": 100
     },
@@ -10309,6 +10381,22 @@
           "stat": "critical_rate",
           "applying": "add",
           "value": 60
+        }
+      ]
+    },
+    "12408": {
+      "3": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
+        }
+      ],
+      "4": [
+        {
+          "stat": "pierce_power_rate",
+          "applying": "add",
+          "value": 300
         }
       ]
     },

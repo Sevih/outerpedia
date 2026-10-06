@@ -1,4 +1,4 @@
-// CCharacterData$$GetStatValuePermille — client Steam 1.4.17 (Assembly-CSharp.dll, Mono)
+// CCharacterData$$GetStatValuePermille — client Steam 1.4.18 (Assembly-CSharp.dll, Mono)
 // Régénéré par `pnpm datagen:extract-cs` — NE PAS ÉDITER. Source : CCharacterData.cs.
 
 	public int GetStatValuePermille(STAT_TYPE _eStatType, int _nPermille)

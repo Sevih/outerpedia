@@ -38,7 +38,8 @@
     "2000121": "FX_UI_Character_List_2000121",
     "2000129": "FX_UI_Character_List_Demi",
     "2700019": "FX_UI_Character_List_Resonance",
-    "2700035": "FX_UI_Character_List_Resonance"
+    "2700035": "FX_UI_Character_List_Resonance",
+    "2000124": "FX_UI_Character_List_Demi"
   },
   "effects": {
     "FX_UI_Character_List_Demi": {

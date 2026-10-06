@@ -89,7 +89,8 @@ export const DAILY_TASK_DEFINITIONS: Record<string, TaskDefinition> = stamp('dai
   'memorial-match': { category: 'task', permanent: true, maxCount: 5 },
   'story-hard': { category: 'task', permanent: true, maxCount: 30 },
   // Masquée par le réglage « tour élémentaire terminée »
-  'elemental-tower': { category: 'task', permanent: true, maxCount: 5 },
+  // 10 entrées par jour, partagées entre les tours élémentaires (patch 1.4.18, 06/10/2026).
+  'elemental-tower': { category: 'task', permanent: true, maxCount: 10 },
   // 10 pubs × 18 stamina = 180 stamina/jour — masquée avec le pack premium
   // Veronica (la stamina est alors réclamée automatiquement, sans pub)
   'ad-stamina': { category: 'task', permanent: true, maxCount: 10 },

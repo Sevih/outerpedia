@@ -57,3 +57,6 @@ desktop.ini
 docs/seo&audit
 # Dumps SQL locaux (migration ponctuelle) — jamais commites
 *.sql
+
+# Python : extracteurs datagen (UnityPy)
+__pycache__/

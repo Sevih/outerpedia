@@ -121,7 +121,7 @@
   },
   "780": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "781": {
     "bosses": ["51202001", "51202002"]
@@ -278,7 +278,7 @@
   },
   "1792": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "1793": {
     "bosses": ["51202001", "51202002"]
@@ -353,7 +353,7 @@
   },
   "3336": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "3360": {
     "bosses": ["404400362"]
@@ -420,7 +420,7 @@
   },
   "5336": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "5360": {
     "bosses": ["404400362"]
@@ -486,7 +486,7 @@
   },
   "7336": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "7360": {
     "bosses": ["404400362"]
@@ -552,7 +552,7 @@
   },
   "9336": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "9360": {
     "bosses": ["404400362"]
@@ -577,10 +577,10 @@
   },
   "10996": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   },
   "10997": {
     "bosses": [],
-    "shops": ["adventure_license"]
+    "shops": ["survey"]
   }
 }

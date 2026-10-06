@@ -108,10 +108,16 @@ def extract() -> dict[str, dict]:
     manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
     infos = [b for b in manifest['bundleInfos'] if b.get('name', '').startswith(PC_PREFIX)]
     out: dict[str, dict] = {}
+    # Un bundle du manifeste que le client n'a pas encore livré (perso annoncé,
+    # pas encore sorti : Demiurge Lambda 2000124 le jour du patch du 06/10/2026)
+    # n'arrête pas l'extraction — comme pour les images (bundle-manifest.ts).
+    # Le perso n'a alors pas d'événements : il n'est pas intégré non plus.
+    unshipped: list[str] = []
     for idx, info in enumerate(infos):
         path = BUNDLES_DIR / info['filename']
         if not path.exists():
-            raise FileNotFoundError(f'Bundle {info["name"]} absent du disque : {path}')
+            unshipped.append(info['name'])
+            continue
         env = UnityPy.load(str(path))
         clip_name_by_pid: dict[int, str] = {}
         clip_trees: list[dict] = []
@@ -146,6 +152,13 @@ def extract() -> dict[str, dict]:
     for entry in out.values():
         entry['clips'] = dict(sorted(entry['clips'].items()))
         entry['triggers'] = dict(sorted(entry['triggers'].items()))
+    if unshipped:
+        print(
+            f'⚠ {len(unshipped)} bundle(s) du manifeste non livré(s) par ce client, '
+            f'sans événements : {", ".join(unshipped)}',
+            file=sys.stderr,
+            flush=True,
+        )
     return dict(sorted(out.items()))
 
 

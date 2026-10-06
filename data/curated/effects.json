@@ -63,6 +63,15 @@
   "10002": {
     "tag": "statBoosts"
   },
+  "2000035": {
+    "tag": "unique"
+  },
+  "2000052": {
+    "tag": "unique"
+  },
+  "2000124": {
+    "tag": "unique"
+  },
   "2010112": {
     "tag": "unique"
   },
@@ -72,6 +81,9 @@
     "note": "copie de buffs (Dianne) : le buff BT_CASTER_COPY_BUFF n'a pas de tooltip — clé type → statut « Gift of Buffs »"
   },
   "2100129": {
+    "tag": "unique"
+  },
+  "2700035": {
     "tag": "unique"
   },
   "DISCHARGE_AP": {
@@ -344,6 +356,9 @@
     "keys": ["BT_AP_CHARGE", "DISCHARGE_AP"],
     "tag": "utility",
     "note": "création — mécanique sans texte dans les tables ; source : glossaire V2 (écrit main)"
+  },
+  "SYS_BUFF_STACK_UP": {
+    "hidden": true
   },
   "UNCOUNTERABLE": {
     "name": {

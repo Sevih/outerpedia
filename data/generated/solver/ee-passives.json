@@ -77,14 +77,6 @@
       "v": 500
     }
   ],
-  "2000052": [
-    {
-      "levelThreshold": 10,
-      "st": "ST_BUFF_CHANCE",
-      "ap": "OAT_RATE",
-      "v": 1000
-    }
-  ],
   "2000057": [
     {
       "levelThreshold": 10,

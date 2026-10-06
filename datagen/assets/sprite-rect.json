@@ -713,6 +713,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2000124": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2000129": {
     "w": 180,
     "h": 344,
@@ -1091,6 +1097,12 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2010124": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2010129": {
     "w": 180,
     "h": 344,
@@ -1265,6 +1277,18 @@
     "left": 2,
     "bottom": 2
   },
+  "at_thumbnailcharacterruntime/CT_2020119": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
+  "at_thumbnailcharacterruntime/CT_2020120": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
   "at_thumbnailcharacterruntime/CT_2030012": {
     "w": 180,
     "h": 344,
@@ -1320,6 +1344,12 @@
     "bottom": 2
   },
   "at_thumbnailcharacterruntime/CT_2040065": {
+    "w": 180,
+    "h": 344,
+    "left": 2,
+    "bottom": 2
+  },
+  "at_thumbnailcharacterruntime/CT_2040084": {
     "w": 180,
     "h": 344,
     "left": 2,
@@ -1834,6 +1864,12 @@
     "h": 116,
     "left": 2,
     "bottom": 3
+  },
+  "at_thumbnailcharacterruntime/CT_Account_Frame_Moon_Rabbit": {
+    "w": 116,
+    "h": 116,
+    "left": 0,
+    "bottom": 1
   },
   "at_thumbnailcharacterruntime/CT_Account_Frame_NewStart": {
     "w": 116,

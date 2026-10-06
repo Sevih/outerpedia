@@ -1527,19 +1527,33 @@
     "teamBonuses": []
   },
   "2000052": {
-    "buff": ["BT_ACTION_GAUGE", "BT_DMG_TARGET_BREAK", "BT_STAT|ST_ATK", "BT_STAT|ST_COUNTER_RATE"],
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_COOL_CHARGE",
+      "BT_DMG_TARGET_BREAK",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_BUFF_CHANCE",
+      "BT_STAT|ST_COUNTER_RATE",
+      "TOWER_ADMINISTRATOR"
+    ],
     "debuff": ["BT_DOT_LIGHTNING", "BT_STUN"],
     "effectsBySource": {
       "s1": {
-        "buff": [],
+        "buff": ["BT_ACTION_GAUGE"],
         "debuff": ["BT_STUN"]
       },
       "s2": {
-        "buff": ["BT_STAT|ST_ATK", "BT_STAT|ST_COUNTER_RATE"],
+        "buff": [
+          "BT_ACTION_GAUGE",
+          "BT_STAT|ST_ATK",
+          "BT_STAT|ST_BUFF_CHANCE",
+          "BT_STAT|ST_COUNTER_RATE",
+          "TOWER_ADMINISTRATOR"
+        ],
         "debuff": ["BT_DOT_LIGHTNING"]
       },
       "ultimate": {
-        "buff": ["BT_ACTION_GAUGE"],
+        "buff": ["BT_ACTION_GAUGE", "BT_COOL_CHARGE"],
         "debuff": ["BT_DOT_LIGHTNING"]
       },
       "chainPassive": {
@@ -3886,6 +3900,57 @@
       }
     },
     "teamBonuses": ["CHC"]
+  },
+  "2000124": {
+    "buff": [
+      "BT_ACTION_GAUGE",
+      "BT_ADDITIVE_TURN",
+      "BT_BARRIER_IR",
+      "BT_COOL_CHARGE",
+      "BT_STAT|ST_ATK",
+      "BT_STAT|ST_COUNTER_RATE",
+      "ELEMENTAL_ADVANTAGE",
+      "LIGHT_OF_THE_DEEP_SEA",
+      "UNIQUE_RESOURCE_INCREASE"
+    ],
+    "debuff": [
+      "BT_ACTION_GAUGE",
+      "BT_FIXED_DAMAGE",
+      "BT_STEAL_BUFF",
+      "BT_STUN",
+      "WEAKNESS_GAUGE_DAMAGE"
+    ],
+    "effectsBySource": {
+      "s1": {
+        "buff": [
+          "BT_ACTION_GAUGE",
+          "BT_ADDITIVE_TURN",
+          "BT_COOL_CHARGE",
+          "BT_STAT|ST_ATK",
+          "LIGHT_OF_THE_DEEP_SEA"
+        ],
+        "debuff": ["WEAKNESS_GAUGE_DAMAGE"]
+      },
+      "s2": {
+        "buff": [
+          "BT_ACTION_GAUGE",
+          "BT_COOL_CHARGE",
+          "BT_STAT|ST_COUNTER_RATE",
+          "ELEMENTAL_ADVANTAGE",
+          "LIGHT_OF_THE_DEEP_SEA"
+        ],
+        "debuff": ["BT_ACTION_GAUGE"]
+      },
+      "ultimate": {
+        "buff": ["BT_ADDITIVE_TURN"],
+        "debuff": ["BT_FIXED_DAMAGE", "BT_STEAL_BUFF", "BT_STUN"]
+      },
+      "dualAttack": {
+        "buff": ["BT_ACTION_GAUGE"],
+        "debuff": []
+      }
+    },
+    "teamBonuses": []
   },
   "2000129": {
     "buff": [

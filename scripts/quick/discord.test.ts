@@ -3295,8 +3295,10 @@ describe('texte d’une note officielle', () => {
     expect(text.length).toBeLessThan(post!.content.length / 4);
     expect(text.length).toBeGreaterThan(20_000);
     // Rien de la note de travail (titre, date, adresse) n'y manque pour la demande.
+    // Le titre n'est pas figé : l'éditeur le suffixe à chaque ajout
+    // (« (Added on 10/6 00:33 UTC) » le jour du patch), et `posts.json` suit.
     expect(requestNote(post!)).toEqual({
-      title: '10/06(Tue) Patch Note',
+      title: expect.stringMatching(/^10\/06\(Tue\) Patch Note/) as string,
       date: '2026-10-05',
       url: `https://${OFFICIAL_HOST}/2026/10/05/1006pne/`,
       text,

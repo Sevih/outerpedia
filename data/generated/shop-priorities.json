@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-09-29",
+  "asOf": "2026-10-13",
   "shops": [
     {
       "key": "guild",
@@ -1522,7 +1522,7 @@
             "jp": "200,000ゴールド",
             "kr": "200,000 골드",
             "zh": "200,000金币",
-            "fr": "200,000 or or",
+            "fr": "200,000 or",
             "es": "200,000 Oro"
           },
           "icon": "CM_TopMenu_Gold",
@@ -2045,7 +2045,7 @@
             "jp": "不敗の指導者・ネラ",
             "kr": "불패의 지도자 넬라",
             "zh": "不败的领袖内拉",
-            "fr": "Leader invaincu Nella Nella.",
+            "fr": "Leader invaincu Nella.",
             "es": "Nella, la Líder Invicta"
           },
           "icon": "TI_Costume_Clothes_2000091_02",
@@ -2137,7 +2137,7 @@
           "gives": 1,
           "cost": 500,
           "limit": {
-            "count": 2,
+            "count": 4,
             "period": "monthly"
           },
           "priority": "S"
@@ -2159,7 +2159,7 @@
           "gives": 1,
           "cost": 400,
           "limit": {
-            "count": 2,
+            "count": 4,
             "period": "monthly"
           },
           "priority": "S"
@@ -2181,7 +2181,7 @@
           "gives": 1,
           "cost": 150,
           "limit": {
-            "count": 5,
+            "count": 8,
             "period": "monthly"
           },
           "priority": "S"
@@ -2209,26 +2209,26 @@
           "priority": "S"
         },
         {
-          "key": "survey/item-30367/monthly",
+          "key": "survey/item-30385/monthly",
           "productId": "5109",
           "name": {
-            "en": "Stage 4 Gem Selection Chest",
-            "jp": "ジェム選択ボックス(ランク4)",
-            "kr": "4단계 보석 선택 상자",
-            "zh": "第4阶段宝石选择箱",
-            "fr": "Coffre de sélection de gemmes niv. 4",
-            "es": "Cofre de Selección de Gema de Fase 4"
+            "en": "Stage 5–6 Gem Chest",
+            "jp": "ジェムボックス(ランク5～6)",
+            "kr": "5~6단계 보석 상자",
+            "zh": "第5~6阶段宝石箱",
+            "fr": "Coffre de gemmes niv. 5–6",
+            "es": "Cofre de gemas de fase 5–6"
           },
           "icon": "TI_GEM_Box_01",
           "iconKind": "item",
-          "grade": "rare",
+          "grade": "unique",
           "gives": 1,
-          "cost": 50,
+          "cost": 250,
           "limit": {
-            "count": 5,
+            "count": 2,
             "period": "monthly"
           },
-          "priority": "C"
+          "priority": "A"
         },
         {
           "key": "survey/item-21104/monthly",
@@ -2370,7 +2370,7 @@
             "jp": "レジェンド研磨剤10%",
             "kr": "10% 전설 등급 연마제",
             "zh": "10%传说级别研磨剂",
-            "fr": "10% Légendaire abrasif abrasif",
+            "fr": "10% Légendaire abrasif",
             "es": "Abrasivo Legendario 10%"
           },
           "icon": "TI_Item_Craft_Addition_U_01",
@@ -2524,7 +2524,7 @@
             "jp": "★6アーマー選択ボックス【レジェンド】",
             "kr": "6성 전설 갑옷 선택 상자",
             "zh": "6星传说盔甲选择箱",
-            "fr": "Coffre de sélection d'armure légendaire 6★",
+            "fr": "6★ Légendaire box armure sélection box",
             "es": "Cofre de selección de armadura legendaria 6★"
           },
           "icon": "TI_Armor_Box02",
@@ -2600,6 +2600,182 @@
           "cost": 1,
           "limit": {
             "count": 900,
+            "period": "one-time"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-10996/one-time",
+          "productId": "5127",
+          "name": {
+            "en": "Powerful Adventurer's Talisman",
+            "jp": "強力な冒険者のタリスマン",
+            "kr": "강력한 모험가의 탈리스만",
+            "zh": "强力冒险家的护身符",
+            "fr": "Powerful Adventurer's Talisman",
+            "es": "Talismán Poderoso del Aventurero"
+          },
+          "icon": "TI_Equipment_Talisman_08",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 1000,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-10997/one-time",
+          "productId": "5128",
+          "name": {
+            "en": "Sharp Adventurer's Talisman",
+            "jp": "鋭敏な冒険者のタリスマン",
+            "kr": "예리한 모험가의 탈리스만",
+            "zh": "敏锐冒险家的护身符",
+            "fr": "acéré Adventurer's Talisman",
+            "es": "Talismán Agudo del Aventurero"
+          },
+          "icon": "TI_Equipment_Talisman_03",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 1000,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-780/one-time",
+          "productId": "5129",
+          "name": {
+            "en": "Adventurer's Sword",
+            "jp": "冒険者の剣",
+            "kr": "모험가의 검",
+            "zh": "冒险家之剑",
+            "fr": "L'épée de l'aventurier",
+            "es": "Espada del Aventurero"
+          },
+          "icon": "TI_Equipment_Weapon_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 750,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-1792/one-time",
+          "productId": "5130",
+          "name": {
+            "en": "Adventurer's Necklace",
+            "jp": "冒険者の首飾り",
+            "kr": "모험가의 목걸이",
+            "zh": "冒险家项链",
+            "fr": "Adventurer's Necklace",
+            "es": "Collar del Aventurero"
+          },
+          "icon": "TI_Equipment_Accessary_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 750,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "C"
+        },
+        {
+          "key": "survey/item-3336/one-time",
+          "productId": "5131",
+          "name": {
+            "en": "6★ Legendary Helmet [Burst]",
+            "jp": "★6炸裂のヘルム\\n【レジェンド】",
+            "kr": "6성 전설 투구 [버스트]",
+            "zh": "6星传说头盔【爆发】",
+            "fr": "6★ Casque légendaire de [Burst]",
+            "es": "Casco Legendario 6★ [Burst]"
+          },
+          "icon": "TI_Equipment_Helmet_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-5336/one-time",
+          "productId": "5132",
+          "name": {
+            "en": "6★ Legendary Chest Armor [Burst]",
+            "jp": "★6炸裂のアーマー\\n【レジェンド】",
+            "kr": "6성 전설 갑옷 [버스트]",
+            "zh": "6星传说盔甲【爆发】",
+            "fr": "6★ Légendaire coffre armure [Burst]",
+            "es": "Peto Legendario 6★ [Burst]"
+          },
+          "icon": "TI_Equipment_Armor_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-7336/one-time",
+          "productId": "5133",
+          "name": {
+            "en": "6★ Legendary Gloves [Burst]",
+            "jp": "★6炸裂のガントレット\\n【レジェンド】",
+            "kr": "6성 전설 장갑 [버스트]",
+            "zh": "6星传说手套【爆发】",
+            "fr": "6★ Légendaire Gloves [Burst]",
+            "es": "Guantes Legendarios [Burst]"
+          },
+          "icon": "TI_Equipment_Gloves_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 1,
+            "period": "one-time"
+          },
+          "priority": "A"
+        },
+        {
+          "key": "survey/item-9336/one-time",
+          "productId": "5134",
+          "name": {
+            "en": "6★ Legendary Boots [Burst]",
+            "jp": "★6炸裂のブーツ\\n【レジェンド】",
+            "kr": "6성 전설 신발 [버스트]",
+            "zh": "6星传说鞋子【爆发】",
+            "fr": "6★ Légendaire bottes [Burst]",
+            "es": "Botas Legendarias [Burst]"
+          },
+          "icon": "TI_Equipment_Shoes_06",
+          "iconKind": "equipment",
+          "grade": "unique",
+          "gives": 1,
+          "cost": 250,
+          "limit": {
+            "count": 1,
             "period": "one-time"
           },
           "priority": "A"

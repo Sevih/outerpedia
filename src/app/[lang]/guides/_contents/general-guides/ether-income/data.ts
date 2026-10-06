@@ -30,7 +30,7 @@ export const DAILY_SOURCES: EtherSource[] = [
   { id: 'daily.freePack', amount: 15 },
   { id: 'daily.missionEvent', amount: 30 },
   { id: 'daily.antiparticle', amount: 78 },
-  { id: 'daily.singularityRanking', amount: 5, daysPerWeek: 4, ranked: 'singularity' },
+  { id: 'daily.singularityRanking', amount: 5, daysPerWeek: 5, ranked: 'singularity' },
 ];
 
 export const WEEKLY_SOURCES: EtherSource[] = [

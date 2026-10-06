@@ -46739,6 +46739,21 @@
     "armorSetIcon": null,
     "class": null
   },
+  "2000124": {
+    "slot": "exclusive",
+    "grade": "unique",
+    "star": 6,
+    "classLimit": null,
+    "setId": "2000124,2100124",
+    "armorSetId": null,
+    "name": "Salvage Spear",
+    "mainGroup": "2000124",
+    "subGroup": null,
+    "image": "TI_Equipment_EX_2000124",
+    "effectIcon": "TI_Icon_UO_EXCLUSIVE",
+    "armorSetIcon": null,
+    "class": null
+  },
   "2000129": {
     "slot": "exclusive",
     "grade": "unique",

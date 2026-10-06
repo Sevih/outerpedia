@@ -13,7 +13,7 @@
       "jp": "敵単体を攻撃時、対象の最大HPの[Value]ダメージがUPする。",
       "kr": "단일 대상 공격 시 대상의 전체 체력의 [Value] 만큼 피해량 증가",
       "zh": "攻击单一目标时，使伤害量提升相当于目标全部生命值的[Value]",
-      "fr": "Accroît les DGT causés par [Value] de PV max de la cible lorsqu'elle attaque une seule cible.",
+      "fr": "Augmente les dommages causés par [Value] de PV max. de la cible lorsqu'elle attaque une seule cible.",
       "es": "Aumenta el daño en [Value] de la Vida máxima al atacar único."
     },
     "values": [
@@ -163,7 +163,7 @@
       "jp": "敵を倒した時、[Rate]の確率で必殺スキルのターンが1ターン減少する。",
       "kr": "적 처치 시 [Rate] 확률로 필살기 쿨타임 1턴 감소",
       "zh": "击杀敌人时，有[Rate]的几率使必杀技的冷却时间减少1回合",
-      "fr": "A une chance [Rate] de réduire le recharge d'une comp. ultime par 1 tour lorsqu'il tue un ennemi ennemi.",
+      "fr": "A une chance [Rate] de réduire le refroidissement d'une compétence ultime par 1 tour lorsqu'il tue un ennemi.",
       "es": "[Rate] probabilidad de reducción de 1 turno a Habilidad definitiva al matar."
     },
     "values": [
@@ -2075,7 +2075,7 @@
       "jp": "敵を倒した時、[Rate]の確率で必殺スキルのターンが1ターン減少する。",
       "kr": "적 처치 시 [Rate] 확률로 필살기 쿨타임 1턴 감소",
       "zh": "击杀敌人时，有[Rate]的几率使必杀技的冷却时间减少1回合",
-      "fr": "A une chance [Rate] de réduire le recharge d'une comp. ultime par 1 tour lorsqu'il tue un ennemi ennemi.",
+      "fr": "A une chance [Rate] de réduire le refroidissement d'une compétence ultime par 1 tour lorsqu'il tue un ennemi.",
       "es": "[Rate] probabilidad de reducción de 1 turno a Habilidad definitiva al matar."
     },
     "values": [
@@ -4053,7 +4053,7 @@
       "jp": "バーストスキル使用後、 [Rate]の確率で味方全体の効果命中が1ターンの間UPする。",
       "kr": "버스트 스킬 사용 후 [Rate] 확률로 아군 전체의 효과 적중 +1턴",
       "zh": "使用爆发技能后，有[Rate]的几率提升全体友军的效果命中+1回合",
-      "fr": "A une chance [Rate] d'accorder une Efficacité accrue à les alliés pour 1 tour après avoir utilisé une Burst Compétence Compétence.",
+      "fr": "A une chance [Rate] d'accorder une Efficacité accrue à tous les alliés pour 1 tour après avoir utilisé une Burst Compétence.",
       "es": "Tiene una [Rate] probabilidad de conceder Efectividad subeda a los aliados por 1 turno tras usar una Habilidad Explosiva"
     },
     "values": [
@@ -4204,7 +4204,7 @@
       "jp": "CP獲得 - 属性優位",
       "kr": "CP회복 - 속성 우위",
       "zh": "CP恢复-属性优势",
-      "fr": "Génération de points de chaîne - Élément d'avantage Avantage",
+      "fr": "Génération de points de chaîne - Élément d'avantage",
       "es": "Generación Chain Point - Ventaja Elemental"
     },
     "desc": {
@@ -4313,7 +4313,7 @@
       "jp": "AP獲得 - 属性優位",
       "kr": "AP회복 - 속성 우위",
       "zh": "AP恢复-属性优势",
-      "fr": "PA Relance - Élément Avantage Avantage",
+      "fr": "PA Relance - Élément Avantage",
       "es": "Recuperación de Action Point - Ventaja Elemental"
     },
     "desc": {
@@ -4321,7 +4321,7 @@
       "jp": "有利属性で敵を攻撃した場合、APを[Value]獲得する。",
       "kr": "공격 시 유리한 속성관계인 경우 AP [Value] 회복",
       "zh": "攻击时，若为优势属性，则AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'on attaque avec un élément avantageux.",
+      "fr": "Récupère [Value] PA lorsqu'on attaque avec un élément avantageux.",
       "es": "Recupera [Value] Puntos de Acción al atacar con un elemento ventajoso"
     },
     "values": [
@@ -4357,7 +4357,7 @@
       "jp": "必殺スキル使用時、APを[Value]獲得する。",
       "kr": "필살기 사용 시 AP [Value] 회복",
       "zh": "使用必杀技时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si using an ultimate",
+      "fr": "Recovers [Value] PA si using an ultimate",
       "es": "Recupera [Value] Puntos de acción al usar una hab. definitiva"
     },
     "values": [
@@ -4394,7 +4394,7 @@
       "jp": "全体攻撃時、APを[Value]獲得する。",
       "kr": "전체 공격 시 AP [Value] 회복",
       "zh": "发动全体攻击时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points quand on attaque tous les ennemis.",
+      "fr": "Récupère [Value] PA quand on attaque tous les ennemis.",
       "es": "Recupera [Value] Puntos de acción al atacar a los enemigos"
     },
     "values": [
@@ -4422,7 +4422,7 @@
       "jp": "AP獲得 - 広域被ダメージ",
       "kr": "AP회복 - 광역 피격",
       "zh": "AP恢复-范围受击",
-      "fr": "PA Recovery - Multi-cible Hit Hit multi-cible",
+      "fr": "PA Recovery - Multi-cible Hit multi-cible",
       "es": "Recuperación de Action Point: Golpe Múltiple"
     },
     "desc": {
@@ -4430,7 +4430,7 @@
       "jp": "全体攻撃を受けた場合、APを[Value]獲得する。",
       "kr": "전체 공격에 의한 피격 시 AP [Value] 회복",
       "zh": "受到全体攻击的伤害时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'ils sont frappés par une attaque qui cible les alliés.",
+      "fr": "Récupère [Value] PA lorsqu'ils sont frappés par une attaque qui cible les alliés.",
       "es": "Recupera [Value] PA al recibir ataque a todos los aliados"
     },
     "values": [
@@ -4603,7 +4603,7 @@
       "jp": "CP獲得 - 属性優位",
       "kr": "CP회복 - 속성 우위",
       "zh": "CP恢复-属性优势",
-      "fr": "Génération de points de chaîne - Élément d'avantage Avantage",
+      "fr": "Génération de points de chaîne - Élément d'avantage",
       "es": "Generación Chain Point - Ventaja Elemental"
     },
     "desc": {
@@ -4712,7 +4712,7 @@
       "jp": "AP獲得 - 属性優位",
       "kr": "AP회복 - 속성 우위",
       "zh": "AP恢复-属性优势",
-      "fr": "PA Relance - Élément Avantage Avantage",
+      "fr": "PA Relance - Élément Avantage",
       "es": "Recuperación de Action Point - Ventaja Elemental"
     },
     "desc": {
@@ -4720,7 +4720,7 @@
       "jp": "有利属性で敵を攻撃した場合、APを[Value]獲得する。",
       "kr": "공격 시 유리한 속성관계인 경우 AP [Value] 회복",
       "zh": "攻击时，若为优势属性，则AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'on attaque avec un élément avantageux.",
+      "fr": "Récupère [Value] PA lorsqu'on attaque avec un élément avantageux.",
       "es": "Recupera [Value] Puntos de Acción al atacar con un elemento ventajoso"
     },
     "values": [
@@ -4756,7 +4756,7 @@
       "jp": "必殺スキル使用時、APを[Value]獲得する。",
       "kr": "필살기 사용 시 AP [Value] 회복",
       "zh": "使用必杀技时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si using an ultimate",
+      "fr": "Recovers [Value] PA si using an ultimate",
       "es": "Recupera [Value] Puntos de acción al usar una hab. definitiva"
     },
     "values": [
@@ -4793,7 +4793,7 @@
       "jp": "全体攻撃時、APを[Value]獲得する。",
       "kr": "전체 공격 시 AP [Value] 회복",
       "zh": "发动全体攻击时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points quand on attaque tous les ennemis.",
+      "fr": "Récupère [Value] PA quand on attaque tous les ennemis.",
       "es": "Recupera [Value] Puntos de acción al atacar a los enemigos"
     },
     "values": [
@@ -4821,7 +4821,7 @@
       "jp": "AP獲得 - 広域被ダメージ",
       "kr": "AP회복 - 광역 피격",
       "zh": "AP恢复-范围受击",
-      "fr": "PA Recovery - Multi-cible Hit Hit multi-cible",
+      "fr": "PA Recovery - Multi-cible Hit multi-cible",
       "es": "Recuperación de Action Point: Golpe Múltiple"
     },
     "desc": {
@@ -4829,7 +4829,7 @@
       "jp": "全体攻撃を受けた場合、APを[Value]獲得する。",
       "kr": "전체 공격에 의한 피격 시 AP [Value] 회복",
       "zh": "受到全体攻击的伤害时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'ils sont frappés par une attaque qui cible les alliés.",
+      "fr": "Récupère [Value] PA lorsqu'ils sont frappés par une attaque qui cible les alliés.",
       "es": "Recupera [Value] PA al recibir ataque a todos los aliados"
     },
     "values": [
@@ -5002,7 +5002,7 @@
       "jp": "CP獲得 - 属性優位",
       "kr": "CP회복 - 속성 우위",
       "zh": "CP恢复-属性优势",
-      "fr": "Génération de points de chaîne - Élément d'avantage Avantage",
+      "fr": "Génération de points de chaîne - Élément d'avantage",
       "es": "Generación Chain Point - Ventaja Elemental"
     },
     "desc": {
@@ -5111,7 +5111,7 @@
       "jp": "AP獲得 - 属性優位",
       "kr": "AP회복 - 속성 우위",
       "zh": "AP恢复-属性优势",
-      "fr": "PA Relance - Élément Avantage Avantage",
+      "fr": "PA Relance - Élément Avantage",
       "es": "Recuperación de Action Point - Ventaja Elemental"
     },
     "desc": {
@@ -5119,7 +5119,7 @@
       "jp": "有利属性で敵を攻撃した場合、APを[Value]獲得する。",
       "kr": "공격 시 유리한 속성관계인 경우 AP [Value] 회복",
       "zh": "攻击时，若为优势属性，则AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'on attaque avec un élément avantageux.",
+      "fr": "Récupère [Value] PA lorsqu'on attaque avec un élément avantageux.",
       "es": "Recupera [Value] Puntos de Acción al atacar con un elemento ventajoso"
     },
     "values": [
@@ -5158,7 +5158,7 @@
       "jp": "必殺スキル使用時、APを[Value]獲得する。",
       "kr": "필살기 사용 시 AP [Value] 회복",
       "zh": "使用必杀技时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si using an ultimate",
+      "fr": "Recovers [Value] PA si using an ultimate",
       "es": "Recupera [Value] Puntos de acción al usar una hab. definitiva"
     },
     "values": [
@@ -5198,7 +5198,7 @@
       "jp": "全体攻撃時、APを[Value]獲得する。",
       "kr": "전체 공격 시 AP [Value] 회복",
       "zh": "发动全体攻击时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points quand on attaque tous les ennemis.",
+      "fr": "Récupère [Value] PA quand on attaque tous les ennemis.",
       "es": "Recupera [Value] Puntos de acción al atacar a los enemigos"
     },
     "values": [
@@ -5229,7 +5229,7 @@
       "jp": "AP獲得 - 広域被ダメージ",
       "kr": "AP회복 - 광역 피격",
       "zh": "AP恢复-范围受击",
-      "fr": "PA Recovery - Multi-cible Hit Hit multi-cible",
+      "fr": "PA Recovery - Multi-cible Hit multi-cible",
       "es": "Recuperación de Action Point: Golpe Múltiple"
     },
     "desc": {
@@ -5237,7 +5237,7 @@
       "jp": "全体攻撃を受けた場合、APを[Value]獲得する。",
       "kr": "전체 공격에 의한 피격 시 AP [Value] 회복",
       "zh": "受到全体攻击的伤害时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'ils sont frappés par une attaque qui cible les alliés.",
+      "fr": "Récupère [Value] PA lorsqu'ils sont frappés par une attaque qui cible les alliés.",
       "es": "Recupera [Value] PA al recibir ataque a todos los aliados"
     },
     "values": [
@@ -5387,7 +5387,7 @@
       "jp": "狂暴化した対象を攻撃時、APを[Value]獲得する。",
       "kr": "광폭화 대상 공격 시 AP [Value] 회복",
       "zh": "攻击处于狂暴化的目标时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si attacking an Enraged cible",
+      "fr": "Recovers [Value] PA si attacking an Enraged cible",
       "es": "Recupera [Value] Puntos acción al atacar un objetivo Enfadado"
     },
     "values": [
@@ -5459,7 +5459,7 @@
       "jp": "ブレイクした対象を攻撃時、ダメージがUPする。",
       "kr": "브레이크 대상 피해량 증가",
       "zh": "力竭目标伤害量提升",
-      "fr": "Accroît les DGT infligés aux cibles infligées par Break Break.",
+      "fr": "Augmente les dommages infligés aux cibles infligées par Break.",
       "es": "Aumenta el daño a objetivos con Ruptura"
     },
     "values": [{}],
@@ -5482,7 +5482,7 @@
       "jp": "CP獲得 - 属性優位",
       "kr": "CP회복 - 속성 우위",
       "zh": "CP恢复-属性优势",
-      "fr": "Génération de points de chaîne - Élément d'avantage Avantage",
+      "fr": "Génération de points de chaîne - Élément d'avantage",
       "es": "Generación Chain Point - Ventaja Elemental"
     },
     "desc": {
@@ -5590,7 +5590,7 @@
       "jp": "AP獲得 - 属性優位",
       "kr": "AP회복 - 속성 우위",
       "zh": "AP恢复-属性优势",
-      "fr": "PA Relance - Élément Avantage Avantage",
+      "fr": "PA Relance - Élément Avantage",
       "es": "Recuperación de Action Point - Ventaja Elemental"
     },
     "desc": {
@@ -5598,7 +5598,7 @@
       "jp": "攻撃時、有利属性の攻撃判定の場合、APを[Value]獲得する。",
       "kr": "공격 시 우위 속성이면 AP [Value] 회복",
       "zh": "攻击时若为优势属性，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'on attaque avec un élément avantageux.",
+      "fr": "Récupère [Value] PA lorsqu'on attaque avec un élément avantageux.",
       "es": "Recupera [Value] Puntos de Acción al atacar con un elemento ventajoso"
     },
     "values": [
@@ -5637,7 +5637,7 @@
       "jp": "必殺スキル使用時、APを[Value]獲得する。",
       "kr": "필살기 사용 시 AP [Value] 회복",
       "zh": "使用必杀技时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si using an ultimate",
+      "fr": "Recovers [Value] PA si using an ultimate",
       "es": "Recupera [Value] Puntos de acción al usar una hab. definitiva"
     },
     "values": [
@@ -5677,7 +5677,7 @@
       "jp": "全体攻撃時、APを[Value]獲得する。",
       "kr": "전체 공격 시 AP [Value] 회복",
       "zh": "发动全体攻击时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points quand on attaque tous les ennemis.",
+      "fr": "Récupère [Value] PA quand on attaque tous les ennemis.",
       "es": "Recupera [Value] Puntos de acción al atacar a los enemigos"
     },
     "values": [
@@ -5708,7 +5708,7 @@
       "jp": "AP獲得 - 広域被ダメージ",
       "kr": "AP회복 - 광역 피격",
       "zh": "AP恢复-范围受击",
-      "fr": "PA Recovery - Multi-cible Hit Hit multi-cible",
+      "fr": "PA Recovery - Multi-cible Hit multi-cible",
       "es": "Recuperación de Action Point: Golpe Múltiple"
     },
     "desc": {
@@ -5716,7 +5716,7 @@
       "jp": "全体攻撃でダメージを受けた場合、APを[Value]獲得する。",
       "kr": "전체 공격 피격 시 AP [Value] 회복",
       "zh": "受到全体攻击时，AP恢复[Value]",
-      "fr": "Récupère [Value] Action Points lorsqu'ils sont frappés par une attaque qui cible les alliés.",
+      "fr": "Récupère [Value] PA lorsqu'ils sont frappés par une attaque qui cible les alliés.",
       "es": "Recupera [Value] Puntos acción al recibir ataque a todos los aliados"
     },
     "values": [
@@ -5843,7 +5843,7 @@
       "jp": "攻撃後、[Rate]の確率で会心率UP+1ターン",
       "kr": "공격 후 [Rate] 확률로 치명 확률 증가 +1턴",
       "zh": "攻击后有[Rate]的几率使暴击率提升+1回合",
-      "fr": "A une chance [Rate] d'accroîtr Tx CRIT Chance pour 1 tour après avoir attaqué après avoir attaqué.",
+      "fr": "A une chance [Rate] d'augmenter Taux CRIT pour 1 tour après avoir attaqué après avoir attaqué.",
       "es": "Tiene una [Rate] probabilidad de aumentar la Prob. CRIT por 1 turno después de atacar"
     },
     "values": [
@@ -5885,7 +5885,7 @@
       "jp": "アセロラオリオン",
       "kr": "아세로라오리온",
       "zh": "亚赛劳拉奥里昂",
-      "fr": "Acérole Orion Orion",
+      "fr": "Acérole Orion",
       "es": "Acerola Orion"
     },
     "desc": {
@@ -6139,7 +6139,7 @@
       "jp": "強化効果がある場合、ダメージが[Value]UPする。",
       "kr": "강화 효과 보유 시 피해 [Value] 증가",
       "zh": "自身附带强化效果时，伤害提升[Value]",
-      "fr": "Accroît les DGT de [Value] lorsqu'on accorde un buff",
+      "fr": "Augmente les dommages de [Value] lorsqu'on accorde un buff",
       "es": "Aumenta el daño en [Value] si tiene un buff."
     },
     "values": [
@@ -6379,7 +6379,7 @@
       "jp": "強化効果がある場合、ダメージが[Value]UPする。",
       "kr": "강화 효과 보유 시 피해 [Value] 증가",
       "zh": "自身附带强化效果时，伤害提升[Value]",
-      "fr": "Accroît les DGT de [Value] lorsqu'on accorde un buff",
+      "fr": "Augmente les dommages de [Value] lorsqu'on accorde un buff",
       "es": "Aumenta el daño en [Value] si tiene un buff."
     },
     "values": [
@@ -6473,7 +6473,7 @@
       "jp": "強化効果がある場合、ダメージが[Value]UPする。",
       "kr": "강화 효과 보유 시 피해 [Value] 증가",
       "zh": "自身附带强化效果时，伤害提升[Value]",
-      "fr": "Accroît les DGT de [Value] lorsqu'on accorde un buff",
+      "fr": "Augmente les dommages de [Value] lorsqu'on accorde un buff",
       "es": "Aumenta el daño en [Value] si tiene un buff."
     },
     "values": [
@@ -6520,7 +6520,7 @@
       "jp": "強化効果がない対象を攻撃時、ダメージが[Value]UPする。",
       "kr": "강화 효과 미보유 대상 공격 시 피해 [Value] 증가",
       "zh": "攻击未附带强化效果的目标时，伤害提升[Value]",
-      "fr": "Accroît les DGT par [Value] lorsqu'on attaque une cible qui ne reçoit pas un buff.",
+      "fr": "Augmente les dommages par [Value] lorsqu'on attaque une cible qui ne reçoit pas un buff.",
       "es": "Al atacar a un objetivo sin mejora, el daño aumenta en [Value]"
     },
     "values": [
@@ -6615,7 +6615,7 @@
       "jp": "弱体効果を解除した時、自分を除く味方の行動ゲージが[+Value]UPする。",
       "kr": "약화 효과 해제 시 자신을 제외한 아군의 행동 게이지 [+Value]",
       "zh": "解除弱化效果时，除自身外的友军行动值\\n[+Value]",
-      "fr": "Accroît la priorité d'un allié sauf pour l'usuaire par par l'attireur[Value]quand on retire un débuff.",
+      "fr": "Augmente la priorité d'un allié sauf pour l'usuaire par l'attireur[Value]quand on retire un débuff.",
       "es": "Sube la prioridad de aliados (excluyendo portador) en [Value] al eliminar efecto de debilitamiento"
     },
     "values": [
@@ -6663,7 +6663,7 @@
       "jp": "強化効果がない対象を攻撃時、ダメージが[Value]UPする。",
       "kr": "강화 효과 미보유 대상 공격 시 피해 [Value] 증가",
       "zh": "攻击未附带强化效果的目标时，伤害提升[Value]",
-      "fr": "Accroît les DGT par [Value] lorsqu'on attaque une cible qui ne reçoit pas un buff.",
+      "fr": "Augmente les dommages par [Value] lorsqu'on attaque une cible qui ne reçoit pas un buff.",
       "es": "Al atacar a un objetivo sin mejora, el daño aumenta en [Value]"
     },
     "values": [
@@ -6710,7 +6710,7 @@
       "jp": "自分に強化効果がある場合、ダメージが[Value]UPする。",
       "kr": "강화 효과 보유 시 피해 [Value] 증가",
       "zh": "自身附带强化效果时，伤害提升[Value]",
-      "fr": "Accroît les DGT de l'utilisateur par [Value] lorsqu'on lui accorde un buff.",
+      "fr": "Augmente les dommages de l'utilisateur par [Value] lorsqu'on lui accorde un buff.",
       "es": "Aumenta el daño del portador en [Value] con mejora"
     },
     "values": [
@@ -6757,7 +6757,7 @@
       "jp": "敵単体を攻撃時、[Rate]の確率で感電を[Turn]ターンの間付与する。",
       "kr": "단일 대상 공격 시 [Rate] 확률로 [Turn]턴 동안 감전 부여",
       "zh": "攻击单体目标时，有[Rate]的几率造成触电，持续[Turn]回合。",
-      "fr": "En attaquant une seule cible, a un attaquant.[Rate]chance d'infliger Électrocuté pour pour[tour]Tour(s)",
+      "fr": "En attaquant une seule cible, a un attaquant.[Rate]chance d'infliger Électrocuté pour[Turn]Tour(s)",
       "es": "Al atacar un objetivo único: [Rate] probabilidad de infligir Electrocutado por [turno] turno(s)"
     },
     "values": [
@@ -6861,7 +6861,7 @@
       "jp": "行動後、[RATE]の確率で対象全体の防御力を+1ターンの間DOWNする。",
       "kr": "행동 후 [Rate] 확률로 대상 전체 방어력 감소 +1턴",
       "zh": "行动后，有[Rate]的几率使全体目标防御力降低+1回合",
-      "fr": "Après avoir exécuté une action, a une chance [Rate] d'infliger une défense réduite sur toutes les cibles pour 1 tour tour sur tour(s).",
+      "fr": "Après avoir exécuté une action, a une chance [Rate] d'infliger une défense réduite sur toutes les cibles pour 1 tour sur tour.",
       "es": "Tras realizar una acción, tiene una [Rate] probabilidad de infligir DEF reducida a todos los objetivos por 1 turno"
     },
     "values": [
@@ -6911,7 +6911,7 @@
       "jp": "攻撃後、[Rate]の確率で会心率が+1ターンの間UPする。",
       "kr": "행동 후 [Rate] 확률로 치명 확률 증가 +1턴",
       "zh": "使用后，有[Rate]的几率使暴击率提升+1回合",
-      "fr": "Après avoir exécuté une action, a une chance [Rate] de accorder une hausse de Tx CRIT Chance pour 1 tour de tour pour tour(s).",
+      "fr": "Après avoir exécuté une action, a une chance [Rate] de accorder une augmentation de Taux CRIT pour 1 tour de tour pour tour.",
       "es": "Tras actuar, tiene [Rate] de probabilidad de aumentar la Probabilidad de golpe crítico por 1 turno"
     },
     "values": [
@@ -7572,7 +7572,7 @@
       "jp": "必殺スキル使用時、APを[Value]獲得する。",
       "kr": "필살기 사용 시 AP [Value] 회복",
       "zh": "使用必杀技时，AP恢复[Value]",
-      "fr": "Recovers [Value] Action Points si using an ultimate",
+      "fr": "Recovers [Value] PA si using an ultimate",
       "es": "Recupera [Value] Puntos de acción al usar una hab. definitiva"
     },
     "values": [
@@ -8405,7 +8405,7 @@
       "jp": "<color=#28d9ed>【ノアカイザーX】</color>使用時、\\n対象の数が少ないほどダメージがUPする。",
       "kr": "<color=#28d9ed>노아 카이저X</color> 사용 시 대상이 적을수록 피해량 증가",
       "zh": "使用<color=#28d9ed>诺雅凯撒X</color>时，目标越少，则伤害量\\n越高",
-      "fr": "Si vous utilisez <color=#28d9ed>Noa Kaizer X</color>, accroît les DGT infligés inversement proportionnellement au nombre de cibles cibles.",
+      "fr": "Lorsque vous utilisez <color=#28d9ed>Noa Kaizer X</color>, augmente les dommages infligés inversement proportionnellement au nombre de cibles.",
       "es": "Al usar <color=#28d9ed>Noa Kaizer X</color>, sube el daño infligido inversamente proporcional al número de objetivos"
     },
     "values": [{}],
@@ -8614,7 +8614,7 @@
       "jp": "味方仲間の魔法型の攻撃力および防御力をUPさせる。",
       "kr": "아군 마법형 캐릭터들의 공격력 및 방어력 증가",
       "zh": "提升友军中魔法型角色的攻击力及防御力",
-      "fr": "Accroît l'attaque et la défense de l'allié Mages Mages",
+      "fr": "Augmente l'attaque et la défense de l'allié Mages",
       "es": "Aumenta Ataque/Defensa Magos aliados"
     },
     "values": [{}],
@@ -8719,7 +8719,7 @@
       "jp": "シンディの専用装備",
       "kr": "신디의 전용장비",
       "zh": "欣蒂专属装备",
-      "fr": "L'équipement exclusif de Cindy's Cindy's",
+      "fr": "L'équipement exclusif de Cindy's",
       "es": "Equipo exclusivo de Cindy"
     },
     "desc": {
@@ -8727,7 +8727,7 @@
       "jp": "<color=#28d9ed>【アストラクリスタル】</color>使用時、自分の行動ゲージが[+Value]UPする。",
       "kr": "<color=#28d9ed>스톰 크리스탈</color> 사용 시 자신의 행동 게이지 [+Value]",
       "zh": "使用<color=#28d9ed>风暴水晶</color>时，自身行动值[+Value]",
-      "fr": "- Quand utiliser<color=#28d9ed>Storm cristal cristal de cristal de tempête</color>, accroît la priorité de l'usuaire par,[Value]",
+      "fr": "- Quand utiliser<color=#28d9ed>Storm cristal de cristal de tempête</color>, augmente la priorité de l'usuaire par,[Value]",
       "es": "Al usar <color=#28d9ed>Cristal tormenta</color>, aumenta la Prioridad del portador en [Value]"
     },
     "values": [
@@ -8803,7 +8803,7 @@
       "jp": "<color=#28d9ed>【準備はいいか? はい、船長!】</color>使用時、\\n対象の数が少ないほどダメージがUPする。",
       "kr": "<color=#28d9ed>준비 됐나? 네, 선장님!</color> 사용 시 대상이 적을수록 피해량 증가",
       "zh": "使用<color=#28d9ed>准备好了吗？是，船长！</color>时，目标越\\n少，伤害量越高",
-      "fr": "Si vous utilisez <color=#28d9ed>Aye, Captain!</color>, accroît les DGT infligés inversement proportionnellement au nombre de cibles cibles.",
+      "fr": "Lorsque vous utilisez <color=#28d9ed>Aye, Captain!</color>, augmente les dommages infligés inversement proportionnellement au nombre de cibles.",
       "es": "¡Al usar <color=#28d9ed>Aye Aye, Captain!</color>, sube el daño infligido inversamente proporcional al número de objetivos"
     },
     "values": [{}],
@@ -9118,7 +9118,7 @@
       "jp": "残りHPが低いほど防御力がUPする。",
       "kr": "체력이 감소할수록 방어력 증가",
       "zh": "生命值越低，防御力越高",
-      "fr": "Accroît la DÉF proportionnelle à PV manquante manquante PV",
+      "fr": "Augmente la Défense proportionnelle à PV manquante PV",
       "es": "Defensa proporcional a Vida faltante."
     },
     "values": [{}],
@@ -9221,7 +9221,7 @@
       "jp": "<color=#28d9ed>【ウォータープリズン】</color>で敵を倒した時、\\n[Value]の確率で追加ターンを獲得する。",
       "kr": "<color=#28d9ed>워터 볼</color>로 적 처치 시 [Value] 확률로 추가 턴 획득",
       "zh": "使用<color=#28d9ed>水球</color>击杀敌人时，有[Value]的几率获得\\n额外回合",
-      "fr": "Si,<color=#28d9ed>Boule d'eau</color>a un a[Value]chance de gagner un tour suppl. suppl.",
+      "fr": "Si,<color=#28d9ed>Boule d'eau</color>a un a[Value]chance de gagner un tour supplémentaire",
       "es": "Si <color=#28d9ed>Agua Bola</color> derrota a un enemigo, tiene una [Value] probabilidad de ganar un turno extra"
     },
     "values": [
@@ -9516,7 +9516,7 @@
       "jp": "<color=#28d9ed>【アブラクサスの飛翔】</color>使用時、APが[+Value]UPする。",
       "kr": "<color=#28d9ed>아브락사스의 비상</color> 사용 시 AP [+Value]",
       "zh": "使用<color=#28d9ed>阿布拉克萨斯的悲伤</color>时，AP[+Value]",
-      "fr": "- Quand utiliser<color=#28d9ed>Vol d'Abraxass</color>, accorde, accorde,[Value]PA PA",
+      "fr": "- Quand utiliser<color=#28d9ed>Vol d'Abraxass</color>, subventions, subventions,[Value]PA",
       "es": "Al usar <color=#28d9ed>Vuelo de Abraxas</color>, otorga [Value] Puntos de acción"
     },
     "values": [
@@ -9691,7 +9691,7 @@
       "jp": "味方が攻撃を受けた時、自分の行動ゲージが[+Value]UP",
       "kr": "아군 팀 피격 시 자신 행동 게이지 [+Value]",
       "zh": "当友军受到攻击时，自身行动值[+Value]",
-      "fr": "Lorsqu'un membre de l'équipe allié est frappé, accroîtr l'auto priorité Prior.[+Value]",
+      "fr": "Lorsqu'un membre de l'équipe allié est frappé, augmenter l'auto priorité[+Value]",
       "es": "Al un miembro del equipo aliado es golpeado, sube tu prioridad [+Value]"
     },
     "values": [
@@ -9804,7 +9804,7 @@
       "jp": "自分の効果命中UP[+Value]",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中提升[+Value]",
-      "fr": "Hausse de l'Efficacité[+Value]",
+      "fr": "Augmentation de l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -11732,7 +11732,7 @@
       "jp": "エリスの専用装備",
       "kr": "에리스의 전용 장비",
       "zh": "艾理斯的专用装备",
-      "fr": "Eris.S équipement exclusif exclusif Eris.",
+      "fr": "Eris.S équipement exclusif Eris.",
       "es": "Equipo Exclusivo de Eris"
     },
     "desc": {
@@ -11892,6 +11892,39 @@
         "target": "me",
         "buff": "BID_CEQUIP_2000122",
         "stat": "dmg_boost",
+        "mode": "up"
+      }
+    ]
+  },
+  "2000124": {
+    "name": {
+      "en": "Demiurge Lambda's Exclusive Equipment",
+      "jp": "デミウルゴス・ラムダ専用装備",
+      "kr": "데미우르고스 람다의 전용 장비",
+      "zh": "创世之神·拉姆达的专属装备",
+      "fr": "Équipement exclusif de Démiurge Lambda",
+      "es": "Equipo exclusivo de Demiurgo Lambda"
+    },
+    "desc": {
+      "en": "Increases damage proportional to the target's Max Health (up to 100%)",
+      "jp": "対象の最大HPに比例してダメージUP（最大100%）",
+      "kr": "대상 최대 체력 비례 피해 증가 (최대 100%)",
+      "zh": "造成的伤害随目标最大生命值提升（最多100%）",
+      "fr": "Augmente les dégâts selon les PV max de la cible (max. 100 %)",
+      "es": "Aumenta el daño según la Vida Máx. del objetivo (máx. 100%)"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000124",
+    "effects": [
+      {
+        "family": "damage",
+        "category": "buff",
+        "type": "BT_DMG_TARGET_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000124",
+        "stat": "hp",
         "mode": "up"
       }
     ]
@@ -12727,7 +12760,7 @@
       "jp": "<color=#28d9ed>【ノアカイザーX】</color>使用時、対象が単体の場合、\\n貫通力が<color=#28d9ed>+30%</color>UPする。",
       "kr": "<color=#28d9ed>노아 카이저X</color> 사용 시 대상이 한 명이라면 관통력 <color=#28d9ed>+30%</color>",
       "zh": "使用<color=#28d9ed>诺雅凯撒X</color>时，若目标为1人，则穿透力<color=#28d9ed>+30%</color>",
-      "fr": "Si vous utilisez <color=#28d9ed>Noa Kaizer X</color>, accroît la pérétration par <color=#28d9ed>30%</color> s'il n'y a qu'une seule cible.",
+      "fr": "Lorsque vous utilisez <color=#28d9ed>Noa Kaizer X</color>, augmente la pérétration par <color=#28d9ed>30%</color> s'il n'y a qu'une seule cible.",
       "es": "Al usar <color=#28d9ed>Noa Kaizer X</color>, aumenta la Penetración en un <color=#28d9ed>30%</color> si solo hay un objetivo"
     },
     "values": [{}],
@@ -12844,7 +12877,7 @@
       "jp": "自分の効果命中[+Value]UP",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中[+Value]",
-      "fr": "Accroît l'Efficacité[+Value]",
+      "fr": "Augmente l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -13066,7 +13099,7 @@
       "jp": "シンディの専用装備",
       "kr": "신디의 전용장비",
       "zh": "欣蒂专属装备",
-      "fr": "L'équipement exclusif de Cindy's Cindy's",
+      "fr": "L'équipement exclusif de Cindy's",
       "es": "Equipo exclusivo de Cindy"
     },
     "desc": {
@@ -13147,7 +13180,7 @@
       "jp": "<color=#28d9ed>【準備はいいか? はい、船長!】</color>使用時、対象が単体の場合、\\n貫通力が<color=#28d9ed>+30％</color>UPする。",
       "kr": "<color=#28d9ed>준비 됐나? 네, 선장님!</color> 사용 시 대상이 한 명이라면 관통력 <color=#28d9ed>+30%</color>",
       "zh": "使用<color=#28d9ed>准备好了吗？是，船长！</color>时，若目标为1名，穿透力<color=#28d9ed>+30%</color>",
-      "fr": "Si vous utilisez <color=#28d9ed>Aye, Captain!</color> accroît la pérétration par <color=#28d9ed>30%</color> quand il n'y a qu'une seule cible.",
+      "fr": "Lorsque vous utilisez <color=#28d9ed>Aye, Captain!</color> augmente la pérétration par <color=#28d9ed>30%</color> quand il n'y a qu'une seule cible.",
       "es": "¡Al usar <color=#28d9ed>Aye Aye, Captain!</color> aumenta la Penetración en <color=#28d9ed>30%</color> cuando solo hay un objetivo"
     },
     "values": [{}],
@@ -13366,7 +13399,7 @@
       "jp": "チェーンスキルおよび連携攻撃を除く攻撃時、味方スピード型攻撃力[+Value]（最大3回累積）",
       "kr": "스킬 체인 및 협공을 제외한 공격 시 아군 속도형 공격력 [+Value] (최대 3회 누적)",
       "zh": "非连携技能及夹攻的攻击时，我方速度型攻击力[+Value]（最多叠加3次）",
-      "fr": "Lors de l'attaque excluant Compétence Chain et Attaque conjointe, ally Ranger ATQ [+Value] (Max 3 piles) (Max stacks)",
+      "fr": "Lors de l'attaque excluant chaîne de comp. et Attaque conjointe, ally Ranger ATQ [+Value] (Max 3 piles) (Max stacks)",
       "es": "Al atacar sin Cadena de Habilidades ni Ataque Dual, Ataque Ranger aliado [+Value] (Máx. 3)"
     },
     "values": [
@@ -13507,7 +13540,7 @@
       "jp": "自分の効果命中UP[+Value]",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中提升[+Value]",
-      "fr": "Hausse de l'Efficacité[+Value]",
+      "fr": "Augmentation de l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -13581,7 +13614,7 @@
       "jp": "<color=#28d9ed>【ウォータープリズン】</color>で敵を倒した時、[Value]の確率で追加ターンを獲得する。",
       "kr": "<color=#28d9ed>워터 볼</color>로 적 처치 시 [Value] 확률로 추가 턴 획득",
       "zh": "使用<color=#28d9ed>水球</color>击杀敌人时，有[Value]的几率获得额外回合",
-      "fr": "Si,<color=#28d9ed>Boule d'eau</color>a un a[Value]chance de gagner un tour suppl. suppl.",
+      "fr": "Si,<color=#28d9ed>Boule d'eau</color>a un a[Value]chance de gagner un tour supplémentaire",
       "es": "Si <color=#28d9ed>Agua Bola</color> derrota a un enemigo, tiene una [Value] probabilidad de ganar un turno extra"
     },
     "values": [
@@ -13618,7 +13651,7 @@
       "jp": "自分の効果命中[+Value]UP",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中[+Value]",
-      "fr": "Accroît l'Efficacité[+Value]",
+      "fr": "Augmente l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -13803,7 +13836,7 @@
       "jp": "自分の効果抵抗[+Value]UP",
       "kr": "자신의 효과 저항 증가 [+Value]",
       "zh": "自身效果抵抗[+Value]",
-      "fr": "Augmente RÉS RÉS[+Value]",
+      "fr": "Augmente Résilience[+Value]",
       "es": "Aumenta Resistencia [+Value]"
     },
     "values": [
@@ -13836,16 +13869,16 @@
       "es": "Equipo Exclusivo de Sigma"
     },
     "desc": {
-      "en": "Self <color=#28d9ed>Effectiveness</color> [+Value]",
-      "jp": "自分の<color=#28d9ed>効果命中</color>[+Value]",
-      "kr": "자신의 효과 적중 증가 [+Value]",
-      "zh": "自身<color=#28d9ed>效果命中</color>[+Value]",
-      "fr": "Self <color=#28d9ed>Efficacité</color> [+Value]",
-      "es": "Efectividad propia <color=#28d9ed>Efectividad</color> [+Value]"
+      "en": "Damage dealt to bosses [+Value]",
+      "jp": "ボスへの与ダメージ [+Value]",
+      "kr": "보스에게 입히는 피해 [+Value]",
+      "zh": "对首领怪物造成的伤害 [+Value]",
+      "fr": "DGT causés aux boss [+Value]",
+      "es": "Daño a jefes [+Value]"
     },
     "values": [
       {
-        "value": "100%"
+        "value": "50%"
       }
     ],
     "levels": [1],
@@ -13853,13 +13886,11 @@
     "buff": "BID_CEQUIP_2000052_ADD",
     "effects": [
       {
-        "family": "stat",
+        "family": "damage",
         "category": "buff",
-        "type": "BT_STAT_PREMIUM",
+        "type": "BT_DMG_TO_BOSS",
         "target": "me",
-        "buff": "BID_CEQUIP_2000052_ADD",
-        "stat": "buff_chance",
-        "mode": "up"
+        "buff": "BID_CEQUIP_2000052_ADD"
       }
     ]
   },
@@ -14021,7 +14052,7 @@
       "jp": "自分の効果命中[+Value]UP",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中[+Value]",
-      "fr": "Accroît l'Efficacité[+Value]",
+      "fr": "Augmente l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -14058,7 +14089,7 @@
       "jp": "味方が攻撃を受けた時、自分の行動ゲージが[+Value]UP",
       "kr": "아군 팀 피격 시 자신 행동 게이지 [+Value]",
       "zh": "当友军受到攻击时，自身行动值[+Value]",
-      "fr": "Lorsqu'un membre de l'équipe allié est frappé, accroîtr l'auto priorité Prior.[+Value]",
+      "fr": "Lorsqu'un membre de l'équipe allié est frappé, augmenter l'auto priorité[+Value]",
       "es": "Al un miembro del equipo aliado es golpeado, sube tu prioridad [+Value]"
     },
     "values": [
@@ -14275,7 +14306,7 @@
       "jp": "自分の効果命中[+Value]UP",
       "kr": "자신의 효과 적중 증가 [+Value]",
       "zh": "自身效果命中[+Value]",
-      "fr": "Accroît l'Efficacité[+Value]",
+      "fr": "Augmente l'Efficacité[+Value]",
       "es": "Sube la Efectividad propia [+Value]"
     },
     "values": [
@@ -14717,7 +14748,7 @@
       "jp": "シールド状態の仲間のダメージが大幅にUPする。",
       "kr": "실드를 보유한 동료의 피해량 크게 증가",
       "zh": "使附带护盾的同伴伤害量大幅提升",
-      "fr": "Accroît considérablement les DGT des alliés avec un Barrière Barrière.",
+      "fr": "Augmente considérablement les dommages des alliés avec un Barrière.",
       "es": "Sube considerablemente el daño de los aliados con Barrera"
     },
     "values": [{}],
@@ -16036,7 +16067,7 @@
       "jp": "自分より防御力が低い対象を攻撃する時、貫通力 <color=#28d9ed>+30%</color>",
       "kr": "자신보다 방어력 낮은 대상 공격 시 관통력 <color=#28d9ed>+30%</color>",
       "zh": "攻击防御力低于自身的目标时，穿透力 <color=#28d9ed>+30%</color>",
-      "fr": "Quand on attaque une cible avec une DÉF inférieure à la roue, on accroît la pérétration par <color=#28d9ed>+30%</color>",
+      "fr": "Quand on attaque une cible avec une DÉF inférieure au lanceur, on accroît la pérétration par <color=#28d9ed>+30%</color>",
       "es": "Al atacar a un objetivo con menor Defensa que el lanzador, aumenta la Penetración en <color=#28d9ed>+30%</color>"
     },
     "values": [{}],
@@ -16061,7 +16092,7 @@
       "jp": "エリスの専用装備",
       "kr": "에리스의 전용 장비",
       "zh": "艾理斯的专用装备",
-      "fr": "Eris.S équipement exclusif exclusif Eris.",
+      "fr": "Eris.S équipement exclusif Eris.",
       "es": "Equipo Exclusivo de Eris"
     },
     "desc": {
@@ -16217,6 +16248,39 @@
         "target": "my_team_element_fire_all",
         "buff": "BID_CEQUIP_2000122_ADD",
         "stat": "dmg_boost",
+        "mode": "up"
+      }
+    ]
+  },
+  "2100124": {
+    "name": {
+      "en": "Demiurge Lambda's Exclusive Equipment",
+      "jp": "デミウルゴス・ラムダ専用装備",
+      "kr": "데미우르고스 람다의 전용 장비",
+      "zh": "创世之神·拉姆达的专属装备",
+      "fr": "Équipement exclusif de Démiurge Lambda",
+      "es": "Equipo exclusivo de Demiurgo Lambda"
+    },
+    "desc": {
+      "en": "Attack <color=#28d9ed>+5%</color> for each <color=#28d9ed>Light of the Deep Sea</color>",
+      "jp": "<color=#28d9ed>固有資源：深淵の希望</color>1個につき自分の攻撃力<color=#28d9ed>+5%</color>",
+      "kr": "<color=#28d9ed>심해의 빛</color> 1개 당 자신 공격력 <color=#28d9ed>5%</color>",
+      "zh": "每1个<color=#28d9ed>固有资源：深渊中的希望</color>，自身攻击力<color=#28d9ed>+5%</color>",
+      "fr": "ATQ propre <color=#28d9ed>+5%</color> par <color=#28d9ed>Ressource unique : Espoir dans l'abîme</color>",
+      "es": "ATQ propio <color=#28d9ed>+5%</color> por cada <color=#28d9ed>Recurso Único: Esperanza en el Abismo</color>"
+    },
+    "values": [{}],
+    "levels": [1],
+    "icon": "TI_Icon_UO_EXCLUSIVE",
+    "buff": "BID_CEQUIP_2000124_ADD",
+    "effects": [
+      {
+        "family": "stat",
+        "category": "buff",
+        "type": "BT_STACK_STAT",
+        "target": "me",
+        "buff": "BID_CEQUIP_2000124_ADD",
+        "stat": "atk",
         "mode": "up"
       }
     ]

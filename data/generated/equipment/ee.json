@@ -469,7 +469,7 @@
       "jp": "洗礼用の聖火",
       "kr": "세례용 성화",
       "zh": "洗礼圣火",
-      "fr": "Baptême Iconal Iconal",
+      "fr": "Baptême Iconal",
       "es": "Icono Bautismal"
     },
     "grade": "unique",
@@ -904,7 +904,7 @@
       "jp": "秘伝の調理道具",
       "kr": "비전 요리 기구",
       "zh": "独门烹饪道具",
-      "fr": "Cuisson secrète Utensiles Utensiles",
+      "fr": "Cuisson secrète Utensiles",
       "es": "Utensilios Cocina Secreto"
     },
     "grade": "unique",
@@ -933,7 +933,7 @@
       "jp": "タイタンアンカー",
       "kr": "타이탄 앵커",
       "zh": "泰坦船锚",
-      "fr": "Titanec ancre ancre",
+      "fr": "Titanec ancre",
       "es": "Ancla Titánica"
     },
     "grade": "unique",
@@ -1571,7 +1571,7 @@
       "jp": "スーパーボード",
       "kr": "슈퍼 보드",
       "zh": "超级冲浪板",
-      "fr": "Super Board Board",
+      "fr": "Super Board",
       "es": "Super Tablero"
     },
     "grade": "unique",
@@ -2813,7 +2813,7 @@
       "jp": "アストラ・ソテリア",
       "kr": "아스트라 소테리아",
       "zh": "星辰庇佑",
-      "fr": "Astra Sotéria Sotéria",
+      "fr": "Astra Sotéria",
       "es": "Astra Soteria"
     },
     "grade": "unique",
@@ -3440,6 +3440,35 @@
       },
       {
         "id": "2100122",
+        "level": 10,
+        "isAdd": true
+      }
+    ]
+  },
+  "2000124": {
+    "name": {
+      "en": "Salvage Spear",
+      "jp": "サルベージスピア",
+      "kr": "샐비지 스피어",
+      "zh": "打捞长矛",
+      "fr": "Lance de récupération",
+      "es": "Lanza de salvamento"
+    },
+    "grade": "unique",
+    "star": 6,
+    "icon": "TI_Equipment_EX_2000124",
+    "craftable": false,
+    "character": "2000124",
+    "trustLevel": 10,
+    "options": ["2000124"],
+    "passives": [
+      {
+        "id": "2000124",
+        "level": 1,
+        "isAdd": false
+      },
+      {
+        "id": "2100124",
         "level": 10,
         "isAdd": true
       }

@@ -4912,6 +4912,9 @@
   "20122": {
     "buffId": "BID_CEQUIP_MAIN_DMG_FIRE"
   },
+  "20124": {
+    "buffId": "BID_CEQUIP_MAIN_DMG_LIGHT"
+  },
   "20129": {
     "buffId": "BID_CEQUIP_MAIN_DMG_DARK"
   },

@@ -1,8 +1,8 @@
 {
   "schedule": {
     "startDow": "wed",
-    "battleDays": 4,
-    "rewardDays": 3,
+    "battleDays": 5,
+    "rewardDays": 2,
     "anchor": {
       "date": "2026-05-20",
       "group": 3
@@ -55,6 +55,13 @@
           "monsters": ["60000010"],
           "thumbnail": "MT_Singularity_4004006",
           "banner": "T_Singularity_4004006"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000115",
+          "monsters": ["60000015"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007"
         }
       ]
     },
@@ -104,6 +111,13 @@
           "monsters": ["60000014"],
           "thumbnail": "MT_Singularity_4004008",
           "banner": "T_Singularity_4004008"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000110",
+          "monsters": ["60000010"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006"
         }
       ]
     },
@@ -153,6 +167,13 @@
           "monsters": ["60000012"],
           "thumbnail": "MT_Singularity_4004007",
           "banner": "T_Singularity_4004007"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000114",
+          "monsters": ["60000014"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008"
         }
       ]
     },
@@ -202,6 +223,13 @@
           "monsters": ["60000013"],
           "thumbnail": "MT_Singularity_4004006",
           "banner": "T_Singularity_4004006"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000112",
+          "monsters": ["60000012"],
+          "thumbnail": "MT_Singularity_4004007",
+          "banner": "T_Singularity_4004007"
         }
       ]
     },
@@ -251,6 +279,13 @@
           "monsters": ["60000011"],
           "thumbnail": "MT_Singularity_4004008",
           "banner": "T_Singularity_4004008"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000113",
+          "monsters": ["60000013"],
+          "thumbnail": "MT_Singularity_4004006",
+          "banner": "T_Singularity_4004006"
         }
       ]
     },
@@ -300,6 +335,13 @@
           "monsters": ["60000015"],
           "thumbnail": "MT_Singularity_4004007",
           "banner": "T_Singularity_4004007"
+        },
+        {
+          "order": 4,
+          "dungeon": "75000111",
+          "monsters": ["60000011"],
+          "thumbnail": "MT_Singularity_4004008",
+          "banner": "T_Singularity_4004008"
         }
       ]
     }

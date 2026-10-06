@@ -50,6 +50,8 @@ export const img = {
   atb: (id: string) => `${BASE}/images/characters/atb/IG_Turn_${id}.webp`,
   /** Icône d'élément (slug → CamelCase ; sprites IG_Turn_Element_*). */
   element: (el: string) => `${BASE}/images/ui/elem/IG_Turn_Element_${cap(el)}.webp`,
+  /** Pastille « sans élément » (Universal Tower) : sprite de menu CM_*, le jeu n'a pas de IG_Turn_ neutre. */
+  elementNeutral: () => `${BASE}/images/ui/elem/CM_Element_Neutral.webp`,
   /** Icône de classe (slug → CamelCase ; sprites IG_Turn_Class_*, clé = slug). */
   klass: (cl: string) => `${BASE}/images/ui/class/IG_Turn_Class_${cap(cl)}.webp`,
   /** Icône de compétence (nom d'icône brut du jeu). */

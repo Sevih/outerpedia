@@ -4,64 +4,14 @@
       "contentType": "ADVENTURE_LICENSE",
       "requirements": [
         {
-          "stage": "S1H-10-7",
           "dungeonName": {
-            "en": "Good Night",
-            "jp": "おやすみ",
-            "kr": "잘 자",
-            "zh": "晚安",
-            "fr": "Bonne nuit",
-            "es": "Buenas noches"
-          },
-          "areaName": {
-            "en": "Conclusion",
-            "jp": "決着",
-            "kr": "결착",
-            "zh": "完结",
-            "fr": "Conclusion",
-            "es": "Conclusión"
-          },
-          "mode": "origin"
-        },
-        {
-          "stage": "S2H-5-11",
-          "dungeonName": {
-            "en": "Snapped Back to Reality",
-            "jp": "現実に向き合う時",
-            "kr": "현실로 돌아갈 시간",
-            "zh": "该回到现实了",
-            "fr": "Retour à la réalité",
-            "es": "De vuelta a la realidad"
-          },
-          "areaName": {
-            "en": "Garden of Dolls",
-            "jp": "箱庭",
-            "kr": "모형 정원",
-            "zh": "模型庄园",
-            "fr": "Jardin de poupées",
-            "es": "Jardín Muñecas"
-          },
-          "mode": "origin"
-        },
-        {
-          "stage": "S2H-10-10",
-          "dungeonName": {
-            "en": "Conqueror and Destroyer",
-            "jp": "征服者と破壊者",
-            "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者",
-            "fr": "Conquérant & Destructeur",
-            "es": "Conquistador & Destructor"
-          },
-          "areaName": {
-            "en": "Conqueror and Destroyer",
-            "jp": "征服者と破壊者",
-            "kr": "정복자와 파괴자",
-            "zh": "征服者和破坏者",
-            "fr": "Conquérant & Destructeur",
-            "es": "Conquistador & Destructor"
-          },
-          "mode": "origin"
+            "en": "Monad Gate: Epilogue 2",
+            "jp": "モナド・ゲート：エピローグ 2",
+            "kr": "모나드 게이트 : 에필로그 2",
+            "zh": "单子门：后记 2",
+            "fr": "Porte de Monade: Épilogue 2",
+            "es": "Portal Monad: Epílogo 2"
+          }
         }
       ],
       "lockScreenName": {

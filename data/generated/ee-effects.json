@@ -553,8 +553,8 @@
       "isDebuff": true
     },
     {
-      "key": "stat:buff_chance:up",
-      "label": "Effectiveness up",
+      "key": "type:BT_DMG_TO_BOSS",
+      "label": "DMG vs bosses",
       "isDebuff": false
     }
   ],
@@ -1339,6 +1339,18 @@
     {
       "key": "stat:dmg_boost:up",
       "label": "DMG Increase up",
+      "isDebuff": false
+    }
+  ],
+  "2000124": [
+    {
+      "key": "damage:BT_DMG_TARGET_STAT:hp",
+      "label": "Dmg target stat",
+      "isDebuff": false
+    },
+    {
+      "key": "stat:atk:up",
+      "label": "Attack up",
       "isDebuff": false
     }
   ],

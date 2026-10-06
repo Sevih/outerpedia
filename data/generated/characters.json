@@ -5558,7 +5558,6 @@
       "5204",
       "5205",
       "5206",
-      "5207",
       "5208",
       "5209",
       "5210",
@@ -5610,7 +5609,7 @@
       "es": "Autómata soñador de cielos claros"
     },
     "subClass": "vanguard",
-    "chainType": "finish",
+    "chainType": "join",
     "gift": "present_01",
     "voiceActor": {
       "en": "Stephanie Southerland",
@@ -8462,7 +8461,7 @@
         "icon": "TI_Costume_Clothes_2000074_03",
         "grade": "rare",
         "sort": 2,
-        "source": "package_shop",
+        "source": "shop",
         "art": true
       },
       {
@@ -8616,7 +8615,7 @@
         "icon": "TI_Costume_Clothes_2000075_03",
         "grade": "rare",
         "sort": 2,
-        "source": "event_mission",
+        "source": "shop",
         "art": true
       }
     ]
@@ -9712,7 +9711,7 @@
     "ee": "2000084",
     "recommendedSets": ["3", "13", "9"],
     "tags": ["premium"],
-    "appearances": ["2010084", "2030084", "2020084"],
+    "appearances": ["2010084", "2030084", "2020084", "2040084"],
     "costumes": [
       {
         "id": "45",
@@ -9763,6 +9762,22 @@
         "grade": "rare",
         "sort": 3,
         "source": "shop",
+        "art": true
+      },
+      {
+        "id": "109",
+        "model": "2040084",
+        "name": {
+          "en": "Adorable Moon Bunny Eva",
+          "jp": "愛らしい月ウサギ・エヴァ",
+          "kr": "앙증맞은 달토끼 에바",
+          "zh": "可爱月兔艾娃",
+          "fr": "Eva, Adorable Lapine lunaire",
+          "es": "Eva, Adorable Conejita Lunar"
+        },
+        "icon": "TI_Costume_Clothes_2000084_05",
+        "grade": "rare",
+        "sort": 4,
         "art": true
       }
     ]
@@ -10504,7 +10519,7 @@
         "icon": "TI_Costume_Clothes_2000090_02",
         "grade": "rare",
         "sort": 1,
-        "source": "package_shop",
+        "source": "shop",
         "art": true
       }
     ]
@@ -13605,7 +13620,7 @@
     "recommendedSets": ["1", "12", "13"],
     "ignoreDefense": ["kit", "transcend"],
     "tags": ["premium", "ignore-defense"],
-    "appearances": ["2010119", "2010120"],
+    "appearances": ["2010119", "2010120", "2020119", "2020120"],
     "costumes": [
       {
         "id": "96",
@@ -13621,6 +13636,38 @@
         "icon": "TI_Costume_Clothes_2000119_02",
         "grade": "rare",
         "sort": 1,
+        "art": true
+      },
+      {
+        "id": "106",
+        "model": "2020119",
+        "name": {
+          "en": "Naughty Moon Bunny Luna",
+          "jp": "小悪魔な月ウサギ・ルナ",
+          "kr": "응큼한 달토끼 루나",
+          "zh": "小恶魔月兔露娜",
+          "fr": "Luna, Petite Diablesse lunaire",
+          "es": "Luna, Conejita Lunar Traviesa"
+        },
+        "icon": "TI_Costume_Clothes_2000119_03",
+        "grade": "rare",
+        "sort": 2,
+        "art": true
+      },
+      {
+        "id": "110",
+        "model": "2020120",
+        "name": {
+          "en": "Cheeky Moon Bunny Luna",
+          "jp": "生意気な月ウサギ・ルナ",
+          "kr": "발칙한 달토끼 루나",
+          "zh": "淘气月兔露娜",
+          "fr": "Luna, Lapine lunaire effrontée",
+          "es": "Luna, Conejita Lunar Descarada"
+        },
+        "icon": "TI_Costume_Clothes_2000120_03",
+        "grade": "rare",
+        "sort": 2,
         "art": true
       }
     ]
@@ -13840,6 +13887,128 @@
           "es": "Justicia Noble Titia"
         },
         "icon": "TI_Costume_Clothes_2000122_02",
+        "grade": "rare",
+        "sort": 1,
+        "source": "shop",
+        "art": true
+      }
+    ]
+  },
+  "2000124": {
+    "id": "2000124",
+    "name": {
+      "en": "Lambda",
+      "jp": "ラムダ",
+      "kr": "람다",
+      "zh": "拉姆达",
+      "fr": "Lambda",
+      "es": "Lambda"
+    },
+    "rarity": 3,
+    "element": "light",
+    "class": "striker",
+    "race": "demiurge",
+    "icon": "2000124",
+    "skills": [
+      "12401",
+      "12402",
+      "12403",
+      "12404",
+      "12405",
+      "12406",
+      "12408",
+      "12409",
+      "12410",
+      "12419",
+      "12420",
+      "12421",
+      "2"
+    ],
+    "stats": {
+      "hp": {
+        "min": 541,
+        "max": 4503
+      },
+      "atk": {
+        "min": 87,
+        "max": 872
+      },
+      "def": {
+        "min": 35,
+        "max": 408
+      },
+      "speed": {
+        "min": 94,
+        "max": 94
+      },
+      "critical_rate": {
+        "min": 50,
+        "max": 50
+      },
+      "critical_dmg": {
+        "min": 1500,
+        "max": 1500
+      },
+      "buff_chance": {
+        "min": 10,
+        "max": 10
+      },
+      "buff_resist": {
+        "min": 19,
+        "max": 190
+      }
+    },
+    "nickname": {
+      "en": "Demiurge",
+      "jp": "デミウルゴス",
+      "kr": "데미우르고스",
+      "zh": "创世之神",
+      "fr": "Démiurge",
+      "es": "Demiurgo"
+    },
+    "showNickName": true,
+    "subClass": "bruiser",
+    "chainType": "join",
+    "gift": "present_04",
+    "voiceActor": {
+      "en": "Saho Shirasu",
+      "jp": "白砂沙帆",
+      "kr": "장채연",
+      "zh": "白砂沙帆",
+      "fr": "Saho Shirasu",
+      "es": "Saho Shirasu"
+    },
+    "profile": {
+      "birthday": "06/08",
+      "height": 175,
+      "weight": 57,
+      "story": {
+        "en": "<Color=#FFBF00>To think my appearance</Color> would change like this...\\nNo matter how curious I was about my origins, I shouldn't have answered the call of the Deep-Sea Ark. I ended up putting you and everyone else in danger by coming to this place that's practically a trap!\\n...But don't worry. With this body, I won't lose to it. I can feel an output within me that's far beyond anything I had before.\\nEven if I have to vanish like sea foam, I will make sure you return to shore, Premier... So please trust me, and don't lose hope!",
+        "jp": "<Color=#FFBF00>私の姿</Color>がこんなふうに変わってしまうなんて…… \\nどれほど自分の起源が気になっていたとしても、深海のアークの呼びかけに応じるべきではありませんでした。罠も同然のこの場所で、宰相や皆さんを危険にさらしてしまったじゃないですか！ \\n……でも、ご心配なく。今のこのボディなら、あれには負けません。以前とは比べものにならないほどの出力を、この身に感じます。 \\nたとえ私が泡沫のように消えてしまうとしても、必ず宰相を陸へお送りいたしますから……私を信じて、希望を失わないでください！",
+        "kr": "<Color=#FFBF00>제 모습</Color>이 이렇게 변해 버리다니… \\n아무리 저의 기원이 궁금했어도, 심해 방주의 부름에 응하는 게 아니었어요. 함정이나 다름없는 이곳에, 재상님과 다른 분들 모두를 위기에 빠뜨리고 말았잖아요! \\n……하지만 걱정하지 마세요. 지금 이 바디라면 녀석에게 지지 않을 거예요. 이전과는 비교도 안 되는 출력이 제 안에서 느껴지거든요. \\n설령 제가 물거품처럼 사라져 버리는 한이 있더라도, 반드시 재상님을 뭍 위로 보내드릴 테니...... 저를 믿고, 희망을 잃지 말아 주세요!",
+        "zh": "<Color=#FFBF00>我的模样</Color>竟然变成了这样…… \\n不管我有多么好奇自己的起源，都不该回应深海方舟的召唤。我竟让丞相和其他各位一起陷入了这个如同陷阱般的地方！ \\n……不过请不要担心。凭现在这副机体，我不会输给它。我能感受到体内涌动着远胜以往的输出功率。 \\n即使我最终会像泡沫般消散，也一定会把丞相送回陆地……所以请相信我，不要失去希望！",
+        "fr": "<Color=#FFBF00>Mon apparence</Color> a changé à ce point... \\nMême si mes origines m'intriguaient, je n'aurais pas dû répondre à l'appel de l'Ark des Profondeurs. J'ai mis Premier et tous les autres en danger dans cet endroit qui n'est rien d'autre qu'un piège ! \\n...Mais ne vous inquiétez pas. Avec ce corps, je ne perdrai pas face à lui. Je sens en moi une puissance sans commune mesure avec celle d'avant. \\nMême si je dois disparaître comme l'écume, je vous ramènerai à terre, Premier... Alors, faites-moi confiance et ne perdez pas espoir !",
+        "es": "<Color=#FFBF00>Mi aspecto</Color> ha cambiado de esta manera... \\nPor mucha curiosidad que sintiera por mis orígenes, no debí responder a la llamada del Ark de las Profundidades. ¡He puesto en peligro a Premier y a todos los demás en este lugar que no es más que una trampa! \\n...Pero no se preocupe. Con este cuerpo, no perderé contra ella. Siento en mi interior una potencia incomparable con la de antes. \\nAunque tenga que desaparecer como la espuma del mar, me aseguraré de llevarle de vuelta a tierra firme, Premier... Así que confíe en mí y no pierda la esperanza."
+      }
+    },
+    "ee": "2000124",
+    "recommendedSets": ["1", "3", "7"],
+    "ignoreDefense": ["transcend"],
+    "tags": ["premium", "ignore-defense"],
+    "appearances": ["2010124"],
+    "costumes": [
+      {
+        "id": "108",
+        "model": "2010124",
+        "name": {
+          "en": "Fluffy Moon Bunny Lambda",
+          "jp": "もふもふ月ウサギ・ラムダ",
+          "kr": "몽실몽실한 달토끼 람다",
+          "zh": "毛茸茸的月兔拉姆达",
+          "fr": "Lambda, Lapine lunaire toute douce",
+          "es": "Lambda, Conejita Lunar Esponjosa"
+        },
+        "icon": "TI_Costume_Clothes_2000124_02",
         "grade": "rare",
         "sort": 1,
         "source": "battlepass",

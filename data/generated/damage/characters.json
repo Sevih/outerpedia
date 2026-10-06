@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.302",
+  "resVersion": "1.11.401",
   "characters": {
     "2000001": {
       "id": "2000001",
@@ -12182,10 +12182,6 @@
         {
           "slot": 6,
           "id": "5206"
-        },
-        {
-          "slot": 7,
-          "id": "5207"
         },
         {
           "slot": 8,
@@ -27968,6 +27964,240 @@
         {
           "slot": 22,
           "id": "4"
+        }
+      ]
+    },
+    "2000124": {
+      "id": "2000124",
+      "element": "CET_LIGHT",
+      "class": "CCT_ATTACKER",
+      "subClass": "BRUISER",
+      "race": "CRT_DEMIURGE",
+      "basicStar": 3,
+      "baseStats": {
+        "HP": {
+          "min": 541,
+          "max": 4503
+        },
+        "Speed": {
+          "min": 94,
+          "max": 94
+        },
+        "Atk": {
+          "min": 87,
+          "max": 872
+        },
+        "Def": {
+          "min": 35,
+          "max": 408
+        },
+        "CriticalRate": {
+          "min": 50,
+          "max": 50
+        },
+        "CriticalDMGRate": {
+          "min": 1500,
+          "max": 1500
+        },
+        "BuffChance": {
+          "min": 10,
+          "max": 10
+        },
+        "BuffResist": {
+          "min": 19,
+          "max": 190
+        }
+      },
+      "evolution": [
+        {
+          "level": 2,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 22
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 14
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 22
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 14
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 33
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 21
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 33
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 21
+            },
+            {
+              "stat": "ST_BUFF_CHANCE",
+              "value": 30
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "rewards": [
+            {
+              "stat": "ST_HP",
+              "value": 448
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 135
+            },
+            {
+              "stat": "ST_SPEED",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "level": 7,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 33
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 21
+            },
+            {
+              "stat": "ST_HP",
+              "value": 224
+            }
+          ]
+        },
+        {
+          "level": 8,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 33
+            },
+            {
+              "stat": "ST_DMG_REDUCE_RATE",
+              "value": 20
+            },
+            {
+              "stat": "ST_HP",
+              "value": 224
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "rewards": [
+            {
+              "stat": "ST_ATK",
+              "value": 33
+            },
+            {
+              "stat": "ST_DEF",
+              "value": 21
+            },
+            {
+              "stat": "ST_HP",
+              "value": 224
+            }
+          ]
+        }
+      ],
+      "skills": [
+        {
+          "slot": 1,
+          "id": "12401"
+        },
+        {
+          "slot": 2,
+          "id": "12402"
+        },
+        {
+          "slot": 3,
+          "id": "12403"
+        },
+        {
+          "slot": 4,
+          "id": "12404"
+        },
+        {
+          "slot": 5,
+          "id": "12405"
+        },
+        {
+          "slot": 6,
+          "id": "12406"
+        },
+        {
+          "slot": 8,
+          "id": "12408"
+        },
+        {
+          "slot": 9,
+          "id": "12409"
+        },
+        {
+          "slot": 10,
+          "id": "12410"
+        },
+        {
+          "slot": 19,
+          "id": "12419"
+        },
+        {
+          "slot": 20,
+          "id": "12420"
+        },
+        {
+          "slot": 21,
+          "id": "12421"
+        },
+        {
+          "slot": 22,
+          "id": "2"
         }
       ]
     },
@@ -85886,7 +86116,7 @@
           "level": 1,
           "damageFactor": 1300,
           "wgReduce": 1,
-          "buffIds": ["2000052_1_2"],
+          "buffIds": ["2000052_1_2", "2000052_1_3", "2000052_1_4"],
           "cool": 0,
           "startCool": 0
         },
@@ -85894,7 +86124,7 @@
           "level": 2,
           "damageFactor": 1400,
           "wgReduce": 2,
-          "buffIds": ["2000052_1_2"],
+          "buffIds": ["2000052_1_2", "2000052_1_3", "2000052_1_4"],
           "cool": 0,
           "startCool": 0
         },
@@ -85902,7 +86132,7 @@
           "level": 3,
           "damageFactor": 1400,
           "wgReduce": 2,
-          "buffIds": ["2000052_1_2"],
+          "buffIds": ["2000052_1_2", "2000052_1_3", "2000052_1_4"],
           "cool": 0,
           "startCool": 0
         },
@@ -85910,7 +86140,7 @@
           "level": 4,
           "damageFactor": 1500,
           "wgReduce": 2,
-          "buffIds": ["2000052_1_2"],
+          "buffIds": ["2000052_1_2", "2000052_1_3", "2000052_1_4"],
           "cool": 0,
           "startCool": 0
         },
@@ -85918,7 +86148,7 @@
           "level": 5,
           "damageFactor": 1600,
           "wgReduce": 2,
-          "buffIds": ["2000052_1_2"],
+          "buffIds": ["2000052_1_2", "2000052_1_3", "2000052_1_4"],
           "cool": 0,
           "startCool": 0
         }
@@ -85972,52 +86202,52 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 935,
+          "damageFactor": 1030,
           "wgReduce": 1,
-          "buffIds": ["2000052_2_1", "2000052_2_2"],
+          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_2_3", "2000052_2_4"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 2,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2"],
+          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_2_3", "2000052_2_4"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 3,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2"],
+          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_2_3", "2000052_2_4"],
           "cool": 3,
           "startCool": 3
         },
         {
           "level": 4,
-          "damageFactor": 1235,
+          "damageFactor": 1330,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2"],
+          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_2_3", "2000052_2_4"],
           "cool": 3,
           "startCool": 3
         },
         {
           "level": 5,
-          "damageFactor": 1335,
+          "damageFactor": 1430,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2"],
+          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_2_3", "2000052_2_4"],
           "cool": 3,
           "startCool": 3
         }
       ],
-      "burstAP": [60, 90, 120],
+      "burstAP": [80, 120, 160],
       "hits": [
         {
           "id": "2000052_Skill_2",
           "chain": "2000052_Skill_2",
           "hit": 1,
-          "damageFactor": 167,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 5,
@@ -86030,7 +86260,7 @@
           "events": [
             {
               "id": "2000052_Skill_2",
-              "factor": 167,
+              "factor": 200,
               "count": 5
             }
           ]
@@ -86046,41 +86276,41 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 1100,
+          "damageFactor": 1200,
           "wgReduce": 2,
-          "buffIds": ["2000052_3_1", "2000052_3_2", "2000052_3_3"],
+          "buffIds": ["2000052_3_3", "2000052_3_4", "2000052_3_5"],
           "cool": 5,
           "startCool": 5
         },
         {
           "level": 2,
-          "damageFactor": 1100,
+          "damageFactor": 1200,
           "wgReduce": 3,
-          "buffIds": ["2000052_3_1", "2000052_3_2", "2000052_3_3"],
+          "buffIds": ["2000052_3_3", "2000052_3_4", "2000052_3_5"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 3,
-          "damageFactor": 1250,
+          "damageFactor": 1350,
           "wgReduce": 3,
-          "buffIds": ["2000052_3_1", "2000052_3_2", "2000052_3_3"],
+          "buffIds": ["2000052_3_3", "2000052_3_4", "2000052_3_5"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 4,
-          "damageFactor": 1400,
+          "damageFactor": 1500,
           "wgReduce": 3,
-          "buffIds": ["2000052_3_1", "2000052_3_2", "2000052_3_3"],
+          "buffIds": ["2000052_3_3", "2000052_3_4", "2000052_3_5"],
           "cool": 4,
           "startCool": 4
         },
         {
           "level": 5,
-          "damageFactor": 1500,
+          "damageFactor": 1600,
           "wgReduce": 3,
-          "buffIds": ["2000052_3_1", "2000052_3_2", "2000052_3_3"],
+          "buffIds": ["2000052_3_3", "2000052_3_4", "2000052_3_5"],
           "cool": 4,
           "startCool": 4
         }
@@ -86202,7 +86432,7 @@
           "level": 1,
           "damageFactor": 1000,
           "wgReduce": 3,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86210,7 +86440,7 @@
           "level": 2,
           "damageFactor": 1050,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86218,7 +86448,7 @@
           "level": 3,
           "damageFactor": 1100,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86226,7 +86456,7 @@
           "level": 4,
           "damageFactor": 1150,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86234,7 +86464,7 @@
           "level": 5,
           "damageFactor": 1200,
           "wgReduce": 5,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         }
@@ -86290,7 +86520,7 @@
           "level": 1,
           "damageFactor": 1000,
           "wgReduce": 3,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86298,7 +86528,7 @@
           "level": 2,
           "damageFactor": 1050,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86306,7 +86536,7 @@
           "level": 3,
           "damageFactor": 1100,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86314,7 +86544,7 @@
           "level": 4,
           "damageFactor": 1150,
           "wgReduce": 4,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         },
@@ -86322,7 +86552,7 @@
           "level": 5,
           "damageFactor": 1200,
           "wgReduce": 5,
-          "buffIds": [],
+          "buffIds": ["2000052_chain_1_1"],
           "cool": 0,
           "startCool": 0
         }
@@ -86367,94 +86597,6 @@
         }
       ]
     },
-    "5207": {
-      "id": "5207",
-      "type": "SKT_STRIKE_FINISH",
-      "subType": "NONE",
-      "targetTeamType": "ENEMY",
-      "rangeType": "ALL",
-      "levels": [
-        {
-          "level": 1,
-          "damageFactor": 1200,
-          "wgReduce": 3,
-          "buffIds": ["2000052_chain_1_1"],
-          "cool": 0,
-          "startCool": 0
-        },
-        {
-          "level": 2,
-          "damageFactor": 1250,
-          "wgReduce": 4,
-          "buffIds": ["2000052_chain_1_1"],
-          "cool": 0,
-          "startCool": 0
-        },
-        {
-          "level": 3,
-          "damageFactor": 1300,
-          "wgReduce": 4,
-          "buffIds": ["2000052_chain_1_1"],
-          "cool": 0,
-          "startCool": 0
-        },
-        {
-          "level": 4,
-          "damageFactor": 1350,
-          "wgReduce": 4,
-          "buffIds": ["2000052_chain_1_1"],
-          "cool": 0,
-          "startCool": 0
-        },
-        {
-          "level": 5,
-          "damageFactor": 1400,
-          "wgReduce": 5,
-          "buffIds": ["2000052_chain_1_1"],
-          "cool": 0,
-          "startCool": 0
-        }
-      ],
-      "hits": [
-        {
-          "id": "2000052_Skill_7_1",
-          "chain": "2000052_Skill_7",
-          "hit": 1,
-          "damageFactor": 130,
-          "damageType": "DT_FIRE_HIT",
-          "multiHit": true,
-          "maxHitCount": 6,
-          "isAdditive": false
-        },
-        {
-          "id": "2000052_Skill_7_2",
-          "chain": "2000052_Skill_7",
-          "hit": 2,
-          "damageFactor": 220,
-          "damageType": "DT_BIG_DAMAGE",
-          "multiHit": false,
-          "maxHitCount": 0,
-          "isAdditive": false
-        }
-      ],
-      "clips": [
-        {
-          "name": "2000052_Skill_7",
-          "events": [
-            {
-              "id": "2000052_Skill_7_1",
-              "factor": 130,
-              "count": 6
-            },
-            {
-              "id": "2000052_Skill_7_2",
-              "factor": 220,
-              "count": 1
-            }
-          ]
-        }
-      ]
-    },
     "5208": {
       "id": "5208",
       "type": "SKT_UNIQUE_PASSIVE",
@@ -86466,7 +86608,13 @@
           "level": 1,
           "damageFactor": 0,
           "wgReduce": 0,
-          "buffIds": ["2000052_trancendent"],
+          "buffIds": [
+            "2000052_trancendent",
+            "2000052_trancendent_2",
+            "2000052_trancendent_3",
+            "2000052_trancendent_4",
+            "2000052_trancendent_5"
+          ],
           "cool": 0,
           "startCool": 0
         },
@@ -86474,7 +86622,14 @@
           "level": 2,
           "damageFactor": 0,
           "wgReduce": 0,
-          "buffIds": ["trancendent_8_atk_team", "2000052_trancendent"],
+          "buffIds": [
+            "trancendent_8_atk_team",
+            "2000052_trancendent",
+            "2000052_trancendent_2",
+            "2000052_trancendent_3",
+            "2000052_trancendent_4",
+            "2000052_trancendent_5"
+          ],
           "cool": 0,
           "startCool": 0
         },
@@ -86482,7 +86637,14 @@
           "level": 3,
           "damageFactor": 0,
           "wgReduce": 0,
-          "buffIds": ["trancendent_8_atk_team", "2000052_trancendent"],
+          "buffIds": [
+            "trancendent_8_atk_team",
+            "2000052_trancendent",
+            "2000052_trancendent_2",
+            "2000052_trancendent_3",
+            "2000052_trancendent_4",
+            "2000052_trancendent_5"
+          ],
           "cool": 0,
           "startCool": 0
         },
@@ -86490,7 +86652,15 @@
           "level": 4,
           "damageFactor": 0,
           "wgReduce": 0,
-          "buffIds": ["trancendent_8_atk_team_upgrade", "trancendent_8_ap", "2000052_trancendent"],
+          "buffIds": [
+            "trancendent_8_atk_team_upgrade",
+            "trancendent_8_ap",
+            "2000052_trancendent",
+            "2000052_trancendent_2",
+            "2000052_trancendent_3",
+            "2000052_trancendent_4",
+            "2000052_trancendent_5"
+          ],
           "cool": 0,
           "startCool": 0
         }
@@ -86682,41 +86852,76 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 935,
+          "damageFactor": 1030,
           "wgReduce": 1,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_1", "2000052_u_1_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_1",
+            "2000052_u_1_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 2,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_1", "2000052_u_1_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_1",
+            "2000052_u_1_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 3,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_1", "2000052_u_1_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_1",
+            "2000052_u_1_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 4,
-          "damageFactor": 1235,
+          "damageFactor": 1330,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_1", "2000052_u_1_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_1",
+            "2000052_u_1_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 5,
-          "damageFactor": 1335,
+          "damageFactor": 1430,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_1", "2000052_u_1_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_1",
+            "2000052_u_1_2"
+          ],
           "cool": 0,
           "startCool": 0
         }
@@ -86726,7 +86931,7 @@
           "id": "2000052_Skill_2",
           "chain": "2000052_Skill_2",
           "hit": 1,
-          "damageFactor": 167,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 5,
@@ -86739,7 +86944,7 @@
           "events": [
             {
               "id": "2000052_Skill_2",
-              "factor": 167,
+              "factor": 200,
               "count": 5
             }
           ]
@@ -86755,41 +86960,81 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 935,
+          "damageFactor": 1030,
           "wgReduce": 1,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 2,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 3,
-          "damageFactor": 1035,
+          "damageFactor": 1130,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 4,
-          "damageFactor": 1235,
+          "damageFactor": 1330,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 5,
-          "damageFactor": 1335,
+          "damageFactor": 1430,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_2"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2"
+          ],
           "cool": 0,
           "startCool": 0
         }
@@ -86799,7 +87044,7 @@
           "id": "2000052_Skill_2",
           "chain": "2000052_Skill_2",
           "hit": 1,
-          "damageFactor": 167,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 5,
@@ -86812,7 +87057,7 @@
           "events": [
             {
               "id": "2000052_Skill_2",
-              "factor": 167,
+              "factor": 200,
               "count": 5
             }
           ]
@@ -86828,41 +87073,91 @@
       "levels": [
         {
           "level": 1,
-          "damageFactor": 935,
+          "damageFactor": 1390,
           "wgReduce": 1,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_3"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2",
+            "2000052_u_3",
+            "2000052_u_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 2,
-          "damageFactor": 1035,
+          "damageFactor": 1490,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_3"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2",
+            "2000052_u_3",
+            "2000052_u_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 3,
-          "damageFactor": 1035,
+          "damageFactor": 1490,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_3"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2",
+            "2000052_u_3",
+            "2000052_u_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 4,
-          "damageFactor": 1235,
+          "damageFactor": 1690,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_3"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2",
+            "2000052_u_3",
+            "2000052_u_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         },
         {
           "level": 5,
-          "damageFactor": 1335,
+          "damageFactor": 1790,
           "wgReduce": 2,
-          "buffIds": ["2000052_2_1", "2000052_2_2", "2000052_u_1_2", "2000052_u_3"],
+          "buffIds": [
+            "2000052_2_1",
+            "2000052_2_2",
+            "2000052_2_3",
+            "2000052_2_4",
+            "2000052_u_1_2",
+            "2000052_u_2",
+            "2000052_u_2_2",
+            "2000052_u_3",
+            "2000052_u_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         }
@@ -86872,23 +87167,11 @@
           "id": "2000052_Skill_2",
           "chain": "2000052_Skill_2",
           "hit": 1,
-          "damageFactor": 167,
+          "damageFactor": 200,
           "damageType": "DT_FIRE_HIT",
           "multiHit": true,
           "maxHitCount": 5,
           "isAdditive": false
-        }
-      ],
-      "clips": [
-        {
-          "name": "2000052_Skill_2_Upgrade",
-          "events": [
-            {
-              "id": "2000052_Skill_2",
-              "factor": 167,
-              "count": 5
-            }
-          ]
         }
       ]
     },
@@ -158540,6 +158823,1160 @@
           "damageFactor": 1650,
           "wgReduce": 3,
           "buffIds": ["2000122_2_1", "2000122_U_1", "2000122_U_2", "2000122_U_3", "2000122_U_2_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [],
+      "hitsUnresolved": true
+    },
+    "12401": {
+      "id": "12401",
+      "type": "SKT_FIRST",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1400,
+          "wgReduce": 1,
+          "buffIds": ["2000124_1_1", "2000124_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1500,
+          "wgReduce": 2,
+          "buffIds": ["2000124_1_1", "2000124_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1500,
+          "wgReduce": 2,
+          "buffIds": ["2000124_1_1", "2000124_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1600,
+          "wgReduce": 2,
+          "buffIds": ["2000124_1_1", "2000124_1_2"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1700,
+          "wgReduce": 2,
+          "buffIds": ["2000124_1_1", "2000124_1_2"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "burstAP": [100, 150, 200],
+      "hits": [
+        {
+          "id": "2000124_Skill_1_1",
+          "chain": "2000124_Skill_1",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_2",
+          "chain": "2000124_Skill_1",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_3",
+          "chain": "2000124_Skill_1",
+          "hit": 3,
+          "damageFactor": 120,
+          "damageType": "DT_LIGHTNING_BLUE_HIT",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_1",
+          "events": [
+            {
+              "id": "2000124_Skill_1_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_3",
+              "factor": 120,
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    "12402": {
+      "id": "12402",
+      "type": "SKT_SECOND",
+      "subType": "PASSIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1300,
+          "wgReduce": 1,
+          "buffIds": [
+            "2000124_2_1",
+            "2000124_2_2",
+            "2000124_2_3",
+            "2000124_2_4",
+            "2000124_2_5",
+            "2000124_2_6",
+            "2000124_2_7",
+            "2000124_2_8",
+            "2000124_2_9",
+            "2000124_2_10",
+            "2000124_2_11",
+            "2000124_2_12",
+            "2000124_2_13",
+            "2000124_2_14"
+          ],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 2,
+          "damageFactor": 1400,
+          "wgReduce": 2,
+          "buffIds": [
+            "2000124_2_1",
+            "2000124_2_2",
+            "2000124_2_3",
+            "2000124_2_4",
+            "2000124_2_5",
+            "2000124_2_6",
+            "2000124_2_7",
+            "2000124_2_8",
+            "2000124_2_9",
+            "2000124_2_10",
+            "2000124_2_11",
+            "2000124_2_12",
+            "2000124_2_13",
+            "2000124_2_14"
+          ],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 3,
+          "damageFactor": 1500,
+          "wgReduce": 2,
+          "buffIds": [
+            "2000124_2_1",
+            "2000124_2_2",
+            "2000124_2_3",
+            "2000124_2_4",
+            "2000124_2_5",
+            "2000124_2_6",
+            "2000124_2_7",
+            "2000124_2_8",
+            "2000124_2_9",
+            "2000124_2_10",
+            "2000124_2_11",
+            "2000124_2_12",
+            "2000124_2_13",
+            "2000124_2_14"
+          ],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 4,
+          "damageFactor": 1600,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_2_1",
+            "2000124_2_2",
+            "2000124_2_3",
+            "2000124_2_4",
+            "2000124_2_5",
+            "2000124_2_6",
+            "2000124_2_7",
+            "2000124_2_8",
+            "2000124_2_9",
+            "2000124_2_10",
+            "2000124_2_11",
+            "2000124_2_12",
+            "2000124_2_13",
+            "2000124_2_14"
+          ],
+          "cool": 3,
+          "startCool": 3
+        },
+        {
+          "level": 5,
+          "damageFactor": 1600,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_2_1",
+            "2000124_2_2",
+            "2000124_2_3",
+            "2000124_2_4",
+            "2000124_2_5",
+            "2000124_2_6",
+            "2000124_2_7",
+            "2000124_2_8",
+            "2000124_2_9",
+            "2000124_2_10",
+            "2000124_2_11",
+            "2000124_2_12",
+            "2000124_2_13",
+            "2000124_2_14"
+          ],
+          "cool": 3,
+          "startCool": 3
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_2_1",
+          "chain": "2000124_Skill_2",
+          "hit": 1,
+          "damageFactor": 50,
+          "damageType": "DT_LIGHTNING_BLUE_HIT",
+          "multiHit": true,
+          "maxHitCount": 10,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_2_2",
+          "chain": "2000124_Skill_2",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_2_3",
+          "chain": "2000124_Skill_2",
+          "hit": 3,
+          "damageFactor": 60,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_2",
+          "events": [
+            {
+              "id": "2000124_Skill_2_1",
+              "factor": 50,
+              "count": 10
+            },
+            {
+              "id": "2000124_Skill_2_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_2_3",
+              "factor": 60,
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    "12403": {
+      "id": "12403",
+      "type": "SKT_ULTIMATE",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1750,
+          "wgReduce": 3,
+          "buffIds": ["2000124_3_1", "2000124_3_2", "2000124_3_3", "2000124_3_4"],
+          "cool": 5,
+          "startCool": 5
+        },
+        {
+          "level": 2,
+          "damageFactor": 1850,
+          "wgReduce": 4,
+          "buffIds": ["2000124_3_1", "2000124_3_2", "2000124_3_3", "2000124_3_4"],
+          "cool": 5,
+          "startCool": 5
+        },
+        {
+          "level": 3,
+          "damageFactor": 1850,
+          "wgReduce": 4,
+          "buffIds": ["2000124_3_1", "2000124_3_2", "2000124_3_3", "2000124_3_4"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 4,
+          "damageFactor": 2000,
+          "wgReduce": 4,
+          "buffIds": ["2000124_3_1", "2000124_3_2", "2000124_3_3", "2000124_3_4"],
+          "cool": 4,
+          "startCool": 4
+        },
+        {
+          "level": 5,
+          "damageFactor": 2200,
+          "wgReduce": 4,
+          "buffIds": ["2000124_3_1", "2000124_3_2", "2000124_3_3", "2000124_3_4"],
+          "cool": 4,
+          "startCool": 4
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_3_1",
+          "chain": "2000124_Skill_3",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_3_2",
+          "chain": "2000124_Skill_3",
+          "hit": 2,
+          "damageFactor": 100,
+          "damageType": "DT_BIG_DAMAGE",
+          "multiHit": true,
+          "maxHitCount": 8,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_3",
+          "events": [
+            {
+              "id": "2000124_Skill_3_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_3_2",
+              "factor": 100,
+              "count": 8
+            }
+          ]
+        }
+      ]
+    },
+    "12404": {
+      "id": "12404",
+      "type": "SKT_CHAIN_PASSIVE",
+      "subType": "NONE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 590,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [],
+      "hitsUnresolved": true
+    },
+    "12405": {
+      "id": "12405",
+      "type": "SKT_STRIKE_AERIAL",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 3,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 5,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_5_1",
+          "chain": "2000124_Skill_5",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": true,
+          "maxHitCount": 6,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_5_2",
+          "chain": "2000124_Skill_5",
+          "hit": 2,
+          "damageFactor": 400,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_5,6",
+          "events": [
+            {
+              "id": "2000124_Skill_5_1",
+              "factor": 100,
+              "count": 6
+            },
+            {
+              "id": "2000124_Skill_5_2",
+              "factor": 400,
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "12406": {
+      "id": "12406",
+      "type": "SKT_STRIKE_GROUND",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "ALL",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 3,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 4,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 5,
+          "buffIds": ["2000124_chain_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_5_1",
+          "chain": "2000124_Skill_5",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": true,
+          "maxHitCount": 6,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_5_2",
+          "chain": "2000124_Skill_5",
+          "hit": 2,
+          "damageFactor": 400,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_5,6",
+          "events": [
+            {
+              "id": "2000124_Skill_5_1",
+              "factor": 100,
+              "count": 6
+            },
+            {
+              "id": "2000124_Skill_5_2",
+              "factor": 400,
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "12408": {
+      "id": "12408",
+      "type": "SKT_UNIQUE_PASSIVE",
+      "subType": "NONE",
+      "targetTeamType": "NONE",
+      "rangeType": "NONE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": ["trancendent_8_ap_upgrade", "trancendent_8_2000124_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "trancendent_8_ap_upgrade",
+            "trancendent_8_2000124_1",
+            "trancendent_8_2000124_2",
+            "trancendent_8_pierce_30"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 0,
+          "wgReduce": 0,
+          "buffIds": [
+            "trancendent_8_ap_upgrade",
+            "trancendent_8_2000124_1",
+            "trancendent_8_2000124_2",
+            "trancendent_8_pierce_30",
+            "trancendent_8_2000124_3_1",
+            "trancendent_8_2000124_3_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": []
+    },
+    "12409": {
+      "id": "12409",
+      "type": "SKT_BACKUP_AERIAL",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 0,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 2,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_5_1",
+          "chain": "2000124_Skill_5",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": true,
+          "maxHitCount": 6,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_5_2",
+          "chain": "2000124_Skill_5",
+          "hit": 2,
+          "damageFactor": 400,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_5,6",
+          "events": [
+            {
+              "id": "2000124_Skill_5_1",
+              "factor": 100,
+              "count": 6
+            },
+            {
+              "id": "2000124_Skill_5_2",
+              "factor": 400,
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "12410": {
+      "id": "12410",
+      "type": "SKT_BACKUP_GROUND",
+      "subType": "NONE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1000,
+          "wgReduce": 0,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1050,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1100,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1150,
+          "wgReduce": 1,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1200,
+          "wgReduce": 2,
+          "buffIds": ["2000124_backup_1_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_5_1",
+          "chain": "2000124_Skill_5",
+          "hit": 1,
+          "damageFactor": 100,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": true,
+          "maxHitCount": 6,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_5_2",
+          "chain": "2000124_Skill_5",
+          "hit": 2,
+          "damageFactor": 400,
+          "damageType": "DT_LIGHTNING_BLUE_PIERCE",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_5,6",
+          "events": [
+            {
+              "id": "2000124_Skill_5_1",
+              "factor": 100,
+              "count": 6
+            },
+            {
+              "id": "2000124_Skill_5_2",
+              "factor": 400,
+              "count": 1
+            }
+          ]
+        }
+      ]
+    },
+    "12419": {
+      "id": "12419",
+      "type": "SKT_BURST_1",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1400,
+          "wgReduce": 2,
+          "buffIds": ["2000124_1_1", "2000124_1_2", "2000124_U_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": ["2000124_1_1", "2000124_1_2", "2000124_U_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": ["2000124_1_1", "2000124_1_2", "2000124_U_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1600,
+          "wgReduce": 3,
+          "buffIds": ["2000124_1_1", "2000124_1_2", "2000124_U_1"],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1700,
+          "wgReduce": 3,
+          "buffIds": ["2000124_1_1", "2000124_1_2", "2000124_U_1"],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_1_1",
+          "chain": "2000124_Skill_1",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_2",
+          "chain": "2000124_Skill_1",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_3",
+          "chain": "2000124_Skill_1",
+          "hit": 3,
+          "damageFactor": 120,
+          "damageType": "DT_LIGHTNING_BLUE_HIT",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_1_Burst_1",
+          "events": [
+            {
+              "id": "2000124_Skill_1_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_3",
+              "factor": 120,
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    "12420": {
+      "id": "12420",
+      "type": "SKT_BURST_2",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1400,
+          "wgReduce": 2,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1500,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 1600,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 1700,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        }
+      ],
+      "hits": [
+        {
+          "id": "2000124_Skill_1_1",
+          "chain": "2000124_Skill_1",
+          "hit": 1,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_2",
+          "chain": "2000124_Skill_1",
+          "hit": 2,
+          "damageFactor": 200,
+          "damageType": "DT_LIGHTNING_BLUE_CUT",
+          "multiHit": false,
+          "maxHitCount": 0,
+          "isAdditive": false
+        },
+        {
+          "id": "2000124_Skill_1_3",
+          "chain": "2000124_Skill_1",
+          "hit": 3,
+          "damageFactor": 120,
+          "damageType": "DT_LIGHTNING_BLUE_HIT",
+          "multiHit": true,
+          "maxHitCount": 5,
+          "isAdditive": false
+        }
+      ],
+      "clips": [
+        {
+          "name": "2000124_Skill_1_Burst_1",
+          "events": [
+            {
+              "id": "2000124_Skill_1_1",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_2",
+              "factor": 200,
+              "count": 1
+            },
+            {
+              "id": "2000124_Skill_1_3",
+              "factor": 120,
+              "count": 5
+            }
+          ]
+        }
+      ]
+    },
+    "12421": {
+      "id": "12421",
+      "type": "SKT_BURST_3",
+      "subType": "ACTIVE",
+      "targetTeamType": "ENEMY",
+      "rangeType": "SINGLE",
+      "levels": [
+        {
+          "level": 1,
+          "damageFactor": 1890,
+          "wgReduce": 2,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2",
+            "2000124_U_3_1",
+            "2000124_U_3_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 2,
+          "damageFactor": 1990,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2",
+            "2000124_U_3_1",
+            "2000124_U_3_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 3,
+          "damageFactor": 1990,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2",
+            "2000124_U_3_1",
+            "2000124_U_3_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 4,
+          "damageFactor": 2090,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2",
+            "2000124_U_3_1",
+            "2000124_U_3_2"
+          ],
+          "cool": 0,
+          "startCool": 0
+        },
+        {
+          "level": 5,
+          "damageFactor": 2190,
+          "wgReduce": 3,
+          "buffIds": [
+            "2000124_1_1",
+            "2000124_1_2",
+            "2000124_U_1",
+            "2000124_U_2_1",
+            "2000124_U_2_2",
+            "2000124_U_3_1",
+            "2000124_U_3_2"
+          ],
           "cool": 0,
           "startCool": 0
         }

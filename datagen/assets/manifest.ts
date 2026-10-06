@@ -403,6 +403,15 @@ export function buildAssetManifest(): AssetRequest[] {
       candidates: [`IG_Turn_Element_${cap(el)}`],
       domain: 'ui',
     });
+  // La pastille « sans élément » de l'Universal Tower (06/10/2026) : le jeu n'a
+  // pas de IG_Turn_Element_* neutre, le menu de la tour porte un CM_* — pris tel
+  // quel, sous son nom (pas une sixième « élément » du glossaire).
+  push({
+    kind: 'image',
+    key: 'images/ui/elem/CM_Element_Neutral.webp',
+    candidates: ['CM_Element_Neutral'],
+    domain: 'ui',
+  });
   // Le slug canonique diffère de l'enum du jeu (striker↔Attacker, healer↔Priest) ;
   // les sprites portent le nom d'ENUM → la clé reste au slug, candidats = enum.
   // L'inverse est DÉRIVÉ de `resolveClass` (même règle que persos/équipement)

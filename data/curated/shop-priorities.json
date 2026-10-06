@@ -330,6 +330,33 @@
   "survey/item-30326/monthly": {
     "priority": "S"
   },
+  "survey/item-30385/monthly": {
+    "priority": "A"
+  },
+  "survey/item-3336/one-time": {
+    "priority": "A"
+  },
+  "survey/item-5336/one-time": {
+    "priority": "A"
+  },
+  "survey/item-7336/one-time": {
+    "priority": "A"
+  },
+  "survey/item-9336/one-time": {
+    "priority": "A"
+  },
+  "survey/item-10996/one-time": {
+    "priority": "C"
+  },
+  "survey/item-10997/one-time": {
+    "priority": "C"
+  },
+  "survey/item-780/one-time": {
+    "priority": "C"
+  },
+  "survey/item-1792/one-time": {
+    "priority": "C"
+  },
   "survey/item-30271/one-time": {
     "priority": "B"
   },

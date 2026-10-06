@@ -110,9 +110,20 @@ function DifficultyCard({ guide, lang }: { guide: Guide; lang: Lang }) {
 }
 
 /** Tour élémentaire : carte haute, icône + nom d'élément en tête, accent coloré. */
-function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; element?: string }) {
+function ElementalCard({
+  guide,
+  lang,
+  element: raw,
+}: {
+  guide: Guide;
+  lang: Lang;
+  element?: string;
+}) {
   const name = lRec(guide.title, lang);
-  const ring = (element && ELEMENT_RING[element]) || 'hover:ring-select/50';
+  // `none` : l'Universal Tower (06/10/2026) est du menu élémentaire sans
+  // élément — sa pastille est celle du jeu (CM_Element_Neutral), sans accent coloré.
+  const badge = raw === 'none' ? img.elementNeutral() : raw ? img.element(raw) : undefined;
+  const ring = (raw && ELEMENT_RING[raw]) || 'hover:ring-select/50';
   return (
     <Link
       href={localePath(lang, `/guides/${guide.category}/${guide.slug}`)}
@@ -120,9 +131,9 @@ function ElementalCard({ guide, lang, element }: { guide: Guide; lang: Lang; ele
     >
       <GuideCardArt icon={guide.icon} topVeil hoverScale />
       <div className="absolute inset-x-0 top-0 flex items-center gap-1 p-2">
-        {element && (
+        {badge && (
           <img
-            src={img.element(element)}
+            src={badge}
             alt=""
             aria-hidden
             loading="lazy"

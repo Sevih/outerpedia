@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-09-29",
+  "asOf": "2026-10-13",
   "tabs": [
     {
       "key": "books",
@@ -217,7 +217,7 @@
               "sourceKey": "survey",
               "origin": "shop",
               "type": "shop",
-              "monthly": 2
+              "monthly": 4
             },
             {
               "sourceKey": "worldboss",
@@ -240,8 +240,8 @@
           ],
           "totals": {
             "weekly": 4,
-            "monthly": 34,
-            "grandMonthly": 50
+            "monthly": 36,
+            "grandMonthly": 52
           }
         },
         {
@@ -286,7 +286,7 @@
               "sourceKey": "survey",
               "origin": "shop",
               "type": "shop",
-              "monthly": 2
+              "monthly": 4
             },
             {
               "sourceKey": "worldboss",
@@ -309,8 +309,8 @@
           ],
           "totals": {
             "weekly": 0,
-            "monthly": 36,
-            "grandMonthly": 36
+            "monthly": 38,
+            "grandMonthly": 38
           }
         }
       ]
@@ -342,7 +342,7 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 20
+              "weekly": 25
             },
             {
               "sourceKey": "stars",
@@ -358,9 +358,9 @@
             }
           ],
           "totals": {
-            "weekly": 90,
+            "weekly": 95,
             "monthly": 200,
-            "grandMonthly": 560
+            "grandMonthly": 580
           }
         },
         {
@@ -446,7 +446,7 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 20
+              "weekly": 25
             },
             {
               "sourceKey": "stars",
@@ -462,9 +462,9 @@
             }
           ],
           "totals": {
-            "weekly": 90,
+            "weekly": 95,
             "monthly": 200,
-            "grandMonthly": 560
+            "grandMonthly": 580
           }
         },
         {
@@ -555,19 +555,19 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 160
+              "weekly": 200
             },
             {
               "sourceKey": "singularity-daily-ranking",
               "origin": "cured",
               "type": "mission",
-              "weeklyRange": [20, 240]
+              "weeklyRange": [25, 300]
             }
           ],
           "totals": {
-            "weekly": 480,
+            "weekly": 520,
             "monthly": 0,
-            "grandMonthly": 1920
+            "grandMonthly": 2080
           }
         },
         {
@@ -588,19 +588,19 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 200
+              "weekly": 250
             },
             {
               "sourceKey": "singularity-daily-ranking",
               "origin": "cured",
               "type": "mission",
-              "weeklyRange": [40, 160]
+              "weeklyRange": [50, 200]
             }
           ],
           "totals": {
-            "weekly": 200,
+            "weekly": 250,
             "monthly": 0,
-            "grandMonthly": 800
+            "grandMonthly": 1000
           }
         },
         {
@@ -627,13 +627,13 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 100
+              "weekly": 125
             }
           ],
           "totals": {
-            "weekly": 200,
+            "weekly": 225,
             "monthly": 0,
-            "grandMonthly": 800
+            "grandMonthly": 900
           }
         }
       ]
@@ -665,7 +665,7 @@
               "sourceKey": "survey",
               "origin": "shop",
               "type": "shop",
-              "monthly": 5
+              "monthly": 8
             },
             {
               "sourceKey": "joint",
@@ -676,8 +676,8 @@
           ],
           "totals": {
             "weekly": 0,
-            "monthly": 7,
-            "grandMonthly": 7
+            "monthly": 10,
+            "grandMonthly": 10
           }
         },
         {
@@ -775,19 +775,19 @@
               "sourceKey": "singularity-daily-run",
               "origin": "cured",
               "type": "mission",
-              "weekly": 100
+              "weekly": 125
             },
             {
               "sourceKey": "singularity-daily-ranking",
               "origin": "cured",
               "type": "mission",
-              "weeklyRange": [20, 160]
+              "weeklyRange": [25, 200]
             }
           ],
           "totals": {
-            "weekly": 260,
+            "weekly": 285,
             "monthly": 0,
-            "grandMonthly": 1040
+            "grandMonthly": 1140
           }
         }
       ]

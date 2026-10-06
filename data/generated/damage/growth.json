@@ -1,5 +1,5 @@
 {
-  "resVersion": "1.11.302",
+  "resVersion": "1.11.401",
   "transcend": [
     {
       "basicStar": 1,
@@ -1095,6 +1095,90 @@
     },
     {
       "characterId": "2000121",
+      "basicStar": 3,
+      "transStar": 9,
+      "hpRate": 300,
+      "atkRate": 300,
+      "defRate": 300,
+      "skillLevel": 4,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 3,
+      "hpRate": 100,
+      "atkRate": 100,
+      "defRate": 100,
+      "skillLevel": 1,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 4,
+      "hpRate": 160,
+      "atkRate": 160,
+      "defRate": 160,
+      "skillLevel": 2,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 5,
+      "hpRate": 190,
+      "atkRate": 190,
+      "defRate": 190,
+      "skillLevel": 2,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 6,
+      "hpRate": 220,
+      "atkRate": 220,
+      "defRate": 220,
+      "skillLevel": 3,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 7,
+      "hpRate": 250,
+      "atkRate": 250,
+      "defRate": 250,
+      "skillLevel": 3,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
+      "basicStar": 3,
+      "transStar": 8,
+      "hpRate": 280,
+      "atkRate": 280,
+      "defRate": 280,
+      "skillLevel": 3,
+      "wgDmg": 0,
+      "burst2": 0,
+      "burst3": 0
+    },
+    {
+      "characterId": "2000124",
       "basicStar": 3,
       "transStar": 9,
       "hpRate": 300,

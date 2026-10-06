@@ -571,7 +571,7 @@
             "jp": "自分の残りHPが低いほど、防御力がUPする。",
             "kr": "잃은 체력 비례 방어력 증가",
             "zh": "根据损失的生命值等比提升防御力",
-            "fr": "Accroît la DÉF proportionnelle à PV manquante manquante PV",
+            "fr": "Augmente la Défense proportionnelle à PV manquante PV",
             "es": "Aumenta Defensa proporcional a Vida perdida"
           }
         }

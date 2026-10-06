@@ -1,5 +1,107 @@
 [
   {
+    "date": "2026-10-06",
+    "type": "character",
+    "title": {
+      "en": "Demiurge Lambda",
+      "jp": "デミウルゴス・ラムダ",
+      "kr": "데미우르고스 람다",
+      "zh": "创世之神 拉姆达",
+      "fr": "Démiurge Lambda",
+      "es": "Demiurgo Lambda"
+    },
+    "content": {
+      "en": [
+        "Demiurge Lambda has been added to the database with full skills, stats and exclusive equipment."
+      ],
+      "jp": [
+        "デミウルゴス・ラムダが、スキル、ステータス、専用装備をすべて含めてデータベースに追加されました。"
+      ],
+      "kr": [
+        "데미우르고스 람다가 모든 스킬, 능력치, 전용 장비를 갖춘 상태로 데이터베이스에 추가되었습니다."
+      ],
+      "zh": ["创世之神 拉姆达已连同其全部技能、属性和专属装备一并添加至数据库中。"],
+      "fr": [
+        "Démiurge Lambda a été ajoutée à la base de données avec tous ses skills, statistiques et équipement exclusif."
+      ],
+      "es": [
+        "Demiurgo Lambda ha sido añadida a la base de datos con todas sus skills, estadísticas y equipo exclusivo."
+      ]
+    },
+    "link": {
+      "kind": "character",
+      "slug": "demiurge-lambda"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "type": "guide",
+    "title": {
+      "en": "Universal Tower",
+      "jp": "万象の塔",
+      "kr": "만상의 탑",
+      "zh": "万象之塔",
+      "fr": "Tour aux Mille Formes",
+      "es": "Torre de las Mil Formas"
+    },
+    "content": {
+      "en": [
+        "Added the **Universal Tower** guide: the new Skyward Tower open to every element, floor by floor, with no daily debuff.",
+        "Elemental Towers extended to 150 floors; Skyward Tower Hard team restrictions updated."
+      ],
+      "jp": [
+        "**万象の塔**の攻略を追加しました：全属性で挑める新しいスカイワードタワー、各階ごとの解説、日替わりの弱体効果なし。",
+        "属性の塔が150階まで拡張、スカイワードタワー（ハード）の編成制限を更新しました。"
+      ],
+      "kr": [
+        "**만상의 탑** 공략을 추가했습니다: 모든 속성으로 도전하는 새 스카이워드 타워, 층별 안내, 요일 약화 효과 없음.",
+        "속성의 탑이 150층으로 확장, 스카이워드 타워 하드의 편성 제한을 갱신했습니다."
+      ],
+      "zh": [
+        "新增**万象之塔**攻略：所有属性皆可出战的新天际塔，逐层解析，无每日减益。",
+        "属性塔扩展至150层；天际塔困难模式的编队限制已更新。"
+      ],
+      "fr": [
+        "Ajout du guide de la **Tour aux Mille Formes** : la nouvelle tour ouverte à tous les éléments, étage par étage, sans affaiblissement du jour.",
+        "Tours élémentaires étendues à 150 étages ; restrictions d'équipe de la Skyward Tower Hard mises à jour."
+      ],
+      "es": [
+        "Se añadió la guía de la **Torre de las Mil Formas**: la nueva Torre Skyward abierta a todos los elementos, piso por piso, sin debuff diario.",
+        "Torres elementales ampliadas a 150 pisos; restricciones de equipo de la Torre Skyward Difícil actualizadas."
+      ]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/skyward-tower/universal-tower"
+    }
+  },
+  {
+    "date": "2026-10-06",
+    "type": "update",
+    "title": {
+      "en": "Annihilator Joint Challenge",
+      "jp": "エクスタミネーター 共同作戦",
+      "kr": "말살자 합동 챌린지",
+      "zh": "歼灭者联合挑战",
+      "fr": "Joint Challenge Annihilateur",
+      "es": "Desafío conjunto: Aniquilador"
+    },
+    "content": {
+      "en": ["Annihilator Joint Challenge Guide updated for October 2026 version."],
+      "jp": ["エクスタミネーター 共同作戦ガイドが2026年10月版に更新されました。"],
+      "kr": ["말살자 합동 챌린지 가이드가 2026년 10월 버전으로 업데이트되었습니다."],
+      "zh": ["歼灭者联合挑战指南已更新至2026年10月版本。"],
+      "fr": [
+        "Le guide du défi commun « Annihilateur » a été mis à jour pour la version d'octobre 2026."
+      ],
+      "es": ["Guía del Desafío conjunto Aniquilador actualizada para la versión de octubre 2026."]
+    },
+    "link": {
+      "kind": "guide",
+      "href": "/guides/joint-challenge/annihilator"
+    }
+  },
+  {
     "date": "2026-09-23",
     "type": "news",
     "title": {

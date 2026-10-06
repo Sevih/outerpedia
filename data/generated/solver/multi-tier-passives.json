@@ -1875,7 +1875,7 @@
       {
         "unlockLevel": 10,
         "isAdd": true,
-        "desc": "Self <color=#28d9ed>Effectiveness</color> <color=#28d9ed>+100%</color>"
+        "desc": "Damage dealt to bosses <color=#28d9ed>+50%</color>"
       }
     ]
   },
@@ -2876,6 +2876,21 @@
         "unlockLevel": 10,
         "isAdd": true,
         "desc": "After taking an action, increases all Fire allies' Damage Dealt by <color=#28d9ed>15%</color>. (Stacks up to 4 times)"
+      }
+    ]
+  },
+  "2000124": {
+    "name": "Demiurge Lambda's Exclusive Equipment",
+    "tiers": [
+      {
+        "unlockLevel": 1,
+        "isAdd": false,
+        "desc": "Increases damage proportional to the target's Max Health (up to 100%)"
+      },
+      {
+        "unlockLevel": 10,
+        "isAdd": true,
+        "desc": "Attack <color=#28d9ed>+5%</color> for each <color=#28d9ed>Light of the Deep Sea</color>"
       }
     ]
   },

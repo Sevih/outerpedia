@@ -1,0 +1,22 @@
+{
+  "title": {
+    "en": "Universal Tower",
+    "fr": "Tour aux Mille Formes",
+    "jp": "万象の塔",
+    "kr": "만상의 탑",
+    "zh": "万象之塔",
+    "es": "Torre de las Mil Formas"
+  },
+  "description": {
+    "en": "Floor-by-floor guide to the Universal Tower, the Skyward Tower open to every element: bosses, minions and recommended teams, with no daily debuff.",
+    "fr": "Guide étage par étage de la Tour aux Mille Formes, la tour ouverte à tous les éléments : boss, sbires et équipes recommandées, sans affaiblissement du jour.",
+    "jp": "全属性で挑める万象の塔の攻略：各階のボス、雑魚、おすすめ編成。日替わりの弱体効果なし。",
+    "kr": "모든 속성으로 도전하는 만상의 탑 공략: 층별 보스, 쫄, 추천 편성. 요일 약화 효과 없음.",
+    "zh": "万象之塔逐层攻略，所有属性皆可出战：各层Boss、小怪与推荐队伍，无每日减益。",
+    "es": "Guía piso por piso de la Torre de las Mil Formas, abierta a todos los elementos: jefes, secuaces y equipos recomendados, sin debuff diario."
+  },
+  "icon": "T_Tower_Elemental_Neutral",
+  "author": "Sevih",
+  "updated": "2026-10-06",
+  "tower": "tower_element_none"
+}

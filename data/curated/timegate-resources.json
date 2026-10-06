@@ -40,7 +40,7 @@
     "22031": [
       { "source": "irregular-extermination-points", "monthly": 150 },
       { "source": "kates-workshop", "weekly": 70 },
-      { "source": "singularity-daily-run", "weekly": 20 }
+      { "source": "singularity-daily-run", "weekly": 25 }
     ],
     "22033": [
       { "source": "irregular-extermination-points", "monthly": 300 },
@@ -50,7 +50,7 @@
     "22030": [
       { "source": "irregular-extermination-points", "monthly": 150 },
       { "source": "kates-workshop", "weekly": 70 },
-      { "source": "singularity-daily-run", "weekly": 20 }
+      { "source": "singularity-daily-run", "weekly": 25 }
     ],
     "22032": [
       { "source": "irregular-extermination-points", "monthly": 300 },
@@ -60,16 +60,16 @@
 
     "25001": [
       { "source": "singularity-rank", "weekly": 320 },
-      { "source": "singularity-daily-run", "weekly": 160 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [20, 240] }
+      { "source": "singularity-daily-run", "weekly": 200 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [25, 300] }
     ],
     "25002": [
-      { "source": "singularity-daily-run", "weekly": 200 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [40, 160] }
+      { "source": "singularity-daily-run", "weekly": 250 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [50, 200] }
     ],
     "60001": [
       { "source": "singularity-weekly-mission", "weekly": 100 },
-      { "source": "singularity-daily-run", "weekly": 100 }
+      { "source": "singularity-daily-run", "weekly": 125 }
     ],
 
     "21127": [
@@ -79,8 +79,8 @@
 
     "30519": [
       { "source": "singularity-rank", "weekly": 160 },
-      { "source": "singularity-daily-run", "weekly": 100 },
-      { "source": "singularity-daily-ranking", "weeklyRange": [20, 160] }
+      { "source": "singularity-daily-run", "weekly": 125 },
+      { "source": "singularity-daily-ranking", "weeklyRange": [25, 200] }
     ]
   }
 }

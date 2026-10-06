@@ -3826,6 +3826,30 @@
       "tooltips": ["2000035"],
       "irremovable": true
     },
+    "2000052": {
+      "id": "2000052",
+      "name": {
+        "en": "Tower Administrator",
+        "jp": "塔の管理者",
+        "kr": "탑의 관리자",
+        "zh": "塔之管理者",
+        "fr": "Administrateur de la Tour",
+        "es": "Administrador de la Torre"
+      },
+      "desc": {
+        "en": "Sigma gains the following effects in the Skyward Tower and Elemental Tower.\\n\\nCritical Hit Chance, Penetration, and Speed +20%\\nDamage dealt +150%\\nDamage taken -30%\\n(Cannot be removed, permanent)",
+        "jp": "シグマは飛天の塔およびエレメンタルタワーで以下の効果を得る。\\n\\n自分の会心率、貫通力、スピード+20%\\n自分の与えるダメージ+150%\\n自分の受けるダメージ-30%\\n(解除不可、永続)",
+        "kr": "시그마는 비천의 탑, 엘레멘탈 타워에서 아래의 효과를 얻습니다.\\n\\n자신 치명 확률, 관통력, 속도 +20%\\n자신 주는 피해 +150%\\n자신 받는 피해 -30%\\n(해제 불가, 영구 지속)",
+        "zh": "西格玛在飞天之塔和元素之塔中获得以下效果。\\n\\n自身暴击率、穿透力、速度+20%\\n自身造成的伤害+150%\\n自身受到的伤害-30%\\n（无法解除，永久持续）",
+        "fr": "Sigma obtient les effets suivants dans la Tour Skyward et la Tour élémentaire.\\n\\nTaux CRIT, PÉN et VIT +20 %\\nDGT infligés +150 %\\nDGT reçus -30 %\\n(Ineffaçable, permanent)",
+        "es": "Sigma obtiene los siguientes efectos en la Torre Skyward y la Elemental Tower.\\n\\nProb. CRIT, PEN y VEL +20%\\nDaño infligido +150%\\nDaño recibido -30%\\n(No se puede eliminar, permanente)"
+      },
+      "icon": "IG_Buff_2000052_Interruption_D",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000052"],
+      "irremovable": true
+    },
     "2000053": {
       "id": "2000053",
       "name": {
@@ -4398,6 +4422,30 @@
       "isDebuff": false,
       "origin": "tooltip",
       "tooltips": ["2000120"],
+      "irremovable": true
+    },
+    "2000124": {
+      "id": "2000124",
+      "name": {
+        "en": "Light of the Deep Sea",
+        "jp": "深海の光",
+        "kr": "심해의 빛",
+        "zh": "深海之光",
+        "fr": "Lumière des profondeurs",
+        "es": "Luz del Mar Profundo"
+      },
+      "desc": {
+        "en": "For each stack held, the caster gains the following effects (up to 10 stacks).\\n1. Damage +5% (up to 50%)\\n2. Damage Taken Reduction +15% (up to 150%)\\n3. Speed +10 (up to 100)\\nThe caster gains the following additional effects upon reaching the specified stack thresholds.\\n5 stacks: After an enemy's action ends, Priority +10%\\n10 stacks: Damage dealt to bosses +100%",
+        "jp": "保有数1個につき、自分に以下の効果を付与します。(最大10スタック)\\n1. 与ダメージ +5%（最大50%）\\n2. 被ダメージ減少 +15%（最大150%）\\n3. スピード +10（最大100）\\n一定数以上保有している場合、以下の追加効果を獲得します。\\n5個：敵の行動終了後、自分の行動ゲージ +10%\\n10個：ボスへの与ダメージ +100%",
+        "kr": "보유 개수 1개당 자신에게 아래 효과를 줍니다.(최대 10스텍)\\n1. 피해 +5%(최대 50%)\\n2.받는 피해 감소 15%(최대 150%)\\n3.속도 +10(최대 100)\\n일정 개수 이상 보유 시 아래 추가 효과를 얻습니다.\\n\n5개: 적 행동 종료 후 자신 행동 게이지 +10%\\n10개: 보스 대상 피해 +100%",
+        "zh": "每持有1个，赋予自身以下效果。（最多叠加10次）\\n1. 伤害 +5%（最多50%）\\n2. 受到的伤害降低15%（最多150%）\\n3. 速度 +10（最多100）\\n持有达到指定数量时，获得以下追加效果。\\n5个：敌人行动结束后，自身行动值 +10%\\n10个：对首领怪物造成的伤害 +100%",
+        "fr": "Pour chaque cumul détenu, obtient les effets suivants. (Max. 10 cumuls)\\n1. Dégâts +5% (max. 50%)\\n2. Réduction des dégâts reçus +15% (max. 150%)\\n3. VIT +10 (max. 100)\\nLorsque le nombre de cumuls requis est atteint, obtient les effets supplémentaires suivants.\\n5 cumuls : À la fin de l'action d'un ennemi, Priorité +10%\\n10 cumuls : Dégâts contre les boss +100%",
+        "es": "Por cada acumulación, obtiene los siguientes efectos. (Máx. 10 acumulaciones)\\n1. Daño +5% (máx. 50%)\\n2. Reducción de daño recibido +15% (máx. 150%)\\n3. VEL +10 (máx. 100)\\nAl alcanzar la cantidad indicada de acumulaciones, obtiene los siguientes efectos adicionales.\\n5 acumulaciones: Tras terminar la acción de un enemigo, Prioridad +10%\\n10 acumulaciones: Daño contra jefes +100%"
+      },
+      "icon": "IG_Buff_Effect_2000124_Interruption",
+      "isDebuff": false,
+      "origin": "tooltip",
+      "tooltips": ["2000124"],
       "irremovable": true
     },
     "2010109": {
@@ -5248,6 +5296,29 @@
       "isDebuff": false,
       "origin": "type",
       "tooltips": []
+    },
+    "SYS_BUFF_STACK_UP": {
+      "id": "SYS_BUFF_STACK_UP",
+      "name": {
+        "en": "Unique Resource Increase",
+        "jp": "固有資源増加",
+        "kr": "고유 자원 증가",
+        "zh": "固有资源增加",
+        "fr": "Augmentation de Ressource unique",
+        "es": "Aumento de Recurso Único"
+      },
+      "desc": {
+        "en": "",
+        "jp": "",
+        "kr": "",
+        "zh": "",
+        "fr": "",
+        "es": ""
+      },
+      "icon": "",
+      "isDebuff": false,
+      "origin": "type",
+      "tooltips": []
     }
   },
   "effectByTooltip": {
@@ -5405,6 +5476,7 @@
     "10002": "10002",
     "2000020": "2000020",
     "2000035": "2000035",
+    "2000052": "2000052",
     "2000053": "2000053",
     "2000056": "2000056",
     "2000057": "2000057",
@@ -5429,6 +5501,7 @@
     "2000114": "2000114",
     "2000119": "2000119",
     "2000120": "2000120",
+    "2000124": "2000124",
     "2010109": "2010109",
     "2010112": "2010112",
     "2100065": "2100065",
@@ -5556,10 +5629,11 @@
     "SYS_BUFF_RATE_CHANCE_DOWN": "20",
     "SYS_BUFF_RATE_RESIST_UP": "10",
     "SYS_BUFF_DMG_REDUCE_RATE_UP": "69",
-    "SYS_BUFF_AVOID_UP": "14",
     "SYS_BUFF_IMMUNE": "30",
     "SYS_BUFF_RATE_CHANCE_UP": "9",
-    "SYS_BUFF_PIERCE_POWER_RATE_DOWN": "19"
+    "SYS_BUFF_PIERCE_POWER_RATE_DOWN": "19",
+    "SYS_BUFF_ACTION_GAUGE_Down": "62",
+    "SYS_BUFF_STACK_UP": "SYS_BUFF_STACK_UP"
   },
   "effectByKey": {
     "buff": {
@@ -5608,6 +5682,7 @@
       "BT_RUN_PASSIVE_SKILL_ON_TURN_END_DEFENDER_NO_CHECK": "47",
       "BT_EXTEND_DEBUFF": "53",
       "BT_STAT|ST_VAMPIRIC": "88",
+      "BT_DMG_TOWER_CONTENT": "2000052",
       "BT_KILL_UNDER_HP_RATE": "54",
       "BT_RESURRECTION": "55",
       "BT_RUN_PASSIVE_SKILL_ON_TURN_END_TEAM": "42",
@@ -5639,6 +5714,8 @@
       "BT_COOL_MAX_REDUCE": "63",
       "BT_INCREASE_RECEIVE_HEAL": "SYS_BUFF_HEAL",
       "BT_STAT_PREMIUM": "9",
+      "BT_STACK_CHANGE": "2000124",
+      "BT_STACK": "2000124",
       "INCREASED_DEFENSE": "6",
       "INCREASED_ATTACK": "7",
       "INCREASED_PENETRATION": "8",
@@ -5687,6 +5764,7 @@
       "IRREGULAR_ADVERSARY": "10001",
       "RANDOM_INCREASED_STAT_EFFECT": "10002",
       "PUREBLOODS_DOMINION": "2000035",
+      "TOWER_ADMINISTRATOR": "2000052",
       "SELFISH_GOD": "2000053",
       "FIERCE_OFFENSIVE": "2000056",
       "DOLL_GARDENS_CARETAKER": "2000059",
@@ -5698,6 +5776,7 @@
       "DESTROYERS_PUNISHMENT": "2000075",
       "CHARISMA": "2000076",
       "HUBRISS_DOMINION": "2000090",
+      "LIGHT_OF_THE_DEEP_SEA": "2000124",
       "FINAL_BRAND": "2100091",
       "RETRIBUTIONS_DOMINION": "2000092",
       "ARIEL": "2000096",
@@ -5731,6 +5810,7 @@
       "WEAKNESS_GAUGE_DAMAGE_IMMUNITY": "SYS_BUFF_WG_INVINCIBLE",
       "ENHANCES_BARRIER_STRENGTH": "SYS_DESC_SHIELD_UP",
       "HEALTH_RECOVERY": "SYS_BUFF_HEAL",
+      "UNIQUE_RESOURCE_INCREASE": "SYS_BUFF_STACK_UP",
       "BT_BARRIER": "29",
       "BT_FIXED_DAMAGE": "75",
       "BT_CONTINU_HEAL": "28",
@@ -5761,6 +5841,7 @@
       "BT_STAT|ST_DEF_IR": "1006",
       "BT_HEAL_BASED_TARGET_IR": "1028",
       "BT_STAT|ST_COUNTER_RATE_IR": "1045",
+      "BT_DMG_TOWER_CONTENT_IR": "2000052",
       "BT_STAT|ST_GET_GOLD_RATE_IR": "2000056",
       "BT_2000065_A_IR": "2000065",
       "BT_2000065_B_IR": "2100065",
@@ -5775,6 +5856,8 @@
       "BT_GROUP_IR": "4086001",
       "BT_DMG_TO_BOSS_IR": "4086001",
       "BT_STAT_PREMIUM_IR": "1009",
+      "BT_STACK_CHANGE_IR": "2000124",
+      "BT_STACK_IR": "2000124",
       "INCREASED_DEFENSE_IR": "1006",
       "INCREASED_ATTACK_IR": "1007",
       "INCREASED_PENETRATION_IR": "1008",
@@ -5797,6 +5880,7 @@
       "STARVING_DEVIL_IR": "1076",
       "IRREGULAR_ADVERSARY_IR": "10001",
       "PUREBLOODS_DOMINION_IR": "2000035",
+      "TOWER_ADMINISTRATOR_IR": "2000052",
       "SELFISH_GOD_IR": "2000053",
       "FIERCE_OFFENSIVE_IR": "2000056",
       "DOLL_GARDENS_CARETAKER_IR": "2000059",
@@ -5808,6 +5892,7 @@
       "DESTROYERS_PUNISHMENT_IR": "2000075",
       "CHARISMA_IR": "2000076",
       "HUBRISS_DOMINION_IR": "2000090",
+      "LIGHT_OF_THE_DEEP_SEA_IR": "2000124",
       "FINAL_BRAND_IR": "2100091",
       "RETRIBUTIONS_DOMINION_IR": "2000092",
       "ARIEL_IR": "2000096",
@@ -6603,7 +6688,6 @@
     "21": ["BT_STAT|buff_resist"],
     "22": ["BT_STAT|critical_rate"],
     "23": ["BT_STAT|critical_dmg_rate"],
-    "24": ["BT_STAT|accuracy"],
     "25": ["BT_STAT|avoid"],
     "26": ["BT_STAT|def", "BT_STAT|speed"],
     "27": ["BT_INVINCIBLE"],
@@ -6724,6 +6808,7 @@
     "12005": ["BT_NONE"],
     "2000020": ["BT_DMG_REDUCE"],
     "2000035": ["BT_NONE"],
+    "2000052": ["BT_DMG_TOWER_CONTENT"],
     "2000053": ["BT_NONE"],
     "2000056": ["BT_NONE", "BT_STAT|get_gold_rate"],
     "2000057": ["BT_REDUCE_RECEIVE_HEAL"],
@@ -6754,6 +6839,7 @@
     "2000119": ["BT_NONE"],
     "2000120": ["BT_NONE"],
     "2000121": ["BT_STAT"],
+    "2000124": ["BT_STACK", "BT_STACK_CHANGE"],
     "2000129": ["BT_NONE"],
     "2010109": ["BT_STAT|atk"],
     "2010112": ["BT_STAT|pierce_power_rate"],
@@ -7588,7 +7674,7 @@
         "jp": "ボスモンスターに強化効果がある場合、与えるダメージがUP",
         "kr": "보스 몬스터 강화 효과 보유 시 주는 피해 크게 증가",
         "zh": "首领怪物持有强化效果时，\\n造成的伤害大幅提升",
-        "fr": "Boss monstres encaisser grandement augmenté les DGT quand ils ont un buff",
+        "fr": "Boss monstres encaisser grandement augmenté les dommages quand ils ont un buff",
         "es": "Los monstruos jefes infligen un daño considerablemente mayor al tienen un buff"
       },
       "icon": "GD_Geis_Boss",
@@ -7843,7 +7929,7 @@
         "jp": "ボスモンスターに強化効果がある場合、与えるダメージUP",
         "kr": "보스 몬스터가 강화 효과 보유 시 입히는 피해 증가",
         "zh": "首领怪物附带强化效果时，\\n造成的伤害提升",
-        "fr": "Accroît les DGT infligés si le boss a un buff.",
+        "fr": "Augmente les dommages infligés lorsque le patron a un buff.",
         "es": "Aumenta daño cuando jefe tiene mejora"
       },
       "icon": "GD_Geis_Boss",
@@ -7891,7 +7977,7 @@
         "jp": "シールド状態の対象に与えるダメージUP",
         "kr": "실드 보유 대상에게 입히는 피해 증가",
         "zh": "对附带护盾的目标造成的伤害提升",
-        "fr": "Accroît les DGT infligés à des cibles avec un Barrière Barrière",
+        "fr": "Augmente les dommages infligés à des cibles avec un Barrière",
         "es": "Aumenta el daño infligido a los objetivos con Barrera"
       },
       "icon": "GD_Geis_special",
@@ -8179,7 +8265,7 @@
         "jp": "味方が連携不可になる",
         "kr": "아군 동료 협공 불가",
         "zh": "友军无法夹攻",
-        "fr": "Attaque conjointe Handicapé pour alliés héros héros",
+        "fr": "Dual Attack Handicapé pour alliés héros",
         "es": "Ataque Dual desactivado aliados"
       },
       "icon": "GD_Geis_Ban",
@@ -8849,7 +8935,7 @@
         "jp": "ボスに会心ダメージを受けた\\n場合、ブラディストライク使用",
         "kr": "보스 치명 피격 시 블라디 스트라이크 사용",
         "zh": "首领被暴击时，使用佛拉达重击",
-        "fr": "Sur le boss prenant un coup critique, utilise Vladi Strike Strike Vladi.",
+        "fr": "Sur le boss prenant un coup critique, utilise Vladi Strike Vladi.",
         "es": "Al el Jefe recibe un Golpe Crítico, usa Vladi Strike"
       },
       "icon": "GD_Geis_Boss",
