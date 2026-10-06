@@ -7,6 +7,25 @@
 
 ## 2026-10-06
 
+- **Relecture de F15 : 79 lots, aucun en attente** (Fable). `f5566d83`,
+  périmètre propre (neuf fichiers de code et de tests ; ni `portrait-fx.json`
+  ni `portrait-fx-served.json` dans le commit — l'invariant « la table ne
+  bouge pas, les dix effets restent servis » tient par construction). Entrée
+  DONE complète et honnête : `_Synchro` joué pour de vrai sort `notExtracted`
+  dès l'extraction (rotation3D sur Y), sa feuille UV n'est tenue que par les
+  tests. Typecheck, lint, `Tests 2701 passed (2701)` sur HEAD ;
+  `/dev/AnimatedPortrait` en 200. P7 et P9 soldés, P10 reste (lot à écrire,
+  après mesure sur mobile). Dans la foulée, décision de Sevih sur la question
+  laissée par F14 : la PROVENANCE d'un costume (`costumes[#].source`) est
+  mineure — une ligne dans `isMinorField`, le test inversé ; Dianne, Vlada,
+  Dahlia et Titia passeront par « Appliquer les retouches mineures ». Test
+  manuel F7 joué par Sevih et Fable : « miaou » dans une desc FR de la
+  proposition, `pnpm damage:build --skip-anim --from-extracted` → la ligne
+  `▷ skill-descs lit data/extracted/` et le diff de `skill-descs.json` portent
+  bien la retouche ; `damage-data.test` est resté VERT parce qu'il ne compare
+  que l'anglais (`desc.en`) — le signal « damage en avance sur le wiki » n'est
+  donc qu'anglais ; puis retouche retirée, `pnpm damage:build --skip-anim` →
+  diff vide. Item 🧪 F7 soldé.
 - **Lot F15 : portraits animés — les trous de « refuser plutôt que rendre de
   travers » fermés (P7) et les compteurs périmés retirés (P9)** (Fable, lot
   F15 de `docs/lots-opus-2026-09-25.md` ; solde P7 et P9 de

@@ -262,13 +262,14 @@ describe('classification MINEURE', () => {
         fields: [{ path: 'costumes[#9]', existing: { id: '9' }, extracted: undefined }],
       }),
     ).toBe(false);
-    // Les autres champs d'un costume restent de vrais écarts.
+    // La provenance d'un costume est mineure (décision du 06/10/2026)…
     expect(
       isMinorEntity({
         key: 'c',
         fields: [{ path: 'costumes[#2].source', existing: 'package_shop', extracted: 'shop' }],
       }),
-    ).toBe(false);
+    ).toBe(true);
+    // …les autres champs d'un costume restent de vrais écarts.
     expect(
       isMinorEntity({
         key: 'c',

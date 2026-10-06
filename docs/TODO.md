@@ -14,12 +14,10 @@
 - [ ] **Sigma, après équilibrage** : curé à revoir (rang, pros/cons) ; et
       décider si le `damage-calculator` modélise [Tower Administrator]
       (+150 % de dégâts en Skyward Tower, les cibles de tour existent).
-- [ ] **Revue d'extraction (suite de F14)** : la provenance d'un costume qui
-      change (`costumes[#].source`, `package_shop`/`battlepass` → `shop` :
-      Dianne, Vlada, Dahlia, Titia) reste un écart par la règle du doute —
-      Sevih tranche ; mineure = une ligne dans `isMinorField`. Le flag `art`
-      qui apparaît sur un costume existant, idem. Même mécanique possible
-      pour monstres et équipement (écrans et staging manquent).
+- [ ] **Revue d'extraction (suite de F14)** : le flag `art` qui apparaît sur
+      un costume existant reste un écart — à trancher au premier cas. Même
+      mécanique « mineur » possible pour monstres et équipement (la
+      classification est générique ; écrans et staging manquent).
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
@@ -53,16 +51,10 @@ dev:caddy:install`, règle de pare-feu). La branche Windows de
 
 - [ ] **Constat Basse restant de l'audit** : P10 (coût par image :
       `SUPERSAMPLE` à dpr 2, `clientWidth` relu à chaque image, instanciation
-      des billboards), lot à écrire — P7 et P9 sont FAITS (lot F15, 06/10 :
-      gardes du moteur et de l'extraction, compteurs retirés) —, à confirmer
-      sur mobile.
+      des billboards), lot à écrire, à confirmer sur mobile d'abord.
 
 ## 🧪 À jouer au prochain patch
 
-- [ ] **Dry-run du flux patch (lot F7, G12)** : le correctif n'a pas pu être
-      joué sans tirer les données du jeu. Test manuel décrit dans l'entrée
-      DONE du lot F7 (03/10) — un run à blanc ne doit plus laisser
-      d'artefact damage bâti sur le `skills.json` d'avant le patch.
 - [ ] **Rapport des effets de portrait (lot F12)** : au premier patch qui
       apporte un effet, contrôler la dernière ligne du refresh (« ◆ Portraits
       animés — à lire ») — l'effet y est nommé avec ses porteurs, « servi tel

@@ -262,9 +262,11 @@ export function isMinorField(f: FieldDiff, newModels: ReadonlySet<string> = new 
     // ajoutée) ; `costumes[#id]` : un costume ajouté — jamais un retiré.
     if (seg.length === 1) return f.existing === undefined && Array.isArray(f.extracted);
     if (seg.length === 2) return f.existing === undefined && isPlainObject(f.extracted);
-    // Champ D'UN costume : son ordre ou son texte — toujours mineur ; tout autre
-    // champ (`icon`, `source`, `grade`, `model`, `art`…) reste un vrai écart.
-    if (seg[2] === 'sort') return true;
+    // Champ D'UN costume : son ordre, son texte, ou sa PROVENANCE (`source` :
+    // un costume qui passe du pack ou du battle pass à la boutique ne touche
+    // ni buffs ni dégâts — décision de Sevih du 06/10/2026) — toujours mineur ;
+    // tout autre champ (`icon`, `grade`, `model`, `art`…) reste un vrai écart.
+    if (seg[2] === 'sort' || seg[2] === 'source') return true;
     return textKeyOf(seg) !== undefined;
   }
   // L'apparence d'un costume ajouté : son modèle APPENDU aux `appearances`
