@@ -255,13 +255,15 @@ const EXCLUDED_MODES = new Set(['monad_battle_1']);
 
 /**
  * Catégories de quirks PERTINENTES pour les dégâts → clé i18n de leur libellé.
- * `utility` (économie/farm) est écartée : aucun nœud de combat.
+ * `utility` (économie/farm) est écartée : aucun nœud de combat. `adventure`
+ * aussi : l'Adventure License a fermé au patch du 06/10/2026 et le client
+ * (`CheckNodeApply`, 1.4.18) n'applique plus jamais cet arbre, remboursé —
+ * `quirks.json` le porte tant que le refresh ne l'en a pas sorti.
  */
 const QUIRK_CATEGORY_KEY: Record<string, string> = {
   pve: 'settings.quirk_counteract',
   class: 'settings.quirk_class',
   elemental: 'settings.quirk_element',
-  adventure: 'settings.quirk_adventure_license',
 };
 
 /**
@@ -270,17 +272,16 @@ const QUIRK_CATEGORY_KEY: Record<string, string> = {
  * inconditionnelles portées par le canal éveil (IOT_STAT — déjà dans la fiche
  * saisie, transparentes pour le moteur). Sur les données réelles :
  *   - dégâts accrus (vs Break / boss / Skill Chain / avantage élémentaire,
- *     « damage of Mage heroes », boss d'Adventure License) ;
+ *     « damage of Mage heroes ») ;
  *   - Reduces Resilience of the Boss (fait tenir NOS debuffs) ;
  *   - miss chance réduite (la branche Esquivé du rapport) ;
- *   - ATK / Effectiveness « of heroes » (bonus conditionnels au mode
- *     Adventure License — absents de la fiche) ;
- *   - les nœuds MAÎTRES de classe « of Striker/Ranger heroes » : des
- *     `BT_STAT_PREMIUM` (IOT_BUFF) — dans la fiche, MAIS leur taux doit être
- *     déclaré pour la défactorisation § 16.4 (mesuré 24/08/2026 : le tick du
- *     Bleed de Francesca bufflé ATK +30 % exige le nœud Striker à 150 ‰ —
- *     sans lui, +2,97 % d'écart ; la version OAT_ADD du nœud Ranger est
- *     mathématiquement transparente, le moteur l'ignore sans dommage).
+ *   - les nœuds MAÎTRES de classe « Attack/Effectiveness of Striker/Ranger
+ *     heroes » : des `BT_STAT_PREMIUM` (IOT_BUFF) — dans la fiche, MAIS leur
+ *     taux doit être déclaré pour la défactorisation § 16.4 (mesuré
+ *     24/08/2026 : le tick du Bleed de Francesca bufflé ATK +30 % exige le
+ *     nœud Striker à 150 ‰ — sans lui, +2,97 % d'écart ; la version OAT_ADD
+ *     du nœud Ranger est mathématiquement transparente, le moteur l'ignore
+ *     sans dommage).
  * Écartés : reduces damage taken, Resilience conditionnelle, Reduces
  * Effectiveness of the Boss, Priority, stats défensives — côté défenseur.
  * Classification sur le texte EN ; l'affichage reste localisé.
@@ -288,7 +289,7 @@ const QUIRK_CATEGORY_KEY: Record<string, string> = {
 // SENSIBLE à la casse : « damage » minuscule = dégâts infligés ; « Critical
 // Damage » (majuscule) est la stat plate de la fiche, qui ne doit PAS matcher.
 const OFFENSIVE_QUIRK_DESC =
-  /[Ii]ncreases [^.]*damage|Reduces Resilience of the Boss|[Rr]educes miss chance|[Ii]ncreases (Attack|Effectiveness) of (<color=[^>]+>\w+<\/color> )?heroes/;
+  /[Ii]ncreases [^.]*damage|Reduces Resilience of the Boss|[Rr]educes miss chance|[Ii]ncreases (Attack|Effectiveness) of <color=[^>]+>\w+<\/color> heroes/;
 
 export default async function DamageCalculator({ lang }: { lang: Lang }) {
   const t = await getT(lang);

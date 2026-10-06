@@ -5,6 +5,90 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-06
+
+- **Calculateur de dégâts : l'arbre de quirks de l'Adventure License sort du
+  réglage, du moteur et du générateur** (lot F13, Fable). Le patch du 06/10
+  ferme le mode et rembourse l'arbre. Ce que les DONNÉES portaient au
+  refresh : l'arbre est TOUJOURS dans les tables (`growth.awakening` : 19
+  nœuds `ADVENTURE_LICENSE`, dont un seul à buff, le 251 « +100 % aux boss
+  en Adventure License », les 18 autres `IOT_STAT` ; `quirks.json` :
+  catégorie `adventure`, 1 arbre) et les donjons du mode sont toujours dans
+  `encounters.json`. Mais le CODE du client 1.4.18 a changé :
+  `docs/specs/damage-formula-cs/CCharacterData_CheckNodeApply.cs` refuse
+  désormais tout nœud `AWAKENING_TYPE.ADVENTURE_LICENSE` sans condition
+  (1.4.17 : seulement hors du contenu, `IsApplyAwakeningNodeAdventureLicense()`).
+  Le calculateur suit le code, pas la table. RETIRÉ : dans `gear.ts`, la
+  branche `ADVENTURE_LICENSE` de `resolveQuirkPassives` (gate
+  `DM_ADVENTURE*`, signalement « mode inconnu » sur cible manuelle) et son
+  paramètre `targetMode`, qui ne servait qu'à elle — `inputs.ts` ne le passe
+  plus (`dungeonModeOf` reste : le buff MAX_HP § 16.2 en a besoin) ; un
+  arbre hors ELEMENTAL/JOB/UTILITY/PVE passe par le chemin « inconnu »
+  existant, signalé `unresolved` (« jamais appliqué par le jeu »),
+  contribution 0. Dans `index.tsx`, la clé `adventure` de
+  `QUIRK_CATEGORY_KEY` (le réglage ne liste plus l'arbre même tant que
+  `quirks.json` le porte), les deux puces du commentaire de
+  `OFFENSIVE_QUIRK_DESC` qui le citaient, et le groupe optionnel
+  `(<color…> )?` de l'alternative « Attack/Effectiveness of heroes » — il
+  n'existait que pour les nœuds licence sans classe ; vérifié sur les
+  données : l'alternative ne matche plus que les maîtres 101 et 141, les
+  mêmes qu'avant. La clé i18n
+  `tools.damage-calculator.settings.quirk_adventure_license` dans les six
+  locales. Dans `datagen/generators/quirks.ts`, `ADVENTURE_LICENSE` sort de
+  `CATEGORY` et de l'union `key` (comme B20 a sorti la boutique du mode) ;
+  `pnpm datagen:build` lancé une fois : `data/extracted/quirks.json` porte
+  `pve:1 class:5 elemental:5 utility:1`, sans `adventure` — PAS promu, Sevih
+  promeut depuis l'admin. Les autres lecteurs de la catégorie étaient déjà
+  faits (guide `quirk` filtre sur ses libellés ; `most-used-units`, le
+  suivi de progression, c'est le mode, pas l'arbre). GARDÉ : les nœuds
+  licence dans `growth.json` (sortie directe de `pnpm damage:build`, déjà
+  modifiée par le refresh du patch — pas à moi de l'embarquer ; `growth.ts`
+  ne change que son commentaire) ; les cibles qui sont des boss d'Adventure
+  License ; un état ANCIEN (localStorage `outerpedia:damage-calculator:quirks`,
+  scénario partagé, les 28 fixtures dorées — toutes portent le 251 à 10) se
+  charge sans erreur, le nœud ne pèse nulle part, les autres arbres comptent
+  comme avant — c'est le nouveau test de `gear.test.ts` (quatre cibles :
+  manuelle, normale, `adventure_mission`, `adventure_challenge`), à la place
+  de l'ancien test du gate licence (le gate chain des captures Valentine
+  garde le sien). RÉFÉRENCE avant/après (100 configurations rejouées par le
+  pont partagé `replayFixture`/`buildDamageReport` : les 28 fixtures dorées
+  — Rhona, Meteos raid, Chimera, Amadeus, Ars Nova, Scrapmetal — et 72
+  synthétiques, 3 persos × 8 cibles {manuelle, normal, tower, raid_1,
+  world_boss, guild_raid, adventure_mission, adventure_challenge} × 3 jeux
+  de quirks {tous les arbres au max, tous sauf licence, aucun}) : **94
+  identiques au chiffre près**, dont les 28 fixtures et TOUT ce qui n'est
+  pas « licence en contenu Adventure License » ; les 6 qui bougent sont
+  exactement {adventure_mission, adventure_challenge} × « tous les arbres »,
+  et leurs dégâts après SONT ceux de « tous sauf licence » :
+
+  | Configuration (S1/normal, S3/critical)             | avant         | après         |
+  | -------------------------------------------------- | ------------- | ------------- |
+  | fixture Valentine vs Rhona (S1 normal / crit)      | 3433 / 4953   | 3433 / 4953   |
+  | fixture Rhona vs Meteos raid (S1 normal / crit)    | 2414 / 3336   | 2414 / 3336   |
+  | fixture Noa vs Chimera (S1 normal / crit)          | 7824 / 15793  | 7824 / 15793  |
+  | fixture Caren vs Amadeus (S1 normal / crit)        | 2293 / 6633   | 2293 / 6633   |
+  | H.Dianne, tous arbres sauf licence, tower          | 12671 / 13983 | 12671 / 13983 |
+  | H.Dianne, tous arbres sauf licence, raid_1         | 12671 / 13983 | 12671 / 13983 |
+  | H.Dianne, tous arbres (251 inclus), cible manuelle | 12671 / 13983 | 12671 / 13983 |
+  | 2000006, tous arbres (251 inclus), world_boss      | 5720 / 13104  | 5720 / 13104  |
+  | 2000001, tous arbres (251 inclus), guild_raid (S1) | 9072          | 9072          |
+  | H.Dianne, tous arbres, adventure_mission (S1)      | 19711         | 12671         |
+  | 2000006, tous arbres, adventure_challenge (S1)     | 10120         | 5720          |
+
+  Vérification : `pnpm typecheck` (sortie vide, trois projets), `pnpm lint`
+  (sortie vide), `pnpm test` : 187 fichiers verts, 2597 tests passés, UN
+  échec préexistant hors périmètre — `damage-data.test.ts` « résout
+  EXACTEMENT comme le catalogue » (30 niveaux de skills dont `5202 niveau 1`),
+  qui ne lit que `data/generated/{skills,damage/skill-descs}.json`
+  modifiés par le refresh du patch, aucun fichier de ce lot ; à régler avec
+  la lecture du diff du patch. LAISSÉ : `quirks.test.ts` tolère encore la
+  clé `adventure` (commentée) tant que `quirks.json` n'est pas promu — à
+  retirer avec la promotion ; `docs/TODO.md` embarque dans ce commit les
+  seize lignes non commitées de la section Admin (F14, B25), écrites avant
+  ce lot et pas par lui ; hors périmètre, non touchés : [Keeper of the
+  Tower] de Sigma, les `BT_STACK*` du 1.4.18, `gear-reco.json`,
+  `equip.source.adventure_license` (ligne du patch, après la promotion).
+
 ## 2026-10-05
 
 - **Onglet Discord de quick : « Proposer un brouillon » — le premier jet

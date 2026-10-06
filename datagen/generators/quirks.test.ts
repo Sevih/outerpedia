@@ -1,6 +1,6 @@
 /**
  * Invariants du générateur quirks sur `data/generated/quirks.json` committé
- * (modèle progression/singularity) : les 5 arbres d'Awakening sont un graphe
+ * (modèle progression/singularity) : les 4 arbres d'Awakening sont un graphe
  * dérivé silencieusement des tables (groupes → nœuds → niveaux) — une dérive
  * rendrait un arbre cassé (main manquant, niveaux désordonnés) sans symptôme.
  *
@@ -12,6 +12,10 @@ import quirksData from '../../data/generated/quirks.json';
 import type { QuirksData } from './quirks';
 
 const q = quirksData as unknown as QuirksData;
+// `adventure` : arbre sorti du générateur le 06/10/2026 (Adventure License
+// fermée, arbre remboursé, jamais appliqué par le client 1.4.18) — toléré dans
+// le JSON committé tant que la promotion ne l'en a pas sorti ; à retirer d'ici
+// avec elle.
 const CATEGORY_KEYS = ['pve', 'class', 'elemental', 'utility', 'adventure'];
 const ELEMENTS = new Set(['earth', 'water', 'fire', 'light', 'dark']);
 const CLASSES = new Set(['defender', 'striker', 'ranger', 'mage', 'healer']);

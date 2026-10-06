@@ -76,7 +76,8 @@ export interface DamageAwakeningNode {
   id: string;
   groupId: string;
   /** Type du groupe (`PVE`/`JOB`/`ELEMENTAL`/`UTILITY`/`ADVENTURE_LICENSE`) —
-   *  les nœuds licence dépendent du CONTENU (spec § 17.4). */
+   *  émis brut ; le moteur décide ce que le client applique (`CheckNodeApply` :
+   *  l'arbre licence est refusé sans condition depuis le 06/10/2026). */
   groupType: string;
   nodeType: string;
   /** Filtre `AAT_*` comparé à l'élément/classe/race du perso. */

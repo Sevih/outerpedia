@@ -337,13 +337,11 @@ describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
     expect(bad.quirkPassives?.unresolved[0].reason).toContain('absent');
   });
 
-  it('gates prouvés par les captures Valentine (06/08) : licence et chain', () => {
-    const quirks = { '251': 10, '232': 1 };
-    // Contenu NORMAL : l'arbre licence (+100 % boss) ne s'applique PAS ; le
-    // nœud « Chain Damage » est réservé aux chain attacks (SKT_STRIKE_*) —
-    // hors des lignes du rapport, signalé.
+  it('gate chain prouvé par les captures Valentine (06/08) : réservé aux SKT_STRIKE_*', () => {
+    // Le nœud « Chain Damage » est réservé aux chain attacks — hors des
+    // lignes du rapport, signalé.
     const normal = buildDamageReport(
-      { ...attacker({}), gear: undefined, quirks },
+      { ...attacker({}), gear: undefined, quirks: { '232': 1 } },
       { ...target(), mode: 'normal' },
       data,
     );
@@ -353,18 +351,36 @@ describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
         (u) => u.buffId === 'Awakening_Chain_Dmg_1' && u.reason.includes('SKT_STRIKE'),
       ),
     ).toBe(true);
-    // Contenu Adventure License : l'arbre licence s'applique.
-    const licence = buildDamageReport(
-      { ...attacker({}), gear: undefined, quirks },
-      { ...target(), mode: 'adventure_mission' },
+  });
+
+  it('état ANCIEN : un niveau sur l’arbre licence (251) se charge, contribution 0 partout', () => {
+    // L'Adventure License a fermé au patch du 06/10/2026 et son arbre a été
+    // remboursé : `CheckNodeApply` (client 1.4.18) refuse ADVENTURE_LICENSE
+    // sans condition. Le nœud reste dans `growth.awakening` (tables du jeu)
+    // et un localStorage ou un scénario partagé peut encore porter son niveau
+    // (les 28 fixtures dorées l'ont, à 10) : il doit se charger sans erreur
+    // et ne peser nulle part — ni en contenu licence, ni ailleurs, ni sur
+    // cible manuelle — et les AUTRES arbres doivent compter comme avant.
+    const quirks = { '251': 10, '231': 3 };
+    const bare = buildDamageReport(
+      { ...attacker({}), gear: undefined, quirks: { '231': 3 } },
+      target(),
       data,
     );
-    expect(licence.quirkPassives?.entries).toMatchObject([
-      { sourceId: '251', active: true, buff: { type: 'BT_DMG_TO_BOSS', value: 1000 } },
-    ]);
-    // Cible MANUELLE (mode inconnu) : l'arbre licence est SIGNALÉ, jamais deviné.
-    const manual = buildDamageReport({ ...attacker({}), gear: undefined, quirks }, target(), data);
-    expect(manual.quirkPassives?.unresolved.some((u) => u.reason.includes('licence'))).toBe(true);
+    for (const mode of [undefined, 'normal', 'adventure_mission', 'adventure_challenge']) {
+      const r = buildDamageReport(
+        { ...attacker({}), gear: undefined, quirks },
+        { ...target(), ...(mode ? { mode } : {}) },
+        data,
+      );
+      expect(r.quirkPassives?.entries.map((e) => e.sourceId)).toEqual(['231']);
+      expect(r.quirkPassives?.unresolved).toMatchObject([
+        { source: 'quirk', sourceId: '251', reason: expect.stringContaining('ADVENTURE_LICENSE') },
+      ]);
+      expect(r.slots[0].report.states[0].branches[0].totalDamage).toBe(
+        bare.slots[0].report.states[0].branches[0].totalDamage,
+      );
+    }
   });
 });
 

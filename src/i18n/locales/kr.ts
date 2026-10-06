@@ -496,7 +496,6 @@ const kr: Record<TranslationKey, string> = {
   'tools.damage-calculator.settings.quirk_element': '속성',
   'tools.damage-calculator.settings.quirk_class': '클래스',
   'tools.damage-calculator.settings.quirk_counteract': '강적 대응',
-  'tools.damage-calculator.settings.quirk_adventure_license': '모험 라이선스',
   // Panel titles
   'tools.damage-calculator.panel.attacker': '딜러',
   'tools.damage-calculator.panel.target': '타겟',

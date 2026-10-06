@@ -519,7 +519,6 @@ const fr: Record<TranslationKey, string> = {
   'tools.damage-calculator.settings.quirk_element': 'Élément',
   'tools.damage-calculator.settings.quirk_class': 'Classe',
   'tools.damage-calculator.settings.quirk_counteract': 'Counteract Strong Enemies',
-  'tools.damage-calculator.settings.quirk_adventure_license': 'Adventure License',
   // Panel titles
   'tools.damage-calculator.panel.attacker': 'DPS',
   'tools.damage-calculator.panel.target': 'Cible',

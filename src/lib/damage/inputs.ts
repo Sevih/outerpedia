@@ -112,8 +112,8 @@ export interface DamageGrowthData {
   /** Nœuds d'éveil (quirks du compte) — les `IOT_BUFF` seuls comptent ici. */
   awakening: {
     id: string;
-    /** `ELEMENTAL`/`JOB`/`UTILITY` (tous contenus), `PVE`, `ADVENTURE_LICENSE`
-     *  (contenu licence SEULEMENT — colonne de scope de la table des groupes). */
+    /** `ELEMENTAL`/`JOB`/`UTILITY` (tous contenus), `PVE` ; tout autre arbre
+     *  (`ADVENTURE_LICENSE`, encore dans les tables) n'est jamais appliqué. */
     groupType: string;
     applyType: string;
     applyTypeValue: number;
@@ -922,7 +922,6 @@ export function buildDamageReport(
       { element: attackerElement, class: char.class, subClass: char.subClass },
       data.buffs,
       defenderElement,
-      target.mode !== undefined ? dungeonModeOf(target.mode) : undefined,
       metConditions,
       target.boss === true,
     );

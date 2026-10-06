@@ -1053,9 +1053,6 @@ export function resolveQuirkPassives(
   char: { element: Element; class?: string; subClass?: string },
   buffs: DamageBuffsData,
   defenderElement: Element,
-  /** `DUNGEON_MODE` du combat (`DM_NORMAL`…) — gate de CONTENU de l'arbre
-   *  licence ; absent (cible manuelle) = inconnu, signalé. */
-  targetMode?: string,
   metConditions?: ReadonlySet<string>,
   targetIsBoss?: boolean,
 ): GearPassivesInfo {
@@ -1080,28 +1077,18 @@ export function resolveQuirkPassives(
       });
       continue;
     }
-    // Gate de CONTENU du groupe (colonne de scope de la table des groupes —
-    // preuve : les 4 captures Valentine 06/08/2026 rejouent EXACTEMENT en
-    // retirant l'arbre licence hors contenu Adventure License) :
-    // ELEMENTAL/JOB/UTILITY = tous contenus ; PVE = tout le PvE (seule scène
-    // du rapport) ; ADVENTURE_LICENSE = ce contenu-là seulement.
-    if (node.groupType === 'ADVENTURE_LICENSE') {
-      if (targetMode === undefined) {
-        info.unresolved.push({
-          source: 'quirk',
-          sourceId: nodeId,
-          buffId: nodeId,
-          reason: 'arbre licence — mode du combat inconnu (cible manuelle), contribution 0',
-        });
-        continue;
-      }
-      if (!targetMode.startsWith('DM_ADVENTURE')) continue; // hors contenu : rien
-    } else if (!['ELEMENTAL', 'JOB', 'UTILITY', 'PVE'].includes(node.groupType)) {
+    // Arbres que le jeu APPLIQUE (`CCharacterData.CheckNodeApply`, client
+    // 1.4.18) : ELEMENTAL/JOB/UTILITY = tous contenus ; PVE = tout le PvE
+    // (seule scène du rapport). ADVENTURE_LICENSE est encore dans les tables
+    // mais refusé sans condition par le client depuis la fermeture du mode
+    // (patch du 06/10/2026, arbre remboursé) — un niveau encore enregistré
+    // chez un visiteur est signalé, contribution 0, comme un arbre inconnu.
+    if (!['ELEMENTAL', 'JOB', 'UTILITY', 'PVE'].includes(node.groupType)) {
       info.unresolved.push({
         source: 'quirk',
         sourceId: nodeId,
         buffId: nodeId,
-        reason: `arbre ${node.groupType} — portée de contenu inconnue, contribution 0`,
+        reason: `arbre ${node.groupType} — jamais appliqué par le jeu, contribution 0`,
       });
       continue;
     }

@@ -505,7 +505,6 @@ const jp: Record<TranslationKey, string> = {
   'tools.damage-calculator.settings.quirk_element': '属性',
   'tools.damage-calculator.settings.quirk_class': 'クラス',
   'tools.damage-calculator.settings.quirk_counteract': '強敵対策',
-  'tools.damage-calculator.settings.quirk_adventure_license': 'アドベンチャーライセンス',
   // Panel titles
   'tools.damage-calculator.panel.attacker': 'アタッカー',
   'tools.damage-calculator.panel.target': 'ターゲット',

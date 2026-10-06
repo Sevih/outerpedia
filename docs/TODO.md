@@ -16,12 +16,28 @@
 - [ ] **Fin de l'Adventure License** : guides masqués, mode sorti de
       `most-used-units`, de `unlock-content`, du suivi de progression et des
       guides `quirk`, `daily-stamina`, `shop-purchase-priorities` (lot B20,
-      FAIT le 05/10). Reste le lot **F13** de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (calculateur de
-      dégâts — agent Fable dédié, seul, après le `pnpm dev` du patch), et
-      après ce `pnpm dev` : les priorités des produits arrivés au Survey Hub
-      (éditorial, admin), les sources d'équipement du mode, l'icône d'onglet
-      `ui/shop/al` du manifeste d'assets.
+      FAIT le 05/10) ; calculateur de dégâts sans l'arbre de quirks du mode
+      (lot F13, FAIT le 06/10 — `quirks.json` à promouvoir depuis l'admin,
+      puis retirer la tolérance `adventure` de `quirks.test.ts`). Reste,
+      après le `pnpm dev` du patch : les priorités des produits arrivés au
+      Survey Hub (éditorial, admin), les sources d'équipement du mode,
+      l'icône d'onglet `ui/shop/al` du manifeste d'assets.
+
+## 🛠️ Admin
+
+- [ ] **Revue d'extraction : les retouches mineures passent sans
+      ré-intégration** (retours de Sevih du 06/10) : costume déplacé ou
+      ajouté, nom ou description reformulés sans nombre changé → classe
+      « mineur », bouton qui les applique, images du costume mises en place
+      sans ré-intégrer le perso. Lot F14 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Fable), après F13.
+
+- [ ] **Accueil de l'admin : deux boutons, « Promouvoir l'extraction » et
+      « Publier les données »** (demande de Sevih du 06/10) : la promotion et
+      `pnpm commit` lancés depuis la page, sortie au fil de l'eau, dry-run et
+      revue avant confirmation, flag `--bump` ajouté à `commit.ts`. Lot B25 de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus), pas en
+      même temps que F14.
 
 ## 🧰 Outil quick
 

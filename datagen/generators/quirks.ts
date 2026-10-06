@@ -1,9 +1,12 @@
 /**
  * Générateur — ARBRES DE QUIRKS (nommés « Awakening » / « Gift » dans le jeu).
  *
- * Reproduit la STRUCTURE complète des 5 arbres depuis les tables du jeu :
- *   - `CharacterAwakeningTemplet` : les 5 groupes (type, coût de reset, niveau
- *     de compte requis) ;
+ * Reproduit la STRUCTURE complète des 4 arbres depuis les tables du jeu :
+ *   - `CharacterAwakeningTemplet` : les groupes (type, coût de reset, niveau
+ *     de compte requis) — le cinquième, `ADVENTURE_LICENSE`, est encore dans
+ *     la table mais n'est plus émis : l'Adventure License a fermé au patch du
+ *     06/10/2026, l'arbre a été remboursé et le client (`CheckNodeApply`,
+ *     1.4.18) ne l'applique plus jamais ;
  *   - `CharacterAwakeningNodeTemplet` : les nœuds (main/normal, icône + couleur
  *     de fond, nom/desc, connexions du graphe, main node requis + son niveau) ;
  *   - `CharacterAwakeningLevelTemplet` : coût (or + items) et effet PAR NIVEAU.
@@ -66,7 +69,7 @@ export interface QuirkTree {
 
 /** Une catégorie de quirks (= un groupe d'Awakening). */
 export interface QuirkCategory {
-  key: 'pve' | 'class' | 'elemental' | 'utility' | 'adventure';
+  key: 'pve' | 'class' | 'elemental' | 'utility';
   /** Prix de reset (Free Ether) de la catégorie. */
   resetPrice: number;
   /** Niveau de compte requis pour débloquer la catégorie. */
@@ -78,13 +81,13 @@ export interface QuirksData {
   categories: QuirkCategory[];
 }
 
-/** Type de groupe du jeu → clé de catégorie + ordre d'affichage (inchangé). */
+/** Type de groupe du jeu → clé de catégorie + ordre d'affichage (inchangé).
+ *  Un type absent d'ici (`ADVENTURE_LICENSE`) est ignoré, pas émis. */
 const CATEGORY: Record<string, { key: QuirkCategory['key']; order: number }> = {
   PVE: { key: 'pve', order: 0 },
   JOB: { key: 'class', order: 1 },
   ELEMENTAL: { key: 'elemental', order: 2 },
   UTILITY: { key: 'utility', order: 3 },
-  ADVENTURE_LICENSE: { key: 'adventure', order: 4 },
 };
 
 // Index `AwakeningApplyTypeValue` → slug (mêmes tables que progression.ts).
@@ -205,5 +208,4 @@ const CATEGORY_ORDER: Record<string, number> = {
   class: 1,
   elemental: 2,
   utility: 3,
-  adventure: 4,
 };

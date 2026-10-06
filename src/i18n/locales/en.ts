@@ -517,7 +517,6 @@ const en = {
   'tools.damage-calculator.settings.quirk_element': 'Element',
   'tools.damage-calculator.settings.quirk_class': 'Class',
   'tools.damage-calculator.settings.quirk_counteract': 'Counteract Strong Enemies',
-  'tools.damage-calculator.settings.quirk_adventure_license': 'Adventure License',
   // Panel titles
   'tools.damage-calculator.panel.attacker': 'Damage Dealer',
   'tools.damage-calculator.panel.target': 'Target',
