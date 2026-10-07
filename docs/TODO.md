@@ -19,6 +19,8 @@
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
+## 🧰 Outil quick
+
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
       cinq lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
       cet ordre — **C5** (charpente : un fichier par onglet dans
