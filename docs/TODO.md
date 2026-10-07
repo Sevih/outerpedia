@@ -19,6 +19,17 @@
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
+- [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
+      cinq lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
+      cet ordre — **C5** (charpente : un fichier par onglet dans
+      `scripts/quick/ui/`, onglet dans l'URL, banc de captures `shot.mjs` ;
+      Opus, seul, après C4), **F16** (charte : jetons de `globals.css`,
+      coquille, composants, `STYLE.md`, trois onglets simples refaits ; Fable,
+      seul), puis **B28** Rangs, **B29** Gear reco et **C6** Discord en
+      parallèle (Opus, fichiers disjoints). Direction posée par défaut dans
+      F16 : ressembler à l'admin, onglets en haut gardés, journal en tiroir —
+      à corriger AVANT de lancer F16 si Sevih voit autrement.
+
 ## 🧪 À jouer au prochain patch
 
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
