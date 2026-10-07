@@ -7794,6 +7794,42 @@
       "substats": "$dps"
     }
   ],
+  "2000124": [
+    {
+      "name": "Penetration",
+      "weapons": [
+        {
+          "id": "24",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "19",
+          "mainStat": "ATK%"
+        },
+        {
+          "id": "14",
+          "mainStat": "ATK%"
+        }
+      ],
+      "amulets": [
+        {
+          "id": "1010",
+          "mainStat": "PEN%"
+        },
+        {
+          "id": "1793",
+          "mainStat": "PEN%"
+        }
+      ],
+      "talismans": ["10001", "10009", "10003", "10004", "10010", "10007"],
+      "sets": [
+        {
+          "preset": "p4"
+        }
+      ],
+      "substats": "ATK>CHC>CHD=SPD>DMG UP%"
+    }
+  ],
   "2000129": [
     {
       "name": "Revenge",
