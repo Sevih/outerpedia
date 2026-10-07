@@ -7,6 +7,26 @@
 
 ## 2026-10-07
 
+- **Relecture C7** (Fable, 07/10) : `b6c5565b` validé — plus aucun lot
+  ouvert. Périmètre attendu (`tabs/gear.*`, `ui/gear-sets.mjs`, une ligne
+  d'`actions.ts` et ses tests, trois lignes de `STYLE.md`, DONE, TODO),
+  entrée DONE complète ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur
+  HEAD (197 fichiers, 2 788 tests). Contrôle indépendant : `gear-sets.mjs`
+  appelé par `node` — principal seul → `[{13, 4}]`, principal + deux
+  secondaires → deux combos 2 + 2, « pas de set principal », « un set
+  secondaire ne peut pas être le set principal », doublon compté une fois,
+  `splitSetCombos` inverse ; captures du banc sur Aer (`--hash
+gear/2000055/picker/<slot>`) : tuile de pièce avec ses stats en bascules
+  (`ATK%` active, `DEF%` et `HP%` disponibles), picker d'armes limité à la
+  classe (17 striker), picker de talismans multi-choix avec le preset `$ru`
+  reconnu au pied, picker de sets « Principal | Secondaires » avec le combo à
+  poser et son `$slug`. Un comportement nouveau accepté : une pièce sans
+  stat active est désormais une erreur côté page (aucune pièce du fichier
+  n'en manque). Laissé par l'agent, au TODO : un set sans bonus 2 pièces
+  reste proposable en secondaire (les options de sets ne portent pas leurs
+  bonus). Pour Sevih : les bascules à la souris et au clavier, un mix de sets
+  puis « Enregistrer » (commit citant `$p2s2` et `$a2s2`), le clavier dans
+  les quatre pickers.
 - **`pnpm quick`, Gear reco : des pickers à icônes pour les armes, les
   amulettes, les talismans et les sets — stats principales en bascules, mix de
   sets depuis un set principal** (lot C7, retour de Sevih du 07/10 après

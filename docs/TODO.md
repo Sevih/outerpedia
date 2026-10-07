@@ -66,6 +66,12 @@
       l'adresse après un choix (recharger reviendrait sur le perso) — ça
       passe par `lib.js`, qui réécrit le hash à chaque bascule.
 
+- [ ] **Gear reco, sets sans bonus 2 pièces** (laissé par C7) : Revenge et
+      Patience restent proposables en secondaire d'un mix alors qu'ils n'ont
+      pas de bonus 2p — les options de sets de `gear-options.ts` ne disent pas
+      leurs bonus, le damage-calculator le sait (`has2P`). À exposer dans
+      `gearRecoState` et griser dans le picker.
+
 ## 🧪 À jouer au prochain patch
 
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
