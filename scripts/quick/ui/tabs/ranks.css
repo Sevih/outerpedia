@@ -1,0 +1,60 @@
+/* Onglet « Rangs » — bloc déplacé de `quick.css` tel quel (jetons renommés),
+   en attendant le lot B28 qui le met à la charte (cf. `STYLE.md`). */
+/* Le panneau d'avant la charte : l'onglet garde son cadre tant que son lot
+   (B28 Rangs, B29 Gear reco, C6 Discord) ne l'a pas passé en `.card`. */
+#tab-ranks:not([hidden]) {
+  display: block;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  padding: 18px;
+}
+#tab-ranks h2 {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+#tab-ranks > p.hint {
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+/* Les cellules ne se replient pas : le tableau défile dans `.scroll`. */
+#tab-ranks td {
+  white-space: nowrap;
+}
+#tab-ranks td.cap {
+  text-transform: capitalize;
+}
+#tab-ranks td select {
+  height: 30px;
+  padding: 0 24px 0 6px;
+}
+#tab-ranks select.dirty {
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+}
+#tab-ranks select.refused {
+  border-color: var(--danger);
+}
+#tab-ranks .badge {
+  margin-left: 6px;
+  color: var(--accent);
+  border-color: var(--line-subtle);
+}
+#tab-ranks .badge:empty {
+  display: none;
+}
+#tab-ranks tr.sub td {
+  background: var(--surface-overlay);
+  white-space: normal;
+}
+#tab-ranks tr.sub th {
+  border: none;
+  padding: 2px 8px;
+}
+#tab-ranks tr.sub table {
+  width: auto;
+}
+#tab-ranks tr.sub table td {
+  border: none;
+  padding: 3px 8px;
+}

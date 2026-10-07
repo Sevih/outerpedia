@@ -7,6 +7,129 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, la charte graphique : jetons du site, coquille à deux
+  niveaux, composants, journal en tiroir — appliqués à Codes promo, 4-comics
+  et Vidéos** (lot F16, Fable, sur la maquette Claude Design de Sevih). Le
+  quoi. `scripts/quick/ui/quick.css` est réécrit : le `:root` recopie les
+  jetons de `src/app/globals.css` SOUS LES MÊMES NOMS (`--surface-*`,
+  `--content-*`, `--line*`, `--accent`, `--ring`, `--success`, `--warn`,
+  `--danger`, couleurs d'élément, de classe, de rareté, de rôle), plus
+  `--placeholder` et `--mono` ; `body` sur `surface-base`, `system-ui`. La
+  coquille (`index.html`, `lib.js`) : un en-tête `surface-raised` avec le logo,
+  les GROUPES en onglets soulignés (Publication, Données ; Éditeurs, Guides,
+  Outils grisés avec un badge « à venir », cf. « Cap de quick »), les
+  pastilles R2 / YouTube / Discord (prêt ou absent, le pourquoi en `title`),
+  le poste et le port, « Quitter » ; dessous, une rangée `surface-sunken`
+  avec les SECTIONS du groupe actif. Le menu est posé par `lib.js` d'après son
+  tableau `GROUPS` (`{ id, label, wide? }` par section) : un groupe ouvre sa
+  première section, le hash `#ranks` sélectionne groupe et section, `wide`
+  donne toute la largeur au `<main>` (1200 px centrés sinon) — Rangs, Gear
+  reco, Discord l'ont. Le JOURNAL est un tiroir fixé en bas : replié, une
+  ligne (dernière étape ou étape en cours, pastille qui bat, bouton
+  « Journal ») ; déplié, tout `#log` (40 % de la fenêtre au plus) ; il s'ouvre
+  seul quand une opération commence (`ok` indéfini + `doing`) et se colore
+  vert ou rouge à la fin ; `log(lines, ok, doing)` garde sa signature, aucun
+  onglet n'a changé pour ça. `/api/state` expose `imgBase` (`IMG_BASE`), et
+  avec lui `host`, `port` et `hasDiscord` — l'en-tête en a besoin, ce sont
+  trois lignes de plus dans `server.ts`. Les composants, dans `quick.css` et
+  décrits dans `STYLE.md` avec un exemple chacun : `.card` (`pad`,
+  `card-head`, `card-foot`, `scroll`), `.form` + `.field` à largeur NATURELLE
+  par classe (`w-code` 14 ch mono, `w-qty` 8 ch, `w-search` 30 ch, `w-url`
+  42 ch, `w-text` 22 ch, date auto), champs alignés sur leur bas, le bouton à
+  côté de son champ ; `input` / `select` (chevron dessiné, 34 px comme
+  l'input) / `textarea`, focus `--ring` ; `.btn` `primary` / `ghost` /
+  `danger`, `sm`, `icon` (✕ gris, rouge au survol seulement), `disabled`,
+  `busy` (le sablier) ; `table` nue (en-tête discret, filets `line-subtle`) ;
+  `.badge` (`active` / `upcoming` / `expired` / `warn` / `refused` / `error`,
+  avec les alias `ok`, `soon`, `edit`, `dirty`, `ko`, `off` que Rangs et Gear
+  reco emploient déjà) ; `.pill` + `.dot` ; `.chip` avec sa croix ; `.drop` ;
+  `.empty` ; `.savebar` ; `.picker` + `.results`. Les trois onglets simples
+  refaits à la charte, markup et CSS (`tabs/coupons.*`, `tabs/comics.*`,
+  `tabs/videos.*`, une feuille par onglet chargée par `index.html` via la
+  route statique de C5) : Codes promo = formulaire en grille dans une carte,
+  table dans une carte avec sa synthèse (« 102 codes · 8 actifs · 94
+  expirés »), badges, ✕ par ligne, et l'ICÔNE de chaque item ou monnaie
+  (`${imgBase}/images/items/<icon>.webp`, 24 px, via `itemIcon()` de
+  `lib.js`) dans les résultats de recherche, les chips et la colonne
+  Récompenses, état vide « Aucun code promo. » ; 4-comics = zone de dépôt
+  avec son icône et la langue par défaut dans une carte, puis une carte des
+  planches (une ligne par BD, trois cases, langue corrigeable, ✕ sur la
+  vignette, « Aucune planche choisie. » à vide) avec le bouton de publication
+  en pied ; Vidéos = cible et recherche sur UNE ligne, candidats en `.card
+cand` (miniature 120 × 68, titre, chaîne · date, « choisir »), URL et
+  libellé sur une ligne avec « Ajouter ». Le JS n'a bougé que là où le markup
+  l'impose : les gabarits (classes, icône, `✕`, la synthèse et l'état vide à
+  poser), `import itemIcon` ; mêmes requêtes, mêmes confirms, mêmes textes.
+  Les trois autres onglets survivent : leurs blocs CSS quittent `quick.css`
+  pour `tabs/ranks.css`, `tabs/gear.css`, `tabs/discord.css`, sans retouche de
+  fond — les anciens jetons remplacés mécaniquement (`--bg` → `surface-base`,
+  `--panel` → `surface-raised`, `--line` → `line-subtle`, `--text` →
+  `content`, `--muted` → `content-muted`, `--ok` → `success`, et les quatre
+  gris en dur `#11131a`, `#171a21`, `#2b3040`, `#2b3550` → la surface voisine,
+  `#3a2f1a` → `warn` à 18 %), le panneau que l'ancienne règle `section` leur
+  donnait recopié en tête de chaque feuille (`#tab-x:not([hidden])`, sans
+  quoi l'id l'emportait sur `hidden` et Rangs s'affichait sous chaque onglet),
+  et les petits `select` des cellules de Rangs remis à 30 px avec la place du
+  chevron (seule retouche). Un bloc « héritage » en fin de `quick.css` rend
+  `.row`, `button.action`, `button.ghost`, `a.ghost`, `label.check` sous les
+  nouveaux jetons pour ces trois onglets ; B28, B29 et C6 les remplacent par
+  `.form` et `.btn`, le dernier retire le bloc. L'aperçu Discord (`.dc*`) n'a
+  pas bougé. `STYLE.md` finit par un croquis texte de Rangs (filtres en
+  `.form`, table `wide` à icônes et portraits, étoiles, savebar), Gear reco
+  (perso à gauche, builds en `.card`, slots en grille, notes en/fr/es,
+  savebar) et Discord (deux colonnes `wide`, note repliable remplacée par un
+  `.empty` sans note, options sur une ligne, Message | Embed segmenté, barre
+  d'outils groupée avec `title`, aperçu dans une carte).
+  Le pourquoi. Sevih : « c'est pas beau » — panneau pleine largeur tassé à
+  gauche, `.row` qui écartait ses champs d'un bord à l'autre, placeholder
+  tronqué, « Ajouter » collé dans Quantité, journal hors de vue dès que la
+  page défile, palette grise sans rapport avec le site. Décision du 07/10 :
+  quick ressemble à l'admin, menu horizontal à deux niveaux, pas de barre
+  latérale.
+  Le banc a changé avec la coquille : le menu n'est plus dans le HTML (il
+  est posé par `lib.js`), donc `shot.mjs` ouvre l'onglet en ne retouchant que
+  `hidden` des sections, et `lib.js` ouvre au démarrage la section que le
+  HTML laisse visible (le hash l'emporte s'il désigne une section) ;
+  `tabsOf` du banc lit les sections. `ui-serve.test.ts` suit : `tabs/` porte
+  aussi les `.css`, chaque onglet a son `<link>` et son entrée dans `GROUPS`,
+  le journal est `<div id="log" hidden>`.
+  Vérification. Quick isolé (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4799
+pnpm quick --no-open`), captures AVANT dans `/tmp/quick-shots/f16-avant/`
+  (1440×1000) et `f16-avant-1024/` (1024×768), APRÈS dans `f16-apres/` et
+  `f16-apres-1024/`, six onglets chacune, regardées une à une : alignées,
+  rien de tronqué, rien qui déborde ; en 1024 l'en-tête tient sur une ligne
+  en réduisant les pastilles à leur point (le `title` reste) et en masquant
+  le poste. Deux défauts vus et corrigés aux captures : Rangs affiché sous
+  tous les onglets (l'id contre `hidden`, ci-dessus) ; la colonne ✕ de la
+  table des codes décalée de 7 px vers le haut — Firefox raccourcit la
+  cellule voisine d'un `.rw` (icône + nom) posé en ligne, isolé par bissection
+  sur une page jetable, réglé en posant les `.rw` dans un `.rws` flex, noté
+  dans `STYLE.md` pour les tables de B28. Les états que le banc ne joue pas
+  ont été rendus sur une page jetable du scratchpad branchée sur le CSS
+  servi (résultats ouverts avec icônes, chips, `busy`, `disabled`, `danger`,
+  badges, savebar, ligne de BD avec vignettes, cartes de vidéo, journal
+  déplié en `ok` et en `run`) et photographiées en 1440 et 1024 : propres.
+  Aucun enregistrement depuis la page, aucun appel à discord.com (sans
+  jeton). `pnpm typecheck` → sa seule ligne est l'écho de la commande (`tsc
+--noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+scripts/tsconfig.json`), code 0 ; `pnpm lint` → `$ eslint`, code 0 ;
+  `pnpm test` → `Tests  2773 passed (2773)`, 197 fichiers.
+  À contrôler à l'écran par Sevih (le banc ne le joue pas) : le survol des ✕
+  (rouge) et des boutons fantômes ; le focus clavier (anneau `--ring`) ; le
+  tiroir pendant un vrai enregistrement (il s'ouvre seul, la pastille bat,
+  vert à la fin, « Journal » le replie) ; la liste de résultats de
+  Récompense avec les icônes, puis une chip ; les confirms de Gear reco
+  inchangés ; le hash (`#gear` ouvre Données › Gear reco) ; une fenêtre
+  réduite sous 1060 px.
+  Laissé. `post()` de `lib.js` ne rattrape toujours pas une connexion coupée
+  (un changement de comportement, hors périmètre ; la ligne du TODO reste).
+  `.btn.busy` est défini et documenté mais aucun onglet ne le pose encore
+  (les trois simples se contentent de `disabled`, comme avant) : B28, B29 et
+  C6 s'en servent. Les onglets Rangs, Gear reco et Discord gardent leur
+  ancien markup (`.row`, `button.ghost`…) sous les nouveaux jetons, lisibles
+  et utilisables aux captures, pas encore à la charte — c'est leur lot. Le
+  logo de l'en-tête est un « q » sur un carré accent, pas l'icône du site
+  (quick ne sert pas `public/`).
 - **Relecture B30** (Fable, 07/10) : `0bd6a7e9` validé. Périmètre attendu
   (`actions.ts` et ses tests, `server.ts`, `ui/comics-group.mjs`, `lib.js`,
   `quick.css`, `tabs/comics.*`, DONE, TODO), entrée DONE complète ;

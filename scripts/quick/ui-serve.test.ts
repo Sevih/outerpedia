@@ -57,24 +57,28 @@ describe('assemblePage — la coquille et ses onglets', () => {
     // Les sections sont dans `<main>`, avant le journal.
     expect(page.indexOf('<main>')).toBeLessThan(page.indexOf('<section id="tab-coupons">'));
     expect(page.indexOf('</section>', page.indexOf('id="tab-discord"'))).toBeLessThan(
-      page.indexOf('<div id="log">'),
+      page.indexOf('<div id="log"'),
     );
   });
 
-  it('chaque onglet de la coquille a ses deux fichiers, son bouton et son import', () => {
+  it('chaque onglet de la coquille a ses trois fichiers, son entrée du menu et son import', () => {
     const page = shell();
     for (const tab of TABS) {
       expect(existsSync(resolve(UI, 'tabs', `${tab}.js`)), `${tab}.js`).toBe(true);
       expect(readTab(tab), `${tab}.html`).toMatch(new RegExp(`^<section id="tab-${tab}"`));
+      expect(existsSync(resolve(UI, 'tabs', `${tab}.css`)), `${tab}.css`).toBe(true);
+      expect(page).toContain(`<link rel="stylesheet" href="/ui/tabs/${tab}.css" />`);
       expect(page).toContain(`import '/ui/tabs/${tab}.js';`);
+      // Le menu : `lib.js` pose les deux rangées d'après son tableau `GROUPS`.
+      expect(readFileSync(resolve(UI, 'lib.js'), 'utf8')).toContain(`{ id: '${tab}', label: '`);
       expect(readFileSync(resolve(UI, 'tabs', `${tab}.js`), 'utf8')).toContain(
         `sections.register('${tab}', {`,
       );
     }
-    expect(menuTabs(page)).toEqual(TABS);
+    expect(menuTabs(assemblePage(page, readTab))).toEqual(TABS);
     // Et rien dans `tabs/` que la coquille ne réclame pas.
     expect(readdirSync(resolve(UI, 'tabs')).sort()).toEqual(
-      TABS.flatMap((t) => [`${t}.html`, `${t}.js`]).sort(),
+      TABS.flatMap((t) => [`${t}.css`, `${t}.html`, `${t}.js`]).sort(),
     );
   });
 });
@@ -159,8 +163,6 @@ describe('shot — la page que le banc de captures photographie', () => {
 
   it('ouvre l’onglet demandé dans le HTML, et lui seul', () => {
     const html = openTab(page(), 'ranks', 2500);
-    expect(html).toContain('<button data-tab="ranks" aria-selected="true">');
-    expect(html.match(/aria-selected="true"/g)).toHaveLength(1);
     expect(html).toContain('<section id="tab-ranks">');
     expect(html.match(/<section id="tab-[a-z0-9-]+" hidden>/g)).toHaveLength(TABS.length - 1);
   });
@@ -171,7 +173,7 @@ describe('shot — la page que le banc de captures photographie', () => {
     );
   });
 
-  it('refuse un onglet que le menu ne porte pas', () => {
+  it('refuse un onglet que la page ne porte pas', () => {
     expect(() => openTab(page(), 'nope', 0)).toThrow(/onglet inconnu/);
   });
 });

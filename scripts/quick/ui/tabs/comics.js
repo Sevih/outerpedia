@@ -36,7 +36,7 @@ const slot = (f, lang) => {
   return `<div class="k-slot">
     <div class="k-thumb">
       <img data-i="${i}" alt="" />
-      <button data-rm="${i}" title="Retirer cette planche" aria-label="Retirer ${name}">×</button>
+      <button class="btn icon" data-rm="${i}" title="Retirer cette planche" aria-label="Retirer ${name}">✕</button>
     </div>
     <select data-i="${i}" aria-label="Langue de ${name}"${
       guess ? ' class="guess" title="Langue par défaut : le nom ne porte pas de suffixe"' : ''
@@ -47,6 +47,7 @@ const slot = (f, lang) => {
 
 const renderFiles = () => {
   const rows = groups();
+  $('k-empty').hidden = files.length > 0;
   $('k-rows').innerHTML = rows
     .map(
       (g) => `<div class="k-row">

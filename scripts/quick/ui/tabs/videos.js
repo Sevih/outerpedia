@@ -9,10 +9,10 @@ $('v-search').onclick = async () => {
   if (!data.candidates) return log([data.error ?? 'recherche impossible'], false);
   $('v-cands').innerHTML = data.candidates
     .map(
-      (c) => `<div class="cand">
+      (c) => `<div class="card cand">
         <img src="https://i.ytimg.com/vi/${c.id}/mqdefault.jpg" alt="" />
         <div><strong>${c.title}</strong><span>${c.author} · ${c.uploadDate.slice(0, 10)}</span></div>
-        <button class="ghost" data-id="${c.id}">choisir</button>
+        <button class="btn ghost sm" data-id="${c.id}">choisir</button>
       </div>`,
     )
     .join('');

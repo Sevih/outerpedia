@@ -1,39 +1,56 @@
 <section id="tab-coupons">
-  <h2>Codes promo</h2>
-  <p class="hint">
-    Publié sur R2 à l'enregistrement (en ligne en ≤ 10 min), puis poussé : la CI rebâtit le site
-    derrière.
-  </p>
-
-  <div class="row">
-    <div><label>Code</label><input id="c-code" placeholder="OPLIVE09" /></div>
-    <div><label>Début</label><input id="c-start" type="date" /></div>
-    <div><label>Fin</label><input id="c-end" type="date" /></div>
+  <div class="head">
+    <h2>Codes promo</h2>
+    <p class="hint">
+      Publié sur R2 à l'enregistrement (en ligne en ≤ 10 min), puis poussé : la CI rebâtit le site
+      derrière.
+    </p>
   </div>
 
-  <div class="row">
-    <div class="picker">
-      <label>Récompense</label>
-      <input id="c-reward" placeholder="Chercher un item ou une monnaie…" autocomplete="off" />
-      <div class="results" id="c-results" hidden></div>
+  <div class="card pad" aria-label="Nouveau code">
+    <div class="form">
+      <div class="field">
+        <label for="c-code">Code</label><input id="c-code" class="w-code" placeholder="OPLIVE09" />
+      </div>
+      <div class="field"><label for="c-start">Début</label><input id="c-start" type="date" /></div>
+      <div class="field"><label for="c-end">Fin</label><input id="c-end" type="date" /></div>
     </div>
-    <div style="flex: 0 0 110px"><label>Quantité</label><input id="c-qty" value="1" /></div>
-    <div style="flex: 0 0 auto"><button class="ghost" id="c-add-reward">Ajouter</button></div>
+    <div class="form">
+      <div class="field picker">
+        <label for="c-reward">Récompense</label>
+        <input
+          id="c-reward"
+          class="w-search"
+          placeholder="Chercher un item ou une monnaie…"
+          autocomplete="off"
+        />
+        <div class="results" id="c-results" hidden></div>
+      </div>
+      <div class="field">
+        <label for="c-qty">Quantité</label><input id="c-qty" class="w-qty" value="1" />
+      </div>
+      <button class="btn ghost" id="c-add-reward">Ajouter</button>
+    </div>
+    <div class="chips" id="c-chips"></div>
+    <div class="actions"><button class="btn primary" id="c-add">Ajouter le code</button></div>
   </div>
 
-  <div class="chips" id="c-chips"></div>
-  <div class="row"><button class="action" id="c-add">Ajouter le code</button></div>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Code</th>
-        <th>Période</th>
-        <th>Récompenses</th>
-        <th>Statut</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="c-list"></tbody>
-  </table>
+  <div class="card" aria-label="Codes en ligne">
+    <div class="card-head" id="c-summary"></div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Période</th>
+            <th>Récompenses</th>
+            <th>Statut</th>
+            <th><span class="sr">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody id="c-list"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="c-empty" hidden>Aucun code promo.</div>
+  </div>
 </section>

@@ -1,0 +1,184 @@
+/* Onglet « Gear reco » — bloc déplacé de `quick.css` tel quel (jetons renommés),
+   en attendant le lot B29 qui le met à la charte (cf. `STYLE.md`). */
+/* Le panneau d'avant la charte : l'onglet garde son cadre tant que son lot
+   (B28 Rangs, B29 Gear reco, C6 Discord) ne l'a pas passé en `.card`. */
+#tab-gear:not([hidden]) {
+  display: block;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  padding: 18px;
+}
+#tab-gear h2 {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+#tab-gear > p.hint {
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+/* Onglet « Gear reco » : un build = une carte, ses slots en grille (une
+   colonne quand la fenêtre est étroite). Mêmes couleurs que « Rangs » :
+   ambre = modifié, rouge = refusé. */
+#tab-gear .picker input {
+  width: 100%;
+}
+#tab-gear .results div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#tab-gear .results .badge {
+  margin-left: auto;
+  color: var(--accent);
+  border-color: var(--line-subtle);
+}
+#tab-gear .g-build {
+  border: 1px solid var(--line-subtle);
+  border-left: 3px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  padding: 12px;
+  margin-top: 12px;
+}
+#tab-gear .g-build.dirty {
+  border-left-color: var(--warn);
+}
+#tab-gear .g-build.refused {
+  border-left-color: var(--danger);
+}
+#tab-gear .g-head,
+#tab-gear .g-piece {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#tab-gear .g-head input {
+  flex: 1 1 180px;
+  min-width: 0;
+  font-weight: 600;
+}
+#tab-gear .g-head .badge {
+  color: var(--warn);
+}
+#tab-gear .g-head .badge:empty {
+  display: none;
+}
+#tab-gear .g-issues {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--danger);
+  font-size: 12px;
+}
+#tab-gear .g-issues:empty {
+  display: none;
+}
+#tab-gear .g-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+#tab-gear .g-slot {
+  border: 1px solid var(--line-subtle);
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 0;
+}
+#tab-gear .g-slot.wide {
+  grid-column: 1 / -1;
+}
+#tab-gear .g-slot h3 {
+  margin: 0 0 6px;
+  color: var(--content-muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+#tab-gear .g-slot.dirty h3 {
+  color: var(--warn);
+}
+#tab-gear .g-piece {
+  margin-bottom: 6px;
+}
+#tab-gear .g-piece select,
+#tab-gear .g-piece input {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+#tab-gear .g-piece select.count {
+  flex: 0 0 64px;
+}
+#tab-gear .g-combo {
+  border-top: 1px dashed var(--line-subtle);
+  padding-top: 6px;
+  margin-top: 6px;
+}
+#tab-gear .g-combo:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+#tab-gear .g-ro {
+  margin: 0 0 6px;
+  color: var(--content-muted);
+  font-size: 12px;
+}
+#tab-gear .g-ro:empty {
+  display: none;
+}
+#tab-gear .g-stats {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+}
+#tab-gear .g-stat {
+  background: none;
+  border: 1px solid var(--line-subtle);
+  border-radius: 4px;
+  color: var(--content-muted);
+  padding: 1px 6px;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+#tab-gear .g-stat.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#tab-gear .g-stat.out {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+#tab-gear .g-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 10px;
+}
+#tab-gear textarea {
+  display: block;
+  width: 100%;
+  min-height: 66px;
+  resize: vertical;
+}
+#tab-gear details {
+  margin-top: 8px;
+}
+#tab-gear summary {
+  color: var(--content-muted);
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+#tab-gear input.dirty,
+#tab-gear textarea.dirty {
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 18%, transparent);
+}
+#tab-gear select.refused,
+#tab-gear input.refused,
+#tab-gear textarea.refused {
+  border-color: var(--danger);
+}

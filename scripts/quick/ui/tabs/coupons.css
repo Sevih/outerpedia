@@ -1,0 +1,21 @@
+/* Onglet « Codes promo » : le formulaire en grille, la table des codes. */
+#tab-coupons .picker .results div span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tab-coupons td.period {
+  color: var(--content-muted);
+  white-space: nowrap;
+}
+#tab-coupons td.actions {
+  width: 48px;
+  text-align: right;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+#tab-coupons tr.expired td {
+  color: var(--content-muted);
+}
+#tab-coupons tr.expired .ico {
+  opacity: 0.6;
+}

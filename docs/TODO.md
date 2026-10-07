@@ -35,24 +35,21 @@
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
       UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN
-    (EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
+(EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
       (`post()` de `lib.js`, signalé par l'agent, à reprendre dans F16).
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
-      six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
-      cet ordre (C4 et C5 faits le 07/10 : onglet Gear reco, charpente
-      `scripts/quick/ui/`, banc `node scripts/quick/shot.mjs` ; B30 fait
-      aussi : 4-comics multi-langues) — **F16** (charte : jetons de
-      `globals.css`, coquille, composants, `STYLE.md`, trois onglets simples
-      refaits ; Fable, seul), puis **B28** Rangs (vraies icônes, portraits),
-      **B29** Gear reco (picker modal) et **C6** Discord en parallèle (Opus,
-      fichiers disjoints). Direction posée par défaut dans
-      F16 : ressembler à l'admin, menu horizontal à deux niveaux — groupes
-      puis sections, pas de barre latérale (quick doit remplacer à terme
-      tout l'admin hors extractor et misc : éditeurs, guides, outils —
-      décisions du 07/10), journal en tiroir.
-      Maquette Claude Design à valider (ou retoucher dans l'éditeur) AVANT
-      de lancer F16 : https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw — cinq planches, les
-      lots F16, B28, B29 et C6 la lisent.
+      six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md). FAITS
+      le 07/10 : C4 (onglet Gear reco), C5 (charpente `scripts/quick/ui/`,
+      banc `node scripts/quick/shot.mjs`), B30 (4-comics multi-langues) et
+      **F16** (charte : jetons de `globals.css`, coquille à deux niveaux,
+      composants, journal en tiroir, `scripts/quick/ui/STYLE.md`, Codes promo
+      / 4-comics / Vidéos refaits). Restent, en parallèle (Opus, fichiers
+      disjoints), sur `STYLE.md` et la maquette
+      https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw : **B28** Rangs
+      (vraies icônes, portraits), **B29** Gear reco (picker modal), **C6**
+      Discord (note repliable, barre d'outils groupée) — chacun remplace dans
+      son onglet `.row` / `button.ghost` / `button.action` par `.form` et
+      `.btn`, le dernier retire le bloc « héritage » de `quick.css`.
 
 ## 🧪 À jouer au prochain patch
 

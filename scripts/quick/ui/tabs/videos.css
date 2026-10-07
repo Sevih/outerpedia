@@ -1,0 +1,38 @@
+/* Onglet « Vidéos » : les candidats de la recherche en cartes. */
+.cands {
+  display: grid;
+  gap: 8px;
+}
+.cands:empty {
+  display: none;
+}
+.cand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 10px;
+}
+.cand img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface-overlay);
+  flex: 0 0 auto;
+}
+.cand div {
+  min-width: 0;
+  flex: 1;
+}
+.cand strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cand span {
+  color: var(--content-muted);
+  font-size: 12px;
+}

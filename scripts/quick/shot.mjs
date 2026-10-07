@@ -17,9 +17,9 @@
  * relais HTTP local se met entre les deux. Il transmet tout à quick, sauf la
  * page, qu'il sert après deux retouches (`openTab`) :
  *
- *   - l'onglet demandé est ouvert DANS LE HTML (`aria-selected` du menu,
- *     `hidden` des sections) — aucun clic à simuler, et la recette ne dépend
- *     pas du script de la page ;
+ *   - l'onglet demandé est ouvert DANS LE HTML (`hidden` des sections) — aucun
+ *     clic à simuler : `lib.js` ouvre au démarrage la section que le HTML
+ *     laisse visible, et pose le menu d'après elle ;
  *   - une image `/__settle?ms=…` est posée avant `</body>`. Le relais n'y
  *     répond qu'après le délai : `load` attend les images, la capture aussi.
  *
@@ -51,16 +51,14 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
  */
 const READ_ONLY_POSTS = new Set(['/api/discord/preview', '/api/discord/emojis']);
 
-const NAV_BUTTON =
-  /(<button\b[^>]*\bdata-tab="([a-z0-9-]+)"[^>]*\baria-selected=")(?:true|false)"/g;
 const SECTION = /<section id="tab-([a-z0-9-]+)"(?: hidden)?>/g;
 
 /**
- * Les onglets du menu, dans l'ordre de la page.
+ * Les onglets de la page — ses sections, dans l'ordre.
  * @param {string} html
  */
 export function tabsOf(html) {
-  return [...html.matchAll(NAV_BUTTON)].map((m) => m[2]);
+  return [...html.matchAll(SECTION)].map((m) => m[1]);
 }
 
 /**
@@ -73,7 +71,6 @@ export function openTab(html, tab, settle) {
   if (!tabsOf(html).includes(tab)) throw new Error(`onglet inconnu : « ${tab} »`);
   if (!html.includes('</body>')) throw new Error('page sans </body> : rien où poser l’attente');
   return html
-    .replace(NAV_BUTTON, (_, head, name) => `${head}${name === tab}"`)
     .replace(SECTION, (_, name) => `<section id="tab-${name}"${name === tab ? '' : ' hidden'}>`)
     .replace('</body>', `<img src="/__settle?ms=${settle}" alt="" hidden />\n</body>`);
 }

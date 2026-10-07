@@ -1,0 +1,78 @@
+/* Onglet « 4-comics » : une ligne par BD, une case par langue (EN · JP · KR). */
+.k-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line-subtle);
+}
+.k-row:last-child {
+  border-bottom: none;
+}
+.k-stem {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding-top: 4px;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.k-slot {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.k-thumb {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-overlay);
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--placeholder);
+  font-size: 12px;
+}
+.k-thumb.empty {
+  background: transparent;
+  border-style: dashed;
+}
+/* Le haut de la planche : sa première case, celle qui la fait reconnaître. */
+.k-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.k-thumb .btn.icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 26px;
+  height: 26px;
+  background: var(--surface-raised);
+  border-color: var(--line-subtle);
+  font-size: 12px;
+}
+.k-slot select {
+  height: 28px;
+  padding: 0 24px 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+/* Ni suffixe ni correction : la langue est celle par défaut, à vérifier. */
+.k-slot select.guess {
+  border-color: var(--warn);
+}
+.k-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 11px;
+}

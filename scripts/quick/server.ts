@@ -26,6 +26,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
+import { hostname } from 'node:os';
 import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
@@ -318,6 +319,12 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       targets: videoTargets(),
       hasYoutubeKey: Boolean(process.env.YOUTUBE_API_KEY),
       hasR2: Boolean(process.env.R2_BUCKET),
+      hasDiscord: Boolean(process.env.DISCORD_BOT_TOKEN),
+      // L'en-tête de la page : le poste qui sert, son port, et d'où viennent
+      // les images (icônes d'items, d'éléments, de classes, portraits).
+      host: hostname(),
+      port: PORT,
+      imgBase: IMG_BASE,
     });
     return;
   }

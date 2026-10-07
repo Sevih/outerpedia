@@ -1,9 +1,10 @@
 // Onglet « Codes promo ».
-import { $, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, itemIcon, log, post, sections, state, stateLoaded } from '../lib.js';
 
 let pending = []; // récompenses du code en cours de saisie
 
 const rewardName = (id) => state.rewards.find((r) => r.id === id)?.name ?? id;
+const rewardIcon = (id) => itemIcon(state.rewards.find((r) => r.id === id)?.icon);
 
 function status(c) {
   const today = new Date().toISOString().slice(0, 10);
@@ -17,18 +18,30 @@ function renderCoupons() {
   const rows = [...state.coupons].sort(
     (a, b) => order[status(a)[0]] - order[status(b)[0]] || b.start.localeCompare(a.start),
   );
+  const count = (k) => rows.filter((c) => status(c)[0] === k).length;
+  const plural = (n, one, many) => `${n} ${n > 1 ? many : one}`;
+  $('c-summary').innerHTML =
+    `<strong>${plural(rows.length, 'code', 'codes')}</strong>` +
+    (count('active')
+      ? `<span class="badge active">${plural(count('active'), 'actif', 'actifs')}</span>`
+      : '') +
+    (count('upcoming') ? `<span class="badge upcoming">${count('upcoming')} à venir</span>` : '') +
+    (count('expired')
+      ? `<span class="badge expired">${plural(count('expired'), 'expiré', 'expirés')}</span>`
+      : '');
+  $('c-empty').hidden = rows.length > 0;
   $('c-list').innerHTML = rows
     .map((c) => {
       const [cls, label] = status(c);
       const rewards = Object.entries(c.description)
-        .map(([k, v]) => `${rewardName(k)} ×${v}`)
-        .join(', ');
-      return `<tr>
+        .map(([k, v]) => `<span class="rw">${rewardIcon(k)}${rewardName(k)} ×${v}</span>`)
+        .join(' ');
+      return `<tr class="${cls}">
         <td class="code">${c.code}</td>
-        <td>${c.start} → ${c.end}</td>
-        <td>${rewards}</td>
+        <td class="period">${c.start} → ${c.end}</td>
+        <td><div class="rws">${rewards}</div></td>
         <td><span class="badge ${cls}">${label}</span></td>
-        <td><button class="ghost" data-del="${c.code}">supprimer</button></td>
+        <td class="actions"><button class="btn icon" data-del="${c.code}" title="Supprimer" aria-label="Supprimer ${c.code}">✕</button></td>
       </tr>`;
     })
     .join('');
@@ -44,7 +57,7 @@ function renderChips() {
   $('c-chips').innerHTML = pending
     .map(
       (p, i) =>
-        `<span class="chip">${rewardName(p.id)} ×${p.qty}<button data-i="${i}">×</button></span>`,
+        `<span class="chip">${rewardIcon(p.id)}${rewardName(p.id)} ×${p.qty}<button class="btn icon" data-i="${i}" title="Retirer" aria-label="Retirer ${rewardName(p.id)}">✕</button></span>`,
     )
     .join('');
   for (const b of $('c-chips').querySelectorAll('button'))
@@ -69,7 +82,9 @@ $('c-reward').oninput = async () => {
   const mine = ++seq;
   const { hits } = await (await fetch(`/api/rewards?q=${encodeURIComponent(q)}`)).json();
   if (mine !== seq) return;
-  $('c-results').innerHTML = hits.map((r) => `<div data-id="${r.id}">${r.name}</div>`).join('');
+  $('c-results').innerHTML = hits
+    .map((r) => `<div data-id="${r.id}">${itemIcon(r.icon)}<span>${r.name}</span></div>`)
+    .join('');
   $('c-results').hidden = !hits.length;
   for (const d of $('c-results').children)
     d.onclick = () => {

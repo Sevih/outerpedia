@@ -5,22 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Outerpedia — quick</title>
     <link rel="stylesheet" href="/ui/quick.css" />
+    <!-- Une feuille par onglet, chargée par la route statique de `ui-serve.ts`. -->
+    <link rel="stylesheet" href="/ui/tabs/coupons.css" />
+    <link rel="stylesheet" href="/ui/tabs/comics.css" />
+    <link rel="stylesheet" href="/ui/tabs/videos.css" />
+    <link rel="stylesheet" href="/ui/tabs/ranks.css" />
+    <link rel="stylesheet" href="/ui/tabs/gear.css" />
+    <link rel="stylesheet" href="/ui/tabs/discord.css" />
   </head>
   <body>
-    <header>
-      <h1>Outerpedia · quick</h1>
-      <span class="env" id="env"></span>
-      <button class="ghost" id="quit" title="Arrête le serveur local">Quitter</button>
+    <!-- Menu à deux niveaux : les GROUPES dans l'en-tête, les SECTIONS du groupe
+         actif dessous. Les deux rangées sont posées par `lib.js` d'après son
+         tableau `GROUPS` ; l'onglet ouvert est celui du hash, sinon la section
+         que ce HTML laisse visible (la première). -->
+    <header class="top">
+      <a class="brand" href="#" title="Outerpedia · quick">
+        <span class="logo" aria-hidden="true">q</span>
+        <strong>Outerpedia · quick</strong>
+      </a>
+      <nav class="groups" id="groups" aria-label="Groupes"></nav>
+      <div class="status">
+        <!-- Pastilles des services : `lib.js` les colore d'après `/api/state`. -->
+        <span class="pill" id="svc-r2" title="R2 : état inconnu"><i class="dot"></i>R2</span>
+        <span class="pill" id="svc-youtube" title="YouTube : état inconnu"
+          ><i class="dot"></i>YouTube</span
+        >
+        <span class="pill" id="svc-discord" title="Discord : état inconnu"
+          ><i class="dot"></i>Discord</span
+        >
+        <span class="env" id="env" title="Le poste qui sert la page, et son port"></span>
+        <button class="btn ghost sm" id="quit" title="Arrête le serveur local">Quitter</button>
+      </div>
     </header>
-
-    <nav>
-      <button data-tab="coupons" aria-selected="true">Codes promo</button>
-      <button data-tab="comics" aria-selected="false">4-comics</button>
-      <button data-tab="videos" aria-selected="false">Vidéos</button>
-      <button data-tab="ranks" aria-selected="false">Rangs</button>
-      <button data-tab="gear" aria-selected="false">Gear reco</button>
-      <button data-tab="discord" aria-selected="false">Discord</button>
-    </nav>
+    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 
     <main>
       <!-- Une section par onglet : le serveur pose `tabs/<nom>.html` à la place de
@@ -31,9 +48,19 @@
       <!-- @tab ranks -->
       <!-- @tab gear -->
       <!-- @tab discord -->
-
-      <div id="log"></div>
     </main>
+
+    <!-- Le journal : un tiroir fixé en bas de la fenêtre. Replié, une ligne
+         (dernière étape, état) ; déplié, tout le journal (`#log`). `lib.js`
+         l'ouvre quand une opération commence et le colore à la fin. -->
+    <aside class="journal" id="journal" data-state="idle" aria-label="Journal">
+      <button class="journal-bar" id="journal-toggle" aria-expanded="false" aria-controls="log">
+        <i class="dot" id="journal-dot" aria-hidden="true"></i>
+        <span class="journal-last" id="journal-last">Aucune opération en cours.</span>
+        <span class="journal-more" aria-hidden="true">Journal</span>
+      </button>
+      <div id="log" hidden></div>
+    </aside>
 
     <!-- Chaque section s'inscrit auprès de `lib.js` en se chargeant ; l'ordre des
          imports est celui du menu. -->
