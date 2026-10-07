@@ -19,15 +19,6 @@
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
-## 🧰 Outil quick
-
-- [ ] **Onglet « Gear reco »** (demande de Sevih du 07/10) : éditer les builds
-      d'un perso (`data/curated/gear-reco.json`, listes tirées des options et
-      des presets, notes en/fr/es) puis commit + push, comme « Rangs » —
-      l'admin reste la surface de rendu. Lot **C4** de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) (Opus, seul sur
-      `scripts/quick/`).
-
 ## 🧪 À jouer au prochain patch
 
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au

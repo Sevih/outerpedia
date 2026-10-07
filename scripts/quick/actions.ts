@@ -1,8 +1,9 @@
 /**
- * quick/actions — les QUATRE gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les CINQ gestes du quotidien, sortis du panneau admin.
  *
- * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo ou régler
- * un rang ne demandait jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
+ * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo, régler un
+ * rang ou une reco d'équipement ne demandait jusqu'ici RIEN de moins qu'un
+ * `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
  * dans l'admin. Des minutes de pipeline de données pour changer quatre lignes
@@ -10,7 +11,7 @@
  *
  * Ce module ne RÉIMPLÉMENTE rien : il rappelle les mêmes stores que les routes
  * admin (`loadCouponsForEdit`/`saveCouponsLive`, `collectComics`, `upsertCharacterCurated`,
- * `upsertEeCurated`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
+ * `upsertEeCurated`, `upsertGearReco`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
  * sont résolus par tsx via tsconfig.
  *
  * CE QUI PART EN PROD, ET COMMENT :
@@ -21,9 +22,10 @@
  *   - 4-comics : la galerie lit le manifeste R2 à la requête (cf. le docblock de
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
- *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists).
+ *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
+ *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso).
  *
- * Les QUATRE poussent quand même avec la CI (cf. `commitAndPush`) : R2 avance la
+ * Les CINQ poussent quand même avec la CI (cf. `commitAndPush`) : R2 avance la
  * mise en ligne de la donnée vive, il ne dispense pas du déploiement — le site
  * bâti garde ses propres copies de tout ça.
  */
@@ -40,12 +42,18 @@ import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
 import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
+import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
+import { expandBuild } from '@/lib/admin/gear-preset-resolve';
+import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
+import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import { listGuides } from '@/lib/data/guides';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
+import { DEFAULT_LANG, LANGS, type Lang } from '@/lib/i18n/config';
+import { TAG_REGEX, checkText } from '@/lib/parse-text';
 import { transcendenceLabel } from '@/lib/transcendence';
 import {
   CURATED_ROLES,
@@ -54,8 +62,9 @@ import {
   EE_TIERS,
   TIERS,
 } from '@/components/tierlist/tiers';
-import type { CharacterCurated } from '@contracts';
+import type { CharacterCurated, GearBuild, GearPresets } from '@contracts';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
+import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { collectComics } from '@datagen/assets/collect-comics';
 import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
@@ -751,4 +760,281 @@ export async function saveRanks(
     report,
   );
   return { ok: git.ok && !refused.length, log: [...log, ...git.log], refused: keys };
+}
+
+// ------------------------------------------------------------- gear reco -----
+
+/** Le seul fichier que l'onglet « Gear reco » écrit, committe et pousse. */
+const GEAR_RECO_PATH = 'data/curated/gear-reco.json';
+
+/**
+ * Les langues de note que l'onglet montre d'emblée : celles que portent les
+ * notes du fichier. Les autres langues du site restent repliées, vides par
+ * défaut.
+ */
+const NOTE_LANGS: readonly Lang[] = ['en', 'fr', 'es'];
+
+/** Où une erreur se montre dans un build. */
+export type GearSlot = 'name' | 'weapons' | 'amulets' | 'talismans' | 'sets' | 'substats' | 'note';
+
+const GEAR_SLOT_LABELS: Record<GearSlot, string> = {
+  name: 'nom',
+  weapons: 'armes',
+  amulets: 'amulettes',
+  talismans: 'talismans',
+  sets: 'sets',
+  substats: 'substats',
+  note: 'note',
+};
+
+/**
+ * Une erreur située : `build` est le rang dans la liste envoyée (`null` quand
+ * elle ne tient à aucun build), `index` celui de la pièce ou du combo dans son
+ * slot. La page s'en sert pour cercler l'endroit.
+ */
+export interface GearIssue {
+  build: number | null;
+  slot?: GearSlot;
+  index?: number;
+  message: string;
+}
+
+/** Ce qu'un build a le droit de citer : les ids des sélecteurs et les presets. */
+export interface GearCatalog {
+  weapons: ReadonlySet<string>;
+  amulets: ReadonlySet<string>;
+  talismans: ReadonlySet<string>;
+  sets: ReadonlySet<string>;
+  presets: GearPresets;
+}
+
+function gearCatalog(): GearCatalog {
+  const options = gearSelectOptions();
+  const ids = (list: GearOption[]): Set<string> => new Set(list.map((o) => o.id));
+  return {
+    weapons: ids(options.weapons),
+    amulets: ids(options.amulets),
+    talismans: ids(options.talismans),
+    sets: ids(options.sets),
+    presets: loadGearPresets(),
+  };
+}
+
+/**
+ * L'onglet « Gear reco » : le roster (qui a des recos), les presets en lecture
+ * seule, les listes des sélecteurs (celles de l'admin, sans les icônes — rien
+ * n'est rendu en tuiles ici) et, avec `id`, les builds de ce perso lus du
+ * disque à l'instant.
+ *
+ * Les builds viennent DEUX fois : `builds` en pièces (presets dépliés, comme
+ * l'admin les édite) et `disk` tels que le fichier les porte. La page a besoin
+ * des deux — un slot resté sur son preset repart sous son `$slug` d'origine, et
+ * ne redevient des pièces que si on le règle à la pièce (deux presets peuvent
+ * avoir le même contenu : replier des pièces rendrait le premier des deux, pas
+ * forcément celui que le build citait).
+ */
+export function gearRecoState(id?: string) {
+  const reco = loadGearReco();
+  const presets = loadGearPresets();
+  const options = gearSelectOptions();
+  const slim = (list: GearOption[]) =>
+    list.map((o) => ({
+      id: o.id,
+      label: o.label,
+      classLimits: o.classLimits,
+      mainStats: o.mainStats,
+    }));
+  const disk = id === undefined ? undefined : (reco[id] ?? []);
+  return {
+    roster: getCharacterListItems()
+      .map((c) => ({
+        id: c.id,
+        name: characterDisplayName(c),
+        class: c.class,
+        builds: reco[c.id]?.length ?? 0,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    presets: { talismans: presets.talismans, sets: presets.sets, substats: presets.substats },
+    options: {
+      weapons: slim(options.weapons),
+      amulets: slim(options.amulets),
+      talismans: slim(options.talismans),
+      sets: slim(options.sets),
+    },
+    langs: {
+      default: DEFAULT_LANG,
+      main: NOTE_LANGS,
+      extra: LANGS.filter((l) => !NOTE_LANGS.includes(l)),
+    },
+    ...(disk ? { id, disk, builds: disk.map((b) => expandBuild(b, presets)) } : {}),
+  };
+}
+
+const tagsOf = (text: string): string[] => (text.match(TAG_REGEX) ?? []).sort();
+
+/**
+ * Ce que `validateGearBuilds` ne voit pas — il ne contrôle que la FORME, et un
+ * id vide ou un preset qui n'existe pas sont des chaînes comme les autres. Or
+ * l'enregistrement pousse `main` : trois contrôles avant d'écrire.
+ *
+ *   - les RÉFÉRENCES : chaque pièce est un id des sélecteurs, chaque `$slug` un
+ *     preset du fichier, un build a un nom ;
+ *   - les TAGS INLINE des textes, par `checkText` — la résolution de
+ *     `tag-control.ts`, dont le test fait échouer la suite sur un tag sans
+ *     correspondance ;
+ *   - la PARITÉ des balises d'une note écrite dans toutes les langues du site,
+ *     règle de `inline-tag-parity.test.ts` (même forme de balise, même
+ *     condition : il ne regarde que les blocs complets).
+ *
+ * Une stat principale hors du pool de sa pièce n'est PAS refusée : le fichier
+ * en porte, et les refuser bloquerait l'enregistrement de ces persos.
+ */
+export function checkGearBuilds(builds: GearBuild[], catalog: GearCatalog): GearIssue[] {
+  const issues: GearIssue[] = [];
+  const { presets } = catalog;
+
+  builds.forEach((b, build) => {
+    const add = (slot: GearSlot, message: string, index?: number): void =>
+      void issues.push({ build, slot, ...(index === undefined ? {} : { index }), message });
+    const tags = (slot: GearSlot, text: string, where = ''): void => {
+      for (const c of checkText(text)) if (!c.ok) add(slot, `${where}${c.tag} — ${c.reason}`);
+    };
+
+    if (!b.name.trim()) add('name', 'nom vide');
+    tags('name', b.name);
+
+    for (const slot of ['weapons', 'amulets'] as const)
+      (b[slot] ?? []).forEach((p, i) => {
+        if (!catalog[slot].has(p.id))
+          add(slot, p.id ? `pièce inconnue « ${p.id} »` : 'pièce non choisie', i);
+      });
+
+    (b.talismans ?? []).forEach((t, i) => {
+      if (t.startsWith('$')) {
+        if (!Object.hasOwn(presets.talismans, t.slice(1)))
+          add('talismans', `preset inconnu « ${t} »`, i);
+      } else if (!catalog.talismans.has(t))
+        add('talismans', t ? `talisman inconnu « ${t} »` : 'talisman non choisi', i);
+    });
+
+    (b.sets ?? []).forEach((combo, i) => {
+      if (combo.preset) {
+        if (!Object.hasOwn(presets.sets, combo.preset))
+          add('sets', `preset inconnu « $${combo.preset} »`, i);
+        return;
+      }
+      if (!combo.pieces?.length) return add('sets', 'combo vide', i);
+      for (const p of combo.pieces)
+        if (!catalog.sets.has(p.set))
+          add('sets', p.set ? `set inconnu « ${p.set} »` : 'set non choisi', i);
+    });
+
+    if (b.substats) {
+      if (b.substats.startsWith('$') && !Object.hasOwn(presets.substats, b.substats.slice(1)))
+        add('substats', `preset inconnu « ${b.substats} »`);
+      tags('substats', b.substats);
+    }
+
+    const note: Partial<Record<string, string>> = b.note ?? {};
+    for (const [lang, text] of Object.entries(note)) if (text) tags('note', text, `${lang} : `);
+    if (Object.keys(note).length && !note[DEFAULT_LANG]?.trim())
+      add('note', `pas de texte « ${DEFAULT_LANG} », la langue de repli`);
+    if (LANGS.every((l) => typeof note[l] === 'string')) {
+      const ref = tagsOf(note[DEFAULT_LANG] ?? '').join(' ');
+      for (const lang of LANGS) {
+        const own = tagsOf(note[lang] ?? '').join(' ');
+        if (own !== ref)
+          add(
+            'note',
+            `${lang} : balises « ${own || 'aucune'} », « ${DEFAULT_LANG} » porte « ${ref || 'aucune'} »`,
+          );
+      }
+    }
+  });
+  return issues;
+}
+
+/** Situe un écart de `validateGearBuilds` (« gearReco[id][1].weapons[0].id — … »). */
+function locateGearError(error: string): GearIssue {
+  const m = error.match(/^gearReco\[[^\]]*\]\[(\d+)\](?:\.(\w+))?(?:\[(\d+)\])?\S* — (.*)$/);
+  if (!m) return { build: null, message: error };
+  const [, build, slot, index, message] = m;
+  const known = slot !== undefined && slot in GEAR_SLOT_LABELS;
+  return {
+    build: Number(build),
+    ...(known ? { slot: slot as GearSlot } : {}),
+    ...(known && index !== undefined ? { index: Number(index) } : {}),
+    message: known ? message : error,
+  };
+}
+
+/** Les deux écritures de `saveGearReco`, injectées : le store et git. */
+export interface GearRecoDeps {
+  upsert: (id: string, builds: GearBuild[]) => Promise<string[]>;
+  commitAndPush: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le store de l'admin et le vrai `commitAndPush`. */
+export const GEAR_RECO_DEPS: GearRecoDeps = { upsert: upsertGearReco, commitAndPush };
+
+/**
+ * Enregistre les builds d'un perso — la liste COMPLÈTE, comme la route de
+ * l'admin (une liste vide retire la clé) : forme, références et tags contrôlés
+ * (`checkGearBuilds`), écriture par `upsertGearReco` (qui replie les pièces
+ * vers leurs presets et trie le fichier), puis un commit poussé sur ce seul
+ * fichier.
+ *
+ * Une erreur n'écrit ni ne committe RIEN : `issues` les situe pour la page, le
+ * journal les dit. `written` distingue l'échec d'après écriture (un push
+ * refusé) — le disque porte alors les builds, et la page le relit.
+ *
+ * Pas de garde de concurrence, à la différence des rangs : la liste remplace
+ * celle du disque, comme dans l'admin. La page relit le disque à chaque perso
+ * choisi.
+ */
+export async function saveGearReco(
+  id: string,
+  builds: GearBuild[],
+  deps: GearRecoDeps,
+  report?: Report,
+): Promise<Outcome & { issues: GearIssue[]; written: boolean }> {
+  const char = getCharacterListItems().find((c) => c.id === id);
+  if (!char) return { ok: false, log: [`Perso inconnu : ${id}`], issues: [], written: false };
+  const name = characterDisplayName(char);
+
+  const refuse = (issues: GearIssue[]) => ({
+    ok: false,
+    log: issues.map((i) => {
+      const b = i.build === null ? undefined : builds[i.build];
+      const where = [
+        i.build === null
+          ? name
+          : `build ${i.build + 1}${typeof b?.name === 'string' && b.name ? ` « ${b.name} »` : ''}`,
+        ...(i.slot
+          ? [`${GEAR_SLOT_LABELS[i.slot]}${i.index === undefined ? '' : ` ${i.index + 1}`}`]
+          : []),
+      ].join(' · ');
+      return `REFUSÉ — ${where} : ${i.message}`;
+    }),
+    issues,
+    written: false,
+  });
+
+  // La FORME d'abord : le contrôle des références parcourt les builds.
+  const shape = validateGearBuilds(id, builds);
+  if (shape.length) return refuse(shape.map(locateGearError));
+  const issues = checkGearBuilds(builds, gearCatalog());
+  if (issues.length) return refuse(issues);
+
+  const j = journal(report);
+  const errors = await deps.upsert(id, builds);
+  if (errors.length) return refuse(errors.map(locateGearError));
+  j.done(
+    builds.length
+      ? `${name} : ${builds.length} build${builds.length > 1 ? 's' : ''} écrit${builds.length > 1 ? 's' : ''}.`
+      : `${name} : recos retirées.`,
+  );
+
+  const git = deps.commitAndPush([GEAR_RECO_PATH], `chore(gear-reco): ${name}`, report);
+  return { ok: git.ok, log: [...j.lines, ...git.log], issues: [], written: true };
 }

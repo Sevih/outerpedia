@@ -9,10 +9,28 @@
  *   - le réglage d'un autre, posé sur le disque depuis le chargement de la page.
  *
  * La fonction est pure : aucun disque ici, l'état est passé en argument.
+ *
+ * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et pousse :
+ * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
+ * `data/curated/` ni ne lance git. Le fichier des recos est LU (roster, listes
+ * des sélecteurs, presets, builds réels), jamais à des coordonnées figées — il
+ * bouge à chaque enregistrement de l'onglet.
  */
 import { describe, expect, it } from 'vitest';
-import type { CharacterCurated } from '@contracts';
-import { planRankChanges, type RankChange, type RankDisk } from './actions';
+import type { CharacterCurated, GearBuild } from '@contracts';
+import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
+import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
+import {
+  checkGearBuilds,
+  gearRecoState,
+  planRankChanges,
+  saveGearReco,
+  type GearCatalog,
+  type GearRecoDeps,
+  type Outcome,
+  type RankChange,
+  type RankDisk,
+} from './actions';
 
 const DIANNE: CharacterCurated = {
   rank: 'S',
@@ -257,5 +275,304 @@ describe('planRankChanges — tables par transcendance', () => {
     ]);
 
     expect({ curated: d.curated, ee: d.ee }).toEqual(before);
+  });
+});
+
+// ------------------------------------------------------------- gear reco -----
+
+const CATALOG: GearCatalog = {
+  weapons: new Set(['w1', 'w2']),
+  amulets: new Set(['a1']),
+  talismans: new Set(['t1', 't2']),
+  sets: new Set(['s1', 's2']),
+  presets: {
+    talismans: { duo: ['t1', 't2'] },
+    sets: { four: [{ set: 's1', count: 4 }] },
+    substats: { dps: 'ATK>CHC>SPD' },
+  },
+};
+
+const BUILD: GearBuild = {
+  name: 'Speed',
+  weapons: [{ id: 'w1', mainStat: 'ATK%' }],
+  amulets: [{ id: 'a1', mainStat: 'PEN%/CHD' }],
+  talismans: ['$duo'],
+  sets: [
+    { preset: 'four' },
+    {
+      pieces: [
+        { set: 's1', count: 2 },
+        { set: 's2', count: 2 },
+      ],
+    },
+  ],
+  substats: '$dps',
+  note: { en: 'Plain note.', fr: 'Note simple.', es: 'Nota simple.' },
+};
+
+describe('checkGearBuilds — références', () => {
+  it('laisse passer un build dont tout existe, presets et pièces', () => {
+    expect(checkGearBuilds([BUILD, { name: 'Nu' }], CATALOG)).toEqual([]);
+  });
+
+  it('situe chaque référence fautive : build, slot, rang', () => {
+    const issues = checkGearBuilds(
+      [
+        BUILD,
+        {
+          name: ' ',
+          weapons: [{ id: 'w1' }, { id: '' }, { id: 'ghost' }],
+          talismans: ['t1', '', '$nope'],
+          sets: [{ preset: 'nope' }, { pieces: [] }, { pieces: [{ set: '', count: 2 }] }],
+          substats: '$nope',
+        },
+      ],
+      CATALOG,
+    );
+
+    expect(issues.map(({ build, slot, index }) => [build, slot, index])).toEqual([
+      [1, 'name', undefined],
+      [1, 'weapons', 1],
+      [1, 'weapons', 2],
+      [1, 'talismans', 1],
+      [1, 'talismans', 2],
+      [1, 'sets', 0],
+      [1, 'sets', 1],
+      [1, 'sets', 2],
+      [1, 'substats', undefined],
+    ]);
+  });
+
+  it('ne refuse PAS une stat principale hors du pool (le fichier en porte)', () => {
+    const odd = { ...BUILD, weapons: [{ id: 'w1', mainStat: 'WHATEVER' }] };
+    expect(checkGearBuilds([odd], CATALOG)).toEqual([]);
+  });
+});
+
+describe('checkGearBuilds — notes', () => {
+  const noted = (note: GearBuild['note']): GearBuild[] => [{ ...BUILD, note }];
+
+  it('refuse un tag sans correspondance, dans la langue qui le porte', () => {
+    const issues = checkGearBuilds(
+      noted({ en: 'Use {I-T/No Such Charm}.', fr: 'Sans balise.' }),
+      CATALOG,
+    );
+
+    expect(issues).toHaveLength(1);
+    expect(issues[0]).toMatchObject({ build: 0, slot: 'note' });
+    expect(issues[0].message).toContain('en : {I-T/No Such Charm}');
+  });
+
+  it('refuse un type de tag que le rendu ne connaît pas', () => {
+    expect(checkGearBuilds(noted({ en: 'Bad {ZZ/x}.' }), CATALOG)).toHaveLength(1);
+  });
+
+  it('refuse une note sans anglais, la langue de repli', () => {
+    const issues = checkGearBuilds(noted({ fr: 'Seulement en français.' }), CATALOG);
+    expect(issues.map((i) => i.slot)).toEqual(['note']);
+  });
+
+  it('exige les MÊMES balises partout quand la note est écrite dans toutes les langues', () => {
+    const all = {
+      en: '{E/fire} team',
+      fr: '{E/fire}',
+      es: '{E/fire}',
+      jp: '{E/fire}',
+      kr: '{E/fire}',
+    };
+
+    expect(checkGearBuilds(noted({ ...all, zh: '{E/fire}' }), CATALOG)).toEqual([]);
+    const issues = checkGearBuilds(noted({ ...all, zh: 'fire' }), CATALOG);
+    expect(issues).toHaveLength(1);
+    expect(issues[0].message).toContain('zh');
+    // Une note partielle n'est pas un bloc pour le test de parité : pas contrôlée.
+    expect(checkGearBuilds(noted({ en: '{E/fire}', fr: 'feu' }), CATALOG)).toEqual([]);
+  });
+});
+
+describe('recos du fichier — lues, jamais écrites', () => {
+  const reco = loadGearReco();
+  const presets = loadGearPresets();
+  const state = gearRecoState();
+  const ids = (list: { id: string }[]): Set<string> => new Set(list.map((o) => o.id));
+  const catalog: GearCatalog = {
+    weapons: ids(state.options.weapons),
+    amulets: ids(state.options.amulets),
+    talismans: ids(state.options.talismans),
+    sets: ids(state.options.sets),
+    presets,
+  };
+
+  it('le contrôle ne refuse AUCUN build existant (sinon son perso ne s’enregistre plus)', () => {
+    const refused = Object.entries(reco).flatMap(([id, builds]) =>
+      checkGearBuilds(builds, catalog).map((i) => `${id}[${i.build}] ${i.slot} — ${i.message}`),
+    );
+    expect(refused).toEqual([]);
+  });
+
+  it('déplier puis replier trois builds réels ne perd rien', () => {
+    const all = Object.values(reco).flat();
+    // Trois formes : tout en presets, plusieurs combos de sets, une note.
+    const sample = [
+      all.find((b) => b.talismans?.[0]?.startsWith('$') && b.substats?.startsWith('$')),
+      all.find((b) => (b.sets?.length ?? 0) > 1),
+      all.find((b) => b.note),
+      ...all,
+    ]
+      .filter((b): b is GearBuild => Boolean(b))
+      .filter((b, i, list) => list.indexOf(b) === i)
+      .slice(0, 3);
+    expect(sample).toHaveLength(3);
+
+    for (const disk of sample) {
+      const pieces = expandBuild(disk, presets);
+      // Déplié : plus aucun `$slug`, que des pièces.
+      expect(JSON.stringify([pieces.talismans, pieces.sets, pieces.substats])).not.toContain('$');
+      expect(pieces.sets?.every((c) => !c.preset)).toBe(true);
+
+      const back = collapseBuild(pieces, presets);
+      // Replié : les MÊMES pièces une fois redépliées (deux presets de même
+      // contenu se valent, d'où la comparaison en pièces et non en slugs)…
+      expect(expandBuild(back, presets)).toEqual(pieces);
+      // …sous forme de presets partout où le disque en citait…
+      if (disk.talismans?.[0]?.startsWith('$')) expect(back.talismans?.[0]).toMatch(/^\$/);
+      expect(back.sets?.map((c) => Boolean(c.preset))).toEqual(
+        disk.sets?.map((c) => Boolean(c.preset)),
+      );
+      if (disk.substats?.startsWith('$')) expect(back.substats).toBe(disk.substats);
+      // …et le reste intact.
+      expect([back.name, back.weapons, back.amulets, back.note]).toEqual([
+        disk.name,
+        disk.weapons,
+        disk.amulets,
+        disk.note,
+      ]);
+    }
+  });
+
+  it('l’état d’un perso porte ses builds deux fois : en pièces et tels que le disque', () => {
+    const id = Object.keys(reco)[0];
+    const one = gearRecoState(id);
+
+    expect(one.disk).toEqual(reco[id]);
+    expect(one.builds).toEqual(reco[id].map((b) => expandBuild(b, presets)));
+    expect(one.roster.find((c) => c.id === id)?.builds).toBe(reco[id].length);
+    expect(gearRecoState()).not.toHaveProperty('builds');
+  });
+});
+
+describe('saveGearReco — écritures injectées', () => {
+  const state = gearRecoState();
+  const who = state.roster[0];
+  // Un build valide tiré des listes réelles, pas d'un build du fichier.
+  const valid: GearBuild = {
+    name: 'Test',
+    weapons: [{ id: state.options.weapons[0].id }],
+    talismans: [`$${Object.keys(state.presets.talismans)[0]}`],
+    sets: [{ preset: Object.keys(state.presets.sets)[0] }],
+    substats: 'ATK>SPD',
+    note: { en: 'Plain note.' },
+  };
+
+  /** Les deux écritures, factices : elles notent leurs appels et rien d'autre. */
+  function deps(over: { errors?: string[]; git?: Outcome } = {}) {
+    const calls = {
+      upsert: [] as [string, GearBuild[]][],
+      git: [] as [string[], string][],
+    };
+    const fake: GearRecoDeps = {
+      upsert: async (id, builds) => {
+        calls.upsert.push([id, builds]);
+        return over.errors ?? [];
+      },
+      commitAndPush: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  it('succès : UN commit, le seul fichier des recos, le message au nom du perso', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco(who.id, [valid], fake);
+
+    expect(out).toMatchObject({ ok: true, issues: [], written: true });
+    expect(calls.upsert).toEqual([[who.id, [valid]]]);
+    expect(calls.git).toEqual([[['data/curated/gear-reco.json'], `chore(gear-reco): ${who.name}`]]);
+    expect(out.log.at(-1)).toBe('git : fait');
+  });
+
+  it('erreurs de validation du store : AUCUN commit, et l’erreur est située', async () => {
+    const { calls, fake } = deps({
+      errors: [`gearReco[${who.id}][0].weapons[0].id — attendu string, reçu number`],
+    });
+    const out = await saveGearReco(who.id, [valid], fake);
+
+    expect(out.ok).toBe(false);
+    expect(out.written).toBe(false);
+    expect(calls.git).toEqual([]);
+    expect(out.issues).toEqual([
+      { build: 0, slot: 'weapons', index: 0, message: 'attendu string, reçu number' },
+    ]);
+    expect(out.log).toEqual(['REFUSÉ — build 1 « Test » · armes 1 : attendu string, reçu number']);
+  });
+
+  it('forme invalide : refusée avant le store', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco(who.id, [{ name: 3 } as unknown as GearBuild], fake);
+
+    expect(out.ok).toBe(false);
+    expect(out.issues).toMatchObject([{ build: 0, slot: 'name' }]);
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('tag inconnu dans une note : refus AVANT écriture', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco(
+      who.id,
+      [valid, { ...valid, name: 'PvP', note: { en: 'Use {I-T/No Such Charm}.' } }],
+      fake,
+    );
+
+    expect(out.ok).toBe(false);
+    expect(calls).toEqual({ upsert: [], git: [] });
+    expect(out.issues).toMatchObject([{ build: 1, slot: 'note' }]);
+    expect(out.log[0]).toContain('build 2 « PvP » · note');
+    expect(out.log[0]).toContain('{I-T/No Such Charm}');
+  });
+
+  it('pièce inconnue : refus avant écriture', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco(who.id, [{ ...valid, weapons: [{ id: '' }] }], fake);
+
+    expect(out.ok).toBe(false);
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('perso inconnu : rien n’est écrit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco('ghost', [valid], fake);
+
+    expect(out.ok).toBe(false);
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('liste vide : le store reçoit `[]` (il retire la clé), puis le commit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveGearReco(who.id, [], fake);
+
+    expect(out.ok).toBe(true);
+    expect(calls.upsert).toEqual([[who.id, []]]);
+    expect(calls.git).toHaveLength(1);
+    expect(out.log[0]).toContain('recos retirées');
+  });
+
+  it('push refusé : `written` dit que le disque porte déjà les builds', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git push a échoué'] } });
+    const out = await saveGearReco(who.id, [valid], fake);
+
+    expect(out).toMatchObject({ ok: false, written: true, issues: [] });
+    expect(out.log.at(-1)).toBe('git push a échoué');
   });
 });

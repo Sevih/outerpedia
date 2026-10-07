@@ -2,11 +2,11 @@
  * quick — le petit outil de tous les jours (`pnpm quick`, ou l'icône du bureau).
  *
  * Un serveur HTTP local de quelques routes et UNE page : mettre à jour un code
- * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, écrire un
- * message Discord que le bot poste. Rien d'autre. Le panneau admin
- * complet reste la référence pour tout le reste — il exige `pnpm dev`, donc un
- * `clean:all` et un refresh complet des données du jeu, ce qui n'a aucun sens
- * pour changer quatre lignes de JSON.
+ * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, éditer les
+ * recos d'équipement d'un perso, écrire un message Discord que le bot poste.
+ * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
+ * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
+ * du jeu, ce qui n'a aucun sens pour changer quatre lignes de JSON.
  *
  * PAS de Next, pas de build, pas de dépendance ajoutée : `node:http` sert une
  * page statique et quelques JSON, la logique vit dans `actions.ts` qui rappelle
@@ -28,13 +28,16 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
+  GEAR_RECO_DEPS,
   addComics,
   addVideo,
   currentCoupons,
+  gearRecoState,
   parseTarget,
   rankState,
   rewardOptions,
   saveCouponList,
+  saveGearReco,
   saveRanks,
   searchRewards,
   searchVideos,
@@ -71,6 +74,7 @@ import { COMIC_LANGS } from '@datagen/generators/comics';
 import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
+import type { GearBuild } from '@contracts';
 
 // Les stores lisent `process.env` (écrits pour Next, qui charge .env.local seul).
 for (const [k, v] of Object.entries(loadEnvLocal())) process.env[k] ??= v;
@@ -344,6 +348,23 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/ranks') {
     const { changes } = await body<{ changes: RankChange[] }>(req);
     await stream(res, (report) => saveRanks(changes, report));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/gear-reco/state') {
+    // Lu du disque à chaque appel, comme les rangs : roster, presets et listes
+    // des sélecteurs, plus les builds du perso de `?id=` quand il est donné.
+    const id = url.searchParams.get('id') ?? undefined;
+    const state = gearRecoState(id);
+    if (id !== undefined && !state.roster.some((c) => c.id === id))
+      return json(res, { error: `perso inconnu : ${id}` }, 404);
+    json(res, state);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/gear-reco') {
+    const { id, builds } = await body<{ id: string; builds: GearBuild[] }>(req);
+    await stream(res, (report) => saveGearReco(String(id ?? ''), builds, GEAR_RECO_DEPS, report));
     return;
   }
 

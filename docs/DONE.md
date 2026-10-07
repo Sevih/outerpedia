@@ -5,6 +5,93 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-07
+
+- **`pnpm quick` : un onglet « Gear reco » pour éditer les recos d'équipement
+  d'un perso et les publier** (lot C4, demande Sevih du 07/10). Les recos
+  (`data/curated/gear-reco.json`) ne s'éditaient que dans l'admin, qui écrit
+  le fichier sans le committer : Sevih finissait au terminal (`d31459ea`).
+  L'onglet, placé après « Rangs », fait les deux. Un sélecteur de perso
+  (recherche par nom, case « avec recos », nombre de builds en pastille), puis
+  une carte par build : nom, armes et amulettes (menu des pièces de la classe
+  du perso, la pièce déjà posée y reste même hors classe ; stats principales
+  en puces tirées du pool de CETTE pièce, plusieurs possibles comme
+  « PEN%/CHD », une stat hors pool en rouge), talismans (un preset ou des
+  pièces une à une), sets (des combos, chacun un preset ou des paires set +
+  2p/4p), substats (un preset ou un texte libre), note en / fr / es et, repliées,
+  jp / kr / zh. Ajouter, dupliquer, supprimer, monter, descendre un build ;
+  ajouter, retirer une pièce, une paire, un combo. Rien ne s'écrit à la saisie :
+  la carte modifiée prend un liseré ambre et sa pastille (« modifié »,
+  « nouveau »), le champ ou le slot touché aussi, la barre collée en haut compte
+  les changements (builds ajoutés, modifiés, supprimés, et l'ordre pour un) et
+  les erreurs ; « Annuler » relit le disque. Les erreurs se posent sur leur
+  build et leur pièce (« Amulettes 3 : pièce non choisie », menu cerclé de
+  rouge) et rien ne part tant qu'il en reste. Quitter l'onglet, changer de
+  perso ou recharger la page avec des changements en attente demande
+  confirmation ; vider tous les builds d'un perso qui en avait aussi (« Supprimer
+  TOUTES les recos de … »). Aucune tuile : l'admin reste la surface de rendu.
+  Le comment. `GET /api/gear-reco/state` (`gearRecoState`, `actions.ts`) rend
+  le roster, les presets en lecture seule, les listes de `gearSelectOptions`
+  sans les icônes, et avec `?id=` les builds du perso DEUX fois : en pièces
+  (`expandBuild`) et tels que le disque les porte. La page a besoin des deux :
+  `$mrs` et `$elemcritAP` ont le même contenu (`a2p2` et `p2a2` aussi), et
+  `collapseBuild` rend le premier trouvé — renvoyer des pièces changeait donc
+  `$mrs` en `$elemcritAP` sur les trois builds de Rin au premier
+  enregistrement. Un slot resté sur son preset repart sous son `$slug` ; il ne
+  redevient des pièces que réglé à la pièce, et la page dit alors sous quel
+  preset le store le repliera. Un build intact repart à l'octet près, clés
+  dans l'ordre du disque (quatre ordres coexistent dans le fichier).
+  `POST /api/gear-reco` `{ id, builds }` passe par `saveGearReco(id, builds,
+deps, report)`, en NDJSON : forme (`validateGearBuilds`), puis
+  `checkGearBuilds` — références (un id vide ou inconnu et un `$preset`
+  inexistant sont des chaînes valides pour le schéma), tags inline par
+  `checkText` comme `tag-control.ts`, et parité des balises d'une note écrite
+  dans les six langues, la règle de `inline-tag-parity.test.ts` que les champs
+  jp / kr / zh de l'onglet peuvent enfreindre —, puis `upsertGearReco`, puis
+  `commitAndPush(['data/curated/gear-reco.json'], 'chore(gear-reco): <nom>')`.
+  Une erreur n'écrit ni ne committe rien ; elle revient située (build, slot,
+  rang) dans le journal et sur la carte. Les deux écritures sont injectées
+  (`GEAR_RECO_DEPS` pour la route).
+  Vérification : `pnpm typecheck` (`tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`, code 0),
+  `pnpm lint` (`eslint`, code 0), `pnpm test` (`Test Files 196 passed (196)`,
+  `Tests 2746 passed (2746)`). Seize tests dans `actions.test.ts`, écritures
+  factices, aucun n'écrit dans `data/curated/` ni ne lance git : erreurs du
+  store → aucun commit ; succès → le seul chemin et le message attendus ; tag
+  inconnu, pièce vide, forme invalide, perso inconnu → refus avant écriture ;
+  liste vide ; push refusé ; aucun des 265 builds du fichier n'est refusé par
+  le contrôle ; déplier puis replier trois builds réels rend les mêmes pièces
+  (choisis par leur forme, pas à des coordonnées figées : le fichier bouge à
+  chaque enregistrement).
+  Ce qui a été joué. Quick lancé par `DISCORD_BOT_TOKEN= DEV_PEERS=
+QUICK_PORT=4799 pnpm quick --no-open`, puis arrêté : la page et
+  `/api/gear-reco/state` lus par `curl` (129 persos, 95 avec recos, 265 builds ;
+  `?id=ghost` → 404), plus un POST d'origine étrangère vers une route qui
+  n'existe pas (403). `POST /api/gear-reco` n'a JAMAIS été appelé. La page
+  elle-même a tourné hors du dépôt, dans happy-dom, sur les états capturés,
+  avec un `fetch` factice qui note les POST sans joindre de serveur : les 129
+  persos chargés un à un (265 builds rendus à l'octet près, zéro changement,
+  zéro erreur), puis une soixantaine de gestes sur Rin — chaque bouton, les
+  confirmations, un refus du serveur posé sur sa pièce, la relecture après
+  écriture. Le corps du POST capturé, donné au vrai `saveGearReco` avec des
+  écritures factices, passe ; replié par `collapseBuild`, les builds non
+  touchés ressortent identiques au disque. Deux captures de Firefox sans tête
+  (1280 et 400 px) sur une copie statique à `fetch` factice : la grille tient
+  sur une colonne au téléphone.
+  Laissé : aucun enregistrement réel, ni aucun navigateur avec un vrai clic —
+  premier essai par Sevih. Pas de garde de concurrence, à la différence des
+  rangs : la liste envoyée remplace celle du disque, comme dans l'admin, et la
+  page relit le disque à chaque perso choisi. Le store replie de lui-même un
+  texte de substats égal à un preset : enregistrer Eliza (`2000035`) écrira
+  `$sdps` sur ses deux builds, ce que la page annonce. Signalé, hors
+  périmètre : Bloody Edge (`631`) porte « ATK% » sur ces deux builds alors que
+  son pool ne donne que HP% ; les presets en double (`mrs` / `elemcritAP`,
+  `a2p2` / `p2a2`) font que l'admin, lui, change le slug au save ;
+  `CLAUDE.md` (« Cinq gestes ») et le `Comment=` de `install-launcher.ts`
+  comptent un geste de moins. Seul écart visible ailleurs que dans l'onglet :
+  `nav` défile en largeur sur écran étroit, le sixième onglet sortait de la
+  page à 400 px.
+
 ## 2026-10-06
 
 - **Hotfix du soir, resVersion 1.11.402 — ressources seulement, premier
