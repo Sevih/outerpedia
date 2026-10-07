@@ -7,6 +7,21 @@
 
 ## 2026-10-07
 
+- **Relecture A29** (Fable, 07/10) : `6d102073` validé — plus aucun lot
+  ouvert, le second retour de Sevih sur Gear reco est soldé (C8, C9, A29).
+  Périmètre attendu (`ui/gear-view.mjs`, `tabs/gear.css`, `actions.test.ts`,
+  une phrase de `STYLE.md`, DONE, TODO), entrée DONE complète, trois écarts
+  acceptés (barre bornée à 336 px, analyse lue dans le HTML par les tests,
+  phrase de STYLE.md) ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur
+  HEAD (198 fichiers, 2 821 tests). Contrôle indépendant : `substatBarHtml`
+  appelé par `node` — `ATK>CHC=CHD>SPD` → 6, 5, 5, 4 segments pleins sur
+  six ; `SPD>>HP` → 6 et 4 ; `A>B>C>D>E>F>G` → 6, 5, 4, 3, 2, 1, 1 ; les
+  stats connues de `statIcons` portent leur icône. Capture du banc sur un
+  quick isolé (:4835, aucun enregistrement ; scratchpad `a29-shots/`) :
+  Demiurge Drakhan, build Speed — sous « Substat priority », six lignes
+  SPD, HP, CHC, CHD, DMG UP%, DEF avec leur icône et 6 à 1 segments jaunes,
+  le reste de l'aperçu inchangé. Pour Sevih : comparer à la fiche d'un perso
+  sur le site.
 - **`pnpm quick`, Gear reco : la priorité de substats de l'aperçu en barre à
   six segments, comme la fiche perso et l'admin** (lot A29, retour de Sevih
   du 07/10 sur l'aperçu de C9 : « le preview des substats ne marche pas comme
