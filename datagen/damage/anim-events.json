@@ -22247,8 +22247,8 @@
     "2010124_Battle_Stand"
    ],
    "IsStun": [
-    "2010124_Battle_Run",
-    "2010124_Battle_Stand"
+    "2010124_Battle_Stand",
+    "2010124_Hit_Stun_Loop"
    ],
    "IsTurn": [
     "2010124_Battle_Stand",
