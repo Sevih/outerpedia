@@ -41,6 +41,10 @@
     <button class="btn primary" id="g-save" disabled>Enregistrer</button>
   </div>
 
+  <!-- Un onglet par build (posés par `gTabs`) ; `#g-list` ne porte que la
+       carte du build montré. -->
+  <div class="g-tabs" id="g-tabs" role="tablist" aria-label="Builds du perso" hidden></div>
+
   <div id="g-list"></div>
 
   <!-- Le picker : UNE modale pour le perso, les armes ou les amulettes, les

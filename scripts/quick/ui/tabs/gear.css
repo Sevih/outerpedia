@@ -1,8 +1,9 @@
-/* Onglet « Gear reco » : le perso choisi, la savebar, un build par carte (slots
-   sur deux colonnes, la note dessous) et LE picker, une modale pour le perso,
-   les pièces, les talismans et les sets. Les composants viennent de
-   `quick.css` ; ce qui suit est propre à l'onglet (cf. `STYLE.md`). Bleu
-   accent = modifié ou choisi, rouge = refusé, ambre = preset. */
+/* Onglet « Gear reco » : le perso choisi, la savebar, un onglet par build et
+   la carte de celui qui est montré (slots sur deux colonnes, la note dessous),
+   et LE picker, une modale pour le perso, les pièces, les talismans et les
+   sets. Les composants viennent de `quick.css` ; ce qui suit est propre à
+   l'onglet (cf. `STYLE.md`). Bleu accent = modifié ou choisi, rouge = refusé,
+   ambre = preset. */
 
 /* ------------------------------------------------------- la tuile d'item
    Celle de /equipment (`EquipmentIcon.tsx`), bâtie par `gear-view.mjs` : le
@@ -157,6 +158,34 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* ------------------------------------------------- les onglets de builds
+   Un onglet par build, entre la savebar et la carte du build montré : le
+   `.tab` des sections de la coquille (`quick.css` — filet accent sous l'actif,
+   texte atténué ailleurs), en 32 px. Le point d'un onglet : accent, build
+   nouveau ou modifié, pas encore enregistré ; rouge (`.dot.ko`), en erreur. */
+#tab-gear .g-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line-subtle);
+  overflow-x: auto;
+}
+#tab-gear .g-tabs[hidden] {
+  display: none;
+}
+#tab-gear .g-tabs .tab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+/* La rangée défile : l'anneau de focus reste dans l'onglet. */
+#tab-gear .g-tabs .tab:focus-visible {
+  outline-offset: -2px;
+}
+#tab-gear .g-tabs .dot.edit {
+  background: var(--accent);
 }
 
 /* ---------------------------------------------------------------- un build */

@@ -7,6 +7,118 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : les builds d'un perso en onglets, un seul
+  montré à la fois, comme sur la fiche perso** (lot B32, troisième retour de
+  Sevih du 07/10 : « plutôt que de mettre les différents builds les uns en
+  dessous des autres, utiliser des tabs comme sur les fiches personnages »).
+  Le pourquoi. Les cartes s'empilaient dans `#g-list` : trois builds font
+  trois écrans, chacun avec son aperçu, et la savebar collante était le seul
+  repère. Le quoi. (1) LA RANGÉE (`#g-tabs`, `role="tablist"`, entre la
+  savebar et la carte ; `tabs/gear.html`) : un `button[role="tab"]` par build
+  dans leur ordre, son nom ou « Build n », `aria-selected`,
+  `aria-controls="g-list"` — `#g-list` devient le `tabpanel`, étiqueté par
+  l'onglet actif —, `tabindex` 0 sur l'actif et -1 ailleurs. Un POINT dit ce
+  qu'un onglet caché ne montre pas : rouge dès que `gIssues(b)` rend une
+  erreur (celles de la page et les refus du serveur `gServer`), sinon accent
+  quand `gStatus(b)` dit « nouveau » ou « modifié » (le critère du compteur
+  de la savebar, d'après `gBase`) ; il porte son texte (`aria-label` et
+  `title` : « 1 erreur », « modifié, pas encore enregistré »). Sans build :
+  pas de rangée, le `.empty` d'avant. Le style est le `.tab` des sections de
+  la coquille, RÉUTILISÉ tel quel (`quick.css` : filet accent sous l'actif,
+  texte atténué, survol, anneau de focus) et ramené à 32 px par trois règles
+  `.g-tabs` de `tabs/gear.css` ; le point est le `.dot` de `quick.css`
+  (`.dot.ko` rouge, `.dot.edit` accent ajouté sous `.g-tabs`). (2) UNE carte
+  (`tabs/gear.js`) : `gActive`, un index en mémoire de page ; `gRender` ne
+  dessine que `gBuilds[gActive]` (borné), `gTabs` la rangée ; clic, ← →
+  (les bouts se rejoignent), Début, Fin passent par `gShow`, qui montre
+  aussitôt et rend le focus à l'onglet actif. Les gestes suivent : « ＋ build »
+  active le nouveau (focus dans son nom, comme avant), « Dupliquer » la copie
+  posée après l'original, « Monter » / « Descendre » emmènent l'onglet,
+  « Supprimer » active le voisin précédent ou le premier, « Annuler » garde
+  l'index borné (`gLoad(id, at)`), un autre perso revient à 0. La frappe dans
+  le nom réécrit la rangée (le champ garde le curseur). Le badge « 1 / 3 » de
+  la tête de carte part. « Traduire » traduit toujours TOUS les builds ; son
+  erreur et le compteur de caractères ne s'écrivent que dans la carte en
+  place. Audit des appelants de `gCardEl` (il rend `null` pour un build
+  caché) : `gRedraw` d'un build caché ne touche que la rangée, la savebar et
+  l'aperçu gardé ; la boucle de fin de « Traduire » ne suppose plus de carte ;
+  `gPvPaint` et les `opener` des pickers toléraient déjà ; `oninput`, la
+  bascule de stat et « ＋ build » ne visent que la carte en place. (3)
+  L'APERÇU : rien ne change à la requête (UNE pour tous les builds, seulement
+  si la charge a changé) ; la réponse était déjà gardée par clé (`gPv.builds`),
+  la carte montrée s'y sert — changer d'onglet ne demande rien au serveur. Le
+  repli de l'aperçu reste par build (`gPv.shut`) ; celui des « Traductions »,
+  qui se relisait dans le DOM de toutes les cartes, passe par un `Set` par
+  clé (`gTrOpen`, tenu par `gTrKeep` avant chaque redessin) — une note
+  traduite pendant que son build est caché s'ouvrira à son onglet, « à
+  relire ». (4) LE HASH : `#gear/<id>/build/<n>` (à partir de 1, borné),
+  combinable en `#gear/<id>/build/<n>/picker/<slot>` ; le picker du hash
+  s'ouvre sur le build MONTRÉ, plus sur `gBuilds[0]`. La page n'écrit pas le
+  hash. `scripts/quick/ui/STYLE.md` : le croquis dit la rangée, le clavier,
+  les gestes et le hash. Vérification. `pnpm typecheck` : `$ tsc --noEmit &&
+tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+scripts/tsconfig.json`, code 0 ; `pnpm lint` : `$ eslint`, code 0 ;
+  `pnpm test` : `Test Files 198 passed (198)`, `Tests 2821 passed (2821)`
+  (aucun test ajouté : la page n'a pas de module pur nouveau). La logique,
+  jouée dans happy-dom hors du dépôt derrière un relais en lecture seule
+  (seuls les `GET` et le `POST` d'aperçu atteignent quick ; l'enregistrement
+  et la traduction sont capturés et reçoivent une réponse factice, JAMAIS
+  transmis) : 72 contrôles, tous passent — une seule carte au chargement,
+  trois onglets aux noms des builds d'Aer, rôles et `aria-*`, UNE requête
+  d'aperçu ; l'onglet 2 cliqué montre le build 2 depuis la réponse gardée,
+  sans requête ; → ← Début Fin avec le focus ; « ＋ build » (« Build 4 »,
+  point rouge du nom vide, puis le nom tapé dans l'onglet) ; « Annuler » 4e →
+  3e onglet, points effacés ; « Dupliquer », « Descendre », « Monter »,
+  « Supprimer » ; un nom changé sur le build 1 puis l'onglet 2 → point accent
+  sur l'onglet 1, compteur identique, pas de requête ; une stat retirée →
+  point rouge, encore là depuis l'onglet 3 ; repli de l'aperçu et des
+  traductions tenus par build ; le picker du build 1 validé alors que
+  l'onglet 2 est montré (le cas `gRedraw` d'un build caché) ; « Traduire »
+  depuis l'onglet 2 d'une note du build 1, refus puis succès ; un refus du
+  serveur à l'enregistrement sur le build 3 → point rouge sur son onglet ;
+  autre perso → premier onglet ; tout supprimer → plus de rangée ;
+  `#gear/2000055/build/2/picker/weapons` → picker d'armes sur le build 2
+  (ses armes cochées, l'arme validée s'y pose), `/build/3`, `/build/9`
+  (borné), `/build/0`, `/picker/talismans` seul, `#gear` seul. Deux
+  aménagements de la sonde, pas de la page : happy-dom n'a pas
+  `structuredClone` (celui de node lui est prêté) et garde le saut de ligne
+  après `<textarea>`. Le banc, sur un quick isolé (`DISCORD_BOT_TOKEN=
+DEV_PEERS= QUICK_PORT=4871 pnpm quick --no-open`, arrêté ensuite, AUCUN
+  enregistrement, `gear-reco.json` intact), captures regardées :
+  `/tmp/quick-shots/b32/gear-build-1.png` (`--hash gear/2000055`, 1440 × 1900) et `/tmp/quick-shots/b32/gear-build-2.png` (`--hash
+gear/2000055/build/2`) — la rangée Speed | High Crit | Penetration sous la
+  savebar, le filet accent sous l'onglet du hash, une seule carte et son
+  aperçu ; et, par un relais jetable qui clique dans la page (lecture seule),
+  `/tmp/quick-shots/b32/etats-points.png` et `etats-points-1024.png` : point
+  accent sur « Speed (PvP) » renommé, points rouges sur « High Crit » (stat
+  retirée) et « Build 4 » (nom vide), savebar « 3 changements · 2 erreurs ».
+  Rien d'autre ne bouge à l'écran, comparé sur le même quick, les trois
+  fichiers de l'onglet remisés le temps de la capture d'avant (`git stash
+push -- <les trois>` puis `pop`, le working tree ne portait que ce lot) :
+  `/tmp/quick-shots/b32/avant-1000/gear.png` et `apres-1000/gear.png`
+  (1440 × 1000, les deux pages défilent) — en-tête, texte d'aide, carte du
+  perso et savebar identiques AU PIXEL (`compare -metric AE` des 390
+  premières lignes : 0) ; la carte du build 1, recalée des 51 px de la rangée
+  (32 px, son filet, 18 px d'écart), ne diffère au-delà de 2 % d'intensité
+  que dans une boîte de 40 × 20 px, le badge « 1 / 3 » retiré (le reste :
+  13 572 px sous ce seuil, du lissage). À 1440 × 1900 la page d'un seul build
+  ne défile plus : sans barre de défilement, elle gagne 12 px de large (le
+  texte d'aide repasse sur deux lignes) — attendu. Écarts et choix, à relire.
+  (a) « Supprimer (sa confirmation d'aujourd'hui) » : il n'y en a PAS
+  aujourd'hui, et je n'en ai pas ajouté (« Annuler » rend le build) — au
+  TODO, à trancher. (b) Un build seulement DÉPLACÉ n'a pas de point : l'ordre
+  compte une fois dans la savebar, pour le perso, pas pour un build. (c) Un
+  seul point par onglet, le rouge l'emporte (un build en erreur est presque
+  toujours aussi modifié). (d) Les flèches bouclent d'un bout à l'autre
+  (l'usage des `tablist`) et l'onglet est montré dès qu'il a le focus. (e)
+  Après un « Enregistrer » qui écrit, on reste sur l'onglet en place (le
+  même `gLoad(id, gActive)` qu'« Annuler » ; non joué, l'écriture n'étant
+  jamais transmise). (f) `aria-controls` vise `#g-list`, panneau unique,
+  plutôt qu'un id par carte : les cartes cachées n'existent pas. Laissé, hors
+  périmètre : après « Monter » / « Descendre » le bouton cliqué perd le focus
+  (la carte est redessinée, comme avant) ; l'anneau de focus des onglets
+  n'est pas photographié (le banc ne tape pas au clavier) ; la rangée n'est
+  pas collante, la savebar seule le reste. Pour Sevih : la ligne du TODO.
 - **Relecture A29** (Fable, 07/10) : `6d102073` validé — plus aucun lot
   ouvert, le second retour de Sevih sur Gear reco est soldé (C8, C9, A29).
   Périmètre attendu (`ui/gear-view.mjs`, `tabs/gear.css`, `actions.test.ts`,

@@ -20,10 +20,12 @@ let gear = {
 };
 let gChar = null; // le perso choisi (ligne du roster)
 let gBuilds = []; // ses builds, dans le modèle de la page
+let gActive = 0; // le build montré (son onglet) : un index, le temps de la page
 let gBase = new Map(); // clé de build → ce qui partirait sans y toucher
 let gOrder = []; // les clés dans l'ordre du disque
 let gServer = []; // erreurs du dernier enregistrement, par clé de build
 let gTr = { busy: false, error: '' }; // « Traduire » : en cours, son dernier refus
+const gTrOpen = new Set(); // les « Traductions » dépliées, par clé de build
 let gSeq = 0;
 // L'aperçu : ce que la fiche perso fera des builds, résolu par le serveur
 // (`POST /api/gear-reco/preview`) et rendu par `previewHtml`. UNE requête pour
@@ -506,7 +508,7 @@ function gCard(b) {
   const note = `<div class="${slotClass('note', true)}"><h3>${G_SLOTS.note}<span class="badge off">${def}</span>${iss('note')}</h3>
     ${area(def, 'aria-label="Note, en anglais"')}
     <div class="g-tr"><button class="btn ghost${gTr.busy ? ' busy' : ''}" data-act="translate"${gTr.busy ? ' disabled' : ''} title="Traduit les notes de tous les builds du perso : les langues qui manquent, ou toutes quand l’anglais a changé (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge error" data-tr-error>${esc(gTr.error)}</span><span class="lbl g-push" data-len>${gLen(b)}</span></div>
-    <details>
+    <details${gTrOpen.has(b.k) ? ' open' : ''}>
       <summary><span class="btn ghost sm">Traductions (${gTrLangs().length})</span><span class="badge warn" data-stale>${gStale(b) ? 'à retraduire' : ''}</span><span class="lbl" data-tally>${gTally(b)}</span></summary>
       <div class="g-notes">${gTrLangs()
         .map(
@@ -520,7 +522,6 @@ function gCard(b) {
     <div class="card-head">
       <span class="lbl">Build</span>
       <input data-t="name" class="g-name ${cls('name', undefined, badSlot('name'))}" value="${esc(b.name)}" placeholder="Nom du build (Speed, PvP…)" aria-label="Nom du build" />
-      <span class="badge off">${at + 1} / ${gBuilds.length}</span>
       <span class="badge edit" data-badge>${gStatus(b)}</span>
       ${iss('name')}${iss('*')}
       <div class="g-tools">
@@ -552,8 +553,8 @@ function gPvBody(b) {
 
 /**
  * L'aperçu d'un build, en bas de sa carte : dépliable, ouvert d'office. Une
- * carte redessinée garde le rendu précédent — atténué tant qu'une requête
- * court (`.busy`).
+ * carte redessinée — ou montrée par son onglet — reprend le dernier rendu
+ * reçu pour son build, atténué tant qu'une requête court (`.busy`).
  */
 function gPvBlock(b) {
   const open = !gPv.shut.has(b.k);
@@ -562,7 +563,7 @@ function gPvBlock(b) {
   }" data-pv${open ? '' : ' hidden'}>${gPvBody(b)}</div></div>`;
 }
 
-/** Les aperçus des cartes en place : leur atténuation, et `redraw` leur contenu. */
+/** L'aperçu de la carte en place (le build montré) : son atténuation, et `redraw` son contenu. */
 function gPvPaint(redraw) {
   for (const b of gBuilds) {
     const at = gCardEl(b)?.querySelector('[data-pv]');
@@ -574,10 +575,11 @@ function gPvPaint(redraw) {
 
 /**
  * Demande l'aperçu de TOUS les builds du perso, tels qu'ils partiraient à
- * l'enregistrement. Pendant la requête les blocs gardent leur rendu, atténué ;
- * une réponse arrivée après une requête plus récente est ignorée ; un refus
- * (400) ou un échec réseau s'affiche dans les blocs, et se retente au prochain
- * changement.
+ * l'enregistrement — montrés ou non : la réponse est gardée par clé de build,
+ * et changer d'onglet redessine depuis elle, sans requête. Pendant la requête
+ * le bloc garde son rendu, atténué ; une réponse arrivée après une requête plus
+ * récente est ignorée ; un refus (400) ou un échec réseau s'affiche dans le
+ * bloc, et se retente au prochain changement.
  */
 async function gPvFetch() {
   if (!gChar || !gBuilds.length) return;
@@ -669,33 +671,111 @@ function gBar() {
   $('g-save').disabled = $('g-reset').disabled = !n;
 }
 
+/** La carte d'un build — `null` s'il n'est pas le build montré. */
 const gCardEl = (b) => $('g-list').querySelector(`[data-k="${b.k}"]`);
 
-/** Toute la liste : un build ajouté, retiré ou déplacé, ou un autre perso. */
+/** Retient, avant de redessiner ou de remplacer la carte en place, si ses « Traductions » sont dépliées. */
+function gTrKeep() {
+  const card = $('g-list').querySelector('[data-k]');
+  if (!card) return;
+  if (card.querySelector('details').open) gTrOpen.add(card.dataset.k);
+  else gTrOpen.delete(card.dataset.k);
+}
+
+/**
+ * La rangée d'onglets : un par build, dans leur ordre — son nom, ou « Build n ».
+ * Un point dit ce qu'un onglet caché ne montre pas : accent, le build est
+ * nouveau ou modifié et pas encore enregistré (ce que compte la savebar) ;
+ * rouge, il porte une erreur. Sans build, pas de rangée.
+ */
+function gTabs() {
+  const row = $('g-tabs');
+  const list = $('g-list');
+  // La rangée est réécrite : l'onglet actif reprend le focus qu'elle avait.
+  const focused = row.contains(document.activeElement);
+  row.hidden = !gChar || !gBuilds.length;
+  row.innerHTML = row.hidden
+    ? ''
+    : gBuilds
+        .map((b, i) => {
+          const bad = gIssues(b).length;
+          const dot = bad
+            ? ['ko', gPlural(bad, 'erreur')]
+            : gStatus(b)
+              ? ['edit', `${gStatus(b)}, pas encore enregistré`]
+              : null;
+          return `<button class="tab" type="button" role="tab" id="${b.k}-tab" data-i="${i}" aria-selected="${i === gActive}" aria-controls="g-list" tabindex="${i === gActive ? 0 : -1}">${esc(
+            b.name || `Build ${i + 1}`,
+          )}${dot ? `<span class="dot ${dot[0]}" role="img" aria-label="${dot[1]}" title="${dot[1]}"></span>` : ''}</button>`;
+        })
+        .join('');
+  if (row.hidden) {
+    list.removeAttribute('role');
+    list.removeAttribute('aria-labelledby');
+  } else {
+    list.setAttribute('role', 'tabpanel');
+    list.setAttribute('aria-labelledby', `${gBuilds[gActive].k}-tab`);
+  }
+  if (focused) row.children[gActive]?.focus();
+}
+
+/**
+ * La rangée d'onglets et LA carte, celle du build montré : un build ajouté,
+ * retiré ou déplacé, un autre onglet, un autre perso.
+ */
 function gRender() {
-  const open = [...$('g-list').querySelectorAll('details[open]')].map(
-    (d) => d.closest('[data-k]').dataset.k,
-  );
+  gTrKeep();
+  gActive = Math.max(0, Math.min(gActive, gBuilds.length - 1));
+  const b = gBuilds[gActive];
   $('g-list').innerHTML = !gChar
     ? ''
-    : gBuilds.map(gCard).join('') ||
-      '<div class="empty">Aucun build pour ce perso : « ＋ build » en ajoute un.</div>';
-  for (const k of open) {
-    const d = $('g-list').querySelector(`[data-k="${k}"] details`);
-    if (d) d.open = true;
-  }
+    : b
+      ? gCard(b)
+      : '<div class="empty">Aucun build pour ce perso : « ＋ build » en ajoute un.</div>';
+  gTabs();
   gBar();
   gPvAsk();
 }
 
-/** UNE carte : un menu a changé, une pièce est ajoutée ou retirée. */
+/**
+ * La carte d'un build : un menu a changé, une pièce est ajoutée ou retirée.
+ * Un build qui n'est pas montré n'a pas de carte : seuls sa rangée d'onglets
+ * et la savebar suivent.
+ */
 function gRedraw(b) {
-  const open = gCardEl(b).querySelector('details').open;
-  gCardEl(b).outerHTML = gCard(b);
-  if (open) gCardEl(b).querySelector('details').open = true;
+  if (gCardEl(b)) {
+    gTrKeep();
+    gCardEl(b).outerHTML = gCard(b);
+  }
+  gTabs();
   gBar();
   gPvAsk();
 }
+
+/** Montre le build `i` : la carte change, pas les builds — l'aperçu ne repart pas. */
+function gShow(i) {
+  if (i === gActive || !gBuilds[i]) return;
+  gActive = i;
+  gRender();
+}
+$('g-tabs').onclick = (e) => {
+  const el = e.target.closest('[role="tab"]');
+  if (el) gShow(Number(el.dataset.i));
+};
+// Flèches, Début, Fin : l'onglet voisin (les bouts se rejoignent), le premier,
+// le dernier — montré aussitôt, et il prend le focus (`gTabs`).
+$('g-tabs').onkeydown = (e) => {
+  const n = gBuilds.length;
+  const to = {
+    ArrowLeft: (gActive + n - 1) % n,
+    ArrowRight: (gActive + 1) % n,
+    Home: 0,
+    End: n - 1,
+  }[e.key];
+  if (to === undefined) return;
+  e.preventDefault();
+  gShow(to);
+};
 
 const gOf = (el) => {
   const k = el?.closest('[data-k]')?.dataset.k;
@@ -752,6 +832,7 @@ $('g-list').oninput = (e) => {
     card.querySelector('[data-stale]').textContent = gStale(b) ? 'à retraduire' : '';
     card.querySelector('[data-tally]').textContent = gTally(b);
   }
+  gTabs();
   gBar();
   gPvAsk(G_PV_DELAY);
 };
@@ -816,8 +897,13 @@ async function gTranslate() {
   } finally {
     gTr.busy = false;
     gRender();
-    // Ce qui vient d'être traduit s'ouvre : c'est à relire.
-    for (const b of done) gCardEl(b).querySelector('details').open = true;
+    // Ce qui vient d'être traduit s'ouvre : c'est à relire — la carte en
+    // place aussitôt, les autres quand leur onglet les montrera.
+    for (const b of done) {
+      gTrOpen.add(b.k);
+      const d = gCardEl(b)?.querySelector('details');
+      if (d) d.open = true;
+    }
   }
 }
 
@@ -856,11 +942,15 @@ $('g-list').onclick = (e) => {
     const to = at + (act === 'up' ? -1 : 1);
     if (to < 0 || to >= gBuilds.length) return;
     [gBuilds[at], gBuilds[to]] = [gBuilds[to], gBuilds[at]];
+    // L'onglet suit son build.
+    gActive = to;
     return gRender();
   }
   if (act === 'del') {
     gBuilds.splice(at, 1);
     gTouched(b);
+    // Le voisin précédent prend la place, ou le premier.
+    gActive = Math.max(0, at - 1);
     return gRender();
   }
   if (act === 'dup') {
@@ -868,6 +958,7 @@ $('g-list').onclick = (e) => {
     copy.k = `g${++gSeq}`;
     if (copy.name) copy.name += ' (copie)';
     gBuilds.splice(at + 1, 0, copy);
+    gActive = at + 1;
     return gRender();
   }
 
@@ -896,8 +987,12 @@ $('g-list').onclick = (e) => {
       ?.focus();
 };
 
-/** Les builds d'un perso, relus du disque : c'est lui qui fait foi. */
-async function gLoad(id) {
+/**
+ * Les builds d'un perso, relus du disque : c'est lui qui fait foi. `at` : le
+ * build à montrer — le premier pour un autre perso, celui en place pour le même
+ * (« Annuler », un enregistrement), borné par `gRender`.
+ */
+async function gLoad(id, at = 0) {
   const s = await (await fetch(`/api/gear-reco/state?id=${encodeURIComponent(id)}`)).json();
   if (s.error) return log([s.error], false);
   gear = s;
@@ -914,6 +1009,8 @@ async function gLoad(id) {
   gTr.error = '';
   gPv.builds = new Map();
   gPv.shut.clear();
+  gTrOpen.clear();
+  gActive = at;
   gWho();
   gRender();
 }
@@ -1364,11 +1461,12 @@ $('g-pick').onclick = gOpenChar;
 
 /**
  * Le roster, les presets et les listes ; à côté, l'élément et la rareté de
- * chaque perso. `open` : le perso à ouvrir d'emblée (`#gear/<id>`) ; `picker` :
- * le picker à ouvrir sur lui (`#gear/<id>/picker/<slot>` — `char`, ou un slot
- * de son premier build : `weapons`, `amulets`, `talismans`, `sets`).
+ * chaque perso. `open` : le perso à ouvrir d'emblée (`#gear/<id>`) ; `build` :
+ * celui de ses builds à montrer, à partir de 1 (`#gear/<id>/build/<n>`) ;
+ * `picker` : le picker à ouvrir sur lui (`…/picker/<slot>` — `char`, ou un slot
+ * du build montré : `weapons`, `amulets`, `talismans`, `sets`).
  */
-async function loadGear(open, picker) {
+async function loadGear(open, build, picker) {
   const [s, ranks] = await Promise.all([
     fetch('/api/gear-reco/state').then((r) => r.json()),
     fetch('/api/ranks')
@@ -1383,20 +1481,22 @@ async function loadGear(open, picker) {
   gBar();
   gPvLangs();
   $('g-pick').disabled = false;
-  if (open && gear.roster.some((c) => c.id === open)) await gLoad(open);
+  if (open && gear.roster.some((c) => c.id === open)) await gLoad(open, build ? build - 1 : 0);
+  const b = gBuilds[gActive];
   if (picker === 'char') gOpenChar();
-  else if (gBuilds[0] && ['weapons', 'amulets', 'talismans', 'sets'].includes(picker))
-    gPickSlot(gBuilds[0], picker, gBuilds[0][picker]?.length ? 0 : -1);
+  else if (b && ['weapons', 'amulets', 'talismans', 'sets'].includes(picker))
+    gPickSlot(b, picker, b[picker]?.length ? 0 : -1);
 }
 
 $('g-add').onclick = () => {
   const b = gNewBuild();
   gBuilds.push(b);
+  gActive = gBuilds.length - 1;
   gRender();
   gCardEl(b).querySelector('[data-t="name"]').focus();
 };
 
-$('g-reset').onclick = () => gLoad(gChar.id);
+$('g-reset').onclick = () => gLoad(gChar.id, gActive);
 
 $('g-save').onclick = async () => {
   if (!gChar || !gearChanges()) return;
@@ -1420,7 +1520,7 @@ $('g-save').onclick = async () => {
     // Écrit (même si le push a échoué ensuite) : le disque fait foi, on le
     // relit. Refusé : rien n'a bougé, les builds restent en attente et les
     // erreurs du serveur se posent sur les leurs.
-    if (r.written) await gLoad(gChar.id);
+    if (r.written) await gLoad(gChar.id, gActive);
     else
       gServer = (r.issues ?? [])
         .filter((x) => x.build !== null && sent[x.build])
@@ -1434,10 +1534,12 @@ $('g-save').onclick = async () => {
 sections.register('gear', {
   init: () => {
     // `#gear/<id>` ouvre l'onglet sur ce perso (un lien, le banc de captures),
-    // `#gear/<id>/picker/<slot>` y ouvre en plus un picker (le banc ne clique
-    // pas). `lib.js` ne connaît que `#gear` : c'est le clic sur l'onglet qui
-    // l'ouvre.
-    const [, open, picker] = /^#gear\/([^/]+)(?:\/picker\/([a-z]+))?$/.exec(location.hash) ?? [];
+    // `#gear/<id>/build/<n>` sur son n-ième build, `…/picker/<slot>` y ouvre
+    // en plus un picker (le banc ne clique pas). Une entrée seulement : la
+    // page n'écrit pas le build montré dans l'adresse. `lib.js` ne connaît
+    // que `#gear` : c'est le clic sur l'onglet qui l'ouvre.
+    const [, open, build, picker] =
+      /^#gear\/([^/]+)(?:\/build\/(\d+))?(?:\/picker\/([a-z]+))?$/.exec(location.hash) ?? [];
     if (open) document.querySelector('#tabs [data-tab="gear"]')?.click();
     // Les icônes sont sous `imgBase`, connu avec `/api/state` : reposées alors.
     stateLoaded.then(() => {
@@ -1445,7 +1547,7 @@ sections.register('gear', {
       if (gChar) gRender();
       else gBar();
     });
-    return loadGear(open && decodeURIComponent(open), picker).catch((e) =>
+    return loadGear(open && decodeURIComponent(open), Number(build ?? 0), picker).catch((e) =>
       log([`Gear reco illisible : ${e}`], false),
     );
   },
