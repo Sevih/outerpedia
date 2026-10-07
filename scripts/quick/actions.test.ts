@@ -26,6 +26,11 @@
  * Et contrat de `itemTile` (`ui/gear-view.mjs`, idem) — la tuile d'item du même
  * onglet : le cadre de rareté, les étoiles, l'icône d'effet et celle de classe.
  *
+ * Et contrat de l'APERÇU du même onglet : les refus de `previewGearBuilds` et
+ * `previewHtml` (`ui/gear-view.mjs`), qui fait d'un build résolu ce que la fiche
+ * perso montrera. La résolution elle-même est dans `gear-preview.test.ts` : elle
+ * exige la garde `IS_DEV` de l'admin, fausse ici.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -45,6 +50,7 @@ import {
   gearRecoState,
   groupComics,
   planRankChanges,
+  previewGearBuilds,
   saveGearReco,
   translateNotes,
   type ComicsDeps,
@@ -57,7 +63,18 @@ import {
   type TranslateDeps,
 } from './actions';
 import { composeSetCombos, splitSetCombos } from './ui/gear-sets.mjs';
-import { gradeColor, itemName, itemTile, setGrid, setRow, shownPieces } from './ui/gear-view.mjs';
+import {
+  gameText,
+  gradeColor,
+  groupCombos,
+  itemName,
+  itemTile,
+  noteHtml,
+  previewHtml,
+  setGrid,
+  setRow,
+  shownPieces,
+} from './ui/gear-view.mjs';
 
 const DIANNE: CharacterCurated = {
   rank: 'S',
@@ -557,6 +574,32 @@ describe('recos du fichier — lues, jamais écrites', () => {
       expect(o.p4, o.label).toContain('proportional to missing Health');
     }
   });
+
+  it('l’état porte les icônes de stat : les puces de l’aperçu', () => {
+    expect(state.statIcons['ATK%']).toBe(state.statIcons.ATK);
+    for (const sprite of Object.values(state.statIcons)) expect(sprite).toMatch(/^CM_Stat_Icon_/);
+  });
+});
+
+describe('previewGearBuilds — les refus de l’aperçu', () => {
+  it('une forme fausse est RENDUE, jamais levée : la route en fait un 400', async () => {
+    for (const bad of [undefined, null, 'x', {}, [{}], [null], [{ name: 'x', weapons: 'y' }]]) {
+      const out = await previewGearBuilds(bad, 'en');
+      expect(out, JSON.stringify(bad)).toEqual({ error: expect.any(String) });
+    }
+    expect(await previewGearBuilds([{ weapons: [] }], 'en')).toEqual({
+      error: expect.stringMatching(/^build 1 · nom : /),
+    });
+    expect(await previewGearBuilds([{ name: 'x' }, { name: 'y', sets: 3 }], 'en')).toEqual({
+      error: expect.stringMatching(/^build 2 · sets : /),
+    });
+  });
+
+  it('coupé par la garde IS_DEV (ici, sous vitest) : une erreur, pas zéro build en silence', async () => {
+    expect(await previewGearBuilds([{ name: 'x' }], 'en')).toEqual({
+      error: expect.stringContaining('IS_DEV'),
+    });
+  });
 });
 
 describe('itemTile — la tuile d’item de gear-view', () => {
@@ -689,6 +732,268 @@ describe('itemTile — la tuile d’item de gear-view', () => {
     expect(setRow(env, undefined, { count: 2, idx: 0 })).toBe(
       `<span class="gv-row">${itemTile(env, undefined, 32)}</span>`,
     );
+  });
+});
+
+describe('previewHtml — l’aperçu d’un build de gear-view', () => {
+  const env = {
+    imgBase: 'https://img.test',
+    esc: (v: unknown) =>
+      String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'),
+  };
+  const count = (html: string, needle: string) => html.split(needle).length - 1;
+  const labels = {
+    weapon: 'Weapon',
+    amulet: 'Accessory',
+    talisman: 'Talisman',
+    set: 'Armor Set',
+    substatPrio: 'Substat Priority',
+    note: 'Notes',
+    piece2: '2 pieces',
+    piece4: '4 pieces',
+  };
+  const statIcons = { 'ATK%': 'CM_Stat_Icon_ATK', CHD: 'CM_Stat_Icon_CRITICAL_DMG' };
+  const empty = {
+    weapons: [],
+    amulets: [],
+    talismans: [],
+    sets: [],
+    setEffects: [],
+    noteSegments: [],
+  };
+  const set = (id: string, name: string, n: number) => ({
+    id,
+    name,
+    icon: `Enchant_${id}`,
+    pieceIcons: ['Helmet', 'Armor', 'Gloves', 'Shoes'],
+    count: n,
+  });
+
+  it('une balise morte (`unknown`) sort dans un élément rouge, son texte échappé', () => {
+    expect(noteHtml(env, [{ t: 'unknown', s: '{B/<nope>}' }])).toBe(
+      '<span class="pv-unknown">{B/&lt;nope>}</span>',
+    );
+    // Un type de segment que le module ne connaît pas : rouge aussi, jamais muet.
+    expect(noteHtml(env, [{ t: 'later' }])).toBe('<span class="pv-unknown">{later}</span>');
+  });
+
+  it('le texte tel quel, un `br` en `<br>`', () => {
+    expect(noteHtml(env, [{ t: 'text', s: 'a <b> & c' }, { t: 'br' }, { t: 'text', s: 'd' }])).toBe(
+      'a &lt;b> &amp; c<br>d',
+    );
+    expect(noteHtml(env, [])).toBe('');
+  });
+
+  it('un `item` : son cadre, son icône et son nom dans la classe du grade ; la desc en `title`', () => {
+    // Tel que le site le rend : avec le lien que l'aperçu ne pose pas.
+    const segment = {
+      t: 'item',
+      name: 'Surefire Greatsword',
+      iconSrc: '/images/equipment/TI_Equipment_Weapon_06.webp',
+      grade: 'unique',
+      color: 'text-item-legendary',
+      href: '/equipment/surefire-greatsword',
+      desc: 'Deals <color=#28d9ed>2%</color> more\\nto "one" target',
+    };
+    const html = noteHtml(env, [segment]);
+    expect(html.startsWith('<span class="pv-seg text-item-legendary" title="')).toBe(true);
+    expect(html).toContain('title="Deals 2% more\nto &quot;one&quot; target"');
+    expect(html).toContain('src="https://img.test/images/ui/bg/TI_Slot_Unique.webp"');
+    // Une adresse relative du site passe sous `imgBase`.
+    expect(html).toContain('src="https://img.test/images/equipment/TI_Equipment_Weapon_06.webp"');
+    expect(html).toContain('<span class="pv-u">Surefire Greatsword</span>');
+    // Rien de cliquable dans l'aperçu.
+    expect(html).not.toContain('href');
+    expect(html).not.toContain('<a');
+  });
+
+  it('`icon`, `effect`, `stat` : icône + libellé dans la couleur du site', () => {
+    const fire = noteHtml(env, [
+      { t: 'icon', label: 'Fire', color: 'text-fire', icon: 'https://cdn.test/f.webp' },
+    ]);
+    expect(fire).toBe(
+      '<span class="pv-seg text-fire"><img class="pv-ico" src="https://cdn.test/f.webp" alt="" width="18" height="18" />Fire</span>',
+    );
+    // Sans icône (un perso, un lien) : le libellé, souligné comme sur le site.
+    expect(noteHtml(env, [{ t: 'icon', label: 'Aer', color: 'text-buff', underline: true }])).toBe(
+      '<span class="pv-seg text-buff"><span class="pv-u">Aer</span></span>',
+    );
+
+    const stun = noteHtml(env, [
+      { t: 'effect', label: 'Stunned', color: 'text-debuff', icon: 'IG_Stun', isDebuff: true },
+    ]);
+    expect(stun).toContain('<span class="pv-seg text-debuff">');
+    expect(stun).toContain(
+      '<span class="pv-fx debuff"><img src="https://img.test/images/ui/effect/IG_Stun.webp" alt="" /></span>',
+    );
+    expect(
+      noteHtml(env, [{ t: 'effect', label: 'Up', color: 'text-buff', icon: 'x', isDebuff: false }]),
+    ).toContain('class="pv-fx buff"');
+
+    const atk = noteHtml(env, [
+      { t: 'stat', name: 'Attack', iconSrc: '/images/ui/stat/CM_Stat_Icon_ATK.webp' },
+    ]);
+    expect(atk).toContain('<span class="pv-seg text-stat">');
+    expect(atk).toContain('src="https://img.test/images/ui/stat/CM_Stat_Icon_ATK.webp"');
+
+    // Une classe de couleur qui n'en est pas une n'entre pas dans le HTML.
+    expect(noteHtml(env, [{ t: 'icon', label: 'x', color: 'a" onclick="b' }])).toBe(
+      '<span class="pv-seg">x</span>',
+    );
+  });
+
+  it('un texte du jeu : `<color=#…>` en span coloré, `\\n` littéraux en sauts de ligne', () => {
+    expect(gameText(env, 'a <color=#ff0000>x</color> b')).toBe(
+      'a <span style="color:#ff0000">x</span> b',
+    );
+    expect(gameText(env, 'a\\nb\n<Color=#28d9ed>c\\nd</Color> <e>')).toBe(
+      'a<br>b<br><span style="color:#28d9ed">c<br>d</span> &lt;e>',
+    );
+    // Une couleur qui n'est pas un `#hex` reste du texte.
+    expect(gameText(env, '<color=red>x</color>')).toBe('&lt;color=red>x&lt;/color>');
+  });
+
+  it('une pièce : sa tuile de 44 px, son nom au grade, ses stats en puces', () => {
+    const html = previewHtml(
+      env,
+      {
+        ...empty,
+        weapons: [
+          {
+            id: '4',
+            name: 'Surefire Greatsword',
+            icon: 'TI_Equipment_Weapon_06',
+            grade: 'unique',
+            star: 6,
+            overlayIcon: 'TI_Icon_UO_Weapon_11',
+            classType: 'striker',
+            mainStat: 'ATK%/CHD/WG',
+          },
+        ],
+      },
+      labels,
+      statIcons,
+    );
+    expect(html.startsWith('<div class="pv-row"><span class="pv-lbl">Weapon</span>')).toBe(true);
+    expect(html).toContain('class="gv-tile" style="width:44px;height:44px"');
+    expect(html).toContain('images/ui/bg/TI_Slot_Unique.webp');
+    expect(html).toContain('images/ui/class/IG_Turn_Class_Striker.webp');
+    expect(count(html, 'CM_icon_star_y')).toBe(6);
+    expect(html).toContain(
+      '<span class="pv-name" style="color:var(--item-legendary)">Surefire Greatsword</span>',
+    );
+    expect(count(html, 'class="pv-chip"')).toBe(3);
+    expect(html).toContain(
+      '<img src="https://img.test/images/ui/stat/CM_Stat_Icon_ATK.webp" alt="" width="14" height="14" />ATK%',
+    );
+    // Une stat sans icône (la WG) : son abréviation seule.
+    expect(html).toContain('<span class="pv-chip">WG</span>');
+    // Que la rangée des armes : rien d'autre n'a de contenu.
+    expect(count(html, 'class="pv-row')).toBe(1);
+  });
+
+  it('une pièce `unresolved` : son id en rouge, sans tuile', () => {
+    const html = previewHtml(
+      env,
+      {
+        ...empty,
+        amulets: [{ id: 'nope', name: 'nope', mainStat: 'PEN%', unresolved: true }],
+        talismans: [{ id: '$zz', name: '', unresolved: true }],
+      },
+      labels,
+      statIcons,
+    );
+    expect(html).toContain('<span class="pv-lbl">Accessory</span>');
+    expect(html).toContain('<p class="pv-bad">nope</p>');
+    expect(html).toContain('<p class="pv-bad">$zz</p>');
+    expect(html).not.toContain('gv-tile');
+    expect(html).not.toContain('pv-chip');
+  });
+
+  it('les combos en lignes, comme la fiche : un set partagé regroupe ses seconds', () => {
+    const [pen, spd, atk, crit] = [
+      set('p', 'Penetration Set', 2),
+      set('s', 'Speed Set', 2),
+      set('a', 'Attack Set', 2),
+      set('c', 'Critical Strike Set', 4),
+    ];
+    // Le set le plus partagé passe en tête, même cité second ; un 4 pièces fait sa ligne.
+    const lines = groupCombos([[spd, pen], [pen, atk], [crit], []]);
+    expect(lines.map((l) => [l.head.id, l.tails.map((t) => t.id)])).toEqual([
+      ['p', ['s', 'a']],
+      ['c', []],
+    ]);
+
+    const html = previewHtml(
+      env,
+      {
+        ...empty,
+        sets: [[spd, pen], [pen, atk], [crit]],
+        setEffects: [
+          { id: 'p', name: 'Penetration Set', maxCount: 2, effect2: 'Pen +11%', effect4: 'no' },
+          {
+            id: 'c',
+            name: 'Critical Strike Set',
+            maxCount: 4,
+            effect2: 'Crit +<color=#ff0000>x</color>',
+            effect4: 'Crit DMG\\n+33%',
+          },
+        ],
+      },
+      labels,
+      statIcons,
+    );
+    expect(html).toContain('<div class="pv-row pv-sets"><span class="pv-lbl">Armor Set</span>');
+    expect(count(html, 'class="pv-combo"')).toBe(2);
+    // Ligne 1 : helmet + armor du premier set, gloves + shoes UNE fois, sans
+    // l'icône d'un set en overlay (deux seconds), leurs noms avec la leur.
+    const [, first, second] = html.split('class="pv-combo"');
+    expect(count(first, 'width:32px;height:32px')).toBe(4);
+    expect(count(first, 'equipment/Enchant_p.webp')).toBe(2);
+    expect(first).not.toContain('equipment/Enchant_s.webp');
+    expect(first).toContain('images/ui/effect/Enchant_s.webp');
+    expect(first).toContain('images/ui/effect/Enchant_a.webp');
+    expect(first).not.toContain('4 pieces');
+    // Ligne 2 : les quatre pièces, « · 4 pieces ».
+    expect(count(second.split('pv-legend')[0], 'width:32px;height:32px')).toBe(4);
+    expect(second).toContain('<span class="pv-dim">· 4 pieces</span>');
+    // La légende : le 4 pièces seulement pour le set joué à 4 ; un bonus coloré.
+    expect(html).toContain('<span class="pv-count text-buff">2 pieces</span> Pen +11%');
+    expect(html).not.toContain('>no<');
+    expect(html).toContain('Crit +<span style="color:#ff0000">x</span>');
+    expect(html).toContain('<span class="pv-count text-buff">4 pieces</span> Crit DMG<br>+33%');
+  });
+
+  it('un build tout en 2 pièces : la légende sans le préfixe « 2 pieces »', () => {
+    const html = previewHtml(
+      env,
+      {
+        ...empty,
+        sets: [[set('p', 'Penetration Set', 2), set('s', 'Speed Set', 2)]],
+        setEffects: [{ id: 'p', name: 'Penetration Set', maxCount: 2, effect2: 'Pen +11%' }],
+      },
+      labels,
+      statIcons,
+    );
+    expect(html).toContain('<p>Pen +11%</p>');
+    expect(html).not.toContain('pv-count');
+    // Un seul second set : ses tuiles gardent son icône, son nom n'en a pas.
+    expect(count(html, 'equipment/Enchant_s.webp')).toBe(2);
+    expect(html).not.toContain('images/ui/effect/');
+  });
+
+  it('les substats en texte, la note en segments ; un build vide ne rend rien', () => {
+    const html = previewHtml(
+      env,
+      { ...empty, substats: 'ATK>CHC', noteSegments: [{ t: 'unknown', s: '{B/nope}' }] },
+      labels,
+      statIcons,
+    );
+    expect(html).toBe(
+      '<div class="pv-row"><span class="pv-lbl">Substat Priority</span><div class="pv-cell"><span class="pv-sub">ATK>CHC</span></div></div>' +
+        '<div class="pv-row"><span class="pv-lbl">Notes</span><div class="pv-cell"><p class="pv-note"><span class="pv-unknown">{B/nope}</span></p></div></div>',
+    );
+    expect(previewHtml(env, empty, labels, statIcons)).toBe('');
   });
 });
 

@@ -26,7 +26,7 @@
  *     répond qu'après le délai : `load` attend les images, la capture aussi.
  *
  * RIEN NE S'ÉCRIT PAR ICI. Chaque enregistrement de quick committe et pousse :
- * le relais ne laisse passer que les lectures (`GET`, et les deux `POST` qui ne
+ * le relais ne laisse passer que les lectures (`GET`, et les `POST` qui ne
  * font que lire, cf. `READ_ONLY_POSTS`) et refuse le reste lui-même.
  *
  * Du `.mjs` sans dépendance, lancé par `node`, typé par JSDoc (`checkJs` de
@@ -48,10 +48,15 @@ const SHOT_TIMEOUT = 60_000;
 const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
 /**
  * Les `POST` que la page émet en se chargeant et qui ne font que LIRE (l'aperçu
- * du brouillon, les emojis des serveurs cochés). Sans eux l'onglet Discord
- * serait photographié sur une erreur.
+ * du brouillon, les emojis des serveurs cochés, l'aperçu des builds d'un
+ * perso). Sans eux l'onglet Discord serait photographié sur une erreur, et les
+ * cartes de Gear reco sur un aperçu refusé.
  */
-const READ_ONLY_POSTS = new Set(['/api/discord/preview', '/api/discord/emojis']);
+const READ_ONLY_POSTS = new Set([
+  '/api/discord/preview',
+  '/api/discord/emojis',
+  '/api/gear-reco/preview',
+]);
 
 const SECTION = /<section id="tab-([a-z0-9-]+)"(?: hidden)?>/g;
 

@@ -3,7 +3,7 @@ import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
 // Le mix de sets (un principal, des secondaires) : le module que les tests couvrent.
 import { composeSetCombos, splitSetCombos } from '../gear-sets.mjs';
 // La tuile d'item « comme /equipment » : idem, un module pur et testé.
-import { itemName, itemTile, setGrid, setRow } from '../gear-view.mjs';
+import { itemName, itemTile, previewHtml, setGrid, setRow } from '../gear-view.mjs';
 
 // Les builds d'UN perso, édités ici puis envoyés d'un bloc : la liste
 // complète remplace celle du disque (contrat de `upsertGearReco`).
@@ -25,6 +25,21 @@ let gOrder = []; // les clés dans l'ordre du disque
 let gServer = []; // erreurs du dernier enregistrement, par clé de build
 let gTr = { busy: false, error: '' }; // « Traduire » : en cours, son dernier refus
 let gSeq = 0;
+// L'aperçu : ce que la fiche perso fera des builds, résolu par le serveur
+// (`POST /api/gear-reco/preview`) et rendu par `previewHtml`. UNE requête pour
+// tous les builds du perso, UNE langue pour tout l'onglet.
+const gPv = {
+  lang: gear.langs.default,
+  seq: 0, // la dernière requête partie : une réponse plus ancienne est ignorée
+  timer: 0, // le délai après la dernière frappe
+  sent: '', // ce que la dernière requête portait : la même ne repart pas
+  busy: false,
+  error: '', // le refus du serveur, ou l'échec réseau
+  labels: null, // les libellés de la fiche, dans la langue de l'aperçu
+  builds: new Map(), // clé de build → son build résolu
+  shut: new Set(), // les aperçus repliés : le temps de la page, rien n'est retenu
+};
+const G_PV_DELAY = 400;
 // Élément et rareté par perso : le roster des recos ne les porte pas, celui
 // de « Rangs » (`/api/ranks`) si. Sans lui, le picker se passe d'élément.
 let gMeta = new Map();
@@ -520,8 +535,106 @@ function gCard(b) {
       <div class="g-col">${talismans}${sets}${substats}</div>
       ${note}
     </div>
+    ${gPvBlock(b)}
   </div>`;
 }
+
+/** Le contenu d'un aperçu : le refus, sinon le dernier rendu reçu pour ce build. */
+function gPvBody(b) {
+  if (gPv.error) return `<p class="g-pv-ko">Aperçu refusé : ${esc(gPv.error)}</p>`;
+  const view = gPv.builds.get(b.k);
+  if (!view) return '<p class="lbl">Aperçu en cours…</p>';
+  return (
+    previewHtml(gEnv(), view, gPv.labels, gear.statIcons ?? {}) ||
+    '<p class="lbl">Rien à montrer : ni pièce, ni set, ni substats, ni note.</p>'
+  );
+}
+
+/**
+ * L'aperçu d'un build, en bas de sa carte : dépliable, ouvert d'office. Une
+ * carte redessinée garde le rendu précédent — atténué tant qu'une requête
+ * court (`.busy`).
+ */
+function gPvBlock(b) {
+  const open = !gPv.shut.has(b.k);
+  return `<div class="g-pv"><button class="g-pv-head" type="button" data-act="pv" aria-expanded="${open}"><span class="g-pv-caret" aria-hidden="true">▾</span>Aperçu<span class="lbl">ce que la fiche perso montrera</span></button><div class="g-pv-body pv${
+    gPv.busy ? ' busy' : ''
+  }" data-pv${open ? '' : ' hidden'}>${gPvBody(b)}</div></div>`;
+}
+
+/** Les aperçus des cartes en place : leur atténuation, et `redraw` leur contenu. */
+function gPvPaint(redraw) {
+  for (const b of gBuilds) {
+    const at = gCardEl(b)?.querySelector('[data-pv]');
+    if (!at) continue;
+    at.classList.toggle('busy', gPv.busy);
+    if (redraw) at.innerHTML = gPvBody(b);
+  }
+}
+
+/**
+ * Demande l'aperçu de TOUS les builds du perso, tels qu'ils partiraient à
+ * l'enregistrement. Pendant la requête les blocs gardent leur rendu, atténué ;
+ * une réponse arrivée après une requête plus récente est ignorée ; un refus
+ * (400) ou un échec réseau s'affiche dans les blocs, et se retente au prochain
+ * changement.
+ */
+async function gPvFetch() {
+  if (!gChar || !gBuilds.length) return;
+  const keys = gBuilds.map((b) => b.k);
+  const body = JSON.stringify({ builds: gBuilds.map(gToBuild), lang: gPv.lang });
+  // Les clés comptent : un perso relu du disque a les mêmes builds sous d'autres clés.
+  const sent = `${keys.join()} ${body}`;
+  if (sent === gPv.sent) return;
+  gPv.sent = sent;
+  const seq = ++gPv.seq;
+  gPv.busy = true;
+  gPvPaint(false);
+  let error = '';
+  try {
+    const res = await fetch('/api/gear-reco/preview', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body,
+    });
+    const r = await res.json();
+    if (seq !== gPv.seq) return;
+    if (!res.ok || !r.builds) throw new Error(r.error ?? r.log?.[0] ?? `réponse ${res.status}`);
+    gPv.builds = new Map(keys.map((k, i) => [k, r.builds[i]]));
+    gPv.labels = r.labels;
+  } catch (e) {
+    if (seq !== gPv.seq) return;
+    error = e instanceof Error ? e.message : String(e);
+    gPv.sent = '';
+  }
+  gPv.error = error;
+  gPv.busy = false;
+  gPvPaint(true);
+}
+
+/** L'aperçu suit un changement : aussitôt, ou `delay` ms après la dernière frappe. */
+function gPvAsk(delay = 0) {
+  clearTimeout(gPv.timer);
+  if (delay) gPv.timer = setTimeout(gPvFetch, delay);
+  else gPvFetch();
+}
+
+/** Le groupe des langues de l'aperçu, dans la barre : les langues du site. */
+function gPvLangs() {
+  $('g-pv-lang').innerHTML = `<span class="lbl">Aperçu</span>${gSeg(
+    'Langue de l’aperçu',
+    'lang',
+    gPv.lang,
+    gLangs().map((l) => [l, l]),
+  )}`;
+}
+$('g-pv-lang').onclick = (e) => {
+  const el = e.target.closest('button[data-lang]');
+  if (!el || el.dataset.lang === gPv.lang) return;
+  gPv.lang = el.dataset.lang;
+  gSegPress(el);
+  gPvAsk();
+};
 
 /** Le perso choisi : portrait, nom, élément, classe, rareté. */
 function gWho() {
@@ -572,6 +685,7 @@ function gRender() {
     if (d) d.open = true;
   }
   gBar();
+  gPvAsk();
 }
 
 /** UNE carte : un menu a changé, une pièce est ajoutée ou retirée. */
@@ -580,6 +694,7 @@ function gRedraw(b) {
   gCardEl(b).outerHTML = gCard(b);
   if (open) gCardEl(b).querySelector('details').open = true;
   gBar();
+  gPvAsk();
 }
 
 const gOf = (el) => {
@@ -638,6 +753,7 @@ $('g-list').oninput = (e) => {
     card.querySelector('[data-tally]').textContent = gTally(b);
   }
   gBar();
+  gPvAsk(G_PV_DELAY);
 };
 
 /**
@@ -726,6 +842,14 @@ $('g-list').onclick = (e) => {
   const at = gBuilds.indexOf(b);
 
   if (act === 'translate') return gTranslate();
+  // « Aperçu » : replie ou déplie le bloc, sans toucher au build.
+  if (act === 'pv') {
+    const open = gPv.shut.delete(b.k);
+    if (!open) gPv.shut.add(b.k);
+    el.setAttribute('aria-expanded', String(open));
+    el.nextElementSibling.hidden = !open;
+    return;
+  }
   // Une tuile de pièce, « ＋ arme », « ＋ talisman », « Composer un mix… ».
   if (act === 'pick') return gPickSlot(b, slot, i);
   if (act === 'up' || act === 'down') {
@@ -788,6 +912,8 @@ async function gLoad(id) {
   gOrder = gBuilds.map((b) => b.k);
   gServer = [];
   gTr.error = '';
+  gPv.builds = new Map();
+  gPv.shut.clear();
   gWho();
   gRender();
 }
@@ -1255,6 +1381,7 @@ async function loadGear(open, picker) {
     log(['Gear reco : éléments et raretés illisibles (/api/ranks), le picker s’en passe.'], false);
   gWho();
   gBar();
+  gPvLangs();
   $('g-pick').disabled = false;
   if (open && gear.roster.some((c) => c.id === open)) await gLoad(open);
   if (picker === 'char') gOpenChar();

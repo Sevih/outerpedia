@@ -43,6 +43,7 @@ import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
 import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
 import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
+import { previewGearReco } from '@/lib/admin/gear-preview-actions';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
@@ -64,6 +65,7 @@ import { listGuides } from '@/lib/data/guides';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
 import { DEFAULT_LANG, LANGS, type Lang } from '@/lib/i18n/config';
 import { TAG_REGEX, checkText } from '@/lib/parse-text';
+import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
 import {
   CURATED_ROLES,
@@ -974,6 +976,9 @@ function setTileFacts() {
  * ne redevient des pièces que si on le règle à la pièce (deux presets peuvent
  * avoir le même contenu : replier des pièces rendrait le premier des deux, pas
  * forcément celui que le build citait).
+ *
+ * `statIcons` : la table `STAT_ICON` du site (abréviation → sprite), pour les
+ * puces de stat principale de l'aperçu.
  */
 export function gearRecoState(id?: string) {
   const reco = loadGearReco();
@@ -1016,6 +1021,7 @@ export function gearRecoState(id?: string) {
       main: NOTE_LANGS,
       extra: LANGS.filter((l) => !NOTE_LANGS.includes(l)),
     },
+    statIcons: STAT_ICON,
     ...(disk ? { id, disk, builds: disk.map((b) => expandBuild(b, presets)) } : {}),
   };
 }
@@ -1187,6 +1193,51 @@ export async function saveGearReco(
 
   const git = deps.commitAndPush([GEAR_RECO_PATH], `chore(gear-reco): ${name}`, report);
   return { ok: git.ok, log: [...j.lines, ...git.log], issues: [], written: true };
+}
+
+/** Ce que rend l'aperçu de l'admin : les builds résolus, les libellés de la fiche. */
+type GearPreview = Awaited<ReturnType<typeof previewGearReco>>;
+
+/**
+ * L'aperçu de l'onglet Gear reco : les builds EN COURS d'édition, tels que
+ * `gToBuild` les enverrait à l'enregistrement, résolus par `previewGearReco` —
+ * l'aperçu de l'admin, donc le résolveur de la fiche perso, appelé tel quel
+ * (`'use server'` n'est ici qu'une chaîne ; sa garde `IS_DEV` passe grâce à
+ * `env.ts`). Rien ne s'écrit.
+ *
+ * Tolérant, comme le résolveur : un id inconnu ou un preset absent sortent en
+ * pièces `unresolved`, un nom vide passe — c'est un aperçu, pas un contrôle.
+ * Seule la FORME est exigée (`validateGearBuilds` : une liste de builds, un nom
+ * en chaîne, des listes de pièces), parce que le résolveur lève ou divague sur
+ * autre chose. Tout refus est RENDU, jamais levé — une forme fausse, une
+ * résolution qui lève, et l'aperçu que sa garde `IS_DEV` aurait coupé (il
+ * rendrait zéro build sans rien dire).
+ */
+export async function previewGearBuilds(
+  builds: unknown,
+  lang: unknown,
+): Promise<GearPreview | { error: string }> {
+  if (!Array.isArray(builds)) return { error: 'builds : une liste de builds attendue' };
+  const list = builds as GearBuild[];
+  const shape = validateGearBuilds('aperçu', list).map(locateGearError);
+  if (shape.length)
+    return {
+      error: shape
+        .map((i) =>
+          i.build === null
+            ? i.message
+            : `build ${i.build + 1}${i.slot ? ` · ${GEAR_SLOT_LABELS[i.slot]}` : ''} : ${i.message}`,
+        )
+        .join(' ; '),
+    };
+  try {
+    const out = await previewGearReco(list, typeof lang === 'string' ? lang : DEFAULT_LANG);
+    if (list.length && !out.builds.length)
+      return { error: 'L’aperçu n’a rien rendu : sa garde IS_DEV l’a coupé (NODE_ENV).' };
+    return out;
+  } catch (e: unknown) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
 }
 
 /** Ce que rend le traducteur de l'admin : une traduction par texte, et le moteur. */

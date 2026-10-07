@@ -7,6 +7,133 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : l'aperçu pré-rendu de chaque build, note
+  comprise, tel que la fiche perso le montrera** (lot C9, point 3 du retour
+  de Sevih du 07/10 : « on n'a pas de visuel pré-rendu, donc impossible de
+  savoir si la syntaxe est bonne (même chose pour la note) »). Le pourquoi.
+  Les balises inline d'une note (`{B/…}`, `{I-W/…}`) et les références des
+  pièces ne se voyaient qu'au contrôle d'« Enregistrer », et leur rendu,
+  jamais. Le quoi, en trois parties. (1) LA ROUTE `POST /api/gear-reco/preview`
+  (`server.ts`), corps `{ builds, lang }` — les builds tels que `gToBuild` les
+  envoie — répond ce que rend `previewGearReco` de l'admin, appelé TEL QUEL :
+  `{ builds: PreviewBuild[], labels }`. Vérifié dans le processus de quick :
+  `IS_DEV` y est vrai (`env.ts`), `'use server'` n'y est qu'une chaîne, rien
+  n'a été extrait ni recopié. La logique est `previewGearBuilds`
+  (`actions.ts`) : tout refus est RENDU `{ error }`, jamais levé, et la route
+  en fait un 400 — un corps illisible compris (`body()` lève sur un JSON vide,
+  ce qui donnait le 500 du `catch` de `createServer`). `gearRecoState` expose
+  en plus `statIcons` (la table `STAT_ICON`). (2) LE CONSTRUCTEUR, pur, dans
+  `scripts/quick/ui/gear-view.mjs` : `previewHtml(env, build, labels,
+statIcons)` (`env` porte `imgBase` et l'échappement, comme pour `itemTile`)
+  rend les rangées étiquetées par les `labels` reçus — Weapon / Accessory /
+  Talisman : la tuile de 44 px, le nom coloré par le grade, les puces de stat
+  principale (icône `images/ui/stat/<sprite>.webp` + abréviation) ; Armor
+  Set : les combos en lignes par `groupCombos`, porté de la fiche (le set le
+  plus partagé en tête, ses seconds regroupés, gloves + shoes une fois), puis
+  la légende des bonus (4 pièces seulement pour un set joué à 4, préfixe
+  « 2 pieces » seulement si un set du build l'est) ; la priorité de substats
+  en texte ; la note par `noteHtml` — `text` tel quel, `br` en `<br>`,
+  `unknown` dans un `span.pv-unknown` ROUGE, `icon` / `effect` / `item` /
+  `stat` en icône + libellé sous la classe de couleur du site, la `desc` en
+  `title` (balises de couleur retirées), aucun lien. `gameText` rend
+  `<color=#hex>` en span coloré et les `\n` littéraux en `<br>`. Une pièce
+  `unresolved` sort en rouge avec son id. (3) LA PAGE (`tabs/gear.{html,js,css}`) :
+  en bas de chaque carte un bloc « Aperçu », ouvert d'office, replié par sa
+  tête (un bouton `aria-expanded`) ; dans la savebar un groupe segmenté
+  « Aperçu en | fr | es | jp | kr | zh », `en` d'office, pour toutes les
+  cartes. `gPvAsk` suit `gRender`, `gRedraw` (aussitôt) et toute frappe
+  (400 ms après la dernière) : UNE requête pour tous les builds du perso,
+  rendue carte par carte ; pendant qu'elle court le rendu précédent reste,
+  atténué (`.busy`) ; un 400 ou un échec réseau s'écrit en rouge dans les
+  blocs et se retente au changement suivant ; une réponse arrivée après une
+  requête plus récente est ignorée (compteur `gPv.seq`) ; la même charge ne
+  repart pas. Les jetons qui manquaient à `quick.css` (`--buff`, `--debuff`,
+  `--buff-bg`, `--debuff-bg`, `--stat`, `--highlight`, `--equipment`) sont
+  recopiés de `globals.css` sous les mêmes noms dans `gear.css`, portés par
+  `#tab-gear`, et les classes du site (`text-buff`, `text-item-legendary`,
+  `text-fire`…) y sont traduites une à une. `STYLE.md` : le croquis. Neuf
+  écarts au texte du lot, à relire. (a) La FORME est contrôlée avant de
+  résoudre (`validateGearBuilds`, celle de l'enregistrement) : le résolveur ne
+  lève PAS sur `[{}]`, or le lot attend un 400 d'un build sans nom ; un nom
+  VIDE, un id inconnu, un preset absent restent résolus (200). (b) Pas de
+  jeton `--class` : `globals.css` l'appelle `--klass`, déjà dans `quick.css`
+  avec les `--item-*` et les éléments ; `--stat` s'ajoute à la liste du lot
+  (`StatInline` est en `text-stat`). (c) La tuile d'un effet est un carré
+  `--buff-bg` / `--debuff-bg` sous l'icône native, comme le lot l'écrit ; le
+  site, lui, teinte l'icône par masque (`--buff-tint`) sur fond noir. (d) Les
+  adresses que le site résout sortent RELATIVES (`/images/…`) dans quick
+  (`NEXT_PUBLIC_IMG_BASE` n'y est pas posé au chargement de `images.ts`) : le
+  constructeur les passe sous `imgBase`. (e) Le bloc est un bouton, pas un
+  `<details>` : `gRender` et `gRedraw` rouvrent le PREMIER `details` de la
+  carte (les traductions), un second, ouvert d'office, les aurait rouvertes à
+  chaque dessin. Replié, il le reste tant que la page vit (un `Set` en
+  mémoire, rien d'écrit). (f) La frappe dans les SUBSTATS attend aussi 400 ms
+  (elle passe par `gTouched`). (g) `scripts/quick/shot.mjs` : la route entre
+  dans `READ_ONLY_POSTS` — sans quoi le banc photographie un aperçu refusé.
+  (h) Un fichier de tests de plus, `scripts/quick/gear-preview.test.ts` : la
+  résolution exige `IS_DEV`, faux sous vitest ; la garde y est remplacée
+  (`vi.mock`), là seulement — dans `actions.test.ts` elle reste le filet des
+  stores qui écrivent. (i) Le texte d'aide de l'onglet dit l'aperçu et ne dit
+  plus que l'admin est « la surface de rendu » : trois lignes au lieu de deux,
+  la carte descend de 20 px. Vérification. `pnpm typecheck` → sa seule ligne
+  est l'écho (`$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc
+--noEmit -p scripts/tsconfig.json`), code 0 ; `pnpm lint` → `$ eslint`,
+  code 0 ; `pnpm test` → `Tests  2817 passed (2817)`, 198 fichiers — 17 tests
+  de plus : dans `actions.test.ts`, `statIcons`, les refus (sept formes
+  fausses, le build et le slot situés, la garde `IS_DEV` qui coupe rendue en
+  erreur) et dix cas du constructeur (balise morte rouge et échappée, `br`,
+  `item` avec cadre, icône et nom dans la classe du grade, `icon` / `effect` /
+  `stat`, classe de couleur forgée refusée, `<color=#ff0000>x</color>` en
+  span, pièce à tuile et puces, pièce `unresolved` rouge, combos regroupés et
+  légende, build tout en 2 pièces, build vide) ; dans `gear-preview.test.ts`,
+  le résolveur réel (builds d'un perso en `en` et `fr`, `{B/nope}` en
+  `unknown`, tolérance) et ses builds rendus sans rouge ni `undefined`. La
+  route en direct, sur un quick isolé (`DISCORD_BOT_TOKEN= DEV_PEERS=
+QUICK_PORT=4861 pnpm quick --no-open`, arrêté ensuite), AUCUN
+  enregistrement, `gear-reco.json` intact : les builds d'Aer en `fr` → 200,
+  trois builds, `labels` « Arme », « Accessoire », « Set d'armure »,
+  `noteSegments` vides (Aer n'a pas de note) ; le même avec une note →
+  `unknown` pour `{B/nope}`, `effect` pour `{D/BT_STUN}`, `br`, `icon`,
+  `stat`, `item` ; corps vide, `{}`, texte qui n'est pas du JSON → 400
+  « builds : une liste de builds attendue » ; `[{}]` → 400 « build 1 · nom :
+  requis mais absent » ; `weapons` en chaîne → 400 « build 1 · armes : attendu
+  array » ; nom vide, id `nope`, `$zzz` → 200 avec `unresolved` ; puis
+  `GET /api/gear-reco/state` → 200, le serveur répond encore. Le banc
+  (`node scripts/quick/shot.mjs --port 4861 --tabs gear --hash gear/2000055`),
+  captures regardées : `/tmp/quick-shots/c9/gear.png` (Aer, 1440 × 1700 : le
+  groupe des langues, le bloc sous la carte, tuiles 6★ à overlays, puces
+  `ATK%` / `PEN%`, combo Speed en quatre tuiles « · 4 pieces », légende
+  2 / 4 pièces, substats), `/tmp/quick-shots/c9/1024/gear.png`,
+  `/tmp/quick-shots/c9/avant/gear.png` (HEAD, même quick) ; et, derrière un
+  relais en lecture seule hors du dépôt qui pose une balise morte et une arme
+  `nope` dans l'état de Core Fusion Lisha, `/tmp/quick-shots/c9/riche-en/gear.png`
+  et `riche-fr/gear.png` (le clic sur `fr` joué par la page), agrandis en
+  `zoom-apercu-en.png` et `zoom-note-fr.png` : `{B/nope}` rouge, `nope` rouge
+  dans la rangée des armes, quatre combos 2 + 2 regroupés sous Penetration,
+  effets en tuile bleue ou rouge, libellés et noms en français. Rien d'autre
+  ne bouge : en-tête et carte du perso identiques AU PIXEL à la capture
+  d'avant (`compare -metric AE` : 0) ; la zone d'édition de la carte, recalée
+  des 20 px du texte d'aide, ne diffère que par le lissage des glyphes et des
+  icônes (1 172 px sur 869 400, aucun cadre déplacé — la ligne ajoutée fait
+  19,5 px). La logique, jouée dans happy-dom hors du dépôt (seuls les `POST`
+  d'aperçu sont transmis) : 45 contrôles, tous passent — une requête au
+  chargement ; rien avant 400 ms puis UNE requête pour trois frappes ; le
+  champ garde le curseur ; une bascule de stat part aussitôt et atténue
+  toutes les cartes en gardant leur rendu ; une réponse lente arrivée après
+  une plus récente est ignorée ; 400 et coupure réseau en rouge puis reprise ;
+  `fr` → libellés traduits, la même langue recliquée ne relance rien ;
+  replier ne touche pas au build et tient à travers un redessin ; dupliquer,
+  supprimer, déplacer, « ＋ build » (vide : « rien à montrer »), « Annuler ».
+  Une fois, pour la capture d'avant, le working tree a été remisé puis
+  restauré (`git stash` / `pop`) : il ne portait que les fichiers du lot.
+  Laissé, hors périmètre. Le nom FRANÇAIS du Critical Strike Set est « 0 »
+  dans `data/generated/equipment/sets.json` (set `12`) : l'aperçu en `fr` le
+  montre tel quel, la fiche aussi. La fiche pose les bonus de set en texte
+  brut (`SetEffectLines`) quand l'aperçu en rend les couleurs, comme le lot le
+  demande — aucun bonus du fichier n'a de balise aujourd'hui. `SLOT_FRAME` de
+  `gear-view.mjs` n'a pas `singularity` (cadre normal pour un tel item cité
+  en note). Les règles `pickable` du damage-calculator et « Traduire » après
+  enregistrement restent au TODO. Pour Sevih : la ligne du TODO.
 - **Relecture C8** (Fable, 07/10) : `e00184bf` validé — reste C9, dans le
   fichier des lots. Périmètre attendu (`tabs/gear.*`, `ui/gear-view.mjs`,
   `actions.ts` et ses tests, `STYLE.md`, DONE, TODO), entrée DONE complète,

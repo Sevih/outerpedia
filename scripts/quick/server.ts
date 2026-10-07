@@ -40,6 +40,7 @@ import {
   currentCoupons,
   gearRecoState,
   parseTarget,
+  previewGearBuilds,
   rankState,
   rewardOptions,
   saveCouponList,
@@ -393,8 +394,9 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/gear-reco/state') {
-    // Lu du disque à chaque appel, comme les rangs : roster, presets et listes
-    // des sélecteurs, plus les builds du perso de `?id=` quand il est donné.
+    // Lu du disque à chaque appel, comme les rangs : roster, presets, listes
+    // des sélecteurs et icônes de stat (`statIcons`, pour l'aperçu), plus les
+    // builds du perso de `?id=` quand il est donné.
     const id = url.searchParams.get('id') ?? undefined;
     const state = gearRecoState(id);
     if (id !== undefined && !state.roster.some((c) => c.id === id))
@@ -406,6 +408,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/gear-reco') {
     const { id, builds } = await body<{ id: string; builds: GearBuild[] }>(req);
     await stream(res, (report) => saveGearReco(String(id ?? ''), builds, GEAR_RECO_DEPS, report));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/gear-reco/preview') {
+    // L'aperçu : les builds en cours d'édition, résolus comme la fiche perso
+    // les montrera, dans la langue demandée. Rien ne s'écrit. Un corps
+    // illisible ou une forme fausse : 400 `{ error }`, que le bloc affiche —
+    // jamais le 500 du `catch` de `createServer`.
+    const b = await body<{ builds?: unknown; lang?: unknown } | null>(req).catch(() => null);
+    const out = await previewGearBuilds(b?.builds, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
     return;
   }
 

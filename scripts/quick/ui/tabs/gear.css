@@ -812,6 +812,7 @@
   overflow-wrap: anywhere;
 }
 #tab-gear .g-item:focus-visible,
+#tab-gear .g-pv-head:focus-visible,
 #tab-gear .g-stat:focus-visible,
 #tab-gear .g-tog:focus-visible,
 #tab-gear .g-seg button:focus-visible,
@@ -823,4 +824,310 @@
 /* Le groupe segmenté rogne ce qui dépasse : l'anneau passe à l'intérieur. */
 #tab-gear .g-seg button:focus-visible {
   outline-offset: -2px;
+}
+
+/* ---------------------------------------------------------------- l'aperçu
+   En bas de chaque carte : ce que la fiche perso montrera du build
+   (`GearRecoSection.tsx`), bâti par `previewHtml` de `gear-view.mjs` — classes
+   `.pv-*`. Les couleurs sont celles du site : ses jetons, recopiés de
+   `globals.css` sous les mêmes noms (ceux qui manquent à `quick.css`), et ses
+   classes de couleur (`text-buff`, `text-item-legendary`…), que les segments
+   de note portent telles quelles. */
+#tab-gear {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-bg: #1a69a7;
+  --debuff-bg: #a72a27;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+  --equipment: #fbbf24;
+}
+#tab-gear .text-buff {
+  color: var(--buff);
+}
+#tab-gear .text-debuff {
+  color: var(--debuff);
+}
+#tab-gear .text-class {
+  color: var(--klass);
+}
+#tab-gear .text-stat {
+  color: var(--stat);
+}
+#tab-gear .text-highlight {
+  color: var(--highlight);
+}
+#tab-gear .text-equipment {
+  color: var(--equipment);
+}
+#tab-gear .text-item-normal {
+  color: var(--item-normal);
+}
+#tab-gear .text-item-superior {
+  color: var(--item-superior);
+}
+#tab-gear .text-item-epic {
+  color: var(--item-epic);
+}
+#tab-gear .text-item-legendary {
+  color: var(--item-legendary);
+}
+#tab-gear .text-fire {
+  color: var(--fire);
+}
+#tab-gear .text-water {
+  color: var(--water);
+}
+#tab-gear .text-earth {
+  color: var(--earth);
+}
+#tab-gear .text-light {
+  color: var(--light);
+}
+#tab-gear .text-dark-elem {
+  color: var(--dark-elem);
+}
+
+/* La langue de l'aperçu, dans la savebar : une pour toutes les cartes. */
+#tab-gear .g-pv-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* `.savebar span` pousse à gauche : ici le libellé suit son groupe. */
+#tab-gear .g-pv-lang .lbl {
+  margin-right: 0;
+}
+#tab-gear .g-pv-lang .g-seg {
+  height: 34px;
+  margin-left: 0;
+}
+#tab-gear .g-pv-lang .g-seg button {
+  padding: 0 10px;
+}
+
+/* Le bloc : sa tête (un bouton qui replie), puis le rendu sur le fond de la
+   page — ce n'est plus l'éditeur. */
+#tab-gear .g-pv {
+  border-top: 1px solid var(--line-subtle);
+  border-radius: 0 0 9px 9px;
+  background: var(--surface-base);
+}
+#tab-gear .g-pv-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 20px;
+  border: 0;
+  background: none;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-gear .g-pv-head:hover {
+  color: var(--content);
+}
+#tab-gear .g-pv-head .lbl {
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+#tab-gear .g-pv-caret {
+  transition: transform 0.12s;
+}
+#tab-gear .g-pv-head[aria-expanded='false'] .g-pv-caret {
+  transform: rotate(-90deg);
+}
+#tab-gear .g-pv-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 4px 20px 18px;
+  transition: opacity 0.12s;
+}
+#tab-gear .g-pv-body[hidden] {
+  display: none;
+}
+/* Une requête court : le rendu précédent reste, atténué. */
+#tab-gear .g-pv-body.busy {
+  opacity: 0.45;
+}
+#tab-gear .g-pv-body p {
+  margin: 0;
+}
+#tab-gear .g-pv-ko,
+#tab-gear .pv-bad,
+#tab-gear .pv-unknown {
+  color: var(--danger);
+}
+#tab-gear .pv-unknown {
+  font-weight: 600;
+}
+
+/* Une rangée : son étiquette à gauche (96 px), le contenu à droite. */
+#tab-gear .pv-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+}
+#tab-gear .pv-row.pv-sets {
+  padding-top: 14px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-gear .pv-lbl {
+  padding-top: 3px;
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+#tab-gear .pv-cell {
+  min-width: 0;
+  font-size: 13px;
+}
+/* Les pièces : des colonnes fixes, qui alignent les trois rangées entre elles. */
+#tab-gear .pv-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
+  gap: 10px 20px;
+}
+#tab-gear .pv-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+#tab-gear .pv-item-t {
+  min-width: 0;
+}
+#tab-gear .pv-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#tab-gear .pv-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+#tab-gear .pv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--content-muted);
+  font-size: 12px;
+}
+/* Les combos, une ligne chacun, puis la légende des bonus : nom | effets. */
+#tab-gear .pv-combos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#tab-gear .pv-combo,
+#tab-gear .pv-tails {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+#tab-gear .pv-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+#tab-gear .pv-combo .pv-set {
+  font-size: 14px;
+}
+#tab-gear .pv-dim {
+  color: var(--content-muted);
+  font-size: 11px;
+}
+#tab-gear .pv-plus {
+  padding: 0 4px;
+}
+#tab-gear .pv-dot {
+  color: var(--line-strong);
+}
+#tab-gear .pv-legend {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 12px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-subtle);
+  color: var(--content-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+#tab-gear .pv-legend .pv-set {
+  white-space: nowrap;
+}
+#tab-gear .pv-count {
+  font-weight: 600;
+}
+#tab-gear .pv-sub {
+  font-family: var(--mono);
+}
+/* La note : le texte du site, ses balises en icône + libellé coloré. */
+#tab-gear .pv-note {
+  color: var(--content-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+#tab-gear .pv-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+#tab-gear .pv-u {
+  text-decoration: underline;
+}
+#tab-gear .pv-ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+/* La tuile d'un effet, teintée buff ou debuff ; celle d'un item, sur son cadre. */
+#tab-gear .pv-fx,
+#tab-gear .pv-it {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+#tab-gear .pv-fx {
+  border-radius: 4px;
+  background: var(--buff-bg);
+}
+#tab-gear .pv-fx.debuff {
+  background: var(--debuff-bg);
+}
+#tab-gear .pv-fx img,
+#tab-gear .pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@media (max-width: 700px) {
+  #tab-gear .pv-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
 }
