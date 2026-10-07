@@ -7,6 +7,37 @@
 
 ## 2026-10-07
 
+- **Relecture C8** (Fable, 07/10) : `e00184bf` validé — reste C9, dans le
+  fichier des lots. Périmètre attendu (`tabs/gear.*`, `ui/gear-view.mjs`,
+  `actions.ts` et ses tests, `STYLE.md`, DONE, TODO), entrée DONE complète,
+  diff du TODO propre (item « sets sans bonus 2 pièces » retiré, lot C8
+  marqué fait dans la ligne du second retour) ; `pnpm typecheck`, `pnpm
+lint`, `pnpm test` verts sur HEAD (197 fichiers, 2 800 tests). Contrôle
+  indépendant : `gear-view.mjs` appelé par `node` — tuile unique 6★ : cadre
+  `TI_Slot_Unique`, six étoiles de 12 px (18 % de 64) chevauchées de 30 %,
+  overlay d'effet et icône de classe ; tuile normale sans passif : cadre et
+  icône seuls ; `shownPieces(4,0)` → les quatre, `(2,1)` → gloves + shoes.
+  `GET /api/gear-reco/state` sur un quick isolé (:4833, aucun
+  enregistrement) : Surefire Greatsword `unique`, `star 6`,
+  `overlayIcon TI_Icon_UO_Weapon_11` ; Assassin's Charm `mode AP` ; Speed
+  Set `has2P` vrai (`p2` « Speed +13% »), Patience et Revenge `has2P` faux,
+  quatre `pieceIcons` partout. Captures du banc (scratchpad `c8-shots/`) :
+  carte d'Aer (tuiles de 44 px cadrées, noms en couleur de grade, badge
+  `$ru` dans le titre des talismans, combo Speed en quatre tuiles + « 4p » +
+  `$s4` + ✕), picker d'armes (17 striker, Surefire cochée en haut à gauche
+  du cadre, pied « Valider »), picker de sets (Patience et Revenge grisés en
+  « Secondaires », Speed « principal », pied « Poser 1 combo »), carte de
+  Demiurge Drakhan (deux entrées Coward's Treasure gardées, HP% puis PEN%).
+  Les quatre écarts de l'agent sont acceptés : jetons `--item-*` déjà dans
+  `quick.css` ; set sans 2p déjà secondaire reste cliquable pour le retirer ;
+  pastille en haut à gauche ; une pièce ne se coche qu'une fois — deux
+  entrées de la même pièce ne se créent plus depuis le picker, la stat
+  composée par les bascules les remplace (le fichier en porte deux, chez
+  Demiurge Drakhan, qui restent lisibles et modifiables). Laissé par
+  l'agent, pas repris au TODO : les règles `pickable` du damage-calculator
+  (principal sans 2p avec secondaires, principal sans 4p seul) — à Sevih de
+  dire si ça compte. Pour Sevih : les contrôles de la ligne TODO du second
+  retour.
 - **`pnpm quick`, Gear reco : pickers d'armes et d'amulettes en multi-choix,
   tuiles d'item « comme /equipment », sets en rangées de tuiles** (lot C8,
   second retour de Sevih du 07/10 après usage des pickers de C7). Le pourquoi.
