@@ -33,9 +33,9 @@
 
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
       six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
-      cet ordre — **C5** (charpente : un fichier par onglet dans
-      `scripts/quick/ui/`, onglet dans l'URL, banc de captures `shot.mjs` ;
-      Opus, seul, après C4), **B30** (4-comics : plusieurs BD et langues en
+      cet ordre — **C5** FAIT le 07/10 (charpente : un fichier par onglet
+      dans `scripts/quick/ui/`, onglet dans l'URL, banc de captures
+      `node scripts/quick/shot.mjs`), **B30** (4-comics : plusieurs BD et langues en
       un envoi et un commit ; Opus, seul), **F16** (charte : jetons de
       `globals.css`, coquille, composants, `STYLE.md`, trois onglets simples
       refaits ; Fable, seul), puis **B28** Rangs (vraies icônes, portraits),

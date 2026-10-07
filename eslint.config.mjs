@@ -216,6 +216,33 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    // PAGE DE QUICK (`scripts/quick/ui/`) — des modules ES servis TELS QUELS au
+    // navigateur : ni build, ni React, ni Node. Les blocs Next ci-dessus les
+    // lintaient déjà, mais avec les globals de Node et sans `no-undef` : un nom
+    // resté dans le fichier d'un autre onglet (ils partageaient un seul
+    // `<script>` jusqu'au 07/10) passait le lint et ne cassait qu'à l'écran.
+    files: ['scripts/quick/ui/**/*.js'],
+    languageOptions: {
+      globals: {
+        process: 'off',
+        Buffer: 'off',
+        require: 'off',
+        module: 'off',
+        exports: 'off',
+        global: 'off',
+        __dirname: 'off',
+        __filename: 'off',
+        setImmediate: 'off',
+        clearImmediate: 'off',
+      },
+    },
+    rules: {
+      'no-undef': 'error',
+      // Pas de React ici : `useEmoji` (onglet Discord) n'est pas un hook.
+      'react-hooks/rules-of-hooks': 'off',
+    },
+  },
   // `.unlighthouse/**` : rapports d'audit générés (`pnpm seo:audit`), bundles JS
   // minifiés — gitignorés, mais ESLint flat ne lit pas `.gitignore` (n'ignore que
   // node_modules/.git), il les linterait sinon (des milliers de faux warnings).

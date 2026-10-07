@@ -1,7 +1,8 @@
 /**
  * quick — le petit outil de tous les jours (`pnpm quick`, ou l'icône du bureau).
  *
- * Un serveur HTTP local de quelques routes et UNE page : mettre à jour un code
+ * Un serveur HTTP local de quelques routes et UNE page (`ui/`, un fichier par
+ * onglet, assemblée à la requête — cf. `ui-serve.ts`) : mettre à jour un code
  * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, éditer les
  * recos d'équipement d'un perso, écrire un message Discord que le bot poste.
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
@@ -23,7 +24,7 @@
  * pas deux serveurs.
  */
 import { spawn } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
@@ -72,6 +73,7 @@ import {
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
 import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
+import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
@@ -86,7 +88,8 @@ const PORT = Number(process.env.QUICK_PORT ?? 4747);
  * reste sur la boucle locale. Les gardes sont dans `lan.ts`.
  */
 const PEERS = parsePeers(process.env.DEV_PEERS);
-const UI = resolve(import.meta.dirname, 'ui.html');
+/** La page : `index.html`, `tabs/<onglet>.html`, et ce que `GET /ui/…` sert. */
+const UI = resolve(import.meta.dirname, 'ui');
 /** Les outils d'édition de l'onglet Discord : un module que la page importe tel quel. */
 const EDITOR = resolve(import.meta.dirname, 'discord-editor.mjs');
 /** La palette d'emojis de l'onglet Discord, retouchée à la main. */
@@ -268,9 +271,25 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? '/', `http://localhost:${PORT}`);
 
   if (req.method === 'GET' && url.pathname === '/') {
-    // Relu à chaque requête : éditer l'UI et rafraîchir suffit, pas de redémarrage.
+    // Relu et assemblé à chaque requête : éditer l'UI et rafraîchir suffit, pas
+    // de redémarrage.
+    const page = assemblePage(readFileSync(resolve(UI, 'index.html'), 'utf8'), (tab) => {
+      const file = resolve(UI, 'tabs', `${tab}.html`);
+      return existsSync(file) ? readFileSync(file, 'utf8') : null;
+    });
     res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
-    res.end(readFileSync(UI, 'utf8'));
+    res.end(page);
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname.startsWith('/ui/')) {
+    // Styles et modules de la page. `no-store`, comme l'éditeur ci-dessous :
+    // rafraîchir doit suffire là aussi.
+    const hit = resolveUiFile(UI, url.pathname.slice('/ui/'.length));
+    if (!hit || !statSync(hit.file, { throwIfNoEntry: false })?.isFile())
+      return json(res, { error: 'fichier inconnu' }, 404);
+    res.writeHead(200, { 'content-type': hit.type, 'cache-control': 'no-store' });
+    res.end(readFileSync(hit.file));
     return;
   }
 

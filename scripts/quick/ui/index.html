@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Outerpedia — quick</title>
+    <link rel="stylesheet" href="/ui/quick.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Outerpedia · quick</h1>
+      <span class="env" id="env"></span>
+      <button class="ghost" id="quit" title="Arrête le serveur local">Quitter</button>
+    </header>
+
+    <nav>
+      <button data-tab="coupons" aria-selected="true">Codes promo</button>
+      <button data-tab="comics" aria-selected="false">4-comics</button>
+      <button data-tab="videos" aria-selected="false">Vidéos</button>
+      <button data-tab="ranks" aria-selected="false">Rangs</button>
+      <button data-tab="gear" aria-selected="false">Gear reco</button>
+      <button data-tab="discord" aria-selected="false">Discord</button>
+    </nav>
+
+    <main>
+      <!-- Une section par onglet : le serveur pose `tabs/<nom>.html` à la place de
+           chaque marqueur (cf. `ui-serve.ts`). -->
+      <!-- @tab coupons -->
+      <!-- @tab comics -->
+      <!-- @tab videos -->
+      <!-- @tab ranks -->
+      <!-- @tab gear -->
+      <!-- @tab discord -->
+
+      <div id="log"></div>
+    </main>
+
+    <!-- Chaque section s'inscrit auprès de `lib.js` en se chargeant ; l'ordre des
+         imports est celui du menu. -->
+    <script type="module">
+      import { sections } from '/ui/lib.js';
+      import '/ui/tabs/coupons.js';
+      import '/ui/tabs/comics.js';
+      import '/ui/tabs/videos.js';
+      import '/ui/tabs/ranks.js';
+      import '/ui/tabs/gear.js';
+      import '/ui/tabs/discord.js';
+
+      sections.start();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<section id="tab-discord" hidden>
+  <h2>Message Discord</h2>
+  <p class="hint">
+    Posté par le bot Outerpedia dans le salon choisi, sans qu'aucune mention ne notifie. Ce geste ne
+    committe et ne pousse rien. <span class="warn" id="d-hint"></span>
+  </p>
+  <div class="cols">
+    <div>
+      <div class="row">
+        <div>
+          <label>Note officielle</label
+          ><select id="d-note"></select>
+        </div>
+        <div style="flex: 0 0 auto">
+          <a class="ghost" id="d-open" target="_blank" rel="noopener noreferrer"
+            >ouvrir l'original</a
+          >
+        </div>
+      </div>
+      <!-- HTML scrapé, pas le nôtre : bac à sable sans `allow-scripts`, doublé
+           d'une CSP dans le document (cf. `noteSrcdoc`). -->
+      <iframe
+        id="d-frame"
+        title="Note officielle"
+        sandbox="allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
+      <!-- Les résumés déjà postés, relus du salon choisi et appariés à leur
+           note (`.quick/discord-history.json`) : les exemples de « copier
+           la demande ». L'import ne fait que lire. -->
+      <div class="d-history">
+        <label>Mes anciens résumés</label>
+        <p class="hint" id="d-history-state"></p>
+        <button class="ghost" id="d-history-import">importer mes anciens résumés</button>
+        <details id="d-history-list" hidden>
+          <summary>voir la liste</summary>
+          <ul></ul>
+        </details>
+      </div>
+    </div>
+    <div>
+      <div class="row">
+        <div>
+          <label>Serveur</label
+          ><select id="d-guild"></select>
+        </div>
+        <div>
+          <label>Salon</label
+          ><select id="d-channel"></select>
+        </div>
+        <div style="flex: 0 0 auto">
+          <label class="check"
+            ><input type="checkbox" id="d-noembed" checked /> sans aperçu des liens<span
+              id="d-noembed-why"
+            ></span
+          ></label>
+        </div>
+      </div>
+      <!-- Les serveurs dont on prend les emojis : ceux dont le bot est
+           membre, une case chacun. Les salons, eux, viennent du seul
+           serveur où l'on poste. -->
+      <div class="d-servers">
+        <label>Prendre les emojis de</label>
+        <div id="d-emoji-guilds"></div>
+        <p class="hint" id="d-external"></p>
+        <p class="hint">
+          <a id="d-invite" target="_blank" rel="noopener noreferrer" hidden
+            >inviter le bot sur un autre serveur</a
+          >
+          <button class="ghost" id="d-reload">recharger la liste</button>
+        </p>
+      </div>
+      <div class="d-mode" role="radiogroup" aria-label="Forme du message">
+        <label class="check"
+          ><input type="radio" name="d-mode" value="simple" checked /> Message simple</label
+        >
+        <label class="check"><input type="radio" name="d-mode" value="embed" /> Embed</label>
+      </div>
+      <!-- Mode embed : le texte de l'éditeur est la DESCRIPTION ; ce
+           formulaire porte le reste. Les plafonds sont ceux de Discord,
+           vérifiés côté serveur après conversion des emojis. -->
+      <div id="d-embed" hidden>
+        <div class="row">
+          <div style="flex: 3 1 200px">
+            <label>Titre (256 caractères au plus)</label
+            ><input id="e-title" type="text" autocomplete="off" />
+          </div>
+          <div style="flex: 3 1 200px">
+            <label>Lien du titre</label
+            ><input id="e-url" type="url" autocomplete="off" placeholder="https://" />
+          </div>
+          <div style="flex: 0 0 auto"><label>Barre</label><input id="e-color" type="color" /></div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Vignette, en haut à droite (adresse d'image)</label
+            ><input id="e-thumb" type="url" autocomplete="off" placeholder="https://" />
+          </div>
+          <div>
+            <label>Image, en bas (adresse d'image)</label
+            ><input id="e-image" type="url" autocomplete="off" placeholder="https://" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Texte au-dessus de l'embed (2 000 au plus)</label
+            ><textarea id="e-content" spellcheck="false"></textarea>
+          </div>
+          <div>
+            <label>Pied (2 048 au plus, sans emoji de serveur)</label
+            ><textarea id="e-footer" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <label>Boutons de lien sous le message (cinq au plus, libellé de 80 au plus)</label>
+        <div id="e-buttons"></div>
+      </div>
+      <div class="edit">
+        <!-- Chaque bouton agit sur la sélection de la zone de texte ; la
+             logique est dans `discord-editor.mjs`, testée à part. -->
+        <div class="tools" id="d-tools" role="toolbar" aria-label="Mise en forme">
+          <button class="ghost" data-tool="bold" title="Gras (Ctrl+B)"><b>G</b></button>
+          <button class="ghost" data-tool="italic" title="Italique (Ctrl+I)"><i>I</i></button>
+          <button class="ghost" data-tool="underline" title="Souligné (Ctrl+U)">
+            <u>S</u>
+          </button>
+          <button class="ghost" data-tool="strike" title="Barré"><s>B</s></button>
+          <button class="ghost" data-tool="code" title="Code en ligne">&lt;&gt;</button>
+          <button class="ghost" data-tool="spoiler" title="Masqué (spoiler)">||</button>
+          <button class="ghost" data-tool="link" title="Lien (Ctrl+K)">lien</button>
+          <span class="sep"></span>
+          <button class="ghost" data-tool="h1" title="Titre 1">T1</button>
+          <button class="ghost" data-tool="h2" title="Titre 2">T2</button>
+          <button class="ghost" data-tool="h3" title="Titre 3">T3</button>
+          <button class="ghost" data-tool="sub" title="Sous-texte (petit, gris)">-#</button>
+          <button class="ghost" data-tool="quote" title="Citation">&gt;</button>
+          <button class="ghost" data-tool="list" title="Liste à puces">•</button>
+          <button class="ghost" data-tool="codeblock" title="Bloc de code">```</button>
+          <span class="sep"></span>
+          <button class="ghost" id="d-emoji" title="Emojis" aria-expanded="false">🙂</button>
+          <span class="sep"></span>
+          <button
+            class="ghost"
+            id="d-date"
+            title="Horodatage Discord : une date UTC, affichée à chacun dans son fuseau"
+            aria-expanded="false"
+          >
+            date
+          </button>
+          <button
+            class="ghost"
+            id="d-dates"
+            title="Convertit chaque « AAAA-MM-JJ HH:MM » (date et heure) ou « AAAA-MM-JJ » (date seule) du brouillon en horodatage Discord — lues en UTC, comme dans la note"
+          >
+            convertir les dates
+          </button>
+        </div>
+        <p class="hint" id="d-dates-info"></p>
+        <div class="pop">
+          <!-- Horodatage `<t:instant:format>` : la date et l'heure sont
+               celles de la note officielle, donc en UTC. -->
+          <div id="d-stamp" hidden>
+            <div class="row">
+              <div>
+                <label>Date — UTC, comme dans la note</label><input id="d-stamp-date" type="date" />
+              </div>
+              <div>
+                <label>Heure — UTC, comme dans la note</label
+                ><input id="d-stamp-time" type="time" value="00:00" />
+              </div>
+              <div>
+                <label>Format</label
+                ><select id="d-stamp-style"></select>
+              </div>
+            </div>
+            <div class="bar">
+              <span id="d-stamp-info"></span>
+              <button class="ghost" id="d-stamp-cancel">Annuler</button>
+              <button class="action" id="d-stamp-ok">Insérer</button>
+            </div>
+          </div>
+          <div id="d-picker" hidden>
+            <input
+              id="d-picker-q"
+              type="search"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Chercher un emoji — Entrée insère le premier, Échap ferme"
+            />
+            <div id="d-picker-list"></div>
+          </div>
+        </div>
+        <!-- Palette : les emojis de `discord-palette.json`, posés d'un clic. -->
+        <div id="d-palette" aria-label="Palette d'emojis"></div>
+        <p class="hint" id="d-palette-missing"></p>
+        <textarea
+          id="d-text"
+          spellcheck="false"
+          placeholder="# :scroll: PATCH NOTES — TL;DR"
+        ></textarea>
+        <ul id="d-complete" role="listbox" hidden></ul>
+      </div>
+      <div class="bar">
+        <span id="d-count"></span>
+        <button class="ghost" id="d-template">Insérer le gabarit</button>
+        <!-- Le premier jet rédigé par Claude Code sans fenêtre, sous
+             l'abonnement (jamais par la clé d'API) : la même demande que
+             « Copier la demande », sans le copier-coller. -->
+        <button
+          class="ghost"
+          id="d-draft"
+          title="Claude Code rédige un premier jet du résumé à partir de la note choisie, puis les dates sont converties"
+        >
+          Proposer un brouillon
+        </button>
+        <!-- Le texte à coller dans claude.ai pour un premier jet : consignes,
+             exemples tirés des anciens résumés, la note choisie, le gabarit.
+             Rien ne part d'ici vers un modèle. -->
+        <button
+          class="ghost"
+          id="d-request"
+          title="Prépare la demande à coller dans claude.ai pour un premier jet du résumé"
+        >
+          Copier la demande
+        </button>
+        <label title="Anciens résumés joints en exemple, les plus récents d'abord"
+          >exemples <input id="d-request-k" type="number" min="0" max="6" step="1" value="3"
+        /></label>
+        <!-- Pour poster SOI-MÊME : le brouillon tel quel (codes d'emoji et
+             horodatages compris), avec les caractères d'échappement des
+             couleurs que le bot ajoute, lui, tout seul à l'envoi. -->
+        <button
+          class="ghost"
+          id="d-copy"
+          title="Copie le brouillon pour le coller toi-même dans Discord, couleurs des blocs ansi comprises"
+        >
+          Copier le message
+        </button>
+        <button class="ghost" id="d-new" hidden>Nouveau message</button>
+        <button class="action" id="d-update" hidden>Mettre à jour le message posté</button>
+        <button class="action" id="d-send" disabled>Envoyer</button>
+      </div>
+      <p class="hint" id="d-request-info"></p>
+      <textarea id="d-request-text" readonly hidden spellcheck="false"></textarea>
+      <p class="hint" id="d-status"></p>
+      <label>Aperçu — tel que Discord le rendra</label>
+      <div id="d-preview"></div>
+    </div>
+  </div>
+</section>

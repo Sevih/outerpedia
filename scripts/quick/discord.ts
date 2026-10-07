@@ -627,7 +627,7 @@ function ansiHtml(body: string): string {
 
 /**
  * Rend un message comme Discord l'affichera — HTML sûr, à poser dans un
- * conteneur `.dc` (les styles sont dans `ui.html`). Reçoit le texte DÉJÀ
+ * conteneur `.dc` (les styles sont dans `ui/quick.css`). Reçoit le texte DÉJÀ
  * converti (`prepare`) : un `<:nom:id>` devient l'image de l'emoji.
  *
  * Couvert : titres `#` `##` `###`, sous-texte `-# `, citations `> ` et `>>> `,

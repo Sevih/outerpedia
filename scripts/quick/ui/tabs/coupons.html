@@ -1,0 +1,39 @@
+<section id="tab-coupons">
+  <h2>Codes promo</h2>
+  <p class="hint">
+    Publié sur R2 à l'enregistrement (en ligne en ≤ 10 min), puis poussé : la CI rebâtit le site
+    derrière.
+  </p>
+
+  <div class="row">
+    <div><label>Code</label><input id="c-code" placeholder="OPLIVE09" /></div>
+    <div><label>Début</label><input id="c-start" type="date" /></div>
+    <div><label>Fin</label><input id="c-end" type="date" /></div>
+  </div>
+
+  <div class="row">
+    <div class="picker">
+      <label>Récompense</label>
+      <input id="c-reward" placeholder="Chercher un item ou une monnaie…" autocomplete="off" />
+      <div class="results" id="c-results" hidden></div>
+    </div>
+    <div style="flex: 0 0 110px"><label>Quantité</label><input id="c-qty" value="1" /></div>
+    <div style="flex: 0 0 auto"><button class="ghost" id="c-add-reward">Ajouter</button></div>
+  </div>
+
+  <div class="chips" id="c-chips"></div>
+  <div class="row"><button class="action" id="c-add">Ajouter le code</button></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Période</th>
+        <th>Récompenses</th>
+        <th>Statut</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="c-list"></tbody>
+  </table>
+</section>

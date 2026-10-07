@@ -4,11 +4,11 @@
  * sélecteur d'emojis et l'autocomplétion des `:codes:`.
  *
  * UN FICHIER, DEUX LECTEURS : la page le charge tel quel
- * (`import('/discord-editor.mjs')`, servi par `server.ts`) et les tests
- * l'importent. D'où le `.mjs`, du JavaScript nu typé par JSDoc (`checkJs` de
- * `scripts/tsconfig.json`) : l'outil n'a ni build ni transpileur, un `.ts`
- * n'arriverait pas jusqu'au navigateur — et une copie dans `ui.html` ne serait
- * pas testée.
+ * (`import('/discord-editor.mjs')` dans `ui/tabs/discord.js`, servi par
+ * `server.ts`) et les tests l'importent. D'où le `.mjs`, du JavaScript nu typé
+ * par JSDoc (`checkJs` de `scripts/tsconfig.json`) : l'outil n'a ni build ni
+ * transpileur, un `.ts` n'arriverait pas jusqu'au navigateur — et une copie
+ * dans la page ne serait pas testée.
  *
  * Tout est PUR : texte et sélection en entrée, texte et sélection en sortie.
  * Rien ici ne touche au DOM ; c'est la page qui pose le résultat dans la zone

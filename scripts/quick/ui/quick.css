@@ -1,0 +1,1137 @@
+:root {
+  --bg: #14161c;
+  --panel: #1c1f27;
+  --line: #2b303b;
+  --text: #e6e8ee;
+  --muted: #9aa2b4;
+  --accent: #6aa6ff;
+  --ok: #57c98a;
+  --warn: #e0a955;
+  --danger: #e5697a;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    14px/1.5 system-ui,
+    sans-serif;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+header h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+header .env {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+header button {
+  margin-left: 10px;
+}
+nav {
+  display: flex;
+  gap: 4px;
+  padding: 12px 20px 0;
+  /* Six onglets : sur un écran étroit le dernier sortait de la page. */
+  overflow-x: auto;
+}
+nav button {
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font: inherit;
+}
+nav button[aria-selected='true'] {
+  background: var(--panel);
+  border-color: var(--line);
+  color: var(--text);
+}
+main {
+  padding: 0 20px 20px;
+}
+section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 0 8px 8px 8px;
+  padding: 18px;
+}
+section[hidden] {
+  display: none;
+}
+h2 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+p.hint {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+input,
+select,
+textarea,
+button.action {
+  background: #11131a;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 7px 10px;
+  font: inherit;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 1px solid var(--accent);
+}
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 12px;
+}
+.row > div {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+button.action {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #10141c;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.action:disabled {
+  opacity: 0.5;
+  cursor: progress;
+}
+button.ghost,
+a.ghost {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 6px;
+  padding: 4px 9px;
+  cursor: pointer;
+  font: inherit;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+}
+td {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.code {
+  font-family: ui-monospace, monospace;
+  font-weight: 600;
+}
+.badge {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+.badge.active {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+.badge.upcoming {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.badge.expired {
+  color: var(--muted);
+  border-color: var(--line);
+}
+.picker {
+  position: relative;
+}
+.results {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow: auto;
+  background: #11131a;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-top: 2px;
+}
+.results div {
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.results div:hover {
+  background: var(--line);
+}
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.chip {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 6px 3px 11px;
+  font-size: 12px;
+}
+.chip button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+}
+.drop {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 26px;
+  text-align: center;
+  color: var(--muted);
+  cursor: pointer;
+}
+.drop.over {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#log {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  color: var(--muted);
+}
+#log .ok {
+  color: var(--ok);
+}
+#log .ko {
+  color: var(--danger);
+}
+/* Étape en cours : le sablier bat, donc on voit que ça travaille même quand
+   l'étape dure une minute et n'a encore rien à raconter. */
+#log .run::before {
+  content: '⟳ ';
+  animation: pulse 1.2s ease-in-out infinite;
+}
+#log .run {
+  font-style: italic;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+/* Onglet « Rangs » : la barre d'enregistrement suit le défilement — le
+   tableau fait plus de cent lignes et le bouton doit rester sous la main. */
+.savebar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--panel);
+  padding: 8px 0;
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.savebar span {
+  margin-right: auto;
+}
+.scroll {
+  overflow-x: auto;
+}
+label.check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+  padding: 7px 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#tab-ranks td {
+  white-space: nowrap;
+}
+#tab-ranks td.cap {
+  text-transform: capitalize;
+}
+#tab-ranks td select {
+  padding: 3px 6px;
+}
+#tab-ranks select.dirty {
+  border-color: var(--warn);
+  background: #3a2f1a;
+}
+#tab-ranks select.refused {
+  border-color: var(--danger);
+}
+#tab-ranks .badge {
+  margin-left: 6px;
+  color: var(--accent);
+  border-color: var(--line);
+}
+#tab-ranks .badge:empty {
+  display: none;
+}
+#tab-ranks tr.sub td {
+  background: #171a21;
+  white-space: normal;
+}
+#tab-ranks tr.sub th {
+  border: none;
+  padding: 2px 8px;
+}
+#tab-ranks tr.sub table {
+  width: auto;
+}
+#tab-ranks tr.sub table td {
+  border: none;
+  padding: 3px 8px;
+}
+/* Onglet « Gear reco » : un build = une carte, ses slots en grille (une
+   colonne quand la fenêtre est étroite). Mêmes couleurs que « Rangs » :
+   ambre = modifié, rouge = refusé. */
+#tab-gear .picker input {
+  width: 100%;
+}
+#tab-gear .results div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#tab-gear .results .badge {
+  margin-left: auto;
+  color: var(--accent);
+  border-color: var(--line);
+}
+#tab-gear .g-build {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: 8px;
+  background: #171a21;
+  padding: 12px;
+  margin-top: 12px;
+}
+#tab-gear .g-build.dirty {
+  border-left-color: var(--warn);
+}
+#tab-gear .g-build.refused {
+  border-left-color: var(--danger);
+}
+#tab-gear .g-head,
+#tab-gear .g-piece {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#tab-gear .g-head input {
+  flex: 1 1 180px;
+  min-width: 0;
+  font-weight: 600;
+}
+#tab-gear .g-head .badge {
+  color: var(--warn);
+}
+#tab-gear .g-head .badge:empty {
+  display: none;
+}
+#tab-gear .g-issues {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--danger);
+  font-size: 12px;
+}
+#tab-gear .g-issues:empty {
+  display: none;
+}
+#tab-gear .g-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+#tab-gear .g-slot {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 0;
+}
+#tab-gear .g-slot.wide {
+  grid-column: 1 / -1;
+}
+#tab-gear .g-slot h3 {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+#tab-gear .g-slot.dirty h3 {
+  color: var(--warn);
+}
+#tab-gear .g-piece {
+  margin-bottom: 6px;
+}
+#tab-gear .g-piece select,
+#tab-gear .g-piece input {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+#tab-gear .g-piece select.count {
+  flex: 0 0 64px;
+}
+#tab-gear .g-combo {
+  border-top: 1px dashed var(--line);
+  padding-top: 6px;
+  margin-top: 6px;
+}
+#tab-gear .g-combo:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+#tab-gear .g-ro {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+#tab-gear .g-ro:empty {
+  display: none;
+}
+#tab-gear .g-stats {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+}
+#tab-gear .g-stat {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  padding: 1px 6px;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+#tab-gear .g-stat.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#tab-gear .g-stat.out {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+#tab-gear .g-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 10px;
+}
+#tab-gear textarea {
+  display: block;
+  width: 100%;
+  min-height: 66px;
+  resize: vertical;
+}
+#tab-gear details {
+  margin-top: 8px;
+}
+#tab-gear summary {
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+#tab-gear input.dirty,
+#tab-gear textarea.dirty {
+  border-color: var(--warn);
+  background: #3a2f1a;
+}
+#tab-gear select.refused,
+#tab-gear input.refused,
+#tab-gear textarea.refused {
+  border-color: var(--danger);
+}
+.cands {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.cand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px;
+}
+.cand img {
+  width: 96px;
+  border-radius: 4px;
+}
+.cand div {
+  min-width: 0;
+  flex: 1;
+}
+.cand strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.cand span {
+  color: var(--muted);
+  font-size: 11px;
+}
+/* Onglet « Discord » : la note officielle à gauche, l'éditeur et son aperçu
+   à droite ; l'une sous l'autre quand la fenêtre est étroite. */
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+a.ghost {
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+}
+#d-frame {
+  width: 100%;
+  height: 72vh;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+#d-text {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+  resize: vertical;
+  font:
+    13px/1.5 ui-monospace,
+    monospace;
+}
+/* Outils d'édition : la barre au-dessus de la zone de texte, le sélecteur
+   d'emojis qui s'ouvre sous elle, et la liste d'autocomplétion posée au
+   curseur — tous placés par rapport à `.edit`. */
+.edit {
+  position: relative;
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.tools button {
+  min-width: 30px;
+  padding: 3px 7px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.tools button:hover,
+.tools button[aria-expanded='true'] {
+  border-color: var(--accent);
+}
+.tools .sep {
+  width: 1px;
+  margin: 2px 4px;
+  background: var(--line);
+}
+/* Ancre sans hauteur : le sélecteur recouvre la zone de texte, il ne la
+   pousse pas. */
+.pop {
+  position: relative;
+}
+#d-picker {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  width: min(430px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+}
+#d-picker[hidden],
+#d-stamp[hidden],
+#d-complete[hidden] {
+  display: none;
+}
+/* Formulaire d'horodatage : même panneau que le sélecteur, posé à gauche. */
+#d-stamp {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: min(470px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+}
+#d-stamp .row {
+  margin-bottom: 0;
+}
+#d-stamp input,
+#d-stamp select {
+  width: 100%;
+}
+#d-stamp .bar {
+  margin-bottom: 0;
+}
+#d-dates-info {
+  margin: 0 0 6px;
+}
+#d-dates-info:empty,
+#d-request-info:empty {
+  display: none;
+}
+/* Anciens résumés importés, sous la note : l'état, et la liste repliée. */
+.d-history {
+  margin-top: 12px;
+}
+.d-history p.hint {
+  margin: 0 0 4px;
+}
+#d-history-list summary {
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+#d-history-list ul {
+  max-height: 260px;
+  margin: 6px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 12px;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#d-history-list li {
+  padding: 3px 0;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+#d-history-list small {
+  display: block;
+  color: var(--muted);
+}
+/* « Copier la demande » : le nombre d'exemples, et le texte à copier à la
+   main quand le presse-papiers se refuse. */
+#tab-discord .bar label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+}
+#d-request-k {
+  width: 52px;
+}
+#d-request-info {
+  margin: 0 0 6px;
+}
+#d-request-text {
+  display: block;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 8px;
+  font:
+    12px/1.4 ui-monospace,
+    monospace;
+}
+#d-request-text[hidden] {
+  display: none;
+}
+#d-picker-q {
+  width: 100%;
+}
+#d-picker-list {
+  max-height: 320px;
+  margin-top: 8px;
+  overflow-y: auto;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#d-picker-list h3 {
+  margin: 8px 0 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+#d-picker-list p.hint {
+  margin: 0;
+}
+/* Titre d'une section repliable (les standards) : un bouton sans habillage. */
+#d-picker-list h3 button {
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+#d-picker-list h3 button:hover {
+  color: var(--text);
+}
+/* Serveurs dont on prend les emojis : une case chacun, sur une ligne qui
+   se replie. */
+.d-servers {
+  margin-bottom: 12px;
+}
+.d-servers p.hint {
+  margin: 4px 0 0;
+}
+.d-servers a {
+  color: var(--accent);
+}
+#d-emoji-guilds,
+.d-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+}
+.d-mode {
+  margin-bottom: 8px;
+}
+#d-emoji-guilds label.check,
+.d-mode label.check {
+  padding: 2px 0;
+  color: var(--text);
+}
+#d-emoji-guilds label.check {
+  white-space: normal;
+}
+#d-emoji-guilds small {
+  color: var(--muted);
+}
+#d-emoji-guilds small.ko {
+  color: var(--danger);
+}
+/* Formulaire du mode embed : tout y est facultatif. */
+#d-embed {
+  margin-bottom: 10px;
+  padding: 10px 10px 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+#d-embed[hidden] {
+  display: none;
+}
+#d-embed .row {
+  margin-bottom: 8px;
+}
+#d-embed input:not([type='color']),
+#d-embed textarea {
+  display: block;
+  width: 100%;
+}
+#d-embed textarea {
+  min-height: 54px;
+  resize: vertical;
+}
+#d-embed input[type='color'] {
+  display: block;
+  width: 46px;
+  height: 34px;
+  padding: 2px;
+}
+.d-btn-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.d-btn-row[hidden] {
+  display: none;
+}
+.d-btn-row input:first-child {
+  flex: 1 1 34%;
+}
+.d-btn-row input:last-child {
+  flex: 2 1 66%;
+}
+/* Palette : toujours visible, sans défilement — elle se replie sur
+   plusieurs lignes quand la colonne est étroite. */
+#d-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+#d-palette .grp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px;
+}
+#d-palette .grp > span {
+  margin-right: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+#d-palette .em {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+#d-palette .em img {
+  width: 22px;
+  height: 22px;
+}
+#d-palette-missing {
+  margin: 0 0 6px;
+}
+#d-palette-missing:empty {
+  display: none;
+}
+.em-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.em {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.em:hover,
+.em.first {
+  background: #2b3040;
+  border-color: var(--line);
+}
+.em img,
+#d-complete img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+#d-complete {
+  position: absolute;
+  z-index: 6;
+  min-width: 210px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+  font-size: 13px;
+}
+#d-complete li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#d-complete li[aria-selected='true'] {
+  background: #2b3550;
+}
+#d-complete .face {
+  width: 24px;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+}
+#tab-discord .bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+#tab-discord .bar span {
+  margin-right: auto;
+}
+#tab-discord button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#tab-discord .warn {
+  color: var(--warn);
+}
+#tab-discord .ko {
+  color: var(--danger);
+}
+#d-status a {
+  color: var(--accent);
+}
+/* Aperçu : couleurs, tailles et marges du thème sombre de Discord. Le HTML
+   vient de `renderDiscord` (scripts/quick/discord.ts). */
+.dc-cut {
+  margin: 10px 0 4px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.dc {
+  background: #313338;
+  color: #dbdee1;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font:
+    16px/1.375 'gg sans',
+    'Noto Sans',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.dc h1,
+.dc h2,
+.dc h3 {
+  margin: 16px 0 8px;
+  color: #f2f3f5;
+  font-weight: 700;
+  line-height: 1.375;
+}
+.dc h1 {
+  font-size: 24px;
+}
+.dc h2 {
+  font-size: 20px;
+}
+.dc h3 {
+  font-size: 16px;
+}
+.dc > :first-child {
+  margin-top: 0;
+}
+.dc .sub {
+  color: #949ba4;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.dc blockquote {
+  margin: 0;
+  padding: 0 8px 0 12px;
+  border-left: 4px solid #4e5058;
+  border-radius: 2px;
+}
+.dc ul {
+  margin: 4px 0 0 16px;
+  padding: 0;
+  list-style: disc outside;
+}
+.dc ul ul {
+  list-style-type: circle;
+}
+.dc li {
+  margin-bottom: 4px;
+}
+.dc a {
+  color: #00a8fc;
+  text-decoration: none;
+}
+.dc a:hover {
+  text-decoration: underline;
+}
+.dc code {
+  background: #2b2d31;
+  border-radius: 3px;
+  padding: 0 0.2em;
+  font:
+    85%/1.3 ui-monospace,
+    Consolas,
+    monospace;
+}
+.dc pre {
+  margin: 6px 0 0;
+  background: #2b2d31;
+  border: 1px solid #1e1f22;
+  border-radius: 4px;
+  padding: 0.5em;
+  white-space: pre-wrap;
+}
+.dc pre code {
+  background: none;
+  padding: 0;
+}
+.dc img.emoji {
+  width: 1.375em;
+  height: 1.375em;
+  vertical-align: bottom;
+  object-fit: contain;
+}
+.dc .spoiler {
+  background: #1e1f22;
+  border-radius: 3px;
+}
+.dc .mention {
+  background: #3c4270;
+  color: #c9cdfb;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+/* Horodatage `<t:…>` : la pastille grise de Discord, l'instant UTC au survol. */
+.dc .ts {
+  background: #3f4248;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+/* `:nom:` resté en toutes lettres : rouge = faute de frappe (bloque
+   l'envoi), ambre = emoji du serveur qu'on ne peut pas vérifier sans jeton. */
+.dc .bad {
+  background: #da373c;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+.dc .wait {
+  color: #f0b232;
+  border-bottom: 1px dashed #f0b232;
+}
+/* Mode embed : la carte de `renderEmbed` — barre de couleur à gauche (sa
+   couleur est posée en ligne), vignette à droite, image dessous, pied,
+   boutons de lien sous la carte, texte du message au-dessus. */
+.dc-above {
+  margin-bottom: 4px;
+}
+.dc-above > :first-child,
+.dc-embed-desc > :first-child {
+  margin-top: 0;
+}
+.dc-embed {
+  max-width: 520px;
+  padding: 8px 16px 16px 12px;
+  background: #2b2d31;
+  border-left: 4px solid #1e1f22;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.dc-embed-head {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.dc-embed-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.dc-embed-title {
+  margin-top: 8px;
+  color: #f2f3f5;
+  font-size: 16px;
+  font-weight: 600;
+}
+.dc-embed-desc {
+  margin-top: 8px;
+}
+.dc-embed code,
+.dc-embed pre {
+  background: #1e1f22;
+}
+.dc-embed-thumb {
+  flex: 0 0 auto;
+  width: 80px;
+  height: 80px;
+  margin-top: 8px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+.dc-embed-image {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  margin-top: 16px;
+  border-radius: 4px;
+}
+.dc-embed-footer {
+  margin-top: 8px;
+  color: #b5bac1;
+  font-size: 12px;
+  font-weight: 500;
+}
+.dc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.dc a.dc-button {
+  padding: 6px 14px;
+  background: #4e5058;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+.dc a.dc-button::after {
+  content: ' ↗';
+}

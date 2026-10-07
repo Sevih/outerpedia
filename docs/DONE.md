@@ -7,6 +7,100 @@
 
 ## 2026-10-07
 
+- **`pnpm quick` : la page découpée en un fichier par onglet, l'onglet dans
+  l'URL, et un banc de captures** (lot C5, charpente de la refonte de l'UI
+  demandée par Sevih le 07/10). Le quoi. `scripts/quick/ui.html` (4 045 lignes,
+  six onglets dans un seul `<style>` et un seul `<script>`) disparaît au profit
+  de `scripts/quick/ui/` : `index.html` (la coquille — en-tête, menu, un
+  marqueur `<!-- @tab nom -->` par onglet, le journal), `quick.css` (tout le
+  CSS, blocs et commentaires dans l'ordre), `lib.js` (`$`, `esc`, `log`, `post`,
+  l'état de `/api/state`, le registre des sections et la bascule), et par
+  onglet `tabs/<nom>.html` (sa `<section>`) et `tabs/<nom>.js` (un module ES)
+  pour `coupons`, `comics`, `videos`, `ranks`, `gear`, `discord`. AUCUN
+  changement visuel ni fonctionnel, à une exception voulue : l'onglet est dans
+  l'adresse — `#ranks` ouvre « Rangs » au chargement, chaque bascule pose le
+  hash (`history.replaceState`, donc sans entrée d'historique), hash absent ou
+  inconnu = premier onglet. Le pourquoi : F16 puis B28, B29 et C6 en parallèle
+  étaient impossibles sur un fichier unique.
+  Le comment. Le serveur ASSEMBLE `/` à chaque requête (éditer et rafraîchir
+  suffit toujours) et sert le reste par `GET /ui/<chemin>`, `no-store` ; les
+  deux décisions vivent dans `ui-serve.ts`, pur : `assemblePage` (chaque
+  marqueur remplacé par son `tabs/<nom>.html` ; un onglet réclamé sans fichier
+  ou un marqueur mal écrit = erreur qui nomme le fautif, rendue en 500) et
+  `resolveUiFile` (liste blanche `.css .js .mjs .woff2 .png .svg` avec son type
+  MIME ; chemin décodé, résolu PUIS vérifié sous `ui/` — `..`, `%2e%2e`,
+  `%2f`, chemin absolu, `\` : 404). Les `.html` des onglets ne sont pas
+  servis seuls. Les onglets ne se connaissent plus :
+  `sections.register(nom, { init, dirty, canLeave })` ; la bascule demande
+  `canLeave()` à la section quittée (Gear reco : `gearLeave`), `onbeforeunload`
+  demande `dirty()` à chacune (Rangs : `edits.size`, Gear reco :
+  `gearChanges`), `init` reprend la part de `// boot` de l'onglet. L'ordre des
+  requêtes du démarrage est celui d'avant (rangs, gear reco, discord, puis
+  `/api/state`) : les trois onglets qui lisent `/api/state` attendent
+  `stateLoaded`, que `lib.js` tient après avoir lancé les `init`. Troisième
+  couplage que le lot ne citait pas : `esc`, défini dans le bloc Rangs et
+  appelé par Gear reco et Discord — passé dans `lib.js`. Textes des confirms
+  inchangés au caractère près. `/discord-editor.mjs` RESTE à sa place et à son
+  adresse : `discord-editor.test.ts` l'importe par `./discord-editor.mjs` et
+  devait passer sans modification, et `scripts/tsconfig.json` le type là.
+  Le JS est du mot à mot, extrait par plages de lignes puis passé à prettier
+  (six colonnes d'indentation en moins : des lignes se recollent). Seule
+  différence dans les chaînes : l'indentation des gabarits HTML multilignes,
+  que le navigateur replie.
+  Le banc : `node scripts/quick/shot.mjs` (`--port 4747`, `--tabs a,b`, `--out`,
+  `--size 1440x1000`, `--settle 2500`), sur un quick DÉJÀ lancé à part
+  (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4799 pnpm quick --no-open`). Un
+  relais HTTP local sert la page avec l'onglet ouvert dans le HTML et une image
+  `/__settle` qui retient `load` — Firefox sans tête photographie donc APRÈS les
+  `fetch`. Trois écarts à la recette, assumés : le relais est en LECTURE SEULE
+  (il ne transmet que les `GET` et les deux `POST` qui lisent,
+  `/api/discord/preview` et `/api/discord/emojis`, et refuse le reste lui-même :
+  aucun enregistrement ne peut partir du banc) ; il retire l'en-tête `Origin`
+  de ces deux `POST`, sans quoi la garde de `lan.ts` les refusait et l'onglet
+  Discord était photographié sur une erreur d'aperçu ; le délai d'une minute
+  est tenu par Node (poignée du processus), pas par `timeout`, absent de
+  Windows. Les onglets par défaut sont ceux du menu de la page, pas une liste
+  en dur. `FIREFOX_BIN` désigne un autre Firefox.
+  Lint : `pnpm lint` couvrait déjà `scripts/quick/ui/*.js`, mais avec les règles
+  React (faux positif `rules-of-hooks` sur `useEmoji`), les globals de Node et
+  sans `no-undef`. Un bloc de `eslint.config.mjs` y pose `no-undef`, coupe les
+  globals de Node et éteint la règle des hooks : un nom resté dans le fichier
+  d'un autre onglet casse désormais le lint, plus seulement l'écran.
+  Vérification. Captures AVANT (`/tmp/quick-shots/c5-avant/`, `-haut` en
+  1440×3200, `-etroit` en 720×2400) et APRÈS (`c5-apres…`) : dix-huit paires,
+  mêmes dimensions, `compare -metric AE` = 0 pixel partout (et 0 entre deux
+  passes « avant » : le banc est déterministe). Le repos ne montre ni carte de
+  build ni bascule : un banc jetable (non commité) a joué les MÊMES gestes
+  dans l'ancienne page et la nouvelle, contre le même serveur — parcours des
+  six onglets, recherche et puce de récompense, sous-ligne et cellule modifiée
+  de Rangs, Aer chargé puis renommé, dupliqué, quitté sur refus puis sur
+  accord, brouillon Discord mis en gras, dates converties, sélecteur, mode
+  embed, gabarit. 134 valeurs relevées (HTML des listes, compteurs, textes des
+  confirms, `beforeunload` bloqué ou non, journal) : identiques, hash mis à
+  part ; aucune erreur de script ; captures d'après gestes identiques au pixel
+  (`/tmp/quick-shots/c5-gestes/`). Hash : `#ranks` ouvre Rangs, `#nope` et
+  rien ouvrent Codes promo. Routes : `/ui/quick.css`, `/ui/lib.js`,
+  `/ui/tabs/ranks.js` en 200 `no-store` au bon type ; `/ui/tabs/ranks.html`,
+  `/ui/../server.ts`, `/ui/%2e%2e/server.ts`, `/ui/..%2fdiscord-editor.mjs`,
+  `/ui/tabs` en 404. Rien n'a été enregistré depuis la page, discord.com n'a
+  pas été appelé (quick lancé sans jeton). `ui-serve.test.ts` : 14 tests
+  (assemblage, vraie page, garde, MIME, et `openTab` du banc sur la vraie
+  page) ; `discord.test.ts` et `discord-editor.test.ts` non modifiés.
+  `pnpm typecheck` → sa seule ligne est l'écho de la commande (les trois
+  `tsc --noEmit`, dont `-p scripts/tsconfig.json`), code 0 ; `pnpm lint` →
+  `$ eslint`, rien d'autre, code 0 ; `pnpm test` →
+  `Tests  2760 passed (2760)`, 197 fichiers.
+  Laissé. Pas d'écoute de `hashchange` : taper un hash à la main dans la page
+  ouverte ne bascule pas, recharger si (le lot ne demandait que le chargement).
+  Les modules s'exécutent après le premier rendu : ouvrir `#discord` peut
+  montrer « Codes promo » le temps d'un éclair. Non essayé derrière Caddy
+  (`https://quick.outerpedia.local`) ni sous Windows — les adresses sont
+  absolues (`/ui/…`), même origine. Les `.js` de `ui/` ne sont pas typés
+  (`scripts/tsconfig.json` ne prend que `.ts` et `.mjs`) : 2 400 lignes de DOM
+  sans JSDoc, à typer onglet par onglet si on le veut. `log` garde son propre
+  échappement (`<` seul), distinct de `esc`. Commentaires de `discord.ts` et
+  `discord-editor.mjs` qui citaient `ui.html` : corrigés. Première ouverture
+  dans le navigateur de tous les jours = Sevih.
 - **Relecture C4** (Fable, 07/10) : `0dcb8084` validé. Périmètre strict (les
   trois fichiers de quick, leurs tests, DONE, TODO), entrée DONE complète,
   pointeur TODO retiré ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur

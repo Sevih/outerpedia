@@ -1,0 +1,27 @@
+<section id="tab-videos" hidden>
+  <h2>Vidéos</h2>
+  <p class="hint">Lues au rendu : la prod ne les affiche qu'une fois le build de la CI déployé.</p>
+  <div class="row">
+    <div>
+      <label>Cible</label
+      ><select id="v-target"></select>
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Chercher sur la chaîne officielle</label
+      ><input id="v-query" placeholder="nom du perso / du boss" />
+    </div>
+    <div style="flex: 0 0 auto"><button class="ghost" id="v-search">Chercher</button></div>
+  </div>
+  <div class="cands" id="v-cands"></div>
+  <div class="row">
+    <div>
+      <label>URL ou id YouTube</label><input id="v-input" placeholder="https://youtu.be/…" />
+    </div>
+    <div style="flex: 0 0 150px">
+      <label>Libellé d'onglet (option)</label><input id="v-label" />
+    </div>
+    <div style="flex: 0 0 auto"><button class="action" id="v-add">Ajouter</button></div>
+  </div>
+</section>

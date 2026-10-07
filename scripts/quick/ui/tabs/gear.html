@@ -1,0 +1,25 @@
+<section id="tab-gear" hidden>
+  <h2>Gear reco</h2>
+  <p class="hint">
+    Rien ne s'écrit à la saisie : « Enregistrer » envoie les builds du perso, committe et pousse.
+    Lues au rendu : la fiche ne change qu'une fois le build de la CI déployé. Les presets se règlent
+    dans l'admin, qui reste aussi la surface de rendu (tuiles).
+  </p>
+  <div class="row">
+    <div class="picker">
+      <label>Perso</label>
+      <input id="g-q" placeholder="Chercher un perso…" autocomplete="off" />
+      <div class="results" id="g-results" hidden></div>
+    </div>
+    <div style="flex: 0 0 auto">
+      <label class="check"><input type="checkbox" id="g-has" /> avec recos</label>
+    </div>
+  </div>
+  <div class="savebar">
+    <span id="g-count"></span>
+    <button class="ghost" id="g-add" disabled>＋ build</button>
+    <button class="ghost" id="g-reset" disabled>Annuler</button>
+    <button class="action" id="g-save" disabled>Enregistrer</button>
+  </div>
+  <div id="g-list"></div>
+</section>
