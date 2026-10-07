@@ -51,7 +51,7 @@
       puis « Enregistrer » (le commit cite les `$slug` des badges). C9 est
       FAIT aussi (bloc « Aperçu » sous chaque build, rendu comme la fiche
       perso par `previewGearReco`, balise inconnue en rouge dans la note) —
-      reste à le jouer à l'écran : taper une note avec `{B/…}`, `{I-W/…}` et
+      reste à le jouer à l'écran, et le lot A29 (la priorité de substats de l'aperçu en barre à segments avec icônes, comme la fiche et l'admin — remarque de Sevih à la relecture de C9) : taper une note avec `{B/…}`, `{I-W/…}` et
       une balise fausse, changer la langue de l'aperçu dans la barre, replier
       un bloc, et comparer un build à sa fiche sur le site.
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que

@@ -7,6 +7,41 @@
 
 ## 2026-10-07
 
+- **Relecture C9** (Fable, 07/10) : `fed10d0d` validé — la série du second
+  retour est faite, reste le correctif A29 (fichier des lots). Périmètre
+  attendu (`tabs/gear.*`, `ui/gear-view.mjs`, `actions.ts` et ses tests, un
+  test `gear-preview.test.ts`, la route dans `server.ts`, `shot.mjs` qui
+  laisse passer le `POST` d'aperçu, `STYLE.md`, DONE, TODO), entrée DONE
+  complète avec ses neuf écarts, tous acceptés (contrôle de forme avant la
+  résolution, jetons `--klass` et `--stat`, tuile d'effet en carré teinté,
+  adresses relatives passées sous `imgBase`, bloc en bouton et non `details`,
+  400 ms aussi sur les substats, `READ_ONLY_POSTS`, garde `IS_DEV` moquée
+  dans le seul test qui résout, texte d'aide) ; `pnpm typecheck`, `pnpm
+lint`, `pnpm test` verts sur HEAD (198 fichiers, 2 817 tests). Contrôle
+  indépendant sur un quick isolé (:4834, aucun enregistrement) : `GET
+/api/gear-reco/state?id=2000055` porte `statIcons` (19) ; `POST
+/api/gear-reco/preview` avec les builds d'Aer en `fr` et une note forgée →
+  200, libellés « Arme » / « Set d'armure », Surefire en `unique` avec
+  `ATK%`, segments `effect` « Étourdi » pour `{D/BT_STUN}`, `unknown` pour
+  `{B/nope}` ; `{}` → 400 puis `/api/state` → 200. Captures du banc
+  (scratchpad `c9-shots/`, 1440 × 1900) : Aer — groupe « Aperçu en | fr | es
+  | jp | kr | zh » dans la savebar, bloc sous la carte avec Weapon /
+  Accessory / Talisman en tuiles cadrées et puces à icône, Speed Set en
+  quatre tuiles « · 4 pieces », légende 2 / 4 pièces ; Demiurge Drakhan —
+  trois amulettes dont les deux Coward's Treasure, note « PvP : Vanguard's
+  Charm or Assassin's Charm » rendue en items inline. Remarque de Sevih à la
+  relecture, fondée : la priorité de substats sort en texte brut quand la
+  fiche et l'admin la montrent en barre à six segments avec l'icône de
+  chaque stat — c'est le lot C9 qui la demandait « en texte » ; lot A29
+  écrit pour la remplacer par la barre (`SubstatPrioBar` porté dans
+  `gear-view.mjs`). Vu aussi : `{I-W/4}` (un id d'arme) sort en `unknown`,
+  la balise attend le slug — comportement du site, pas de l'aperçu. État du
+  dépôt : 35 commits locaux devant `origin/main`, dont `aba7a39c
+chore(gear-reco): Demiurge Lambda` écrit par un enregistrement réel de
+  quick — qui pousse d'habitude ; ce coup-ci rien n'est parti, à vérifier
+  par Sevih (`git push` refusé ? quick lancé avec un jeton ou un réseau
+  absent ?). Pour Sevih : la ligne du TODO (note avec balises, langue de
+  l'aperçu, repli du bloc, comparaison avec la fiche).
 - **`pnpm quick`, Gear reco : l'aperçu pré-rendu de chaque build, note
   comprise, tel que la fiche perso le montrera** (lot C9, point 3 du retour
   de Sevih du 07/10 : « on n'a pas de visuel pré-rendu, donc impossible de
