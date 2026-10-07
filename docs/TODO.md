@@ -29,8 +29,10 @@
       coquille, composants, `STYLE.md`, trois onglets simples refaits ; Fable,
       seul), puis **B28** Rangs, **B29** Gear reco et **C6** Discord en
       parallèle (Opus, fichiers disjoints). Direction posée par défaut dans
-      F16 : ressembler à l'admin, onglets en haut gardés, journal en tiroir —
-      à corriger AVANT de lancer F16 si Sevih voit autrement.
+      F16 : ressembler à l'admin, onglets en haut gardés, journal en tiroir.
+      Maquette Claude Design à valider (ou retoucher dans l'éditeur) AVANT
+      de lancer F16 : https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw — cinq planches, les
+      lots F16, B28, B29 et C6 la lisent.
 
 ## 🧪 À jouer au prochain patch
 
