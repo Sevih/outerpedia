@@ -1,5 +1,5 @@
 /* Onglet « Gear reco » : le perso choisi, la savebar, un build par carte (slots
-   sur deux colonnes, notes dessous) et le picker de perso en modale. Les
+   sur deux colonnes, la note dessous) et le picker de perso en modale. Les
    composants viennent de `quick.css` ; ce qui suit est propre à l'onglet
    (cf. `STYLE.md`). Bleu accent = modifié, rouge = refusé, ambre = preset. */
 
@@ -269,12 +269,27 @@
   white-space: normal;
 }
 
-/* Les notes : les langues du site côte à côte, les autres repliées. */
+/* La note : l'anglais sur toute la largeur, « Traduire » et le compte de
+   caractères dessous, puis les traductions, repliées, trois par rangée. */
+#tab-gear .g-tr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-gear .g-tr .badge {
+  height: auto;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: normal;
+}
 #tab-gear .g-notes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
+#tab-gear .g-slot > textarea,
 #tab-gear .g-notes textarea {
   width: 100%;
   font-size: 13px;

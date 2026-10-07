@@ -16,6 +16,9 @@
  * des sélecteurs, presets, builds réels), jamais à des coordonnées figées — il
  * bouge à chaque enregistrement de l'onglet.
  *
+ * Et contrat de `translateNotes` — « Traduire » du même onglet : le traducteur
+ * est INJECTÉ, aucun test n'appelle DeepL ni Anthropic.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -28,6 +31,7 @@ import type { CharacterCurated, GearBuild } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import {
+  NO_TRANSLATE_KEY,
   addComics,
   checkGearBuilds,
   comicLangOf,
@@ -35,6 +39,7 @@ import {
   groupComics,
   planRankChanges,
   saveGearReco,
+  translateNotes,
   type ComicsDeps,
   type ComicUpload,
   type GearCatalog,
@@ -42,6 +47,7 @@ import {
   type Outcome,
   type RankChange,
   type RankDisk,
+  type TranslateDeps,
 } from './actions';
 
 const DIANNE: CharacterCurated = {
@@ -586,6 +592,107 @@ describe('saveGearReco — écritures injectées', () => {
 
     expect(out).toMatchObject({ ok: false, written: true, issues: [] });
     expect(out.log.at(-1)).toBe('git push a échoué');
+  });
+});
+
+describe('translateNotes — traducteur injecté', () => {
+  /** Un faux moteur : chaque texte rendu tel quel derrière le code de sa langue. */
+  function deps(over: Partial<TranslateDeps> = {}) {
+    const calls: [string[], string[]][] = [];
+    const fake: TranslateDeps = {
+      autoTranslate: async (texts, targets) => {
+        calls.push([texts, targets]);
+        return {
+          results: texts.map((text) =>
+            Object.fromEntries(targets.map((lang) => [lang, `${lang}: ${text}`])),
+          ),
+          provider: 'deepl',
+        };
+      },
+      hasKey: () => true,
+      ...over,
+    };
+    return { calls, fake };
+  }
+
+  it('rend les cinq autres langues du site et relaie le moteur', async () => {
+    const { calls, fake } = deps();
+    const out = await translateNotes(['Plain note.'], fake);
+
+    expect(calls).toEqual([[['Plain note.'], ['jp', 'kr', 'zh', 'fr', 'es']]]);
+    expect(out).toEqual({
+      results: [
+        {
+          jp: 'jp: Plain note.',
+          kr: 'kr: Plain note.',
+          zh: 'zh: Plain note.',
+          fr: 'fr: Plain note.',
+          es: 'es: Plain note.',
+        },
+      ],
+      provider: 'deepl',
+    });
+  });
+
+  it('relaie Haiku quand c’est lui qui a servi', async () => {
+    const { fake } = deps({
+      autoTranslate: async (texts) => ({ results: texts.map(() => ({})), provider: 'haiku' }),
+    });
+    expect(await translateNotes(['Plain note.'], fake)).toMatchObject({ provider: 'haiku' });
+  });
+
+  it('n’envoie pas les textes vides, et garde les résultats alignés sur l’envoi', async () => {
+    const { calls, fake } = deps();
+    const out = await translateNotes(['First.', '', '  \n', 'Last.'], fake);
+
+    expect(calls).toHaveLength(1);
+    expect(calls[0][0]).toEqual(['First.', 'Last.']);
+    expect(out).toMatchObject({
+      results: [{ fr: 'fr: First.' }, {}, {}, { fr: 'fr: Last.' }],
+    });
+  });
+
+  it('rien que du vide : aucun appel', async () => {
+    const { calls, fake } = deps();
+    expect(await translateNotes(['', ' '], fake)).toEqual({ results: [{}, {}], provider: 'none' });
+    expect(calls).toEqual([]);
+  });
+
+  it('pas de clé : l’erreur est rendue SANS appeler le moteur', async () => {
+    const { calls, fake } = deps({ hasKey: () => false });
+    const out = await translateNotes(['Plain note.'], fake);
+
+    expect(out).toEqual({ error: NO_TRANSLATE_KEY });
+    expect(NO_TRANSLATE_KEY).toContain('DEEPL_API_KEY');
+    expect(NO_TRANSLATE_KEY).toContain('ANTHROPIC_API_KEY');
+    expect(calls).toEqual([]);
+  });
+
+  it('ne touche pas aux tags inline : ce que le moteur garde revient intact', async () => {
+    const { calls, fake } = deps();
+    const out = await translateNotes(['Use {I-T/ATK} here.'], fake);
+
+    expect(calls[0][0]).toEqual(['Use {I-T/ATK} here.']);
+    expect(out).toMatchObject({ results: [{ fr: 'fr: Use {I-T/ATK} here.' }] });
+  });
+
+  it('un moteur qui ne traduit rien (garde IS_DEV) est une erreur, pas un silence', async () => {
+    const { fake } = deps({
+      autoTranslate: async (texts) => ({ results: texts.map(() => ({})), provider: 'none' }),
+    });
+    const out = await translateNotes(['Plain note.'], fake);
+
+    expect(out).toHaveProperty('error');
+    expect(out).not.toHaveProperty('results');
+  });
+
+  it('un refus du moteur est rendu, pas levé', async () => {
+    const { fake } = deps({
+      autoTranslate: async () => {
+        throw new Error('DeepL 403 : forbidden');
+      },
+    });
+    expect(await translateNotes(['Plain note.'], fake)).toEqual({ error: 'DeepL 403 : forbidden' });
   });
 });
 

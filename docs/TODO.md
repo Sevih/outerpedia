@@ -33,9 +33,10 @@
 
 - [ ] **Gear reco, retour de Sevih du 07/10** : deux lots de
       [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), l'un APRÈS l'autre
-      (mêmes fichiers) — **B31** une seule note (anglais, le site replie
-      dessus) et le bouton « Traduire » de l'admin (DeepL puis Claude Haiku),
-      traductions repliées et badge « à retraduire » ; **C7** des pickers
+      (mêmes fichiers) — **B31 FAIT** (une seule note en anglais, « Traduire »,
+      traductions repliées, badge « à retraduire » ; reste à jouer à l'écran
+      par Sevih, cf. l'entrée DONE : un vrai « Traduire » avec ses clés, le
+      badge, l'enregistrement) ; reste **C7** : des pickers
       modaux comme celui des héros pour armes et amulettes (stats principales
       disponibles en bascules à côté de la pièce), talismans (multi-choix) et
       sets (set principal + secondaires → combos `sp2pen2`, `sp2atk2`).

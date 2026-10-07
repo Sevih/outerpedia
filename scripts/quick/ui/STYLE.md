@@ -253,7 +253,7 @@ le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 .card.pad  perso à gauche : portrait 56 px, nom, élément · classe · sous-classe · ★★★, badge « 2 builds · 1 note » ; à droite [Changer de perso] (le picker : recherche, élément, classe, portraits)
 .savebar   1 changement · 1 erreur · « Build PvP : stat principale non permise » [＋ build] [Annuler] [Enregistrer]
 .card (un build)  card-head : « Build » [nom 24ch] badge 1 / 2 · ✕ dupliquer ↑ ↓ ✕ (btn icon)
-   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug + « régler à la pièce ») | Amulettes | Sets | Substats (pleine largeur) | Notes en · fr · es (pleine largeur, 3 textarea, « + jp · kr · zh »)
+   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug + « régler à la pièce ») | Amulettes | Sets | Substats (pleine largeur) | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] badge error · « 212 caractères » à droite ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
    une pièce = [select 260px] [select 120px] ✕ ; « + arme » en .btn.ghost.sm
 .card.ko (un build refusé) : bord danger, badge « stat principale non permise », le message sous la pièce
 ```

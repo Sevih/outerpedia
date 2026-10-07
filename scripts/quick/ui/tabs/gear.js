@@ -19,6 +19,7 @@ let gBuilds = []; // ses builds, dans le modèle de la page
 let gBase = new Map(); // clé de build → ce qui partirait sans y toucher
 let gOrder = []; // les clés dans l'ordre du disque
 let gServer = []; // erreurs du dernier enregistrement, par clé de build
+let gTr = { busy: false, error: '' }; // « Traduire » : en cours, son dernier refus
 let gSeq = 0;
 // Élément et rareté par perso : le roster des recos ne les porte pas, celui
 // de « Rangs » (`/api/ranks`) si. Sans lui, le picker se passe d'élément.
@@ -65,6 +66,9 @@ function gFromDisk(disk, pieces) {
     },
     note: { ...(disk.note ?? {}) },
     noteKeys: Object.keys(disk.note ?? {}),
+    // L'anglais dont datent les traductions : celui du disque, puis celui de
+    // chaque « Traduire ». Propre à la page, jamais écrit.
+    noteAt: disk.note?.[gear.langs.default] ?? '',
   };
 }
 
@@ -79,6 +83,7 @@ const gNewBuild = () => ({
   sub: { preset: '', text: '' },
   note: {},
   noteKeys: [],
+  noteAt: '',
 });
 
 /**
@@ -127,6 +132,43 @@ const gStatus = (b) =>
     : JSON.stringify(gToBuild(b)) !== gBase.get(b.k).json
       ? 'modifié'
       : '';
+
+// La note se saisit en ANGLAIS ; les autres langues se génèrent (« Traduire »)
+// et se relisent. Le site replie une langue absente sur l'anglais.
+const gTrLangs = () => gLangs().filter((l) => l !== gear.langs.default);
+const gEn = (b) => (b.note[gear.langs.default] ?? '').trim();
+const gMoved = (b) => gEn(b) !== b.noteAt.trim();
+/** Des traductions qui datent d'un autre anglais que celui saisi. */
+const gStale = (b) => Boolean(gEn(b)) && gMoved(b) && gTrLangs().some((l) => b.note[l]);
+/**
+ * Ce qui part au traducteur (règle de `createFreshness`, côté admin) : un
+ * anglais retouché depuis la dernière traduction, ou une langue qui manque.
+ * Le reste est à jour — le renvoyer brûlerait du quota pour le même texte.
+ */
+const gToTranslate = (b) =>
+  Boolean(gEn(b)) && (gMoved(b) || gTrLangs().some((l) => !b.note[l]?.trim()));
+const gLen = (b) => gPlural((b.note[gear.langs.default] ?? '').length, 'caractère');
+const gTally = (b) =>
+  `${gTrLangs().filter((l) => b.note[l]).length} / ${gTrLangs().length} — une langue absente se replie sur l’anglais au rendu`;
+
+/**
+ * Pose une traduction reçue pour l'anglais `sent`. Anglais retouché : il fait
+ * foi, toutes les langues sont réécrites. Anglais inchangé : seules les langues
+ * VIDES sont remplies — celles en place ont été relues contre ce même texte
+ * (en vider une la fait regénérer). Rend le nombre de langues posées.
+ */
+function gApply(b, sent, tr) {
+  const moved = sent.trim() !== b.noteAt.trim();
+  let n = 0;
+  for (const lang of gTrLangs()) {
+    const next = tr[lang]?.trim();
+    if (!next || next === b.note[lang] || (!moved && b.note[lang]?.trim())) continue;
+    b.note[lang] = next;
+    n++;
+  }
+  b.noteAt = sent;
+  return n;
+}
 
 /** Builds ajoutés, modifiés, supprimés — et l'ordre, compté une fois. */
 function gearChanges() {
@@ -468,17 +510,25 @@ function gCard(b) {
 
   // Le saut de ligne après `<textarea>` est mangé par le navigateur : sans
   // lui, c'est celui d'une note qui commence par une ligne vide qui le serait.
-  const area = (lang) =>
-    `<div class="field"><label for="${b.k}-${lang}">${lang}</label><textarea id="${b.k}-${lang}" data-t="note" data-lang="${lang}" class="${cls(
+  const def = gear.langs.default;
+  const area = (lang, attrs) =>
+    `<textarea id="${b.k}-${lang}" data-t="note" data-lang="${lang}" ${attrs} class="${cls(
       'note',
       lang,
-      lang === gear.langs.default && badSlot('note'),
-    )}">\n${esc(b.note[lang] ?? '')}</textarea></div>`;
-  const note = `<div class="${slotClass('note', true)}"><h3>${G_SLOTS.note}<span class="badge off">${gear.langs.main.join(' · ')}</span>${iss('note')}</h3>
-    <div class="g-notes">${gear.langs.main.map(area).join('')}</div>
-    <details${gear.langs.extra.some((l) => b.note[l]) ? ' open' : ''}>
-      <summary><span class="btn ghost sm">＋ autres langues</span><span class="lbl">${gear.langs.extra.join(' / ')} — optionnelles, repli sur « ${gear.langs.default} »</span></summary>
-      <div class="g-notes">${gear.langs.extra.map(area).join('')}</div>
+      lang === def && badSlot('note'),
+    )}">\n${esc(b.note[lang] ?? '')}</textarea>`;
+  // L'anglais seul se saisit ; « Traduire » vaut pour TOUS les builds du perso.
+  const note = `<div class="${slotClass('note', true)}"><h3>${G_SLOTS.note}<span class="badge off">${def}</span>${iss('note')}</h3>
+    ${area(def, 'aria-label="Note, en anglais"')}
+    <div class="g-tr"><button class="btn ghost${gTr.busy ? ' busy' : ''}" data-act="translate"${gTr.busy ? ' disabled' : ''} title="Traduit les notes de tous les builds du perso : les langues qui manquent, ou toutes quand l’anglais a changé (DeepL, puis Claude Haiku). Rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge error" data-tr-error>${esc(gTr.error)}</span><span class="lbl g-push" data-len>${gLen(b)}</span></div>
+    <details>
+      <summary><span class="btn ghost sm">Traductions (${gTrLangs().length})</span><span class="badge warn" data-stale>${gStale(b) ? 'à retraduire' : ''}</span><span class="lbl" data-tally>${gTally(b)}</span></summary>
+      <div class="g-notes">${gTrLangs()
+        .map(
+          (lang) =>
+            `<div class="field"><label for="${b.k}-${lang}">${lang}</label>${area(lang, 'placeholder="— (repli sur l’anglais au rendu)"')}</div>`,
+        )
+        .join('')}</div>
     </details></div>`;
 
   return `<div class="${gCardClass(b, issues)}" data-k="${b.k}">
@@ -612,8 +662,78 @@ $('g-list').oninput = (e) => {
   card.querySelector('[data-badge]').textContent = gStatus(b);
   for (const at of card.querySelectorAll('[data-iss]'))
     at.innerHTML = gIssueBadges(b, issues, at.dataset.iss);
+  if (t === 'note') {
+    card.querySelector('[data-len]').textContent = gLen(b);
+    card.querySelector('[data-stale]').textContent = gStale(b) ? 'à retraduire' : '';
+    card.querySelector('[data-tally]').textContent = gTally(b);
+  }
   gBar();
 };
+
+/**
+ * « Traduire » : les notes anglaises de TOUS les builds du perso, d'un seul
+ * appel. Le résultat se pose dans le modèle de la page — il compte dans la
+ * savebar et ne part au disque qu'à « Enregistrer », où le serveur contrôle
+ * les tags des traductions comme ceux de l'anglais.
+ */
+async function gTranslate() {
+  if (gTr.busy) return;
+  const todo = gBuilds
+    .filter(gToTranslate)
+    .map((b) => ({ k: b.k, en: b.note[gear.langs.default] }));
+  gTr = { busy: Boolean(todo.length), error: '' };
+  for (const el of $('g-list').querySelectorAll('[data-act="translate"]')) {
+    el.disabled = gTr.busy;
+    el.classList.toggle('busy', gTr.busy);
+  }
+  for (const el of $('g-list').querySelectorAll('[data-tr-error]')) el.textContent = '';
+  if (!todo.length)
+    return log(
+      ['Rien à traduire : pas de note anglaise retouchée, ni de langue qui manque.'],
+      true,
+    );
+
+  log([], undefined, `traduction de ${gPlural(todo.length, 'note')}`);
+  const done = [];
+  try {
+    const res = await fetch('/api/gear-reco/translate', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ texts: todo.map((x) => x.en) }),
+    });
+    const r = await res.json();
+    if (!r.results) throw new Error(r.error ?? r.log?.[0] ?? `réponse ${res.status}`);
+    let filled = 0;
+    todo.forEach((x, i) => {
+      // Un build supprimé pendant l'appel n'attend plus rien.
+      const b = gBuilds.find((y) => y.k === x.k);
+      if (!b) return;
+      const n = gApply(b, x.en, r.results[i] ?? {});
+      if (!n) return;
+      filled += n;
+      gTouched(b);
+      done.push(b);
+    });
+    log(
+      [
+        filled
+          ? `${gPlural(done.length, 'note')} : ${gPlural(filled, 'traduction')} posée${filled > 1 ? 's' : ''} par ${
+              r.provider === 'haiku' ? 'Claude Haiku (quota DeepL vide)' : 'DeepL'
+            } — à relire, puis « Enregistrer ».`
+          : 'Le traducteur n’a rien rendu de neuf.',
+      ],
+      true,
+    );
+  } catch (e) {
+    gTr.error = e instanceof Error ? e.message : String(e);
+    log([`Traduction refusée : ${gTr.error}`], false);
+  } finally {
+    gTr.busy = false;
+    gRender();
+    // Ce qui vient d'être traduit s'ouvre : c'est à relire.
+    for (const b of done) gCardEl(b).querySelector('details').open = true;
+  }
+}
 
 $('g-list').onchange = (e) => {
   const el = e.target.closest('select[data-s]');
@@ -658,6 +778,7 @@ $('g-list').onclick = (e) => {
   const i = Number(el.dataset.i);
   const at = gBuilds.indexOf(b);
 
+  if (act === 'translate') return gTranslate();
   if (act === 'up' || act === 'down') {
     const to = at + (act === 'up' ? -1 : 1);
     if (to < 0 || to >= gBuilds.length) return;
@@ -711,6 +832,7 @@ async function gLoad(id) {
   );
   gOrder = gBuilds.map((b) => b.k);
   gServer = [];
+  gTr.error = '';
   gWho();
   gRender();
 }

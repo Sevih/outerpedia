@@ -46,6 +46,7 @@ import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
+import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
 import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
@@ -849,9 +850,9 @@ export async function saveRanks(
 const GEAR_RECO_PATH = 'data/curated/gear-reco.json';
 
 /**
- * Les langues de note que l'onglet montre d'emblée : celles que portent les
- * notes du fichier. Les autres langues du site restent repliées, vides par
- * défaut.
+ * Les langues que portent presque toutes les notes du fichier, dans l'ordre où
+ * l'onglet les range : l'anglais se saisit, les autres (celles-ci d'abord, puis
+ * le reste des langues du site) se génèrent par « Traduire » et se relisent.
  */
 const NOTE_LANGS: readonly Lang[] = ['en', 'fr', 'es'];
 
@@ -1118,4 +1119,70 @@ export async function saveGearReco(
 
   const git = deps.commitAndPush([GEAR_RECO_PATH], `chore(gear-reco): ${name}`, report);
   return { ok: git.ok, log: [...j.lines, ...git.log], issues: [], written: true };
+}
+
+/** Ce que rend le traducteur de l'admin : une traduction par texte, et le moteur. */
+type Translated = Awaited<ReturnType<typeof autoTranslate>>;
+
+/**
+ * Ce dont `translateNotes` dépend, injecté : le traducteur, et la présence
+ * d'une clé. Aucun test n'appelle DeepL ni Anthropic.
+ */
+export interface TranslateDeps {
+  autoTranslate: (texts: string[], targets: Lang[]) => Promise<Translated>;
+  /** Une clé de traduction est-elle posée ? La clé elle-même ne sort pas d'ici. */
+  hasKey: () => boolean;
+}
+
+/**
+ * Celles de la route : `autoTranslate` de l'admin (DeepL, puis Claude Haiku
+ * quand son quota est vide) et les variables qu'il lit — à l'appel, `.env.local`
+ * étant chargé après les imports.
+ */
+export const TRANSLATE_DEPS: TranslateDeps = {
+  autoTranslate,
+  hasKey: () =>
+    [process.env.DEEPL_API_KEY ?? process.env.DEEPL_API, process.env.ANTHROPIC_API_KEY].some(
+      (key) => key?.trim(),
+    ),
+};
+
+export const NO_TRANSLATE_KEY = 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local';
+
+/**
+ * « Traduire » de l'onglet Gear reco : les notes anglaises d'un perso vers les
+ * autres langues du site, d'UN appel (`autoTranslate` prend tous les textes à
+ * la fois et préserve les tags `{…}`). `results` est aligné sur `texts` ; un
+ * texte vide n'est pas envoyé et rend `{}`.
+ *
+ * Rien ne s'écrit ici : la page pose les traductions dans son modèle, et c'est
+ * `saveGearReco` qui en contrôle les tags à l'enregistrement.
+ *
+ * Tout échec est RENDU, jamais levé — pas de clé (sans appeler le moteur), un
+ * refus de DeepL ou d'Anthropic, et le moteur qui ne traduit rien : `provider`
+ * à `none` est ce que rend `autoTranslate` quand sa garde `IS_DEV` le coupe
+ * (cf. `env.ts`), un silence qui laisserait croire le texte traduit.
+ */
+export async function translateNotes(
+  texts: string[],
+  deps: TranslateDeps,
+): Promise<Translated | { error: string }> {
+  if (!deps.hasKey()) return { error: NO_TRANSLATE_KEY };
+  const results: Translated['results'] = texts.map(() => ({}));
+  const sent = texts.flatMap((text, i) => (text.trim() ? [i] : []));
+  if (!sent.length) return { results, provider: 'none' };
+  try {
+    const out = await deps.autoTranslate(
+      sent.map((i) => texts[i]),
+      LANGS.filter((l) => l !== DEFAULT_LANG),
+    );
+    if (out.provider === 'none')
+      return { error: 'Le traducteur n’a rien rendu : sa garde IS_DEV l’a coupé (NODE_ENV).' };
+    sent.forEach((i, k) => {
+      results[i] = out.results[k] ?? {};
+    });
+    return { results, provider: out.provider };
+  } catch (e: unknown) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
 }

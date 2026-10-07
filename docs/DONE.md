@@ -7,6 +7,119 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : UNE note, en anglais, et le bouton « Traduire »
+  (DeepL, puis Claude Haiku) — quick se déclare en développement** (lot B31,
+  retour de Sevih du 07/10 après usage). Le pourquoi. L'onglet montrait trois
+  zones de note (en / fr / es, plus jp / kr / zh repliées) alors que le site
+  replie toute langue absente sur l'anglais (`lRec`, `src/lib/data/gear-reco.ts`),
+  et le « Translate » de l'admin y manquait : les autres langues se saisissaient
+  au lieu de se générer. Le quoi. Dans chaque carte de build (`tabs/gear.js`,
+  `gear.css`), le slot Note n'a plus qu'UNE `textarea`, l'anglais, sur toute la
+  largeur sous les slots ; dessous, le bouton `.btn.ghost` « Traduire », son
+  refus en `.badge.error` à côté de lui, et à droite le compte de caractères
+  de l'anglais ; puis un `details` replié « Traductions (5) » — badge `warn`
+  « à retraduire », compte « 2 / 5 — une langue absente se replie sur
+  l'anglais au rendu » — qui porte les cinq autres langues en `textarea`
+  relisibles et corrigeables, trois par rangée (une sous 900 px), une langue
+  vide se lisant « — (repli sur l'anglais au rendu) » en placeholder. La phrase
+  d'en-tête de l'onglet (`gear.html`) dit la règle, le croquis de `STYLE.md`
+  est à jour. « Traduire » est posé sous chaque note mais vaut pour TOUS les
+  builds du perso, d'UN appel (son `title` le dit) : `POST
+/api/gear-reco/translate` `{ texts }` (`server.ts`) → `translateNotes(texts,
+deps)` (`actions.ts`), qui appelle `autoTranslate` de l'admin vers les cinq
+  langues de `LANGS` hors anglais et rend `{ results, provider }`, alignés sur
+  l'envoi (un texte vide n'est pas envoyé et rend `{}`). Les deux dépendances
+  sont injectées (`TRANSLATE_DEPS` : `autoTranslate`, et `hasKey` qui lit les
+  mêmes variables que lui, à l'appel) ; tout échec est RENDU en `{ error }`
+  (HTTP 500), jamais levé : pas de clé — sans appeler le moteur, « Pas de clé
+  DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local » —, un refus de DeepL ou
+  d'Anthropic, et le moteur qui ne traduit rien (`provider: 'none'`). La page
+  pose le résultat dans son modèle : les builds passent « modifié », le compte
+  de la savebar suit, les traductions reçues se déplient, le journal dit
+  « 3 notes : 11 traductions posées par DeepL — à relire, puis
+  « Enregistrer » » ; rien ne part au disque avant « Enregistrer », par
+  `saveGearReco` comme avant — `checkGearBuilds` contrôle donc les tags des
+  traductions comme ceux de l'anglais et refuse celle qui en casserait un.
+  LA GARDE `IS_DEV` (blocage levé par Sevih le 07/10). `autoTranslate` est
+  gardé par `IS_DEV` (`NODE_ENV === 'development'`, figé au chargement de
+  `src/lib/admin/guard.ts`) ; sous `pnpm quick`, `NODE_ENV` est indéfini et il
+  rendait `provider: 'none'` sans rien traduire, en silence (constaté par une
+  sonde tsx, sans clés). Décision de Sevih : quick est l'outil local, il se
+  déclare en développement — nouveau `scripts/quick/env.ts`, un module à
+  effet de bord (`NODE_ENV ??= 'development'`, par un cast : les types de
+  Next le déclarent en lecture seule) importé EN PREMIER par `server.ts`,
+  parce que les imports sont évalués avant le corps du module ; l'admin n'est
+  pas touché et `translate-actions` s'importe normalement. Vérifié par la
+  même sonde (`import './env'` puis `guard` : `IS_DEV = true`, `NODE_ENV`
+  retiré de l'environnement). L'héritage par les processus enfants (git et
+  ses hooks lefthook, `claude -p`) est sans effet : rien dans `scripts/`,
+  `datagen/` ni `lefthook.yml` ne lit `NODE_ENV` (grep), seuls
+  `src/lib/site.ts` et `src/lib/data/guides.ts` le lisent, côté Next, par un
+  `!== 'production'` qui rend la même chose pour `development` que pour
+  indéfini. Et le silence ne peut plus revenir : `provider: 'none'` est une
+  erreur, testée.
+  Trois choix à relire. (1) CE QUI PART au traducteur suit la règle de
+  `createFreshness` (`translate-fill.ts`), réécrite en JS nu : un build dont
+  l'anglais a bougé depuis sa dernière traduction, ou à qui il manque une
+  langue ; le reste est à jour et n'est pas renvoyé (quota). L'empreinte est
+  `noteAt` dans le modèle de la page — l'anglais du disque au chargement, puis
+  celui de chaque « Traduire » —, jamais écrite ; le badge « à retraduire »
+  s'allume quand l'anglais s'en écarte ET qu'il existe des traductions. (2) CE
+  QUI EST ÉCRASÉ s'écarte d'`applyTranslation`, à dessein : anglais retouché,
+  il fait foi et les cinq langues sont réécrites, comme dans l'admin ; anglais
+  INCHANGÉ, seules les langues vides sont remplies — 87 des 91 notes du
+  fichier portent en / es / fr, et y ajouter jp / kr / zh n'a pas à remplacer
+  un fr et un es déjà relus contre ce même texte (vider une langue la fait
+  regénérer). (3) L'ORDRE des cinq langues est celui que le lot énumère, fr,
+  es, jp, kr, zh (`langs.main` puis `langs.extra` de `/api/gear-reco/state`,
+  inchangés) — ce n'est PAS l'ordre de `LANGS` (jp, kr, zh, fr, es) que le
+  lot cite au même endroit ; l'ordre des clés écrites dans le fichier ne
+  change pas (celles du disque d'abord, les nouvelles ensuite).
+  Le modèle et le format du fichier ne bougent pas : `note` reste `{ en, fr,
+es, jp, kr, zh }` partiel. Vérifié, comme demandé : la règle « une langue
+  vide n'est pas écrite » n'est NI dans `collapseBuild` NI dans
+  `upsertGearReco` — ils ne touchent pas à `note`, que `validateGearBuilds`
+  ne contrôle qu'en forme ; elle est dans la page (`gToBuild` ne garde que
+  les langues non vides) et y reste.
+  Tests (`actions.test.ts`, +8, traducteur injecté, aucun appel à DeepL ni à
+  Anthropic) : les cinq langues et `provider` relayés (deepl, haiku), textes
+  vides non envoyés et résultats alignés, rien que du vide sans appel, « pas
+  de clé » sans appel, un tag `{I-T/ATK}` rendu intact, `provider: 'none'` en
+  erreur, un refus du moteur rendu et non levé.
+  Vérification. `pnpm typecheck` : `$ tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`, sans erreur ;
+  `pnpm lint` : `$ eslint`, sans erreur ; `pnpm test` : `Test Files  197
+passed (197)`, `Tests  2781 passed (2781)`. La route n'a JAMAIS tourné avec
+  les vraies clés : quick isolé (`DEEPL_API_KEY= DEEPL_API= ANTHROPIC_API_KEY=
+DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4799 pnpm quick --no-open`, arrêté
+  ensuite), `curl -X POST` avec l'`Origin` de la page → `{"error":"Pas de clé
+DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local"}` et rien d'autre ; avec
+  une origine étrangère, le refus de `lan.ts`. Aucun enregistrement depuis la
+  page. Captures, regardées : AVANT `/tmp/quick-shots/b31-avant/` (Aer
+  `2000055` et Rhona `2000008`, qui a une note fr, en `-1440` et `-1024`,
+  plus `-haut` pour voir le bloc Note) ; APRÈS `/tmp/quick-shots/b31-apres/`
+  (les mêmes, 1440×1900 et 1024×2100) ; les états que le banc ne joue pas,
+  par un relais jetable du scratchpad qui clique dans la page (tout `POST`
+  refusé, la traduction rendue FACTICE par le relais, ou transmise au quick
+  sans clés pour l'erreur) : `/tmp/quick-shots/b31-etats/` — `erreur.png` et
+  `erreur-1024.png` (le badge à côté du bouton, le journal en rouge),
+  `occupe.png` (bouton en sablier), `traduit.png` (jp / kr / zh remplis, fr
+  et es gardés), `retraduire.png` (anglais retouché : badge « à retraduire »,
+  placeholders de repli), `retraduit.png` et `retraduit-1024.png` (les cinq
+  réécrites sur le build retouché, « 3 changements »), `rien.png` (Demiurge
+  Saeran, six langues : « Rien à traduire »), `aer.png` (aucune note). Rien à
+  corriger à l'écran après coup.
+  À l'écran pour Sevih : un VRAI « Traduire » avec ses clés (relancer quick :
+  `server.ts` a changé) sur un perso à note en / es / fr — jp, kr, zh
+  arrivent, fr et es ne bougent pas, les tags `{I-T/…}` sont intacts ;
+  retoucher l'anglais → badge « à retraduire », puis « Traduire » → les cinq
+  réécrites ; « Enregistrer » → un commit `chore(gear-reco): <perso>` dont le
+  diff ne porte que les notes ; et, clés retirées, le badge d'erreur.
+  Laissé : l'empreinte ne survit pas à un rechargement (un anglais retouché
+  puis enregistré SANS retraduire n'est plus signalé à la relecture — le
+  disque devient la référence, comme dans l'admin) ; le docblock de tête
+  d'`actions.ts` compte toujours « CINQ gestes » ; les pickers d'équipement
+  et de sets sont le lot C7.
 - **Relecture B28, B29, C6** (Fable, 07/10) : `8e981a9e`, `417d4f25`,
   `81e4e985` validés — la série UI de quick est close. Fichiers disjoints
   comme prévu (B28 : `tabs/ranks.*` et la sous-classe ajoutée à `/api/ranks` ;

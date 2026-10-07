@@ -17,12 +17,15 @@
  * sans R2_* la publication des codes promo est sautée, sans YOUTUBE_API_KEY
  * l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
  * l'onglet Discord rédige et prévisualise mais n'envoie pas, et n'importe pas
- * les anciens résumés (cf. `discord.ts`).
+ * les anciens résumés (cf. `discord.ts`), sans DEEPL_API_KEY ni ANTHROPIC_API_KEY
+ * « Traduire » de l'onglet Gear reco répond qu'il n'a pas de clé.
  *
  * DÉJÀ LANCÉ : le port est tenu par l'instance précédente, on se contente
  * d'ouvrir le navigateur dessus. Double-cliquer l'icône deux fois ne crée donc
  * pas deux serveurs.
  */
+// EN PREMIER, avant tout import qui tirerait l'admin : cf. `env.ts`.
+import './env';
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
@@ -31,6 +34,7 @@ import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   GEAR_RECO_DEPS,
+  TRANSLATE_DEPS,
   addComics,
   addVideo,
   currentCoupons,
@@ -43,6 +47,7 @@ import {
   saveRanks,
   searchRewards,
   searchVideos,
+  translateNotes,
   videoTargets,
   type ComicBatch,
   type RankChange,
@@ -401,6 +406,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/gear-reco') {
     const { id, builds } = await body<{ id: string; builds: GearBuild[] }>(req);
     await stream(res, (report) => saveGearReco(String(id ?? ''), builds, GEAR_RECO_DEPS, report));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/gear-reco/translate') {
+    // « Traduire » : les notes anglaises du perso, d'UN appel. Rien ne s'écrit
+    // ici — la page pose le résultat dans son modèle, « Enregistrer » fait le
+    // reste. Sans clé ou sur un refus du moteur : `{ error }`, que le bouton
+    // affiche.
+    const { texts } = await body<{ texts?: unknown }>(req);
+    const out = await translateNotes(strings(texts), TRANSLATE_DEPS);
+    json(res, out, 'error' in out ? 500 : 200);
     return;
   }
 
