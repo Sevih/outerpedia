@@ -19,6 +19,16 @@
 - [ ] **R2** : `images/ui/shop/al.webp` (onglet de l'Adventure License)
       encore dans le bucket, plus référencé — à retirer (Sevih).
 
+## 🎒 Gear reco — données (signalé par le lot C4)
+
+- [ ] **Bloody Edge (`631`)** : deux builds de `data/curated/gear-reco.json`
+      lui donnent ATK% en stat principale, son pool ne propose que HP% — à
+      corriger dans quick (onglet Gear reco) ou l'admin (Sevih).
+- [ ] **Presets en double** (`$mrs` = `$elemcritAP`, `a2p2` = `p2a2` dans
+      `gear-presets.json`) : `collapseBuild` rend le premier trouvé, l'admin
+      change donc le slug au save (quick, lui, garde celui du disque). À
+      fusionner ou à distinguer dans l'admin des presets.
+
 ## 🧰 Outil quick
 
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :

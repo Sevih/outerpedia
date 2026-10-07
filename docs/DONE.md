@@ -7,6 +7,22 @@
 
 ## 2026-10-07
 
+- **Relecture C4** (Fable, 07/10) : `0dcb8084` validé. Périmètre strict (les
+  trois fichiers de quick, leurs tests, DONE, TODO), entrée DONE complète,
+  pointeur TODO retiré ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur
+  HEAD (196 fichiers, 2 746 tests). Contrôle indépendant : quick isolé sur
+  :4798, `GET /api/gear-reco/state` → roster de 129, presets, options, langues ;
+  `?id=2000055` → les trois builds d'Aer, à l'octet du disque ; `saveGearReco`
+  passe bien par `checkGearBuilds` (tags par `checkText`, références, parité)
+  AVANT `upsertGearReco`, puis `commitAndPush` du seul `gear-reco.json` ; les
+  deux écritures injectées (`GEAR_RECO_DEPS`). Capture de l'onglet à vide : le
+  sélecteur de perso prend toute la largeur — F16 et B29 le remplacent par le
+  picker de la maquette. Premier enregistrement réel = Sevih. Signalements
+  de l'agent repris : « cinq gestes » → six dans `CLAUDE.md` et le `.desktop`
+  (corrigé ici) ; Bloody Edge (`631`) en ATK% sur deux builds alors que son
+  pool ne donne que HP% → TODO (donnée de Sevih) ; presets en double
+  (`$mrs`/`$elemcritAP`, `a2p2`/`p2a2`) : l'admin change le slug au save, pas
+  quick — à trancher un jour dans les presets, noté au TODO.
 - **`pnpm quick` : un onglet « Gear reco » pour éditer les recos d'équipement
   d'un perso et les publier** (lot C4, demande Sevih du 07/10). Les recos
   (`data/curated/gear-reco.json`) ne s'éditaient que dans l'admin, qui écrit
