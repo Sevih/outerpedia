@@ -7,6 +7,25 @@
 
 ## 2026-10-07
 
+- **Relecture B31** (Fable, 07/10) : `8667d5b0` validé. Périmètre attendu
+  (`tabs/gear.*`, `actions.ts` et ses tests, `server.ts`, le nouveau
+  `env.ts`, une ligne de `STYLE.md`, DONE, TODO), entrée DONE complète ;
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (197 fichiers,
+  2 781 tests). Contrôle indépendant : quick isolé SANS clés — `POST
+/api/gear-reco/translate` avec l'`Origin` de la page → `{ error: « Pas de
+clé … » }` en 500 et rien d'autre, origine étrangère → 403 de `lan.ts` ;
+  `import './env'` est bien le PREMIER import de `server.ts` ; capture de
+  Rhona (`2000008`, trois notes) : une seule zone Note en anglais, « Traduire »,
+  compte de caractères, « Traductions (5) » repliées avec « 2 / 5 — une
+  langue absente se replie sur l'anglais au rendu ». Trois choix de l'agent
+  acceptés : ne renvoyer au traducteur que ce qui a bougé ou manque (quota) ;
+  anglais inchangé → seules les langues vides sont remplies, anglais retouché
+  → les cinq réécrites ; ordre fr, es, jp, kr, zh (celui de l'onglet, pas de
+  `LANGS` — le lot se contredisait, l'agent a bien choisi). Le blocage levé
+  (`NODE_ENV ??= 'development'` dans un module importé en premier) est
+  documenté dans son entrée. Le « CINQ gestes » du docblock d'`actions.ts`
+  corrigé ici. Reste pour Sevih : un vrai « Traduire » avec ses clés
+  (relancer quick) et l'enregistrement qui suit, au TODO.
 - **`pnpm quick`, Gear reco : UNE note, en anglais, et le bouton « Traduire »
   (DeepL, puis Claude Haiku) — quick se déclare en développement** (lot B31,
   retour de Sevih du 07/10 après usage). Le pourquoi. L'onglet montrait trois

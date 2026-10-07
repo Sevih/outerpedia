@@ -31,15 +31,16 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Gear reco, retour de Sevih du 07/10** : deux lots de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), l'un APRÈS l'autre
-      (mêmes fichiers) — **B31 FAIT** (une seule note en anglais, « Traduire »,
-      traductions repliées, badge « à retraduire » ; reste à jouer à l'écran
-      par Sevih, cf. l'entrée DONE : un vrai « Traduire » avec ses clés, le
-      badge, l'enregistrement) ; reste **C7** : des pickers
-      modaux comme celui des héros pour armes et amulettes (stats principales
+- [ ] **Gear reco, retour de Sevih du 07/10** : reste le lot **C7** de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) — pickers modaux
+      comme celui des héros pour armes et amulettes (stats principales
       disponibles en bascules à côté de la pièce), talismans (multi-choix) et
-      sets (set principal + secondaires → combos `sp2pen2`, `sp2atk2`).
+      sets (set principal + secondaires → combos `sp2pen2`, `sp2atk2`). B31
+      est fait (une note en anglais, « Traduire ») : à jouer à l'écran avec
+      les vraies clés — relancer quick, « Traduire » sur un perso à note
+      en / es / fr (jp, kr, zh arrivent, fr et es ne bougent pas, tags
+      intacts), retoucher l'anglais → badge « à retraduire », « Enregistrer »
+      → un commit `chore(gear-reco): <perso>` qui ne porte que les notes.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,

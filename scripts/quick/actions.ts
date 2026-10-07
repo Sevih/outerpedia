@@ -1,5 +1,5 @@
 /**
- * quick/actions — les CINQ gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les SIX gestes du quotidien, sortis du panneau admin.
  *
  * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo, régler un
  * rang ou une reco d'équipement ne demandait jusqu'ici RIEN de moins qu'un
