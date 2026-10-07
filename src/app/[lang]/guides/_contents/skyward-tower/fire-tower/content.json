@@ -1,0 +1,99 @@
+{
+  "reasons": {
+    "this-floor-has-no-turn-limit": {
+      "en": "This floor has no turn limit: keep chipping away at the boss's HP bar instead of watching the damage counter.",
+      "jp": "この階にはターン制限がありません。ダメージカウンターを気にせず、ボスのHPを少しずつ削り続けましょう。",
+      "kr": "이 층에는 턴 제한이 없습니다. 피해량 카운터를 신경 쓰기보다 보스의 체력을 꾸준히 깎아 나가세요.",
+      "zh": "本层没有回合限制：不必盯着伤害计数，持续削减Boss的血条即可。",
+      "fr": "Cet étage n'a pas de limite de tours : grignote la barre de PV du boss plutôt que de surveiller le compteur de dégâts.",
+      "es": "Este piso no tiene límite de turnos: sigue desgastando la barra de PS del jefe en lugar de fijarte en el contador de daño."
+    },
+    "the-boss-is-also-an-eff-check": {
+      "en": "The boss is also an {S/EFF} check: the higher {P/Fortuna}'s {S/EFF}, the more reliably {D/BT_SEALED_RECEIVE_HEAL} lands. Keep it on the boss at all times, extending it with her Burst 2 (+1 turn debuff duration) whenever your action points allow.",
+      "jp": "このボスは{S/EFF}チェックでもあります。{P/Fortuna}の{S/EFF}が高いほど{D/BT_SEALED_RECEIVE_HEAL}が安定して入ります。APに余裕があればバースト2（弱体効果の持続ターン+1）で延長し、ボスに常に付与し続けましょう。",
+      "kr": "이 보스는 {S/EFF} 체크이기도 합니다. {P/Fortuna}의 {S/EFF}가 높을수록 {D/BT_SEALED_RECEIVE_HEAL}이 안정적으로 들어갑니다. AP가 허락하면 버스트 2(약화 효과 지속 +1턴)로 연장해 보스에게 항상 유지하세요.",
+      "zh": "这个Boss同时也是{S/EFF}检定：{P/Fortuna}的{S/EFF}越高，{D/BT_SEALED_RECEIVE_HEAL}就越稳定命中。只要AP允许，就用她的爆发2（弱化效果持续+1回合）延长，让Boss始终处于该状态。",
+      "fr": "Le boss est aussi un test d'{S/EFF} : plus {P/Fortuna} a d'{S/EFF}, plus {D/BT_SEALED_RECEIVE_HEAL} passe souvent. Garde-le en permanence sur le boss, en le prolongeant avec son Burst 2 (durée des debuffs +1 tour) dès que tes points d'action le permettent.",
+      "es": "El jefe también es una prueba de {S/EFF}: cuanta más {S/EFF} tenga {P/Fortuna}, con más fiabilidad entra {D/BT_SEALED_RECEIVE_HEAL}. Mantenlo siempre sobre el jefe, prolongándolo con su Burst 2 (+1 turno de duración de debuffs) cuando tus puntos de acción lo permitan."
+    },
+    "use-sk-primine-s3-and-her-burst-": {
+      "en": "Use {SK/Primine|S3} and her Burst 3 sparingly: only when an ally has lost {B/BT_IMMUNE}. Note that {SK/Primine|S3} grants it for 3 turns while Burst 3 only grants 1 turn.",
+      "jp": "{SK/Primine|S3}とバースト3は温存し、味方の{B/BT_IMMUNE}が切れたときだけ使いましょう。{SK/Primine|S3}は3ターン付与しますが、バースト3は1ターンのみです。",
+      "kr": "{SK/Primine|S3}와 버스트 3은 아껴 두었다가 아군의 {B/BT_IMMUNE}이 사라졌을 때만 사용하세요. {SK/Primine|S3}는 3턴 동안 부여하지만 버스트 3은 1턴뿐입니다.",
+      "zh": "{SK/Primine|S3}和她的爆发3要省着用：只在有队友失去{B/BT_IMMUNE}时使用。注意{SK/Primine|S3}提供3回合，而爆发3只有1回合。",
+      "fr": "Utilise {SK/Primine|S3} et son Burst 3 avec parcimonie : seulement quand un allié a perdu {B/BT_IMMUNE}. Note que {SK/Primine|S3} le donne pour 3 tours, contre 1 seul tour pour le Burst 3.",
+      "es": "Usa {SK/Primine|S3} y su Burst 3 con moderación: solo cuando un aliado haya perdido {B/BT_IMMUNE}. Ten en cuenta que {SK/Primine|S3} lo otorga durante 3 turnos, mientras que el Burst 3 solo 1 turno."
+    },
+    "barrier-and-remove-debuff-for-he": {
+      "en": "Barrier and {B/BT_REMOVE_DEBUFF} for herself and the ally with the lowest HP. Equip {I-T/Rogue's Charm} to stack up chain points.",
+      "jp": "自身とHPが最も低い味方にバリアと{B/BT_REMOVE_DEBUFF}。{I-T/Rogue's Charm}を装備してチェインポイントを貯めましょう。",
+      "kr": "자신과 체력이 가장 낮은 아군에게 보호막과 {B/BT_REMOVE_DEBUFF}. {I-T/Rogue's Charm}을 장착해 체인 포인트를 쌓으세요.",
+      "zh": "为自身和生命值最低的队友提供护盾和{B/BT_REMOVE_DEBUFF}。装备{I-T/Rogue's Charm}来累积连锁点数。",
+      "fr": "Barrière et {B/BT_REMOVE_DEBUFF} pour elle-même et l'allié qui a le moins de PV. Équipe {I-T/Rogue's Charm} pour accumuler des chain points.",
+      "es": "Barrera y {B/BT_REMOVE_DEBUFF} para ella misma y el aliado con menos PS. Equipa {I-T/Rogue's Charm} para acumular puntos de cadena."
+    },
+    "sealed-receive-heal-on-the-boss": {
+      "en": "{D/BT_SEALED_RECEIVE_HEAL} on the boss.",
+      "jp": "ボスに{D/BT_SEALED_RECEIVE_HEAL}を付与。",
+      "kr": "보스에게 {D/BT_SEALED_RECEIVE_HEAL} 부여.",
+      "zh": "对Boss施加{D/BT_SEALED_RECEIVE_HEAL}。",
+      "fr": "{D/BT_SEALED_RECEIVE_HEAL} sur le boss.",
+      "es": "{D/BT_SEALED_RECEIVE_HEAL} sobre el jefe."
+    },
+    "team-wide-immune-barrier-and-hea": {
+      "en": "Team-wide {B/BT_IMMUNE}, barrier and heal. Equip her with a T4 {I-A/Saint's Ring}.",
+      "jp": "味方全体に{B/BT_IMMUNE}、バリア、回復。T4 {I-A/Saint's Ring}を装備させましょう。",
+      "kr": "아군 전체에 {B/BT_IMMUNE}, 보호막, 회복. T4 {I-A/Saint's Ring}을 장착하세요.",
+      "zh": "全队{B/BT_IMMUNE}、护盾和治疗。为她装备T4 {I-A/Saint's Ring}。",
+      "fr": "{B/BT_IMMUNE}, barrière et heal sur toute l'équipe. Équipe-la d'un {I-A/Saint's Ring} T4.",
+      "es": "{B/BT_IMMUNE}, barrera y curación para todo el equipo. Equípala con un {I-A/Saint's Ring} T4."
+    },
+    "resurrection-and-team-wide-heal": {
+      "en": "{B/BT_RESURRECTION} and team-wide heal: she can save your run if {P/Fortuna} dies along the way. Equip her with a T4 {I-A/Resurrection Token}.",
+      "jp": "{B/BT_RESURRECTION}と味方全体回復。途中で{P/Fortuna}が倒れても立て直せます。T4 {I-A/Resurrection Token}を装備させましょう。",
+      "kr": "{B/BT_RESURRECTION}과 아군 전체 회복. 도중에 {P/Fortuna}가 쓰러져도 전투를 살릴 수 있습니다. T4 {I-A/Resurrection Token}을 장착하세요.",
+      "zh": "{B/BT_RESURRECTION}和全队治疗：如果{P/Fortuna}中途阵亡，她能挽救这场战斗。为她装备T4 {I-A/Resurrection Token}。",
+      "fr": "{B/BT_RESURRECTION} et heal sur toute l'équipe : elle peut sauver ta run si {P/Fortuna} meurt en chemin. Équipe-la d'un {I-A/Resurrection Token} T4.",
+      "es": "{B/BT_RESURRECTION} y curación para todo el equipo: puede salvar tu intento si {P/Fortuna} muere por el camino. Equípala con un {I-A/Resurrection Token} T4."
+    },
+    "source-of-remove-debuff": {
+      "en": "Source of {B/BT_REMOVE_DEBUFF}",
+      "jp": "{B/BT_REMOVE_DEBUFF}付与源",
+      "kr": "{B/BT_REMOVE_DEBUFF} 부여원",
+      "zh": "{B/BT_REMOVE_DEBUFF}来源",
+      "fr": "Source de {B/BT_REMOVE_DEBUFF}",
+      "es": "Fuente de {B/BT_REMOVE_DEBUFF}"
+    }
+  },
+  "floors": {
+    "110": {
+      "advice": [
+        "this-floor-has-no-turn-limit",
+        "the-boss-is-also-an-eff-check",
+        "use-sk-primine-s3-and-her-burst-"
+      ],
+      "recommended": [
+        {
+          "characters": ["Core Fusion Veronica"],
+          "reason": "barrier-and-remove-debuff-for-he"
+        },
+        {
+          "characters": ["Fortuna", "Edelweiss"],
+          "reason": "sealed-receive-heal-on-the-boss"
+        },
+        {
+          "characters": ["Luna"],
+          "reason": "source-of-remove-debuff"
+        },
+        {
+          "characters": ["Primine"],
+          "reason": "team-wide-immune-barrier-and-hea"
+        },
+        {
+          "characters": ["Mene"],
+          "reason": "resurrection-and-team-wide-heal"
+        }
+      ]
+    }
+  }
+}
