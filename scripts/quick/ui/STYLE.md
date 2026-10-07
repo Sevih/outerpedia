@@ -3,10 +3,13 @@
 > La page de `pnpm quick` ressemble à l'admin du site : mêmes couleurs, même
 > sobriété, pas de web font. Ce fichier dit d'où viennent les jetons, ce que
 > fait chaque composant de `quick.css` (un exemple de markup chacun), les
-> règles de mise en page, et le croquis attendu des onglets qui restent à
-> passer à la charte (Rangs, Gear reco, Discord). La maquette de départ est
-> l'artefact Claude Design de Sevih du 07/10/2026 (cinq planches) ; ici, c'est
-> ce que le code rend.
+> règles de mise en page, et le croquis de chaque onglet tel qu'il est rendu
+> (les six sont à la charte depuis le 07/10/2026 ; les écarts aux croquis de
+> départ sont dans les entrées DONE des lots B28, B29 et C6). La maquette de
+> départ est l'artefact Claude Design de Sevih du 07/10/2026 (sept planches) ;
+> ici, c'est ce que le code rend. Une section nouvelle (éditeurs, guides,
+> outils de l'admin que quick doit absorber) suit ces composants et ces
+> croquis.
 
 ## Les jetons
 
@@ -220,13 +223,14 @@ colonnes de Rangs.
 - **Le journal est le seul retour** : pas de message dans l'onglet, `log()`.
 - **L'aperçu Discord** (`.dc*`) imite Discord à dessein et garde ses couleurs.
 
-## Les trois onglets qui suivent — croquis
+## Les trois onglets « wide » — croquis
 
-Un croquis, pas un diktat : si l'agent du lot voit mieux, il dit pourquoi dans
-`DONE.md`. Le markup de chaque onglet reste dans `tabs/<nom>.html` et son
-style dans `tabs/<nom>.css` (aujourd'hui l'ancien bloc, jetons renommés).
+Croquis de départ pour Rangs et Gear reco (faits par B28 et B29 le 07/10 :
+les écarts, et pourquoi, sont dans leurs entrées DONE ; le rendu fait foi),
+croquis du rendu pour Discord. Le markup de chaque onglet est dans
+`tabs/<nom>.html`, son style dans `tabs/<nom>.css`.
 
-### Rangs (B28, `wide`)
+### Rangs (`wide`, fait — B28)
 
 ```
 .head  Rangs et rôles — Rien ne s'écrit à la sélection…
@@ -242,7 +246,7 @@ Un select modifié prend le bord et le fond `accent` à 12 % (`.badge.edit` pour
 le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 22 px, depuis `imgBase`, `alt=""` doublées par le nom en texte ou en `title`.
 
-### Gear reco (B29, `wide`)
+### Gear reco (`wide`, fait — B29)
 
 ```
 .head  Gear reco — Les builds d'un perso…
@@ -254,7 +258,7 @@ le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 .card.ko (un build refusé) : bord danger, badge « stat principale non permise », le message sous la pièce
 ```
 
-### Discord (C6, `wide`)
+### Discord (`wide`, fait — C6)
 
 Fait, et le croquis est ici celui du rendu (les écarts au croquis de départ
 sont dans l'entrée DONE du lot C6) :

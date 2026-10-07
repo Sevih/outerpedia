@@ -34,21 +34,25 @@
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
-      UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN
-(EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
+      UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN (EN, JP, KR)`
+      poussé. Si une connexion coupe, le bouton reste grisé
       (`post()` de `lib.js`, signalé par l'agent : à reprendre un jour, hors
       série UI).
-- [ ] **Refonte de l'UI, dernière vague** (lots de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), en parallèle,
-      Opus, fichiers disjoints, sur `scripts/quick/ui/STYLE.md` et la maquette
-      https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw) : **B28** Rangs
-      — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **B29** Gear
-      reco — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **C6** Discord
-      — FAIT (07/10, avec le placeholder de Récompense et le retrait du bloc
-      « héritage » de `quick.css` ; contrôles AVEC le jeton dans son entrée
-      DONE). Contrôles à l'écran laissés par F16 : survol des ✕ et des
-      boutons fantômes, anneau de focus, tiroir pendant un vrai enregistrement,
-      résultats de Récompense avec icônes, hash `#gear`, fenêtre sous 1060 px.
+- [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
+      le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
+      anneau de focus, tiroir du journal pendant un vrai enregistrement,
+      résultats de Récompense avec icônes, hash `#gear/<id>`, fenêtre sous
+      1060 px ; Rangs : cellule modifiée, refus réel, dépliage, clavier dans
+      les menus de rang ; Gear reco : erreur à la pièce, preset libéré puis
+      repris, picker au clavier ; Discord AVEC le jeton : serveurs, salons,
+      emojis de serveur, un envoi d'essai sur le serveur perso, embed,
+      reprise d'envoi, presse-papiers (listes détaillées dans les entrées
+      DONE des lots F16, B28, B29, C6).
+- [ ] **Gear reco, à trancher** (laissé par B29) : donner `element`, `rarity`
+      et la sous-classe au roster de `gearRecoState` (`actions.ts`) pour que
+      l'en-tête n'ait plus à lire `/api/ranks` ; garder `#gear/<id>` dans
+      l'adresse après un choix (recharger reviendrait sur le perso) — ça
+      passe par `lib.js`, qui réécrit le hash à chaque bascule.
 
 ## 🧪 À jouer au prochain patch
 

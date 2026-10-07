@@ -7,6 +7,24 @@
 
 ## 2026-10-07
 
+- **Relecture B28, B29, C6** (Fable, 07/10) : `8e981a9e`, `417d4f25`,
+  `81e4e985` validés — la série UI de quick est close. Fichiers disjoints
+  comme prévu (B28 : `tabs/ranks.*` et la sous-classe ajoutée à `/api/ranks` ;
+  B29 : `tabs/gear.*` et l'option `--hash` de `shot.mjs` ; C6 :
+  `tabs/discord.*`, le placeholder de Récompense, le bloc « héritage » retiré
+  de `quick.css`, le `_doc` de la palette, `STYLE.md`), trois entrées DONE
+  complètes ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD
+  (197 fichiers, 2 773 tests). Captures du banc regardées par Fable : Rangs
+  avec visages carrés, icônes d'élément, de classe et de sous-classe, étoiles
+  et rangs en image dans chaque cellule, chevron de dépliage visible ; Gear
+  reco sur Aer (`--hash gear/2000055`) en cartes à deux colonnes, presets en
+  badge, et l'état vide d'Adelie (capture de l'agent) ; Discord en deux
+  colonnes, barre d'outils groupée à icônes, Message | Embed segmenté,
+  palette repliable. Décision de B28 acceptée : un `select` natif derrière
+  l'icône du rang, pas de menu custom (le clavier et `onchange` restent).
+  `STYLE.md` remis d'aplomb par Fable (préambule et titres des croquis :
+  tout est fait, le rendu fait foi). Ce que le banc ne joue pas est au TODO
+  pour Sevih, avec les deux points « à trancher » laissés par B29.
 - **`pnpm quick`, l'onglet « Discord » à la charte : la note repliable à
   gauche, l'éditeur en cartes à droite, la barre d'outils groupée — et le bloc
   « héritage » de `quick.css` retiré** (lot C6, dernier de la série UI, sur la
