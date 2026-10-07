@@ -22,14 +22,19 @@
 ## 🧰 Outil quick
 
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
-      cinq lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
+      six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
       cet ordre — **C5** (charpente : un fichier par onglet dans
       `scripts/quick/ui/`, onglet dans l'URL, banc de captures `shot.mjs` ;
-      Opus, seul, après C4), **F16** (charte : jetons de `globals.css`,
-      coquille, composants, `STYLE.md`, trois onglets simples refaits ; Fable,
-      seul), puis **B28** Rangs, **B29** Gear reco et **C6** Discord en
-      parallèle (Opus, fichiers disjoints). Direction posée par défaut dans
-      F16 : ressembler à l'admin, onglets en haut gardés, journal en tiroir.
+      Opus, seul, après C4), **B30** (4-comics : plusieurs BD et langues en
+      un envoi et un commit ; Opus, seul), **F16** (charte : jetons de
+      `globals.css`, coquille, composants, `STYLE.md`, trois onglets simples
+      refaits ; Fable, seul), puis **B28** Rangs (vraies icônes, portraits),
+      **B29** Gear reco (picker modal) et **C6** Discord en parallèle (Opus,
+      fichiers disjoints). Direction posée par défaut dans
+      F16 : ressembler à l'admin, menu horizontal à deux niveaux — groupes
+      puis sections, pas de barre latérale (quick doit remplacer à terme
+      tout l'admin hors extractor et misc : éditeurs, guides, outils —
+      décisions du 07/10), journal en tiroir.
       Maquette Claude Design à valider (ou retoucher dans l'éditeur) AVANT
       de lancer F16 : https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw — cinq planches, les
       lots F16, B28, B29 et C6 la lisent.
