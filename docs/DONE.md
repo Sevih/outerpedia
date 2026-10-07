@@ -7,6 +7,35 @@
 
 ## 2026-10-07
 
+- **Admin, « Translate » : un bouton « Retranslate all » pour rattraper une
+  correction de l'anglais déjà enregistrée** (Fable, 07/10, constat de Sevih
+  sur le guide Annihilator : un conseil corrigé en anglais, « Translate », et
+  seules l'anglais a changé — `tips.json` de la version 2026-10 porte l'EN
+  corrigé et cinq langues sur l'ancienne version). Le pourquoi. La logique
+  n'est pas en cause en session : `createFreshness` (`translate-fill.ts`)
+  tient pour « périmé » tout EN inconnu de la photo des EN AU MONTAGE, et
+  `useAutoTranslate` renvoie le périmé au traducteur, qui écrase les autres
+  langues. Le trou est la référence : l'état du disque au chargement de la
+  page. Une correction ENREGISTRÉE (ou la page rechargée) y figure, donc passe
+  pour « déjà traduite », et le bouton répond « nothing to translate » sans
+  aucun moyen de régénérer les autres langues — la donnée ne porte pas la
+  date des traductions, la fraîcheur ne peut pas faire mieux. Le quoi.
+  `run(force?)` dans `useAutoTranslate` : `force` renvoie TOUT texte avec un
+  EN, message dédié s'il n'y en a aucun ; `TranslateButton` (quatre éditeurs
+  dont les guides) et le bouton propre de `GearRecoEditor` gagnent un second
+  bouton « Retranslate all » avec une infobulle qui dit quand s'en servir et
+  que ça coûte du quota DeepL ; les deux boutons passent par une closure
+  (`onClick={() => t.run()}`) — `onClick={t.run}` aurait passé l'événement en
+  guise de `force`, le typecheck l'a attrapé dans `GearRecoEditor`. Docblocks
+  de `translate-fill.ts` et du bouton : la limite est écrite. Vérifié : deux
+  cas ajoutés à `useAutoTranslate.hook.test.tsx` (EN dans la baseline et
+  langues remplies → `force` appelle le traducteur et écrase ; `force` sans
+  EN → pas d'appel, message « no English text »), 2 800 tests verts,
+  typecheck et lint verts. À faire par Sevih : rouvrir Annihilator 2026-10,
+  « Retranslate all », relire les cinq langues du conseil « Non {E/Dark}
+  units… », enregistrer. Laissé : la même limite existe dans « Traduire » de
+  Gear reco dans `pnpm quick` (B31, `noteAt` = l'EN au chargement) — au TODO,
+  `tabs/gear.js` est en cours d'édition par le lot C8.
 - **Relecture C7** (Fable, 07/10) : `b6c5565b` validé — plus aucun lot
   ouvert. Périmètre attendu (`tabs/gear.*`, `ui/gear-sets.mjs`, une ligne
   d'`actions.ts` et ses tests, trois lignes de `STYLE.md`, DONE, TODO),

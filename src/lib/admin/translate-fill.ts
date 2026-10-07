@@ -48,6 +48,11 @@ export interface Freshness {
  * position dans une liste : ajouter, supprimer ou réordonner des entrées ne
  * fausse donc rien. Deux textes au même EN partagent leur fraîcheur, ce qui est
  * exact — même source, même traduction.
+ *
+ * LIMITE : la référence est l'état du disque au MONTAGE, pas le moment où les
+ * traductions ont été faites (la donnée ne le porte pas). Une correction de
+ * l'EN déjà enregistrée, puis la page rechargée, passe donc pour « déjà
+ * traduite » — c'est le `force` de `useAutoTranslate.run` qui la rattrape.
  */
 export function createFreshness(baseline: Iterable<string | undefined>): Freshness {
   const fresh = new Set<string>();

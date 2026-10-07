@@ -42,6 +42,7 @@ export const providerLabel = (provider: string): string =>
  */
 export const TRANSLATE_MSG = {
   nothingStale: 'Nothing to translate — every English text is already up to date.',
+  noEnglish: 'Nothing to translate — no English text in this editor.',
   noChange: 'Every translation already matched the English text.',
   filled: (n: number, provider: string) =>
     `${n} field(s) translated via ${providerLabel(provider)} — review before saving.`,
@@ -64,25 +65,36 @@ export interface AutoTranslateOptions<D> {
 export interface AutoTranslateResult {
   state: TranslateState;
   message: string | null;
-  /** Lance la traduction ; ne lève jamais (l'erreur passe dans `message`). */
-  run: () => Promise<void>;
+  /**
+   * Lance la traduction ; ne lève jamais (l'erreur passe dans `message`).
+   * `force` : TOUT texte avec un EN repart au traducteur, périmé ou non — le
+   * geste « j'ai corrigé l'anglais, enregistré, et les autres langues sont
+   * restées sur l'ancienne version ». La fraîcheur ne connaît que l'état du
+   * disque au chargement : une correction déjà enregistrée y passe pour « déjà
+   * traduite » et le bouton normal répond « nothing to translate » (constat de
+   * Sevih sur Annihilator, 07/10/2026).
+   */
+  run: (force?: boolean) => Promise<void>;
 }
 
 export function useAutoTranslate<D>(opts: AutoTranslateOptions<D>): AutoTranslateResult {
   const [state, setState] = useState<TranslateState>('idle');
   const [message, setMessage] = useState<string | null>(null);
 
-  async function run(): Promise<void> {
+  async function run(force = false): Promise<void> {
     setState('loading');
     setMessage(null);
     const targets = opts.langs.filter((l) => l !== 'en');
     const { draft, records } = opts.collect();
     // Ne part au traducteur que ce qui a BOUGÉ (EN édité/ajouté) ou à qui il
-    // manque une langue — inutile de repayer DeepL pour l'identique.
-    const stale = records.filter((r) => opts.freshness.isStale(r, targets));
+    // manque une langue — inutile de repayer DeepL pour l'identique. `force`
+    // ignore ce tri : tout ce qui a un EN.
+    const stale = force
+      ? records.filter((r) => r.en?.trim())
+      : records.filter((r) => opts.freshness.isStale(r, targets));
     if (!stale.length) {
       setState('done');
-      setMessage(TRANSLATE_MSG.nothingStale);
+      setMessage(force ? TRANSLATE_MSG.noEnglish : TRANSLATE_MSG.nothingStale);
       return;
     }
     try {

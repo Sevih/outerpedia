@@ -51,6 +51,12 @@
       tuiles à la place des `select`, set sans bonus 2p grisé en secondaire.
       C9 : bloc « Aperçu » sous chaque build, rendu comme la fiche perso par
       `previewGearReco`, balise inconnue en rouge dans la note.
+- [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
+      l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
+      au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
+      repart plus au traducteur (seules les langues manquantes). Ajouter le
+      geste forcé (tout retraduire) dans `tabs/gear.js` — après C8 et C9, qui
+      tiennent le fichier.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,

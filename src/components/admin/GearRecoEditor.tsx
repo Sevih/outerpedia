@@ -610,11 +610,20 @@ export function GearRecoEditor({
         <button
           type="button"
           className={btn}
-          onClick={translate.run}
+          onClick={() => translate.run()}
           disabled={translate.state === 'loading'}
-          title="Regenerates every other language from the English note — existing translations are overwritten"
+          title="Regenerates the other languages of every English note edited since the page loaded, or missing a language — existing translations are overwritten"
         >
           {translate.state === 'loading' ? 'Translating…' : 'Translate notes (EN → all)'}
+        </button>
+        <button
+          type="button"
+          className={btn}
+          onClick={() => translate.run(true)}
+          disabled={translate.state === 'loading'}
+          title="Sends EVERY English note to the translator, even those considered up to date — use after saving a correction of the English. Costs DeepL quota."
+        >
+          Retranslate all
         </button>
         <button
           type="button"

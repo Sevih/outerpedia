@@ -32,7 +32,7 @@ function mount(opts: {
   onCommit?: (draft: LText[]) => void;
 }) {
   const snaps: { state: string; message: string | null }[] = [];
-  let run: () => Promise<void> = async () => {};
+  let run: (force?: boolean) => Promise<void> = async () => {};
   function Probe() {
     const t = useAutoTranslate<LText[]>({
       langs: LANGS,
@@ -49,7 +49,7 @@ function mount(opts: {
   mounted = root;
   return {
     snaps,
-    run: async () => await act(async () => void (await run())),
+    run: async (force?: boolean) => await act(async () => void (await run(force))),
     /** Démarre sans attendre — pour observer l'état PENDANT l'appel. */
     start: () => run(),
   };
@@ -76,6 +76,33 @@ describe('useAutoTranslate', () => {
     expect(commit).not.toHaveBeenCalled();
     expect(last(h.snaps).state).toBe('done');
     expect(last(h.snaps).message).toMatch(/Nothing to translate/);
+  });
+
+  it('`force` retraduit même ce que la fraîcheur croit à jour (correction déjà enregistrée)', async () => {
+    // Le cas d'Annihilator (07/10) : l'EN corrigé est sur le disque, donc dans
+    // la baseline, et fr/jp sont remplis (de l'ancienne version) ⇒ le bouton
+    // normal ne voit rien à faire ; « Retranslate all » doit tout renvoyer.
+    autoTranslate.mockResolvedValue({
+      results: [{ fr: 'Bonjour', jp: 'こんにちは' }],
+      provider: 'deepl',
+    });
+    const commit = vi.fn();
+    const rec: LText = { en: 'Hello', fr: 'Salut (ancien)', jp: 'やあ (ancien)' };
+    const h = mount({ records: [rec], baseline: ['Hello'], onCommit: commit });
+    await h.run(true);
+
+    expect(autoTranslate).toHaveBeenCalledWith(['Hello'], ['fr', 'jp']);
+    expect(rec.fr).toBe('Bonjour');
+    expect(rec.jp).toBe('こんにちは');
+    expect(commit).toHaveBeenCalledTimes(1);
+    expect(last(h.snaps).message).toMatch(/2 field\(s\) translated via DeepL/);
+  });
+
+  it('`force` sans aucun EN : message dédié, pas d’appel', async () => {
+    const h = mount({ records: [{ fr: 'Bonjour' }], baseline: [] });
+    await h.run(true);
+    expect(autoTranslate).not.toHaveBeenCalled();
+    expect(last(h.snaps).message).toMatch(/no English text/);
   });
 
   it('traduit le périmé, compte les champs remplis et commite', async () => {
