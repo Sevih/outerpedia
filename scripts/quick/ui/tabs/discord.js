@@ -180,8 +180,9 @@ function refreshDiscord() {
   $('d-embed').hidden = !embed;
   // En mode embed le drapeau n'est JAMAIS posé : il masquerait l'embed.
   $('d-noembed').disabled = embed;
-  $('d-noembed-why').textContent = embed
-    ? ' — inactif en mode embed : il masquerait l’embed lui-même'
+  // Le pourquoi au survol : écrit en toutes lettres, il casserait la ligne.
+  $('d-noembed').parentElement.title = embed
+    ? 'Inactif en mode embed : il masquerait l’embed lui-même'
     : '';
   renderExternal();
 
@@ -211,6 +212,9 @@ function refreshDiscord() {
           : !channel
             ? ['warn', dChannelsError ?? 'Choisir un salon.']
             : null;
+  // Le compte est un badge : gris tant qu'il n'y a rien à compter, rouge si
+  // l'envoi est retenu par le texte, vert sinon.
+  $('d-count').className = `badge ${!p || !hasText ? 'off' : p.blocker ? 'ko' : 'ok'}`;
   // Signalé, pas bloquant : la permission se lit, elle ne se garantit pas.
   const c = channelOf(channel);
   const foreign =
@@ -222,7 +226,7 @@ function refreshDiscord() {
   // Signalé, pas bloquant non plus : un horodatage là où Discord ne le rend pas.
   const warned = (p?.warnings ?? []).map((w) => `<span class="warn">${esc(w)}</span> `).join('');
   $('d-status').innerHTML =
-    (why ? `<span class="${why[0]}">${esc(why[1])}</span> ` : '') +
+    (why ? `<span class="badge ${why[0]}">${esc(why[1])}</span> ` : '') +
     foreign +
     warned +
     (posted
@@ -240,7 +244,7 @@ function refreshDiscord() {
   $('d-send').disabled = blocked || !dGuild || !channel || Boolean(posted);
   $('d-send').textContent = partial
     ? `Reprendre l'envoi (message ${partial.ids.length + 1}/${partial.total})`
-    : 'Envoyer';
+    : `Envoyer${c ? ` dans #${c.name}` : ''}`;
   $('d-update').hidden = !posted;
   $('d-update').disabled = blocked || Boolean(away || otherMode);
   $('d-new').hidden = !posted && !partial;
@@ -284,6 +288,24 @@ for (const r of document.getElementsByName('d-mode'))
     staleDiscord();
   };
 
+// La note se replie (état retenu) : ses deux cartes se rangent alors en une
+// ligne, et l'éditeur prend toute la largeur.
+let noteFolded = mem.get('noteFolded', false) === true;
+function foldNote() {
+  $('d-note-body').hidden = noteFolded;
+  $('d-cols').classList.toggle('folded', noteFolded);
+  const b = $('d-note-fold');
+  b.setAttribute('aria-expanded', String(!noteFolded));
+  b.title = noteFolded ? 'Déplier la note' : 'Replier la note';
+  b.setAttribute('aria-label', b.title);
+}
+$('d-note-fold').onclick = () => {
+  noteFolded = !noteFolded;
+  mem.set('noteFolded', noteFolded);
+  foldNote();
+};
+foldNote();
+
 let dNoteSeq = 0;
 async function loadNote() {
   const id = $('d-note').value;
@@ -294,6 +316,9 @@ async function loadNote() {
   if (data.error) return log([data.error], false);
   $('d-frame').srcdoc = data.srcdoc;
   $('d-open').href = data.url;
+  // Le cadre n'apparaît qu'avec une note dedans : avant, « Choisir une note ».
+  $('d-frame').hidden = $('d-open').hidden = false;
+  $('d-note-empty').hidden = true;
   dTemplate = { simple: data.template, embed: data.embedTemplate };
 }
 $('d-note').onchange = loadNote;
@@ -353,8 +378,30 @@ function renderEmojiGuilds() {
         })
         .join('')
     : `<small>${dState.hasToken ? 'liste des serveurs non lue' : 'indisponible sans jeton'}</small>`;
+  // Le résumé de la liste repliée : combien de serveurs cochés, et en rouge
+  // si l'un d'eux a refusé ses emojis (le détail est à côté de sa case).
+  $('d-emoji-count').textContent = guilds.length
+    ? on.size
+      ? plural(on.size, 'serveur')
+      : 'aucun serveur'
+    : dState.hasToken
+      ? 'non lus'
+      : 'sans jeton';
+  $('d-emoji-menu').classList.toggle(
+    'ko',
+    [...on].some((id) => gEmojis.get(id)?.error),
+  );
   renderExternal();
 }
+// Un clic ailleurs referme la liste, Échap aussi.
+document.addEventListener('mousedown', (e) => {
+  if (!e.target.closest('#d-emoji-menu')) $('d-emoji-menu').open = false;
+});
+$('d-emoji-menu').onkeydown = (e) => {
+  if (e.key !== 'Escape' || !$('d-emoji-menu').open) return;
+  $('d-emoji-menu').open = false;
+  $('d-emoji-menu').querySelector('summary').focus();
+};
 
 /**
  * Lit les emojis des serveurs COCHÉS que la page n'a pas encore — un
@@ -557,6 +604,7 @@ function renderHistory() {
     ? `${h.count} résumé${s(h.count)} importé${s(h.count)} (dernier : ${isoDay(h.last)}), ${h.paired} apparié${s(h.paired)} à ${h.paired > 1 ? 'leur' : 'sa'} note` +
       (h.importedAt ? ` — import du ${isoDay(h.importedAt)}.` : '.')
     : 'Aucun résumé importé : « copier la demande » part sans exemple.';
+  $('d-history-count').textContent = h.count ? `${h.count} importé${s(h.count)}` : '';
   $('d-history-list').hidden = !h.count;
   $('d-history-list').querySelector('ul').innerHTML = h.items
     .map(
@@ -913,6 +961,19 @@ function renderPalette() {
     ? `absents${unread ? ' (emojis de serveur non lus)' : ''} : ${missing.join(', ')} — ni sur un serveur coché ni standard ; les noms se corrigent dans scripts/quick/discord-palette.json`
     : '';
 }
+// Elle se replie d'un bouton, état retenu.
+let paletteFolded = mem.get('paletteFolded', false) === true;
+function foldPalette() {
+  $('d-palette').hidden = $('d-palette-missing').hidden = paletteFolded;
+  $('d-palette-fold').textContent = paletteFolded ? 'déplier' : 'replier';
+  $('d-palette-fold').setAttribute('aria-expanded', String(!paletteFolded));
+}
+$('d-palette-fold').onclick = () => {
+  paletteFolded = !paletteFolded;
+  mem.set('paletteFolded', paletteFolded);
+  foldPalette();
+};
+foldPalette();
 // `mousedown` retenu, comme pour la barre : la zone de texte garde sa sélection.
 $('d-palette').onmousedown = (e) => e.preventDefault();
 $('d-palette').onclick = (e) => {
@@ -1179,6 +1240,14 @@ async function loadDiscord() {
   if (patch) $('d-note').value = patch.id;
 
   await Promise.all([loadNote(), previewDiscord()]);
+
+  // Banc de captures (`shot.mjs --hash discord/gabarit`) : l'onglet se
+  // photographie avec du texte. Le gabarit n'est posé que dans une zone
+  // vide, et n'est pas retenu comme brouillon.
+  if (location.hash === '#discord/gabarit' && dTemplate && !$('d-text').value) {
+    $('d-text').value = dTemplate.simple;
+    await previewDiscord();
+  }
 }
 
 sections.register('discord', {

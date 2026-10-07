@@ -219,11 +219,6 @@ colonnes de Rangs.
 - **Un seul `primary` par formulaire** ; détruire = `danger` ou `icon` ✕.
 - **Le journal est le seul retour** : pas de message dans l'onglet, `log()`.
 - **L'aperçu Discord** (`.dc*`) imite Discord à dessein et garde ses couleurs.
-- **Héritage** : `.row`, `button.action`, `button.ghost`, `a.ghost`,
-  `label.check` (bloc « héritage » de `quick.css`) rendent les composants sous
-  les anciens noms pour Rangs, Gear reco et Discord ; chaque lot qui passe un
-  onglet à la charte les remplace par `.form` et `.btn`, le dernier retire le
-  bloc.
 
 ## Les trois onglets qui suivent — croquis
 
@@ -261,19 +256,25 @@ le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 
 ### Discord (C6, `wide`)
 
+Fait, et le croquis est ici celui du rendu (les écarts au croquis de départ
+sont dans l'entrée DONE du lot C6) :
+
 ```
-.head  Message Discord — Posté par le bot…
-deux colonnes (flex, 20 px ; 380 px / 620 px, l'une sous l'autre en étroit)
-  gauche .card : card-head [▾ replier] « Note officielle » [select de la note, 230px] « ouvrir l'original »
-                 le cadre de la note (iframe) — REPLIÉ et remplacé par un .empty « Choisir une note » tant qu'aucune note n'est choisie : plus d'iframe blanc
-         .card : « Anciens résumés » badge « 14 importés » [déplier] — la liste repliée
-  droite .card.pad : .form sur UNE ligne — [Serveur ▾] [Salon ▾] [Emojis de ▾] [☐ sans aperçu des liens] et à droite un bouton segmenté Message | Embed (aria-pressed)
-         .card : barre d'outils GROUPÉE (style · blocs · titres · listes · insertions), chaque bouton 30 × 30 avec `title` ; [convertir les dates] à droite
-                 la zone de texte (textarea, chasse fixe) ; la palette en dessous, repliable
-                 card-foot : [Insérer le gabarit] [Proposer un brouillon] [Copier la demande] exemples [3] · badge « 1 message · 612 / 2000 » [Copier le message] [Envoyer dans #salon]
-         .card : « Aperçu — tel que Discord le rendra » puis .dc (thème Discord, inchangé)
+.head  Message Discord — Posté par le bot…  badge warn « jeton absent… »
+deux colonnes (flex, 20 px ; la note 30 % — 380 px au moins —, l'éditeur le reste ; l'une sous l'autre sous 1100 px)
+  gauche .card : card-head [▾ replier] « Note officielle » … « ouvrir l'original » ; dessous, le select de la note sur toute la largeur
+                 le cadre de la note (iframe), montré une fois la note chargée — avant, un .empty « Choisir une note »
+         .card : card-head « Anciens résumés » badge « 14 importés » [importer] ; l'état, puis « voir la liste » (details)
+  droite .card.pad : .form sur UNE ligne — [Serveur ▾] [Salon ▾] [Emojis de ▾ : liste de cases déroulante] [☐ sans aperçu des liens] et à droite le segmenté Message | Embed (deux radios)
+         .card.pad (mode Embed seulement) : titre, lien, barre ; vignette, image ; texte au-dessus, pied ; boutons de lien
+         .card : card-head = barre d'outils GROUPÉE (style · blocs · titres · listes et citation · insertions), boutons 32 × 30 avec `title` ; [convertir les dates] à droite
+                 la zone de texte (chasse fixe) — le formulaire de date, le sélecteur d'emojis et l'autocomplétion se posent par-dessus ; la palette dessous, repliable
+                 card-foot, deux rangées : [Insérer le gabarit] [Proposer un brouillon] [Copier la demande] exemples [3]
+                                           badge « 612 / 2000 caractères » … [Copier le message] [Envoyer dans #salon] ; puis la ligne d'état (badge + texte)
+         .card : card-head « Aperçu — tel que Discord le rendra » puis .dc (thème Discord, inchangé)
 ```
 
-Le formulaire embed (titre, lien, couleur, vignette, image, texte au-dessus,
-pied, boutons) devient une `.card.pad` entre la ligne des options et l'éditeur,
-visible en mode Embed seulement.
+Note repliée (état retenu) : ses deux cartes se rangent en une ligne au-dessus
+de l'éditeur, qui prend toute la largeur. Propres à l'onglet, dans
+`tabs/discord.css` faute de composant commun : `.d-grp` (boutons d'outil
+accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).

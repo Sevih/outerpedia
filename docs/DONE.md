@@ -7,6 +7,159 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, l'onglet « Discord » à la charte : la note repliable à
+  gauche, l'éditeur en cartes à droite, la barre d'outils groupée — et le bloc
+  « héritage » de `quick.css` retiré** (lot C6, dernier de la série UI, sur la
+  planche « Discord » de la maquette de Sevih et `scripts/quick/ui/STYLE.md`).
+  Le quoi. `tabs/discord.html` et `tabs/discord.css` sont refaits, section
+  `wide` : `.head` (le titre, la phrase, et « jeton absent… » en `.badge.warn`
+  au lieu d'un texte orange), puis deux colonnes. À GAUCHE, une `.card` pour
+  la note : en-tête sur deux rangées — le bouton qui replie (chevron,
+  `aria-expanded`), « Note officielle », « ouvrir l'original » à droite, puis
+  la liste des notes sur toute la largeur (un titre de note fait 60
+  caractères : à 230 px il était tronqué à la date) — et le cadre, qui remplit
+  la carte jusqu'au bas de la fenêtre. Le cadre n'est montré qu'UNE FOIS LA
+  NOTE CHARGÉE : avant (chargement, aucune note sur le disque), un `.empty`
+  « Choisir une note » — plus de cadre blanc vide. Dessous, une `.card`
+  « Anciens résumés » : badge « n importés », bouton « importer », l'état, et
+  la liste repliée (`details`, comme avant). À DROITE, quatre cartes :
+  (1) les options sur UNE ligne — Serveur, Salon, « Emojis de » (les cases par
+  serveur passent dans une liste déroulante, cf. plus bas), « sans aperçu des
+  liens », et à droite le bouton segmenté Message | Embed ; (2) en mode Embed
+  seulement, le formulaire d'embed en `.card.pad` (trois rangées `.form`, puis
+  les boutons de lien, dont la règle « une rangée ne se montre que si la
+  précédente est entamée » est intacte) ; (3) l'éditeur — la barre d'outils en
+  `card-head`, GROUPÉE (style : gras, italique, souligné, barré ; blocs : code,
+  bloc de code, masqué, lien ; titres : T1, T2, T3, sous-texte ; liste et
+  citation ; insertions : emoji, date), chaque bouton 32 × 30 avec son `title`
+  (le nom, et « — Ctrl+B / I / U / K » quand il y a un raccourci) et son
+  `aria-label`, les pictogrammes de la maquette en SVG, « convertir les
+  dates » à droite ; la zone de texte ; la palette DESSOUS (maquette),
+  toujours là, sans défilement, avec un bouton « replier » ; un pied en deux
+  rangées, rédiger (« Insérer le gabarit », « Proposer un brouillon »,
+  « Copier la demande », exemples) puis envoyer (le compte en badge, « Copier
+  le message », « Nouveau message », « Mettre à jour… », « Envoyer »), et la
+  ligne d'état ; (4) l'aperçu dans sa carte (« tel que Discord le rendra —
+  thème Discord, à dessein »). L'aperçu (`.dc*`) est recopié TEL QUEL — pas un
+  octet du bloc n'a changé, seule la marge de sa carte l'entoure ; le
+  sélecteur d'emojis, le formulaire de date et l'autocomplétion gardent leur
+  allure et leur place (posés par-dessus la zone de texte).
+  Le pourquoi des écarts au croquis de `STYLE.md` (mis à jour : il décrit
+  maintenant ce que le code rend). (a) Colonnes : la note prend 30 % (380 px
+  au moins) et l'éditeur le reste, au lieu de 380 / 620 qui grandissent en
+  1 : 2 — à 1440 px la ligne des options (cinq champs) ne tenait pas dans la
+  colonne de droite, le segmenté passait seul à la ligne ; elle tient
+  maintenant à partir de ~1400 px de fenêtre, et se replie proprement en
+  dessous. Sous 1100 px, une colonne (la note limitée à la moitié de la
+  fenêtre). (b) Note REPLIÉE : ses deux cartes se rangent en une ligne
+  au-dessus de l'éditeur, qui prend toute la largeur — la maquette le dit
+  (« ce panneau se replie et laisse la place à l'éditeur »), et une colonne de
+  380 px vide n'aurait servi à rien. (c) « Emojis de » : une liste déroulante
+  (`details`) dont le résumé dit « 2 serveurs » / « aucun serveur » / « sans
+  jeton » et passe en BORD ROUGE si un serveur coché a refusé ses emojis — le
+  refus, écrit à côté de sa case, ne doit pas se cacher dans une liste
+  fermée ; dedans, les cases, la ligne des emojis externes, « recharger la
+  liste » et « inviter le bot ». Un clic ailleurs ou Échap la referme.
+  (d) Message | Embed reste DEUX BOUTONS RADIO (`name="d-mode"`), dessinés en
+  bouton segmenté : le script n'a pas à changer, le clavier (flèches) marche
+  tout seul. (e) « sans aperçu des liens » en mode embed : la raison (« il
+  masquerait l'embed lui-même ») est au SURVOL de la case grisée, plus en
+  toutes lettres — elle cassait la ligne. (f) Le compte est un badge : gris
+  sans texte, rouge si le texte retient l'envoi, vert sinon ; ce qui retient
+  l'envoi (« Choisir un serveur. », le jeton absent, un emoji inconnu) est un
+  `.badge.warn` / `.ko` en tête de la ligne d'état, le reste de la ligne
+  (posté où, reprise) en texte, ses avertissements en `--warn`. (g) Un
+  message posté : « Envoyer », alors toujours éteint, est caché (une règle
+  CSS, pas de script) — « Mettre à jour » reste le seul bouton principal.
+  (h) « Envoyer » nomme le salon choisi (« Envoyer dans #annonces »), comme
+  la maquette. La phrase du lot « les rangées d'actions … en gardant la règle
+  une rangée ne se montre que si la précédente est entamée » a été lue comme
+  visant la seule règle de ce nom qui existe, celle des boutons de lien de
+  l'embed (`showButtonRows`) : l'appliquer aux rangées gabarit / envoyer
+  aurait changé le comportement de l'envoi, hors périmètre.
+  Le comment. `tabs/discord.js` : +73 / −4 lignes, là où le markup l'impose et
+  rien d'autre — `foldNote` et `foldPalette` (deux états retenus sous
+  `quick.discord.noteFolded` et `.paletteFolded`, par le `mem` existant), le
+  cadre et « ouvrir l'original » révélés dans `loadNote`, le résumé et le bord
+  de la liste « Emojis de » dans `renderEmojiGuilds` avec sa fermeture, le
+  badge « n importés », la classe du compte, `badge` sur le motif d'état, le
+  salon sur « Envoyer », la raison de la case en `title`. Tous les `id`
+  d'avant sont conservés sauf `d-noembed-why` (devenu un `title`) ; les
+  requêtes, l'envoi par morceaux et sa reprise, les `confirm` et leurs textes,
+  les clés `localStorage` existantes, `discord-editor.mjs`, `discord.ts`,
+  `server.ts`, `lib.js`, `index.html` : INCHANGÉS. La zone de texte a
+  maintenant son propre conteneur (`.d-area`, `position: relative`) : c'est
+  lui que `caretPoint` mesure, l'autocomplétion tombe sous le `:` (vu en
+  capture). `#tab-discord [hidden] { display: none }` : `.btn`, `.card.pad`
+  et `.empty` posent un `display` qui l'emportait sur l'attribut — « Nouveau
+  message » se voyait AVANT ce lot alors qu'il était `hidden` (capture
+  « avant »). Tout le CSS de l'onglet est préfixé `#tab-discord` (les noms
+  courts `.em`, `.grp`, `.warn` ne débordent plus). Composants qui manquent à
+  `quick.css`, posés dans `tabs/discord.css` : `.d-grp` (boutons d'outil
+  accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases
+  déroulante), et un survol NEUTRE pour un `.btn.icon` qui ne détruit rien
+  (le chevron de la note : `.btn.icon` rougit au survol, c'est le ✕).
+  Comportement nouveau minuscule : ouverte sur `#discord/gabarit`, la page
+  pose le gabarit de la note dans une zone de texte VIDE, sans le retenir
+  comme brouillon — c'est ce qui permet au banc de photographier l'onglet avec
+  du texte (`shot.mjs --hash discord/gabarit`, l'option `--hash` est celle de
+  B29, pas de seconde).
+  Les petits restes de la série. `tabs/coupons.html` : placeholder de
+  Récompense « Item ou monnaie… » (il dépassait les 30 ch). Le bloc
+  « HÉRITAGE » de `quick.css` est RETIRÉ (72 lignes : `.row`,
+  `button.action`, `button.ghost`, `a.ghost`, `label.check`) — B28 et B29
+  étaient commités, plus rien dans `scripts/quick/ui/` ne porte ces noms
+  (cherché dans le HTML et dans le markup que posent les scripts). Effet
+  VISIBLE et voulu, sur les six onglets : `button.ghost` (28 px, 12,5 px)
+  l'emportait par sa spécificité sur `.btn.ghost` ; les boutons fantômes
+  retrouvent les 34 px de la charte, à la hauteur de leur voisin `primary` et
+  des champs (« Ajouter » de Codes promo, « Annuler » de Rangs, « Choisir un
+  perso » de Gear reco — ces deux-là ont été validés à 28 px par leurs lots, à
+  regarder), `.btn.ghost.sm` reste à 28. Le paragraphe « Héritage » de
+  `STYLE.md` part avec. `discord-palette.json` : son `_doc` disait la palette
+  « entre la barre d'outils et la zone de texte », une phrase corrigée.
+  Vérification. Quick isolé SANS JETON, sur le port 4803
+  (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4803`), arrêté ensuite par
+  `/api/quit` ; aucun appel à discord.com, aucun enregistrement. Captures regardées :
+  `/tmp/quick-shots/c6-avant/` et `c6-avant-1024/` (avant) ;
+  `c6-apres/`, `c6-apres-1024/` (vide), `c6-apres-gabarit/`,
+  `c6-apres-gabarit-1024/` (avec le gabarit) ; et, par un relais jetable qui
+  pose un état dans `localStorage` puis clique (lecture seule, comme
+  `shot.mjs`), `/tmp/quick-shots/c6-etats/` : `embed.png` (formulaire d'embed,
+  case grisée), `replie.png` (note et palette repliées), `date.png`,
+  `panneaux.png` (sélecteur d'emojis et liste « Emojis de » ouverts),
+  `completion.png` (`:sc` → la liste sous le curseur), `poste.png` (message
+  posté : « Mettre à jour » seul), `long-1440x2100.png` (jusqu'à l'aperçu).
+  Retrait de l'héritage : les six onglets avant / après dans
+  `/tmp/quick-shots/c6-heritage-avant/` et `c6-heritage-apres/` (avec
+  `cmp-coupons.png`, `cmp-ranks.png`, `cmp-gear.png`) — seule la taille des
+  boutons fantômes change. Aperçu Discord : bloc `.dc*` comparé ligne à ligne
+  à celui de HEAD (identique). `discord.test.ts` et `discord-editor.test.ts`
+  passent sans modification. `pnpm typecheck` : la ligne de commande des trois
+  `tsc --noEmit` (racine, `datagen`, `scripts`), sans une erreur derrière ;
+  `pnpm lint` : `$ eslint`, sans une erreur derrière ; `pnpm test` :
+  `Tests  2773 passed (2773)` (197 fichiers).
+  À contrôler à l'écran par Sevih, AVEC le jeton (rien de tout cela n'a pu
+  l'être) : la liste « Serveur » et les salons ; « Emojis de » — les cases, le
+  compte d'emojis par serveur, le bord rouge sur un refus, la ligne des emojis
+  externes, « recharger la liste », le lien d'invitation, fermeture au clic
+  ailleurs ; la palette avec les emojis de serveur (images du CDN) et sa
+  ligne « absents » ; le sélecteur d'emojis avec les sections par serveur ;
+  l'aperçu rendu avec des emojis de serveur ; un ENVOI D'ESSAI sur le serveur
+  perso — le bouton « Envoyer dans #salon », la confirmation, puis « Mettre à
+  jour » seul et « Nouveau message » ; un envoi en mode embed (la case grisée,
+  sa raison au survol) ; une reprise d'envoi interrompu (serveur, salon et
+  segmenté verrouillés) ; « Copier la demande » et « Copier le message »
+  (presse-papiers, et la zone de repli s'il se refuse) ; « Proposer un
+  brouillon » ; « importer » des anciens résumés ; les `title` et Ctrl+B / I
+  / U / K ; les deux replis retenus après rechargement.
+  Laissé. `STYLE.md` garde, dans son préambule et son titre « Les trois
+  onglets qui suivent », la tournure d'avant les lots (les croquis de Rangs
+  et de Gear reco sont ceux de départ, pas ceux du rendu) : à reprendre par
+  qui relit la série. Le jeton absent se lit deux fois dans l'état sans bot
+  (en tête, et dans la ligne d'état qui explique « Envoyer » éteint) : c'était
+  déjà le cas, comportement non touché. Une erreur de chargement de note
+  laisse l'ancienne note à l'écran sous le nouveau titre, comme avant.
 - **`pnpm quick`, l'onglet « Gear reco » à la charte : le perso en tête, un
   picker modal à icônes de visage, un build par carte sur deux colonnes, les
   erreurs en badges** (lot B29, sur les planches « Gear reco » et « Picker »

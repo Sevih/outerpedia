@@ -1,89 +1,434 @@
-/* Onglet « Discord » — bloc déplacé de `quick.css` tel quel (jetons renommés),
-   en attendant le lot C6 qui le met à la charte (cf. `STYLE.md`). L'aperçu
-   (`.dc*`) imite Discord à dessein : il ne prend pas la palette du site. */
-/* Le panneau d'avant la charte : l'onglet garde son cadre tant que son lot
-   (B28 Rangs, B29 Gear reco, C6 Discord) ne l'a pas passé en `.card`. */
-#tab-discord:not([hidden]) {
-  display: block;
-  background: var(--surface-raised);
-  border: 1px solid var(--line-subtle);
+/* Onglet « Discord », à la charte (cf. `STYLE.md`) : la note officielle à
+   gauche, l'éditeur et son aperçu à droite, en cartes. Tout est préfixé par
+   `#tab-discord` : les noms courts (`.em`, `.grp`, `.warn`) que la page pose
+   ne débordent pas sur les autres onglets. L'aperçu (`.dc*`) imite Discord à
+   dessein : il ne prend pas la palette du site. */
+
+/* `.btn`, `.card.pad`, `.empty` posent un `display` : sans cette règle,
+   l'attribut `hidden` que la page bascule ne les cacherait pas. */
+#tab-discord [hidden] {
+  display: none;
+}
+/* Ce que la page écrit en couleur dans ses lignes d'état. */
+#tab-discord .warn {
+  color: var(--warn);
+}
+#tab-discord .ko {
+  color: var(--danger);
+}
+/* Un badge qui porte une phrase (jeton absent, ce qui retient l'envoi, le
+   compte d'un embed) : il peut passer à la ligne. */
+#d-hint,
+#d-count,
+#d-status .badge {
+  height: auto;
+  min-height: 20px;
+  padding: 1px 8px;
   border-radius: 10px;
-  padding: 18px;
+  white-space: normal;
 }
-#tab-discord h2 {
-  margin-bottom: 4px;
-  font-size: 14px;
+
+/* ---------------------------------------------------------------- colonnes
+   La note prend 30 % (380 px au moins), l'éditeur le reste. L'une sous
+   l'autre en fenêtre étroite ; et quand la note est repliée, ses deux cartes
+   se rangent en une ligne au-dessus de l'éditeur, qui prend toute la largeur. */
+#tab-discord .d-cols {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
-#tab-discord > p.hint {
-  margin-bottom: 16px;
-  font-size: 12px;
-}
-/* Onglet « Discord » : la note officielle à gauche, l'éditeur et son aperçu
-   à droite ; l'une sous l'autre quand la fenêtre est étroite. */
-.cols {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+#tab-discord .d-side {
+  flex: 0 0 clamp(380px, 30%, 720px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
-  align-items: start;
 }
-@media (max-width: 900px) {
-  .cols {
-    grid-template-columns: minmax(0, 1fr);
+#tab-discord .d-main {
+  flex: 1 1 620px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-discord .d-cols.folded {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+}
+#tab-discord .d-cols.folded .d-side {
+  flex: none;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+#tab-discord .d-cols.folded .d-side > .card {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+#tab-discord .d-cols.folded .d-main {
+  flex: none;
+}
+@media (max-width: 1099px) {
+  #tab-discord .d-cols {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+  #tab-discord .d-side,
+  #tab-discord .d-main {
+    flex: none;
   }
 }
-a.ghost {
-  display: inline-block;
-  text-decoration: none;
+
+/* ---------------------------------------------------------------- la note
+   En-tête sur deux rangées : le bouton qui replie, le titre et l'original ;
+   dessous, la liste des notes sur toute la largeur (un titre de note est
+   long). Le cadre occupe la carte jusqu'en bas de la fenêtre ; son fond blanc
+   est celui du document scrapé. */
+#tab-discord .d-note-head label {
+  margin: 0;
+  color: var(--content);
+}
+#d-open {
+  margin-left: auto;
+  font-size: 12.5px;
   white-space: nowrap;
 }
+#d-note {
+  order: 1;
+  flex: 1 1 100%;
+  min-width: 0;
+}
+/* Le bouton qui replie n'efface rien : pas de rouge au survol. */
+#d-note-fold:hover {
+  color: var(--content);
+  background: var(--surface-overlay);
+}
+#d-note-fold svg {
+  transition: transform 0.15s;
+}
+#d-note-fold[aria-expanded='false'] svg {
+  transform: rotate(-90deg);
+}
+#tab-discord .d-cols.folded .d-note-head {
+  border-bottom: 0;
+}
 #d-frame {
+  display: block;
   width: 100%;
-  height: 72vh;
-  border: 1px solid var(--line-subtle);
-  border-radius: 6px;
+  height: max(420px, calc(100vh - 300px));
+  border: 0;
+  border-radius: 0 0 9px 9px;
   background: #fff;
+}
+@media (max-width: 1099px) {
+  #d-frame {
+    height: max(320px, 50vh);
+  }
+}
+
+/* Anciens résumés importés, sous la note : l'état, et la liste repliée. */
+#tab-discord .d-history .card-head .btn {
+  margin-left: auto;
+}
+#tab-discord .d-history-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 20px 14px;
+}
+#d-history-list summary {
+  width: max-content;
+  color: var(--content-muted);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+#d-history-list summary:hover {
+  color: var(--content);
+}
+#d-history-list ul {
+  max-height: 260px;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 12.5px;
+  scrollbar-color: var(--line-subtle) transparent;
+  scrollbar-width: thin;
+}
+#d-history-list li {
+  padding: 5px 0;
+  border-top: 1px solid var(--line-subtle);
+  overflow-wrap: anywhere;
+}
+#d-history-list small {
+  display: block;
+  color: var(--content-muted);
+}
+
+/* ---------------------------------------------------------------- options
+   Serveur, salon, serveurs d'emojis, la case et le mode : une ligne. */
+#d-guild {
+  width: 190px;
+}
+#d-channel {
+  width: 200px;
+}
+/* « Emojis de » : une liste de cases qui se déroule sous son résumé, dessiné
+   comme un select. Bord rouge si un serveur coché a refusé ses emojis. */
+#tab-discord .d-menu {
+  position: relative;
+}
+#tab-discord .d-menu > summary {
+  display: block;
+  width: 130px;
+  height: 34px;
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-base)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 9px center;
+  line-height: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  list-style: none;
+  cursor: pointer;
+}
+#tab-discord .d-menu > summary::-webkit-details-marker {
+  display: none;
+}
+#tab-discord .d-menu > summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+#tab-discord .d-menu.ko > summary {
+  border-color: var(--danger);
+}
+#tab-discord .d-menu-list {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: max-content;
+  min-width: 100%;
+  max-width: min(440px, 80vw);
+  margin-top: 4px;
+  padding: 10px 14px 12px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.45);
+}
+#d-emoji-guilds {
+  display: flex;
+  flex-direction: column;
+}
+#d-emoji-guilds .check {
+  height: 30px;
+  padding: 0;
+  color: var(--content);
+}
+#d-emoji-guilds small {
+  color: var(--content-muted);
+}
+#d-external:empty {
+  display: none;
+}
+#tab-discord .d-menu-list a {
+  font-size: 12.5px;
+}
+#tab-discord .check:has(input:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* Message | Embed : deux boutons radio en un bouton segmenté. */
+#tab-discord .d-seg {
+  display: inline-flex;
+  height: 34px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-discord .d-seg label {
+  position: relative;
+  display: flex;
+  margin: 0;
+  cursor: pointer;
+}
+#tab-discord .d-seg input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+#tab-discord .d-seg span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 14px;
+  color: var(--content-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+#tab-discord .d-seg label:hover span {
+  color: var(--content);
+}
+#tab-discord .d-seg input:checked + span {
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 600;
+}
+#tab-discord .d-seg input:focus-visible + span {
+  outline: 2px solid var(--ring);
+  outline-offset: -3px;
+}
+#tab-discord .d-seg input:disabled + span {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Formulaire du mode embed : tout y est facultatif. */
+#d-embed .grow > input,
+#d-embed .grow > textarea {
+  width: 100%;
+}
+#d-embed textarea {
+  min-height: 54px;
+}
+#tab-discord .d-btn-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+#tab-discord .d-btn-row:last-child {
+  margin-bottom: 0;
+}
+#tab-discord .d-btn-row input:first-child {
+  flex: 1 1 34%;
+  min-width: 0;
+}
+#tab-discord .d-btn-row input:last-child {
+  flex: 2 1 66%;
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------------- éditeur
+   La barre d'outils, par groupes de boutons accolés (30 px de haut). */
+#d-tools {
+  padding: 10px 20px;
+}
+#tab-discord .d-grp {
+  display: inline-flex;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-discord .d-grp button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-right: 1px solid var(--line-subtle);
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+#tab-discord .d-grp button:last-child {
+  border-right: 0;
+}
+#tab-discord .d-grp button:hover {
+  background: var(--surface-overlay);
+}
+#tab-discord .d-grp button[aria-expanded='true'] {
+  background: var(--surface-overlay);
+  color: var(--accent);
+}
+#tab-discord .d-grp button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-discord .d-grp svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#tab-discord .d-grp .t1,
+#tab-discord .d-grp .t2,
+#tab-discord .d-grp .t3 {
+  font-weight: 700;
+}
+#tab-discord .d-grp .t2 {
+  font-size: 12px;
+}
+#tab-discord .d-grp .t3,
+#tab-discord .d-grp .sub {
+  font-size: 11px;
+}
+#tab-discord .d-grp .sub {
+  color: var(--content-muted);
+}
+#d-dates {
+  margin-left: auto;
+}
+#tab-discord .d-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 20px;
+}
+#d-dates-info:empty,
+#d-request-info:empty,
+#d-status:empty,
+#d-palette-missing:empty {
+  display: none;
+}
+/* La zone de texte ; le formulaire de date, le sélecteur d'emojis et la liste
+   d'autocomplétion se posent PAR-DESSUS elle, sans la pousser. */
+#tab-discord .d-area {
+  position: relative;
 }
 #d-text {
   display: block;
   width: 100%;
   min-height: 300px;
-  resize: vertical;
-  font:
-    13px/1.5 ui-monospace,
-    monospace;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.5;
 }
-/* Outils d'édition : la barre au-dessus de la zone de texte, le sélecteur
-   d'emojis qui s'ouvre sous elle, et la liste d'autocomplétion posée au
-   curseur — tous placés par rapport à `.edit`. */
-.edit {
-  position: relative;
-}
-.tools {
+/* Formulaire d'horodatage : un panneau posé à gauche de la zone de texte. */
+#d-stamp {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 6px;
+  flex-direction: column;
+  gap: 12px;
+  width: min(600px, 100%);
+  padding: 14px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
 }
-.tools button {
-  min-width: 30px;
-  padding: 3px 7px;
-  color: var(--content);
-  white-space: nowrap;
+#d-stamp-info {
+  margin-right: auto;
 }
-.tools button:hover,
-.tools button[aria-expanded='true'] {
-  border-color: var(--accent);
-}
-.tools .sep {
-  width: 1px;
-  margin: 2px 4px;
-  background: var(--line-subtle);
-}
-/* Ancre sans hauteur : le sélecteur recouvre la zone de texte, il ne la
-   pousse pas. */
-.pop {
-  position: relative;
-}
+/* Sélecteur d'emojis : le panneau de droite, à l'allure de celui de Discord. */
 #d-picker {
   position: absolute;
   z-index: 5;
@@ -95,98 +440,6 @@ a.ghost {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
-}
-#d-picker[hidden],
-#d-stamp[hidden],
-#d-complete[hidden] {
-  display: none;
-}
-/* Formulaire d'horodatage : même panneau que le sélecteur, posé à gauche. */
-#d-stamp {
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  left: 0;
-  width: min(470px, 100%);
-  background: var(--surface-raised);
-  border: 1px solid var(--line-subtle);
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
-}
-#d-stamp .row {
-  margin-bottom: 0;
-}
-#d-stamp input,
-#d-stamp select {
-  width: 100%;
-}
-#d-stamp .bar {
-  margin-bottom: 0;
-}
-#d-dates-info {
-  margin: 0 0 6px;
-}
-#d-dates-info:empty,
-#d-request-info:empty {
-  display: none;
-}
-/* Anciens résumés importés, sous la note : l'état, et la liste repliée. */
-.d-history {
-  margin-top: 12px;
-}
-.d-history p.hint {
-  margin: 0 0 4px;
-}
-#d-history-list summary {
-  color: var(--content-muted);
-  font-size: 12px;
-  cursor: pointer;
-}
-#d-history-list ul {
-  max-height: 260px;
-  margin: 6px 0 0;
-  padding: 0;
-  overflow-y: auto;
-  list-style: none;
-  font-size: 12px;
-  scrollbar-color: var(--line-subtle) transparent;
-  scrollbar-width: thin;
-}
-#d-history-list li {
-  padding: 3px 0;
-  border-top: 1px solid var(--line-subtle);
-  overflow-wrap: anywhere;
-}
-#d-history-list small {
-  display: block;
-  color: var(--content-muted);
-}
-/* « Copier la demande » : le nombre d'exemples, et le texte à copier à la
-   main quand le presse-papiers se refuse. */
-#tab-discord .bar label {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  margin: 0;
-}
-#d-request-k {
-  width: 52px;
-}
-#d-request-info {
-  margin: 0 0 6px;
-}
-#d-request-text {
-  display: block;
-  width: 100%;
-  height: 160px;
-  margin-bottom: 8px;
-  font:
-    12px/1.4 ui-monospace,
-    monospace;
-}
-#d-request-text[hidden] {
-  display: none;
 }
 #d-picker-q {
   width: 100%;
@@ -221,90 +474,85 @@ a.ghost {
 #d-picker-list h3 button:hover {
   color: var(--content);
 }
-/* Serveurs dont on prend les emojis : une case chacun, sur une ligne qui
-   se replie. */
-.d-servers {
-  margin-bottom: 12px;
-}
-.d-servers p.hint {
-  margin: 4px 0 0;
-}
-.d-servers a {
-  color: var(--accent);
-}
-#d-emoji-guilds,
-.d-mode {
+#tab-discord .em-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px 16px;
+  gap: 2px;
 }
-.d-mode {
-  margin-bottom: 8px;
-}
-#d-emoji-guilds label.check,
-.d-mode label.check {
-  padding: 2px 0;
-  color: var(--content);
-}
-#d-emoji-guilds label.check {
-  white-space: normal;
-}
-#d-emoji-guilds small {
-  color: var(--content-muted);
-}
-#d-emoji-guilds small.ko {
-  color: var(--danger);
-}
-/* Formulaire du mode embed : tout y est facultatif. */
-#d-embed {
-  margin-bottom: 10px;
-  padding: 10px 10px 4px;
-  border: 1px solid var(--line-subtle);
-  border-radius: 6px;
-}
-#d-embed[hidden] {
-  display: none;
-}
-#d-embed .row {
-  margin-bottom: 8px;
-}
-#d-embed input:not([type='color']),
-#d-embed textarea {
-  display: block;
-  width: 100%;
-}
-#d-embed textarea {
-  min-height: 54px;
-  resize: vertical;
-}
-#d-embed input[type='color'] {
-  display: block;
-  width: 46px;
+#tab-discord .em {
+  width: 34px;
   height: 34px;
-  padding: 2px;
+  padding: 0;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--content);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
 }
-.d-btn-row {
+#tab-discord .em:hover,
+#tab-discord .em.first {
+  background: var(--surface-overlay);
+  border-color: var(--line-subtle);
+}
+#tab-discord .em img,
+#d-complete img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+#d-complete {
+  position: absolute;
+  z-index: 6;
+  min-width: 210px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+  font-size: 13px;
+}
+#d-complete li {
   display: flex;
-  gap: 6px;
-  margin-bottom: 4px;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.d-btn-row[hidden] {
-  display: none;
+#d-complete li[aria-selected='true'] {
+  background: var(--surface-overlay);
 }
-.d-btn-row input:first-child {
-  flex: 1 1 34%;
+#d-complete .face {
+  width: 24px;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
 }
-.d-btn-row input:last-child {
-  flex: 2 1 66%;
+/* Palette : toujours visible, sans défilement — elle se replie sur plusieurs
+   lignes quand la colonne est étroite, et se range d'un bouton. */
+#tab-discord .d-palette {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 }
-/* Palette : toujours visible, sans défilement — elle se replie sur
-   plusieurs lignes quand la colonne est étroite. */
+#tab-discord .d-palette > .lbl {
+  line-height: 30px;
+}
+#tab-discord .d-palette > .btn {
+  margin-left: auto;
+}
 #d-palette {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 2px 14px;
   align-items: center;
-  margin-bottom: 6px;
 }
 #d-palette .grp {
   display: flex;
@@ -327,95 +575,47 @@ a.ghost {
   width: 22px;
   height: 22px;
 }
-#d-palette-missing {
-  margin: 0 0 6px;
+
+/* Le pied de l'éditeur : rédiger (gabarit, premier jet, demande), puis
+   envoyer (le compte, copier, poster), et ce que la page a à en dire. */
+#tab-discord .d-foot {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
 }
-#d-palette-missing:empty {
-  display: none;
-}
-.em-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-}
-.em {
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  color: var(--content);
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-}
-.em:hover,
-.em.first {
-  background: var(--surface-overlay);
-  border-color: var(--line-subtle);
-}
-.em img,
-#d-complete img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  vertical-align: middle;
-}
-#d-complete {
-  position: absolute;
-  z-index: 6;
-  min-width: 210px;
-  margin: 0;
-  padding: 4px;
-  list-style: none;
-  background: var(--surface-raised);
-  border: 1px solid var(--line-subtle);
-  border-radius: 6px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.5);
-  font-size: 13px;
-}
-#d-complete li {
-  display: flex;
+#tab-discord .d-k {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  cursor: pointer;
+  margin: 0;
+  font-size: 12.5px;
 }
-#d-complete li[aria-selected='true'] {
-  background: var(--surface-overlay);
+#d-request-k {
+  width: 62px;
 }
-#d-complete .face {
-  width: 24px;
-  font-size: 18px;
-  line-height: 24px;
-  text-align: center;
-}
-#tab-discord .bar {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 8px 0;
-  color: var(--content-muted);
-  font-size: 12px;
-}
-#tab-discord .bar span {
+#d-count {
   margin-right: auto;
 }
-#tab-discord button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+#d-request-text {
+  display: block;
+  width: 100%;
+  height: 160px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.4;
 }
-#tab-discord .warn {
-  color: var(--warn);
+/* Un message posté ne se renvoie pas : « Envoyer », alors toujours éteint,
+   laisse « Mettre à jour » seul bouton principal. */
+#d-update:not([hidden]) ~ #d-send {
+  display: none;
 }
-#tab-discord .ko {
-  color: var(--danger);
+#d-status {
+  line-height: 1.7;
 }
-#d-status a {
-  color: var(--accent);
+
+/* ---------------------------------------------------------------- aperçu */
+#d-preview {
+  padding: 14px 20px 18px;
 }
 /* Aperçu : couleurs, tailles et marges du thème sombre de Discord. Le HTML
    vient de `renderDiscord` (scripts/quick/discord.ts). */

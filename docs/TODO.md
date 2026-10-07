@@ -43,9 +43,10 @@
       Opus, fichiers disjoints, sur `scripts/quick/ui/STYLE.md` et la maquette
       https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw) : **B28** Rangs
       — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **B29** Gear
-      reco — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **C6** Discord (note repliable, barre d'outils
-      groupée, et les petits restes : placeholder de Récompense, bloc
-      « héritage » de `quick.css`). Contrôles à l'écran laissés par F16 : survol des ✕ et des
+      reco — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **C6** Discord
+      — FAIT (07/10, avec le placeholder de Récompense et le retrait du bloc
+      « héritage » de `quick.css` ; contrôles AVEC le jeton dans son entrée
+      DONE). Contrôles à l'écran laissés par F16 : survol des ✕ et des
       boutons fantômes, anneau de focus, tiroir pendant un vrai enregistrement,
       résultats de Récompense avec icônes, hash `#gear`, fenêtre sous 1060 px.
 
