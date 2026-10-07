@@ -44,13 +44,14 @@
       le commit cite `$p2s2` et `$a2s2`, et `Tab` / `Entrée` /
       `Ctrl + Entrée` / `Échap` dans les quatre pickers.
 - [ ] **Gear reco, second retour de Sevih du 07/10** (après usage de C7) :
-      lots C8 puis C9 dans le fichier des lots, l'un après l'autre. C8 :
-      pickers d'armes et d'amulettes en multi-choix validés par « Valider »
-      ou Entrée, tuiles « comme /equipment » (cadre de rareté, étoiles, icône
-      d'effet et de classe) dans les pickers et les cartes, sets en rangées de
-      tuiles à la place des `select`, set sans bonus 2p grisé en secondaire.
-      C9 : bloc « Aperçu » sous chaque build, rendu comme la fiche perso par
-      `previewGearReco`, balise inconnue en rouge dans la note.
+      C8 est FAIT (pickers d'armes et d'amulettes en multi-choix, tuiles
+      « comme /equipment », sets en rangées de tuiles, set sans bonus 2p grisé
+      en secondaire) — reste à le jouer à l'écran : cocher / décocher au
+      clavier, Entrée dans la recherche des quatre pickers, un mix de sets
+      puis « Enregistrer » (le commit cite les `$slug` des badges). Reste le
+      lot C9, dans le fichier des lots : bloc « Aperçu » sous chaque build,
+      rendu comme la fiche perso par `previewGearReco`, balise inconnue en
+      rouge dans la note.
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
       l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
@@ -79,12 +80,6 @@
       l'en-tête n'ait plus à lire `/api/ranks` ; garder `#gear/<id>` dans
       l'adresse après un choix (recharger reviendrait sur le perso) — ça
       passe par `lib.js`, qui réécrit le hash à chaque bascule.
-
-- [ ] **Gear reco, sets sans bonus 2 pièces** (laissé par C7) : Revenge et
-      Patience restent proposables en secondaire d'un mix alors qu'ils n'ont
-      pas de bonus 2p — les options de sets de `gear-options.ts` ne disent pas
-      leurs bonus, le damage-calculator le sait (`has2P`). À exposer dans
-      `gearRecoState` et griser dans le picker.
 
 ## 🧪 À jouer au prochain patch
 

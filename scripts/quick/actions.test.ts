@@ -23,6 +23,9 @@
  * aussi) — le picker de sets du même onglet : un set principal et des
  * secondaires deviennent les combos du build.
  *
+ * Et contrat de `itemTile` (`ui/gear-view.mjs`, idem) — la tuile d'item du même
+ * onglet : le cadre de rareté, les étoiles, l'icône d'effet et celle de classe.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -54,6 +57,7 @@ import {
   type TranslateDeps,
 } from './actions';
 import { composeSetCombos, splitSetCombos } from './ui/gear-sets.mjs';
+import { gradeColor, itemName, itemTile, setGrid, setRow, shownPieces } from './ui/gear-view.mjs';
 
 const DIANNE: CharacterCurated = {
   rank: 'S',
@@ -491,6 +495,200 @@ describe('recos du fichier — lues, jamais écrites', () => {
         slot,
       ).toEqual([]);
     }
+  });
+
+  it('une pièce porte ce que sa tuile montre : grade, étoiles, icône d’effet', () => {
+    const { weapons, amulets, talismans } = state.options;
+    for (const o of [...weapons, ...amulets, ...talismans]) {
+      expect(['normal', 'magic', 'rare', 'unique'], o.label).toContain(o.grade);
+      expect(o.star, o.label).toBeGreaterThan(0);
+    }
+
+    // Une arme unique 6★ à passif : l'icône d'effet de son premier palier.
+    const sword = weapons.find((o) => o.label === 'Surefire Greatsword');
+    expect(sword).toMatchObject({ grade: 'unique', star: 6, classLimits: ['striker'] });
+    expect(sword?.overlayIcon).toMatch(/^TI_Icon_UO_Weapon_/);
+    expect(sword?.mode).toBeUndefined();
+    // Sans passif : pas d'icône d'effet.
+    const steel = weapons.find((o) => o.label === 'Steel Sword');
+    expect(steel).toMatchObject({ grade: 'rare', star: 6 });
+    expect(steel?.overlayIcon).toBeUndefined();
+    // Une variante de classe porte SON passif, sous son id à elle.
+    const briareos = weapons.filter((o) => /^Briareos's Recklessness \[/.test(o.label));
+    expect(briareos).toHaveLength(5);
+    expect(new Set(briareos.map((o) => o.id)).size).toBe(5);
+    for (const o of briareos) {
+      expect(o.classLimits, o.label).toHaveLength(1);
+      expect(o.overlayIcon, o.label).toBeTruthy();
+    }
+  });
+
+  it('un talisman dit son type de points', () => {
+    const { talismans } = state.options;
+    expect(talismans.filter((o) => o.mode !== 'AP' && o.mode !== 'CP')).toEqual([]);
+    const ap = talismans.find((o) => o.mode === 'AP');
+    expect(ap).toMatchObject({ grade: 'unique', star: 6 });
+    expect(ap?.overlayIcon).toMatch(/^TI_Icon_UO_Talisman_/);
+    expect(talismans.some((o) => o.mode === 'CP')).toBe(true);
+  });
+
+  it('un set porte son icône, ses quatre pièces et ses bonus — Revenge et Patience sans 2 pièces', () => {
+    const { sets } = state.options;
+    for (const o of sets) {
+      expect(o.setIcon, o.label).toMatch(/^TI_Icon_Set_/);
+      expect(o.setIcon, o.label).toBe(o.icon);
+      expect(o.pieceIcons, o.label).toHaveLength(4);
+      // helmet, armor, gloves, shoes : l'ordre des tuiles d'un combo.
+      for (const [i, part] of ['Helmet', 'Armor', 'Gloves', 'Shoes'].entries())
+        expect(o.pieceIcons?.[i], o.label).toContain(part);
+      expect(o.has2P, o.label).toBe(Boolean(o.p2));
+    }
+
+    // Le bonus 2 pièces de Speed n'existe qu'au dernier palier : c'est lui qui est servi.
+    const speed = sets.find((o) => o.label === 'Speed Set');
+    expect(speed).toMatchObject({ has2P: true });
+    expect(speed?.p2).toMatch(/^Speed \+\d+%$/);
+    expect(speed?.p4).toMatch(/^Speed \+\d+%$/);
+
+    const alone = sets.filter((o) => !o.has2P).map((o) => o.label);
+    expect(alone).toEqual(['Patience Set', 'Revenge Set']);
+    for (const o of sets.filter((x) => !x.has2P)) {
+      expect(o.p2, o.label).toBeUndefined();
+      expect(o.p4, o.label).toContain('proportional to missing Health');
+    }
+  });
+});
+
+describe('itemTile — la tuile d’item de gear-view', () => {
+  const env = {
+    imgBase: 'https://img.test',
+    esc: (v: unknown) =>
+      String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'),
+  };
+  const count = (html: string, needle: string) => html.split(needle).length - 1;
+
+  it('unique 6★ à effet, d’une seule classe : son cadre, six étoiles, les deux overlays', () => {
+    const html = itemTile(
+      env,
+      {
+        icon: 'TI_Equipment_Weapon_06',
+        grade: 'unique',
+        star: 6,
+        overlayIcon: 'TI_Icon_UO_Weapon_11',
+        classLimits: ['striker'],
+      },
+      64,
+    );
+    expect(html).toContain('style="width:64px;height:64px"');
+    expect(html).toContain('src="https://img.test/images/ui/bg/TI_Slot_Unique.webp"');
+    expect(html).toContain('src="https://img.test/images/equipment/TI_Equipment_Weapon_06.webp"');
+    expect(count(html, 'images/ui/star/CM_icon_star_y.webp')).toBe(6);
+    // 18 % de 64 px, arrondi ; chevauchement de 30 %, sauf la première.
+    expect(count(html, 'width="12" height="12"')).toBe(6);
+    expect(count(html, 'margin-left:-3.6px')).toBe(5);
+    expect(html).toContain(
+      'class="gv-fx" src="https://img.test/images/equipment/TI_Icon_UO_Weapon_11.webp"',
+    );
+    expect(html).toContain(
+      'class="gv-cls" src="https://img.test/images/ui/class/IG_Turn_Class_Striker.webp"',
+    );
+    expect(count(html, '<img')).toBe(10);
+  });
+
+  it('normale sans passif : ni overlay, ni étoile en trop', () => {
+    const html = itemTile(env, { icon: 'TI_Equipment_Weapon_01', grade: 'normal', star: 1 }, 44);
+    expect(html).toContain('images/ui/bg/TI_Slot_Normal.webp');
+    expect(count(html, 'CM_icon_star_y')).toBe(1);
+    // 18 % de 44 px : 8 px, le plancher.
+    expect(html).toContain('width="8" height="8"');
+    expect(html).not.toContain('margin-left');
+    expect(html).not.toContain('gv-fx');
+    expect(html).not.toContain('gv-cls');
+    expect(count(html, '<img')).toBe(3);
+  });
+
+  it('pas d’icône de classe sur une pièce libre ou ouverte à plusieurs classes', () => {
+    const tile = (classLimits: string[]) =>
+      itemTile(env, { icon: 'x', grade: 'rare', star: 6, classLimits }, 64);
+    expect(tile([])).not.toContain('gv-cls');
+    expect(tile(['striker', 'mage'])).not.toContain('gv-cls');
+    expect(tile(['healer'])).toContain('IG_Turn_Class_Healer.webp');
+    expect(tile([])).toContain('TI_Slot_Rare.webp');
+  });
+
+  it('une pièce inconnue : sa place vide, à la taille ; un grade inconnu : le cadre normal', () => {
+    for (const none of [undefined, {}, { grade: 'unique', star: 6 }]) {
+      const html = itemTile(env, none, 44);
+      expect(html).toContain('class="gv-tile none" style="width:44px;height:44px"');
+      expect(html).not.toContain('<img');
+    }
+    expect(itemTile(env, { icon: 'x', grade: 'mythic' }, 44)).toContain('TI_Slot_Normal.webp');
+    expect(itemTile(env, { icon: 'x', grade: 'unique' }, 44)).not.toContain('gv-stars');
+  });
+
+  it('échappe ce qu’il pose dans le HTML', () => {
+    const html = itemTile({ ...env, imgBase: 'https://a"b' }, { icon: '"><i>' }, 44);
+    expect(html).not.toContain('"><i>');
+    expect(html).toContain('https://a&quot;b/images/equipment/&quot;>&lt;i>.webp');
+    expect(itemName(env, '<b>Sword</b>', 'unique')).toBe(
+      '<span class="gv-name" style="color:var(--item-legendary)">&lt;b>Sword&lt;/b></span>',
+    );
+  });
+
+  it('le nom prend le jeton de son grade (`GRADE_TEXT` du site)', () => {
+    expect(['normal', 'magic', 'rare', 'unique', 'mythic', undefined].map(gradeColor)).toEqual([
+      'var(--item-normal)',
+      'var(--item-superior)',
+      'var(--item-epic)',
+      'var(--item-legendary)',
+      '',
+      '',
+    ]);
+    expect(itemName(env, 'Sword', undefined, 'g-n')).toBe('<span class="g-n">Sword</span>');
+  });
+
+  it('un set : quatre pièces en cadre unique, l’icône du set sur chacune', () => {
+    const set = {
+      setIcon: 'TI_Icon_Set_Enchant_15',
+      pieceIcons: ['Helmet_06', 'Armor_06', 'Gloves_06', 'Shoes_06'],
+    };
+    const grid = setGrid(env, set);
+    expect(grid.startsWith('<span class="gv-set">')).toBe(true);
+    expect(count(grid, 'TI_Slot_Unique.webp')).toBe(4);
+    expect(
+      count(
+        grid,
+        'class="gv-fx" src="https://img.test/images/equipment/TI_Icon_Set_Enchant_15.webp"',
+      ),
+    ).toBe(4);
+    expect(count(grid, 'width:34px;height:34px')).toBe(4);
+    expect(grid).not.toContain('gv-stars');
+    const order = set.pieceIcons.map((icon) => grid.indexOf(`equipment/${icon}.webp`));
+    expect(order).toEqual([...order].sort((a, b) => a - b));
+    expect(order.every((at) => at > 0)).toBe(true);
+
+    // Dans un combo : helmet + armor pour le premier set, gloves + shoes ensuite ;
+    // joué à 4, les quatre.
+    expect([shownPieces(4, 0), shownPieces(2, 0), shownPieces(2, 1), shownPieces(2, 2)]).toEqual([
+      [0, 1, 2, 3],
+      [0, 1],
+      [2, 3],
+      [2, 3],
+    ]);
+    const head = setRow(env, set, { count: 2, idx: 0 });
+    expect(count(head, 'width:32px;height:32px')).toBe(2);
+    expect(head).toContain('Helmet_06');
+    expect(head).toContain('Armor_06');
+    expect(head).not.toContain('Gloves_06');
+    const tail = setRow(env, set, { count: 2, idx: 1 });
+    expect(tail).toContain('Gloves_06');
+    expect(tail).toContain('Shoes_06');
+    expect(tail).not.toContain('Helmet_06');
+    expect(count(setRow(env, set, { count: 4, idx: 0 }), 'TI_Slot_Unique.webp')).toBe(4);
+    // Un set que les listes ne connaissent pas : une place vide.
+    expect(setRow(env, undefined, { count: 2, idx: 0 })).toBe(
+      `<span class="gv-row">${itemTile(env, undefined, 32)}</span>`,
+    );
   });
 });
 

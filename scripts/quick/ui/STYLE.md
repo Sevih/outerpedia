@@ -246,17 +246,20 @@ Un select modifié prend le bord et le fond `accent` à 12 % (`.badge.edit` pour
 le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 22 px, depuis `imgBase`, `alt=""` doublées par le nom en texte ou en `title`.
 
-### Gear reco (`wide`, fait — B29, pickers C7)
+### Gear reco (`wide`, fait — B29, pickers C7, tuiles C8)
 
 ```
 .head  Gear reco — Les builds d'un perso…
 .card.pad  perso à gauche : portrait 56 px, nom, élément · classe · sous-classe · ★★★, badge « 2 builds · 1 note » ; à droite [Changer de perso] (le picker : recherche, élément, classe, portraits)
 .savebar   1 changement · 1 erreur · « Build PvP : stat principale non permise » [＋ build] [Annuler] [Enregistrer]
 .card (un build)  card-head : « Build » [nom 24ch] badge 1 / 2 · ✕ dupliquer ↑ ↓ ✕ (btn icon)
-   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug + « régler à la pièce ») | Amulettes | Sets | Substats (pleine largeur) | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] badge error · « 212 caractères » à droite ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
-   une arme, une amulette = [tuile 240px : icône 40 px + nom, un clic ouvre le picker] [ses stats principales en bascules, aria-pressed] ✕ ; « ＋ arme » (.btn.ghost.sm) ouvre le picker
-   talismans à la pièce = une rangée de tuiles (icône + nom + ✕), « ＋ talisman » ouvre le picker en multi-choix ; sets = « Composer un mix… » ouvre le picker (un principal, des secondaires), les combos restent en paires [select 260px] [select 120px] ✕
-le picker (UNE modale pour le perso, les pièces, les talismans, les sets — `gPkOpen`, lot C7) : titre + badge · recherche · rangée de filtres optionnelle (pastilles, groupe segmenté) · grille de tuiles (visages 64 px, équipement 56 px, anneau accent sur le choix, `disabled` grisé) · en multi-choix, un pied [récapitulatif] [Annuler] [Valider]
+   grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug, ou « sans preset ») | Amulettes | Sets | Substats (le seul menu de preset, + « régler à la pièce ») | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] badge error · « 212 caractères » à droite ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
+   une arme, une amulette = [bouton 240px : tuile d'item 44 px + nom coloré par le grade, un clic ouvre le picker du slot] [ses stats principales en bascules, aria-pressed] ✕ ; « ＋ arme » (.btn.ghost.sm) ouvre le même picker
+   talismans = une rangée de tuiles (tuile d'item 44 px + nom + ✕), « ＋ talisman » ouvre le picker
+   sets = une rangée par combo : [tuiles helmet + armor du premier set, 32 px] nom « 2p » + [tuiles gloves + shoes du second] nom « 2p » … badge $slug ou « sans preset » ✕ (un set joué à 4 : ses quatre tuiles, « 4p ») ; « Composer un mix… » est la seule façon de les éditer (un principal, des secondaires)
+le picker (UNE modale pour le perso, les pièces, les talismans, les sets — `gPkOpen`, lot C7) : titre + badge · recherche · rangée de filtres optionnelle (pastilles, groupe segmenté) · grille de tuiles (visages 64 px ; tuile d'item 64 px, nom coloré dessous, badge AP / CP ou « hors classe » ; un set = ses quatre pièces de 34 px en grille 2 × 2 ; anneau accent sur le choix, pastille ✓ en haut à gauche, `disabled` grisé — un set sans bonus 2 pièces parmi les secondaires) · en multi-choix (armes, amulettes, talismans, sets), un pied [récapitulatif] [Annuler] [Valider]
+   clavier : Entrée dans la recherche = « Valider » en multi-choix (Ctrl + Entrée aussi), la première tuile en choix unique (le perso) ; Entrée ou Espace sur une tuile la coche ou la décoche ; Échap, la croix, le voile ferment sans rien poser ; Tab reste dans le panneau
+la tuile d'item (`ui/gear-view.mjs`, pur et testé ; classes `.gv-*` de `tabs/gear.css`) est celle de /equipment (`EquipmentIcon.tsx`) : cadre de rareté `images/ui/bg/TI_Slot_<Grade>.webp`, icône à 6 % de marge, étoiles en bas (18 % de la tuile, chevauchement 30 %), icône d'effet en haut à droite (26 %), icône de classe dessous (24 %) si la pièce n'a qu'une classe ; le nom prend le jeton `--item-*` de son grade (`GRADE_TOKEN`)
 .card.ko (un build refusé) : bord danger, badge « stat principale non permise », le message sous la pièce
 ```
 

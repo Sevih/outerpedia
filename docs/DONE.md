@@ -7,6 +7,109 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : pickers d'armes et d'amulettes en multi-choix,
+  tuiles d'item « comme /equipment », sets en rangées de tuiles** (lot C8,
+  second retour de Sevih du 07/10 après usage des pickers de C7). Le pourquoi.
+  Trois demandes : valider plusieurs pièces d'un coup « avec un bouton ou la
+  touche Entrée, comme les talismans » ; des tuiles qui ressemblent à celles
+  du site (cadre de rareté, étoiles, icône d'effet, icône de classe) au lieu
+  de l'icône nue ; des sets lisibles d'un regard à la place des `select`. Le
+  quoi, en quatre parties. (1) LES DONNÉES : `gearRecoState` (`actions.ts`)
+  joint à chaque option d'arme, d'amulette et de talisman `grade`, `star` (le
+  dernier palier, `stars.at(-1)`), `overlayIcon` (l'icône du PREMIER palier de
+  passif par `resolvePassives`, comme `toGearRows` de la page ; pour Briareos
+  et Gorgon, le passif de la variante, sous l'id de la variante) et, pour un
+  talisman, `mode` (AP / CP) ; à chaque option de set `setIcon`, `pieceIcons`
+  (helmet, armor, gloves, shoes), `p2`, `p4` (dernier palier, repli sur le
+  premier, en anglais) et `has2P`. Deux fonctions à côté de `gearRecoState`
+  (`gearTileFacts`, `setTileFacts`), jointes par id ; `gear-options.ts` et
+  l'admin ne bougent pas. (2) LA TUILE : un module pur
+  `scripts/quick/ui/gear-view.mjs` (sans DOM, il reçoit `imgBase` et
+  l'échappement) — `itemTile(env, item, size)` rend le cadre
+  `ui/bg/TI_Slot_<Grade>`, l'icône, les étoiles (18 % de la tuile, 8 px au
+  moins, chevauchement de 30 %), l'icône d'effet et, pour une pièce limitée à
+  UNE classe, l'icône de classe ; `itemName` colore le nom par le grade
+  (`GRADE_TOKEN`, la table de `GRADE_TEXT`) ; `setGrid` rend les quatre pièces
+  d'un set en grille 2 × 2 (cadre unique, icône du set en overlay), `setRow`
+  celles qu'il occupe dans un combo (`shownPieces`, la règle de
+  `shownPieceIdx`). Les proportions (marge de 6 %, overlays à 26 % et 24 %)
+  sont dans `tabs/gear.css`, classes `.gv-*`. `gear.js` n'a plus de `gEq` :
+  tuiles de 64 px dans les pickers (nom coloré dessous, badge AP / CP d'un
+  talisman, « hors classe » en badge), 44 px dans les cartes, 34 px en grille
+  de set, 32 px en rangée de combo. (3) LES PICKERS d'armes et d'amulettes en
+  multi-choix (`gOpenGear`), sur le modèle des talismans : ouverts sur la
+  liste du slot (cochée, dans l'ordre du build) par la tuile d'une pièce comme
+  par « ＋ arme », un clic coche ou décoche, le pied récapitule dans l'ordre
+  des clics, « Valider » remplace la liste ; une pièce gardée garde sa stat,
+  une nouvelle prend la stat unique de son pool ou reste sans stat (erreur à
+  la pièce). Clavier, dans tout multi-choix : Entrée dans la recherche =
+  « Valider » (sets compris : « Poser n combos », avec sa confirmation),
+  Ctrl + Entrée aussi, Entrée ou Espace sur une tuile la coche ; le picker de
+  héros garde Entrée = la première tuile. (4) LA CARTE sans `select` de sets
+  ni de talismans : un combo = une rangée (les tuiles helmet + armor du
+  premier set, son nom, « 2p », « + », gloves + shoes du second ; un set joué
+  à 4 montre ses quatre tuiles et « 4p », comme `ComboLineView`), puis le
+  badge `$slug` — celui que le disque cite, sinon celui de `gTwin.sets`, sinon
+  « sans preset » — et la `✕` ; un combo que `splitSetCombos` ne lit pas
+  s'affiche de la même façon. « Composer un mix… » est la seule entrée ;
+  partent le select de preset des combos, les paires de selects, « régler à la
+  pièce », « ＋ paire », « ＋ combo ». Talismans : toujours en tuiles, le
+  badge `$slug` dans le titre du slot à la place du select ; retirer un
+  talisman détache le preset. Le select des substats et son « régler à la
+  pièce » restent. Dans le picker de sets, Revenge et Patience (`has2P` faux)
+  sont grisés en « Secondaires », `title` « pas de bonus 2 pièces » — l'item
+  du TODO, retiré ; les autres tuiles disent leurs bonus 2p / 4p en `title`.
+  `gToBuild` n'est pas touché. `STYLE.md` : croquis, aide du clavier et la
+  tuile. Quatre écarts au texte du lot, à relire. (a) Les jetons `--item-*`
+  ne sont PAS recopiés dans `gear.css` : ils sont déjà dans le `:root` de
+  `quick.css`, aux valeurs de `globals.css`. (b) Un set sans bonus 2p DÉJÀ
+  secondaire reste cliquable, pour pouvoir le retirer (aucun build du fichier
+  n'en a). (c) La pastille ✓ / « principal » / « 2p » passe en haut à GAUCHE
+  des tuiles d'équipement : à droite elle couvrait l'icône d'effet. (d) Une
+  pièce citée DEUX fois dans un slot (Speed et Swift Immune de `2000063` :
+  l'amulette `1011` en HP% puis en PEN%) n'est cochée qu'une fois et garde
+  ses deux entrées tant qu'elle reste cochée ; le picker ne permet plus d'en
+  créer une seconde (avant : « ＋ amulette » puis la même pièce) — l'équivalent
+  est la stat composée par les bascules. Vérification. `pnpm typecheck` → sa
+  seule ligne est l'écho (`$ tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`), code 0 ;
+  `pnpm lint` → `$ eslint`, code 0 ; `pnpm test` → `Tests  2800 passed
+(2800)`, 197 fichiers — dix tests de plus dans `actions.test.ts` : les
+  options (Surefire Greatsword unique 6★ et son icône d'effet, Steel Sword
+  sans, les cinq variantes de Briareos, un talisman AP, Speed avec et Revenge
+  / Patience sans bonus 2p, quatre pièces dans l'ordre) et le module (tuile
+  unique 6★ à effet et classe : cadre, six étoiles, deux overlays ; tuile
+  normale sans passif : rien en trop ; classe unique seulement ; place vide ;
+  échappement ; jetons de grade ; grille et rangée de set). À l'écran : quick
+  isolé (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4808 pnpm quick --no-open`,
+  arrêté ensuite), AUCUN enregistrement, `gear-reco.json` intact. Captures
+  regardées : AVANT `/tmp/quick-shots/c8/avant/{build,weapons,talismans,sets}/gear.png`,
+  APRÈS `/tmp/quick-shots/c8/apres/{build,weapons,talismans,sets}/gear.png`
+  (Aer : cadres, étoiles 5★ et 6★, overlays d'effet et de classe, cadre bleu
+  des Steel Sword, badges AP / CP, combo Speed en quatre tuiles sous `$s4`,
+  Patience et Revenge grisés), `apres/combos/` et `apres/combos-1024/`
+  (Sigma : trois combos 2 + 2 et leurs `$slug`), `apres/amulets-1024/`,
+  et des agrandissements `apres/zoom-*.png` ; un défaut vu et corrigé : en
+  1024 le badge et la `✕` d'un combo retombaient à gauche (groupés à droite).
+  Le picker de héros est identique AU PIXEL à la capture de C7 (`compare
+-metric AE` de sa zone de 720 × 700 : 0). La logique, jouée dans happy-dom
+  hors du dépôt derrière un relais en lecture seule (le `POST` est capturé,
+  jamais transmis) : 51 contrôles, tous passent — multi-choix ouvert par les
+  deux boutons, ordre des clics, stat gardée / posée d'office / manquante,
+  Entrée, Ctrl + Entrée, « Valider », « Annuler », Échap, talisman retiré puis
+  repris (`$ru` recalculé), sets grisés, mix posé par Entrée, `✕` d'un combo,
+  Entrée du picker de héros, et la CHARGE du `POST` : les builds intacts sont
+  le JSON du disque à l'identique, le build retouché porte ses pièces
+  (`talismans` en ids, `sets` en `{ pieces }`) que `collapseBuild` replie.
+  Laissé, hors périmètre. Un set PRINCIPAL sans bonus 2p (Revenge, Patience)
+  accepte encore des secondaires, et un principal sans bonus 4p (Fortification,
+  Swiftness, Weakness, Augmentation) se pose seul en « 4p » : les règles du
+  damage-calculator (`pickable`) ne sont pas reprises. Un slot détaché puis
+  remis au contenu de son preset repart en pièces : le store choisit alors le
+  premier preset de même contenu (cf. les presets en double du TODO). Les
+  pièces d'armure ont la même icône d'un set à l'autre : dans le picker, seuls
+  le nom et la petite icône d'overlay distinguent deux sets. Pour Sevih : le
+  clavier dans les quatre pickers, et un mix puis « Enregistrer ».
 - **Admin, « Translate » : un bouton « Retranslate all » pour rattraper une
   correction de l'anglais déjà enregistrée** (Fable, 07/10, constat de Sevih
   sur le guide Annihilator : un conseil corrigé en anglais, « Translate », et

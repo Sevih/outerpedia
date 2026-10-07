@@ -49,7 +49,16 @@ import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
-import { getEEViews, loadEquipmentEditorial } from '@/lib/data/equipment';
+import {
+  getAmuletFamilies,
+  getEEViews,
+  getSetViews,
+  getTalismanFamilies,
+  getWeaponFamilies,
+  loadEquipmentEditorial,
+  resolvePassives,
+  type GearFamily,
+} from '@/lib/data/equipment';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import { listGuides } from '@/lib/data/guides';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
@@ -903,10 +912,61 @@ function gearCatalog(): GearCatalog {
 }
 
 /**
+ * Ce que la tuile d'une pièce montre en plus de son icône (`EquipmentIcon`,
+ * côté site), par id d'option : le grade (son cadre de rareté), le dernier
+ * palier d'étoiles, l'icône d'effet — celle du PREMIER palier de passif, comme
+ * `toGearRows` de la page /equipment — et, pour un talisman, son type de
+ * points. Une famille à variantes de classe (Briareos, Gorgon) rend une entrée
+ * par variante, sous son id et avec SON passif : les ids de `familyOptions`
+ * (`gear-options.ts`), auxquels ces faits se joignent.
+ */
+function gearTileFacts(families: GearFamily[]) {
+  const effect = (refs: GearFamily['passives']) =>
+    resolvePassives(refs, 'en')[0]?.icon || undefined;
+  return new Map(
+    families.flatMap((f) => {
+      const base = { grade: f.grade, star: f.stars.at(-1), mode: f.mode };
+      return f.classPassives?.length
+        ? f.classPassives.map((v) => [v.id, { ...base, overlayIcon: effect(v.passives) }] as const)
+        : [[f.id, { ...base, overlayIcon: effect(f.passives) }] as const];
+    }),
+  );
+}
+
+/** Les pièces d'un set dans l'ordre de ses tuiles (`SetCard`, `shownPieceIdx`). */
+const SET_PIECES = ['helmet', 'armor', 'gloves', 'shoes'] as const;
+
+/**
+ * Ce que la tuile d'un set montre, par id : l'icône d'enchantement, ses quatre
+ * pièces 6★, et ses bonus au dernier palier connu, en anglais (repli sur le
+ * premier, comme la page /equipment). `has2P` : le set a un bonus 2 pièces —
+ * Revenge et Patience n'en ont pas, ils ne s'apparient pas dans un combo 2 + 2.
+ */
+function setTileFacts() {
+  return new Map(
+    getSetViews('en').map((s) => {
+      const last = s.tiers.at(-1);
+      const p2 = last?.p2 ?? s.tiers[0]?.p2;
+      const p4 = last?.p4 ?? s.tiers[0]?.p4;
+      return [
+        s.id,
+        {
+          setIcon: s.icon,
+          pieceIcons: SET_PIECES.map((slot) => s.pieceIcons[slot] ?? ''),
+          p2,
+          p4,
+          has2P: Boolean(p2),
+        },
+      ] as const;
+    }),
+  );
+}
+
+/**
  * L'onglet « Gear reco » : le roster (qui a des recos), les presets en lecture
- * seule, les listes des sélecteurs (celles de l'admin, `icon` compris : c'est
- * l'image des tuiles des pickers) et, avec `id`, les builds de ce perso lus du
- * disque à l'instant.
+ * seule, les listes des sélecteurs (celles de l'admin, jointes à ce que leurs
+ * tuiles montrent — `gearTileFacts`, `setTileFacts`) et, avec `id`, les builds
+ * de ce perso lus du disque à l'instant.
  *
  * Les builds viennent DEUX fois : `builds` en pièces (presets dépliés, comme
  * l'admin les édite) et `disk` tels que le fichier les porte. La page a besoin
@@ -927,6 +987,13 @@ export function gearRecoState(id?: string) {
       classLimits: o.classLimits,
       mainStats: o.mainStats,
     }));
+  // Une option sans famille (ou sans vue de set) reste telle quelle : la page
+  // lui pose une tuile sans cadre de rareté connu.
+  const pieces = (list: GearOption[], families: GearFamily[]) => {
+    const facts = gearTileFacts(families);
+    return slim(list).map((o) => ({ ...o, ...facts.get(o.id) }));
+  };
+  const sets = setTileFacts();
   const disk = id === undefined ? undefined : (reco[id] ?? []);
   return {
     roster: getCharacterListItems()
@@ -939,10 +1006,10 @@ export function gearRecoState(id?: string) {
       .sort((a, b) => a.name.localeCompare(b.name)),
     presets: { talismans: presets.talismans, sets: presets.sets, substats: presets.substats },
     options: {
-      weapons: slim(options.weapons),
-      amulets: slim(options.amulets),
-      talismans: slim(options.talismans),
-      sets: slim(options.sets),
+      weapons: pieces(options.weapons, getWeaponFamilies()),
+      amulets: pieces(options.amulets, getAmuletFamilies()),
+      talismans: pieces(options.talismans, getTalismanFamilies()),
+      sets: slim(options.sets).map((o) => ({ ...o, ...sets.get(o.id) })),
     },
     langs: {
       default: DEFAULT_LANG,
