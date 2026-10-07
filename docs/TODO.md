@@ -63,6 +63,10 @@
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` — C8 et C9, qui
       tenaient le fichier, sont faits.
+- [ ] **Gear reco, troisième retour de Sevih du 07/10** : les builds d'un
+      perso en onglets, un seul visible à la fois, comme la fiche perso — lot
+      B32 dans le fichier des lots (point d'état sur les onglets cachés, hash
+      `#gear/<id>/build/<n>`).
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
