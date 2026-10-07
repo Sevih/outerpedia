@@ -1,25 +1,91 @@
 <section id="tab-gear" hidden>
-  <h2>Gear reco</h2>
-  <p class="hint">
-    Rien ne s'écrit à la saisie : « Enregistrer » envoie les builds du perso, committe et pousse.
-    Lues au rendu : la fiche ne change qu'une fois le build de la CI déployé. Les presets se règlent
-    dans l'admin, qui reste aussi la surface de rendu (tuiles).
-  </p>
-  <div class="row">
-    <div class="picker">
-      <label>Perso</label>
-      <input id="g-q" placeholder="Chercher un perso…" autocomplete="off" />
-      <div class="results" id="g-results" hidden></div>
-    </div>
-    <div style="flex: 0 0 auto">
-      <label class="check"><input type="checkbox" id="g-has" /> avec recos</label>
-    </div>
+  <div class="head">
+    <h2>Gear reco</h2>
+    <p class="hint">
+      Rien ne s'écrit à la saisie : « Enregistrer » envoie les builds du perso, committe et pousse.
+      Lues au rendu : la fiche ne change qu'une fois le build de la CI déployé. Les presets se
+      règlent dans l'admin, qui reste aussi la surface de rendu (tuiles).
+    </p>
   </div>
-  <div class="savebar">
+
+  <!-- Le perso choisi (posé par `gWho`) et le bouton qui ouvre le picker. -->
+  <div class="card g-char" aria-label="Perso">
+    <div class="g-who" id="g-who"></div>
+    <button class="btn ghost" id="g-pick" type="button" aria-haspopup="dialog" disabled>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" />
+      </svg>
+      <span id="g-pick-label">Choisir un perso</span>
+    </button>
+  </div>
+
+  <div class="savebar" id="g-bar" role="toolbar" aria-label="Enregistrement" hidden>
     <span id="g-count"></span>
-    <button class="ghost" id="g-add" disabled>＋ build</button>
-    <button class="ghost" id="g-reset" disabled>Annuler</button>
-    <button class="action" id="g-save" disabled>Enregistrer</button>
+    <button class="btn ghost" id="g-add" disabled>＋ build</button>
+    <button class="btn ghost" id="g-reset" disabled>Annuler</button>
+    <button class="btn primary" id="g-save" disabled>Enregistrer</button>
   </div>
+
   <div id="g-list"></div>
+
+  <!-- Le picker de perso : une modale. Échap et un clic sur le voile ferment. -->
+  <div class="g-modal" id="g-modal" hidden>
+    <div class="g-panel" role="dialog" aria-modal="true" aria-labelledby="g-modal-title">
+      <div class="g-panel-head">
+        <strong id="g-modal-title">Choisir un perso</strong>
+        <span class="badge" id="g-tally"></span>
+        <button class="btn icon del" id="g-close" type="button" aria-label="Fermer" title="Fermer">
+          ✕
+        </button>
+      </div>
+      <div class="g-panel-filters">
+        <div class="g-search">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </svg>
+          <input
+            id="g-q"
+            placeholder="Chercher un perso…"
+            aria-label="Chercher un perso"
+            autocomplete="off"
+          />
+        </div>
+        <div class="g-filters">
+          <div class="g-togs" id="g-elements" role="group" aria-label="Élément"></div>
+          <div class="g-togs" id="g-classes" role="group" aria-label="Classe"></div>
+          <div class="g-seg" id="g-has" role="group" aria-label="Recos">
+            <button type="button" data-has="" aria-pressed="true">Tous</button>
+            <button type="button" data-has="with" aria-pressed="false">Avec recos</button>
+            <button type="button" data-has="without" aria-pressed="false">Sans recos</button>
+          </div>
+        </div>
+      </div>
+      <div class="g-panel-body">
+        <div class="g-tiles" id="g-results"></div>
+        <div class="empty" id="g-none" hidden>Aucun perso ne correspond.</div>
+      </div>
+    </div>
+  </div>
 </section>

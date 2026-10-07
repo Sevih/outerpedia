@@ -6,7 +6,9 @@
  *
  * Options : `--port 4747` (le quick à photographier), `--tabs a,b` (défaut :
  * tous ceux du menu), `--out <dossier>` (défaut `<tmp>/quick-shots/<horodatage>/`),
- * `--size 1440x1000`, `--settle 2500` (ms laissées aux `fetch` de la page).
+ * `--size 1440x1000`, `--settle 2500` (ms laissées aux `fetch` de la page),
+ * `--hash <fragment>` (posé tel quel derrière l'adresse : un onglet qui lit son
+ * hash s'ouvre sur un état précis, ex. `--tabs gear --hash gear/2000095`).
  *
  * POURQUOI. Un agent qui retouche l'interface ne regarde pas l'écran : ce script
  * est son œil. Il suppose un quick DÉJÀ lancé — à part, sans jeton ni poste
@@ -194,6 +196,7 @@ async function main() {
       out: { type: 'string' },
       size: { type: 'string', default: '1440x1000' },
       settle: { type: 'string', default: '2500' },
+      hash: { type: 'string' },
     },
   });
   const port = Number(values.port);
@@ -201,7 +204,7 @@ async function main() {
   const size = /^(\d+)x(\d+)$/.exec(values.size);
   if (!Number.isInteger(port) || !Number.isFinite(settle) || settle < 0 || !size)
     throw new Error(
-      'options : --port 4747 --size 1440x1000 --settle 2500 --tabs a,b --out <dossier>',
+      'options : --port 4747 --size 1440x1000 --settle 2500 --tabs a,b --hash <fragment> --out <dossier>',
     );
 
   const html = await quickPage(port);
@@ -233,7 +236,7 @@ async function main() {
     for (const tab of tabs) {
       const file = join(out, `${tab}.png`);
       const error = await capture({
-        url: `http://127.0.0.1:${relayPort}/?tab=${tab}`,
+        url: `http://127.0.0.1:${relayPort}/?tab=${tab}${values.hash ? `#${values.hash}` : ''}`,
         file,
         profile: join(profiles, tab),
         width: Number(size[1]),

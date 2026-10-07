@@ -7,6 +7,146 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, l'onglet « Gear reco » à la charte : le perso en tête, un
+  picker modal à icônes de visage, un build par carte sur deux colonnes, les
+  erreurs en badges** (lot B29, sur les planches « Gear reco » et « Picker »
+  de la maquette de Sevih et `scripts/quick/ui/STYLE.md`). Le quoi.
+  `tabs/gear.html` et `tabs/gear.css` sont refaits, section `wide` : `.head`
+  (titre et phrase, texte inchangé), puis une carte du PERSO choisi — portrait
+  56 px (`${imgBase}/images/characters/portrait/CT_<id>.webp`, cadré sur le
+  visage), nom, élément et classe en vraies icônes du jeu (`IG_Turn_Element_*`,
+  `IG_Turn_Class_*`) doublées de leur nom, étoiles de rareté, badge « 3 builds
+  · 3 notes » — et à droite « Changer de perso » (« Choisir un perso » tant
+  qu'il n'y en a pas). Ce bouton ouvre le PICKER, une modale en JavaScript nu
+  dans l'esprit du `CharPicker` du damage-calculator : champ de recherche,
+  pastilles à bascule d'élément puis de classe avec leurs icônes (aucune =
+  toutes, ordre du site), filtre à trois états « Tous / Avec recos / Sans
+  recos » (le dernier liste ce qu'il reste à couvrir), grille d'icônes de
+  visage carrées de 64 px (`faceicon/FI_<id>.webp`, en `loading="lazy"`), le
+  nom dessous, l'élément en coin, le nombre de builds en pastille (grise à
+  zéro), anneau accent sur le perso en cours, et en tête « 129 persos · 95
+  avec recos · 34 sans » ; `Échap`, la croix et un clic sur le voile ferment,
+  `Entrée` dans la recherche prend le premier, `Tab` reste dans le panneau,
+  les filtres survivent à la fermeture, pas la recherche. Dessous, la
+  `.savebar` collante (masquée sans perso) : badge « n changements », badge
+  « n erreurs », la première erreur en clair (toutes au survol), « ＋ build »,
+  « Annuler », « Enregistrer » (`busy` pendant l'envoi). Un BUILD = une
+  `.card` : en-tête avec « Build », son nom éditable (24 ch), « 1 / 3 »,
+  « modifié » ou « nouveau », et à droite dupliquer, monter, descendre,
+  supprimer en icônes fantômes ; puis les slots sur deux colonnes — armes et
+  amulettes à gauche, talismans, sets et substats à droite —, une pièce = le
+  menu de la pièce (260 px), celui de sa stat principale (120 px) et sa `✕`,
+  « ＋ arme » en bouton fantôme ; un slot sous preset montre son `$slug` en
+  badge ambre, ses pièces dépliées en pointillés gris et « régler à la
+  pièce », qui le rend aux pièces ; les notes en / fr / es en trois
+  `textarea` côte à côte sous les slots, jp / kr / zh repliées derrière
+  « ＋ autres langues ». Les erreurs ne sont plus une liste sous l'en-tête :
+  un `.badge.error` à la pièce (sous sa ligne), au slot ou au combo, sinon
+  dans l'en-tête, le menu fautif cerclé de rouge et la carte en liseré
+  `--danger`. Sous 900 px, les deux colonnes et les trois notes passent l'une
+  sous l'autre.
+  Le pourquoi. Dernière vague de la refonte de quick (décision de Sevih du
+  07/10) : l'onglet gardait son panneau d'avant la charte, un sélecteur de
+  perso en liste de noms sur toute la largeur, des boutons en texte et des
+  stats en puces.
+  Le comment. `tabs/gear.js` ne change que là où le markup l'impose ; le
+  modèle (`gFromDisk`, `gToBuild`, `gStatus`, `gearChanges`), le repli des
+  presets et leur jumeau annoncé (`gTwin`), la validation (`gIssues`), la
+  requête `POST /api/gear-reco`, les trois confirms (quitter l'onglet, changer
+  de perso, vider tous les builds) et leurs textes sont à l'identique. Ce qui
+  bouge : les gabarits (`gCard`, `gBar`, le nouveau `gWho`) ; `gStats`, de
+  puces à UN menu — 109 des 1 122 pièces du fichier portent plusieurs stats
+  (« ATK%/SPD »), un simple menu les aurait figées : il propose donc les
+  stats du pool (en choisir une remplace), puis un groupe « Ajouter » et, à
+  plusieurs, un groupe « Retirer » ; la valeur posée reste dans le menu, une
+  stat hors pool y est marquée « ⚠ », menu cerclé de rouge et raison au
+  survol, sans devenir une erreur (comme avant) ; `onchange` gagne donc le cas
+  `stat`, `onclick` perd le sien et gagne `free` (« régler à la pièce », le
+  même effet que le premier choix du menu de preset, qui reste au pied du
+  slot pour changer de preset ou y revenir) ; les erreurs se posent par
+  `gPlace` (pièce, sinon slot, sinon en-tête) et se rafraîchissent à la frappe
+  sans redessiner la carte ; le sélecteur de perso devient le picker
+  (`gResults`, `gFilters`, `gOpen`, `gClose`, `gChoose`). Les `id` gardés :
+  `g-q` (la recherche, dans la modale), `g-has` (la case « avec recos »
+  devenue le groupe à trois états), `g-results` (la grille), `g-count`,
+  `g-add`, `g-reset`, `g-save`, `g-list` ; nouveaux : `g-who`, `g-pick`,
+  `g-bar`, `g-modal`, `g-close`, `g-tally`, `g-elements`, `g-classes`,
+  `g-none`. Deux comportements nouveaux, minuscules. `gear.js` lit
+  `#gear/<id>` au chargement et ouvre l'onglet sur ce perso (`lib.js` ne
+  connaît que `#gear` : c'est un clic sur l'onglet qui l'ouvre, et l'adresse
+  redevient `#gear`). Et l'onglet lit `/api/ranks` en plus de
+  `/api/gear-reco/state` : le roster des recos ne porte que `id`, `name`,
+  `class`, `builds`, l'élément et la rareté viennent de celui de « Rangs » ;
+  s'il manque, le journal le dit et le picker se passe du filtre par élément.
+  `scripts/quick/shot.mjs` gagne l'option générique `--hash <fragment>`,
+  posée derrière l'adresse (`--tabs gear --hash gear/2000095`).
+  Écarts au croquis de `STYLE.md`, et pourquoi. Substats dans la colonne de
+  droite (le lot le demande ; le croquis les voulait en pleine largeur), leur
+  texte passant sous leur menu en 1024. « Modifié » en bleu accent
+  (`.badge.edit`, bord et fond accent à 12 % sur le champ, titre du slot),
+  plus en ambre : c'est la règle que la charte donne à Rangs, et l'ambre
+  devient la couleur des presets, comme sur la maquette. Pas de sous-classe
+  dans l'en-tête : ni le roster des recos ni celui de Rangs ne la portent.
+  Chaque combo de sets garde son en-tête (« Combo 1 », son `$slug`, « régler
+  à la pièce », sa croix) : un build en porte jusqu'à cinq et les erreurs les
+  numérotent. « Enregistrer » reste cliquable avec des erreurs (la maquette le
+  grise) : le clic les liste au journal, comportement inchangé. Composants qui
+  manquent à `quick.css`, posés dans `tabs/gear.css` : `.badge.preset`
+  (ambre, chasse fixe), le survol NEUTRE d'un `.btn.icon` qui ne retire rien
+  (dupliquer, monter, descendre : `:not(.del)`, seul `.del` rougit), la
+  modale (`.g-modal`, `.g-panel`), la pastille à bascule (`.g-tog`), le
+  bouton segmenté (`.g-seg`), la vignette (`.g-tile`), la pièce en lecture
+  (`.g-dim`) — les trois premiers serviront ailleurs (Message | Embed de
+  Discord, les éditeurs à venir).
+  Vérification. Quick isolé (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4802
+pnpm quick --no-open`), arrêté ensuite. AVANT : `/tmp/quick-shots/b29-avant/`
+  et `b29-avant-1024/` (l'onglet à vide, l'ancien ne lisait pas le hash).
+  APRÈS, par `shot.mjs --hash` : `/tmp/quick-shots/b29-apres/` (1440×1000) et
+  `b29-apres-1024/` (1024×768), chacun `bell-cranel/` (trois builds, une note
+  par build, `ATK%/SPD`), `adelie/` (sans reco : « Aucun build pour ce
+  perso ») et `vide/`. Les états que le banc ne joue pas, par un relais
+  jetable du scratchpad qui clique dans la page (lecture seule, tout `POST`
+  refusé) : `/tmp/quick-shots/b29-etats/` — `picker.png`,
+  `picker-light-sans-1024.png` (Light + Sans recos : trois persos),
+  `picker-aucun.png`, `edit.png` et `edit-1024.png` (preset libéré, pièce non
+  choisie, nom vide, combo vide, note et substats modifiées, langues
+  dépliées), `beth-1024.png` (substats sous preset), `stat.png`. Regardées
+  une à une ; trois défauts vus et corrigés : la barre de défilement blanche
+  du picker (`scrollbar-color`), le texte des substats tronqué en 1024 (il
+  passe à la ligne), l'anneau de focus du bouton segmenté rogné. La logique,
+  dans happy-dom hors du dépôt, sur le quick isolé en lecture : 30 contrôles
+  — ouverture par `#gear/<id>`, aucune modification au chargement, retirer
+  puis rajouter une stat rend le build à l'octet du disque, preset libéré
+  puis repris, erreur à la pièce et au nom, enregistrer avec des erreurs
+  n'envoie rien, filtres et recherche du picker, `Échap`, voile, `Entrée`,
+  les trois textes de confirm, la charge du `POST` et les erreurs du serveur
+  posées à leur place (réponse FACTICE, la requête n'atteint pas quick), stat
+  hors pool de Bloody Edge marquée sans erreur. 28 passent ; les 2 autres
+  lisent la valeur affichée du menu de stat, que happy-dom rend mal (le HTML
+  porte bien `selected`) : rejoués dans Firefox, justes (`stat.png`). Aucun
+  enregistrement réel, `gear-reco.json` intact. `pnpm typecheck` → sa seule
+  ligne est l'écho de la commande (`tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`), code 0 ;
+  `pnpm lint` → `$ eslint`, code 0 ; `pnpm test` → `Tests  2773 passed
+(2773)`, 197 fichiers.
+  À contrôler à l'écran par Sevih (le banc ne le joue pas) : une erreur à la
+  pièce (« ＋ arme » sans choisir : badge sous la ligne, carte en rouge,
+  compte dans la savebar) ; un preset libéré par « régler à la pièce », puis
+  repris par le menu du pied ; le menu de stat déroulé (groupes « Ajouter » et
+  « Retirer ») ; la savebar qui reste collée en défilant trois builds ; le
+  confirm en quittant l'onglet et en changeant de perso avec des changements ;
+  le picker au clavier (`Tab`, `Échap`, `Entrée`) et le survol des vignettes ;
+  `#gear/2000095` dans le vrai navigateur ; le bouton `busy` pendant un vrai
+  enregistrement.
+  Laissé. Le croquis « Gear reco » de `STYLE.md` n'est pas retouché (hors de
+  mes fichiers) : les écarts sont ci-dessus. L'onglet n'emploie plus rien du
+  bloc « héritage » de `quick.css` (`.row`, `button.action`, `button.ghost`,
+  `label.check`) : C6 peut le retirer dès que Rangs et Discord l'ont quitté.
+  Hors périmètre, à trancher : ajouter `element`, `rarity` et la sous-classe
+  au roster de `gearRecoState` (`actions.ts`) éviterait la lecture de
+  `/api/ranks` et donnerait la sous-classe à l'en-tête ; garder `#gear/<id>`
+  dans l'adresse après un choix (recharger reviendrait sur le perso) demande
+  `lib.js`, qui réécrit le hash à chaque bascule.
 - **`pnpm quick`, l'onglet « Rangs » à la charte : visages, vraies icônes du
   jeu, rangs en image, lignes par transcendance dans la grille** (lot B28, sur
   la planche « Rangs » de la maquette de Sevih et `scripts/quick/ui/STYLE.md`).

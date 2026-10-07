@@ -35,7 +35,7 @@
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
       UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN
-  (EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
+(EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
       (`post()` de `lib.js`, signalé par l'agent : à reprendre un jour, hors
       série UI).
 - [ ] **Refonte de l'UI, dernière vague** (lots de
@@ -43,7 +43,7 @@
       Opus, fichiers disjoints, sur `scripts/quick/ui/STYLE.md` et la maquette
       https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw) : **B28** Rangs
       — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **B29** Gear
-      reco (picker modal), **C6** Discord (note repliable, barre d'outils
+      reco — FAIT (07/10 ; contrôles à l'écran dans son entrée DONE), **C6** Discord (note repliable, barre d'outils
       groupée, et les petits restes : placeholder de Récompense, bloc
       « héritage » de `quick.css`). Contrôles à l'écran laissés par F16 : survol des ✕ et des
       boutons fantômes, anneau de focus, tiroir pendant un vrai enregistrement,

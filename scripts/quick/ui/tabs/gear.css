@@ -1,184 +1,553 @@
-/* Onglet « Gear reco » — bloc déplacé de `quick.css` tel quel (jetons renommés),
-   en attendant le lot B29 qui le met à la charte (cf. `STYLE.md`). */
-/* Le panneau d'avant la charte : l'onglet garde son cadre tant que son lot
-   (B28 Rangs, B29 Gear reco, C6 Discord) ne l'a pas passé en `.card`. */
-#tab-gear:not([hidden]) {
-  display: block;
-  background: var(--surface-raised);
-  border: 1px solid var(--line-subtle);
-  border-radius: 10px;
-  padding: 18px;
-}
-#tab-gear h2 {
-  margin-bottom: 4px;
-  font-size: 14px;
-}
-#tab-gear > p.hint {
-  margin-bottom: 16px;
-  font-size: 12px;
-}
-/* Onglet « Gear reco » : un build = une carte, ses slots en grille (une
-   colonne quand la fenêtre est étroite). Mêmes couleurs que « Rangs » :
-   ambre = modifié, rouge = refusé. */
-#tab-gear .picker input {
-  width: 100%;
-}
-#tab-gear .results div {
+/* Onglet « Gear reco » : le perso choisi, la savebar, un build par carte (slots
+   sur deux colonnes, notes dessous) et le picker de perso en modale. Les
+   composants viennent de `quick.css` ; ce qui suit est propre à l'onglet
+   (cf. `STYLE.md`). Bleu accent = modifié, rouge = refusé, ambre = preset. */
+
+/* ---------------------------------------------------------------- le perso */
+#tab-gear .g-char {
   display: flex;
-  gap: 8px;
   align-items: center;
-}
-#tab-gear .results .badge {
-  margin-left: auto;
-  color: var(--accent);
-  border-color: var(--line-subtle);
-}
-#tab-gear .g-build {
-  border: 1px solid var(--line-subtle);
-  border-left: 3px solid var(--line-subtle);
-  border-radius: 8px;
-  background: var(--surface-overlay);
-  padding: 12px;
-  margin-top: 12px;
-}
-#tab-gear .g-build.dirty {
-  border-left-color: var(--warn);
-}
-#tab-gear .g-build.refused {
-  border-left-color: var(--danger);
-}
-#tab-gear .g-head,
-#tab-gear .g-piece {
-  display: flex;
-  gap: 6px;
-  align-items: center;
+  gap: 16px;
   flex-wrap: wrap;
+  padding: 14px 20px;
 }
-#tab-gear .g-head input {
-  flex: 1 1 180px;
+#tab-gear .g-who {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   min-width: 0;
+}
+/* Le portrait du site est en hauteur : cadré sur le visage. */
+#tab-gear .g-face {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 12px;
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  object-fit: cover;
+  object-position: top;
+}
+#tab-gear .g-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-gear .g-id strong {
+  font-size: 16px;
+}
+#tab-gear .g-traits {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-gear .g-trait {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: capitalize;
+}
+#tab-gear .g-trait img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#tab-gear .g-stars {
+  display: inline-flex;
+  align-items: center;
+}
+#tab-gear .g-stars img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+#tab-gear #g-pick {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- savebar */
+#tab-gear .savebar[hidden] {
+  display: none;
+}
+#tab-gear #g-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+/* `.savebar span` pousse à gauche : ici les badges se suivent. */
+#tab-gear #g-count span {
+  margin-right: 0;
+}
+#tab-gear .g-msg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- un build */
+#tab-gear #g-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-gear #g-list:empty {
+  display: none;
+}
+#tab-gear .g-build.ko {
+  border-color: var(--danger);
+}
+#tab-gear .g-name {
+  width: 24ch;
+  height: 30px;
   font-weight: 600;
 }
-#tab-gear .g-head .badge {
-  color: var(--warn);
+#tab-gear .g-tools {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
 }
-#tab-gear .g-head .badge:empty {
-  display: none;
-}
-#tab-gear .g-issues {
-  margin: 8px 0 0;
-  padding-left: 18px;
-  color: var(--danger);
-  font-size: 12px;
-}
-#tab-gear .g-issues:empty {
-  display: none;
+/* `.btn.icon` rougit au survol : réservé à ce qui retire (`.del`). */
+#tab-gear .btn.icon:not(.del):hover {
+  color: var(--content);
+  background: var(--surface-overlay);
 }
 #tab-gear .g-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: 10px;
-  margin-top: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+  padding: 16px 20px;
+}
+#tab-gear .g-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
 }
 #tab-gear .g-slot {
-  border: 1px solid var(--line-subtle);
-  border-radius: 6px;
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   min-width: 0;
 }
 #tab-gear .g-slot.wide {
   grid-column: 1 / -1;
 }
 #tab-gear .g-slot h3 {
-  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 28px;
+  margin: 0;
   color: var(--content-muted);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 #tab-gear .g-slot.dirty h3 {
-  color: var(--warn);
+  color: var(--accent);
 }
-#tab-gear .g-piece {
-  margin-bottom: 6px;
+#tab-gear .g-slot h3 .btn,
+#tab-gear .g-slot h3 .badge {
+  letter-spacing: normal;
+  text-transform: none;
 }
-#tab-gear .g-piece select,
-#tab-gear .g-piece input {
-  flex: 1 1 150px;
+#tab-gear .g-push {
+  margin-left: auto;
+}
+#tab-gear .g-slot [hidden] {
+  display: none;
+}
+
+/* Une pièce : son menu, sa stat principale (ou son nombre), sa croix. */
+#tab-gear .g-piece,
+#tab-gear .g-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   min-width: 0;
 }
-#tab-gear .g-piece select.count {
-  flex: 0 0 64px;
+#tab-gear .g-foot {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#tab-gear .g-piece select,
+#tab-gear .g-piece input,
+#tab-gear .g-foot select,
+#tab-gear .g-dim {
+  height: 30px;
+  min-width: 0;
+  font-size: 13px;
+}
+#tab-gear .g-piece > select:first-child,
+#tab-gear .g-foot select,
+#tab-gear .g-dim {
+  flex: 0 1 260px;
+}
+#tab-gear .g-piece select[data-s='stat'],
+#tab-gear .g-piece select.count,
+#tab-gear .g-dim.count {
+  flex: 0 0 120px;
+}
+#tab-gear .g-piece input {
+  flex: 1 1 240px;
+}
+/* Substats : le texte passe sous son menu quand la colonne est étroite. */
+#tab-gear .g-sub {
+  flex-wrap: wrap;
+}
+/* La pièce d'un preset, en lecture : le fichier citera le `$slug`. */
+#tab-gear .g-dim {
+  display: block;
+  padding: 0 10px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--placeholder);
+  line-height: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#tab-gear input.g-dim {
+  flex: 1 1 240px;
+  background: none;
+}
+#tab-gear .badge.preset {
+  background: color-mix(in srgb, var(--warn) 14%, transparent);
+  color: var(--warn);
+  font-family: var(--mono);
+  font-weight: 500;
 }
 #tab-gear .g-combo {
-  border-top: 1px dashed var(--line-subtle);
-  padding-top: 6px;
-  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-#tab-gear .g-combo:first-of-type {
-  border-top: none;
-  padding-top: 0;
-  margin-top: 0;
+#tab-gear .g-combo + .g-combo {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line-subtle);
+}
+#tab-gear .g-combo-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 28px;
 }
 #tab-gear .g-ro {
-  margin: 0 0 6px;
+  margin: 0;
   color: var(--content-muted);
   font-size: 12px;
 }
 #tab-gear .g-ro:empty {
   display: none;
 }
-#tab-gear .g-stats {
-  display: flex;
+
+/* Les erreurs, en badges : à la pièce, au slot, sinon dans l'en-tête. */
+#tab-gear .g-iss {
+  display: inline-flex;
   gap: 4px;
   flex-wrap: wrap;
-  flex: 1 1 100%;
 }
-#tab-gear .g-stat {
-  background: none;
-  border: 1px solid var(--line-subtle);
-  border-radius: 4px;
-  color: var(--content-muted);
-  padding: 1px 6px;
-  font: inherit;
-  font-size: 11px;
-  cursor: pointer;
+#tab-gear .g-iss:empty {
+  display: none;
 }
-#tab-gear .g-stat.on {
-  border-color: var(--accent);
-  color: var(--accent);
+#tab-gear .g-iss .badge {
+  height: auto;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: normal;
 }
-#tab-gear .g-stat.out {
-  border-color: var(--danger);
-  color: var(--danger);
-}
+
+/* Les notes : les langues du site côte à côte, les autres repliées. */
 #tab-gear .g-notes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
-#tab-gear textarea {
-  display: block;
+#tab-gear .g-notes textarea {
   width: 100%;
-  min-height: 66px;
-  resize: vertical;
+  font-size: 13px;
 }
 #tab-gear details {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 #tab-gear summary {
-  color: var(--content-muted);
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: max-content;
+  max-width: 100%;
+  list-style: none;
   cursor: pointer;
-  margin-bottom: 6px;
 }
+#tab-gear summary::-webkit-details-marker {
+  display: none;
+}
+#tab-gear details[open] summary {
+  margin-bottom: 8px;
+}
+
 #tab-gear input.dirty,
 #tab-gear textarea.dirty {
-  border-color: var(--warn);
-  background: color-mix(in srgb, var(--warn) 18%, transparent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
 }
 #tab-gear select.refused,
+#tab-gear select.out,
 #tab-gear input.refused,
 #tab-gear textarea.refused {
   border-color: var(--danger);
+}
+#tab-gear select.refused {
+  background-color: color-mix(in srgb, var(--danger) 12%, var(--surface-base));
+}
+
+@media (max-width: 900px) {
+  #tab-gear .g-grid,
+  #tab-gear .g-notes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------- le picker
+   Une modale au-dessus du journal : recherche, pastilles d'élément et de
+   classe, filtre à trois états, grille d'icônes de visage. */
+#tab-gear .g-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(2 6 23 / 0.72);
+}
+#tab-gear .g-modal[hidden] {
+  display: none;
+}
+#tab-gear .g-panel {
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+  max-width: 100%;
+  max-height: min(720px, 100%);
+  overflow: hidden;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.55);
+}
+#tab-gear .g-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-gear .g-panel-head strong {
+  color: var(--content-muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#tab-gear .g-panel-head .btn.icon {
+  margin-left: auto;
+}
+#tab-gear .g-panel-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+}
+#tab-gear .g-search {
+  position: relative;
+}
+#tab-gear .g-search svg {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  color: var(--placeholder);
+}
+#tab-gear .g-search input {
+  width: 100%;
+  height: 36px;
+  padding-left: 36px;
+}
+#tab-gear .g-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+#tab-gear .g-togs {
+  display: flex;
+  gap: 6px;
+}
+#tab-gear .g-togs:empty {
+  display: none;
+}
+#tab-gear .g-tog {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-base);
+  cursor: pointer;
+}
+#tab-gear .g-tog img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.55;
+}
+#tab-gear .g-tog:hover img {
+  opacity: 0.8;
+}
+#tab-gear .g-tog[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+#tab-gear .g-tog[aria-pressed='true'] img {
+  opacity: 1;
+}
+#tab-gear .g-seg {
+  display: inline-flex;
+  height: 36px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-gear .g-seg button {
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-gear .g-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-gear .g-panel-body {
+  padding: 8px 16px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-gear .g-panel-body .empty {
+  margin: 0;
+}
+#tab-gear .g-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 12px 8px;
+}
+#tab-gear .g-tiles:empty {
+  display: none;
+}
+#tab-gear .g-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--content-muted);
+  font: inherit;
+  cursor: pointer;
+}
+#tab-gear .g-tile:hover {
+  color: var(--content);
+}
+/* L'anneau du perso courant, sur un conteneur : l'icône d'élément et le
+   compte de builds en débordent. */
+#tab-gear .g-ring {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+#tab-gear .g-tile:hover .g-ring {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+#tab-gear .g-ring.on {
+  border-color: var(--accent);
+}
+#tab-gear .g-fi {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+#tab-gear .g-el {
+  position: absolute;
+  left: -4px;
+  bottom: -4px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 50%;
+  background: var(--surface-base);
+  object-fit: contain;
+}
+#tab-gear .g-cnt {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+#tab-gear .g-cnt.zero {
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  color: var(--content-muted);
+}
+#tab-gear .g-n {
+  max-width: 76px;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+#tab-gear .g-tog:focus-visible,
+#tab-gear .g-seg button:focus-visible,
+#tab-gear .g-tile:focus-visible,
+#tab-gear summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+/* Le groupe segmenté rogne ce qui dépasse : l'anneau passe à l'intérieur. */
+#tab-gear .g-seg button:focus-visible {
+  outline-offset: -2px;
 }
