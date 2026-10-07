@@ -7,6 +7,59 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : la priorité de substats de l'aperçu en barre à
+  six segments, comme la fiche perso et l'admin** (lot A29, retour de Sevih
+  du 07/10 sur l'aperçu de C9 : « le preview des substats ne marche pas comme
+  sur le panneau admin (barre et icônes) »). Le pourquoi. La rangée « Substat
+  Priority » de l'aperçu rendait la chaîne curée telle quelle
+  (`SPD>HP>CHC…` dans un `span.pv-sub`) — c'est le lot C9 qui la demandait
+  « en texte » — alors que la fiche et l'éditeur de l'admin la montrent par
+  `SubstatPrioBar` : l'aperçu ne disait donc pas ce que la fiche montrera. Le
+  quoi. Une fonction pure `substatBarHtml(env, prio, statIcons)` dans
+  `scripts/quick/ui/gear-view.mjs`, que `previewHtml` appelle à la place du
+  texte. Elle porte l'analyse de `SubstatPrioBar` à l'identique — la chaîne
+  coupée sur `>`, chaque token monte le niveau de un, un token vide (un `>>`)
+  ne fait que ça, un token se coupe sur `=` en stats de même rang, `filled =
+max(1, 6 − niveau)` — et le HTML : `div.pv-bar`, une `div.pv-bar-line` par
+  stat avec `span.pv-bar-stat` (l'icône de 14 px
+  `images/ui/stat/<sprite>.webp` prise dans la table `statIcons` déjà reçue,
+  puis l'abréviation échappée ; une stat sans icône, son nom seul) et
+  `div.pv-bar-segs`, six `span.pv-bar-seg`, les pleins marqués `on`. Pas de
+  badge de verdict flat / % : l'admin ne l'a pas non plus. Les styles
+  `.pv-bar*` remplacent `.pv-sub` dans `scripts/quick/ui/tabs/gear.css` :
+  10 px entre les lignes (`space-y-2.5`), nom en 14 px dans la couleur de
+  texte de quick (le `zinc-200` de la fiche, comme le « + » des combos),
+  6 px d'écart icône / nom, segments de 6 px de haut à 2 px d'écart, 4 px
+  sous le nom, rayon 4 px (`rounded-sm` de Tailwind v4), jaune `#facc15` et
+  gris `#3f3f46` copiés tels quels avec leur nom Tailwind en commentaire.
+  Tests (`scripts/quick/actions.test.ts`, quatorze cas du constructeur au
+  lieu de dix) : trois de l'analyse — `ATK>CHC=CHD>SPD` → 6, 5, 5, 4 (et les
+  espaces autour des séparateurs ignorés), `SPD>>HP` → 6 et 4,
+  `A>B>C>D>E>F>G` → 6, 5, 4, 3, 2, 1, 1 —, un du HTML (chaîne exacte : icône
+  de `statIcons`, stat sans icône échappée, 16 segments pleins sur 18), et le
+  cas qui attendait `pv-sub` attend la barre. La vérification. `pnpm
+typecheck` : `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json &&
+tsc --noEmit -p scripts/tsconfig.json`, code 0 ; `pnpm lint` : `$ eslint`,
+  code 0 ; `pnpm test` : `Test Files 198 passed (198)`, `Tests 2821 passed
+(2821)`. Capture du banc sur un quick isolé (:4829, sans jeton ni poste,
+  aucun enregistrement, arrêté ensuite ; HEAD inchangé) :
+  `/tmp/quick-shots/a29/gear.png` (1440 × 1900, Demiurge Drakhan, build
+  Speed, `SPD>HP>CHC>CHD>DMG UP%>DEF`) — sous l'aperçu, six lignes SPD, HP,
+  CHC, CHD, DMG UP%, DEF, chacune avec son icône, à 6, 5, 4, 3, 2 et 1
+  segments jaunes ; les rangées Weapon / Accessory / Talisman / Armor Set et
+  la note y sont telles que la relecture de C9 les décrit, le diff ne
+  touchant que la cellule des substats et sa règle CSS. Les écarts, à juger.
+  (1) La barre est bornée à 336 px (`max-width` de `.pv-bar`) : sur la fiche
+  elle remplit un panneau d'un tiers de la grille, ici la cellule fait toute
+  la rangée — sans borne, six segments de 200 px. (2) L'analyse n'est pas
+  exportée à part : les trois cas la lisent dans le HTML (stat et segments
+  `on` par ligne), le lot demandant UNE fonction. (3) `scripts/quick/ui/STYLE.md`
+  disait « Substat Priority en texte » : la phrase est mise à jour, rien
+  d'autre. Laissé : comme sur le site, une chaîne mal formée n'est pas
+  signalée (`ATK=` donne une ligne sans nom, `>` seul une barre vide) — le
+  contrôle d'« Enregistrer » reste le seul juge ; et le rang n'est dit que
+  par la barre, sans texte pour un lecteur d'écran, sur la fiche comme ici.
+  Pour Sevih : comparer la barre d'un build à celle de sa fiche.
 - **Relecture C9** (Fable, 07/10) : `fed10d0d` validé — la série du second
   retour est faite, reste le correctif A29 (fichier des lots). Périmètre
   attendu (`tabs/gear.*`, `ui/gear-view.mjs`, `actions.ts` et ses tests, un

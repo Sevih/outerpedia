@@ -396,6 +396,46 @@ export function groupCombos(sets) {
   return lines;
 }
 
+/** Les segments d'une barre de priorité (`TOTAL_SEGMENTS` de la fiche perso). */
+const BAR_SEGMENTS = 6;
+
+/**
+ * La priorité des substats en BARRE (`SubstatPrioBar` de la fiche perso, que
+ * l'éditeur de l'admin montre aussi) : une ligne par stat — son icône, son
+ * abréviation — et dessous six segments, pleins jusqu'à son rang.
+ *
+ * La chaîne se lit comme sur le site : `>` sépare les rangs, et chaque rang
+ * perd un segment (il en reste toujours un) ; un rang vide — un `>>` — en fait
+ * perdre un de plus ; `=` met plusieurs stats au même rang. Sans le verdict
+ * flat / % de la fiche : l'admin ne l'a pas non plus.
+ *
+ * @param {ViewEnv} env
+ * @param {string} prio La priorité curée (`ATK>CHC=CHD>SPD`).
+ * @param {Readonly<Record<string, string>>} statIcons Abréviation → sprite (`STAT_ICON`).
+ */
+export function substatBarHtml(env, prio, statIcons) {
+  let lines = '';
+  let level = 0;
+  for (const token of prio.split('>')) {
+    const rank = token.trim();
+    if (rank) {
+      const filled = Math.max(1, BAR_SEGMENTS - level);
+      const segs = Array.from(
+        { length: BAR_SEGMENTS },
+        (_, i) => `<span class="pv-bar-seg${i < filled ? ' on' : ''}"></span>`,
+      ).join('');
+      for (const stat of rank.split('=').map((s) => s.trim()))
+        lines += `<div class="pv-bar-line"><span class="pv-bar-stat">${
+          statIcons[stat]
+            ? img(env, '', `ui/stat/${statIcons[stat]}`, ' width="14" height="14"')
+            : ''
+        }${env.esc(stat)}</span><div class="pv-bar-segs">${segs}</div></div>`;
+    }
+    level++;
+  }
+  return `<div class="pv-bar">${lines}</div>`;
+}
+
 /**
  * L'aperçu d'un build : ce que la fiche perso en montrera. Vide quand le build
  * n'a ni pièce, ni set, ni substats, ni note.
@@ -525,9 +565,7 @@ export function previewHtml(env, build, labels, statIcons) {
           ' pv-sets',
         )
       : '',
-    build.substats
-      ? row(labels.substatPrio, `<span class="pv-sub">${env.esc(build.substats)}</span>`)
-      : '',
+    build.substats ? row(labels.substatPrio, substatBarHtml(env, build.substats, statIcons)) : '',
     build.noteSegments.length
       ? row(labels.note, `<p class="pv-note">${noteHtml(env, build.noteSegments)}</p>`)
       : '',

@@ -74,6 +74,7 @@ import {
   setGrid,
   setRow,
   shownPieces,
+  substatBarHtml,
 } from './ui/gear-view.mjs';
 
 const DIANNE: CharacterCurated = {
@@ -982,7 +983,70 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
     expect(html).not.toContain('images/ui/effect/');
   });
 
-  it('les substats en texte, la note en segments ; un build vide ne rend rien', () => {
+  // Ce qu'une barre montre : chaque stat, dans l'ordre, et ses segments pleins.
+  const filled = (prio: string) =>
+    substatBarHtml(env, prio, statIcons)
+      .split('class="pv-bar-line"')
+      .slice(1)
+      .map((line) => [
+        /<span class="pv-bar-stat">(?:<img[^>]*>)?([^<]*)<\/span>/.exec(line)?.[1],
+        count(line, 'class="pv-bar-seg on"'),
+      ]);
+
+  it('la barre des substats : un segment de moins à chaque rang, `=` au même rang', () => {
+    expect(filled('ATK>CHC=CHD>SPD')).toEqual([
+      ['ATK', 6],
+      ['CHC', 5],
+      ['CHD', 5],
+      ['SPD', 4],
+    ]);
+    // Les espaces autour des séparateurs ne comptent pas.
+    expect(filled(' ATK > CHC = CHD ')).toEqual([
+      ['ATK', 6],
+      ['CHC', 5],
+      ['CHD', 5],
+    ]);
+  });
+
+  it('la barre des substats : un `>>` descend d’un rang de plus', () => {
+    expect(filled('SPD>>HP')).toEqual([
+      ['SPD', 6],
+      ['HP', 4],
+    ]);
+  });
+
+  it('la barre des substats : passé six rangs, il reste un segment plein', () => {
+    expect(filled('A>B>C>D>E>F>G')).toEqual([
+      ['A', 6],
+      ['B', 5],
+      ['C', 4],
+      ['D', 3],
+      ['E', 2],
+      ['F', 1],
+      ['G', 1],
+    ]);
+  });
+
+  it('la barre des substats : par stat, son icône et son nom, puis six segments', () => {
+    const html = substatBarHtml(env, 'ATK%>CHD=A&B', statIcons);
+    const [on, off] = ['<span class="pv-bar-seg on"></span>', '<span class="pv-bar-seg"></span>'];
+    expect(html).toBe(
+      '<div class="pv-bar">' +
+        '<div class="pv-bar-line"><span class="pv-bar-stat">' +
+        '<img src="https://img.test/images/ui/stat/CM_Stat_Icon_ATK.webp" alt="" width="14" height="14" />ATK%</span>' +
+        `<div class="pv-bar-segs">${on.repeat(6)}</div></div>` +
+        '<div class="pv-bar-line"><span class="pv-bar-stat">' +
+        '<img src="https://img.test/images/ui/stat/CM_Stat_Icon_CRITICAL_DMG.webp" alt="" width="14" height="14" />CHD</span>' +
+        `<div class="pv-bar-segs">${on.repeat(5)}${off}</div></div>` +
+        // Une stat sans icône : son nom seul, échappé.
+        `<div class="pv-bar-line"><span class="pv-bar-stat">A&amp;B</span><div class="pv-bar-segs">${on.repeat(5)}${off}</div></div>` +
+        '</div>',
+    );
+    expect(count(html, 'class="pv-bar-seg on"')).toBe(16);
+    expect(count(html, '<span class="pv-bar-seg')).toBe(18);
+  });
+
+  it('les substats en barre, la note en segments ; un build vide ne rend rien', () => {
     const html = previewHtml(
       env,
       { ...empty, substats: 'ATK>CHC', noteSegments: [{ t: 'unknown', s: '{B/nope}' }] },
@@ -990,9 +1054,13 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
       statIcons,
     );
     expect(html).toBe(
-      '<div class="pv-row"><span class="pv-lbl">Substat Priority</span><div class="pv-cell"><span class="pv-sub">ATK>CHC</span></div></div>' +
+      `<div class="pv-row"><span class="pv-lbl">Substat Priority</span><div class="pv-cell">${substatBarHtml(env, 'ATK>CHC', statIcons)}</div></div>` +
         '<div class="pv-row"><span class="pv-lbl">Notes</span><div class="pv-cell"><p class="pv-note"><span class="pv-unknown">{B/nope}</span></p></div></div>',
     );
+    // La barre, plus la chaîne : deux lignes, onze segments pleins.
+    expect(html).not.toContain('pv-sub');
+    expect(count(html, 'class="pv-bar-line"')).toBe(2);
+    expect(count(html, 'class="pv-bar-seg on"')).toBe(11);
     expect(previewHtml(env, empty, labels, statIcons)).toBe('');
   });
 });

@@ -1078,8 +1078,37 @@
 #tab-gear .pv-count {
   font-weight: 600;
 }
-#tab-gear .pv-sub {
-  font-family: var(--mono);
+/* La priorité des substats, en barre (`SubstatPrioBar` de la fiche) : par
+   stat, l'icône et l'abréviation, puis six segments. Sa largeur est celle du
+   panneau de la fiche — un tiers de la grille —, pas celle de la rangée. */
+#tab-gear .pv-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 336px;
+}
+#tab-gear .pv-bar-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+#tab-gear .pv-bar-stat img {
+  flex: none;
+}
+#tab-gear .pv-bar-segs {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+#tab-gear .pv-bar-seg {
+  flex: 1;
+  height: 6px;
+  border-radius: 4px;
+  background: #3f3f46; /* bg-zinc-700 */
+}
+#tab-gear .pv-bar-seg.on {
+  background: #facc15; /* bg-yellow-400 */
 }
 /* La note : le texte du site, ses balises en icône + libellé coloré. */
 #tab-gear .pv-note {
