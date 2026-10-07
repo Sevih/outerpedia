@@ -7,6 +7,124 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, Gear reco : des pickers à icônes pour les armes, les
+  amulettes, les talismans et les sets — stats principales en bascules, mix de
+  sets depuis un set principal** (lot C7, retour de Sevih du 07/10 après
+  usage). Le pourquoi. Chaque pièce se choisissait dans un `select` de noms ;
+  Sevih veut des pickers « du même genre que le picker de héros », les stats
+  principales DISPONIBLES de la pièce à côté d'elle, cliquables, et composer
+  vite des mix de sets (Speed en principal, Penetration et Attack en
+  secondaires → deux combos). Le quoi. UNE modale pour tout l'onglet
+  (`gPkOpen(cfg)` dans `tabs/gear.js`, markup générique dans `gear.html`) :
+  titre et badge de tête, recherche par nom, rangée de filtres optionnelle
+  (pastilles, groupe segmenté), grille de tuiles — icône de 56 px depuis
+  `imgBase` (`images/equipment/<icon>.webp`), nom dessous, anneau accent sur
+  le choix, tuile `disabled` grisée —, et en multi-choix un pied
+  (récapitulatif, « Annuler », « Valider »). `Échap`, la croix et un clic sur
+  le voile ferment sans rien poser et rendent le focus au bouton d'origine,
+  `Tab` reste dans le panneau, `Entrée` dans la recherche choisit la première
+  tuile, `Ctrl + Entrée` valide un multi-choix (ajout). Le picker de héros de
+  B29 y passe aussi (`gOpenChar`) : la modale est identique AU PIXEL
+  (`compare -metric AE` de sa zone, avant / après, 1440 et 1024 : 0). ARMES et
+  AMULETTES : une ligne = la tuile de la pièce (icône 40 px + nom, badge
+  « hors classe » le cas échéant ; un clic ouvre le picker, qui ne propose que
+  les pièces de la classe du perso plus celle déjà posée — règle de C4), À
+  CÔTÉ ses stats principales en bascules (`aria-pressed`, le `mainStats` de
+  l'option), puis sa `✕` ; plusieurs bascules actives = la stat composée du
+  format existant (`PEN%/CHD`, dans l'ordre des clics) ; une stat hors pool
+  que le disque porte reste là, en rouge « ⚠ », et un clic la retire (Bloody
+  Edge d'Eliza, cf. TODO) ; « ＋ arme » ouvre le picker et n'ajoute la pièce
+  qu'une fois choisie (plus de ligne vide). TALISMANS : à la pièce, une rangée
+  de tuiles (icône, nom, `✕`) ; « ＋ talisman » ouvre le picker en multi-choix
+  avec les choisis cochés, le pied dit la liste et le preset de même contenu ;
+  un slot sous `$slug` reste comme avant (badge, pièces grisées, « régler à la
+  pièce », menu des presets). SETS : « Composer un mix… » ouvre le picker de
+  sets — groupe segmenté « Principal | Secondaires » (le rôle que prend le set
+  cliqué ; pas de secondaire sans principal, le principal n'est pas cliquable
+  parmi les secondaires), pastille « principal » ou « 2p » sur les tuiles, et
+  au pied les combos qui seront posés, chacun avec le `$slug` sous lequel
+  `collapseBuild` le repliera (`Speed Set ×2 + Penetration Set ×2 $p2s2`,
+  `… Attack Set ×2 $a2s2` ; `Speed Set ×4 $s4` seul) ; « Poser n combos »
+  REMPLACE les combos du build, sur confirmation s'il en avait, et la carte
+  les montre comme avant, combo par combo, paires set + nombre éditables,
+  « ＋ combo » et les presets intacts. Le picker se rouvre sur le mix que le
+  build porte (`splitSetCombos`) ; le même mix validé ne touche à rien, et un
+  combo déjà présent garde son entrée, donc le `$slug` que le disque cite
+  (pas de `a2p2` changé en `p2a2`). Le comment. La règle de composition est
+  une fonction PURE dans un nouveau `scripts/quick/ui/gear-sets.mjs`, partagé
+  page / tests comme `comics-group.mjs` :
+  `composeSetCombos(main, secondaries)` — principal seul →
+  `[{principal, 4}]`, N secondaires → N
+  combos `[{principal, 2}, {secondaire, 2}]`, refus (`error`) sans principal
+  ou si un secondaire EST le principal, doublon de secondaire compté une fois
+  — et son inverse `splitSetCombos`. `gearRecoState` (`actions.ts`) remet
+  `icon` dans les options (une ligne ; pas de `grade`, `GearOption` ne le
+  porte pas : tuiles sans cadre de rareté). Le modèle de la page
+  (`gFromDisk`, `gToBuild`), `saveGearReco`, `checkGearBuilds`,
+  `upsertGearReco` et le format du fichier sont INCHANGÉS ; dans `gear.js`
+  partent les menus de pièce, de stat et de talisman (`gStats` en bascules,
+  `onchange` ne garde que presets, paires et substats), `gear.css` gagne la
+  tuile de pièce (`.g-item`), les bascules (`.g-stat`), la rangée de talismans,
+  le pied de la modale et la grille d'équipement ; sous 520 px de colonne
+  (fenêtre de 1024) les stats passent SOUS leur tuile (requête de conteneur
+  sur `.g-col`). Le croquis de `STYLE.md` est à jour (trois lignes). Trois
+  comportements nouveaux, à connaître. (1) « Aucune stat active = erreur à la
+  pièce » : le lot la dit « comme aujourd'hui », mais ni la page ni le serveur
+  ne refusaient une pièce sans stat (`mainStat` est optionnel au schéma) —
+  c'est donc une erreur NOUVELLE, côté page seulement (`gIssues` : « stat
+  principale non choisie », groupe cerclé de rouge, rien n'est envoyé) ; aucune
+  des 1 122 pièces du fichier n'est sans stat, aucun perso n'est bloqué. (2) Une
+  pièce CHANGÉE par le picker garde, de ses stats, celles que le nouveau pool
+  propose ; un pool d'une seule stat (17 armes, 2 amulettes) la pose d'office.
+  (3) `gear.js` lit `#gear/<id>/picker/<slot>` au chargement et ouvre le
+  picker voulu sur le premier build (`char`, `weapons`, `amulets`,
+  `talismans`, `sets`) : le banc ne clique pas. Choix à relire : le picker
+  reste dans `gear.js` et non dans `ui/picker.js` — son style vit dans
+  `tabs/gear.css` sous `#tab-gear` et le lot ne touche que ses fichiers ; le
+  jour où un éditeur en veut un, le bloc « le picker » se déplace tel quel et
+  son CSS va dans `quick.css`. Les `id` `g-elements`, `g-classes`, `g-has`
+  disparaissent (filtres générés), `g-filters` et `g-foot` arrivent.
+  Vérification : `pnpm typecheck` (`$ tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`, code 0),
+  `pnpm lint` (`$ eslint`, code 0), `pnpm test` (197 fichiers,
+  `Tests  2788 passed (2788)`) — sept tests de plus dans
+  `actions.test.ts` : la composition (4p seul, deux combos 2 + 2, refus du
+  doublon et du mix sans principal), sa relecture, chaque preset de sets du
+  fichier relu, recomposé et replié sous un preset par `collapseBuild`, et
+  `icon` présent sur toutes les options. À l'écran : quick isolé
+  (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4802 pnpm quick --no-open`,
+  arrêté ensuite), AUCUN enregistrement depuis la page. Captures, regardées :
+  AVANT `/tmp/quick-shots/c7-avant/` (`gear-1440`, `gear-1024`, et le picker
+  de héros `picker-perso-*`, ouvert par une ligne temporaire retirée
+  aussitôt) ; APRÈS `/tmp/quick-shots/c7-apres/` (`gear-*`, `picker-armes-*`,
+  `picker-talismans-1440`, `picker-sets-*`, `picker-perso-*` par le nouveau
+  fragment ; `hors-pool-1440` Eliza `2000035`, `composees-1024` Liselotte
+  `2000098`, `talismans-piece-1440` Titia `2000122`, `dense-1024` Resonance
+  Eliza `2700035` et ses onze pièces) ; les gestes que le banc ne joue pas,
+  par un relais jetable du scratchpad qui clique dans la page et refuse tout
+  `POST` : `/tmp/quick-shots/c7-etats/` — `stats` (une stat retirée : badge
+  et savebar « 1 erreur » ; `PEN%` + `CHD` actives), `talismans` (preset
+  libéré, un talisman ajouté par le picker, un retiré), `sets-picker` (Speed
+  principal, Penetration et Attack : `$p2s2`, `$a2s2`), `sets-poses` (les
+  deux combos dans la carte, « Même contenu que le preset… »),
+  `sets-sans-principal` (« Poser » éteint), `armes` (une arme ajoutée par
+  `Entrée`, une changée : `ATK%` hors du nouveau pool tombe, `HP%` posé
+  d'office), plusieurs en `-1024`. Le même relais a contrôlé le clavier dans
+  le DOM : focus dans la recherche à l'ouverture, `Tab` et `Maj + Tab` qui
+  bouclent, `Échap` et le voile qui ferment en rendant le focus (carte
+  intacte), un clic dans le panneau qui ne ferme pas, `Ctrl + Entrée` qui
+  pose, la confirmation « Remplacer 1 combo du build « Speed » par 2
+  combos ? », pas de seconde confirmation pour le même mix. Contrôles à
+  l'écran pour Sevih (au TODO) : les bascules de stats à la souris et au
+  clavier (le focus reste sur la bascule), un mix de sets puis
+  « Enregistrer » (le commit doit citer `$p2s2` et `$a2s2`), `Tab` / `Entrée`
+  / `Échap` dans les quatre pickers. Laissé : un set sans bonus 2 pièces
+  (Revenge, Patience) reste proposable en secondaire — les options de sets ne
+  disent pas quels bonus ils ont, contrairement au damage-calculator ; pas de
+  filtre dans le picker d'armes au-delà de la classe ; à 1024, un build de
+  onze pièces fait deux lignes par pièce ; beaucoup d'armes et d'amulettes
+  partagent le même sprite 6★ dans le généré (le nom les distingue) — donnée,
+  hors périmètre.
 - **Relecture B31** (Fable, 07/10) : `8667d5b0` validé. Périmètre attendu
   (`tabs/gear.*`, `actions.ts` et ses tests, `server.ts`, le nouveau
   `env.ts`, une ligne de `STYLE.md`, DONE, TODO), entrée DONE complète ;

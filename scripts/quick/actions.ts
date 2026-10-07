@@ -904,8 +904,8 @@ function gearCatalog(): GearCatalog {
 
 /**
  * L'onglet « Gear reco » : le roster (qui a des recos), les presets en lecture
- * seule, les listes des sélecteurs (celles de l'admin, sans les icônes — rien
- * n'est rendu en tuiles ici) et, avec `id`, les builds de ce perso lus du
+ * seule, les listes des sélecteurs (celles de l'admin, `icon` compris : c'est
+ * l'image des tuiles des pickers) et, avec `id`, les builds de ce perso lus du
  * disque à l'instant.
  *
  * Les builds viennent DEUX fois : `builds` en pièces (presets dépliés, comme
@@ -923,6 +923,7 @@ export function gearRecoState(id?: string) {
     list.map((o) => ({
       id: o.id,
       label: o.label,
+      icon: o.icon,
       classLimits: o.classLimits,
       mainStats: o.mainStats,
     }));

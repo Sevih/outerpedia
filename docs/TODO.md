@@ -31,16 +31,18 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Gear reco, retour de Sevih du 07/10** : reste le lot **C7** de
-      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md) — pickers modaux
-      comme celui des héros pour armes et amulettes (stats principales
-      disponibles en bascules à côté de la pièce), talismans (multi-choix) et
-      sets (set principal + secondaires → combos `sp2pen2`, `sp2atk2`). B31
-      est fait (une note en anglais, « Traduire ») : à jouer à l'écran avec
-      les vraies clés — relancer quick, « Traduire » sur un perso à note
-      en / es / fr (jp, kr, zh arrivent, fr et es ne bougent pas, tags
-      intacts), retoucher l'anglais → badge « à retraduire », « Enregistrer »
-      → un commit `chore(gear-reco): <perso>` qui ne porte que les notes.
+- [ ] **Gear reco, retour de Sevih du 07/10** : les deux lots sont FAITS
+      (B31, C7), reste à les jouer à l'écran. B31 (une note en anglais,
+      « Traduire ») avec les vraies clés — relancer quick, « Traduire » sur
+      un perso à note en / es / fr (jp, kr, zh arrivent, fr et es ne bougent
+      pas, tags intacts), retoucher l'anglais → badge « à retraduire »,
+      « Enregistrer » → un commit `chore(gear-reco): <perso>` qui ne porte
+      que les notes. C7 (pickers) : les bascules de stats à la souris et au
+      clavier (une stat composée, la dernière retirée → « stat principale
+      non choisie », la stat hors pool qui se retire), un mix de sets (Speed
+      principal, Penetration et Attack secondaires) puis « Enregistrer » →
+      le commit cite `$p2s2` et `$a2s2`, et `Tab` / `Entrée` /
+      `Ctrl + Entrée` / `Échap` dans les quatre pickers.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,

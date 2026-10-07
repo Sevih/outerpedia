@@ -40,11 +40,13 @@
 
   <div id="g-list"></div>
 
-  <!-- Le picker de perso : une modale. Échap et un clic sur le voile ferment. -->
+  <!-- Le picker : UNE modale pour le perso, une arme ou une amulette, les
+       talismans et les sets — `gPkOpen` (gear.js) la remplit. Échap et un clic
+       sur le voile ferment. -->
   <div class="g-modal" id="g-modal" hidden>
     <div class="g-panel" role="dialog" aria-modal="true" aria-labelledby="g-modal-title">
       <div class="g-panel-head">
-        <strong id="g-modal-title">Choisir un perso</strong>
+        <strong id="g-modal-title"></strong>
         <span class="badge" id="g-tally"></span>
         <button class="btn icon del" id="g-close" type="button" aria-label="Fermer" title="Fermer">
           ✕
@@ -66,27 +68,15 @@
             <circle cx="11" cy="11" r="7" />
             <path d="M20 20l-3.5-3.5" />
           </svg>
-          <input
-            id="g-q"
-            placeholder="Chercher un perso…"
-            aria-label="Chercher un perso"
-            autocomplete="off"
-          />
+          <input id="g-q" autocomplete="off" />
         </div>
-        <div class="g-filters">
-          <div class="g-togs" id="g-elements" role="group" aria-label="Élément"></div>
-          <div class="g-togs" id="g-classes" role="group" aria-label="Classe"></div>
-          <div class="g-seg" id="g-has" role="group" aria-label="Recos">
-            <button type="button" data-has="" aria-pressed="true">Tous</button>
-            <button type="button" data-has="with" aria-pressed="false">Avec recos</button>
-            <button type="button" data-has="without" aria-pressed="false">Sans recos</button>
-          </div>
-        </div>
+        <div class="g-filters" id="g-filters"></div>
       </div>
       <div class="g-panel-body">
         <div class="g-tiles" id="g-results"></div>
-        <div class="empty" id="g-none" hidden>Aucun perso ne correspond.</div>
+        <div class="empty" id="g-none" hidden></div>
       </div>
+      <div class="g-panel-foot" id="g-foot" hidden></div>
     </div>
   </div>
 </section>

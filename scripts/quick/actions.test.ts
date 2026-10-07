@@ -19,6 +19,10 @@
  * Et contrat de `translateNotes` — « Traduire » du même onglet : le traducteur
  * est INJECTÉ, aucun test n'appelle DeepL ni Anthropic.
  *
+ * Et contrat de `composeSetCombos` (`ui/gear-sets.mjs`, que la page charge
+ * aussi) — le picker de sets du même onglet : un set principal et des
+ * secondaires deviennent les combos du build.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -49,6 +53,7 @@ import {
   type RankDisk,
   type TranslateDeps,
 } from './actions';
+import { composeSetCombos, splitSetCombos } from './ui/gear-sets.mjs';
 
 const DIANNE: CharacterCurated = {
   rank: 'S',
@@ -476,6 +481,103 @@ describe('recos du fichier — lues, jamais écrites', () => {
     expect(one.builds).toEqual(reco[id].map((b) => expandBuild(b, presets)));
     expect(one.roster.find((c) => c.id === id)?.builds).toBe(reco[id].length);
     expect(gearRecoState()).not.toHaveProperty('builds');
+  });
+
+  it('les listes portent leur icône : c’est l’image des tuiles des pickers', () => {
+    for (const slot of ['weapons', 'amulets', 'talismans', 'sets'] as const) {
+      expect(state.options[slot].length, slot).toBeGreaterThan(0);
+      expect(
+        state.options[slot].filter((o) => !o.icon).map((o) => o.label),
+        slot,
+      ).toEqual([]);
+    }
+  });
+});
+
+describe('composeSetCombos — le mix du picker de sets', () => {
+  it('principal seul : un combo, ses 4 pièces', () => {
+    expect(composeSetCombos('speed', [])).toEqual({
+      combos: [[{ set: 'speed', count: 4 }]],
+      error: '',
+    });
+  });
+
+  it('principal et deux secondaires : deux combos 2 + 2, dans l’ordre des secondaires', () => {
+    expect(composeSetCombos('speed', ['pen', 'atk'])).toEqual({
+      combos: [
+        [
+          { set: 'speed', count: 2 },
+          { set: 'pen', count: 2 },
+        ],
+        [
+          { set: 'speed', count: 2 },
+          { set: 'atk', count: 2 },
+        ],
+      ],
+      error: '',
+    });
+    // Un secondaire cité deux fois ne fait pas deux combos.
+    expect(composeSetCombos('speed', ['pen', 'pen']).combos).toHaveLength(1);
+  });
+
+  it('refuse un secondaire qui est le principal, et un mix sans principal', () => {
+    const twice = composeSetCombos('speed', ['pen', 'speed']);
+    expect(twice.combos).toEqual([]);
+    expect(twice.error).toContain('principal');
+    expect(composeSetCombos('', ['pen'])).toEqual({ combos: [], error: 'pas de set principal' });
+  });
+
+  it('se relit : les combos composés redonnent le principal et les secondaires', () => {
+    for (const [main, secondaries] of [
+      ['speed', []],
+      ['speed', ['pen']],
+      ['speed', ['pen', 'atk', 'crit']],
+    ] as const)
+      expect(splitSetCombos(composeSetCombos(main, secondaries).combos)).toEqual({
+        main,
+        secondaries: [...secondaries],
+      });
+  });
+
+  it('ne lit pas comme un mix ce qui n’en est pas un', () => {
+    const none = { main: '', secondaries: [] };
+    const two = (a: string, b: string) => [
+      { set: a, count: 2 },
+      { set: b, count: 2 },
+    ];
+    expect(splitSetCombos([])).toEqual(none);
+    expect(splitSetCombos([[]])).toEqual(none);
+    expect(splitSetCombos([[{ set: 'speed', count: 2 }]])).toEqual(none);
+    // Deux combos sans set commun, puis un 4 pièces à côté d'un 2 + 2.
+    expect(splitSetCombos([two('speed', 'pen'), two('atk', 'crit')])).toEqual(none);
+    expect(splitSetCombos([[{ set: 'speed', count: 4 }], two('speed', 'pen')])).toEqual(none);
+    // Le set commun n'est pas forcément cité en premier.
+    expect(splitSetCombos([two('pen', 'speed'), two('speed', 'atk')])).toEqual({
+      main: 'speed',
+      secondaries: ['pen', 'atk'],
+    });
+  });
+
+  it('un preset de sets du fichier, relu puis recomposé, est replié sous un preset', () => {
+    const presets = loadGearPresets();
+    const key = (pieces: { set: string; count: number }[]) =>
+      pieces
+        .map((p) => `${p.set}:${p.count}`)
+        .sort()
+        .join('|');
+    const mixes = Object.entries(presets.sets)
+      .map(([slug, pieces]) => ({ slug, pieces, ...splitSetCombos([pieces]) }))
+      .filter((m) => m.main);
+    expect(mixes.length).toBeGreaterThan(0);
+
+    for (const { slug, pieces, main, secondaries } of mixes) {
+      const { combos } = composeSetCombos(main, secondaries);
+      expect(combos.map(key), slug).toEqual([key(pieces)]);
+      // Le store le range sous un preset de même contenu (pas forcément ce slug :
+      // deux presets peuvent se valoir).
+      const back = collapseBuild({ name: slug, sets: [{ pieces: combos[0] }] }, presets);
+      expect(key(presets.sets[back.sets?.[0].preset ?? ''] ?? []), slug).toBe(key(pieces));
+    }
   });
 });
 

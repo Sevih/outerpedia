@@ -246,7 +246,7 @@ Un select modifié prend le bord et le fond `accent` à 12 % (`.badge.edit` pour
 le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 22 px, depuis `imgBase`, `alt=""` doublées par le nom en texte ou en `title`.
 
-### Gear reco (`wide`, fait — B29)
+### Gear reco (`wide`, fait — B29, pickers C7)
 
 ```
 .head  Gear reco — Les builds d'un perso…
@@ -254,7 +254,9 @@ le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
 .savebar   1 changement · 1 erreur · « Build PvP : stat principale non permise » [＋ build] [Annuler] [Enregistrer]
 .card (un build)  card-head : « Build » [nom 24ch] badge 1 / 2 · ✕ dupliquer ↑ ↓ ✕ (btn icon)
    grille 2 colonnes, 18 × 28 px : Armes | Talismans (badge preset $slug + « régler à la pièce ») | Amulettes | Sets | Substats (pleine largeur) | Note (pleine largeur : UNE textarea, l'anglais ; dessous [Traduire] badge error · « 212 caractères » à droite ; puis « Traductions (5) » replié, badge warn « à retraduire », 5 textarea fr · es · jp · kr · zh, trois par rangée)
-   une pièce = [select 260px] [select 120px] ✕ ; « + arme » en .btn.ghost.sm
+   une arme, une amulette = [tuile 240px : icône 40 px + nom, un clic ouvre le picker] [ses stats principales en bascules, aria-pressed] ✕ ; « ＋ arme » (.btn.ghost.sm) ouvre le picker
+   talismans à la pièce = une rangée de tuiles (icône + nom + ✕), « ＋ talisman » ouvre le picker en multi-choix ; sets = « Composer un mix… » ouvre le picker (un principal, des secondaires), les combos restent en paires [select 260px] [select 120px] ✕
+le picker (UNE modale pour le perso, les pièces, les talismans, les sets — `gPkOpen`, lot C7) : titre + badge · recherche · rangée de filtres optionnelle (pastilles, groupe segmenté) · grille de tuiles (visages 64 px, équipement 56 px, anneau accent sur le choix, `disabled` grisé) · en multi-choix, un pied [récapitulatif] [Annuler] [Valider]
 .card.ko (un build refusé) : bord danger, badge « stat principale non permise », le message sous la pièce
 ```
 

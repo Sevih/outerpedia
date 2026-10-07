@@ -1,7 +1,8 @@
 /* Onglet « Gear reco » : le perso choisi, la savebar, un build par carte (slots
-   sur deux colonnes, la note dessous) et le picker de perso en modale. Les
-   composants viennent de `quick.css` ; ce qui suit est propre à l'onglet
-   (cf. `STYLE.md`). Bleu accent = modifié, rouge = refusé, ambre = preset. */
+   sur deux colonnes, la note dessous) et LE picker, une modale pour le perso,
+   les pièces, les talismans et les sets. Les composants viennent de
+   `quick.css` ; ce qui suit est propre à l'onglet (cf. `STYLE.md`). Bleu
+   accent = modifié ou choisi, rouge = refusé, ambre = preset. */
 
 /* ---------------------------------------------------------------- le perso */
 #tab-gear .g-char {
@@ -124,11 +125,14 @@
   gap: 18px 28px;
   padding: 16px 20px;
 }
+/* Conteneur : une pièce range ses stats sous sa tuile quand la colonne est
+   étroite (cf. `.g-gear`). */
 #tab-gear .g-col {
   display: flex;
   flex-direction: column;
   gap: 18px;
   min-width: 0;
+  container-type: inline-size;
 }
 #tab-gear .g-slot {
   display: flex;
@@ -167,7 +171,7 @@
   display: none;
 }
 
-/* Une pièce : son menu, sa stat principale (ou son nombre), sa croix. */
+/* Une ligne de slot : un menu (preset, set d'une paire), son nombre, sa croix. */
 #tab-gear .g-piece,
 #tab-gear .g-foot {
   display: flex;
@@ -192,13 +196,136 @@
 #tab-gear .g-dim {
   flex: 0 1 260px;
 }
-#tab-gear .g-piece select[data-s='stat'],
 #tab-gear .g-piece select.count,
 #tab-gear .g-dim.count {
   flex: 0 0 120px;
 }
 #tab-gear .g-piece input {
   flex: 1 1 240px;
+}
+/* Une arme, une amulette : sa tuile (icône et nom, un clic ouvre le picker),
+   à côté ses stats principales en bascules, puis sa croix. */
+#tab-gear .g-gear {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr) auto;
+  gap: 6px 10px;
+}
+#tab-gear .g-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 50px;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-base);
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+}
+#tab-gear button.g-item {
+  cursor: pointer;
+}
+#tab-gear button.g-item:hover {
+  border-color: var(--accent);
+}
+#tab-gear .g-item.refused {
+  border-color: var(--danger);
+}
+#tab-gear .g-eq {
+  display: block;
+  object-fit: contain;
+}
+#tab-gear .g-item .g-eq {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+}
+/* Une pièce que les listes ne connaissent pas : pas d'icône. */
+#tab-gear .g-eq.none {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--placeholder);
+}
+#tab-gear .g-item-n {
+  min-width: 0;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+#tab-gear .g-item .badge {
+  flex: none;
+}
+#tab-gear .g-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+  padding: 2px;
+  border-radius: 8px;
+}
+/* Aucune stat active : le groupe est cerclé, le badge dessous dit pourquoi. */
+#tab-gear .g-stats.refused {
+  outline: 1px dashed var(--danger);
+}
+#tab-gear .g-stat {
+  height: 24px;
+  padding: 0 9px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 999px;
+  background: var(--surface-base);
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#tab-gear .g-stat:hover {
+  border-color: var(--accent);
+  color: var(--content);
+}
+#tab-gear .g-stat[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 600;
+}
+/* Une stat que le pool de la pièce ne propose pas : le disque en porte. */
+#tab-gear .g-stat.out {
+  border-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--danger);
+}
+@container (max-width: 520px) {
+  #tab-gear .g-gear {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  #tab-gear .g-gear .g-stats {
+    grid-area: 2 / 1 / 3 / -1;
+  }
+}
+/* Les talismans choisis : une rangée de tuiles, chacune avec sa croix. */
+#tab-gear .g-tals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#tab-gear .g-tals:empty {
+  display: none;
+}
+#tab-gear .g-tal {
+  padding-right: 2px;
+}
+#tab-gear .g-item-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
 }
 /* Substats : le texte passe sous son menu quand la colonne est étroite. */
 #tab-gear .g-sub {
@@ -320,7 +447,6 @@
   background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
 }
 #tab-gear select.refused,
-#tab-gear select.out,
 #tab-gear input.refused,
 #tab-gear textarea.refused {
   border-color: var(--danger);
@@ -337,8 +463,9 @@
 }
 
 /* ---------------------------------------------------------------- le picker
-   Une modale au-dessus du journal : recherche, pastilles d'élément et de
-   classe, filtre à trois états, grille d'icônes de visage. */
+   Une modale au-dessus du journal : recherche, rangée de filtres (pastilles
+   d'élément et de classe, groupe segmenté), grille de tuiles — visages ou
+   équipement — et, en multi-choix, un pied qui récapitule et valide. */
 #tab-gear .g-modal {
   position: fixed;
   inset: 0;
@@ -406,6 +533,9 @@
   gap: 10px 14px;
   flex-wrap: wrap;
 }
+#tab-gear .g-filters:empty {
+  display: none;
+}
 #tab-gear .g-togs {
   display: flex;
   gap: 6px;
@@ -463,6 +593,14 @@
   background: var(--accent);
   color: var(--accent-fg);
 }
+#tab-gear .g-seg button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+/* Seul dans sa rangée (le rôle d'un set), le groupe reste à gauche. */
+#tab-gear .g-filters > .g-seg:first-child {
+  margin-left: 0;
+}
 #tab-gear .g-panel-body {
   padding: 8px 16px 16px;
   overflow-y: auto;
@@ -496,6 +634,25 @@
 #tab-gear .g-tile:hover {
   color: var(--content);
 }
+#tab-gear .g-tile:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+/* Le set principal, non cliquable parmi les secondaires : il reste lisible. */
+#tab-gear .g-tile.keep:disabled {
+  opacity: 1;
+}
+/* Tuiles d'équipement : 56 px, un nom plus long qu'un prénom. */
+#tab-gear .g-tiles.gear {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+#tab-gear .g-tile .g-eq {
+  width: 56px;
+  height: 56px;
+}
+#tab-gear .g-tiles.gear .g-n {
+  max-width: 100px;
+}
 /* L'anneau du perso courant, sur un conteneur : l'icône d'élément et le
    compte de builds en débordent. */
 #tab-gear .g-ring {
@@ -505,7 +662,7 @@
   border: 2px solid transparent;
   border-radius: 8px;
 }
-#tab-gear .g-tile:hover .g-ring {
+#tab-gear .g-tile:not(:disabled):hover .g-ring {
   border-color: color-mix(in srgb, var(--accent) 50%, transparent);
 }
 #tab-gear .g-ring.on {
@@ -548,6 +705,41 @@
   background: var(--surface-overlay);
   color: var(--content-muted);
 }
+/* Un set secondaire : la pastille en creux, le principal la garde pleine. */
+#tab-gear .g-cnt.sub {
+  border: 1px solid var(--accent);
+  background: var(--surface-base);
+  color: var(--accent);
+}
+#tab-gear .g-cnt.warn {
+  background: var(--warn);
+}
+/* Le pied d'un multi-choix : ce qui sera posé, « Annuler », « Valider ». */
+#tab-gear .g-panel-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-gear .g-panel-foot[hidden] {
+  display: none;
+}
+#tab-gear .g-recap {
+  display: flex;
+  align-items: center;
+  gap: 6px 16px;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  min-width: 0;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-gear .g-mix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 #tab-gear .g-n {
   max-width: 76px;
   font-size: 11px;
@@ -555,6 +747,8 @@
   text-align: center;
   overflow-wrap: anywhere;
 }
+#tab-gear .g-item:focus-visible,
+#tab-gear .g-stat:focus-visible,
 #tab-gear .g-tog:focus-visible,
 #tab-gear .g-seg button:focus-visible,
 #tab-gear .g-tile:focus-visible,

@@ -1,5 +1,7 @@
 // Onglet « Gear reco ».
 import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+// Le mix de sets (un principal, des secondaires) : le module que les tests couvrent.
+import { composeSetCombos, splitSetCombos } from '../gear-sets.mjs';
 
 // Les builds d'UN perso, édités ici puis envoyés d'un bloc : la liste
 // complète remplace celle du disque (contrat de `upsertGearReco`).
@@ -24,7 +26,7 @@ let gSeq = 0;
 // Élément et rareté par perso : le roster des recos ne les porte pas, celui
 // de « Rangs » (`/api/ranks`) si. Sans lui, le picker se passe d'élément.
 let gMeta = new Map();
-// Les filtres du picker : ils survivent à sa fermeture, pas la recherche.
+// Les filtres du picker de perso : ils survivent à sa fermeture, pas la recherche.
 const gPick = { elements: new Set(), classes: new Set(), has: '' };
 // L'ordre des pastilles, celui du site (`ELEMENT_ORDER`, `CLASS_ORDER`).
 const G_ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'];
@@ -245,6 +247,7 @@ function gIssues(b) {
       if (!p.id) add(slot, 'pièce non choisie', i);
       else if (!options[slot].some((o) => o.id === p.id))
         add(slot, `pièce inconnue « ${p.id} »`, i);
+      else if (!gStatsOf(p).length) add(slot, 'stat principale non choisie', i);
     });
   if (b.tal.preset) {
     if (!Object.hasOwn(presets.talismans, b.tal.preset))
@@ -300,6 +303,11 @@ const gIcon = (kind, slug, cls = '') =>
   `<img${cls ? ` class="${cls}"` : ''} src="${gSrc(
     `ui/${kind === 'element' ? 'elem/IG_Turn_Element_' : 'class/IG_Turn_Class_'}${gCap(esc(slug))}`,
   )}" alt="" aria-hidden="true" />`;
+/** L'icône d'une pièce ou d'un set (`equipment/<icon>`), ou sa place vide. */
+const gEq = (icon, size) =>
+  icon
+    ? `<img class="g-eq" src="${gSrc(`equipment/${esc(icon)}`)}" alt="" aria-hidden="true" width="${size}" height="${size}" loading="lazy" />`
+    : '<span class="g-eq none" aria-hidden="true">?</span>';
 const G_SVG = (path, w = 2.2) =>
   `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
 const G_ICONS = {
@@ -322,14 +330,12 @@ function gSelect({ attrs, cur, none, list, bad }) {
   }${list.map((o) => gOpt(o.id, o.label, cur)).join('')}</select>`;
 }
 
+const gOption = (slot, id) => gear.options[slot].find((o) => o.id === id);
+const gFits = (o) => !o.classLimits?.length || o.classLimits.includes(gChar.class);
 /** Armes et amulettes du perso : celles de sa classe, plus la pièce déjà posée. */
 function gGearList(slot, cur) {
-  const fits = (o) => !o.classLimits?.length || o.classLimits.includes(gChar.class);
-  const off = gear.options[slot].find((o) => o.id === cur && !fits(o));
-  return [
-    ...(off ? [{ id: off.id, label: `${off.label} (hors classe)` }] : []),
-    ...gear.options[slot].filter(fits),
-  ];
+  const off = gear.options[slot].find((o) => o.id === cur && !gFits(o));
+  return [...(off ? [off] : []), ...gear.options[slot].filter(gFits)];
 }
 
 const gStatsOf = (p) =>
@@ -339,38 +345,22 @@ const gStatsOf = (p) =>
     .filter(Boolean);
 
 /**
- * Stat principale : celles du pool de CETTE pièce. Plusieurs possibles
- * (« PEN%/CHD ») : le menu en pose une, ou en ajoute et en retire une de
- * celles posées. Une stat hors pool reste dans le menu, marquée.
+ * Stat principale : celles du pool de CETTE pièce, en bascules. Plusieurs
+ * actives = une stat composée (« PEN%/CHD », dans l'ordre où on les active).
+ * Une stat hors pool (le disque en porte) reste là, en rouge : un clic la
+ * retire, et elle ne revient pas.
  */
-function gStats(slot, i, p) {
-  const pool = gear.options[slot].find((o) => o.id === p.id)?.mainStats ?? [];
+function gStats(slot, i, p, one, bad) {
+  const pool = gOption(slot, p.id)?.mainStats ?? [];
   const on = gStatsOf(p);
-  const out = on.filter((stat) => !pool.includes(stat));
-  const cur = on.join('/');
-  const group = (label, list) =>
-    list.length ? `<optgroup label="${label}">${list.join('')}</optgroup>` : '';
-  return `<select data-s="stat" data-slot="${slot}" data-i="${i}" aria-label="Stat principale"${
-    out.length ? ` class="out" title="Hors du pool de cette pièce : ${esc(out.join(', '))}."` : ''
-  }>${gOpt('', '— stat —', cur)}${
-    cur && (on.length > 1 || out.length) ? gOpt(cur, `${out.length ? '⚠ ' : ''}${cur}`, cur) : ''
-  }${pool.map((stat) => gOpt(stat, stat, cur)).join('')}${
-    on.length
-      ? group(
-          'Ajouter',
-          pool
-            .filter((stat) => !on.includes(stat))
-            .map((stat) => gOpt(`add:${stat}`, `＋ ${stat}`)),
-        )
-      : ''
-  }${
-    on.length > 1
-      ? group(
-          'Retirer',
-          on.map((stat) => gOpt(`rm:${stat}`, `− ${stat}`)),
-        )
-      : ''
-  }</select>`;
+  const tog = (stat, out) =>
+    `<button class="g-stat${out ? ' out' : ''}" type="button" data-act="stat" data-slot="${slot}" data-i="${i}" data-stat="${esc(stat)}" aria-pressed="${on.includes(stat)}"${
+      out ? ' title="Hors du pool de cette pièce : un clic la retire."' : ''
+    }>${out ? '⚠ ' : ''}${esc(stat)}</button>`;
+  return `<div class="g-stats${bad ? ' refused' : ''}" role="group" aria-label="Stat principale de l’${one} ${i + 1}">${on
+    .filter((stat) => !pool.includes(stat))
+    .map((stat) => tog(stat, true))
+    .join('')}${pool.map((stat) => tog(stat, false)).join('')}</div>`;
 }
 
 function gCard(b) {
@@ -396,21 +386,21 @@ function gCard(b) {
   const dim = (label, cls = '') => `<span class="g-dim${cls}">${esc(label)}</span>`;
   const at = gBuilds.indexOf(b);
 
+  // Une pièce : sa tuile (un clic ouvre le picker) puis, à côté, ses stats.
   const picks = (slot, one) =>
     `<div class="${slotClass(slot)}"><h3>${G_SLOTS[slot]}${iss(slot)}</h3>${b[slot]
-      .map(
-        (p, i) =>
-          `<div class="g-piece">${gSelect({
-            attrs: `data-s="pick" data-slot="${slot}" data-i="${i}" aria-label="${one} ${i + 1}"`,
-            cur: p.id,
-            none: '— choisir —',
-            list: gGearList(slot, p.id),
-            bad: badAt(slot, i),
-          })}${gStats(slot, i, p)}${rm('rm', `data-slot="${slot}" data-i="${i}"`, `l’${one} ${i + 1}`)}</div>${iss(`${slot}:${i}`, 'div')}`,
-      )
+      .map((p, i) => {
+        const o = gOption(slot, p.id);
+        const noStat = Boolean(o) && !gStatsOf(p).length;
+        return `<div class="g-piece g-gear"><button class="g-item${
+          badAt(slot, i) && !noStat ? ' refused' : ''
+        }" type="button" data-act="pick" data-slot="${slot}" data-i="${i}" aria-haspopup="dialog" title="Changer l’${one} ${i + 1}">${gEq(o?.icon, 40)}<span class="g-item-n">${esc(
+          o ? o.label : p.id ? `⚠ ${p.id}` : '— choisir —',
+        )}</span>${o && !gFits(o) ? '<span class="badge warn">hors classe</span>' : ''}</button>${gStats(slot, i, p, one, noStat)}${rm('rm', `data-slot="${slot}" data-i="${i}"`, `l’${one} ${i + 1}`)}</div>${iss(`${slot}:${i}`, 'div')}`;
+      })
       .join(
         '',
-      )}<div class="g-foot"><button class="btn ghost sm" data-act="add" data-slot="${slot}">＋ ${one}</button></div></div>`;
+      )}<div class="g-foot"><button class="btn ghost sm" type="button" data-act="pick" data-slot="${slot}" data-i="-1" aria-haspopup="dialog">＋ ${one}</button></div></div>`;
 
   const talPreset = gSelect({
     attrs: 'data-s="tal-preset" aria-label="Preset de talismans"',
@@ -426,19 +416,15 @@ function gCard(b) {
       ? `${(gear.presets.talismans[b.tal.preset] ?? [])
           .map((t) => `<div class="g-piece">${dim(gLabel('talismans', t))}</div>`)
           .join('')}<div class="g-foot">${talPreset}</div>`
-      : `${b.tal.pieces
-          .map(
-            (t, i) =>
-              `<div class="g-piece">${gSelect({
-                attrs: `data-s="tal" data-i="${i}" aria-label="talisman ${i + 1}"`,
-                cur: t,
-                none: '— choisir —',
-                list: gear.options.talismans,
-                bad: badAt('talismans', i),
-              })}${rm('rm', `data-slot="talismans" data-i="${i}"`, `le talisman ${i + 1}`)}</div>${iss(`talismans:${i}`, 'div')}`,
-          )
-          .join('')}<p class="g-ro">${gTwinText(gTwin.talismans(b.tal.pieces))}</p>
-          <div class="g-foot"><button class="btn ghost sm" data-act="add" data-slot="talismans">＋ talisman</button>${talPreset}</div>`
+      : `<div class="g-tals">${b.tal.pieces
+          .map((t, i) => {
+            const o = gOption('talismans', t);
+            return `<span class="g-item g-tal${badAt('talismans', i) ? ' refused' : ''}">${gEq(o?.icon, 40)}<span class="g-item-col"><span class="g-item-n">${esc(
+              o ? o.label : t ? `⚠ ${t}` : '— non choisi —',
+            )}</span>${iss(`talismans:${i}`)}</span>${rm('rm', `data-slot="talismans" data-i="${i}"`, `le talisman ${i + 1}`)}</span>`;
+          })
+          .join('')}</div><p class="g-ro">${gTwinText(gTwin.talismans(b.tal.pieces))}</p>
+          <div class="g-foot"><button class="btn ghost sm" type="button" data-act="pick" data-slot="talismans" aria-haspopup="dialog">＋ talisman</button>${talPreset}</div>`
   }</div>`;
 
   const sets = `<div class="${slotClass('sets')}"><h3>${G_SLOTS.sets}</h3>${b.sets
@@ -487,7 +473,7 @@ function gCard(b) {
     })
     .join(
       '',
-    )}<div class="g-foot"><button class="btn ghost sm" data-act="add-combo">＋ combo</button>${iss('sets')}</div></div>`;
+    )}<div class="g-foot"><button class="btn ghost sm" type="button" data-act="pick" data-slot="sets" aria-haspopup="dialog" title="Un set principal, seul (4 pièces) ou avec des secondaires (un combo 2 + 2 par secondaire). Remplace les combos du build.">Composer un mix…</button><button class="btn ghost sm" data-act="add-combo">＋ combo</button>${iss('sets')}</div></div>`;
 
   const text = (t, lang) =>
     t === 'name' ? now.name : t === 'sub' ? (now.substats ?? '') : (now.note?.[lang] ?? '');
@@ -740,25 +726,12 @@ $('g-list').onchange = (e) => {
   const b = gOf(el);
   if (!b) return;
   gTouched(b);
-  const { s, slot, i, c, j } = el.dataset;
+  const { s, c, j } = el.dataset;
   const v = el.value;
   const { presets } = gear;
-  if (s === 'pick') b[slot][i].id = v;
-  else if (s === 'stat') {
-    // « ＋ » ajoute une stat à celles posées, « − » en retire une ; une stat
-    // seule les remplace.
-    const on = gStatsOf(b[slot][i]);
-    const [op, stat] = v.includes(':') ? v.split(':') : ['', v];
-    b[slot][i].mainStat = (
-      op === 'add' ? [...on, stat] : op === 'rm' ? on.filter((x) => x !== stat) : [stat]
-    )
-      .filter(Boolean)
-      .join('/');
-  }
   // Un preset choisi pose ses pièces ; « une à une » les garde pour départ.
-  else if (s === 'tal-preset')
+  if (s === 'tal-preset')
     b.tal = { preset: v, pieces: [...(presets.talismans[v] ?? b.tal.pieces)] };
-  else if (s === 'tal') b.tal.pieces[i] = v;
   else if (s === 'set-preset')
     b.sets[c] = {
       preset: v,
@@ -779,6 +752,8 @@ $('g-list').onclick = (e) => {
   const at = gBuilds.indexOf(b);
 
   if (act === 'translate') return gTranslate();
+  // Une tuile de pièce, « ＋ arme », « ＋ talisman », « Composer un mix… ».
+  if (act === 'pick') return gPickSlot(b, slot, i);
   if (act === 'up' || act === 'down') {
     const to = at + (act === 'up' ? -1 : 1);
     if (to < 0 || to >= gBuilds.length) return;
@@ -799,10 +774,15 @@ $('g-list').onclick = (e) => {
   }
 
   gTouched(b);
-  if (act === 'add') {
-    if (slot === 'talismans') b.tal.pieces.push('');
-    else b[slot].push({ id: '', mainStat: '' });
-  } else if (act === 'rm') (slot === 'talismans' ? b.tal.pieces : b[slot]).splice(i, 1);
+  if (act === 'rm') (slot === 'talismans' ? b.tal.pieces : b[slot]).splice(i, 1);
+  // Une bascule de stat : active, elle se retire ; sinon elle s'ajoute.
+  else if (act === 'stat') {
+    const on = gStatsOf(b[slot][i]);
+    const { stat } = el.dataset;
+    b[slot][i].mainStat = (on.includes(stat) ? on.filter((x) => x !== stat) : [...on, stat]).join(
+      '/',
+    );
+  }
   // « régler à la pièce » : le slot quitte son preset et garde ses pièces pour
   // départ, comme le premier choix de son menu.
   else if (act === 'free') {
@@ -815,6 +795,11 @@ $('g-list').onclick = (e) => {
   else if (act === 'add-pair') b.sets[c].pieces.push({ set: '', count: 2 });
   else if (act === 'rm-pair') b.sets[c].pieces.splice(j, 1);
   gRedraw(b);
+  // La carte est redessinée : la bascule cliquée reprend le focus (clavier).
+  if (act === 'stat')
+    [...gCardEl(b).querySelectorAll(`[data-act="stat"][data-slot="${slot}"][data-i="${i}"]`)]
+      .find((x) => x.dataset.stat === el.dataset.stat)
+      ?.focus();
 };
 
 /** Les builds d'un perso, relus du disque : c'est lui qui fait foi. */
@@ -837,65 +822,123 @@ async function gLoad(id) {
   gRender();
 }
 
-// Le picker de perso : une modale. La grille suit la recherche, les pastilles
-// d'élément et de classe (aucune = toutes) et le filtre des recos ; chaque
-// vignette porte son nombre de builds, le perso en cours son anneau.
-function gResults() {
+// ------------------------------------------------------------- le picker
+// UNE modale (`#g-modal`), quatre usages : le perso, une arme ou une amulette,
+// les talismans (multi-choix), les sets. `gPkOpen(cfg)` l'ouvre sur :
+//   title, search (le placeholder de la recherche), none (rien ne correspond) ;
+//   grid     la classe de la grille (`gear` : des tuiles d'équipement) ;
+//   multi    plusieurs tuiles se cochent (`aria-pressed`), un pied valide ;
+//   opener() l'élément qui reprend le focus à la fermeture ;
+//   tally()  le badge de tête ;
+//   filters() la rangée de filtres, filter(el) un clic sur un de ses boutons ;
+//   items()  les tuiles — { id, label, html, title?, on?, disabled?, cls? } —,
+//            la recherche porte sur `label` ;
+//   pick(id) une tuile choisie : à lui de fermer (`gPkClose`) ou non ;
+//   foot()   le pied d'un multi-choix (son récapitulatif, `data-pk="cancel"`,
+//            `data-pk="ok"`), done() son « ok ».
+// Échap, la croix et un clic sur le voile ferment sans rien poser ; Entrée dans
+// la recherche choisit la première tuile ; Tab reste dans le panneau.
+let gPk = null;
+
+const gTile = (it) =>
+  `<button class="g-tile${it.cls ? ` ${it.cls}` : ''}" type="button" data-id="${esc(it.id)}" title="${esc(it.title ?? it.label)}"${
+    gPk.multi ? ` aria-pressed="${Boolean(it.on)}"` : it.on ? ' aria-current="true"' : ''
+  }${it.disabled ? ' disabled' : ''}><span class="g-ring${it.on ? ' on' : ''}">${it.html}</span><span class="g-n">${esc(it.label)}</span></button>`;
+
+/** La grille, le badge et le pied ; `all` : la rangée de filtres aussi. */
+function gPkDraw(all) {
+  if (!gPk) return;
   const q = $('g-q').value.trim().toLowerCase();
-  const rows = gear.roster.filter(
-    (c) =>
-      (!q || c.name.toLowerCase().includes(q)) &&
-      (!gPick.elements.size || gPick.elements.has(gMeta.get(c.id)?.element)) &&
-      (!gPick.classes.size || gPick.classes.has(c.class)) &&
-      (gPick.has === 'with' ? c.builds > 0 : gPick.has === 'without' ? !c.builds : true),
-  );
-  const done = gear.roster.filter((c) => c.builds).length;
-  $('g-tally').textContent =
-    `${gPlural(gear.roster.length, 'perso')} · ${done} avec recos · ${gear.roster.length - done} sans`;
-  $('g-results').innerHTML = rows
-    .map((c) => {
-      const element = gMeta.get(c.id)?.element;
-      return `<button class="g-tile" type="button" data-id="${esc(c.id)}" title="${esc(c.name)} — ${
-        c.builds ? gPlural(c.builds, 'build') : 'sans reco'
-      }"><span class="g-ring${c.id === gChar?.id ? ' on' : ''}"><img class="g-fi" src="${gSrc(
-        `characters/faceicon/FI_${esc(c.id)}`,
-      )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
-        element ? gIcon('element', element, 'g-el') : ''
-      }<span class="g-cnt${c.builds ? '' : ' zero'}">${c.builds}</span></span><span class="g-n">${esc(c.name)}</span></button>`;
-    })
-    .join('');
+  const rows = gPk.items().filter((it) => !q || it.label.toLowerCase().includes(q));
+  // La tuile cliquée est redessinée : elle reprend le focus (clavier).
+  const at = document.activeElement?.closest('#g-results .g-tile')?.dataset.id;
+  $('g-tally').textContent = gPk.tally?.() ?? '';
+  if (all) $('g-filters').innerHTML = gPk.filters?.() ?? '';
+  $('g-results').innerHTML = rows.map(gTile).join('');
   $('g-none').hidden = rows.length > 0;
+  $('g-foot').innerHTML = gPk.foot?.() ?? '';
+  if (at !== undefined) [...$('g-results').children].find((t) => t.dataset.id === at)?.focus();
 }
 
-/** Les pastilles à bascule du picker, d'après ce que le roster porte. */
-function gFilters() {
-  const tog = (kind, slug, on) =>
-    `<button class="g-tog" type="button" data-${kind}="${slug}" aria-pressed="${on}" title="${gCap(slug)}" aria-label="${gCap(slug)}">${gIcon(kind, slug)}</button>`;
-  const elements = new Set([...gMeta.values()].map((m) => m.element));
-  const classes = new Set(gear.roster.map((c) => c.class));
-  $('g-elements').innerHTML = G_ELEMENTS.filter((e) => elements.has(e))
-    .map((e) => tog('element', e, gPick.elements.has(e)))
-    .join('');
-  $('g-classes').innerHTML = G_CLASSES.filter((c) => classes.has(c))
-    .map((c) => tog('class', c, gPick.classes.has(c)))
-    .join('');
-}
-
-function gOpen() {
+function gPkOpen(cfg) {
+  gPk = cfg;
+  $('g-modal-title').textContent = cfg.title;
   $('g-q').value = '';
+  $('g-q').placeholder = cfg.search;
+  $('g-q').setAttribute('aria-label', cfg.search.replace(/…$/, ''));
+  $('g-none').textContent = cfg.none;
+  $('g-results').className = `g-tiles${cfg.grid ? ` ${cfg.grid}` : ''}`;
+  $('g-foot').hidden = !cfg.foot;
   $('g-modal').hidden = false;
-  gResults();
+  gPkDraw(true);
   $('g-q').focus();
 }
 
-function gClose() {
-  if ($('g-modal').hidden) return;
+function gPkClose() {
+  if (!gPk) return;
+  const { opener } = gPk;
+  gPk = null;
   $('g-modal').hidden = true;
-  $('g-pick').focus();
+  $('g-foot').innerHTML = '';
+  opener?.()?.focus();
 }
 
+/** Une tuile choisie. `pick` ferme ou non : ouverte, la modale est redessinée. */
+function gPkPick(id) {
+  gPk.pick(id);
+  gPkDraw(true);
+}
+
+$('g-close').onclick = gPkClose;
+$('g-q').oninput = () => gPkDraw();
+$('g-modal').onclick = (e) => {
+  // Un clic sur le voile, hors du panneau, ferme.
+  if (e.target === $('g-modal')) return gPkClose();
+  if (!gPk) return;
+  const tile = e.target.closest('.g-tile');
+  if (tile) return gPkPick(tile.dataset.id);
+  const act = e.target.closest('[data-pk]');
+  if (act) return act.dataset.pk === 'ok' ? gPk.done() : gPkClose();
+  const tog = e.target.closest('#g-filters button');
+  if (!tog) return;
+  gPk.filter(tog);
+  gPkDraw();
+};
+$('g-modal').onkeydown = (e) => {
+  if (!gPk) return;
+  if (e.key === 'Enter' && e.target === $('g-q')) {
+    // Ctrl + Entrée valide un multi-choix ; Entrée : la première de la grille.
+    if ((e.ctrlKey || e.metaKey) && gPk.done) return gPk.done();
+    const first = $('g-results').querySelector('.g-tile:not([disabled])');
+    if (first) gPkPick(first.dataset.id);
+    return;
+  }
+  // Tab reste dans le panneau.
+  if (e.key !== 'Tab') return;
+  const stops = [...$('g-modal').querySelectorAll('button:not([disabled]), input')];
+  const edge = e.shiftKey ? stops[0] : stops[stops.length - 1];
+  if (document.activeElement !== edge) return;
+  e.preventDefault();
+  (e.shiftKey ? stops[stops.length - 1] : stops[0]).focus();
+};
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') gPkClose();
+});
+
+/** Un groupe segmenté de la rangée de filtres : un seul bouton enfoncé. */
+const gSeg = (label, key, cur, list) =>
+  `<div class="g-seg" role="group" aria-label="${label}">${list
+    .map(
+      ([value, text, off]) =>
+        `<button type="button" data-${key}="${value}" aria-pressed="${value === cur}"${off ? ' disabled' : ''}>${text}</button>`,
+    )
+    .join('')}</div>`;
+const gSegPress = (el) => {
+  for (const b of el.parentElement.children) b.setAttribute('aria-pressed', String(b === el));
+};
+
 async function gChoose(id) {
-  if (id === gChar?.id) return gClose();
+  if (id === gChar?.id) return gPkClose();
   const n = gearChanges();
   if (
     n &&
@@ -904,54 +947,292 @@ async function gChoose(id) {
     )
   )
     return;
-  gClose();
+  gPkClose();
   await gLoad(id);
 }
 
-$('g-pick').onclick = gOpen;
-$('g-close').onclick = gClose;
-$('g-q').oninput = gResults;
-$('g-modal').onclick = (e) => {
-  // Un clic sur le voile, hors du panneau, ferme.
-  if (e.target === $('g-modal')) return gClose();
-  const tile = e.target.closest('[data-id]');
-  if (tile) return gChoose(tile.dataset.id);
-  const tog = e.target.closest('.g-tog');
-  const has = e.target.closest('[data-has]');
-  if (tog) {
-    const [set, slug] = tog.dataset.element
-      ? [gPick.elements, tog.dataset.element]
-      : [gPick.classes, tog.dataset.class];
-    if (!set.delete(slug)) set.add(slug);
-    tog.setAttribute('aria-pressed', String(set.has(slug)));
-  } else if (has) {
-    gPick.has = has.dataset.has;
-    for (const b of $('g-has').children)
-      b.setAttribute('aria-pressed', String(b.dataset.has === gPick.has));
-  } else return;
-  gResults();
-};
-$('g-modal').onkeydown = (e) => {
-  // Entrée dans la recherche : le premier de la grille.
-  const first = $('g-results').firstElementChild;
-  if (e.key === 'Enter' && e.target === $('g-q') && first) gChoose(first.dataset.id);
-  // Tab reste dans le panneau.
-  if (e.key !== 'Tab') return;
-  const stops = [...$('g-modal').querySelectorAll('button, input')];
-  const edge = e.shiftKey ? stops[0] : stops[stops.length - 1];
-  if (document.activeElement !== edge) return;
-  e.preventDefault();
-  (e.shiftKey ? stops[stops.length - 1] : stops[0]).focus();
-};
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') gClose();
-});
+// Le picker de perso. La grille suit la recherche, les pastilles d'élément et
+// de classe (aucune = toutes) et le filtre des recos ; chaque vignette porte
+// son nombre de builds, le perso en cours son anneau.
+function gOpenChar() {
+  const tog = (kind, slug, on) =>
+    `<button class="g-tog" type="button" data-${kind}="${slug}" aria-pressed="${on}" title="${gCap(slug)}" aria-label="${gCap(slug)}">${gIcon(kind, slug)}</button>`;
+  gPkOpen({
+    title: 'Choisir un perso',
+    search: 'Chercher un perso…',
+    none: 'Aucun perso ne correspond.',
+    opener: () => $('g-pick'),
+    tally: () => {
+      const done = gear.roster.filter((c) => c.builds).length;
+      return `${gPlural(gear.roster.length, 'perso')} · ${done} avec recos · ${gear.roster.length - done} sans`;
+    },
+    // Les pastilles à bascule, d'après ce que le roster porte.
+    filters: () => {
+      const elements = new Set([...gMeta.values()].map((m) => m.element));
+      const classes = new Set(gear.roster.map((c) => c.class));
+      return `<div class="g-togs" role="group" aria-label="Élément">${G_ELEMENTS.filter((e) =>
+        elements.has(e),
+      )
+        .map((e) => tog('element', e, gPick.elements.has(e)))
+        .join('')}</div><div class="g-togs" role="group" aria-label="Classe">${G_CLASSES.filter(
+        (c) => classes.has(c),
+      )
+        .map((c) => tog('class', c, gPick.classes.has(c)))
+        .join('')}</div>${gSeg('Recos', 'has', gPick.has, [
+        ['', 'Tous'],
+        ['with', 'Avec recos'],
+        ['without', 'Sans recos'],
+      ])}`;
+    },
+    filter: (el) => {
+      if (el.dataset.has !== undefined) {
+        gPick.has = el.dataset.has;
+        return gSegPress(el);
+      }
+      const [set, slug] = el.dataset.element
+        ? [gPick.elements, el.dataset.element]
+        : [gPick.classes, el.dataset.class];
+      if (!set.delete(slug)) set.add(slug);
+      el.setAttribute('aria-pressed', String(set.has(slug)));
+    },
+    items: () =>
+      gear.roster
+        .filter(
+          (c) =>
+            (!gPick.elements.size || gPick.elements.has(gMeta.get(c.id)?.element)) &&
+            (!gPick.classes.size || gPick.classes.has(c.class)) &&
+            (gPick.has === 'with' ? c.builds > 0 : gPick.has === 'without' ? !c.builds : true),
+        )
+        .map((c) => {
+          const element = gMeta.get(c.id)?.element;
+          return {
+            id: c.id,
+            label: c.name,
+            title: `${c.name} — ${c.builds ? gPlural(c.builds, 'build') : 'sans reco'}`,
+            on: c.id === gChar?.id,
+            html: `<img class="g-fi" src="${gSrc(
+              `characters/faceicon/FI_${esc(c.id)}`,
+            )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
+              element ? gIcon('element', element, 'g-el') : ''
+            }<span class="g-cnt${c.builds ? '' : ' zero'}">${c.builds}</span>`,
+          };
+        }),
+    pick: gChoose,
+  });
+}
+
+/**
+ * Le picker d'une arme ou d'une amulette : les pièces de la classe du perso,
+ * plus celle déjà posée. `i` à -1 : une pièce de plus (« ＋ arme »).
+ *
+ * La pièce choisie garde, de ses stats, celles que son pool propose ; un pool
+ * d'une seule stat la pose d'office. Sinon aucune : l'erreur à la pièce le dit.
+ */
+function gOpenGear(b, slot, i) {
+  const one = slot === 'weapons' ? 'arme' : 'amulette';
+  const cur = i < 0 ? '' : b[slot][i].id;
+  const list = gGearList(slot, cur);
+  gPkOpen({
+    title: i < 0 ? `Ajouter une ${one}` : `Changer l’${one} ${i + 1}`,
+    search: `Chercher une ${one}…`,
+    none: `Aucune ${one} ne correspond.`,
+    grid: 'gear',
+    opener: () =>
+      gCardEl(b)?.querySelector(`[data-act="pick"][data-slot="${slot}"][data-i="${i}"]`),
+    tally: () => `${gPlural(list.length, one)} · ${gChar.class}`,
+    items: () =>
+      list.map((o) => ({
+        id: o.id,
+        label: o.label,
+        title: `${o.label}${gFits(o) ? '' : ' (hors classe)'} — ${(o.mainStats ?? []).join(', ')}`,
+        on: o.id === cur,
+        html: `${gEq(o.icon, 56)}${gFits(o) ? '' : '<span class="g-cnt warn">hors classe</span>'}`,
+      })),
+    pick: (id) => {
+      if (id !== cur) {
+        const pool = gOption(slot, id)?.mainStats ?? [];
+        const kept = i < 0 ? [] : gStatsOf(b[slot][i]).filter((stat) => pool.includes(stat));
+        const piece = { id, mainStat: kept.join('/') || (pool.length === 1 ? pool[0] : '') };
+        if (i < 0) b[slot].push(piece);
+        else b[slot][i] = piece;
+        gTouched(b);
+        gRedraw(b);
+      }
+      gPkClose();
+    },
+  });
+}
+
+/** Le picker de talismans, en multi-choix : la liste du build, dans l'ordre des clics. */
+function gOpenTalismans(b) {
+  const sel = b.tal.pieces.filter(Boolean);
+  gPkOpen({
+    multi: true,
+    title: 'Choisir les talismans',
+    search: 'Chercher un talisman…',
+    none: 'Aucun talisman ne correspond.',
+    grid: 'gear',
+    opener: () => gCardEl(b)?.querySelector('[data-act="pick"][data-slot="talismans"]'),
+    tally: () => `${gPlural(sel.length, 'choisi')} sur ${gear.options.talismans.length}`,
+    items: () =>
+      gear.options.talismans.map((o) => ({
+        id: o.id,
+        label: o.label,
+        on: sel.includes(o.id),
+        html: `${gEq(o.icon, 56)}${sel.includes(o.id) ? '<span class="g-cnt">✓</span>' : ''}`,
+      })),
+    pick: (id) => {
+      const at = sel.indexOf(id);
+      if (at < 0) sel.push(id);
+      else sel.splice(at, 1);
+    },
+    foot: () => {
+      const twin = gTwin.talismans(sel);
+      return `<div class="g-recap"><span>${esc(sel.length ? gTalText(sel) : 'Aucun talisman.')}</span>${
+        twin ? `<span class="badge preset">$${esc(twin)}</span>` : ''
+      }</div><button class="btn ghost" type="button" data-pk="cancel">Annuler</button><button class="btn primary" type="button" data-pk="ok" title="Ctrl + Entrée">Valider</button>`;
+    },
+    done: () => {
+      // La même liste : rien ne bouge, un slot sous preset y reste.
+      if (sel.join('|') !== b.tal.pieces.join('|')) {
+        b.tal = { preset: '', pieces: [...sel] };
+        gTouched(b);
+        gRedraw(b);
+      }
+      gPkClose();
+    },
+  });
+}
+
+/**
+ * Le picker de sets : UN set principal et des secondaires, d'où les combos du
+ * build (`composeSetCombos` — le principal seul en 4 pièces, sinon un combo
+ * 2 + 2 par secondaire). Il s'ouvre sur le mix que le build porte déjà, s'il en
+ * porte un, et REMPLACE ses combos — sur confirmation s'il en avait.
+ */
+function gOpenSets(b) {
+  const st = { role: 'main', ...splitSetCombos(b.sets.map((c) => c.pieces)) };
+  if (st.main) st.role = 'sub';
+  const mix = () => composeSetCombos(st.main, st.secondaries);
+  const hint = () =>
+    st.role === 'main'
+      ? 'Un clic pose le set principal.'
+      : 'Un clic ajoute ou retire un secondaire ; sans secondaire, le principal est en 4 pièces.';
+  gPkOpen({
+    multi: true,
+    title: 'Composer les sets',
+    search: 'Chercher un set…',
+    none: 'Aucun set ne correspond.',
+    grid: 'gear',
+    opener: () => gCardEl(b)?.querySelector('[data-act="pick"][data-slot="sets"]'),
+    tally: () =>
+      st.main
+        ? `${gLabel('sets', st.main)} · ${
+            st.secondaries.length ? gPlural(st.secondaries.length, 'secondaire') : '4 pièces'
+          }`
+        : 'pas de set principal',
+    // Le rôle que prend le set cliqué. Pas de secondaire sans principal.
+    filters: () =>
+      `${gSeg('Rôle du set cliqué', 'role', st.role, [
+        ['main', 'Principal'],
+        ['sub', 'Secondaires', !st.main],
+      ])}<span class="lbl">${hint()}</span>`,
+    filter: (el) => {
+      st.role = el.dataset.role;
+      gSegPress(el);
+      el.parentElement.nextElementSibling.textContent = hint();
+    },
+    items: () =>
+      gear.options.sets.map((o) => {
+        const main = o.id === st.main;
+        const sub = st.secondaries.includes(o.id);
+        return {
+          id: o.id,
+          label: o.label,
+          on: main || sub,
+          // Le principal ne peut pas être aussi secondaire.
+          disabled: main && st.role === 'sub',
+          cls: main ? 'keep' : '',
+          html: `${gEq(o.icon, 56)}${
+            main
+              ? '<span class="g-cnt">principal</span>'
+              : sub
+                ? '<span class="g-cnt sub">2p</span>'
+                : ''
+          }`,
+        };
+      }),
+    pick: (id) => {
+      if (st.role === 'main') {
+        st.main = st.main === id ? '' : id;
+        st.secondaries = st.secondaries.filter((x) => x !== id);
+        if (st.main) st.role = 'sub';
+      } else if (id !== st.main) {
+        const at = st.secondaries.indexOf(id);
+        if (at < 0) st.secondaries.push(id);
+        else st.secondaries.splice(at, 1);
+      }
+    },
+    // Les combos qui seront posés, chacun avec le preset qui le repliera.
+    foot: () => {
+      const { combos, error } = mix();
+      return `<div class="g-recap">${
+        error
+          ? '<span>Choisir le set principal.</span>'
+          : combos
+              .map((pieces) => {
+                const twin = gTwin.sets(pieces);
+                return `<span class="g-mix">${esc(gSetText(pieces))}<span class="badge ${twin ? 'preset' : 'off'}">${twin ? `$${esc(twin)}` : 'sans preset'}</span></span>`;
+              })
+              .join('')
+      }</div><button class="btn ghost" type="button" data-pk="cancel">Annuler</button><button class="btn primary" type="button" data-pk="ok" title="Ctrl + Entrée"${error ? ' disabled' : ''}>${
+        error ? 'Poser' : `Poser ${gPlural(combos.length, 'combo')}`
+      }</button>`;
+    },
+    done: () => {
+      const { combos, error } = mix();
+      if (error) return;
+      const old = b.sets;
+      const same =
+        combos.length === old.length &&
+        combos.every((pieces, i) => gSetKey(pieces) === gSetKey(old[i].pieces));
+      if (!same) {
+        if (
+          old.length &&
+          !confirm(
+            `Remplacer ${gPlural(old.length, 'combo')} du build${b.name ? ` « ${b.name} »` : ''} par ${gPlural(combos.length, 'combo')} ?`,
+          )
+        )
+          return;
+        // Un combo déjà là garde son entrée, et le `$slug` que le disque cite.
+        b.sets = combos.map(
+          (pieces) =>
+            old.find((c) => gSetKey(c.pieces) === gSetKey(pieces)) ?? { preset: '', pieces },
+        );
+        gTouched(b);
+        gRedraw(b);
+      }
+      gPkClose();
+    },
+  });
+}
+
+/** Le picker d'un slot d'un build ; `i` : la pièce (armes, amulettes), -1 pour une de plus. */
+function gPickSlot(b, slot, i) {
+  if (slot === 'talismans') gOpenTalismans(b);
+  else if (slot === 'sets') gOpenSets(b);
+  else gOpenGear(b, slot, i);
+}
+
+$('g-pick').onclick = gOpenChar;
 
 /**
  * Le roster, les presets et les listes ; à côté, l'élément et la rareté de
- * chaque perso. `open` : le perso à ouvrir d'emblée (`#gear/<id>`).
+ * chaque perso. `open` : le perso à ouvrir d'emblée (`#gear/<id>`) ; `picker` :
+ * le picker à ouvrir sur lui (`#gear/<id>/picker/<slot>` — `char`, ou un slot
+ * de son premier build : `weapons`, `amulets`, `talismans`, `sets`).
  */
-async function loadGear(open) {
+async function loadGear(open, picker) {
   const [s, ranks] = await Promise.all([
     fetch('/api/gear-reco/state').then((r) => r.json()),
     fetch('/api/ranks')
@@ -962,11 +1243,13 @@ async function loadGear(open) {
   gMeta = new Map((ranks?.rows ?? []).map((r) => [r.id, { element: r.element, rarity: r.rarity }]));
   if (!gMeta.size)
     log(['Gear reco : éléments et raretés illisibles (/api/ranks), le picker s’en passe.'], false);
-  gFilters();
   gWho();
   gBar();
   $('g-pick').disabled = false;
   if (open && gear.roster.some((c) => c.id === open)) await gLoad(open);
+  if (picker === 'char') gOpenChar();
+  else if (gBuilds[0] && ['weapons', 'amulets', 'talismans', 'sets'].includes(picker))
+    gPickSlot(gBuilds[0], picker, gBuilds[0][picker]?.length ? 0 : -1);
 }
 
 $('g-add').onclick = () => {
@@ -1013,17 +1296,19 @@ $('g-save').onclick = async () => {
 
 sections.register('gear', {
   init: () => {
-    // `#gear/<id>` ouvre l'onglet sur ce perso (un lien, le banc de captures).
-    // `lib.js` ne connaît que `#gear` : c'est le clic sur l'onglet qui l'ouvre.
-    const open = /^#gear\/(.+)$/.exec(location.hash)?.[1];
+    // `#gear/<id>` ouvre l'onglet sur ce perso (un lien, le banc de captures),
+    // `#gear/<id>/picker/<slot>` y ouvre en plus un picker (le banc ne clique
+    // pas). `lib.js` ne connaît que `#gear` : c'est le clic sur l'onglet qui
+    // l'ouvre.
+    const [, open, picker] = /^#gear\/([^/]+)(?:\/picker\/([a-z]+))?$/.exec(location.hash) ?? [];
     if (open) document.querySelector('#tabs [data-tab="gear"]')?.click();
     // Les icônes sont sous `imgBase`, connu avec `/api/state` : reposées alors.
     stateLoaded.then(() => {
-      gFilters();
       gWho();
-      gBar();
+      if (gChar) gRender();
+      else gBar();
     });
-    return loadGear(open && decodeURIComponent(open)).catch((e) =>
+    return loadGear(open && decodeURIComponent(open), picker).catch((e) =>
       log([`Gear reco illisible : ${e}`], false),
     );
   },
