@@ -7,6 +7,25 @@
 
 ## 2026-10-07
 
+- **Relecture B32** (Fable, 07/10) : `f9cc597d` validé — plus aucun lot
+  ouvert. Périmètre attendu (`tabs/gear.{html,js,css}`, `STYLE.md`, DONE,
+  TODO), entrée DONE complète, six écarts et choix acceptés (pas de
+  confirmation à « Supprimer » puisqu'il n'y en avait pas, un build déplacé
+  sans point, le rouge l'emporte, flèches qui bouclent, l'onglet reste après
+  « Enregistrer », `aria-controls` sur le panneau unique) ; `pnpm
+typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (198 fichiers, 2 821
+  tests). Contrôle indépendant sur un quick isolé (:4836, aucun
+  enregistrement ; captures dans le scratchpad `b32-shots/`, 1440 × 1100) :
+  `#gear/2000055` — rangée Speed | High Crit | Penetration sous la savebar,
+  filet accent sous Speed, UNE carte, plus de badge « 1 / 3 » ;
+  `#gear/2000055/build/2` — filet sous High Crit, carte du build 2 (Critical
+  Strike Set, `$chd4`) ; `#gear/2000055/build/3/picker/weapons` — filet sous
+  Penetration, carte du build 3 (`$p4`) et le picker d'armes ouvert sur SES
+  armes (Surefire cochée). Question laissée par l'agent, au TODO : faut-il
+  une confirmation à « Supprimer » maintenant que la carte supprimée n'est
+  plus sous les yeux des autres (« Annuler » rend le build) — à Sevih. Pour
+  Sevih : la ligne du TODO (clavier, points d'état, un « Enregistrer » réel
+  depuis le 2e onglet).
 - **`pnpm quick`, Gear reco : les builds d'un perso en onglets, un seul
   montré à la fois, comme sur la fiche perso** (lot B32, troisième retour de
   Sevih du 07/10 : « plutôt que de mettre les différents builds les uns en
