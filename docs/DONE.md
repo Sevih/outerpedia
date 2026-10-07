@@ -7,6 +7,128 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, l'onglet « Rangs » à la charte : visages, vraies icônes du
+  jeu, rangs en image, lignes par transcendance dans la grille** (lot B28, sur
+  la planche « Rangs » de la maquette de Sevih et `scripts/quick/ui/STYLE.md`).
+  Le quoi. `tabs/ranks.html` est refait avec les composants de `quick.css` :
+  `.head` (le titre et sa phrase, inchangée), les six filtres dans une
+  `.card.pad` en `.form` sur UNE ligne (nom en `w-search`, rang de, rang, rôle,
+  « par transcendance », « modifiés », chaque `label` relié à son champ), la
+  `.savebar` collante (`.btn.ghost` / `.btn.primary`), la table dans une
+  `.card` > `.scroll`, un `.empty` (« Aucun perso ne passe les filtres. ») et
+  un `card-foot` : les lignes montrées, et l'échelle des rangs en icônes, de E
+  à S (lue de `tiers`, pas écrite en dur). Onze colonnes : le bouton de
+  dépliage, le perso, élément, classe, SOUS-CLASSE (nouvelle), rareté, rôle,
+  PvE, PvP, EE base, EE +10. Le perso porte son icône de visage
+  (`FI_<id>.webp`, 36 px, carrée, `loading="lazy"`, décorative) devant son nom
+  et la pastille de ses paliers (`.badge.edit`, même texte qu'avant). Élément,
+  classe et sous-classe sont les icônes du jeu en 20 px
+  (`IG_Turn_Element_<Cap>`, `IG_Turn_Class_<Cap>`, `CM_Sub_Class_<Cap>`) avec
+  `alt` et `title`, suivies du nom en texte : l'`alt` porte le nom, le texte
+  est donc `aria-hidden` (lu une fois), et il disparaît sous 1280 px où
+  l'icône reste seule. La rareté est l'étoile du jeu (`CM_icon_star_y`,
+  14 px) répétée, le groupe étiqueté « 3 étoiles ». Le bouton de dépliage est
+  un vrai bouton de divulgation : chevron SVG blanc sur `surface-overlay`,
+  bord `line-subtle`, qui tourne d'un quart de tour, `aria-expanded`, et un
+  `aria-label` qui nomme le perso ; pas de rouge au survol (il ne détruit
+  rien). Les lignes par transcendance ne sont plus une table dans une cellule
+  mais des lignes de la MÊME grille, sous le perso : une par palier plein
+  (l'étoile et le chiffre, alignés sur le nom), le rôle du palier sous « Rôle »
+  et son rang PvE sous « PvE », sur fond `surface-sunken`, puis la ligne qui
+  dit comment un palier vide hérite (texte inchangé, clés héritées comprises).
+  Le rang, la décision demandée : la cellule GARDE un `select` natif, et
+  l'icône du rang courant (`IG_Event_Rank_<rang>`, 22 px) est posée DANS son
+  cadre, à gauche de la lettre (`pointer-events: none`, le clic la traverse) —
+  le rendu de la maquette (icône, lettre, chevron dans un même cadre) sans
+  menu custom. Pourquoi pas la liste d'icônes : il aurait fallu réécrire le
+  clavier et l'ARIA d'une listbox pour 500 cellules, et `r-list.onchange`, que
+  le lot demande de ne pas toucher, repose sur un vrai `select` ; le natif
+  donne Tab, flèches et première lettre sans une ligne. Le prix : le menu
+  OUVERT montre des lettres, pas des icônes. Sans rang (ou valeur hors
+  échelle) : pas d'icône, cadre en pointillés, « — » grisé. Une cellule
+  modifiée prend le bord et le fond `--accent` à 15 % plus un point en coin,
+  une cellule refusée le bord et un fond `--danger` (son `title` inchangé).
+  La savebar suit la maquette : « 129 / 129 persos » en gras, puis
+  `.badge.edit` « 2 modifications » (ou « aucune modification »), puis
+  `.badge.ko` « 1 refus » quand le dernier enregistrement en a écarté — le
+  compte disait « 2 cellules modifiées », c'est le seul texte changé, avec
+  l'état vide et le pied de carte, ajoutés. « Enregistrer » prend `busy` (le
+  sablier de la charte) pendant l'envoi.
+  `tabs/ranks.js` n'a bougé que là où le markup l'impose : les gabarits
+  (`mainRow`, `subRow`, `cell`), `refreshBar` (le compte en éléments, l'état
+  vide, le pied), le dépliage (plusieurs `tr[data-sub]` par perso,
+  `aria-expanded` au lieu de ▸ / ▾), l'icône qui suit le menu dans
+  `onchange`, `renderScale`, et un redessin si `/api/state` (qui attend R2,
+  donc arrive après les rangs) annonce une autre `imgBase` que celle du
+  premier dessin. `edits`, `shown`, le plan de changements, `POST
+/api/ranks`, le journal et les `id` (`r-q`, `r-col`, `r-rank`, `r-role`,
+  `r-trans`, `r-dirty`, `r-count`, `r-reset`, `r-save`, `r-list`) sont
+  inchangés ; ajoutés : `r-empty`, `r-shown`, `r-scale`. `server.ts`, la seule
+  retouche permise : `GET /api/ranks` ajoute `subClass` (du roster,
+  `getCharacterListItems`) à chaque ligne — `rankState` d'`actions.ts` n'est
+  pas touché. Un quick déjà lancé doit être relancé pour la servir ; sans
+  elle la colonne est vide, rien ne casse.
+  Le pourquoi : dernière vague de la refonte de l'UI de quick (décision du
+  07/10), l'onglet avait encore le markup d'avant la charte (`.row`,
+  `button.action`, texte « Fire / Striker / 3★ », ▸ en bouton par défaut).
+  Écarts à la maquette, voulus. Le filtre « Élément » (cinq icônes
+  cliquables) n'est pas fait : le lot liste six filtres et interdit tout
+  changement de comportement, c'en est un. Le résumé des changements dans la
+  savebar (« Beth : PvP D → B · … ») et le libellé « Enregistrer 2
+  changements » non plus : textes inchangés. La pastille du perso garde son
+  texte précis (« rang pve 3★ 4★ 5★ 6★ ») plutôt que « par transcendance ».
+  La ligne de palier porte le rôle ET le rang PvE (la maquette n'a que le
+  PvE) : les deux tables existent, elles tiennent dans la grille.
+  Manque à la charte, posé dans `tabs/ranks.css` et à remonter dans
+  `quick.css` / `STYLE.md` si B29 ou C6 en ont l'usage : le bouton de
+  divulgation (`.disclose`), l'icône du jeu avec son nom (`.lab` + `.ic`,
+  20 px), les étoiles (`.stars`), le `select` compact de cellule (30 px,
+  `.cell`), le rang avec son icône (`.rk` + `.rkico`), les états `dirty` /
+  `refused` d'un `select` et le point, les lignes `tr.sub`. Un piège de
+  `quick.css` contourné ici : `.savebar span { margin-right: auto }` touche
+  TOUS les `span` de la barre, badges compris (`#r-count *` l'annule). Vu,
+  hors périmètre : le bloc « héritage » rend encore `label.check` par-dessus
+  `.check` (7 px de marge au lieu de la hauteur de 34 px) — Rangs n'emploie
+  plus `.row`, `button.action` ni `button.ghost`, C6 peut retirer le bloc
+  sans lui ; une cellule refusée garde sa marque tant qu'aucun filtre ni
+  enregistrement ne redessine, et « Annuler » est grisé sans modification
+  (comportement d'avant, pas touché).
+  Vérification. Quick isolé (`DISCORD_BOT_TOKEN= DEV_PEERS= QUICK_PORT=4799
+pnpm quick --no-open`), `node scripts/quick/shot.mjs --port 4799 --tabs
+ranks` AVANT dans `/tmp/quick-shots/b28-avant/` (1440×1000) et
+  `b28-avant-1024/` (1024×768), APRÈS dans `b28-apres/` et `b28-apres-1024/`,
+  regardées : en 1440 tout tient sur une ligne par perso, icônes et rangs
+  nets ; en 1024 les onze colonnes tiennent SANS défilement horizontal (962 px
+  mesurés pour 962 disponibles) — la cellule du perso est la seule qui se
+  replie, la pastille passe sous le nom. Deux défauts vus et corrigés aux
+  captures : la table débordait de 115 px en 1024 (une piste `1fr`, puis une
+  pastille de 270 px insécable, donnaient à la colonne du perso sa largeur
+  MAXIMALE comme minimum — piste `auto` et pastille repliable) ; la colonne du
+  bouton prenait sa part de la place libre (`width: 1%`). Les états que le
+  banc ne joue pas ont été joués par un relais jetable du scratchpad (le banc
+  plus un scénario injecté, lecture seule : les `POST` n'y partent pas) et
+  photographiés en 1440 et 1024 dans `/tmp/quick-shots/b28-etats/` :
+  `states-*` (dépliage, quatre cellules modifiées dont un rang vidé et un
+  palier, un refus simulé), `filter-*` (8 / 129, lignes de palier), `empty-*`
+  (état vide, pied et échelle), `busy-*` (savebar et tiroir pendant l'envoi).
+  Les sept familles d'images répondent 200 sur `img.outerpedia.com`, les 129
+  lignes ont une sous-classe. Aucun enregistrement depuis la page. `pnpm
+typecheck` → sa seule ligne est l'écho de la commande (`tsc --noEmit && tsc
+--noEmit -p datagen/tsconfig.json && tsc --noEmit -p
+scripts/tsconfig.json`), code 0 ; `pnpm lint` → `$ eslint`, code 0 ; `pnpm
+test` → `Test Files  197 passed (197)`, `Tests  2773 passed (2773)`.
+  À contrôler à l'écran par Sevih (le banc ne le joue pas en vrai) : une
+  cellule modifiée (fond bleu, point ; la remettre à sa valeur d'origine
+  retire la marque et le compte) ; un refus réel (bord rouge, `title`, badge
+  « 1 refus », la cellule montre la valeur du disque) ; la savebar pendant un
+  enregistrement (boutons grisés, sablier, collée en haut au défilement) ; le
+  dépliage (le chevron tourne, les lignes de palier arrivent sous le perso,
+  le repli les retire, un filtre les garde ouvertes) ; le clavier (Tab passe
+  du bouton aux menus, flèches et première lettre changent le rang, l'icône
+  suit) ; le survol du bouton de dépliage ; les visages qui se chargent au
+  défilement ; le menu ouvert d'un rang (lettres seules, c'est le prix du
+  natif).
+
 - **Relecture F16** (Fable, 07/10) : `184d7530` validé. Périmètre attendu
   (`scripts/quick/ui/` entier, `STYLE.md`, trois lignes de `server.ts`, le
   banc et son test, DONE, TODO), entrée DONE complète ; `pnpm typecheck`,

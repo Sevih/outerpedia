@@ -1,58 +1,72 @@
 <section id="tab-ranks" hidden>
-  <h2>Rangs et rôles</h2>
-  <p class="hint">
-    Rien ne s'écrit à la sélection : les cellules modifiées sont surlignées, « Enregistrer » envoie
-    le lot, committe et pousse. Lus au rendu : les quatre tier lists ne changent qu'une fois le
-    build de la CI déployé.
-  </p>
-  <div class="row">
-    <div><label>Nom</label><input id="r-q" placeholder="Chercher un perso…" /></div>
-    <div style="flex: 0 0 110px">
-      <label>Rang de</label>
-      <select id="r-col">
-        <option value="rank">PvE</option>
-        <option value="rankPvp">PvP</option>
-        <option value="eeRank">EE base</option>
-        <option value="eeRank10">EE +10</option>
-      </select>
-    </div>
-    <div style="flex: 0 0 110px">
-      <label>Rang</label
-      ><select id="r-rank"></select>
-    </div>
-    <div style="flex: 0 0 120px">
-      <label>Rôle</label
-      ><select id="r-role"></select>
-    </div>
-    <div style="flex: 0 0 auto">
+  <div class="head">
+    <h2>Rangs et rôles</h2>
+    <p class="hint">
+      Rien ne s'écrit à la sélection : les cellules modifiées sont surlignées, « Enregistrer »
+      envoie le lot, committe et pousse. Lus au rendu : les quatre tier lists ne changent qu'une
+      fois le build de la CI déployé.
+    </p>
+  </div>
+
+  <div class="card pad" aria-label="Filtres">
+    <div class="form">
+      <div class="field">
+        <label for="r-q">Nom</label>
+        <input id="r-q" class="w-search" placeholder="Chercher un perso…" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="r-col">Rang de</label>
+        <select id="r-col">
+          <option value="rank">PvE</option>
+          <option value="rankPvp">PvP</option>
+          <option value="eeRank">EE base</option>
+          <option value="eeRank10">EE +10</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="r-rank">Rang</label>
+        <select id="r-rank"></select>
+      </div>
+      <div class="field">
+        <label for="r-role">Rôle</label>
+        <select id="r-role"></select>
+      </div>
       <label class="check"><input type="checkbox" id="r-trans" /> par transcendance</label>
-    </div>
-    <div style="flex: 0 0 auto">
       <label class="check"><input type="checkbox" id="r-dirty" /> modifiés</label>
     </div>
   </div>
-  <div class="savebar">
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
     <span id="r-count"></span>
-    <button class="ghost" id="r-reset" disabled>Annuler</button>
-    <button class="action" id="r-save" disabled>Enregistrer</button>
+    <button class="btn ghost" id="r-reset" disabled>Annuler</button>
+    <button class="btn primary" id="r-save" disabled>Enregistrer</button>
   </div>
-  <div class="scroll">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Perso</th>
-          <th>Élément</th>
-          <th>Classe</th>
-          <th>Rareté</th>
-          <th>Rôle</th>
-          <th>PvE</th>
-          <th>PvP</th>
-          <th>EE base</th>
-          <th>EE +10</th>
-        </tr>
-      </thead>
-      <tbody id="r-list"></tbody>
-    </table>
+
+  <div class="card" aria-label="Persos">
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="fold"><span class="sr">Par transcendance</span></th>
+            <th>Perso</th>
+            <th>Élément</th>
+            <th>Classe</th>
+            <th>Sous-classe</th>
+            <th>Rareté</th>
+            <th>Rôle</th>
+            <th>PvE</th>
+            <th>PvP</th>
+            <th>EE base</th>
+            <th>EE +10</th>
+          </tr>
+        </thead>
+        <tbody id="r-list"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="r-empty" hidden>Aucun perso ne passe les filtres.</div>
+    <div class="card-foot">
+      <span id="r-shown"></span>
+      <span class="scale" id="r-scale"></span>
+    </div>
   </div>
 </section>

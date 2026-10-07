@@ -76,6 +76,7 @@ import { COMIC_LANGS } from '@datagen/generators/comics';
 import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
+import { getCharacterListItems } from '@/lib/data/characters';
 import type { PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
 
@@ -370,7 +371,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'GET' && url.pathname === '/api/ranks') {
     // À part de `/api/state` : celui-ci attend R2 (les codes promo), et l'onglet
     // se recharge après chaque enregistrement — le disque fait foi.
-    json(res, rankState());
+    // La sous-classe du roster part avec chaque ligne : la table en montre l'icône.
+    const ranks = rankState();
+    const subClass = new Map(getCharacterListItems().map((c) => [c.id, c.subClass ?? '']));
+    json(res, {
+      ...ranks,
+      rows: ranks.rows.map((row) => ({ ...row, subClass: subClass.get(row.id) ?? '' })),
+    });
     return;
   }
 

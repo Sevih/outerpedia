@@ -1,60 +1,247 @@
-/* Onglet « Rangs » — bloc déplacé de `quick.css` tel quel (jetons renommés),
-   en attendant le lot B28 qui le met à la charte (cf. `STYLE.md`). */
-/* Le panneau d'avant la charte : l'onglet garde son cadre tant que son lot
-   (B28 Rangs, B29 Gear reco, C6 Discord) ne l'a pas passé en `.card`. */
-#tab-ranks:not([hidden]) {
-  display: block;
-  background: var(--surface-raised);
-  border: 1px solid var(--line-subtle);
-  border-radius: 10px;
-  padding: 18px;
+/* Onglet « Rangs » : la table des persos (visage, icônes du jeu, rangs en
+   image), ses cellules éditables et les lignes par transcendance. Le reste —
+   carte, `.form`, `.savebar`, `.btn`, `.badge` — vient de `quick.css`. */
+
+/* Le compte de la savebar : « n / n persos », puis ses badges. `.savebar span`
+   pousse à gauche chaque `span` ; ici seul le compte entier l'est. */
+#tab-ranks #r-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-#tab-ranks h2 {
-  margin-bottom: 4px;
-  font-size: 14px;
+#tab-ranks #r-count * {
+  margin-right: 0;
 }
-#tab-ranks > p.hint {
-  margin-bottom: 16px;
-  font-size: 12px;
+#tab-ranks #r-count strong {
+  color: var(--content);
+  font-size: 13px;
 }
+
 /* Les cellules ne se replient pas : le tableau défile dans `.scroll`. */
+#tab-ranks th,
 #tab-ranks td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#tab-ranks td {
+  padding-top: 6px;
+  padding-bottom: 6px;
   white-space: nowrap;
 }
-#tab-ranks td.cap {
-  text-transform: capitalize;
+#tab-ranks th:first-child,
+#tab-ranks td:first-child {
+  padding-left: 12px;
 }
-#tab-ranks td select {
-  height: 30px;
-  padding: 0 24px 0 6px;
+/* 1 % : la colonne du bouton reste à sa largeur, la place libre va aux autres. */
+#tab-ranks th.fold,
+#tab-ranks td.fold {
+  width: 1%;
+  padding-right: 0;
 }
-#tab-ranks select.dirty {
-  border-color: var(--warn);
-  background: color-mix(in srgb, var(--warn) 18%, transparent);
-}
-#tab-ranks select.refused {
-  border-color: var(--danger);
-}
-#tab-ranks .badge {
-  margin-left: 6px;
-  color: var(--accent);
-  border-color: var(--line-subtle);
-}
-#tab-ranks .badge:empty {
-  display: none;
-}
-#tab-ranks tr.sub td {
+
+/* Le bouton de divulgation des lignes par transcendance : un chevron blanc
+   qui tourne, jamais le rouge au survol d'un `.btn.icon` (il ne détruit rien). */
+#tab-ranks .disclose,
+#tab-ranks .disclose:hover {
   background: var(--surface-overlay);
+  border-color: var(--line-subtle);
+  color: var(--content);
+}
+#tab-ranks .disclose:hover {
+  border-color: var(--line-strong);
+}
+#tab-ranks .disclose svg {
+  transition: transform 0.15s;
+}
+#tab-ranks .disclose[aria-expanded='true'] svg {
+  transform: rotate(90deg);
+}
+
+/* Le perso : son visage (carré, 36 px), son nom, la pastille de ses paliers.
+   Seule cellule qui se replie : quand la fenêtre manque de place, la pastille
+   passe sous le nom et un nom long sur deux lignes, plutôt que de pousser les
+   rangs hors de l'écran. */
+#tab-ranks td.perso {
   white-space: normal;
 }
-#tab-ranks tr.sub th {
-  border: none;
-  padding: 2px 8px;
+#tab-ranks .who {
+  display: grid;
+  grid-template-columns: 36px auto;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
 }
-#tab-ranks tr.sub table {
-  width: auto;
+/* La pastille des paliers se replie aussi (rang ET rôle par palier : 270 px). */
+#tab-ranks .who .badge {
+  height: auto;
+  min-height: 20px;
+  margin-left: 4px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-radius: 10px;
+  vertical-align: middle;
+  white-space: normal;
 }
-#tab-ranks tr.sub table td {
-  border: none;
-  padding: 3px 8px;
+#tab-ranks .face {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  object-fit: contain;
+}
+/* Une icône du jeu et son nom (élément, classe, sous-classe, palier). */
+#tab-ranks .lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  vertical-align: middle;
+}
+#tab-ranks .ic {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  object-fit: contain;
+}
+#tab-ranks .stars {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+#tab-ranks .star {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  object-fit: contain;
+}
+
+/* Une cellule éditable : le `select` de la charte en petit (30 px). Un rang
+   porte en plus son icône, posée DANS le cadre du menu — le clic la traverse. */
+#tab-ranks .cell {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+#tab-ranks .cell select {
+  height: 30px;
+  min-width: 62px;
+  padding: 0 26px 0 9px;
+  font-size: 13px;
+  background-position: right 8px center;
+}
+#tab-ranks .rk select {
+  min-width: 64px;
+  padding-left: 32px;
+  padding-right: 22px;
+  background-position: right 6px center;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+#tab-ranks .rkico {
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  pointer-events: none;
+}
+/* Sans rang (ou valeur hors échelle) : pas d'icône, un cadre en pointillés. */
+#tab-ranks .rkico[hidden] + select {
+  padding-left: 9px;
+  border-style: dashed;
+  color: var(--placeholder);
+}
+#tab-ranks .cell option {
+  color: var(--content);
+  font-weight: 400;
+}
+/* Modifiée : bord et fond accent (15 %), plus un point ; refusée : danger. */
+#tab-ranks .cell select.dirty {
+  border-style: solid;
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 15%, var(--surface-base));
+  color: var(--content);
+}
+#tab-ranks .cell select.refused {
+  border-style: solid;
+  border-color: var(--danger);
+  background-color: color-mix(in srgb, var(--danger) 12%, var(--surface-base));
+  color: var(--content);
+}
+#tab-ranks .pt {
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--surface-raised);
+}
+#tab-ranks select.dirty + .pt {
+  display: block;
+}
+
+/* Les lignes par transcendance : sous le perso, en retrait (le palier
+   s'aligne sur le nom), dans la même grille. */
+#tab-ranks tr.sub td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background: var(--surface-sunken);
+  color: var(--content-muted);
+}
+#tab-ranks tr.sub td.step {
+  padding-left: 56px;
+  font-weight: 600;
+}
+#tab-ranks tr.sub .lab {
+  gap: 4px;
+}
+#tab-ranks tr.sub .pt {
+  box-shadow: 0 0 0 2px var(--surface-sunken);
+}
+#tab-ranks tr.sub.note td {
+  padding-left: 56px;
+  padding-bottom: 8px;
+  white-space: normal;
+}
+#tab-ranks tr.sub.note .hint {
+  font-size: 12px;
+}
+
+/* Le pied de la carte : les lignes montrées, l'échelle des rangs en icônes. */
+#tab-ranks .card-foot {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: var(--content-muted);
+  font-size: 12.5px;
+}
+#tab-ranks .scale {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+#tab-ranks .scale img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* Une fenêtre de portable : les icônes d'élément, de classe et de sous-classe
+   restent seules (leur nom est dans `title`), les colonnes se resserrent. */
+@media (max-width: 1280px) {
+  #tab-ranks .lab > span {
+    display: none;
+  }
+  #tab-ranks th,
+  #tab-ranks td {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  #tab-ranks tr.sub td.step,
+  #tab-ranks tr.sub.note td {
+    padding-left: 52px;
+  }
 }
