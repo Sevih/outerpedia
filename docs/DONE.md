@@ -7,6 +7,22 @@
 
 ## 2026-10-07
 
+- **Relecture B30** (Fable, 07/10) : `0bd6a7e9` validé. Périmètre attendu
+  (`actions.ts` et ses tests, `server.ts`, `ui/comics-group.mjs`, `lib.js`,
+  `quick.css`, `tabs/comics.*`, DONE, TODO), entrée DONE complète ;
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (197 fichiers,
+  2 773 tests). Contrôle indépendant : `comics-group.mjs` appelé par `node` —
+  `_KR` et `_kr` → KR, `comic01.jpg`, `yami_EN_.png`, `_FR` → sans langue ;
+  cinq fichiers → trois lignes (`comic08` à trois cases, `comic07` EN seule,
+  `comic01` en langue par défaut) ; `/api/state` rend `maxUpload` 64 Mo et
+  les trois langues ; capture du banc sur l'onglet à vide, propre. Bon choix
+  non demandé : la règle de regroupement dans UN module lu par la page et par
+  le serveur, comme `discord-editor.mjs`, au lieu d'une copie. Reste à
+  Sevih : l'envoi réel d'une BD en trois langues (attendu : trois « déposé »,
+  UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN
+(EN, JP, KR)`), gardé au TODO. Hors périmètre repéré par l'agent, noté :
+  `post()` de `lib.js` ne rattrape pas une connexion coupée ; les noms en
+  hangeul du pool restent refusés par `safeName`.
 - **`pnpm quick`, 4-comics : plusieurs BD et plusieurs langues en UN envoi et
   UN commit** (lot B30 — le seul de la refonte de quick qui change un
   comportement). Le pourquoi : l'onglet n'acceptait qu'une langue par envoi,
