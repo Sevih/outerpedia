@@ -12,15 +12,7 @@
     ],
     "second": [
       {
-        "name": "Demiurge Astei",
-        "stars": 3
-      },
-      {
         "name": "Demiurge Saeran",
-        "stars": 3
-      },
-      {
-        "name": "Demiurge Stella",
         "stars": 3
       },
       {
@@ -29,10 +21,6 @@
       },
       {
         "name": "Gnosis Domine",
-        "stars": 3
-      },
-      {
-        "name": "Gnosis Viella",
         "stars": 3
       },
       {
@@ -51,6 +39,18 @@
       },
       {
         "name": "Monad Iota",
+        "stars": 3
+      },
+      {
+        "name": "Gnosis Viella",
+        "stars": 3
+      },
+      {
+        "name": "Demiurge Astei",
+        "stars": 3
+      },
+      {
+        "name": "Demiurge Stella",
         "stars": 3
       }
     ],

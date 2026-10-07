@@ -2,35 +2,35 @@
   "tactical": [
     {
       "en": "Boss gains {B/BT_BARRIER} on S1 - use {D/BT_REMOVE_BUFF} to remove it.",
-      "jp": "ボスはS1で{B/BT_BARRIER}を獲得 - {D/BT_REMOVE_BUFF}で解除。",
-      "kr": "보스는 S1에서 {B/BT_BARRIER} 획득 - {D/BT_REMOVE_BUFF}로 해제.",
-      "zh": "首领在S1获得{B/BT_BARRIER} - 使用{D/BT_REMOVE_BUFF}解除。",
-      "fr": "Le boss gagne {B/BT_BARRIER} sur son S1 — utilisez {D/BT_REMOVE_BUFF} pour le retirer.",
-      "es": "El jefe gana {B/BT_BARRIER} con S1 - usa {D/BT_REMOVE_BUFF} para eliminarlo."
+      "jp": "S1でボスが「{B/BT_BARRIER}」を獲得します。これを解除するには「{D/BT_REMOVE_BUFF}」を使用してください。",
+      "kr": "S1에서 보스가 ‘{B/BT_BARRIER}’ 효과를 얻습니다. ‘{D/BT_REMOVE_BUFF}’을 사용하여 이 효과를 제거하세요.",
+      "zh": "首季（S1）中，BOSS获得“{B/BT_BARRIER}”效果——请使用{D/BT_REMOVE_BUFF}将其移除。",
+      "fr": "Le boss acquiert l'{B/BT_BARRIER}e sur S1 : utilisez « {D/BT_REMOVE_BUFF} » pour la supprimer.",
+      "es": "El jefe adquiere la habilidad «{B/BT_BARRIER}» en la temporada 1; utiliza «{D/BT_REMOVE_BUFF}» para eliminarla."
     },
     {
-      "en": "{E/Dark} units have 50% reduced action point cost.",
-      "jp": "{E/Dark}ユニットはAP消費が50%減少。",
-      "kr": "{E/Dark} 유닛은 AP 소모가 50% 감소.",
-      "zh": "{E/Dark}单位AP消耗降低50%。",
-      "fr": "Les unités {E/Dark} ont -50% sur le coût en action points.",
-      "es": "Las unidades {E/Dark} tienen un coste de puntos de acción reducido en un 50%."
+      "en": "Non {E/Dark} units have 50% increase action point cost.",
+      "jp": "「{E/Dark}」を持たないユニットのアクションポイント消費量は50％増加する。",
+      "kr": "{E/Dark}가 아닌 유닛의 행동 포인트 소모량이 50% 증가합니다.",
+      "zh": "非“{E/Dark}”单位所需的行动点数增加50%。",
+      "fr": "Les unités non «{E/Dark} » voient le coût de leurs points d'action augmenter de 50 %.",
+      "es": "Las unidades que no son de la clase «{E/Dark}» tienen un coste de puntos de acción un 50 % mayor."
     },
     {
       "en": "Single target attacks deal 70% reduced damage and restore 3 WG to the boss.",
-      "jp": "単体攻撃は70%のダメージ減少、ボスのWGを3回復。",
-      "kr": "단일 공격은 70% 피해 감소, 보스 WG 3 회복.",
-      "zh": "单体攻击伤害降低70%，恢复首领WG 3点。",
-      "fr": "Les attaques monocibles infligent -70% de dégâts et restaurent 3 WG au boss.",
-      "es": "Los ataques de objetivo único infligen un 70% menos de daño y restauran 3 WG al jefe."
+      "jp": "単体攻撃によるダメージは70％軽減され、ボスに3 WGが回復する。",
+      "kr": "단일 대상 공격은 입히는 피해가 70% 감소하며, 보스에게 WG 3을 회복시킵니다.",
+      "zh": "单体攻击造成的伤害降低70%，并为首领恢复3点WG。",
+      "fr": "Les attaques visant une seule cible infligent 70 % de dégâts en moins et restaurent 3 WG au boss.",
+      "es": "Los ataques contra un solo objetivo infligen un 70 % menos de daño y restauran 3 WG al jefe."
     },
     {
       "en": "Non-attack skills deal 10,000 fixed damage to the boss twice.",
-      "jp": "非攻撃スキルはボスに10,000の固定ダメージを2回与える。",
-      "kr": "비공격 스킬은 보스에게 10,000 고정 피해를 2회 부여.",
-      "zh": "非攻击技能对首领造成2次10,000固定伤害。",
-      "fr": "Les skills non-offensifs infligent deux fois 10 000 dégâts fixes au boss.",
-      "es": "Los skills que no son de ataque infligen 10,000 de daño fijo al jefe dos veces."
+      "jp": "非攻撃スキルは、ボスに10,000の固定ダメージを2回与える。",
+      "kr": "비공격 스킬은 보스에게 10,000의 고정 피해를 두 번 입힙니다.",
+      "zh": "非攻击技能对BOSS造成两次10,000点固定伤害。",
+      "fr": "Les compétences non offensives infligent deux fois 10 000 points de dégâts fixes au boss.",
+      "es": "Las habilidades que no son de ataque infligen 10 000 de daño fijo al jefe en dos ocasiones."
     }
   ]
 }

@@ -371,6 +371,37 @@
           "pvp": "4"
         }
       }
+    },
+    {
+      "name": "Demiurge Lambda",
+      "review": {
+        "en": "A damage dealer who excels in long fights. She has element advantage against both {E/Dark} and {E/Light} enemies. {SK/Demiurge Lambda|S1} and taking AoE attacks ramp up her damage, damage reduction and speed through {B/BT_STACK}. 4-star gives her a very strong {B/BARRIER_IR}, but be aware it will still be overwritten when applying a new {B/BARRIER}. 5 & 6-star increase her damage output a lot and shorten the time it takes for her to heat up.",
+        "jp": "長期戦に強みを持つダメージディーラー。 彼女は「{E/Dark}」および「{E/Light}」の敵に対して属性優位を持つ。「{SK/Demiurge Lambda|S1}」や範囲攻撃を受けることでダメージが増加し、「{B/BT_STACK}」を通じてダメージ軽減率と攻撃速度が向上する。4スターでは非常に強力な「{B/BARRIER_IR}」が発動するが、新しい「{B/BARRIER}」を適用すると上書きされてしまう点に注意が必要だ。5スターおよび6スターでは、ダメージ出力が大幅に向上し、戦闘開始時の準備時間が短縮される。",
+        "kr": "장시간 전투에서 뛰어난 활약을 펼치는 딜러입니다. 그녀는 불({E/Dark})과 얼음({E/Light}) 속성 적 모두에게 속성 이점을 가집니다. 물({SK/Demiurge Lambda|S1}) 속성과 광역(AoE) 공격을 받을 때, '{B/BT_STACK}'을 통해 피해량, 피해 감소율, 이동 속도가 상승합니다. 4성 등급에서는 매우 강력한 '{B/BARRIER_IR}' 효과를 얻지만, 새로운 '{B/BARRIER}'을 적용할 경우 이 효과가 덮어쓰어질 수 있으니 주의해야 합니다. 5성 및 6성 등급에서는 피해량이 크게 증가하고, 전투 준비 완료까지 걸리는 시간이 단축됩니다.",
+        "zh": "一位擅长持久战的输出型角色。 她对{E/Dark}和{E/Light}属性的敌人均具有元素优势。{SK/Demiurge Lambda|S1}以及承受AoE攻击会提升她的伤害，而{B/BT_STACK}则能增强她的减伤效果并提升移动速度。4星时她将获得极强的{B/BARRIER_IR}，但需注意，当施加新的{B/BARRIER}时，该效果仍会被覆盖。5星和6星将大幅提升她的伤害输出，并缩短她的热身时间。",
+        "fr": "Une combattante qui excelle dans les combats de longue haleine. Elle bénéficie d’un avantage élémentaire face aux ennemis de type «{E/Dark} » et «{E/Light}». L’effet «{SK/Demiurge Lambda|S1}» et les attaques de zone (AoE) augmentent ses dégâts, sa réduction des dégâts et sa vitesse grâce à l’effet «{B/BT_STACK}». Le niveau 4 étoiles lui confère un effet «{B/BARRIER_IR}» très puissant, mais attention : celui-ci sera tout de même écrasé lors de l’application d’un nouvel effet «{B/BARRIER}». Les niveaux 5 et 6 étoiles augmentent considérablement ses dégâts et réduisent le temps nécessaire à sa mise en condition.",
+        "es": "Una luchadora especializada en infligir daño que destaca en combates prolongados. Tiene ventaja elemental frente a enemigos tanto de tipo «{E/Dark}» como «{E/Light}». «{SK/Demiurge Lambda|S1}» y recibir ataques de área de efecto (AoE) aumentan su daño, su reducción de daño y su velocidad gracias a «{B/BT_STACK}». El nivel de 4 estrellas le otorga un «{B/BARRIER_IR}» muy potente, pero ten en cuenta que seguirá siendo sobrescrito al aplicar un nuevo «{B/BARRIER}». Los niveles de 5 y 6 estrellas aumentan considerablemente su producción de daño y acortan el tiempo que tarda en entrar en calor."
+      },
+      "recommendedPve": "Any",
+      "recommendedPvp": "4 to 6",
+      "impact": {
+        "3": {
+          "pve": "3",
+          "pvp": "2"
+        },
+        "4": {
+          "pve": "3",
+          "pvp": "4"
+        },
+        "5": {
+          "pve": "4",
+          "pvp": "4"
+        },
+        "6": {
+          "pve": "4",
+          "pvp": "4"
+        }
+      }
     }
   ],
   "limited": [

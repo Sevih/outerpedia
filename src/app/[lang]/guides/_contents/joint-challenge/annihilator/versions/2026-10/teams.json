@@ -7,10 +7,10 @@
   ],
   "note": {
     "en": "Your {D/BT_REMOVE_BUFF} unit should have 240 speed (not over) to play before your DPS and remove the {B/BT_BARRIER}. Remember to count {P/Liselotte}'s transcend speed bonus (+5 at 4★, +10 at 6★).",
-    "jp": "{D/BT_REMOVE_BUFF}持ちは速度240（超えないように）でDPSより先に行動し、{B/BT_BARRIER}を解除。{P/Liselotte}の超越速度ボーナス（4★で+5、6★で+10）を忘れずに。",
-    "kr": "{D/BT_REMOVE_BUFF} 유닛은 속도 240(초과 금지)으로 DPS보다 먼저 행동하여 {B/BT_BARRIER}를 해제해야 합니다. {P/Liselotte}의 초월 속도 보너스(4★에서 +5, 6★에서 +10)를 기억하세요.",
-    "zh": "{D/BT_REMOVE_BUFF}角色速度应为240（不要超过），在DPS之前行动并解除{B/BT_BARRIER}。记得计算{P/Liselotte}的超越速度加成（4★+5，6★+10）。",
-    "fr": "Votre unité {D/BT_REMOVE_BUFF} doit avoir 240 de speed (pas plus) pour jouer avant votre DPS et retirer le {B/BT_BARRIER}. Pensez à compter le bonus de speed de transcend de {P/Liselotte} (+5 à 4★, +10 à 6★).",
-    "es": "Tu unidad {D/BT_REMOVE_BUFF} debe tener 240 de velocidad (no más) para jugar antes que tu DPS y eliminar el {B/BT_BARRIER}. Recuerda contar el bono de velocidad de trascendencia de {P/Liselotte} (+5 a 4★, +10 a 6★)."
+    "jp": "{D/BT_REMOVE_BUFF}ユニットは、DPSを先回りする前に戦闘を開始し、{B/BT_BARRIER}を解除するために、スピードが240（それ以上ではない）である必要があります。{P/Liselotte}の超越スピードボーナス（4★で+5、6★で+10）も忘れずに計算に入れてください。",
+    "kr": "{D/BT_REMOVE_BUFF} 유닛은 DPS를 발동하고 ‘{B/BT_BARRIER}’ 효과를 제거하기 전에 240의 속도(이를 초과하지 않아야 함)를 가져야 합니다. ‘{P/Liselotte}’의 초월 속도 보너스(4★ 시 +5, 6★ 시 +10)를 반드시 계산에 포함해야 합니다.",
+    "zh": "你的{D/BT_REMOVE_BUFF}单位在发动DPS并移除{B/BT_BARRIER}之前，速度应达到240（不可超过）。请记得计算{P/Liselotte}的超脱速度加成（4★时+5，6★时+10）。",
+    "fr": "Votre unité « {D/BT_REMOVE_BUFF} » doit avoir une vitesse de 240 (pas plus) pour jouer avant votre DPS et supprimer l’effet « {B/BT_BARRIER} ». N’oubliez pas de prendre en compte le bonus de vitesse de transcendance d’{P/Liselotte} (+5 à 4★, +10 à 6★).",
+    "es": "Tu unidad «{D/BT_REMOVE_BUFF}» debe tener una velocidad de 240 (sin sobrepasar ese valor) para actuar antes que tu DPS y eliminar el «{B/BT_BARRIER}». Recuerda tener en cuenta la bonificación de velocidad de «{P/Liselotte}» (+5 a 4★, +10 a 6★)."
   }
 }

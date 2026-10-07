@@ -1,10 +1,10 @@
 {
   "intro": {
     "en": "Joint Challenge boss. The boss gains {B/BT_BARRIER} on S1 and requires {E/Dark} units for optimal action point efficiency. Single target attacks are heavily penalized with 70% damage reduction and WG recovery. Non-attack skills deal 20,000 fixed damage to the boss.",
-    "jp": "共同作戦ボス。ボスはS1で{B/BT_BARRIER}を獲得し、{E/Dark}ユニットはAP消費が最適化されます。単体攻撃は70%のダメージ減少とWG回復でペナルティを受けます。非攻撃スキルはボスに20,000の固定ダメージを与えます。",
-    "kr": "합동 챌린지 보스. 보스는 S1에서 {B/BT_BARRIER}를 획득하며, {E/Dark} 유닛은 AP 소모가 최적화됩니다. 단일 공격은 70% 피해 감소와 WG 회복으로 페널티를 받습니다. 비공격 스킬은 보스에게 20,000 고정 피해를 줍니다.",
-    "zh": "联合挑战首领。首领在S1获得{B/BT_BARRIER}，{E/Dark}单位的AP消耗最优化。单体攻击受到70%伤害降低和WG恢复的惩罚。非攻击技能对首领造成20,000固定伤害。",
-    "fr": "Boss de Joint Challenge. Le boss gagne {B/BT_BARRIER} sur son S1 et nécessite des unités {E/Dark} pour une efficacité optimale en action points. Les attaques monocibles sont lourdement pénalisées (-70% de dégâts et regen WG). Les skills non-offensifs infligent 20 000 dégâts fixes au boss.",
-    "es": "Jefe del Desafío Conjunto. El jefe gana {B/BT_BARRIER} con S1 y requiere unidades {E/Dark} para una eficiencia óptima de puntos de acción. Los ataques de objetivo único son fuertemente penalizados con 70% de reducción de daño y recuperación de WG. Los skills que no son de ataque infligen 20,000 de daño fijo al jefe."
+    "jp": "ジョイントチャレンジのボス。このボスはS1で「{B/BT_BARRIER}」を獲得し、アクションポイントの効率を最大化するには「{E/Dark}」ユニットが必要となる。単体攻撃は、ダメージが70％減少し、WGが回復するという大きなペナルティが課される。攻撃以外のスキルは、ボスに20,000の固定ダメージを与える。",
+    "kr": "합동 챌린지 보스. 이 보스는 S1에서 ‘{B/BT_BARRIER}’ 효과를 얻으며, 행동 포인트를 가장 효율적으로 사용하려면 ‘{E/Dark}’ 유닛이 필요합니다. 단일 대상 공격은 피해가 70% 감소하고 WG가 회복되는 등 큰 불이익을 받습니다. 공격이 아닌 스킬을 사용하면 보스에게 20,000의 고정 피해를 입힙니다.",
+    "zh": "联合挑战首领。该首领在S1阶段获得{B/BT_BARRIER}，且需要{E/Dark}单位才能实现行动点效率最大化。单体攻击将遭受70%的伤害减免和WG恢复的严厉惩罚。非攻击类技能会对首领造成20,000点固定伤害。",
+    "fr": "Boss du « Joint Challenge ». Le boss bénéficie d’{B/BT_BARRIER}e en S1 et nécessite des unités de type « {E/Dark} » pour une efficacité optimale en termes de points d’action. Les attaques ciblant une seule cible sont fortement pénalisées par une réduction des dégâts de 70 % et une récupération de WG. Les compétences non offensives infligent 20 000 points de dégâts fixes au boss.",
+    "es": "Jefe del Desafío Conjunto. El jefe obtiene «{B/BT_BARRIER}» en la fase S1 y requiere unidades «{E/Dark}» para una eficiencia óptima de los puntos de acción. Los ataques contra un solo objetivo se ven muy penalizados con una reducción del daño del 70 % y la recuperación de WG. Las habilidades que no son de ataque infligen 20 000 de daño fijo al jefe."
   }
 }
