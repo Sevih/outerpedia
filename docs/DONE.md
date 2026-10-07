@@ -7,6 +7,22 @@
 
 ## 2026-10-07
 
+- **Relecture C5** (Fable, 07/10) : `fdec73d0` validé. Périmètre attendu
+  (`scripts/quick/ui/`, `ui-serve.ts` et son test, `shot.mjs`, `server.ts`,
+  un bloc d'`eslint.config.mjs`, deux commentaires, DONE, TODO), entrée DONE
+  complète ; `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (197
+  fichiers, 2 760 tests). Contrôle indépendant : quick isolé sur :4798 — page
+  assemblée sans marqueur restant, `/ui/quick.css` en 200 `text/css`,
+  `/ui/../server.ts` en 404 ; `node scripts/quick/shot.mjs --port 4798 --tabs
+coupons,ranks,gear` rend trois captures ; celle de « Codes promo » est
+  identique AU PIXEL (`compare -metric AE` = 0) à la capture que Fable avait
+  prise sur l'ancien `ui.html` le matin, avec sa propre recette — le banc et
+  le découpage sont confirmés de l'extérieur. Le relais du banc est en
+  lecture seule (seuls les GET et les deux POST d'aperçu passent) : un agent
+  ne peut plus enregistrer par le banc, bon écart à la recette. Laissé par
+  l'agent et accepté : pas de `hashchange` (recharger pour changer de hash),
+  `.js` de `ui/` non typés (JSDoc onglet par onglet, plus tard). Suite :
+  B30, puis F16 sur la maquette validée.
 - **`pnpm quick` : la page découpée en un fichier par onglet, l'onglet dans
   l'URL, et un banc de captures** (lot C5, charpente de la refonte de l'UI
   demandée par Sevih le 07/10). Le quoi. `scripts/quick/ui.html` (4 045 lignes,
