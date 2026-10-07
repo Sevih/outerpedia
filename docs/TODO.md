@@ -43,6 +43,14 @@
       principal, Penetration et Attack secondaires) puis « Enregistrer » →
       le commit cite `$p2s2` et `$a2s2`, et `Tab` / `Entrée` /
       `Ctrl + Entrée` / `Échap` dans les quatre pickers.
+- [ ] **Gear reco, second retour de Sevih du 07/10** (après usage de C7) :
+      lots C8 puis C9 dans le fichier des lots, l'un après l'autre. C8 :
+      pickers d'armes et d'amulettes en multi-choix validés par « Valider »
+      ou Entrée, tuiles « comme /equipment » (cadre de rareté, étoiles, icône
+      d'effet et de classe) dans les pickers et les cartes, sets en rangées de
+      tuiles à la place des `select`, set sans bonus 2p grisé en secondaire.
+      C9 : bloc « Aperçu » sous chaque build, rendu comme la fiche perso par
+      `previewGearReco`, balise inconnue en rouge dans la note.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
