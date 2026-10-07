@@ -7,6 +7,20 @@
 
 ## 2026-10-07
 
+- **Relecture F16** (Fable, 07/10) : `184d7530` validé. Périmètre attendu
+  (`scripts/quick/ui/` entier, `STYLE.md`, trois lignes de `server.ts`, le
+  banc et son test, DONE, TODO), entrée DONE complète ; `pnpm typecheck`,
+  `pnpm lint`, `pnpm test` verts sur HEAD (197 fichiers, 2 773 tests).
+  Contrôle indépendant : banc lancé par Fable sur un quick isolé, six onglets
+  en 1440×1000 et deux en 1024×768, regardés : coquille à deux niveaux
+  conforme à la maquette (groupes, sections, pastilles, poste, Quitter ;
+  pastilles réduites à leur point en 1024), Codes promo en grille avec
+  icônes d'items et table synthétisée, 4-comics et Vidéos en cartes, tiroir
+  du journal en bas ; Rangs et Discord lisibles sous les jetons du site en
+  attendant B28 et C6. Un reste vu : le placeholder de Récompense
+  (« Chercher un item ou une monnaie… ») dépasse encore `w-search` de 30 ch
+  — à raccourcir (« Item ou monnaie… ») dans le premier lot qui touche
+  l'onglet. TODO remis au seul « à faire » (les lots faits sont ici).
 - **`pnpm quick`, la charte graphique : jetons du site, coquille à deux
   niveaux, composants, journal en tiroir — appliqués à Codes promo, 4-comics
   et Vidéos** (lot F16, Fable, sur la maquette Claude Design de Sevih). Le

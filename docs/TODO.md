@@ -35,21 +35,19 @@
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
       UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN
-(EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
-      (`post()` de `lib.js`, signalé par l'agent, à reprendre dans F16).
-- [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
-      six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md). FAITS
-      le 07/10 : C4 (onglet Gear reco), C5 (charpente `scripts/quick/ui/`,
-      banc `node scripts/quick/shot.mjs`), B30 (4-comics multi-langues) et
-      **F16** (charte : jetons de `globals.css`, coquille à deux niveaux,
-      composants, journal en tiroir, `scripts/quick/ui/STYLE.md`, Codes promo
-      / 4-comics / Vidéos refaits). Restent, en parallèle (Opus, fichiers
-      disjoints), sur `STYLE.md` et la maquette
-      https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw : **B28** Rangs
-      (vraies icônes, portraits), **B29** Gear reco (picker modal), **C6**
-      Discord (note repliable, barre d'outils groupée) — chacun remplace dans
-      son onglet `.row` / `button.ghost` / `button.action` par `.form` et
-      `.btn`, le dernier retire le bloc « héritage » de `quick.css`.
+    (EN, JP, KR)` poussé. Si une connexion coupe, le bouton reste grisé
+      (`post()` de `lib.js`, signalé par l'agent : à reprendre un jour, hors
+      série UI).
+- [ ] **Refonte de l'UI, dernière vague** (lots de
+      [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), en parallèle,
+      Opus, fichiers disjoints, sur `scripts/quick/ui/STYLE.md` et la maquette
+      https://claude.ai/artifact/TNRpwKkQcUhvX4VQhNMtHw) : **B28** Rangs
+      (vraies icônes, faceicons, rangs en image), **B29** Gear reco (picker
+      modal), **C6** Discord (note repliable, barre d'outils groupée, et les
+      petits restes : placeholder de Récompense, bloc « héritage » de
+      `quick.css`). Contrôles à l'écran laissés par F16 : survol des ✕ et des
+      boutons fantômes, anneau de focus, tiroir pendant un vrai enregistrement,
+      résultats de Récompense avec icônes, hash `#gear`, fenêtre sous 1060 px.
 
 ## 🧪 À jouer au prochain patch
 
