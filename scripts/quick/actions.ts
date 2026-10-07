@@ -70,6 +70,7 @@ import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
 import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
+import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
 /** Journal rendu tel quel dans l'interface (une ligne = une étape). */
 export interface Outcome {
@@ -241,55 +242,135 @@ export interface ComicUpload {
   data: string;
 }
 
+/** Les planches d'UNE langue dans un envoi — celle du dossier où elles vont. */
+export interface ComicBatch {
+  lang: ComicLang;
+  files: ComicUpload[];
+}
+
+/** Une BD : son radical, et sa planche dans chaque langue où elle est venue. */
+export interface ComicGroup {
+  stem: string;
+  slots: Partial<Record<ComicLang, ComicUpload>>;
+}
+
 /**
- * Dépose des planches dans le pool éditorial puis rejoue la sous-chaîne
- * 4-comics de `pnpm images` — et ELLE SEULE : la chaîne complète collecte aussi
- * persos, audio et wallpapers, sans rapport avec une BD ajoutée.
+ * La langue que dit le NOM d'une planche (`_EN`, `_JP`, `_KR` juste avant
+ * l'extension, sans égard à la casse), ou `null`. La règle vit dans
+ * `ui/comics-group.mjs`, que la page charge aussi.
+ */
+export function comicLangOf(name: string): ComicLang | null {
+  return splitComicName(name, COMIC_LANGS).lang;
+}
+
+/**
+ * Les planches regroupées par BD, dans l'ordre d'arrivée (cf. `groupByStem`).
+ * Une planche va dans la langue qu'elle porte (`lang`), sinon dans celle de son
+ * nom, sinon dans `fallback`.
+ */
+export function groupComics(
+  files: (ComicUpload & { lang?: ComicLang })[],
+  fallback: ComicLang = COMIC_LANGS[0],
+): ComicGroup[] {
+  return groupByStem(files, COMIC_LANGS, fallback);
+}
+
+/** Ce que `addComics` écrit et lance, injecté : le pool, la chaîne, git. */
+export interface ComicsDeps {
+  /** Le pool éditorial des BD : un dossier par langue. */
+  dir: string;
+  /** Conversion webp et manifeste (`assets:collect-comics`). */
+  collect: () => Promise<{ made: number; skipped: number }>;
+  /** Sauvegarde des originaux (`editorial:push`). */
+  pushEditorial: () => void;
+  /** `assets:push` : le staging sur R2, puis la purge de l'edge. */
+  pushAssets: () => { ok: boolean; error: string };
+  /** Repli committé réaligné sur le manifeste en ligne ; rend ce qu'il a fait. */
+  syncSeed: () => string;
+  commitAndPush: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le vrai pool, la vraie chaîne, le vrai `commitAndPush`. */
+export const COMICS_DEPS: ComicsDeps = {
+  dir: EDITORIAL_COMICS,
+  collect: collectComics,
+  pushEditorial,
+  pushAssets: () => {
+    const push = spawnSync(process.execPath, [resolve('scripts/assets-push.mjs')], {
+      encoding: 'utf8',
+    });
+    return { ok: push.status === 0, error: (push.stderr ?? '').trim() };
+  },
+  syncSeed: () => syncComicsSeed(),
+  commitAndPush,
+};
+
+/** Au-delà, le message de commit dit « et N autres » (comme celui des rangs). */
+const COMICS_NAMED = 3;
+
+/**
+ * Dépose des planches dans le pool éditorial — plusieurs BD, plusieurs langues,
+ * chaque fichier dans le dossier de SA langue — puis rejoue UNE fois la
+ * sous-chaîne 4-comics de `pnpm images`, et ELLE SEULE : la chaîne complète
+ * collecte aussi persos, audio et wallpapers, sans rapport avec une BD ajoutée.
+ * Un envoi = un commit, quel que soit le nombre de BD et de langues : une BD en
+ * trois langues en demandait trois.
+ *
+ * Tout est contrôlé AVANT la première écriture : une langue inconnue ou un nom
+ * refusé n'écrit rien, ni ce fichier ni ceux qui le précèdent dans l'envoi.
  *
  * `assets:push` reste appelé en entier : il est incrémental (diff sha1 contre
  * `pushed.json`), donc seules les nouvelles clés partent réellement.
  */
 export async function addComics(
-  lang: ComicLang,
-  files: ComicUpload[],
+  batches: ComicBatch[],
   report?: Report,
+  deps: ComicsDeps = COMICS_DEPS,
 ): Promise<Outcome> {
-  if (!COMIC_LANGS.includes(lang)) return { ok: false, log: [`Langue inconnue : ${lang}`] };
-  if (!files.length) return { ok: false, log: ['Aucun fichier.'] };
-
-  const dir = resolve(EDITORIAL_COMICS, lang);
-  mkdirSync(dir, { recursive: true });
+  const drops: (ComicUpload & { lang: ComicLang })[] = [];
+  for (const batch of Array.isArray(batches) ? batches : []) {
+    if (!COMIC_LANGS.includes(batch.lang))
+      return { ok: false, log: [`Langue inconnue : ${batch.lang}`] };
+    for (const f of batch.files ?? []) {
+      const name = safeName(f.name);
+      if (!name) return { ok: false, log: [`Nom de fichier refusé : ${f.name}`] };
+      drops.push({ name, data: f.data, lang: batch.lang });
+    }
+  }
+  if (!drops.length) return { ok: false, log: ['Aucun fichier.'] };
 
   const j = journal(report);
   const log = j.lines;
-  for (const f of files) {
-    const name = safeName(f.name);
-    if (!name) return { ok: false, log: [`Nom de fichier refusé : ${f.name}`] };
-    writeFileSync(resolve(dir, name), Buffer.from(f.data, 'base64'));
-    j.done(`déposé : ${lang}/${name}`);
+  for (const f of drops) {
+    const dir = resolve(deps.dir, f.lang);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(resolve(dir, f.name), Buffer.from(f.data, 'base64'));
+    j.done(`déposé : ${f.lang}/${f.name}`);
   }
 
   j.doing('conversion webp');
-  const made = await collectComics();
+  const made = await deps.collect();
   j.done(`conversion webp : ${made.made} produites, ${made.skipped} déjà à jour.`);
 
   j.doing('sauvegarde des originaux sur R2 (editorial:push)');
-  pushEditorial();
+  deps.pushEditorial();
   j.done('originaux sauvegardés sur R2 (editorial:push).');
 
   j.doing('push R2 du staging, puis purge de l’edge — l’étape la plus lente');
-  const push = spawnSync(process.execPath, [resolve('scripts/assets-push.mjs')], {
-    encoding: 'utf8',
-  });
-  if (push.status !== 0)
-    return { ok: false, log: [...log, `assets:push a échoué : ${(push.stderr ?? '').trim()}`] };
+  const push = deps.pushAssets();
+  if (!push.ok) return { ok: false, log: [...log, `assets:push a échoué : ${push.error}`] };
   j.done('poussé sur R2 — la galerie lit le manifeste à la requête.');
 
-  j.done(`repli committé : ${syncComicsSeed()}.`);
+  j.done(`repli committé : ${deps.syncSeed()}.`);
 
-  const git = commitAndPush(
+  // Le message nomme les BD par leur radical, sans le préfixe commun des
+  // planches officielles (`outerplane_comic08` → `comic08`), puis les langues.
+  const stems = [...new Set(groupComics(drops).map((g) => g.stem.replace(/^outerplane_/, '')))];
+  const langs = COMIC_LANGS.filter((l) => drops.some((f) => f.lang === l));
+  const others = stems.length - COMICS_NAMED;
+  const git = deps.commitAndPush(
     ['data/generated/comics.json', 'datagen/assets/pushed.json'],
-    'chore(assets): nouvelles 4-comics',
+    `chore(assets): 4-comics ${stems.slice(0, COMICS_NAMED).join(', ')}${others > 0 ? ` et ${others} autres` : ''} (${langs.join(', ')})`,
     report,
   );
   return { ok: git.ok, log: [...log, ...git.log] };

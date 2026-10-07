@@ -1,17 +1,23 @@
 <section id="tab-comics" hidden>
   <h2>4-comics</h2>
   <p class="hint">
-    Déposé dans le pool éditorial, converti en webp, poussé sur R2 : la galerie lit le manifeste à
-    la requête, la galerie les montre aussitôt. Le repli committé suit, CI comprise.
+    Glisser toutes les planches d'un coup : la langue se lit dans le nom (<code>_EN</code>,
+    <code>_JP</code>, <code>_KR</code>), le reste prend la langue par défaut. Un seul envoi :
+    conversion webp, R2 (la galerie lit le manifeste à la requête et les montre aussitôt), puis UN
+    commit pour toutes les BD, CI comprise.
   </p>
   <div class="row">
-    <div style="flex: 0 0 160px">
-      <label>Langue d'origine</label>
+    <div class="drop" id="k-drop">
+      Glisser les planches ici (ou cliquer) — png, jpg, webp · plusieurs BD et plusieurs langues à
+      la fois
+    </div>
+    <div style="flex: 0 0 200px">
+      <label for="k-lang">Langue par défaut (sans suffixe)</label>
       <select id="k-lang"></select>
     </div>
   </div>
-  <div class="drop" id="k-drop">Glisser les planches ici (ou cliquer) — png, jpg, webp</div>
   <input type="file" id="k-file" accept="image/png,image/jpeg,image/webp" multiple hidden />
-  <div class="chips" id="k-chips"></div>
+  <!-- Une ligne par BD (son radical), une case par langue : posé par `comics.js`. -->
+  <div id="k-rows"></div>
   <div class="row"><button class="action" id="k-send">Publier les planches</button></div>
 </section>

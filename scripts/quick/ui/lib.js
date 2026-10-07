@@ -17,8 +17,9 @@ export const $ = (id) => document.getElementById(id);
 
 /**
  * `/api/state`, demandé une fois au démarrage (`sections.start`) : codes promo,
- * catalogue des récompenses, langues des 4-comics, cibles des vidéos, et ce que
- * `.env.local` permet. Les sections qui en dépendent attendent `stateLoaded`.
+ * catalogue des récompenses, langues des 4-comics et plafond d'un envoi, cibles
+ * des vidéos, et ce que `.env.local` permet. Les sections qui en dépendent
+ * attendent `stateLoaded`.
  */
 export const state = {
   coupons: [],

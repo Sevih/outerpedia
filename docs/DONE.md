@@ -7,6 +7,96 @@
 
 ## 2026-10-07
 
+- **`pnpm quick`, 4-comics : plusieurs BD et plusieurs langues en UN envoi et
+  UN commit** (lot B30 — le seul de la refonte de quick qui change un
+  comportement). Le pourquoi : l'onglet n'acceptait qu'une langue par envoi,
+  et chaque envoi rejouait conversion webp, deux poussées R2, purge, repli et
+  push ; une BD sort en EN, JP et KR, donc trois envois et trois commits pour
+  une seule BD (demande de Sevih du 07/10).
+  Le quoi. `addComics(batches, report?, deps?)` (`scripts/quick/actions.ts`)
+  prend `{ lang, files }[]` : tout est contrôlé AVANT la première écriture
+  (langue inconnue, nom refusé par `safeName`, envoi vide → rien n'est écrit,
+  pas même les fichiers qui précèdent le fautif), puis chaque planche est
+  déposée dans le dossier de SA langue, et la chaîne passe UNE fois —
+  `collectComics`, `editorial:push`, `assets:push` + purge, `syncComicsSeed`,
+  un `commitAndPush` sur `data/generated/comics.json` et
+  `datagen/assets/pushed.json`. Le message nomme les BD et les langues :
+  `chore(assets): 4-comics comic08, comic07 (EN, JP, KR)` — radicaux sans
+  suffixe de langue, préfixe `outerplane_` retiré (c'est la forme du lot et
+  de la maquette), langues dans l'ordre de `COMIC_LANGS`, « et N autres »
+  au-delà de trois BD comme le commit des rangs. Le pool et les quatre
+  commandes sont injectables (`ComicsDeps`, défaut `COMICS_DEPS` =
+  l'existant). L'ancienne signature a disparu ; `POST /api/comics` lit
+  `{ batches }` (un corps à l'ancienne forme répond « Aucun fichier. »).
+  Le comment. La règle « quel radical, quelle langue » vit dans UN fichier lu
+  des deux côtés, `scripts/quick/ui/comics-group.mjs` (JSDoc, typé par
+  `scripts/tsconfig.json`, servi par `GET /ui/…` déjà en place) — le modèle de
+  `discord-editor.mjs` : `splitComicName(name, langs)` (`_EN`/`_JP`/`_KR`
+  juste avant l'extension, casse indifférente ; sinon pas de langue et le
+  radical est le nom sans extension) et `groupByStem(files, langs, fallback)`.
+  `actions.ts` en exporte les deux fonctions du lot, `comicLangOf(name)` et
+  `groupComics(files, fallback = 'EN')`, liées à `COMIC_LANGS` ; la page lui
+  passe `state.langs`. Le lot ne citait pas ce fichier : une copie de la règle
+  dans `comics.js` n'aurait pas été testée. Trois choix à relire : la langue
+  d'une planche est celle posée à la main, sinon celle du nom, sinon la
+  langue par défaut ; une case ne tient qu'UNE planche — la seconde du même
+  radical dans la même langue ouvre une ligne de plus au lieu d'écraser
+  l'autre ; un fichier sans suffixe forme sa propre ligne.
+  L'onglet (`ui/tabs/comics.html`, `comics.js`, un bloc `.k-*` dans
+  `quick.css`) : on glisse tout d'un coup ; une ligne par BD (le radical),
+  trois cases EN · JP · KR — vignette (l'image déjà lue en base64, posée par
+  propriété et non par le HTML de la liste), bouton × pour retirer, `select`
+  de langue pour corriger, nom du fichier ; case vide « JP — manquant », qui
+  ne bloque rien ; le `select` d'une planche sans suffixe ni correction est
+  cerclé (`--warn`). Le `select` du haut devient « Langue par défaut (sans
+  suffixe) » et re-range à chaque changement. Un seul bouton, « Publier 6
+  planches — 2 BD (EN, JP, KR) ». Le journal NDJSON est inchangé. Markup posé
+  dans le sens de la planche « Comics » de la maquette (zone de dépôt et
+  langue par défaut côte à côte, ligne = radical puis cases) ; aucun habillage
+  au-delà. Ajout hors liste du lot, jugé nécessaire : `/api/state` rend
+  `maxUpload` (le `MAX_BODY` de 64 Mo de `server.ts`) et la page refuse
+  d'elle-même un envoi qui le dépasse — les originaux PNG pèsent ~5 Mo, soit
+  ~6,7 Mo en base64 : neuf planches passent, la dixième faisait couper la
+  connexion par le serveur sans message. Le plafond lui-même n'a pas bougé.
+  Vérification. `pnpm typecheck` : `tsc --noEmit && tsc --noEmit -p
+datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`, sortie 0 ;
+  `pnpm lint` : `$ eslint`, sortie 0 ; `pnpm test` : `Test Files 197 passed
+(197)`, `Tests 2773 passed (2773)`. Treize tests ajoutés à
+  `actions.test.ts` : `comicLangOf` (six suffixes ; `comic01.jpg`,
+  `yami_EN_.png`, `_FR` → `null`), `groupComics` (une BD à trois cases, deux
+  BD mélangées, sans suffixe, langue posée à la main, case déjà prise),
+  `addComics` sur un répertoire temporaire avec chaîne et git factices (deux
+  langues → deux dossiers, chaîne et commit appelés une fois, message exact ;
+  nom refusé, langue inconnue, envoi vide → dossier vide et aucun appel ; nom
+  à chemin ramené à son basename ; `assets:push` en échec → ni repli ni
+  commit). Joué à l'écran : quick isolé (`DISCORD_BOT_TOKEN= DEV_PEERS=
+QUICK_PORT=4799 pnpm quick --no-open`) derrière un relais jetable en
+  lecture seule (non commité, calqué sur `shot.mjs`) qui dépose dans le
+  `<input>` six fichiers — `outerplane_comic05_EN.png` servi sous les noms
+  `…05_EN`, `…05_JP`, `…05_KR`, `…08_EN`, `…08_kr`, et `outerplane_comic01.jpg`
+  — puis relève la liste et photographie (1440 et 420 px de large). Relevé :
+  trois lignes (`comic05` trois cases, `comic08` EN + « JP — manquant » + KR,
+  `comic01` en EN cerclé), bouton « Publier 6 planches — 3 BD (EN, JP, KR) »,
+  six vignettes décodées ; langue par défaut → JP : `comic01` passe en JP ;
+  `comic08_kr` corrigé en JP ; `comic05_KR` retiré : « Publier 5 planches — 3
+  BD (EN, JP) » ; `comic05_JP` corrigé en EN, case prise : une seconde ligne
+  `comic05`. « Publier » n'a PAS été cliqué. Côté serveur, seuls des corps
+  refusés avant toute écriture ont été envoyés à `/api/comics` (vide, nom à
+  espace, langue `FR`, ancienne forme) : quatre refus nets, rien dans
+  `.editorial/`, working tree intact.
+  Laissé. L'envoi réel n'est pas joué — test de Sevih : glisser d'un coup les
+  trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`), vérifier la ligne
+  à trois cases, publier ; attendu : trois « déposé : … », UNE conversion, UN
+  push R2, et UN commit `chore(assets): 4-comics comicNN (EN, JP, KR)` poussé.
+  Le chemin page → corps `{ batches }` n'a donc été lu qu'en code. De la
+  maquette, non faits (F16 ou plus tard) : le bandeau de compteurs par
+  langue, « Tout retirer », glisser une planche sur une case vide. Hors
+  périmètre, repéré : `post()` de `lib.js` ne rattrape pas une connexion
+  coupée (le bouton reste grisé) — le garde de taille évite le cas atteint
+  par ce lot, pas les autres ; les noms à hangeul du pool
+  (`유마님_EN.png`…) sont toujours refusés par `safeName`, comme avant ; le
+  commentaire d'en-tête de `collect-comics.ts` et son `LANGS` propre, non
+  touchés.
 - **Relecture C5** (Fable, 07/10) : `fdec73d0` validé. Périmètre attendu
   (`scripts/quick/ui/`, `ui-serve.ts` et son test, `shot.mjs`, `server.ts`,
   un bloc d'`eslint.config.mjs`, deux commentaires, DONE, TODO), entrée DONE

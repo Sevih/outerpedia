@@ -43,7 +43,7 @@ import {
   searchRewards,
   searchVideos,
   videoTargets,
-  type ComicUpload,
+  type ComicBatch,
   type RankChange,
   type Report,
 } from './actions';
@@ -312,6 +312,9 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       couponsError: coupons.error,
       rewards: rewardOptions(),
       langs: COMIC_LANGS,
+      // Plusieurs BD partent dans UN corps : la page refuse d'elle-même ce que
+      // `body` couperait.
+      maxUpload: MAX_BODY,
       targets: videoTargets(),
       hasYoutubeKey: Boolean(process.env.YOUTUBE_API_KEY),
       hasR2: Boolean(process.env.R2_BUCKET),
@@ -328,8 +331,8 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'POST' && url.pathname === '/api/comics') {
-    const { lang, files } = await body<{ lang: string; files: ComicUpload[] }>(req);
-    await stream(res, (report) => addComics(lang as (typeof COMIC_LANGS)[number], files, report));
+    const { batches } = await body<{ batches: ComicBatch[] }>(req);
+    await stream(res, (report) => addComics(batches, report));
     return;
   }
 

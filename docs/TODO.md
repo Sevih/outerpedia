@@ -34,8 +34,9 @@
 - [ ] **Refonte de l'UI** (demande de Sevih du 07/10 : « c'est pas beau ») :
       six lots de [lots-opus-2026-09-25.md](./lots-opus-2026-09-25.md), dans
       cet ordre (C4 et C5 faits le 07/10 : onglet Gear reco, charpente
-      `scripts/quick/ui/`, banc `node scripts/quick/shot.mjs`) — **B30** (4-comics : plusieurs BD et langues en
-      un envoi et un commit ; Opus, seul), **F16** (charte : jetons de
+      `scripts/quick/ui/`, banc `node scripts/quick/shot.mjs`) — **B30** FAIT le 07/10 (4-comics : plusieurs BD et langues en
+      un envoi et un commit ; reste à Sevih l'envoi réel d'une BD en trois
+      langues, un commit attendu), **F16** (charte : jetons de
       `globals.css`, coquille, composants, `STYLE.md`, trois onglets simples
       refaits ; Fable, seul), puis **B28** Rangs (vraies icônes, portraits),
       **B29** Gear reco (picker modal) et **C6** Discord en parallèle (Opus,

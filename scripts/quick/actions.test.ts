@@ -15,16 +15,28 @@
  * `data/curated/` ni ne lance git. Le fichier des recos est LU (roster, listes
  * des sélecteurs, presets, builds réels), jamais à des coordonnées figées — il
  * bouge à chaque enregistrement de l'onglet.
+ *
+ * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
+ * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
+ * temporaire, la chaîne (webp, R2, repli) et git sont factices.
  */
-import { describe, expect, it } from 'vitest';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, describe, expect, it } from 'vitest';
 import type { CharacterCurated, GearBuild } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import {
+  addComics,
   checkGearBuilds,
+  comicLangOf,
   gearRecoState,
+  groupComics,
   planRankChanges,
   saveGearReco,
+  type ComicsDeps,
+  type ComicUpload,
   type GearCatalog,
   type GearRecoDeps,
   type Outcome,
@@ -574,5 +586,221 @@ describe('saveGearReco — écritures injectées', () => {
 
     expect(out).toMatchObject({ ok: false, written: true, issues: [] });
     expect(out.log.at(-1)).toBe('git push a échoué');
+  });
+});
+
+// ---------------------------------------------------------------- comics -----
+
+const page = (name: string): ComicUpload => ({
+  name,
+  data: Buffer.from(name).toString('base64'),
+});
+
+describe('comicLangOf — la langue que dit le nom', () => {
+  it('lit les trois suffixes, en capitales comme en minuscules', () => {
+    expect(comicLangOf('outerplane_comic08_EN.png')).toBe('EN');
+    expect(comicLangOf('outerplane_comic08_JP.png')).toBe('JP');
+    expect(comicLangOf('outerplane_comic08_KR.png')).toBe('KR');
+    expect(comicLangOf('outerplane_comic04_en.jpg')).toBe('EN');
+    expect(comicLangOf('outerplane_comic04_jp.png')).toBe('JP');
+    expect(comicLangOf('outerplane_comic04_kr.webp')).toBe('KR');
+  });
+
+  it('rend `null` sans suffixe, ou quand il n’est pas juste avant l’extension', () => {
+    expect(comicLangOf('comic01.jpg')).toBeNull();
+    expect(comicLangOf('20260710_121053.jpg')).toBeNull();
+    expect(comicLangOf('yami_EN_.png')).toBeNull();
+    expect(comicLangOf('comic_EN_final.png')).toBeNull();
+    expect(comicLangOf('comicEN.png')).toBeNull();
+    expect(comicLangOf('comic_FR.png')).toBeNull();
+  });
+});
+
+describe('groupComics — une ligne par BD, une case par langue', () => {
+  it('trois fichiers d’une BD : une ligne à trois cases', () => {
+    const [en, jp, kr] = ['c08_EN.png', 'c08_JP.png', 'c08_kr.png'].map(page);
+
+    expect(groupComics([kr, en, jp])).toEqual([{ stem: 'c08', slots: { EN: en, JP: jp, KR: kr } }]);
+  });
+
+  it('deux BD mélangées : deux lignes, dans l’ordre d’arrivée', () => {
+    const [a, b, c, d, e] = ['c08_EN.png', 'c07_JP.png', 'c08_KR.png', 'c07_EN.png', 'c08_JP.png'];
+
+    expect(groupComics([a, b, c, d, e].map(page))).toEqual([
+      { stem: 'c08', slots: { EN: page(a), KR: page(c), JP: page(e) } },
+      { stem: 'c07', slots: { JP: page(b), EN: page(d) } },
+    ]);
+  });
+
+  it('un fichier sans suffixe reste seul, dans la langue par défaut', () => {
+    const files = ['c08_EN.png', 'c08.jpg', 'comic01.jpg'].map(page);
+
+    expect(groupComics(files, 'JP')).toEqual([
+      { stem: 'c08', slots: { EN: files[0], JP: files[1] } },
+      { stem: 'comic01', slots: { JP: files[2] } },
+    ]);
+    expect(groupComics([page('comic01.jpg')])).toEqual([
+      { stem: 'comic01', slots: { EN: page('comic01.jpg') } },
+    ]);
+  });
+
+  it('une langue donnée à la main passe avant celle du nom', () => {
+    const fixed = { ...page('c08_EN.png'), lang: 'KR' as const };
+
+    expect(groupComics([fixed])).toEqual([{ stem: 'c08', slots: { KR: fixed } }]);
+  });
+
+  it('deux planches pour la même case : la seconde ouvre une ligne, rien n’est écrasé', () => {
+    const [png, jpg] = ['c08_EN.png', 'c08_EN.jpg'].map(page);
+
+    expect(groupComics([png, jpg])).toEqual([
+      { stem: 'c08', slots: { EN: png } },
+      { stem: 'c08', slots: { EN: jpg } },
+    ]);
+  });
+});
+
+describe('addComics — écritures injectées', () => {
+  const dirs: string[] = [];
+  afterEach(() => {
+    for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true });
+  });
+
+  /** Un pool temporaire, et la chaîne factice : elle note ses appels, rien d'autre. */
+  function deps(over: Partial<ComicsDeps> = {}) {
+    const dir = mkdtempSync(join(tmpdir(), 'quick-comics-'));
+    dirs.push(dir);
+    const calls = { chain: [] as string[], git: [] as [string[], string][] };
+    const fake: ComicsDeps = {
+      dir,
+      collect: async () => {
+        calls.chain.push('collect');
+        return { made: 4, skipped: 0 };
+      },
+      pushEditorial: () => void calls.chain.push('editorial'),
+      pushAssets: () => {
+        calls.chain.push('assets');
+        return { ok: true, error: '' };
+      },
+      syncSeed: () => {
+        calls.chain.push('seed');
+        return 'mis à jour';
+      },
+      commitAndPush: (paths, message) => {
+        calls.git.push([paths, message]);
+        return { ok: true, log: ['git : fait'] };
+      },
+      ...over,
+    };
+    return { dir, calls, fake };
+  }
+
+  it('deux langues : chaque fichier dans SON dossier, la chaîne UNE fois, UN commit', async () => {
+    const { dir, calls, fake } = deps();
+    const out = await addComics(
+      [
+        {
+          lang: 'EN',
+          files: [page('outerplane_comic08_EN.png'), page('outerplane_comic07_EN.png')],
+        },
+        { lang: 'KR', files: [page('outerplane_comic08_KR.png')] },
+      ],
+      undefined,
+      fake,
+    );
+
+    expect(out.ok).toBe(true);
+    expect(readdirSync(dir).sort()).toEqual(['EN', 'KR']);
+    expect(readdirSync(join(dir, 'EN')).sort()).toEqual([
+      'outerplane_comic07_EN.png',
+      'outerplane_comic08_EN.png',
+    ]);
+    expect(readdirSync(join(dir, 'KR'))).toEqual(['outerplane_comic08_KR.png']);
+    // Le contenu est celui envoyé, décodé.
+    expect(readFileSync(join(dir, 'KR', 'outerplane_comic08_KR.png'), 'utf8')).toBe(
+      'outerplane_comic08_KR.png',
+    );
+    expect(calls.chain).toEqual(['collect', 'editorial', 'assets', 'seed']);
+    expect(calls.git).toEqual([
+      [
+        ['data/generated/comics.json', 'datagen/assets/pushed.json'],
+        'chore(assets): 4-comics comic08, comic07 (EN, KR)',
+      ],
+    ]);
+    expect(out.log).toEqual([
+      'déposé : EN/outerplane_comic08_EN.png',
+      'déposé : EN/outerplane_comic07_EN.png',
+      'déposé : KR/outerplane_comic08_KR.png',
+      'conversion webp : 4 produites, 0 déjà à jour.',
+      'originaux sauvegardés sur R2 (editorial:push).',
+      'poussé sur R2 — la galerie lit le manifeste à la requête.',
+      'repli committé : mis à jour.',
+      'git : fait',
+    ]);
+  });
+
+  it('le message nomme les BD sans suffixe, les langues dans leur ordre, et abrège au-delà de trois', async () => {
+    const { calls, fake } = deps();
+    await addComics(
+      [
+        { lang: 'KR', files: ['a_KR.png', 'b.png'].map(page) },
+        { lang: 'JP', files: ['a_jp.png', 'c_JP.png', 'd_JP.png', 'e_JP.png'].map(page) },
+      ],
+      undefined,
+      fake,
+    );
+
+    expect(calls.git[0][1]).toBe('chore(assets): 4-comics a, b, c et 2 autres (JP, KR)');
+  });
+
+  it('nom refusé : AUCUN fichier écrit, pas même ceux d’avant, ni chaîne ni commit', async () => {
+    const { dir, calls, fake } = deps();
+    const out = await addComics(
+      [
+        { lang: 'EN', files: [page('ok_EN.png')] },
+        { lang: 'JP', files: [page('ok_JP.png'), page('유마님_JP.png')] },
+      ],
+      undefined,
+      fake,
+    );
+
+    expect(out).toEqual({ ok: false, log: ['Nom de fichier refusé : 유마님_JP.png'] });
+    expect(readdirSync(dir)).toEqual([]);
+    expect(calls).toEqual({ chain: [], git: [] });
+  });
+
+  it('langue inconnue, envoi vide : rien n’est écrit', async () => {
+    const { dir, calls, fake } = deps();
+    const unknown = await addComics(
+      [
+        { lang: 'EN', files: [page('ok_EN.png')] },
+        { lang: 'FR' as 'EN', files: [page('ok_FR.png')] },
+      ],
+      undefined,
+      fake,
+    );
+    const empty = await addComics([{ lang: 'EN', files: [] }], undefined, fake);
+
+    expect(unknown).toEqual({ ok: false, log: ['Langue inconnue : FR'] });
+    expect(empty).toEqual({ ok: false, log: ['Aucun fichier.'] });
+    expect(readdirSync(dir)).toEqual([]);
+    expect(calls).toEqual({ chain: [], git: [] });
+  });
+
+  it('un nom à chemin est ramené à son basename, dans le dossier de sa langue', async () => {
+    const { dir, fake } = deps();
+    await addComics([{ lang: 'JP', files: [page('../../evil_JP.png')] }], undefined, fake);
+
+    expect(readdirSync(join(dir, 'JP'))).toEqual(['evil_JP.png']);
+    expect(existsSync(join(dir, '..', 'evil_JP.png'))).toBe(false);
+  });
+
+  it('push R2 en échec : les originaux sont déposés, mais ni repli ni commit', async () => {
+    const { calls, fake } = deps({ pushAssets: () => ({ ok: false, error: 'R2 muet' }) });
+    const out = await addComics([{ lang: 'EN', files: [page('a_EN.png')] }], undefined, fake);
+
+    expect(out.ok).toBe(false);
+    expect(out.log.at(-1)).toBe('assets:push a échoué : R2 muet');
+    expect(calls).toEqual({ chain: ['collect', 'editorial'], git: [] });
   });
 });
