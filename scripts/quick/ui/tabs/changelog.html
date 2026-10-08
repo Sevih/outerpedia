@@ -1,0 +1,46 @@
+<section id="tab-changelog" hidden>
+  <div class="head">
+    <h2>Journal du site</h2>
+    <p class="hint">
+      Ce que la page /changelog et la home annoncent. Rien ne s'écrit à la saisie : « Enregistrer »
+      écrit le fichier entier, puis committe. Le site le lit au build : une entrée n'est en ligne
+      qu'après « Pousser », dans la barre d'en-tête, et la CI — à sa date si elle est à venir.
+    </p>
+  </div>
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
+    <span id="j-count"></span>
+    <div class="j-pv-lang" id="j-pv-lang"></div>
+    <button class="btn ghost" id="j-reset" disabled>Annuler</button>
+    <button class="btn primary" id="j-save" disabled>Enregistrer</button>
+  </div>
+
+  <div class="card pad" aria-label="Nouvelle entrée">
+    <div class="j-new">
+      <strong>Nouvelle entrée</strong>
+      <div class="j-templates" id="j-templates" role="group" aria-label="Gabarits"></div>
+    </div>
+    <div class="form" id="j-form" hidden></div>
+  </div>
+
+  <div class="card" aria-label="Entrées du journal">
+    <div class="card-head">
+      <span id="j-summary"></span>
+      <input
+        id="j-q"
+        class="w-search"
+        type="search"
+        placeholder="Filtrer : titre, contenu, slug…"
+        aria-label="Filtrer les entrées"
+        autocomplete="off"
+      />
+      <select id="j-type" aria-label="Type d'entrée"></select>
+    </div>
+    <ul class="j-list" id="j-list"></ul>
+    <div class="empty" id="j-empty" hidden></div>
+    <div class="card-foot" id="j-foot" hidden>
+      <span class="lbl" id="j-shown"></span>
+      <button class="btn ghost sm" id="j-more">Afficher plus</button>
+    </div>
+  </div>
+</section>

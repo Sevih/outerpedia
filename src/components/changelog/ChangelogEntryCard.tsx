@@ -4,6 +4,7 @@ import type { Lang } from '@/lib/i18n/config';
 import type { TranslationKey } from '@/i18n';
 import type { ResolvedChangelogEntry } from '@/lib/data/changelog';
 import { localePath } from '@/lib/navigation';
+import { bulletSegments } from '@/lib/changelog-bullets';
 import {
   CHANGELOG_TYPE_BADGE,
   CHANGELOG_TYPE_ICON,
@@ -15,7 +16,8 @@ import {
 
 /**
  * Une carte d'entrée du journal (page `/changelog`). Toute la carte est un lien
- * quand l'entrée en porte un (grande cible), sinon un `<article>` inerte.
+ * quand l'entrée en porte un (grande cible), sinon un `<article>` inerte. Les
+ * puces passent par `bulletSegments` : le gras `**…**`, et lui seul.
  */
 export function ChangelogEntryCard({
   entry,
@@ -62,7 +64,11 @@ export function ChangelogEntryCard({
         {entry.content.length > 0 && (
           <ul className="text-content-muted mt-1.5 list-disc space-y-1 pl-5 text-sm">
             {entry.content.map((line, i) => (
-              <li key={i}>{line}</li>
+              <li key={i}>
+                {bulletSegments(line).map((s, k) =>
+                  s.bold ? <strong key={k}>{s.text}</strong> : s.text,
+                )}
+              </li>
             ))}
           </ul>
         )}

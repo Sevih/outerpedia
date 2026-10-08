@@ -1,0 +1,387 @@
+/* Onglet « Journal du site » : les gabarits d'une nouvelle entrée, la liste
+   (une entrée = une ligne, dépliée = sa fiche), et sous la fiche l'aperçu de
+   la carte de /changelog. Le reste — carte, `.savebar`, `.form`, `.btn`,
+   `.badge`, `.picker` — vient de `quick.css`. */
+
+/* Les teintes de type de la page /changelog (`CHANGELOG_TYPE_BADGE`), jetons
+   `--cat-*-fg` recopiés de `src/app/globals.css` sous les mêmes noms. */
+#tab-changelog {
+  --cat-emerald-fg: oklch(84.5% 0.143 164.978);
+  --cat-sky-fg: oklch(82.8% 0.111 230.318);
+  --cat-violet-fg: oklch(81.1% 0.111 293.571);
+  --cat-amber-fg: oklch(87.9% 0.169 91.605);
+  --cat-teal-fg: oklch(85.5% 0.138 181.071);
+  --cat-rose-fg: oklch(81% 0.117 11.638);
+}
+#tab-changelog .j-t-guide {
+  --j-type: var(--cat-emerald-fg);
+}
+#tab-changelog .j-t-update {
+  --j-type: var(--cat-sky-fg);
+}
+#tab-changelog .j-t-feature {
+  --j-type: var(--cat-violet-fg);
+}
+#tab-changelog .j-t-character {
+  --j-type: var(--cat-amber-fg);
+}
+#tab-changelog .j-t-news {
+  --j-type: var(--cat-teal-fg);
+}
+#tab-changelog .j-t-fix {
+  --j-type: var(--cat-rose-fg);
+}
+/* Le badge de type : celui de la carte du site (`rounded`, capitales, fond à
+   15 %), dans la ligne comme dans l'aperçu. */
+#tab-changelog .j-badge {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--j-type, var(--content-muted)) 15%, transparent);
+  color: var(--j-type, var(--content-muted));
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* La savebar : le compte et ses badges, puis la langue de l'aperçu.
+   `.savebar span` pousse à gauche chaque `span` ; ici seul le compte l'est. */
+#tab-changelog #j-count,
+#tab-changelog #j-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-changelog #j-count {
+  margin-right: auto;
+}
+#tab-changelog #j-count *,
+#tab-changelog .j-pv-lang .lbl {
+  margin-right: 0;
+}
+#tab-changelog .j-pv-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Le groupe segmenté de Gear reco, recopié faute de composant commun. */
+#tab-changelog .j-seg {
+  display: inline-flex;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-changelog .j-seg button {
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-changelog .j-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-changelog .j-seg button:focus-visible,
+#tab-changelog .j-line:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* Nouvelle entrée : le titre, la rangée des gabarits, puis le formulaire de
+   celui qui en a un. */
+#tab-changelog .j-new,
+#tab-changelog .j-templates {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-changelog .j-new strong {
+  font-size: 13px;
+}
+#tab-changelog .j-templates .btn[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+/* `.form` et `.field` posent un `display` : sans ces règles, `hidden` ne
+   masquerait rien. */
+#tab-changelog .form[hidden],
+#tab-changelog .field[hidden],
+#tab-changelog .card-foot[hidden],
+#tab-changelog .btn[hidden] {
+  display: none;
+}
+#tab-changelog .j-form-note {
+  flex: 1 1 260px;
+  align-self: center;
+}
+
+/* La liste. Le filtre est poussé à droite de l'en-tête de la carte. */
+#tab-changelog .card-head #j-q {
+  margin-left: auto;
+}
+#tab-changelog #j-more {
+  margin-left: auto;
+}
+#tab-changelog .j-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#tab-changelog .j-item {
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-changelog .j-item:last-child {
+  border-bottom: none;
+}
+#tab-changelog .j-item.ko {
+  box-shadow: inset 2px 0 0 var(--danger);
+}
+/* Une ligne : un bouton sur toute la largeur, qui déplie la fiche. */
+#tab-changelog .j-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 20px;
+  border: 0;
+  background: none;
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-changelog .j-line:hover,
+#tab-changelog .j-item.open > .j-line {
+  background: var(--surface-overlay);
+}
+#tab-changelog .j-caret {
+  flex: 0 0 auto;
+  color: var(--content-muted);
+  font-size: 11px;
+  transition: transform 0.12s;
+}
+#tab-changelog .j-line[aria-expanded='true'] .j-caret {
+  transform: rotate(90deg);
+}
+#tab-changelog .j-date {
+  flex: 0 0 auto;
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-changelog .j-title {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#tab-changelog .none {
+  color: var(--placeholder);
+  font-style: italic;
+  font-weight: 400;
+}
+/* Le lien d'une entrée : sa sorte et sa cible, tronquée. */
+#tab-changelog .j-chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 56ch;
+  overflow: hidden;
+  padding: 1px 8px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 999px;
+  background: var(--surface-overlay);
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#tab-changelog .j-line .badge {
+  flex: 0 0 auto;
+}
+/* Le point d'une entrée modifiée ou nouvelle, pas encore enregistrée. */
+#tab-changelog .j-edit {
+  margin-left: auto;
+  background: var(--accent);
+}
+
+/* La fiche : une colonne de champs, sur le fond de la carte. */
+#tab-changelog .j-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 18px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-changelog .j-sheet .j-del {
+  margin-left: auto;
+}
+#tab-changelog .j-sheet textarea {
+  width: 100%;
+  min-height: 70px;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-changelog .j-sheet .field > input:not([class]) {
+  width: 100%;
+}
+/* Les autres langues, repliées : trois par rangée, une sous 760 px. */
+#tab-changelog .j-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
+}
+#tab-changelog .j-more > summary::-webkit-details-marker {
+  display: none;
+}
+#tab-changelog .j-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 14px;
+  margin-top: 12px;
+}
+@media (max-width: 760px) {
+  #tab-changelog .j-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-changelog .j-tr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-changelog .results {
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-changelog .face {
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+/* L'aperçu : sa tête, puis la carte de /changelog sur le fond de la page —
+   ce n'est plus l'éditeur. */
+#tab-changelog .j-pv {
+  margin: 4px -20px -18px;
+  border-top: 1px solid var(--line-subtle);
+  background: var(--surface-base);
+}
+#tab-changelog .j-item:last-child .j-pv {
+  border-radius: 0 0 9px 9px;
+}
+#tab-changelog .j-pv-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px 0;
+  color: var(--content-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#tab-changelog .j-pv-head .lbl {
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+#tab-changelog .j-pv-body {
+  padding: 12px 20px 18px;
+  transition: opacity 0.12s;
+}
+/* Une requête court : le rendu précédent reste, atténué. */
+#tab-changelog .j-pv-body.busy {
+  opacity: 0.45;
+}
+#tab-changelog .j-pv-body p {
+  margin: 0;
+}
+#tab-changelog .j-pv-ko {
+  color: var(--danger);
+}
+/* La carte du site (`ChangelogEntryCard` : `card flex gap-4 p-5`, 768 px au
+   plus comme la colonne de la page), ses classes traduites en jetons. */
+#tab-changelog .j-card {
+  display: flex;
+  gap: 16px;
+  max-width: 720px;
+  padding: 20px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-raised);
+}
+#tab-changelog .j-thumb {
+  display: grid;
+  place-items: center;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  font-size: 24px;
+}
+#tab-changelog .j-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#tab-changelog .j-card-in {
+  flex: 1;
+  min-width: 0;
+}
+#tab-changelog .j-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+#tab-changelog .j-when {
+  color: var(--content-subtle);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+#tab-changelog .j-card-title {
+  color: var(--content-strong);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.375;
+}
+#tab-changelog .j-card ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding-left: 20px;
+  /* Dans la liste des entrées, une liste imbriquée prendrait des cercles. */
+  list-style: disc;
+  color: var(--content-muted);
+  font-size: 14px;
+}
+#tab-changelog .j-goto {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}

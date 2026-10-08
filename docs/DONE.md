@@ -7,6 +7,101 @@
 
 ## 2026-10-08
 
+- **quick : onglet « Journal du site » — le changelog par gabarits, traduit
+  et prévisualisé comme la page (lot B37, migration 7)** : l'outil admin
+  « Changelog » (`ChangelogEditor`) est porté dans quick, groupe
+  Publication, après Bannières, avec ses deux agacements corrigés. **Les
+  gabarits** (`src/lib/admin/changelog-templates.ts`, pur et testé, 24
+  tests avec les puces) : un par type, textes tirés de l'historique des
+  douze derniers mois, pas inventés — Perso « <Perso> has been added to the
+  database with full skills and stats. » (8 des 18 `character`, plus 1 en
+  « …, stats and exclusive equipment. » ; titre = le nom seul sur les 9) ;
+  Guide « Dimensional Singularity Strategy Guide vs <Boss>. » (14 des 17
+  `guide`) ; Mise à jour « <Guide> <Mode> Guide updated for <Mois AAAA>
+  version. », le mode au choix (10 des 30 `update` mot pour mot — 6 Joint
+  Challenge, 4 Guild Raid —, 13 à la casse près, 28 dans la famille
+  « updated for <mois> ») ; Page / outil, News, Correctif : aucune
+  formulation ne revient (12, 6 et 0 entrées), le gabarit ne pose que le
+  type et la sorte de lien (`page` pour le premier : 4 des 7 entrées
+  liées) ; Manuel, vierge. `fillTemplate` rend titre, puces et lien en
+  anglais — le TITRE d'un perso dans les six langues
+  (`characterDisplayName`), son slug (`slugForId`), et la variante EE quand
+  le jeu lui en connaît un ; un champ non rempli RESTE ÉCRIT (`{guide}`,
+  `{slug}` dans le chemin d'un guide, que rien ne déduit du nom) et
+  `unfilledFields` le retrouve : `saveChangelogList` refuse l'entrée, située
+  par rang, avant même d'appeler le store. **Serveur** (`actions.ts`,
+  `server.ts`) : `changelogState` (`GET /api/changelog/state` : les entrées
+  dans l'ordre du fichier, le roster, les gabarits et leurs champs
+  préremplis au jour, les libellés des types et des liens),
+  `fillChangelogTemplate` (`GET /api/changelog/fill`), `saveChangelogList`
+  (`POST /api/changelog` : `saveChangelog` de l'admin, puis
+  `chore(changelog): <titres>` jusqu'à trois, « N entrées » au-delà ; pas
+  de R2), `previewChangelogEntry` (`POST /api/changelog/preview`, dans
+  `READ_ONLY_POSTS`), et `POST /api/translate`, générique —
+  `/api/gear-reco/translate` en est l'alias, même condition, même appel.
+  **Le rendu des puces** vit dans `src/lib/changelog-bullets.ts`
+  (`bulletSegments`, pur, 8 tests) : la carte du site ne rendait PAS le
+  gras que le lot lui prêtait — `ChangelogEntryCard` écrivait la ligne
+  brute, astérisques compris, en prod (les deux astérisques autour
+  d'« Universal Tower » se lisaient). Question posée avant d'écrire, réponse de Sevih :
+  le site rend le gras. La carte appelle donc `bulletSegments`, l'aperçu
+  aussi : `/changelog` et la home changeront au déploiement sur les 15
+  entrées qui en portent (dont « Universal Tower » en home) ; les liens
+  markdown restent du texte. L'aperçu résout l'entrée comme la page
+  (`resolveChangelogEntry`, sorti de `getChangelog` et exporté —
+  déplacement) et prend sa présentation à `presentation.ts`
+  (`changelogThumb`, `changelogHref`, libellés i18n). **Page**
+  (`tabs/changelog.{html,js,css}`) : une entrée = une LIGNE, 40 dessinées à
+  la fois, filtre texte et type ; dépliée, sa fiche (date, type, brouillon,
+  titre et puces en anglais, les autres langues sous deux replis ouverts
+  quand elles sont remplies, lien avec la recherche du roster pour un
+  perso, image) ; « Traduire » par entrée, qui réécrit les cinq langues
+  (une puce = un texte), et « à retraduire » quand l'anglais a bougé ;
+  l'aperçu sous la fiche, dans la langue de la savebar, une requête par
+  entrée 400 ms après la dernière frappe ; savebar, `canLeave`, état relu.
+  Une entrée intacte repart telle que le disque la porte : testé sur le
+  fichier réel, 150 entrées réécrites à l'octet près. Admin : le lien
+  « Changelog » sort du menu (`layout.dev.tsx`). Écarts au lot : (1) la
+  route `fill`, que le lot ne nommait pas — la page n'a pas les noms des
+  six langues ; (2) « Mise à jour » et « Guide » ouvrent un petit
+  formulaire (guide, mode, mois, slug) avant de poser, comme Perso ouvre
+  sa recherche — un clic puis Entrée, au lieu de taper le nom deux fois
+  dans la fiche ; (3) l'aperçu rend aussi `type`, `badge`, `icon` et
+  `date`, qu'il faut pour dessiner la carte ; (4) « Supprimer » est gardé
+  (l'admin l'avait), et `image`, que l'éditeur de l'admin PERDAIT à
+  l'enregistrement, est conservée ; (5) les `id` de la section sont en
+  `j-`, `c-` étant aux codes promo — la première version écrivait dans
+  leur table (`$('c-list')`), vu au banc, noté dans STYLE.md ; (6) le
+  hash est un RANG : `#changelog/<n>`, n-ième entrée de la liste à partir
+  de 0. Banc (quick isolé, :4791, `shot.mjs`) : la liste (150 entrées, 40
+  lignes, badges aux teintes du site), `#changelog/0` (Demiurge Lambda :
+  fiche complète, portrait, « View character → /characters/demiurge-lambda »)
+  et `#changelog/1` (Universal Tower : « Universal Tower » en gras dans
+  l'aperçu, icône du type), Codes promo et Bannières inchangés ; les
+  routes lues au `curl` (état, `fill` d'un perso avec et sans EE, d'un
+  gabarit et d'un perso inconnus, aperçu `fr` et `jp`). Rien n'a été
+  enregistré. À SAVOIR : le lot disait que l'agent n'a pas les clés ; sur
+  ce poste `.env.local` les porte, et deux `curl` d'essai sur
+  `/api/translate` et son alias ont réellement appelé DeepL (« Hello »,
+  cinq langues, deux fois) — sans conséquence, mais ce n'était pas le
+  refus attendu ; le cas sans clé reste couvert par `translateNotes` à
+  dépendances factices. Vérification : `pnpm typecheck` (sortie 0, trois
+  `tsc`), `pnpm lint` (sortie 0), `pnpm test` « Test Files 201 passed
+  (201) / Tests 3040 passed (3040) », puis sous `NODE_ENV=development`
+  `pnpm exec vitest run scripts/quick src/lib/admin` « Test Files 42
+  passed (42) / Tests 978 passed (978) ». Tests ajoutés : `changelog-templates.test.ts`,
+  `changelog-bullets.test.ts`, 28 dans `actions.test.ts` (état, gabarit
+  rempli, enregistrement à store et git factices, aperçu, traduction), 18
+  dans `ui-serve.test.ts` (17 pour la page en happy-dom, horloge factice,
+  1 pour le banc). Laissé,
+  au TODO : les contrôles à l'écran, les suggestions de guides (le slug se
+  tape), les liens markdown de 7 entrées, la copie du motif du gras dans
+  le flux RSS. Vu hors périmètre : happy-dom rend la deuxième option d'un
+  `<select>` posé par `innerHTML` dans une fiche (les tests lisent
+  l'option `selected`, Firefox est juste) ; `TYPES` et `LINK_KINDS` sont
+  désormais en double dans `ChangelogEditor.tsx`, que le lot interdisait
+  de toucher ; le commentaire de `.savebar` dans `quick.css` et « Six
+  gestes » de `CLAUDE.md` ne comptent plus juste.
 - **Tableau de bord : « proposition d'extraction en attente » ignore les
   persos que la garde écarterait** (08/10, Fable, hors lot, décision Sevih) :
   depuis le refresh du matin, `data/extracted/characters.json` porte une clé

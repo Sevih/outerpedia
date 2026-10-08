@@ -1,8 +1,9 @@
 /**
- * quick/actions — les HUIT gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les NEUF gestes du quotidien, sortis du panneau admin.
  *
  * Mettre à jour un code promo ou une bannière, déposer une 4-comic, ajouter une
- * vidéo, régler un rang, une reco d'équipement ou un nom court ne demandait
+ * vidéo, régler un rang, une reco d'équipement ou un nom court, écrire une
+ * entrée du journal du site ne demandait
  * jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
@@ -29,9 +30,11 @@
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
- *     sous les cartes, le champ recherche des listes de persos).
+ *     sous les cartes, le champ recherche des listes de persos) ;
+ *   - journal du site : `changelog.json` est lu par import statique, donc au
+ *     BUILD (la page `/changelog`, la home, le flux RSS).
  *
- * Les SEPT COMMITTENT, sans rien demander, et aucun ne pousse (cf.
+ * Les HUIT COMMITTENT, sans rien demander, et aucun ne pousse (cf.
  * `commitPaths`) : pousser à chaque geste lançait la CI à chaque geste. Le push
  * est un geste à part, le bouton « Pousser » de l'en-tête (`pushMain`), qui dit
  * combien de commits attendent (`gitState`). Il part quand même avec la CI : R2
@@ -50,6 +53,18 @@ import {
   type PromoCode,
 } from '@/lib/admin/promo-banner-store';
 import { publishBanners, type RuntimePublishResult } from '@/lib/admin/runtime-publish';
+import { loadChangelog, saveChangelog } from '@/lib/admin/changelog-store';
+import {
+  CHANGELOG_LINK_KINDS,
+  CHANGELOG_TEMPLATES,
+  CHANGELOG_TYPES,
+  CHARACTER_SCOPE,
+  fillTemplate,
+  templateDefaults,
+  unfilledFields,
+  type FilledTemplate,
+  type TemplateValue,
+} from '@/lib/admin/changelog-templates';
 import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
@@ -65,9 +80,16 @@ import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import {
+  resolveChangelogEntry,
+  type ChangelogEntry,
+  type ChangelogLink,
+  type ChangelogType,
+} from '@/lib/data/changelog';
+import {
   characterDisplayName,
   characterSearchNames,
   getCharacterListItems,
+  slugForId,
 } from '@/lib/data/characters';
 import {
   getAmuletFamilies,
@@ -84,12 +106,22 @@ import { listGuides } from '@/lib/data/guides';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
-import { DEFAULT_LANG, LANGS, type Lang } from '@/lib/i18n/config';
+import { DEFAULT_LANG, LANGS, isValidLang, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
+import { getT } from '@/i18n';
+import { bulletSegments, type BulletSegment } from '@/lib/changelog-bullets';
+import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
+import {
+  CHANGELOG_TYPE_ICON,
+  changelogGotoKey,
+  changelogHref,
+  changelogThumb,
+  formatChangelogDate,
+} from '@/components/changelog/presentation';
 import {
   CURATED_ROLES,
   CURATED_STEPS,
@@ -574,6 +606,316 @@ export async function saveBannerList(
     issues: [],
     written: true,
   };
+}
+
+// -------------------------------------------------------- journal du site ----
+
+/** Le seul fichier que l'onglet « Journal du site » écrit et committe. */
+const CHANGELOG_PATH = 'data/curated/changelog.json';
+
+/** Les lectures de l'onglet « Journal du site », injectées : le curé, le jour. */
+export interface ChangelogDisk {
+  loadChangelog: () => ChangelogEntry[];
+  /** Le jour UTC — la date d'une entrée est aussi sa mise en ligne. */
+  today: () => string;
+}
+
+/** Celles de la route : le store de l'admin, l'horloge. */
+export const CHANGELOG_DISK: ChangelogDisk = {
+  loadChangelog,
+  today: () => new Date().toISOString().slice(0, 10),
+};
+
+/**
+ * L'onglet « Journal du site » : `changelog.json` tel que le disque le porte,
+ * dans l'ordre du fichier, le jour UTC, le roster (id, nom complet anglais,
+ * slug — la recherche du gabarit Perso et du lien d'une entrée), les gabarits
+ * avec leurs champs préremplis au jour, et les libellés des types et des sortes
+ * de lien : la page n'en recopie aucun.
+ *
+ * `langs.file` est l'ordre des langues dans le fichier (celui de `LANGS`),
+ * `langs.shown` celui de l'écran, comme Gear reco : l'anglais, puis le français
+ * et l'espagnol que Sevih relit, puis le reste.
+ */
+export function changelogState(disk: ChangelogDisk = CHANGELOG_DISK) {
+  const today = disk.today();
+  return {
+    entries: disk.loadChangelog(),
+    today,
+    roster: getCharacterListItems()
+      .map((c) => ({ id: c.id, name: characterDisplayName(c), slug: slugForId(c.id) ?? '' }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    templates: CHANGELOG_TEMPLATES.map((t) => {
+      const defaults = templateDefaults(t, today);
+      return {
+        id: t.id,
+        label: t.label,
+        type: t.type,
+        fields: t.fields.map((f) => ({
+          key: f.key,
+          label: f.label,
+          kind: f.kind,
+          value: defaults[f.key] ?? '',
+          placeholder: f.placeholder ?? '',
+          options: (f.options ?? []).map((o) => ({ value: o.value, label: o.label ?? o.value })),
+        })),
+      };
+    }),
+    types: CHANGELOG_TYPES,
+    linkKinds: CHANGELOG_LINK_KINDS,
+    langs: {
+      default: DEFAULT_LANG,
+      file: LANGS,
+      shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
+    },
+  };
+}
+
+/**
+ * Un gabarit rempli, prêt à poser en tête de liste : `fillTemplate`, appelé
+ * ICI — la page n'a ni les noms du roster dans les six langues ni la règle de
+ * remplissage, et une seule copie ne peut pas diverger de l'autre. Rien ne
+ * s'écrit.
+ *
+ * `values` : les champs saisis dans le formulaire du gabarit. Pour le gabarit
+ * Perso, `character` est l'id du perso choisi : son nom par langue
+ * (`characterDisplayName`), son slug (`slugForId`), et la variante « exclusive
+ * equipment » quand le jeu lui en connaît un. Un champ laissé vide n'est PAS
+ * une erreur : il reste écrit dans l'entrée (`{guide}`), refusé seulement à
+ * l'enregistrement.
+ */
+export function fillChangelogTemplate(
+  templateId: unknown,
+  values: unknown,
+  today: string,
+): (FilledTemplate & { date: string }) | { error: string } {
+  const template = CHANGELOG_TEMPLATES.find((t) => t.id === templateId);
+  if (!template) return { error: `gabarit inconnu : ${String(templateId ?? '')}` };
+  const given: Record<string, TemplateValue> = {};
+  if (values && typeof values === 'object')
+    for (const [key, value] of Object.entries(values))
+      if (typeof value === 'string') given[key] = value;
+
+  const picked: Record<string, TemplateValue> = {};
+  const who = template.fields.find((f) => f.kind === 'character');
+  if (who) {
+    const c = getCharacterListItems().find((x) => x.id === given.character);
+    if (!c) return { error: `perso inconnu : ${String(given.character ?? '') || '(aucun)'}` };
+    picked[who.key] = perLang((l) => characterDisplayName(c, l));
+    picked.slug = slugForId(c.id) ?? '';
+    given.scope ??= getEEViews().some((e) => e.characterId === c.id)
+      ? CHARACTER_SCOPE.ee
+      : CHARACTER_SCOPE.base;
+  }
+  return {
+    ...fillTemplate(template, { ...templateDefaults(template, today), ...given, ...picked }),
+    date: today,
+  };
+}
+
+/** Les sortes de lien qu'une entrée peut porter. */
+const CHANGELOG_LINKS = new Set<string>(CHANGELOG_LINK_KINDS.map((k) => k.value).filter(Boolean));
+
+/** Le lien d'une entrée reçue : une sorte connue et une valeur, sinon aucun. */
+function cleanChangelogLink(raw: unknown): ChangelogLink | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const { kind, slug, href } = raw as Record<string, unknown>;
+  if (typeof kind !== 'string' || !CHANGELOG_LINKS.has(kind)) return undefined;
+  const value = kind === 'character' ? slug : href;
+  if (typeof value !== 'string' || !value.trim()) return undefined;
+  return kind === 'character'
+    ? { kind, slug: value.trim() }
+    : { kind: kind as Exclude<ChangelogLink['kind'], 'character'>, href: value.trim() };
+}
+
+/**
+ * Une entrée reçue de la page, réduite à ce que le fichier porte — la règle de
+ * l'éditeur de l'admin (`toEntry`) : les clés du fichier et elles seules, dans
+ * son ordre ; un titre vide ou une langue sans puce ne s'écrivent pas ; `draft`
+ * seulement s'il est vrai. L'ordre des langues reçu est gardé : une entrée du
+ * disque renvoyée intacte se réécrit à l'identique (aucun diff sur ce que la
+ * page n'a pas touché). `image`, que l'éditeur de l'admin perdait, est gardée.
+ */
+function cleanChangelogEntry(raw: unknown): ChangelogEntry {
+  const e = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  const perKnownLang = <T>(map: unknown, keep: (v: unknown) => T | undefined) => {
+    const out: Partial<Record<Lang, T>> = {};
+    if (map && typeof map === 'object')
+      for (const [lang, v] of Object.entries(map)) {
+        const kept = isValidLang(lang) ? keep(v) : undefined;
+        if (kept !== undefined) out[lang as Lang] = kept;
+      }
+    return out;
+  };
+  const text = (v: unknown): string | undefined =>
+    typeof v === 'string' && v.trim() ? v.trim() : undefined;
+  const lines = (v: unknown): string[] | undefined => {
+    const kept = Array.isArray(v) ? v.flatMap((x) => text(x) ?? []) : [];
+    return kept.length ? kept : undefined;
+  };
+  const link = cleanChangelogLink(e.link);
+  const image = text(e.image);
+  return {
+    date: String(e.date ?? ''),
+    type: String(e.type ?? '') as ChangelogType,
+    title: perKnownLang(e.title, text),
+    content: perKnownLang(e.content, lines),
+    ...(link && { link }),
+    ...(image && { image }),
+    ...(e.draft === true && { draft: true }),
+  };
+}
+
+/** Un refus situé : `index` est le rang de l'entrée dans la liste envoyée. */
+export interface ChangelogIssue {
+  index: number | null;
+  message: string;
+}
+
+/** Situe un refus de `saveChangelog` (« Entrée 3 : titre EN requis. »). */
+function locateChangelogError(error: string): ChangelogIssue {
+  const m = /^Entrée (\d+) /.exec(error);
+  return { index: m ? Number(m[1]) - 1 : null, message: error };
+}
+
+/** Les deux écritures de `saveChangelogList`, injectées : le store, git. */
+export interface ChangelogDeps {
+  saveChangelog: (list: ChangelogEntry[]) => Promise<string[]>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le store de l'admin, le vrai `commitPaths`. */
+export const CHANGELOG_DEPS: ChangelogDeps = { saveChangelog, commitPaths };
+
+/** Au-delà, le message de commit compte les entrées au lieu de les nommer. */
+const CHANGELOG_NAMED = 3;
+
+/** `chore(changelog): Demiurge Lambda, Annihilator` — ou leur nombre, au-delà de trois. */
+function changelogCommitMessage(changed: string[]): string {
+  if (changed.length > CHANGELOG_NAMED) return `chore(changelog): ${changed.length} entrées`;
+  const titles = changed.map((t) => t.trim()).filter(Boolean);
+  return `chore(changelog): ${titles.join(', ') || 'mise à jour du journal'}`;
+}
+
+/**
+ * Enregistre la LISTE complète du journal (même contrat que la route admin :
+ * l'écran est l'éditeur, il renvoie son état) : `saveChangelog` — la validation
+ * de l'admin, puis le fichier —, puis un commit sur ce seul fichier. `changed`
+ * porte les titres anglais des entrées qui ont bougé (ajoutées, modifiées,
+ * retirées) : la page les connaît, le message de commit les dit.
+ *
+ * Pas de R2 : le site lit `changelog.json` par import statique, une entrée
+ * n'est en ligne qu'après « Pousser » et le build de la CI.
+ *
+ * Deux refus, qui n'écrivent ni ne committent RIEN, situés par rang (`issues`) :
+ * un champ de gabarit encore écrit dans une entrée (`{guide}` — vu d'abord, le
+ * store ne le connaît pas), puis la validation du store (titre anglais, type,
+ * date).
+ */
+export async function saveChangelogList(
+  list: unknown,
+  changed: string[],
+  deps: ChangelogDeps,
+  report?: Report,
+): Promise<Outcome & { issues: ChangelogIssue[]; written: boolean }> {
+  if (!Array.isArray(list))
+    return { ok: false, log: ['Liste d’entrées attendue.'], issues: [], written: false };
+  const entries = list.map(cleanChangelogEntry);
+
+  const unfilled = entries.flatMap((e, index): ChangelogIssue[] => {
+    const fields = unfilledFields(e);
+    if (!fields.length) return [];
+    const many = fields.length > 1 ? 's' : '';
+    return [
+      {
+        index,
+        message: `Entrée ${index + 1} : champ${many} de gabarit non rempli${many} — ${fields.map((f) => `{${f}}`).join(', ')}.`,
+      },
+    ];
+  });
+  const issues = unfilled.length
+    ? unfilled
+    : (await deps.saveChangelog(entries)).map(locateChangelogError);
+  if (issues.length)
+    return {
+      ok: false,
+      log: issues.map((i) => `REFUSÉ — ${i.message}`),
+      issues,
+      written: false,
+    };
+
+  const j = journal(report);
+  const n = entries.length;
+  j.done(
+    `${n} entrée${n > 1 ? 's écrites' : ' écrite'} dans ${CHANGELOG_PATH} — lu au build : en ligne après « Pousser » et la CI.`,
+  );
+  const commit = deps.commitPaths([CHANGELOG_PATH], changelogCommitMessage(changed), report);
+  return { ok: commit.ok, log: [...j.lines, ...commit.log], issues: [], written: true };
+}
+
+/** Ce que la page `/changelog` montrerait d'une entrée, dans une langue. */
+export interface ChangelogPreview {
+  type: ChangelogType;
+  /** Le libellé du badge de type, dans la langue (`changelog.type.*`). */
+  badge: string;
+  /** L'emoji du type : la vignette de repli, quand `image` est `null`. */
+  icon: string;
+  /** La date comme la carte l'écrit ; telle que saisie si elle n'en est pas une. */
+  date: string;
+  title: string;
+  /** Une puce = ses segments (`bulletSegments` : le gras, et lui seul). */
+  bullets: BulletSegment[][];
+  link: { kind: ChangelogLink['kind']; label: string; href: string } | null;
+  /** L'adresse de la vignette — relative à la base des images quand elle commence par `/`. */
+  image: string | null;
+}
+
+/**
+ * L'aperçu de l'onglet « Journal du site » : une entrée EN COURS d'édition,
+ * rendue par les fonctions de la page — `resolveChangelogEntry` (la langue,
+ * repli anglais), `bulletSegments` (le gras), et la présentation de la carte
+ * (`changelogThumb` : l'image explicite, sinon le portrait du perso ou la carte
+ * du guide ; `changelogHref` ; les libellés i18n du badge et du lien). Rien ne
+ * s'écrit, rien n'est validé : c'est un aperçu, un titre vide passe.
+ *
+ * Seul un type inconnu est refusé (la carte n'aurait ni badge ni icône). Tout
+ * refus est RENDU, jamais levé.
+ */
+export async function previewChangelogEntry(
+  entry: unknown,
+  lang: unknown,
+): Promise<ChangelogPreview | { error: string }> {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry))
+    return { error: 'entry : une entrée du journal attendue' };
+  const clean = cleanChangelogEntry(entry);
+  if (!CHANGELOG_TYPES.some((t) => t.value === clean.type))
+    return { error: `type inconnu : ${clean.type || '(vide)'}` };
+  try {
+    const l = normalizeLang(typeof lang === 'string' ? lang : DEFAULT_LANG);
+    const t = await getT(l);
+    const resolved = resolveChangelogEntry(clean, l);
+    const href = changelogHref(resolved.link);
+    const dated = ISO_DAY.test(resolved.date) && !Number.isNaN(Date.parse(resolved.date));
+    return {
+      type: resolved.type,
+      badge: t(`changelog.type.${resolved.type}`),
+      icon: CHANGELOG_TYPE_ICON[resolved.type],
+      date: dated ? formatChangelogDate(resolved.date, l) : resolved.date,
+      title: resolved.title,
+      bullets: resolved.content.map(bulletSegments),
+      link:
+        resolved.link && href
+          ? {
+              kind: resolved.link.kind,
+              label: t(changelogGotoKey(resolved.link.kind)),
+              href: localePath(l, href),
+            }
+          : null,
+      image: changelogThumb(resolved) ?? null,
+    };
+  } catch (e: unknown) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
 }
 
 // -------------------------------------------------------- tableau de bord ----
@@ -2078,13 +2420,15 @@ export const TRANSLATE_DEPS: TranslateDeps = {
 export const NO_TRANSLATE_KEY = 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local';
 
 /**
- * « Traduire » de l'onglet Gear reco : les notes anglaises d'un perso vers les
- * autres langues du site, d'UN appel (`autoTranslate` prend tous les textes à
- * la fois et préserve les tags `{…}`). `results` est aligné sur `texts` ; un
- * texte vide n'est pas envoyé et rend `{}`.
+ * « Traduire » : des textes anglais vers les autres langues du site, d'UN appel
+ * (`autoTranslate` prend tous les textes à la fois et préserve les tags `{…}`).
+ * `results` est aligné sur `texts` ; un texte vide n'est pas envoyé et rend
+ * `{}`. Générique — `POST /api/translate` : les notes d'un perso (Gear reco, né
+ * pour lui, d'où le nom), le titre et les puces d'une entrée du journal du site,
+ * UNE PUCE = UN TEXTE (cf. `changelog-text.ts`).
  *
  * Rien ne s'écrit ici : la page pose les traductions dans son modèle, et c'est
- * `saveGearReco` qui en contrôle les tags à l'enregistrement.
+ * l'enregistrement de l'onglet qui les contrôle (`saveGearReco` : les tags).
  *
  * Tout échec est RENDU, jamais levé — pas de clé (sans appeler le moteur), un
  * refus de DeepL ou d'Anthropic, et le moteur qui ne traduit rien : `provider`

@@ -47,6 +47,12 @@
  * lignes, le fichier curé et le jour sont INJECTÉS, comme les trois écritures
  * (le store, R2, git). Seul le roster est réel.
  *
+ * Et contrat de l'onglet « Journal du site » — `changelogState`,
+ * `fillChangelogTemplate` (un gabarit rempli pour la page), `saveChangelogList`
+ * et `previewChangelogEntry` (ce que la page `/changelog` montrerait). Le fichier
+ * du journal est LU (jamais écrit : le store et git sont INJECTÉS), le roster
+ * est réel, et l'aperçu ne dépend pas de la garde `IS_DEV`.
+ *
  * Et contrat du « Tableau de bord » — `dashboardState`, l'accueil de quick.
  * Il ne fait que LIRE, et toutes ses lectures sont INJECTÉES : l'inbox de
  * l'admin (son moteur de revue n'est jamais lancé ici), git (un `--porcelain`
@@ -69,7 +75,12 @@ import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CharacterCurated, GearBuild, LocalizedText } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
-import { getCharacterListItems } from '@/lib/data/characters';
+import { loadChangelog } from '@/lib/admin/changelog-store';
+import type { ChangelogEntry } from '@/lib/data/changelog';
+import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
+import { getEEViews } from '@/lib/data/equipment';
+import en from '@/i18n/locales/en';
+import fr from '@/i18n/locales/fr';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
@@ -85,25 +96,31 @@ import {
   NO_TRANSLATE_KEY,
   addComics,
   bannersState,
+  changelogState,
   checkGearBuilds,
   comicLangOf,
   commitPaths,
   dashboardState,
   diffBanners,
+  fillChangelogTemplate,
   fitNames,
   gearRecoState,
   gitState,
   groupComics,
   namesState,
   planRankChanges,
+  previewChangelogEntry,
   previewGearBuilds,
   pushMain,
   saveBannerList,
+  saveChangelogList,
   saveGearReco,
   saveNames,
   translateNotes,
   type BannersDeps,
   type BannersDisk,
+  type ChangelogDeps,
+  type ChangelogDisk,
   type ComicsDeps,
   type ComicUpload,
   type DashboardDisk,
@@ -2472,6 +2489,582 @@ describe('saveBannerList — écritures injectées', () => {
     const out = await saveBannerList([RIN], ['Resonance Rin'], fake);
     expect(out).toMatchObject({ ok: false, written: true });
     expect(out.log.at(-1)).toBe('git commit a échoué');
+  });
+});
+
+describe('changelogState — le fichier, le roster, les gabarits et les libellés servis', () => {
+  const ENTRIES: ChangelogEntry[] = [
+    {
+      date: '2026-10-06',
+      type: 'character',
+      title: { en: 'Demiurge Lambda' },
+      content: { en: ['Added.'] },
+      link: { kind: 'character', slug: 'demiurge-lambda' },
+    },
+    { date: '2026-09-23', type: 'news', title: { en: 'Old news' }, content: {} },
+  ];
+  const disk: ChangelogDisk = { loadChangelog: () => ENTRIES, today: () => '2026-10-08' };
+
+  it('les entrées telles que le disque, dans son ordre, et le jour', () => {
+    const state = changelogState(disk);
+    expect(state.entries).toBe(ENTRIES);
+    expect(state.today).toBe('2026-10-08');
+  });
+
+  it('le roster : id, nom complet anglais et slug, par nom', () => {
+    const { roster } = changelogState(disk);
+    expect(roster).toHaveLength(getCharacterListItems().length);
+    expect(roster.map((c) => c.name)).toEqual(
+      [...roster.map((c) => c.name)].sort((a, b) => a.localeCompare(b)),
+    );
+    expect(roster.find((c) => c.slug === 'demiurge-lambda')).toEqual({
+      id: expect.stringMatching(/^\d+$/),
+      name: 'Demiurge Lambda',
+      slug: 'demiurge-lambda',
+    });
+    expect(roster.filter((c) => !c.slug)).toEqual([]);
+  });
+
+  it('les gabarits et leurs champs préremplis au jour : la page n’en recopie aucun', () => {
+    const { templates } = changelogState(disk);
+    expect(templates.map((t) => [t.id, t.label, t.type, t.fields.map((f) => f.key)])).toEqual([
+      ['character', 'Perso', 'character', ['name', 'scope']],
+      ['guide', 'Guide', 'guide', ['guide', 'slug']],
+      ['update', 'Mise à jour', 'update', ['guide', 'mode', 'month', 'slug']],
+      ['feature', 'Page / outil', 'feature', []],
+      ['news', 'News', 'news', []],
+      ['fix', 'Correctif', 'fix', []],
+      ['manual', 'Manuel', 'guide', []],
+    ]);
+    const update = templates.find((t) => t.id === 'update');
+    expect(update?.fields).toEqual([
+      {
+        key: 'guide',
+        label: 'Guide',
+        kind: 'text',
+        value: '',
+        placeholder: 'Annihilator',
+        options: [],
+      },
+      {
+        key: 'mode',
+        label: 'Mode',
+        kind: 'choice',
+        value: 'Joint Challenge',
+        placeholder: '',
+        options: [
+          { value: 'Joint Challenge', label: 'Joint Challenge' },
+          { value: 'Guild Raid', label: 'Guild Raid' },
+          { value: 'World Boss', label: 'World Boss' },
+        ],
+      },
+      // Le mois courant, au jour du serveur.
+      {
+        key: 'month',
+        label: 'Mois',
+        kind: 'month',
+        value: 'October 2026',
+        placeholder: '',
+        options: [],
+      },
+      {
+        key: 'slug',
+        label: 'Slug du guide',
+        kind: 'text',
+        value: '',
+        placeholder: 'annihilator',
+        options: [],
+      },
+    ]);
+    expect(
+      changelogState({ ...disk, today: () => '2027-01-02' })
+        .templates.find((t) => t.id === 'update')
+        ?.fields.find((f) => f.key === 'month')?.value,
+    ).toBe('January 2027');
+  });
+
+  it('les libellés des types et des sortes de lien, et les langues dans leurs deux ordres', () => {
+    const state = changelogState(disk);
+    expect(state.types).toEqual([
+      { value: 'guide', label: 'Guide' },
+      { value: 'update', label: 'Mise à jour' },
+      { value: 'feature', label: 'Page / outil' },
+      { value: 'character', label: 'Perso' },
+      { value: 'news', label: 'News' },
+      { value: 'fix', label: 'Correctif' },
+    ]);
+    expect(state.linkKinds.map((k) => [k.value, k.label])).toEqual([
+      ['', 'aucun lien'],
+      ['character', 'perso (slug)'],
+      ['guide', 'guide (chemin)'],
+      ['tool', 'outil (chemin)'],
+      ['page', 'page (chemin)'],
+    ]);
+    // `file` : l'ordre des langues dans le fichier ; `shown` : celui de l'écran.
+    expect(state.langs).toEqual({
+      default: 'en',
+      file: LANGS,
+      shown: ['en', 'fr', 'es', 'jp', 'kr', 'zh'],
+    });
+  });
+
+  it('le disque réel se lit : des entrées, toutes datées et typées', () => {
+    const { entries, types } = changelogState();
+    expect(entries.length).toBeGreaterThan(100);
+    const known = new Set<string>(types.map((t) => t.value));
+    expect(
+      entries.filter((e) => !known.has(e.type) || !/^\d{4}-\d{2}-\d{2}$/.test(e.date)),
+    ).toEqual([]);
+  });
+});
+
+describe('fillChangelogTemplate — un gabarit rempli par le serveur', () => {
+  const TODAY = '2026-10-08';
+  const lambda = getCharacterListItems().find((c) => slugForId(c.id) === 'demiurge-lambda');
+  const filled = (template: unknown, values: unknown) => {
+    const out = fillChangelogTemplate(template, values, TODAY);
+    if ('error' in out) throw new Error(out.error);
+    return out;
+  };
+
+  it('Perso : le titre dans les six langues depuis le roster, le slug, la date du jour', () => {
+    expect(lambda).toBeTruthy();
+    const out = filled('character', { character: lambda?.id });
+    expect(out.type).toBe('character');
+    expect(out.date).toBe(TODAY);
+    expect(out.link).toEqual({ kind: 'character', value: 'demiurge-lambda' });
+    expect(Object.keys(out.title).sort()).toEqual([...LANGS].sort());
+    for (const lang of LANGS)
+      expect(out.title[lang], lang).toBe(lambda && characterDisplayName(lambda, lang));
+    expect(out.title.en).toBe('Demiurge Lambda');
+    // Le nom du jeu dans chaque langue, pas l'anglais recopié.
+    expect(new Set(Object.values(out.title)).size).toBeGreaterThan(1);
+  });
+
+  it('Perso : la variante « exclusive equipment » quand le jeu lui connaît un EE, sinon l’autre', () => {
+    const owners = new Set(getEEViews().map((e) => e.characterId));
+    const roster = getCharacterListItems();
+    const withEe = roster.find((c) => owners.has(c.id));
+    expect(withEe).toBeTruthy();
+    const name = withEe ? characterDisplayName(withEe) : '';
+    expect(filled('character', { character: withEe?.id }).content).toEqual([
+      `${name} has been added to the database with full skills, stats and exclusive equipment.`,
+    ]);
+    const without = roster.find((c) => !owners.has(c.id));
+    if (without)
+      expect(filled('character', { character: without.id }).content).toEqual([
+        `${characterDisplayName(without)} has been added to the database with full skills and stats.`,
+      ]);
+    // Une variante donnée l'emporte sur la déduction.
+    expect(
+      filled('character', { character: withEe?.id, scope: 'skills and stats' }).content,
+    ).toEqual([`${name} has been added to the database with full skills and stats.`]);
+  });
+
+  it('Perso : un nom saisi ne remplace pas celui du roster', () => {
+    expect(
+      filled('character', { character: lambda?.id, name: 'Intrus', slug: 'intrus' }),
+    ).toMatchObject({ title: { en: 'Demiurge Lambda' }, link: { value: 'demiurge-lambda' } });
+  });
+
+  it('Mise à jour : les valeurs d’office (mode, mois courant) quand rien n’est saisi', () => {
+    expect(filled('update', { guide: 'Annihilator', slug: 'annihilator' })).toEqual({
+      type: 'update',
+      title: { en: 'Annihilator' },
+      content: ['Annihilator Joint Challenge Guide updated for October 2026 version.'],
+      link: { kind: 'guide', value: '/guides/joint-challenge/annihilator' },
+      date: TODAY,
+    });
+  });
+
+  it('un champ laissé vide n’est pas une erreur : il reste écrit dans l’entrée', () => {
+    expect(filled('update', { guide: '', mode: 'Guild Raid', slug: '' })).toMatchObject({
+      title: { en: '{guide}' },
+      content: ['{guide} Guild Raid Guide updated for October 2026 version.'],
+      link: { kind: 'guide', value: '/guides/guild-raid/{slug}' },
+    });
+    // Ce qui n'est pas une chaîne est ignoré, pas écrit « [object Object] ».
+    expect(filled('update', { guide: { en: 'x' }, slug: 7 }).title).toEqual({ en: '{guide}' });
+    expect(filled('update', null).title).toEqual({ en: '{guide}' });
+  });
+
+  it('Manuel : une entrée vierge, datée du jour', () => {
+    expect(filled('manual', {})).toEqual({
+      type: 'guide',
+      title: {},
+      content: [],
+      link: { kind: '', value: '' },
+      date: TODAY,
+    });
+  });
+
+  it('un gabarit ou un perso inconnu est rendu en erreur, pas levé', () => {
+    expect(fillChangelogTemplate('nope', {}, TODAY)).toEqual({ error: 'gabarit inconnu : nope' });
+    expect(fillChangelogTemplate(undefined, {}, TODAY)).toEqual({ error: 'gabarit inconnu : ' });
+    expect(fillChangelogTemplate('character', { character: 'nope' }, TODAY)).toEqual({
+      error: 'perso inconnu : nope',
+    });
+    expect(fillChangelogTemplate('character', {}, TODAY)).toEqual({
+      error: 'perso inconnu : (aucun)',
+    });
+  });
+});
+
+describe('saveChangelogList — écritures injectées', () => {
+  const LAMBDA: ChangelogEntry = {
+    date: '2026-10-06',
+    type: 'character',
+    title: { en: 'Demiurge Lambda', fr: 'Démiurge Lambda' },
+    content: { en: ['Demiurge Lambda has been added.'], fr: ['Démiurge Lambda est là.'] },
+    link: { kind: 'character', slug: 'demiurge-lambda' },
+  };
+  const NEWS: ChangelogEntry = {
+    date: '2026-09-23',
+    type: 'news',
+    title: { en: 'Outerpedia in French and Spanish' },
+    content: { en: ['First.', 'Second.'] },
+  };
+
+  /**
+   * Les deux écritures, factices : elles notent leur ordre. `saveChangelog` tient
+   * le contrat du store — sa règle du titre anglais, et rien d'écrit s'il refuse.
+   */
+  function deps(over: { git?: Outcome } = {}) {
+    const calls = {
+      order: [] as string[],
+      asked: 0,
+      written: [] as ChangelogEntry[][],
+      git: [] as [string[], string][],
+    };
+    const fake: ChangelogDeps = {
+      saveChangelog: async (list) => {
+        calls.asked += 1;
+        const errors = list.flatMap((e, i) =>
+          e.title?.en?.trim() ? [] : [`Entrée ${i + 1} : titre EN requis.`],
+        );
+        if (errors.length) return errors;
+        calls.order.push('fichier');
+        calls.written.push(list);
+        return [];
+      },
+      commitPaths: (paths, message) => {
+        calls.order.push('commit');
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  it('fichier → commit, sur le seul changelog.json, la liste entière — pas de R2', async () => {
+    const { calls, fake } = deps();
+    const steps: string[] = [];
+    const out = await saveChangelogList([LAMBDA, NEWS], ['Demiurge Lambda'], fake, (line) =>
+      steps.push(line),
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: [
+        '2 entrées écrites dans data/curated/changelog.json — lu au build : en ligne après « Pousser » et la CI.',
+        'git : fait',
+      ],
+      issues: [],
+      written: true,
+    });
+    expect(calls.order).toEqual(['fichier', 'commit']);
+    expect(calls.written).toEqual([[LAMBDA, NEWS]]);
+    expect(calls.git).toEqual([
+      [['data/curated/changelog.json'], 'chore(changelog): Demiurge Lambda'],
+    ]);
+    expect(steps).toEqual([out.log[0]]);
+  });
+
+  it('n’écrit que la forme du fichier : les clés de la page, les vides et les espaces restent dehors', async () => {
+    const { calls, fake } = deps();
+    await saveChangelogList(
+      [
+        {
+          key: 12,
+          was: null,
+          date: '2026-10-08',
+          type: 'update',
+          draft: false,
+          title: { en: '  Annihilator ', fr: '', xx: 'langue inconnue', jp: 7 },
+          content: { en: [' One. ', '', '   ', 'Two.'], fr: [], kr: 'pas une liste' },
+          link: { kind: 'guide', href: ' /guides/joint-challenge/annihilator ', slug: 'ignoré' },
+          image: '   ',
+        },
+        // Un lien sans valeur, ou d'une sorte inconnue, n'en est pas un.
+        { ...NEWS, link: { kind: 'page', href: '  ' }, draft: true, image: ' /images/a.webp ' },
+        { ...NEWS, link: { kind: 'video', href: '/x' }, draft: 'oui' },
+        { ...NEWS, link: { kind: 'character', slug: ' titia ', href: '/ignoré' } },
+      ],
+      ['Annihilator'],
+      fake,
+    );
+    expect(calls.written[0]).toEqual([
+      {
+        date: '2026-10-08',
+        type: 'update',
+        title: { en: 'Annihilator' },
+        content: { en: ['One.', 'Two.'] },
+        link: { kind: 'guide', href: '/guides/joint-challenge/annihilator' },
+      },
+      { ...NEWS, image: '/images/a.webp', draft: true },
+      NEWS,
+      { ...NEWS, link: { kind: 'character', slug: 'titia' } },
+    ]);
+    // L'ordre des clés est celui du fichier : date, type, titre, contenu, lien, image, brouillon.
+    expect(Object.keys(calls.written[0][1])).toEqual([
+      'date',
+      'type',
+      'title',
+      'content',
+      'image',
+      'draft',
+    ]);
+  });
+
+  it('le fichier réel, renvoyé intact, se réécrit à l’identique — clés et langues dans leur ordre', async () => {
+    const real = loadChangelog();
+    expect(real.length).toBeGreaterThan(100);
+    const { calls, fake } = deps();
+    const out = await saveChangelogList(structuredClone(real), [], fake);
+    expect(out.ok).toBe(true);
+    expect(JSON.stringify(calls.written[0])).toBe(JSON.stringify(real));
+    expect(calls.git[0][1]).toBe('chore(changelog): mise à jour du journal');
+  });
+
+  it('une validation en échec n’écrit ni ne committe rien, et situe l’entrée', async () => {
+    const { calls, fake } = deps();
+    const out = await saveChangelogList(
+      [LAMBDA, { ...NEWS, title: { fr: 'Sans anglais' } }, { ...NEWS, title: { en: '  ' } }],
+      ['x'],
+      fake,
+    );
+    expect(out).toEqual({
+      ok: false,
+      log: ['REFUSÉ — Entrée 2 : titre EN requis.', 'REFUSÉ — Entrée 3 : titre EN requis.'],
+      issues: [
+        { index: 1, message: 'Entrée 2 : titre EN requis.' },
+        { index: 2, message: 'Entrée 3 : titre EN requis.' },
+      ],
+      written: false,
+    });
+    expect(calls.order).toEqual([]);
+    expect(calls.written).toEqual([]);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('un champ de gabarit non rempli est refusé AVANT le store, situé et nommé', async () => {
+    const { calls, fake } = deps();
+    const out = await saveChangelogList(
+      [
+        LAMBDA,
+        {
+          date: '2026-10-08',
+          type: 'update',
+          title: { en: '{guide}' },
+          content: { en: ['{guide} Joint Challenge Guide updated for October 2026 version.'] },
+          link: { kind: 'guide', href: '/guides/joint-challenge/{slug}' },
+        },
+        { ...NEWS, content: { en: ['Released in {month}.'] } },
+      ],
+      ['{guide}'],
+      fake,
+    );
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'REFUSÉ — Entrée 2 : champs de gabarit non remplis — {guide}, {slug}.',
+        'REFUSÉ — Entrée 3 : champ de gabarit non rempli — {month}.',
+      ],
+      issues: [
+        { index: 1, message: 'Entrée 2 : champs de gabarit non remplis — {guide}, {slug}.' },
+        { index: 2, message: 'Entrée 3 : champ de gabarit non rempli — {month}.' },
+      ],
+      written: false,
+    });
+    // Le store n'a même pas été sollicité : il aurait écrit, lui ne connaît pas les gabarits.
+    expect(calls.asked).toBe(0);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('le message de commit : un titre, jusqu’à trois, leur nombre au-delà', async () => {
+    const message = async (changed: string[]) => {
+      const { calls, fake } = deps();
+      await saveChangelogList([LAMBDA], changed, fake);
+      return calls.git[0][1];
+    };
+    expect(await message(['Demiurge Lambda'])).toBe('chore(changelog): Demiurge Lambda');
+    expect(await message(['Demiurge Lambda', ' Annihilator ', 'Universal Tower'])).toBe(
+      'chore(changelog): Demiurge Lambda, Annihilator, Universal Tower',
+    );
+    expect(await message(['A', 'B', 'C', 'D'])).toBe('chore(changelog): 4 entrées');
+    // Une entrée sans titre anglais (retirée telle quelle) ne laisse pas de virgule orpheline.
+    expect(await message(['', 'Annihilator'])).toBe('chore(changelog): Annihilator');
+    expect(await message([])).toBe('chore(changelog): mise à jour du journal');
+  });
+
+  it('refuse ce qui n’est pas une liste, sans rien écrire', async () => {
+    const { calls, fake } = deps();
+    expect(await saveChangelogList({ list: [LAMBDA] }, [], fake)).toEqual({
+      ok: false,
+      log: ['Liste d’entrées attendue.'],
+      issues: [],
+      written: false,
+    });
+    expect(calls.asked).toBe(0);
+  });
+
+  it('un commit refusé est un échec d’après écriture : le disque porte la liste', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
+    const out = await saveChangelogList([LAMBDA], ['Demiurge Lambda'], fake);
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.log.at(-1)).toBe('git commit a échoué');
+  });
+});
+
+describe('previewChangelogEntry — ce que la page /changelog montrerait', () => {
+  const lambda = getCharacterListItems().find((c) => slugForId(c.id) === 'demiurge-lambda');
+  const ENTRY = {
+    date: '2026-10-06',
+    type: 'character',
+    title: { en: 'Demiurge Lambda', fr: 'Démiurge Lambda' },
+    content: {
+      en: ['Added the **Universal Tower** guide: floor by floor.', 'Plain bullet.'],
+      fr: ['Ajout du guide de la **Tour aux Mille Formes**.'],
+    },
+    link: { kind: 'character', slug: 'demiurge-lambda' },
+  };
+  const ok = async (entry: unknown, lang: unknown) => {
+    const out = await previewChangelogEntry(entry, lang);
+    if ('error' in out) throw new Error(out.error);
+    return out;
+  };
+
+  it('le gras en segments, le lien du perso (href et libellé), son portrait sans image explicite', async () => {
+    const out = await ok(ENTRY, 'en');
+    expect(out).toEqual({
+      type: 'character',
+      badge: en['changelog.type.character'],
+      icon: '🛡️',
+      date: 'Oct 6, 2026',
+      title: 'Demiurge Lambda',
+      bullets: [
+        [
+          { text: 'Added the ' },
+          { text: 'Universal Tower', bold: true },
+          { text: ' guide: floor by floor.' },
+        ],
+        [{ text: 'Plain bullet.' }],
+      ],
+      link: {
+        kind: 'character',
+        label: en['changelog.goto.character'],
+        href: '/characters/demiurge-lambda',
+      },
+      image: expect.stringMatching(
+        new RegExp(`/images/characters/faceicon/FI_${lambda?.id}\\.png$`),
+      ),
+    });
+  });
+
+  it('dans la langue demandée : le titre, les puces, les libellés et la date', async () => {
+    const out = await ok(ENTRY, 'fr');
+    expect(out.title).toBe('Démiurge Lambda');
+    expect(out.bullets).toEqual([
+      [
+        { text: 'Ajout du guide de la ' },
+        { text: 'Tour aux Mille Formes', bold: true },
+        { text: '.' },
+      ],
+    ]);
+    expect(out.badge).toBe(fr['changelog.type.character']);
+    expect(out.link?.label).toBe(fr['changelog.goto.character']);
+    expect(out.date).toBe('6 oct. 2026');
+  });
+
+  it('une langue sans texte se replie sur l’anglais, comme la page', async () => {
+    const out = await ok(ENTRY, 'jp');
+    expect(out.title).toBe('Demiurge Lambda');
+    expect(out.bullets).toHaveLength(2);
+    // Une langue inconnue, ou absente : l'anglais.
+    expect((await ok(ENTRY, 'xx')).badge).toBe(en['changelog.type.character']);
+    expect((await ok(ENTRY, undefined)).title).toBe('Demiurge Lambda');
+  });
+
+  it('une image explicite l’emporte ; sans lien ni image, l’icône du type', async () => {
+    const withImage = await ok({ ...ENTRY, image: '/images/ui/custom.webp' }, 'en');
+    expect(withImage.image).toMatch(/\/images\/ui\/custom\.webp$/);
+    const bare = await ok({ date: '2026-09-23', type: 'news', title: { en: 'News' } }, 'en');
+    expect(bare).toMatchObject({ icon: '📣', image: null, link: null, bullets: [] });
+    // Un outil ou une page : un lien, pas de vignette.
+    const tool = await ok(
+      { ...ENTRY, type: 'feature', link: { kind: 'tool', href: '/team-planner' } },
+      'en',
+    );
+    expect(tool.link).toEqual({
+      kind: 'tool',
+      label: en['changelog.goto.tool'],
+      href: '/team-planner',
+    });
+    expect(tool.image).toBeNull();
+  });
+
+  it('un aperçu n’est pas un contrôle : sans titre, sans date lisible, un slug inconnu passent', async () => {
+    const out = await ok(
+      { date: 'bientôt', type: 'character', link: { kind: 'character', slug: 'nope' } },
+      'en',
+    );
+    expect(out).toMatchObject({ title: '', date: 'bientôt', bullets: [], image: null });
+    expect(out.link?.href).toBe('/characters/nope');
+    expect((await ok({ date: '2026-13-45', type: 'fix' }, 'en')).date).toBe('2026-13-45');
+  });
+
+  it('un type inconnu, ou ce qui n’est pas une entrée, est rendu en erreur', async () => {
+    expect(await previewChangelogEntry({ ...ENTRY, type: 'annonce' }, 'en')).toEqual({
+      error: 'type inconnu : annonce',
+    });
+    expect(await previewChangelogEntry({}, 'en')).toEqual({ error: 'type inconnu : (vide)' });
+    for (const bad of [null, undefined, 'x', [ENTRY]])
+      expect(await previewChangelogEntry(bad, 'en')).toEqual({
+        error: 'entry : une entrée du journal attendue',
+      });
+  });
+});
+
+describe('POST /api/translate — « Traduire » générique, par translateNotes', () => {
+  it('le titre et les puces d’une entrée : un texte chacun, les résultats alignés', async () => {
+    const calls: string[][] = [];
+    const fake: TranslateDeps = {
+      autoTranslate: async (texts, targets) => {
+        calls.push(texts);
+        return {
+          results: texts.map((text) =>
+            Object.fromEntries(targets.map((lang) => [lang, `${lang}: ${text}`])),
+          ),
+          provider: 'deepl',
+        };
+      },
+      hasKey: () => true,
+    };
+    // Une entrée sans titre : sa case reste, vide, et les puces gardent leur rang.
+    const out = await translateNotes(['', 'First **bold** bullet.', 'Second bullet.'], fake);
+    expect(calls).toEqual([['First **bold** bullet.', 'Second bullet.']]);
+    expect(out).toMatchObject({
+      results: [{}, { fr: 'fr: First **bold** bullet.' }, { es: 'es: Second bullet.' }],
+      provider: 'deepl',
+    });
+  });
+
+  it('la route générique et celle de Gear reco sont la même : une seule fonction derrière', () => {
+    const server = readFileSync(join(import.meta.dirname, 'server.ts'), 'utf8');
+    expect(server).toContain(
+      "(url.pathname === '/api/translate' || url.pathname === '/api/gear-reco/translate')",
+    );
+    expect(server.match(/translateNotes\(/g)).toHaveLength(1);
   });
 });
 

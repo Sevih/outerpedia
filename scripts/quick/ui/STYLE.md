@@ -61,6 +61,12 @@ pastille.
   groupe, ses trois fichiers `tabs/<id>.{html,css,js}`, son marqueur
   `<!-- @tab id -->`, son `<link>` et son `import` dans `index.html`. Seule
   la première section du premier groupe est sans `hidden` dans son HTML.
+  Les sections vivent dans UN document : chacune préfixe ses `id` et ses
+  classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
+  `e-` Discord, `g-` Gear reco, `h-` Tableau de bord, `j-` Journal du site,
+  `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `v-` Vidéos) — une
+  lettre reprise et `$('c-list')` rend l'élément de l'autre onglet, sans
+  erreur.
 - Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
   `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
@@ -227,7 +233,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Gear reco, Noms et Bannières : le compte de changements
+La barre d'enregistrement de Rangs, Gear reco, Noms, Bannières et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -454,6 +460,65 @@ la liste de suggestions sort de la table au lieu d'y être rognée. La cellule
 du ✕ est `td.b-del`, pas `td.actions` : `.actions` est une rangée flex, et une
 cellule qui n'en est plus une décale son filet. Quitter l'onglet avec des
 changements en attente demande confirmation (`canLeave`).
+
+### Journal du site (1200 px, fait — B37)
+
+Le changelog du site (`changelog.json`, la page `/changelog` et la home) :
+une entrée se pose par gabarit, se traduit, et se relit comme la page la
+montrera. Croquis du rendu :
+
+```
+.head  Journal du site — Ce que la page /changelog et la home annoncent. Rien ne s'écrit à la saisie… Le site le lit au build…
+.savebar   2 entrées modifiées · 1 refus   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (le fichier entier part, puis un commit — pas de R2)
+.card.pad « Nouvelle entrée »  [＋ Perso] [＋ Guide] [＋ Mise à jour] [＋ Page / outil] [＋ News] [＋ Correctif] [＋ Manuel]   (.btn.ghost.sm, un par gabarit du serveur)
+   un gabarit sans champ (Page / outil, News, Correctif, Manuel) pose son entrée d'un clic
+   Perso : .form — [Chercher un perso…] et ses suggestions du roster (.picker + .results, deux lettres, Entrée prend la première) ; le choix POSE l'entrée : titre dans les six langues, puce en anglais, slug en lien
+   Guide, Mise à jour : .form — un champ par champ du gabarit, préremplis par le serveur ([Guide 30ch] [Mode ▾] [Mois 22ch « October 2026 »] [Slug du guide 30ch]) puis [Poser l'entrée] (Entrée aussi) ; un second clic sur le gabarit referme
+   l'entrée posée arrive en tête, dépliée, datée du jour ; un champ laissé vide reste ÉCRIT dedans ({guide}, {slug}) et l'enregistrement la refuse tant qu'il y est
+.card  card-head : « 150 entrées » · badges « 1 brouillon » · « 2 programmées » … [Filtrer : titre, contenu, slug… 30ch] [Tous les types ▾]
+   ul.j-list, récent → ancien — 40 lignes dessinées à la fois ; card-foot : « 40 entrées montrées sur 150 » … [Afficher plus (40)]
+   une entrée PLIÉE = une ligne (un bouton, `aria-expanded`) :  ▸ 2026-10-06 (chasse fixe) · badge du type (la teinte de la carte du site) · titre anglais · chip « guide · /guides/… » (tronquée, `title` = la cible)
+        puis badge warn « brouillon » ou upcoming « programmée » (date à venir), badge ko « refusée » (`title` = le refus, filet rouge à gauche), et à droite le point accent d'une entrée nouvelle ou modifiée
+   DÉPLIÉE, sa fiche (.j-sheet) sous la ligne :
+        .form  [Date] [Type ▾] [☐ brouillon] … [Supprimer] (danger, sm)
+        Titre (en) [toute la largeur]
+        ▸ [Titre — autres langues] « 5 / 5 »   (details, ouvert quand une langue est remplie : fr · es · jp · kr · zh, trois par rangée)
+        Puces (en) — une par ligne ; **gras**   (UNE textarea : une ligne = une puce)
+        [Traduire] · badge warn « à retraduire » (l'anglais a changé depuis le chargement ou la dernière traduction) · badge error (le refus du traducteur)
+        ▸ [Puces — autres langues] « 5 / 5 »   (details : cinq textarea)
+        .form  [Lien ▾ : aucun · perso · guide · outil · page] [Slug du perso | Chemin, 42ch, chasse fixe — pour un perso, les suggestions du roster] [Image (chemin, facultatif…) 42ch]
+        APERÇU  « ce que la page /changelog montrera » — sur le fond de la page : la carte du site (.j-card, 720 px au plus)
+             vignette 56 px (l'image explicite, sinon le portrait du perso ou la carte du guide, sinon l'emoji du type) | badge du type · date dans la langue
+             titre (16 px, gras) · les puces (pastilles pleines, le gras `**…**` rendu) · « View character → » en accent, puis sa cible en chasse fixe atténuée
+   .empty « Aucune entrée ne correspond au filtre. »
+le hash (une entrée pour un lien ou le banc ; la page ne l'écrit pas) : `#changelog/<n>` ouvre l'onglet sur la fiche de la n-ième entrée de la liste, à partir de 0 — la plus récente
+```
+
+Tout ce qui se lit vient de `GET /api/changelog/state` (les entrées dans
+l'ordre du fichier, le jour UTC, le roster, les gabarits et leurs champs
+préremplis, les libellés des types et des sortes de lien — la page n'en
+recopie aucun). Un gabarit se remplit AU SERVEUR (`GET /api/changelog/fill`,
+`fillTemplate`) : la page n'a ni les noms du roster dans six langues ni la
+règle. « Traduire » envoie le titre et les puces anglaises de l'entrée à
+`POST /api/translate` — une puce = un texte, le nombre de puces d'une langue
+suit l'anglais — et RÉÉCRIT les cinq langues, remplies ou non. L'aperçu rend
+`POST /api/changelog/preview` (`previewChangelogEntry` : les fonctions de la
+carte du site) dans la langue du groupe segmenté de la savebar, une pour
+toutes les fiches : une requête à l'ouverture d'une fiche, puis UNE par entrée
+400 ms après la dernière frappe, et une par fiche ouverte au changement de
+langue ; pendant qu'elle court le rendu précédent reste, atténué (`.busy`) ;
+un refus s'écrit en rouge dans le bloc. Une frappe ne redessine pas la fiche
+(le champ garde le curseur) : sa ligne, ses badges, les comptes « n / 5 », la
+savebar et l'aperçu suivent. Le filtre ne masque ni une fiche dépliée ni une
+entrée pas encore enregistrée. Une entrée posée et laissée vide ne compte
+pas, « Annuler » la retire. « Enregistrer » envoie la liste entière, récent →
+ancien — une entrée intacte repart telle que le disque la porte, aucun diff
+hors de ce qui a bougé — et l'état est relu. Quitter l'onglet avec des
+changements en attente demande confirmation (`canLeave`). Propres à l'onglet,
+dans `tabs/changelog.css` : `.j-line`, `.j-sheet`, `.j-more`, `.j-grid`,
+`.j-badge` et ses teintes `.j-t-<type>` (les jetons `--cat-*-fg` du site,
+recopiés sous les mêmes noms), `.j-chip`, `.j-seg` (le segmenté de Gear reco,
+recopié faute de composant commun), `.j-card` (la carte de `/changelog`).
 
 ## Outils — croquis
 

@@ -42,6 +42,7 @@ export const GROUPS = [
     sections: [
       { id: 'coupons', label: 'Codes promo' },
       { id: 'banners', label: 'Bannières' },
+      { id: 'changelog', label: 'Journal du site' },
       { id: 'comics', label: '4-comics' },
       { id: 'videos', label: 'Vidéos' },
       { id: 'discord', label: 'Discord', wide: true },

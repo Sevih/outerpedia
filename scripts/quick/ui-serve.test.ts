@@ -12,6 +12,7 @@ const TABS = [
   'patch',
   'coupons',
   'banners',
+  'changelog',
   'comics',
   'videos',
   'ranks',
@@ -60,7 +61,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : dix sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : onze sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -201,6 +202,9 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/patch/stop',
       '/api/coupons',
       '/api/banners',
+      '/api/changelog',
+      '/api/translate',
+      '/api/gear-reco/translate',
       '/api/comics',
       '/api/video',
       '/api/ranks',
@@ -214,6 +218,12 @@ describe('shot — la page que le banc de captures photographie', () => {
 
   it('relaie le verdict d’un nom court saisi : il ne fait que lire', () => {
     expect(READ_ONLY_POSTS.has('/api/names/fit')).toBe(true);
+  });
+
+  it('du journal du site, relaie l’aperçu d’une entrée et rien d’autre', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/changelog'))).toEqual([
+      '/api/changelog/preview',
+    ]);
   });
 });
 
@@ -1069,6 +1079,7 @@ describe('Bannières — la page, sur le vrai markup', () => {
     ).toEqual([
       ['coupons', 'Codes promo'],
       ['banners', 'Bannières'],
+      ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
       ['videos', 'Vidéos'],
       ['discord', 'Discord'],
@@ -1344,6 +1355,1026 @@ describe('Bannières — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-banners').hidden).toBe(true);
+  });
+});
+
+describe('Journal du site — la page, sur le vrai markup', () => {
+  // L'horloge est FACTICE d'un bout à l'autre (cf. `journal`) : l'aperçu se
+  // relance 400 ms après une frappe, et un minuteur laissé en vol par un test
+  // irait frapper le `fetch` du suivant.
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  const TODAY = '2026-10-08';
+  type Link = { kind: 'character'; slug: string } | { kind: string; href: string };
+  interface Entry {
+    date: string;
+    type: string;
+    title: Record<string, string>;
+    content: Record<string, string[]>;
+    link?: Link;
+    image?: string;
+    draft?: true;
+  }
+  interface Field {
+    key: string;
+    label: string;
+    kind: string;
+    value: string;
+    placeholder: string;
+    options: { value: string; label: string }[];
+  }
+  interface State {
+    entries: Entry[];
+    today: string;
+    roster: { id: string; name: string; slug: string }[];
+    templates: { id: string; label: string; type: string; fields: Field[] }[];
+    types: { value: string; label: string }[];
+    linkKinds: { value: string; label: string }[];
+    langs: { default: string; file: string[]; shown: string[] };
+  }
+
+  const LAMBDA: Entry = {
+    date: '2026-10-06',
+    type: 'character',
+    title: { en: 'Demiurge Lambda', fr: 'Démiurge Lambda' },
+    content: { en: ['Lambda added.'], fr: ['Lambda ajouté.'] },
+    link: { kind: 'character', slug: 'demiurge-lambda' },
+  };
+  const TOWER: Entry = {
+    date: '2026-10-06',
+    type: 'guide',
+    title: { en: 'Universal Tower' },
+    content: { en: ['Added the **Universal Tower** guide.', 'Second bullet.'] },
+    link: { kind: 'guide', href: '/guides/skyward-tower/universal-tower' },
+  };
+  const NEWS: Entry = {
+    date: '2026-09-23',
+    type: 'news',
+    title: { en: 'Outerpedia in French' },
+    content: { en: ['News bullet.'] },
+  };
+  const field = (over: Partial<Field> & { key: string; label: string }): Field => ({
+    kind: 'text',
+    value: '',
+    placeholder: '',
+    options: [],
+    ...over,
+  });
+  /** Ce que `/api/changelog/state` sert : trois entrées, récent → ancien, et les gabarits. */
+  const disk = (over: Partial<State> = {}): State => ({
+    entries: [LAMBDA, TOWER, NEWS],
+    today: TODAY,
+    roster: [
+      { id: '1', name: 'Anna', slug: 'anna' },
+      { id: '4', name: 'Dana', slug: 'dana' },
+      { id: '5', name: 'Summer Anna', slug: 'summer-anna' },
+    ],
+    templates: [
+      {
+        id: 'character',
+        label: 'Perso',
+        type: 'character',
+        fields: [
+          field({
+            key: 'name',
+            label: 'Perso',
+            kind: 'character',
+            placeholder: 'Chercher un perso…',
+          }),
+          field({ key: 'scope', label: 'Fiche', kind: 'choice', value: 'skills and stats' }),
+        ],
+      },
+      {
+        id: 'update',
+        label: 'Mise à jour',
+        type: 'update',
+        fields: [
+          field({ key: 'guide', label: 'Guide', placeholder: 'Annihilator' }),
+          field({
+            key: 'mode',
+            label: 'Mode',
+            kind: 'choice',
+            value: 'Joint Challenge',
+            options: [
+              { value: 'Joint Challenge', label: 'Joint Challenge' },
+              { value: 'Guild Raid', label: 'Guild Raid' },
+            ],
+          }),
+          field({ key: 'month', label: 'Mois', kind: 'month', value: 'October 2026' }),
+          field({ key: 'slug', label: 'Slug du guide', placeholder: 'annihilator' }),
+        ],
+      },
+      { id: 'feature', label: 'Page / outil', type: 'feature', fields: [] },
+      { id: 'manual', label: 'Manuel', type: 'guide', fields: [] },
+    ],
+    types: [
+      { value: 'guide', label: 'Guide' },
+      { value: 'update', label: 'Mise à jour' },
+      { value: 'feature', label: 'Page / outil' },
+      { value: 'character', label: 'Perso' },
+      { value: 'news', label: 'News' },
+      { value: 'fix', label: 'Correctif' },
+    ],
+    linkKinds: [
+      { value: '', label: 'aucun lien' },
+      { value: 'character', label: 'perso (slug)' },
+      { value: 'guide', label: 'guide (chemin)' },
+      { value: 'tool', label: 'outil (chemin)' },
+      { value: 'page', label: 'page (chemin)' },
+    ],
+    langs: {
+      default: 'en',
+      file: ['en', 'jp', 'kr', 'zh', 'fr', 'es'],
+      shown: ['en', 'fr', 'es', 'jp', 'kr', 'zh'],
+    },
+    ...over,
+  });
+  /** `n` entrées datées, récent → ancien : « Update 1 » est la plus récente. */
+  const many = (n: number): Entry[] =>
+    Array.from({ length: n }, (_, i) => ({
+      date: `2026-${String(9 - Math.floor(i / 28)).padStart(2, '0')}-${String(28 - (i % 28)).padStart(2, '0')}`,
+      type: i % 5 ? 'update' : 'news',
+      title: { en: `Update ${i + 1}` },
+      content: { en: [`Bullet of ${i + 1}.`] },
+    }));
+
+  /** Le gabarit rempli que rendrait `GET /api/changelog/fill`, d'après sa requête. */
+  const filled = (q: URLSearchParams) => {
+    const template = q.get('template');
+    if (template === 'character')
+      return {
+        type: 'character',
+        title: {
+          en: 'Summer Anna',
+          jp: 'サマー・アンナ',
+          kr: '서머 안나',
+          zh: '夏日安娜',
+          fr: 'Anna estivale',
+          es: 'Anna de verano',
+        },
+        content: ['Summer Anna has been added to the database with full skills and stats.'],
+        link: { kind: 'character', value: 'summer-anna' },
+        date: TODAY,
+      };
+    if (template === 'update') {
+      const guide = q.get('guide') || '{guide}';
+      return {
+        type: 'update',
+        title: { en: guide },
+        content: [`${guide} ${q.get('mode')} Guide updated for ${q.get('month')} version.`],
+        link: { kind: 'guide', value: `/guides/joint-challenge/${q.get('slug') || '{slug}'}` },
+        date: TODAY,
+      };
+    }
+    const feature = template === 'feature';
+    return {
+      type: feature ? 'feature' : 'guide',
+      title: {},
+      content: [],
+      link: { kind: feature ? 'page' : '', value: '' },
+      date: TODAY,
+    };
+  };
+
+  /** L'aperçu que rendrait le serveur : la langue, repli anglais, le gras en segments. */
+  const viewOf = (entry: Entry, lang: string) => ({
+    type: entry.type,
+    badge: `${entry.type} (${lang})`,
+    icon: '🧭',
+    date: entry.date,
+    title: entry.title[lang] ?? entry.title.en ?? '',
+    bullets: (entry.content[lang] ?? entry.content.en ?? []).map((line) =>
+      line
+        .split(/(\*\*.+?\*\*)/)
+        .filter(Boolean)
+        .map((part) =>
+          part.startsWith('**') ? { text: part.slice(2, -2), bold: true } : { text: part },
+        ),
+    ),
+    link: entry.link
+      ? {
+          kind: entry.link.kind,
+          label: 'Go there',
+          href: 'slug' in entry.link ? `/characters/${entry.link.slug}` : entry.link.href,
+        }
+      : null,
+    image: entry.link?.kind === 'character' ? '/images/characters/faceicon/FI_9.png' : null,
+  });
+
+  type Call = { path: string; body: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Bannières : la VRAIE
+   * coquille assemblée, le vrai `lib.js` et le vrai `tabs/changelog.js` (eux
+   * seuls), démarrés par `sections.start()`. `fetch` est factice : il sert
+   * l'état, remplit les gabarits, rend l'aperçu et la traduction, répond à
+   * l'enregistrement — et note ce que la page demande.
+   */
+  async function journal(
+    opts: {
+      state?: Partial<State>;
+      hash?: string;
+      saved?: (body: Call['body']) => unknown;
+      translated?: (texts: string[]) => unknown;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/#${opts.hash ?? 'changelog'}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { state: disk(opts.state), reads: 0 };
+    const calls: Call[] = [];
+    const fills: string[] = [];
+    const previews: { entry: Entry; lang: string }[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        status: 200,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      if (path === '/api/changelog/state') {
+        served.reads += 1;
+        return answer(served.state);
+      }
+      if (path.startsWith('/api/changelog/fill?')) {
+        fills.push(decodeURIComponent(path.slice(path.indexOf('?') + 1)).replace(/\+/g, ' '));
+        return answer(filled(new URLSearchParams(path.slice(path.indexOf('?') + 1))));
+      }
+      if (path === '/api/changelog/preview') {
+        const asked = body as { entry: Entry; lang: string };
+        previews.push(asked);
+        return answer(viewOf(asked.entry, asked.lang));
+      }
+      if (init) calls.push({ path, body });
+      if (path === '/api/translate') {
+        const { texts } = body as { texts: string[] };
+        return answer(
+          opts.translated?.(texts) ?? {
+            results: texts.map((text) =>
+              text
+                ? Object.fromEntries(
+                    ['fr', 'es', 'jp', 'kr', 'zh'].map((lang) => [lang, `${lang}: ${text}`]),
+                  )
+                : {},
+            ),
+            provider: 'deepl',
+          },
+        );
+      }
+      if (path === '/api/changelog')
+        return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'], issues: [], written: true });
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'changelog.js'));
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    lib.sections.start();
+    const settle = () => vi.advanceTimersByTimeAsync(0);
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string, root?: HTMLElement) =>
+      [
+        ...((root ?? document) as unknown as ParentNode).querySelectorAll(selector),
+      ] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    const texts = (root: HTMLElement, selector: string) =>
+      all(selector, root).map((n) => n.textContent ?? '');
+    const item = (title: string) => {
+      const li = all('#j-list .j-item').find((x) => texts(x, '.j-title')[0] === title);
+      if (!li) throw new Error(`pas d’entrée « ${title} »`);
+      return li;
+    };
+    const type = (input: HTMLElement, value: string) => {
+      (input as HTMLInputElement).value = value;
+      fire(input, 'input');
+    };
+    return {
+      el,
+      all,
+      calls,
+      fills,
+      previews,
+      confirm,
+      served,
+      settle,
+      texts,
+      item,
+      type,
+      fire,
+      /**
+       * L'option qu'un menu de la fiche porte `selected` — pas sa `value` :
+       * happy-dom ne la relit pas d'un `<select>` posé par `innerHTML` dans une
+       * fiche (il rend la deuxième option), Firefox si.
+       */
+      picked: (select: HTMLElement) =>
+        (select.querySelector('option[selected]') as HTMLOptionElement | null)?.value,
+      /** Les lignes de la liste : date, type, titre, lien, badges, point « modifiée ». */
+      lines: () =>
+        all('#j-list .j-item').map((li) => [
+          texts(li, '.j-date')[0],
+          texts(li, '.j-line .j-badge')[0],
+          texts(li, '.j-title')[0],
+          texts(li, '.j-chip')[0] ?? '',
+          texts(li, '.j-line .badge').join(' | '),
+          li.querySelector('.j-edit') ? '●' : '',
+        ]),
+      titles: () => all('#j-list .j-title').map((n) => n.textContent),
+      /** Déplie (ou replie) une entrée, et laisse partir son aperçu. */
+      toggle: async (title: string) => {
+        (item(title).querySelector('.j-line') as HTMLElement).click();
+        await settle();
+      },
+      /** Un champ de la fiche d'une entrée : `data-f`, `data-t` (titre) ou `data-c` (puces). */
+      input: (title: string, attr: 'f' | 't' | 'c', name: string) => {
+        const found = item(title).querySelector(`[data-${attr}="${name}"]`);
+        if (!found) throw new Error(`pas de champ ${attr}=${name} dans « ${title} »`);
+        return found as unknown as HTMLInputElement;
+      },
+      template: (label: string) => {
+        const button = all('#j-templates button').find((b) => b.textContent === `＋ ${label}`);
+        if (!button) throw new Error(`pas de gabarit « ${label} »`);
+        return button;
+      },
+      save: async () => {
+        el('j-save').click();
+        await settle();
+        await settle();
+        await settle();
+      },
+    };
+  }
+
+  it('la section est servie, dans Publication, après Bannières — pas `wide`', async () => {
+    const page = await journal();
+    expect(
+      page.all('#tabs [data-group="publication"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['coupons', 'Codes promo'],
+      ['banners', 'Bannières'],
+      ['changelog', 'Journal du site'],
+      ['comics', '4-comics'],
+      ['videos', 'Vidéos'],
+      ['discord', 'Discord'],
+    ]);
+    expect(page.el('tab-changelog').hidden).toBe(false);
+    expect(page.el('tab-banners').hidden).toBe(true);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(false);
+    // Le rappel de l'intro : le site lit le fichier au build.
+    expect(page.all('#tab-changelog .hint')[0].textContent).toMatch(/au build.*« Pousser »/s);
+    // Aucun id de la section ne double celui d'un autre onglet (`c-` est aux codes promo).
+    const ids = page.all('[id]').map((n) => n.id);
+    expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
+  });
+
+  it('la liste : une entrée = une ligne, récent → ancien ; gabarits, types et langues servis', async () => {
+    const page = await journal();
+    expect(page.lines()).toEqual([
+      ['2026-10-06', 'Perso', 'Demiurge Lambda', 'character · demiurge-lambda', '', ''],
+      [
+        '2026-10-06',
+        'Guide',
+        'Universal Tower',
+        'guide · /guides/skyward-tower/universal-tower',
+        '',
+        '',
+      ],
+      ['2026-09-23', 'News', 'Outerpedia in French', '', '', ''],
+    ]);
+    // Pliées : aucune fiche, donc aucun champ dessiné — et aucun aperçu demandé.
+    expect(page.all('#j-list .j-sheet')).toEqual([]);
+    expect(page.previews).toEqual([]);
+    expect(page.el('j-summary').textContent).toBe('3 entrées');
+    expect(page.el('j-shown').textContent).toBe('3 entrées montrées sur 3');
+    expect(page.el('j-more').hidden).toBe(true);
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+    expect(page.el('j-save').disabled).toBe(true);
+    expect(page.el('j-reset').disabled).toBe(true);
+    expect(page.all('#j-templates button').map((b) => b.textContent)).toEqual([
+      '＋ Perso',
+      '＋ Mise à jour',
+      '＋ Page / outil',
+      '＋ Manuel',
+    ]);
+    expect(page.all('#j-type option').map((o) => o.textContent)).toEqual([
+      'Tous les types',
+      'Guide',
+      'Mise à jour',
+      'Page / outil',
+      'Perso',
+      'News',
+      'Correctif',
+    ]);
+    expect(
+      page.all('#j-pv-lang button').map((b) => [b.textContent, b.getAttribute('aria-pressed')]),
+    ).toEqual([
+      ['en', 'true'],
+      ['fr', 'false'],
+      ['es', 'false'],
+      ['jp', 'false'],
+      ['kr', 'false'],
+      ['zh', 'false'],
+    ]);
+  });
+
+  it('brouillon et programmée se lisent sur la ligne, et se comptent', async () => {
+    const page = await journal({
+      state: {
+        entries: [
+          { ...NEWS, date: '2026-10-20', title: { en: 'Later' } },
+          { ...NEWS, date: '2026-10-20', title: { en: 'Hidden' }, draft: true },
+          LAMBDA,
+        ],
+      },
+    });
+    expect(page.lines().map(([, , title, , badges]) => [title, badges])).toEqual([
+      ['Later', 'programmée'],
+      ['Hidden', 'brouillon'],
+      ['Demiurge Lambda', ''],
+    ]);
+    expect(page.el('j-summary').textContent).toBe('3 entrées' + '1 brouillon' + '1 programmée');
+  });
+
+  it('n’en dessine que 40 à la fois ; « Afficher plus », le filtre texte et le filtre type', async () => {
+    const page = await journal({ state: { entries: many(95) } });
+    expect(page.titles()).toHaveLength(40);
+    expect(page.titles()[0]).toBe('Update 1');
+    expect(page.el('j-shown').textContent).toBe('40 entrées montrées sur 95');
+    expect(page.el('j-more').hidden).toBe(false);
+    expect(page.el('j-more').textContent).toBe('Afficher plus (40)');
+
+    page.el('j-more').click();
+    expect(page.titles()).toHaveLength(80);
+    expect(page.el('j-more').textContent).toBe('Afficher plus (15)');
+    page.el('j-more').click();
+    expect(page.titles()).toHaveLength(95);
+    expect(page.el('j-more').hidden).toBe(true);
+
+    // Le filtre texte : titre, contenu, lien — et la liste repart de sa première page.
+    page.type(page.el('j-q'), 'UPDATE 9');
+    expect(page.titles()).toEqual([
+      'Update 9',
+      ...Array.from({ length: 6 }, (_, i) => `Update ${90 + i}`),
+    ]);
+    expect(page.el('j-shown').textContent).toBe('7 entrées montrées sur 7 — 95 en tout');
+    page.type(page.el('j-q'), 'bullet of 42.');
+    expect(page.titles()).toEqual(['Update 42']);
+    page.type(page.el('j-q'), 'rien de tel');
+    expect(page.titles()).toEqual([]);
+    expect(page.el('j-empty').hidden).toBe(false);
+    expect(page.el('j-empty').textContent).toBe('Aucune entrée ne correspond au filtre.');
+    expect(page.el('j-foot').hidden).toBe(true);
+
+    // Le filtre type : une entrée sur cinq est une news.
+    page.type(page.el('j-q'), '');
+    page.el('j-type').value = 'news';
+    page.fire(page.el('j-type'), 'change');
+    expect(page.el('j-shown').textContent).toBe('19 entrées montrées sur 19 — 95 en tout');
+    expect(page.titles().slice(0, 3)).toEqual(['Update 1', 'Update 6', 'Update 11']);
+  });
+
+  it('dépliée, la fiche : ses champs, les puces une par ligne, les autres langues ouvertes si remplies', async () => {
+    const page = await journal();
+    await page.toggle('Demiurge Lambda');
+    expect(page.all('#j-list .j-sheet')).toHaveLength(1);
+    const li = page.item('Demiurge Lambda');
+    expect(li.classList.contains('open')).toBe(true);
+    expect(li.querySelector('.j-line')?.getAttribute('aria-expanded')).toBe('true');
+    expect(page.input('Demiurge Lambda', 'f', 'date').value).toBe('2026-10-06');
+    expect(page.picked(page.input('Demiurge Lambda', 'f', 'type'))).toBe('character');
+    expect(page.input('Demiurge Lambda', 'f', 'draft').checked).toBe(false);
+    expect(page.input('Demiurge Lambda', 't', 'en').value).toBe('Demiurge Lambda');
+    expect(page.input('Demiurge Lambda', 't', 'fr').value).toBe('Démiurge Lambda');
+    expect(page.input('Demiurge Lambda', 'c', 'en').value).toBe('Lambda added.');
+    expect(page.picked(page.input('Demiurge Lambda', 'f', 'linkKind'))).toBe('character');
+    expect(page.input('Demiurge Lambda', 'f', 'linkValue').value).toBe('demiurge-lambda');
+    expect(page.input('Demiurge Lambda', 'f', 'image').value).toBe('');
+    // Les cinq autres langues, dans l'ordre de l'écran, sous deux replis.
+    expect(page.all('.j-more [data-t]', li).map((n) => n.dataset.t)).toEqual([
+      'fr',
+      'es',
+      'jp',
+      'kr',
+      'zh',
+    ]);
+    expect(
+      page
+        .all('.j-more', li)
+        .map((d) => [d.hasAttribute('open'), page.texts(d, '[data-tally]')[0]]),
+    ).toEqual([
+      [true, '1 / 5'],
+      [true, '1 / 5'],
+    ]);
+
+    // Une entrée sans traduction : deux puces, une par ligne, les replis fermés.
+    await page.toggle('Universal Tower');
+    expect(page.input('Universal Tower', 'c', 'en').value).toBe(
+      'Added the **Universal Tower** guide.\nSecond bullet.',
+    );
+    expect(
+      page
+        .all('.j-more', page.item('Universal Tower'))
+        .map((d) => [d.hasAttribute('open'), page.texts(d, '[data-tally]')[0]]),
+    ).toEqual([
+      [false, '0 / 5'],
+      [false, '0 / 5'],
+    ]);
+    expect(page.all('#j-list .j-sheet')).toHaveLength(2);
+
+    // Un second clic replie.
+    await page.toggle('Demiurge Lambda');
+    expect(page.all('#j-list .j-sheet')).toHaveLength(1);
+    expect(page.item('Demiurge Lambda').classList.contains('open')).toBe(false);
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+  });
+
+  it('la saisie : le textarea devient des puces, la ligne et le compte suivent, le champ garde le curseur', async () => {
+    const page = await journal();
+    await page.toggle('Universal Tower');
+    const bullets = page.input('Universal Tower', 'c', 'en');
+    page.type(bullets, ' First.  \n\n   \nSecond **bold**.\nThird. ');
+    expect(page.input('Universal Tower', 'c', 'en')).toBe(bullets);
+    expect(page.lines()[1][5]).toBe('●');
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée');
+    expect(page.el('j-save').disabled).toBe(false);
+
+    const title = page.input('Universal Tower', 't', 'en');
+    page.type(title, 'Tower, universal');
+    expect(page.lines()[1][2]).toBe('Tower, universal');
+    page.type(page.input('Tower, universal', 'f', 'date'), '2026-10-20');
+    page.input('Tower, universal', 'f', 'draft').checked = true;
+    page.fire(page.input('Tower, universal', 'f', 'draft'), 'change');
+    expect(page.lines()[1].slice(0, 5)).toEqual([
+      '2026-10-20',
+      'Guide',
+      'Tower, universal',
+      'guide · /guides/skyward-tower/universal-tower',
+      'brouillon',
+    ]);
+    // Le lien : sans sorte, plus de champ de valeur ni de chip.
+    const kind = page.input('Tower, universal', 'f', 'linkKind');
+    kind.value = '';
+    page.fire(kind, 'change');
+    expect(page.lines()[1][3]).toBe('');
+    expect(
+      (page.item('Tower, universal').querySelector('[data-linkbox]') as HTMLElement).hidden,
+    ).toBe(true);
+
+    await page.save();
+    expect(page.calls).toEqual([
+      {
+        path: '/api/changelog',
+        body: {
+          // La liste entière, récent → ancien ; les entrées intactes telles que le disque.
+          list: [
+            {
+              date: '2026-10-20',
+              type: 'guide',
+              title: { en: 'Tower, universal' },
+              content: { en: ['First.', 'Second **bold**.', 'Third.'] },
+              draft: true,
+            },
+            LAMBDA,
+            NEWS,
+          ],
+          changed: ['Tower, universal'],
+        },
+      },
+    ]);
+    // L'état est relu : plus rien en attente, les fiches repliées.
+    expect(page.served.reads).toBe(2);
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+    expect(page.all('#j-list .j-sheet')).toEqual([]);
+  });
+
+  it('« à retraduire » quand l’anglais a changé depuis le chargement ; « Traduire » force les cinq langues', async () => {
+    const page = await journal();
+    await page.toggle('Demiurge Lambda');
+    const stale = () => page.texts(page.all('#j-list .j-item')[0], '[data-stale]')[0];
+    expect(stale()).toBe('');
+    page.type(page.input('Demiurge Lambda', 'c', 'en'), 'Lambda added.\nWith her gear.');
+    expect(stale()).toBe('à retraduire');
+    // Revenu à l'anglais chargé : les traductions sont de nouveau à jour.
+    page.type(page.input('Demiurge Lambda', 'c', 'en'), 'Lambda added.');
+    expect(stale()).toBe('');
+    page.type(page.input('Demiurge Lambda', 'c', 'en'), 'Lambda added.\nWith her gear.');
+
+    (page.item('Demiurge Lambda').querySelector('[data-act="translate"]') as HTMLElement).click();
+    await page.settle();
+    await page.settle();
+    // Le titre et les puces de CETTE entrée, une puce = un texte.
+    expect(page.calls).toEqual([
+      {
+        path: '/api/translate',
+        body: { texts: ['Demiurge Lambda', 'Lambda added.', 'With her gear.'] },
+      },
+    ]);
+    // Les cinq langues sont posées, le français déjà là réécrit ; les puces suivent l'anglais.
+    expect(page.input('Demiurge Lambda', 't', 'fr').value).toBe('fr: Demiurge Lambda');
+    expect(page.input('Demiurge Lambda', 't', 'zh').value).toBe('zh: Demiurge Lambda');
+    expect(page.input('Demiurge Lambda', 'c', 'fr').value).toBe(
+      'fr: Lambda added.\nfr: With her gear.',
+    );
+    expect(page.input('Demiurge Lambda', 'c', 'jp').value).toBe(
+      'jp: Lambda added.\njp: With her gear.',
+    );
+    expect(page.texts(page.item('Demiurge Lambda'), '[data-tally]')).toEqual(['5 / 5', '5 / 5']);
+    expect(stale()).toBe('');
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée');
+    expect(page.el('journal').dataset.state).toBe('ok');
+
+    // Sans anglais retouché, « Traduire » repart quand même : il force.
+    (page.item('Demiurge Lambda').querySelector('[data-act="translate"]') as HTMLElement).click();
+    await page.settle();
+    await page.settle();
+    expect(page.calls).toHaveLength(2);
+  });
+
+  it('une entrée sans traduction n’est pas « à retraduire » ; un refus du traducteur s’écrit sur la fiche', async () => {
+    const page = await journal({
+      translated: () => ({
+        error: 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
+      }),
+    });
+    await page.toggle('Universal Tower');
+    page.type(page.input('Universal Tower', 't', 'en'), 'Universal Tower 2');
+    const li = () => page.item('Universal Tower 2');
+    expect(page.texts(li(), '[data-stale]')[0]).toBe('');
+
+    (li().querySelector('[data-act="translate"]') as HTMLElement).click();
+    await page.settle();
+    await page.settle();
+    expect(page.texts(li(), '[data-tr-error]')[0]).toBe(
+      'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
+    );
+    expect(page.el('journal').dataset.state).toBe('ko');
+    // Rien n'a été posé.
+    expect(page.input('Universal Tower 2', 't', 'fr').value).toBe('');
+    expect((li().querySelector('[data-act="translate"]') as HTMLButtonElement).disabled).toBe(
+      false,
+    );
+  });
+
+  it('l’aperçu : une requête à l’ouverture, puis UNE, 400 ms après la dernière frappe ; la langue relance', async () => {
+    const page = await journal();
+    await page.toggle('Universal Tower');
+    expect(page.previews).toEqual([{ entry: TOWER, lang: 'en' }]);
+    const pv = () => page.item('Universal Tower').querySelector('[data-pv]') as HTMLElement;
+    // La carte du site : le badge, la date, le titre, le gras, le lien et où il mène.
+    expect(page.texts(pv(), '.j-badge')).toEqual(['guide (en)']);
+    expect(page.texts(pv(), '.j-card-title')).toEqual(['Universal Tower']);
+    expect(page.texts(pv(), 'li')).toEqual(['Added the Universal Tower guide.', 'Second bullet.']);
+    expect(page.texts(pv(), 'li strong')).toEqual(['Universal Tower']);
+    expect(pv().querySelector('.j-goto')?.textContent).toBe(
+      'Go there →/guides/skyward-tower/universal-tower',
+    );
+    // Sans vignette : l'icône du type.
+    expect(pv().querySelector('.j-thumb')?.textContent).toBe('🧭');
+    expect(pv().querySelector('.j-thumb img')).toBeNull();
+
+    const bullets = page.input('Universal Tower', 'c', 'en');
+    page.type(bullets, 'A');
+    await vi.advanceTimersByTimeAsync(300);
+    page.type(bullets, 'A **b**');
+    await vi.advanceTimersByTimeAsync(399);
+    expect(page.previews).toHaveLength(1);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(page.previews).toHaveLength(2);
+    expect(page.previews[1]).toEqual({
+      entry: { ...TOWER, content: { en: ['A **b**'] } },
+      lang: 'en',
+    });
+    expect(page.texts(pv(), 'li')).toEqual(['A b']);
+    expect(page.texts(pv(), 'li strong')).toEqual(['b']);
+    // Une frappe qui ne change rien à l'entrée ne redemande rien.
+    page.type(bullets, 'A **b**  ');
+    await vi.advanceTimersByTimeAsync(400);
+    expect(page.previews).toHaveLength(2);
+
+    // Une autre fiche dépliée, puis la langue : une requête par entrée ouverte.
+    await page.toggle('Demiurge Lambda');
+    expect(page.previews).toHaveLength(3);
+    const lambda = page.item('Demiurge Lambda').querySelector('[data-pv]') as HTMLElement;
+    // Le portrait est sous la base des images quand le serveur rend un chemin.
+    expect(lambda.querySelector('.j-thumb img')?.getAttribute('src')).toBe(
+      'https://img.test/images/characters/faceicon/FI_9.png',
+    );
+    page.all('#j-pv-lang button')[1].click();
+    await page.settle();
+    expect(page.previews.slice(3).map((p) => [p.entry.title.en, p.lang])).toEqual([
+      ['Demiurge Lambda', 'fr'],
+      ['Universal Tower', 'fr'],
+    ]);
+    expect(page.all('#j-pv-lang button').map((b) => b.getAttribute('aria-pressed'))).toEqual([
+      'false',
+      'true',
+      'false',
+      'false',
+      'false',
+      'false',
+    ]);
+    expect(
+      page.texts(
+        page.item('Demiurge Lambda').querySelector('[data-pv]') as HTMLElement,
+        '.j-card-title',
+      ),
+    ).toEqual(['Démiurge Lambda']);
+    // Rien de tout cela n'est un changement.
+    expect(page.calls).toEqual([]);
+  });
+
+  it('un gabarit sans champ pose une entrée en tête, dépliée, à la date du jour — vide, elle ne compte pas', async () => {
+    const page = await journal();
+    page.template('Page / outil').click();
+    await page.settle();
+    await page.settle();
+    expect(page.fills).toEqual(['template=feature']);
+    expect(page.lines()[0]).toEqual(['2026-10-08', 'Page / outil', 'sans titre', '', '', '']);
+    expect(page.lines()).toHaveLength(4);
+    const li = page.all('#j-list .j-item')[0];
+    expect(li.classList.contains('open')).toBe(true);
+    expect(page.picked(li.querySelector('[data-f="type"]') as HTMLElement)).toBe('feature');
+    // La sorte de lien est préremplie, sa valeur reste à saisir.
+    expect(page.picked(li.querySelector('[data-f="linkKind"]') as HTMLElement)).toBe('page');
+    expect((li.querySelector('[data-linkbox]') as HTMLElement).hidden).toBe(false);
+    expect(page.previews).toHaveLength(1);
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+    expect(page.el('j-save').disabled).toBe(true);
+    // « Annuler » la retire.
+    expect(page.el('j-reset').disabled).toBe(false);
+    page.el('j-reset').click();
+    expect(page.lines()).toHaveLength(3);
+
+    // Elle reste à l'écran sous un filtre qui ne la contient pas.
+    page.template('Manuel').click();
+    await page.settle();
+    await page.settle();
+    page.type(page.el('j-q'), 'lambda');
+    expect(page.titles()).toEqual(['sans titre', 'Demiurge Lambda']);
+  });
+
+  it('le gabarit « Mise à jour » : son formulaire prérempli, puis l’entrée remplie par le serveur', async () => {
+    const page = await journal();
+    expect(page.el('j-form').hidden).toBe(true);
+    page.template('Mise à jour').click();
+    expect(page.el('j-form').hidden).toBe(false);
+    expect(page.template('Mise à jour').getAttribute('aria-pressed')).toBe('true');
+    expect(
+      page.all('#j-form [data-v]').map((f) => [f.dataset.v, (f as HTMLInputElement).value]),
+    ).toEqual([
+      ['guide', ''],
+      ['mode', 'Joint Challenge'],
+      // Le mois courant, rendu par le serveur.
+      ['month', 'October 2026'],
+      ['slug', ''],
+    ]);
+    expect(page.fills).toEqual([]);
+
+    // Le slug laissé vide : il reste écrit dans le lien, à compléter.
+    page.type(page.all('#j-form [data-v="guide"]')[0], 'Annihilator');
+    (page.el('j-form').querySelector('[data-act="pose"]') as HTMLElement).click();
+    await page.settle();
+    await page.settle();
+    expect(page.fills).toEqual([
+      'template=update&guide=Annihilator&mode=Joint Challenge&month=October 2026&slug=',
+    ]);
+    expect(page.lines()[0]).toEqual([
+      '2026-10-08',
+      'Mise à jour',
+      'Annihilator',
+      'guide · /guides/joint-challenge/{slug}',
+      '',
+      '●',
+    ]);
+    expect(page.input('Annihilator', 'c', 'en').value).toBe(
+      'Annihilator Joint Challenge Guide updated for October 2026 version.',
+    );
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée');
+    // Le formulaire s'est refermé.
+    expect(page.el('j-form').hidden).toBe(true);
+    expect(page.template('Mise à jour').getAttribute('aria-pressed')).toBe('false');
+
+    // Un second clic sur le gabarit referme son formulaire sans rien poser.
+    page.template('Mise à jour').click();
+    page.template('Mise à jour').click();
+    expect(page.el('j-form').hidden).toBe(true);
+    expect(page.fills).toHaveLength(1);
+  });
+
+  it('le gabarit « Perso » : la recherche du roster, puis le titre en six langues, la puce et le slug', async () => {
+    const page = await journal();
+    page.template('Perso').click();
+    const search = page.el('j-form').querySelector('[data-pick]') as unknown as HTMLInputElement;
+    expect(search.placeholder).toBe('Chercher un perso…');
+    const results = page.el('j-form').querySelector('.results') as HTMLElement;
+    page.type(search, 'a');
+    expect(results.hidden).toBe(true);
+    page.type(search, 'AN');
+    // Ceux qui commencent par la saisie d'abord, puis ceux qui la contiennent.
+    expect(page.all('#j-form .results div span:first-of-type').map((n) => n.textContent)).toEqual([
+      'Anna',
+      'Dana',
+      'Summer Anna',
+    ]);
+    page.all('#j-form .results div')[2].click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.fills).toEqual(['template=character&character=5']);
+    expect(page.lines()[0]).toEqual([
+      '2026-10-08',
+      'Perso',
+      'Summer Anna',
+      'character · summer-anna',
+      '',
+      '●',
+    ]);
+    expect(page.input('Summer Anna', 't', 'fr').value).toBe('Anna estivale');
+    expect(page.input('Summer Anna', 't', 'zh').value).toBe('夏日安娜');
+    expect(page.input('Summer Anna', 'c', 'en').value).toBe(
+      'Summer Anna has been added to the database with full skills and stats.',
+    );
+    // Les six titres sont là, les puces des autres langues restent à traduire.
+    expect(page.texts(page.item('Summer Anna'), '[data-tally]')).toEqual(['5 / 5', '0 / 5']);
+    expect(page.texts(page.item('Summer Anna'), '[data-stale]')[0]).toBe('');
+    expect(page.el('j-form').hidden).toBe(true);
+
+    await page.save();
+    const sent = page.calls[0].body as { list: Entry[]; changed: string[] };
+    expect(sent.changed).toEqual(['Summer Anna']);
+    expect(sent.list).toHaveLength(4);
+    // Les langues dans l'ordre du fichier, pas celui de l'écran.
+    expect(JSON.stringify(sent.list[0])).toBe(
+      JSON.stringify({
+        date: '2026-10-08',
+        type: 'character',
+        title: {
+          en: 'Summer Anna',
+          jp: 'サマー・アンナ',
+          kr: '서머 안나',
+          zh: '夏日安娜',
+          fr: 'Anna estivale',
+          es: 'Anna de verano',
+        },
+        content: {
+          en: ['Summer Anna has been added to the database with full skills and stats.'],
+        },
+        link: { kind: 'character', slug: 'summer-anna' },
+      }),
+    );
+  });
+
+  it('le lien d’un perso se cherche dans le roster ; les autres se tapent', async () => {
+    const page = await journal();
+    await page.toggle('Outerpedia in French');
+    const kind = page.input('Outerpedia in French', 'f', 'linkKind');
+    const box = page.item('Outerpedia in French').querySelector('[data-linkbox]') as HTMLElement;
+    expect(box.hidden).toBe(true);
+    kind.value = 'character';
+    page.fire(kind, 'change');
+    expect(box.hidden).toBe(false);
+    expect(page.texts(box, '[data-link-label]')).toEqual(['Slug du perso']);
+
+    const value = page.input('Outerpedia in French', 'f', 'linkValue');
+    page.type(value, 'dan');
+    expect(page.texts(box, '.results div span:first-of-type')).toEqual(['Dana']);
+    (box.querySelector('.results div') as HTMLElement).click();
+    expect(value.value).toBe('dana');
+    expect((box.querySelector('.results') as HTMLElement).hidden).toBe(true);
+    expect(page.lines()[2][3]).toBe('character · dana');
+
+    // Un chemin : aucune suggestion.
+    kind.value = 'page';
+    page.fire(kind, 'change');
+    expect(page.texts(box, '[data-link-label]')).toEqual(['Chemin']);
+    page.type(value, '/dana');
+    expect((box.querySelector('.results') as HTMLElement).hidden).toBe(true);
+    expect(page.lines()[2][3]).toBe('page · /dana');
+  });
+
+  it('« Enregistrer » refusé : rien n’est relu, l’entrée fautive est marquée par son rang ; la saisie lève le refus', async () => {
+    const page = await journal({
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ — Entrée 3 : titre EN requis.'],
+        issues: [{ index: 2, message: 'Entrée 3 : titre EN requis.' }],
+        written: false,
+      }),
+    });
+    await page.toggle('Outerpedia in French');
+    page.type(page.input('Outerpedia in French', 't', 'en'), '  ');
+    await page.save();
+
+    expect(page.served.reads).toBe(1);
+    expect(page.lines()[2]).toEqual(['2026-09-23', 'News', 'sans titre', '', 'refusée', '●']);
+    expect(page.all('#j-list .j-item')[2].classList.contains('ko')).toBe(true);
+    expect(page.all('#j-list .badge.ko')[0].title).toBe('Entrée 3 : titre EN requis.');
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée' + '1 refus');
+    // La fiche est restée ouverte, la saisie est gardée.
+    expect(page.all('#j-list .j-sheet')).toHaveLength(1);
+
+    page.type(
+      page.all('#j-list .j-item')[2].querySelector('[data-t="en"]') as HTMLElement,
+      'Fixed',
+    );
+    expect(page.lines()[2].slice(2)).toEqual(['Fixed', '', '', '●']);
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée');
+  });
+
+  it('« Supprimer » retire l’entrée, et son titre part avec le commit', async () => {
+    const page = await journal();
+    await page.toggle('Universal Tower');
+    (page.item('Universal Tower').querySelector('[data-act="del"]') as HTMLElement).click();
+    expect(page.titles()).toEqual(['Demiurge Lambda', 'Outerpedia in French']);
+    expect(page.el('j-summary').textContent).toBe('2 entrées');
+    expect(page.el('j-count').textContent).toBe('1 entrée modifiée');
+
+    page.served.state = disk({ entries: [LAMBDA, NEWS] });
+    await page.save();
+    expect(page.calls).toEqual([
+      { path: '/api/changelog', body: { list: [LAMBDA, NEWS], changed: ['Universal Tower'] } },
+    ]);
+    expect(page.el('j-summary').textContent).toBe('2 entrées');
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+  });
+
+  it('« Annuler » rend le disque ; quitter l’onglet avec des changements demande confirmation', async () => {
+    const page = await journal();
+    expect(page.confirm).not.toHaveBeenCalled();
+    await page.toggle('Universal Tower');
+    page.type(page.input('Universal Tower', 't', 'en'), 'Renamed');
+    await page.toggle('Demiurge Lambda');
+    (page.item('Demiurge Lambda').querySelector('[data-act="del"]') as HTMLElement).click();
+    expect(page.el('j-count').textContent).toBe('2 entrées modifiées');
+
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.confirm.mock.calls[0]).toEqual([
+      '2 entrées modifiées, pas encore enregistrées. Quitter l’onglet ? Elles restent en attente tant que la page n’est pas rechargée.',
+    ]);
+    expect(page.el('tab-changelog').hidden).toBe(false);
+
+    page.el('j-reset').click();
+    expect(page.titles()).toEqual(['Demiurge Lambda', 'Universal Tower', 'Outerpedia in French']);
+    expect(page.all('#j-list .j-sheet')).toEqual([]);
+    expect(page.el('j-count').textContent).toBe('aucune modification');
+    expect(page.el('j-reset').disabled).toBe(true);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-changelog').hidden).toBe(true);
+    expect(page.calls).toEqual([]);
+  });
+
+  it('`#changelog/<n>` ouvre l’onglet sur la fiche de la n-ième entrée, à partir de 0', async () => {
+    const page = await journal({ hash: 'changelog/1' });
+    expect(page.el('tab-changelog').hidden).toBe(false);
+    expect(page.all('#j-list .j-item.open').map((li) => page.texts(li, '.j-title')[0])).toEqual([
+      'Universal Tower',
+    ]);
+    expect(page.previews).toEqual([{ entry: TOWER, lang: 'en' }]);
+
+    // Au-delà de la première page : la liste s'étend jusqu'à elle. Hors liste : rien d'ouvert.
+    const far = await journal({ hash: 'changelog/59', state: { entries: many(95) } });
+    expect(far.titles()).toHaveLength(60);
+    expect(far.all('#j-list .j-item.open').map((li) => far.texts(li, '.j-title')[0])).toEqual([
+      'Update 60',
+    ]);
+    const none = await journal({ hash: 'changelog/7' });
+    expect(none.all('#j-list .j-item.open')).toEqual([]);
+    expect(none.titles()).toHaveLength(3);
   });
 });
 

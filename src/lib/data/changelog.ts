@@ -76,6 +76,22 @@ function resolveLines(map: LocalizedLines, lang: Lang): string[] {
 }
 
 /**
+ * Une entrée résolue pour `lang` : titre et puces dans la langue, repli EN. Ce
+ * que `getChangelog` rend pour chaque entrée — exporté pour l'aperçu de quick,
+ * qui résout une entrée EN COURS d'édition comme la page le fera.
+ */
+export function resolveChangelogEntry(e: ChangelogEntry, lang: Lang): ResolvedChangelogEntry {
+  return {
+    date: e.date,
+    type: e.type,
+    title: resolveText(e.title, lang),
+    content: resolveLines(e.content, lang),
+    ...(e.link && { link: e.link }),
+    ...(e.image && { image: e.image }),
+  };
+}
+
+/**
  * Entrées du journal résolues pour `lang`, plus récentes d'abord.
  *
  * Par défaut, exclut les entrées PROGRAMMÉES (date future) et les BROUILLONS.
@@ -91,13 +107,6 @@ export function getChangelog(
     ? entries
     : entries.filter((e) => !e.draft && e.date <= today);
   const sorted = [...visible].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
-  const resolved: ResolvedChangelogEntry[] = sorted.map((e) => ({
-    date: e.date,
-    type: e.type,
-    title: resolveText(e.title, lang),
-    content: resolveLines(e.content, lang),
-    ...(e.link && { link: e.link }),
-    ...(e.image && { image: e.image }),
-  }));
+  const resolved = sorted.map((e) => resolveChangelogEntry(e, lang));
   return options?.limit ? resolved.slice(0, options.limit) : resolved;
 }

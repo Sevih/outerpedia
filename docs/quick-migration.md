@@ -77,7 +77,14 @@ existant, période ou récompenses : supprimer puis recréer, ou lot A pour
 l'ajouter), Bannières (= Tools › Banner, étape 5, lot B35 : la liste de
 `banner.json` éditée en place et, au-dessus, la détection dans la table du jeu
 `RecruitGroupTemplet` — ce qui manque s'insère d'un clic, une fin différente
-s'aligne ; lien retiré du menu admin le 08/10), 4-comics, Vidéos, Discord.
+s'aligne ; lien retiré du menu admin le 08/10), Journal du site (= Tools ›
+Changelog, étape 7, lot B37 : `changelog.json` édité entrée par entrée — une
+ligne pliée, sa fiche dépliée —, une entrée nouvelle posée par GABARIT
+(`src/lib/admin/changelog-templates.ts` : un par type, textes tirés de
+l'historique, le perso cherché dans le roster donne le titre en six langues,
+la puce et le slug), « Traduire » par entrée, et sous la fiche l'APERÇU de la
+carte de `/changelog` dans la langue choisie ; lien retiré du menu admin le
+08/10), 4-comics, Vidéos, Discord.
 Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
 un exemplaire).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
@@ -92,7 +99,7 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
-C10) → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
+C10) → 7 Changelog (fait, B37) → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
@@ -130,9 +137,12 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    `EventsEditor` (451 l.)
    - Agacements :
 
-7. **Tools › Changelog**
-   `ChangelogEditor` (346 l.)
-   - Agacements : on a enormement de message qui se ressemble et que l'on pourrais preremplir, pas de preview de la news ...
+7. **Tools › Changelog** — FAIT, lot B37 : l'onglet « Journal du site »
+   (cf. « Déjà dans quick »). Les deux agacements de Sevih y sont corrigés :
+   « on a énormément de messages qui se ressemblent et que l'on pourrait
+   préremplir » par les gabarits, « pas de preview de la news » par l'aperçu
+   sous la fiche. L'entrée reste pour que la numérotation des suivantes ne
+   bouge pas.
 
 8. **Tools › Game data**
    `GameDataBrowser` + `[table]` (lecture)

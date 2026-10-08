@@ -6,7 +6,8 @@
  * demande une action (le tableau de bord, qui ne fait que lire), mettre à jour
  * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
- * Discord que le bot poste, curer un nom court ou des alias de recherche. Tous
+ * Discord que le bot poste, curer un nom court ou des alias de recherche, tenir
+ * le journal du site (le changelog, par gabarits). Tous
  * committent, sauf le message Discord ; « Pousser », dans l'en-tête, pousse
  * `main`. Et, à chaque patch du jeu, la chaîne des données — rafraîchir, relire
  * la promotion, promouvoir, committer —, lancée de la section « Patch », sa
@@ -24,7 +25,7 @@
  * YOUTUBE_API_KEY l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
  * l'onglet Discord rédige et prévisualise mais n'envoie pas, et n'importe pas
  * les anciens résumés (cf. `discord.ts`), sans DEEPL_API_KEY ni ANTHROPIC_API_KEY
- * « Traduire » de l'onglet Gear reco répond qu'il n'a pas de clé.
+ * « Traduire » (Gear reco, Journal du site) répond qu'il n'a pas de clé.
  *
  * DÉJÀ LANCÉ : le port est tenu par l'instance précédente, on se contente
  * d'ouvrir le navigateur dessus. Double-cliquer l'icône deux fois ne crée donc
@@ -40,24 +41,30 @@ import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   BANNERS_DEPS,
+  CHANGELOG_DEPS,
+  CHANGELOG_DISK,
   GEAR_RECO_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
   addComics,
   addVideo,
   bannersState,
+  changelogState,
   currentCoupons,
   dashboardState,
+  fillChangelogTemplate,
   fitNames,
   gearRecoState,
   gitState,
   namesState,
   parseTarget,
+  previewChangelogEntry,
   previewGearBuilds,
   pushMain,
   rankState,
   rewardOptions,
   saveBannerList,
+  saveChangelogList,
   saveCouponList,
   saveGearReco,
   saveNames,
@@ -482,6 +489,44 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     return;
   }
 
+  if (req.method === 'GET' && url.pathname === '/api/changelog/state') {
+    // Lu du disque à chaque appel, comme les bannières : `changelog.json`, le
+    // jour UTC, le roster, les gabarits et les libellés des types et des liens.
+    json(res, changelogState());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/changelog/fill') {
+    // Un gabarit rempli (`?template=update&guide=…`, `?template=character&character=<id>`) :
+    // de quoi poser une entrée en tête de liste. Rien ne s'écrit ; un gabarit
+    // ou un perso inconnu : 400 `{ error }`.
+    const { template, ...values } = Object.fromEntries(url.searchParams);
+    const out = fillChangelogTemplate(template, values, CHANGELOG_DISK.today());
+    json(res, out, 'error' in out ? 400 : 200);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/changelog/preview') {
+    // L'aperçu : une entrée en cours d'édition, rendue comme la page
+    // `/changelog` la montrera, dans la langue demandée. Rien ne s'écrit. Un
+    // corps illisible ou un type inconnu : 400 `{ error }`, que le bloc affiche.
+    const b = await body<{ entry?: unknown; lang?: unknown } | null>(req).catch(() => null);
+    const out = await previewChangelogEntry(b?.entry, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/changelog') {
+    // La liste est l'ÉTAT COMPLET, comme dans l'admin ; `changed` porte les
+    // titres des entrées qui ont bougé, pour le message de commit. Pas de R2 :
+    // le site lit le fichier au build.
+    const { list, changed } = await body<{ list?: unknown; changed?: unknown }>(req);
+    await stream(res, (report) =>
+      withGit(saveChangelogList(list, strings(changed), CHANGELOG_DEPS, report)),
+    );
+    return;
+  }
+
   if (req.method === 'POST' && url.pathname === '/api/comics') {
     const { batches } = await body<{ batches: ComicBatch[] }>(req);
     await stream(res, (report) => withGit(addComics(batches, report)));
@@ -562,8 +607,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     return;
   }
 
-  if (req.method === 'POST' && url.pathname === '/api/gear-reco/translate') {
-    // « Traduire » : les notes anglaises du perso, d'UN appel. Rien ne s'écrit
+  if (
+    req.method === 'POST' &&
+    (url.pathname === '/api/translate' || url.pathname === '/api/gear-reco/translate')
+  ) {
+    // « Traduire » : des textes anglais vers les cinq autres langues, d'UN
+    // appel — les notes d'un perso (Gear reco, sous son adresse d'origine, qui
+    // reste), le titre et les puces d'une entrée du journal. Rien ne s'écrit
     // ici — la page pose le résultat dans son modèle, « Enregistrer » fait le
     // reste. Sans clé ou sur un refus du moteur : `{ error }`, que le bouton
     // affiche.

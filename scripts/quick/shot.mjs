@@ -8,7 +8,8 @@
  * tous ceux du menu), `--out <dossier>` (défaut `<tmp>/quick-shots/<horodatage>/`),
  * `--size 1440x1000`, `--settle 2500` (ms laissées aux `fetch` de la page),
  * `--hash <fragment>` (posé tel quel derrière l'adresse : un onglet qui lit son
- * hash s'ouvre sur un état précis, ex. `--tabs gear --hash gear/2000095`).
+ * hash s'ouvre sur un état précis, ex. `--tabs gear --hash gear/2000095`, ou
+ * `--tabs changelog --hash changelog/0` pour la fiche de l'entrée la plus récente).
  *
  * POURQUOI. Un agent qui retouche l'interface ne regarde pas l'écran : ce script
  * est son œil. Il suppose un quick DÉJÀ lancé — à part, sans jeton ni poste
@@ -50,8 +51,9 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
 /**
  * Les `POST` que la page émet en se chargeant et qui ne font que LIRE (l'aperçu
  * du brouillon, les emojis des serveurs cochés, l'aperçu des builds d'un
- * perso, le verdict « déborde » d'un nom court saisi). Sans eux l'onglet
- * Discord serait photographié sur une erreur, et les cartes de Gear reco sur
+ * perso, le verdict « déborde » d'un nom court saisi, l'aperçu d'une entrée du
+ * journal du site). Sans eux l'onglet Discord serait photographié sur une
+ * erreur, et les cartes de Gear reco ou la fiche d'une entrée du journal sur
  * un aperçu refusé.
  */
 export const READ_ONLY_POSTS = new Set([
@@ -59,6 +61,7 @@ export const READ_ONLY_POSTS = new Set([
   '/api/discord/emojis',
   '/api/gear-reco/preview',
   '/api/names/fit',
+  '/api/changelog/preview',
 ]);
 
 const SECTION = /<section id="tab-([a-z0-9-]+)"(?: hidden)?>/g;

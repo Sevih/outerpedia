@@ -36,9 +36,36 @@
       Search aliases (onglet « Noms », lot B34), Banner (onglet
       « Bannières », lot B35), la boîte de réception de la home (onglet
       « Tableau de bord », lot B36), la chaîne des données (onglet
-      « Patch », lot C10). À faire par Sevih : remplir
+      « Patch », lot C10), Changelog (onglet « Journal du site », lot B37).
+      À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
+- [ ] **« Journal du site » — contrôles à l'écran (lot B37)** : le banc ne
+      clique pas, et rien n'a été enregistré. (1) Un gabarit Perso sur un
+      perso réel : « ＋ Perso », deux lettres, Entrée — attendu : l'entrée en
+      tête, dépliée, le titre dans les six langues (les noms du jeu), la puce
+      anglaise (« …, stats and exclusive equipment. » si le jeu lui connaît
+      un EE), le slug en lien, le portrait dans l'aperçu. (2) « Traduire »
+      avec les vraies clés : les cinq langues posées, titre et puces, une
+      puce par ligne dans chacune ; retoucher l'anglais → « à retraduire » ;
+      recliquer → tout est réécrit. (3) L'aperçu contre `/changelog` du
+      site : ouvrir la même entrée des deux côtés (`en`, puis `fr`) —
+      vignette, badge, date, titre, puces, appel du lien ; le gras `**…**`
+      n'apparaîtra sur le site qu'après le déploiement de ce lot (cf. (5)).
+      (4) « Enregistrer » → le journal dit « N entrées écrites… » puis
+      « committé », `git log -1` = `chore(changelog): <titre>` sur le seul
+      `data/curated/changelog.json`, `git show --stat` sans autre ligne que
+      celles de l'entrée ; un gabarit « Mise à jour » au slug laissé vide →
+      refusé (« champ de gabarit non rempli — {slug} »), rien d'écrit. (5)
+      Le site, une fois poussé : `/changelog` et la home rendent le gras
+      des puces (15 entrées, dont « Universal Tower » en home) au lieu des
+      astérisques. À juger : (a) le gabarit Guide ne connaît que la
+      Singularité dimensionnelle, et « Mise à jour » demande le slug à la
+      main — un lot A servirait la liste des guides (`listGuides()`) en
+      suggestions, nom, mode et chemin déduits ; (b) 7 entrées portent un
+      lien markdown `[texte](url)` que la carte affiche brut (elle est déjà
+      un lien entier) ; (c) le flux RSS garde sa propre copie du motif du
+      gras (`src/app/feed/changelog/route.ts`) au lieu de `bulletSegments`.
 - [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
       clique pas. (1) L'inbox contre la home admin : ouvrir `/admin` à côté,
       mêmes items, même ordre, mêmes chiffres (le 08/10 : « Character ·
