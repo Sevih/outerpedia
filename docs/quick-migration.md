@@ -54,7 +54,23 @@ sa page de l'ADMIN dans un nouvel onglet (`ADMIN_BASE`,
 `https://outerpedia.local` d'office) tant que quick n'a pas la section — le
 lot qui la porte ajoute sa ligne à `ADMIN_TO_QUICK` d'`actions.ts`. Portage
 PARTIEL de la home admin : sa `PatchCard` est l'étape 21, sa couverture
-éditoriale suivra les éditeurs ; l'admin garde donc sa home).
+éditoriale suivra les éditeurs ; l'admin garde donc sa home), Patch (= la
+chaîne de `pnpm dev` et la `PatchCard` de la home admin, étape 21, lot C10 :
+quatre gestes lancés de quick, chacun une commande du dépôt, sa sortie ligne
+à ligne dans la console de la section — « Rafraîchir depuis le jeu »
+(`pnpm datagen:patch`, source Steam ou Android, `--force`, `--no-pull`,
+`--collect`, `--news` : pull, dump si le code a changé, extract, build,
+promote en DRY), « Dry-run » (`pnpm datagen:promote`, la revue par fichier et
+par entité, qui reste à l'écran), « Promouvoir » (`--apply`, allumé seulement
+après un dry-run réussi dans la page, sans boîte de confirmation — le
+dry-run EST la revue, décision Sevih ; la garde perso de `promote.ts` tient),
+« Committer » (`pnpm commit --no-push`, message et bump) ; le push reste
+« Pousser ». Un seul travail à la fois, le verrou de l'admin
+(`acquirePatchJob`), que « Pousser » prend aussi ; « Arrêter » coupe le
+travail en cours. Portage de la `PatchCard` COMPLET côté gestes, mais son
+lien reste dans l'admin tant que le cycle n'a pas été joué une fois dans
+quick — cf. TODO ; la revue par entité et l'intégration, étapes 19 et 20,
+restent dans l'admin).
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
 08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
 existant, période ou récompenses : supprimer puis recréer, ou lot A pour
@@ -75,22 +91,18 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 `PatchCard` de l'admin les font. Les étapes 18 et 21 remontent donc juste
 après les Bannières (5), avant Events :
 
-5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch →
-6 Events → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
+5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
+C10) → 6 Events → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 22 Clôture. La
 numérotation des étapes ne change pas.
 
 - **18 Tableau de bord** — FAIT, lot B36 (cf. « Déjà dans quick ») : un
   groupe « Accueil » en tête du menu, où l'étape 21 posera sa section.
-- **21 Patch** = la chaîne `datagen/refresh.ts` lancée de quick, étape par
-  étape dans le journal : pull (Steam, Android en secours) → dump si le code
-  a changé → extract → convert → build → promote en DRY (le diff par
-  fichier au niveau entité, lu à l'écran) → « Promouvoir » (`--apply`,
-  après confirmation, la garde perso de `promote.ts` reste) → commit des
-  `data/generated/` + notes de patch. Verrou d'un seul job à la fois
-  (`acquirePatchJob` de `patch-runner.ts`). Les persos non intégrés
-  restent gardés : l'intégration par entité (19, 20) reste dans l'admin
-  tant qu'elle n'est pas portée, et son lien reste.
+- **21 Patch** — FAIT, lot C10 (cf. « Déjà dans quick ») : la chaîne
+  `datagen/refresh.ts`, la promotion et le commit, lancés de la section
+  « Patch » du groupe Accueil. Les persos non intégrés restent gardés :
+  l'intégration par entité (19, 20) reste dans l'admin tant qu'elle n'est
+  pas portée, et son lien reste.
 
 ## Ordre et inventaire
 
@@ -180,9 +192,11 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport`
     - Agacements :
 
-21. **Patch : lanceur et journal**
-    `PatchCard` + `patch-runner` (`pnpm datagen…`, `pnpm commit`), journaux longs en direct
-    - Agacements :
+21. **Patch : lanceur et journal** — FAIT, lot C10 : la section « Patch »
+    (cf. « Déjà dans quick »). La ligne « Agacements » était vide : les
+    gestes de la `PatchCard` sont portés tels quels, plus le rafraîchissement
+    que seul `pnpm dev` lançait. L'entrée reste pour que la numérotation des
+    suivantes ne bouge pas.
 
 ### 5. Clôture
 

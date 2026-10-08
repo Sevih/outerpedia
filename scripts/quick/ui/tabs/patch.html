@@ -1,0 +1,122 @@
+<section id="tab-patch" hidden>
+  <div class="head">
+    <h2>Patch</h2>
+    <p class="hint">
+      La chaîne des données à chaque patch du jeu, étape par étape : rafraîchir depuis le client,
+      relire la promotion, promouvoir, committer. Un seul travail à la fois, sa sortie dans la
+      console ; rien ne part en ligne avant « Pousser », dans l'en-tête.
+    </p>
+  </div>
+
+  <div class="card" aria-label="Rafraîchir depuis le jeu">
+    <div class="card-head">
+      <strong>1 · Rafraîchir depuis le jeu</strong>
+      <span class="lbl">pull, dump si le code a changé, extract, build, promotion en dry-run</span>
+      <span class="p-state" id="p-refresh-state">Lecture…</span>
+    </div>
+    <div class="p-body">
+      <div class="form">
+        <div class="field">
+          <label id="p-source-label">Source</label>
+          <div class="p-seg" role="radiogroup" aria-labelledby="p-source-label">
+            <label
+              ><input type="radio" name="p-source" value="steam" checked /><span>Steam</span></label
+            >
+            <label
+              ><input type="radio" name="p-source" value="android" /><span>Android</span></label
+            >
+          </div>
+        </div>
+        <label class="check" title="--force : régénère même si le local est à jour"
+          ><input type="checkbox" id="p-force" /> forcer</label
+        >
+        <label class="check" title="--no-pull : travaille sur ce qui a déjà été tiré"
+          ><input type="checkbox" id="p-nopull" /> sans pull</label
+        >
+        <label class="check" title="--collect : met les images du patch en attente de R2"
+          ><input type="checkbox" id="p-collect" checked /> collecter les images</label
+        >
+        <label class="check" title="--news : relit les notes de patch du site officiel"
+          ><input type="checkbox" id="p-news" checked /> notes de patch</label
+        >
+        <button class="btn primary" id="p-refresh">Lancer</button>
+      </div>
+      <p class="p-note warn" id="p-resume" hidden></p>
+    </div>
+  </div>
+
+  <div class="card" aria-label="Revue de la promotion">
+    <div class="card-head">
+      <strong>2 · Revue de la promotion</strong>
+      <span class="lbl"
+        >ce que la promotion changerait, par fichier et par entité — rien ne s'écrit</span
+      >
+      <span class="p-state" id="p-review-state">pas encore de dry-run</span>
+    </div>
+    <div class="p-body">
+      <div class="actions"><button class="btn primary" id="p-dry">Dry-run</button></div>
+      <!-- La sortie du dernier dry-run : elle reste, c'est la revue. -->
+      <pre class="p-out" id="p-review" tabindex="0" aria-label="Sortie du dry-run" hidden></pre>
+    </div>
+  </div>
+
+  <div class="card" aria-label="Promouvoir">
+    <div class="card-head">
+      <strong>3 · Promouvoir</strong>
+      <span class="lbl">écrit data/generated — se défait par git</span>
+      <span class="p-state" id="p-apply-state">après un dry-run réussi</span>
+    </div>
+    <div class="p-body">
+      <div class="actions">
+        <button class="btn primary" id="p-apply" disabled>Promouvoir (--apply)</button>
+        <span class="lbl"
+          >Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de
+          <span class="mono">promote.ts</span>).</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="card" aria-label="Committer les données">
+    <div class="card-head">
+      <strong>4 · Committer les données</strong>
+      <span class="lbl">contrôles, bump de version, images sur R2, commit local</span>
+      <span class="p-state" id="p-commit-state">Lecture…</span>
+    </div>
+    <div class="p-body">
+      <div class="form">
+        <div class="field">
+          <label for="p-message">Message</label
+          ><input id="p-message" class="w-url" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="p-bump">Version</label
+          ><select id="p-bump">
+            <option value="patch" selected>patch</option>
+            <option value="minor">minor</option>
+            <option value="major">major</option>
+          </select>
+        </div>
+        <button class="btn primary" id="p-commit">Committer (pnpm commit)</button>
+      </div>
+      <p class="p-note">
+        Le commit lance format, lint, typecheck et tests : compter dix minutes. Il embarque tout ce
+        qui est modifié dans le dépôt (<span class="mono">git add -A</span>), pas seulement les
+        données.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" aria-label="Console">
+    <div class="card-head">
+      <strong>Console</strong>
+      <span class="lbl" id="p-console-state">au repos</span>
+      <span class="p-tools">
+        <button class="btn danger sm" id="p-stop" hidden>Arrêter</button>
+        <button class="btn ghost sm" id="p-copy">Copier</button>
+        <button class="btn ghost sm" id="p-clear">Effacer</button>
+      </span>
+    </div>
+    <pre class="p-out" id="p-console" tabindex="0" aria-label="Sortie de la commande"></pre>
+  </div>
+</section>

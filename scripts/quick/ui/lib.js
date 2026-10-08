@@ -31,7 +31,10 @@ export const GROUPS = [
   {
     id: 'home',
     label: 'Accueil',
-    sections: [{ id: 'dashboard', label: 'Tableau de bord' }],
+    sections: [
+      { id: 'dashboard', label: 'Tableau de bord' },
+      { id: 'patch', label: 'Patch', wide: true },
+    ],
   },
   {
     id: 'publication',
@@ -235,8 +238,13 @@ export const journalWire = () => {
  * le bouton de l'en-tête se met à jour ici, aucune section n'a rien à faire.
  * Quand il a réussi, la page l'annonce (`quick:saved` sur `document`) : le
  * tableau de bord, s'il est à l'écran, se relit.
+ *
+ * `onStep` (facultatif) : la section veut les lignes ELLE-MÊME — la sortie
+ * d'une commande longue, des milliers de lignes, va dans sa console (« Patch »).
+ * Chaque `step` lui est alors remis au lieu d'être empilé ici : le journal ne
+ * montre que la ligne en cours, puis le résultat, comme pour tout geste.
  */
-export async function post(path, payload) {
+export async function post(path, payload, onStep) {
   const res = await fetch(path, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -254,7 +262,11 @@ export async function post(path, payload) {
     const m = JSON.parse(raw);
     if (m.done) done = m.done;
     else if (m.doing) doing = m.step;
-    else if (m.step !== undefined) {
+    else if (m.step !== undefined && onStep) {
+      onStep(m.step);
+      // Une ligne vide ne remplace pas la ligne en cours du journal.
+      if (String(m.step).trim()) doing = m.step;
+    } else if (m.step !== undefined) {
       steps.push(m.step);
       doing = null;
     } else done = m;

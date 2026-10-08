@@ -21,6 +21,7 @@
  *   - `pnpm dev`         → scripts/dev-refresh.ts : { collect, news } = true,
  *                          promote en DRY (`apply: false`) — la revue reste humaine
  *   - `pnpm datagen:patch` → CLI ci-dessous : promote en DRY (revue), sans extras
+ *                          (`--collect`, `--news` les demandent : quick, section « Patch »)
  *
  * DEUX SOURCES depuis le 2026-08-26 (`--source steam|android`, défaut STEAM ;
  * l'Android est le secours) : chacune a son pull, son dump et son signal « le code a
@@ -753,19 +754,26 @@ export function sourceArg(argv: string[]): string | undefined {
   return argv.find((x) => x.startsWith('--source='))?.slice('--source='.length);
 }
 
+/**
+ * Les flags de la CLI → les options de `refresh`. PUR. `--news` rejoue `getNews`
+ * comme `pnpm dev` : c'est ainsi que la section « Patch » de quick le demande.
+ */
+export function cliOptions(argv: string[]): RefreshOptions {
+  return {
+    force: argv.includes('--force'),
+    noPull: argv.includes('--no-pull'),
+    apply: argv.includes('--apply'),
+    collect: argv.includes('--collect'),
+    news: argv.includes('--news'),
+    source: sourceArg(argv) as SourceName | undefined,
+  };
+}
+
 // Exécution directe = `pnpm datagen:patch` : refresh headless, promote en DRY
 // (revue du diff) sauf `--apply`. Flags : --force / --no-pull / --apply /
-// --collect / --source steam|android.
+// --collect / --news / --source steam|android.
 if (isMain(import.meta.url)) {
-  const a = process.argv.slice(2);
-  refresh({
-    force: a.includes('--force'),
-    noPull: a.includes('--no-pull'),
-    apply: a.includes('--apply'),
-    collect: a.includes('--collect'),
-    news: false,
-    source: sourceArg(a) as SourceName | undefined,
-  })
+  refresh(cliOptions(process.argv.slice(2)))
     .then(() => console.log('\n✅ refresh terminé.\n'))
     .catch((e) => {
       console.error('\n✗ refresh a échoué :', e?.message ?? e);

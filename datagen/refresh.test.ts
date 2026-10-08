@@ -1,15 +1,16 @@
 /**
  * Tests de `refresh` — ses DÉCISIONS, isolées en fonctions pures : (re)générer
  * (`regenDecision`), re-dumper (`dumpDecision`), reprendre après échec
- * (`resumeDecision`), et sauter une étape non outillée (`preflightPython`). Le
- * reste du flux est de l'orchestration à effets de bord (execFileSync, pull) —
- * non testable sans le jeu, et sa sortie (data/generated) est déjà couverte par
- * les invariants des générateurs.
+ * (`resumeDecision`), sauter une étape non outillée (`preflightPython`), et lire
+ * les flags de la CLI (`cliOptions`). Le reste du flux est de l'orchestration à
+ * effets de bord (execFileSync, pull) — non testable sans le jeu, et sa sortie
+ * (data/generated) est déjà couverte par les invariants des générateurs.
  *
  * Tourne SANS `.gamedata` : aucune de ces fonctions ne touche fs ni tables.
  */
 import { describe, expect, it } from 'vitest';
 import {
+  cliOptions,
   dumpDecision,
   genSteps,
   preflightPython,
@@ -301,5 +302,38 @@ describe('resumeDecision — reprendre où ça a cassé', () => {
       done: [],
       discarded: null,
     });
+  });
+});
+
+describe('cliOptions — les flags de `pnpm datagen:patch`', () => {
+  it('sans flag : rien de plus que la chaîne gatée, promote en dry', () => {
+    expect(cliOptions([])).toEqual({
+      force: false,
+      noPull: false,
+      apply: false,
+      collect: false,
+      news: false,
+      source: undefined,
+    });
+  });
+
+  it('`--news` rejoue getNews, comme `pnpm dev` — quick le passe', () => {
+    expect(cliOptions(['--news']).news).toBe(true);
+    expect(cliOptions(['--collect', '--news', '--source', 'android'])).toEqual({
+      force: false,
+      noPull: false,
+      apply: false,
+      collect: true,
+      news: true,
+      source: 'android',
+    });
+  });
+
+  it('chaque flag ne pose que son option', () => {
+    expect(cliOptions(['--force']).force).toBe(true);
+    expect(cliOptions(['--no-pull']).noPull).toBe(true);
+    expect(cliOptions(['--apply']).apply).toBe(true);
+    expect(cliOptions(['--source=steam']).source).toBe('steam');
+    expect(cliOptions(['--force', '--no-pull']).news).toBe(false);
   });
 });

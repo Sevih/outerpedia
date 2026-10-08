@@ -7,6 +7,111 @@
 
 ## 2026-10-08
 
+- **quick : « Patch » — la chaîne des données lancée de quick, du pull au
+  commit (lot C10, migration 21)** (08/10) : étape 21 de
+  `docs/quick-migration.md`. Ce que Sevih faisait à chaque patch du jeu au
+  terminal (`pnpm dev` : pull, dump, extract, build, promote en dry, collect,
+  news) puis dans la `PatchCard` de l'admin (dry-run, `--apply`, commit) se
+  lance désormais d'une section « Patch », seconde du groupe « Accueil »,
+  `wide` — sans `clean:all`, sans Next. Le push reste « Pousser ».
+  **Serveur** — `scripts/quick/patch.ts`, qui câble et ne réécrit rien :
+  `runJob(label, command, args, report, { cwd, env })` lance SANS shell par
+  `spawnLauncher` de l'admin (importé, auquel il ne glisse qu'un `spawn`
+  enveloppé : dossier, environnement, poignée gardée), envoie chaque ligne au
+  `report` de quick (un `step` du NDJSON de `stream`) et rend
+  `{ ok, code, out }`, la sortie entière. Verrou : `acquirePatchJob` de
+  l'admin, pris par `runJob` et par `/api/push` (`server.ts`) — un second
+  lancement répond 409 `{ ok: false, error: 'Un travail tourne déjà : <label>' }`
+  (`ok: false` en plus du contrat : sans lui `post()` de la page lirait le
+  refus comme une opération en cours). `stopJob()` (`POST /api/patch/stop`)
+  envoie SIGTERM. Les gestes sont des PLANS purs, bâtis du corps de la
+  requête : `refreshPlan` (`pnpm datagen:patch` + `--source`, `--force`,
+  `--no-pull`, `--collect`, `--news` — `--apply` n'est pas dans sa table,
+  la source est une liste close), `promotePlan` (`{ apply }` booléen strict),
+  `commitPlan` (`parsePublishRequest` et `publishArgs` de l'admin : message et
+  bump refusés AVANT tout lancement, 400). `runGesture` écrit la commande en
+  première ligne (`$ pnpm …`), puis rend un journal COURT : une ligne quand ça
+  passe, les quinze dernières lignes et le verdict quand ça casse. Le commit
+  rend `git` (`withGit`). `patchState(disk)` (`GET /api/patch/state`, lectures
+  injectées, une lecture qui lève = `null` + `errors`) : travail en cours,
+  source par défaut, client Steam, versions site / client (celles du tableau
+  de bord, `DASHBOARD_DISK`), checkpoint de reprise PAR source (la page en
+  change), dépôt et fichiers modifiés, borne du message. `datagen/refresh.ts` :
+  le flag `--news`, par une fonction pure `cliOptions(argv)` extraite de la
+  CLI pour être testée (rien d'autre n'y bouge).
+  **Comment la console reçoit les lignes** — choix : un troisième paramètre
+  facultatif à `post()` (`lib.js`), `onStep`. Avec lui, chaque `step` est
+  remis à la section au lieu d'être empilé : la console l'écrit (un nœud texte
+  par ligne dans un `pre`), et le journal de l'en-tête ne montre que la ligne
+  en cours puis le résultat. Sans cela `log()` redessinait tout le journal à
+  chaque ligne — quadratique sur une sortie de milliers de lignes. La console
+  suit la sortie tant qu'on n'est pas remonté, garde 5 000 lignes à l'écran
+  (« Copier » rend tout), et la carte 2 tient SA copie de la sortie du dernier
+  dry-run : c'est la revue, elle reste. « Promouvoir » n'est allumé qu'après
+  un dry-run réussi dans la page, sans `confirm` (décision Sevih) ; un
+  rafraîchissement lancé ou une promotion (faite ou ratée) rend la revue à
+  refaire — ajout de l'agent, la proposition ayant pu changer. Pendant un
+  travail : les quatre boutons et « Pousser » éteints, « Arrêter » visible ;
+  un travail lancé avant (page rechargée) est dit « un travail tourne : … »,
+  sans sa sortie, et l'état est relu toutes les trois secondes jusqu'à sa fin.
+  **« Arrêter » coupe le GROUPE, pas pnpm seul** — écart assumé à « SIGTERM au
+  job » : pnpm lance tsx, qui lance node, qui lance chaque étape par
+  `execFileSync` ; un SIGTERM à pnpm seul laissait l'étape en cours finir en
+  orpheline, verrou relâché. Sous Linux et macOS la commande part donc dans
+  son groupe (`detached`) et c'est lui qui reçoit le signal ; Windows garde la
+  poignée seule. Vérifié sur un projet d'essai du scratchpad (un script pnpm
+  dont le node tient un `sleep` par `execFileSync`) : `stopJob()` à 2,5 s,
+  rendu `{ ok: false, code: null, stopped: true }`, plus aucun `sleep`.
+  **Ce que la section montre au repos sur ce poste** (quick isolé :4831,
+  capture `/tmp/quick-shots/c10/patch.png`, aucun bouton cliqué) : 1 ·
+  « client 1.11.404 · site 1.11.404 », Steam, images et notes cochées, pas
+  de reprise ; 2 · « pas encore de dry-run » ; 3 · « Promouvoir (--apply) »
+  éteint, « après un dry-run réussi » ; 4 · « chore(data): patch du 08/10 »,
+  `patch`, « 11 fichiers modifiés · 9 commits à pousser » (les fichiers de ce
+  lot) ; console « au repos ». Sur ce quick, seuls les REFUS ont été appelés
+  à la main : `stop` sans travail (409), source `ios`, `apply` absent, message
+  sans préfixe (400) — aucune commande n'est partie.
+  **Tests** — `patch.test.ts` (28 : faux `spawn`, lignes et ANSI, code de
+  sortie, `spawn` en échec, verrou refusé puis relâché même en échec, verrou
+  tenu par l'admin, SIGTERM reçu, plans et refus, `--apply` impossible,
+  `runGesture`, `patchState`) ; `refresh.test.ts` (`cliOptions`, `--news`) ;
+  `ui-serve.test.ts` (la page en happy-dom, flux tenu par le test : quatre
+  cartes, « Promouvoir » avant / après / après échec, boutons pendant un
+  travail, console au fil, 5 000 lignes, « Arrêter », « Copier », « Effacer »,
+  « un travail tourne », 409 ; section servie, seconde du groupe Accueil ;
+  `shot` ne relaie aucune route de la section). Le tableau de bord gagne le
+  bouton « Onglet Patch » que B36 avait prévu (`hasSection('patch')`) : son
+  test est mis à jour, c'est le seul changement visuel hors de la section.
+  Vérifié : `pnpm typecheck` (dernière ligne
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, rien dessous), `pnpm test`
+  (`Tests  2969 passed (2969)`, 199 fichiers), et
+  `NODE_ENV=development pnpm exec vitest run scripts/quick datagen/refresh.test.ts`
+  (`Tests  574 passed (574)`). Docs : `quick-migration.md` (21 FAIT), une
+  phrase dans `CLAUDE.md` et dans le docblock de `scripts/dev-refresh.ts`,
+  croquis « Patch » dans `STYLE.md`.
+  **Laissé** : le vrai cycle n'a JAMAIS été joué (c'est le lot : il câble) —
+  ligne du TODO « À jouer au prochain patch », avec le retrait de la
+  `PatchCard` de l'admin une fois ce cycle joué. Le message de commit n'est
+  validé que par le serveur (la page ne peut pas importer
+  `commitMessageError` : elle borne la longueur et exige un texte, le refus
+  passe par le journal). **Vu hors périmètre** : (1) les enregistrements de
+  quick (`commitPaths`) ne prennent pas le verrou — un « Enregistrer » pendant
+  `pnpm commit` se mêlerait à son `git add -A` ; (2) « Arrêter » pendant
+  `pnpm commit`, après le push R2 et avant le commit, laisse la prod servir
+  des images que le dépôt n'enregistre pas — le bouton ne le dit pas ;
+  (3) « Quitter » pendant un travail : il va au bout (son groupe ne meurt pas
+  avec quick), verrou perdu ; (4) `pull-steam.ts` écrit sa progression par
+  `\r`, que `createLineSplitter` rend ligne à ligne — la console se remplit
+  de « n/N copié(s)… » ; (5) `.p-seg` est la troisième copie d'un bouton
+  segmenté (Discord, Gear reco) : un composant commun de `quick.css` les
+  remplacerait ; (6) `pushMain` est synchrone : pendant un push le serveur ne
+  répond à rien, l'état de « Patch » compris. Incident du banc, hors dépôt :
+  le projet d'essai du scratchpad n'épinglait pas pnpm, corepack a commencé à
+  télécharger pnpm 12.4.2 dans `~/.cache/node/corepack` avant d'être coupé ;
+  la copie partielle a été retirée (`lastKnownGood.json` disait déjà 12.4.2
+  depuis le 18/09, rien d'autre n'a changé), l'essai rejoué avec
+  `packageManager: pnpm@11.13.1`.
 - **Relecture B36** (Fable, 08/10) : `d84ab34c` validé — 98 lots, C10 reste
   ouvert. Périmètre attendu (`tabs/dashboard.*`, `actions.ts`, `server.ts`,
   `lib.js`, `index.html`, `coupons.html`, tests, STYLE.md, DONE, TODO,

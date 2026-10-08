@@ -31,7 +31,8 @@ Jeu : **Outerplane**. Wiki communautaire — le code de [outerpedia.com](https:/
 ## Les verbes
 
 - `pnpm dev` — clean:all → refresh des données (`scripts/dev-refresh.ts`) →
-  `next dev`.
+  `next dev`. À chaque patch du jeu, ce refresh, la promotion et le commit
+  des données se lancent désormais de quick, section « Patch ».
 - `pnpm quick` — l'outil de tous les jours (`scripts/quick/`, icône posée par
   `pnpm quick:install` sur le poste courant : `.desktop` sous Linux, menu
   Démarrer sous Windows) : code promo, 4-comic, vidéo, rangs, gear reco,

@@ -65,10 +65,13 @@ pastille.
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
   `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
   sur son onglet. Un `post()` réussi qui a committé ou poussé émet
-  `quick:saved` sur `document`.
+  `quick:saved` sur `document`. `post(path, payload, onStep)` : avec
+  `onStep`, chaque ligne du flux est remise à la section au lieu d'être
+  empilée au journal, qui ne montre alors que la ligne en cours puis le
+  résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Rangs, Gear reco, Discord. Une section est une colonne à
+  (`main.wide`) : Patch, Rangs, Gear reco, Discord. Une section est une colonne à
   18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
   entre `nav.tabs` et `<main>`, pleine largeur, son contenu (`.journal-in`)
@@ -254,6 +257,8 @@ colonnes de Rangs.
   12 × 14 px entre les champs, 10 px entre les boutons d'une rangée.
 - **Un seul `primary` par formulaire** ; détruire = `danger` ou `icon` ✕.
 - **Le journal est le seul retour** : pas de message dans l'onglet, `log()`.
+  Exception : la sortie d'une commande longue (« Patch ») va dans une console
+  de la section, le journal n'en gardant que la ligne en cours et l'issue.
 - **L'aperçu Discord** (`.dc*`) imite Discord à dessein et garde ses couleurs.
 
 ## Les trois onglets « wide » — croquis
@@ -371,6 +376,48 @@ comptent au jour UTC du serveur (`today`). Propres à l'onglet, dans
 `.h-detail`, ce qui la ferme poussé à droite), `.h-row.tint` (le libellé
 prend la teinte de la pastille), les teintes `.dot.warn`, `.dot.danger`,
 `.dot.info`, et `.h-note` (une phrase à la place des lignes).
+
+### Patch (`wide`, fait — C10)
+
+La chaîne des données à chaque patch du jeu : quatre gestes, chacun une
+commande du dépôt lancée par le serveur (`patch.ts`), un seul travail à la
+fois. Croquis du rendu :
+
+```
+.head  Patch — La chaîne des données à chaque patch du jeu, étape par étape…
+quatre .card empilées, dans l'ordre du flux ; chacune : card-head = « n · titre » · ce que fait le geste (.lbl) … son ÉTAT poussé à droite (.p-state : atténué, ok, warn, ko), puis .p-body = le geste
+  .card « 1 · Rafraîchir depuis le jeu »      … « client 1.11.404 · site 1.11.402 — un patch attend » (warn ; sans écart, atténué ; « pas de client Steam · site … », `title` : l'Android reste possible)
+     .form : Source [Steam | Android] (.p-seg, deux radios ; défaut = `DATAGEN_SOURCE`, sinon Steam) [☐ forcer] [☐ sans pull] [☑ collecter les images] [☑ notes de patch] [Lancer]
+     .p-note.warn « une reprise attend (checkpoint du 08/10 14:30) : « Lancer » reprend où la chaîne a cassé, « forcer » repart de zéro. » — seulement s'il y en a un pour la source choisie
+  .card « 2 · Revue de la promotion »         … « pas encore de dry-run » · « dry-run en cours… » · « dry-run réussi à 14:32 » (ok) · « dry-run en échec à 14:32 » (ko) · « dry-run à refaire : la proposition a pu changer » (warn)
+     [Dry-run]
+     pre.p-out (32 vh au plus, absente avant le premier dry-run) : la sortie du DERNIER dry-run, qui reste après la fin — c'est la revue
+  .card « 3 · Promouvoir »                    … « après un dry-run réussi » · « prêt : la revue est au-dessus » · « promue à 14:40 — reste à committer » (ok)
+     [Promouvoir (--apply)]  Les persos pas encore intégrés dans l'admin ne partent pas, même ici (la garde de promote.ts).
+     éteint tant qu'un dry-run n'a pas réussi DANS CETTE PAGE ; pas de boîte de confirmation (le dry-run est la revue, la promotion se défait par git) ; un rafraîchissement lancé, une promotion faite ou ratée : la revue est à refaire
+  .card « 4 · Committer les données »         … « 11 fichiers modifiés · 2 commits à pousser — « Pousser », dans l'en-tête » (warn s'il y a des fichiers ; « aucun fichier modifié » ; « dépôt illisible : … » en ko)
+     .form : [Message 42ch, prérempli « chore(data): patch du 08/10 », borné à 200] [Version ▾ patch · minor · major] [Committer (pnpm commit)]
+     .p-note « Le commit lance format, lint, typecheck et tests : compter dix minutes. Il embarque tout ce qui est modifié dans le dépôt (git add -A)… »
+     éteint sans message ou sans fichier modifié (`title` : rien à committer)
+.card « Console »  card-head : titre · son état (.lbl) … [Arrêter] (danger, pendant un travail seulement) [Copier] [Effacer]
+   état : « au repos » · « en cours : dry-run de la promotion » · « 412 lignes » · « un travail tourne : commit des données — lancé avant, sa sortie n'est pas ici »
+   pre.p-out#p-console (chasse fixe 12 px, fond de la page, 40 vh) : toute la sortie, ligne à ligne ; elle défile avec la sortie tant qu'on n'est pas remonté ; au-delà de 5 000 lignes seule la fin reste affichée, « Copier » rend tout
+```
+
+Pendant un travail : les quatre boutons et « Pousser » sont éteints (le 409
+du serveur reste la vraie garde), celui du geste est `busy`, le journal de
+l'en-tête montre la ligne en cours puis l'issue — une ligne quand ça passe,
+les quinze dernières lignes de la sortie et le verdict quand ça casse.
+« Arrêter » envoie SIGTERM au travail et à ce qu'il a lancé ; sa réponse
+s'écrit dans la console (« — arrêt demandé : … »), le geste se clôt seul en
+« arrêté ». L'état vient de `GET /api/patch/state` : relu à chaque venue à
+l'écran et après chaque geste, et toutes les trois secondes tant qu'un
+travail lancé AVANT (page rechargée, « Pousser » en cours) tient le verrou —
+sa sortie, elle, n'est pas rejouée. Recharger la page pendant un geste lancé
+d'ici demande confirmation (`dirty`). Propres à l'onglet, dans
+`tabs/patch.css` : `.p-state`, `.p-body`, `.p-note`, `.p-seg` (le segmenté de
+Discord, recopié faute de composant commun), `.p-out` (une sortie de
+commande).
 
 ## Publication — croquis
 

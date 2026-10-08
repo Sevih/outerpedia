@@ -9,6 +9,7 @@ import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
 const UI = resolve(import.meta.dirname, 'ui');
 const TABS = [
   'dashboard',
+  'patch',
   'coupons',
   'banners',
   'comics',
@@ -59,7 +60,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : neuf sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : dix sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -194,6 +195,10 @@ describe('shot — la page que le banc de captures photographie', () => {
   it('ne relaie ni « Pousser » ni un enregistrement : aucun n’est une lecture', () => {
     for (const path of [
       '/api/push',
+      '/api/patch/refresh',
+      '/api/patch/promote',
+      '/api/patch/commit',
+      '/api/patch/stop',
       '/api/coupons',
       '/api/banners',
       '/api/comics',
@@ -1574,7 +1579,10 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     ]);
     expect(
       page.all('#tabs [data-group="home"]').map((b) => [b.dataset.tab, b.textContent]),
-    ).toEqual([['dashboard', 'Tableau de bord']]);
+    ).toEqual([
+      ['dashboard', 'Tableau de bord'],
+      ['patch', 'Patch'],
+    ]);
     // Sans hash : la première section du premier groupe, et elle seule.
     expect(
       page
@@ -1680,9 +1688,9 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
         })
       ).rows('h-game');
 
-    // La section « Patch » n'existe pas encore : du texte, pas un bouton.
+    // La section « Patch » existe : un bouton y mène.
     expect(await game({ version: '1.11.405', client: 'ahead' })).toEqual([
-      ['warn', 'site 1.11.404 · client 1.11.405un patch attend : onglet Patch', true],
+      ['warn', 'site 1.11.404 · client 1.11.405un patch attendOnglet Patch', true],
     ]);
     expect(await game({ version: null, client: 'absent' })).toEqual([
       ['muted', 'site 1.11.404 · client —pas de client Steam sur ce poste', true],
@@ -1810,6 +1818,22 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     expect(page.el('tab-names').hidden).toBe(false);
   });
 
+  it('un patch attend : « Onglet Patch » ouvre la section, seconde du groupe', async () => {
+    const page = await dashboard({
+      state: quiet({
+        game: { site: '1.11.404', version: '1.11.405', client: 'ahead', proposal: false },
+      }),
+    });
+    (
+      page.all('#h-game button').find((b) => page.text(b) === 'Onglet Patch') as HTMLElement
+    ).click();
+    expect(page.el('tab-patch').hidden).toBe(false);
+    expect(page.el('tab-dashboard').hidden).toBe(true);
+    expect(page.all('#groups [data-group="home"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#tabs [data-tab="patch"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+  });
+
   it('ouvert sur un autre onglet (`#coupons`), il ne lit rien avant qu’on y vienne', async () => {
     const page = await dashboard({ hash: '#coupons' });
     expect(page.el('tab-coupons').hidden).toBe(false);
@@ -1854,5 +1878,679 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
     await hidden.settle();
     expect(hidden.posts).toEqual(['/api/push']);
     expect(hidden.served.reads).toBe(0);
+  });
+});
+
+describe('Patch — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  interface State {
+    job: string | null;
+    source: 'steam' | 'android';
+    steam: boolean;
+    site: string | null;
+    client: string | null;
+    checkpoint: { steam: string | null; android: string | null };
+    git: { branch: string; ahead: number | null; behind: number; dirty: number } | null;
+    messageMax: number;
+    errors: Record<string, string>;
+  }
+
+  /** Un poste au repos : le client en avance d'un patch, trois fichiers modifiés. */
+  const idle = (over: Partial<State> = {}): State => ({
+    job: null,
+    source: 'steam',
+    steam: true,
+    site: '1.11.402',
+    client: '1.11.404',
+    checkpoint: { steam: null, android: null },
+    git: { branch: 'main', ahead: 0, behind: 0, dirty: 3 },
+    messageMax: 200,
+    errors: {},
+    ...over,
+  });
+
+  type Call = { path: string; body: unknown };
+
+  /**
+   * Le flux d'un geste, TENU par le test : il y pousse des lignes NDJSON quand
+   * il veut, puis le clôt — la page est observée pendant que le travail court.
+   */
+  function heldStream() {
+    const queue: (Uint8Array | null)[] = [];
+    let wake: (() => void) | null = null;
+    const put = (chunk: Uint8Array | null) => {
+      queue.push(chunk);
+      wake?.();
+    };
+    return {
+      /** Une ligne du flux : `{ step }`, `{ done }`, ou une réponse d'une pièce. */
+      send: (line: unknown) => put(new TextEncoder().encode(`${JSON.stringify(line)}\n`)),
+      /** Un morceau brut, tel quel : plusieurs lignes d'un coup. */
+      raw: (text: string) => put(new TextEncoder().encode(text)),
+      close: () => put(null),
+      body: {
+        getReader: () => ({
+          read: async () => {
+            while (!queue.length) await new Promise<void>((done) => (wake = done));
+            const chunk = queue.shift();
+            return chunk ? { value: chunk } : { done: true };
+          },
+        }),
+      },
+    };
+  }
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour le tableau de
+   * bord : la VRAIE coquille, le vrai `lib.js` et le vrai `tabs/patch.js` (eux
+   * seuls). `fetch` est factice : il sert `served.state`, répond à « Arrêter »,
+   * et rend à chaque geste un flux que le test tient (`streams`). Aucune
+   * commande n'existe ici.
+   */
+  async function patch(opts: { state?: Partial<State>; hash?: string; stop?: unknown } = {}) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? '#patch'}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { state: idle(opts.state), reads: 0 };
+    const calls: Call[] = [];
+    const streams: ReturnType<typeof heldStream>[] = [];
+    const confirm = vi.fn(() => true);
+    const writeText = vi.fn<(text: string) => Promise<void>>(() => Promise.resolve());
+    const answer = (data: unknown, ok = true) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      if (init) calls.push({ path, body: init.body ? JSON.parse(init.body) : undefined });
+      if (path === '/api/patch/state') {
+        served.reads += 1;
+        return answer(served.state);
+      }
+      if (path === '/api/patch/stop')
+        return answer(opts.stop ?? { ok: true, stopped: 'dry-run de la promotion' });
+      if (init) {
+        const held = heldStream();
+        streams.push(held);
+        return { ok: true, body: held.body };
+      }
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+    vi.stubGlobal('navigator', { clipboard: { writeText } });
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'patch.js'));
+    lib.sections.start();
+    /** Laisse la page lire ce qui est arrivé — sous de faux minuteurs aussi. */
+    const settle = async () => {
+      for (let i = 0; i < 4; i++)
+        if (vi.isFakeTimers()) await vi.advanceTimersByTimeAsync(0);
+        else await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const text = (node: Element | null | undefined) =>
+      (node?.textContent ?? '').replace(/\s+/g, ' ').trim();
+    const BUTTONS = ['p-refresh', 'p-dry', 'p-apply', 'p-commit'];
+    return {
+      el,
+      all,
+      text,
+      served,
+      calls,
+      streams,
+      confirm,
+      writeText,
+      settle,
+      fire: (target: HTMLElement, type: string) =>
+        target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event),
+      /** Le flux du dernier geste lancé. */
+      stream: () => streams[streams.length - 1],
+      /** Le dernier flux reçoit ces lignes de sortie, puis son issue, et se clôt. */
+      async finish(done: unknown, steps: string[] = []) {
+        const held = streams[streams.length - 1];
+        for (const step of steps) held.send({ step });
+        held.send({ done });
+        held.close();
+        await settle();
+      },
+      /** Éteints ? Les quatre gestes, dans l'ordre du flux. */
+      disabled: () => BUTTONS.map((id) => el(id).disabled),
+      /** L'état de chaque étape, à droite de sa tête. */
+      states: () =>
+        ['p-refresh-state', 'p-review-state', 'p-apply-state', 'p-commit-state'].map((id) =>
+          text(el(id)),
+        ),
+      console: () => el('p-console').textContent ?? '',
+    };
+  }
+
+  const OK = (label: string) => ({ ok: true, code: 0, log: [`${label} : terminé.`] });
+  const KO = (label: string) => ({
+    ok: false,
+    code: 1,
+    log: [
+      '✗ ça casse',
+      `${label} : échec (code 1) — toute la sortie est dans la console de « Patch ».`,
+    ],
+  });
+
+  it('la section est servie, seconde du groupe Accueil, en pleine largeur', async () => {
+    const page = await patch();
+    expect(
+      page.all('#tabs [data-group="home"]').map((b) => [b.dataset.tab, b.textContent, b.hidden]),
+    ).toEqual([
+      ['dashboard', 'Tableau de bord', false],
+      ['patch', 'Patch', false],
+    ]);
+    expect(
+      page
+        .all('main > section')
+        .filter((s) => !s.hidden)
+        .map((s) => s.id),
+    ).toEqual(['tab-patch']);
+    expect(page.all('#groups [data-group="home"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#tabs [data-tab="patch"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    // Elle lit son état en venant à l'écran, et ne poste rien.
+    expect(page.served.reads).toBe(1);
+    expect(page.calls).toEqual([]);
+
+    // Ouverte ailleurs, elle ne lit rien avant qu'on y vienne.
+    const elsewhere = await patch({ hash: '#coupons' });
+    expect(elsewhere.served.reads).toBe(0);
+    elsewhere.all('#groups [data-group="home"]')[0].click();
+    expect(elsewhere.el('tab-dashboard').hidden).toBe(false);
+    elsewhere.all('#tabs [data-tab="patch"]')[0].click();
+    await elsewhere.settle();
+    expect(elsewhere.el('tab-patch').hidden).toBe(false);
+    expect(elsewhere.served.reads).toBe(1);
+  });
+
+  it('les quatre cartes au repos, dans l’ordre du flux, puis la console', async () => {
+    const page = await patch();
+    expect(page.all('#tab-patch > .card').map((c) => c.getAttribute('aria-label'))).toEqual([
+      'Rafraîchir depuis le jeu',
+      'Revue de la promotion',
+      'Promouvoir',
+      'Committer les données',
+      'Console',
+    ]);
+    expect(page.all('#tab-patch > .card .card-head strong').map((s) => page.text(s))).toEqual([
+      '1 · Rafraîchir depuis le jeu',
+      '2 · Revue de la promotion',
+      '3 · Promouvoir',
+      '4 · Committer les données',
+      'Console',
+    ]);
+    expect(page.states()).toEqual([
+      'client 1.11.404 · site 1.11.402 — un patch attend',
+      'pas encore de dry-run',
+      'après un dry-run réussi',
+      '3 fichiers modifiés',
+    ]);
+    // Chaque carte a son bouton ; seul « Promouvoir » attend la revue.
+    expect(
+      ['p-refresh', 'p-dry', 'p-apply', 'p-commit'].map((id) => page.text(page.el(id))),
+    ).toEqual(['Lancer', 'Dry-run', 'Promouvoir (--apply)', 'Committer (pnpm commit)']);
+    expect(page.disabled()).toEqual([false, false, true, false]);
+    // Les options de « Rafraîchir », comme `pnpm dev` : images et notes cochées.
+    expect(['p-force', 'p-nopull', 'p-collect', 'p-news'].map((id) => page.el(id).checked)).toEqual(
+      [false, false, true, true],
+    );
+    expect(
+      page
+        .all('input[name="p-source"]')
+        .map((r) => [(r as HTMLInputElement).value, (r as HTMLInputElement).checked]),
+    ).toEqual([
+      ['steam', true],
+      ['android', false],
+    ]);
+    expect(page.el('p-resume').hidden).toBe(true);
+    // Le commit : message prérempli au jour du poste, borné, bump `patch`.
+    expect(page.el('p-message').value).toMatch(/^chore\(data\): patch du \d\d\/\d\d$/);
+    expect(page.el('p-message').maxLength).toBe(200);
+    expect(page.el('p-bump').value).toBe('patch');
+    expect(page.all('#p-bump option').map((o) => (o as HTMLOptionElement).value)).toEqual([
+      'patch',
+      'minor',
+      'major',
+    ]);
+    expect(page.text(page.all('[aria-label="Committer les données"] .p-note')[0])).toContain(
+      'Le commit lance format, lint, typecheck et tests : compter dix minutes.',
+    );
+    expect(page.text(page.all('[aria-label="Promouvoir"] .actions')[0])).toContain(
+      "Les persos pas encore intégrés dans l'admin ne partent pas",
+    );
+    // La console : vide, au repos, « Arrêter » absent, la revue pas encore là.
+    expect(page.console()).toBe('');
+    expect(page.text(page.el('p-console-state'))).toBe('au repos');
+    expect(page.el('p-stop').hidden).toBe(true);
+    expect(page.el('p-review').hidden).toBe(true);
+    expect(readFileSync(resolve(UI, 'tabs', 'patch.css'), 'utf8')).toMatch(
+      /#p-console \{\s*height: 40vh;/,
+    );
+    // L'en-tête suit le dépôt : rien à pousser.
+    expect(page.el('push').disabled).toBe(true);
+  });
+
+  it('l’état du poste : sans client Steam, source Android, reprise, dépôt', async () => {
+    const none = await patch({
+      state: { steam: false, client: null, source: 'android', site: '1.11.404' },
+    });
+    expect(none.states()[0]).toBe('pas de client Steam · site 1.11.404');
+    expect(none.el('p-refresh-state').title).toContain('Android reste possible');
+    expect(none.disabled()[0]).toBe(false);
+    expect(none.all('input[name="p-source"]').map((r) => (r as HTMLInputElement).checked)).toEqual([
+      false,
+      true,
+    ]);
+
+    // À jour : pas de « un patch attend ».
+    const same = await patch({ state: { client: '1.11.404', site: '1.11.404' } });
+    expect(same.states()[0]).toBe('client 1.11.404 · site 1.11.404');
+    expect(same.el('p-refresh-state').className).toBe('p-state');
+
+    // Une reprise attend : dite pour la source choisie, et elle seule.
+    const resume = await patch({
+      state: { checkpoint: { steam: '2026-10-08T12:30:00.000Z', android: null } },
+    });
+    expect(resume.el('p-resume').hidden).toBe(false);
+    expect(resume.text(resume.el('p-resume'))).toMatch(
+      /^une reprise attend \(checkpoint du \d\d\/\d\d.{1,3}\d\d:\d\d\) : « Lancer » reprend/,
+    );
+    const android = resume.all('input[name="p-source"]')[1] as HTMLInputElement;
+    android.checked = true;
+    resume.fire(android, 'change');
+    expect(resume.el('p-resume').hidden).toBe(true);
+
+    // Rien de modifié : rien à committer ; des commits attendent : dit.
+    const clean = await patch({
+      state: { git: { branch: 'main', ahead: 2, behind: 0, dirty: 0 } },
+    });
+    expect(clean.states()[3]).toBe(
+      'aucun fichier modifié · 2 commits à pousser — « Pousser », dans l’en-tête',
+    );
+    expect(clean.disabled()).toEqual([false, false, true, true]);
+    expect(clean.el('p-commit').title).toBe('Aucun fichier modifié : rien à committer');
+    expect(clean.el('push').disabled).toBe(false);
+    expect(clean.text(clean.el('push-count'))).toBe('2');
+
+    // Dépôt illisible : dit dans la carte, et le commit reste tentable.
+    const blind = await patch({ state: { git: null, errors: { git: 'git status a échoué' } } });
+    expect(blind.states()[3]).toBe('dépôt illisible : git status a échoué');
+    expect(blind.disabled()[3]).toBe(false);
+  });
+
+  it('« Lancer » : les options cochées partent, la console reçoit les lignes au fil', async () => {
+    const page = await patch();
+    page.el('p-force').checked = true;
+    page.el('p-news').checked = false;
+    page.el('p-refresh').click();
+    await page.settle();
+    expect(page.calls).toEqual([
+      {
+        path: '/api/patch/refresh',
+        body: { source: 'steam', force: true, noPull: false, collect: true, news: false },
+      },
+    ]);
+
+    // Pendant le travail : les quatre gestes et « Pousser » éteints, « Arrêter » là.
+    expect(page.disabled()).toEqual([true, true, true, true]);
+    expect(page.el('push').disabled).toBe(true);
+    expect(page.el('p-stop').hidden).toBe(false);
+    expect(page.el('p-refresh').classList.contains('busy')).toBe(true);
+    expect(page.text(page.el('p-console-state'))).toBe('en cours : rafraîchissement depuis le jeu');
+    expect(page.el('journal').dataset.state).toBe('run');
+    expect(page.text(page.el('journal-last'))).toBe('rafraîchissement depuis le jeu');
+
+    page.stream().send({ step: '$ pnpm datagen:patch --source steam --force --collect' });
+    page.stream().send({ step: '▶ pull (client Steam → .gamedata)' });
+    await page.settle();
+    expect(page.console()).toBe(
+      '$ pnpm datagen:patch --source steam --force --collect\n▶ pull (client Steam → .gamedata)\n',
+    );
+    // Le journal de l'en-tête : la ligne en cours, sans empiler la sortie.
+    expect(page.el('journal').dataset.state).toBe('run');
+    expect(page.text(page.el('journal-last'))).toBe('▶ pull (client Steam → .gamedata)');
+    expect(page.el('log').children).toHaveLength(1);
+    // Une ligne vide va à la console, pas au journal.
+    page.stream().send({ step: '' });
+    await page.settle();
+    expect(page.text(page.el('journal-last'))).toBe('▶ pull (client Steam → .gamedata)');
+    expect(page.disabled()).toEqual([true, true, true, true]);
+
+    page.served.state = idle({ client: '1.11.404', site: '1.11.402' });
+    await page.finish(OK('rafraîchissement depuis le jeu (Steam)'), ['✅ refresh terminé.']);
+    expect(page.console()).toBe(
+      '$ pnpm datagen:patch --source steam --force --collect\n▶ pull (client Steam → .gamedata)\n\n✅ refresh terminé.\n',
+    );
+    expect(page.el('journal').dataset.state).toBe('ok');
+    expect(page.text(page.el('journal-last'))).toBe(
+      'rafraîchissement depuis le jeu (Steam) : terminé.',
+    );
+    // Fini : l'état est relu, les boutons reviennent, « Arrêter » repart.
+    expect(page.served.reads).toBe(2);
+    expect(page.disabled()).toEqual([false, false, true, false]);
+    expect(page.el('p-stop').hidden).toBe(true);
+    expect(page.el('p-refresh').classList.contains('busy')).toBe(false);
+    expect(page.text(page.el('p-console-state'))).toBe('4 lignes');
+    // Rien n'a demandé confirmation.
+    expect(page.confirm).not.toHaveBeenCalled();
+  });
+
+  it('« Promouvoir » : éteint avant un dry-run réussi, allumé après, éteint après un échec', async () => {
+    const page = await patch();
+    expect(page.el('p-apply').disabled).toBe(true);
+
+    page.el('p-dry').click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/patch/promote', body: { apply: false } });
+    expect(page.states()[1]).toBe('dry-run en cours…');
+    // La revue est à l'écran dès le lancement, et reçoit SA copie de la sortie.
+    expect(page.el('p-review').hidden).toBe(false);
+    await page.finish(OK('dry-run de la promotion'), [
+      '$ pnpm datagen:promote',
+      '~ characters.json : 2 modifiées (2000095, 2000101)',
+      '(dry-run — rien n’a été écrit ; relance avec --apply pour valider)',
+    ]);
+    const review =
+      '$ pnpm datagen:promote\n~ characters.json : 2 modifiées (2000095, 2000101)\n(dry-run — rien n’a été écrit ; relance avec --apply pour valider)\n';
+    expect(page.el('p-review').textContent).toBe(review);
+    expect(page.console()).toBe(review);
+    expect(page.states()[1]).toMatch(/^dry-run réussi à \d\d:\d\d$/);
+    expect(page.states()[2]).toBe('prêt : la revue est au-dessus');
+    expect(page.disabled()).toEqual([false, false, false, false]);
+
+    // Un dry-run en échec : la revue repart de zéro, « Promouvoir » s'éteint.
+    page.el('p-dry').click();
+    await page.settle();
+    expect(page.el('p-review').textContent).toBe('');
+    await page.finish(KO('dry-run de la promotion'), ['✗ data/extracted absent']);
+    expect(page.el('p-review').textContent).toBe('✗ data/extracted absent\n');
+    expect(page.states()[1]).toMatch(/^dry-run en échec à \d\d:\d\d$/);
+    expect(page.el('p-review-state').className).toBe('p-state ko');
+    expect(page.disabled()).toEqual([false, false, true, false]);
+    // L'échec : la fin de la sortie et le verdict, au journal déplié.
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect([...page.el('log').children].map((d) => d.textContent)).toEqual([
+      '✗ ça casse',
+      'dry-run de la promotion : échec (code 1) — toute la sortie est dans la console de « Patch ».',
+    ]);
+
+    // De nouveau réussi, puis promu — sans confirmation : le dry-run EST la revue.
+    page.el('p-dry').click();
+    await page.settle();
+    await page.finish(OK('dry-run de la promotion'), ['~ items.json : 1 ajoutée']);
+    expect(page.el('p-apply').disabled).toBe(false);
+    page.el('p-apply').click();
+    await page.settle();
+    expect(page.confirm).not.toHaveBeenCalled();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/patch/promote', body: { apply: true } });
+    expect(page.el('p-apply').classList.contains('busy')).toBe(true);
+    await page.finish(OK('promotion de l’extraction'), ['✓ 1 fichier(s) promu(s)']);
+    // La revue du dry-run reste lisible ; une autre promotion demande un autre dry-run.
+    expect(page.el('p-review').textContent).toBe('~ items.json : 1 ajoutée\n');
+    expect(page.states()[2]).toMatch(/^promue à \d\d:\d\d — reste à committer$/);
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(page.calls.map((c) => c.path)).toEqual([
+      '/api/patch/promote',
+      '/api/patch/promote',
+      '/api/patch/promote',
+      '/api/patch/promote',
+    ]);
+  });
+
+  it('une revue ne survit pas à un rafraîchissement, ni à une promotion en échec', async () => {
+    const page = await patch();
+    page.el('p-dry').click();
+    await page.settle();
+    await page.finish(OK('dry-run de la promotion'));
+    expect(page.el('p-apply').disabled).toBe(false);
+
+    // La proposition va changer : la revue faite ne vaut plus.
+    page.el('p-refresh').click();
+    await page.settle();
+    await page.finish(OK('rafraîchissement depuis le jeu (Steam)'));
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(page.states()[1]).toBe('dry-run à refaire : la proposition a pu changer');
+
+    page.el('p-dry').click();
+    await page.settle();
+    await page.finish(OK('dry-run de la promotion'));
+    page.el('p-apply').click();
+    await page.settle();
+    await page.finish(KO('promotion de l’extraction'));
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(page.states()[1]).toBe('dry-run à refaire : la proposition a pu changer');
+  });
+
+  it('« Committer » : le message et le bump partent, « Pousser » suit le compte rendu', async () => {
+    const page = await patch();
+    const message = page.el('p-message');
+    // Sans message, pas de commit.
+    message.value = '   ';
+    page.fire(message, 'input');
+    expect(page.el('p-commit').disabled).toBe(true);
+    message.value = '  chore(data): patch 1.11.404  ';
+    page.fire(message, 'input');
+    expect(page.el('p-commit').disabled).toBe(false);
+    page.el('p-bump').value = 'minor';
+
+    page.el('p-commit').click();
+    await page.settle();
+    expect(page.calls).toEqual([
+      {
+        path: '/api/patch/commit',
+        body: { message: 'chore(data): patch 1.11.404', bump: 'minor' },
+      },
+    ]);
+    expect(page.disabled()).toEqual([true, true, true, true]);
+
+    // Le commit est fait : plus rien de modifié, un commit à pousser.
+    page.served.state = idle({ git: { branch: 'main', ahead: 1, behind: 0, dirty: 0 } });
+    await page.finish(
+      { ...OK('commit des données'), git: { branch: 'main', ahead: 1, behind: 0 } },
+      ['$ pnpm commit --msg "chore(data): patch 1.11.404" --bump minor --yes --no-push'],
+    );
+    expect(page.el('journal').dataset.state).toBe('ok');
+    expect(page.states()[3]).toBe(
+      'aucun fichier modifié · 1 commit à pousser — « Pousser », dans l’en-tête',
+    );
+    expect(page.text(page.el('push-count'))).toBe('1');
+    expect(page.el('push').disabled).toBe(false);
+    expect(page.disabled()).toEqual([false, false, true, true]);
+  });
+
+  it('un refus du serveur (message, 409) passe par le journal, rien ne tourne', async () => {
+    const page = await patch();
+    page.el('p-dry').click();
+    await page.settle();
+    // Une réponse d'une pièce, pas un flux : c'est elle, l'issue.
+    page.stream().send({ ok: false, error: 'Un travail tourne déjà : git push' });
+    page.stream().close();
+    await page.settle();
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.text(page.el('log'))).toBe('Un travail tourne déjà : git push');
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(page.console()).toBe('');
+
+    page.el('p-commit').click();
+    await page.settle();
+    page.stream().send({
+      ok: false,
+      log: ['préfixe conventionnel exigé — ex. « chore(data): patch du 06/10 ».'],
+    });
+    page.stream().close();
+    await page.settle();
+    expect(page.text(page.el('log'))).toBe(
+      'préfixe conventionnel exigé — ex. « chore(data): patch du 06/10 ».',
+    );
+    expect(page.disabled()).toEqual([false, false, true, false]);
+  });
+
+  it('« Arrêter » : visible pendant un travail, sa réponse dans la console', async () => {
+    const page = await patch();
+    page.el('p-dry').click();
+    await page.settle();
+    page.stream().send({ step: '$ pnpm datagen:promote' });
+    await page.settle();
+    expect(page.el('p-stop').hidden).toBe(false);
+
+    page.el('p-stop').click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/patch/stop', body: {} });
+    expect(page.console()).toBe(
+      '$ pnpm datagen:promote\n— arrêt demandé : dry-run de la promotion\n',
+    );
+    // Le journal reste celui du geste, qui se clôt seul : arrêté n'est pas réussi.
+    expect(page.el('journal').dataset.state).toBe('run');
+    await page.finish({
+      ok: false,
+      code: null,
+      stopped: true,
+      log: ['dry-run de la promotion : arrêté.'],
+    });
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.text(page.el('log'))).toBe('dry-run de la promotion : arrêté.');
+    expect(page.el('p-stop').hidden).toBe(true);
+    expect(page.el('p-apply').disabled).toBe(true);
+    expect(page.states()[1]).toMatch(/^dry-run en échec/);
+
+    // Un refus d'arrêt se lit dans la console, lui aussi.
+    const refused = await patch({ stop: { ok: false, error: 'Aucun travail en cours.' } });
+    refused.el('p-dry').click();
+    await refused.settle();
+    refused.el('p-stop').click();
+    await refused.settle();
+    expect(refused.console()).toBe('— Aucun travail en cours.\n');
+  });
+
+  it('« Copier » rend toute la sortie, « Effacer » vide la console', async () => {
+    const page = await patch();
+    page.el('p-dry').click();
+    await page.settle();
+    await page.finish(OK('dry-run de la promotion'), ['$ pnpm datagen:promote', '~ a.json']);
+    // Une seconde sortie s'enchaîne, séparée d'une ligne vide.
+    page.el('p-dry').click();
+    await page.settle();
+    await page.finish(OK('dry-run de la promotion'), ['$ pnpm datagen:promote']);
+    expect(page.console()).toBe('$ pnpm datagen:promote\n~ a.json\n\n$ pnpm datagen:promote\n');
+
+    vi.useFakeTimers();
+    page.el('p-copy').click();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(page.writeText).toHaveBeenCalledExactlyOnceWith(
+      '$ pnpm datagen:promote\n~ a.json\n\n$ pnpm datagen:promote',
+    );
+    expect(page.text(page.el('p-copy'))).toBe('copié');
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(page.text(page.el('p-copy'))).toBe('Copier');
+
+    page.el('p-clear').click();
+    expect(page.console()).toBe('');
+    expect(page.text(page.el('p-console-state'))).toBe('au repos');
+    // La revue, elle, garde sa sortie.
+    expect(page.el('p-review').textContent).toBe('$ pnpm datagen:promote\n');
+    // Presse-papiers refusé : le bouton le dit.
+    page.writeText.mockRejectedValueOnce(new Error('NotAllowedError'));
+    page.el('p-copy').click();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(page.text(page.el('p-copy'))).toBe('impossible');
+  });
+
+  it('la console n’affiche que la fin d’une sortie très longue — « Copier » garde tout', async () => {
+    const page = await patch();
+    page.el('p-refresh').click();
+    await page.settle();
+    const steps = Array.from({ length: 5003 }, (_, i) => `  ${i + 1}/5003 copié(s)…`);
+    // D'un bloc, comme une rafale du pull : un seul morceau du flux.
+    page.stream().raw(steps.map((step) => `${JSON.stringify({ step })}\n`).join(''));
+    await page.finish(OK('rafraîchissement depuis le jeu (Steam)'));
+    expect(page.el('p-console').childNodes).toHaveLength(5000);
+    expect(page.console().startsWith('  4/5003 copié(s)…\n')).toBe(true);
+    expect(page.console().endsWith('  5003/5003 copié(s)…\n')).toBe(true);
+    expect(page.text(page.el('p-console-state'))).toBe(
+      '5003 lignes — les 5000 dernières affichées',
+    );
+    page.el('p-copy').click();
+    await page.settle();
+    expect(page.writeText).toHaveBeenCalledExactlyOnceWith(steps.join('\n'));
+  });
+
+  it('un travail tourne déjà (lancé avant) : dit, sans sa sortie, boutons éteints jusqu’à sa fin', async () => {
+    vi.useFakeTimers();
+    const page = await patch({
+      state: { job: 'commit des données', git: { branch: 'main', ahead: 2, behind: 0, dirty: 3 } },
+    });
+    expect(page.text(page.el('p-console-state'))).toBe(
+      'un travail tourne : commit des données — lancé avant, sa sortie n’est pas ici',
+    );
+    expect(page.console()).toBe('');
+    expect(page.disabled()).toEqual([true, true, true, true]);
+    // « Pousser » aussi, malgré deux commits en attente ; « Arrêter » est là.
+    expect(page.text(page.el('push-count'))).toBe('2');
+    expect(page.el('push').disabled).toBe(true);
+    expect(page.el('p-stop').hidden).toBe(false);
+    expect(page.served.reads).toBe(1);
+
+    // L'état est relu toutes les trois secondes tant que le travail tient.
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(page.served.reads).toBe(2);
+    expect(page.disabled()).toEqual([true, true, true, true]);
+
+    page.served.state = idle({ git: { branch: 'main', ahead: 3, behind: 0, dirty: 0 } });
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(page.served.reads).toBe(3);
+    expect(page.disabled()).toEqual([false, false, true, true]);
+    expect(page.el('push').disabled).toBe(false);
+    expect(page.text(page.el('push-count'))).toBe('3');
+    expect(page.el('p-stop').hidden).toBe(true);
+    expect(page.text(page.el('p-console-state'))).toBe('au repos');
+    // Fini : plus de relecture.
+    await vi.advanceTimersByTimeAsync(10_000);
+    expect(page.served.reads).toBe(3);
+  });
+
+  it('un travail lancé ailleurs n’est plus relu une fois la section quittée', async () => {
+    vi.useFakeTimers();
+    const page = await patch({ state: { job: 'git push' } });
+    expect(page.served.reads).toBe(1);
+    page.all('#tabs [data-tab="dashboard"]')[0].click();
+    // La relecture déjà armée part une fois, puis plus rien.
+    await vi.advanceTimersByTimeAsync(3000);
+    await vi.advanceTimersByTimeAsync(10_000);
+    expect(page.served.reads).toBe(2);
   });
 });

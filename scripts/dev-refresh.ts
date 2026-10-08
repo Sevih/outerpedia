@@ -9,6 +9,9 @@
  * « Valider l'extraction ») ou en lot via `pnpm datagen:promote --apply`. La
  * console affiche quand même le diff (dry) pour savoir ce qui a bougé.
  *
+ * À chaque patch du jeu, la même chaîne se lance désormais de quick, section
+ * « Patch » (`pnpm datagen:patch --collect --news`), sans relancer `pnpm dev`.
+ *
  * Flags : --force (re-génère même si local à jour) / --no-pull (offline) /
  * --source steam|android (défaut : DATAGEN_SOURCE, sinon steam ; android = secours).
  */

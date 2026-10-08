@@ -8,7 +8,9 @@
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
  * Discord que le bot poste, curer un nom court ou des alias de recherche. Tous
  * committent, sauf le message Discord ; « Pousser », dans l'en-tête, pousse
- * `main`.
+ * `main`. Et, à chaque patch du jeu, la chaîne des données — rafraîchir, relire
+ * la promotion, promouvoir, committer —, lancée de la section « Patch », sa
+ * sortie à l'écran (cf. `patch.ts`).
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
  * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
  * du jeu, ce qui n'a aucun sens pour changer quatre lignes de JSON.
@@ -97,8 +99,20 @@ import {
 } from './discord';
 import { COMIC_LANGS } from '@datagen/generators/comics';
 import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan';
+import {
+  busyError,
+  busyRefusal,
+  commitPlan,
+  patchState,
+  promotePlan,
+  refreshPlan,
+  runGesture,
+  stopJob,
+  type Planned,
+} from './patch';
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
+import { acquirePatchJob } from '@/lib/admin/patch-runner';
 import { getCharacterListItems } from '@/lib/data/characters';
 import type { Banner, PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
@@ -265,6 +279,22 @@ async function withGit<T extends Outcome>(run: T | Promise<T>): Promise<T & { gi
   return { ...(await run), git: gitState() };
 }
 
+/**
+ * Un geste de la section « Patch » : un plan refusé répond 400, un travail déjà
+ * en cours 409 — rien n'est lancé. Sinon la commande part, chaque ligne de sa
+ * sortie est un `step` du flux, et `done` porte son issue (avec l'état de git
+ * quand `git` : le commit, pour le compte de « Pousser »).
+ */
+async function patchGesture(res: ServerResponse, plan: Planned, git = false): Promise<void> {
+  if ('error' in plan) return json(res, { ok: false, log: [plan.error] }, 400);
+  const busy = busyRefusal();
+  if (busy) return json(res, busy, 409);
+  await stream(res, (report) => {
+    const run = runGesture(plan, report);
+    return git ? withGit(run) : run;
+  });
+}
+
 interface RequestBody {
   noteId?: unknown;
   examples?: unknown;
@@ -380,8 +410,49 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/push') {
     // « Pousser » : le seul geste qui pousse. Les enregistrements committent
-    // (`commitPaths`), celui-ci envoie ce qui attend — et lance la CI.
-    await stream(res, (report) => withGit(pushMain(report)));
+    // (`commitPaths`), celui-ci envoie ce qui attend — et lance la CI. Sous le
+    // verrou de la section « Patch » : pousser pendant une promotion ou un
+    // commit serait un non-sens.
+    const release = acquirePatchJob('git push');
+    if (!release) return json(res, { ok: false, error: busyError() }, 409);
+    try {
+      await stream(res, (report) => withGit(pushMain(report)));
+    } finally {
+      release();
+    }
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/patch/state') {
+    // Ce que la section « Patch » montre au repos : le travail en cours, la
+    // source, les versions, la reprise qui attend, le dépôt. Relu à chaque appel.
+    json(res, patchState());
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/patch/refresh') {
+    // `pnpm datagen:patch` : pull, dump si le code a changé, extract, build,
+    // promote en DRY. Jamais `--apply` par ici (cf. `refreshPlan`).
+    await patchGesture(res, refreshPlan(await body<unknown>(req).catch(() => null)));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/patch/promote') {
+    // `{ apply: false }` : le dry-run, la revue ; `{ apply: true }` : la promotion.
+    await patchGesture(res, promotePlan(await body<unknown>(req).catch(() => null)));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/patch/commit') {
+    // `pnpm commit --no-push` : contrôles, bump, images sur R2, commit LOCAL.
+    await patchGesture(res, commitPlan(await body<unknown>(req).catch(() => null)), true);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/patch/stop') {
+    // « Arrêter » : SIGTERM au travail lancé d'ici. Le flux du geste se clôt seul.
+    const out = stopJob();
+    json(res, out, out.ok ? 200 : 409);
     return;
   }
 

@@ -35,7 +35,8 @@
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet
       « Bannières », lot B35), la boîte de réception de la home (onglet
-      « Tableau de bord », lot B36). À faire par Sevih : remplir
+      « Tableau de bord », lot B36), la chaîne des données (onglet
+      « Patch », lot C10). À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
 - [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
@@ -135,6 +136,30 @@
 
 ## 🧪 À jouer au prochain patch
 
+- [ ] **quick, section « Patch » — le vrai cycle, à l'écran (lot C10)** :
+      l'agent a câblé les gestes sans en jouer aucun. Au prochain patch,
+      depuis quick (Accueil › Patch) au lieu de `pnpm dev` et de la
+      `PatchCard` : (1) « Lancer » (Steam, images et notes cochées) — la
+      console défile au fil du pull, reste collée au bas tant qu'on ne
+      remonte pas, le journal de l'en-tête ne montre que la ligne en cours ;
+      à la fin l'état passe à « client X · site Y ». (2) « Dry-run » — la
+      revue reste dans sa carte ; « Promouvoir » s'allume. (3) « Promouvoir
+      (--apply) » sans confirmation — vérifier qu'un perso non intégré ne
+      part pas. (4) « Committer » (message prérempli, bump) — dix minutes de
+      contrôles dans la console, puis « N commits à pousser » et le bouton
+      « Pousser » allumé. (5) « Pousser ». À essayer une fois : « Arrêter »
+      pendant le rafraîchissement (rien ne doit continuer derrière :
+      `pgrep -f datagen` vide ; « Lancer » reprend ensuite au checkpoint), recharger
+      la page pendant un travail (« un travail tourne : … », boutons éteints,
+      puis rallumés seuls à sa fin), « Pousser » pendant un travail (refusé :
+      « Un travail tourne déjà : … »). À NE PAS arrêter : « Committer » une
+      fois les images parties sur R2 (la prod les servirait sans commit).
+- [ ] **Admin : retirer le lien « Patch » (suite de C10)** : la `PatchCard`
+      de la home admin fait doublon avec la section de quick. À retirer —
+      la carte de `src/app/admin/page.dev.tsx` et ses routes
+      `api/admin/patch/*` — quand le cycle ci-dessus aura été joué une fois
+      dans quick ; `patch-runner.ts` et `patch-commands.ts` restent (quick
+      les importe).
 - [ ] **Retouches mineures des monstres et de l'équipement (lot B27)** : au
       premier patch qui en apporte, `/admin/extractor/monsters` — cases Diff
       et Minor, « Apply minor changes (n) », badge `minor` discret dans la
