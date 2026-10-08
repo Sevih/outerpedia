@@ -52,6 +52,35 @@ Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
 
+## Ordre révisé le 08/10 (décision Sevih)
+
+Quick devient le VRAI panneau admin : il lui faut un accueil et la chaîne
+des données (détection, extraction, promotion) comme `pnpm dev` et la
+`PatchCard` de l'admin les font. Les étapes 18 et 21 remontent donc juste
+après les Bannières (5), avant Events :
+
+5 Bannières → 18 Tableau de bord → 21 Patch → 6 Events → 7 Changelog →
+8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides → 19 et 20 Extractor
+(revue par entité, intégration) → 22 Clôture. La numérotation des étapes ne
+change pas.
+
+- **18 Tableau de bord** = l'accueil de quick, premier onglet du groupe
+  Données (ou un groupe « Accueil » en tête) : l'inbox de l'admin
+  (`buildInbox` d'`admin-inbox.ts` : extraction à revoir par entité, tags
+  morts, rapport d'assets — « rien à l'écran » = « rien à faire »), l'état
+  git (commits à pousser, retard), la version du jeu (`game-version.json`)
+  contre celle du client installé, les bannières qui finissent ou qui
+  commencent (depuis la table du jeu, cf. 5), les codes promo qui expirent.
+- **21 Patch** = la chaîne `datagen/refresh.ts` lancée de quick, étape par
+  étape dans le journal : pull (Steam, Android en secours) → dump si le code
+  a changé → extract → convert → build → promote en DRY (le diff par
+  fichier au niveau entité, lu à l'écran) → « Promouvoir » (`--apply`,
+  après confirmation, la garde perso de `promote.ts` reste) → commit des
+  `data/generated/` + notes de patch. Verrou d'un seul job à la fois
+  (`acquirePatchJob` de `patch-runner.ts`). Les persos non intégrés
+  restent gardés : l'intégration par entité (19, 20) reste dans l'admin
+  tant qu'elle n'est pas portée, et son lien reste.
+
 ## Ordre et inventaire
 
 Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
@@ -70,6 +99,12 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 5. **Tools › Banner**
    `BannersEditor`
    - Agacements : on devrait pouvoir detecter les bannieres active (et faire des auto insertion)
+   - Précisé le 08/10 : les bannières arrivent avec un patch ; la table du
+     jeu `RecruitGroupTemplet` porte TOUTES les fenêtres (`PickupID`,
+     `StartDate`, `EndDate`, `RecruitType` PICKUP / SEASONAL / OUTER_FES /
+     selections / DEMIURGE / ELEMENTAL) et `banner.json` les suit une à une
+     (id + début) — deux fins tapées à la main diffèrent d'un jour de la
+     table (Lambda, Titia). Lot B35.
 
 6. **Tools › Events**
    `EventsEditor` (451 l.)
