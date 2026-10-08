@@ -1502,14 +1502,8 @@ $('g-save').onclick = async () => {
   if (!gChar || !gearChanges()) return;
   const bad = gBad();
   if (bad.length) return log(['Rien n’est envoyé tant qu’il reste des erreurs :', ...bad], false);
-  // Une liste vide retire le perso du fichier : jamais sans le dire.
-  if (
-    !gBuilds.length &&
-    !confirm(
-      `Supprimer TOUTES les recos de ${gChar.name} ? Sa clé est retirée de gear-reco.json, committé et poussé.`,
-    )
-  )
-    return;
+  // Une liste vide retire le perso du fichier, sans rien demander : un commit
+  // local se défait, et le journal le dit (« gear-reco : … retiré du fichier »).
 
   $('g-save').disabled = $('g-reset').disabled = true;
   $('g-save').classList.add('busy');
@@ -1517,7 +1511,7 @@ $('g-save').onclick = async () => {
   const sent = gBuilds.map((b) => b.k);
   try {
     const r = await post('/api/gear-reco', { id: gChar.id, builds: gBuilds.map(gToBuild) });
-    // Écrit (même si le push a échoué ensuite) : le disque fait foi, on le
+    // Écrit (même si le commit a échoué ensuite) : le disque fait foi, on le
     // relit. Refusé : rien n'a bougé, les builds restent en attente et les
     // erreurs du serveur se posent sur les leurs.
     if (r.written) await gLoad(gChar.id, gActive);

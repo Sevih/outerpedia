@@ -48,7 +48,7 @@
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
       UNE conversion, UN push R2, UN commit `chore(assets): 4-comics comicNN (EN, JP, KR)`
-      poussé. Si une connexion coupe, le bouton reste grisé
+      local, que « Pousser » envoie (B33). Si une connexion coupe, le bouton reste grisé
       (`post()` de `lib.js`, signalé par l'agent : à reprendre un jour, hors
       série UI).
 - [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,

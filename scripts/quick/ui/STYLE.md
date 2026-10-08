@@ -42,8 +42,16 @@ pastille.
   **groupes** en onglets (`.gtab`, filet accent sous l'actif ; `.gtab.soon`
   grisé avec son badge « à venir » : Éditeurs, Guides, Outils, tant que quick
   n'a pas repris l'admin hors extractor et misc), puis à droite les pastilles
-  des services (`.pill` + `.dot`, `title` = pourquoi), le poste et le port
-  (`#env`), « Quitter ».
+  des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser », le poste et
+  le port (`#env`), « Quitter ».
+- **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
+  le seul geste qui pousse — un enregistrement ne fait que committer. Le badge
+  compte les commits en attente (`gitBar(git)` de `lib.js`, d'après
+  `/api/state` puis la réponse de chaque `post()`) ; à zéro le bouton est
+  `disabled` (`title` « Rien à pousser »), en retard sur l'amont le badge
+  passe en ambre (`.warn`, `title` = le `git pull --rebase` à faire), sans
+  amont il dit « pas d'amont ». Pendant le push : `busy`, et le tiroir du
+  journal suit.
 - **Sections** (`nav.tabs`, 40 px, `surface-sunken`) : les sections du groupe
   actif (`.tab`, filet accent sous l'active). Un groupe s'ouvre sur sa
   première section. Le hash (`#ranks`) sélectionne le groupe ET la section.

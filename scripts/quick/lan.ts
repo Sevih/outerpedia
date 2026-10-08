@@ -4,8 +4,9 @@
  * quick n'écoutait que sur la boucle locale. Avec `DEV_PEERS` dans
  * `.env.local` (les adresses du fixe et du portable, cf. scripts/dev-caddy.mjs)
  * il écoute sur le réseau, pour que le Caddy de l'autre poste le relaie sous
- * `https://quick.outerpedia.local`. Or chaque geste committe ET pousse `main`,
- * et l'onglet Discord poste avec le jeton du bot : deux gardes, pures, testées.
+ * `https://quick.outerpedia.local`. Or chaque geste committe, « Pousser »
+ * pousse `main`, et l'onglet Discord poste avec le jeton du bot : deux gardes,
+ * pures, testées.
  *
  *   - l'ADRESSE qui se connecte : la boucle locale ou un poste déclaré, rien
  *     d'autre du réseau ;

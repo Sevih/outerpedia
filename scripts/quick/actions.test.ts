@@ -1,8 +1,9 @@
 /**
  * Contrat de `planRankChanges` — l'onglet « Rangs » de `pnpm quick`.
  *
- * L'enregistrement POUSSE sur `main` : ce qui se perdrait ici partirait en prod
- * avec le commit. Deux pertes possibles, invisibles à l'écran de l'onglet :
+ * L'enregistrement COMMITTE sur `main`, que « Pousser » envoie : ce qui se
+ * perdrait ici partirait en prod avec le commit. Deux pertes possibles,
+ * invisibles à l'écran de l'onglet :
  *   - les champs que l'onglet ne montre pas (`tags`, `skillPriority`, `videos`,
  *     `prosCons`, `synergies`, les chips des EE), écrasés par une entrée
  *     reconstruite au lieu d'être reprise ;
@@ -10,7 +11,7 @@
  *
  * La fonction est pure : aucun disque ici, l'état est passé en argument.
  *
- * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et pousse :
+ * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
  * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
  * `data/curated/` ni ne lance git. Le fichier des recos est LU (roster, listes
  * des sélecteurs, presets, builds réels), jamais à des coordonnées figées — il
@@ -36,11 +37,17 @@
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
+ *
+ * Et contrat de git lui-même — `commitPaths` (un enregistrement committe, et ne
+ * pousse jamais), `pushMain` (le bouton « Pousser ») et `gitState` (son compte)
+ * — joué pour de bon, mais sur un DÉPÔT JETABLE : un dossier temporaire, son
+ * amont `bare` à côté. Le dépôt du projet n'est ni lu ni touché.
  */
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CharacterCurated, GearBuild } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
@@ -49,10 +56,13 @@ import {
   addComics,
   checkGearBuilds,
   comicLangOf,
+  commitPaths,
   gearRecoState,
+  gitState,
   groupComics,
   planRankChanges,
   previewGearBuilds,
+  pushMain,
   saveGearReco,
   translateNotes,
   type ComicsDeps,
@@ -1181,7 +1191,7 @@ describe('saveGearReco — écritures injectées', () => {
         calls.upsert.push([id, builds]);
         return over.errors ?? [];
       },
-      commitAndPush: (paths, message) => {
+      commitPaths: (paths, message) => {
         calls.git.push([paths, message]);
         return over.git ?? { ok: true, log: ['git : fait'] };
       },
@@ -1261,15 +1271,15 @@ describe('saveGearReco — écritures injectées', () => {
     expect(out.ok).toBe(true);
     expect(calls.upsert).toEqual([[who.id, []]]);
     expect(calls.git).toHaveLength(1);
-    expect(out.log[0]).toContain('recos retirées');
+    expect(out.log[0]).toBe(`gear-reco : ${who.name} retiré du fichier.`);
   });
 
-  it('push refusé : `written` dit que le disque porte déjà les builds', async () => {
-    const { fake } = deps({ git: { ok: false, log: ['git push a échoué'] } });
+  it('commit refusé : `written` dit que le disque porte déjà les builds', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
     const out = await saveGearReco(who.id, [valid], fake);
 
     expect(out).toMatchObject({ ok: false, written: true, issues: [] });
-    expect(out.log.at(-1)).toBe('git push a échoué');
+    expect(out.log.at(-1)).toBe('git commit a échoué');
   });
 });
 
@@ -1471,7 +1481,7 @@ describe('addComics — écritures injectées', () => {
         calls.chain.push('seed');
         return 'mis à jour';
       },
-      commitAndPush: (paths, message) => {
+      commitPaths: (paths, message) => {
         calls.git.push([paths, message]);
         return { ok: true, log: ['git : fait'] };
       },
@@ -1587,5 +1597,203 @@ describe('addComics — écritures injectées', () => {
     expect(out.ok).toBe(false);
     expect(out.log.at(-1)).toBe('assets:push a échoué : R2 muet');
     expect(calls).toEqual({ chain: ['collect', 'editorial'], git: [] });
+  });
+});
+
+describe('commitPaths, pushMain, gitState — sur un dépôt jetable', () => {
+  const dirs: string[] = [];
+
+  // Les fonctions lancent `git` avec l'environnement du processus : rien de
+  // celui d'un hook (`GIT_DIR`, `GIT_INDEX_FILE`… qui viseraient le dépôt du
+  // projet malgré le `cwd`) ni de la configuration du poste (signature des
+  // commits, hooks globaux) ne doit y entrer.
+  beforeEach(() => {
+    for (const key of Object.keys(process.env))
+      if (key.startsWith('GIT_')) vi.stubEnv(key, undefined);
+    const home = mkdtempSync(join(tmpdir(), 'quick-git-home-'));
+    dirs.push(home);
+    writeFileSync(join(home, 'gitconfig'), '');
+    vi.stubEnv('GIT_CONFIG_GLOBAL', join(home, 'gitconfig'));
+    vi.stubEnv('GIT_CONFIG_NOSYSTEM', '1');
+  });
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true });
+  });
+
+  /** `git` dans `cwd`, pour monter la scène et la relire ; lève s'il échoue. */
+  const sh = (cwd: string, ...args: string[]): string => {
+    const r = spawnSync('git', args, { cwd, encoding: 'utf8' });
+    if (r.status !== 0) throw new Error(`git ${args.join(' ')} : ${r.stderr}`);
+    return r.stdout.trim();
+  };
+  const identity = (cwd: string): void => {
+    sh(cwd, 'config', 'user.name', 'quick test');
+    sh(cwd, 'config', 'user.email', 'quick@test.invalid');
+  };
+  /** Écrit `name` dans le dépôt `cwd` (pas indexé : c'est le rôle de `commitPaths`). */
+  const write = (cwd: string, name: string, content: string): void =>
+    writeFileSync(join(cwd, name), content);
+
+  /** Un dépôt de travail sur `main`, sans amont. */
+  function lone() {
+    const root = mkdtempSync(join(tmpdir(), 'quick-git-'));
+    dirs.push(root);
+    const work = join(root, 'work');
+    sh(root, 'init', '-b', 'main', work);
+    identity(work);
+    write(work, 'data.json', '{}\n');
+    sh(work, 'add', '--', 'data.json');
+    sh(work, 'commit', '-m', 'chore: depart');
+    return { root, work };
+  }
+
+  /** Le même, avec son amont `bare` à côté et le commit de départ poussé. */
+  function repo() {
+    const { root, work } = lone();
+    const bare = join(root, 'origin.git');
+    sh(root, 'init', '--bare', '-b', 'main', bare);
+    sh(work, 'remote', 'add', 'origin', bare);
+    sh(work, 'push', '-u', 'origin', 'main');
+    return { root, work, bare };
+  }
+
+  /** Un AUTRE clone pousse un commit dans l'amont : `work` est en retard. */
+  function pushFromElsewhere(root: string, bare: string): void {
+    const other = join(root, 'other');
+    sh(root, 'clone', bare, other);
+    identity(other);
+    write(other, 'ailleurs.json', '{}\n');
+    sh(other, 'add', '--', 'ailleurs.json');
+    sh(other, 'commit', '-m', 'chore: ailleurs');
+    sh(other, 'push');
+  }
+
+  const head = (cwd: string): string => sh(cwd, 'rev-parse', 'main');
+
+  it('un enregistrement committe, compte ce qui attend, et ne pousse pas', () => {
+    const { work, bare } = repo();
+    const start = head(bare);
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 0, behind: 0 });
+
+    write(work, 'data.json', '{"a":1}\n');
+    const steps: string[] = [];
+    const out = commitPaths(['data.json'], 'chore(coupons): essai', (l) => steps.push(l), work);
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['git : chore(coupons): essai', 'committé — 1 commit à pousser (bouton « Pousser »).'],
+    });
+    expect(steps).toEqual(out.log);
+    expect(sh(work, 'log', '-1', '--format=%s')).toBe('chore(coupons): essai');
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 1, behind: 0 });
+    // L'amont n'a PAS bougé.
+    expect(head(bare)).toBe(start);
+
+    write(work, 'data.json', '{"a":2}\n');
+    expect(commitPaths(['data.json'], 'chore(coupons): encore', undefined, work).log.at(-1)).toBe(
+      'committé — 2 commits à pousser (bouton « Pousser »).',
+    );
+    expect(head(bare)).toBe(start);
+  });
+
+  it('ne committe que les chemins donnés, et rien quand ils n’ont pas changé', () => {
+    const { work } = repo();
+    write(work, 'voisin.json', '{}\n');
+
+    expect(commitPaths(['data.json'], 'chore: rien', undefined, work)).toEqual({
+      ok: true,
+      log: ['git : rien à committer.'],
+    });
+    expect(gitState(work).ahead).toBe(0);
+
+    write(work, 'data.json', '{"a":1}\n');
+    expect(commitPaths(['data.json'], 'chore: un seul', undefined, work).ok).toBe(true);
+    expect(sh(work, 'show', '--name-only', '--format=', 'HEAD')).toBe('data.json');
+    // Le travail d'à côté reste où il est : ni indexé, ni committé.
+    expect(sh(work, 'status', '--porcelain')).toBe('?? voisin.json');
+  });
+
+  it('« Pousser » envoie ce qui attend ; rien à pousser n’est pas une erreur', () => {
+    const { work, bare } = repo();
+    expect(pushMain(undefined, work)).toEqual({ ok: true, log: ['rien à pousser.'] });
+
+    write(work, 'data.json', '{"a":1}\n');
+    commitPaths(['data.json'], 'chore: un', undefined, work);
+    write(work, 'data.json', '{"a":2}\n');
+    commitPaths(['data.json'], 'chore: deux', undefined, work);
+
+    const steps: [string, boolean | undefined][] = [];
+    const out = pushMain((line, doing) => steps.push([line, doing]), work);
+
+    expect(out).toEqual({ ok: true, log: ['poussé — la CI build et déploie.'] });
+    // Que du `.json` dans ce qui part : le pre-push est sauté, rien à annoncer.
+    expect(steps).toEqual([
+      ['git push', true],
+      ['poussé — la CI build et déploie.', undefined],
+    ]);
+    expect(head(bare)).toBe(head(work));
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 0, behind: 0 });
+    expect(pushMain(undefined, work)).toEqual({ ok: true, log: ['rien à pousser.'] });
+  });
+
+  it('annonce le pre-push AVANT, dès qu’un commit en attente porte autre chose que du JSON', () => {
+    const { work, bare } = repo();
+    write(work, 'data.json', '{"a":1}\n');
+    commitPaths(['data.json'], 'chore: donnee', undefined, work);
+    write(work, 'code.ts', 'export {};\n');
+    commitPaths(['code.ts'], 'feat: code', undefined, work);
+
+    const doing: string[] = [];
+    const out = pushMain((line, d) => void (d && doing.push(line)), work);
+
+    expect(doing).toEqual(['pre-push : typecheck… (une minute), puis git push']);
+    expect(out.ok).toBe(true);
+    expect(head(bare)).toBe(head(work));
+  });
+
+  it('branche en retard : le push est refusé, les commits restent, le conseil est donné', () => {
+    const { root, work, bare } = repo();
+    pushFromElsewhere(root, bare);
+    write(work, 'data.json', '{"a":1}\n');
+    commitPaths(['data.json'], 'chore: local', undefined, work);
+    // Sans `git fetch`, le dépôt ne sait rien de ce retard.
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 1, behind: 0 });
+
+    const refused = pushMain(undefined, work);
+    expect(refused.ok).toBe(false);
+    expect(refused.log).toHaveLength(2);
+    expect(refused.log[0]).toMatch(/^git push a échoué \(1 commit reste en local\) : /);
+    expect(refused.log[1]).toBe('Corriger avec `git pull --rebase` puis « Pousser » de nouveau.');
+    expect(sh(work, 'log', '-1', '--format=%s')).toBe('chore: local');
+
+    // Une fois l'amont relu (au terminal), le retard se compte — et le push
+    // reste refusé tant que le `pull --rebase` n'est pas fait.
+    sh(work, 'fetch');
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 1, behind: 1 });
+    expect(pushMain(undefined, work).log.at(-1)).toContain('git pull --rebase');
+
+    sh(work, 'pull', '--rebase');
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: 1, behind: 0 });
+    expect(pushMain(undefined, work).ok).toBe(true);
+    expect(head(bare)).toBe(head(work));
+  });
+
+  it('sans amont : `ahead` est `null`, le commit passe et rien ne se pousse', () => {
+    const { work } = lone();
+    expect(gitState(work)).toEqual({ branch: 'main', ahead: null, behind: 0 });
+
+    write(work, 'data.json', '{"a":1}\n');
+    expect(commitPaths(['data.json'], 'chore: seul', undefined, work)).toEqual({
+      ok: true,
+      log: [
+        'git : chore: seul',
+        'committé — la branche main n’a pas d’amont : rien à pousser d’ici.',
+      ],
+    });
+    expect(pushMain(undefined, work)).toEqual({
+      ok: false,
+      log: ['la branche main n’a pas d’amont : rien à pousser d’ici.'],
+    });
   });
 });

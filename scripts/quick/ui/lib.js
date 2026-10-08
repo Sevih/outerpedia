@@ -1,7 +1,8 @@
 /**
  * quick/ui/lib — ce que les sections de la page ont en commun : les helpers
- * (`$`, `esc`, `log`, `post`), l'état de `/api/state`, le menu à deux niveaux
- * (`GROUPS`) et le registre des sections avec la bascule.
+ * (`$`, `esc`, `log`, `post`), l'état de `/api/state`, le bouton « Pousser » de
+ * l'en-tête (`gitBar`), le menu à deux niveaux (`GROUPS`) et le registre des
+ * sections avec la bascule.
  *
  * UNE SECTION = UN ONGLET, dans ses fichiers : `tabs/<nom>.html` (son markup,
  * posé dans la page par `ui-serve.ts`), `tabs/<nom>.css` (son style) et
@@ -51,8 +52,8 @@ export const GROUPS = [
 /**
  * `/api/state`, demandé une fois au démarrage (`sections.start`) : codes promo,
  * catalogue des récompenses, langues des 4-comics et plafond d'un envoi, cibles
- * des vidéos, ce que `.env.local` permet, le poste et la base des images. Les
- * sections qui en dépendent attendent `stateLoaded`.
+ * des vidéos, ce que `.env.local` permet, le poste, la base des images et
+ * l'état de git. Les sections qui en dépendent attendent `stateLoaded`.
  */
 export const state = {
   coupons: [],
@@ -72,8 +73,42 @@ const service = (id, ok, yes, no) => {
   pill.querySelector('.dot').className = ok ? 'dot ok' : 'dot';
 };
 
+const plural = (n) => `${n} commit${n > 1 ? 's' : ''}`;
+
+/** Le dernier état de git posé : « Pousser » y revient si sa réponse se perd. */
+let lastGit = null;
+
+/**
+ * Le bouton « Pousser » de l'en-tête, d'après `{ branch, ahead, behind }`
+ * (`gitState` côté serveur) : le compte des commits en attente, éteint à zéro.
+ * Les enregistrements ne font que committer ; lui seul pousse, et lance la CI.
+ *
+ * `behind` est ce que le dépôt sait sans `git fetch` : s'il y a du retard, le
+ * push sera refusé — le bouton le dit (badge ambre, `title`) sans s'éteindre,
+ * le refus du journal donnant la marche à suivre. `ahead` à `null` : la branche
+ * n'a pas d'amont, rien ne peut partir d'ici.
+ */
+export const gitBar = (git) => {
+  lastGit = git;
+  const btn = $('push');
+  const count = $('push-count');
+  const none = git.ahead === null;
+  const late = !none && git.behind > 0;
+  count.textContent = none ? 'pas d’amont' : String(git.ahead);
+  count.classList.toggle('warn', late);
+  btn.disabled = !git.ahead;
+  btn.title = none
+    ? `La branche ${git.branch} n’a pas d’amont : rien à pousser d’ici`
+    : late
+      ? `${plural(git.behind)} sur origin que tu n’as pas : \`git pull --rebase\` d’abord`
+      : git.ahead
+        ? `${plural(git.ahead)} à pousser sur ${git.branch} — lance la CI`
+        : 'Rien à pousser';
+};
+
 async function loadState() {
   Object.assign(state, await (await fetch('/api/state')).json());
+  if (state.git) gitBar(state.git);
   service('svc-r2', state.hasR2, 'Bucket R2 joignable', 'R2_BUCKET absent de .env.local');
   service(
     'svc-youtube',
@@ -144,6 +179,9 @@ export const log = (lines, ok, doing) => {
  * Une réponse JSON d'une seule pièce (un 409 d'etag, `/api/quit`) n'a ni
  * `step` ni `done` : elle EST le résultat. Les deux formes se lisent donc
  * ici, plutôt qu'en tenant à jour la liste des routes qui streament.
+ *
+ * Un geste qui committe (et « Pousser ») rend aussi `git`, l'état d'après :
+ * le bouton de l'en-tête se met à jour ici, aucune section n'a rien à faire.
  */
 export async function post(path, payload) {
   const res = await fetch(path, {
@@ -182,6 +220,7 @@ export async function post(path, payload) {
 
   const data = done ?? { ok: false, log: ['réponse interrompue'] };
   log(data.log ?? [data.error ?? 'erreur'], data.ok);
+  if (data.git) gitBar(data.git);
   return data;
 }
 
@@ -264,6 +303,21 @@ export const sections = {
     };
 
     $('journal-toggle').onclick = () => journalOpen($('log').hidden);
+
+    // « Pousser » : le journal suit, et `post` repose le bouton d'après l'état
+    // rendu. Réponse perdue : il revient à ce qu'il montrait.
+    $('push').onclick = async () => {
+      const btn = $('push');
+      btn.disabled = true;
+      btn.classList.add('busy');
+      log([], undefined, 'git push');
+      try {
+        await post('/api/push', {});
+      } finally {
+        btn.classList.remove('busy');
+        if (lastGit) gitBar(lastGit);
+      }
+    };
 
     // Arrêt : lancé par l'icône, l'outil n'a aucune fenêtre pour le faire.
     $('quit').onclick = async () => {

@@ -25,9 +25,12 @@
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso).
  *
- * Les CINQ poussent quand même avec la CI (cf. `commitAndPush`) : R2 avance la
- * mise en ligne de la donnée vive, il ne dispense pas du déploiement — le site
- * bâti garde ses propres copies de tout ça.
+ * Les CINQ COMMITTENT, sans rien demander, et aucun ne pousse (cf.
+ * `commitPaths`) : pousser à chaque geste lançait la CI à chaque geste. Le push
+ * est un geste à part, le bouton « Pousser » de l'en-tête (`pushMain`), qui dit
+ * combien de commits attendent (`gitState`). Il part quand même avec la CI : R2
+ * avance la mise en ligne de la donnée vive, il ne dispense pas du déploiement
+ * — le site bâti garde ses propres copies de tout ça.
  */
 import { spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -94,7 +97,7 @@ export interface Outcome {
  * Envoi d'une ligne À L'INSTANT où elle est écrite (cf. `stream` dans
  * server.ts). Sans lui, le journal n'existait qu'au RETOUR : déposer une
  * 4-comic enchaîne conversion webp, deux poussées R2, une purge d'edge et un
- * push git — deux minutes pendant lesquelles l'onglet affichait un texte figé,
+ * commit git — deux minutes pendant lesquelles l'onglet affichait un texte figé,
  * où rien ne distingue « ça avance » de « c'est mort » (constat Sevih du
  * 28/09 : cru bloqué, ça ne l'était pas).
  */
@@ -126,61 +129,121 @@ const EDITORIAL_COMICS = resolve('.editorial/comics');
 
 // ---------------------------------------------------------------- git --------
 
-/**
- * Committe et pousse des chemins EXPLICITES (jamais `git add -A` : un dossier
- * entier embarquerait le travail en cours d'à côté — cf. CONVENTIONS.md).
- *
- * PAS de « [skip ci] », pour AUCUN des gestes (décision Sevih) : R2 met
- * bien la donnée vive en ligne sans build, mais le site DÉPLOYÉ en garde des
- * copies cuites — le repli committé des 4-comics, les pages qui lisent les
- * coupons au rendu. Sauter le build les laissait en retard jusqu'au prochain
- * push sans rapport, c'est-à-dire diverger en silence. Le déploiement part donc
- * avec le changement qui le justifie ; R2 ne fait plus qu'avancer la mise en
- * ligne de quelques minutes sur lui.
- *
- * Les hooks sont sautés (`--no-verify`) SEULEMENT quand tous les chemins sont du
- * JSON de données : le pre-commit ne fait que passer prettier (or `writeJson`
- * écrit déjà le format canonique prettier, cf. `formatJson`) et le pre-push un
- * `tsc --noEmit` triple — une minute d'attente pour des fichiers qu'aucun type
- * ne peut casser. Dès qu'un chemin n'est pas un `.json`, les hooks tournent.
- */
-export function commitAndPush(paths: string[], message: string, report?: Report): Outcome {
-  const j = journal(report);
-  const log = j.lines;
-  const run = (args: string[]): { ok: boolean; out: string } => {
-    const r = spawnSync('git', args, { encoding: 'utf8' });
-    const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim();
-    return { ok: r.status === 0, out };
-  };
+/** Où en est la branche par rapport à son amont — ce que montre « Pousser ». */
+export interface GitState {
+  branch: string;
+  /** Commits locaux à pousser ; `null` quand la branche n'a pas d'amont. */
+  ahead: number | null;
+  /** Commits de l'amont absents d'ici, d'après le DERNIER fetch (cf. `gitState`). */
+  behind: number;
+}
 
-  const add = run(['add', '--', ...paths]);
+/** `git` dans `cwd` (défaut : le dépôt, d'où quick est lancé), sortie et statut. */
+function git(args: string[], cwd?: string): { ok: boolean; out: string } {
+  const r = spawnSync('git', args, { cwd, encoding: 'utf8' });
+  return { ok: r.status === 0, out: `${r.stdout ?? ''}${r.stderr ?? ''}`.trim() };
+}
+
+const commits = (n: number): string => `${n} commit${n > 1 ? 's' : ''}`;
+
+/**
+ * La branche courante et son écart à l'amont (`@{u}`), SANS `git fetch` : aucun
+ * réseau ici, l'en-tête de la page le demande à chaque chargement. `behind` est
+ * donc ce que le dépôt SAIT — un commit poussé d'ailleurs depuis le dernier
+ * fetch ne s'y voit pas, c'est le refus de `git push` qui le dira.
+ */
+export function gitState(cwd?: string): GitState {
+  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD'], cwd).out;
+  const gap = git(['rev-list', '--left-right', '--count', '@{u}...HEAD'], cwd);
+  if (!gap.ok) return { branch, ahead: null, behind: 0 };
+  // À gauche ce que l'amont a de plus, à droite ce que `HEAD` a de plus.
+  const [behind, ahead] = gap.out.split(/\s+/).map(Number);
+  return { branch, ahead, behind };
+}
+
+/**
+ * Committe des chemins EXPLICITES (jamais `git add -A` : un dossier entier
+ * embarquerait le travail en cours d'à côté — cf. CONVENTIONS.md), et ne pousse
+ * JAMAIS : un enregistrement est un commit local, qui se défait, et « Pousser »
+ * (`pushMain`) envoie d'un coup ceux qui attendent. La dernière ligne du
+ * journal en donne le compte.
+ *
+ * Le pre-commit est sauté (`--no-verify`) SEULEMENT quand tous les chemins sont
+ * du JSON de données : il ne fait qu'y passer prettier, or `writeJson` écrit
+ * déjà le format canonique prettier (cf. `formatJson`). Dès qu'un chemin n'est
+ * pas un `.json`, les hooks tournent.
+ */
+export function commitPaths(
+  paths: string[],
+  message: string,
+  report?: Report,
+  cwd?: string,
+): Outcome {
+  const j = journal(report);
+
+  const add = git(['add', '--', ...paths], cwd);
   if (!add.ok) return { ok: false, log: [`git add a échoué : ${add.out}`] };
 
   // Rien d'indexé = rien à dire (re-sauvegarde à l'identique) : pas une erreur.
-  if (run(['diff', '--cached', '--quiet']).ok)
+  if (git(['diff', '--cached', '--quiet'], cwd).ok)
     return { ok: true, log: ['git : rien à committer.'] };
 
   const dataOnly = paths.every((p) => p.endsWith('.json'));
-  const hooks = dataOnly ? ['--no-verify'] : [];
-  const commit = run(['commit', ...hooks, '-m', message]);
+  const commit = git(['commit', ...(dataOnly ? ['--no-verify'] : []), '-m', message], cwd);
   if (!commit.ok) return { ok: false, log: [`git commit a échoué : ${commit.out}`] };
   j.done(`git : ${message}`);
 
-  j.doing('git push');
-  const push = run(['push', ...hooks]);
-  // Le commit, lui, EST passé : le dire, sinon on croit avoir tout perdu et on
-  // ressaisit la même chose. Le cas courant est une branche en retard.
+  const { branch, ahead } = gitState(cwd);
+  j.done(
+    ahead === null
+      ? `committé — la branche ${branch} n’a pas d’amont : rien à pousser d’ici.`
+      : `committé — ${commits(ahead)} à pousser (bouton « Pousser »).`,
+  );
+  return { ok: true, log: j.lines };
+}
+
+/**
+ * « Pousser » : `git push` de la branche courante, avec tous les commits que
+ * les gestes y ont laissés.
+ *
+ * PAS de « [skip ci] » (décision Sevih) : R2 met bien la donnée vive en ligne
+ * sans build, mais le site DÉPLOYÉ en garde des copies cuites — le repli
+ * committé des 4-comics, les pages qui lisent les coupons au rendu. Sauter le
+ * build les laissait en retard jusqu'au prochain push sans rapport,
+ * c'est-à-dire diverger en silence. Le déploiement part donc avec le push.
+ *
+ * Le pre-push (un `tsc --noEmit` triple, une minute) suit la règle du
+ * pre-commit, calculée sur ce qui part : sauté quand les commits en attente ne
+ * touchent que du `.json`, qu'aucun type ne peut casser ; sinon il tourne, et
+ * le journal le dit AVANT.
+ *
+ * Un refus ne perd rien : les commits restent locaux. Le cas courant est une
+ * branche en retard — le `git pull --rebase` se fait au terminal, pas d'ici.
+ */
+export function pushMain(report?: Report, cwd?: string): Outcome {
+  const j = journal(report);
+
+  const { branch, ahead } = gitState(cwd);
+  if (ahead === null)
+    return { ok: false, log: [`la branche ${branch} n’a pas d’amont : rien à pousser d’ici.`] };
+  if (!ahead) return { ok: true, log: ['rien à pousser.'] };
+
+  const dataOnly = git(['diff', '--name-only', '@{u}..HEAD'], cwd)
+    .out.split('\n')
+    .filter(Boolean)
+    .every((p) => p.endsWith('.json'));
+  j.doing(dataOnly ? 'git push' : 'pre-push : typecheck… (une minute), puis git push');
+  const push = git(['push', ...(dataOnly ? ['--no-verify'] : [])], cwd);
   if (!push.ok)
     return {
       ok: false,
       log: [
-        ...log,
-        `git push a échoué (le commit local est fait) : ${push.out}`,
-        'Corriger avec `git pull --rebase` puis `git push`.',
+        `git push a échoué (${commits(ahead)} ${ahead > 1 ? 'restent' : 'reste'} en local) : ${push.out}`,
+        'Corriger avec `git pull --rebase` puis « Pousser » de nouveau.',
       ],
     };
   j.done('poussé — la CI build et déploie.');
-  return { ok: true, log };
+  return { ok: true, log: j.lines };
 }
 
 // ------------------------------------------------------------ codes promo ----
@@ -232,12 +295,12 @@ export async function saveCouponList(
     `${list.length} codes enregistrés sur R2${res.purged ? ' + edge purgé' : ` (${res.purgeError ?? 'edge non purgé'})`}.`,
   );
 
-  const git = commitAndPush(
+  const commit = commitPaths(
     ['data/curated/coupons.json'],
     'chore(coupons): mise à jour des codes promo',
     report,
   );
-  return { ok: git.ok, etag: res.etag, log: [...log, ...git.log] };
+  return { ok: commit.ok, etag: res.etag, log: [...log, ...commit.log] };
 }
 
 // ---------------------------------------------------------------- comics -----
@@ -299,10 +362,10 @@ export interface ComicsDeps {
   pushAssets: () => { ok: boolean; error: string };
   /** Repli committé réaligné sur le manifeste en ligne ; rend ce qu'il a fait. */
   syncSeed: () => string;
-  commitAndPush: (paths: string[], message: string, report?: Report) => Outcome;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
-/** Celles de la route : le vrai pool, la vraie chaîne, le vrai `commitAndPush`. */
+/** Celles de la route : le vrai pool, la vraie chaîne, le vrai `commitPaths`. */
 export const COMICS_DEPS: ComicsDeps = {
   dir: EDITORIAL_COMICS,
   collect: collectComics,
@@ -314,7 +377,7 @@ export const COMICS_DEPS: ComicsDeps = {
     return { ok: push.status === 0, error: (push.stderr ?? '').trim() };
   },
   syncSeed: () => syncComicsSeed(),
-  commitAndPush,
+  commitPaths,
 };
 
 /** Au-delà, le message de commit dit « et N autres » (comme celui des rangs). */
@@ -380,12 +443,12 @@ export async function addComics(
   const stems = [...new Set(groupComics(drops).map((g) => g.stem.replace(/^outerplane_/, '')))];
   const langs = COMIC_LANGS.filter((l) => drops.some((f) => f.lang === l));
   const others = stems.length - COMICS_NAMED;
-  const git = deps.commitAndPush(
+  const commit = deps.commitPaths(
     ['data/generated/comics.json', 'datagen/assets/pushed.json'],
     `chore(assets): 4-comics ${stems.slice(0, COMICS_NAMED).join(', ')}${others > 0 ? ` et ${others} autres` : ''} (${langs.join(', ')})`,
     report,
   );
-  return { ok: git.ok, log: [...log, ...git.log] };
+  return { ok: commit.ok, log: [...log, ...commit.log] };
 }
 
 // --------------------------------------------------------------- vidéos ------
@@ -452,8 +515,8 @@ export const searchVideos = (query: string) => searchOfficial(query);
 /**
  * Ajoute une vidéo à sa cible, méta YouTube résolue au passage, puis rafraîchit
  * le cache `video-meta.json` (Schema.org exige `uploadDate`, jamais écrit à la
- * main) et pousse — AVEC la CI cette fois : ces données sont lues au rendu,
- * elles n'existent en prod qu'après un build.
+ * main) et committe. Ces données sont lues au rendu : elles n'existent en prod
+ * qu'après « Pousser » et le build de la CI.
  */
 export async function addVideo(
   target: VideoTarget,
@@ -517,8 +580,8 @@ export async function addVideo(
   touched.push('data/generated/video-meta.json');
   j.done('cache video-meta rafraîchi.');
 
-  const git = commitAndPush(touched, `feat(videos): ${meta.title}`, report);
-  return { ok: git.ok, log: [...log, ...git.log] };
+  const commit = commitPaths(touched, `feat(videos): ${meta.title}`, report);
+  return { ok: commit.ok, log: [...log, ...commit.log] };
 }
 
 // ---------------------------------------------------------- rangs et rôles ---
@@ -789,8 +852,8 @@ export function rankState() {
 
 /**
  * Enregistre un lot de cellules : relecture du disque, plan (`planRankChanges`),
- * écriture par les DEUX stores de l'admin, puis un seul commit poussé sur les
- * fichiers réellement touchés.
+ * écriture par les DEUX stores de l'admin, puis un seul commit sur les fichiers
+ * réellement touchés.
  *
  * Une cellule refusée n'arrête pas le lot : les autres partent, et `refused`
  * dit à la page lesquelles marquer. Un lot où rien ne passe n'écrit ni ne
@@ -847,17 +910,17 @@ export async function saveRanks(
       : { ok: true, log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'], refused: [] };
 
   const who = [...new Set(written.map((c) => names.get(c.id) ?? c.id))];
-  const git = commitAndPush(
+  const commit = commitPaths(
     [...touched],
     `chore(tierlist): rangs et rôles — ${who.slice(0, 3).join(', ')}${who.length > 3 ? ` et ${who.length - 3} autres` : ''}`,
     report,
   );
-  return { ok: git.ok && !refused.length, log: [...log, ...git.log], refused: keys };
+  return { ok: commit.ok && !refused.length, log: [...log, ...commit.log], refused: keys };
 }
 
 // ------------------------------------------------------------- gear reco -----
 
-/** Le seul fichier que l'onglet « Gear reco » écrit, committe et pousse. */
+/** Le seul fichier que l'onglet « Gear reco » écrit et committe. */
 const GEAR_RECO_PATH = 'data/curated/gear-reco.json';
 
 /**
@@ -1031,7 +1094,8 @@ const tagsOf = (text: string): string[] => (text.match(TAG_REGEX) ?? []).sort();
 /**
  * Ce que `validateGearBuilds` ne voit pas — il ne contrôle que la FORME, et un
  * id vide ou un preset qui n'existe pas sont des chaînes comme les autres. Or
- * l'enregistrement pousse `main` : trois contrôles avant d'écrire.
+ * l'enregistrement committe sur `main`, que « Pousser » envoie : trois contrôles
+ * avant d'écrire.
  *
  *   - les RÉFÉRENCES : chaque pièce est un id des sélecteurs, chaque `$slug` un
  *     preset du fichier, un build a un nom ;
@@ -1127,21 +1191,22 @@ function locateGearError(error: string): GearIssue {
 /** Les deux écritures de `saveGearReco`, injectées : le store et git. */
 export interface GearRecoDeps {
   upsert: (id: string, builds: GearBuild[]) => Promise<string[]>;
-  commitAndPush: (paths: string[], message: string, report?: Report) => Outcome;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
-/** Celles de la route : le store de l'admin et le vrai `commitAndPush`. */
-export const GEAR_RECO_DEPS: GearRecoDeps = { upsert: upsertGearReco, commitAndPush };
+/** Celles de la route : le store de l'admin et le vrai `commitPaths`. */
+export const GEAR_RECO_DEPS: GearRecoDeps = { upsert: upsertGearReco, commitPaths };
 
 /**
  * Enregistre les builds d'un perso — la liste COMPLÈTE, comme la route de
  * l'admin (une liste vide retire la clé) : forme, références et tags contrôlés
  * (`checkGearBuilds`), écriture par `upsertGearReco` (qui replie les pièces
- * vers leurs presets et trie le fichier), puis un commit poussé sur ce seul
- * fichier.
+ * vers leurs presets et trie le fichier), puis un commit sur ce seul fichier.
+ * Une liste vide ne demande rien avant (un commit local se défait) : le journal
+ * dit que le perso est retiré du fichier.
  *
  * Une erreur n'écrit ni ne committe RIEN : `issues` les situe pour la page, le
- * journal les dit. `written` distingue l'échec d'après écriture (un push
+ * journal les dit. `written` distingue l'échec d'après écriture (un commit
  * refusé) — le disque porte alors les builds, et la page le relit.
  *
  * Pas de garde de concurrence, à la différence des rangs : la liste remplace
@@ -1188,11 +1253,11 @@ export async function saveGearReco(
   j.done(
     builds.length
       ? `${name} : ${builds.length} build${builds.length > 1 ? 's' : ''} écrit${builds.length > 1 ? 's' : ''}.`
-      : `${name} : recos retirées.`,
+      : `gear-reco : ${name} retiré du fichier.`,
   );
 
-  const git = deps.commitAndPush([GEAR_RECO_PATH], `chore(gear-reco): ${name}`, report);
-  return { ok: git.ok, log: [...j.lines, ...git.log], issues: [], written: true };
+  const commit = deps.commitPaths([GEAR_RECO_PATH], `chore(gear-reco): ${name}`, report);
+  return { ok: commit.ok, log: [...j.lines, ...commit.log], issues: [], written: true };
 }
 
 /** Ce que rend l'aperçu de l'admin : les builds résolus, les libellés de la fiche. */

@@ -1,7 +1,9 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
-import { describe, expect, it } from 'vitest';
-import { openTab, tabsOf as menuTabs } from './shot.mjs';
+import { Window } from 'happy-dom';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import type { GitState } from './actions';
+import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
 
 const UI = resolve(import.meta.dirname, 'ui');
@@ -175,5 +177,85 @@ describe('shot — la page que le banc de captures photographie', () => {
 
   it('refuse un onglet que la page ne porte pas', () => {
     expect(() => openTab(page(), 'nope', 0)).toThrow(/onglet inconnu/);
+  });
+
+  it('ne relaie ni « Pousser » ni un enregistrement : aucun n’est une lecture', () => {
+    for (const path of [
+      '/api/push',
+      '/api/coupons',
+      '/api/comics',
+      '/api/video',
+      '/api/ranks',
+      '/api/gear-reco',
+      '/api/discord/send',
+      '/api/quit',
+    ])
+      expect(READ_ONLY_POSTS.has(path), path).toBe(false);
+  });
+});
+
+describe('gitBar — le bouton « Pousser » de l’en-tête', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  /**
+   * `gitBar` de la page, sur l'en-tête de la VRAIE coquille posé dans un
+   * document happy-dom. `lib.js` est du JavaScript de navigateur, hors du
+   * typage des scripts : il se charge par son chemin, et ne lit `document`
+   * qu'à l'appel.
+   */
+  async function bar() {
+    const { document } = new Window();
+    document.body.innerHTML = /<header class="top">[\s\S]*?<\/header>/.exec(shell())?.[0] ?? '';
+    vi.stubGlobal('document', document);
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      gitBar: (git: GitState) => void;
+    };
+    const button = document.getElementById('push') as unknown as HTMLButtonElement;
+    const count = document.getElementById('push-count') as unknown as HTMLElement;
+    return { gitBar: lib.gitBar, button, count };
+  }
+
+  it('est éteint tant que l’état de git n’est pas arrivé', async () => {
+    const { button, count } = await bar();
+    expect(button.className).toBe('btn primary sm');
+    expect(button.disabled).toBe(true);
+    expect(count.textContent).toBe('0');
+    // Avant `#env` : pastilles, « Pousser », le poste, « Quitter ».
+    expect(shell().indexOf('id="push"')).toBeLessThan(shell().indexOf('id="env"'));
+  });
+
+  it('pose le compte des commits en attente et s’allume', async () => {
+    const { gitBar, button, count } = await bar();
+    gitBar({ branch: 'main', ahead: 2, behind: 0 });
+    expect(count.textContent).toBe('2');
+    expect(button.disabled).toBe(false);
+    expect(button.title).toBe('2 commits à pousser sur main — lance la CI');
+    expect(count.classList.contains('warn')).toBe(false);
+  });
+
+  it('s’éteint à zéro', async () => {
+    const { gitBar, button, count } = await bar();
+    gitBar({ branch: 'main', ahead: 1, behind: 0 });
+    gitBar({ branch: 'main', ahead: 0, behind: 0 });
+    expect(count.textContent).toBe('0');
+    expect(button.disabled).toBe(true);
+    expect(button.title).toBe('Rien à pousser');
+  });
+
+  it('dit le retard sur l’amont, sans s’éteindre', async () => {
+    const { gitBar, button, count } = await bar();
+    gitBar({ branch: 'main', ahead: 1, behind: 3 });
+    expect(count.textContent).toBe('1');
+    expect(count.classList.contains('warn')).toBe(true);
+    expect(button.disabled).toBe(false);
+    expect(button.title).toBe('3 commits sur origin que tu n’as pas : `git pull --rebase` d’abord');
+  });
+
+  it('dit « pas d’amont » quand la branche ne suit rien', async () => {
+    const { gitBar, button, count } = await bar();
+    gitBar({ branch: 'essai', ahead: null, behind: 0 });
+    expect(count.textContent).toBe('pas d’amont');
+    expect(button.disabled).toBe(true);
+    expect(button.title).toContain('essai');
   });
 });

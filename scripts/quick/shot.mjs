@@ -25,9 +25,10 @@
  *   - une image `/__settle?ms=…` est posée avant `</body>`. Le relais n'y
  *     répond qu'après le délai : `load` attend les images, la capture aussi.
  *
- * RIEN NE S'ÉCRIT PAR ICI. Chaque enregistrement de quick committe et pousse :
- * le relais ne laisse passer que les lectures (`GET`, et les `POST` qui ne
- * font que lire, cf. `READ_ONLY_POSTS`) et refuse le reste lui-même.
+ * RIEN NE S'ÉCRIT PAR ICI. Chaque enregistrement de quick committe, et son
+ * bouton « Pousser » pousse `main` : le relais ne laisse passer que les
+ * lectures (`GET`, et les `POST` qui ne font que lire, cf. `READ_ONLY_POSTS`)
+ * et refuse le reste lui-même — `POST /api/push` compris.
  *
  * Du `.mjs` sans dépendance, lancé par `node`, typé par JSDoc (`checkJs` de
  * `scripts/tsconfig.json`). Le relais et Firefox sont arrêtés par leur
@@ -52,7 +53,7 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
  * perso). Sans eux l'onglet Discord serait photographié sur une erreur, et les
  * cartes de Gear reco sur un aperçu refusé.
  */
-const READ_ONLY_POSTS = new Set([
+export const READ_ONLY_POSTS = new Set([
   '/api/discord/preview',
   '/api/discord/emojis',
   '/api/gear-reco/preview',

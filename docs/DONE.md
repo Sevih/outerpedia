@@ -7,6 +7,89 @@
 
 ## 2026-10-08
 
+- **quick : un enregistrement COMMITTE, « Pousser » dans la barre d'en-tête
+  (lot B33)** (08/10, décision Sevih) : chaque geste de quick (codes promo,
+  4-comics, vidéos, rangs, recos) committait PUIS poussait `main`, donc lançait
+  la CI à chaque clic. Un enregistrement ne fait plus qu'un commit local, sans
+  rien demander ; le push est un geste à part, un bouton de l'en-tête qui
+  compte les commits en attente. **Serveur** (`scripts/quick/actions.ts`) :
+  `commitAndPush` est remplacé par `commitPaths(paths, message, report, cwd?)`
+  — mêmes chemins explicites, même « git : rien à committer. », même règle de
+  hooks (`--no-verify` si tout est du `.json`), dernière ligne « committé — N
+  commit(s) à pousser (bouton « Pousser ») », et jamais de push — et
+  `pushMain(report, cwd?)` : `git push` de la branche courante, pre-push sauté
+  quand `git diff --name-only @{u}..HEAD` ne rend que du `.json`, sinon
+  annoncé AVANT (« pre-push : typecheck… (une minute), puis git push ») ;
+  « rien à pousser. » n'est pas une erreur ; un refus dit que les commits
+  restent en local et donne le `git pull --rebase` ; succès « poussé — la CI
+  build et déploie. ». `gitState(cwd?)` rend `{ branch, ahead, behind }` par
+  `rev-list --left-right --count @{u}...HEAD`, sans `git fetch` (`behind` est
+  ce que le dépôt sait) ; sans amont `ahead: null` (et `behind: 0`). Les
+  dépendances injectées (`ComicsDeps`, `GearRecoDeps`, leurs `*_DEPS`) portent
+  `commitPaths`. **Routes** (`server.ts`) : `/api/state` porte `git`,
+  `GET /api/git` le rend seul, `POST /api/push` répond `{ ok, log, git }` en
+  NDJSON comme les autres gestes longs ; les cinq POST qui committent passent
+  par `withGit`, qui joint l'état d'APRÈS — même à un échec (écart voulu à
+  « après un Outcome ok » : un lot de rangs à moitié refusé a committé le
+  reste, le compte doit suivre). **Page** : `#push` (`.btn.primary.sm` + son
+  `.badge` `#push-count`) avant `#env` dans `ui/index.html` ; `gitBar(git)`
+  dans `ui/lib.js` pose le compte, éteint le bouton à zéro (« Rien à
+  pousser »), passe le badge en ambre et donne le `git pull --rebase` en
+  `title` si `behind > 0`, écrit « pas d'amont » si `ahead === null` ; appelée
+  au démarrage et dans `post()` dès qu'une réponse porte `git` — aucune
+  section n'y touche. Au clic : `busy`, désactivé, le tiroir du journal suit,
+  puis l'état rendu (ou le précédent si la réponse se perd). Trois règles dans
+  `quick.css` (le badge lisible sur le fond accent), une puce dans `STYLE.md`.
+  **Textes** : les intros de `tabs/coupons.html`, `comics.html`, `videos.html`,
+  `ranks.html` et `gear.html` disent « committe » et renvoient à « Pousser »
+  pour la CI ; les docblocks de `actions.ts`, `server.ts`, `lan.ts`, `shot.mjs`
+  et l'en-tête de `actions.test.ts` aussi ; « poussé sur R2 » des 4-comics
+  reste (c'est R2) ; la ligne B30 du TODO attend un commit local.
+  **Confirmations** : celle qui gardait l'enregistrement d'une liste vide de
+  recos est supprimée (`tabs/gear.js`), remplacée par la ligne de journal
+  « gear-reco : <perso> retiré du fichier. » (écrite par `saveGearReco`).
+  Restent, dans `gear.js`, les trois qui protègent une saisie — quitter
+  l'onglet avec des changements (`gearLeave`), changer de perso avec des
+  changements (`gChoose`), remplacer les combos d'un build par le picker de
+  sets — et, dans `discord.js`, les six de l'onglet Discord : remplacer le
+  brouillon par le gabarit, par le premier jet de Claude (saisie perdue), lire
+  l'historique d'un salon (appel réel à Discord), poster, modifier en place
+  (envois réels), oublier un envoi interrompu (la reprise est perdue). Le
+  `beforeunload` de `lib.js` reste aussi. **Tests** : `actions.test.ts` joue
+  `commitPaths`, `pushMain` et `gitState` sur un dépôt jetable (`mkdtempSync`,
+  amont `bare` à côté, `GIT_*` du processus écartés et configuration globale
+  vide, pour qu'un hook ou le poste n'y entrent pas) — un commit ne bouge pas
+  le bare et dit « 1 commit à pousser », puis 2 ; seuls les chemins donnés
+  partent ; `pushMain` met le bare à jour, `ahead: 0`, « rien à pousser. » ;
+  l'annonce du pre-push dès qu'un `.ts` attend ; un commit poussé d'un autre
+  clone → refus avec le conseil, `behind: 1` après `git fetch`, puis succès
+  après `pull --rebase` ; sans amont → `ahead: null`. `ui-serve.test.ts` pose
+  l'en-tête de la vraie coquille dans un document happy-dom et vérifie
+  `gitBar` (compte, éteint à zéro, retard, pas d'amont), et que
+  `READ_ONLY_POSTS` du banc (exporté pour ça) ne porte ni `/api/push` ni
+  aucun enregistrement. Vérifié : `pnpm typecheck` (sortie 0, dernière ligne
+  la commande elle-même, les trois `tsc --noEmit` dont
+  `-p scripts/tsconfig.json`), `pnpm lint` (`$ eslint`, rien d'autre),
+  `pnpm test` (`Test Files 198 passed (198)`, `Tests 2833 passed (2833)`), et
+  la suite de quick sous `NODE_ENV=development`
+  (`pnpm exec vitest run scripts/quick` : 7 fichiers, 409 tests). Banc sur un
+  quick isolé (port 4812, sans jeton ni poste déclaré) : l'en-tête montre
+  « Pousser 8 » entre la pastille Discord et le poste, soit le `devant 8` de
+  `git status` à cet instant ; à 1000 px il passe à la seconde ligne avec les
+  pastilles et « Quitter », comme elles le faisaient déjà. Rien n'a été
+  enregistré ni poussé sur ce quick. Laissé : le clic réel sur « Pousser »
+  (un vrai push, donc à Sevih) — au premier, des commits non JSON attendent,
+  le journal doit annoncer le typecheck puis « poussé » ; un quick déjà
+  ouvert garde l'ANCIEN serveur en mémoire (il pousse encore à chaque
+  enregistrement, et son bouton reste éteint sur « git : état inconnu ») tant
+  qu'il n'est pas relancé. Vu hors périmètre : la page ne relit pas
+  `/api/git` d'elle-même (après un `git pull --rebase` ou un commit au
+  terminal, le compte attend le rechargement ou le prochain enregistrement) ;
+  `commitPaths`, comme avant lui, committe TOUT l'index — un fichier indexé
+  par ailleurs partirait avec l'enregistrement ; l'item « Gear reco, à
+  trancher (B32) » du TODO (confirmer la suppression d'un build ?) semble
+  réglé par la même décision, à Sevih de le clore ; `discord.ts` dit encore
+  « contrairement aux quatre autres » gestes, ils sont cinq.
 - **Menu admin : lien « Promo code » retiré** (08/10, demande Sevih) : quick
   tient les codes promo (Codes promo) ; la page `/admin/tools/promo-codes`
   reste joignable par son URL jusqu'au retrait de l'admin. Écart noté dans

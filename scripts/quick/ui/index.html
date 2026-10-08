@@ -33,6 +33,11 @@
         <span class="pill" id="svc-discord" title="Discord : état inconnu"
           ><i class="dot"></i>Discord</span
         >
+        <!-- Le seul geste qui pousse : `gitBar` (`lib.js`) y pose le compte des
+             commits en attente, d'après `/api/state` puis chaque enregistrement. -->
+        <button class="btn primary sm" id="push" title="git : état inconnu" disabled>
+          Pousser <span class="badge" id="push-count">0</span>
+        </button>
         <span class="env" id="env" title="Le poste qui sert la page, et son port"></span>
         <button class="btn ghost sm" id="quit" title="Arrête le serveur local">Quitter</button>
       </div>

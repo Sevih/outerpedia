@@ -153,6 +153,21 @@ nav.groups {
   margin: 0 6px;
   white-space: nowrap;
 }
+/* « Pousser » : le compte des commits en attente, lisible sur le fond accent
+   du bouton ; ambre quand la branche est en retard sur son amont. */
+#push {
+  margin-left: 4px;
+}
+#push .badge {
+  height: 18px;
+  padding: 0 7px;
+  background: color-mix(in srgb, var(--accent-fg) 20%, transparent);
+  color: var(--accent-fg);
+}
+#push .badge.warn {
+  background: var(--accent-fg);
+  color: var(--warn);
+}
 nav.tabs {
   display: flex;
   gap: 4px;

@@ -5,6 +5,7 @@
  * onglet, assemblée à la requête — cf. `ui-serve.ts`) : mettre à jour un code
  * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, éditer les
  * recos d'équipement d'un perso, écrire un message Discord que le bot poste.
+ * Les cinq premiers committent ; « Pousser », dans l'en-tête, pousse `main`.
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
  * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
  * du jeu, ce qui n'a aucun sens pour changer quatre lignes de JSON.
@@ -39,8 +40,10 @@ import {
   addVideo,
   currentCoupons,
   gearRecoState,
+  gitState,
   parseTarget,
   previewGearBuilds,
+  pushMain,
   rankState,
   rewardOptions,
   saveCouponList,
@@ -51,6 +54,8 @@ import {
   translateNotes,
   videoTargets,
   type ComicBatch,
+  type GitState,
+  type Outcome,
   type RankChange,
   type Report,
 } from './actions';
@@ -213,7 +218,7 @@ const json = (res: ServerResponse, data: unknown, status = 200): void => {
  * une dernière ligne `{ done: … }` qui porte le résultat complet.
  *
  * Les gestes prennent des dizaines de secondes (conversion webp, deux
- * poussées R2, purge d'edge, push git) et leur journal existait déjà — mais
+ * poussées R2, purge d'edge, commit git) et leur journal existait déjà — mais
  * rendu en BLOC au retour, il ne s'affichait qu'une fois tout fini. L'onglet
  * montrait donc un texte figé pendant deux minutes, sans rien qui distingue une
  * étape lente d'un plantage.
@@ -237,6 +242,15 @@ async function stream<T>(res: ServerResponse, run: (report: Report) => Promise<T
     line({ done: { ok: false, log: [String(e)] } });
   }
   res.end();
+}
+
+/**
+ * Ce que rend un geste qui committe (et « Pousser »), avec l'état de git APRÈS
+ * lui : la page y lit le compte du bouton « Pousser », sans rien redemander.
+ * Joint même à un échec — un lot de rangs à moitié refusé a committé le reste.
+ */
+async function withGit<T extends Outcome>(run: T | Promise<T>): Promise<T & { git: GitState }> {
+  return { ...(await run), git: gitState() };
 }
 
 interface RequestBody {
@@ -332,7 +346,22 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       host: hostname(),
       port: PORT,
       imgBase: IMG_BASE,
+      // Le bouton « Pousser » : la branche et ses commits en attente.
+      git: gitState(),
     });
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/git') {
+    // L'état de git seul, sans attendre R2 comme `/api/state` — et sans réseau.
+    json(res, gitState());
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/push') {
+    // « Pousser » : le seul geste qui pousse. Les enregistrements committent
+    // (`commitPaths`), celui-ci envoie ce qui attend — et lance la CI.
+    await stream(res, (report) => withGit(pushMain(report)));
     return;
   }
 
@@ -340,13 +369,13 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const { list, etag } = await body<{ list: PromoCode[]; etag: string | null }>(req);
     if (!etag)
       return json(res, { ok: false, log: ['Liste non chargée depuis R2 : recharger.'] }, 409);
-    await stream(res, (report) => saveCouponList(list, etag, report));
+    await stream(res, (report) => withGit(saveCouponList(list, etag, report)));
     return;
   }
 
   if (req.method === 'POST' && url.pathname === '/api/comics') {
     const { batches } = await body<{ batches: ComicBatch[] }>(req);
-    await stream(res, (report) => addComics(batches, report));
+    await stream(res, (report) => withGit(addComics(batches, report)));
     return;
   }
 
@@ -370,7 +399,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     );
     const parsed = parseTarget(target);
     if (!parsed) return json(res, { ok: false, log: [`Cible inconnue : ${target}`] }, 400);
-    await stream(res, (report) => addVideo(parsed, input, label, report));
+    await stream(res, (report) => withGit(addVideo(parsed, input, label, report)));
     return;
   }
 
@@ -389,7 +418,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/ranks') {
     const { changes } = await body<{ changes: RankChange[] }>(req);
-    await stream(res, (report) => saveRanks(changes, report));
+    await stream(res, (report) => withGit(saveRanks(changes, report)));
     return;
   }
 
@@ -407,7 +436,9 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/gear-reco') {
     const { id, builds } = await body<{ id: string; builds: GearBuild[] }>(req);
-    await stream(res, (report) => saveGearReco(String(id ?? ''), builds, GEAR_RECO_DEPS, report));
+    await stream(res, (report) =>
+      withGit(saveGearReco(String(id ?? ''), builds, GEAR_RECO_DEPS, report)),
+    );
     return;
   }
 
