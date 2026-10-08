@@ -33,7 +33,7 @@
  * note officielle, `draftRequest` en fait la demande à coller dans claude.ai
  * pour un premier jet (aucun appel à un modèle d'ici).
  *
- * Ce geste ne committe et ne pousse RIEN, contrairement aux quatre autres.
+ * Ce geste ne committe RIEN, contrairement aux cinq gestes d'enregistrement.
  */
 import shortcodes from './discord-shortcodes.json';
 import type { Outcome, Report } from './actions';

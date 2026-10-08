@@ -7,6 +7,31 @@
 
 ## 2026-10-08
 
+- **Relecture B33** (Fable, 08/10) : `d6c4eb0d` validé — 94 lots, aucun
+  ouvert. Périmètre attendu (`actions.ts`, `server.ts`, `lib.js`,
+  `index.html`, `quick.css`, cinq intros d'onglets, `gear.js`, `shot.mjs`,
+  `lan.ts`, tests, STYLE.md, DONE, TODO), entrée DONE complète, écart accepté
+  (`withGit` joint l'état git même à un échec partiel, le compte doit
+  suivre). `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (198
+  fichiers, 2 833 tests) et la suite de quick sous `NODE_ENV=development`
+  (409 tests). Contrôle indépendant : un script `tsx` du scratchpad
+  (`b33/check-git.ts`) sur un dépôt jetable avec amont bare — `commitPaths`
+  laisse le bare intact et dit « 1 commit à pousser », un fichier non donné
+  reste non suivi, re-sauvegarde = « rien à committer », `pushMain` met le
+  bare à jour puis « rien à pousser. », un commit poussé d'un autre clone →
+  refus « 1 commit reste en local » + conseil `pull --rebase`, `gitState`
+  rend `ahead: 1, behind: 1` après fetch, et un `.ts` en attente fait
+  annoncer « pre-push : typecheck… » avant le push. Quick isolé (:4843) :
+  `/api/git` et `/api/state.git` rendent `ahead: 9` (le `devant 9` réel) ;
+  captures (scratchpad `b33/`) à 1440 et 1000 px : « Pousser 9 » entre les
+  pastilles et le poste, passe à la seconde ligne avec elles en étroit.
+  Rangé en passant : le commentaire « quatre autres » de `discord.ts` ; le
+  « à trancher » de B32 (confirmer « Supprimer » ?) est clos par la décision
+  du jour (rien ne se confirme avant un commit local). Pour Sevih, au TODO :
+  relancer quick (un serveur déjà ouvert pousse encore à chaque
+  enregistrement), premier clic réel sur « Pousser », et les deux restes
+  (compte relu seulement au chargement et après un enregistrement ;
+  `commitPaths` committe tout l'index).
 - **quick : un enregistrement COMMITTE, « Pousser » dans la barre d'en-tête
   (lot B33)** (08/10, décision Sevih) : chaque geste de quick (codes promo,
   4-comics, vidéos, rangs, recos) committait PUIS poussait `main`, donc lançait

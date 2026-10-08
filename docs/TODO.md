@@ -40,10 +40,16 @@
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
-- [ ] **Gear reco, à trancher (B32)** : « Supprimer » un build n'a jamais
-      demandé de confirmation, et la carte supprimée n'est plus sous les
-      yeux des autres depuis les onglets (« Annuler » la rend) — en ajouter
-      une ? Lot A si oui.
+- [ ] **« Pousser », restes de B33** : (1) le compte de l'en-tête ne se relit
+      qu'au chargement et après un enregistrement — après un `git pull
+  --rebase` ou un commit au terminal, recharger la page (relire
+      `/api/git` au retour de focus serait un lot A) ; (2) `commitPaths`
+      committe TOUT l'index, comme avant lui : un fichier indexé au terminal
+      partirait avec l'enregistrement — ne rien laisser dans l'index pendant
+      que quick tourne, ou lot A pour n'indexer que ses chemins (`git
+  commit -- <chemins>` sur un index propre). À jouer par Sevih : le
+      premier clic réel sur « Pousser » (des commits non JSON attendent : le
+      journal annonce le typecheck, puis « poussé »).
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
