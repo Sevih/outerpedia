@@ -7,6 +7,103 @@
 
 ## 2026-10-08
 
+- **quick : onglet « Effets » — le catalogue des effets, une recherche qui
+  dit pourquoi elle trouve (lot B41, étape 10 de la migration)** —
+  l'éditeur « Effect » de l'admin (`/admin/editor/effects`) est porté dans
+  quick, groupe « Éditeurs », qui n'est plus « à venir ». Les deux agacements
+  de Sevih sont corrigés en portant. **La recherche**
+  (`src/lib/admin/effect-search.ts`, pur, que l'admin partage et dont il
+  profite donc) : la sous-chaîne sur tous les champs à la fois est remplacée
+  par une règle qui se lit. La saisie est découpée en MOTS (lettres et
+  chiffres ; `_`, `|` et l'espace séparent) et chacun doit COMMENCER un mot
+  du champ, dans le même champ, peu importe l'ordre. Elle vaut pour l'id, les
+  clés éditoriales et les noms anglais puis français ; le japonais, le coréen
+  et le chinois ne répondent que si la saisie porte un caractère de leur
+  écriture (kana, hangul, idéogrammes — ces derniers lisent le japonais et le
+  chinois), et alors par sous-chaîne, ces écritures n'ayant pas de mots à
+  l'espace ; l'espagnol n'est pas cherché. `effectMatches` rend le champ qui a
+  répondu, `{ field, value }` (`id`, `key`, `name.<langue>` ; `all` pour une
+  saisie vide), dans l'ordre où il explique le mieux la ligne : id exact, nom
+  anglais, nom français, clé égale puis clé par ses mots, id par son début,
+  autres écritures. Les cas de « tes », joués sur le glossaire du jour par le
+  quick du banc : « tes » sortait quatre effets (les deux « Increased Speed »
+  par le milieu de « Vitesse accrue », les deux « Reduced Crit Hit Chance »
+  par « Taux CRIT réduites ») — il n'en sort plus aucun, et n'attraperait une
+  clé qu'en début de mot (`…_TEST`, pas `BT_FASTEST_UP`) ; « spe » et
+  « speed » rendent les quatre effets de vitesse par leur nom anglais ;
+  « BT_SP » les rend par leur clé, `BT_STAT|ST_SPEED` (et
+  `BT_STAT|ST_SPEED_IR` pour les irremovable) — « bt » et « sp » commencent
+  deux de ses mots, c'est pour ce cas que plusieurs mots se cherchent dans UN
+  champ sans ordre ; « スピ » les rend par le japonais (« スピードUP »).
+  Écart trouvé au banc et corrigé : repliés comme une saisie latine
+  (`normalizeSearchText` retire les « diacritiques », donc le voisement des
+  kana et l'allongement), « スピ » sortait aussi « ミスヒット発生率UP » ; les
+  autres écritures ne replient que la casse et la pleine chasse (NFKC).
+  `filterEffectCatalog` garde son contrat (une paire entière dès qu'un membre
+  répond) et la botte de foin reste une chaîne, désormais un champ étiqueté
+  par ligne. **Le menu latéral** disparaît : le catalogue est la liste. Ce qui
+  est descendu de l'admin, selon la règle de portage : l'appariement buff ↔
+  debuff et le tri de `page.dev.tsx`, ses clés par effet et la forge de l'id
+  de `NewEffectForm` vivent dans `src/lib/admin/effect-catalog.ts`
+  (`pairEffects`, `effectPairKey`, `effectKeysById`, `newEffectId`, testés) —
+  la page admin et le formulaire les appellent, rendu inchangé (lu sur le
+  serveur de dev : « No mirror (156) », soit les 90 + 66 orphelins que quick
+  sert). **Serveur** (`actions.ts`, `server.ts`) : `effectsState` →
+  `GET /api/effects/state` (le catalogue rangé, par effet sa ligne, son extrait
+  sans la curation et son entrée du disque, les comptes, les familles et
+  leurs libellés par côté, les libellés d'origine, les langues, le dossier des
+  icônes et celles déjà portées) ; `effectsSearch` →
+  `GET /api/effects/search?q=` — la recherche est jouée au SERVEUR, la page
+  vanilla ne pouvant pas importer le module de l'admin, comme le verdict de
+  Noms ; `effectNewId` → `GET /api/effects/id?raw=` ; `saveEffects` →
+  `POST /api/effects { changes }` : par effet, le disque doit encore porter
+  l'entrée chargée (`was`), puis `upsertEffectCurated`, ses refus rendus tels
+  quels, puis UN `commitPaths` de `data/curated/effects.json`, au nom anglais
+  de l'effet (`chore(effects): Increased Speed`), « N effets » pour un lot.
+  Une création passe par la même porte
+  avec `create` : id forgé comme l'admin, refusé s'il existe déjà (extrait ou
+  curé), nom anglais requis. `ADMIN_TO_QUICK` gagne `/admin/editor/effects`.
+  **Page** (`tabs/effects.{html,js,css}`, préfixe `x-`, `wide`) : la recherche
+  et les filtres sur une ligne (nature, sans description, curés seulement,
+  masqués), « ＋ effet », le catalogue en paires côte à côte puis « Sans
+  miroir », chaque ligne avec sa tuile (celle du site : masque teinté sur
+  fond noir, les « Interruption » en couleurs natives), ses badges et la
+  RAISON de la correspondance en atténué ; la fiche à droite (dessous sous
+  1000 px) avec les champs de `EffectCuratedEditor`, l'extrait en
+  placeholder ; savebar par lot, `canLeave`, hash `#effects/<id>`, état relu.
+  Un effet refusé garde sa saisie, sauf si le disque avait changé (`stale`).
+  Le lien « Effect » sort du menu de l'admin. Vérification : `pnpm typecheck`
+  (`$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test`
+  (`Tests  3141 passed (3141)`, 203 fichiers) ; `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` :
+  1 079 cas verts sur 44 fichiers. Tests ajoutés : `effect-search.test.ts`
+  refait (22 cas), `effect-catalog.test.ts` (7), `actions.test.ts` (21 :
+  état, recherche, id, enregistrement à store et git factices, création et
+  doublon refusé), la page en happy-dom (13 : raison affichée, filtres,
+  fiche, lot, « Annuler », `canLeave`), la section servie. Banc : quick
+  isolé sur :4811, clés vidées (`hasR2` et `hasYoutubeKey` restent vrais : que
+  des GET), captures `--tabs effects`, `--hash effects/15`,
+  `--hash effects/UNCOUNTERABLE` et une fenêtre de 900 px — le catalogue en
+  paires, la fiche d'un extrait et celle d'une création, l'une sous l'autre en
+  étroit ; il a fait redescendre « Nouvel effet » sur la ligne des filtres et
+  borner le catalogue à la fenêtre (l'effet ouvert tombait sous le pli).
+  Rien d'enregistré, aucune clé i18n ajoutée. Mes choix, à redire s'ils
+  gênent : plusieurs mots sans ordre dans un champ, l'ordre des champs
+  rendus, l'espagnol hors recherche, l'envoi par lot (`changes`) plutôt que
+  `{ id, curated }`. Laissé, hors périmètre : la carte « couverture » de la
+  home admin et deux pages de l'extractor renvoient toujours à
+  `/admin/editor/effects` (seul le lien du menu sort) ; le placeholder de
+  `EffectsCatalog` dit encore « Name (any language) » ; une CRÉATION ne se
+  supprime ni d'ici ni de l'admin (son nom anglais est exigé, donc elle ne se
+  vide pas — à la main dans le JSON) ; un enregistrement réécrit les langues
+  d'un nom dans l'ordre du site, comme l'admin (`es` et `fr` s'échangent sur
+  les entrées écrites à la main) ; renommer un effet en anglais change sa
+  paire (la clé d'appariement lit le nom fusionné, règle inchangée) ;
+  `normalizeSearchText` replie aussi le voisement des kana pour la palette du
+  site (`SearchModal`), même faux positif possible ; `EffectHiddenToggle` est
+  sur la fiche perso de l'extractor, il suivra le lot Character ; le
+  paragraphe « quick » de `CLAUDE.md` en est resté à six gestes. Contrôles à
+  l'écran au TODO.
 - **Relecture A31, A32, A33 (Fable)** — trois lots Opus livrés ensemble,
   chacun relu à part. Commun : `pnpm typecheck && pnpm lint && pnpm test` sur
   HEAD (`ad50762e` + les deux), vert ; la suite de quick et les deux fichiers

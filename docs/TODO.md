@@ -37,10 +37,36 @@
       « Bannières », lot B35), la boîte de réception de la home (onglet
       « Tableau de bord », lot B36), la chaîne des données (onglet
       « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
-      Game data (onglet « Tables du jeu », lot B38).
+      Game data (onglet « Tables du jeu », lot B38), Effect (onglet
+      « Effets », lot B41).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
+- [ ] **Onglet « Effets » — contrôles à l'écran (lot B41)** : le banc ne
+      tape pas, et aucun enregistrement réel n'a été joué. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : quatre routes nouvelles). (1) La
+      recherche : taper `tes` — attendu : « Aucun effet ne correspond. »,
+      Increased Speed ne sort plus ; `spe` → les quatre effets de vitesse,
+      chacun « nom en » ; `BT_SP` → les mêmes, « clé BT_STAT|ST_SPEED » (et
+      `…_IR` pour les irremovable) ; `スピ` → « nom jp · スピードUP » ; `15` →
+      « id 15 ». À juger : la raison sous chaque ligne (utile, ou du bruit
+      quand c'est le nom anglais ?), et l'espagnol, qui n'est pas cherché.
+      (2) Les filtres : « Nature » sur Debuffs → une seule colonne ; « sans
+      description » → 8 effets ; « curés seulement » → 42 ; « masqués » → 2.
+      (3) Un effet curé : ouvrir « Priority Increase » (61) — son icône
+      curée dans le champ, celle du jeu en gris ; changer sa famille, puis la
+      nature : la liste des familles suit le côté, l'ancienne reste proposée
+      « (autre côté) ». (4) Un créé : `fixed test` dans « Nouvel effet »,
+      « ＋ effet » → la fiche vierge `FIXED_TEST` en tête du catalogue ;
+      « Enregistrer » sans nom anglais → refusé, la saisie reste, point
+      rouge ; avec un nom → créé. Puis « Annuler » sur une autre création :
+      elle disparaît. (5) « Enregistrer » deux effets modifiés — attendu :
+      UN commit `chore(effects): 2 effets` (un seul effet : son nom anglais
+      à la place), « Pousser » qui compte un commit de plus, le catalogue relu ;
+      retirer ensuite l'effet d'essai à la main dans
+      `data/curated/effects.json` (une création ne se vide pas d'ici). À
+      juger aussi : la hauteur du catalogue, qui défile dans sa carte, et la
+      fiche à droite (560 px).
 - [ ] **« Tables du jeu » — contrôles à l'écran (lot B38)** : le banc ne
       clique pas ; l'onglet ne fait que lire. (1) Le sélecteur : cliquer dans
       « Table… » — attendu : les tables lues d'abord (TextSystem, ItemTemplet,

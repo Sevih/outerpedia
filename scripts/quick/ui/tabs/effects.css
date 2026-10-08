@@ -1,0 +1,374 @@
+/* Onglet « Effets » : la recherche et ses filtres dans une carte, puis deux
+   colonnes — le catalogue (paires buff | debuff côte à côte, puis les effets
+   sans miroir) et la fiche de l'effet choisi. Le reste — carte, `.form`,
+   `.savebar`, `.btn`, `.badge`, `.chip` — vient de `quick.css`. */
+
+/* Les couleurs de nature du site, recopiées de `globals.css` sous leurs noms. */
+#tab-effects {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
+}
+
+/* Le compte de la savebar et ses badges. `.savebar span` pousse à gauche
+   chaque `span` ; ici seul le compte entier l'est. */
+#tab-effects #x-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-effects #x-count * {
+  margin-right: 0;
+}
+
+/* « Nouvel effet » ferme la rangée des filtres, à droite ; le compte dessous. */
+#tab-effects .x-new {
+  margin-left: auto;
+}
+#tab-effects .x-total {
+  margin: 0;
+}
+
+#tab-effects .x-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: 18px;
+  align-items: start;
+}
+
+/* ------------------------------------------------------------ le catalogue
+   Il défile dans sa carte, la fiche reste à l'écran. */
+#tab-effects .x-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#tab-effects .x-heads,
+#tab-effects .x-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#tab-effects .x-rows.one .x-pair {
+  grid-template-columns: minmax(0, 1fr);
+}
+#tab-effects .x-heads {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line-subtle);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#tab-effects .x-heads[hidden] {
+  display: none;
+}
+#tab-effects .x-h {
+  padding: 0 8px;
+}
+#tab-effects .x-h.buff {
+  color: var(--buff);
+}
+#tab-effects .x-h.debuff {
+  color: var(--debuff);
+}
+#tab-effects .x-rows {
+  max-height: max(320px, calc(100vh - 490px));
+  padding: 4px 6px;
+  overflow-y: auto;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-effects .x-pair + .x-pair {
+  border-top: 1px solid color-mix(in srgb, var(--line-subtle) 45%, transparent);
+}
+#tab-effects .x-sep {
+  margin: 6px 0 2px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--surface-base);
+  color: var(--content-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#tab-effects .x-list .empty {
+  margin: 14px;
+}
+
+/* Une ligne : la tuile, le nom et ses badges, l'id · l'origine · la famille,
+   la raison de la correspondance, le point. */
+#tab-effects .x-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-effects .x-row:hover {
+  background: var(--surface-overlay);
+}
+#tab-effects .x-row[aria-current='true'] {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+#tab-effects .x-row:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+/* Le miroir d'un effet qui répond, lui-même hors de la recherche. */
+#tab-effects .x-row.x-dim {
+  opacity: 0.45;
+}
+#tab-effects .x-main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+#tab-effects .x-line {
+  display: flex;
+  align-items: center;
+  gap: 4px 6px;
+  flex-wrap: wrap;
+}
+#tab-effects .x-name {
+  font-weight: 600;
+}
+#tab-effects .x-name.none {
+  color: var(--danger);
+  font-style: italic;
+  font-weight: 400;
+}
+#tab-effects .x-row .badge {
+  height: 18px;
+  padding: 0 7px;
+  font-size: 11px;
+}
+#tab-effects .x-meta {
+  color: var(--content-muted);
+  font-size: 12px;
+}
+#tab-effects .x-why {
+  color: var(--content-muted);
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.8;
+  overflow-wrap: anywhere;
+}
+#tab-effects .x-ok {
+  color: var(--success);
+}
+#tab-effects .x-warn {
+  color: var(--warn);
+}
+#tab-effects .x-ko {
+  color: var(--danger);
+}
+#tab-effects .badge.x-nat.buff {
+  background: color-mix(in srgb, var(--buff) 15%, transparent);
+  color: var(--buff);
+}
+#tab-effects .badge.x-nat.debuff {
+  background: color-mix(in srgb, var(--debuff) 15%, transparent);
+  color: var(--debuff);
+}
+/* Le point d'une ligne : accent = modifiée, rouge = refusée. */
+#tab-effects .x-pt {
+  display: inline-flex;
+  flex: 0 0 8px;
+  margin-top: 8px;
+}
+#tab-effects .pt {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#tab-effects .pt.ko {
+  background: var(--danger);
+}
+
+/* La tuile d'un effet, celle du site : fond noir, l'icône en masque teinté de
+   sa nature (trois couches, comme `TintedIcon`). */
+#tab-effects .x-ico {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: #000;
+}
+#tab-effects .x-ico.lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+}
+#tab-effects .x-ico.none {
+  border: 1px dashed var(--line);
+  background: transparent;
+}
+#tab-effects .x-ico i {
+  position: absolute;
+  inset: 0;
+  background: var(--buff-tint);
+  -webkit-mask: var(--x-src) center / contain no-repeat;
+  mask: var(--x-src) center / contain no-repeat;
+  mask-mode: luminance;
+}
+#tab-effects .x-ico.debuff i {
+  background: var(--debuff-tint);
+}
+#tab-effects .x-ico img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------- la fiche */
+#tab-effects .x-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+}
+#tab-effects .x-sheet > .empty {
+  margin: 0;
+}
+#tab-effects .x-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+#tab-effects .x-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-effects .x-id strong {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+#tab-effects .x-badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+/* Ce que le jeu fournit : la description extraite, les clés de l'index. */
+#tab-effects .x-ext {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-base);
+}
+#tab-effects .x-desc {
+  margin: 0;
+  font-size: 13px;
+  white-space: pre-line;
+}
+#tab-effects .x-desc.none {
+  color: var(--content-muted);
+  font-style: italic;
+}
+#tab-effects .x-ext .x-meta {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+#tab-effects .chips {
+  gap: 6px;
+}
+#tab-effects .chip.x-key {
+  height: 22px;
+  padding: 0 8px;
+  background: transparent;
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+#tab-effects .x-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#tab-effects .x-block h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+#tab-effects .x-block .hint {
+  margin: 0;
+}
+/* Un champ par langue, deux par rangée. */
+#tab-effects .x-langs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+}
+#tab-effects .x-lang {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+}
+#tab-effects .x-lang span {
+  flex: 0 0 20px;
+  padding-top: 8px;
+  color: var(--content-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#tab-effects .x-lang input,
+#tab-effects .x-lang textarea {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+#tab-effects .x-lang textarea {
+  height: 64px;
+  min-height: 34px;
+}
+#tab-effects .x-wide textarea {
+  width: 100%;
+  height: 64px;
+}
+/* Une description plus longue que son cadre : l'ascenseur de la page, pas un blanc. */
+#tab-effects .x-sheet textarea {
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+
+/* Fenêtre étroite : le catalogue au-dessus de la fiche. */
+@media (max-width: 1000px) {
+  #tab-effects .x-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #tab-effects .x-rows {
+    max-height: 320px;
+  }
+}
+@media (max-width: 620px) {
+  #tab-effects .x-langs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

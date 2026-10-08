@@ -42,8 +42,9 @@ pastille.
   **groupes** en onglets (`.gtab`, filet accent sous l'actif ; « Accueil » en
   tête — sa première section, le tableau de bord, est celle que la page
   ouvre ; `.gtab.soon`
-  grisé avec son badge « à venir » : Éditeurs, Guides, tant que quick n'a pas
-  repris l'admin — Outils a sa première section, Noms), puis à droite les
+  grisé avec son badge « à venir » : Guides, tant que quick n'a pas repris
+  l'admin — Éditeurs a sa première section, Effets, et Outils la sienne,
+  Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
   le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
@@ -65,7 +66,7 @@ pastille.
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `g-` Gear reco, `h-` Tableau de bord, `j-` Journal du site,
   `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
-  `v-` Vidéos) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
+  `v-` Vidéos, `x-` Effets) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur.
 - Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
@@ -77,7 +78,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Gear reco, Tables du jeu, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Gear reco, Tables du jeu, Effets, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -234,7 +235,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Gear reco, Noms, Bannières et Journal du site : le compte de changements
+La barre d'enregistrement de Rangs, Gear reco, Noms, Effets, Bannières et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -571,6 +572,74 @@ dans `tabs/changelog.css` : `.j-line`, `.j-sheet`, `.j-more`, `.j-grid`,
 `.j-badge` et ses teintes `.j-t-<type>` (les jetons `--cat-*-fg` du site,
 recopiés sous les mêmes noms), `.j-chip`, `.j-seg` (le segmenté de Gear reco,
 recopié faute de composant commun), `.j-card` (la carte de `/changelog`).
+
+## Éditeurs — croquis
+
+### Effets (`wide`, fait — B41)
+
+Le glossaire des effets : ce que le jeu fournit et l'entrée curée de chacun
+(`data/curated/effects.json`), l'éditeur « Effect » de l'admin sans son menu
+latéral. Croquis du rendu :
+
+```
+.head  Effets — Le glossaire des effets : ce que le jeu fournit… Rien ne s'écrit à la saisie… Lus au rendu…
+.savebar   2 effets modifiés · 1 refus   [Annuler] [Enregistrer]   (un lot : tous les effets modifiés, pas seulement celui à l'écran)
+.card.pad  .form sur UNE ligne : [Chercher 42ch « Nom (en, fr), id, clé BT_… — ou 日本語, 한국어, 中文 »] [Nature ▾ : Buffs et debuffs · Buffs · Debuffs] [☐ sans description] [☐ curés seulement] [☐ masqués]   …à droite [Nouvel effet 22ch, chasse fixe « ID (ex. UNCOUNTERABLE) »] [＋ effet]
+   dessous, le compte : « 212 effets — 188 statuts, 12 mécaniques, 12 créations · 42 curés · 8 sans description · 2 masqués » ; dès qu'un filtre ou une recherche joue : « 4 sur 212 effets »
+.x-cols — deux colonnes (le catalogue | la fiche, 560 px ; l'une sous l'autre sous 1000 px)
+  gauche .card.x-list : en-têtes BUFF (bleu) | DEBUFF (rouge), puis le catalogue, qui défile dans sa carte
+     PAS de menu latéral : le catalogue EST la liste. Une rangée (.x-pair) = une PAIRE miroir côte à côte (Increased Speed | Reduced Speed), dans l'ordre du serveur
+     puis .x-sep « Sans miroir (156) » et les orphelins, un buff et un debuff par rangée, la case vide quand une colonne est plus courte
+     une ligne (.x-row, un bouton) : tuile 28 px · nom EN (« sans nom » en rouge) · badges · point
+        dessous : id (chasse fixe) · origine (statut · mécanique · création) · « curé » (un effet extrait qui porte une entrée) · famille éditoriale
+        dessous, en italique atténué : POURQUOI la ligne répond à la recherche — « nom en », « nom fr · Vitesse accrue », « clé BT_STAT|ST_SPEED », « id 15 », « nom jp · スピードUP »
+        badges : nature (buff bleu, debuff rouge) · « irremovable » (off) · « masqué » (off) · « sans description » (warn) · « sans icône » (ko) · « nouveau » (edit, une création pas encore enregistrée)
+        point : accent = modifié, pas enregistré ; rouge = refusé au dernier enregistrement (`title` = le refus)
+     une paire reste ENTIÈRE dès qu'un de ses deux membres passe la recherche et les filtres : le miroir qui ne passe pas est atténué (45 %), sans raison
+     « Nature » choisie : UNE colonne (les en-têtes s'effacent) — les effets en paire de cette nature, puis « Sans miroir »
+     l'effet ouvert garde sa ligne hors des filtres ; en tête, .x-sep « Nouveaux, pas encore enregistrés (1) » et les créations de « ＋ effet »
+     .empty « Aucun effet ne correspond. »
+  droite .card.x-sheet (l'effet choisi, `#effects/<id>` ; avant, un .empty « Choisir un effet dans le catalogue. »)
+     tuile 48 px · nom (le nom anglais saisi, sinon l'extrait, sinon l'id) · id · origine · « icône du jeu » (ok) / « icône du wiki » (warn) / « sans icône » (ko) · badges (nature effective, « nouveau », « refusé », « modifié »)
+     un effet EXTRAIT : cadre « Ce que le jeu fournit » — la description anglaise (balises retirées), les clés de l'index en .chip.x-key (chasse fixe, lecture seule), « Tooltips fusionnés : … »
+     une CRÉATION : p.hint « Aucune donnée extraite pour cet id… »
+     Nom — six champs, deux par rangée (.x-langs), `placeholder` = le nom extrait ; « Vide = le nom extrait » (création : « L'anglais est requis. »)
+     Description — six textarea, `placeholder` = la description extraite, telle que le jeu l'écrit
+     .form  [Icône 30ch, chasse fixe, `list` = les icônes déjà portées par un effet] [Nature ▾ : celle de l'extrait (buff) · buff · debuff] [Famille éditoriale (buff) ▾ : par défaut (taxonomie) + les familles du côté EFFECTIF ; une famille de l'autre côté reste proposée, « cc (autre côté) »]
+     Clés éditoriales ({B/…} et {D/…}) — une textarea en chasse fixe, virgule ou retour à la ligne
+     [☐ Masquer du site (bruit, interne)]   Note interne (textarea)
+     p.hint « Tout vider puis « Enregistrer » retire l'entrée curée : l'extrait fait foi. » (création : « Une création garde au moins son nom anglais. »)
+```
+
+Tout ce qui se lit vient de `GET /api/effects/state` (`effectsState` : le
+catalogue rangé par `pairEffects` de l'admin, et par effet sa ligne, son
+extrait SANS la curation, son entrée curée du disque ; les comptes, les
+familles et leurs libellés par côté, les libellés d'origine, les langues, le
+dossier des icônes et celles déjà portées — la page n'en recopie aucun). La
+RECHERCHE est au serveur : `GET /api/effects/search?q=` (`effectsSearch`)
+joue la règle de `src/lib/admin/effect-search.ts` et rend, par effet qui
+répond, le champ qui a répondu — 200 ms après la dernière frappe, seule la
+dernière demande se dessine, un champ vidé rend tout aussitôt. Les filtres,
+eux, sont à la page (ils lisent la ligne). La tuile (`.x-ico`) est celle du
+site (`EffectIconTile`) : fond noir, l'icône en masque teinté de sa nature
+(`--buff-tint`, `--debuff-tint`, recopiés de `globals.css` et portés par
+`#tab-effects`), sauf les icônes « Interruption », qui gardent leurs couleurs.
+Une frappe ne redessine pas la fiche (le champ garde le curseur) : son titre,
+sa tuile, les familles du côté effectif, le point de sa ligne, ses badges et
+la savebar suivent ; la LIGNE du catalogue (nom, badges) ne suit qu'après
+« Enregistrer », quand l'état est relu. « ＋ effet » demande l'id au serveur
+(`GET /api/effects/id?raw=`, la règle de l'admin : capitales, blancs en `_`) :
+un id qui existe ouvre sa fiche, un id nouveau pose une fiche vierge — elle ne
+compte pas tant que rien n'y est saisi. « Enregistrer » envoie tous les effets
+modifiés à `POST /api/effects` (`saveEffects`), chacun avec l'entrée que la
+page avait chargée (`was`) et `create` pour une création ; un effet refusé
+GARDE sa saisie, marqué d'un point rouge — sauf si le disque avait changé
+(`stale`) : sa fiche montre alors le disque. « Annuler » rend le disque et
+retire les créations. Quitter l'onglet avec des effets en attente demande
+confirmation (`canLeave`). Propres à l'onglet, dans `tabs/effects.css` :
+`.x-cols`, `.x-list`, `.x-heads`, `.x-rows`, `.x-pair`, `.x-sep`, `.x-row`,
+`.x-dim`, `.x-why`, `.x-nat`, `.x-ico`, `.x-sheet`, `.x-ext`, `.x-key`,
+`.x-langs`.
 
 ## Outils — croquis
 

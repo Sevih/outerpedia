@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
+import { newEffectId } from '@/lib/admin/effect-catalog';
 
 /**
  * Création d'un effet : on choisit l'id (conseillé = la clé éditoriale
@@ -12,7 +13,7 @@ import type { Route } from 'next';
 export function NewEffectForm({ basePath = '/admin/editor/effects' }: { basePath?: string }) {
   const router = useRouter();
   const [id, setId] = useState('');
-  const slug = id.trim().toUpperCase().replace(/\s+/g, '_');
+  const slug = newEffectId(id);
 
   return (
     <form

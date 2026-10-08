@@ -1,9 +1,9 @@
 /**
- * quick/actions — les NEUF gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les DIX gestes du quotidien, sortis du panneau admin.
  *
  * Mettre à jour un code promo ou une bannière, déposer une 4-comic, ajouter une
- * vidéo, régler un rang, une reco d'équipement ou un nom court, écrire une
- * entrée du journal du site ne demandait
+ * vidéo, régler un rang, une reco d'équipement ou un nom court, curer un effet,
+ * écrire une entrée du journal du site ne demandait
  * jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
@@ -13,7 +13,7 @@
  * Ce module ne RÉIMPLÉMENTE rien : il rappelle les mêmes stores que les routes
  * admin (`loadCouponsForEdit`/`saveCouponsLive`, `saveBanners`/`publishBanners`,
  * `collectComics`, `upsertCharacterCurated`,
- * `upsertEeCurated`, `upsertGearReco`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
+ * `upsertEeCurated`, `upsertGearReco`, `upsertEffectCurated`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
  * sont résolus par tsx via tsconfig.
  *
  * CE QUI PART EN PROD, ET COMMENT :
@@ -31,10 +31,12 @@
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
  *     sous les cartes, le champ recherche des listes de persos) ;
+ *   - effets (noms, descriptions, icônes, familles, masquage) : lus au RENDU
+ *     eux aussi (chips des skills, glossaire, filtres de `/characters`) ;
  *   - journal du site : `changelog.json` est lu par import statique, donc au
  *     BUILD (la page `/changelog`, la home, le flux RSS).
  *
- * Les HUIT COMMITTENT, sans rien demander, et aucun ne pousse (cf.
+ * Les NEUF COMMITTENT, sans rien demander, et aucun ne pousse (cf.
  * `commitPaths`) : pousser à chaque geste lançait la CI à chaque geste. Le push
  * est un geste à part, le bouton « Pousser » de l'en-tête (`pushMain`), qui dit
  * combien de commits attendent (`gitState`). Il part quand même avec la CI : R2
@@ -82,6 +84,14 @@ import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
+import { effectKeysById, newEffectId, pairEffects } from '@/lib/admin/effect-catalog';
+import {
+  effectHaystack,
+  effectMatches,
+  type EffectCatalog,
+  type EffectMatch,
+} from '@/lib/admin/effect-search';
+import { upsertEffectCurated } from '@/lib/admin/effects-store';
 import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
 import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
@@ -92,6 +102,13 @@ import { upsertShortName } from '@/lib/admin/short-name-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
+import { EFFECT_FAMILIES, effectFamilyLabel, type EffectSide } from '@/lib/data/effect-families';
+import {
+  getMergedEffects,
+  liveEffectSources,
+  type EffectSources,
+  type MergedEffect,
+} from '@/lib/data/effects';
 import {
   resolveChangelogEntry,
   type ChangelogEntry,
@@ -144,6 +161,7 @@ import {
 } from '@/components/tierlist/tiers';
 import type {
   CharacterCurated,
+  EffectCurated,
   GameVersion,
   GearBuild,
   GearPresets,
@@ -151,6 +169,7 @@ import type {
 } from '@contracts';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
+import { compactEffect } from '@datagen/curated/effects';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { collectComics } from '@datagen/assets/collect-comics';
 import { stripUnintegratedCharacters } from '@datagen/promote';
@@ -961,12 +980,14 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
 
 /**
  * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
- * de quick. VIDE aujourd'hui — l'inbox ne renvoie qu'à l'extractor, aux tags et
- * aux données du jeu, que quick n'a pas encore. Le lot qui porte une de ces
- * pages y ajoute sa ligne : le tableau de bord y renvoie alors au lieu de
- * l'admin (`inQuick`).
+ * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
+ * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
+ * effets seul — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux tags et
+ * aux données du jeu.
  */
-export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {};
+export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
+  '/admin/editor/effects': 'effects',
+};
 
 /** Sous combien de jours un code promo actif est « à échéance ». */
 export const COUPON_EXPIRY_DAYS = 7;
@@ -2489,6 +2510,351 @@ export async function translateNotes(
   } catch (e: unknown) {
     return { error: e instanceof Error ? e.message : String(e) };
   }
+}
+
+// ---------------------------------------------------------------- effets -----
+
+/** Le curé des effets : overrides du glossaire extrait, et créations. */
+const EFFECTS_PATH = 'data/curated/effects.json';
+
+/** D'où viennent les icônes d'effet, sous la base des images (`img.effect`). */
+const EFFECT_SPRITE = 'images/ui/effect';
+
+/** Ce que l'origine d'un effet veut dire, pour la ligne et la fiche. */
+const EFFECT_ORIGINS: Record<MergedEffect['origin'], string> = {
+  tooltip: 'statut',
+  type: 'mécanique',
+  curated: 'création',
+};
+
+/** La lecture de l'onglet « Effets » : le glossaire extrait et le curé du disque. */
+export interface EffectsDisk {
+  sources: () => EffectSources;
+}
+
+/** Celle de la route : le lecteur du site, curé relu du disque à chaque appel. */
+export const EFFECTS_DISK: EffectsDisk = { sources: liveEffectSources };
+
+/** Un effet du catalogue : sa ligne, et ce que sa fiche édite. */
+export interface EffectRow {
+  id: string;
+  /** Nom anglais FUSIONNÉ (le curé prime) : la ligne, le commit. '' sans nom. */
+  name: string;
+  icon: string;
+  isDebuff: boolean;
+  origin: MergedEffect['origin'];
+  /** Icône du pool du wiki (posée par la curation), absente des sprites du jeu. */
+  iconEditorial: boolean;
+  irremovable: boolean;
+  /** Famille éditoriale curée (`tag`) et son libellé, du côté de l'effet. */
+  tag: string | null;
+  family: string | null;
+  /** Une entrée curée existe. */
+  overridden: boolean;
+  hidden: boolean;
+  /** Pas de description anglaise, curation comprise : à documenter. */
+  noDesc: boolean;
+  /** Clés éditoriales : l'index généré (`BT_*`, alias), puis les curées. */
+  keys: string[];
+  /** Ce que l'EXTRACTION porte, sans la curation ; `null` pour une création. */
+  extracted: {
+    name: Record<string, string>;
+    desc: Record<string, string>;
+    icon: string;
+    isDebuff: boolean;
+    tooltips: string[];
+  } | null;
+  /** L'entrée du disque, telle quelle ; `{}` sans curation. */
+  curated: EffectCurated;
+}
+
+/** La ligne d'un effet fusionné. */
+function effectRow(e: MergedEffect, src: EffectSources, keys: Map<string, Set<string>>): EffectRow {
+  const raw = src.effects[e.id];
+  const side: EffectSide = e.isDebuff ? 'debuff' : 'buff';
+  return {
+    id: e.id,
+    name: e.name.en ?? '',
+    icon: e.icon,
+    isDebuff: e.isDebuff,
+    origin: e.origin,
+    iconEditorial: e.iconEditorial,
+    irremovable: e.irremovable,
+    tag: e.tag ?? null,
+    family: e.tag ? effectFamilyLabel(side, e.tag) : null,
+    overridden: e.overridden,
+    hidden: e.hidden,
+    noDesc: !e.desc.en,
+    keys: [...(keys.get(e.id) ?? [])],
+    extracted: raw
+      ? {
+          name: raw.name,
+          desc: raw.desc,
+          icon: raw.icon,
+          isDebuff: raw.isDebuff,
+          tooltips: raw.tooltips,
+        }
+      : null,
+    curated: src.curated[e.id] ?? {},
+  };
+}
+
+/**
+ * L'onglet « Effets » : le catalogue tel que l'admin le range (`pairEffects` —
+ * paires buff ↔ debuff miroir, puis orphelins), chaque effet avec ce que sa
+ * fiche édite : l'extrait d'un côté, l'entrée curée du disque de l'autre. Et ce
+ * que la page ne doit pas recopier : les comptes, les familles éditoriales et
+ * leurs libellés par côté, les libellés d'origine, les langues, le dossier des
+ * icônes, et les icônes déjà portées par un effet (les suggestions du champ).
+ */
+export function effectsState(disk: EffectsDisk = EFFECTS_DISK) {
+  const src = disk.sources();
+  const all = getMergedEffects(src);
+  const keys = effectKeysById(src);
+  const paired = pairEffects(all);
+  const row = (e: MergedEffect): EffectRow => effectRow(e, src, keys);
+  const catalog: EffectCatalog<EffectRow> = {
+    pairs: paired.pairs.map(({ buff, debuff }) => ({ buff: row(buff), debuff: row(debuff) })),
+    orphanBuffs: paired.orphanBuffs.map(row),
+    orphanDebuffs: paired.orphanDebuffs.map(row),
+  };
+  const count = (is: (e: MergedEffect) => boolean): number => all.filter(is).length;
+  const families = (side: EffectSide) =>
+    EFFECT_FAMILIES[side].map((value) => ({ value, label: effectFamilyLabel(side, value) }));
+  return {
+    catalog,
+    counts: {
+      total: all.length,
+      statuses: count((e) => e.origin === 'tooltip'),
+      mechanics: count((e) => e.origin === 'type'),
+      creations: count((e) => e.origin === 'curated'),
+      curated: count((e) => e.overridden),
+      noDesc: count((e) => !e.desc.en),
+      hidden: count((e) => e.hidden),
+    },
+    families: { buff: families('buff'), debuff: families('debuff') },
+    origins: EFFECT_ORIGINS,
+    langs: LANGS,
+    sprite: EFFECT_SPRITE,
+    icons: [...new Set(all.map((e) => e.icon).filter(Boolean))].sort(),
+  };
+}
+
+/**
+ * La recherche de l'onglet : la règle de l'admin (`effect-search`), jouée ici —
+ * la page ne la recopie pas. Par effet qui répond, le champ qui a répondu et
+ * sa valeur (« clé BT_STAT|ST_SPEED », « nom fr »), que la ligne affiche.
+ * `matches` à `null` : saisie vide, tout le catalogue reste.
+ */
+export function effectsSearch(
+  query: unknown,
+  disk: EffectsDisk = EFFECTS_DISK,
+): { q: string; matches: Record<string, EffectMatch> | null } {
+  const q = typeof query === 'string' ? query : '';
+  if (!q.trim()) return { q, matches: null };
+  const src = disk.sources();
+  const keys = effectKeysById(src);
+  const matches: Record<string, EffectMatch> = {};
+  for (const e of getMergedEffects(src)) {
+    const hit = effectMatches(
+      effectHaystack({ id: e.id, keys: [...(keys.get(e.id) ?? [])], name: e.name }),
+      q,
+    );
+    if (hit) matches[e.id] = hit;
+  }
+  return { q, matches };
+}
+
+/**
+ * L'id qu'aurait un effet créé sous ce qui est tapé (`newEffectId`, la règle de
+ * l'admin), et s'il est pris : un id qui existe ne se crée pas, il s'ouvre.
+ */
+export function effectNewId(
+  raw: unknown,
+  disk: EffectsDisk = EFFECTS_DISK,
+): { id: string; exists: boolean } {
+  const id = newEffectId(typeof raw === 'string' ? raw : '');
+  const src = disk.sources();
+  return { id, exists: Boolean(id) && Boolean(src.effects[id] ?? src.curated[id]) };
+}
+
+const trimmed = (v: unknown): string => (typeof v === 'string' ? v.trim() : '');
+
+/** Un texte par langue du site, blancs retirés ; rien si aucune n'est remplie. */
+function cleanLocalized(raw: unknown): LocalizedText | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const out: LocalizedText = {};
+  for (const l of LANGS) {
+    const text = trimmed((raw as Record<string, unknown>)[l]);
+    if (text) out[l] = text;
+  }
+  return Object.keys(out).length ? out : undefined;
+}
+
+/**
+ * Une entrée curée venue de la page, ramenée à son contrat : les champs
+ * connus, dans un ordre fixe, blancs retirés, vides absents — la forme que
+ * l'éditeur de l'admin compose (`build`), puis `compactEffect`. Deux entrées
+ * pareilles se comparent donc par leur JSON.
+ */
+function cleanEffectCurated(raw: unknown): EffectCurated {
+  const r = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  const keys = Array.isArray(r.keys) ? r.keys.map(trimmed).filter(Boolean) : [];
+  return compactEffect({
+    name: cleanLocalized(r.name),
+    desc: cleanLocalized(r.desc),
+    icon: trimmed(r.icon),
+    ...(typeof r.isDebuff === 'boolean' ? { isDebuff: r.isDebuff } : {}),
+    keys,
+    tag: trimmed(r.tag),
+    hidden: r.hidden === true,
+    note: trimmed(r.note),
+  });
+}
+
+const sameEffectCurated = (a: unknown, b: unknown): boolean =>
+  JSON.stringify(cleanEffectCurated(a)) === JSON.stringify(cleanEffectCurated(b));
+
+/** Un effet de l'onglet : ce qu'il doit porter, et ce que la page avait chargé. */
+export interface EffectChange {
+  id: string;
+  curated: EffectCurated;
+  was: EffectCurated;
+  /** « ＋ effet » : l'id est NOUVEAU — refusé s'il existe déjà. */
+  create?: boolean;
+}
+
+/** La lecture et les écritures de `saveEffects`, injectées : le store et git. */
+export interface EffectsDeps extends EffectsDisk {
+  upsert: (id: string, curated: EffectCurated) => Promise<string[]>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le store de l'admin et le vrai `commitPaths`. */
+export const EFFECTS_DEPS: EffectsDeps = {
+  ...EFFECTS_DISK,
+  upsert: upsertEffectCurated,
+  commitPaths,
+};
+
+/**
+ * Ce que rend `saveEffects` : `saved` ne sont plus en attente, `refused` sont
+ * à marquer (leur première raison dans `reasons`), et parmi eux `stale` ont
+ * été refusés parce que le DISQUE avait changé — la page leur rend le disque
+ * au lieu de garder une saisie qui déferait l'écriture d'un autre.
+ */
+export interface EffectsOutcome extends Outcome {
+  refused: string[];
+  stale: string[];
+  saved: string[];
+  reasons: Record<string, string>;
+}
+
+/**
+ * Enregistre un lot d'effets : pour chacun, le disque doit encore porter
+ * l'entrée curée que la page avait chargée (`was`), puis `upsertEffectCurated`
+ * — le store de l'admin, ses refus de schéma rendus tels quels —, puis UN
+ * commit du fichier curé : `chore(effects): <nom anglais>`, « N effets » pour
+ * un lot.
+ *
+ * Une CRÉATION (`create`) passe par la même porte avec un id nouveau : forgé
+ * comme dans l'admin (`newEffectId`), refusé s'il existe déjà — extrait ou
+ * curé —, car l'écrire remplacerait l'entrée d'un autre. Un effet sans extrait
+ * n'existe que par son entrée : elle porte au moins un nom anglais (la règle de
+ * l'éditeur de l'admin), donc elle ne se vide pas d'ici.
+ *
+ * Une entrée vide retire la clé (le store). Un effet refusé n'arrête pas le
+ * lot : les autres partent (cf. `EffectsOutcome`). Un lot où rien ne passe
+ * n'écrit ni ne committe rien.
+ */
+export async function saveEffects(
+  changes: EffectChange[],
+  deps: EffectsDeps,
+  report?: Report,
+): Promise<EffectsOutcome> {
+  const refused: string[] = [];
+  const stale: string[] = [];
+  const saved: string[] = [];
+  const reasons: Record<string, string> = {};
+  const out = (ok: boolean, lines: string[]): EffectsOutcome => ({
+    ok,
+    log: lines,
+    refused,
+    stale,
+    saved,
+    reasons,
+  });
+  if (!Array.isArray(changes) || !changes.length)
+    return out(false, ['Aucune modification à enregistrer.']);
+
+  const j = journal(report);
+  const named: string[] = [];
+  const refuse = (id: string, why: string): void => {
+    if (!refused.includes(id)) refused.push(id);
+    reasons[id] ??= why;
+    j.done(`REFUSÉ — ${why}`);
+  };
+
+  for (const c of changes) {
+    const id = String(c?.id ?? '');
+    // Le disque, relu pour CET effet : une entrée posée d'ailleurs (l'admin,
+    // l'autre poste) depuis le chargement de la page ne doit pas être écrasée.
+    const src = deps.sources();
+    const extracted = src.effects[id];
+    const disk = src.curated[id];
+    if (c?.create) {
+      if (!id || id !== newEffectId(id)) {
+        refuse(id, `id de création invalide : « ${id} » (attendu ${newEffectId(id) || 'un id'}).`);
+        continue;
+      }
+      if (extracted || disk) {
+        refuse(id, `${id} existe déjà : l’ouvrir pour l’éditer, pas le créer.`);
+        continue;
+      }
+    } else if (!extracted && !disk) {
+      refuse(id, `effet inconnu : ${id}.`);
+      continue;
+    }
+    const label = `${disk?.name?.en ?? extracted?.name.en ?? id} (${id})`;
+    if (!sameEffectCurated(disk, c.was)) {
+      stale.push(id);
+      refuse(id, `${label} : le disque a changé depuis le chargement.`);
+      continue;
+    }
+
+    const next = cleanEffectCurated(c.curated);
+    // Le disque porte déjà cette entrée : rien à écrire, rien à refuser.
+    if (sameEffectCurated(next, disk)) continue;
+    if (!extracted && !next.name?.en) {
+      refuse(id, `${label} : une création porte au moins un nom anglais.`);
+      continue;
+    }
+    const errors = await deps.upsert(id, next);
+    if (errors.length) {
+      for (const e of errors) refuse(id, `${label} : ${e}`);
+      continue;
+    }
+    saved.push(id);
+    const name = next.name?.en ?? extracted?.name.en ?? id;
+    named.push(name);
+    j.done(
+      Object.keys(next).length
+        ? `${name} (${id}) : ${c.create ? 'effet créé' : 'entrée curée écrite'}.`
+        : `${name} (${id}) : entrée curée retirée, l’extrait fait foi.`,
+    );
+  }
+
+  if (!saved.length)
+    return refused.length
+      ? out(false, [...j.lines, 'Rien à enregistrer.'])
+      : out(true, ['Rien à enregistrer : le disque porte déjà ces valeurs.']);
+
+  const commit = deps.commitPaths(
+    [EFFECTS_PATH],
+    `chore(effects): ${named.length === 1 ? named[0] : `${named.length} effets`}`,
+    report,
+  );
+  return out(commit.ok && !refused.length, [...j.lines, ...commit.log]);
 }
 
 // ---------------------------------------------------------- tables du jeu ----

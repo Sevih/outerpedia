@@ -1,46 +1,9 @@
 import { getMergedEffects, liveEffectSources, type MergedEffect } from '@/lib/data/effects';
 import { EffectsCatalog, type EffectRow } from '@/components/admin/EffectsCatalog';
+import { effectKeysById, pairEffects } from '@/lib/admin/effect-catalog';
 import { effectHaystack } from '@/lib/admin/effect-search';
 
 export const dynamic = 'force-dynamic';
-
-/**
- * Appariement buff ↔ debuff : même concept aux mots de DIRECTION près
- * (« Increased Defense » ↔ « Reduced Defense »). Les variantes irremovable
- * s'apparient entre elles (clé distincte).
- */
-function pairKey(e: MergedEffect): string {
-  const base = (e.name.en ?? '')
-    .toLowerCase()
-    .replace(
-      /\b(increased|increases|increase|reduced|reduces|reduce|decreased|decrease|reduction)\b/g,
-      ' ',
-    )
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-  return base ? `${base}${e.irremovable ? '|irr' : ''}` : '';
-}
-
-/**
- * Clés éditoriales par id d'effet : l'index généré (`BT_*`, les deux côtés)
- * puis les `keys` curées. `MergedEffect` ne les porte pas — la recherche si.
- */
-function keysByEffect(): Map<string, Set<string>> {
-  const src = liveEffectSources();
-  const out = new Map<string, Set<string>>();
-  const add = (id: string, key: string) => {
-    const set = out.get(id) ?? new Set<string>();
-    set.add(key);
-    out.set(id, set);
-  };
-  for (const side of Object.values(src.byKey)) {
-    for (const [key, id] of Object.entries(side)) add(id, key);
-  }
-  for (const [id, c] of Object.entries(src.curated)) {
-    for (const key of c.keys ?? []) add(id, key);
-  }
-  return out;
-}
 
 /** Ligne du catalogue : ce que le composant client affiche et cherche. */
 function toRow(e: MergedEffect, keys: Map<string, Set<string>>): EffectRow {
@@ -71,44 +34,12 @@ export default async function EditorEffectsCatalog({
   // Filtre « sans description » : n'affiche que les effets à documenter.
   const effects = noDescOnly ? all.filter((e) => !e.desc.en) : all;
 
-  // Appariement : par clé normalisée, on zippe buffs et debuffs ; l'excédent
-  // (et les clés à un seul côté) part dans les orphelins.
-  const byKey = new Map<string, { buffs: MergedEffect[]; debuffs: MergedEffect[] }>();
-  const unnamed: MergedEffect[] = [];
-  for (const e of effects) {
-    const key = pairKey(e);
-    if (!key) {
-      unnamed.push(e);
-      continue;
-    }
-    const slot = byKey.get(key) ?? { buffs: [], debuffs: [] };
-    (e.isDebuff ? slot.debuffs : slot.buffs).push(e);
-    byKey.set(key, slot);
-  }
-
-  const pairs: { buff: MergedEffect; debuff: MergedEffect }[] = [];
-  const orphanBuffs: MergedEffect[] = [];
-  const orphanDebuffs: MergedEffect[] = [];
-  for (const { buffs, debuffs } of byKey.values()) {
-    const n = Math.min(buffs.length, debuffs.length);
-    for (let i = 0; i < n; i++) pairs.push({ buff: buffs[i], debuff: debuffs[i] });
-    orphanBuffs.push(...buffs.slice(n));
-    orphanDebuffs.push(...debuffs.slice(n));
-  }
-
-  const alpha = (a: MergedEffect, b: MergedEffect) =>
-    (a.name.en || '').localeCompare(b.name.en || '') ||
-    Number(a.irremovable) - Number(b.irremovable);
-  pairs.sort((a, b) => alpha(a.buff, b.buff));
-  orphanBuffs.sort(alpha);
-  orphanDebuffs.sort(alpha);
-  // Sans nom : en queue de liste (à nommer/curer).
-  orphanBuffs.push(...unnamed.filter((e) => !e.isDebuff));
-  orphanDebuffs.push(...unnamed.filter((e) => e.isDebuff));
+  // Appariement et tri : la règle de `effect-catalog`, partagée avec quick.
+  const { pairs, orphanBuffs, orphanDebuffs } = pairEffects(effects);
 
   // Le serveur lit et range ; la recherche (au fil de la frappe) et les
   // compteurs de ce qui reste affiché sont au composant client.
-  const keys = keysByEffect();
+  const keys = effectKeysById(liveEffectSources());
   const row = (e: MergedEffect) => toRow(e, keys);
 
   return (

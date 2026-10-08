@@ -93,6 +93,14 @@ tables que le code lit d'abord, avec les fichiers qui les lisent et la
 première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
+Éditeurs : Effets (= Editor › Effect, étape 10, lot B41 : le catalogue des
+effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
+sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
+de `src/lib/admin/effect-search.ts`, et chaque ligne dit quel champ a répondu ;
+des filtres — nature, sans description, curés seulement, masqués ; la fiche de
+l'effet choisi à droite, avec les champs de `EffectCuratedEditor` et l'extrait
+en placeholder ; « ＋ effet » pour une création ; plusieurs fiches modifiées
+partent en un lot, un commit ; lien retiré du menu admin le 08/10).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -105,7 +113,8 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
-C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs →
+C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
+(10 Effect fait, B41) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -166,9 +175,13 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    `CharacterCuratedEditor` + `CharacterKitEditor`
    - Agacements : ui pas joli et compact (et on a deplacer le gear reco)
 
-10. **Editor › Effect**
-    `EffectCuratedEditor`, `EffectsCatalog`, `NewEffectForm`
-    - Agacements : on a une recherche text qui match sur je ne sais pas quoi (genre j'ecrit "tes" et j'ai increased speed qui sort), le side menu sert a rien
+10. **Editor › Effect** — FAIT, lot B41 : l'onglet « Effets » (cf. « Déjà
+    dans quick »). Les deux agacements de Sevih y sont corrigés : « une
+    recherche text qui match sur je ne sais pas quoi (genre j'ecrit "tes" et
+    j'ai increased speed qui sort) » par la règle par DÉBUT DE MOT, qui nomme
+    le champ trouvé (l'admin en profite : c'est son module), « le side menu
+    sert a rien » par son retrait — le catalogue est la liste. L'entrée reste
+    pour que la numérotation des suivantes ne bouge pas.
 
 11. **Editor › EE**
     `EeCuratedEditor`

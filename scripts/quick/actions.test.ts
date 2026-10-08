@@ -64,6 +64,12 @@
  * lectures injectées), `queryGameTable` et `gameTableSchema` (le store de
  * l'admin, factice). Ni `.gamedata/parsed/` ni les sources du dépôt ne sont lus.
  *
+ * Et contrat de l'onglet « Effets » — `effectsState` (le catalogue rangé comme
+ * l'admin), `effectsSearch` et `effectNewId` (la règle de l'admin, jouée au
+ * serveur) et `saveEffects`. Le glossaire et le curé sont FACTICES (ceux du
+ * jour bougent à chaque patch et à chaque curation), le store et git INJECTÉS :
+ * aucun test n'écrit `data/curated/effects.json`.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -87,11 +93,12 @@ import {
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CharacterCurated, GearBuild, LocalizedText } from '@contracts';
+import type { CharacterCurated, Effect, EffectCurated, GearBuild, LocalizedText } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadChangelog } from '@/lib/admin/changelog-store';
 import type { ChangelogEntry } from '@/lib/data/changelog';
 import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
+import type { EffectSources } from '@/lib/data/effects';
 import { getEEViews } from '@/lib/data/equipment';
 import en from '@/i18n/locales/en';
 import fr from '@/i18n/locales/fr';
@@ -101,6 +108,7 @@ import type { TablePage, TableSchema } from '@/lib/admin/gamedata-store';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
 import { LANGS } from '@/lib/i18n/config';
 import type { RecruitWindow } from '@datagen/generators/recruit';
+import { emptyDict } from '@datagen/lib/lang';
 import {
   ADMIN_BASE_DEFAULT,
   ADMIN_TO_QUICK,
@@ -116,6 +124,9 @@ import {
   comicLangOf,
   commitPaths,
   dashboardState,
+  effectNewId,
+  effectsSearch,
+  effectsState,
   diffBanners,
   fillChangelogTemplate,
   fitNames,
@@ -133,6 +144,7 @@ import {
   saveBannerList,
   saveChangelogList,
   saveGearReco,
+  saveEffects,
   saveNames,
   tableUsage,
   translateNotes,
@@ -143,6 +155,9 @@ import {
   type ComicsDeps,
   type ComicUpload,
   type DashboardDisk,
+  type EffectChange,
+  type EffectsDeps,
+  type EffectsDisk,
   type GameTableDeps,
   type GameTablesDisk,
   type GearCatalog,
@@ -2023,7 +2038,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     ]);
   });
 
-  it('inbox : `inQuick` et son onglet quand quick a déjà la page — la table est vide aujourd’hui', async () => {
+  it('inbox : `inQuick` et son onglet quand quick a déjà la page', async () => {
     const { inbox } = await dashboardState(
       disk({
         inbox: async () => [item(), item({ key: 'tags', href: '/admin/tags' })],
@@ -2034,8 +2049,8 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ['extract:character', false, null],
       ['tags', true, 'tags'],
     ]);
-    // Aucune page de l'inbox n'est encore dans quick : les lots suivants la rempliront.
-    expect(ADMIN_TO_QUICK).toEqual({});
+    // La table du jour : l'éditeur des effets. Les lots suivants la rempliront.
+    expect(ADMIN_TO_QUICK).toEqual({ '/admin/editor/effects': 'effects' });
     expect(DASHBOARD_DISK.quickTabs).toBe(ADMIN_TO_QUICK);
   });
 
@@ -3386,6 +3401,449 @@ describe('queryGameTable, gameTableSchema — le store de l’admin, factice', (
     expect(d.describeTable).toHaveBeenCalledWith('ItemTemplet');
     expect(d.linkTargets).toHaveBeenCalledWith(schema.columns);
     expect(d.queryTable).not.toHaveBeenCalled();
+  });
+});
+
+/**
+ * Un glossaire FACTICE pour l'onglet « Effets » : six statuts (une paire, sa
+ * paire irremovable, deux sans miroir), une mécanique sans nom d'icône ni
+ * description, et le curé qui va avec — un nom français et une famille, une
+ * description, un effet masqué, une création.
+ */
+const fxEffect = (id: string, en: string, over: Partial<Effect> = {}): Effect => ({
+  id,
+  name: { ...emptyDict(), en },
+  desc: { ...emptyDict(), en: `${en}.` },
+  icon: '',
+  isDebuff: false,
+  origin: 'tooltip',
+  tooltips: [id],
+  ...over,
+});
+const EFFECT_CURATED: Record<string, EffectCurated> = {
+  '15': { name: { fr: 'Hâte' }, keys: ['HASTE'], tag: 'statBoosts' },
+  '27': { desc: { en: 'Cannot take damage.' } },
+  '1': { tag: 'utility', hidden: true },
+  UNCOUNTERABLE: {
+    name: { en: 'Uncounterable' },
+    desc: { en: 'Negates reactive strikes.' },
+    icon: 'IG_Buff_Seal_Counter',
+    keys: ['BT_SEAL_COUNTER', 'UNCOUNTERABLE'],
+    tag: 'utility',
+  },
+};
+const effectsDisk = (curated: Record<string, EffectCurated> = EFFECT_CURATED): EffectsDisk => ({
+  sources: (): EffectSources => ({
+    effects: Object.fromEntries(
+      [
+        fxEffect('15', 'Increased Speed', {
+          name: { ...emptyDict(), en: 'Increased Speed', jp: 'スピードUP', fr: 'Vitesse accrue' },
+          icon: 'IG_Buff_Stat_Speed',
+          tooltips: ['15', '2015'],
+        }),
+        fxEffect('26', 'Reduced Speed', {
+          name: { ...emptyDict(), en: 'Reduced Speed', fr: 'VIT réduite' },
+          icon: 'IG_Buff_Stat_Speed',
+          isDebuff: true,
+        }),
+        fxEffect('1015', 'Increased Speed', {
+          icon: 'IG_Buff_Stat_Speed_Interruption',
+          irremovable: true,
+        }),
+        fxEffect('1026', 'Reduced Speed', {
+          icon: 'IG_Buff_Stat_Speed_Interruption',
+          isDebuff: true,
+          irremovable: true,
+        }),
+        fxEffect('27', 'Invulnerability', { icon: 'IG_Buff_Invincible', desc: emptyDict() }),
+        fxEffect('1', 'Burned', { icon: 'IG_Buff_Dot_Burn', isDebuff: true }),
+        fxEffect('900', 'Zap', {
+          desc: emptyDict(),
+          isDebuff: true,
+          origin: 'type',
+          tooltips: [],
+        }),
+      ].map((e) => [e.id, e]),
+    ),
+    byTooltip: {},
+    byLabel: {},
+    byKey: {
+      buff: { 'BT_STAT|ST_SPEED': '15', INCREASED_SPEED: '15', 'BT_STAT|ST_SPEED_IR': '1015' },
+      debuff: { 'BT_STAT|ST_SPEED': '26', 'BT_STAT|ST_SPEED_IR': '1026', BT_DOT_BURN: '1' },
+    },
+    curated,
+  }),
+});
+
+describe('effectsState — le catalogue des effets, sources injectées', () => {
+  it('range comme l’admin : paires miroir, orphelins par nom, la création à sa place', () => {
+    const { catalog } = effectsState(effectsDisk());
+    expect(catalog.pairs.map((p) => [p.buff.id, p.debuff.id])).toEqual([
+      ['15', '26'],
+      ['1015', '1026'],
+    ]);
+    expect(catalog.orphanBuffs.map((e) => e.id)).toEqual(['27', 'UNCOUNTERABLE']);
+    expect(catalog.orphanDebuffs.map((e) => e.id)).toEqual(['1', '900']);
+  });
+
+  it('une ligne : le nom fusionné, l’origine, la famille et son libellé, les clés des deux index', () => {
+    const { catalog } = effectsState(effectsDisk());
+    const speed = catalog.pairs[0].buff;
+    expect(speed).toMatchObject({
+      id: '15',
+      name: 'Increased Speed',
+      icon: 'IG_Buff_Stat_Speed',
+      isDebuff: false,
+      origin: 'tooltip',
+      iconEditorial: false,
+      irremovable: false,
+      tag: 'statBoosts',
+      family: 'Stat Boosts',
+      overridden: true,
+      hidden: false,
+      noDesc: false,
+      keys: ['BT_STAT|ST_SPEED', 'INCREASED_SPEED', 'HASTE'],
+    });
+    // L'extrait SANS la curation d'un côté, l'entrée du disque de l'autre.
+    expect(speed.extracted?.name.en).toBe('Increased Speed');
+    expect(speed.extracted?.tooltips).toEqual(['15', '2015']);
+    expect(speed.curated).toEqual(EFFECT_CURATED['15']);
+    // Sans curation : une entrée vide, pas de famille.
+    expect(catalog.pairs[0].debuff).toMatchObject({
+      curated: {},
+      tag: null,
+      family: null,
+      overridden: false,
+    });
+  });
+
+  it('une création n’a pas d’extrait ; un debuff prend le libellé de SON côté', () => {
+    const { catalog } = effectsState(effectsDisk());
+    const made = catalog.orphanBuffs.find((e) => e.id === 'UNCOUNTERABLE');
+    expect(made).toMatchObject({
+      name: 'Uncounterable',
+      origin: 'curated',
+      extracted: null,
+      iconEditorial: true,
+      keys: ['BT_SEAL_COUNTER', 'UNCOUNTERABLE'],
+    });
+    const burn = catalog.orphanDebuffs.find((e) => e.id === '1');
+    expect(burn).toMatchObject({ tag: 'utility', family: 'Utility Debuffs', hidden: true });
+    expect(made?.family).toBe('Utility');
+  });
+
+  it('compte les « sans description », curation comprise, et sert ce que la page ne recopie pas', () => {
+    const state = effectsState(effectsDisk());
+    // 900 n'a ni description extraite ni curée ; 27 n'en a que par le curé.
+    expect(state.catalog.orphanDebuffs.find((e) => e.id === '900')?.noDesc).toBe(true);
+    expect(state.catalog.orphanBuffs.find((e) => e.id === '27')?.noDesc).toBe(false);
+    expect(state.counts).toEqual({
+      total: 8,
+      statuses: 6,
+      mechanics: 1,
+      creations: 1,
+      curated: 4,
+      noDesc: 1,
+      hidden: 1,
+    });
+    expect(state.families.buff).toEqual([
+      { value: 'statBoosts', label: 'Stat Boosts' },
+      { value: 'supporting', label: 'Supporting' },
+      { value: 'utility', label: 'Utility' },
+      { value: 'unique', label: 'Unique Buffs' },
+    ]);
+    expect(state.families.debuff.map((f) => f.label)).toContain('Control Effects (CC)');
+    expect(state.origins).toEqual({ tooltip: 'statut', type: 'mécanique', curated: 'création' });
+    expect(state.langs).toEqual(LANGS);
+    expect(state.sprite).toBe('images/ui/effect');
+    // Les icônes déjà portées, une fois chacune, triées : les suggestions du champ.
+    expect(state.icons).toEqual([
+      'IG_Buff_Dot_Burn',
+      'IG_Buff_Invincible',
+      'IG_Buff_Seal_Counter',
+      'IG_Buff_Stat_Speed',
+      'IG_Buff_Stat_Speed_Interruption',
+    ]);
+  });
+
+  it('les sources du jour se lisent : un catalogue non vide, chaque effet une fois', () => {
+    const { catalog, counts } = effectsState();
+    const ids = [
+      ...catalog.pairs.flatMap((p) => [p.buff.id, p.debuff.id]),
+      ...catalog.orphanBuffs.map((e) => e.id),
+      ...catalog.orphanDebuffs.map((e) => e.id),
+    ];
+    expect(ids.length).toBeGreaterThan(100);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(counts.total).toBe(ids.length);
+  });
+});
+
+describe('effectsSearch, effectNewId — la règle de l’admin, jouée au serveur', () => {
+  it('rend, par effet qui répond, le champ qui a répondu', () => {
+    // « tes » : le milieu de « Vitesse accrue » ne répond plus.
+    expect(effectsSearch('tes', effectsDisk())).toEqual({ q: 'tes', matches: {} });
+    expect(effectsSearch('spe', effectsDisk()).matches).toEqual({
+      '15': { field: 'name.en', value: 'Increased Speed' },
+      '26': { field: 'name.en', value: 'Reduced Speed' },
+      '1015': { field: 'name.en', value: 'Increased Speed' },
+      '1026': { field: 'name.en', value: 'Reduced Speed' },
+    });
+    expect(effectsSearch('BT_SP', effectsDisk()).matches?.['26']).toEqual({
+      field: 'key',
+      value: 'BT_STAT|ST_SPEED',
+    });
+    expect(effectsSearch('スピ', effectsDisk()).matches?.['15']).toEqual({
+      field: 'name.jp',
+      value: 'スピードUP',
+    });
+    // Le nom curé se cherche (accent replié), la clé curée aussi.
+    expect(effectsSearch('hate', effectsDisk()).matches).toEqual({
+      '15': { field: 'name.fr', value: 'Hâte' },
+    });
+    expect(effectsSearch('haste', effectsDisk()).matches).toEqual({
+      '15': { field: 'key', value: 'HASTE' },
+    });
+    expect(effectsSearch('seal', effectsDisk()).matches).toEqual({
+      UNCOUNTERABLE: { field: 'key', value: 'BT_SEAL_COUNTER' },
+    });
+  });
+
+  it('une saisie vide, ou qui n’est pas un texte : `null`, tout le catalogue reste', () => {
+    expect(effectsSearch('  ', effectsDisk())).toEqual({ q: '  ', matches: null });
+    expect(effectsSearch(null, effectsDisk())).toEqual({ q: '', matches: null });
+  });
+
+  it('forge l’id d’une création comme l’admin, et dit s’il est pris', () => {
+    expect(effectNewId(' fixed damage ', effectsDisk())).toEqual({
+      id: 'FIXED_DAMAGE',
+      exists: false,
+    });
+    // Pris par une création curée, ou par un effet extrait.
+    expect(effectNewId('uncounterable', effectsDisk())).toEqual({
+      id: 'UNCOUNTERABLE',
+      exists: true,
+    });
+    expect(effectNewId('15', effectsDisk())).toEqual({ id: '15', exists: true });
+    expect(effectNewId('   ', effectsDisk())).toEqual({ id: '', exists: false });
+    expect(effectNewId(undefined, effectsDisk())).toEqual({ id: '', exists: false });
+  });
+});
+
+describe('saveEffects — store et git injectés', () => {
+  /** Le disque et les deux écritures, factices : elles notent leurs appels. */
+  function deps(
+    over: {
+      curated?: Record<string, EffectCurated>;
+      errors?: Record<string, string[]>;
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      upsert: [] as [string, EffectCurated][],
+      git: [] as [string[], string][],
+    };
+    const fake: EffectsDeps = {
+      ...effectsDisk(over.curated),
+      upsert: async (id, curated) => {
+        calls.upsert.push([id, curated]);
+        return over.errors?.[id] ?? [];
+      },
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  const change = (
+    id: string,
+    curated: EffectCurated,
+    over: Partial<Omit<EffectChange, 'id' | 'curated'>> = {},
+  ): EffectChange => ({ id, curated, was: EFFECT_CURATED[id] ?? {}, ...over });
+
+  it('un effet : le store de l’admin, UN commit du fichier curé, à son nom anglais', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects([change('26', { tag: 'statReduction', note: 'famille' })], fake);
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['Reduced Speed (26) : entrée curée écrite.', 'git : fait'],
+      refused: [],
+      stale: [],
+      saved: ['26'],
+      reasons: {},
+    });
+    expect(calls.upsert).toEqual([['26', { tag: 'statReduction', note: 'famille' }]]);
+    expect(calls.git).toEqual([[['data/curated/effects.json'], 'chore(effects): Reduced Speed']]);
+  });
+
+  it('un lot : un appel au store par effet, UN commit « N effets »', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects(
+      [
+        change('26', { hidden: true }),
+        change('15', { ...EFFECT_CURATED['15'], name: { en: 'Hasted' } }),
+      ],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, saved: ['26', '15'], refused: [] });
+    expect(calls.upsert.map(([id]) => id)).toEqual(['26', '15']);
+    expect(calls.git).toEqual([[['data/curated/effects.json'], 'chore(effects): 2 effets']]);
+    // Le commit et le journal portent le nom d'APRÈS l'enregistrement.
+    expect(out.log).toContain('Hasted (15) : entrée curée écrite.');
+  });
+
+  it('ramène l’entrée à son contrat : blancs retirés, vides et champs inconnus absents', async () => {
+    const { calls, fake } = deps();
+    await saveEffects(
+      [
+        change('26', {
+          name: { en: '  Slowed ', fr: '   ', xx: 'hors langues' },
+          desc: {},
+          icon: ' IG_Buff_Slow ',
+          keys: [' SLOW ', '', 'SLOWED'],
+          tag: ' ',
+          hidden: false,
+          note: '',
+          intrus: 1,
+        } as unknown as EffectCurated),
+      ],
+      fake,
+    );
+    expect(calls.upsert).toEqual([
+      ['26', { name: { en: 'Slowed' }, icon: 'IG_Buff_Slow', keys: ['SLOW', 'SLOWED'] }],
+    ]);
+  });
+
+  it('tout vider retire l’entrée curée d’un effet extrait', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects([change('15', {})], fake);
+    expect(calls.upsert).toEqual([['15', {}]]);
+    expect(out.log[0]).toBe('Increased Speed (15) : entrée curée retirée, l’extrait fait foi.');
+    expect(calls.git[0][1]).toBe('chore(effects): Increased Speed');
+  });
+
+  it('le disque porte déjà l’entrée : ni store ni commit, et ce n’est pas un échec', async () => {
+    const { calls, fake } = deps();
+    // La même entrée, ses langues dans un autre ordre.
+    const out = await saveEffects(
+      [change('15', { tag: 'statBoosts', keys: ['HASTE'], name: { fr: 'Hâte' } })],
+      fake,
+    );
+    expect(out).toMatchObject({
+      ok: true,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+      saved: [],
+      refused: [],
+    });
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('le disque a changé depuis le chargement : refusé et `stale`, les autres partent', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects(
+      [
+        change('15', { tag: 'utility' }, { was: { tag: 'statBoosts' } }),
+        change('26', { tag: 'cc' }),
+      ],
+      fake,
+    );
+    expect(out.ok).toBe(false);
+    expect(out.saved).toEqual(['26']);
+    expect(out.refused).toEqual(['15']);
+    expect(out.stale).toEqual(['15']);
+    expect(out.reasons).toEqual({
+      '15': 'Increased Speed (15) : le disque a changé depuis le chargement.',
+    });
+    expect(calls.upsert.map(([id]) => id)).toEqual(['26']);
+    expect(calls.git).toEqual([[['data/curated/effects.json'], 'chore(effects): Reduced Speed']]);
+  });
+
+  it('les refus du store sont rendus tels quels, sans commit', async () => {
+    const { calls, fake } = deps({ errors: { '26': ['effectCurated[26].tag — attendu string'] } });
+    const out = await saveEffects([change('26', { tag: 'cc' })], fake);
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'REFUSÉ — Reduced Speed (26) : effectCurated[26].tag — attendu string',
+        'Rien à enregistrer.',
+      ],
+      refused: ['26'],
+      stale: [],
+      saved: [],
+      reasons: { '26': 'Reduced Speed (26) : effectCurated[26].tag — attendu string' },
+    });
+    expect(calls.git).toEqual([]);
+  });
+
+  it('une création : un id nouveau, forgé comme l’admin, un nom anglais', async () => {
+    const { calls, fake } = deps();
+    const made = { name: { en: 'Fixed Damage' }, keys: ['FIXED_DAMAGE'], isDebuff: false };
+    const out = await saveEffects([change('FIXED_DAMAGE', made, { create: true })], fake);
+    expect(out).toMatchObject({ ok: true, saved: ['FIXED_DAMAGE'], refused: [] });
+    expect(out.log[0]).toBe('Fixed Damage (FIXED_DAMAGE) : effet créé.');
+    expect(calls.upsert).toEqual([['FIXED_DAMAGE', made]]);
+    expect(calls.git[0][1]).toBe('chore(effects): Fixed Damage');
+  });
+
+  it('une création en doublon est refusée : l’id d’un effet extrait, ou d’une création', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects(
+      [
+        change('15', { name: { en: 'Mine' } }, { create: true, was: {} }),
+        change('UNCOUNTERABLE', { name: { en: 'Mine' } }, { create: true, was: {} }),
+      ],
+      fake,
+    );
+    expect(out.ok).toBe(false);
+    expect(out.refused).toEqual(['15', 'UNCOUNTERABLE']);
+    expect(out.stale).toEqual([]);
+    expect(out.reasons['15']).toBe('15 existe déjà : l’ouvrir pour l’éditer, pas le créer.');
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('une création sans nom anglais, ou sous un id que l’admin n’aurait pas forgé : refusée', async () => {
+    const { calls, fake } = deps();
+    const out = await saveEffects(
+      [
+        change('NO_NAME', { desc: { en: 'x' } }, { create: true }),
+        change('bad id', { name: { en: 'Bad' } }, { create: true }),
+        change('', { name: { en: 'Empty' } }, { create: true }),
+        // Une création du disque ne se vide pas non plus.
+        change('UNCOUNTERABLE', {}),
+      ],
+      fake,
+    );
+    expect(out.refused).toEqual(['NO_NAME', 'bad id', '', 'UNCOUNTERABLE']);
+    expect(out.reasons).toEqual({
+      NO_NAME: 'NO_NAME (NO_NAME) : une création porte au moins un nom anglais.',
+      'bad id': 'id de création invalide : « bad id » (attendu BAD_ID).',
+      '': 'id de création invalide : «  » (attendu un id).',
+      UNCOUNTERABLE: 'Uncounterable (UNCOUNTERABLE) : une création porte au moins un nom anglais.',
+    });
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('un effet inconnu sans `create`, un lot vide : rien ne s’écrit', async () => {
+    const { calls, fake } = deps();
+    const ghost = await saveEffects([change('GHOST', { name: { en: 'Ghost' } })], fake);
+    expect(ghost).toMatchObject({ ok: false, refused: ['GHOST'] });
+    expect(ghost.reasons.GHOST).toBe('effet inconnu : GHOST.');
+    for (const none of [[], null as unknown as EffectChange[]])
+      expect(await saveEffects(none, fake)).toMatchObject({
+        ok: false,
+        log: ['Aucune modification à enregistrer.'],
+      });
+    expect(calls).toEqual({ upsert: [], git: [] });
+  });
+
+  it('un commit qui échoue : l’échec est rendu, l’effet reste « enregistré » sur le disque', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué : hook'] } });
+    const out = await saveEffects([change('26', { hidden: true })], fake);
+    expect(out).toMatchObject({ ok: false, saved: ['26'], refused: [] });
+    expect(out.log.at(-1)).toBe('git commit a échoué : hook');
   });
 });
 

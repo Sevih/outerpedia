@@ -6,7 +6,8 @@
  * demande une action (le tableau de bord, qui ne fait que lire), mettre à jour
  * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
- * Discord que le bot poste, curer un nom court ou des alias de recherche, tenir
+ * Discord que le bot poste, curer un nom court ou des alias de recherche, curer
+ * un effet (son nom, sa description, son icône, sa famille — ou en créer un), tenir
  * le journal du site (le changelog, par gabarits), lire une table brute du jeu
  * (« Tables du jeu »). Tous committent, sauf le message Discord et les deux
  * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
@@ -45,6 +46,7 @@ import {
   BANNERS_DEPS,
   CHANGELOG_DEPS,
   CHANGELOG_DISK,
+  EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
   NAMES_DEPS,
@@ -55,6 +57,9 @@ import {
   changelogState,
   currentCoupons,
   dashboardState,
+  effectNewId,
+  effectsSearch,
+  effectsState,
   fillChangelogTemplate,
   fitNames,
   gameTableSchema,
@@ -72,6 +77,7 @@ import {
   saveBannerList,
   saveChangelogList,
   saveCouponList,
+  saveEffects,
   saveGearReco,
   saveNames,
   saveRanks,
@@ -80,6 +86,7 @@ import {
   translateNotes,
   videoTargets,
   type ComicBatch,
+  type EffectChange,
   type GitState,
   type NameChange,
   type Outcome,
@@ -673,6 +680,35 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/names') {
     const { changes } = await body<{ changes: NameChange[] }>(req);
     await stream(res, (report) => withGit(saveNames(changes, NAMES_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/effects/state') {
+    // Lu du disque à chaque appel, comme les noms : le catalogue des effets
+    // tel que l'admin le range (paires buff ↔ debuff, orphelins), l'extrait et
+    // l'entrée curée de chacun, les familles, les langues, le dossier d'icônes.
+    json(res, effectsState());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/effects/search') {
+    // La recherche (`?q=`) : la règle de l'admin, jouée au serveur. Par effet
+    // qui répond, le champ qui a répondu. Rien ne s'écrit.
+    json(res, effectsSearch(url.searchParams.get('q')));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/effects/id') {
+    // « ＋ effet » : l'id que donnerait la saisie (`?raw=`), et s'il est pris.
+    json(res, effectNewId(url.searchParams.get('raw')));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/effects') {
+    // Un lot d'entrées curées (une création = `create`, sur un id nouveau) :
+    // le store de l'admin par effet, puis un commit du fichier curé.
+    const { changes } = await body<{ changes: EffectChange[] }>(req);
+    await stream(res, (report) => withGit(saveEffects(changes, EFFECTS_DEPS, report)));
     return;
   }
 

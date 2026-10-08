@@ -2,6 +2,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 import { Window } from 'happy-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { newEffectId } from '@/lib/admin/effect-catalog';
+import { effectHaystack, effectMatches } from '@/lib/admin/effect-search';
 import type { GitState } from './actions';
 import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
@@ -18,6 +20,7 @@ const TABS = [
   'ranks',
   'gear',
   'gamedata',
+  'effects',
   'discord',
   'names',
 ];
@@ -62,7 +65,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : douze sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : treize sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -211,6 +214,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/ranks',
       '/api/gear-reco',
       '/api/names',
+      '/api/effects',
       '/api/discord/send',
       '/api/quit',
     ])
@@ -225,6 +229,10 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/changelog'))).toEqual([
       '/api/changelog/preview',
     ]);
+  });
+
+  it('des effets, ne relaie aucun POST : la recherche et l’id d’une création sont des GET', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/effects'))).toEqual([]);
   });
 
   it('des tables du jeu, ne relaie aucun POST : l’onglet ne fait que des GET', () => {
@@ -645,7 +653,6 @@ describe('Noms — la page, sur le vrai markup', () => {
     expect(group?.dataset.group).toBe('tools');
     expect(group?.classList.contains('soon')).toBe(false);
     expect(all('#groups .gtab.soon').map((b) => b.textContent?.trim().split(/\s+/)[0])).toEqual([
-      'Éditeurs',
       'Guides',
     ]);
     expect(el('tab-names').hidden).toBe(true);
@@ -881,6 +888,766 @@ describe('Noms — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-names').hidden).toBe(true);
+  });
+});
+
+describe('Effets — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  const LANGS = ['en', 'jp', 'kr', 'zh', 'fr', 'es'];
+
+  interface Curated {
+    name?: Record<string, string>;
+    desc?: Record<string, string>;
+    icon?: string;
+    isDebuff?: boolean;
+    keys?: string[];
+    tag?: string;
+    hidden?: boolean;
+    note?: string;
+  }
+  interface Row {
+    id: string;
+    name: string;
+    icon: string;
+    isDebuff: boolean;
+    origin: string;
+    iconEditorial: boolean;
+    irremovable: boolean;
+    tag: string | null;
+    family: string | null;
+    overridden: boolean;
+    hidden: boolean;
+    noDesc: boolean;
+    keys: string[];
+    extracted: {
+      name: Record<string, string>;
+      desc: Record<string, string>;
+      icon: string;
+      isDebuff: boolean;
+      tooltips: string[];
+    } | null;
+    curated: Curated;
+  }
+  const row = (id: string, name: string, over: Partial<Row> = {}): Row => ({
+    id,
+    name,
+    icon: `IG_${id}`,
+    isDebuff: false,
+    origin: 'tooltip',
+    iconEditorial: false,
+    irremovable: false,
+    tag: null,
+    family: null,
+    overridden: false,
+    hidden: false,
+    noDesc: false,
+    keys: [],
+    extracted: {
+      name: { en: name },
+      desc: { en: `${name}.` },
+      icon: `IG_${id}`,
+      isDebuff: Boolean(over.isDebuff),
+      tooltips: [id],
+    },
+    curated: {},
+    ...over,
+  });
+
+  /** Une paire, une création et deux debuffs sans miroir — un masqué, un sans description. */
+  const catalog = () => ({
+    pairs: [
+      {
+        buff: row('15', 'Increased Speed', {
+          keys: ['BT_STAT|ST_SPEED', 'INCREASED_SPEED'],
+          extracted: {
+            name: { en: 'Increased Speed', jp: 'スピードUP', fr: 'Vitesse accrue' },
+            desc: { en: 'Increases <color=#fff>Speed</color>.\\nStacks.' },
+            icon: 'IG_15',
+            isDebuff: false,
+            tooltips: ['15', '2015'],
+          },
+        }),
+        debuff: row('26', 'Reduced Speed', { isDebuff: true, keys: ['BT_STAT|ST_SPEED'] }),
+      },
+    ],
+    orphanBuffs: [
+      row('UNCOUNTERABLE', 'Uncounterable', {
+        icon: 'IG_Buff_Seal_Counter',
+        origin: 'curated',
+        iconEditorial: true,
+        tag: 'utility',
+        family: 'Utility',
+        overridden: true,
+        keys: ['BT_SEAL_COUNTER'],
+        extracted: null,
+        curated: {
+          name: { en: 'Uncounterable', fr: 'Incontrable' },
+          icon: 'IG_Buff_Seal_Counter',
+          keys: ['BT_SEAL_COUNTER'],
+          tag: 'utility',
+          note: 'création',
+        },
+      }),
+    ],
+    orphanDebuffs: [
+      row('1', 'Burned', {
+        isDebuff: true,
+        hidden: true,
+        overridden: true,
+        curated: { hidden: true },
+      }),
+      row('900', 'Zap', { icon: '', isDebuff: true, origin: 'type', noDesc: true }),
+    ],
+  });
+  const rowsOf = (c: ReturnType<typeof catalog>): Row[] => [
+    ...c.pairs.flatMap((p) => [p.buff, p.debuff]),
+    ...c.orphanBuffs,
+    ...c.orphanDebuffs,
+  ];
+
+  type Call = { path: string; body?: unknown };
+  type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Noms : la VRAIE
+   * coquille assemblée, le vrai `lib.js` et le vrai `tabs/effects.js`. `fetch`
+   * est factice : il sert `disk.catalog`, répond à la recherche par la VRAIE
+   * règle (`effectMatches` sur les lignes servies — la raison affichée est
+   * celle que le serveur rendrait), forge l'id d'une création comme l'admin,
+   * et note tout ce que la page demande.
+   */
+  async function effects(
+    opts: {
+      hash?: string;
+      saved?: (body: unknown) => Saved;
+      edit?: (c: ReturnType<typeof catalog>) => void;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const disk = { catalog: catalog() };
+    opts.edit?.(disk.catalog);
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/effects')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/effects/state')
+        return answer({
+          catalog: disk.catalog,
+          counts: {
+            total: 5,
+            statuses: 3,
+            mechanics: 1,
+            creations: 1,
+            curated: 2,
+            noDesc: 1,
+            hidden: 1,
+          },
+          families: {
+            buff: [
+              { value: 'statBoosts', label: 'Stat Boosts' },
+              { value: 'utility', label: 'Utility' },
+            ],
+            debuff: [
+              { value: 'cc', label: 'Control Effects (CC)' },
+              { value: 'utility', label: 'Utility Debuffs' },
+            ],
+          },
+          origins: { tooltip: 'statut', type: 'mécanique', curated: 'création' },
+          langs: LANGS,
+          sprite: 'images/ui/effect',
+          icons: ['IG_15', 'IG_Buff_Seal_Counter'],
+        });
+      if (url.pathname === '/api/effects/search') {
+        const q = url.searchParams.get('q') ?? '';
+        const matches: Record<string, unknown> = {};
+        for (const r of rowsOf(disk.catalog)) {
+          const name = { ...r.extracted?.name, ...r.curated.name };
+          const hit = effectMatches(effectHaystack({ id: r.id, keys: r.keys, name }), q);
+          if (hit) matches[r.id] = hit;
+        }
+        return answer({ q, matches });
+      }
+      if (url.pathname === '/api/effects/id') {
+        const id = newEffectId(url.searchParams.get('raw') ?? '');
+        return answer({ id, exists: rowsOf(disk.catalog).some((r) => r.id === id) });
+      }
+      if (url.pathname === '/api/effects')
+        return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'] });
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'effects.js'));
+    lib.sections.start();
+    const settle = () => new Promise((done) => setTimeout(done, 0));
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    const type = (input: HTMLInputElement, value: string) => {
+      input.value = value;
+      fire(input, 'input');
+    };
+    const cell = (b: Element | null): string =>
+      b?.classList.contains('x-row')
+        ? `${b.classList.contains('x-dim') ? '~' : ''}${(b as HTMLElement).dataset.id}`
+        : '';
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      disk,
+      settle,
+      type,
+      fire,
+      /** Le catalogue tel qu'il se lit : une rangée par ligne, `~` devant un miroir atténué. */
+      grid: () =>
+        all('#x-rows > *').map((line) =>
+          line.classList.contains('x-sep')
+            ? line.textContent
+            : [...line.children].map((b) => cell(b)).join(' | '),
+        ),
+      /** Une ligne : son nom, ses badges, sa seconde ligne, sa raison, son point. */
+      line: (id: string) => {
+        const b = all('#x-rows .x-row').find((r) => r.dataset.id === id);
+        return {
+          name: b?.querySelector('.x-name')?.textContent,
+          badges: [...(b?.querySelectorAll('.badge') ?? [])].map((x) => x.textContent),
+          meta: b?.querySelector('.x-meta')?.textContent,
+          why: b?.querySelector('.x-why')?.textContent ?? '',
+          dot: b?.querySelector('.pt')?.className ?? '',
+          icon: b?.querySelector('.x-ico')?.className,
+        };
+      },
+      open: (id: string) =>
+        all('#x-rows .x-row')
+          .find((b) => b.dataset.id === id)
+          ?.click(),
+      /** Cherche, et attend la réponse (200 ms après la dernière frappe). */
+      search: async (q: string) => {
+        vi.useFakeTimers();
+        type(el('x-q'), q);
+        await vi.advanceTimersByTimeAsync(200);
+        vi.useRealTimers();
+        await settle();
+      },
+      check: (id: string, on = true) => {
+        el(id).checked = on;
+        fire(el(id), 'input');
+      },
+      pick: (id: string, value: string) => {
+        el(id).value = value;
+        fire(el(id), 'input');
+      },
+      /** Un champ de la fiche, par son `data-f` (et sa langue). */
+      field: (f: string, lang?: string) =>
+        all(
+          `#x-sheet [data-f="${f}"]${lang ? `[data-lang="${lang}"]` : ''}`,
+        )[0] as HTMLInputElement,
+      /** L'option qu'un menu porte `selected` (cf. `picked` du journal du site). */
+      picked: (select: HTMLElement) =>
+        (select.querySelector('option[selected]') as HTMLOptionElement | null)?.value,
+      options: (select: HTMLElement) =>
+        [...select.querySelectorAll('option')].map((o) => o.textContent),
+    };
+  }
+
+  it('le groupe Éditeurs n’est plus « à venir » : il ouvre Effets, en pleine largeur', async () => {
+    const { all, el } = await effects();
+    const group = all('#groups button').find((b) => b.textContent?.includes('Éditeurs'));
+    expect(group?.dataset.group).toBe('editors');
+    expect(group?.classList.contains('soon')).toBe(false);
+    expect(el('tab-effects').hidden).toBe(true);
+    group?.click();
+    expect(el('tab-effects').hidden).toBe(false);
+    expect(all('#tabs [data-tab="effects"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(all('#tabs [data-tab="effects"]')[0].textContent).toBe('Effets');
+    expect(all('main')[0].classList.contains('wide')).toBe(true);
+    // Pas de menu latéral : une recherche, des filtres, le catalogue, la fiche.
+    expect(all('#tab-effects aside, #tab-effects nav')).toEqual([]);
+  });
+
+  it('le catalogue : les paires côte à côte, puis les effets sans miroir', async () => {
+    const page = await effects();
+    expect(page.grid()).toEqual(['15 | 26', 'Sans miroir (3)', 'UNCOUNTERABLE | 1', ' | 900']);
+    expect(page.el('x-heads').hidden).toBe(false);
+    expect(page.el('x-total').textContent).toBe(
+      '5 effets — 3 statuts, 1 mécanique, 1 création · 2 curés · 1 sans description · 1 masqué',
+    );
+    expect(page.line('15')).toEqual({
+      name: 'Increased Speed',
+      badges: ['buff'],
+      meta: '15 · statut',
+      why: '',
+      dot: '',
+      icon: 'x-ico buff',
+    });
+    // Une création curée : son origine, sa famille ; pas de « curé » en double.
+    expect(page.line('UNCOUNTERABLE').meta).toBe('UNCOUNTERABLE · création · Utility');
+    // Un effet extrait qui porte une entrée curée le dit.
+    expect(page.line('1')).toMatchObject({
+      badges: ['debuff', 'masqué'],
+      meta: '1 · statut · curé',
+      icon: 'x-ico debuff',
+    });
+    expect(page.line('900')).toMatchObject({
+      badges: ['debuff', 'sans description', 'sans icône'],
+      meta: '900 · mécanique',
+      icon: 'x-ico none',
+    });
+    expect(page.all('#x-rows .badge.warn').map((b) => b.textContent)).toEqual(['sans description']);
+  });
+
+  it('la tuile : l’icône en masque teinté, sous la base des images ; « Interruption » garde ses couleurs', async () => {
+    const page = await effects({
+      edit: (c) => (c.pairs[0].debuff.icon = 'IG_Buff_Stat_Speed_Interruption_D'),
+    });
+    const tinted = page.all('#x-rows .x-row[data-id="15"] .x-ico')[0];
+    expect(tinted.getAttribute('style')).toBe(
+      "--x-src: url('https://img.test/images/ui/effect/IG_15.webp')",
+    );
+    expect(tinted.querySelectorAll('i')).toHaveLength(3);
+    expect(tinted.getAttribute('aria-hidden')).toBe('true');
+    const native = page.all('#x-rows .x-row[data-id="26"] .x-ico')[0];
+    expect(native.className).toBe('x-ico');
+    expect(native.querySelectorAll('i')).toHaveLength(0);
+    expect(native.querySelector('img')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/effect/IG_Buff_Stat_Speed_Interruption_D.webp',
+    );
+  });
+
+  it('la recherche part 200 ms après la dernière frappe, et chaque ligne dit POURQUOI elle sort', async () => {
+    const page = await effects();
+    vi.useFakeTimers();
+    page.type(page.el('x-q'), 'sp');
+    page.type(page.el('x-q'), 'spe');
+    await vi.advanceTimersByTimeAsync(199);
+    expect(page.calls.filter((c) => c.path.includes('/search'))).toEqual([]);
+    await vi.advanceTimersByTimeAsync(1);
+    vi.useRealTimers();
+    await page.settle();
+    expect(page.calls.filter((c) => c.path.includes('/search'))).toEqual([
+      { path: '/api/effects/search?q=spe' },
+    ]);
+    expect(page.grid()).toEqual(['15 | 26']);
+    expect(page.line('15').why).toBe('nom en');
+    expect(page.line('26').why).toBe('nom en');
+    expect(page.el('x-total').textContent).toBe('2 sur 5 effets');
+
+    // Par la clé : la raison la nomme.
+    await page.search('BT_SP');
+    expect(page.grid()).toEqual(['15 | 26']);
+    expect(page.line('15').why).toBe('clé BT_STAT|ST_SPEED');
+
+    // Par une autre langue que celle de la ligne : la raison montre le nom trouvé.
+    await page.search('スピ');
+    expect(page.line('15').why).toBe('nom jp · スピードUP');
+    // La paire reste entière : le miroir qui ne répond pas est atténué, sans raison.
+    expect(page.grid()).toEqual(['15 | ~26']);
+    expect(page.line('26').why).toBe('');
+    await page.search('accrue');
+    expect(page.line('15').why).toBe('nom fr · Vitesse accrue');
+
+    await page.search('seal');
+    expect(page.grid()).toEqual(['Sans miroir (1)', 'UNCOUNTERABLE | ']);
+    expect(page.line('UNCOUNTERABLE').why).toBe('clé BT_SEAL_COUNTER');
+    await page.search('900');
+    expect(page.line('900').why).toBe('id 900');
+  });
+
+  it('« tes » ne sort plus Increased Speed : la liste le dit, plutôt que de rester blanche', async () => {
+    const page = await effects();
+    await page.search('tes');
+    expect(page.grid()).toEqual([]);
+    expect(page.el('x-empty').hidden).toBe(false);
+    expect(page.el('x-empty').textContent).toBe('Aucun effet ne correspond.');
+    expect(page.el('x-heads').hidden).toBe(true);
+    expect(page.el('x-total').textContent).toBe('0 sur 5 effets');
+
+    // Champ vidé : tout revient aussitôt, sans attendre ni demander.
+    const asked = page.calls.length;
+    page.type(page.el('x-q'), '');
+    expect(page.grid()).toHaveLength(4);
+    expect(page.calls).toHaveLength(asked);
+  });
+
+  it('les filtres : une nature = une colonne ; sans description, curés seulement, masqués', async () => {
+    const page = await effects();
+    page.pick('x-nature', 'debuff');
+    expect(page.grid()).toEqual(['26', 'Sans miroir (2)', '1', '900']);
+    expect(page.el('x-rows').classList.contains('one')).toBe(true);
+    expect(page.el('x-heads').hidden).toBe(true);
+    expect(page.el('x-total').textContent).toBe('3 sur 5 effets');
+    page.pick('x-nature', 'buff');
+    expect(page.grid()).toEqual(['15', 'Sans miroir (1)', 'UNCOUNTERABLE']);
+    page.pick('x-nature', '');
+    expect(page.el('x-rows').classList.contains('one')).toBe(false);
+
+    page.check('x-nodesc');
+    expect(page.grid()).toEqual(['Sans miroir (1)', ' | 900']);
+    page.check('x-nodesc', false);
+    page.check('x-curated');
+    expect(page.grid()).toEqual(['Sans miroir (2)', 'UNCOUNTERABLE | 1']);
+    page.check('x-hidden');
+    expect(page.grid()).toEqual(['Sans miroir (1)', ' | 1']);
+    page.check('x-curated', false);
+    page.check('x-hidden', false);
+
+    // Les filtres se combinent avec la recherche.
+    await page.search('spe');
+    page.pick('x-nature', 'debuff');
+    expect(page.grid()).toEqual(['26']);
+  });
+
+  it('la fiche d’un effet extrait : ce que le jeu fournit, et l’extrait en placeholder', async () => {
+    const page = await effects();
+    expect(page.el('x-sheet').textContent?.trim()).toBe('Choisir un effet dans le catalogue.');
+    page.open('15');
+    expect(location.hash).toBe('#effects/15');
+    expect(page.all('#x-rows .x-row[aria-current="true"]').map((b) => b.dataset.id)).toEqual([
+      '15',
+    ]);
+    expect(page.el('x-title').textContent).toBe('Increased Speed');
+    expect(page.all('#x-sheet .x-who .x-meta')[0].textContent).toBe('15 · statut · icône du jeu');
+    // Balises retirées, `\n` littéraux rendus en sauts de ligne.
+    expect(page.all('#x-sheet .x-desc')[0].textContent).toBe('Increases Speed.\nStacks.');
+    expect(page.all('#x-sheet .x-key').map((c) => c.textContent)).toEqual([
+      'BT_STAT|ST_SPEED',
+      'INCREASED_SPEED',
+    ]);
+    expect(page.all('#x-sheet .x-ext .x-meta')[0].textContent).toBe(
+      'Tooltips fusionnés : 15, 2015',
+    );
+
+    // Six langues pour le nom, six pour la description, vides : l'extrait est en gris.
+    expect(page.all('#x-sheet [data-f="name"]')).toHaveLength(6);
+    expect(page.all('#x-sheet [data-f="desc"]')).toHaveLength(6);
+    expect(page.field('name', 'en').value).toBe('');
+    expect(page.field('name', 'en').placeholder).toBe('Increased Speed');
+    expect(page.field('name', 'fr').placeholder).toBe('Vitesse accrue');
+    expect(page.field('name', 'kr').placeholder).toBe('');
+    expect(page.field('desc', 'en').placeholder).toBe(
+      'Increases <color=#fff>Speed</color>.\\nStacks.',
+    );
+    expect(page.field('icon').placeholder).toBe('IG_15');
+    expect(page.field('icon').getAttribute('list')).toBe('x-icons');
+    expect(page.all('#x-icons option').map((o) => o.getAttribute('value'))).toEqual([
+      'IG_15',
+      'IG_Buff_Seal_Counter',
+    ]);
+    expect(page.options(page.field('isDebuff'))).toEqual([
+      'celle de l’extrait (buff)',
+      'buff',
+      'debuff',
+    ]);
+    expect(page.options(page.field('tag'))).toEqual([
+      'par défaut (taxonomie)',
+      'Stat Boosts',
+      'Utility',
+    ]);
+    expect(page.field('hidden').checked).toBe(false);
+    expect(page.el('x-sheet').textContent).toContain('retire l’entrée curée');
+  });
+
+  it('la fiche d’une création : son entrée curée dans les champs, l’anglais requis', async () => {
+    const page = await effects({ hash: '#effects/UNCOUNTERABLE' });
+    // `#effects/<id>` : l'onglet ouvert sur la fiche, sans clic.
+    expect(page.el('tab-effects').hidden).toBe(false);
+    expect(page.el('x-title').textContent).toBe('Uncounterable');
+    expect(page.all('#x-sheet .x-who .x-meta')[0].textContent).toBe(
+      'UNCOUNTERABLE · création · icône du wiki',
+    );
+    expect(page.all('#x-sheet .x-ext')).toEqual([]);
+    expect(page.el('x-sheet').textContent).toContain('Aucune donnée extraite pour cet id');
+    expect(page.field('name', 'en').value).toBe('Uncounterable');
+    expect(page.field('name', 'fr').value).toBe('Incontrable');
+    expect(page.field('icon').value).toBe('IG_Buff_Seal_Counter');
+    expect(page.field('keys').value).toBe('BT_SEAL_COUNTER');
+    expect(page.field('note').value).toBe('création');
+    expect(page.picked(page.field('tag'))).toBe('utility');
+    expect(page.options(page.field('isDebuff'))[0]).toBe('buff (par défaut)');
+    expect(page.el('x-sheet').textContent).toContain(
+      'Une création garde au moins son nom anglais.',
+    );
+
+    // Un id inconnu dans l'adresse : l'onglet s'ouvre, sans fiche.
+    const ghost = await effects({ hash: '#effects/ghost' });
+    expect(ghost.el('tab-effects').hidden).toBe(false);
+    expect(ghost.el('x-sheet').textContent?.trim()).toBe('Choisir un effet dans le catalogue.');
+  });
+
+  it('la saisie : le point, le badge, la savebar ; la nature choisie change les familles proposées', async () => {
+    const page = await effects();
+    page.open('15');
+    expect(page.el('x-count').textContent).toBe('aucune modification');
+    expect(page.el('x-save').disabled).toBe(true);
+
+    page.type(page.field('name', 'en'), 'Haste');
+    expect(page.el('x-title').textContent).toBe('Haste');
+    expect(page.line('15').dot).toBe('pt edit');
+    expect(page.el('x-badges').textContent).toBe('buff' + 'modifié');
+    expect(page.el('x-count').textContent).toBe('1 effet modifié');
+    expect(page.el('x-save').disabled).toBe(false);
+
+    // Debuff : les familles de ce côté, la tuile repeinte, le badge de la fiche.
+    page.pick('x-isdebuff', 'true');
+    expect(page.options(page.field('tag'))).toEqual([
+      'par défaut (taxonomie)',
+      'Control Effects (CC)',
+      'Utility Debuffs',
+    ]);
+    expect(page.el('x-tag-label').textContent).toBe('Famille éditoriale (debuff)');
+    expect(page.all('#x-preview .x-ico')[0].className).toBe('x-ico lg debuff');
+    expect(page.el('x-badges').textContent).toBe('debuff' + 'modifié');
+    // Une famille de l'AUTRE côté reste proposée : elle ne s'efface pas en douce.
+    page.pick('x-tag', 'cc');
+    page.pick('x-isdebuff', 'false');
+    expect(page.options(page.field('tag'))).toEqual([
+      'par défaut (taxonomie)',
+      'Stat Boosts',
+      'Utility',
+      'cc (autre côté)',
+    ]);
+    expect(page.picked(page.field('tag'))).toBe('cc');
+
+    // L'icône tapée est celle de la tuile de la fiche.
+    page.type(page.field('icon'), "IG_It's(new)");
+    expect(page.all('#x-preview .x-ico')[0].getAttribute('style')).toBe(
+      "--x-src: url('https://img.test/images/ui/effect/IG_It%27s%28new%29.webp')",
+    );
+
+    // Revenu aux valeurs du disque : plus rien en attente.
+    page.type(page.field('name', 'en'), ' ');
+    page.type(page.field('icon'), '');
+    page.pick('x-isdebuff', '');
+    page.pick('x-tag', '');
+    expect(page.line('15').dot).toBe('');
+    expect(page.el('x-count').textContent).toBe('aucune modification');
+    expect(page.el('x-save').disabled).toBe(true);
+  });
+
+  it('« Enregistrer » : tout le lot en UN envoi, ce que le disque portait joint, puis l’état relu', async () => {
+    const page = await effects({
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ — …'],
+        saved: ['15'],
+        refused: ['26', '1'],
+        stale: ['1'],
+        reasons: { '26': 'Reduced Speed (26) : schéma', '1': 'Burned (1) : le disque a changé.' },
+      }),
+    });
+    page.open('15');
+    page.type(page.field('name', 'en'), ' Haste ');
+    page.type(page.field('name', 'fr'), 'Hâte');
+    page.type(page.field('keys'), 'HASTE,\n QUICK ,');
+    page.open('26');
+    page.pick('x-tag', 'cc');
+    page.type(page.field('note'), 'à revoir');
+    page.open('1');
+    page.field('hidden').checked = false;
+    page.fire(page.field('hidden'), 'input');
+    expect(page.el('x-count').textContent).toBe('3 effets modifiés');
+    page.calls.length = 0;
+
+    // Ce que le disque rendra à la relecture : 15 a son entrée.
+    const next = catalog();
+    next.pairs[0].buff.name = 'Haste';
+    next.pairs[0].buff.overridden = true;
+    next.pairs[0].buff.curated = { name: { en: 'Haste', fr: 'Hâte' }, keys: ['HASTE', 'QUICK'] };
+    page.disk.catalog = next;
+    page.el('x-save').click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.calls[0]).toEqual({
+      path: '/api/effects',
+      body: {
+        changes: [
+          {
+            id: '15',
+            curated: { name: { en: 'Haste', fr: 'Hâte' }, keys: ['HASTE', 'QUICK'] },
+            was: {},
+          },
+          { id: '26', curated: { tag: 'cc', note: 'à revoir' }, was: {} },
+          { id: '1', curated: {}, was: { hidden: true } },
+        ],
+      },
+    });
+    expect(page.calls[1]).toEqual({ path: '/api/effects/state' });
+
+    // Enregistré : plus en attente, la ligne suit le disque.
+    expect(page.line('15')).toMatchObject({ name: 'Haste', dot: '' });
+    // Refusé : la saisie RESTE (rien à retaper), marquée d'un point rouge.
+    expect(page.line('26').dot).toBe('pt ko');
+    page.open('26');
+    expect(page.field('note').value).toBe('à revoir');
+    expect(page.all('#x-badges .badge.ko').map((b) => [b.textContent, b.title])).toEqual([
+      ['refusé', 'Reduced Speed (26) : schéma'],
+    ]);
+    // Refusé parce que le disque avait changé : la fiche montre le disque.
+    expect(page.line('1').dot).toBe('pt ko');
+    page.open('1');
+    expect(page.field('hidden').checked).toBe(true);
+    expect(page.el('x-count').textContent).toBe('1 effet modifié' + '2 refus');
+    expect(page.el('x-save').disabled).toBe(false);
+  });
+
+  it('« ＋ effet » : l’id forgé par le serveur, une fiche vierge en tête, envoyée avec `create`', async () => {
+    const page = await effects({
+      saved: () => ({ ok: true, log: ['fait'], saved: ['FIXED_DAMAGE'], refused: [] }),
+    });
+    page.type(page.el('x-new-id'), ' fixed damage ');
+    page.el('x-new').click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/effects/id?raw=%20fixed%20damage%20' });
+    expect(page.grid().slice(0, 2)).toEqual([
+      'Nouveaux, pas encore enregistrés (1)',
+      'FIXED_DAMAGE',
+    ]);
+    expect(page.line('FIXED_DAMAGE')).toMatchObject({
+      name: 'sans nom',
+      badges: ['buff', 'nouveau'],
+      meta: 'FIXED_DAMAGE · création',
+    });
+    expect(page.el('x-new-id').value).toBe('');
+    expect(location.hash).toBe('#effects/FIXED_DAMAGE');
+    expect(page.el('x-title').textContent).toBe('FIXED_DAMAGE');
+    expect(page.el('x-badges').textContent).toBe('buff' + 'nouveau');
+    // Vierge, elle ne compte pas : rien à enregistrer, mais « Annuler » la retire.
+    expect(page.el('x-count').textContent).toBe('aucune modification');
+    expect(page.el('x-save').disabled).toBe(true);
+    expect(page.el('x-reset').disabled).toBe(false);
+
+    page.type(page.field('name', 'en'), 'Fixed Damage');
+    page.type(page.field('keys'), 'FIXED_DAMAGE');
+    expect(page.el('x-count').textContent).toBe('1 effet modifié');
+    page.calls.length = 0;
+    // À la relecture, la création est sur le disque : elle n'est plus un brouillon.
+    const next = catalog();
+    next.orphanBuffs.unshift(
+      row('FIXED_DAMAGE', 'Fixed Damage', {
+        origin: 'curated',
+        overridden: true,
+        extracted: null,
+        curated: { name: { en: 'Fixed Damage' }, keys: ['FIXED_DAMAGE'] },
+      }),
+    );
+    page.disk.catalog = next;
+    page.el('x-save').click();
+    await page.settle();
+    await page.settle();
+    expect(page.calls[0].body).toEqual({
+      changes: [
+        {
+          id: 'FIXED_DAMAGE',
+          curated: { name: { en: 'Fixed Damage' }, keys: ['FIXED_DAMAGE'] },
+          was: {},
+          create: true,
+        },
+      ],
+    });
+    expect(page.grid()).toEqual([
+      '15 | 26',
+      'Sans miroir (4)',
+      'FIXED_DAMAGE | 1',
+      'UNCOUNTERABLE | 900',
+    ]);
+    expect(page.line('FIXED_DAMAGE').badges).toEqual(['buff']);
+    expect(page.el('x-count').textContent).toBe('aucune modification');
+  });
+
+  it('« ＋ effet » sur un id qui existe : sa fiche s’ouvre, rien n’est créé ; Entrée vaut le bouton', async () => {
+    const page = await effects();
+    page.type(page.el('x-new-id'), 'uncounterable');
+    page.fire(page.el('x-new-id'), 'keydown', 'Enter');
+    await page.settle();
+    expect(page.grid()).toHaveLength(4);
+    expect(page.el('x-title').textContent).toBe('Uncounterable');
+    expect(page.el('journal-last').textContent).toBe(
+      'UNCOUNTERABLE existe déjà : sa fiche est ouverte.',
+    );
+
+    // Sans id : rien n'est demandé au serveur.
+    const asked = page.calls.length;
+    page.el('x-new').click();
+    await page.settle();
+    expect(page.calls).toHaveLength(asked);
+    expect(page.el('journal').dataset.state).toBe('ko');
+  });
+
+  it('« Annuler » rend le disque et retire les créations ; quitter avec des changements demande confirmation', async () => {
+    const page = await effects({ hash: '#effects/15' });
+    expect(page.confirm).not.toHaveBeenCalled();
+    page.type(page.field('name', 'en'), 'Haste');
+    page.type(page.el('x-new-id'), 'draft');
+    page.el('x-new').click();
+    await page.settle();
+    expect(page.grid()[0]).toBe('Nouveaux, pas encore enregistrés (1)');
+
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.confirm.mock.calls[0]).toEqual([
+      '1 effet modifié, pas encore enregistré. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    ]);
+    expect(page.el('tab-effects').hidden).toBe(false);
+
+    page.el('x-reset').click();
+    expect(page.grid()).toHaveLength(4);
+    expect(page.el('x-count').textContent).toBe('aucune modification');
+    // La fiche montrée était celle de la création retirée.
+    expect(page.el('x-sheet').textContent?.trim()).toBe('Choisir un effet dans le catalogue.');
+    page.open('15');
+    expect(page.field('name', 'en').value).toBe('');
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-effects').hidden).toBe(true);
   });
 });
 

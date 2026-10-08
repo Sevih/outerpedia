@@ -51,7 +51,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       title: 'Editor',
       items: [
         { label: 'Character', href: '/admin/editor/characters' },
-        { label: 'Effect', href: '/admin/editor/effects' },
+        // Effect : porté dans quick (Éditeurs › Effets), lien retiré le 08/10 —
+        // la page reste joignable par son URL jusqu'au retrait de l'admin.
         { label: 'EE', href: '/admin/editor/ee' },
         { label: 'Monster', href: '/admin/editor/monsters' },
         { label: 'Item', href: '/admin/editor/items' },

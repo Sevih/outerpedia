@@ -1,0 +1,72 @@
+<section id="tab-effects" hidden>
+  <div class="head">
+    <h2>Effets</h2>
+    <p class="hint">
+      Le glossaire des effets : ce que le jeu fournit (statuts, mécaniques) et ce que le wiki y
+      ajoute — un nom corrigé, une description, une icône, une famille, un effet masqué, ou une
+      création pour une mécanique sans texte en jeu. Rien ne s'écrit à la saisie : « Enregistrer »
+      envoie tous les effets modifiés et committe. Lus au rendu : le site ne change qu'une fois le
+      lot poussé (« Pousser », dans la barre d'en-tête) et le build de la CI déployé.
+    </p>
+  </div>
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
+    <span id="x-count"></span>
+    <button class="btn ghost" id="x-reset" disabled>Annuler</button>
+    <button class="btn primary" id="x-save" disabled>Enregistrer</button>
+  </div>
+
+  <div class="card pad" aria-label="Recherche et filtres">
+    <div class="form">
+      <div class="field">
+        <label for="x-q">Chercher</label>
+        <input
+          id="x-q"
+          type="search"
+          class="w-url"
+          placeholder="Nom (en, fr), id, clé BT_… — ou 日本語, 한국어, 中文"
+          autocomplete="off"
+        />
+      </div>
+      <div class="field">
+        <label for="x-nature">Nature</label>
+        <select id="x-nature">
+          <option value="">Buffs et debuffs</option>
+          <option value="buff">Buffs</option>
+          <option value="debuff">Debuffs</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="x-nodesc" /> sans description</label>
+      <label class="check"><input type="checkbox" id="x-curated" /> curés seulement</label>
+      <label class="check"><input type="checkbox" id="x-hidden" /> masqués</label>
+      <div class="field x-new">
+        <label for="x-new-id">Nouvel effet</label>
+        <input
+          id="x-new-id"
+          class="w-text mono"
+          placeholder="ID (ex. UNCOUNTERABLE)"
+          autocomplete="off"
+        />
+      </div>
+      <button class="btn ghost" id="x-new" title="Ouvre la fiche vierge d'un effet créé">
+        ＋ effet
+      </button>
+    </div>
+    <p class="lbl x-total" id="x-total"></p>
+  </div>
+
+  <div class="x-cols">
+    <div class="card x-list" aria-label="Catalogue">
+      <div class="x-heads" id="x-heads" aria-hidden="true">
+        <span class="x-h buff">Buff</span><span class="x-h debuff">Debuff</span>
+      </div>
+      <div class="x-rows" id="x-rows"></div>
+      <div class="empty" id="x-empty" hidden></div>
+    </div>
+
+    <div class="card x-sheet" id="x-sheet" aria-live="off">
+      <div class="empty">Choisir un effet dans le catalogue.</div>
+    </div>
+  </div>
+  <datalist id="x-icons"></datalist>
+</section>
