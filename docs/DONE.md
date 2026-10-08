@@ -7,6 +7,27 @@
 
 ## 2026-10-08
 
+- **Relecture B42 (Fable) — Pros / Cons et Synergies de la « Fiche perso »,
+  validé** : périmètre tenu (treize fichiers, le seul hors quick est le menu
+  admin qui perd Pro / Con et Synergy). `pnpm typecheck && pnpm lint && pnpm test`
+  sur HEAD vert ; `NODE_ENV=development pnpm exec vitest run scripts/quick` :
+  740 cas verts. Rejoué par le module (tsx) : l'état d'Aer porte `refs` (13)
+  et `langs` ; `previewInline` rend `{B/BT_ADDITIVE_TURN}` en segment
+  « Extra Turn » et `{B/Foo}` en `unknown` ; `saveCharacterSheet` à stores et
+  git factices — un pro à tag inconnu → refus situé `pros[1]`, aucun appel ;
+  un groupe sans héros → refus situé, aucun appel ; une synergie valide → un
+  `upsert` puis UN commit `chore(characters): Aer` ; `was` périmé → `stale`,
+  aucun appel. Banc rejoué sur un quick isolé (:4879, clés vidées, GET et
+  l'aperçu seulement) : Pros / Cons d'Aer en deux cartes, chaque ligne avec
+  son aperçu (icônes et noms résolus, « Unbuffable » et « Buff Removal » en
+  rouge : ces balises de debuff sont rendues en rouge par la couleur du site,
+  pas un refus — à ne pas confondre avec un tag inconnu, qui s'écrit tel quel
+  en rouge), « Traductions (5) » repliées avec le compte ; Synergies de Marian
+  en trois cartes, tuiles de héros, raison et aperçu ; le groupe « Aperçu »
+  de la savebar n'apparaît que sur ces deux onglets. Dans la charte, rien à
+  redire. À Sevih : ses contrôles au TODO, dont « Traduire » avec les clés.
+  Suite : B39, puis B40.
+
 - **quick : « Fiche perso » › Pros / Cons et Synergies — textes à tags inline
   contrôlés, aperçu, traduction (lot B42, étapes 3, 4 et 9 de la migration,
   suite)** — les outils Pro / Con et Synergy de l'admin étaient deux écrans à
