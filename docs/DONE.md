@@ -7,6 +7,29 @@
 
 ## 2026-10-08
 
+- **Relecture A30** (Fable, 08/10) : `04f126cb` validé — 95 lots, aucun
+  ouvert ; déjà poussé par Sevih, CI verte dessus. Périmètre attendu
+  (`index.html`, `lib.js`, `quick.css`, STYLE.md, `ui-serve.test.ts`, DONE,
+  TODO), entrée DONE complète, deux choix de forme acceptés (le titre
+  « Journal » en tête quand c'est déplié, un `ko` qui se replie au clic).
+  `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (198 fichiers,
+  2 839 tests), suite de quick sous `NODE_ENV=development` (415). Contrôle
+  indépendant : un script happy-dom du scratchpad (`a30/states.mjs`) sur le
+  vrai `<aside>` et le vrai `lib.js` — repos `hidden` ; `run` une ligne
+  (« git push »), journal replié, clic inerte, pas de remontée ; `ok` la
+  dernière ligne, remontée demandée, le clic déplie et montre le titre ;
+  `ko` tout le journal déplié, dernière ligne seule en `ko`, « Copier »
+  visible, son clic écrit les deux lignes jointes par `\n` et dit
+  « copié » ; un `log()` vide remet au repos. Banc sur un quick isolé
+  (:4845, captures scratchpad `a30/`) : Codes promo et Gear reco sur Aer
+  (`--hash gear/2000055`) sans bande entre les onglets et le contenu, plus
+  de barre en bas, « Pousser 0 » dans l'en-tête. À juger à l'usage par
+  Sevih (ligne du TODO) : un simple refus de saisie (« Code requis. ») est
+  désormais un `ko` complet — tête, ligne rouge, « Copier », et la page
+  remonte ; et le journal reste affiché jusqu'à l'opération suivante, sans
+  croix. Vu par l'agent, noté : `shot.mjs` pose lui-même le `#` (écrire
+  `--hash gear/…`), et un `--hash` vaut pour tous les `--tabs` du même
+  appel.
 - **quick : le journal EN HAUT de la page — une ligne si ça passe, tout le
   journal et « Copier » sinon (lot A30)** (08/10, décision Sevih) : le journal
   était un tiroir fixé en bas de la fenêtre, qui s'ouvrait seul à chaque
