@@ -42,7 +42,10 @@
 
 ## Déjà dans quick
 
-Publication : Codes promo (= Tools › Promo code), 4-comics, Vidéos, Discord.
+Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
+08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
+existant, période ou récompenses : supprimer puis recréer, ou lot A pour
+l'ajouter), 4-comics, Vidéos, Discord.
 Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
 un exemplaire).
 

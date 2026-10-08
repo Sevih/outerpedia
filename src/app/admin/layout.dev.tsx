@@ -64,7 +64,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Synergy', href: '/admin/tools/synergies' },
         { label: 'Search aliases', href: '/admin/tools/search-aliases' },
         { label: 'Short names', href: '/admin/tools/short-names' },
-        { label: 'Promo code', href: '/admin/tools/promo-codes' },
+        // Promo code : porté dans quick (Codes promo), lien retiré le 08/10 —
+        // la page reste joignable par son URL jusqu'au retrait de l'admin.
         { label: 'Banner', href: '/admin/tools/banners' },
         { label: 'Changelog', href: '/admin/tools/changelog' },
         { label: 'Events', href: '/admin/tools/events' },

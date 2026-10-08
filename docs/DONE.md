@@ -7,6 +7,10 @@
 
 ## 2026-10-08
 
+- **Menu admin : lien « Promo code » retiré** (08/10, demande Sevih) : quick
+  tient les codes promo (Codes promo) ; la page `/admin/tools/promo-codes`
+  reste joignable par son URL jusqu'au retrait de l'admin. Écart noté dans
+  `quick-migration.md` : quick ne retouche pas un code existant.
 - **Cap de quick étendu à tout l'admin** (08/10, décision Sevih) : quick
   remplacera aussi l'extractor et les outils — plus rapide, UI plus agréable,
   tout d'un seul endroit. Inventaire (22 étapes : outils simples, éditeurs,
