@@ -31,6 +31,36 @@
       "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>10/7(水)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n\n\n<p>◈データ更新実施時間<br>: 10/7(水) 14:00 ~ 14:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈更新内容</p>\n\n\n\n<ol>\n<li>「デミウルゴス・ラムダ」のスキルおよび関連テキストの日本語・中国語（簡体字・繁体字）翻訳が、パッチノートの内容と異なる現象</li>\n\n\n<li>「基本データダウンロード」のみを行った場合、「デミウルゴス・セイラン」が変身できない現象</li>\n\n\n<li>「デミウルゴス・ラムダ」のモデリングが一部、正常に表示されない現象</li>\n\n\n<li>「デミウルゴス・ラムダ」がスキン「ふわふわな月ウサギ・ラムダ」を着用した状態でスタンが付与されると、走るモーションが再生される現象</li>\n\n\n<li>「デミウルゴス・ラムダ」の専用ロビーを設定した状態でスカウトを行うと、一部の演出が正常に表示されない現象</li>\n</ol>\n\n\n\n<p>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・更新された再ログイン後、修正された内容をご利用いただけます。</p>\n\n\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
     },
     {
+      "id": 11841,
+      "date": "2026-10-07",
+      "modified": "2026-10-07T06:09:56",
+      "slug": "notice-10-7wed-sequential-rolling-patch-2",
+      "lang": "en",
+      "type": "notice",
+      "title": "[Notice] 10/7(Wed) Sequential Rolling Patch",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/548f09f13ebc61b3.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello, Masters.<br><br>We will carry out a patch for fixing issues in the game.<br>Please note that players may experience some server instability during this time, but players can continue to play.<br><br>We kindly ask for your understanding. Please see below for more information.</p>\n\n\n\n<p>◈ Patch Schedule</p>\n\n\n\n<ul>\n<li>10/7(Wed) 06:15 ~ 06:30 (UTC)</li>\n\n\n\n<li>It will be applied sequentially within the specified timeframe.</li>\n</ul>\n\n\n\n<p>◈ Details</p>\n\n\n\n<ol>\n<li>An issue where Demiurge Luna cannot transform while wearing the Round-the-Clock Tourist Luna costume after downloading only the minimum required data</li>\n</ol>\n\n\n\n<p>◈ Notice</p>\n\n\n\n<ul>\n<li>Players may experience some server instability.</li>\n\n\n\n<li>After restart, you will be able to access the game’s improved function.</li>\n</ul>\n\n\n\n<p>We sincerely apologize for any inconvenience caused.<br>We will continue doing our best to provide you with the best service possible.</p>\n\n\n\n<p>Thank you.</p>\n"
+    },
+    {
+      "id": 11839,
+      "date": "2026-10-07",
+      "modified": "2026-10-07T06:10:45",
+      "slug": "%ea%b3%b5%ec%a7%80-10-7%ec%88%98-%eb%ac%b4%ec%a0%90%ea%b2%80-%ed%8c%a8%ec%b9%98-%ec%a7%84%ed%96%89-%ec%95%88%eb%82%b4-2",
+      "lang": "kr",
+      "type": "notice",
+      "title": "[공지] 10/7(수) 무점검 패치 진행 안내",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/621af36733a8d627.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요. GM 아메입니다.</p>\n\n\n\n<p>게임 내 확인된 현상 수정을 위한 패치가 진행될 예정입니다.<br>패치를 진행하는 동안 일시적으로 접속 불안정 현상이 발생할 수 있는 점 너그러운 양해 부탁드립니다.</p>\n\n\n\n<p>자세한 내용은 아래에서 확인해 주시기 바랍니다.</p>\n\n\n\n<p>◈ 패치 진행 일정</p>\n\n\n\n<ul>\n<li>10/7(수) 15:15 ~ 15:30 (KST)<br>※ 위 시간 내 순차적으로 적용됩니다.</li>\n</ul>\n\n\n\n<p>◈ 내용</p>\n\n\n\n<ol>\n<li>최소 다운로드만 진행한 상태에서 데미우르고스 루나가 ‘밤낮 없는 관광객 루나’ 코스튬을 착용한 상태에서 변신할 수 없는 현상</li>\n</ol>\n\n\n\n<p>◈ 유의사항</p>\n\n\n\n<ul>\n<li>패치 진행하는 동안 접속 불안정 현상이 있을 수 있습니다.</li>\n\n\n\n<li>재접속 후 개선된 내용을 이용할 수 있습니다.</li>\n</ul>\n\n\n\n<p>이용에 불편을 드려 대단히 죄송합니다.<br>보다 쾌적하고 안정적인 환경을 제공해 드릴 수 있도록 최선을 다하겠습니다.<br>감사합니다.<br></p>\n"
+    },
+    {
+      "id": 11843,
+      "date": "2026-10-07",
+      "modified": "2026-10-07T06:37:19",
+      "slug": "26100702_data_patch_jp",
+      "lang": "jp",
+      "type": "notice",
+      "title": "【お知らせ】データ更新作業のお知らせ(10/7)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/f50b9aec4b98cb8e.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも『アウタープレーン』をプレイしていただき、誠にありがとうございます。<br>『アウタープレーン』運営チームです。</p>\n\n\n\n<p>10/7(水)、データ更新作業を実施いたします。<br>一時的に接続が不安定になる場合がございます。<br>より快適なサービス提供のための対応となりますので、<br>マスター様のご理解とご協力をお願いいたします。<br>詳細内容は下記をご確認ください。</p>\n\n\n\n<p>◈データ更新実施時間<br>: 10/7(水) 15:15 ~ 15:30 (JST)<br>※上記時間中、順次適用されます。</p>\n\n\n\n<p>◈更新内容</p>\n\n\n\n<ol>\n<li>「基本データダウンロード」のみを行った際、「デミウルゴス・ルナ」のスキン「昼夜なき観光客・ルナ」を着用時、変身できない現象</li>\n</ol>\n\n\n\n<p>※注意事項<br>・データ更新と共に接続が中断される場合があります。<br>・更新されたデータは、実施時間後ゲームに再度接続した時に自動でダウンロードされます。<br>・更新された再ログイン後、修正された内容をご利用いただけます。</p>\n\n\n\n<p>この度はご迷惑をおかけいたしましたことをお詫び申し上げます。<br>安定的なサービスをご提供できるよう、最善を尽くしてまいります。</p>\n"
+    },
+    {
       "id": 11759,
       "date": "2026-10-06",
       "modified": "2026-10-07T03:25:43",
@@ -43,12 +73,12 @@
     {
       "id": 11734,
       "date": "2026-10-06",
-      "modified": "2026-10-07T03:24:03",
+      "modified": "2026-10-07T08:31:15",
       "slug": "1006kie",
       "lang": "en",
       "type": "known-issue",
-      "title": "[Issues] Known Issues (10/6 Maintenance) (Added on 10/7 03:23 UTC)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about an issue that has been identified. We apologize for the inconvenience.</p>\n\n\n\n<p><s><strong>1. An issue where an incorrect icon appears in the buff area after purchasing the Terminus Isle Exploration Support Pack<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>2. An issue where some visual effects are not displayed when entering battle with Demiurge Lambda<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>3. An issue where some visual effects are displayed incorrectly when using Dimensional Supply with the minimum download installed<br></strong>→ We are currently investigating this issue.</s><br><br><strong>4. An issue where the Japanese and Chinese translations of Demiurge Lambda’s skills and text differ from those in the patch notes<br></strong>→ We are currently investigating this issue.<br><br><strong>5. An issue where Demiurge Saeran cannot transform when only the minimum download has been completed<br></strong>→ We are currently investigating this issue.<br><br><strong>6. An issue where Demiurge Lambda’s character model is displayed incorrectly<br></strong>→ We are currently investigating this issue.<br><br><strong>7. An issue where Demiurge Lambda plays a running animation when Stunned while wearing the Fluffy Moon Bunny Lambda costume<br></strong>→ We are currently investigating this issue.<br><br><strong>8. An issue where some Recruit animations are not displayed properly when recruiting after completing the minimum download<br></strong>→ We are currently investigating this issue.<br><br>We will work to resolve this issue as quickly as possible and provide updates in this notice if there are any changes.</p>\n\n\n\n<p>Thank you.</p>\n"
+      "title": "[Issues] Known Issues (10/6 Maintenance) (Added on 10/7 06:04 UTC)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/2711930b3fbdcd80.webp\" alt=\"\"></figure>\n\n\n\n<p>Hello Masters,</p>\n\n\n\n<p>We would like to inform you about an issue that has been identified. We apologize for the inconvenience.</p>\n\n\n\n<p><s><strong>1. An issue where an incorrect icon appears in the buff area after purchasing the Terminus Isle Exploration Support Pack<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>2. An issue where some visual effects are not displayed when entering battle with Demiurge Lambda<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>3. An issue where some visual effects are displayed incorrectly when using Dimensional Supply with the minimum download installed<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>4. An issue where the Japanese and Chinese translations of Demiurge Lambda’s skills and text differ from those in the patch notes<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>5. An issue where Demiurge Saeran cannot transform when only the minimum download has been completed<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>6. An issue where Demiurge Lambda’s character model is displayed incorrectly<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>7. An issue where Demiurge Lambda plays a running animation when Stunned while wearing the Fluffy Moon Bunny Lambda costume<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>8. An issue where some Recruit animations are not displayed properly when recruiting after completing the minimum download<br></strong>→ We are currently investigating this issue.</s><br><br><s><strong>9. An issue where Demiurge Luna cannot transform while wearing the Round-the-Clock Tourist Luna costume after downloading only the minimum required data<br></strong>→ We are currently investigating this issue.</s><br><br>We will work to resolve this issue as quickly as possible and provide updates in this notice if there are any changes.</p>\n\n\n\n<p>Thank you.</p>\n"
     },
     {
       "id": 11678,
@@ -73,12 +103,12 @@
     {
       "id": 11732,
       "date": "2026-10-06",
-      "modified": "2026-10-07T03:31:19",
+      "modified": "2026-10-07T08:30:58",
       "slug": "%ec%9d%b4%ec%8a%88-10-6-%ec%97%85%eb%8d%b0%ec%9d%b4%ed%8a%b8-%ec%9d%b4%ed%9b%84-%ed%99%95%ec%9d%b8%eb%90%9c-%ed%98%84%ec%83%81",
       "lang": "kr",
       "type": "known-issue",
-      "title": "[이슈] 10/6 업데이트 이후 확인된 현상 (10/7 12:23 추가)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><s><strong>1. 멸망의 섬 탐사 지원팩 구매 후 버프 영역에 비정상적인 아이콘이 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>2. 데미우르고스 람다 전투 진입 시 일부 연출 이펙트가 노출되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>3. 최소 다운로드 상태에서 차원 물자 호출 진행 시 일부 연출 그래픽이 비정상적으로 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><strong>4. 데미우르고스 람다 스킬 및 텍스트의 일본어·중문 번역이 패치노트와 다르게 적용되어 있는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>5. 최소 다운로드를 진행한 경우 데미우르고스 세이란이 변신할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>6. 데미우르고스 람다의 모델링이 비정상적으로 표시되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>7. 데미우르고스 람다가 몽실몽실한 달토끼 람다 코스튬을 착용한 상태에서 스턴 적용 시 달리기 모션이 재생되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p><strong>8. 최소 다운로드 진행한 경우 영입 진행 시 일부 연출이 정상적으로 노출되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</p>\n\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n"
+      "title": "[이슈] 10/6 업데이트 이후 확인된 현상 (10/7 15:04 추가)",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/efd8449fdbb282dd.webp\" alt=\"\"></figure>\n\n\n\n<p>안녕하세요, 오너 여러분.<br>GM 아메입니다.</p>\n\n\n\n<p>현재 확인된 현상에 대해 안내 드립니다.<br>게임 내 오류 현상으로 이용에 불편을 드려 죄송합니다.</p>\n\n\n\n<p><s><strong>1. 멸망의 섬 탐사 지원팩 구매 후 버프 영역에 비정상적인 아이콘이 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>2. 데미우르고스 람다 전투 진입 시 일부 연출 이펙트가 노출되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>3. 최소 다운로드 상태에서 차원 물자 호출 진행 시 일부 연출 그래픽이 비정상적으로 노출되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>4. 데미우르고스 람다 스킬 및 텍스트의 일본어·중문 번역이 패치노트와 다르게 적용되어 있는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>5. 최소 다운로드를 진행한 경우 데미우르고스 세이란이 변신할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>6. 데미우르고스 람다의 모델링이 비정상적으로 표시되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>7. 데미우르고스 람다가 몽실몽실한 달토끼 람다 코스튬을 착용한 상태에서 스턴 적용 시 달리기 모션이 재생되는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>8. 최소 다운로드 진행한 경우 영입 진행 시 일부 연출이 정상적으로 노출되지 않는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p><s><strong>9. 최소 다운로드만 진행한 상태에서 데미우르고스 루나가 ‘밤낮 없는 관광객 루나’ 코스튬을 착용한 상태에서 변신할 수 없는 현상<br></strong>→ 해당 현상 확인 중에 있습니다.</s></p>\n\n\n\n<p>위 현상에 대해 빠르게 정상화될 수 있도록 노력하겠으며,<br>추가 현상이나 변동 사항이 있을 시 해당 공지를 통해 안내 드리겠습니다.</p>\n\n\n\n<p>감사합니다.</p>\n"
     },
     {
       "id": 11762,
@@ -93,12 +123,12 @@
     {
       "id": 11736,
       "date": "2026-10-06",
-      "modified": "2026-10-07T03:21:12",
+      "modified": "2026-10-07T08:31:49",
       "slug": "%e3%80%90%e4%b8%8d%e5%85%b7%e5%90%88%e3%80%91%e7%8f%be%e5%9c%a8%e7%a2%ba%e8%aa%8d%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e4%b8%8d%e5%85%b7%e5%90%88%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6-10-6",
       "lang": "jp",
       "type": "known-issue",
-      "title": "【不具合】現在確認されている不具合について (10/6)（10/07 12:21 追記)",
-      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n\n\n\n<p><strong>1. 「テルミナス島探査応援パック」の購入後、バフ表示欄に本来とは異なるアイコンが表示される現象<br></strong>→ 現在、本現象について調査を行っております。<br><br><strong><s>2. 「基本データダウンロード」のみを行った状態で「次元物資召喚」を行うと、一部の演出グラフィックが正常に表示されない現象<br></s></strong>→ 26/10/06データ更新にて修正されました。<br><br><strong><s>3. 「デミウルゴス・ラムダ」戦闘開始時、一部の演出エフェクトが正常に表示されない現象<br></s></strong>→ 現在、本現象について調査を行っております。<br>→ 26/10/06データ更新にて修正されました。<br><br><strong>4. 「デミウルゴス・ラムダ」のスキルおよび関連テキストの日本語・中国語（簡体字・繁体字）翻訳が、パッチノートの内容と異なる現象</strong>（10/07 11:21 追記)<br>→ パッチノートに記載されている内容が正しい仕様となります。<br>→ 本仕様の誤訳に関連して返金などの対応をご希望の場合は、カスタマーサポートまでお問い合わせください。この度はご不便をおかけし、誠に申し訳ございません。</p>\n\n\n\n<p><strong>5. 「基本データダウンロード」のみを行った場合、「デミウルゴス・セイラン」が変身できない現象</strong>（10/07 11:21 追記)<br>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong>6．「デミウルゴス・ラムダ」のモデリングが一部、正常に表示されない現象（10/07 11:21 追記)<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong>7．「デミウルゴス・ラムダ」がスキン「ふわふわな月ウサギ・ラムダ」を着用した状態でスタンが付与されると、走るモーションが再生される現象（10/07 12:21 追記)<br></strong>→ 現在、本現象について調査を行っております。</p>\n\n\n\n<p><strong>8.「基本データダウンロード」のみを行った状態でスカウトを行うと、一部の演出が正常に表示されない現象（10/07 12:21 追記)<br></strong>→ 現在、本現象について調査を行っております。<br></p>\n\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
+      "title": "【不具合】現在確認されている不具合について (10/6)（10/07 15:04 追記）",
+      "content": "<figure class=\"size-full\"><img width=\"658\" height=\"200\" src=\"/images/patch-notes/213ce7185b5a83ed.webp\" alt=\"\"></figure>\n\n\n\n<p>いつも「アウタープレーン」をプレイしていただき、誠にありがとうございます。<br>「アウタープレーン」運営チームです。</p>\n\n\n\n<p>大変ご不便をおかけして申し訳ございません。<br>現在確認されている不具合についてご案内いたします。</p>\n\n\n\n<p><strong>1. 「テルミナス島探査応援パック」の購入後、バフ表示欄に本来とは異なるアイコンが表示される現象<br></strong>→ 現在、本現象について調査を行っております。<br><br><strong><s>2. 「基本データダウンロード」のみを行った状態で「次元物資召喚」を行うと、一部の演出グラフィックが正常に表示されない現象<br></s></strong>→ 26/10/06データ更新にて修正されました。<br><br><strong><s>3. 「デミウルゴス・ラムダ」戦闘開始時、一部の演出エフェクトが正常に表示されない現象<br></s></strong>→ 現在、本現象について調査を行っております。<br>→ 26/10/06データ更新にて修正されました。<br><br><s><strong>4. 「デミウルゴス・ラムダ」のスキルおよび関連テキストの日本語・中国語（簡体字・繁体字）翻訳が、パッチノートの内容と異なる現象</strong></s>（10/07 11:21 追記)<br>→ パッチノートに記載されている内容が正しい仕様となります。<br>→ 本仕様の誤訳に関連して返金などの対応をご希望の場合は、カスタマーサポートまでお問い合わせください。この度はご不便をおかけし、誠に申し訳ございません。</p>\n\n\n\n<p><s><strong>5. 「基本データダウンロード」のみを行った場合、「デミウルゴス・セイラン」が変身できない現象</strong>（10/07 11:21 追記)<br>→ 現在、本現象について調査を行っております。</s></p>\n\n\n\n<p><s><strong>6．「デミウルゴス・ラムダ」のモデリングが一部、正常に表示されない現象（10/07 11:21 追記)<br></strong>→ 現在、本現象について調査を行っております。</s></p>\n\n\n\n<p><s><strong>7．「デミウルゴス・ラムダ」がスキン「ふわふわな月ウサギ・ラムダ」を着用した状態でスタンが付与されると、走るモーションが再生される現象（10/07 12:21 追記)<br></strong>→ 現在、本現象について調査を行っております。</s></p>\n\n\n\n<p><s><strong>8.「基本データダウンロード」のみを行った状態でスカウトを行うと、一部の演出が正常に表示されない現象（10/07 12:21 追記)<br></strong>→ 現在、本現象について調査を行っております。<br></s></p>\n\n\n\n<p><s><strong>9. 「基本データダウンロード」のみを行った際、「デミウルゴス・ルナ」のスキン「昼夜なき観光客・ルナ」を着用時、変身できない現象（10/07 15:04 追記）<br></strong>→ 現在、本現象について調査を行っております。</s></p>\n\n\n\n<p>この度は皆さまにご迷惑をおかけしておりますことをお詫び申し上げます。<br>不具合解消まで今しばらくお待ちいただけますよう、お願い申し上げます。</p>\n\n\n\n<p></p>\n"
     },
     {
       "id": 11697,
