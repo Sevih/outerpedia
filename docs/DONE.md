@@ -7,6 +7,29 @@
 
 ## 2026-10-08
 
+- **Relecture C11 (Fable) — « Fiche perso » de quick, coquille et onglet
+  Fiche, validé** : périmètre tenu (dix-neuf fichiers ; hors quick, seuls
+  `HUMAN_TAGS` descendu dans `tierlist/tiers.ts` et l'éditeur admin qui
+  l'importe — justifié, c'est la source des listes de curation).
+  `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 711 cas verts.
+  État rejoué par le module (tsx) : le roster (129, avec élément, classe,
+  sous-classe, rareté), la fiche d'Ais (ligne, chaîne `join`, tags dérivés,
+  curé entier avec `prosCons` et `synergies` pour B42, rangs, paliers,
+  `HUMAN_TAGS`, vidéos), un id inconnu → « perso inconnu ». Une fausse alerte
+  levée en relisant : les paliers d'Ais s'affichent 3★ 4★ 5★ 6★ alors que le
+  disque porte 3, 4, 6, 9 — ce sont les niveaux de transcendance, étiquetés
+  par `transcendenceFullSteps` du site, comme dans Rangs ; rien à corriger.
+  Banc rejoué sur un quick isolé (:4877, clés vidées, que des GET) : sans
+  perso le picker partagé s'ouvre d'office (recherche, pastilles d'élément et
+  de classe, tuiles) ; la fiche d'Aer et celle d'Ais (quatre paliers) : en-tête
+  de Gear reco plus sous-classe et badge de chaîne, savebar, rangée des
+  sous-onglets avec quatre éteints, cartes Rangs et Kit côte à côte, Vidéos
+  dessous — dans la charte, lisible, ce qui était l'agacement. Le picker de
+  Gear reco (`gear/2000055/picker/char`) s'ouvre comme avant, avec son filtre
+  des recos et ses comptes de builds. À Sevih : les contrôles au TODO, dont
+  la question des priorités à 0 sur le disque. Suite : B42.
+
 - **quick : « Fiche perso » — la coquille à sous-onglets, le picker de héros
   partagé, le serveur, le sous-onglet Fiche (lot C11, étape 9 de la migration,
   première partie)** — l'admin répartit un perso sur quatre écrans (la fiche à
