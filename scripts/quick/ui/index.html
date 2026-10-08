@@ -44,6 +44,22 @@
     </header>
     <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 
+    <!-- Le journal : une bande dans le flux, entre les sections et le contenu,
+         absente au repos. `log()` (`lib.js`) pose son état : UNE ligne tant
+         que l'opération court et quand elle passe (un clic la déplie), tout le
+         journal (`#log`) et « Copier » quand elle échoue. -->
+    <aside class="journal" id="journal" data-state="idle" aria-label="Journal" hidden>
+      <div class="journal-in">
+        <button class="journal-bar" id="journal-toggle" aria-expanded="false" aria-controls="log">
+          <i class="dot" id="journal-dot" aria-hidden="true"></i>
+          <span class="journal-last" id="journal-last"></span>
+          <span class="journal-title" id="journal-title" hidden>Journal</span>
+        </button>
+        <button class="btn ghost sm" id="journal-copy" hidden>Copier</button>
+        <div id="log" hidden></div>
+      </div>
+    </aside>
+
     <main>
       <!-- Une section par onglet : le serveur pose `tabs/<nom>.html` à la place de
            chaque marqueur (cf. `ui-serve.ts`). -->
@@ -54,18 +70,6 @@
       <!-- @tab gear -->
       <!-- @tab discord -->
     </main>
-
-    <!-- Le journal : un tiroir fixé en bas de la fenêtre. Replié, une ligne
-         (dernière étape, état) ; déplié, tout le journal (`#log`). `lib.js`
-         l'ouvre quand une opération commence et le colore à la fin. -->
-    <aside class="journal" id="journal" data-state="idle" aria-label="Journal">
-      <button class="journal-bar" id="journal-toggle" aria-expanded="false" aria-controls="log">
-        <i class="dot" id="journal-dot" aria-hidden="true"></i>
-        <span class="journal-last" id="journal-last">Aucune opération en cours.</span>
-        <span class="journal-more" aria-hidden="true">Journal</span>
-      </button>
-      <div id="log" hidden></div>
-    </aside>
 
     <!-- Chaque section s'inscrit auprès de `lib.js` en se chargeant ; l'ordre des
          imports est celui du menu. -->

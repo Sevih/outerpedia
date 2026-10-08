@@ -7,6 +7,90 @@
 
 ## 2026-10-08
 
+- **quick : le journal EN HAUT de la page — une ligne si ça passe, tout le
+  journal et « Copier » sinon (lot A30)** (08/10, décision Sevih) : le journal
+  était un tiroir fixé en bas de la fenêtre, qui s'ouvrait seul à chaque
+  opération et mangeait 72 px de `<main>`. Il devient une bande DANS LE FLUX,
+  entre `nav.tabs` et `<main>`, absente au repos, à deux visages : ça passe,
+  UNE ligne (l'action faite) ; ça casse, TOUT le journal et de quoi le copier.
+  **Coquille** (`scripts/quick/ui/index.html`) : l'`<aside class="journal">`
+  remonte sous `#tabs`, `hidden` au départ ; dedans `.journal-in` (la ligne
+  `#journal-toggle` — pastille, `#journal-last`, titre `#journal-title` —, le
+  bouton `#journal-copy`, puis `#log`). Le bouton « Journal » de la barre
+  repliée et la phrase « Aucune opération en cours. » disparaissent.
+  **`log()`** (`lib.js`, signature inchangée, les onglets et `post()` ne
+  bougent pas) pose seul l'état : `idle` = aside `hidden` ; `run` = une
+  ligne, la pastille qui bat et l'étape en cours, jamais dépliée (le clic est
+  inerte tant que l'opération court) ; `ok` = une ligne verte, la dernière du
+  journal, sans bouton, un clic la déplie (`aria-expanded`) et un second la
+  replie ; `ko` = `#log` déplié d'office, la DERNIÈRE ligne seule en rouge
+  (les étapes passées neutres — avant, tout le journal prenait la couleur),
+  et « Copier » (`.btn.ghost.sm`) en tête à droite. `copyJournal` écrit les
+  lignes jointes par `\n` (`navigator.clipboard.writeText`), le bouton dit
+  « copié » deux secondes, « impossible » si le navigateur refuse ou si
+  `navigator.clipboard` manque (page non sécurisée). Chaque `log()` repart de
+  zéro. `journalWire()` (exportée, appelée par `sections.start`) branche la
+  ligne et « Copier » — c'est elle que les tests jouent. **Comment la page y
+  remonte** : à la fin d'une opération (`ok` ou `ko`), `log()` appelle
+  `scrollIntoView({ block: 'nearest' })` sur l'aside — sans effet s'il se
+  voit déjà, sinon son haut vient au bord de la fenêtre. **Feuille**
+  (`quick.css`) : plus rien de `position: fixed` ni d'ombre, `main` revient à
+  24 px de marge partout ; `.journal-in` suit `main` (1200 px centrés, et
+  `.journal:has(+ main.wide)` lui rend toute la largeur — la règle de `main`,
+  sans une ligne de JS) ; jetons existants, `.dot.run/.ok/.ko` inchangée.
+  **Deux choix de forme, à juger à l'écran** : (1) déplié, la ligne de tête
+  montre le titre « Journal » au lieu de la dernière étape — sinon un refus
+  d'une ligne (« Code requis. ») s'affichait deux fois, tronqué en tête puis
+  entier dessous ; (2) un `ko` se replie au clic comme un `ok` se déplie,
+  « Copier » reste. `STYLE.md` : la description du tiroir remplacée (place,
+  trois états, « Copier », remontée, rapport à la savebar), « 72 px en bas »
+  retiré de `<main>`. **Tests** (`ui-serve.test.ts`, +6) : la coquille porte
+  l'aside entre `#tabs` et `<main>` ; en happy-dom sur le vrai markup (la
+  méthode de `gitBar`) — repos `hidden`, `run` (une ligne, ni journal ni
+  bouton, clic inerte, pas de remontée), `ok` (la dernière ligne, clic qui
+  déplie puis replie, remontée demandée), `ko` (toutes les lignes, la
+  dernière seule `ko`, « Copier » → `writeText` factice appelé avec les
+  lignes jointes, « copié » puis retour à 2 s pile), « impossible » sur un
+  refus et sans `clipboard`, et un `log()` suivant qui repart de zéro.
+  **Vérifié** : `pnpm typecheck` (`tsc --noEmit -p scripts/tsconfig.json`,
+  sans sortie), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test`
+  (`Tests  2839 passed (2839)`, 198 fichiers), suite de quick sous
+  `NODE_ENV=development` (`Tests  415 passed (415)`). **Banc** (quick isolé
+  :4853, `shot.mjs`, `/tmp/quick-shots/a30/`) : au repos, Codes promo et Gear
+  reco sur Aer n'ont aucune bande entre les sections et le contenu, et plus
+  de barre en bas de fenêtre ; le reste de la page est à sa place. Les états,
+  que `shot.mjs` ne joue pas, ont été joués en plus dans le même Firefox sans
+  tête par un relais d'appoint en lecture seule du scratchpad
+  (`a30/states.mjs` : il injecte un appel à `log()` et relève les
+  rectangles) — **savebar de Gear reco** (`#gear/2000055`, 1440 × 1000) :
+  page défilée à fond (savebar collée, 0 → 56 px), un `run` pose la bande
+  hors champ sans rien décaler (l'ancrage de défilement compense ses 41 px,
+  `<main>` ne bouge pas) ; à l'`ok` la page remonte, journal 0 → 41 px en
+  haut de fenêtre, savebar revenue à sa place 275 → 331 px ; au `ko` (six
+  lignes) journal 0 → 172 px, savebar 406 → 462 px ; redéfilé ensuite, le
+  journal sort par le haut et la savebar recolle à 0. Les deux sont dans le
+  flux, la savebar dans `<main>` donc toujours SOUS l'aside : aucun
+  recouvrement possible, aucun mesuré. Alignement : `.journal-in` 114 → 1314
+  px sous Codes promo comme `<main>`, pleine largeur sous Gear reco ; à
+  700 px de large « Copier » reste à droite de la tête. **Laissé / vu hors
+  périmètre** : la commande du lot écrit `--hash '#gear/2000055'`, or
+  `shot.mjs` pose déjà le `#` (hash `##gear/…`, inconnu, l'onglet reste sans
+  perso) — joué avec `--hash gear/2000055` ; et un `--hash` vaut pour TOUS
+  les onglets de `--tabs` (le hash l'emporte sur l'onglet ouvert : `coupons`
+  photographiait Gear reco), Codes promo a été pris à part. Un simple refus
+  de saisie (`log(['Code requis.'], false)`) est désormais un `ko` complet —
+  tête, ligne rouge, « Copier », 82 px, et la page remonte : conforme au lot,
+  à juger à l'usage. Le journal reste affiché jusqu'à l'opération suivante
+  (comme le tiroir), mais il occupe maintenant 41 px du flux en `ok` : pas de
+  croix pour le fermer, non demandée. Pendant un `run` lancé depuis le bas de
+  Gear reco, la ligne est hors champ jusqu'à la fin (seul le bouton `busy` le
+  dit). « Copier » exige un contexte sûr : `localhost` et
+  `quick.outerpedia.local` oui, une IP du LAN en http dira « impossible ».
+  L'`esc` local de `log()` n'échappe que `<` (un `&amp;` d'une sortie de
+  commande s'afficherait `&`), inchangé. Le commentaire « Une modale
+  au-dessus du journal » de `tabs/gear.css` date du tiroir en `z-index: 20`
+  (fichier d'onglet, pas touché). Au TODO, le contrôle à l'écran « tiroir du
+  journal » est reformulé. Rien d'enregistré ni poussé sur le quick isolé.
 - **Relecture B33** (Fable, 08/10) : `d6c4eb0d` validé — 94 lots, aucun
   ouvert. Périmètre attendu (`actions.ts`, `server.ts`, `lib.js`,
   `index.html`, `quick.css`, cinq intros d'onglets, `gear.js`, `shot.mjs`,

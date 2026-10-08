@@ -136,10 +136,16 @@ export const itemIcon = (icon) =>
     : '';
 
 // ------------------------------------------------------ journal
-const IDLE = 'Aucune opération en cours.';
+const COPY = 'Copier';
 
+/** Les lignes du journal, telles que « Copier » les rend. */
+let shown = [];
+
+/** Déplié, la ligne laisse sa place au titre : la dernière étape est dans `#log`. */
 const journalOpen = (open) => {
   $('log').hidden = !open;
+  $('journal-last').hidden = open;
+  $('journal-title').hidden = !open;
   $('journal-toggle').setAttribute('aria-expanded', String(open));
 };
 
@@ -149,24 +155,61 @@ const journalOpen = (open) => {
  * `doing` est l'étape commencée, affichée en dernière ligne et remplacée
  * par la suivante — l'empiler doublerait la longueur du journal.
  *
- * Le tiroir : replié, sa barre montre la dernière ligne (ou l'étape en cours,
- * pastille qui bat) ; il s'ouvre seul quand une opération commence et prend
- * la couleur du résultat à la fin. Un simple message (`ok` tranché, sans
- * étape) ne l'ouvre pas : la barre suffit à le lire.
+ * Le journal est une bande en haut de la page, absente au repos, et il a
+ * deux visages. Tant que l'opération court (`run`) et quand elle passe
+ * (`ok`) : UNE ligne — l'étape en cours, pastille qui bat, puis la dernière
+ * ligne, verte, l'action faite. Quand elle échoue (`ko`) : TOUT le journal,
+ * déplié d'office, la dernière ligne en rouge, et « Copier ». Chaque appel
+ * repart de zéro, et la page remonte au journal quand l'opération est finie.
  */
 export const log = (lines, ok, doing) => {
-  const cls = ok === undefined ? '' : ok ? 'ok' : 'ko';
   const esc = (l) => String(l).replace(/</g, '&lt;');
-  $('log').innerHTML =
-    lines.map((l) => `<div class="${cls}">${esc(l)}</div>`).join('') +
-    (doing ? `<div class="run">${esc(doing)}</div>` : '');
-  const running = ok === undefined && (doing || lines.length);
-  const last = doing ?? lines[lines.length - 1];
-  $('journal').dataset.state = running ? 'run' : ok === undefined ? 'idle' : ok ? 'ok' : 'ko';
-  $('journal-last').textContent = last ?? IDLE;
-  $('journal-dot').className = `dot ${running ? 'run' : ok === undefined ? '' : ok ? 'ok' : 'ko'}`;
-  if (running) journalOpen(true);
+  const state = ok === undefined ? (doing || lines.length ? 'run' : 'idle') : ok ? 'ok' : 'ko';
+  const done = state === 'ok' || state === 'ko';
+  shown = doing ? [...lines, doing] : [...lines];
+  // Les étapes passées restent neutres : seule la dernière porte l'état.
+  const cls = done ? state : doing ? 'run' : '';
+  $('log').innerHTML = shown
+    .map((l, i) => `<div class="${i === shown.length - 1 ? cls : ''}">${esc(l)}</div>`)
+    .join('');
+  const journal = $('journal');
+  journal.dataset.state = state;
+  journal.hidden = state === 'idle';
+  $('journal-last').textContent = shown[shown.length - 1] ?? '';
+  $('journal-dot').className = `dot ${state === 'idle' ? '' : state}`;
+  $('journal-copy').hidden = state !== 'ko';
+  journalOpen(state === 'ko');
   $('log').scrollTop = $('log').scrollHeight;
+  // On a pu défiler (Gear reco, Discord) : `nearest` ne bouge rien s'il se voit.
+  if (done) journal.scrollIntoView({ block: 'nearest' });
+};
+
+let copyTimer;
+
+/**
+ * « Copier » : le journal en texte brut dans le presse-papiers. Le bouton dit
+ * deux secondes ce qu'il en a été — « impossible » si la permission est
+ * refusée ou la page non sécurisée (`navigator.clipboard` y manque).
+ */
+async function copyJournal() {
+  const btn = $('journal-copy');
+  let said = 'copié';
+  try {
+    await navigator.clipboard.writeText(shown.join('\n'));
+  } catch {
+    said = 'impossible';
+  }
+  btn.textContent = said;
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => (btn.textContent = COPY), 2000);
+}
+
+/** Branche la ligne — elle déplie, sauf pendant une opération — et « Copier ». */
+export const journalWire = () => {
+  $('journal-toggle').onclick = () => {
+    if ($('journal').dataset.state !== 'run') journalOpen($('log').hidden);
+  };
+  $('journal-copy').onclick = copyJournal;
 };
 
 /**
@@ -302,7 +345,7 @@ export const sections = {
       if ([...registry.values()].some((s) => s.dirty?.())) e.preventDefault();
     };
 
-    $('journal-toggle').onclick = () => journalOpen($('log').hidden);
+    journalWire();
 
     // « Pousser » : le journal suit, et `post` repose le bouton d'après l'état
     // rendu. Réponse perdue : il revient à ce qu'il montrait.

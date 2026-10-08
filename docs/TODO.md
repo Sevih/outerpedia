@@ -59,7 +59,10 @@
       série UI).
 - [ ] **Refonte de l'UI — contrôles à l'écran** (la série est close le 07/10,
       le banc ne joue pas ces états) : survol des ✕ et des boutons fantômes,
-      anneau de focus, tiroir du journal pendant un vrai enregistrement,
+      anneau de focus, journal en haut pendant un vrai enregistrement (lot
+      A30 : une ligne verte quand ça passe ; sur un refus réel tout le
+      journal, « Copier » et son collage ; la page qui remonte depuis le bas
+      de Gear reco, savebar comprise),
       résultats de Récompense avec icônes, hash `#gear/<id>`, fenêtre sous
       1060 px ; Rangs : cellule modifiée, refus réel, dépliage, clavier dans
       les menus de rang ; Discord AVEC le jeton : serveurs, salons,

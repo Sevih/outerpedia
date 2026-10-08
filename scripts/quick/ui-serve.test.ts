@@ -56,11 +56,11 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(
       [...page.matchAll(/<section id="tab-([a-z0-9-]+)"( hidden)?>/g)].map((m) => m[1]),
     ).toEqual(TABS);
-    // Les sections sont dans `<main>`, avant le journal.
+    // Les sections sont dans `<main>` ; le journal est AVANT lui, sous `#tabs`.
     expect(page.indexOf('<main>')).toBeLessThan(page.indexOf('<section id="tab-coupons">'));
-    expect(page.indexOf('</section>', page.indexOf('id="tab-discord"'))).toBeLessThan(
-      page.indexOf('<div id="log"'),
-    );
+    expect(page.indexOf('id="tabs"')).toBeLessThan(page.indexOf('<aside class="journal"'));
+    expect(page.indexOf('</aside>')).toBeLessThan(page.indexOf('<main>'));
+    expect(page.indexOf('<div id="log"')).toBeLessThan(page.indexOf('</aside>'));
   });
 
   it('chaque onglet de la coquille a ses trois fichiers, son entrée du menu et son import', () => {
@@ -257,5 +257,186 @@ describe('gitBar — le bouton « Pousser » de l’en-tête', () => {
     expect(count.textContent).toBe('pas d’amont');
     expect(button.disabled).toBe(true);
     expect(button.title).toContain('essai');
+  });
+});
+
+describe('log — le journal en haut de la page', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  type Lib = {
+    log: (lines: string[], ok?: boolean, doing?: string) => void;
+    journalWire: () => void;
+  };
+
+  /**
+   * `log` de la page, sur l'aside de la VRAIE coquille (la méthode de
+   * `gitBar`). Le presse-papiers est factice ; `scrollIntoView` aussi, pour
+   * voir quand la page remonte au journal.
+   */
+  async function journal(clipboard: unknown = { writeText: vi.fn(() => Promise.resolve()) }) {
+    const { document } = new Window();
+    document.body.innerHTML = /<aside class="journal"[\s\S]*?<\/aside>/.exec(shell())?.[0] ?? '';
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('navigator', { clipboard });
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as Lib;
+    lib.journalWire();
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLElement;
+    const aside = el('journal');
+    const scroll = vi.fn();
+    aside.scrollIntoView = scroll;
+    return {
+      log: lib.log,
+      aside,
+      scroll,
+      bar: el('journal-toggle'),
+      last: el('journal-last'),
+      title: el('journal-title'),
+      dot: el('journal-dot'),
+      copy: el('journal-copy'),
+      /** Les lignes de `#log`, ou `null` tant qu'il est replié. */
+      lines: () =>
+        el('log').hidden ? null : [...el('log').children].map((d) => [d.className, d.textContent]),
+    };
+  }
+
+  it('n’occupe rien au repos', async () => {
+    const { log, aside, last, copy, lines } = await journal();
+    expect(aside.hidden).toBe(true);
+    expect(aside.dataset.state).toBe('idle');
+    expect(last.textContent).toBe('');
+    expect(copy.hidden).toBe(true);
+    expect(lines()).toBeNull();
+    // Un journal vidé y revient.
+    log(['Code requis.'], false);
+    log([]);
+    expect(aside.hidden).toBe(true);
+    expect(aside.dataset.state).toBe('idle');
+  });
+
+  it('`run` : une ligne, l’étape en cours, ni journal déplié ni bouton', async () => {
+    const { log, aside, scroll, bar, last, dot, copy, lines } = await journal();
+    log([], undefined, 'envoi au serveur');
+    expect(aside.hidden).toBe(false);
+    expect(aside.dataset.state).toBe('run');
+    expect(dot.className).toBe('dot run');
+    expect(last.textContent).toBe('envoi au serveur');
+    expect(last.hidden).toBe(false);
+    expect(lines()).toBeNull();
+    expect(copy.hidden).toBe(true);
+
+    log(['écrit'], undefined, 'git commit');
+    expect(last.textContent).toBe('git commit');
+    log(['écrit', 'committé']);
+    expect(last.textContent).toBe('committé');
+    expect(aside.dataset.state).toBe('run');
+    // Pas de journal déplié pendant qu'une opération court, même au clic.
+    bar.click();
+    expect(lines()).toBeNull();
+    expect(bar.getAttribute('aria-expanded')).toBe('false');
+    expect(scroll).not.toHaveBeenCalled();
+  });
+
+  it('`ok` : une ligne verte, la dernière, sans bouton — le clic déplie', async () => {
+    const { log, aside, scroll, bar, last, title, dot, copy, lines } = await journal();
+    log(['écrit', 'committé — 1 commit à pousser.'], true);
+    expect(aside.hidden).toBe(false);
+    expect(aside.dataset.state).toBe('ok');
+    expect(dot.className).toBe('dot ok');
+    expect(last.textContent).toBe('committé — 1 commit à pousser.');
+    expect(last.hidden).toBe(false);
+    expect(title.hidden).toBe(true);
+    expect(lines()).toBeNull();
+    expect(copy.hidden).toBe(true);
+    expect(bar.getAttribute('aria-expanded')).toBe('false');
+    // L'opération est finie : la page remonte au journal s'il ne se voit pas.
+    expect(scroll).toHaveBeenCalledWith({ block: 'nearest' });
+    // Le vert : `data-state` sur la ligne, la classe sur la dernière étape.
+    expect(readFileSync(resolve(UI, 'quick.css'), 'utf8')).toMatch(
+      /\.journal\[data-state='ok'\] \.journal-last \{\s*color: var\(--success\);/,
+    );
+
+    bar.click();
+    expect(bar.getAttribute('aria-expanded')).toBe('true');
+    expect(lines()).toEqual([
+      ['', 'écrit'],
+      ['ok', 'committé — 1 commit à pousser.'],
+    ]);
+    // Déplié, le titre remplace la ligne ; toujours pas de bouton.
+    expect(last.hidden).toBe(true);
+    expect(title.hidden).toBe(false);
+    expect(copy.hidden).toBe(true);
+    bar.click();
+    expect(lines()).toBeNull();
+    expect(last.hidden).toBe(false);
+  });
+
+  it('`ko` : tout le journal d’office, la dernière ligne en rouge, et « Copier »', async () => {
+    const writeText = vi.fn(() => Promise.resolve());
+    const { log, aside, scroll, bar, dot, copy, lines } = await journal({ writeText });
+    vi.useFakeTimers();
+    log(['écrit', 'git commit', 'git push : refusé\n ! [rejected] main -> main'], false);
+    expect(aside.hidden).toBe(false);
+    expect(aside.dataset.state).toBe('ko');
+    expect(dot.className).toBe('dot ko');
+    expect(bar.getAttribute('aria-expanded')).toBe('true');
+    expect(lines()).toEqual([
+      ['', 'écrit'],
+      ['', 'git commit'],
+      ['ko', 'git push : refusé\n ! [rejected] main -> main'],
+    ]);
+    expect(scroll).toHaveBeenCalledWith({ block: 'nearest' });
+    expect(copy.hidden).toBe(false);
+    expect(copy.className).toBe('btn ghost sm');
+    expect(copy.textContent).toBe('Copier');
+
+    copy.click();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(writeText).toHaveBeenCalledExactlyOnceWith(
+      'écrit\ngit commit\ngit push : refusé\n ! [rejected] main -> main',
+    );
+    expect(copy.textContent).toBe('copié');
+    await vi.advanceTimersByTimeAsync(1999);
+    expect(copy.textContent).toBe('copié');
+    await vi.advanceTimersByTimeAsync(1);
+    expect(copy.textContent).toBe('Copier');
+  });
+
+  it('« Copier » dit « impossible » quand le presse-papiers se refuse', async () => {
+    const refused = { writeText: vi.fn(() => Promise.reject(new Error('NotAllowedError'))) };
+    // Permission refusée, puis page non sécurisée : `navigator.clipboard` absent.
+    for (const clipboard of [refused, null]) {
+      const { log, copy } = await journal(clipboard);
+      vi.useFakeTimers();
+      log(['Code requis.'], false);
+      copy.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(copy.textContent).toBe('impossible');
+      await vi.advanceTimersByTimeAsync(2000);
+      expect(copy.textContent).toBe('Copier');
+      vi.useRealTimers();
+    }
+    expect(refused.writeText).toHaveBeenCalledExactlyOnceWith('Code requis.');
+  });
+
+  it('une opération suivante repart de zéro', async () => {
+    const { log, aside, bar, last, copy, lines } = await journal();
+    log(['écrit', 'git push : refusé'], false);
+    expect(lines()).toHaveLength(2);
+
+    log([], undefined, 'envoi au serveur');
+    expect(aside.dataset.state).toBe('run');
+    expect(lines()).toBeNull();
+    expect(bar.getAttribute('aria-expanded')).toBe('false');
+    expect(copy.hidden).toBe(true);
+    expect(last.textContent).toBe('envoi au serveur');
+
+    log(['git : rien à committer.'], true);
+    expect(aside.dataset.state).toBe('ok');
+    expect(last.textContent).toBe('git : rien à committer.');
+    bar.click();
+    expect(lines()).toEqual([['ok', 'git : rien à committer.']]);
   });
 });

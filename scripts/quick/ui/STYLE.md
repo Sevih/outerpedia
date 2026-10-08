@@ -20,7 +20,7 @@ couleur qui change sur le site se recopie ici, sans traduction :
 | ------------------------------------------------------------------------- | --------------------------------- | --------------------------------------------------------- |
 | `--surface-base`                                                          | `#0b1120`                         | le fond de la page, des champs                            |
 | `--surface-raised`                                                        | `#131c2e`                         | l'en-tête, les cartes                                     |
-| `--surface-overlay`                                                       | `#1e293b`                         | la savebar, le tiroir du journal, les chips, un survol    |
+| `--surface-overlay`                                                       | `#1e293b`                         | la savebar, la bande du journal, les chips, un survol     |
 | `--surface-sunken`                                                        | `#070b14`                         | la rangée des sections                                    |
 | `--content` / `--content-strong`                                          | `#ffffff`                         | le texte                                                  |
 | `--content-muted` / `--content-subtle`                                    | `#cbd5e1`                         | libellés, explications, en-têtes de table (4,5:1 partout) |
@@ -50,8 +50,7 @@ pastille.
   `/api/state` puis la réponse de chaque `post()`) ; à zéro le bouton est
   `disabled` (`title` « Rien à pousser »), en retard sur l'amont le badge
   passe en ambre (`.warn`, `title` = le `git pull --rebase` à faire), sans
-  amont il dit « pas d'amont ». Pendant le push : `busy`, et le tiroir du
-  journal suit.
+  amont il dit « pas d'amont ». Pendant le push : `busy`, et le journal suit.
 - **Sections** (`nav.tabs`, 40 px, `surface-sunken`) : les sections du groupe
   actif (`.tab`, filet accent sous l'active). Un groupe s'ouvre sur sa
   première section. Le hash (`#ranks`) sélectionne le groupe ET la section.
@@ -59,17 +58,35 @@ pastille.
   **ajouter une section** = une entrée `{ id, label, wide? }` dans le bon
   groupe, ses trois fichiers `tabs/<id>.{html,css,js}`, son marqueur
   `<!-- @tab id -->`, son `<link>` et son `import` dans `index.html`.
-- **`<main>`** : 1200 px centrés, 24 px de marge, 72 px en bas (le tiroir).
+- **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
   (`main.wide`) : Rangs, Gear reco, Discord. Une section est une colonne à
   18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des `.card`.
-- **Journal** (`.journal`, fixé en bas) : replié, une ligne — la dernière
-  étape, la pastille (bat pendant une opération), le bouton « Journal » ;
-  déplié, tout `#log` (40 % de la fenêtre au plus). `log(lines, ok, doing)`
-  garde sa signature : `ok` indéfini + `doing` = l'opération commence, le
-  tiroir s'ouvre seul et bat ; `ok` vrai / faux = il se colore (`data-state`
-  `ok` / `ko`). Un simple message (`log(['Code requis.'], false)`) colore la
-  barre sans l'ouvrir.
+- **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
+  entre `nav.tabs` et `<main>`, pleine largeur, son contenu (`.journal-in`)
+  aligné sur `<main>` — 1200 px centrés, toute la largeur sous un onglet
+  `wide`. Rien de fixé, et au repos il n'occupe rien (`hidden`).
+  `log(lines, ok, doing)` garde sa signature et pose seul l'état
+  (`data-state`) :
+  - `run` (`ok` indéfini) : UNE ligne de 40 px — la pastille qui bat et l'étape
+    en cours (`doing`, sinon la dernière ligne). Elle ne se déplie pas.
+  - `ok` : UNE ligne, verte — la dernière du journal, l'action faite
+    (« committé — 1 commit à pousser… »). Pas de bouton ; un clic sur la ligne
+    déplie tout le journal (`aria-expanded`), un second le replie.
+  - `ko` : TOUT le journal (`#log`, monospace, 40 % de la fenêtre au plus),
+    déplié d'office, la dernière ligne en rouge et les étapes passées neutres,
+    et « Copier » (`#journal-copy`, `.btn.ghost.sm`) en tête à droite : le
+    journal en texte brut dans le presse-papiers, une ligne par étape. Le
+    bouton dit « copié » deux secondes, « impossible » si le navigateur refuse.
+    Un simple message (`log(['Code requis.'], false)`) est un `ko` comme un
+    autre.
+
+  Déplié, la ligne de tête montre le titre « Journal » à la place de la
+  dernière étape (elle est dans `#log`, entière). Chaque `log()` repart de
+  zéro ; à la fin d'une opération (`ok` ou `ko`) la page remonte au journal
+  s'il n'est plus dans la fenêtre (`scrollIntoView({ block: 'nearest' })`). La
+  `.savebar` collante est dans `<main>`, donc toujours sous lui : aucun des
+  deux ne recouvre l'autre.
 
 ```html
 <main>
