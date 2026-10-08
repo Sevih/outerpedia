@@ -108,6 +108,7 @@ import type { InboxItem } from '@/lib/admin/admin-inbox';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { collectComics } from '@datagen/assets/collect-comics';
+import { stripUnintegratedCharacters } from '@datagen/promote';
 import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
 import { refreshVideoMeta } from '@datagen/video-meta';
@@ -631,6 +632,8 @@ export interface DashboardDisk {
   mtime: (path: string) => number | null;
   /** Deux fichiers du dépôt, identiques à l'octet ? */
   sameBytes: (a: string, b: string) => boolean;
+  /** Un JSON du dépôt, parsé ; `null` s'il manque. */
+  readJson: (path: string) => unknown;
   banners: () => Pick<
     ReturnType<typeof bannersState>,
     'banners' | 'missing' | 'drift' | 'gameError'
@@ -667,6 +670,10 @@ export const DASHBOARD_DISK: DashboardDisk = {
   sameBytes: (a, b) =>
     statSync(resolve(a)).size === statSync(resolve(b)).size &&
     readFileSync(resolve(a)).equals(readFileSync(resolve(b))),
+  readJson: (path) =>
+    statSync(resolve(path), { throwIfNoEntry: false })
+      ? (JSON.parse(readFileSync(resolve(path), 'utf8')) as unknown)
+      : null,
   banners: () => bannersState(),
   coupons: currentCoupons,
   today: BANNERS_DISK.today,
@@ -678,17 +685,43 @@ export const DASHBOARD_DISK: DashboardDisk = {
  * de `data/generated/` ET n'a pas les mêmes octets — la date seule serait
  * vraie en permanence : `pnpm dev` rebâtit la proposition à chaque lancement,
  * à l'identique quand le jeu n'a pas bougé. Sans `data/extracted/` (jamais de
- * build sur ce poste) : rien n'attend.
+ * build sur ce poste) : rien n'attend. Et une différence qui se réduit aux
+ * persos que la garde perso de `promote.ts` écarterait (proposés, inconnus du
+ * validé — un perso d'un patch à venir, sans nom) n'est PAS une proposition :
+ * rien ne partirait à la promotion (décision Sevih, 08/10).
  */
 function hasProposal(disk: DashboardDisk): boolean {
+  // Les persos que la garde de `promote.ts` écarterait : proposés, inconnus du
+  // validé. Lus une fois, seulement si un fichier mérite la comparaison.
+  let unintegrated: ReadonlySet<string> | null = null;
+  const guard = (): ReadonlySet<string> => {
+    if (unintegrated) return unintegrated;
+    const ids = (path: string): string[] => {
+      const data = disk.readJson(path);
+      return data && typeof data === 'object' ? Object.keys(data as object) : [];
+    };
+    const known = new Set(ids('data/generated/characters.json'));
+    unintegrated = new Set(ids('data/extracted/characters.json').filter((id) => !known.has(id)));
+    return unintegrated;
+  };
+  // Même contenu une fois les persos non intégrés retirés de la proposition ?
+  const sameAfterGuard = (extracted: string, generated: string): boolean => {
+    const ids = guard();
+    if (!ids.size) return false;
+    const proposed = disk.readJson(extracted);
+    stripUnintegratedCharacters(proposed, ids);
+    return JSON.stringify(proposed) === JSON.stringify(disk.readJson(generated));
+  };
+
   return PROPOSAL_FILES.some((name) => {
-    const extracted = disk.mtime(`data/extracted/${name}`);
-    if (extracted === null) return false;
-    const generated = disk.mtime(`data/generated/${name}`);
-    if (generated === null) return true;
-    return (
-      extracted > generated && !disk.sameBytes(`data/extracted/${name}`, `data/generated/${name}`)
-    );
+    const extracted = `data/extracted/${name}`;
+    const generated = `data/generated/${name}`;
+    const extractedAt = disk.mtime(extracted);
+    if (extractedAt === null) return false;
+    const generatedAt = disk.mtime(generated);
+    if (generatedAt === null) return true;
+    if (extractedAt <= generatedAt || disk.sameBytes(extracted, generated)) return false;
+    return !sameAfterGuard(extracted, generated);
   });
 }
 

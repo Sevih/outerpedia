@@ -1923,6 +1923,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     clientVersion: () => '1.11.404',
     mtime: () => null,
     sameBytes: () => true,
+    readJson: () => null,
     banners: () => ({ banners: [], missing: [], drift: [] }),
     coupons: async () => ({ list: [] }),
     today: () => TODAY,
@@ -2104,6 +2105,44 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     const read = vi.fn(() => true);
     await proposal(older, read);
     expect(read).not.toHaveBeenCalled();
+  });
+
+  it('game : `proposal` ignore ce que la garde perso de promote écarterait', async () => {
+    const newer = { 'data/extracted/characters.json': 200, 'data/generated/characters.json': 100 };
+    const proposal = async (files: Record<string, unknown>) =>
+      (
+        await dashboardState(
+          disk({
+            mtime: (path) => newer[path as keyof typeof newer] ?? null,
+            sameBytes: () => false,
+            readJson: (path) => files[path] ?? null,
+          }),
+        )
+      ).game?.proposal;
+
+    // La seule différence : un perso proposé que le validé ne connaît pas — la
+    // garde l'écarterait, rien ne partirait à la promotion.
+    const validated = { '2000001': { name: 'Aer' } };
+    expect(
+      await proposal({
+        'data/extracted/characters.json': { ...validated, '2400015': { name: '' } },
+        'data/generated/characters.json': validated,
+      }),
+    ).toBe(false);
+    // Un perso connu qui change : une vraie proposition.
+    expect(
+      await proposal({
+        'data/extracted/characters.json': { '2000001': { name: 'Aer+' }, '2400015': {} },
+        'data/generated/characters.json': validated,
+      }),
+    ).toBe(true);
+    // Sans perso non intégré, la différence d'octets suffit.
+    expect(
+      await proposal({
+        'data/extracted/characters.json': validated,
+        'data/generated/characters.json': validated,
+      }),
+    ).toBe(true);
   });
 
   it('bannières : les actives par fin, les à venir par début, les expirées tues, la détection comptée', async () => {

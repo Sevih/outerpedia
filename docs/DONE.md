@@ -7,6 +7,20 @@
 
 ## 2026-10-08
 
+- **Tableau de bord : « proposition d'extraction en attente » ignore les
+  persos que la garde écarterait** (08/10, Fable, hors lot, décision Sevih) :
+  depuis le refresh du matin, `data/extracted/characters.json` porte une clé
+  de plus que le validé — `2400015`, un perso d'un patch à venir sans nom,
+  que `stripUnintegratedCharacters` de `promote.ts` écarte de toute
+  promotion — et l'accueil disait « proposition en attente » alors que rien
+  ne partirait. `hasProposal` (`scripts/quick/actions.ts`) garde sa règle
+  (plus récent ET différent) puis, s'il reste une différence, rejoue la garde
+  sur la proposition (ids proposés inconnus du validé, la vraie fonction de
+  `promote.ts`) et compare ensuite : identique = pas de proposition. Nouveau
+  `readJson` dans `DashboardDisk`, test ajouté (la seule différence est un
+  perso non intégré → `false` ; un perso connu qui change → `true` ; sans
+  perso écarté, les octets suffisent). Sur le disque du jour :
+  `proposal: false`. Ligne « à juger (a) » du TODO close.
 - **Relecture C10** (Fable, 08/10) : `b129b251` validé — 99 lots, aucun
   ouvert. Périmètre attendu (`patch.ts` + test, `refresh.ts` + test,
   `dev-refresh.ts`, `CLAUDE.md`, `tabs/patch.*`, `server.ts`, `lib.js`,

@@ -52,9 +52,7 @@
       atténué (« pas de client Steam sur ce poste »). (4) « Ouvrir
       Bannières » et « Ouvrir Codes promo » mènent à l'onglet, revenir sur
       « Accueil » relit (deux à trois secondes, bouton « Actualiser »
-      occupé) ; « Pousser » depuis le tableau le relit aussi. À juger : (a)
-      « proposition d'extraction en attente » reste affichée tant que le
-      perso « 1 new » n'est pas intégré — utile ou bruit ? (b) la lecture
+      occupé) ; « Pousser » depuis le tableau le relit aussi. À juger : (b) la lecture
       prend 2 à 3 s (le moteur de revue de l'admin, relancé par entité hors
       Next : lot A pour le mémoïser dans `admin-inbox.ts`).
 - [ ] **Onglet « Noms » — contrôles à l'écran (lot B34)** : le banc ne tape
