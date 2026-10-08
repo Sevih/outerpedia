@@ -31,6 +31,10 @@
 
 ## 🧰 Outil quick
 
+- [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
+      ordre et règles dans `docs/quick-migration.md`. À faire par Sevih :
+      remplir la colonne « Agacements » (en vrac) ; puis un lot par section,
+      à partir de Short names.
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
       l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne

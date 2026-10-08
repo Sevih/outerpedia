@@ -7,6 +7,12 @@
 
 ## 2026-10-08
 
+- **Cap de quick étendu à tout l'admin** (08/10, décision Sevih) : quick
+  remplacera aussi l'extractor et les outils — plus rapide, UI plus agréable,
+  tout d'un seul endroit. Inventaire (22 étapes : outils simples, éditeurs,
+  guides, extractor, retrait de `/admin`), ordre et règles de portage dans
+  `docs/quick-migration.md`, avec une colonne « Agacements » que Sevih
+  remplit avant chaque lot.
 - **`pnpm commit` depuis l'admin : un test de quick cassait sous
   `NODE_ENV=development`** (08/10, Fable, hors lot) : le test « coupé par la
   garde IS_DEV » de `scripts/quick/actions.test.ts` comptait sur le
