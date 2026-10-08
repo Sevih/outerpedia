@@ -40,10 +40,10 @@ pastille.
 
 - **En-tête** (`header.top`, 52 px, `surface-raised`) : le logo, les
   **groupes** en onglets (`.gtab`, filet accent sous l'actif ; `.gtab.soon`
-  grisé avec son badge « à venir » : Éditeurs, Guides, Outils, tant que quick
-  n'a pas repris l'admin hors extractor et misc), puis à droite les pastilles
-  des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser », le poste et
-  le port (`#env`), « Quitter ».
+  grisé avec son badge « à venir » : Éditeurs, Guides, tant que quick n'a pas
+  repris l'admin — Outils a sa première section, Noms), puis à droite les
+  pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
+  le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
   le seul geste qui pousse — un enregistrement ne fait que committer. Le badge
   compte les commits en attente (`gitBar(git)` de `lib.js`, d'après
@@ -216,7 +216,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs et Gear reco : le compte de changements
+La barre d'enregistrement de Rangs, Gear reco et Noms : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -318,3 +318,39 @@ Note repliée (état retenu) : ses deux cartes se rangent en une ligne au-dessus
 de l'éditeur, qui prend toute la largeur. Propres à l'onglet, dans
 `tabs/discord.css` faute de composant commun : `.d-grp` (boutons d'outil
 accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).
+
+## Outils — croquis
+
+### Noms (1200 px, fait — B34)
+
+Le nom court d'affichage et les alias de recherche d'un perso, les deux outils
+de l'admin en un onglet. Croquis du rendu :
+
+```
+.head  Noms — Le nom court d'affichage d'un perso et ses alias de recherche…
+.savebar   2 persos modifiés · 1 refus   [Annuler] [Enregistrer]   (un lot : tous les persos modifiés, pas seulement celui à l'écran)
+.card.n-cols — deux colonnes (320 px | le reste ; l'une sous l'autre sous 900 px)
+  gauche .n-side : [Chercher un perso…] [État ▾ : À traiter (défaut) · Nom court trop long · Avec nom court · Avec alias · Tous]
+                   « 3 à traiter sur 129 »
+                   la liste (elle défile dans sa colonne), une ligne = un bouton : visage 32 px · nom EN · badge d'état · point
+                     badge : « déborde » (ko) = à traiter ; « court trop long » (warn) ; « court » (ok) = un nom court qui tient ; rien quand tout tient
+                     point : accent = modifié, pas enregistré ; rouge = refusé au dernier enregistrement
+                     tri : à traiter, puis court trop long, puis par nom ; le perso ouvert garde sa ligne hors du filtre d'état
+                   .empty « Aucun perso à traiter… » quand la liste est vide
+  droite .n-sheet (le perso choisi, `#names/<id>` ; avant, un .empty « Choisir un perso dans la liste. »)
+     visage 56 px · nom EN · ses badges (l'état, « refusé : le disque avait changé », « modifié »)
+     p.hint  la règle : le nom court là où le nom complet ne tient pas sur deux lignes de 80 px ; sans valeur, l'anglais sert
+     table  Langue | Nom complet + badge « tient » (ok) / « déborde » (ko) | Nom court : [input 22ch, placeholder = le nom complet] puis le verdict du nom court EFFECTIF
+            verdict : badge « tient » / « déborde » / « — » (aucun nom court) / « … » (le serveur n'a pas encore jugé) ; champ vide = « = en : S.Regina » atténué devant le badge
+     Alias de recherche  « Déjà cherchable » : .chip.base (atténués, sans croix)
+                         « Alias (n) » : un cadre de champ (.n-box) — .chip.alias (accent, ✕), .chip.alias.warn + title « déjà cherchable sans cet alias », puis l'input « + alias (Entrée, virgule)… »
+                         Entrée ou virgule ajoute, Retour arrière sur champ vide retire le dernier, ✕ retire ; le texte encore dans le champ part avec « Enregistrer »
+```
+
+Le verdict vient du serveur, jamais de la page : `/api/names/state` le donne
+pour le disque (la liste et les badges d'état ne bougent donc qu'après
+« Enregistrer », quand l'état est relu), `POST /api/names/fit` pour la saisie
+— 300 ms après la dernière frappe, les noms courts effectifs du perso en une
+requête, gardés par texte. Le point d'une ligne et le badge « modifié » suivent
+la saisie aussitôt. Quitter l'onglet avec des persos en attente demande
+confirmation (`canLeave`), comme Gear reco.

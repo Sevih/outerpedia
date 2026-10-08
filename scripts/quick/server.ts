@@ -4,8 +4,9 @@
  * Un serveur HTTP local de quelques routes et UNE page (`ui/`, un fichier par
  * onglet, assemblée à la requête — cf. `ui-serve.ts`) : mettre à jour un code
  * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, éditer les
- * recos d'équipement d'un perso, écrire un message Discord que le bot poste.
- * Les cinq premiers committent ; « Pousser », dans l'en-tête, pousse `main`.
+ * recos d'équipement d'un perso, écrire un message Discord que le bot poste,
+ * curer un nom court ou des alias de recherche. Tous committent, sauf le
+ * message Discord ; « Pousser », dans l'en-tête, pousse `main`.
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
  * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
  * du jeu, ce qui n'a aucun sens pour changer quatre lignes de JSON.
@@ -35,12 +36,15 @@ import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
   GEAR_RECO_DEPS,
+  NAMES_DEPS,
   TRANSLATE_DEPS,
   addComics,
   addVideo,
   currentCoupons,
+  fitNames,
   gearRecoState,
   gitState,
+  namesState,
   parseTarget,
   previewGearBuilds,
   pushMain,
@@ -48,6 +52,7 @@ import {
   rewardOptions,
   saveCouponList,
   saveGearReco,
+  saveNames,
   saveRanks,
   searchRewards,
   searchVideos,
@@ -55,6 +60,7 @@ import {
   videoTargets,
   type ComicBatch,
   type GitState,
+  type NameChange,
   type Outcome,
   type RankChange,
   type Report,
@@ -461,6 +467,26 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const { texts } = await body<{ texts?: unknown }>(req);
     const out = await translateNotes(strings(texts), TRANSLATE_DEPS);
     json(res, out, 'error' in out ? 500 : 200);
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/names/state') {
+    // Lu du disque à chaque appel, comme les rangs : le roster, ses noms, son
+    // nom court, ses alias, et le verdict « déborde » du site, par langue.
+    json(res, namesState());
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/names/fit') {
+    // Le verdict en direct de la saisie : la règle du site, rien ne s'écrit.
+    const b = await body<{ texts?: unknown } | null>(req).catch(() => null);
+    json(res, fitNames(b?.texts));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/names') {
+    const { changes } = await body<{ changes: NameChange[] }>(req);
+    await stream(res, (report) => withGit(saveNames(changes, NAMES_DEPS, report)));
     return;
   }
 

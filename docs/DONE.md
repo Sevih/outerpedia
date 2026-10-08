@@ -7,6 +7,106 @@
 
 ## 2026-10-08
 
+- **quick : onglet « Noms » — noms courts et alias de recherche en un écran,
+  avec le verdict « ce nom déborde-t-il ? » du site (lot B34, migration 1 + 2)**
+  (08/10) : premier lot de `docs/quick-migration.md`. Les deux outils de
+  l'admin « Short names » et « Search aliases » deviennent UN onglet, premier
+  du groupe « Outils » (qui perd son « à venir »), et les deux agacements
+  notés par Sevih sont corrigés en portant : on voit, par langue, si le nom
+  complet déborde et si le nom court tient ; et les deux données d'un perso
+  sont sur la même fiche.
+  **Serveur** (`scripts/quick/actions.ts`, routes dans `server.ts`) — la
+  logique reste celle du site et de l'admin, appelée telle quelle :
+  `namesState()` (`GET /api/names/state`) rend le roster
+  (`getCharacterListItems`), le nom complet des six langues
+  (`characterDisplayName`), le nom court et les alias du disque, `base`
+  (`characterSearchNames` sans alias) et le verdict `fitsOnTwoLines` par
+  langue — `fits.full`, `fits.short` sur le nom court EFFECTIF (`lRec`, donc
+  l'anglais quand la langue n'a pas sa valeur ; `null` sans nom court) — plus
+  `todo` (une langue où le nom complet déborde et où le nom court effectif
+  manque ou déborde), calculé une fois, là ; `fitNames()`
+  (`POST /api/names/fit`, lecture seule, entré dans `READ_ONLY_POSTS` de
+  `shot.mjs`) rend la même règle pour la saisie ; `saveNames()`
+  (`POST /api/names`, sous `withGit`) refuse sans écrire un perso dont le
+  disque ne porte plus ce que la page avait chargé (« REFUSÉ — <perso> : le
+  disque a changé depuis le chargement. »), n'appelle que le store dont la
+  donnée change (`upsertShortName`, `upsertSearchAliases` — trim et
+  dédoublonnage restent les leurs, une liste vide leur est passée telle
+  quelle), puis UN `commitPaths` sur les seuls fichiers touchés,
+  `chore(names): <perso>` ou `chore(names): N persos` ; un lot à moitié
+  refusé committe le reste. **Largeur retenue : la constante 80**, avec le
+  commentaire de `card-label.test.ts` — `SCALE` de `CharacterCard.tsx` n'est
+  pas exportée. **Page** (`ui/tabs/names.{html,js,css}`, entrée de `GROUPS`,
+  marqueur et imports d'`index.html`) : deux colonnes dans une carte — la
+  liste (recherche, état « À traiter » par défaut, compteur « N à traiter sur
+  129 », badge « déborde » / « court trop long » / « court », point accent
+  d'un perso modifié, point rouge d'un refus) et la fiche (`#names/<id>`) :
+  le tableau des six langues avec le verdict du nom complet, un champ de nom
+  court par langue et le verdict du nom effectif (« = en : … » quand le champ
+  est vide), relancé 300 ms après la dernière frappe en une requête ; les
+  alias en chips (Entrée, virgule, Retour arrière, ✕, doublon de `base` en
+  `warn`), le texte encore dans le champ comptant à l'enregistrement.
+  Savebar pour tout le lot, état relu après l'enregistrement, `canLeave`
+  comme Gear reco. **Admin** : les deux liens sortent du menu
+  (`src/app/admin/layout.dev.tsx`), les pages restent joignables par URL ;
+  `card-label.test.ts` renvoie à l'onglet. **Docs** : étapes 1 et 2 dans
+  « Déjà dans quick » (`docs/quick-migration.md`, la numérotation des autres
+  inchangée), croquis « Noms » dans `scripts/quick/ui/STYLE.md`.
+  **Choix de forme, à relire** : `saveNames(changes, deps, report)` et
+  `namesState(disk)` prennent leurs lectures et écritures en argument (comme
+  `saveGearReco`), sans quoi ni les stores ni `commitPaths` ne se remplacent
+  en test ; la réponse de l'enregistrement porte `refused` et `saved` (des
+  ids) ; chaque ligne porte `name` (le nom anglais) et l'état `langs` et
+  `width`, pour que la page n'écrive ni la liste des langues ni les 80 px ;
+  le portrait n'est pas un champ, la page le compose de l'id comme Rangs ;
+  la liste et les badges d'état montrent le DISQUE (le verdict du serveur) et
+  ne tournent qu'après « Enregistrer » — seuls les verdicts par langue de la
+  fiche, le point et le badge « modifié » suivent la frappe ; le perso ouvert
+  garde sa ligne hors du filtre d'état (enregistré, il sortirait de « À
+  traiter » sous le curseur) et la liste défile jusqu'à lui ; la recherche
+  porte aussi sur `base` et les alias ; Entrée pendant une composition
+  (japonais, coréen) n'ajoute pas d'alias.
+  **Tests** (27 de plus). `actions.test.ts` : `namesState` sur un disque
+  FACTICE (celui du jour n'a rien à traiter) et le roster réel — `2000085`
+  est « à traiter » sans nom court, plus avec « S.Regina », `fr` replie sur
+  `en`, `fits.short` à `null` sans nom court, un nom court anglais trop long
+  déborde partout où la langue n'a pas le sien, `base` sans les alias ;
+  `fitNames` (un booléen par texte, rien ne lève) ; `saveNames` à stores et
+  git factices — un commit et deux fichiers, un seul store et un seul
+  fichier quand un seul a changé, « 2 persos », refus situé et reste
+  committé, alias changés d'ailleurs, `[]` et `{}` passés aux stores, rien à
+  écrire, perso inconnu, commit refusé. `ui-serve.test.ts` : la vraie
+  coquille, le vrai `lib.js` et le vrai `tabs/names.js` dans happy-dom,
+  `fetch` factice — Outils n'est plus `soon`, filtre et compteur, un badge
+  par état, « = en », verdict après 300 ms en une requête, point `edit`,
+  chips, lot enregistré avec le texte en attente du champ d'alias (c'est la
+  page qui le compte : le serveur reçoit une liste), relecture, refus,
+  « Annuler », confirmation à la sortie, `#names/<id>`. Trois mutations
+  jouées à la main (délai à 500 ms, texte en attente ignoré, ligne non
+  gardée) : les deux premières tombaient, la troisième a demandé un test de
+  plus. **Vérification** : `pnpm typecheck` (`tsc --noEmit` ×3, sans
+  sortie), `pnpm lint` (`eslint`, sans sortie), `pnpm test` (« Test Files
+  198 passed (198) », « Tests 2866 passed (2866) »), suite de quick sous
+  `NODE_ENV=development` (« Tests 442 passed (442) »). **Banc** : quick
+  isolé sur :4851, rien enregistré ; `/tmp/quick-shots/b34/names-liste.png`
+  — « 0 à traiter sur 129 », la liste vide dit « Aucun perso à traiter… »
+  — et `names-regina.png` (`--hash names/2000085`) : cinq noms complets en
+  « déborde » (seul le chinois tient), six noms courts en « tient », badge
+  « court », douze termes « déjà cherchable », aucun alias ; vus aussi, hors
+  dossier, la liste entière (« Tous ») et la fenêtre de 820 px (la liste
+  au-dessus de la fiche). **Sur le disque d'aujourd'hui : 0 perso à traiter,
+  0 nom court trop long, 11 noms courts, aucun alias.** Laissé, hors
+  périmètre : la vue par défaut est donc vide tant que rien n'est à traiter
+  (c'est le filtre demandé — passer à « Tous » pour curer un alias) ;
+  `data/curated/search-aliases.json` n'existe pas encore, le premier alias
+  enregistré le créera ; `2000085` s'appelle « Poolside Trickster Regina »
+  dans les données, pas « Pool Party Prankster Regina » comme l'écrivent le
+  lot et le docblock de `src/lib/data/short-names.ts`, qui dit aussi que les
+  entrées « ne portent qu'`en` » alors que dix sur onze portent les six
+  langues ; l'éditeur de l'admin donnait en repère le nom nu (`char.name`,
+  sans le titre) ; `CLAUDE.md` annonce encore « Six gestes » ; cliquer
+  l'onglet remet `#names` dans l'adresse (`go` de `lib.js`), le perso
+  ouvert n'y revient qu'au prochain choix.
 - **Relecture A30** (Fable, 08/10) : `04f126cb` validé — 95 lots, aucun
   ouvert ; déjà poussé par Sevih, CI verte dessus. Périmètre attendu
   (`index.html`, `lib.js`, `quick.css`, STYLE.md, `ui-serve.test.ts`, DONE,

@@ -32,9 +32,21 @@
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
-      ordre et règles dans `docs/quick-migration.md`. À faire par Sevih :
-      remplir la colonne « Agacements » (en vrac) ; puis un lot par section,
-      à partir de Short names.
+      ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
+      Search aliases (onglet « Noms », lot B34). À faire par Sevih : remplir
+      la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
+      et Pro / Con iront dans l'éditeur de perso.
+- [ ] **Onglet « Noms » — contrôles à l'écran (lot B34)** : le banc ne tape
+      pas. Passer l'état à « Tous », ouvrir un perso sans nom court dont un
+      nom complet « déborde », taper un nom court et voir son badge passer
+      de « … » à « tient » (ou « déborde ») et les langues vides afficher
+      « = en : … » ; ajouter un alias (Entrée, virgule, Retour arrière, ✕,
+      un doublon en ambre) ; « Enregistrer » — attendu : le commit
+      `chore(names): <perso>`, « Pousser » qui compte un commit de plus, la
+      liste et les badges relus. Le premier alias crée
+      `data/curated/search-aliases.json`. À juger : la vue par défaut « À
+      traiter » est vide tant que le disque n'a rien à traiter (0 sur 129
+      aujourd'hui).
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
       l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne

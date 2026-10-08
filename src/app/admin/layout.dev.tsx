@@ -62,8 +62,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         { label: 'Pro / Con', href: '/admin/tools/pros-cons' },
         { label: 'Synergy', href: '/admin/tools/synergies' },
-        { label: 'Search aliases', href: '/admin/tools/search-aliases' },
-        { label: 'Short names', href: '/admin/tools/short-names' },
+        // Short names et Search aliases : portés dans quick (Outils › Noms),
+        // liens retirés le 08/10 — les pages restent joignables par leur URL
+        // jusqu'au retrait de l'admin.
         // Promo code : porté dans quick (Codes promo), lien retiré le 08/10 —
         // la page reste joignable par son URL jusqu'au retrait de l'admin.
         { label: 'Banner', href: '/admin/tools/banners' },

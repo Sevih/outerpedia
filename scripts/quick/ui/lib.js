@@ -46,7 +46,7 @@ export const GROUPS = [
   },
   { id: 'editors', label: 'Éditeurs', soon: true, sections: [] },
   { id: 'guides', label: 'Guides', soon: true, sections: [] },
-  { id: 'tools', label: 'Outils', soon: true, sections: [] },
+  { id: 'tools', label: 'Outils', sections: [{ id: 'names', label: 'Noms' }] },
 ];
 
 /**

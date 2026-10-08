@@ -22,7 +22,7 @@ import { fitsOnTwoLines } from './CharacterPortrait';
  *
  * SI CE TEST CASSE : un personnage vient d'arriver avec un nom long. Ce n'est pas
  * le test qu'il faut assouplir, c'est un nom court qu'il faut lui curer, dans
- * `/admin/tools/short-names`.
+ * quick, onglet Noms (`#names/<id>`).
  */
 
 /**

@@ -34,6 +34,13 @@
  * ne compte pas : `pnpm commit` lancé depuis l'admin hérite de `development`,
  * que vitest garde).
  *
+ * Et contrat de l'onglet « Noms » — `namesState` (le roster et le verdict
+ * « déborde » du site), `fitNames` (le même, à la saisie) et `saveNames`. Les
+ * deux lectures (noms courts, alias) et les trois écritures (les deux stores,
+ * git) sont INJECTÉES : le verdict se joue sur un disque FACTICE — celui du
+ * jour n'a aucun perso « à traiter », et il bouge —, et aucun test n'écrit dans
+ * `data/curated/`. Seul le roster est réel (les noms complets de `2000085`).
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -48,27 +55,35 @@ import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSy
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CharacterCurated, GearBuild } from '@contracts';
+import type { CharacterCurated, GearBuild, LocalizedText } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
+import { getCharacterListItems } from '@/lib/data/characters';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
+import { LANGS } from '@/lib/i18n/config';
 import {
   NO_TRANSLATE_KEY,
   addComics,
   checkGearBuilds,
   comicLangOf,
   commitPaths,
+  fitNames,
   gearRecoState,
   gitState,
   groupComics,
+  namesState,
   planRankChanges,
   previewGearBuilds,
   pushMain,
   saveGearReco,
+  saveNames,
   translateNotes,
   type ComicsDeps,
   type ComicUpload,
   type GearCatalog,
   type GearRecoDeps,
+  type NameChange,
+  type NamesDeps,
+  type NamesDisk,
   type Outcome,
   type RankChange,
   type RankDisk,
@@ -1389,6 +1404,281 @@ describe('translateNotes — traducteur injecté', () => {
 const page = (name: string): ComicUpload => ({
   name,
   data: Buffer.from(name).toString('base64'),
+});
+
+/** Pool Party Regina : un nom complet qui déborde en 80 px dans cinq langues. */
+const REGINA = '2000085';
+
+/** Le disque de l'onglet « Noms », factice : ce que rendraient les deux curés. */
+const namesDisk = (
+  short: Record<string, LocalizedText> = {},
+  aliases: Record<string, string[]> = {},
+): NamesDisk => ({ loadShortNames: () => short, loadSearchAliases: () => aliases });
+
+describe('namesState — le roster et le verdict « déborde » du site', () => {
+  const regina = (disk: NamesDisk) => {
+    const row = namesState(disk).rows.find((r) => r.id === REGINA);
+    if (!row) throw new Error(`${REGINA} absent du roster`);
+    return row;
+  };
+
+  it('rend tout le roster, les six langues et la largeur du libellé', () => {
+    const state = namesState(namesDisk());
+    expect(state.rows.map((r) => r.id).sort()).toEqual(
+      getCharacterListItems()
+        .map((c) => c.id)
+        .sort(),
+    );
+    expect(state.langs).toEqual(LANGS);
+    expect(state.width).toBe(80);
+    expect(Object.keys(regina(namesDisk()).full)).toEqual(LANGS);
+  });
+
+  it('SANS nom court : le nom complet déborde, le perso est « à traiter »', () => {
+    const row = regina(namesDisk());
+    expect(row.fits.full.en).toBe(false);
+    // `null`, pas `false` : il n'y a pas de nom court à juger.
+    expect(row.fits.short).toEqual(Object.fromEntries(LANGS.map((l) => [l, null])));
+    expect(row.short).toEqual({});
+    expect(row.todo).toBe(true);
+  });
+
+  it('AVEC « S.Regina » : il ne l’est plus, et `fr` sans valeur replie sur `en`', () => {
+    const row = regina(namesDisk({ [REGINA]: { en: 'S.Regina' } }));
+    expect(row.short).toEqual({ en: 'S.Regina' });
+    expect(row.fits.full.fr).toBe(false);
+    expect(row.fits.short).toEqual(Object.fromEntries(LANGS.map((l) => [l, true])));
+    expect(row.todo).toBe(false);
+  });
+
+  it('un nom court anglais trop long déborde partout où la langue n’a pas le sien', () => {
+    const row = regina(
+      namesDisk({ [REGINA]: { en: 'Poolside Trickster Regina', jp: 'レジーナ' } }),
+    );
+    expect(row.fits.short.en).toBe(false);
+    expect(row.fits.short.fr).toBe(false);
+    expect(row.fits.short.jp).toBe(true);
+    // Le nom complet déborde en anglais et son nom court aussi : toujours à traiter.
+    expect(row.todo).toBe(true);
+  });
+
+  it('`base` est ce qui se cherche déjà, SANS les alias', () => {
+    const row = regina(namesDisk({}, { [REGINA]: ['Sregina', 'pool regina'] }));
+    expect(row.aliases).toEqual(['Sregina', 'pool regina']);
+    expect(row.base).toContain('regina');
+    expect(row.base).toContain(REGINA);
+    expect(row.base).not.toContain('sregina');
+    expect(row.base).toEqual(regina(namesDisk()).base);
+  });
+});
+
+describe('fitNames — le verdict d’une saisie', () => {
+  it('rend un booléen par texte, dans l’ordre', () => {
+    const full = namesState(namesDisk()).rows.find((r) => r.id === REGINA)?.full.en;
+    expect(fitNames(['S.Regina', full, '', 'レジーナ'])).toEqual({
+      fits: [true, false, true, true],
+    });
+  });
+
+  it('ne lève pas sur autre chose qu’une liste de chaînes', () => {
+    expect(fitNames(undefined)).toEqual({ fits: [] });
+    expect(fitNames('S.Regina')).toEqual({ fits: [] });
+    expect(fitNames([3, null])).toEqual({ fits: [true, true] });
+  });
+});
+
+describe('saveNames — lectures et écritures injectées', () => {
+  // Deux persos réels du roster : le journal et le commit portent leur nom.
+  const [one, two] = namesState(namesDisk()).rows;
+
+  /** Le disque et les trois écritures, factices : elles notent leurs appels. */
+  function deps(
+    over: {
+      short?: Record<string, LocalizedText>;
+      aliases?: Record<string, string[]>;
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      short: [] as [string, LocalizedText][],
+      aliases: [] as [string, string[]][],
+      git: [] as [string[], string][],
+    };
+    const fake: NamesDeps = {
+      ...namesDisk(over.short, over.aliases),
+      upsertShortName: async (id, name) => {
+        calls.short.push([id, name]);
+        return [];
+      },
+      upsertSearchAliases: async (id, aliases) => {
+        calls.aliases.push([id, aliases]);
+        return [];
+      },
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  const change = (id: string, over: Partial<Omit<NameChange, 'id'>> = {}): NameChange => ({
+    id,
+    short: {},
+    aliases: [],
+    was: { short: {}, aliases: [] },
+    ...over,
+  });
+
+  it('un perso, nom court ET alias : UN commit, les deux fichiers, le message à son nom', async () => {
+    const { calls, fake } = deps();
+    const out = await saveNames(
+      [change(one.id, { short: { en: 'Short' }, aliases: ['alt', 'other'] })],
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, refused: [], saved: [one.id] });
+    expect(calls.short).toEqual([[one.id, { en: 'Short' }]]);
+    expect(calls.aliases).toEqual([[one.id, ['alt', 'other']]]);
+    expect(calls.git).toEqual([
+      [
+        ['data/curated/short-names.json', 'data/curated/search-aliases.json'],
+        `chore(names): ${one.name}`,
+      ],
+    ]);
+    expect(out.log).toEqual([
+      `${one.name} : nom court en « Short » ; alias alt, other.`,
+      'git : fait',
+    ]);
+  });
+
+  it('un seul des deux a changé : son store seul, son fichier seul', async () => {
+    const disk = { short: { [one.id]: { en: 'Short' } }, aliases: { [one.id]: ['alt'] } };
+    const was = { short: { en: 'Short' }, aliases: ['alt'] };
+
+    const short = deps(disk);
+    await saveNames(
+      [change(one.id, { short: { en: 'Shorter' }, aliases: ['alt'], was })],
+      short.fake,
+    );
+    expect(short.calls.short).toEqual([[one.id, { en: 'Shorter' }]]);
+    expect(short.calls.aliases).toEqual([]);
+    expect(short.calls.git).toEqual([
+      [['data/curated/short-names.json'], `chore(names): ${one.name}`],
+    ]);
+
+    const aliases = deps(disk);
+    await saveNames(
+      [change(one.id, { short: { en: 'Short' }, aliases: ['alt', 'new'], was })],
+      aliases.fake,
+    );
+    expect(aliases.calls.short).toEqual([]);
+    expect(aliases.calls.aliases).toEqual([[one.id, ['alt', 'new']]]);
+    expect(aliases.calls.git).toEqual([
+      [['data/curated/search-aliases.json'], `chore(names): ${one.name}`],
+    ]);
+  });
+
+  it('deux persos : UN commit, « 2 persos »', async () => {
+    const { calls, fake } = deps();
+    const out = await saveNames(
+      [change(one.id, { short: { en: 'A' } }), change(two.id, { aliases: ['b'] })],
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, saved: [one.id, two.id] });
+    expect(calls.git).toEqual([
+      [
+        ['data/curated/short-names.json', 'data/curated/search-aliases.json'],
+        'chore(names): 2 persos',
+      ],
+    ]);
+  });
+
+  it('disque changé depuis le chargement : refus situé, sans écrire, les autres passent', async () => {
+    // Le nom court de `one` a été posé d'ailleurs : la page le croyait vide.
+    const { calls, fake } = deps({ short: { [one.id]: { en: 'Elsewhere' } } });
+    const out = await saveNames(
+      [change(one.id, { short: { en: 'Mine' } }), change(two.id, { short: { en: 'B' } })],
+      fake,
+    );
+
+    expect(out.ok).toBe(false);
+    expect(out.refused).toEqual([one.id]);
+    expect(out.saved).toEqual([two.id]);
+    expect(out.log[0]).toBe(`REFUSÉ — ${one.name} : le disque a changé depuis le chargement.`);
+    expect(calls.short).toEqual([[two.id, { en: 'B' }]]);
+    // Le reste du lot est committé, au nom du seul perso écrit.
+    expect(calls.git).toEqual([[['data/curated/short-names.json'], `chore(names): ${two.name}`]]);
+  });
+
+  it('des alias changés d’ailleurs refusent aussi un perso dont seul le nom court bouge', async () => {
+    const { calls, fake } = deps({ aliases: { [one.id]: ['elsewhere'] } });
+    const out = await saveNames([change(one.id, { short: { en: 'Mine' } })], fake);
+
+    expect(out).toMatchObject({ ok: false, refused: [one.id], saved: [] });
+    expect(out.log.at(-1)).toBe('Rien à enregistrer.');
+    expect(calls).toEqual({ short: [], aliases: [], git: [] });
+  });
+
+  it('liste d’alias vide : le store reçoit `[]` (il retire la clé)', async () => {
+    const { calls, fake } = deps({ aliases: { [one.id]: ['alt'] } });
+    const out = await saveNames(
+      [change(one.id, { aliases: [], was: { short: {}, aliases: ['alt'] } })],
+      fake,
+    );
+
+    expect(out.ok).toBe(true);
+    expect(calls.aliases).toEqual([[one.id, []]]);
+    expect(out.log[0]).toBe(`${one.name} : alias retirés.`);
+  });
+
+  it('nom court vidé : le store reçoit `{}` (il retire la clé)', async () => {
+    const { calls, fake } = deps({ short: { [one.id]: { en: 'Short' } } });
+    const out = await saveNames(
+      [change(one.id, { short: {}, was: { short: { en: 'Short' }, aliases: [] } })],
+      fake,
+    );
+
+    expect(out.ok).toBe(true);
+    expect(calls.short).toEqual([[one.id, {}]]);
+    expect(out.log[0]).toBe(`${one.name} : nom court retiré.`);
+  });
+
+  it('rien ne change : ni écriture ni commit', async () => {
+    const { calls, fake } = deps({ short: { [one.id]: { en: 'Short' } } });
+    const out = await saveNames(
+      [change(one.id, { short: { en: 'Short' }, was: { short: { en: 'Short' }, aliases: [] } })],
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+      refused: [],
+      saved: [],
+    });
+    expect(calls).toEqual({ short: [], aliases: [], git: [] });
+  });
+
+  it('perso inconnu, lot vide : rien n’est écrit', async () => {
+    const ghost = deps();
+    const out = await saveNames([change('ghost', { short: { en: 'Boo' } })], ghost.fake);
+    expect(out).toMatchObject({ ok: false, refused: ['ghost'], saved: [] });
+    expect(ghost.calls).toEqual({ short: [], aliases: [], git: [] });
+
+    const empty = deps();
+    expect((await saveNames([], empty.fake)).ok).toBe(false);
+    expect(empty.calls).toEqual({ short: [], aliases: [], git: [] });
+  });
+
+  it('commit refusé : le perso est écrit, l’échec est dit', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
+    const out = await saveNames([change(one.id, { short: { en: 'A' } })], fake);
+
+    expect(out).toMatchObject({ ok: false, refused: [], saved: [one.id] });
+    expect(out.log.at(-1)).toBe('git commit a échoué');
+  });
 });
 
 describe('comicLangOf — la langue que dit le nom', () => {

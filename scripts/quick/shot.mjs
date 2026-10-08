@@ -50,13 +50,15 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
 /**
  * Les `POST` que la page émet en se chargeant et qui ne font que LIRE (l'aperçu
  * du brouillon, les emojis des serveurs cochés, l'aperçu des builds d'un
- * perso). Sans eux l'onglet Discord serait photographié sur une erreur, et les
- * cartes de Gear reco sur un aperçu refusé.
+ * perso, le verdict « déborde » d'un nom court saisi). Sans eux l'onglet
+ * Discord serait photographié sur une erreur, et les cartes de Gear reco sur
+ * un aperçu refusé.
  */
 export const READ_ONLY_POSTS = new Set([
   '/api/discord/preview',
   '/api/discord/emojis',
   '/api/gear-reco/preview',
+  '/api/names/fit',
 ]);
 
 const SECTION = /<section id="tab-([a-z0-9-]+)"(?: hidden)?>/g;

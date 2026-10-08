@@ -48,6 +48,9 @@ existant, période ou récompenses : supprimer puis recréer, ou lot A pour
 l'ajouter), 4-comics, Vidéos, Discord.
 Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
 un exemplaire).
+Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
+liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
+« ce nom déborde-t-il ? » du site par langue).
 
 ## Ordre et inventaire
 
@@ -55,14 +58,6 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 « Agacements » à remplir (en vrac, même approximatif).
 
 ### 1. Outils simples (un lot A/B chacun, dans cet ordre)
-
-1. **Tools › Short names**
-   liste + fiche `[id]`
-   - Agacements : aucun moyen de savoir si le nom actel (peut importe la langue) sera genant (et donc si il est necessaire de mettre un short)
-
-2. **Tools › Search aliases**
-   liste + fiche `[id]`
-   - Agacements : ça devrais plus ou moins fusionner avec short name.
 
 3. **Tools › Synergy**
    liste + fiche `[id]`

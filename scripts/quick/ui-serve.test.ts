@@ -7,7 +7,7 @@ import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
 
 const UI = resolve(import.meta.dirname, 'ui');
-const TABS = ['coupons', 'comics', 'videos', 'ranks', 'gear', 'discord'];
+const TABS = ['coupons', 'comics', 'videos', 'ranks', 'gear', 'discord', 'names'];
 
 /** Comme `server.ts` : `tabs/<nom>.html`, ou `null` s'il manque. */
 const readTab = (name: string): string | null => {
@@ -49,7 +49,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : six sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : sept sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -187,10 +187,15 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/video',
       '/api/ranks',
       '/api/gear-reco',
+      '/api/names',
       '/api/discord/send',
       '/api/quit',
     ])
       expect(READ_ONLY_POSTS.has(path), path).toBe(false);
+  });
+
+  it('relaie le verdict d’un nom court saisi : il ne fait que lire', () => {
+    expect(READ_ONLY_POSTS.has('/api/names/fit')).toBe(true);
   });
 });
 
@@ -438,5 +443,410 @@ describe('log — le journal en haut de la page', () => {
     expect(last.textContent).toBe('git : rien à committer.');
     bar.click();
     expect(lines()).toEqual([['ok', 'git : rien à committer.']]);
+  });
+});
+
+describe('Noms — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  const LANGS = ['en', 'jp', 'kr', 'zh', 'fr', 'es'];
+  const per = <T>(value: T, over: Record<string, T> = {}): Record<string, T> => ({
+    ...Object.fromEntries(LANGS.map((l) => [l, value])),
+    ...over,
+  });
+
+  interface Row {
+    id: string;
+    name: string;
+    full: Record<string, string>;
+    short: Record<string, string>;
+    aliases: string[];
+    base: string[];
+    fits: { full: Record<string, boolean>; short: Record<string, boolean | null> };
+    todo: boolean;
+  }
+  const row = (id: string, name: string, over: Partial<Row> = {}): Row => ({
+    id,
+    name,
+    full: per(name),
+    short: {},
+    aliases: [],
+    base: [name.toLowerCase(), id],
+    fits: { full: per(true), short: per<boolean | null>(null) },
+    todo: false,
+    ...over,
+  });
+
+  /** Quatre persos, un par état : à traiter, nom court trop long, nom court, rien. */
+  const roster = (): Row[] => [
+    row('4', 'Zed'),
+    row('3', 'Short Carla', {
+      short: { en: 'S.Carla' },
+      aliases: ['carlita'],
+      fits: { full: per(true, { en: false }), short: per<boolean | null>(true) },
+    }),
+    row('2', 'Long Bella', {
+      short: { en: 'L.Bella', jp: 'とても長いベラの名前です' },
+      fits: { full: per(true), short: per<boolean | null>(true, { jp: false }) },
+    }),
+    row('1', 'Overflowing Name Anna', {
+      fits: { full: per(true, { en: false, fr: false }), short: per<boolean | null>(null) },
+      todo: true,
+    }),
+  ];
+
+  type Call = { path: string; body: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom : la VRAIE coquille assemblée,
+   * le vrai `lib.js` et le vrai `tabs/names.js` (eux seuls : les autres onglets
+   * ne sont pas chargés), démarrés par `sections.start()`. `fetch` est factice :
+   * il sert `rows`, juge un nom court à sa longueur (dix caractères au plus) et
+   * note ce que la page poste.
+   */
+  async function names(opts: { hash?: string; saved?: (changes: Call['body']) => unknown } = {}) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const disk = { rows: roster() };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      if (init) calls.push({ path, body });
+      if (path === '/api/names/state') return answer({ rows: disk.rows, langs: LANGS, width: 80 });
+      if (path === '/api/names/fit')
+        return answer({ fits: (body as { texts: string[] }).texts.map((t) => t.length <= 10) });
+      if (path === '/api/names') return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'] });
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'names.js'));
+    lib.sections.start();
+    const settle = () => new Promise((done) => setTimeout(done, 0));
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      disk,
+      settle,
+      /** Les lignes de la liste : nom, badge, point. */
+      list: () =>
+        all('#n-list .n-row').map((b) => [
+          b.querySelector('.n-name')?.textContent,
+          b.querySelector('.badge')?.className ?? '',
+          b.querySelector('.pt')?.className ?? '',
+        ]),
+      filter: (value: string) => {
+        el('n-state').value = value;
+        fire(el('n-state'), 'input');
+      },
+      open: (id: string) =>
+        all('#n-list .n-row')
+          .find((b) => b.dataset.id === id)
+          ?.click(),
+      /** Le champ du nom court d'une langue, et son verdict tel qu'il se lit. */
+      short: (lang: string) => all(`#n-sheet input[data-lang="${lang}"]`)[0] as HTMLInputElement,
+      verdict: (lang: string) => all(`#n-sheet [data-verdict="${lang}"]`)[0].textContent,
+      type: (input: HTMLInputElement, value: string) => {
+        input.value = value;
+        fire(input, 'input');
+      },
+      key: (input: HTMLElement, key: string) => fire(input, 'keydown', key),
+      chips: () =>
+        all('#n-chips .chip').map((c) => [
+          c.firstChild?.textContent,
+          c.classList.contains('warn') ? c.title : '',
+        ]),
+    };
+  }
+
+  it('le groupe Outils n’est plus « à venir » : il ouvre Noms, la section est servie', async () => {
+    const { all, el } = await names();
+    const group = all('#groups button').find((b) => b.textContent?.includes('Outils'));
+    expect(group?.dataset.group).toBe('tools');
+    expect(group?.classList.contains('soon')).toBe(false);
+    expect(all('#groups .gtab.soon').map((b) => b.textContent?.trim().split(/\s+/)[0])).toEqual([
+      'Éditeurs',
+      'Guides',
+    ]);
+    expect(el('tab-names').hidden).toBe(true);
+    group?.click();
+    expect(el('tab-names').hidden).toBe(false);
+    expect(all('#tabs [data-tab="names"]')[0].getAttribute('aria-selected')).toBe('true');
+    // Pas `wide` : la section reste dans les 1200 px.
+    expect(all('main')[0].classList.contains('wide')).toBe(false);
+  });
+
+  it('filtre « À traiter » par défaut, le compte en tête, un badge par état', async () => {
+    const page = await names();
+    expect(page.el('n-state').value).toBe('todo');
+    expect(page.el('n-total').textContent).toBe('1 à traiter sur 4');
+    expect(page.list()).toEqual([['Overflowing Name Anna', 'badge ko', '']]);
+
+    // À traiter d'abord, puis le nom court trop long, puis par nom.
+    page.filter('all');
+    expect(page.list()).toEqual([
+      ['Overflowing Name Anna', 'badge ko', ''],
+      ['Long Bella', 'badge warn', ''],
+      ['Short Carla', 'badge ok', ''],
+      ['Zed', '', ''],
+    ]);
+    expect(page.all('#n-list .badge').map((b) => b.textContent)).toEqual([
+      'déborde',
+      'court trop long',
+      'court',
+    ]);
+
+    page.filter('long');
+    expect(page.list().map(([name]) => name)).toEqual(['Long Bella']);
+    page.filter('short');
+    expect(page.list().map(([name]) => name)).toEqual(['Long Bella', 'Short Carla']);
+    page.filter('alias');
+    expect(page.list().map(([name]) => name)).toEqual(['Short Carla']);
+
+    page.filter('all');
+    page.type(page.el('n-q'), 'carl');
+    expect(page.list().map(([name]) => name)).toEqual(['Short Carla']);
+  });
+
+  it('rien à traiter : la liste le dit, plutôt que de rester blanche', async () => {
+    const page = await names();
+    page.type(page.el('n-q'), 'zzz');
+    expect(page.list()).toEqual([]);
+    expect(page.el('n-empty').hidden).toBe(false);
+    expect(page.el('n-empty').textContent).toBe('Aucun perso ne passe les filtres.');
+  });
+
+  it('la fiche : six langues, le verdict du nom complet, « = en » quand la langue est vide', async () => {
+    const page = await names();
+    page.filter('all');
+    page.open('3');
+    expect(page.all('#n-sheet .n-id strong')[0].textContent).toBe('Short Carla');
+    expect(page.all('#n-sheet tbody tr')).toHaveLength(6);
+    expect(page.all('#n-sheet tbody tr td:nth-child(2) .badge').map((b) => b.textContent)).toEqual([
+      'déborde',
+      'tient',
+      'tient',
+      'tient',
+      'tient',
+      'tient',
+    ]);
+    // L'anglais porte sa valeur ; le français, vide, replie dessus.
+    expect(page.short('en').value).toBe('S.Carla');
+    expect(page.verdict('en')).toBe('tient');
+    expect(page.short('fr').value).toBe('');
+    expect(page.short('fr').placeholder).toBe('Short Carla');
+    expect(page.verdict('fr')).toBe('= en : S.Carla' + 'tient');
+    // Le perso ouvert est dans l'adresse.
+    expect(location.hash).toBe('#names/3');
+
+    // Sans nom court du tout : rien à juger.
+    page.open('4');
+    expect(page.verdict('en')).toBe('—');
+    expect(page.verdict('fr')).toBe('—');
+  });
+
+  it('la saisie relance le verdict, 300 ms après la dernière frappe, en UNE requête', async () => {
+    const page = await names();
+    page.open('1');
+    vi.useFakeTimers();
+    page.type(page.short('en'), 'O.A');
+    page.type(page.short('en'), 'O.Anna');
+    page.type(page.short('jp'), 'とても長いアンナの名前');
+    // Le texte suit aussitôt ; le verdict attend le serveur.
+    expect(page.verdict('fr')).toBe('= en : O.Anna' + '…');
+    await vi.advanceTimersByTimeAsync(299);
+    expect(page.calls).toEqual([]);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(page.calls).toEqual([
+      { path: '/api/names/fit', body: { texts: ['O.Anna', 'とても長いアンナの名前'] } },
+    ]);
+    expect(page.verdict('en')).toBe('tient');
+    expect(page.verdict('jp')).toBe('déborde');
+    expect(page.verdict('fr')).toBe('= en : O.Anna' + 'tient');
+
+    // Modifié, pas enregistré : le point de la ligne, le badge, la savebar.
+    expect(page.list()).toEqual([['Overflowing Name Anna', 'badge ko', 'pt edit']]);
+    expect(page.el('n-badges').textContent).toContain('modifié');
+    expect(page.el('n-count').textContent).toBe('1 perso modifié');
+    expect(page.el('n-save').disabled).toBe(false);
+
+    // Revenu à la valeur du disque : plus rien en attente.
+    page.type(page.short('en'), '');
+    page.type(page.short('jp'), '');
+    expect(page.list()).toEqual([['Overflowing Name Anna', 'badge ko', '']]);
+    expect(page.el('n-count').textContent).toBe('aucune modification');
+    expect(page.el('n-save').disabled).toBe(true);
+  });
+
+  it('les alias en chips : Entrée, virgule, Retour arrière, ✕, et le doublon en `warn`', async () => {
+    const page = await names();
+    page.filter('all');
+    page.open('3');
+    const input = page.el('n-alias');
+    expect(page.all('#n-sheet .chip.base').map((c) => c.textContent)).toEqual(['short carla', '3']);
+    expect(page.chips()).toEqual([['carlita', '']]);
+
+    page.type(input, 'carla s');
+    page.key(input, 'Enter');
+    expect(input.value).toBe('');
+    // « Short Carla » est déjà cherchable, quelle que soit la casse.
+    page.type(input, 'SHORT CARLA, sc,');
+    expect(input.value).toBe('');
+    expect(page.chips()).toEqual([
+      ['carlita', ''],
+      ['carla s', ''],
+      ['SHORT CARLA', 'déjà cherchable sans cet alias'],
+      ['sc', ''],
+    ]);
+    expect(page.el('n-alias-count').textContent).toBe('Alias (4)');
+
+    // Retour arrière sur un champ vide retire le dernier ; pas sur un champ rempli.
+    page.key(input, 'Backspace');
+    expect(page.chips().map(([a]) => a)).toEqual(['carlita', 'carla s', 'SHORT CARLA']);
+    input.value = 'x';
+    page.key(input, 'Backspace');
+    expect(page.chips()).toHaveLength(3);
+    input.value = '';
+
+    page.all('#n-chips [data-drop="0"]')[0].click();
+    expect(page.chips().map(([a]) => a)).toEqual(['carla s', 'SHORT CARLA']);
+    expect(page.list().find(([name]) => name === 'Short Carla')?.[2]).toBe('pt edit');
+  });
+
+  it('« Enregistrer » : tout le lot, le texte en attente du champ d’alias compris, puis le disque relu', async () => {
+    const page = await names({
+      saved: () => ({ ok: false, log: ['REFUSÉ — Zed'], refused: ['4'], saved: ['1', '3'] }),
+    });
+    page.filter('all');
+    page.open('1');
+    page.type(page.short('en'), 'O.Anna');
+    page.open('3');
+    // Tapé, jamais validé par Entrée : il part quand même.
+    page.type(page.el('n-alias'), 'carla s');
+    page.open('4');
+    page.type(page.short('fr'), 'Z');
+    expect(page.el('n-count').textContent).toBe('3 persos modifiés');
+    await page.settle();
+    page.calls.length = 0;
+
+    // Ce que le disque rendra à la relecture : Anna a son nom court.
+    page.disk.rows = roster().map((r) =>
+      r.id === '1'
+        ? { ...r, short: { en: 'O.Anna' }, todo: false, fits: { ...r.fits, short: per(true) } }
+        : r.id === '3'
+          ? { ...r, aliases: ['carlita', 'carla s'] }
+          : r,
+    );
+    page.el('n-save').click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.calls.find((c) => c.path === '/api/names')?.body).toEqual({
+      changes: [
+        { id: '1', short: { en: 'O.Anna' }, aliases: [], was: { short: {}, aliases: [] } },
+        {
+          id: '3',
+          short: { en: 'S.Carla' },
+          aliases: ['carlita', 'carla s'],
+          was: { short: { en: 'S.Carla' }, aliases: ['carlita'] },
+        },
+        { id: '4', short: { fr: 'Z' }, aliases: [], was: { short: {}, aliases: [] } },
+      ],
+    });
+    // Badges et liste suivent le disque ; le refusé garde un point rouge.
+    expect(page.list()).toEqual([
+      ['Long Bella', 'badge warn', ''],
+      ['Overflowing Name Anna', 'badge ok', ''],
+      ['Short Carla', 'badge ok', ''],
+      ['Zed', '', 'pt ko'],
+    ]);
+    expect(page.el('n-total').textContent).toBe('0 à traiter sur 4');
+    expect(page.el('n-count').textContent).toBe('aucune modification' + '1 refus');
+    expect(page.el('n-save').disabled).toBe(true);
+    // La fiche montrée (Zed, refusé) est revenue au disque.
+    expect(page.short('fr').value).toBe('');
+  });
+
+  it('le perso ouvert garde sa ligne, même hors du filtre d’état — pas hors de la recherche', async () => {
+    const page = await names({ hash: '#names/3' });
+    expect(page.el('n-state').value).toBe('todo');
+    expect(page.list().map(([name]) => name)).toEqual(['Overflowing Name Anna', 'Short Carla']);
+    expect(page.all('#n-list .n-row[aria-current="true"] .n-name')[0].textContent).toBe(
+      'Short Carla',
+    );
+    page.type(page.el('n-q'), 'anna');
+    expect(page.list().map(([name]) => name)).toEqual(['Overflowing Name Anna']);
+    // Un id inconnu dans l'adresse : l'onglet s'ouvre, sans fiche.
+    const ghost = await names({ hash: '#names/ghost' });
+    expect(ghost.el('tab-names').hidden).toBe(false);
+    expect(ghost.el('n-sheet').textContent?.trim()).toBe('Choisir un perso dans la liste.');
+  });
+
+  it('« Annuler » rend le disque ; quitter l’onglet avec des changements demande confirmation', async () => {
+    const page = await names({ hash: '#names/1' });
+    // `#names/<id>` : l'onglet ouvert sur la fiche, sans clic.
+    expect(page.el('tab-names').hidden).toBe(false);
+    expect(page.all('#n-sheet .n-id strong')[0].textContent).toBe('Overflowing Name Anna');
+    expect(page.confirm).not.toHaveBeenCalled();
+
+    page.type(page.short('en'), 'O.Anna');
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-names').hidden).toBe(false);
+
+    page.el('n-reset').click();
+    expect(page.short('en').value).toBe('');
+    expect(page.el('n-count').textContent).toBe('aucune modification');
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-names').hidden).toBe(true);
   });
 });

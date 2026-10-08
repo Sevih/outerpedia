@@ -1,0 +1,43 @@
+<section id="tab-names" hidden>
+  <div class="head">
+    <h2>Noms</h2>
+    <p class="hint">
+      Le nom court d'affichage d'un perso et ses alias de recherche. Rien ne s'écrit à la saisie : «
+      Enregistrer » envoie tous les persos modifiés et committe. Lus au rendu : le site ne change
+      qu'une fois le lot poussé (« Pousser », dans la barre d'en-tête) et le build de la CI déployé.
+    </p>
+  </div>
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
+    <span id="n-count"></span>
+    <button class="btn ghost" id="n-reset" disabled>Annuler</button>
+    <button class="btn primary" id="n-save" disabled>Enregistrer</button>
+  </div>
+
+  <div class="card n-cols">
+    <div class="n-side" aria-label="Persos">
+      <div class="n-filters">
+        <input
+          id="n-q"
+          placeholder="Chercher un perso…"
+          aria-label="Chercher un perso"
+          autocomplete="off"
+        />
+        <select id="n-state" aria-label="État">
+          <option value="todo">À traiter</option>
+          <option value="long">Nom court trop long</option>
+          <option value="short">Avec nom court</option>
+          <option value="alias">Avec alias</option>
+          <option value="all">Tous</option>
+        </select>
+      </div>
+      <p class="n-total" id="n-total"></p>
+      <ul class="n-list" id="n-list"></ul>
+      <div class="empty" id="n-empty" hidden></div>
+    </div>
+
+    <div class="n-sheet" id="n-sheet" aria-live="off">
+      <div class="empty">Choisir un perso dans la liste.</div>
+    </div>
+  </div>
+</section>

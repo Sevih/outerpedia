@@ -1,0 +1,270 @@
+/* Onglet « Noms » : deux colonnes dans une carte — la liste des persos à
+   gauche, la fiche du perso choisi à droite (ses six noms, son nom court par
+   langue, ses alias de recherche). Le reste — carte, `.savebar`, `.btn`,
+   `.badge`, `.chip`, table — vient de `quick.css`. */
+
+/* Le compte de la savebar et ses badges. `.savebar span` pousse à gauche
+   chaque `span` ; ici seul le compte entier l'est. */
+#tab-names #n-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-names #n-count * {
+  margin-right: 0;
+}
+
+#tab-names .n-cols {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+}
+
+/* La liste : la recherche et l'état, le compte, puis les persos — elle défile
+   dans sa colonne, la fiche reste à l'écran. */
+#tab-names .n-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 0;
+  border-right: 1px solid var(--line-subtle);
+}
+#tab-names .n-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 14px;
+}
+#tab-names .n-filters input,
+#tab-names .n-filters select {
+  width: 100%;
+}
+#tab-names .n-total {
+  margin: 0;
+  padding: 0 14px;
+  color: var(--content-muted);
+  font-size: 12.5px;
+}
+#tab-names .n-total strong {
+  color: var(--content);
+}
+#tab-names .n-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 6px;
+  max-height: max(280px, calc(100vh - 440px));
+  overflow-y: auto;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-names .n-side .empty {
+  margin: 0 14px;
+}
+#tab-names .n-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-names .n-row:hover {
+  background: var(--surface-overlay);
+}
+#tab-names .n-row[aria-current='true'] {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+#tab-names .n-row:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-names .n-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#tab-names .face {
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+/* Le point d'une ligne : accent = modifiée, rouge = refusée. */
+#tab-names .n-pt {
+  display: inline-flex;
+  flex: 0 0 8px;
+}
+#tab-names .pt {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#tab-names .pt.ko {
+  background: var(--danger);
+}
+
+/* La fiche. */
+#tab-names .n-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+}
+#tab-names .n-sheet > .empty {
+  margin: 0;
+}
+#tab-names .n-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+#tab-names .n-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-names .n-id strong {
+  font-size: 16px;
+}
+#tab-names .n-badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+
+/* Les six langues : le nom complet et son verdict, le champ du nom court et
+   le verdict du nom court effectif. */
+#tab-names .n-sheet td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+#tab-names .n-sheet th:first-child,
+#tab-names .n-sheet td:first-child {
+  padding-left: 0;
+}
+#tab-names .n-lang {
+  width: 1%;
+  color: var(--content-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+/* Le nom complet à sa largeur : le champ du nom court le suit, la place libre
+   va à la dernière colonne. Trop étroit, le tableau défile dans `.scroll`. */
+#tab-names .n-sheet th:nth-child(2),
+#tab-names .n-sheet td:nth-child(2) {
+  width: 1%;
+  padding-right: 28px;
+  white-space: nowrap;
+}
+#tab-names .n-full {
+  margin-right: 10px;
+}
+#tab-names .n-short {
+  display: flex;
+  align-items: center;
+  gap: 8px 10px;
+  flex-wrap: wrap;
+}
+#tab-names .n-short input {
+  width: 22ch;
+}
+#tab-names .n-verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-names .n-eff {
+  color: var(--content-muted);
+  font-size: 12.5px;
+}
+
+/* Les alias : ce qui est déjà cherchable (atténué), puis les alias en chips
+   dans le cadre du champ. */
+#tab-names .n-aliases {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-names .n-aliases h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+#tab-names .chips {
+  gap: 6px;
+}
+#tab-names .chip.base {
+  height: 24px;
+  padding: 0 9px;
+  background: transparent;
+  color: var(--content-muted);
+  font-size: 12px;
+}
+#tab-names .chip.alias {
+  gap: 4px;
+  height: 26px;
+  padding: 0 2px 0 10px;
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+}
+#tab-names .chip.alias.warn {
+  border-color: color-mix(in srgb, var(--warn) 45%, transparent);
+  background: color-mix(in srgb, var(--warn) 15%, transparent);
+  color: var(--warn);
+}
+#tab-names .n-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-base);
+}
+#tab-names .n-box:focus-within {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+/* Les chips et le champ se replient ensemble, dans le même cadre. */
+#tab-names .n-box .chips {
+  display: contents;
+}
+#tab-names .n-box input {
+  flex: 1 1 26ch;
+  min-width: 0;
+  height: 26px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
+/* Fenêtre étroite : la liste au-dessus de la fiche. */
+@media (max-width: 900px) {
+  #tab-names .n-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #tab-names .n-side {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-subtle);
+  }
+  #tab-names .n-list {
+    max-height: 260px;
+  }
+}

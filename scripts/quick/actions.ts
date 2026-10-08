@@ -1,9 +1,9 @@
 /**
- * quick/actions — les SIX gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les SEPT gestes du quotidien, sortis du panneau admin.
  *
  * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo, régler un
- * rang ou une reco d'équipement ne demandait jusqu'ici RIEN de moins qu'un
- * `pnpm dev` complet : `clean:all`
+ * rang, une reco d'équipement ou un nom court ne demandait jusqu'ici RIEN de
+ * moins qu'un `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
  * dans l'admin. Des minutes de pipeline de données pour changer quatre lignes
@@ -23,9 +23,11 @@
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
- *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso).
+ *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
+ *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
+ *     sous les cartes, le champ recherche des listes de persos).
  *
- * Les CINQ COMMITTENT, sans rien demander, et aucun ne pousse (cf.
+ * Les SIX COMMITTENT, sans rien demander, et aucun ne pousse (cf.
  * `commitPaths`) : pousser à chaque geste lançait la CI à chaque geste. Le push
  * est un geste à part, le bouton « Pousser » de l'en-tête (`pushMain`), qui dit
  * combien de commits attendent (`gitState`). Il part quand même avec la CI : R2
@@ -49,10 +51,16 @@ import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
+import { upsertSearchAliases } from '@/lib/admin/search-alias-store';
+import { upsertShortName } from '@/lib/admin/short-name-store';
 import { appendGuideVideo } from '@/lib/admin/guide-store';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
-import { characterDisplayName, getCharacterListItems } from '@/lib/data/characters';
+import {
+  characterDisplayName,
+  characterSearchNames,
+  getCharacterListItems,
+} from '@/lib/data/characters';
 import {
   getAmuletFamilies,
   getEEViews,
@@ -65,11 +73,15 @@ import {
 } from '@/lib/data/equipment';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import { listGuides } from '@/lib/data/guides';
+import { loadSearchAliases } from '@/lib/data/search-aliases';
+import { loadShortNames } from '@/lib/data/short-names';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
 import { DEFAULT_LANG, LANGS, type Lang } from '@/lib/i18n/config';
+import { lRec } from '@/lib/i18n/localize';
 import { TAG_REGEX, checkText } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
+import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import {
   CURATED_ROLES,
   CURATED_STEPS,
@@ -77,7 +89,7 @@ import {
   EE_TIERS,
   TIERS,
 } from '@/components/tierlist/tiers';
-import type { CharacterCurated, GearBuild, GearPresets } from '@contracts';
+import type { CharacterCurated, GearBuild, GearPresets, LocalizedText } from '@contracts';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { collectComics } from '@datagen/assets/collect-comics';
@@ -916,6 +928,224 @@ export async function saveRanks(
     report,
   );
   return { ok: commit.ok && !refused.length, log: [...log, ...commit.log], refused: keys };
+}
+
+// ------------------------------------------------------------------ noms -----
+
+const SHORT_NAMES_PATH = 'data/curated/short-names.json';
+const SEARCH_ALIASES_PATH = 'data/curated/search-aliases.json';
+
+/**
+ * La largeur du libellé au palier le plus étroit — celui du mobile. Recopiée de
+ * `SCALE.default.labelWidthPx` : la table de `CharacterCard` reste celle qui
+ * décide (elle n'est pas exportée), l'onglet « Noms » constate — comme
+ * `card-label.test.ts`, qui pose la même question à tout le roster.
+ */
+const LABEL_WIDTH_PX = 80;
+
+/** Les deux lectures de l'onglet « Noms » : les curés, tels que le disque les porte. */
+export interface NamesDisk {
+  loadShortNames: () => Record<string, LocalizedText>;
+  loadSearchAliases: () => Record<string, string[]>;
+}
+
+/** Celles de la route : les lecteurs du site. */
+export const NAMES_DISK: NamesDisk = { loadShortNames, loadSearchAliases };
+
+export interface NameRow {
+  id: string;
+  /** Nom COMPLET en anglais, comme dans Rangs : la ligne de la liste, le commit. */
+  name: string;
+  /** Nom COMPLET par langue (`characterDisplayName`), les six. */
+  full: Record<Lang, string>;
+  /** L'entrée du disque, telle quelle : les seules langues renseignées. */
+  short: LocalizedText;
+  aliases: string[];
+  /** Ce qui est DÉJÀ cherchable sans alias (`characterSearchNames`). */
+  base: string[];
+  /**
+   * Le verdict du site, par langue : le nom complet tient-il sous la carte, et
+   * le nom court EFFECTIF (`lRec` : la langue, sinon l'anglais) — `null` sans
+   * nom court.
+   */
+  fits: { full: Record<Lang, boolean>; short: Record<Lang, boolean | null> };
+  /**
+   * « À traiter » : au moins une langue où le nom complet déborde ET où le nom
+   * court effectif manque ou déborde aussi — ce que `card-label.test.ts` refuse.
+   */
+  todo: boolean;
+}
+
+const perLang = <T>(of: (lang: Lang) => T): Record<Lang, T> =>
+  Object.fromEntries(LANGS.map((l) => [l, of(l)])) as Record<Lang, T>;
+
+/**
+ * L'onglet « Noms » : tout le roster, ses noms complets, son nom court et ses
+ * alias lus du disque à l'instant, et la réponse à « ce nom déborde-t-il ? » —
+ * la règle du site (`fitsOnTwoLines`), appelée telle quelle, une fois, ici. Le
+ * portrait est celui de Rangs : la page le compose de l'id.
+ */
+export function namesState(disk: NamesDisk = NAMES_DISK) {
+  const shortNames = disk.loadShortNames();
+  const searchAliases = disk.loadSearchAliases();
+  const rows: NameRow[] = getCharacterListItems().map((c) => {
+    const short = shortNames[c.id] ?? {};
+    const full = perLang((l) => characterDisplayName(c, l));
+    const fits = {
+      full: perLang((l) => fitsOnTwoLines(full[l], LABEL_WIDTH_PX)),
+      short: perLang((l) => {
+        const effective = lRec(short, l);
+        return effective ? fitsOnTwoLines(effective, LABEL_WIDTH_PX) : null;
+      }),
+    };
+    return {
+      id: c.id,
+      name: characterDisplayName(c),
+      full,
+      short,
+      aliases: searchAliases[c.id] ?? [],
+      base: characterSearchNames(c),
+      fits,
+      todo: LANGS.some((l) => !fits.full[l] && fits.short[l] !== true),
+    };
+  });
+  return { rows, langs: LANGS, width: LABEL_WIDTH_PX };
+}
+
+/**
+ * Le verdict en direct de la saisie : la même règle, un booléen par texte, dans
+ * l'ordre. Rien n'est lu ni écrit. Ce qui n'est pas une chaîne « tient » — il
+ * n'y a rien à afficher.
+ */
+export function fitNames(texts: unknown): { fits: boolean[] } {
+  if (!Array.isArray(texts)) return { fits: [] };
+  return {
+    fits: texts.map((t) => typeof t !== 'string' || fitsOnTwoLines(t, LABEL_WIDTH_PX)),
+  };
+}
+
+/** Un perso de l'onglet « Noms » : ce qu'il doit porter, et ce que la page a chargé. */
+export interface NameChange {
+  id: string;
+  short: LocalizedText;
+  aliases: string[];
+  was: { short: LocalizedText; aliases: string[] };
+}
+
+/** Les lectures et les écritures de `saveNames`, injectées : les stores et git. */
+export interface NamesDeps extends NamesDisk {
+  upsertShortName: (id: string, name: LocalizedText) => Promise<string[]>;
+  upsertSearchAliases: (id: string, aliases: string[]) => Promise<string[]>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : les stores de l'admin et le vrai `commitPaths`. */
+export const NAMES_DEPS: NamesDeps = {
+  ...NAMES_DISK,
+  upsertShortName,
+  upsertSearchAliases,
+  commitPaths,
+};
+
+const sameShort = (a: LocalizedText | undefined, b: LocalizedText | undefined): boolean =>
+  LANGS.every((l) => (a?.[l] ?? '') === (b?.[l] ?? ''));
+const sameAliases = (a: string[] | undefined, b: string[] | undefined): boolean =>
+  (a ?? []).length === (b ?? []).length && (a ?? []).every((v, i) => v === b?.[i]);
+
+/**
+ * Enregistre un lot de persos : pour chacun, le disque doit encore porter ce
+ * que la page avait chargé (`was`), puis `upsertShortName` et
+ * `upsertSearchAliases` — les stores de l'admin, et seulement celui dont la
+ * donnée change —, puis un seul commit sur les fichiers réellement touchés.
+ *
+ * Le trim et le dédoublonnage sont ceux des stores : rien n'est nettoyé ici, et
+ * une liste d'alias vide leur est passée telle quelle (ils retirent la clé).
+ *
+ * Un perso refusé n'arrête pas le lot : les autres partent, `refused` dit à la
+ * page lesquels marquer et `saved` lesquels ne sont plus en attente. Un lot où
+ * rien ne passe n'écrit ni ne committe rien.
+ */
+export async function saveNames(
+  changes: NameChange[],
+  deps: NamesDeps,
+  report?: Report,
+): Promise<Outcome & { refused: string[]; saved: string[] }> {
+  if (!Array.isArray(changes) || !changes.length)
+    return { ok: false, log: ['Aucune modification à enregistrer.'], refused: [], saved: [] };
+
+  const j = journal(report);
+  const names = new Map(getCharacterListItems().map((c) => [c.id, characterDisplayName(c)]));
+  const refused: string[] = [];
+  const saved: string[] = [];
+  const touched = new Set<string>();
+
+  for (const c of changes) {
+    const id = String(c?.id ?? '');
+    const name = names.get(id);
+    if (!name) {
+      refused.push(id);
+      j.done(`REFUSÉ — perso inconnu : ${id}.`);
+      continue;
+    }
+    // Le disque, relu pour CE perso : un nom posé d'ailleurs (l'admin, l'autre
+    // poste) depuis le chargement de la page ne doit pas être écrasé.
+    const disk = {
+      short: deps.loadShortNames()[id] ?? {},
+      aliases: deps.loadSearchAliases()[id] ?? [],
+    };
+    if (!sameShort(disk.short, c.was?.short) || !sameAliases(disk.aliases, c.was?.aliases)) {
+      refused.push(id);
+      j.done(`REFUSÉ — ${name} : le disque a changé depuis le chargement.`);
+      continue;
+    }
+
+    const short = c.short ?? {};
+    const aliases = Array.isArray(c.aliases) ? c.aliases : [];
+    const errors: string[] = [];
+    const done: string[] = [];
+    if (!sameShort(short, disk.short)) {
+      errors.push(...(await deps.upsertShortName(id, short)));
+      if (!errors.length) {
+        touched.add(SHORT_NAMES_PATH);
+        const said = LANGS.filter((l) => short[l]?.trim()).map((l) => `${l} « ${short[l]} »`);
+        done.push(said.length ? `nom court ${said.join(', ')}` : 'nom court retiré');
+      }
+    }
+    if (!errors.length && !sameAliases(aliases, disk.aliases)) {
+      errors.push(...(await deps.upsertSearchAliases(id, aliases)));
+      if (!errors.length) {
+        touched.add(SEARCH_ALIASES_PATH);
+        done.push(aliases.length ? `alias ${aliases.join(', ')}` : 'alias retirés');
+      }
+    }
+    if (errors.length) {
+      refused.push(id);
+      for (const e of errors) j.done(`REFUSÉ — ${name} : ${e}`);
+    }
+    // Le perso est « enregistré » dès qu'un store a écrit pour lui : la page
+    // relit le disque, et ce qui a été refusé après coup est dit au journal.
+    if (done.length) {
+      saved.push(id);
+      j.done(`${name} : ${done.join(' ; ')}.`);
+    }
+  }
+
+  if (!touched.size)
+    return refused.length
+      ? { ok: false, log: [...j.lines, 'Rien à enregistrer.'], refused, saved }
+      : {
+          ok: true,
+          log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+          refused,
+          saved,
+        };
+
+  const commit = deps.commitPaths(
+    [...touched],
+    `chore(names): ${saved.length === 1 ? names.get(saved[0]) : `${saved.length} persos`}`,
+    report,
+  );
+  return { ok: commit.ok && !refused.length, log: [...j.lines, ...commit.log], refused, saved };
 }
 
 // ------------------------------------------------------------- gear reco -----
