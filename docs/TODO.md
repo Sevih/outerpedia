@@ -41,13 +41,13 @@
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
 - [ ] **« Pousser », restes de B33** : (1) le compte de l'en-tête ne se relit
-      qu'au chargement et après un enregistrement — après un `git pull
-  --rebase` ou un commit au terminal, recharger la page (relire
+      qu'au chargement et après un enregistrement — après un
+      `git pull --rebase` ou un commit au terminal, recharger la page (relire
       `/api/git` au retour de focus serait un lot A) ; (2) `commitPaths`
       committe TOUT l'index, comme avant lui : un fichier indexé au terminal
       partirait avec l'enregistrement — ne rien laisser dans l'index pendant
-      que quick tourne, ou lot A pour n'indexer que ses chemins (`git
-  commit -- <chemins>` sur un index propre). À jouer par Sevih : le
+      que quick tourne, ou lot A pour n'indexer que ses chemins
+      (`git commit -- <chemins>` sur un index propre). À jouer par Sevih : le
       premier clic réel sur « Pousser » (des commits non JSON attendent : le
       journal annonce le typecheck, puis « poussé »).
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
