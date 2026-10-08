@@ -7,6 +7,45 @@
 
 ## 2026-10-08
 
+- **Relecture A31, A32, A33 (Fable)** — trois lots Opus livrés ensemble,
+  chacun relu à part. Commun : `pnpm typecheck && pnpm lint && pnpm test` sur
+  HEAD (`ad50762e` + les deux), vert ; la suite de quick et les deux fichiers
+  de tests nouveaux sous `NODE_ENV=development` : 637 cas, verts. Périmètre
+  de chaque commit tenu (quatre, quatre et sept fichiers, rien d'autre).
+  **A31** : l'écart au prompt est validé — aucun `data/extracted` dans
+  `datagen/extractor/` ni `review-store.ts`, l'extraction fraîche se
+  reconstruit en mémoire depuis les tables parsées ; stamper `data/curated/`
+  entier était la bonne lecture. Mesure à part (tsx, modules appelés
+  directement) : `entityBuckets` 1 009 ms à froid puis 1 ms, même `Map` ;
+  `buildInbox` 72 ms ; un `utimes` sur `data/curated/effects.json` →
+  recalcul (195 ms) deux fois de suite sans rétention tant que les 2 s ne
+  sont pas passées, puis retenu (1 ms), contenu identique au premier appel.
+  **A32** : 34 alias, aucune cible absente du disque ; `linkTargets` de
+  `RecruitGroupTemplet` rend `PickupID` → `CharacterTemplet`,
+  `RecruitTicketID` → `ItemTemplet` et `OpenDungeonID` ; six alias recomptés
+  depuis les tables (84/84, 277/277, 415/420, 24/24, 129/129, 69/69, listes
+  CSV découpées) ; `GroupID` toujours sans lien, `CharacterID` toujours par le
+  nom. Les liens FAUX par le nom que l'agent a relevés hors périmètre
+  (`*BuffID`, `RewardVoiceID`, `ArtifactID`, `ClearMissionID`, la cellule
+  `0`) passent au TODO, item (d) des contrôles B38. **A33** : dépôt jetable
+  avec le vrai git — `b.json` indexé à côté, `a.json` committé seul et
+  `b.json` toujours indexé après ; re-sauvegarde identique et liste vide →
+  « rien à committer », HEAD immobile ; fichier nouveau committé ; un
+  pre-commit qui ré-indexe `c.txt` ne voit que `c.txt`, son ajout est dans
+  HEAD, le statut ne garde que `b.json` indexé. Rien à redire aux trois.
+- **quick : au F5, le journal du site disait « data.entries is undefined »**
+  — le quick de Sevih tournait depuis 14 h 54, avant B37 (15 h 37) et B38 :
+  l'UI est servie à jour depuis le disque, mais le serveur n'avait pas encore
+  `/api/changelog/state` et répondait 404 `route inconnue`, que `load()`
+  prenait pour un état. Un serveur plus vieux que ses onglets est le cas
+  normal après un `git pull` ou un lot, tant que `pnpm quick` n'est pas
+  relancé. `getJson(path)` (`lib.js`) lit maintenant les états : une réponse
+  non `ok` devient une erreur lisible — le chemin, le code HTTP, le message
+  du serveur, et sur un 404 « quick lancé avant ce code ? Ctrl-C puis
+  `pnpm quick` ». Les quatre chargements qui passaient par
+  `(await fetch(…)).json()` sans regarder le code (journal du site,
+  bannières, noms, rangs) l'utilisent. Le remède immédiat : relancer quick.
+
 - **admin-inbox : le diff par entité mémoïsé hors Next, sur l'empreinte des
   fichiers lus — le tableau de bord de quick sous la seconde (lot A31)** :
   `GET /api/dashboard` de quick mettait 3,4 s parce qu'`entityBuckets`

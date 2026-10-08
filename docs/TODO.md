@@ -67,7 +67,15 @@
       `lib/text.ts`) : leurs tables ne leur sont pas attribuées ; (c) l'item
       « Assets » du tableau de bord renvoie toujours à
       `/admin/tools/gamedata`, dont le lien de menu est retiré — le rapport
-      d'assets n'est pas porté, et cette page ne le montre pas non plus.
+      d'assets n'est pas porté, et cette page ne le montre pas non plus ;
+      (d) la déduction par le NOM pose aussi des liens FAUX, relevés par A32 :
+      les 21 colonnes `*BuffID` visent `BuffTemplet` mais portent un nom de
+      buff (0 % retrouvés), `RewardVoiceID` de `TrustRewardTemplet` →
+      `VoiceTemplet` (0/5577), `ArtifactID` de `MonadGateArtifactGroupTemplet`
+      → `ArtifactTemplet` (0/164), `ClearMissionID` de `DungeonTemplet` →
+      `MissionTemplet` (2/33), et une cellule `0` reste un lien vers `ID = 0`
+      — lot A : une liste d'exclusions dans `gamedata-store.ts` (ou un alias
+      par `Table.Colonne`), et pas de lien sur `0`.
 - [ ] **« Journal du site » — contrôles à l'écran (lot B37)** : le banc ne
       clique pas, et rien n'a été enregistré. (1) Un gabarit Perso sur un
       perso réel : « ＋ Perso », deux lettres, Entrée — attendu : l'entrée en
