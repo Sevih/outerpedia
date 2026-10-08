@@ -92,8 +92,9 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
-C10) → 6 Events → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
-19 et 20 Extractor (revue par entité, intégration) → 22 Clôture. La
+C10) → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
+19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
+du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
 
 - **18 Tableau de bord** — FAIT, lot B36 (cf. « Déjà dans quick ») : un
