@@ -1,7 +1,7 @@
 // Onglet « Journal du site » : le changelog du site (`changelog.json`) — une
 // entrée se pose par gabarit, se traduit, et se relit telle que la page
 // `/changelog` la montrera.
-import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 
 // `/api/changelog/state` : le fichier curé dans son ordre, le jour UTC, le
 // roster (id, nom anglais, slug), les gabarits et leurs champs préremplis, les
@@ -732,7 +732,7 @@ $('j-form').onclick = (e) => {
 
 // ------------------------------------------------------ le disque
 async function load() {
-  data = await (await fetch('/api/changelog/state')).json();
+  data = await getJson('/api/changelog/state');
   resetRows();
 }
 

@@ -1585,6 +1585,8 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       hash?: string;
       saved?: (body: Call['body']) => unknown;
       translated?: (texts: string[]) => unknown;
+      /** L'état répond autre chose que 200 : un serveur plus vieux que l'onglet (404), le moteur (500). */
+      stateDown?: { status: number; body: unknown };
     } = {},
   ) {
     vi.resetModules();
@@ -1619,6 +1621,12 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
       if (path === '/api/changelog/state') {
         served.reads += 1;
+        if (opts.stateDown)
+          return {
+            ok: false,
+            status: opts.stateDown.status,
+            json: async () => opts.stateDown?.body,
+          };
         return answer(served.state);
       }
       if (path.startsWith('/api/changelog/fill?')) {
@@ -1762,6 +1770,16 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     // Aucun id de la section ne double celui d'un autre onglet (`c-` est aux codes promo).
     const ids = page.all('[id]').map((n) => n.id);
     expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
+  });
+
+  it('un serveur sans la route (quick lancé avant l’onglet) : le journal dit le 404 et le remède, pas « data.entries is undefined »', async () => {
+    const page = await journal({ stateDown: { status: 404, body: { error: 'route inconnue' } } });
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('journal').textContent).toContain(
+      'Journal du site illisible : Error: /api/changelog/state : HTTP 404 — route inconnue (quick lancé avant ce code ? Ctrl-C puis `pnpm quick`)',
+    );
+    // La liste reste vide, rien ne plante derrière.
+    expect(page.all('#j-list li').length).toBe(0);
   });
 
   it('la liste : une entrée = une ligne, récent → ancien ; gabarits, types et langues servis', async () => {

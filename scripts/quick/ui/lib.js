@@ -246,6 +246,28 @@ export const journalWire = () => {
  * Chaque `step` lui est alors remis au lieu d'être empilé ici : le journal ne
  * montre que la ligne en cours, puis le résultat, comme pour tout geste.
  */
+/**
+ * Un GET en JSON, ou une erreur LISIBLE. L'état d'une section lu sur un
+ * serveur qui répond autre chose — le 404 « route inconnue » d'un quick lancé
+ * AVANT le code de l'onglet (l'UI est servie à jour depuis le disque, pas le
+ * serveur), le 500 du moteur — ne doit pas finir en « data.entries is
+ * undefined » : le chemin, le code et le message du serveur, et le remède.
+ */
+export async function getJson(path) {
+  const res = await fetch(path);
+  if (res.ok) return res.json();
+  let why = `HTTP ${res.status}`;
+  try {
+    const b = await res.json();
+    const said = b.error ?? (Array.isArray(b.log) ? b.log.join(' / ') : '');
+    if (said) why += ` — ${said}`;
+  } catch {
+    /* corps non JSON : le code suffit */
+  }
+  if (res.status === 404) why += ' (quick lancé avant ce code ? Ctrl-C puis `pnpm quick`)';
+  throw new Error(`${path} : ${why}`);
+}
+
 export async function post(path, payload, onStep) {
   const res = await fetch(path, {
     method: 'POST',

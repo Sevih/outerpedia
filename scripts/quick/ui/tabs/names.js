@@ -1,5 +1,5 @@
 // Onglet « Noms » : le nom court d'affichage et les alias de recherche.
-import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 
 let names = { rows: [], langs: [], width: 80 };
 let byId = new Map();
@@ -356,7 +356,7 @@ function renderNames() {
 }
 
 async function loadNames() {
-  names = await (await fetch('/api/names/state')).json();
+  names = await getJson('/api/names/state');
   byId = new Map(names.rows.map((r) => [r.id, r]));
   for (const row of names.rows)
     for (const l of names.langs) {

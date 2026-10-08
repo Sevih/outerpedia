@@ -1,5 +1,5 @@
 // Onglet « Rangs ».
-import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 
 let ranks = { rows: [], tiers: [], eeTiers: [], roles: [], steps: [] };
 let byId = new Map();
@@ -258,7 +258,7 @@ for (const id of ['r-q', 'r-col', 'r-rank', 'r-role', 'r-trans', 'r-dirty'])
   $(id).oninput = renderRanks;
 
 async function loadRanks() {
-  ranks = await (await fetch('/api/ranks')).json();
+  ranks = await getJson('/api/ranks');
   byId = new Map(ranks.rows.map((r) => [r.id, r]));
   const opts = (list, none) =>
     `<option value="">tous</option>${list
@@ -288,7 +288,7 @@ $('r-save').onclick = async () => {
     // montre la valeur du disque, cerclée) ; celle qui n'a pas été traitée
     // — échec avant écriture — reste en attente, rien n'est à ressaisir.
     refused = new Set((r.refused ?? []).map((c) => cellKey(c.id, c.field, c.step)));
-    ranks = await (await fetch('/api/ranks')).json();
+    ranks = await getJson('/api/ranks');
     byId = new Map(ranks.rows.map((row) => [row.id, row]));
     for (const [key, e] of [...edits]) {
       const row = byId.get(e.id);

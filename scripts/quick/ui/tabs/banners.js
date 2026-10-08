@@ -1,6 +1,6 @@
 // Onglet « Bannières » : les fenêtres de recrutement de la home (`banner.json`),
 // et ce que la table du jeu en sait de plus.
-import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 
 // `/api/banners/state` : le fichier curé, le jour UTC, le roster, et le diff du
 // serveur contre la table du jeu (`missing`, `drift` ; `game` à `null` et
@@ -319,7 +319,7 @@ $('b-reset').onclick = () => {
 
 // ------------------------------------------------------ le disque
 async function loadBanners() {
-  data = await (await fetch('/api/banners/state')).json();
+  data = await getJson('/api/banners/state');
   names = new Map(data.roster.map((c) => [c.id, c.name]));
   resetRows();
 }
