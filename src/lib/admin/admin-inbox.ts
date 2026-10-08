@@ -11,8 +11,9 @@
  * du moteur de revue.
  */
 import { cache } from 'react';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { listTableNames, tablePath } from '@datagen/lib/tables';
 import { reviewAll, reviewBuckets, type DiffBuckets } from '@/lib/admin/review-store';
 import { actionableDiff } from '@/lib/admin/monster-review';
 import { collectTagOccurrences } from '@/lib/admin/tag-control';
@@ -45,25 +46,108 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
 const EMPTY: DiffBuckets = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
 
 /**
- * Diff « jeu ↔ site » par entité, MÉMOÏSÉ À LA REQUÊTE (`cache()`).
+ * Ce que le diff LIT, hors tables du jeu : le committé de chaque cible
+ * (`data/generated/`, l'équipement dans son sous-dossier), les curés que
+ * l'extraction fraîche et le périmètre « site » des monstres consultent, et les
+ * icônes d'effets versionnées. Par DOSSIER plutôt que fichier par fichier : une
+ * cible ou un curé de plus y entre sans qu'on y pense, et un fichier voisin qui
+ * bouge ne coûte qu'un recalcul — l'inverse, un curé oublié, figerait un badge.
+ */
+const INPUT_DIRS = ['data/generated', 'data/generated/equipment', 'data/curated'];
+const INPUT_FILES = ['data/editorial/effect-icons.json'];
+/**
+ * Hors empreinte : l'instantané des codes promo, que chaque LECTURE de la liste
+ * vivante réécrit (`loadCouponsForEdit`) — celle du tableau de bord de quick
+ * comprise, qui périmerait son propre mémo à chaque appel. Le diff ne le lit pas.
+ */
+const NOT_INPUTS: ReadonlySet<string> = new Set(['data/curated/coupons.json']);
+
+/**
+ * EMPREINTE des entrées du diff (`chemin:taille:mtime`, l'idée de `tablesStamp`
+ * étendue à la taille) et date de la plus récente. Que des `statSync`, aucune
+ * lecture : ~300 fichiers, toutes les tables parsées comprises, en moins d'une
+ * milliseconde. Un fichier ajouté ou retiré change la liste, donc l'empreinte.
  *
- * Le moteur coûte ~1,3 s : le layout (badges) et la home (inbox) le lançaient
- * chacun pour leur compte, soit ~2,6 s par chargement de `/admin`. Un seul appel
- * par requête les sert tous les deux.
+ * Deux entrées n'y sont PAS, comme dans les caches du moteur : le pool d'images
+ * extraites (7 000 dossiers — un refresh qui le change réécrit aussi les tables)
+ * et les `meta.json` des guides, que `siteMonsterIds` ne stampe pas non plus.
+ */
+function inputsStamp(): { stamp: string; newest: number } {
+  const cwd = process.cwd();
+  const paths = INPUT_FILES.map((f) => resolve(cwd, f));
+  for (const dir of INPUT_DIRS) {
+    try {
+      for (const f of readdirSync(resolve(cwd, dir)))
+        if (f.endsWith('.json') && !NOT_INPUTS.has(`${dir}/${f}`)) paths.push(resolve(cwd, dir, f));
+    } catch {
+      /* dossier absent : rien à lire, rien dans l'empreinte */
+    }
+  }
+  for (const t of listTableNames()) paths.push(tablePath(t));
+
+  let newest = 0;
+  const stamp = paths
+    .sort()
+    .map((p) => {
+      try {
+        const s = statSync(p);
+        newest = Math.max(newest, s.mtimeMs);
+        return `${p}:${s.size}:${s.mtimeMs}`;
+      } catch {
+        return `${p}:absent`;
+      }
+    })
+    .join('|');
+  return { stamp, newest };
+}
+
+/**
+ * Délai de re-stat de `tablesStamp`/`fileStamp` (`datagen/lib/tables.ts`), sur
+ * lesquels les builds du moteur sont eux-mêmes mémoïsés : dans les 2 s qui
+ * suivent une écriture, ils peuvent encore servir l'extraction d'AVANT.
+ */
+const ENGINE_STAMP_TTL_MS = 2000;
+
+let bucketsMemo: { stamp: string; buckets: Map<string, DiffBuckets> } | undefined;
+
+/**
+ * Diff « jeu ↔ site » par entité, MÉMOÏSÉ AU MODULE sur l'empreinte de ses
+ * entrées : même empreinte, même `Map` (en LECTURE SEULE) ; un fichier qui bouge
+ * — promotion, build, curé édité — et on recalcule. Pas de TTL : l'empreinte
+ * est le seul signal juste.
+ *
+ * `cache()` de React ne mémoïse qu'en rendu serveur : hors Next (quick, sous
+ * tsx) c'est un passe-plat, et chaque `bucketsOf` relançait le moteur (~0,2 s
+ * l'un, dix entités). Ce mémo-ci vaut des deux côtés.
+ *
+ * Un calcul parti moins de `ENGINE_STAMP_TTL_MS` après la dernière écriture
+ * est servi mais PAS retenu : le moteur a pu lire ses propres caches pas encore
+ * rafraîchis, et le garder figerait un diff périmé sous la nouvelle empreinte.
+ * Un échec non plus — l'appel suivant réessaie.
  *
  * Monstres restreints au périmètre SITE (`actionableDiff`) : sans ça le compte
  * intègre du bruit d'extraction que rien ne peut traiter. Tolérant à l'échec —
  * une extraction cassée ne doit pas faire tomber la coquille admin.
  */
-export const entityBuckets = cache((): Map<string, DiffBuckets> => {
-  const out = new Map<string, DiffBuckets>();
+function memoizedBuckets(): Map<string, DiffBuckets> {
+  const { stamp, newest } = inputsStamp();
+  if (bucketsMemo?.stamp === stamp) return bucketsMemo.buckets;
+  const settled = Date.now() - newest >= ENGINE_STAMP_TTL_MS;
+  const buckets = new Map<string, DiffBuckets>();
   try {
-    for (const r of reviewAll()) out.set(r.id, reviewBuckets(actionableDiff(r.id, r.diff)));
+    for (const r of reviewAll()) buckets.set(r.id, reviewBuckets(actionableDiff(r.id, r.diff)));
+    bucketsMemo = settled ? { stamp, buckets } : undefined;
   } catch {
     /* extraction indisponible */
   }
-  return out;
-});
+  return buckets;
+}
+
+/**
+ * Le même, MÉMOÏSÉ EN PLUS À LA REQUÊTE dans Next (`cache()`) : le layout
+ * (badges) et la home (inbox) partagent un appel, sans même refaire l'empreinte.
+ */
+export const entityBuckets = cache(memoizedBuckets);
 
 /** Buckets d'une entité (jamais undefined — tout à zéro si inconnue). */
 export const bucketsOf = (id: string): DiffBuckets => entityBuckets().get(id) ?? EMPTY;
@@ -139,8 +223,10 @@ export function buildInbox(): InboxItem[] {
   }
 
   // Extraction, une ligne par entité concernée (les entités saines sont tues).
+  // Les buckets en UN appel : hors Next, `bucketsOf` referait l'empreinte par entité.
+  const buckets = entityBuckets();
   for (const e of EXTRACTOR_ENTITIES) {
-    const b = bucketsOf(e.id);
+    const b = buckets.get(e.id) ?? EMPTY;
     const act = actionableCount(b);
     const soft = b.minor + b.typo;
     if (!act && !soft) continue;

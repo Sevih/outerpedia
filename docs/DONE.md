@@ -7,6 +7,69 @@
 
 ## 2026-10-08
 
+- **admin-inbox : le diff par entité mémoïsé hors Next, sur l'empreinte des
+  fichiers lus — le tableau de bord de quick sous la seconde (lot A31)** :
+  `GET /api/dashboard` de quick mettait 3,4 s parce qu'`entityBuckets`
+  (`src/lib/admin/admin-inbox.ts`) n'était mémoïsé que par `cache()` de
+  React, qui ne retient rien hors rendu serveur : sous tsx, chacun des dix
+  `bucketsOf` de `buildInbox` relançait `reviewAll` (~0,2 s l'un). Le calcul
+  vit maintenant dans `memoizedBuckets`, un mémo de MODULE gardé par
+  `inputsStamp()` — `chemin:taille:mtime` de chaque entrée, que des
+  `statSync`, ~0,7 ms pour ~300 fichiers : même empreinte, même `Map` ; un
+  fichier qui bouge, on recalcule ; pas de TTL. `cache()` reste par-dessus
+  (dans Next, layout et home partagent toujours un appel par requête), et
+  `buildInbox` lit les buckets en UN appel au lieu de dix `bucketsOf` — rien
+  d'autre n'y change. **Écart au prompt, à relire** : il donnait
+  `data/extracted/*.json` et `data/generated/*.json` pour entrées ; une trace
+  des appels `fs` de `reviewAll` + `actionableDiff` (script jetable, non
+  commité) montre que la revue ne lit JAMAIS `data/extracted/` — l'extraction
+  fraîche est reconstruite en mémoire. Ce qu'elle lit, et que l'empreinte
+  couvre donc : le committé (`data/generated/*.json` et
+  `data/generated/equipment/*.json`, dix fichiers lus), 55 tables de
+  `.gamedata/parsed/` (les 258 sont stampées, par `listTableNames` /
+  `tablePath`), six curés (`effects`, `effect-families`, `equipment`, `items`,
+  `mode-titles`, `singularity` — tout `data/curated/*.json` est stampé, pour
+  qu'un curé de plus n'ait pas à être déclaré) et
+  `data/editorial/effect-icons.json`. S'en tenir aux deux dossiers du prompt
+  aurait figé les badges de l'admin après une édition de curé ou un
+  `datagen:convert`. Deux choses que la mesure a imposées : (1)
+  `data/curated/coupons.json` est HORS empreinte (`NOT_INPUTS`) — chaque
+  lecture de la liste vivante le réécrit (`loadCouponsForEdit`), celle du
+  tableau de bord comprise, qui périmait son propre mémo à chaque appel
+  (0,39 s au lieu de 0,23) ; (2) un calcul parti moins de 2 s après la
+  dernière écriture est servi mais PAS retenu (`ENGINE_STAMP_TTL_MS`) : les
+  builds du moteur sont eux-mêmes mémoïsés sur `tablesStamp`/`fileStamp`, qui
+  ne re-statent que toutes les 2 s — retenir ce calcul-là figerait le diff
+  d'avant sous la nouvelle empreinte, là où `cache()` seul se corrigeait à la
+  requête suivante. Un échec du moteur n'est pas retenu non plus.
+  **Mesures**, quick isolé (:4861, clés vidées, que des GET), deux appels
+  successifs de `GET /api/dashboard` : avant 3,43 s puis 3,39 s ; après
+  1,48 s (à froid : les builds du moteur) puis 0,23 s, et 0,21 à 0,30 s sur
+  les quatre suivants — ce qui reste est la lecture R2 des codes (0,09 à
+  0,43 s selon l'appel) et `collectTagOccurrences` (~50 ms), `buildInbox`
+  entier tombant de ~1,9 s à ~50 ms. L'inbox rendue est identique
+  avant / après (« Character · 1 new »), et `/admin` du serveur de dev (:3000,
+  lu par `curl`) rend la même ligne en 0,10 à 0,13 s une fois chaud.
+  **Tests** : `admin-inbox.test.ts` (nouveau, 13 cas, moteur factice compté,
+  vrais fichiers dans un `sandbox()`, horloge avancée) — deux appels = un
+  calcul et la même `Map` ; un committé réécrit, puis chacune des cinq
+  familles d'entrées seulement touchée, un fichier ajouté puis retiré = un
+  calcul de plus ; l'instantané des codes ne compte pas ; la garde des 2 s ;
+  l'échec non retenu ; `buildInbox` rendu en entier (tags, entités, assets,
+  tri) pour un seul calcul. Quatre mutations du module (garde retirée,
+  tables hors empreinte, échec retenu, mémo retiré) font chacune tomber le
+  cas attendu. `pnpm typecheck` : `tsc --noEmit -p scripts/tsconfig.json`
+  sans sortie, code 0 ; `pnpm lint` : `$ eslint`, code 0 ; `pnpm test` :
+  `Tests  3088 passed (3088)` (202 fichiers). **Laissé** : le pool d'images
+  extraites et les `meta.json` des guides ne sont pas dans l'empreinte, comme
+  ils ne sont dans aucun cache du moteur (`siteMonsterIds` le dit pour les
+  guides) — sous quick, un `bossId` de guide ajouté n'entre dans le périmètre
+  « site » des monstres qu'au redémarrage, ce qui était déjà vrai ;
+  `collectTagOccurrences` (~50 ms par appel) n'est pas mémoïsé, hors
+  périmètre ; le TODO B36 perd son « (b) », et son contrôle (4) dit
+  maintenant « un quart de seconde » au lieu de « deux à trois secondes ».
+  `reviewAll`, le tableau de bord et l'admin : intacts.
+
 - **Tables du jeu : les colonnes d'id qui ne portent pas le nom de leur table
   deviennent des liens — `PickupID` → `CharacterTemplet` et trente-trois
   autres alias (lot A32)** : dans l'admin comme dans l'onglet « Tables du

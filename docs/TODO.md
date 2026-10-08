@@ -106,10 +106,9 @@
       « un patch attend : onglet Patch », et sur un poste sans le jeu,
       atténué (« pas de client Steam sur ce poste »). (4) « Ouvrir
       Bannières » et « Ouvrir Codes promo » mènent à l'onglet, revenir sur
-      « Accueil » relit (deux à trois secondes, bouton « Actualiser »
-      occupé) ; « Pousser » depuis le tableau le relit aussi. À juger : (b) la lecture
-      prend 2 à 3 s (le moteur de revue de l'admin, relancé par entité hors
-      Next : lot A pour le mémoïser dans `admin-inbox.ts`).
+      « Accueil » relit (un quart de seconde depuis A31, bouton « Actualiser »
+      occupé le temps de la lecture) ; « Pousser » depuis le tableau le relit
+      aussi.
 - [ ] **Onglet « Noms » — contrôles à l'écran (lot B34)** : le banc ne tape
       pas. Passer l'état à « Tous », ouvrir un perso sans nom court dont un
       nom complet « déborde », taper un nom court et voir son badge passer
