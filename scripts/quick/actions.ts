@@ -42,7 +42,7 @@
  * — le site bâti garde ses propres copies de tout ça.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import {
   loadBanners,
@@ -54,6 +54,19 @@ import {
 } from '@/lib/admin/promo-banner-store';
 import { publishBanners, type RuntimePublishResult } from '@/lib/admin/runtime-publish';
 import { loadChangelog, saveChangelog } from '@/lib/admin/changelog-store';
+import { HIDDEN_LANG_COLUMNS } from '@/lib/admin/gamedata-columns';
+import {
+  PAGE_SIZE,
+  describeTable,
+  isValidTableName,
+  linkTargets,
+  listGameTables,
+  queryTable,
+  type TableInfo,
+  type TablePage,
+  type TableQuery,
+  type TableSchema,
+} from '@/lib/admin/gamedata-store';
 import {
   CHANGELOG_LINK_KINDS,
   CHANGELOG_TEMPLATES,
@@ -2457,4 +2470,234 @@ export async function translateNotes(
   } catch (e: unknown) {
     return { error: e instanceof Error ? e.message : String(e) };
   }
+}
+
+// ---------------------------------------------------------- tables du jeu ----
+
+/** Un fichier source, tel que la passe d'usage le lit. */
+export interface UsageSource {
+  /** Son chemin dans le dépôt, extension comprise (`datagen/generators/recruit.ts`). */
+  path: string;
+  text: string;
+}
+
+/** Un fichier qui lit une table. */
+export interface TableReader {
+  /** Sans extension, et sans `datagen/` en tête : `generators/recruit`. */
+  name: string;
+  /** Le chemin complet dans le dépôt. */
+  path: string;
+}
+
+/** Qui lit une table, et à quoi elle sert d'après eux. */
+export interface TableUse {
+  usedBy: TableReader[];
+  /** La première ligne du docblock de chaque lecteur, une par ligne. */
+  note: string;
+}
+
+/**
+ * Une lecture de table par son NOM écrit en dur : les trois primitives de
+ * `datagen/lib/tables` (lignes, colonnes, chemin) et `loadTextIndex`, par où
+ * passent les tables `Text*`. Un appel par variable n'est pas une lecture
+ * repérable : il ne nomme aucune table.
+ */
+const TABLE_READ =
+  /\b(?:loadTable|loadColumns|tablePath|loadTextIndex)\(\s*(['"`])([A-Za-z0-9_]+)\1/g;
+
+/**
+ * Les commentaires d'une source : un docblock qui CITE une lecture en exemple
+ * n'en fait pas une. Le `//` d'une adresse (`https://`) n'en ouvre pas un.
+ */
+const COMMENTS = /\/\*[\s\S]*?\*\/|(?<![:\\])\/\/[^\n]*/g;
+
+/** Le docblock qui ouvre un fichier (après un éventuel shebang). */
+const FILE_DOCBLOCK = /^(?:#![^\n]*\n)?\s*\/\*\*([\s\S]*?)\*\//;
+
+/**
+ * La première ligne du docblock d'un fichier, sans son astérisque ; `…` quand
+ * la phrase continue à la ligne suivante. Vide sans docblock en tête.
+ */
+function docblockLead(text: string): string {
+  const body = FILE_DOCBLOCK.exec(text)?.[1];
+  if (body === undefined) return '';
+  const lines = body.split('\n').map((l) => l.replace(/^\s*\*?/, '').trim());
+  const at = lines.findIndex(Boolean);
+  if (at < 0) return '';
+  const cut = Boolean(lines[at + 1]) && !/[.!?…]$/.test(lines[at]);
+  return cut ? `${lines[at]}…` : lines[at];
+}
+
+/**
+ * Qui lit quelle table — PURE : une passe sur des sources, rien de tenu à la
+ * main. Une table se reconnaît à son nom écrit en dur dans un appel de lecture
+ * (`TABLE_READ`), hors commentaires ; ses lecteurs sont rangés par chemin, et
+ * sa `note` joint la première ligne du docblock de chacun, une par ligne, dans
+ * le même ordre — l'utilité de la table DÉDUITE de qui s'en sert
+ * (« Générateur — DOMAINE RECRUTEMENT (`recruit.json`). »). Deux lecteurs au
+ * même docblock ne le disent qu'une fois.
+ */
+export function tableUsage(sources: UsageSource[]): Map<string, TableUse> {
+  const readers = new Map<string, { reader: TableReader; lead: string }[]>();
+  for (const source of [...sources].sort((a, b) => a.path.localeCompare(b.path))) {
+    const code = source.text.replace(COMMENTS, '');
+    const tables = new Set([...code.matchAll(TABLE_READ)].map((m) => m[2]));
+    if (!tables.size) continue;
+    const reader = {
+      name: source.path.replace(/\.[a-z]+$/, '').replace(/^datagen\//, ''),
+      path: source.path,
+    };
+    const lead = docblockLead(source.text);
+    for (const table of tables)
+      readers.set(table, [...(readers.get(table) ?? []), { reader, lead }]);
+  }
+  return new Map(
+    [...readers].map(([table, list]) => [
+      table,
+      {
+        usedBy: list.map((r) => r.reader),
+        note: [...new Set(list.map((r) => r.lead).filter(Boolean))].join('\n'),
+      },
+    ]),
+  );
+}
+
+/**
+ * Où chercher qui lit les tables : le pipeline, la couche de données du site,
+ * quick. Les tests n'en sont pas — une table lue par son seul test ne sert à
+ * rien, et ceux de quick citent des lectures factices.
+ */
+const USAGE_ROOTS = ['datagen', 'src/lib/data', 'scripts/quick'];
+const USAGE_FILE = /\.(?:ts|tsx|mjs)$/;
+const USAGE_SKIP = /\.(?:test|d)\.[a-z]+$|(?:^|\/)node_modules\//;
+
+/** Les sources des `USAGE_ROOTS`, lues du disque ; une racine absente ne donne rien. */
+function readUsageSources(): UsageSource[] {
+  return USAGE_ROOTS.flatMap((root) => {
+    let files: string[];
+    try {
+      files = readdirSync(resolve(root), { recursive: true, encoding: 'utf8' });
+    } catch {
+      return [];
+    }
+    return files
+      .map((file) => `${root}/${file.replaceAll('\\', '/')}`)
+      .filter((path) => USAGE_FILE.test(path) && !USAGE_SKIP.test(path))
+      .map((path) => ({ path, text: readFileSync(resolve(path), 'utf8') }));
+  });
+}
+
+/** Les lectures de l'onglet « Tables du jeu », injectées : le catalogue et les sources. */
+export interface GameTablesDisk {
+  /** `listGameTables()` de l'admin : nom, octets, date — aucun contenu lu. */
+  listTables: () => TableInfo[];
+  /** Les fichiers où chercher qui lit les tables. */
+  sources: () => UsageSource[];
+}
+
+/** Celles de la route : `.gamedata/parsed/` et les sources du dépôt. */
+export const GAME_TABLES_DISK: GameTablesDisk = {
+  listTables: listGameTables,
+  sources: readUsageSources,
+};
+
+/** L'usage, par jeu de lectures : calculé une fois par processus (cf. `gameTablesState`). */
+const usageMemo = new WeakMap<GameTablesDisk, Map<string, TableUse>>();
+
+/**
+ * L'onglet « Tables du jeu » : le catalogue de `.gamedata/parsed/` (nom, taille,
+ * date d'extraction — sans lire une table) et, pour chacune, son USAGE
+ * (`tableUsage`) : `usedBy`, les fichiers qui la lisent, et `note`. Les tables
+ * LUES d'abord, par nombre de lecteurs décroissant puis par nom ; les autres
+ * ensuite, par nom. `used` et `readers` : combien de tables sont lues, par
+ * combien de fichiers. `hiddenColumns` : les colonnes de langue que le tableau
+ * ne montre pas (la règle de l'admin, `HIDDEN_LANG_COLUMNS`).
+ *
+ * L'usage ne bouge qu'avec le code : il est calculé UNE FOIS par processus, et
+ * de nouveau sur `recompute` (« Recalculer ») — jamais à chaque requête. Le
+ * catalogue, lui, est relu à chaque appel : un pull le change.
+ *
+ * Sans table (`.gamedata/parsed/` jamais tiré) : liste vide et `error`, pas une
+ * erreur de route.
+ */
+export function gameTablesState(disk: GameTablesDisk = GAME_TABLES_DISK, recompute = false) {
+  const usage = (recompute ? undefined : usageMemo.get(disk)) ?? tableUsage(disk.sources());
+  usageMemo.set(disk, usage);
+  const tables = disk
+    .listTables()
+    .map((t) => ({ ...t, ...(usage.get(t.name) ?? { usedBy: [], note: '' }) }))
+    .sort((a, b) => b.usedBy.length - a.usedBy.length || a.name.localeCompare(b.name));
+  return {
+    tables,
+    used: tables.filter((t) => t.usedBy.length).length,
+    readers: new Set(tables.flatMap((t) => t.usedBy.map((r) => r.path))).size,
+    hiddenColumns: [...HIDDEN_LANG_COLUMNS],
+    ...(tables.length ? {} : { error: NO_GAME_DATA }),
+  };
+}
+
+/** Ce dont la lecture d'UNE table dépend, injecté : le store de l'admin, tel quel. */
+export interface GameTableDeps {
+  listTables: () => TableInfo[];
+  queryTable: (name: string, query: TableQuery) => TablePage;
+  describeTable: (name: string) => TableSchema;
+  linkTargets: (columns: string[]) => Record<string, string>;
+}
+
+/** Celles de la route : `gamedata-store.ts`. */
+export const GAME_TABLE_DEPS: GameTableDeps = {
+  listTables: listGameTables,
+  queryTable,
+  describeTable,
+  linkTargets,
+};
+
+/** Un refus, et le statut que la route lui donne — ceux de la route de l'admin. */
+export interface GameTableRefusal {
+  error: string;
+  status: 400 | 404;
+}
+
+/** Un nom qui n'est pas un basename : 400 ; une table que le disque n'a pas : 404. */
+function refuseTable(name: string, deps: GameTableDeps): GameTableRefusal | null {
+  if (!isValidTableName(name)) return { error: 'nom de table invalide', status: 400 };
+  if (!deps.listTables().some((t) => t.name === name))
+    return { error: `table inconnue : ${name}`, status: 404 };
+  return null;
+}
+
+/**
+ * Une page d'une table brute — `queryTable` de l'admin, avec les paramètres de
+ * sa route : `q` (sous-chaîne), `col`, `exact=1` (égalité stricte sur `col`),
+ * `page`, `resolve=1` (les clés de texte en anglais). La recherche et la
+ * pagination restent au serveur : une table monte à 18 Mo, la page n'en reçoit
+ * jamais que `PAGE_SIZE` lignes.
+ */
+export function queryGameTable(
+  name: string,
+  query: Readonly<Record<string, string | undefined>>,
+  deps: GameTableDeps = GAME_TABLE_DEPS,
+): TablePage | GameTableRefusal {
+  const refusal = refuseTable(name, deps);
+  if (refusal) return refusal;
+  const page = Number(query.page ?? '1');
+  return deps.queryTable(name, {
+    q: query.q ?? '',
+    col: query.col ?? '',
+    exact: query.exact === '1',
+    page: Number.isFinite(page) ? page : 1,
+    pageSize: PAGE_SIZE,
+    resolve: query.resolve === '1',
+  });
+}
+
+/** Le schéma effectif d'une table (`describeTable`) et ses liens croisés (`linkTargets`). */
+export function gameTableSchema(
+  name: string,
+  deps: GameTableDeps = GAME_TABLE_DEPS,
+): (TableSchema & { links: Record<string, string> }) | GameTableRefusal {
+  const refusal = refuseTable(name, deps);
+  if (refusal) return refusal;
+  const schema = deps.describeTable(name);
+  return { ...schema, links: deps.linkTargets(schema.columns) };
 }

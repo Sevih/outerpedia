@@ -7,10 +7,12 @@
  * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
  * Discord que le bot poste, curer un nom court ou des alias de recherche, tenir
- * le journal du site (le changelog, par gabarits). Tous
- * committent, sauf le message Discord ; « Pousser », dans l'en-tête, pousse
- * `main`. Et, à chaque patch du jeu, la chaîne des données — rafraîchir, relire
- * la promotion, promouvoir, committer —, lancée de la section « Patch », sa
+ * le journal du site (le changelog, par gabarits), lire une table brute du jeu
+ * (« Tables du jeu »). Tous committent, sauf le message Discord et les deux
+ * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
+ * « Pousser », dans l'en-tête, pousse `main`. Et, à chaque patch du jeu, la
+ * chaîne des données — rafraîchir, relire la promotion, promouvoir,
+ * committer —, lancée de la section « Patch », sa
  * sortie à l'écran (cf. `patch.ts`).
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
  * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
@@ -43,6 +45,7 @@ import {
   BANNERS_DEPS,
   CHANGELOG_DEPS,
   CHANGELOG_DISK,
+  GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
@@ -54,6 +57,8 @@ import {
   dashboardState,
   fillChangelogTemplate,
   fitNames,
+  gameTableSchema,
+  gameTablesState,
   gearRecoState,
   gitState,
   namesState,
@@ -61,6 +66,7 @@ import {
   previewChangelogEntry,
   previewGearBuilds,
   pushMain,
+  queryGameTable,
   rankState,
   rewardOptions,
   saveBannerList,
@@ -620,6 +626,33 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     const { texts } = await body<{ texts?: unknown }>(req);
     const out = await translateNotes(strings(texts), TRANSLATE_DEPS);
     json(res, out, 'error' in out ? 500 : 200);
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/gamedata/tables') {
+    // Le catalogue de `.gamedata/parsed/` et, par table, qui la lit. L'usage est
+    // calculé une fois par processus ; `?recompute=1` (« Recalculer ») relit
+    // les sources. Sans données du jeu : liste vide et `error`, pas un 500.
+    json(res, gameTablesState(GAME_TABLES_DISK, url.searchParams.has('recompute')));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/gamedata/table') {
+    // Une page d'une table brute (`?name=&q=&col=&exact=&page=&resolve=`) : la
+    // recherche et la pagination de l'admin, au serveur. Nom invalide : 400 ;
+    // table inconnue : 404.
+    const { name = '', ...query } = Object.fromEntries(url.searchParams);
+    const out = queryGameTable(name, query);
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/gamedata/schema') {
+    // Le schéma effectif d'une table et ses liens croisés, sans ses lignes.
+    const out = gameTableSchema(url.searchParams.get('name') ?? '');
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
     return;
   }
 

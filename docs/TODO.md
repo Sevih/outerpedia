@@ -36,10 +36,42 @@
       Search aliases (onglet « Noms », lot B34), Banner (onglet
       « Bannières », lot B35), la boîte de réception de la home (onglet
       « Tableau de bord », lot B36), la chaîne des données (onglet
-      « Patch », lot C10), Changelog (onglet « Journal du site », lot B37).
+      « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
+      Game data (onglet « Tables du jeu », lot B38).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
+- [ ] **« Tables du jeu » — contrôles à l'écran (lot B38)** : le banc ne
+      clique pas ; l'onglet ne fait que lire. (1) Le sélecteur : cliquer dans
+      « Table… » — attendu : les tables lues d'abord (TextSystem, ItemTemplet,
+      BuffTemplet…), chacune avec « utilisée · N », puis les « jamais lue » ;
+      taper `Recruit`, Entrée → `RecruitGroupTemplet` s'ouvre, ses trois
+      lecteurs en chips (le chemin complet au survol) et leurs trois lignes de
+      note. (2) Un lien croisé : ouvrir `CostumeTemplet`, cliquer un
+      `CharacterID` → `CharacterTemplet` filtrée sur `ID` = cette valeur,
+      « exact » coché, UNE ligne ; « Précédent » du navigateur revient à
+      `CostumeTemplet`. Le `PickupID` de `RecruitGroupTemplet`, lui, n'est PAS
+      un lien : la règle de l'admin (`linkTargetFor`) cherche une table
+      `Pickup*`, pas `CharacterTemplet` — cf. (a). (3) « résoudre les
+      textes », sur `CostumeTemplet` : décocher → les lignes en italique
+      sous les clés (`2010019_Name` → « Shutendouji Rin ») disparaissent,
+      recocher → elles reviennent. (4) La ligne brute : cliquer une ligne de `TextSystem` →
+      à droite toutes ses langues (le tableau ne montre que l'anglais),
+      « Copier » → le JSON de la ligne dans le presse-papiers ; fenêtre
+      réduite sous 1000 px → le panneau passe sous le tableau. (5) « colonnes
+      vides » sur `RecruitGroupTemplet` : 3 colonnes de plus (32 → 35). À
+      juger : (a) `linkTargetFor` ne suit que le NOM de la colonne — un petit
+      tableau d'alias (`PickupID`, `ChangeCharID` → `CharacterTemplet`…) dans
+      `gamedata-store.ts` rendrait ces colonnes cliquables, des deux côtés ;
+      (b) la passe d'usage ne lit que `datagen/`, `src/lib/data/` et
+      `scripts/quick/` : `src/lib/admin/monster-store.ts` lit
+      `BuffToolTipTemplet` et n'apparaît pas parmi ses lecteurs ; (c) quatre
+      lectures passent par un nom en variable (`damage/targets.ts`,
+      `lib/effects.ts`, `generators/solver.ts` — son `textMap` —,
+      `lib/text.ts`) : leurs tables ne leur sont pas attribuées ; (d) l'item
+      « Assets » du tableau de bord renvoie toujours à
+      `/admin/tools/gamedata`, dont le lien de menu est retiré — le rapport
+      d'assets n'est pas porté, et cette page ne le montre pas non plus.
 - [ ] **« Journal du site » — contrôles à l'écran (lot B37)** : le banc ne
       clique pas, et rien n'a été enregistré. (1) Un gabarit Perso sur un
       perso réel : « ＋ Perso », deux lettres, Entrée — attendu : l'entrée en

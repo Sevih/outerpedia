@@ -7,6 +7,103 @@
 
 ## 2026-10-08
 
+- **quick : onglet « Tables du jeu » — les tables lues d'abord, une recherche
+  au lieu d'une liste (lot B38, migration 8)** : l'outil admin « Game data »
+  (`GameDataBrowser`, `GameDataTableList`) est porté dans quick, groupe
+  Données, après Gear reco, `wide`, avec ses deux agacements corrigés. En
+  lecture seule : ni savebar ni `canLeave`, trois routes, toutes des GET.
+  **L'usage** (`tableUsage`, `actions.ts`, pur et testé) : une passe sur les
+  sources de `datagen/`, `src/lib/data/` et `scripts/quick/` (tests et `.d.ts`
+  exclus) retient chaque table NOMMÉE EN DUR dans un appel de lecture ; ses
+  lecteurs (`usedBy`, par chemin : `generators/recruit` et le chemin complet)
+  et sa `note`, la première ligne du docblock de chacun, une par ligne —
+  rien n'est tenu à la main. Aujourd'hui : **258 tables, 89 lues par
+  41 fichiers** (40 de `datagen/`, plus `scripts/quick/actions`), en tête
+  `TextSystem` (18 lecteurs), `ItemTemplet` (11), `BuffTemplet` et
+  `CharacterTemplet` (8) ; 169 tables ne sont lues par aucun. La note de
+  `RecruitGroupTemplet` : « Spec d'extraction — PERSONNAGES
+  (CharacterTemplet), entité qui relie tout. / Générateur — DOMAINE
+  RECRUTEMENT (`recruit.json`). / quick/actions — les NEUF gestes du
+  quotidien, sortis du panneau admin. ». **Serveur** : `gameTablesState`
+  (`GET /api/gamedata/tables` : `listGameTables()` de l'admin, l'usage par
+  table, les tables lues d'abord par nombre de lecteurs puis par nom, les
+  comptes, `hiddenColumns` ; l'usage est calculé une fois par processus —
+  13 ms — et refait sur `?recompute=1`, le catalogue relu à chaque appel ;
+  sans `.gamedata/parsed/`, liste vide et `error`), `queryGameTable`
+  (`GET /api/gamedata/table?name=&q=&col=&exact=&page=&resolve=` :
+  `isValidTableName` puis `queryTable`, 400 et 404 comme la route admin) et
+  `gameTableSchema` (`GET /api/gamedata/schema?name=` : `describeTable` +
+  `linkTargets`). `gamedata-store.ts` est appelé tel quel, pas retouché.
+  **La règle des colonnes de langue** masquées vivait dans le composant
+  React, non exportée : elle descend dans `src/lib/admin/gamedata-columns.ts`
+  (`HIDDEN_LANG_COLUMNS`, module pur — `gamedata-store.ts` tire `node:fs` et
+  ne s'importe pas d'un composant client), `GameDataBrowser` l'importe, quick
+  la sert dans l'état ; aucune copie. **Page** (`tabs/gamedata.{html,js,css}`,
+  ids en `t-`) : PAS de liste latérale — un champ « Table… » et ses
+  suggestions (nom, taille, badge « utilisée · N » ou « jamais lue »
+  atténué ; 40 au plus, le reste compté ; Entrée prend la première) ; sous le
+  champ la table choisie (taille, date d'extraction, nom interne, lignes,
+  colonnes remplies, lecteurs en chips à texte seul, la note) ; puis la
+  recherche (texte à 200 ms, colonne, « exact », « résoudre les textes »,
+  « colonnes vides »), « N lignes sur T », « page N / M », le tableau
+  (colonnes mortes et colonnes de langue masquées, anglais sous la clé de
+  texte, un lien par id d'une colonne `*ID` qui a une cible, en égalité
+  stricte) et la LIGNE BRUTE à droite — dessous sous 1000 px —, clé : valeur,
+  avec « Copier ». Catalogue lu à la première venue sur l'onglet, pas au
+  démarrage. Admin : le lien « Game data » sort du menu (`layout.dev.tsx`).
+  `ADMIN_TO_QUICK` reste VIDE : l'item « Assets » de l'inbox pointe vers
+  `/admin/tools/gamedata` mais annonce le rapport d'assets, que ce lot ne
+  porte pas. Écarts au lot : (1) `loadTextIndex` est compté parmi les
+  lectures, en plus des trois primitives nommées — sans lui `TextCharacter`,
+  `TextItem` et `TextSkill` (5, 5 et 6 lecteurs) s'affichaient « jamais
+  lue » ; les trois seules donnent bien 231 appels et 86 tables, les quatre
+  264 et 89 ; (2) les commentaires sont retirés avant la passe : `lib/text`
+  devenait lecteur de `TextSystem` pour l'avoir citée dans un docblock, vu au
+  banc ; (3) la note prend TOUS les lecteurs, pas les seuls `generators/` —
+  une table lue par `damage/` ou `extractor/` seulement n'en aurait pas —, une
+  ligne par lecteur (`\n`, `white-space: pre-line`), `…` quand la phrase du
+  docblock continue à la ligne ; (4) `usedBy` porte `{ name, path }`, le
+  `title` de la chip voulant le chemin complet ; (5) la route `schema` est
+  servie et testée mais la page ne l'appelle pas : chaque page de lignes
+  porte déjà le schéma et les liens, comme dans l'admin ; (6) suivre un lien
+  croisé pose une entrée d'historique (`pushState`), « Précédent » revient à
+  la table quittée — ce que le `Link` de l'admin donnait ; (7) `&row=<n>`
+  dans le hash ouvre la ligne brute, pour le banc qui ne clique pas ; (8) les
+  refus sont en français (« nom de table invalide », « table inconnue : X »),
+  mêmes statuts. **Le contrôle « suivre un `PickupID` vers
+  `CharacterTemplet` » du lot ne peut pas se jouer** : `linkTargetFor` déduit
+  la cible du nom de la colonne et cherche une table `Pickup*` — la seule
+  colonne liée de `RecruitGroupTemplet` est `OpenDungeonID`. Le TODO propose
+  `CostumeTemplet` → `CharacterID` → `CharacterTemplet`, vérifié au `curl`
+  (une ligne, « Dianne » résolu). Banc (quick isolé, clés vidées, :4812,
+  `shot.mjs`, que des GET) : le sélecteur vide (« 258 tables · 89 lues par
+  41 fichiers », la phrase d'accueil), `#gamedata/RecruitGroupTemplet` (trois
+  chips, trois lignes de note, 177 lignes, 32/35 colonnes, page 1 / 4),
+  `#gamedata/CostumeTemplet?row=3` (liens accent sur `CharacterID` et
+  `ShareCharacterID`, « Summer Island Alpha » sous `2010007_Name`, la ligne
+  brute de 17 champs à droite), `TextSystem` filtrée en 900 px (seules `ID`
+  et `English` au tableau, les langues dans la ligne brute, dessous),
+  `#gamedata/NopeTemplet` (« table inconnue : NopeTemplet ») ; Rangs et
+  Tableau de bord capturés après coup et rendus entiers — pas de capture
+  d'avant à leur opposer : ni `quick.css` ni leurs fichiers ne sont touchés,
+  seul le menu Données gagne un onglet. Vérification : `pnpm typecheck` (sortie 0, trois
+  `tsc`), `pnpm lint` (sortie 0), `pnpm test` « Test Files 201 passed (201) /
+  Tests 3069 passed (3069) », puis sous `NODE_ENV=development`
+  `pnpm exec vitest run scripts/quick` « Test Files 8 passed (8) / Tests 612
+  passed (612) ». Tests ajoutés : 13 dans `actions.test.ts` (`tableUsage` sur
+  des sources factices, `gameTablesState` à lectures injectées et son mémo,
+  `queryGameTable` et `gameTableSchema` à store factice), 16 dans
+  `ui-serve.test.ts` (15 pour la page en happy-dom, 1 pour le banc : aucun
+  POST de la section dans `READ_ONLY_POSTS`). Laissé, au TODO : les contrôles
+  à l'écran, les alias de `linkTargetFor`, `src/lib/admin/` hors de la passe
+  (`monster-store.ts` lit `BuffToolTipTemplet`), les quatre lectures par
+  variable, l'item « Assets ». Vu hors périmètre : `GameDataTableList` dit
+  « 257 tables » dans son commentaire (258 aujourd'hui) ; la page admin
+  renvoie à `pnpm datagen:convert` pour peupler le dossier, quick dit « un
+  patch (pull) » ; l'en-tête d'`actions.ts` compte « NEUF gestes » et
+  « Les HUIT committent », et c'est cette première ligne que la note de
+  `RecruitGroupTemplet` affiche.
+
 - **Relecture B37** (Fable, 08/10) : `b1ce507b` validé — 100 lots, aucun
   ouvert. Périmètre attendu (gabarits et puces dans `src/lib/`, `changelog.ts`
   du site, `ChangelogEntryCard`, `tabs/changelog.*`, `actions.ts`,

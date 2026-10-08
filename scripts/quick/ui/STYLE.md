@@ -64,9 +64,9 @@ pastille.
   Les sections vivent dans UN document : chacune préfixe ses `id` et ses
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `g-` Gear reco, `h-` Tableau de bord, `j-` Journal du site,
-  `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `v-` Vidéos) — une
-  lettre reprise et `$('c-list')` rend l'élément de l'autre onglet, sans
-  erreur.
+  `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
+  `v-` Vidéos) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
+  onglet, sans erreur.
 - Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
   `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
@@ -77,8 +77,9 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Gear reco, Discord. Une section est une colonne à
-  18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des `.card`.
+  (`main.wide`) : Patch, Rangs, Gear reco, Tables du jeu, Discord. Une section
+  est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
+  `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
   entre `nav.tabs` et `<main>`, pleine largeur, son contenu (`.journal-in`)
   aligné sur `<main>` — 1200 px centrés, toute la largeur sous un onglet
@@ -337,6 +338,57 @@ Note repliée (état retenu) : ses deux cartes se rangent en une ligne au-dessus
 de l'éditeur, qui prend toute la largeur. Propres à l'onglet, dans
 `tabs/discord.css` faute de composant commun : `.d-grp` (boutons d'outil
 accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).
+
+## Données — croquis
+
+Rangs et Gear reco ont leur croquis plus haut, avec les onglets « wide ».
+
+### Tables du jeu (`wide`, fait — B38)
+
+Les tables brutes du jeu (`.gamedata/parsed/`), telles que le parser les
+produit — l'outil d'exploration qui précède l'écriture d'un générateur.
+Lecture seule : ni savebar ni `canLeave`, que des GET. Croquis du rendu :
+
+```
+.head  Tables du jeu — Les tables brutes extraites du jeu… Lecture seule… Les tables que le code lit sortent d'abord…
+.card.pad  .form : [Table… 30ch, chasse fixe] « 258 tables · 89 lues par 42 fichiers » [Recalculer]
+   PAS de liste : le champ et ses suggestions (.picker + .results, 40 au plus puis « … N autres : préciser le nom. »)
+     une suggestion = le nom (chasse fixe) · la taille · à droite badge ok « utilisée · N » (N fichiers la lisent), ou « jamais lue » atténué en italique
+     dans l'ordre du serveur : les tables lues d'abord, par nombre de lecteurs décroissant puis par nom ; les autres ensuite, par nom
+     le champ vide (ou qui porte le nom de la table ouverte) propose tout ; Entrée prend la première ; Échap ou un clic ailleurs referme
+   .t-info (la table choisie) :
+     nom (chasse fixe, 15 px) · son badge d'usage · « 180 Ko · extraite le 08/10/2026 08:58 » · « CNomInterne · 177 lignes · 32/35 colonnes remplies » (arrive avec la première page ; le nom interne seulement s'il diffère)
+     .chips : un .chip.t-reader par fichier qui la lit (« generators/recruit », chasse fixe, texte seul, `title` = le chemin complet)
+     p.t-note : la première ligne du docblock de chaque lecteur, une par ligne, les `…` en chasse fixe ; au-delà de six lignes elle défile dans son cadre
+     une table que rien ne lit : « Aucun fichier de datagen, de src/lib/data ni de scripts/quick ne lit cette table par son nom. »
+   .empty à la place : « Choisir une table : taper son nom — les 89 tables lues par le code sortent d'abord. » · « table inconnue : X » · sans `.gamedata/parsed/`, le message du serveur
+.card (absente sans table)  card-head.t-bar : [Chercher dans la table… 30ch] [toutes les colonnes ▾ + les colonnes COMPLÈTES] [☐ exact] [☑ résoudre les textes] [☐ colonnes vides] … « 120 lignes sur 177 » [Précédent] « page 1 / 3 » [Suivant]
+   « exact » = égalité stricte sur la colonne choisie, éteinte sans colonne ; la recherche part 200 ms après la dernière frappe et revient à la première page
+   .t-cols — le tableau, et à sa droite la ligne brute (380 px ; dessous sous 1000 px)
+     .scroll > table : il défile dans son cadre, dans les deux sens, en-tête collant ; en-têtes et cellules en chasse fixe, sans repli
+        colonnes jamais remplies masquées (« colonnes vides » les montre), colonnes de langue masquées sauf l'anglais (`HIDDEN_LANG_COLUMNS`, la règle de l'admin, servie par l'état)
+        une colonne `*ID` qui mène à une table : ↗ accent dans l'en-tête (`title` = la cible), et dans la cellule un lien PAR id (une liste CSV en porte plusieurs)
+        une clé de texte : son anglais dessous, en italique atténué (40 ch au plus) ; une valeur longue est coupée à 60 ch (`title` = la valeur)
+        une ligne se clique (ou Entrée) : fond `surface-overlay`, et sa LIGNE BRUTE s'ouvre
+     aside.t-raw  card-head : « Ligne brute » · « 32 champs » … [Copier] ✕
+        dl.t-kv : une paire par champ de la ligne, clé atténuée | valeur entière — toutes les colonnes, toutes les langues, rien de résolu
+        « Copier » : le JSON de la ligne ; le bouton dit « copié » deux secondes, « impossible » si le navigateur refuse
+   .empty « Aucune ligne ne correspond. »
+le hash : `#gamedata/<Table>` ouvre l'onglet sur la table (la page l'écrit au choix : recharger y revient) ; un lien croisé est `#gamedata/<Cible>?col=ID&exact=1&q=<valeur>` — égalité stricte, `ID=101` ne ramène pas `1011` ; `&row=<n>` y montre en plus la ligne brute de la n-ième ligne, à partir de 0 (le banc ne clique pas)
+```
+
+Le catalogue vient de `GET /api/gamedata/tables` (`gameTablesState` : nom,
+taille, date, `usedBy`, `note`, les comptes, `hiddenColumns`), lu à la
+PREMIÈRE venue sur l'onglet, pas au démarrage. L'usage est une passe du
+serveur sur les sources (`tableUsage`), faite une fois par processus ;
+« Recalculer » la refait (`?recompute=1`) et relit le catalogue. Une page de
+lignes vient de `GET /api/gamedata/table` (`queryTable` de l'admin : la
+recherche et la pagination restent au serveur, une table monte à 18 Mo) ; seule
+la dernière demande se dessine, un refus passe par le journal. Suivre un lien
+croisé pose une entrée d'historique : « Précédent » du navigateur revient à la
+table quittée. Propres à l'onglet, dans `tabs/gamedata.css` : `.t-info`,
+`.t-id`, `.t-reader`, `.t-note`, `.t-bar`, `.t-cols`, `.t-grid`, `.t-v`,
+`.t-text`, `.t-raw`, `.t-kv`, `.t-pair`.
 
 ## Accueil — croquis
 

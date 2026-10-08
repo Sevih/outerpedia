@@ -1,0 +1,79 @@
+<section id="tab-gamedata" hidden>
+  <div class="head">
+    <h2>Tables du jeu</h2>
+    <p class="hint">
+      Les tables brutes extraites du jeu (<code>.gamedata/parsed</code>), telles que le parser les
+      produit. Lecture seule : rien ne s'écrit d'ici. Les tables que le code lit sortent d'abord,
+      avec les fichiers qui les lisent et ce qu'ils en font.
+    </p>
+  </div>
+
+  <div class="card pad" aria-label="Table">
+    <div class="form">
+      <div class="field picker" id="t-picker">
+        <label for="t-pick">Table</label>
+        <input id="t-pick" class="w-search mono" placeholder="Table…" autocomplete="off" />
+        <div class="results" id="t-results" hidden></div>
+      </div>
+      <span class="lbl t-total" id="t-total"></span>
+      <button
+        class="btn ghost sm"
+        id="t-recompute"
+        title="Relit les sources (datagen, src/lib/data, scripts/quick) : qui lit quelle table"
+      >
+        Recalculer
+      </button>
+    </div>
+    <div class="t-info" id="t-info" hidden></div>
+    <div class="empty" id="t-none">Lecture…</div>
+  </div>
+
+  <div class="card" id="t-card" aria-label="Lignes" hidden>
+    <div class="card-head t-bar">
+      <input
+        id="t-q"
+        class="w-search"
+        placeholder="Chercher dans la table…"
+        aria-label="Chercher dans la table"
+        autocomplete="off"
+      />
+      <select id="t-col" aria-label="Colonne de la recherche"></select>
+      <label class="check"><input type="checkbox" id="t-exact" />exact</label>
+      <label class="check"
+        ><input type="checkbox" id="t-resolve" checked />résoudre les textes</label
+      >
+      <label class="check"><input type="checkbox" id="t-blank" />colonnes vides</label>
+      <span class="lbl t-end" id="t-count"></span>
+      <button class="btn ghost sm" id="t-prev" disabled>Précédent</button>
+      <span class="lbl" id="t-page"></span>
+      <button class="btn ghost sm" id="t-next" disabled>Suivant</button>
+    </div>
+    <div class="t-cols">
+      <div class="t-grid">
+        <div class="scroll">
+          <table>
+            <thead id="t-head"></thead>
+            <tbody id="t-rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="t-no-rows" hidden>Aucune ligne ne correspond.</div>
+      </div>
+      <aside class="t-raw" id="t-raw" aria-label="Ligne brute" hidden>
+        <div class="card-head">
+          <strong>Ligne brute</strong>
+          <span class="lbl" id="t-raw-count"></span>
+          <button class="btn ghost sm t-end" id="t-copy">Copier</button>
+          <button
+            class="btn icon"
+            id="t-raw-close"
+            title="Fermer"
+            aria-label="Fermer la ligne brute"
+          >
+            ✕
+          </button>
+        </div>
+        <dl class="t-kv" id="t-kv"></dl>
+      </aside>
+    </div>
+  </div>
+</section>

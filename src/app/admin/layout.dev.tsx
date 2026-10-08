@@ -73,7 +73,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         // retiré le 08/10 — la page reste joignable par son URL jusqu'au retrait
         // de l'admin.
         { label: 'Events', href: '/admin/tools/events' },
-        { label: 'Game data', href: '/admin/tools/gamedata' },
+        // Game data : porté dans quick (Données › Tables du jeu), lien retiré
+        // le 08/10 — la page reste joignable par son URL jusqu'au retrait de
+        // l'admin, et l'item « Assets » de l'inbox y renvoie toujours.
       ],
     },
     {

@@ -86,7 +86,13 @@ la puce et le slug), « Traduire » par entrée, et sous la fiche l'APERÇU de l
 carte de `/changelog` dans la langue choisie ; lien retiré du menu admin le
 08/10), 4-comics, Vidéos, Discord.
 Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
-un exemplaire).
+un exemplaire), Tables du jeu (= Tools › Game data, étape 8, lot B38 : les
+tables brutes de `.gamedata/parsed/`, en lecture seule — un champ de recherche
+à la place de la liste latérale, ses suggestions rangées par USAGE : les
+tables que le code lit d'abord, avec les fichiers qui les lisent et la
+première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
+recherche dans la table, la pagination, les textes résolus, les liens croisés
+et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -99,7 +105,8 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
-C10) → 7 Changelog (fait, B37) → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
+C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs →
+16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
@@ -144,9 +151,14 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    sous la fiche. L'entrée reste pour que la numérotation des suivantes ne
    bouge pas.
 
-8. **Tools › Game data**
-   `GameDataBrowser` + `[table]` (lecture)
-   - Agacements : mettre en avant les tables que l'on utilise réelement (et mettre un petit text pour l'utilité de la table), on a une grande liste de fichier qui prendre de la place plutot qu'un select avec une recherche text qui suffirait)
+8. **Tools › Game data** — FAIT, lot B38 : l'onglet « Tables du jeu »
+   (cf. « Déjà dans quick »). Les deux agacements de Sevih y sont corrigés :
+   « mettre en avant les tables que l'on utilise réellement, avec un petit
+   texte pour l'utilité de la table » par l'usage déduit des sources (les
+   tables lues d'abord, leurs lecteurs, la première ligne de leur docblock),
+   « une grande liste de fichiers qui prend de la place » par le champ de
+   recherche et ses suggestions. L'entrée reste pour que la numérotation des
+   suivantes ne bouge pas.
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 

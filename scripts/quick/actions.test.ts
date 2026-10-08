@@ -59,6 +59,11 @@
  * factice), la version du jeu et celle du client, les dates des fichiers de la
  * proposition, les bannières, les codes promo (R2 n'est pas appelé), le jour.
  *
+ * Et contrat de l'onglet « Tables du jeu » — `tableUsage` (qui lit quelle table,
+ * pur, sur des sources FACTICES), `gameTablesState` (le catalogue et l'usage,
+ * lectures injectées), `queryGameTable` et `gameTableSchema` (le store de
+ * l'admin, factice). Ni `.gamedata/parsed/` ni les sources du dépôt ne sont lus.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -83,6 +88,7 @@ import en from '@/i18n/locales/en';
 import fr from '@/i18n/locales/fr';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
+import type { TablePage, TableSchema } from '@/lib/admin/gamedata-store';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
 import { LANGS } from '@/lib/i18n/config';
 import type { RecruitWindow } from '@datagen/generators/recruit';
@@ -104,6 +110,8 @@ import {
   diffBanners,
   fillChangelogTemplate,
   fitNames,
+  gameTableSchema,
+  gameTablesState,
   gearRecoState,
   gitState,
   groupComics,
@@ -112,10 +120,12 @@ import {
   previewChangelogEntry,
   previewGearBuilds,
   pushMain,
+  queryGameTable,
   saveBannerList,
   saveChangelogList,
   saveGearReco,
   saveNames,
+  tableUsage,
   translateNotes,
   type BannersDeps,
   type BannersDisk,
@@ -124,6 +134,8 @@ import {
   type ComicsDeps,
   type ComicUpload,
   type DashboardDisk,
+  type GameTableDeps,
+  type GameTablesDisk,
   type GearCatalog,
   type GearRecoDeps,
   type NameChange,
@@ -133,6 +145,7 @@ import {
   type RankChange,
   type RankDisk,
   type TranslateDeps,
+  type UsageSource,
 } from './actions';
 import { composeSetCombos, splitSetCombos } from './ui/gear-sets.mjs';
 import {
@@ -3065,6 +3078,305 @@ describe('POST /api/translate — « Traduire » générique, par translateNotes
       "(url.pathname === '/api/translate' || url.pathname === '/api/gear-reco/translate')",
     );
     expect(server.match(/translateNotes\(/g)).toHaveLength(1);
+  });
+});
+
+// ------------------------------------------------------------ tables du jeu ---
+
+/** Des sources FACTICES : deux lecteurs à docblock, un sans, un fichier qui ne lit rien. */
+const USAGE_SOURCES: UsageSource[] = [
+  {
+    path: 'datagen/generators/recruit.ts',
+    text: [
+      '/**',
+      ' * Générateur — DOMAINE RECRUTEMENT (`recruit.json`).',
+      ' *',
+      ' * Sert les guides de la catégorie general-guides.',
+      ' */',
+      "import { loadTable } from '../lib/tables';",
+      "const groups = loadTable('RecruitGroupTemplet');",
+      'const rates = loadTable( "RecruitTemplet" );',
+      "const again = loadTable('RecruitGroupTemplet');",
+      // Ni un nom en variable, ni un nom composé : aucune table n'y est nommée.
+      'for (const name of names) loadTable(name);',
+      'const text = loadTable(`Text${suffix}`);',
+    ].join('\n'),
+  },
+  {
+    path: 'datagen/extractor/specs/character.ts',
+    text: [
+      '/**',
+      " * Spec d'extraction — PERSONNAGES (CharacterTemplet), entité",
+      ' * qui relie tout.',
+      ' */',
+      "for (const r of loadTable('RecruitGroupTemplet')) seen.add(r.PickupID);",
+      'const columns = loadColumns(`CharacterTemplet`);',
+      "const names = loadTextIndex('TextCharacter');",
+    ].join('\n'),
+  },
+  {
+    path: 'scripts/quick/actions.ts',
+    text: "import './env';\nconst has = existsSync(tablePath('RecruitGroupTemplet'));\n",
+  },
+  { path: 'datagen/lib/idle.ts', text: '/** Ne lit rien. */\nexport const n = 1;\n' },
+  {
+    // Une lecture CITÉE dans un commentaire n'en est pas une.
+    path: 'datagen/lib/text.ts',
+    text: [
+      '/**',
+      ' * Primitive #2 — résolution de texte localisé.',
+      " * Un build appelle `loadTextIndex('TextSystem')` depuis quinze générateurs.",
+      ' */',
+      "// const rows = loadTable('ItemTemplet');",
+      "export const DOC = 'https://example.test/doc';",
+    ].join('\n'),
+  },
+];
+
+describe('tableUsage — qui lit quelle table, d’après les sources', () => {
+  const usage = tableUsage(USAGE_SOURCES);
+
+  it('une table = son nom écrit en dur dans un appel de lecture ; un appel par variable est ignoré', () => {
+    expect([...usage.keys()].sort()).toEqual([
+      'CharacterTemplet',
+      'RecruitGroupTemplet',
+      'RecruitTemplet',
+      'TextCharacter',
+    ]);
+    // Une table lue par personne n'a pas d'entrée — ni celle qu'un commentaire cite.
+    expect(usage.get('ItemTemplet')).toBeUndefined();
+    expect(usage.get('TextSystem')).toBeUndefined();
+    // Le `//` d'une adresse n'ouvre pas un commentaire : la lecture qui la suit compte.
+    expect(
+      tableUsage([
+        { path: 'datagen/a.ts', text: "const u = 'https://x.test'; loadTable('AreaTemplet');" },
+      ]).get('AreaTemplet')?.usedBy,
+    ).toEqual([{ name: 'a', path: 'datagen/a.ts' }]);
+  });
+
+  it('un générateur qui lit deux tables est le lecteur des deux, une fois chacune', () => {
+    const recruit = { name: 'generators/recruit', path: 'datagen/generators/recruit.ts' };
+    expect(usage.get('RecruitTemplet')?.usedBy).toEqual([recruit]);
+    // Lue deux fois par le même fichier : un seul lecteur.
+    expect(usage.get('RecruitGroupTemplet')?.usedBy.filter((r) => r.path === recruit.path)).toEqual(
+      [recruit],
+    );
+  });
+
+  it('les lecteurs par chemin : sans extension, sans `datagen/` en tête, le chemin complet à côté', () => {
+    expect(usage.get('RecruitGroupTemplet')?.usedBy).toEqual([
+      { name: 'extractor/specs/character', path: 'datagen/extractor/specs/character.ts' },
+      { name: 'generators/recruit', path: 'datagen/generators/recruit.ts' },
+      { name: 'scripts/quick/actions', path: 'scripts/quick/actions.ts' },
+    ]);
+    // L'ordre des sources ne compte pas.
+    expect(tableUsage([...USAGE_SOURCES].reverse()).get('RecruitGroupTemplet')).toEqual(
+      usage.get('RecruitGroupTemplet'),
+    );
+  });
+
+  it('la note : la première ligne du docblock de chaque lecteur, une par ligne — `…` si la phrase continue', () => {
+    expect(usage.get('RecruitTemplet')?.note).toBe(
+      'Générateur — DOMAINE RECRUTEMENT (`recruit.json`).',
+    );
+    // Un lecteur sans docblock en tête ne dit rien.
+    expect(usage.get('RecruitGroupTemplet')?.note).toBe(
+      "Spec d'extraction — PERSONNAGES (CharacterTemplet), entité…\nGénérateur — DOMAINE RECRUTEMENT (`recruit.json`).",
+    );
+    expect(tableUsage([USAGE_SOURCES[2]]).get('RecruitGroupTemplet')?.note).toBe('');
+  });
+
+  it('deux lecteurs au même docblock ne le disent qu’une fois ; un docblock d’une ligne se lit', () => {
+    const twin = (path: string): UsageSource => ({
+      path,
+      text: "/** Extracteur DAMAGE — cibles. */\nloadTable('MonsterTemplet');",
+    });
+    const out = tableUsage([twin('datagen/damage/a.ts'), twin('datagen/damage/b.ts')]);
+    expect(out.get('MonsterTemplet')).toEqual({
+      usedBy: [
+        { name: 'damage/a', path: 'datagen/damage/a.ts' },
+        { name: 'damage/b', path: 'datagen/damage/b.ts' },
+      ],
+      note: 'Extracteur DAMAGE — cibles.',
+    });
+  });
+});
+
+describe('gameTablesState — le catalogue et l’usage, lectures injectées', () => {
+  const info = (name: string, bytes = 1000) => ({ name, bytes, mtimeMs: 1_700_000_000_000 });
+  const disk = (over: Partial<GameTablesDisk> = {}): GameTablesDisk => ({
+    // L'ordre du disque : alphabétique.
+    listTables: () => [
+      info('AreaTemplet'),
+      info('CharacterTemplet', 2_400_000),
+      info('RecruitGroupTemplet', 180_167),
+      info('RecruitTemplet'),
+      info('ZoneTemplet'),
+    ],
+    sources: () => USAGE_SOURCES,
+    ...over,
+  });
+
+  it('les tables lues d’abord, par nombre de lecteurs puis par nom ; les autres ensuite', () => {
+    const state = gameTablesState(disk());
+    expect(state.tables.map((t) => [t.name, t.usedBy.length])).toEqual([
+      ['RecruitGroupTemplet', 3],
+      ['CharacterTemplet', 1],
+      ['RecruitTemplet', 1],
+      ['AreaTemplet', 0],
+      ['ZoneTemplet', 0],
+    ]);
+    expect(state.tables[0]).toEqual({
+      ...info('RecruitGroupTemplet', 180_167),
+      usedBy: [
+        { name: 'extractor/specs/character', path: 'datagen/extractor/specs/character.ts' },
+        { name: 'generators/recruit', path: 'datagen/generators/recruit.ts' },
+        { name: 'scripts/quick/actions', path: 'scripts/quick/actions.ts' },
+      ],
+      note: "Spec d'extraction — PERSONNAGES (CharacterTemplet), entité…\nGénérateur — DOMAINE RECRUTEMENT (`recruit.json`).",
+    });
+    expect(state.tables[3]).toEqual({ ...info('AreaTemplet'), usedBy: [], note: '' });
+    // Trois tables du disque sont lues, par trois fichiers — `TextCharacter`,
+    // lue mais absente du disque, ne se compte pas.
+    expect(state.used).toBe(3);
+    expect(state.readers).toBe(3);
+    expect('error' in state).toBe(false);
+  });
+
+  it('les colonnes de langue masquées : la règle de l’admin, l’anglais reste', () => {
+    const { hiddenColumns } = gameTablesState(disk());
+    expect(hiddenColumns).toEqual(
+      expect.arrayContaining(['Japanese', 'Korean', 'French', 'Spanish', 'China_Traditional']),
+    );
+    expect(hiddenColumns).not.toContain('English');
+  });
+
+  it('sans `.gamedata/parsed/` : liste vide et `error`, pas une levée', () => {
+    expect(gameTablesState(disk({ listTables: () => [] }))).toEqual({
+      tables: [],
+      used: 0,
+      readers: 0,
+      hiddenColumns: expect.any(Array),
+      error: NO_GAME_DATA,
+    });
+    expect(NO_GAME_DATA).toBe('Pas de données du jeu : lancer un patch (pull) d’abord.');
+  });
+
+  it('l’usage est calculé UNE fois par jeu de lectures ; `recompute` relit les sources', () => {
+    const sources = vi.fn(() => USAGE_SOURCES);
+    const listTables = vi.fn(() => [info('RecruitTemplet')]);
+    const d = disk({ sources, listTables });
+    gameTablesState(d);
+    gameTablesState(d);
+    expect(sources).toHaveBeenCalledTimes(1);
+    // Le catalogue, lui, est relu à chaque appel : un pull le change.
+    expect(listTables).toHaveBeenCalledTimes(2);
+
+    sources.mockReturnValue([]);
+    expect(gameTablesState(d).used).toBe(1);
+    expect(gameTablesState(d, true).used).toBe(0);
+    expect(sources).toHaveBeenCalledTimes(2);
+    // Le recalcul remplace le mémo.
+    expect(gameTablesState(d).used).toBe(0);
+    expect(sources).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('queryGameTable, gameTableSchema — le store de l’admin, factice', () => {
+  const schema: TableSchema = {
+    table: 'CItemTemplet',
+    columns: ['ID', 'NameID', 'DissolveRewardID', 'Dead'],
+    filled: ['ID', 'NameID', 'DissolveRewardID'],
+    rowCount: 2,
+  };
+  const page: TablePage = {
+    ...schema,
+    rows: [{ ID: '1', NameID: 'NAME_ITEM_1' }],
+    matched: 1,
+    page: 1,
+    pageSize: 50,
+    texts: {},
+    links: { DissolveRewardID: 'RewardTemplet' },
+  };
+  const deps = () => {
+    const d = {
+      listTables: vi.fn(() => [{ name: 'ItemTemplet', bytes: 10, mtimeMs: 1 }]),
+      queryTable: vi.fn(() => page),
+      describeTable: vi.fn(() => schema),
+      linkTargets: vi.fn(() => ({ DissolveRewardID: 'RewardTemplet' })),
+    };
+    return d satisfies GameTableDeps;
+  };
+
+  it('un nom qui n’est pas un basename : 400, rien n’est lu', () => {
+    for (const name of ['', '../etc/passwd', 'a/b', 'Item.json', 'a b']) {
+      const d = deps();
+      expect(queryGameTable(name, {}, d), name).toEqual({
+        error: 'nom de table invalide',
+        status: 400,
+      });
+      expect(gameTableSchema(name, d), name).toEqual({
+        error: 'nom de table invalide',
+        status: 400,
+      });
+      expect(d.listTables).not.toHaveBeenCalled();
+      expect(d.queryTable).not.toHaveBeenCalled();
+      expect(d.describeTable).not.toHaveBeenCalled();
+    }
+  });
+
+  it('une table que le disque n’a pas : 404, en la nommant', () => {
+    const d = deps();
+    expect(queryGameTable('NopeTemplet', { q: 'x' }, d)).toEqual({
+      error: 'table inconnue : NopeTemplet',
+      status: 404,
+    });
+    expect(gameTableSchema('NopeTemplet', d)).toEqual({
+      error: 'table inconnue : NopeTemplet',
+      status: 404,
+    });
+    expect(d.queryTable).not.toHaveBeenCalled();
+    expect(d.describeTable).not.toHaveBeenCalled();
+  });
+
+  it('les paramètres de la route de l’admin : sous-chaîne, colonne, `exact=1`, page, `resolve=1`', () => {
+    const d = deps();
+    expect(
+      queryGameTable(
+        'ItemTemplet',
+        { q: 'gold', col: 'ID', exact: '1', page: '3', resolve: '1' },
+        d,
+      ),
+    ).toBe(page);
+    expect(d.queryTable).toHaveBeenLastCalledWith('ItemTemplet', {
+      q: 'gold',
+      col: 'ID',
+      exact: true,
+      page: 3,
+      pageSize: 50,
+      resolve: true,
+    });
+
+    // Sans rien : la première page, en sous-chaîne, sans résolution. Une page
+    // illisible vaut la première ; `exact` et `resolve` ne valent que `1`.
+    queryGameTable('ItemTemplet', {}, d);
+    queryGameTable('ItemTemplet', { page: 'deux', exact: 'true', resolve: '0' }, d);
+    const first = { q: '', col: '', exact: false, page: 1, pageSize: 50, resolve: false };
+    expect(d.queryTable.mock.calls.slice(1)).toEqual([
+      ['ItemTemplet', first],
+      ['ItemTemplet', first],
+    ]);
+  });
+
+  it('le schéma : `describeTable` et ses liens croisés, sans une ligne', () => {
+    const d = deps();
+    expect(gameTableSchema('ItemTemplet', d)).toEqual({
+      ...schema,
+      links: { DissolveRewardID: 'RewardTemplet' },
+    });
+    expect(d.describeTable).toHaveBeenCalledWith('ItemTemplet');
+    expect(d.linkTargets).toHaveBeenCalledWith(schema.columns);
+    expect(d.queryTable).not.toHaveBeenCalled();
   });
 });
 

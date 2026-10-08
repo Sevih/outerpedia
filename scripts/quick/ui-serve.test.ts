@@ -17,6 +17,7 @@ const TABS = [
   'videos',
   'ranks',
   'gear',
+  'gamedata',
   'discord',
   'names',
 ];
@@ -61,7 +62,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : onze sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : douze sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -224,6 +225,10 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/changelog'))).toEqual([
       '/api/changelog/preview',
     ]);
+  });
+
+  it('des tables du jeu, ne relaie aucun POST : l’onglet ne fait que des GET', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/gamedata'))).toEqual([]);
   });
 });
 
@@ -2375,6 +2380,694 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     const none = await journal({ hash: 'changelog/7' });
     expect(none.all('#j-list .j-item.open')).toEqual([]);
     expect(none.titles()).toHaveLength(3);
+  });
+});
+
+describe('Tables du jeu — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  interface Reader {
+    name: string;
+    path: string;
+  }
+  interface Table {
+    name: string;
+    bytes: number;
+    mtimeMs: number;
+    usedBy: Reader[];
+    note: string;
+  }
+  interface Catalog {
+    tables: Table[];
+    used: number;
+    readers: number;
+    hiddenColumns: string[];
+    error?: string;
+  }
+  interface Rows {
+    table: string;
+    columns: string[];
+    filled: string[];
+    rowCount: number;
+    rows: Record<string, string>[];
+    matched: number;
+    page: number;
+    pageSize: number;
+    texts: Record<string, string>;
+    links: Record<string, string>;
+  }
+  type Query = Record<string, string>;
+
+  const reader = (name: string): Reader => ({ name, path: `datagen/${name}.ts` });
+  const table = (name: string, bytes: number, usedBy: Reader[] = [], note = ''): Table => ({
+    name,
+    bytes,
+    mtimeMs: Date.UTC(2026, 9, 8, 8, 58),
+    usedBy,
+    note,
+  });
+  /** Le catalogue, dans l'ordre du serveur : les tables lues d'abord. */
+  const catalog = (over: Partial<Catalog> = {}): Catalog => ({
+    tables: [
+      table(
+        'RecruitGroupTemplet',
+        180_167,
+        [reader('extractor/specs/character'), reader('generators/recruit')],
+        "Spec d'extraction — PERSONNAGES.\nGénérateur — DOMAINE RECRUTEMENT (`recruit.json`).",
+      ),
+      table(
+        'CharacterTemplet',
+        2_400_000,
+        [reader('extractor/specs/character')],
+        "Spec d'extraction — PERSONNAGES.",
+      ),
+      table('AreaTemplet', 512),
+      table('RecruitRateTemplet', 4_096),
+    ],
+    used: 2,
+    readers: 2,
+    hiddenColumns: ['French', 'Korean'],
+    ...over,
+  });
+
+  const NORMAL = {
+    ID: '1',
+    RecruitType: 'NORMAL',
+    NameID: 'SYS_RECRUIT_1',
+    English: 'Normal',
+    French: 'Normale',
+  };
+  const SEASONAL = {
+    ID: '6203',
+    RecruitType: 'SEASONAL <b>',
+    CharacterIDs: '2000093, 2000085',
+    NameID: 'constructor',
+    English: 'Seasonal',
+    French: 'Saison',
+  };
+  /** Une page de `RecruitGroupTemplet` : 120 lignes filtrées sur 177, trois pages. */
+  const recruit = (over: Partial<Rows> = {}): Rows => ({
+    table: 'CRecruitGroupTemplet',
+    columns: ['ID', 'RecruitType', 'CharacterIDs', 'NameID', 'English', 'French', 'Dead'],
+    filled: ['ID', 'RecruitType', 'CharacterIDs', 'NameID', 'English', 'French'],
+    rowCount: 177,
+    rows: [NORMAL, SEASONAL],
+    matched: 120,
+    page: 1,
+    pageSize: 50,
+    texts: { SYS_RECRUIT_1: 'Normal Recruitment' },
+    links: { CharacterIDs: 'CharacterTemplet' },
+    ...over,
+  });
+  const character = (): Rows => ({
+    table: 'CharacterTemplet',
+    columns: ['ID', 'NameID'],
+    filled: ['ID', 'NameID'],
+    rowCount: 300,
+    rows: [{ ID: '2000085', NameID: '2000085_Name' }],
+    matched: 1,
+    page: 1,
+    pageSize: 50,
+    texts: {},
+    links: {},
+  });
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour le tableau de
+   * bord : la VRAIE coquille assemblée, le vrai `lib.js` et le vrai
+   * `tabs/gamedata.js` (eux seuls), démarrés par `sections.start()`. `fetch`
+   * est factice : il sert `served.catalog`, et de `/api/gamedata/table` la
+   * page de la table demandée (au rang demandé) — chaque requête est gardée.
+   */
+  async function gamedata(
+    opts: {
+      hash?: string;
+      catalog?: Catalog;
+      rows?: (query: Query) => Rows | null;
+      clipboard?: unknown;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { catalog: opts.catalog ?? catalog() };
+    const reads: string[] = [];
+    const queries: Query[] = [];
+    const posts: string[] = [];
+    const answer = (data: unknown, status = 200) => ({
+      ok: status < 400,
+      status,
+      json: async () => data,
+    });
+    const rows =
+      opts.rows ??
+      ((q: Query): Rows | null =>
+        q.name === 'RecruitGroupTemplet'
+          ? recruit({ page: Number(q.page) })
+          : q.name === 'CharacterTemplet'
+            ? character()
+            : null);
+    const fetch = vi.fn(async (path: string, init?: unknown) => {
+      if (init) posts.push(path);
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname === '/api/gamedata/tables') {
+        reads.push(path);
+        return answer(served.catalog);
+      }
+      if (url.pathname === '/api/gamedata/table') {
+        const query = Object.fromEntries(url.searchParams);
+        queries.push(query);
+        const out = rows(query);
+        return out ? answer(out) : answer({ error: `table inconnue : ${query.name}` }, 404);
+      }
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+    const writeText = vi.fn(() => Promise.resolve());
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('navigator', { clipboard: opts.clipboard ?? { writeText } });
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'gamedata.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 4; i++) await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const text = (node: Element | null | undefined) =>
+      (node?.textContent ?? '').replace(/\s+/g, ' ').trim();
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    const type = (input: HTMLInputElement, value: string) => {
+      input.value = value;
+      fire(input, 'input');
+    };
+    return {
+      window,
+      el,
+      all,
+      text,
+      fire,
+      type,
+      served,
+      reads,
+      queries,
+      posts,
+      writeText,
+      settle,
+      /** Vient à l'onglet par le menu. */
+      come: async () => {
+        all('#tabs [data-tab="gamedata"]')[0].click();
+        await settle();
+      },
+      /** Tape un nom dans le sélecteur et prend la suggestion `name`. */
+      pick: async (name: string) => {
+        type(el('t-pick'), name);
+        all('#t-results [data-id]')
+          .find((d) => d.dataset.id === name)
+          ?.click();
+        await settle();
+      },
+      /** Coche ou décoche une case, comme un clic. */
+      check: async (id: string, checked: boolean) => {
+        el(id).checked = checked;
+        fire(el(id), 'change');
+        await settle();
+      },
+      /** Les suggestions : le nom, la taille, l'usage. */
+      hits: () =>
+        all('#t-results [data-id]').map((d) => [
+          d.dataset.id,
+          text(d.querySelector('.lbl')),
+          text(d.lastElementChild),
+        ]),
+      /** Les en-têtes du tableau. */
+      head: () => all('#t-head th').map((th) => text(th)),
+      /** Les cellules d'une ligne, telles qu'elles se lisent. */
+      cells: (i: number) => all(`#t-rows tr[data-i="${i}"] td`).map((td) => text(td)),
+      /** La ligne brute : ses paires clé, valeur. */
+      raw: () =>
+        all('#t-kv .t-pair').map((pair) => [
+          pair.querySelector('dt')?.textContent,
+          pair.querySelector('dd')?.textContent,
+        ]),
+    };
+  }
+
+  it('la section est servie, dans Données, après Gear reco — `wide` ; rien n’est lu avant d’y venir', async () => {
+    const page = await gamedata();
+    expect(
+      page.all('#tabs [data-group="data"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['ranks', 'Rangs'],
+      ['gear', 'Gear reco'],
+      ['gamedata', 'Tables du jeu'],
+    ]);
+    // La page s'ouvre sur le tableau de bord : ni catalogue ni passe sur les sources.
+    expect(page.el('tab-gamedata').hidden).toBe(true);
+    expect(page.reads).toEqual([]);
+
+    await page.come();
+    expect(page.el('tab-gamedata').hidden).toBe(false);
+    expect(page.all('#groups [data-group="data"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.reads).toEqual(['/api/gamedata/tables']);
+    expect(page.text(page.el('t-total'))).toBe('4 tables · 2 lues par 2 fichiers');
+    expect(page.text(page.el('t-none'))).toBe(
+      'Choisir une table : taper son nom — les 2 tables lues par le code sortent d’abord.',
+    );
+    expect(page.el('t-info').hidden).toBe(true);
+    expect(page.el('t-card').hidden).toBe(true);
+
+    // Y revenir ne relit pas : le catalogue ne bouge qu'à « Recalculer ».
+    page.all('#tabs [data-tab="ranks"]')[0].click();
+    await page.come();
+    expect(page.reads).toEqual(['/api/gamedata/tables']);
+    // Lecture seule : ni savebar, ni un seul POST.
+    expect(page.all('#tab-gamedata .savebar')).toEqual([]);
+    expect(page.queries).toEqual([]);
+    expect(page.posts).toEqual([]);
+  });
+
+  it('les suggestions : les tables lues d’abord, le badge « utilisée · N », « jamais lue » sinon', async () => {
+    const page = await gamedata({ hash: '#gamedata' });
+    expect(page.el('t-results').hidden).toBe(true);
+
+    // Le champ vide propose tout, dans l'ordre du serveur.
+    page.fire(page.el('t-pick'), 'focus');
+    expect(page.el('t-results').hidden).toBe(false);
+    expect(page.hits()).toEqual([
+      ['RecruitGroupTemplet', '180 Ko', 'utilisée · 2'],
+      ['CharacterTemplet', '2,4 Mo', 'utilisée · 1'],
+      ['AreaTemplet', '512 o', 'jamais lue'],
+      ['RecruitRateTemplet', '4 Ko', 'jamais lue'],
+    ]);
+    expect(page.all('#t-results [data-id]').map((d) => d.lastElementChild?.className)).toEqual([
+      'badge ok',
+      'badge ok',
+      'lbl t-unread',
+      'lbl t-unread',
+    ]);
+
+    // La saisie filtre par sous-chaîne, sans casse, et garde l'ordre.
+    page.type(page.el('t-pick'), 'recruit');
+    expect(page.hits().map(([name]) => name)).toEqual([
+      'RecruitGroupTemplet',
+      'RecruitRateTemplet',
+    ]);
+    page.type(page.el('t-pick'), 'zzz');
+    expect(page.hits()).toEqual([]);
+    expect(page.text(page.el('t-results'))).toBe('Aucune table ne porte ce nom.');
+
+    // Un clic ailleurs, ou Échap, referme la liste.
+    page.el('t-total').click();
+    expect(page.el('t-results').hidden).toBe(true);
+    page.type(page.el('t-pick'), 'rate');
+    expect(page.el('t-results').hidden).toBe(false);
+    page.fire(page.el('t-pick'), 'keydown', 'Escape');
+    expect(page.el('t-results').hidden).toBe(true);
+    expect(page.queries).toEqual([]);
+  });
+
+  it('pas le catalogue entier sous le champ : quarante suggestions, et le reste compté', async () => {
+    const many = Array.from({ length: 45 }, (_, i) =>
+      table(`Table${String(i).padStart(2, '0')}Templet`, 1000),
+    );
+    const page = await gamedata({
+      hash: '#gamedata',
+      catalog: catalog({ tables: many, used: 0, readers: 0 }),
+    });
+    page.fire(page.el('t-pick'), 'focus');
+    expect(page.hits()).toHaveLength(40);
+    expect(page.text(page.all('#t-results .t-more')[0])).toBe('… 5 autres : préciser le nom.');
+    page.type(page.el('t-pick'), 'table4');
+    expect(page.hits()).toHaveLength(5);
+    expect(page.all('#t-results .t-more')).toEqual([]);
+  });
+
+  it('Entrée prend la première ; la table choisie : taille, date, lecteurs en chips, note, hash', async () => {
+    const page = await gamedata({ hash: '#gamedata' });
+    page.type(page.el('t-pick'), 'recruit');
+    page.fire(page.el('t-pick'), 'keydown', 'Enter');
+    await page.settle();
+
+    expect(page.el('t-pick').value).toBe('RecruitGroupTemplet');
+    expect(page.el('t-results').hidden).toBe(true);
+    expect(page.window.location.hash).toBe('#gamedata/RecruitGroupTemplet');
+    // UNE requête : la première page, textes résolus d'office.
+    expect(page.queries).toEqual([
+      { name: 'RecruitGroupTemplet', q: '', col: '', exact: '0', page: '1', resolve: '1' },
+    ]);
+
+    expect(page.el('t-none').hidden).toBe(true);
+    expect(page.el('t-info').hidden).toBe(false);
+    expect(page.text(page.all('#t-info .t-id strong')[0])).toBe('RecruitGroupTemplet');
+    expect(page.text(page.all('#t-info .t-id .badge')[0])).toBe('utilisée · 2');
+    expect(page.all('#t-info .t-id .lbl').map((span) => page.text(span))).toEqual([
+      expect.stringMatching(/^180 Ko · extraite le \d{2}\/\d{2}\/2026 \d{2}:\d{2}$/),
+      // Le nom interne du parser, puis ce que la lecture apprend.
+      'CRecruitGroupTemplet · 177 lignes · 6/7 colonnes remplies',
+    ]);
+    // Un lecteur : du texte seul, son chemin complet au survol.
+    expect(page.all('#t-info .t-reader').map((c) => [c.textContent, c.title, c.tagName])).toEqual([
+      ['extractor/specs/character', 'datagen/extractor/specs/character.ts', 'SPAN'],
+      ['generators/recruit', 'datagen/generators/recruit.ts', 'SPAN'],
+    ]);
+    expect(page.all('#t-info .t-note')[0].innerHTML).toBe(
+      "Spec d'extraction — PERSONNAGES.\nGénérateur — DOMAINE RECRUTEMENT (<code>recruit.json</code>).",
+    );
+    expect(page.el('t-card').hidden).toBe(false);
+
+    // Une table que rien ne lit le dit, sans chips.
+    await page.pick('AreaTemplet');
+    expect(page.window.location.hash).toBe('#gamedata/AreaTemplet');
+    expect(page.all('#t-info .t-id .t-unread').map((s) => page.text(s))).toEqual(['jamais lue']);
+    expect(page.all('#t-info .t-reader')).toEqual([]);
+    expect(page.text(page.all('#t-info .t-note')[0])).toMatch(
+      /^Aucun fichier .* ne lit cette table/,
+    );
+  });
+
+  it('`#gamedata/<Table>` ouvre l’onglet sur la table, son filtre compris ; une table inconnue le dit', async () => {
+    const hash = '#gamedata/CharacterTemplet?col=ID&exact=1&q=2000085';
+    const page = await gamedata({ hash });
+    expect(page.el('tab-gamedata').hidden).toBe(false);
+    expect(page.window.location.hash).toBe(hash);
+    expect(page.reads).toEqual(['/api/gamedata/tables']);
+    expect(page.queries).toEqual([
+      { name: 'CharacterTemplet', q: '2000085', col: 'ID', exact: '1', page: '1', resolve: '1' },
+    ]);
+    expect(page.el('t-pick').value).toBe('CharacterTemplet');
+    expect(page.el('t-q').value).toBe('2000085');
+    expect(page.el('t-col').value).toBe('ID');
+    expect(page.el('t-exact').checked).toBe(true);
+    expect(page.el('t-exact').disabled).toBe(false);
+    expect(page.text(page.el('t-count'))).toBe('1 ligne sur 300');
+    expect(page.cells(0)).toEqual(['2000085', '2000085_Name']);
+
+    const bare = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    expect(bare.queries).toEqual([
+      { name: 'RecruitGroupTemplet', q: '', col: '', exact: '0', page: '1', resolve: '1' },
+    ]);
+    expect(bare.el('t-exact').disabled).toBe(true);
+
+    const none = await gamedata({ hash: '#gamedata/NopeTemplet' });
+    expect(none.el('tab-gamedata').hidden).toBe(false);
+    expect(none.text(none.el('t-none'))).toBe('table inconnue : NopeTemplet');
+    expect(none.el('t-none').hidden).toBe(false);
+    expect(none.el('t-info').hidden).toBe(true);
+    expect(none.el('t-card').hidden).toBe(true);
+    expect(none.queries).toEqual([]);
+  });
+
+  it('le tableau : colonnes jamais remplies et colonnes de langue masquées, le texte anglais sous sa clé', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    // `Dead` n'est renseignée par aucune ligne, `French` est une langue ; la
+    // flèche dit la colonne qui mène à une autre table.
+    expect(page.head()).toEqual(['ID', 'RecruitType', 'CharacterIDs↗', 'NameID', 'English']);
+    expect(page.all('#t-head .t-arrow')[0].title).toBe('→ CharacterTemplet');
+    expect(page.cells(0)).toEqual(['1', 'NORMAL', '', 'SYS_RECRUIT_1Normal Recruitment', 'Normal']);
+    expect(page.all('#t-rows tr[data-i="0"] .t-text').map((t) => t.textContent)).toEqual([
+      'Normal Recruitment',
+    ]);
+    // Une valeur qui porte un chevron est échappée ; `constructor`, clé de texte
+    // possible, ne ramène pas un membre hérité de l'objet des textes.
+    expect(page.cells(1)).toEqual([
+      '6203',
+      'SEASONAL <b>',
+      '2000093, 2000085',
+      'constructor',
+      'Seasonal',
+    ]);
+    expect(page.all('#t-rows b')).toEqual([]);
+
+    // « colonnes vides » montre les colonnes mortes — jamais les langues.
+    await page.check('t-blank', true);
+    expect(page.head()).toEqual([
+      'ID',
+      'RecruitType',
+      'CharacterIDs↗',
+      'NameID',
+      'English',
+      'Dead',
+    ]);
+    // Le select de la recherche, lui, liste les colonnes complètes.
+    expect(page.all('#t-col option').map((o) => o.textContent)).toEqual([
+      'toutes les colonnes',
+      'ID',
+      'RecruitType',
+      'CharacterIDs',
+      'NameID',
+      'English',
+      'French',
+      'Dead',
+    ]);
+    // Rien de tout cela ne redemande la table.
+    expect(page.queries).toHaveLength(1);
+  });
+
+  it('une cellule `*ID` qui a une cible : un lien par id, en égalité STRICTE sur `ID`', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    const links = page.all('#t-rows tr[data-i="1"] a');
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([
+      '#gamedata/CharacterTemplet?col=ID&exact=1&q=2000093',
+      '#gamedata/CharacterTemplet?col=ID&exact=1&q=2000085',
+    ]);
+    // Une cellule vide, ou une colonne sans cible, n'en porte pas.
+    expect(page.all('#t-rows tr[data-i="0"] a')).toEqual([]);
+
+    links[1].click();
+    await page.settle();
+    expect(page.queries.at(-1)).toEqual({
+      name: 'CharacterTemplet',
+      q: '2000085',
+      col: 'ID',
+      exact: '1',
+      page: '1',
+      resolve: '1',
+    });
+    expect(page.window.location.hash).toBe('#gamedata/CharacterTemplet?col=ID&exact=1&q=2000085');
+    expect(page.el('t-pick').value).toBe('CharacterTemplet');
+    expect(page.text(page.all('#t-info .t-id strong')[0])).toBe('CharacterTemplet');
+    expect(page.el('t-col').value).toBe('ID');
+    expect(page.el('t-exact').checked).toBe(true);
+    expect(page.cells(0)).toEqual(['2000085', '2000085_Name']);
+    // Suivre un lien n'ouvre pas la ligne brute de la ligne quittée.
+    expect(page.el('t-raw').hidden).toBe(true);
+
+    // « Précédent » du navigateur : la table quittée revient.
+    page.window.history.replaceState(null, '', '#gamedata/RecruitGroupTemplet');
+    page.window.dispatchEvent(new page.window.Event('popstate') as never);
+    await page.settle();
+    expect(page.el('t-pick').value).toBe('RecruitGroupTemplet');
+    expect(page.queries.at(-1)).toEqual({
+      name: 'RecruitGroupTemplet',
+      q: '',
+      col: '',
+      exact: '0',
+      page: '1',
+      resolve: '1',
+    });
+  });
+
+  it('cliquer une ligne ouvre la LIGNE BRUTE : toutes les colonnes, toutes les langues — et « Copier »', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    expect(page.el('t-raw').hidden).toBe(true);
+
+    page.all('#t-rows tr[data-i="1"] td')[0].click();
+    expect(page.el('t-raw').hidden).toBe(false);
+    expect(page.all('#t-rows tr').map((tr) => tr.getAttribute('aria-selected'))).toEqual([
+      'false',
+      'true',
+    ]);
+    expect(page.text(page.el('t-raw-count'))).toBe('6 champs');
+    // La langue que le tableau masque y est, et rien n'est résolu.
+    expect(page.raw()).toEqual(Object.entries(SEASONAL));
+
+    page.el('t-copy').click();
+    await page.settle();
+    expect(page.writeText).toHaveBeenCalledWith(JSON.stringify(SEASONAL, null, 2));
+    expect(page.el('t-copy').textContent).toBe('copié');
+
+    // Entrée sur une ligne l'ouvre aussi ; la croix referme.
+    page.fire(page.all('#t-rows tr[data-i="0"]')[0], 'keydown', 'Enter');
+    expect(page.raw()).toEqual(Object.entries(NORMAL));
+    page.el('t-raw-close').click();
+    expect(page.el('t-raw').hidden).toBe(true);
+    expect(page.all('#t-rows tr[aria-selected="true"]')).toEqual([]);
+    expect(page.posts).toEqual([]);
+  });
+
+  it('« Copier » dit « impossible » quand le presse-papiers se refuse', async () => {
+    const page = await gamedata({
+      hash: '#gamedata/RecruitGroupTemplet',
+      clipboard: { writeText: () => Promise.reject(new Error('refusé')) },
+    });
+    page.all('#t-rows tr[data-i="0"] td')[0].click();
+    page.el('t-copy').click();
+    await page.settle();
+    expect(page.el('t-copy').textContent).toBe('impossible');
+  });
+
+  it('`&row=<n>` dans le hash montre la ligne brute de la n-ième ligne (le banc ne clique pas)', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet?row=1' });
+    expect(page.el('t-raw').hidden).toBe(false);
+    expect(page.raw()).toEqual(Object.entries(SEASONAL));
+    // Le rang ne part pas au serveur.
+    expect(page.queries).toEqual([
+      { name: 'RecruitGroupTemplet', q: '', col: '', exact: '0', page: '1', resolve: '1' },
+    ]);
+  });
+
+  it('la pagination : « N lignes sur T », « page N / M », précédent et suivant', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    expect(page.text(page.el('t-count'))).toBe('120 lignes sur 177');
+    expect(page.text(page.el('t-page'))).toBe('page 1 / 3');
+    expect(page.el('t-prev').disabled).toBe(true);
+    expect(page.el('t-next').disabled).toBe(false);
+
+    page.el('t-next').click();
+    await page.settle();
+    page.el('t-next').click();
+    await page.settle();
+    expect(page.queries.map((q) => q.page)).toEqual(['1', '2', '3']);
+    expect(page.text(page.el('t-page'))).toBe('page 3 / 3');
+    expect(page.el('t-prev').disabled).toBe(false);
+    expect(page.el('t-next').disabled).toBe(true);
+
+    page.el('t-prev').click();
+    await page.settle();
+    expect(page.queries.at(-1)?.page).toBe('2');
+    expect(page.text(page.el('t-page'))).toBe('page 2 / 3');
+
+    // Une table sans ligne qui corresponde le dit, sur une seule page.
+    const empty = await gamedata({
+      hash: '#gamedata/RecruitGroupTemplet',
+      rows: () => recruit({ rows: [], matched: 0 }),
+    });
+    expect(empty.text(empty.el('t-count'))).toBe('0 ligne sur 177');
+    expect(empty.text(empty.el('t-page'))).toBe('page 1 / 1');
+    expect(empty.el('t-no-rows').hidden).toBe(false);
+    expect(empty.el('t-next').disabled).toBe(true);
+  });
+
+  it('la recherche : UNE requête 200 ms après la dernière frappe, la colonne, « exact », « résoudre les textes »', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitGroupTemplet' });
+    page.el('t-next').click();
+    await page.settle();
+    expect(page.queries).toHaveLength(2);
+
+    vi.useFakeTimers();
+    page.type(page.el('t-q'), 'pi');
+    page.type(page.el('t-q'), 'pickup');
+    await vi.advanceTimersByTimeAsync(199);
+    expect(page.queries).toHaveLength(2);
+    await vi.advanceTimersByTimeAsync(1);
+    // La recherche repart de la première page.
+    expect(page.queries.slice(2)).toEqual([
+      { name: 'RecruitGroupTemplet', q: 'pickup', col: '', exact: '0', page: '1', resolve: '1' },
+    ]);
+    vi.useRealTimers();
+    await page.settle();
+
+    // « exact » porte sur une colonne : éteinte sans elle.
+    expect(page.el('t-exact').disabled).toBe(true);
+    page.el('t-col').value = 'RecruitType';
+    page.fire(page.el('t-col'), 'change');
+    await page.settle();
+    expect(page.el('t-exact').disabled).toBe(false);
+    await page.check('t-exact', true);
+    await page.check('t-resolve', false);
+    expect(page.queries.slice(3).map((q) => [q.q, q.col, q.exact, q.resolve])).toEqual([
+      ['pickup', 'RecruitType', '0', '1'],
+      ['pickup', 'RecruitType', '1', '1'],
+      ['pickup', 'RecruitType', '1', '0'],
+    ]);
+
+    // Revenir à « toutes les colonnes » lève l'égalité stricte.
+    page.el('t-col').value = '';
+    page.fire(page.el('t-col'), 'change');
+    await page.settle();
+    expect(page.el('t-exact').checked).toBe(false);
+    expect(page.el('t-exact').disabled).toBe(true);
+    expect(page.queries.at(-1)).toMatchObject({ col: '', exact: '0', resolve: '0' });
+    expect(page.posts).toEqual([]);
+  });
+
+  it('« Recalculer » relit les sources au serveur, et redessine ce qu’il dit maintenant', async () => {
+    const page = await gamedata({ hash: '#gamedata/AreaTemplet' });
+    expect(page.all('#t-info .t-unread')).toHaveLength(1);
+
+    page.served.catalog = catalog({
+      tables: [
+        table('AreaTemplet', 512, [reader('generators/areas')], 'Générateur — ZONES.'),
+        ...catalog().tables.filter((t) => t.name !== 'AreaTemplet'),
+      ],
+      used: 3,
+      readers: 3,
+    });
+    page.el('t-recompute').click();
+    await page.settle();
+    expect(page.reads).toEqual(['/api/gamedata/tables', '/api/gamedata/tables?recompute=1']);
+    expect(page.text(page.el('t-total'))).toBe('4 tables · 3 lues par 3 fichiers');
+    expect(page.text(page.all('#t-info .t-id .badge')[0])).toBe('utilisée · 1');
+    expect(page.all('#t-info .t-reader').map((c) => c.textContent)).toEqual(['generators/areas']);
+    expect(page.el('t-recompute').disabled).toBe(false);
+    // La table ouverte n'est pas relue.
+    expect(page.queries).toHaveLength(1);
+    expect(page.posts).toEqual([]);
+  });
+
+  it('sans données du jeu : le message du serveur, et aucune suggestion', async () => {
+    const page = await gamedata({
+      hash: '#gamedata',
+      catalog: {
+        tables: [],
+        used: 0,
+        readers: 0,
+        hiddenColumns: [],
+        error: 'Pas de données du jeu : lancer un patch (pull) d’abord.',
+      },
+    });
+    expect(page.text(page.el('t-none'))).toBe(
+      'Pas de données du jeu : lancer un patch (pull) d’abord.',
+    );
+    expect(page.text(page.el('t-total'))).toBe('');
+    page.fire(page.el('t-pick'), 'focus');
+    expect(page.el('t-results').hidden).toBe(true);
+    expect(page.el('t-card').hidden).toBe(true);
+  });
+
+  it('une table que le serveur refuse passe par le journal', async () => {
+    const page = await gamedata({ hash: '#gamedata/RecruitRateTemplet' });
+    expect(page.queries).toHaveLength(1);
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.text(page.el('log'))).toBe(
+      'Table RecruitRateTemplet illisible : Error: table inconnue : RecruitRateTemplet',
+    );
   });
 });
 

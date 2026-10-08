@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import type { Row, TablePage } from '@/lib/admin/gamedata-store';
-import { LANG_COLUMNS } from '@datagen/lib/lang';
+import { HIDDEN_LANG_COLUMNS } from '@/lib/admin/gamedata-columns';
 
 /**
  * Le lien croisé filtre la table cible sur sa clé primaire (`ID` partout), en
@@ -13,19 +13,6 @@ import { LANG_COLUMNS } from '@datagen/lib/lang';
 function crossLink(target: string, value: string): Route {
   return `/admin/tools/gamedata/${target}?col=ID&exact=1&q=${encodeURIComponent(value)}` as Route;
 }
-
-/**
- * Colonnes de LANGUE masquées du TABLEAU (tables Text*) : seule la colonne
- * anglaise se lit — les autres ne font qu'écraser la largeur. La ligne brute
- * (panneau de droite) garde toutes les langues, et la recherche par colonne
- * aussi (le sélecteur liste les colonnes complètes). Dérivé de `LANG_COLUMNS`
- * (plus `China_Traditional`, que le jeu porte sans qu'on la serve) : la liste
- * recopiée ici avait laissé passer French et Spanish le 23/09/2026.
- */
-const HIDDEN_LANG_COLUMNS = new Set([
-  ...Object.values(LANG_COLUMNS).filter((c) => c !== 'English'),
-  'China_Traditional',
-]);
 
 /**
  * Grille d'une table brute du jeu : recherche (serveur), pagination, résolution

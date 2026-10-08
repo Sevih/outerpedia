@@ -54,6 +54,7 @@ export const GROUPS = [
     sections: [
       { id: 'ranks', label: 'Rangs', wide: true },
       { id: 'gear', label: 'Gear reco', wide: true },
+      { id: 'gamedata', label: 'Tables du jeu', wide: true },
     ],
   },
   { id: 'editors', label: 'Éditeurs', soon: true, sections: [] },

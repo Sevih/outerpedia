@@ -1,0 +1,211 @@
+/* Onglet « Tables du jeu » : un champ pour choisir la table (ses suggestions
+   dessous, les tables lues d'abord), ce qu'on sait d'elle, puis ses lignes —
+   un tableau large qui défile dans son cadre, et la ligne brute à côté. Le
+   reste — carte, `.form`, `.picker`, `.badge`, `.chip`, table — vient de
+   `quick.css`. */
+
+/* Ce qui ferme une rangée : poussé à droite. */
+#tab-gamedata .t-end {
+  margin-left: auto;
+}
+#tab-gamedata code {
+  font-family: var(--mono);
+  font-size: 0.95em;
+}
+
+/* ------------------------------------------------------------ le sélecteur */
+/* Le compte du catalogue et « Recalculer », à hauteur du champ. */
+#tab-gamedata .t-total {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+}
+#tab-gamedata #t-recompute {
+  margin-bottom: 3px;
+}
+/* Une suggestion : le nom, la taille, puis l'usage poussé à droite. */
+#tab-gamedata #t-results {
+  max-width: min(560px, 90vw);
+  max-height: 340px;
+}
+#tab-gamedata #t-results div > :last-child {
+  margin-left: auto;
+}
+#tab-gamedata .t-unread {
+  font-style: italic;
+}
+#tab-gamedata .t-more {
+  margin: 0;
+  padding: 6px 10px;
+  color: var(--content-muted);
+  font-size: 12.5px;
+}
+
+/* ------------------------------------------------------- la table choisie */
+#tab-gamedata .t-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#tab-gamedata .t-info[hidden] {
+  display: none;
+}
+#tab-gamedata .t-id {
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+}
+#tab-gamedata .t-id strong {
+  font-size: 15px;
+}
+/* Un fichier qui lit la table : du texte seul, son chemin complet au survol. */
+#tab-gamedata .t-reader {
+  height: 26px;
+  padding: 0 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+/* Une ligne par lecteur ; au-delà de six, la note défile dans son cadre. */
+#tab-gamedata .t-note {
+  margin: 0;
+  max-height: 9.6em;
+  overflow-y: auto;
+  color: var(--content-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-line;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-gamedata .card.pad > .empty {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- les lignes */
+#tab-gamedata .t-bar select {
+  max-width: 26ch;
+}
+/* Le tableau et, à sa droite, la ligne brute ; l'une sous l'autre sous 1000 px. */
+#tab-gamedata .t-cols {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+}
+#tab-gamedata .t-grid {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* Le tableau défile dans son cadre, dans les deux sens : la barre horizontale
+   d'une table de cinquante lignes resterait sinon sous la fenêtre. */
+#tab-gamedata .t-grid .scroll {
+  max-height: max(320px, calc(100vh - 150px));
+  overflow: auto;
+  scrollbar-color: var(--line) transparent;
+}
+#tab-gamedata thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-raised);
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 8px 10px;
+}
+/* La colonne mène à une autre table. */
+#tab-gamedata .t-arrow {
+  margin-left: 4px;
+  color: var(--accent);
+}
+#tab-gamedata tbody td {
+  padding: 5px 10px;
+  vertical-align: top;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+#tab-gamedata tbody tr {
+  cursor: pointer;
+}
+#tab-gamedata tbody tr:hover td {
+  background: color-mix(in srgb, var(--surface-overlay) 50%, transparent);
+}
+#tab-gamedata tbody tr[aria-selected='true'] td {
+  background: var(--surface-overlay);
+}
+#tab-gamedata tbody tr:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+/* Une valeur longue (une description) est coupée : la ligne brute la montre entière. */
+#tab-gamedata .t-v {
+  display: block;
+  max-width: 60ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tab-gamedata .t-sep {
+  color: var(--content-muted);
+}
+/* Le texte anglais d'une clé de texte, sous elle. */
+#tab-gamedata .t-text {
+  display: block;
+  max-width: 40ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--content-muted);
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------- la ligne brute */
+#tab-gamedata .t-raw {
+  flex: 0 0 380px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-left: 1px solid var(--line-subtle);
+}
+#tab-gamedata .t-raw[hidden] {
+  display: none;
+}
+#tab-gamedata .t-kv {
+  margin: 0;
+  padding: 6px 0;
+  max-height: max(280px, calc(100vh - 200px));
+  overflow-y: auto;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+/* Une paire : la clé à gauche (atténuée), sa valeur entière à droite. */
+#tab-gamedata .t-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 22ch) minmax(0, 1fr);
+  gap: 12px;
+  padding: 4px 20px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+#tab-gamedata .t-pair dt {
+  color: var(--content-muted);
+  overflow-wrap: anywhere;
+}
+#tab-gamedata .t-pair dd {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1000px) {
+  #tab-gamedata .t-cols {
+    flex-direction: column;
+  }
+  #tab-gamedata .t-raw {
+    flex-basis: auto;
+    border-left: none;
+    border-top: 1px solid var(--line-subtle);
+  }
+}
