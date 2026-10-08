@@ -50,9 +50,8 @@
       note. (2) Un lien croisé : ouvrir `CostumeTemplet`, cliquer un
       `CharacterID` → `CharacterTemplet` filtrée sur `ID` = cette valeur,
       « exact » coché, UNE ligne ; « Précédent » du navigateur revient à
-      `CostumeTemplet`. Le `PickupID` de `RecruitGroupTemplet`, lui, n'est PAS
-      un lien : la règle de l'admin (`linkTargetFor`) cherche une table
-      `Pickup*`, pas `CharacterTemplet` — cf. (a). (3) « résoudre les
+      `CostumeTemplet`. Le `PickupID` de `RecruitGroupTemplet` est un lien
+      lui aussi, vers `CharacterTemplet` (alias, lot A32). (3) « résoudre les
       textes », sur `CostumeTemplet` : décocher → les lignes en italique
       sous les clés (`2010019_Name` → « Shutendouji Rin ») disparaissent,
       recocher → elles reviennent. (4) La ligne brute : cliquer une ligne de `TextSystem` →
@@ -60,15 +59,12 @@
       « Copier » → le JSON de la ligne dans le presse-papiers ; fenêtre
       réduite sous 1000 px → le panneau passe sous le tableau. (5) « colonnes
       vides » sur `RecruitGroupTemplet` : 3 colonnes de plus (32 → 35). À
-      juger : (a) `linkTargetFor` ne suit que le NOM de la colonne — un petit
-      tableau d'alias (`PickupID`, `ChangeCharID` → `CharacterTemplet`…) dans
-      `gamedata-store.ts` rendrait ces colonnes cliquables, des deux côtés ;
-      (b) la passe d'usage ne lit que `datagen/`, `src/lib/data/` et
+      juger : (a) la passe d'usage ne lit que `datagen/`, `src/lib/data/` et
       `scripts/quick/` : `src/lib/admin/monster-store.ts` lit
-      `BuffToolTipTemplet` et n'apparaît pas parmi ses lecteurs ; (c) quatre
+      `BuffToolTipTemplet` et n'apparaît pas parmi ses lecteurs ; (b) quatre
       lectures passent par un nom en variable (`damage/targets.ts`,
       `lib/effects.ts`, `generators/solver.ts` — son `textMap` —,
-      `lib/text.ts`) : leurs tables ne leur sont pas attribuées ; (d) l'item
+      `lib/text.ts`) : leurs tables ne leur sont pas attribuées ; (c) l'item
       « Assets » du tableau de bord renvoie toujours à
       `/admin/tools/gamedata`, dont le lien de menu est retiré — le rapport
       d'assets n'est pas porté, et cette page ne le montre pas non plus.

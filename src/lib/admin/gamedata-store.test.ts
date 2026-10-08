@@ -1,15 +1,15 @@
 /**
  * Tests de `gamedata-store` (explorateur ADMIN des tables brutes, dev-only) —
  * ses CŒURS PURS : `isValidTableName` (garde anti-chemin) et `linkTargetFor`
- * (déduction de la table cible d'une colonne `*ID` — retrait du suffixe,
- * suffixes de mots longs→courts, préférence `<X>Templet`). Le reste
+ * (déduction de la table cible d'une colonne `*ID` — alias d'abord, puis retrait
+ * du suffixe, suffixes de mots longs→courts, préférence `<X>Templet`). Le reste
  * (describeTable/queryTable/textIndex) lit `.gamedata/parsed` et n'est pas
  * testable sans le jeu.
  *
  * Tourne SANS `.gamedata` : ces deux fonctions sont pures.
  */
 import { describe, expect, it } from 'vitest';
-import { isValidTableName, linkTargetFor } from './gamedata-store';
+import { isValidTableName, LINK_ALIASES, linkTargetFor } from './gamedata-store';
 
 describe('isValidTableName — garde anti-chemin', () => {
   it('accepte un basename alphanumérique/underscore', () => {
@@ -50,5 +50,35 @@ describe('linkTargetFor — colonne *ID → table cible', () => {
     expect(linkTargetFor('Level', tables)).toBeUndefined(); // pas *ID
     expect(linkTargetFor('ID', tables)).toBeUndefined(); // base vide
     expect(linkTargetFor('NameID', tables)).toBeUndefined(); // clé de texte, pas une table
+  });
+});
+
+describe('linkTargetFor — alias (`LINK_ALIASES`)', () => {
+  it("l'alias l'emporte sur la déduction par le nom", () => {
+    // Sans alias, `PickupID` chercherait `PickupTemplet` — et le trouverait ici.
+    const tables = new Set(['CharacterTemplet', 'PickupTemplet']);
+    expect(linkTargetFor('PickupID', tables)).toBe('CharacterTemplet');
+    expect(linkTargetFor('ChangeCharID', tables)).toBe('CharacterTemplet');
+    expect(linkTargetFor('BonusCharIDs', tables)).toBe('CharacterTemplet'); // liste CSV
+  });
+
+  it('un alias vers une table absente ne donne rien — pas de repli sur le nom', () => {
+    expect(linkTargetFor('PickupID', new Set(['DungeonTemplet']))).toBeUndefined();
+    expect(linkTargetFor('PickupID', new Set(['PickupTemplet']))).toBeUndefined();
+  });
+
+  it('chaque alias est une colonne `*ID` et vise une table nommée', () => {
+    for (const [col, target] of Object.entries(LINK_ALIASES)) {
+      expect(col).toMatch(/I[Dd]s?$/);
+      expect(linkTargetFor(col, new Set([target]))).toBe(target);
+    }
+  });
+
+  it('la déduction par le nom reste pour les colonnes sans alias', () => {
+    const tables = new Set(['CharacterTemplet', 'CostumeTemplet']);
+    expect(LINK_ALIASES).not.toHaveProperty('ShareCharacterID');
+    expect(linkTargetFor('ShareCharacterID', tables)).toBe('CharacterTemplet');
+    expect(linkTargetFor('ChangeCharacterCostumeID', tables)).toBe('CostumeTemplet');
+    expect(linkTargetFor('toString', tables)).toBeUndefined(); // clé du prototype, pas un alias
   });
 });

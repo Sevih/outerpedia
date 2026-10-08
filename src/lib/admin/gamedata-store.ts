@@ -187,6 +187,62 @@ function resolveCells(rows: Row[]): Record<string, string> {
 // --- Liens croisés -------------------------------------------------------------
 
 /**
+ * ALIAS : les colonnes d'id dont le NOM ne mène pas à leur table (`PickupID`
+ * ne dit pas `CharacterTemplet`). Consultés AVANT la déduction par le nom, et
+ * avec la même garde : la cible doit exister sur disque.
+ *
+ * Aucune devinette : chaque ligne nomme la table qui porte la colonne et une
+ * valeur réelle retrouvée dans l'`ID` de la cible ; toutes les tables qui
+ * portent la colonne ont été vérifiées (un alias vaut pour un NOM, pas pour une
+ * table). Une colonne dont la cible change d'une table à l'autre (`BossID`,
+ * `SkillID`, `FloorID`…) n'a donc pas sa place ici, ni celle qui désigne un
+ * `GroupID` : le lien filtre la cible sur son `ID`.
+ */
+export const LINK_ALIASES: Readonly<Record<string, string>> = {
+  // --- → CharacterTemplet
+  PickupID: 'CharacterTemplet', // RecruitGroupTemplet : 2000110 (84/84)
+  ChangeCharID: 'CharacterTemplet', // CharacterFusionTemplet : 2700037 (6/6)
+  CharID: 'CharacterTemplet', // EventBossDungeonTemplet (CSV), SideStoryBonusTemplet, CharacterExpansionTemplet : 2000071
+  Char_ID: 'CharacterTemplet', // PVPPresetCharacterTemplet : 2000001 (114/114)
+  BonusCharIDs: 'CharacterTemplet', // EventDungeonChapterTemplet (CSV) : 2000043 (69/69)
+  FavoriteCharID: 'CharacterTemplet', // PVPArenaMemberTemplet : 2000009 (16/16)
+  LimitedShopCharID: 'CharacterTemplet', // LimitedProductTemplet : 2000046 (1/1)
+
+  // --- → ItemTemplet
+  WeaponID: 'ItemTemplet', // PVPPresetEquipTemplet : 92062 (90/90)
+  AccessaryID: 'ItemTemplet', // PVPPresetEquipTemplet : 93012 (99/99)
+  HelmetID: 'ItemTemplet', // PVPPresetEquipTemplet : 94003 (31/31)
+  ArmorID: 'ItemTemplet', // PVPPresetEquipTemplet : 94103 (31/31)
+  GlovesID: 'ItemTemplet', // PVPPresetEquipTemplet : 94213 (28/28)
+  ShoesID: 'ItemTemplet', // PVPPresetEquipTemplet : 94313 (28/28)
+  TalismanID: 'ItemTemplet', // PVPPresetEquipTemplet : 95024 (45/45)
+  ExclusiveID: 'ItemTemplet', // PVPPresetEquipTemplet : 2000001, l'item ITS_EQUIP_EXCLUSIVE (129/129)
+  MaterialID: 'ItemTemplet', // ItemOptionChangeTemplet : 21201 ; ItemSmeltingTemplet : 21101 (4/4 chacune)
+  MaterialIDs: 'ItemTemplet', // ItemCraftConsumeTemplet (CSV) : 22021 (11/11)
+  RecruitTicketID: 'ItemTemplet', // RecruitGroupTemplet : 1000005, toujours RTT_ITEM (5/5)
+  ProductBuyID: 'ItemTemplet', // ProductTemplet : 1000001, toujours PBT_ITEM (6/6)
+
+  // --- → les options d'équipement
+  UniqueOptionID: 'ItemSpecialOptionTemplet', // ItemTemplet : 1001 (423/423) ; RewardViewTemplet : 1011 (40/40)
+  MainOptionID: 'ItemOptionTemplet', // RewardGroupExpansionTemplet (CSV) : 1126 (165/165)
+  SubOptionID: 'ItemOptionTemplet', // RewardGroupExpansionTemplet (CSV) : 120002 (57/57)
+
+  // --- → une table que le nom de la colonne abrège
+  ToolTipID: 'BuffToolTipTemplet', // BuffTemplet : 1070 (277/277)
+  ConvertToID: 'BuffToolTipTemplet', // BuffToolTipTemplet : 6 « Defence Up » → 17 « Defence Down » (7/7)
+  PieceBonusID: 'RewardTemplet', // DungeonTemplet : 21000011 (5/5)
+  QuestionID: 'InteractionScenarioTemplet', // TrustDialogueTemplet : 826011900 (415/420)
+  RewardDialogueID: 'TrustDialogueTemplet', // TrustRewardTemplet (CSV) : 406, même CharacterID des deux côtés (400/405)
+  PopupConditionID: 'ProductPopupConditionTemplet', // ProductTemplet : 1, dont le ProductID renvoie à la ligne (452/454)
+  ShortcutID: 'ItemShortcutTemplet', // ItemShortcutGroupTemplet (CSV) : 102 (18/19)
+  ThemeID: 'MonadGateThemeTemplet', // les quatre MonadGate*Templet qui la portent : 1 (le seul thème)
+  DepthID: 'MonadGateDepthTemplet', // MonadGateRouteTemplet : 1 (10/10)
+  BonusTypeID: 'EventBossBonusTypeTemplet', // EventBossDungeonTemplet (CSV) : 1 (11/11)
+  ClearFloorNodeID: 'IrregularInfiltrateNodeTemplet', // IrregularInfiltrateFloorTemplet : 1302, nœud de l'étage 1 (3/3)
+  NextLevelID: 'GuildMonolithTemplet', // GuildMonolithTemplet : la ligne 1 mène à la 2 (24/24)
+};
+
+/**
  * Colonne → table cible, déduit du NOM de colonne. La colonne porte un RÔLE
  * devant l'entité (`ClearDungeonID`, `FirstRewardID`) : on retire `ID`, puis on
  * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
@@ -200,12 +256,19 @@ function resolveCells(rows: Row[]): Record<string, string> {
  * lisibles. La cible se filtre sur sa clé primaire `ID`.
  */
 /**
- * Table cible d'UNE colonne (pur, testable). Retire le suffixe `ID(s)`, puis
- * essaie les suffixes de mots du plus long au plus court (`ClearDungeon`, puis
- * `Dungeon`), en préférant `<X>Templet` à `<X>`. `undefined` si aucune table
- * candidate n'existe (conservateur), ou si la colonne n'est pas un `*ID`.
+ * Table cible d'UNE colonne (pur, testable). Un alias (`LINK_ALIASES`) passe
+ * d'abord, et tranche seul : sa cible absente du disque, la colonne n'a pas de
+ * lien — on ne retombe pas sur le nom, que l'alias est là pour contredire.
+ * Sinon : retire le suffixe `ID(s)`, puis essaie les suffixes de mots du plus
+ * long au plus court (`ClearDungeon`, puis `Dungeon`), en préférant
+ * `<X>Templet` à `<X>`. `undefined` si aucune table candidate n'existe
+ * (conservateur), ou si la colonne n'est pas un `*ID`.
  */
 export function linkTargetFor(col: string, tables: Set<string>): string | undefined {
+  if (Object.hasOwn(LINK_ALIASES, col)) {
+    const alias = LINK_ALIASES[col];
+    return alias && tables.has(alias) ? alias : undefined;
+  }
   const base = col.replace(/I[Dd]s?$/, '');
   if (!base || base === col) return undefined; // seules les colonnes `*ID` désignent une table
   const words = base.match(/[A-Z][a-z0-9]*|[a-z0-9]+/g) ?? [];

@@ -7,6 +7,126 @@
 
 ## 2026-10-08
 
+- **Tables du jeu : les colonnes d'id qui ne portent pas le nom de leur table
+  deviennent des liens — `PickupID` → `CharacterTemplet` et trente-trois
+  autres alias (lot A32)** : dans l'admin comme dans l'onglet « Tables du
+  jeu » de quick, une cellule `*ID` n'était un lien que si `linkTargetFor`
+  (`src/lib/admin/gamedata-store.ts`) trouvait une table au NOM de la
+  colonne ; `PickupID` de `RecruitGroupTemplet` cherchait une table `Pickup*`
+  et restait du texte. `LINK_ALIASES` (`Readonly<Record<string, string>>`,
+  même fichier) est consulté d'abord, sous la même garde que le reste : la
+  cible doit exister dans `tables`. Un alias dont la cible manque ne donne
+  RIEN, sans repli sur le nom — l'alias est là pour contredire le nom, et
+  `undefined` vaut mieux qu'une cible fausse (c'est ma lecture de « ne donne
+  rien », la plus conservatrice des deux). `linkTargets`, `GameDataBrowser` et
+  `tabs/gamedata.js` ne changent pas : ils consomment la même fonction, et
+  découpent déjà les listes CSV. **Inventaire** (script jetable, non
+  commité) : sur les 258 tables, 575 colonnes `*ID`/`*Id`/`*IDs` (hors `ID`
+  seul), 236 résolues par le nom, 339 non résolues, soit 176 noms distincts —
+  34 tables : `GroupID` ; 31 tables : `NameID` ; 17 tables : `DescID` ; 8
+  tables : `TextID` ; 6 tables : `OptionID` ; 5 tables : `BossID`,
+  `GradeGroupID` ; 4 tables : `CharID`, `ExplorationStageGroupID`, `FloorID`,
+  `SkillID`, `ThemeID` ; 3 tables : `CategoryID`, `EventGroupID`,
+  `MaterialID`, `ModelID`, `MoveEventID`, `NextID`, `ProductGroupID`,
+  `SeasonID`, `TalkNameID`, `TaskGroupID`, `TypeID` ; 2 tables :
+  `ArtifactGroupID`, `AwakeningGroupID`, `AwakeningLevelGroupID`,
+  `BuffSystemGroupID`, `CategoryNameID`, `ConnectionNodeID`, `CVNameID`,
+  `EventRewadID`, `FaceIconID`, `FieldSkillGroupID`, `FirstMeetID`,
+  `FusionGroupID`, `GachaCommentID`, `ImageTextID`, `ImageTitleTextID`,
+  `NickNameID`, `NodeDescID`, `NodeGroupID`, `NodeNameID`,
+  `RecommandSetOptionID`, `RewardNameID`, `SceneID`, `SetOptionID`,
+  `SkipNameID`, `SpotEventActGroupID`, `SpotEventGroupID`, `UniqueOptionID` ;
+  1 table : `AccessaryID`, `ActGroupID`, `ActiveGroupID`,
+  `AddSpecialOptionGroupID`, `AdmobID`, `ArmorID`, `ArtifactRegionID`,
+  `AttendanceGroupID`, `BannerTextID`, `BonusCharIDs`, `BonusItemEffectID`,
+  `BonusTypeID`, `BossModelID`, `BreakLimitGroupID`, `BuffArenaRankID`,
+  `CallerDamageID`, `CategoryDescID`, `ChangeCharID`, `ChangeSpawnGroupID`,
+  `Char_ID`, `Child1_BID`, `Child10_BID`, `Child2_BID`, `Child3_BID`,
+  `Child4_BID`, `Child5_BID`, `Child6_BID`, `Child7_BID`, `Child8_BID`,
+  `Child9_BID`, `ClearFloorID`, `ClearFloorNodeID`, `ClearRemainsID`,
+  `ConvertToID`, `CustomCraftDescID`, `Default_Equip_Preset_G_ID`, `DepthID`,
+  `DepthOpenStageID`, `DescriptionID`, `DescriptionNameID`, `DescTextID`,
+  `DeungeonID`, `DungeonClearInfoGroupID`, `DungeonGroupID`,
+  `EventActGroupID`, `EventDescID`, `EventID`, `EventNameID`, `ExclusiveID`,
+  `ExplorationWheatherGroupID`, `FavoriteCharID`, `FusionCompleteDescID`,
+  `FusionNameID`, `GachaGroupID`, `GlovesID`, `GuilDungeonLevelGorupID`,
+  `HelmetID`, `LeagueID`, `LimitedShopCharID`, `LimitedShopDescID`, `LineID`,
+  `LockTextID`, `MainOptionGroupID`, `MainOptionID`, `MaterialGroupID`,
+  `MaterialIDs`, `MissionGroupID`, `ModelNameID`, `NextLevelID`, `NodeID`,
+  `PickupID`, `PieceBonusID`, `PopupConditionID`, `PositionGroupID`,
+  `ProductBuyID`, `ProductGoodsID`, `ProductNameID`, `ProductSubTextID`,
+  `QuestionID`, `RandomGroupID`, `RankID`, `RecoGroupID`, `RecruitID`,
+  `RecruitTicketID`, `RemainsCurseID`, `RemainsGroupID`, `RequireMainNodeID`,
+  `RewardDescID`, `RewardDialogueID`, `RewardInteractionID`, `RewardTextID`,
+  `RoomID`, `RouletteGroupID`, `RouteTextID`, `RPSGroupID`,
+  `Selectable_Acc_Preset_G_ID`, `Selectable_ArmorSet_G_ID`,
+  `Selectable_Exclusive_Preset_ID`, `Selectable_Talisman_Preset_ID`,
+  `Selectable_Weapon_Preset_G_ID`, `ShareModelNameID`, `ShoesID`,
+  `ShortcutID`, `ShortCutShopSubCategoryID`, `ShortNameID`, `ShowBannerID`,
+  `SimpleDescID`, `SingularBossGroupID`, `SkillSceneID`, `SkillSpawnID`,
+  `SkipMoveNodeID`, `SkipTicketID`, `SortID`, `StageRouteID`, `StaticGroupID`,
+  `SubOptionGroupID`, `SubOptionID`, `TabNameID`, `TalismanID`, `TalkEventID`,
+  `TeamConditionGroupID`, `TitleTextID`, `ToolTipID`, `UseItemEffectID`,
+  `WeaponID`, `WorldBossGroupID`. **Les 34 alias**, chacun vérifié sur TOUTES
+  les tables qui portent la colonne (valeurs distinctes non nulles retrouvées
+  dans l'`ID` de la cible ; la table et une valeur réelle sont en commentaire
+  sur chaque ligne) : vers `CharacterTemplet`, `PickupID` (84/84),
+  `ChangeCharID` (6/6), `CharID` (40/40 sur trois tables), `Char_ID`
+  (114/114), `BonusCharIDs` (69/69), `FavoriteCharID` (16/16),
+  `LimitedShopCharID` (1/1) ; vers `ItemTemplet`, les huit emplacements de
+  `PVPPresetEquipTemplet` (`WeaponID`, `AccessaryID`, `HelmetID`, `ArmorID`,
+  `GlovesID`, `ShoesID`, `TalismanID`, `ExclusiveID` — ce dernier porte l'id
+  du perso, qui est aussi celui de son item `ITS_EQUIP_EXCLUSIVE`),
+  `MaterialID`, `MaterialIDs`, `RecruitTicketID` et `ProductBuyID` (toujours
+  `RTT_ITEM` et `PBT_ITEM` aujourd'hui) ; `UniqueOptionID` →
+  `ItemSpecialOptionTemplet` (463/463 sur deux tables), `MainOptionID` et
+  `SubOptionID` → `ItemOptionTemplet` (son `ID`, pas son `GroupID` : 165/165
+  contre 51) ; `ToolTipID` et `ConvertToID` → `BuffToolTipTemplet`,
+  `PieceBonusID` → `RewardTemplet`, `QuestionID` →
+  `InteractionScenarioTemplet` (415/420), `RewardDialogueID` →
+  `TrustDialogueTemplet` (400/405 : les cinq absents sont trois ids collés
+  sans virgule par le jeu), `PopupConditionID` →
+  `ProductPopupConditionTemplet` (452/454), `ShortcutID` →
+  `ItemShortcutTemplet` (18/19), `ThemeID` → `MonadGateThemeTemplet`,
+  `DepthID` → `MonadGateDepthTemplet`, `BonusTypeID` →
+  `EventBossBonusTypeTemplet`, `ClearFloorNodeID` →
+  `IrregularInfiltrateNodeTemplet`, `NextLevelID` → `GuildMonolithTemplet`.
+  **Nommés par la tâche et absents de la table** : `ShareCharacterID` et
+  `ChangeCharacterCostumeID` (`CostumeTemplet`) étaient DÉJÀ des liens — le
+  nom les mène à `CharacterTemplet` et `CostumeTemplet` (6/6 et 7/7), un alias
+  y serait mort, un test le fixe ; `TargetCharacterID` n'existe dans aucune
+  table. **Laissé**, faute de cible unique ou prouvée : (a) la cible change
+  d'une table à l'autre — `BossID` (un monstre dans `WorldBossTemplet`, 4, 9,
+  17 dans `GuildRaidTemplet`), `SkillID` (`CharacterSkillTemplet` ou
+  `MonsterSkillTemplet`), `FloorID`, `CategoryID`, `MoveEventID`,
+  `ConnectionNodeID` : il y faudrait un alias par `Table.Colonne`, une autre
+  forme que celle demandée ; (b) les `*GroupID` désignent le `GroupID` de leur
+  cible, et le lien filtre sur `ID` ; (c) les clés de texte (`NameID`,
+  `DescID`, `TextID`…), que « résoudre les textes » rend déjà lisibles ; (d)
+  `OptionID`, `CallerDamageID` et les `Child1_BID`…`Child10_BID` portent un
+  nom de buff, présent dans aucune colonne `ID` ; (e) les ids d'assets
+  (`ModelID`, `FaceIconID`, `SceneID`) ; (f) les petits entiers sans preuve
+  (`SeasonID`, `LeagueID`, `RankID`, `SetOptionID`, `ClearFloorID`…) : 1, 2, 3
+  se retrouvent dans cent tables ; (g) les colonnes vides (`DeungeonID`,
+  `RecruitID`, `SkipTicketID`). **Repéré hors périmètre** : la déduction par
+  le nom pose aussi des liens FAUX — les 21 colonnes `*BuffID` visent
+  `BuffTemplet` mais portent un nom de buff que le filtre `ID = …` ne retrouve
+  pas (0 % partout), `TrustRewardTemplet.RewardVoiceID` → `VoiceTemplet`
+  (0/5577), `MonadGateArtifactGroupTemplet.ArtifactID` → `ArtifactTemplet`
+  (0/164), `DungeonTemplet.ClearMissionID` → `MissionTemplet` (2/33) ; et une
+  cellule `0` reste un lien vers `ID = 0`. **Vérification** : quatre tests
+  ajoutés à `gamedata-store.test.ts` (l'alias l'emporte sur une table
+  `PickupTemplet` présente, un alias vers une table absente ne donne rien,
+  chaque alias est une colonne `*ID`, la déduction par le nom reste) ; au
+  banc, sur un quick ISOLÉ (port 4832, clés vidées, arrêté par son PID),
+  `GET /api/gamedata/table?name=RecruitGroupTemplet` rend `links` avec
+  `PickupID` → `CharacterTemplet` et `RecruitTicketID` → `ItemTemplet` à côté
+  de `OpenDungeonID` → `DungeonTemplet`, et la capture
+  `shot.mjs --tabs gamedata --hash gamedata/RecruitGroupTemplet` montre les
+  `PickupID` soulignés (2000110…) — rien d'autre ne bouge à l'écran.
+  `pnpm typecheck` : `tsc --noEmit -p scripts/tsconfig.json` sans erreur ;
+  `pnpm lint` : `$ eslint` sans sortie ; `pnpm test` :
+  `Tests 3087 passed (3087)`, 202 fichiers.
 - **quick : un enregistrement ne committe QUE ses chemins, l'index d'à côté
   reste intact (lot A33)** : `commitPaths` (`scripts/quick/actions.ts`)
   faisait `git add -- <chemins>` puis `git commit -m …`, donc committait TOUT
