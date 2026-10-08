@@ -7,6 +7,40 @@
 
 ## 2026-10-08
 
+- **Relecture B37** (Fable, 08/10) : `b1ce507b` validé — 100 lots, aucun
+  ouvert. Périmètre attendu (gabarits et puces dans `src/lib/`, `changelog.ts`
+  du site, `ChangelogEntryCard`, `tabs/changelog.*`, `actions.ts`,
+  `server.ts`, `shot.mjs`, `lib.js`, `index.html`, tests, STYLE.md,
+  `layout.dev.tsx`, DONE, TODO, `quick-migration.md`), entrée DONE complète,
+  six écarts acceptés (route `fill`, petit formulaire pour Guide et Mise à
+  jour, l'aperçu rend aussi type/badge/icône/date, « Supprimer » gardé et
+  `image` conservée, ids en `j-`, hash par rang). La question posée en cours
+  de lot (le site rend-il le gras ?) a eu la réponse de Sevih : oui — la
+  carte du site rend désormais `**…**` par `bulletSegments`, 15 entrées
+  changent d'aspect au déploiement. `pnpm typecheck`, `pnpm lint`, `pnpm
+test` verts sur HEAD (201 fichiers, 3 040 tests), quick + `src/lib/admin`
+  - puces sous `NODE_ENV=development` (986). Contrôle indépendant (scripts
+    `tsx` du scratchpad, `b37/check*.ts`) : sept gabarits servis ;
+    recoupement de l'historique ENTIER — 9 des 22 `character` suivent la
+    phrase du gabarit, 27 des 56 `update` la forme « updated for <Mois AAAA>
+    version. » ; `fillChangelogTemplate('character')` sur Demiurge Lambda et
+    Titia rend le titre en six langues, le slug, et « …, stats and exclusive
+    equipment » pour les deux (les deux ont un EE dans le jeu, vérifié dans
+    `ee-effects.json`) ; un gabarit « update » vide garde `{guide}` et
+    `{slug}` écrits (refusés à l'enregistrement) ; l'aperçu `fr` d'Universal
+    Tower rend le gras en segment, le lien « Lire le guide » et la date
+    localisée. Quick isolé (:4855, clés DeepL et Anthropic VIDÉES) :
+    `/api/changelog/state` (150 entrées, 7 gabarits) ; captures (scratchpad
+    `b37/`) : la liste (150 entrées, 40 lignes, badges du site, rangée des
+    gabarits) et `#changelog/1` (fiche d'Universal Tower dépliée, six titres,
+    puces EN et les cinq autres langues, « Traduire », lien et image).
+    **Leçon** : le lot disait « l'agent n'a pas les clés » — faux sur ce poste,
+    `.env.local` les porte, et deux `curl` d'essai ont appelé DeepL. La
+    commande du quick isolé du préambule vide désormais `DEEPL_API_KEY` et
+    `ANTHROPIC_API_KEY` comme le jeton Discord. Pour Sevih : la ligne du TODO
+    (gabarit Perso réel, « Traduire » avec les clés, aperçu contre
+    `/changelog`, un « Enregistrer »), et à juger les trois restes (suggestions
+    de guides, liens markdown de 7 entrées, copie du motif dans le flux RSS).
 - **quick : onglet « Journal du site » — le changelog par gabarits, traduit
   et prévisualisé comme la page (lot B37, migration 7)** : l'outil admin
   « Changelog » (`ChangelogEditor`) est porté dans quick, groupe
