@@ -48,49 +48,104 @@ un exemplaire).
 
 ## Ordre et inventaire
 
+Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
+« Agacements » à remplir (en vrac, même approximatif).
+
 ### 1. Outils simples (un lot A/B chacun, dans cet ordre)
 
-| #   | Admin                  | Écran                                   | Agacements (Sevih) |
-| --- | ---------------------- | --------------------------------------- | ------------------ |
-| 1   | Tools › Short names    | liste + fiche `[id]`                    |                    |
-| 2   | Tools › Search aliases | liste + fiche `[id]`                    |                    |
-| 3   | Tools › Synergy        | liste + fiche `[id]`                    |                    |
-| 4   | Tools › Pro / Con      | liste + fiche `[id]`                    |                    |
-| 5   | Tools › Banner         | `BannersEditor`                         |                    |
-| 6   | Tools › Events         | `EventsEditor` (451 l.)                 |                    |
-| 7   | Tools › Changelog      | `ChangelogEditor` (346 l.)              |                    |
-| 8   | Tools › Game data      | `GameDataBrowser` + `[table]` (lecture) |                    |
+1. **Tools › Short names**
+   liste + fiche `[id]`
+   - Agacements :
+
+2. **Tools › Search aliases**
+   liste + fiche `[id]`
+   - Agacements :
+
+3. **Tools › Synergy**
+   liste + fiche `[id]`
+   - Agacements :
+
+4. **Tools › Pro / Con**
+   liste + fiche `[id]`
+   - Agacements :
+
+5. **Tools › Banner**
+   `BannersEditor`
+   - Agacements :
+
+6. **Tools › Events**
+   `EventsEditor` (451 l.)
+   - Agacements :
+
+7. **Tools › Changelog**
+   `ChangelogEditor` (346 l.)
+   - Agacements :
+
+8. **Tools › Game data**
+   `GameDataBrowser` + `[table]` (lecture)
+   - Agacements :
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
-| #   | Admin               | Écran                                                    | Agacements (Sevih) |
-| --- | ------------------- | -------------------------------------------------------- | ------------------ |
-| 9   | Editor › Character  | `CharacterCuratedEditor` + `CharacterKitEditor`          |                    |
-| 10  | Editor › Effect     | `EffectCuratedEditor`, `EffectsCatalog`, `NewEffectForm` |                    |
-| 11  | Editor › EE         | `EeCuratedEditor`                                        |                    |
-| 12  | Editor › Monster    | `MonsterKitEditor`, `MonsterStatsCard`, `MonsterActions` |                    |
-| 13  | Editor › Item       | `ItemCuratedEditor`, `ItemsBrowser`                      |                    |
-| 14  | Misc › Gear presets | `GearPresetsEditor` (318 l.)                             |                    |
-| 15  | Misc › Tag control  | page `tags`                                              |                    |
+9. **Editor › Character**
+   `CharacterCuratedEditor` + `CharacterKitEditor`
+   - Agacements :
+
+10. **Editor › Effect**
+    `EffectCuratedEditor`, `EffectsCatalog`, `NewEffectForm`
+    - Agacements :
+
+11. **Editor › EE**
+    `EeCuratedEditor`
+    - Agacements :
+
+12. **Editor › Monster**
+    `MonsterKitEditor`, `MonsterStatsCard`, `MonsterActions`
+    - Agacements :
+
+13. **Editor › Item**
+    `ItemCuratedEditor`, `ItemsBrowser`
+    - Agacements :
+
+14. **Misc › Gear presets**
+    `GearPresetsEditor` (318 l.)
+    - Agacements :
+
+15. **Misc › Tag control**
+    page `tags`
+    - Agacements :
 
 ### 3. Guides (lot F, en plusieurs écrans si besoin)
 
-| #   | Admin                                        | Écran                                                                                                                                         | Agacements (Sevih) |
-| --- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| 16  | Guide editor › Overview + catégories de boss | `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos |                    |
-| 17  | Guides généraux                              | `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`                                                                                 |                    |
+16. **Guide editor › Overview + catégories de boss**
+    `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos
+    - Agacements :
+
+17. **Guides généraux**
+    `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`
+    - Agacements :
 
 ### 4. Extractor (plusieurs lots, en dernier)
 
-| #   | Admin                           | Écran                                                                                                                                                | Agacements (Sevih) |
-| --- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| 18  | Home admin : boîte de réception | compteurs new / diff / removed par entité (`admin-inbox`)                                                                                            |                    |
-| 19  | Extractor › revue par entité    | `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item |                    |
-| 20  | Extractor › intégration         | `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport`                                 |                    |
-| 21  | Patch : lanceur et journal      | `PatchCard` + `patch-runner` (`pnpm datagen…`, `pnpm commit`), journaux longs en direct                                                              |                    |
+18. **Home admin : boîte de réception**
+    compteurs new / diff / removed par entité (`admin-inbox`)
+    - Agacements :
+
+19. **Extractor › revue par entité**
+    `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item
+    - Agacements :
+
+20. **Extractor › intégration**
+    `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport`
+    - Agacements :
+
+21. **Patch : lanceur et journal**
+    `PatchCard` + `patch-runner` (`pnpm datagen…`, `pnpm commit`), journaux longs en direct
+    - Agacements :
 
 ### 5. Clôture
 
-| #   | Quoi                                                                                                                 | Agacements (Sevih) |
-| --- | -------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| 22  | Retirer `/admin` du site (routes `.dev`, composants, `api/admin` devenus inutiles) — un lot, quand 1 à 21 sont faits |                    |
+22. **Retirer `/admin` du site**
+    routes `.dev`, composants, `api/admin` devenus inutiles — un lot, quand
+    1 à 21 sont faits
+    - Agacements :
