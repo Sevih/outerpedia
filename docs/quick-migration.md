@@ -58,23 +58,23 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 1. **Tools › Short names**
    liste + fiche `[id]`
-   - Agacements :
+   - Agacements : aucun moyen de savoir si le nom actel (peut importe la langue) sera genant (et donc si il est necessaire de mettre un short)
 
 2. **Tools › Search aliases**
    liste + fiche `[id]`
-   - Agacements :
+   - Agacements : ça devrais plus ou moins fusionner avec short name.
 
 3. **Tools › Synergy**
    liste + fiche `[id]`
-   - Agacements :
+   - Agacements : ça devrais etre dans l'editor de character
 
 4. **Tools › Pro / Con**
    liste + fiche `[id]`
-   - Agacements :
+   - Agacements : ça devrais etre dans l'editor de character
 
 5. **Tools › Banner**
    `BannersEditor`
-   - Agacements :
+   - Agacements : on devrait pouvoir detecter les bannieres active (et faire des auto insertion)
 
 6. **Tools › Events**
    `EventsEditor` (451 l.)
@@ -82,21 +82,21 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 7. **Tools › Changelog**
    `ChangelogEditor` (346 l.)
-   - Agacements :
+   - Agacements : on a enormement de message qui se ressemble et que l'on pourrais preremplir, pas de preview de la news ...
 
 8. **Tools › Game data**
    `GameDataBrowser` + `[table]` (lecture)
-   - Agacements :
+   - Agacements : mettre en avant les tables que l'on utilise réelement (et mettre un petit text pour l'utilité de la table), on a une grande liste de fichier qui prendre de la place plutot qu'un select avec une recherche text qui suffirait)
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
 9. **Editor › Character**
    `CharacterCuratedEditor` + `CharacterKitEditor`
-   - Agacements :
+   - Agacements : ui pas joli et compact (et on a deplacer le gear reco)
 
 10. **Editor › Effect**
     `EffectCuratedEditor`, `EffectsCatalog`, `NewEffectForm`
-    - Agacements :
+    - Agacements : on a une recherche text qui match sur je ne sais pas quoi (genre j'ecrit "tes" et j'ai increased speed qui sort), le side menu sert a rien
 
 11. **Editor › EE**
     `EeCuratedEditor`
