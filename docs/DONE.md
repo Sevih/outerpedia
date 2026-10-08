@@ -7,6 +7,27 @@
 
 ## 2026-10-08
 
+- **Relecture B41 (Fable) — onglet « Effets » de quick, validé** : périmètre
+  tenu (vingt fichiers, tous du lot : la section, le serveur, le module de
+  recherche partagé avec l'admin, `effect-catalog.ts` descendu de la page
+  admin, les tests, les docs). `pnpm typecheck && pnpm lint && pnpm test` sur
+  HEAD vert ; `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` :
+  1 079 cas verts. Recherche rejouée à part par le module (tsx) sur le
+  glossaire du jour : « tes » → rien ; « spe », « speed » → les quatre effets
+  de vitesse par `name.en` ; « BT_SP » → les mêmes par `key BT_STAT|ST_SPEED`
+  et `…_IR` ; « スピ » → les mêmes par `name.jp` ; « 15 » → l'id 15 ;
+  « vitesse » → les deux par `name.fr` ; « crit red » → quatre par le nom
+  anglais, deux mots sans ordre dans un champ. `effectNewId('fixed test')` →
+  `FIXED_TEST`, libre. Banc rejoué sur un quick isolé (:4873, clés vidées,
+  que des GET) : la capture `--hash effects/15` montre le catalogue en paires,
+  la fiche « Increased Speed » avec l'extrait du jeu et ses six noms — dans la
+  charte, rien à redire. Les choix de l'agent (plusieurs mots sans ordre dans
+  un champ, l'espagnol hors recherche, l'envoi par lot) sont gardés ; ce que
+  Sevih peut rejuger est dans ses contrôles au TODO. Au passage : F17 est
+  réécrit en deux lots Opus, C11 (coquille de la fiche, picker partagé,
+  serveur, onglet Fiche) et B42 (Pros / Cons et Synergies), la forme tranchée
+  dans le prompt ; B39 et B40 renvoient maintenant à C11 et B42.
+
 - **quick : onglet « Effets » — le catalogue des effets, une recherche qui
   dit pourquoi elle trouve (lot B41, étape 10 de la migration)** —
   l'éditeur « Effect » de l'admin (`/admin/editor/effects`) est porté dans
