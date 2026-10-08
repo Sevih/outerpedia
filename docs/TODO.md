@@ -153,19 +153,16 @@
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
-- [ ] **« Pousser », restes de B33** : (1) le compte de l'en-tête ne se relit
+- [ ] **« Pousser », restes de B33** : le compte de l'en-tête ne se relit
       qu'au chargement, après un enregistrement et, depuis B36, à chaque
       lecture du tableau de bord (y revenir, ou « Actualiser ») — après un
       `git pull --rebase` ou un commit au terminal, passer par l'accueil
-      (relire `/api/git` au retour de focus serait un lot A) ; (2)
-      `commitPaths` committe TOUT l'index, comme avant lui : un fichier
-      indexé au terminal partirait avec l'enregistrement — la carte
-      « Dépôt » du tableau de bord compte les fichiers modifiés (B36), mais
-      rien ne l'empêche : ne rien laisser dans l'index pendant que quick
-      tourne, ou lot A pour n'indexer que ses chemins
-      (`git commit -- <chemins>` sur un index propre). À jouer par Sevih : le
-      premier clic réel sur « Pousser » (des commits non JSON attendent : le
-      journal annonce le typecheck, puis « poussé »).
+      (relire `/api/git` au retour de focus serait un lot A). À jouer par
+      Sevih : le premier clic réel sur « Pousser » (des commits non JSON
+      attendent : le journal annonce le typecheck, puis « poussé ») ; et,
+      depuis A33, un fichier indexé au terminal (`git add`) puis un
+      enregistrement dans quick — `git show --stat` ne le cite pas,
+      `git status` le montre toujours indexé.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,

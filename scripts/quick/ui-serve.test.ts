@@ -3353,7 +3353,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       ['muted', 'f1b28e5feat(quick): tableau de bord · il y a 3 heures', false],
       [
         'warn',
-        '3 fichiers modifiésou non suivis — ce qui est indexé part avec le prochain enregistrement',
+        '3 fichiers modifiésou non suivis — un enregistrement ne committe que ses fichiers',
         true,
       ],
     ]);
@@ -3441,7 +3441,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       ['warn', '3 commits de retard sur origin`git pull --rebase` d’abord, au terminal', true],
       [
         'warn',
-        '1 fichier modifiéou non suivis — ce qui est indexé part avec le prochain enregistrement',
+        '1 fichier modifiéou non suivis — un enregistrement ne committe que ses fichiers',
         true,
       ],
     ]);

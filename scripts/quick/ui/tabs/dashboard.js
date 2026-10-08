@@ -89,13 +89,13 @@ function renderGit(git, error) {
         `<span class="mono">${esc(git.last.hash)}</span>${detail(`${git.last.subject} · ${git.last.when}`)}`,
       ),
     );
-  // quick committe tout l'index : un fichier indexé au terminal partirait avec.
+  // Un compte, sans risque derrière : `commitPaths` ne committe que ses chemins.
   rows.push(
     git.dirty
       ? row(
           'warn',
           label(plural(git.dirty, 'fichier modifié', 'fichiers modifiés')) +
-            detail('ou non suivis — ce qui est indexé part avec le prochain enregistrement'),
+            detail('ou non suivis — un enregistrement ne committe que ses fichiers'),
           true,
         )
       : row('ok', label('aucun fichier modifié')),

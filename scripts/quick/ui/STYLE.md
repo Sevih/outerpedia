@@ -408,7 +408,7 @@ rien. Croquis du rendu :
      ● 7 commits à pousser  « Pousser », dans l'en-tête      (accent ; « rien à pousser » en vert ; « pas d'amont » atténué)
      ● 3 commits de retard sur origin  `git pull --rebase` d'abord, au terminal      (warn, seulement s'il y en a)
      ● 54135782  le sujet du dernier commit · il y a 31 minutes
-     ● 10 fichiers modifiés  ou non suivis — ce qui est indexé part avec le prochain enregistrement      (warn ; « aucun fichier modifié » en vert)
+     ● 10 fichiers modifiés  ou non suivis — un enregistrement ne committe que ses fichiers      (warn ; « aucun fichier modifié » en vert)
   .card « Jeu »
      ● site 1.11.404 · client 1.11.404  à jour      (ok ; warn « un patch attend : onglet Patch » quand le client est en avance — un bouton quand la section existe ; atténué sans client, ou client en retard)
      ● proposition d'extraction en attente  data/extracted/ : à revoir, puis promouvoir      (warn, seulement s'il y en a une)

@@ -244,10 +244,19 @@ export function gitState(cwd?: string): GitState {
  * (`pushMain`) envoie d'un coup ceux qui attendent. La dernière ligne du
  * journal en donne le compte.
  *
+ * Le commit ne porte QUE ces chemins : `git commit -- <chemins>` prend leur
+ * contenu dans l'arbre de travail et laisse le reste de l'index tel quel. Un
+ * fichier indexé au terminal pendant que quick tourne ne part donc pas avec
+ * l'enregistrement, et reste indexé. Le `git add` d'avant ne sert qu'aux
+ * fichiers NOUVEAUX — un pathspec ne connaît que ce que git suit déjà — et
+ * « rien à committer » se juge sur ces chemins contre `HEAD`, pas sur l'index
+ * entier : ce qui est indexé à côté ne fait pas croire qu'il y a quelque chose.
+ *
  * Le pre-commit est sauté (`--no-verify`) SEULEMENT quand tous les chemins sont
  * du JSON de données : il ne fait qu'y passer prettier, or `writeJson` écrit
  * déjà le format canonique prettier (cf. `formatJson`). Dès qu'un chemin n'est
- * pas un `.json`, les hooks tournent.
+ * pas un `.json`, les hooks tournent — sur un index TEMPORAIRE (celui d'un
+ * commit par pathspec), où ils ne voient d'indexé que ces chemins.
  */
 export function commitPaths(
   paths: string[],
@@ -256,17 +265,27 @@ export function commitPaths(
   cwd?: string,
 ): Outcome {
   const j = journal(report);
+  // Sans chemin, `git commit --` committerait l'index entier.
+  if (!paths.length) return { ok: true, log: ['git : rien à committer.'] };
 
   const add = git(['add', '--', ...paths], cwd);
   if (!add.ok) return { ok: false, log: [`git add a échoué : ${add.out}`] };
 
-  // Rien d'indexé = rien à dire (re-sauvegarde à l'identique) : pas une erreur.
-  if (git(['diff', '--cached', '--quiet'], cwd).ok)
+  // Ces chemins pareils à `HEAD` = rien à dire (re-sauvegarde à l'identique) :
+  // pas une erreur.
+  if (git(['diff', '--quiet', 'HEAD', '--', ...paths], cwd).ok)
     return { ok: true, log: ['git : rien à committer.'] };
 
   const dataOnly = paths.every((p) => p.endsWith('.json'));
-  const commit = git(['commit', ...(dataOnly ? ['--no-verify'] : []), '-m', message], cwd);
+  const commit = git(
+    ['commit', ...(dataOnly ? ['--no-verify'] : []), '-m', message, '--', ...paths],
+    cwd,
+  );
   if (!commit.ok) return { ok: false, log: [`git commit a échoué : ${commit.out}`] };
+  // Ce qu'un hook ré-indexe (prettier, `stage_fixed`) entre dans le commit par
+  // l'index temporaire, pas dans le vrai, qui garderait la version d'AVANT le
+  // formatage — indexée, donc prête à le défaire. On réaligne ces chemins.
+  if (!dataOnly) git(['add', '--', ...paths], cwd);
   j.done(`git : ${message}`);
 
   const { branch, ahead } = gitState(cwd);

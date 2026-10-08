@@ -68,13 +68,22 @@
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
  *
- * Et contrat de git lui-même — `commitPaths` (un enregistrement committe, et ne
- * pousse jamais), `pushMain` (le bouton « Pousser ») et `gitState` (son compte)
+ * Et contrat de git lui-même — `commitPaths` (un enregistrement committe ses
+ * chemins et eux seuls, et ne pousse jamais), `pushMain` (le bouton
+ * « Pousser ») et `gitState` (son compte)
  * — joué pour de bon, mais sur un DÉPÔT JETABLE : un dossier temporaire, son
  * amont `bare` à côté. Le dépôt du projet n'est ni lu ni touché.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -3701,6 +3710,78 @@ describe('commitPaths, pushMain, gitState — sur un dépôt jetable', () => {
     expect(sh(work, 'show', '--name-only', '--format=', 'HEAD')).toBe('data.json');
     // Le travail d'à côté reste où il est : ni indexé, ni committé.
     expect(sh(work, 'status', '--porcelain')).toBe('?? voisin.json');
+  });
+
+  it('un fichier indexé à côté ne part pas avec l’enregistrement, et reste indexé', () => {
+    const { work } = repo();
+    // Indexé au terminal pendant que quick tourne.
+    write(work, 'autre.txt', 'au terminal\n');
+    sh(work, 'add', '--', 'autre.txt');
+
+    // Un chemin suivi qui change, un fichier NOUVEAU : les deux entrent.
+    write(work, 'data.json', '{"a":1}\n');
+    write(work, 'neuf.json', '{}\n');
+    expect(commitPaths(['data.json', 'neuf.json'], 'chore: les miens', undefined, work)).toEqual({
+      ok: true,
+      log: ['git : chore: les miens', 'committé — 1 commit à pousser (bouton « Pousser »).'],
+    });
+    const stat = sh(work, 'show', '--stat', '--format=%s', 'HEAD');
+    expect(stat).toMatch(/^chore: les miens\n/);
+    expect(stat).toContain('data.json');
+    expect(stat).toContain('neuf.json');
+    expect(stat).not.toContain('autre.txt');
+    expect(sh(work, 'diff', '--cached', '--name-only')).toBe('autre.txt');
+    expect(sh(work, 'status', '--porcelain')).toBe('A  autre.txt');
+
+    // La re-sauvegarde à l'identique ne prend pas l'index d'à côté pour du neuf.
+    const saved = head(work);
+    expect(commitPaths(['data.json', 'neuf.json'], 'chore: rien', undefined, work)).toEqual({
+      ok: true,
+      log: ['git : rien à committer.'],
+    });
+    // Sans chemin non plus : `git commit --` prendrait l'index entier.
+    expect(commitPaths([], 'chore: vide', undefined, work)).toEqual({
+      ok: true,
+      log: ['git : rien à committer.'],
+    });
+    expect(head(work)).toBe(saved);
+    expect(sh(work, 'diff', '--cached', '--name-only')).toBe('autre.txt');
+  });
+
+  it('les hooks tournent dès qu’un chemin n’est pas du JSON, sur ces chemins seuls', () => {
+    const { work } = repo();
+    // Un pre-commit à la manière de lefthook (`stage_fixed`) : il note ce qu'il
+    // voit d'indexé, « formate » les `.ts` et les ré-indexe.
+    const seen = join(work, '.git', 'hook-seen');
+    mkdirSync(join(work, '.git', 'hooks'), { recursive: true });
+    writeFileSync(
+      join(work, '.git', 'hooks', 'pre-commit'),
+      [
+        '#!/bin/sh',
+        'git diff --cached --name-only >> .git/hook-seen',
+        'for f in $(git diff --cached --name-only); do',
+        '  case "$f" in *.ts) echo "// formate" >> "$f"; git add -- "$f";; esac',
+        'done',
+        '',
+      ].join('\n'),
+      { mode: 0o755 },
+    );
+    write(work, 'autre.txt', 'au terminal\n');
+    sh(work, 'add', '--', 'autre.txt');
+
+    // Que du `.json` : `--no-verify`, le hook ne tourne pas.
+    write(work, 'data.json', '{"a":1}\n');
+    expect(commitPaths(['data.json'], 'chore: donnee', undefined, work).ok).toBe(true);
+    expect(existsSync(seen)).toBe(false);
+
+    // Un `.ts` dans le lot : il tourne, et ne voit pas le fichier d'à côté.
+    write(work, 'data.json', '{"a":2}\n');
+    write(work, 'code.ts', 'export {};\n');
+    expect(commitPaths(['data.json', 'code.ts'], 'feat: code', undefined, work).ok).toBe(true);
+    expect(readFileSync(seen, 'utf8')).toBe('code.ts\ndata.json\n');
+    // Ce qu'il a ré-indexé est dans le commit, et ne traîne pas dans l'index.
+    expect(sh(work, 'show', 'HEAD:code.ts')).toBe('export {};\n// formate');
+    expect(sh(work, 'status', '--porcelain')).toBe('A  autre.txt');
   });
 
   it('« Pousser » envoie ce qui attend ; rien à pousser n’est pas une erreur', () => {

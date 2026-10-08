@@ -7,6 +7,63 @@
 
 ## 2026-10-08
 
+- **quick : un enregistrement ne committe QUE ses chemins, l'index d'à côté
+  reste intact (lot A33)** : `commitPaths` (`scripts/quick/actions.ts`)
+  faisait `git add -- <chemins>` puis `git commit -m …`, donc committait TOUT
+  l'index — un fichier indexé au terminal (ou par un lot voisin) pendant que
+  quick tournait partait avec l'enregistrement ; le TODO le disait, la carte
+  « Dépôt » l'affichait, rien ne l'empêchait. Le commit porte maintenant son
+  pathspec : `git commit [--no-verify] -m <message> -- <chemins>` prend le
+  contenu de l'ARBRE DE TRAVAIL de ces chemins et laisse le reste de l'index
+  tel quel, le fichier d'à côté restant indexé. Le `git add` d'avant est
+  gardé (un fichier NOUVEAU doit être connu de git pour entrer dans un
+  pathspec), et « rien à committer » se juge par
+  `git diff --quiet HEAD -- <chemins>` au lieu de `git diff --cached --quiet`
+  sur tout l'index : un changement indexé à côté ne fait plus croire qu'il y
+  a quelque chose. Message, journal et règle des hooks inchangés
+  (`--no-verify` quand tout est du `.json`). **Deux ajouts que la tâche ne
+  nommait pas**, tous deux dans `commitPaths` : (1) une liste de chemins VIDE
+  rend « rien à committer » sans appeler git — `git commit --` sans pathspec
+  committerait l'index entier (aucun appelant n'en passe aujourd'hui) ; (2)
+  après un commit où les hooks ont tourné, un second `git add -- <chemins>` :
+  un commit par pathspec passe par un index TEMPORAIRE, ce qu'un hook y
+  ré-indexe (prettier, `stage_fixed` de lefthook) entre dans le commit mais
+  pas dans le vrai index, qui gardait la version d'AVANT le formatage,
+  indexée (`MM` au statut, vu sur un dépôt jetable avec git 2.55) — prête à
+  défaire le formatage au commit suivant et à bloquer le contrôle
+  `git diff --cached` des lots. Sans effet aujourd'hui (les huit gestes ne
+  passent que du `.json`, vidéos comprises : le hook est sauté), mais la
+  règle « dès qu'un chemin n'est pas un `.json`, les hooks tournent » existe.
+  Docblock de `commitPaths` réécrit. **Tableau de bord** : le détail de la
+  ligne des fichiers modifiés (« ce qui est indexé part avec le prochain
+  enregistrement », devenu faux) devient « N fichiers modifiés ou non suivis
+  — un enregistrement ne committe que ses fichiers » (`tabs/dashboard.js`,
+  son commentaire, la ligne de `ui/STYLE.md` et les deux attentes de
+  `ui-serve.test.ts`) ; « ou non suivis » gardé, le compte les inclut, et
+  « committe » avec deux t comme les autres libellés de quick. La teinte
+  `warn` et le gras de la ligne ne sont PAS touchés (aucun changement visuel
+  demandé) : à juger par Sevih, la ligne n'annonce plus un risque. **Tests**
+  (`actions.test.ts`, dépôt jetable de B33, deux cas de plus) : `autre.txt`
+  INDEXÉ avant l'enregistrement, un chemin suivi modifié et un fichier
+  nouveau donnés en chemins — `git show --stat` cite les deux et pas
+  `autre.txt`, `git diff --cached --name-only` rend encore `autre.txt`,
+  statut `A  autre.txt` ; la re-sauvegarde à l'identique et la liste vide
+  disent « rien à committer », `HEAD` ne bouge pas ; un pre-commit écrit dans
+  le dépôt jetable (il note ce qu'il voit d'indexé, « formate » les `.ts` et
+  les ré-indexe) ne tourne pas sur du `.json` seul, tourne dès qu'un `.ts`
+  est du lot, n'y voit que `code.ts` et `data.json` (pas `autre.txt`), et
+  son ajout est dans `HEAD` sans rien laisser d'indexé. Contre-épreuve : le
+  pathspec retiré fait tomber les deux cas, le second `git add` retiré le
+  cas des hooks, l'ancien `--cached --quiet` le cas d'`autre.txt`.
+  `pnpm typecheck` : `tsc --noEmit -p scripts/tsconfig.json`, sans erreur ;
+  `pnpm lint` : `$ eslint`, sans sortie ; `pnpm test` : « Test Files 201
+  passed (201) · Tests 3071 passed (3071) » (suite de quick sous
+  `NODE_ENV=development` : 614). Aucun hook joué dans ce dépôt, aucun quick
+  lancé. Laissé : un `git commit -- <chemins>` est refusé par git pendant un
+  merge ou un rebase en cours (« cannot do a partial commit during a
+  merge ») — le journal rend le refus tel quel, rien n'est perdu ;
+  `pnpm commit` et `pushMain` hors périmètre, pas touchés. Pour Sevih : à
+  jouer une fois pour de bon (ligne du TODO, « Pousser »).
 - **Relecture B38** (Fable, 08/10) : `7ba0160e` validé — 101 lots, aucun
   ouvert. Périmètre attendu (`tabs/gamedata.*`, `actions.ts`, `server.ts`,
   `lib.js`, `index.html`, `gamedata-columns.ts` sorti de `GameDataBrowser`,
