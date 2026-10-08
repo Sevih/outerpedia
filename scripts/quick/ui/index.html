@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/ui/quick.css" />
     <!-- Une feuille par onglet, chargée par la route statique de `ui-serve.ts`. -->
     <link rel="stylesheet" href="/ui/tabs/coupons.css" />
+    <link rel="stylesheet" href="/ui/tabs/banners.css" />
     <link rel="stylesheet" href="/ui/tabs/comics.css" />
     <link rel="stylesheet" href="/ui/tabs/videos.css" />
     <link rel="stylesheet" href="/ui/tabs/ranks.css" />
@@ -65,6 +66,7 @@
       <!-- Une section par onglet : le serveur pose `tabs/<nom>.html` à la place de
            chaque marqueur (cf. `ui-serve.ts`). -->
       <!-- @tab coupons -->
+      <!-- @tab banners -->
       <!-- @tab comics -->
       <!-- @tab videos -->
       <!-- @tab ranks -->
@@ -78,6 +80,7 @@
     <script type="module">
       import { sections } from '/ui/lib.js';
       import '/ui/tabs/coupons.js';
+      import '/ui/tabs/banners.js';
       import '/ui/tabs/comics.js';
       import '/ui/tabs/videos.js';
       import '/ui/tabs/ranks.js';

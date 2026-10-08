@@ -4,8 +4,9 @@
  *   1. CŒURS PURS en synthétique : `ratesOf` (la vraie logique — des POIDS
  *      bruts normalisés en %, filtrés par groupe et par type de recette),
  *      `poolOf` (le pool hors focus d'un groupe : vedette exclue, un palier
- *      par rareté, poids émis seulement s'ils départagent) et `isoDate`
- *      (troncature de la date du jeu). Aucune table requise.
+ *      par rareté, poids émis seulement s'ils départagent), `isoDate`
+ *      (troncature de la date du jeu) et `recruitWindows` (toutes les fenêtres
+ *      à vedette, pour l'onglet « Bannières » de quick). Aucune table requise.
  *
  *   2. INVARIANTS RÉFÉRENTIELS sur `data/generated/recruit.json` committé
  *      (modèle encounters.test.ts) : les 5 types documentés, des taux qui
@@ -22,7 +23,14 @@ import charactersData from '../../data/generated/characters.json';
 import itemsData from '../../data/generated/items.json';
 import type { LangDict } from '../lib/lang';
 import type { Row } from '../lib/tables';
-import { isoDate, poolOf, ratesOf, type RecruitData, type RecruitKind } from './recruit';
+import {
+  isoDate,
+  poolOf,
+  ratesOf,
+  recruitWindows,
+  type RecruitData,
+  type RecruitKind,
+} from './recruit';
 
 // ─── 1. Cœurs purs (synthétique) ─────────────────────────────────────────────
 
@@ -35,6 +43,105 @@ describe('isoDate — date du jeu tronquée', () => {
   it('vide / absent → chaîne vide (pas de crash)', () => {
     expect(isoDate('')).toBe('');
     expect(isoDate(undefined as unknown as string)).toBe('');
+  });
+});
+
+describe('recruitWindows — toutes les fenêtres à vedette de la table', () => {
+  const group = (ID: string, RecruitType: string, PickupID: string, start: string, end: string) =>
+    ({ ID, RecruitType, PickupID, StartDate: start, EndDate: end }) as Row;
+  const known = new Set(['2000118', '2000121', '2000122', '2000058', '2000061']);
+
+  it('sort un PICKUP comme un SEASONAL, le type brut en minuscules, les dates en jours', () => {
+    const out = recruitWindows(
+      [
+        group('5014', 'SEASONAL', '2000121', '2026-07-14  00:00:00', '2026-08-11  00:00:00'),
+        group('121', 'PICKUP', '2000118', '2026-07-28  00:00:00', '2026-09-08  00:00:00'),
+        group('6106', 'OUTER_FES_SELECTION', '2000122', '2026-05-06  00:00:00', '2026-06-16'),
+      ],
+      known,
+    );
+    expect(out).toEqual([
+      {
+        characterId: '2000122',
+        type: 'outer_fes_selection',
+        start: '2026-05-06',
+        end: '2026-06-16',
+      },
+      { characterId: '2000121', type: 'seasonal', start: '2026-07-14', end: '2026-08-11' },
+      { characterId: '2000118', type: 'pickup', start: '2026-07-28', end: '2026-09-08' },
+    ]);
+  });
+
+  it('ignore ce qui n’a pas de PickupID : absent, vide ou « 0 »', () => {
+    const custom = { ID: '1', RecruitType: 'CUSTOM', StartDate: '2023-05-23', EndDate: '0' } as Row;
+    expect(
+      recruitWindows(
+        [
+          custom,
+          group('2', 'NORMAL', '', '2023-05-23', '0'),
+          group('3', 'EQUIPMENT_SELECTION', '0', '2023-05-23', '0'),
+        ],
+        known,
+      ),
+    ).toEqual([]);
+  });
+
+  it('rend un PickupID inconnu, marqué — jamais levé', () => {
+    expect(
+      recruitWindows([group('125', 'PICKUP', '2000999', '2026-10-20', '2026-11-17')], known),
+    ).toEqual([
+      {
+        characterId: '2000999',
+        type: 'pickup',
+        start: '2026-10-20',
+        end: '2026-11-17',
+        unknown: true,
+      },
+    ]);
+  });
+
+  it('trie par début, puis par perso', () => {
+    const out = recruitWindows(
+      [
+        group('124', 'PICKUP', '2000122', '2026-09-22', '2026-10-20'),
+        group('122', 'PICKUP', '2000118', '2026-09-22', '2026-10-20'),
+        group('121', 'PICKUP', '2000121', '2026-07-28', '2026-09-08'),
+      ],
+      known,
+    );
+    expect(out.map((w) => `${w.start} ${w.characterId}`)).toEqual([
+      '2026-07-28 2000121',
+      '2026-09-22 2000118',
+      '2026-09-22 2000122',
+    ]);
+  });
+
+  it('laisse telle quelle une date que la table ne porte pas (« 0 »)', () => {
+    // DEMIURGE : ni début ni fin ; SEASONAL_SELECTION : pas de fin.
+    expect(
+      recruitWindows(
+        [
+          group('10018', 'DEMIURGE', '2000121', '0', '0'),
+          group('6201', 'SEASONAL_SELECTION', '2000118', '2026-02-24  00:00:00', '0'),
+        ],
+        known,
+      ),
+    ).toEqual([
+      { characterId: '2000121', type: 'demiurge', start: '0', end: '0' },
+      { characterId: '2000118', type: 'seasonal_selection', start: '2026-02-24', end: '0' },
+    ]);
+  });
+
+  it('un groupe ELEMENTAL à plusieurs vedettes : une fenêtre par perso', () => {
+    const out = recruitWindows(
+      [group('20001', 'ELEMENTAL', '2000058,2000061,2000012', '1999-12-31', '2024-11-07')],
+      known,
+    );
+    expect(out.map((w) => [w.characterId, w.type, w.unknown ?? false])).toEqual([
+      ['2000012', 'elemental', true],
+      ['2000058', 'elemental', false],
+      ['2000061', 'elemental', false],
+    ]);
   });
 });
 

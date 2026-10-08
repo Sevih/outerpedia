@@ -33,7 +33,8 @@
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
-      Search aliases (onglet « Noms », lot B34). À faire par Sevih : remplir
+      Search aliases (onglet « Noms », lot B34), Banner (onglet
+      « Bannières », lot B35). À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
 - [ ] **Onglet « Noms » — contrôles à l'écran (lot B34)** : le banc ne tape
@@ -47,6 +48,29 @@
       `data/curated/search-aliases.json`. À juger : la vue par défaut « À
       traiter » est vide tant que le disque n'a rien à traiter (0 sur 129
       aujourd'hui).
+- [ ] **Onglet « Bannières » — contrôles à l'écran (lot B35)** : le banc ne
+      clique pas, et aucun enregistrement réel n'a été joué. Dans « Dans le
+      jeu » : « Aligner sur le jeu » sur Titia (fin `2026-10-05` → `2026-10-06`)
+      et sur Lambda (`2026-09-07` → `2026-09-08`) — attendu : les deux lignes,
+      expirées, apparaissent dans la liste avec « modifiée », la savebar dit
+      « 2 changements », la carte « Les bannières du jeu sont toutes dans la
+      liste. » ; aucune bannière à insérer aujourd'hui (au prochain patch :
+      « Insérer », nom du roster et dates de la table). « Enregistrer » —
+      attendu : une ligne verte « committé — N commits à pousser » et, le
+      journal déplié d'un clic, « 52 bannières écrites », « publié sur R2 +
+      edge purgé », `chore(banner): Titia, Lambda` ; « Pousser » compte un
+      commit de plus, et la carte ne propose plus rien. La home du site ne
+      bouge pas ce jour-là (deux bannières expirées) : à contrôler pour de
+      bon à la prochaine bannière insérée, qui doit s'y montrer dans les
+      10 min. À
+      essayer aussi : « ＋ bannière », deux lettres dans la recherche, un
+      perso choisi, « Enregistrer » sans dates → refus situé (« refusée »,
+      rien d'écrit). À juger : (1) un échec de R2 rend l'enregistrement en
+      ÉCHEC dans le journal (déplié, rouge) alors que le fichier est écrit et
+      committé — comme l'admin l'affichait en rouge ; (2) le message de
+      commit nomme aussi une bannière RETIRÉE ; (3) une fenêtre du jeu sans
+      date lisible (les SEASONAL_SELECTION n'ont pas de fin en table, les
+      DEMIURGE aucune date) n'est ni proposée ni comparée.
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
       l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne

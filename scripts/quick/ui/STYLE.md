@@ -4,7 +4,7 @@
 > sobriété, pas de web font. Ce fichier dit d'où viennent les jetons, ce que
 > fait chaque composant de `quick.css` (un exemple de markup chacun), les
 > règles de mise en page, et le croquis de chaque onglet tel qu'il est rendu
-> (les six sont à la charte depuis le 07/10/2026 ; les écarts aux croquis de
+> (les six de départ sont à la charte depuis le 07/10/2026 ; les écarts aux croquis de
 > départ sont dans les entrées DONE des lots B28, B29 et C6). La maquette de
 > départ est l'artefact Claude Design de Sevih du 07/10/2026 (sept planches) ;
 > ici, c'est ce que le code rend. Une section nouvelle (éditeurs, guides,
@@ -216,7 +216,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Gear reco et Noms : le compte de changements
+La barre d'enregistrement de Rangs, Gear reco, Noms et Bannières : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -318,6 +318,42 @@ Note repliée (état retenu) : ses deux cartes se rangent en une ligne au-dessus
 de l'éditeur, qui prend toute la largeur. Propres à l'onglet, dans
 `tabs/discord.css` faute de composant commun : `.d-grp` (boutons d'outil
 accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).
+
+## Publication — croquis
+
+### Bannières (1200 px, fait — B35)
+
+Les fenêtres de recrutement de la home (`banner.json`), et ce que la table du
+jeu en sait de plus. Croquis du rendu :
+
+```
+.head  Bannières — Les fenêtres de recrutement que montre la home. Rien ne s'écrit à la saisie…
+.savebar   2 changements · 1 refus   [Annuler] [Enregistrer]   (la liste entière part : fichier, R2, commit)
+.card « Dans le jeu »  card-head : titre · badge edit « 2 à insérer » · badge warn « 1 à aligner » … [Tout insérer] (absent sans rien d'insérable)
+   une ligne par fenêtre (.b-win), les manquantes puis les dérives de fin :
+     visage 32 px · nom EN du roster · badge du type (pickup, seasonal, fes, « seasonal · sélection »…) · « 2026-10-20 → 2026-11-17 » · badge de statut … [Insérer]
+     un perso hors du roster du site : son id, badge ko « hors roster », [Insérer] éteint
+     visage · nom · badge du type · « 2026-09-08 → fin curée 2026-10-05, jeu 2026-10-06 » … [Aligner sur le jeu]
+   rien à proposer : « Les bannières du jeu sont toutes dans la liste. » ; sans table du jeu : le message du serveur, en texte atténué (pas en rouge)
+   insérer et aligner sont des changements EN ATTENTE : la ligne quitte la carte et entre dans la liste, rien ne s'écrit avant « Enregistrer »
+.card  card-head : « 52 bannières » · badges « 2 actives » · « 1 à venir » · « 1 brouillon » · « 49 expirées » … [☑ masquer les expirées] [＋ bannière]
+   table, récent → ancien :  visage 32 px + [nom affiché 30ch] | [début, date] | [fin, date] | statut | ✕
+     statut : badge ok « active · 12 j restants » (« dernier jour » à zéro) · badge upcoming « à venir · dans 5 j » · badge expired « expirée » (ligne à 50 %) · badge warn « brouillon » (sans dates)
+              puis badge edit « nouvelle » ou « modifiée », et badge ko « refusée » (`title` = le refus ; les champs de la ligne bordés de rouge)
+     « masquer les expirées » est coché d'office ; une ligne expirée qui porte un changement ou un refus reste à l'écran
+     « ＋ bannière » pose une ligne en tête : [Chercher un perso…] et sa liste de suggestions du roster (.picker + .results, à partir de deux lettres, ceux qui commencent par la saisie d'abord ; Entrée prend la première) ; le perso choisi, la ligne montre son visage et son nom prérempli, sans dates = brouillon
+   .empty « Aucune bannière active ou à venir — 50 expirées masquées. »
+```
+
+Le diff vient du serveur (`/api/banners/state` : `missing`, `drift`), la page
+n'y retire que ce que la liste en cours porte déjà. Le statut se lit au jour
+UTC du serveur (`today`), la règle de la home. Une frappe ne redessine pas la
+ligne (le champ garde le curseur) : son statut, le résumé, la carte du jeu et
+la savebar suivent. La table ne défile en largeur que sous 760 px — au-dessus,
+la liste de suggestions sort de la table au lieu d'y être rognée. La cellule
+du ✕ est `td.b-del`, pas `td.actions` : `.actions` est une rangée flex, et une
+cellule qui n'en est plus une décale son filet. Quitter l'onglet avec des
+changements en attente demande confirmation (`canLeave`).
 
 ## Outils — croquis
 

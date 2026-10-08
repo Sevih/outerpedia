@@ -41,6 +41,12 @@
  * jour n'a aucun perso « à traiter », et il bouge —, et aucun test n'écrit dans
  * `data/curated/`. Seul le roster est réel (les noms complets de `2000085`).
  *
+ * Et contrat de l'onglet « Bannières » — `diffBanners` (ce que la table du jeu
+ * sait de plus que `banner.json`, pur), `bannersState` et `saveBannerList`. La
+ * table du jeu n'est JAMAIS lue ici (la suite tourne sans `.gamedata`) : ses
+ * lignes, le fichier curé et le jour sont INJECTÉS, comme les trois écritures
+ * (le store, R2, git). Seul le roster est réel.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -59,13 +65,19 @@ import type { CharacterCurated, GearBuild, LocalizedText } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { getCharacterListItems } from '@/lib/data/characters';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
+import { validateBanners, type Banner } from '@/lib/data/promo-rules';
 import { LANGS } from '@/lib/i18n/config';
+import type { RecruitWindow } from '@datagen/generators/recruit';
 import {
+  BANNER_LOOKBACK_DAYS,
+  NO_GAME_DATA,
   NO_TRANSLATE_KEY,
   addComics,
+  bannersState,
   checkGearBuilds,
   comicLangOf,
   commitPaths,
+  diffBanners,
   fitNames,
   gearRecoState,
   gitState,
@@ -74,9 +86,12 @@ import {
   planRankChanges,
   previewGearBuilds,
   pushMain,
+  saveBannerList,
   saveGearReco,
   saveNames,
   translateNotes,
+  type BannersDeps,
+  type BannersDisk,
   type ComicsDeps,
   type ComicUpload,
   type GearCatalog,
@@ -1677,6 +1692,364 @@ describe('saveNames — lectures et écritures injectées', () => {
     const out = await saveNames([change(one.id, { short: { en: 'A' } })], fake);
 
     expect(out).toMatchObject({ ok: false, refused: [], saved: [one.id] });
+    expect(out.log.at(-1)).toBe('git commit a échoué');
+  });
+});
+
+describe('diffBanners — ce que la table du jeu sait de plus que banner.json', () => {
+  const TODAY = '2026-10-08';
+  const banner = (id: string, start: string, end: string, name = id): Banner => ({
+    id,
+    name,
+    start,
+    end,
+  });
+  const win = (
+    characterId: string,
+    start: string,
+    end: string,
+    type = 'pickup',
+  ): RecruitWindow => ({ characterId, type, start, end });
+
+  it('`missing` : une fenêtre du jeu dont (perso, début) n’est dans aucune bannière', () => {
+    const game = [win('1', '2026-09-22', '2026-10-20'), win('2', '2026-10-20', '2026-11-17')];
+    expect(diffBanners([banner('1', '2026-09-22', '2026-10-20')], game, TODAY)).toEqual({
+      missing: [win('2', '2026-10-20', '2026-11-17')],
+      drift: [],
+    });
+  });
+
+  it('pas `missing` quand (perso, début) existe — même perso, autre début : un rerun, proposé', () => {
+    const curated = [banner('1', '2026-09-22', '2026-10-20')];
+    expect(diffBanners(curated, [win('1', '2026-09-22', '2026-10-20')], TODAY).missing).toEqual([]);
+    expect(
+      diffBanners(curated, [win('1', '2026-10-01', '2026-10-29')], TODAY).missing.map(
+        (w) => w.start,
+      ),
+    ).toEqual(['2026-10-01']);
+  });
+
+  it('`drift` : même (perso, début), fins différentes — le nom est celui du fichier', () => {
+    const curated = [
+      banner('2000122', '2026-09-08', '2026-10-05', 'Titia'),
+      banner('2000118', '2026-07-28', '2026-09-07', 'Lambda'),
+      banner('2700019', '2026-09-22', '2026-10-20', 'Resonance Rin'),
+    ];
+    const game = [
+      win('2000118', '2026-07-28', '2026-09-08'),
+      win('2000122', '2026-09-08', '2026-10-06'),
+      win('2700019', '2026-09-22', '2026-10-20'),
+    ];
+    expect(diffBanners(curated, game, TODAY)).toEqual({
+      missing: [],
+      drift: [
+        {
+          id: '2000122',
+          name: 'Titia',
+          start: '2026-09-08',
+          curated: '2026-10-05',
+          game: '2026-10-06',
+          type: 'pickup',
+        },
+        {
+          id: '2000118',
+          name: 'Lambda',
+          start: '2026-07-28',
+          curated: '2026-09-07',
+          game: '2026-09-08',
+          type: 'pickup',
+        },
+      ],
+    });
+  });
+
+  it('une bannière curée absente de la table n’est pas un écart : les tables purgent', () => {
+    expect(diffBanners([banner('9', '2024-01-02', '2024-01-30')], [], TODAY)).toEqual({
+      missing: [],
+      drift: [],
+    });
+  });
+
+  it(`le seuil : finie depuis plus de ${BANNER_LOOKBACK_DAYS} jours, une fenêtre n’est plus proposée`, () => {
+    expect(BANNER_LOOKBACK_DAYS).toBe(60);
+    // 2026-10-08 − 60 jours = 2026-08-09.
+    const game = [
+      win('old', '2026-07-12', '2026-08-08'),
+      win('edge', '2026-07-13', '2026-08-09'),
+      win('live', '2026-09-22', '2026-10-20'),
+      win('soon', '2026-10-20', '2026-11-17'),
+    ];
+    // Récentes d'abord, comme la liste curée.
+    expect(diffBanners([], game, TODAY).missing.map((w) => w.characterId)).toEqual([
+      'soon',
+      'live',
+      'edge',
+    ]);
+    // Le seuil ne vaut que pour l'insertion : une dérive ancienne reste dite.
+    expect(
+      diffBanners([banner('old', '2026-07-12', '2026-08-07')], game, TODAY).drift.map((d) => d.id),
+    ).toEqual(['old']);
+  });
+
+  it('une fenêtre sans dates lisibles ne se compare pas : ni proposée, ni une dérive', () => {
+    const game = [
+      // DEMIURGE : ni début ni fin. SEASONAL_SELECTION : pas de fin.
+      win('1', '0', '0', 'demiurge'),
+      win('2', '2026-02-24', '0', 'seasonal_selection'),
+      win('3', '2026-09-30', '0', 'seasonal_selection'),
+    ];
+    expect(diffBanners([banner('2', '2026-02-24', '2026-03-26')], game, TODAY)).toEqual({
+      missing: [],
+      drift: [],
+    });
+  });
+
+  it('deux groupes pour le même (perso, début) : une proposition, la fin la plus tardive', () => {
+    const game = [win('1', '2026-09-22', '2026-10-06'), win('1', '2026-09-22', '2026-10-20')];
+    expect(diffBanners([], game, TODAY).missing).toEqual([win('1', '2026-09-22', '2026-10-20')]);
+    // Une fin qui est celle d'UN des deux groupes n'est pas une dérive.
+    expect(diffBanners([banner('1', '2026-09-22', '2026-10-06')], game, TODAY).drift).toEqual([]);
+    expect(
+      diffBanners([banner('1', '2026-09-22', '2026-10-01')], game, TODAY).drift.map((d) => d.game),
+    ).toEqual(['2026-10-20']);
+  });
+});
+
+describe('bannersState — le fichier curé, le roster, la table du jeu injectée', () => {
+  // Deux persos réels : le roster du site dit qui est « connu ».
+  const [one, two] = getCharacterListItems();
+  const CURATED: Banner[] = [
+    { id: one.id, name: 'Curated name', start: '2026-09-08', end: '2026-10-05' },
+  ];
+  const group = (PickupID: string, StartDate: string, EndDate: string, RecruitType = 'PICKUP') => ({
+    ID: `${RecruitType}-${PickupID}`,
+    RecruitType,
+    PickupID,
+    StartDate,
+    EndDate,
+  });
+  const disk = (recruitGroups: BannersDisk['recruitGroups']): BannersDisk => ({
+    loadBanners: () => CURATED,
+    recruitGroups,
+    today: () => '2026-10-08',
+  });
+
+  it('rend le fichier tel quel, le jour, le roster par nom, et le diff contre la table', () => {
+    const state = bannersState(
+      disk(() => [
+        group(one.id, '2026-09-08  00:00:00', '2026-10-06  00:00:00'),
+        group(two.id, '2026-10-20  00:00:00', '2026-11-17  00:00:00', 'SEASONAL'),
+        group('2999999', '2026-10-20  00:00:00', '2026-11-17  00:00:00'),
+        { ID: '1', RecruitType: 'CUSTOM', StartDate: '2023-05-23', EndDate: '0' },
+      ]),
+    );
+    expect(state.banners).toBe(CURATED);
+    expect(state.today).toBe('2026-10-08');
+    expect(state.roster).toHaveLength(getCharacterListItems().length);
+    expect(state.roster.map((c) => c.name)).toEqual(
+      state.roster.map((c) => c.name).sort((a, b) => a.localeCompare(b)),
+    );
+    expect(Object.keys(state.roster[0])).toEqual(['id', 'name']);
+    expect(state).not.toHaveProperty('gameError');
+
+    // Trois fenêtres (le CUSTOM n'a pas de vedette), l'inconnu du roster marqué.
+    expect(state.game?.map((w) => [w.characterId, w.type, w.unknown ?? false])).toEqual([
+      [one.id, 'pickup', false],
+      [two.id, 'seasonal', false],
+      ['2999999', 'pickup', true],
+    ]);
+    expect(state.missing.map((w) => w.characterId)).toEqual([two.id, '2999999']);
+    expect(state.drift).toEqual([
+      {
+        id: one.id,
+        name: 'Curated name',
+        start: '2026-09-08',
+        curated: '2026-10-05',
+        game: '2026-10-06',
+        type: 'pickup',
+      },
+    ]);
+  });
+
+  it('`game: null` et `gameError` quand la table manque — jamais une erreur', () => {
+    const state = bannersState(disk(() => null));
+    expect(state.game).toBeNull();
+    expect(state.gameError).toBe(NO_GAME_DATA);
+    expect(state.gameError).toBe('Pas de données du jeu : lancer un patch (pull) d’abord.');
+    expect(state.missing).toEqual([]);
+    expect(state.drift).toEqual([]);
+    // La liste curée s'édite quand même.
+    expect(state.banners).toBe(CURATED);
+    expect(state.roster.length).toBeGreaterThan(0);
+  });
+
+  it('une table illisible est dite, pas levée', () => {
+    const state = bannersState(
+      disk(() => {
+        throw new Error('Unexpected end of JSON input');
+      }),
+    );
+    expect(state.game).toBeNull();
+    expect(state.gameError).toBe('RecruitGroupTemplet illisible : Unexpected end of JSON input');
+  });
+});
+
+describe('saveBannerList — écritures injectées', () => {
+  const RIN: Banner = {
+    id: '2700019',
+    name: 'Resonance Rin',
+    start: '2026-09-22',
+    end: '2026-10-20',
+  };
+  const TITIA: Banner = { id: '2000122', name: 'Titia', start: '2026-09-08', end: '2026-10-06' };
+
+  /**
+   * Les trois écritures, factices : elles notent leur ordre. `saveBanners` tient
+   * le contrat du store — la VRAIE validation, et rien d'écrit si elle refuse.
+   */
+  function deps(
+    over: { publish?: Awaited<ReturnType<BannersDeps['publishBanners']>>; git?: Outcome } = {},
+  ) {
+    const calls = {
+      order: [] as string[],
+      written: [] as Banner[][],
+      git: [] as [string[], string][],
+    };
+    const fake: BannersDeps = {
+      saveBanners: async (list) => {
+        const errors = validateBanners(list);
+        if (errors.length) return errors;
+        calls.order.push('fichier');
+        calls.written.push(list);
+        return [];
+      },
+      publishBanners: async () => {
+        calls.order.push('R2');
+        return over.publish ?? { ok: true, purged: true };
+      },
+      commitPaths: (paths, message) => {
+        calls.order.push('commit');
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  it('fichier → R2 → commit, sur le seul banner.json, la liste entière', async () => {
+    const { calls, fake } = deps();
+    const steps: string[] = [];
+    const out = await saveBannerList([RIN, TITIA], ['Titia'], fake, (line, doing) =>
+      steps.push(`${doing ? '… ' : ''}${line}`),
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: [
+        '2 bannières écrites dans data/curated/banner.json.',
+        'publié sur R2 + edge purgé — en ligne en ≤ 10 min.',
+        'git : fait',
+      ],
+      issues: [],
+      written: true,
+    });
+    expect(calls.order).toEqual(['fichier', 'R2', 'commit']);
+    expect(calls.written).toEqual([[RIN, TITIA]]);
+    expect(calls.git).toEqual([[['data/curated/banner.json'], 'chore(banner): Titia']]);
+    // Le journal suit au fil de l'eau, l'étape lente annoncée avant de finir.
+    expect(steps).toEqual([
+      '2 bannières écrites dans data/curated/banner.json.',
+      '… publication sur R2, puis purge de l’edge',
+      'publié sur R2 + edge purgé — en ligne en ≤ 10 min.',
+    ]);
+  });
+
+  it('n’écrit que les quatre champs du fichier : les clés de la page restent à la page', async () => {
+    const { calls, fake } = deps();
+    await saveBannerList([{ ...RIN, key: 7, was: null } as Banner], ['Resonance Rin'], fake);
+    expect(calls.written).toEqual([[RIN]]);
+  });
+
+  it('R2 en échec : une ligne du journal, le commit est fait — et le résultat le dit', async () => {
+    const { calls, fake } = deps({
+      publish: { ok: false, purged: false, error: 'R2_* absents de .env.local' },
+    });
+    const out = await saveBannerList([RIN], ['Resonance Rin'], fake);
+
+    expect(calls.order).toEqual(['fichier', 'R2', 'commit']);
+    expect(out).toMatchObject({ ok: false, written: true, issues: [] });
+    expect(out.log).toEqual([
+      '1 bannière écrite dans data/curated/banner.json.',
+      'R2 NON PUBLIÉ : R2_* absents de .env.local',
+      'git : fait',
+      'R2 non publié : la home ne suivra qu’au prochain enregistrement, ou à `pnpm commit`.',
+    ]);
+  });
+
+  it('R2 publié sans purge de l’edge : dit, et ce n’est pas un échec', async () => {
+    const { fake } = deps({ publish: { ok: true, purged: false, error: 'jeton absent' } });
+    const out = await saveBannerList([RIN], ['Resonance Rin'], fake);
+    expect(out.ok).toBe(true);
+    expect(out.log[1]).toBe('publié sur R2 (jeton absent) — en ligne en ≤ 10 min.');
+  });
+
+  it('validation en échec : rien d’écrit, ni publié, ni committé — l’erreur située', async () => {
+    const { calls, fake } = deps();
+    const draft: Banner = { id: '2000122', name: 'Titia', start: '', end: '' };
+    const out = await saveBannerList([RIN, draft, { ...RIN, id: '' }], ['Titia'], fake);
+
+    expect(calls.order).toEqual([]);
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'REFUSÉ — Banner 2 (Titia): invalid start date (YYYY-MM-DD expected).',
+        'REFUSÉ — Banner 2 (Titia): invalid end date (YYYY-MM-DD expected).',
+        'REFUSÉ — Banner 3 (Resonance Rin): character id is required.',
+      ],
+      issues: [
+        { index: 1, message: 'Banner 2 (Titia): invalid start date (YYYY-MM-DD expected).' },
+        { index: 1, message: 'Banner 2 (Titia): invalid end date (YYYY-MM-DD expected).' },
+        { index: 2, message: 'Banner 3 (Resonance Rin): character id is required.' },
+      ],
+      written: false,
+    });
+  });
+
+  it('une liste qui n’en est pas une : refusée avant le store', async () => {
+    const { calls, fake } = deps();
+    const out = await saveBannerList(undefined as unknown as Banner[], [], fake);
+    expect(out).toEqual({
+      ok: false,
+      log: ['Liste de bannières attendue.'],
+      issues: [],
+      written: false,
+    });
+    expect(calls.order).toEqual([]);
+  });
+
+  it('le message de commit : un nom, trois noms, puis le compte', async () => {
+    const message = async (changed: string[]) => {
+      const { calls, fake } = deps();
+      await saveBannerList([RIN], changed, fake);
+      return calls.git[0][1];
+    };
+    expect(await message(['Titia'])).toBe('chore(banner): Titia');
+    expect(await message(['Lambda', 'Titia', 'Resonance Rin'])).toBe(
+      'chore(banner): Lambda, Titia, Resonance Rin',
+    );
+    expect(await message(['Lambda', 'Titia', 'Resonance Rin', 'Caren'])).toBe(
+      'chore(banner): 4 bannières',
+    );
+    // Deux fenêtres du même perso : nommé une fois.
+    expect(await message(['Resonance Rin', 'Resonance Rin'])).toBe('chore(banner): Resonance Rin');
+    // La page ne nomme rien : le message reste lisible.
+    expect(await message([])).toBe('chore(banner): mise à jour des bannières');
+  });
+
+  it('un commit refusé est un échec d’après écriture : le disque porte la liste', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué'] } });
+    const out = await saveBannerList([RIN], ['Resonance Rin'], fake);
+    expect(out).toMatchObject({ ok: false, written: true });
     expect(out.log.at(-1)).toBe('git commit a échoué');
   });
 });

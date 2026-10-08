@@ -45,7 +45,10 @@
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
 08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
 existant, période ou récompenses : supprimer puis recréer, ou lot A pour
-l'ajouter), 4-comics, Vidéos, Discord.
+l'ajouter), Bannières (= Tools › Banner, étape 5, lot B35 : la liste de
+`banner.json` éditée en place et, au-dessus, la détection dans la table du jeu
+`RecruitGroupTemplet` — ce qui manque s'insère d'un clic, une fin différente
+s'aligne ; lien retiré du menu admin le 08/10), 4-comics, Vidéos, Discord.
 Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
 un exemplaire).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
@@ -59,10 +62,10 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 `PatchCard` de l'admin les font. Les étapes 18 et 21 remontent donc juste
 après les Bannières (5), avant Events :
 
-5 Bannières → 18 Tableau de bord → 21 Patch → 6 Events → 7 Changelog →
-8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides → 19 et 20 Extractor
-(revue par entité, intégration) → 22 Clôture. La numérotation des étapes ne
-change pas.
+5 Bannières (fait, B35) → 18 Tableau de bord → 21 Patch → 6 Events →
+7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides → 19 et 20
+Extractor (revue par entité, intégration) → 22 Clôture. La numérotation des
+étapes ne change pas.
 
 - **18 Tableau de bord** = l'accueil de quick, premier onglet du groupe
   Données (ou un groupe « Accueil » en tête) : l'inbox de l'admin
@@ -70,7 +73,8 @@ change pas.
   morts, rapport d'assets — « rien à l'écran » = « rien à faire »), l'état
   git (commits à pousser, retard), la version du jeu (`game-version.json`)
   contre celle du client installé, les bannières qui finissent ou qui
-  commencent (depuis la table du jeu, cf. 5), les codes promo qui expirent.
+  commencent (depuis la table du jeu : `recruitWindows` de
+  `datagen/generators/recruit.ts`, lot B35), les codes promo qui expirent.
 - **21 Patch** = la chaîne `datagen/refresh.ts` lancée de quick, étape par
   étape dans le journal : pull (Steam, Android en secours) → dump si le code
   a changé → extract → convert → build → promote en DRY (le diff par
@@ -96,15 +100,11 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    liste + fiche `[id]`
    - Agacements : ça devrais etre dans l'editor de character
 
-5. **Tools › Banner**
-   `BannersEditor`
-   - Agacements : on devrait pouvoir detecter les bannieres active (et faire des auto insertion)
-   - Précisé le 08/10 : les bannières arrivent avec un patch ; la table du
-     jeu `RecruitGroupTemplet` porte TOUTES les fenêtres (`PickupID`,
-     `StartDate`, `EndDate`, `RecruitType` PICKUP / SEASONAL / OUTER_FES /
-     selections / DEMIURGE / ELEMENTAL) et `banner.json` les suit une à une
-     (id + début) — deux fins tapées à la main diffèrent d'un jour de la
-     table (Lambda, Titia). Lot B35.
+5. **Tools › Banner** — FAIT, lot B35 : l'onglet « Bannières » (cf. « Déjà
+   dans quick »). L'agacement de Sevih (« on devrait pouvoir détecter les
+   bannières actives et faire des auto-insertions ») y est corrigé par la
+   détection dans `RecruitGroupTemplet`. L'entrée reste pour que la
+   numérotation des suivantes ne bouge pas.
 
 6. **Tools › Events**
    `EventsEditor` (451 l.)

@@ -757,8 +757,8 @@ td.dim {
 }
 
 /* ---------------------------------------------------------------- savebar
-   La barre d'enregistrement de Rangs et Gear reco : le compte de changements,
-   Annuler, Enregistrer ; collante en haut de l'onglet. */
+   La barre d'enregistrement de Rangs, Gear reco, Noms et Bannières : le compte
+   de changements, Annuler, Enregistrer ; collante en haut de l'onglet. */
 .savebar {
   position: sticky;
   top: 0;

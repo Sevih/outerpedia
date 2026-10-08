@@ -1,0 +1,48 @@
+<section id="tab-banners" hidden>
+  <div class="head">
+    <h2>Bannières</h2>
+    <p class="hint">
+      Les fenêtres de recrutement que montre la home. Rien ne s'écrit à la saisie : « Enregistrer »
+      publie la liste sur R2 (en ligne en ≤ 10 min), puis committe — « Pousser », dans la barre
+      d'en-tête, lance la CI qui rebâtit le site derrière.
+    </p>
+  </div>
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
+    <span id="b-count"></span>
+    <button class="btn ghost" id="b-reset" disabled>Annuler</button>
+    <button class="btn primary" id="b-save" disabled>Enregistrer</button>
+  </div>
+
+  <div class="card" aria-label="Dans le jeu">
+    <div class="card-head">
+      <strong>Dans le jeu</strong>
+      <span id="b-game-count"></span>
+      <button class="btn ghost sm" id="b-insert-all" hidden>Tout insérer</button>
+    </div>
+    <div class="b-game" id="b-game"></div>
+  </div>
+
+  <div class="card" aria-label="Bannières curées">
+    <div class="card-head">
+      <span id="b-summary"></span>
+      <label class="check"><input type="checkbox" id="b-hide" checked />masquer les expirées</label>
+      <button class="btn ghost sm" id="b-add">＋ bannière</button>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Perso et nom affiché</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Statut</th>
+            <th><span class="sr">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody id="b-list"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="b-empty" hidden></div>
+  </div>
+</section>

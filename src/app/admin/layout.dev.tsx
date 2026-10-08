@@ -67,7 +67,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         // jusqu'au retrait de l'admin.
         // Promo code : porté dans quick (Codes promo), lien retiré le 08/10 —
         // la page reste joignable par son URL jusqu'au retrait de l'admin.
-        { label: 'Banner', href: '/admin/tools/banners' },
+        // Banner : porté dans quick (Publication › Bannières), lien retiré le
+        // 08/10 — la page reste joignable par son URL jusqu'au retrait de l'admin.
         { label: 'Changelog', href: '/admin/tools/changelog' },
         { label: 'Events', href: '/admin/tools/events' },
         { label: 'Game data', href: '/admin/tools/gamedata' },

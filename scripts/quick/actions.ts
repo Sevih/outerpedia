@@ -1,16 +1,17 @@
 /**
- * quick/actions — les SEPT gestes du quotidien, sortis du panneau admin.
+ * quick/actions — les HUIT gestes du quotidien, sortis du panneau admin.
  *
- * Mettre à jour un code promo, déposer une 4-comic, ajouter une vidéo, régler un
- * rang, une reco d'équipement ou un nom court ne demandait jusqu'ici RIEN de
- * moins qu'un `pnpm dev` complet : `clean:all`
+ * Mettre à jour un code promo ou une bannière, déposer une 4-comic, ajouter une
+ * vidéo, régler un rang, une reco d'équipement ou un nom court ne demandait
+ * jusqu'ici RIEN de moins qu'un `pnpm dev` complet : `clean:all`
  * (suppression de `node_modules` + réinstallation) puis `dev-refresh` (pull
  * Steam, build de la proposition, collecte des images), pour finir par cliquer
  * dans l'admin. Des minutes de pipeline de données pour changer quatre lignes
  * de JSON.
  *
  * Ce module ne RÉIMPLÉMENTE rien : il rappelle les mêmes stores que les routes
- * admin (`loadCouponsForEdit`/`saveCouponsLive`, `collectComics`, `upsertCharacterCurated`,
+ * admin (`loadCouponsForEdit`/`saveCouponsLive`, `saveBanners`/`publishBanners`,
+ * `collectComics`, `upsertCharacterCurated`,
  * `upsertEeCurated`, `upsertGearReco`, `fetchMeta`…), sans Next et sans serveur de dev. Les alias `@/` et `@datagen/`
  * sont résolus par tsx via tsconfig.
  *
@@ -19,6 +20,9 @@
  *     Discord) ; l'écran la lit, puis l'écrit conditionnellement et purge
  *     l'edge (`lib/data/live-coupons`) → en ligne tout de suite, sans build.
  *     `coupons.json` committé n'en est que l'instantané ;
+ *   - bannières : `banner.json` est écrit ici, puis poussé sur R2 et l'edge
+ *     purgé (`runtime-publish`) — la home le lit en runtime → en ligne en
+ *     ≤ 10 min, sans build ;
  *   - 4-comics : la galerie lit le manifeste R2 à la requête (cf. le docblock de
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
@@ -27,7 +31,7 @@
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
  *     sous les cartes, le champ recherche des listes de persos).
  *
- * Les SIX COMMITTENT, sans rien demander, et aucun ne pousse (cf.
+ * Les SEPT COMMITTENT, sans rien demander, et aucun ne pousse (cf.
  * `commitPaths`) : pousser à chaque geste lançait la CI à chaque geste. Le push
  * est un geste à part, le bouton « Pousser » de l'en-tête (`pushMain`), qui dit
  * combien de commits attendent (`gitState`). Il part quand même avec la CI : R2
@@ -35,13 +39,17 @@
  * — le site bâti garde ses propres copies de tout ça.
  */
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import {
+  loadBanners,
   loadCouponsForEdit,
+  saveBanners,
   saveCouponsLive,
+  type Banner,
   type PromoCode,
 } from '@/lib/admin/promo-banner-store';
+import { publishBanners, type RuntimePublishResult } from '@/lib/admin/runtime-publish';
 import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
@@ -97,6 +105,8 @@ import { pushEditorial } from '@datagen/assets/editorial';
 import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
 import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
+import { recruitWindows, type RecruitWindow } from '@datagen/generators/recruit';
+import { loadTable, tablePath, type Row } from '@datagen/lib/tables';
 import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
 /** Journal rendu tel quel dans l'interface (une ligne = une étape). */
@@ -313,6 +323,248 @@ export async function saveCouponList(
     report,
   );
   return { ok: commit.ok, etag: res.etag, log: [...log, ...commit.log] };
+}
+
+// -------------------------------------------------------------- bannières ----
+
+/** Le seul fichier que l'onglet « Bannières » écrit et committe. */
+const BANNER_PATH = 'data/curated/banner.json';
+
+/**
+ * Jusqu'où le passé intéresse : une fenêtre du jeu finie depuis plus longtemps
+ * n'est pas proposée à l'insertion. `banner.json` ne suit pas tout l'historique
+ * de la table — au 08/10/2026 elle porte 118 fenêtres qu'il n'a pas, toutes
+ * anciennes.
+ */
+export const BANNER_LOOKBACK_DAYS = 60;
+
+export const NO_GAME_DATA = 'Pas de données du jeu : lancer un patch (pull) d’abord.';
+
+/** Un jour du calendrier, comme `banner.json` et `isoDate` les écrivent. */
+const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;
+
+/** `day` décalé de `days` jours, en jours UTC. */
+const shiftDay = (day: string, days: number): string =>
+  new Date(Date.parse(`${day}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10);
+
+/** Une bannière curée dont la fin n'est pas celle de la table. */
+export interface BannerDrift {
+  id: string;
+  name: string;
+  start: string;
+  /** La fin de `banner.json`. */
+  curated: string;
+  /** Celle de la table. */
+  game: string;
+  type: string;
+}
+
+export interface BannerDiff {
+  missing: RecruitWindow[];
+  drift: BannerDrift[];
+}
+
+/**
+ * Ce que la table du jeu sait et que `banner.json` ne dit pas — PURE. Une
+ * bannière se reconnaît à son perso et à son début, comme le fichier les suit :
+ *
+ *   - `missing` : une fenêtre du jeu sans bannière curée de même (perso, début),
+ *     si elle n'est pas finie depuis plus de `BANNER_LOOKBACK_DAYS` jours —
+ *     récentes d'abord ;
+ *   - `drift` : même (perso, début) des deux côtés, fins différentes.
+ *
+ * Une bannière curée absente de la table n'est PAS un écart : VAGames purge les
+ * vieilles lignes, et une bannière se pré-saisit avant que le patch l'apporte.
+ * Une fenêtre sans dates lisibles (DEMIURGE, la fin d'une SEASONAL_SELECTION —
+ * cf. `recruitWindows`) ne se compare pas : elle n'est ni proposée ni un écart,
+ * « aligner » une fin sur `0` écrirait une bannière que `validateBanners` refuse.
+ */
+export function diffBanners(curated: Banner[], game: RecruitWindow[], today: string): BannerDiff {
+  const key = (id: string, start: string): string => `${id} @ ${start}`;
+  // Deux groupes peuvent porter le même (perso, début) : la fin la plus tardive
+  // parle pour eux.
+  const windows = new Map<string, RecruitWindow[]>();
+  for (const w of game) {
+    if (!ISO_DAY.test(w.start) || !ISO_DAY.test(w.end)) continue;
+    const k = key(w.characterId, w.start);
+    windows.set(k, [...(windows.get(k) ?? []), w]);
+  }
+  const latest = (list: RecruitWindow[]): RecruitWindow =>
+    list.reduce((a, b) => (b.end > a.end ? b : a));
+
+  const known = new Set(curated.map((b) => key(b.id, b.start)));
+  const floor = shiftDay(today, -BANNER_LOOKBACK_DAYS);
+  const missing = [...windows]
+    .filter(([k]) => !known.has(k))
+    .map(([, list]) => latest(list))
+    .filter((w) => w.end >= floor)
+    .sort((a, b) => b.start.localeCompare(a.start) || a.characterId.localeCompare(b.characterId));
+
+  const drift = curated.flatMap((b): BannerDrift[] => {
+    const list = windows.get(key(b.id, b.start));
+    if (!list || list.some((w) => w.end === b.end)) return [];
+    const w = latest(list);
+    return [{ id: b.id, name: b.name, start: b.start, curated: b.end, game: w.end, type: w.type }];
+  });
+  return { missing, drift };
+}
+
+/** Les lectures de l'onglet « Bannières », injectées : le curé, la table, le jour. */
+export interface BannersDisk {
+  loadBanners: () => Banner[];
+  /** Les lignes de `RecruitGroupTemplet` — `null` tant qu'aucun pull ne l'a posée. */
+  recruitGroups: () => Row[] | null;
+  /** Le jour UTC, la règle de la home (`todayUTC` de `lib/home`). */
+  today: () => string;
+}
+
+/** Celles de la route : le store de l'admin, `.gamedata/parsed/`, l'horloge. */
+export const BANNERS_DISK: BannersDisk = {
+  loadBanners,
+  recruitGroups: () =>
+    existsSync(tablePath('RecruitGroupTemplet')) ? loadTable('RecruitGroupTemplet') : null,
+  today: () => new Date().toISOString().slice(0, 10),
+};
+
+/**
+ * L'onglet « Bannières » : `banner.json` tel que le disque le porte (pas sa
+ * copie R2), le jour UTC, le roster (id et nom complet anglais — la page
+ * compose le visage de l'id, comme dans Rangs), les fenêtres de la table du jeu
+ * (`game`) et ce qu'elle sait de plus que le fichier (`diffBanners`).
+ *
+ * Un perso de la table absent du roster est `unknown` : pas encore intégré au
+ * site, la home ne saurait pas l'afficher.
+ *
+ * Sans table (`.gamedata/parsed/` jamais tiré) ou sur une table illisible :
+ * `game` à `null` et `gameError`, jamais une erreur de route — la liste curée
+ * s'édite sans la détection.
+ */
+export function bannersState(disk: BannersDisk = BANNERS_DISK) {
+  const banners = disk.loadBanners();
+  const today = disk.today();
+  const roster = getCharacterListItems()
+    .map((c) => ({ id: c.id, name: characterDisplayName(c) }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  let game: RecruitWindow[] | null = null;
+  let gameError: string | undefined;
+  try {
+    const groups = disk.recruitGroups();
+    if (groups) game = recruitWindows(groups, new Set(roster.map((c) => c.id)));
+    else gameError = NO_GAME_DATA;
+  } catch (e: unknown) {
+    gameError = `RecruitGroupTemplet illisible : ${e instanceof Error ? e.message : String(e)}`;
+  }
+
+  return {
+    banners,
+    today,
+    roster,
+    game,
+    ...(gameError ? { gameError } : {}),
+    ...diffBanners(banners, game ?? [], today),
+  };
+}
+
+/** Un refus de `validateBanners`, situé : `index` est le rang dans la liste envoyée. */
+export interface BannerIssue {
+  index: number | null;
+  message: string;
+}
+
+/** Situe un écart de `validateBanners` (« Banner 3 (Titia): invalid end date… »). */
+function locateBannerError(error: string): BannerIssue {
+  const m = /^Banner (\d+) /.exec(error);
+  return { index: m ? Number(m[1]) - 1 : null, message: error };
+}
+
+/** Les trois écritures de `saveBannerList`, injectées : le store, R2, git. */
+export interface BannersDeps {
+  saveBanners: (list: Banner[]) => Promise<string[]>;
+  publishBanners: () => Promise<RuntimePublishResult>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le store et la publication de l'admin, le vrai `commitPaths`. */
+export const BANNERS_DEPS: BannersDeps = { saveBanners, publishBanners, commitPaths };
+
+/** Au-delà, le message de commit compte les bannières au lieu de les nommer. */
+const BANNERS_NAMED = 3;
+
+/** `chore(banner): Lambda, Titia` — ou leur nombre, au-delà de trois. */
+function bannerCommitMessage(changed: string[]): string {
+  const names = [...new Set(changed.map((n) => n.trim()).filter(Boolean))];
+  if (changed.length > BANNERS_NAMED) return `chore(banner): ${changed.length} bannières`;
+  return `chore(banner): ${names.join(', ') || 'mise à jour des bannières'}`;
+}
+
+/**
+ * Enregistre la LISTE complète des bannières (même contrat que la route admin :
+ * l'écran est l'éditeur, il renvoie son état) : `saveBanners` — la validation
+ * de l'admin, puis le fichier —, `publishBanners` (R2 et purge de l'edge), puis
+ * un commit sur ce seul fichier. `changed` nomme les bannières qui ont bougé
+ * (ajoutées, modifiées, retirées) : la page les connaît, le message de commit
+ * les dit.
+ *
+ * Une erreur de validation n'écrit, ne publie ni ne committe RIEN : `issues`
+ * les situe pour la page, le journal les dit.
+ *
+ * Un échec de R2 n'est PAS un refus, comme dans l'admin : le fichier est écrit
+ * et committé quand même, le résultat est en échec (`ok` faux) pour que le
+ * journal se déplie sur la ligne qui le dit. `written` : le disque porte la
+ * liste, la page le relit.
+ */
+export async function saveBannerList(
+  list: Banner[],
+  changed: string[],
+  deps: BannersDeps,
+  report?: Report,
+): Promise<Outcome & { issues: BannerIssue[]; written: boolean }> {
+  if (!Array.isArray(list))
+    return { ok: false, log: ['Liste de bannières attendue.'], issues: [], written: false };
+  // Les quatre champs du fichier, et eux seuls : la page porte aussi ses clés.
+  const banners = list.map((b): Banner => ({
+    id: String(b?.id ?? ''),
+    name: String(b?.name ?? ''),
+    start: String(b?.start ?? ''),
+    end: String(b?.end ?? ''),
+  }));
+
+  const errors = await deps.saveBanners(banners);
+  if (errors.length)
+    return {
+      ok: false,
+      log: errors.map((e) => `REFUSÉ — ${e}`),
+      issues: errors.map(locateBannerError),
+      written: false,
+    };
+
+  const j = journal(report);
+  const n = banners.length;
+  j.done(`${n} bannière${n > 1 ? 's écrites' : ' écrite'} dans ${BANNER_PATH}.`);
+
+  j.doing('publication sur R2, puis purge de l’edge');
+  const pub = await deps.publishBanners();
+  j.done(
+    pub.ok
+      ? `publié sur R2${pub.purged ? ' + edge purgé' : ` (${pub.error ?? 'edge non purgé'})`} — en ligne en ≤ 10 min.`
+      : `R2 NON PUBLIÉ : ${pub.error ?? 'erreur inconnue'}`,
+  );
+
+  const commit = deps.commitPaths([BANNER_PATH], bannerCommitMessage(changed), report);
+  return {
+    ok: commit.ok && pub.ok,
+    log: [
+      ...j.lines,
+      ...commit.log,
+      // En dernier : c'est la ligne que le journal montre en rouge.
+      ...(pub.ok
+        ? []
+        : ['R2 non publié : la home ne suivra qu’au prochain enregistrement, ou à `pnpm commit`.']),
+    ],
+    issues: [],
+    written: true,
+  };
 }
 
 // ---------------------------------------------------------------- comics -----

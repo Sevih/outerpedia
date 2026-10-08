@@ -1,0 +1,112 @@
+/* Onglet « Bannières » : la carte « Dans le jeu » (ce que la table du jeu
+   propose d'insérer ou d'aligner), puis la table des bannières curées. Le
+   reste — carte, `.savebar`, `.btn`, `.badge`, `.picker`, table — vient de
+   `quick.css`. */
+
+/* Le compte de la savebar et ses badges. `.savebar span` pousse à gauche
+   chaque `span` ; ici seul le compte entier l'est. */
+#tab-banners #b-count,
+#tab-banners #b-summary,
+#tab-banners #b-game-count,
+#tab-banners .b-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-banners #b-count * {
+  margin-right: 0;
+}
+
+/* Les en-têtes de carte : l'action à droite. */
+#tab-banners #b-insert-all,
+#tab-banners .card-head .check {
+  margin-left: auto;
+}
+#tab-banners .card-head .check {
+  height: 28px;
+}
+/* `.btn` pose un `display` : sans cette règle, `hidden` ne masquerait rien. */
+#tab-banners #b-insert-all[hidden] {
+  display: none;
+}
+
+/* Dans le jeu : une ligne par fenêtre — le visage, le nom, le type, la
+   période, puis son bouton à droite. */
+#tab-banners .b-wins {
+  list-style: none;
+  margin: 0;
+  padding: 4px 20px;
+}
+#tab-banners .b-win {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-subtle);
+  font-size: 13px;
+}
+#tab-banners .b-win:last-child {
+  border-bottom: none;
+}
+#tab-banners .b-win .btn {
+  margin-left: auto;
+}
+#tab-banners .b-name {
+  font-weight: 600;
+}
+#tab-banners .b-period {
+  color: var(--content-muted);
+  white-space: nowrap;
+}
+#tab-banners .b-period strong {
+  color: var(--content);
+  font-weight: 600;
+}
+/* Rien à proposer, ou pas de données du jeu : une phrase, pas une alerte. */
+#tab-banners .b-note {
+  margin: 0;
+  padding: 14px 20px;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+
+/* La table. Sans défilement sur un écran large : la liste des suggestions
+   d'une ligne ajoutée sort de la table au lieu d'y être rognée. */
+#tab-banners .card .scroll {
+  overflow: visible;
+}
+@media (max-width: 760px) {
+  #tab-banners .card .scroll {
+    overflow-x: auto;
+  }
+}
+#tab-banners .results {
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-banners .face {
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+#tab-banners .b-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#tab-banners td.b-status {
+  white-space: nowrap;
+}
+/* Pas `td.actions` : `.actions` de `quick.css` est une rangée flex, et une
+   cellule qui n'en est plus une décale son filet. */
+#tab-banners td.b-del {
+  width: 48px;
+  text-align: right;
+}
+#tab-banners tr.expired td {
+  opacity: 0.5;
+}
+#tab-banners tr.ko input {
+  border-color: var(--danger);
+}

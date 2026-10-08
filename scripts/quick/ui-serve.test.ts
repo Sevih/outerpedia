@@ -7,7 +7,7 @@ import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
 
 const UI = resolve(import.meta.dirname, 'ui');
-const TABS = ['coupons', 'comics', 'videos', 'ranks', 'gear', 'discord', 'names'];
+const TABS = ['coupons', 'banners', 'comics', 'videos', 'ranks', 'gear', 'discord', 'names'];
 
 /** Comme `server.ts` : `tabs/<nom>.html`, ou `null` s'il manque. */
 const readTab = (name: string): string | null => {
@@ -49,7 +49,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : sept sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : huit sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -183,6 +183,7 @@ describe('shot — la page que le banc de captures photographie', () => {
     for (const path of [
       '/api/push',
       '/api/coupons',
+      '/api/banners',
       '/api/comics',
       '/api/video',
       '/api/ranks',
@@ -848,5 +849,483 @@ describe('Noms — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-names').hidden).toBe(true);
+  });
+});
+
+describe('Bannières — la page, sur le vrai markup', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const TODAY = '2026-10-08';
+  interface Banner {
+    id: string;
+    name: string;
+    start: string;
+    end: string;
+  }
+  interface Win {
+    characterId: string;
+    type: string;
+    start: string;
+    end: string;
+    unknown?: true;
+  }
+  interface State {
+    banners: Banner[];
+    today: string;
+    roster: { id: string; name: string }[];
+    game: Win[] | null;
+    gameError?: string;
+    missing: Win[];
+    drift: (Omit<Banner, 'end'> & { curated: string; game: string; type: string })[];
+  }
+
+  const SUMMER: Win = {
+    characterId: '5',
+    type: 'outer_fes',
+    start: '2026-10-20',
+    end: '2026-11-17',
+  };
+  const GHOST: Win = {
+    characterId: '9',
+    type: 'pickup',
+    start: '2026-10-20',
+    end: '2026-11-17',
+    unknown: true,
+  };
+  /** Quatre bannières, une par statut daté, et ce que le jeu en dit de plus. */
+  const disk = (over: Partial<State> = {}): State => ({
+    banners: [
+      { id: '4', name: 'Dana', start: '2026-10-13', end: '2026-11-10' },
+      { id: '1', name: 'Anna', start: '2026-09-22', end: '2026-10-20' },
+      { id: '2', name: 'Bella', start: '2026-09-08', end: '2026-10-05' },
+      { id: '3', name: 'Carla', start: '2026-07-01', end: '2026-07-28' },
+    ],
+    today: TODAY,
+    roster: [
+      { id: '1', name: 'Anna' },
+      { id: '2', name: 'Bella' },
+      { id: '3', name: 'Carla' },
+      { id: '4', name: 'Dana' },
+      { id: '5', name: 'Summer Anna' },
+    ],
+    game: [SUMMER],
+    missing: [SUMMER, GHOST],
+    drift: [
+      {
+        id: '2',
+        name: 'Bella',
+        start: '2026-09-08',
+        curated: '2026-10-05',
+        game: '2026-10-06',
+        type: 'pickup',
+      },
+    ],
+    ...over,
+  });
+
+  type Call = { path: string; body: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Noms : la VRAIE
+   * coquille assemblée, le vrai `lib.js` et le vrai `tabs/banners.js` (eux
+   * seuls), démarrés par `sections.start()`. `fetch` est factice : il sert
+   * `state`, répond à l'enregistrement et note ce que la page poste.
+   */
+  async function banners(
+    opts: { state?: Partial<State>; saved?: (body: Call['body']) => unknown } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: 'http://localhost:4747/#banners' });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { state: disk(opts.state), reads: 0 };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      if (init) calls.push({ path, body });
+      if (path === '/api/banners/state') {
+        served.reads += 1;
+        return answer(served.state);
+      }
+      if (path === '/api/banners')
+        return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'], issues: [], written: true });
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'banners.js'));
+    lib.sections.start();
+    const settle = () => new Promise((done) => setTimeout(done, 0));
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    const field = (tr: HTMLElement, name: string) =>
+      tr.querySelector(`[data-f="${name}"]`) as HTMLInputElement | null;
+    const texts = (root: HTMLElement, selector: string) =>
+      [...root.querySelectorAll(selector)].map((n) => n.textContent ?? '');
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      served,
+      settle,
+      /** Les lignes de la table : nom, début, fin, badges, classe. */
+      rows: () =>
+        all('#b-list tr').map((tr) => [
+          field(tr, 'name')?.value ?? '(recherche)',
+          field(tr, 'start')?.value,
+          field(tr, 'end')?.value,
+          texts(tr, '.b-status .badge').join(' | '),
+          tr.className,
+        ]),
+      row: (name: string) => {
+        const tr = all('#b-list tr').find((r) => field(r, 'name')?.value === name);
+        if (!tr) throw new Error(`pas de ligne « ${name} »`);
+        return tr;
+      },
+      field,
+      /** Les lignes de « Dans le jeu » : nom, badges, période, bouton, éteint ? */
+      game: () =>
+        all('#b-game .b-win').map((li) => [
+          texts(li, '.b-name')[0],
+          texts(li, '.badge').join(' | '),
+          texts(li, '.b-period')[0],
+          texts(li, 'button')[0],
+          (li.querySelector('button') as HTMLButtonElement).disabled,
+        ]),
+      gameButton: (label: string, name: string) => {
+        const button = all('#b-game .b-win')
+          .find((li) => texts(li, '.b-name')[0] === name)
+          ?.querySelector('button') as HTMLButtonElement | null | undefined;
+        if (button?.textContent !== label) throw new Error(`pas de « ${label} » pour ${name}`);
+        return button;
+      },
+      type: (input: HTMLInputElement, value: string) => {
+        input.value = value;
+        fire(input, 'input');
+      },
+      hideExpired: (on: boolean) => {
+        el('b-hide').checked = on;
+        fire(el('b-hide'), 'change');
+      },
+    };
+  }
+
+  it('la section est servie, dans Publication, après Codes promo — pas `wide`', async () => {
+    const page = await banners();
+    expect(
+      page.all('#tabs [data-group="publication"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['coupons', 'Codes promo'],
+      ['banners', 'Bannières'],
+      ['comics', '4-comics'],
+      ['videos', 'Vidéos'],
+      ['discord', 'Discord'],
+    ]);
+    // `#banners` ouvre la section et son groupe.
+    expect(page.el('tab-banners').hidden).toBe(false);
+    expect(page.el('tab-coupons').hidden).toBe(true);
+    expect(page.all('#groups [data-group="publication"]')[0].getAttribute('aria-selected')).toBe(
+      'true',
+    );
+    expect(page.all('main')[0].classList.contains('wide')).toBe(false);
+  });
+
+  it('le statut par date, au jour du serveur ; les expirées masquées d’office', async () => {
+    const page = await banners();
+    expect(page.el('b-hide').checked).toBe(true);
+    expect(page.rows()).toEqual([
+      ['Dana', '2026-10-13', '2026-11-10', 'à venir · dans 5 j', ''],
+      ['Anna', '2026-09-22', '2026-10-20', 'active · 12 j restants', ''],
+    ]);
+    expect(page.el('b-summary').textContent).toBe(
+      '4 bannières' + '1 active' + '1 à venir' + '2 expirées',
+    );
+    expect(page.all('#b-list .badge').map((b) => b.className)).toEqual([
+      'badge upcoming',
+      'badge active',
+    ]);
+
+    // Décoché : récent → ancien, les expirées atténuées.
+    page.hideExpired(false);
+    expect(page.rows()).toEqual([
+      ['Dana', '2026-10-13', '2026-11-10', 'à venir · dans 5 j', ''],
+      ['Anna', '2026-09-22', '2026-10-20', 'active · 12 j restants', ''],
+      ['Bella', '2026-09-08', '2026-10-05', 'expirée', 'expired'],
+      ['Carla', '2026-07-01', '2026-07-28', 'expirée', 'expired'],
+    ]);
+
+    // La saisie d'une date refait le statut, sans redessiner la ligne.
+    const end = page.field(page.row('Anna'), 'end') as HTMLInputElement;
+    page.type(end, TODAY);
+    expect(page.rows()[1]).toEqual([
+      'Anna',
+      '2026-09-22',
+      TODAY,
+      'active · dernier jour | modifiée',
+      '',
+    ]);
+    expect(page.field(page.row('Anna'), 'end')).toBe(end);
+    page.type(end, '');
+    expect(page.rows()[1][3]).toBe('brouillon | modifiée');
+    expect(page.el('b-count').textContent).toBe('1 changement');
+  });
+
+  it('rien d’actif ni à venir : la carte le dit, avec le compte des expirées masquées', async () => {
+    const page = await banners({
+      state: { banners: disk().banners.slice(2), missing: [], drift: [] },
+    });
+    expect(page.rows()).toEqual([]);
+    expect(page.el('b-empty').hidden).toBe(false);
+    expect(page.el('b-empty').textContent).toBe(
+      'Aucune bannière active ou à venir — 2 expirées masquées.',
+    );
+  });
+
+  it('« Dans le jeu » : les manquantes puis les dérives ; « Insérer » ajoute la ligne et compte un changement', async () => {
+    const page = await banners();
+    expect(page.el('b-game-count').textContent).toBe('2 à insérer' + '1 à aligner');
+    expect(page.game()).toEqual([
+      ['Summer Anna', 'fes | à venir · dans 12 j', '2026-10-20 → 2026-11-17', 'Insérer', false],
+      // Hors du roster du site : montré, pas insérable.
+      [
+        '9',
+        'hors roster | pickup | à venir · dans 12 j',
+        '2026-10-20 → 2026-11-17',
+        'Insérer',
+        true,
+      ],
+      [
+        'Bella',
+        'pickup',
+        '2026-09-08 → fin curée 2026-10-05, jeu 2026-10-06',
+        'Aligner sur le jeu',
+        false,
+      ],
+    ]);
+    expect(page.el('b-insert-all').hidden).toBe(false);
+    expect(page.el('b-save').disabled).toBe(true);
+
+    page.gameButton('Insérer', 'Summer Anna').click();
+    // Le nom du roster, les dates de la table, à sa place dans la liste.
+    expect(page.rows()).toEqual([
+      ['Summer Anna', '2026-10-20', '2026-11-17', 'à venir · dans 12 j | nouvelle', ''],
+      ['Dana', '2026-10-13', '2026-11-10', 'à venir · dans 5 j', ''],
+      ['Anna', '2026-09-22', '2026-10-20', 'active · 12 j restants', ''],
+    ]);
+    expect(page.el('b-count').textContent).toBe('1 changement');
+    expect(page.el('b-save').disabled).toBe(false);
+    // Un changement en attente : la carte ne la propose plus, et rien n'est parti.
+    expect(page.game().map(([name]) => name)).toEqual(['9', 'Bella']);
+    expect(page.el('b-game-count').textContent).toBe('1 à insérer' + '1 à aligner');
+    expect(page.el('b-insert-all').hidden).toBe(true);
+    expect(page.calls).toEqual([]);
+
+    // Retirée de la liste, elle revient dans la carte.
+    (page.row('Summer Anna').querySelector('[data-del]') as HTMLButtonElement).click();
+    expect(page.game().map(([name]) => name)).toEqual(['Summer Anna', '9', 'Bella']);
+    expect(page.el('b-count').textContent).toBe('aucune modification');
+
+    // « Tout insérer » laisse le perso hors roster.
+    page.el('b-insert-all').click();
+    expect(page.rows().map(([name]) => name)).toEqual(['Summer Anna', 'Dana', 'Anna']);
+    expect(page.game().map(([name]) => name)).toEqual(['9', 'Bella']);
+  });
+
+  it('« Aligner sur le jeu » change la fin ; une ligne expirée modifiée reste à l’écran', async () => {
+    const page = await banners({ state: { missing: [] } });
+    expect(page.rows().map(([name]) => name)).toEqual(['Dana', 'Anna']);
+
+    page.gameButton('Aligner sur le jeu', 'Bella').click();
+    expect(page.rows()).toEqual([
+      ['Dana', '2026-10-13', '2026-11-10', 'à venir · dans 5 j', ''],
+      ['Anna', '2026-09-22', '2026-10-20', 'active · 12 j restants', ''],
+      ['Bella', '2026-09-08', '2026-10-06', 'expirée | modifiée', 'expired'],
+    ]);
+    expect(page.el('b-count').textContent).toBe('1 changement');
+    // Plus rien à proposer.
+    expect(page.game()).toEqual([]);
+    expect(page.el('b-game').textContent).toBe('Les bannières du jeu sont toutes dans la liste.');
+    expect(page.el('b-game-count').textContent).toBe('');
+  });
+
+  it('sans données du jeu : le message, en texte — et la liste s’édite quand même', async () => {
+    const page = await banners({
+      state: {
+        game: null,
+        gameError: 'Pas de données du jeu : lancer un patch (pull) d’abord.',
+        missing: [],
+        drift: [],
+      },
+    });
+    const note = page.all('#b-game .b-note')[0];
+    expect(note.textContent).toBe('Pas de données du jeu : lancer un patch (pull) d’abord.');
+    expect(page.all('#b-game .ko, #b-game .error, #b-game .badge')).toEqual([]);
+    expect(page.el('b-insert-all').hidden).toBe(true);
+    expect(page.rows().map(([name]) => name)).toEqual(['Dana', 'Anna']);
+  });
+
+  it('« ＋ bannière » : le perso par les suggestions du roster, le nom prérempli, un brouillon refusé situé', async () => {
+    const page = await banners({
+      state: { missing: [], drift: [] },
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ — Banner 1 (Summer Anna): invalid start date (YYYY-MM-DD expected).'],
+        issues: [
+          {
+            index: 0,
+            message: 'Banner 1 (Summer Anna): invalid start date (YYYY-MM-DD expected).',
+          },
+          { index: 0, message: 'Banner 1 (Summer Anna): invalid end date (YYYY-MM-DD expected).' },
+        ],
+        written: false,
+      }),
+    });
+    page.el('b-add').click();
+    expect(page.rows()[0]).toEqual(['(recherche)', '', '', 'brouillon', '']);
+    // Une ligne vide ne compte pas — mais « Annuler » la retirerait.
+    expect(page.el('b-count').textContent).toBe('aucune modification');
+    expect(page.el('b-save').disabled).toBe(true);
+    expect(page.el('b-reset').disabled).toBe(false);
+
+    const search = page.all('#b-list [data-pick]')[0] as HTMLInputElement;
+    const results = page.all('#b-list .results')[0];
+    page.type(search, 'a');
+    expect(results.hidden).toBe(true);
+    page.type(search, 'AN');
+    expect(results.hidden).toBe(false);
+    // Ceux qui commencent par la saisie d'abord, puis ceux qui la contiennent.
+    expect(page.all('#b-list .results div').map((d) => d.textContent)).toEqual([
+      'Anna',
+      'Dana',
+      'Summer Anna',
+    ]);
+    page.all('#b-list .results div')[2].click();
+    expect(page.rows()[0]).toEqual(['Summer Anna', '', '', 'brouillon | nouvelle', '']);
+    expect(page.all('#b-list tr')[0].querySelector('.face')?.getAttribute('src')).toBe(
+      'https://img.test/images/characters/faceicon/FI_5.webp',
+    );
+    expect(page.el('b-count').textContent).toBe('1 changement');
+
+    // Sans dates : `validateBanners` refuse, rien n'est écrit, la ligne est marquée.
+    page.el('b-save').click();
+    await page.settle();
+    await page.settle();
+    expect(page.calls).toEqual([
+      {
+        path: '/api/banners',
+        body: {
+          list: [{ id: '5', name: 'Summer Anna', start: '', end: '' }, ...disk().banners],
+          changed: ['Summer Anna'],
+        },
+      },
+    ]);
+    expect(page.served.reads).toBe(1);
+    expect(page.rows()[0]).toEqual(['Summer Anna', '', '', 'brouillon | nouvelle | refusée', 'ko']);
+    expect(page.all('#b-list .badge.ko')[0].title).toBe(
+      'Banner 1 (Summer Anna): invalid start date (YYYY-MM-DD expected). ; Banner 1 (Summer Anna): invalid end date (YYYY-MM-DD expected).',
+    );
+    expect(page.el('b-count').textContent).toBe('1 changement' + '1 refus');
+
+    // La saisie lève le refus.
+    page.type(page.field(page.row('Summer Anna'), 'start') as HTMLInputElement, '2026-10-20');
+    expect(page.rows()[0][4]).toBe('');
+    expect(page.el('b-count').textContent).toBe('1 changement');
+  });
+
+  it('« Enregistrer » : la liste entière, récent → ancien, les noms qui ont bougé — puis l’état relu', async () => {
+    const page = await banners();
+    page.gameButton('Insérer', 'Summer Anna').click();
+    page.gameButton('Aligner sur le jeu', 'Bella').click();
+    page.hideExpired(false);
+    (page.row('Carla').querySelector('[data-del]') as HTMLButtonElement).click();
+    page.type(page.field(page.row('Dana'), 'name') as HTMLInputElement, 'Dana (rerun)');
+    expect(page.el('b-count').textContent).toBe('4 changements');
+
+    // Ce que le disque rendra : la liste enregistrée, plus rien à proposer.
+    const saved: Banner[] = [
+      { id: '5', name: 'Summer Anna', start: '2026-10-20', end: '2026-11-17' },
+      { id: '4', name: 'Dana (rerun)', start: '2026-10-13', end: '2026-11-10' },
+      { id: '1', name: 'Anna', start: '2026-09-22', end: '2026-10-20' },
+      { id: '2', name: 'Bella', start: '2026-09-08', end: '2026-10-06' },
+    ];
+    page.served.state = disk({ banners: saved, missing: [GHOST], drift: [] });
+    page.el('b-save').click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.calls).toEqual([
+      {
+        path: '/api/banners',
+        body: { list: saved, changed: ['Summer Anna', 'Dana (rerun)', 'Bella', 'Carla'] },
+      },
+    ]);
+    expect(page.served.reads).toBe(2);
+    expect(page.el('b-count').textContent).toBe('aucune modification');
+    expect(page.el('b-save').disabled).toBe(true);
+    expect(page.rows().map(([name, , , badges]) => [name, badges])).toEqual([
+      ['Summer Anna', 'à venir · dans 12 j'],
+      ['Dana (rerun)', 'à venir · dans 5 j'],
+      ['Anna', 'active · 12 j restants'],
+      ['Bella', 'expirée'],
+    ]);
+    // La détection ne propose plus ce qui est inséré ni aligné.
+    expect(page.game().map(([name]) => name)).toEqual(['9']);
+  });
+
+  it('« Annuler » rend le disque ; quitter l’onglet avec des changements demande confirmation', async () => {
+    const page = await banners();
+    expect(page.confirm).not.toHaveBeenCalled();
+    page.gameButton('Insérer', 'Summer Anna').click();
+    page.gameButton('Aligner sur le jeu', 'Bella').click();
+    expect(page.el('b-count').textContent).toBe('2 changements');
+
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-banners').hidden).toBe(false);
+
+    page.el('b-reset').click();
+    expect(page.rows().map(([name]) => name)).toEqual(['Dana', 'Anna']);
+    expect(page.el('b-count').textContent).toBe('aucune modification');
+    expect(page.el('b-reset').disabled).toBe(true);
+    expect(page.game().map(([name]) => name)).toEqual(['Summer Anna', '9', 'Bella']);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-banners').hidden).toBe(true);
   });
 });

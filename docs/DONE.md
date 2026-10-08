@@ -7,6 +7,126 @@
 
 ## 2026-10-08
 
+- **quick : onglet « Bannières » — les fenêtres de recrutement lues dans la
+  table du jeu, insérées d'un clic (lot B35, migration 5)** (08/10) : étape 5
+  de `docs/quick-migration.md`. L'outil admin « Banner » devient un onglet du
+  groupe « Publication », après « Codes promo », et l'agacement de Sevih est
+  corrigé en portant (« on devrait pouvoir détecter les bannières actives et
+  faire des auto-insertions ») : les bannières arrivent avec un patch, donc
+  elles sont dans `RecruitGroupTemplet` — l'onglet y lit qui est en vedette et
+  propose ce qui manque à `banner.json`.
+  **Détection** (`datagen/generators/recruit.ts`) :
+  `recruitWindows(groups, knownChars)`, PURE et exportée, rend une fenêtre
+  `{ characterId, type, start, end }` par vedette de TOUT groupe à `PickupID`
+  non nul — `type` = le `RecruitType` brut en minuscules, dates par `isoDate`, tri par début puis
+  perso, un perso inconnu RENDU avec `unknown: true`, jamais levé.
+  `BANNER_KIND`, `buildRecruit()` et `recruit.json#banners` ne bougent pas.
+  **Serveur** (`scripts/quick/actions.ts`, deux routes dans `server.ts`) :
+  `diffBanners(curated, game, today)`, pure — `missing` (fenêtre du jeu dont
+  (perso, début) n'est dans aucune bannière curée, récentes d'abord) et
+  `drift` (même (perso, début), fins différentes) ; une curée absente de la
+  table n'est pas un écart. **Seuil retenu : 60 jours** (`BANNER_LOOKBACK_DAYS`)
+  — une fenêtre finie depuis plus longtemps n'est pas proposée ; il ne vaut
+  que pour l'insertion, une dérive ancienne reste dite. `bannersState(disk)`
+  (`GET /api/banners/state`) rend `banners` (le store, pas la copie R2),
+  `today` (jour UTC), `roster` (id et nom anglais ; la page compose le visage
+  de l'id, comme Rangs), `game` et le diff ; sans table sur le disque,
+  `game: null` et `gameError` (« Pas de données du jeu : lancer un patch
+  (pull) d'abord. »), une table illisible est dite de la même façon, jamais
+  une erreur de route. `saveBannerList(list, changed, deps, report)`
+  (`POST /api/banners { list, changed }`, sous `withGit`) : `saveBanners` de
+  l'admin (ses refus rendus et situés par rang, rien d'écrit), puis
+  `publishBanners` (R2 + purge), puis `commitPaths` sur le seul
+  `data/curated/banner.json` — `chore(banner): <nom>`, jusqu'à trois noms,
+  `chore(banner): N bannières` au-delà.
+  **Page** (`ui/tabs/banners.{html,js,css}`, entrée de `GROUPS`, marqueur et
+  imports d'`index.html`) : la carte « Dans le jeu » (manquantes avec
+  « Insérer » et « Tout insérer », dérives avec « fin curée …, jeu … » et
+  « Aligner sur le jeu », ou « Les bannières du jeu sont toutes dans la
+  liste. », ou le `gameError` en texte), puis la liste curée, récent → ancien :
+  visage, nom affiché, début, fin, statut au jour du serveur (« active · N j
+  restants », « à venir · dans N j », « expirée » à 50 %, « brouillon »), ✕ ;
+  « masquer les expirées » coché d'office ; « ＋ bannière » pose une ligne
+  dont le perso se cherche dans le roster (suggestions sous le champ, pas de
+  modale), le nom se préremplit. Insertions et alignements sont des
+  changements en attente ; savebar, `canLeave`, état relu après
+  l'enregistrement. **Admin** : le lien « Banner » sort du menu
+  (`src/app/admin/layout.dev.tsx`), la page reste joignable par son URL.
+  **Docs** : étape 5 dans « Déjà dans quick » (`docs/quick-migration.md` ;
+  l'entrée 5 de l'inventaire reste, réduite à « FAIT », parce que prettier
+  renumérote une liste dont on retire un élément), croquis « Bannières » dans
+  `scripts/quick/ui/STYLE.md`, contrôles à l'écran au TODO.
+  **Ce que la détection propose sur le disque du 08/10** : la table porte 168
+  groupes à vedette, 180 fenêtres ; **aucune manquante** dans le seuil (118
+  fenêtres de la table ne sont pas dans `banner.json`, toutes finies avant le
+  09/08) et **deux dérives**, celles attendues — Titia `2026-10-05` contre
+  `2026-10-06`, Lambda `2026-09-07` contre `2026-09-08`. 2 des 52 bannières
+  curées ne sont plus dans la table (purge), ignorées.
+  **Trois faits de la table que le lot ne disait pas, et ce que j'en ai
+  fait — à relire** : (1) les 13 DEMIURGE n'ont AUCUNE date (`0`) et les 5
+  SEASONAL_SELECTION pas de fin (`0`) : `recruitWindows` les rend tels quels,
+  `diffBanners` écarte toute fenêtre sans dates lisibles — sans quoi les cinq
+  sélections du 24/02, curées avec une fin au 26/03, sortaient en « dérive »
+  et « Aligner » écrivait une fin `0` que `validateBanners` refuse ; (2) les 3
+  groupes ELEMENTAL portent CINQ vedettes dans une cellule (`2000058,2000061,…`)
+  : une fenêtre par perso (`splitCsv`), au lieu d'un « perso inconnu » au nom
+  de liste ; (3) `knownChars` est, dans quick, le ROSTER du site
+  (`getCharacterListItems`) et non `CharacterTemplet` : un perso du jeu pas
+  encore intégré sort « hors roster », montré mais pas insérable — la home ne
+  l'afficherait pas (`getActiveBanners` le saute).
+  **Choix de forme, à relire** : lectures et écritures injectées
+  (`BannersDisk`, `BannersDeps`), comme Noms ; la page envoie `changed`, les
+  noms des bannières ajoutées, modifiées OU retirées (une liste vide donne
+  `chore(banner): mise à jour des bannières`) ; un échec de R2 n'est pas un
+  refus — fichier écrit, commit fait — mais le résultat est `ok: false` avec
+  une dernière ligne qui le dit, pour que le journal se déplie en rouge (en
+  `ok` il ne montre qu'une ligne, et l'admin affichait ce cas en rouge) ; la
+  réponse porte `written` et `issues` ; le serveur ne garde que les quatre
+  champs du fichier ; deux groupes du jeu au même (perso, début) comptent
+  pour un, la fin la plus tardive ; une ligne ajoutée et laissée vide ne
+  compte pas et ne part pas ; une ligne expirée qui porte un changement ou un
+  refus reste à l'écran malgré le filtre ; une frappe ne redessine pas la
+  ligne ; Entrée dans la recherche prend la première suggestion ; la table ne
+  défile en largeur que sous 760 px (au-dessus, la liste de suggestions
+  serait rognée par `.scroll`).
+  **Tests** (33 de plus). `recruit.test.ts` : un PICKUP et un SEASONAL
+  sortent, sans `PickupID` non, l'inconnu marqué, l'ordre, les dates `0`,
+  l'ELEMENTAL. `actions.test.ts` : `diffBanners` (manquante, présente, dérive,
+  curée absente, seuil au jour près, dates illisibles, doublon de groupe),
+  `bannersState` sur une table INJECTÉE (la suite tourne sans `.gamedata`) —
+  diff, `game: null`, table illisible —, `saveBannerList` à store, R2 et git
+  factices : ordre fichier → R2 → commit, R2 en échec, purge manquée,
+  validation en échec (rien d'écrit, publié ni committé), messages à un,
+  trois et quatre noms, commit refusé. `ui-serve.test.ts` : la vraie
+  coquille, le vrai `lib.js` et le vrai `tabs/banners.js` dans happy-dom —
+  section servie dans Publication, statut par date, filtre, « Insérer »,
+  « Tout insérer », « Aligner », sans données du jeu, suggestions du roster et
+  brouillon refusé situé, « Enregistrer » (liste entière et `changed`, état
+  relu), « Annuler » et `canLeave`.
+  **Vérification** : `pnpm typecheck` (`tsc --noEmit` ×3, sans sortie),
+  `pnpm lint` (`eslint`, sans sortie), `pnpm test` →
+  `Tests  2899 passed (2899)` ; la suite de quick et `recruit.test.ts`
+  rejouées avec `NODE_ENV=development` → `Tests  496 passed (496)`.
+  **Banc** (quick isolé sur :4801, `shot.mjs --tabs banners`, capture dans
+  `/tmp/quick-shots/b35`) : « Dans le jeu » avec « 2 à aligner », Titia et
+  Lambda ; « 52 bannières · 2 actives · 50 expirées », la liste réduite à
+  Resonance Rin et Resonance Eliza (« active · 12 j restants »). La première
+  capture a montré deux défauts, corrigés : « Tout insérer » affiché sans
+  rien à insérer (`.btn` pose un `display`, `hidden` ne masquait rien) et le
+  filet de la cellule du ✕ décalé (`td.actions` héritait de `.actions`, une
+  rangée flex — la cellule est `td.b-del`). Un relais d'essai, hors dépôt, a
+  servi un état factice pour voir le reste : manquantes, « hors roster »,
+  ligne insérée, ligne alignée, suggestions par-dessus la table, 700 px de
+  large, et la carte sans données du jeu. Rien n'a été enregistré : aucun
+  `POST /api/banners` réel, aucun `pnpm datagen:*`.
+  **Laissé, hors périmètre** : `recruit.json#banners` porte les cinq
+  SEASONAL_SELECTION avec `end: "0"` (même cause) ; dans Codes promo,
+  `td.actions` hérite de la même rangée flex (ses marges de 4 px compensent)
+  ; un `[hidden]` global dans `quick.css` éviterait le piège du bouton ;
+  `CLAUDE.md` et `install-launcher.ts` disent encore « six gestes » ; on ne
+  peut pas republier sur R2 sans changement en attente (après un échec,
+  `pnpm commit` resynchronise) ; Events (étape 6) a la même mécanique runtime.
+
 - **Relecture B34** (Fable, 08/10) : `80b55246` validé — 96 lots, aucun
   ouvert. Périmètre attendu (`tabs/names.*`, `actions.ts`, `server.ts`,
   `lib.js`, `index.html`, `shot.mjs`, tests, STYLE.md, `layout.dev.tsx` de

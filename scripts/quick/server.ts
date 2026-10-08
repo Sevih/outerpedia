@@ -3,10 +3,11 @@
  *
  * Un serveur HTTP local de quelques routes et UNE page (`ui/`, un fichier par
  * onglet, assemblée à la requête — cf. `ui-serve.ts`) : mettre à jour un code
- * promo, déposer une 4-comic, ajouter une vidéo, régler les rangs, éditer les
- * recos d'équipement d'un perso, écrire un message Discord que le bot poste,
- * curer un nom court ou des alias de recherche. Tous committent, sauf le
- * message Discord ; « Pousser », dans l'en-tête, pousse `main`.
+ * promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler les
+ * rangs, éditer les recos d'équipement d'un perso, écrire un message Discord
+ * que le bot poste, curer un nom court ou des alias de recherche. Tous
+ * committent, sauf le message Discord ; « Pousser », dans l'en-tête, pousse
+ * `main`.
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
  * — il exige `pnpm dev`, donc un `clean:all` et un refresh complet des données
  * du jeu, ce qui n'a aucun sens pour changer quatre lignes de JSON.
@@ -16,8 +17,8 @@
  * les stores de l'admin. Démarrage ~1 s.
  *
  * `.env.local` est chargé à la main (tsx ne le fait pas, contrairement à Next) :
- * sans R2_* la publication des codes promo est sautée, sans YOUTUBE_API_KEY
- * l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
+ * sans R2_* la publication des codes promo et des bannières est sautée, sans
+ * YOUTUBE_API_KEY l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
  * l'onglet Discord rédige et prévisualise mais n'envoie pas, et n'importe pas
  * les anciens résumés (cf. `discord.ts`), sans DEEPL_API_KEY ni ANTHROPIC_API_KEY
  * « Traduire » de l'onglet Gear reco répond qu'il n'a pas de clé.
@@ -35,11 +36,13 @@ import { hostname } from 'node:os';
 import { dirname, extname, resolve } from 'node:path';
 import { loadEnvLocal } from '@datagen/lib/env';
 import {
+  BANNERS_DEPS,
   GEAR_RECO_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
   addComics,
   addVideo,
+  bannersState,
   currentCoupons,
   fitNames,
   gearRecoState,
@@ -50,6 +53,7 @@ import {
   pushMain,
   rankState,
   rewardOptions,
+  saveBannerList,
   saveCouponList,
   saveGearReco,
   saveNames,
@@ -94,7 +98,7 @@ import { QUICK_HOST, isAllowedOrigin, isAllowedRemote, parsePeers } from './lan'
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import { getCharacterListItems } from '@/lib/data/characters';
-import type { PromoCode } from '@/lib/admin/promo-banner-store';
+import type { Banner, PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
 
 // Les stores lisent `process.env` (écrits pour Next, qui charge .env.local seul).
@@ -376,6 +380,24 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     if (!etag)
       return json(res, { ok: false, log: ['Liste non chargée depuis R2 : recharger.'] }, 409);
     await stream(res, (report) => withGit(saveCouponList(list, etag, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/banners/state') {
+    // Lu du disque à chaque appel, comme les rangs : `banner.json`, le jour UTC,
+    // le roster, et ce que la table du jeu sait de plus (`game` à `null` et
+    // `gameError` quand `.gamedata/parsed/` n'a pas la table — pas un 500).
+    json(res, bannersState());
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/banners') {
+    // La liste est l'ÉTAT COMPLET, comme dans l'admin ; `changed` nomme les
+    // bannières qui ont bougé, pour le message de commit.
+    const { list, changed } = await body<{ list: Banner[]; changed?: unknown }>(req);
+    await stream(res, (report) =>
+      withGit(saveBannerList(list, strings(changed), BANNERS_DEPS, report)),
+    );
     return;
   }
 

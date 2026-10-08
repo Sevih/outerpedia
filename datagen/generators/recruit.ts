@@ -46,7 +46,7 @@ import { DUMP_PATH, assetTypeKeys } from '../lib/dump';
 import { isMain } from '../lib/is-main';
 import { readCuratedJson } from '../lib/json';
 import { loadTextIndex, resolveText } from '../lib/text';
-import { fileStamp, loadTable, num, type Row } from '../lib/tables';
+import { fileStamp, loadTable, num, splitCsv, type Row } from '../lib/tables';
 
 /**
  * Un LOT d'un palier (Dimensional Supply) : ce que le palier peut rendre,
@@ -166,6 +166,52 @@ const BANNER_KIND: Record<string, RecruitBanner['kind']> = {
 
 /** `2026-07-14  00:00:00` → `2026-07-14`. */
 export const isoDate = (raw: string): string => (raw ?? '').trim().slice(0, 10);
+
+/** Une fenêtre de recrutement, lue telle que `RecruitGroupTemplet` la porte. */
+export interface RecruitWindow {
+  characterId: string;
+  /** Le `RecruitType` brut, en minuscules (`pickup`, `seasonal`, `outer_fes`…). */
+  type: string;
+  /** `isoDate` des colonnes du jeu — `0` quand la table ne date pas le groupe. */
+  start: string;
+  end: string;
+  /** Le perso n'est pas dans `knownChars`. */
+  unknown?: true;
+}
+
+/**
+ * TOUTES les fenêtres à vedette de la table, quel que soit leur type — PURE.
+ * C'est la lecture de l'onglet « Bannières » de quick, pas celle de
+ * `recruit.json#banners` (les seuls limités, par `BANNER_KIND`, archive
+ * comprise) : ici un PICKUP sort aussi, et rien n'est recollé d'une archive.
+ *
+ * Rien n'est levé, c'est un écran et pas le build : un `PickupID` inconnu de
+ * `knownChars` est rendu, marqué `unknown`, et une date que la table ne porte
+ * pas reste telle qu'`isoDate` la rend (`0` : les DEMIURGE n'en ont aucune, les
+ * SEASONAL_SELECTION pas de fin) — à l'appelant d'écarter ce qu'il ne sait pas
+ * comparer. Un groupe ELEMENTAL porte ses cinq vedettes dans UNE cellule,
+ * séparées par des virgules : une fenêtre par perso.
+ *
+ * Triées par début, puis par perso.
+ */
+export function recruitWindows(groups: Row[], knownChars: ReadonlySet<string>): RecruitWindow[] {
+  const windows: RecruitWindow[] = [];
+  for (const g of groups) {
+    for (const characterId of splitCsv(g.PickupID)) {
+      if (characterId === '0') continue;
+      windows.push({
+        characterId,
+        type: (g.RecruitType ?? '').toLowerCase(),
+        start: isoDate(g.StartDate),
+        end: isoDate(g.EndDate),
+        ...(knownChars.has(characterId) ? {} : { unknown: true as const }),
+      });
+    }
+  }
+  return windows.sort(
+    (a, b) => a.start.localeCompare(b.start) || a.characterId.localeCompare(b.characterId),
+  );
+}
 
 /** `data/curated/recruit-banners.json` — mémoire des purges de tables. */
 interface RecruitBannersCurated {
