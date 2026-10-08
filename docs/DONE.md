@@ -7,6 +7,39 @@
 
 ## 2026-10-08
 
+- **Relecture C10** (Fable, 08/10) : `b129b251` validé — 99 lots, aucun
+  ouvert. Périmètre attendu (`patch.ts` + test, `refresh.ts` + test,
+  `dev-refresh.ts`, `CLAUDE.md`, `tabs/patch.*`, `server.ts`, `lib.js`,
+  `index.html`, tests, STYLE.md, DONE, TODO, `quick-migration.md`), entrée
+  DONE complète, écart accepté (« Arrêter » coupe le groupe de processus,
+  pas pnpm seul — vérifié ci-dessous). `pnpm typecheck`, `pnpm lint`, `pnpm
+test` verts sur HEAD (199 fichiers, 2 969 tests), quick + `refresh.test.ts`
+  sous `NODE_ENV=development` (574). Contrôle indépendant, par le MODULE
+  (script `tsx` du scratchpad, `c10/check.ts`, commandes inoffensives) :
+  `runJob` sur un `node -e` à trois lignes et code 3 — lignes au `report`,
+  ANSI retiré, `ok: false, code: 3`, verrou relâché ; un `node` qui tient un
+  `sleep 30` par `execFileSync` : second lancement refusé (« Un travail
+  tourne déjà : dodo »), `stopJob()` → `stopped`, plus aucun `sleep` ;
+  `refreshPlan` / `promotePlan` / `commitPlan` acceptent et refusent ce que
+  le lot demande (`--source android --force --news`, `apply` non booléen,
+  message sans préfixe, bump inconnu). Quick isolé (:4853) :
+  `/api/patch/state` (steam, site et client 1.11.404, pas de checkpoint,
+  `dirty: 0`), refus 409 de `stop` à vide et 400 des corps fautifs ;
+  capture (scratchpad `c10/`) : les quatre cartes au repos, « Promouvoir »
+  éteint, console vide, « Pousser 11 ».
+  **Incident de relecture, de mon fait** : un corps d'essai `{ apply: true }`
+  envoyé à `/api/patch/refresh` sur ce quick a répondu 200 — le champ est
+  IGNORÉ (pas dans la table du plan, conforme au lot « jamais `--apply` par
+  cette route »), donc un vrai `pnpm datagen:patch` est parti. Il a comparé
+  le client Steam, rien de nouveau, et a sauté la chaîne (`refresh.ts` :
+  « on ne re-génère que si on a réellement tiré ») : `data/extracted/`
+  intact (08:58), pas de checkpoint, aucun processus restant, arbre propre.
+  Sans dégât, mais la règle est rappelée dans la mémoire de Fable : sur un
+  quick vivant, ne jamais POSTer une route hors `READ_ONLY_POSTS` — les
+  refus se vérifient par le module ou par le relais du banc. À juger par
+  Sevih : faut-il que les plans REFUSENT un champ inconnu (ici `apply`)
+  plutôt que de l'ignorer ? Pour Sevih : les deux lignes du TODO (le vrai
+  cycle au prochain patch, puis le retrait de la `PatchCard`).
 - **quick : « Patch » — la chaîne des données lancée de quick, du pull au
   commit (lot C10, migration 21)** (08/10) : étape 21 de
   `docs/quick-migration.md`. Ce que Sevih faisait à chaque patch du jeu au
