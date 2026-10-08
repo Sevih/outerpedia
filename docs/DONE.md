@@ -7,6 +7,32 @@
 
 ## 2026-10-08
 
+- **Relecture B34** (Fable, 08/10) : `80b55246` validé — 96 lots, aucun
+  ouvert. Périmètre attendu (`tabs/names.*`, `actions.ts`, `server.ts`,
+  `lib.js`, `index.html`, `shot.mjs`, tests, STYLE.md, `layout.dev.tsx` de
+  l'admin, `card-label.test.ts`, DONE, TODO, `quick-migration.md`), entrée
+  DONE complète, choix de forme acceptés (lectures et écritures injectées,
+  `refused`/`saved` dans la réponse, `langs` et `width` servis, la liste
+  montre le disque et la fiche suit la frappe, le perso ouvert garde sa
+  ligne hors filtre). `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur
+  HEAD (198 fichiers, 2 866 tests), suite de quick sous
+  `NODE_ENV=development` (442). Contrôle indépendant : un script `tsx` du
+  scratchpad (`b34/check.ts`) appelle `namesState()` et `fitNames()` sur
+  le disque du jour — 129 persos, largeur 80, 0 à traiter, 11 noms courts,
+  Regina (`2000085`) déborde en en/jp/kr/fr/es et tient en zh, ses six noms
+  courts tiennent, `base` sans alias ; et la règle croisée sur tout le
+  roster : 0 couple (perso, langue) qui déborde sans nom court effectif qui
+  tienne — exactement ce que `card-label.test.ts` garantit au site.
+  Quick isolé (:4847) : `/api/names/state` et `/api/names/fit` répondent
+  pareil ; captures (scratchpad `b34/`) : la liste « À traiter » vide avec
+  son message, la fiche de Regina (`--hash names/2000085`) — tableau des six
+  langues, badges, douze termes « déjà cherchable », champ d'alias — et
+  l'onglet Outils sans « à venir ». Pour Sevih : la ligne du TODO (taper un
+  nom court, un alias, « Enregistrer »), et à juger la vue par défaut
+  « À traiter », vide tant que rien ne déborde. Vu par l'agent, laissé : le
+  docblock de `src/lib/data/short-names.ts` dit « les entrées ne portent
+  qu'`en` » alors que dix sur onze portent les six langues (un lot A de doc
+  si on y tient), `CLAUDE.md` dit encore « Six gestes ».
 - **quick : onglet « Noms » — noms courts et alias de recherche en un écran,
   avec le verdict « ce nom déborde-t-il ? » du site (lot B34, migration 1 + 2)**
   (08/10) : premier lot de `docs/quick-migration.md`. Les deux outils de
