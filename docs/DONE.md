@@ -7,6 +7,29 @@
 
 ## 2026-10-08
 
+- **Relecture B35** (Fable, 08/10) : `cfd7ae96` validé — 97 lots, aucun
+  ouvert. Périmètre attendu (`recruit.ts` + test, `tabs/banners.*`,
+  `actions.ts`, `server.ts`, `lib.js`, `index.html`, `quick.css`, tests,
+  STYLE.md, `layout.dev.tsx`, DONE, TODO, `quick-migration.md`), entrée DONE
+  complète ; les trois faits de la table traités comme il faut (DEMIURGE sans
+  dates et SEASONAL_SELECTION sans fin écartés du diff, ELEMENTAL à cinq
+  vedettes éclaté par `splitCsv`, « hors roster » montré mais pas insérable)
+  et les choix de forme acceptés (R2 en échec = journal rouge mais fichier
+  écrit et committé ; `changed` envoyé par la page). `pnpm typecheck`,
+  `pnpm lint`, `pnpm test` verts sur HEAD (198 fichiers, 2 899 tests), quick
+  - `recruit.test.ts` sous `NODE_ENV=development` (496). Contrôle
+    indépendant : un script `tsx` du scratchpad (`b35/check.ts`) —
+    `bannersState()` sur le disque du jour : 52 bannières, 180 fenêtres du
+    jeu (sept types), 0 inconnue, 0 manquante, 2 dérives (Titia 10-05 → 10-06,
+    Lambda 09-07 → 09-08) ; recoupement BRUT de `recruitWindows` contre
+    `banner.json` par (id, début) : mêmes deux dérives, aucune manquante ;
+    `diffBanners` sur un cas synthétique classe la manquante dans le seuil,
+    ignore celle d'avant, dit la dérive. Quick isolé (:4849) :
+    `/api/banners/state` identique ; capture (scratchpad `b35/`) : « Dans le
+    jeu · 2 à aligner » avec Titia et Lambda et leurs deux fins, « 52
+    bannières · 2 actives · 50 expirées », Rin et Eliza « active · 12 j
+    restants », « ＋ bannière ». Pour Sevih : la ligne du TODO (aligner les
+    deux fins, « Enregistrer » → R2 + `chore(banner): Titia, Lambda`).
 - **quick : onglet « Bannières » — les fenêtres de recrutement lues dans la
   table du jeu, insérées d'un clic (lot B35, migration 5)** (08/10) : étape 5
   de `docs/quick-migration.md`. L'outil admin « Banner » devient un onglet du
