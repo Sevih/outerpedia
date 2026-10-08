@@ -7,6 +7,29 @@
 
 ## 2026-10-08
 
+- **Relecture B36** (Fable, 08/10) : `d84ab34c` validé — 98 lots, C10 reste
+  ouvert. Périmètre attendu (`tabs/dashboard.*`, `actions.ts`, `server.ts`,
+  `lib.js`, `index.html`, `coupons.html`, tests, STYLE.md, DONE, TODO,
+  `quick-migration.md`), entrée DONE complète, deux choix acceptés
+  (`proposal` = plus récent ET différent, sinon toujours vrai sur ce poste ;
+  le compte de l'en-tête suit aussi le tableau). `pnpm typecheck`, `pnpm
+lint`, `pnpm test` verts sur HEAD (198 fichiers, 2 924 tests), suite de
+  quick sous `NODE_ENV=development` (494). Contrôle indépendant : un script
+  `tsx` du scratchpad (`b36/check.ts`) appelle `dashboardState()` — un item
+  « Character · 1 new » vers `https://outerpedia.local/admin/extractor/
+characters`, `main` 8 devant, 0 fichier modifié, dernier commit
+  `d84ab34c`, site et client 1.11.404, `proposal` vrai, Rin et Eliza 12 j,
+  0 manquante, 2 dérives, 102 codes dont 8 actifs ; recoupé à la main :
+  `git status --porcelain` vide, `game-version.json` 1.11.404, et dans
+  `data/extracted/` seul `characters.json` diffère de `generated/` (le perso
+  « 1 new », pas encore intégré) — `proposal` dit vrai à raison. Quick isolé
+  (:4851) : `/api/dashboard` identique en 3,2 s ; captures (scratchpad
+  `b36/`) à 1440 et 900 px : les quatre cartes, « Accueil » en tête du menu
+  et onglet d'ouverture, « Pousser 8 ». Pour Sevih : la ligne du TODO
+  (inbox contre la home admin, lien « dans l'admin ↗ », version du client).
+  Signalé par l'agent, à retenir : la route prend 2 à 3 s parce que `cache()`
+  de React ne mémoïse rien hors rendu et `buildInbox` relance le moteur de
+  revue par entité — lot A pour mémoïser dans `admin-inbox.ts` si ça gêne.
 - **quick : « Tableau de bord » — l'accueil de quick, ce qui demande une
   action (lot B36, migration 18)** (08/10) : étape 18 de
   `docs/quick-migration.md`. Quick devient le vrai panneau admin, il lui
