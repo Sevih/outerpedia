@@ -6,6 +6,7 @@
     <title>Outerpedia — quick</title>
     <link rel="stylesheet" href="/ui/quick.css" />
     <!-- Une feuille par onglet, chargée par la route statique de `ui-serve.ts`. -->
+    <link rel="stylesheet" href="/ui/tabs/dashboard.css" />
     <link rel="stylesheet" href="/ui/tabs/coupons.css" />
     <link rel="stylesheet" href="/ui/tabs/banners.css" />
     <link rel="stylesheet" href="/ui/tabs/comics.css" />
@@ -65,6 +66,7 @@
     <main>
       <!-- Une section par onglet : le serveur pose `tabs/<nom>.html` à la place de
            chaque marqueur (cf. `ui-serve.ts`). -->
+      <!-- @tab dashboard -->
       <!-- @tab coupons -->
       <!-- @tab banners -->
       <!-- @tab comics -->
@@ -79,6 +81,7 @@
          imports est celui du menu. -->
     <script type="module">
       import { sections } from '/ui/lib.js';
+      import '/ui/tabs/dashboard.js';
       import '/ui/tabs/coupons.js';
       import '/ui/tabs/banners.js';
       import '/ui/tabs/comics.js';

@@ -39,7 +39,9 @@ pastille.
 ## La coquille
 
 - **En-tête** (`header.top`, 52 px, `surface-raised`) : le logo, les
-  **groupes** en onglets (`.gtab`, filet accent sous l'actif ; `.gtab.soon`
+  **groupes** en onglets (`.gtab`, filet accent sous l'actif ; « Accueil » en
+  tête — sa première section, le tableau de bord, est celle que la page
+  ouvre ; `.gtab.soon`
   grisé avec son badge « à venir » : Éditeurs, Guides, tant que quick n'a pas
   repris l'admin — Outils a sa première section, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
@@ -57,7 +59,13 @@ pastille.
 - Les deux rangées sont posées par `lib.js` d'après son tableau `GROUPS` :
   **ajouter une section** = une entrée `{ id, label, wide? }` dans le bon
   groupe, ses trois fichiers `tabs/<id>.{html,css,js}`, son marqueur
-  `<!-- @tab id -->`, son `<link>` et son `import` dans `index.html`.
+  `<!-- @tab id -->`, son `<link>` et son `import` dans `index.html`. Seule
+  la première section du premier groupe est sans `hidden` dans son HTML.
+- Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
+  démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
+  `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
+  sur son onglet. Un `post()` réussi qui a committé ou poussé émet
+  `quick:saved` sur `document`.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
   (`main.wide`) : Rangs, Gear reco, Discord. Une section est une colonne à
@@ -318,6 +326,51 @@ Note repliée (état retenu) : ses deux cartes se rangent en une ligne au-dessus
 de l'éditeur, qui prend toute la largeur. Propres à l'onglet, dans
 `tabs/discord.css` faute de composant commun : `.d-grp` (boutons d'outil
 accolés), `.d-seg` (bouton segmenté), `.d-menu` (liste de cases déroulante).
+
+## Accueil — croquis
+
+### Tableau de bord (1200 px, fait — B36)
+
+Ce qui demande une action, lu ailleurs : il montre et renvoie, il ne fait
+rien. Croquis du rendu :
+
+```
+.head  Tableau de bord — Ce qui demande une action. Rien ne se fait d'ici…        « au 2026-10-08 (UTC) » [Actualiser]
+.h-grid — des .card sur deux colonnes au-dessus de 900 px, une en dessous ; chaque carte a sa hauteur
+  .card « À faire »    card-head : titre · badge du compte (ko s'il y a du rouge, sinon warn) … « extraction, tags, assets — lu par l'admin »
+     une ligne par item de l'inbox de l'admin, dans SON ordre :  ● Character  1 new … dans l'admin ↗ (nouvel onglet)
+       ● = `.dot` de la teinte de l'item (danger, warn, muted) ; un item que quick a déjà : [Ouvrir] (va à l'onglet) à la place du lien
+     .empty « Rien à faire. »
+  .card « Dépôt »      card-head : titre · la branche en chasse fixe
+     ● 7 commits à pousser  « Pousser », dans l'en-tête      (accent ; « rien à pousser » en vert ; « pas d'amont » atténué)
+     ● 3 commits de retard sur origin  `git pull --rebase` d'abord, au terminal      (warn, seulement s'il y en a)
+     ● 54135782  le sujet du dernier commit · il y a 31 minutes
+     ● 10 fichiers modifiés  ou non suivis — ce qui est indexé part avec le prochain enregistrement      (warn ; « aucun fichier modifié » en vert)
+  .card « Jeu »
+     ● site 1.11.404 · client 1.11.404  à jour      (ok ; warn « un patch attend : onglet Patch » quand le client est en avance — un bouton quand la section existe ; atténué sans client, ou client en retard)
+     ● proposition d'extraction en attente  data/extracted/ : à revoir, puis promouvoir      (warn, seulement s'il y en a une)
+  .card « Publication » — deux têtes dans la même carte
+     card-head : « Bannières » · badges « 2 actives » · « 1 à venir » … [Ouvrir Bannières]
+       ● visage 24 px · nom … badge ok « 12 j restants » (« dernier jour » à zéro) ; à venir : ● accent … badge upcoming « dans 5 j »
+       ● 2 à insérer · 1 à aligner  d'après la table du jeu      (warn)
+       « Aucune bannière active ni à venir. » ; sans table du jeu, le message du serveur dessous, atténué
+     card-head : « Codes promo » · badge « 8 actifs » … [Ouvrir Codes promo]
+       ● OPLIVE09 (chasse fixe) … badge warn « expire dans 3 j » (« dernier jour » à zéro)
+       « Aucun code n'expire sous 7 jours. »
+un bloc que le serveur n'a pas pu lire : « Illisible : <raison> » en rouge DANS sa carte, les autres servis
+```
+
+Tout vient de `GET /api/dashboard` (`dashboardState` : cinq blocs
+indépendants, chacun `null` avec sa raison dans `errors` quand sa lecture a
+levé). La page le relit à chaque venue à l'écran (`open`), au clic sur
+« Actualiser », et sur `quick:saved` si elle est montrée — jamais en boucle :
+l'inbox de l'admin coûte deux secondes. Le compte de la carte « Dépôt » est
+celui de l'en-tête, qu'elle remet à jour (`gitBar`). Les échéances se
+comptent au jour UTC du serveur (`today`). Propres à l'onglet, dans
+`tabs/dashboard.css` : `.h-row` (une ligne : pastille, `.h-label`,
+`.h-detail`, ce qui la ferme poussé à droite), `.h-row.tint` (le libellé
+prend la teinte de la pastille), les teintes `.dot.warn`, `.dot.danger`,
+`.dot.info`, et `.h-note` (une phrase à la place des lignes).
 
 ## Publication — croquis
 

@@ -1,0 +1,58 @@
+<section id="tab-dashboard">
+  <div class="head h-top">
+    <div class="h-title">
+      <h2>Tableau de bord</h2>
+      <p class="hint">
+        Ce qui demande une action. Rien ne se fait d'ici : chaque carte montre, et renvoie à l'écran
+        qui agit.
+      </p>
+    </div>
+    <div class="h-tools">
+      <span
+        class="lbl"
+        id="h-today"
+        title="Les échéances se comptent au jour UTC du serveur"
+      ></span>
+      <button class="btn ghost sm" id="h-refresh">Actualiser</button>
+    </div>
+  </div>
+
+  <div class="h-grid">
+    <div class="card" aria-label="À faire">
+      <div class="card-head">
+        <strong>À faire</strong>
+        <span id="h-inbox-count"></span>
+        <span class="lbl h-end">extraction, tags, assets — lu par l'admin</span>
+      </div>
+      <div id="h-inbox"><p class="h-note">Lecture…</p></div>
+    </div>
+
+    <div class="card" aria-label="Dépôt">
+      <div class="card-head">
+        <strong>Dépôt</strong>
+        <span class="mono lbl" id="h-git-branch"></span>
+      </div>
+      <div id="h-git"><p class="h-note">Lecture…</p></div>
+    </div>
+
+    <div class="card" aria-label="Jeu">
+      <div class="card-head"><strong>Jeu</strong></div>
+      <div id="h-game"><p class="h-note">Lecture…</p></div>
+    </div>
+
+    <div class="card" aria-label="Publication">
+      <div class="card-head">
+        <strong>Bannières</strong>
+        <span class="h-badges" id="h-banners-count"></span>
+        <button class="btn ghost sm h-end" data-go="banners">Ouvrir Bannières</button>
+      </div>
+      <div id="h-banners"><p class="h-note">Lecture…</p></div>
+      <div class="card-head h-sub">
+        <strong>Codes promo</strong>
+        <span class="h-badges" id="h-coupons-count"></span>
+        <button class="btn ghost sm h-end" data-go="coupons">Ouvrir Codes promo</button>
+      </div>
+      <div id="h-coupons"><p class="h-note">Lecture…</p></div>
+    </div>
+  </div>
+</section>

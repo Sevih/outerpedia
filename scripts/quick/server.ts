@@ -2,10 +2,11 @@
  * quick — le petit outil de tous les jours (`pnpm quick`, ou l'icône du bureau).
  *
  * Un serveur HTTP local de quelques routes et UNE page (`ui/`, un fichier par
- * onglet, assemblée à la requête — cf. `ui-serve.ts`) : mettre à jour un code
- * promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler les
- * rangs, éditer les recos d'équipement d'un perso, écrire un message Discord
- * que le bot poste, curer un nom court ou des alias de recherche. Tous
+ * onglet, assemblée à la requête — cf. `ui-serve.ts`) : voir d'abord ce qui
+ * demande une action (le tableau de bord, qui ne fait que lire), mettre à jour
+ * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
+ * les rangs, éditer les recos d'équipement d'un perso, écrire un message
+ * Discord que le bot poste, curer un nom court ou des alias de recherche. Tous
  * committent, sauf le message Discord ; « Pousser », dans l'en-tête, pousse
  * `main`.
  * Rien d'autre. Le panneau admin complet reste la référence pour tout le reste
@@ -44,6 +45,7 @@ import {
   addVideo,
   bannersState,
   currentCoupons,
+  dashboardState,
   fitNames,
   gearRecoState,
   gitState,
@@ -365,6 +367,14 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'GET' && url.pathname === '/api/git') {
     // L'état de git seul, sans attendre R2 comme `/api/state` — et sans réseau.
     json(res, gitState());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/dashboard') {
+    // L'accueil : l'inbox de l'admin, git, la version du jeu, les échéances.
+    // Relu à chaque appel ; un bloc illisible est `null` avec sa raison dans
+    // `errors`, les autres sont servis — pas un 500.
+    json(res, await dashboardState());
     return;
   }
 

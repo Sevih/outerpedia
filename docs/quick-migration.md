@@ -42,6 +42,19 @@
 
 ## Déjà dans quick
 
+Accueil : Tableau de bord (= la boîte de réception de la home admin, étape 18,
+lot B36 : l'onglet qui s'ouvre au lancement — l'inbox de l'admin telle quelle
+(`buildInbox` d'`admin-inbox.ts` : extraction à revoir par entité, tags morts,
+rapport d'assets — « Rien à faire. » quand elle est vide), l'état git (commits
+à pousser, retard, dernier commit, fichiers modifiés), la version du jeu du
+site contre celle du client installé, les bannières actives et à venir avec
+ce que la table du jeu sait de plus, les codes promo qui expirent sous sept
+jours. Il montre et renvoie, il ne fait rien : chaque item de l'inbox ouvre
+sa page de l'ADMIN dans un nouvel onglet (`ADMIN_BASE`,
+`https://outerpedia.local` d'office) tant que quick n'a pas la section — le
+lot qui la porte ajoute sa ligne à `ADMIN_TO_QUICK` d'`actions.ts`. Portage
+PARTIEL de la home admin : sa `PatchCard` est l'étape 21, sa couverture
+éditoriale suivra les éditeurs ; l'admin garde donc sa home).
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
 08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
 existant, période ou récompenses : supprimer puis recréer, ou lot A pour
@@ -62,19 +75,13 @@ des données (détection, extraction, promotion) comme `pnpm dev` et la
 `PatchCard` de l'admin les font. Les étapes 18 et 21 remontent donc juste
 après les Bannières (5), avant Events :
 
-5 Bannières (fait, B35) → 18 Tableau de bord → 21 Patch → 6 Events →
-7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides → 19 et 20
-Extractor (revue par entité, intégration) → 22 Clôture. La numérotation des
-étapes ne change pas.
+5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch →
+6 Events → 7 Changelog → 8 Game data → 9 à 15 Éditeurs → 16 et 17 Guides →
+19 et 20 Extractor (revue par entité, intégration) → 22 Clôture. La
+numérotation des étapes ne change pas.
 
-- **18 Tableau de bord** = l'accueil de quick, premier onglet du groupe
-  Données (ou un groupe « Accueil » en tête) : l'inbox de l'admin
-  (`buildInbox` d'`admin-inbox.ts` : extraction à revoir par entité, tags
-  morts, rapport d'assets — « rien à l'écran » = « rien à faire »), l'état
-  git (commits à pousser, retard), la version du jeu (`game-version.json`)
-  contre celle du client installé, les bannières qui finissent ou qui
-  commencent (depuis la table du jeu : `recruitWindows` de
-  `datagen/generators/recruit.ts`, lot B35), les codes promo qui expirent.
+- **18 Tableau de bord** — FAIT, lot B36 (cf. « Déjà dans quick ») : un
+  groupe « Accueil » en tête du menu, où l'étape 21 posera sa section.
 - **21 Patch** = la chaîne `datagen/refresh.ts` lancée de quick, étape par
   étape dans le journal : pull (Steam, Android en secours) → dump si le code
   a changé → extract → convert → build → promote en DRY (le diff par
@@ -160,9 +167,10 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 4. Extractor (plusieurs lots, en dernier)
 
-18. **Home admin : boîte de réception**
-    compteurs new / diff / removed par entité (`admin-inbox`)
-    - Agacements :
+18. **Home admin : boîte de réception** — FAIT, lot B36 : l'onglet
+    « Tableau de bord » (cf. « Déjà dans quick »). La ligne « Agacements »
+    était vide : l'inbox est portée telle quelle. L'entrée reste pour que la
+    numérotation des suivantes ne bouge pas.
 
 19. **Extractor › revue par entité**
     `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item

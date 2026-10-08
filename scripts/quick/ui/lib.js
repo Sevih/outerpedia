@@ -8,9 +8,10 @@
  * posé dans la page par `ui-serve.ts`), `tabs/<nom>.css` (son style) et
  * `tabs/<nom>.js` (un module que `index.html` importe). Les sections ne se
  * connaissent pas : chacune s'inscrit ici (`sections.register`) et dit ce que la
- * page doit savoir d'elle — comment se charger, si elle a du travail en attente,
- * si on peut la quitter. Ajouter une section : une entrée dans `GROUPS`, ses
- * trois fichiers, son marqueur et ses deux lignes dans `index.html`.
+ * page doit savoir d'elle — comment se charger, quoi faire quand elle vient à
+ * l'écran, si elle a du travail en attente, si on peut la quitter. Ajouter une
+ * section : une entrée dans `GROUPS`, ses trois fichiers, son marqueur et ses
+ * deux lignes dans `index.html`.
  *
  * Servi tel quel par `GET /ui/…` (`no-store`) : du JavaScript nu, sans build —
  * éditer et rafraîchir suffit.
@@ -20,12 +21,18 @@ export const $ = (id) => document.getElementById(id);
 
 /**
  * Le menu. Un GROUPE = un onglet de l'en-tête ; ses SECTIONS = la rangée du
- * dessous. `wide` : la section prend toute la largeur de la fenêtre (le
- * `<main>` est sinon centré à 1200 px). `soon` : le groupe est annoncé mais
+ * dessous. Le premier groupe est l'accueil : sa première section est celle
+ * que la page ouvre. `wide` : la section prend toute la largeur de la fenêtre
+ * (le `<main>` est sinon centré à 1200 px). `soon` : le groupe est annoncé mais
  * vide — quick doit absorber à terme les éditeurs, les guides et les outils de
  * l'admin, et la place se voit dès maintenant.
  */
 export const GROUPS = [
+  {
+    id: 'home',
+    label: 'Accueil',
+    sections: [{ id: 'dashboard', label: 'Tableau de bord' }],
+  },
   {
     id: 'publication',
     label: 'Publication',
@@ -226,6 +233,8 @@ export const journalWire = () => {
  *
  * Un geste qui committe (et « Pousser ») rend aussi `git`, l'état d'après :
  * le bouton de l'en-tête se met à jour ici, aucune section n'a rien à faire.
+ * Quand il a réussi, la page l'annonce (`quick:saved` sur `document`) : le
+ * tableau de bord, s'il est à l'écran, se relit.
  */
 export async function post(path, payload) {
   const res = await fetch(path, {
@@ -264,12 +273,17 @@ export async function post(path, payload) {
 
   const data = done ?? { ok: false, log: ['réponse interrompue'] };
   log(data.log ?? [data.error ?? 'erreur'], data.ok);
-  if (data.git) gitBar(data.git);
+  if (data.git) {
+    gitBar(data.git);
+    if (data.ok) document.dispatchEvent(new Event('quick:saved'));
+  }
   return data;
 }
 
 // ------------------------------------------------------ sections
 const registry = new Map();
+/** La bascule de `start`, pour `sections.go`. */
+let goTo = null;
 
 /** Le groupe d'une section, par son id. */
 const groupOf = (tab) => GROUPS.find((g) => g.sections.some((s) => s.id === tab));
@@ -294,12 +308,22 @@ export const sections = {
    * Inscrit la section `name` — son id dans `GROUPS`, et `tab-<name>` l'id de
    * sa `<section>`. Tout est facultatif :
    *   - `init()`     : son chargement, appelé une fois au démarrage ;
+   *   - `open()`     : appelé chaque fois qu'elle vient à l'écran — au
+   *                    démarrage si c'est elle qui s'ouvre, puis à chaque retour ;
    *   - `dirty()`    : vrai tant qu'elle porte du travail non enregistré (le
    *                    navigateur demande alors avant de recharger la page) ;
    *   - `canLeave()` : faux pour rester sur elle (à elle de demander confirmation).
    */
   register(name, section) {
     registry.set(name, section);
+  },
+
+  /**
+   * Ouvre la section `tab`, groupe compris, comme un clic sur son onglet (la
+   * section quittée peut refuser : `canLeave`). Sans effet avant `start`.
+   */
+  go(tab) {
+    goTo?.(tab);
   },
 
   /** Branche le menu et la page, puis charge les sections dans l'ordre d'inscription. */
@@ -329,7 +353,9 @@ export const sections = {
       show(tab);
       // La section ouverte est dans l'adresse : recharger y revient.
       history.replaceState(null, '', `#${tab}`);
+      registry.get(tab)?.open?.();
     };
+    goTo = go;
     for (const b of tabs) b.onclick = () => go(b.dataset.tab);
     // Un groupe ouvre sa première section.
     for (const b of groups)
@@ -371,6 +397,7 @@ export const sections = {
     };
 
     for (const s of registry.values()) s.init?.();
+    registry.get(current)?.open?.();
     loadState();
   },
 };

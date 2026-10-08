@@ -47,6 +47,12 @@
  * lignes, le fichier curé et le jour sont INJECTÉS, comme les trois écritures
  * (le store, R2, git). Seul le roster est réel.
  *
+ * Et contrat du « Tableau de bord » — `dashboardState`, l'accueil de quick.
+ * Il ne fait que LIRE, et toutes ses lectures sont INJECTÉES : l'inbox de
+ * l'admin (son moteur de revue n'est jamais lancé ici), git (un `--porcelain`
+ * factice), la version du jeu et celle du client, les dates des fichiers de la
+ * proposition, les bannières, les codes promo (R2 n'est pas appelé), le jour.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -65,11 +71,16 @@ import type { CharacterCurated, GearBuild, LocalizedText } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { getCharacterListItems } from '@/lib/data/characters';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
-import { validateBanners, type Banner } from '@/lib/data/promo-rules';
+import type { InboxItem } from '@/lib/admin/admin-inbox';
+import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
 import { LANGS } from '@/lib/i18n/config';
 import type { RecruitWindow } from '@datagen/generators/recruit';
 import {
+  ADMIN_BASE_DEFAULT,
+  ADMIN_TO_QUICK,
   BANNER_LOOKBACK_DAYS,
+  COUPON_EXPIRY_DAYS,
+  DASHBOARD_DISK,
   NO_GAME_DATA,
   NO_TRANSLATE_KEY,
   addComics,
@@ -77,6 +88,7 @@ import {
   checkGearBuilds,
   comicLangOf,
   commitPaths,
+  dashboardState,
   diffBanners,
   fitNames,
   gearRecoState,
@@ -94,6 +106,7 @@ import {
   type BannersDisk,
   type ComicsDeps,
   type ComicUpload,
+  type DashboardDisk,
   type GearCatalog,
   type GearRecoDeps,
   type NameChange,
@@ -1891,6 +1904,375 @@ describe('bannersState — le fichier curé, le roster, la table du jeu injecté
     );
     expect(state.game).toBeNull();
     expect(state.gameError).toBe('RecruitGroupTemplet illisible : Unexpected end of JSON input');
+  });
+});
+
+describe('dashboardState — l’accueil de quick, toutes lectures injectées', () => {
+  afterEach(() => vi.unstubAllEnvs());
+
+  const TODAY = '2026-10-08';
+  /** Un poste sans rien à signaler : chaque test n'y change que sa lecture. */
+  const disk = (over: Partial<DashboardDisk> = {}): DashboardDisk => ({
+    inbox: () => [],
+    adminBase: () => 'https://outerpedia.local',
+    quickTabs: {},
+    gitState: () => ({ branch: 'main', ahead: 0, behind: 0 }),
+    lastCommit: () => 'f1b28e5\tfeat(quick): tableau de bord\til y a 3 heures',
+    porcelain: () => '',
+    siteVersion: () => '1.11.404',
+    clientVersion: () => '1.11.404',
+    mtime: () => null,
+    sameBytes: () => true,
+    banners: () => ({ banners: [], missing: [], drift: [] }),
+    coupons: async () => ({ list: [] }),
+    today: () => TODAY,
+    ...over,
+  });
+
+  const item = (over: Partial<InboxItem> = {}): InboxItem => ({
+    key: 'extract:character',
+    label: 'Character',
+    detail: '1 new',
+    href: '/admin/extractor/characters',
+    tone: 'warn',
+    rank: 2,
+    count: 1,
+    ...over,
+  });
+
+  it('un poste sans rien à signaler : cinq blocs servis, aucune erreur, le jour UTC', async () => {
+    expect(await dashboardState(disk())).toEqual({
+      today: TODAY,
+      inbox: [],
+      git: {
+        branch: 'main',
+        ahead: 0,
+        behind: 0,
+        last: { hash: 'f1b28e5', subject: 'feat(quick): tableau de bord', when: 'il y a 3 heures' },
+        dirty: 0,
+      },
+      game: { site: '1.11.404', version: '1.11.404', client: 'same', proposal: false },
+      banners: { active: [], upcoming: [], missing: 0, drift: 0 },
+      coupons: { total: 0, active: 0, within: COUPON_EXPIRY_DAYS, expiring: [] },
+      errors: {},
+    });
+  });
+
+  it('inbox : la liste de l’admin telle quelle, dans son ordre, chaque `href` en adresse complète', async () => {
+    const tags = item({
+      key: 'tags',
+      label: 'Dead inline tags',
+      detail: '2 tag(s) resolve to nothing',
+      href: '/admin/tags',
+      tone: 'danger',
+      rank: 0,
+      count: 2,
+    });
+    const { inbox } = await dashboardState(
+      // Une base écrite avec sa barre finale ne la double pas.
+      disk({ inbox: () => [tags, item()], adminBase: () => 'http://localhost:3000/' }),
+    );
+    expect(inbox).toEqual([
+      { ...tags, href: 'http://localhost:3000/admin/tags', inQuick: false, tab: null },
+      {
+        ...item(),
+        href: 'http://localhost:3000/admin/extractor/characters',
+        inQuick: false,
+        tab: null,
+      },
+    ]);
+  });
+
+  it('inbox : `inQuick` et son onglet quand quick a déjà la page — la table est vide aujourd’hui', async () => {
+    const { inbox } = await dashboardState(
+      disk({
+        inbox: async () => [item(), item({ key: 'tags', href: '/admin/tags' })],
+        quickTabs: { '/admin/tags': 'tags' },
+      }),
+    );
+    expect(inbox?.map((i) => [i.key, i.inQuick, i.tab])).toEqual([
+      ['extract:character', false, null],
+      ['tags', true, 'tags'],
+    ]);
+    // Aucune page de l'inbox n'est encore dans quick : les lots suivants la rempliront.
+    expect(ADMIN_TO_QUICK).toEqual({});
+    expect(DASHBOARD_DISK.quickTabs).toBe(ADMIN_TO_QUICK);
+  });
+
+  it('`ADMIN_BASE` : le site de dev de Caddy d’office, `.env.local` le remplace', () => {
+    vi.stubEnv('ADMIN_BASE', '');
+    expect(DASHBOARD_DISK.adminBase()).toBe('https://outerpedia.local');
+    expect(ADMIN_BASE_DEFAULT).toBe('https://outerpedia.local');
+    vi.stubEnv('ADMIN_BASE', 'http://localhost:3000');
+    expect(DASHBOARD_DISK.adminBase()).toBe('http://localhost:3000');
+  });
+
+  it('git : l’état de « Pousser », le dernier commit, les fichiers modifiés ou non suivis comptés', async () => {
+    const { git } = await dashboardState(
+      disk({
+        gitState: () => ({ branch: 'main', ahead: 3, behind: 1 }),
+        lastCommit: () => 'cfd7ae96\tfeat(quick): onglet « Bannières » (B35)\til y a 2 jours',
+        porcelain: () => ' M scripts/quick/actions.ts\nA  docs/DONE.md\n?? scripts/quick/ui/tabs/',
+      }),
+    );
+    expect(git).toEqual({
+      branch: 'main',
+      ahead: 3,
+      behind: 1,
+      last: {
+        hash: 'cfd7ae96',
+        subject: 'feat(quick): onglet « Bannières » (B35)',
+        when: 'il y a 2 jours',
+      },
+      dirty: 3,
+    });
+  });
+
+  it('git : sans amont ni commit, le bloc le dit sans lever', async () => {
+    const { git, errors } = await dashboardState(
+      disk({
+        gitState: () => ({ branch: 'essai', ahead: null, behind: 0 }),
+        lastCommit: () => '',
+      }),
+    );
+    expect(git).toEqual({ branch: 'essai', ahead: null, behind: 0, last: null, dirty: 0 });
+    expect(errors).toEqual({});
+  });
+
+  it('game : le client égal, en avance, en retard — comparés segment par segment', async () => {
+    const client = async (version: string | null, site = '1.11.404') =>
+      (await dashboardState(disk({ siteVersion: () => site, clientVersion: () => version }))).game;
+    expect(await client('1.11.404')).toEqual({
+      site: '1.11.404',
+      version: '1.11.404',
+      client: 'same',
+      proposal: false,
+    });
+    expect((await client('1.11.405'))?.client).toBe('ahead');
+    expect((await client('1.12.0'))?.client).toBe('ahead');
+    // Pas une comparaison de texte : 1000 est après 404.
+    expect((await client('1.11.1000'))?.client).toBe('ahead');
+    expect((await client('1.11.99'))?.client).toBe('behind');
+    expect((await client('1.10.503'))?.client).toBe('behind');
+  });
+
+  it('game : pas de client sur ce poste — `absent`, pas une erreur', async () => {
+    const { game, errors } = await dashboardState(disk({ clientVersion: () => null }));
+    expect(game).toEqual({ site: '1.11.404', version: null, client: 'absent', proposal: false });
+    expect(errors).toEqual({});
+  });
+
+  it('game : `proposal` — un fichier de data/extracted plus récent que son homologue ET différent', async () => {
+    const asked: string[] = [];
+    const proposal = async (
+      mtimes: Record<string, number>,
+      same: boolean | (() => boolean) = false,
+    ) =>
+      (
+        await dashboardState(
+          disk({
+            mtime: (path) => {
+              asked.push(path);
+              return mtimes[path] ?? null;
+            },
+            sameBytes: () => (typeof same === 'function' ? same() : same),
+          }),
+        )
+      ).game?.proposal;
+
+    // Jamais de build sur ce poste : rien n'attend.
+    expect(await proposal({})).toBe(false);
+    // Quelques fichiers, pas tout le dossier — et aucun de ceux à rétention.
+    expect([...new Set(asked.map((p) => p.replace(/^data\/[a-z]+\//, '')))]).toEqual([
+      'game-version.json',
+      'characters.json',
+      'skills.json',
+      'items.json',
+    ]);
+
+    const newer = { 'data/extracted/characters.json': 200, 'data/generated/characters.json': 100 };
+    expect(await proposal(newer)).toBe(true);
+    // `pnpm dev` rebâtit la proposition à l'identique : la date seule ne suffit pas.
+    expect(await proposal(newer, true)).toBe(false);
+    // Le validé est plus récent (un pull de l'autre poste) : la proposition est périmée.
+    const older = { 'data/extracted/skills.json': 100, 'data/generated/skills.json': 200 };
+    expect(await proposal(older)).toBe(false);
+    expect(await proposal({ ...older, 'data/generated/skills.json': 100 })).toBe(false);
+    // Un fichier proposé que le validé n'a pas du tout.
+    expect(await proposal({ 'data/extracted/items.json': 100 })).toBe(true);
+    // Les octets ne sont lus que pour un fichier plus récent.
+    const read = vi.fn(() => true);
+    await proposal(older, read);
+    expect(read).not.toHaveBeenCalled();
+  });
+
+  it('bannières : les actives par fin, les à venir par début, les expirées tues, la détection comptée', async () => {
+    const banner = (id: string, start: string, end: string): Banner => ({
+      id,
+      name: `Perso ${id}`,
+      start,
+      end,
+    });
+    const window = (characterId: string) => ({
+      characterId,
+      type: 'pickup',
+      start: '2026-10-20',
+      end: '2026-11-17',
+    });
+    const { banners } = await dashboardState(
+      disk({
+        banners: () => ({
+          banners: [
+            banner('5', '2026-10-21', '2026-11-18'),
+            banner('4', '2026-10-13', '2026-11-10'),
+            banner('1', '2026-09-22', '2026-10-20'),
+            // Dernier jour, et premier jour : actives toutes les deux.
+            banner('2', '2026-09-10', TODAY),
+            banner('6', TODAY, '2026-10-09'),
+            // Finie hier.
+            banner('3', '2026-09-08', '2026-10-07'),
+          ],
+          missing: [window('7'), window('8')],
+          drift: [
+            {
+              id: '1',
+              name: 'Perso 1',
+              start: '2026-09-22',
+              curated: '2026-10-20',
+              game: '2026-10-21',
+              type: 'pickup',
+            },
+          ],
+        }),
+      }),
+    );
+    expect(banners).toEqual({
+      active: [
+        { id: '2', name: 'Perso 2', daysLeft: 0 },
+        { id: '6', name: 'Perso 6', daysLeft: 1 },
+        { id: '1', name: 'Perso 1', daysLeft: 12 },
+      ],
+      upcoming: [
+        { id: '4', name: 'Perso 4', inDays: 5 },
+        { id: '5', name: 'Perso 5', inDays: 13 },
+      ],
+      missing: 2,
+      drift: 1,
+    });
+  });
+
+  it('bannières : sans table du jeu, la raison passe — la liste est servie quand même', async () => {
+    const { banners, errors } = await dashboardState(
+      disk({ banners: () => ({ banners: [], missing: [], drift: [], gameError: NO_GAME_DATA }) }),
+    );
+    expect(banners).toEqual({
+      active: [],
+      upcoming: [],
+      missing: 0,
+      drift: 0,
+      gameError: NO_GAME_DATA,
+    });
+    expect(errors).toEqual({});
+  });
+
+  it(`codes promo : les actifs, et ceux qui expirent sous ${COUPON_EXPIRY_DAYS} jours, au jour près`, async () => {
+    const coupon = (code: string, start: string, end: string): PromoCode => ({
+      code,
+      start,
+      end,
+      description: { GOLD: '1' },
+    });
+    const { coupons } = await dashboardState(
+      disk({
+        coupons: async () => ({
+          list: [
+            coupon('FAR', '2026-09-01', '2026-12-31'),
+            // Sept jours : dedans. Huit : dehors.
+            coupon('SEVEN', '2026-10-01', '2026-10-15'),
+            coupon('EIGHT', '2026-10-01', '2026-10-16'),
+            coupon('SOON', '2026-10-01', '2026-10-11'),
+            coupon('LASTDAY', '2026-10-01', TODAY),
+            // Fini hier, et pas encore commencé : ni actifs ni à échéance.
+            coupon('GONE', '2026-09-01', '2026-10-07'),
+            coupon('NEXT', '2026-10-09', '2026-10-12'),
+          ],
+        }),
+      }),
+    );
+    expect(COUPON_EXPIRY_DAYS).toBe(7);
+    expect(coupons).toEqual({
+      total: 7,
+      active: 5,
+      within: 7,
+      expiring: [
+        { code: 'LASTDAY', daysLeft: 0 },
+        { code: 'SOON', daysLeft: 3 },
+        { code: 'SEVEN', daysLeft: 7 },
+      ],
+    });
+  });
+
+  it('codes promo : R2 injoignable — l’instantané local est compté, et la raison jointe', async () => {
+    const { coupons, errors } = await dashboardState(
+      disk({
+        coupons: async () => ({
+          list: [{ code: 'LOCAL', start: '2026-10-01', end: '2026-10-31', description: {} }],
+          error: 'R2 unreadable: timeout',
+        }),
+      }),
+    );
+    expect(coupons).toEqual({
+      total: 1,
+      active: 1,
+      within: 7,
+      expiring: [],
+      error: 'R2 unreadable: timeout',
+    });
+    expect(errors).toEqual({});
+  });
+
+  it('un bloc qui lève rend `null` et sa raison ; les autres sont servis', async () => {
+    const state = await dashboardState(
+      disk({
+        inbox: () => {
+          throw new Error('extraction indisponible');
+        },
+        clientVersion: () => {
+          throw new Error('manifest.dat illisible');
+        },
+        coupons: () => Promise.reject(new Error('fetch failed')),
+        gitState: () => ({ branch: 'main', ahead: 1, behind: 0 }),
+      }),
+    );
+    expect(state.inbox).toBeNull();
+    expect(state.game).toBeNull();
+    expect(state.coupons).toBeNull();
+    expect(state.errors).toEqual({
+      inbox: 'extraction indisponible',
+      game: 'manifest.dat illisible',
+      coupons: 'fetch failed',
+    });
+    expect(state.git?.ahead).toBe(1);
+    expect(state.banners).toEqual({ active: [], upcoming: [], missing: 0, drift: 0 });
+    expect(state.today).toBe(TODAY);
+
+    // Chacun des cinq, seul : jamais un rejet de `dashboardState`.
+    const boom = () => {
+      throw new Error('boom');
+    };
+    for (const [name, over] of [
+      ['inbox', { adminBase: boom }],
+      ['git', { porcelain: boom }],
+      ['git', { gitState: boom }],
+      ['game', { siteVersion: boom }],
+      ['game', { mtime: boom }],
+      ['banners', { banners: boom }],
+      ['coupons', { coupons: boom }],
+    ] as const) {
+      const one = await dashboardState(disk(over));
+      expect(one.errors, name).toEqual({ [name]: 'boom' });
+      expect(one[name], name).toBeNull();
+    }
   });
 });
 

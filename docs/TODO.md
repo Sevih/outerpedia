@@ -34,9 +34,28 @@
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
       ordre et règles dans `docs/quick-migration.md`. FAIT : Short names et
       Search aliases (onglet « Noms », lot B34), Banner (onglet
-      « Bannières », lot B35). À faire par Sevih : remplir
+      « Bannières », lot B35), la boîte de réception de la home (onglet
+      « Tableau de bord », lot B36). À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
+- [ ] **« Tableau de bord » — contrôles à l'écran (lot B36)** : le banc ne
+      clique pas. (1) L'inbox contre la home admin : ouvrir `/admin` à côté,
+      mêmes items, même ordre, mêmes chiffres (le 08/10 : « Character ·
+      1 new »). (2) Le lien « dans l'admin ↗ » : il ouvre
+      `https://outerpedia.local/admin/extractor/characters` dans un nouvel
+      onglet — il faut `pnpm dev` lancé sur un des deux postes ; sans Caddy,
+      poser `ADMIN_BASE=http://localhost:3000` dans `.env.local`. (3) La
+      version du client : « site 1.11.404 · client 1.11.404 » en vert
+      aujourd'hui ; après une mise à jour Steam du jeu, attendu en ambre avec
+      « un patch attend : onglet Patch », et sur un poste sans le jeu,
+      atténué (« pas de client Steam sur ce poste »). (4) « Ouvrir
+      Bannières » et « Ouvrir Codes promo » mènent à l'onglet, revenir sur
+      « Accueil » relit (deux à trois secondes, bouton « Actualiser »
+      occupé) ; « Pousser » depuis le tableau le relit aussi. À juger : (a)
+      « proposition d'extraction en attente » reste affichée tant que le
+      perso « 1 new » n'est pas intégré — utile ou bruit ? (b) la lecture
+      prend 2 à 3 s (le moteur de revue de l'admin, relancé par entité hors
+      Next : lot A pour le mémoïser dans `admin-inbox.ts`).
 - [ ] **Onglet « Noms » — contrôles à l'écran (lot B34)** : le banc ne tape
       pas. Passer l'état à « Tous », ouvrir un perso sans nom court dont un
       nom complet « déborde », taper un nom court et voir son badge passer
@@ -77,12 +96,15 @@
       repart plus au traducteur (seules les langues manquantes). Ajouter le
       geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
 - [ ] **« Pousser », restes de B33** : (1) le compte de l'en-tête ne se relit
-      qu'au chargement et après un enregistrement — après un
-      `git pull --rebase` ou un commit au terminal, recharger la page (relire
-      `/api/git` au retour de focus serait un lot A) ; (2) `commitPaths`
-      committe TOUT l'index, comme avant lui : un fichier indexé au terminal
-      partirait avec l'enregistrement — ne rien laisser dans l'index pendant
-      que quick tourne, ou lot A pour n'indexer que ses chemins
+      qu'au chargement, après un enregistrement et, depuis B36, à chaque
+      lecture du tableau de bord (y revenir, ou « Actualiser ») — après un
+      `git pull --rebase` ou un commit au terminal, passer par l'accueil
+      (relire `/api/git` au retour de focus serait un lot A) ; (2)
+      `commitPaths` committe TOUT l'index, comme avant lui : un fichier
+      indexé au terminal partirait avec l'enregistrement — la carte
+      « Dépôt » du tableau de bord compte les fichiers modifiés (B36), mais
+      rien ne l'empêche : ne rien laisser dans l'index pendant que quick
+      tourne, ou lot A pour n'indexer que ses chemins
       (`git commit -- <chemins>` sur un index propre). À jouer par Sevih : le
       premier clic réel sur « Pousser » (des commits non JSON attendent : le
       journal annonce le typecheck, puis « poussé »).

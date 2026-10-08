@@ -1,0 +1,119 @@
+/* Onglet « Tableau de bord » : l'accueil — quatre cartes en grille, une ligne
+   par chose à voir (une pastille de la teinte, un libellé, un détail, où
+   aller). Le reste — carte, `.badge`, `.btn`, `.empty` — vient de `quick.css`. */
+
+/* Le titre à gauche, le jour et « Actualiser » à droite. */
+#tab-dashboard .h-top {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 14px;
+}
+#tab-dashboard .h-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+#tab-dashboard .h-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Deux colonnes au-dessus de 900 px, une en dessous ; chaque carte a sa
+   hauteur. */
+#tab-dashboard .h-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  #tab-dashboard .h-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Ce qui ferme une tête de carte ou une ligne : poussé à droite. */
+#tab-dashboard .h-end {
+  margin-left: auto;
+}
+#tab-dashboard .h-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+/* « Codes promo », seconde tête de la carte Publication. */
+#tab-dashboard .h-sub {
+  border-top: 1px solid var(--line-subtle);
+}
+
+#tab-dashboard .h-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tab-dashboard .h-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  min-height: 44px;
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--line-subtle);
+  font-size: 13px;
+}
+#tab-dashboard .h-row:last-child {
+  border-bottom: 0;
+}
+#tab-dashboard .h-label {
+  font-weight: 600;
+}
+#tab-dashboard .h-detail {
+  flex: 1 1 12ch;
+  min-width: 0;
+  color: var(--content-muted);
+}
+#tab-dashboard .h-out {
+  margin-left: auto;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+#tab-dashboard .face {
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+/* Les teintes : la pastille d'une ligne, et son libellé quand la ligne EST
+   l'état (`tint` : la version du jeu, les fichiers modifiés, la détection). */
+#tab-dashboard .dot.danger {
+  background: var(--danger);
+}
+#tab-dashboard .dot.warn {
+  background: var(--warn);
+}
+#tab-dashboard .dot.info {
+  background: var(--accent);
+}
+#tab-dashboard .h-row.tint.ok .h-label {
+  color: var(--success);
+}
+#tab-dashboard .h-row.tint.warn .h-label {
+  color: var(--warn);
+}
+#tab-dashboard .h-row.tint.muted .h-label {
+  color: var(--content-muted);
+}
+
+/* Une phrase à la place des lignes : rien à montrer, ou un bloc illisible. */
+#tab-dashboard .h-note {
+  margin: 0;
+  padding: 12px 20px;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-dashboard .h-note.ko {
+  color: var(--danger);
+}

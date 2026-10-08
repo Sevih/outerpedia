@@ -39,7 +39,7 @@
  * — le site bâti garde ses propres copies de tout ça.
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import {
   loadBanners,
@@ -97,7 +97,14 @@ import {
   EE_TIERS,
   TIERS,
 } from '@/components/tierlist/tiers';
-import type { CharacterCurated, GearBuild, GearPresets, LocalizedText } from '@contracts';
+import type {
+  CharacterCurated,
+  GameVersion,
+  GearBuild,
+  GearPresets,
+  LocalizedText,
+} from '@contracts';
+import type { InboxItem } from '@/lib/admin/admin-inbox';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
 import { collectComics } from '@datagen/assets/collect-comics';
@@ -106,6 +113,7 @@ import { syncComicsSeed } from '@datagen/assets/sync-comics-seed';
 import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
 import { recruitWindows, type RecruitWindow } from '@datagen/generators/recruit';
+import { findSteamInstall, installedResVersion } from '@datagen/extract/steam';
 import { loadTable, tablePath, type Row } from '@datagen/lib/tables';
 import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
@@ -565,6 +573,227 @@ export async function saveBannerList(
     issues: [],
     written: true,
   };
+}
+
+// -------------------------------------------------------- tableau de bord ----
+
+/**
+ * Le site de dev de ce poste, où vit l'admin : Caddy le sert sous ce nom sur
+ * les deux PC (`Caddyfile.dev`, comme `QUICK_HOST` de `lan.ts`). `ADMIN_BASE`
+ * dans `.env.local` le remplace — un `http://localhost:3000` sans Caddy.
+ */
+export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
+
+/**
+ * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
+ * de quick. VIDE aujourd'hui — l'inbox ne renvoie qu'à l'extractor, aux tags et
+ * aux données du jeu, que quick n'a pas encore. Le lot qui porte une de ces
+ * pages y ajoute sa ligne : le tableau de bord y renvoie alors au lieu de
+ * l'admin (`inQuick`).
+ */
+export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {};
+
+/** Sous combien de jours un code promo actif est « à échéance ». */
+export const COUPON_EXPIRY_DAYS = 7;
+
+/**
+ * Ce que `proposal` compare, de `data/extracted/` à `data/generated/` : la
+ * version et trois fichiers lourds, pas tout le dossier. Aucun des fichiers à
+ * rétention de `promote.ts` (monstres, rencontres) : ceux-là diffèrent de la
+ * proposition par construction.
+ */
+const PROPOSAL_FILES = ['game-version.json', 'characters.json', 'skills.json', 'items.json'];
+
+/** Jours entiers de `from` à `to`, deux jours du calendrier. */
+const daysBetween = (from: string, to: string): number =>
+  Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000);
+
+export type DashboardBlock = 'inbox' | 'git' | 'game' | 'banners' | 'coupons';
+
+/** Les lectures du tableau de bord, injectées : l'admin, git, le jeu, les deux listes. */
+export interface DashboardDisk {
+  /** `buildInbox()` de l'admin : SA liste, triée par lui. */
+  inbox: () => InboxItem[] | Promise<InboxItem[]>;
+  /** Où l'admin répond (`ADMIN_BASE`). */
+  adminBase: () => string;
+  /** `href` admin → section de quick (`ADMIN_TO_QUICK`). */
+  quickTabs: Readonly<Record<string, string>>;
+  gitState: () => GitState;
+  /** `git log -1 --format=%h%x09%s%x09%cr`, brut ; vide sans commit. */
+  lastCommit: () => string;
+  /** `git status --porcelain`, brut. */
+  porcelain: () => string;
+  /** `resVersion` de `data/generated/game-version.json`. */
+  siteVersion: () => string;
+  /** Celle du client Steam installé ; `null` sans client sur ce poste. */
+  clientVersion: () => string | null;
+  /** Date de modification d'un fichier du dépôt (ms) ; `null` s'il manque. */
+  mtime: (path: string) => number | null;
+  /** Deux fichiers du dépôt, identiques à l'octet ? */
+  sameBytes: (a: string, b: string) => boolean;
+  banners: () => Pick<
+    ReturnType<typeof bannersState>,
+    'banners' | 'missing' | 'drift' | 'gameError'
+  >;
+  coupons: () => Promise<{ list: PromoCode[]; error?: string }>;
+  /** Le jour UTC, la même règle que les bannières. */
+  today: () => string;
+}
+
+/** Celles de la route : l'admin tel quel, le dépôt, le client Steam, R2. */
+export const DASHBOARD_DISK: DashboardDisk = {
+  // À la demande : le moteur de revue pèse, et les autres routes ne le lisent pas.
+  inbox: async () => (await import('@/lib/admin/admin-inbox')).buildInbox(),
+  adminBase: () => process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT,
+  quickTabs: ADMIN_TO_QUICK,
+  gitState: () => gitState(),
+  lastCommit: () => {
+    const log = git(['log', '-1', '--format=%h%x09%s%x09%cr']);
+    return log.ok ? log.out : '';
+  },
+  porcelain: () => {
+    const status = git(['status', '--porcelain']);
+    if (!status.ok) throw new Error(`git status a échoué : ${status.out}`);
+    return status.out;
+  },
+  siteVersion: () =>
+    (JSON.parse(readFileSync(resolve('data/generated/game-version.json'), 'utf8')) as GameVersion)
+      .resVersion,
+  clientVersion: () => {
+    const install = findSteamInstall();
+    return install ? installedResVersion(install) : null;
+  },
+  mtime: (path) => statSync(resolve(path), { throwIfNoEntry: false })?.mtimeMs ?? null,
+  sameBytes: (a, b) =>
+    statSync(resolve(a)).size === statSync(resolve(b)).size &&
+    readFileSync(resolve(a)).equals(readFileSync(resolve(b))),
+  banners: () => bannersState(),
+  coupons: currentCoupons,
+  today: BANNERS_DISK.today,
+};
+
+/**
+ * Une proposition d'extraction attend-elle d'être revue ou promue ? Vrai si un
+ * des `PROPOSAL_FILES` de `data/extracted/` est plus récent que son homologue
+ * de `data/generated/` ET n'a pas les mêmes octets — la date seule serait
+ * vraie en permanence : `pnpm dev` rebâtit la proposition à chaque lancement,
+ * à l'identique quand le jeu n'a pas bougé. Sans `data/extracted/` (jamais de
+ * build sur ce poste) : rien n'attend.
+ */
+function hasProposal(disk: DashboardDisk): boolean {
+  return PROPOSAL_FILES.some((name) => {
+    const extracted = disk.mtime(`data/extracted/${name}`);
+    if (extracted === null) return false;
+    const generated = disk.mtime(`data/generated/${name}`);
+    if (generated === null) return true;
+    return (
+      extracted > generated && !disk.sameBytes(`data/extracted/${name}`, `data/generated/${name}`)
+    );
+  });
+}
+
+/**
+ * Le tableau de bord, l'accueil de quick : ce qui demande une action. Il ne
+ * décide de rien — chaque bloc relit ce qu'un autre écran sait déjà :
+ *
+ *   - `inbox` : l'inbox de l'admin, TELLE QUELLE, chaque item avec son adresse
+ *     complète dans l'admin (`href`) et, quand quick a déjà la section,
+ *     `inQuick` et son `tab` ;
+ *   - `git` : `gitState` (le compte de « Pousser »), le dernier commit et le
+ *     nombre de fichiers modifiés ou non suivis (`dirty`) ;
+ *   - `game` : la version du site contre celle du client installé (`client` :
+ *     `same`, `ahead` — un patch attend —, `behind`, `absent`), et `proposal` ;
+ *   - `banners` : les actives et les à venir de `banner.json`, et les comptes
+ *     de la détection (`missing`, `drift`) — ceux de l'onglet Bannières ;
+ *   - `coupons` : les actifs, et ceux qui expirent sous `COUPON_EXPIRY_DAYS`.
+ *
+ * Chaque bloc est INDÉPENDANT : une lecture qui lève rend `null` pour le sien
+ * et sa raison dans `errors`, les autres sont servis — jamais une erreur de
+ * route.
+ */
+export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
+  const today = disk.today();
+  const errors: Partial<Record<DashboardBlock, string>> = {};
+  const block = async <T>(name: DashboardBlock, read: () => T | Promise<T>): Promise<T | null> => {
+    try {
+      return await read();
+    } catch (e: unknown) {
+      errors[name] = e instanceof Error ? e.message : String(e);
+      return null;
+    }
+  };
+
+  // Lancé en premier : c'est le seul bloc qui attend le réseau (R2).
+  const couponsRead = block('coupons', async () => {
+    const { list, error } = await disk.coupons();
+    const active = list.filter((c) => c.start <= today && today <= c.end);
+    return {
+      total: list.length,
+      active: active.length,
+      within: COUPON_EXPIRY_DAYS,
+      expiring: active
+        .map((c) => ({ code: c.code, daysLeft: daysBetween(today, c.end) }))
+        .filter((c) => c.daysLeft <= COUPON_EXPIRY_DAYS)
+        .sort((a, b) => a.daysLeft - b.daysLeft || a.code.localeCompare(b.code)),
+      // R2 injoignable : c'est l'instantané local qui est compté.
+      ...(error ? { error } : {}),
+    };
+  });
+
+  const inbox = await block('inbox', async () => {
+    const base = disk.adminBase().replace(/\/+$/, '');
+    return (await disk.inbox()).map((item) => {
+      const tab = disk.quickTabs[item.href] ?? null;
+      return { ...item, href: `${base}${item.href}`, inQuick: tab !== null, tab };
+    });
+  });
+
+  const gitBlock = await block('git', () => {
+    const [hash = '', subject = '', when = ''] = disk.lastCommit().split('\t');
+    return {
+      ...disk.gitState(),
+      last: hash ? { hash, subject, when } : null,
+      dirty: disk.porcelain().split('\n').filter(Boolean).length,
+    };
+  });
+
+  const game = await block('game', () => {
+    const site = disk.siteVersion();
+    const client = disk.clientVersion();
+    const gap = client === null ? 0 : client.localeCompare(site, 'en', { numeric: true });
+    return {
+      site,
+      version: client,
+      client:
+        client === null
+          ? ('absent' as const)
+          : gap > 0
+            ? ('ahead' as const)
+            : gap < 0
+              ? ('behind' as const)
+              : ('same' as const),
+      proposal: hasProposal(disk),
+    };
+  });
+
+  const banners = await block('banners', () => {
+    const state = disk.banners();
+    return {
+      active: state.banners
+        .filter((b) => b.start <= today && today <= b.end)
+        .map((b) => ({ id: b.id, name: b.name, daysLeft: daysBetween(today, b.end) }))
+        .sort((a, b) => a.daysLeft - b.daysLeft),
+      upcoming: state.banners
+        .filter((b) => b.start > today)
+        .map((b) => ({ id: b.id, name: b.name, inDays: daysBetween(today, b.start) }))
+        .sort((a, b) => a.inDays - b.inDays),
+      missing: state.missing.length,
+      drift: state.drift.length,
+      ...(state.gameError ? { gameError: state.gameError } : {}),
+    };
+  });
+
+  return { today, inbox, git: gitBlock, game, banners, coupons: await couponsRead, errors };
 }
 
 // ---------------------------------------------------------------- comics -----

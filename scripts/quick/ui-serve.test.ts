@@ -7,7 +7,17 @@ import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
 
 const UI = resolve(import.meta.dirname, 'ui');
-const TABS = ['coupons', 'banners', 'comics', 'videos', 'ranks', 'gear', 'discord', 'names'];
+const TABS = [
+  'dashboard',
+  'coupons',
+  'banners',
+  'comics',
+  'videos',
+  'ranks',
+  'gear',
+  'discord',
+  'names',
+];
 
 /** Comme `server.ts` : `tabs/<nom>.html`, ou `null` s'il manque. */
 const readTab = (name: string): string | null => {
@@ -49,15 +59,17 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : huit sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : neuf sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
     expect(
       [...page.matchAll(/<section id="tab-([a-z0-9-]+)"( hidden)?>/g)].map((m) => m[1]),
     ).toEqual(TABS);
+    // Une seule section sans `hidden`, la première : c'est elle que la page ouvre.
+    expect(page.match(/<section id="tab-[a-z0-9-]+">/g)).toEqual(['<section id="tab-dashboard">']);
     // Les sections sont dans `<main>` ; le journal est AVANT lui, sous `#tabs`.
-    expect(page.indexOf('<main>')).toBeLessThan(page.indexOf('<section id="tab-coupons">'));
+    expect(page.indexOf('<main>')).toBeLessThan(page.indexOf('<section id="tab-dashboard">'));
     expect(page.indexOf('id="tabs"')).toBeLessThan(page.indexOf('<aside class="journal"'));
     expect(page.indexOf('</aside>')).toBeLessThan(page.indexOf('<main>'));
     expect(page.indexOf('<div id="log"')).toBeLessThan(page.indexOf('</aside>'));
@@ -1327,5 +1339,520 @@ describe('Bannières — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-banners').hidden).toBe(true);
+  });
+});
+
+describe('Tableau de bord — la page, sur le vrai markup', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const ADMIN = 'https://outerpedia.local';
+  interface Dash {
+    today: string;
+    inbox:
+      | {
+          key: string;
+          label: string;
+          detail: string;
+          href: string;
+          tone: string;
+          inQuick: boolean;
+          tab: string | null;
+        }[]
+      | null;
+    git: {
+      branch: string;
+      ahead: number | null;
+      behind: number;
+      last: { hash: string; subject: string; when: string } | null;
+      dirty: number;
+    } | null;
+    game: { site: string; version: string | null; client: string; proposal: boolean } | null;
+    banners: {
+      active: { id: string; name: string; daysLeft: number }[];
+      upcoming: { id: string; name: string; inDays: number }[];
+      missing: number;
+      drift: number;
+      gameError?: string;
+    } | null;
+    coupons: {
+      total: number;
+      active: number;
+      within: number;
+      expiring: { code: string; daysLeft: number }[];
+      error?: string;
+    } | null;
+    errors: Record<string, string>;
+  }
+
+  /** Un poste où chaque carte a quelque chose à dire. */
+  const busy = (over: Partial<Dash> = {}): Dash => ({
+    today: '2026-10-08',
+    inbox: [
+      {
+        key: 'tags',
+        label: 'Dead inline tags',
+        detail: '2 tag(s) resolve to nothing',
+        href: `${ADMIN}/admin/tags`,
+        tone: 'danger',
+        inQuick: false,
+        tab: null,
+      },
+      {
+        key: 'extract:character',
+        label: 'Character',
+        detail: '1 new',
+        href: `${ADMIN}/admin/extractor/characters`,
+        tone: 'warn',
+        inQuick: false,
+        tab: null,
+      },
+      {
+        key: 'extract:item',
+        label: 'Item',
+        detail: '3 typo',
+        href: `${ADMIN}/admin/extractor/items`,
+        tone: 'muted',
+        inQuick: true,
+        tab: 'names',
+      },
+    ],
+    git: {
+      branch: 'main',
+      ahead: 2,
+      behind: 0,
+      last: { hash: 'f1b28e5', subject: 'feat(quick): tableau de bord', when: 'il y a 3 heures' },
+      dirty: 3,
+    },
+    game: { site: '1.11.404', version: '1.11.404', client: 'same', proposal: false },
+    banners: {
+      active: [
+        { id: '2', name: 'Bella', daysLeft: 0 },
+        { id: '1', name: 'Anna', daysLeft: 12 },
+      ],
+      upcoming: [{ id: '4', name: 'Dana', inDays: 5 }],
+      missing: 2,
+      drift: 1,
+    },
+    coupons: {
+      total: 13,
+      active: 8,
+      within: 7,
+      expiring: [
+        { code: 'LASTDAY', daysLeft: 0 },
+        { code: 'OPLIVE09', daysLeft: 3 },
+      ],
+    },
+    errors: {},
+    ...over,
+  });
+
+  /** Le même poste, sans rien à signaler. */
+  const quiet = (over: Partial<Dash> = {}): Dash =>
+    busy({
+      inbox: [],
+      git: { branch: 'main', ahead: 0, behind: 0, last: null, dirty: 0 },
+      banners: { active: [], upcoming: [], missing: 0, drift: 0 },
+      coupons: { total: 0, active: 0, within: 7, expiring: [] },
+      ...over,
+    });
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Noms et Bannières :
+   * la VRAIE coquille assemblée, le vrai `lib.js` et le vrai
+   * `tabs/dashboard.js` (eux seuls), démarrés par `sections.start()`. `fetch`
+   * est factice : il sert `served.state`, compte les lectures de
+   * `/api/dashboard` et répond à « Pousser ».
+   */
+  async function dashboard(
+    opts: {
+      state?: Dash;
+      hash?: string;
+      pushed?: unknown;
+      status?: number;
+      git?: GitState;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const served = { state: opts.state ?? busy(), reads: 0 };
+    const posts: string[] = [];
+    const answer = (data: unknown, ok = true) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      if (init) posts.push(path);
+      if (path === '/api/dashboard') {
+        served.reads += 1;
+        return opts.status
+          ? answer({ ok: false, log: ['Error: route cassée'] }, false)
+          : answer(served.state);
+      }
+      if (path === '/api/push')
+        return answer(
+          opts.pushed ?? {
+            ok: true,
+            log: ['poussé — la CI build et déploie.'],
+            git: { branch: 'main', ahead: 0, behind: 0 },
+          },
+        );
+      // `/api/state`, sans `git` d'office : l'en-tête ne suit alors que le
+      // tableau de bord.
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747, git: opts.git });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    // `quick:saved` : happy-dom ne distribue que SES événements, pas l'`Event`
+    // de Node que `lib.js` construirait ici.
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'dashboard.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 3; i++) await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLButtonElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const text = (node: Element | null | undefined) =>
+      (node?.textContent ?? '').replace(/\s+/g, ' ').trim();
+    return {
+      el,
+      all,
+      text,
+      served,
+      posts,
+      settle,
+      /** Les lignes d'un bloc : la teinte de la pastille, ce qui s'y lit, teintée ? */
+      rows: (id: string) =>
+        all(`#${id} .h-row`).map((li) => [
+          li.querySelector('.dot')?.className.replace('dot ', ''),
+          text(li),
+          li.classList.contains('tint'),
+        ]),
+      /** Les phrases d'un bloc sans ligne : rien à montrer, ou illisible. */
+      notes: (id: string) => all(`#${id} .h-note, #${id} .empty`).map((p) => text(p)),
+      /** Les titres des cartes, dans l'ordre de la grille. */
+      cards: () => all('#tab-dashboard .h-grid > .card').map((c) => c.getAttribute('aria-label')),
+    };
+  }
+
+  it('le groupe Accueil en tête : il ouvre la page, et le tableau de bord se lit', async () => {
+    const page = await dashboard();
+    expect(page.all('#groups button').map((b) => page.text(b).split(' ')[0])).toEqual([
+      'Accueil',
+      'Publication',
+      'Données',
+      'Éditeurs',
+      'Guides',
+      'Outils',
+    ]);
+    expect(
+      page.all('#tabs [data-group="home"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([['dashboard', 'Tableau de bord']]);
+    // Sans hash : la première section du premier groupe, et elle seule.
+    expect(
+      page
+        .all('main > section')
+        .filter((s) => !s.hidden)
+        .map((s) => s.id),
+    ).toEqual(['tab-dashboard']);
+    expect(page.all('#groups [data-group="home"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#tabs [data-tab="dashboard"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#tabs [data-tab="coupons"]')[0].hidden).toBe(true);
+    // Pas `wide` : la section reste dans les 1200 px.
+    expect(page.all('main')[0].classList.contains('wide')).toBe(false);
+    expect(page.served.reads).toBe(1);
+    expect(page.posts).toEqual([]);
+  });
+
+  it('les quatre cartes, depuis l’état du serveur', async () => {
+    const page = await dashboard();
+    expect(page.cards()).toEqual(['À faire', 'Dépôt', 'Jeu', 'Publication']);
+    expect(page.text(page.el('h-today'))).toBe('au 2026-10-08 (UTC)');
+
+    // « À faire » : l'inbox de l'admin, dans son ordre, une pastille par teinte.
+    expect(page.rows('h-inbox')).toEqual([
+      ['danger', 'Dead inline tags2 tag(s) resolve to nothingdans l’admin ↗', false],
+      ['warn', 'Character1 newdans l’admin ↗', false],
+      ['muted', 'Item3 typoOuvrir', false],
+    ]);
+    expect(page.text(page.el('h-inbox-count'))).toBe('3');
+    expect(page.el('h-inbox-count').querySelector('.badge')?.className).toBe('badge ko');
+    expect(
+      page.all('#h-inbox a').map((a) => [a.getAttribute('href'), a.getAttribute('target')]),
+    ).toEqual([
+      ['https://outerpedia.local/admin/tags', '_blank'],
+      ['https://outerpedia.local/admin/extractor/characters', '_blank'],
+    ]);
+    expect(page.text(page.all('[aria-label="À faire"] .card-head')[0])).toContain(
+      "extraction, tags, assets — lu par l'admin",
+    );
+
+    // « Dépôt » : le compte de « Pousser », le dernier commit, l'index.
+    expect(page.text(page.el('h-git-branch'))).toBe('main');
+    expect(page.rows('h-git')).toEqual([
+      ['info', '2 commits à pousser« Pousser », dans l’en-tête', false],
+      ['muted', 'f1b28e5feat(quick): tableau de bord · il y a 3 heures', false],
+      [
+        'warn',
+        '3 fichiers modifiésou non suivis — ce qui est indexé part avec le prochain enregistrement',
+        true,
+      ],
+    ]);
+    // L'en-tête dit le même compte que la carte.
+    expect(page.text(page.el('push-count'))).toBe('2');
+
+    // « Jeu » : égal, en vert.
+    expect(page.rows('h-game')).toEqual([['ok', 'site 1.11.404 · client 1.11.404à jour', true]]);
+
+    // « Publication » : les bannières, puis les codes promo.
+    expect(page.rows('h-banners')).toEqual([
+      ['ok', 'Belladernier jour', false],
+      ['ok', 'Anna12 j restants', false],
+      ['info', 'Danadans 5 j', false],
+      ['warn', '2 à insérer · 1 à alignerd’après la table du jeu', true],
+    ]);
+    expect(page.text(page.el('h-banners-count'))).toBe('2 actives1 à venir');
+    expect(page.all('#h-banners .face')[0].getAttribute('src')).toMatch(
+      /\/images\/characters\/faceicon\/FI_2\.webp$/,
+    );
+    expect(page.rows('h-coupons')).toEqual([
+      ['warn', 'LASTDAYdernier jour', false],
+      ['warn', 'OPLIVE09expire dans 3 j', false],
+    ]);
+    expect(page.text(page.el('h-coupons-count'))).toBe('8 actifs');
+  });
+
+  it('rien à signaler : « Rien à faire. », et des pastilles vertes', async () => {
+    const page = await dashboard({ state: quiet() });
+    expect(page.notes('h-inbox')).toEqual(['Rien à faire.']);
+    expect(page.rows('h-inbox')).toEqual([]);
+    expect(page.text(page.el('h-inbox-count'))).toBe('');
+    expect(page.rows('h-git')).toEqual([
+      ['ok', 'rien à pousser', false],
+      ['ok', 'aucun fichier modifié', false],
+    ]);
+    expect(page.notes('h-banners')).toEqual(['Aucune bannière active ni à venir.']);
+    expect(page.notes('h-coupons')).toEqual(['Aucun code n’expire sous 7 jours.']);
+    expect(page.el('h-coupons-count').querySelector('.badge')?.className).toBe('badge off');
+    expect(page.text(page.el('h-coupons-count'))).toBe('0 actif');
+  });
+
+  it('les teintes du jeu : un patch attend en ambre, sans client atténué, la proposition dite', async () => {
+    const game = async (over: Partial<NonNullable<Dash['game']>>) =>
+      (
+        await dashboard({
+          state: quiet({
+            game: {
+              site: '1.11.404',
+              version: '1.11.404',
+              client: 'same',
+              proposal: false,
+              ...over,
+            },
+          }),
+        })
+      ).rows('h-game');
+
+    // La section « Patch » n'existe pas encore : du texte, pas un bouton.
+    expect(await game({ version: '1.11.405', client: 'ahead' })).toEqual([
+      ['warn', 'site 1.11.404 · client 1.11.405un patch attend : onglet Patch', true],
+    ]);
+    expect(await game({ version: null, client: 'absent' })).toEqual([
+      ['muted', 'site 1.11.404 · client —pas de client Steam sur ce poste', true],
+    ]);
+    expect(await game({ version: '1.11.403', client: 'behind' })).toEqual([
+      ['muted', 'site 1.11.404 · client 1.11.403le client de ce poste est en retard', true],
+    ]);
+    expect(await game({ proposal: true })).toEqual([
+      ['ok', 'site 1.11.404 · client 1.11.404à jour', true],
+      [
+        'warn',
+        'proposition d’extraction en attentedata/extracted/ : à revoir, puis promouvoir',
+        true,
+      ],
+    ]);
+  });
+
+  it('le dépôt en retard ou sans amont : la règle de l’en-tête', async () => {
+    const late = await dashboard({
+      state: quiet({ git: { branch: 'main', ahead: 1, behind: 3, last: null, dirty: 1 } }),
+    });
+    expect(late.rows('h-git')).toEqual([
+      ['info', '1 commit à pousser« Pousser », dans l’en-tête', false],
+      ['warn', '3 commits de retard sur origin`git pull --rebase` d’abord, au terminal', true],
+      [
+        'warn',
+        '1 fichier modifiéou non suivis — ce qui est indexé part avec le prochain enregistrement',
+        true,
+      ],
+    ]);
+    expect(late.el('push-count').classList.contains('warn')).toBe(true);
+
+    const none = await dashboard({
+      state: quiet({ git: { branch: 'essai', ahead: null, behind: 0, last: null, dirty: 0 } }),
+    });
+    expect(none.rows('h-git')[0]).toEqual(['muted', 'pas d’amontrien ne peut partir d’ici', false]);
+    expect(none.text(none.el('push-count'))).toBe('pas d’amont');
+  });
+
+  it('un bloc illisible le dit dans SA carte, les autres sont servis', async () => {
+    const page = await dashboard({
+      state: busy({
+        inbox: null,
+        game: null,
+        errors: { inbox: 'extraction indisponible', game: 'manifest.dat illisible' },
+      }),
+    });
+    expect(page.notes('h-inbox')).toEqual(['Illisible : extraction indisponible']);
+    expect(page.all('#h-inbox .h-note')[0].className).toBe('h-note ko');
+    expect(page.notes('h-game')).toEqual(['Illisible : manifest.dat illisible']);
+    expect(page.rows('h-git')).toHaveLength(3);
+    expect(page.rows('h-banners')).toHaveLength(4);
+    // Rien dans le journal : la route a répondu.
+    expect(page.el('journal').hidden).toBe(true);
+
+    // Sans table du jeu, R2 injoignable : dits en clair, sous leurs lignes.
+    const partial = await dashboard({
+      state: quiet({
+        banners: { active: [], upcoming: [], missing: 0, drift: 0, gameError: 'Pas de données.' },
+        coupons: { total: 1, active: 1, within: 7, expiring: [], error: 'R2 unreadable: x' },
+      }),
+    });
+    expect(partial.notes('h-banners')).toEqual([
+      'Aucune bannière active ni à venir.',
+      'Pas de données.',
+    ]);
+    expect(partial.notes('h-coupons')).toEqual([
+      'Aucun code n’expire sous 7 jours.',
+      'R2 unreadable: x — instantané local.',
+    ]);
+  });
+
+  it('une route en erreur passe par le journal, et « Actualiser » se rallume', async () => {
+    const page = await dashboard({ status: 500 });
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.text(page.el('log'))).toBe(
+      'Tableau de bord illisible : Error: Error: route cassée',
+    );
+    expect(page.el('h-refresh').disabled).toBe(false);
+    expect(page.el('h-refresh').classList.contains('busy')).toBe(false);
+  });
+
+  it('« Actualiser » relit, et redessine ce que le serveur dit maintenant', async () => {
+    const page = await dashboard();
+    expect(page.rows('h-inbox')).toHaveLength(3);
+    page.served.state = quiet();
+    page.el('h-refresh').click();
+    expect(page.el('h-refresh').disabled).toBe(true);
+    expect(page.el('h-refresh').classList.contains('busy')).toBe(true);
+    await page.settle();
+    expect(page.served.reads).toBe(2);
+    expect(page.notes('h-inbox')).toEqual(['Rien à faire.']);
+    expect(page.el('h-refresh').disabled).toBe(false);
+    expect(page.el('h-refresh').classList.contains('busy')).toBe(false);
+  });
+
+  it('les boutons renvoient à leur section ; revenir sur l’onglet relit', async () => {
+    const page = await dashboard();
+    const button = (label: string) =>
+      page.all('#tab-dashboard button').find((b) => page.text(b) === label) as HTMLElement;
+
+    button('Ouvrir Bannières').click();
+    expect(page.el('tab-banners').hidden).toBe(false);
+    expect(page.el('tab-dashboard').hidden).toBe(true);
+    expect(page.all('#groups [data-group="publication"]')[0].getAttribute('aria-selected')).toBe(
+      'true',
+    );
+    await page.settle();
+    expect(page.served.reads).toBe(1);
+
+    // Le groupe Accueil ramène au tableau de bord, qui se relit.
+    page.all('#groups [data-group="home"]')[0].click();
+    await page.settle();
+    expect(page.el('tab-dashboard').hidden).toBe(false);
+    expect(page.served.reads).toBe(2);
+
+    button('Ouvrir Codes promo').click();
+    expect(page.el('tab-coupons').hidden).toBe(false);
+    page.all('#tabs [data-tab="dashboard"]')[0].click();
+    await page.settle();
+    expect(page.served.reads).toBe(3);
+
+    // Un item de l'inbox que quick a déjà : son bouton, pas le lien de l'admin.
+    button('Ouvrir').click();
+    expect(page.el('tab-names').hidden).toBe(false);
+  });
+
+  it('ouvert sur un autre onglet (`#coupons`), il ne lit rien avant qu’on y vienne', async () => {
+    const page = await dashboard({ hash: '#coupons' });
+    expect(page.el('tab-coupons').hidden).toBe(false);
+    expect(page.el('tab-dashboard').hidden).toBe(true);
+    expect(page.served.reads).toBe(0);
+    page.all('#groups [data-group="home"]')[0].click();
+    await page.settle();
+    expect(page.served.reads).toBe(1);
+    expect(page.rows('h-inbox')).toHaveLength(3);
+  });
+
+  it('`quick:saved` : un geste réussi relit le tableau s’il est à l’écran — pas autrement', async () => {
+    const page = await dashboard();
+    expect(page.el('push').disabled).toBe(false);
+    page.served.state = quiet();
+    page.el('push').click();
+    await page.settle();
+    expect(page.posts).toEqual(['/api/push']);
+    expect(page.served.reads).toBe(2);
+    expect(page.rows('h-git')[0]).toEqual(['ok', 'rien à pousser', false]);
+
+    // Un push refusé n'a rien changé : pas de relecture.
+    const refused = await dashboard({
+      pushed: {
+        ok: false,
+        log: ['git push a échoué'],
+        git: { branch: 'main', ahead: 2, behind: 1 },
+      },
+    });
+    refused.el('push').click();
+    await refused.settle();
+    expect(refused.posts).toEqual(['/api/push']);
+    expect(refused.served.reads).toBe(1);
+
+    // Tableau caché : il se relira en revenant, pas maintenant.
+    const hidden = await dashboard({
+      hash: '#coupons',
+      git: { branch: 'main', ahead: 1, behind: 0 },
+    });
+    expect(hidden.el('push').disabled).toBe(false);
+    hidden.el('push').click();
+    await hidden.settle();
+    expect(hidden.posts).toEqual(['/api/push']);
+    expect(hidden.served.reads).toBe(0);
   });
 });

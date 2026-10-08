@@ -7,6 +7,112 @@
 
 ## 2026-10-08
 
+- **quick : « Tableau de bord » — l'accueil de quick, ce qui demande une
+  action (lot B36, migration 18)** (08/10) : étape 18 de
+  `docs/quick-migration.md`. Quick devient le vrai panneau admin, il lui
+  fallait un accueil : un groupe « Accueil » en TÊTE du menu, dont la section
+  « Tableau de bord » est celle que la page ouvre. Il montre et renvoie, il ne
+  fait rien — aucune route n'est postée d'ici.
+  **Serveur** — `dashboardState(disk)` dans `scripts/quick/actions.ts`, servi
+  par `GET /api/dashboard` (`server.ts`), toutes lectures injectées
+  (`DashboardDisk`, `DASHBOARD_DISK` pour la route) : `inbox` =
+  `buildInbox()` de l'admin TEL QUEL (importé à la demande : le moteur de
+  revue ne pèse pas sur le démarrage), chaque `href` complété par
+  `ADMIN_BASE` (`https://outerpedia.local` d'office, `.env.local` le
+  remplace) avec `inQuick` et `tab` d'après la table `ADMIN_TO_QUICK` — vide
+  aujourd'hui, les lots suivants la rempliront ; `git` = `gitState()` plus le
+  dernier commit et le compte de `git status --porcelain` ; `game` = la
+  version de `data/generated/game-version.json` contre celle du client Steam
+  (`installedResVersion(findSteamInstall())`), dite `same`, `ahead`,
+  `behind` ou `absent` (comparaison par segment : 1000 est après 404), et
+  `proposal` ; `banners` = les actives (jours restants) et les à venir de
+  `bannersState()`, `missing` et `drift` comptés comme l'onglet Bannières ;
+  `coupons` = les actifs et ceux qui expirent sous 7 jours
+  (`COUPON_EXPIRY_DAYS`) ; `today`, le jour UTC. Chaque bloc est
+  indépendant : une lecture qui lève rend `null` pour le sien et sa raison
+  dans `errors`, jamais une erreur de route.
+  **Page** — `scripts/quick/ui/tabs/dashboard.{html,js,css}` : quatre cartes
+  en grille (deux colonnes au-dessus de 900 px, une en dessous) — « À
+  faire » (une ligne par item de l'inbox, pastille de sa teinte, lien « dans
+  l'admin ↗ » en nouvel onglet ou bouton vers l'onglet quand `inQuick` ;
+  « Rien à faire. »), « Dépôt » (la branche, « N commits à pousser » selon la
+  règle de `gitBar`, le retard, le dernier commit, « N fichiers modifiés » en
+  ambre : l'avertissement « quick committe tout l'index » du TODO, rendu
+  visible), « Jeu » (« site X · client Y » en vert, en ambre avec « un patch
+  attend : onglet Patch » quand le client est en avance, atténué sans
+  client ; « proposition d'extraction en attente »), « Publication » (les
+  bannières puis les codes promo, chacun avec son bouton vers son onglet).
+  « Actualiser » relit ; la page relit aussi à chaque venue à l'écran et
+  après un geste réussi.
+  **Coquille** — `ui/lib.js` : le groupe `home` en tête de `GROUPS` ; un
+  crochet `open()` par section (appelé quand elle vient à l'écran, au
+  démarrage puis à chaque retour) ; `sections.go(tab)` ; `post()` émet
+  `quick:saved` sur `document` quand un geste qui rend `git` a réussi — le
+  tableau de bord ne l'écoute que s'il est montré, il n'y a aucune relecture
+  en boucle. `index.html` : marqueur, feuille et import en premier ;
+  `tabs/coupons.html` prend le `hidden` que la première section n'a pas.
+  **Deux choix à relire.** (1) `proposal` : le lot demandait « un fichier de
+  `data/extracted/` plus récent que son homologue » ; la date seule est vraie
+  en permanence sur ce poste (`pnpm dev` rebâtit la proposition à
+  l'identique : `items.json` y est plus récent et identique à l'octet), donc
+  la règle est « plus récent ET différent », sur `game-version.json`,
+  `characters.json`, `skills.json`, `items.json` — pas les fichiers à
+  rétention de `promote.ts`, différents par construction. (2) Le compte de
+  l'en-tête suit aussi le tableau de bord (`gitBar` à chaque lecture) : un
+  commit fait au terminal s'y voit sans recharger la page.
+  **Docs** — `docs/quick-migration.md` (l'étape 18 dans « Déjà dans quick »,
+  l'entrée marquée FAIT, numérotation inchangée ; portage PARTIEL de la home
+  admin, qui garde son lien), `scripts/quick/ui/STYLE.md` (le groupe
+  « Accueil » dans la coquille, `open` / `go` / `quick:saved`, le croquis
+  « Tableau de bord »).
+  **Tests** (+25) — `actions.test.ts`, `dashboardState` à lectures
+  injectées : l'item d'inbox et son adresse complète, `inQuick`, `ADMIN_BASE`,
+  le dernier commit et un `--porcelain` factice compté, le client égal, en
+  avance, en retard, absent, `proposal` (six cas), bannières et codes à
+  échéance (7 jours dedans, 8 dehors), un bloc qui lève = `null` + `error`
+  et les autres servis, pour chacun des cinq. `ui-serve.test.ts`, la page en
+  happy-dom (méthode C4) : le groupe Accueil en tête et l'onglet par défaut,
+  les quatre cartes, « Rien à faire. », les teintes, un bloc illisible dans
+  sa carte, une route en erreur au journal, « Actualiser », les boutons vers
+  les onglets, la relecture au retour et sur `quick:saved` (pas après un push
+  refusé, pas quand le tableau est caché).
+  **Vérification** — `pnpm typecheck` : sans sortie, code 0 (dernière ligne :
+  la commande `tsc --noEmit && … -p scripts/tsconfig.json`) ; `pnpm lint` :
+  `$ eslint`, code 0 ; `pnpm test` : `Tests  2924 passed (2924)`, 198
+  fichiers ; `NODE_ENV=development pnpm exec vitest run scripts/quick` :
+  `Tests  494 passed (494)`. Banc : quick isolé sur :4861 (sans jeton ni
+  pairs, arrêté par `/api/quit`, rien d'enregistré, aucun `pnpm datagen:*`),
+  `shot.mjs --tabs dashboard --settle 7000` à 1440, 900 et 720 px
+  (`/tmp/quick-shots/b36/`) — aucun autre onglet n'a changé d'aspect (seul
+  `coupons.html` gagne un `hidden`).
+  **Ce que le tableau montre sur ce poste le 08/10** — À faire : un item,
+  « Character · 1 new » (ambre), vers
+  `https://outerpedia.local/admin/extractor/characters`. Dépôt : `main`,
+  7 commits à pousser, aucun retard, dernier commit `54135782`, 10 fichiers
+  modifiés (ceux de ce lot). Jeu : site 1.11.404 · client 1.11.404, à jour ;
+  proposition en attente (`characters.json` proposé diffère du validé : le
+  perso « 1 new » de l'inbox, pas encore intégré). Bannières : Resonance Rin
+  et Resonance Eliza actives, 12 j restants chacune, aucune à venir,
+  « 2 à aligner » (Titia et Lambda, cf. B35). Codes promo : 102 codes,
+  8 actifs, aucun n'expire sous 7 jours.
+  **Laissé / vu hors périmètre.** (a) `/api/dashboard` répond en 2,2 à 3,1 s
+  et tient le serveur pendant ce temps : `cache()` de `react` ne mémoïse
+  rien hors rendu serveur (React 19.2.8, c'est un passe-plat), donc sous tsx
+  `bucketsOf` relance le moteur de revue pour chacune des dix entités
+  (~0,2 s l'une, mesuré) — une mémoïsation dans `admin-inbox.ts`, ou un seul
+  appel d'`entityBuckets()` par `buildInbox()`, ramènerait la route sous la
+  seconde ; non touché, la logique de l'admin ne bouge pas dans un portage.
+  (b) `currentCoupons()` (`loadCouponsForEdit`) réécrit
+  `data/curated/coupons.json` à chaque lecture, comme `/api/state` : un code
+  ajouté par le staff depuis Discord apparaît alors dans « N fichiers
+  modifiés ». (c) Les liens « dans l'admin ↗ » supposent `pnpm dev` lancé sur
+  un des deux postes (Caddy) : sinon la page de l'admin ne répond pas. (d)
+  `CLAUDE.md` dit encore « Six gestes, une page » pour quick. Non fait, hors
+  périmètre : la section Patch (C10, qui ajoutera sa section au groupe
+  Accueil — le bouton « Onglet Patch » de la carte « Jeu » apparaîtra seul
+  dès que `GROUPS` porte une section `patch`), l'extractor, la couverture
+  éditoriale. Aucun clic réel n'a été joué (le banc ne clique pas) : cf. la
+  ligne du TODO.
 - **Relecture B35** (Fable, 08/10) : `cfd7ae96` validé — 97 lots, aucun
   ouvert. Périmètre attendu (`recruit.ts` + test, `tabs/banners.*`,
   `actions.ts`, `server.ts`, `lib.js`, `index.html`, `quick.css`, tests,
