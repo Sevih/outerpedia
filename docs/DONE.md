@@ -7,6 +7,35 @@
 
 ## 2026-10-08
 
+- **Relecture B38** (Fable, 08/10) : `7ba0160e` validé — 101 lots, aucun
+  ouvert. Périmètre attendu (`tabs/gamedata.*`, `actions.ts`, `server.ts`,
+  `lib.js`, `index.html`, `gamedata-columns.ts` sorti de `GameDataBrowser`,
+  `layout.dev.tsx`, tests, STYLE.md, DONE, TODO, `quick-migration.md`),
+  entrée DONE complète, huit écarts acceptés (`loadTextIndex` compté,
+  commentaires retirés avant la passe, note de tous les lecteurs, `schema`
+  servie sans appel, `pushState` sur un lien croisé, `&row=`, refus en
+  français). `pnpm typecheck`, `pnpm lint`, `pnpm test` verts sur HEAD (201
+  fichiers, 3 069 tests), suite de quick sous `NODE_ENV=development` (612).
+  Contrôle indépendant : un `grep` brut des quatre primitives sur
+  `datagen/`, `src/lib/data/`, `scripts/quick/` hors tests donne 89 tables
+  et 42 fichiers (41 côté quick : un fichier ne cite une table qu'en
+  commentaire, écarté à raison) ; scripts `tsx` du scratchpad
+  (`b38/check*.ts`) : `gameTablesState()` en 15 ms, 258 tables, 89 lues par
+  41 fichiers, `TextSystem` en tête (18), `RecruitGroupTemplet` lue par
+  `extractor/specs/character`, `generators/recruit`, `scripts/quick/actions`
+  avec ses trois lignes de note ; `queryGameTable` : nom invalide 400,
+  inconnue 404, `CostumeTemplet` filtrée sur `CharacterID = 2000023` en
+  exact → 2 lignes (85 en sous-chaîne), puis `CharacterTemplet` `ID =
+2000023` → 1 ligne. Quick isolé (:4857, clés vidées, que des GET) : mêmes
+  comptes et statuts ; captures (scratchpad `b38/`) : le sélecteur vide
+  (« 258 tables · 89 lues par 41 fichiers ») et
+  `#gamedata/CostumeTemplet?row=3` — badge « utilisée · 2 », deux chips et
+  deux lignes de note, liens accent sur `CharacterID` et `ShareCharacterID`,
+  noms résolus en italique sous les clés, la ligne brute à droite avec
+  « Copier ». Pour Sevih : la ligne du TODO (sélecteur, lien croisé depuis
+  `CostumeTemplet`, textes résolus, ligne brute), et à juger les quatre
+  restes (alias de `linkTargetFor` pour `PickupID`, `src/lib/admin/` hors
+  de la passe, lectures par variable, item « Assets »).
 - **quick : onglet « Tables du jeu » — les tables lues d'abord, une recherche
   au lieu d'une liste (lot B38, migration 8)** : l'outil admin « Game data »
   (`GameDataBrowser`, `GameDataTableList`) est porté dans quick, groupe
