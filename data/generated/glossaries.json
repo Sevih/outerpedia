@@ -1306,7 +1306,7 @@
       },
       "desc": {
         "en": "Restricts movement. Removed when the caster dies.\\nOnly the debuff with the longest duration among Frozen, Petrified, Stunned, and Golden Curse can be inflicted at the same time.",
-        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・黄金の呪いの\\n中で、ターンが最も残っている効果のみ\\n適用される。",
+        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・\\n黄金の呪いの中で、\\nターンが最も残っている効果のみ\\n適用される。",
         "kr": "대상의 행동을 제한합니다.\\n시전자가 사망 시 해제됩니다.\\n빙결, 석화, 스턴, 황금의 저주 중 가장 지속 시간이 긴 효과 1종만 적용됩니다.",
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。",
         "fr": "Restreint les mouvements. Disparaît lorsque le lanceur meurt. \\nSeul l'affaiblissement ayant la + longue dur. parmi Gelé, Pétrifié, Étourdi & Malédiction dorée peut être infligé simultanément",
@@ -1329,7 +1329,7 @@
       },
       "desc": {
         "en": "Restricts movement. Removed when the caster dies.\\nOnly the debuff with the longest duration among Frozen, Petrified, Stunned, and Golden Curse can be inflicted at the same time.",
-        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・黄金の呪いの\\n中で、ターンが最も残っている効果のみ\\n適用される。",
+        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・\\n黄金の呪いの中で、\\nターンが最も残っている効果のみ\\n適用される。",
         "kr": "대상의 행동을 제한합니다.\\n시전자가 사망 시 해제됩니다.\\n빙결, 석화, 스턴, 황금의 저주 중 가장 지속 시간이 긴 효과 1종만 적용됩니다.",
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。",
         "fr": "Restreint les mouvements. Disparaît lorsque le lanceur meurt. \\nSeul l'affaiblissement ayant la + longue dur. parmi Gelé, Pétrifié, Étourdi & Malédiction dorée peut être infligé simultanément",
@@ -1352,7 +1352,7 @@
       },
       "desc": {
         "en": "Restricts movement. Removed when the caster dies.\\nOnly the debuff with the longest duration among Frozen, Petrified, Stunned, and Golden Curse can be inflicted at the same time.",
-        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・黄金の呪いの\\n中で、ターンが最も残っている効果のみ\\n適用される。",
+        "jp": "一定の間行動できなくなる。\\nスキル使用者が倒れると\\n解除される。スタン・石化・凍結・\\n黄金の呪いの中で、\\nターンが最も残っている効果のみ\\n適用される。",
         "kr": "대상의 행동을 제한합니다.\\n시전자가 사망 시 해제됩니다.\\n빙결, 석화, 스턴, 황금의 저주 중 가장 지속 시간이 긴 효과 1종만 적용됩니다.",
         "zh": "限制目标行动。\\n施展者死亡时解除。\\n冰冻、石化、黄金诅咒、\\n晕眩中持续时间最长的\\n1种效果生效。",
         "fr": "Restreint les mouvements. Disparaît lorsque le lanceur meurt. \\nSeul l'affaiblissement ayant la + longue dur. parmi Gelé, Pétrifié, Étourdi & Malédiction dorée peut être infligé simultanément",
@@ -4436,7 +4436,7 @@
       },
       "desc": {
         "en": "For each stack held, the caster gains the following effects (up to 10 stacks).\\n1. Damage +5% (up to 50%)\\n2. Damage Taken Reduction +15% (up to 150%)\\n3. Speed +10 (up to 100)\\nThe caster gains the following additional effects upon reaching the specified stack thresholds.\\n5 stacks: After an enemy's action ends, Priority +10%\\n10 stacks: Damage dealt to bosses +100%",
-        "jp": "保有数1個につき、自分に以下の効果を付与します。(最大10スタック)\\n1. 与ダメージ +5%（最大50%）\\n2. 被ダメージ減少 +15%（最大150%）\\n3. スピード +10（最大100）\\n一定数以上保有している場合、以下の追加効果を獲得します。\\n5個：敵の行動終了後、自分の行動ゲージ +10%\\n10個：ボスへの与ダメージ +100%",
+        "jp": "保有数1個につき、自分に以下の効果を\\n付与します。(最大10スタック)\\n1. 与ダメージ +5%（最大50%）\\n2. 被ダメージ減少 +15%（最大150%）\\n3. スピード +10（最大100）\\n一定数以上保有している場合、\\n以下の追加効果を獲得します。\\n5個：敵の行動終了後、\\n自分の行動ゲージ +10%\\n10個：ボスへの与ダメージ +100%",
         "kr": "보유 개수 1개당 자신에게 아래 효과를 줍니다.(최대 10스텍)\\n1. 피해 +5%(최대 50%)\\n2.받는 피해 감소 15%(최대 150%)\\n3.속도 +10(최대 100)\\n일정 개수 이상 보유 시 아래 추가 효과를 얻습니다.\\n\n5개: 적 행동 종료 후 자신 행동 게이지 +10%\\n10개: 보스 대상 피해 +100%",
         "zh": "每持有1个，赋予自身以下效果。（最多叠加10次）\\n1. 伤害 +5%（最多50%）\\n2. 受到的伤害降低15%（最多150%）\\n3. 速度 +10（最多100）\\n持有达到指定数量时，获得以下追加效果。\\n5个：敌人行动结束后，自身行动值 +10%\\n10个：对首领怪物造成的伤害 +100%",
         "fr": "Pour chaque cumul détenu, obtient les effets suivants. (Max. 10 cumuls)\\n1. Dégâts +5% (max. 50%)\\n2. Réduction des dégâts reçus +15% (max. 150%)\\n3. VIT +10 (max. 100)\\nLorsque le nombre de cumuls requis est atteint, obtient les effets supplémentaires suivants.\\n5 cumuls : À la fin de l'action d'un ennemi, Priorité +10%\\n10 cumuls : Dégâts contre les boss +100%",

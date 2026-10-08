@@ -11907,7 +11907,7 @@
     },
     "desc": {
       "en": "Increases damage proportional to the target's Max Health (up to 100%)",
-      "jp": "対象の最大HPに比例してダメージUP（最大100%）",
+      "jp": "対象の最大HPに応じてダメージUP (最大 100%)",
       "kr": "대상 최대 체력 비례 피해 증가 (최대 100%)",
       "zh": "造成的伤害随目标最大生命值提升（最多100%）",
       "fr": "Augmente les dégâts selon les PV max de la cible (max. 100 %)",
@@ -16263,11 +16263,11 @@
     },
     "desc": {
       "en": "Attack <color=#28d9ed>+5%</color> for each <color=#28d9ed>Light of the Deep Sea</color>",
-      "jp": "<color=#28d9ed>固有資源：深淵の希望</color>1個につき自分の攻撃力<color=#28d9ed>+5%</color>",
+      "jp": "<color=#28d9ed>【深海の光】</color>1個につき、自分の攻撃力<color=#28d9ed>5%</color>",
       "kr": "<color=#28d9ed>심해의 빛</color> 1개 당 자신 공격력 <color=#28d9ed>5%</color>",
-      "zh": "每1个<color=#28d9ed>固有资源：深渊中的希望</color>，自身攻击力<color=#28d9ed>+5%</color>",
-      "fr": "ATQ propre <color=#28d9ed>+5%</color> par <color=#28d9ed>Ressource unique : Espoir dans l'abîme</color>",
-      "es": "ATQ propio <color=#28d9ed>+5%</color> por cada <color=#28d9ed>Recurso Único: Esperanza en el Abismo</color>"
+      "zh": "每1个<color=#28d9ed>深海之光</color>，自身攻击力<color=#28d9ed>+5%</color>",
+      "fr": "ATQ propre <color=#28d9ed>+5%</color> par <color=#28d9ed>Lumière des profondeurs</color>",
+      "es": "ATQ propio <color=#28d9ed>+5%</color> por cada <color=#28d9ed>Luz del Mar Profundo</color>"
     },
     "values": [{}],
     "levels": [1],
