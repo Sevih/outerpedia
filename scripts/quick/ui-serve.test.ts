@@ -249,8 +249,10 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/effects'))).toEqual([]);
   });
 
-  it('de la fiche perso, ne relaie aucun POST : le roster et l’état sont des GET', () => {
-    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([]);
+  it('de la fiche perso, relaie l’aperçu de ses textes et rien d’autre', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([
+      '/api/character/preview',
+    ]);
   });
 
   it('des tables du jeu, ne relaie aucun POST : l’onglet ne fait que des GET', () => {
@@ -1964,10 +1966,28 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
 });
 
 describe('Fiche perso — la page, sur le vrai markup', () => {
-  afterEach(() => vi.unstubAllGlobals());
+  // L'horloge est FACTICE d'un bout à l'autre (cf. `character`) : l'aperçu des
+  // textes part 400 ms après une frappe, et un minuteur laissé en vol par un
+  // test irait frapper le `fetch` du suivant.
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
 
   const AER = '2000055';
   const AIS = '2000096';
+  const ALICE = '2000002';
+  type Text = Partial<Record<string, string>>;
+  /** Un pro du disque, traduit partout : les clés dans l'ordre du fichier. */
+  const BEACH: Text = {
+    en: 'Strips buffs with {D/BT_REMOVE_BUFF}',
+    jp: 'jp {D/BT_REMOVE_BUFF}',
+    kr: 'kr {D/BT_REMOVE_BUFF}',
+    zh: 'zh {D/BT_REMOVE_BUFF}',
+    fr: 'Retire les buffs avec {D/BT_REMOVE_BUFF}',
+    es: 'es {D/BT_REMOVE_BUFF}',
+  };
   interface Curated {
     rank?: string;
     rankPvp?: string;
@@ -1983,7 +2003,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       author?: string;
       uploadDate?: string;
     }[];
-    prosCons?: unknown;
+    prosCons?: { pros?: Text[]; cons?: Text[] };
+    synergies?: { heroes: string[]; reason?: Text }[];
   }
   const ROSTER = [
     { id: AER, name: 'Aer', element: 'fire', class: 'striker', subClass: 'attacker', rarity: 3 },
@@ -1995,11 +2016,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       subClass: 'attacker',
       rarity: 3,
     },
+    { id: ALICE, name: 'Alice', element: 'earth', class: 'mage', subClass: 'wizard', rarity: 3 },
   ];
-  /** Le curé du disque, par perso : Aer sans palier, Ais avec. */
+  /** Le curé du disque, par perso : Aer sans palier, Ais avec — et une synergie. */
   const curated = (): Record<string, Curated> => ({
     [AER]: {
-      prosCons: { pros: [{ en: 'strong' }] },
+      prosCons: { pros: [BEACH, { en: 'strong' }], cons: [{ en: 'slow' }] },
       videos: [
         {
           platform: 'youtube',
@@ -2015,7 +2037,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       tags: ['free'],
       skillPriority: { first: 3, second: 2, ultimate: 1 },
     },
-    [AIS]: { rank: 'B', role: 'dps', rankByTranscend: { '3': 'D', '9': 'B', '5': 'C' } },
+    [AIS]: {
+      rank: 'B',
+      role: 'dps',
+      rankByTranscend: { '3': 'D', '9': 'B', '5': 'C' },
+      synergies: [{ heroes: [AER], reason: { en: 'Feeds {B/BT_ADDITIVE_TURN}', fr: 'Nourrit' } }],
+    },
   });
 
   type Call = { path: string; body?: unknown };
@@ -2023,13 +2050,20 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
 
   /**
    * La page de quick dans un document happy-dom, comme pour Noms et Effets : la
-   * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/character.js` et
-   * le vrai `hero-picker.mjs`. `fetch` est factice : il sert le roster et
-   * l'état d'un perso d'après `disk.curated` (relu à chaque appel), et note ce
-   * que la page demande.
+   * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/character.js`, le
+   * vrai `gear-view.mjs` et le vrai `hero-picker.mjs`. `fetch` est factice : il
+   * sert le roster et l'état d'un perso d'après `disk.curated` (relu à chaque
+   * appel), l'aperçu des textes (une balise `{…/Foo}` y sort `unknown`, les
+   * autres en effet) et « Traduire » (`translated`), et note ce que la page
+   * demande. L'horloge est factice une fois les modules chargés : `settle`
+   * laisse passer les promesses, pas les 400 ms de l'aperçu.
    */
   async function character(
-    opts: { hash?: string; saved?: (body: unknown, disk: Record<string, Curated>) => Saved } = {},
+    opts: {
+      hash?: string;
+      saved?: (body: unknown, disk: Record<string, Curated>) => Saved;
+      translated?: (texts: string[]) => unknown;
+    } = {},
   ) {
     vi.resetModules();
     const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
@@ -2042,6 +2076,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
 
     const disk = { curated: curated() };
     const calls: Call[] = [];
+    // L'aperçu attend cette porte : `hold` la ferme, pour voir la requête en vol.
+    let gate: Promise<void> = Promise.resolve();
     const confirm = vi.fn(() => true);
     const answer = (data: unknown, status = 200) => {
       const bytes = new TextEncoder().encode(JSON.stringify(data));
@@ -2087,7 +2123,40 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           ],
           humanTags: ['free'],
           videos: cu.videos ?? [],
+          refs: {},
+          langs: { default: 'en', shown: ['en', 'fr', 'es', 'jp', 'kr', 'zh'] },
         });
+      }
+      if (url.pathname === '/api/character/preview') {
+        const { texts, lang } = body as { texts: string[]; lang: string };
+        await gate;
+        return answer({
+          segments: texts.map((text) =>
+            text.split(/(\{[^}]+\})/).flatMap((part): unknown[] =>
+              !part
+                ? []
+                : !part.startsWith('{')
+                  ? [{ t: 'text', s: part }]
+                  : part.endsWith('/Foo}')
+                    ? [{ t: 'unknown', s: part }]
+                    : [
+                        {
+                          t: 'effect',
+                          label: `${part.slice(3, -1)} (${lang})`,
+                          color: 'text-buff',
+                          isDebuff: false,
+                        },
+                      ],
+            ),
+          ),
+        });
+      }
+      if (url.pathname === '/api/translate') {
+        calls.push({ path, body });
+        const out = opts.translated?.((body as { texts: string[] }).texts) ?? {
+          error: 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
+        };
+        return answer(out, 'error' in (out as object) ? 500 : 200);
       }
       if (url.pathname === '/api/character')
         return answer(
@@ -2115,8 +2184,9 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       sections: { start: () => void };
     };
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'character.js'));
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
     lib.sections.start();
-    const settle = () => new Promise((done) => setTimeout(done, 0));
+    const settle = () => vi.advanceTimersByTimeAsync(0);
     await settle();
     await settle();
     await settle();
@@ -2183,6 +2253,32 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       },
       posted: () => calls.filter((c) => c.path === '/api/character').map((c) => c.body),
       states: () => calls.filter((c) => c.path.startsWith('/api/character/state')).length,
+      /** Les aperçus demandés, et les appels à « Traduire ». */
+      previews: () => calls.filter((c) => c.path === '/api/character/preview').map((c) => c.body),
+      translations: () => calls.filter((c) => c.path === '/api/translate').map((c) => c.body),
+      sub: (id: string) => el(`c-tab-${id}`).click(),
+      /** Les lignes d'une liste (`pros`, `cons`, `synergies`), dans l'ordre. */
+      lines: (list: string) => all(`#c-panel [data-list="${list}"][data-k]`),
+      /** La textarea d'une ligne, dans une langue. */
+      area: (line: HTMLElement, lang = 'en') =>
+        line.querySelector(`textarea[data-lang="${lang}"]`) as unknown as HTMLTextAreaElement,
+      act: (name: string, root?: HTMLElement) =>
+        ((root ?? el('c-panel')) as unknown as ParentNode).querySelector(
+          `[data-act="${name}"]`,
+        ) as unknown as HTMLButtonElement,
+      text: (root: HTMLElement, selector: string) =>
+        root.querySelector(selector)?.textContent ?? '',
+      /** Retient la réponse du prochain aperçu ; rend de quoi la lâcher. */
+      hold: () => {
+        let release = () => {};
+        gate = new Promise((done) => (release = done));
+        return () => release();
+      },
+      /** 400 ms après la dernière frappe, puis la réponse. */
+      preview: async () => {
+        await vi.advanceTimersByTimeAsync(400);
+        await settle();
+      },
     };
   }
 
@@ -2220,6 +2316,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#hp-results .hp-n').map((n) => n.textContent)).toEqual([
       'Aer',
       'Ais Wallenstein',
+      'Alice',
     ]);
   });
 
@@ -2266,7 +2363,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     // `#character/<id>` vaut « fiche », un sous-onglet pas encore porté aussi.
     const bare = await character({ hash: `#character/${AIS}` });
     expect(bare.window.location.hash).toBe(`#character/${AIS}/fiche`);
-    const soon = await character({ hash: `#character/${AIS}/synergies` });
+    const soon = await character({ hash: `#character/${AIS}/skills` });
     expect(soon.window.location.hash).toBe(`#character/${AIS}/fiche`);
     expect(soon.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
   });
@@ -2278,13 +2375,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('log').textContent).toContain('perso inconnu : nope');
   });
 
-  it('les sous-onglets : la rangée entière, Fiche montrée, les quatre autres éteints', async () => {
+  it('les sous-onglets : la rangée entière, Fiche montrée, les deux pas encore portés éteints', async () => {
     const page = await character({ hash: `#character/${AER}` });
     expect(page.el('c-tabs').getAttribute('role')).toBe('tablist');
     expect(page.subs()).toEqual([
       ['Fiche', 'true', '', ''],
-      ['Pros / Cons', 'false', 'lot B42', ''],
-      ['Synergies', 'false', 'lot B42', ''],
+      ['Pros / Cons', 'false', '', ''],
+      ['Synergies', 'false', '', ''],
       ['Skills', 'false', 'lot B39', ''],
       ['Gear reco', 'false', 'lot B40', ''],
     ]);
@@ -2302,19 +2399,29 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
 
   it('le clavier des sous-onglets : ← → Début Fin restent parmi ceux qui sont allumés', async () => {
     const page = await character({ hash: `#character/${AER}` });
-    const fiche = page.el('c-tab-fiche');
-    fiche.focus();
-    for (const key of ['ArrowRight', 'ArrowLeft', 'End', 'Home']) {
+    page.el('c-tab-fiche').focus();
+    // Trois allumés : → avance, les bouts se rejoignent, Fin et Début y vont.
+    for (const [key, to] of [
+      ['ArrowRight', 'pros-cons'],
+      ['ArrowRight', 'synergies'],
+      ['ArrowRight', 'fiche'],
+      ['ArrowLeft', 'synergies'],
+      ['Home', 'fiche'],
+      ['End', 'synergies'],
+      ['ArrowLeft', 'pros-cons'],
+      ['Home', 'fiche'],
+    ]) {
       const event = new page.window.KeyboardEvent('keydown', {
         key,
         bubbles: true,
         cancelable: true,
       });
-      page.el('c-tab-fiche').dispatchEvent(event as unknown as Event);
-      // La touche est prise (la page ne défile pas), l'onglet garde la main.
+      page.window.document.activeElement?.dispatchEvent(event);
+      // La touche est prise (la page ne défile pas), l'onglet montré a la main.
       expect(event.defaultPrevented, key).toBe(true);
-      expect(page.subs()[0].slice(0, 2), key).toEqual(['Fiche', 'true']);
-      expect(page.window.document.activeElement?.id, key).toBe('c-tab-fiche');
+      expect(page.el(`c-tab-${to}`).getAttribute('aria-selected'), key).toBe('true');
+      expect(page.window.document.activeElement?.id, key).toBe(`c-tab-${to}`);
+      expect(page.window.location.hash, key).toBe(`#character/${AER}/${to}`);
     }
     // Un clic sur un sous-onglet éteint ne montre rien d'autre.
     page.el('c-tab-skills').click();
@@ -2787,6 +2894,536 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('tab-videos').hidden).toBe(false);
     expect(page.el('tab-character').hidden).toBe(true);
     expect(page.el('v-target').value).toBe(`character:${AER}`);
+  });
+
+  // ------------------------------------------- « Pros / Cons » et « Synergies »
+  const PROS = `#character/${AER}/pros-cons`;
+  /** Un traducteur factice : chaque langue rend son code devant l'anglais. */
+  const deepl = (texts: string[]) => ({
+    results: texts.map((t) =>
+      Object.fromEntries(['jp', 'kr', 'zh', 'fr', 'es'].map((l) => [l, `${l}:${t}`])),
+    ),
+    provider: 'deepl',
+  });
+
+  it('`#character/2000055/pros-cons` : deux cartes, les lignes du disque, UN aperçu pour l’onglet', async () => {
+    const page = await character({ hash: PROS });
+    expect(page.window.location.hash).toBe(PROS);
+    expect(page.subs().map((t) => t.slice(0, 2))).toEqual([
+      ['Fiche', 'false'],
+      ['Pros / Cons', 'true'],
+      ['Synergies', 'false'],
+      ['Skills', 'false'],
+      ['Gear reco', 'false'],
+    ]);
+    expect(page.all('#c-panel .c-card > .card-head strong').map((h) => h.textContent)).toEqual([
+      'Pros',
+      'Cons',
+    ]);
+    expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['2', '1']);
+    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual([BEACH.en, 'strong']);
+    expect(page.lines('cons').map((l) => page.area(l).value.trim())).toEqual(['slow']);
+    const first = page.area(page.lines('pros')[0]);
+    expect(first.getAttribute('rows')).toBe('2');
+    expect(first.getAttribute('aria-label')).toBe('Pro 1, en anglais');
+    expect(page.act('add-line', page.all('[data-card="pros"]')[0]).textContent).toBe('＋ pro');
+    expect(page.act('add-line', page.all('[data-card="cons"]')[0]).textContent).toBe('＋ con');
+    expect(page.act('del-line', page.lines('pros')[0]).className).toBe('btn icon');
+    expect(page.count()).toBe('aucune modification');
+
+    // UNE requête pour tout l'onglet, pros et cons, dans la langue de la savebar.
+    expect(page.previews()).toEqual([{ texts: [BEACH.en, 'strong', 'slow'], lang: 'en' }]);
+    const pv = page.lines('pros')[0].querySelector('[data-pv]') as unknown as HTMLElement;
+    expect(pv.textContent).toBe('Strips buffs with BT_REMOVE_BUFF (en)');
+    expect(pv.querySelector('.pv-seg.text-buff .pv-u')?.textContent).toBe('BT_REMOVE_BUFF (en)');
+    expect(pv.classList.contains('busy')).toBe(false);
+
+    // Le groupe des langues : dans la savebar, `en` d'office ; absent de « Fiche ».
+    expect(page.el('c-pv-lang').hidden).toBe(false);
+    expect(
+      page.all('#c-pv-lang button').map((b) => [b.textContent, b.getAttribute('aria-pressed')]),
+    ).toEqual([
+      ['en', 'true'],
+      ['fr', 'false'],
+      ['es', 'false'],
+      ['jp', 'false'],
+      ['kr', 'false'],
+      ['zh', 'false'],
+    ]);
+    page.sub('fiche');
+    expect(page.el('c-pv-lang').hidden).toBe(true);
+    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
+    // Revenu, l'onglet se redessine sur le rendu reçu : la même requête ne repart pas.
+    page.sub('pros-cons');
+    await page.settle();
+    expect(page.previews()).toHaveLength(1);
+    expect(page.text(page.lines('pros')[0], '[data-pv]')).toBe(
+      'Strips buffs with BT_REMOVE_BUFF (en)',
+    );
+  });
+
+  it('pendant que l’aperçu court, le rendu précédent reste, atténué', async () => {
+    const page = await character({ hash: PROS });
+    const pv = () => page.lines('pros')[1].querySelector('[data-pv]') as unknown as HTMLElement;
+    expect(pv().textContent).toBe('strong');
+    const release = page.hold();
+    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    await vi.advanceTimersByTimeAsync(400);
+    expect(page.previews()).toHaveLength(2);
+    expect(pv().classList.contains('busy')).toBe(true);
+    expect(pv().textContent).toBe('strong');
+    release();
+    await page.settle();
+    expect(pv().classList.contains('busy')).toBe(false);
+    expect(pv().textContent).toBe('stronger');
+  });
+
+  it('« ＋ pro » : vide, la ligne ne compte pas ; saisie, elle compte, et l’aperçu part 400 ms après la frappe, en UNE requête', async () => {
+    const page = await character({ hash: PROS });
+    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
+    await page.settle();
+    expect(page.lines('pros')).toHaveLength(3);
+    const added = () => page.lines('pros')[2];
+    // La ligne ajoutée a la main, et ne pèse rien tant qu'elle est vide.
+    expect(page.window.document.activeElement).toBe(
+      page.area(added()) as unknown as typeof page.window.document.activeElement,
+    );
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[1][3]).toBe('');
+    const before = page.previews().length;
+
+    page.type(page.area(added()), 'Gra');
+    await vi.advanceTimersByTimeAsync(300);
+    page.type(page.area(added()), 'Grants {B/Foo} and {B/BT_ADDITIVE_TURN}');
+    await vi.advanceTimersByTimeAsync(399);
+    expect(page.previews()).toHaveLength(before);
+    await vi.advanceTimersByTimeAsync(1);
+    await page.settle();
+    expect(page.previews()).toHaveLength(before + 1);
+    expect(page.previews().at(-1)).toEqual({
+      texts: [BEACH.en, 'strong', 'Grants {B/Foo} and {B/BT_ADDITIVE_TURN}', 'slow'],
+      lang: 'en',
+    });
+    // Un tag que le site ne résout pas sort en ROUGE, comme dans Gear reco.
+    expect(page.text(added(), '[data-pv] .pv-unknown')).toBe('{B/Foo}');
+    expect(page.text(added(), '[data-pv]')).toBe('Grants {B/Foo} and BT_ADDITIVE_TURN (en)');
+
+    // La frappe n'a rien redessiné : la textarea garde la main et son texte.
+    expect(page.area(added()).value).toBe('Grants {B/Foo} and {B/BT_ADDITIVE_TURN}');
+    expect(added().classList.contains('dirty')).toBe(true);
+    expect(page.count()).toBe('1 changement');
+    expect(page.all('#c-panel [data-mod="pros"]')[0].textContent).toBe('modifié');
+    expect(page.all('#c-panel [data-mod="cons"]')[0].textContent).toBe('');
+    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot edit', '', '', '']);
+    // Revidée, elle ne compte plus.
+    page.type(page.area(added()), ' ');
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('les traductions, repliées : cinq langues, l’anglais en placeholder, « à retraduire » quand il a bougé', async () => {
+    const page = await character({ hash: PROS });
+    const [beach, strong] = page.lines('pros');
+    const fold = beach.querySelector('details') as unknown as HTMLDetailsElement;
+    expect(fold.open).toBe(false);
+    expect(page.text(beach, 'summary .btn')).toBe('Traductions (5)');
+    expect(page.text(beach, '[data-tally]')).toBe('5 / 5');
+    expect(page.text(strong, '[data-tally]')).toBe('0 / 5');
+    expect(
+      page
+        .all('.c-trs label')
+        .slice(0, 5)
+        .map((l) => l.textContent),
+    ).toEqual(['fr', 'es', 'jp', 'kr', 'zh']);
+    expect(page.area(beach, 'fr').value.trim()).toBe(BEACH.fr);
+    expect(page.area(strong, 'fr').value.trim()).toBe('');
+    expect(page.area(strong, 'fr').getAttribute('placeholder')).toBe('strong');
+    expect(page.text(beach, '[data-stale]')).toBe('');
+
+    // L'anglais retouché : ses traductions datent d'un autre texte.
+    page.type(page.area(beach), 'Removes buffs with {D/BT_REMOVE_BUFF}');
+    expect(page.text(beach, '[data-stale]')).toBe('à retraduire');
+    expect(beach.querySelector('[data-stale]')?.className).toBe('badge warn');
+    expect(page.area(beach, 'fr').placeholder).toBe('Removes buffs with {D/BT_REMOVE_BUFF}');
+    // Remis, plus rien à retraduire ; une ligne sans traduction n'en a jamais.
+    page.type(page.area(beach), BEACH.en ?? '');
+    expect(page.text(beach, '[data-stale]')).toBe('');
+    expect(page.count()).toBe('aucune modification');
+    page.type(page.area(strong), 'stronger');
+    expect(page.text(strong, '[data-stale]')).toBe('');
+
+    // Une traduction se retouche à la main : elle compte, et part à sa place.
+    page.type(page.area(beach, 'fr'), 'Retire {D/BT_REMOVE_BUFF}');
+    page.type(page.area(strong, 'fr'), 'plus fort');
+    expect(page.text(strong, '[data-tally]')).toBe('1 / 5');
+    expect(page.count()).toBe('2 changements');
+    await page.save();
+    const sent = (page.posted()[0] as { changes: { curated: { prosCons: Curated['prosCons'] } } })
+      .changes.curated;
+    expect(sent).toEqual({
+      prosCons: {
+        pros: [
+          { ...BEACH, fr: 'Retire {D/BT_REMOVE_BUFF}' },
+          { en: 'stronger', fr: 'plus fort' },
+        ],
+        cons: [{ en: 'slow' }],
+      },
+    });
+    // Les langues du disque gardent leur ordre dans le fichier.
+    expect(Object.keys(sent.prosCons?.pros?.[0] ?? {})).toEqual(Object.keys(BEACH));
+  });
+
+  it('la langue de l’aperçu : un clic dans la savebar, la requête part aussitôt — une langue absente se replie sur l’anglais', async () => {
+    const page = await character({ hash: PROS });
+    const fr = page.all('#c-pv-lang button[data-lang="fr"]')[0];
+    fr.click();
+    await page.settle();
+    expect(fr.getAttribute('aria-pressed')).toBe('true');
+    expect(page.all('#c-pv-lang button[data-lang="en"]')[0].getAttribute('aria-pressed')).toBe(
+      'false',
+    );
+    expect(page.previews().at(-1)).toEqual({ texts: [BEACH.fr, 'strong', 'slow'], lang: 'fr' });
+    expect(page.text(page.lines('pros')[0], '[data-pv]')).toBe(
+      'Retire les buffs avec BT_REMOVE_BUFF (fr)',
+    );
+    // La langue vaut pour toute la fiche : Synergies la garde.
+    page.sub('synergies');
+    expect(page.all('#c-pv-lang button[data-lang="fr"]')[0].getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+  });
+
+  it('« Traduire » : les textes anglais de l’onglet, d’UN appel — les cinq langues ÉCRASÉES, à relire', async () => {
+    const page = await character({ hash: PROS, translated: deepl });
+    const button = page.act('translate');
+    expect(button.className).toBe('btn ghost');
+    expect(button.title).toContain('ÉCRASE');
+    page.type(page.area(page.lines('pros')[0]), 'Removes buffs');
+    expect(page.text(page.lines('pros')[0], '[data-stale]')).toBe('à retraduire');
+    button.click();
+    for (let i = 0; i < 4; i++) await page.settle();
+
+    expect(page.translations()).toEqual([{ texts: ['Removes buffs', 'strong', 'slow'] }]);
+    const [beach, strong] = page.lines('pros');
+    // Écrasées : la traduction du disque n'est plus là.
+    expect(page.area(beach, 'fr').value.trim()).toBe('fr:Removes buffs');
+    expect(page.area(strong, 'zh').value.trim()).toBe('zh:strong');
+    expect(page.area(page.lines('cons')[0], 'es').value.trim()).toBe('es:slow');
+    expect(page.text(beach, '[data-stale]')).toBe('');
+    expect(page.text(strong, '[data-tally]')).toBe('5 / 5');
+    // Ce qui vient d'être traduit s'ouvre : c'est à relire.
+    expect((beach.querySelector('details') as unknown as HTMLDetailsElement).open).toBe(true);
+    expect(page.act('translate').disabled).toBe(false);
+    expect(page.count()).toBe('3 changements');
+    expect(page.el('journal').dataset.state).toBe('ok');
+    expect(page.el('log').textContent).toContain('3 textes : 15 traductions posées par DeepL');
+
+    await page.save();
+    const pros = (page.posted()[0] as { changes: { curated: { prosCons: { pros: Text[] } } } })
+      .changes.curated.prosCons.pros;
+    // Une langue nouvelle se range dans l'ordre du moteur, celui du fichier.
+    expect(Object.keys(pros[1])).toEqual(['en', 'jp', 'kr', 'zh', 'fr', 'es']);
+    expect(pros[0]).toEqual({
+      en: 'Removes buffs',
+      jp: 'jp:Removes buffs',
+      kr: 'kr:Removes buffs',
+      zh: 'zh:Removes buffs',
+      fr: 'fr:Removes buffs',
+      es: 'es:Removes buffs',
+    });
+  });
+
+  it('« Traduire » sans clé, ou un moteur qui ne rend rien : le refus va au journal, rien ne bouge', async () => {
+    const page = await character({ hash: PROS });
+    page.act('translate').click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain(
+      'Traduction refusée : Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
+    );
+    expect(page.text(page.el('c-panel'), '[data-tr-error]')).toContain('Pas de clé');
+    expect(page.area(page.lines('pros')[1], 'fr').value.trim()).toBe('');
+    expect(page.area(page.lines('pros')[0], 'fr').value.trim()).toBe(BEACH.fr);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.act('translate').disabled).toBe(false);
+
+    const none = await character({
+      hash: PROS,
+      translated: (texts) => ({ results: texts.map(() => ({})), provider: 'none' }),
+    });
+    none.act('translate').click();
+    for (let i = 0; i < 4; i++) await none.settle();
+    expect(none.el('journal').dataset.state).toBe('ko');
+    expect(none.el('log').textContent).toContain('le traducteur n’a rien rendu');
+    expect(none.count()).toBe('aucune modification');
+  });
+
+  it('✕ retire une ligne : elle compte, et part en moins dans la liste ENTIÈRE', async () => {
+    const page = await character({ hash: PROS });
+    page.act('del-line', page.lines('pros')[0]).click();
+    await page.settle();
+    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual(['strong']);
+    expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['1', '1']);
+    expect(page.count()).toBe('1 changement');
+    expect(page.area(page.lines('pros')[0]).getAttribute('aria-label')).toBe('Pro 1, en anglais');
+    // Une ligne ajoutée puis retirée ne laisse rien.
+    page.act('add-line', page.all('[data-card="cons"]')[0]).click();
+    page.act('del-line', page.lines('cons')[1]).click();
+    expect(page.count()).toBe('1 changement');
+
+    await page.save();
+    expect((page.posted()[0] as { changes: unknown }).changes).toEqual({
+      ranks: [],
+      curated: { prosCons: { pros: [{ en: 'strong' }], cons: [{ en: 'slow' }] } },
+      was: page.disk.curated[AER],
+    });
+  });
+
+  it('un tag refusé à l’enregistrement : situé sur SA ligne — carte cerclée, message sous la textarea, saisie gardée', async () => {
+    const page = await character({
+      hash: PROS,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [
+          {
+            field: 'prosCons',
+            list: 'pros',
+            index: 2,
+            reason: 'tag inconnu {B/Foo} (effet inconnu)',
+          },
+        ],
+      }),
+    });
+    // Une ligne vide au milieu : elle ne part pas, le rang du refus est celui de l'envoi.
+    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
+    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
+    page.type(page.area(page.lines('pros')[3]), 'Grants {B/Foo}');
+    await page.save();
+
+    const bad = page.lines('pros')[3];
+    expect(page.area(bad).value.trim()).toBe('Grants {B/Foo}');
+    expect(page.area(bad).classList.contains('refused')).toBe(true);
+    expect(page.text(bad, '.c-err')).toBe('tag inconnu {B/Foo} (effet inconnu)');
+    expect(page.all('#c-panel [data-card="pros"]')[0].classList.contains('ko')).toBe(true);
+    expect(page.all('#c-panel [data-ko="pros"]')[0].textContent).toBe('refusé');
+    expect(page.all('#c-panel [data-card="cons"]')[0].classList.contains('ko')).toBe(false);
+    expect(page.text(page.lines('pros')[0], '.c-err')).toBe('');
+    expect(page.count()).toBe('1 changement1 refus');
+    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot ko', '', '', '']);
+    // Y retoucher lève le refus.
+    page.type(page.area(bad), 'Grants {B/BT_ADDITIVE_TURN}');
+    expect(page.area(bad).classList.contains('refused')).toBe(false);
+    expect(page.text(bad, '.c-err')).toBe('');
+    expect(page.all('#c-panel [data-card="pros"]')[0].classList.contains('ko')).toBe(false);
+    expect(page.subs()[1][3]).toBe('dot edit');
+  });
+
+  it('« Enregistrer » écrit les pros : la fiche relue du disque, plus rien en attente', async () => {
+    const page = await character({
+      hash: PROS,
+      saved: (body, disk) => {
+        const { curated: sent } = (body as { changes: { curated: Curated } }).changes;
+        disk[AER] = { ...disk[AER], prosCons: sent.prosCons };
+        return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+      },
+    });
+    page.type(page.area(page.lines('cons')[0]), 'slower');
+    expect(page.count()).toBe('1 changement');
+    await page.save();
+    expect(page.lines('cons').map((l) => page.area(l).value.trim())).toEqual(['slower']);
+    expect(page.lines('cons')[0].classList.contains('dirty')).toBe(false);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[1][3]).toBe('');
+  });
+
+  it('`stale` : le disque avait changé sous les pros — l’onglet montre le disque, le refus sous les cartes', async () => {
+    const page = await character({
+      hash: PROS,
+      saved: (_, disk) => {
+        disk[AER] = { ...disk[AER], prosCons: { pros: [{ en: 'from elsewhere' }] } };
+        return {
+          ok: false,
+          log: ['REFUSÉ'],
+          written: false,
+          stale: true,
+          refused: [{ field: 'prosCons', reason: 'le disque a changé depuis le chargement' }],
+        };
+      },
+    });
+    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    await page.save();
+    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual(['from elsewhere']);
+    expect(page.lines('cons')).toEqual([]);
+    expect(page.all('#c-panel [data-card="cons"] .lbl')[0].textContent).toBe('Aucun con.');
+    expect(page.text(page.el('c-panel'), '[data-err="prosCons"]')).toBe(
+      'le disque a changé depuis le chargement',
+    );
+    expect(page.count()).toBe('1 refus');
+    expect(page.subs()[1][3]).toBe('dot ko');
+  });
+
+  it('`#character/2000096/synergies` : une carte par groupe — ses héros en tuiles, sa raison, son aperçu', async () => {
+    const page = await character({ hash: `#character/${AIS}/synergies` });
+    expect(page.window.location.hash).toBe(`#character/${AIS}/synergies`);
+    expect(page.subs()[2].slice(0, 2)).toEqual(['Synergies', 'true']);
+    const [group] = page.lines('synergies');
+    expect(page.lines('synergies')).toHaveLength(1);
+    expect(group.classList.contains('card')).toBe(true);
+    expect(page.text(group, '.card-head strong')).toBe('Groupe 1');
+    expect(page.act('del-line', group).closest('.card-head')).not.toBeNull();
+    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual(['Aer']);
+    const face = page.all('.c-hero img')[0];
+    expect(face.getAttribute('src')).toBe(
+      `https://img.test/images/characters/portrait/CT_${AER}.webp`,
+    );
+    expect([face.getAttribute('width'), face.getAttribute('height')]).toEqual(['44', '44']);
+    expect(page.act('del-hero', group).getAttribute('aria-label')).toBe('Retirer Aer');
+    expect(page.act('add-hero', group).textContent).toBe('＋ héros');
+    expect(page.area(group).value.trim()).toBe('Feeds {B/BT_ADDITIVE_TURN}');
+    expect(page.area(group).getAttribute('aria-label')).toBe('Raison du groupe 1, en anglais');
+    expect(page.text(group, '[data-tally]')).toBe('1 / 5');
+    expect(page.previews()).toEqual([{ texts: ['Feeds {B/BT_ADDITIVE_TURN}'], lang: 'en' }]);
+    expect(page.text(group, '[data-pv]')).toBe('Feeds BT_ADDITIVE_TURN (en)');
+    expect(page.all('#c-panel > .c-syn > .c-foot button').map((b) => b.textContent)).toEqual([
+      '＋ groupe',
+      'Traduire',
+    ]);
+
+    // Sans synergie : la phrase, et les deux boutons.
+    const aer = await character({ hash: `#character/${AER}/synergies` });
+    expect(aer.lines('synergies')).toEqual([]);
+    expect(aer.all('#c-panel .c-syn > .lbl')[0].textContent).toBe('Aucune synergie.');
+    expect(aer.previews()).toEqual([]);
+  });
+
+  it('une synergie à deux héros : « ＋ groupe », le picker partagé en multi, la raison, l’envoi', async () => {
+    const page = await character({ hash: `#character/${AER}/synergies` });
+    page.act('add-line').click();
+    await page.settle();
+    const group = () => page.lines('synergies')[0];
+    // Un groupe ajouté et laissé vide n'est pas un changement.
+    expect(page.count()).toBe('aucune modification');
+
+    page.act('add-hero', group()).click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Héros du groupe');
+    // Le perso de la fiche n'est pas proposé.
+    expect(page.all('#hp-results .hp-n').map((n) => n.textContent)).toEqual([
+      'Ais Wallenstein',
+      'Alice',
+    ]);
+    expect(page.el('hp-foot').hidden).toBe(false);
+    const tile = (id: string) => page.all('#hp-results .hp-tile').find((t) => t.dataset.id === id)!;
+    tile(ALICE).click();
+    tile(AIS).click();
+    expect(page.el('hp-tally').textContent).toBe('2 choisis sur 2');
+    page.all('#hp-foot [data-hp="ok"]')[0].click();
+    await page.settle();
+
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual([
+      'Alice',
+      'Ais Wallenstein',
+    ]);
+    expect(page.count()).toBe('1 changement');
+    expect(page.text(group(), '[data-mod-line]')).toBe('modifié');
+    expect(page.subs().map((t) => t[3])).toEqual(['', '', 'dot edit', '', '']);
+    // Rouvert, le picker coche les héros du groupe.
+    page.act('add-hero', group()).click();
+    expect(page.all('#hp-results .hp-tile[aria-pressed="true"]').map((t) => t.dataset.id)).toEqual([
+      AIS,
+      ALICE,
+    ]);
+    page.all('#hp-foot [data-hp="cancel"]')[0].click();
+    // ✕ sur une tuile retire son héros.
+    page.all('.c-hero [data-act="del-hero"]')[0].click();
+    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual([
+      'Ais Wallenstein',
+    ]);
+    page.act('add-hero', group()).click();
+    tile(ALICE).click();
+    page.all('#hp-foot [data-hp="ok"]')[0].click();
+
+    page.type(page.area(group()), 'Shares {B/BT_ADDITIVE_TURN}');
+    await page.preview();
+    expect(page.previews().at(-1)).toEqual({ texts: ['Shares {B/BT_ADDITIVE_TURN}'], lang: 'en' });
+    await page.save();
+    expect((page.posted()[0] as { changes: unknown }).changes).toEqual({
+      ranks: [],
+      curated: {
+        synergies: [{ heroes: [AIS, ALICE], reason: { en: 'Shares {B/BT_ADDITIVE_TURN}' } }],
+      },
+      was: page.disk.curated[AER],
+    });
+  });
+
+  it('un groupe refusé : sa carte cerclée, son refus sous la raison ; « Traduire » y vaut pour les raisons', async () => {
+    const page = await character({
+      hash: `#character/${AIS}/synergies`,
+      translated: deepl,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [{ field: 'synergies', list: 'synergies', index: 1, reason: 'groupe sans héros' }],
+      }),
+    });
+    page.act('add-line').click();
+    page.type(page.area(page.lines('synergies')[1]), 'alone');
+    await page.save();
+    const [kept, bad] = page.lines('synergies');
+    expect(bad.classList.contains('ko')).toBe(true);
+    expect(page.text(bad, '[data-ko-line]')).toBe('refusé');
+    expect(page.text(bad, '.c-err')).toBe('groupe sans héros');
+    expect(kept.classList.contains('ko')).toBe(false);
+    expect(page.subs()[2][3]).toBe('dot ko');
+
+    page.act('translate').click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.translations()).toEqual([{ texts: ['Feeds {B/BT_ADDITIVE_TURN}', 'alone'] }]);
+    expect(page.area(page.lines('synergies')[0], 'fr').value.trim()).toBe(
+      'fr:Feeds {B/BT_ADDITIVE_TURN}',
+    );
+    // ✕ en tête de carte retire le groupe.
+    page.act('del-line', page.lines('synergies')[0]).click();
+    expect(page.lines('synergies')).toHaveLength(1);
+    expect(page.text(page.lines('synergies')[0], '.card-head strong')).toBe('Groupe 1');
+  });
+
+  it('« Annuler » rend tout, d’un sous-onglet à l’autre ; `canLeave` retient l’onglet', async () => {
+    const page = await character({ hash: PROS });
+    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    page.sub('synergies');
+    page.act('add-line').click();
+    page.type(page.area(page.lines('synergies')[0]), 'with someone');
+    page.sub('fiche');
+    page.pick(page.cell('rank'), 'S');
+    // UNE barre pour toute la fiche : les trois sous-onglets comptés.
+    expect(page.count()).toBe('3 changements');
+    expect(page.subs().map((t) => t[3])).toEqual(['dot edit', 'dot edit', 'dot edit', '', '']);
+
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      '3 changements non enregistrés sur Aer. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    );
+    // La saisie d'un sous-onglet survit au passage par un autre.
+    page.sub('pros-cons');
+    expect(page.area(page.lines('pros')[1]).value.trim()).toBe('stronger');
+
+    page.el('c-reset').click();
+    await page.settle();
+    await page.settle();
+    expect(page.count()).toBe('aucune modification');
+    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual([BEACH.en, 'strong']);
+    page.sub('synergies');
+    expect(page.lines('synergies')).toEqual([]);
+    expect(page.posted()).toEqual([]);
+    expect(page.subs().map((t) => t[3])).toEqual(['', '', '', '', '']);
   });
 });
 

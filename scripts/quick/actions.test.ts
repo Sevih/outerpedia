@@ -13,8 +13,10 @@
  *
  * Et contrat de la « Fiche perso » — `characterRoster`, `characterSheetState` et
  * `saveCharacterSheet` : les rangs y passent par le même plan, puis les champs
- * hors rangs (priorité de skills, tags). Le disque est FACTICE, les deux stores
- * et git INJECTÉS ; seul le roster est réel (Aer, `2000055`).
+ * hors rangs (priorité de skills, tags, pros / cons et synergies, leurs tags
+ * inline contrôlés par la résolution du site). Le disque est FACTICE, les deux
+ * stores et git INJECTÉS ; seul le roster est réel (Aer, `2000055`). Et
+ * `previewInline`, l'aperçu de ces textes, par un `renderInlineBatch` factice.
  *
  * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
  * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
@@ -102,6 +104,7 @@ import type { CharacterCurated, Effect, EffectCurated, GearBuild, LocalizedText 
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadChangelog } from '@/lib/admin/changelog-store';
+import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import type { ChangelogEntry } from '@/lib/data/changelog';
 import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
 import type { EffectSources } from '@/lib/data/effects';
@@ -147,6 +150,7 @@ import {
   planRankChanges,
   previewChangelogEntry,
   previewGearBuilds,
+  previewInline,
   pushMain,
   queryGameTable,
   saveBannerList,
@@ -516,6 +520,28 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(HUMAN_TAGS).toEqual(['free']);
   });
 
+  it('`refs` : ce que les tags inline peuvent viser, et les langues dans l’ordre de l’onglet', () => {
+    const state = characterSheetState(AER, sheetDisk());
+    if ('error' in state) throw new Error(state.error);
+    // Les listes de l'éditeur assisté de l'admin, telles quelles.
+    expect(state.refs).toEqual(buildInlineRefs());
+    expect(state.refs.character).toContainEqual({
+      value: characterDisplayName(aer),
+      label: characterDisplayName(aer),
+    });
+    expect(state.refs.element.map((e) => e.value)).toContain('Earth');
+    expect(state.refs.stat.map((e) => e.value)).toContain('RES');
+    // Une liste de SAISIE, pas un contrôle : à apparence égale elle ne garde
+    // qu'une clé d'effet, et `{B/BT_ADDITIVE_TURN}`, que le site résout, n'y
+    // est pas — l'enregistrement contrôle par `checkText`, pas par elle.
+    expect(state.refs.effectBuff.length).toBeGreaterThan(0);
+    expect(state.refs.effectBuff.map((e) => e.value)).not.toContain('BT_ADDITIVE_TURN');
+    // L'anglais se saisit ; les autres langues du site suivent, toutes.
+    expect(state.langs.default).toBe('en');
+    expect(state.langs.shown).toEqual(['en', 'fr', 'es', 'jp', 'kr', 'zh']);
+    expect([...state.langs.shown].sort()).toEqual([...LANGS].sort());
+  });
+
   it('un perso sans entrée curée : tout vide, rien d’absent', () => {
     const state = characterSheetState(AER, sheetDisk({}));
     if ('error' in state) throw new Error(state.error);
@@ -532,6 +558,45 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
 
   it('un id hors du roster : une erreur, pas une fiche vide', () => {
     expect(characterSheetState('nope', sheetDisk())).toEqual({ error: 'perso inconnu : nope' });
+  });
+});
+
+describe('previewInline — l’aperçu des textes de la fiche, par un `renderInlineBatch` factice', () => {
+  it('rend les segments du moteur, alignés sur les textes, dans la langue demandée', async () => {
+    const calls: [string[], string][] = [];
+    const out = await previewInline(['a {B/X}', ''], 'fr', async (texts, lang) => {
+      calls.push([texts, lang]);
+      return texts.map((text) => (text ? [{ t: 'text', s: text }] : []));
+    });
+    expect(out).toEqual({ segments: [[{ t: 'text', s: 'a {B/X}' }], []] });
+    expect(calls).toEqual([[['a {B/X}', ''], 'fr']]);
+  });
+
+  it('sans langue : l’anglais ; une forme fausse ou un moteur qui lève : rendus, jamais levés', async () => {
+    const langs: string[] = [];
+    await previewInline([], undefined, async (_, lang) => (langs.push(lang), []));
+    expect(langs).toEqual(['en']);
+
+    const never = vi.fn(async () => []);
+    expect(await previewInline('texte', 'en', never)).toEqual({
+      error: 'texts : une liste de textes attendue',
+    });
+    expect(await previewInline(['a', 1], 'en', never)).toEqual({
+      error: 'texts : une liste de textes attendue',
+    });
+    expect(never).not.toHaveBeenCalled();
+    expect(
+      await previewInline(['a'], 'en', async () => {
+        throw new Error('glossaire illisible');
+      }),
+    ).toEqual({ error: 'glossaire illisible' });
+  });
+
+  it('par le vrai moteur : un tag résolu, et un tag inconnu en segment `unknown`', async () => {
+    const out = await previewInline(['vs {E/Earth} and {B/Foo}'], 'en');
+    if ('error' in out) throw new Error(out.error);
+    expect(out.segments[0].map((seg) => seg.t)).toEqual(['text', 'icon', 'text', 'unknown']);
+    expect(out.segments[0][3]).toEqual({ t: 'unknown', s: '{B/Foo}' });
   });
 });
 
@@ -556,6 +621,8 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       entry?: CharacterCurated;
       errors?: (curated: CharacterCurated) => string[];
       git?: Outcome;
+      /** Les autres persos du roster : les héros qu'une synergie peut citer. */
+      others?: string[];
     } = {},
   ) {
     const calls = {
@@ -568,7 +635,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
         disk({
           curated: { [AER]: over.entry ?? ENTRY },
           ee: { [AER]: { rank: 'A', rank10: 'S', chipHide: ['x'] } },
-          roster: new Set([AER]),
+          roster: new Set([AER, ...(over.others ?? [])]),
           eeOwners: new Set([AER]),
         }),
       upsertCharacter: async (id, curated) => {
@@ -840,6 +907,268 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     const out = await save({ ranks: [cell('rank', 'A', 'S')] }, fake);
     expect(out).toMatchObject({ ok: false, written: true });
     expect(out.log.at(-1)).toBe('git commit a échoué : x');
+  });
+
+  // ------------------------------------------- pros / cons et synergies
+  const PRO = { en: 'Gains an {B/BT_ADDITIVE_TURN}', fr: 'Gagne un {B/BT_ADDITIVE_TURN}' };
+  const CON = { en: 'Weak against {E/Earth}' };
+  const ALLY = '2000096';
+
+  it('pros et cons : contrôlés, écrits à leur place dans l’entrée, une ligne vide retirée', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      { curated: { prosCons: { pros: [PRO, { en: '  ', fr: '' }], cons: [CON] } } },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['pros / cons : 1 pro, 1 con', 'git : fait'],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    expect(calls.character).toEqual([[AER, { ...ENTRY, prosCons: { pros: [PRO], cons: [CON] } }]]);
+    expect(Object.keys(calls.character[0][1])).toEqual(Object.keys(ENTRY));
+    expect(calls.git).toEqual([[['data/curated/characters.json'], `chore(characters): ${name}`]]);
+  });
+
+  it('un tag inconnu : refus SITUÉ à la ligne, rien n’est écrit ni committé', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        curated: {
+          prosCons: {
+            pros: [PRO, CON, { en: 'Grants {B/Foo}' }],
+            cons: [{ en: 'ok', fr: 'voir {P/Personne}' }],
+          },
+        },
+      },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        `REFUSÉ — ${name} · pros[2] : tag inconnu {B/Foo} (effet inconnu).`,
+        `REFUSÉ — ${name} · cons[0] : fr : tag inconnu {P/Personne} (perso inconnu).`,
+        'Rien à enregistrer.',
+      ],
+      written: false,
+      stale: false,
+      refused: [
+        {
+          field: 'prosCons',
+          list: 'pros',
+          index: 2,
+          reason: 'tag inconnu {B/Foo} (effet inconnu)',
+        },
+        {
+          field: 'prosCons',
+          list: 'cons',
+          index: 0,
+          reason: 'fr : tag inconnu {P/Personne} (perso inconnu)',
+        },
+      ],
+    });
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('une ligne sans anglais, ou écrite partout avec d’autres balises : refusée comme une note de Gear reco', async () => {
+    const { calls, fake } = deps();
+    const everywhere = Object.fromEntries(LANGS.map((l) => [l, 'no tag']));
+    const out = await save(
+      {
+        curated: {
+          prosCons: {
+            pros: [{ fr: 'sans anglais' }, { ...everywhere, en: 'vs {E/Earth}' }],
+          },
+        },
+      },
+      fake,
+    );
+
+    expect(out.refused.map((r) => [r.list, r.index])).toEqual([
+      ['pros', 0],
+      ['pros', 1],
+    ]);
+    expect(out.refused[0].reason).toBe('pas de texte « en », la langue de repli');
+    expect(out.refused[1].reason).toContain('fr : balises « aucune », « en » porte « {E/Earth} »');
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('une langue inconnue, une forme fausse : refusées, situées', async () => {
+    const { calls, fake } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      {
+        curated: {
+          prosCons: { pros: [{ en: 'a', de: 'b' }, 'texte'] },
+          synergies: 'x',
+        } as unknown as CharacterSheetChanges['curated'],
+        was: ENTRY,
+      },
+      fake,
+    );
+    expect(out.refused).toEqual([
+      { field: 'prosCons', list: 'pros', index: 0, reason: 'langue inconnue « de »' },
+      { field: 'prosCons', list: 'pros', index: 1, reason: 'forme inattendue' },
+      { field: 'synergies', reason: 'forme inattendue' },
+    ]);
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('synergies : des héros du roster, une raison contrôlée ; sans texte, la raison n’est pas écrite', async () => {
+    const { calls, fake } = deps({ others: [ALLY, '2000014'] });
+    const out = await save(
+      {
+        curated: {
+          synergies: [
+            { heroes: [ALLY, '2000014'], reason: { en: 'More {B/BT_ADDITIVE_TURN}' } },
+            { heroes: [ALLY], reason: { en: ' ' } },
+          ],
+        },
+      },
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(out.log).toEqual(['synergies : 2 groupes', 'git : fait']);
+    const written = calls.character[0][1];
+    expect(written.synergies).toEqual([
+      { heroes: [ALLY, '2000014'], reason: { en: 'More {B/BT_ADDITIVE_TURN}' } },
+      { heroes: [ALLY] },
+    ]);
+    // Un champ nouveau se range en queue d'entrée, après les vidéos : sa place dans le fichier.
+    expect(Object.keys(written).at(-1)).toBe('synergies');
+    expect(Object.keys(written).slice(0, -1)).toEqual(Object.keys(ENTRY));
+  });
+
+  it('un héros hors du roster, un groupe sans héros, une raison au tag inconnu : refusés, situés, rien d’écrit', async () => {
+    const { calls, fake } = deps({ others: [ALLY] });
+    const out = await save(
+      {
+        curated: {
+          synergies: [
+            { heroes: [ALLY] },
+            { heroes: [ALLY, 'nope'] },
+            { heroes: [], reason: { en: 'alone' } },
+            { heroes: [ALLY], reason: { en: 'with {D/Foo}' } },
+          ],
+        },
+      },
+      fake,
+    );
+
+    expect(out.ok).toBe(false);
+    expect(out.written).toBe(false);
+    expect(out.refused).toEqual([
+      { field: 'synergies', list: 'synergies', index: 1, reason: 'hors du roster : « nope »' },
+      { field: 'synergies', list: 'synergies', index: 2, reason: 'groupe sans héros' },
+      {
+        field: 'synergies',
+        list: 'synergies',
+        index: 3,
+        reason: 'tag inconnu {D/Foo} (effet inconnu)',
+      },
+    ]);
+    expect(out.log[0]).toBe(`REFUSÉ — ${name} · synergies[1] : hors du roster : « nope ».`);
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('pros + rangs : deux écritures, la seconde sur la première, UN commit', async () => {
+    const { calls, fake } = deps({ others: [ALLY] });
+    const out = await save(
+      {
+        ranks: [cell('rank', 'A', 'S')],
+        curated: { prosCons: { pros: [PRO], cons: [] }, synergies: [{ heroes: [ALLY] }] },
+      },
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(out.log).toEqual([
+      'PvE : A → S',
+      'pros / cons : 1 pro, 0 con',
+      'synergies : 1 groupe',
+      'git : fait',
+    ]);
+    expect(calls.character).toHaveLength(2);
+    expect(calls.character[0]).toEqual([AER, { ...ENTRY, rank: 'S' }]);
+    expect(calls.character[1][1]).toEqual({
+      ...ENTRY,
+      rank: 'S',
+      prosCons: { pros: [PRO], cons: [] },
+      synergies: [{ heroes: [ALLY] }],
+    });
+    expect(calls.git).toEqual([[['data/curated/characters.json'], `chore(characters): ${name}`]]);
+  });
+
+  it('des pros refusés n’arrêtent pas un rang : il part, eux gardent leur refus', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('rank', 'A', 'S')],
+        curated: { prosCons: { pros: [{ en: '{B/Foo}' }] } },
+      },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.refused.map((r) => [r.field, r.list, r.index])).toEqual([['prosCons', 'pros', 0]]);
+    expect(calls.character).toEqual([[AER, { ...ENTRY, rank: 'S' }]]);
+    expect(calls.git).toHaveLength(1);
+  });
+
+  it('listes vidées : la clé s’en va ; listes que le disque porte déjà : rien', async () => {
+    const entry = { ...ENTRY, synergies: [{ heroes: [ALLY] }] };
+    const emptied = deps({ entry, others: [ALLY] });
+    const out = await saveCharacterSheet(
+      AER,
+      { curated: { prosCons: { pros: [], cons: [] }, synergies: [] }, was: entry },
+      emptied.fake,
+    );
+    expect(out.log).toEqual(['pros / cons retirés', 'synergies retirées', 'git : fait']);
+    expect(emptied.calls.character[0][1]).not.toHaveProperty('prosCons');
+    expect(emptied.calls.character[0][1]).not.toHaveProperty('synergies');
+
+    const same = deps({ entry, others: [ALLY] });
+    expect(
+      await saveCharacterSheet(
+        AER,
+        // `cons` absent du disque comme de l'envoi, ou vide : la même liste.
+        {
+          curated: { prosCons: { pros: [{ en: 'strong' }] }, synergies: entry.synergies },
+          was: entry,
+        },
+        same.fake,
+      ),
+    ).toMatchObject({
+      ok: true,
+      written: false,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+    });
+    expect(same.calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('`stale` : le disque a changé sous les pros ou les synergies — refus sans écriture', async () => {
+    const { calls, fake } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      {
+        curated: { prosCons: { pros: [PRO] }, synergies: [] },
+        // La page avait chargé d'autres pros ; les synergies, elles, n'ont pas bougé.
+        was: { ...ENTRY, prosCons: { pros: [{ en: 'older' }], cons: [] } },
+      },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: false, stale: true });
+    expect(out.refused).toEqual([
+      { field: 'prosCons', reason: 'le disque a changé depuis le chargement' },
+    ]);
+    expect(out.log[0]).toBe(
+      `REFUSÉ — ${name} · pros / cons : le disque a changé depuis le chargement.`,
+    );
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
   });
 });
 
@@ -2457,8 +2786,14 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ['extract:character', false, null],
       ['tags', true, 'tags'],
     ]);
-    // La table du jour : l'éditeur des effets. Les lots suivants la rempliront.
-    expect(ADMIN_TO_QUICK).toEqual({ '/admin/editor/effects': 'effects' });
+    // La table du jour : l'éditeur des effets, et les outils Pro / Con et
+    // Synergy, deux sous-onglets de la « Fiche perso ». Les lots suivants la
+    // rempliront.
+    expect(ADMIN_TO_QUICK).toEqual({
+      '/admin/editor/effects': 'effects',
+      '/admin/tools/pros-cons': 'character',
+      '/admin/tools/synergies': 'character',
+    });
     expect(DASHBOARD_DISK.quickTabs).toBe(ADMIN_TO_QUICK);
   });
 

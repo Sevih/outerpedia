@@ -1,5 +1,6 @@
-/* Onglet « Fiche perso » : le perso choisi, la savebar, les sous-onglets et le
-   sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos). Le
+/* Onglet « Fiche perso » : le perso choisi, la savebar, les sous-onglets, le
+   sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos) et
+   les deux sous-onglets de textes, « Pros / Cons » et « Synergies ». Le
    reste — carte, `.form`, `.savebar`, `.btn`, `.badge`, `.tab` — vient de
    `quick.css` ; le picker de héros, de `hero-picker.css`. Les ids `c-` voisinent
    avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. */
@@ -91,6 +92,46 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/* La langue de l'aperçu des textes, une pour toute la fiche : le groupe
+   segmenté de Gear reco (`.g-pv-lang`, `.g-seg`), aux mêmes mesures. */
+#tab-character .c-pv-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-character .c-pv-lang[hidden] {
+  display: none;
+}
+/* `.savebar span` pousse à gauche : ici le libellé suit son groupe. */
+#tab-character .c-pv-lang .lbl {
+  margin-right: 0;
+}
+#tab-character .c-seg {
+  display: inline-flex;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-character .c-seg button {
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-character .c-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+/* Le groupe rogne ce qui dépasse : l'anneau passe à l'intérieur. */
+#tab-character .c-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
 }
 
 /* ------------------------------------------------------- les sous-onglets
@@ -314,4 +355,260 @@
 }
 #tab-character .c-vt {
   font-size: 13.5px;
+}
+
+/* ------------------------------------------- « Pros / Cons » et « Synergies »
+   Des textes à tags inline, sur le modèle de la Note de Gear reco : l'anglais
+   dans une textarea de deux lignes qui grandit, dessous son aperçu, puis les
+   traductions, repliées. Pros / Cons : les deux cartes de `.c-cols` ;
+   Synergies : une carte par groupe. */
+#tab-character .c-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Une ligne : son texte, et ✕ à droite. Modifiée, un filet accent la borde. */
+#tab-character .c-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-left: 10px;
+  border-left: 2px solid var(--line-subtle);
+}
+#tab-character .c-line.dirty {
+  border-left-color: var(--accent);
+}
+#tab-character .c-text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+#tab-character .c-line > .btn.icon {
+  flex: none;
+}
+#tab-character .c-text textarea {
+  width: 100%;
+  min-height: 0;
+  font-size: 13px;
+}
+#tab-character textarea.refused {
+  border-color: var(--danger);
+}
+#tab-character .c-wide.c-foot {
+  margin-top: -4px;
+}
+/* « Traduire » dit son refus à côté de lui, sur plusieurs lignes s'il le faut. */
+#tab-character .c-foot .badge {
+  height: auto;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: normal;
+}
+#tab-character .c-ko {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+#tab-character .c-ko:empty {
+  display: none;
+}
+
+/* Les traductions, repliées : une par langue, trois par rangée. */
+#tab-character .c-trs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+#tab-character summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: max-content;
+  max-width: 100%;
+  list-style: none;
+  cursor: pointer;
+}
+#tab-character summary::-webkit-details-marker {
+  display: none;
+}
+#tab-character details[open] summary {
+  margin-bottom: 8px;
+}
+#tab-character summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+@media (max-width: 1300px) {
+  #tab-character .c-cols .c-trs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  #tab-character .c-trs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Synergies : la pile des groupes. En tête de carte, ✕ part à droite ; dans la
+   carte, la rangée des héros — portrait 44 px cadré sur le visage, nom, ✕ —
+   puis la raison. */
+#tab-character .c-syn {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-character .c-group .card-head .btn.icon {
+  margin-left: auto;
+}
+#tab-character .c-heroes {
+  display: flex;
+  align-items: center;
+  gap: 8px 10px;
+  flex-wrap: wrap;
+}
+#tab-character .c-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  background: var(--surface-base);
+  font-size: 13px;
+}
+#tab-character .c-hero img {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+  object-position: top;
+}
+
+/* L'aperçu d'un texte : ses segments, bâtis par `noteHtml` de `gear-view.mjs`
+   (classes `.pv-*`), sur le fond de la page — ce n'est plus l'éditeur. Les
+   couleurs sont celles du site : ses jetons, recopiés de `globals.css` sous
+   les mêmes noms (ceux qui manquent à `quick.css`), et ses classes de couleur
+   (`text-buff`, `text-earth`…), que les segments portent telles quelles —
+   comme dans `gear.css`, dont l'aperçu vit sous `#tab-gear`. */
+#tab-character {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-bg: #1a69a7;
+  --debuff-bg: #a72a27;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+  --equipment: #fbbf24;
+}
+#tab-character .text-buff {
+  color: var(--buff);
+}
+#tab-character .text-debuff {
+  color: var(--debuff);
+}
+#tab-character .text-class {
+  color: var(--klass);
+}
+#tab-character .text-stat {
+  color: var(--stat);
+}
+#tab-character .text-highlight {
+  color: var(--highlight);
+}
+#tab-character .text-equipment {
+  color: var(--equipment);
+}
+#tab-character .text-item-normal {
+  color: var(--item-normal);
+}
+#tab-character .text-item-superior {
+  color: var(--item-superior);
+}
+#tab-character .text-item-epic {
+  color: var(--item-epic);
+}
+#tab-character .text-item-legendary {
+  color: var(--item-legendary);
+}
+#tab-character .text-fire {
+  color: var(--fire);
+}
+#tab-character .text-water {
+  color: var(--water);
+}
+#tab-character .text-earth {
+  color: var(--earth);
+}
+#tab-character .text-light {
+  color: var(--light);
+}
+#tab-character .text-dark-elem {
+  color: var(--dark-elem);
+}
+#tab-character .c-pv {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface-base);
+  color: var(--content);
+  font-size: 14px;
+  line-height: 1.65;
+  transition: opacity 0.12s;
+}
+#tab-character .c-pv:empty {
+  display: none;
+}
+/* Une requête court : le rendu précédent reste, atténué. */
+#tab-character .c-pv.busy {
+  opacity: 0.45;
+}
+/* Une balise que le site ne résout pas : l'alerte de syntaxe. */
+#tab-character .pv-unknown {
+  color: var(--danger);
+  font-weight: 600;
+}
+#tab-character .pv-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+#tab-character .pv-u {
+  text-decoration: underline;
+}
+#tab-character .pv-ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+/* La tuile d'un effet, teintée buff ou debuff ; celle d'un item, sur son cadre. */
+#tab-character .pv-fx,
+#tab-character .pv-it {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+#tab-character .pv-fx {
+  border-radius: 4px;
+  background: var(--buff-bg);
+}
+#tab-character .pv-fx.debuff {
+  background: var(--debuff-bg);
+}
+#tab-character .pv-fx img,
+#tab-character .pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }

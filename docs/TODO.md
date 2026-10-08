@@ -38,13 +38,35 @@
       « Tableau de bord », lot B36), la chaîne des données (onglet
       « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
       Game data (onglet « Tables du jeu », lot B38), Effect (onglet
-      « Effets », lot B41). PARTIEL : Character (section « Fiche perso »,
-      lot C11 — la coquille, le picker de héros partagé, le sous-onglet
-      Fiche ; restent Pros / Cons et Synergies B42, Skills B39, Gear reco
-      B40, dans cet ordre).
+      « Effets », lot B41), Synergy et Pro / Con (sous-onglets « Synergies »
+      et « Pros / Cons » de la « Fiche perso », lot B42). PARTIEL : Character
+      (section « Fiche perso », lots C11 et B42 — la coquille, le picker de
+      héros partagé, les sous-onglets Fiche, Pros / Cons et Synergies ;
+      restent Skills B39 puis Gear reco B40).
       À faire par Sevih : remplir
-      la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
-      et Pro / Con iront dans l'éditeur de perso.
+      la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Fiche perso » › Pros / Cons et Synergies — contrôles à l'écran
+      (lot B42)** : le banc ne clique pas, aucun enregistrement réel n'a été
+      joué et « Traduire » n'a jamais été appelé avec des clés. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : une route nouvelle, et l'état de la
+      fiche sert les langues — sans ça la fiche dit « quick lancé avant ce
+      code »). (1) Un perso, sous-onglet Pros / Cons : « ＋ pro », taper un
+      texte avec un tag `{B/…}` — l'aperçu arrive sous la ligne après la
+      frappe, icône et nom de l'effet ; changer la langue « Aperçu » de la
+      savebar. (2) Un tag faux (`{B/Foo}`) : rouge dans l'aperçu ;
+      « Enregistrer » — attendu : refus sur la ligne, carte cerclée, rien
+      d'écrit ; le corriger, enregistrer. (3) « Traduire » avec les clés : les
+      cinq langues se posent (elles ÉCRASENT celles en place), « Traductions »
+      se déplie, à relire ; « à retraduire » après une retouche de l'anglais.
+      (4) Synergies : « ＋ groupe », « ＋ héros » (deux héros dans le picker,
+      « Valider »), une raison, « Enregistrer » → UN commit
+      `chore(characters): <perso>` ; un groupe sans héros est refusé. (5) Le
+      diff du commit : seules les lignes touchées bougent dans
+      `data/curated/characters.json`. (6) Après « Pousser » et le déploiement :
+      la fiche du perso sur le site, sections Pros / Cons et Synergies. À
+      juger : « Traduire » de Pros / Cons posé sous les deux cartes ; les
+      textarea de deux lignes ; faut-il une saisie assistée des tags (les
+      `refs` sont servis, la page ne les lit pas encore) ?
 - [ ] **« Fiche perso » — contrôles à l'écran (lot C11)** : le banc ne
       clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : trois routes nouvelles). (1) Groupe

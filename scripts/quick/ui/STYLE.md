@@ -609,20 +609,21 @@ le panneau ; à la fermeture le focus revient à `opener()`.
 
 ## Éditeurs — croquis
 
-### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11)
+### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42)
 
 Ce que le wiki sait d'UN perso, en sous-onglets comme sur sa fiche du site :
-l'éditeur « Character » de l'admin et, à terme, ses outils Pro / Con et
-Synergy. Croquis du rendu :
+l'éditeur « Character » de l'admin et ses outils Pro / Con et Synergy. Croquis
+du rendu :
 
 ```
 .head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
 .card.pad.c-char  l'en-tête de Gear reco : portrait 56 px, nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
    sans perso : « Aucun perso choisi. », [Choisir un perso], et le picker OUVERT d'office à chaque venue sur l'onglet
-.savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets ; absente sans perso)
-.c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons] [Synergies] [Skills] [Gear reco]
-   les sous-onglets pas encore portés sont là, `disabled`, `title` = le lot qui les apporte (B42, B42, B39, B40)
-   un point accent = des changements pas encore enregistrés, rouge = un refus ou une erreur
+.savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets ; absente sans perso)
+   « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
+.c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [Gear reco]
+   les sous-onglets pas encore portés sont là, `disabled`, `title` = le lot qui les apporte (Skills B39, Gear reco B40)
+   un point accent = des changements pas encore enregistrés DANS ce sous-onglet, rouge = un refus ou une erreur
    clavier : ← → (les bouts se rejoignent), Début, Fin — parmi les sous-onglets allumés ; `tabindex` 0 sur l'actif, -1 ailleurs
 #c-panel (le `tabpanel`) — Fiche : .c-cols, deux colonnes de .card (une seule sous 1000 px)
   .card « Rangs »   card-head : titre · badge edit « modifié » · badge ko « refusé »
@@ -635,6 +636,21 @@ Synergy. Croquis du rendu :
      TAGS  les tags humains en cases (.check : free) ; dessous « déduits des données » puis les tags du jeu en .badge.off (lecture)
   .card « Vidéos » (pleine largeur)  card-head : titre · badge du compte · « en lecture » … lien « ajouter dans Vidéos » (ouvre l'onglet Vidéos sur ce perso)
      une ligne par vidéo : titre · auteur · date ; « aucune vidéo »
+#c-panel — Pros / Cons : .c-cols, deux .card côte à côte (une seule sous 1000 px)
+  .card « Pros » | .card « Cons »   card-head : titre · badge off (le compte) · badge edit « modifié » · badge ko « refusé »
+     .c-lines : une ligne (.c-line, filet à gauche — accent quand elle est modifiée) = son texte, et ✕ (.btn.icon) à droite
+        le TEXTE d'une ligne (.c-text, le même dans Synergies) :
+          [textarea EN, 2 lignes, qui grandit avec le texte]   (bord danger quand la ligne est refusée)
+          .c-pv  l'aperçu : les segments que le site rendra (icône + libellé dans la couleur du site), un tag inconnu en ROUGE ; atténué pendant que la requête court ; absent tant que le texte est vide
+          .c-err le refus de la ligne, en rouge
+          <details> [Traductions (5)] · badge warn « à retraduire » · « 3 / 5 »   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée, placeholder = l'anglais
+     [＋ pro] / [＋ con] (.btn.ghost.sm, en pied de carte) ; « Aucun pro. » / « Aucun con. »
+  sous les deux cartes : [Traduire] (.btn.ghost, `title` : il ÉCRASE) · badge error (son refus) · le refus du champ entier (`stale`, forme)
+#c-panel — Synergies : .c-syn, une pile de .card.c-group, une par groupe
+  .card   card-head : « Groupe 1 » · badge edit « modifié » · badge ko « refusé » … ✕ à droite (retire le groupe)
+     .c-heroes : des tuiles (.c-hero : portrait 44 px cadré sur le visage, nom, ✕) puis [＋ héros] (.btn.ghost.sm — le picker de héros en `multi`, les héros du groupe cochés, le perso de la fiche exclu)
+     la raison : le TEXTE d'une ligne, comme un pro
+  sous la pile : [＋ groupe] [Traduire] · badge error · le refus du champ ; « Aucune synergie. »
 .card.ko (une carte qui porte un refus ou une erreur) : bord danger
 le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies` · `skills` · `gear` ; `#character/<id>` = `fiche`, un sous-onglet éteint aussi) — la page l'écrit au choix du perso et du sous-onglet : recharger y revient
 ```
@@ -657,11 +673,43 @@ ne redessine pas la carte (le champ garde le curseur) : ses badges, le point
 du sous-onglet et la savebar suivent ; seule la table des paliers est
 redessinée, quand un palier est ajouté, retiré ou déplacé. « Annuler » relit
 le disque. Changer de perso ou quitter l'onglet avec des changements en
-attente demande confirmation (`canLeave`). Propres à l'onglet, dans
-`tabs/character.css` : `.c-char`, `.c-who` et consorts (l'en-tête de Gear
-reco, recopié), `.c-tabs`, `.c-cols`, `.c-card`, `.c-body`, `.c-cell`,
-`.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée), `.c-tiers`, `.c-err`,
-`.c-tags`, `.c-derived`, `.c-videos`.
+attente demande confirmation (`canLeave`).
+
+Pros / Cons et Synergies (B42) sont des TEXTES À TAGS INLINE (`{B/…}`,
+`{SK/Aer|S3}`…), sur le modèle de la Note de Gear reco : l'anglais se saisit,
+« Traduire » génère les autres langues, à relire. Une ligne compte dans la
+savebar dès qu'elle diffère du disque — ajoutée (vide, elle ne compte pas et
+ne part pas), modifiée, retirée ; chaque liste part ENTIÈRE (`curated.prosCons`
+avec ses deux listes, `curated.synergies`), les langues d'un texte dans
+l'ordre où le fichier les portait. L'aperçu : UNE requête pour toutes les
+lignes du sous-onglet montré (`POST /api/character/preview` →
+`renderInlineBatch`, l'aperçu de l'admin), 400 ms après la dernière frappe,
+dans la langue de la savebar — une langue qu'une ligne ne porte pas se replie
+sur l'anglais, comme au rendu ; les segments sont rendus par `noteHtml` de
+`gear-view.mjs`. « à retraduire » : l'anglais a bougé depuis le chargement (ou
+depuis le dernier « Traduire ») et des traductions sont en place. « Traduire »
+envoie les textes anglais du sous-onglet à `POST /api/translate` et ÉCRASE les
+cinq autres langues, comme dans l'admin ; ce qu'il vient de traduire se
+déplie ; un refus (pas de clé, le moteur) va au journal et à côté du bouton,
+rien ne bouge. À l'enregistrement le serveur CONTRÔLE avant d'écrire, comme
+les notes de Gear reco : chaque tag de chaque langue par la résolution du
+site (`checkText`), l'anglais présent, la parité des balises d'un texte écrit
+dans toutes les langues, les héros d'une synergie dans le roster, pas de
+groupe sans héros. Un écart est un refus SITUÉ (`list`, `index` dans la liste
+envoyée) : la ligne garde sa saisie, son message dessous, sa carte cerclée,
+le point rouge sur son sous-onglet — y retoucher le lève. `refs` de l'état
+(`buildInlineRefs`, les listes de saisie assistée de l'admin) est servi, pas
+encore lu par la page : ce n'est PAS le contrôle (à apparence égale elle ne
+garde qu'une clé d'effet).
+
+Propres à l'onglet, dans `tabs/character.css` : `.c-char`, `.c-who` et
+consorts (l'en-tête de Gear reco, recopié), `.c-tabs`, `.c-cols`, `.c-card`,
+`.c-body`, `.c-cell`, `.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée),
+`.c-tiers`, `.c-err`, `.c-tags`, `.c-derived`, `.c-videos` ; pour les textes :
+`.c-pv-lang`, `.c-seg`, `.c-lines`, `.c-line`, `.c-text`, `.c-pv`, `.c-trs`,
+`.c-ko`, `.c-syn`, `.c-group`, `.c-heroes`, `.c-hero` — et les jetons et
+classes de couleur des segments (`.pv-*`, `text-buff`…), recopiés de
+`gear.css` où ils vivent sous `#tab-gear`.
 
 ### Effets (`wide`, fait — B41)
 

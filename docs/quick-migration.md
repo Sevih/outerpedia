@@ -93,17 +93,21 @@ tables que le code lit d'abord, avec les fichiers qui les lisent et la
 première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
-Éditeurs : Fiche perso (= Editor › Character, étape 9, lot C11 — portage
-PARTIEL : UNE section pour tout ce que le wiki sait d'un perso, le picker de
-héros en tête, des sous-onglets comme sur la fiche du site — Fiche, Pros /
-Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker partagé
-(`ui/hero-picker.mjs`, que Gear reco emploie aussi) et le sous-onglet Fiche :
-rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills, tags
-humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
+Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11 et B42 —
+portage PARTIEL : UNE section pour tout ce que le wiki sait d'un perso, le
+picker de héros en tête, des sous-onglets comme sur la fiche du site — Fiche,
+Pros / Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker
+partagé (`ui/hero-picker.mjs`, que Gear reco emploie aussi) et le sous-onglet
+Fiche : rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills,
+tags humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
 commit `chore(characters): <perso>`. Les rangs et le rôle restent AUSSI dans
-la grille Rangs. Les quatre autres sous-onglets sont là, éteints : Pros / Cons
-et Synergies arrivent avec B42, Skills avec B39, Gear reco avec B40 ; l'admin
-garde donc ses liens Character, Pro / Con et Synergy), Effets (= Editor ›
+la grille Rangs. B42 porte Pros / Cons et Synergies (= Tools › Pro / Con et
+Tools › Synergy, étapes 4 et 3) : des textes à tags inline saisis en anglais,
+leur aperçu tel que le site les rend, « Traduire » vers les cinq autres
+langues, les héros d'une synergie par le picker partagé — dans la même savebar
+et le même commit ; leurs liens sont retirés du menu admin le 08/10. Les deux
+derniers sous-onglets sont là, éteints : Skills arrive avec B39, Gear reco
+avec B40 ; l'admin garde donc son lien Character), Effets (= Editor ›
 Effect, étape 10, lot B41 : le catalogue des
 effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
 sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
@@ -125,7 +129,8 @@ après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
-(9 Character partiel, C11 ; 10 Effect fait, B41) →
+(9 Character partiel, C11 et B42 — qui clôt aussi 3 Synergy et 4 Pro / Con ;
+10 Effect fait, B41) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -146,13 +151,21 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 1. Outils simples (un lot A/B chacun, dans cet ordre)
 
-3. **Tools › Synergy**
+3. **Tools › Synergy** — FAIT, lot B42 : le sous-onglet « Synergies » de la
+   « Fiche perso » (cf. « Déjà dans quick »). L'entrée reste pour que la
+   numérotation ne bouge pas.
    liste + fiche `[id]`
-   - Agacements : ça devrais etre dans l'editor de character
+   - Agacements : ça devrais etre dans l'editor de character — corrigé : une
+     carte par groupe dans la fiche du perso, ses héros choisis dans le picker
+     partagé (en multi) au lieu d'une saisie par nom, la raison avec son aperçu.
 
-4. **Tools › Pro / Con**
+4. **Tools › Pro / Con** — FAIT, lot B42 : le sous-onglet « Pros / Cons » de
+   la « Fiche perso » (cf. « Déjà dans quick »). L'entrée reste pour que la
+   numérotation ne bouge pas.
    liste + fiche `[id]`
-   - Agacements : ça devrais etre dans l'editor de character
+   - Agacements : ça devrais etre dans l'editor de character — corrigé : les
+     deux listes côte à côte dans la fiche du perso, chaque ligne avec son
+     aperçu dessous (plus d'onglet Pros / Cons ni de clic pour éditer).
 
 5. **Tools › Banner** — FAIT, lot B35 : l'onglet « Bannières » (cf. « Déjà
    dans quick »). L'agacement de Sevih (« on devrait pouvoir détecter les
@@ -182,13 +195,14 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
-9. **Editor › Character** — PARTIEL, lot C11 : la section « Fiche perso »
-   (cf. « Déjà dans quick »). Faits : la coquille à sous-onglets, le picker de
-   héros partagé, le sous-onglet Fiche (les champs de `CharacterCuratedEditor`,
-   vidéos en lecture). Restent : Pros / Cons et Synergies (B42, les étapes 3
-   et 4, que Sevih veut « dans l'editor de character »), Skills (B39,
-   `CharacterKitEditor`), Gear reco (B40, qui devient un sous-onglet). Le lien
-   Character de l'admin reste jusqu'à B40.
+9. **Editor › Character** — PARTIEL, lots C11 et B42 : la section « Fiche
+   perso » (cf. « Déjà dans quick »). Faits : la coquille à sous-onglets, le
+   picker de héros partagé, le sous-onglet Fiche (les champs de
+   `CharacterCuratedEditor`, vidéos en lecture), puis Pros / Cons et Synergies
+   (B42, les étapes 3 et 4, que Sevih voulait « dans l'editor de character » :
+   `EditorialEditor` de l'admin). Restent : Skills (B39, `CharacterKitEditor`),
+   Gear reco (B40, qui devient un sous-onglet). Le lien Character de l'admin
+   reste jusqu'à B40.
    - Agacements : ui pas joli et compact (et on a deplacer le gear reco) —
      corrigé pour la Fiche par deux cartes aérées, « Rangs » et « Kit », au
      lieu de la grille serrée de l'admin ; le reste suit avec ses lots.

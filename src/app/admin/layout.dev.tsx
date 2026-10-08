@@ -61,8 +61,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     {
       title: 'Tools',
       items: [
-        { label: 'Pro / Con', href: '/admin/tools/pros-cons' },
-        { label: 'Synergy', href: '/admin/tools/synergies' },
+        // Pro / Con et Synergy : portés dans quick (Éditeurs › Fiche perso,
+        // sous-onglets « Pros / Cons » et « Synergies »), liens retirés le
+        // 08/10 — les pages restent joignables par leur URL jusqu'au retrait
+        // de l'admin.
         // Short names et Search aliases : portés dans quick (Outils › Noms),
         // liens retirés le 08/10 — les pages restent joignables par leur URL
         // jusqu'au retrait de l'admin.

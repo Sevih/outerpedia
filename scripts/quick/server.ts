@@ -74,6 +74,7 @@ import {
   parseTarget,
   previewChangelogEntry,
   previewGearBuilds,
+  previewInline,
   pushMain,
   queryGameTable,
   rankState,
@@ -604,7 +605,8 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'GET' && url.pathname === '/api/character/state') {
     // La fiche du perso de `?id=`, lue du disque à chaque appel : sa ligne du
-    // roster, son entrée curée entière, ses rangs et les listes de leurs menus.
+    // roster, son entrée curée entière, ses rangs et les listes de leurs menus,
+    // ce que les tags inline peuvent viser.
     const out = characterSheetState(url.searchParams.get('id') ?? '');
     if ('error' in out) return json(res, { error: out.error }, 404);
     json(res, out);
@@ -613,11 +615,23 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 
   if (req.method === 'POST' && url.pathname === '/api/character') {
     // UN enregistrement pour toute la fiche : les rangs par le plan de Rangs,
-    // puis les champs hors rangs, puis un commit au nom du perso.
+    // puis les champs hors rangs (pros / cons et synergies compris, leurs tags
+    // inline contrôlés), puis un commit au nom du perso.
     const { id, changes } = await body<{ id: string; changes: CharacterSheetChanges }>(req);
     await stream(res, (report) =>
       withGit(saveCharacterSheet(String(id ?? ''), changes, CHARACTER_SHEET_DEPS, report)),
     );
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/character/preview') {
+    // L'aperçu des pros, des cons et des raisons de synergie en cours de
+    // saisie : chaque texte en segments, tels que le site les rend dans la
+    // langue demandée. Rien ne s'écrit. Un corps illisible ou une forme
+    // fausse : 400 `{ error }`, que la page affiche.
+    const b = await body<{ texts?: unknown; lang?: unknown } | null>(req).catch(() => null);
+    const out = await previewInline(b?.texts, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
     return;
   }
 

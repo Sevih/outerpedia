@@ -52,14 +52,16 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
  * Les `POST` que la page émet en se chargeant et qui ne font que LIRE (l'aperçu
  * du brouillon, les emojis des serveurs cochés, l'aperçu des builds d'un
  * perso, le verdict « déborde » d'un nom court saisi, l'aperçu d'une entrée du
- * journal du site). Sans eux l'onglet Discord serait photographié sur une
- * erreur, et les cartes de Gear reco ou la fiche d'une entrée du journal sur
- * un aperçu refusé.
+ * journal du site, celui des pros, des cons et des synergies d'une fiche de
+ * perso). Sans eux l'onglet Discord serait photographié sur une erreur, et les
+ * cartes de Gear reco, la fiche d'une entrée du journal ou les lignes d'une
+ * fiche de perso sur un aperçu refusé.
  */
 export const READ_ONLY_POSTS = new Set([
   '/api/discord/preview',
   '/api/discord/emojis',
   '/api/gear-reco/preview',
+  '/api/character/preview',
   '/api/names/fit',
   '/api/changelog/preview',
 ]);

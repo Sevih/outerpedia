@@ -4,7 +4,10 @@
     <p class="hint">
       Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie : « Enregistrer
       » envoie la fiche et committe. Lue au rendu : le site ne change qu'une fois « Pousser » fait
-      et le build de la CI déployé. Les rangs et le rôle se règlent aussi dans la grille Rangs.
+      et le build de la CI déployé. Les rangs et le rôle se règlent aussi dans la grille Rangs. Les
+      pros, les cons et les raisons de synergie se saisissent en anglais ; « Traduire » génère les
+      autres langues, à relire. Chaque texte porte dessous son aperçu, dans la langue choisie dans
+      la barre — une balise que le site ne résout pas y sort en rouge.
     </p>
   </div>
 
@@ -34,6 +37,8 @@
   <!-- Une barre pour toute la fiche : les changements de tous les sous-onglets. -->
   <div class="savebar" id="c-bar" role="toolbar" aria-label="Enregistrement" hidden>
     <span id="c-count"></span>
+    <!-- La langue de l'aperçu des textes, une pour toute la fiche (posée par `pvLangs`). -->
+    <div class="c-pv-lang" id="c-pv-lang" hidden></div>
     <button class="btn ghost" id="c-reset" disabled>Annuler</button>
     <button class="btn primary" id="c-save" disabled>Enregistrer</button>
   </div>

@@ -28,8 +28,9 @@
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
- *   - fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags) : le
- *     même curé, lu au RENDU lui aussi (tier lists, fiche du perso) ;
+ *   - fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags, pros /
+ *     cons, synergies) : le même curé, lu au RENDU lui aussi (tier lists,
+ *     fiche du perso) ;
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
  *     sous les cartes, le champ recherche des listes de persos) ;
@@ -97,6 +98,8 @@ import { upsertEffectCurated } from '@/lib/admin/effects-store';
 import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
 import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
+import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
+import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { upsertSearchAliases } from '@/lib/admin/search-alias-store';
@@ -143,7 +146,7 @@ import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { bulletSegments, type BulletSegment } from '@/lib/changelog-bullets';
 import { localePath } from '@/lib/navigation';
-import { TAG_REGEX, checkText } from '@/lib/parse-text';
+import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
@@ -169,9 +172,11 @@ import type {
   GearBuild,
   GearPresets,
   LocalizedText,
+  ProsCons,
   SkillPriority,
 } from '@contracts';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
+import type { SynergyGroup } from '@datagen/curated/character';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
 import { compactEffect } from '@datagen/curated/effects';
 import { validateGearBuilds } from '@datagen/curated/gear-reco';
@@ -986,11 +991,14 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
  * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
- * effets seul — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux tags et
+ * effets et les outils Pro / Con et Synergy (deux sous-onglets de la « Fiche
+ * perso ») — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux tags et
  * aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/effects': 'effects',
+  '/admin/tools/pros-cons': 'character',
+  '/admin/tools/synergies': 'character',
 };
 
 /** Sous combien de jours un code promo actif est « à échéance ». */
@@ -1600,13 +1608,23 @@ const CURATED_ORDER = [
   'skillPriority',
   'rankByTranscend',
   'roleByTranscend',
+  'prosCons',
+  'videos',
+  'synergies',
 ];
 
 /** `entry` avec `key` posé (à sa place s'il est nouveau) ou retiré (`undefined`). */
 function withField(
   entry: CharacterCurated,
   key: keyof CharacterCurated,
-  value: string | string[] | Record<string, string> | SkillPriority | undefined,
+  value:
+    | string
+    | string[]
+    | Record<string, string>
+    | SkillPriority
+    | ProsCons
+    | SynergyGroup[]
+    | undefined,
 ): CharacterCurated {
   const rest = Object.entries(entry).filter(([k]) => k !== key);
   if (value === undefined) return Object.fromEntries(rest) as CharacterCurated;
@@ -1907,10 +1925,14 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
 /**
  * La « Fiche perso » d'un perso : sa ligne du roster (avec sa chaîne et ses tags
  * DÉRIVÉS du jeu, en lecture), son entrée curée du disque ENTIÈRE (les
- * sous-onglets suivants y liront `prosCons` et `synergies`), ses rangs tels que
- * Rangs les sert — et l'échelle, les rôles, les paliers des menus —, les tags
- * humains que la fiche coche, ses vidéos en lecture. Lu du disque à chaque
- * appel. `error` : le perso n'est pas du roster.
+ * sous-onglets Pros / Cons et Synergies y lisent `prosCons` et `synergies`),
+ * ses rangs tels que Rangs les sert — et l'échelle, les rôles, les paliers des
+ * menus —, les tags humains que la fiche coche, ses vidéos en lecture. Pour les
+ * textes à tags inline : `refs`, ce que ces tags peuvent viser (les listes de
+ * l'éditeur assisté de l'admin, `buildInlineRefs`), et `langs`, les langues du
+ * site dans l'ordre où l'onglet les range — l'anglais se saisit, les autres se
+ * génèrent par « Traduire ». Lu du disque à chaque appel. `error` : le perso
+ * n'est pas du roster.
  */
 export function characterSheetState(id: string, disk: CharacterSheetDisk = CHARACTER_SHEET_DEPS) {
   const c = getCharacterListItems().find((x) => x.id === id);
@@ -1931,17 +1953,51 @@ export function characterSheetState(id: string, disk: CharacterSheetDisk = CHARA
     steps: rankSteps(),
     humanTags: HUMAN_TAGS,
     videos: curated.videos ?? [],
+    refs: buildInlineRefs(),
+    langs: {
+      default: DEFAULT_LANG,
+      shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
+    },
   };
 }
 
+/**
+ * L'aperçu des textes à tags inline de la fiche (pros, cons, raisons de
+ * synergie) : chaque texte en segments, tels que le site les rend dans `lang`
+ * — `renderInlineBatch`, l'aperçu de l'éditeur de l'admin, appelé tel quel (pas
+ * de garde `IS_DEV` : il ne fait que lire). Un tag que le site ne résout pas
+ * sort en segment `unknown`. `segments` est aligné sur `texts`. Rien ne
+ * s'écrit ; tout refus est RENDU, jamais levé.
+ */
+export async function previewInline(
+  texts: unknown,
+  lang: unknown,
+  render: (texts: string[], lang: string) => Promise<InlineSegment[][]> = renderInlineBatch,
+): Promise<{ segments: InlineSegment[][] } | { error: string }> {
+  if (!Array.isArray(texts) || texts.some((t) => typeof t !== 'string'))
+    return { error: 'texts : une liste de textes attendue' };
+  try {
+    return {
+      segments: await render(texts as string[], typeof lang === 'string' ? lang : DEFAULT_LANG),
+    };
+  } catch (e: unknown) {
+    return { error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
 /** Les champs du curé que la fiche écrit hors des rangs, dans l'ordre du fichier. */
-const SHEET_KEYS = ['tags', 'skillPriority'] as const;
+const SHEET_KEYS = ['tags', 'skillPriority', 'prosCons', 'synergies'] as const;
 type SheetKey = (typeof SHEET_KEYS)[number];
 
 const SHEET_LABELS: Record<SheetKey, string> = {
   tags: 'tags',
   skillPriority: 'priorité de skills',
+  prosCons: 'pros / cons',
+  synergies: 'synergies',
 };
+
+/** Les listes de textes de la fiche : où un refus se situe, à la ligne près. */
+export type SheetList = 'pros' | 'cons' | 'synergies';
 
 const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
 
@@ -1949,19 +2005,30 @@ const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
  * Ce que la fiche envoie. `ranks` : des cellules, comme Rangs les envoie (rang
  * PvE, rang PvP, rôle, paliers). `curated` : les champs hors rangs, chacun
  * ENTIER et seulement s'il a bougé — une priorité vide n'y est pas, une liste
- * de tags est celle des tags humains cochés. `was` : l'entrée que la page
- * avait chargée.
+ * de tags est celle des tags humains cochés, `prosCons` porte les deux listes
+ * et `synergies` tous les groupes. `was` : l'entrée que la page avait chargée.
  */
 export interface CharacterSheetChanges {
   ranks?: RankChange[];
-  curated?: { skillPriority?: SkillPriority; tags?: string[] };
+  curated?: {
+    skillPriority?: SkillPriority;
+    tags?: string[];
+    prosCons?: ProsCons;
+    synergies?: SynergyGroup[];
+  };
   was?: CharacterCurated;
 }
 
-/** Un refus situé : la cellule de rang (`field`, `step`) ou le champ de la fiche. */
+/**
+ * Un refus situé : la cellule de rang (`field`, `step`), le champ de la fiche,
+ * ou la ligne d'une de ses listes (`list`, `index` — le rang dans la liste
+ * ENVOYÉE, à partir de zéro).
+ */
 export interface SheetRefusal {
   field: RankField | SheetKey;
   step?: string;
+  list?: SheetList;
+  index?: number;
   reason: string;
 }
 
@@ -2009,6 +2076,121 @@ function cleanSheetTags(raw: unknown, disk: readonly string[]): string[] | strin
   ];
 }
 
+/** Ce qui cloche dans une ligne d'une liste de la fiche. */
+interface ListIssue {
+  list: SheetList;
+  index: number;
+  reason: string;
+}
+
+/**
+ * Un texte localisé venu de la page : les langues du site, dans l'ordre reçu
+ * (celui du fichier pour un texte qui en vient). Une langue vide n'est pas
+ * écrite — le rendu se replie sur l'anglais.
+ */
+function cleanSheetText(raw: unknown): LocalizedText | string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const out: LocalizedText = {};
+  for (const [lang, text] of Object.entries(raw)) {
+    if (!isValidLang(lang)) return `langue inconnue « ${lang} »`;
+    if (typeof text !== 'string') return `${lang} : une chaîne attendue`;
+    if (text.trim()) out[lang] = text;
+  }
+  return out;
+}
+
+/**
+ * Ce qui cloche dans un texte à tags inline — les trois contrôles des notes de
+ * Gear reco (`checkGearBuilds`), parce que l'enregistrement committe sur `main` :
+ * l'anglais, langue de repli, est là ; chaque tag de chaque langue se résout
+ * (`checkText`, la résolution du rendu) ; un texte écrit dans toutes les
+ * langues du site porte partout les mêmes balises (`inline-tag-parity.test.ts`
+ * ferait échouer la suite sur le fichier committé).
+ */
+function localizedIssues(text: LocalizedText): string[] {
+  const note: Partial<Record<string, string>> = text;
+  const out: string[] = [];
+  if (!note[DEFAULT_LANG]?.trim()) out.push(`pas de texte « ${DEFAULT_LANG} », la langue de repli`);
+  for (const [lang, value] of Object.entries(note))
+    for (const c of checkText(value ?? ''))
+      if (!c.ok)
+        out.push(
+          `${lang === DEFAULT_LANG ? '' : `${lang} : `}tag inconnu ${c.tag} (${c.reason ?? 'sans correspondance'})`,
+        );
+  if (LANGS.every((l) => typeof note[l] === 'string')) {
+    const ref = tagsOf(note[DEFAULT_LANG] ?? '').join(' ');
+    for (const lang of LANGS) {
+      const own = tagsOf(note[lang] ?? '').join(' ');
+      if (own !== ref)
+        out.push(
+          `${lang} : balises « ${own || 'aucune'} », « ${DEFAULT_LANG} » porte « ${ref || 'aucune'} »`,
+        );
+    }
+  }
+  return out;
+}
+
+/** Les deux listes d'un `prosCons`, absentes comprises : ce qui se compare. */
+const prosConsSides = (pc: ProsCons | undefined): Required<ProsCons> => ({
+  pros: pc?.pros ?? [],
+  cons: pc?.cons ?? [],
+});
+
+/**
+ * Les pros et les cons venus de la page, contrôlés ligne à ligne. Une ligne
+ * sans aucun texte n'est pas écrite (elle ne compte pas non plus comme un
+ * écart) ; `index` reste celui de la liste envoyée.
+ */
+function cleanProsCons(raw: unknown): { value: Required<ProsCons>; issues: ListIssue[] } | string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const value: Required<ProsCons> = { pros: [], cons: [] };
+  const issues: ListIssue[] = [];
+  for (const list of ['pros', 'cons'] as const) {
+    const sent = (raw as Record<string, unknown>)[list] ?? [];
+    if (!Array.isArray(sent)) return `${list} : une liste attendue`;
+    sent.forEach((item: unknown, index) => {
+      const text = cleanSheetText(item);
+      if (typeof text === 'string') return void issues.push({ list, index, reason: text });
+      if (!Object.keys(text).length) return;
+      const bad = localizedIssues(text);
+      if (bad.length) issues.push({ list, index, reason: bad.join(' ; ') });
+      else value[list].push(text);
+    });
+  }
+  return { value, issues };
+}
+
+/**
+ * Les groupes de synergie venus de la page : des héros du roster — un groupe
+ * sans héros est un écart, l'admin le retirait sans rien dire —, et une raison
+ * contrôlée comme un pro. Une raison sans aucun texte n'est pas écrite.
+ */
+function cleanSynergies(
+  raw: unknown,
+  roster: ReadonlySet<string>,
+): { value: SynergyGroup[]; issues: ListIssue[] } | string {
+  if (!Array.isArray(raw)) return 'forme inattendue';
+  const value: SynergyGroup[] = [];
+  const issues: ListIssue[] = [];
+  raw.forEach((item: unknown, index) => {
+    const bad = (reason: string): void => void issues.push({ list: 'synergies', index, reason });
+    if (!item || typeof item !== 'object' || Array.isArray(item)) return bad('forme inattendue');
+    const { heroes, reason } = item as { heroes?: unknown; reason?: unknown };
+    if (!Array.isArray(heroes) || heroes.some((h) => typeof h !== 'string'))
+      return bad('héros : une liste d’ids attendue');
+    if (!heroes.length) return bad('groupe sans héros');
+    const stray = (heroes as string[]).filter((h) => !roster.has(h));
+    if (stray.length) return bad(`hors du roster : ${stray.map((h) => `« ${h} »`).join(', ')}`);
+    const text = reason === undefined ? {} : cleanSheetText(reason);
+    if (typeof text === 'string') return bad(`raison : ${text}`);
+    const written = Object.keys(text).length > 0;
+    const wrong = written ? localizedIssues(text) : [];
+    if (wrong.length) return bad(wrong.join(' ; '));
+    value.push({ heroes: heroes as string[], ...(written ? { reason: text } : {}) });
+  });
+  return { value, issues };
+}
+
 /**
  * Enregistre la « Fiche perso » d'UN perso, en un geste et un commit.
  *
@@ -2023,7 +2205,11 @@ function cleanSheetTags(raw: unknown, disk: readonly string[]): string[] | strin
  *     `upsertEeCurated` si un rang d'EE est du lot) ;
  *   - puis les champs hors rangs, posés SUR l'entrée que les rangs viennent
  *     d'écrire — le store remplace l'entrée entière —, par
- *     `upsertCharacterCurated` : ses refus de schéma sont rendus tels quels ;
+ *     `upsertCharacterCurated` : ses refus de schéma sont rendus tels quels.
+ *     Les pros, les cons et les raisons de synergie sont CONTRÔLÉS avant
+ *     (`localizedIssues` : tags inline, langue de repli, parité), les héros
+ *     d'une synergie aussi : un écart est un refus situé à la ligne
+ *     (`list`, `index`), et la liste entière n'est pas écrite ;
  *   - puis UN commit des fichiers réellement touchés, au nom du perso.
  *
  * Les deux écritures passent par le verrou du store (`withStoreLock`), celui de
@@ -2147,11 +2333,46 @@ export async function saveCharacterSheet(
       said.push(tags.length ? `tags : ${tags.join(', ')}` : 'tags retirés');
     }
   }
+  if (keys.includes('prosCons')) {
+    const pc = cleanProsCons(sent.prosCons);
+    if (typeof pc === 'string')
+      refuse({ field: 'prosCons', reason: pc }, `${name} · ${SHEET_LABELS.prosCons}`);
+    else if (pc.issues.length)
+      for (const { list, index, reason } of pc.issues)
+        refuse({ field: 'prosCons', list, index, reason }, `${name} · ${list}[${index}]`);
+    else if (!sameJson(pc.value, prosConsSides(current.prosCons))) {
+      const { pros, cons } = pc.value;
+      const empty = !pros.length && !cons.length;
+      next = withField(next, 'prosCons', empty ? undefined : pc.value);
+      said.push(
+        empty
+          ? `${SHEET_LABELS.prosCons} retirés`
+          : `${SHEET_LABELS.prosCons} : ${pros.length} pro${pros.length > 1 ? 's' : ''}, ${cons.length} con${cons.length > 1 ? 's' : ''}`,
+      );
+    }
+  }
+  if (keys.includes('synergies')) {
+    const syn = cleanSynergies(sent.synergies, disk.roster);
+    if (typeof syn === 'string')
+      refuse({ field: 'synergies', reason: syn }, `${name} · ${SHEET_LABELS.synergies}`);
+    else if (syn.issues.length)
+      for (const { list, index, reason } of syn.issues)
+        refuse({ field: 'synergies', list, index, reason }, `${name} · ${list}[${index}]`);
+    else if (!sameJson(syn.value, current.synergies ?? [])) {
+      const n = syn.value.length;
+      next = withField(next, 'synergies', n ? syn.value : undefined);
+      said.push(
+        n
+          ? `${SHEET_LABELS.synergies} : ${n} groupe${n > 1 ? 's' : ''}`
+          : `${SHEET_LABELS.synergies} retirées`,
+      );
+    }
+  }
   if (said.length) {
     j.doing('écriture de la fiche');
     const errors = await deps.upsertCharacter(id, next);
     if (errors.length) {
-      // Le store ne dit pas lequel des champs il refuse : les deux sont marqués.
+      // Le store ne dit pas lequel des champs il refuse : tous sont marqués.
       for (const k of keys)
         if (!refused.some((r) => r.field === k)) refused.push({ field: k, reason: errors[0] });
       for (const e of errors) j.done(`REFUSÉ — ${name} : ${e}`);

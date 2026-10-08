@@ -7,6 +7,71 @@
 
 ## 2026-10-08
 
+- **quick : « Fiche perso » › Pros / Cons et Synergies — textes à tags inline
+  contrôlés, aperçu, traduction (lot B42, étapes 3, 4 et 9 de la migration,
+  suite)** — les outils Pro / Con et Synergy de l'admin étaient deux écrans à
+  part (agacement de Sevih : « ça devrais etre dans l'editor de character ») ;
+  ils deviennent les sous-onglets « Pros / Cons » et « Synergies » de la fiche,
+  que C11 avait posés éteints, sur le modèle de la Note de Gear reco.
+  **Serveur** (`scripts/quick/actions.ts`, `server.ts`) : `characterSheetState`
+  gagne `refs` (`buildInlineRefs()`) et `langs` (l'anglais, puis fr · es · jp ·
+  kr · zh : la page ne recopie pas la liste des langues) ;
+  `previewInline(texts, lang)` → `POST /api/character/preview` →
+  `renderInlineBatch`, l'aperçu de l'admin appelé tel quel (lecture seule :
+  ajoutée à `READ_ONLY_POSTS` de `shot.mjs`) ; `saveCharacterSheet` accepte
+  `changes.curated.prosCons` et `changes.curated.synergies`, chacun ENTIER,
+  jugés `stale` comme les autres champs, posés sur l'entrée d'après les rangs,
+  toujours UN commit `chore(characters): <perso>`. Avant d'écrire, les trois
+  contrôles des notes de Gear reco (`localizedIssues`) : chaque tag de chaque
+  langue par `checkText`, l'anglais présent, la parité des balises d'un texte
+  écrit dans toutes les langues (`inline-tag-parity.test.ts` casserait la CI
+  sur le fichier committé) ; les héros d'une synergie dans le roster, pas de
+  groupe sans héros (l'admin le retirait sans rien dire). Un écart est un
+  refus SITUÉ (`list`, `index` dans la liste envoyée — « Aer · pros[2] : tag
+  inconnu {B/Foo} (effet inconnu) »), la liste n'est pas écrite ; les autres
+  champs partent, comme le voulait déjà C11. Le contrôle passe par `checkText`
+  et NON par `refs` : cette liste de saisie ne garde qu'une clé par apparence
+  d'effet, et `{B/BT_ADDITIVE_TURN}`, que la fiche d'Aer porte et que le site
+  résout, n'y est pas — un test le garde. `CURATED_ORDER` gagne `prosCons`,
+  `videos`, `synergies` : un champ nouveau se range où le fichier le range.
+  **Page** (`tabs/character.{html,js,css}`) : Pros / Cons en deux cartes côte à
+  côte (une colonne sous 1000 px), Synergies en une carte par groupe (tuiles de
+  héros 44 px, « ＋ héros » par le picker partagé en `multi`, le perso de la
+  fiche exclu). Une ligne : UNE textarea anglaise de deux lignes qui grandit,
+  dessous son aperçu (`noteHtml` de `gear-view.mjs`, un tag inconnu en rouge),
+  puis « Traductions (5) » repliée avec « à retraduire » et le compte des
+  langues écrites. L'aperçu : UNE requête pour tout le sous-onglet, 400 ms
+  après la frappe, dans la langue du groupe « Aperçu » de la savebar (absent de
+  Fiche) ; pendant qu'elle court le rendu précédent reste, atténué.
+  « Traduire » (un par sous-onglet) envoie les textes anglais à
+  `POST /api/translate` et ÉCRASE les cinq langues ; sans clé le refus va au
+  journal et à côté du bouton. Savebar commune : chaque ligne ajoutée, modifiée
+  ou retirée compte, un point par sous-onglet, refus sur la ligne (carte
+  cerclée, message sous la textarea, saisie gardée), « Annuler », `canLeave`.
+  Les langues d'un texte repartent dans l'ordre où le fichier les portait
+  (37 textes du disque ne suivent pas l'ordre des langues du site) : pas de
+  bruit dans le diff.
+  **Admin** : les liens Pro / Con et Synergy sortent du menu Tools
+  (`layout.dev.tsx`), `ADMIN_TO_QUICK` les renvoie à `character`. **Vérifié** :
+  `pnpm typecheck` (« tsc --noEmit … -p scripts/tsconfig.json », code 0),
+  `pnpm lint` (« eslint », code 0), `pnpm test` (« Tests 3232 passed (3232) »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests 740
+  passed (740) ») — dont `actions.test.ts` (refs, aperçu factice et réel, tag
+  inconnu, héros hors roster, groupe vide, parité, `stale`, pros + rangs en un
+  commit) et la page en happy-dom, horloge factice (quinze cas nouveaux ;
+  quatre cas de C11 ajustés : deux sous-onglets ne sont plus éteints). Banc sur
+  un quick isolé (:4883, clés vidées, que des GET et l'aperçu) : Aer en Pros /
+  Cons à 1440 et à 900 px, Marian (trois groupes) et Aer (aucun) en Synergies,
+  la Fiche d'Aer — inchangée, hors les deux onglets allumés et la phrase
+  d'aide. Rien d'enregistré, `/api/translate` jamais appelé. **Laissé** : la
+  page ne lit pas encore `refs` (pas de saisie assistée des tags : le lot ne
+  demande qu'une textarea) ; le « Traduire » de Pros / Cons est sous les deux
+  cartes plutôt que dans un pied de carte, il vaut pour les deux ; les jetons
+  et classes `.pv-*` sont recopiés de `gear.css` (ils y vivent sous
+  `#tab-gear`) — B40, qui amène Gear reco dans la fiche, pourra les mettre en
+  commun ; la home de l'admin (`page.dev.tsx`) liste toujours Pro / Con et
+  Synergy dans son avancement, comme elle liste Effect. Suite : B39, puis B40.
+
 - **Relecture C11 (Fable) — « Fiche perso » de quick, coquille et onglet
   Fiche, validé** : périmètre tenu (dix-neuf fichiers ; hors quick, seuls
   `HUMAN_TAGS` descendu dans `tierlist/tiers.ts` et l'éditeur admin qui
