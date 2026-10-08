@@ -1,0 +1,257 @@
+/* Le picker de héros (`hero-picker.mjs`), partagé par « Fiche perso » et Gear
+   reco : une modale au-dessus du journal, posée dans `<body>` — recherche,
+   pastilles d'élément et de classe, groupe segmenté facultatif, grille de
+   visages et, en multi-choix, un pied qui récapitule et valide. Les mêmes
+   mesures que le picker de pièces de Gear reco (`.g-modal`, `tabs/gear.css`),
+   qui reste dans son onglet. */
+.hp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(2 6 23 / 0.72);
+}
+.hp-modal[hidden] {
+  display: none;
+}
+.hp-panel {
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+  max-width: 100%;
+  max-height: min(720px, 100%);
+  overflow: hidden;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-subtle);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.55);
+}
+.hp-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line-subtle);
+}
+.hp-head strong {
+  color: var(--content-muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hp-head .btn.icon {
+  margin-left: auto;
+}
+.hp-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+}
+.hp-search {
+  position: relative;
+}
+.hp-search svg {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  color: var(--placeholder);
+}
+.hp-search input {
+  width: 100%;
+  height: 36px;
+  padding-left: 36px;
+}
+.hp-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+.hp-filters:empty {
+  display: none;
+}
+.hp-togs {
+  display: flex;
+  gap: 6px;
+}
+.hp-togs:empty {
+  display: none;
+}
+.hp-tog {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-base);
+  cursor: pointer;
+}
+.hp-tog img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  opacity: 0.55;
+}
+.hp-tog:hover img {
+  opacity: 0.8;
+}
+.hp-tog[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.hp-tog[aria-pressed='true'] img {
+  opacity: 1;
+}
+.hp-seg {
+  display: inline-flex;
+  height: 36px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.hp-seg button {
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.hp-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.hp-body {
+  padding: 8px 16px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+.hp-body .empty {
+  margin: 0;
+}
+.hp-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 12px 8px;
+}
+.hp-tiles:empty {
+  display: none;
+}
+.hp-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--content-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.hp-tile:hover {
+  color: var(--content);
+}
+/* L'anneau du perso choisi, sur un conteneur : l'icône d'élément et la
+   pastille en débordent. */
+.hp-ring {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+.hp-tile:hover .hp-ring {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.hp-ring.on {
+  border-color: var(--accent);
+}
+.hp-fi {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+.hp-el {
+  position: absolute;
+  left: -4px;
+  bottom: -4px;
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 50%;
+  background: var(--surface-base);
+  object-fit: contain;
+}
+/* La pastille d'une tuile : un compte (atténué à zéro), ou ✓ en multi-choix. */
+.hp-cnt {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.hp-cnt.zero {
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  color: var(--content-muted);
+}
+.hp-n {
+  max-width: 76px;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+/* Le pied d'un multi-choix : qui est coché, « Annuler », « Valider ». */
+.hp-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line-subtle);
+}
+.hp-foot[hidden] {
+  display: none;
+}
+.hp-recap {
+  display: flex;
+  align-items: center;
+  gap: 6px 16px;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  min-width: 0;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+.hp-tog:focus-visible,
+.hp-seg button:focus-visible,
+.hp-tile:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+/* Le groupe segmenté rogne ce qui dépasse : l'anneau passe à l'intérieur. */
+.hp-seg button:focus-visible {
+  outline-offset: -2px;
+}

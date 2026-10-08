@@ -11,6 +11,11 @@
  *
  * La fonction est pure : aucun disque ici, l'état est passé en argument.
  *
+ * Et contrat de la « Fiche perso » — `characterRoster`, `characterSheetState` et
+ * `saveCharacterSheet` : les rangs y passent par le même plan, puis les champs
+ * hors rangs (priorité de skills, tags). Le disque est FACTICE, les deux stores
+ * et git INJECTÉS ; seul le roster est réel (Aer, `2000055`).
+ *
  * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
  * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
  * `data/curated/` ni ne lance git. Le fichier des recos est LU (roster, listes
@@ -94,6 +99,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CharacterCurated, Effect, EffectCurated, GearBuild, LocalizedText } from '@contracts';
+import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadChangelog } from '@/lib/admin/changelog-store';
 import type { ChangelogEntry } from '@/lib/data/changelog';
@@ -120,6 +126,8 @@ import {
   addComics,
   bannersState,
   changelogState,
+  characterRoster,
+  characterSheetState,
   checkGearBuilds,
   comicLangOf,
   commitPaths,
@@ -143,6 +151,7 @@ import {
   queryGameTable,
   saveBannerList,
   saveChangelogList,
+  saveCharacterSheet,
   saveGearReco,
   saveEffects,
   saveNames,
@@ -152,6 +161,8 @@ import {
   type BannersDisk,
   type ChangelogDeps,
   type ChangelogDisk,
+  type CharacterSheetChanges,
+  type CharacterSheetDeps,
   type ComicsDeps,
   type ComicUpload,
   type DashboardDisk,
@@ -432,6 +443,403 @@ describe('planRankChanges — tables par transcendance', () => {
     ]);
 
     expect({ curated: d.curated, ee: d.ee }).toEqual(before);
+  });
+});
+
+// ----------------------------------------------------------- fiche perso -----
+
+describe('characterRoster, characterSheetState — la fiche lue, disque injecté', () => {
+  const AER = '2000055';
+  const aer = getCharacterListItems().find((c) => c.id === AER)!;
+  const sheetDisk = (curated: Record<string, CharacterCurated> = { [AER]: DIANNE }) => ({
+    disk: () => disk({ curated, roster: new Set([AER]), eeOwners: new Set([AER]) }),
+  });
+
+  it('le roster : tout le monde, par nom, avec de quoi dessiner une tuile et l’en-tête', () => {
+    const { roster } = characterRoster();
+    expect(roster).toHaveLength(getCharacterListItems().length);
+    expect(roster.map((c) => c.name)).toEqual(
+      [...roster.map((c) => c.name)].sort((a, b) => a.localeCompare(b)),
+    );
+    expect(roster.find((c) => c.id === AER)).toEqual({
+      id: AER,
+      name: characterDisplayName(aer),
+      element: aer.element,
+      class: aer.class,
+      subClass: aer.subClass ?? '',
+      rarity: aer.rarity,
+    });
+  });
+
+  it('l’état : la ligne du roster, sa chaîne, ses tags dérivés, et le curé du disque ENTIER', () => {
+    const state = characterSheetState(AER, sheetDisk());
+    if ('error' in state) throw new Error(state.error);
+    expect(state.char).toEqual({
+      id: AER,
+      name: characterDisplayName(aer),
+      element: aer.element,
+      class: aer.class,
+      subClass: aer.subClass ?? '',
+      rarity: aer.rarity,
+      chain: aer.chainType ?? '',
+      tags: aer.tags ?? [],
+    });
+    // Entier : les sous-onglets suivants y liront `prosCons` et `synergies`.
+    expect(state.curated).toEqual(DIANNE);
+    expect(state.videos).toEqual(DIANNE.videos);
+  });
+
+  it('les rangs tels que Rangs les sert, avec l’échelle, les rôles et les paliers', () => {
+    const state = characterSheetState(AER, sheetDisk());
+    if ('error' in state) throw new Error(state.error);
+    expect(state.ranks).toEqual({
+      rank: 'S',
+      rankPvp: 'A',
+      role: 'dps',
+      rankByTranscend: DIANNE.rankByTranscend,
+      roleByTranscend: DIANNE.roleByTranscend,
+    });
+    expect(state.tiers).toEqual(['S', 'A', 'B', 'C', 'D', 'E']);
+    expect(state.roles).toEqual(['dps', 'support', 'sustain']);
+    expect(state.steps).toEqual([
+      { key: '3', label: '3★' },
+      { key: '4', label: '4★' },
+      { key: '6', label: '5★' },
+      { key: '9', label: '6★' },
+    ]);
+  });
+
+  it('sert les tags humains que la fiche coche : la liste de l’éditeur de l’admin', () => {
+    const state = characterSheetState(AER, sheetDisk());
+    if ('error' in state) throw new Error(state.error);
+    expect(state.humanTags).toBe(HUMAN_TAGS);
+    expect(HUMAN_TAGS).toEqual(['free']);
+  });
+
+  it('un perso sans entrée curée : tout vide, rien d’absent', () => {
+    const state = characterSheetState(AER, sheetDisk({}));
+    if ('error' in state) throw new Error(state.error);
+    expect(state.curated).toEqual({});
+    expect(state.ranks).toEqual({
+      rank: '',
+      rankPvp: '',
+      role: '',
+      rankByTranscend: {},
+      roleByTranscend: {},
+    });
+    expect(state.videos).toEqual([]);
+  });
+
+  it('un id hors du roster : une erreur, pas une fiche vide', () => {
+    expect(characterSheetState('nope', sheetDisk())).toEqual({ error: 'perso inconnu : nope' });
+  });
+});
+
+describe('saveCharacterSheet — disque, stores et git injectés', () => {
+  const AER = '2000055';
+  const name = characterDisplayName(getCharacterListItems().find((c) => c.id === AER)!);
+  /** L'entrée du disque : les clés dans l'ordre d'un vrai fichier, vidéos en tête. */
+  const ENTRY: CharacterCurated = {
+    videos: [{ platform: 'youtube', id: 'zvgoCGKtIfo', title: 't', author: 'a' }],
+    prosCons: { pros: [{ en: 'strong' }], cons: [] },
+    rank: 'A',
+    rankPvp: 'C',
+    role: 'dps',
+    tags: ['free'],
+    skillPriority: { first: 3, second: 2, ultimate: 1 },
+    rankByTranscend: { '6': 'S' },
+  };
+
+  /** Le disque et les trois écritures, factices : elles notent leurs appels. */
+  function deps(
+    over: {
+      entry?: CharacterCurated;
+      errors?: (curated: CharacterCurated) => string[];
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      character: [] as [string, CharacterCurated][],
+      ee: [] as [string, unknown][],
+      git: [] as [string[], string][],
+    };
+    const fake: CharacterSheetDeps = {
+      disk: () =>
+        disk({
+          curated: { [AER]: over.entry ?? ENTRY },
+          ee: { [AER]: { rank: 'A', rank10: 'S', chipHide: ['x'] } },
+          roster: new Set([AER]),
+          eeOwners: new Set([AER]),
+        }),
+      upsertCharacter: async (id, curated) => {
+        calls.character.push([id, curated]);
+        return over.errors?.(curated) ?? [];
+      },
+      upsertEe: async (id, patch) => {
+        calls.ee.push([id, patch]);
+        return [];
+      },
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+  const cell = (field: RankChange['field'], from: string, to: string, step?: string): RankChange =>
+    change(AER, field, from, to, step);
+  const save = (changes: CharacterSheetChanges, fake: CharacterSheetDeps) =>
+    saveCharacterSheet(AER, { was: ENTRY, ...changes }, fake);
+
+  it('des rangs seuls : le plan de Rangs, une écriture, UN commit au nom du perso', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      { ranks: [cell('rank', 'A', 'S'), cell('rankByTranscend', '', 'A', '4')] },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['PvE : A → S', 'PvE à 4★ : vide → A', 'git : fait'],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    // L'entrée EXISTANTE est reprise : vidéos, pros / cons, tags, priorités intacts.
+    expect(calls.character).toEqual([
+      [AER, { ...ENTRY, rank: 'S', rankByTranscend: { '4': 'A', '6': 'S' } }],
+    ]);
+    expect(Object.keys(calls.character[0][1])).toEqual(Object.keys(ENTRY));
+    expect(calls.ee).toEqual([]);
+    expect(calls.git).toEqual([[['data/curated/characters.json'], `chore(characters): ${name}`]]);
+  });
+
+  it('une cellule que le disque ne porte plus comme la page : refusée, située, le reste part', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      { ranks: [cell('rank', 'B', 'S'), cell('role', 'dps', 'support')] },
+      fake,
+    );
+
+    expect(out.ok).toBe(false);
+    expect(out.written).toBe(true);
+    expect(out.stale).toBe(false);
+    expect(out.refused).toEqual([
+      { field: 'rank', step: undefined, reason: 'la page avait « B », le disque porte « A »' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — ${name} · PvE : la page avait « B », le disque porte « A ».`,
+      'rôle : dps → support',
+      'git : fait',
+    ]);
+    expect(calls.character).toEqual([[AER, { ...ENTRY, role: 'support' }]]);
+    expect(calls.git).toHaveLength(1);
+  });
+
+  it('priorité de skills et tags : par le store, sur l’entrée du disque, à leur place', async () => {
+    const { calls, fake } = deps({ entry: { rank: 'A', videos: ENTRY.videos } });
+    const out = await saveCharacterSheet(
+      AER,
+      {
+        curated: { skillPriority: { first: 2, ultimate: 3 }, tags: ['free'] },
+        was: { rank: 'A', videos: ENTRY.videos },
+      },
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(out.log).toEqual(['priorité de skills : 2 · — · 3', 'tags : free', 'git : fait']);
+    expect(calls.character).toEqual([
+      [
+        AER,
+        {
+          rank: 'A',
+          tags: ['free'],
+          skillPriority: { first: 2, ultimate: 3 },
+          videos: ENTRY.videos,
+        },
+      ],
+    ]);
+    // Un champ nouveau prend sa place dans l'entrée, pas la queue après les vidéos.
+    expect(Object.keys(calls.character[0][1])).toEqual(['rank', 'tags', 'skillPriority', 'videos']);
+  });
+
+  it('une priorité vidée et un tag décoché retirent leur clé', async () => {
+    const { calls, fake } = deps();
+    const out = await save({ curated: { skillPriority: {}, tags: [] } }, fake);
+
+    expect(out.log).toEqual(['priorité de skills retirée', 'tags retirés', 'git : fait']);
+    const written = calls.character[0][1];
+    expect(written).not.toHaveProperty('skillPriority');
+    expect(written).not.toHaveProperty('tags');
+    expect(written.videos).toEqual(ENTRY.videos);
+  });
+
+  it('rangs PUIS champs hors rangs : la seconde écriture repart de la première, UN commit', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('rankPvp', 'C', 'B')],
+        curated: { skillPriority: { first: 1, second: 2, ultimate: 3 } },
+      },
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(calls.character).toEqual([
+      [AER, { ...ENTRY, rankPvp: 'B' }],
+      [AER, { ...ENTRY, rankPvp: 'B', skillPriority: { first: 1, second: 2, ultimate: 3 } }],
+    ]);
+    expect(calls.git).toEqual([[['data/curated/characters.json'], `chore(characters): ${name}`]]);
+    expect(out.log).toEqual(['PvP : C → B', 'priorité de skills : 1 · 2 · 3', 'git : fait']);
+  });
+
+  it('`stale` : le disque a changé sous un champ de la fiche — refus SANS écriture, rangs compris', async () => {
+    const { calls, fake } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      {
+        ranks: [cell('rank', 'A', 'S')],
+        curated: { skillPriority: { first: 1 } },
+        // La page avait chargé d'autres priorités que celles du disque.
+        was: { ...ENTRY, skillPriority: { first: 1, second: 2, ultimate: 3 } },
+      },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        `REFUSÉ — ${name} · priorité de skills : le disque a changé depuis le chargement.`,
+        'Rien à enregistrer.',
+      ],
+      written: false,
+      stale: true,
+      refused: [{ field: 'skillPriority', reason: 'le disque a changé depuis le chargement' }],
+    });
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('le disque a bougé AILLEURS (une vidéo ajoutée) : la fiche n’est pas `stale` pour autant', async () => {
+    const { calls, fake } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      { curated: { tags: [] }, was: { ...ENTRY, videos: [] } },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, stale: false, written: true });
+    // La vidéo du disque est reprise : c'est lui qui est réécrit, pas `was`.
+    expect(calls.character[0][1].videos).toEqual(ENTRY.videos);
+  });
+
+  it('un tag qui n’est pas humain, une priorité qui n’est pas un entier : refusés, situés', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('rank', 'A', 'B')],
+        curated: {
+          tags: ['premium'],
+          skillPriority: { first: 1.5 },
+        },
+      },
+      fake,
+    );
+
+    expect(out.ok).toBe(false);
+    expect(out.refused).toEqual([
+      { field: 'skillPriority', reason: "« 1.5 » n'est pas un entier" },
+      { field: 'tags', reason: "« premium » n'est pas un tag humain" },
+    ]);
+    // Le rang, lui, est parti.
+    expect(calls.character).toEqual([[AER, { ...ENTRY, rank: 'B' }]]);
+    expect(calls.git).toHaveLength(1);
+  });
+
+  it('un tag hérité du disque qui n’est pas humain reste, la fiche ne le montre pas', async () => {
+    const entry = { ...ENTRY, tags: ['legacy', 'free'] };
+    const { calls, fake } = deps({ entry });
+    await saveCharacterSheet(AER, { curated: { tags: [] }, was: entry }, fake);
+    expect(calls.character[0][1].tags).toEqual(['legacy']);
+  });
+
+  it('un refus de schéma du store : rendu tel quel, les champs marqués, rien de committé', async () => {
+    const { calls, fake } = deps({ errors: () => ['curated[2000055].tags — attendu un tableau'] });
+    const out = await save({ curated: { tags: [] } }, fake);
+
+    expect(out).toMatchObject({ ok: false, written: false, stale: false });
+    expect(out.refused).toEqual([
+      { field: 'tags', reason: 'curated[2000055].tags — attendu un tableau' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — ${name} : curated[2000055].tags — attendu un tableau`,
+      'Rien à enregistrer.',
+    ]);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('un rang d’EE dans le lot : le store des EE, et son fichier dans le même commit', async () => {
+    const { calls, fake } = deps();
+    const out = await save({ ranks: [cell('eeRank', 'A', 'B'), cell('rank', 'A', 'S')] }, fake);
+
+    expect(out.ok).toBe(true);
+    expect(calls.ee).toEqual([
+      [AER, { rank: 'B', rank10: 'S', chipHide: ['x'], chipAdd: undefined }],
+    ]);
+    expect(calls.git).toEqual([
+      [
+        ['data/curated/characters.json', 'data/curated/equipment.json'],
+        `chore(characters): ${name}`,
+      ],
+    ]);
+  });
+
+  it('une cellule d’un autre perso n’est pas de la fiche', async () => {
+    const { calls, fake } = deps();
+    const out = await save({ ranks: [change('dianne', 'rank', 'S', 'A')] }, fake);
+    expect(out).toMatchObject({ ok: false, written: false });
+    expect(out.refused).toEqual([
+      { field: 'rank', step: undefined, reason: 'cette cellule n’est pas de ce perso' },
+    ]);
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('le disque porte déjà tout : ni écriture, ni commit, ni refus', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('rank', 'B', 'A')],
+        curated: { tags: ['free'], skillPriority: ENTRY.skillPriority },
+      },
+      fake,
+    );
+    expect(out).toEqual({
+      ok: true,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+      written: false,
+      stale: false,
+      refused: [],
+    });
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('sans changement, ou pour un perso hors du roster : refusé avant toute lecture', async () => {
+    const { calls, fake } = deps();
+    expect(await saveCharacterSheet(AER, { was: ENTRY }, fake)).toMatchObject({
+      ok: false,
+      log: ['Aucune modification à enregistrer.'],
+    });
+    expect(await saveCharacterSheet(AER, undefined, fake)).toMatchObject({ ok: false });
+    expect(
+      await saveCharacterSheet('nope', { ranks: [change('nope', 'rank', '', 'S')] }, fake),
+    ).toMatchObject({ ok: false, log: ['perso inconnu : nope.'], written: false });
+    expect(calls).toEqual({ character: [], ee: [], git: [] });
+  });
+
+  it('un commit qui échoue : la fiche est écrite, le geste est en échec', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué : x'] } });
+    const out = await save({ ranks: [cell('rank', 'A', 'S')] }, fake);
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.log.at(-1)).toBe('git commit a échoué : x');
   });
 });
 

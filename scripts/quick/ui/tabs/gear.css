@@ -551,9 +551,10 @@
 }
 
 /* ---------------------------------------------------------------- le picker
-   Une modale au-dessus du journal : recherche, rangée de filtres (pastilles
-   d'élément et de classe, groupe segmenté), grille de tuiles — visages ou
-   équipement — et, en multi-choix, un pied qui récapitule et valide. */
+   Une modale au-dessus du journal, pour les pièces d'un build : recherche,
+   rangée de filtres (le groupe segmenté des sets), grille de tuiles
+   d'équipement, et un pied qui récapitule et valide. Le perso se choisit dans
+   le picker de héros partagé (`hero-picker.css`), aux mêmes mesures. */
 #tab-gear .g-modal {
   position: fixed;
   inset: 0;
@@ -623,41 +624,6 @@
 }
 #tab-gear .g-filters:empty {
   display: none;
-}
-#tab-gear .g-togs {
-  display: flex;
-  gap: 6px;
-}
-#tab-gear .g-togs:empty {
-  display: none;
-}
-#tab-gear .g-tog {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 1px solid var(--line-subtle);
-  border-radius: 8px;
-  background: var(--surface-base);
-  cursor: pointer;
-}
-#tab-gear .g-tog img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  opacity: 0.55;
-}
-#tab-gear .g-tog:hover img {
-  opacity: 0.8;
-}
-#tab-gear .g-tog[aria-pressed='true'] {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-}
-#tab-gear .g-tog[aria-pressed='true'] img {
-  opacity: 1;
 }
 #tab-gear .g-seg {
   display: inline-flex;
@@ -749,8 +715,7 @@
   right: auto;
   left: -6px;
 }
-/* L'anneau du perso courant, sur un conteneur : l'icône d'élément et le
-   compte de builds en débordent. */
+/* L'anneau d'une pièce cochée, sur un conteneur : sa pastille en déborde. */
 #tab-gear .g-ring {
   position: relative;
   display: inline-flex;
@@ -763,24 +728,6 @@
 }
 #tab-gear .g-ring.on {
   border-color: var(--accent);
-}
-#tab-gear .g-fi {
-  display: block;
-  width: 64px;
-  height: 64px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-#tab-gear .g-el {
-  position: absolute;
-  left: -4px;
-  bottom: -4px;
-  width: 20px;
-  height: 20px;
-  padding: 1px;
-  border-radius: 50%;
-  background: var(--surface-base);
-  object-fit: contain;
 }
 #tab-gear .g-cnt {
   position: absolute;
@@ -795,11 +742,6 @@
   color: var(--accent-fg);
   font-size: 10.5px;
   font-weight: 700;
-}
-#tab-gear .g-cnt.zero {
-  border: 1px solid var(--line-subtle);
-  background: var(--surface-overlay);
-  color: var(--content-muted);
 }
 /* Un set secondaire : la pastille en creux, le principal la garde pleine. */
 #tab-gear .g-cnt.sub {
@@ -843,7 +785,6 @@
 #tab-gear .g-item:focus-visible,
 #tab-gear .g-pv-head:focus-visible,
 #tab-gear .g-stat:focus-visible,
-#tab-gear .g-tog:focus-visible,
 #tab-gear .g-seg button:focus-visible,
 #tab-gear .g-tile:focus-visible,
 #tab-gear summary:focus-visible {

@@ -3,9 +3,9 @@
  * accents visuels des rangées et comparateur de tri par rang. Partagé entre les
  * outils tier list (PvE/PvP) et leur JSON-LD ItemList.
  *
- * C'est aussi la source des listes que la CURATION propose — rangs, rôles et
- * paliers : les deux éditeurs de l'admin et l'onglet « Rangs » de `pnpm quick`
- * les lisent ici. Chacun en tenait sa copie, et une copie de plus côté quick
+ * C'est aussi la source des listes que la CURATION propose — rangs, rôles,
+ * paliers et tags humains : les deux éditeurs de l'admin, l'onglet « Rangs » et
+ * la « Fiche perso » de `pnpm quick` les lisent ici. Chacun en tenait sa copie, et une copie de plus côté quick
  * aurait fini par offrir un rang que la tier list ne sait pas ranger.
  */
 import type { CuratedRole } from '@contracts';
@@ -31,6 +31,20 @@ export const CURATED_ROLES = [
  */
 export const CURATED_STEP_RARITY = 3;
 export const CURATED_STEPS = transcendenceFullSteps(CURATED_STEP_RARITY);
+
+/**
+ * Les tags que la curation COCHE = les tags HUMAINS. Il n'y en a qu'un.
+ *
+ * premium/festival/seasonal/collab (bannière), ignore-defense (buffs de
+ * pénétration) et core-fusion (lignée) sont DÉRIVÉS DU JEU par l'extraction
+ * (`Character.tags`) : les éditeurs les montrent en lecture seule. Les cocher
+ * les figerait en curé et ils divergeraient à la régénération. `free` reste
+ * humain : aucune table ne marque un perso comme offert.
+ *
+ * Lus par l'éditeur de l'admin (`CharacterCuratedEditor`) et par la « Fiche
+ * perso » de `pnpm quick`, qui les sert à sa page et refuse tout autre tag.
+ */
+export const HUMAN_TAGS: readonly string[] = ['free'];
 
 /**
  * Dégradé + bordure d'une rangée de tier (classes littérales Tailwind — couleurs

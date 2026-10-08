@@ -7,6 +7,86 @@
 
 ## 2026-10-08
 
+- **quick : « Fiche perso » — la coquille à sous-onglets, le picker de héros
+  partagé, le serveur, le sous-onglet Fiche (lot C11, étape 9 de la migration,
+  première partie)** — l'admin répartit un perso sur quatre écrans (la fiche à
+  onglets `/admin/editor/characters/<id>` et les outils Pro / Con et Synergy) ;
+  quick en fait UNE section, « Fiche perso », en tête du groupe « Éditeurs »
+  (décisions de Sevih du 08/10 : le picker de héros en tête, des sous-onglets
+  comme sur la fiche du site, rangs et rôle AUSSI dans la grille Rangs). Ce lot
+  pose la coquille et porte le premier sous-onglet ; les quatre autres sont
+  déjà dans la rangée, éteints, leur lot en `title` (Pros / Cons et Synergies
+  B42, Skills B39, Gear reco B40). **Le picker partagé**
+  (`scripts/quick/ui/hero-picker.mjs`, `hero-picker.css`, classes `hp-`) : le
+  mode héros de `gPkOpen` sort de `tabs/gear.js` —
+  `openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen? })`, même
+  recherche, mêmes pastilles d'élément et de classe, mêmes tuiles, et en
+  `multi` un pied [récapitulatif] [Annuler] [Valider] (pour les synergies de
+  B42). Sa modale est À LUI, posée dans `<body>` au premier appel : celle de
+  Gear reco vit dans son onglet, caché dès qu'on le quitte. Ce que Gear reco y
+  ajoutait passe par des options (`seg` : Tous · Avec recos · Sans recos ;
+  `count` : le nombre de builds par vignette ; `tally`, `hint`, `filters`), les
+  modes armes, amulettes, talismans et sets restent dans `gear.js`, dont les
+  règles de style propres au héros (`.g-tog`, `.g-fi`, `.g-el`, `.g-cnt.zero`)
+  partent avec lui. **Le serveur** (`actions.ts`, `server.ts`) :
+  `GET /api/character/roster` (`characterRoster`, lu une fois),
+  `GET /api/character/state?id=` (`characterSheetState` : la ligne du roster,
+  la chaîne, les tags dérivés, l'entrée curée ENTIÈRE, les rangs tels que Rangs
+  les sert avec l'échelle, les rôles et les paliers, `HUMAN_TAGS`, les vidéos)
+  et `POST /api/character` (`saveCharacterSheet`, via `withGit`) : UN
+  enregistrement pour toute la fiche — les rangs par `planRankChanges` sur le
+  disque relu (refus par cellule, situé, qui n'empêche pas le reste ;
+  `upsertEeCurated` si un rang d'EE est du lot), puis `skillPriority` et `tags`
+  par `upsertCharacterCurated`, posés SUR l'entrée que les rangs viennent
+  d'écrire (le store remplace l'entrée entière), puis UN `commitPaths` des
+  fichiers touchés, `chore(characters): <perso>`. `was` (l'entrée chargée) est
+  jugé sur les champs hors rangs que la requête écrit : le disque a bougé sous
+  l'un d'eux, tout est refusé `stale` sans écriture, rangs compris ; les rangs,
+  eux, gardent leur refus par cellule — un `was` comparé en entier l'aurait
+  rendu inatteignable, et une vidéo ajoutée ailleurs aurait bloqué la fiche.
+  `HUMAN_TAGS` descend du composant `CharacterCuratedEditor` dans
+  `src/components/tierlist/tiers.ts` (la source des listes de curation, que
+  l'admin et quick lisent déjà) : l'admin l'importe, le serveur le sert et
+  refuse tout autre tag. **La page** (`tabs/character.{html,js,css}`, préfixe
+  `c-`, `wide`) : l'en-tête de Gear reco plus la sous-classe et la chaîne en
+  badge ; sans perso, le picker s'ouvre d'office à chaque venue sur l'onglet ;
+  une savebar pour tous les sous-onglets ; la rangée des sous-onglets de B32
+  (`role=tablist`, ← → Début Fin parmi ceux qui sont allumés, point accent ou
+  rouge) ; Fiche en deux cartes (une sous 1000 px) — « Rangs » : trois cellules
+  de Rangs (icône dans le cadre, surlignée quand modifiée) et la table des
+  paliers (palier · rang · rôle · ✕, « ＋ palier », le menu du palier emmène
+  rang et rôle) ; « Kit » : trois priorités (1 à 3), les tags humains en cases,
+  les tags dérivés en lecture ; « Vidéos » en lecture, avec « ajouter dans
+  Vidéos » qui ouvre l'onglet sur ce perso. Hash
+  `#character/<id>/<sous-onglet>`, écrit par la page. L'agacement de Sevih («
+  UI pas jolie et compacte ») est corrigé pour ce sous-onglet par les deux
+  cartes, à la place de la grille serrée de l'admin. Vérifié : `pnpm typecheck`
+  (`tsc --noEmit -p scripts/tsconfig.json`, sans sortie), `pnpm lint`
+  (`eslint`, sans sortie), `pnpm test` (« Tests 3203 passed (3203) », 203
+  fichiers), `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests
+  711 passed (711) ») — dont 21 cas serveur (`actions.test.ts` : l'état, le
+  plan de Rangs, `stale`, UN commit au nom du perso, disque, stores et git
+  factices), 12 cas du picker et 27 de la page en happy-dom
+  (`ui-serve.test.ts`, méthode C4). Banc sur un quick isolé (:4811, clés
+  vidées, que des GET) : `shot.mjs --tabs gear --hash gear/2000055` et
+  `…/picker/char` AVANT et APRÈS le changement de picker, les deux paires de
+  PNG identiques à l'octet (`cmp`) — aucun changement visible dans Gear reco ;
+  `--tabs character` (le picker ouvert), `--hash character/2000055/fiche` (Aer)
+  et `character/2000096` (Ais, quatre paliers) relus à l'œil. Rien
+  d'enregistré. Docs : `quick-migration.md` (9 PARTIEL), `STYLE.md` (le picker
+  de héros, le croquis « Fiche perso »), contrôles à l'écran au TODO. Laissé,
+  et pourquoi : le préfixe `c-` est aussi celui de Codes promo — demandé par le
+  lot, tenu sans collision, et gardé par un test (« aucun `id` en double dans
+  la page ») ; la chaîne s'écrit « chaîne join » (start · join · finish), le
+  jeu n'ayant pas de numéro ; trois persos portent des priorités à 0 sur le
+  disque — la page demande 1 à 3 mais ne touche pas une valeur déjà là, et le
+  serveur n'exige qu'un entier (la règle du schéma) : à trancher par Sevih ; le
+  picker de pièces de Gear reco et celui des héros sont deux modales aux mêmes
+  mesures (le lot garde `gPkOpen` dans `gear.js`) — à réunir quand B40 fera de
+  Gear reco un sous-onglet ; l'en-tête de `actions.ts` compte encore « DIX
+  gestes » ; l'admin garde tous ses liens (rien ne sort avant B42 et B40),
+  `ADMIN_TO_QUICK` inchangé.
+
 - **Relecture B41 (Fable) — onglet « Effets » de quick, validé** : périmètre
   tenu (vingt fichiers, tous du lot : la section, le serveur, le module de
   recherche partagé avec l'admin, `effect-catalog.ts` descendu de la page

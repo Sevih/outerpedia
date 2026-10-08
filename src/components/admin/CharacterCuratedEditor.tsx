@@ -10,6 +10,7 @@ import {
   CURATED_ROLES,
   CURATED_STEPS,
   CURATED_STEP_RARITY,
+  HUMAN_TAGS,
   TIERS,
 } from '@/components/tierlist/tiers';
 import { field, label } from './_ui';
@@ -33,16 +34,6 @@ const RANKS: string[] = ['', ...TIERS];
  */
 const STAR_RARITY = CURATED_STEP_RARITY;
 const STARS = CURATED_STEPS.map(String);
-/**
- * Tags ÉDITABLES ici = les tags HUMAINS. Il n'y en a qu'un.
- *
- * premium/festival/seasonal/collab (bannière), ignore-defense (buffs de
- * pénétration) et core-fusion (lignée) sont désormais DÉRIVÉS DU JEU par
- * l'extraction (`Character.tags`) : ils s'affichent en lecture seule ci-dessous.
- * Les cocher ici les figerait en curé et ils divergeraient à la régénération.
- * `free` reste humain : aucune table ne marque un perso comme offert.
- */
-const HUMAN_TAGS = ['free'];
 
 type Status = { kind: 'idle' | 'ok' | 'err'; msg?: string };
 

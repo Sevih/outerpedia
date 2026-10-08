@@ -93,7 +93,18 @@ tables que le code lit d'abord, avec les fichiers qui les lisent et la
 première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
-Éditeurs : Effets (= Editor › Effect, étape 10, lot B41 : le catalogue des
+Éditeurs : Fiche perso (= Editor › Character, étape 9, lot C11 — portage
+PARTIEL : UNE section pour tout ce que le wiki sait d'un perso, le picker de
+héros en tête, des sous-onglets comme sur la fiche du site — Fiche, Pros /
+Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker partagé
+(`ui/hero-picker.mjs`, que Gear reco emploie aussi) et le sous-onglet Fiche :
+rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills, tags
+humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
+commit `chore(characters): <perso>`. Les rangs et le rôle restent AUSSI dans
+la grille Rangs. Les quatre autres sous-onglets sont là, éteints : Pros / Cons
+et Synergies arrivent avec B42, Skills avec B39, Gear reco avec B40 ; l'admin
+garde donc ses liens Character, Pro / Con et Synergy), Effets (= Editor ›
+Effect, étape 10, lot B41 : le catalogue des
 effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
 sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
 de `src/lib/admin/effect-search.ts`, et chaque ligne dit quel champ a répondu ;
@@ -114,7 +125,7 @@ après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
-(10 Effect fait, B41) →
+(9 Character partiel, C11 ; 10 Effect fait, B41) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -171,9 +182,16 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
-9. **Editor › Character**
-   `CharacterCuratedEditor` + `CharacterKitEditor`
-   - Agacements : ui pas joli et compact (et on a deplacer le gear reco)
+9. **Editor › Character** — PARTIEL, lot C11 : la section « Fiche perso »
+   (cf. « Déjà dans quick »). Faits : la coquille à sous-onglets, le picker de
+   héros partagé, le sous-onglet Fiche (les champs de `CharacterCuratedEditor`,
+   vidéos en lecture). Restent : Pros / Cons et Synergies (B42, les étapes 3
+   et 4, que Sevih veut « dans l'editor de character »), Skills (B39,
+   `CharacterKitEditor`), Gear reco (B40, qui devient un sous-onglet). Le lien
+   Character de l'admin reste jusqu'à B40.
+   - Agacements : ui pas joli et compact (et on a deplacer le gear reco) —
+     corrigé pour la Fiche par deux cartes aérées, « Rangs » et « Kit », au
+     lieu de la grille serrée de l'admin ; le reste suit avec ses lots.
 
 10. **Editor › Effect** — FAIT, lot B41 : l'onglet « Effets » (cf. « Déjà
     dans quick »). Les deux agacements de Sevih y sont corrigés : « une

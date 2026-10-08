@@ -60,7 +60,10 @@ export const GROUPS = [
   {
     id: 'editors',
     label: 'Éditeurs',
-    sections: [{ id: 'effects', label: 'Effets', wide: true }],
+    sections: [
+      { id: 'character', label: 'Fiche perso', wide: true },
+      { id: 'effects', label: 'Effets', wide: true },
+    ],
   },
   { id: 'guides', label: 'Guides', soon: true, sections: [] },
   { id: 'tools', label: 'Outils', sections: [{ id: 'names', label: 'Noms' }] },

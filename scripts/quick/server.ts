@@ -7,7 +7,8 @@
  * un code promo ou une bannière, déposer une 4-comic, ajouter une vidéo, régler
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
  * Discord que le bot poste, curer un nom court ou des alias de recherche, curer
- * un effet (son nom, sa description, son icône, sa famille — ou en créer un), tenir
+ * un effet (son nom, sa description, son icône, sa famille — ou en créer un),
+ * tenir la fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags), tenir
  * le journal du site (le changelog, par gabarits), lire une table brute du jeu
  * (« Tables du jeu »). Tous committent, sauf le message Discord et les deux
  * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
@@ -46,6 +47,7 @@ import {
   BANNERS_DEPS,
   CHANGELOG_DEPS,
   CHANGELOG_DISK,
+  CHARACTER_SHEET_DEPS,
   EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
@@ -55,6 +57,8 @@ import {
   addVideo,
   bannersState,
   changelogState,
+  characterRoster,
+  characterSheetState,
   currentCoupons,
   dashboardState,
   effectNewId,
@@ -76,6 +80,7 @@ import {
   rewardOptions,
   saveBannerList,
   saveChangelogList,
+  saveCharacterSheet,
   saveCouponList,
   saveEffects,
   saveGearReco,
@@ -85,6 +90,7 @@ import {
   searchVideos,
   translateNotes,
   videoTargets,
+  type CharacterSheetChanges,
   type ComicBatch,
   type EffectChange,
   type GitState,
@@ -586,6 +592,32 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/ranks') {
     const { changes } = await body<{ changes: RankChange[] }>(req);
     await stream(res, (report) => withGit(saveRanks(changes, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/character/roster') {
+    // Le roster de la « Fiche perso », pour son picker de héros : lu une fois
+    // par la page, pas à chaque perso ouvert.
+    json(res, characterRoster());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/character/state') {
+    // La fiche du perso de `?id=`, lue du disque à chaque appel : sa ligne du
+    // roster, son entrée curée entière, ses rangs et les listes de leurs menus.
+    const out = characterSheetState(url.searchParams.get('id') ?? '');
+    if ('error' in out) return json(res, { error: out.error }, 404);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/character') {
+    // UN enregistrement pour toute la fiche : les rangs par le plan de Rangs,
+    // puis les champs hors rangs, puis un commit au nom du perso.
+    const { id, changes } = await body<{ id: string; changes: CharacterSheetChanges }>(req);
+    await stream(res, (report) =>
+      withGit(saveCharacterSheet(String(id ?? ''), changes, CHARACTER_SHEET_DEPS, report)),
+    );
     return;
   }
 

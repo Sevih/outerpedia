@@ -1,0 +1,45 @@
+<section id="tab-character" hidden>
+  <div class="head">
+    <h2>Fiche perso</h2>
+    <p class="hint">
+      Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie : « Enregistrer
+      » envoie la fiche et committe. Lue au rendu : le site ne change qu'une fois « Pousser » fait
+      et le build de la CI déployé. Les rangs et le rôle se règlent aussi dans la grille Rangs.
+    </p>
+  </div>
+
+  <!-- Le perso choisi (posé par `who`) et le bouton qui ouvre le picker de héros
+       partagé (`hero-picker.mjs`). -->
+  <div class="card pad c-char" aria-label="Perso">
+    <div class="c-who" id="c-who"></div>
+    <button class="btn ghost" id="c-pick" type="button" aria-haspopup="dialog" disabled>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" />
+      </svg>
+      <span id="c-pick-label">Choisir un perso</span>
+    </button>
+  </div>
+
+  <!-- Une barre pour toute la fiche : les changements de tous les sous-onglets. -->
+  <div class="savebar" id="c-bar" role="toolbar" aria-label="Enregistrement" hidden>
+    <span id="c-count"></span>
+    <button class="btn ghost" id="c-reset" disabled>Annuler</button>
+    <button class="btn primary" id="c-save" disabled>Enregistrer</button>
+  </div>
+
+  <!-- Les sous-onglets (posés par `subTabs`) ; `#c-panel` porte celui qui est montré. -->
+  <div class="c-tabs" id="c-tabs" role="tablist" aria-label="Sous-onglets de la fiche" hidden></div>
+
+  <div id="c-panel" role="tabpanel"></div>
+</section>

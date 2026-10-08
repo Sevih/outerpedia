@@ -4,6 +4,8 @@ import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
 import { composeSetCombos, splitSetCombos } from '../gear-sets.mjs';
 // La tuile d'item « comme /equipment » : idem, un module pur et testé.
 import { itemName, itemTile, previewHtml, setGrid, setRow } from '../gear-view.mjs';
+// Le picker de perso : la modale partagée avec « Fiche perso ».
+import { openHeroPicker } from '../hero-picker.mjs';
 
 // Les builds d'UN perso, édités ici puis envoyés d'un bloc : la liste
 // complète remplace celle du disque (contrat de `upsertGearReco`).
@@ -45,11 +47,9 @@ const G_PV_DELAY = 400;
 // Élément et rareté par perso : le roster des recos ne les porte pas, celui
 // de « Rangs » (`/api/ranks`) si. Sans lui, le picker se passe d'élément.
 let gMeta = new Map();
-// Les filtres du picker de perso : ils survivent à sa fermeture, pas la recherche.
-const gPick = { elements: new Set(), classes: new Set(), has: '' };
-// L'ordre des pastilles, celui du site (`ELEMENT_ORDER`, `CLASS_ORDER`).
-const G_ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'];
-const G_CLASSES = ['defender', 'striker', 'ranger', 'mage', 'healer'];
+// Les filtres du picker de perso : ils survivent à sa fermeture, pas la
+// recherche. `seg` : le groupe « Tous · Avec recos · Sans recos ».
+const gPick = { elements: new Set(), classes: new Set(), seg: '' };
 
 const G_KEYS = ['name', 'weapons', 'amulets', 'talismans', 'sets', 'substats', 'note'];
 const G_LISTS = ['weapons', 'amulets', 'talismans', 'sets'];
@@ -1016,8 +1016,9 @@ async function gLoad(id, at = 0) {
 }
 
 // ------------------------------------------------------------- le picker
-// UNE modale (`#g-modal`), quatre usages : le perso (choix unique), et en
-// multi-choix les armes ou les amulettes, les talismans, les sets.
+// UNE modale (`#g-modal`), trois usages, tous en multi-choix : les armes ou
+// les amulettes, les talismans, les sets. Le perso, lui, se choisit dans le
+// picker de héros partagé (`hero-picker.mjs`, cf. `gOpenChar`).
 // `gPkOpen(cfg)` l'ouvre sur :
 //   title, search (le placeholder de la recherche), none (rien ne correspond) ;
 //   grid     la classe de la grille (`gear` : des tuiles d'équipement) ;
@@ -1032,9 +1033,8 @@ async function gLoad(id, at = 0) {
 //   foot()   le pied d'un multi-choix (son récapitulatif, `data-pk="cancel"`,
 //            `data-pk="ok"`), done() son « ok ».
 // Échap, la croix et un clic sur le voile ferment sans rien poser ; Entrée dans
-// la recherche VALIDE un multi-choix (Ctrl + Entrée aussi) et, en choix unique,
-// choisit la première tuile ; Entrée ou Espace sur une tuile la coche ou la
-// décoche (c'est un bouton) ; Tab reste dans le panneau.
+// la recherche VALIDE (Ctrl + Entrée aussi) ; Entrée ou Espace sur une tuile la
+// coche ou la décoche (c'est un bouton) ; Tab reste dans le panneau.
 let gPk = null;
 
 const gTile = (it) =>
@@ -1103,14 +1103,8 @@ $('g-modal').onclick = (e) => {
 };
 $('g-modal').onkeydown = (e) => {
   if (!gPk) return;
-  if (e.key === 'Enter' && e.target === $('g-q')) {
-    // Multi-choix : Entrée valide, comme « Valider » (Ctrl + Entrée aussi).
-    // Choix unique : la première tuile de la grille.
-    if (gPk.done) return gPk.done();
-    const first = $('g-results').querySelector('.g-tile:not([disabled])');
-    if (first) gPkPick(first.dataset.id);
-    return;
-  }
+  // Entrée dans la recherche valide, comme « Valider » (Ctrl + Entrée aussi).
+  if (e.key === 'Enter' && e.target === $('g-q')) return gPk.done();
   // Tab reste dans le panneau.
   if (e.key !== 'Tab') return;
   const stops = [...$('g-modal').querySelectorAll('button:not([disabled]), input')];
@@ -1135,8 +1129,12 @@ const gSegPress = (el) => {
   for (const b of el.parentElement.children) b.setAttribute('aria-pressed', String(b === el));
 };
 
-async function gChoose(id) {
-  if (id === gChar?.id) return gPkClose();
+/**
+ * Un perso choisi dans le picker. Rend `false` pour le garder ouvert : des
+ * changements en attente, et l'abandon refusé.
+ */
+function gChoose(id) {
+  if (id === gChar?.id) return;
   const n = gearChanges();
   if (
     n &&
@@ -1144,78 +1142,37 @@ async function gChoose(id) {
       `Abandonner ${gPlural(n, 'changement')} non enregistré${n > 1 ? 's' : ''} sur ${gChar.name} ?`,
     )
   )
-    return;
-  gPkClose();
-  await gLoad(id);
+    return false;
+  gLoad(id);
 }
 
-// Le picker de perso. La grille suit la recherche, les pastilles d'élément et
-// de classe (aucune = toutes) et le filtre des recos ; chaque vignette porte
-// son nombre de builds, le perso en cours son anneau.
+// Le picker de perso : celui de « Fiche perso » (`hero-picker.mjs`), avec en
+// plus le filtre des recos, et sur chaque vignette son nombre de builds.
 function gOpenChar() {
-  const tog = (kind, slug, on) =>
-    `<button class="g-tog" type="button" data-${kind}="${slug}" aria-pressed="${on}" title="${gCap(slug)}" aria-label="${gCap(slug)}">${gIcon(kind, slug)}</button>`;
-  gPkOpen({
+  openHeroPicker({
     title: 'Choisir un perso',
-    search: 'Chercher un perso…',
-    none: 'Aucun perso ne correspond.',
+    // L'élément vient de « Rangs » (`gMeta`) : le roster des recos ne le porte pas.
+    roster: gear.roster.map((c) => ({ ...c, element: gMeta.get(c.id)?.element })),
+    imgBase: state.imgBase,
+    chosen: gChar?.id,
+    filters: gPick,
     opener: () => $('g-pick'),
     tally: () => {
       const done = gear.roster.filter((c) => c.builds).length;
       return `${gPlural(gear.roster.length, 'perso')} · ${done} avec recos · ${gear.roster.length - done} sans`;
     },
-    // Les pastilles à bascule, d'après ce que le roster porte.
-    filters: () => {
-      const elements = new Set([...gMeta.values()].map((m) => m.element));
-      const classes = new Set(gear.roster.map((c) => c.class));
-      return `<div class="g-togs" role="group" aria-label="Élément">${G_ELEMENTS.filter((e) =>
-        elements.has(e),
-      )
-        .map((e) => tog('element', e, gPick.elements.has(e)))
-        .join('')}</div><div class="g-togs" role="group" aria-label="Classe">${G_CLASSES.filter(
-        (c) => classes.has(c),
-      )
-        .map((c) => tog('class', c, gPick.classes.has(c)))
-        .join('')}</div>${gSeg('Recos', 'has', gPick.has, [
+    seg: {
+      label: 'Recos',
+      options: [
         ['', 'Tous'],
         ['with', 'Avec recos'],
         ['without', 'Sans recos'],
-      ])}`;
+      ],
+      test: (c, has) => (has === 'with' ? c.builds > 0 : has === 'without' ? !c.builds : true),
     },
-    filter: (el) => {
-      if (el.dataset.has !== undefined) {
-        gPick.has = el.dataset.has;
-        return gSegPress(el);
-      }
-      const [set, slug] = el.dataset.element
-        ? [gPick.elements, el.dataset.element]
-        : [gPick.classes, el.dataset.class];
-      if (!set.delete(slug)) set.add(slug);
-      el.setAttribute('aria-pressed', String(set.has(slug)));
-    },
-    items: () =>
-      gear.roster
-        .filter(
-          (c) =>
-            (!gPick.elements.size || gPick.elements.has(gMeta.get(c.id)?.element)) &&
-            (!gPick.classes.size || gPick.classes.has(c.class)) &&
-            (gPick.has === 'with' ? c.builds > 0 : gPick.has === 'without' ? !c.builds : true),
-        )
-        .map((c) => {
-          const element = gMeta.get(c.id)?.element;
-          return {
-            id: c.id,
-            label: c.name,
-            title: `${c.name} — ${c.builds ? gPlural(c.builds, 'build') : 'sans reco'}`,
-            on: c.id === gChar?.id,
-            html: `<img class="g-fi" src="${gSrc(
-              `characters/faceicon/FI_${esc(c.id)}`,
-            )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
-              element ? gIcon('element', element, 'g-el') : ''
-            }<span class="g-cnt${c.builds ? '' : ' zero'}">${c.builds}</span>`,
-          };
-        }),
-    pick: gChoose,
+    count: (c) => c.builds,
+    hint: (c) => `${c.name} — ${c.builds ? gPlural(c.builds, 'build') : 'sans reco'}`,
+    onPick: gChoose,
   });
 }
 

@@ -43,8 +43,8 @@ pastille.
   tête — sa première section, le tableau de bord, est celle que la page
   ouvre ; `.gtab.soon`
   grisé avec son badge « à venir » : Guides, tant que quick n'a pas repris
-  l'admin — Éditeurs a sa première section, Effets, et Outils la sienne,
-  Noms), puis à droite les
+  l'admin — Éditeurs a deux sections, Fiche perso et Effets, et Outils la
+  sienne, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
   le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
@@ -67,7 +67,10 @@ pastille.
   `e-` Discord, `g-` Gear reco, `h-` Tableau de bord, `j-` Journal du site,
   `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
   `v-` Vidéos, `x-` Effets) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
-  onglet, sans erreur.
+  onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
+  lot C11) : aucun id de l'un n'est repris par l'autre, et un test le garde
+  (« aucun `id` en double dans la page »). `hp-` est au picker de héros, qui
+  n'est à aucun onglet.
 - Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
   `canLeave()`. `sections.go('<id>')` ouvre une autre section, comme un clic
@@ -78,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Gear reco, Tables du jeu, Effets, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Gear reco, Tables du jeu, Fiche perso, Effets, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -235,7 +238,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Gear reco, Noms, Effets, Bannières et Journal du site : le compte de changements
+La barre d'enregistrement de Rangs, Gear reco, Noms, Fiche perso, Effets, Bannières et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -306,8 +309,8 @@ le compte), un refus le bord `danger`. Les icônes d'élément et de classe :
    une arme, une amulette = [bouton 240px : tuile d'item 44 px + nom coloré par le grade, un clic ouvre le picker du slot] [ses stats principales en bascules, aria-pressed] ✕ ; « ＋ arme » (.btn.ghost.sm) ouvre le même picker
    talismans = une rangée de tuiles (tuile d'item 44 px + nom + ✕), « ＋ talisman » ouvre le picker
    sets = une rangée par combo : [tuiles helmet + armor du premier set, 32 px] nom « 2p » + [tuiles gloves + shoes du second] nom « 2p » … badge $slug ou « sans preset » ✕ (un set joué à 4 : ses quatre tuiles, « 4p ») ; « Composer un mix… » est la seule façon de les éditer (un principal, des secondaires)
-le picker (UNE modale pour le perso, les pièces, les talismans, les sets — `gPkOpen`, lot C7) : titre + badge · recherche · rangée de filtres optionnelle (pastilles, groupe segmenté) · grille de tuiles (visages 64 px ; tuile d'item 64 px, nom coloré dessous, badge AP / CP ou « hors classe » ; un set = ses quatre pièces de 34 px en grille 2 × 2 ; anneau accent sur le choix, pastille ✓ en haut à gauche, `disabled` grisé — un set sans bonus 2 pièces parmi les secondaires) · en multi-choix (armes, amulettes, talismans, sets), un pied [récapitulatif] [Annuler] [Valider]
-   clavier : Entrée dans la recherche = « Valider » en multi-choix (Ctrl + Entrée aussi), la première tuile en choix unique (le perso) ; Entrée ou Espace sur une tuile la coche ou la décoche ; Échap, la croix, le voile ferment sans rien poser ; Tab reste dans le panneau
+le picker de pièces (UNE modale pour les armes ou les amulettes, les talismans, les sets — `gPkOpen`, lot C7 ; le perso, lui, se choisit dans le picker de héros partagé, cf. « Le picker de héros ») : titre + badge · recherche · rangée de filtres optionnelle (le groupe segmenté des sets) · grille de tuiles (tuile d'item 64 px, nom coloré dessous, badge AP / CP ou « hors classe » ; un set = ses quatre pièces de 34 px en grille 2 × 2 ; anneau accent sur le choix, pastille ✓ en haut à gauche, `disabled` grisé — un set sans bonus 2 pièces parmi les secondaires) · un pied [récapitulatif] [Annuler] [Valider]
+   clavier : Entrée dans la recherche = « Valider » (Ctrl + Entrée aussi) ; Entrée ou Espace sur une tuile la coche ou la décoche ; Échap, la croix, le voile ferment sans rien poser ; Tab reste dans le panneau
    en bas de la carte, sur le fond de la page : ▾ APERÇU (un bouton, `aria-expanded` ; ouvert d'office, rien n'est retenu) puis le build COMME LA FICHE PERSO le montrera — rangées à étiquette de 96 px (Weapon | Accessory | Talisman : tuile 44 px, nom au grade, puces de stat principale ; Armor Set : une ligne par combo, tuiles 32 px, puis la légende des bonus ; Substat Priority en barre, comme `SubstatPrioBar` — par stat, icône 14 px et abréviation, puis six segments de 6 px, pleins en jaune `#facc15` jusqu'à son rang, le reste en gris `#3f3f46`, 336 px au plus ; Notes : icône + libellé coloré par balise, une balise que le site ne résout pas en ROUGE, une pièce inconnue aussi) ; rien n'y est cliquable, une description passe en `title`
 le hash (une entrée pour un lien ou le banc ; la page ne l'écrit pas) : `#gear/<id>` ouvre le perso, `#gear/<id>/build/<n>` sur son n-ième build (à partir de 1, borné), `…/picker/<slot>` y ouvre en plus un picker (`char`, ou `weapons` / `amulets` / `talismans` / `sets` du build montré) — les deux se combinent : `#gear/<id>/build/2/picker/weapons`
 l'aperçu (`previewHtml` de `ui/gear-view.mjs`, pur et testé ; classes `.pv-*`) rend ce que répond `POST /api/gear-reco/preview` — les builds de la page résolus par le résolveur du site, dans la langue du groupe segmenté de la savebar (une pour toutes les cartes, `en` d'office). UNE requête pour tous les builds du perso à chaque changement (400 ms après la dernière frappe), gardée par build : changer d'onglet redessine depuis elle, sans requête ; pendant qu'elle court le rendu précédent reste, atténué (`.busy`) ; un refus s'écrit en rouge DANS le bloc — la seule exception à « le journal est le seul retour », l'aperçu se relançant à chaque touche. Les couleurs sont les classes du site (`text-buff`, `text-item-legendary`…) traduites en jetons dans `tabs/gear.css` ; ceux qui manquaient à `quick.css` (`--buff`, `--debuff`, `--buff-bg`, `--debuff-bg`, `--stat`, `--highlight`, `--equipment`) y sont recopiés de `globals.css`, portés par `#tab-gear`
@@ -573,7 +576,92 @@ dans `tabs/changelog.css` : `.j-line`, `.j-sheet`, `.j-more`, `.j-grid`,
 recopiés sous les mêmes noms), `.j-chip`, `.j-seg` (le segmenté de Gear reco,
 recopié faute de composant commun), `.j-card` (la carte de `/changelog`).
 
+## Le picker de héros (`ui/hero-picker.mjs`, lot C11)
+
+La modale où l'on choisit un perso — ou plusieurs —, PARTAGÉE : « Fiche
+perso » et Gear reco l'ouvrent, les synergies s'en serviront en multi-choix.
+Elle n'est à aucun onglet : `openHeroPicker(opts)` la pose dans `<body>` au
+premier appel (classes `hp-`, `ui/hero-picker.css`), aux mesures du picker de
+pièces de Gear reco. Une section n'a donc rien à écrire dans son HTML.
+
+```
+openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, count?, hint? })
+.hp-modal (voile, fixe)  >  .hp-panel (720 px, 720 px de haut au plus)
+  .hp-head     titre en capitales · badge « 129 persos » (multi : « 2 choisis sur 129 » ; `tally` le remplace) … ✕
+  .hp-top      la recherche (36 px, « Chercher un perso… ») ; dessous .hp-filters :
+                 pastilles d'élément puis de classe (.hp-tog 36 px, `aria-pressed` ; celles que le roster porte, dans l'ordre du site ; aucune enfoncée = toutes)
+                 `seg` : un groupe segmenté de plus, poussé à droite (Gear reco : Tous · Avec recos · Sans recos)
+  .hp-body     .hp-tiles — une tuile par perso, dans l'ordre du roster : visage 64 px dans son anneau (.hp-ring, accent sur le choix), icône d'élément en bas à gauche, le nom dessous (11 px)
+                 `count` : une pastille en haut à droite (le nombre de builds, atténuée à zéro) ; en multi-choix, ✓ sur une tuile cochée
+               .empty « Aucun perso ne correspond. »
+  .hp-foot     en multi-choix seulement : les noms cochés, dans l'ordre des clics (« Aucun perso. ») … [Annuler] [Valider]
+```
+
+Choix unique : la tuile cliquée part à `onPick(id)` et la modale se ferme —
+sauf si `onPick` rend `false` (des changements en attente, l'abandon refusé).
+Multi-choix : un clic coche ou décoche, « Valider » rend `onPick(ids)`. La
+recherche repart vide à chaque ouverture ; les filtres restent là où
+l'appelant les garde (`filters`, cf. `heroFilters()`), sinon dans le module.
+Clavier : Entrée dans la recherche prend la première tuile (choix unique) ou
+valide (multi-choix, Ctrl + Entrée aussi) ; Entrée ou Espace sur une tuile la
+choisit ; Échap, la croix et le voile ferment sans rien poser ; Tab reste dans
+le panneau ; à la fermeture le focus revient à `opener()`.
+
 ## Éditeurs — croquis
+
+### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11)
+
+Ce que le wiki sait d'UN perso, en sous-onglets comme sur sa fiche du site :
+l'éditeur « Character » de l'admin et, à terme, ses outils Pro / Con et
+Synergy. Croquis du rendu :
+
+```
+.head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
+.card.pad.c-char  l'en-tête de Gear reco : portrait 56 px, nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
+   sans perso : « Aucun perso choisi. », [Choisir un perso], et le picker OUVERT d'office à chaque venue sur l'onglet
+.savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets ; absente sans perso)
+.c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons] [Synergies] [Skills] [Gear reco]
+   les sous-onglets pas encore portés sont là, `disabled`, `title` = le lot qui les apporte (B42, B42, B39, B40)
+   un point accent = des changements pas encore enregistrés, rouge = un refus ou une erreur
+   clavier : ← → (les bouts se rejoignent), Début, Fin — parmi les sous-onglets allumés ; `tabindex` 0 sur l'actif, -1 ailleurs
+#c-panel (le `tabpanel`) — Fiche : .c-cols, deux colonnes de .card (une seule sous 1000 px)
+  .card « Rangs »   card-head : titre · badge edit « modifié » · badge ko « refusé »
+     .form : [Rang PvE ▾] [Rang PvP ▾] [Rôle ▾] — la cellule de Rangs : l'icône du rang dans le cadre, bord et fond accent quand modifiée, bord danger quand refusée, son refus dessous en rouge
+     PAR TRANSCENDANCE  table : [palier ▾] | [rang ▾] | [rôle ▾] | ✕ — une ligne par palier qui porte une valeur ; le menu du palier propose le sien et ceux qui sont libres, en changer emmène rang et rôle
+        [＋ palier] (.btn.ghost.sm : le premier palier libre ; éteint quand les quatre sont là) · « Vide = palier non noté : il hérite… » · un palier hérité hors des pleins est DIT, pas édité
+        sans palier : « Aucun palier : le rang et le rôle valent à toute transcendance. »
+  .card « Kit »     card-head : titre · badges
+     PRIORITÉ DE SKILLS  .form : [Skill 1] [Skill 2] [Ultimate] (nombre, 1 à 3) « 1 à 3 ; vide = non renseigné. » — une valeur hors de 1 à 3 : champ rouge, l'erreur dessous, rien n'est envoyé
+     TAGS  les tags humains en cases (.check : free) ; dessous « déduits des données » puis les tags du jeu en .badge.off (lecture)
+  .card « Vidéos » (pleine largeur)  card-head : titre · badge du compte · « en lecture » … lien « ajouter dans Vidéos » (ouvre l'onglet Vidéos sur ce perso)
+     une ligne par vidéo : titre · auteur · date ; « aucune vidéo »
+.card.ko (une carte qui porte un refus ou une erreur) : bord danger
+le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies` · `skills` · `gear` ; `#character/<id>` = `fiche`, un sous-onglet éteint aussi) — la page l'écrit au choix du perso et du sous-onglet : recharger y revient
+```
+
+Le roster vient de `GET /api/character/roster`, lu UNE fois ; la fiche d'un
+perso de `GET /api/character/state?id=` (`characterSheetState` : sa ligne, sa
+chaîne, ses tags dérivés, son entrée curée entière, ses rangs et les listes de
+leurs menus, les tags humains, ses vidéos — la page n'en recopie aucun), relue
+à chaque venue sur l'onglet quand rien n'est en attente (un rang a pu changer
+dans Rangs). Les rangs sont des CELLULES, celles de Rangs : même forme
+envoyée, même refus par cellule. « Enregistrer » envoie toute la fiche à
+`POST /api/character` (`saveCharacterSheet`) — les cellules modifiées, les
+champs hors rangs qui ont bougé (chacun entier), et l'entrée que la page
+avait chargée (`was`) — pour UN commit `chore(characters): <perso>`, puis
+relit le disque. Une cellule enregistrée ou refusée n'est plus « modifiée » :
+la refusée montre la valeur du disque, cerclée, son refus dessous. Un champ
+hors rangs refusé garde sa saisie — sauf si c'est le disque qui avait changé
+sous lui (`stale`, rien n'est alors écrit) : il montre le disque. Une frappe
+ne redessine pas la carte (le champ garde le curseur) : ses badges, le point
+du sous-onglet et la savebar suivent ; seule la table des paliers est
+redessinée, quand un palier est ajouté, retiré ou déplacé. « Annuler » relit
+le disque. Changer de perso ou quitter l'onglet avec des changements en
+attente demande confirmation (`canLeave`). Propres à l'onglet, dans
+`tabs/character.css` : `.c-char`, `.c-who` et consorts (l'en-tête de Gear
+reco, recopié), `.c-tabs`, `.c-cols`, `.c-card`, `.c-body`, `.c-cell`,
+`.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée), `.c-tiers`, `.c-err`,
+`.c-tags`, `.c-derived`, `.c-videos`.
 
 ### Effets (`wide`, fait — B41)
 

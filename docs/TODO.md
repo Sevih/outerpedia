@@ -38,10 +38,36 @@
       « Tableau de bord », lot B36), la chaîne des données (onglet
       « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
       Game data (onglet « Tables du jeu », lot B38), Effect (onglet
-      « Effets », lot B41).
+      « Effets », lot B41). PARTIEL : Character (section « Fiche perso »,
+      lot C11 — la coquille, le picker de héros partagé, le sous-onglet
+      Fiche ; restent Pros / Cons et Synergies B42, Skills B39, Gear reco
+      B40, dans cet ordre).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section — Synergy
       et Pro / Con iront dans l'éditeur de perso.
+- [ ] **« Fiche perso » — contrôles à l'écran (lot C11)** : le banc ne
+      clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : trois routes nouvelles). (1) Groupe
+      « Éditeurs » : il s'ouvre maintenant sur « Fiche perso », le picker de
+      héros ouvert d'office — chercher, filtrer par élément et par classe,
+      choisir un perso réel. À juger : le picker qui se rouvre à chaque
+      retour sur l'onglet tant qu'aucun perso n'est choisi. (2) L'en-tête
+      (sous-classe, « chaîne join ») et la rangée des sous-onglets : quatre
+      sont éteints, leur lot en `title`. (3) Changer un rang ici, « Enregistrer »
+      — attendu : UN commit `chore(characters): <perso>`, « Pousser » qui
+      compte un commit de plus ; puis l'onglet Rangs : le même rang y est.
+      Dans l'autre sens : changer le rôle dans Rangs, revenir sur la fiche —
+      elle est relue, le rôle y est. (4) « ＋ palier » : le premier palier
+      libre s'ajoute ; changer son palier par son menu (le rang suit), lui
+      donner un rang, enregistrer ; ✕ le retire. (5) Une priorité de skills :
+      taper 7 → champ rouge, « entre 1 et 3, ou vide », rien ne part ; 2 →
+      enregistré. Trois persos portent des priorités à 0 sur le disque : elles
+      restent tant qu'on n'y touche pas — à trancher, 0 est-il une valeur ?
+      (6) Cocher « free », enregistrer ; « ajouter dans Vidéos » ouvre
+      l'onglet Vidéos sur ce perso. (7) Gear reco : « Changer de perso » ouvre
+      le même picker qu'avant (captures identiques au pixel), le filtre des
+      recos et le compte de builds par vignette compris. À juger aussi : les
+      deux cartes côte à côte (une seule sous 1000 px) — assez aérées ?
 - [ ] **Onglet « Effets » — contrôles à l'écran (lot B41)** : le banc ne
       tape pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : quatre routes nouvelles). (1) La

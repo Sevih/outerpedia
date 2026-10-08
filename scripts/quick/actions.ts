@@ -28,6 +28,8 @@
  *     `collect-comics`) → une BD apparaît dès le push R2 ;
  *   - vidéos : lues au RENDU, donc visibles seulement une fois le site rebâti ;
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
+ *   - fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags) : le
+ *     même curé, lu au RENDU lui aussi (tier lists, fiche du perso) ;
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
  *     sous les cartes, le champ recherche des listes de persos) ;
@@ -157,6 +159,7 @@ import {
   CURATED_STEPS,
   CURATED_STEP_RARITY,
   EE_TIERS,
+  HUMAN_TAGS,
   TIERS,
 } from '@/components/tierlist/tiers';
 import type {
@@ -166,6 +169,7 @@ import type {
   GearBuild,
   GearPresets,
   LocalizedText,
+  SkillPriority,
 } from '@contracts';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
 import type { EquipmentCuratedEntry } from '@datagen/curated/equipment';
@@ -1602,7 +1606,7 @@ const CURATED_ORDER = [
 function withField(
   entry: CharacterCurated,
   key: keyof CharacterCurated,
-  value: string | Record<string, string> | undefined,
+  value: string | string[] | Record<string, string> | SkillPriority | undefined,
 ): CharacterCurated {
   const rest = Object.entries(entry).filter(([k]) => k !== key);
   if (value === undefined) return Object.fromEntries(rest) as CharacterCurated;
@@ -1725,6 +1729,10 @@ export interface RankRow {
   roleByTranscend: Record<string, string>;
 }
 
+/** Les paliers curables et leur libellé (« 5★ »), tels que les menus les montrent. */
+const rankSteps = (): { key: string; label: string }[] =>
+  STEP_KEYS.map((key) => ({ key, label: transcendenceLabel(CURATED_STEP_RARITY, Number(key)) }));
+
 function rankDisk(): RankDisk {
   return {
     curated: loadCuratedCharacters(),
@@ -1764,10 +1772,7 @@ export function rankState() {
     tiers: TIERS,
     eeTiers: EE_TIERS,
     roles: CURATED_ROLES,
-    steps: STEP_KEYS.map((key) => ({
-      key,
-      label: transcendenceLabel(CURATED_STEP_RARITY, Number(key)),
-    })),
+    steps: rankSteps(),
   };
 }
 
@@ -1837,6 +1842,332 @@ export async function saveRanks(
     report,
   );
   return { ok: commit.ok && !refused.length, log: [...log, ...commit.log], refused: keys };
+}
+
+// ------------------------------------------------------------ fiche perso ----
+
+/** Le curé des persos, et celui des EE quand un rang d'EE part avec la fiche. */
+const CHARACTERS_PATH = 'data/curated/characters.json';
+const EQUIPMENT_PATH = 'data/curated/equipment.json';
+
+/** Un perso du roster, pour l'en-tête de la fiche et le picker de héros. */
+export interface SheetRosterRow {
+  id: string;
+  /** Nom COMPLET en anglais, comme dans Rangs et Gear reco. */
+  name: string;
+  element: string;
+  class: string;
+  subClass: string;
+  rarity: number;
+}
+
+type RosterItem = ReturnType<typeof getCharacterListItems>[number];
+
+const sheetRosterRow = (c: RosterItem): SheetRosterRow => ({
+  id: c.id,
+  name: characterDisplayName(c),
+  element: c.element,
+  class: c.class,
+  subClass: c.subClass ?? '',
+  rarity: c.rarity,
+});
+
+/**
+ * Le roster de la « Fiche perso », par nom : ce que le picker de héros montre.
+ * Servi à part de l'état d'un perso — lu une fois, pas à chaque perso ouvert.
+ */
+export function characterRoster(): { roster: SheetRosterRow[] } {
+  return {
+    roster: getCharacterListItems()
+      .map(sheetRosterRow)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  };
+}
+
+/** La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster). */
+export interface CharacterSheetDisk {
+  disk: () => RankDisk;
+}
+
+/** La lecture et les écritures de `saveCharacterSheet`, injectées : les stores et git. */
+export interface CharacterSheetDeps extends CharacterSheetDisk {
+  upsertCharacter: (id: string, curated: CharacterCurated) => Promise<string[]>;
+  upsertEe: (id: string, patch: EeCuratedPatch) => Promise<string[]>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles des routes : le disque de Rangs, les stores de l'admin, le vrai `commitPaths`. */
+export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
+  disk: rankDisk,
+  upsertCharacter: upsertCharacterCurated,
+  upsertEe: upsertEeCurated,
+  commitPaths,
+};
+
+/**
+ * La « Fiche perso » d'un perso : sa ligne du roster (avec sa chaîne et ses tags
+ * DÉRIVÉS du jeu, en lecture), son entrée curée du disque ENTIÈRE (les
+ * sous-onglets suivants y liront `prosCons` et `synergies`), ses rangs tels que
+ * Rangs les sert — et l'échelle, les rôles, les paliers des menus —, les tags
+ * humains que la fiche coche, ses vidéos en lecture. Lu du disque à chaque
+ * appel. `error` : le perso n'est pas du roster.
+ */
+export function characterSheetState(id: string, disk: CharacterSheetDisk = CHARACTER_SHEET_DEPS) {
+  const c = getCharacterListItems().find((x) => x.id === id);
+  if (!c) return { error: `perso inconnu : ${id}` };
+  const curated = disk.disk().curated[id] ?? {};
+  return {
+    char: { ...sheetRosterRow(c), chain: c.chainType ?? '', tags: c.tags ?? [] },
+    curated,
+    ranks: {
+      rank: curated.rank ?? '',
+      rankPvp: curated.rankPvp ?? '',
+      role: curated.role ?? '',
+      rankByTranscend: curated.rankByTranscend ?? {},
+      roleByTranscend: curated.roleByTranscend ?? {},
+    },
+    tiers: TIERS,
+    roles: CURATED_ROLES,
+    steps: rankSteps(),
+    humanTags: HUMAN_TAGS,
+    videos: curated.videos ?? [],
+  };
+}
+
+/** Les champs du curé que la fiche écrit hors des rangs, dans l'ordre du fichier. */
+const SHEET_KEYS = ['tags', 'skillPriority'] as const;
+type SheetKey = (typeof SHEET_KEYS)[number];
+
+const SHEET_LABELS: Record<SheetKey, string> = {
+  tags: 'tags',
+  skillPriority: 'priorité de skills',
+};
+
+const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
+
+/**
+ * Ce que la fiche envoie. `ranks` : des cellules, comme Rangs les envoie (rang
+ * PvE, rang PvP, rôle, paliers). `curated` : les champs hors rangs, chacun
+ * ENTIER et seulement s'il a bougé — une priorité vide n'y est pas, une liste
+ * de tags est celle des tags humains cochés. `was` : l'entrée que la page
+ * avait chargée.
+ */
+export interface CharacterSheetChanges {
+  ranks?: RankChange[];
+  curated?: { skillPriority?: SkillPriority; tags?: string[] };
+  was?: CharacterCurated;
+}
+
+/** Un refus situé : la cellule de rang (`field`, `step`) ou le champ de la fiche. */
+export interface SheetRefusal {
+  field: RankField | SheetKey;
+  step?: string;
+  reason: string;
+}
+
+/**
+ * Ce que rend `saveCharacterSheet`. `written` : un store a écrit, la page relit
+ * le disque. `stale` : refusé parce que le DISQUE avait changé sous un champ de
+ * la fiche — rien n'a été écrit, et la page rend le disque au lieu de garder
+ * une saisie qui déferait l'écriture d'un autre.
+ */
+export interface CharacterSheetOutcome extends Outcome {
+  written: boolean;
+  stale: boolean;
+  refused: SheetRefusal[];
+}
+
+const sameJson = (a: unknown, b: unknown): boolean =>
+  JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+
+/** Une priorité de skills venue de la page : des entiers, les vides absents. */
+function cleanSkillPriority(raw: unknown): SkillPriority | string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const out: SkillPriority = {};
+  for (const key of PRIORITY_KEYS) {
+    const v = (raw as Record<string, unknown>)[key];
+    if (v === undefined || v === null || v === '') continue;
+    if (typeof v !== 'number' || !Number.isInteger(v) || v < 0)
+      return `« ${String(v)} » n'est pas un entier`;
+    out[key] = v;
+  }
+  return out;
+}
+
+/**
+ * Les tags du curé d'après les cases de la fiche : les tags humains cochés,
+ * dans l'ordre de `HUMAN_TAGS`. Un tag du disque qui n'en est pas un (hérité)
+ * reste, la fiche ne le montre pas.
+ */
+function cleanSheetTags(raw: unknown, disk: readonly string[]): string[] | string {
+  if (!Array.isArray(raw) || raw.some((t) => typeof t !== 'string')) return 'forme inattendue';
+  const stray = (raw as string[]).find((t) => !HUMAN_TAGS.includes(t));
+  if (stray !== undefined) return `« ${stray} » n'est pas un tag humain`;
+  return [
+    ...disk.filter((t) => !HUMAN_TAGS.includes(t)),
+    ...HUMAN_TAGS.filter((t) => (raw as string[]).includes(t)),
+  ];
+}
+
+/**
+ * Enregistre la « Fiche perso » d'UN perso, en un geste et un commit.
+ *
+ * Dans l'ordre :
+ *   - les champs hors rangs (`changes.curated`) exigent que le disque porte
+ *     encore, pour eux, l'entrée que la page avait chargée (`was`) : sinon tout
+ *     est refusé `stale`, SANS écriture — les rangs non plus ;
+ *   - les rangs (`changes.ranks`) passent par le modèle de Rangs
+ *     (`planRankChanges` sur le disque relu) : une cellule que le disque ne
+ *     porte plus comme la page l'avait est refusée, située, et n'empêche pas le
+ *     reste ; les écritures sont celles de Rangs (`upsertCharacterCurated`, et
+ *     `upsertEeCurated` si un rang d'EE est du lot) ;
+ *   - puis les champs hors rangs, posés SUR l'entrée que les rangs viennent
+ *     d'écrire — le store remplace l'entrée entière —, par
+ *     `upsertCharacterCurated` : ses refus de schéma sont rendus tels quels ;
+ *   - puis UN commit des fichiers réellement touchés, au nom du perso.
+ *
+ * Les deux écritures passent par le verrou du store (`withStoreLock`), celui de
+ * Rangs. Un champ refusé n'arrête pas les autres. Rien d'écrit : rien de committé.
+ */
+export async function saveCharacterSheet(
+  id: string,
+  changes: CharacterSheetChanges | undefined,
+  deps: CharacterSheetDeps,
+  report?: Report,
+): Promise<CharacterSheetOutcome> {
+  const refused: SheetRefusal[] = [];
+  const out = (
+    ok: boolean,
+    lines: string[],
+    more: { written?: boolean; stale?: boolean } = {},
+  ) => ({
+    ok,
+    log: lines,
+    written: more.written ?? false,
+    stale: more.stale ?? false,
+    refused,
+  });
+
+  const c = getCharacterListItems().find((x) => x.id === id);
+  if (!c) return out(false, [`perso inconnu : ${id}.`]);
+  const name = characterDisplayName(c);
+
+  const ranks = Array.isArray(changes?.ranks) ? changes.ranks : [];
+  const sent = (
+    changes?.curated && typeof changes.curated === 'object' ? changes.curated : {}
+  ) as Record<string, unknown>;
+  const keys = SHEET_KEYS.filter((k) => k in sent);
+  if (!ranks.length && !keys.length) return out(false, ['Aucune modification à enregistrer.']);
+
+  const j = journal(report);
+  const refuse = (r: SheetRefusal, said: string): void => {
+    refused.push(r);
+    j.done(`REFUSÉ — ${said} : ${r.reason}.`);
+  };
+
+  // Le disque, relu : une valeur posée d'ailleurs (Rangs, l'admin, l'autre
+  // poste) depuis le chargement de la fiche ne doit pas être écrasée.
+  const disk = deps.disk();
+  const entry = disk.curated[id] ?? {};
+  const moved = keys.filter((k) => !sameJson(entry[k], changes?.was?.[k]));
+  if (moved.length) {
+    for (const k of moved)
+      refuse(
+        { field: k, reason: 'le disque a changé depuis le chargement' },
+        `${name} · ${SHEET_LABELS[k]}`,
+      );
+    return out(false, [...j.lines, 'Rien à enregistrer.'], { stale: true });
+  }
+
+  // 1. Les rangs, par le plan de Rangs. Une cellule d'un autre perso n'est pas de la fiche.
+  const rankLabel = (r: Pick<RankChange, 'field' | 'step'>): string =>
+    `${FIELD_LABELS[r.field] ?? r.field}${
+      isTable(r.field) ? ` à ${transcendenceLabel(CURATED_STEP_RARITY, Number(r.step))}` : ''
+    }`;
+  const own = ranks.filter((r) => r?.id === id);
+  for (const r of ranks)
+    if (r?.id !== id)
+      refuse(
+        { field: r?.field, step: r?.step, reason: 'cette cellule n’est pas de ce perso' },
+        `${String(r?.id ?? '')} · ${String(r?.field ?? '')}`,
+      );
+  const plan = planRankChanges(disk, own);
+  for (const { change, reason } of plan.refused)
+    refuse({ field: change.field, step: change.step, reason }, `${name} · ${rankLabel(change)}`);
+
+  const touched = new Set<string>();
+  // L'entrée sur laquelle se posent les champs hors rangs : celle que les rangs
+  // viennent d'écrire, sinon celle du disque.
+  let current = entry;
+  const failed = new Set<'character' | 'ee'>();
+  if (plan.characters[id]) {
+    j.doing('écriture des rangs');
+    const errors = await deps.upsertCharacter(id, plan.characters[id]);
+    if (errors.length) failed.add('character');
+    else {
+      current = plan.characters[id];
+      touched.add(CHARACTERS_PATH);
+    }
+    for (const e of errors) j.done(`REFUSÉ — ${name} : ${e}`);
+  }
+  if (plan.ee[id]) {
+    const errors = await deps.upsertEe(id, plan.ee[id]);
+    if (errors.length) failed.add('ee');
+    else touched.add(EQUIPMENT_PATH);
+    for (const e of errors) j.done(`REFUSÉ — EE de ${name} : ${e}`);
+  }
+  for (const r of plan.applied) {
+    if (failed.has(isEe(r.field) ? 'ee' : 'character'))
+      refused.push({ field: r.field, step: r.step, reason: 'refusé par le store' });
+    else j.done(`${rankLabel(r)} : ${r.from || 'vide'} → ${r.to || 'vide'}`);
+  }
+
+  // 2. Les champs hors rangs, sur l'entrée d'après les rangs.
+  let next = current;
+  const said: string[] = [];
+  if (keys.includes('skillPriority')) {
+    const sp = cleanSkillPriority(sent.skillPriority);
+    if (typeof sp === 'string')
+      refuse({ field: 'skillPriority', reason: sp }, `${name} · ${SHEET_LABELS.skillPriority}`);
+    else if (!sameJson(sp, current.skillPriority ?? {})) {
+      next = withField(next, 'skillPriority', Object.keys(sp).length ? sp : undefined);
+      said.push(
+        Object.keys(sp).length
+          ? `${SHEET_LABELS.skillPriority} : ${PRIORITY_KEYS.map((k) => sp[k] ?? '—').join(' · ')}`
+          : `${SHEET_LABELS.skillPriority} retirée`,
+      );
+    }
+  }
+  if (keys.includes('tags')) {
+    const tags = cleanSheetTags(sent.tags, current.tags ?? []);
+    if (typeof tags === 'string')
+      refuse({ field: 'tags', reason: tags }, `${name} · ${SHEET_LABELS.tags}`);
+    else if (!sameJson(tags, current.tags ?? [])) {
+      next = withField(next, 'tags', tags.length ? tags : undefined);
+      said.push(tags.length ? `tags : ${tags.join(', ')}` : 'tags retirés');
+    }
+  }
+  if (said.length) {
+    j.doing('écriture de la fiche');
+    const errors = await deps.upsertCharacter(id, next);
+    if (errors.length) {
+      // Le store ne dit pas lequel des champs il refuse : les deux sont marqués.
+      for (const k of keys)
+        if (!refused.some((r) => r.field === k)) refused.push({ field: k, reason: errors[0] });
+      for (const e of errors) j.done(`REFUSÉ — ${name} : ${e}`);
+    } else {
+      touched.add(CHARACTERS_PATH);
+      for (const line of said) j.done(line);
+    }
+  }
+
+  if (!touched.size)
+    return refused.length
+      ? out(false, [...j.lines, 'Rien à enregistrer.'])
+      : out(true, ['Rien à enregistrer : le disque porte déjà ces valeurs.']);
+
+  const commit = deps.commitPaths([...touched], `chore(characters): ${name}`, report);
+  return out(commit.ok && !refused.length, [...j.lines, ...commit.log], { written: true });
 }
 
 // ------------------------------------------------------------------ noms -----

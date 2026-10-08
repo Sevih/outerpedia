@@ -20,6 +20,7 @@ const TABS = [
   'ranks',
   'gear',
   'gamedata',
+  'character',
   'effects',
   'discord',
   'names',
@@ -65,7 +66,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : treize sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : quatorze sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -100,6 +101,18 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(readdirSync(resolve(UI, 'tabs')).sort()).toEqual(
       TABS.flatMap((t) => [`${t}.css`, `${t}.html`, `${t}.js`]).sort(),
     );
+  });
+
+  it('aucun `id` en double dans la page : deux onglets peuvent partager une lettre, pas un id', () => {
+    // « Fiche perso » et Codes promo préfixent tous deux en `c-` : un id repris
+    // et `$('c-list')` rendrait l'élément de l'autre onglet, sans erreur.
+    const ids = [...assemblePage(shell(), readTab).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+    expect(ids.filter((id, i) => ids.indexOf(id) !== i)).toEqual([]);
+    // Et ceux que `character.js` pose lui-même ne sont pas ceux de Codes promo.
+    const coupons = [...(readTab('coupons') ?? '').matchAll(/\sid="(c-[^"]+)"/g)].map((m) => m[1]);
+    const posed = readFileSync(resolve(UI, 'tabs', 'character.js'), 'utf8');
+    expect(coupons.length).toBeGreaterThan(0);
+    expect(coupons.filter((id) => posed.includes(`id="${id}"`))).toEqual([]);
   });
 });
 
@@ -215,6 +228,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/gear-reco',
       '/api/names',
       '/api/effects',
+      '/api/character',
       '/api/discord/send',
       '/api/quit',
     ])
@@ -233,6 +247,10 @@ describe('shot — la page que le banc de captures photographie', () => {
 
   it('des effets, ne relaie aucun POST : la recherche et l’id d’une création sont des GET', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/effects'))).toEqual([]);
+  });
+
+  it('de la fiche perso, ne relaie aucun POST : le roster et l’état sont des GET', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([]);
   });
 
   it('des tables du jeu, ne relaie aucun POST : l’onglet ne fait que des GET', () => {
@@ -1197,13 +1215,16 @@ describe('Effets — la page, sur le vrai markup', () => {
     };
   }
 
-  it('le groupe Éditeurs n’est plus « à venir » : il ouvre Effets, en pleine largeur', async () => {
+  it('le groupe Éditeurs n’est plus « à venir » : Effets y est, en pleine largeur', async () => {
     const { all, el } = await effects();
     const group = all('#groups button').find((b) => b.textContent?.includes('Éditeurs'));
     expect(group?.dataset.group).toBe('editors');
     expect(group?.classList.contains('soon')).toBe(false);
     expect(el('tab-effects').hidden).toBe(true);
+    // Le groupe s'ouvre sur sa première section, « Fiche perso » ; Effets suit.
     group?.click();
+    expect(el('tab-effects').hidden).toBe(true);
+    all('#tabs [data-tab="effects"]')[0].click();
     expect(el('tab-effects').hidden).toBe(false);
     expect(all('#tabs [data-tab="effects"]')[0].getAttribute('aria-selected')).toBe('true');
     expect(all('#tabs [data-tab="effects"]')[0].textContent).toBe('Effets');
@@ -1648,6 +1669,1124 @@ describe('Effets — la page, sur le vrai markup', () => {
     page.all('#tabs [data-tab="coupons"]')[0].click();
     expect(page.confirm).toHaveBeenCalledTimes(1);
     expect(page.el('tab-effects').hidden).toBe(true);
+  });
+});
+
+describe('hero-picker — le picker de héros partagé, dans un document', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  interface Hero {
+    id: string;
+    name: string;
+    class: string;
+    element?: string;
+    builds?: number;
+  }
+  const ROSTER: Hero[] = [
+    { id: '1', name: 'Aer', class: 'striker', element: 'fire', builds: 3 },
+    { id: '2', name: 'Alice', class: 'mage', element: 'earth', builds: 0 },
+    { id: '3', name: 'Astei', class: 'healer', element: 'fire', builds: 1 },
+  ];
+  type Options = {
+    roster: Hero[];
+    imgBase: string;
+    title: string;
+    onPick: (picked: unknown) => unknown;
+    [more: string]: unknown;
+  };
+
+  /**
+   * Le VRAI `hero-picker.mjs` dans un document happy-dom vide : la modale est à
+   * lui, il la pose dans `<body>` au premier appel. Un bouton tient lieu de
+   * celui qui l'ouvre.
+   */
+  async function picker() {
+    vi.resetModules();
+    const window = new Window({ url: 'http://localhost:4747/' });
+    const { document } = window;
+    document.body.innerHTML = '<button id="opener">Choisir</button>';
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    const mod = (await import(/* @vite-ignore */ resolve(UI, 'hero-picker.mjs'))) as {
+      openHeroPicker: (opts: Options) => void;
+      closeHeroPicker: () => void;
+      heroFilters: () => { elements: Set<string>; classes: Set<string>; seg: string };
+    };
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    const onPick = vi.fn<(picked: unknown) => unknown>();
+    return {
+      ...mod,
+      el,
+      all,
+      fire,
+      onPick,
+      document,
+      open: (over: Partial<Options> = {}) =>
+        mod.openHeroPicker({
+          roster: ROSTER,
+          imgBase: 'https://img.test',
+          title: 'Choisir un perso',
+          onPick,
+          opener: () => el('opener'),
+          ...over,
+        }),
+      names: () => all('#hp-results .hp-tile').map((t) => t.querySelector('.hp-n')?.textContent),
+      tile: (id: string) => all('#hp-results .hp-tile').find((t) => t.dataset.id === id)!,
+      search: (q: string) => {
+        el('hp-q').value = q;
+        fire(el('hp-q'), 'input');
+      },
+    };
+  }
+
+  it('pose SA modale dans <body>, une fois, et l’ouvre : titre, compte, tuiles, recherche au focus', async () => {
+    const p = await picker();
+    expect(p.el('hp-modal')).toBeNull();
+    p.open();
+    p.closeHeroPicker();
+    p.open();
+
+    expect(p.all('.hp-modal')).toHaveLength(1);
+    expect(p.el('hp-modal').parentElement).toBe(p.document.body as unknown as HTMLElement);
+    expect(p.el('hp-modal').hidden).toBe(false);
+    expect(p.el('hp-title').textContent).toBe('Choisir un perso');
+    expect(p.el('hp-tally').textContent).toBe('3 persos');
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+    expect(p.document.activeElement).toBe(
+      p.el('hp-q') as unknown as typeof p.document.activeElement,
+    );
+    // Une tuile : le visage, l'icône d'élément, le nom — sous la base des images.
+    const tile = p.tile('1');
+    expect(tile.title).toBe('Aer');
+    expect(tile.querySelector('.hp-fi')?.getAttribute('src')).toBe(
+      'https://img.test/images/characters/faceicon/FI_1.webp',
+    );
+    expect(tile.querySelector('.hp-el')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/elem/IG_Turn_Element_Fire.webp',
+    );
+    // Choix unique : pas de pied, pas de pastille.
+    expect(p.el('hp-foot').hidden).toBe(true);
+    expect(p.all('.hp-cnt')).toEqual([]);
+  });
+
+  it('la recherche filtre par nom, et dit quand rien ne correspond', async () => {
+    const p = await picker();
+    p.open();
+    p.search('  aL ');
+    expect(p.names()).toEqual(['Alice']);
+    expect(p.el('hp-none').hidden).toBe(true);
+    p.search('zzz');
+    expect(p.names()).toEqual([]);
+    expect(p.el('hp-none').hidden).toBe(false);
+    expect(p.el('hp-none').textContent).toBe('Aucun perso ne correspond.');
+  });
+
+  it('les pastilles : celles que le roster porte, dans l’ordre du site ; aucune enfoncée = tout', async () => {
+    const p = await picker();
+    p.open();
+    const togs = (group: string) =>
+      p.all(`#hp-filters [aria-label="${group}"] .hp-tog`).map((b) => b.getAttribute('aria-label'));
+    expect(togs('Élément')).toEqual(['Fire', 'Earth']);
+    expect(togs('Classe')).toEqual(['Striker', 'Mage', 'Healer']);
+
+    p.all('#hp-filters [data-element="fire"]')[0].click();
+    expect(p.names()).toEqual(['Aer', 'Astei']);
+    expect(p.all('#hp-filters [data-element="fire"]')[0].getAttribute('aria-pressed')).toBe('true');
+    p.all('#hp-filters [data-class="healer"]')[0].click();
+    expect(p.names()).toEqual(['Astei']);
+    p.all('#hp-filters [data-element="fire"]')[0].click();
+    p.all('#hp-filters [data-class="healer"]')[0].click();
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+  });
+
+  it('les filtres survivent à la fermeture là où l’appelant les garde, pas la recherche', async () => {
+    const p = await picker();
+    const filters = p.heroFilters();
+    p.open({ filters });
+    p.all('#hp-filters [data-class="mage"]')[0].click();
+    p.search('al');
+    p.closeHeroPicker();
+
+    p.open({ filters });
+    expect(p.el('hp-q').value).toBe('');
+    expect(p.names()).toEqual(['Alice']);
+    expect(p.all('#hp-filters [data-class="mage"]')[0].getAttribute('aria-pressed')).toBe('true');
+    // Un autre appelant, ses propres filtres : rien d'enfoncé.
+    p.open({ filters: p.heroFilters() });
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+  });
+
+  it('choix unique : la tuile cliquée part à `onPick`, la modale se ferme, le focus revient', async () => {
+    const p = await picker();
+    p.open({ chosen: '2' });
+    // Le perso en cours porte l'anneau.
+    expect(p.tile('2').getAttribute('aria-current')).toBe('true');
+    expect(p.tile('2').querySelector('.hp-ring')?.classList.contains('on')).toBe(true);
+    expect(p.tile('1').hasAttribute('aria-current')).toBe(false);
+
+    p.tile('3').click();
+    expect(p.onPick.mock.calls).toEqual([['3']]);
+    expect(p.el('hp-modal').hidden).toBe(true);
+    expect(p.document.activeElement).toBe(
+      p.el('opener') as unknown as typeof p.document.activeElement,
+    );
+  });
+
+  it('`onPick` qui rend false garde la modale ouverte (un abandon refusé)', async () => {
+    const p = await picker();
+    p.onPick.mockReturnValue(false);
+    p.open();
+    p.tile('1').click();
+    expect(p.onPick.mock.calls).toEqual([['1']]);
+    expect(p.el('hp-modal').hidden).toBe(false);
+  });
+
+  it('Entrée dans la recherche prend la première tuile montrée', async () => {
+    const p = await picker();
+    p.open();
+    p.search('as');
+    p.fire(p.el('hp-q'), 'keydown', 'Enter');
+    expect(p.onPick.mock.calls).toEqual([['3']]);
+    expect(p.el('hp-modal').hidden).toBe(true);
+  });
+
+  it('Échap, la croix et le voile ferment sans rien poser', async () => {
+    const p = await picker();
+    p.open();
+    p.fire(p.document.body as unknown as HTMLElement, 'keydown', 'Escape');
+    expect(p.el('hp-modal').hidden).toBe(true);
+    p.open();
+    p.el('hp-close').click();
+    expect(p.el('hp-modal').hidden).toBe(true);
+    p.open();
+    // Un clic DANS le panneau ne ferme pas ; sur le voile, si.
+    p.all('.hp-panel')[0].click();
+    expect(p.el('hp-modal').hidden).toBe(false);
+    p.el('hp-modal').click();
+    expect(p.el('hp-modal').hidden).toBe(true);
+    expect(p.onPick).not.toHaveBeenCalled();
+  });
+
+  it('multi : les tuiles se cochent dans l’ordre des clics, le pied récapitule, « Valider » rend la liste', async () => {
+    const p = await picker();
+    p.open({ multi: true, chosen: ['3'] });
+    expect(p.el('hp-foot').hidden).toBe(false);
+    expect(p.el('hp-tally').textContent).toBe('1 choisi sur 3');
+    expect(p.tile('3').getAttribute('aria-pressed')).toBe('true');
+    expect(p.tile('3').querySelector('.hp-cnt')?.textContent).toBe('✓');
+    expect(p.tile('1').getAttribute('aria-pressed')).toBe('false');
+
+    p.tile('1').click();
+    expect(p.el('hp-modal').hidden).toBe(false);
+    expect(p.onPick).not.toHaveBeenCalled();
+    expect(p.el('hp-tally').textContent).toBe('2 choisis sur 3');
+    expect(p.all('#hp-foot .hp-recap')[0].textContent).toBe('Astei, Aer');
+    // Un second clic décoche.
+    p.tile('3').click();
+    expect(p.all('#hp-foot .hp-recap')[0].textContent).toBe('Aer');
+    p.tile('2').click();
+
+    expect(p.all('#hp-foot button').map((b) => b.textContent)).toEqual(['Annuler', 'Valider']);
+    p.all('#hp-foot [data-hp="ok"]')[0].click();
+    expect(p.onPick.mock.calls).toEqual([[['1', '2']]]);
+    expect(p.el('hp-modal').hidden).toBe(true);
+  });
+
+  it('multi : « Annuler » ne pose rien, Entrée dans la recherche valide', async () => {
+    const p = await picker();
+    p.open({ multi: true });
+    expect(p.all('#hp-foot .hp-recap')[0].textContent).toBe('Aucun perso.');
+    p.tile('2').click();
+    p.all('#hp-foot [data-hp="cancel"]')[0].click();
+    expect(p.el('hp-modal').hidden).toBe(true);
+    expect(p.onPick).not.toHaveBeenCalled();
+
+    p.open({ multi: true });
+    p.tile('2').click();
+    p.search('ae');
+    p.fire(p.el('hp-q'), 'keydown', 'Enter');
+    // La recherche ne décoche pas ce qu'elle cache.
+    expect(p.onPick.mock.calls).toEqual([[['2']]]);
+  });
+
+  it('ce que Gear reco y ajoute : un groupe segmenté, un compte par tuile, son badge, son `title`', async () => {
+    const p = await picker();
+    p.open({
+      tally: () => '3 persos · 2 avec recos · 1 sans',
+      seg: {
+        label: 'Recos',
+        options: [
+          ['', 'Tous'],
+          ['with', 'Avec recos'],
+          ['without', 'Sans recos'],
+        ],
+        test: (c: Hero, has: string) =>
+          has === 'with' ? Boolean(c.builds) : has === 'without' ? !c.builds : true,
+      },
+      count: (c: Hero) => c.builds,
+      hint: (c: Hero) => `${c.name} — ${c.builds} builds`,
+    });
+    expect(p.el('hp-tally').textContent).toBe('3 persos · 2 avec recos · 1 sans');
+    expect(p.all('#hp-results .hp-cnt').map((b) => [b.textContent, b.className])).toEqual([
+      ['3', 'hp-cnt'],
+      ['0', 'hp-cnt zero'],
+      ['1', 'hp-cnt'],
+    ]);
+    expect(p.tile('1').title).toBe('Aer — 3 builds');
+    const seg = () => p.all('#hp-filters .hp-seg button');
+    expect(seg().map((b) => [b.textContent, b.getAttribute('aria-pressed')])).toEqual([
+      ['Tous', 'true'],
+      ['Avec recos', 'false'],
+      ['Sans recos', 'false'],
+    ]);
+    seg()[2].click();
+    expect(p.names()).toEqual(['Alice']);
+    expect(seg().map((b) => b.getAttribute('aria-pressed'))).toEqual(['false', 'false', 'true']);
+    seg()[1].click();
+    expect(p.names()).toEqual(['Aer', 'Astei']);
+  });
+
+  it('un roster sans élément : ni pastille d’élément, ni icône sur la tuile', async () => {
+    const p = await picker();
+    p.open({ roster: ROSTER.map(({ id, name, class: cls }) => ({ id, name, class: cls })) });
+    expect(p.all('#hp-filters [data-element]')).toEqual([]);
+    expect(p.all('#hp-results .hp-el')).toEqual([]);
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+  });
+});
+
+describe('Fiche perso — la page, sur le vrai markup', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const AER = '2000055';
+  const AIS = '2000096';
+  interface Curated {
+    rank?: string;
+    rankPvp?: string;
+    role?: string;
+    tags?: string[];
+    skillPriority?: { first?: number; second?: number; ultimate?: number };
+    rankByTranscend?: Record<string, string>;
+    roleByTranscend?: Record<string, string>;
+    videos?: {
+      platform: string;
+      id: string;
+      title?: string;
+      author?: string;
+      uploadDate?: string;
+    }[];
+    prosCons?: unknown;
+  }
+  const ROSTER = [
+    { id: AER, name: 'Aer', element: 'fire', class: 'striker', subClass: 'attacker', rarity: 3 },
+    {
+      id: AIS,
+      name: 'Ais Wallenstein',
+      element: 'light',
+      class: 'striker',
+      subClass: 'attacker',
+      rarity: 3,
+    },
+  ];
+  /** Le curé du disque, par perso : Aer sans palier, Ais avec. */
+  const curated = (): Record<string, Curated> => ({
+    [AER]: {
+      prosCons: { pros: [{ en: 'strong' }] },
+      videos: [
+        {
+          platform: 'youtube',
+          id: 'abc',
+          title: 'Slacking Surfer, Aer',
+          author: 'Outerplane',
+          uploadDate: '2025-09-22T10:00:00Z',
+        },
+      ],
+      rank: 'A',
+      rankPvp: 'C',
+      role: 'dps',
+      tags: ['free'],
+      skillPriority: { first: 3, second: 2, ultimate: 1 },
+    },
+    [AIS]: { rank: 'B', role: 'dps', rankByTranscend: { '3': 'D', '9': 'B', '5': 'C' } },
+  });
+
+  type Call = { path: string; body?: unknown };
+  type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Noms et Effets : la
+   * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/character.js` et
+   * le vrai `hero-picker.mjs`. `fetch` est factice : il sert le roster et
+   * l'état d'un perso d'après `disk.curated` (relu à chaque appel), et note ce
+   * que la page demande.
+   */
+  async function character(
+    opts: { hash?: string; saved?: (body: unknown, disk: Record<string, Curated>) => Saved } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const disk = { curated: curated() };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown, status = 200) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: status === 200,
+        status,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/character')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/character/roster') return answer({ roster: ROSTER });
+      if (url.pathname === '/api/character/state') {
+        const id = url.searchParams.get('id') ?? '';
+        const row = ROSTER.find((c) => c.id === id);
+        if (!row) return answer({ error: `perso inconnu : ${id}` }, 404);
+        const cu = disk.curated[id] ?? {};
+        return answer({
+          char: { ...row, chain: 'join', tags: id === AER ? ['ignore-defense'] : [] },
+          curated: cu,
+          ranks: {
+            rank: cu.rank ?? '',
+            rankPvp: cu.rankPvp ?? '',
+            role: cu.role ?? '',
+            rankByTranscend: cu.rankByTranscend ?? {},
+            roleByTranscend: cu.roleByTranscend ?? {},
+          },
+          tiers: ['S', 'A', 'B', 'C', 'D', 'E'],
+          roles: ['dps', 'support', 'sustain'],
+          steps: [
+            { key: '3', label: '3★' },
+            { key: '4', label: '4★' },
+            { key: '6', label: '5★' },
+            { key: '9', label: '6★' },
+          ],
+          humanTags: ['free'],
+          videos: cu.videos ?? [],
+        });
+      }
+      if (url.pathname === '/api/character')
+        return answer(
+          opts.saved?.(body, disk.curated) ?? {
+            ok: true,
+            log: ['fait'],
+            written: true,
+            stale: false,
+            refused: [],
+          },
+        );
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+    // `quick:saved` : happy-dom ne distribue que SES événements, pas l'`Event` de Node.
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'character.js'));
+    lib.sections.start();
+    const settle = () => new Promise((done) => setTimeout(done, 0));
+    await settle();
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    /** Choisit une valeur dans un menu, comme le ferait la souris. */
+    const pick = (select: HTMLElement, value: string) => {
+      (select as unknown as HTMLSelectElement).value = value;
+      fire(select, 'change');
+    };
+    /**
+     * La valeur qu'un menu porte à son DESSIN (l'option `selected`) : après un
+     * `innerHTML`, happy-dom ne la rend pas par `value` (cf. `picked`, Effets).
+     */
+    const val = (select: HTMLElement): string =>
+      select.querySelector('option[selected]')?.getAttribute('value') ?? '';
+    const type = (input: HTMLElement, value: string) => {
+      (input as unknown as HTMLInputElement).value = value;
+      fire(input, 'input');
+    };
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      disk,
+      settle,
+      fire,
+      pick,
+      type,
+      val,
+      window,
+      /** Le menu d'une cellule de rang : un champ, ou le palier `step` d'une table. */
+      cell: (field: string, step?: string) =>
+        all(
+          `#c-panel select[data-field="${field}"]${step ? `[data-step="${step}"]` : ':not([data-step])'}`,
+        )[0] as HTMLSelectElement,
+      prio: (key: string) => all(`#c-panel input[data-prio="${key}"]`)[0] as HTMLInputElement,
+      tag: (t: string) => all(`#c-panel input[data-tag="${t}"]`)[0] as HTMLInputElement,
+      /** Les paliers montrés, tels qu'ils se lisent : palier, rang, rôle. */
+      tiers: () =>
+        all('#c-tiers tr[data-step]').map((tr) =>
+          [...tr.querySelectorAll('select')].map((s) => val(s as unknown as HTMLElement)),
+        ),
+      subs: () =>
+        all('#c-tabs [role="tab"]').map((b) => [
+          b.textContent,
+          b.getAttribute('aria-selected'),
+          (b as unknown as HTMLButtonElement).disabled ? b.title : '',
+          b.querySelector('.dot')?.className ?? '',
+        ]),
+      count: () => el('c-count').textContent,
+      save: async () => {
+        el('c-save').click();
+        for (let i = 0; i < 6; i++) await settle();
+      },
+      posted: () => calls.filter((c) => c.path === '/api/character').map((c) => c.body),
+      states: () => calls.filter((c) => c.path.startsWith('/api/character/state')).length,
+    };
+  }
+
+  it('servie dans Éditeurs, EN PREMIER : le groupe s’ouvre sur elle, en pleine largeur', async () => {
+    const page = await character();
+    expect(
+      page.all('#tabs [data-group="editors"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['character', 'Fiche perso'],
+      ['effects', 'Effets'],
+    ]);
+    expect(page.el('tab-character').hidden).toBe(true);
+    // Sur un autre onglet, le picker ne s'ouvre pas : il couvrirait sa page.
+    expect(page.el('hp-modal')).toBeNull();
+
+    page.all('#groups [data-group="editors"]')[0].click();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.all('#tab-character h2')[0].textContent).toBe('Fiche perso');
+  });
+
+  it('sans perso : « Aucun perso choisi. », rien d’autre, et le picker OUVERT d’office', async () => {
+    const page = await character({ hash: '#character' });
+    expect(page.el('c-who').textContent).toBe('Aucun perso choisi.');
+    expect(page.el('c-pick-label').textContent).toBe('Choisir un perso');
+    expect(page.el('c-pick').disabled).toBe(false);
+    expect(page.el('c-bar').hidden).toBe(true);
+    expect(page.el('c-tabs').hidden).toBe(true);
+    expect(page.el('c-panel').innerHTML).toBe('');
+    // Le roster est lu UNE fois, aucun état de perso n'est demandé.
+    expect(page.calls).toEqual([{ path: '/api/character/roster' }]);
+
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Choisir un perso');
+    expect(page.all('#hp-results .hp-n').map((n) => n.textContent)).toEqual([
+      'Aer',
+      'Ais Wallenstein',
+    ]);
+  });
+
+  it('un perso choisi dans le picker : sa fiche, son en-tête, et l’adresse qui le dit', async () => {
+    const page = await character({ hash: '#character' });
+    page.all('#hp-results .hp-tile')[0].click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+    expect(page.all('#c-who .c-trait').map((t) => t.textContent)).toEqual([
+      'fire',
+      'striker',
+      'attacker',
+    ]);
+    expect(page.all('#c-who .c-trait img').map((i) => i.getAttribute('src'))).toEqual([
+      'https://img.test/images/ui/elem/IG_Turn_Element_Fire.webp',
+      'https://img.test/images/ui/class/IG_Turn_Class_Striker.webp',
+      'https://img.test/images/ui/class/CM_Sub_Class_Attacker.webp',
+    ]);
+    expect(page.all('#c-who .c-stars img')).toHaveLength(3);
+    expect(page.all('#c-who .badge.off')[0].textContent).toBe('chaîne join');
+    expect(page.all('#c-who .c-face')[0].getAttribute('src')).toBe(
+      `https://img.test/images/characters/portrait/CT_${AER}.webp`,
+    );
+    expect(page.el('c-pick-label').textContent).toBe('Changer de perso');
+    expect(page.el('c-bar').hidden).toBe(false);
+    expect(page.count()).toBe('aucune modification');
+    // « Changer de perso » rouvre le picker, l'anneau sur le perso en cours.
+    page.el('c-pick').click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.all('#hp-results [aria-current="true"]').map((t) => t.dataset.id)).toEqual([AER]);
+  });
+
+  it('`#character/2000055/fiche` ouvre l’onglet sur la fiche, sans picker', async () => {
+    const page = await character({ hash: `#character/${AER}/fiche` });
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.all('#tabs [data-tab="character"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+    expect(page.el('hp-modal')).toBeNull();
+    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
+    // `#character/<id>` vaut « fiche », un sous-onglet pas encore porté aussi.
+    const bare = await character({ hash: `#character/${AIS}` });
+    expect(bare.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    const soon = await character({ hash: `#character/${AIS}/synergies` });
+    expect(soon.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    expect(soon.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+  });
+
+  it('un perso que le roster ne connaît pas : le journal le dit, la page reste sans perso', async () => {
+    const page = await character({ hash: '#character/nope' });
+    expect(page.el('c-who').textContent).toBe('Aucun perso choisi.');
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain('perso inconnu : nope');
+  });
+
+  it('les sous-onglets : la rangée entière, Fiche montrée, les quatre autres éteints', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    expect(page.el('c-tabs').getAttribute('role')).toBe('tablist');
+    expect(page.subs()).toEqual([
+      ['Fiche', 'true', '', ''],
+      ['Pros / Cons', 'false', 'lot B42', ''],
+      ['Synergies', 'false', 'lot B42', ''],
+      ['Skills', 'false', 'lot B39', ''],
+      ['Gear reco', 'false', 'lot B40', ''],
+    ]);
+    expect(page.all('#c-tabs [role="tab"]').map((b) => b.getAttribute('tabindex'))).toEqual([
+      '0',
+      '-1',
+      '-1',
+      '-1',
+      '-1',
+    ]);
+    expect(page.el('c-panel').getAttribute('role')).toBe('tabpanel');
+    expect(page.el('c-panel').getAttribute('aria-labelledby')).toBe('c-tab-fiche');
+    expect(page.el('c-tab-fiche').getAttribute('aria-controls')).toBe('c-panel');
+  });
+
+  it('le clavier des sous-onglets : ← → Début Fin restent parmi ceux qui sont allumés', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    const fiche = page.el('c-tab-fiche');
+    fiche.focus();
+    for (const key of ['ArrowRight', 'ArrowLeft', 'End', 'Home']) {
+      const event = new page.window.KeyboardEvent('keydown', {
+        key,
+        bubbles: true,
+        cancelable: true,
+      });
+      page.el('c-tab-fiche').dispatchEvent(event as unknown as Event);
+      // La touche est prise (la page ne défile pas), l'onglet garde la main.
+      expect(event.defaultPrevented, key).toBe(true);
+      expect(page.subs()[0].slice(0, 2), key).toEqual(['Fiche', 'true']);
+      expect(page.window.document.activeElement?.id, key).toBe('c-tab-fiche');
+    }
+    // Un clic sur un sous-onglet éteint ne montre rien d'autre.
+    page.el('c-tab-skills').click();
+    expect(page.subs()[0].slice(0, 2)).toEqual(['Fiche', 'true']);
+    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
+  });
+
+  it('la fiche : trois cartes — Rangs, Kit, Vidéos — remplies du disque', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    expect(page.all('#c-panel .c-card > .card-head strong').map((s) => s.textContent)).toEqual([
+      'Rangs',
+      'Kit',
+      'Vidéos',
+    ]);
+    expect(['rank', 'rankPvp', 'role'].map((f) => page.val(page.cell(f)))).toEqual([
+      'A',
+      'C',
+      'dps',
+    ]);
+    expect(page.all('#c-panel label[for="c-f-rank"]')[0].textContent).toBe('Rang PvE');
+    // L'icône du rang, dans le cadre du menu.
+    expect(page.all('#c-panel .c-rkico')[0].getAttribute('src')).toBe(
+      'https://img.test/images/ui/rank/IG_Event_Rank_A.webp',
+    );
+    expect(page.tiers()).toEqual([]);
+    expect(page.el('c-tiers').textContent).toContain('Aucun palier');
+    expect([
+      page.prio('first').value,
+      page.prio('second').value,
+      page.prio('ultimate').value,
+    ]).toEqual(['3', '2', '1']);
+    expect(page.prio('first').type).toBe('number');
+    expect(page.tag('free').checked).toBe(true);
+    // Les tags que le jeu donne : en lecture.
+    expect(page.all('#c-panel .c-derived .lbl')[0].textContent).toBe('déduits des données');
+    expect(page.all('#c-panel .c-derived .badge.off').map((b) => b.textContent)).toEqual([
+      'ignore-defense',
+    ]);
+    expect(page.all('#c-panel .c-derived input')).toEqual([]);
+    // Les vidéos : titre, auteur, date — et rien à saisir.
+    expect(page.all('#c-panel .c-videos li').map((li) => li.textContent)).toEqual([
+      'Slacking Surfer, AerOuterplane · 2025-09-22',
+    ]);
+    expect(page.all('#c-panel [data-card="videos"] input, [data-card="videos"] select')).toEqual(
+      [],
+    );
+
+    const ais = await character({ hash: `#character/${AIS}` });
+    expect(ais.all('#c-panel [data-card="videos"] .c-body')[0].textContent).toBe('aucune vidéo');
+    expect(ais.all('#c-panel .c-derived')[0].textContent).toBe('déduits des données— aucun');
+    expect(ais.tag('free').checked).toBe(false);
+    expect(ais.prio('first').value).toBe('');
+  });
+
+  it('un rang modifié : surligné comme dans Rangs, compté, pointé sur l’onglet ; remis, tout s’efface', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.pick(page.cell('rank'), 'S');
+
+    expect(page.cell('rank').className).toBe('dirty');
+    expect(page.all('#c-panel .c-rkico')[0].getAttribute('src')).toBe(
+      'https://img.test/images/ui/rank/IG_Event_Rank_S.webp',
+    );
+    expect(page.count()).toBe('1 changement');
+    expect(page.el('c-save').disabled).toBe(false);
+    expect(page.el('c-reset').disabled).toBe(false);
+    expect(page.all('#c-panel [data-mod="ranks"]')[0].textContent).toBe('modifié');
+    expect(page.all('#c-panel [data-mod="kit"]')[0].textContent).toBe('');
+    expect(page.subs()[0]).toEqual(['Fiche', 'true', '', 'dot edit']);
+    // Le menu n'a pas été redessiné : il garde la main.
+    page.pick(page.cell('role'), 'support');
+    expect(page.count()).toBe('2 changements');
+
+    page.pick(page.cell('rank'), 'A');
+    page.pick(page.cell('role'), 'dps');
+    expect(page.cell('rank').className).toBe('');
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('c-save').disabled).toBe(true);
+    expect(page.subs()[0]).toEqual(['Fiche', 'true', '', '']);
+  });
+
+  it('un rang vidé : le cadre perd son icône', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.pick(page.cell('rankPvp'), '');
+    const icon = page.cell('rankPvp').parentElement?.querySelector('.c-rkico') as unknown as {
+      hidden: boolean;
+    };
+    expect(icon.hidden).toBe(true);
+    expect(page.count()).toBe('1 changement');
+  });
+
+  it('les paliers : ceux du disque, dans l’ordre ; un palier hérité hors échelle est dit, pas édité', async () => {
+    const page = await character({ hash: `#character/${AIS}` });
+    expect(page.tiers()).toEqual([
+      ['3', 'D', ''],
+      ['9', 'B', ''],
+    ]);
+    expect(page.all('#c-tiers thead th').map((th) => th.textContent)).toEqual([
+      'Transcendance',
+      'Rang PvE',
+      'Rôle',
+      'Retirer',
+    ]);
+    expect(page.el('c-tiers').textContent).toContain(
+      'Hérité hors paliers pleins, conservé tel quel : Rang Trans 5 : C.',
+    );
+    // Le menu d'un palier : le sien, plus ceux qui sont libres.
+    expect(
+      [...page.all('#c-tiers select[data-move="3"] option')].map((o) => o.textContent),
+    ).toEqual(['3★', '4★', '5★']);
+  });
+
+  it('« ＋ palier » ajoute le premier palier libre ; son rang choisi, il compte', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    const add = () => page.all('#c-tiers [data-act="add-step"]')[0] as unknown as HTMLButtonElement;
+    expect(add().textContent).toBe('＋ palier');
+    add().click();
+    expect(page.tiers()).toEqual([['3', '', '']]);
+    // Un palier ajouté et laissé vide n'est pas un changement.
+    expect(page.count()).toBe('aucune modification');
+
+    page.pick(page.cell('rankByTranscend', '3'), 'S');
+    page.pick(page.cell('roleByTranscend', '3'), 'support');
+    expect(page.count()).toBe('2 changements');
+    expect(page.cell('rankByTranscend', '3').className).toBe('dirty');
+
+    add().click();
+    add().click();
+    add().click();
+    expect(page.tiers().map(([step]) => step)).toEqual(['3', '4', '6', '9']);
+    expect(add().disabled).toBe(true);
+    expect(add().title).toBe('Tous les paliers sont là.');
+  });
+
+  it('changer le palier d’une ligne emmène son rang et son rôle', async () => {
+    const page = await character({ hash: `#character/${AIS}` });
+    page.pick(page.all('#c-tiers select[data-move="3"]')[0], '6');
+    expect(page.tiers()).toEqual([
+      ['6', 'D', ''],
+      ['9', 'B', ''],
+    ]);
+    // Deux cellules : le palier quitté se vide, celui d'arrivée prend le rang.
+    expect(page.count()).toBe('2 changements');
+    await page.save();
+    expect((page.posted()[0] as { changes: { ranks: unknown[] } }).changes.ranks).toEqual([
+      { id: AIS, field: 'rankByTranscend', step: '3', from: 'D', to: '' },
+      { id: AIS, field: 'rankByTranscend', step: '6', from: '', to: 'D' },
+    ]);
+  });
+
+  it('✕ retire un palier : ses deux cellules se vident, la ligne s’en va', async () => {
+    const page = await character({ hash: `#character/${AIS}` });
+    page.all('#c-tiers [data-act="del-step"][data-step="9"]')[0].click();
+    expect(page.tiers()).toEqual([['3', 'D', '']]);
+    expect(page.count()).toBe('1 changement');
+    // Un palier vidé à la main, lui, reste à l'écran : ✕ le retire.
+    page.pick(page.cell('rankByTranscend', '3'), '');
+    expect(page.tiers().map(([step]) => step)).toEqual(['3']);
+    expect(page.cell('rankByTranscend', '3').className).toBe('dirty');
+    expect(page.count()).toBe('2 changements');
+  });
+
+  it('une priorité saisie : surlignée, comptée UNE fois pour les trois champs', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.type(page.prio('first'), '1');
+    expect(page.prio('first').classList.contains('dirty')).toBe(true);
+    expect(page.count()).toBe('1 changement');
+    page.type(page.prio('ultimate'), '');
+    expect(page.count()).toBe('1 changement');
+    expect(page.all('#c-panel [data-mod="kit"]')[0].textContent).toBe('modifié');
+    // Le champ n'a pas été redessiné : la frappe garde le curseur.
+    expect(page.prio('first').value).toBe('1');
+
+    await page.save();
+    expect((page.posted()[0] as { changes: unknown }).changes).toEqual({
+      ranks: [],
+      // Vide = non renseigné : la clé n'est pas envoyée.
+      curated: { skillPriority: { first: 1, second: 2 } },
+      was: page.disk.curated[AER],
+    });
+  });
+
+  it('une priorité hors de 1 à 3 : l’erreur sous le champ, et rien n’est envoyé', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.type(page.prio('second'), '7');
+    expect(page.prio('second').classList.contains('refused')).toBe(true);
+    expect(page.all('#c-panel [data-err="skillPriority"]')[0].textContent).toBe(
+      'Priorité de skills · Skill 2 : entre 1 et 3, ou vide',
+    );
+    expect(page.all('#c-panel [data-card="kit"]')[0].classList.contains('ko')).toBe(true);
+    expect(page.subs()[0][3]).toBe('dot ko');
+    expect(page.count()).toContain('1 erreur');
+
+    await page.save();
+    expect(page.posted()).toEqual([]);
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain('Rien n’est envoyé tant qu’il reste des erreurs');
+
+    page.type(page.prio('second'), '3');
+    expect(page.prio('second').classList.contains('refused')).toBe(false);
+    expect(page.all('#c-panel [data-err="skillPriority"]')[0].textContent).toBe('');
+    expect(page.subs()[0][3]).toBe('dot edit');
+  });
+
+  it('un tag coché ou décoché compte, et part en liste entière', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.tag('free').checked = false;
+    page.fire(page.tag('free'), 'change');
+    expect(page.count()).toBe('1 changement');
+    await page.save();
+    expect((page.posted()[0] as { changes: { curated: unknown } }).changes.curated).toEqual({
+      tags: [],
+    });
+
+    const again = await character({ hash: `#character/${AER}` });
+    again.tag('free').checked = false;
+    again.fire(again.tag('free'), 'change');
+    again.tag('free').checked = true;
+    again.fire(again.tag('free'), 'change');
+    expect(again.count()).toBe('aucune modification');
+  });
+
+  it('« Enregistrer » : UN envoi pour toute la fiche, puis l’état relu du disque', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      saved: (_, disk) => {
+        disk[AER] = {
+          ...disk[AER],
+          rank: 'S',
+          skillPriority: { first: 1, second: 2, ultimate: 1 },
+        };
+        return {
+          ok: true,
+          log: ['PvE : A → S', 'git : fait'],
+          written: true,
+          stale: false,
+          refused: [],
+          git: { branch: 'main', ahead: 1, behind: 0 },
+        };
+      },
+    });
+    const was = page.disk.curated[AER];
+    page.pick(page.cell('rank'), 'S');
+    page.type(page.prio('first'), '1');
+    expect(page.count()).toBe('2 changements');
+    const before = page.states();
+    await page.save();
+
+    expect(page.posted()).toEqual([
+      {
+        id: AER,
+        changes: {
+          ranks: [{ id: AER, field: 'rank', from: 'A', to: 'S' }],
+          curated: { skillPriority: { first: 1, second: 2, ultimate: 1 } },
+          was,
+        },
+      },
+    ]);
+    expect(page.states()).toBe(before + 1);
+    expect(page.val(page.cell('rank'))).toBe('S');
+    expect(page.cell('rank').className).toBe('');
+    expect(page.prio('first').classList.contains('dirty')).toBe(false);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[0][3]).toBe('');
+    expect(page.el('c-save').classList.contains('busy')).toBe(false);
+    // Le compte de « Pousser » suit, par `post`.
+    expect(page.el('push-count').textContent).toBe('1');
+  });
+
+  it('une cellule refusée : elle montre le disque, cerclée, son refus dessous ; le reste est parti', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      saved: (_, disk) => {
+        // Quelqu'un avait posé B entre-temps ; le rôle, lui, est écrit.
+        disk[AER] = { ...disk[AER], rank: 'B', role: 'support' };
+        return {
+          ok: false,
+          log: ['REFUSÉ', 'git : fait'],
+          written: true,
+          stale: false,
+          refused: [{ field: 'rank', reason: 'la page avait « A », le disque porte « B »' }],
+        };
+      },
+    });
+    page.pick(page.cell('rank'), 'S');
+    page.pick(page.cell('role'), 'support');
+    await page.save();
+
+    expect(page.val(page.cell('rank'))).toBe('B');
+    expect(page.cell('rank').className).toBe('refused');
+    expect(page.all('#c-panel [data-err="rank"]')[0].textContent).toBe(
+      'la page avait « A », le disque porte « B »',
+    );
+    expect(page.all('#c-panel [data-card="ranks"]')[0].classList.contains('ko')).toBe(true);
+    expect(page.all('#c-panel [data-ko="ranks"]')[0].textContent).toBe('refusé');
+    expect(page.val(page.cell('role'))).toBe('support');
+    expect(page.cell('role').className).toBe('');
+    expect(page.count()).toBe('1 refus');
+    expect(page.subs()[0][3]).toBe('dot ko');
+    // Y retoucher lève le refus.
+    page.pick(page.cell('rank'), 'S');
+    expect(page.cell('rank').className).toBe('dirty');
+    expect(page.all('#c-panel [data-err="rank"]')[0].textContent).toBe('');
+    expect(page.subs()[0][3]).toBe('dot edit');
+  });
+
+  it('un palier refusé : cerclé, et dit sous la table', async () => {
+    const page = await character({
+      hash: `#character/${AIS}`,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [{ field: 'rankByTranscend', step: '9', reason: 'le disque porte « B »' }],
+      }),
+    });
+    page.pick(page.cell('rankByTranscend', '9'), 'S');
+    await page.save();
+    expect(page.cell('rankByTranscend', '9').className).toBe('refused');
+    expect(page.val(page.cell('rankByTranscend', '9'))).toBe('B');
+    expect(page.all('#c-panel [data-err="tiers"]')[0].textContent).toBe(
+      '6★ · Rang : le disque porte « B »',
+    );
+  });
+
+  it('`stale` : le disque avait changé sous un champ — la fiche montre le disque, le refus dessous', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      saved: (_, disk) => {
+        disk[AER] = { ...disk[AER], skillPriority: { first: 2, second: 2, ultimate: 2 } };
+        return {
+          ok: false,
+          log: ['REFUSÉ'],
+          written: false,
+          stale: true,
+          refused: [{ field: 'skillPriority', reason: 'le disque a changé depuis le chargement' }],
+        };
+      },
+    });
+    page.type(page.prio('first'), '1');
+    await page.save();
+
+    expect(page.prio('first').value).toBe('2');
+    expect(page.prio('first').classList.contains('dirty')).toBe(false);
+    expect(page.prio('first').classList.contains('refused')).toBe(true);
+    expect(page.all('#c-panel [data-err="skillPriority"]')[0].textContent).toBe(
+      'le disque a changé depuis le chargement',
+    );
+    expect(page.count()).toBe('1 refus');
+    expect(page.el('c-save').disabled).toBe(true);
+  });
+
+  it('un champ hors rangs refusé sans que le disque ait bougé garde sa saisie', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [{ field: 'skillPriority', reason: 'refus du store' }],
+      }),
+    });
+    page.type(page.prio('first'), '1');
+    await page.save();
+    expect(page.prio('first').value).toBe('1');
+    expect(page.prio('first').classList.contains('dirty')).toBe(true);
+    expect(page.prio('first').classList.contains('refused')).toBe(true);
+    expect(page.count()).toBe('1 changement1 refus');
+  });
+
+  it('« Annuler » relit le disque : la saisie et les paliers ajoutés s’en vont', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.pick(page.cell('rank'), 'S');
+    page.type(page.prio('first'), '1');
+    page.all('#c-tiers [data-act="add-step"]')[0].click();
+    const before = page.states();
+    page.el('c-reset').click();
+    await page.settle();
+    await page.settle();
+
+    expect(page.states()).toBe(before + 1);
+    expect(page.val(page.cell('rank'))).toBe('A');
+    expect(page.prio('first').value).toBe('3');
+    expect(page.tiers()).toEqual([]);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.posted()).toEqual([]);
+  });
+
+  it('`dirty` et `canLeave` : des changements en attente retiennent l’onglet, sur confirmation', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    const leave = () => page.all('#tabs [data-tab="effects"]')[0].click();
+    const unload = () => {
+      const event = new page.window.Event('beforeunload', { cancelable: true });
+      (page.window.onbeforeunload as unknown as (e: unknown) => void)(event);
+      return event.defaultPrevented;
+    };
+    expect(unload()).toBe(false);
+
+    page.pick(page.cell('rank'), 'S');
+    expect(unload()).toBe(true);
+    page.confirm.mockReturnValueOnce(false);
+    leave();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      '1 changement non enregistré sur Aer. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    );
+
+    leave();
+    expect(page.el('tab-character').hidden).toBe(true);
+    // Revenu, la saisie est toujours là — et la fiche n'a pas été relue par-dessus.
+    const before = page.states();
+    page.all('#tabs [data-tab="character"]')[0].click();
+    await page.settle();
+    expect(page.states()).toBe(before);
+    expect(page.cell('rank').value).toBe('S');
+    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
+  });
+
+  it('revenir sur l’onglet sans rien en attente relit la fiche : un rang a pu changer dans Rangs', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    expect(page.confirm).not.toHaveBeenCalled();
+    page.disk.curated[AER] = { ...page.disk.curated[AER], rank: 'E' };
+    page.all('#tabs [data-tab="character"]')[0].click();
+    await page.settle();
+    await page.settle();
+    expect(page.val(page.cell('rank'))).toBe('E');
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('changer de perso avec des changements en attente : sur confirmation, sinon le picker reste', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.pick(page.cell('rank'), 'S');
+    page.el('c-pick').click();
+    const other = () => page.all('#hp-results .hp-tile').find((t) => t.dataset.id === AIS)!;
+
+    page.confirm.mockReturnValueOnce(false);
+    other().click();
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      'Abandonner 1 changement non enregistré sur Aer ?',
+    );
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+
+    other().click();
+    await page.settle();
+    await page.settle();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    expect(page.count()).toBe('aucune modification');
+    expect(page.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    // Le même perso recliqué : le picker se ferme, rien n'est relu.
+    const before = page.states();
+    page.el('c-pick').click();
+    other().click();
+    await page.settle();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.states()).toBe(before);
+  });
+
+  it('« ajouter dans Vidéos » ouvre l’onglet Vidéos, sur ce perso si sa liste le propose', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    // L'onglet Vidéos n'est pas chargé ici : sa liste de cibles est posée à la main.
+    page.el('v-target').innerHTML =
+      `<option value="character:1">Autre</option><option value="character:${AER}">Aer</option>`;
+    const link = page.all('#c-panel [data-act="videos"]')[0];
+    expect(link.textContent).toBe('ajouter dans Vidéos');
+    link.click();
+    expect(page.el('tab-videos').hidden).toBe(false);
+    expect(page.el('tab-character').hidden).toBe(true);
+    expect(page.el('v-target').value).toBe(`character:${AER}`);
   });
 });
 

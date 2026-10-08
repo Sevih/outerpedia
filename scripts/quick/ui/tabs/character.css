@@ -1,0 +1,317 @@
+/* Onglet « Fiche perso » : le perso choisi, la savebar, les sous-onglets et le
+   sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos). Le
+   reste — carte, `.form`, `.savebar`, `.btn`, `.badge`, `.tab` — vient de
+   `quick.css` ; le picker de héros, de `hero-picker.css`. Les ids `c-` voisinent
+   avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. */
+
+/* ---------------------------------------------------------------- le perso
+   L'en-tête de Gear reco (`.g-char`), aux mêmes mesures. */
+#tab-character .c-char {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+}
+#tab-character .c-who {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+/* Le portrait du site est en hauteur : cadré sur le visage. */
+#tab-character .c-face {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 12px;
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  object-fit: cover;
+  object-position: top;
+}
+#tab-character .c-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-character .c-id strong {
+  font-size: 16px;
+}
+#tab-character .c-traits {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-character .c-trait {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: capitalize;
+}
+#tab-character .c-trait img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+#tab-character .c-stars {
+  display: inline-flex;
+  align-items: center;
+}
+#tab-character .c-stars img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+#tab-character #c-pick {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- savebar */
+#tab-character .savebar[hidden] {
+  display: none;
+}
+#tab-character #c-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+/* `.savebar span` pousse à gauche : ici les badges se suivent. */
+#tab-character #c-count span {
+  margin-right: 0;
+}
+#tab-character .c-msg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------- les sous-onglets
+   La rangée des onglets de builds de Gear reco (`.g-tabs`) : le `.tab` des
+   sections de la coquille, en 32 px. Un sous-onglet pas encore porté est
+   éteint. Le point : accent, des changements en attente ; rouge, un refus. */
+#tab-character .c-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line-subtle);
+  overflow-x: auto;
+}
+#tab-character .c-tabs[hidden] {
+  display: none;
+}
+#tab-character .c-tabs .tab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+#tab-character .c-tabs .tab:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+#tab-character .c-tabs .tab:disabled:hover {
+  color: var(--content-muted);
+}
+/* La rangée défile : l'anneau de focus reste dans l'onglet. */
+#tab-character .c-tabs .tab:focus-visible {
+  outline-offset: -2px;
+}
+#tab-character .c-tabs .dot.edit {
+  background: var(--accent);
+}
+#tab-character #c-panel:empty {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- « Fiche »
+   Deux colonnes de cartes, une seule sous 1000 px ; les vidéos dessous, sur
+   toute la largeur. */
+#tab-character .c-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+#tab-character .c-wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 1000px) {
+  #tab-character .c-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-character .c-card .card-head {
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-character .c-card.ko {
+  border-color: var(--danger);
+}
+#tab-character .c-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 18px;
+}
+#tab-character .c-body h3 {
+  margin: 6px 0 0;
+  color: var(--content-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#tab-character .c-body h3:first-child {
+  margin-top: 0;
+}
+/* Le refus d'un champ, sous lui ; vide, la ligne ne prend pas de place. */
+#tab-character .c-err {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+#tab-character .c-err:empty {
+  display: none;
+}
+#tab-character .c-note {
+  align-self: center;
+}
+
+/* Une cellule de rang ou de rôle, celle de l'onglet « Rangs » (`.cell`) : le
+   `select` de la charte, l'icône du rang posée DANS son cadre — le clic la
+   traverse —, et le point d'une cellule modifiée. */
+#tab-character .c-cell {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+#tab-character .c-cell select {
+  min-width: 96px;
+}
+#tab-character .c-cell.rk select {
+  min-width: 76px;
+  padding-left: 36px;
+  font-weight: 600;
+}
+#tab-character .c-rkico {
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  pointer-events: none;
+}
+/* Sans rang (ou valeur hors échelle) : pas d'icône, un cadre en pointillés. */
+#tab-character .c-rkico[hidden] + select {
+  padding-left: 12px;
+  border-style: dashed;
+  color: var(--placeholder);
+}
+#tab-character .c-cell option {
+  color: var(--content);
+  font-weight: 400;
+}
+/* Modifié : bord et fond accent (15 %), plus un point ; refusé : danger. */
+#tab-character .c-cell select.dirty,
+#tab-character input.dirty {
+  border-style: solid;
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 15%, var(--surface-base));
+  color: var(--content);
+}
+#tab-character .c-cell select.refused,
+#tab-character input.refused {
+  border-style: solid;
+  border-color: var(--danger);
+  background-color: color-mix(in srgb, var(--danger) 12%, var(--surface-base));
+  color: var(--content);
+}
+#tab-character .c-pt {
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--surface-raised);
+}
+#tab-character select.dirty + .c-pt {
+  display: block;
+}
+
+/* Les paliers : transcendance · rang · rôle · ✕. La table a la largeur de ce
+   qu'elle contient ; la cellule du ✕ n'est pas une `.actions` (une rangée
+   flex décalerait son filet). */
+#tab-character #c-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#tab-character .c-body p {
+  margin: 0;
+}
+#tab-character .c-tiers {
+  width: auto;
+  align-self: flex-start;
+}
+#tab-character .c-tiers th,
+#tab-character .c-tiers td {
+  padding: 6px 16px 6px 0;
+}
+#tab-character .c-tiers th:last-child,
+#tab-character .c-tiers td:last-child {
+  padding-right: 0;
+}
+#tab-character .c-step {
+  min-width: 78px;
+  font-weight: 600;
+}
+#tab-character .c-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+
+/* Les tags : les humains en cases, puis ceux que le jeu donne, en lecture. */
+#tab-character .c-tags,
+#tab-character .c-derived {
+  display: flex;
+  align-items: center;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+}
+#tab-character .c-derived {
+  gap: 8px;
+}
+
+/* Les vidéos, en lecture : une ligne par vidéo, son titre puis auteur et date. */
+#tab-character .c-link {
+  margin-left: auto;
+}
+#tab-character .c-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tab-character .c-videos li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+}
+#tab-character .c-vt {
+  font-size: 13.5px;
+}
