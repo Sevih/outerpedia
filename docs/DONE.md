@@ -5,6 +5,16 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-08
+
+- **Gear reco de quick validé à l'écran par Sevih** (08/10) : la série du
+  07/10 (B31, C7, C8, C9, A29, B32 — pickers multi-choix, tuiles
+  « comme /equipment », aperçu rendu avec barre de substats, builds en
+  onglets) est jouée sur le vrai quick et jugée bonne ; la CI de
+  `434c6da3` (premier push de la série) est verte. Les lignes de contrôle
+  écran sortent du TODO ; restent la question de la confirmation à
+  « Supprimer » et « Traduire » forcé après un enregistrement.
+
 ## 2026-10-07
 
 - **Relecture B32** (Fable, 07/10) : `f9cc597d` validé — plus aucun lot

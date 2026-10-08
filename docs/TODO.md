@@ -31,48 +31,15 @@
 
 ## 🧰 Outil quick
 
-- [ ] **Gear reco, retour de Sevih du 07/10** : les deux lots sont FAITS
-      (B31, C7), reste à les jouer à l'écran. B31 (une note en anglais,
-      « Traduire ») avec les vraies clés — relancer quick, « Traduire » sur
-      un perso à note en / es / fr (jp, kr, zh arrivent, fr et es ne bougent
-      pas, tags intacts), retoucher l'anglais → badge « à retraduire »,
-      « Enregistrer » → un commit `chore(gear-reco): <perso>` qui ne porte
-      que les notes. C7 (pickers) : les bascules de stats à la souris et au
-      clavier (une stat composée, la dernière retirée → « stat principale
-      non choisie », la stat hors pool qui se retire), un mix de sets (Speed
-      principal, Penetration et Attack secondaires) puis « Enregistrer » →
-      le commit cite `$p2s2` et `$a2s2`, et `Tab` / `Entrée` /
-      `Ctrl + Entrée` / `Échap` dans les quatre pickers.
-- [ ] **Gear reco, second retour de Sevih du 07/10** (après usage de C7) :
-      C8 est FAIT (pickers d'armes et d'amulettes en multi-choix, tuiles
-      « comme /equipment », sets en rangées de tuiles, set sans bonus 2p grisé
-      en secondaire) — reste à le jouer à l'écran : cocher / décocher au
-      clavier, Entrée dans la recherche des quatre pickers, un mix de sets
-      puis « Enregistrer » (le commit cite les `$slug` des badges). C9 est
-      FAIT aussi (bloc « Aperçu » sous chaque build, rendu comme la fiche
-      perso par `previewGearReco`, balise inconnue en rouge dans la note) —
-      reste à le jouer à l'écran (A29 est FAIT : la priorité de substats de
-      l'aperçu est en barre à six segments avec icônes, comme la fiche et
-      l'admin) : taper une note avec `{B/…}`, `{I-W/…}` et
-      une balise fausse, changer la langue de l'aperçu dans la barre, replier
-      un bloc, et comparer un build à sa fiche sur le site, barre des
-      substats comprise.
 - [ ] **Gear reco, « Traduire » après un enregistrement** (même limite que
       l'admin, corrigée le 07/10 par « Retranslate all ») : `noteAt` est l'EN
       au chargement, donc une note corrigée en anglais puis ENREGISTRÉE ne
       repart plus au traducteur (seules les langues manquantes). Ajouter le
-      geste forcé (tout retraduire) dans `tabs/gear.js` — C8 et C9, qui
-      tenaient le fichier, sont faits.
-- [ ] **Gear reco, troisième retour de Sevih du 07/10** : B32 est FAIT (les
-      builds d'un perso en onglets, un seul visible à la fois, point d'état
-      sur les onglets cachés, hash `#gear/<id>/build/<n>`) — reste à le jouer
-      à l'écran : cliquer les onglets, ← → Début Fin au clavier (l'anneau de
-      focus), renommer un build puis en montrer un autre (point bleu, compteur
-      inchangé), retirer une stat (point rouge), « ＋ build », dupliquer,
-      monter / descendre, supprimer, « Annuler », puis un « Enregistrer » réel
-      depuis le 2e onglet (on y reste). À trancher : « Supprimer » n'a jamais
-      demandé de confirmation, et la carte supprimée n'est plus sous les yeux
-      des autres — en ajouter une ?
+      geste forcé (tout retraduire) dans `tabs/gear.js` (lot A, fichier libre).
+- [ ] **Gear reco, à trancher (B32)** : « Supprimer » un build n'a jamais
+      demandé de confirmation, et la carte supprimée n'est plus sous les
+      yeux des autres depuis les onglets (« Annuler » la rend) — en ajouter
+      une ? Lot A si oui.
 - [ ] **4-comics, premier envoi réel multi-langues (lot B30)** : glisser d'un
       coup les trois fichiers d'une nouvelle BD (`…_EN`, `…_JP`, `…_KR`),
       vérifier la ligne à trois cases, publier — attendu : trois « déposé »,
@@ -85,8 +52,7 @@
       anneau de focus, tiroir du journal pendant un vrai enregistrement,
       résultats de Récompense avec icônes, hash `#gear/<id>`, fenêtre sous
       1060 px ; Rangs : cellule modifiée, refus réel, dépliage, clavier dans
-      les menus de rang ; Gear reco : erreur à la pièce, preset libéré puis
-      repris, picker au clavier ; Discord AVEC le jeton : serveurs, salons,
+      les menus de rang ; Discord AVEC le jeton : serveurs, salons,
       emojis de serveur, un envoi d'essai sur le serveur perso, embed,
       reprise d'envoi, presse-papiers (listes détaillées dans les entrées
       DONE des lots F16, B28, B29, C6).
