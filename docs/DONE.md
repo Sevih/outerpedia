@@ -7,6 +7,16 @@
 
 ## 2026-10-08
 
+- **`pnpm commit` depuis l'admin : un test de quick cassait sous
+  `NODE_ENV=development`** (08/10, Fable, hors lot) : le test « coupé par la
+  garde IS_DEV » de `scripts/quick/actions.test.ts` comptait sur le
+  `NODE_ENV=test` posé par vitest ; lancé par l'admin (`next dev`), le
+  sous-processus hérite de `development`, vitest le garde (`??=`), la garde
+  passe à vrai et l'aperçu rend un build au lieu de l'erreur. La garde est
+  désormais FORCÉE fausse par `vi.mock` dans ce fichier (symétrique de
+  `gear-preview.test.ts` qui la force vraie). Suite entière rejouée sous
+  `NODE_ENV=development` : 198 fichiers, 2 821 tests verts — aucun autre test
+  ne dépendait de l'ambiant.
 - **Gear reco de quick validé à l'écran par Sevih** (08/10) : la série du
   07/10 (B31, C7, C8, C9, A29, B32 — pickers multi-choix, tuiles
   « comme /equipment », aperçu rendu avec barre de substats, builds en

@@ -29,7 +29,9 @@
  * Et contrat de l'APERÇU du même onglet : les refus de `previewGearBuilds` et
  * `previewHtml` (`ui/gear-view.mjs`), qui fait d'un build résolu ce que la fiche
  * perso montrera. La résolution elle-même est dans `gear-preview.test.ts` : elle
- * exige la garde `IS_DEV` de l'admin, fausse ici.
+ * exige la garde `IS_DEV` de l'admin, FORCÉE fausse ici (le `NODE_ENV` ambiant
+ * ne compte pas : `pnpm commit` lancé depuis l'admin hérite de `development`,
+ * que vitest garde).
  *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
@@ -38,7 +40,7 @@
 import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CharacterCurated, GearBuild } from '@contracts';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
@@ -76,6 +78,9 @@ import {
   shownPieces,
   substatBarHtml,
 } from './ui/gear-view.mjs';
+
+/** La garde de l'admin, fausse quel que soit `NODE_ENV` (voir l'en-tête). */
+vi.mock('@/lib/admin/guard', () => ({ IS_DEV: false }));
 
 const DIANNE: CharacterCurated = {
   rank: 'S',
@@ -596,7 +601,7 @@ describe('previewGearBuilds — les refus de l’aperçu', () => {
     });
   });
 
-  it('coupé par la garde IS_DEV (ici, sous vitest) : une erreur, pas zéro build en silence', async () => {
+  it('coupé par la garde IS_DEV (forcée fausse ici) : une erreur, pas zéro build en silence', async () => {
     expect(await previewGearBuilds([{ name: 'x' }], 'en')).toEqual({
       error: expect.stringContaining('IS_DEV'),
     });
