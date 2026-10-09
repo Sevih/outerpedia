@@ -284,22 +284,21 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   emit('equipment.json', equipment);
 
   // ---- enhance : constantes + courbes d'XP cumulée par (slot, grade, star) ----
-  // Les trois scalaires du contrat sont LUS des tables (`singleValue` jette si
-  // un patch les fait varier par slot ou par palier : le contrat n'en a qu'un).
+  // `enhanceFactor` et `tierFactor` sont LUS des tables, comme le client
+  // (CItem.GetEnchantFactor somme UpgradeFactorforOP des niveaux 1..L de son
+  // slot ; GetBreakLimitFactor somme FactorArr de son (étoile, grade)). Le
+  // contrat n'en porte qu'un scalaire : `singleValue` jette si un patch les
+  // fait varier. `maxEnhanceLevel` est EN DUR dans le client
+  // (MAIN_DEFINE.MAX_ITEM_ENCHANT_LEVEL = 10, CItem.EnchantEnable) : pas un
+  // doublon de table, il reste en dur ici aussi.
   const enchantRows = loadTable('ItemEnchantTemplet');
-  const gearEnchantRows = enchantRows.filter((r) => GEAR_SUBTYPES.has(r.ItemSubType ?? ''));
   const enhanceFactor = singleValue(
-    gearEnchantRows.map((r) => Number(r.UpgradeFactorforOP)),
-    'ItemEnchantTemplet.UpgradeFactorforOP (gear)',
+    enchantRows
+      .filter((r) => GEAR_SUBTYPES.has(r.ItemSubType ?? '') && Number(r.EnchantLevel) > 0)
+      .map((r) => Number(r.UpgradeFactorforOP)),
+    'ItemEnchantTemplet.UpgradeFactorforOP (gear, niveaux 1+)',
   );
-  const maxEnhanceLevel = singleValue(
-    [...GEAR_SUBTYPES].map((st) =>
-      Math.max(
-        ...gearEnchantRows.filter((r) => r.ItemSubType === st).map((r) => Number(r.EnchantLevel)),
-      ),
-    ),
-    'ItemEnchantTemplet.EnchantLevel max (gear)',
-  );
+  const maxEnhanceLevel = 10;
   const tierFactor = singleValue(
     loadTable('ItemBreakLimitTemplet').flatMap((r) =>
       [r.Factor1, r.Factor2, r.Factor3, r.Factor4].map(Number),
@@ -629,7 +628,8 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
     { st: 'ST_DMG_BOOST', ap: 'OAT_ADD', type: 'DMG_INCREASE' },
     { st: 'ST_DMG_REDUCE_RATE', ap: 'OAT_ADD', type: 'DMG_REDUCE' },
   ];
-  // Base des ids et niveau max LUS des gemmes d'ItemTemplet (15001, 6★ en 1.11).
+  // Base des ids et niveau max LUS des gemmes d'ItemTemplet (15001, 6★ en 1.11) ;
+  // le client reconnaît une gemme à `ItemType == IT_GEM` et son niveau à `BasicStar`.
   const gemItems = itemTemplet.filter((r) => r.ItemType === 'IT_GEM');
   const GEMS_BASE_ID = Math.min(...gemItems.map((r) => Number(r.ID)));
   const GEM_MAX_LEVEL = Math.max(...gemItems.map((r) => Number(r.BasicStar)));
@@ -658,11 +658,9 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   for (const r of expRowsRaw) expCurveByLevel[r.lv] = r.exp;
   emit('exp-character.json', expCurveByLevel);
 
-  // Plafond de confiance LU de TrustRewardTemplet (100 en 1.11).
-  const maxTrust = Math.max(...loadTable('TrustRewardTemplet').map((r) => Number(r.TrustLevel)));
-  const trustCurveByLevel = Array<number>(maxTrust + 1).fill(0);
-  for (const r of expRowsRaw)
-    if (r.lv >= 1 && r.lv <= maxTrust) trustCurveByLevel[r.lv] = r.trustExp;
+  // Plafond de confiance EN DUR dans le client (MAIN_DEFINE.MAX_TRUST_LEVEL = 100).
+  const trustCurveByLevel = Array<number>(101).fill(0);
+  for (const r of expRowsRaw) if (r.lv >= 1 && r.lv <= 100) trustCurveByLevel[r.lv] = r.trustExp;
   emit('trust-character.json', trustCurveByLevel);
 
   // ---- trust-buffs ----
