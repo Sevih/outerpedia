@@ -217,7 +217,7 @@
   border-color: color-mix(in srgb, var(--accent) 50%, transparent);
   background: var(--surface-base);
 }
-/* La pastille d'une tuile : un compte (atténué à zéro), ou ✓ en multi-choix. */
+/* La pastille d'une tuile cochée, en multi-choix : ✓. */
 .hp-cnt {
   position: absolute;
   right: -6px;
@@ -231,11 +231,6 @@
   color: var(--accent-fg);
   font-size: 10.5px;
   font-weight: 700;
-}
-.hp-cnt.zero {
-  border: 1px solid var(--line-subtle);
-  background: var(--surface-overlay);
-  color: var(--content-muted);
 }
 .hp-n {
   max-width: 76px;

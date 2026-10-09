@@ -15,8 +15,7 @@ import { gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
-// Les sous-onglets, dans l'ordre de la fiche du site. `soon` : pas encore
-// porté — l'onglet est là, éteint, et son `title` dit quel lot l'apporte.
+// Les sous-onglets, dans l'ordre de la fiche du site.
 const SUBS = [
   { id: 'fiche', label: 'Fiche' },
   { id: 'pros-cons', label: 'Pros / Cons' },
@@ -25,8 +24,8 @@ const SUBS = [
   { id: 'ee', label: 'EE' },
   { id: 'gear', label: 'Gear reco' },
 ];
-/** Pourquoi un sous-onglet est éteint — son `title` : pas encore porté, ou un perso sans EE. */
-const subOff = (s) => s.soon ?? (s.id === 'ee' && sheet && !sheet.ee ? 'pas d’EE' : '');
+/** Pourquoi un sous-onglet est éteint — son `title` : un perso sans EE. */
+const subOff = (s) => (s.id === 'ee' && sheet && !sheet.ee ? 'pas d’EE' : '');
 const subsOn = () => SUBS.filter((s) => !subOff(s));
 
 // Les champs de la fiche. Les rangs sont des CELLULES, celles de l'onglet

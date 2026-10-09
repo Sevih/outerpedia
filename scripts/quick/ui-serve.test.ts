@@ -1941,7 +1941,7 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.onPick.mock.calls).toEqual([[['2']]]);
   });
 
-  it('ce que Gear reco y ajoute : un groupe segmenté, un compte par tuile, son badge, son `title`', async () => {
+  it('ce qu’un appelant y ajoute : un groupe segmenté, son badge, le `title` de ses tuiles', async () => {
     const p = await picker();
     p.open({
       tally: () => '3 persos · 2 avec recos · 1 sans',
@@ -1955,15 +1955,9 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
         test: (c: Hero, has: string) =>
           has === 'with' ? Boolean(c.builds) : has === 'without' ? !c.builds : true,
       },
-      count: (c: Hero) => c.builds,
       hint: (c: Hero) => `${c.name} — ${c.builds} builds`,
     });
     expect(p.el('hp-tally').textContent).toBe('3 persos · 2 avec recos · 1 sans');
-    expect(p.all('#hp-results .hp-cnt').map((b) => [b.textContent, b.className])).toEqual([
-      ['3', 'hp-cnt'],
-      ['0', 'hp-cnt zero'],
-      ['1', 'hp-cnt'],
-    ]);
     expect(p.tile('1').title).toBe('Aer — 3 builds');
     const seg = () => p.all('#hp-filters .hp-seg button');
     expect(seg().map((b) => [b.textContent, b.getAttribute('aria-pressed')])).toEqual([
@@ -2436,12 +2430,6 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         if (!row) return answer({ error: `perso inconnu : ${id}` }, 404);
         const builds = disk.gear[id] ?? [];
         return answer({
-          roster: ROSTER.map((c) => ({
-            id: c.id,
-            name: c.name,
-            class: c.class,
-            builds: (disk.gear[c.id] ?? []).length,
-          })),
           presets: GEAR_PRESETS,
           options: GEAR_OPTIONS,
           langs: { default: 'en', main: ['en', 'fr', 'es'], extra: ['jp', 'kr', 'zh'] },
@@ -7183,6 +7171,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
           tone: string;
           inQuick: boolean;
           tab: string | null;
+          sheet?: string;
         }[]
       | null;
     git: {
@@ -7476,6 +7465,25 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       ['warn', 'OPLIVE09expire dans 3 j', false],
     ]);
     expect(page.text(page.el('h-coupons-count'))).toBe('8 actifs');
+  });
+
+  it('les tags morts d’un perso : un lien vers sa fiche dans quick, pas vers l’admin', async () => {
+    const [tags, ...rest] = busy().inbox ?? [];
+    const page = await dashboard({
+      state: busy({ inbox: [{ ...tags, sheet: 'character/2000012/pros-cons' }, ...rest] }),
+    });
+    expect(page.rows('h-inbox')[0]).toEqual([
+      'danger',
+      'Dead inline tags2 tag(s) resolve to nothingfiche du perso ↗',
+      false,
+    ]);
+    // Un nouvel onglet de quick : la fiche lit ce hash à son chargement.
+    expect(
+      page.all('#h-inbox a').map((a) => [a.getAttribute('href'), a.getAttribute('target')]),
+    ).toEqual([
+      ['#character/2000012/pros-cons', '_blank'],
+      ['https://outerpedia.local/admin/extractor/characters', '_blank'],
+    ]);
   });
 
   it('rien à signaler : « Rien à faire. », et des pastilles vertes', async () => {

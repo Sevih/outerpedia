@@ -51,9 +51,8 @@
  * @property {HeroFilters} [filters] Où garder les filtres ; sans lui, ceux du module.
  * @property {() => string} [tally] Le badge de tête ; sans lui, le compte.
  * @property {{ label: string, options: readonly (readonly [string, string])[], test: (hero: any, value: string) => boolean }} [seg]
- *   Un groupe segmenté de plus dans la rangée de filtres (« Avec recos »).
- * @property {(hero: any) => number | undefined} [count] La pastille d'une tuile
- *   (son nombre de builds), atténuée à zéro.
+ *   Un groupe segmenté de plus dans la rangée de filtres (la nature d'un
+ *   effet : tous, buffs, debuffs).
  * @property {(hero: any) => string} [hint] Le `title` d'une tuile ; sans lui, le nom.
  * @property {(item: any) => string} [tile] Le contenu d'une tuile, dessiné par
  *   l'appelant (déjà échappé) ; sans lui, le visage du héros, son élément, son nom.
@@ -183,7 +182,6 @@ function tile(c) {
   if (!open) return '';
   const { opts, sel } = open;
   const on = opts.multi ? sel.includes(c.id) : c.id === opts.chosen;
-  const n = opts.count?.(c);
   const head = `<button class="hp-tile" type="button" data-id="${esc(c.id)}" title="${esc(opts.hint?.(c) ?? c.name)}"${
     opts.multi ? ` aria-pressed="${on}"` : on ? ' aria-current="true"' : ''
   }>`;
@@ -192,13 +190,7 @@ function tile(c) {
     `characters/faceicon/FI_${esc(c.id)}`,
   )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
     c.element ? icon('element', c.element, 'hp-el') : ''
-  }${
-    opts.multi && on
-      ? '<span class="hp-cnt">✓</span>'
-      : n === undefined
-        ? ''
-        : `<span class="hp-cnt${n ? '' : ' zero'}">${n}</span>`
-  }</span><span class="hp-n">${esc(c.name)}</span></button>`;
+  }${opts.multi && on ? '<span class="hp-cnt">✓</span>' : ''}</span><span class="hp-n">${esc(c.name)}</span></button>`;
 }
 
 /** Le pied d'un multi-choix : les persos cochés, puis « Annuler » et « Valider ». */

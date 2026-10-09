@@ -27,7 +27,9 @@
 - [ ] **Presets en double** (`$mrs` = `$elemcritAP`, `a2p2` = `p2a2` dans
       `gear-presets.json`) : `collapseBuild` rend le premier trouvé, l'admin
       change donc le slug au save (quick, lui, garde celui du disque). À
-      fusionner ou à distinguer dans l'admin des presets.
+      fusionner ou à distinguer à la main dans le fichier (ou par
+      `/admin/gear-presets`, sortie du menu le 09/10 mais joignable par son
+      URL).
 
 ## 🧰 Outil quick
 
@@ -43,7 +45,9 @@
       « Fiche perso », lots C11, B42, B39 et B40 — la coquille, le picker de
       héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies, Skills et
       Gear reco, qui a quitté les Données), EE (sous-onglet « EE » de la
-      « Fiche perso », lot B43).
+      « Fiche perso », lot B43). Clos sans portage (lot A34) : Gear presets
+      (non porté, le fichier s'édite à la main) et Tag control (le contrôle
+      est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
 - [ ] **« Fiche perso » › EE — contrôles à l'écran (lot B43)** : le banc ne

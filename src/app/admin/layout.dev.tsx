@@ -94,13 +94,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         })),
       ],
     },
-    {
-      title: 'Misc',
-      items: [
-        { label: 'Tag control', href: '/admin/tags' },
-        { label: 'Gear presets', href: '/admin/gear-presets' },
-      ],
-    },
+    // Groupe « Misc » : vide depuis le 09/10, il sort du menu avec ses deux
+    // liens. Tag control : pas porté dans quick, le contrôle EST le test
+    // (`tag-control.test.ts`, bloquant dans `pnpm test` donc dans
+    // `pnpm commit`). Gear presets : non porté (décision Sevih du 09/10),
+    // `data/curated/gear-presets.json` s'édite à la main. Les deux pages
+    // (`/admin/tags`, `/admin/gear-presets`) restent joignables par leur URL
+    // jusqu'au retrait de l'admin, et l'item « Dead inline tags » de l'inbox
+    // renvoie toujours à la première.
   ];
 
   return (

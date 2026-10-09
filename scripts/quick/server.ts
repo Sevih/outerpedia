@@ -639,14 +639,14 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/gear-reco/state') {
-    // Lu du disque à chaque appel, comme les rangs : roster, presets, listes
-    // des sélecteurs et icônes de stat (`statIcons`, pour l'aperçu), plus les
-    // builds du perso de `?id=` quand il est donné.
+    // Lu du disque à chaque appel, comme les rangs : presets, listes des
+    // sélecteurs et icônes de stat (`statIcons`, pour l'aperçu), plus les
+    // builds du perso de `?id=` quand il est donné — un perso du roster, celui
+    // de la fiche.
     const id = url.searchParams.get('id') ?? undefined;
-    const state = gearRecoState(id);
-    if (id !== undefined && !state.roster.some((c) => c.id === id))
+    if (id !== undefined && !characterRoster().roster.some((c) => c.id === id))
       return json(res, { error: `perso inconnu : ${id}` }, 404);
-    json(res, state);
+    json(res, gearRecoState(id));
     return;
   }
 

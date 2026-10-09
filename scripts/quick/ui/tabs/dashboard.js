@@ -33,7 +33,12 @@ const face = (id) =>
   `<img class="face" src="${esc(state.imgBase)}/images/characters/faceicon/FI_${esc(id)}.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />`;
 
 // ------------------------------------------------------ « À faire »
-/** L'inbox de l'admin, dans son ordre : la plus urgente d'abord. */
+/**
+ * L'inbox de l'admin, dans son ordre : la plus urgente d'abord. Un item que
+ * quick sait situer (`sheet` : les tags morts d'un perso) ouvre sa fiche dans
+ * un nouvel onglet — elle ne lit `#character/<id>/<sous-onglet>` qu'à son
+ * chargement, et la page d'ici garde ce qu'elle a en attente.
+ */
 function renderInbox(inbox, error) {
   $('h-inbox-count').innerHTML = inbox?.length
     ? `<span class="badge ${inbox.some((i) => i.tone === 'danger') ? 'ko' : 'warn'}">${inbox.length}</span>`
@@ -46,9 +51,11 @@ function renderInbox(inbox, error) {
             item.tone,
             label(item.label) +
               detail(item.detail) +
-              (item.inQuick
-                ? goButton(item.tab, 'Ouvrir')
-                : `<a class="h-out" href="${esc(item.href)}" target="_blank" rel="noopener">dans l’admin ↗</a>`),
+              (item.sheet
+                ? `<a class="h-out" href="#${esc(item.sheet)}" target="_blank" rel="noopener">fiche du perso ↗</a>`
+                : item.inQuick
+                  ? goButton(item.tab, 'Ouvrir')
+                  : `<a class="h-out" href="${esc(item.href)}" target="_blank" rel="noopener">dans l’admin ↗</a>`),
           ),
         ),
       )

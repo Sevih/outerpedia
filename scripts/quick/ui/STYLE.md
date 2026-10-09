@@ -568,14 +568,14 @@ premier appel (classes `hp-`, `ui/hero-picker.css`), aux mesures du picker de
 pièces de Gear reco. Une section n'a donc rien à écrire dans son HTML.
 
 ```
-openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, count?, hint?, tile?, rows?, placeholder?, none? })
+openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, hint?, tile?, rows?, placeholder?, none? })
 .hp-modal (voile, fixe)  >  .hp-panel (720 px, 720 px de haut au plus)
   .hp-head     titre en capitales · badge « 129 persos » (multi : « 2 choisis sur 129 » ; `tally` le remplace) … ✕
   .hp-top      la recherche (36 px, « Chercher un perso… ») ; dessous .hp-filters :
                  pastilles d'élément puis de classe (.hp-tog 36 px, `aria-pressed` ; celles que le roster porte, dans l'ordre du site ; aucune enfoncée = toutes)
-                 `seg` : un groupe segmenté de plus, poussé à droite (c'était « Tous · Avec recos · Sans recos » de Gear reco ; sans appelant depuis B40, comme `count`, `tally` et `hint`)
+                 `seg` : un groupe segmenté de plus, poussé à droite (« Tous · Buffs · Debuffs » du picker d'effets de Skills, qui passe aussi `tally` et `hint`)
   .hp-body     .hp-tiles — une tuile par perso, dans l'ordre du roster : visage 64 px dans son anneau (.hp-ring, accent sur le choix), icône d'élément en bas à gauche, le nom dessous (11 px)
-                 `count` : une pastille en haut à droite (le nombre de builds, atténuée à zéro) ; en multi-choix, ✓ sur une tuile cochée
+                 en multi-choix, ✓ sur une tuile cochée : une pastille en haut à droite (.hp-cnt) ; `hint` : le `title` d'une tuile, son nom sinon
                .empty « Aucun perso ne correspond. »
   .hp-foot     en multi-choix seulement : les noms cochés, dans l'ordre des clics (« Aucun perso. ») … [Annuler] [Valider]
 autre chose que des héros (le picker d'effets de Skills) :

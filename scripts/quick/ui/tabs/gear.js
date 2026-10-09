@@ -17,7 +17,6 @@ import { itemName, itemTile, previewHtml, setGrid, setRow } from '../gear-view.m
 // ce slug, à l'identique. Deux presets peuvent avoir le même contenu —
 // renvoyer des pièces laisserait le store choisir lequel des deux écrire.
 let gear = {
-  roster: [],
   presets: { talismans: {}, sets: {}, substats: {} },
   options: { weapons: [], amulets: [], talismans: [], sets: [] },
   langs: { default: 'en', main: [], extra: [] },
@@ -1341,7 +1340,7 @@ function gPickSlot(b, slot, i) {
 const G_SEARCH = (size) =>
   `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>`;
 const G_HTML = `
-  <p class="hint">Les builds ont leur barre et leur commit à eux : « Enregistrer » de la fiche, au-dessus, ne les envoie pas. La note se saisit en anglais ; les presets se règlent dans l'admin.</p>
+  <p class="hint">Les builds ont leur barre et leur commit à eux : « Enregistrer » de la fiche, au-dessus, ne les envoie pas. La note se saisit en anglais ; les presets (<code>$slug</code>) se règlent dans <code>data/curated/gear-presets.json</code>.</p>
   <div class="savebar" id="g-bar" role="toolbar" aria-label="Enregistrement des builds" hidden>
     <span id="g-count"></span>
     <div class="g-pv-lang" id="g-pv-lang"></div>

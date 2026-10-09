@@ -7,6 +7,70 @@
 
 ## 2026-10-09
 
+- **quick : Gear presets non porté, Tag control = le test bloquant, restes
+  de B40 (lot A34, étapes 14 et 15 de la migration)** — trois ménages de
+  `docs/quick-migration.md`, décidés le 09/10. **Gear presets (14), NON
+  PORTÉ** : l'écran ne sert plus (Sevih : utile quand le site a été refait).
+  La page `/admin/gear-presets` et `GearPresetsEditor` ne bougent pas ; son
+  lien sort du menu ; l'aide de Gear reco dans quick (`tabs/gear.js`) dit
+  maintenant que les presets (`$slug`) se règlent dans
+  `data/curated/gear-presets.json`. **Tag control (15), FAIT autrement** :
+  l'agacement (« ça devrait être dans `pnpm commit`, bloquant ») était déjà
+  vrai, vérifié à la lecture, sans lancer `pnpm commit` —
+  `src/lib/admin/tag-control.test.ts` l. 15-20 : `collectTagOccurrences()`
+  filtré sur `!o.ok`, attendu `[]`, donc `pnpm test` échoue au premier tag
+  sans correspondance (l. 11-13 : le scan ne tourne pas à vide) ;
+  `scripts/commit.ts` l. 192-197 : la liste `controls`, dont
+  `{ label: 'test', check: 'pnpm test' }` (l. 196), jouée l. 198-221 avant
+  le bump, R2 et le commit — sans `fix`, un échec sort en `process.exit(1)`
+  (l. 218, « rien n'a été publié »). Seul `--skip-controls` (l. 189) le
+  contourne, à la main. Le lien sort du menu, la page reste. Les deux liens
+  partis, le groupe « Misc » de `src/app/admin/layout.dev.tsx` était vide :
+  il sort aussi, un commentaire à sa place. **L'item « tags » du tableau de
+  bord** renvoyait à `/admin/tags` (« dans l'admin ↗ ») : il ouvre
+  maintenant la fiche du perso dans quick quand TOUS les tags morts viennent
+  d'un même perso — `tagSourceSheet` (`actions.ts`) lit la provenance de
+  `collectTagOccurrences` (« curated pros-cons · Nom (id)… » → `pros-cons`,
+  « synergies · … » → `synergies`, « gear-reco.json.<id>[… » → `gear`),
+  `dashboardState` pose `sheet: 'character/<id>/<sous-onglet>'` sur l'item,
+  et `tabs/dashboard.js` en fait un lien « fiche du perso ↗ ». Sinon — un
+  guide, un preset, plusieurs persos, un perso hors roster — l'URL de l'admin
+  reste : seule cette page liste chaque tag. Les provenances ne sont lues
+  (`deadTagSources` de `DashboardDisk`) que si l'inbox annonce des tags
+  morts, zéro en temps normal. Le lien ouvre un NOUVEL onglet de quick : la
+  fiche ne lit `#character/<id>/<sous-onglet>` qu'à son chargement, et la
+  page d'où l'on part garde ce qu'elle a en attente. `tag-control.ts` et
+  `admin-inbox.ts` ne sont pas touchés : l'inbox de l'admin est la même.
+  **Restes de B40.** `hero-picker.mjs` : seul `count` (la pastille du nombre
+  de builds) n'avait plus d'appelant — retiré avec son docblock, sa règle
+  `.hp-cnt.zero`, son cas de test et sa ligne de `STYLE.md` ; `seg`, `tally`
+  et `hint` RESTENT, le picker d'effets de Skills (`pickFx` de
+  `tabs/character.js`) passe les trois, et `STYLE.md` qui les disait « sans
+  appelant » est corrigé. `gearRecoState` ne sert plus de `roster` : ni
+  `gear.js`, ni `shot.mjs`, ni un autre onglet ne le lisait ; son seul
+  lecteur était la route `GET /api/gear-reco/state` pour son 404 « perso
+  inconnu », qui le demande maintenant à `characterRoster()` — même liste,
+  même réponse. Les commentaires d'`actions.ts` disent « le sous-onglet Gear
+  reco de la fiche ». `character.js` : `soon` est retiré (plus aucun
+  sous-onglet ne le porte), `subOff` / `subsOn` sont GARDÉS — ils éteignent
+  l'EE d'un perso qui n'en a pas (B43). **Vérifié** : `pnpm typecheck` →
+  `tsc --noEmit -p scripts/tsconfig.json`, sans erreur ; `pnpm lint` →
+  `$ eslint`, sans sortie ; `pnpm test` → `Tests  3297 passed (3297)`, 205
+  fichiers ; `NODE_ENV=development pnpm exec vitest run scripts/quick` →
+  `Tests  795 passed (795)` (791 + 4 : le renvoi des tags par provenance,
+  les provenances non lues sans tag mort, le lien dans la page, et un
+  contrat qui passe les 23 922 provenances RÉELLES dans `tagSourceSheet` —
+  si `tag-control.ts` change son format, c'est là que ça casse). Aucun quick
+  lancé, rien d'enregistré ; visuel : la phrase d'aide et le menu de l'admin
+  sans « Misc », rien d'autre (aucun appelant ne passait `count`).
+  **Laissé** : le renvoi vers la fiche n'a pas été vu à l'écran (il faut un
+  tag mort, que le test refuse) ; le texte fautif n'y est pas désigné, c'est
+  son aperçu qui le montre ; deux persos fautifs à la fois renvoient à
+  l'admin plutôt qu'à deux liens. Vu hors périmètre, pas touché : l'en-tête
+  de `hero-picker.mjs` cite encore Gear reco parmi ceux qui y choisissent un
+  perso ; `tag-control.test.ts` et `admin-inbox.ts` renvoient à
+  `/admin/tags` pour le diagnostic, une page que l'étape 22 retirera.
+
 - **Relecture B43 (Fable) — EE dans la « Fiche perso », validé** : périmètre
   tenu (douze fichiers ; hors quick, le seul est le menu admin qui perd
   « EE »). `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;

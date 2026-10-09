@@ -119,6 +119,7 @@ import en from '@/i18n/locales/en';
 import fr from '@/i18n/locales/fr';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
+import { collectTagOccurrences } from '@/lib/admin/tag-control';
 import type { TablePage, TableSchema } from '@/lib/admin/gamedata-store';
 import { validateBanners, type Banner, type PromoCode } from '@/lib/data/promo-rules';
 import { LANGS } from '@/lib/i18n/config';
@@ -167,6 +168,7 @@ import {
   saveEffects,
   saveNames,
   tableUsage,
+  tagSourceSheet,
   translateNotes,
   type BannersDeps,
   type BannersDisk,
@@ -1887,7 +1889,6 @@ describe('recos du fichier — lues, jamais écrites', () => {
 
     expect(one.disk).toEqual(reco[id]);
     expect(one.builds).toEqual(reco[id].map((b) => expandBuild(b, presets)));
-    expect(one.roster.find((c) => c.id === id)?.builds).toBe(reco[id].length);
     expect(gearRecoState()).not.toHaveProperty('builds');
   });
 
@@ -2540,7 +2541,7 @@ describe('composeSetCombos — le mix du picker de sets', () => {
 
 describe('saveGearReco — écritures injectées', () => {
   const state = gearRecoState();
-  const who = state.roster[0];
+  const who = characterRoster().roster[0];
   // Un build valide tiré des listes réelles, pas d'un build du fichier.
   const valid: GearBuild = {
     name: 'Test',
@@ -3244,6 +3245,7 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     inbox: () => [],
     adminBase: () => 'https://outerpedia.local',
     quickTabs: {},
+    deadTagSources: () => [],
     gitState: () => ({ branch: 'main', ahead: 0, behind: 0 }),
     lastCommit: () => 'f1b28e5\tfeat(quick): tableau de bord\til y a 3 heures',
     porcelain: () => '',
@@ -3334,6 +3336,79 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       '/admin/tools/synergies': 'character',
     });
     expect(DASHBOARD_DISK.quickTabs).toBe(ADMIN_TO_QUICK);
+  });
+
+  it('inbox : les tags morts d’UN perso renvoient à sa fiche dans quick, les autres à l’admin', async () => {
+    const tags = item({ key: 'tags', href: '/admin/tags', tone: 'danger', rank: 0 });
+    const sheetOf = async (sources: string[]) => {
+      const { inbox } = await dashboardState(
+        disk({ inbox: () => [tags, item()], deadTagSources: () => sources }),
+      );
+      return inbox?.map((i) => i.sheet);
+    };
+    const PROS = 'curated pros-cons · Valentine (2000012).pros[1].en';
+    // Un perso, plusieurs textes : sa fiche, au sous-onglet du premier — et
+    // l'item d'à côté n'y gagne rien.
+    expect(await sheetOf([PROS, 'synergies · Valentine (2000012)[0]'])).toEqual([
+      'character/2000012/pros-cons',
+      undefined,
+    ]);
+    expect(await sheetOf(['gear-reco.json.2000008[0].note.en'])).toEqual([
+      'character/2000008/gear',
+      undefined,
+    ]);
+    // Deux persos, un guide, un preset : la page de l'admin, qui les liste tous.
+    for (const sources of [
+      [PROS, 'synergies · Marian (2000014)[0]'],
+      [PROS, 'guides · adventure/S1-9-5 · content.json.tips[0].en'],
+      ['gear-presets.json.substats.dps'],
+      [],
+    ])
+      expect(await sheetOf(sources)).toEqual([undefined, undefined]);
+    // L'adresse de l'admin reste dans l'item : `sheet` s'y ajoute.
+    const { inbox } = await dashboardState(
+      disk({ inbox: () => [tags], deadTagSources: () => [PROS] }),
+    );
+    expect(inbox).toEqual([
+      {
+        ...tags,
+        href: 'https://outerpedia.local/admin/tags',
+        inQuick: false,
+        tab: null,
+        sheet: 'character/2000012/pros-cons',
+      },
+    ]);
+  });
+
+  it('inbox : sans tag mort annoncé, les provenances ne sont pas lues', async () => {
+    const deadTagSources = vi.fn(() => []);
+    await dashboardState(disk({ inbox: () => [item()], deadTagSources }));
+    expect(deadTagSources).not.toHaveBeenCalled();
+  });
+
+  it('`tagSourceSheet` lit les provenances RÉELLES de `collectTagOccurrences`', () => {
+    // Le format de `source` est celui de `tag-control.ts` : s'il change, c'est
+    // ici que ça se voit. Chaque texte d'un perso mène à un perso du roster.
+    const ids = new Set(getCharacterListItems().map((c) => c.id));
+    const seen = new Set<string>();
+    for (const { source } of collectTagOccurrences()) {
+      const where = tagSourceSheet(source);
+      const kind = /^(curated pros-cons|synergies|gear-reco\.json)/.exec(source)?.[1];
+      if (!kind) {
+        expect(where, source).toBeNull();
+        continue;
+      }
+      expect(where && ids.has(where.id), source).toBe(true);
+      expect(where?.sub, source).toBe(
+        { 'curated pros-cons': 'pros-cons', synergies: 'synergies', 'gear-reco.json': 'gear' }[
+          kind
+        ],
+      );
+      seen.add(kind);
+    }
+    expect([...seen].sort()).toEqual(['curated pros-cons', 'gear-reco.json', 'synergies']);
+    // Un perso hors du roster n'a pas de nom dans sa provenance : pas de fiche.
+    expect(tagSourceSheet('curated pros-cons · 2999999.pros[0].en')).toBeNull();
   });
 
   it('`ADMIN_BASE` : le site de dev de Caddy d’office, `.env.local` le remplace', () => {

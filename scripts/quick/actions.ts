@@ -1015,6 +1015,33 @@ export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/tools/synergies': 'character',
 };
 
+/**
+ * Où un tag mort se corrige dans quick, d'après sa provenance (le `source` de
+ * `collectTagOccurrences`, `tag-control.ts`) : le sous-onglet de la « Fiche
+ * perso » qui porte le texte — pros / cons, synergies, note d'un build. `null`
+ * pour ce que quick n'édite pas : un guide, un preset, un perso hors du roster
+ * (sa provenance porte son id nu, sans nom).
+ */
+export function tagSourceSheet(source: string): { id: string; sub: string } | null {
+  const text = /^(curated pros-cons|synergies) · .* \((\d+)\)(?=[.[]|$)/.exec(source);
+  if (text) return { id: text[2], sub: text[1] === 'synergies' ? 'synergies' : 'pros-cons' };
+  const build = /^gear-reco\.json\.(\d+)\[/.exec(source);
+  return build ? { id: build[1], sub: 'gear' } : null;
+}
+
+/**
+ * La fiche où renvoyer l'item « tags » de l'inbox : `character/<id>/<sous-onglet>`
+ * quand TOUS les tags morts viennent d'un même perso (le sous-onglet du
+ * premier), `null` sinon — un guide, un preset ou plusieurs persos : seule la
+ * page `/admin/tags` les liste tous.
+ */
+function deadTagSheet(sources: readonly string[]): string | null {
+  const where = sources.map(tagSourceSheet);
+  const [first] = where;
+  if (!first || where.some((w) => w?.id !== first.id)) return null;
+  return `character/${first.id}/${first.sub}`;
+}
+
 /** Sous combien de jours un code promo actif est « à échéance ». */
 export const COUPON_EXPIRY_DAYS = 7;
 
@@ -1040,6 +1067,8 @@ export interface DashboardDisk {
   adminBase: () => string;
   /** `href` admin → section de quick (`ADMIN_TO_QUICK`). */
   quickTabs: Readonly<Record<string, string>>;
+  /** La provenance de chaque tag mort (`source`) ; lue seulement si l'inbox en annonce. */
+  deadTagSources: () => string[] | Promise<string[]>;
   gitState: () => GitState;
   /** `git log -1 --format=%h%x09%s%x09%cr`, brut ; vide sans commit. */
   lastCommit: () => string;
@@ -1070,6 +1099,11 @@ export const DASHBOARD_DISK: DashboardDisk = {
   inbox: async () => (await import('@/lib/admin/admin-inbox')).buildInbox(),
   adminBase: () => process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT,
   quickTabs: ADMIN_TO_QUICK,
+  deadTagSources: async () =>
+    (await import('@/lib/admin/tag-control'))
+      .collectTagOccurrences()
+      .filter((o) => !o.ok)
+      .map((o) => o.source),
   gitState: () => gitState(),
   lastCommit: () => {
     const log = git(['log', '-1', '--format=%h%x09%s%x09%cr']);
@@ -1152,7 +1186,9 @@ function hasProposal(disk: DashboardDisk): boolean {
  *
  *   - `inbox` : l'inbox de l'admin, TELLE QUELLE, chaque item avec son adresse
  *     complète dans l'admin (`href`) et, quand quick a déjà la section,
- *     `inQuick` et son `tab` ;
+ *     `inQuick` et son `tab` ; l'item des tags morts porte en plus `sheet`,
+ *     la fiche du perso dans quick, quand ils viennent tous de lui
+ *     (`deadTagSheet`) ;
  *   - `git` : `gitState` (le compte de « Pousser »), le dernier commit et le
  *     nombre de fichiers modifiés ou non suivis (`dirty`) ;
  *   - `game` : la version du site contre celle du client installé (`client` :
@@ -1196,9 +1232,19 @@ export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
 
   const inbox = await block('inbox', async () => {
     const base = disk.adminBase().replace(/\/+$/, '');
-    return (await disk.inbox()).map((item) => {
+    const items = await disk.inbox();
+    const sheet = items.some((i) => i.key === 'tags')
+      ? deadTagSheet(await disk.deadTagSources())
+      : null;
+    return items.map((item) => {
       const tab = disk.quickTabs[item.href] ?? null;
-      return { ...item, href: `${base}${item.href}`, inQuick: tab !== null, tab };
+      return {
+        ...item,
+        href: `${base}${item.href}`,
+        inQuick: tab !== null,
+        tab,
+        ...(item.key === 'tags' && sheet ? { sheet } : {}),
+      };
     });
   });
 
@@ -2984,12 +3030,12 @@ export async function saveNames(
 
 // ------------------------------------------------------------- gear reco -----
 
-/** Le seul fichier que l'onglet « Gear reco » écrit et committe. */
+/** Le seul fichier que le sous-onglet « Gear reco » de la fiche écrit et committe. */
 const GEAR_RECO_PATH = 'data/curated/gear-reco.json';
 
 /**
  * Les langues que portent presque toutes les notes du fichier, dans l'ordre où
- * l'onglet les range : l'anglais se saisit, les autres (celles-ci d'abord, puis
+ * le sous-onglet les range : l'anglais se saisit, les autres (celles-ci d'abord, puis
  * le reste des langues du site) se génèrent par « Traduire » et se relisent.
  */
 const NOTE_LANGS: readonly Lang[] = ['en', 'fr', 'es'];
@@ -3092,10 +3138,10 @@ function setTileFacts() {
 }
 
 /**
- * L'onglet « Gear reco » : le roster (qui a des recos), les presets en lecture
- * seule, les listes des sélecteurs (celles de l'admin, jointes à ce que leurs
- * tuiles montrent — `gearTileFacts`, `setTileFacts`) et, avec `id`, les builds
- * de ce perso lus du disque à l'instant.
+ * Le sous-onglet « Gear reco » de la fiche : les presets en lecture seule, les
+ * listes des sélecteurs (celles de l'admin, jointes à ce que leurs tuiles
+ * montrent — `gearTileFacts`, `setTileFacts`) et, avec `id`, les builds de ce
+ * perso lus du disque à l'instant. Pas de roster : la fiche fournit le perso.
  *
  * Les builds viennent DEUX fois : `builds` en pièces (presets dépliés, comme
  * l'admin les édite) et `disk` tels que le fichier les porte. La page a besoin
@@ -3128,14 +3174,6 @@ export function gearRecoState(id?: string) {
   const sets = setTileFacts();
   const disk = id === undefined ? undefined : (reco[id] ?? []);
   return {
-    roster: getCharacterListItems()
-      .map((c) => ({
-        id: c.id,
-        name: characterDisplayName(c),
-        class: c.class,
-        builds: reco[c.id]?.length ?? 0,
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name)),
     presets: { talismans: presets.talismans, sets: presets.sets, substats: presets.substats },
     options: {
       weapons: pieces(options.weapons, getWeaponFamilies()),
@@ -3328,7 +3366,7 @@ export async function saveGearReco(
 type GearPreview = Awaited<ReturnType<typeof previewGearReco>>;
 
 /**
- * L'aperçu de l'onglet Gear reco : les builds EN COURS d'édition, tels que
+ * L'aperçu du sous-onglet Gear reco de la fiche : les builds EN COURS d'édition, tels que
  * `gToBuild` les enverrait à l'enregistrement, résolus par `previewGearReco` —
  * l'aperçu de l'admin, donc le résolveur de la fiche perso, appelé tel quel
  * (`'use server'` n'est ici qu'une chaîne ; sa garde `IS_DEV` passe grâce à

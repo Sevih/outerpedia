@@ -147,7 +147,8 @@ après les Bannières (5), avant Events :
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
-Con ; 10 Effect fait, B41 ; 11 EE fait, B43) →
+Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 14 Gear presets non porté et
+15 Tag control fait autrement, A34) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -252,13 +253,28 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     `ItemCuratedEditor`, `ItemsBrowser`
     - Agacements :
 
-14. **Misc › Gear presets**
+14. **Misc › Gear presets** — NON PORTÉ, décision du 09/10 (lot A34) : la
+    raison est l'agacement lui-même, l'écran ne sert plus. La page
+    `/admin/gear-presets` et `GearPresetsEditor` restent tels quels jusqu'au
+    retrait de l'admin (étape 22), le lien est retiré du menu ;
+    `data/curated/gear-presets.json` s'édite à la main (ou par la page, par
+    son URL), et l'aide de Gear reco dans quick le dit. L'entrée reste pour
+    que la numérotation des suivantes ne bouge pas.
     `GearPresetsEditor` (318 l.)
     - Agacements : c'etait surtout utile quand j'ai refait le site mais maintenant pllus vraiment
 
-15. **Misc › Tag control**
+15. **Misc › Tag control** — FAIT autrement (lot A34) : le contrôle est le
+    test, bloquant dans `pnpm commit` ; lien retiré. `tag-control.test.ts`
+    fait échouer `pnpm test` dès qu'un tag inline n'a pas de correspondance,
+    et `pnpm commit` joue `pnpm test` avant tout effet de bord (`scripts/commit.ts`,
+    « contrôle : test »). La page `/admin/tags` reste, par son URL, pour le
+    diagnostic tag par tag ; l'inbox du tableau de bord y renvoie toujours,
+    sauf quand tous les tags morts viennent d'un même perso — elle ouvre alors
+    sa fiche dans quick, au sous-onglet qui porte le texte. L'entrée reste
+    pour que la numérotation des suivantes ne bouge pas.
     page `tags`
-    - Agacements : ça ça devrais plus etre dans le pnpm commit en bloquant (on refuse de livrer si des tag ne sont pas valide) que dans les outils d'admin
+    - Agacements : ça ça devrais plus etre dans le pnpm commit en bloquant (on refuse de livrer si des tag ne sont pas valide) que dans les outils d'admin — c'était
+      déjà le cas, rien à porter.
 
 ### 3. Guides (lot F, en plusieurs écrans si besoin)
 
