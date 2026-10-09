@@ -1,18 +1,16 @@
 /**
  * Invariants du générateur progression sur `data/generated/progression.json`
  * committé (modèle singularity/towers) : la section « Base Stats » des fiches
- * dérive silencieusement d'une demi-douzaine de tables (évolutions, limit
- * breaks, premium, codex, quirks d'éveil, passif de transcendance) — une dérive
+ * dérive silencieusement de plusieurs tables (évolutions, limit
+ * breaks, codex, quirks d'éveil, passif de transcendance) — une dérive
  * du générateur rendrait des paliers faux sans aucun symptôme.
  *
  * Le générateur n'a pas de cœur pur module-level (tout est en closures sur les
  * tables) → pas de test synthétique, comme singularity. Tourne SANS `.gamedata`
  * (rien n'appelle buildProgression).
  *
- * NB : `premium`/`evoRewards` sont un SUR-ENSEMBLE de characters.json — le
- * générateur itère TOUS les `CT_PC` (skins/formes/NPC compris) là où
- * characters.json est filtré (curé). Les entrées en trop sont inertes (l'app
- * interroge par id de perso réel) → pas de cross-ref d'id ici.
+ * Base, évolutions par perso et passifs de fiche ne sont plus ici : la fiche
+ * les lit dans le contrat solver (cf. l'en-tête du générateur).
  */
 import { describe, expect, it } from 'vitest';
 import progressionData from '../../data/generated/progression.json';
@@ -69,21 +67,12 @@ describe('progression.json — évolutions & limit breaks', () => {
   });
 });
 
-describe('progression.json — codex & premium', () => {
+describe('progression.json — codex', () => {
   it('codex : index 0 nul, chaque cran porte atk/def/hp numériques', () => {
     expect(p.codex[0]).toEqual({ atk: 0, def: 0, hp: 0 });
     const bad = p.codex.filter(
       (c) => typeof c.atk !== 'number' || typeof c.def !== 'number' || typeof c.hp !== 'number',
     );
-    expect(bad).toEqual([]);
-  });
-
-  it('premium : mode ∈ {flat,rate}, stat renseignée', () => {
-    const bad: string[] = [];
-    for (const [id, pr] of Object.entries(p.premium)) {
-      if (pr.mode !== 'flat' && pr.mode !== 'rate') bad.push(`${id} : mode « ${pr.mode} »`);
-      if (!pr.stat) bad.push(`${id} : sans stat`);
-    }
     expect(bad).toEqual([]);
   });
 });
