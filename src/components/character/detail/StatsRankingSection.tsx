@@ -38,7 +38,8 @@ export interface StatsRankingLabels {
   transcend: string;
   codex: string;
   quirks: string;
-  /** Sous la table : dit que les passifs de fiche sont déjà dans les valeurs. */
+  /** Sous la table : dit que les bonus permanents (transcendance, passifs de
+   * compétences) sont déjà dans les valeurs. */
   passivesNote: string;
   /** État de l'interrupteur des quirks. */
   on: string;
@@ -91,11 +92,6 @@ export function StatsRankingSection({
   const [quirksOn, setQuirksOn] = useState(true);
   const step = steps[Math.min(idx, steps.length - 1)];
   const composed = step ? composeStep(step, layers, { tierIdx, codexLevel, quirksOn }) : undefined;
-  // Passifs de fiche (classe, noyau, S1/S2/S3 au niveau max) : toujours actifs,
-  // sans interrupteur — la note sous la table est le seul endroit qui le dit.
-  const hasPassives = [layers.passives?.flat, layers.passives?.ratePM].some((part) =>
-    Object.values(part ?? {}).some(Boolean),
-  );
 
   // Combat Power SANS équipement (CalcBattlePower, gear zéroé) sur les stats
   // AFFICHÉES (palier + couches actives) — skills supposés Lv5, étoiles du
@@ -190,7 +186,8 @@ export function StatsRankingSection({
                 );
               })}
             </div>
-            {hasPassives && <p className="mt-3 text-xs text-zinc-400">{labels.passivesNote}</p>}
+            {/* Les passifs de fiche n'ont pas d'interrupteur : seule cette note le dit. */}
+            <p className="mt-3 text-xs text-zinc-400">{labels.passivesNote}</p>
 
             {/* Couches optionnelles : codex / quirks (la transcendance suit le
                 slider de la section Transcendence) */}

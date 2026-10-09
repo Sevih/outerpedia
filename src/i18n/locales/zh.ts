@@ -1188,7 +1188,7 @@ const zh: Record<TranslationKey, string> = {
   'page.character.stats.limit_break_cost': '极限突破费用',
   'page.character.stats.codex': '图鉴',
   'page.character.stats.quirks': '天赋',
-  'page.character.stats.passives_note': '已包含技能的常驻加成：职业被动、核心融合被动、满级技能。',
+  'page.character.stats.passives_note': '已包含超越、技能被动等常驻属性加成。',
 
   // Monad Gate
   'monad.rewards': '奖励',

@@ -1258,7 +1258,7 @@ const fr: Record<TranslationKey, string> = {
   'page.character.stats.codex': 'Codex',
   'page.character.stats.quirks': 'Quirks',
   'page.character.stats.passives_note':
-    'Les bonus permanents des compétences sont inclus : passif de classe, passif de Core Fusion, compétences au niveau max.',
+    'Les bonus de stats permanents, tels que les transcendances ou les passifs de compétences, sont inclus.',
 
   // Monad Gate
   'monad.rewards': 'Récompenses',

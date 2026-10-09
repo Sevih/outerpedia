@@ -1263,7 +1263,7 @@ const es: Record<TranslationKey, string> = {
   'page.character.stats.codex': 'Códice',
   'page.character.stats.quirks': 'Peculiaridades',
   'page.character.stats.passives_note':
-    'Se incluyen las bonificaciones permanentes de las habilidades: pasiva de clase, pasiva de Fusión Core y habilidades al nivel máximo.',
+    'Se incluyen las bonificaciones de estadísticas permanentes, como las trascendencias o las pasivas de habilidades.',
 
   // Monad Gate
   'monad.rewards': 'Premios',

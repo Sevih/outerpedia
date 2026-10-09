@@ -1253,7 +1253,7 @@ const en = {
   'page.character.stats.codex': 'Codex',
   'page.character.stats.quirks': 'Quirks',
   'page.character.stats.passives_note':
-    'Permanent skill bonuses are included: class passive, Core Fusion passive, skills at max level.',
+    'Permanent stat bonuses, such as transcendence or skill passives, are included.',
 
   // Monad Gate
   'monad.rewards': 'Rewards',
