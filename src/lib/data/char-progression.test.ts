@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import type { Character, ProgressionData } from '@contracts';
-import { composeStep } from '@/lib/stat-compose';
+import { composeStep, type StatLayersView, type StatStepView } from '@/lib/stat-compose';
+import { transcendStarRow } from '@/lib/images';
+import { getTranscend } from './transcend';
 import {
   computeStatSteps,
   getStatLayers,
@@ -84,16 +86,24 @@ describe('computeStatSteps (oracle hérité, perso 2000073)', () => {
     for (const s of view.steps) expect(s.premiumValue).toBe(5);
   });
 
-  it('limit breaks aux niveaux 105/110/120 avec les coûts du jeu', () => {
+  it('limit breaks aux niveaux et aux coûts de la table du jeu', () => {
+    // Les niveaux (105/110/120) et le coût (50 pièces, 500 000) se lisent dans
+    // progression.json : les recopier ici ferait casser le test au premier
+    // patch qui ajoute un palier ou retouche un prix.
+    const table = PROGRESSION.limitBreak[`${CHARS['2000073'].rarity}_${CHARS['2000073'].element}`];
     const lb = view.steps.filter((s) => s.limitBreak);
-    expect(lb.map((s) => s.level)).toEqual([105, 110, 120]);
-    expect(lb[0].limitBreak).toEqual({ pieces: 50, recallItemId: '30512', price: 500000 });
+    expect(lb.length).toBeGreaterThan(0);
+    expect(lb.map((s) => s.level)).toEqual(table.map((s) => s.maxLevel));
+    for (const s of lb) {
+      expect(s.limitBreak!.pieces, `lv${s.level}`).toBeGreaterThan(0);
+      expect(s.limitBreak!.price, `lv${s.level}`).toBeGreaterThan(0);
+      expect(s.limitBreak!.recallItemId, `lv${s.level}`).toBeTruthy();
+    }
   });
 });
 
 describe('composeStep — couches quirks / codex / transcendance (CalcFinalStat)', () => {
-  // Vlada (3★ fire striker/attacker) au lv120 : base ATK interpolée 1217
-  // (93 + floor(837×119/99) + floor(837×20×700/99000)), évo +286.
+  // Vlada (3★ fire striker/attacker) au lv120, sur la donnée committée.
   const char = CHARS['2000073'];
   const layers = getStatLayers(char);
   const step = computeStatSteps(char).steps.at(-1)!;
@@ -107,19 +117,79 @@ describe('composeStep — couches quirks / codex / transcendance (CalcFinalStat)
   });
 
   it('codex seul : trunc(base × taux / 1000) ajouté après le compound', () => {
-    const c = composeStep(step, layers, { tierIdx: -1, codexLevel: 11, quirksOn: false });
-    // Niveau 11 = 100 per-mille sur ATK/DEF/HP, sur la BASE seule (pas l'évo).
-    expect(c.ATK.value).toBe(step.stats.ATK + Math.trunc(step.base.ATK / 10));
-    expect(c.HP.value).toBe(step.stats.HP + Math.trunc(step.base.HP / 10));
+    const top = layers.codex.length - 1;
+    const codex = layers.codex[top];
+    expect(codex.atkPM).toBeGreaterThan(0);
+    const c = composeStep(step, layers, { tierIdx: -1, codexLevel: top, quirksOn: false });
+    // Le taux s'applique à la BASE seule (pas l'évo) ; sa valeur vient de la table.
+    expect(c.ATK.value).toBe(step.stats.ATK + Math.trunc((step.base.ATK * codex.atkPM) / 1000));
+    expect(c.HP.value).toBe(step.stats.HP + Math.trunc((step.base.HP * codex.hpPM) / 1000));
     expect(c.SPD.delta).toBe(0);
   });
+});
+
+describe('composeStep — ordre des opérations de CalcFinalStat (fixture)', () => {
+  /**
+   * FIXTURE : les couches de Vlada au lv120 relevées le 2026-07-16 (base ATK
+   * 1217 = 93 + floor(837×119/99) + floor(837×20×700/99000), évo +286). Écrites
+   * ici plutôt que lues dans la donnée : le test garde l'ORDRE des troncatures
+   * de la formule, il n'a pas à casser quand un patch retouche les quirks.
+   */
+  const zero = { ATK: 0, DEF: 0, HP: 0, SPD: 0, CHC: 0, CHD: 0 };
+  const stats = { ...zero, 'PEN%': 0, 'DMG UP%': 6, 'DMG RED%': 0, 'CDMG RED%': 0 };
+  const step: StatStepView = {
+    key: 'lv120_ev8',
+    level: 120,
+    evo: 8,
+    stats: {
+      ...stats,
+      ATK: 1503,
+      DEF: 396,
+      HP: 5314,
+      SPD: 134,
+      CHC: 5,
+      CHD: 150,
+      EFF: 140,
+      RES: 144,
+    },
+    base: {
+      ...stats,
+      'DMG UP%': 0,
+      ATK: 1217,
+      DEF: 323,
+      HP: 4509,
+      SPD: 122,
+      CHC: 5,
+      CHD: 150,
+      EFF: 10,
+      RES: 144,
+    },
+  };
+  const layers: StatLayersView = {
+    transcend: [
+      {
+        label: '6',
+        showStar: 6,
+        starPlus: 0,
+        atkPM: 300,
+        defPM: 300,
+        hpPM: 300,
+        skill8: { flat: { CHD: 8 } },
+      },
+    ],
+    codex: [
+      { atkPM: 0, defPM: 0, hpPM: 0 },
+      { atkPM: 100, defPM: 100, hpPM: 100 },
+    ],
+    quirks: {
+      stat: { flat: { CHC: 10, CHD: 30, ATK: 200, DEF: 600, HP: 200, SPD: 2 } },
+      buff: { ratePM: { ATK: 150 } },
+    },
+    premium: { key: 'CHC', mode: 'flat', value: 50 },
+  };
 
   it('tout au max : ATK 2665 (quirks +200 plat & +15% striker, transcend +30%, codex +10%)', () => {
-    const c = composeStep(step, layers, {
-      tierIdx: layers.transcend.length - 1,
-      codexLevel: 11,
-      quirksOn: true,
-    });
+    const c = composeStep(step, layers, { tierIdx: 0, codexLevel: 1, quirksOn: true });
     // part1 = trunc((1217+286+200)×1300/1000) = 2213 ; part2 = trunc(2213×1150/1000)
     // = 2544 ; codex = trunc(1217×100/1000) = 121 → 2665.
     expect(c.ATK.value).toBe(2665);
@@ -137,20 +207,27 @@ describe('composeStep — couches quirks / codex / transcendance (CalcFinalStat)
 describe('getTranscendTiers (3★)', () => {
   const tiers = getTranscendTiers(CHARS['2000073'], 'en');
 
-  it('libellés historiques : 3, 4, 4+, 5, 5+, 5++, 6', () => {
-    expect(tiers.map((t) => t.label)).toEqual(['3', '4', '4+', '5', '5+', '5++', '6']);
+  // Le barème de la rareté (3, 4, 4+, 5, 5+, 5++, 6 au 2026-07-16) vient de
+  // transcend.json : on vérifie le CÂBLAGE palier → vue, pas l'échelle du jour.
+  const steps = getTranscend().byStar[String(CHARS['2000073'].rarity)];
+
+  it('un palier de vue par palier du barème, libellé « étoiles + StarPlus »', () => {
+    expect(tiers).toHaveLength(steps.length);
+    tiers.forEach((t, i) =>
+      expect(t.label, `palier ${i}`).toBe(`${steps[i].showStar}${'+'.repeat(steps[i].starPlus)}`),
+    );
+    // Le « + » survit (la panne d'origine le perdait) dès que le barème en porte.
+    if (steps.some((s) => s.starPlus > 0))
+      expect(tiers.some((t) => t.label.endsWith('+'))).toBe(true);
   });
 
-  it('étoiles : 4+ = 3 jaunes + 1 orange, 5++ = 4 jaunes + 1 violette', () => {
-    expect(tiers[2].stars).toEqual([
-      'CM_icon_star_y',
-      'CM_icon_star_y',
-      'CM_icon_star_y',
-      'CM_icon_star_o',
-      'CM_icon_star_w',
-      'CM_icon_star_w',
-    ]);
-    expect(tiers[5].stars[4]).toBe('CM_icon_star_v');
+  it('étoiles : la dernière allumée porte la couleur du palier, les autres jaunes', () => {
+    tiers.forEach((t, i) =>
+      expect(t.stars, `palier ${i}`).toEqual(
+        transcendStarRow(steps[i].showStar, steps[i].starColor),
+      ),
+    );
+    expect(new Set(tiers.map((t) => t.stars[t.star - 1])).size).toBeGreaterThan(1);
   });
 
   it('déblocages : burst 3 au palier « 5 » (texte officiel TextSkill)', () => {
@@ -176,7 +253,6 @@ describe('getSubstatFlatProfile — base aux paliers stables pour le verdict fla
   const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`];
 
   it('paliers lus dans les tables : 100 (sans LB) puis le maxLevel de chaque LB', () => {
-    expect(profile.levels).toEqual([100, 105, 110, 120]);
     expect(profile.levels).toEqual([lb[0].requireLevel, ...lb.map((s) => s.maxLevel)]);
   });
 
@@ -191,14 +267,18 @@ describe('getSubstatFlatProfile — base aux paliers stables pour le verdict fla
 
   it('coïncide avec les paliers de la fiche (même formule, évolutions comprises)', () => {
     const shared = steps.filter((s) => profile.levels.includes(s.level));
-    expect(shared).toHaveLength(4);
+    expect(shared).toHaveLength(profile.levels.length);
     for (const st of shared)
       for (const axis of SUBSTAT_AXES)
         expect(profile.flatByLevel[axis][st.level], `${axis} lv${st.level}`).toBe(st.stats[axis]);
   });
 
-  it('les 4 paliers donnent le bon modificateur LB (0 / 200 / 400 / 700 ‰)', () => {
-    expect(lb.map((s) => s.statModifier)).toEqual([200, 400, 700]);
+  it('chaque palier donne le modificateur LB de la table (0 ‰ au lv100)', () => {
+    // 200 / 400 / 700 ‰ au 2026-07-16 : la valeur est celle de la table, la
+    // règle est qu'elle croît d'un palier à l'autre.
+    const mods = lb.map((s) => s.statModifier);
+    expect(mods[0]).toBeGreaterThan(0);
+    for (let i = 1; i < mods.length; i++) expect(mods[i]).toBeGreaterThan(mods[i - 1]);
     const { min: mn, max } = char.stats.atk;
     const rng = max - mn;
     const evoAt = (L: number): number => {
@@ -227,13 +307,13 @@ describe('getSubstatFlatProfile — base aux paliers stables pour le verdict fla
   it('quirks : le PLAT IOT_STAT seulement — le taux est exclu', () => {
     for (const axis of SUBSTAT_AXES)
       expect(profile.awakFlat[axis]).toBe(layers.quirks?.stat.flat?.[axis] ?? 0);
-    // Vlada est striker : le +15 % ATK du quirk de classe est un taux de BUFF —
-    // il n'entre jamais dans la somme plate du verdict.
-    expect(layers.quirks?.buff.ratePM?.ATK).toBe(150);
+    // Vlada est striker : le taux ATK du quirk de classe (+15 % au 2026-07-16)
+    // est un taux de BUFF — il n'entre jamais dans la somme plate du verdict.
+    expect(layers.quirks?.buff.ratePM?.ATK).toBeGreaterThan(0);
     expect(profile.awakFlat.ATK).toBeLessThan(1000);
   });
 
-  it('roster entier (gear 6★, quirks) : verdict monotone sur 100 → 105 → 110 → 120 ; HP penche vers le %, DEF est l’axe partagé', () => {
+  it('roster entier (gear 6★, quirks) : verdict monotone du lv100 au niveau max ; HP penche vers le %, DEF est l’axe partagé', () => {
     const ticks = getSubstatTicks();
     expect(ticks).not.toBeNull();
     const rank = { flat: 0, close: 1, pct: 2 } as const;
@@ -247,7 +327,8 @@ describe('getSubstatFlatProfile — base aux paliers stables pour le verdict fla
     let n = 0;
     for (const c of Object.values(CHARS)) {
       const p = getSubstatFlatProfile(c);
-      expect(p.levels).toEqual([100, 105, 110, 120]);
+      const table = PROGRESSION.limitBreak[`${c.rarity}_${c.element}`];
+      expect(p.levels, c.id).toEqual([table[0].requireLevel, ...table.map((s) => s.maxLevel)]);
       n++;
       for (const axis of SUBSTAT_AXES) {
         let prev = -1;
@@ -256,8 +337,9 @@ describe('getSubstatFlatProfile — base aux paliers stables pour le verdict fla
           expect(rank[k], `${c.id} ${axis} lv${l}`).toBeGreaterThanOrEqual(prev);
           prev = rank[k];
         }
-        at100[axis][judgeSubstat(sumFlatAt(p, axis, 100, true), ticks![axis]).kind]++;
-        at120[axis][judgeSubstat(sumFlatAt(p, axis, 120, true), ticks![axis]).kind]++;
+        const [first, last] = [p.levels[0], p.levels[p.levels.length - 1]];
+        at100[axis][judgeSubstat(sumFlatAt(p, axis, first, true), ticks![axis]).kind]++;
+        at120[axis][judgeSubstat(sumFlatAt(p, axis, last, true), ticks![axis]).kind]++;
       }
     }
     // Grosse base (HP, ATK) → le % ; petite base (DEF) → les verdicts se partagent.

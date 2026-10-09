@@ -208,33 +208,32 @@ describe('encounters.json — invariants référentiels', () => {
       ((d.monsters ?? []) as DungeonMonster[]).some((m) => m.formation !== undefined),
     );
 
-    it('40103001 (very hard 1F) : 12 formations de 1 à 4 monstres, pas une vague de 35', () => {
-      // Le cas qui a révélé le défaut : les 12 lignes du groupe 401030001
-      // sortaient aplaties en UNE vague de 35 entrées, trois adds marqués
-      // « ×2 » parce qu'ils servent dans deux formations.
-      const ms = dungeons['40103001'].monsters as DungeonMonster[];
-      expect(formationsOf(dungeons['40103001']).map((f) => f.length)).toEqual([
-        2, 1, 4, 4, 4, 4, 3, 3, 4, 4, 2, 3,
-      ]);
-      expect(ms).toHaveLength(38);
-      expect(ms.every((m) => m.wave === undefined && m.count === undefined)).toBe(true);
-      // Un add commun à deux formations a UNE entrée par formation.
-      expect(ms.filter((m) => m.id === '40103026').map((m) => m.formation)).toEqual([3, 8]);
-      // Chaque formation aligne exactement un boss.
-      for (let n = 1; n <= 12; n++)
-        expect(ms.filter((m) => m.formation === n && m.role === 'boss')).toHaveLength(1);
-    });
-
-    it('`count` vaut DANS la formation : 40103003 aligne 3 × le même add en formation 3', () => {
-      const ms = dungeons['40103003'].monsters as DungeonMonster[];
-      expect(ms.find((m) => m.formation === 3 && m.id === '40103052')?.count).toBe(3);
+    it('un pool aligne plusieurs formations, sans vague, un boss chacune', () => {
+      // Le cas qui a révélé le défaut (40103001, very hard 1F) : les 12 lignes
+      // du groupe sortaient aplaties en UNE vague de 35 entrées, trois adds
+      // marqués « ×2 » parce qu'ils servent dans deux formations. La règle vaut
+      // pour tout pool ; la composition exacte d'un étage, elle, suit les patchs.
+      // (Le `count` DANS une formation est couvert par la parité avec
+      // towers.json ci-dessous, qui le déplie.)
+      const bad: string[] = [];
+      for (const [id, d] of pooled) {
+        const ms = d.monsters as DungeonMonster[];
+        const formations = formationsOf(d);
+        if (formations.length < 2) bad.push(`${id} : ${formations.length} formation(s)`);
+        if (ms.some((m) => m.wave !== undefined)) bad.push(`${id} : vague dans un pool`);
+        formations.forEach((_, i) => {
+          const bosses = ms.filter((m) => m.formation === i + 1 && m.role === 'boss');
+          if (bosses.length !== 1) bad.push(`${id} : formation ${i + 1}, ${bosses.length} boss`);
+        });
+      }
+      expect(bad).toEqual([]);
     });
 
     it('émis sur les seuls étages very hard, tout-ou-rien, numéros 1..N en ordre', () => {
       // Un pool ailleurs que sur la tour very hard = donnée du jeu nouvelle :
       // les lecteurs (`encounterFormations`, picker du calculateur) sont à
       // revoir avant de laisser passer.
-      expect(pooled).toHaveLength(20);
+      expect(pooled.length).toBeGreaterThan(0);
       const bad: string[] = [];
       for (const [id, d] of pooled) {
         const ms = d.monsters as DungeonMonster[];

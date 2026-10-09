@@ -36,6 +36,23 @@ const data = {
 const CHAR_ID = '2000001';
 const char = data.characters.characters[CHAR_ID];
 
+/** Valeur d'un buff de la table au niveau `level` : l'attendu se LIT dans
+ * buffs.json, pour qu'un rééquilibrage ne casse pas un test dont le code est
+ * juste (les valeurs du jour figurent en commentaire). */
+const lv = (id: string, level = 1): number => {
+  const v = data.buffs.buffs[id]?.find((l) => l.level === level)?.value;
+  expect(v, `${id} niveau ${level} absent de buffs.json`).toBeDefined();
+  return v!;
+};
+
+/** Somme des plats d'affinité d'une stat jusqu'au palier `tier`, lue dans buffs.json
+ * (+60 ATK / +40 DEF / +300 PV par palier en 1.4.9). */
+const trustSum = (stat: string, tier: number): number => {
+  let sum = 0;
+  for (let i = 1; i <= tier; i++) sum += data.buffs.buffs[`trust_level_${stat}_${i}`]![0].value!;
+  return sum;
+};
+
 const attackerBase = (): AttackerBuildInput => ({
   id: CHAR_ID,
   level: 120,
@@ -69,10 +86,11 @@ describe('inputs — affinité et chips', () => {
     expect(t5).toHaveLength(15); // 3 stats × 5 paliers
     const sum = (st: string) =>
       t5.filter((b) => b.stat === st).reduce((s, b) => s + (b.value ?? 0), 0);
-    // Témoins binaires re-vérifiés par l'extracteur : +60/+40/+300 par palier.
-    expect(sum('ST_ATK')).toBe(300);
-    expect(sum('ST_DEF')).toBe(200);
-    expect(sum('ST_HP')).toBe(1500);
+    // Cumul des paliers 1..5 ; les plats eux-mêmes sont ceux de la table.
+    for (const stat of ['ATK', 'DEF', 'HP']) {
+      expect(sum(`ST_${stat}`), stat).toBe(trustSum(stat, 5));
+      expect(sum(`ST_${stat}`), stat).toBeGreaterThan(0);
+    }
     expect(t5.every((b) => b.applyingType === 'OAT_ADD')).toBe(true);
   });
 
@@ -99,8 +117,9 @@ describe('inputs — stats de combat (§ 16.1)', () => {
     const a = attackerBase();
     a.codexLevel = 11;
     const trust = trustBuffs(5, data.buffs);
-    // Plats seuls : +300 ATK, indépendant du terme Codex.
-    expect(buildCombatStats(a, char, data.growth, trust).atk).toBe(10300);
+    // Plats seuls : +300 ATK (5 × 60), indépendant du terme Codex.
+    const flat = trustSum('ATK', 5);
+    expect(buildCombatStats(a, char, data.growth, trust).atk).toBe(10000 + flat);
     // Avec un chip +30 % : l'identité § 16.1 exacte, A recalculé de la donnée.
     const chip = resolveFx(['atk']).buffs;
     const codexRow = data.growth.archive.find((r) => r.level === 11)!;
@@ -111,7 +130,7 @@ describe('inputs — stats de combat (§ 16.1)', () => {
       modifierAfter100For(char, 120, data.growth),
     );
     const A = Math.trunc((base * codexRow.atkRate) / 1000);
-    const expected = Math.trunc(((10000 - A + 300) * 1300) / 1000) + A;
+    const expected = Math.trunc(((10000 - A + flat) * 1300) / 1000) + A;
     expect(buildCombatStats(a, char, data.growth, [...trust, ...chip]).atk).toBe(expected);
   });
 });
@@ -453,6 +472,11 @@ describe('inputs — compteurs § 9.1 (buffs/débuffs déclarés)', () => {
 });
 
 describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
+  // Les taux (+15 % guilde Lv 10, +5 % titre en 1.4.9) se lisent dans
+  // growth.json ; leur valeur est gardée par damage-data.test.ts, ici on teste
+  // le cumul et les modes.
+  const GUILD = data.growth.guildMaxHp.find((t) => t.level === 10)!.maxHpValue;
+  const TITLE = data.growth.titleMaxHp[0].maxHpValue;
   const withHp = (): AttackerBuildInput => ({
     ...attackerBase(),
     sheet: { atk: 10000, hp: 50000 },
@@ -473,27 +497,27 @@ describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
 
   it('guilde seule, mode éligible : HP = floor(float32(rate × HP))', () => {
     const r = buildDamageReport(withHp(), { ...target(), mode: 'raid_1' }, data);
-    expect(r.maxHpBuff).toMatchObject({ sum: 15, hpBefore: 50000 }); // Lv 10 → 15
-    expect(r.combatStats.hp).toBe(applied(15, 50000));
+    expect(r.maxHpBuff).toMatchObject({ sum: GUILD, hpBefore: 50000 }); // Lv 10 → 15
+    expect(r.combatStats.hp).toBe(applied(GUILD, 50000));
   });
 
   it('guilde + titre CUMULÉS en Special Request (Σ = 15 + 5 = 20)', () => {
     const a = { ...withHp(), premiumHp: true };
     const r = buildDamageReport(a, { ...target(), mode: 'raid_1' }, data);
-    expect(r.maxHpBuff?.sum).toBe(20);
+    expect(r.maxHpBuff?.sum).toBe(GUILD + TITLE);
     expect(r.maxHpBuff?.parts.map((p) => [p.source, p.active])).toEqual([
       ['guild', true],
       ['title', true],
     ]);
-    expect(r.combatStats.hp).toBe(applied(20, 50000));
+    expect(r.combatStats.hp).toBe(applied(GUILD + TITLE, 50000));
   });
 
   it('les listes de modes DIFFÈRENT : tour normale = guilde seule, adventure = titre seul', () => {
     const a = { ...withHp(), premiumHp: true };
     const tower = buildDamageReport(a, { ...target(), mode: 'tower' }, data);
-    expect(tower.maxHpBuff?.sum).toBe(15); // guilde oui, titre non
+    expect(tower.maxHpBuff?.sum).toBe(GUILD); // guilde oui, titre non
     const adv = buildDamageReport(a, { ...target(), mode: 'adventure_mission' }, data);
-    expect(adv.maxHpBuff?.sum).toBe(5); // titre oui, guilde non
+    expect(adv.maxHpBuff?.sum).toBe(TITLE); // titre oui, guilde non
   });
 
   it('mode exclu des deux (world boss…) : Σ = 0, HP intact, parts signalées', () => {
@@ -508,12 +532,16 @@ describe('inputs — buffs MAX_HP (§ 16.2 : guilde + titre)', () => {
   it('cible manuelle : coches INDÉPENDANTES par buff', () => {
     const a = { ...withHp(), premiumHp: true };
     expect(buildDamageReport(a, target(), data).maxHpBuff?.sum).toBe(0);
-    expect(buildDamageReport(a, { ...target(), guildBuffOn: true }, data).maxHpBuff?.sum).toBe(15);
-    expect(buildDamageReport(a, { ...target(), titleBuffOn: true }, data).maxHpBuff?.sum).toBe(5);
+    expect(buildDamageReport(a, { ...target(), guildBuffOn: true }, data).maxHpBuff?.sum).toBe(
+      GUILD,
+    );
+    expect(buildDamageReport(a, { ...target(), titleBuffOn: true }, data).maxHpBuff?.sum).toBe(
+      TITLE,
+    );
     expect(
       buildDamageReport(a, { ...target(), guildBuffOn: true, titleBuffOn: true }, data).maxHpBuff
         ?.sum,
-    ).toBe(20);
+    ).toBe(GUILD + TITLE);
   });
 
   it('sans aucun réglage de compte : aucun bloc maxHpBuff, rien ne bouge', () => {
@@ -551,7 +579,7 @@ describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () 
         type: 'BT_STAT_PREMIUM',
         stat: 'ST_CRITICAL_DMG_RATE',
         applyingType: 'OAT_ADD',
-        value: 500,
+        value: lv('BID_CEQUIP_2000117_2'), // 500
       },
     });
     // Plat +500 ‰ dans le canal buff du crit dmg — multiplié par les taux du
@@ -559,7 +587,7 @@ describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () 
     // fiche de Francesca porte un taux crit dmg, le delta observé est 580).
     // Propriété stable : delta ≥ +500 (taux du canal jamais négatifs ici).
     expect(withAlly.combatStats.critical_dmg).toBeGreaterThanOrEqual(
-      without.combatStats.critical_dmg + 500,
+      without.combatStats.critical_dmg + lv('BID_CEQUIP_2000117_2'),
     );
     // Le +20 % Strikers du S2 d'Eris (2000117_2_5, SKILL_FINISH, 3 stacks) :
     // DYNAMIQUE — signalé, jamais simulé.
@@ -590,7 +618,12 @@ describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () 
     const entry = withAlly.allyPassives?.entries.find((e) => e.buffId === 'BID_CEQUIP_2000028_3');
     expect(entry).toMatchObject({
       active: true,
-      buff: { type: 'BT_STAT_PREMIUM', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 300 },
+      buff: {
+        type: 'BT_STAT_PREMIUM',
+        stat: 'ST_ATK',
+        applyingType: 'OAT_RATE',
+        value: lv('BID_CEQUIP_2000028_3'), // 300
+      },
     });
     expect(withAlly.combatStats.atk).toBeGreaterThan(without.combatStats.atk);
   });
@@ -643,7 +676,10 @@ describe('inputs — passifs d’ALLIÉS (kit + EE des membres déclarés)', () 
     const base = eris();
     // Le proc est SIGNALÉ déclarable (side attacker + plafond 3) dans le kit.
     const dyn = base.kitPassives?.dynamic.find((d) => d.buffId === '2000117_2_5');
-    expect(dyn).toMatchObject({ side: 'attacker', maxStacks: 3 });
+    expect(dyn).toMatchObject({
+      side: 'attacker',
+      maxStacks: data.buffs.buffs['2000117_2_5']![0].stackCount, // 3
+    });
     const dmg = (r: ReturnType<typeof eris>) =>
       r.slots.find((s) => s.slot === 'S1' && s.burst === undefined)!.report.states[0].branches[0]
         .totalDamage;
@@ -678,12 +714,17 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
       source: 'talisman',
       side: 'attacker',
       active: true,
-      buff: { type: 'BT_STAT_PREMIUM', stat: 'ST_ATK', applyingType: 'OAT_RATE', value: 150 },
+      buff: {
+        type: 'BT_STAT_PREMIUM',
+        stat: 'ST_ATK',
+        applyingType: 'OAT_RATE',
+        value: lv(TAL_ATK, 11), // 150
+      },
     });
     expect(plus10.combatStats.atk).toBeGreaterThan(without.combatStats.atk);
     // +0 : la ligne L1 (120 ‰) — le montant suit l'enchant déclaré.
     const plus0 = at(0).allyPassives?.entries.find((e) => e.buffId === TAL_ATK);
-    expect(plus0?.buff.value).toBe(120);
+    expect(plus0?.buff.value).toBe(lv(TAL_ATK, 1));
   });
 
   it('accessoire d’ALLIÉ à ligne d’équipe (2025 : +10 % vs boss aux alliés) : atteint l’attaquant', () => {
@@ -702,7 +743,7 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
       source: 'amulet',
       side: 'attacker',
       active: true,
-      buff: { type: 'BT_DMG_TO_BOSS', value: 100 },
+      buff: { type: 'BT_DMG_TO_BOSS', value: lv('BID_ITEM_UO_ACC_25', 1) }, // 100
     });
     const dmg = (r: ReturnType<typeof buildDamageReport>) =>
       r.slots.find((s) => s.slot === 'S1' && s.burst === undefined)!.report.states[0].branches[0]
@@ -742,7 +783,7 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
       target(),
       dataEq,
     );
-    expect(withAlly.combatStats.dmg_boost).toBe(120);
+    expect(withAlly.combatStats.dmg_boost).toBe(lv('BID_ITEM_STAT_OOPARTS_DMG_6', 11)); // 120
   });
 
   it('NON-CUMUL des mains par stat (mesure Sevih 24/08) : la plus forte l’emporte, l’allié ne verse que l’excédent', () => {
@@ -777,7 +818,9 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
     // Porteur +0 (120) < allié +10 (150) : l'allié ne verse que l'EXCÉDENT
     // (30 ‰) — pas les 150 pleins.
     const strongAlly = withTal(0, [{ id: '2000117', enchant: 10 }]);
-    expect(strongAlly.allyPassives?.entries.find((e) => e.buffId === TAL_ATK)?.buff.value).toBe(30);
+    expect(strongAlly.allyPassives?.entries.find((e) => e.buffId === TAL_ATK)?.buff.value).toBe(
+      lv(TAL_ATK, 11) - lv(TAL_ATK, 1), // 30
+    );
     // Deux ALLIÉS sur la même stat : seul le plus fort compte.
     const twoAllies = withTal(undefined, [
       { id: '2000117', enchant: 10 },
@@ -785,7 +828,7 @@ describe('inputs — équipement d’ÉQUIPE (talisman / arme / accessoire, 24/0
     ]);
     const actives = twoAllies.allyPassives?.entries.filter((e) => e.buffId === TAL_ATK && e.active);
     expect(actives).toHaveLength(1);
-    expect(actives?.[0]).toMatchObject({ ally: '2000117', buff: { value: 150 } });
+    expect(actives?.[0]).toMatchObject({ ally: '2000117', buff: { value: lv(TAL_ATK, 11) } });
     const oneAlly = withTal(undefined, [{ id: '2000117', enchant: 10 }]);
     expect(twoAllies.combatStats.atk).toBe(oneAlly.combatStats.atk);
   });

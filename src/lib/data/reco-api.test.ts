@@ -5,9 +5,13 @@ import { GET } from '@/app/api/reco/[id]/route';
 import charactersData from '@data/generated/characters.json';
 import weaponsData from '@data/generated/equipment/weapon.json';
 import accessoryData from '@data/generated/equipment/accessory.json';
+import familiesData from '@data/generated/equipment/families.json';
 
 const CHARACTERS = charactersData as unknown as Record<string, unknown>;
 const EQUIPMENT = { ...weaponsData, ...accessoryData } as unknown as Record<string, unknown>;
+const WEAPON_FAMILIES = (
+  familiesData as unknown as { weapon: { topId: string; ids: string[]; classLimits: string[] }[] }
+).weapon;
 
 /**
  * `reco-api.ts` — CONTRAT PUBLIC de `GET /api/reco/:id`, consommé par l'app
@@ -45,35 +49,62 @@ describe('getRecoStatPriorities — forme du contrat', () => {
   });
 
   it('structure complète sur un perso réel (Sofia)', () => {
+    // Le perso est réel, ses recos sont celles de `data/curated/gear-reco.json`
+    // (« Surefire Greatsword », « Death's Hold »/« Clock Up », `$CPdps`, set
+    // Speed ×4 au 2026-07). Elles changent à chaque retouche éditoriale : le test
+    // vérifie la FORME émise et sa fidélité au curé, pas le choix du jour.
     const reco = getRecoStatPriorities('2000006');
     expect(reco).not.toBeNull();
     expect(reco!.id).toBe('2000006');
+    const curated = loadGearReco()['2000006'];
+    expect(Object.keys(reco!.builds).sort()).toEqual(curated.map((b) => b.name).sort());
 
-    const speed = reco!.builds.Speed;
-    expect(speed).toBeDefined();
+    for (const src of curated) {
+      const build = reco!.builds[src.name];
+      expect(build, src.name).toBeDefined();
 
-    // Weapon/Amulet : OR-list d'alternatives, chacune avec sa OR-list de mains.
-    expect(speed.Weapon).toEqual([
-      expect.objectContaining({ name: 'Surefire Greatsword', mainStat: ['atkPct'] }),
-    ]);
-    expect(speed.Amulet).toEqual([
-      expect.objectContaining({ name: "Death's Hold", mainStat: ['pen', 'critDmg'] }),
-      expect.objectContaining({ name: 'Clock Up', mainStat: ['spd'] }),
-    ]);
+      // Weapon/Amulet : OR-list d'alternatives, une par entrée curée, chacune
+      // avec sa OR-list de mains (« PEN%/CHD » → deux clés moteur).
+      for (const [out, list] of [
+        [build.Weapon ?? [], src.weapons ?? []],
+        [build.Amulet ?? [], src.amulets ?? []],
+      ] as const) {
+        expect(out, src.name).toHaveLength(list.length);
+        out.forEach((piece, i) => {
+          expect(piece.name, src.name).toBeTruthy();
+          expect(typeof piece.itemId, `${src.name} : ${piece.name}`).toBe('number');
+          const curatedMain = list[i].mainStat;
+          if (curatedMain)
+            expect(piece.mainStat, `${src.name} : ${piece.name}`).toHaveLength(
+              curatedMain.split('/').length,
+            );
+        });
+      }
 
-    // Talisman : même forme que Weapon/Amulet, mais sans main stat curée. Ici
-    // le preset `$CPdps` s'aplatit en ses trois talismans (OR-list).
-    expect(speed.Talisman).toEqual([
-      { name: "Sage's Charm", itemId: 10204, effectIcon: expect.any(String), mainStat: [] },
-      { name: "Rogue's Charm", itemId: 10203, effectIcon: expect.any(String), mainStat: [] },
-      { name: "Executioner's Charm", itemId: 10201, effectIcon: expect.any(String), mainStat: [] },
-    ]);
+      // Talisman : même forme que Weapon/Amulet, mais sans main stat curée (un
+      // preset comme `$CPdps` s'aplatit en ses talismans, en OR-list).
+      for (const t of build.Talisman ?? []) {
+        expect(t).toEqual({
+          name: expect.any(String),
+          itemId: expect.any(Number),
+          effectIcon: expect.any(String),
+          mainStat: [],
+        });
+      }
 
-    // Set : OR-list de combos, chaque combo étant une ET-list de conditions.
-    expect(speed.Set).toEqual([[{ name: 'Speed', setId: '13', count: 4 }]]);
+      // Set : OR-list de combos, chaque combo étant une ET-list de conditions.
+      expect(build.Set?.length, src.name).toBeGreaterThan(0);
+      for (const combo of build.Set ?? [])
+        for (const cond of combo) {
+          expect(cond.name).toBeTruthy();
+          expect(typeof cond.setId).toBe('string');
+          expect([2, 4]).toContain(cond.count);
+        }
 
-    // SubstatPrio : tiers ORDONNÉS (preset `$dps` résolu).
-    expect(speed.SubstatPrio).toEqual([['atk'], ['critRate'], ['critDmg'], ['spd'], ['dmgUp']]);
+      // SubstatPrio : tiers ORDONNÉS (preset résolu), non vides.
+      expect(build.SubstatPrio?.length, src.name).toBeGreaterThan(0);
+      for (const tier of build.SubstatPrio ?? []) expect(tier.length).toBeGreaterThan(0);
+    }
   });
 });
 
@@ -117,10 +148,26 @@ describe('itemId — palier canonique', () => {
    * d'effet de CHAQUE arme et amulette, avec un warning côté app.
    */
   it('remonte le membre bas de famille au palier max (Surefire Greatsword 4 → 754)', () => {
-    const weapon = getRecoStatPriorities('2000006')!.builds.Speed.Weapon![0];
-    expect(loadGearReco()['2000006'][0].weapons![0].id).toBe('4'); // le curé dit bien 4
-    expect(weapon.itemId).toBe(754); // …et le contrat émet 754
-    expect(weapon.effectIcon).toBe('TI_Icon_UO_Weapon_11');
+    // Le cas d'origine (Sofia, Surefire Greatsword curé 4, émis 754) dépend du
+    // curé du jour : la règle est vérifiée sur TOUTE arme curée qui n'est pas
+    // le haut de sa famille (familles mono-classe ; les variantes par classe
+    // sont le cas suivant).
+    let checked = 0;
+    for (const [charId, builds] of Object.entries(loadGearReco())) {
+      for (const build of builds) {
+        const emitted = getRecoStatPriorities(charId)!.builds[build.name].Weapon ?? [];
+        (build.weapons ?? []).forEach((w, i) => {
+          const family = WEAPON_FAMILIES.find((f) => f.ids.includes(w.id));
+          if (!family || family.classLimits.length > 1 || family.topId === w.id) return;
+          checked++;
+          expect(emitted[i]?.itemId, `${charId}/${build.name} : ${w.id}`).toBe(
+            Number(family.topId),
+          );
+          expect(emitted[i]?.effectIcon, `${charId}/${build.name} : ${w.id}`).toBeTruthy();
+        });
+      }
+    }
+    expect(checked, 'aucun membre bas de famille dans le curé').toBeGreaterThan(0);
   });
 
   it('laisse intactes les variantes par classe, déjà au palier max', () => {

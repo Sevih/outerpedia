@@ -29,11 +29,22 @@ const day = (i: number) =>
 /** Les jours de RÉCOMPENSE de cette semaine-là. */
 const REWARD = Array.from({ length: 7 - BATTLE }, (_, i) => day(BATTLE + i));
 
+/**
+ * LE NOMBRE DE GROUPES VIENT AUSSI DES TABLES (six au 2026-07-16) : l'id
+ * attendu `k` semaines après l'ancre se lit dans le cycle, jamais en dur.
+ */
+const GROUP_IDS = singularityGroups().map((g) => g.id);
+const ANCHOR_GROUP = 3;
+const groupAfter = (k: number) => {
+  const n = GROUP_IDS.length;
+  return GROUP_IDS[(((GROUP_IDS.indexOf(ANCHOR_GROUP) + k) % n) + n) % n];
+};
+
 describe('singularityStateAt — semaine et boss du jour', () => {
   it('l’ancre est un mercredi et ouvre le groupe 3 sur son premier boss', () => {
     const s = at('2026-05-20');
     expect(new Date('2026-05-20T00:00:00Z').getUTCDay()).toBe(3); // 3 = mercredi
-    expect(s.week.group.id).toBe(3);
+    expect(s.week.group.id).toBe(ANCHOR_GROUP);
     expect(s.week.start).toBe('2026-05-20');
     expect(s.today?.order).toBe(0);
     expect(s.betweenWeeks).toBe(false);
@@ -65,21 +76,23 @@ describe('singularityStateAt — semaine et boss du jour', () => {
       expect(s.betweenWeeks, iso).toBe(true);
       expect(s.today, iso).toBeUndefined();
       expect(s.week.start, iso).toBe('2026-05-27'); // le mercredi suivant
-      expect(s.week.group.id, iso).toBe(4); // le groupe d'après
+      expect(s.week.group.id, iso).toBe(groupAfter(1)); // le groupe d'après
     }
   });
 
   it('la semaine suivante fait tourner le groupe', () => {
-    expect(at('2026-05-27').week.group.id).toBe(4);
-    expect(at('2026-06-03').week.group.id).toBe(5);
-    expect(at('2026-06-10').week.group.id).toBe(6);
+    expect(at('2026-05-27').week.group.id).toBe(groupAfter(1));
+    expect(at('2026-06-03').week.group.id).toBe(groupAfter(2));
+    expect(at('2026-06-10').week.group.id).toBe(groupAfter(3));
+    expect(groupAfter(1)).not.toBe(ANCHOR_GROUP);
   });
 
-  it('le cycle boucle sur les 6 groupes', () => {
-    const n = singularityGroups().length;
-    expect(n).toBe(6);
-    // 6 semaines après l'ancre → retour au groupe de l'ancre.
-    expect(at('2026-07-01').week.group.id).toBe(3);
+  it('le cycle boucle sur tous les groupes', () => {
+    const n = GROUP_IDS.length;
+    expect(n).toBeGreaterThan(1);
+    expect(GROUP_IDS).toContain(ANCHOR_GROUP);
+    // n semaines après l'ancre → retour au groupe de l'ancre.
+    expect(at(day(7 * n)).week.group.id).toBe(ANCHOR_GROUP);
   });
 
   /**
@@ -88,9 +101,9 @@ describe('singularityStateAt — semaine et boss du jour', () => {
    * sortirait du tableau et la page planterait — ou pire, choisirait au hasard.
    */
   it('reste correct AVANT l’ancre (index de semaine négatif)', () => {
-    expect(at('2026-05-13').week.group.id).toBe(2); // la semaine d'avant
-    expect(at('2026-05-06').week.group.id).toBe(1);
-    expect(at('2026-04-29').week.group.id).toBe(6); // on reboucle par le bas
+    expect(at('2026-05-13').week.group.id).toBe(groupAfter(-1)); // la semaine d'avant
+    expect(at('2026-05-06').week.group.id).toBe(groupAfter(-2));
+    expect(at('2026-04-29').week.group.id).toBe(groupAfter(-3)); // on reboucle par le bas
     expect(at('2026-04-01').week.group).toBeDefined(); // 7 semaines avant : pas de crash
   });
 
@@ -150,10 +163,13 @@ describe('singularityStateAt — nextChange, la seule échéance qu’on ait le 
     }
   });
 
-  it('au premier jour de récompense, l’échéance est à PLUS de 24 h (donc pas minuit)', () => {
+  it('au premier jour de récompense, l’échéance est l’ouverture — à PLUS de 24 h dès deux jours de récompense', () => {
     const midi = new Date(`${REWARD[0]}T12:00:00Z`);
     const restant = singularityStateAt(midi).nextChange - midi.getTime();
-    expect(restant).toBeGreaterThan(24 * 3_600_000);
+    // Il reste tous les jours de récompense, moins la demi-journée écoulée.
+    expect(restant).toBe(REWARD.length * 86_400_000 - 12 * 3_600_000);
+    // Deux jours de récompense au 2026-10-06 : l'échéance n'est alors pas minuit.
+    if (REWARD.length >= 2) expect(restant).toBeGreaterThan(24 * 3_600_000);
   });
 
   it('est toujours dans le FUTUR, tous les jours de la semaine', () => {

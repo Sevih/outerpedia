@@ -29,6 +29,10 @@ const TRANSCEND = getTranscend();
 const R = 3;
 
 describe('les paliers du sélecteur', () => {
+  // L'échelle est écrite EN DUR, et c'est voulu : `data/curated/characters.json`
+  // note la tier list sur les clés 3/4/6/9 (`rankByTranscend`, `atStep`). Un
+  // patch qui redécoupe le barème doit casser ICI, avant que la donnée curée ne
+  // désigne en silence d'autres paliers que ceux qu'elle croit noter.
   it('ne retient que les paliers PLEINS — 3★, 4★, 5★, 6★', () => {
     expect(transcendenceFullSteps(R)).toEqual([3, 4, 6, 9]);
     expect(transcendenceFullSteps(R).map((s) => transcendenceLabel(R, s))).toEqual([

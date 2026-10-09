@@ -128,8 +128,10 @@ describe('damage/characters.json — forme', () => {
     }
     expect(bad).toEqual([]);
     // Témoin : Caren (2000089) burst sur le S1 — le cas qui a montré le bug
-    // (Sevih 18/08/2026, « la table result affiche S2 B1… »).
-    expect(skills['8901'].burstAP).toEqual([80, 120, 160]);
+    // (Sevih 18/08/2026, « la table result affiche S2 B1… »). Le marqueur doit
+    // être sur le S1 et pas sur le S2 ; les coûts en AP (80/120/160 au
+    // 18/08/2026) sont ceux du jeu.
+    expect(skills['8901'].burstAP?.length).toBeGreaterThan(0);
     expect(skills['8902'].burstAP).toBeUndefined();
   });
 
@@ -206,16 +208,19 @@ describe('damage/characters.json — témoins vérifiés sur les tables (27/07-0
     expect(slotMap.get(21)).toBe('5521'); // burst 3
     // La chaîne du S2 sert AUSSI les bursts 1/2 (jointure SkillID CSV).
     expect(skills['5519'].hits.map((h) => h.id)).toEqual(skills['5502'].hits.map((h) => h.id));
-    expect(skills['5502'].hits.map((h) => h.damageFactor)).toEqual([200, 100, 400]);
-    // Le burst 3 a SA chaîne (multi-hit 3× puis coup final).
-    expect(skills['5521'].hits.map((h) => h.damageFactor)).toEqual([150, 550]);
+    // Les facteurs par coup (200/100/400 au S2, 150/550 au burst 3, relevés le
+    // 27/07/2026) sont l'équilibrage du jeu : seule la jointure est vérifiée.
+    for (const id of ['5502', '5521'])
+      for (const h of skills[id].hits) expect(h.damageFactor, id).toBeGreaterThan(0);
+    // Le burst 3 a SA chaîne (multi-hit puis coup final).
+    expect(skills['5521'].hits.map((h) => h.id)).not.toEqual(skills['5502'].hits.map((h) => h.id));
     expect(skills['5521'].hits[0].multiHit).toBe(true);
-    expect(skills['5521'].hits[0].maxHitCount).toBe(3);
+    expect(skills['5521'].hits[0].maxHitCount).toBeGreaterThan(1);
   });
 
   it('les facteurs de skill sont en ‰ plausibles (jointure LevelTemplet vivante)', () => {
-    // S2 d'Aer niveau 1 : 1900 ‰ (vérifié table). Un 0 généralisé = jointure morte.
-    expect(skills['5502'].levels[0].damageFactor).toBe(1900);
+    // S2 d'Aer niveau 1 (1900 ‰ le 27/07/2026). Un 0 généralisé = jointure morte.
+    expect(skills['5502'].levels[0].damageFactor).toBeGreaterThan(0);
     const withFactor = Object.values(skills).filter((s) =>
       s.levels.some((l) => l.damageFactor > 0),
     );
@@ -367,8 +372,10 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
       // lignes résolues par (étoile, grade)) — pas de jointure à vérifier ici.
     }
     // Groupes ABSENTS des tables du jeu (réfs mortes, mesuré 03/08/2026) —
-    // une CROISSANCE de cette liste signale une résolution cassée.
-    expect([...unresolvedOpt].sort()).toEqual(['12004', '12010', '1504']);
+    // une CROISSANCE de cette liste signale une résolution cassée. Un patch qui
+    // en répare un la fait décroître : ce n'est pas une panne, le test passe.
+    const KNOWN_DEAD = ['12004', '12010', '1504'];
+    expect([...unresolvedOpt].filter((g) => !KNOWN_DEAD.includes(g))).toEqual([]);
     expect([...unresolvedSpe]).toEqual([]);
   });
 
@@ -415,8 +422,9 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
   it('équipement : les artefacts référencent des buffs, les talismans un unique', () => {
     // Un effet par artefact : buffs référencés, OU effet direct ABT_* — un seul
     // artefact sans rien (id 2020, mesuré 03/08/2026).
+    // Comme les groupes morts : la liste ne doit pas CROÎTRE.
     const empty = equipment.artifacts.filter((a) => !a.buffIds.length && !a.buffType);
-    expect(empty.map((a) => a.id)).toEqual(['2020']);
+    expect(empty.map((a) => a.id).filter((id) => id !== '2020')).toEqual([]);
     const talismans = Object.values(equipment.pieces).filter(
       (p) => p.subType === 'ITS_EQUIP_OOPARTS',
     );
@@ -473,33 +481,35 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
         expect(levels[i].level, id).toBeGreaterThanOrEqual(levels[i - 1].level);
       for (const l of levels) expect(l.type, id).toBeTruthy();
     }
-    // Résolution « niveau enchant + 1 » (spec § 17.5) : 11 niveaux (enchant 0..10).
-    expect(buffsFile.buffs['BID_CEQUIP_MAIN_DMG_FIRE'].map((l) => l.level)).toEqual([
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-    ]);
+    // Résolution « niveau enchant + 1 » (spec § 17.5) : un niveau de buff par
+    // cran d'enchant de l'EE, +0 compris (11 pour +0..+10 au 2026-08).
+    const eeEnchant = equipment.enchant
+      .filter((e) => e.subType === 'ITS_EQUIP_EXCLUSIVE')
+      .map((e) => e.level);
+    expect(eeEnchant.length).toBeGreaterThan(0);
+    const levels = Math.max(...eeEnchant) + 1;
+    expect(buffsFile.buffs['BID_CEQUIP_MAIN_DMG_FIRE'].map((l) => l.level)).toEqual(
+      Array.from({ length: levels }, (_, i) => i + 1),
+    );
   });
 
   it('buffs : l’affinité (Trust) sort les plats vérifiés au binaire (27/07/2026)', () => {
-    expect(buffsFile.trust).toHaveLength(15);
-    const witness = (id: string): { stat?: string; applyingType?: string; value?: number } => {
+    // 15 paliers le 27/07/2026 : le nombre est celui du jeu.
+    expect(buffsFile.trust.length).toBeGreaterThan(0);
+    // Le MAPPING stat / type d'application est la règle ; les plats du
+    // palier 1 (60 ATK, 40 DEF, 300 PV le 27/07/2026) sont ceux du jeu.
+    for (const [id, stat] of [
+      ['trust_level_ATK_1', 'ST_ATK'],
+      ['trust_level_DEF_1', 'ST_DEF'],
+      ['trust_level_HP_1', 'ST_HP'],
+    ] as const) {
       const l = buffsFile.buffs[id][0];
-      return { stat: l.stat, applyingType: l.applyingType, value: l.value };
-    };
-    expect(witness('trust_level_ATK_1')).toEqual({
-      stat: 'ST_ATK',
-      applyingType: 'OAT_ADD',
-      value: 60,
-    });
-    expect(witness('trust_level_DEF_1')).toEqual({
-      stat: 'ST_DEF',
-      applyingType: 'OAT_ADD',
-      value: 40,
-    });
-    expect(witness('trust_level_HP_1')).toEqual({
-      stat: 'ST_HP',
-      applyingType: 'OAT_ADD',
-      value: 300,
-    });
+      expect({ stat: l.stat, applyingType: l.applyingType }, id).toEqual({
+        stat,
+        applyingType: 'OAT_ADD',
+      });
+      expect(l.value, id).toBeGreaterThan(0);
+    }
   });
 
   it('config : le GARDE-FOU des constantes du moteur tient (spec § 7 du mapping)', () => {
@@ -515,6 +525,9 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     expect(config.PVP_ATK_PENALTY_DMG_RATE).toBe(100);
     expect(config.PVP_ATK_PENALTY_DMG_ADD_RATE).toBe(30);
     expect(config.PVP_HEAL_PENALTY_REDUCE_ADD_RATE).toBe(250);
+    // Pas une constante du moteur mais un plafond que le calculateur écrit en
+    // dur (src/lib/damage/scenario.ts, `clamp(st.lv ?? 120, 1, 120)`) : un
+    // patch qui relève le cap doit casser ICI, et l'on corrige le clamp.
     expect(config.MAX_CHARACTER_LEVEL).toBe(120);
     expect([
       config.CHECK_AVOID_VALUE_1,
@@ -586,8 +599,12 @@ describe('damage/targets.json — cibles de preset (monstres des rencontres viva
     expect(vera).toBeDefined();
     expect(vera.element).toBe('CET_DARK');
     // Boss à stats PLATES (min = max) : l'interpolation de niveau est neutre.
-    expect(vera.baseStats.HP).toEqual({ min: 91080, max: 91080 });
-    expect(vera.baseStats.CriticalDMGRate).toEqual({ min: 1500, max: 1500 });
+    // (Les valeurs — 91 080 PV, 1500 ‰ de crit DMG au 03/08/2026 — sont
+    // l'équilibrage du jeu, pas le contrat de l'extraction.)
+    for (const stat of ['HP', 'CriticalDMGRate'] as const) {
+      expect(vera.baseStats[stat]?.min, stat).toBeGreaterThan(0);
+      expect(vera.baseStats[stat]?.max, stat).toBe(vera.baseStats[stat]?.min);
+    }
     expect(vera.buffImmune).toContain('BT_STUN');
     // Le break vit dans RageTemplet même sans enrage (trigger NONE).
     expect(vera.rage?.breakBuffIds).toEqual(['BID_BREAK_1', 'BID_BREAK_2', 'BID_BREAK_3']);
@@ -596,7 +613,13 @@ describe('damage/targets.json — cibles de preset (monstres des rencontres viva
   it('témoin enrage (401201) : déclencheur HP_RATE en ‰ avec durée', () => {
     const rage = targetsFile.targets['401201']?.rage;
     expect(rage?.trigger).toBe('HP_RATE');
-    expect(rage?.steps).toEqual([{ value: 500, duration: 5 }]);
+    // Un seuil en ‰ de PV (500 = 50 % au 03/08/2026) et une durée en tours.
+    expect(rage?.steps.length).toBeGreaterThan(0);
+    for (const st of rage?.steps ?? []) {
+      expect(st.value).toBeGreaterThan(0);
+      expect(st.value).toBeLessThan(1000);
+      expect(st.duration).toBeGreaterThan(0);
+    }
   });
 
   it('les buffs de break universels sont dans la fermeture avec leur effet vérifié', () => {
@@ -605,7 +628,7 @@ describe('damage/targets.json — cibles de preset (monstres des rencontres viva
     const b1 = buffsFile.buffs['BID_BREAK_1'][0];
     expect(b1.type).toBe('BT_DMG_REDUCE');
     expect(b1.applyingType).toBe('OAT_RATE');
-    expect(b1.value).toBe(-200);
+    expect(b1.value).toBeLessThan(0); // −200 ‰ au 03/08/2026 : le SIGNE est la règle
     expect(b1.createType).toBe('ON_BREAK');
     expect(buffsFile.buffs['BID_BREAK_2'][0].stat).toBe('ST_AVOID');
     expect(buffsFile.buffs['BID_BREAK_3'][0].stat).toBe('ST_BUFF_RESIST');

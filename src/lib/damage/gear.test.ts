@@ -14,7 +14,10 @@
  *   - set Revenge 4P : ATK jusqu'à +160 % selon les PV PERDUS (§ 14 BT 31).
  *
  * Attendus dérivés des TABLES (BuffTemplet via buffs.json), jamais recopiés
- * d'un rendu.
+ * d'un rendu — ni de la table elle-même : la valeur attendue se LIT dans
+ * buffs.json au niveau que la règle désigne (`lv`), pour qu'un rééquilibrage
+ * ne fasse pas casser un test dont le code est juste. Les valeurs entre
+ * parenthèses sont celles du jour, pour le lecteur.
  */
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../../data/generated/damage/characters.json';
@@ -49,6 +52,13 @@ const data = {
 
 const equipment = data.equipment!;
 const buffs = data.buffs;
+
+/** Valeur d'un buff de la table au niveau `level` — l'attendu des tests. */
+const lv = (id: string, level = 1): number => {
+  const v = buffs.buffs[id]?.find((l) => l.level === level)?.value;
+  expect(v, `${id} niveau ${level} absent de buffs.json`).toBeDefined();
+  return v!;
+};
 
 /** H.Dianne — feu, EE « Earnest Love » (pièce 2000093). */
 const DIANNE = '2000093';
@@ -105,14 +115,18 @@ describe('gear — EE « Earnest Love » (H.Dianne), donnée réelle', () => {
       source: 'ee',
       side: 'attacker',
       active: true,
-      buff: { type: 'BT_DMG_TO_BOSS', applyingType: 'OAT_RATE', value: 1000 },
+      buff: {
+        type: 'BT_DMG_TO_BOSS',
+        applyingType: 'OAT_RATE',
+        value: lv('BID_CEQUIP_2000093_ADD'),
+      },
     });
     const main = info.entries.find((e) => e.buffId === 'BID_CEQUIP_MAIN_DMG_FIRE');
     expect(main).toMatchObject({
       condition: 'TARGET_ELEMENT',
       conditionElement: Element.Earth,
       active: true,
-      buff: { type: 'BT_DMG', value: 230 }, // niveau enchant + 1 = 11
+      buff: { type: 'BT_DMG', value: lv('BID_CEQUIP_MAIN_DMG_FIRE', 11) }, // enchant + 1 (230)
     });
   });
 
@@ -126,7 +140,9 @@ describe('gear — EE « Earnest Love » (H.Dianne), donnée réelle', () => {
       Element.Earth,
     );
     expect(zero.entries.some((e) => e.buffId === 'BID_CEQUIP_2000093_ADD')).toBe(false);
-    expect(zero.entries.find((e) => e.buffId === 'BID_CEQUIP_MAIN_DMG_FIRE')?.buff.value).toBe(170);
+    expect(zero.entries.find((e) => e.buffId === 'BID_CEQUIP_MAIN_DMG_FIRE')?.buff.value).toBe(
+      lv('BID_CEQUIP_MAIN_DMG_FIRE', 1), // 170
+    );
     const vsWater = resolveGearPassives(
       DIANNE,
       { ee: { enchant: 10 } },
@@ -188,7 +204,7 @@ describe('gear — arme, accessoire, talisman, sets (donnée réelle)', () => {
     expect(e).toMatchObject({
       side: 'allies',
       active: false,
-      buff: { type: 'BT_DMG_TO_BOSS', value: 200 },
+      buff: { type: 'BT_DMG_TO_BOSS', value: lv('BID_ITEM_UO_ACC_25', 5) },
     });
     // BID_ITEM_UO_ACC_25_2 est BT_NONE (placeholder) : ignoré en silence.
     expect(info.entries.some((x) => x.buffId === 'BID_ITEM_UO_ACC_25_2')).toBe(false);
@@ -204,7 +220,11 @@ describe('gear — arme, accessoire, talisman, sets (donnée réelle)', () => {
       Element.Earth,
     );
     expect(info.entries).toMatchObject([
-      { source: 'talisman', active: true, buff: { type: 'BT_DMG_TARGET_BREAK', value: 100 } },
+      {
+        source: 'talisman',
+        active: true,
+        buff: { type: 'BT_DMG_TARGET_BREAK', value: lv('BID_OOPART_CP_6_03_lv10') }, // 100
+      },
     ]);
     // Le Lv1 (charge de CP en SKILL_FINISH) ne pèse pas sur le hit : silencieux.
     expect(info.dynamic).toEqual([]);
@@ -219,7 +239,9 @@ describe('gear — arme, accessoire, talisman, sets (donnée réelle)', () => {
 
   it('set Revenge 4P : ATK scalé par les PV PERDUS (§ 14 BT 31) — via § 16.1', () => {
     const gear = { sets: [{ groupId: '15', enchanted: false, pieces: 4 as const }] };
-    // À 100 % PV : rien ; à 25 % PV : +160 % × 0,75 = +120 % d'ATK.
+    // À 100 % PV : rien ; à 25 % PV : +160 % × 0,75 = +120 % d'ATK (le taux
+    // max, 1600 ‰ au 05/08/2026, se lit dans la table).
+    const revenge = lv('BID_ITEM_UO_SET_15');
     const full = buildDamageReport(attacker(gear, 100), target(), data);
     const hurt = buildDamageReport(attacker(gear, 25), target(), data);
     expect(full.combatStats.atk).toBe(10000);
@@ -229,7 +251,7 @@ describe('gear — arme, accessoire, talisman, sets (donnée réelle)', () => {
         baseValue: 0,
         archiveRatePermille: 0,
         buffValue: 0,
-        buffValueRate: 1200,
+        buffValueRate: (revenge * 3) / 4,
       }),
     );
     // 2 pièces seulement : le 4P ne s'applique pas.
@@ -267,11 +289,29 @@ describe('gear — intégration buildDamageReport', () => {
 
 describe('kit — passifs du perso (H.Dianne, donnée réelle)', () => {
   it('palier du passif UNIQUE par transcendance (growth.transcend.skillLevel)', () => {
-    const g = data.growth.transcend;
+    // Fixture calquée sur la table des 3★ (transStar 9 → niveau 4 au
+    // 05/08/2026) : la règle est « le plus haut palier atteint », pas le barème.
+    const g = [
+      { basicStar: 3, transStar: 3, skillLevel: 1 },
+      { basicStar: 3, transStar: 4, skillLevel: 1 },
+      { basicStar: 3, transStar: 5, skillLevel: 2 },
+      { basicStar: 3, transStar: 9, skillLevel: 4 },
+      { basicStar: 2, transStar: 9, skillLevel: 7 },
+    ];
     expect(uniquePassiveLevel(g, 3, 9)).toBe(4);
+    expect(uniquePassiveLevel(g, 3, 8)).toBe(2);
     expect(uniquePassiveLevel(g, 3, 5)).toBe(2);
     expect(uniquePassiveLevel(g, 3, 3)).toBe(1);
     expect(uniquePassiveLevel(g, 3, 2)).toBe(0);
+    // Sur la table réelle : monotone, nul sous le premier palier.
+    const real = data.growth.transcend;
+    let prev = 0;
+    for (let t = 1; t <= 12; t++) {
+      const level = uniquePassiveLevel(real, 3, t);
+      expect(level, `3★ transStar ${t}`).toBeGreaterThanOrEqual(prev);
+      prev = level;
+    }
+    expect(prev).toBeGreaterThan(0);
   });
 
   it('BT_STAT_PREMIUM (transcendance) : déjà dans la fiche AFFICHÉE — jamais recompté', () => {
@@ -308,7 +348,7 @@ describe('quirks — nœuds d’éveil du compte (donnée réelle)', () => {
         source: 'quirk',
         sourceId: '231',
         active: true,
-        buff: { type: 'BT_DMG_TO_BOSS', value: 90 },
+        buff: { type: 'BT_DMG_TO_BOSS', value: lv('Awakening_Boss_Dmg_3') }, // 90
       },
     ]);
     // 1 = arbre élémentaire TERRE (applyTypeValue 0) : Dianne est FEU → écarté.
@@ -402,7 +442,7 @@ describe('débuffs passifs ENEMY_* du kit — POSÉS in-game (mesure EE on/off 2
     expect(kit.entries.find((x) => x.buffId === 'trancendent_8_2000092_2')).toMatchObject({
       side: 'defender',
       active: true,
-      buff: { type: 'BT_2000092_ENHANCE', value: 500 },
+      buff: { type: 'BT_2000092_ENHANCE', value: lv('trancendent_8_2000092_2') }, // 500
     });
     expect(kit.unresolved.some((u) => u.buffId === 'trancendent_8_2000092_2')).toBe(false);
   });
@@ -454,7 +494,7 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
       side: 'attacker',
       active: true,
       callers: ['SKT_SECOND'],
-      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: 30 },
+      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: lv('2000022_2_2', 5) },
     });
     // Niveau 1 → ligne 1 (10 ‰) : la sélection suit le NIVEAU SAISI.
     const low = resolveKitPassives(
@@ -467,7 +507,9 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
       Element.Earth,
       { S2: 1 },
     );
-    expect(low.entries.find((x) => x.buffId === '2000022_2_2')?.buff.value).toBe(10);
+    expect(low.entries.find((x) => x.buffId === '2000022_2_2')?.buff.value).toBe(
+      lv('2000022_2_2', 1),
+    );
     // Le 3 % PV du S3 (2000022_3_3) : condition OWNER_RESOURCE (5 énergies) —
     // état de combat, jamais évalué par le moteur : entrée `stateful`,
     // INACTIVE par défaut.
@@ -492,7 +534,7 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
     expect(met.entries.find((x) => x.buffId === '2000022_3_3')).toMatchObject({
       stateful: true,
       active: true,
-      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: 30 },
+      buff: { type: 'BT_DMG_TARGET_STAT', stat: 'ST_HP', value: lv('2000022_3_3', 5) },
     });
   });
 
@@ -705,7 +747,7 @@ describe('buffs restreints par slot — Noa (donnée réelle, fixture 10/08/2026
       source: 'ee',
       active: true,
       callers: ['SKT_ULTIMATE'],
-      buff: { type: 'BT_DMG_ENEMY_TEAM_DECREASE', value: 150 },
+      buff: { type: 'BT_DMG_ENEMY_TEAM_DECREASE', value: lv('BID_CEQUIP_2000022') }, // 150
     });
     // La main « dégâts vs élément » vise l'EAU (BuffConditionValue 1) —
     // inactive contre une cible terre (cohérent avec le Δ 0 de la fixture).

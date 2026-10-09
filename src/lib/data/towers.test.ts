@@ -18,8 +18,8 @@ import {
  * d'étage lu dans le NameID, discrimination waves/encounters par la FORME des
  * groupes, singleton vs pool randomisé — n'a aucun symptôme visible, la page
  * rend simplement des étages faux. Ces tests ancrent le CONTRAT structurel sur
- * la donnée committée ; les comptes exacts (étages, pool, combats) sont datés
- * du 2026-07-16 et bougent avec les patchs, comme dans tags.test.ts.
+ * la donnée committée. Aucun compte exact (étages, pool, combats) n'y est
+ * écrit : ils bougent avec les patchs, alors que le contrat, lui, ne bouge pas.
  */
 
 const tower = (key: string): Tower => {
@@ -54,9 +54,8 @@ describe('towers.json — invariants structurels', () => {
         key,
       ).toEqual(floors);
     }
-    expect(tower('tower').floors).toHaveLength(100);
-    expect(tower('tower_hard').floors).toHaveLength(40);
-    expect(tower('tower_very_hard').floors).toHaveLength(20);
+    for (const key of TOWER_DIFFICULTY_MODES)
+      expect(tower(key).floors.length, key).toBeGreaterThan(0);
     // Les cinq élémentaires montent ensemble : même hauteur, jamais sous 100.
     const heights = ELEMENTS.map((el) => tower(`${TOWER_ELEMENT_MODE}_${el}`).floors.length);
     expect(new Set(heights).size, heights.join(',')).toBe(1);
@@ -94,15 +93,17 @@ describe('tower_very_hard — restrictions randomisées', () => {
 
   it('rien de figé par étage : le menu vit dans restrictionsPool', () => {
     for (const f of vh.floors) expect(f.restrictions, `étage ${f.floor}`).toEqual([]);
-    // Les 23 bans/quotas possibles (groupe 1001 des tables) — dédupliqués.
-    expect(vh.restrictionsPool).toHaveLength(23);
+    // Les bans/quotas possibles (groupe 1001 des tables) — dédupliqués.
+    expect(vh.restrictionsPool?.length).toBeGreaterThan(0);
     const keys = vh.restrictionsPool!.map((r) => `${r.type}|${r.subType}|${r.count}`);
     expect(new Set(keys).size).toBe(keys.length);
   });
 
-  it('randomisé partout SAUF les paliers fixes 5/10/15/20', () => {
+  it('randomisé partout SAUF les paliers fixes, un étage sur cinq', () => {
     const fixed = vh.floors.filter((f) => !f.randomized).map((f) => f.floor);
-    expect(fixed).toEqual([5, 10, 15, 20]);
+    const everyFifth = vh.floors.map((f) => f.floor).filter((n) => n % 5 === 0);
+    expect(fixed.length).toBeGreaterThan(0);
+    expect(fixed).toEqual(everyFifth);
   });
 });
 
@@ -152,10 +153,11 @@ describe('tours élémentaires — contre-élément requis', () => {
 describe('getTowerFloor / formatRestriction', () => {
   it('étage par numéro joueur, undefined hors bornes', () => {
     const t = tower('tower_hard');
+    const top = t.floors.length;
     expect(getTowerFloor(t, 1)?.floor).toBe(1);
-    expect(getTowerFloor(t, 40)?.floor).toBe(40);
+    expect(getTowerFloor(t, top)?.floor).toBe(top);
     expect(getTowerFloor(t, 0)).toBeUndefined();
-    expect(getTowerFloor(t, 41)).toBeUndefined();
+    expect(getTowerFloor(t, top + 1)).toBeUndefined();
   });
 
   const restriction = (over: Partial<TowerRestriction>): TowerRestriction => ({
@@ -191,12 +193,12 @@ describe('getTowerCombats — combats very hard', () => {
   const vh = tower('tower_very_hard');
   const combats = getTowerCombats(vh);
 
-  it('21 combats (état 2026-07-16) : 2 d’étage 20, 3 Demiurges, 16 du pool', () => {
+  it('trois groupes, chacun non vide, qui couvrent tous les combats', () => {
+    // Les effectifs (2 / 3 / 16 au 2026-07-16) suivent les patchs : seul le
+    // partage en trois groupes est une règle.
     const byGroup = (g: string) => combats.filter((c) => c.group === g).length;
-    expect(combats).toHaveLength(21);
-    expect(byGroup('floor20')).toBe(2); // Sigma / Iota
-    expect(byGroup('demiurge')).toBe(3);
-    expect(byGroup('random')).toBe(16);
+    for (const g of ['floor20', 'demiurge', 'random']) expect(byGroup(g), g).toBeGreaterThan(0);
+    expect(byGroup('floor20') + byGroup('demiurge') + byGroup('random')).toBe(combats.length);
   });
 
   it('dédupliqués par boss, rangés floor20 → demiurge → random, boss hors adds', () => {

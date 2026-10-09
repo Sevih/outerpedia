@@ -370,15 +370,19 @@ describe('unsupportedBillboard', () => {
 });
 
 describe('unsupportedFrameLayer', () => {
-  /** Un calque de cadre de la table — le premier émetteur est l'`inner` d'un effet servi. */
-  const FRAME = EMITTERS.find(({ e }) => layerVerdict(e).kind === 'mesh')!.e;
+  /** Un calque de cadre de la table, sans rotation initiale — la base que les
+   * cas ci-dessous dérèglent un à un. Choisi par sa forme, pas par sa place :
+   * un patch qui ajoute un effet en tête de table ne change rien ici. */
+  const FRAME = EMITTERS.find(
+    ({ e }) =>
+      layerVerdict(e).kind === 'mesh' && e.startRotationMode === 0 && e.startRotation === 0,
+  )?.e as FxEmitter;
 
   it('accepte les calques de cadre de la table', () => {
-    expect(unsupportedFrameLayer(FRAME)).toBeNull();
     // `startRotationMin` vaut 2π sur tous les calques du jeu : en état 0, seule
     // la valeur compte, et elle est nulle.
-    expect(FRAME.startRotationMode).toBe(0);
-    expect(FRAME.startRotation).toBe(0);
+    expect(FRAME).toBeDefined();
+    expect(unsupportedFrameLayer(FRAME)).toBeNull();
   });
 
   it.each<[string, Partial<FxEmitter>, string]>([

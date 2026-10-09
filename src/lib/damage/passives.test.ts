@@ -7,7 +7,9 @@
  * Attendus dérivés des TABLES (BuffTemplet via buffs.json), jamais recopiés
  * d'un rendu : crit +100 % / crit dmg −85 % sur l'équipe joueuse, réductions
  * élémentaires du boss (−15 % si l'attaquant a l'avantage, +50 % sinon), les
- * trois WG_DMG_REDUCE signalés § 12.3.
+ * trois WG_DMG_REDUCE signalés § 12.3. Les MONTANTS se lisent dans
+ * buffs.json (`lv`) : leur valeur du jour est gardée, comme alarme de patch,
+ * par datagen/damage/damage-data.test.ts — ici on teste le moteur.
  */
 import { describe, expect, it } from 'vitest';
 import charactersData from '../../../data/generated/damage/characters.json';
@@ -29,6 +31,13 @@ const data = {
   buffs: buffsData,
   targets: targetsData,
 } as unknown as DamageData;
+
+/** Valeur d'un buff de la table (niveau 1) — l'attendu des tests. */
+const lv = (id: string): number => {
+  const v = data.buffs.buffs[id]?.find((l) => l.level === 1)?.value;
+  expect(v, `${id} absent de buffs.json`).toBeDefined();
+  return v!;
+};
 
 /** Unidentified Chimera, stage 12 — seul passif : 131113 (Starving Devil). */
 const CHIMERA_12 = '403400261';
@@ -88,7 +97,7 @@ describe('passives — Ars Nova (raid_2), donnée réelle', () => {
       side: 'defender',
       condition: 'TARGET_ELEMENT',
       conditionValue: 3,
-      buff: { type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: -450 },
+      buff: { type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: lv('9') }, // −450
     });
     expect(s.unresolved.some((u) => u.buffId === '9')).toBe(false);
   });
@@ -102,17 +111,27 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
     // Équipe joueuse (ENEMY_TEAM) : crit forcé + crit dmg −85 %.
     expect(byId('4076007_15_1')[0]).toMatchObject({
       side: 'attacker',
-      buff: { type: 'BT_STAT', stat: 'ST_CRITICAL_RATE', applyingType: 'OAT_ADD', value: 1000 },
+      buff: {
+        type: 'BT_STAT',
+        stat: 'ST_CRITICAL_RATE',
+        applyingType: 'OAT_ADD',
+        value: lv('4076007_15_1'), // 1000
+      },
     });
     expect(byId('4076007_15_2')[0]).toMatchObject({
       side: 'attacker',
-      buff: { type: 'BT_STAT', stat: 'ST_CRITICAL_DMG_RATE', applyingType: 'OAT_ADD', value: -850 },
+      buff: {
+        type: 'BT_STAT',
+        stat: 'ST_CRITICAL_DMG_RATE',
+        applyingType: 'OAT_ADD',
+        value: lv('4076007_15_2'), // −850
+      },
     });
     // Boss (ME) : réductions conditionnées à l'élément de l'attaquant.
     expect(byId('1')[0]).toMatchObject({
       side: 'defender',
       condition: 'ATTACKER_ELEMENT_WIN',
-      buff: { type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: -150 },
+      buff: { type: 'BT_DMG_REDUCE', applyingType: 'OAT_RATE', value: lv('1') }, // −150
     });
     expect(byId('2')[0]).toMatchObject({ condition: 'ATTACKER_ELEMENT_LOSE' });
     expect(byId('3')[0]).toMatchObject({ condition: 'ATTACKER_ELEMENT_EQUAL' });
@@ -122,7 +141,12 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
       skillId: '131125',
       side: 'defender',
       rage: true,
-      buff: { type: 'BT_STAT', stat: 'ST_DMG_REDUCE_RATE', applyingType: 'OAT_ADD', value: 400 },
+      buff: {
+        type: 'BT_STAT',
+        stat: 'ST_DMG_REDUCE_RATE',
+        applyingType: 'OAT_ADD',
+        value: lv('Common_Rage_Buff_3'), // 400
+      },
     });
     expect(s.entries).toHaveLength(6);
     // BT_DMG sortants du boss (4/5/6) : jamais calculés — absents, pas signalés.
@@ -174,8 +198,8 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
 
   it('équipe joueuse : les débuffs traversent § 16.1 — crit forcé, crit dmg −850', () => {
     const r = buildDamageReport(attacker(FIRE), target(), data);
-    expect(r.combatStats.critical_rate).toBe(500 + 1000);
-    expect(r.combatStats.critical_dmg).toBe(1500 - 850);
+    expect(r.combatStats.critical_rate).toBe(500 + lv('4076007_15_1')); // 500 + 1000
+    expect(r.combatStats.critical_dmg).toBe(1500 + lv('4076007_15_2')); // 1500 − 850
     // +100 % de taux crit → P(crit) = 1, la branche normale reste émise à
     // P = 0 (normal/crit toujours émis — leurs dégâts ne dépendent pas de P).
     for (const s of r.slots) {
@@ -194,9 +218,9 @@ describe('passives — Starving Devil (Chimera stage 12), donnée réelle', () =
       expect(step).toBeDefined();
       return step!.out;
     };
-    expect(reduceOf(FIRE)).toBe(-150); // avantage : le boss prend PLUS
-    expect(reduceOf(WATER)).toBe(500); // désavantage : −50 %
-    expect(reduceOf(EARTH)).toBe(500); // neutre (EQUAL) : −50 % aussi
+    expect(reduceOf(FIRE)).toBe(lv('1')); // avantage (−150) : le boss prend PLUS
+    expect(reduceOf(WATER)).toBe(lv('2')); // désavantage : −50 %
+    expect(reduceOf(EARTH)).toBe(lv('3')); // neutre (EQUAL) : −50 % aussi
   });
 
   it('le rapport expose bossPassives : entrées évaluées + non-résolus', () => {

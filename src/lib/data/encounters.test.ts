@@ -54,7 +54,10 @@ describe('encountersOfGroup — un combat, ses difficultés', () => {
     // unique n'en retenait qu'un, et les deux autres n'existaient nulle part.
     const ids = encs.flatMap((e) => e.monsters.map((m) => m.id));
     expect(new Set(ids).size).toBe(3);
-    expect(encs.map((e) => e.monsters[0].level)).toEqual([25, 80, 120]);
+    // Le niveau monte avec la difficulté — sa valeur exacte est l'affaire du jeu.
+    const levels = encs.map((e) => e.monsters[0].level);
+    expect(new Set(levels).size).toBe(levels.length);
+    expect(levels).toEqual([...levels].sort((a, b) => a - b));
   });
 
   it('trie sur `difficulty.order`, jamais sur les identifiants', () => {
@@ -109,13 +112,21 @@ describe('difficultyLabel — le texte du jeu, sinon la locale, jamais une clé'
     }
   });
 
-  it('`stage_N` est un GABARIT — le guild raid monte à 10, pas à 3', () => {
-    const gr = encountersOfGroup('guild_raid:SYS_TITLE_GUILD_RAID_SEASON2_MAIN');
-    const keys = gr.map((e) => e.ref.difficulty?.key);
-    expect(keys).toContain('stage_10');
+  it('`stage_N` est un GABARIT — une échelle de guild raid dépasse 3', () => {
+    // Le combat n'est pas écrit en dur (une saison peut être purgée) : on prend
+    // l'échelle de guild raid la plus longue, qui doit dépasser les trois
+    // libellés qu'un dictionnaire figé aurait prévus.
+    const gr = GROUPS.filter((g) => g.startsWith('guild_raid:'))
+      .map((g) => encountersOfGroup(g))
+      .reduce((a, b) => (b.length > a.length ? b : a), []);
+    expect(gr.length).toBeGreaterThan(3);
     const last = gr[gr.length - 1];
-    expect(difficultyLabel(last.ref, 'fr', makeT(MSG.fr))).toBe('Étape 10');
-    expect(difficultyLabel(last.ref, 'en', makeT(MSG.en))).toBe('Stage 10');
+    const m = /^stage_(\d+)$/.exec(last.ref.difficulty?.key ?? '');
+    expect(m, last.ref.difficulty?.key).not.toBeNull();
+    const n = Number(m![1]);
+    expect(n).toBeGreaterThan(3);
+    expect(difficultyLabel(last.ref, 'fr', makeT(MSG.fr))).toBe(`Étape ${n}`);
+    expect(difficultyLabel(last.ref, 'en', makeT(MSG.en))).toBe(`Stage ${n}`);
   });
 
   it('la difficulté la plus dure est celle que le guide cible', () => {
@@ -166,12 +177,11 @@ describe.skipIf(AL.length === 0)(
         expect(new Set(stages).size, `${d.name.en} : doublons`).toBe(stages.length);
         expect(stages, `${d.name.en} : ordre`).toEqual([...stages].sort((a, b) => a - b));
       }
-      // Anubis (70600018) n'existe qu'en fin d'échelle : 8, 9, 10.
-      const anubis = (encountersData as Record<string, DungeonRef>)['70600018'];
-      expect(anubis.ranks!.map((r) => r.stage)).toEqual([8, 9, 10]);
-      // Masterless (70600000), lui, est là dès le premier stage.
-      const masterless = (encountersData as Record<string, DungeonRef>)['70600000'];
-      expect(masterless.ranks!.map((r) => r.stage)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      // Certains boss n'entrent qu'en cours d'échelle (Anubis au 8 le
+      // 2026-07-16), d'autres sont là dès le premier stage (Masterless) : le
+      // stage est la colonne `Level`, pas le rang de la ligne.
+      expect(AL.some((d) => d.ranks![0].stage! > 1)).toBe(true);
+      expect(AL.some((d) => d.ranks![0].stage === 1)).toBe(true);
     });
 
     it('le stage fixe le niveau du boss — plus le stage est haut, plus il est fort', () => {
@@ -186,8 +196,9 @@ describe.skipIf(AL.length === 0)(
 describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les boss', () => {
   const WB_GROUPS = GROUPS.filter((g) => g.startsWith('world_boss:'));
 
-  it('six combats, quatre ligues chacun, les hautes alignent DEUX boss', () => {
-    expect(WB_GROUPS).toHaveLength(6);
+  it('quatre ligues par combat, les hautes alignent DEUX boss', () => {
+    // Le nombre de combats (six au 2026-07-16) suit les patchs ; pas la forme.
+    expect(WB_GROUPS.length).toBeGreaterThan(0);
     for (const g of WB_GROUPS) {
       const encs = encountersOfGroup(g);
       expect(
@@ -203,7 +214,7 @@ describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les bo
         g,
       ).toEqual([1, 1, 2, 2]);
       const ids = encs.flatMap((e) => e.monsters.map((m) => m.id));
-      expect(new Set(ids).size, g).toBe(6);
+      expect(new Set(ids).size, g).toBe(ids.length);
     }
   });
 
@@ -248,15 +259,20 @@ describe('world boss — quatre ligues, une échelle de rangs qui ENJAMBE les bo
 });
 
 describe('formations alternatives — la tour very hard se lit une formation à la fois', () => {
-  /** Skyward very hard 1F : un pool de 12 formations (38 entrées en tout). */
-  const [vh1] = encountersOfIds(['40103001']);
   const pooled = Object.entries(encountersData as unknown as Record<string, DungeonRef>)
     .filter(([, d]) => d.monsters?.some((m) => m.formation !== undefined))
     .map(([id]) => id);
+  /** Un étage very hard à pool (Skyward 1F au 2026-07-16 : 12 formations). La
+   * composition exacte suit les patchs : on prend le premier donjon à pool. */
+  const [vh1] = encountersOfIds(pooled);
+  /** Les numéros de formation de la donnée, dans l'ordre du jeu. */
+  const numbers = [...new Set(vh1.monsters.flatMap((m) => m.formation ?? []))];
 
   it('un donjon à pool rend ses formations, jamais leur somme', () => {
     const formations = encounterFormations(vh1);
-    expect(formations.map((f) => f.length)).toEqual([2, 1, 4, 4, 4, 4, 3, 3, 4, 4, 2, 3]);
+    expect(formations.length).toBeGreaterThan(1);
+    expect(formations).toHaveLength(numbers.length);
+    for (const f of formations) expect(f.length).toBeLessThan(vh1.monsters.length);
     // Rien n'est perdu ni compté deux fois : les formations se partagent le donjon.
     expect(formations.flat()).toHaveLength(vh1.monsters.length);
   });
@@ -267,21 +283,24 @@ describe('formations alternatives — la tour very hard se lit une formation à 
   });
 
   it('la vague du boss est celle d’UNE formation — la première par défaut', () => {
-    expect(bossWaveMonsters(vh1).map((m) => m.id)).toEqual(['40103001', '40103022']);
-    expect(bossWaveMonsters(vh1, 3).map((m) => m.id)).toEqual([
-      '40103003',
-      '40103026',
-      '40103027',
-      '40103028',
-    ]);
-    expect(bossWaveMonsters(vh1, 2)).toHaveLength(1);
+    const ids = (ms: { id: string }[]) => ms.map((m) => m.id);
+    expect(ids(bossWaveMonsters(vh1))).toEqual(ids(bossWaveMonsters(vh1, numbers[0])));
+    for (const n of numbers) {
+      const wave = bossWaveMonsters(vh1, n);
+      expect(wave.length, `formation ${n}`).toBeGreaterThan(0);
+      expect(wave[0].role, `formation ${n} : le boss d'abord`).toBe('boss');
+      for (const m of wave) expect([undefined, n], `formation ${n}`).toContain(m.formation);
+    }
+    // Deux formations ne rendent pas la même vague : le pool n'est pas aplati.
+    const waves = new Set(numbers.map((n) => ids(bossWaveMonsters(vh1, n)).join(',')));
+    expect(waves.size).toBeGreaterThan(1);
   });
 
   it('une formation = UN boss, distinct des autres : une ligne du picker par formation', () => {
     // Le calculateur liste les boss d'un donjon (`<donjon>:<boss>`) : sur un
     // pool, cela ne présente une formation à la fois que si chaque formation
     // aligne exactement un boss et qu'aucun boss ne sert deux formations.
-    expect(pooled).toHaveLength(20);
+    expect(pooled.length).toBeGreaterThan(0);
     for (const e of encountersOfIds(pooled)) {
       const bosses = encounterFormations(e).map((f) => f.filter((m) => m.role === 'boss'));
       expect(
@@ -294,16 +313,20 @@ describe('formations alternatives — la tour very hard se lit une formation à 
   });
 });
 
-describe('special request — dix échelles de treize stages', () => {
-  /** Les dix combats des guides Special Request portés (5 échelles × 2 modes). */
+describe('special request — des échelles de stages, mode par mode', () => {
+  /** Les combats des guides Special Request portés (au 2026-07-16 : 5 échelles
+   * de 13 stages × 2 modes — des effectifs que le test n'écrit pas). */
   const SR_GROUPS = GROUPS.filter((g) => g.startsWith('raid_1:') || g.startsWith('raid_2:'));
 
-  it('cinq échelles par mode, treize stages chacune, clés en gabarit `stage_N`', () => {
-    expect(SR_GROUPS.filter((g) => g.startsWith('raid_1:'))).toHaveLength(5);
-    expect(SR_GROUPS.filter((g) => g.startsWith('raid_2:'))).toHaveLength(5);
+  it('autant d’échelles par mode, clés en gabarit `stage_N` contigu', () => {
+    const raid1 = SR_GROUPS.filter((g) => g.startsWith('raid_1:'));
+    const raid2 = SR_GROUPS.filter((g) => g.startsWith('raid_2:'));
+    expect(raid1.length).toBeGreaterThan(0);
+    expect(raid2).toHaveLength(raid1.length);
     for (const g of SR_GROUPS) {
       const keys = encountersOfGroup(g).map((e) => e.ref.difficulty?.key);
-      expect(keys, g).toEqual(Array.from({ length: 13 }, (_, i) => `stage_${i + 1}`));
+      expect(keys.length, g).toBeGreaterThan(1);
+      expect(keys, g).toEqual(Array.from({ length: keys.length }, (_, i) => `stage_${i + 1}`));
     }
   });
 
@@ -420,12 +443,12 @@ describe('special request — dix échelles de treize stages', () => {
   });
 });
 
-describe('poursuite irregular — quatre combats permanents, du butin par issue', () => {
-  /** Les quatre combats des guides Irregular Extermination portés. */
+describe('poursuite irregular — des combats permanents, du butin par issue', () => {
+  /** Les combats des guides Irregular Extermination portés (quatre au 2026-07-16). */
   const CHASE_GROUPS = GROUPS.filter((g) => g.startsWith('irregular_chase:'));
 
-  it("quatre poursuites, trois difficultés chacune, dans l'ordre du jeu", () => {
-    expect(CHASE_GROUPS).toHaveLength(4);
+  it("des poursuites à trois difficultés chacune, dans l'ordre du jeu", () => {
+    expect(CHASE_GROUPS.length).toBeGreaterThan(0);
     for (const g of CHASE_GROUPS) {
       const keys = encountersOfGroup(g).map((e) => e.ref.difficulty?.key);
       expect(keys, g).toEqual(['normal', 'hard', 'very_hard']);

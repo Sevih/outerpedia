@@ -24,6 +24,7 @@ import setsData from '../../data/generated/solver/sets.json';
 import subTicksData from '../../data/generated/solver/sub-ticks.json';
 import trustCharacterData from '../../data/generated/solver/trust-character.json';
 import versionData from '../../data/generated/solver/version.json';
+import heroGrowthData from '../../data/generated/hero-growth.json';
 import { singleValue } from '../lib/tables';
 
 const characters = charactersData as Record<
@@ -68,6 +69,7 @@ const sets = setsData as Record<
   }
 >;
 const eePassives = eePassivesData as Record<string, { levelThreshold: number; v: number }[]>;
+const heroGrowth = heroGrowthData as { xpCurve: number[]; affinityCurve: number[] };
 
 const SLOTS = new Set([
   'weapon',
@@ -118,22 +120,30 @@ describe('solver — contrat de FORME (enums bruts, EN simple)', () => {
 });
 
 describe('solver — cohérence inter-fichiers', () => {
-  it('gems : 54 gemmes (9 stats × 6 niveaux), chacune alignée sur son option', () => {
-    expect(Object.keys(gems)).toHaveLength(54);
+  it('gems : une grille complète stats × niveaux, chacune alignée sur son option', () => {
+    // 9 stats × 6 niveaux = 54 au 2026-07-16 : la grille est la règle, pas
+    // ses dimensions.
+    const all = Object.values(gems);
+    const maxLevel = Math.max(...all.map((g) => g.level));
+    const stats = new Set(all.map((g) => g.st));
+    expect(all.length).toBeGreaterThan(0);
+    expect(all).toHaveLength(stats.size * maxLevel);
+    const cells = new Set(all.map((g) => `${g.st}|${g.level}`));
+    expect(cells.size).toBe(all.length);
     for (const [id, g] of Object.entries(gems)) {
       const opt = options[id];
       expect(opt?.st, id).toBe(g.st);
       expect(opt?.v, id).toBe(g.v);
       expect(g.level).toBeGreaterThanOrEqual(1);
-      expect(g.level).toBeLessThanOrEqual(6);
     }
   });
 
-  it('enhance : courbes d’XP complètes (11 crans, cumulées croissantes), 5 pas de Singularité', () => {
-    expect(enhance.maxEnhanceLevel).toBe(10);
+  it('enhance : courbes d’XP complètes (un cran par niveau, +0 compris, cumulées croissantes), 5 pas de Singularité', () => {
+    // +10 max au 2026-07-16 : la courbe doit couvrir le max de la table, quel qu'il soit.
+    expect(enhance.maxEnhanceLevel).toBeGreaterThan(0);
     expect(enhance.singularity.steps.length).toBeGreaterThanOrEqual(5);
     for (const [key, curve] of Object.entries(enhance.expCurves)) {
-      expect(curve, key).toHaveLength(11);
+      expect(curve, key).toHaveLength(enhance.maxEnhanceLevel + 1);
       for (let i = 1; i < curve.length; i++)
         expect(curve[i], `${key}[${i}]`).toBeGreaterThanOrEqual(curve[i - 1]);
     }
@@ -165,13 +175,16 @@ describe('solver — cohérence inter-fichiers', () => {
     }
   });
 
-  it('courbes : exp-character 121 crans croissants, trust 101 plafonné à 850000', () => {
+  it('courbes : exp-character et trust croissants, mêmes crans que la fiche hero-growth', () => {
+    // 121 et 101 crans au 2026-07-16 (index 0 = sentinelle) : la longueur suit
+    // le niveau max et l'affinité max du jeu ; la règle est la parité avec la
+    // même table lue par hero-growth.json, décalée d'un cran.
     const exp = expCharacterData as number[];
-    expect(exp).toHaveLength(121);
     for (let i = 2; i < exp.length; i++) expect(exp[i], `lv${i}`).toBeGreaterThan(exp[i - 1]);
+    expect(exp.slice(1)).toEqual(heroGrowth.xpCurve);
     const trust = trustCharacterData as number[];
-    expect(trust).toHaveLength(101);
-    expect(trust[100]).toBe(850000);
+    expect(trust.slice(1)).toEqual(heroGrowth.affinityCurve);
+    expect(trust.at(-1)).toBe(Math.max(...trust));
   });
 
   it('sub-ticks : paliers 5★ et 6★, chacun avec les 6 duals ATK/DEF/HP flat+%', () => {

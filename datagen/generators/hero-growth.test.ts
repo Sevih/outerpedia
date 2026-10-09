@@ -15,6 +15,7 @@
 import { describe, expect, it } from 'vitest';
 import { emptyDict } from '../lib/lang';
 import heroGrowthData from '../../data/generated/hero-growth.json';
+import damageConfigData from '../../data/generated/damage/config.json';
 import itemsData from '../../data/generated/items.json';
 import type { Row } from '../lib/tables';
 import type { CatalogEntry } from './item-catalog';
@@ -175,10 +176,15 @@ describe('hero-growth.json — invariants', () => {
         if (curve[i] <= curve[i - 1]) bad.push(`${label} : palier ${i + 1} = ${curve[i]}`);
     }
     expect(bad).toEqual([]);
-    // Le niveau max EST le contrat de l'outil : un cran de plus et la saisie de
-    // niveau accepterait une valeur que le jeu refuse.
-    expect(h.xpCurve).toHaveLength(120);
-    expect(h.affinityCurve).toHaveLength(100);
+    // Le niveau max EST le contrat de l'outil (la saisie lit la longueur de la
+    // courbe) : un cran de plus et elle accepterait une valeur que le jeu
+    // refuse. On l'adosse donc à la constante du jeu, pas à « 120 » écrit ici.
+    const maxLevel = (damageConfigData as { config: { MAX_CHARACTER_LEVEL: number } }).config
+      .MAX_CHARACTER_LEVEL;
+    expect(h.xpCurve).toHaveLength(maxLevel);
+    // Pas de constante de jeu pour l'affinité max (100 au 2026-07-16) : la
+    // parité avec trust-character est tenue par solver.test.ts.
+    expect(h.affinityCurve.length).toBeGreaterThan(1);
   });
 
   it('cadeaux : points > 0, types present_0X, chaque grade a son palier', () => {
@@ -189,10 +195,17 @@ describe('hero-growth.json — invariants', () => {
       if (!itemIds.has(g.id)) bad.push(`${g.id} : absent d’items.json`);
     }
     expect(bad).toEqual([]);
-    // Un point par grade : le barème du jeu monte 100 → 200 → 500 → 1000.
-    expect([...new Set(h.gifts.map((g) => g.points))].sort((a, b) => a - b)).toEqual([
-      100, 200, 500, 1000,
-    ]);
+    // Un palier de points par grade, qui monte avec le grade (100 → 200 → 500
+    // → 1000 au 2026-07-16 : le barème est au jeu, la règle est ici).
+    const GRADES = ['normal', 'magic', 'rare', 'unique'];
+    const byGrade = new Map<string, Set<number>>();
+    for (const g of h.gifts) {
+      expect(GRADES, `${g.id} : grade ${g.grade}`).toContain(g.grade);
+      byGrade.set(g.grade, (byGrade.get(g.grade) ?? new Set()).add(g.points));
+    }
+    const ladder = GRADES.filter((g) => byGrade.has(g)).map((g) => [...byGrade.get(g)!]);
+    for (const pts of ladder) expect(pts).toHaveLength(1);
+    for (let i = 1; i < ladder.length; i++) expect(ladder[i][0]).toBeGreaterThan(ladder[i - 1][0]);
   });
 
   it('fusion : paliers 1→5 continus, coût > 0, couple base ≠ fusionné', () => {

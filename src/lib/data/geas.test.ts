@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import glossariesData from '@data/generated/glossaries.json';
 import type { Glossaries } from '@contracts';
+import { getEncounters } from '@/lib/data/encounters';
 import { getGeas, geasUnlockTable, isBonusGeas, resolveGeas } from '@/lib/data/geas';
 
 /**
@@ -8,17 +9,24 @@ import { getGeas, geasUnlockTable, isBonusGeas, resolveGeas } from '@/lib/data/g
  * la table de déblocage d'un sous-boss se lit sur les `geasRewards` de ses
  * stages. Deux dérives silencieuses possibles : un id de geas qui ne résout
  * plus (palier muet) et un classement bonus/malus faux (le SIGNE de `points`
- * fait foi, pas le flag `positive` du jeu). Groupe d'ancrage : S4 sub1,
- * committé — même régime de donnée datée que singularity.test.ts.
+ * fait foi, pas le flag `positive` du jeu). Le groupe d'ancrage n'est pas
+ * écrit en dur : c'est le premier sous-boss de raid de guilde qui porte des
+ * geas dans la donnée committée — une saison purgée par un patch ne casse rien.
  */
 
 const POOL = (glossariesData as unknown as Glossaries).geas ?? {};
-const GROUP = 'guild_raid:SYS_TITLE_GUILD_RAID_SEASON4_SUB1';
+const GROUP = [
+  ...new Set(
+    Object.values(getEncounters())
+      .map((d) => d.group)
+      .filter((g): g is string => Boolean(g?.startsWith('guild_raid:'))),
+  ),
+].find((g) => geasUnlockTable(g).length > 0);
 
 describe('pool de geas (glossaries.geas)', () => {
-  it('107 entrées (état 2026-07-16), chacune complète', () => {
+  it('un pool non vide, chaque entrée complète', () => {
     const entries = Object.entries(POOL);
-    expect(entries).toHaveLength(107);
+    expect(entries.length).toBeGreaterThan(0);
     for (const [id, g] of entries) {
       expect(g.desc.en, id).toBeTruthy();
       expect(typeof g.points, id).toBe('number');
@@ -55,9 +63,10 @@ describe('isBonusGeas — le signe de points fait foi', () => {
 });
 
 describe('geasUnlockTable — table de déblocage d’un sous-boss', () => {
-  const table = geasUnlockTable(GROUP);
+  const table = GROUP ? geasUnlockTable(GROUP) : [];
 
   it('des paliers triés par kills croissants, lus des clés stage_N', () => {
+    expect(GROUP, 'aucun sous-boss de raid ne porte de geas').toBeDefined();
     expect(table.length).toBeGreaterThan(0);
     const kills = table.map((u) => u.kill);
     expect([...kills].sort((a, b) => a - b)).toEqual(kills);
