@@ -16,6 +16,8 @@
  * hors rangs (priorité de skills, tags, pros / cons et synergies, leurs tags
  * inline contrôlés par la résolution du site), puis les chips de skills (`kit` :
  * cartes, curation et catalogue FACTICES, `applyCharacterKitCuration` factice).
+ * L'EE (`ee` : l'item et le catalogue FACTICES, `upsertEeCurated` factice) : ses
+ * rangs et ses chips partent en UNE écriture, sur l'entrée que la page avait lue.
  * Le disque est FACTICE, les stores et git INJECTÉS ; seul le roster est réel
  * (Aer, `2000055`). Et `previewInline`, l'aperçu de ces textes, par un
  * `renderInlineBatch` factice.
@@ -126,6 +128,7 @@ import {
   ADMIN_BASE_DEFAULT,
   ADMIN_TO_QUICK,
   BANNER_LOOKBACK_DAYS,
+  CHARACTER_SHEET_DEPS,
   COUPON_EXPIRY_DAYS,
   DASHBOARD_DISK,
   NO_GAME_DATA,
@@ -187,6 +190,7 @@ import {
   type Outcome,
   type RankChange,
   type RankDisk,
+  type SheetEeItem,
   type TranslateDeps,
   type UsageSource,
 } from './actions';
@@ -481,18 +485,46 @@ const KIT_CATALOG: Record<string, EffectOption> = {
   '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
   '7': { id: '7', name: 'Increased Attack', isDebuff: false },
 };
+/** L'EE d'un perso, factice : une chip AUTO, ses deux passifs. */
+const EE_ITEM: SheetEeItem = {
+  itemId: '2000055',
+  name: 'Super Board',
+  icon: 'TI_Equipment_EX_2000055',
+  star: 6,
+  grade: 'unique',
+  chips: [
+    {
+      ref: 'SYS_BUFF_ACTION_GAUGE_UP',
+      name: 'Priority Increase',
+      icon: 'IG_Buff_Action_Gauge_Up',
+      isDebuff: false,
+      desc: 'Increases the target’s Priority.',
+    },
+  ],
+  passives: [
+    { level: 1, name: 'Aer’s Exclusive Equipment', texts: ['Penetration +20%'] },
+    { level: 10, name: 'Aer’s Exclusive Equipment', texts: ['Penetration +40%'] },
+  ],
+};
+/** Le catalogue de « ＋ effet » de l'EE : celui de Skills, descriptions comprises. */
+const EE_CATALOG: Record<string, EffectOption> = {
+  '1': { ...KIT_CATALOG['1'], desc: 'Takes damage every turn.' },
+  '7': KIT_CATALOG['7'],
+};
 
 describe('characterRoster, characterSheetState — la fiche lue, disque injecté', () => {
   const AER = '2000055';
   const aer = getCharacterListItems().find((c) => c.id === AER)!;
   const sheetDisk = (
     curated: Record<string, CharacterCurated> = { [AER]: DIANNE },
-    kit: Partial<Pick<CharacterSheetDeps, 'kitCards' | 'kitSections'>> = {},
+    kit: Partial<Pick<CharacterSheetDeps, 'disk' | 'kitCards' | 'kitSections' | 'eeItem'>> = {},
   ) => ({
     disk: () => disk({ curated, roster: new Set([AER]), eeOwners: new Set([AER]) }),
     kitCards: async () => KIT_CARDS,
     kitSections: () => ({ chipHide: {}, chipAdd: {} }),
     kitCatalog: () => KIT_CATALOG,
+    eeItem: (): SheetEeItem | null => EE_ITEM,
+    eeCatalog: () => EE_CATALOG,
     ...kit,
   });
 
@@ -636,6 +668,71 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(state.curated).toEqual(DIANNE);
   });
 
+  it('`ee` : l’item du jeu, ce que le disque en cure — vides compris —, le catalogue ; l’échelle à part', async () => {
+    const eeDisk = (ee: RankDisk['ee']) => () =>
+      disk({ curated: { [AER]: DIANNE }, ee, roster: new Set([AER]), eeOwners: new Set([AER]) });
+    const state = await characterSheetState(
+      AER,
+      sheetDisk(undefined, {
+        disk: eeDisk({
+          [AER]: { rank: 'A', rank10: 'S', chipHide: ['x'], source: { label: 'z' } },
+        }),
+      }),
+    );
+    if ('error' in state) throw new Error(state.error);
+    expect(state.ee).toEqual({
+      ...EE_ITEM,
+      rank: 'A',
+      rank10: 'S',
+      chipHide: ['x'],
+      chipAdd: [],
+      catalog: EE_CATALOG,
+    });
+    expect(state.eeTiers).toEqual(['S', 'A', 'B', 'C', 'D']);
+
+    // Un EE sans entrée curée (Lambda aujourd'hui) : la fiche vide, rien d'absent.
+    const bare = await characterSheetState(AER, sheetDisk(undefined, { disk: eeDisk({}) }));
+    if ('error' in bare) throw new Error(bare.error);
+    expect(bare.ee).toMatchObject({ rank: '', rank10: '', chipHide: [], chipAdd: [] });
+  });
+
+  it('un perso sans EE : `ee` est `null`, le reste de la fiche se lit', async () => {
+    const state = await characterSheetState(AER, sheetDisk(undefined, { eeItem: () => null }));
+    if ('error' in state) throw new Error(state.error);
+    expect(state.ee).toBeNull();
+    expect(state.curated).toEqual(DIANNE);
+  });
+
+  it('l’EE tel que la route le lit : sa tuile, ses passifs, et le second porteur d’un `20…`', () => {
+    const { eeItem, eeCatalog, kitCatalog } = CHARACTER_SHEET_DEPS;
+    const snow = eeItem('2000003')!;
+    expect(snow).toMatchObject({
+      itemId: '2000003',
+      icon: 'TI_Equipment_EX_2000003',
+      star: 6,
+      grade: 'unique',
+      // Le pendant core-fusion, que le site montre comme second porteur.
+      companion: { id: '2700003', name: 'Core Fusion Snow' },
+    });
+    expect(snow.name).toBe(getEEViews().find((v) => v.characterId === '2000003')?.name.en);
+    expect(snow.passives.map((p) => p.level)).toEqual([1, 10]);
+    expect(snow.passives.every((p) => p.name && p.texts.length)).toBe(true);
+    expect(snow.chips.map((c) => c.ref)).toContain('SYS_BUFF_ACTION_GAUGE_UP');
+    // Le core-fusion a son PROPRE EE, sans second porteur ; Aer n'a pas de pendant.
+    expect(eeItem('2700003')).toMatchObject({ itemId: '2700003' });
+    expect(eeItem('2700003')).not.toHaveProperty('companion');
+    expect(eeItem(AER)).not.toHaveProperty('companion');
+    expect(eeItem('nope')).toBeNull();
+
+    // Le catalogue : celui de Skills, chaque effet décrit par le jeu avec sa description.
+    const [plain, described] = [kitCatalog(), eeCatalog()];
+    expect(Object.keys(described)).toEqual(Object.keys(plain));
+    expect(Object.values(described).some((o) => o.desc)).toBe(true);
+    expect(Object.values(plain).some((o) => o.desc)).toBe(false);
+    const withDesc = Object.values(described).find((o) => o.desc)!;
+    expect(withDesc).toEqual({ ...plain[withDesc.id], desc: withDesc.desc });
+  });
+
   it('un id hors du roster : une erreur, pas une fiche vide', async () => {
     expect(await characterSheetState('nope', sheetDisk())).toEqual({
       error: 'perso inconnu : nope',
@@ -709,6 +806,9 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       kit?: Partial<Record<'chipHide' | 'chipAdd', Record<string, string[]>>>;
       kitErrors?: (patch: CharacterKitPatch) => string[];
       kitCards?: CharacterSheetDeps['kitCards'];
+      /** Un perso sans EE, et les refus du store des EE. */
+      noEe?: boolean;
+      eeErrors?: string[];
     } = {},
   ) {
     const calls = {
@@ -728,13 +828,15 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       kitCards: over.kitCards ?? (async () => KIT_CARDS),
       kitSections: () => ({ chipHide: {}, chipAdd: {}, ...over.kit }),
       kitCatalog: () => KIT_CATALOG,
+      eeItem: () => (over.noEe ? null : EE_ITEM),
+      eeCatalog: () => EE_CATALOG,
       upsertCharacter: async (id, curated) => {
         calls.character.push([id, curated]);
         return over.errors?.(curated) ?? [];
       },
       upsertEe: async (id, patch) => {
         calls.ee.push([id, patch]);
-        return [];
+        return over.eeErrors ?? [];
       },
       applyKit: async (patch) => {
         calls.kit.push(patch);
@@ -1435,6 +1537,175 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     );
     expect(out).toMatchObject({ ok: false, written: false, stale: true });
     expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  // ------------------------------------------------------ les chips de l'EE (`ee`)
+  const EE_FILE = 'data/curated/equipment.json';
+  /** L'entrée curée de l'EE que la page avait chargée : celle du disque factice. */
+  const EE_WAS = { rank: 'A', rank10: 'S', chipHide: ['x'], chipAdd: [] as string[] };
+  const eeChips = (
+    chipHide: string[],
+    chipAdd: string[] = [],
+    was = EE_WAS,
+  ): NonNullable<CharacterSheetChanges['ee']> => ({ chipHide, chipAdd, was });
+  const AUTO = 'SYS_BUFF_ACTION_GAUGE_UP';
+
+  it('un rang d’EE ET ses chips : UN `upsertEe`, les quatre champs fusionnés, UN commit', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('eeRank10', 'S', 'A')],
+        // Nettoyées et dédoublonnées ; `x`, héritée du disque sans être une chip, reste.
+        ee: eeChips(['x', ` ${AUTO} `, AUTO], ['7', '7']),
+      },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['EE +10 : S → A', "chips de l'EE : 2 masquées, 1 ajoutée", 'git : fait'],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    // Deux écritures bâties sur le disque d'avant s'écraseraient : il n'y en a qu'une.
+    expect(calls.ee).toEqual([
+      [AER, { rank: 'A', rank10: 'A', chipHide: ['x', AUTO], chipAdd: ['7'] }],
+    ]);
+    expect(calls.character).toEqual([]);
+    expect(calls.git).toEqual([[[EE_FILE], `chore(characters): ${name}`]]);
+  });
+
+  it('des chips seules : les rangs du disque repartent avec elles ; une liste vidée part vide', async () => {
+    const { calls, fake } = deps();
+    const out = await save({ ee: eeChips([], ['1']) }, fake);
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(out.log).toEqual(["chips de l'EE : 0 masquée, 1 ajoutée", 'git : fait']);
+    expect(calls.ee).toEqual([[AER, { rank: 'A', rank10: 'S', chipHide: [], chipAdd: ['1'] }]]);
+  });
+
+  it('une chip hors des AUTO, un effet hors du catalogue : un refus SITUÉ, les chips ne partent pas — le rang, si', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      { ranks: [cell('eeRank', 'A', 'B')], ee: eeChips(['x', 'nope'], ['404', '7']) },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: true, stale: false });
+    expect(out.refused).toEqual([
+      {
+        field: 'ee',
+        reason: '« nope » : pas une chip de cet EE ; « 404 » : effet inconnu du glossaire',
+      },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — ${name} · chips de l'EE : « nope » : pas une chip de cet EE ; « 404 » : effet inconnu du glossaire.`,
+      'EE base : A → B',
+      'git : fait',
+    ]);
+    // Le rang part sur les chips du DISQUE, pas sur celles de la page.
+    expect(calls.ee).toEqual([
+      [AER, { rank: 'B', rank10: 'S', chipHide: ['x'], chipAdd: undefined }],
+    ]);
+
+    const alone = deps();
+    expect(await save({ ee: eeChips(['x'], ['404']) }, alone.fake)).toMatchObject({
+      ok: false,
+      written: false,
+      refused: [{ field: 'ee', reason: '« 404 » : effet inconnu du glossaire' }],
+    });
+    expect(alone.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  it('`stale` : l’entrée curée de l’EE a changé depuis le chargement — refus SANS écriture, rangs compris', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        ranks: [cell('rank', 'A', 'S'), cell('eeRank', 'A', 'B')],
+        // La page avait chargé un autre rang +10 : l'onglet Rangs a écrit entre-temps.
+        ee: eeChips(['x', AUTO], [], { ...EE_WAS, rank10: 'A' }),
+      },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: false, stale: true });
+    expect(out.refused).toEqual([
+      { field: 'ee', reason: 'le disque a changé depuis le chargement' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — EE de ${name} : le disque a changé depuis le chargement.`,
+      'Rien à enregistrer.',
+    ]);
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+    // Des chips que la page n'avait pas : périmé aussi.
+    const chips = deps();
+    expect(
+      await save({ ee: eeChips([AUTO], [], { ...EE_WAS, chipHide: [] }) }, chips.fake),
+    ).toMatchObject({ stale: true, written: false });
+    expect(chips.calls.ee).toEqual([]);
+  });
+
+  it('des chips que le disque porte déjà : le store n’est pas appelé, equipment.json n’est pas du commit', async () => {
+    const withRank = deps();
+    await save({ ranks: [cell('rank', 'A', 'S')], ee: eeChips(['x']) }, withRank.fake);
+    expect(withRank.calls.ee).toEqual([]);
+    expect(withRank.calls.git).toEqual([
+      [['data/curated/characters.json'], `chore(characters): ${name}`],
+    ]);
+
+    const alone = deps();
+    expect(await save({ ee: eeChips(['x']) }, alone.fake)).toMatchObject({
+      ok: true,
+      written: false,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+    });
+    expect(alone.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  it('un rang, des chips d’EE et des chips de skill : trois fichiers, toujours UN commit', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      { ranks: [cell('rank', 'A', 'S')], ee: eeChips(['x'], ['7']), kit: kit({ '5504': ['7'] }) },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(calls.git).toEqual([
+      [['data/curated/characters.json', EE_FILE, KIT_FILE], `chore(characters): ${name}`],
+    ]);
+  });
+
+  it('un perso sans EE, une forme fausse : un refus du champ, rien n’est écrit', async () => {
+    const none = deps({ noEe: true });
+    expect((await save({ ee: eeChips(['x'], ['7']) }, none.fake)).refused).toEqual([
+      { field: 'ee', reason: "ce perso n'a pas d'EE" },
+    ]);
+    expect(none.calls.ee).toEqual([]);
+
+    const shape = deps();
+    for (const bad of [
+      { chipHide: 'x', was: EE_WAS },
+      { chipAdd: [1], was: EE_WAS },
+    ] as unknown[]) {
+      const out = await save({ ee: bad as never }, shape.fake);
+      expect(out.refused.map((r) => [r.field, r.reason])).toEqual([
+        ['ee', expect.stringContaining('une liste de refs attendue')],
+      ]);
+    }
+    expect(shape.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  it('un refus du store des EE : le rang et les chips sont refusés, rien n’est committé', async () => {
+    const { calls, fake } = deps({ eeErrors: ['ee[2000055].rank — attendu une chaîne'] });
+    const out = await save({ ranks: [cell('eeRank', 'A', 'B')], ee: eeChips(['x'], ['7']) }, fake);
+    expect(out).toMatchObject({ ok: false, written: false });
+    expect(out.refused).toEqual([
+      { field: 'ee', reason: 'ee[2000055].rank — attendu une chaîne' },
+      { field: 'eeRank', step: undefined, reason: 'refusé par le store' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — EE de ${name} : ee[2000055].rank — attendu une chaîne`,
+      'Rien à enregistrer.',
+    ]);
+    expect(calls.ee).toHaveLength(1);
+    expect(calls.git).toEqual([]);
   });
 });
 
@@ -3053,10 +3324,11 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ['tags', true, 'tags'],
     ]);
     // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
-    // perso », Gear reco compris), et les outils Pro / Con et Synergy, deux de
-    // ses sous-onglets. Les lots suivants la rempliront.
+    // perso », Gear reco compris), celui des EE et les outils Pro / Con et
+    // Synergy, trois de ses sous-onglets. Les lots suivants la rempliront.
     expect(ADMIN_TO_QUICK).toEqual({
       '/admin/editor/characters': 'character',
+      '/admin/editor/ee': 'character',
       '/admin/editor/effects': 'effects',
       '/admin/tools/pros-cons': 'character',
       '/admin/tools/synergies': 'character',

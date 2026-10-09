@@ -7,6 +7,71 @@
 
 ## 2026-10-09
 
+- **quick : « Fiche perso » › EE — les rangs et les chips de l'équipement
+  exclusif dans la fiche du perso (lot B43, étape 11 de la migration)** —
+  agacement de Sevih : l'éditeur EE de l'admin « devrait limite être une tab
+  dans l'édition du personnage, vu qu'un EE est lié à un ou deux persos max ».
+  C'est fait : un sous-onglet « EE » entre Skills et Gear reco, éteint
+  (`title` « pas d'EE ») pour un perso qui n'en a pas — aucun aujourd'hui, les
+  129 du roster en ont un. **Serveur** (`scripts/quick/actions.ts`) :
+  `characterSheetState` sert `ee` (`null` sans EE) — l'item (`itemId`, nom
+  anglais, `icon` sous `images/equipment`, étoiles, grade), `companion` (le
+  second porteur que le site montre : le `27…` d'un `20…`, par
+  `ownerCompanion` de `eeModelForView`), les quatre champs curés du disque
+  (vides compris), les chips AUTO (`eeEditorChips`), les passifs (palier,
+  nom, textes) et le catalogue de Skills avec la description de chaque effet —
+  et `eeTiers`, l'échelle des deux rangs. Deux lectures injectées de plus
+  (`eeItem`, `eeCatalog` de `CharacterSheetDisk`) pour que les tests ne
+  dépendent pas des données du jour. `CharacterSheetChanges` gagne `ee`
+  (`chipHide`, `chipAdd`, `was`) ; les RANGS restent des cellules de `ranks`
+  (`eeRank`, `eeRank10`), rien de nouveau là. Dans `saveCharacterSheet` :
+  `was` est comparé à l'entrée du disque AVANT toute écriture, sinon refus
+  `stale` sans rien écrire (Rangs ou l'admin a écrit entre-temps) ; `planEe`,
+  sur le modèle de `planKit`, nettoie et dédoublonne les deux listes, refuse
+  une ref masquée qui n'est pas une chip de l'EE et un effet hors catalogue —
+  une ref héritée du disque reste, sans refus ; puis UN SEUL `upsertEe`, qui
+  FUSIONNE le rang des cellules (`plan.ee`) et les chips. C'était le piège : le
+  store prend l'état complet des quatre champs, deux écritures bâties sur le
+  disque d'avant s'écrasaient. Un écart de chips est un refus situé
+  `field: 'ee'` et n'empêche pas le rang de partir (sur les chips du disque).
+  Le commit reste UN `chore(characters): <perso>`, `equipment.json` dedans
+  seulement s'il a bougé. **Page** (`tabs/character.js`, `.css`, `.html`) :
+  une carte d'en-tête (la tuile d'item 56 px de `gear-view.mjs`, le nom dans
+  la couleur du grade, « porté aussi par … »), « Rangs » (deux cellules de la
+  Fiche, « Au déblocage » et « À +10 », sur l'échelle des EE — elles comptent
+  dans CE sous-onglet, plus dans Fiche), « Passifs » en lecture (`gameText`),
+  « Chips » (la rangée d'une carte de Skills, le picker d'effets de B39, et
+  dessous l'aide-mémoire : la description de chaque chip visible et de chaque
+  ajout). `chipHtml` lit maintenant ses listes par un petit objet (`kitAt`,
+  `eeAt`) et le picker d'effets est sorti en `pickFx` : les cartes de Skills
+  rendent le même HTML, leurs tests n'ont pas bougé. `…/ee` pour un perso
+  sans EE vaut `fiche`. **Admin** : le lien « EE » sort du menu Editor
+  (`layout.dev.tsx`), `ADMIN_TO_QUICK` gagne `/admin/editor/ee` ; la page
+  répond toujours par son URL. Docs : `quick-migration.md` (11 FAIT),
+  `STYLE.md` (croquis et paragraphe EE). **Vérifié** : `pnpm typecheck` et
+  `pnpm lint` sans sortie, code 0 ; `pnpm test` : « Tests 3293 passed (3293) »
+  ; `NODE_ENV=development pnpm exec vitest run scripts/quick` : « Tests 791
+  passed (791) » — dont 11 cas neufs dans `actions.test.ts` (l'état, `null`,
+  `companion` de Snow par la vraie lecture, la fusion en un `upsertEe`, les
+  deux refus situés, `stale`, le commit sans `equipment.json`, le refus du
+  store) et 10 dans `ui-serve.test.ts` (happy-dom, méthode C4). Banc sur un
+  quick isolé (:4893, clés vidées, que des GET) :
+  `--tabs character --hash character/<id>/ee` pour Aer `2000055` (aucune
+  chip), Core Fusion Snow `2700003` (son EE à lui, Frost Nova), Snow `2000003`
+  (« porté aussi par Core Fusion Snow », une chip et son aide-mémoire),
+  Demiurge Saeran `2000129` (deux effets ajoutés) — quatre captures relues.
+  Rien d'enregistré. **Laissé** : le premier enregistrement réel et les
+  contrôles à l'écran (TODO) ; la carte de couverture de la home admin et
+  `docs/procedure/newPatch.md` pointent encore `/admin/editor/ee` (la page
+  existe) ; Rangs garde ses colonnes EE, doublon accepté ; le catalogue des
+  effets voyage deux fois dans l'état (celui de Skills, et celui de l'EE avec
+  les descriptions — 210 effets) ; la tuile d'item `.gv-*` est recopiée sous
+  `.c-ee` parce que `gear.css` ne la règle que sous `#c-gear`. Ordre : A34
+  était encore au fichier des lots au lancement (ni fait ni rangé) ; l'arbre
+  était propre et aucun autre lot n'écrivait dans `scripts/quick/`, B43 a donc
+  tourné seul — A34 trouvera le menu Editor sans « EE » et
+  `ADMIN_TO_QUICK` avec une ligne de plus.
+
 - **datagen : `pnpm datagen:snapshot` — rejouer le build sans `.gamedata/`
   (hors lot)** : une session cloud ne voit que ce que git suit, donc pas les
   22 Go de la machine de datamine. Or `datagen:build` n'en lit qu'une fraction :

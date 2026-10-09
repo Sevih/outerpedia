@@ -93,9 +93,10 @@ première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
 Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11, B42, B39 et
-B40 — portage COMPLET : UNE section pour tout ce que le wiki sait d'un perso, le
-picker de héros en tête, des sous-onglets comme sur la fiche du site — Fiche,
-Pros / Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker
+B40 — portage COMPLET —, et Editor › EE, étape 11, lot B43 : UNE section pour
+tout ce que le wiki sait d'un perso, le picker de héros en tête, des
+sous-onglets comme sur la fiche du site — Fiche, Pros / Cons, Synergies,
+Skills, EE, Gear reco. C11 pose la coquille, le picker
 partagé (`ui/hero-picker.mjs`) et le sous-onglet
 Fiche : rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills,
 tags humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
@@ -116,7 +117,14 @@ savebar de builds, onglets de builds, pickers, aperçu, « Traduire » — moins
 son en-tête et son picker de perso, que la fiche porte ; les builds gardent
 leur barre et leur commit à part, `chore(gear-reco): <perso>`, et les anciens
 liens `#gear/<id>` y sont redirigés ; lien Character retiré du menu admin le
-09/10), Effets (= Editor ›
+09/10. B43 y range l'EE (= l'éditeur des EE de l'admin, `EeCuratedEditor`),
+entre Skills et Gear reco, éteint pour un perso qui n'en a pas : la tuile de
+l'item et son second porteur, ses deux rangs — les cellules « EE base » et
+« EE +10 » de la grille Rangs, qui les garde —, ses passifs en lecture, et ses
+chips réglées comme celles d'un skill, la description de chaque effet montré
+dessous ; le commit de la fiche porte alors aussi
+`data/curated/equipment.json` ; lien EE retiré du menu admin le 09/10),
+Effets (= Editor ›
 Effect, étape 10, lot B41 : le catalogue des
 effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
 sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
@@ -139,7 +147,7 @@ après les Bannières (5), avant Events :
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
-Con ; 10 Effect fait, B41) →
+Con ; 10 Effect fait, B41 ; 11 EE fait, B43) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -227,9 +235,14 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     sert a rien » par son retrait — le catalogue est la liste. L'entrée reste
     pour que la numérotation des suivantes ne bouge pas.
 
-11. **Editor › EE**
+11. **Editor › EE** — FAIT, lot B43 : le sous-onglet « EE » de la « Fiche
+    perso » (cf. « Déjà dans quick »). L'entrée reste pour que la numérotation
+    des suivantes ne bouge pas.
     `EeCuratedEditor`
-    - Agacements : ça devrais limite etre une tab dans l'edition du personnage vu qu'un EE est lié a un ou deux perso max
+    - Agacements : ça devrais limite etre une tab dans l'edition du personnage vu qu'un EE est lié a un ou deux perso max — corrigé : l'EE est un
+      sous-onglet de la fiche de SON perso (un core-fusion `27…` a le sien ;
+      l'EE d'un `20…` dit « porté aussi par » son pendant), plus une liste de
+      129 EE à part.
 
 12. **Editor › Monster**
     `MonsterKitEditor`, `MonsterStatsCard`, `MonsterActions`

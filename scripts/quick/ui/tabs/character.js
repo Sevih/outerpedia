@@ -4,12 +4,14 @@
 // « Synergies » : des textes à tags inline, saisis en anglais, traduits par
 // « Traduire », avec leur aperçu tel que le site les rendra. « Skills » : les
 // cartes de skills du perso et leurs chips d'effets — ✕ en masque une, « ＋ effet »
-// en ajoute une du glossaire. Une seule savebar, un seul enregistrement, un seul
+// en ajoute une du glossaire. « EE » : l'équipement exclusif du perso, quand il en
+// a un — ses deux rangs (les cellules de Rangs), ses passifs en lecture, ses chips
+// comme une carte de Skills. Une seule savebar, un seul enregistrement, un seul
 // commit — sauf « Gear reco » : les builds du perso, un module (`gear.js`) monté
 // dans son hôte, avec SA savebar et SON commit ; la fiche ne fait que compter
 // ses builds en attente avant de quitter l'onglet ou de changer de perso.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
-import { gameText, noteHtml } from '../gear-view.mjs';
+import { gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
@@ -20,9 +22,12 @@ const SUBS = [
   { id: 'pros-cons', label: 'Pros / Cons' },
   { id: 'synergies', label: 'Synergies' },
   { id: 'skills', label: 'Skills' },
+  { id: 'ee', label: 'EE' },
   { id: 'gear', label: 'Gear reco' },
 ];
-const subsOn = () => SUBS.filter((s) => !s.soon);
+/** Pourquoi un sous-onglet est éteint — son `title` : pas encore porté, ou un perso sans EE. */
+const subOff = (s) => s.soon ?? (s.id === 'ee' && sheet && !sheet.ee ? 'pas d’EE' : '');
+const subsOn = () => SUBS.filter((s) => !subOff(s));
 
 // Les champs de la fiche. Les rangs sont des CELLULES, celles de l'onglet
 // « Rangs » : même clé, même forme envoyée (`RankChange`), même refus par
@@ -40,6 +45,13 @@ const PRIOS = [
   ['first', 'Skill 1'],
   ['second', 'Skill 2'],
   ['ultimate', 'Ultimate'],
+];
+// Les deux rangs de l'EE : des cellules aussi, celles de « EE base » et de
+// « EE +10 » dans Rangs — le champ de l'état (`sheet.ee`) qui porte chacune.
+const EE_FIELDS = { eeRank: 'rank', eeRank10: 'rank10' };
+const EE_RANKS = [
+  ['eeRank', 'Au déblocage'],
+  ['eeRank10', 'À +10'],
 ];
 // Où se pose un refus : la carte de chaque champ hors cellules de rang.
 const KIT_KEYS = ['skillPriority', 'tags'];
@@ -92,6 +104,9 @@ const pv = {
 // porte. Les deux sections du curé, sous leurs noms.
 const kit = { hide: {}, add: {} };
 const KIT = { hide: 'chipHide', add: 'chipAdd' };
+// Les chips de l'EE, sa seule carte : les deux listes telles qu'elles
+// partiraient ; `null` : ce que le disque porte.
+const ee = { hide: null, add: null };
 const fxFilters = heroFilters(); // les filtres du picker d'effets, à lui
 let wantedPick = 0; // la carte dont le hash demande le picker d'effets (à partir de 1)
 let geared = null; // le perso dont Gear reco porte les builds : monté à sa première venue
@@ -105,9 +120,18 @@ const rankSrc = (v) => src(`ui/rank/IG_Event_Rank_${v}`);
 
 // ------------------------------------------------------ le modèle
 const cellKey = (field, step) => `${field}${step ? `.${step}` : ''}`;
-const baseOf = (field, step) => (step ? sheet.ranks[field][step] : sheet.ranks[field]) ?? '';
+const baseOf = (field, step) =>
+  (field in EE_FIELDS
+    ? sheet.ee?.[EE_FIELDS[field]]
+    : step
+      ? sheet.ranks[field][step]
+      : sheet.ranks[field]) ?? '';
 const valueOf = (field, step) => cells.get(cellKey(field, step))?.to ?? baseOf(field, step);
-const listOf = (field) => (field.startsWith('role') ? sheet.roles : sheet.tiers);
+const listOf = (field) =>
+  field in EE_FIELDS ? sheet.eeTiers : field.startsWith('role') ? sheet.roles : sheet.tiers;
+/** Les cellules modifiées de l'EE, et celles de la Fiche : chacune compte dans son sous-onglet. */
+const eeCells = () => Object.keys(EE_FIELDS).filter((k) => cells.has(k)).length;
+const ficheCells = () => cells.size - eeCells();
 const stepLabel = (key) => sheet.steps.find((s) => s.key === key)?.label ?? `Trans ${key}`;
 
 /** Pose la valeur d'une cellule : revenue à celle du disque, elle n'est plus modifiée. */
@@ -236,29 +260,67 @@ function kitOut() {
   };
 }
 
+// Les chips de l'EE : celles que ses passifs posent (`sheet.ee.chips`), dont le
+// curé masque certaines, et les effets qu'il ajoute — une seule carte.
+const eeBase = (kind) => sheet.ee?.[KIT[kind]] ?? [];
+const eeNow = (kind) => ee[kind] ?? eeBase(kind);
+/** Les chips de l'EE masquées, rétablies, ajoutées ou retirées depuis le disque. */
+const eeChipChanges = () =>
+  apart(eeNow('hide'), eeBase('hide')) + apart(eeNow('add'), eeBase('add'));
+/** Pose une liste de l'EE : revenue à celle du disque, elle n'est plus modifiée. */
+function eeSet(kind, list) {
+  ee[kind] = apart(list, eeBase(kind)) ? list : null;
+  refused.delete('ee');
+}
+/** La saisie que le disque porte maintenant, ou celle d'un perso sans EE : oubliée. */
+function eePrune() {
+  for (const kind of Object.keys(KIT))
+    if (!sheet.ee || (ee[kind] && !apart(ee[kind], eeBase(kind)))) ee[kind] = null;
+}
+/**
+ * Les chips de l'EE telles qu'elles partiraient : ses deux listes ENTIÈRES, et
+ * l'entrée curée que la page avait chargée — le serveur refuse si le disque en
+ * porte une autre.
+ */
+function eeOut() {
+  if (!eeChipChanges()) return null;
+  const { rank, rank10, chipHide, chipAdd } = sheet.ee;
+  return {
+    chipHide: eeNow('hide'),
+    chipAdd: eeNow('add'),
+    was: { rank, rank10, chipHide, chipAdd },
+  };
+}
+
 /** Le sous-onglet d'un refus, d'après sa clé. */
 const subOf = (key) =>
-  key === 'kit' || key.startsWith('kit:')
-    ? 'skills'
-    : (Object.keys(TEXT_TABS).find(
-        (id) => key === TEXT_FIELDS[id] || TEXT_TABS[id].some((list) => key.startsWith(`${list}:`)),
-      ) ?? 'fiche');
+  key === 'ee' || key in EE_FIELDS
+    ? 'ee'
+    : key === 'kit' || key.startsWith('kit:')
+      ? 'skills'
+      : (Object.keys(TEXT_TABS).find(
+          (id) =>
+            key === TEXT_FIELDS[id] || TEXT_TABS[id].some((list) => key.startsWith(`${list}:`)),
+        ) ?? 'fiche');
 const refusedIn = (id) => [...refused.keys()].filter((k) => subOf(k) === id);
 /** Ce qu'un sous-onglet a en attente. */
 const subChanges = (id) =>
   id === 'fiche'
-    ? cells.size + Number(prioMoved()) + Number(tagsMoved())
+    ? ficheCells() + Number(prioMoved()) + Number(tagsMoved())
     : id === 'skills'
       ? kitChanges()
-      : id === 'gear'
-        ? gearChanges()
-        : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
+      : id === 'ee'
+        ? eeCells() + eeChipChanges()
+        : id === 'gear'
+          ? gearChanges()
+          : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
 
 /**
- * Ce que compte la savebar : une cellule de rang, la priorité, les tags, chaque
- * ligne de pros, de cons ou de synergie ajoutée, modifiée ou retirée, et chaque
- * chip de skill masquée, rétablie, ajoutée ou retirée. Pas les builds de Gear
- * reco : ils ont leur barre, et « Enregistrer » d'ici ne les envoie pas.
+ * Ce que compte la savebar : une cellule de rang (les deux de l'EE comprises), la
+ * priorité, les tags, chaque ligne de pros, de cons ou de synergie ajoutée,
+ * modifiée ou retirée, et chaque chip de skill ou d'EE masquée, rétablie,
+ * ajoutée ou retirée. Pas les builds de Gear reco : ils ont leur barre, et
+ * « Enregistrer » d'ici ne les envoie pas.
  */
 const changes = () =>
   sheet ? SUBS.reduce((n, s) => n + (s.id === 'gear' ? 0 : subChanges(s.id)), 0) : 0;
@@ -292,19 +354,27 @@ const legacy = () =>
 /** Les clés que porte chaque carte : son badge, son bord rouge, ses refus. */
 const cardKeys = {
   ranks: () =>
-    [...new Set([...cells.keys(), ...refusedIn('fiche')])].filter((k) => !KIT_KEYS.includes(k)),
+    [...new Set([...cells.keys(), ...refusedIn('fiche')])].filter(
+      (k) => subOf(k) === 'fiche' && !KIT_KEYS.includes(k),
+    ),
   kit: () => KIT_KEYS,
   pros: () => lists.pros.map((l) => lineKey('pros', l)),
   cons: () => lists.cons.map((l) => lineKey('cons', l)),
+  'ee-ranks': () => Object.keys(EE_FIELDS),
+  'ee-chips': () => ['ee'],
 };
 const cardMoved = (card) =>
   card === 'ranks'
-    ? cells.size > 0
+    ? ficheCells() > 0
     : card === 'kit'
       ? prioMoved() || tagsMoved()
-      : card in lists
-        ? listChanges(card) > 0
-        : false;
+      : card === 'ee-ranks'
+        ? eeCells() > 0
+        : card === 'ee-chips'
+          ? eeChipChanges() > 0
+          : card in lists
+            ? listChanges(card) > 0
+            : false;
 const cardBad = (card) =>
   cardKeys[card]().some((k) => refused.has(k)) || (card === 'kit' && issues().length > 0);
 
@@ -365,7 +435,8 @@ $('c-pv-lang').onclick = (e) => {
 
 /**
  * La rangée des sous-onglets, entière dès maintenant : ceux qui ne sont pas
- * portés sont éteints. Un point dit ce que l'onglet porte : accent, des
+ * portés sont éteints, « EE » aussi pour un perso qui n'en a pas. Un point dit
+ * ce que l'onglet porte : accent, des
  * changements pas encore enregistrés ; rouge, un refus ou une erreur.
  */
 function subTabs() {
@@ -382,8 +453,9 @@ function subTabs() {
             : subChanges(s.id)
               ? ['edit', 'modifié, pas encore enregistré']
               : null;
+        const off = subOff(s);
         return `<button class="tab" type="button" role="tab" id="c-tab-${s.id}" data-sub="${s.id}" aria-selected="${on}" aria-controls="${s.id === 'gear' ? 'c-gear' : 'c-panel'}" tabindex="${on ? 0 : -1}"${
-          s.soon ? ` disabled title="${s.soon}"` : ''
+          off ? ` disabled title="${off}"` : ''
         }>${s.label}${dot ? `<span class="dot ${dot[0]}" role="img" aria-label="${dot[1]}" title="${dot[1]}"></span>` : ''}</button>`;
       }).join('');
   if (sub !== 'gear') $('c-panel').setAttribute('aria-labelledby', `c-tab-${sub}`);
@@ -409,7 +481,7 @@ function cell(field, step, attrs) {
   // Valeur héritée hors liste : gardée dans le menu pour ne pas la perdre.
   const extra = [...new Set([baseOf(field, step), cur])].filter((v) => v && !list.includes(v));
   const cls = [cells.has(key) && 'dirty', refused.has(key) && 'refused'].filter(Boolean).join(' ');
-  const rk = list === sheet.tiers;
+  const rk = list !== sheet.roles;
   return `<span class="c-cell${rk ? ' rk' : ''}">${rk ? rankIcon(cur) : ''}<select class="${cls}" data-field="${field}"${
     step ? ` data-step="${step}"` : ''
   } ${attrs}>${['', ...extra, ...list]
@@ -660,21 +732,28 @@ function fxTile(icon, isDebuff) {
 }
 
 /** Un effet ajouté à une carte, tel que le catalogue le connaît ; sinon sa ref. */
-function addedChip(ref) {
-  const o = sheet.kit.catalog[ref];
+function addedChip(ref, catalog = sheet.kit.catalog) {
+  const o = catalog[ref];
   return { ref, name: o?.name ?? ref, icon: o?.icon, isDebuff: o?.isDebuff ?? false };
 }
 
+/** Où une carte lit ses deux listes : une carte de skill, ou celle de l'EE. */
+const kitAt = (card) => ({
+  now: (kind) => kitNow(kind, card),
+  base: (kind) => kitBase(kind, card),
+});
+const eeAt = { now: eeNow, base: eeBase };
+
 /**
- * Une chip d'une carte. Celle que le kit pose (`auto`) : ✕ la masque — barrée
- * et atténuée, « rétablir » la rend. Un effet ajouté (`add`) : son badge, et ✕
- * le retire. Le bord accent : son état n'est pas celui du disque.
+ * Une chip d'une carte (`at` : ses listes). Celle que le kit pose (`auto`) : ✕
+ * la masque — barrée et atténuée, « rétablir » la rend. Un effet ajouté (`add`) :
+ * son badge, et ✕ le retire. Le bord accent : son état n'est pas celui du disque.
  */
-function chipHtml(card, c, kind) {
+function chipHtml(at, c, kind) {
   const add = kind === 'add';
-  const now = kitNow(add ? 'add' : 'hide', card.id).includes(c.ref);
+  const now = at.now(add ? 'add' : 'hide').includes(c.ref);
   const off = !add && now;
-  const moved = now !== kitBase(add ? 'add' : 'hide', card.id).includes(c.ref);
+  const moved = now !== at.base(add ? 'add' : 'hide').includes(c.ref);
   return `<span class="chip c-chip${off ? ' off' : ''}${moved ? ' dirty' : ''}" data-kind="${kind}" data-ref="${esc(c.ref)}" title="${esc(c.ref)}">${fxTile(c.icon, c.isDebuff)}<span class="c-chn">${esc(c.name)}</span>${
     add ? '<span class="badge edit">ajoutée</span>' : ''
   }${
@@ -692,6 +771,7 @@ const skillDesc = (desc) => desc.replace(/(?:\\n|\s)+$/, '');
 /** L'intérieur d'une carte de skill : son en-tête, sa description, ses chips, « ＋ effet ». */
 function skillInner(card) {
   const key = `kit:${card.id}`;
+  const at = kitAt(card.id);
   return `<div class="card-head">${
     card.iconSrc
       ? `<img class="c-skico" src="${srcAt(card.iconSrc)}" alt="" aria-hidden="true" width="36" height="36" />`
@@ -701,11 +781,11 @@ function skillInner(card) {
   }</span><span class="badge ko">${refused.has(key) ? 'refusé' : ''}</span></div>
     <div class="c-body">
       ${card.desc ? `<p class="c-desc">${gameText(viewEnv(), skillDesc(card.desc))}</p>` : ''}
-      <div class="c-chips">${card.chips.map((c) => chipHtml(card, c, 'auto')).join('')}${kitNow(
+      <div class="c-chips">${card.chips.map((c) => chipHtml(at, c, 'auto')).join('')}${kitNow(
         'add',
         card.id,
       )
-        .map((ref) => chipHtml(card, addedChip(ref), 'add'))
+        .map((ref) => chipHtml(at, addedChip(ref), 'add'))
         .join(
           '',
         )}<button class="btn ghost sm" type="button" data-act="add-chip" aria-haspopup="dialog">＋ effet</button></div>
@@ -752,8 +832,8 @@ function skillDraw(card, focus) {
  * sont suffixés, et l'id départage ce qui reste — la règle de l'éditeur de
  * l'admin.
  */
-function fxOptions() {
-  const all = Object.values(sheet.kit.catalog);
+function fxOptions(catalog) {
+  const all = Object.values(catalog);
   const counts = new Map();
   for (const o of all)
     counts.set(o.name.toLowerCase(), (counts.get(o.name.toLowerCase()) ?? 0) + 1);
@@ -771,14 +851,13 @@ function fxOptions() {
 }
 
 /**
- * « ＋ effet » : le picker partagé, sur le catalogue des effets — ceux que la
- * carte n'a pas déjà en ajout. Celui qu'on y choisit s'ajoute à la carte.
+ * « ＋ effet » : le picker partagé, sur un catalogue d'effets — ceux que la
+ * carte n'a pas déjà en ajout (`have`). `onPick` reçoit celui qu'on y choisit.
  */
-function pickEffect(card) {
-  const have = kitNow('add', card.id);
-  const options = fxOptions().filter((o) => !have.includes(o.id));
+function pickFx({ title, catalog, have, opener, onPick }) {
+  const options = fxOptions(catalog).filter((o) => !have.includes(o.id));
   openHeroPicker({
-    title: `Ajouter un effet — ${card.name || card.id}`,
+    title,
     roster: options,
     imgBase: state.imgBase,
     rows: true,
@@ -797,13 +876,23 @@ function pickEffect(card) {
       test: (o, value) => !value || (value === 'debuff') === o.isDebuff,
     },
     filters: fxFilters,
+    opener,
+    onPick,
+  });
+}
+
+/** « ＋ effet » d'une carte de skill : l'effet choisi s'ajoute à la carte. */
+const pickEffect = (card) =>
+  pickFx({
+    title: `Ajouter un effet — ${card.name || card.id}`,
+    catalog: sheet.kit.catalog,
+    have: kitNow('add', card.id),
     opener: () => skillEl(card.id)?.querySelector('[data-act="add-chip"]'),
     onPick: (id) => {
       kitSet('add', card.id, [...kitNow('add', card.id), id]);
       skillDraw(card);
     },
   });
-}
 
 /** Un geste sur une carte de skill : « ＋ effet », ou le bouton d'une de ses chips. */
 function kitAct(at, el) {
@@ -818,6 +907,133 @@ function kitAct(at, el) {
   const now = kitNow(kind, card.id);
   kitSet(kind, card.id, act === 'hide-chip' ? [...now, ref] : now.filter((r) => r !== ref));
   skillDraw(card, kind === 'hide' && ['auto', ref]);
+}
+
+// ------------------------------------------------------ le sous-onglet « EE »
+/** La carte des chips de l'EE, à l'écran. */
+const eeChipsEl = () => $('c-panel').querySelector('[data-card="ee-chips"]');
+
+/**
+ * L'intérieur de la carte « Chips » : la rangée d'une carte de Skills — les chips
+ * que les passifs posent, les effets ajoutés, « ＋ effet » — puis l'aide-mémoire :
+ * la description de chaque chip visible et de chaque ajout.
+ */
+function eeChipsInner() {
+  const { chips, catalog } = sheet.ee;
+  const added = eeNow('add').map((ref) => ({
+    ...addedChip(ref, catalog),
+    desc: catalog[ref]?.desc,
+  }));
+  const memo = [...chips.filter((c) => !eeNow('hide').includes(c.ref)), ...added].filter(
+    (c) => c.desc,
+  );
+  return `${cardHead('ee-chips', 'Chips')}
+    <div class="c-body">
+      <div class="c-chips">${
+        chips.length || added.length ? '' : '<span class="lbl">aucune chip</span>'
+      }${chips.map((c) => chipHtml(eeAt, c, 'auto')).join('')}${added
+        .map((c) => chipHtml(eeAt, c, 'add'))
+        .join(
+          '',
+        )}<button class="btn ghost sm" type="button" data-act="add-chip" aria-haspopup="dialog">＋ effet</button></div>
+      ${err('ee')}
+      ${
+        memo.length
+          ? `<ul class="c-memo">${memo
+              .map(
+                (c) =>
+                  `<li class="lbl">${fxTile(c.icon, c.isDebuff)}<span><strong>${esc(c.name)}</strong> — ${gameText(viewEnv(), skillDesc(c.desc))}</span></li>`,
+              )
+              .join('')}</ul>`
+          : ''
+      }
+    </div>`;
+}
+
+/**
+ * L'EE du perso : sa tuile d'item et son nom — et son second porteur, quand le
+ * site en montre un —, ses deux rangs (les cellules « EE base » et « EE +10 » de
+ * Rangs), ses passifs en lecture, ses chips.
+ */
+function eeHtml() {
+  const e = sheet.ee;
+  if (!e) return '<div class="empty">Ce perso n’a pas d’EE.</div>';
+  return `<div class="c-cols">
+    <div class="card pad c-wide c-ee">
+      ${itemTile(viewEnv(), e, 56)}
+      <div class="c-id">${itemName(viewEnv(), e.name, e.grade, 'c-een')}${
+        e.companion ? `<span class="lbl">porté aussi par ${esc(e.companion.name)}</span>` : ''
+      }</div>
+    </div>
+    <div class="card c-card${cardBad('ee-ranks') ? ' ko' : ''}" data-card="ee-ranks">
+      ${cardHead('ee-ranks', 'Rangs')}
+      <div class="c-body">
+        <div class="form">${EE_RANKS.map(
+          ([f, label]) =>
+            `<div class="field"><label for="c-f-${f}">${label}</label>${cell(f, undefined, `id="c-f-${f}"`)}${err(f)}</div>`,
+        ).join('')}</div>
+        <span class="lbl">Les colonnes « EE base » et « EE +10 » de la grille Rangs.</span>
+      </div>
+    </div>
+    <div class="card c-card" data-card="ee-passives">
+      <div class="card-head"><strong>Passifs</strong><span class="lbl">en lecture</span></div>
+      <div class="c-body">${
+        e.passives.length
+          ? e.passives
+              .map(
+                (p) =>
+                  `<div class="c-passive"><div><span class="badge off">${
+                    p.level <= 1 ? 'Déblocage' : `+${esc(p.level)}`
+                  }</span><strong>${esc(p.name)}</strong></div>${p.texts
+                    .map((t) => `<p class="c-desc">${gameText(viewEnv(), skillDesc(t))}</p>`)
+                    .join('')}</div>`,
+              )
+              .join('')
+          : '<p class="lbl">aucun passif</p>'
+      }</div>
+    </div>
+    <div class="card c-card c-wide${cardBad('ee-chips') ? ' ko' : ''}" data-card="ee-chips">${eeChipsInner()}</div>
+  </div>`;
+}
+
+/**
+ * La carte des chips de l'EE redessinée seule, après un geste ; le focus va à
+ * `focus` — `[kind, ref]` : le bouton de cette chip ; sinon « ＋ effet ».
+ */
+function eeDraw(focus) {
+  const at = eeChipsEl();
+  if (!at) return;
+  at.innerHTML = eeChipsInner();
+  marks();
+  const chip =
+    focus &&
+    [...at.querySelectorAll('[data-ref]')].find(
+      (el) => el.dataset.kind === focus[0] && el.dataset.ref === focus[1],
+    );
+  (chip ?? at).querySelector(chip ? 'button' : '[data-act="add-chip"]')?.focus();
+}
+
+/** Un geste sur la carte des chips de l'EE : « ＋ effet », ou le bouton d'une chip. */
+function eeAct(el) {
+  const { act } = el.dataset;
+  if (act === 'add-chip')
+    return pickFx({
+      title: `Ajouter un effet — ${sheet.ee.name}`,
+      catalog: sheet.ee.catalog,
+      have: eeNow('add'),
+      opener: () => eeChipsEl()?.querySelector('[data-act="add-chip"]'),
+      onPick: (id) => {
+        eeSet('add', [...eeNow('add'), id]);
+        eeDraw();
+      },
+    });
+  const chip = el.closest('[data-ref]');
+  if (!chip) return;
+  const { ref } = chip.dataset;
+  const kind = act === 'del-chip' ? 'add' : 'hide';
+  const now = eeNow(kind);
+  eeSet(kind, act === 'hide-chip' ? [...now, ref] : now.filter((r) => r !== ref));
+  eeDraw(kind === 'hide' && ['auto', ref]);
 }
 
 /** La ligne d'un élément du panneau : sa liste, son modèle, son élément. */
@@ -949,7 +1165,9 @@ function render() {
           ? prosConsHtml()
           : sub === 'synergies'
             ? synHtml()
-            : skillsHtml();
+            : sub === 'ee'
+              ? eeHtml()
+              : skillsHtml();
   growAll(panel);
   subTabs();
   bar();
@@ -1088,6 +1306,7 @@ $('c-panel').onclick = (e) => {
   const { act, step } = el.dataset;
   const skill = el.closest('[data-kit]');
   if (skill) return kitAct(skill, el);
+  if (el.closest('[data-card="ee-chips"]')) return eeAct(el);
   if (act === 'add-step') {
     const next = stepsFree()[0];
     if (!next) return;
@@ -1284,8 +1503,9 @@ $('c-tabs').onkeydown = (e) => {
  */
 async function load(id, keep = false) {
   const s = await getJson(`/api/character/state?id=${encodeURIComponent(id)}`);
-  // Un serveur plus vieux que cette page ne sert ni les langues des textes ni le kit.
-  if (!s.langs || !s.kit) throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
+  // Un serveur plus vieux que cette page ne sert ni les langues des textes, ni le kit, ni l'EE.
+  if (!s.langs || !s.kit || s.ee === undefined)
+    throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
   // Un autre perso : les builds du précédent ne sont plus ceux de la fiche.
   if (sheet?.char.id !== s.char.id) {
     gearReset();
@@ -1299,11 +1519,15 @@ async function load(id, keep = false) {
     prio = tags = null;
     kit.hide = {};
     kit.add = {};
+    ee.hide = ee.add = null;
     refused = new Map();
     tr = { busy: tr.busy, error: '' };
     fromDisk();
   }
   kitPrune();
+  eePrune();
+  // Un perso sans EE n'a pas ce sous-onglet : la fiche s'ouvre sur le premier.
+  if (sub === 'ee' && !sheet.ee) sub = 'fiche';
   added.clear();
   who();
   render();
@@ -1370,6 +1594,7 @@ $('c-save').onclick = async () => {
   if (subChanges('pros-cons')) curated.prosCons = { pros: send('pros'), cons: send('cons') };
   if (subChanges('synergies')) curated.synergies = send('synergies');
   const chips = kitOut();
+  const eeChips = eeOut();
 
   $('c-save').disabled = $('c-reset').disabled = true;
   $('c-save').classList.add('busy');
@@ -1382,16 +1607,19 @@ $('c-save').onclick = async () => {
         curated,
         was: sheet.curated,
         ...(chips ? { kit: chips } : {}),
+        ...(eeChips ? { ee: eeChips } : {}),
       },
     });
     const said = new Map();
     for (const x of r.refused ?? []) {
       const key =
-        x.field === 'kit'
-          ? `kit${x.card ? `:${x.card}` : ''}`
-          : x.list
-            ? `${x.list}:${sentKeys[x.list]?.[x.index]}`
-            : cellKey(x.field, x.step);
+        x.field === 'ee'
+          ? 'ee'
+          : x.field === 'kit'
+            ? `kit${x.card ? `:${x.card}` : ''}`
+            : x.list
+              ? `${x.list}:${sentKeys[x.list]?.[x.index]}`
+              : cellKey(x.field, x.step);
       said.set(key, said.has(key) ? `${said.get(key)} ; ${x.reason}` : x.reason);
     }
     // Le disque fait foi, que tout soit passé ou non : on le relit, puis la
@@ -1403,7 +1631,8 @@ $('c-save').onclick = async () => {
     // une liste que le disque porte maintenant telle quelle est relue de lui,
     // une liste refusée garde ses lignes, le refus sur la sienne. Les chips :
     // une carte que le disque porte maintenant comme saisie n'est plus
-    // modifiée (`kitPrune`, au chargement), une carte refusée garde sa saisie.
+    // modifiée (`kitPrune`, au chargement), une carte refusée garde sa saisie ;
+    // celles de l'EE de même (`eePrune`) — sauf `stale` : elles montrent le disque.
     const pending = [...cells.values()];
     const typed = { prio, tags };
     await load(id, true);
@@ -1416,6 +1645,7 @@ $('c-save').onclick = async () => {
       if (typed.tags && typed.tags.join('|') !== tagsBase().join('|')) tags = typed.tags;
     }
     for (const list of LISTS) if (r.stale || sameAsDisk(list)) fromDisk([list]);
+    if (r.stale) ee.hide = ee.add = null;
     refused = said;
   } catch (e) {
     log([`Enregistrement interrompu : ${e}`], false);
@@ -1440,8 +1670,9 @@ sections.register('character', {
   init: () => {
     // `#character/<id>` ouvre l'onglet sur la fiche de ce perso, et
     // `#character/<id>/<sous-onglet>` sur ce sous-onglet (un lien, le banc de
-    // captures) ; `…/skills/picker/<n>` y ouvre le picker d'effets de la n-ième
-    // carte (à partir de 1), `…/gear/build/<n>` montre le n-ième build du perso
+    // captures) — `ee` vaut `fiche` pour un perso sans EE ; `…/skills/picker/<n>`
+    // y ouvre le picker d'effets de la n-ième carte (à partir de 1),
+    // `…/gear/build/<n>` montre le n-ième build du perso
     // et `…/gear/picker/<slot>` y ouvre un picker de pièces (les deux se
     // combinent), sans que la page l'écrive dans l'adresse. `lib.js` ne connaît
     // que `#character` : c'est le clic sur l'onglet qui l'ouvre.

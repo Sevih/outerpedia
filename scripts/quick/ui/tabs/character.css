@@ -1,7 +1,8 @@
 /* Onglet « Fiche perso » : le perso choisi, la savebar, les sous-onglets, le
    sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos),
-   les deux sous-onglets de textes, « Pros / Cons » et « Synergies », et
-   « Skills » (les cartes de skills, leurs chips d'effets). Le reste — carte,
+   les deux sous-onglets de textes, « Pros / Cons » et « Synergies »,
+   « Skills » (les cartes de skills, leurs chips d'effets) et « EE » (la tuile
+   de l'équipement exclusif, ses rangs, ses passifs, ses chips). Le reste — carte,
    `.form`, `.savebar`, `.btn`, `.badge`, `.chip`, `.tab` — vient de
    `quick.css` ; le picker de héros, de `hero-picker.css`. Les ids `c-` voisinent
    avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. Le
@@ -721,4 +722,85 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* -------------------------------------------------------------------- « EE »
+   L'équipement exclusif du perso : sa tuile d'item et son nom en tête, puis
+   ses rangs (les cellules de la Fiche), ses passifs en lecture et ses chips
+   (celles de Skills), avec dessous la description de chaque effet montré. */
+#tab-character .c-ee {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+}
+#tab-character .c-een {
+  font-size: 16px;
+  font-weight: 700;
+}
+/* La tuile d'item de `gear-view.mjs`, celle de Gear reco (`gear.css`, qui ne
+   la règle que sous `#c-gear`), recopiée pour celle de l'EE. */
+#tab-character .c-ee .gv-tile {
+  position: relative;
+  display: block;
+  flex: none;
+}
+#tab-character .c-ee .gv-tile img {
+  position: absolute;
+  display: block;
+}
+#tab-character .c-ee .gv-frame,
+#tab-character .c-ee .gv-icon {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#tab-character .c-ee .gv-icon {
+  padding: 6%;
+  object-fit: contain;
+}
+#tab-character .c-ee .gv-stars {
+  position: absolute;
+  inset: auto 0 4%;
+  display: flex;
+  justify-content: center;
+}
+#tab-character .c-ee .gv-stars img {
+  position: static;
+}
+#tab-character .c-ee .gv-tile.none {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--placeholder);
+}
+#tab-character .c-passive {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#tab-character .c-passive > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* L'aide-mémoire : une ligne par effet montré, sa tuile puis sa description. */
+#tab-character .c-memo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+#tab-character .c-memo li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.55;
+}
+#tab-character .c-memo strong {
+  color: var(--content);
 }

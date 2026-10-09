@@ -52,9 +52,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       items: [
         // Character : porté dans quick (Éditeurs › Fiche perso, Gear reco
         // compris), lien retiré le 09/10. Effect : porté dans quick (Éditeurs ›
-        // Effets), lien retiré le 08/10 — les pages restent joignables par leur
-        // URL jusqu'au retrait de l'admin.
-        { label: 'EE', href: '/admin/editor/ee' },
+        // Effets), lien retiré le 08/10. EE : porté dans quick (Éditeurs ›
+        // Fiche perso, sous-onglet « EE »), lien retiré le 09/10 — les pages
+        // restent joignables par leur URL jusqu'au retrait de l'admin.
         { label: 'Monster', href: '/admin/editor/monsters' },
         { label: 'Item', href: '/admin/editor/items' },
       ],

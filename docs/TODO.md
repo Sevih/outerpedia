@@ -42,9 +42,31 @@
       et « Pros / Cons » de la « Fiche perso », lot B42), Character (section
       « Fiche perso », lots C11, B42, B39 et B40 — la coquille, le picker de
       héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies, Skills et
-      Gear reco, qui a quitté les Données).
+      Gear reco, qui a quitté les Données), EE (sous-onglet « EE » de la
+      « Fiche perso », lot B43).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Fiche perso » › EE — contrôles à l'écran (lot B43)** : le banc ne
+      clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : l'état de la fiche sert maintenant
+      l'EE — sans ça la fiche dit « quick lancé avant ce code »). (1) Un
+      perso, le sous-onglet « EE », entre Skills et Gear reco : la tuile de
+      son EE, ses deux rangs, ses passifs, ses chips. (2) Le rang « À +10 »
+      changé ICI, « Enregistrer », puis l'onglet Rangs : la colonne « EE +10 »
+      de ce perso porte la nouvelle valeur (et l'inverse : un rang posé dans
+      Rangs se lit dans la fiche). (3) Une chip masquée (✕ → pointillés,
+      « rétablir »), un effet ajouté par « ＋ effet », « Enregistrer » —
+      attendu : UN commit `chore(characters): <perso>` qui porte
+      `data/curated/equipment.json`, et dans le diff la seule entrée de ce
+      perso. (4) Un perso core-fusion `27…` (Core Fusion Snow, `2700003`) :
+      son EE à lui, Frost Nova ; sur Snow (`2000003`), Glacial Bow dit « porté
+      aussi par Core Fusion Snow ». (5) Demiurge Lambda (`2000124`), seul EE
+      sans entrée curée : la fiche vide, un rang posé crée l'entrée. (6)
+      L'admin : le lien « EE » a quitté le menu Editor (la page répond
+      toujours par son URL). À juger : l'onglet « EE » éteint n'est visible
+      sur aucun perso aujourd'hui (les 129 ont un EE) ; le catalogue des
+      effets servi deux fois dans l'état (Skills, et EE avec les
+      descriptions).
 - [ ] **« Fiche perso » › Gear reco — contrôles à l'écran (lot B40)** : le
       banc ne clique pas, et aucun enregistrement réel n'a été joué. Pas de
       relance de quick à faire (aucune route n'a bougé), un rechargement de

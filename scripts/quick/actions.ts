@@ -134,6 +134,7 @@ import {
   slugForId,
 } from '@/lib/data/characters';
 import {
+  gearById,
   getAmuletFamilies,
   getEEViews,
   getSetViews,
@@ -143,6 +144,7 @@ import {
   resolvePassives,
   type GearFamily,
 } from '@/lib/data/equipment';
+import { eeEditorChips, eeModelForView, type EeChipMeta } from '@/lib/data/equipment-detail';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
 import { listGuides } from '@/lib/data/guides';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
@@ -1000,12 +1002,14 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
  * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
- * effets, celui des persos (la « Fiche perso », Gear reco compris) et les
- * outils Pro / Con et Synergy (deux de ses sous-onglets) — l'inbox, elle, ne
- * renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
+ * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
+ * EE (son sous-onglet « EE ») et les outils Pro / Con et Synergy (deux autres
+ * de ses sous-onglets) — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux
+ * tags et aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/characters': 'character',
+  '/admin/editor/ee': 'character',
   '/admin/editor/effects': 'effects',
   '/admin/tools/pros-cons': 'character',
   '/admin/tools/synergies': 'character',
@@ -1875,8 +1879,8 @@ export async function saveRanks(
 // ------------------------------------------------------------ fiche perso ----
 
 /**
- * Le curé des persos, celui des EE quand un rang d'EE part avec la fiche, et
- * celui des chips de skills (sous-onglet Skills).
+ * Le curé des persos, celui des EE quand un rang ou des chips d'EE partent avec
+ * la fiche (sous-onglet EE), et celui des chips de skills (sous-onglet Skills).
  */
 const CHARACTERS_PATH = 'data/curated/characters.json';
 const EQUIPMENT_PATH = 'data/curated/equipment.json';
@@ -1919,16 +1923,46 @@ export function characterRoster(): { roster: SheetRosterRow[] } {
 /** Les deux sections du curé des chips de skills : cardId → refs. */
 export type KitSections = Record<'chipHide' | 'chipAdd', Record<string, string[]>>;
 
+/** Un passif d'EE, en lecture : son palier (1 = au déblocage, 10 = à +10), son nom, ses textes. */
+export interface SheetEePassive {
+  level: number;
+  name: string;
+  texts: string[];
+}
+
 /**
- * La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster) et,
+ * L'EE d'un perso tel que le JEU le donne, sans sa curation : de quoi dessiner
+ * sa tuile (`icon` sous `images/equipment`), le second porteur — le pendant
+ * core-fusion `27…` d'un `20…`, que le site montre sur la fiche de l'EE —, ses
+ * chips AUTO (`eeEditorChips`, celles que la curation peut masquer) et ses
+ * passifs.
+ */
+export interface SheetEeItem {
+  itemId: string;
+  /** Nom en anglais. */
+  name: string;
+  icon: string;
+  star: number;
+  grade: string;
+  companion?: { id: string; name: string };
+  chips: EeChipMeta[];
+  passives: SheetEePassive[];
+}
+
+/**
+ * La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster) ;
  * pour le sous-onglet Skills, les cartes de skills du perso (lève s'il n'a pas
- * de kit lisible), le curé des chips et le catalogue des effets.
+ * de kit lisible), le curé des chips et le catalogue des effets ; pour le
+ * sous-onglet EE, l'EE du perso (`null` : il n'en a pas) et le catalogue de
+ * son « ＋ effet » — celui de Skills, chaque effet avec sa description.
  */
 export interface CharacterSheetDisk {
   disk: () => RankDisk;
   kitCards: (id: string) => Promise<KitEditorCard[]>;
   kitSections: () => KitSections;
   kitCatalog: () => Record<string, EffectOption>;
+  eeItem: (id: string) => SheetEeItem | null;
+  eeCatalog: () => Record<string, EffectOption>;
 }
 
 /** La lecture et les écritures de `saveCharacterSheet`, injectées : les stores et git. */
@@ -1937,6 +1971,40 @@ export interface CharacterSheetDeps extends CharacterSheetDisk {
   upsertEe: (id: string, patch: EeCuratedPatch) => Promise<string[]>;
   applyKit: (patch: CharacterKitPatch) => Promise<string[]>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/**
+ * L'EE d'un perso, assemblé comme la fiche de l'éditeur de l'admin
+ * (`/admin/editor/ee/[id]`) : la vue, les chips AUTO, les passifs résolus et le
+ * second porteur du modèle de page.
+ */
+function sheetEeItem(id: string): SheetEeItem | null {
+  const view = getEEViews().find((v) => v.characterId === id);
+  if (!view) return null;
+  const model = eeModelForView(view, DEFAULT_LANG);
+  const companion = model.ownerCompanion;
+  return {
+    itemId: view.itemId,
+    name: model.name,
+    icon: gearById(view.itemId)?.icon ?? '',
+    star: view.star,
+    grade: view.grade,
+    ...(companion ? { companion: { id: companion.id, name: companion.name } } : {}),
+    chips: eeEditorChips(id, DEFAULT_LANG),
+    passives: model.passives.map((p) => ({ level: p.unlockLevel, name: p.name, texts: p.texts })),
+  };
+}
+
+/** Le catalogue de Skills (`kitEffectCatalog`), chaque effet avec sa description : l'aide-mémoire de l'EE. */
+function eeEffectCatalog(): Record<string, EffectOption> {
+  const effects = getMergedEffects();
+  const descs = new Map(effects.map((e) => [e.id, e.desc.en]));
+  return Object.fromEntries(
+    Object.entries(kitEffectCatalog(effects)).map(([id, o]) => [
+      id,
+      descs.get(id) ? { ...o, desc: descs.get(id) } : o,
+    ]),
+  );
 }
 
 /**
@@ -1955,6 +2023,8 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
   },
   kitSections: loadCharacterKitSections,
   kitCatalog: () => kitEffectCatalog(),
+  eeItem: sheetEeItem,
+  eeCatalog: eeEffectCatalog,
   upsertCharacter: upsertCharacterCurated,
   upsertEe: upsertEeCurated,
   applyKit: applyCharacterKitCuration,
@@ -1994,6 +2064,30 @@ async function sheetKit(id: string, disk: CharacterSheetDisk): Promise<SheetKit>
   };
 }
 
+/** Les quatre champs curés d'un EE, tels que le disque les porte — vides compris. */
+export interface EeCuratedState {
+  rank: string;
+  rank10: string;
+  chipHide: string[];
+  chipAdd: string[];
+}
+
+const eeCuratedState = (entry: EquipmentCuratedEntry | undefined): EeCuratedState => ({
+  rank: entry?.rank ?? '',
+  rank10: entry?.rank10 ?? '',
+  chipHide: entry?.chipHide ?? [],
+  chipAdd: entry?.chipAdd ?? [],
+});
+
+/**
+ * L'EE d'un perso, pour le sous-onglet EE : l'item du jeu (`SheetEeItem`), ce
+ * que le disque en cure — ses deux rangs, les chips masquées et ajoutées — et
+ * le catalogue des effets que « ＋ effet » propose, descriptions comprises.
+ */
+export interface SheetEe extends SheetEeItem, EeCuratedState {
+  catalog: Record<string, EffectOption>;
+}
+
 /**
  * La « Fiche perso » d'un perso : sa ligne du roster (avec sa chaîne et ses tags
  * DÉRIVÉS du jeu, en lecture), son entrée curée du disque ENTIÈRE (les
@@ -2004,7 +2098,9 @@ async function sheetKit(id: string, disk: CharacterSheetDisk): Promise<SheetKit>
  * l'éditeur assisté de l'admin, `buildInlineRefs`), et `langs`, les langues du
  * site dans l'ordre où l'onglet les range — l'anglais se saisit, les autres se
  * génèrent par « Traduire ». Pour le sous-onglet Skills : `kit` (`SheetKit`).
- * Lu du disque à chaque appel. `error` : le perso n'est pas du roster.
+ * Pour le sous-onglet EE : `ee` (`SheetEe`, `null` si le perso n'a pas d'EE) et
+ * `eeTiers`, l'échelle de ses deux rangs. Lu du disque à chaque appel. `error` :
+ * le perso n'est pas du roster.
  */
 export async function characterSheetState(
   id: string,
@@ -2012,7 +2108,12 @@ export async function characterSheetState(
 ) {
   const c = getCharacterListItems().find((x) => x.id === id);
   if (!c) return { error: `perso inconnu : ${id}` };
-  const curated = disk.disk().curated[id] ?? {};
+  const read = disk.disk();
+  const curated = read.curated[id] ?? {};
+  const item = disk.eeItem(id);
+  const ee: SheetEe | null = item
+    ? { ...item, ...eeCuratedState(read.ee[id]), catalog: disk.eeCatalog() }
+    : null;
   return {
     char: { ...sheetRosterRow(c), chain: c.chainType ?? '', tags: c.tags ?? [] },
     curated,
@@ -2024,6 +2125,7 @@ export async function characterSheetState(
       roleByTranscend: curated.roleByTranscend ?? {},
     },
     tiers: TIERS,
+    eeTiers: EE_TIERS,
     roles: CURATED_ROLES,
     steps: rankSteps(),
     humanTags: HUMAN_TAGS,
@@ -2034,6 +2136,7 @@ export async function characterSheetState(
       shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
     },
     kit: await sheetKit(id, disk),
+    ee,
   };
 }
 
@@ -2085,6 +2188,9 @@ const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
  * et `synergies` tous les groupes. `was` : l'entrée que la page avait chargée.
  * `kit` : les chips de skills, par carte modifiée — la liste ENTIÈRE de ses refs
  * masquées, celle de ses effets ajoutés (vide = plus rien sur cette carte).
+ * `ee` : les chips de l'EE, ses deux listes ENTIÈRES, et l'entrée curée de l'EE
+ * que la page avait chargée (`was`) — ses RANGS, eux, sont des cellules de
+ * `ranks` (`eeRank`, `eeRank10`).
  */
 export interface CharacterSheetChanges {
   ranks?: RankChange[];
@@ -2096,16 +2202,17 @@ export interface CharacterSheetChanges {
   };
   was?: CharacterCurated;
   kit?: CharacterKitPatch;
+  ee?: { chipHide: string[]; chipAdd: string[]; was: EeCuratedState };
 }
 
 /**
  * Un refus situé : la cellule de rang (`field`, `step`), le champ de la fiche,
  * la ligne d'une de ses listes (`list`, `index` — le rang dans la liste
- * ENVOYÉE, à partir de zéro), ou la carte de skill d'un refus de chips
- * (`field: 'kit'`, `card`).
+ * ENVOYÉE, à partir de zéro), la carte de skill d'un refus de chips
+ * (`field: 'kit'`, `card`), ou les chips de l'EE (`field: 'ee'`).
  */
 export interface SheetRefusal {
-  field: RankField | SheetKey | 'kit';
+  field: RankField | SheetKey | 'kit' | 'ee';
   step?: string;
   list?: SheetList;
   index?: number;
@@ -2116,8 +2223,8 @@ export interface SheetRefusal {
 /**
  * Ce que rend `saveCharacterSheet`. `written` : un store a écrit, la page relit
  * le disque. `stale` : refusé parce que le DISQUE avait changé sous un champ de
- * la fiche — rien n'a été écrit, et la page rend le disque au lieu de garder
- * une saisie qui déferait l'écriture d'un autre.
+ * la fiche, ou sous l'entrée curée de l'EE — rien n'a été écrit, et la page
+ * rend le disque au lieu de garder une saisie qui déferait l'écriture d'un autre.
  */
 export interface CharacterSheetOutcome extends Outcome {
   written: boolean;
@@ -2342,17 +2449,64 @@ function planKit(
 }
 
 /**
+ * Les chips de l'EE venues de la page, contrôlées comme celles d'une carte de
+ * skill (`planKit`) contre les chips AUTO de l'EE (celles que le SERVEUR
+ * calcule), le disque et le catalogue des effets : masquer vise une de ses
+ * chips, ajouter un effet du catalogue — une ref héritée du fichier qui n'en
+ * est plus une reste, sans refus. Les listes sont nettoyées et dédoublonnées.
+ * Rendu : les deux listes telles qu'elles s'écriraient et `moved` (le disque
+ * ne les porte pas déjà), ou la raison du refus — rien n'est alors écrit des
+ * chips.
+ */
+function planEe(
+  raw: unknown,
+  item: SheetEeItem,
+  disk: EeCuratedState,
+  catalog: Record<string, EffectOption>,
+): { chipHide: string[]; chipAdd: string[]; moved: boolean } | string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const lists = { chipHide: [] as string[], chipAdd: [] as string[] };
+  const issues: string[] = [];
+  for (const section of KIT_SECTIONS) {
+    const list = (raw as Record<string, unknown>)[section] ?? [];
+    if (!Array.isArray(list) || list.some((v) => typeof v !== 'string'))
+      return `${section} : une liste de refs attendue`;
+    const clean = [...new Set((list as string[]).map((v) => v.trim()).filter(Boolean))];
+    const known = (ref: string): boolean =>
+      section === 'chipHide' ? item.chips.some((c) => c.ref === ref) : ref in catalog;
+    const stray = clean.filter((ref) => !disk[section].includes(ref) && !known(ref));
+    if (stray.length)
+      issues.push(
+        `${stray.map((ref) => `« ${ref} »`).join(', ')} : ${
+          section === 'chipHide' ? 'pas une chip de cet EE' : 'effet inconnu du glossaire'
+        }`,
+      );
+    lists[section] = clean;
+  }
+  if (issues.length) return issues.join(' ; ');
+  return { ...lists, moved: KIT_SECTIONS.some((s) => !sameJson(lists[s], disk[s])) };
+}
+
+/**
  * Enregistre la « Fiche perso » d'UN perso, en un geste et un commit.
  *
  * Dans l'ordre :
  *   - les champs hors rangs (`changes.curated`) exigent que le disque porte
  *     encore, pour eux, l'entrée que la page avait chargée (`was`) : sinon tout
- *     est refusé `stale`, SANS écriture — les rangs non plus ;
+ *     est refusé `stale`, SANS écriture — les rangs non plus. De même les chips
+ *     de l'EE (`changes.ee`) : l'entrée curée de l'EE doit être celle que la
+ *     page avait chargée (`ee.was`, rangs compris — l'onglet Rangs ou l'admin a
+ *     pu écrire entre-temps) ;
  *   - les rangs (`changes.ranks`) passent par le modèle de Rangs
  *     (`planRankChanges` sur le disque relu) : une cellule que le disque ne
  *     porte plus comme la page l'avait est refusée, située, et n'empêche pas le
- *     reste ; les écritures sont celles de Rangs (`upsertCharacterCurated`, et
- *     `upsertEeCurated` si un rang d'EE est du lot) ;
+ *     reste ; l'écriture est celle de Rangs (`upsertCharacterCurated`) ;
+ *   - l'EE s'écrit par UN SEUL `upsertEeCurated`, qui prend l'état COMPLET de
+ *     ses quatre champs : le rang venu des cellules (`plan.ee`) ET les chips
+ *     de `changes.ee`, contrôlées par `planEe`, FUSIONNÉS sur l'entrée du
+ *     disque — deux écritures bâties chacune sur le disque d'avant
+ *     s'écraseraient. Un écart de chips est un refus situé (`field: 'ee'`), le
+ *     rang part quand même ;
  *   - puis les champs hors rangs, posés SUR l'entrée que les rangs viennent
  *     d'écrire — le store remplace l'entrée entière —, par
  *     `upsertCharacterCurated` : ses refus de schéma sont rendus tels quels.
@@ -2399,7 +2553,8 @@ export async function saveCharacterSheet(
   ) as Record<string, unknown>;
   const keys = SHEET_KEYS.filter((k) => k in sent);
   const hasKit = changes?.kit !== undefined;
-  if (!ranks.length && !keys.length && !hasKit)
+  const hasEe = changes?.ee !== undefined;
+  if (!ranks.length && !keys.length && !hasKit && !hasEe)
     return out(false, ['Aucune modification à enregistrer.']);
 
   const j = journal(report);
@@ -2413,14 +2568,19 @@ export async function saveCharacterSheet(
   const disk = deps.disk();
   const entry = disk.curated[id] ?? {};
   const moved = keys.filter((k) => !sameJson(entry[k], changes?.was?.[k]));
-  if (moved.length) {
-    for (const k of moved)
-      refuse(
-        { field: k, reason: 'le disque a changé depuis le chargement' },
-        `${name} · ${SHEET_LABELS[k]}`,
-      );
+  for (const k of moved)
+    refuse(
+      { field: k, reason: 'le disque a changé depuis le chargement' },
+      `${name} · ${SHEET_LABELS[k]}`,
+    );
+  // L'entrée curée de l'EE de même : le store prend ses quatre champs d'un
+  // coup, des chips posées sur une entrée périmée déferaient l'écriture d'un autre.
+  const eeDisk = eeCuratedState(disk.ee[id]);
+  const eeMoved = hasEe && !sameJson(changes?.ee?.was, eeDisk);
+  if (eeMoved)
+    refuse({ field: 'ee', reason: 'le disque a changé depuis le chargement' }, `EE de ${name}`);
+  if (moved.length || eeMoved)
     return out(false, [...j.lines, 'Rien à enregistrer.'], { stale: true });
-  }
 
   // 1. Les rangs, par le plan de Rangs. Une cellule d'un autre perso n'est pas de la fiche.
   const rankLabel = (r: Pick<RankChange, 'field' | 'step'>): string =>
@@ -2453,16 +2613,38 @@ export async function saveCharacterSheet(
     }
     for (const e of errors) j.done(`REFUSÉ — ${name} : ${e}`);
   }
-  if (plan.ee[id]) {
-    const errors = await deps.upsertEe(id, plan.ee[id]);
+  // L'EE : le rang des cellules et les chips de `changes.ee`, en UNE écriture.
+  let eeChips: Exclude<ReturnType<typeof planEe>, string> | null = null;
+  if (hasEe) {
+    const item = deps.eeItem(id);
+    const checked = item
+      ? planEe(changes?.ee, item, eeDisk, deps.eeCatalog())
+      : "ce perso n'a pas d'EE";
+    if (typeof checked === 'string')
+      refuse({ field: 'ee', reason: checked }, `${name} · chips de l'EE`);
+    else if (checked.moved) eeChips = checked;
+  }
+  const eePatch: EeCuratedPatch | undefined =
+    plan.ee[id] ?? (eeChips ? { rank: eeDisk.rank, rank10: eeDisk.rank10 } : undefined);
+  if (eePatch) {
+    if (eeChips) Object.assign(eePatch, { chipHide: eeChips.chipHide, chipAdd: eeChips.chipAdd });
+    j.doing('écriture de l’EE');
+    const errors = await deps.upsertEe(id, eePatch);
     if (errors.length) failed.add('ee');
     else touched.add(EQUIPMENT_PATH);
     for (const e of errors) j.done(`REFUSÉ — EE de ${name} : ${e}`);
+    if (errors.length && eeChips) refused.push({ field: 'ee', reason: errors[0] });
   }
   for (const r of plan.applied) {
     if (failed.has(isEe(r.field) ? 'ee' : 'character'))
       refused.push({ field: r.field, step: r.step, reason: 'refusé par le store' });
     else j.done(`${rankLabel(r)} : ${r.from || 'vide'} → ${r.to || 'vide'}`);
+  }
+  if (eeChips && !failed.has('ee')) {
+    const [hidden, added] = [eeChips.chipHide.length, eeChips.chipAdd.length];
+    j.done(
+      `chips de l'EE : ${hidden} masquée${hidden > 1 ? 's' : ''}, ${added} ajoutée${added > 1 ? 's' : ''}`,
+    );
   }
 
   // 2. Les champs hors rangs, sur l'entrée d'après les rangs.

@@ -597,11 +597,12 @@ le panneau ; à la fermeture le focus revient à `opener()`.
 
 ## Éditeurs — croquis
 
-### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42 ; Skills — B39 ; Gear reco — B40)
+### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42 ; Skills — B39 ; EE — B43 ; Gear reco — B40)
 
 Ce que le wiki sait d'UN perso, en sous-onglets comme sur sa fiche du site :
 l'éditeur « Character » de l'admin, son onglet « Skills (buff/debuff) », ses
-outils Pro / Con et Synergy, et ses recos de gear. Croquis du rendu :
+outils Pro / Con et Synergy, l'éditeur de son EE, et ses recos de gear. Croquis
+du rendu :
 
 ```
 .head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
@@ -609,8 +610,9 @@ outils Pro / Con et Synergy, et ses recos de gear. Croquis du rendu :
    sans perso : « Aucun perso choisi. », [Choisir un perso], et le picker OUVERT d'office à chaque venue sur l'onglet
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets, sauf les builds de Gear reco, qui ont la leur ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
-.c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [Gear reco]
+.c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [EE] [Gear reco]
    un point accent = des changements pas encore enregistrés DANS ce sous-onglet (pour Gear reco, ses builds en attente), rouge = un refus ou une erreur
+   [EE] est ÉTEINT (`disabled`, `title` « pas d'EE ») pour un perso sans équipement exclusif : le clavier le saute, `…/ee` vaut `fiche`
    clavier : ← → (les bouts se rejoignent), Début, Fin ; `tabindex` 0 sur l'actif, -1 ailleurs
    Gear reco n'est pas dessiné dans `#c-panel` : il a son hôte, `#c-gear`, à côté (croquis plus bas) — y revenir retrouve ses builds en attente
 #c-panel (le `tabpanel`) — Fiche : .c-cols, deux colonnes de .card (une seule sous 1000 px)
@@ -650,8 +652,19 @@ outils Pro / Con et Synergy, et ses recos de gear. Croquis du rendu :
      .c-err    le refus de la carte, en rouge
   [＋ effet] ouvre le picker partagé sur le catalogue des effets : « Ajouter un effet — <skill> », la recherche sur le nom, [Tous | Buffs | Debuffs], des tuiles en lignes (tuile 28 px + nom) ; les homonymes sont départagés (« Barrier (buff) », « Barrier (irremovable, buff) ») ; un effet déjà ajouté à la carte n'est plus proposé
   sous les cartes : le refus du champ entier (cartes illisibles au serveur) ; .empty « Kit illisible : … » / « Aucune carte de skill. »
+#c-panel — EE : .c-cols — l'en-tête en pleine largeur, puis Rangs | Passifs côte à côte, puis Chips en pleine largeur (une colonne sous 1000 px)
+  .card.pad.c-ee  l'en-tête : la tuile d'item 56 px (`itemTile` de `gear-view.mjs` — cadre de rareté, icône, étoiles) · le nom dans la couleur du grade · « porté aussi par <perso> » en .lbl quand le site montre un second porteur
+  .card « Rangs »    card-head : titre · badge edit « modifié » · badge ko « refusé »
+     .form : [Au déblocage ▾] [À +10 ▾] — la cellule de Rangs (`eeRank`, `eeRank10`), sur l'échelle des EE (S à D) plus vide ; son refus dessous
+     « Les colonnes « EE base » et « EE +10 » de la grille Rangs. » (.lbl)
+  .card « Passifs »  card-head : titre · « en lecture »
+     par passif : badge off « Déblocage » / « +10 » · son nom · son texte tel que le jeu l'écrit (.c-desc)
+  .card « Chips » (pleine largeur)   card-head : titre · badges
+     .c-chips  la rangée d'une carte de Skills : les chips que les passifs posent (✕ masque → pointillés, [rétablir]), les effets ajoutés (badge « ajoutée », ✕ retire), [＋ effet] (le picker d'effets de Skills, « Ajouter un effet — <EE> ») ; « aucune chip » quand il n'y en a pas
+     .c-err    le refus des chips, en rouge
+     .c-memo   l'aide-mémoire : une ligne .lbl par chip VISIBLE et par ajout que le jeu décrit — tuile de l'effet · nom en gras — sa description
 .card.ko (une carte qui porte un refus ou une erreur) : bord danger
-le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies` · `skills` · `gear` ; `#character/<id>` = `fiche`, un sous-onglet inconnu aussi) — la page l'écrit au choix du perso et du sous-onglet : recharger y revient
+le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies` · `skills` · `ee` · `gear` ; `#character/<id>` = `fiche`, un sous-onglet inconnu aussi, et `ee` pour un perso sans EE) — la page l'écrit au choix du perso et du sous-onglet : recharger y revient
    `#character/<id>/skills/picker/<n>` ouvre en plus le picker d'effets de la n-ième carte (à partir de 1) — pour le banc, la page ne l'écrit pas
 ```
 
@@ -722,6 +735,26 @@ le commit — toujours UN, `chore(characters): <perso>` — porte alors AUSSI
 `character-skills.json`. Une carte refusée garde sa saisie, cerclée, son
 message dessous ; y retoucher le lève.
 
+EE (B43) porte l'éditeur des EE de l'admin (`EeCuratedEditor`), DANS la fiche
+du perso qui le porte. `ee` de l'état sert tout (`null` : pas d'EE, l'onglet
+est éteint) — l'item (nom, `icon` sous `images/equipment`, grade, étoiles), le
+second porteur que le site montre (`companion`), ce que la section `ee` de
+`data/curated/equipment.json` en cure (`rank`, `rank10`, `chipHide`,
+`chipAdd`), les chips AUTO (`eeEditorChips`), les passifs, et le catalogue de
+Skills avec la description de chaque effet ; `eeTiers` est l'échelle des deux
+rangs. Les rangs sont des CELLULES (`eeRank`, `eeRank10`), les mêmes que dans
+Rangs : elles partent dans `ranks`, comptent dans CE sous-onglet, se refusent
+une à une. Les chips sont UNE carte de Skills (`chipHtml` lit ses listes par
+`eeAt`) : un geste redessine la carte « Chips » seule, aide-mémoire compris.
+« Enregistrer » joint `ee` à l'envoi quand une chip a bougé — ses deux listes
+ENTIÈRES et l'entrée curée que la page avait chargée (`was`). Le serveur
+refuse `stale`, sans rien écrire, si le disque en porte une autre (Rangs ou
+l'admin a écrit entre-temps), contrôle les refs (`planEe` : masquer vise une
+chip de l'EE, ajouter un effet du catalogue ; une ref héritée du fichier
+reste) et écrit par UN SEUL `upsertEeCurated`, le rang des cellules et les
+chips fusionnés — le store prend les quatre champs d'un coup, deux écritures
+s'écraseraient. Le commit, toujours UN, porte alors `equipment.json`.
+
 Propres à l'onglet, dans `tabs/character.css` : `.c-char`, `.c-who` et
 consorts (l'en-tête de perso), `.c-tabs`, `.c-cols`, `.c-card`,
 `.c-body`, `.c-cell`, `.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée),
@@ -733,7 +766,9 @@ classes de couleur des segments (`.pv-*`, `text-buff`…), posés sur
 pas) ; pour Skills : `.c-skill`,
 `.c-skico`, `.c-skid`, `.c-desc`, `.c-chips`, `.c-chip`, `.c-chn`, et `.c-fx`,
 la tuile d'effet de l'onglet Effets (`.x-ico`), recopiée avec ses deux
-teintes — elle vaut aussi sous `.hp-modal`, pour le picker d'effets.
+teintes — elle vaut aussi sous `.hp-modal`, pour le picker d'effets ; pour EE :
+`.c-ee`, `.c-een`, `.c-passive`, `.c-memo`, et la tuile d'item `.gv-*` de
+Gear reco recopiée sous `.c-ee` (`gear.css` ne la règle que sous `#c-gear`).
 
 ### Fiche perso › Gear reco (fait — B29, pickers C7, tuiles C8, aperçu C9, onglets de builds B32 ; sous-onglet de la fiche — B40)
 

@@ -2156,6 +2156,43 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       irremovable: true,
     },
   };
+  /** L'EE d'Aer, tel que le serveur le sert : deux chips AUTO, ses deux passifs. */
+  interface EeDisk {
+    rank: string;
+    rank10: string;
+    chipHide: string[];
+    chipAdd: string[];
+  }
+  const EE_ITEM = {
+    itemId: AER,
+    name: 'Super Board',
+    icon: 'TI_Equipment_EX_2000055',
+    star: 6,
+    grade: 'unique',
+    chips: [
+      {
+        ref: 'SYS_BUFF_ACTION_GAUGE_UP',
+        name: 'Priority Increase',
+        icon: 'IG_Buff_Action_Gauge_Up',
+        isDebuff: false,
+        desc: 'Increases the target’s <color=#28d9ed>Priority</color>.',
+      },
+      { ref: 'SYS_NO_DESC', name: 'Silent', isDebuff: true },
+    ],
+    passives: [
+      {
+        level: 1,
+        name: 'Aer’s Exclusive Equipment',
+        texts: ['Penetration <color=#28d9ed>+20%</color> when using To the Beach?'],
+      },
+      { level: 10, name: 'Aer’s Exclusive Equipment', texts: ['Line one.\\nLine two.'] },
+    ],
+  };
+  /** Le catalogue de « ＋ effet » de l'EE : celui de Skills, descriptions comprises. */
+  const EE_CATALOG = {
+    ...KIT_CATALOG,
+    '1': { ...KIT_CATALOG['1'], desc: 'Takes damage every turn.' },
+  };
 
   type Call = { path: string; body?: unknown };
   type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
@@ -2259,11 +2296,15 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         body: unknown,
         disk: Record<string, Curated>,
         chips: { chipHide: Chips; chipAdd: Chips },
+        ee: EeDisk,
       ) => Saved;
       translated?: (texts: string[]) => unknown;
       /** Le curé des chips de skills du disque (Aer), et un kit illisible. */
       chips?: { chipHide?: Chips; chipAdd?: Chips };
       kitError?: string;
+      /** Le curé de l'EE d'Aer sur le disque, et son second porteur — les autres persos n'ont pas d'EE. */
+      ee?: Partial<EeDisk>;
+      companion?: { id: string; name: string };
       /** Gear reco : la réponse à un enregistrement des builds (d'office, écrit). */
       gearSaved?: (body: unknown) => Saved;
     } = {},
@@ -2280,6 +2321,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     const disk = {
       curated: curated(),
       chips: { chipHide: {}, chipAdd: {}, ...opts.chips } as { chipHide: Chips; chipAdd: Chips },
+      ee: { rank: 'A', rank10: 'S', chipHide: [], chipAdd: [], ...opts.ee } as EeDisk,
       gear: gearDisk(),
     };
     const calls: Call[] = [];
@@ -2323,6 +2365,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
             roleByTranscend: cu.roleByTranscend ?? {},
           },
           tiers: ['S', 'A', 'B', 'C', 'D', 'E'],
+          eeTiers: ['S', 'A', 'B', 'C', 'D'],
           roles: ['dps', 'support', 'sustain'],
           steps: [
             { key: '3', label: '3★' },
@@ -2343,6 +2386,15 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
             sprite: 'images/ui/effect',
             ...(opts.kitError ? { error: opts.kitError } : {}),
           },
+          ee:
+            id === AER
+              ? {
+                  ...EE_ITEM,
+                  ...(opts.companion ? { companion: opts.companion } : {}),
+                  ...disk.ee,
+                  catalog: EE_CATALOG,
+                }
+              : null,
         });
       }
       if (url.pathname === '/api/character/preview') {
@@ -2428,7 +2480,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       }
       if (url.pathname === '/api/character')
         return answer(
-          opts.saved?.(body, disk.curated, disk.chips) ?? {
+          opts.saved?.(body, disk.curated, disk.chips, disk.ee) ?? {
             ok: true,
             log: ['fait'],
             written: true,
@@ -2686,10 +2738,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Pros / Cons', 'false', '', ''],
       ['Synergies', 'false', '', ''],
       ['Skills', 'false', '', ''],
+      ['EE', 'false', '', ''],
       ['Gear reco', 'false', '', ''],
     ]);
     expect(page.all('#c-tabs [role="tab"]').map((b) => b.getAttribute('tabindex'))).toEqual([
       '0',
+      '-1',
       '-1',
       '-1',
       '-1',
@@ -2709,17 +2763,18 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   it('le clavier des sous-onglets : ← → Début Fin, les bouts se rejoignent', async () => {
     const page = await character({ hash: `#character/${AER}` });
     page.el('c-tab-fiche').focus();
-    // Cinq sous-onglets : → avance, les bouts se rejoignent, Fin et Début y vont.
+    // Six sous-onglets : → avance, les bouts se rejoignent, Fin et Début y vont.
     for (const [key, to] of [
       ['ArrowRight', 'pros-cons'],
       ['ArrowRight', 'synergies'],
       ['ArrowRight', 'skills'],
+      ['ArrowRight', 'ee'],
       ['ArrowRight', 'gear'],
       ['ArrowRight', 'fiche'],
       ['ArrowLeft', 'gear'],
       ['Home', 'fiche'],
       ['End', 'gear'],
-      ['ArrowLeft', 'skills'],
+      ['ArrowLeft', 'ee'],
       ['Home', 'fiche'],
     ]) {
       const event = new page.window.KeyboardEvent('keydown', {
@@ -3221,6 +3276,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Pros / Cons', 'true'],
       ['Synergies', 'false'],
       ['Skills', 'false'],
+      ['EE', 'false'],
       ['Gear reco', 'false'],
     ]);
     expect(page.all('#c-panel .c-card > .card-head strong').map((h) => h.textContent)).toEqual([
@@ -3321,7 +3377,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.count()).toBe('1 changement');
     expect(page.all('#c-panel [data-mod="pros"]')[0].textContent).toBe('modifié');
     expect(page.all('#c-panel [data-mod="cons"]')[0].textContent).toBe('');
-    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot edit', '', '', '']);
+    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot edit', '', '', '', '']);
     // Revidée, elle ne compte plus.
     page.type(page.area(added()), ' ');
     expect(page.count()).toBe('aucune modification');
@@ -3518,7 +3574,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#c-panel [data-card="cons"]')[0].classList.contains('ko')).toBe(false);
     expect(page.text(page.lines('pros')[0], '.c-err')).toBe('');
     expect(page.count()).toBe('1 changement1 refus');
-    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot ko', '', '', '']);
+    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot ko', '', '', '', '']);
     // Y retoucher lève le refus.
     page.type(page.area(bad), 'Grants {B/BT_ADDITIVE_TURN}');
     expect(page.area(bad).classList.contains('refused')).toBe(false);
@@ -3636,7 +3692,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
     expect(page.count()).toBe('1 changement');
     expect(page.text(group(), '[data-mod-line]')).toBe('modifié');
-    expect(page.subs().map((t) => t[3])).toEqual(['', '', 'dot edit', '', '']);
+    expect(page.subs().map((t) => t[3])).toEqual(['', '', 'dot edit', '', '', '']);
     // Rouvert, le picker coche les héros du groupe.
     page.act('add-hero', group()).click();
     expect(page.all('#hp-results .hp-tile[aria-pressed="true"]').map((t) => t.dataset.id)).toEqual([
@@ -3710,7 +3766,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.pick(page.cell('rank'), 'S');
     // UNE barre pour toute la fiche : les trois sous-onglets comptés.
     expect(page.count()).toBe('3 changements');
-    expect(page.subs().map((t) => t[3])).toEqual(['dot edit', 'dot edit', 'dot edit', '', '']);
+    expect(page.subs().map((t) => t[3])).toEqual(['dot edit', 'dot edit', 'dot edit', '', '', '']);
 
     page.confirm.mockReturnValueOnce(false);
     page.all('#tabs [data-tab="effects"]')[0].click();
@@ -3730,7 +3786,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.sub('synergies');
     expect(page.lines('synergies')).toEqual([]);
     expect(page.posted()).toEqual([]);
-    expect(page.subs().map((t) => t[3])).toEqual(['', '', '', '', '']);
+    expect(page.subs().map((t) => t[3])).toEqual(['', '', '', '', '', '']);
   });
 
   // ------------------------------------------------------------ « Skills »
@@ -4087,6 +4143,440 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
   });
 
+  // ------------------------------------------------------------------ « EE »
+  // L'équipement exclusif du perso : sa tuile, ses deux rangs (des cellules de
+  // Rangs), ses passifs en lecture, ses chips réglées comme celles d'un skill.
+  const EE = `#character/${AER}/ee`;
+  const AUTO = 'SYS_BUFF_ACTION_GAUGE_UP';
+  const eeCard = (page: Page, card = 'ee-chips') => page.all(`#c-panel [data-card="${card}"]`)[0];
+  /** L'aide-mémoire sous les chips : une ligne par effet décrit. */
+  const memo = (page: Page) => page.all('#c-panel .c-memo li').map((li) => li.textContent);
+  /** L'entrée curée de l'EE que la page avait chargée, telle qu'elle la renvoie. */
+  const eeWas = (over: Partial<EeDisk> = {}) => ({
+    rank: 'A',
+    rank10: 'S',
+    chipHide: [],
+    chipAdd: [],
+    ...over,
+  });
+  /** Un enregistrement qui écrit l'EE envoyé — ses rangs, ses chips — sur le disque factice. */
+  const writeEe: NonNullable<Parameters<typeof character>[0]>['saved'] = (body, _, __, disk) => {
+    const { ranks, ee } = (
+      body as {
+        changes: {
+          ranks: { field: string; to: string }[];
+          ee?: { chipHide: string[]; chipAdd: string[] };
+        };
+      }
+    ).changes;
+    for (const r of ranks) {
+      if (r.field === 'eeRank') disk.rank = r.to;
+      if (r.field === 'eeRank10') disk.rank10 = r.to;
+    }
+    if (ee) Object.assign(disk, { chipHide: ee.chipHide, chipAdd: ee.chipAdd });
+    return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+  };
+
+  it('`#character/2000055/ee` : la tuile de l’EE, ses deux rangs, ses passifs en lecture, ses chips et leur aide-mémoire', async () => {
+    const page = await character({ hash: EE });
+    expect(page.window.location.hash).toBe(EE);
+    expect(page.subs()[4]).toEqual(['EE', 'true', '', '']);
+    expect(page.el('c-panel').getAttribute('aria-labelledby')).toBe('c-tab-ee');
+    // Pas de texte à tags ici : le groupe « Aperçu » de la savebar s'efface.
+    expect(page.el('c-pv-lang').hidden).toBe(true);
+
+    // L'en-tête : un ITEM — son cadre de rareté, son icône, ses étoiles —, son nom dans la couleur du grade.
+    const head = page.all('#c-panel .c-ee')[0];
+    expect(head.querySelector('.gv-frame')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/bg/TI_Slot_Unique.webp',
+    );
+    expect(head.querySelector('.gv-icon')?.getAttribute('src')).toBe(
+      'https://img.test/images/equipment/TI_Equipment_EX_2000055.webp',
+    );
+    expect(head.querySelector('.gv-tile')?.getAttribute('style')).toBe('width:56px;height:56px');
+    expect(head.querySelectorAll('.gv-stars img')).toHaveLength(6);
+    expect(page.text(head, '.c-een')).toBe('Super Board');
+    expect(head.querySelector('.c-een')?.getAttribute('style')).toBe('color:var(--item-legendary)');
+    expect(head.querySelector('.lbl')).toBeNull();
+
+    // Les rangs : deux cellules de Rangs, sur l'échelle des EE (pas de E) plus vide.
+    const ranks = eeCard(page, 'ee-ranks');
+    expect([...ranks.querySelectorAll('label')].map((l) => l.textContent)).toEqual([
+      'Au déblocage',
+      'À +10',
+    ]);
+    expect(page.val(page.cell('eeRank'))).toBe('A');
+    expect(page.val(page.cell('eeRank10'))).toBe('S');
+    expect([...page.cell('eeRank').options].map((o) => o.value)).toEqual([
+      '',
+      'S',
+      'A',
+      'B',
+      'C',
+      'D',
+    ]);
+    expect([...ranks.querySelectorAll('.c-rkico')].map((i) => i.getAttribute('src'))).toEqual([
+      'https://img.test/images/ui/rank/IG_Event_Rank_A.webp',
+      'https://img.test/images/ui/rank/IG_Event_Rank_S.webp',
+    ]);
+
+    // Les passifs, en lecture : le déblocage puis +10, le texte tel que le jeu l'écrit.
+    const passives = eeCard(page, 'ee-passives');
+    expect([...passives.querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      'Déblocage',
+      '+10',
+    ]);
+    expect([...passives.querySelectorAll('.c-desc')].map((d) => d.innerHTML)).toEqual([
+      'Penetration <span style="color:#28d9ed">+20%</span> when using To the Beach?',
+      'Line one.<br>Line two.',
+    ]);
+    expect(passives.querySelector('select, input, button')).toBeNull();
+
+    // Les chips : la rangée d'une carte de Skills, « ＋ effet » au bout.
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', '', '✕'],
+      ['Silent', '', '✕'],
+    ]);
+    expect(chip(eeCard(page), AUTO).querySelector('.c-fx')?.className).toBe('c-fx buff');
+    expect(chip(eeCard(page), 'SYS_NO_DESC').querySelector('.c-fx')?.className).toBe('c-fx none');
+    expect(page.act('add-chip', eeCard(page)).textContent).toBe('＋ effet');
+    // L'aide-mémoire : une chip sans description n'y est pas.
+    expect(memo(page)).toEqual(['Priority Increase — Increases the target’s Priority.']);
+    expect(page.all('#c-panel .c-memo li')[0].className).toBe('lbl');
+    expect(page.all('#c-panel .c-memo li span span')[0].getAttribute('style')).toBe(
+      'color:#28d9ed',
+    );
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('un second porteur : « porté aussi par … » sous le nom ; sans chip, la carte le dit', async () => {
+    const page = await character({
+      hash: EE,
+      companion: { id: '2700055', name: 'Core Fusion Aer' },
+    });
+    expect(page.text(page.all('#c-panel .c-ee')[0], '.lbl')).toBe(
+      'porté aussi par Core Fusion Aer',
+    );
+    // Toutes ses chips masquées restent là, barrées ; l'aide-mémoire s'efface.
+    const hidden = await character({
+      hash: EE,
+      ee: { chipHide: [AUTO, 'SYS_NO_DESC'] },
+    });
+    expect(chips(eeCard(hidden)).map((c) => c[1])).toEqual(['off', 'off']);
+    expect(memo(hidden)).toEqual([]);
+    expect(hidden.all('#c-panel .c-memo')).toEqual([]);
+  });
+
+  it('un perso sans EE : l’onglet est éteint, son `title` le dit ; `…/ee` vaut `fiche`, le clavier le saute', async () => {
+    const page = await character({ hash: `#character/${AIS}/ee` });
+    expect(page.subs()[4]).toEqual(['EE', 'false', 'pas d’EE', '']);
+    expect(page.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    expect(page.subs()[0].slice(0, 2)).toEqual(['Fiche', 'true']);
+    // Éteint : un clic n'y mène pas, et → passe de Skills à Gear reco.
+    page.el('c-tab-ee').click();
+    expect(page.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    page.sub('skills');
+    page.el('c-tab-skills').focus();
+    page.fire(page.el('c-tab-skills'), 'keydown', 'ArrowRight');
+    expect(page.window.location.hash).toBe(`#character/${AIS}/gear`);
+
+    // Changer de perso depuis l'EE d'Aer : Ais n'en a pas, sa fiche s'ouvre sur « Fiche ».
+    const aer = await character({ hash: EE });
+    aer.el('c-pick').click();
+    aer.all('#hp-results .hp-tile')[1].click();
+    await aer.settle();
+    await aer.settle();
+    expect(aer.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    expect(aer.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    expect(aer.subs()[4]).toEqual(['EE', 'false', 'pas d’EE', '']);
+  });
+
+  it('les deux rangs : des cellules de Rangs — surlignées, comptées dans CE sous-onglet, envoyées comme elles', async () => {
+    const page = await character({ hash: EE, saved: writeEe });
+    page.pick(page.cell('eeRank10'), 'A');
+
+    expect(page.cell('eeRank10').className).toBe('dirty');
+    expect(eeCard(page, 'ee-ranks').querySelectorAll('.c-rkico')[1].getAttribute('src')).toBe(
+      'https://img.test/images/ui/rank/IG_Event_Rank_A.webp',
+    );
+    expect(page.count()).toBe('1 changement');
+    expect(page.all('#c-panel [data-mod="ee-ranks"]')[0].textContent).toBe('modifié');
+    expect(page.all('#c-panel [data-mod="ee-chips"]')[0].textContent).toBe('');
+    expect(page.subs()[4]).toEqual(['EE', 'true', '', 'dot edit']);
+    // Pas dans Fiche : ni son point, ni le badge de sa carte Rangs.
+    expect(page.subs()[0][3]).toBe('');
+    page.sub('fiche');
+    expect(page.all('#c-panel [data-mod="ranks"]')[0].textContent).toBe('');
+    page.pick(page.cell('rank'), 'S');
+    expect(page.count()).toBe('2 changements');
+    expect(page.subs().map((t) => t[3])).toEqual(['dot edit', '', '', '', 'dot edit', '']);
+    page.pick(page.cell('rank'), 'A');
+    page.sub('ee');
+    expect(page.val(page.cell('eeRank10'))).toBe('A');
+    page.pick(page.cell('eeRank'), '');
+    expect(page.count()).toBe('2 changements');
+
+    await page.save();
+    // Les rangs de l'EE partent en cellules ; sans chip touchée, pas de `ee`.
+    expect(page.posted()).toEqual([
+      {
+        id: AER,
+        changes: {
+          ranks: [
+            { id: AER, field: 'eeRank10', from: 'S', to: 'A' },
+            { id: AER, field: 'eeRank', from: 'A', to: '' },
+          ],
+          curated: {},
+          was: curated()[AER],
+        },
+      },
+    ]);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.val(page.cell('eeRank'))).toBe('');
+    expect(page.val(page.cell('eeRank10'))).toBe('A');
+    expect(page.cell('eeRank10').className).toBe('');
+    // Vidé : le cadre perd son icône.
+    expect(
+      (eeCard(page, 'ee-ranks').querySelectorAll('.c-rkico')[0] as unknown as HTMLElement).hidden,
+    ).toBe(true);
+  });
+
+  it('✕ masque une chip : barrée, « rétablir », sortie de l’aide-mémoire — comptée ; rétablie, elle ne compte plus', async () => {
+    const page = await character({ hash: EE });
+    chip(eeCard(page), AUTO).querySelector('button')!.click();
+
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', 'off dirty', 'rétablir'],
+      ['Silent', '', '✕'],
+    ]);
+    expect(memo(page)).toEqual([]);
+    expect(page.text(eeCard(page), '.card-head .badge.edit')).toBe('modifié');
+    expect(page.all('#c-panel [data-mod="ee-ranks"]')[0].textContent).toBe('');
+    expect(page.count()).toBe('1 changement');
+    expect(page.subs()[4][3]).toBe('dot edit');
+    // Le focus reste sur la chip : son bouton, devenu « rétablir ».
+    const back = chip(eeCard(page), AUTO).querySelector('button')!;
+    expect(page.window.document.activeElement).toBe(back as unknown as Element);
+    expect(back.getAttribute('aria-label')).toBe('Rétablir Priority Increase');
+
+    back.click();
+    expect(chips(eeCard(page)).map((c) => c[1])).toEqual(['', '']);
+    expect(memo(page)).toHaveLength(1);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[4][3]).toBe('');
+    expect(page.el('c-save').disabled).toBe(true);
+  });
+
+  it('« ＋ effet » : le picker d’effets de Skills sur le catalogue — l’effet choisi s’ajoute, décrit dessous ; ✕ le retire', async () => {
+    const page = await character({ hash: EE, ee: { chipAdd: ['7'] } });
+    expect(chips(eeCard(page))[2]).toEqual(['Increased Attack', '', '✕']);
+    page.act('add-chip', eeCard(page)).click();
+
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Ajouter un effet — Super Board');
+    expect(page.el('hp-q').placeholder).toBe('Chercher un effet…');
+    expect(page.el('hp-results').classList.contains('rows')).toBe(true);
+    // Par nom, homonymes départagés ; l'effet déjà ajouté n'est plus proposé.
+    expect(tiles(page)).toEqual(['Burned', 'Immunity (buff)', 'Immunity (irremovable, buff)']);
+    expect(page.all('#hp-filters .hp-seg button').map((b) => b.textContent)).toEqual([
+      'Tous',
+      'Buffs',
+      'Debuffs',
+    ]);
+
+    page.all('#hp-results .hp-tile')[0].click();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', '', '✕'],
+      ['Silent', '', '✕'],
+      ['Increased Attack', '', '✕'],
+      ['Burned', 'dirty', '✕'],
+    ]);
+    expect(chip(eeCard(page), '1', 'add').querySelector('.badge')?.textContent).toBe('ajoutée');
+    expect(chip(eeCard(page), '1', 'add').querySelector('button')?.getAttribute('aria-label')).toBe(
+      'Retirer Burned',
+    );
+    // L'aide-mémoire suit : la chip visible, puis l'ajout que le catalogue décrit.
+    expect(memo(page)).toEqual([
+      'Priority Increase — Increases the target’s Priority.',
+      'Burned — Takes damage every turn.',
+    ]);
+    expect(page.count()).toBe('1 changement');
+    expect(page.subs()[4][3]).toBe('dot edit');
+    expect(page.window.document.activeElement).toBe(
+      page.act('add-chip', eeCard(page)) as unknown as Element,
+    );
+
+    // ✕ sur l'ajout du picker : il ne compte plus ; sur celui du disque : il compte.
+    chip(eeCard(page), '1', 'add').querySelector('button')!.click();
+    expect(page.count()).toBe('aucune modification');
+    expect(memo(page)).toHaveLength(1);
+    chip(eeCard(page), '7', 'add').querySelector('button')!.click();
+    expect(chips(eeCard(page))).toHaveLength(2);
+    expect(page.count()).toBe('1 changement');
+  });
+
+  it('« Enregistrer » : un rang et des chips en UN envoi — les deux listes ENTIÈRES et l’entrée chargée ; le disque relu n’a plus rien en attente', async () => {
+    const page = await character({
+      hash: EE,
+      saved: writeEe,
+      // `legacy` : une ref héritée du fichier, que la carte ne montre pas ; `404`, hors catalogue.
+      ee: { chipHide: ['SYS_NO_DESC', 'legacy'], chipAdd: ['404'] },
+    });
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', '', '✕'],
+      ['Silent', 'off', 'rétablir'],
+      ['404', '', '✕'],
+    ]);
+    expect(page.count()).toBe('aucune modification');
+
+    page.pick(page.cell('eeRank'), 'S');
+    chip(eeCard(page), 'SYS_NO_DESC').querySelector('button')!.click();
+    chip(eeCard(page), AUTO).querySelector('button')!.click();
+    page.act('add-chip', eeCard(page)).click();
+    page.all('#hp-results .hp-tile')[0].click();
+    expect(page.count()).toBe('4 changements');
+
+    const states = page.states();
+    await page.save();
+    expect(page.posted()).toEqual([
+      {
+        id: AER,
+        changes: {
+          ranks: [{ id: AER, field: 'eeRank', from: 'A', to: 'S' }],
+          curated: {},
+          was: curated()[AER],
+          ee: {
+            chipHide: ['legacy', AUTO],
+            chipAdd: ['404', '1'],
+            was: eeWas({ chipHide: ['SYS_NO_DESC', 'legacy'], chipAdd: ['404'] }),
+          },
+        },
+      },
+    ]);
+    expect(page.states()).toBe(states + 1);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[4][3]).toBe('');
+    // Ce que le disque porte maintenant n'est plus « modifié ».
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', 'off', 'rétablir'],
+      ['Silent', '', '✕'],
+      ['404', '', '✕'],
+      ['Burned', '', '✕'],
+    ]);
+    expect(page.val(page.cell('eeRank'))).toBe('S');
+    expect(page.text(eeCard(page), '.card-head .badge.edit')).toBe('');
+  });
+
+  it('un refus situé : la carte des chips cerclée, son message dessous, sa saisie gardée — la cellule refusée montre le disque', async () => {
+    const page = await character({
+      hash: EE,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [
+          { field: 'ee', reason: '« x » : pas une chip de cet EE' },
+          { field: 'eeRank10', reason: 'la page avait « S », le disque porte « A »' },
+        ],
+      }),
+    });
+    chip(eeCard(page), AUTO).querySelector('button')!.click();
+    page.pick(page.cell('eeRank10'), 'B');
+    await page.save();
+
+    expect(eeCard(page).classList.contains('ko')).toBe(true);
+    expect(page.text(eeCard(page), '.card-head .badge.ko')).toBe('refusé');
+    expect(page.text(eeCard(page), '[data-err="ee"]')).toBe('« x » : pas une chip de cet EE');
+    expect(chips(eeCard(page))[0]).toEqual(['Priority Increase', 'off dirty', 'rétablir']);
+    // La cellule refusée n'est plus « modifiée » : le disque, cerclé, son refus dessous.
+    expect(page.cell('eeRank10').className).toBe('refused');
+    expect(page.val(page.cell('eeRank10'))).toBe('S');
+    expect(eeCard(page, 'ee-ranks').classList.contains('ko')).toBe(true);
+    expect(page.text(eeCard(page, 'ee-ranks'), '[data-err="eeRank10"]')).toBe(
+      'la page avait « S », le disque porte « A »',
+    );
+    expect(page.count()).toBe('1 changement2 refus');
+    expect(page.subs()[4][3]).toBe('dot ko');
+    // Rien de tout ça n'est de la Fiche.
+    expect(page.subs()[0][3]).toBe('');
+    page.sub('fiche');
+    expect(page.all('#c-panel [data-card="ranks"]')[0].classList.contains('ko')).toBe(false);
+    page.sub('ee');
+
+    // Y retoucher lève le refus des chips.
+    chip(eeCard(page), 'SYS_NO_DESC').querySelector('button')!.click();
+    expect(eeCard(page).classList.contains('ko')).toBe(false);
+    expect(page.text(eeCard(page), '[data-err="ee"]')).toBe('');
+    expect(page.count()).toBe('2 changements1 refus');
+  });
+
+  it('`stale` : l’entrée de l’EE avait changé — les chips montrent le disque, le refus dessous', async () => {
+    const page = await character({
+      hash: EE,
+      saved: (_, __, ___, disk) => {
+        // L'admin avait masqué l'autre chip entre-temps : rien n'est écrit.
+        disk.chipHide = ['SYS_NO_DESC'];
+        return {
+          ok: false,
+          log: ['REFUSÉ'],
+          written: false,
+          stale: true,
+          refused: [{ field: 'ee', reason: 'le disque a changé depuis le chargement' }],
+        };
+      },
+    });
+    chip(eeCard(page), AUTO).querySelector('button')!.click();
+    await page.save();
+
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', '', '✕'],
+      ['Silent', 'off', 'rétablir'],
+    ]);
+    expect(page.text(eeCard(page), '[data-err="ee"]')).toBe(
+      'le disque a changé depuis le chargement',
+    );
+    expect(page.count()).toBe('1 refus');
+    expect(page.el('c-save').disabled).toBe(true);
+  });
+
+  it('« Annuler » rend l’EE du disque ; changer de sous-onglet garde la saisie, `canLeave` la retient', async () => {
+    const page = await character({ hash: EE, ee: { chipHide: [AUTO] } });
+    chip(eeCard(page), AUTO).querySelector('button')!.click();
+    page.pick(page.cell('eeRank'), 'C');
+    page.act('add-chip', eeCard(page)).click();
+    page.all('#hp-results .hp-tile')[1].click();
+    expect(page.count()).toBe('3 changements');
+
+    page.sub('skills');
+    expect(page.subs()[4][3]).toBe('dot edit');
+    page.sub('ee');
+    expect(page.val(page.cell('eeRank'))).toBe('C');
+    expect(page.cell('eeRank').className).toBe('dirty');
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', 'dirty', '✕'],
+      ['Silent', '', '✕'],
+      ['Immunity', 'dirty', '✕'],
+    ]);
+    // Quitter l'onglet avec l'EE en attente : sur confirmation.
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledWith(expect.stringContaining('3 changements'));
+    expect(page.el('tab-character').hidden).toBe(false);
+
+    page.el('c-reset').click();
+    await page.settle();
+    await page.settle();
+    expect(page.count()).toBe('aucune modification');
+    expect(page.val(page.cell('eeRank'))).toBe('A');
+    expect(chips(eeCard(page))).toEqual([
+      ['Priority Increase', 'off', 'rétablir'],
+      ['Silent', '', '✕'],
+    ]);
+    expect(page.posted()).toEqual([]);
+  });
+
   // ---------------------------------------------------------------- Gear reco
   // Le dernier sous-onglet : l'ancienne section « Gear reco » des Données,
   // devenue un module (`tabs/gear.js`) que la fiche monte pour son perso. Son UI
@@ -4114,7 +4604,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
 
     await page.gear();
     expect(page.window.location.hash).toBe(`#character/${AER}/gear`);
-    expect(page.subs()[4]).toEqual(['Gear reco', 'true', '', '']);
+    expect(page.subs()[5]).toEqual(['Gear reco', 'true', '', '']);
     expect(page.el('c-panel').hidden).toBe(true);
     expect(page.el('c-panel').innerHTML).toBe('');
     expect(page.el('c-gear').hidden).toBe(false);
@@ -4186,7 +4676,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('tab-character').hidden).toBe(false);
     expect(page.all('#tabs [data-tab="character"]')[0].getAttribute('aria-selected')).toBe('true');
     expect(page.window.location.hash).toBe(`#character/${AER}/gear`);
-    expect(page.subs()[4].slice(0, 2)).toEqual(['Gear reco', 'true']);
+    expect(page.subs()[5].slice(0, 2)).toEqual(['Gear reco', 'true']);
     expect(page.builds().map((b) => b[1])).toEqual(['false', 'true']);
     expect(page.el('g-modal').hidden).toBe(false);
     expect(page.el('g-modal-title').textContent).toBe('Choisir les armes');
@@ -4237,7 +4727,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.builds()[2]).toEqual(['PvP', 'true', 'dot edit']);
     expect(page.gearCount()).toBe('1 changement');
     // Le sous-onglet de la fiche porte le point ; sa savebar ne compte pas les builds.
-    expect(page.subs()[4]).toEqual(['Gear reco', 'true', '', 'dot edit']);
+    expect(page.subs()[5]).toEqual(['Gear reco', 'true', '', 'dot edit']);
     expect(page.count()).toBe('aucune modification');
     expect(page.el('c-save').disabled).toBe(true);
 
@@ -4247,7 +4737,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.gearStates()).toHaveLength(2);
     expect(page.builds()).toHaveLength(2);
     expect(page.gearCount()).toBe('aucune modification');
-    expect(page.subs()[4][3]).toBe('');
+    expect(page.subs()[5][3]).toBe('');
   });
 
   it('Gear reco : l’aperçu — une requête pour tous les builds, la langue de la barre, 400 ms après une frappe', async () => {
@@ -4349,7 +4839,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     await page.save();
     expect(page.posted()).toHaveLength(1);
     expect(page.gearPosted()).toEqual([]);
-    expect(page.subs()[4]).toEqual(['Gear reco', 'false', '', 'dot edit']);
+    expect(page.subs()[5]).toEqual(['Gear reco', 'false', '', 'dot edit']);
     await page.gear();
     expect(page.gearStates()).toHaveLength(1);
     expect(page.gearCount()).toBe('1 changement');
@@ -4365,7 +4855,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Speed 2', 'true', ''],
       ['High Crit', 'false', ''],
     ]);
-    expect(page.subs()[4][3]).toBe('');
+    expect(page.subs()[5][3]).toBe('');
     expect(page.posted()).toHaveLength(1);
   });
 
@@ -4432,7 +4922,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     await page.settle();
     await page.settle();
     expect(page.count()).toBe('aucune modification');
-    expect(page.subs()[4][3]).toBe('dot edit');
+    expect(page.subs()[5][3]).toBe('dot edit');
     expect(unload()).toBe(true);
 
     // Un rang et un build : comptés ensemble avant de changer de perso.
@@ -4450,7 +4940,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
     // Les builds d'Aer sont oubliés ; ceux d'Ais ne sont lus qu'en venant sur Gear reco.
     expect(unload()).toBe(false);
-    expect(page.subs()[4][3]).toBe('');
+    expect(page.subs()[5][3]).toBe('');
     expect(page.gearStates()).toHaveLength(1);
     await page.gear();
     expect(page.gearStates()).toEqual([
