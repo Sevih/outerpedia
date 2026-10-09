@@ -525,6 +525,7 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
   // Filtre variantes : NameID d'un AUTRE perso = alt visuel/PvP — jamais
   // référencé par une capture utilisateur (règle canonique du solver).
   const characters: Record<string, CharacterIngredients> = {};
+  const templetById = new Map(characterTemplet.map((r) => [r.ID, r]));
   for (const row of characterTemplet) {
     if (row.Type !== 'CT_PC') continue;
     if (row.NameID !== `${row.ID}_Name`) continue;
@@ -532,7 +533,11 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     const fusionRow = fusionTemplet.find((r) => r.ChangeCharID === id);
     const evoCharId = fusionRow?.CharacterID ?? id;
     const basicStar = num(row.BasicStar);
-    const base = extractBase(row);
+    // Base et évolution d'un fusionné : celles du perso d'origine. Le client
+    // (CCharacterData.CalcBasicStats) lit `Templet`, le templet de l'ID d'origine ;
+    // le templet fusionné ne sert qu'aux skills. Confirmé par trois captures ATK
+    // (Snow, Lisha, Veronica, lv100, 10/10/2026).
+    const base = extractBase(templetById.get(evoCharId) ?? row);
     const evoByLevel = extractEvoByLevel(evosByCharId.get(evoCharId));
     // Seul `spd` est encore consommé (SPD OAT_RATE pré-cuit sur lv100 max + évo max).
     const evoMax = zeroStats();
