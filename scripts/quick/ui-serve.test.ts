@@ -1956,6 +1956,46 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.names()).toEqual(['Aer', 'Astei']);
   });
 
+  it('autre chose que des héros : `tile` dessine la tuile, `rows` la range en lignes, la recherche et le vide se nomment', async () => {
+    const p = await picker();
+    const effects = [
+      { id: '1', name: 'Burned', isDebuff: true },
+      { id: '7', name: 'Increased Attack', isDebuff: false },
+    ];
+    p.open({
+      roster: effects as unknown as Hero[],
+      title: 'Ajouter un effet',
+      rows: true,
+      tile: (o: { name: string }) => `<i class="fx"></i><span>${o.name}</span>`,
+      placeholder: 'Chercher un effet…',
+      none: 'Aucun effet ne correspond.',
+    });
+    expect(p.el('hp-q').placeholder).toBe('Chercher un effet…');
+    expect(p.el('hp-q').getAttribute('aria-label')).toBe('Chercher un effet');
+    expect(p.el('hp-results').className).toBe('hp-tiles rows');
+    // La tuile est celle de l'appelant, dans le bouton du picker : ni visage ni anneau.
+    expect(p.tile('1').innerHTML).toBe('<i class="fx"></i><span>Burned</span>');
+    expect(p.tile('1').title).toBe('Burned');
+    expect(p.all('#hp-results .hp-fi, #hp-results .hp-ring')).toEqual([]);
+    // Sans classe ni élément : aucune pastille.
+    expect(p.all('#hp-filters .hp-tog')).toEqual([]);
+    p.search('att');
+    expect(p.all('#hp-results .hp-tile').map((t) => t.dataset.id)).toEqual(['7']);
+    p.search('zzz');
+    expect(p.el('hp-none').textContent).toBe('Aucun effet ne correspond.');
+    p.search('');
+    p.tile('7').click();
+    expect(p.onPick).toHaveBeenCalledWith('7');
+
+    // Rouvert sur des héros : la grille de visages, ses mots à elle.
+    p.open();
+    expect(p.el('hp-q').placeholder).toBe('Chercher un perso…');
+    expect(p.el('hp-q').getAttribute('aria-label')).toBe('Chercher un perso');
+    expect(p.el('hp-results').className).toBe('hp-tiles');
+    expect(p.el('hp-none').textContent).toBe('Aucun perso ne correspond.');
+    expect(p.all('#hp-results .hp-fi')).toHaveLength(3);
+  });
+
   it('un roster sans élément : ni pastille d’élément, ni icône sur la tuile', async () => {
     const p = await picker();
     p.open({ roster: ROSTER.map(({ id, name, class: cls }) => ({ id, name, class: cls })) });
@@ -2045,6 +2085,56 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     },
   });
 
+  /** Le kit d'Aer, tel que le serveur le sert : deux cartes de skill, la chaîne, le duo. */
+  type Chips = Record<string, string[]>;
+  const KIT_CARDS = [
+    {
+      id: '5501',
+      name: 'Whatever!',
+      type: 'first',
+      desc: 'Attacks with a <color=#28d9ed>40%</color> chance.\\nSecond line.',
+      iconSrc: '/images/characters/skills/Skill_First_2000055.webp',
+      chips: [
+        { ref: '11', name: 'Increased Crit Hit Chance', icon: 'IG_Buff_Crit', isDebuff: false },
+      ],
+    },
+    {
+      id: '5502',
+      name: 'To the Beach?',
+      type: 'second',
+      iconSrc: '/images/characters/skills/Skill_Second_2000055.webp',
+      chips: [
+        {
+          ref: 'SYS_BUFF_REMOVE_BUFF',
+          name: 'Buff Removal',
+          icon: 'IG_Buff_Remove',
+          isDebuff: true,
+        },
+        { ref: 'SYS_NO_ICON', name: 'Priority Increase', isDebuff: false },
+      ],
+    },
+    {
+      id: '5504',
+      name: 'Chain Passive',
+      type: 'chain_passive',
+      iconSrc: 'https://cdn.test/chain.webp',
+      chips: [],
+    },
+    { id: '5504::dual', name: 'Dual', type: 'dual', chips: [] },
+  ];
+  const KIT_CATALOG = {
+    '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
+    '7': { id: '7', name: 'Increased Attack', icon: 'IG_Buff_Atk', isDebuff: false },
+    '8': { id: '8', name: 'Immunity', icon: 'IG_Buff_Immune', isDebuff: false },
+    '9': {
+      id: '9',
+      name: 'Immunity',
+      icon: 'IG_Buff_Immune_Interruption',
+      isDebuff: false,
+      irremovable: true,
+    },
+  };
+
   type Call = { path: string; body?: unknown };
   type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
 
@@ -2061,8 +2151,15 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   async function character(
     opts: {
       hash?: string;
-      saved?: (body: unknown, disk: Record<string, Curated>) => Saved;
+      saved?: (
+        body: unknown,
+        disk: Record<string, Curated>,
+        chips: { chipHide: Chips; chipAdd: Chips },
+      ) => Saved;
       translated?: (texts: string[]) => unknown;
+      /** Le curé des chips de skills du disque (Aer), et un kit illisible. */
+      chips?: { chipHide?: Chips; chipAdd?: Chips };
+      kitError?: string;
     } = {},
   ) {
     vi.resetModules();
@@ -2074,7 +2171,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       '',
     );
 
-    const disk = { curated: curated() };
+    const disk = {
+      curated: curated(),
+      chips: { chipHide: {}, chipAdd: {}, ...opts.chips } as { chipHide: Chips; chipAdd: Chips },
+    };
     const calls: Call[] = [];
     // L'aperçu attend cette porte : `hold` la ferme, pour voir la requête en vol.
     let gate: Promise<void> = Promise.resolve();
@@ -2125,6 +2225,15 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           videos: cu.videos ?? [],
           refs: {},
           langs: { default: 'en', shown: ['en', 'fr', 'es', 'jp', 'kr', 'zh'] },
+          // Seul Aer a des cartes ; un autre perso, un kit vide.
+          kit: {
+            cards: id === AER && !opts.kitError ? KIT_CARDS : [],
+            chipHide: id === AER ? disk.chips.chipHide : {},
+            chipAdd: id === AER ? disk.chips.chipAdd : {},
+            catalog: KIT_CATALOG,
+            sprite: 'images/ui/effect',
+            ...(opts.kitError ? { error: opts.kitError } : {}),
+          },
         });
       }
       if (url.pathname === '/api/character/preview') {
@@ -2160,7 +2269,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       }
       if (url.pathname === '/api/character')
         return answer(
-          opts.saved?.(body, disk.curated) ?? {
+          opts.saved?.(body, disk.curated, disk.chips) ?? {
             ok: true,
             log: ['fait'],
             written: true,
@@ -2363,7 +2472,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     // `#character/<id>` vaut « fiche », un sous-onglet pas encore porté aussi.
     const bare = await character({ hash: `#character/${AIS}` });
     expect(bare.window.location.hash).toBe(`#character/${AIS}/fiche`);
-    const soon = await character({ hash: `#character/${AIS}/skills` });
+    const soon = await character({ hash: `#character/${AIS}/gear` });
     expect(soon.window.location.hash).toBe(`#character/${AIS}/fiche`);
     expect(soon.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
   });
@@ -2375,14 +2484,14 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('log').textContent).toContain('perso inconnu : nope');
   });
 
-  it('les sous-onglets : la rangée entière, Fiche montrée, les deux pas encore portés éteints', async () => {
+  it('les sous-onglets : la rangée entière, Fiche montrée, celui qui n’est pas encore porté éteint', async () => {
     const page = await character({ hash: `#character/${AER}` });
     expect(page.el('c-tabs').getAttribute('role')).toBe('tablist');
     expect(page.subs()).toEqual([
       ['Fiche', 'true', '', ''],
       ['Pros / Cons', 'false', '', ''],
       ['Synergies', 'false', '', ''],
-      ['Skills', 'false', 'lot B39', ''],
+      ['Skills', 'false', '', ''],
       ['Gear reco', 'false', 'lot B40', ''],
     ]);
     expect(page.all('#c-tabs [role="tab"]').map((b) => b.getAttribute('tabindex'))).toEqual([
@@ -2400,15 +2509,16 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   it('le clavier des sous-onglets : ← → Début Fin restent parmi ceux qui sont allumés', async () => {
     const page = await character({ hash: `#character/${AER}` });
     page.el('c-tab-fiche').focus();
-    // Trois allumés : → avance, les bouts se rejoignent, Fin et Début y vont.
+    // Quatre allumés : → avance, les bouts se rejoignent, Fin et Début y vont.
     for (const [key, to] of [
       ['ArrowRight', 'pros-cons'],
       ['ArrowRight', 'synergies'],
+      ['ArrowRight', 'skills'],
       ['ArrowRight', 'fiche'],
-      ['ArrowLeft', 'synergies'],
+      ['ArrowLeft', 'skills'],
       ['Home', 'fiche'],
-      ['End', 'synergies'],
-      ['ArrowLeft', 'pros-cons'],
+      ['End', 'skills'],
+      ['ArrowLeft', 'synergies'],
       ['Home', 'fiche'],
     ]) {
       const event = new page.window.KeyboardEvent('keydown', {
@@ -2424,7 +2534,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       expect(page.window.location.hash, key).toBe(`#character/${AER}/${to}`);
     }
     // Un clic sur un sous-onglet éteint ne montre rien d'autre.
-    page.el('c-tab-skills').click();
+    page.el('c-tab-gear').click();
     expect(page.subs()[0].slice(0, 2)).toEqual(['Fiche', 'true']);
     expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
   });
@@ -3424,6 +3534,360 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.lines('synergies')).toEqual([]);
     expect(page.posted()).toEqual([]);
     expect(page.subs().map((t) => t[3])).toEqual(['', '', '', '', '']);
+  });
+
+  // ------------------------------------------------------------ « Skills »
+  const SKILLS = `#character/${AER}/skills`;
+  type Page = Awaited<ReturnType<typeof character>>;
+  /** Les cartes de skills, et les chips d'une carte telles qu'elles se lisent. */
+  const kitCards = (page: Page) => page.all('#c-panel [data-kit]');
+  const kitCard = (page: Page, id: string) => kitCards(page).find((c) => c.dataset.kit === id)!;
+  const chips = (card: HTMLElement) =>
+    ([...card.querySelectorAll('.c-chip')] as unknown as HTMLElement[]).map((c) => [
+      c.querySelector('.c-chn')?.textContent,
+      c.className.replace('chip c-chip', '').trim(),
+      c.querySelector('button')?.textContent,
+    ]);
+  const chip = (card: HTMLElement, ref: string, kind = 'auto') =>
+    ([...card.querySelectorAll('.c-chip')] as unknown as HTMLElement[]).find(
+      (c) => c.dataset.ref === ref && c.dataset.kind === kind,
+    )!;
+  const tiles = (page: Page) => page.all('#hp-results .hp-tile').map((t) => t.textContent);
+  /** Un enregistrement qui écrit les chips envoyées sur le disque factice. */
+  const writeChips: NonNullable<Parameters<typeof character>[0]>['saved'] = (body, _, disk) => {
+    const { kit } = (body as { changes: { kit?: { chipHide: Chips; chipAdd: Chips } } }).changes;
+    for (const section of ['chipHide', 'chipAdd'] as const)
+      for (const [card, list] of Object.entries(kit?.[section] ?? {})) {
+        if (list.length) disk[section][card] = list;
+        else delete disk[section][card];
+      }
+    return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+  };
+
+  it('`#character/2000055/skills` : une carte par skill — icône, nom, id · type, description, chips, « ＋ effet »', async () => {
+    const page = await character({ hash: SKILLS });
+    expect(page.window.location.hash).toBe(SKILLS);
+    expect(page.subs()[3]).toEqual(['Skills', 'true', '', '']);
+    // Pas de texte à tags ici : le groupe « Aperçu » de la savebar s'efface.
+    expect(page.el('c-pv-lang').hidden).toBe(true);
+    expect(page.previews()).toEqual([]);
+
+    expect(kitCards(page).map((c) => page.text(c, '.card-head strong'))).toEqual([
+      'Whatever!',
+      'To the Beach?',
+      'Chain Passive',
+      'Dual',
+    ]);
+    expect(kitCards(page).map((c) => page.text(c, '.c-skid'))).toEqual([
+      '5501 · first',
+      '5502 · second',
+      '5504 · chain_passive',
+      '5504::dual · dual',
+    ]);
+    // Une icône relative passe sous la base des images ; absolue, elle reste ; le duo n'en a pas.
+    expect(kitCards(page).map((c) => c.querySelector('.c-skico')?.getAttribute('src'))).toEqual([
+      'https://img.test/images/characters/skills/Skill_First_2000055.webp',
+      'https://img.test/images/characters/skills/Skill_Second_2000055.webp',
+      'https://cdn.test/chain.webp',
+      undefined,
+    ]);
+    // La description, telle que le jeu l'écrit : sa couleur, son `\n` littéral.
+    const [first, second, chain] = kitCards(page);
+    expect(first.querySelector('.c-desc')?.innerHTML).toBe(
+      'Attacks with a <span style="color:#28d9ed">40%</span> chance.<br>Second line.',
+    );
+    expect(second.querySelector('.c-desc')).toBeNull();
+
+    expect(chips(first)).toEqual([['Increased Crit Hit Chance', '', '✕']]);
+    expect(chips(second)).toEqual([
+      ['Buff Removal', '', '✕'],
+      ['Priority Increase', '', '✕'],
+    ]);
+    expect(chips(chain)).toEqual([]);
+    // La tuile du site : l'icône en masque teinté de sa nature ; sans icône, un cadre vide.
+    const tile = (ref: string) => chip(second, ref).querySelector('.c-fx')!;
+    expect(tile('SYS_BUFF_REMOVE_BUFF').className).toBe('c-fx debuff');
+    expect(tile('SYS_BUFF_REMOVE_BUFF').getAttribute('style')).toContain(
+      "url('https://img.test/images/ui/effect/IG_Buff_Remove.webp')",
+    );
+    expect(tile('SYS_NO_ICON').className).toBe('c-fx none');
+    expect(chip(first, '11').querySelector('.c-fx')?.className).toBe('c-fx buff');
+    expect(chip(first, '11').title).toBe('11');
+    expect(chip(first, '11').querySelector('button')?.getAttribute('aria-label')).toBe(
+      'Masquer Increased Crit Hit Chance',
+    );
+    // Chaque carte a son « ＋ effet », le duo sans chip compris.
+    expect(kitCards(page).map((c) => page.act('add-chip', c)?.textContent)).toEqual(
+      Array(4).fill('＋ effet'),
+    );
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('✕ masque une chip : barrée, atténuée, « rétablir » — comptée, le point sur l’onglet', async () => {
+    const page = await character({ hash: SKILLS });
+    const second = () => kitCard(page, '5502');
+    chip(second(), 'SYS_BUFF_REMOVE_BUFF').querySelector('button')!.click();
+
+    expect(chips(second())).toEqual([
+      ['Buff Removal', 'off dirty', 'rétablir'],
+      ['Priority Increase', '', '✕'],
+    ]);
+    expect(page.text(second(), '.card-head .badge.edit')).toBe('modifié');
+    expect(page.count()).toBe('1 changement');
+    expect(page.el('c-save').disabled).toBe(false);
+    expect(page.subs()[3]).toEqual(['Skills', 'true', '', 'dot edit']);
+    // Le focus reste sur la chip : son bouton, devenu « rétablir ».
+    const back = chip(second(), 'SYS_BUFF_REMOVE_BUFF').querySelector('button')!;
+    expect(page.window.document.activeElement).toBe(back as unknown as Element);
+    expect(back.getAttribute('aria-label')).toBe('Rétablir Buff Removal');
+    // Les autres cartes n'ont pas bougé.
+    expect(page.text(kitCard(page, '5501'), '.card-head .badge.edit')).toBe('');
+
+    chip(second(), 'SYS_NO_ICON').querySelector('button')!.click();
+    expect(page.count()).toBe('2 changements');
+    // « rétablir » rend la chip : revenue à ce que le disque porte, elle ne compte plus.
+    chip(second(), 'SYS_BUFF_REMOVE_BUFF').querySelector('button')!.click();
+    chip(second(), 'SYS_NO_ICON').querySelector('button')!.click();
+    expect(chips(second()).map((c) => c[1])).toEqual(['', '']);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[3][3]).toBe('');
+    expect(page.el('c-save').disabled).toBe(true);
+  });
+
+  it('une chip que le disque masque déjà : barrée sans être « modifiée » ; la rétablir compte', async () => {
+    const page = await character({
+      hash: SKILLS,
+      chips: { chipHide: { '5502': ['SYS_NO_ICON', 'legacy'] }, chipAdd: { '5501': ['7', '404'] } },
+    });
+    const second = () => kitCard(page, '5502');
+    expect(chips(second())).toEqual([
+      ['Buff Removal', '', '✕'],
+      ['Priority Increase', 'off', 'rétablir'],
+    ]);
+    // Un effet ajouté par le disque : son badge ; hors du catalogue, sa ref pour nom.
+    expect(chips(kitCard(page, '5501'))).toEqual([
+      ['Increased Crit Hit Chance', '', '✕'],
+      ['Increased Attack', '', '✕'],
+      ['404', '', '✕'],
+    ]);
+    expect(
+      [...kitCard(page, '5501').querySelectorAll('.c-chip')].map(
+        (c) => c.querySelector('.badge')?.textContent ?? '',
+      ),
+    ).toEqual(['', 'ajoutée', 'ajoutée']);
+    expect(page.count()).toBe('aucune modification');
+
+    chip(second(), 'SYS_NO_ICON').querySelector('button')!.click();
+    expect(chips(second())[1]).toEqual(['Priority Increase', 'dirty', '✕']);
+    expect(page.count()).toBe('1 changement');
+    await page.save();
+    // La liste part ENTIÈRE : la ref héritée, que la carte ne montre pas, y reste.
+    expect(page.posted()).toEqual([
+      {
+        id: AER,
+        changes: {
+          ranks: [],
+          curated: {},
+          was: curated()[AER],
+          kit: {
+            cardIds: ['5501', '5502', '5504', '5504::dual'],
+            chipHide: { '5502': ['legacy'] },
+            chipAdd: { '5502': [] },
+          },
+        },
+      },
+    ]);
+  });
+
+  it('« ＋ effet » : le picker partagé sur le catalogue — recherche, nature, homonymes départagés', async () => {
+    const page = await character({ hash: SKILLS, chips: { chipAdd: { '5501': ['7'] } } });
+    const first = () => kitCard(page, '5501');
+    page.act('add-chip', first()).click();
+
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Ajouter un effet — Whatever!');
+    expect(page.el('hp-q').placeholder).toBe('Chercher un effet…');
+    expect(page.el('hp-results').classList.contains('rows')).toBe(true);
+    // Par nom ; l'effet que la carte a déjà en ajout n'est plus proposé.
+    expect(tiles(page)).toEqual(['Burned', 'Immunity (buff)', 'Immunity (irremovable, buff)']);
+    expect(page.el('hp-tally').textContent).toBe('3 effets');
+    // Une tuile : celle de l'effet, et son nom ; les « Interruption » gardent leurs couleurs.
+    const [burned, , irremovable] = page.all('#hp-results .hp-tile');
+    expect(burned.title).toBe('Burned — 1');
+    expect(burned.querySelector('.c-fx')?.className).toBe('c-fx debuff');
+    expect(irremovable.querySelector('.c-fx img')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/effect/IG_Buff_Immune_Interruption.webp',
+    );
+    // Ni pastille d'élément ni de classe : un effet n'en a pas.
+    expect(page.all('#hp-filters .hp-tog')).toEqual([]);
+
+    const seg = () => page.all('#hp-filters .hp-seg button');
+    expect(seg().map((b) => b.textContent)).toEqual(['Tous', 'Buffs', 'Debuffs']);
+    seg()[2].click();
+    expect(tiles(page)).toEqual(['Burned']);
+    seg()[1].click();
+    expect(tiles(page)).toEqual(['Immunity (buff)', 'Immunity (irremovable, buff)']);
+    seg()[0].click();
+    page.type(page.el('hp-q'), 'zzz');
+    expect(tiles(page)).toEqual([]);
+    expect(page.el('hp-none').textContent).toBe('Aucun effet ne correspond.');
+    page.type(page.el('hp-q'), 'irrem');
+    expect(tiles(page)).toEqual(['Immunity (irremovable, buff)']);
+
+    // La tuile choisie s'ajoute à la carte : son badge, le compte, le focus sur « ＋ effet ».
+    page.all('#hp-results .hp-tile')[0].click();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(chips(first())).toEqual([
+      ['Increased Crit Hit Chance', '', '✕'],
+      ['Increased Attack', '', '✕'],
+      ['Immunity', 'dirty', '✕'],
+    ]);
+    expect(chip(first(), '9', 'add').querySelector('.badge')?.textContent).toBe('ajoutée');
+    expect(chip(first(), '9', 'add').querySelector('button')?.getAttribute('aria-label')).toBe(
+      'Retirer Immunity',
+    );
+    expect(page.count()).toBe('1 changement');
+    expect(page.subs()[3][3]).toBe('dot edit');
+    expect(page.window.document.activeElement).toBe(
+      page.act('add-chip', first()) as unknown as Element,
+    );
+    // La modale du picker de héros est la même : « Changer de perso » la rouvre sur des persos.
+    page.act('add-chip', first()).click();
+    expect(tiles(page)).toEqual(['Burned', 'Immunity (buff)']);
+    page.el('hp-close').click();
+    page.el('c-pick').click();
+    expect(page.el('hp-q').placeholder).toBe('Chercher un perso…');
+    expect(page.el('hp-results').classList.contains('rows')).toBe(false);
+    expect(page.all('#hp-results .hp-fi')).toHaveLength(3);
+    page.el('hp-close').click();
+
+    // ✕ sur une chip ajoutée la retire : celle du picker ne compte plus, celle du disque compte.
+    chip(first(), '9', 'add').querySelector('button')!.click();
+    expect(page.count()).toBe('aucune modification');
+    chip(first(), '7', 'add').querySelector('button')!.click();
+    expect(chips(first())).toEqual([['Increased Crit Hit Chance', '', '✕']]);
+    expect(page.count()).toBe('1 changement');
+  });
+
+  it('« Enregistrer » : les seules cartes modifiées, leurs deux listes ENTIÈRES ; le disque relu n’a plus rien en attente', async () => {
+    const page = await character({ hash: SKILLS, saved: writeChips });
+    chip(kitCard(page, '5502'), 'SYS_BUFF_REMOVE_BUFF').querySelector('button')!.click();
+    page.act('add-chip', kitCard(page, '5504::dual')).click();
+    page.all('#hp-results .hp-tile')[0].click();
+    expect(page.count()).toBe('2 changements');
+
+    const states = page.states();
+    await page.save();
+    expect(page.posted()).toEqual([
+      {
+        id: AER,
+        changes: {
+          ranks: [],
+          curated: {},
+          was: curated()[AER],
+          kit: {
+            cardIds: ['5501', '5502', '5504', '5504::dual'],
+            chipHide: { '5502': ['SYS_BUFF_REMOVE_BUFF'], '5504::dual': [] },
+            chipAdd: { '5502': [], '5504::dual': ['1'] },
+          },
+        },
+      },
+    ]);
+    expect(page.states()).toBe(states + 1);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[3][3]).toBe('');
+    // Ce que le disque porte maintenant : masquée, ajoutée — plus « modifiées ».
+    expect(chips(kitCard(page, '5502'))[0]).toEqual(['Buff Removal', 'off', 'rétablir']);
+    expect(chips(kitCard(page, '5504::dual'))).toEqual([['Burned', '', '✕']]);
+    expect(page.text(kitCard(page, '5502'), '.card-head .badge.edit')).toBe('');
+  });
+
+  it('un refus situé : la carte cerclée, son message dessous, sa saisie gardée ; y retoucher le lève', async () => {
+    const page = await character({
+      hash: SKILLS,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [
+          { field: 'kit', card: '5502', reason: '« x » : pas une chip de cette carte' },
+          { field: 'kit', reason: 'kit illisible (tables du jeu absentes)' },
+        ],
+      }),
+    });
+    chip(kitCard(page, '5502'), 'SYS_NO_ICON').querySelector('button')!.click();
+    chip(kitCard(page, '5501'), '11').querySelector('button')!.click();
+    await page.save();
+
+    const second = () => kitCard(page, '5502');
+    expect(second().classList.contains('ko')).toBe(true);
+    expect(page.text(second(), '.card-head .badge.ko')).toBe('refusé');
+    expect(page.text(second(), '.c-err')).toBe('« x » : pas une chip de cette carte');
+    expect(kitCard(page, '5501').classList.contains('ko')).toBe(false);
+    // Le refus sans carte : sous les cartes.
+    expect(page.text(page.el('c-panel'), '[data-err="kit"]')).toBe(
+      'kit illisible (tables du jeu absentes)',
+    );
+    expect(page.count()).toBe('2 changements2 refus');
+    expect(page.subs()[3][3]).toBe('dot ko');
+    expect(chips(second())[1]).toEqual(['Priority Increase', 'off dirty', 'rétablir']);
+
+    chip(second(), 'SYS_NO_ICON').querySelector('button')!.click();
+    expect(second().classList.contains('ko')).toBe(false);
+    expect(page.text(second(), '.c-err')).toBe('');
+    expect(page.text(page.el('c-panel'), '[data-err="kit"]')).toBe('');
+    expect(page.subs()[3][3]).toBe('dot edit');
+  });
+
+  it('« Annuler » rend les chips du disque ; changer de sous-onglet garde la saisie', async () => {
+    const page = await character({ hash: SKILLS, chips: { chipHide: { '5501': ['11'] } } });
+    chip(kitCard(page, '5501'), '11').querySelector('button')!.click();
+    page.act('add-chip', kitCard(page, '5504')).click();
+    page.all('#hp-results .hp-tile')[1].click();
+    expect(page.count()).toBe('2 changements');
+
+    page.sub('fiche');
+    expect(page.subs()[3][3]).toBe('dot edit');
+    page.sub('skills');
+    expect(chips(kitCard(page, '5501'))).toEqual([['Increased Crit Hit Chance', 'dirty', '✕']]);
+    expect(chips(kitCard(page, '5504'))).toEqual([['Immunity', 'dirty', '✕']]);
+
+    page.el('c-reset').click();
+    await page.settle();
+    await page.settle();
+    expect(page.count()).toBe('aucune modification');
+    expect(chips(kitCard(page, '5501'))).toEqual([
+      ['Increased Crit Hit Chance', 'off', 'rétablir'],
+    ]);
+    expect(chips(kitCard(page, '5504'))).toEqual([]);
+    expect(page.posted()).toEqual([]);
+  });
+
+  it('`…/skills/picker/2` ouvre le picker d’effets de la deuxième carte, sans l’écrire dans l’adresse', async () => {
+    const page = await character({ hash: `${SKILLS}/picker/2` });
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Ajouter un effet — To the Beach?');
+    expect(page.window.location.hash).toBe(SKILLS);
+    // Une carte qui n'existe pas : le sous-onglet, sans picker.
+    const none = await character({ hash: `${SKILLS}/picker/9` });
+    expect(none.el('hp-modal')).toBeNull();
+    expect(kitCards(none)).toHaveLength(4);
+  });
+
+  it('un kit illisible, un perso sans carte : la page le dit, le reste de la fiche se lit', async () => {
+    const page = await character({ hash: SKILLS, kitError: 'tables du jeu absentes' });
+    expect(page.all('#c-panel .empty').map((e) => e.textContent)).toEqual([
+      'Kit illisible : tables du jeu absentes.',
+    ]);
+    expect(kitCards(page)).toEqual([]);
+    page.sub('fiche');
+    expect(page.val(page.cell('rank'))).toBe('A');
+
+    const ais = await character({ hash: `#character/${AIS}/skills` });
+    expect(ais.all('#c-panel .empty').map((e) => e.textContent)).toEqual([
+      'Aucune carte de skill.',
+    ]);
   });
 });
 

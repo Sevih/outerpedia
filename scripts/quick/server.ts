@@ -606,8 +606,9 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'GET' && url.pathname === '/api/character/state') {
     // La fiche du perso de `?id=`, lue du disque à chaque appel : sa ligne du
     // roster, son entrée curée entière, ses rangs et les listes de leurs menus,
-    // ce que les tags inline peuvent viser.
-    const out = characterSheetState(url.searchParams.get('id') ?? '');
+    // ce que les tags inline peuvent viser, son kit (cartes de skills, chips
+    // masquées et ajoutées, catalogue des effets).
+    const out = await characterSheetState(url.searchParams.get('id') ?? '');
     if ('error' in out) return json(res, { error: out.error }, 404);
     json(res, out);
     return;
@@ -616,7 +617,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'POST' && url.pathname === '/api/character') {
     // UN enregistrement pour toute la fiche : les rangs par le plan de Rangs,
     // puis les champs hors rangs (pros / cons et synergies compris, leurs tags
-    // inline contrôlés), puis un commit au nom du perso.
+    // inline contrôlés), puis les chips de skills, puis un commit au nom du perso.
     const { id, changes } = await body<{ id: string; changes: CharacterSheetChanges }>(req);
     await stream(res, (report) =>
       withGit(saveCharacterSheet(String(id ?? ''), changes, CHARACTER_SHEET_DEPS, report)),

@@ -14,9 +14,11 @@
  * Et contrat de la « Fiche perso » — `characterRoster`, `characterSheetState` et
  * `saveCharacterSheet` : les rangs y passent par le même plan, puis les champs
  * hors rangs (priorité de skills, tags, pros / cons et synergies, leurs tags
- * inline contrôlés par la résolution du site). Le disque est FACTICE, les deux
- * stores et git INJECTÉS ; seul le roster est réel (Aer, `2000055`). Et
- * `previewInline`, l'aperçu de ces textes, par un `renderInlineBatch` factice.
+ * inline contrôlés par la résolution du site), puis les chips de skills (`kit` :
+ * cartes, curation et catalogue FACTICES, `applyCharacterKitCuration` factice).
+ * Le disque est FACTICE, les stores et git INJECTÉS ; seul le roster est réel
+ * (Aer, `2000055`). Et `previewInline`, l'aperçu de ces textes, par un
+ * `renderInlineBatch` factice.
  *
  * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
  * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
@@ -101,7 +103,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CharacterCurated, Effect, EffectCurated, GearBuild, LocalizedText } from '@contracts';
+import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
+import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import { loadChangelog } from '@/lib/admin/changelog-store';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
@@ -452,11 +456,44 @@ describe('planRankChanges — tables par transcendance', () => {
 
 // ----------------------------------------------------------- fiche perso -----
 
+/** Le kit d'un perso, factice : trois cartes (un skill, la chaîne, le duo) et leurs chips. */
+const KIT_CARDS: KitEditorCard[] = [
+  {
+    id: '5502',
+    name: 'To the Beach?',
+    type: 'second',
+    desc: 'Removes <color=#28d9ed>all</color> buffs.',
+    iconSrc: '/images/characters/skills/Skill_Second_2000055.webp',
+    chips: [
+      { ref: 'SYS_BUFF_REMOVE_BUFF', name: 'Buff Removal', icon: 'IG_Buff_Remove', isDebuff: true },
+      { ref: '11', name: 'Increased Crit Hit Chance', isDebuff: false },
+    ],
+  },
+  {
+    id: '5504',
+    name: 'Chain Passive',
+    type: 'chain_passive',
+    chips: [{ ref: '7', name: 'Increased Attack', isDebuff: false }],
+  },
+  { id: '5504::dual', name: 'Dual', type: 'dual', chips: [] },
+];
+const KIT_CATALOG: Record<string, EffectOption> = {
+  '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
+  '7': { id: '7', name: 'Increased Attack', isDebuff: false },
+};
+
 describe('characterRoster, characterSheetState — la fiche lue, disque injecté', () => {
   const AER = '2000055';
   const aer = getCharacterListItems().find((c) => c.id === AER)!;
-  const sheetDisk = (curated: Record<string, CharacterCurated> = { [AER]: DIANNE }) => ({
+  const sheetDisk = (
+    curated: Record<string, CharacterCurated> = { [AER]: DIANNE },
+    kit: Partial<Pick<CharacterSheetDeps, 'kitCards' | 'kitSections'>> = {},
+  ) => ({
     disk: () => disk({ curated, roster: new Set([AER]), eeOwners: new Set([AER]) }),
+    kitCards: async () => KIT_CARDS,
+    kitSections: () => ({ chipHide: {}, chipAdd: {} }),
+    kitCatalog: () => KIT_CATALOG,
+    ...kit,
   });
 
   it('le roster : tout le monde, par nom, avec de quoi dessiner une tuile et l’en-tête', () => {
@@ -475,8 +512,8 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     });
   });
 
-  it('l’état : la ligne du roster, sa chaîne, ses tags dérivés, et le curé du disque ENTIER', () => {
-    const state = characterSheetState(AER, sheetDisk());
+  it('l’état : la ligne du roster, sa chaîne, ses tags dérivés, et le curé du disque ENTIER', async () => {
+    const state = await characterSheetState(AER, sheetDisk());
     if ('error' in state) throw new Error(state.error);
     expect(state.char).toEqual({
       id: AER,
@@ -493,8 +530,8 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(state.videos).toEqual(DIANNE.videos);
   });
 
-  it('les rangs tels que Rangs les sert, avec l’échelle, les rôles et les paliers', () => {
-    const state = characterSheetState(AER, sheetDisk());
+  it('les rangs tels que Rangs les sert, avec l’échelle, les rôles et les paliers', async () => {
+    const state = await characterSheetState(AER, sheetDisk());
     if ('error' in state) throw new Error(state.error);
     expect(state.ranks).toEqual({
       rank: 'S',
@@ -513,15 +550,15 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     ]);
   });
 
-  it('sert les tags humains que la fiche coche : la liste de l’éditeur de l’admin', () => {
-    const state = characterSheetState(AER, sheetDisk());
+  it('sert les tags humains que la fiche coche : la liste de l’éditeur de l’admin', async () => {
+    const state = await characterSheetState(AER, sheetDisk());
     if ('error' in state) throw new Error(state.error);
     expect(state.humanTags).toBe(HUMAN_TAGS);
     expect(HUMAN_TAGS).toEqual(['free']);
   });
 
-  it('`refs` : ce que les tags inline peuvent viser, et les langues dans l’ordre de l’onglet', () => {
-    const state = characterSheetState(AER, sheetDisk());
+  it('`refs` : ce que les tags inline peuvent viser, et les langues dans l’ordre de l’onglet', async () => {
+    const state = await characterSheetState(AER, sheetDisk());
     if ('error' in state) throw new Error(state.error);
     // Les listes de l'éditeur assisté de l'admin, telles quelles.
     expect(state.refs).toEqual(buildInlineRefs());
@@ -542,8 +579,8 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect([...state.langs.shown].sort()).toEqual([...LANGS].sort());
   });
 
-  it('un perso sans entrée curée : tout vide, rien d’absent', () => {
-    const state = characterSheetState(AER, sheetDisk({}));
+  it('un perso sans entrée curée : tout vide, rien d’absent', async () => {
+    const state = await characterSheetState(AER, sheetDisk({}));
     if ('error' in state) throw new Error(state.error);
     expect(state.curated).toEqual({});
     expect(state.ranks).toEqual({
@@ -556,8 +593,53 @@ describe('characterRoster, characterSheetState — la fiche lue, disque injecté
     expect(state.videos).toEqual([]);
   });
 
-  it('un id hors du roster : une erreur, pas une fiche vide', () => {
-    expect(characterSheetState('nope', sheetDisk())).toEqual({ error: 'perso inconnu : nope' });
+  it('`kit` : les cartes de skills, la curation du disque sur CES cartes, le catalogue des effets', async () => {
+    const state = await characterSheetState(
+      AER,
+      sheetDisk(undefined, {
+        // Le fichier est global : il porte aussi les cartes d'autres persos.
+        kitSections: () => ({
+          chipHide: { '5502': ['SYS_BUFF_REMOVE_BUFF'], '12102': ['1037'] },
+          chipAdd: { '5504::dual': ['7'], '999': ['1'] },
+        }),
+      }),
+    );
+    if ('error' in state) throw new Error(state.error);
+    expect(state.kit).toEqual({
+      cards: KIT_CARDS,
+      chipHide: { '5502': ['SYS_BUFF_REMOVE_BUFF'] },
+      chipAdd: { '5504::dual': ['7'] },
+      catalog: KIT_CATALOG,
+      sprite: 'images/ui/effect',
+    });
+  });
+
+  it('des cartes illisibles (pas de tables du jeu) : `kit.error`, et le reste de la fiche quand même', async () => {
+    const state = await characterSheetState(
+      AER,
+      sheetDisk(undefined, {
+        kitCards: async () => {
+          throw new Error('tables du jeu absentes');
+        },
+        kitSections: () => ({ chipHide: { '5502': ['x'] }, chipAdd: {} }),
+      }),
+    );
+    if ('error' in state) throw new Error(state.error);
+    expect(state.kit).toEqual({
+      cards: [],
+      chipHide: {},
+      chipAdd: {},
+      catalog: KIT_CATALOG,
+      sprite: 'images/ui/effect',
+      error: 'tables du jeu absentes',
+    });
+    expect(state.curated).toEqual(DIANNE);
+  });
+
+  it('un id hors du roster : une erreur, pas une fiche vide', async () => {
+    expect(await characterSheetState('nope', sheetDisk())).toEqual({
+      error: 'perso inconnu : nope',
+    });
   });
 });
 
@@ -615,7 +697,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     rankByTranscend: { '6': 'S' },
   };
 
-  /** Le disque et les trois écritures, factices : elles notent leurs appels. */
+  /** Le disque et les quatre écritures, factices : elles notent leurs appels. */
   function deps(
     over: {
       entry?: CharacterCurated;
@@ -623,11 +705,16 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       git?: Outcome;
       /** Les autres persos du roster : les héros qu'une synergie peut citer. */
       others?: string[];
+      /** Le curé des chips de skills, tel que le disque le porte. */
+      kit?: Partial<Record<'chipHide' | 'chipAdd', Record<string, string[]>>>;
+      kitErrors?: (patch: CharacterKitPatch) => string[];
+      kitCards?: CharacterSheetDeps['kitCards'];
     } = {},
   ) {
     const calls = {
       character: [] as [string, CharacterCurated][],
       ee: [] as [string, unknown][],
+      kit: [] as CharacterKitPatch[],
       git: [] as [string[], string][],
     };
     const fake: CharacterSheetDeps = {
@@ -638,6 +725,9 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
           roster: new Set([AER, ...(over.others ?? [])]),
           eeOwners: new Set([AER]),
         }),
+      kitCards: over.kitCards ?? (async () => KIT_CARDS),
+      kitSections: () => ({ chipHide: {}, chipAdd: {}, ...over.kit }),
+      kitCatalog: () => KIT_CATALOG,
       upsertCharacter: async (id, curated) => {
         calls.character.push([id, curated]);
         return over.errors?.(curated) ?? [];
@@ -645,6 +735,10 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       upsertEe: async (id, patch) => {
         calls.ee.push([id, patch]);
         return [];
+      },
+      applyKit: async (patch) => {
+        calls.kit.push(patch);
+        return over.kitErrors?.(patch) ?? [];
       },
       commitPaths: (paths, message) => {
         calls.git.push([paths, message]);
@@ -784,7 +878,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       stale: true,
       refused: [{ field: 'skillPriority', reason: 'le disque a changé depuis le chargement' }],
     });
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('le disque a bougé AILLEURS (une vidéo ajoutée) : la fiche n’est pas `stale` pour autant', async () => {
@@ -867,7 +961,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     expect(out.refused).toEqual([
       { field: 'rank', step: undefined, reason: 'cette cellule n’est pas de ce perso' },
     ]);
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('le disque porte déjà tout : ni écriture, ni commit, ni refus', async () => {
@@ -886,7 +980,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       stale: false,
       refused: [],
     });
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('sans changement, ou pour un perso hors du roster : refusé avant toute lecture', async () => {
@@ -899,7 +993,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     expect(
       await saveCharacterSheet('nope', { ranks: [change('nope', 'rank', '', 'S')] }, fake),
     ).toMatchObject({ ok: false, log: ['perso inconnu : nope.'], written: false });
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('un commit qui échoue : la fiche est écrite, le geste est en échec', async () => {
@@ -971,7 +1065,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
         },
       ],
     });
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('une ligne sans anglais, ou écrite partout avec d’autres balises : refusée comme une note de Gear reco', async () => {
@@ -994,7 +1088,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     ]);
     expect(out.refused[0].reason).toBe('pas de texte « en », la langue de repli');
     expect(out.refused[1].reason).toContain('fr : balises « aucune », « en » porte « {E/Earth} »');
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('une langue inconnue, une forme fausse : refusées, situées', async () => {
@@ -1015,7 +1109,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       { field: 'prosCons', list: 'pros', index: 1, reason: 'forme inattendue' },
       { field: 'synergies', reason: 'forme inattendue' },
     ]);
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('synergies : des héros du roster, une raison contrôlée ; sans texte, la raison n’est pas écrite', async () => {
@@ -1073,7 +1167,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       },
     ]);
     expect(out.log[0]).toBe(`REFUSÉ — ${name} · synergies[1] : hors du roster : « nope ».`);
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('pros + rangs : deux écritures, la seconde sur la première, UN commit', async () => {
@@ -1147,7 +1241,7 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       written: false,
       log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
     });
-    expect(same.calls).toEqual({ character: [], ee: [], git: [] });
+    expect(same.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 
   it('`stale` : le disque a changé sous les pros ou les synergies — refus sans écriture', async () => {
@@ -1168,7 +1262,179 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     expect(out.log[0]).toBe(
       `REFUSÉ — ${name} · pros / cons : le disque a changé depuis le chargement.`,
     );
-    expect(calls).toEqual({ character: [], ee: [], git: [] });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  // ------------------------------------------------- les chips de skills (`kit`)
+  const KIT_FILE = 'data/curated/character-skills.json';
+  const CARD_IDS = ['5502', '5504', '5504::dual'];
+  const kit = (
+    chipHide: Record<string, string[]> = {},
+    chipAdd: Record<string, string[]> = {},
+  ): CharacterKitPatch => ({ cardIds: CARD_IDS, chipHide, chipAdd });
+
+  it('un `kit` seul : `applyCharacterKitCuration`, puis UN commit qui porte character-skills.json', async () => {
+    const { calls, fake } = deps();
+    const out = await save(
+      {
+        kit: kit({ '5502': [' SYS_BUFF_REMOVE_BUFF ', 'SYS_BUFF_REMOVE_BUFF'] }, { '5504': ['1'] }),
+      },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: [
+        'chips de « To the Beach? » : 1 masquée, 0 ajoutée',
+        'chips de « Chain Passive » : 0 masquée, 1 ajoutée',
+        'git : fait',
+      ],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    // Les cartes sont celles que le SERVEUR calcule ; les listes, nettoyées.
+    expect(calls.kit).toEqual([
+      {
+        cardIds: CARD_IDS,
+        chipHide: { '5502': ['SYS_BUFF_REMOVE_BUFF'] },
+        chipAdd: { '5504': ['1'] },
+      },
+    ]);
+    expect(calls.character).toEqual([]);
+    expect(calls.git).toEqual([[[KIT_FILE], `chore(characters): ${name}`]]);
+  });
+
+  it('un rang ET des chips : deux fichiers, toujours UN commit', async () => {
+    const { calls, fake } = deps();
+    const out = await save({ ranks: [cell('rank', 'A', 'S')], kit: kit({ '5504': ['7'] }) }, fake);
+    expect(out).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(calls.git).toEqual([
+      [['data/curated/characters.json', KIT_FILE], `chore(characters): ${name}`],
+    ]);
+  });
+
+  it('des chips que le disque porte déjà : le store n’est pas appelé, le fichier n’est pas du commit', async () => {
+    const onDisk = { kit: { chipHide: { '5502': ['11'] }, chipAdd: { '5504': ['1'] } } };
+    const withRank = deps(onDisk);
+    const sent = kit({ '5502': ['11'], '5504': [] }, { '5504': ['1'], '5502': [] });
+    await save({ ranks: [cell('rank', 'A', 'S')], kit: sent }, withRank.fake);
+    expect(withRank.calls.kit).toEqual([]);
+    expect(withRank.calls.git).toEqual([
+      [['data/curated/characters.json'], `chore(characters): ${name}`],
+    ]);
+
+    const alone = deps(onDisk);
+    expect(await save({ kit: sent }, alone.fake)).toMatchObject({
+      ok: true,
+      written: false,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+    });
+    expect(alone.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+  });
+
+  it('une liste vidée part vide : le store retire la clé ; seules les listes qui bougent partent', async () => {
+    const { calls, fake } = deps({
+      kit: { chipHide: { '5502': ['11'], '5504': ['7'] }, chipAdd: { '5502': ['1'] } },
+    });
+    const out = await save({ kit: kit({ '5502': [], '5504': ['7'] }, { '5502': ['1'] }) }, fake);
+    expect(calls.kit).toEqual([{ cardIds: CARD_IDS, chipHide: { '5502': [] }, chipAdd: {} }]);
+    // La ligne du journal : ce que la carte porte après l'écriture.
+    expect(out.log[0]).toBe('chips de « To the Beach? » : 0 masquée, 1 ajoutée');
+  });
+
+  it('un écart est un refus SITUÉ à sa carte, qui n’est pas écrite ; les autres le sont', async () => {
+    const { calls, fake } = deps({ kit: { chipHide: { '5504': ['legacy'] } } });
+    const out = await save(
+      {
+        kit: kit(
+          // Une ref qui n'est pas une chip de la carte ; une ref héritée du disque reste.
+          { '5502': ['nope'], '5504': ['legacy', '7'], '999': ['x'] },
+          // Un effet hors du catalogue ; la même carte que le masquage valide.
+          { '5504::dual': ['404'], '5502': ['1'] },
+        ),
+      },
+      fake,
+    );
+
+    expect(out).toMatchObject({ ok: false, written: true, stale: false });
+    expect(out.refused).toEqual([
+      // Dans l'ordre des clés reçues : JS range d'abord celles qui sont des entiers.
+      { field: 'kit', card: '999', reason: 'pas une carte de ce perso' },
+      { field: 'kit', card: '5502', reason: '« nope » : pas une chip de cette carte' },
+      { field: 'kit', card: '5504::dual', reason: '« 404 » : effet inconnu du glossaire' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — ${name} · chips de « 999 » : pas une carte de ce perso.`,
+      `REFUSÉ — ${name} · chips de « To the Beach? » : « nope » : pas une chip de cette carte.`,
+      `REFUSÉ — ${name} · chips de « Dual » : « 404 » : effet inconnu du glossaire.`,
+      'chips de « Chain Passive » : 2 masquées, 0 ajoutée',
+      'git : fait',
+    ]);
+    // La carte en écart n'est écrite pour AUCUNE de ses deux listes.
+    expect(calls.kit).toEqual([
+      { cardIds: CARD_IDS, chipHide: { '5504': ['legacy', '7'] }, chipAdd: {} },
+    ]);
+    expect(calls.git).toEqual([[[KIT_FILE], `chore(characters): ${name}`]]);
+  });
+
+  it('un refus du store est situé à la carte qu’il nomme ; rien n’est committé', async () => {
+    const { calls, fake } = deps({
+      kitErrors: () => ['chipAdd[5504::dual] : string list expected', 'cardIds missing'],
+    });
+    const out = await save({ kit: kit({}, { '5504::dual': ['7'] }) }, fake);
+    expect(out).toMatchObject({ ok: false, written: false });
+    expect(out.refused).toEqual([
+      { field: 'kit', card: '5504::dual', reason: 'string list expected' },
+      { field: 'kit', reason: 'cardIds missing' },
+    ]);
+    expect(out.log).toEqual([
+      `REFUSÉ — ${name} · chips de « Dual » : string list expected.`,
+      `REFUSÉ — ${name} · chips : cardIds missing.`,
+      'Rien à enregistrer.',
+    ]);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('une forme fausse, ou des cartes illisibles : un refus du champ, le reste part', async () => {
+    const shape = deps();
+    for (const bad of [[], 'x', { chipHide: [] }] as unknown[]) {
+      const out = await save({ kit: bad as CharacterKitPatch }, shape.fake);
+      expect(out.refused.map((r) => [r.field, r.card])).toEqual([['kit', undefined]]);
+    }
+    expect(shape.calls).toEqual({ character: [], ee: [], kit: [], git: [] });
+    expect(
+      (await save({ kit: { cardIds: [], chipAdd: { '5502': [1] } } as never }, shape.fake)).refused,
+    ).toEqual([{ field: 'kit', card: '5502', reason: 'chipAdd : une liste de refs attendue' }]);
+
+    const blind = deps({
+      kitCards: async () => {
+        throw new Error('tables du jeu absentes');
+      },
+    });
+    const out = await save(
+      { ranks: [cell('rank', 'A', 'S')], kit: kit({ '5502': ['11'] }) },
+      blind.fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.refused).toEqual([
+      { field: 'kit', reason: 'kit illisible (tables du jeu absentes)' },
+    ]);
+    expect(blind.calls.kit).toEqual([]);
+    expect(blind.calls.git).toEqual([
+      [['data/curated/characters.json'], `chore(characters): ${name}`],
+    ]);
+  });
+
+  it('`stale` sur un champ de la fiche : les chips ne partent pas non plus', async () => {
+    const { calls, fake } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      { curated: { tags: [] }, was: { ...ENTRY, tags: [] }, kit: kit({ '5502': ['11'] }) },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: false, stale: true });
+    expect(calls).toEqual({ character: [], ee: [], kit: [], git: [] });
   });
 });
 

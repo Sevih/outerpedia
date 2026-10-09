@@ -30,7 +30,8 @@
  *   - rangs et rôles : lus au RENDU eux aussi (les quatre tier lists) ;
  *   - fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags, pros /
  *     cons, synergies) : le même curé, lu au RENDU lui aussi (tier lists,
- *     fiche du perso) ;
+ *     fiche du perso) — et les chips masquées ou ajoutées de ses skills
+ *     (`character-skills.json`), lues au RENDU de même ;
  *   - recos d'équipement : lues au RENDU elles aussi (les fiches de perso) ;
  *   - noms courts et alias de recherche : lus au RENDU eux aussi (le libellé
  *     sous les cartes, le champ recherche des listes de persos) ;
@@ -86,6 +87,12 @@ import {
 import { catalogOptions } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
+import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
+import {
+  applyCharacterKitCuration,
+  loadCharacterKitSections,
+  type CharacterKitPatch,
+} from '@/lib/admin/character-skill-curated-store';
 import { upsertCharacterCurated } from '@/lib/admin/curated-store';
 import { effectKeysById, newEffectId, pairEffects } from '@/lib/admin/effect-catalog';
 import {
@@ -141,6 +148,7 @@ import { listGuides } from '@/lib/data/guides';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
+import { img } from '@/lib/images';
 import { DEFAULT_LANG, LANGS, isValidLang, normalizeLang, type Lang } from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
@@ -149,6 +157,7 @@ import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
+import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import {
   CHANGELOG_TYPE_ICON,
@@ -1864,9 +1873,13 @@ export async function saveRanks(
 
 // ------------------------------------------------------------ fiche perso ----
 
-/** Le curé des persos, et celui des EE quand un rang d'EE part avec la fiche. */
+/**
+ * Le curé des persos, celui des EE quand un rang d'EE part avec la fiche, et
+ * celui des chips de skills (sous-onglet Skills).
+ */
 const CHARACTERS_PATH = 'data/curated/characters.json';
 const EQUIPMENT_PATH = 'data/curated/equipment.json';
+const CHARACTER_SKILLS_PATH = 'data/curated/character-skills.json';
 
 /** Un perso du roster, pour l'en-tête de la fiche et le picker de héros. */
 export interface SheetRosterRow {
@@ -1902,25 +1915,83 @@ export function characterRoster(): { roster: SheetRosterRow[] } {
   };
 }
 
-/** La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster). */
+/** Les deux sections du curé des chips de skills : cardId → refs. */
+export type KitSections = Record<'chipHide' | 'chipAdd', Record<string, string[]>>;
+
+/**
+ * La lecture de la fiche : le disque de Rangs (curé des persos, EE, roster) et,
+ * pour le sous-onglet Skills, les cartes de skills du perso (lève s'il n'a pas
+ * de kit lisible), le curé des chips et le catalogue des effets.
+ */
 export interface CharacterSheetDisk {
   disk: () => RankDisk;
+  kitCards: (id: string) => Promise<KitEditorCard[]>;
+  kitSections: () => KitSections;
+  kitCatalog: () => Record<string, EffectOption>;
 }
 
 /** La lecture et les écritures de `saveCharacterSheet`, injectées : les stores et git. */
 export interface CharacterSheetDeps extends CharacterSheetDisk {
   upsertCharacter: (id: string, curated: CharacterCurated) => Promise<string[]>;
   upsertEe: (id: string, patch: EeCuratedPatch) => Promise<string[]>;
+  applyKit: (patch: CharacterKitPatch) => Promise<string[]>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
-/** Celles des routes : le disque de Rangs, les stores de l'admin, le vrai `commitPaths`. */
+/**
+ * Celles des routes : le disque de Rangs, les stores de l'admin, le vrai
+ * `commitPaths`. Les cartes de skills sont celles de l'éditeur de l'admin
+ * (`characterKitCards` sur le bundle de l'extraction), aux icônes du site.
+ */
 export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
   disk: rankDisk,
+  kitCards: async (id) => {
+    // À la demande : l'extraction pèse, et les autres routes ne la lisent pas.
+    const { extractedBundle } = await import('@/lib/admin/review-store');
+    const bundle = extractedBundle(id);
+    if (!bundle) throw new Error('perso absent de l’extraction du jeu');
+    return characterKitCards(bundle, img.skill);
+  },
+  kitSections: loadCharacterKitSections,
+  kitCatalog: () => kitEffectCatalog(),
   upsertCharacter: upsertCharacterCurated,
   upsertEe: upsertEeCurated,
+  applyKit: applyCharacterKitCuration,
   commitPaths,
 };
+
+/**
+ * Le kit d'un perso, pour le sous-onglet Skills : ses cartes de skills et leurs
+ * chips AUTO, ce que le disque masque (`chipHide`) et ajoute (`chipAdd`) sur
+ * ces cartes, le catalogue des effets que « ＋ effet » propose et le dossier de
+ * leurs icônes. `error` : les cartes sont illisibles (pas de tables du jeu sur
+ * ce poste) — le reste de la fiche se lit quand même.
+ */
+export interface SheetKit extends KitSections {
+  cards: KitEditorCard[];
+  catalog: Record<string, EffectOption>;
+  sprite: string;
+  error?: string;
+}
+
+async function sheetKit(id: string, disk: CharacterSheetDisk): Promise<SheetKit> {
+  let cards: KitEditorCard[] = [];
+  let error = '';
+  try {
+    cards = await disk.kitCards(id);
+  } catch (e: unknown) {
+    error = e instanceof Error ? e.message : String(e);
+  }
+  const sections = disk.kitSections();
+  return {
+    cards,
+    chipHide: pickKitCards(sections.chipHide, cards),
+    chipAdd: pickKitCards(sections.chipAdd, cards),
+    catalog: disk.kitCatalog(),
+    sprite: EFFECT_SPRITE,
+    ...(error ? { error } : {}),
+  };
+}
 
 /**
  * La « Fiche perso » d'un perso : sa ligne du roster (avec sa chaîne et ses tags
@@ -1931,10 +2002,13 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
  * textes à tags inline : `refs`, ce que ces tags peuvent viser (les listes de
  * l'éditeur assisté de l'admin, `buildInlineRefs`), et `langs`, les langues du
  * site dans l'ordre où l'onglet les range — l'anglais se saisit, les autres se
- * génèrent par « Traduire ». Lu du disque à chaque appel. `error` : le perso
- * n'est pas du roster.
+ * génèrent par « Traduire ». Pour le sous-onglet Skills : `kit` (`SheetKit`).
+ * Lu du disque à chaque appel. `error` : le perso n'est pas du roster.
  */
-export function characterSheetState(id: string, disk: CharacterSheetDisk = CHARACTER_SHEET_DEPS) {
+export async function characterSheetState(
+  id: string,
+  disk: CharacterSheetDisk = CHARACTER_SHEET_DEPS,
+) {
   const c = getCharacterListItems().find((x) => x.id === id);
   if (!c) return { error: `perso inconnu : ${id}` };
   const curated = disk.disk().curated[id] ?? {};
@@ -1958,6 +2032,7 @@ export function characterSheetState(id: string, disk: CharacterSheetDisk = CHARA
       default: DEFAULT_LANG,
       shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
     },
+    kit: await sheetKit(id, disk),
   };
 }
 
@@ -2007,6 +2082,8 @@ const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
  * ENTIER et seulement s'il a bougé — une priorité vide n'y est pas, une liste
  * de tags est celle des tags humains cochés, `prosCons` porte les deux listes
  * et `synergies` tous les groupes. `was` : l'entrée que la page avait chargée.
+ * `kit` : les chips de skills, par carte modifiée — la liste ENTIÈRE de ses refs
+ * masquées, celle de ses effets ajoutés (vide = plus rien sur cette carte).
  */
 export interface CharacterSheetChanges {
   ranks?: RankChange[];
@@ -2017,18 +2094,21 @@ export interface CharacterSheetChanges {
     synergies?: SynergyGroup[];
   };
   was?: CharacterCurated;
+  kit?: CharacterKitPatch;
 }
 
 /**
  * Un refus situé : la cellule de rang (`field`, `step`), le champ de la fiche,
- * ou la ligne d'une de ses listes (`list`, `index` — le rang dans la liste
- * ENVOYÉE, à partir de zéro).
+ * la ligne d'une de ses listes (`list`, `index` — le rang dans la liste
+ * ENVOYÉE, à partir de zéro), ou la carte de skill d'un refus de chips
+ * (`field: 'kit'`, `card`).
  */
 export interface SheetRefusal {
-  field: RankField | SheetKey;
+  field: RankField | SheetKey | 'kit';
   step?: string;
   list?: SheetList;
   index?: number;
+  card?: string;
   reason: string;
 }
 
@@ -2191,6 +2271,75 @@ function cleanSynergies(
   return { value, issues };
 }
 
+/** Ce qui cloche dans les chips envoyées : sur une carte, ou dans la forme entière. */
+interface KitIssue {
+  card?: string;
+  reason: string;
+}
+
+const KIT_SECTIONS = ['chipHide', 'chipAdd'] as const;
+
+/**
+ * Les chips de skills venues de la page, contrôlées contre les cartes du perso
+ * (celles que le SERVEUR calcule), le disque et le catalogue des effets. Une
+ * liste que le disque porte déjà n'est pas un changement. Ne s'ajoute à ce que
+ * le disque porte qu'une ref que la carte connaît : masquer vise une de ses
+ * chips, ajouter un effet du catalogue — une ref héritée du fichier, elle,
+ * reste. Une carte en écart n'est pas écrite du tout. `patch` : les seules
+ * listes qui bougent, entières ; `said` : une ligne de journal par carte.
+ */
+function planKit(
+  raw: unknown,
+  cards: readonly KitEditorCard[],
+  disk: KitSections,
+  catalog: Record<string, EffectOption>,
+): { patch: KitSections; said: string[]; issues: KitIssue[] } | string {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'forme inattendue';
+  const patch: KitSections = { chipHide: {}, chipAdd: {} };
+  const issues: KitIssue[] = [];
+  for (const section of KIT_SECTIONS) {
+    const sent = (raw as Record<string, unknown>)[section] ?? {};
+    if (typeof sent !== 'object' || Array.isArray(sent)) return `${section} : forme inattendue`;
+    for (const [cid, list] of Object.entries(sent as Record<string, unknown>)) {
+      const card = cards.find((c) => c.id === cid);
+      if (!card) {
+        issues.push({ card: cid, reason: 'pas une carte de ce perso' });
+        continue;
+      }
+      if (!Array.isArray(list) || list.some((v) => typeof v !== 'string')) {
+        issues.push({ card: cid, reason: `${section} : une liste de refs attendue` });
+        continue;
+      }
+      const clean = [...new Set((list as string[]).map((v) => v.trim()).filter(Boolean))];
+      const before = disk[section][cid] ?? [];
+      if (sameJson(clean, before)) continue;
+      const known = (ref: string): boolean =>
+        section === 'chipHide' ? card.chips.some((c) => c.ref === ref) : ref in catalog;
+      const stray = clean.filter((ref) => !before.includes(ref) && !known(ref));
+      if (stray.length)
+        issues.push({
+          card: cid,
+          reason: `${stray.map((ref) => `« ${ref} »`).join(', ')} : ${
+            section === 'chipHide' ? 'pas une chip de cette carte' : 'effet inconnu du glossaire'
+          }`,
+        });
+      else patch[section][cid] = clean;
+    }
+  }
+  for (const { card } of issues)
+    if (card) for (const section of KIT_SECTIONS) delete patch[section][card];
+
+  const said = cards
+    .filter((c) => KIT_SECTIONS.some((section) => c.id in patch[section]))
+    .map((c) => {
+      const n = (section: 'chipHide' | 'chipAdd'): number =>
+        (patch[section][c.id] ?? disk[section][c.id] ?? []).length;
+      const [hidden, added] = [n('chipHide'), n('chipAdd')];
+      return `chips de « ${c.name || c.id} » : ${hidden} masquée${hidden > 1 ? 's' : ''}, ${added} ajoutée${added > 1 ? 's' : ''}`;
+    });
+  return { patch, said, issues };
+}
+
 /**
  * Enregistre la « Fiche perso » d'UN perso, en un geste et un commit.
  *
@@ -2210,6 +2359,11 @@ function cleanSynergies(
  *     (`localizedIssues` : tags inline, langue de repli, parité), les héros
  *     d'une synergie aussi : un écart est un refus situé à la ligne
  *     (`list`, `index`), et la liste entière n'est pas écrite ;
+ *   - puis les chips de skills (`changes.kit`), contrôlées par `planKit` contre
+ *     les cartes que le serveur calcule pour CE perso, et écrites par
+ *     `applyCharacterKitCuration` dans `character-skills.json` — seulement si
+ *     une liste bouge ; un écart, ou un refus du store, est situé à sa carte
+ *     (`card`) ;
  *   - puis UN commit des fichiers réellement touchés, au nom du perso.
  *
  * Les deux écritures passent par le verrou du store (`withStoreLock`), celui de
@@ -2243,7 +2397,9 @@ export async function saveCharacterSheet(
     changes?.curated && typeof changes.curated === 'object' ? changes.curated : {}
   ) as Record<string, unknown>;
   const keys = SHEET_KEYS.filter((k) => k in sent);
-  if (!ranks.length && !keys.length) return out(false, ['Aucune modification à enregistrer.']);
+  const hasKit = changes?.kit !== undefined;
+  if (!ranks.length && !keys.length && !hasKit)
+    return out(false, ['Aucune modification à enregistrer.']);
 
   const j = journal(report);
   const refuse = (r: SheetRefusal, said: string): void => {
@@ -2379,6 +2535,40 @@ export async function saveCharacterSheet(
     } else {
       touched.add(CHARACTERS_PATH);
       for (const line of said) j.done(line);
+    }
+  }
+
+  // 3. Les chips de skills, sur les cartes que le serveur calcule pour ce perso.
+  if (hasKit) {
+    let cards: KitEditorCard[] = [];
+    const kitRefuse = (card: string | undefined, reason: string): void =>
+      refuse(
+        { field: 'kit', ...(card ? { card } : {}), reason },
+        `${name} · chips${card ? ` de « ${cards.find((c) => c.id === card)?.name || card} »` : ''}`,
+      );
+    let plan: ReturnType<typeof planKit> | null = null;
+    try {
+      cards = await deps.kitCards(id);
+      plan = planKit(changes?.kit, cards, deps.kitSections(), deps.kitCatalog());
+    } catch (e: unknown) {
+      kitRefuse(undefined, `kit illisible (${e instanceof Error ? e.message : String(e)})`);
+    }
+    if (typeof plan === 'string') kitRefuse(undefined, plan);
+    else if (plan) {
+      for (const { card, reason } of plan.issues) kitRefuse(card, reason);
+      if (plan.said.length) {
+        j.doing('écriture des chips de skills');
+        const errors = await deps.applyKit({ cardIds: cards.map((c) => c.id), ...plan.patch });
+        // Le store nomme la carte en tête de son refus : `chipHide[<id>] : …`.
+        for (const e of errors) {
+          const m = /^chip(?:Hide|Add)\[(.+?)\] : (.*)$/.exec(e);
+          kitRefuse(m?.[1], m?.[2] ?? e);
+        }
+        if (!errors.length) {
+          touched.add(CHARACTER_SKILLS_PATH);
+          for (const line of plan.said) j.done(line);
+        }
+      }
     }
   }
 

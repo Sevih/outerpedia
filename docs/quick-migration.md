@@ -93,7 +93,7 @@ tables que le code lit d'abord, avec les fichiers qui les lisent et la
 première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
-Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11 et B42 —
+Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11, B42 et B39 —
 portage PARTIEL : UNE section pour tout ce que le wiki sait d'un perso, le
 picker de héros en tête, des sous-onglets comme sur la fiche du site — Fiche,
 Pros / Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker
@@ -105,9 +105,14 @@ la grille Rangs. B42 porte Pros / Cons et Synergies (= Tools › Pro / Con et
 Tools › Synergy, étapes 4 et 3) : des textes à tags inline saisis en anglais,
 leur aperçu tel que le site les rend, « Traduire » vers les cinq autres
 langues, les héros d'une synergie par le picker partagé — dans la même savebar
-et le même commit ; leurs liens sont retirés du menu admin le 08/10. Les deux
-derniers sous-onglets sont là, éteints : Skills arrive avec B39, Gear reco
-avec B40 ; l'admin garde donc son lien Character), Effets (= Editor ›
+et le même commit ; leurs liens sont retirés du menu admin le 08/10. B39 porte
+Skills (= l'onglet « Skills (buff/debuff) » de l'éditeur, `CharacterKitEditor`) :
+les cartes de skills du perso et leurs chips d'effets telles que l'admin les
+calcule — ✕ masque une chip, « rétablir » la rend, « ＋ effet » en ajoute une
+du glossaire par le picker partagé —, comptées par la même savebar ; le commit
+de la fiche porte alors aussi `data/curated/character-skills.json`. Le dernier
+sous-onglet est là, éteint : Gear reco arrive avec B40 ; l'admin garde donc
+son lien Character), Effets (= Editor ›
 Effect, étape 10, lot B41 : le catalogue des
 effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
 sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
@@ -195,14 +200,14 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
-9. **Editor › Character** — PARTIEL, lots C11 et B42 : la section « Fiche
+9. **Editor › Character** — PARTIEL, lots C11, B42 et B39 : la section « Fiche
    perso » (cf. « Déjà dans quick »). Faits : la coquille à sous-onglets, le
    picker de héros partagé, le sous-onglet Fiche (les champs de
    `CharacterCuratedEditor`, vidéos en lecture), puis Pros / Cons et Synergies
    (B42, les étapes 3 et 4, que Sevih voulait « dans l'editor de character » :
-   `EditorialEditor` de l'admin). Restent : Skills (B39, `CharacterKitEditor`),
-   Gear reco (B40, qui devient un sous-onglet). Le lien Character de l'admin
-   reste jusqu'à B40.
+   `EditorialEditor` de l'admin), puis Skills (B39, FAIT : `CharacterKitEditor`
+   — masquer ou ajouter les chips d'un kit). Reste : Gear reco (B40, qui
+   devient un sous-onglet). Le lien Character de l'admin reste jusqu'à B40.
    - Agacements : ui pas joli et compact (et on a deplacer le gear reco) —
      corrigé pour la Fiche par deux cartes aérées, « Rangs » et « Kit », au
      lieu de la grille serrée de l'admin ; le reste suit avec ses lots.

@@ -197,6 +197,26 @@
   background: var(--surface-base);
   object-fit: contain;
 }
+/* `rows` : des tuiles en lignes, dessinées par l'appelant (`tile`) — une icône,
+   un nom à côté —, sur plusieurs colonnes. */
+.hp-tiles.rows {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px 10px;
+}
+.hp-tiles.rows .hp-tile {
+  flex-direction: row;
+  gap: 8px;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: left;
+}
+.hp-tiles.rows .hp-tile:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: var(--surface-base);
+}
 /* La pastille d'une tuile : un compte (atténué à zéro), ou ✓ en multi-choix. */
 .hp-cnt {
   position: absolute;

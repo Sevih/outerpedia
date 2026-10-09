@@ -40,11 +40,31 @@
       Game data (onglet « Tables du jeu », lot B38), Effect (onglet
       « Effets », lot B41), Synergy et Pro / Con (sous-onglets « Synergies »
       et « Pros / Cons » de la « Fiche perso », lot B42). PARTIEL : Character
-      (section « Fiche perso », lots C11 et B42 — la coquille, le picker de
-      héros partagé, les sous-onglets Fiche, Pros / Cons et Synergies ;
-      restent Skills B39 puis Gear reco B40).
+      (section « Fiche perso », lots C11, B42 et B39 — la coquille, le picker
+      de héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies et
+      Skills ; reste Gear reco B40).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Fiche perso » › Skills — contrôles à l'écran (lot B39)** : le banc
+      ne clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : l'état de la fiche sert maintenant
+      le kit — sans ça la fiche dit « quick lancé avant ce code »). (1) Un
+      perso, sous-onglet Skills : ses cartes (mains, passifs, chaîne, duo),
+      descriptions et chips comme sur sa fiche du site. (2) ✕ sur une chip :
+      elle passe barrée, « rétablir » la rend ; la savebar compte, le point
+      vient sur l'onglet. (3) « ＋ effet » : le picker — chercher un nom,
+      [Buffs | Debuffs], choisir ; la chip arrive avec « ajoutée », son ✕ la
+      retire. (4) « Enregistrer » — attendu : UN commit
+      `chore(characters): <perso>` qui porte
+      `data/curated/character-skills.json`, et seulement lui si rien d'autre
+      n'a bougé ; le diff : les seules cartes touchées. (5) Rouvrir la fiche
+      dans l'admin (onglet Skills) : le même état. (6) Après « Pousser » et le
+      déploiement : la fiche du perso sur le site, la chip masquée absente, la
+      chip ajoutée là. À juger : les tuiles du picker en lignes sur trois
+      colonnes (210 effets) ; la chip neutre de la charte plutôt que la pill
+      bleue ou rouge du site ; faut-il que les cartes viennent du committé
+      quand le poste n'a pas les tables du jeu (aujourd'hui : « Kit
+      illisible ») ?
 - [ ] **« Fiche perso » › Pros / Cons et Synergies — contrôles à l'écran
       (lot B42)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué et « Traduire » n'a jamais été appelé avec des clés. Relancer quick

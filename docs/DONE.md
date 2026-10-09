@@ -5,6 +5,88 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-09
+
+- **quick : « Fiche perso » › Skills — masquer ou ajouter les chips d'un kit
+  (lot B39, étape 9 de la migration, suite)** — le sous-onglet « Skills », que
+  C11 avait posé éteint, porte l'éditeur de kit de l'admin
+  (`CharacterKitEditor`) : les cartes de skills d'un perso et leurs chips
+  d'effets, où l'on masque une chip parasite (`chipHide`) ou en ajoute une du
+  glossaire (`chipAdd`) — présentation seule, la donnée extraite reste fidèle
+  aux tables. **Cartes** : le calcul vivait dans la page de l'admin
+  (`admin/editor/characters/[id]/page.dev.tsx`) ; il est DÉPLACÉ tel quel dans
+  `src/lib/admin/character-kit.ts` — `characterKitCards(bundle, skillIconSrc)`
+  (mains, fusion_passive, extra, chaîne, duo, chips AUTO à curation vide),
+  `pickKitCards` (une section du curé restreinte aux cartes d'un perso),
+  `kitEffectCatalog` — et la page de l'admin l'appelle (sa seule différence :
+  l'adresse des icônes de skill, ses sprites bruts). **Serveur**
+  (`scripts/quick/actions.ts`, `server.ts`) : `characterSheetState` devient
+  asynchrone et gagne `kit` — les cartes par `characterKitCards` sur le bundle
+  de l'EXTRACTION (`extractedBundle`, comme l'admin ; importé à la demande, le
+  moteur pèse : 440 ms au premier perso), aux icônes du site (`img.skill`),
+  `chipHide` et `chipAdd` du disque sur CES cartes, le catalogue (id, nom,
+  icône, nature, irremovable) et le dossier des icônes d'effet. Des cartes
+  illisibles (pas de tables du jeu sur le poste) : `kit.error`, et le reste de
+  la fiche se lit. `saveCharacterSheet` accepte `changes.kit`
+  (`CharacterKitPatch`) : les cartes sont RECALCULÉES au serveur (celles que
+  la page envoie ne font pas foi), `planKit` nettoie les listes, écarte celles
+  que le disque porte déjà, et refuse — situé à la carte (`card`) — une carte
+  d'un autre perso, une ref nouvellement masquée qui n'est pas une chip de la
+  carte, un effet nouvellement ajouté hors du catalogue (une ref héritée du
+  fichier reste) ; une carte en écart n'est écrite pour aucune de ses deux
+  listes. `applyCharacterKitCuration` n'est appelé que si une liste bouge, ses
+  refus situés par la carte qu'il nomme ; le commit, toujours UN
+  `chore(characters): <perso>`, porte alors AUSSI
+  `data/curated/character-skills.json`. Un `stale` de la fiche n'écrit pas les
+  chips non plus. **Page** (`tabs/character.{html,js,css}`) : une carte par
+  skill, deux par rangée (une sous 1000 px) — icône, nom, id · type, la
+  description du jeu (`gameText` de `gear-view.mjs`), puis les chips : la
+  `.chip` de la charte avec la tuile d'effet du site (masque teinté buff ou
+  debuff, celle de l'onglet Effets). ✕ masque : pointillés, atténuée, nom
+  barré, « rétablir » ; un effet ajouté porte « ajoutée », son ✕ le retire ;
+  bord accent sur une chip qui n'est pas dans l'état du disque. Un geste
+  redessine SA carte seule, le focus reste où il était. Savebar commune :
+  chaque chip masquée, rétablie, ajoutée ou retirée compte, point sur
+  l'onglet, refus sur la carte (cerclée, message dessous, saisie gardée),
+  « Annuler », `canLeave`. Seules les cartes modifiées partent, leurs deux
+  listes ENTIÈRES. **Picker** : `ui/hero-picker.mjs` est GÉNÉRALISÉ plutôt que
+  doublé — c'était une question de contenu : `tile` (la tuile dessinée par
+  l'appelant), `rows` (des tuiles en lignes), `placeholder`, `none`, et un item
+  sans `class`. « ＋ effet » l'ouvre sur le catalogue : recherche sur le nom,
+  [Tous | Buffs | Debuffs] par son `seg`, homonymes départagés comme dans
+  l'admin (« Barrier (irremovable, buff) »), un effet déjà ajouté à la carte
+  n'est plus proposé. `#character/<id>/skills/picker/<n>` l'ouvre sur la
+  n-ième carte, pour le banc. **Docs** : `quick-migration.md` (9 : Skills
+  FAIT, reste Gear reco), `STYLE.md` (croquis de Skills, options du picker),
+  TODO (contrôles à l'écran). **Vérifié** : `pnpm typecheck` (« tsc --noEmit …
+  -p scripts/tsconfig.json », code 0), `pnpm lint` (« eslint », code 0),
+  `pnpm test` (« Tests 3257 passed (3257) »),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests 760
+  passed (760) ») — dont `character-kit.test.ts` (cinq cas, sur les skills
+  COMMITTÉS d'Aer : la suite tourne sans tables du jeu), `actions.test.ts`
+  (l'état porte `kit`, cartes illisibles ; `saveCharacterSheet` avec un `kit`
+  — store factice, second fichier dans le commit seulement s'il a bougé,
+  refus situés de `planKit` et du store, `stale`), la page en happy-dom (neuf
+  cas : masquer, rétablir, ajouter depuis le picker, retirer, le compte,
+  l'envoi, un refus situé, « Annuler », le hash de picker) et le picker (un
+  cas) ; trois cas de C11 ajustés (Skills n'est plus éteint). Banc sur un
+  quick isolé (:4883, clés vidées, que des GET) : `/api/character/state`
+  d'Aer sert cinq cartes et 210 effets ; `--hash character/2000055/skills` —
+  cinq cartes, descriptions colorées, chips teintées — et
+  `…/skills/picker/2`, la modale ouverte sur 210 effets en trois colonnes ;
+  les états « masquée » et « ajoutée » vus en posant deux entrées dans
+  `character-skills.json` le temps d'une capture, fichier rendu par
+  `git checkout` aussitôt. Rien d'enregistré. **Laissé** : les cartes viennent
+  de l'extraction, comme dans l'admin, pas de `data/generated/` — quick ne les
+  sert donc que sur un poste qui a les tables du jeu (sinon « Kit
+  illisible ») ; à dire si le committé doit servir de repli. Pas de contrôle
+  `stale` sur les chips (l'admin n'en a pas) : la dernière écriture d'une
+  carte gagne. Une ref masquée que la carte ne produit plus reste dans le
+  fichier sans être montrée, comme dans l'admin. La page de l'admin n'a pas
+  été rejouée à l'écran (pas de `pnpm dev`) : le déplacement est gardé par
+  `tsc` et par les tests de la fonction. La tuile `.c-fx` recopie `.x-ico`
+  d'Effets, faute de composant commun. Suite : B40.
+
 ## 2026-10-08
 
 - **Relecture B42 (Fable) — Pros / Cons et Synergies de la « Fiche perso »,

@@ -2,11 +2,13 @@
 // ce que le wiki sait de lui en sous-onglets. « Fiche » : rangs, rôle, paliers
 // par transcendance, priorité de skills, tags. « Pros / Cons » et
 // « Synergies » : des textes à tags inline, saisis en anglais, traduits par
-// « Traduire », avec leur aperçu tel que le site les rendra. Une seule savebar,
-// un seul enregistrement, un seul commit.
+// « Traduire », avec leur aperçu tel que le site les rendra. « Skills » : les
+// cartes de skills du perso et leurs chips d'effets — ✕ en masque une, « ＋ effet »
+// en ajoute une du glossaire. Une seule savebar, un seul enregistrement, un seul
+// commit.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
-import { noteHtml } from '../gear-view.mjs';
-import { openHeroPicker } from '../hero-picker.mjs';
+import { gameText, noteHtml } from '../gear-view.mjs';
+import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 
 // Les sous-onglets, dans l'ordre de la fiche du site. `soon` : pas encore
 // porté — l'onglet est là, éteint, et son `title` dit quel lot l'apporte.
@@ -14,7 +16,7 @@ const SUBS = [
   { id: 'fiche', label: 'Fiche' },
   { id: 'pros-cons', label: 'Pros / Cons' },
   { id: 'synergies', label: 'Synergies' },
-  { id: 'skills', label: 'Skills', soon: 'lot B39' },
+  { id: 'skills', label: 'Skills' },
   { id: 'gear', label: 'Gear reco', soon: 'lot B40' },
 ];
 const subsOn = () => SUBS.filter((s) => !s.soon);
@@ -82,6 +84,13 @@ const pv = {
   error: '', // le refus du serveur, ou l'échec réseau
   segs: new Map(), // clé de ligne → ses segments
 };
+// Les chips des skills : par carte, les refs masquées (`hide`) et les effets
+// ajoutés (`add`) tels qu'ils partiraient. Une carte absente : ce que le disque
+// porte. Les deux sections du curé, sous leurs noms.
+const kit = { hide: {}, add: {} };
+const KIT = { hide: 'chipHide', add: 'chipAdd' };
+const fxFilters = heroFilters(); // les filtres du picker d'effets, à lui
+let wantedPick = 0; // la carte dont le hash demande le picker d'effets (à partir de 1)
 let drawnBase = state.imgBase; // la base des images du dernier dessin (cf. `init`)
 
 const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
@@ -181,21 +190,67 @@ const stale = (line) =>
 const tally = (line) =>
   `${others().filter((l) => line.text[l]?.trim()).length} / ${others().length}`;
 
+// Les chips des skills. Une carte porte les chips que le kit lui pose (`chips`),
+// dont le curé masque certaines, et les effets que le curé lui ajoute.
+const kitBase = (kind, card) => sheet.kit[KIT[kind]][card] ?? [];
+const kitNow = (kind, card) => kit[kind][card] ?? kitBase(kind, card);
+/** Ce qui sépare deux listes de refs : celles de l'une que l'autre n'a pas. */
+const apart = (a, b) =>
+  a.filter((x) => !b.includes(x)).length + b.filter((x) => !a.includes(x)).length;
+/** Les chips d'une carte masquées, rétablies, ajoutées ou retirées depuis le disque. */
+const cardChanges = (card) =>
+  apart(kitNow('hide', card), kitBase('hide', card)) +
+  apart(kitNow('add', card), kitBase('add', card));
+const kitChanges = () => sheet.kit.cards.reduce((n, c) => n + cardChanges(c.id), 0);
+/** Pose une liste d'une carte : revenue à celle du disque, elle n'est plus modifiée. */
+function kitSet(kind, card, list) {
+  if (apart(list, kitBase(kind, card))) kit[kind][card] = list;
+  else delete kit[kind][card];
+  refused.delete(`kit:${card}`);
+  refused.delete('kit');
+}
+/** La saisie que le disque porte maintenant, ou dont la carte n'est plus : oubliée. */
+function kitPrune() {
+  for (const kind of Object.keys(KIT))
+    for (const card of Object.keys(kit[kind]))
+      if (
+        !sheet.kit.cards.some((c) => c.id === card) ||
+        !apart(kit[kind][card], kitBase(kind, card))
+      )
+        delete kit[kind][card];
+}
+/** Les chips telles qu'elles partiraient : par carte modifiée, ses deux listes ENTIÈRES. */
+function kitOut() {
+  const moved = sheet.kit.cards.filter((c) => cardChanges(c.id));
+  if (!moved.length) return null;
+  const lists = (kind) => Object.fromEntries(moved.map((c) => [c.id, kitNow(kind, c.id)]));
+  return {
+    cardIds: sheet.kit.cards.map((c) => c.id),
+    chipHide: lists('hide'),
+    chipAdd: lists('add'),
+  };
+}
+
 /** Le sous-onglet d'un refus, d'après sa clé. */
 const subOf = (key) =>
-  Object.keys(TEXT_TABS).find(
-    (id) => key === TEXT_FIELDS[id] || TEXT_TABS[id].some((list) => key.startsWith(`${list}:`)),
-  ) ?? 'fiche';
+  key === 'kit' || key.startsWith('kit:')
+    ? 'skills'
+    : (Object.keys(TEXT_TABS).find(
+        (id) => key === TEXT_FIELDS[id] || TEXT_TABS[id].some((list) => key.startsWith(`${list}:`)),
+      ) ?? 'fiche');
 const refusedIn = (id) => [...refused.keys()].filter((k) => subOf(k) === id);
 /** Ce qu'un sous-onglet a en attente. */
 const subChanges = (id) =>
   id === 'fiche'
     ? cells.size + Number(prioMoved()) + Number(tagsMoved())
-    : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
+    : id === 'skills'
+      ? kitChanges()
+      : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
 
 /**
- * Ce que compte la savebar : une cellule de rang, la priorité, les tags, et
- * chaque ligne de pros, de cons ou de synergie ajoutée, modifiée ou retirée.
+ * Ce que compte la savebar : une cellule de rang, la priorité, les tags, chaque
+ * ligne de pros, de cons ou de synergie ajoutée, modifiée ou retirée, et chaque
+ * chip de skill masquée, rétablie, ajoutée ou retirée.
  */
 const changes = () => (sheet ? SUBS.reduce((n, s) => n + subChanges(s.id), 0) : 0);
 
@@ -573,6 +628,187 @@ const synHtml = () =>
     <div class="c-foot"><button class="btn ghost sm" type="button" data-act="add-line" data-list="synergies">＋ groupe</button>${translateHtml()}${err('synergies')}</div>
   </div>`;
 
+// ------------------------------------------------------ le sous-onglet « Skills »
+/** Une image que le serveur a résolue : relative (`/images/…`), elle passe sous `imgBase`. */
+const srcAt = (path) => esc(path.startsWith('/') ? `${state.imgBase}${path}` : path);
+// Les caractères qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
+const fxUrl = (icon) =>
+  `${state.imgBase}/${sheet.kit.sprite}/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`;
+
+/**
+ * La tuile d'un effet, comme le site la peint (`EffectIconTile`) et comme
+ * l'onglet Effets : fond noir, l'icône en MASQUE teinté de sa nature — sauf les
+ * « Interruption », qui gardent leurs couleurs. Décorative : le nom est à côté.
+ */
+function fxTile(icon, isDebuff) {
+  if (!icon) return '<span class="c-fx none" aria-hidden="true"></span>';
+  const url = esc(fxUrl(icon));
+  if (icon.includes('Interruption'))
+    return `<span class="c-fx" aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
+  return `<span class="c-fx ${isDebuff ? 'debuff' : 'buff'}" style="--c-src: url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
+}
+
+/** Un effet ajouté à une carte, tel que le catalogue le connaît ; sinon sa ref. */
+function addedChip(ref) {
+  const o = sheet.kit.catalog[ref];
+  return { ref, name: o?.name ?? ref, icon: o?.icon, isDebuff: o?.isDebuff ?? false };
+}
+
+/**
+ * Une chip d'une carte. Celle que le kit pose (`auto`) : ✕ la masque — barrée
+ * et atténuée, « rétablir » la rend. Un effet ajouté (`add`) : son badge, et ✕
+ * le retire. Le bord accent : son état n'est pas celui du disque.
+ */
+function chipHtml(card, c, kind) {
+  const add = kind === 'add';
+  const now = kitNow(add ? 'add' : 'hide', card.id).includes(c.ref);
+  const off = !add && now;
+  const moved = now !== kitBase(add ? 'add' : 'hide', card.id).includes(c.ref);
+  return `<span class="chip c-chip${off ? ' off' : ''}${moved ? ' dirty' : ''}" data-kind="${kind}" data-ref="${esc(c.ref)}" title="${esc(c.ref)}">${fxTile(c.icon, c.isDebuff)}<span class="c-chn">${esc(c.name)}</span>${
+    add ? '<span class="badge edit">ajoutée</span>' : ''
+  }${
+    off
+      ? `<button class="btn ghost sm" type="button" data-act="show-chip" aria-label="Rétablir ${esc(c.name)}">rétablir</button>`
+      : `<button class="btn icon" type="button" data-act="${add ? 'del-chip' : 'hide-chip'}" title="${
+          add ? 'Retirer' : 'Masquer sur cette carte'
+        }" aria-label="${add ? 'Retirer' : 'Masquer'} ${esc(c.name)}">✕</button>`
+  }</span>`;
+}
+
+/** La description d'un skill, sans les sauts de ligne qui la terminent (la moitié « chaîne » d'un chain_passive). */
+const skillDesc = (desc) => desc.replace(/(?:\\n|\s)+$/, '');
+
+/** L'intérieur d'une carte de skill : son en-tête, sa description, ses chips, « ＋ effet ». */
+function skillInner(card) {
+  const key = `kit:${card.id}`;
+  return `<div class="card-head">${
+    card.iconSrc
+      ? `<img class="c-skico" src="${srcAt(card.iconSrc)}" alt="" aria-hidden="true" width="36" height="36" />`
+      : ''
+  }<strong>${esc(card.name || '(sans nom)')}</strong><span class="lbl c-skid">${esc(card.id)} · ${esc(card.type)}</span><span class="badge edit">${
+    cardChanges(card.id) ? 'modifié' : ''
+  }</span><span class="badge ko">${refused.has(key) ? 'refusé' : ''}</span></div>
+    <div class="c-body">
+      ${card.desc ? `<p class="c-desc">${gameText(viewEnv(), skillDesc(card.desc))}</p>` : ''}
+      <div class="c-chips">${card.chips.map((c) => chipHtml(card, c, 'auto')).join('')}${kitNow(
+        'add',
+        card.id,
+      )
+        .map((ref) => chipHtml(card, addedChip(ref), 'add'))
+        .join(
+          '',
+        )}<button class="btn ghost sm" type="button" data-act="add-chip" aria-haspopup="dialog">＋ effet</button></div>
+      ${err(key)}
+    </div>`;
+}
+const skillClass = (card) => `card c-card c-skill${refused.has(`kit:${card.id}`) ? ' ko' : ''}`;
+
+/** Une carte par skill, comme la fiche du site : mains, passifs, chaîne, duo. */
+function skillsHtml() {
+  const { cards, error } = sheet.kit;
+  if (error) return `<div class="empty">Kit illisible : ${esc(error)}.</div>`;
+  if (!cards.length) return '<div class="empty">Aucune carte de skill.</div>';
+  return `<div class="c-cols">${cards
+    .map((c) => `<div class="${skillClass(c)}" data-kit="${esc(c.id)}">${skillInner(c)}</div>`)
+    .join('')}<div class="c-wide c-foot">${err('kit')}</div></div>`;
+}
+
+/** La carte d'un skill à l'écran, par son id (`…::dual` : pas un sélecteur sûr). */
+const skillEl = (id) =>
+  [...$('c-panel').querySelectorAll('[data-kit]')].find((el) => el.dataset.kit === id);
+
+/**
+ * Une carte de skill redessinée seule, après un geste sur ses chips ; le focus
+ * va à `focus` — `[kind, ref]` : le bouton de cette chip ; sinon « ＋ effet ».
+ */
+function skillDraw(card, focus) {
+  const at = skillEl(card.id);
+  if (!at) return;
+  at.className = skillClass(card);
+  at.innerHTML = skillInner(card);
+  marks();
+  const chip =
+    focus &&
+    [...at.querySelectorAll('[data-ref]')].find(
+      (el) => el.dataset.kind === focus[0] && el.dataset.ref === focus[1],
+    );
+  (chip ?? at).querySelector(chip ? 'button' : '[data-act="add-chip"]')?.focus();
+}
+
+/**
+ * Le catalogue des effets en options du picker, par nom. Des effets DISTINCTS
+ * partagent un nom (variante irremovable, natures opposées) : les homonymes
+ * sont suffixés, et l'id départage ce qui reste — la règle de l'éditeur de
+ * l'admin.
+ */
+function fxOptions() {
+  const all = Object.values(sheet.kit.catalog);
+  const counts = new Map();
+  for (const o of all)
+    counts.set(o.name.toLowerCase(), (counts.get(o.name.toLowerCase()) ?? 0) + 1);
+  const seen = new Set();
+  return all
+    .map((o) => {
+      let name = o.name;
+      if (counts.get(o.name.toLowerCase()) > 1)
+        name = `${o.name} (${[o.irremovable && 'irremovable', o.isDebuff ? 'debuff' : 'buff'].filter(Boolean).join(', ')})`;
+      if (seen.has(name.toLowerCase())) name = `${name} [${o.id}]`;
+      seen.add(name.toLowerCase());
+      return { ...o, name };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * « ＋ effet » : le picker partagé, sur le catalogue des effets — ceux que la
+ * carte n'a pas déjà en ajout. Celui qu'on y choisit s'ajoute à la carte.
+ */
+function pickEffect(card) {
+  const have = kitNow('add', card.id);
+  const options = fxOptions().filter((o) => !have.includes(o.id));
+  openHeroPicker({
+    title: `Ajouter un effet — ${card.name || card.id}`,
+    roster: options,
+    imgBase: state.imgBase,
+    rows: true,
+    tile: (o) => `${fxTile(o.icon, o.isDebuff)}<span>${esc(o.name)}</span>`,
+    hint: (o) => `${o.name} — ${o.id}`,
+    placeholder: 'Chercher un effet…',
+    none: 'Aucun effet ne correspond.',
+    tally: () => plural(options.length, 'effet'),
+    seg: {
+      label: 'Nature',
+      options: [
+        ['', 'Tous'],
+        ['buff', 'Buffs'],
+        ['debuff', 'Debuffs'],
+      ],
+      test: (o, value) => !value || (value === 'debuff') === o.isDebuff,
+    },
+    filters: fxFilters,
+    opener: () => skillEl(card.id)?.querySelector('[data-act="add-chip"]'),
+    onPick: (id) => {
+      kitSet('add', card.id, [...kitNow('add', card.id), id]);
+      skillDraw(card);
+    },
+  });
+}
+
+/** Un geste sur une carte de skill : « ＋ effet », ou le bouton d'une de ses chips. */
+function kitAct(at, el) {
+  const card = sheet.kit.cards.find((c) => c.id === at.dataset.kit);
+  if (!card) return;
+  const { act } = el.dataset;
+  if (act === 'add-chip') return pickEffect(card);
+  const chip = el.closest('[data-ref]');
+  if (!chip) return;
+  const { ref } = chip.dataset;
+  const kind = act === 'del-chip' ? 'add' : 'hide';
+  const now = kitNow(kind, card.id);
+  kitSet(kind, card.id, act === 'hide-chip' ? [...now, ref] : now.filter((r) => r !== ref));
+  skillDraw(card, kind === 'hide' && ['auto', ref]);
+}
+
 /** La ligne d'un élément du panneau : sa liste, son modèle, son élément. */
 function lineAt(target) {
   const el = target.closest('[data-k]');
@@ -673,7 +909,9 @@ function render() {
       ? ficheHtml()
       : sub === 'pros-cons'
         ? prosConsHtml()
-        : synHtml();
+        : sub === 'synergies'
+          ? synHtml()
+          : skillsHtml();
   growAll(panel);
   subTabs();
   bar();
@@ -809,6 +1047,8 @@ $('c-panel').onclick = (e) => {
   const el = e.target.closest('[data-act]');
   if (!el || !sheet) return;
   const { act, step } = el.dataset;
+  const skill = el.closest('[data-kit]');
+  if (skill) return kitAct(skill, el);
   if (act === 'add-step') {
     const next = stepsFree()[0];
     if (!next) return;
@@ -1005,18 +1245,21 @@ $('c-tabs').onkeydown = (e) => {
  */
 async function load(id, keep = false) {
   const s = await getJson(`/api/character/state?id=${encodeURIComponent(id)}`);
-  // Un serveur plus vieux que cette page ne sert pas les langues des textes.
-  if (!s.langs) throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
+  // Un serveur plus vieux que cette page ne sert ni les langues des textes ni le kit.
+  if (!s.langs || !s.kit) throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
   sheet = s;
   wanted = null;
   pv.lang ||= s.langs.default;
   if (!keep) {
     cells.clear();
     prio = tags = null;
+    kit.hide = {};
+    kit.add = {};
     refused = new Map();
     tr = { busy: tr.busy, error: '' };
     fromDisk();
   }
+  kitPrune();
   added.clear();
   who();
   render();
@@ -1082,6 +1325,7 @@ $('c-save').onclick = async () => {
   };
   if (subChanges('pros-cons')) curated.prosCons = { pros: send('pros'), cons: send('cons') };
   if (subChanges('synergies')) curated.synergies = send('synergies');
+  const chips = kitOut();
 
   $('c-save').disabled = $('c-reset').disabled = true;
   $('c-save').classList.add('busy');
@@ -1089,11 +1333,21 @@ $('c-save').onclick = async () => {
   try {
     const r = await post('/api/character', {
       id,
-      changes: { ranks: [...cells.values()], curated, was: sheet.curated },
+      changes: {
+        ranks: [...cells.values()],
+        curated,
+        was: sheet.curated,
+        ...(chips ? { kit: chips } : {}),
+      },
     });
     const said = new Map();
     for (const x of r.refused ?? []) {
-      const key = x.list ? `${x.list}:${sentKeys[x.list]?.[x.index]}` : cellKey(x.field, x.step);
+      const key =
+        x.field === 'kit'
+          ? `kit${x.card ? `:${x.card}` : ''}`
+          : x.list
+            ? `${x.list}:${sentKeys[x.list]?.[x.index]}`
+            : cellKey(x.field, x.step);
       said.set(key, said.has(key) ? `${said.get(key)} ; ${x.reason}` : x.reason);
     }
     // Le disque fait foi, que tout soit passé ou non : on le relit, puis la
@@ -1103,7 +1357,9 @@ $('c-save').onclick = async () => {
     // rangs refusé garde sa saisie — sauf si c'est le disque qui avait changé
     // (`stale`) : il montre alors le disque. Les listes de textes de même :
     // une liste que le disque porte maintenant telle quelle est relue de lui,
-    // une liste refusée garde ses lignes, le refus sur la sienne.
+    // une liste refusée garde ses lignes, le refus sur la sienne. Les chips :
+    // une carte que le disque porte maintenant comme saisie n'est plus
+    // modifiée (`kitPrune`, au chargement), une carte refusée garde sa saisie.
     const pending = [...cells.values()];
     const typed = { prio, tags };
     await load(id, true);
@@ -1140,12 +1396,16 @@ sections.register('character', {
   init: () => {
     // `#character/<id>` ouvre l'onglet sur la fiche de ce perso, et
     // `#character/<id>/<sous-onglet>` sur ce sous-onglet (un lien, le banc de
-    // captures). `lib.js` ne connaît que `#character` : c'est le clic sur
-    // l'onglet qui l'ouvre.
-    const [, open, tab] = /^#character\/([^/]+)(?:\/([a-z-]+))?$/.exec(location.hash) ?? [];
+    // captures) ; `…/skills/picker/<n>` y ouvre le picker d'effets de la n-ième
+    // carte (à partir de 1), sans que la page l'écrive dans l'adresse.
+    // `lib.js` ne connaît que `#character` : c'est le clic sur l'onglet qui
+    // l'ouvre.
+    const [, open, tab, pick] =
+      /^#character\/([^/]+)(?:\/([a-z-]+))?(?:\/picker\/(\d+))?$/.exec(location.hash) ?? [];
     if (open) {
       wanted = decodeURIComponent(open);
       if (subsOn().some((s) => s.id === tab)) sub = tab;
+      if (sub === 'skills') wantedPick = Number(pick ?? 0);
       document.querySelector('#tabs [data-tab="character"]')?.click();
     }
     who();
@@ -1161,7 +1421,12 @@ sections.register('character', {
       .then((r) => {
         roster = r.roster;
         $('c-pick').disabled = false;
-        return wanted ? load(wanted) : pickIfEmpty();
+        if (!wanted) return pickIfEmpty();
+        return load(wanted).then(() => {
+          const card = sheet.kit.cards[wantedPick - 1];
+          wantedPick = 0;
+          if (card && sub === 'skills') pickEffect(card);
+        });
       })
       .catch((e) => {
         wanted = null;

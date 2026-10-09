@@ -2,7 +2,10 @@
  * quick/ui/hero-picker — le picker de héros, PARTAGÉ : la modale où l'on
  * choisit un perso (« Fiche perso », Gear reco) ou plusieurs (les partenaires
  * d'une synergie) — recherche, pastilles d'élément et de classe, grille de
- * visages.
+ * visages. Elle sert aussi à choisir AUTRE CHOSE qu'un héros, quand ce n'est
+ * qu'une question de contenu (un effet du glossaire, « Fiche perso » › Skills) :
+ * l'appelant dessine alors ses tuiles (`tile`, `rows`) et nomme ce qu'on y
+ * cherche (`placeholder`, `none`).
  *
  * Sa modale est À LUI : posée dans `<body>` au premier appel, stylée par
  * `hero-picker.css` (classes `hp-`), elle s'ouvre donc de n'importe quelle
@@ -21,8 +24,9 @@
 
 /**
  * Un perso du roster. `element` manque quand l'appelant ne le connaît pas : la
- * tuile se passe de son icône, la rangée de sa pastille.
- * @typedef {{ id: string, name: string, class: string, element?: string }} Hero
+ * tuile se passe de son icône, la rangée de sa pastille — de même `class`, pour
+ * ce qui n'est pas un héros.
+ * @typedef {{ id: string, name: string, class?: string, element?: string }} Hero
  */
 
 /**
@@ -51,6 +55,14 @@
  * @property {(hero: any) => number | undefined} [count] La pastille d'une tuile
  *   (son nombre de builds), atténuée à zéro.
  * @property {(hero: any) => string} [hint] Le `title` d'une tuile ; sans lui, le nom.
+ * @property {(item: any) => string} [tile] Le contenu d'une tuile, dessiné par
+ *   l'appelant (déjà échappé) ; sans lui, le visage du héros, son élément, son nom.
+ * @property {boolean} [rows] Des tuiles en lignes (une icône, un nom à côté),
+ *   sur plusieurs colonnes, au lieu de la grille de visages.
+ * @property {string} [placeholder] Ce que la recherche invite à chercher ; sans
+ *   lui, « Chercher un perso… ».
+ * @property {string} [none] Ce que dit une recherche sans résultat ; sans lui,
+ *   « Aucun perso ne correspond. ».
  */
 
 /** L'ordre des pastilles, celui du site (`ELEMENT_ORDER`, `CLASS_ORDER`). */
@@ -65,6 +77,9 @@ const shared = heroFilters();
 const SEARCH =
   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>';
 
+const PLACEHOLDER = 'Chercher un perso…';
+const NONE = 'Aucun perso ne correspond.';
+
 const MARKUP = `<div class="hp-panel" role="dialog" aria-modal="true" aria-labelledby="hp-title">
   <div class="hp-head">
     <strong id="hp-title"></strong>
@@ -72,12 +87,12 @@ const MARKUP = `<div class="hp-panel" role="dialog" aria-modal="true" aria-label
     <button class="btn icon del" id="hp-close" type="button" aria-label="Fermer" title="Fermer">✕</button>
   </div>
   <div class="hp-top">
-    <div class="hp-search">${SEARCH}<input id="hp-q" autocomplete="off" placeholder="Chercher un perso…" aria-label="Chercher un perso" /></div>
+    <div class="hp-search">${SEARCH}<input id="hp-q" autocomplete="off" /></div>
     <div class="hp-filters" id="hp-filters"></div>
   </div>
   <div class="hp-body">
     <div class="hp-tiles" id="hp-results"></div>
-    <div class="empty" id="hp-none" hidden>Aucun perso ne correspond.</div>
+    <div class="empty" id="hp-none" hidden></div>
   </div>
   <div class="hp-foot" id="hp-foot" hidden></div>
 </div>`;
@@ -158,7 +173,7 @@ function shown() {
     (c) =>
       (!q || c.name.toLowerCase().includes(q)) &&
       (!filters.elements.size || (c.element !== undefined && filters.elements.has(c.element))) &&
-      (!filters.classes.size || filters.classes.has(c.class)) &&
+      (!filters.classes.size || (c.class !== undefined && filters.classes.has(c.class))) &&
       (!seg || seg.test(c, filters.seg)),
   );
 }
@@ -169,9 +184,11 @@ function tile(c) {
   const { opts, sel } = open;
   const on = opts.multi ? sel.includes(c.id) : c.id === opts.chosen;
   const n = opts.count?.(c);
-  return `<button class="hp-tile" type="button" data-id="${esc(c.id)}" title="${esc(opts.hint?.(c) ?? c.name)}"${
+  const head = `<button class="hp-tile" type="button" data-id="${esc(c.id)}" title="${esc(opts.hint?.(c) ?? c.name)}"${
     opts.multi ? ` aria-pressed="${on}"` : on ? ' aria-current="true"' : ''
-  }><span class="hp-ring${on ? ' on' : ''}"><img class="hp-fi" src="${src(
+  }>`;
+  if (opts.tile) return `${head}${opts.tile(c)}</button>`;
+  return `${head}<span class="hp-ring${on ? ' on' : ''}"><img class="hp-fi" src="${src(
     `characters/faceicon/FI_${esc(c.id)}`,
   )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
     c.element ? icon('element', c.element, 'hp-el') : ''
@@ -340,6 +357,10 @@ export function openHeroPicker(opts) {
   };
   el('hp-title').textContent = opts.title;
   search().value = '';
+  search().placeholder = opts.placeholder ?? PLACEHOLDER;
+  search().setAttribute('aria-label', (opts.placeholder ?? PLACEHOLDER).replace(/…$/, ''));
+  el('hp-none').textContent = opts.none ?? NONE;
+  el('hp-results').classList.toggle('rows', Boolean(opts.rows));
   el('hp-foot').hidden = !opts.multi;
   modal.hidden = false;
   draw(true);

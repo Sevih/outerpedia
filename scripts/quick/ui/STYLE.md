@@ -579,13 +579,15 @@ recopié faute de composant commun), `.j-card` (la carte de `/changelog`).
 ## Le picker de héros (`ui/hero-picker.mjs`, lot C11)
 
 La modale où l'on choisit un perso — ou plusieurs —, PARTAGÉE : « Fiche
-perso » et Gear reco l'ouvrent, les synergies s'en serviront en multi-choix.
+perso » et Gear reco l'ouvrent, les synergies s'en servent en multi-choix. Et
+autre chose qu'un héros, quand ce n'est qu'une question de contenu : le
+sous-onglet Skills y choisit un EFFET du glossaire (B39).
 Elle n'est à aucun onglet : `openHeroPicker(opts)` la pose dans `<body>` au
 premier appel (classes `hp-`, `ui/hero-picker.css`), aux mesures du picker de
 pièces de Gear reco. Une section n'a donc rien à écrire dans son HTML.
 
 ```
-openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, count?, hint? })
+openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, count?, hint?, tile?, rows?, placeholder?, none? })
 .hp-modal (voile, fixe)  >  .hp-panel (720 px, 720 px de haut au plus)
   .hp-head     titre en capitales · badge « 129 persos » (multi : « 2 choisis sur 129 » ; `tally` le remplace) … ✕
   .hp-top      la recherche (36 px, « Chercher un perso… ») ; dessous .hp-filters :
@@ -595,6 +597,11 @@ openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filte
                  `count` : une pastille en haut à droite (le nombre de builds, atténuée à zéro) ; en multi-choix, ✓ sur une tuile cochée
                .empty « Aucun perso ne correspond. »
   .hp-foot     en multi-choix seulement : les noms cochés, dans l'ordre des clics (« Aucun perso. ») … [Annuler] [Valider]
+autre chose que des héros (le picker d'effets de Skills) :
+  `tile(item)`  le contenu d'une tuile, dessiné par l'appelant, dans le bouton du picker — ni visage ni anneau ; son CSS est à l'appelant, sous `.hp-modal`
+  `rows`        .hp-tiles.rows : des tuiles en LIGNES (une icône, le nom à côté, 13 px), 200 px au moins, trois colonnes dans le panneau
+  `placeholder` la recherche (« Chercher un effet… », aussi son `aria-label`) ; `none` : le vide (« Aucun effet ne correspond. »)
+  un item sans `class` ni `element` : aucune pastille — l'appelant passe SES `filters`, ceux du module pourraient porter une classe enfoncée
 ```
 
 Choix unique : la tuile cliquée part à `onPick(id)` et la modale se ferme —
@@ -609,11 +616,11 @@ le panneau ; à la fermeture le focus revient à `opener()`.
 
 ## Éditeurs — croquis
 
-### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42)
+### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42 ; Skills — B39)
 
 Ce que le wiki sait d'UN perso, en sous-onglets comme sur sa fiche du site :
-l'éditeur « Character » de l'admin et ses outils Pro / Con et Synergy. Croquis
-du rendu :
+l'éditeur « Character » de l'admin, son onglet « Skills (buff/debuff) » et ses
+outils Pro / Con et Synergy. Croquis du rendu :
 
 ```
 .head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
@@ -622,7 +629,7 @@ du rendu :
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
 .c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [Gear reco]
-   les sous-onglets pas encore portés sont là, `disabled`, `title` = le lot qui les apporte (Skills B39, Gear reco B40)
+   le sous-onglet pas encore porté est là, `disabled`, `title` = le lot qui l'apporte (Gear reco B40)
    un point accent = des changements pas encore enregistrés DANS ce sous-onglet, rouge = un refus ou une erreur
    clavier : ← → (les bouts se rejoignent), Début, Fin — parmi les sous-onglets allumés ; `tabindex` 0 sur l'actif, -1 ailleurs
 #c-panel (le `tabpanel`) — Fiche : .c-cols, deux colonnes de .card (une seule sous 1000 px)
@@ -651,8 +658,20 @@ du rendu :
      .c-heroes : des tuiles (.c-hero : portrait 44 px cadré sur le visage, nom, ✕) puis [＋ héros] (.btn.ghost.sm — le picker de héros en `multi`, les héros du groupe cochés, le perso de la fiche exclu)
      la raison : le TEXTE d'une ligne, comme un pro
   sous la pile : [＋ groupe] [Traduire] · badge error · le refus du champ ; « Aucune synergie. »
+#c-panel — Skills : .c-cols, une .card.c-skill par carte de skill, deux par rangée (une seule sous 1000 px) — mains, passifs, chaîne, duo
+  .card   card-head : icône du skill 36 px (le duo n'en a pas) · nom · id · type (chasse fixe) · badge edit « modifié » · badge ko « refusé »
+     .c-desc   la description telle que le jeu l'écrit, en anglais : ses couleurs, ses sauts de ligne (`gameText` de `gear-view.mjs`)
+     .c-chips  les chips d'effets, puis [＋ effet] (.btn.ghost.sm)
+        une chip = la `.chip` de la charte : tuile de l'effet 22 px (.c-fx : fond noir, l'icône en masque teinté buff ou debuff ; cadre vide sans icône) · nom · ✕ (`title` de la chip = sa ref)
+        ✕ sur une chip du kit la MASQUE : pointillés, atténuée, nom barré, et [rétablir] à la place de ✕
+        un effet AJOUTÉ : badge edit « ajoutée », son ✕ le retire
+        bord accent (.dirty) : la chip n'est pas dans l'état que le disque porte
+     .c-err    le refus de la carte, en rouge
+  [＋ effet] ouvre le picker partagé sur le catalogue des effets : « Ajouter un effet — <skill> », la recherche sur le nom, [Tous | Buffs | Debuffs], des tuiles en lignes (tuile 28 px + nom) ; les homonymes sont départagés (« Barrier (buff) », « Barrier (irremovable, buff) ») ; un effet déjà ajouté à la carte n'est plus proposé
+  sous les cartes : le refus du champ entier (cartes illisibles au serveur) ; .empty « Kit illisible : … » / « Aucune carte de skill. »
 .card.ko (une carte qui porte un refus ou une erreur) : bord danger
 le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies` · `skills` · `gear` ; `#character/<id>` = `fiche`, un sous-onglet éteint aussi) — la page l'écrit au choix du perso et du sous-onglet : recharger y revient
+   `#character/<id>/skills/picker/<n>` ouvre en plus le picker d'effets de la n-ième carte (à partir de 1) — pour le banc, la page ne l'écrit pas
 ```
 
 Le roster vient de `GET /api/character/roster`, lu UNE fois ; la fiche d'un
@@ -702,6 +721,26 @@ le point rouge sur son sous-onglet — y retoucher le lève. `refs` de l'état
 encore lu par la page : ce n'est PAS le contrôle (à apparence égale elle ne
 garde qu'une clé d'effet).
 
+Skills (B39) porte l'éditeur de kit de l'admin (`CharacterKitEditor`) : la
+présentation seule, la donnée extraite reste fidèle aux tables. `kit` de
+l'état sert tout — les cartes et leurs chips telles que l'admin les calcule
+(`characterKitCards` de `src/lib/admin/character-kit.ts`, sur l'extraction du
+jeu ; les icônes de skill sont celles du site), ce que
+`data/curated/character-skills.json` masque (`chipHide`) et ajoute
+(`chipAdd`) sur CES cartes, le catalogue des effets et le dossier de leurs
+icônes ; sans tables du jeu sur le poste, `kit.error` le dit et le reste de la
+fiche se lit. Un geste sur une chip redessine SA carte seule (le focus reste
+sur la chip, ou va à « ＋ effet ») ; la savebar compte chaque chip masquée,
+rétablie, ajoutée ou retirée, le point du sous-onglet suit. « Enregistrer »
+joint `kit` à l'envoi de la fiche : les seules cartes modifiées, leurs deux
+listes ENTIÈRES (une ref héritée du fichier, que la carte ne montre pas, y
+reste). Le serveur recalcule les cartes du perso, n'écrit que les listes qui
+bougent (`applyCharacterKitCuration`) et refuse, SITUÉ à la carte (`card`),
+une ref ajoutée qui n'est pas une chip de la carte ou un effet du catalogue ;
+le commit — toujours UN, `chore(characters): <perso>` — porte alors AUSSI
+`character-skills.json`. Une carte refusée garde sa saisie, cerclée, son
+message dessous ; y retoucher le lève.
+
 Propres à l'onglet, dans `tabs/character.css` : `.c-char`, `.c-who` et
 consorts (l'en-tête de Gear reco, recopié), `.c-tabs`, `.c-cols`, `.c-card`,
 `.c-body`, `.c-cell`, `.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée),
@@ -709,7 +748,10 @@ consorts (l'en-tête de Gear reco, recopié), `.c-tabs`, `.c-cols`, `.c-card`,
 `.c-pv-lang`, `.c-seg`, `.c-lines`, `.c-line`, `.c-text`, `.c-pv`, `.c-trs`,
 `.c-ko`, `.c-syn`, `.c-group`, `.c-heroes`, `.c-hero` — et les jetons et
 classes de couleur des segments (`.pv-*`, `text-buff`…), recopiés de
-`gear.css` où ils vivent sous `#tab-gear`.
+`gear.css` où ils vivent sous `#tab-gear` ; pour Skills : `.c-skill`,
+`.c-skico`, `.c-skid`, `.c-desc`, `.c-chips`, `.c-chip`, `.c-chn`, et `.c-fx`,
+la tuile d'effet de l'onglet Effets (`.x-ico`), recopiée avec ses deux
+teintes — elle vaut aussi sous `.hp-modal`, pour le picker d'effets.
 
 ### Effets (`wide`, fait — B41)
 

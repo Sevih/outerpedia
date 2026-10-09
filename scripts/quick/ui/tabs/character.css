@@ -1,7 +1,8 @@
 /* Onglet « Fiche perso » : le perso choisi, la savebar, les sous-onglets, le
-   sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos) et
-   les deux sous-onglets de textes, « Pros / Cons » et « Synergies ». Le
-   reste — carte, `.form`, `.savebar`, `.btn`, `.badge`, `.tab` — vient de
+   sous-onglet « Fiche » (rangs, paliers, priorité de skills, tags, vidéos),
+   les deux sous-onglets de textes, « Pros / Cons » et « Synergies », et
+   « Skills » (les cartes de skills, leurs chips d'effets). Le reste — carte,
+   `.form`, `.savebar`, `.btn`, `.badge`, `.chip`, `.tab` — vient de
    `quick.css` ; le picker de héros, de `hero-picker.css`. Les ids `c-` voisinent
    avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. */
 
@@ -606,6 +607,111 @@
 }
 #tab-character .pv-fx img,
 #tab-character .pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------- « Skills »
+   Une carte par skill, deux par rangée (`.c-cols`) : l'icône du skill, son nom,
+   son id et son type en tête ; sa description telle que le jeu l'écrit ; puis
+   ses chips d'effets et « ＋ effet ». */
+#tab-character .c-skill .card-head {
+  flex-wrap: wrap;
+}
+#tab-character .c-skico {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: contain;
+}
+#tab-character .c-skid {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-character .c-desc {
+  color: var(--content-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+#tab-character .c-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+/* Une chip d'effet : la `.chip` de la charte, sa tuile, son nom, son bouton.
+   Masquée : pointillés, atténuée, le nom barré, « rétablir » au lieu de ✕.
+   Bord accent : son état n'est pas celui du disque. */
+#tab-character .c-chip {
+  gap: 6px;
+  padding-left: 4px;
+}
+#tab-character .c-chip.dirty {
+  border-color: var(--accent);
+}
+#tab-character .c-chip.off {
+  border-style: dashed;
+  background: transparent;
+}
+#tab-character .c-chip.off .c-fx,
+#tab-character .c-chip.off .c-chn {
+  opacity: 0.5;
+}
+#tab-character .c-chip.off .c-chn {
+  text-decoration: line-through;
+}
+#tab-character .c-chip .badge {
+  height: 18px;
+  padding: 0 6px;
+}
+#tab-character .c-chip .btn.sm {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+/* La tuile d'un effet, celle du site (`EffectIconTile`) et de l'onglet Effets
+   (`.x-ico`) : fond noir, l'icône en masque teinté de sa nature — les teintes
+   de `globals.css`. Elle vit aussi dans le picker d'effets, posé dans `<body>`. */
+#tab-character .c-fx,
+.hp-modal .c-fx {
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #000;
+}
+.hp-modal .c-fx {
+  width: 28px;
+  height: 28px;
+}
+#tab-character .c-fx.none,
+.hp-modal .c-fx.none {
+  border: 1px dashed var(--line);
+  background: transparent;
+}
+#tab-character .c-fx i,
+.hp-modal .c-fx i {
+  position: absolute;
+  inset: 0;
+  background: var(--buff-tint);
+  -webkit-mask: var(--c-src) center / contain no-repeat;
+  mask: var(--c-src) center / contain no-repeat;
+  mask-mode: luminance;
+}
+#tab-character .c-fx.debuff i,
+.hp-modal .c-fx.debuff i {
+  background: var(--debuff-tint);
+}
+#tab-character .c-fx img,
+.hp-modal .c-fx img {
   position: absolute;
   inset: 0;
   width: 100%;
