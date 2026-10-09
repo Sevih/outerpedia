@@ -7,6 +7,28 @@
 
 ## 2026-10-09
 
+- **Relecture B40 (Fable) — Gear reco sous la « Fiche perso », validé ; la
+  fiche est portée en entier** : périmètre tenu (dix-sept fichiers ; hors
+  quick, le seul est le menu admin qui perd « Character »).
+  `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 770 cas verts.
+  Banc rejoué sur un quick isolé (:4885, clés vidées, que des GET) :
+  `#character/2000055/gear/build/2` et l'ancien `#gear/2000055/build/2`
+  rendent deux captures identiques à l'octet (`cmp`) — la redirection tient ;
+  la carte du build « High Crit » d'Aer sous l'en-tête de la fiche, avec sa
+  barre des builds, ses onglets, ses pickers (celui des armes ouvert par
+  `…/picker/weapons`, « 1 choisie sur 17 · striker ») et la ligne qui dit
+  que « Enregistrer » de la fiche n'envoie pas les builds. `GROUPS` : Données
+  n'a plus que Rangs et Tables du jeu, Éditeurs porte Fiche perso et Effets ;
+  plus un `#tab-gear` ni un renvoi vers `gear` dans `lib.js`, `index.html`,
+  le tableau de bord ou les bannières. `gear.js` exporte `mountGear`,
+  `gearChanges`, `gearReset` et ne s'inscrit plus. Dans la charte, rien à
+  redire. Étape 9 de la migration CLOSE : C11, B42, B39, B40 — l'éditeur
+  Character, Pro / Con et Synergy de l'admin n'ont plus de lien de menu. À
+  Sevih : ses contrôles au TODO (dont les deux barres collantes) ; les restes
+  relevés par l'agent (options orphelines de `hero-picker.mjs`, roster
+  inutile de `gearRecoState`) attendront un lot A de ménage.
+
 - **quick : Gear reco devient le sous-onglet « Gear reco » de la « Fiche
   perso », son UI intacte (lot B40, étape 9 de la migration, fin)** — décision
   de Sevih du 08/10 : « sous-onglet de la fiche, mais on garde bien son UI —
