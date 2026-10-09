@@ -273,6 +273,25 @@ publier** : `collect-comics` régénère le manifeste depuis le pool LOCAL, donc
 pool partiel amputerait la galerie (un garde-fou retient le manifeste dans ce
 cas, cf. `datagen/assets/collect-comics.ts`).
 
+### Rejouer le build sans `.gamedata/` (session cloud)
+
+`datagen:build` ne lit qu'une fraction des 22 Go : les tables, le dump, le
+manifeste, les mp3 de l'OST, et des images leur seul nom et leur en-tête PNG.
+`pnpm datagen:snapshot <dossier>` recopie cette fraction (~330 Mo) dans le clone
+du dépôt privé `outerpedia-gamedata`, à committer et pousser après chaque patch.
+La liste exacte et sa raison sont en tête de `datagen/snapshot.ts`.
+
+Sur une machine sans datamine, avec les deux dépôts clonés côte à côte et
+`ffprobe` installé :
+
+```bash
+cp -r ../outerpedia-gamedata/editorial/wallpapers .editorial/wallpapers   # après mkdir -p .editorial
+GAMEDATA_ROOT=../outerpedia-gamedata pnpm datagen:build
+```
+
+`data/extracted/` en sort identique à celui de la machine outillée. L'extraction
+(bundles → tables) et la collecte d'images n'y tournent pas.
+
 ---
 
 ## Récupérer les données du jeu

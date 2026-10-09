@@ -15,13 +15,16 @@ import { closeSync, openSync, readSync } from 'node:fs';
 /** Signature PNG (8 premiers octets), en hexa. */
 const PNG_SIGNATURE = '89504e470d0a1a0a';
 
+/** Octets d'en-tête qui suffisent à `readPngSize` (signature + début d'IHDR). */
+export const PNG_HEADER_BYTES = 24;
+
 /** Taille d'un PNG via son en-tête, `null` si illisible ou non-PNG. */
 export function readPngSize(path: string): { w: number; h: number } | null {
   try {
-    const buf = Buffer.alloc(24);
+    const buf = Buffer.alloc(PNG_HEADER_BYTES);
     const fd = openSync(path, 'r');
     try {
-      readSync(fd, buf, 0, 24, 0);
+      readSync(fd, buf, 0, PNG_HEADER_BYTES, 0);
     } finally {
       closeSync(fd); // fermé même si la lecture jette (pas de fd fuité)
     }

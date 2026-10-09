@@ -7,6 +7,23 @@
 
 ## 2026-10-09
 
+- **datagen : `pnpm datagen:snapshot` — rejouer le build sans `.gamedata/`
+  (hors lot)** : une session cloud ne voit que ce que git suit, donc pas les
+  22 Go de la machine de datamine. Or `datagen:build` n'en lit qu'une fraction :
+  les tables, `dump.cs`, `manifest.dat`, les mp3 de l'OST, et des images leur
+  seul nom et leur en-tête PNG de 24 octets. `datagen/snapshot.ts` recopie
+  cette fraction (~330 Mo) dans le clone du dépôt privé `outerpedia-gamedata`,
+  à pousser après chaque patch ; il refuse une destination qui recouvre
+  `.gamedata/` ou qui n'est pas un instantané (il tronque les images et purge
+  ce qu'il n'a pas écrit). Preuve : deux clones neufs (outerpedia + le paquet,
+  sans `.gamedata`, `.editorial` ni `.env.local`) redonnent `data/extracted/`
+  à l'identique, 65 fichiers sur 65, version 1.11.404. Leçon : c'est ce test
+  sur clone neuf qui a montré que `wallpapers.ts` lit aussi la catégorie
+  Outerpedia de `.editorial/wallpapers` — invisible tant que le pool local
+  existe. Un générateur qui lit une nouvelle source l'ajoute à `snapshot.ts`.
+  Non éprouvé en vrai cloud : `pnpm install`, la version de `ffprobe`.
+  Mode d'emploi : `datagen/README.md`, § « Rejouer le build sans `.gamedata/` ».
+
 - **Relecture B40 (Fable) — Gear reco sous la « Fiche perso », validé ; la
   fiche est portée en entier** : périmètre tenu (dix-sept fichiers ; hors
   quick, le seul est le menu admin qui perd « Character »).

@@ -27,12 +27,12 @@ export function parseResVersion(tail: string): string | null {
 }
 
 /** Lit `"version":"X.Y.Z"` en fin de `manifest.dat` (256 derniers octets). */
-export function buildGameVersion(): GameVersion | null {
-  if (!existsSync(MANIFEST)) return null;
-  const size = statSync(MANIFEST).size;
+export function buildGameVersion(manifest = MANIFEST): GameVersion | null {
+  if (!existsSync(manifest)) return null;
+  const size = statSync(manifest).size;
   const window = Math.min(size, 256);
   const buf = Buffer.alloc(window);
-  const fd = openSync(MANIFEST, 'r');
+  const fd = openSync(manifest, 'r');
   try {
     readSync(fd, buf, 0, window, size - window);
   } finally {
