@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.83",
+        "--browser",
+        "firefox",
+        "--headless",
+        "--isolated",
+        "--ignore-https-errors",
+        "--output-dir",
+        "/tmp/playwright-mcp",
+        "--blocked-origins",
+        "https://quick.outerpedia.local;http://localhost:4747;http://127.0.0.1:4747"
+      ],
+      "env": {}
+    }
+  }
+}
