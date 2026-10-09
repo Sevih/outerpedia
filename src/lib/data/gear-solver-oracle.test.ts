@@ -70,28 +70,73 @@ const COLUMN_KEY: Record<string, StepStatKey> = {
 
 type Layer = 'white' | 'full';
 
+/** Qui le code du client (`outerpedia-gamedata/apk/dumped/src/`, 1.4.18) donne gagnant. */
+type Verdict = 'gear-solver' | 'wiki' | 'aucun';
+
 /**
- * ÉCARTS CONNUS — la fiche du wiki a tort, le solver a raison (audit des
- * doublons outerpedia ↔ gear-solver, PR #51, `docs/audit-doublons-solver.md`).
+ * ÉCARTS CONNUS — audit des doublons outerpedia ↔ gear-solver (PR #51,
+ * `docs/audit-doublons-solver.md`), attribués par le code du client décompilé.
  * Le test exige qu'ils divergent ENCORE, sur exactement ces couches : le jour où
  * la fiche est corrigée, il échoue, et c'est cette liste qu'on vide.
+ *
+ * Ce que dit le client, pour une fiche hors combat (`CCharacterData.CalcStat`) :
+ *   - un perso fusionné garde l'ID de son perso d'ORIGINE (`Initialize` reçoit
+ *     `CharID`, la fusion ne renseigne que `FusionCharID`) ; `GetEvolutionStat`
+ *     lit `GetCharacterEvolutionStatTempletList(ID)`, donc les évolutions du
+ *     perso d'origine — la règle du solver (§ 2.2) ;
+ *   - `InitStatPremiumBuff` ← `CSkillManager.GetStatPremiumBuffList` prend, sur
+ *     TOUS les skills du perso (pour un fusionné, les `SkillIDs` du templet de
+ *     fusion, Skill_23 compris), TOUS les buffs `BT_STAT_PREMIUM` de création
+ *     `PASSIVE` ciblant `ME` ou `MY_TEAM`, au niveau courant du skill ;
+ *     `CStatValue.SetBuffPremiumValue` les cumule tous. Ni « premier buff », ni
+ *     Skill_23 à la place de Skill_22 : la règle du solver (§ 2.4) ; et les
+ *     passifs permanents de S1/S2/S3 y entrent comme les autres (§ 2.5).
+ *
+ * Ce que ni l'un ni l'autre ne fait : `CalcBasicStats` lit `Templet`, celui de
+ * l'ID d'origine, donc les Min/Max du perso d'origine. Les deux côtés prennent
+ * ceux du templet 27xxxxx ; ils ne diffèrent que pour Snow et Lisha (Snow : HP
+ * 301-3070 à l’origine, 519-3530 au templet de fusion). Ces deux bases sont
+ * donc fausses des deux côtés, sans être un écart wiki ↔ solver.
  */
-const KNOWN_DIVERGENCES: Record<string, { layers: Layer[]; why: string }> = {
-  // § 2.2 — `progression.ts` indexe les évolutions par l'id du Core Fusion, qui
-  // n'a pas de ligne dans CharacterEvolutionStatTemplet (le solver suit
-  // CharacterFusionTemplet). § 2.4 — la fiche ne garde qu'un buff premium, le
-  // solver applique passif de classe + passif de noyau.
-  '2700003': { layers: ['white', 'full'], why: 'Core Fusion Snow : évolutions + passifs' },
-  '2700005': { layers: ['white', 'full'], why: 'Core Fusion Lisha : évolutions + passifs' },
-  '2700037': { layers: ['white', 'full'], why: 'Core Fusion Veronica : évolutions + passifs' },
-  '2700043': { layers: ['white', 'full'], why: 'Core Fusion Eternal : évolutions + passifs' },
-  '2700056': { layers: ['white', 'full'], why: 'Core Fusion Notia : évolutions + passifs' },
-  '2700070': { layers: ['white', 'full'], why: 'Core Fusion Epsilon : évolutions + passifs' },
-  // § 2.5 — passif S2 permanent (BT_STAT_PREMIUM sur soi), couche absente de la
-  // fiche : la portion blanche est juste, la fiche affichée ne l'est pas.
-  '2000017': { layers: ['full'], why: 'Claire : S2 +10 % ATK' },
-  '2000065': { layers: ['full'], why: 'Ame : S2 +25 CHC' },
-  '2000095': { layers: ['full'], why: 'Bell Cranel : S2 +30 % ATK' },
+const KNOWN_DIVERGENCES: Record<string, { layers: Layer[]; why: string; verdict: Verdict }> = {
+  // § 2.2 + § 2.4 — évolutions (absentes de la fiche) et passifs classe + noyau
+  // (réduits à un buff). Le client confirme le solver sur les deux points.
+  '2700003': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Snow : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  '2700005': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Lisha : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  '2700037': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Veronica : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  '2700043': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Eternal : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  '2700056': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Notia : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  '2700070': {
+    layers: ['white', 'full'],
+    why: 'Core Fusion Epsilon : évolutions + passifs',
+    verdict: 'gear-solver',
+  },
+  // § 2.5 — passif S2 permanent (BT_STAT_PREMIUM PASSIVE sur soi), couche
+  // absente de la fiche : la portion blanche est juste, la fiche affichée ne
+  // l'est pas. Le client compte ce buff au niveau courant de S2.
+  '2000017': { layers: ['full'], why: 'Claire : S2 +10 % ATK', verdict: 'gear-solver' },
+  '2000065': { layers: ['full'], why: 'Ame : S2 +25 CHC', verdict: 'gear-solver' },
+  '2000095': { layers: ['full'], why: 'Bell Cranel : S2 +30 % ATK', verdict: 'gear-solver' },
 };
 
 /** Écarts d'un perso sur une couche, sous la forme « lv100 HP wiki 5202 ≠ 7171 ». */
