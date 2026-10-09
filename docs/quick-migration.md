@@ -229,11 +229,11 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 11. **Editor › EE**
     `EeCuratedEditor`
-    - Agacements :
+    - Agacements : ça devrais limite etre une tab dans l'edition du personnage vu qu'un EE est lié a un ou deux perso max
 
 12. **Editor › Monster**
     `MonsterKitEditor`, `MonsterStatsCard`, `MonsterActions`
-    - Agacements :
+    - Agacements : c'est le bordel (surtout la partie versionnage). et de plus on devrait mettre en avant ceux utiliser dans les guides plutot que tous. ce que je veux dire c'est que l'on a quoi 100 guide donc pas sur que avoir les data de tout les monstres dans l'editor soit pertinent.
 
 13. **Editor › Item**
     `ItemCuratedEditor`, `ItemsBrowser`
@@ -241,21 +241,21 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 14. **Misc › Gear presets**
     `GearPresetsEditor` (318 l.)
-    - Agacements :
+    - Agacements : c'etait surtout utile quand j'ai refait le site mais maintenant pllus vraiment
 
 15. **Misc › Tag control**
     page `tags`
-    - Agacements :
+    - Agacements : ça ça devrais plus etre dans le pnpm commit en bloquant (on refuse de livrer si des tag ne sont pas valide) que dans les outils d'admin
 
 ### 3. Guides (lot F, en plusieurs écrans si besoin)
 
 16. **Guide editor › Overview + catégories de boss**
     `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos
-    - Agacements :
+    - Agacements : deja certaines categorie n'existe plus (genre les AL ou monad gates)
 
 17. **Guides généraux**
     `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`
-    - Agacements :
+    - Agacements : ui pas pratique
 
 ### 4. Extractor (plusieurs lots, en dernier)
 
