@@ -44,7 +44,7 @@ export interface CatSpec {
    * offrait les 69 combats du jeu là où 5 sont valides, homonymes compris — on
    * ne choisissait plus, on cherchait. Un `group` hors mode ne casse pas le
    * rendu (il existe), il fait juste un guide qui parle d'autre chose : c'est
-   * une garde d'ERGONOMIE, et `guide-categories.test.ts` la tient à jour en la
+   * une garde d'ERGONOMIE, et `guide-specs.test.ts` la tient à jour en la
    * confrontant à ce que les guides utilisent réellement.
    */
   groupModes?: readonly string[];

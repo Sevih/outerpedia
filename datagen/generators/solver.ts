@@ -1,8 +1,10 @@
 /**
  * Générateur SOLVER — les tables dérivées finies que l'app desktop gear-solver
  * télécharge telles quelles (`data/generated/solver/*.json`). Port FIDÈLE de
- * `gear-solver/data/build.mjs` (source de vérité du contrat — ses commentaires
- * expliquent chaque choix ; ne rien « corriger » silencieusement).
+ * l'ancien `gear-solver/data/build.mjs`, aujourd'hui supprimé : CE fichier est
+ * désormais la source de vérité du contrat (ne rien « corriger »
+ * silencieusement). Côté consommateur, le schéma est décrit dans
+ * `gear-solver/docs/data-schema.md` et typé dans `packages/core/src/gamedata.ts`.
  *
  * Différences assumées avec l'original (spec de portage, 2026-08-12) :
  *   - source = `.gamedata/parsed` via `loadTable` (mêmes colonnes que l'ancien
@@ -81,7 +83,7 @@ function setProse(e: SetsViewEffect | null | undefined): string | null {
   return null;
 }
 
-// ---- helpers fidèles à build.mjs ------------------------------------------------
+// ---- helpers fidèles à l'ancien build.mjs ---------------------------------------
 const SLOT: Record<string, string> = {
   ITS_EQUIP_WEAPON: 'weapon',
   ITS_EQUIP_HELMET: 'helmet',
@@ -113,7 +115,7 @@ function textMap(table: string): Map<string, string | null> {
   return new Map(loadTable(table).map((t) => [t.ID, t[lang] ?? null]));
 }
 
-/** `_num()` de build.mjs : 15.0 → "15", 1.5 → "1.5". */
+/** `_num()` de l'ancien build.mjs : 15.0 → "15", 1.5 → "1.5". */
 function jsNum(x: number): string {
   return x === Math.trunc(x) ? String(Math.trunc(x)) : String(x);
 }
@@ -129,7 +131,7 @@ function fmtTurn(buff: Row | undefined): string {
 }
 
 export interface SolverFiles {
-  /** nom de fichier (sans dossier) → contenu, dans l'ORDRE d'émission de build.mjs. */
+  /** nom de fichier (sans dossier) → contenu, dans l'ORDRE d'émission de l'ancien build.mjs. */
   files: [string, unknown][];
   /** `{hash, builtAt}` — idempotent contre le version.json COMMITTÉ. */
   version: { hash: string; builtAt: string };
@@ -573,7 +575,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
       nameForItem ??= textSkill.get(opt.NameID ?? '') ?? null;
       // Deux encodages coexistent (BuffID par palier vs BuffID partagé à deux
       // Levels) — le lookup au Level de la ligne, borné au max du buff, couvre
-      // les deux (cf. build.mjs).
+      // les deux (règle reprise de l'ancien build.mjs).
       const buffMaxLv = maxBuffLevel(buffIdStr);
       const lookupLv = Math.min(Number(opt.Level) || 1, buffMaxLv);
       tiers.push({
