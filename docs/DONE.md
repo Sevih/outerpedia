@@ -36,6 +36,11 @@
   un point de trop aux bas niveaux, taux ou fixe non tranché par capture) ; le
   passif de noyau est pris au niveau de fusion max. À contrôler à l'écran par
   Sevih : Snow fusionné, Ame (46 % de taux critique), Claire (1096 d'ATK).
+  Ajout à la demande de Sevih avant de pousser : une note sous la table des
+  stats (`page.character.stats.passives_note`, six langues) dit que les bonus
+  permanents des compétences sont inclus — passif de classe, passif de Core
+  Fusion, compétences au niveau max. Affichée seulement quand la fiche a de
+  tels passifs : 100 personnages sur 129.
 
 - **Quatre PR des sessions cloud fusionnées en local (hors lot)** : T6 `#54`
   (constantes de la génération lues de leurs tables, `singleValue` qui jette si

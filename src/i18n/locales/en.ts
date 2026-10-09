@@ -1252,6 +1252,8 @@ const en = {
   'page.character.stats.limit_break_cost': 'Limit Break cost',
   'page.character.stats.codex': 'Codex',
   'page.character.stats.quirks': 'Quirks',
+  'page.character.stats.passives_note':
+    'Permanent skill bonuses are included: class passive, Core Fusion passive, skills at max level.',
 
   // Monad Gate
   'monad.rewards': 'Rewards',

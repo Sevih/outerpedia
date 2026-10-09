@@ -381,6 +381,7 @@ export default async function CharacterDetail({
             transcend: t('page.character.toc.transcend'),
             codex: t('page.character.stats.codex'),
             quirks: t('page.character.stats.quirks'),
+            passivesNote: t('page.character.stats.passives_note'),
             on: t('common.on'),
             off: t('common.off'),
             cpTitle: t('page.character.cp_title'),

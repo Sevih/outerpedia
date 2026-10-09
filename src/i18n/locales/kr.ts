@@ -1209,6 +1209,8 @@ const kr: Record<TranslationKey, string> = {
   'page.character.stats.limit_break_cost': '한계 돌파 비용',
   'page.character.stats.codex': '도감',
   'page.character.stats.quirks': '기아스',
+  'page.character.stats.passives_note':
+    '스킬의 상시 보너스가 포함됩니다: 클래스 패시브, 코어 퓨전 패시브, 최대 레벨 스킬.',
 
   // Monad Gate
   'monad.rewards': '보상',

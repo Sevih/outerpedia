@@ -1257,6 +1257,8 @@ const fr: Record<TranslationKey, string> = {
   'page.character.stats.limit_break_cost': 'Coût du Limit Break',
   'page.character.stats.codex': 'Codex',
   'page.character.stats.quirks': 'Quirks',
+  'page.character.stats.passives_note':
+    'Les bonus permanents des compétences sont inclus : passif de classe, passif de Core Fusion, compétences au niveau max.',
 
   // Monad Gate
   'monad.rewards': 'Récompenses',

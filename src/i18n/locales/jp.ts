@@ -1222,6 +1222,8 @@ const jp: Record<TranslationKey, string> = {
   'page.character.stats.limit_break_cost': '限界突破コスト',
   'page.character.stats.codex': '図鑑',
   'page.character.stats.quirks': 'ギアス',
+  'page.character.stats.passives_note':
+    'スキルの常時ボーナスを含みます：クラスパッシブ、コアフュージョンのパッシブ、最大レベルのスキル。',
 
   // Monad Gate
   'monad.rewards': '報酬',
