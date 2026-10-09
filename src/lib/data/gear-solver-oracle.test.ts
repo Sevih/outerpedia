@@ -70,73 +70,117 @@ const COLUMN_KEY: Record<string, StepStatKey> = {
 
 type Layer = 'white' | 'full';
 
-/** Qui le code du client (`outerpedia-gamedata/apk/dumped/src/`, 1.4.18) donne gagnant. */
-type Verdict = 'gear-solver' | 'wiki' | 'aucun';
+/**
+ * Qui a raison selon le jeu : `gear-solver`, `wiki`, `aucun`, ou `partagé` (le
+ * solver a raison sur une partie, tort sur une autre — dit dans `detail`).
+ */
+type Verdict = 'gear-solver' | 'wiki' | 'aucun' | 'partagé';
+/** D'où vient le verdict : une capture prise en jeu, ou la seule lecture du code
+ * du client (`outerpedia-gamedata/apk/dumped/src/`, 1.4.18). */
+type Basis = 'capture' | 'code';
+
+interface KnownDivergence {
+  layers: Layer[];
+  why: string;
+  verdict: Verdict;
+  basis: Basis;
+  detail?: string;
+}
 
 /**
  * ÉCARTS CONNUS — audit des doublons outerpedia ↔ gear-solver (PR #51,
- * `docs/audit-doublons-solver.md`), attribués par le code du client décompilé.
- * Le test exige qu'ils divergent ENCORE, sur exactement ces couches : le jour où
- * la fiche est corrigée, il échoue, et c'est cette liste qu'on vide.
+ * `docs/audit-doublons-solver.md`), attribués par le code du client décompilé
+ * et, pour trois Core Fusion, par des captures en jeu (tâche T16 de
+ * `sevih-tool/docs/taches-cloud-2026-10-09.md`, section « Les captures » :
+ * ATK lv100 sans équipement, tout au max — Snow 1503, Lisha 2093,
+ * Veronica 1562). Le test exige qu'ils divergent ENCORE, sur exactement ces
+ * couches : le jour où la fiche est corrigée, il échoue, et c'est cette liste
+ * qu'on vide.
  *
  * Ce que dit le client, pour une fiche hors combat (`CCharacterData.CalcStat`) :
  *   - un perso fusionné garde l'ID de son perso d'ORIGINE (`Initialize` reçoit
  *     `CharID`, la fusion ne renseigne que `FusionCharID`) ; `GetEvolutionStat`
  *     lit `GetCharacterEvolutionStatTempletList(ID)`, donc les évolutions du
  *     perso d'origine — la règle du solver (§ 2.2) ;
+ *   - `CalcBasicStats` lit `Templet`, celui du même ID : les Min/Max de base
+ *     sont ceux du perso d'origine. Les deux côtés prennent ceux du templet
+ *     27xxxxx ; ils ne diffèrent que pour Snow et Lisha (Snow : ATK 66-659 à
+ *     l'origine, 75-757 au templet de fusion). Les captures le confirment sur
+ *     l'ATK ; DEF, HP et SPD suivent le même chemin dans le code, sans capture ;
  *   - `InitStatPremiumBuff` ← `CSkillManager.GetStatPremiumBuffList` prend, sur
  *     TOUS les skills du perso (pour un fusionné, les `SkillIDs` du templet de
  *     fusion, Skill_23 compris), TOUS les buffs `BT_STAT_PREMIUM` de création
  *     `PASSIVE` ciblant `ME` ou `MY_TEAM`, au niveau courant du skill ;
  *     `CStatValue.SetBuffPremiumValue` les cumule tous. Ni « premier buff », ni
- *     Skill_23 à la place de Skill_22 : la règle du solver (§ 2.4) ; et les
- *     passifs permanents de S1/S2/S3 y entrent comme les autres (§ 2.5).
+ *     Skill_23 à la place de Skill_22 : la règle du solver (§ 2.4, confirmée
+ *     par la capture de Lisha, classe + noyau = +20,2 %) ; et les passifs
+ *     permanents de S1/S2/S3 y entrent comme les autres (§ 2.5).
  *
- * Ce que ni l'un ni l'autre ne fait : `CalcBasicStats` lit `Templet`, celui de
- * l'ID d'origine, donc les Min/Max du perso d'origine. Les deux côtés prennent
- * ceux du templet 27xxxxx ; ils ne diffèrent que pour Snow et Lisha (Snow : HP
- * 301-3070 à l’origine, 519-3530 au templet de fusion). Ces deux bases sont
- * donc fausses des deux côtés, sans être un écart wiki ↔ solver.
+ * L'instantané n'est PAS régénéré ici : il le sera après le correctif de base
+ * des fusionnés (T16). D'ici là, ses valeurs de Snow et Lisha portent la base
+ * du templet de fusion — fausse, mais sans effet sur ce test, qui ne vérifie
+ * que la divergence.
  */
-const KNOWN_DIVERGENCES: Record<string, { layers: Layer[]; why: string; verdict: Verdict }> = {
+const KNOWN_DIVERGENCES: Record<string, KnownDivergence> = {
   // § 2.2 + § 2.4 — évolutions (absentes de la fiche) et passifs classe + noyau
-  // (réduits à un buff). Le client confirme le solver sur les deux points.
+  // (réduits à un buff). Le wiki a tort sur les deux points.
   '2700003': {
     layers: ['white', 'full'],
     why: 'Core Fusion Snow : évolutions + passifs',
-    verdict: 'gear-solver',
+    verdict: 'partagé',
+    basis: 'capture',
+    detail:
+      'solver juste sur évolution et passif de noyau, faux sur la base (templet de fusion au lieu de 2000003) ; wiki faux sur les trois',
   },
   '2700005': {
     layers: ['white', 'full'],
     why: 'Core Fusion Lisha : évolutions + passifs',
-    verdict: 'gear-solver',
+    verdict: 'partagé',
+    basis: 'capture',
+    detail:
+      'solver juste sur évolution et passifs classe + noyau cumulés, faux sur la base (templet de fusion au lieu de 2000005) ; wiki faux sur les trois',
   },
   '2700037': {
     layers: ['white', 'full'],
     why: 'Core Fusion Veronica : évolutions + passifs',
     verdict: 'gear-solver',
+    basis: 'capture',
+    detail: 'même base des deux templets ; capture ATK seule',
   },
   '2700043': {
     layers: ['white', 'full'],
     why: 'Core Fusion Eternal : évolutions + passifs',
     verdict: 'gear-solver',
+    basis: 'code',
   },
   '2700056': {
     layers: ['white', 'full'],
     why: 'Core Fusion Notia : évolutions + passifs',
     verdict: 'gear-solver',
+    basis: 'code',
   },
   '2700070': {
     layers: ['white', 'full'],
     why: 'Core Fusion Epsilon : évolutions + passifs',
     verdict: 'gear-solver',
+    basis: 'code',
   },
   // § 2.5 — passif S2 permanent (BT_STAT_PREMIUM PASSIVE sur soi), couche
   // absente de la fiche : la portion blanche est juste, la fiche affichée ne
   // l'est pas. Le client compte ce buff au niveau courant de S2.
-  '2000017': { layers: ['full'], why: 'Claire : S2 +10 % ATK', verdict: 'gear-solver' },
-  '2000065': { layers: ['full'], why: 'Ame : S2 +25 CHC', verdict: 'gear-solver' },
-  '2000095': { layers: ['full'], why: 'Bell Cranel : S2 +30 % ATK', verdict: 'gear-solver' },
+  '2000017': {
+    layers: ['full'],
+    why: 'Claire : S2 +10 % ATK',
+    verdict: 'gear-solver',
+    basis: 'code',
+  },
+  '2000065': { layers: ['full'], why: 'Ame : S2 +25 CHC', verdict: 'gear-solver', basis: 'code' },
+  '2000095': {
+    layers: ['full'],
+    why: 'Bell Cranel : S2 +30 % ATK',
+    verdict: 'gear-solver',
+    basis: 'code',
+  },
 };
 
 /** Écarts d'un perso sur une couche, sous la forme « lv100 HP wiki 5202 ≠ 7171 ». */
