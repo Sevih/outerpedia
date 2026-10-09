@@ -7,6 +7,24 @@
 
 ## 2026-10-09
 
+- **Relecture A34 (Fable) — Gear presets non porté, Tag control = le test,
+  restes de B40, validé** : périmètre tenu (quatorze fichiers ; hors quick,
+  le menu admin qui perd le groupe Misc entier, vide sans ses deux liens).
+  `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 795 cas verts.
+  Lu : les lignes citées de `tag-control.test.ts` et de `scripts/commit.ts`
+  disent bien ce que l'entrée affirme, le contrôle des tags bloque déjà
+  `pnpm commit`. Rejoué par le module (tsx) : `tagSourceSheet` sur les
+  23 922 provenances réelles du jour — 1 950 pros / cons, 354 synergies,
+  426 notes de gear reco renvoient à une fiche de quick, 21 192 (guides,
+  presets…) restent à la page admin ; zéro tag mort aujourd'hui. L'ajout non
+  demandé mais utile : l'item « tags » du tableau de bord ouvre la fiche du
+  perso quand tous les tags morts viennent de lui. Les restes de B40 sont
+  tranchés avec discernement : `count` retiré, `seg` / `tally` / `hint`
+  gardés parce que le picker d'effets de Skills les passe, `subsOn` gardé
+  pour l'EE absent. À Sevih : l'aide de Gear reco et le menu admin sans
+  « Misc », à voir en passant. Suite : C12, puis B44.
+
 - **quick : Gear presets non porté, Tag control = le test bloquant, restes
   de B40 (lot A34, étapes 14 et 15 de la migration)** — trois ménages de
   `docs/quick-migration.md`, décidés le 09/10. **Gear presets (14), NON
