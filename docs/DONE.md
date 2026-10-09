@@ -108,6 +108,10 @@
   existe. Un générateur qui lit une nouvelle source l'ajoute à `snapshot.ts`.
   Non éprouvé en vrai cloud : `pnpm install`, la version de `ffprobe`.
   Mode d'emploi : `datagen/README.md`, § « Rejouer le build sans `.gamedata/` ».
+  Ajout du soir : l'instantané emporte aussi le client décompilé
+  (`apk/dumped/src`, 4188 fichiers, ~16 Mo) — le build ne le lit pas, c'est la
+  référence pour trancher une formule sans capture en jeu ; il suit donc
+  chaque patch avec le reste, et ne sort pas du dépôt privé.
 
 - **Relecture B40 (Fable) — Gear reco sous la « Fiche perso », validé ; la
   fiche est portée en entier** : périmètre tenu (dix-sept fichiers ; hors

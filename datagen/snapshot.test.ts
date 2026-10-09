@@ -43,6 +43,8 @@ function fixture(name: string): { root: string; editorial: string } {
   write(join(root, 'parsed/ItemTemplet.json'), '{"rows":[]}');
   write(join(root, 'parsed/notes.txt'), 'pas une table');
   write(join(root, 'apk/dumped/dump.cs'), '// dump');
+  write(join(root, 'apk/dumped/src/CFormula.cs'), 'class CFormula {}');
+  write(join(root, 'apk/dumped/src/Properties/AssemblyInfo.cs'), '// info');
   write(join(root, 'files/bundles/manifest.dat'), 'xxxx,"version":"1.7.5"}');
   write(join(root, 'files/bundles/gros.bundle'), Buffer.alloc(2048));
   write(join(root, 'extracted/audio/bgm/Lobby.mp3'), Buffer.alloc(512, 1));
@@ -70,10 +72,13 @@ describe('snapshot', () => {
       wallpapers: 1,
       bgm: 1,
       editorial: 3,
+      sources: 2,
       removed: 0,
     });
     expect(readFileSync(join(out, 'parsed/ItemTemplet.json'), 'utf8')).toBe('{"rows":[]}');
     expect(statSync(join(out, 'extracted/audio/bgm/Lobby.mp3')).size).toBe(512);
+    expect(readFileSync(join(out, 'apk/dumped/src/CFormula.cs'), 'utf8')).toBe('class CFormula {}');
+    expect(existsSync(join(out, 'apk/dumped/src/Properties/AssemblyInfo.cs'))).toBe(true);
 
     const sprite = join(out, 'extracted/images/assets/sprite/TI_Item_Coin.png');
     expect(statSync(sprite).size).toBe(PNG_HEADER_BYTES);

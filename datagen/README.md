@@ -279,6 +279,8 @@ cas, cf. `datagen/assets/collect-comics.ts`).
 manifeste, les mp3 de l'OST, et des images leur seul nom et leur en-tête PNG.
 `pnpm datagen:snapshot <dossier>` recopie cette fraction (~330 Mo) dans le clone
 du dépôt privé `outerpedia-gamedata`, à committer et pousser après chaque patch.
+Il y joint le client décompilé (`apk/dumped/src`, ~16 Mo) : le build ne le lit
+pas, mais c'est la référence pour trancher une formule sans capture en jeu.
 La liste exacte et sa raison sont en tête de `datagen/snapshot.ts`.
 
 Sur une machine sans datamine, avec les deux dépôts clonés côte à côte et

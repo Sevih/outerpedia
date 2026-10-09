@@ -21,6 +21,12 @@
  *     versions archivées `@n`. Ce pool vit HORS de la racine gamedata : à
  *     recopier dans `.editorial/wallpapers/` du clone d'outerpedia.
  *
+ * S'y ajoute ce que le build ne lit PAS mais qui dit ce que le jeu calcule :
+ * `apk/dumped/src/`, le client décompilé par ilspycmd (corps de méthodes
+ * compris, là où `dump.cs` n'a que les signatures) — la référence pour trancher
+ * une formule sans capture en jeu, à rafraîchir comme le reste à chaque patch.
+ * C'est le code de l'éditeur : il ne sort pas du dépôt privé.
+ *
  * Un générateur qui se met à lire autre chose sous `.gamedata/` doit l'ajouter
  * ICI, sinon le build de l'instantané diverge en silence de celui de la machine
  * outillée. L'extraction (bundles → tables) et la collecte d'images ne sont pas
@@ -73,6 +79,8 @@ export interface SnapshotStamp {
   wallpapers: number;
   bgm: number;
   editorial: number;
+  /** Fichiers du client décompilé (`apk/dumped/src`). */
+  sources: number;
 }
 
 export interface SnapshotReport extends SnapshotStamp {
@@ -128,6 +136,7 @@ export async function snapshot(dest: string, opts: SnapshotOptions = {}): Promis
   };
   const parsed = need(join(root, 'parsed'), '`pnpm datagen:convert`.');
   const dump = need(join(root, 'apk/dumped/dump.cs'), '`pnpm datagen:dump`.');
+  const sources = need(join(root, 'apk/dumped/src'), '`pnpm datagen:dump`.');
   const manifest = need(join(root, 'files/bundles/manifest.dat'), '`pnpm datagen:pull`.');
   const bgmDir = need(join(root, 'extracted/audio/bgm'), '`pnpm datagen:extract-audio`.');
   const images = need(join(root, 'extracted/images'), '`pnpm datagen:extract`.');
@@ -166,6 +175,11 @@ export async function snapshot(dest: string, opts: SnapshotOptions = {}): Promis
   // il suit quand il existe, pour que l'instantané dise de quel client il vient.
   const dumpStamp = join(root, 'apk/dumped/.dump-stamp.json');
   if (existsSync(dumpStamp)) put('apk/dumped/.dump-stamp.json', dumpStamp);
+  let sourceFiles = 0;
+  walkFiles(sources, (abs, rel) => {
+    put(`apk/dumped/src/${rel}`, abs);
+    sourceFiles++;
+  });
   put('files/bundles/manifest.dat', manifest);
   const bgm = readdirSync(bgmDir).filter((f) => f.toLowerCase().endsWith('.mp3'));
   for (const f of bgm) put(`extracted/audio/bgm/${f}`, join(bgmDir, f));
@@ -177,6 +191,7 @@ export async function snapshot(dest: string, opts: SnapshotOptions = {}): Promis
     wallpapers: putHeads(pool, 'extracted/wallpapers'),
     bgm: bgm.length,
     editorial: putHeads(editorial, 'editorial/wallpapers'),
+    sources: sourceFiles,
   };
 
   const stale: string[] = [];
@@ -204,7 +219,8 @@ if (isMain(import.meta.url)) {
       console.log(
         `instantané ${r.resVersion ?? '(version inconnue)'} → ${resolve(dest)}\n` +
           `  ${r.tables} tables, ${r.bgm} mp3, ${r.images} images et ${r.wallpapers} wallpapers ` +
-          `(en-têtes), ${r.editorial} wallpapers éditoriaux — ${r.removed} fichier(s) périmé(s) retiré(s)`,
+          `(en-têtes), ${r.editorial} wallpapers éditoriaux, ${r.sources} sources décompilées — ` +
+          `${r.removed} fichier(s) périmé(s) retiré(s)`,
       );
     })
     .catch((e) => {
