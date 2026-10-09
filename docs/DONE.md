@@ -7,6 +7,124 @@
 
 ## 2026-10-09
 
+- **quick : onglet « Items » — le catalogue curé, la fiche à six langues, la
+  création (lot B44, étape 13 de la migration)** — l'éditeur « Item » de
+  l'admin (`/admin/editor/items` : `ItemsBrowser`, `ItemCuratedEditor`) est
+  porté dans quick, sur le modèle d'Effets ; c'était le dernier des Éditeurs.
+  La ligne « Agacements » était vide : portage fidèle, dans la charte.
+  **Serveur** (`scripts/quick/actions.ts`, quatre routes dans `server.ts`) :
+  `itemsState()` → `GET /api/items/state` — le catalogue servi
+  (`data/generated/items.json`, 1 208 entrées) RELU DU DISQUE à chaque appel
+  (`getCatalog` l'importe statiquement : dans le processus long de quick il
+  ne bougerait plus après un rebake, ni après une promotion lancée de
+  « Patch »), sous l'overlay du curé — celui de l'admin, `listItemEntries` ;
+  par item sa ligne (id, nom anglais effectif, type, kind, grade, étoiles,
+  icône, `hasDesc`, `hidden`, `overridden`), sa `base` (nom, description et
+  icône du catalogue servi, le placeholder de la fiche — ce que `itemBase`
+  rend dans l'admin) et son entrée curée telle que le disque la porte ; puis
+  les sprites `TI_*` que rien ne porte (`unusedItemIcons` ; `hasSprites` dit
+  quand les images du jeu manquent), les comptes de l'en-tête de l'admin
+  (1 149 items, 59 monnaies, 102 sans description, 496 sprites, 23 curés),
+  les types présents, `GAME_LANGS`, le dossier des icônes, et `canBake` —
+  `listTableNames()` porte `ItemTemplet` et `TextSystem`. `itemsSearch(q)` →
+  `GET /api/items/search?q=` : `effectMatches` tel quel, sur une botte de
+  foin `id` + `name.en` (et sur le nom des sprites) — `Hero` trouve
+  `Hero%20Piece` par son nom, `ero` ne trouve rien. `resolveText(key)` →
+  `GET /api/items/text?key=` (`resolveGameText`).
+  `saveItems(changes, deps, report)` → `POST /api/items`, via `withGit` :
+  REFUS AVANT TOUTE ÉCRITURE
+  sans les deux tables (« tables du jeu absentes : le rebake de items.json
+  échouerait après l'écriture du curé ») ; par item, `was` doit être
+  l'entrée du disque (sinon `stale`), l'entrée est compactée comme `compact`
+  et `build` de l'éditeur (langues vides retirées, `icon` et `note` sans
+  blancs, `hidden` seulement vrai, entrée vide = suppression), une création
+  exige `name.en` et un id sans espace, ni `%`, ni `/`, absent du catalogue
+  ET du curé (« existe déjà » se dit avant « id invalide » : `Hero%20Piece`
+  est un id du catalogue, jamais décodé ni ré-encodé) ; puis
+  `upsertItemCurated`, ses refus rendus tels quels, PUIS
+  `bakeItemCatalogEntry` ; enfin UN `commitPaths` des deux fichiers,
+  `chore(items): <nom en>` ou « N items ». `ADMIN_TO_QUICK` gagne
+  `/admin/editor/items`. **La page** (`tabs/items.{html,js,css}`, préfixe
+  `i-`, groupe Éditeurs après Monstres, `wide`, hash `#items/<id>`) : la
+  recherche (200 ms après la dernière frappe, la raison en atténué), le type
+  en groupe segmenté d'après les types présents, les cases « sans
+  description », « sans icône », « curés seulement », « masqués » et
+  « sprites à intégrer », « Nouvel item » (id + « ＋ item ») ; la ligne des
+  comptes ; le catalogue en lignes par pages de 100 — tuile 32 px
+  (`itemTile` : cadre de rareté, étoiles), nom, ✎ si curé, « masqué »,
+  id · type · grade, « desc ✓ / — » ; la fiche à droite (dessous sous
+  1000 px) : tuile 56 px, nom effectif, id, type · grade · étoiles, nom et
+  description dans les six langues avec la base en placeholder, un
+  « clé… » par champ texte, l'icône (champ, aperçu, sprites en datalist),
+  « masqué », la note, « Vider ». Savebar par lot, `dirty`, `canLeave`, les
+  refus SUR la fiche (`p.i-err`), l'état relu après. L'état pèse un
+  mégaoctet : lu à la première venue sur l'onglet, pas au démarrage, relu à
+  chaque venue tant que rien n'est en attente. Sans tables du jeu la savebar
+  dit « enregistrement impossible sur ce poste (tables du jeu absentes) » et
+  « Enregistrer » est éteint. **Trois écarts à l'admin, tous assumés** : la
+  recherche par début de mot (demandée) au lieu de la sous-chaîne ; le refus
+  sans tables (demandé) ; et l'icône d'une création née d'un sprite, posée
+  DANS le champ — dans l'admin `TI_…` n'était qu'un placeholder, et le
+  générateur écrit `icon: ''` pour une création sans `icon` curé : une
+  création enregistrée sans toucher au champ partait sans icône. **Trois
+  fichiers partagés touchés, à dessein, sans changer leur contrat** :
+  `src/lib/data/item-catalog.ts` (`listItemEntries(cat?, cur?)` — le
+  catalogue relu du disque passe par l'overlay de l'admin au lieu d'une
+  copie de la règle), `src/lib/admin/item-icons.ts`
+  (`unusedItemIcons(catalog?, cur?)`, même raison) et `ui/gear-view.mjs`
+  (`itemTile` prend `dir`, le dossier du sprite quand ce n'est pas
+  `equipment` : les items sont sous `images/items`) ; leurs appelants ne
+  passent rien, rien ne change pour eux. **Admin** : le lien « Item » sort
+  du menu (`layout.dev.tsx`) — c'était le dernier du groupe « Editor », qui
+  en sort avec lui, comme « Misc » le 09/10 ; les pages restent joignables
+  par leur URL. **Docs** : `docs/quick-migration.md` (13 FAIT, « Déjà dans
+  quick »), `STYLE.md` (croquis « Items », la lettre `i-`, les listes
+  `wide` et savebar), TODO (contrôles à l'écran). **Tests** :
+  `actions.test.ts`, 28 cas — l'état sur un catalogue injecté (overlay, création pas encore
+  bakée, comptes, `canBake`, le disque relu à chaque appel et la vraie
+  lecture de la route), la recherche, `resolveText`, `saveItems` à store,
+  bake et git factices (refus avant écriture sans tables, `stale`,
+  compactage, suppression par entrée vide, création sans `name.en`, ids à
+  espace / `%` / `/`, id existant, `Hero%20Piece` tel quel, store PUIS bake
+  par item, UN commit des deux fichiers, un rebake qui lève), et `itemTile`
+  avec `dir` ; `ui-serve.test.ts`, 16 cas en happy-dom sur le vrai markup
+  (méthode C4) — la section dans Éditeurs, rien demandé avant d'y venir, le
+  catalogue et sa tuile, la recherche et sa raison, les filtres, les pages
+  de 100, la fiche à six langues, « clé… », « Vider », le lot et ses refus
+  situés, « sprites à intégrer » jusqu'à la création, « ＋ item »,
+  « Annuler », `canLeave`, `#items/<id>` (`Hero%2520Piece` et l'id écrit à
+  la main), la savebar éteinte sans tables. **Vérification** :
+  `pnpm typecheck` (`tsc --noEmit -p scripts/tsconfig.json`, silencieux),
+  `pnpm lint` (`eslint`, silencieux), `pnpm test` (« Tests 3397 passed
+  (3397) », 206 fichiers),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` (« Tests 879
+  passed (879) »), `prettier --check` par stdin
+  sur les quatre docs. Rejoué par le module (tsx, lectures seules) : l'état
+  réel — 1 208 lignes, les comptes ci-dessus, `canBake` vrai sur ce poste ;
+  `buildItemCatalog()` rend AUJOURD'HUI octet pour octet le catalogue servi
+  (zéro entrée d'écart sur 1 208 : un rebake ne touchera que l'item
+  enregistré) en 122 ms puis 7 ms. Banc : quick isolé (:4893, clés vidées,
+  que des GET — état, recherche `Hero pie`, texte `SYS_STAMINA`),
+  `--tabs items` nu, `--hash items/SYS_ASSET_GOLD`, `items/COSTUME_1` en 1440 × 1800
+  et `items/Hero%2520Piece` en 900 px : le catalogue, la fiche et ses
+  placeholders dans les six langues, la vue étroite (la fiche sous le
+  catalogue) — rien de débordant. RIEN n'a été enregistré : ni POST, ni
+  commit de données. **Laissé** : (a) les contrôles à l'écran (TODO) ;
+  (b) vider une CRÉATION déjà au catalogue (type custom : `Hero%20Piece`,
+  que `shop-priorities.ts` désigne, `Gems`…) la RETIRE du catalogue au
+  rebake — c'est ce que fait l'admin, la fiche et le journal le disent, mais
+  rien ne l'empêche : à trancher si ça gêne ; (c) si un rebake lève malgré
+  les tables, le curé de cet item EST écrit : il est refusé avec cette
+  raison et le commit part quand même, pour ne pas laisser le fichier
+  modifié — l'état à moitié fait n'est donc pas impossible, seulement
+  réservé à une vraie panne ; (d) `resolveGameText` garde ses index pour la
+  vie du processus, échecs compris : après un pull de « Patch », « clé… »
+  sert les anciens textes jusqu'à relancer quick (hors périmètre : appelé,
+  pas retouché) ; (e) hors périmètre, non touchés : la home de l'admin lie
+  toujours `/admin/editor/items` (`page.dev.tsx`), et le commentaire de
+  `ItemCuratedEditor.tsx` parle encore de quatre langues de jeu ; (f) la
+  rangée des filtres se replie sur deux lignes à 1440 px.
+
 - **Relecture C12 (Fable) — onglet « Monstres » de quick, validé** :
   périmètre tenu (vingt fichiers ; hors quick, la logique des cartes
   descendue de la page admin dans `src/lib/admin/monster-kit.ts`, le

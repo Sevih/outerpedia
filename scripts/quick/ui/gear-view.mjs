@@ -30,6 +30,8 @@
  * Ce qu'une tuile montre d'une pièce : une option de `gearRecoState`.
  * @typedef {object} TileItem
  * @property {string} [icon] Sprite de la pièce (`images/equipment`).
+ * @property {string} [dir] Le dossier de ce sprite sous `images/`, quand ce
+ *   n'est pas `equipment` : `items` pour un item du catalogue (onglet « Items »).
  * @property {string} [grade] normal, magic, rare ou unique.
  * @property {number} [star] Étoiles posées en bas de la tuile.
  * @property {string} [overlayIcon] Icône d'effet (`images/equipment`).
@@ -95,7 +97,7 @@ export function itemTile(env, item, size) {
     'gv-frame',
     `ui/bg/TI_Slot_${SLOT_FRAME[item.grade ?? ''] ?? 'Normal'}`,
     dim,
-  )}${img(env, 'gv-icon', `equipment/${item.icon}`, `${dim} loading="lazy"`)}${
+  )}${img(env, 'gv-icon', `${item.dir ?? 'equipment'}/${item.icon}`, `${dim} loading="lazy"`)}${
     item.overlayIcon ? img(env, 'gv-fx', `equipment/${item.overlayIcon}`) : ''
   }${only ? img(env, 'gv-cls', `ui/class/IG_Turn_Class_${cap(only)}`) : ''}${
     item.star

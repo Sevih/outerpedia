@@ -22,6 +22,7 @@ const TABS = [
   'character',
   'effects',
   'monsters',
+  'items',
   'discord',
   'names',
 ];
@@ -66,7 +67,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : quatorze sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : quinze sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -2700,6 +2701,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['character', 'Fiche perso'],
       ['effects', 'Effets'],
       ['monsters', 'Monstres'],
+      ['items', 'Items'],
     ]);
     expect(page.el('tab-character').hidden).toBe(true);
     // Sur un autre onglet, le picker ne s'ouvre pas : il couvrirait sa page.
@@ -5326,6 +5328,7 @@ describe('Monstres — la page, sur le vrai markup', () => {
       ['character', 'Fiche perso'],
       ['effects', 'Effets'],
       ['monsters', 'Monstres'],
+      ['items', 'Items'],
     ]);
     await page.come();
     expect(page.el('tab-monsters').hidden).toBe(false);
@@ -5791,6 +5794,900 @@ describe('Monstres — la page, sur le vrai markup', () => {
     expect(page.el('log').textContent).toContain('monstre inconnu : nope');
     expect(page.el('m-who').textContent).toBe('Aucun monstre choisi.');
     expect(page.el('hp-modal').hidden).toBe(false);
+  });
+});
+
+describe('Items — la page, sur le vrai markup', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  const LANGS = ['en', 'jp', 'kr', 'zh', 'fr', 'es'];
+  const NO_BAKE =
+    'tables du jeu absentes : le rebake de items.json échouerait après l’écriture du curé';
+
+  interface Curated {
+    name?: Record<string, string>;
+    desc?: Record<string, string>;
+    icon?: string;
+    hidden?: boolean;
+    note?: string;
+  }
+  interface Row {
+    id: string;
+    name: string;
+    type: string;
+    kind: string;
+    grade: string;
+    star: number;
+    icon: string;
+    hasDesc: boolean;
+    hidden: boolean;
+    overridden: boolean;
+    base: { name: Record<string, string>; desc?: Record<string, string>; icon: string } | null;
+    curated: Curated;
+  }
+  const row = (id: string, name: string, over: Partial<Row> = {}): Row => ({
+    id,
+    name,
+    type: 'material',
+    kind: 'item',
+    grade: 'normal',
+    star: 0,
+    icon: `TI_${id}`,
+    hasDesc: true,
+    hidden: false,
+    overridden: false,
+    base: { name: { en: name }, desc: { en: `${name}.` }, icon: `TI_${id}` },
+    curated: {},
+    ...over,
+  });
+
+  /** Une gemme, un matériau sans description ni icône, une monnaie curée, un costume masqué, une création à l'id encodé. */
+  const catalog = (): Row[] => [
+    row('15001', 'Stage 1 Attack Gem', { type: 'gem', grade: 'rare', star: 1 }),
+    row('20001', 'Mystery Dust', {
+      hasDesc: false,
+      icon: '',
+      base: { name: { en: 'Mystery Dust', fr: 'Poussière mystère' }, icon: '' },
+    }),
+    row('SYS_ASSET_GOLD', 'Gold', {
+      type: 'goods',
+      kind: 'goods',
+      icon: 'CM_TopMenu_Gold',
+      overridden: true,
+      base: { name: { en: 'Gold' }, desc: { en: 'Coins.' }, icon: 'CM_TopMenu_Gold' },
+      curated: { icon: 'CM_TopMenu_Gold', note: 'icône du menu' },
+    }),
+    row('COSTUME_1', 'Shutendouji Rin', {
+      type: 'costume',
+      kind: 'costume',
+      hidden: true,
+      overridden: true,
+      curated: { hidden: true },
+    }),
+    row('Hero%20Piece', 'Hero Piece', {
+      type: 'custom',
+      kind: 'custom',
+      icon: 'CM_Piece_Frame',
+      overridden: true,
+      base: {
+        name: { en: 'Hero Piece', fr: 'Fragment de Héros' },
+        desc: { en: 'A piece.' },
+        icon: 'CM_Piece_Frame',
+      },
+      curated: { name: { en: 'Hero Piece', fr: 'Fragment de Héros' }, icon: 'CM_Piece_Frame' },
+    }),
+  ];
+
+  type Call = { path: string; body?: unknown };
+  type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour Effets : la VRAIE
+   * coquille assemblée, le vrai `lib.js` et le vrai `tabs/items.js`. `fetch`
+   * est factice : il sert `disk`, répond à la recherche par la VRAIE règle
+   * (`effectMatches` sur l'id et le nom anglais des lignes servies, et sur le
+   * nom des sprites), rend le texte d'une clé, et note tout ce que la page
+   * demande. La page s'ouvre sur l'onglet (`#items`) sauf `hash` contraire :
+   * le catalogue n'est lu qu'à la première venue.
+   */
+  async function items(
+    opts: {
+      hash?: string;
+      saved?: (body: unknown) => Saved;
+      edit?: (rows: Row[]) => Row[] | void;
+      canBake?: boolean;
+      sprites?: string[];
+      hasSprites?: boolean;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? '#items'}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const rows = catalog();
+    const disk = {
+      items: opts.edit?.(rows) ?? rows,
+      unused: opts.sprites ?? ['TI_Class_Mage', 'TI_Item_New'],
+      canBake: opts.canBake ?? true,
+      texts: {
+        SYS_STAMINA: { en: 'Stamina', jp: '活力', kr: '행동력', zh: '行动力', fr: 'Endurance' },
+      } as Record<string, Record<string, string>>,
+    };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: true,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/items')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/items/state') {
+        const goods = disk.items.filter((r) => r.type === 'goods').length;
+        return answer({
+          items: disk.items,
+          unused: disk.unused,
+          hasSprites: opts.hasSprites ?? true,
+          counts: {
+            items: disk.items.length - goods,
+            currencies: goods,
+            noDesc: disk.items.filter((r) => !r.hasDesc).length,
+            unused: disk.unused.length,
+            curated: disk.items.filter((r) => r.overridden).length,
+          },
+          types: [...new Set(disk.items.map((r) => r.type))].sort(),
+          langs: LANGS,
+          sprite: 'images/items',
+          canBake: disk.canBake,
+          noBake: NO_BAKE,
+        });
+      }
+      if (url.pathname === '/api/items/search') {
+        const q = url.searchParams.get('q') ?? '';
+        const matches: Record<string, unknown> = {};
+        const seek = (id: string, en: string) => {
+          const hit = effectMatches(effectHaystack({ id, keys: [], name: en ? { en } : {} }), q);
+          if (hit) matches[id] = hit;
+        };
+        for (const r of disk.items) seek(r.id, r.name);
+        for (const s of disk.unused) seek(s, '');
+        return answer({ q, matches });
+      }
+      if (url.pathname === '/api/items/text') {
+        const key = url.searchParams.get('key') ?? '';
+        return answer({ key, text: disk.texts[key] ?? null });
+      }
+      if (url.pathname === '/api/items')
+        return answer(opts.saved?.(body) ?? { ok: true, log: ['fait'] });
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'items.js'));
+    lib.sections.start();
+    const settle = () => new Promise((done) => setTimeout(done, 0));
+    await settle();
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string, key?: string) =>
+      target.dispatchEvent(
+        (key
+          ? new window.KeyboardEvent(type, { key, bubbles: true, cancelable: true })
+          : new window.Event(type, { bubbles: true })) as unknown as Event,
+      );
+    const type = (input: HTMLInputElement, value: string) => {
+      input.value = value;
+      fire(input, 'input');
+    };
+    const lineOf = (id: string) =>
+      all('#i-rows .i-row').find((r) => (r.dataset.id ?? r.dataset.sprite) === id);
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      disk,
+      settle,
+      type,
+      fire,
+      /** Le catalogue tel qu'il se lit : un id par ligne, le titre d'un séparateur. */
+      grid: () =>
+        all('#i-rows > *').map((line) =>
+          line.classList.contains('i-sep')
+            ? (line.textContent ?? '')
+            : (line.dataset.id ?? `sprite ${line.dataset.sprite}`),
+        ),
+      /** Une ligne : son nom, ses marques, sa seconde ligne, sa raison, « desc », son point, sa tuile. */
+      line: (id: string) => {
+        const b = lineOf(id);
+        return {
+          name: b?.querySelector('.i-name')?.textContent,
+          curated: Boolean(b?.querySelector('.i-cur')),
+          badges: [...(b?.querySelectorAll('.badge') ?? [])].map((x) => x.textContent),
+          meta: b?.querySelector('.i-meta')?.textContent,
+          why: b?.querySelector('.i-why')?.textContent ?? '',
+          desc: b?.querySelector('.i-desc')?.textContent ?? '',
+          dot: b?.querySelector('.pt')?.className ?? '',
+          tile: b?.querySelector('.gv-tile')?.outerHTML ?? '',
+        };
+      },
+      open: (id: string) => lineOf(id)?.click(),
+      /** Cherche, et attend la réponse (200 ms après la dernière frappe). */
+      search: async (q: string) => {
+        vi.useFakeTimers();
+        type(el('i-q'), q);
+        await vi.advanceTimersByTimeAsync(200);
+        vi.useRealTimers();
+        await settle();
+      },
+      check: (id: string, on = true) => {
+        el(id).checked = on;
+        fire(el(id), 'input');
+      },
+      /** Le bouton d'un type du groupe segmenté. */
+      seg: (value: string) => all('#i-types button').find((b) => b.dataset.type === value),
+      /** Un champ de la fiche, par son `data-f` (et sa langue). */
+      field: (f: string, lang?: string) =>
+        all(
+          `#i-sheet [data-f="${f}"]${lang ? `[data-lang="${lang}"]` : ''}`,
+        )[0] as HTMLInputElement,
+      /** « clé… » d'un champ texte : sa saisie et son bouton. */
+      key: (f: string) => ({
+        input: all(`#i-sheet [data-key="${f}"]`)[0] as HTMLInputElement,
+        button: all(`#i-sheet [data-pull="${f}"]`)[0],
+      }),
+      save: async () => {
+        el('i-save').click();
+        await settle();
+        await settle();
+      },
+    };
+  }
+
+  it('servie dans Éditeurs, après Monstres, en pleine largeur — et rien n’est demandé avant d’y venir', async () => {
+    const page = await items({ hash: '' });
+    expect(page.calls).toEqual([]);
+    expect(
+      page.all('#tabs [data-group="editors"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['character', 'Fiche perso'],
+      ['effects', 'Effets'],
+      ['monsters', 'Monstres'],
+      ['items', 'Items'],
+    ]);
+    expect(page.el('tab-items').hidden).toBe(true);
+    page.all('#tabs [data-tab="items"]')[0].click();
+    await page.settle();
+    expect(page.el('tab-items').hidden).toBe(false);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.calls).toEqual([{ path: '/api/items/state' }]);
+    // Pas de menu latéral : une recherche, des filtres, le catalogue, la fiche.
+    expect(page.all('#tab-items aside, #tab-items nav')).toEqual([]);
+    expect(page.el('i-sheet').textContent?.trim()).toBe('Choisir un item dans le catalogue.');
+    // Y revenir sans rien en attente relit le disque ; avec une saisie, non.
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    page.all('#tabs [data-tab="items"]')[0].click();
+    await page.settle();
+    expect(page.calls).toHaveLength(2);
+    page.open('20001');
+    page.type(page.field('note'), 'x');
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    page.all('#tabs [data-tab="items"]')[0].click();
+    await page.settle();
+    expect(page.calls).toHaveLength(2);
+    expect(page.field('note').value).toBe('x');
+  });
+
+  it('le catalogue en lignes : la tuile d’item, le nom, ✎, « masqué », id · type · grade, « desc ✓ / — »', async () => {
+    const page = await items();
+    expect(page.grid()).toEqual(['15001', '20001', 'SYS_ASSET_GOLD', 'COSTUME_1', 'Hero%20Piece']);
+    expect(page.el('i-total').textContent).toBe(
+      '4 items + 1 monnaie · 1 sans description · 2 sprites à intégrer · 3 curés',
+    );
+    expect(page.line('15001')).toMatchObject({
+      name: 'Stage 1 Attack Gem',
+      curated: false,
+      badges: [],
+      meta: '15001 · gem · rare',
+      why: '',
+      desc: 'desc ✓',
+      dot: '',
+    });
+    // La tuile de `gear-view.mjs` : cadre de rareté, icône sous `images/items`, étoiles.
+    const tile = page.line('15001').tile;
+    expect(tile).toContain('style="width:32px;height:32px"');
+    expect(tile).toContain('src="https://img.test/images/ui/bg/TI_Slot_Rare.webp"');
+    expect(tile).toContain('class="gv-icon" src="https://img.test/images/items/TI_15001.webp"');
+    expect(tile.split('CM_icon_star_y').length - 1).toBe(1);
+    // Sans icône : la place vide de la tuile.
+    expect(page.line('20001')).toMatchObject({ desc: 'desc —' });
+    expect(page.line('20001').tile).toContain('gv-tile none');
+    expect(page.line('SYS_ASSET_GOLD')).toMatchObject({ curated: true, badges: [] });
+    expect(page.line('COSTUME_1')).toMatchObject({ curated: true, badges: ['masqué'] });
+    expect(page.el('i-foot').hidden).toBe(true);
+    expect(page.el('i-empty').hidden).toBe(true);
+  });
+
+  it('sans images du jeu sur le poste, la ligne des comptes le dit', async () => {
+    const page = await items({ sprites: [], hasSprites: false });
+    expect(page.el('i-total').textContent).toBe(
+      '4 items + 1 monnaie · 1 sans description · sprites : images du jeu absentes sur ce poste · 3 curés',
+    );
+    page.check('i-unused');
+    expect(page.grid()).toEqual([]);
+    expect(page.el('i-total').textContent).toBe(
+      'Images du jeu absentes sur ce poste : aucun sprite à proposer.',
+    );
+    expect(page.el('i-empty').hidden).toBe(false);
+    expect(page.el('i-empty').textContent).toBe('Images du jeu absentes sur ce poste.');
+  });
+
+  it('la recherche part 200 ms après la dernière frappe ; `Hero` trouve `Hero%20Piece` par son nom, son id intact', async () => {
+    const page = await items();
+    vi.useFakeTimers();
+    page.type(page.el('i-q'), 'He');
+    page.type(page.el('i-q'), 'Hero');
+    await vi.advanceTimersByTimeAsync(199);
+    expect(page.calls.filter((c) => c.path.includes('/search'))).toEqual([]);
+    await vi.advanceTimersByTimeAsync(1);
+    vi.useRealTimers();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/items/search?q=Hero' });
+    expect(page.grid()).toEqual(['Hero%20Piece']);
+    expect(page.line('Hero%20Piece')).toMatchObject({
+      name: 'Hero Piece',
+      meta: 'Hero%20Piece · custom · normal',
+      why: 'nom en',
+    });
+    expect(page.el('i-total').textContent).toBe('1 sur 5 entrées');
+
+    // Par l'id : la raison le dit. Jamais par le milieu d'un mot.
+    await page.search('sys_asset');
+    expect(page.grid()).toEqual(['SYS_ASSET_GOLD']);
+    expect(page.line('SYS_ASSET_GOLD').why).toBe('id SYS_ASSET_GOLD');
+    await page.search('ero');
+    expect(page.grid()).toEqual([]);
+    expect(page.el('i-empty').hidden).toBe(false);
+    expect(page.el('i-empty').textContent).toBe('Aucun item ne correspond.');
+
+    // Champ vidé : tout revient aussitôt, sans demande.
+    const asked = page.calls.length;
+    page.type(page.el('i-q'), '');
+    expect(page.grid()).toHaveLength(5);
+    expect(page.calls).toHaveLength(asked);
+  });
+
+  it('les filtres : le type en groupe segmenté d’après les types présents, et les cases', async () => {
+    const page = await items();
+    expect(
+      page.all('#i-types button').map((b) => [b.textContent, b.getAttribute('aria-pressed')]),
+    ).toEqual([
+      ['tous', 'true'],
+      ['costume', 'false'],
+      ['custom', 'false'],
+      ['gem', 'false'],
+      ['goods', 'false'],
+      ['material', 'false'],
+    ]);
+    page.seg('goods')?.click();
+    expect(page.grid()).toEqual(['SYS_ASSET_GOLD']);
+    expect(page.seg('goods')?.getAttribute('aria-pressed')).toBe('true');
+    expect(page.el('i-total').textContent).toBe('1 sur 5 entrées');
+    page.seg('')?.click();
+    expect(page.grid()).toHaveLength(5);
+
+    page.check('i-nodesc');
+    expect(page.grid()).toEqual(['20001']);
+    page.check('i-nodesc', false);
+    page.check('i-noicon');
+    expect(page.grid()).toEqual(['20001']);
+    page.check('i-noicon', false);
+    page.check('i-curated');
+    expect(page.grid()).toEqual(['SYS_ASSET_GOLD', 'COSTUME_1', 'Hero%20Piece']);
+    page.check('i-hidden');
+    expect(page.grid()).toEqual(['COSTUME_1']);
+    // L'item ouvert garde sa ligne hors des filtres.
+    page.check('i-hidden', false);
+    page.open('Hero%20Piece');
+    page.check('i-hidden');
+    expect(page.grid()).toEqual(['COSTUME_1', 'Hero%20Piece']);
+  });
+
+  it('par pages de 100 : « Afficher plus », et un item ouvert par l’adresse fait venir sa page', async () => {
+    const many = (rows: Row[]) => [
+      ...rows,
+      ...Array.from({ length: 245 }, (_, i) => row(String(30000 + i), `Chest ${i}`)),
+    ];
+    const page = await items({ edit: many });
+    expect(page.grid()).toHaveLength(100);
+    expect(page.el('i-foot').hidden).toBe(false);
+    expect(page.el('i-shown').textContent).toBe('100 lignes montrées sur 250');
+    expect(page.el('i-more').textContent).toBe('Afficher plus (100)');
+    page.el('i-more').click();
+    expect(page.grid()).toHaveLength(200);
+    expect(page.el('i-more').textContent).toBe('Afficher plus (50)');
+    page.el('i-more').click();
+    expect(page.grid()).toHaveLength(250);
+    expect(page.el('i-foot').hidden).toBe(true);
+    // Un filtre repart de la première page.
+    page.seg('material')?.click();
+    expect(page.grid()).toHaveLength(100);
+    expect(page.el('i-shown').textContent).toBe('100 lignes montrées sur 246');
+
+    const far = await items({ edit: many, hash: '#items/30240' });
+    expect(far.el('i-title').textContent).toBe('Chest 240');
+    expect(far.grid()).toHaveLength(250);
+    expect(far.all('#i-rows .i-row[aria-current="true"]').map((b) => b.dataset.id)).toEqual([
+      '30240',
+    ]);
+  });
+
+  it('la fiche : l’en-tête, le nom et la description en SIX langues, la base en placeholder', async () => {
+    const page = await items();
+    page.open('15001');
+    expect(location.hash).toBe('#items/15001');
+    expect(page.el('i-title').textContent).toBe('Stage 1 Attack Gem');
+    expect(page.all('#i-sheet .i-who .i-meta')[0].textContent).toBe('15001 · gem · rare · ★');
+    expect(page.el('i-preview').innerHTML).toContain('style="width:56px;height:56px"');
+    expect(page.el('i-preview').innerHTML).toContain('images/items/TI_15001.webp');
+    expect(page.all('#i-sheet [data-f="name"]').map((i) => i.dataset.lang)).toEqual(LANGS);
+    expect(page.all('#i-sheet textarea[data-f="desc"]').map((i) => i.dataset.lang)).toEqual(LANGS);
+    expect(page.field('name', 'en').value).toBe('');
+    expect(page.field('name', 'en').placeholder).toBe('Stage 1 Attack Gem');
+    expect(page.field('desc', 'en').placeholder).toBe('Stage 1 Attack Gem.');
+    expect(page.field('icon').value).toBe('');
+    expect(page.field('icon').placeholder).toBe('TI_15001');
+    expect(page.field('icon').getAttribute('list')).toBe('i-sprites');
+    expect(page.all('#i-sprites option').map((o) => (o as HTMLOptionElement).value)).toEqual([
+      'TI_Class_Mage',
+      'TI_Item_New',
+    ]);
+    expect(page.el('i-badges').textContent).toBe('');
+    expect(page.el('i-err').hidden).toBe(true);
+
+    // Un item curé : son entrée dans les champs, la base du catalogue en gris.
+    page.open('Hero%20Piece');
+    expect(location.hash).toBe('#items/Hero%2520Piece');
+    expect(page.field('name', 'en').value).toBe('Hero Piece');
+    expect(page.field('name', 'fr').value).toBe('Fragment de Héros');
+    expect(page.field('name', 'jp').value).toBe('');
+    expect(page.field('desc', 'en').value).toBe('');
+    expect(page.field('desc', 'en').placeholder).toBe('A piece.');
+    expect(page.field('icon').value).toBe('CM_Piece_Frame');
+    expect(page.el('i-badges').textContent).toBe('curé');
+    // Une création du wiki : la vider la retire du catalogue, la fiche le dit.
+    expect(page.all('#i-sheet > .hint').map((p) => p.textContent)).toEqual([
+      'Une création du wiki : elle n’existe que par son entrée curée. La vider puis « Enregistrer » la retire du catalogue.',
+    ]);
+    page.open('SYS_ASSET_GOLD');
+    expect(page.field('note').value).toBe('icône du menu');
+    expect(page.field('hidden').checked).toBe(false);
+    page.open('COSTUME_1');
+    expect(page.field('hidden').checked).toBe(true);
+    expect(page.el('i-badges').textContent).toBe('curé' + 'masqué');
+  });
+
+  it('la saisie : le titre et les tuiles suivent, le point, les badges, la savebar', async () => {
+    const page = await items();
+    page.open('20001');
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+    expect(page.el('i-save').disabled).toBe(true);
+    expect(page.el('i-preview').innerHTML).toContain('gv-tile none');
+
+    page.type(page.field('name', 'en'), 'Dust');
+    expect(page.el('i-title').textContent).toBe('Dust');
+    expect(page.line('20001').dot).toBe('pt edit');
+    expect(page.el('i-badges').textContent).toBe('modifié');
+    expect(page.el('i-count').textContent).toBe('1 item modifié');
+    expect(page.el('i-save').disabled).toBe(false);
+    // La ligne du catalogue ne suit qu'après « Enregistrer ».
+    expect(page.line('20001').name).toBe('Mystery Dust');
+
+    page.type(page.field('icon'), ' TI_Dust ');
+    expect(page.el('i-preview').innerHTML).toContain('images/items/TI_Dust.webp');
+    expect(page.el('i-icon-pv').innerHTML).toContain('images/items/TI_Dust.webp');
+    page.field('hidden').checked = true;
+    page.fire(page.field('hidden'), 'input');
+    expect(page.el('i-badges').textContent).toBe('masqué' + 'modifié');
+
+    // Tout remis comme le disque : plus rien en attente.
+    page.type(page.field('name', 'en'), '  ');
+    page.type(page.field('icon'), '');
+    page.field('hidden').checked = false;
+    page.fire(page.field('hidden'), 'input');
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+    expect(page.line('20001').dot).toBe('');
+    expect(page.el('i-title').textContent).toBe('Mystery Dust');
+  });
+
+  it('« clé… » : le texte du jeu sous la clé, posé dans les six langues du champ', async () => {
+    const page = await items();
+    page.open('20001');
+    page.type(page.key('desc').input, ' SYS_STAMINA ');
+    page.key('desc').button.click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/items/text?key=SYS_STAMINA' });
+    expect(
+      page
+        .all('#i-sheet textarea[data-f="desc"]')
+        .map((t) => (t as never as HTMLInputElement).value),
+    ).toEqual(['Stamina', '活力', '행동력', '行动力', 'Endurance', '']);
+    // Le nom, lui, n'a pas bougé.
+    expect(page.field('name', 'en').value).toBe('');
+    expect(page.el('i-count').textContent).toBe('1 item modifié');
+    expect(page.el('journal').dataset.state).toBe('ok');
+    expect(page.el('journal-last').textContent).toBe(
+      'SYS_STAMINA : description posée dans les langues du jeu.',
+    );
+
+    // Entrée dans la saisie vaut le bouton ; le nom suit, titre compris.
+    page.type(page.key('name').input, 'SYS_STAMINA');
+    page.fire(page.key('name').input, 'keydown', 'Enter');
+    await page.settle();
+    expect(page.field('name', 'en').value).toBe('Stamina');
+    expect(page.field('name', 'fr').value).toBe('Endurance');
+    expect(page.el('i-title').textContent).toBe('Stamina');
+
+    // Une clé inconnue : le journal le dit, rien ne bouge. Sans clé : aucune demande.
+    page.type(page.key('name').input, 'NOPE');
+    page.key('name').button.click();
+    await page.settle();
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('journal-last').textContent).toBe('Clé de texte introuvable : NOPE.');
+    expect(page.field('name', 'en').value).toBe('Stamina');
+    const asked = page.calls.length;
+    page.type(page.key('desc').input, '  ');
+    page.key('desc').button.click();
+    await page.settle();
+    expect(page.calls).toHaveLength(asked);
+  });
+
+  it('« Vider » remet la fiche à la base : l’entrée curée part vide, donc retirée', async () => {
+    const page = await items();
+    page.open('SYS_ASSET_GOLD');
+    page.el('i-clear').click();
+    expect(page.field('icon').value).toBe('');
+    expect(page.field('icon').placeholder).toBe('CM_TopMenu_Gold');
+    expect(page.field('note').value).toBe('');
+    expect(page.el('i-count').textContent).toBe('1 item modifié');
+    expect(page.el('i-badges').textContent).toBe('curé' + 'modifié');
+    page.calls.length = 0;
+    await page.save();
+    expect(page.calls[0]).toEqual({
+      path: '/api/items',
+      body: {
+        changes: [
+          {
+            id: 'SYS_ASSET_GOLD',
+            curated: {},
+            was: { icon: 'CM_TopMenu_Gold', note: 'icône du menu' },
+          },
+        ],
+      },
+    });
+
+    // Sur un item sans entrée : la saisie s'efface, plus rien en attente.
+    const other = await items();
+    other.open('20001');
+    other.type(other.field('note'), 'x');
+    expect(other.el('i-count').textContent).toBe('1 item modifié');
+    other.el('i-clear').click();
+    expect(other.field('note').value).toBe('');
+    expect(other.el('i-count').textContent).toBe('aucune modification');
+  });
+
+  it('« Enregistrer » : tout le lot en UN envoi, ce que le disque portait joint, puis l’état relu', async () => {
+    const page = await items({
+      saved: () => ({
+        ok: false,
+        log: ['x'],
+        saved: ['20001'],
+        refused: ['15001', 'COSTUME_1'],
+        stale: ['COSTUME_1'],
+        reasons: {
+          '15001': 'Stage 1 Attack Gem (15001) : itemCurated[15001].icon — attendu string',
+          COSTUME_1: 'Shutendouji Rin (COSTUME_1) : le disque a changé depuis le chargement.',
+        },
+      }),
+    });
+    page.open('20001');
+    page.type(page.field('name', 'en'), ' Dust ');
+    page.type(page.field('name', 'fr'), '  ');
+    page.type(page.field('desc', 'en'), 'Fine dust.');
+    page.open('15001');
+    page.type(page.field('note'), 'à revoir');
+    page.open('COSTUME_1');
+    page.field('hidden').checked = false;
+    page.fire(page.field('hidden'), 'input');
+    expect(page.el('i-count').textContent).toBe('3 items modifiés');
+    page.calls.length = 0;
+
+    // Ce que le disque rendra à la relecture : 20001 a son entrée.
+    const next = catalog();
+    next[1] = row('20001', 'Dust', {
+      icon: '',
+      overridden: true,
+      base: { name: { en: 'Dust' }, desc: { en: 'Fine dust.' }, icon: '' },
+      curated: { name: { en: 'Dust' }, desc: { en: 'Fine dust.' } },
+    });
+    page.disk.items = next;
+    await page.save();
+
+    expect(page.calls[0]).toEqual({
+      path: '/api/items',
+      body: {
+        changes: [
+          {
+            id: '20001',
+            curated: { name: { en: 'Dust' }, desc: { en: 'Fine dust.' } },
+            was: {},
+          },
+          { id: '15001', curated: { note: 'à revoir' }, was: {} },
+          { id: 'COSTUME_1', curated: {}, was: { hidden: true } },
+        ],
+      },
+    });
+    expect(page.calls[1]).toEqual({ path: '/api/items/state' });
+
+    // Enregistré : plus en attente, la ligne suit le disque.
+    expect(page.line('20001')).toMatchObject({
+      name: 'Dust',
+      curated: true,
+      dot: '',
+      desc: 'desc ✓',
+    });
+    // Refusé par le store : la saisie RESTE, un point rouge, la raison SUR la fiche.
+    expect(page.line('15001').dot).toBe('pt ko');
+    page.open('15001');
+    expect(page.field('note').value).toBe('à revoir');
+    expect(page.el('i-err').hidden).toBe(false);
+    expect(page.el('i-err').textContent).toBe(
+      'Stage 1 Attack Gem (15001) : itemCurated[15001].icon — attendu string',
+    );
+    expect(page.el('i-badges').textContent).toBe('refusé' + 'modifié');
+    // Refusé parce que le disque avait changé : la fiche montre le disque, et pourquoi.
+    expect(page.line('COSTUME_1').dot).toBe('pt ko');
+    page.open('COSTUME_1');
+    expect(page.field('hidden').checked).toBe(true);
+    expect(page.el('i-err').textContent).toBe(
+      'Shutendouji Rin (COSTUME_1) : le disque a changé depuis le chargement.',
+    );
+    expect(page.el('i-count').textContent).toBe('1 item modifié' + '2 refus');
+    // Y retoucher lève le refus.
+    page.open('15001');
+    page.type(page.field('note'), 'revu');
+    expect(page.el('i-err').hidden).toBe(true);
+    expect(page.line('15001').dot).toBe('pt edit');
+  });
+
+  it('« sprites à intégrer » : la liste des sprites, et un clic ouvre la création, son icône posée', async () => {
+    const page = await items({
+      saved: () => ({ ok: true, log: ['fait'], saved: ['TI_Item_New'], refused: [] }),
+    });
+    page.check('i-unused');
+    expect(page.grid()).toEqual(['sprite TI_Class_Mage', 'sprite TI_Item_New']);
+    expect(page.el('i-total').textContent).toBe(
+      '2 sprites à intégrer — extraits du jeu, portés par aucun item',
+    );
+    expect(page.line('TI_Item_New').tile).toContain('images/items/TI_Item_New.webp');
+    // Les filtres lisent une ligne du catalogue : éteints tant que la case est cochée.
+    expect(
+      ['i-nodesc', 'i-noicon', 'i-curated', 'i-hidden'].map((id) => page.el(id).disabled),
+    ).toEqual([true, true, true, true]);
+    expect(
+      page.all('#i-types button').every((b) => (b as never as HTMLInputElement).disabled),
+    ).toBe(true);
+    await page.search('ti_item');
+    expect(page.grid()).toEqual(['sprite TI_Item_New']);
+    expect(page.el('i-total').textContent).toBe('1 sur 2 sprites à intégrer');
+
+    page.open('TI_Item_New');
+    expect(location.hash).toBe('#items/TI_Item_New');
+    expect(page.grid()).toEqual(['Nouveaux, pas encore enregistrés (1)', 'TI_Item_New']);
+    expect(page.line('TI_Item_New')).toMatchObject({ name: 'sans nom', badges: ['nouveau'] });
+    expect(page.el('i-title').textContent).toBe('TI_Item_New');
+    expect(page.field('icon').value).toBe('TI_Item_New');
+    expect(page.el('i-preview').innerHTML).toContain('images/items/TI_Item_New.webp');
+    expect(page.all('#i-sheet > .hint')[0].textContent).toMatch(/^Création : cet id est absent/);
+    // Vierge, elle ne compte pas : rien à enregistrer, mais « Annuler » la retire.
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+    expect(page.el('i-save').disabled).toBe(true);
+    expect(page.el('i-reset').disabled).toBe(false);
+
+    page.type(page.field('name', 'en'), 'New Thing');
+    expect(page.el('i-count').textContent).toBe('1 item modifié');
+    page.calls.length = 0;
+    // À la relecture, la création est sur le disque : plus un brouillon, plus un sprite.
+    page.disk.items = [
+      ...catalog(),
+      row('TI_Item_New', 'New Thing', {
+        type: 'custom',
+        kind: 'custom',
+        icon: 'TI_Item_New',
+        hasDesc: false,
+        overridden: true,
+        curated: { name: { en: 'New Thing' }, icon: 'TI_Item_New' },
+      }),
+    ];
+    page.disk.unused = ['TI_Class_Mage'];
+    await page.save();
+    expect(page.calls[0].body).toEqual({
+      changes: [
+        {
+          id: 'TI_Item_New',
+          curated: { name: { en: 'New Thing' }, icon: 'TI_Item_New' },
+          was: {},
+          create: true,
+        },
+      ],
+    });
+    page.check('i-unused', false);
+    page.type(page.el('i-q'), '');
+    expect(page.grid()).toEqual([
+      '15001',
+      '20001',
+      'SYS_ASSET_GOLD',
+      'COSTUME_1',
+      'Hero%20Piece',
+      'TI_Item_New',
+    ]);
+    expect(page.line('TI_Item_New').badges).toEqual([]);
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+  });
+
+  it('« ＋ item » : l’id pris tel quel, Entrée vaut le bouton ; un id qui existe s’ouvre, un id mal formé est refusé', async () => {
+    const page = await items();
+    page.type(page.el('i-new-id'), ' Wildcard_Pieces ');
+    page.fire(page.el('i-new-id'), 'keydown', 'Enter');
+    expect(page.grid().slice(0, 3)).toEqual([
+      'Nouveaux, pas encore enregistrés (1)',
+      'Wildcard_Pieces',
+      'Catalogue',
+    ]);
+    expect(page.el('i-new-id').value).toBe('');
+    expect(page.el('i-title').textContent).toBe('Wildcard_Pieces');
+    // Pas un sprite : l'icône reste à saisir.
+    expect(page.field('icon').value).toBe('');
+    expect(page.el('i-badges').textContent).toBe('nouveau');
+    // « Vider » rend la fiche vierge de la création.
+    page.type(page.field('name', 'en'), 'Wildcard');
+    page.el('i-clear').click();
+    expect(page.field('name', 'en').value).toBe('');
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+
+    // Un id qui existe : sa fiche s'ouvre, rien n'est créé.
+    page.type(page.el('i-new-id'), 'Hero%20Piece');
+    page.el('i-new').click();
+    expect(page.el('i-title').textContent).toBe('Hero Piece');
+    expect(page.grid().filter((l) => l === 'Hero%20Piece')).toHaveLength(1);
+    expect(page.el('journal-last').textContent).toBe(
+      'Hero%20Piece existe déjà : sa fiche est ouverte.',
+    );
+
+    // Un espace, un `%`, un `/` : refusés ici comme au serveur, la saisie reste.
+    for (const bad of ['My Item', 'A%20B', 'a/b']) {
+      page.type(page.el('i-new-id'), bad);
+      page.el('i-new').click();
+      expect(page.el('journal').dataset.state, bad).toBe('ko');
+      expect(page.el('journal-last').textContent).toBe(
+        `Id de création invalide : « ${bad} » (ni espace, ni %, ni /).`,
+      );
+      expect(page.el('i-new-id').value).toBe(bad);
+    }
+    page.type(page.el('i-new-id'), '  ');
+    page.el('i-new').click();
+    expect(page.el('journal-last').textContent).toBe(
+      'Un id pour le nouvel item (ex. TI_Item_Stamina).',
+    );
+    expect(page.grid()[0]).toBe('Nouveaux, pas encore enregistrés (1)');
+    // Rien de tout cela n'a parlé au serveur.
+    expect(page.calls).toEqual([{ path: '/api/items/state' }]);
+  });
+
+  it('« Annuler » rend le disque et retire les créations ; quitter avec des changements demande confirmation', async () => {
+    const page = await items({ hash: '#items/20001' });
+    expect(page.el('tab-items').hidden).toBe(false);
+    expect(page.el('i-title').textContent).toBe('Mystery Dust');
+    expect(page.confirm).not.toHaveBeenCalled();
+    page.type(page.field('name', 'en'), 'Dust');
+    page.type(page.el('i-new-id'), 'draft');
+    page.el('i-new').click();
+    expect(page.grid()[0]).toBe('Nouveaux, pas encore enregistrés (1)');
+
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.confirm.mock.calls[0]).toEqual([
+      '1 item modifié, pas encore enregistré. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    ]);
+    expect(page.el('tab-items').hidden).toBe(false);
+
+    page.el('i-reset').click();
+    expect(page.grid()).toHaveLength(5);
+    expect(page.el('i-count').textContent).toBe('aucune modification');
+    // La fiche montrée était celle de la création retirée.
+    expect(page.el('i-sheet').textContent?.trim()).toBe('Choisir un item dans le catalogue.');
+    page.open('20001');
+    expect(page.field('name', 'en').value).toBe('');
+    page.all('#tabs [data-tab="coupons"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledTimes(1);
+    expect(page.el('tab-items').hidden).toBe(true);
+  });
+
+  it('`#items/<id>` : l’id encodé de l’adresse rend `Hero%20Piece` intact, écrit à la main aussi', async () => {
+    const page = await items({ hash: '#items/Hero%2520Piece' });
+    expect(page.el('tab-items').hidden).toBe(false);
+    expect(page.el('i-title').textContent).toBe('Hero Piece');
+    expect(page.all('#i-rows .i-row[aria-current="true"]').map((b) => b.dataset.id)).toEqual([
+      'Hero%20Piece',
+    ]);
+    expect(location.hash).toBe('#items/Hero%2520Piece');
+
+    const raw = await items({ hash: '#items/Hero%20Piece' });
+    expect(raw.el('i-title').textContent).toBe('Hero Piece');
+    expect(location.hash).toBe('#items/Hero%2520Piece');
+
+    // Un id inconnu : l'onglet s'ouvre, sans fiche.
+    const none = await items({ hash: '#items/nope' });
+    expect(none.el('tab-items').hidden).toBe(false);
+    expect(none.grid()).toHaveLength(5);
+    expect(none.el('i-sheet').textContent?.trim()).toBe('Choisir un item dans le catalogue.');
+  });
+
+  it('sans tables du jeu : la savebar le dit, « Enregistrer » est éteint — l’état se lit quand même', async () => {
+    const page = await items({ canBake: false });
+    expect(page.grid()).toHaveLength(5);
+    expect(page.el('i-count').textContent).toBe(
+      'aucune modification' + 'enregistrement impossible sur ce poste (tables du jeu absentes)',
+    );
+    page.open('20001');
+    page.type(page.field('note'), 'x');
+    expect(page.el('i-count').textContent).toBe(
+      '1 item modifié' + 'enregistrement impossible sur ce poste (tables du jeu absentes)',
+    );
+    expect(page.el('i-save').disabled).toBe(true);
+    expect(page.el('i-save').title).toBe(NO_BAKE);
+    expect(page.el('i-reset').disabled).toBe(false);
+    page.calls.length = 0;
+    await page.save();
+    expect(page.calls).toEqual([]);
+    // « clé… » sur ce poste : introuvable, et pourquoi.
+    page.type(page.key('name').input, 'NOPE');
+    page.key('name').button.click();
+    await page.settle();
+    expect(page.el('journal-last').textContent).toBe(
+      'Clé de texte introuvable : NOPE — tables du jeu absentes sur ce poste.',
+    );
   });
 });
 

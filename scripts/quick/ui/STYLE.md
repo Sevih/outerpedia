@@ -43,8 +43,8 @@ pastille.
   tête — sa première section, le tableau de bord, est celle que la page
   ouvre ; `.gtab.soon`
   grisé avec son badge « à venir » : Guides, tant que quick n'a pas repris
-  l'admin — Éditeurs a trois sections, Fiche perso, Effets et Monstres, et
-  Outils la sienne, Noms), puis à droite les
+  l'admin — Éditeurs a quatre sections, Fiche perso, Effets, Monstres et
+  Items, et Outils la sienne, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
   le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
@@ -64,7 +64,7 @@ pastille.
   la première section du premier groupe est sans `hidden` dans son HTML.
   Les sections vivent dans UN document : chacune préfixe ses `id` et ses
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
-  `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `j-` Journal du site,
+  `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
   `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
   `v-` Vidéos, `x-` Effets) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
@@ -81,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Items, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -238,7 +238,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Monstres, Bannières et Journal du site : le compte de changements
+La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Monstres, Items, Bannières et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -951,6 +951,85 @@ perso (`.c-fx`), recopiée — elle vaut aussi sous `.hp-modal`, pour le picker
 d'effets ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
 `.m-pn`, `.m-pname`, `.m-pwhere`, et l'élargissement du panneau
 (`:has(.m-pk)`).
+
+### Items (`wide`, fait — B44)
+
+Le catalogue d'items du site (`data/generated/items.json` : gemmes, matériaux,
+présents, boîtes, monnaies, costumes, créations — pas l'équipement) et
+l'entrée curée de chacun (`data/curated/items.json`), l'éditeur « Item » de
+l'admin sur le modèle d'Effets. Croquis du rendu :
+
+```
+.head  Items — Le catalogue d'items du site… et ce que le wiki y corrige… Rien ne s'écrit à la saisie… refait leur entrée du catalogue servi et committe les deux fichiers…
+.savebar   2 items modifiés · 1 refus   [Annuler] [Enregistrer]   (un lot : tous les items modifiés, pas seulement celui à l'écran)
+   sans tables du jeu sur le poste : badge warn « enregistrement impossible sur ce poste (tables du jeu absentes) », [Enregistrer] éteint (`title` = la raison du serveur) — tout se lit quand même
+.card.pad  .form, sur UNE ligne quand la fenêtre le permet : [Chercher 30ch « Nom (en) ou id »] Type [tous | box | costume | custom | gem | goods | material | present] (.i-seg, les types PRÉSENTS, servis par l'état) [☐ sans description] [☐ sans icône] [☐ curés seulement] [☐ masqués] [☐ sprites à intégrer]   …à droite .i-new : [Nouvel item 22ch, chasse fixe « ID (ex. TI_Item_Stamina) », `list` = les sprites à intégrer] [＋ item]
+   dessous, le compte : « 1149 items + 59 monnaies · 102 sans description · 496 sprites à intégrer · 23 curés » ; dès qu'un filtre ou la recherche joue : « 4 sur 1208 entrées »
+   sans images du jeu sur le poste : « … · sprites : images du jeu absentes sur ce poste · … »
+.i-cols — deux colonnes (le catalogue | la fiche, 560 px ; l'une sous l'autre sous 1000 px)
+  gauche .card.i-list : le catalogue en LIGNES, dans l'ordre du fichier, qui défile dans sa carte
+     une ligne (.i-row, un bouton) : tuile d'item 32 px (`itemTile` de `gear-view.mjs` — cadre de rareté du grade, icône sous `images/items`, étoiles ; « ? » en pointillés sans icône) · nom EN (« sans nom » en rouge) · ✎ accent si une entrée curée existe · badges « nouveau » (edit), « masqué » (off) … à droite « desc ✓ » (vert) / « desc — » (ambre) · point
+        dessous : id (chasse fixe) · type · grade
+        dessous, en italique atténué : POURQUOI la ligne répond à la recherche — « nom en », « id SYS_ASSET_GOLD »
+        point : accent = modifié, pas enregistré ; rouge = refusé au dernier enregistrement (`title` = le refus)
+     par pages de 100 : card-foot « 100 lignes montrées sur 1208 » … [Afficher plus (100)] ; un filtre ou la recherche repart de la première page, un item ouvert par l'adresse fait venir la sienne
+     l'item ouvert garde sa ligne hors des filtres ; en tête, .i-sep « Nouveaux, pas encore enregistrés (1) » et les créations de « ＋ item », puis .i-sep « Catalogue »
+     « sprites à intégrer » coché : le catalogue laisse la place aux sprites `TI_*` extraits que rien ne porte — tuile 32 px, nom en chasse fixe, « sprite à intégrer — un clic ouvre sa création » ; les autres filtres sont éteints, la recherche joue sur le nom du sprite ; compte « 496 sprites à intégrer — extraits du jeu, portés par aucun item »
+     .empty « Aucun item ne correspond. » · « Aucun sprite à intégrer. » · « Images du jeu absentes sur ce poste. »
+  droite .card.i-sheet (l'item choisi, `#items/<id>` ; avant, un .empty « Choisir un item dans le catalogue. »)
+     tuile 56 px · nom effectif (le nom anglais saisi, sinon la base, sinon l'id) · id (chasse fixe) · type · grade · ★★★ · badges (« nouveau », « curé », « masqué », « refusé », « modifié »)
+     p.i-err : le refus de l'item, en rouge, SUR sa fiche (`stale`, une erreur du store, un rebake qui a levé)
+     p.hint : une CRÉATION (« Création : cet id est absent du catalogue. Au moins un nom anglais… ») ; une création déjà au catalogue (« … La vider puis « Enregistrer » la retire du catalogue. »)
+     Nom  … à droite [clé du jeu (ex. SYS_STAMINA) 30ch, chasse fixe] [clé…] (.btn.ghost.sm ; Entrée dans le champ aussi)
+        six champs, deux par rangée (.i-langs : en · jp · kr · zh · fr · es), `placeholder` = la base ; « Vide = le nom du catalogue »
+     Description  … [clé du jeu (ex. SYS_DISC_TICKET_STAMINA)] [clé…]
+        six textarea, `placeholder` = la base
+     .form  [Icône (sprite items) 30ch, chasse fixe, `list` = les sprites à intégrer, `placeholder` = l'icône de base] · son aperçu, une tuile 34 px · [☐ Masquer du site (bruit, interne)]
+     Note interne (textarea)
+     [Vider] (.btn.ghost) « Remet la fiche à la base : « Enregistrer » retire alors l'entrée curée. »
+```
+
+Tout ce qui se lit vient de `GET /api/items/state` (`itemsState` : le
+catalogue servi RELU DU DISQUE à chaque appel — l'import statique du site ne
+bougerait plus dans le processus de quick après un rebake —, sous l'overlay
+du curé, celui de l'admin : `listItemEntries` ; par item sa ligne, sa `base`
+— l'entrée du catalogue, le placeholder — et son entrée curée du disque ; les
+sprites à intégrer, les comptes, les types présents, les langues du jeu, le
+dossier des icônes, et `canBake`). Plus d'un mégaoctet : lu à la PREMIÈRE
+venue sur l'onglet, pas au démarrage, puis relu à chaque venue tant que rien
+n'est en attente. La RECHERCHE est au serveur : `GET /api/items/search?q=`
+(`itemsSearch`) joue la règle d'Effets (`effectMatches` : chaque mot de la
+saisie commence un mot du champ) sur le nom anglais effectif et l'id — 200 ms
+après la dernière frappe, seule la dernière demande se dessine. Les filtres
+sont à la page. « clé… » demande `GET /api/items/text?key=` (`resolveText` →
+`resolveGameText` de l'admin) et pose les six langues du champ — une langue
+que la clé ne porte pas est vidée ; une clé inconnue va au journal. Une frappe
+ne redessine pas la fiche : son titre, ses deux tuiles, le point de sa ligne,
+ses badges et la savebar suivent ; la LIGNE du catalogue ne suit qu'après
+« Enregistrer ». « ＋ item » prend l'id TEL QUEL (ni espace, ni `%`, ni `/` —
+la règle du serveur) : un id qui existe ouvre sa fiche, un id nouveau pose une
+fiche vierge qui ne compte pas tant que rien n'y est saisi ; née d'un sprite
+(`TI_…`), elle porte son icône DANS le champ. Un id existant n'est jamais
+décodé ni ré-encodé : `Hero%20Piece` est écrit ainsi dans les deux fichiers,
+et l'adresse l'encode à son tour (`#items/Hero%2520Piece`). « Enregistrer »
+envoie tous les items modifiés à `POST /api/items` (`saveItems`), chacun avec
+l'entrée que la page avait chargée (`was`) et `create` pour une création : le
+serveur refuse TOUT, avant d'écrire, sans tables du jeu ; sinon, par item, il
+compacte l'entrée comme l'éditeur de l'admin (langues vides retirées,
+`hidden` seulement s'il est vrai — l'entrée vide retire la clé), l'écrit par
+`upsertItemCurated` puis refait son entrée du catalogue
+(`bakeItemCatalogEntry`), et committe UNE fois `data/curated/items.json` et
+`data/generated/items.json`. Un item refusé GARDE sa saisie, point rouge, sa
+raison sur sa fiche — sauf si le disque avait changé (`stale`) : sa fiche
+montre alors le disque. « Annuler » rend le disque et retire les créations.
+Quitter l'onglet avec des items en attente demande confirmation (`canLeave`).
+Propres à l'onglet, dans `tabs/items.css` : `.i-new`, `.i-total`, `.i-seg`
+(le segmenté de Gear reco, recopié faute de composant commun), `.i-cols`,
+`.i-list`, `.i-rows`, `.i-sep`, `.i-row`, `.i-cur`, `.i-why`, `.i-desc`,
+`.i-sheet`, `.i-err`, `.i-bhead`, `.i-key`, `.i-langs`, `.i-icon-pv` — et la
+tuile d'item `.gv-*` de Gear reco, recopiée sous `#tab-items` (`gear.css` ne
+la règle que sous `#c-gear`) ; `itemTile` prend pour elle un `dir` (`items`),
+le dossier du sprite quand ce n'est pas `equipment`.
 
 ## Outils — croquis
 

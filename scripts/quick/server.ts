@@ -52,6 +52,7 @@ import {
   EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
+  ITEMS_DEPS,
   MONSTERS_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
@@ -72,6 +73,8 @@ import {
   gameTablesState,
   gearRecoState,
   gitState,
+  itemsSearch,
+  itemsState,
   monsterSheetState,
   monstersRoster,
   namesState,
@@ -82,6 +85,7 @@ import {
   pushMain,
   queryGameTable,
   rankState,
+  resolveText,
   rewardOptions,
   saveBannerList,
   saveChangelogList,
@@ -89,6 +93,7 @@ import {
   saveCouponList,
   saveEffects,
   saveGearReco,
+  saveItems,
   saveMonsterKit,
   saveNames,
   saveRanks,
@@ -100,6 +105,7 @@ import {
   type ComicBatch,
   type EffectChange,
   type GitState,
+  type ItemChange,
   type NameChange,
   type Outcome,
   type RankChange,
@@ -796,6 +802,36 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     await stream(res, (report) =>
       withGit(saveMonsterKit(String(id ?? ''), changes, was, MONSTERS_DEPS, report)),
     );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/items/state') {
+    // Le catalogue d'items, relu du DISQUE à chaque appel (`items.json` change
+    // à chaque rebake) sous l'overlay du curé, les sprites à intégrer, les
+    // comptes, et `canBake` : les tables du jeu que l'enregistrement exige.
+    json(res, itemsState());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/items/search') {
+    // La recherche (`?q=`) : la règle d'Effets, sur l'id et le nom anglais.
+    // Par item qui répond, le champ qui a répondu. Rien ne s'écrit.
+    json(res, itemsSearch(url.searchParams.get('q')));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/items/text') {
+    // « clé… » : le texte du jeu sous la clé de `?key=`, dans les six langues.
+    json(res, resolveText(url.searchParams.get('key')));
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/items') {
+    // Un lot d'entrées curées (une création = `create`, sur un id nouveau) :
+    // refusé avant toute écriture sans tables du jeu ; sinon le store de
+    // l'admin puis le rebake par item, et UN commit du curé et du catalogue.
+    const { changes } = await body<{ changes: ItemChange[] }>(req);
+    await stream(res, (report) => withGit(saveItems(changes, ITEMS_DEPS, report)));
     return;
   }
 

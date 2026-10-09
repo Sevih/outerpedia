@@ -47,7 +47,8 @@
       Gear reco, qui a quitté les Données), EE (sous-onglet « EE » de la
       « Fiche perso », lot B43), Monster (onglet « Monstres », lot C12 — le
       câblage des chips ; ses stats, son intégration et ses versions sont de
-      l'extractor, étapes 19-20). Clos sans portage (lot A34) : Gear presets
+      l'extractor, étapes 19-20), Item (onglet « Items », lot B44 — le
+      dernier des Éditeurs). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
@@ -79,6 +80,39 @@
       adds liés par le kit qui héritent de plusieurs guides (Ragnakeus
       `4086001` : huit), et l'ordre du picker — par nom, pas les boss
       d'abord.
+- [ ] **« Items » — contrôles à l'écran (lot B44)** : le banc ne tape ni ne
+      clique, et aucun enregistrement réel n'a été joué. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : quatre routes nouvelles — sans ça
+      l'onglet dit « quick lancé avant ce code »). (1) Éditeurs › Items : le
+      compte « 1149 items + 59 monnaies · 102 sans description · 496 sprites
+      à intégrer · 23 curés ». Chercher `Hero` — attendu : « Hero Piece »
+      parmi les tickets, trouvé par son NOM (« nom en »), son id
+      `Hero%20Piece` intact sous son nom et dans l'adresse
+      (`#items/Hero%2520Piece`) ; `ero` → « Aucun item ne correspond. ».
+      (2) Les filtres : le type (goods → 59), « sans description » → 102,
+      « curés seulement » → 23. (3) Un item sans description : sur sa
+      fiche, « Description », taper une clé du jeu (`SYS_STAMINA` pour
+      l'essai) puis « clé… » — attendu : les six langues posées,
+      « 1 item modifié ». « Enregistrer » — attendu : UN commit
+      `chore(items): <nom>` qui porte les DEUX fichiers,
+      `data/curated/items.json` et `data/generated/items.json`, et dans le
+      second la seule entrée de cet item. (4) Cocher « sprites à intégrer »,
+      cliquer un `TI_…` : la fiche vierge de la création, son icône déjà
+      dans le champ ; un nom anglais, « Enregistrer » — l'item arrive au
+      catalogue (type custom), le sprite quitte la liste. (5) « Vider » sur
+      un item curé puis « Enregistrer » : son entrée disparaît de
+      `data/curated/items.json`, le catalogue retrouve les valeurs du jeu.
+      ATTENTION aux créations (type custom : `Hero%20Piece`, `Gems`…) :
+      elles n'existent que par leur entrée, les vider les RETIRE du
+      catalogue — la fiche le dit, l'admin faisait de même. (6) L'admin par
+      son URL (`/admin/editor/items`) : le même état ; le groupe « Editor »
+      a quitté son menu. (7) Après « Pousser » et le déploiement : le nom ou
+      la description corrigés là où le site montre l'item (récompenses d'un
+      code promo, tooltips). À juger : la rangée des filtres, qui se replie
+      sur deux lignes à 1440 px (huit types + cinq cases) ; « sprites à
+      intégrer », qui REMPLACE le catalogue et éteint les autres filtres ;
+      les 496 sprites, dont beaucoup ne sont pas des items (`TI_Class_*`) ;
+      et l'état d'un mégaoctet relu à chaque venue sur l'onglet.
 - [ ] **« Fiche perso » › EE — contrôles à l'écran (lot B43)** : le banc ne
       clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : l'état de la fiche sert maintenant

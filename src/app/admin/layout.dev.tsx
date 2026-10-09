@@ -43,24 +43,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         badge: badge(e.id),
       })),
     },
-    {
-      // Même ordre d'entités que l'Extractor (demande Sevih) ; le Monstre et
-      // l'Item ferment la liste des deux côtés. PAS d'éditeur pour les autres
-      // pièces d'équipement (armes/amulettes/armures/talismans/sets) : rien à
-      // curer dessus — seul l'EE a une curation (rang + câblage des chips).
-      title: 'Editor',
-      items: [
-        // Character : porté dans quick (Éditeurs › Fiche perso, Gear reco
-        // compris), lien retiré le 09/10. Effect : porté dans quick (Éditeurs ›
-        // Effets), lien retiré le 08/10. EE : porté dans quick (Éditeurs ›
-        // Fiche perso, sous-onglet « EE »), lien retiré le 09/10. Monster :
-        // porté dans quick (Éditeurs › Monstres : le câblage des chips, les
-        // monstres des guides d'abord), lien retiré le 09/10 — les stats,
-        // l'intégration et les versions restent à l'Extractor. Les pages
-        // restent joignables par leur URL jusqu'au retrait de l'admin.
-        { label: 'Item', href: '/admin/editor/items' },
-      ],
-    },
+    // Groupe « Editor » : vide depuis le 09/10, il sort du menu. Character :
+    // porté dans quick (Éditeurs › Fiche perso, Gear reco compris), lien
+    // retiré le 09/10. Effect : porté dans quick (Éditeurs › Effets), lien
+    // retiré le 08/10. EE : porté dans quick (Éditeurs › Fiche perso,
+    // sous-onglet « EE »), lien retiré le 09/10. Monster : porté dans quick
+    // (Éditeurs › Monstres : le câblage des chips, les monstres des guides
+    // d'abord), lien retiré le 09/10 — les stats, l'intégration et les
+    // versions restent à l'Extractor. Item : porté dans quick (Éditeurs ›
+    // Items : le catalogue curé, la fiche à six langues, la création), lien
+    // retiré le 09/10. PAS d'éditeur pour les autres pièces d'équipement
+    // (armes/amulettes/armures/talismans/sets) : rien à curer dessus. Les
+    // pages (`/admin/editor/…`) restent joignables par leur URL jusqu'au
+    // retrait de l'admin.
     {
       title: 'Tools',
       items: [

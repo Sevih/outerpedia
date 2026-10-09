@@ -1,0 +1,75 @@
+<section id="tab-items" hidden>
+  <div class="head">
+    <h2>Items</h2>
+    <p class="hint">
+      Le catalogue d'items du site — gemmes, matériaux, présents, boîtes, monnaies, costumes,
+      créations ; pas l'équipement — et ce que le wiki y corrige : un nom, une description, une
+      icône, un item masqué, ou une création pour ce que les tables du jeu ne nomment pas. Rien ne
+      s'écrit à la saisie : « Enregistrer » envoie tous les items modifiés, refait leur entrée du
+      catalogue servi et committe les deux fichiers. Le site ne change qu'une fois le lot poussé («
+      Pousser », dans la barre d'en-tête) et le build de la CI déployé.
+    </p>
+  </div>
+
+  <div class="savebar" role="toolbar" aria-label="Enregistrement">
+    <span id="i-count"></span>
+    <button class="btn ghost" id="i-reset" disabled>Annuler</button>
+    <button class="btn primary" id="i-save" disabled>Enregistrer</button>
+  </div>
+
+  <div class="card pad" aria-label="Recherche et filtres">
+    <div class="form">
+      <div class="field">
+        <label for="i-q">Chercher</label>
+        <input
+          id="i-q"
+          type="search"
+          class="w-search"
+          placeholder="Nom (en) ou id"
+          autocomplete="off"
+        />
+      </div>
+      <div class="field">
+        <span class="lbl" id="i-type-label">Type</span>
+        <div class="i-seg" id="i-types" role="group" aria-labelledby="i-type-label"></div>
+      </div>
+      <label class="check"><input type="checkbox" id="i-nodesc" /> sans description</label>
+      <label class="check"><input type="checkbox" id="i-noicon" /> sans icône</label>
+      <label class="check"><input type="checkbox" id="i-curated" /> curés seulement</label>
+      <label class="check"><input type="checkbox" id="i-hidden" /> masqués</label>
+      <label class="check"><input type="checkbox" id="i-unused" /> sprites à intégrer</label>
+      <div class="i-new">
+        <div class="field">
+          <label for="i-new-id">Nouvel item</label>
+          <input
+            id="i-new-id"
+            class="w-text mono"
+            list="i-sprites"
+            placeholder="ID (ex. TI_Item_Stamina)"
+            autocomplete="off"
+          />
+        </div>
+        <button class="btn ghost" id="i-new" title="Ouvre la fiche vierge d'un item créé">
+          ＋ item
+        </button>
+      </div>
+    </div>
+    <p class="lbl i-total" id="i-total"></p>
+  </div>
+
+  <div class="i-cols">
+    <div class="card i-list" aria-label="Catalogue">
+      <div class="i-rows" id="i-rows"></div>
+      <div class="empty" id="i-empty" hidden></div>
+      <div class="card-foot" id="i-foot" hidden>
+        <span class="lbl" id="i-shown"></span>
+        <button class="btn ghost sm" id="i-more">Afficher plus</button>
+      </div>
+    </div>
+
+    <div class="card i-sheet" id="i-sheet" aria-live="off">
+      <div class="empty">Choisir un item dans le catalogue.</div>
+    </div>
+  </div>
+  <datalist id="i-sprites"></datalist>
+</section>

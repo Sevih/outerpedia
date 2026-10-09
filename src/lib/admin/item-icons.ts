@@ -20,11 +20,16 @@ function sprites(): string[] {
   }
 }
 
-/** Noms de sprites `TI_*` non référencés (ni comme icône, ni comme id créé). */
-export function unusedItemIcons(): string[] {
-  const cur = loadItemCurated();
+/**
+ * Noms de sprites `TI_*` non référencés (ni comme icône, ni comme id créé).
+ * `catalog` : un catalogue relu du disque (quick, cf. `listItemEntries`).
+ */
+export function unusedItemIcons(
+  catalog: Record<string, { icon?: string }> = getCatalog(),
+  cur: Record<string, { icon?: string }> = loadItemCurated(),
+): string[] {
   const used = new Set<string>();
-  for (const e of Object.values(getCatalog())) if (e.icon) used.add(e.icon.toLowerCase());
+  for (const e of Object.values(catalog)) if (e.icon) used.add(e.icon.toLowerCase());
   for (const c of Object.values(cur)) if (c.icon) used.add(c.icon.toLowerCase());
   // Un sprite dont le nom est déjà un id créé n'est plus « à rentrer ».
   const createdIds = new Set(Object.keys(cur).map((k) => k.toLowerCase()));

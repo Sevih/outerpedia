@@ -63,6 +63,7 @@ export const GROUPS = [
       { id: 'character', label: 'Fiche perso', wide: true },
       { id: 'effects', label: 'Effets', wide: true },
       { id: 'monsters', label: 'Monstres', wide: true },
+      { id: 'items', label: 'Items', wide: true },
     ],
   },
   { id: 'guides', label: 'Guides', soon: true, sections: [] },

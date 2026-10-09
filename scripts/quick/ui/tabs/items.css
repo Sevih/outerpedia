@@ -1,0 +1,382 @@
+/* Onglet « Items » : la recherche et ses filtres dans une carte, puis deux
+   colonnes — le catalogue en lignes, par pages, et la fiche de l'item choisi.
+   Le reste — carte, `.form`, `.savebar`, `.btn`, `.badge` — vient de
+   `quick.css`. */
+
+/* Le compte de la savebar et ses badges. `.savebar span` pousse à gauche
+   chaque `span` ; ici seul le compte entier l'est. */
+#tab-items #i-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-items #i-count * {
+  margin-right: 0;
+}
+
+/* « Nouvel item » ferme la rangée des filtres, à droite, son bouton à côté de
+   son champ même quand la rangée se replie ; le compte dessous. */
+#tab-items .i-new {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-left: auto;
+}
+#tab-items .i-total {
+  margin: 0;
+}
+
+/* Le groupe segmenté de Gear reco, recopié faute de composant commun : un
+   bouton par type présent. */
+#tab-items .i-seg {
+  display: inline-flex;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-items .i-seg button {
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-items .i-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-items .i-seg button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+#tab-items .i-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+#tab-items .i-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: 18px;
+  align-items: start;
+}
+
+/* ------------------------------------------------------------ le catalogue
+   Il défile dans sa carte, la fiche reste à l'écran. */
+#tab-items .i-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#tab-items .i-rows {
+  max-height: max(320px, calc(100vh - 490px));
+  padding: 4px 6px;
+  overflow-y: auto;
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+#tab-items .i-rows:empty {
+  display: none;
+}
+#tab-items .i-row + .i-row {
+  border-top: 1px solid color-mix(in srgb, var(--line-subtle) 45%, transparent);
+}
+#tab-items .i-sep {
+  margin: 6px 0 2px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--surface-base);
+  color: var(--content-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#tab-items .i-list .empty {
+  margin: 14px;
+}
+/* `.card-foot` pose un `display` : sans cette règle, `hidden` ne masquerait rien. */
+#tab-items .card-foot[hidden] {
+  display: none;
+}
+#tab-items #i-more {
+  margin-left: auto;
+}
+
+/* Une ligne : la tuile, le nom et ses marques, l'id · le type · le grade, la
+   raison de la correspondance, « desc ✓ / — », le point. */
+#tab-items .i-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-items .i-row:hover {
+  background: var(--surface-overlay);
+}
+#tab-items .i-row[aria-current='true'] {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+#tab-items .i-row:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-items .i-main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+#tab-items .i-line {
+  display: flex;
+  align-items: center;
+  gap: 4px 6px;
+  flex-wrap: wrap;
+}
+#tab-items .i-name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#tab-items .i-name.none {
+  color: var(--danger);
+  font-style: italic;
+  font-weight: 400;
+}
+#tab-items .i-cur {
+  color: var(--accent);
+  font-size: 12px;
+}
+#tab-items .i-row .badge {
+  height: 18px;
+  padding: 0 7px;
+  font-size: 11px;
+}
+#tab-items .i-meta {
+  color: var(--content-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+#tab-items .i-why {
+  color: var(--content-muted);
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.8;
+  overflow-wrap: anywhere;
+}
+#tab-items .i-desc {
+  flex: 0 0 auto;
+  font-size: 12px;
+  white-space: nowrap;
+}
+#tab-items .i-desc.ok {
+  color: var(--success);
+}
+#tab-items .i-desc.no {
+  color: var(--warn);
+}
+/* Le point d'une ligne : accent = modifiée, rouge = refusée. */
+#tab-items .i-pt {
+  display: inline-flex;
+  flex: 0 0 8px;
+}
+#tab-items .pt {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+#tab-items .pt.ko {
+  background: var(--danger);
+}
+
+/* La tuile d'item de `gear-view.mjs`, celle de Gear reco (`gear.css`, qui ne
+   la règle que sous `#c-gear`), recopiée pour le catalogue et la fiche. */
+#tab-items .gv-tile {
+  position: relative;
+  display: block;
+  flex: none;
+}
+#tab-items .gv-tile img {
+  position: absolute;
+  display: block;
+}
+#tab-items .gv-frame,
+#tab-items .gv-icon {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#tab-items .gv-icon {
+  padding: 6%;
+  object-fit: contain;
+}
+#tab-items .gv-stars {
+  position: absolute;
+  inset: auto 0 4%;
+  display: flex;
+  justify-content: center;
+}
+#tab-items .gv-stars img {
+  position: static;
+}
+#tab-items .gv-tile.none {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--placeholder);
+}
+
+/* ---------------------------------------------------------------- la fiche */
+#tab-items .i-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+}
+#tab-items .i-sheet > .empty {
+  margin: 0;
+}
+#tab-items .i-sheet > .hint {
+  margin: 0;
+}
+#tab-items .i-who {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+#tab-items .i-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-items .i-id strong {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+#tab-items .i-badges {
+  display: inline-flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 20px;
+}
+/* Le refus de l'item, sur sa fiche. */
+#tab-items .i-err {
+  margin: 0;
+  color: var(--danger);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+#tab-items .i-err[hidden] {
+  display: none;
+}
+#tab-items .i-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+/* Le titre d'un champ texte, et à sa droite son « clé… ». */
+#tab-items .i-bhead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-items .i-bhead h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+#tab-items .i-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+#tab-items .i-key input {
+  width: 30ch;
+  height: 28px;
+  font-size: 12px;
+}
+#tab-items .i-block .hint {
+  margin: 0;
+}
+/* Un champ par langue, deux par rangée. */
+#tab-items .i-langs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+}
+#tab-items .i-lang {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+}
+#tab-items .i-lang span {
+  flex: 0 0 20px;
+  padding-top: 8px;
+  color: var(--content-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#tab-items .i-lang input,
+#tab-items .i-lang textarea {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+}
+#tab-items .i-lang textarea {
+  height: 64px;
+  min-height: 34px;
+}
+#tab-items .i-wide textarea {
+  width: 100%;
+  height: 64px;
+}
+/* L'aperçu de l'icône, à la hauteur de son champ. */
+#tab-items .i-icon-pv {
+  display: inline-flex;
+}
+/* Une description plus longue que son cadre : l'ascenseur de la page, pas un blanc. */
+#tab-items .i-sheet textarea {
+  scrollbar-color: var(--line) transparent;
+  scrollbar-width: thin;
+}
+
+/* Fenêtre étroite : le catalogue au-dessus de la fiche. */
+@media (max-width: 1000px) {
+  #tab-items .i-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #tab-items .i-rows {
+    max-height: 320px;
+  }
+}
+@media (max-width: 620px) {
+  #tab-items .i-langs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #tab-items .i-key {
+    margin-left: 0;
+  }
+}

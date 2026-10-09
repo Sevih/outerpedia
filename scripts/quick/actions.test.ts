@@ -87,6 +87,13 @@
  * jour bougent à chaque patch et à chaque curation), le store et git INJECTÉS :
  * aucun test n'écrit `data/curated/effects.json`.
  *
+ * Et contrat de l'onglet « Items » — `itemsState` (le catalogue servi sous
+ * l'overlay du curé), `itemsSearch` (la règle d'Effets, sur l'id et le nom
+ * anglais), `resolveText` et `saveItems`. Le catalogue et le curé sont FACTICES,
+ * le store, le rebake et git INJECTÉS : aucun test n'écrit
+ * `data/curated/items.json` ni `data/generated/items.json` — le second est LU
+ * une fois, pour prouver que la route lit le disque.
+ *
  * Et contrat de `addComics` — l'onglet « 4-comics » : plusieurs BD et plusieurs
  * langues, UN envoi, UN commit. Même règle : le pool est un répertoire
  * temporaire, la chaîne (webp, R2, repli) et git sont factices.
@@ -111,11 +118,13 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type {
+  CatalogEntry,
   CharacterCurated,
   DungeonRef,
   Effect,
   EffectCurated,
   GearBuild,
+  LangDict,
   LocalizedText,
   Monster,
 } from '@contracts';
@@ -123,6 +132,7 @@ import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKi
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
+import type { ItemCurated } from '@/lib/admin/item-curated-store';
 import {
   monsterKitCards,
   pickMonsterKit,
@@ -155,7 +165,9 @@ import {
   CHARACTER_SHEET_DEPS,
   COUPON_EXPIRY_DAYS,
   DASHBOARD_DISK,
+  ITEMS_DISK,
   NO_GAME_DATA,
+  NO_ITEM_BAKE,
   NO_TRANSLATE_KEY,
   addComics,
   bannersState,
@@ -177,6 +189,8 @@ import {
   gearRecoState,
   gitState,
   groupComics,
+  itemsSearch,
+  itemsState,
   monsterSheetState,
   monstersRoster,
   namesState,
@@ -186,11 +200,13 @@ import {
   previewInline,
   pushMain,
   queryGameTable,
+  resolveText,
   saveBannerList,
   saveChangelogList,
   saveCharacterSheet,
   saveGearReco,
   saveEffects,
+  saveItems,
   saveMonsterKit,
   saveNames,
   tableUsage,
@@ -212,6 +228,9 @@ import {
   type GameTablesDisk,
   type GearCatalog,
   type GearRecoDeps,
+  type ItemChange,
+  type ItemsDeps,
+  type ItemsDisk,
   type MonstersDeps,
   type NameChange,
   type NamesDeps,
@@ -2065,6 +2084,14 @@ describe('itemTile — la tuile d’item de gear-view', () => {
     expect(count(html, '<img')).toBe(3);
   });
 
+  it('`dir` : le sprite d’un item du catalogue est sous `images/items`, pas `equipment`', () => {
+    const html = itemTile(env, { icon: 'TI_GEM_ATK_1', grade: 'rare', star: 2, dir: 'items' }, 32);
+    expect(html).toContain('class="gv-icon" src="https://img.test/images/items/TI_GEM_ATK_1.webp"');
+    expect(html).not.toContain('images/equipment/');
+    expect(html).toContain('images/ui/bg/TI_Slot_Rare.webp');
+    expect(count(html, 'CM_icon_star_y')).toBe(2);
+  });
+
   it('pas d’icône de classe sur une pièce libre ou ouverte à plusieurs classes', () => {
     const tile = (classLimits: string[]) =>
       itemTile(env, { icon: 'x', grade: 'rare', star: 6, classLimits }, 64);
@@ -3354,12 +3381,13 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     ]);
     // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
     // perso », Gear reco compris), celui des EE et les outils Pro / Con et
-    // Synergy, trois de ses sous-onglets, et celui des monstres. Les lots
-    // suivants la rempliront.
+    // Synergy, trois de ses sous-onglets, celui des monstres et celui des
+    // items. Les lots suivants la rempliront.
     expect(ADMIN_TO_QUICK).toEqual({
       '/admin/editor/characters': 'character',
       '/admin/editor/ee': 'character',
       '/admin/editor/effects': 'effects',
+      '/admin/editor/items': 'items',
       '/admin/editor/monsters': 'monsters',
       '/admin/tools/pros-cons': 'character',
       '/admin/tools/synergies': 'character',
@@ -5230,6 +5258,566 @@ describe('saveEffects — store et git injectés', () => {
     const out = await saveEffects([change('26', { hidden: true })], fake);
     expect(out).toMatchObject({ ok: false, saved: ['26'], refused: [] });
     expect(out.log.at(-1)).toBe('git commit a échoué : hook');
+  });
+});
+
+/**
+ * Un petit catalogue servi pour l'onglet « Items » : une gemme du jeu, un
+ * matériau sans description ni icône, une monnaie, un costume masqué, une
+ * création bakée dont l'id est LITTÉRALEMENT encodé — et le curé qui va avec,
+ * plus une création que le catalogue ne porte pas encore.
+ */
+const itemLang = (dict: Record<string, string>): LangDict => dict as LangDict;
+const catalogEntry = (en: string, over: Partial<CatalogEntry> = {}): CatalogEntry => ({
+  kind: 'item',
+  name: { ...emptyDict(), en },
+  desc: { ...emptyDict(), en: `${en}.` },
+  icon: 'TI_Item',
+  grade: 'normal',
+  type: 'material',
+  star: 0,
+  ...over,
+});
+const ITEM_CATALOG: Record<string, CatalogEntry> = {
+  '15001': catalogEntry('Stage 1 Attack Gem', { type: 'gem', star: 1, icon: 'TI_GEM_ATK_1' }),
+  '20001': catalogEntry('Mystery Dust', { desc: undefined, icon: '', grade: 'rare' }),
+  SYS_ASSET_GOLD: catalogEntry('Gold', { kind: 'goods', type: 'goods', icon: 'CM_TopMenu_Gold' }),
+  COSTUME_1: catalogEntry('Shutendouji Rin', {
+    kind: 'costume',
+    type: 'costume',
+    grade: 'rare',
+    hidden: true,
+  }),
+  'Hero%20Piece': catalogEntry('Hero Piece', {
+    kind: 'custom',
+    type: 'custom',
+    icon: 'CM_Piece_Frame',
+  }),
+};
+const ITEM_CURATED: Record<string, ItemCurated> = {
+  SYS_ASSET_GOLD: { icon: 'CM_TopMenu_Gold', note: 'icône du menu' },
+  COSTUME_1: { hidden: true },
+  'Hero%20Piece': {
+    name: itemLang({ en: 'Hero Piece', fr: 'Fragment de Héros' }),
+    icon: 'CM_Piece_Frame',
+  },
+  TI_Item_Stamina: { name: itemLang({ en: 'Stamina' }), icon: 'TI_Item_Stamina' },
+};
+const itemsDisk = (
+  over: {
+    catalog?: Record<string, CatalogEntry>;
+    curated?: Record<string, ItemCurated>;
+    sprites?: string[];
+    hasSprites?: boolean;
+    tables?: string[];
+  } = {},
+): ItemsDisk => ({
+  catalog: () => over.catalog ?? ITEM_CATALOG,
+  curated: () => over.curated ?? ITEM_CURATED,
+  unusedIcons: () => over.sprites ?? ['TI_Class_Mage', 'TI_Item_New'],
+  hasSprites: () => over.hasSprites ?? true,
+  tables: () => over.tables ?? ['ItemTemplet', 'TextItem', 'TextSystem'],
+});
+
+describe('itemsState — le catalogue servi sous l’overlay du curé, lectures injectées', () => {
+  it('les lignes : l’overlay de l’admin, la création pas encore bakée en queue', () => {
+    const { items } = itemsState(itemsDisk());
+    expect(items.map((r) => r.id)).toEqual([
+      '15001',
+      '20001',
+      'SYS_ASSET_GOLD',
+      'COSTUME_1',
+      'Hero%20Piece',
+      'TI_Item_Stamina',
+    ]);
+    const row = (id: string) => items.find((r) => r.id === id);
+
+    expect(row('15001')).toEqual({
+      id: '15001',
+      name: 'Stage 1 Attack Gem',
+      type: 'gem',
+      kind: 'item',
+      grade: 'normal',
+      star: 1,
+      icon: 'TI_GEM_ATK_1',
+      hasDesc: true,
+      hidden: false,
+      overridden: false,
+      base: {
+        name: ITEM_CATALOG['15001'].name,
+        desc: ITEM_CATALOG['15001'].desc,
+        icon: 'TI_GEM_ATK_1',
+      },
+      curated: {},
+    });
+    // Ni description ni icône : ce que les filtres « sans … » liront.
+    expect(row('20001')).toMatchObject({ hasDesc: false, icon: '', overridden: false });
+    expect(row('COSTUME_1')).toMatchObject({ hidden: true, overridden: true });
+    // L'id littéralement encodé, tel quel ; l'entrée curée est celle du disque.
+    expect(row('Hero%20Piece')).toMatchObject({ name: 'Hero Piece', kind: 'custom' });
+    expect(row('Hero%20Piece')?.curated).toBe(ITEM_CURATED['Hero%20Piece']);
+    // Une création que le catalogue ne porte pas : pas de base, tout vient du curé.
+    expect(row('TI_Item_Stamina')).toEqual({
+      id: 'TI_Item_Stamina',
+      name: 'Stamina',
+      type: 'custom',
+      kind: 'custom',
+      grade: 'normal',
+      star: 0,
+      icon: 'TI_Item_Stamina',
+      hasDesc: false,
+      hidden: false,
+      overridden: true,
+      base: null,
+      curated: ITEM_CURATED.TI_Item_Stamina,
+    });
+  });
+
+  it('le curé prime sur le catalogue : nom, icône, masquage', () => {
+    const { items } = itemsState(
+      itemsDisk({
+        curated: {
+          '20001': {
+            name: itemLang({ en: 'Dust' }),
+            desc: itemLang({ en: 'Fine dust.' }),
+            icon: 'TI_Dust',
+            hidden: true,
+          },
+        },
+      }),
+    );
+    expect(items.find((r) => r.id === '20001')).toMatchObject({
+      name: 'Dust',
+      icon: 'TI_Dust',
+      hasDesc: true,
+      hidden: true,
+      overridden: true,
+      // Le placeholder reste ce que le catalogue servi porte.
+      base: { name: ITEM_CATALOG['20001'].name, icon: '' },
+    });
+  });
+
+  it('les comptes de l’en-tête, les types présents, les langues du jeu, le dossier des icônes', () => {
+    const s = itemsState(itemsDisk());
+    expect(s.counts).toEqual({ items: 5, currencies: 1, noDesc: 2, unused: 2, curated: 4 });
+    expect(s.types).toEqual(['costume', 'custom', 'gem', 'goods', 'material']);
+    expect(s.langs).toEqual(['en', 'jp', 'kr', 'zh', 'fr', 'es']);
+    expect(s.sprite).toBe('images/items');
+    expect(s.unused).toEqual(['TI_Class_Mage', 'TI_Item_New']);
+    expect(s.hasSprites).toBe(true);
+  });
+
+  it('`canBake` : les deux tables que le rebake relit sont là — sinon l’état se lit quand même', () => {
+    expect(itemsState(itemsDisk()).canBake).toBe(true);
+    for (const tables of [[], ['ItemTemplet'], ['TextSystem', 'TextItem']]) {
+      const s = itemsState(itemsDisk({ tables }));
+      expect(s.canBake, tables.join()).toBe(false);
+      expect(s.items).toHaveLength(6);
+      expect(s.noBake).toBe(NO_ITEM_BAKE);
+    }
+  });
+
+  it('sans images du jeu : aucun sprite, et l’état le dit', () => {
+    const s = itemsState(itemsDisk({ sprites: [], hasSprites: false }));
+    expect(s.unused).toEqual([]);
+    expect(s.hasSprites).toBe(false);
+    expect(s.counts.unused).toBe(0);
+  });
+
+  it('relit le DISQUE à chaque appel : un rebake se voit sans relancer quick', () => {
+    let catalog = ITEM_CATALOG;
+    const disk = { ...itemsDisk(), catalog: () => catalog };
+    expect(itemsState(disk).items.find((r) => r.id === '20001')?.name).toBe('Mystery Dust');
+    catalog = { ...ITEM_CATALOG, '20001': catalogEntry('Stardust') };
+    expect(itemsState(disk).items.find((r) => r.id === '20001')?.name).toBe('Stardust');
+    // Et la lecture de la route est le fichier du dépôt, pas l'import statique.
+    const real = ITEMS_DISK.catalog();
+    expect(Object.keys(real).length).toBeGreaterThan(1000);
+    expect(real['Hero%20Piece']?.kind).toBe('custom');
+    expect(ITEMS_DISK.catalog()).not.toBe(real);
+  });
+});
+
+describe('itemsSearch, resolveText — la règle d’Effets et les textes du jeu', () => {
+  it('par début de mot, sur le nom anglais : `Hero` trouve `Hero%20Piece`, son id intact', () => {
+    expect(itemsSearch('Hero', itemsDisk())).toEqual({
+      q: 'Hero',
+      matches: { 'Hero%20Piece': { field: 'name.en', value: 'Hero Piece' } },
+    });
+    expect(itemsSearch('pie', itemsDisk()).matches).toEqual({
+      'Hero%20Piece': { field: 'name.en', value: 'Hero Piece' },
+    });
+    // Jamais par le milieu d'un mot.
+    expect(itemsSearch('ero', itemsDisk()).matches).toEqual({});
+  });
+
+  it('par l’id, exact ou par ses mots — et les sprites à intégrer par leur nom', () => {
+    expect(itemsSearch('15001', itemsDisk()).matches).toEqual({
+      '15001': { field: 'id', value: '15001' },
+    });
+    expect(itemsSearch('sys_asset', itemsDisk()).matches).toEqual({
+      SYS_ASSET_GOLD: { field: 'id', value: 'SYS_ASSET_GOLD' },
+    });
+    expect(itemsSearch('ti_class', itemsDisk()).matches).toEqual({
+      TI_Class_Mage: { field: 'id', value: 'TI_Class_Mage' },
+    });
+    // Le nom effectif : le curé prime.
+    expect(Object.keys(itemsSearch('stamina', itemsDisk()).matches ?? {})).toEqual([
+      'TI_Item_Stamina',
+    ]);
+  });
+
+  it('une saisie vide ne filtre rien', () => {
+    expect(itemsSearch('  ', itemsDisk())).toEqual({ q: '  ', matches: null });
+    expect(itemsSearch(null, itemsDisk())).toEqual({ q: '', matches: null });
+  });
+
+  it('`resolveText` : la clé sans blancs, le texte du résolveur, `null` sans clé', () => {
+    const asked: string[] = [];
+    const resolveKey = (key: string) => {
+      asked.push(key);
+      return key === 'SYS_STAMINA' ? itemLang({ en: 'Stamina', fr: 'Endurance' }) : null;
+    };
+    expect(resolveText(' SYS_STAMINA ', resolveKey)).toEqual({
+      key: 'SYS_STAMINA',
+      text: { en: 'Stamina', fr: 'Endurance' },
+    });
+    expect(resolveText('NOPE', resolveKey)).toEqual({ key: 'NOPE', text: null });
+    expect(resolveText('  ', resolveKey)).toEqual({ key: '', text: null });
+    expect(resolveText(null, resolveKey)).toEqual({ key: '', text: null });
+    expect(asked).toEqual(['SYS_STAMINA', 'NOPE']);
+  });
+});
+
+describe('saveItems — store, bake et git factices', () => {
+  /** Le disque et les trois écritures, factices : elles notent leurs appels, dans l'ordre. */
+  function deps(
+    over: {
+      curated?: Record<string, ItemCurated>;
+      tables?: string[];
+      errors?: Record<string, string[]>;
+      bakeFails?: Record<string, string>;
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      order: [] as string[],
+      upsert: [] as [string, ItemCurated][],
+      bake: [] as string[],
+      git: [] as [string[], string][],
+    };
+    const fake: ItemsDeps = {
+      ...itemsDisk({ curated: over.curated, tables: over.tables }),
+      upsert: async (id, curated) => {
+        calls.order.push(`upsert ${id}`);
+        calls.upsert.push([id, curated]);
+        return over.errors?.[id] ?? [];
+      },
+      bake: async (id) => {
+        calls.order.push(`bake ${id}`);
+        calls.bake.push(id);
+        if (over.bakeFails?.[id]) throw new Error(over.bakeFails[id]);
+      },
+      commitPaths: (paths, message) => {
+        calls.order.push('git');
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  const change = (
+    id: string,
+    curated: ItemCurated,
+    over: Partial<Omit<ItemChange, 'id' | 'curated'>> = {},
+  ): ItemChange => ({ id, curated, was: ITEM_CURATED[id] ?? {}, ...over });
+  const BOTH = ['data/curated/items.json', 'data/generated/items.json'];
+
+  it('un item : le store PUIS le rebake, UN commit des DEUX fichiers, à son nom anglais', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems([change('20001', { desc: itemLang({ en: 'Dust.' }) })], fake);
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['Mystery Dust (20001) : entrée curée écrite, catalogue rebaké.', 'git : fait'],
+      refused: [],
+      stale: [],
+      saved: ['20001'],
+      reasons: {},
+    });
+    expect(calls.upsert).toEqual([['20001', { desc: { en: 'Dust.' } }]]);
+    expect(calls.order).toEqual(['upsert 20001', 'bake 20001', 'git']);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): Mystery Dust']]);
+  });
+
+  it('un lot : store et rebake PAR item, UN commit « N items »', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [
+        change('20001', { name: itemLang({ en: 'Dust' }) }),
+        change('15001', { note: 'la première gemme' }),
+      ],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, saved: ['20001', '15001'], refused: [] });
+    expect(calls.order).toEqual([
+      'upsert 20001',
+      'bake 20001',
+      'upsert 15001',
+      'bake 15001',
+      'git',
+    ]);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): 2 items']]);
+    // Le journal porte le nom d'APRÈS l'enregistrement.
+    expect(out.log).toContain('Dust (20001) : entrée curée écrite, catalogue rebaké.');
+  });
+
+  it('sans tables du jeu : refusé AVANT toute écriture — pas de curé en avance sur le catalogue', async () => {
+    for (const tables of [[], ['ItemTemplet'], ['TextSystem']]) {
+      const { calls, fake } = deps({ tables });
+      const out = await saveItems([change('20001', { note: 'x' })], fake);
+      expect(out).toEqual({
+        ok: false,
+        log: [`Rien n’est écrit — ${NO_ITEM_BAKE}.`],
+        refused: [],
+        stale: [],
+        saved: [],
+        reasons: {},
+      });
+      expect(calls.order, tables.join()).toEqual([]);
+    }
+    expect(NO_ITEM_BAKE).toContain('tables du jeu absentes');
+  });
+
+  it('`stale` : le disque ne porte plus l’entrée que la page avait chargée, rien n’est écrit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [change('SYS_ASSET_GOLD', { icon: 'TI_Gold' }, { was: { icon: 'CM_Old' } })],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, stale: ['SYS_ASSET_GOLD'], saved: [] });
+    expect(out.refused).toEqual(['SYS_ASSET_GOLD']);
+    expect(out.reasons.SYS_ASSET_GOLD).toBe(
+      'Gold (SYS_ASSET_GOLD) : le disque a changé depuis le chargement.',
+    );
+    expect(calls.order).toEqual([]);
+    // Un item sans entrée, que la page croyait curé : périmé aussi.
+    const other = deps();
+    expect(
+      (await saveItems([change('15001', { note: 'x' }, { was: { hidden: true } })], other.fake))
+        .stale,
+    ).toEqual(['15001']);
+  });
+
+  it('compacte comme l’éditeur de l’admin : langues vides et blancs retirés, `hidden` seulement vrai', async () => {
+    const { calls, fake } = deps();
+    await saveItems(
+      [
+        change('20001', {
+          name: { en: '  Dust ', fr: '   ', xx: 'hors langues' },
+          desc: {},
+          icon: ' TI_Dust ',
+          hidden: false,
+          note: '  à revoir ',
+          intrus: 1,
+        } as unknown as ItemCurated),
+        change('15001', { hidden: true, note: '   ' }),
+      ],
+      fake,
+    );
+    expect(calls.upsert).toEqual([
+      ['20001', { name: { en: 'Dust' }, icon: 'TI_Dust', note: 'à revoir' }],
+      ['15001', { hidden: true }],
+    ]);
+  });
+
+  it('une entrée vide supprime l’override — et une création sort alors du catalogue', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [
+        change('SYS_ASSET_GOLD', { name: itemLang({ en: ' ' }), icon: '', note: '' }),
+        change('Hero%20Piece', {}),
+      ],
+      fake,
+    );
+    expect(calls.upsert).toEqual([
+      ['SYS_ASSET_GOLD', {}],
+      ['Hero%20Piece', {}],
+    ]);
+    expect(calls.bake).toEqual(['SYS_ASSET_GOLD', 'Hero%20Piece']);
+    expect(out.log.slice(0, 2)).toEqual([
+      'Gold (SYS_ASSET_GOLD) : entrée curée retirée, le jeu fait foi.',
+      'Hero Piece (Hero%20Piece) : entrée curée retirée — une création, elle sort du catalogue.',
+    ]);
+  });
+
+  it('`Hero%20Piece` passe TEL QUEL au store et au rebake : ni décodé, ni ré-encodé', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [change('Hero%20Piece', { ...ITEM_CURATED['Hero%20Piece'], note: 'fragments' })],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, saved: ['Hero%20Piece'] });
+    expect(calls.upsert[0][0]).toBe('Hero%20Piece');
+    expect(calls.bake).toEqual(['Hero%20Piece']);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): Hero Piece']]);
+  });
+
+  it('une création : un id nouveau, un nom anglais — l’item est créé', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [
+        change(
+          'TI_Item_New',
+          { name: itemLang({ en: 'New Thing' }), icon: 'TI_Item_New' },
+          { create: true },
+        ),
+      ],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, saved: ['TI_Item_New'], refused: [] });
+    expect(out.log[0]).toBe('New Thing (TI_Item_New) : item créé, catalogue rebaké.');
+    expect(calls.order).toEqual(['upsert TI_Item_New', 'bake TI_Item_New', 'git']);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): New Thing']]);
+  });
+
+  it('une création sans nom anglais est refusée, rien n’est écrit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [
+        change(
+          'TI_Item_New',
+          { name: itemLang({ fr: 'Chose' }), icon: 'TI_Item_New' },
+          { create: true },
+        ),
+      ],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, refused: ['TI_Item_New'], saved: [] });
+    expect(out.reasons.TI_Item_New).toBe(
+      'TI_Item_New (TI_Item_New) : une création porte au moins un nom anglais.',
+    );
+    expect(calls.order).toEqual([]);
+    // Et une création que le catalogue ne porte pas encore ne se vide pas non plus.
+    const live = deps();
+    const emptied = await saveItems([change('TI_Item_Stamina', {})], live.fake);
+    expect(emptied.reasons.TI_Item_Stamina).toMatch(/une création porte au moins un nom anglais/);
+    expect(live.calls.order).toEqual([]);
+  });
+
+  it('l’id d’une création : ni espace, ni %, ni /, ni vide', async () => {
+    for (const id of ['My Item', 'A%20B', 'a/b', '', 'tab\tbed']) {
+      const { calls, fake } = deps();
+      const out = await saveItems(
+        [change(id, { name: itemLang({ en: 'X' }) }, { create: true })],
+        fake,
+      );
+      expect(out.reasons[id], id).toBe(
+        `id de création invalide : « ${id} » (ni espace, ni %, ni /).`,
+      );
+      expect(out.ok).toBe(false);
+      expect(calls.order, id).toEqual([]);
+    }
+  });
+
+  it('une création sur un id qui existe — au catalogue ou au curé — est refusée', async () => {
+    for (const id of ['15001', 'Hero%20Piece', 'TI_Item_Stamina']) {
+      const { calls, fake } = deps();
+      const out = await saveItems(
+        [change(id, { name: itemLang({ en: 'X' }) }, { create: true, was: {} })],
+        fake,
+      );
+      expect(out.reasons[id], id).toBe(`${id} existe déjà : l’ouvrir pour l’éditer, pas le créer.`);
+      expect(calls.order, id).toEqual([]);
+    }
+  });
+
+  it('un id inconnu, hors création, est refusé', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems([change('99999', { note: 'x' })], fake);
+    expect(out.reasons['99999']).toBe('item inconnu : 99999.');
+    expect(calls.order).toEqual([]);
+  });
+
+  it('les refus du store sont rendus tels quels : ni rebake, ni commit', async () => {
+    const { calls, fake } = deps({
+      errors: { '20001': ['itemCurated[20001].icon — attendu string'] },
+    });
+    const out = await saveItems([change('20001', { icon: 'TI_Dust' })], fake);
+    expect(out).toMatchObject({ ok: false, refused: ['20001'], saved: [] });
+    expect(out.reasons['20001']).toBe(
+      'Mystery Dust (20001) : itemCurated[20001].icon — attendu string',
+    );
+    expect(calls.order).toEqual(['upsert 20001']);
+    expect(out.log.at(-1)).toBe('Rien à enregistrer.');
+  });
+
+  it('un item refusé n’arrête pas le lot : les autres partent, le résultat est en échec', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [
+        change('99999', { note: 'x' }),
+        change('20001', { note: 'gardé' }),
+        change('SYS_ASSET_GOLD', { icon: 'X' }, { was: {} }),
+      ],
+      fake,
+    );
+    expect(out).toMatchObject({
+      ok: false,
+      saved: ['20001'],
+      refused: ['99999', 'SYS_ASSET_GOLD'],
+      stale: ['SYS_ASSET_GOLD'],
+    });
+    expect(calls.order).toEqual(['upsert 20001', 'bake 20001', 'git']);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): Mystery Dust']]);
+  });
+
+  it('un rebake qui lève malgré les tables : l’item est refusé avec sa raison, le curé écrit est committé', async () => {
+    const { calls, fake } = deps({ bakeFails: { '20001': 'ItemTemplet illisible' } });
+    const out = await saveItems(
+      [change('20001', { note: 'x' }), change('15001', { note: 'y' })],
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, saved: ['15001'], refused: ['20001'], stale: [] });
+    expect(out.reasons['20001']).toBe(
+      'Mystery Dust (20001) : curé enregistré, mais rebake de items.json échoué : ItemTemplet illisible',
+    );
+    // Le fichier curé est modifié : il ne reste pas derrière, hors commit.
+    expect(calls.order).toEqual([
+      'upsert 20001',
+      'bake 20001',
+      'upsert 15001',
+      'bake 15001',
+      'git',
+    ]);
+    expect(calls.git).toEqual([[BOTH, 'chore(items): 2 items']]);
+  });
+
+  it('rien à écrire : le disque porte déjà ces valeurs, ni store ni commit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveItems(
+      [change('SYS_ASSET_GOLD', { icon: ' CM_TopMenu_Gold ', note: 'icône du menu' })],
+      fake,
+    );
+    expect(out).toEqual({
+      ok: true,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+      refused: [],
+      stale: [],
+      saved: [],
+      reasons: {},
+    });
+    expect(calls.order).toEqual([]);
+    expect((await saveItems([], fake)).log).toEqual(['Aucune modification à enregistrer.']);
+  });
+
+  it('un commit qui échoue rend le lot en échec, son journal joint', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué : verrou'] } });
+    const out = await saveItems([change('20001', { note: 'x' })], fake);
+    expect(out.ok).toBe(false);
+    expect(out.saved).toEqual(['20001']);
+    expect(out.log.at(-1)).toBe('git commit a échoué : verrou');
   });
 });
 

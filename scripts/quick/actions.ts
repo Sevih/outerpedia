@@ -84,7 +84,7 @@ import {
   type FilledTemplate,
   type TemplateValue,
 } from '@/lib/admin/changelog-templates';
-import { catalogOptions } from '@/lib/data/item-catalog';
+import { catalogOptions, listItemEntries } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
@@ -124,11 +124,19 @@ import {
 } from '@/lib/admin/effect-search';
 import { upsertEffectCurated } from '@/lib/admin/effects-store';
 import { upsertEeCurated, type EeCuratedPatch } from '@/lib/admin/equipment-curated-store';
+import { resolveGameText } from '@/lib/admin/game-text';
 import { gearSelectOptions, type GearOption } from '@/lib/admin/gear-options';
 import { previewGearReco } from '@/lib/admin/gear-preview-actions';
 import { renderInlineBatch } from '@/lib/admin/inline-preview-actions';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import { expandBuild } from '@/lib/admin/gear-preset-resolve';
+import {
+  bakeItemCatalogEntry,
+  loadItemCurated,
+  upsertItemCurated,
+  type ItemCurated,
+} from '@/lib/admin/item-curated-store';
+import { unusedItemIcons } from '@/lib/admin/item-icons';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { upsertSearchAliases } from '@/lib/admin/search-alias-store';
 import { upsertShortName } from '@/lib/admin/short-name-store';
@@ -173,7 +181,14 @@ import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
 import { img } from '@/lib/images';
-import { DEFAULT_LANG, LANGS, isValidLang, normalizeLang, type Lang } from '@/lib/i18n/config';
+import {
+  DEFAULT_LANG,
+  GAME_LANGS,
+  LANGS,
+  isValidLang,
+  normalizeLang,
+  type Lang,
+} from '@/lib/i18n/config';
 import { lRec } from '@/lib/i18n/localize';
 import { getT } from '@/i18n';
 import { bulletSegments, type BulletSegment } from '@/lib/changelog-bullets';
@@ -200,12 +215,14 @@ import {
   TIERS,
 } from '@/components/tierlist/tiers';
 import type {
+  CatalogEntry,
   CharacterCurated,
   DungeonRef,
   EffectCurated,
   GameVersion,
   GearBuild,
   GearPresets,
+  LangDict,
   LocalizedText,
   Monster,
   ProsCons,
@@ -225,7 +242,8 @@ import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
 import { recruitWindows, type RecruitWindow } from '@datagen/generators/recruit';
 import { findSteamInstall, installedResVersion } from '@datagen/extract/steam';
-import { fileStamp, loadTable, tablePath, type Row } from '@datagen/lib/tables';
+import { ITEM_SPRITE_DIR } from '@datagen/assets/source';
+import { fileStamp, listTableNames, loadTable, tablePath, type Row } from '@datagen/lib/tables';
 import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
 /** Journal rendu tel quel dans l'interface (une ligne = une étape). */
@@ -1029,14 +1047,16 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
  * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
- * EE (son sous-onglet « EE »), celui des monstres (« Monstres ») et les outils
- * Pro / Con et Synergy (deux autres sous-onglets de la fiche) — l'inbox, elle,
+ * EE (son sous-onglet « EE »), celui des monstres (« Monstres »), celui des
+ * items (« Items ») et les outils Pro / Con et Synergy (deux autres
+ * sous-onglets de la fiche) — l'inbox, elle,
  * ne renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/characters': 'character',
   '/admin/editor/ee': 'character',
   '/admin/editor/effects': 'effects',
+  '/admin/editor/items': 'items',
   '/admin/editor/monsters': 'monsters',
   '/admin/tools/pros-cons': 'character',
   '/admin/tools/synergies': 'character',
@@ -4349,6 +4369,376 @@ export async function saveMonsterKit(
     report,
   );
   return out(commit.ok && !refused.length, [...j.lines, ...commit.log], { written: true });
+}
+
+// ------------------------------------------------------------------ items ----
+
+/** Le curé des items, et le catalogue servi que chaque enregistrement rebake. */
+const ITEMS_CURATED_PATH = 'data/curated/items.json';
+const ITEMS_CATALOG_PATH = 'data/generated/items.json';
+
+/** D'où viennent les icônes d'item, sous la base des images (`img.item`). */
+const ITEM_SPRITE = 'images/items';
+
+/** Les tables que le rebake d'une entrée relit (`buildItemCatalog`). */
+const ITEM_BAKE_TABLES: readonly string[] = ['ItemTemplet', 'TextSystem'];
+
+/** Le refus de `saveItems` sur un poste sans ces tables, et le mot de la savebar. */
+export const NO_ITEM_BAKE =
+  'tables du jeu absentes : le rebake de items.json échouerait après l’écriture du curé';
+
+/**
+ * Les lectures de l'onglet « Items ». Le catalogue est relu DU DISQUE à chaque
+ * appel : `getCatalog` importe `items.json` statiquement, et dans le processus
+ * long de quick il ne bougerait plus après un rebake (ni après une promotion).
+ */
+export interface ItemsDisk {
+  catalog: () => Record<string, CatalogEntry>;
+  curated: () => Record<string, ItemCurated>;
+  /** Les sprites `TI_*` extraits que rien ne porte ; vide sans images du jeu. */
+  unusedIcons: (
+    catalog: Record<string, CatalogEntry>,
+    curated: Record<string, ItemCurated>,
+  ) => string[];
+  /** Le dossier des sprites d'items extraits existe sur ce poste. */
+  hasSprites: () => boolean;
+  /** Les tables parsées du poste, par leur nom. */
+  tables: () => string[];
+}
+
+/** Celles de la route : les fichiers du dépôt, les images et les tables du jeu. */
+export const ITEMS_DISK: ItemsDisk = {
+  catalog: () =>
+    JSON.parse(readFileSync(resolve(ITEMS_CATALOG_PATH), 'utf8')) as Record<string, CatalogEntry>,
+  curated: loadItemCurated,
+  unusedIcons: unusedItemIcons,
+  hasSprites: () => existsSync(ITEM_SPRITE_DIR),
+  tables: listTableNames,
+};
+
+/** Un item du catalogue : sa ligne, et ce que sa fiche édite. */
+export interface ItemRow {
+  id: string;
+  /** Nom anglais EFFECTIF (le curé prime) : la ligne, le commit. '' sans nom. */
+  name: string;
+  type: string;
+  kind: CatalogEntry['kind'];
+  grade: string;
+  star: number;
+  /** Icône effective, sous `images/items`. */
+  icon: string;
+  /** Une description anglaise, curation comprise. */
+  hasDesc: boolean;
+  hidden: boolean;
+  /** Une entrée curée existe. */
+  overridden: boolean;
+  /**
+   * L'entrée du catalogue servi — le placeholder de la fiche, comme `itemBase`
+   * dans l'admin : curé DÉJÀ baké compris. `null` : une création que le
+   * catalogue ne porte pas encore.
+   */
+  base: { name: LangDict; desc?: LangDict; icon: string } | null;
+  /** L'entrée du disque, telle quelle ; `{}` sans curation. */
+  curated: ItemCurated;
+}
+
+const canBakeItems = (disk: ItemsDisk): boolean => {
+  const tables = new Set(disk.tables());
+  return ITEM_BAKE_TABLES.every((t) => tables.has(t));
+};
+
+/** Les lignes du catalogue : l'overlay de l'admin (`listItemEntries`), sur le disque. */
+function itemRows(
+  catalog: Record<string, CatalogEntry>,
+  curated: Record<string, ItemCurated>,
+): ItemRow[] {
+  return listItemEntries(catalog, curated).map((e) => {
+    const base = catalog[e.id];
+    return {
+      id: e.id,
+      name: e.name.en ?? '',
+      type: e.type,
+      kind: e.kind,
+      grade: e.grade,
+      star: e.star,
+      icon: e.icon,
+      hasDesc: Boolean(e.desc?.en),
+      hidden: Boolean(e.hidden),
+      overridden: e.curated,
+      base: base ? { name: base.name, desc: base.desc, icon: base.icon } : null,
+      curated: curated[e.id] ?? {},
+    };
+  });
+}
+
+/**
+ * L'onglet « Items » : le catalogue servi (`data/generated/items.json`, relu du
+ * disque) sous l'overlay du curé — la liste de l'éditeur « Item » de l'admin —,
+ * chaque item avec ce que sa fiche édite. Et ce que la page ne doit pas
+ * recopier : les sprites extraits que rien ne porte (`unused` ; sans images du
+ * jeu sur le poste, `hasSprites` le dit et la liste est vide), les comptes de
+ * l'en-tête de l'admin, les types présents, les langues du jeu, le dossier des
+ * icônes, et `canBake` — les tables que le rebake relit sont là ; sans elles
+ * rien ne s'enregistre d'ici (`saveItems`).
+ */
+export function itemsState(disk: ItemsDisk = ITEMS_DISK) {
+  const catalog = disk.catalog();
+  const curated = disk.curated();
+  const items = itemRows(catalog, curated);
+  const unused = disk.unusedIcons(catalog, curated);
+  const currencies = items.filter((e) => e.type === 'goods').length;
+  return {
+    items,
+    unused,
+    hasSprites: disk.hasSprites(),
+    counts: {
+      items: items.length - currencies,
+      currencies,
+      noDesc: items.filter((e) => !e.hasDesc).length,
+      unused: unused.length,
+      curated: items.filter((e) => e.overridden).length,
+    },
+    types: [...new Set(items.map((e) => e.type))].sort(),
+    langs: GAME_LANGS,
+    sprite: ITEM_SPRITE,
+    canBake: canBakeItems(disk),
+    noBake: NO_ITEM_BAKE,
+  };
+}
+
+/**
+ * La recherche de l'onglet : la règle d'Effets (`effectMatches` — chaque mot de
+ * la saisie COMMENCE un mot du champ), sur l'id et le nom anglais effectif, et
+ * sur le nom des sprites à intégrer. Par item qui répond, le champ qui a
+ * répondu. `matches` à `null` : saisie vide, tout le catalogue reste. Un id
+ * est lu TEL QUEL : `Hero%20Piece` n'est ni décodé ni ré-encodé.
+ */
+export function itemsSearch(
+  query: unknown,
+  disk: ItemsDisk = ITEMS_DISK,
+): { q: string; matches: Record<string, EffectMatch> | null } {
+  const q = typeof query === 'string' ? query : '';
+  if (!q.trim()) return { q, matches: null };
+  const catalog = disk.catalog();
+  const curated = disk.curated();
+  const matches: Record<string, EffectMatch> = {};
+  const seek = (id: string, en: string): void => {
+    const hit = effectMatches(effectHaystack({ id, keys: [], name: en ? { en } : {} }), q);
+    if (hit) matches[id] = hit;
+  };
+  for (const e of listItemEntries(catalog, curated)) seek(e.id, e.name.en ?? '');
+  for (const sprite of disk.unusedIcons(catalog, curated)) seek(sprite, '');
+  return { q, matches };
+}
+
+/**
+ * « clé… » : le texte du jeu sous une clé (`resolveGameText` de l'admin —
+ * `TextSystem`, `TextItem`…), dans les langues du jeu ; `null` si aucune table
+ * ne la porte. Une lecture.
+ */
+export function resolveText(
+  key: unknown,
+  resolveKey: (key: string) => LangDict | null = resolveGameText,
+): { key: string; text: LangDict | null } {
+  const k = trimmed(key);
+  return { key: k, text: k ? resolveKey(k) : null };
+}
+
+/** Un texte par langue du JEU, blancs retirés ; rien si aucune n'est remplie. */
+function cleanGameText(raw: unknown): LangDict | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const out: Record<string, string> = {};
+  for (const l of GAME_LANGS) {
+    const text = trimmed((raw as Record<string, unknown>)[l]);
+    if (text) out[l] = text;
+  }
+  // Partiel, comme l'éditeur de l'admin l'écrit (`compact`) : l'overlay et le
+  // bake prennent le dict tel quel, une langue absente y manque.
+  return Object.keys(out).length ? (out as LangDict) : undefined;
+}
+
+/**
+ * Une entrée curée venue de la page, ramenée à ce que l'éditeur de l'admin
+ * compose (`compact` et `build` d'`ItemCuratedEditor`) : les champs connus,
+ * dans un ordre fixe, langues vides retirées, `icon` et `note` sans blancs
+ * autour, `hidden` seulement s'il est vrai. Le store ne compacte pas : c'est
+ * ici que l'entrée vide devient `{}` — la suppression.
+ */
+function cleanItemCurated(raw: unknown): ItemCurated {
+  const r = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  const c: ItemCurated = {};
+  const name = cleanGameText(r.name);
+  const desc = cleanGameText(r.desc);
+  if (name) c.name = name;
+  if (desc) c.desc = desc;
+  if (trimmed(r.icon)) c.icon = trimmed(r.icon);
+  if (r.hidden === true) c.hidden = true;
+  if (trimmed(r.note)) c.note = trimmed(r.note);
+  return c;
+}
+
+const sameItemCurated = (a: unknown, b: unknown): boolean =>
+  JSON.stringify(cleanItemCurated(a)) === JSON.stringify(cleanItemCurated(b));
+
+/** L'id d'une création : ni blanc, ni `%`, ni `/` — il part tel quel dans une adresse d'image. */
+const ITEM_NEW_ID = /^[^\s%/]+$/;
+
+/** Un item de l'onglet : ce qu'il doit porter, et ce que la page avait chargé. */
+export interface ItemChange {
+  id: string;
+  curated: ItemCurated;
+  was: ItemCurated;
+  /** « ＋ item » : l'id est NOUVEAU — refusé s'il existe déjà. */
+  create?: boolean;
+}
+
+/** La lecture et les écritures de `saveItems`, injectées : le store, le bake et git. */
+export interface ItemsDeps extends ItemsDisk {
+  upsert: (id: string, curated: ItemCurated) => Promise<string[]>;
+  bake: (id: string) => Promise<void>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles de la route : le store de l'admin, son rebake, le vrai `commitPaths`. */
+export const ITEMS_DEPS: ItemsDeps = {
+  ...ITEMS_DISK,
+  upsert: upsertItemCurated,
+  bake: bakeItemCatalogEntry,
+  commitPaths,
+};
+
+/** Ce que rend `saveItems` : la forme de `saveEffects` (cf. `EffectsOutcome`). */
+export type ItemsOutcome = EffectsOutcome;
+
+/**
+ * Enregistre un lot d'items : pour chacun, le disque doit encore porter
+ * l'entrée curée que la page avait chargée (`was`), puis `upsertItemCurated` —
+ * le store de l'admin, ses refus de schéma rendus tels quels —, puis
+ * `bakeItemCatalogEntry`, qui refait SON entrée du catalogue servi ; enfin UN
+ * commit des DEUX fichiers : `chore(items): <nom anglais>`, « N items » pour
+ * un lot.
+ *
+ * SANS TABLES DU JEU, RIEN NE S'ÉCRIT. Le rebake recalcule l'entrée depuis
+ * `ItemTemplet` et `TextSystem` et lève sans elles : la route de l'admin
+ * écrivait d'abord le curé, puis répondait « curé enregistré, mais rebake
+ * échoué » — un état à moitié fait, le curé en avance sur le catalogue. Le lot
+ * est donc refusé AVANT toute écriture sur un poste qui ne les a pas.
+ *
+ * Une CRÉATION (`create`) passe par la même porte avec un id nouveau : sans
+ * blanc, ni `%`, ni `/`, absent du catalogue ET du curé. Un item que le
+ * catalogue ne porte pas n'existe que par son entrée : elle garde un nom
+ * anglais (la règle de l'éditeur de l'admin). Un id existant n'est jamais
+ * décodé ni ré-encodé — `Hero%20Piece` est écrit ainsi dans les deux fichiers.
+ *
+ * Une entrée vide retire la clé (le store) — et, pour une création que le
+ * catalogue portait, le rebake la retire AUSSI du catalogue : c'est ce que
+ * fait l'admin, le journal le dit. Un item refusé n'arrête pas le lot. Si le
+ * rebake d'un item lève malgré tout, son curé EST écrit : il est refusé avec
+ * cette raison, et le commit part quand même, pour ne pas laisser le fichier
+ * modifié derrière lui.
+ */
+export async function saveItems(
+  changes: ItemChange[],
+  deps: ItemsDeps,
+  report?: Report,
+): Promise<ItemsOutcome> {
+  const refused: string[] = [];
+  const stale: string[] = [];
+  const saved: string[] = [];
+  const reasons: Record<string, string> = {};
+  const out = (ok: boolean, lines: string[]): ItemsOutcome => ({
+    ok,
+    log: lines,
+    refused,
+    stale,
+    saved,
+    reasons,
+  });
+  if (!Array.isArray(changes) || !changes.length)
+    return out(false, ['Aucune modification à enregistrer.']);
+  if (!canBakeItems(deps)) return out(false, [`Rien n’est écrit — ${NO_ITEM_BAKE}.`]);
+
+  const j = journal(report);
+  // Ceux dont le curé est sur le disque, rebake réussi ou non : le commit.
+  const named: string[] = [];
+  const refuse = (id: string, why: string): void => {
+    if (!refused.includes(id)) refused.push(id);
+    reasons[id] ??= why;
+    j.done(`REFUSÉ — ${why}`);
+  };
+
+  for (const c of changes) {
+    const id = String(c?.id ?? '');
+    // Le disque, relu pour CET item : une entrée posée d'ailleurs (l'admin,
+    // l'autre poste) depuis le chargement de la page ne doit pas être écrasée.
+    const base = deps.catalog()[id];
+    const disk = deps.curated()[id];
+    if (c?.create) {
+      // D'abord « existe déjà » : `Hero%20Piece` est un id du catalogue, pas
+      // un id mal formé.
+      if (base || disk) {
+        refuse(id, `${id} existe déjà : l’ouvrir pour l’éditer, pas le créer.`);
+        continue;
+      }
+      if (!ITEM_NEW_ID.test(id)) {
+        refuse(id, `id de création invalide : « ${id} » (ni espace, ni %, ni /).`);
+        continue;
+      }
+    } else if (!base && !disk) {
+      refuse(id, `item inconnu : ${id}.`);
+      continue;
+    }
+    const label = `${disk?.name?.en ?? base?.name.en ?? id} (${id})`;
+    if (!sameItemCurated(disk, c.was)) {
+      stale.push(id);
+      refuse(id, `${label} : le disque a changé depuis le chargement.`);
+      continue;
+    }
+
+    const next = cleanItemCurated(c.curated);
+    // Le disque porte déjà cette entrée : rien à écrire, rien à refuser.
+    if (sameItemCurated(next, disk)) continue;
+    if (!base && !next.name?.en) {
+      refuse(id, `${label} : une création porte au moins un nom anglais.`);
+      continue;
+    }
+    const errors = await deps.upsert(id, next);
+    if (errors.length) {
+      for (const e of errors) refuse(id, `${label} : ${e}`);
+      continue;
+    }
+    const name = next.name?.en ?? base?.name.en ?? id;
+    named.push(name);
+    j.doing(`${name} (${id}) : rebake de son entrée de items.json`);
+    try {
+      await deps.bake(id);
+    } catch (e: unknown) {
+      const why = e instanceof Error ? e.message : String(e);
+      refuse(id, `${name} (${id}) : curé enregistré, mais rebake de items.json échoué : ${why}`);
+      continue;
+    }
+    saved.push(id);
+    const empty = !Object.keys(next).length;
+    j.done(
+      empty
+        ? base?.kind === 'custom'
+          ? `${name} (${id}) : entrée curée retirée — une création, elle sort du catalogue.`
+          : `${name} (${id}) : entrée curée retirée, le jeu fait foi.`
+        : `${name} (${id}) : ${c.create ? 'item créé' : 'entrée curée écrite'}, catalogue rebaké.`,
+    );
+  }
+
+  if (!named.length)
+    return refused.length
+      ? out(false, [...j.lines, 'Rien à enregistrer.'])
+      : out(true, ['Rien à enregistrer : le disque porte déjà ces valeurs.']);
+
+  const commit = deps.commitPaths(
+    [ITEMS_CURATED_PATH, ITEMS_CATALOG_PATH],
+    `chore(items): ${named.length === 1 ? named[0] : `${named.length} items`}`,
+    report,
+  );
+  return out(commit.ok && !refused.length, [...j.lines, ...commit.log]);
 }
 
 // ---------------------------------------------------------- tables du jeu ----

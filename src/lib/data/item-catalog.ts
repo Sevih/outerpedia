@@ -59,10 +59,15 @@ function creation(id: string, cur: ItemCurated): CatalogItem {
   };
 }
 
-/** Toutes les entrées (catalogue baké + overlay curé live). */
-export function listItemEntries(): CatalogItem[] {
-  const cat = getCatalog();
-  const cur = loadItemCurated();
+/**
+ * Toutes les entrées (catalogue baké + overlay curé live). `cat` : un catalogue
+ * RELU DU DISQUE — l'import statique de `getCatalog` ne bouge plus dans un
+ * processus long (quick) après un rebake.
+ */
+export function listItemEntries(
+  cat: Record<string, CatalogEntry> = getCatalog(),
+  cur: Record<string, ItemCurated> = loadItemCurated(),
+): CatalogItem[] {
   const out: CatalogItem[] = [];
   for (const [id, e] of Object.entries(cat)) out.push(overlay(id, e, cur[id]));
   // Créations LIVE (curées, pas encore bakées dans le catalogue servi).

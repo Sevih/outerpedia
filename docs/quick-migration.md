@@ -150,7 +150,27 @@ est partagé par d'autres monstres. Un enregistrement, un commit
 pas l'extraction fraîche : il édite ce que le site montre, sans tables du jeu.
 Les stats, l'intégration et les versions d'un monstre ne sont PAS de cet
 écran : elles sont à l'extractor, étapes 19 et 20 ; lien Monster retiré du
-menu admin le 09/10).
+menu admin le 09/10),
+Items (= Editor › Item, étape 13, lot B44 : le catalogue d'items du site —
+gemmes, matériaux, présents, boîtes, monnaies, costumes, créations ; pas
+l'équipement — et l'entrée curée de chacun, `data/curated/items.json`. Le
+modèle est l'onglet Effets : UNE recherche jouée au serveur par la même règle
+(début de mot, sur le nom anglais et l'id), des filtres — le type en groupe
+segmenté, sans description, sans icône, curés seulement, masqués —, le
+catalogue en lignes par pages de 100 avec la tuile d'item du site, la fiche à
+droite : nom et description dans les SIX langues du jeu, la base en
+placeholder, icône, masquage, note. « clé… » pose les six langues d'une clé de
+texte du jeu ; « Vider » rend la fiche à la base, et l'enregistrement retire
+alors l'entrée ; « ＋ item » crée un item sous un id nouveau, et la case
+« sprites à intégrer » liste les sprites extraits que rien ne porte — un clic
+ouvre la création, son icône posée. Plusieurs fiches modifiées partent en un
+lot : par item le store de l'admin puis le rebake de son entrée du catalogue
+servi, et UN commit `chore(items): …` des DEUX fichiers. Quick lit
+`data/generated/items.json` DU DISQUE, pas l'import statique : un rebake se
+voit sans le relancer. Sans tables du jeu sur le poste rien ne s'enregistre —
+le rebake échouerait APRÈS l'écriture du curé, l'état à moitié fait de la
+route de l'admin — et la savebar le dit ; l'état se lit quand même. Lien Item
+retiré du menu admin le 09/10 : le groupe « Editor » en sort, vide).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -165,8 +185,8 @@ après les Bannières (5), avant Events :
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
-Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 14 Gear
-presets non porté et 15 Tag control fait autrement, A34) →
+Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 13 Item
+fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -286,7 +306,15 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       archives et l'épinglage en UN geste qui montre les guides touchés
       AVANT de figer.
 
-13. **Editor › Item**
+13. **Editor › Item** — FAIT, lot B44 : l'onglet « Items » (cf. « Déjà dans
+    quick »). La ligne « Agacements » était vide : l'écran est porté tel
+    quel, dans la charte, sur le modèle d'Effets — à trois écarts près, tous
+    du côté de la sûreté : la recherche par début de mot au lieu de la
+    sous-chaîne, le refus d'enregistrer sans tables du jeu (plus de « curé
+    enregistré, mais rebake échoué »), et l'icône d'une création née d'un
+    sprite posée DANS le champ (dans l'admin elle n'était qu'un placeholder :
+    enregistrée sans y toucher, la création partait sans icône). L'entrée
+    reste pour que la numérotation des suivantes ne bouge pas.
     `ItemCuratedEditor`, `ItemsBrowser`
     - Agacements :
 
