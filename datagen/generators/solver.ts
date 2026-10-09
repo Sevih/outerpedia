@@ -28,7 +28,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { findBuff, formatRowValue } from '../lib/buff';
-import { loadTable, type Row } from '../lib/tables';
+import { loadTable, singleValue, type Row } from '../lib/tables';
 import { kitScaling, loadKitScalingTables } from '../lib/kit-scaling';
 import { buildDamageCharacters } from '../damage/characters';
 import { bestSkillOf } from './solver-best-skill';
@@ -92,6 +92,16 @@ const SLOT: Record<string, string> = {
   ITS_EQUIP_EXCLUSIVE: 'exclusive',
   ITS_EQUIP_OOPARTS: 'ooparts',
 };
+/** Les six slots d'équipement classiques (hors EE et talisman, sans enchant). */
+const GEAR_SUBTYPES = new Set([
+  'ITS_EQUIP_WEAPON',
+  'ITS_EQUIP_HELMET',
+  'ITS_EQUIP_ARMOR',
+  'ITS_EQUIP_GLOVES',
+  'ITS_EQUIP_SHOES',
+  'ITS_EQUIP_ACCESSORY',
+]);
+
 const GRADE: Record<string, string> = {
   IG_NORMAL: 'normal',
   IG_MAGIC: 'magic',
@@ -274,11 +284,29 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   emit('equipment.json', equipment);
 
   // ---- enhance : constantes + courbes d'XP cumulée par (slot, grade, star) ----
-  const enhanceFactor = 0.4;
-  const tierFactor = 0.05;
+  // `enhanceFactor` et `tierFactor` sont LUS des tables, comme le client
+  // (CItem.GetEnchantFactor somme UpgradeFactorforOP des niveaux 1..L de son
+  // slot ; GetBreakLimitFactor somme FactorArr de son (étoile, grade)). Le
+  // contrat n'en porte qu'un scalaire : `singleValue` jette si un patch les
+  // fait varier. `maxEnhanceLevel` est EN DUR dans le client
+  // (MAIN_DEFINE.MAX_ITEM_ENCHANT_LEVEL = 10, CItem.EnchantEnable) : pas un
+  // doublon de table, il reste en dur ici aussi.
+  const enchantRows = loadTable('ItemEnchantTemplet');
+  const enhanceFactor = singleValue(
+    enchantRows
+      .filter((r) => GEAR_SUBTYPES.has(r.ItemSubType ?? '') && Number(r.EnchantLevel) > 0)
+      .map((r) => Number(r.UpgradeFactorforOP)),
+    'ItemEnchantTemplet.UpgradeFactorforOP (gear, niveaux 1+)',
+  );
   const maxEnhanceLevel = 10;
+  const tierFactor = singleValue(
+    loadTable('ItemBreakLimitTemplet').flatMap((r) =>
+      [r.Factor1, r.Factor2, r.Factor3, r.Factor4].map(Number),
+    ),
+    'ItemBreakLimitTemplet.Factor1..4',
+  );
   const expCurves: Record<string, number[]> = {};
-  for (const r of loadTable('ItemEnchantTemplet')) {
+  for (const r of enchantRows) {
     const slot = SLOT[r.ItemSubType ?? ''];
     if (!slot) continue;
     const lv = Number(r.EnchantLevel);
@@ -600,8 +628,11 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
     { st: 'ST_DMG_BOOST', ap: 'OAT_ADD', type: 'DMG_INCREASE' },
     { st: 'ST_DMG_REDUCE_RATE', ap: 'OAT_ADD', type: 'DMG_REDUCE' },
   ];
-  const GEMS_BASE_ID = 15001;
-  const GEM_MAX_LEVEL = 6;
+  // Base des ids et niveau max LUS des gemmes d'ItemTemplet (15001, 6★ en 1.11) ;
+  // le client reconnaît une gemme à `ItemType == IT_GEM` et son niveau à `BasicStar`.
+  const gemItems = itemTemplet.filter((r) => r.ItemType === 'IT_GEM');
+  const GEMS_BASE_ID = Math.min(...gemItems.map((r) => Number(r.ID)));
+  const GEM_MAX_LEVEL = Math.max(...gemItems.map((r) => Number(r.BasicStar)));
   const gems: Record<string, unknown> = {};
   for (let lv = 1; lv <= GEM_MAX_LEVEL; lv++) {
     for (let i = 0; i < GEM_STAT_BY_INDEX.length; i++) {
@@ -627,6 +658,7 @@ export function buildSolver(inputs: { setsView: SolverSetsView }): SolverFiles {
   for (const r of expRowsRaw) expCurveByLevel[r.lv] = r.exp;
   emit('exp-character.json', expCurveByLevel);
 
+  // Plafond de confiance EN DUR dans le client (MAIN_DEFINE.MAX_TRUST_LEVEL = 100).
   const trustCurveByLevel = Array<number>(101).fill(0);
   for (const r of expRowsRaw) if (r.lv >= 1 && r.lv <= 100) trustCurveByLevel[r.lv] = r.trustExp;
   emit('trust-character.json', trustCurveByLevel);

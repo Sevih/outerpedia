@@ -16,7 +16,7 @@
  *     (`<color=#27D054>C</color> … <color=#0D99DA>20%</color>`) — on les
  *     parse tels quels, zéro barème écrit main.
  */
-import { loadTable, num, numf } from '../lib/tables';
+import { loadTable, num, numf, singleValue } from '../lib/tables';
 import { loadTextIndex, resolveText } from '../lib/text';
 import { slugEnum } from '../lib/enums';
 import { uniformDict, type LangDict } from '../lib/lang';
@@ -308,7 +308,12 @@ export function buildEnhanceRules(): EnhanceRules {
   return {
     enhanceFactor,
     maxEnhance,
-    tierFactor: 0.05, // breakLimits.factors — constant sur toute la table, vérifié
+    tierFactor: singleValue(
+      loadTable('ItemBreakLimitTemplet').flatMap((r) =>
+        [r.Factor1, r.Factor2, r.Factor3, r.Factor4].map(numf),
+      ),
+      'ItemBreakLimitTemplet.Factor1..4',
+    ),
     examples,
     singularity: {
       minGrade: 'unique',
