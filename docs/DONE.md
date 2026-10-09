@@ -7,6 +7,30 @@
 
 ## 2026-10-09
 
+- **Relecture B44 (Fable) — onglet « Items » de quick, validé ; les Éditeurs
+  sont portés en entier** : périmètre tenu (dix-sept fichiers ; hors quick,
+  deux fonctions de l'admin qui acceptent un catalogue injecté sans changer
+  leur contrat, et le menu admin qui perd le groupe « Editor » entier).
+  `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 879 cas verts.
+  Rejoué par le module (tsx) : l'état du jour — 1 208 lignes, 1 149 items,
+  59 monnaies, 102 sans description, 496 sprites, 23 curés, `canBake` vrai ;
+  `saveItems` à store, bake et git factices — `was` périmé → `stale`, aucun
+  appel ; création sans nom anglais, id avec espace, id existant
+  (`Hero%20Piece`) : trois refus nommés, aucun appel ; deux items modifiés →
+  pour chacun `upsert` puis `bake`, l'entrée compactée (le `fr` vide de la
+  description retiré, `Hero%20Piece` passé tel quel), puis UN commit des
+  deux fichiers ; une entrée vidée → `upsert {}` (suppression) ; sans tables
+  parsées → refus avant tout appel. La route de recherche : « hero » trouve
+  les tickets par `name.en`. Banc rejoué sur un quick isolé (:4891, clés
+  vidées, que des GET) : le catalogue avec sa ligne de comptes, le segment
+  des types et les cinq cases, la fiche de Gems (création : l'avertissement
+  qu'une entrée vidée la retire du catalogue, les six langues du nom avec
+  « clé… », la description) — dans la charte. Les contrôles au TODO sont
+  pour Sevih, dont l'enregistrement réel qui porte les DEUX fichiers.
+  Étapes 9 à 15 de la migration closes : plus un lien « Editor » ni « Misc »
+  dans l'admin. Restent 16-17 (guides), 19-20 (extractor), 6 (Events), 22.
+
 - **quick : onglet « Items » — le catalogue curé, la fiche à six langues, la
   création (lot B44, étape 13 de la migration)** — l'éditeur « Item » de
   l'admin (`/admin/editor/items` : `ItemsBrowser`, `ItemCuratedEditor`) est
