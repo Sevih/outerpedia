@@ -8,7 +8,7 @@
  * tous ceux du menu), `--out <dossier>` (défaut `<tmp>/quick-shots/<horodatage>/`),
  * `--size 1440x1000`, `--settle 2500` (ms laissées aux `fetch` de la page),
  * `--hash <fragment>` (posé tel quel derrière l'adresse : un onglet qui lit son
- * hash s'ouvre sur un état précis, ex. `--tabs gear --hash gear/2000095`, ou
+ * hash s'ouvre sur un état précis, ex. `--tabs character --hash character/2000095/gear`, ou
  * `--tabs changelog --hash changelog/0` pour la fiche de l'entrée la plus récente).
  *
  * POURQUOI. Un agent qui retouche l'interface ne regarde pas l'écran : ce script

@@ -4,10 +4,12 @@
    « Skills » (les cartes de skills, leurs chips d'effets). Le reste — carte,
    `.form`, `.savebar`, `.btn`, `.badge`, `.chip`, `.tab` — vient de
    `quick.css` ; le picker de héros, de `hero-picker.css`. Les ids `c-` voisinent
-   avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. */
+   avec ceux de Codes promo (`c-code`, `c-list`…) : aucun n'est repris ici. Le
+   dernier sous-onglet, « Gear reco », est un module (`gear.js`) : sa feuille
+   se charge d'ici, et ne règle que ce qui vit sous son hôte, `#c-gear`. */
+@import url('/ui/tabs/gear.css');
 
-/* ---------------------------------------------------------------- le perso
-   L'en-tête de Gear reco (`.g-char`), aux mêmes mesures. */
+/* ---------------------------------------------------------------- le perso */
 #tab-character .c-char {
   flex-direction: row;
   align-items: center;
@@ -260,16 +262,17 @@
   color: var(--content);
   font-weight: 400;
 }
-/* Modifié : bord et fond accent (15 %), plus un point ; refusé : danger. */
+/* Modifié : bord et fond accent (15 %), plus un point ; refusé : danger. Les
+   champs de `#c-panel` seulement : ceux de Gear reco ont leurs marques. */
 #tab-character .c-cell select.dirty,
-#tab-character input.dirty {
+#c-panel input.dirty {
   border-style: solid;
   border-color: var(--accent);
   background-color: color-mix(in srgb, var(--accent) 15%, var(--surface-base));
   color: var(--content);
 }
 #tab-character .c-cell select.refused,
-#tab-character input.refused {
+#c-panel input.refused {
   border-style: solid;
   border-color: var(--danger);
   background-color: color-mix(in srgb, var(--danger) 12%, var(--surface-base));
@@ -498,8 +501,9 @@
    (classes `.pv-*`), sur le fond de la page — ce n'est plus l'éditeur. Les
    couleurs sont celles du site : ses jetons, recopiés de `globals.css` sous
    les mêmes noms (ceux qui manquent à `quick.css`), et ses classes de couleur
-   (`text-buff`, `text-earth`…), que les segments portent telles quelles —
-   comme dans `gear.css`, dont l'aperçu vit sous `#tab-gear`. */
+   (`text-buff`, `text-earth`…), que les segments portent telles quelles.
+   Posés sur toute la fiche : l'aperçu des builds de Gear reco (`gear.css`)
+   s'en sert aussi, comme des segments de note (`.pv-seg`, `.pv-fx`…). */
 #tab-character {
   --buff: #38bdf8;
   --debuff: #f87171;

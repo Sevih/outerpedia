@@ -1000,11 +1000,12 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * Les pages de l'admin que quick a déjà : `href` d'un item de l'inbox → section
  * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
- * effets et les outils Pro / Con et Synergy (deux sous-onglets de la « Fiche
- * perso ») — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux tags et
- * aux données du jeu.
+ * effets, celui des persos (la « Fiche perso », Gear reco compris) et les
+ * outils Pro / Con et Synergy (deux de ses sous-onglets) — l'inbox, elle, ne
+ * renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
+  '/admin/editor/characters': 'character',
   '/admin/editor/effects': 'effects',
   '/admin/tools/pros-cons': 'character',
   '/admin/tools/synergies': 'character',

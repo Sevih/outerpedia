@@ -18,7 +18,6 @@ const TABS = [
   'comics',
   'videos',
   'ranks',
-  'gear',
   'gamedata',
   'character',
   'effects',
@@ -66,7 +65,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : quatorze sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : treize sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -97,10 +96,33 @@ describe('assemblePage — la coquille et ses onglets', () => {
       );
     }
     expect(menuTabs(assemblePage(page, readTab))).toEqual(TABS);
-    // Et rien dans `tabs/` que la coquille ne réclame pas.
+    // Et rien dans `tabs/` que la coquille ne réclame pas — sauf Gear reco, qui
+    // n'est plus une section : un module et sa feuille, sans markup à lui.
     expect(readdirSync(resolve(UI, 'tabs')).sort()).toEqual(
-      TABS.flatMap((t) => [`${t}.css`, `${t}.html`, `${t}.js`]).sort(),
+      [...TABS.flatMap((t) => [`${t}.css`, `${t}.html`, `${t}.js`]), 'gear.css', 'gear.js'].sort(),
     );
+  });
+
+  it('Gear reco n’est plus une section : ni menu, ni marqueur, ni feuille, ni import — la fiche le charge', () => {
+    const tab = (file: string): string => readFileSync(resolve(UI, 'tabs', file), 'utf8');
+    expect(shell()).not.toMatch(/gear/i);
+    expect(readFileSync(resolve(UI, 'lib.js'), 'utf8')).not.toContain("id: 'gear'");
+    expect(tab('gear.js')).not.toContain('sections.register');
+    // Le module et sa feuille viennent avec la « Fiche perso », son hôte dans son markup.
+    expect(tab('character.js')).toContain("from './gear.js';");
+    expect(tab('character.css')).toContain("@import url('/ui/tabs/gear.css');");
+    expect(tab('character.html')).toContain('<div id="c-gear" role="tabpanel"');
+    // Sa feuille ne règle que ce qui vit sous cet hôte.
+    const selectors = tab('gear.css')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .split('}')
+      .filter((rule) => rule.includes('{'))
+      // Dans un `@media` ou un `@container`, la règle est après son accolade.
+      .map((rule) => rule.slice(0, rule.lastIndexOf('{')))
+      .flatMap((head) => head.slice(head.lastIndexOf('{') + 1).split(','))
+      .map((sel) => sel.trim());
+    expect(selectors.length).toBeGreaterThan(100);
+    expect(selectors.filter((sel) => !sel.startsWith('#c-gear'))).toEqual([]);
   });
 
   it('aucun `id` en double dans la page : deux onglets peuvent partager une lettre, pas un id', () => {
@@ -2138,6 +2160,88 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   type Call = { path: string; body?: unknown };
   type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
 
+  /** Gear reco : un build tel que le disque l'écrit, les listes et les presets du serveur. */
+  interface GearBuild {
+    name: string;
+    weapons?: { id: string; mainStat?: string }[];
+    amulets?: { id: string; mainStat?: string }[];
+    talismans?: string[];
+    sets?: { preset?: string; pieces?: { set: string; count: number }[] }[];
+    substats?: string;
+    note?: Text;
+  }
+  const piece = (id: string, label: string, more: object = {}) => ({
+    id,
+    label,
+    icon: `I${id}`,
+    classLimits: [] as string[],
+    mainStats: [] as string[],
+    grade: 'unique',
+    star: 6,
+    ...more,
+  });
+  const GEAR_OPTIONS = {
+    weapons: [
+      piece('4', 'Surefire Greatsword', {
+        classLimits: ['striker'],
+        mainStats: ['ATK%', 'DEF%', 'HP%'],
+      }),
+      piece('5', 'Twin B', { classLimits: ['striker'], mainStats: ['ATK%'] }),
+      piece('6', 'Sage Staff', { classLimits: ['mage'], mainStats: ['ATK%'] }),
+    ],
+    amulets: [piece('1010', 'Death’s Hold', { mainStats: ['PEN%', 'CHD'] })],
+    talismans: [
+      piece('10003', 'Rogue’s Charm', { mode: 'CP' }),
+      piece('10011', 'Undertaker’s Charm', { mode: 'AP' }),
+    ],
+    sets: [
+      { id: '12', label: 'Critical Strike Set', pieceIcons: ['H', 'A', 'G', 'S'], has2P: true },
+      { id: '13', label: 'Speed Set', pieceIcons: ['H', 'A', 'G', 'S'], has2P: true },
+    ],
+  };
+  const GEAR_PRESETS = {
+    talismans: { ru: ['10003', '10011'] } as Record<string, string[]>,
+    sets: {
+      s4: [{ set: '13', count: 4 }],
+      chd4: [{ set: '12', count: 4 }],
+    } as Record<string, { set: string; count: number }[]>,
+    substats: { dps: 'ATK>CHC>CHD>SPD' } as Record<string, string>,
+  };
+  /** Les recos du disque : deux builds pour Aer, aucun pour les autres. */
+  const gearDisk = (): Record<string, GearBuild[]> => ({
+    [AER]: [
+      {
+        name: 'Speed',
+        weapons: [{ id: '4', mainStat: 'ATK%' }],
+        amulets: [{ id: '1010', mainStat: 'PEN%' }],
+        talismans: ['$ru'],
+        sets: [{ preset: 's4' }],
+        substats: '$dps',
+      },
+      {
+        name: 'High Crit',
+        weapons: [{ id: '4', mainStat: 'ATK%' }],
+        talismans: ['$ru'],
+        sets: [{ preset: 'chd4' }],
+        substats: '$dps',
+        note: { en: 'Crit first.', fr: 'Le crit d’abord.' },
+      },
+    ],
+  });
+  /** Un build du disque, ses presets dépliés en pièces : ce que l'état sert à côté. */
+  const gearPieces = (b: GearBuild) => ({
+    ...b,
+    talismans: (b.talismans ?? []).flatMap((t) =>
+      t.startsWith('$') ? (GEAR_PRESETS.talismans[t.slice(1)] ?? [t]) : [t],
+    ),
+    sets: (b.sets ?? []).map((c) => ({
+      pieces: c.preset ? (GEAR_PRESETS.sets[c.preset] ?? []) : (c.pieces ?? []),
+    })),
+    substats: b.substats?.startsWith('$')
+      ? (GEAR_PRESETS.substats[b.substats.slice(1)] ?? '')
+      : (b.substats ?? ''),
+  });
+
   /**
    * La page de quick dans un document happy-dom, comme pour Noms et Effets : la
    * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/character.js`, le
@@ -2160,6 +2264,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       /** Le curé des chips de skills du disque (Aer), et un kit illisible. */
       chips?: { chipHide?: Chips; chipAdd?: Chips };
       kitError?: string;
+      /** Gear reco : la réponse à un enregistrement des builds (d'office, écrit). */
+      gearSaved?: (body: unknown) => Saved;
     } = {},
   ) {
     vi.resetModules();
@@ -2174,8 +2280,11 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     const disk = {
       curated: curated(),
       chips: { chipHide: {}, chipAdd: {}, ...opts.chips } as { chipHide: Chips; chipAdd: Chips },
+      gear: gearDisk(),
     };
     const calls: Call[] = [];
+    // Ce que Gear reco demande, à part : les tests de la fiche comptent les leurs.
+    const gearCalls: Call[] = [];
     // L'aperçu attend cette porte : `hold` la ferme, pour voir la requête en vol.
     let gate: Promise<void> = Promise.resolve();
     const confirm = vi.fn(() => true);
@@ -2266,6 +2375,56 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           error: 'Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
         };
         return answer(out, 'error' in (out as object) ? 500 : 200);
+      }
+      if (url.pathname.startsWith('/api/gear-reco'))
+        gearCalls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/gear-reco/state') {
+        const id = url.searchParams.get('id') ?? '';
+        const row = ROSTER.find((c) => c.id === id);
+        if (!row) return answer({ error: `perso inconnu : ${id}` }, 404);
+        const builds = disk.gear[id] ?? [];
+        return answer({
+          roster: ROSTER.map((c) => ({
+            id: c.id,
+            name: c.name,
+            class: c.class,
+            builds: (disk.gear[c.id] ?? []).length,
+          })),
+          presets: GEAR_PRESETS,
+          options: GEAR_OPTIONS,
+          langs: { default: 'en', main: ['en', 'fr', 'es'], extra: ['jp', 'kr', 'zh'] },
+          statIcons: {},
+          id,
+          disk: builds,
+          builds: builds.map(gearPieces),
+        });
+      }
+      // L'aperçu : les armes par leur nom, la note dans la langue (repli sur l'anglais).
+      if (url.pathname === '/api/gear-reco/preview') {
+        const { builds, lang } = body as { builds: GearBuild[]; lang: string };
+        return answer({
+          builds: builds.map((b) => ({
+            name: b.name,
+            weapons: (b.weapons ?? []).map((p) => ({
+              id: p.id,
+              name: GEAR_OPTIONS.weapons.find((o) => o.id === p.id)?.label ?? p.id,
+              grade: 'unique',
+              mainStat: p.mainStat,
+            })),
+            amulets: [],
+            talismans: [],
+            sets: [],
+            setEffects: [],
+            noteSegments: [{ t: 'text', s: `${lang}: ${b.note?.[lang] ?? b.note?.en ?? ''}` }],
+          })),
+          labels: { weapon: 'Weapon', note: 'Notes' },
+        });
+      }
+      if (url.pathname === '/api/gear-reco') {
+        const sent = body as { id: string; builds: GearBuild[] };
+        const out = opts.gearSaved?.(body) ?? { ok: true, log: ['fait'], written: true };
+        if (out.written) disk.gear[sent.id] = sent.builds;
+        return answer(out);
       }
       if (url.pathname === '/api/character')
         return answer(
@@ -2388,6 +2547,41 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         await vi.advanceTimersByTimeAsync(400);
         await settle();
       },
+      // ---- Gear reco, le dernier sous-onglet : un module monté dans `#c-gear`.
+      /** Vient sur Gear reco, et laisse son état puis son aperçu arriver. */
+      gear: async () => {
+        el('c-tab-gear').click();
+        for (let i = 0; i < 6; i++) await settle();
+      },
+      gearStates: () =>
+        gearCalls.filter((c) => c.path.startsWith('/api/gear-reco/state')).map((c) => c.path),
+      gearPreviews: () =>
+        gearCalls.filter((c) => c.path === '/api/gear-reco/preview').map((c) => c.body),
+      gearPosted: () => gearCalls.filter((c) => c.path === '/api/gear-reco').map((c) => c.body),
+      /** Les onglets de builds : leur nom, s'il est montré, son point. */
+      builds: () =>
+        all('#g-tabs [role="tab"]').map((b) => [
+          b.textContent,
+          b.getAttribute('aria-selected'),
+          b.querySelector('.dot')?.className ?? '',
+        ]),
+      /** La carte du build montré. */
+      card: () => all('#g-list [data-k]')[0],
+      /** Le nom du build montré, et sa note dans une langue. */
+      buildName: () => all('#g-list [data-t="name"]')[0] as unknown as HTMLInputElement,
+      note: (lang = 'en') =>
+        all(`#g-list textarea[data-lang="${lang}"]`)[0] as unknown as HTMLTextAreaElement,
+      gearCount: () => el('g-count').textContent,
+      gearSave: async () => {
+        el('g-save').click();
+        for (let i = 0; i < 8; i++) await settle();
+      },
+      /** Les tuiles du picker de pièces : leur nom, cochée ou non. */
+      tiles: () =>
+        all('#g-results .g-tile').map((t) => [
+          t.querySelector('.g-n')?.textContent,
+          t.getAttribute('aria-pressed'),
+        ]),
     };
   }
 
@@ -2469,12 +2663,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
     expect(page.el('hp-modal')).toBeNull();
     expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
-    // `#character/<id>` vaut « fiche », un sous-onglet pas encore porté aussi.
+    // `#character/<id>` vaut « fiche », un sous-onglet inconnu aussi.
     const bare = await character({ hash: `#character/${AIS}` });
     expect(bare.window.location.hash).toBe(`#character/${AIS}/fiche`);
-    const soon = await character({ hash: `#character/${AIS}/gear` });
-    expect(soon.window.location.hash).toBe(`#character/${AIS}/fiche`);
-    expect(soon.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    const nope = await character({ hash: `#character/${AIS}/nope` });
+    expect(nope.window.location.hash).toBe(`#character/${AIS}/fiche`);
+    expect(nope.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
   });
 
   it('un perso que le roster ne connaît pas : le journal le dit, la page reste sans perso', async () => {
@@ -2484,7 +2678,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('log').textContent).toContain('perso inconnu : nope');
   });
 
-  it('les sous-onglets : la rangée entière, Fiche montrée, celui qui n’est pas encore porté éteint', async () => {
+  it('les sous-onglets : la rangée entière, Fiche montrée, tous allumés', async () => {
     const page = await character({ hash: `#character/${AER}` });
     expect(page.el('c-tabs').getAttribute('role')).toBe('tablist');
     expect(page.subs()).toEqual([
@@ -2492,7 +2686,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Pros / Cons', 'false', '', ''],
       ['Synergies', 'false', '', ''],
       ['Skills', 'false', '', ''],
-      ['Gear reco', 'false', 'lot B40', ''],
+      ['Gear reco', 'false', '', ''],
     ]);
     expect(page.all('#c-tabs [role="tab"]').map((b) => b.getAttribute('tabindex'))).toEqual([
       '0',
@@ -2504,21 +2698,28 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.el('c-panel').getAttribute('role')).toBe('tabpanel');
     expect(page.el('c-panel').getAttribute('aria-labelledby')).toBe('c-tab-fiche');
     expect(page.el('c-tab-fiche').getAttribute('aria-controls')).toBe('c-panel');
+    // Gear reco a son hôte, à côté : rien n'y est monté avant d'y venir.
+    expect(page.el('c-tab-gear').getAttribute('aria-controls')).toBe('c-gear');
+    expect(page.el('c-gear').getAttribute('aria-labelledby')).toBe('c-tab-gear');
+    expect(page.el('c-gear').hidden).toBe(true);
+    expect(page.el('c-gear').innerHTML).toBe('');
+    expect(page.gearStates()).toEqual([]);
   });
 
-  it('le clavier des sous-onglets : ← → Début Fin restent parmi ceux qui sont allumés', async () => {
+  it('le clavier des sous-onglets : ← → Début Fin, les bouts se rejoignent', async () => {
     const page = await character({ hash: `#character/${AER}` });
     page.el('c-tab-fiche').focus();
-    // Quatre allumés : → avance, les bouts se rejoignent, Fin et Début y vont.
+    // Cinq sous-onglets : → avance, les bouts se rejoignent, Fin et Début y vont.
     for (const [key, to] of [
       ['ArrowRight', 'pros-cons'],
       ['ArrowRight', 'synergies'],
       ['ArrowRight', 'skills'],
+      ['ArrowRight', 'gear'],
       ['ArrowRight', 'fiche'],
-      ['ArrowLeft', 'skills'],
+      ['ArrowLeft', 'gear'],
       ['Home', 'fiche'],
-      ['End', 'skills'],
-      ['ArrowLeft', 'synergies'],
+      ['End', 'gear'],
+      ['ArrowLeft', 'skills'],
       ['Home', 'fiche'],
     ]) {
       const event = new page.window.KeyboardEvent('keydown', {
@@ -2533,10 +2734,6 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       expect(page.window.document.activeElement?.id, key).toBe(`c-tab-${to}`);
       expect(page.window.location.hash, key).toBe(`#character/${AER}/${to}`);
     }
-    // Un clic sur un sous-onglet éteint ne montre rien d'autre.
-    page.el('c-tab-gear').click();
-    expect(page.subs()[0].slice(0, 2)).toEqual(['Fiche', 'true']);
-    expect(page.window.location.hash).toBe(`#character/${AER}/fiche`);
   });
 
   it('la fiche : trois cartes — Rangs, Kit, Vidéos — remplies du disque', async () => {
@@ -3887,6 +4084,392 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     const ais = await character({ hash: `#character/${AIS}/skills` });
     expect(ais.all('#c-panel .empty').map((e) => e.textContent)).toEqual([
       'Aucune carte de skill.',
+    ]);
+  });
+
+  // ---------------------------------------------------------------- Gear reco
+  // Le dernier sous-onglet : l'ancienne section « Gear reco » des Données,
+  // devenue un module (`tabs/gear.js`) que la fiche monte pour son perso. Son UI
+  // et ses routes n'ont pas bougé ; son en-tête et son picker de perso, si.
+
+  /** La page ouverte sur Gear reco, son état et son premier aperçu arrivés. */
+  async function geared(
+    hash = `#character/${AER}/gear`,
+    opts: Parameters<typeof character>[0] = {},
+  ) {
+    const page = await character({ ...opts, hash });
+    for (let i = 0; i < 6; i++) await page.settle();
+    return page;
+  }
+
+  it('Gear reco : y venir monte le module pour le perso de la fiche, son état lu une fois', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    // Plus de section à lui : ni onglet dans le menu, ni `<section>`.
+    expect(page.all('#tabs [data-tab="gear"]')).toEqual([]);
+    expect(page.el('tab-gear')).toBeNull();
+    expect(page.all('#tabs [data-group="data"]').map((b) => b.dataset.tab)).toEqual([
+      'ranks',
+      'gamedata',
+    ]);
+
+    await page.gear();
+    expect(page.window.location.hash).toBe(`#character/${AER}/gear`);
+    expect(page.subs()[4]).toEqual(['Gear reco', 'true', '', '']);
+    expect(page.el('c-panel').hidden).toBe(true);
+    expect(page.el('c-panel').innerHTML).toBe('');
+    expect(page.el('c-gear').hidden).toBe(false);
+    expect(page.gearStates()).toEqual([`/api/gear-reco/state?id=${AER}`]);
+    // Ni en-tête de perso ni « Changer de perso » à lui : la fiche les a.
+    expect(page.el('g-who')).toBeNull();
+    expect(page.el('g-pick')).toBeNull();
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+    // Sa savebar, ses onglets de builds, la carte du premier.
+    expect(page.el('g-bar').hidden).toBe(false);
+    expect(page.gearCount()).toBe('aucune modification');
+    expect(page.builds()).toEqual([
+      ['Speed', 'true', ''],
+      ['High Crit', 'false', ''],
+    ]);
+    expect(page.buildName().value).toBe('Speed');
+    expect(page.all('#g-pv-lang button').map((b) => b.textContent)).toEqual([
+      'en',
+      'fr',
+      'es',
+      'jp',
+      'kr',
+      'zh',
+    ]);
+    // Au-dessus de sa barre, qui enregistre quoi ; la barre de la fiche reste,
+    // sans langue d'aperçu (ce sous-onglet a la sienne).
+    expect(page.all('#c-gear > p.hint')[0].textContent).toContain(
+      '« Enregistrer » de la fiche, au-dessus, ne les envoie pas',
+    );
+    expect(page.el('c-bar').hidden).toBe(false);
+    expect(page.el('c-pv-lang').hidden).toBe(true);
+
+    // Un autre sous-onglet, puis le retour : le module est resté monté, rien n'est relu.
+    page.sub('fiche');
+    expect(page.el('c-gear').hidden).toBe(true);
+    expect(page.el('c-panel').hidden).toBe(false);
+    expect(page.all('#c-panel .c-card').length).toBeGreaterThan(0);
+    await page.gear();
+    expect(page.gearStates()).toHaveLength(1);
+    expect(page.builds()).toHaveLength(2);
+  });
+
+  it('`#character/<id>/gear/build/2/picker/weapons` : le n-ième build, et son picker d’armes', async () => {
+    const page = await geared(`#character/${AER}/gear/build/2/picker/weapons`);
+    // L'adresse dit le sous-onglet, pas le build montré.
+    expect(page.window.location.hash).toBe(`#character/${AER}/gear`);
+    expect(page.builds().map((b) => b.slice(0, 2))).toEqual([
+      ['Speed', 'false'],
+      ['High Crit', 'true'],
+    ]);
+    expect(page.buildName().value).toBe('High Crit');
+    expect(page.el('g-modal').hidden).toBe(false);
+    expect(page.el('g-modal-title').textContent).toBe('Choisir les armes');
+    // Les armes de la classe du perso de la fiche (striker), celle du build cochée.
+    expect(page.tiles()).toEqual([
+      ['Surefire Greatsword', 'true'],
+      ['Twin B', 'false'],
+    ]);
+    expect(page.el('g-tally').textContent).toBe('1 choisie sur 2 · striker');
+
+    // Sans picker ; un rang hors des builds est borné au dernier.
+    const far = await geared(`#character/${AER}/gear/build/9`);
+    expect(far.builds().map((b) => b[1])).toEqual(['false', 'true']);
+    expect(far.el('g-modal').hidden).toBe(true);
+  });
+
+  it('les anciens liens : `#gear/<id>…` vaut `#character/<id>/gear…`, mêmes effets', async () => {
+    const page = await geared(`#gear/${AER}/build/2/picker/weapons`);
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.all('#tabs [data-tab="character"]')[0].getAttribute('aria-selected')).toBe('true');
+    expect(page.window.location.hash).toBe(`#character/${AER}/gear`);
+    expect(page.subs()[4].slice(0, 2)).toEqual(['Gear reco', 'true']);
+    expect(page.builds().map((b) => b[1])).toEqual(['false', 'true']);
+    expect(page.el('g-modal').hidden).toBe(false);
+    expect(page.el('g-modal-title').textContent).toBe('Choisir les armes');
+
+    // `#gear/<id>` : le perso, son premier build — ici aucun —, pas de picker.
+    const plain = await geared(`#gear/${AIS}`);
+    expect(plain.window.location.hash).toBe(`#character/${AIS}/gear`);
+    expect(plain.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    expect(plain.gearStates()).toEqual([`/api/gear-reco/state?id=${AIS}`]);
+    expect(plain.all('#g-list .empty')[0].textContent).toBe(
+      'Aucun build pour ce perso : « ＋ build » en ajoute un.',
+    );
+    expect(plain.el('g-modal').hidden).toBe(true);
+
+    // `#gear` seul : la fiche, sur Gear reco — et le picker de héros, faute de perso.
+    const bare = await geared('#gear');
+    expect(bare.el('tab-character').hidden).toBe(false);
+    expect(bare.gearStates()).toEqual([]);
+    expect(bare.el('hp-modal').hidden).toBe(false);
+    bare.all('#hp-results .hp-tile')[0].click();
+    for (let i = 0; i < 6; i++) await bare.settle();
+    expect(bare.window.location.hash).toBe(`#character/${AER}/gear`);
+    expect(bare.builds()).toHaveLength(2);
+  });
+
+  it('Gear reco : les onglets de builds — clic, clavier, « ＋ build » — et le point du sous-onglet', async () => {
+    const page = await geared();
+    const tab = (i: number) => page.all('#g-tabs [role="tab"]')[i];
+    tab(1).click();
+    expect(page.buildName().value).toBe('High Crit');
+    expect(page.el('g-list').getAttribute('role')).toBe('tabpanel');
+    expect(page.el('g-list').getAttribute('aria-labelledby')).toBe(tab(1).id);
+    // → depuis le dernier revient au premier ; changer d'onglet ne redemande pas l'aperçu.
+    page.fire(tab(1), 'keydown', 'ArrowRight');
+    expect(page.builds().map((b) => b[1])).toEqual(['true', 'false']);
+    expect(page.gearPreviews()).toHaveLength(1);
+
+    // « ＋ build » : un onglet de plus, montré, en erreur tant qu'il n'a pas de nom.
+    page.el('g-add').click();
+    expect(page.builds()).toEqual([
+      ['Speed', 'false', ''],
+      ['High Crit', 'false', ''],
+      ['Build 3', 'true', 'dot ko'],
+    ]);
+    expect(page.gearCount()).toContain('1 changement');
+    expect(page.gearCount()).toContain('nom vide');
+    page.type(page.buildName(), 'PvP');
+    expect(page.builds()[2]).toEqual(['PvP', 'true', 'dot edit']);
+    expect(page.gearCount()).toBe('1 changement');
+    // Le sous-onglet de la fiche porte le point ; sa savebar ne compte pas les builds.
+    expect(page.subs()[4]).toEqual(['Gear reco', 'true', '', 'dot edit']);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('c-save').disabled).toBe(true);
+
+    // « Annuler » de SA barre relit les builds du disque.
+    page.el('g-reset').click();
+    for (let i = 0; i < 6; i++) await page.settle();
+    expect(page.gearStates()).toHaveLength(2);
+    expect(page.builds()).toHaveLength(2);
+    expect(page.gearCount()).toBe('aucune modification');
+    expect(page.subs()[4][3]).toBe('');
+  });
+
+  it('Gear reco : l’aperçu — une requête pour tous les builds, la langue de la barre, 400 ms après une frappe', async () => {
+    const page = await geared(`#character/${AER}/gear/build/2`);
+    // Les builds tels qu'ils partiraient : intacts, ceux du disque.
+    expect(page.gearPreviews()).toEqual([{ builds: gearDisk()[AER], lang: 'en' }]);
+    const pv = () => page.card().querySelector('[data-pv]')?.textContent ?? '';
+    expect(pv()).toContain('Surefire Greatsword');
+    expect(pv()).toContain('en: Crit first.');
+
+    // Une autre langue : une requête, aussitôt.
+    page.all('#g-pv-lang button[data-lang="fr"]')[0].click();
+    await page.settle();
+    await page.settle();
+    expect(page.gearPreviews()).toHaveLength(2);
+    expect(page.gearPreviews()[1]).toMatchObject({ lang: 'fr' });
+    expect(pv()).toContain('fr: Le crit d’abord.');
+
+    // Une frappe dans la note : rien avant 400 ms, puis les builds retouchés.
+    page.type(page.note(), 'Crit, then speed.');
+    expect(page.gearPreviews()).toHaveLength(2);
+    await page.preview();
+    expect(page.gearPreviews()).toHaveLength(3);
+    expect(page.gearPreviews()[2]).toMatchObject({
+      lang: 'fr',
+      builds: [{ name: 'Speed' }, { name: 'High Crit', note: { en: 'Crit, then speed.' } }],
+    });
+    expect(page.gearCount()).toBe('1 changement');
+  });
+
+  it('Gear reco : un picker de pièces — cocher puis « Valider » pose, Échap ferme sans rien poser', async () => {
+    const page = await geared();
+    const add = () =>
+      page
+        .card()
+        .querySelector(
+          '[data-act="pick"][data-slot="weapons"][data-i="-1"]',
+        ) as unknown as HTMLElement;
+    const pieces = () => page.all('#g-list .g-gear .g-item-n').map((n) => n.textContent);
+    expect(pieces()).toEqual(['Surefire Greatsword', 'Death’s Hold']);
+
+    add().click();
+    expect(page.el('g-modal').hidden).toBe(false);
+    page.all('#g-results .g-tile')[1].click();
+    expect(page.tiles()).toEqual([
+      ['Surefire Greatsword', 'true'],
+      ['Twin B', 'true'],
+    ]);
+    page.fire(page.el('g-q'), 'keydown', 'Escape');
+    expect(page.el('g-modal').hidden).toBe(true);
+    expect(pieces()).toEqual(['Surefire Greatsword', 'Death’s Hold']);
+    expect(page.gearCount()).toBe('aucune modification');
+
+    add().click();
+    page.all('#g-results .g-tile')[1].click();
+    page.all('#g-foot [data-pk="ok"]')[0].click();
+    expect(page.el('g-modal').hidden).toBe(true);
+    expect(pieces()).toEqual(['Surefire Greatsword', 'Twin B', 'Death’s Hold']);
+    expect(page.gearCount()).toBe('1 changement');
+    expect(page.builds()[0]).toEqual(['Speed', 'true', 'dot edit']);
+
+    // Les autres slots ouvrent la même modale : les talismans, le mix de sets.
+    (
+      page
+        .card()
+        .querySelector('[data-act="pick"][data-slot="talismans"]') as unknown as HTMLElement
+    ).click();
+    expect(page.el('g-modal-title').textContent).toBe('Choisir les talismans');
+    expect(page.tiles()).toEqual([
+      ['Rogue’s Charm', 'true'],
+      ['Undertaker’s Charm', 'true'],
+    ]);
+    page.el('g-close').click();
+    (
+      page.card().querySelector('[data-act="pick"][data-slot="sets"]') as unknown as HTMLElement
+    ).click();
+    expect(page.el('g-modal-title').textContent).toBe('Composer les sets');
+    expect(page.el('g-tally').textContent).toBe('Speed Set · 4 pièces');
+    page.el('g-close').click();
+    expect(page.el('g-modal').hidden).toBe(true);
+  });
+
+  it('Gear reco : « Enregistrer » de SA barre poste les builds, à part ; celle de la fiche ne les envoie pas', async () => {
+    const page = await geared();
+    page.type(page.buildName(), 'Speed 2');
+    expect(page.gearCount()).toBe('1 changement');
+    expect(page.builds()[0]).toEqual(['Speed 2', 'true', 'dot edit']);
+    // La savebar de la fiche ne compte pas les builds : son bouton reste éteint.
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('c-save').disabled).toBe(true);
+    await page.save();
+    expect(page.posted()).toEqual([]);
+    expect(page.gearPosted()).toEqual([]);
+
+    // Un rang en plus : la fiche part seule, les builds restent en attente.
+    page.sub('fiche');
+    page.pick(page.cell('rank'), 'S');
+    expect(page.count()).toBe('1 changement');
+    await page.save();
+    expect(page.posted()).toHaveLength(1);
+    expect(page.gearPosted()).toEqual([]);
+    expect(page.subs()[4]).toEqual(['Gear reco', 'false', '', 'dot edit']);
+    await page.gear();
+    expect(page.gearStates()).toHaveLength(1);
+    expect(page.gearCount()).toBe('1 changement');
+
+    // Sa barre : la liste entière du perso, un build intact tel que le disque l'écrit.
+    await page.gearSave();
+    const [speed, crit] = gearDisk()[AER];
+    expect(page.gearPosted()).toEqual([{ id: AER, builds: [{ ...speed, name: 'Speed 2' }, crit] }]);
+    // Écrit : le disque est relu, le build montré reste le même.
+    expect(page.gearStates()).toHaveLength(2);
+    expect(page.gearCount()).toBe('aucune modification');
+    expect(page.builds()).toEqual([
+      ['Speed 2', 'true', ''],
+      ['High Crit', 'false', ''],
+    ]);
+    expect(page.subs()[4][3]).toBe('');
+    expect(page.posted()).toHaveLength(1);
+  });
+
+  it('Gear reco : un refus du serveur se pose sur son build, rien n’est relu ; une erreur retient l’envoi', async () => {
+    const page = await geared(undefined, {
+      gearSaved: () => ({
+        ok: false,
+        log: ['refusé'],
+        written: false,
+        issues: [{ build: 1, slot: 'note', message: 'tag inconnu {B/nope}' }],
+      }),
+    });
+    page.type(page.buildName(), 'Speed 2');
+    await page.gearSave();
+    expect(page.gearPosted()).toHaveLength(1);
+    expect(page.gearStates()).toHaveLength(1);
+    expect(page.el('journal').dataset.state).toBe('ko');
+    // Le build 2 porte l'erreur : son onglet en rouge, la savebar la compte.
+    expect(page.builds()).toEqual([
+      ['Speed 2', 'true', 'dot edit'],
+      ['High Crit', 'false', 'dot ko'],
+    ]);
+    expect(page.gearCount()).toContain('1 erreur');
+    page.all('#g-tabs [role="tab"]')[1].click();
+    expect(page.card().classList.contains('ko')).toBe(true);
+    expect(
+      page.all('#g-list .g-iss[data-iss="note"] .badge.error').map((b) => b.textContent),
+    ).toEqual(['tag inconnu {B/nope}']);
+
+    // Tant qu'il en reste une, rien n'est envoyé : le journal dit laquelle.
+    await page.gearSave();
+    expect(page.gearPosted()).toHaveLength(1);
+    expect(page.el('log').textContent).toContain('Rien n’est envoyé tant qu’il reste des erreurs');
+    expect(page.el('log').textContent).toContain('build 2 « High Crit » · Note : tag inconnu');
+    // Le build retouché ne porte plus l'erreur du dernier enregistrement.
+    page.type(page.note(), 'Crit.');
+    expect(page.builds()[1]).toEqual(['High Crit', 'true', 'dot edit']);
+  });
+
+  it('`dirty` et `canLeave` communs : des builds en attente retiennent l’onglet et le changement de perso', async () => {
+    const page = await geared();
+    const leave = () => page.all('#tabs [data-tab="effects"]')[0].click();
+    const unload = () => {
+      const event = new page.window.Event('beforeunload', { cancelable: true });
+      (page.window.onbeforeunload as unknown as (e: unknown) => void)(event);
+      return event.defaultPrevented;
+    };
+    const hero = (id: string) => page.all('#hp-results .hp-tile').find((t) => t.dataset.id === id)!;
+    expect(unload()).toBe(false);
+
+    page.type(page.buildName(), 'Speed 2');
+    expect(unload()).toBe(true);
+    page.confirm.mockReturnValueOnce(false);
+    leave();
+    expect(page.el('tab-character').hidden).toBe(false);
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      '1 changement non enregistré sur Aer. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    );
+
+    // « Annuler » de la fiche relit la fiche, pas les builds.
+    page.sub('fiche');
+    page.pick(page.cell('rank'), 'S');
+    page.el('c-reset').click();
+    await page.settle();
+    await page.settle();
+    expect(page.count()).toBe('aucune modification');
+    expect(page.subs()[4][3]).toBe('dot edit');
+    expect(unload()).toBe(true);
+
+    // Un rang et un build : comptés ensemble avant de changer de perso.
+    page.pick(page.cell('rank'), 'S');
+    page.el('c-pick').click();
+    page.confirm.mockReturnValueOnce(false);
+    hero(AIS).click();
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      'Abandonner 2 changements non enregistrés sur Aer ?',
+    );
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+
+    hero(AIS).click();
+    for (let i = 0; i < 6; i++) await page.settle();
+    expect(page.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    // Les builds d'Aer sont oubliés ; ceux d'Ais ne sont lus qu'en venant sur Gear reco.
+    expect(unload()).toBe(false);
+    expect(page.subs()[4][3]).toBe('');
+    expect(page.gearStates()).toHaveLength(1);
+    await page.gear();
+    expect(page.gearStates()).toEqual([
+      `/api/gear-reco/state?id=${AER}`,
+      `/api/gear-reco/state?id=${AIS}`,
+    ]);
+    expect(page.builds()).toEqual([]);
+    expect(page.all('#g-list .empty')[0].textContent).toBe(
+      'Aucun build pour ce perso : « ＋ build » en ajoute un.',
+    );
+
+    // Retour à Aer, sur Gear reco : ses builds relus du disque, la saisie abandonnée.
+    page.el('c-pick').click();
+    hero(AER).click();
+    for (let i = 0; i < 6; i++) await page.settle();
+    expect(page.gearStates()).toHaveLength(3);
+    expect(page.builds()).toEqual([
+      ['Speed', 'true', ''],
+      ['High Crit', 'false', ''],
     ]);
   });
 });
@@ -5662,13 +6245,12 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     };
   }
 
-  it('la section est servie, dans Données, après Gear reco — `wide` ; rien n’est lu avant d’y venir', async () => {
+  it('la section est servie, dans Données, après Rangs — `wide` ; rien n’est lu avant d’y venir', async () => {
     const page = await gamedata();
     expect(
       page.all('#tabs [data-group="data"]').map((b) => [b.dataset.tab, b.textContent]),
     ).toEqual([
       ['ranks', 'Rangs'],
-      ['gear', 'Gear reco'],
       ['gamedata', 'Tables du jeu'],
     ]);
     // La page s'ouvre sur le tableau de bord : ni catalogue ni passe sur les sources.

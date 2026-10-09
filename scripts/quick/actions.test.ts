@@ -3052,10 +3052,11 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
       ['extract:character', false, null],
       ['tags', true, 'tags'],
     ]);
-    // La table du jour : l'éditeur des effets, et les outils Pro / Con et
-    // Synergy, deux sous-onglets de la « Fiche perso ». Les lots suivants la
-    // rempliront.
+    // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
+    // perso », Gear reco compris), et les outils Pro / Con et Synergy, deux de
+    // ses sous-onglets. Les lots suivants la rempliront.
     expect(ADMIN_TO_QUICK).toEqual({
+      '/admin/editor/characters': 'character',
       '/admin/editor/effects': 'effects',
       '/admin/tools/pros-cons': 'character',
       '/admin/tools/synergies': 'character',

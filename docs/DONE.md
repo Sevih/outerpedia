@@ -7,6 +7,110 @@
 
 ## 2026-10-09
 
+- **quick : Gear reco devient le sous-onglet « Gear reco » de la « Fiche
+  perso », son UI intacte (lot B40, étape 9 de la migration, fin)** — décision
+  de Sevih du 08/10 : « sous-onglet de la fiche, mais on garde bien son UI —
+  il y a juste le picker de personnage à virer, sinon c'est un déplacement de
+  page ». La section « Gear reco » du groupe Données n'existe plus (Données
+  garde Rangs et Tables du jeu) ; tout ce qu'elle montrait vit sous le dernier
+  sous-onglet de la fiche du perso choisi, et l'éditeur « Character » de
+  l'admin est ainsi porté en entier (C11 + B42 + B39 + B40). **Le module** :
+  `tabs/gear.js` ne s'inscrit plus auprès de `lib.js` ; il exporte
+  `mountGear(host, charRow, { build, picker, onChange })` — qui pose son
+  markup dans l'hôte une fois (savebar de builds, onglets de builds, carte,
+  modale des pickers : `tabs/gear.html` est supprimé), branche ses écouteurs,
+  puis relit les builds du perso par `GET /api/gear-reco/state?id=`, comme
+  avant —, `gearChanges()` et `gearReset()` (oublie le perso et ses builds en
+  attente). Sortis avec l'en-tête : `gWho`, le picker de perso (`gOpenChar`,
+  `gChoose`, son filtre des recos), la lecture de `/api/ranks`, `gearLeave` et
+  `loadGear`. Le reste du fichier n'a pas bougé d'une ligne de logique : les
+  écouteurs posés au chargement du module sont devenus des fonctions nommées
+  que `gWire` branche au montage, « Enregistrer » poste toujours
+  `POST /api/gear-reco` (le commit `chore(gear-reco): <perso>` à part). Trois
+  gardes en plus, que le montage par un tiers rend nécessaires : une réponse
+  d'état plus ancienne que la dernière demandée est ignorée, un enregistrement
+  qui revient après un changement de perso ne repose rien, et l'état attend
+  `stateLoaded` (la base des images). **La fiche** (`tabs/character.js`) :
+  `SUBS` allume « Gear reco » ; le sous-onglet a son hôte à lui, `#c-gear`
+  (`character.html`), à côté de `#c-panel` qui se cache — le module garde donc
+  son DOM et ses builds en attente d'une venue à l'autre, et les écouteurs
+  délégués de la fiche (`data-act` des deux côtés) ne se croisent pas. Monté à
+  la première venue pour le perso de la fiche, vidé (`gearReset`) dès qu'elle
+  en charge un autre ; un état refusé se retente à la venue suivante. **Qui
+  compte quoi** : la savebar de la fiche ne compte ni n'envoie les builds
+  (`changes()` les exclut, son « Enregistrer » et son « Annuler » ne touchent
+  qu'à la fiche) — une ligne le dit au-dessus de la barre des builds ; en
+  revanche le point du sous-onglet suit les builds en attente (le module
+  prévient par `onChange`), et `dirty`, `canLeave` et la confirmation de
+  « Changer de perso » comptent les deux (`allChanges()`). Aucun export « pour
+  enregistrer » : le lot l'évoquait puis tranchait que la fiche n'enregistre
+  pas les builds, il n'y a donc rien à appeler. **Le hash** : la fiche écrit
+  `#character/<id>/gear` ; `…/gear/build/<n>` et `…/gear/picker/<slot>`
+  (`weapons`, `amulets`, `talismans`, `sets`) valent pour un lien ou le banc ;
+  les anciens liens sont redirigés dans `init` — `#gear/<id>…` vaut
+  `#character/<id>/gear…`, `#gear` seul ouvre la fiche sur ce sous-onglet (et
+  le picker de héros, faute de perso). `…/picker/char` n'existe plus : c'était
+  le picker de perso. **Le CSS** : `gear.css` est scopé sous `#c-gear` (plus
+  un seul `#tab-gear`), chargé par un `@import` en tête de `character.css`
+  puisque sa feuille sort d'`index.html` avec le marqueur et l'import ; les
+  règles de l'en-tête sont retirées, et les doublons avec `character.css`
+  aussi, vérifiés un à un à déclarations égales (les jetons `--buff`…, les
+  quinze classes `text-*`, `.pv-seg`, `.pv-u`, `.pv-ico`, `.pv-fx`, `.pv-it`,
+  `.pv-unknown`, `summary`, `.savebar[hidden]`, `textarea.refused`) — 1 132
+  lignes → 960. Deux règles de la fiche auraient débordé sur les champs des
+  builds (`input.dirty` à 15 % au lieu de 12, `input.refused` avec un fond) :
+  elles sont scopées à `#c-panel`. **Menu et renvois** : `gear` sort de
+  `GROUPS`, d'`index.html` (marqueur, feuille, import) ; `ADMIN_TO_QUICK`
+  gagne `/admin/editor/characters` → `character` ; le lien « Character » sort
+  du menu de l'admin (`layout.dev.tsx`, la page répond toujours par son URL).
+  Ni le tableau de bord ni les bannières ne renvoyaient à l'onglet Gear reco :
+  rien à y changer. **Tests** (`ui-serve.test.ts`) : la page n'avait AUCUN
+  test de Gear reco en happy-dom, contrairement à ce que le lot supposait —
+  neuf sont écrits dans le banc de la fiche, sur un faux serveur de recos : le
+  montage (état lu une fois, ni en-tête ni picker à lui, le retour sans
+  relecture), le hash `…/gear/build/2/picker/weapons`, la redirection des
+  trois formes de `#gear`, les onglets de builds (clic, clavier, « ＋ build »,
+  le point du sous-onglet, « Annuler »), l'aperçu (une requête pour tous les
+  builds, la langue, 400 ms), les pickers (cocher, « Valider », Échap,
+  talismans, sets), l'enregistrement à part (la barre de la fiche n'envoie
+  rien, un rang part seul, les builds restent en attente), le refus du serveur
+  et l'erreur qui retient l'envoi, `dirty` / `canLeave` communs ; plus un test
+  de structure (ni menu, ni marqueur, ni feuille, ni import ; chaque sélecteur
+  de `gear.css` sous `#c-gear`). Sept tests existants suivent (treize
+  sections, Données à deux onglets, cinq sous-onglets allumés).
+  `actions.test.ts` : une seule retouche, la table `ADMIN_TO_QUICK` qu'il
+  épingle. **Vérification** : `pnpm typecheck`
+  (`tsc --noEmit -p scripts/tsconfig.json`, muet, code 0), `pnpm lint`
+  (`eslint`, muet, code 0), `pnpm test` (`Tests  3267 passed (3267)`),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  (`Tests  770 passed (770)`). **Banc** (quick isolé sur :4799, clés vidées,
+  que des lectures) : AVANT, `--tabs gear --hash gear/2000055/build/2` ;
+  APRÈS, `--tabs character --hash character/2000055/gear/build/2` et
+  `--hash gear/2000055/build/2`. Les deux captures d'après sont identiques au
+  pixel (la redirection rend la même page). Avant / après, de la savebar des
+  builds au bas de l'aperçu du build 2 : la même image 202 px plus bas —
+  l'en-tête de la fiche, sa barre, ses sous-onglets et la ligne d'explication
+  remplacent l'en-tête de Gear reco ; 28 581 pixels sur 1 929 600 diffèrent au
+  décalage entier, 13 à ± 1 px près : de l'arrondi sous-pixel du texte, pas un
+  écart de mise en page. Le picker d'armes (`…/picker/weapons`) : panneau
+  identique à 16 pixels près, ceux de son coin arrondi. Rien d'enregistré. Vu
+  aussi, après seulement (pas de capture d'avant pour comparer) : Pros / Cons
+  de la fiche, rendu attendu — balises colorées, cinq sous-onglets allumés ;
+  son texte d'aide gagne une phrase. **Laissé, hors périmètre** : (1)
+  `hero-picker.mjs` garde `seg`, `count`, `tally` et `hint`, sans appelant
+  depuis que Gear reco ne choisit plus son perso (son test les couvre encore)
+  — lot A pour les retirer ou les garder ; (2) dans `character.js`, le
+  mécanisme `soon` / `subsOn` n'éteint plus aucun sous-onglet ; (3)
+  `gearRecoState` sert toujours un roster que la page ne lit plus, et les
+  commentaires d'`actions.ts` disent encore « l'onglet » — les routes ne
+  devaient pas bouger ; (4) la home de l'admin renvoie toujours à
+  `/admin/editor/characters` ; (5) les deux barres sont collantes : en
+  défilant, celle des builds recouvre celle de la fiche — à juger par Sevih
+  (TODO). Retiré du TODO : « Gear reco, à trancher » de B29 (l'en-tête est
+  celui de la fiche, qui écrit le perso dans l'adresse). Un `git rm` a indexé
+  un instant la suppression de `gear.html` : désindexée aussitôt, rien d'autre
+  n'était indexé. Aucun geste réel joué : contrôles à l'écran dans TODO.
+
 - **Relecture B39 (Fable) — Skills de la « Fiche perso », validé** :
   périmètre tenu (seize fichiers ; hors quick, le calcul des cartes descendu
   de la page admin dans `src/lib/admin/character-kit.ts`, que la page

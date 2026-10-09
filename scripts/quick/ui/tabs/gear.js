@@ -1,11 +1,13 @@
-// Onglet « Gear reco ».
-import { $, esc, log, post, sections, state, stateLoaded } from '../lib.js';
+// Le sous-onglet « Gear reco » de la « Fiche perso » : un module, pas une
+// section. `character.js` le monte dans son hôte (`mountGear`) pour le perso de
+// la fiche, compte ses builds en attente (`gearChanges`) et les abandonne quand
+// la fiche change de perso (`gearReset`). Le perso se choisit dans la fiche ;
+// les builds s'enregistrent ICI, par leur savebar, dans leur commit à eux.
+import { $, esc, log, post, state, stateLoaded } from '../lib.js';
 // Le mix de sets (un principal, des secondaires) : le module que les tests couvrent.
 import { composeSetCombos, splitSetCombos } from '../gear-sets.mjs';
 // La tuile d'item « comme /equipment » : idem, un module pur et testé.
 import { itemName, itemTile, previewHtml, setGrid, setRow } from '../gear-view.mjs';
-// Le picker de perso : la modale partagée avec « Fiche perso ».
-import { openHeroPicker } from '../hero-picker.mjs';
 
 // Les builds d'UN perso, édités ici puis envoyés d'un bloc : la liste
 // complète remplace celle du disque (contrat de `upsertGearReco`).
@@ -20,7 +22,9 @@ let gear = {
   options: { weapons: [], amulets: [], talismans: [], sets: [] },
   langs: { default: 'en', main: [], extra: [] },
 };
-let gChar = null; // le perso choisi (ligne du roster)
+let gChar = null; // le perso de la fiche (`id`, `name`, `class`), une fois ses builds lus
+let gLoads = 0; // la dernière lecture partie : une réponse plus ancienne est ignorée
+let gOnChange = null; // la fiche, prévenue à chaque changement (le point de son sous-onglet)
 let gBuilds = []; // ses builds, dans le modèle de la page
 let gActive = 0; // le build montré (son onglet) : un index, le temps de la page
 let gBase = new Map(); // clé de build → ce qui partirait sans y toucher
@@ -31,7 +35,7 @@ const gTrOpen = new Set(); // les « Traductions » dépliées, par clé de buil
 let gSeq = 0;
 // L'aperçu : ce que la fiche perso fera des builds, résolu par le serveur
 // (`POST /api/gear-reco/preview`) et rendu par `previewHtml`. UNE requête pour
-// tous les builds du perso, UNE langue pour tout l'onglet.
+// tous les builds du perso, UNE langue pour tout le sous-onglet.
 const gPv = {
   lang: gear.langs.default,
   seq: 0, // la dernière requête partie : une réponse plus ancienne est ignorée
@@ -44,13 +48,6 @@ const gPv = {
   shut: new Set(), // les aperçus repliés : le temps de la page, rien n'est retenu
 };
 const G_PV_DELAY = 400;
-// Élément et rareté par perso : le roster des recos ne les porte pas, celui
-// de « Rangs » (`/api/ranks`) si. Sans lui, le picker se passe d'élément.
-let gMeta = new Map();
-// Les filtres du picker de perso : ils survivent à sa fermeture, pas la
-// recherche. `seg` : le groupe « Tous · Avec recos · Sans recos ».
-const gPick = { elements: new Set(), classes: new Set(), seg: '' };
-
 const G_KEYS = ['name', 'weapons', 'amulets', 'talismans', 'sets', 'substats', 'note'];
 const G_LISTS = ['weapons', 'amulets', 'talismans', 'sets'];
 const G_SLOTS = {
@@ -192,23 +189,12 @@ function gApply(b, sent, tr) {
 }
 
 /** Builds ajoutés, modifiés, supprimés — et l'ordre, compté une fois. */
-function gearChanges() {
+export function gearChanges() {
   if (!gChar) return 0;
   const now = gBuilds.map((b) => b.k);
   const kept = gOrder.filter((k) => now.includes(k));
   const moved = now.filter((k) => gBase.has(k)).join() !== kept.join();
   return gOrder.length - kept.length + gBuilds.filter((b) => gStatus(b)).length + (moved ? 1 : 0);
-}
-
-/** Quitter l'onglet avec des builds en attente : sur confirmation. */
-function gearLeave() {
-  const n = gearChanges();
-  return (
-    !n ||
-    confirm(
-      `${gPlural(n, 'changement')} non enregistré${n > 1 ? 's' : ''} sur ${gChar.name}. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.`,
-    )
-  );
 }
 
 // Ce que le store écrira à la place de pièces saisies une à une : le preset
@@ -319,13 +305,6 @@ const gBad = () =>
     gIssues(b).map((x) => `build ${i + 1}${b.name ? ` « ${b.name} »` : ''} · ${gIssueText(x)}`),
   );
 
-// Les icônes du site, sous `imgBase` : décoratives, doublées par un nom.
-const gSrc = (path) => `${esc(state.imgBase)}/images/${path}.webp`;
-const gCap = (slug) => slug.charAt(0).toUpperCase() + slug.slice(1);
-const gIcon = (kind, slug, cls = '') =>
-  `<img${cls ? ` class="${cls}"` : ''} src="${gSrc(
-    `ui/${kind === 'element' ? 'elem/IG_Turn_Element_' : 'class/IG_Turn_Class_'}${gCap(esc(slug))}`,
-  )}" alt="" aria-hidden="true" />`;
 // La tuile d'item du jeu (`gear-view.mjs`) : 64 px dans un picker, 44 px dans
 // une carte de build ; un set, ses pièces — 34 px en grille, 32 px en rangée.
 const gEnv = () => ({ imgBase: state.imgBase, esc });
@@ -630,29 +609,12 @@ function gPvLangs() {
     gLangs().map((l) => [l, l]),
   )}`;
 }
-$('g-pv-lang').onclick = (e) => {
+function gOnPvLang(e) {
   const el = e.target.closest('button[data-lang]');
   if (!el || el.dataset.lang === gPv.lang) return;
   gPv.lang = el.dataset.lang;
   gSegPress(el);
   gPvAsk();
-};
-
-/** Le perso choisi : portrait, nom, élément, classe, rareté. */
-function gWho() {
-  const meta = gChar && gMeta.get(gChar.id);
-  const trait = (kind, slug) => `<span class="g-trait">${gIcon(kind, slug)}${esc(slug)}</span>`;
-  $('g-who').innerHTML = gChar
-    ? `<img class="g-face" src="${gSrc(`characters/portrait/CT_${esc(gChar.id)}`)}" alt="" aria-hidden="true" width="56" height="56" />
-      <div class="g-id"><strong>${esc(gChar.name)}</strong>
-        <span class="g-traits">${meta ? trait('element', meta.element) : ''}${trait('class', gChar.class)}${
-          meta
-            ? `<span class="g-stars" title="${meta.rarity}★">${`<img src="${gSrc('ui/star/CM_icon_star_y')}" alt="" aria-hidden="true" />`.repeat(meta.rarity)}</span>`
-            : ''
-        }<span class="badge off" id="g-sum"></span></span>
-      </div>`
-    : '<span class="lbl">Aucun perso choisi.</span>';
-  $('g-pick-label').textContent = gChar ? 'Changer de perso' : 'Choisir un perso';
 }
 
 function gBar() {
@@ -663,12 +625,9 @@ function gBar() {
     `${n ? `<span class="badge edit">${gPlural(n, 'changement')}</span>` : ''}${
       bad.length ? `<span class="badge error">${gPlural(bad.length, 'erreur')}</span>` : ''
     }<span class="g-msg" title="${esc(bad.join('\n'))}">${esc(bad[0] ?? (n ? '' : 'aucune modification'))}</span>`;
-  if (gChar) {
-    const notes = gBuilds.filter((b) => Object.values(b.note).some(Boolean)).length;
-    $('g-sum').textContent = `${gPlural(gBuilds.length, 'build')} · ${gPlural(notes, 'note')}`;
-  }
   $('g-add').disabled = !gChar;
   $('g-save').disabled = $('g-reset').disabled = !n;
+  gOnChange?.();
 }
 
 /** La carte d'un build — `null` s'il n'est pas le build montré. */
@@ -758,13 +717,13 @@ function gShow(i) {
   gActive = i;
   gRender();
 }
-$('g-tabs').onclick = (e) => {
+function gOnTabsClick(e) {
   const el = e.target.closest('[role="tab"]');
   if (el) gShow(Number(el.dataset.i));
-};
+}
 // Flèches, Début, Fin : l'onglet voisin (les bouts se rejoignent), le premier,
 // le dernier — montré aussitôt, et il prend le focus (`gTabs`).
-$('g-tabs').onkeydown = (e) => {
+function gOnTabsKey(e) {
   const n = gBuilds.length;
   const to = {
     ArrowLeft: (gActive + n - 1) % n,
@@ -775,7 +734,7 @@ $('g-tabs').onkeydown = (e) => {
   if (to === undefined) return;
   e.preventDefault();
   gShow(to);
-};
+}
 
 const gOf = (el) => {
   const k = el?.closest('[data-k]')?.dataset.k;
@@ -786,7 +745,7 @@ const gTouched = (b) => (gServer = gServer.filter((x) => x.k !== b.k));
 
 // Frappe : l'état suit, la carte n'est PAS redessinée — le champ y perdrait
 // le curseur. Seuls ses marques, ses erreurs et le compteur sont remis à jour.
-$('g-list').oninput = (e) => {
+function gOnInput(e) {
   const el = e.target.closest('[data-t]');
   const b = gOf(el);
   if (!b) return;
@@ -835,7 +794,7 @@ $('g-list').oninput = (e) => {
   gTabs();
   gBar();
   gPvAsk(G_PV_DELAY);
-};
+}
 
 /**
  * « Traduire » : les notes anglaises de TOUS les builds du perso, d'un seul
@@ -907,7 +866,7 @@ async function gTranslate() {
   }
 }
 
-$('g-list').onchange = (e) => {
+function gOnChangeMenu(e) {
   const el = e.target.closest('select[data-s]');
   const b = gOf(el);
   if (!b) return;
@@ -917,9 +876,9 @@ $('g-list').onchange = (e) => {
   if (el.dataset.s === 'sub-preset')
     b.sub = { preset: el.value, text: gear.presets.substats[el.value] ?? b.sub.text };
   gRedraw(b);
-};
+}
 
-$('g-list').onclick = (e) => {
+function gOnClick(e) {
   const el = e.target.closest('[data-act]');
   const b = gOf(el);
   if (!b) return;
@@ -985,18 +944,29 @@ $('g-list').onclick = (e) => {
     [...gCardEl(b).querySelectorAll(`[data-act="stat"][data-slot="${slot}"][data-i="${i}"]`)]
       .find((x) => x.dataset.stat === el.dataset.stat)
       ?.focus();
-};
+}
 
 /**
  * Les builds d'un perso, relus du disque : c'est lui qui fait foi. `at` : le
  * build à montrer — le premier pour un autre perso, celui en place pour le même
- * (« Annuler », un enregistrement), borné par `gRender`.
+ * (« Annuler », un enregistrement), borné par `gRender`. Rend `false` si l'état
+ * est refusé (le journal dit pourquoi) ou si une lecture plus récente est
+ * partie entre-temps : rien n'a bougé.
  */
-async function gLoad(id, at = 0) {
-  const s = await (await fetch(`/api/gear-reco/state?id=${encodeURIComponent(id)}`)).json();
-  if (s.error) return log([s.error], false);
+async function gLoad(char, at = 0) {
+  const seq = ++gLoads;
+  // Les icônes sont sous `imgBase`, connu avec `/api/state`.
+  const [s] = await Promise.all([
+    fetch(`/api/gear-reco/state?id=${encodeURIComponent(char.id)}`).then((r) => r.json()),
+    stateLoaded,
+  ]);
+  if (seq !== gLoads) return false;
+  if (s.error) {
+    log([s.error], false);
+    return false;
+  }
   gear = s;
-  gChar = s.roster.find((c) => c.id === id);
+  gChar = char;
   gBuilds = s.disk.map((disk, i) => gFromDisk(disk, s.builds[i]));
   gBase = new Map(
     gBuilds.map((b) => {
@@ -1011,14 +981,15 @@ async function gLoad(id, at = 0) {
   gPv.shut.clear();
   gTrOpen.clear();
   gActive = at;
-  gWho();
+  gPvLangs();
   gRender();
+  return true;
 }
 
 // ------------------------------------------------------------- le picker
 // UNE modale (`#g-modal`), trois usages, tous en multi-choix : les armes ou
-// les amulettes, les talismans, les sets. Le perso, lui, se choisit dans le
-// picker de héros partagé (`hero-picker.mjs`, cf. `gOpenChar`).
+// les amulettes, les talismans, les sets. Le perso, lui, se choisit dans la
+// fiche, par le picker de héros partagé (`hero-picker.mjs`).
 // `gPkOpen(cfg)` l'ouvre sur :
 //   title, search (le placeholder de la recherche), none (rien ne correspond) ;
 //   grid     la classe de la grille (`gear` : des tuiles d'équipement) ;
@@ -1086,9 +1057,7 @@ function gPkPick(id) {
   gPkDraw(true);
 }
 
-$('g-close').onclick = gPkClose;
-$('g-q').oninput = () => gPkDraw();
-$('g-modal').onclick = (e) => {
+function gOnModalClick(e) {
   // Un clic sur le voile, hors du panneau, ferme.
   if (e.target === $('g-modal')) return gPkClose();
   if (!gPk) return;
@@ -1100,8 +1069,8 @@ $('g-modal').onclick = (e) => {
   if (!tog) return;
   gPk.filter(tog);
   gPkDraw();
-};
-$('g-modal').onkeydown = (e) => {
+}
+function gOnModalKey(e) {
   if (!gPk) return;
   // Entrée dans la recherche valide, comme « Valider » (Ctrl + Entrée aussi).
   if (e.key === 'Enter' && e.target === $('g-q')) return gPk.done();
@@ -1112,10 +1081,7 @@ $('g-modal').onkeydown = (e) => {
   if (document.activeElement !== edge) return;
   e.preventDefault();
   (e.shiftKey ? stops[stops.length - 1] : stops[0]).focus();
-};
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') gPkClose();
-});
+}
 
 /** Un groupe segmenté de la rangée de filtres : un seul bouton enfoncé. */
 const gSeg = (label, key, cur, list) =>
@@ -1128,53 +1094,6 @@ const gSeg = (label, key, cur, list) =>
 const gSegPress = (el) => {
   for (const b of el.parentElement.children) b.setAttribute('aria-pressed', String(b === el));
 };
-
-/**
- * Un perso choisi dans le picker. Rend `false` pour le garder ouvert : des
- * changements en attente, et l'abandon refusé.
- */
-function gChoose(id) {
-  if (id === gChar?.id) return;
-  const n = gearChanges();
-  if (
-    n &&
-    !confirm(
-      `Abandonner ${gPlural(n, 'changement')} non enregistré${n > 1 ? 's' : ''} sur ${gChar.name} ?`,
-    )
-  )
-    return false;
-  gLoad(id);
-}
-
-// Le picker de perso : celui de « Fiche perso » (`hero-picker.mjs`), avec en
-// plus le filtre des recos, et sur chaque vignette son nombre de builds.
-function gOpenChar() {
-  openHeroPicker({
-    title: 'Choisir un perso',
-    // L'élément vient de « Rangs » (`gMeta`) : le roster des recos ne le porte pas.
-    roster: gear.roster.map((c) => ({ ...c, element: gMeta.get(c.id)?.element })),
-    imgBase: state.imgBase,
-    chosen: gChar?.id,
-    filters: gPick,
-    opener: () => $('g-pick'),
-    tally: () => {
-      const done = gear.roster.filter((c) => c.builds).length;
-      return `${gPlural(gear.roster.length, 'perso')} · ${done} avec recos · ${gear.roster.length - done} sans`;
-    },
-    seg: {
-      label: 'Recos',
-      options: [
-        ['', 'Tous'],
-        ['with', 'Avec recos'],
-        ['without', 'Sans recos'],
-      ],
-      test: (c, has) => (has === 'with' ? c.builds > 0 : has === 'without' ? !c.builds : true),
-    },
-    count: (c) => c.builds,
-    hint: (c) => `${c.name} — ${c.builds ? gPlural(c.builds, 'build') : 'sans reco'}`,
-    onPick: gChoose,
-  });
-}
 
 /** Le pied d'un multi-choix de pièces : la liste, puis « Annuler » et « Valider ». */
 const gPkFoot = (recap, twin) =>
@@ -1414,48 +1333,52 @@ function gPickSlot(b, slot, i) {
   else gOpenGear(b, slot, i);
 }
 
-$('g-pick').onclick = gOpenChar;
+// ------------------------------------------------------------- le module
+// Ce que `mountGear` pose dans l'hôte, une fois : la savebar des builds, leurs
+// onglets, la carte du build montré, et LE picker de pièces — une modale pour
+// les armes ou les amulettes, les talismans et les sets, que `gPkOpen` remplit
+// (Échap et un clic sur le voile ferment ; Entrée dans la recherche valide).
+const G_SEARCH = (size) =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>`;
+const G_HTML = `
+  <p class="hint">Les builds ont leur barre et leur commit à eux : « Enregistrer » de la fiche, au-dessus, ne les envoie pas. La note se saisit en anglais ; les presets se règlent dans l'admin.</p>
+  <div class="savebar" id="g-bar" role="toolbar" aria-label="Enregistrement des builds" hidden>
+    <span id="g-count"></span>
+    <div class="g-pv-lang" id="g-pv-lang"></div>
+    <button class="btn ghost" id="g-add" disabled>＋ build</button>
+    <button class="btn ghost" id="g-reset" disabled>Annuler</button>
+    <button class="btn primary" id="g-save" disabled>Enregistrer</button>
+  </div>
+  <div class="g-tabs" id="g-tabs" role="tablist" aria-label="Builds du perso" hidden></div>
+  <div id="g-list"></div>
+  <div class="g-modal" id="g-modal" hidden>
+    <div class="g-panel" role="dialog" aria-modal="true" aria-labelledby="g-modal-title">
+      <div class="g-panel-head">
+        <strong id="g-modal-title"></strong>
+        <span class="badge" id="g-tally"></span>
+        <button class="btn icon del" id="g-close" type="button" aria-label="Fermer" title="Fermer">✕</button>
+      </div>
+      <div class="g-panel-filters">
+        <div class="g-search">${G_SEARCH(16)}<input id="g-q" autocomplete="off" /></div>
+        <div class="g-filters" id="g-filters"></div>
+      </div>
+      <div class="g-panel-body">
+        <div class="g-tiles" id="g-results"></div>
+        <div class="empty" id="g-none" hidden></div>
+      </div>
+      <div class="g-panel-foot" id="g-foot" hidden></div>
+    </div>
+  </div>`;
 
-/**
- * Le roster, les presets et les listes ; à côté, l'élément et la rareté de
- * chaque perso. `open` : le perso à ouvrir d'emblée (`#gear/<id>`) ; `build` :
- * celui de ses builds à montrer, à partir de 1 (`#gear/<id>/build/<n>`) ;
- * `picker` : le picker à ouvrir sur lui (`…/picker/<slot>` — `char`, ou un slot
- * du build montré : `weapons`, `amulets`, `talismans`, `sets`).
- */
-async function loadGear(open, build, picker) {
-  const [s, ranks] = await Promise.all([
-    fetch('/api/gear-reco/state').then((r) => r.json()),
-    fetch('/api/ranks')
-      .then((r) => r.json())
-      .catch(() => null),
-  ]);
-  gear = s;
-  gMeta = new Map((ranks?.rows ?? []).map((r) => [r.id, { element: r.element, rarity: r.rarity }]));
-  if (!gMeta.size)
-    log(['Gear reco : éléments et raretés illisibles (/api/ranks), le picker s’en passe.'], false);
-  gWho();
-  gBar();
-  gPvLangs();
-  $('g-pick').disabled = false;
-  if (open && gear.roster.some((c) => c.id === open)) await gLoad(open, build ? build - 1 : 0);
-  const b = gBuilds[gActive];
-  if (picker === 'char') gOpenChar();
-  else if (b && ['weapons', 'amulets', 'talismans', 'sets'].includes(picker))
-    gPickSlot(b, picker, b[picker]?.length ? 0 : -1);
-}
-
-$('g-add').onclick = () => {
+function gOnAdd() {
   const b = gNewBuild();
   gBuilds.push(b);
   gActive = gBuilds.length - 1;
   gRender();
   gCardEl(b).querySelector('[data-t="name"]').focus();
-};
+}
 
-$('g-reset').onclick = () => gLoad(gChar.id, gActive);
-
-$('g-save').onclick = async () => {
+async function gOnSave() {
   if (!gChar || !gearChanges()) return;
   const bad = gBad();
   if (bad.length) return log(['Rien n’est envoyé tant qu’il reste des erreurs :', ...bad], false);
@@ -1465,13 +1388,16 @@ $('g-save').onclick = async () => {
   $('g-save').disabled = $('g-reset').disabled = true;
   $('g-save').classList.add('busy');
   log([], undefined, 'envoi des builds au serveur');
+  const char = gChar;
   const sent = gBuilds.map((b) => b.k);
   try {
-    const r = await post('/api/gear-reco', { id: gChar.id, builds: gBuilds.map(gToBuild) });
+    const r = await post('/api/gear-reco', { id: char.id, builds: gBuilds.map(gToBuild) });
+    // La fiche a changé de perso pendant l'envoi : ces builds ne sont plus là.
+    if (gChar !== char) return;
     // Écrit (même si le commit a échoué ensuite) : le disque fait foi, on le
     // relit. Refusé : rien n'a bougé, les builds restent en attente et les
     // erreurs du serveur se posent sur les leurs.
-    if (r.written) await gLoad(gChar.id, gActive);
+    if (r.written) await gLoad(char, gActive);
     else
       gServer = (r.issues ?? [])
         .filter((x) => x.build !== null && sent[x.build])
@@ -1480,29 +1406,66 @@ $('g-save').onclick = async () => {
     $('g-save').classList.remove('busy');
     gRender();
   }
-};
+}
 
-sections.register('gear', {
-  init: () => {
-    // `#gear/<id>` ouvre l'onglet sur ce perso (un lien, le banc de captures),
-    // `#gear/<id>/build/<n>` sur son n-ième build, `…/picker/<slot>` y ouvre
-    // en plus un picker (le banc ne clique pas). Une entrée seulement : la
-    // page n'écrit pas le build montré dans l'adresse. `lib.js` ne connaît
-    // que `#gear` : c'est le clic sur l'onglet qui l'ouvre.
-    const [, open, build, picker] =
-      /^#gear\/([^/]+)(?:\/build\/(\d+))?(?:\/picker\/([a-z]+))?$/.exec(location.hash) ?? [];
-    if (open) document.querySelector('#tabs [data-tab="gear"]')?.click();
-    // Les icônes sont sous `imgBase`, connu avec `/api/state` : reposées alors.
-    stateLoaded.then(() => {
-      gWho();
-      if (gChar) gRender();
-      else gBar();
-    });
-    return loadGear(open && decodeURIComponent(open), Number(build ?? 0), picker).catch((e) =>
-      log([`Gear reco illisible : ${e}`], false),
-    );
-  },
-  // Les builds en attente ne survivent pas à un rechargement de la page.
-  dirty: gearChanges,
-  canLeave: gearLeave,
-});
+/** Le markup dans l'hôte, et ses écouteurs : une fois, à la première venue. */
+function gWire(host) {
+  host.innerHTML = G_HTML;
+  $('g-pv-lang').onclick = gOnPvLang;
+  $('g-tabs').onclick = gOnTabsClick;
+  $('g-tabs').onkeydown = gOnTabsKey;
+  $('g-list').oninput = gOnInput;
+  $('g-list').onchange = gOnChangeMenu;
+  $('g-list').onclick = gOnClick;
+  $('g-close').onclick = gPkClose;
+  $('g-q').oninput = () => gPkDraw();
+  $('g-modal').onclick = gOnModalClick;
+  $('g-modal').onkeydown = gOnModalKey;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') gPkClose();
+  });
+  $('g-add').onclick = gOnAdd;
+  $('g-reset').onclick = () => gLoad(gChar, gActive);
+  $('g-save').onclick = gOnSave;
+}
+
+/**
+ * Oublie le perso et ses builds, ceux en attente compris : la fiche en ouvre un
+ * autre (elle a demandé avant, cf. `choose` de `character.js`). Le sous-onglet
+ * reste vide jusqu'au prochain `mountGear`.
+ */
+export function gearReset() {
+  gLoads++;
+  clearTimeout(gPv.timer);
+  gPv.seq++;
+  gPv.sent = '';
+  gPv.busy = false;
+  gPv.error = '';
+  gChar = null;
+  gBuilds = [];
+  gBase = new Map();
+  gOrder = [];
+  gServer = [];
+  if (!$('g-list')) return;
+  gPkClose();
+  gRender();
+}
+
+/**
+ * Monte le sous-onglet dans `host` pour `charRow`, le perso de la fiche (`id`,
+ * `name`, `class`), et relit ses builds du disque — `GET /api/gear-reco/state`,
+ * comme avant. `build` : celui de ses builds à montrer, à partir de 1
+ * (`#character/<id>/gear/build/<n>`) ; `picker` : le picker à ouvrir sur lui
+ * (`…/picker/<slot>` : `weapons`, `amulets`, `talismans`, `sets`) ; `onChange` :
+ * appelé à chaque changement du compte de builds en attente. Rend `false` si
+ * rien n'a pu être lu : à l'appelant de remonter plus tard.
+ */
+export async function mountGear(host, charRow, { build = 0, picker = '', onChange = null } = {}) {
+  if (!$('g-list')) gWire(host);
+  gearReset();
+  gOnChange = onChange;
+  if (!(await gLoad(charRow, build ? build - 1 : 0))) return false;
+  const b = gBuilds[gActive];
+  if (b && G_LISTS.includes(picker)) gPickSlot(b, picker, b[picker]?.length ? 0 : -1);
+  return true;
+}

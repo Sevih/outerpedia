@@ -1,9 +1,22 @@
-/* Onglet « Gear reco » : le perso choisi, la savebar, un onglet par build et
-   la carte de celui qui est montré (slots sur deux colonnes, la note dessous),
-   et LE picker, une modale pour le perso, les pièces, les talismans et les
-   sets. Les composants viennent de `quick.css` ; ce qui suit est propre à
-   l'onglet (cf. `STYLE.md`). Bleu accent = modifié ou choisi, rouge = refusé,
-   ambre = preset. */
+/* Le sous-onglet « Gear reco » de la « Fiche perso » (`#c-gear`, monté par
+   `mountGear` de `gear.js`) : la savebar des builds, un onglet par build et la
+   carte de celui qui est montré (slots sur deux colonnes, la note dessous), et
+   LE picker, une modale pour les pièces, les talismans et les sets. Les
+   composants viennent de `quick.css` ; ce qui suit est propre au sous-onglet
+   (cf. `STYLE.md`). Chargée par `character.css`, qui porte ce que les deux ont
+   en commun : les jetons et les classes de couleur du site, les segments de
+   note (`.pv-seg`, `.pv-fx`…), `summary`. Bleu accent = modifié ou choisi,
+   rouge = refusé, ambre = preset. */
+
+/* L'hôte : la pile d'une section (`main > section` de `quick.css`). */
+#c-gear {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#c-gear[hidden] {
+  display: none;
+}
 
 /* ------------------------------------------------------- la tuile d'item
    Celle de /equipment (`EquipmentIcon.tsx`), bâtie par `gear-view.mjs` : le
@@ -11,48 +24,48 @@
    (26 %), celle de classe dessous (24 %), les étoiles centrées en bas. La
    taille de la tuile et celle des étoiles sont posées par le module. Le nom
    prend la couleur de son grade : les jetons `--item-*` de `quick.css`. */
-#tab-gear .gv-tile {
+#c-gear .gv-tile {
   position: relative;
   display: block;
   flex: none;
 }
-#tab-gear .gv-tile img {
+#c-gear .gv-tile img {
   position: absolute;
   display: block;
 }
-#tab-gear .gv-frame,
-#tab-gear .gv-icon {
+#c-gear .gv-frame,
+#c-gear .gv-icon {
   inset: 0;
   width: 100%;
   height: 100%;
 }
-#tab-gear .gv-icon {
+#c-gear .gv-icon {
   padding: 6%;
   object-fit: contain;
 }
-#tab-gear .gv-fx {
+#c-gear .gv-fx {
   top: 2%;
   right: 2%;
   width: 26%;
   height: 26%;
 }
-#tab-gear .gv-cls {
+#c-gear .gv-cls {
   top: 30%;
   right: 2%;
   width: 24%;
   height: 24%;
 }
-#tab-gear .gv-stars {
+#c-gear .gv-stars {
   position: absolute;
   inset: auto 0 4%;
   display: flex;
   justify-content: center;
 }
-#tab-gear .gv-stars img {
+#c-gear .gv-stars img {
   position: static;
 }
 /* Une pièce que les listes ne connaissent pas : pas d'icône. */
-#tab-gear .gv-tile.none {
+#c-gear .gv-tile.none {
   display: grid;
   place-items: center;
   border: 1px dashed var(--line);
@@ -61,88 +74,19 @@
 }
 /* Un set : ses quatre pièces en grille (`SetCard`), ou celles d'un combo en
    rangée (`ComboLineView`). */
-#tab-gear .gv-set {
+#c-gear .gv-set {
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 2px;
 }
-#tab-gear .gv-row {
+#c-gear .gv-row {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-}
-
-/* ---------------------------------------------------------------- le perso */
-#tab-gear .g-char {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 14px 20px;
-}
-#tab-gear .g-who {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  min-width: 0;
-}
-/* Le portrait du site est en hauteur : cadré sur le visage. */
-#tab-gear .g-face {
-  width: 56px;
-  height: 56px;
-  flex: 0 0 56px;
-  border-radius: 12px;
-  border: 1px solid var(--line-subtle);
-  background: var(--surface-overlay);
-  object-fit: cover;
-  object-position: top;
-}
-#tab-gear .g-id {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-#tab-gear .g-id strong {
-  font-size: 16px;
-}
-#tab-gear .g-traits {
-  display: flex;
-  align-items: center;
-  gap: 6px 14px;
-  flex-wrap: wrap;
-  color: var(--content-muted);
-  font-size: 13px;
-}
-#tab-gear .g-trait {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  text-transform: capitalize;
-}
-#tab-gear .g-trait img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-#tab-gear .g-stars {
-  display: inline-flex;
-  align-items: center;
-}
-#tab-gear .g-stars img {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-}
-#tab-gear #g-pick {
-  margin-left: auto;
 }
 
 /* ---------------------------------------------------------------- savebar */
-#tab-gear .savebar[hidden] {
-  display: none;
-}
-#tab-gear #g-count {
+#c-gear #g-count {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -150,10 +94,10 @@
   min-width: 0;
 }
 /* `.savebar span` pousse à gauche : ici les badges se suivent. */
-#tab-gear #g-count span {
+#c-gear #g-count span {
   margin-right: 0;
 }
-#tab-gear .g-msg {
+#c-gear .g-msg {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -165,57 +109,57 @@
    `.tab` des sections de la coquille (`quick.css` — filet accent sous l'actif,
    texte atténué ailleurs), en 32 px. Le point d'un onglet : accent, build
    nouveau ou modifié, pas encore enregistré ; rouge (`.dot.ko`), en erreur. */
-#tab-gear .g-tabs {
+#c-gear .g-tabs {
   display: flex;
   gap: 4px;
   border-bottom: 1px solid var(--line-subtle);
   overflow-x: auto;
 }
-#tab-gear .g-tabs[hidden] {
+#c-gear .g-tabs[hidden] {
   display: none;
 }
-#tab-gear .g-tabs .tab {
+#c-gear .g-tabs .tab {
   flex: none;
   height: 32px;
   padding: 0 12px;
   font-size: 13px;
 }
 /* La rangée défile : l'anneau de focus reste dans l'onglet. */
-#tab-gear .g-tabs .tab:focus-visible {
+#c-gear .g-tabs .tab:focus-visible {
   outline-offset: -2px;
 }
-#tab-gear .g-tabs .dot.edit {
+#c-gear .g-tabs .dot.edit {
   background: var(--accent);
 }
 
 /* ---------------------------------------------------------------- un build */
-#tab-gear #g-list {
+#c-gear #g-list {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
-#tab-gear #g-list:empty {
+#c-gear #g-list:empty {
   display: none;
 }
-#tab-gear .g-build.ko {
+#c-gear .g-build.ko {
   border-color: var(--danger);
 }
-#tab-gear .g-name {
+#c-gear .g-name {
   width: 24ch;
   height: 30px;
   font-weight: 600;
 }
-#tab-gear .g-tools {
+#c-gear .g-tools {
   display: flex;
   gap: 2px;
   margin-left: auto;
 }
 /* `.btn.icon` rougit au survol : réservé à ce qui retire (`.del`). */
-#tab-gear .btn.icon:not(.del):hover {
+#c-gear .btn.icon:not(.del):hover {
   color: var(--content);
   background: var(--surface-overlay);
 }
-#tab-gear .g-grid {
+#c-gear .g-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px 28px;
@@ -223,23 +167,23 @@
 }
 /* Conteneur : une pièce range ses stats sous sa tuile quand la colonne est
    étroite (cf. `.g-gear`). */
-#tab-gear .g-col {
+#c-gear .g-col {
   display: flex;
   flex-direction: column;
   gap: 18px;
   min-width: 0;
   container-type: inline-size;
 }
-#tab-gear .g-slot {
+#c-gear .g-slot {
   display: flex;
   flex-direction: column;
   gap: 6px;
   min-width: 0;
 }
-#tab-gear .g-slot.wide {
+#c-gear .g-slot.wide {
   grid-column: 1 / -1;
 }
-#tab-gear .g-slot h3 {
+#c-gear .g-slot h3 {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -252,55 +196,55 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-#tab-gear .g-slot.dirty h3 {
+#c-gear .g-slot.dirty h3 {
   color: var(--accent);
 }
-#tab-gear .g-slot h3 .btn,
-#tab-gear .g-slot h3 .badge {
+#c-gear .g-slot h3 .btn,
+#c-gear .g-slot h3 .badge {
   letter-spacing: normal;
   text-transform: none;
 }
-#tab-gear .g-push {
+#c-gear .g-push {
   margin-left: auto;
 }
-#tab-gear .g-slot [hidden] {
+#c-gear .g-slot [hidden] {
   display: none;
 }
 
 /* Une ligne de slot : une pièce (cf. `.g-gear`), ou le menu de preset des
    substats et leur texte ; `.g-foot` : les boutons sous le slot. */
-#tab-gear .g-piece,
-#tab-gear .g-foot {
+#c-gear .g-piece,
+#c-gear .g-foot {
   display: flex;
   align-items: center;
   gap: 6px;
   min-width: 0;
 }
-#tab-gear .g-foot {
+#c-gear .g-foot {
   gap: 8px;
   flex-wrap: wrap;
 }
-#tab-gear .g-piece select,
-#tab-gear .g-piece input {
+#c-gear .g-piece select,
+#c-gear .g-piece input {
   height: 30px;
   min-width: 0;
   font-size: 13px;
 }
-#tab-gear .g-piece > select:first-child {
+#c-gear .g-piece > select:first-child {
   flex: 0 1 260px;
 }
-#tab-gear .g-piece input {
+#c-gear .g-piece input {
   flex: 1 1 240px;
 }
 /* Une arme, une amulette : sa tuile (celle du jeu, 44 px, et son nom ; un clic
    ouvre le picker du slot), à côté ses stats principales en bascules, puis sa
    croix. */
-#tab-gear .g-gear {
+#c-gear .g-gear {
   display: grid;
   grid-template-columns: minmax(0, 240px) minmax(0, 1fr) auto;
   gap: 6px 10px;
 }
-#tab-gear .g-item {
+#c-gear .g-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -315,24 +259,24 @@
   font-size: 13px;
   text-align: left;
 }
-#tab-gear button.g-item {
+#c-gear button.g-item {
   cursor: pointer;
 }
-#tab-gear button.g-item:hover {
+#c-gear button.g-item:hover {
   border-color: var(--accent);
 }
-#tab-gear .g-item.refused {
+#c-gear .g-item.refused {
   border-color: var(--danger);
 }
-#tab-gear .g-item-n {
+#c-gear .g-item-n {
   min-width: 0;
   line-height: 1.25;
   overflow-wrap: anywhere;
 }
-#tab-gear .g-item .badge {
+#c-gear .g-item .badge {
   flex: none;
 }
-#tab-gear .g-stats {
+#c-gear .g-stats {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -341,10 +285,10 @@
   border-radius: 8px;
 }
 /* Aucune stat active : le groupe est cerclé, le badge dessous dit pourquoi. */
-#tab-gear .g-stats.refused {
+#c-gear .g-stats.refused {
   outline: 1px dashed var(--danger);
 }
-#tab-gear .g-stat {
+#c-gear .g-stat {
   height: 24px;
   padding: 0 9px;
   border: 1px solid var(--line-subtle);
@@ -357,43 +301,43 @@
   white-space: nowrap;
   cursor: pointer;
 }
-#tab-gear .g-stat:hover {
+#c-gear .g-stat:hover {
   border-color: var(--accent);
   color: var(--content);
 }
-#tab-gear .g-stat[aria-pressed='true'] {
+#c-gear .g-stat[aria-pressed='true'] {
   border-color: var(--accent);
   background: var(--accent);
   color: var(--accent-fg);
   font-weight: 600;
 }
 /* Une stat que le pool de la pièce ne propose pas : le disque en porte. */
-#tab-gear .g-stat.out {
+#c-gear .g-stat.out {
   border-color: var(--danger);
   background: color-mix(in srgb, var(--danger) 15%, transparent);
   color: var(--danger);
 }
 @container (max-width: 520px) {
-  #tab-gear .g-gear {
+  #c-gear .g-gear {
     grid-template-columns: minmax(0, 1fr) auto;
   }
-  #tab-gear .g-gear .g-stats {
+  #c-gear .g-gear .g-stats {
     grid-area: 2 / 1 / 3 / -1;
   }
 }
 /* Les talismans choisis : une rangée de tuiles, chacune avec sa croix. */
-#tab-gear .g-tals {
+#c-gear .g-tals {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
-#tab-gear .g-tals:empty {
+#c-gear .g-tals:empty {
   display: none;
 }
-#tab-gear .g-tal {
+#c-gear .g-tal {
   padding-right: 2px;
 }
-#tab-gear .g-item-col {
+#c-gear .g-item-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -401,11 +345,11 @@
   min-width: 0;
 }
 /* Substats : le texte passe sous son menu quand la colonne est étroite. */
-#tab-gear .g-sub {
+#c-gear .g-sub {
   flex-wrap: wrap;
 }
 /* Le texte d'un preset de substats, en lecture : le fichier citera le `$slug`. */
-#tab-gear input.g-dim {
+#c-gear input.g-dim {
   display: block;
   padding: 0 10px;
   border: 1px dashed var(--line);
@@ -417,7 +361,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#tab-gear .badge.preset {
+#c-gear .badge.preset {
   background: color-mix(in srgb, var(--warn) 14%, transparent);
   color: var(--warn);
   font-family: var(--mono);
@@ -425,7 +369,7 @@
 }
 /* Un combo de sets : une rangée — les pièces de chaque set (32 px), son nom,
    son nombre, « + » entre deux — puis le `$slug` et la croix, poussés à droite. */
-#tab-gear .g-combo {
+#c-gear .g-combo {
   display: flex;
   align-items: center;
   gap: 6px 8px;
@@ -437,46 +381,46 @@
   border-radius: 8px;
   background: var(--surface-base);
 }
-#tab-gear .g-combo-set {
+#c-gear .g-combo-set {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   min-width: 0;
 }
 /* Le `$slug` et la croix restent ensemble, à droite, même passés à la ligne. */
-#tab-gear .g-combo-end {
+#c-gear .g-combo-end {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   margin-left: auto;
 }
-#tab-gear .g-set-n {
+#c-gear .g-set-n {
   font-size: 13px;
   font-weight: 600;
 }
-#tab-gear .g-plus {
+#c-gear .g-plus {
   color: var(--content-muted);
   font-weight: 600;
 }
-#tab-gear .g-ro {
+#c-gear .g-ro {
   margin: 0;
   color: var(--content-muted);
   font-size: 12px;
 }
-#tab-gear .g-ro:empty {
+#c-gear .g-ro:empty {
   display: none;
 }
 
 /* Les erreurs, en badges : à la pièce, au slot, sinon dans l'en-tête. */
-#tab-gear .g-iss {
+#c-gear .g-iss {
   display: inline-flex;
   gap: 4px;
   flex-wrap: wrap;
 }
-#tab-gear .g-iss:empty {
+#c-gear .g-iss:empty {
   display: none;
 }
-#tab-gear .g-iss .badge {
+#c-gear .g-iss .badge {
   height: auto;
   min-height: 20px;
   padding-top: 2px;
@@ -486,66 +430,49 @@
 
 /* La note : l'anglais sur toute la largeur, « Traduire » et le compte de
    caractères dessous, puis les traductions, repliées, trois par rangée. */
-#tab-gear .g-tr {
+#c-gear .g-tr {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
-#tab-gear .g-tr .badge {
+#c-gear .g-tr .badge {
   height: auto;
   min-height: 20px;
   padding-top: 2px;
   padding-bottom: 2px;
   white-space: normal;
 }
-#tab-gear .g-notes {
+#c-gear .g-notes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
-#tab-gear .g-slot > textarea,
-#tab-gear .g-notes textarea {
+#c-gear .g-slot > textarea,
+#c-gear .g-notes textarea {
   width: 100%;
   font-size: 13px;
 }
-#tab-gear details {
+#c-gear details {
   margin-top: 4px;
 }
-#tab-gear summary {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: max-content;
-  max-width: 100%;
-  list-style: none;
-  cursor: pointer;
-}
-#tab-gear summary::-webkit-details-marker {
-  display: none;
-}
-#tab-gear details[open] summary {
-  margin-bottom: 8px;
-}
 
-#tab-gear input.dirty,
-#tab-gear textarea.dirty {
+#c-gear input.dirty,
+#c-gear textarea.dirty {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
 }
-#tab-gear select.refused,
-#tab-gear input.refused,
-#tab-gear textarea.refused {
+#c-gear select.refused,
+#c-gear input.refused {
   border-color: var(--danger);
 }
-#tab-gear select.refused {
+#c-gear select.refused {
   background-color: color-mix(in srgb, var(--danger) 12%, var(--surface-base));
 }
 
 @media (max-width: 900px) {
-  #tab-gear .g-grid,
-  #tab-gear .g-notes {
+  #c-gear .g-grid,
+  #c-gear .g-notes {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -555,7 +482,7 @@
    rangée de filtres (le groupe segmenté des sets), grille de tuiles
    d'équipement, et un pied qui récapitule et valide. Le perso se choisit dans
    le picker de héros partagé (`hero-picker.css`), aux mêmes mesures. */
-#tab-gear .g-modal {
+#c-gear .g-modal {
   position: fixed;
   inset: 0;
   z-index: 30;
@@ -565,10 +492,10 @@
   padding: 24px;
   background: rgb(2 6 23 / 0.72);
 }
-#tab-gear .g-modal[hidden] {
+#c-gear .g-modal[hidden] {
   display: none;
 }
-#tab-gear .g-panel {
+#c-gear .g-panel {
   display: flex;
   flex-direction: column;
   width: 720px;
@@ -580,52 +507,52 @@
   border-radius: 14px;
   box-shadow: 0 24px 64px rgb(0 0 0 / 0.55);
 }
-#tab-gear .g-panel-head {
+#c-gear .g-panel-head {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
   border-bottom: 1px solid var(--line-subtle);
 }
-#tab-gear .g-panel-head strong {
+#c-gear .g-panel-head strong {
   color: var(--content-muted);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-#tab-gear .g-panel-head .btn.icon {
+#c-gear .g-panel-head .btn.icon {
   margin-left: auto;
 }
-#tab-gear .g-panel-filters {
+#c-gear .g-panel-filters {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 14px 16px;
 }
-#tab-gear .g-search {
+#c-gear .g-search {
   position: relative;
 }
-#tab-gear .g-search svg {
+#c-gear .g-search svg {
   position: absolute;
   left: 12px;
   top: 10px;
   color: var(--placeholder);
 }
-#tab-gear .g-search input {
+#c-gear .g-search input {
   width: 100%;
   height: 36px;
   padding-left: 36px;
 }
-#tab-gear .g-filters {
+#c-gear .g-filters {
   display: flex;
   align-items: center;
   gap: 10px 14px;
   flex-wrap: wrap;
 }
-#tab-gear .g-filters:empty {
+#c-gear .g-filters:empty {
   display: none;
 }
-#tab-gear .g-seg {
+#c-gear .g-seg {
   display: inline-flex;
   height: 36px;
   margin-left: auto;
@@ -633,7 +560,7 @@
   border-radius: 8px;
   overflow: hidden;
 }
-#tab-gear .g-seg button {
+#c-gear .g-seg button {
   padding: 0 12px;
   border: 0;
   background: transparent;
@@ -643,37 +570,37 @@
   font-weight: 500;
   cursor: pointer;
 }
-#tab-gear .g-seg button[aria-pressed='true'] {
+#c-gear .g-seg button[aria-pressed='true'] {
   background: var(--accent);
   color: var(--accent-fg);
 }
-#tab-gear .g-seg button:disabled {
+#c-gear .g-seg button:disabled {
   opacity: 0.5;
   cursor: default;
 }
 /* Seul dans sa rangée (le rôle d'un set), le groupe reste à gauche. */
-#tab-gear .g-filters > .g-seg:first-child {
+#c-gear .g-filters > .g-seg:first-child {
   margin-left: 0;
 }
-#tab-gear .g-panel-body {
+#c-gear .g-panel-body {
   padding: 8px 16px 16px;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-color: var(--line) transparent;
   scrollbar-width: thin;
 }
-#tab-gear .g-panel-body .empty {
+#c-gear .g-panel-body .empty {
   margin: 0;
 }
-#tab-gear .g-tiles {
+#c-gear .g-tiles {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
   gap: 12px 8px;
 }
-#tab-gear .g-tiles:empty {
+#c-gear .g-tiles:empty {
   display: none;
 }
-#tab-gear .g-tile {
+#c-gear .g-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -685,51 +612,51 @@
   font: inherit;
   cursor: pointer;
 }
-#tab-gear .g-tile:hover {
+#c-gear .g-tile:hover {
   color: var(--content);
 }
-#tab-gear .g-tile:disabled {
+#c-gear .g-tile:disabled {
   opacity: 0.4;
   cursor: default;
 }
 /* Le set principal, non cliquable parmi les secondaires : il reste lisible. */
-#tab-gear .g-tile.keep:disabled {
+#c-gear .g-tile.keep:disabled {
   opacity: 1;
 }
 /* Tuiles d'équipement : celle du jeu (64 px ; un set, ses quatre pièces de
    34 px), un nom plus long qu'un prénom, dessous son badge (AP / CP, « hors
    classe »). */
-#tab-gear .g-tiles.gear {
+#c-gear .g-tiles.gear {
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
 }
-#tab-gear .g-tiles.gear .g-n {
+#c-gear .g-tiles.gear .g-n {
   max-width: 100px;
 }
-#tab-gear .g-tile .badge {
+#c-gear .g-tile .badge {
   height: 16px;
   padding: 0 6px;
   font-size: 10px;
 }
 /* La pastille passe à gauche : à droite, la tuile porte son icône d'effet. */
-#tab-gear .g-tiles.gear .g-cnt {
+#c-gear .g-tiles.gear .g-cnt {
   right: auto;
   left: -6px;
 }
 /* L'anneau d'une pièce cochée, sur un conteneur : sa pastille en déborde. */
-#tab-gear .g-ring {
+#c-gear .g-ring {
   position: relative;
   display: inline-flex;
   padding: 2px;
   border: 2px solid transparent;
   border-radius: 8px;
 }
-#tab-gear .g-tile:not(:disabled):hover .g-ring {
+#c-gear .g-tile:not(:disabled):hover .g-ring {
   border-color: color-mix(in srgb, var(--accent) 50%, transparent);
 }
-#tab-gear .g-ring.on {
+#c-gear .g-ring.on {
   border-color: var(--accent);
 }
-#tab-gear .g-cnt {
+#c-gear .g-cnt {
   position: absolute;
   right: -6px;
   top: -6px;
@@ -744,23 +671,23 @@
   font-weight: 700;
 }
 /* Un set secondaire : la pastille en creux, le principal la garde pleine. */
-#tab-gear .g-cnt.sub {
+#c-gear .g-cnt.sub {
   border: 1px solid var(--accent);
   background: var(--surface-base);
   color: var(--accent);
 }
 /* Le pied d'un multi-choix : ce qui sera posé, « Annuler », « Valider ». */
-#tab-gear .g-panel-foot {
+#c-gear .g-panel-foot {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
   border-top: 1px solid var(--line-subtle);
 }
-#tab-gear .g-panel-foot[hidden] {
+#c-gear .g-panel-foot[hidden] {
   display: none;
 }
-#tab-gear .g-recap {
+#c-gear .g-recap {
   display: flex;
   align-items: center;
   gap: 6px 16px;
@@ -770,120 +697,63 @@
   color: var(--content-muted);
   font-size: 13px;
 }
-#tab-gear .g-mix {
+#c-gear .g-mix {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
-#tab-gear .g-n {
+#c-gear .g-n {
   max-width: 76px;
   font-size: 11px;
   line-height: 1.2;
   text-align: center;
   overflow-wrap: anywhere;
 }
-#tab-gear .g-item:focus-visible,
-#tab-gear .g-pv-head:focus-visible,
-#tab-gear .g-stat:focus-visible,
-#tab-gear .g-seg button:focus-visible,
-#tab-gear .g-tile:focus-visible,
-#tab-gear summary:focus-visible {
+#c-gear .g-item:focus-visible,
+#c-gear .g-pv-head:focus-visible,
+#c-gear .g-stat:focus-visible,
+#c-gear .g-seg button:focus-visible,
+#c-gear .g-tile:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 1px;
 }
 /* Le groupe segmenté rogne ce qui dépasse : l'anneau passe à l'intérieur. */
-#tab-gear .g-seg button:focus-visible {
+#c-gear .g-seg button:focus-visible {
   outline-offset: -2px;
 }
 
 /* ---------------------------------------------------------------- l'aperçu
    En bas de chaque carte : ce que la fiche perso montrera du build
    (`GearRecoSection.tsx`), bâti par `previewHtml` de `gear-view.mjs` — classes
-   `.pv-*`. Les couleurs sont celles du site : ses jetons, recopiés de
-   `globals.css` sous les mêmes noms (ceux qui manquent à `quick.css`), et ses
-   classes de couleur (`text-buff`, `text-item-legendary`…), que les segments
-   de note portent telles quelles. */
-#tab-gear {
-  --buff: #38bdf8;
-  --debuff: #f87171;
-  --buff-bg: #1a69a7;
-  --debuff-bg: #a72a27;
-  --stat: #fbbf24;
-  --highlight: #22d3ee;
-  --equipment: #fbbf24;
-}
-#tab-gear .text-buff {
-  color: var(--buff);
-}
-#tab-gear .text-debuff {
-  color: var(--debuff);
-}
-#tab-gear .text-class {
-  color: var(--klass);
-}
-#tab-gear .text-stat {
-  color: var(--stat);
-}
-#tab-gear .text-highlight {
-  color: var(--highlight);
-}
-#tab-gear .text-equipment {
-  color: var(--equipment);
-}
-#tab-gear .text-item-normal {
-  color: var(--item-normal);
-}
-#tab-gear .text-item-superior {
-  color: var(--item-superior);
-}
-#tab-gear .text-item-epic {
-  color: var(--item-epic);
-}
-#tab-gear .text-item-legendary {
-  color: var(--item-legendary);
-}
-#tab-gear .text-fire {
-  color: var(--fire);
-}
-#tab-gear .text-water {
-  color: var(--water);
-}
-#tab-gear .text-earth {
-  color: var(--earth);
-}
-#tab-gear .text-light {
-  color: var(--light);
-}
-#tab-gear .text-dark-elem {
-  color: var(--dark-elem);
-}
-
+   `.pv-*`. Les couleurs sont celles du site : ses jetons et ses classes de
+   couleur (`text-buff`, `text-item-legendary`…), que les segments de note
+   portent telles quelles — posés par `character.css` pour toute la fiche. */
 /* La langue de l'aperçu, dans la savebar : une pour toutes les cartes. */
-#tab-gear .g-pv-lang {
+#c-gear .g-pv-lang {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 /* `.savebar span` pousse à gauche : ici le libellé suit son groupe. */
-#tab-gear .g-pv-lang .lbl {
+#c-gear .g-pv-lang .lbl {
   margin-right: 0;
 }
-#tab-gear .g-pv-lang .g-seg {
+#c-gear .g-pv-lang .g-seg {
   height: 34px;
   margin-left: 0;
 }
-#tab-gear .g-pv-lang .g-seg button {
+#c-gear .g-pv-lang .g-seg button {
   padding: 0 10px;
 }
 
 /* Le bloc : sa tête (un bouton qui replie), puis le rendu sur le fond de la
    page — ce n'est plus l'éditeur. */
-#tab-gear .g-pv {
+#c-gear .g-pv {
   border-top: 1px solid var(--line-subtle);
   border-radius: 0 0 9px 9px;
   background: var(--surface-base);
 }
-#tab-gear .g-pv-head {
+#c-gear .g-pv-head {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -900,57 +770,53 @@
   text-align: left;
   cursor: pointer;
 }
-#tab-gear .g-pv-head:hover {
+#c-gear .g-pv-head:hover {
   color: var(--content);
 }
-#tab-gear .g-pv-head .lbl {
+#c-gear .g-pv-head .lbl {
   font-weight: 400;
   letter-spacing: normal;
   text-transform: none;
 }
-#tab-gear .g-pv-caret {
+#c-gear .g-pv-caret {
   transition: transform 0.12s;
 }
-#tab-gear .g-pv-head[aria-expanded='false'] .g-pv-caret {
+#c-gear .g-pv-head[aria-expanded='false'] .g-pv-caret {
   transform: rotate(-90deg);
 }
-#tab-gear .g-pv-body {
+#c-gear .g-pv-body {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 4px 20px 18px;
   transition: opacity 0.12s;
 }
-#tab-gear .g-pv-body[hidden] {
+#c-gear .g-pv-body[hidden] {
   display: none;
 }
 /* Une requête court : le rendu précédent reste, atténué. */
-#tab-gear .g-pv-body.busy {
+#c-gear .g-pv-body.busy {
   opacity: 0.45;
 }
-#tab-gear .g-pv-body p {
+#c-gear .g-pv-body p {
   margin: 0;
 }
-#tab-gear .g-pv-ko,
-#tab-gear .pv-bad,
-#tab-gear .pv-unknown {
+#c-gear .g-pv-ko,
+#c-gear .pv-bad {
   color: var(--danger);
-}
-#tab-gear .pv-unknown {
-  font-weight: 600;
 }
 
 /* Une rangée : son étiquette à gauche (96 px), le contenu à droite. */
-#tab-gear .pv-row {
+#c-gear .pv-row {
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr);
   gap: 14px;
 }
-#tab-gear .pv-row.pv-sets {
+#c-gear .pv-row.pv-sets {
   padding-top: 14px;
   border-top: 1px solid var(--line-subtle);
 }
-#tab-gear .pv-lbl {
+#c-gear .pv-lbl {
   padding-top: 3px;
   color: var(--content-muted);
   font-family: var(--mono);
@@ -960,26 +826,26 @@
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
-#tab-gear .pv-cell {
+#c-gear .pv-cell {
   min-width: 0;
   font-size: 13px;
 }
 /* Les pièces : des colonnes fixes, qui alignent les trois rangées entre elles. */
-#tab-gear .pv-items {
+#c-gear .pv-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
   gap: 10px 20px;
 }
-#tab-gear .pv-item {
+#c-gear .pv-item {
   display: flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
 }
-#tab-gear .pv-item-t {
+#c-gear .pv-item-t {
   min-width: 0;
 }
-#tab-gear .pv-name {
+#c-gear .pv-name {
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -987,12 +853,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#tab-gear .pv-chips {
+#c-gear .pv-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0 8px;
 }
-#tab-gear .pv-chip {
+#c-gear .pv-chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -1000,38 +866,38 @@
   font-size: 12px;
 }
 /* Les combos, une ligne chacun, puis la légende des bonus : nom | effets. */
-#tab-gear .pv-combos {
+#c-gear .pv-combos {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-#tab-gear .pv-combo,
-#tab-gear .pv-tails {
+#c-gear .pv-combo,
+#c-gear .pv-tails {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px 8px;
 }
-#tab-gear .pv-set {
+#c-gear .pv-set {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-weight: 600;
 }
-#tab-gear .pv-combo .pv-set {
+#c-gear .pv-combo .pv-set {
   font-size: 14px;
 }
-#tab-gear .pv-dim {
+#c-gear .pv-dim {
   color: var(--content-muted);
   font-size: 11px;
 }
-#tab-gear .pv-plus {
+#c-gear .pv-plus {
   padding: 0 4px;
 }
-#tab-gear .pv-dot {
+#c-gear .pv-dot {
   color: var(--line-strong);
 }
-#tab-gear .pv-legend {
+#c-gear .pv-legend {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 4px 12px;
@@ -1042,90 +908,52 @@
   font-size: 12px;
   line-height: 1.6;
 }
-#tab-gear .pv-legend .pv-set {
+#c-gear .pv-legend .pv-set {
   white-space: nowrap;
 }
-#tab-gear .pv-count {
+#c-gear .pv-count {
   font-weight: 600;
 }
 /* La priorité des substats, en barre (`SubstatPrioBar` de la fiche) : par
    stat, l'icône et l'abréviation, puis six segments. Sa largeur est celle du
    panneau de la fiche — un tiers de la grille —, pas celle de la rangée. */
-#tab-gear .pv-bar {
+#c-gear .pv-bar {
   display: flex;
   flex-direction: column;
   gap: 10px;
   max-width: 336px;
 }
-#tab-gear .pv-bar-stat {
+#c-gear .pv-bar-stat {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 14px;
 }
-#tab-gear .pv-bar-stat img {
+#c-gear .pv-bar-stat img {
   flex: none;
 }
-#tab-gear .pv-bar-segs {
+#c-gear .pv-bar-segs {
   display: flex;
   gap: 2px;
   margin-top: 4px;
 }
-#tab-gear .pv-bar-seg {
+#c-gear .pv-bar-seg {
   flex: 1;
   height: 6px;
   border-radius: 4px;
   background: #3f3f46; /* bg-zinc-700 */
 }
-#tab-gear .pv-bar-seg.on {
+#c-gear .pv-bar-seg.on {
   background: #facc15; /* bg-yellow-400 */
 }
 /* La note : le texte du site, ses balises en icône + libellé coloré. */
-#tab-gear .pv-note {
+#c-gear .pv-note {
   color: var(--content-muted);
   font-size: 14px;
   line-height: 1.65;
 }
-#tab-gear .pv-seg {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  vertical-align: middle;
-}
-#tab-gear .pv-u {
-  text-decoration: underline;
-}
-#tab-gear .pv-ico {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-}
-/* La tuile d'un effet, teintée buff ou debuff ; celle d'un item, sur son cadre. */
-#tab-gear .pv-fx,
-#tab-gear .pv-it {
-  position: relative;
-  flex: none;
-  width: 18px;
-  height: 18px;
-}
-#tab-gear .pv-fx {
-  border-radius: 4px;
-  background: var(--buff-bg);
-}
-#tab-gear .pv-fx.debuff {
-  background: var(--debuff-bg);
-}
-#tab-gear .pv-fx img,
-#tab-gear .pv-it img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 @media (max-width: 700px) {
-  #tab-gear .pv-row {
+  #c-gear .pv-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 6px;
   }

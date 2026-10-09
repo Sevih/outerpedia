@@ -9,7 +9,8 @@
       autres langues, à relire. Chaque texte porte dessous son aperçu, dans la langue choisie dans
       la barre — une balise que le site ne résout pas y sort en rouge. Dans Skills, ✕ masque une
       chip d'effet sur sa carte et « ＋ effet » en ajoute une du glossaire : présentation seule, la
-      donnée extraite reste fidèle aux tables.
+      donnée extraite reste fidèle aux tables. Gear reco porte les builds du perso, avec leur barre
+      et leur commit à eux.
     </p>
   </div>
 
@@ -36,7 +37,8 @@
     </button>
   </div>
 
-  <!-- Une barre pour toute la fiche : les changements de tous les sous-onglets. -->
+  <!-- Une barre pour toute la fiche : les changements de ses sous-onglets — sauf les builds de
+       Gear reco, qui ont la leur. -->
   <div class="savebar" id="c-bar" role="toolbar" aria-label="Enregistrement" hidden>
     <span id="c-count"></span>
     <!-- La langue de l'aperçu des textes, une pour toute la fiche (posée par `pvLangs`). -->
@@ -49,4 +51,8 @@
   <div class="c-tabs" id="c-tabs" role="tablist" aria-label="Sous-onglets de la fiche" hidden></div>
 
   <div id="c-panel" role="tabpanel"></div>
+
+  <!-- Le sous-onglet « Gear reco » : un module (`gear.js`), monté ici par `mountGear` à la
+       première venue — sa savebar, ses onglets de builds, la carte du build montré, ses pickers. -->
+  <div id="c-gear" role="tabpanel" aria-labelledby="c-tab-gear" hidden></div>
 </section>

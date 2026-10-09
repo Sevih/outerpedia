@@ -50,9 +50,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       // curer dessus — seul l'EE a une curation (rang + câblage des chips).
       title: 'Editor',
       items: [
-        { label: 'Character', href: '/admin/editor/characters' },
-        // Effect : porté dans quick (Éditeurs › Effets), lien retiré le 08/10 —
-        // la page reste joignable par son URL jusqu'au retrait de l'admin.
+        // Character : porté dans quick (Éditeurs › Fiche perso, Gear reco
+        // compris), lien retiré le 09/10. Effect : porté dans quick (Éditeurs ›
+        // Effets), lien retiré le 08/10 — les pages restent joignables par leur
+        // URL jusqu'au retrait de l'admin.
         { label: 'EE', href: '/admin/editor/ee' },
         { label: 'Monster', href: '/admin/editor/monsters' },
         { label: 'Item', href: '/admin/editor/items' },

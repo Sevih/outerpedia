@@ -5,10 +5,13 @@
 // « Traduire », avec leur aperçu tel que le site les rendra. « Skills » : les
 // cartes de skills du perso et leurs chips d'effets — ✕ en masque une, « ＋ effet »
 // en ajoute une du glossaire. Une seule savebar, un seul enregistrement, un seul
-// commit.
+// commit — sauf « Gear reco » : les builds du perso, un module (`gear.js`) monté
+// dans son hôte, avec SA savebar et SON commit ; la fiche ne fait que compter
+// ses builds en attente avant de quitter l'onglet ou de changer de perso.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { gameText, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
+import { gearChanges, gearReset, mountGear } from './gear.js';
 
 // Les sous-onglets, dans l'ordre de la fiche du site. `soon` : pas encore
 // porté — l'onglet est là, éteint, et son `title` dit quel lot l'apporte.
@@ -17,7 +20,7 @@ const SUBS = [
   { id: 'pros-cons', label: 'Pros / Cons' },
   { id: 'synergies', label: 'Synergies' },
   { id: 'skills', label: 'Skills' },
-  { id: 'gear', label: 'Gear reco', soon: 'lot B40' },
+  { id: 'gear', label: 'Gear reco' },
 ];
 const subsOn = () => SUBS.filter((s) => !s.soon);
 
@@ -91,6 +94,8 @@ const kit = { hide: {}, add: {} };
 const KIT = { hide: 'chipHide', add: 'chipAdd' };
 const fxFilters = heroFilters(); // les filtres du picker d'effets, à lui
 let wantedPick = 0; // la carte dont le hash demande le picker d'effets (à partir de 1)
+let geared = null; // le perso dont Gear reco porte les builds : monté à sa première venue
+let wantedGear = {}; // ce que le hash demande à Gear reco : `build` (à partir de 1), `picker`
 let drawnBase = state.imgBase; // la base des images du dernier dessin (cf. `init`)
 
 const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
@@ -245,14 +250,20 @@ const subChanges = (id) =>
     ? cells.size + Number(prioMoved()) + Number(tagsMoved())
     : id === 'skills'
       ? kitChanges()
-      : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
+      : id === 'gear'
+        ? gearChanges()
+        : (TEXT_TABS[id] ?? []).reduce((n, list) => n + listChanges(list), 0);
 
 /**
  * Ce que compte la savebar : une cellule de rang, la priorité, les tags, chaque
  * ligne de pros, de cons ou de synergie ajoutée, modifiée ou retirée, et chaque
- * chip de skill masquée, rétablie, ajoutée ou retirée.
+ * chip de skill masquée, rétablie, ajoutée ou retirée. Pas les builds de Gear
+ * reco : ils ont leur barre, et « Enregistrer » d'ici ne les envoie pas.
  */
-const changes = () => (sheet ? SUBS.reduce((n, s) => n + subChanges(s.id), 0) : 0);
+const changes = () =>
+  sheet ? SUBS.reduce((n, s) => n + (s.id === 'gear' ? 0 : subChanges(s.id)), 0) : 0;
+/** Tout ce qui attend, builds compris : ce que quitter l'onglet ou changer de perso abandonne. */
+const allChanges = () => changes() + gearChanges();
 
 /** Les erreurs que la page voit seule : tant qu'il en reste, rien n'est envoyé. */
 const issues = () =>
@@ -371,11 +382,11 @@ function subTabs() {
             : subChanges(s.id)
               ? ['edit', 'modifié, pas encore enregistré']
               : null;
-        return `<button class="tab" type="button" role="tab" id="c-tab-${s.id}" data-sub="${s.id}" aria-selected="${on}" aria-controls="c-panel" tabindex="${on ? 0 : -1}"${
+        return `<button class="tab" type="button" role="tab" id="c-tab-${s.id}" data-sub="${s.id}" aria-selected="${on}" aria-controls="${s.id === 'gear' ? 'c-gear' : 'c-panel'}" tabindex="${on ? 0 : -1}"${
           s.soon ? ` disabled title="${s.soon}"` : ''
         }>${s.label}${dot ? `<span class="dot ${dot[0]}" role="img" aria-label="${dot[1]}" title="${dot[1]}"></span>` : ''}</button>`;
       }).join('');
-  $('c-panel').setAttribute('aria-labelledby', `c-tab-${sub}`);
+  if (sub !== 'gear') $('c-panel').setAttribute('aria-labelledby', `c-tab-${sub}`);
   if (focused) $(`c-tab-${sub}`)?.focus();
 }
 
@@ -899,24 +910,52 @@ function keepOpen() {
   }
 }
 
+/**
+ * Gear reco, monté dans son hôte pour le perso de la fiche — une fois par
+ * perso : y revenir retrouve ses builds en attente. Le module prévient à chaque
+ * changement : le point du sous-onglet suit. Un état illisible (le journal le
+ * dit) se retente à la prochaine venue.
+ */
+function showGear() {
+  const { id } = sheet.char;
+  if (geared === id) return;
+  geared = id;
+  const at = wantedGear;
+  wantedGear = {};
+  mountGear($('c-gear'), sheet.char, { ...at, onChange: subTabs })
+    .then((ok) => {
+      if (!ok && geared === id) geared = null;
+    })
+    .catch((e) => {
+      if (geared === id) geared = null;
+      log([`Gear reco illisible : ${e}`], false);
+    });
+}
+
 /** Le sous-onglet montré, redessiné en entier : un autre perso, « Annuler », l'état relu. */
 function render() {
   const panel = $('c-panel');
+  // Gear reco vit dans son hôte, à côté : il garde son DOM d'une venue à l'autre.
+  const gearOn = Boolean(sheet) && sub === 'gear';
   keepOpen();
-  panel.innerHTML = !sheet
-    ? ''
-    : sub === 'fiche'
-      ? ficheHtml()
-      : sub === 'pros-cons'
-        ? prosConsHtml()
-        : sub === 'synergies'
-          ? synHtml()
-          : skillsHtml();
+  panel.hidden = gearOn;
+  $('c-gear').hidden = !gearOn;
+  panel.innerHTML =
+    !sheet || gearOn
+      ? ''
+      : sub === 'fiche'
+        ? ficheHtml()
+        : sub === 'pros-cons'
+          ? prosConsHtml()
+          : sub === 'synergies'
+            ? synHtml()
+            : skillsHtml();
   growAll(panel);
   subTabs();
   bar();
   pvLangs();
   pvAsk();
+  if (gearOn) showGear();
 }
 
 /** Ce qui suit la saisie dans une ligne de texte, sans la redessiner. */
@@ -1247,6 +1286,11 @@ async function load(id, keep = false) {
   const s = await getJson(`/api/character/state?id=${encodeURIComponent(id)}`);
   // Un serveur plus vieux que cette page ne sert ni les langues des textes ni le kit.
   if (!s.langs || !s.kit) throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
+  // Un autre perso : les builds du précédent ne sont plus ceux de la fiche.
+  if (sheet?.char.id !== s.char.id) {
+    gearReset();
+    geared = null;
+  }
   sheet = s;
   wanted = null;
   pv.lang ||= s.langs.default;
@@ -1273,7 +1317,7 @@ async function load(id, keep = false) {
  */
 function choose(id) {
   if (id === sheet?.char.id) return;
-  const n = changes();
+  const n = allChanges();
   if (
     n &&
     !confirm(
@@ -1383,7 +1427,7 @@ $('c-save').onclick = async () => {
 
 /** Quitter l'onglet avec des changements en attente : sur confirmation. */
 function leave() {
-  const n = changes();
+  const n = allChanges();
   return (
     !n ||
     confirm(
@@ -1397,17 +1441,29 @@ sections.register('character', {
     // `#character/<id>` ouvre l'onglet sur la fiche de ce perso, et
     // `#character/<id>/<sous-onglet>` sur ce sous-onglet (un lien, le banc de
     // captures) ; `…/skills/picker/<n>` y ouvre le picker d'effets de la n-ième
-    // carte (à partir de 1), sans que la page l'écrive dans l'adresse.
-    // `lib.js` ne connaît que `#character` : c'est le clic sur l'onglet qui
-    // l'ouvre.
-    const [, open, tab, pick] =
-      /^#character\/([^/]+)(?:\/([a-z-]+))?(?:\/picker\/(\d+))?$/.exec(location.hash) ?? [];
+    // carte (à partir de 1), `…/gear/build/<n>` montre le n-ième build du perso
+    // et `…/gear/picker/<slot>` y ouvre un picker de pièces (les deux se
+    // combinent), sans que la page l'écrive dans l'adresse. `lib.js` ne connaît
+    // que `#character` : c'est le clic sur l'onglet qui l'ouvre.
+    //
+    // Gear reco a été une section : ses liens `#gear/<id>…` valent
+    // `#character/<id>/gear…`, et `#gear` le sous-onglet, sans perso.
+    const hash = location.hash.replace(/^#gear(?:\/([^/]+))?(?=\/|$)/, (_, id) =>
+      id ? `#character/${id}/gear` : '#character',
+    );
+    const [, open, tab, build, pick] =
+      /^#character\/([^/]+)(?:\/([a-z-]+))?(?:\/build\/(\d+))?(?:\/picker\/([a-z0-9]+))?$/.exec(
+        hash,
+      ) ?? [];
+    if (hash !== location.hash) sub = 'gear';
     if (open) {
       wanted = decodeURIComponent(open);
       if (subsOn().some((s) => s.id === tab)) sub = tab;
-      if (sub === 'skills') wantedPick = Number(pick ?? 0);
-      document.querySelector('#tabs [data-tab="character"]')?.click();
+      if (sub === 'skills') wantedPick = Number(pick ?? 0) || 0;
+      if (sub === 'gear') wantedGear = { build: Number(build ?? 0), picker: pick ?? '' };
     }
+    if (open || hash !== location.hash)
+      document.querySelector('#tabs [data-tab="character"]')?.click();
     who();
     bar();
     // Les images sont sous `imgBase`, connu avec `/api/state` : reposées si
@@ -1440,7 +1496,8 @@ sections.register('character', {
     writeHash();
     if (!changes()) load(sheet.char.id).catch((e) => log([`Fiche illisible : ${e}`], false));
   },
-  // Des changements en attente ne survivent pas à un rechargement de la page.
-  dirty: changes,
+  // Des changements en attente, builds de Gear reco compris, ne survivent pas à
+  // un rechargement de la page.
+  dirty: allChanges,
   canLeave: leave,
 });

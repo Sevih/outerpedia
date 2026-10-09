@@ -23,7 +23,7 @@
 
 - [ ] **Bloody Edge (`631`)** : deux builds de `data/curated/gear-reco.json`
       lui donnent ATK% en stat principale, son pool ne propose que HP% — à
-      corriger dans quick (onglet Gear reco) ou l'admin (Sevih).
+      corriger dans quick (Fiche perso › Gear reco) ou l'admin (Sevih).
 - [ ] **Presets en double** (`$mrs` = `$elemcritAP`, `a2p2` = `p2a2` dans
       `gear-presets.json`) : `collapseBuild` rend le premier trouvé, l'admin
       change donc le slug au save (quick, lui, garde celui du disque). À
@@ -39,12 +39,32 @@
       « Patch », lot C10), Changelog (onglet « Journal du site », lot B37),
       Game data (onglet « Tables du jeu », lot B38), Effect (onglet
       « Effets », lot B41), Synergy et Pro / Con (sous-onglets « Synergies »
-      et « Pros / Cons » de la « Fiche perso », lot B42). PARTIEL : Character
-      (section « Fiche perso », lots C11, B42 et B39 — la coquille, le picker
-      de héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies et
-      Skills ; reste Gear reco B40).
+      et « Pros / Cons » de la « Fiche perso », lot B42), Character (section
+      « Fiche perso », lots C11, B42, B39 et B40 — la coquille, le picker de
+      héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies, Skills et
+      Gear reco, qui a quitté les Données).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Fiche perso » › Gear reco — contrôles à l'écran (lot B40)** : le
+      banc ne clique pas, et aucun enregistrement réel n'a été joué. Pas de
+      relance de quick à faire (aucune route n'a bougé), un rechargement de
+      la page suffit. (1) Éditeurs › Fiche perso, un perso, le sous-onglet
+      « Gear reco » : ses builds comme avant — savebar de builds, onglets de
+      builds, carte, aperçu —, sans l'en-tête ni « Changer de perso » (ceux
+      de la fiche servent). (2) Un build retouché : le point vient sur son
+      onglet ET sur le sous-onglet « Gear reco » ; la barre de la fiche,
+      au-dessus, reste à « aucune modification ». (3) « Enregistrer » de la
+      barre des builds — attendu : UN commit `chore(gear-reco): <perso>`, et
+      rien de la fiche dedans. (4) Un rang ET un build en attente : chaque
+      « Enregistrer » ne part qu'avec le sien ; changer de perso ou quitter
+      l'onglet demande confirmation en comptant les deux. (5) Les anciens
+      liens : `#gear/<id>` et `#gear/<id>/build/2` ouvrent la fiche du perso
+      sur Gear reco (l'adresse devient `#character/<id>/gear`). (6) L'admin :
+      le lien « Character » a quitté le menu (la page répond toujours par son
+      URL) ; le groupe Données de quick n'a plus que Rangs et Tables du jeu.
+      À juger : les deux barres collantes — en défilant, celle des builds
+      recouvre celle de la fiche — et la ligne d'explication au-dessus de la
+      barre des builds.
 - [ ] **« Fiche perso » › Skills — contrôles à l'écran (lot B39)** : le banc
       ne clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : l'état de la fiche sert maintenant
@@ -106,9 +126,8 @@
       enregistré. Trois persos portent des priorités à 0 sur le disque : elles
       restent tant qu'on n'y touche pas — à trancher, 0 est-il une valeur ?
       (6) Cocher « free », enregistrer ; « ajouter dans Vidéos » ouvre
-      l'onglet Vidéos sur ce perso. (7) Gear reco : « Changer de perso » ouvre
-      le même picker qu'avant (captures identiques au pixel), le filtre des
-      recos et le compte de builds par vignette compris. À juger aussi : les
+      l'onglet Vidéos sur ce perso. (7) Caduc depuis B40 : Gear reco n'a plus
+      de picker de perso à lui, il prend celui de la fiche. À juger aussi : les
       deux cartes côte à côte (une seule sous 1000 px) — assez aérées ?
 - [ ] **Onglet « Effets » — contrôles à l'écran (lot B41)** : le banc ne
       tape pas, et aucun enregistrement réel n'a été joué. Relancer quick
@@ -273,17 +292,13 @@
       A30 : une ligne verte quand ça passe ; sur un refus réel tout le
       journal, « Copier » et son collage ; la page qui remonte depuis le bas
       de Gear reco, savebar comprise),
-      résultats de Récompense avec icônes, hash `#gear/<id>`, fenêtre sous
+      résultats de Récompense avec icônes, hash `#gear/<id>` (redirigé vers
+      la fiche depuis B40), fenêtre sous
       1060 px ; Rangs : cellule modifiée, refus réel, dépliage, clavier dans
       les menus de rang ; Discord AVEC le jeton : serveurs, salons,
       emojis de serveur, un envoi d'essai sur le serveur perso, embed,
       reprise d'envoi, presse-papiers (listes détaillées dans les entrées
       DONE des lots F16, B28, B29, C6).
-- [ ] **Gear reco, à trancher** (laissé par B29) : donner `element`, `rarity`
-      et la sous-classe au roster de `gearRecoState` (`actions.ts`) pour que
-      l'en-tête n'ait plus à lire `/api/ranks` ; garder `#gear/<id>` dans
-      l'adresse après un choix (recharger reviendrait sur le perso) — ça
-      passe par `lib.js`, qui réécrit le hash à chaque bascule.
 
 ## 🧪 À jouer au prochain patch
 

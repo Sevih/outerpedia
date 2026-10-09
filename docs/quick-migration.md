@@ -85,19 +85,18 @@ l'historique, le perso cherché dans le roster donne le titre en six langues,
 la puce et le slug), « Traduire » par entrée, et sous la fiche l'APERÇU de la
 carte de `/changelog` dans la langue choisie ; lien retiré du menu admin le
 08/10), 4-comics, Vidéos, Discord.
-Données : Rangs, Gear reco (= l'éditeur des recos de l'admin, l'admin en garde
-un exemplaire), Tables du jeu (= Tools › Game data, étape 8, lot B38 : les
+Données : Rangs, Tables du jeu (= Tools › Game data, étape 8, lot B38 : les
 tables brutes de `.gamedata/parsed/`, en lecture seule — un champ de recherche
 à la place de la liste latérale, ses suggestions rangées par USAGE : les
 tables que le code lit d'abord, avec les fichiers qui les lisent et la
 première ligne de leur docblock, déduits d'une passe sur les sources ; puis la
 recherche dans la table, la pagination, les textes résolus, les liens croisés
 et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
-Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11, B42 et B39 —
-portage PARTIEL : UNE section pour tout ce que le wiki sait d'un perso, le
+Éditeurs : Fiche perso (= Editor › Character, étape 9, lots C11, B42, B39 et
+B40 — portage COMPLET : UNE section pour tout ce que le wiki sait d'un perso, le
 picker de héros en tête, des sous-onglets comme sur la fiche du site — Fiche,
 Pros / Cons, Synergies, Skills, Gear reco. C11 pose la coquille, le picker
-partagé (`ui/hero-picker.mjs`, que Gear reco emploie aussi) et le sous-onglet
+partagé (`ui/hero-picker.mjs`) et le sous-onglet
 Fiche : rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills,
 tags humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
 commit `chore(characters): <perso>`. Les rangs et le rôle restent AUSSI dans
@@ -110,9 +109,14 @@ Skills (= l'onglet « Skills (buff/debuff) » de l'éditeur, `CharacterKitEditor
 les cartes de skills du perso et leurs chips d'effets telles que l'admin les
 calcule — ✕ masque une chip, « rétablir » la rend, « ＋ effet » en ajoute une
 du glossaire par le picker partagé —, comptées par la même savebar ; le commit
-de la fiche porte alors aussi `data/curated/character-skills.json`. Le dernier
-sous-onglet est là, éteint : Gear reco arrive avec B40 ; l'admin garde donc
-son lien Character), Effets (= Editor ›
+de la fiche porte alors aussi `data/curated/character-skills.json`. B40 y
+range Gear reco (= l'éditeur des recos de l'admin, jusque-là une section des
+Données) : il VIT DANS LA FICHE, dernier sous-onglet, son UI telle quelle —
+savebar de builds, onglets de builds, pickers, aperçu, « Traduire » — moins
+son en-tête et son picker de perso, que la fiche porte ; les builds gardent
+leur barre et leur commit à part, `chore(gear-reco): <perso>`, et les anciens
+liens `#gear/<id>` y sont redirigés ; lien Character retiré du menu admin le
+09/10), Effets (= Editor ›
 Effect, étape 10, lot B41 : le catalogue des
 effets rangé comme l'admin — paires buff ↔ debuff côte à côte, puis les effets
 sans miroir —, sans menu latéral ; UNE recherche, jouée au serveur par la règle
@@ -134,8 +138,8 @@ après les Bannières (5), avant Events :
 
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
-(9 Character partiel, C11 et B42 — qui clôt aussi 3 Synergy et 4 Pro / Con ;
-10 Effect fait, B41) →
+(9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
+Con ; 10 Effect fait, B41) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -200,17 +204,20 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 2. Éditeurs (curation ; un lot B chacun)
 
-9. **Editor › Character** — PARTIEL, lots C11, B42 et B39 : la section « Fiche
+9. **Editor › Character** — FAIT, lots C11, B42, B39 et B40 : la section « Fiche
    perso » (cf. « Déjà dans quick »). Faits : la coquille à sous-onglets, le
    picker de héros partagé, le sous-onglet Fiche (les champs de
    `CharacterCuratedEditor`, vidéos en lecture), puis Pros / Cons et Synergies
    (B42, les étapes 3 et 4, que Sevih voulait « dans l'editor de character » :
-   `EditorialEditor` de l'admin), puis Skills (B39, FAIT : `CharacterKitEditor`
-   — masquer ou ajouter les chips d'un kit). Reste : Gear reco (B40, qui
-   devient un sous-onglet). Le lien Character de l'admin reste jusqu'à B40.
+   `EditorialEditor` de l'admin), puis Skills (B39 : `CharacterKitEditor` —
+   masquer ou ajouter les chips d'un kit), puis Gear reco (B40 : la section
+   des Données devenue le dernier sous-onglet, son UI intacte). Le lien
+   Character de l'admin est retiré avec B40 ; l'entrée reste pour que la
+   numérotation des suivantes ne bouge pas.
    - Agacements : ui pas joli et compact (et on a deplacer le gear reco) —
      corrigé pour la Fiche par deux cartes aérées, « Rangs » et « Kit », au
-     lieu de la grille serrée de l'admin ; le reste suit avec ses lots.
+     lieu de la grille serrée de l'admin ; le gear reco est revenu dans la
+     fiche avec B40.
 
 10. **Editor › Effect** — FAIT, lot B41 : l'onglet « Effets » (cf. « Déjà
     dans quick »). Les deux agacements de Sevih y sont corrigés : « une
