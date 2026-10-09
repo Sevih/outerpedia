@@ -7,6 +7,28 @@
 
 ## 2026-10-09
 
+- **Quatre PR des sessions cloud fusionnées en local (hors lot)** : T6 `#54`
+  (constantes de la génération lues de leurs tables, `singleValue` qui jette si
+  une colonne censée constante diverge), T1 `#52` (test oracle fiche du wiki ↔
+  gear-solver, fixture de 129 persos, liste d'écarts connus avec le verdict du
+  code du jeu), T8 `#58` (audit des six langues et des liens internes, garde
+  des valeurs restées en anglais en jp/kr/zh) et T5 `#56` (les tests ne figent
+  plus une valeur du jour). Tâches décrites dans
+  `sevih-tool/docs/taches-cloud-2026-10-09.md`. Relues par Fable avant fusion :
+  build rejoué sur clone neuf pour T6 (65 fichiers identiques à l'octet),
+  affirmations sur le code du jeu recoupées dans le client décompilé, constat
+  de T1 sur la base des Core Fusion confirmé par huit captures de Sevih en jeu
+  (Snow 1503 / 6452 / 1366 / 155 : c'est la base du perso d'origine). Seul
+  conflit : une ligne d'import de `solver.test.ts` entre T5 et T6, les deux
+  gardées. Sur le résultat : typecheck, lint, format, 207 fichiers et 3416 tests
+  verts, `datagen:build` identique. Restent à faire, en tâches cloud T16 à T18 :
+  la base des fusionnés dans le contrat solver, le passif de S2 appliqué au
+  mauvais niveau par gear-solver, et la fiche « Base Stats » (six Core Fusion,
+  Claire, Ame, Bell Cranel). Trois constats de T8 à corriger : `<html lang>` en
+  `jp`/`kr` au lieu de `ja`/`ko`, balises `[buff_c_…]` affichées brutes
+  (expression sensible à la casse dans `src/lib/skills.ts`), ancres du pied de
+  page vers `/tools#…`.
+
 - **Relecture B44 (Fable) — onglet « Items » de quick, validé ; les Éditeurs
   sont portés en entier** : périmètre tenu (dix-sept fichiers ; hors quick,
   deux fonctions de l'admin qui acceptent un catalogue injecté sans changer
