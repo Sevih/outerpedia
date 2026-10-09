@@ -187,6 +187,20 @@ export function numf(v: string | undefined | null): number {
   return Number.isFinite(n) ? n : 0;
 }
 
+/**
+ * L'unique valeur d'une colonne censée être constante sur ses lignes. Pour un
+ * scalaire de contrat lu d'une table : si un patch la fait varier, on jette
+ * plutôt que d'en retenir une au hasard.
+ */
+export function singleValue(values: number[], what: string): number {
+  const distinct = [...new Set(values)];
+  if (distinct.length !== 1 || !Number.isFinite(distinct[0]))
+    throw new Error(
+      `${what} : une valeur unique attendue, trouvé [${distinct.join(', ')}] — le contrat n'en porte qu'une.`,
+    );
+  return distinct[0];
+}
+
 /** Parse un booléen du jeu (`'True'`/`'TRUE'` → true ; tout le reste → false). */
 export function bool(v: string | undefined | null): boolean {
   return v != null && /^true$/i.test(v);

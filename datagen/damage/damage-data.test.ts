@@ -26,6 +26,7 @@ import type { DamageBuffsData } from './buffs';
 import type { DamageConfigData } from './config';
 import {
   MISSED_DAMAGE_RATE_PERMILLE,
+  PUNISH_DMG_REDUCE_VALUE_PERMILLE,
   PVP_HEAL_PENALTY_REDUCE_RATE_PERMILLE,
 } from '../../src/lib/damage/types';
 import {
@@ -507,6 +508,7 @@ describe('damage/growth.json — canaux de CalcFinalStat', () => {
     // (types.ts + spec § 17.6), jamais une valeur à deviner.
     expect(config.MISSED_DAMAGE_RATE).toBe(MISSED_DAMAGE_RATE_PERMILLE);
     expect(config.PVP_HEAL_PENALTY_REDUCE_RATE).toBe(PVP_HEAL_PENALTY_REDUCE_RATE_PERMILLE);
+    expect(config.PUNISH_DMG_REDUCE_VALUE).toBe(PUNISH_DMG_REDUCE_VALUE_PERMILLE);
     // Mécanisme PvP § 17.6 (extrait du binaire 1.4.9).
     expect(config.PVP_ATK_PENALTY_START_TURN).toBe(10);
     expect(config.PVP_ATK_PENALTY_LOOP_TURN).toBe(5);

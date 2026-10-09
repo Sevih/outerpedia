@@ -24,6 +24,7 @@ import setsData from '../../data/generated/solver/sets.json';
 import subTicksData from '../../data/generated/solver/sub-ticks.json';
 import trustCharacterData from '../../data/generated/solver/trust-character.json';
 import versionData from '../../data/generated/solver/version.json';
+import { singleValue } from '../lib/tables';
 
 const characters = charactersData as Record<
   string,
@@ -218,5 +219,20 @@ describe('solver — bestSkill (colonne Damage de gear-solver)', () => {
       expect(c.bestSkill!.factor, id).toBeGreaterThanOrEqual(500);
       expect(c.bestSkill!.factor, id).toBeLessThanOrEqual(5000);
     }
+  });
+});
+
+describe('singleValue (constantes lues des tables)', () => {
+  it('rend la valeur commune à toutes les lignes', () => {
+    expect(singleValue([0.4, 0.4, 0.4], 'x')).toBe(0.4);
+  });
+
+  it('jette si un patch fait diverger la colonne (le contrat n’en porte qu’une)', () => {
+    expect(() => singleValue([0.4, 0.5], 'x')).toThrow(/valeur unique/);
+  });
+
+  it('jette sur une colonne vide ou non numérique', () => {
+    expect(() => singleValue([], 'x')).toThrow();
+    expect(() => singleValue([Number.NaN], 'x')).toThrow();
   });
 });
