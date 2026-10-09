@@ -19,7 +19,8 @@ grâce à des primitives partagées et des contrats typés.
 | **Aire de travail brute** | `.gamedata/` | ❌ gitignoré | Gros fichiers du jeu, **locaux**, régénérables |
 
 `.gamedata/` n'est **jamais** committé (évite le bloat). Il est régénérable depuis
-le jeu et sauvegardé sur **Cloudflare R2** (cf. multi-PC plus bas).
+le jeu (cf. « Travailler sur 2 PC » plus bas) ; seules les entrées du build en
+sont recopiées, dans le dépôt privé `outerpedia-gamedata` (`datagen:snapshot`).
 
 Sa racine est **pilotable** (`GAMEDATA_ROOT`, cf. `lib/paths.ts`) : deux sources
 de jeu coexistent (§ « Récupérer les données du jeu »), chacune dans sa racine
@@ -54,10 +55,11 @@ contracts/    Couche 4 — schémas TS des données GÉNÉRÉES (le format uniqu
 build.ts      Couche 5 — orchestration en 3 fichiers :
 refresh.ts      build.ts   lance les générateurs → data/extracted/ ;
 promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
-                           jeu » (pull → extract → convert → build → promote),
-                           partagé par `pnpm dev` et `datagen:patch` — les DEUX
-                           en dry (le dev ne promeut plus auto ; l'intégration
-                           se fait par entité depuis l'admin, ou promote manuel) ;
+                           jeu » (pull → extract → convert → scripts python →
+                           build → promote → damage → [collect]), partagé par
+                           `pnpm dev` et `datagen:patch` — les DEUX en dry (le
+                           dev ne promeut plus auto ; l'intégration se fait par
+                           entité depuis l'admin, ou promote manuel) ;
                 promote.ts diff entité par entité + `--apply` → data/generated/.
 ```
 
@@ -70,13 +72,21 @@ promote.ts      refresh.ts définition UNIQUE du flux « rafraîchir depuis le
   (figer l'état committé d'un monstre).
 - **`curated/`** — outillage de la couche curée : les schémas de validation
   (personnages, gear reco, tags, effets…). L'édition se fait via l'admin.
+- **`damage/`** — pipeline des tables du calculateur de dégâts
+  (`pnpm damage:build`, joué aussi par `refresh`) → `data/generated/damage/`.
+- **`assets/`** — collecte des images vers le staging et publication R2
+  (`pnpm images`).
+- **Scripts autonomes** : `sync-derived.ts` (re-dérive solver et damage après
+  une intégration), `snapshot.ts` (`datagen:snapshot`, cf. plus bas),
+  `version-boss.ts` (rattrapage du versionnage de boss), `video-meta.ts`
+  (métadonnées YouTube des vidéos, `datagen:video-meta`).
 
 ### Exception assumée : l'outillage Python
 
-Cinq scripts échappent au « tout-TS », pour la **même** raison : lire un format
-binaire spécialisé — typetrees Unity pour quatre d'entre eux, tables OpenType
-pour le dernier — au même titre que l'extracteur .NET de la couche 0, donc
-**délibérément non réécrits en TS**.
+Six scripts échappent au « tout-TS », pour la **même** raison : lire un format
+binaire spécialisé — typetrees Unity pour cinq d'entre eux, tables OpenType
+pour `extract-font-metrics.py` — au même titre que l'extracteur .NET de la
+couche 0, donc **délibérément non réécrits en TS**.
 
 | Script                                           | Module      | Sortie committée                                 | Ce qu'il évite                                                       |
 | ------------------------------------------------ | ----------- | ------------------------------------------------ | -------------------------------------------------------------------- |
@@ -85,14 +95,23 @@ pour le dernier — au même titre que l'extracteur .NET de la couche 0, donc
 | `extract-portrait-fx.py` _(câblé le 2026-08-21)_ | `UnityPy`   | `datagen/assets/portrait-fx.json` + textures PNG | 38 « sprite introuvable » à la collecte, donc un portrait sans effet |
 | `extract-font-metrics.py` _(2026-08-08)_         | `fontTools` | `datagen/assets/portrait-font-metrics.json`      | Un `m_BestFit` faux, donc un nom qui déborde de sa boîte             |
 | `extract-anim-events.py` _(2026-08-22)_          | `UnityPy`   | `datagen/damage/anim-events.json`                | Un facteur de skill § 8.1 faux (le binaire somme les events du CLIP) |
+| `extract/bundle-version.py`                      | `UnityPy`   | aucune (une version sur stdout)                  | Une empreinte de dump sans version applicative du client Steam       |
 
-Le cinquième vit dans `datagen/damage/` (pipeline damage, pas assets) et n'est
-PAS câblé dans `refresh` : il se relance à la main après un patch
-(`python datagen/damage/extract-anim-events.py`, machine de datamine), puis
-`pnpm damage:build` — même logique de revue que le reste du pipeline damage
-(le diff git de `anim-events.json` et `characters.json` fait foi).
+`extract-anim-events.py` vit dans `datagen/damage/` (pipeline damage, pas
+assets). Il n'est pas une étape de `refresh` à lui seul : c'est
+`datagen/damage/build.ts` qui le lance en tête (depuis le 2026-08-25), et
+l'étape `damage` de `refresh` joue ce build. Sans UnityPy, il est SAUTÉ avec
+un avertissement et `anim-events.json` committé est pris tel quel ; il se
+relance seul par `python datagen/damage/extract-anim-events.py`. Même logique
+de revue que le reste du pipeline damage (le diff git de `anim-events.json` et
+`characters.json` fait foi).
 
-Le second mérite un mot : le packer d'atlas coupe les bords transparents, et
+`bundle-version.py` n'écrit rien de committé : `datagen:dump` (Steam)
+l'appelle pour lire `PlayerSettings.bundleVersion` dans `globalgamemanagers`
+et graver la version du jeu dans l'empreinte du dump (« inconnue » s'il échoue,
+jamais devinée).
+
+`extract-sprite-rect.py` mérite un mot : le packer d'atlas coupe les bords transparents, et
 AssetStudio n'exporte que ce qui reste. Un fichier de 111×128 pour un sprite de
 128×128 — et le rognage est rarement symétrique (`MT_4031033` perd 30 px à gauche
 et 0 à droite). Tout consommateur qui l'étire à la taille attendue le déforme ET
@@ -105,7 +124,7 @@ savoir**. La table est bornée à `at_thumbnailmonsterruntime` et
 re-découpe tous les icônes déjà servis par cet atlas — un atlas à la fois, et
 délibérément.
 
-Le dernier arrivé mérite aussi un mot : il vivait **hors pipeline** alors que sa
+`extract-portrait-fx.py` mérite aussi un mot : il vivait **hors pipeline** alors que sa
 sortie est committée — `manifest.ts` réclamait ses 38 textures sur toutes les
 machines, mais seule celle où on l'avait lancé à la main savait les produire. Il
 écrit en outre le `colorSpace` du build, que le rendu exige à `linear` (sinon il
@@ -125,7 +144,7 @@ relevé `portrait-fx-served.json`. Ni l'un ni l'autre ne fait échouer un patch
 pour un effet qui arrive — un effet que le site ne sait pas poser en entier
 reste un portrait statique, et le refresh le redit en dernière ligne.
 
-Les quatre premiers sont :
+Les quatre scripts de `datagen/assets/` sont :
 
 - **locaux** : joués automatiquement par le flux `refresh` (`pnpm dev` /
   `datagen:patch`) entre convert et build — les trois lecteurs de typetrees
@@ -169,8 +188,10 @@ Deux gardes distincts protègent la chaîne, tous deux rendus possibles par le f
 qu'elle est **déclarée** (`genSteps`) et non écrite en ligne droite d'appels : on
 ne peut annoncer ni reprendre une étape qui n'a pas de nom.
 
-**Pré-vol** — l'outillage python de TOUTES les étapes est sondé avant le pull, et
-ce qui sera sauté est annoncé tout de suite. Sonder au moment de l'étape rendait
+**Pré-vol** — l'outillage python de toutes les étapes déclarées avec un module
+python (`py` dans `genSteps`) est sondé avant le pull, et ce qui sera sauté est
+annoncé tout de suite. L'étape `damage` fait exception : `damage/build.ts` sonde
+UnityPy lui-même, au moment de lancer `extract-anim-events.py`. Sonder au moment de l'étape rendait
 la réponse juste mais tardive : un module manquant se découvrait après le pull et
 l'extract, soit un quart d'heure pour une information connaissable à la
 seconde 0. Le verdict est calculé une fois et réutilisé par la boucle — ce qui
@@ -199,7 +220,8 @@ checkpoint :
 - clé différente = le monde a bougé entre l'échec et la reprise.
 
 La clé porte l'empreinte de `.gamedata/files` **et** celle des sources
-`datagen/**` en `.ts`/`.py`. Cette seconde moitié est le garde qui compte : sans
+`datagen/**` en `.ts`/`.py` (plus `extract/listings.json`, que lit
+`extract-cs.ts`). Cette seconde moitié est le garde qui compte : sans
 elle, corriger `bytes-parser.ts` après un build cassé puis reprendre sauterait
 `convert` et ferait déboguer sur du JSON périmé. Elle est bornée aux SOURCES,
 jamais aux JSON du dossier — `face-icon-layout.json` & consorts sont des sorties
@@ -226,7 +248,8 @@ additif, l'ignorer (ou l'effacer à la main) ramène au comportement d'avant.
             │                       │  (`pnpm datagen:promote --apply` — revue explicite)
             │                       ▼
             │                data/generated/   ✅ VALIDÉ, committé → consommé par l'app
-            └──────────────► .gamedata/staging-images/  →  upload R2 → CDN
+            └──────────────► .assets-staging/  →  upload R2 → CDN
+                             (assets/ — `pnpm images`, ou `collect` de `pnpm dev`)
 ```
 
 - **Données écrites à la main** : `data/curated/` (✅ committé).
@@ -255,15 +278,17 @@ additif, l'ignorer (ou l'effacer à la main) ramène au comportement d'avant.
 
 ## Travailler sur 2 PC
 
-| Tu fais quoi                        | Ce qu'il te faut          | Sur l'autre PC                                    |
-| ----------------------------------- | ------------------------- | ------------------------------------------------- |
-| Coder / éditer `curated/` / builder | `git` (tout est committé) | `git pull` — c'est tout                           |
-| **Régénérer** (jeu a patché)        | l'aire `.gamedata/`       | la récupérer depuis **R2** (pas de ré-extraction) |
-| **Publier une BD / un wallpaper**   | le pool `.editorial/`     | `pnpm editorial:pull` (puis `:push` après ajout)  |
+| Tu fais quoi                        | Ce qu'il te faut          | Sur l'autre PC                                   |
+| ----------------------------------- | ------------------------- | ------------------------------------------------ |
+| Coder / éditer `curated/` / builder | `git` (tout est committé) | `git pull` — c'est tout                          |
+| **Régénérer** (jeu a patché)        | l'aire `.gamedata/`       | la reconstituer depuis le jeu (cf. ci-dessous)   |
+| **Publier une BD / un wallpaper**   | le pool `.editorial/`     | `pnpm editorial:pull` (puis `:push` après ajout) |
 
 Le quotidien est 100% git. Seule la régénération (rare) a besoin de `.gamedata/`,
 qui n'est **pas** synchronisé entre machines : sur l'autre PC, on le reconstitue
-par un `pnpm datagen:pull` depuis LDPlayer.
+par un `pnpm datagen:pull` depuis le client Steam installé (ou
+`pnpm datagen:pull-android` depuis LDPlayer, le secours). Pour seulement rejouer
+le build, l'instantané `outerpedia-gamedata` suffit (section suivante).
 
 `.editorial/` (BD 4-cut + wallpapers faits main) est le seul contenu ORIGINAL du
 projet : absent du jeu ET de git (binaires). Sa source de vérité est R2, préfixe
@@ -353,7 +378,7 @@ première erreur) :
 pnpm datagen:patch-android   # pull → extract → convert → build → résumé du diff
 pnpm datagen:promote --apply # si le résumé est cohérent : valider
 pnpm datagen:regen           # après une correction curée (/admin/effects…) : build + apply
-pnpm images                  # assets:collect + assets:push (R2) + auto-commit des états
+pnpm images                  # collectes (images, wallpapers, audio, BD) + push R2 + auto-commit des états
 ```
 
 **Incrémental & fiable** : ne tire que les fichiers nouveaux/modifiés, et
@@ -403,9 +428,10 @@ protections, dont deux automatiques :
   neuve) conditionne la détection.
 - **Versionnage au clic** (geste humain, à ton jugement — une maj sans impact
   guide ne se versionne pas) : sur la fiche `/admin/extractor/monsters/<id>`,
-  deux boutons — **Enregistrer** (applique l'extraction fraîche de CE monstre)
-  et **Versionner l'état committé** (fige l'état git HEAD dans
-  `data/generated/monster-archive/<id>@<n>.json`, append-only, committé).
+  deux boutons — **Save (apply extraction)** (applique l'extraction fraîche de
+  CE monstre) et **Version the committed state** (fige l'état git HEAD dans
+  `data/generated/monster-archive/<id>@<n>.json`, append-only, committé, puis
+  ré-épingle les guides — cf. plus bas).
 
 La **localisation** (où affronte-t-on le monstre : `spawns` = donjon + niveau
 réel + barres de vie ; `summonedBy`/`linkedTo` pour les adds jamais spawnés) est
@@ -416,19 +442,30 @@ par « Enregistrer » avec le monstre), les titres de modes dans
 `glossaries.modes`, et l'archive d'un boss embarque un snapshot des
 donjons/modes référencés pour rester lisible seule.
 
-Flux type : le boss `1` change de façon significative → **Versionner** (fige
-l'ancien sous `1@1`) puis **Enregistrer** (le live prend le nouvel état). La
+Flux type : le boss `1` change de façon significative → **Version the
+committed state** (fige l'ancien sous `1@1`) puis **Save** (le live prend le
+nouvel état). La
 version A du guide s'épingle sur `1@1`, la nouvelle version B suit le live.
 
+Le bouton ré-épingle les guides lui-même (`src/lib/admin/repin-guides.ts`, via
+la route `/api/admin/version/monster/<id>`) — versionner ne demande pas
+d'éditer un guide à la main :
+
+- références DIRECTES (`meta.bossId`, `meta.monsters`) encore en live :
+  réécrites en `<id>@<n>` dans le `meta.json` du guide ;
+- références par un COMBAT dans une version de guide (`config.json` de
+  `versions/…`) : la clé d'archive est ajoutée à son `pinned` ;
+- références par un combat dans un guide PLAT (`meta.group`, `meta.dungeons`) :
+  rapportées, pas épinglées — il n'y a pas de version où poser le pin ;
+- une référence déjà épinglée n'est jamais retouchée.
+
 > Le versionnage fige **HEAD** (dernier état committé — celui contre lequel les
-> guides ont été écrits) car en dev le promote automatique a souvent déjà écrasé
-> le disque avec le nouvel état. Si la maj a été committée il y a longtemps,
-> rattrapage CLI : `pnpm datagen:version-boss <id> --ref <commit>` (retrouver le
-> commit : `git log -- data/generated/monsters.json`).
->
-> TODO(guides) : quand le domaine guides existera, « Versionner » devra
-> ré-épingler AUTOMATIQUEMENT les guides référençant `<id>` vers `<id>@<n>` —
-> versionner ne doit jamais demander d'éditer la config d'un guide à la main.
+> guides ont été écrits) : le disque peut déjà porter le nouvel état (un
+> **Save** ou un `datagen:promote --apply` passé avant). Si la maj a été
+> committée il y a longtemps, rattrapage CLI :
+> `pnpm datagen:version-boss <id> --ref <commit>` (retrouver le commit :
+> `git log -- data/generated/monsters.json`). La CLI fige l'archive mais ne
+> ré-épingle PAS les guides.
 
 ---
 
@@ -482,13 +519,14 @@ git push                                 # 3. sur une branche → PR vers main
 
 Ce qui se passe tout seul, dans l'ordre :
 
-1. **Au commit** (lefthook `pre-commit`) : prettier + eslint sur les fichiers
-   indexés.
+1. **Au commit** (lefthook `pre-commit`) : re-datation des guides touchés
+   (`stamp:guides`), puis prettier + eslint sur les fichiers indexés.
 2. **Au push** (lefthook `pre-push`) : `pnpm typecheck` complet — un type cassé
    ne quitte jamais le poste.
-3. **Sur la PR** (CI, job `check`) : lint + typecheck + `next build` — la
-   validation finale avant merge.
-4. **Au merge dans `main`** (CI) : build de l'**image Docker** → **test de
+3. **Sur la PR** (CI, job `check`) : format:check + lint + typecheck + test +
+   `next build` — la validation finale avant merge.
+4. **Au merge dans `main`** (CI) : le même job `check` (sans `next build`),
+   puis build de l'**image Docker** → **test de
    démarrage** (l'image est lancée et doit répondre 2xx/3xx sur l'accueil en
    60 s, sinon rien n'est publié) → publication sur **GHCR** →
    **déploiement automatique** sur le VPS en SSH
@@ -502,8 +540,9 @@ Règles d'or :
 - On ne committe que `data/generated/` (validé via `datagen:promote`) et
   `data/curated/` (saisies humaines). `data/extracted/`, `.gamedata/` et
   `.assets-staging/` sont gitignorés — impossible de publier du non-validé.
-- Tant que le domaine n'est pas transféré, le déploiement `main` n'expose que
-  l'IP du VPS : on peut valider la chaîne complète sans risque public.
+- Le domaine est basculé depuis le 22/07/2026
+  (`docs/procedure/bascule-domaine.md`) : un merge dans `main` est en ligne sur
+  `outerpedia.com` dans la foulée.
 
 ## État
 

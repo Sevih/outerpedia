@@ -9,7 +9,8 @@
  * pools d'options…) → générateur `equipment` à part.
  *
  * Entrées (tables du jeu) : ItemTemplet, TextItem.
- * Sortie : data/items.json (id → entité), consommé par `item-catalog`.
+ * Sortie : `Record<id, Item>`, sans fichier propre — `item-catalog` le fusionne
+ * (avec monnaies et costumes) dans le catalogue unifié `items.json`.
  */
 import { isMain } from '../lib/is-main';
 import { loadTable, num } from '../lib/tables';
