@@ -22,6 +22,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { LANGUAGES } from '@/lib/i18n/config';
+import en from './en';
+import jp from './jp';
+import kr from './kr';
+import zh from './zh';
 
 const LOCALES_DIR = resolve(__dirname);
 const LANGS = Object.keys(LANGUAGES);
@@ -85,5 +89,66 @@ describe('locales — contrat des clés', () => {
         ![...dynamic].some((p) => k.startsWith(p)),
     );
     expect(dead, 'clés sans consommateur (vestige à purger, ou typo)').toEqual([]);
+  });
+});
+
+/**
+ * Le test de parité ci-dessus ne voit pas une VALEUR restée en anglais : une
+ * clé copiée sans être traduite a bien sa place dans chaque langue. En
+ * japonais, coréen et chinois, du texte latin identique à l'anglais est un
+ * signal fiable (en français et en espagnol, trop de mots s'écrivent pareil —
+ * « Guides », « Type », « Source » — pour en faire une règle).
+ *
+ * Deux listes, tenues EXACTES (une entrée traduite doit en sortir) :
+ *   - IDENTICAL_OK : sigles du wiki, marques, URL — identiques par nature ;
+ *   - TO_TRANSLATE : restes relevés par l'audit docs/audit-langues-liens.md.
+ */
+const IDENTICAL_OK: Record<string, string> = {
+  'page.equipment.title_suffix': 'jp,kr,zh',
+  'tools.damage-calculator.target.lv_prefix': 'jp,kr,zh',
+  'tools.damage-calculator.stat.HP': 'jp,kr',
+  'tools.damage-calculator.stat.ATK': 'jp,kr',
+  'tools.damage-calculator.stat.DEF': 'jp,kr',
+  'tools.damage-calculator.stat.SPD': 'jp,kr',
+  'tools.damage-calculator.stat.CHC': 'jp,kr',
+  'tools.damage-calculator.stat.CHD': 'jp,kr',
+  'tools.damage-calculator.stat.EFF': 'jp,kr',
+  'tools.damage-calculator.stat.RES': 'jp,kr',
+  'tools.damage-calculator.stat.PEN': 'jp,kr',
+  'tools.damage-calculator.stat.DR': 'jp,kr',
+  'tools.damage-calculator.stat.DMG_INC': 'jp,kr',
+  'tools.damage-calculator.equipment.ee': 'jp,kr',
+  'tools.damage-calculator.equipment.cf': 'jp,kr',
+  'tools.damage-calculator.equipment.passive_lv0': 'jp,kr,zh',
+  'tools.damage-calculator.equipment.passive_lv10': 'jp,kr,zh',
+  'tools.damage-calculator.attacker.tag_dmg': 'jp,kr,zh',
+  'footer.social.github': 'jp,kr,zh',
+  'footer.social.evamains_discord': 'jp,kr,zh',
+  'footer.social.reddit': 'jp,kr,zh',
+  'footer.social.youtube': 'jp,kr,zh',
+  'footer.social.rss': 'jp,kr,zh',
+  'filters.roles.dps': 'jp,kr',
+  'page.character.skill.level': 'jp,kr,zh',
+  'page.character.skill.cooldown': 'zh',
+  'wallpapers.cat.Outerpedia': 'jp,kr,zh',
+  'comics.credit': 'jp,kr,zh',
+  'tools.patch-history.era.smilegate': 'kr',
+  'link.officialwebsite': 'zh',
+};
+const TO_TRANSLATE: Record<string, string> = {
+  'equip.detail.minmax': 'jp,kr,zh',
+};
+
+describe('locales — valeurs restées en anglais (jp, kr, zh)', () => {
+  it('aucune valeur latine identique à l’anglais hors des deux listes', () => {
+    const cjk = { jp, kr, zh } as Record<string, Record<string, string>>;
+    const found: Record<string, string> = {};
+    for (const [key, value] of Object.entries(en as Record<string, string>)) {
+      // Les variables `{x}` ne comptent pas : « {start} — {end} » n'a rien à traduire.
+      if (!/[A-Za-z]{2,}/.test(value.replace(/\{[^}]*\}/g, ''))) continue;
+      const langs = Object.keys(cjk).filter((l) => cjk[l][key] === value);
+      if (langs.length) found[key] = langs.join(',');
+    }
+    expect(found).toEqual({ ...IDENTICAL_OK, ...TO_TRANSLATE });
   });
 });
