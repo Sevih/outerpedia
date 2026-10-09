@@ -88,111 +88,21 @@ interface KnownDivergence {
 }
 
 /**
- * ÉCARTS CONNUS — audit des doublons outerpedia ↔ gear-solver (PR #51,
- * `docs/audit-doublons-solver.md`), attribués par le code du client décompilé
- * et par des captures en jeu (tâche T16 de
- * `sevih-tool/docs/taches-cloud-2026-10-09.md`, section « Les captures » :
- * lv100 sans équipement, tout au max — Snow ATK 1503 / HP 6452 / DEF 1366 /
- * SPD 155, Lisha ATK 2093, Veronica ATK 1562, Claire ATK 1002 avec S2 niv. 1,
- * Ame CHC 46 % avec S2 niv. 5). Le test exige qu'ils divergent ENCORE, sur exactement ces
- * couches : le jour où la fiche est corrigée, il échoue, et c'est cette liste
- * qu'on vide.
+ * ÉCARTS CONNUS — aucun aujourd'hui. Le test exige qu'un écart listé diverge
+ * ENCORE sur exactement ses couches : le jour où il est corrigé, il échoue, et
+ * c'est cette liste qu'on vide.
  *
- * Ce que dit le client, pour une fiche hors combat (`CCharacterData.CalcStat`) :
- *   - un perso fusionné garde l'ID de son perso d'ORIGINE (`Initialize` reçoit
- *     `CharID`, la fusion ne renseigne que `FusionCharID`) ; `GetEvolutionStat`
- *     lit `GetCharacterEvolutionStatTempletList(ID)`, donc les évolutions du
- *     perso d'origine — la règle du solver (§ 2.2) ;
- *   - `CalcBasicStats` lit `Templet`, celui du même ID : les Min/Max de base
- *     sont ceux du perso d'origine. Les deux côtés prennent ceux du templet
- *     27xxxxx ; ils ne diffèrent que pour Snow et Lisha (Snow : ATK 66-659 à
- *     l'origine, 75-757 au templet de fusion). Les captures de Snow le
- *     confirment sur l'ATK, les HP, la DEF et la vitesse ;
- *   - `InitStatPremiumBuff` ← `CSkillManager.GetStatPremiumBuffList` prend, sur
- *     TOUS les skills du perso (pour un fusionné, les `SkillIDs` du templet de
- *     fusion, Skill_23 compris), TOUS les buffs `BT_STAT_PREMIUM` de création
- *     `PASSIVE` ciblant `ME` ou `MY_TEAM`, au niveau courant du skill ;
- *     `CStatValue.SetBuffPremiumValue` les cumule tous. Ni « premier buff », ni
- *     Skill_23 à la place de Skill_22 : la règle du solver (§ 2.4, confirmée
- *     par la capture de Lisha, classe + noyau = +20,2 %) ; et les passifs
- *     permanents de S1/S2/S3 y entrent comme les autres (§ 2.5) — confirmé par
- *     Ame (S2 niv. 5 : +25 CHC compté) et par Claire (S2 niv. 1, niveau sans
- *     buff : rien de compté).
- *
- * L'instantané n'est PAS régénéré ici : il le sera après le correctif de base
- * des fusionnés (T16). D'ici là, ses valeurs de Snow et Lisha portent la base
- * du templet de fusion — fausse, mais sans effet sur ce test, qui ne vérifie
- * que la divergence.
+ * Historique : l'audit des doublons (PR #51, `docs/audit-doublons-solver.md`)
+ * en avait trouvé neuf — les six Core Fusion (base prise au templet 27xxxxx,
+ * évolutions absentes, un seul buff de passif retenu) et les passifs permanents
+ * de S2 de Claire, Ame et Bell Cranel. Tranchés par le client décompilé et par
+ * huit captures en jeu du 09/10/2026 (Snow fusionné ATK 1503 / HP 6452 /
+ * DEF 1366 / SPD 155, Lisha ATK 2093, Veronica ATK 1562, Claire ATK 1002 avec
+ * S2 niv. 1, Ame CHC 46 % avec S2 niv. 5), puis corrigés des deux côtés : la
+ * base des fusionnés dans le contrat (T16, #59) et la fiche, qui lit désormais
+ * le contrat (T18, #60). L'instantané a été régénéré après ces correctifs.
  */
-const KNOWN_DIVERGENCES: Record<string, KnownDivergence> = {
-  // § 2.2 + § 2.4 — évolutions (absentes de la fiche) et passifs classe + noyau
-  // (réduits à un buff). Le wiki a tort sur les deux points.
-  '2700003': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Snow : évolutions + passifs',
-    verdict: 'partagé',
-    basis: 'capture',
-    detail:
-      'solver juste sur évolution et passif de noyau, faux sur la base (templet de fusion au lieu de 2000003) ; wiki faux sur les trois',
-  },
-  '2700005': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Lisha : évolutions + passifs',
-    verdict: 'partagé',
-    basis: 'capture',
-    detail:
-      'solver juste sur évolution et passifs classe + noyau cumulés, faux sur la base (templet de fusion au lieu de 2000005) ; wiki faux sur les trois',
-  },
-  '2700037': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Veronica : évolutions + passifs',
-    verdict: 'gear-solver',
-    basis: 'capture',
-    detail: 'même base des deux templets ; capture ATK seule',
-  },
-  '2700043': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Eternal : évolutions + passifs',
-    verdict: 'gear-solver',
-    basis: 'code',
-  },
-  '2700056': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Notia : évolutions + passifs',
-    verdict: 'gear-solver',
-    basis: 'code',
-  },
-  '2700070': {
-    layers: ['white', 'full'],
-    why: 'Core Fusion Epsilon : évolutions + passifs',
-    verdict: 'gear-solver',
-    basis: 'code',
-  },
-  // § 2.5 — passif S2 permanent (BT_STAT_PREMIUM PASSIVE sur soi), couche
-  // absente de la fiche : la portion blanche est juste, la fiche affichée ne
-  // l'est pas. Le client compte ce buff au niveau courant de S2.
-  '2000017': {
-    layers: ['full'],
-    why: 'Claire : S2 +10 % ATK',
-    verdict: 'gear-solver',
-    basis: 'code',
-    detail:
-      'comparaison au niveau max de S2 (1096) : calcul, pas capture. La capture (S2 niv. 1, ATK 1002) confirme seulement que le buff suit le niveau ; elle coïncide avec le wiki, qui ignore S2 à tout niveau',
-  },
-  '2000065': {
-    layers: ['full'],
-    why: 'Ame : S2 +25 CHC',
-    verdict: 'gear-solver',
-    basis: 'capture',
-    detail: 'CHC 46 % en jeu avec S2 niv. 5 : la valeur du solver, le wiki affiche 21',
-  },
-  '2000095': {
-    layers: ['full'],
-    why: 'Bell Cranel : S2 +30 % ATK',
-    verdict: 'gear-solver',
-    basis: 'code',
-  },
-};
+const KNOWN_DIVERGENCES: Record<string, KnownDivergence> = {};
 
 /** Écarts d'un perso sur une couche, sous la forme « lv100 HP wiki 5202 ≠ 7171 ». */
 function diffsOf(id: string, layer: Layer): string[] {
