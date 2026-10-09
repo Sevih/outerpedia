@@ -94554,20 +94554,20 @@
     "ingredients": {
       "base": {
         "atk": {
-          "min": 75,
-          "max": 757
+          "min": 66,
+          "max": 659
         },
         "def": {
-          "min": 34,
-          "max": 341
+          "min": 30,
+          "max": 297
         },
         "hp": {
-          "min": 519,
-          "max": 3530
+          "min": 301,
+          "max": 3070
         },
         "spd": {
-          "min": 138,
-          "max": 138
+          "min": 133,
+          "max": 133
         },
         "chc": {
           "min": 5,
@@ -95452,20 +95452,20 @@
     "ingredients": {
       "base": {
         "atk": {
-          "min": 86,
-          "max": 861
+          "min": 75,
+          "max": 749
         },
         "def": {
-          "min": 16,
-          "max": 167
+          "min": 14,
+          "max": 146
         },
         "hp": {
-          "min": 498,
-          "max": 3433
+          "min": 289,
+          "max": 2986
         },
         "spd": {
-          "min": 124,
-          "max": 124
+          "min": 119,
+          "max": 119
         },
         "chc": {
           "min": 5,
