@@ -45,11 +45,40 @@
       « Fiche perso », lots C11, B42, B39 et B40 — la coquille, le picker de
       héros partagé, les sous-onglets Fiche, Pros / Cons, Synergies, Skills et
       Gear reco, qui a quitté les Données), EE (sous-onglet « EE » de la
-      « Fiche perso », lot B43). Clos sans portage (lot A34) : Gear presets
+      « Fiche perso », lot B43), Monster (onglet « Monstres », lot C12 — le
+      câblage des chips ; ses stats, son intégration et ses versions sont de
+      l'extractor, étapes 19-20). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Monstres » — contrôles à l'écran (lot C12)** : le banc ne clique
+      pas, et aucun enregistrement réel n'a été joué. Relancer quick d'abord
+      (Ctrl-C puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet
+      dit « quick lancé avant ce code »). (1) Éditeurs › Monstres : le picker
+      s'ouvre de lui-même sur les monstres des GUIDES (« 543 des guides ·
+      2451 avec le site ») ; chercher le boss d'un guide récent par son nom
+      (« anni » → Annihilator, ses variantes distinguées par le stage) ou par
+      son id (`4318062`) ; « Site » élargit, les pastilles de type filtrent.
+      (2) Sa fiche : ses guides en liens (ils ouvrent le site de dev), ses
+      cartes de skills. ✕ sur une chip : pointillés, « rétablir ».
+      « ＋ effet » : le picker d'effets, la chip arrive « ajoutée ». Le menu
+      « sur la carte… » d'une chip : elle passe sur la carte choisie,
+      « déplacée » ; « par défaut » la rend. (3) « Enregistrer » — attendu :
+      UN commit `chore(monsters): <nom> (<id>)` qui ne porte que
+      `data/curated/monster-skills.json`, et dans le diff les seules clés
+      touchées. (4) Le badge « partagé par N monstres » sur un skill commun
+      (Sphinx Guardian `4044008` : ses cartes sont partagées par quatre
+      monstres) — y masquer une chip puis ouvrir un de ses jumeaux : le même
+      masquage. (5) L'admin par son URL (`/admin/editor/monsters/4044008`) :
+      le même état ; son lien « Monster » a quitté le menu Editor. (6) Après
+      « Pousser » et le déploiement : la page du guide, la chip masquée
+      absente. À juger : le `select` dans la chip (une chip devient large),
+      le picker sur « Site » (2 451 lignes redessinées à chaque frappe), les
+      liens de guide vers le site de DEV du poste plutôt que la prod, les
+      adds liés par le kit qui héritent de plusieurs guides (Ragnakeus
+      `4086001` : huit), et l'ordre du picker — par nom, pas les boss
+      d'abord.
 - [ ] **« Fiche perso » › EE — contrôles à l'écran (lot B43)** : le banc ne
       clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : l'état de la fiche sert maintenant

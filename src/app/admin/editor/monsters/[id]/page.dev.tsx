@@ -1,16 +1,9 @@
 import { notFound } from 'next/navigation';
 import type { Skill } from '@datagen/contracts';
-import {
-  MonsterKitEditor,
-  type EffectOption,
-  type KitChip,
-  type KitEditorSkill,
-} from '@/components/admin/MonsterKitEditor';
+import { MonsterKitEditor, type KitEditorSkill } from '@/components/admin/MonsterKitEditor';
 import { EntitySwitch } from '@/components/admin/EntitySwitch';
-import { monsterChipMeta, monsterSkillViews } from '@/lib/skill-view';
-import { resolveSkillText } from '@/lib/skills';
-import { getMergedEffects } from '@/lib/data/effects';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { monsterKitCards, monsterKitCatalog } from '@/lib/admin/monster-kit';
 import { committedMonsterSkills, committedMonsters } from '@/lib/admin/monster-store';
 import { extractedMonsterBundle } from '@/lib/admin/review-store';
 import { loadKitCurationSections } from '@/lib/admin/monster-skill-curated-store';
@@ -31,84 +24,22 @@ export default async function EditorMonsterPage({ params }: { params: Promise<{ 
   const m = bundle?.monster ?? committed;
   if (!m) notFound();
 
-  const committedSkills = committedMonsterSkills();
-  const skills = m.skills
-    .map((sid) => (bundle?.skills[sid] ?? committedSkills[sid]) as Skill | undefined)
-    .filter((s): s is Skill => Boolean(s));
-
-  // Positions sous les RÈGLES SEULES (caller/desc-réf, curation ignorée) : le
-  // « défaut » que l'éditeur matérialise quand aucun chipOwner n'est posé.
-  const defaultCards = new Map<string, string[]>();
-  for (const v of monsterSkillViews(skills, {})) {
-    for (const e of v.effects ?? []) {
-      if (!e.buff) continue;
-      const list = defaultCards.get(e.buff) ?? [];
-      if (!list.includes(v.skill.id)) list.push(v.skill.id);
-      defaultCards.set(e.buff, list);
-    }
-  }
-
-  const cur = loadKitCurationSections();
-  const kitIds = new Set(skills.map((s) => s.id));
-  const ownerOf = (buff: string): string | null => {
-    const o = cur.chipOwner[buff];
-    const candidates = Array.isArray(o) ? o : o ? [o] : [];
-    return candidates.find((c) => kitIds.has(c)) ?? null;
-  };
-  const hiddenOf = (buff: string): string[] =>
-    skills.map((s) => s.id).filter((sid) => cur.chipHide[sid]?.includes(buff));
-
-  const seen = new Set<string>();
-  const chips: KitChip[] = skills.flatMap((s) =>
-    (s.effects ?? []).flatMap((e) => {
-      if (!e.buff || seen.has(e.buff)) return [];
-      const meta = monsterChipMeta(e);
-      if (!meta) return [];
-      seen.add(e.buff);
-      return [
-        {
-          buff: e.buff,
-          carrier: s.id,
-          ...meta,
-          defaultCards: defaultCards.get(e.buff) ?? [s.id],
-          owner: ownerOf(e.buff),
-          hiddenOn: hiddenOf(e.buff),
-        },
-      ];
-    }),
+  // Les cartes et les chips du kit : le calcul partagé avec quick, sur
+  // l'extraction fraîche posée par-dessus le committé.
+  const { cards, chips } = monsterKitCards(
+    m,
+    { ...committedMonsterSkills(), ...(bundle?.skills as Record<string, Skill> | undefined) },
+    loadKitCurationSections(),
   );
-
-  const editorSkills: KitEditorSkill[] = skills.map((s) => ({
-    id: s.id,
-    name: s.name.en,
-    type: s.type,
-    // Placeholders [Buff_V/C/T_…] résolus aux vars du dernier niveau (sinon la
-    // desc s'affiche brute — comme le rendu public via SkillDescription).
-    ...(s.desc?.en
-      ? { desc: resolveSkillText(s.desc.en, s.levels[s.levels.length - 1]?.vars) }
-      : {}),
-    ...(s.icon ? { iconSrc: `/api/admin/sprite/${encodeURIComponent(s.icon)}` } : {}),
+  const editorSkills: KitEditorSkill[] = cards.map((c) => ({
+    id: c.id,
+    name: c.name,
+    type: c.type,
+    ...(c.desc ? { desc: c.desc } : {}),
+    ...(c.icon ? { iconSrc: `/api/admin/sprite/${encodeURIComponent(c.icon)}` } : {}),
   }));
-
-  // Catalogue du glossaire pour le bouton + (effets non masqués, nommés).
-  const catalog: Record<string, EffectOption> = Object.fromEntries(
-    getMergedEffects()
-      .filter((e) => !e.hidden && e.name.en)
-      .map((e) => [
-        e.id,
-        {
-          id: e.id,
-          name: e.name.en,
-          ...(e.icon ? { icon: e.icon } : {}),
-          isDebuff: e.isDebuff,
-          ...(e.irremovable ? { irremovable: true } : {}),
-        },
-      ]),
-  );
-
-  const chipAdd: Record<string, string[]> = Object.fromEntries(
-    skills.map((s) => [s.id, cur.chipAdd[s.id] ?? []]),
-  );
+  const catalog = monsterKitCatalog();
+  const chipAdd: Record<string, string[]> = Object.fromEntries(cards.map((c) => [c.id, c.added]));
 
   return (
     <div className="max-w-4xl space-y-5">

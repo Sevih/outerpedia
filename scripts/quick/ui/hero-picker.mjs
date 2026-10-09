@@ -5,7 +5,8 @@
  * visages. Elle sert aussi à choisir AUTRE CHOSE qu'un héros, quand ce n'est
  * qu'une question de contenu (un effet du glossaire, « Fiche perso » › Skills) :
  * l'appelant dessine alors ses tuiles (`tile`, `rows`) et nomme ce qu'on y
- * cherche (`placeholder`, `none`).
+ * cherche (`placeholder`, `none`), ce qui répond à sa recherche (`match`) et
+ * des pastilles à lui (`pills` : le type d'un monstre, onglet « Monstres »).
  *
  * Sa modale est À LUI : posée dans `<body>` au premier appel, stylée par
  * `hero-picker.css` (classes `hp-`), elle s'ouvre donc de n'importe quelle
@@ -31,8 +32,9 @@
 
 /**
  * Les filtres, gardés par l'appelant d'une ouverture à l'autre (la recherche,
- * elle, repart vide) : les pastilles enfoncées, et la valeur du groupe `seg`.
- * @typedef {{ elements: Set<string>, classes: Set<string>, seg: string }} HeroFilters
+ * elle, repart vide) : les pastilles enfoncées (élément, classe, celles de
+ * `pills`), et la valeur du groupe `seg`.
+ * @typedef {{ elements: Set<string>, classes: Set<string>, seg: string, pills?: Set<string> }} HeroFilters
  */
 
 /**
@@ -53,6 +55,12 @@
  * @property {{ label: string, options: readonly (readonly [string, string])[], test: (hero: any, value: string) => boolean }} [seg]
  *   Un groupe segmenté de plus dans la rangée de filtres (la nature d'un
  *   effet : tous, buffs, debuffs).
+ * @property {{ label: string, options: readonly (readonly [string, string])[], of: (item: any) => string }} [pills]
+ *   Des pastilles à LIBELLÉ de plus, après celles d'élément et de classe (le
+ *   type d'un monstre) : `of` rend la valeur d'un item ; aucune enfoncée = tout.
+ * @property {(item: any, q: string) => boolean} [match] Ce qui répond à la
+ *   recherche — `q` : la saisie en minuscules, sans blancs autour ; sans lui,
+ *   le nom qui la contient.
  * @property {(hero: any) => string} [hint] Le `title` d'une tuile ; sans lui, le nom.
  * @property {(item: any) => string} [tile] Le contenu d'une tuile, dessiné par
  *   l'appelant (déjà échappé) ; sans lui, le visage du héros, son élément, son nom.
@@ -69,7 +77,12 @@ const ELEMENTS = ['fire', 'water', 'earth', 'light', 'dark'];
 const CLASSES = ['defender', 'striker', 'ranger', 'mage', 'healer'];
 
 /** Les filtres d'un appelant qui n'en garde pas. */
-export const heroFilters = () => ({ elements: new Set(), classes: new Set(), seg: '' });
+export const heroFilters = () => ({
+  elements: new Set(),
+  classes: new Set(),
+  seg: '',
+  pills: new Set(),
+});
 /** @type {HeroFilters} */
 const shared = heroFilters();
 
@@ -116,6 +129,12 @@ const search = () => /** @type {HTMLInputElement} */ (document.getElementById('h
  */
 let open = null;
 
+/**
+ * Les pastilles de `pills` enfoncées (des filtres bâtis à la main n'en ont pas encore).
+ * @param {HeroFilters} filters
+ */
+const pillsOf = (filters) => (filters.pills ??= new Set());
+
 /** @param {string} path */
 const src = (path) => `${esc(open?.opts.imgBase ?? '')}/images/${path}.webp`;
 /**
@@ -129,7 +148,7 @@ const icon = (kind, slug, cls = '') =>
     `ui/${kind === 'element' ? 'elem/IG_Turn_Element_' : 'class/IG_Turn_Class_'}${cap(esc(slug))}`,
   )}" alt="" aria-hidden="true" />`;
 
-/** La rangée de filtres : les pastilles que le roster porte, puis le groupe `seg`. */
+/** La rangée de filtres : les pastilles que le roster porte, celles de `pills`, puis le groupe `seg`. */
 function filtersHtml() {
   if (!open) return '';
   const { opts, filters } = open;
@@ -151,6 +170,15 @@ function filtersHtml() {
   )
     .map((c) => tog('class', c, filters.classes.has(c)))
     .join('')}</div>${
+    opts.pills
+      ? `<div class="hp-togs" role="group" aria-label="${esc(opts.pills.label)}">${opts.pills.options
+          .map(
+            ([value, text]) =>
+              `<button class="hp-tog txt" type="button" data-pill="${esc(value)}" aria-pressed="${pillsOf(filters).has(value)}">${esc(text)}</button>`,
+          )
+          .join('')}</div>`
+      : ''
+  }${
     opts.seg
       ? `<div class="hp-seg" role="group" aria-label="${esc(opts.seg.label)}">${opts.seg.options
           .map(
@@ -167,10 +195,12 @@ function shown() {
   if (!open) return [];
   const { opts, filters } = open;
   const q = search().value.trim().toLowerCase();
-  const { seg } = opts;
+  const { seg, pills, match } = opts;
+  const pressed = pillsOf(filters);
   return opts.roster.filter(
     (c) =>
-      (!q || c.name.toLowerCase().includes(q)) &&
+      (!q || (match ? match(c, q) : c.name.toLowerCase().includes(q))) &&
+      (!pills || !pressed.size || pressed.has(pills.of(c))) &&
       (!filters.elements.size || (c.element !== undefined && filters.elements.has(c.element))) &&
       (!filters.classes.size || (c.class !== undefined && filters.classes.has(c.class))) &&
       (!seg || seg.test(c, filters.seg)),
@@ -271,9 +301,12 @@ function toggle(tog) {
       b.setAttribute('aria-pressed', String(b === tog));
     return;
   }
-  const [set, slug] = data.element
-    ? [filters.elements, data.element]
-    : [filters.classes, data.class ?? ''];
+  const [set, slug] =
+    data.pill !== undefined
+      ? [pillsOf(filters), data.pill]
+      : data.element
+        ? [filters.elements, data.element]
+        : [filters.classes, data.class ?? ''];
   if (!set.delete(slug)) set.add(slug);
   tog.setAttribute('aria-pressed', String(set.has(slug)));
 }

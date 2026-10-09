@@ -1,0 +1,287 @@
+/* Onglet « Monstres » : le monstre choisi, la savebar, les cartes de skills de
+   son kit et leurs chips d'effets, et les lignes de son picker. Le reste —
+   carte, `.savebar`, `.btn`, `.badge`, `.chip` — vient de `quick.css` ; le
+   picker, de `hero-picker.css`. Les cartes et les chips sont celles du
+   sous-onglet Skills de la « Fiche perso », recopiées sous `m-` faute de
+   composant commun. */
+
+/* ---------------------------------------------------------------- le monstre */
+#tab-monsters .m-char {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+}
+#tab-monsters .m-who {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+#tab-monsters .m-face {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 12px;
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+#tab-monsters .m-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+#tab-monsters .m-id strong {
+  font-size: 16px;
+}
+#tab-monsters .m-traits {
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-monsters .m-mono {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-monsters .m-guides {
+  font-size: 13px;
+}
+#tab-monsters .m-link {
+  color: var(--accent);
+}
+#tab-monsters #m-pick {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- savebar */
+#tab-monsters .savebar[hidden] {
+  display: none;
+}
+#tab-monsters #m-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+/* `.savebar span` pousse à gauche : ici les badges se suivent. */
+#tab-monsters #m-count span {
+  margin-right: 0;
+}
+#tab-monsters #m-panel:empty {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- le kit
+   Une carte par skill, deux par rangée, une seule sous 1000 px : l'icône du
+   skill, son nom, son id et son type en tête ; sa description telle que le jeu
+   l'écrit ; puis ses chips d'effets et « ＋ effet ». */
+#tab-monsters .m-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+#tab-monsters .m-wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 1000px) {
+  #tab-monsters .m-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-monsters .m-card .card-head {
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-monsters .m-card.ko {
+  border-color: var(--danger);
+}
+#tab-monsters .m-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 18px;
+}
+#tab-monsters .m-body p {
+  margin: 0;
+}
+/* Le refus d'une carte, sous elle ; vide, la ligne ne prend pas de place. */
+#tab-monsters .m-err {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+#tab-monsters .m-err:empty {
+  display: none;
+}
+#tab-monsters .m-skico {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: contain;
+}
+#tab-monsters .m-skid {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-monsters .m-desc {
+  color: var(--content-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+#tab-monsters .m-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+/* Une chip d'effet : la `.chip` de la charte, sa tuile, son nom, son menu, son
+   bouton. Masquée : pointillés, atténuée, le nom barré, « rétablir » au lieu
+   de ✕. Bord accent : son état n'est pas celui du disque. */
+#tab-monsters .m-chip {
+  gap: 6px;
+  padding-left: 4px;
+}
+#tab-monsters .m-chip.dirty {
+  border-color: var(--accent);
+}
+#tab-monsters .m-chip.off {
+  border-style: dashed;
+  background: transparent;
+}
+#tab-monsters .m-chip.off .m-fx,
+#tab-monsters .m-chip.off .m-chn {
+  opacity: 0.5;
+}
+#tab-monsters .m-chip.off .m-chn {
+  text-decoration: line-through;
+}
+#tab-monsters .m-chip .badge {
+  height: 18px;
+  padding: 0 6px;
+}
+#tab-monsters .m-chip .btn.sm {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+/* Le menu d'une chip, « sur la carte… » : le `select` de la charte, à la
+   hauteur de la chip. Bord accent : la carte choisie n'est pas celle du disque. */
+#tab-monsters .m-move {
+  width: auto;
+  max-width: 150px;
+  height: 22px;
+  padding: 0 22px 0 8px;
+  border-radius: 999px;
+  background-position: right 6px center;
+  color: var(--content-muted);
+  font-size: 12px;
+  text-overflow: ellipsis;
+}
+#tab-monsters .m-move.dirty {
+  border-color: var(--accent);
+  color: var(--content);
+}
+/* La tuile d'un effet, celle du site (`EffectIconTile`), de l'onglet Effets
+   (`.x-ico`) et de la « Fiche perso » (`.c-fx`) : fond noir, l'icône en masque
+   teinté de sa nature — les teintes de `globals.css`. Elle vit aussi dans le
+   picker d'effets, posé dans `<body>`. */
+#tab-monsters .m-fx,
+.hp-modal .m-fx {
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #000;
+}
+.hp-modal .m-fx {
+  width: 28px;
+  height: 28px;
+}
+#tab-monsters .m-fx.none,
+.hp-modal .m-fx.none {
+  border: 1px dashed var(--line);
+  background: transparent;
+}
+#tab-monsters .m-fx i,
+.hp-modal .m-fx i {
+  position: absolute;
+  inset: 0;
+  background: var(--buff-tint);
+  -webkit-mask: var(--m-src) center / contain no-repeat;
+  mask: var(--m-src) center / contain no-repeat;
+  mask-mode: luminance;
+}
+#tab-monsters .m-fx.debuff i,
+.hp-modal .m-fx.debuff i {
+  background: var(--debuff-tint);
+}
+#tab-monsters .m-fx img,
+.hp-modal .m-fx img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------- le picker
+   Une ligne du picker partagé (`rows`) : l'icône, le nom et, dessous, où on
+   affronte le monstre ; à droite son type et « N guides ». Le panneau s'élargit
+   et ne porte que deux colonnes : c'est le stage, en fin de ligne, qui distingue
+   les variantes d'un même boss. */
+.hp-modal .hp-panel:has(.m-pk) {
+  width: 1040px;
+}
+.hp-modal .hp-tiles.rows:has(.m-pk) {
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+}
+.hp-modal .m-pk {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hp-modal .m-pico {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+.hp-modal .m-pn {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hp-modal .m-pname,
+.hp-modal .m-pwhere {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hp-modal .m-pname {
+  color: var(--content);
+}
+.hp-modal .m-pwhere {
+  color: var(--content-muted);
+  font-size: 11.5px;
+}
+.hp-modal .m-pk .badge {
+  flex: none;
+}

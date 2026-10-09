@@ -89,6 +89,27 @@ import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
 import {
+  guideMonsterIds,
+  monsterKitCards,
+  monsterKitCatalog,
+  monsterPlaces,
+  pickMonsterKit,
+  type GuideRef,
+  type MonsterKitCard,
+  type MonsterKitDisk,
+  type MonsterKitSections,
+} from '@/lib/admin/monster-kit';
+import {
+  applyKitCuration,
+  loadKitCurationSections,
+  type KitCurationPatch,
+} from '@/lib/admin/monster-skill-curated-store';
+import {
+  committedMonsterSkills,
+  committedMonsters,
+  siteMonsterIds,
+} from '@/lib/admin/monster-store';
+import {
   applyCharacterKitCuration,
   loadCharacterKitSections,
   type CharacterKitPatch,
@@ -146,6 +167,7 @@ import {
 } from '@/lib/data/equipment';
 import { eeEditorChips, eeModelForView, type EeChipMeta } from '@/lib/data/equipment-detail';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
+import { getEncounters, modeLabel } from '@/lib/data/encounters';
 import { listGuides } from '@/lib/data/guides';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
@@ -160,6 +182,7 @@ import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
 import { transcendenceLabel } from '@/lib/transcendence';
 import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
+import type { KitChip } from '@/components/admin/MonsterKitEditor';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
 import {
   CHANGELOG_TYPE_ICON,
@@ -178,12 +201,15 @@ import {
 } from '@/components/tierlist/tiers';
 import type {
   CharacterCurated,
+  DungeonRef,
   EffectCurated,
   GameVersion,
   GearBuild,
   GearPresets,
   LocalizedText,
+  Monster,
   ProsCons,
+  Skill,
   SkillPriority,
 } from '@contracts';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
@@ -199,7 +225,7 @@ import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
 import { recruitWindows, type RecruitWindow } from '@datagen/generators/recruit';
 import { findSteamInstall, installedResVersion } from '@datagen/extract/steam';
-import { loadTable, tablePath, type Row } from '@datagen/lib/tables';
+import { fileStamp, loadTable, tablePath, type Row } from '@datagen/lib/tables';
 import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
 /** Journal rendu tel quel dans l'interface (une ligne = une étape). */
@@ -1003,14 +1029,15 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * de quick. Le lot qui porte une page y ajoute sa ligne : le tableau de bord y
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
  * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
- * EE (son sous-onglet « EE ») et les outils Pro / Con et Synergy (deux autres
- * de ses sous-onglets) — l'inbox, elle, ne renvoie encore qu'à l'extractor, aux
- * tags et aux données du jeu.
+ * EE (son sous-onglet « EE »), celui des monstres (« Monstres ») et les outils
+ * Pro / Con et Synergy (deux autres sous-onglets de la fiche) — l'inbox, elle,
+ * ne renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/characters': 'character',
   '/admin/editor/ee': 'character',
   '/admin/editor/effects': 'effects',
+  '/admin/editor/monsters': 'monsters',
   '/admin/tools/pros-cons': 'character',
   '/admin/tools/synergies': 'character',
 };
@@ -3818,6 +3845,510 @@ export async function saveEffects(
     report,
   );
   return out(commit.ok && !refused.length, [...j.lines, ...commit.log]);
+}
+
+// --------------------------------------------------------------- monstres ----
+
+/** Le curé du câblage des chips de skills de monstres : la SEULE écriture de l'onglet. */
+const MONSTER_SKILLS_PATH = 'data/curated/monster-skills.json';
+
+/** Un monstre, pour le picker de l'onglet « Monstres » et l'en-tête de sa fiche. */
+export interface MonsterRosterRow {
+  id: string;
+  /** Nom en anglais. */
+  name: string;
+  type: string;
+  /** L'adresse de son icône (`img.monster`). */
+  icon: string;
+  /** Où on l'affronte : « mode · stage / zone » de ses spawns, comme la sidebar de l'admin. */
+  place: string;
+  /** Les guides qui le désignent ; vide : un monstre du site, sans guide. */
+  guides: GuideRef[];
+}
+
+/**
+ * Les lectures de l'onglet « Monstres » : les monstres et leurs skills COMMITTÉS
+ * (`data/generated/`), le curé des chips, le catalogue des effets, les monstres
+ * que les guides désignent, ceux que le site utilise (lève sans tables du jeu),
+ * les donjons où lire un spawn — et `stamp`, ce qui date le tout : le roster
+ * n'est recalculé que s'il bouge.
+ */
+export interface MonstersDisk {
+  monsters: () => Record<string, Monster>;
+  skills: () => Record<string, Skill>;
+  sections: () => MonsterKitSections;
+  catalog: () => Record<string, EffectOption>;
+  guideIds: (monsters: Record<string, Monster>) => Map<string, GuideRef[]>;
+  siteIds: () => Set<string>;
+  dungeons: () => Record<string, DungeonRef>;
+  stamp: () => string;
+}
+
+/** La lecture et les écritures de `saveMonsterKit`, injectées : le store de l'admin et git. */
+export interface MonstersDeps extends MonstersDisk {
+  applyKit: (patch: KitCurationPatch) => Promise<string[]>;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Un JSON de `data/generated/` gardé en mémoire tant que son fichier n'a pas bougé (7 et 12 Mo). */
+function stamped<T>(path: string, read: () => T): () => T {
+  let kept: { stamp: string; value: T } | undefined;
+  return () => {
+    const stamp = fileStamp(path);
+    if (kept?.stamp !== stamp) kept = { stamp, value: read() };
+    return kept.value;
+  };
+}
+
+/** Le dossier des guides : leurs `meta.json` et les `config.json` de leurs versions. */
+const GUIDES_DIR = 'src/app/[lang]/guides/_contents';
+
+/** La date la plus récente des fichiers où un guide désigne un monstre, et leur compte. */
+function guideFilesStamp(): string {
+  let latest = 0;
+  let count = 0;
+  const see = (path: string): void => {
+    const at = statSync(path, { throwIfNoEntry: false })?.mtimeMs;
+    if (at === undefined) return;
+    count++;
+    latest = Math.max(latest, at);
+  };
+  const dirs = (path: string): string[] => {
+    try {
+      return readdirSync(path, { withFileTypes: true })
+        .filter((d) => d.isDirectory())
+        .map((d) => resolve(path, d.name));
+    } catch {
+      return [];
+    }
+  };
+  for (const category of dirs(resolve(GUIDES_DIR)))
+    for (const guide of dirs(category)) {
+      see(resolve(guide, 'meta.json'));
+      for (const version of dirs(resolve(guide, 'versions'))) see(resolve(version, 'config.json'));
+    }
+  return `${count}:${latest}`;
+}
+
+/**
+ * Celles des routes : le COMMITTÉ (ce que le site montre — quick édite donc
+ * sans les tables du jeu), le store de l'admin, le vrai `commitPaths`.
+ */
+export const MONSTERS_DEPS: MonstersDeps = {
+  monsters: stamped('data/generated/monsters.json', committedMonsters),
+  skills: stamped('data/generated/monster-skills.json', committedMonsterSkills),
+  sections: loadKitCurationSections,
+  catalog: () => monsterKitCatalog(),
+  guideIds: guideMonsterIds,
+  siteIds: siteMonsterIds,
+  dungeons: getEncounters,
+  stamp: () =>
+    [
+      fileStamp('data/generated/monsters.json'),
+      fileStamp('data/generated/encounters.json'),
+      guideFilesStamp(),
+    ].join('|'),
+  applyKit: applyKitCuration,
+  commitPaths,
+};
+
+/** Ce que le roster calcule une fois : ses lignes, et qui porte chaque skill. */
+interface MonstersIndex {
+  roster: MonsterRosterRow[];
+  rows: Map<string, MonsterRosterRow>;
+  counts: { guides: number; site: number };
+  /** Sans tables du jeu, « utilisés par le site » ne se calcule pas : la raison. */
+  siteError?: string;
+  /** skill → les monstres qui le portent. */
+  carriers: Map<string, string[]>;
+}
+
+const monstersMemo = new WeakMap<MonstersDisk, { stamp: string; index: MonstersIndex }>();
+
+/** Ce que montre un monstre que le jeu ne nomme pas. */
+const NO_NAME = '(sans nom)';
+
+/** Par nom, puis par id ; les monstres sans nom ferment la liste. */
+const byName = (a: MonsterRosterRow, b: MonsterRosterRow): number =>
+  Number(a.name === NO_NAME) - Number(b.name === NO_NAME) ||
+  a.name.localeCompare(b.name) ||
+  a.id.localeCompare(b.id);
+
+/** L'index des monstres, recalculé quand `disk.stamp()` bouge. */
+function monstersIndex(disk: MonstersDisk): MonstersIndex {
+  const stamp = disk.stamp();
+  const kept = monstersMemo.get(disk);
+  if (kept?.stamp === stamp) return kept.index;
+
+  const monsters = disk.monsters();
+  const dungeons = disk.dungeons();
+  const modeNames = new Map<string, string>();
+  for (const d of Object.values(dungeons))
+    if (!modeNames.has(d.mode)) modeNames.set(d.mode, modeLabel(d, DEFAULT_LANG));
+  const guides = disk.guideIds(monsters);
+  const row = (m: Monster): MonsterRosterRow => {
+    const { modes, zones } = monsterPlaces(m, dungeons);
+    return {
+      id: m.id,
+      name: m.name.en || NO_NAME,
+      type: m.type,
+      icon: img.monster(m.icon),
+      // Les deux premiers de chaque, comme la sidebar de l'admin.
+      place: [
+        modes
+          .slice(0, 2)
+          .map((mode) => modeNames.get(mode) ?? mode)
+          .join(', '),
+        zones.slice(0, 2).join(', '),
+      ]
+        .filter(Boolean)
+        .join(' · '),
+      guides: guides.get(m.id) ?? [],
+    };
+  };
+
+  let site = new Set<string>();
+  let siteError = '';
+  try {
+    site = disk.siteIds();
+  } catch (e: unknown) {
+    siteError = e instanceof Error ? e.message : String(e);
+  }
+  const all = Object.values(monsters);
+  const inGuides = all
+    .filter((m) => guides.has(m.id))
+    .map(row)
+    .sort(byName);
+  const inSite = all
+    .filter((m) => !guides.has(m.id) && site.has(m.id))
+    .map(row)
+    .sort(byName);
+  const roster = [...inGuides, ...inSite];
+
+  const carriers = new Map<string, string[]>();
+  for (const m of all)
+    for (const sid of new Set(m.skills)) {
+      const list = carriers.get(sid);
+      if (list) list.push(m.id);
+      else carriers.set(sid, [m.id]);
+    }
+
+  const index: MonstersIndex = {
+    roster,
+    rows: new Map(roster.map((r) => [r.id, r])),
+    counts: { guides: inGuides.length, site: roster.length },
+    ...(siteError ? { siteError } : {}),
+    carriers,
+  };
+  // Un calcul sans la liste du site n'est pas gardé : les tables peuvent arriver.
+  if (!siteError) monstersMemo.set(disk, { stamp, index });
+  return index;
+}
+
+/**
+ * Le roster de l'onglet « Monstres » : ceux que les GUIDES désignent d'abord
+ * (`guideMonsterIds`, chacun avec ses guides), puis les autres monstres que le
+ * site utilise (`siteMonsterIds`) — chaque groupe par nom. `counts.site` compte
+ * les deux. Servi à part de l'état d'un monstre, et gardé tant que ni les
+ * monstres, ni les donjons, ni les guides n'ont bougé. Sans tables du jeu sur
+ * le poste, la liste du site manque (`siteError`) : les monstres des guides,
+ * eux, se lisent du committé.
+ */
+export function monstersRoster(disk: MonstersDisk = MONSTERS_DEPS) {
+  const { roster, counts, siteError } = monstersIndex(disk);
+  return { roster, counts, ...(siteError ? { siteError } : {}) };
+}
+
+/** Une carte du kit telle que la page la reçoit : l'adresse de son icône, pas son sprite. */
+export type MonsterSheetCard = Omit<MonsterKitCard, 'icon'> & { iconSrc?: string };
+
+/** Combien de noms de monstres un badge « partagé » cite. */
+const SHARED_NAMES = 5;
+
+/**
+ * La fiche d'un monstre, pour l'onglet « Monstres » : sa ligne (ses guides
+ * compris), les cartes de son kit et leurs chips (`monsterKitCards` sur le
+ * COMMITTÉ — ce que le site montre), ce que le disque en cure, restreint à ce
+ * kit (`disk` : `chipOwner`, `chipHide`, `chipAdd` — renvoyé tel quel à
+ * l'enregistrement, c'est son `was`), le catalogue des effets et le dossier de
+ * leurs icônes, où mènent les liens de guide (`guideBase`), et `shared` : par
+ * skill que d'AUTRES monstres portent aussi, leur nombre (lui compris) et
+ * jusqu'à cinq de leurs noms — masquer ou ajouter sur un tel skill vaut pour
+ * tous. Lu du disque à chaque appel. `error` : le monstre n'est pas du committé.
+ */
+export function monsterSheetState(id: string, disk: MonstersDisk = MONSTERS_DEPS) {
+  const monsters = disk.monsters();
+  const m = monsters[id];
+  if (!m) return { error: `monstre inconnu : ${id}` };
+  const index = monstersIndex(disk);
+  const { cards, chips } = monsterKitCards(m, disk.skills(), disk.sections());
+  const shared: Record<string, { count: number; names: string[] }> = {};
+  for (const card of cards) {
+    const ids = index.carriers.get(card.id) ?? [];
+    if (ids.length < 2) continue;
+    const names = [...new Set(ids.map((mid) => monsters[mid]?.name.en || mid))];
+    shared[card.id] = { count: ids.length, names: names.slice(0, SHARED_NAMES) };
+  }
+  return {
+    monster: index.rows.get(id) ?? {
+      id,
+      name: m.name.en || NO_NAME,
+      type: m.type,
+      icon: img.monster(m.icon),
+      place: '',
+      guides: [],
+    },
+    kit: {
+      cards: cards.map(({ icon, ...card }): MonsterSheetCard => ({
+        ...card,
+        ...(icon ? { iconSrc: img.skill(icon) } : {}),
+      })),
+      chips,
+    },
+    disk: pickMonsterKit(
+      disk.sections(),
+      cards.map((c) => c.id),
+    ),
+    catalog: disk.catalog(),
+    sprite: EFFECT_SPRITE,
+    shared,
+    guideBase: `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/guides`,
+  };
+}
+
+/**
+ * Ce que l'onglet envoie : par buff déplacé, sa carte (`null` : par défaut) ;
+ * par carte modifiée, la liste ENTIÈRE de ses buffs masqués et celle de ses
+ * effets ajoutés.
+ */
+export interface MonsterKitChanges {
+  chipOwner?: Record<string, string | null>;
+  chipHide?: Record<string, string[]>;
+  chipAdd?: Record<string, string[]>;
+}
+
+/** Un refus situé à sa carte ; sans carte, il vaut pour l'envoi entier. */
+export interface MonsterKitRefusal {
+  card?: string;
+  reason: string;
+}
+
+/**
+ * Ce que rend `saveMonsterKit`. `written` : le store a écrit, la page relit le
+ * disque. `stale` : refusé parce que le disque ne portait plus, pour ce kit, ce
+ * que la page avait chargé — rien n'a été écrit, la page rend le disque.
+ */
+export interface MonsterKitOutcome extends Outcome {
+  written: boolean;
+  stale: boolean;
+  refused: MonsterKitRefusal[];
+}
+
+/** Une section par clé triée : deux lectures du même état se comparent. */
+const sortedKeys = (rec: Record<string, unknown> | undefined): Record<string, unknown> =>
+  Object.fromEntries(Object.entries(rec ?? {}).sort(([a], [b]) => a.localeCompare(b)));
+
+const sameKitDisk = (a: Partial<MonsterKitDisk> | undefined, b: MonsterKitDisk): boolean =>
+  (['chipOwner', 'chipHide', 'chipAdd'] as const).every((section) =>
+    sameJson(sortedKeys(a?.[section]), sortedKeys(b[section])),
+  );
+
+const isRecord = (v: unknown): v is Record<string, unknown> =>
+  Boolean(v) && typeof v === 'object' && !Array.isArray(v);
+
+/**
+ * Le câblage venu de la page, contrôlé contre le kit que le SERVEUR calcule,
+ * le disque et le catalogue — le contrôle de `planKit`, plus `chipOwner` :
+ *   - un buff déplacé est une chip de ce kit, sa cible une carte du kit ou
+ *     `null` (par défaut) ;
+ *   - une carte de `chipHide` ou de `chipAdd` est un skill du kit ; une ref
+ *     masquée NOUVELLE est une chip que cette carte montre (par défaut, par le
+ *     disque ou par un déplacement de cet envoi), un effet ajouté NOUVEAU est du
+ *     catalogue ; une ref HÉRITÉE du fichier, elle, reste.
+ * Ce que le disque porte déjà n'est pas un changement ; une carte en écart
+ * n'est pas écrite du tout. `patch` : ce qui bouge ; `said` : le journal.
+ */
+function planMonsterKit(
+  raw: unknown,
+  cards: readonly MonsterKitCard[],
+  chips: readonly KitChip[],
+  disk: MonsterKitDisk,
+  catalog: Record<string, EffectOption>,
+): { patch: Required<MonsterKitChanges>; said: string[]; issues: MonsterKitRefusal[] } | string {
+  if (!isRecord(raw)) return 'forme inattendue';
+  const patch: Required<MonsterKitChanges> = { chipOwner: {}, chipHide: {}, chipAdd: {} };
+  const issues: MonsterKitRefusal[] = [];
+  const cardOf = (id: string) => cards.find((c) => c.id === id);
+  const label = (id: string): string => cardOf(id)?.name || id;
+
+  const owners = raw.chipOwner ?? {};
+  if (!isRecord(owners)) return 'chipOwner : forme inattendue';
+  for (const [buff, target] of Object.entries(owners)) {
+    const chip = chips.find((c) => c.buff === buff);
+    if (!chip) {
+      issues.push({ reason: `« ${buff} » : pas une chip de ce kit` });
+      continue;
+    }
+    // Le refus se lit là où la chip est montrée : sa carte du disque.
+    const at = chip.owner ?? chip.defaultCards[0];
+    if (target !== null && (typeof target !== 'string' || !cardOf(target))) {
+      issues.push({
+        card: at,
+        reason: `« ${chip.name} » : « ${String(target)} » n’est pas une carte de ce kit`,
+      });
+      continue;
+    }
+    if (target !== (disk.chipOwner[buff] ?? null)) patch.chipOwner[buff] = target;
+  }
+
+  /** Les cartes où une chip peut se montrer : sa place du disque, et celle de cet envoi. */
+  const shownOn = (chip: KitChip): string[] => {
+    const moved = patch.chipOwner[chip.buff];
+    return [...chip.defaultCards, ...(chip.owner ? [chip.owner] : []), ...(moved ? [moved] : [])];
+  };
+  for (const section of KIT_SECTIONS) {
+    const sent = raw[section] ?? {};
+    if (!isRecord(sent)) return `${section} : forme inattendue`;
+    for (const [cid, list] of Object.entries(sent)) {
+      if (!cardOf(cid)) {
+        issues.push({ card: cid, reason: 'pas une carte de ce monstre' });
+        continue;
+      }
+      if (!Array.isArray(list) || list.some((v) => typeof v !== 'string')) {
+        issues.push({ card: cid, reason: `${section} : une liste de refs attendue` });
+        continue;
+      }
+      const clean = [...new Set((list as string[]).map((v) => v.trim()).filter(Boolean))];
+      const before = disk[section][cid] ?? [];
+      if (sameJson(clean, before)) continue;
+      const known = (ref: string): boolean =>
+        section === 'chipHide'
+          ? chips.some((c) => c.buff === ref && shownOn(c).includes(cid))
+          : ref in catalog;
+      const stray = clean.filter((ref) => !before.includes(ref) && !known(ref));
+      if (stray.length)
+        issues.push({
+          card: cid,
+          reason: `${stray.map((ref) => `« ${ref} »`).join(', ')} : ${
+            section === 'chipHide' ? 'pas une chip de cette carte' : 'effet inconnu du glossaire'
+          }`,
+        });
+      else patch[section][cid] = clean;
+    }
+  }
+  for (const { card } of issues)
+    if (card) for (const section of KIT_SECTIONS) delete patch[section][card];
+
+  const said = [
+    ...Object.entries(patch.chipOwner).map(([buff, target]) => {
+      const name = chips.find((c) => c.buff === buff)?.name ?? buff;
+      return target
+        ? `« ${name} » : déplacée sur « ${label(target)} »`
+        : `« ${name} » : remise à sa place par défaut`;
+    }),
+    ...cards
+      .filter((c) => KIT_SECTIONS.some((section) => c.id in patch[section]))
+      .map((c) => {
+        const n = (section: 'chipHide' | 'chipAdd'): number =>
+          (patch[section][c.id] ?? disk[section][c.id] ?? []).length;
+        const [hidden, added] = [n('chipHide'), n('chipAdd')];
+        return `chips de « ${c.name || c.id} » : ${hidden} masquée${hidden > 1 ? 's' : ''}, ${added} ajoutée${added > 1 ? 's' : ''}`;
+      }),
+  ];
+  return { patch, said, issues };
+}
+
+/**
+ * Enregistre le câblage des chips d'UN monstre, en un geste et un commit.
+ *
+ * Dans l'ordre :
+ *   - `was` — les trois sections du curé restreintes au kit, telles que la page
+ *     les avait chargées (`disk` de `monsterSheetState`) — doit être ce que le
+ *     disque porte encore : sinon tout est refusé `stale`, SANS écriture
+ *     (l'admin ou l'autre poste a écrit entre-temps, et un skill est souvent
+ *     partagé : un autre monstre a pu le régler) ;
+ *   - l'envoi est contrôlé par `planMonsterKit` contre le kit que le serveur
+ *     calcule pour CE monstre : un écart est un refus situé à sa carte, qui
+ *     n'empêche pas les autres ;
+ *   - ce qui bouge part au store de l'admin (`applyKitCuration`, la seule
+ *     écriture du curé) avec `kitSkillIds` COMPLET — c'est lui qui préserve les
+ *     porteurs des kits jumeaux ; ses refus sont situés à leur carte ;
+ *   - puis UN commit du fichier curé, au nom du monstre.
+ *
+ * Rien d'écrit : rien de committé.
+ */
+export async function saveMonsterKit(
+  id: string,
+  changes: unknown,
+  was: Partial<MonsterKitDisk> | undefined,
+  deps: MonstersDeps,
+  report?: Report,
+): Promise<MonsterKitOutcome> {
+  const refused: MonsterKitRefusal[] = [];
+  const out = (
+    ok: boolean,
+    lines: string[],
+    more: { written?: boolean; stale?: boolean } = {},
+  ): MonsterKitOutcome => ({
+    ok,
+    log: lines,
+    written: more.written ?? false,
+    stale: more.stale ?? false,
+    refused,
+  });
+
+  const monsters = deps.monsters();
+  const m = monsters[id];
+  if (!m) return out(false, [`monstre inconnu : ${id}.`]);
+  const name = m.name.en || id;
+
+  const j = journal(report);
+  const sections = deps.sections();
+  const { cards, chips } = monsterKitCards(m, deps.skills(), sections);
+  const kitSkillIds = cards.map((c) => c.id);
+  const disk = pickMonsterKit(sections, kitSkillIds);
+  const refuse = (r: MonsterKitRefusal): void => {
+    refused.push(r);
+    const card = r.card ? ` de « ${cards.find((c) => c.id === r.card)?.name || r.card} »` : '';
+    j.done(`REFUSÉ — ${name} · chips${card} : ${r.reason}.`);
+  };
+
+  if (!sameKitDisk(was, disk)) {
+    refuse({ reason: 'le disque a changé depuis le chargement' });
+    return out(false, [...j.lines, 'Rien à enregistrer.'], { stale: true });
+  }
+
+  const plan = planMonsterKit(changes, cards, chips, disk, deps.catalog());
+  if (typeof plan === 'string') {
+    refuse({ reason: plan });
+    return out(false, [...j.lines, 'Rien à enregistrer.']);
+  }
+  for (const issue of plan.issues) refuse(issue);
+  if (!plan.said.length)
+    return refused.length
+      ? out(false, [...j.lines, 'Rien à enregistrer.'])
+      : out(true, ['Rien à enregistrer : le disque porte déjà ces valeurs.']);
+
+  j.doing('écriture du câblage des chips');
+  const errors = await deps.applyKit({ kitSkillIds, ...plan.patch });
+  if (errors.length) {
+    // Le store nomme la carte, ou le buff, en tête de son refus : `chipHide[<id>] : …`.
+    for (const e of errors) {
+      const [, section, key, reason] = /^(chip(?:Hide|Add|Owner))\[(.+?)\] : (.*)$/.exec(e) ?? [];
+      const chip = section === 'chipOwner' ? chips.find((c) => c.buff === key) : undefined;
+      const card = chip ? (chip.owner ?? chip.defaultCards[0]) : key;
+      refuse({ ...(card ? { card } : {}), reason: reason ?? e });
+    }
+    return out(false, [...j.lines, 'Rien à enregistrer.']);
+  }
+  for (const line of plan.said) j.done(line);
+
+  const commit = deps.commitPaths(
+    [MONSTER_SKILLS_PATH],
+    `chore(monsters): ${name} (${id})`,
+    report,
+  );
+  return out(commit.ok && !refused.length, [...j.lines, ...commit.log], { written: true });
 }
 
 // ---------------------------------------------------------- tables du jeu ----

@@ -21,6 +21,7 @@ const TABS = [
   'gamedata',
   'character',
   'effects',
+  'monsters',
   'discord',
   'names',
 ];
@@ -65,7 +66,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : treize sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : quatorze sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -251,6 +252,7 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/names',
       '/api/effects',
       '/api/character',
+      '/api/monsters',
       '/api/discord/send',
       '/api/quit',
     ])
@@ -275,6 +277,10 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([
       '/api/character/preview',
     ]);
+  });
+
+  it('des monstres, ne relaie aucun POST : le roster et l’état d’un kit sont des GET', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/monsters'))).toEqual([]);
   });
 
   it('des tables du jeu, ne relaie aucun POST : l’onglet ne fait que des GET', () => {
@@ -2012,6 +2018,67 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.all('#hp-results .hp-fi')).toHaveLength(3);
   });
 
+  it('`match` : la recherche de l’appelant remplace « le nom qui contient », sur la saisie en minuscules', async () => {
+    const p = await picker();
+    const match = vi.fn((c: Hero, q: string) => c.id === q || c.name.toLowerCase().startsWith(q));
+    p.open({ match });
+    // Par le début seulement : « li » est au milieu d'« Alice ».
+    p.search('  AL ');
+    expect(p.names()).toEqual(['Alice']);
+    expect(match).toHaveBeenCalledWith(ROSTER[0], 'al');
+    p.search('li');
+    expect(p.names()).toEqual([]);
+    // Et par ce que l'appelant veut : ici l'id.
+    p.search('3');
+    expect(p.names()).toEqual(['Astei']);
+    // Une saisie vide ne lui demande rien : tout est montré.
+    match.mockClear();
+    p.search('');
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+    expect(match).not.toHaveBeenCalled();
+  });
+
+  it('`pills` : des pastilles à libellé, après celles du roster ; aucune enfoncée = tout, et l’appelant les garde', async () => {
+    const p = await picker();
+    const filters = p.heroFilters();
+    const pills = {
+      label: 'Recos',
+      options: [
+        ['with', 'avec recos'],
+        ['none', 'sans reco'],
+      ],
+      of: (c: Hero) => (c.builds ? 'with' : 'none'),
+    };
+    p.open({ pills, filters });
+    const togs = () => p.all('#hp-filters [aria-label="Recos"] .hp-tog');
+    expect(togs().map((b) => [b.textContent, b.className, b.getAttribute('aria-pressed')])).toEqual(
+      [
+        ['avec recos', 'hp-tog txt', 'false'],
+        ['sans reco', 'hp-tog txt', 'false'],
+      ],
+    );
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+
+    togs()[1].click();
+    expect(p.names()).toEqual(['Alice']);
+    expect(togs()[1].getAttribute('aria-pressed')).toBe('true');
+    // Deux enfoncées : l'une OU l'autre ; elles se combinent aux pastilles du roster.
+    togs()[0].click();
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+    p.all('#hp-filters [data-element="fire"]')[0].click();
+    togs()[1].click();
+    expect(p.names()).toEqual(['Aer', 'Astei']);
+
+    // Rouvert avec les mêmes filtres : la pastille est restée enfoncée.
+    p.closeHeroPicker();
+    p.open({ pills, filters });
+    expect(togs().map((b) => b.getAttribute('aria-pressed'))).toEqual(['true', 'false']);
+    // Sans `pills`, aucune pastille à libellé — et celles d'un autre appelant ne filtrent rien.
+    p.open({ filters: { elements: new Set(), classes: new Set(), seg: '' } });
+    expect(p.all('#hp-filters .hp-tog.txt')).toEqual([]);
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+  });
+
   it('un roster sans élément : ni pastille d’élément, ni icône sur la tuile', async () => {
     const p = await picker();
     p.open({ roster: ROSTER.map(({ id, name, class: cls }) => ({ id, name, class: cls })) });
@@ -2632,6 +2699,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ).toEqual([
       ['character', 'Fiche perso'],
       ['effects', 'Effets'],
+      ['monsters', 'Monstres'],
     ]);
     expect(page.el('tab-character').hidden).toBe(true);
     // Sur un autre onglet, le picker ne s'ouvre pas : il couvrirait sa page.
@@ -4949,6 +5017,780 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Speed', 'true', ''],
       ['High Crit', 'false', ''],
     ]);
+  });
+});
+
+describe('Monstres — la page, sur le vrai markup', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const BOSS = '4318062';
+  const TWIN = '4318061';
+  const ADD = '4044007';
+  const MOB = '4004100';
+  interface Guide {
+    category: string;
+    slug: string;
+    title: string;
+  }
+  const JC: Guide = {
+    category: 'joint-challenge',
+    slug: 'annihilator',
+    title: 'Annihilator Guide',
+  };
+  const S3: Guide = { category: 'adventure', slug: 'S3-1-10', title: 'S3 Hard : Annihilator' };
+  const FROST: Guide = { category: 'guild-raid', slug: 'frost-legion', title: 'Frost Legion' };
+  /** Le roster du serveur : trois monstres des guides, puis un du site, sans guide. */
+  const ROSTER = [
+    {
+      id: BOSS,
+      name: 'Annihilator',
+      type: 'area_boss',
+      icon: '/images/ui/boss/MT_4014002.webp',
+      place: 'Joint Challenge · Defeat the Annihilator Very Hard',
+      guides: [JC, S3],
+    },
+    {
+      id: TWIN,
+      name: 'Annihilator',
+      type: 'boss',
+      icon: 'https://cdn.test/annihilator.webp',
+      place: 'Joint Challenge · Defeat the Annihilator Hard',
+      guides: [JC],
+    },
+    {
+      id: ADD,
+      name: 'Giant God Soldier',
+      type: 'named',
+      icon: '/images/a.webp',
+      place: '',
+      guides: [FROST],
+    },
+    {
+      id: MOB,
+      name: 'Goblin Scout',
+      type: 'monster',
+      icon: '/images/ui/boss/MT_4004100.webp',
+      place: 'Skyward Tower · 5F',
+      guides: [],
+    },
+  ];
+  /** Le kit du boss : deux cartes à chips, et le skill technique de fin d'enrage, sans nom. */
+  const CARDS = [
+    {
+      id: '113651',
+      name: 'Target Acquired',
+      type: 'first',
+      desc: 'Attacks an enemy, gains a <color=#28d9ed>Barrier</color>.\\nTwice.\\n',
+      iconSrc: '/images/characters/skills/Skill_First_4014002.webp',
+    },
+    {
+      id: '113652',
+      name: 'Neutralize All Fronts',
+      type: 'second',
+      iconSrc: 'https://cdn.test/second.webp',
+    },
+    { id: '113656', name: '', type: 'rage_finish1' },
+  ];
+  const chipRow = (buff: string, carrier: string, name: string, more: object = {}) => ({
+    buff,
+    carrier,
+    name,
+    isDebuff: false,
+    defaultCards: [carrier],
+    owner: null,
+    hiddenOn: [],
+    ...more,
+  });
+  const CHIPS = [
+    chipRow('buff_502', '113651', 'Barrier', { icon: 'IG_Buff_Barrier' }),
+    chipRow('buff_503', '113652', 'Stunned', { icon: 'IG_Buff_Stun', isDebuff: true }),
+    // Portée par le skill technique, montrée par les règles sur la carte du second.
+    chipRow('buff_437', '113656', 'Cooldown Reduction', { defaultCards: ['113652'] }),
+  ];
+  const CATALOG = {
+    '1': { id: '1', name: 'Burned', icon: 'IG_Buff_Dot_Burn', isDebuff: true },
+    '7': { id: '7', name: 'Increased Attack', icon: 'IG_Buff_Atk', isDebuff: false },
+    '8': { id: '8', name: 'Immunity', icon: 'IG_Buff_Immune', isDebuff: false },
+    '9': { id: '9', name: 'Immunity', icon: 'IG_Buff_Immune', isDebuff: false, irremovable: true },
+  };
+  interface KitDisk {
+    chipOwner: Record<string, string>;
+    chipHide: Record<string, string[]>;
+    chipAdd: Record<string, string[]>;
+  }
+  interface Sent {
+    id: string;
+    changes: {
+      chipOwner: Record<string, string | null>;
+      chipHide: Record<string, string[]>;
+      chipAdd: Record<string, string[]>;
+    };
+    was: KitDisk;
+  }
+  type Call = { path: string; body?: unknown };
+  type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
+
+  /** Ce que le serveur ferait d'un envoi accepté : le curé du disque, mis à jour. */
+  const written = (body: unknown, disk: KitDisk): Saved => {
+    const { changes } = body as Sent;
+    for (const [buff, target] of Object.entries(changes.chipOwner)) {
+      if (target) disk.chipOwner[buff] = target;
+      else delete disk.chipOwner[buff];
+    }
+    for (const section of ['chipHide', 'chipAdd'] as const)
+      for (const [card, list] of Object.entries(changes[section])) {
+        if (list.length) disk[section][card] = list;
+        else delete disk[section][card];
+      }
+    return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+  };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour la « Fiche perso » :
+   * la VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/monsters.js`, le
+   * vrai `gear-view.mjs` et le vrai `hero-picker.mjs`. `fetch` est factice : il
+   * sert le roster et l'état d'un monstre d'après `disk` (relu à chaque appel) —
+   * seul le boss a un kit —, répond à un enregistrement (`saved` ; d'office, il
+   * écrit), et note ce que la page demande.
+   */
+  async function monsters(
+    opts: {
+      hash?: string;
+      disk?: Partial<KitDisk>;
+      saved?: (body: unknown, disk: KitDisk) => Saved;
+      siteError?: string;
+    } = {},
+  ) {
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const disk: KitDisk = { chipOwner: {}, chipHide: {}, chipAdd: {}, ...opts.disk };
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (data: unknown, status = 200) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(data));
+      let read = false;
+      return {
+        ok: status === 200,
+        status,
+        json: async () => data,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/monsters')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/monsters/roster')
+        return answer({
+          roster: ROSTER,
+          counts: { guides: 3, site: 4 },
+          ...(opts.siteError ? { siteError: opts.siteError } : {}),
+        });
+      if (url.pathname === '/api/monsters/state') {
+        const id = url.searchParams.get('id') ?? '';
+        const row = ROSTER.find((m) => m.id === id);
+        if (!row) return answer({ error: `monstre inconnu : ${id}` }, 404);
+        const mine = id === BOSS;
+        return answer({
+          monster: row,
+          kit: { cards: mine ? CARDS : [], chips: mine ? CHIPS : [] },
+          // Une copie : la page garde l'état qu'elle a lu, le disque bouge sans elle.
+          disk: JSON.parse(
+            JSON.stringify(mine ? disk : { chipOwner: {}, chipHide: {}, chipAdd: {} }),
+          ),
+          catalog: CATALOG,
+          sprite: 'images/ui/effect',
+          shared: mine ? { '113651': { count: 3, names: ['Annihilator', 'Prototype'] } } : {},
+          guideBase: 'https://outerpedia.local/en/guides',
+        });
+      }
+      if (url.pathname === '/api/monsters')
+        return answer(opts.saved?.(body, disk) ?? written(body, disk));
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+    // `quick:saved` : happy-dom ne distribue que SES événements, pas l'`Event` de Node.
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'monsters.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 4; i++) await new Promise((done) => setTimeout(done, 0));
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    const card = (id: string) => all('#m-panel [data-kit]').find((c) => c.dataset.kit === id)!;
+    const chip = (id: string, ref: string) =>
+      [...card(id).querySelectorAll('.m-chip')].find(
+        (c) => (c as HTMLElement).dataset.ref === ref,
+      ) as HTMLElement;
+    /** La valeur qu'un menu porte à son DESSIN (cf. `val` de la « Fiche perso »). */
+    const val = (select: Element | null): string =>
+      select?.querySelector('option[selected]')?.getAttribute('value') ?? '';
+    return {
+      el,
+      all,
+      calls,
+      confirm,
+      disk,
+      settle,
+      window,
+      card,
+      chip,
+      /** Ouvre l'onglet, comme un clic sur son entrée du menu. */
+      come: async () => {
+        all('#tabs [data-tab="monsters"]')[0].click();
+        await settle();
+      },
+      /** Les lignes du picker : nom, où, badges. */
+      rows: () =>
+        all('#hp-results .hp-tile').map((t) => [
+          t.querySelector('.m-pname')?.textContent,
+          t.querySelector('.m-pwhere')?.textContent,
+          [...t.querySelectorAll('.badge')].map((b) => b.textContent).join(' · '),
+        ]),
+      tile: (id: string) => all('#hp-results .hp-tile').find((t) => t.dataset.id === id)!,
+      search: (q: string) => {
+        el('hp-q').value = q;
+        fire(el('hp-q'), 'input');
+      },
+      choose: async (id: string) => {
+        all('#hp-results .hp-tile')
+          .find((t) => t.dataset.id === id)!
+          .click();
+        await settle();
+      },
+      /** Les chips d'une carte : nom, classes d'état, badge, la carte de son menu, son bouton. */
+      chips: (id: string) =>
+        [...card(id).querySelectorAll('.m-chip')].map((c) => [
+          c.querySelector('.m-chn')?.textContent,
+          c.className.replace(/^chip m-chip ?/, ''),
+          c.querySelector('.badge')?.textContent ?? '',
+          c.querySelector('select') ? val(c.querySelector('select')) || '—' : '',
+          c.querySelector('button')?.textContent,
+        ]),
+      /** Pose une chip sur une carte par son menu, comme le ferait la souris. */
+      move: (id: string, ref: string, to: string) => {
+        const menu = chip(id, ref).querySelector('select') as unknown as HTMLSelectElement;
+        menu.value = to;
+        fire(menu as unknown as HTMLElement, 'change');
+      },
+      badges: (id: string) =>
+        [...card(id).querySelectorAll('.card-head .badge')]
+          .map((b) => b.textContent)
+          .filter(Boolean),
+      count: () => el('m-count').textContent,
+      save: async () => {
+        el('m-save').click();
+        await settle();
+        await settle();
+      },
+      posted: () => calls.filter((c) => c.path === '/api/monsters').map((c) => c.body as Sent),
+      states: () => calls.filter((c) => c.path.startsWith('/api/monsters/state')).length,
+    };
+  }
+
+  const HASH = `#monsters/${BOSS}`;
+
+  it('servie dans Éditeurs, après Effets, en pleine largeur — et rien n’est demandé avant d’y venir', async () => {
+    const page = await monsters();
+    expect(page.calls).toEqual([]);
+    expect(
+      page.all('#tabs [data-group="editors"]').map((b) => [b.dataset.tab, b.textContent]),
+    ).toEqual([
+      ['character', 'Fiche perso'],
+      ['effects', 'Effets'],
+      ['monsters', 'Monstres'],
+    ]);
+    await page.come();
+    expect(page.el('tab-monsters').hidden).toBe(false);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.all('#tab-monsters h2')[0].textContent).toBe('Monstres');
+    // Le roster est lu à la première venue, une fois : y revenir ne le redemande pas.
+    expect(page.calls).toEqual([{ path: '/api/monsters/roster' }]);
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    await page.come();
+    expect(page.calls).toEqual([{ path: '/api/monsters/roster' }]);
+  });
+
+  it('sans monstre : « Aucun monstre choisi. », et le picker OUVERT d’office sur les monstres des GUIDES', async () => {
+    const page = await monsters({ hash: '#monsters' });
+    expect(page.el('m-who').textContent).toBe('Aucun monstre choisi.');
+    expect(page.el('m-pick-label').textContent).toBe('Choisir un monstre');
+    expect(page.el('m-pick').disabled).toBe(false);
+    expect(page.el('m-bar').hidden).toBe(true);
+    expect(page.el('m-panel').innerHTML).toBe('');
+
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Choisir un monstre');
+    expect(page.el('hp-tally').textContent).toBe('3 des guides · 4 avec le site');
+    expect(page.el('hp-q').placeholder).toBe('Chercher un monstre (nom ou id)…');
+    expect(page.el('hp-results').className).toBe('hp-tiles rows');
+    // Une ligne : le nom, où on l'affronte (son id sinon), son type, « N guides ».
+    expect(page.rows()).toEqual([
+      ['Annihilator', 'Joint Challenge · Defeat the Annihilator Very Hard', 'area boss · 2 guides'],
+      ['Annihilator', 'Joint Challenge · Defeat the Annihilator Hard', 'boss · 1 guide'],
+      ['Giant God Soldier', ADD, 'named · 1 guide'],
+    ]);
+    // L'icône du serveur : relative, sous la base des images ; absolue, telle quelle.
+    expect(page.tile(BOSS).querySelector('.m-pico')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/boss/MT_4014002.webp',
+    );
+    expect(page.tile(TWIN).querySelector('.m-pico')?.getAttribute('src')).toBe(
+      'https://cdn.test/annihilator.webp',
+    );
+    // Le `title` : le nom, l'id, et les titres de ses guides.
+    expect(page.tile(BOSS).title).toBe(
+      `Annihilator — ${BOSS}\nAnnihilator Guide\nS3 Hard : Annihilator`,
+    );
+  });
+
+  it('le picker : « Site » élargit, les pastilles de type filtrent, la recherche prend le début d’un mot du nom ou de l’id', async () => {
+    const page = await monsters({ hash: '#monsters' });
+    const ids = () => page.all('#hp-results .hp-tile').map((t) => t.dataset.id);
+    const seg = () => page.all('#hp-filters .hp-seg button');
+    expect(seg().map((b) => [b.textContent, b.getAttribute('aria-pressed')])).toEqual([
+      ['Guides', 'true'],
+      ['Site', 'false'],
+    ]);
+    seg()[1].click();
+    expect(ids()).toEqual([BOSS, TWIN, ADD, MOB]);
+    expect(page.rows()[3]).toEqual(['Goblin Scout', 'Skyward Tower · 5F', 'monster']);
+
+    // Les types que le roster porte, les boss d'abord ; aucune enfoncée = tous.
+    const pills = () => page.all('#hp-filters [aria-label="Type"] .hp-tog');
+    expect(pills().map((b) => b.textContent)).toEqual(['boss', 'area boss', 'named', 'monster']);
+    pills()[0].click();
+    expect(ids()).toEqual([TWIN]);
+    pills()[3].click();
+    expect(ids()).toEqual([TWIN, MOB]);
+    pills()[0].click();
+    pills()[3].click();
+
+    // Par le DÉBUT d'un mot, dans n'importe quel ordre — jamais par le milieu.
+    page.search('sold gi');
+    expect(ids()).toEqual([ADD]);
+    page.search('nihil');
+    expect(ids()).toEqual([]);
+    expect(page.el('hp-none').textContent).toBe('Aucun monstre ne correspond.');
+    page.search('  ANNI ');
+    expect(ids()).toEqual([BOSS, TWIN]);
+    // Par le début de l'id ; « Guides » referme le périmètre sur la même saisie.
+    page.search('4004');
+    expect(ids()).toEqual([MOB]);
+    seg()[0].click();
+    expect(ids()).toEqual([]);
+  });
+
+  it('sans tables du jeu : le picker dit que la liste du site manque, les monstres des guides sont là', async () => {
+    const page = await monsters({ hash: '#monsters', siteError: 'pas de tables' });
+    expect(page.el('hp-tally').textContent).toBe('3 des guides · site illisible');
+    expect(page.rows()).toHaveLength(3);
+  });
+
+  it('un monstre choisi : son en-tête, ses guides en liens, et l’adresse qui le dit', async () => {
+    const page = await monsters({ hash: '#monsters' });
+    await page.choose(BOSS);
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.window.location.hash).toBe(HASH);
+    expect(page.calls.map((c) => c.path)).toEqual([
+      '/api/monsters/roster',
+      `/api/monsters/state?id=${BOSS}`,
+    ]);
+
+    const who = page.el('m-who');
+    expect(who.querySelector('strong')?.textContent).toBe('Annihilator');
+    expect(who.querySelector('.m-face')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/boss/MT_4014002.webp',
+    );
+    expect(who.querySelector('.m-traits')?.textContent).toBe(
+      `area boss${BOSS}Joint Challenge · Defeat the Annihilator Very Hard`,
+    );
+    expect(
+      [...who.querySelectorAll('.m-link')].map((a) => [a.textContent, a.getAttribute('href')]),
+    ).toEqual([
+      ['Annihilator Guide', 'https://outerpedia.local/en/guides/joint-challenge/annihilator'],
+      ['S3 Hard : Annihilator', 'https://outerpedia.local/en/guides/adventure/S3-1-10'],
+    ]);
+    // Ce que l'onglet ne porte pas, et où le trouver.
+    expect(who.textContent).toContain('Stats, intégration et versions : extractor (étapes 19-20).');
+    expect(page.el('m-pick-label').textContent).toBe('Changer de monstre');
+    expect(page.el('m-bar').hidden).toBe(false);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('m-save').disabled).toBe(true);
+  });
+
+  it('un monstre du site, sans guide : le badge « aucun guide », et un kit vide le dit', async () => {
+    const page = await monsters({ hash: `#monsters/${MOB}` });
+    expect(page.el('m-who').querySelector('.m-guides')?.textContent).toBe('aucun guide');
+    expect(page.el('m-who').querySelector('.m-link')).toBeNull();
+    expect(page.el('m-panel').textContent).toBe('Aucune carte de skill.');
+  });
+
+  it('`#monsters/<id>` : le kit s’ouvre sans picker — une carte par skill, ses chips, son menu, « ＋ effet »', async () => {
+    const page = await monsters({ hash: HASH });
+    expect(page.el('tab-monsters').hidden).toBe(false);
+    expect(page.el('hp-modal')).toBeNull();
+    expect(page.states()).toBe(1);
+
+    const cards = page.all('#m-panel [data-kit]');
+    expect(cards.map((c) => c.querySelector('.card-head strong')?.textContent)).toEqual([
+      'Target Acquired',
+      'Neutralize All Fronts',
+      '(sans nom)',
+    ]);
+    expect(cards.map((c) => c.querySelector('.m-skid')?.textContent)).toEqual([
+      '113651 · first',
+      '113652 · second',
+      '113656 · rage_finish1',
+    ]);
+    // Une icône relative passe sous la base des images ; absolue, elle reste ; le dernier n'en a pas.
+    expect(cards.map((c) => c.querySelector('.m-skico')?.getAttribute('src'))).toEqual([
+      'https://img.test/images/characters/skills/Skill_First_4014002.webp',
+      'https://cdn.test/second.webp',
+      undefined,
+    ]);
+    // La description, telle que le jeu l'écrit : sa couleur, ses `\n` littéraux, sans ceux de la fin.
+    expect(cards[0].querySelector('.m-desc')?.innerHTML).toBe(
+      'Attacks an enemy, gains a <span style="color:#28d9ed">Barrier</span>.<br>Twice.',
+    );
+    expect(cards[1].querySelector('.m-desc')).toBeNull();
+
+    // Chaque chip à sa place par défaut : son menu invite, ✕ la masque.
+    expect(page.chips('113651')).toEqual([['Barrier', '', '', '—', '✕']]);
+    // La chip du skill technique est sur la carte où les règles la montrent.
+    expect(page.chips('113652')).toEqual([
+      ['Stunned', '', '', '—', '✕'],
+      ['Cooldown Reduction', '', '', '—', '✕'],
+    ]);
+    expect(page.chips('113656')).toEqual([]);
+    const menu = page.chip('113651', 'buff_502').querySelector('select')!;
+    expect([...menu.querySelectorAll('option')].map((o) => o.textContent)).toEqual([
+      'sur la carte…',
+      'Target Acquired · first',
+      'Neutralize All Fronts · second',
+      '(sans nom) · rage_finish1',
+    ]);
+    expect(menu.getAttribute('aria-label')).toBe('Carte de Barrier');
+    expect(page.chip('113651', 'buff_502').title).toBe('buff_502 — porté par 113651');
+    // La tuile du site : l'icône en masque teinté de sa nature ; sans icône, un cadre vide.
+    expect(page.chip('113652', 'buff_503').querySelector('.m-fx')?.className).toBe('m-fx debuff');
+    expect(page.chip('113652', 'buff_503').querySelector('.m-fx')?.getAttribute('style')).toContain(
+      "url('https://img.test/images/ui/effect/IG_Buff_Stun.webp')",
+    );
+    expect(page.chip('113652', 'buff_437').querySelector('.m-fx')?.className).toBe('m-fx none');
+    expect(cards.map((c) => c.querySelector('[data-act="add-chip"]')?.textContent)).toEqual(
+      Array(3).fill('＋ effet'),
+    );
+  });
+
+  it('le badge « partagé par N monstres » sur un skill commun, ses noms au survol', async () => {
+    const page = await monsters({ hash: HASH });
+    expect(page.badges('113651')).toEqual(['partagé par 3 monstres']);
+    expect(page.card('113651').querySelector('.card-head .badge.off')?.getAttribute('title')).toBe(
+      'Masquer ou ajouter une chip ici vaut pour tous : Annihilator, Prototype…',
+    );
+    expect(page.badges('113652')).toEqual([]);
+  });
+
+  it('✕ masque une chip : pointillés, « rétablir », son menu retiré — comptée ; rétablie, elle ne compte plus', async () => {
+    const page = await monsters({ hash: HASH });
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    expect(page.chips('113652')).toEqual([
+      ['Stunned', 'off dirty', '', '', 'rétablir'],
+      ['Cooldown Reduction', '', '', '—', '✕'],
+    ]);
+    expect(page.badges('113652')).toEqual(['modifié']);
+    expect(page.badges('113651')).toEqual(['partagé par 3 monstres']);
+    expect(page.count()).toBe('1 changement');
+    expect(page.el('m-save').disabled).toBe(false);
+    // Le focus reste sur la chip : son bouton, devenu « rétablir ».
+    const back = page.chip('113652', 'buff_503').querySelector('button')!;
+    expect(page.window.document.activeElement).toBe(back as unknown as Element);
+    expect(back.getAttribute('aria-label')).toBe('Rétablir Stunned');
+
+    back.click();
+    expect(page.chips('113652')[0]).toEqual(['Stunned', '', '', '—', '✕']);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('m-save').disabled).toBe(true);
+  });
+
+  it('« ＋ effet » : le picker d’effets sur le catalogue — l’effet choisi s’ajoute, ✕ le retire', async () => {
+    const page = await monsters({ hash: HASH });
+    (page.card('113651').querySelector('[data-act="add-chip"]') as HTMLElement).click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-title').textContent).toBe('Ajouter un effet — Target Acquired');
+    expect(page.el('hp-tally').textContent).toBe('4 effets');
+    // Les homonymes sont départagés ; pas de pastilles de type ici.
+    expect(page.all('#hp-results .hp-tile').map((t) => t.textContent)).toEqual([
+      'Burned',
+      'Immunity (buff)',
+      'Immunity (irremovable, buff)',
+      'Increased Attack',
+    ]);
+    expect(page.all('#hp-filters .hp-tog')).toEqual([]);
+    expect(page.all('#hp-results .m-fx')).toHaveLength(4);
+
+    page.tile('7').click();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    expect(page.chips('113651')).toEqual([
+      ['Barrier', '', '', '—', '✕'],
+      ['Increased Attack', 'dirty', 'ajoutée', '', '✕'],
+    ]);
+    expect(page.count()).toBe('1 changement');
+    // Un effet déjà ajouté n'est plus proposé.
+    (page.card('113651').querySelector('[data-act="add-chip"]') as HTMLElement).click();
+    expect(page.all('#hp-results .hp-tile').map((t) => t.dataset.id)).not.toContain('7');
+    page.el('hp-close').click();
+
+    page.chip('113651', '7').querySelector('button')!.click();
+    expect(page.chips('113651')).toEqual([['Barrier', '', '', '—', '✕']]);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('le menu d’une chip la DÉPLACE : elle quitte sa carte pour la cible, « déplacée » ; « par défaut » la rend', async () => {
+    const page = await monsters({ hash: HASH });
+    page.move('113651', 'buff_502', '113652');
+
+    expect(page.chips('113651')).toEqual([]);
+    expect(page.chips('113652')).toEqual([
+      ['Barrier', 'dirty', 'déplacée', '113652', '✕'],
+      ['Stunned', '', '', '—', '✕'],
+      ['Cooldown Reduction', '', '', '—', '✕'],
+    ]);
+    // Les deux cartes portent le changement, la troisième non ; UN changement.
+    expect(page.badges('113651')).toEqual(['partagé par 3 monstres', 'modifié']);
+    expect(page.badges('113652')).toEqual(['modifié']);
+    expect(page.badges('113656')).toEqual([]);
+    expect(page.count()).toBe('1 changement');
+    // Déplacée, son menu propose « par défaut » en tête, et le focus l'a suivie.
+    const menu = page.chip('113652', 'buff_502').querySelector('select')!;
+    expect(menu.querySelector('option')?.textContent).toBe('par défaut');
+    expect(menu.className).toBe('m-move dirty');
+    expect(page.window.document.activeElement).toBe(menu as unknown as Element);
+
+    page.move('113652', 'buff_502', '');
+    expect(page.chips('113651')).toEqual([['Barrier', '', '', '—', '✕']]);
+    expect(page.chips('113652')).toHaveLength(2);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.badges('113652')).toEqual([]);
+  });
+
+  it('ce que le disque cure déjà : une chip posée ailleurs, une masquée, un masquage resté d’une autre carte, des ajouts', async () => {
+    const page = await monsters({
+      hash: HASH,
+      disk: {
+        chipOwner: { buff_437: '113656' },
+        chipHide: { '113652': ['buff_503', 'buff_502', 'ref-heritee'] },
+        chipAdd: { '113651': ['1', '404'] },
+      },
+    });
+    // Rien n'est « modifié » : c'est l'état du disque.
+    expect(page.count()).toBe('aucune modification');
+    expect(page.all('#m-panel .m-chip.dirty')).toEqual([]);
+    // Un effet ajouté par le disque : son badge ; hors du catalogue, sa ref pour nom.
+    expect(page.chips('113651')).toEqual([
+      ['Barrier', '', '', '—', '✕'],
+      ['Burned', '', 'ajoutée', '', '✕'],
+      ['404', '', 'ajoutée', '', '✕'],
+    ]);
+    // Masquée sur sa carte ; et « Barrier », masquée ici alors qu'elle est montrée ailleurs.
+    expect(page.chips('113652')).toEqual([
+      ['Stunned', 'off', '', '', 'rétablir'],
+      ['Barrier', 'off', '', '', 'rétablir'],
+    ]);
+    expect(page.chip('113652', 'buff_502').dataset.kind).toBe('stray');
+    // Posée par le curé sur le skill technique : « déplacée », sans être modifiée.
+    expect(page.chips('113656')).toEqual([['Cooldown Reduction', '', 'déplacée', '113656', '✕']]);
+
+    // La remettre par défaut compte ; la poser sur une carte qui la masquait l'y rétablit.
+    page.move('113656', 'buff_437', '');
+    expect(page.chips('113652')[1]).toEqual(['Cooldown Reduction', 'dirty', '', '—', '✕']);
+    expect(page.count()).toBe('1 changement');
+    page.move('113651', 'buff_502', '113652');
+    expect(page.chips('113652').find((c) => c[0] === 'Barrier')).toEqual([
+      'Barrier',
+      'dirty',
+      'déplacée',
+      '113652',
+      '✕',
+    ]);
+    // Deux déplacements, et le masquage levé sur la carte cible.
+    expect(page.count()).toBe('3 changements');
+  });
+
+  it('« Enregistrer » : UN envoi — les chips déplacées, les deux listes ENTIÈRES des cartes modifiées, l’état chargé ; le disque relu n’a plus rien en attente', async () => {
+    const page = await monsters({
+      hash: HASH,
+      disk: { chipHide: { '113652': ['ref-heritee'] } },
+    });
+    page.move('113651', 'buff_502', '113656');
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    (page.card('113651').querySelector('[data-act="add-chip"]') as HTMLElement).click();
+    page.tile('1').click();
+    expect(page.count()).toBe('3 changements');
+
+    await page.save();
+    expect(page.posted()).toEqual([
+      {
+        id: BOSS,
+        changes: {
+          chipOwner: { buff_502: '113656' },
+          // La ref héritée du fichier, que la carte ne montre pas, y reste.
+          chipHide: { '113651': [], '113652': ['ref-heritee', 'buff_503'] },
+          chipAdd: { '113651': ['1'], '113652': [] },
+        },
+        was: { chipOwner: {}, chipHide: { '113652': ['ref-heritee'] }, chipAdd: {} },
+      },
+    ]);
+    // Le disque fait foi : relu, il porte la saisie — plus rien n'est « modifié ».
+    expect(page.states()).toBe(2);
+    expect(page.disk).toEqual({
+      chipOwner: { buff_502: '113656' },
+      chipHide: { '113652': ['ref-heritee', 'buff_503'] },
+      chipAdd: { '113651': ['1'] },
+    });
+    expect(page.count()).toBe('aucune modification');
+    expect(page.all('#m-panel .m-chip.dirty')).toEqual([]);
+    expect(page.chips('113656')).toEqual([['Barrier', '', 'déplacée', '113656', '✕']]);
+    expect(page.chips('113652')[0]).toEqual(['Stunned', 'off', '', '', 'rétablir']);
+    expect(page.el('m-save').disabled).toBe(true);
+  });
+
+  it('un refus situé : la carte cerclée, son message dessous, sa saisie gardée — y retoucher le lève', async () => {
+    const page = await monsters({
+      hash: HASH,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [
+          { card: '113652', reason: '« buff_503 » : pas une chip de cette carte' },
+          { card: '113652', reason: 'autre chose' },
+        ],
+      }),
+    });
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    await page.save();
+
+    const card = page.card('113652');
+    expect(card.className).toBe('card m-card ko');
+    expect(page.badges('113652')).toEqual(['modifié', 'refusé']);
+    expect(card.querySelector('.m-err')?.textContent).toBe(
+      '« buff_503 » : pas une chip de cette carte ; autre chose',
+    );
+    // La saisie est restée : la chip est toujours masquée, et comptée.
+    expect(page.chips('113652')[0]).toEqual(['Stunned', 'off dirty', '', '', 'rétablir']);
+    expect(page.count()).toBe('1 changement1 refus');
+    expect(page.card('113651').className).toBe('card m-card');
+
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    expect(page.card('113652').className).toBe('card m-card');
+    expect(page.card('113652').querySelector('.m-err')?.textContent).toBe('');
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('`stale` : le disque avait changé — la page le montre, la saisie est abandonnée, le refus dit dessous', async () => {
+    const page = await monsters({
+      hash: HASH,
+      saved: (_, disk) => {
+        // Un autre a écrit entre-temps : le disque que la page va relire.
+        disk.chipAdd['113651'] = ['7'];
+        return {
+          ok: false,
+          log: ['REFUSÉ'],
+          written: false,
+          stale: true,
+          refused: [{ reason: 'le disque a changé depuis le chargement' }],
+        };
+      },
+    });
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    await page.save();
+
+    expect(page.chips('113652')[0]).toEqual(['Stunned', '', '', '—', '✕']);
+    expect(page.chips('113651')[1]).toEqual(['Increased Attack', '', 'ajoutée', '', '✕']);
+    expect(page.count()).toBe('1 refus');
+    expect(page.all('#m-panel [data-err="kit"]')[0].textContent).toBe(
+      'le disque a changé depuis le chargement',
+    );
+    expect(page.el('m-save').disabled).toBe(true);
+  });
+
+  it('« Annuler » rend le disque ; quitter l’onglet ou changer de monstre avec des changements demande', async () => {
+    const page = await monsters({ hash: HASH });
+    page.move('113651', 'buff_502', '113652');
+    page.chip('113652', 'buff_503').querySelector('button')!.click();
+    expect(page.count()).toBe('2 changements');
+
+    // Quitter l'onglet : refusé, on y reste, la saisie avec.
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    expect(page.confirm).toHaveBeenCalledWith(
+      '2 changements non enregistrés sur Annihilator. Quitter l’onglet ? Ils restent en attente tant que la page n’est pas rechargée.',
+    );
+    expect(page.el('tab-monsters').hidden).toBe(false);
+
+    // Changer de monstre : refusé, le picker reste ouvert.
+    page.el('m-pick').click();
+    page.confirm.mockReturnValueOnce(false);
+    await page.choose(TWIN);
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      'Abandonner 2 changements non enregistrés sur Annihilator ?',
+    );
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.count()).toBe('2 changements');
+    // Le monstre en cours porte l'anneau du choix, et le rechoisir ne demande rien.
+    expect(page.tile(BOSS).getAttribute('aria-current')).toBe('true');
+    page.el('hp-close').click();
+
+    page.el('m-reset').click();
+    await page.settle();
+    expect(page.count()).toBe('aucune modification');
+    expect(page.chips('113651')).toEqual([['Barrier', '', '', '—', '✕']]);
+    // Plus rien en attente : on quitte sans question, et y revenir relit le kit.
+    const asked = page.confirm.mock.calls.length;
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    expect(page.el('tab-monsters').hidden).toBe(true);
+    const read = page.states();
+    await page.come();
+    expect(page.confirm.mock.calls.length).toBe(asked);
+    expect(page.states()).toBe(read + 1);
+    expect(page.window.location.hash).toBe(HASH);
+  });
+
+  it('un monstre inconnu dans l’adresse : le journal le dit, et le picker s’ouvre', async () => {
+    const page = await monsters({ hash: '#monsters/nope' });
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain('monstre inconnu : nope');
+    expect(page.el('m-who').textContent).toBe('Aucun monstre choisi.');
+    expect(page.el('hp-modal').hidden).toBe(false);
   });
 });
 

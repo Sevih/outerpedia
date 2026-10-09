@@ -8,7 +8,8 @@
  * les rangs, éditer les recos d'équipement d'un perso, écrire un message
  * Discord que le bot poste, curer un nom court ou des alias de recherche, curer
  * un effet (son nom, sa description, son icône, sa famille — ou en créer un),
- * tenir la fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags), tenir
+ * tenir la fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags),
+ * câbler les chips de skills d'un monstre (ceux des guides d'abord), tenir
  * le journal du site (le changelog, par gabarits), lire une table brute du jeu
  * (« Tables du jeu »). Tous committent, sauf le message Discord et les deux
  * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
@@ -51,6 +52,7 @@ import {
   EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
+  MONSTERS_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
   addComics,
@@ -70,6 +72,8 @@ import {
   gameTablesState,
   gearRecoState,
   gitState,
+  monsterSheetState,
+  monstersRoster,
   namesState,
   parseTarget,
   previewChangelogEntry,
@@ -85,6 +89,7 @@ import {
   saveCouponList,
   saveEffects,
   saveGearReco,
+  saveMonsterKit,
   saveNames,
   saveRanks,
   searchRewards,
@@ -140,6 +145,7 @@ import {
 import { assemblePage, resolveUiFile } from './ui-serve';
 import { childEnv, draftModel, proposeDraft, runClaude } from './claude-draft';
 import { acquirePatchJob } from '@/lib/admin/patch-runner';
+import type { MonsterKitDisk } from '@/lib/admin/monster-kit';
 import { getCharacterListItems } from '@/lib/data/characters';
 import type { Banner, PromoCode } from '@/lib/admin/promo-banner-store';
 import type { GearBuild } from '@contracts';
@@ -758,6 +764,38 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // le store de l'admin par effet, puis un commit du fichier curé.
     const { changes } = await body<{ changes: EffectChange[] }>(req);
     await stream(res, (report) => withGit(saveEffects(changes, EFFECTS_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/monsters/roster') {
+    // Le roster de l'onglet « Monstres », pour son picker : les monstres des
+    // guides, puis ceux du site. Gardé en mémoire tant que rien n'a bougé ; la
+    // page le lit à sa première venue, pas au démarrage.
+    json(res, monstersRoster());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/monsters/state') {
+    // La fiche du monstre de `?id=`, lue du disque à chaque appel : sa ligne
+    // et ses guides, les cartes de son kit et leurs chips, ce que le curé en
+    // dit, le catalogue des effets, les skills que d'autres monstres partagent.
+    const out = monsterSheetState(url.searchParams.get('id') ?? '');
+    if ('error' in out) return json(res, { error: out.error }, 404);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/monsters') {
+    // Le câblage des chips d'UN monstre : contrôlé contre son kit, écrit par le
+    // store de l'admin, puis un commit du fichier curé au nom du monstre.
+    const { id, changes, was } = await body<{
+      id: string;
+      changes: unknown;
+      was: Partial<MonsterKitDisk>;
+    }>(req);
+    await stream(res, (report) =>
+      withGit(saveMonsterKit(String(id ?? ''), changes, was, MONSTERS_DEPS, report)),
+    );
     return;
   }
 

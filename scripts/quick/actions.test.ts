@@ -52,6 +52,12 @@
  * jour n'a aucun perso « à traiter », et il bouge —, et aucun test n'écrit dans
  * `data/curated/`. Seul le roster est réel (les noms complets de `2000085`).
  *
+ * Et contrat de l'onglet « Monstres » — `monstersRoster`, `monsterSheetState` et
+ * `saveMonsterKit`. Le kit est RÉEL (un boss de `data/generated/`, son id
+ * dérivé : la suite tourne sans `.gamedata`), tout le reste est INJECTÉ : le
+ * curé des chips, le catalogue, les monstres des guides et ceux du site, les
+ * donjons, et les deux écritures (`applyKitCuration`, git).
+ *
  * Et contrat de l'onglet « Bannières » — `diffBanners` (ce que la table du jeu
  * sait de plus que `banner.json`, pur), `bannersState` et `saveBannerList`. La
  * table du jeu n'est JAMAIS lue ici (la suite tourne sans `.gamedata`) : ses
@@ -104,17 +110,34 @@ import {
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CharacterCurated, Effect, EffectCurated, GearBuild, LocalizedText } from '@contracts';
+import type {
+  CharacterCurated,
+  DungeonRef,
+  Effect,
+  EffectCurated,
+  GearBuild,
+  LocalizedText,
+  Monster,
+} from '@contracts';
 import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
+import {
+  monsterKitCards,
+  pickMonsterKit,
+  type GuideRef,
+  type MonsterKitSections,
+} from '@/lib/admin/monster-kit';
+import type { KitCurationPatch } from '@/lib/admin/monster-skill-curated-store';
+import { committedMonsterSkills, committedMonsters } from '@/lib/admin/monster-store';
 import { loadChangelog } from '@/lib/admin/changelog-store';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
 import type { ChangelogEntry } from '@/lib/data/changelog';
 import { characterDisplayName, getCharacterListItems, slugForId } from '@/lib/data/characters';
 import type { EffectSources } from '@/lib/data/effects';
 import { getEEViews } from '@/lib/data/equipment';
+import { img } from '@/lib/images';
 import en from '@/i18n/locales/en';
 import fr from '@/i18n/locales/fr';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
@@ -154,6 +177,8 @@ import {
   gearRecoState,
   gitState,
   groupComics,
+  monsterSheetState,
+  monstersRoster,
   namesState,
   planRankChanges,
   previewChangelogEntry,
@@ -166,6 +191,7 @@ import {
   saveCharacterSheet,
   saveGearReco,
   saveEffects,
+  saveMonsterKit,
   saveNames,
   tableUsage,
   tagSourceSheet,
@@ -186,6 +212,7 @@ import {
   type GameTablesDisk,
   type GearCatalog,
   type GearRecoDeps,
+  type MonstersDeps,
   type NameChange,
   type NamesDeps,
   type NamesDisk,
@@ -3327,11 +3354,13 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     ]);
     // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
     // perso », Gear reco compris), celui des EE et les outils Pro / Con et
-    // Synergy, trois de ses sous-onglets. Les lots suivants la rempliront.
+    // Synergy, trois de ses sous-onglets, et celui des monstres. Les lots
+    // suivants la rempliront.
     expect(ADMIN_TO_QUICK).toEqual({
       '/admin/editor/characters': 'character',
       '/admin/editor/ee': 'character',
       '/admin/editor/effects': 'effects',
+      '/admin/editor/monsters': 'monsters',
       '/admin/tools/pros-cons': 'character',
       '/admin/tools/synergies': 'character',
     });
@@ -5410,6 +5439,442 @@ describe('addComics — écritures injectées', () => {
     expect(out.ok).toBe(false);
     expect(out.log.at(-1)).toBe('assets:push a échoué : R2 muet');
     expect(calls).toEqual({ chain: ['collect', 'editorial'], git: [] });
+  });
+});
+
+describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Monstres », tout injecté', () => {
+  // Un VRAI kit, lu du committé (la suite tourne sans les tables du jeu) : le
+  // premier boss dont deux cartes au moins portent des chips — de quoi en
+  // déplacer une. Son id est dérivé, jamais écrit ici ; le reste est factice.
+  const SKILLS = committedMonsterSkills();
+  const none: MonsterKitSections = { chipOwner: {}, chipHide: {}, chipAdd: {} };
+  /** Ce qu'une page a chargé d'un kit que le disque ne cure pas : son `was`. */
+  const empty = pickMonsterKit(none, []);
+  const REAL = Object.values(committedMonsters()).find((m) => {
+    if (m.type !== 'boss' || !m.name.en) return false;
+    const { cards } = monsterKitCards(m, SKILLS, none);
+    const [from, to] = cards.filter((c) => c.chips.length);
+    return Boolean(to) && !to.chips.includes(from.chips[0]);
+  })!;
+  const named = (id: string, en: string, over: Partial<Monster> = {}): Monster => ({
+    ...REAL,
+    id,
+    name: { ...REAL.name, en },
+    spawns: [],
+    ...over,
+  });
+  const BOSS = named(REAL.id, 'Mega Boss');
+  // Son jumeau : les mêmes skills, sous un autre id.
+  const TWIN = named('twin', 'Twin Boss');
+  // Un monstre du site, sans guide ; et un autre, ni l'un ni l'autre.
+  const MOB = named('mob', 'Aaa Mob', {
+    type: 'monster',
+    skills: [],
+    spawns: [{ dungeon: 'd1' }] as Monster['spawns'],
+  });
+  const LONE = named('lone', 'Zed Lone', { skills: [] });
+
+  const KIT = monsterKitCards(BOSS, SKILLS, none);
+  const KIT_IDS = KIT.cards.map((c) => c.id);
+  /** Deux cartes qui portent des chips, et la première chip de la première. */
+  const [FROM, TO] = KIT.cards.filter((c) => c.chips.length);
+  const CHIP = KIT.chips.find((c) => c.buff === FROM.chips[0])!;
+  const OTHER = KIT.chips.find((c) => c.buff === TO.chips[0])!;
+
+  const GUIDE: GuideRef = { category: 'joint-challenge', slug: 'mega', title: 'Mega Boss Guide' };
+  const GUIDE2: GuideRef = { category: 'adventure', slug: 'S1-1-1', title: 'S1 : Mega Boss' };
+  const CATALOG: Record<string, EffectOption> = {
+    '48': { id: '48', name: 'Stunned', icon: 'IG_Buff_Stun', isDebuff: true },
+    '7': { id: '7', name: 'Increased Attack', icon: 'IG_Buff_Atk', isDebuff: false },
+  };
+  const PATH = 'data/curated/monster-skills.json';
+  const row = (m: Monster, guides: GuideRef[], place = '') => ({
+    id: m.id,
+    name: m.name.en,
+    type: m.type,
+    icon: img.monster(m.icon),
+    place,
+    guides,
+  });
+
+  /** Les lectures et les deux écritures, factices : elles notent leurs appels. */
+  function deps(
+    over: {
+      sections?: MonsterKitSections;
+      siteError?: string;
+      errors?: string[];
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      apply: [] as KitCurationPatch[],
+      git: [] as [string[], string][],
+      guideIds: 0,
+      siteIds: 0,
+    };
+    const state = { stamp: 's1', sections: over.sections ?? none };
+    const fake: MonstersDeps = {
+      monsters: () => ({ [BOSS.id]: BOSS, twin: TWIN, mob: MOB, lone: LONE }),
+      skills: () => SKILLS,
+      sections: () => state.sections,
+      catalog: () => CATALOG,
+      guideIds: () => {
+        calls.guideIds++;
+        return new Map([
+          [BOSS.id, [GUIDE, GUIDE2]],
+          ['twin', [GUIDE]],
+          ['hors-committe', [GUIDE]],
+        ]);
+      },
+      siteIds: () => {
+        calls.siteIds++;
+        if (over.siteError) throw new Error(over.siteError);
+        return new Set([BOSS.id, 'mob', 'hors-committe']);
+      },
+      dungeons: () => ({ d1: { mode: 'mode_inconnu', name: { en: 'Stage 1' } } as DungeonRef }),
+      stamp: () => state.stamp,
+      applyKit: async (patch) => {
+        calls.apply.push(patch);
+        return over.errors ?? [];
+      },
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake, state };
+  }
+
+  it('le kit de travail : deux cartes à chips, la chip de l’une absente de l’autre', () => {
+    expect(TO.chips).not.toContain(CHIP.buff);
+    expect(CHIP.defaultCards).toEqual([FROM.id]);
+  });
+
+  it('roster : les monstres des GUIDES d’abord, avec leurs guides, puis ceux du site — chaque groupe par nom', () => {
+    const { fake } = deps();
+    expect(monstersRoster(fake)).toEqual({
+      roster: [
+        row(BOSS, [GUIDE, GUIDE2]),
+        row(TWIN, [GUIDE]),
+        // Du site, sans guide : après les guides, quel que soit son nom. Son
+        // libellé : « mode · stage » de ses spawns (un mode sans titre garde son slug).
+        row(MOB, [], 'mode_inconnu · Stage 1'),
+      ],
+      // `site` compte les deux ; un id que le committé n'a pas n'a pas de ligne.
+      counts: { guides: 2, site: 3 },
+    });
+  });
+
+  it('roster : gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
+    const { calls, fake, state } = deps();
+    const first = monstersRoster(fake);
+    expect(monstersRoster(fake).roster).toBe(first.roster);
+    expect(calls).toMatchObject({ guideIds: 1, siteIds: 1 });
+    state.stamp = 's2';
+    expect(monstersRoster(fake).roster).not.toBe(first.roster);
+    expect(calls).toMatchObject({ guideIds: 2, siteIds: 2 });
+  });
+
+  it('roster sans tables du jeu : les monstres des guides sont servis, la raison dite — et rien n’est gardé', () => {
+    const { calls, fake } = deps({ siteError: 'table MonsterTemplet introuvable' });
+    const out = monstersRoster(fake);
+    expect(out.roster.map((r) => r.id)).toEqual([BOSS.id, 'twin']);
+    expect(out.counts).toEqual({ guides: 2, site: 2 });
+    expect(out.siteError).toBe('table MonsterTemplet introuvable');
+    monstersRoster(fake);
+    expect(calls.siteIds).toBe(2);
+  });
+
+  it('état : la ligne et ses guides, les cartes à l’adresse de leur icône, les chips, le catalogue', () => {
+    const { fake } = deps();
+    const state = monsterSheetState(BOSS.id, fake);
+    if ('error' in state) throw new Error(state.error);
+    expect(state.monster).toEqual(row(BOSS, [GUIDE, GUIDE2]));
+    expect(state.kit.cards.map((c) => c.id)).toEqual(KIT_IDS);
+    // Le sprite du skill est devenu l'adresse de son icône sur le site.
+    for (const [i, card] of state.kit.cards.entries()) {
+      expect(card).not.toHaveProperty('icon');
+      expect(card.iconSrc).toBe(KIT.cards[i].icon ? img.skill(KIT.cards[i].icon!) : undefined);
+      expect(card.chips).toEqual(KIT.cards[i].chips);
+    }
+    expect(state.kit.chips).toEqual(KIT.chips);
+    expect(state.disk).toEqual(none);
+    expect(state.catalog).toBe(CATALOG);
+    expect(state.sprite).toBe('images/ui/effect');
+    expect(state.guideBase).toBe(`${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/en/guides`);
+  });
+
+  it('état : `shared` — les skills que d’autres monstres portent, leur nombre et leurs noms', () => {
+    const { fake } = deps();
+    const state = monsterSheetState(BOSS.id, fake);
+    if ('error' in state) throw new Error(state.error);
+    // Le jumeau porte tout le kit : chaque carte est partagée par deux monstres.
+    expect(state.shared).toEqual(
+      Object.fromEntries(
+        KIT_IDS.map((id) => [id, { count: 2, names: ['Mega Boss', 'Twin Boss'] }]),
+      ),
+    );
+    // Un monstre seul sur ses skills : rien de partagé.
+    const alone = monsterSheetState('mob', fake);
+    expect('error' in alone ? null : alone.shared).toEqual({});
+  });
+
+  it('état : `disk` — le curé restreint à CE kit, celui d’un autre kit écarté', () => {
+    const { fake } = deps({
+      sections: {
+        chipOwner: { [CHIP.buff]: ['skill-d-un-jumeau', TO.id], ailleurs: 'zz' },
+        chipHide: { [FROM.id]: ['ref-heritee'], zz: ['x'] },
+        chipAdd: { [TO.id]: ['48'], zz: ['7'] },
+      },
+    });
+    const state = monsterSheetState(BOSS.id, fake);
+    if ('error' in state) throw new Error(state.error);
+    expect(state.disk).toEqual({
+      chipOwner: { [CHIP.buff]: TO.id },
+      chipHide: { [FROM.id]: ['ref-heritee'] },
+      chipAdd: { [TO.id]: ['48'] },
+    });
+    // Et les cartes le montrent : la chip est sur sa carte cible.
+    expect(state.kit.cards.find((c) => c.id === TO.id)?.chips).toContain(CHIP.buff);
+    expect(state.kit.cards.find((c) => c.id === TO.id)?.added).toEqual(['48']);
+  });
+
+  it('état : un monstre hors des guides et du site se lit quand même ; un inconnu est dit', () => {
+    const { fake } = deps();
+    const state = monsterSheetState('lone', fake);
+    expect('error' in state ? null : state.monster).toEqual(row(LONE, []));
+    expect(monsterSheetState('nope', fake)).toEqual({ error: 'monstre inconnu : nope' });
+  });
+
+  it('enregistrer : une chip déplacée, une masquée, un effet ajouté — le store, `kitSkillIds` COMPLET, UN commit au nom du monstre', async () => {
+    const { calls, fake } = deps();
+    const changes = {
+      chipOwner: { [CHIP.buff]: TO.id },
+      chipHide: { [TO.id]: [OTHER.buff] },
+      chipAdd: { [FROM.id]: [' 48 ', '48'] },
+    };
+    const out = await saveMonsterKit(BOSS.id, changes, empty, fake);
+
+    expect(out).toEqual({
+      ok: true,
+      log: [
+        `« ${CHIP.name} » : déplacée sur « ${TO.name} »`,
+        `chips de « ${FROM.name} » : 0 masquée, 1 ajoutée`,
+        `chips de « ${TO.name} » : 1 masquée, 0 ajoutée`,
+        'git : fait',
+      ],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    expect(calls.apply).toEqual([
+      {
+        kitSkillIds: KIT_IDS,
+        chipOwner: { [CHIP.buff]: TO.id },
+        chipHide: { [TO.id]: [OTHER.buff] },
+        chipAdd: { [FROM.id]: ['48'] },
+      },
+    ]);
+    expect(calls.git).toEqual([[[PATH], `chore(monsters): Mega Boss (${BOSS.id})`]]);
+  });
+
+  it('enregistrer : « par défaut » retire le porteur curé (`null`) ; ce que le disque porte déjà ne part pas', async () => {
+    const sections = { ...none, chipOwner: { [CHIP.buff]: TO.id }, chipAdd: { [FROM.id]: ['48'] } };
+    const { calls, fake } = deps({ sections });
+    const was = pickMonsterKit(sections, KIT_IDS);
+    const out = await saveMonsterKit(
+      BOSS.id,
+      { chipOwner: { [CHIP.buff]: null, [OTHER.buff]: null }, chipAdd: { [FROM.id]: ['48'] } },
+      was,
+      fake,
+    );
+    expect(out.log[0]).toBe(`« ${CHIP.name} » : remise à sa place par défaut`);
+    expect(calls.apply).toEqual([
+      { kitSkillIds: KIT_IDS, chipOwner: { [CHIP.buff]: null }, chipHide: {}, chipAdd: {} },
+    ]);
+
+    // Rien ne bouge : ni store, ni commit, et ce n'est pas une erreur.
+    const idle = deps({ sections });
+    expect(
+      await saveMonsterKit(BOSS.id, { chipOwner: { [CHIP.buff]: TO.id } }, was, idle.fake),
+    ).toEqual({
+      ok: true,
+      log: ['Rien à enregistrer : le disque porte déjà ces valeurs.'],
+      written: false,
+      stale: false,
+      refused: [],
+    });
+    expect(idle.calls).toMatchObject({ apply: [], git: [] });
+  });
+
+  it('refus : une carte hors du kit — située, rien n’est écrit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveMonsterKit(BOSS.id, { chipHide: { zz: [CHIP.buff] } }, empty, fake);
+    expect(out).toMatchObject({ ok: false, written: false, stale: false });
+    expect(out.refused).toEqual([{ card: 'zz', reason: 'pas une carte de ce monstre' }]);
+    expect(out.log).toEqual([
+      'REFUSÉ — Mega Boss · chips de « zz » : pas une carte de ce monstre.',
+      'Rien à enregistrer.',
+    ]);
+    expect(calls).toMatchObject({ apply: [], git: [] });
+  });
+
+  it('refus : une ref masquée qui n’est pas une chip de la carte — sauf si l’envoi l’y déplace', async () => {
+    const { calls, fake } = deps();
+    const out = await saveMonsterKit(BOSS.id, { chipHide: { [TO.id]: [CHIP.buff] } }, empty, fake);
+    expect(out.refused).toEqual([
+      { card: TO.id, reason: `« ${CHIP.buff} » : pas une chip de cette carte` },
+    ]);
+    expect(calls.apply).toEqual([]);
+
+    const moved = deps();
+    const ok = await saveMonsterKit(
+      BOSS.id,
+      { chipOwner: { [CHIP.buff]: TO.id }, chipHide: { [TO.id]: [CHIP.buff] } },
+      empty,
+      moved.fake,
+    );
+    expect(ok.refused).toEqual([]);
+    expect(moved.calls.apply[0].chipHide).toEqual({ [TO.id]: [CHIP.buff] });
+  });
+
+  it('refus : un effet ajouté hors du catalogue', async () => {
+    const { calls, fake } = deps();
+    const out = await saveMonsterKit(
+      BOSS.id,
+      { chipAdd: { [FROM.id]: ['48', 'nope'] } },
+      empty,
+      fake,
+    );
+    expect(out.refused).toEqual([
+      { card: FROM.id, reason: '« nope » : effet inconnu du glossaire' },
+    ]);
+    expect(calls.apply).toEqual([]);
+  });
+
+  it('refus : `chipOwner` vers un skill hors du kit, situé à la carte de la chip ; un buff inconnu, à l’envoi', async () => {
+    const { calls, fake } = deps();
+    const out = await saveMonsterKit(
+      BOSS.id,
+      { chipOwner: { [CHIP.buff]: 'zz', fantome: TO.id } },
+      empty,
+      fake,
+    );
+    expect(out.refused).toEqual([
+      { card: FROM.id, reason: `« ${CHIP.name} » : « zz » n’est pas une carte de ce kit` },
+      { reason: '« fantome » : pas une chip de ce kit' },
+    ]);
+    expect(calls).toMatchObject({ apply: [], git: [] });
+  });
+
+  it('une ref HÉRITÉE du fichier est conservée : elle n’est ni refusée ni effacée', async () => {
+    const sections = {
+      ...none,
+      chipHide: { [FROM.id]: ['buff-disparu'] },
+      chipAdd: { [FROM.id]: ['effet-retire'] },
+    };
+    const { calls, fake } = deps({ sections });
+    const out = await saveMonsterKit(
+      BOSS.id,
+      {
+        chipHide: { [FROM.id]: ['buff-disparu', CHIP.buff] },
+        chipAdd: { [FROM.id]: ['effet-retire', '7'] },
+      },
+      pickMonsterKit(sections, KIT_IDS),
+      fake,
+    );
+    expect(out).toMatchObject({ ok: true, refused: [] });
+    expect(calls.apply[0]).toMatchObject({
+      chipHide: { [FROM.id]: ['buff-disparu', CHIP.buff] },
+      chipAdd: { [FROM.id]: ['effet-retire', '7'] },
+    });
+  });
+
+  it('`was` périmé : `stale`, sans écriture — le curé d’un AUTRE kit, lui, n’y fait rien', async () => {
+    const { calls, fake } = deps({ sections: { ...none, chipAdd: { [FROM.id]: ['7'] } } });
+    const out = await saveMonsterKit(BOSS.id, { chipAdd: { [FROM.id]: ['48'] } }, empty, fake);
+    expect(out).toEqual({
+      ok: false,
+      log: [
+        'REFUSÉ — Mega Boss · chips : le disque a changé depuis le chargement.',
+        'Rien à enregistrer.',
+      ],
+      written: false,
+      stale: true,
+      refused: [{ reason: 'le disque a changé depuis le chargement' }],
+    });
+    expect(calls).toMatchObject({ apply: [], git: [] });
+
+    const elsewhere = deps({ sections: { ...none, chipAdd: { zz: ['7'] } } });
+    const ok = await saveMonsterKit(
+      BOSS.id,
+      { chipAdd: { [FROM.id]: ['48'] } },
+      empty,
+      elsewhere.fake,
+    );
+    expect(ok).toMatchObject({ ok: true, stale: false, written: true });
+  });
+
+  it('une carte en écart n’est pas écrite, les autres le sont : UN commit, et l’issue le dit', async () => {
+    const { calls, fake } = deps();
+    const out = await saveMonsterKit(
+      BOSS.id,
+      {
+        chipHide: { [FROM.id]: ['pas-une-chip'] },
+        chipAdd: { [FROM.id]: ['48'], [TO.id]: ['7'] },
+      },
+      empty,
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: true, stale: false });
+    expect(out.refused).toEqual([
+      { card: FROM.id, reason: '« pas-une-chip » : pas une chip de cette carte' },
+    ]);
+    expect(calls.apply).toEqual([
+      { kitSkillIds: KIT_IDS, chipOwner: {}, chipHide: {}, chipAdd: { [TO.id]: ['7'] } },
+    ]);
+    expect(calls.git).toHaveLength(1);
+  });
+
+  it('un refus du store est situé à sa carte — ou à celle de la chip pour `chipOwner` — et rien n’est committé', async () => {
+    const { calls, fake } = deps({
+      errors: [
+        `chipHide[${TO.id}] : string list expected`,
+        `chipOwner[${CHIP.buff}] : zz is not a skill of the kit`,
+        'kitSkillIds missing',
+      ],
+    });
+    const out = await saveMonsterKit(BOSS.id, { chipAdd: { [FROM.id]: ['48'] } }, empty, fake);
+    expect(out).toMatchObject({ ok: false, written: false });
+    expect(out.refused).toEqual([
+      { card: TO.id, reason: 'string list expected' },
+      { card: FROM.id, reason: 'zz is not a skill of the kit' },
+      { reason: 'kitSkillIds missing' },
+    ]);
+    expect(calls.apply).toHaveLength(1);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('un monstre inconnu, une forme fausse : refusés sans rien lire de plus', async () => {
+    const { calls, fake } = deps();
+    expect(await saveMonsterKit('nope', {}, empty, fake)).toMatchObject({
+      ok: false,
+      log: ['monstre inconnu : nope.'],
+    });
+    for (const bad of ['x', null, [], { chipHide: [] }, { chipOwner: 'x' }])
+      expect((await saveMonsterKit(BOSS.id, bad, empty, fake)).refused).toHaveLength(1);
+    const lists = await saveMonsterKit(BOSS.id, { chipAdd: { [FROM.id]: 'x' } }, empty, fake);
+    expect(lists.refused).toEqual([
+      { card: FROM.id, reason: 'chipAdd : une liste de refs attendue' },
+    ]);
+    expect(calls).toMatchObject({ apply: [], git: [] });
+  });
+
+  it('un commit en échec : l’écriture est faite, l’issue est un échec', async () => {
+    const { fake } = deps({ git: { ok: false, log: ['git commit a échoué : hook'] } });
+    const out = await saveMonsterKit(BOSS.id, { chipAdd: { [FROM.id]: ['48'] } }, empty, fake);
+    expect(out).toMatchObject({ ok: false, written: true });
+    expect(out.log.at(-1)).toBe('git commit a échoué : hook');
   });
 });
 

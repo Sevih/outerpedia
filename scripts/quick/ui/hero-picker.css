@@ -109,6 +109,19 @@
 .hp-tog[aria-pressed='true'] img {
   opacity: 1;
 }
+/* Une pastille à libellé (`pills` : le type d'un monstre) : sa largeur est celle de son mot. */
+.hp-tog.txt {
+  width: auto;
+  padding: 0 10px;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+}
+.hp-tog.txt:hover,
+.hp-tog.txt[aria-pressed='true'] {
+  color: var(--content);
+}
 .hp-seg {
   display: inline-flex;
   height: 36px;

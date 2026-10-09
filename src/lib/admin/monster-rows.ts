@@ -10,13 +10,9 @@
  *   - tags = slugs des MODES DE JEU où le monstre spawne (select).
  */
 import { reviewEntities, reviewTarget, type TargetReview } from '@/lib/admin/review-store';
-import {
-  freshEncounters,
-  freshMonsters,
-  siteMonsterIds,
-  type Monster,
-} from '@/lib/admin/monster-store';
+import { freshEncounters, freshMonsters, siteMonsterIds } from '@/lib/admin/monster-store';
 import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import { monsterPlaces } from '@/lib/admin/monster-kit';
 import { img } from '@/lib/images';
 import type { ExtractorRow } from '@/components/admin/ExtractorSidebar';
 
@@ -53,48 +49,17 @@ export function buildMonsterRows(): MonsterRowsResult {
   const diffCounts = new Map(review.diff.changed.map((c) => [c.key, c.fields.length]));
 
   const modeLabel = (mode: string): string => enc.modes[mode]?.en ?? mode;
-  // NB : les modes sans intérêt d'extraction (event, remains, sidestory…)
-  // sont ignorés PAR LE GÉNÉRATEUR (mode-titles.json `ignore`) — leurs
-  // donjons/spawns n'existent plus dans encounters.
-  const modesOf = (m: Monster): string[] => {
-    const modes = new Set<string>();
-    for (const s of m.spawns ?? []) {
-      const mode = enc.dungeons[s.dungeon]?.mode;
-      if (mode) modes.add(mode);
-    }
-    return [...modes];
-  };
-  // Stage/zone d'une rencontre : story → saison/épisode/zone/stage ; world
-  // boss → LIGUE SEULE (les 4 donjons d'un groupe partagent le nom, et en
-  // queue de ligne la difficulté sortait de l'écran) ; sinon le nom du
-  // donjon (JC/poursuite/guild raid y portent leur difficulté).
-  const zoneLabel = (dungeon: string): string | undefined => {
-    const d = enc.dungeons[dungeon];
-    if (!d?.name.en) return undefined;
-    if (d.season || d.episode) {
-      const se = [d.season ? `S${d.season}` : '', d.episode ? `Ep${d.episode}` : '']
-        .filter(Boolean)
-        .join(' ');
-      return [se, d.area?.en, d.name.en].filter(Boolean).join(' · ');
-    }
-    if (d.mode === 'world_boss' && d.difficulty?.name?.en) return d.difficulty.name.en;
-    return d.name.en;
-  };
-  const zonesOf = (m: Monster): string[] => {
-    const zones = new Set<string>();
-    for (const s of m.spawns ?? []) {
-      const z = zoneLabel(s.dungeon);
-      if (z) zones.add(z);
-    }
-    return [...zones];
-  };
 
   const seenModes = new Set<string>();
   const rows: ExtractorRow[] = Object.values(fresh).flatMap((m) => {
     // Un monstre sans AUCUNE rencontre restante (ni spawn, ni add rattaché)
     // n'a rien à faire dans la liste — les modes ignorés tombent ici.
     if (!m.spawns?.length && !m.summonedBy?.length && !m.linkedTo?.length) return [];
-    const modes = modesOf(m);
+    // Modes et stages / zones des spawns : le libellé partagé avec quick.
+    // NB : les modes sans intérêt d'extraction (event, remains, sidestory…)
+    // sont ignorés PAR LE GÉNÉRATEUR (mode-titles.json `ignore`) — leurs
+    // donjons/spawns n'existent plus dans encounters.
+    const { modes, zones } = monsterPlaces(m, enc.dungeons);
     for (const mode of modes) seenModes.add(mode);
     return [
       {
@@ -104,7 +69,7 @@ export function buildMonsterRows(): MonsterRowsResult {
         // homonymes. Type = badge BOSS sur le portrait, élément/classe =
         // overlays — pas de doublon texte. Ligne 3 (sub) : stage/zone.
         meta: modes.slice(0, 2).map(modeLabel).join(', '),
-        sub: zonesOf(m).slice(0, 2).join(', '),
+        sub: zones.slice(0, 2).join(', '),
         icon: monsterIconSrc(m.icon),
         iconFrame: monsterSlotSrc(m.type),
         iconInset: true,

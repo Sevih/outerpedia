@@ -132,7 +132,25 @@ de `src/lib/admin/effect-search.ts`, et chaque ligne dit quel champ a répondu ;
 des filtres — nature, sans description, curés seulement, masqués ; la fiche de
 l'effet choisi à droite, avec les champs de `EffectCuratedEditor` et l'extrait
 en placeholder ; « ＋ effet » pour une création ; plusieurs fiches modifiées
-partent en un lot, un commit ; lien retiré du menu admin le 08/10).
+partent en un lot, un commit ; lien retiré du menu admin le 08/10),
+Monstres (= Editor › Monster, étape 12, lot C12 : le câblage des chips de
+skills d'un monstre, `data/curated/monster-skills.json` — la seule chose que
+l'écran de l'admin éditait. Le picker partagé, en lignes, montre d'abord les
+monstres que les GUIDES désignent (543 sur les 4 848 du jeu : `bossId`,
+`monsters`, `group`, `dungeons` des `meta.json`, les groupes des `config.json`
+de versions, et leurs adds), chacun avec son mode · stage et le nombre de ses
+guides ; « Site » élargit aux 2 451 que le site utilise ; pastilles de type,
+recherche par début de mot du nom ou par id. La fiche : le monstre, ses guides
+en liens, puis ses cartes de skills comme le sous-onglet Skills de la Fiche
+perso — ✕ masque une chip, « rétablir » la rend, « ＋ effet » en ajoute une du
+glossaire, et un MENU par chip (« sur la carte… ») la pose sur une autre carte
+du kit, à la place du glisser-déposer de l'admin ; un badge dit quand un skill
+est partagé par d'autres monstres. Un enregistrement, un commit
+`chore(monsters): <nom> (<id>)`. Quick lit le COMMITTÉ (`data/generated/`),
+pas l'extraction fraîche : il édite ce que le site montre, sans tables du jeu.
+Les stats, l'intégration et les versions d'un monstre ne sont PAS de cet
+écran : elles sont à l'extractor, étapes 19 et 20 ; lien Monster retiré du
+menu admin le 09/10).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -147,8 +165,8 @@ après les Bannières (5), avant Events :
 5 Bannières (fait, B35) → 18 Tableau de bord (fait, B36) → 21 Patch (fait,
 C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeurs
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
-Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 14 Gear presets non porté et
-15 Tag control fait autrement, A34) →
+Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 14 Gear
+presets non porté et 15 Tag control fait autrement, A34) →
 16 et 17 Guides →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
@@ -245,9 +263,28 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       l'EE d'un `20…` dit « porté aussi par » son pendant), plus une liste de
       129 EE à part.
 
-12. **Editor › Monster**
-    `MonsterKitEditor`, `MonsterStatsCard`, `MonsterActions`
-    - Agacements : c'est le bordel (surtout la partie versionnage). et de plus on devrait mettre en avant ceux utiliser dans les guides plutot que tous. ce que je veux dire c'est que l'on a quoi 100 guide donc pas sur que avoir les data de tout les monstres dans l'editor soit pertinent.
+12. **Editor › Monster** — FAIT pour l'ÉDITEUR, lot C12 : l'onglet
+    « Monstres » (cf. « Déjà dans quick »). L'entrée reste pour que la
+    numérotation des suivantes ne bouge pas.
+    `MonsterKitEditor`
+    - Correction de l'inventaire (lecture du code, 09/10) : l'écran
+      « Editor › Monster » n'édite QU'UNE chose, le câblage des chips
+      (`chipOwner`, `chipHide`, `chipAdd` de `monster-skills.json`).
+      `MonsterStatsCard` (les stats, en lecture) et `MonsterActions` (Save =
+      `integrateMonster`, « Version » = `versionMonster` puis le
+      ré-épinglage des guides) vivent dans la page EXTRACTOR du monstre :
+      ils étaient rangés ici à tort, ils sont aux étapes 19 et 20.
+    - Agacements : c'est le bordel (surtout la partie versionnage). et de plus on devrait mettre en avant ceux utiliser dans les guides plutot que tous. ce que je veux dire c'est que l'on a quoi 100 guide donc pas sur que avoir les data de tout les monstres dans l'editor soit pertinent. — corrigé
+      pour l'éditeur : le picker ouvre sur les 543 monstres que les 150
+      guides désignent, « Site » élargit ; le câblage se fait par un menu sur
+      chaque chip, carte par carte, sans glisser-déposer. Le VERSIONNAGE
+      n'est pas porté : il n'est pas « une version par mode » (une variante
+      de mode ou de difficulté est un AUTRE id — 4 848 monstres, 426 noms)
+      mais des archives figées `monster-archive/<id>@<n>.json` puis
+      l'épinglage `bossId@n` des guides (trois archives sur le disque, zéro
+      épinglage au 09/10). Note pour 19-20 : versionnage à repenser — les
+      archives et l'épinglage en UN geste qui montre les guides touchés
+      AVANT de figer.
 
 13. **Editor › Item**
     `ItemCuratedEditor`, `ItemsBrowser`
@@ -294,12 +331,14 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     numérotation des suivantes ne bouge pas.
 
 19. **Extractor › revue par entité**
-    `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item
+    `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item ; pour un monstre, `MonsterStatsCard` (ses stats, en lecture — cf. la correction de l'étape 12)
     - Agacements :
 
 20. **Extractor › intégration**
-    `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport`
-    - Agacements :
+    `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
+    - Agacements : (reporté de l'étape 12 — « c'est le bordel, surtout la
+      partie versionnage ») versionnage à repenser : les archives et
+      l'épinglage en UN geste qui montre les guides touchés AVANT de figer.
 
 21. **Patch : lanceur et journal** — FAIT, lot C10 : la section « Patch »
     (cf. « Déjà dans quick »). La ligne « Agacements » était vide : les

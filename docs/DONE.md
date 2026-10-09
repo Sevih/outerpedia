@@ -7,6 +7,117 @@
 
 ## 2026-10-09
 
+- **quick : onglet « Monstres » — les monstres des guides d'abord, le câblage
+  des chips sans le bordel (lot C12, étape 12 de la migration)** — l'écran
+  « Editor › Monster » de l'admin n'édite qu'une chose, le câblage des chips
+  de skills dans `data/curated/monster-skills.json` (`chipOwner`, `chipHide`,
+  `chipAdd`) : c'est lui qui est porté, avec les deux agacements de Sevih
+  corrigés — « mettre en avant ceux utilisés dans les guides » et « c'est le
+  bordel ». Le versionnage et l'intégration, eux, sont de l'extractor et ne
+  bougent pas. **La logique descend** dans `src/lib/admin/monster-kit.ts`
+  (déplacée de `src/app/admin/editor/monsters/[id]/page.dev.tsx`, qui
+  l'appelle maintenant) : `monsterKitCards(monster, skills, sections)` rend
+  `{ cards, chips }` — une carte par skill du monstre (id, nom, type,
+  description aux placeholders résolus, sprite brut, et ce que le disque y
+  pose : `chips`, `hidden`, `added`) et les chips du kit, une par buff
+  (`monsterChipMeta`, la place « règles pures » de `monsterSkillViews`, le
+  porteur curé pour CE kit, les cartes qui la masquent) ;
+  `monsterKitCatalog()` est le catalogue des persos (`kitEffectCatalog`, le
+  même code) ; `pickMonsterKit` restreint les trois sections à un kit ;
+  `monsterPlaces` est le libellé « modes / stages » de la sidebar, sorti de
+  `monster-rows.ts` (qui l'appelle) pour que quick le rende sur le committé.
+  Et la fonction qui manquait, `guideMonsterIds()` : les monstres que les
+  guides désignent — `bossId` et `monsters` des `meta.json` (un `id@n` vaut
+  son id), `group` et `dungeons` des `meta.json`, `group` / `main` / `subA` /
+  `subB` des `config.json` de versions, résolus par `encountersOfGroup` et
+  `getEncounter`, plus leurs adds (`summonedBy`, `linkedTo`) — avec, par
+  monstre, ses guides (catégorie, slug, titre). **Les chiffres du jour** :
+  150 guides, 53 `config.json` de versions → 543 monstres sur 4 848 (25
+  d'entre eux portent un `summonedBy` ou un `linkedTo`), là où
+  `siteMonsterIds` en donne 2 382 ; 71 monstres des guides n'y sont pas, le
+  roster « Site » en compte donc 2 451 ; 2 834 des 4 064 skills sont
+  partagés par plusieurs monstres ; le curé porte 24 `chipOwner`, 41
+  `chipHide`, 35 `chipAdd`, et 183 monstres ont une chip posée ou masquée
+  par lui. **Serveur**
+  (`scripts/quick/actions.ts`, routes dans `server.ts`) : `monstersRoster()`
+  → `GET /api/monsters/roster` (les monstres des guides, par nom, puis les
+  autres du site ; par ligne id, nom, type, icône, « mode · stage », ses
+  guides ; calculé une fois — 0,65 s — et gardé tant que `monsters.json`,
+  `encounters.json` et les `meta.json` / `config.json` des guides n'ont pas
+  bougé ; sans tables du jeu, `siteError` et les seuls monstres des guides) ;
+  `monsterSheetState(id)` → `GET /api/monsters/state?id=` (la ligne, `kit`,
+  `disk` — le curé restreint au kit —, le catalogue, `shared` — par skill que
+  d'autres monstres portent, leur nombre et jusqu'à cinq noms —,
+  `guideBase`) ; `saveMonsterKit` → `POST /api/monsters`. **Quick lit le
+  COMMITTÉ** (`committedMonsters`, `committedMonsterSkills`, gardés en mémoire
+  sur leur `fileStamp`), pas l'extraction fraîche que lit l'admin : il édite
+  ce que le site montre, et l'onglet marche sans tables du jeu — un monstre
+  extrait mais pas encore intégré n'y est donc pas. `saveMonsterKit` : `was`
+  (le `disk` chargé) doit être ce que le disque porte encore pour ce kit,
+  sinon `stale` sans écriture ; l'envoi est contrôlé comme `planKit`, plus
+  `chipOwner` — un buff déplacé est une chip du kit, sa cible une carte du
+  kit ou `null`, une ref masquée NOUVELLE une chip que la carte montre (par
+  défaut, par le disque, ou par un déplacement du même envoi), un effet
+  ajouté NOUVEAU du catalogue ; une ref HÉRITÉE du fichier reste (l'admin
+  reconstruit `chipHide` depuis les seules chips affichables et effaçait le
+  reste en silence — non reproduit) ; puis `applyKitCuration` avec
+  `kitSkillIds` complet, ses refus situés à la carte, puis UN `commitPaths`
+  de `monster-skills.json`, `chore(monsters): <nom> (<id>)`.
+  `ADMIN_TO_QUICK` gagne `/admin/editor/monsters`. **La page**
+  (`tabs/monsters.{html,js,css}`, préfixe `m-`, groupe Éditeurs après
+  Effets, `wide`, hash `#monsters/<id>`) : le picker partagé en lignes,
+  ouvert d'office — les monstres des guides, [Guides | Site], pastilles de
+  type, recherche par début de mot du nom ou par id ; la carte du monstre
+  (icône, type, id, mode · stage, ses guides en liens, « Stats, intégration
+  et versions : extractor (étapes 19-20) ») ; la savebar ; les cartes du kit
+  deux par rangée, comme Skills de la Fiche perso, avec le badge « partagé
+  par N monstres », ✕ / « rétablir », « ＋ effet », et — à la place du
+  glisser-déposer — un `select` par chip (« sur la carte… », puis « par
+  défaut » une fois déplacée) qui pose `chipOwner` ; un geste redessine sa
+  carte, un déplacement la carte quittée et la carte cible. Le roster n'est
+  demandé qu'à la première venue sur l'onglet. **Deux fichiers partagés
+  touchés, à dessein** : `ui/hero-picker.mjs` gagne `match` (la recherche de
+  l'appelant) et `pills` (des pastilles à libellé), sans quoi ni « nom ou
+  id » ni le filtre par type n'étaient possibles — les appelants existants
+  ne passent ni l'un ni l'autre, rien ne change pour eux ; `monster-rows.ts`
+  appelle `monsterPlaces`. **Admin** : le lien « Monster » sort du menu
+  Editor (`src/app/admin/layout.dev.tsx`), la page répond par son URL.
+  **Docs** : `docs/quick-migration.md` (12 fait pour l'éditeur, l'inventaire
+  corrigé — `MonsterStatsCard` et `MonsterActions` passent aux étapes 19 et
+  20 —, la note « versionnage à repenser : les archives et l'épinglage en UN
+  geste qui montre les guides touchés avant de figer »), `STYLE.md` (croquis
+  « Monstres », `match` et `pills` du picker), le TODO (contrôles à
+  l'écran). **Vérifié** : `pnpm typecheck` →
+  `tsc --noEmit -p scripts/tsconfig.json`, sans erreur ; `pnpm lint` →
+  `$ eslint`, sans sortie ; `pnpm test` → `Tests  3353 passed (3353)`, 206
+  fichiers (3 297 + 56 : 16 de `monster-kit.test.ts` sur le committé et les
+  guides réels, ids dérivés ; 20 d'`actions.test.ts`, store et git factices
+  sur un vrai kit ; 17 de la page en happy-dom ; 2 du picker ; 1 du banc) ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` →
+  `Tests  1286 passed (1286)`. Rendu de l'admin inchangé : l'ancienne
+  logique de la page, recopiée de HEAD dans un script jetable, comparée à
+  `monsterKitCards` sur les 4 848 monstres avec le curé du jour — zéro
+  écart (cartes, chips, `chipAdd`), catalogue identique (210 effets). Banc
+  sur un quick isolé (:4801, clés vidées, que des GET, rien d'enregistré) :
+  `--tabs monsters` (le picker ouvert sur les guides, « 543 des guides ·
+  2451 avec le site »), `--hash monsters/4318062` (Annihilator, boss du
+  guide retouché le 07/10) et `monsters/4044008` (Sphinx Guardian, un kit
+  déjà curé : une chip masquée, une « déplacée », deux « ajoutées ») — dans
+  la charte. Aucun autre changement visuel : les sections voisines ne sont
+  pas touchées, et la sidebar de l'admin lit le même libellé, déplacé tel
+  quel. **Laissé** : aucun clic ni enregistrement réel (le banc ne clique
+  pas) — contrôles au TODO ; `monster-rows.ts` n'a pas de test de sa liste
+  (elle lit les tables), seul `monsterPlaces` en a ; le picker sur « Site »
+  redessine 2 451 lignes à chaque frappe ; les liens de guide mènent au site
+  de dev du poste (`ADMIN_BASE`) ; un add lié par le kit hérite des guides de
+  toutes ses ancres (Ragnakeus `4086001` en cite huit, le câblage cloné des
+  world boss) ; les quarante lignes du picker d'effets (`fxOptions`,
+  `fxTile`) sont recopiées de `tabs/character.js`, qui ne les exporte pas —
+  une brique commune serait un lot à part. Vu hors périmètre, pas touché :
+  les en-têtes de `hero-picker.mjs` et de `hero-picker.css` citent encore
+  Gear reco ; `EntitySwitch` mène toujours de l'extractor à cette page admin
+  (elle répond).
+
 - **Relecture A34 (Fable) — Gear presets non porté, Tag control = le test,
   restes de B40, validé** : périmètre tenu (quatorze fichiers ; hors quick,
   le menu admin qui perd le groupe Misc entier, vide sans ses deux liens).

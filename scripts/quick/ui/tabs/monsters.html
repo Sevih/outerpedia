@@ -1,0 +1,46 @@
+<section id="tab-monsters" hidden>
+  <div class="head">
+    <h2>Monstres</h2>
+    <p class="hint">
+      Le câblage des chips d'effets sur les cartes de skills d'un monstre : ✕ masque une chip sur sa
+      carte, « ＋ effet » en ajoute une du glossaire, le menu d'une chip la pose sur une autre carte
+      du kit. Présentation seule : la donnée extraite reste fidèle aux tables. Le picker montre
+      d'abord les monstres que les guides désignent ; « Site » élargit à tous ceux que le site
+      utilise. Rien ne s'écrit à la saisie : « Enregistrer » envoie le kit et committe. Un skill est
+      souvent partagé — y masquer ou y ajouter une chip vaut pour tous les monstres qui le portent.
+      Lu au rendu : le site ne change qu'une fois « Pousser » fait et le build de la CI déployé.
+    </p>
+  </div>
+
+  <!-- Le monstre choisi (posé par `who`) et le bouton qui ouvre le picker partagé
+       (`hero-picker.mjs`), en lignes. -->
+  <div class="card pad m-char" aria-label="Monstre">
+    <div class="m-who" id="m-who"></div>
+    <button class="btn ghost" id="m-pick" type="button" aria-haspopup="dialog" disabled>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5" />
+      </svg>
+      <span id="m-pick-label">Choisir un monstre</span>
+    </button>
+  </div>
+
+  <div class="savebar" id="m-bar" role="toolbar" aria-label="Enregistrement" hidden>
+    <span id="m-count"></span>
+    <button class="btn ghost" id="m-reset" disabled>Annuler</button>
+    <button class="btn primary" id="m-save" disabled>Enregistrer</button>
+  </div>
+
+  <!-- Les cartes du kit (posées par `render`), deux par rangée. -->
+  <div id="m-panel"></div>
+</section>

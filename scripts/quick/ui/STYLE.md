@@ -43,8 +43,8 @@ pastille.
   tête — sa première section, le tableau de bord, est celle que la page
   ouvre ; `.gtab.soon`
   grisé avec son badge « à venir » : Guides, tant que quick n'a pas repris
-  l'admin — Éditeurs a deux sections, Fiche perso et Effets, et Outils la
-  sienne, Noms), puis à droite les
+  l'admin — Éditeurs a trois sections, Fiche perso, Effets et Monstres, et
+  Outils la sienne, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
   le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
@@ -65,7 +65,7 @@ pastille.
   Les sections vivent dans UN document : chacune préfixe ses `id` et ses
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `j-` Journal du site,
-  `k-` 4-comics, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
+  `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
   `v-` Vidéos, `x-` Effets) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
   lot C11) : aucun id de l'un n'est repris par l'autre, et un test le garde
@@ -81,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -238,7 +238,7 @@ survol d'un fichier). `.empty` : l'état vide d'une carte, en pointillés —
 
 ### `.savebar`
 
-La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Bannières et Journal du site : le compte de changements
+La barre d'enregistrement de Rangs, Noms, Fiche perso (la sienne, et celle des builds de son sous-onglet Gear reco), Effets, Monstres, Bannières et Journal du site : le compte de changements
 (le `span`, poussé à gauche), « Annuler », « Enregistrer ». Collante en haut.
 
 ```html
@@ -562,13 +562,14 @@ La modale où l'on choisit un perso — ou plusieurs —, PARTAGÉE : « Fiche
 perso » l'ouvre (Gear reco, qui l'ouvrait aussi, y prend son perso depuis
 B40), les synergies s'en servent en multi-choix. Et
 autre chose qu'un héros, quand ce n'est qu'une question de contenu : le
-sous-onglet Skills y choisit un EFFET du glossaire (B39).
+sous-onglet Skills y choisit un EFFET du glossaire (B39), l'onglet Monstres
+un MONSTRE, puis un effet à son tour (C12).
 Elle n'est à aucun onglet : `openHeroPicker(opts)` la pose dans `<body>` au
 premier appel (classes `hp-`, `ui/hero-picker.css`), aux mesures du picker de
 pièces de Gear reco. Une section n'a donc rien à écrire dans son HTML.
 
 ```
-openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, hint?, tile?, rows?, placeholder?, none? })
+openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filters?, tally?, seg?, pills?, match?, hint?, tile?, rows?, placeholder?, none? })
 .hp-modal (voile, fixe)  >  .hp-panel (720 px, 720 px de haut au plus)
   .hp-head     titre en capitales · badge « 129 persos » (multi : « 2 choisis sur 129 » ; `tally` le remplace) … ✕
   .hp-top      la recherche (36 px, « Chercher un perso… ») ; dessous .hp-filters :
@@ -583,6 +584,8 @@ autre chose que des héros (le picker d'effets de Skills) :
   `rows`        .hp-tiles.rows : des tuiles en LIGNES (une icône, le nom à côté, 13 px), 200 px au moins, trois colonnes dans le panneau
   `placeholder` la recherche (« Chercher un effet… », aussi son `aria-label`) ; `none` : le vide (« Aucun effet ne correspond. »)
   un item sans `class` ni `element` : aucune pastille — l'appelant passe SES `filters`, ceux du module pourraient porter une classe enfoncée
+  `pills`       des pastilles à LIBELLÉ (.hp-tog.txt, la largeur de leur mot), après celles d'élément et de classe : `{ label, options: [valeur, texte][], of(item) }` — plusieurs s'enfoncent, aucune = tout ; gardées dans `filters.pills` (les types du picker de Monstres : boss · area boss · named · monster)
+  `match(item, q)` ce qui répond à la recherche, à la place de « le nom contient la saisie » — `q` : la saisie en minuscules, sans blancs autour (le début d'un mot du nom, ou de l'id, pour un monstre)
 ```
 
 Choix unique : la tuile cliquée part à `onPick(id)` et la modale se ferme —
@@ -871,6 +874,83 @@ confirmation (`canLeave`). Propres à l'onglet, dans `tabs/effects.css` :
 `.x-cols`, `.x-list`, `.x-heads`, `.x-rows`, `.x-pair`, `.x-sep`, `.x-row`,
 `.x-dim`, `.x-why`, `.x-nat`, `.x-ico`, `.x-sheet`, `.x-ext`, `.x-key`,
 `.x-langs`.
+
+### Monstres (`wide`, fait — C12)
+
+Le câblage des chips d'effets sur les cartes de skills d'un monstre
+(`data/curated/monster-skills.json`), l'éditeur « Monster » de l'admin sans
+sa liste latérale : le picker montre d'abord les monstres que les guides
+désignent. Croquis du rendu :
+
+```
+.head  Monstres — Le câblage des chips d'effets sur les cartes de skills d'un monstre… Le picker montre d'abord les monstres que les guides désignent… Un skill est souvent partagé…
+.card.pad.m-char  l'en-tête du monstre : icône 56 px, nom ; dessous badge off du type · id (chasse fixe) · « mode · stage » de ses spawns
+   « Guides : » ses guides en liens (le site de dev du poste, `/en/guides/<catégorie>/<slug>`, nouvel onglet) ; sans guide, badge off « aucun guide »
+   « Stats, intégration et versions : extractor (étapes 19-20). » en .lbl — ce que l'onglet ne porte pas
+   à droite [Changer de monstre] (le picker) ; sans monstre : « Aucun monstre choisi. », [Choisir un monstre], et le picker OUVERT d'office à chaque venue sur l'onglet
+.savebar   2 changements · 1 refus   [Annuler] [Enregistrer]   (absente sans monstre)
+le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : « Choisir un monstre » · badge « 543 des guides · 2451 avec le site »
+   la recherche « Chercher un monstre (nom ou id)… » : chaque mot de la saisie COMMENCE un mot du nom (la règle d'Effets), ou la saisie commence l'id
+   pastilles de type (`pills` : boss · area boss · season boss · named · monster — ceux que le roster porte) ; à droite le segmenté [Guides | Site], « Guides » d'office
+   une ligne (.m-pk) : icône 36 px · nom, et dessous en atténué « mode · stage » (son id pour un add sans spawn) · badge off du type · badge edit « N guides » ; `title` = nom, id, titres de ses guides
+   les monstres des guides d'abord, par nom, puis ceux du site ; .empty « Aucun monstre ne correspond. »
+#m-panel — .m-cols, une .card.m-card par skill du kit, deux par rangée (une seule sous 1000 px), dans l'ordre du monstre
+  .card   card-head : icône du skill 36 px · nom (« (sans nom) » pour un skill technique) · id · type (chasse fixe) · badge off « partagé par N monstres » (`title` : jusqu'à cinq noms) · badge edit « modifié » · badge ko « refusé »
+     .m-desc   la description telle que le jeu l'écrit, en anglais (`gameText` de `gear-view.mjs`)
+     .m-chips  les chips d'effets, puis [＋ effet] (.btn.ghost.sm)
+        une chip du kit = la `.chip` de la charte : tuile de l'effet 22 px (.m-fx) · nom · [badge edit « déplacée »] · son MENU · ✕ (`title` = son buff et le skill qui le porte)
+        le menu (.m-move, un `select` à la hauteur de la chip) : « sur la carte… » puis les cartes du kit (« nom · type ») ; il pose la chip sur la carte choisie (`chipOwner`) — elle quitte sa carte et apparaît sur la cible, « déplacée » ; son menu propose alors « par défaut », qui la rend aux règles
+        ✕ la MASQUE sur cette carte (`chipHide`) : pointillés, atténuée, nom barré, sans menu, et [rétablir] à la place de ✕
+        un masquage resté sur une carte alors que la chip est montrée ailleurs : la chip y paraît masquée, [rétablir] seulement
+        un effet AJOUTÉ (`chipAdd`) : badge edit « ajoutée », son ✕ le retire ; [＋ effet] ouvre le picker d'effets de Skills (« Ajouter un effet — <skill> », [Tous | Buffs | Debuffs])
+        bord accent (.dirty) : la chip, ou son menu, n'est pas dans l'état que le disque porte
+     .m-err    le refus de la carte, en rouge
+  sous les cartes : le refus de l'envoi entier (`stale`, forme) ; .empty « Aucune carte de skill. »
+.card.ko (une carte refusée) : bord danger
+le hash : `#monsters/<id>` — la page l'écrit au choix du monstre : recharger y revient
+```
+
+Le roster vient de `GET /api/monsters/roster` (`monstersRoster` : les monstres
+des guides avec leurs guides, puis ceux du site, et `counts`), lu à la
+PREMIÈRE venue sur l'onglet, pas au démarrage — le serveur le calcule une
+fois et le garde tant que ni les monstres, ni les donjons, ni les guides
+n'ont bougé ; sans tables du jeu sur le poste, la liste du site manque
+(`siteError`, le badge dit « site illisible ») et les monstres des guides
+restent. La fiche vient de `GET /api/monsters/state?id=`
+(`monsterSheetState`) : la ligne du monstre, `kit` — ses cartes et ses chips
+telles que l'admin les calcule (`monsterKitCards` de
+`src/lib/admin/monster-kit.ts`, sur le COMMITTÉ : quick édite ce que le site
+montre, sans tables du jeu), chaque chip avec sa place par défaut
+(`defaultCards`) —, `disk` — le curé restreint à ce kit (`chipOwner`,
+`chipHide`, `chipAdd`) —, le catalogue des effets, `shared` (les skills que
+d'autres monstres portent) et `guideBase`. La page ne recopie aucune règle :
+la place d'une chip est `chipOwner` du disque ou de la saisie, sinon
+`defaultCards`. Un geste redessine SA carte — et, pour un déplacement, la
+carte quittée et la carte cible —, le focus reste sur la chip ; la savebar
+compte chaque chip déplacée, masquée, rétablie, ajoutée ou retirée. Poser une
+chip sur une carte qui la masquait l'y rétablit (la règle de l'admin).
+« Enregistrer » envoie à `POST /api/monsters` (`saveMonsterKit`) les chips
+déplacées (`chipOwner` : buff → carte, `null` = par défaut), les deux listes
+ENTIÈRES des cartes modifiées (une ref héritée du fichier, que la carte ne
+montre pas, y reste) et `was`, le `disk` chargé. Le serveur refuse `stale`,
+sans rien écrire, si le disque porte autre chose pour ce kit ; contrôle
+l'envoi contre le kit qu'il recalcule (un buff déplacé est une chip du kit,
+sa cible une de ses cartes ; une ref masquée nouvelle est une chip de la
+carte, un effet ajouté nouveau est du catalogue), écrit par
+`applyKitCuration` — le store de l'admin, avec tous les skills du kit — et
+committe `chore(monsters): <nom> (<id>)`. Un refus est SITUÉ à sa carte :
+cerclée, son message dessous, sa saisie gardée — y retoucher le lève.
+« Annuler » relit le disque. Changer de monstre ou quitter l'onglet avec des
+changements en attente demande confirmation (`canLeave`). Une icône que le
+site n'a pas (un monstre hors de ses pages) laisse son cadre vide. Propres à
+l'onglet, dans `tabs/monsters.css` : `.m-char`, `.m-who`, `.m-face`, `.m-id`,
+`.m-traits`, `.m-mono`, `.m-guides`, `.m-link`, `.m-cols`, `.m-wide`,
+`.m-card`, `.m-body`, `.m-err`, `.m-skico`, `.m-skid`, `.m-desc`, `.m-chips`,
+`.m-chip`, `.m-chn`, `.m-move`, et `.m-fx`, la tuile d'effet de la Fiche
+perso (`.c-fx`), recopiée — elle vaut aussi sous `.hp-modal`, pour le picker
+d'effets ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
+`.m-pn`, `.m-pname`, `.m-pwhere`, et l'élargissement du panneau
+(`:has(.m-pk)`).
 
 ## Outils — croquis
 
