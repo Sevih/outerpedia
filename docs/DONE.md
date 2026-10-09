@@ -7,6 +7,33 @@
 
 ## 2026-10-09
 
+- **Relecture C12 (Fable) — onglet « Monstres » de quick, validé** :
+  périmètre tenu (vingt fichiers ; hors quick, la logique des cartes
+  descendue de la page admin dans `src/lib/admin/monster-kit.ts`, le
+  libellé « modes / stages » sorti de `monster-rows.ts`, le menu admin qui
+  perd « Monster »). `pnpm typecheck && pnpm lint && pnpm test` sur HEAD
+  vert ; `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` :
+  1 286 cas verts. Rejoué par le module (tsx) : le roster compte 2 451
+  lignes dont 543 avec guides, les monstres des guides d'abord ; Sphinx
+  Guardian `4044008` : six cartes, quatre partagées par quatre monstres, le
+  curé du disque restreint au kit (un porteur, une chip masquée, deux
+  ajoutées) ; `saveMonsterKit` à store et git factices — clé hors kit, cible
+  de `chipOwner` hors kit, ref masquée hors carte : trois refus situés à la
+  carte, aucun appel ; `was` périmé → `stale`, aucun appel ; un déplacement
+  et un ajout → `applyKitCuration` avec les six `kitSkillIds` et UN commit
+  `chore(monsters): Sphinx Guardian (4044008)` de `monster-skills.json`.
+  Banc rejoué sur un quick isolé (:4889, clés vidées, que des GET) : le
+  picker ouvert d'office sur « 543 des guides · 2451 avec le site », deux
+  colonnes, type et nombre de guides par ligne, pastilles de type et segment
+  Guides / Site ; la fiche de Sphinx Guardian : ses guides en lien, ses
+  cartes deux par rangée avec le badge « partagé par N monstres », la chip
+  masquée barrée avec « rétablir », la « déplacée », les « ajoutées », le
+  `select` « sur la carte… » dans chaque chip — dans la charte, la chip est
+  large mais lisible, Sevih en jugera (TODO). Les choix de l'agent tiennent :
+  lire le COMMITTÉ plutôt que l'extraction fraîche (quick édite ce que le
+  site montre, et marche sans tables), le `select` à la place du
+  glisser-déposer. Suite : B44, le dernier des Éditeurs.
+
 - **quick : onglet « Monstres » — les monstres des guides d'abord, le câblage
   des chips sans le bordel (lot C12, étape 12 de la migration)** — l'écran
   « Editor › Monster » de l'admin n'édite qu'une chose, le câblage des chips
