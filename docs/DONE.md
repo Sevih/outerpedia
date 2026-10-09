@@ -7,6 +7,36 @@
 
 ## 2026-10-09
 
+- **Fiche « Base Stats » : les Core Fusion et les passifs de S2 justes, contrat
+  solver corrigé (PR cloud T16 `#59` et T18 `#60`, hors lot)** : huit captures
+  de Sevih en jeu (lv100, sans équipement, tout au max) ont tranché ce que
+  l'audit des doublons laissait ouvert. Un perso fusionné garde l'ID de son
+  perso d'ORIGINE : sa base et ses évolutions en viennent, seules ses
+  compétences viennent du `27xxxxx` ; ses passifs de classe et de noyau se
+  cumulent ; un passif permanent de S2 compte au niveau courant de la
+  compétence. Snow fusionné : 1503 / 6452 / 1366 / 155 en jeu, là où la fiche
+  affichait 5202 de HP et gear-solver 7171. T16 : `solver-ingredients.ts` prend
+  la base du perso d'origine (une ligne ; le contrat ne change que pour Snow et
+  Lisha, hash `e0d0b39edac2`). T18 : `char-progression.ts` lit base, évolutions
+  et passifs dans `data/generated/solver/characters.json` — une seule source ;
+  `premium` devient la couche `passives` de `stat-compose.ts`, et
+  `progression.json` perd `evoRewards` et `premium` (−6 269 lignes). La fiche se
+  place au niveau MAX des compétences, comme le Combat Power de la même
+  section : Claire y affiche 1096, pas les 1002 de la capture (S2 niv. 1).
+  Intégration : conflit avec T5 dans `char-progression.test.ts` (imports des
+  deux côtés gardés, fixture passée de `premium` à `passives`), instantané de
+  l'oracle T1 régénéré depuis gear-solver `7b9bf32`, liste d'écarts connus
+  VIDÉE — la fiche est identique à `composeCharStats` sur les 129 persos, en
+  blanc comme en fiche complète. Contrôles : typecheck, lint, format, 208
+  fichiers et 3420 tests verts ; `datagen:build` = committé pour `solver/` et
+  `progression.json`. Côté gear-solver, fusionnés en local : `#13` (script de
+  l'oracle), `#31` (captures en test, contrat corrigé), `#32` (un passif de
+  compétence vaut zéro à un niveau qui ne le porte pas — Claire). Restes : le
+  bonus de vitesse du noyau est un +6 précuit dans le contrat (juste au lv100,
+  un point de trop aux bas niveaux, taux ou fixe non tranché par capture) ; le
+  passif de noyau est pris au niveau de fusion max. À contrôler à l'écran par
+  Sevih : Snow fusionné, Ame (46 % de taux critique), Claire (1096 d'ATK).
+
 - **Quatre PR des sessions cloud fusionnées en local (hors lot)** : T6 `#54`
   (constantes de la génération lues de leurs tables, `singleValue` qui jette si
   une colonne censée constante diverge), T1 `#52` (test oracle fiche du wiki ↔
