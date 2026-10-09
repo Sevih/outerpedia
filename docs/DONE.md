@@ -7,6 +7,26 @@
 
 ## 2026-10-09
 
+- **Relecture B43 (Fable) — EE dans la « Fiche perso », validé** : périmètre
+  tenu (douze fichiers ; hors quick, le seul est le menu admin qui perd
+  « EE »). `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` : 791 cas verts.
+  Rejoué par le module (tsx) : l'état de Snow porte son EE Glacial Bow, le
+  second porteur Core Fusion Snow, une chip AUTO, deux passifs et le
+  catalogue (210) ; Lambda `2000124` sans entrée curée → quatre champs vides.
+  `saveCharacterSheet` à stores factices — un rang +10 en cellule ET deux
+  chips dans le même enregistrement → UN SEUL `upsertEe` portant les quatre
+  champs fusionnés (`rank` B gardé, `rank10` S, la chip masquée, l'effet
+  ajouté) puis UN commit `chore(characters): Snow` avec `equipment.json` ;
+  une ref hors des chips de l'EE → refus situé `field: 'ee'`, aucun appel ;
+  `was` périmé → `stale`, aucun appel. Banc rejoué sur un quick isolé (:4887,
+  clés vidées, que des GET) : Core Fusion Snow a bien SON EE (Frost Nova),
+  Lambda sa fiche vide ; en-tête à la tuile d'item, cartes Rangs et Passifs
+  côte à côte, Chips dessous — dans la charte. Ordre : B43 a tourné avant A34
+  (encore ouvert), l'arbre était propre, A34 trouvera le menu sans « EE ».
+  À Sevih : ses contrôles au TODO, dont l'aller-retour d'un rang entre la
+  fiche et Rangs. Suite : A34, puis C12, puis B44.
+
 - **quick : « Fiche perso » › EE — les rangs et les chips de l'équipement
   exclusif dans la fiche du perso (lot B43, étape 11 de la migration)** —
   agacement de Sevih : l'éditeur EE de l'admin « devrait limite être une tab
