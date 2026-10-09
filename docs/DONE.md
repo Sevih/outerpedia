@@ -7,6 +7,27 @@
 
 ## 2026-10-09
 
+- **Relecture B39 (Fable) — Skills de la « Fiche perso », validé** :
+  périmètre tenu (seize fichiers ; hors quick, le calcul des cartes descendu
+  de la page admin dans `src/lib/admin/character-kit.ts`, que la page
+  rappelle — un déplacement, gardé par ses tests).
+  `pnpm typecheck && pnpm lint && pnpm test` sur HEAD vert ;
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin` :
+  1 195 cas verts. Rejoué par le module (tsx) : l'état d'Aer sert cinq cartes
+  et le catalogue ; `saveCharacterSheet` à store factice — une ref masquée qui
+  n'est pas une chip de la carte → refus situé `5501`, aucun appel ; une carte
+  d'un autre perso → refus situé, aucun appel ; masquer la chip `11` de
+  « Whatever! » et ajouter l'effet `1` → `applyKit` avec les cinq cartes du
+  perso en contexte et UN commit `chore(characters): Aer` qui ne porte que
+  `data/curated/character-skills.json`. Banc rejoué sur un quick isolé
+  (:4881, clés vidées, que des GET) : les cinq cartes d'Aer deux par rangée,
+  descriptions colorées comme le site, chips teintées avec ✕ et « ＋ effet » ;
+  le picker ouvert sur « Whatever! », 210 effets en trois colonnes avec
+  [Tous | Buffs | Debuffs] et les homonymes départagés. Dans la charte, rien
+  à redire. Le « Kit illisible » sans tables du jeu suit l'admin : à dire par
+  Sevih si le committé doit servir de repli. Suite : B40, le dernier de la
+  fiche.
+
 - **quick : « Fiche perso » › Skills — masquer ou ajouter les chips d'un kit
   (lot B39, étape 9 de la migration, suite)** — le sous-onglet « Skills », que
   C11 avait posé éteint, porte l'éditeur de kit de l'admin
