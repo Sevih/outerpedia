@@ -536,7 +536,7 @@ export function computeCharacterIngredients(tables: IngredientsTables): {
     // Base et évolution d'un fusionné : celles du perso d'origine. Le client
     // (CCharacterData.CalcBasicStats) lit `Templet`, le templet de l'ID d'origine ;
     // le templet fusionné ne sert qu'aux skills. Confirmé par trois captures ATK
-    // (Snow, Lisha, Veronica, lv100, 10/10/2026).
+    // (Snow, Lisha, Veronica, lv100, 09/10/2026).
     const base = extractBase(templetById.get(evoCharId) ?? row);
     const evoByLevel = extractEvoByLevel(evosByCharId.get(evoCharId));
     // Seul `spd` est encore consommé (SPD OAT_RATE pré-cuit sur lv100 max + évo max).

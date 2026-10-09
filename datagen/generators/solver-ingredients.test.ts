@@ -2,7 +2,7 @@
  * Base d'un Core Fusion dans le contrat solver : celle du perso d'origine
  * (`CharacterFusionTemplet.CharacterID`), pas celle du templet fusionné. Le
  * client lit `CCharacterData.Templet` (ID d'origine) dans `CalcBasicStats` ;
- * trois captures ATK lv100 du 10/10/2026 le confirment (Snow, Lisha, Veronica).
+ * trois captures ATK lv100 du 09/10/2026 le confirment (Snow, Lisha, Veronica).
  */
 import { describe, expect, it } from 'vitest';
 import solverCharacters from '../../data/generated/solver/characters.json';
