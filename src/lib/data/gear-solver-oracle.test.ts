@@ -90,10 +90,11 @@ interface KnownDivergence {
 /**
  * ÉCARTS CONNUS — audit des doublons outerpedia ↔ gear-solver (PR #51,
  * `docs/audit-doublons-solver.md`), attribués par le code du client décompilé
- * et, pour trois Core Fusion, par des captures en jeu (tâche T16 de
+ * et par des captures en jeu (tâche T16 de
  * `sevih-tool/docs/taches-cloud-2026-10-09.md`, section « Les captures » :
- * ATK lv100 sans équipement, tout au max — Snow 1503, Lisha 2093,
- * Veronica 1562). Le test exige qu'ils divergent ENCORE, sur exactement ces
+ * lv100 sans équipement, tout au max — Snow ATK 1503 / HP 6452 / DEF 1366 /
+ * SPD 155, Lisha ATK 2093, Veronica ATK 1562, Claire ATK 1002 avec S2 niv. 1,
+ * Ame CHC 46 % avec S2 niv. 5). Le test exige qu'ils divergent ENCORE, sur exactement ces
  * couches : le jour où la fiche est corrigée, il échoue, et c'est cette liste
  * qu'on vide.
  *
@@ -105,8 +106,8 @@ interface KnownDivergence {
  *   - `CalcBasicStats` lit `Templet`, celui du même ID : les Min/Max de base
  *     sont ceux du perso d'origine. Les deux côtés prennent ceux du templet
  *     27xxxxx ; ils ne diffèrent que pour Snow et Lisha (Snow : ATK 66-659 à
- *     l'origine, 75-757 au templet de fusion). Les captures le confirment sur
- *     l'ATK ; DEF, HP et SPD suivent le même chemin dans le code, sans capture ;
+ *     l'origine, 75-757 au templet de fusion). Les captures de Snow le
+ *     confirment sur l'ATK, les HP, la DEF et la vitesse ;
  *   - `InitStatPremiumBuff` ← `CSkillManager.GetStatPremiumBuffList` prend, sur
  *     TOUS les skills du perso (pour un fusionné, les `SkillIDs` du templet de
  *     fusion, Skill_23 compris), TOUS les buffs `BT_STAT_PREMIUM` de création
@@ -114,7 +115,9 @@ interface KnownDivergence {
  *     `CStatValue.SetBuffPremiumValue` les cumule tous. Ni « premier buff », ni
  *     Skill_23 à la place de Skill_22 : la règle du solver (§ 2.4, confirmée
  *     par la capture de Lisha, classe + noyau = +20,2 %) ; et les passifs
- *     permanents de S1/S2/S3 y entrent comme les autres (§ 2.5).
+ *     permanents de S1/S2/S3 y entrent comme les autres (§ 2.5) — confirmé par
+ *     Ame (S2 niv. 5 : +25 CHC compté) et par Claire (S2 niv. 1, niveau sans
+ *     buff : rien de compté).
  *
  * L'instantané n'est PAS régénéré ici : il le sera après le correctif de base
  * des fusionnés (T16). D'ici là, ses valeurs de Snow et Lisha portent la base
@@ -173,8 +176,16 @@ const KNOWN_DIVERGENCES: Record<string, KnownDivergence> = {
     why: 'Claire : S2 +10 % ATK',
     verdict: 'gear-solver',
     basis: 'code',
+    detail:
+      'comparaison au niveau max de S2 (1096) : calcul, pas capture. La capture (S2 niv. 1, ATK 1002) confirme seulement que le buff suit le niveau ; elle coïncide avec le wiki, qui ignore S2 à tout niveau',
   },
-  '2000065': { layers: ['full'], why: 'Ame : S2 +25 CHC', verdict: 'gear-solver', basis: 'code' },
+  '2000065': {
+    layers: ['full'],
+    why: 'Ame : S2 +25 CHC',
+    verdict: 'gear-solver',
+    basis: 'capture',
+    detail: 'CHC 46 % en jeu avec S2 niv. 5 : la valeur du solver, le wiki affiche 21',
+  },
   '2000095': {
     layers: ['full'],
     why: 'Bell Cranel : S2 +30 % ATK',
