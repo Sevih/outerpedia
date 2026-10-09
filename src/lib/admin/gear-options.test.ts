@@ -67,17 +67,34 @@ describe('options d’équipement (admin)', () => {
     expect(dups).toEqual([]);
   });
 
-  it('Briareos et Gorgon donnent bien une option PAR classe', () => {
-    const CLASSES = ['striker', 'defender', 'ranger', 'mage', 'healer'];
-    for (const name of ["Briareos's Ambition", "Gorgon's Vanity"]) {
-      const found = options.amulets.filter((o) => o.label.startsWith(name));
-      expect(found.map((o) => o.classLimits?.[0]).sort(), name).toEqual([...CLASSES].sort());
-      // Et chaque option pointe un objet RÉELLEMENT de cette classe.
-      for (const o of found) expect(table[o.id]?.classLimit, o.label).toBe(o.classLimits?.[0]);
+  /** Familles multi-classes d'une table : nom EN → classes de ses objets.
+   * Briareos et Gorgon au 26/07 ; lues dans la donnée, pour qu'un patch qui en
+   * ajoute une soit couvert au lieu de faire casser le test. */
+  const multiClass = (
+    t: Record<string, { classLimit?: string | null; name?: { en?: string } }>,
+  ) => {
+    const byName = new Map<string, Set<string>>();
+    for (const item of Object.values(t)) {
+      if (!item.name?.en || !item.classLimit) continue;
+      byName.set(item.name.en, (byName.get(item.name.en) ?? new Set()).add(item.classLimit));
     }
-    for (const name of ["Briareos's Recklessness", "Gorgon's Wrath"]) {
-      const found = options.weapons.filter((o) => o.label.startsWith(name));
-      expect(found.map((o) => o.classLimits?.[0]).sort(), name).toEqual([...CLASSES].sort());
+    return new Map([...byName].filter(([, classes]) => classes.size > 1));
+  };
+  const amuletFamilies = multiClass(getEquipmentAccessories());
+  const weaponFamilies = multiClass(getEquipmentWeapons());
+
+  it('chaque famille multi-classes donne une option PAR classe', () => {
+    expect(amuletFamilies.size + weaponFamilies.size).toBeGreaterThan(0);
+    for (const [list, families] of [
+      [options.amulets, amuletFamilies],
+      [options.weapons, weaponFamilies],
+    ] as const) {
+      for (const [name, classes] of families) {
+        const found = list.filter((o) => o.label.replace(/ \[[a-z]+\]$/, '') === name);
+        expect(found.map((o) => o.classLimits?.[0]).sort(), name).toEqual([...classes].sort());
+        // Et chaque option pointe un objet RÉELLEMENT de cette classe.
+        for (const o of found) expect(table[o.id]?.classLimit, o.label).toBe(o.classLimits?.[0]);
+      }
     }
   });
 
@@ -89,6 +106,6 @@ describe('options d’équipement (admin)', () => {
       perName.set(base, (perName.get(base) ?? 0) + 1);
     }
     const split = [...perName].filter(([, n]) => n > 1).map(([n]) => n);
-    expect(split.sort()).toEqual(["Briareos's Ambition", "Gorgon's Vanity"]);
+    expect(split.sort()).toEqual([...amuletFamilies.keys()].sort());
   });
 });

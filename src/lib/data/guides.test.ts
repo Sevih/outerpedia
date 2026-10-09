@@ -85,10 +85,12 @@ describe('champs exigés par la vue d’une catégorie (`requires`)', () => {
 describe('special-request — les guides désignent des combats réels, entièrement couverts', () => {
   const guides = listGuidesByCategory('special-request');
 
-  it('les dix échelles portées, chacune sur un combat de treize stages', () => {
+  it('les dix échelles portées, chacune sur un combat à plusieurs stages', () => {
     expect(guides).toHaveLength(10);
+    // La longueur de l'échelle (13 au 2026-07-16) est celle du jeu : la
+    // couverture stage par stage, juste en dessous, la lit dans la donnée.
     for (const g of guides) {
-      expect(encountersOfGroup(g.group!), `${g.slug} : ${g.group}`).toHaveLength(13);
+      expect(encountersOfGroup(g.group!).length, `${g.slug} : ${g.group}`).toBeGreaterThan(1);
     }
   });
 

@@ -102,7 +102,10 @@ const ARRIVING = 'FX_UI_Character_List_Arrivant';
 const CARRIER = '9999901';
 const MODEL = EFFECTS.find(
   ([name, fx]) =>
-    effectVerdict(name).kind === 'served' && fx.emitters.filter((e) => e.active).length >= 2,
+    effectVerdict(name).kind === 'served' &&
+    fx.emitters.filter((e) => e.active).length >= 2 &&
+    // Un calque de cadre actif (maille) : le cas `_Synchro` ci-dessous en dérègle un.
+    fx.emitters.some((e) => e.active && e.renderMode === 4),
 )![1];
 
 function arrival(change?: (table: FxTable) => void): FxTable {

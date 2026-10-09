@@ -32,14 +32,21 @@ import {
   withTaskCount,
   type UserSettings,
 } from './tracker';
+import { isSingularityBattleDay } from '@/lib/data/singularity';
 
 const DAY = 86_400_000;
 // Mercredi 15/07/2026 10:00 UTC (jour du mois 15 → phase VHT 3, singularité ouverte)
 const WED = Date.UTC(2026, 6, 15, 10);
-// Dimanche 12/07/2026 10:00 UTC (singularité fermée)
+// Dimanche 12/07/2026 10:00 UTC
 const SUN = Date.UTC(2026, 6, 12, 10);
 // Lundi 13/07/2026 01:00 UTC (juste après le reset hebdo)
 const MON = Date.UTC(2026, 6, 13, 1);
+// Jours de combat et de récompense de la singularité : lus dans le calendrier
+// de la donnée (singularity.json), jamais écrits en dur — le dimanche a déjà
+// changé de camp au patch du 06/10/2026, le lundi peut suivre.
+const WEEK = Array.from({ length: 7 }, (_, i) => WED + i * DAY);
+const SING_ON = WEEK.find((t) => isSingularityBattleDay(t))!;
+const SING_OFF = WEEK.find((t) => !isSingularityBattleDay(t))!;
 
 function settingsWith(patch: Partial<UserSettings>): UserSettings {
   return { ...createDefaultSettings(), ...patch };
@@ -112,12 +119,12 @@ describe('disponibilité calendaire', () => {
     expect(activeTaskIds('daily', done, WED)).not.toContain('elemental-tower');
   });
 
-  // Le lundi est un jour de récompense à 4 comme à 5 jours de combat (le
-  // dimanche, lui, a changé de camp au patch du 06/10/2026).
   it('singularité dimensionnelle : les jours de combat seulement', () => {
     const s = createDefaultSettings();
-    expect(activeTaskIds('daily', s, WED)).toContain('dimensional-singularity');
-    expect(activeTaskIds('daily', s, MON)).not.toContain('dimensional-singularity');
+    expect(SING_ON).toBeDefined();
+    expect(SING_OFF).toBeDefined();
+    expect(activeTaskIds('daily', s, SING_ON)).toContain('dimensional-singularity');
+    expect(activeTaskIds('daily', s, SING_OFF)).not.toContain('dimensional-singularity');
   });
 
   it('ad stamina masquée avec le pack premium Veronica (stamina auto-réclamée)', () => {
@@ -468,9 +475,12 @@ describe('contenus saisonniers — auto-détection', () => {
   it('n’affecte AUCUNE tâche non saisonnière (les filtres habituels tiennent)', () => {
     const ids = activeTaskIds('daily', auto, WED, windows);
     expect(ids).toContain('story-hard');
-    // Singularité : ouverte mercredi, fermée lundi — inchangé par l'auto.
-    expect(ids).toContain('dimensional-singularity');
-    expect(activeTaskIds('daily', auto, MON, windows)).not.toContain('dimensional-singularity');
+    // Singularité : ouverte un jour de combat, fermée un jour de récompense —
+    // inchangé par l'auto.
+    expect(activeTaskIds('daily', auto, SING_ON, windows)).toContain('dimensional-singularity');
+    expect(activeTaskIds('daily', auto, SING_OFF, windows)).not.toContain(
+      'dimensional-singularity',
+    );
   });
 
   it('la progression suit : la tâche entre puis sort du suivi avec sa saison', () => {
