@@ -1,22 +1,32 @@
 /**
  * PROGRESSION d'un personnage — paliers de stats, transcendance, gifts.
  *
- * Les paliers de stats sont CALCULÉS depuis l'extraction (`progression.json`
- * + min/max de la fiche) avec les règles du client, validées contre l'oracle
- * hérité (`char-progression.test.ts`, perso 2000073) :
+ * Les paliers de stats sont CALCULÉS avec les règles du client, validées
+ * contre l'oracle hérité (`char-progression.test.ts`, perso 2000073) :
  *   - stats interpolées (ATK/DEF/HP/SPD/EFF/RES) :
  *     min + floor((max−min)·(L−1)/99) + Σ bonus d'évolution — référence
  *     niveau 100, EXTRAPOLÉE au-delà (limit breaks 105/110/120) ;
- *   - CHC/CHD : fixes (min ÷10, en %) ;
- *   - DMG UP%/RED% : uniquement les bonus d'évolution (per-mille ÷10) ;
- *   - premium (passif de classe BT_STAT_PREMIUM) : flat = valeur ÷10,
- *     rate = floor(stat du palier × valeur / 1000).
+ *   - CHC/CHD : fixes (min, en %) + évolutions ;
+ *   - DMG UP%/RED%/PEN% : uniquement les bonus d'évolution.
+ *
+ * Base (min/max), évolutions et passifs de fiche viennent du CONTRAT solver
+ * (`solver/characters.json`), la même source que le gear-solver : c'est lui
+ * qui suit `CharacterFusionTemplet` (un Core Fusion prend la base et les
+ * évolutions de son perso d'origine) et qui cumule TOUS les buffs de fiche
+ * (passifs de classe, de noyau, de S1/S2/S3), comme le client
+ * (`CSkillManager.GetStatPremiumBuffList`). La fiche en avait sa propre
+ * extraction (`progression.json` `evoRewards`/`premium`), fausse sur les six
+ * Core Fusion et muette sur les passifs de S2 (audit des doublons, § 2.2, 2.4,
+ * 2.5). Le reste (échelle d'évolution, limit breaks, codex, quirks, Skill_8)
+ * vient toujours de `progression.json`.
  */
 import type {
   Character,
+  CharacterIngredients,
   Item,
   ProgressionData,
   Skill,
+  SolverStatBlock,
   StatBonus,
   TranscendData,
   TranscendStep,
@@ -39,11 +49,25 @@ import progressionData from '@data/generated/progression.json';
 import transcendData from '@data/generated/transcend.json';
 import itemsData from '@data/generated/items.json';
 import skillsData from '@data/generated/skills.json';
+import solverCharactersData from '@data/generated/solver/characters.json';
 
 const PROGRESSION = progressionData as unknown as ProgressionData;
 const TRANSCEND = transcendData as unknown as TranscendData;
 const ITEMS = itemsData as unknown as Record<string, Item>;
 const SKILLS = skillsData as unknown as Record<string, Skill>;
+const SOLVER = solverCharactersData as unknown as Record<
+  string,
+  { ingredients: CharacterIngredients }
+>;
+
+/** Ingrédients du contrat solver d'un perso. Le contrat et `characters.json`
+ * sortent du même build : un perso sans entrée est une incohérence de données
+ * (couverte par `char-progression.test.ts`), pas un cas à maquiller. */
+function ingredientsOf(char: Character): CharacterIngredients {
+  const ing = SOLVER[char.id]?.ingredients;
+  if (!ing) throw new Error(`solver/characters.json : pas d'entrée pour ${char.id}`);
+  return ing;
+}
 
 // Les briques PURES (clés, formule CalcFinalStat, composeStep) vivent dans
 // `@/lib/stat-compose` — client-safe, sans données. Ré-exportées ici pour les
@@ -51,27 +75,35 @@ const SKILLS = skillsData as unknown as Record<string, Skill>;
 export { STEP_STAT_KEYS, PERCENT_STEP_KEYS };
 export type { StatStepView, StepStatKey, StatLayersView };
 
-/** Slug de stat (fiche/évolutions) → clé d'affichage. */
-const SLUG_TO_KEY: Record<string, StepStatKey> = {
+/** Champ du contrat solver (`StatBlock`, unités d'affichage : entiers pour
+ * ATK…RES, % pour CHC/CHD/PEN/DMG) → clé d'affichage. Les taux (`*Pct`,
+ * `effRate`, `resRate`) sont traités à part (`blockToParts`). */
+const BLOCK_KEY: Partial<Record<keyof SolverStatBlock, StepStatKey>> = {
   atk: 'ATK',
   def: 'DEF',
   hp: 'HP',
-  speed: 'SPD',
-  critical_rate: 'CHC',
-  critical_dmg: 'CHD',
-  critical_dmg_rate: 'CHD',
-  buff_chance: 'EFF',
-  buff_resist: 'RES',
-  dmg_boost: 'DMG UP%',
-  dmg_reduce_rate: 'DMG RED%',
-  pierce_power_rate: 'PEN%',
-  e_cri_dmg_reduce: 'CDMG RED%',
+  spd: 'SPD',
+  chc: 'CHC',
+  chd: 'CHD',
+  pen: 'PEN%',
+  dmgInc: 'DMG UP%',
+  dmgRed: 'DMG RED%',
+  eff: 'EFF',
+  res: 'RES',
 };
+
+/** Stat interpolée → plage min/max du contrat. */
+const BASE_KEY = {
+  ATK: 'atk',
+  DEF: 'def',
+  HP: 'hp',
+  SPD: 'spd',
+  EFF: 'eff',
+  RES: 'res',
+} as const;
 
 export interface StatStepsView {
   steps: StatStepView[];
-  /** Stat qui reçoit le bonus premium (passif de classe). */
-  premiumStat?: StepStatKey;
 }
 
 type LimitBreakSteps = ProgressionData['limitBreak'][string];
@@ -99,29 +131,28 @@ function whiteStatsAt(
   evs: number[],
   modifier: number,
 ): { stats: Record<StepStatKey, number>; base: Record<StepStatKey, number> } {
-  const rewards = PROGRESSION.evoRewards[char.id] ?? {};
+  const ing = ingredientsOf(char);
   const cum: Partial<Record<StepStatKey, number>> = {};
-  for (const ev of evs)
-    for (const [slug, v] of Object.entries(rewards[String(ev)] ?? {})) {
-      const k = SLUG_TO_KEY[slug];
-      if (k) cum[k] = (cum[k] ?? 0) + v;
-    }
+  for (const ev of evs) {
+    const block = ing.evoByLevel[String(ev)];
+    if (!block) continue;
+    for (const [field, key] of Object.entries(BLOCK_KEY) as [keyof SolverStatBlock, StepStatKey][])
+      if (block[field]) cum[key] = (cum[key] ?? 0) + block[field];
+  }
 
   const stats = {} as Record<StepStatKey, number>;
   const base = {} as Record<StepStatKey, number>;
   for (const key of STEP_STAT_KEYS) {
     if (key === 'CHC' || key === 'CHD') {
-      const slug = key === 'CHC' ? 'critical_rate' : 'critical_dmg';
-      base[key] = (char.stats[slug]?.min ?? 0) / 10;
-      stats[key] = base[key];
+      base[key] = ing.base[key === 'CHC' ? 'chc' : 'chd'].min;
+      stats[key] = base[key] + (cum[key] ?? 0);
     } else if (key === 'DMG UP%' || key === 'DMG RED%' || key === 'PEN%' || key === 'CDMG RED%') {
       base[key] = 0;
-      stats[key] = (cum[key] ?? 0) / 10;
+      stats[key] = cum[key] ?? 0;
     } else {
-      const slug = Object.entries(SLUG_TO_KEY).find(([, k]) => k === key)![0];
-      const r = char.stats[slug];
-      const mn = r?.min ?? 0;
-      const rng = (r?.max ?? 0) - mn;
+      const r = ing.base[BASE_KEY[key]];
+      const mn = r.min;
+      const rng = r.max - mn;
       const growth = rng > 0 ? Math.floor((rng * (level - 1)) / 99) : 0;
       const above =
         rng > 0 && level > 100 ? Math.floor((rng * (level - 100) * modifier) / 99000) : 0;
@@ -135,9 +166,7 @@ function whiteStatsAt(
 /** Paliers de stats d'un perso (lv1 + un par évolution, jusqu'au lv120). */
 export function computeStatSteps(char: Character): StatStepsView {
   const rungs = PROGRESSION.evolutions[String(char.rarity)] ?? [];
-  const premium = PROGRESSION.premium[char.id];
   const lb = PROGRESSION.limitBreak[`${char.rarity}_${char.element}`] ?? [];
-  const premiumStat = premium ? SLUG_TO_KEY[premium.stat] : undefined;
 
   const points: { level: number; evo: number; evs: number[] }[] = [
     { level: 1, evo: 0, evs: [] },
@@ -152,12 +181,6 @@ export function computeStatSteps(char: Character): StatStepsView {
     const { stats, base } = whiteStatsAt(char, level, evs, limitBreakModifier(lb, level));
 
     const step: StatStepView = { key: `lv${level}_ev${evo}`, level, evo, stats, base };
-    if (premium && premiumStat) {
-      step.premiumValue =
-        premium.mode === 'flat'
-          ? premium.value / 10
-          : Math.floor((stats[premiumStat] * premium.value) / 1000);
-    }
     const lbStep = lb.find((s) => s.maxLevel === level);
     if (lbStep)
       step.limitBreak = {
@@ -168,7 +191,7 @@ export function computeStatSteps(char: Character): StatStepsView {
     return step;
   });
 
-  return { steps, premiumStat };
+  return { steps };
 }
 
 // --- Couches optionnelles (quirks / codex / transcendance) -------------------------
@@ -207,7 +230,7 @@ function addBonus(parts: LayerParts, b: StatBonus): void {
  * Couches optionnelles de la fiche pour les contrôles de la section Stats :
  * paliers de transcendance (% ATK/DEF/HP + buffs du passif au niveau lié),
  * courbe du codex, quirks applicables (arbre élémentaire + classe +
- * sous-classe, niveau max) et premium (passif de classe).
+ * sous-classe, niveau max) et passifs de fiche (`sheetPassives`).
  */
 export function getStatLayers(char: Character): StatLayersView {
   const steps = TRANSCEND.overrides[char.id] ?? TRANSCEND.byStar[String(char.rarity)] ?? [];
@@ -240,16 +263,61 @@ export function getStatLayers(char: Character): StatLayersView {
     for (const b of bl.buff) addBonus(buff, b);
   }
 
-  const premiumInfo = PROGRESSION.premium[char.id];
-  const premiumKey = premiumInfo ? SLUG_TO_KEY[premiumInfo.stat] : undefined;
   return {
     transcend,
     codex: PROGRESSION.codex.map((c) => ({ atkPM: c.atk, defPM: c.def, hpPM: c.hp })),
     quirks: { stat, buff },
-    ...(premiumInfo && premiumKey
-      ? { premium: { key: premiumKey, mode: premiumInfo.mode, value: premiumInfo.value } }
-      : {}),
+    passives: sheetPassives(char),
   };
+}
+
+/** Bloc du contrat → couche : plats tels quels (unités d'affichage), taux en
+ * per-mille (`10.2` % → 102 ‰ ; arrondi pour éponger le flottant du ÷10). */
+function blockToParts(parts: LayerParts, block: SolverStatBlock): void {
+  for (const [field, key] of Object.entries(BLOCK_KEY) as [keyof SolverStatBlock, StepStatKey][])
+    if (block[field]) (parts.flat ??= {})[key] = (parts.flat[key] ?? 0) + block[field];
+  const rates: [keyof SolverStatBlock, StepStatKey][] = [
+    ['atkPct', 'ATK'],
+    ['defPct', 'DEF'],
+    ['hpPct', 'HP'],
+    ['effRate', 'EFF'],
+    ['resRate', 'RES'],
+  ];
+  for (const [field, key] of rates)
+    if (block[field])
+      (parts.ratePM ??= {})[key] = (parts.ratePM[key] ?? 0) + Math.round(block[field] * 10);
+}
+
+/** Emplacement de compétence → son bloc par niveau dans le contrat. */
+const SKILL_SLOTS = [
+  ['first', 's1ByLevel'],
+  ['second', 's2ByLevel'],
+  ['ultimate', 's3ByLevel'],
+] as const;
+
+/**
+ * Passifs de fiche (couche BuffValueRate) : passif de classe (Skill_22), passif
+ * de noyau d'un Core Fusion (Skill_23) et passifs permanents de S1/S2/S3,
+ * TOUS cumulés comme le client.
+ *
+ * Le jeu les prend au niveau COURANT de chaque compétence ; une fiche de wiki
+ * doit en choisir un : le niveau MAXIMUM, comme le Combat Power de la même
+ * section (skills Lv5) et le niveau de fusion max que le contrat suppose pour
+ * le noyau. Un niveau sans entrée dans le contrat ne porte aucun buff de fiche
+ * et vaut zéro (Claire, S2 niv. 1) — jamais de repli sur un autre niveau.
+ */
+function sheetPassives(char: Character): LayerParts {
+  const ing = ingredientsOf(char);
+  const parts: LayerParts = {};
+  blockToParts(parts, ing.classPassive);
+  if (ing.corePassive) blockToParts(parts, ing.corePassive);
+  for (const [type, field] of SKILL_SLOTS) {
+    const skill = char.skills.map((id) => SKILLS[id]).find((sk) => sk?.type === type);
+    const maxLevel = Math.max(0, ...(skill?.levels.map((l) => l.level) ?? []));
+    const block = ing[field][String(maxLevel)];
+    if (block) blockToParts(parts, block);
+  }
+  return parts;
 }
 
 // --- Substats flat vs % : base aux paliers stables ---------------------------------

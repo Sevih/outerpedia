@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { Character, ProgressionData } from '@contracts';
-import { composeStep, type StatLayersView, type StatStepView } from '@/lib/stat-compose';
+import {
+  composeStep,
+  type StatLayersView,
+  type StatStepView,
+  type StepStatKey,
+} from '@/lib/stat-compose';
 import { transcendStarRow } from '@/lib/images';
 import { getTranscend } from './transcend';
 import {
@@ -13,6 +18,7 @@ import { getSubstatTicks } from './sub-ticks';
 import { judgeSubstat, SUBSTAT_AXES, sumFlatAt } from '@/lib/substat-verdict';
 import charactersData from '@data/generated/characters.json';
 import progressionData from '@data/generated/progression.json';
+import solverCharactersData from '@data/generated/solver/characters.json';
 
 const CHARS = charactersData as unknown as Record<string, Character>;
 const PROGRESSION = progressionData as unknown as ProgressionData;
@@ -81,9 +87,8 @@ describe('computeStatSteps (oracle hérité, perso 2000073)', () => {
     }
   });
 
-  it('premium : CHC +5 plat sur tous les paliers', () => {
-    expect(view.premiumStat).toBe('CHC');
-    for (const s of view.steps) expect(s.premiumValue).toBe(5);
+  it('passif de classe : CHC +5 plat, seul passif de fiche de Vlada', () => {
+    expect(getStatLayers(CHARS['2000073']).passives).toEqual({ flat: { CHC: 5 } });
   });
 
   it('limit breaks aux niveaux et aux coûts de la table du jeu', () => {
@@ -108,11 +113,11 @@ describe('composeStep — couches quirks / codex / transcendance (CalcFinalStat)
   const layers = getStatLayers(char);
   const step = computeStatSteps(char).steps.at(-1)!;
 
-  it('couches désactivées : portion blanche + premium seul', () => {
+  it('couches désactivées : portion blanche + passif de classe seul', () => {
     const c = composeStep(step, layers, { tierIdx: -1, codexLevel: 0, quirksOn: false });
     expect(c.ATK.value).toBe(step.stats.ATK);
     expect(c.HP.delta).toBe(0);
-    // Premium (passif de classe) : CHC +5 plat, toujours actif comme in-game.
+    // Passif de classe : CHC +5 plat, toujours actif comme in-game.
     expect(c.CHC).toEqual({ value: 10, delta: 5 });
   });
 
@@ -185,7 +190,7 @@ describe('composeStep — ordre des opérations de CalcFinalStat (fixture)', () 
       stat: { flat: { CHC: 10, CHD: 30, ATK: 200, DEF: 600, HP: 200, SPD: 2 } },
       buff: { ratePM: { ATK: 150 } },
     },
-    premium: { key: 'CHC', mode: 'flat', value: 50 },
+    passives: { flat: { CHC: 5 } },
   };
 
   it('tout au max : ATK 2665 (quirks +200 plat & +15% striker, transcend +30%, codex +10%)', () => {
@@ -193,7 +198,7 @@ describe('composeStep — ordre des opérations de CalcFinalStat (fixture)', () 
     // part1 = trunc((1217+286+200)×1300/1000) = 2213 ; part2 = trunc(2213×1150/1000)
     // = 2544 ; codex = trunc(1217×100/1000) = 121 → 2665.
     expect(c.ATK.value).toBe(2665);
-    // CHC : 5 blanc + 10 quirks fire (per-mille ÷10) + 5 premium.
+    // CHC : 5 blanc + 10 quirks fire (per-mille ÷10) + 5 passif de classe.
     expect(c.CHC.value).toBe(20);
     // CHD : 150 + 30 quirks fire + 8 skill_8 (niveau 4 : upgrade 80 per-mille).
     expect(c.CHD.value).toBe(188);
@@ -201,6 +206,55 @@ describe('composeStep — ordre des opérations de CalcFinalStat (fixture)', () 
     expect(c.SPD.value).toBe(136);
     // EFF/RES : aucune couche pour ce perso.
     expect(c.EFF.value).toBe(step.stats.EFF);
+  });
+});
+
+/**
+ * CAPTURES EN JEU — prises par l'auteur le 09/10/2026 (sevih-tool,
+ * `docs/taches-cloud-2026-10-09.md`, T16 « Les captures ») : niveau 100, sans
+ * équipement, transcendance au dernier palier (+30 %), codex au max (+10 %),
+ * quirks au max, fusion au niveau 5. C'est l'état par défaut de la fiche
+ * (dernier palier, codex max, quirks actifs), lu au palier lv100. `delta` est
+ * la part en jaune du jeu (la part blanche = base + évolution + quirks).
+ */
+const CAPTURES: { id: string; who: string; key: StepStatKey; value: number; delta: number }[] = [
+  { id: '2700003', who: 'Snow fusionné', key: 'ATK', value: 1503, delta: 499 },
+  { id: '2700003', who: 'Snow fusionné', key: 'HP', value: 6452, delta: 2249 },
+  { id: '2700003', who: 'Snow fusionné', key: 'DEF', value: 1366, delta: 364 },
+  { id: '2700003', who: 'Snow fusionné', key: 'SPD', value: 155, delta: 6 },
+  { id: '2700005', who: 'Lisha fusionnée', key: 'ATK', value: 2093, delta: 800 },
+  { id: '2700037', who: 'Veronica fusionnée', key: 'ATK', value: 1562, delta: 424 },
+  { id: '2000065', who: 'Ame (S2 niv. 5)', key: 'CHC', value: 46, delta: 31 },
+];
+
+/** La fiche dans son état par défaut, au palier lv100. */
+function defaultSheetAt100(id: string) {
+  const char = CHARS[id];
+  const layers = getStatLayers(char);
+  const step = computeStatSteps(char).steps.find((s) => s.level === 100)!;
+  return composeStep(step, layers, {
+    tierIdx: layers.transcend.length - 1,
+    codexLevel: layers.codex.length - 1,
+    quirksOn: true,
+  });
+}
+
+describe('fiche par défaut au lv100 = captures en jeu', () => {
+  it.each(CAPTURES)('$who $key : $value (+$delta)', ({ id, key, value, delta }) => {
+    expect(defaultSheetAt100(id)[key]).toEqual({ value, delta });
+  });
+
+  // Pas une capture : celle de Claire (1002) est prise S2 au niveau 1, où la
+  // ligne de compétence ne porte pas le buff. La fiche se place au niveau MAX
+  // des compétences : (530 + 200) × 1,30 × 1,10 + 53 de codex = 1096, le +10 %
+  // de son S2 au niveau 5 compris.
+  it('Claire ATK : 1096 au niveau max de S2 (calcul, pas une capture)', () => {
+    expect(defaultSheetAt100('2000017').ATK.value).toBe(1096);
+  });
+
+  it('tout perso du wiki a son entrée dans le contrat solver', () => {
+    const solverIds = new Set(Object.keys(solverCharactersData));
+    expect(Object.keys(CHARS).filter((id) => !solverIds.has(id))).toEqual([]);
   });
 });
 

@@ -5,12 +5,8 @@
  *   - `CharacterEvolutionTemplet`      : échelle d'évolution par rareté de base
  *     (ev2..ev9, niveau requis) — les coûts varient par élément mais PAS les
  *     niveaux (validé), on ne stocke que l'échelle ;
- *   - `CharacterEvolutionStatTemplet`  : bonus de stats PAR PERSO à chaque
- *     évolution (3 slots RewardStatType/Value) ;
  *   - `CharacterMaxLevelTemplet`       : limit breaks (lv100→105→110→120) par
  *     (rareté, élément) — pièces de rappel, or, modificateur de stats ;
- *   - `CharacterTemplet` Skill_23/22   : buff PREMIUM (`BT_STAT_PREMIUM`) —
- *     stat + valeur (OAT_ADD = plat ÷10, OAT_RATE = per-mille de la stat) ;
  *   - `CharacterArchiveStatTemplet`    : courbe du CODEX (bonus % ATK/DEF/HP
  *     par niveau d'archive 1..11, per-mille, appliqué sur la stat de BASE) ;
  *   - `CharacterAwakening{Node,Level}Templet` : QUIRKS (arbres d'éveil de
@@ -24,6 +20,11 @@
  * Le CALCUL des paliers (formule CalcFinalStat reverse-engineered, validée
  * 0-diff in-game par le gear-solver) vit côté app
  * (`src/lib/data/char-progression.ts`).
+ *
+ * Base, bonus d'évolution par perso et passifs de fiche (classe, noyau,
+ * S1/S2/S3) n'y sont PLUS : la fiche les lit dans le contrat solver
+ * (`solver/characters.json`, `solver-ingredients.ts`), seule extraction qui
+ * suive les Core Fusion et cumule tous les buffs comme le client.
  */
 import { loadTable, num, splitCsv, type Row } from '../lib/tables';
 import { slugEnum } from '../lib/enums';
@@ -47,14 +48,6 @@ export interface LimitBreakStep {
   statModifier: number;
 }
 
-export interface PremiumInfo {
-  /** Slug de stat (atk, critical_rate…). */
-  stat: string;
-  /** flat = valeur brute ÷10 ; rate = per-mille de la stat du palier. */
-  mode: 'flat' | 'rate';
-  value: number;
-}
-
 /** Un bonus de stat brut (quirks / passif de transcendance). */
 export interface StatBonus {
   /** Slug de stat (atk, critical_rate…). */
@@ -75,12 +68,8 @@ export interface QuirkBlock {
 export interface ProgressionData {
   /** Rareté de base → échelle d'évolution (ordonnée). */
   evolutions: Record<string, EvolutionRung[]>;
-  /** Perso → évolution → bonus de stats (slugs, valeurs brutes). */
-  evoRewards: Record<string, Record<string, Record<string, number>>>;
   /** `<rareté>_<élément>` → paliers de limit break (ordonnés). */
   limitBreak: Record<string, LimitBreakStep[]>;
-  /** Perso → buff premium (passif de classe). */
-  premium: Record<string, PremiumInfo>;
   /** Courbe du codex : index = niveau d'archive (0 = rien), per-mille sur la BASE. */
   codex: { atk: number; def: number; hp: number }[];
   /** Quirks (arbres d'éveil) au niveau max, par groupe applicable. */
@@ -130,20 +119,6 @@ export function buildProgression(): ProgressionData {
   }
   for (const list of Object.values(evolutions)) list.sort((a, b) => a.ev - b.ev);
 
-  // --- Bonus d'évolution par perso (3 slots par ligne).
-  const evoRewards: ProgressionData['evoRewards'] = {};
-  for (const r of loadTable('CharacterEvolutionStatTemplet')) {
-    const byEv = (evoRewards[r.CharacterID] ??= {});
-    const stats = (byEv[r.EvolutionLevel] ??= {});
-    for (const i of [1, 2, 3]) {
-      const st = r[`RewardStatType_${i}`];
-      const v = num(r[`RewardValue_${i}`]);
-      if (!st || st === 'ST_NONE' || !v) continue;
-      const slug = slugEnum(st);
-      stats[slug] = (stats[slug] ?? 0) + v;
-    }
-  }
-
   // --- Limit breaks par (rareté, élément).
   const limitBreak: ProgressionData['limitBreak'] = {};
   for (const r of loadTable('CharacterMaxLevelTemplet')) {
@@ -160,13 +135,9 @@ export function buildProgression(): ProgressionData {
   }
   for (const list of Object.values(limitBreak)) list.sort((a, b) => a.step - b.step);
 
-  // --- Premium : buff BT_STAT_PREMIUM du skill de classe (Skill_23, repli 22).
-  const skillBuffs = new Map<string, Set<string>>();
+  // --- Lignes de niveau par skill (passif de transcendance, plus bas).
   const levelRowsBySkill = new Map<string, Row[]>();
   for (const l of loadTable('CharacterSkillLevelTemplet')) {
-    const set = skillBuffs.get(l.SkillID) ?? new Set<string>();
-    for (const id of splitCsv(l.BuffID ?? '')) set.add(id);
-    skillBuffs.set(l.SkillID, set);
     let rows = levelRowsBySkill.get(l.SkillID);
     if (!rows) levelRowsBySkill.set(l.SkillID, (rows = []));
     rows.push(l);
@@ -178,28 +149,6 @@ export function buildProgression(): ProgressionData {
     const prev = buffMaxRows.get(b.BuffID);
     if (!prev || num(b.Level) > num(prev.Level)) buffMaxRows.set(b.BuffID, b);
   }
-  const buffRows = new Map<string, Row>();
-  for (const b of loadTable('BuffTemplet')) {
-    if (b.Type === 'BT_STAT_PREMIUM' && b.BuffID && !buffRows.has(b.BuffID))
-      buffRows.set(b.BuffID, b);
-  }
-  const premium: ProgressionData['premium'] = {};
-  for (const c of loadTable('CharacterTemplet')) {
-    if (c.Type !== 'CT_PC') continue;
-    const sid = c.Skill_23 || c.Skill_22;
-    if (!sid) continue;
-    for (const buffId of skillBuffs.get(sid) ?? []) {
-      const b = buffRows.get(buffId);
-      if (!b) continue;
-      premium[c.ID] = {
-        stat: slugEnum(b.StatType),
-        mode: b.ApplyingType === 'OAT_RATE' ? 'rate' : 'flat',
-        value: num(b.Value),
-      };
-      break;
-    }
-  }
-
   // --- Codex : courbe globale des bonus d'archive (per-mille, index = niveau).
   const codex: ProgressionData['codex'] = [{ atk: 0, def: 0, hp: 0 }];
   for (const r of loadTable('CharacterArchiveStatTemplet')
@@ -288,5 +237,5 @@ export function buildProgression(): ProgressionData {
     if (Object.keys(byLevel).length) skill8[c.Skill_8] = byLevel;
   }
 
-  return { evolutions, evoRewards, limitBreak, premium, codex, quirks, skill8 };
+  return { evolutions, limitBreak, codex, quirks, skill8 };
 }

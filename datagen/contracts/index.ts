@@ -155,11 +155,17 @@ export type {
   // price). Aliasé pour lever la collision de barrel — aucun consommateur du
   // nom nu, donc renommage sans risque de contrat.
   LimitBreakStep as ProgressionLimitBreakStep,
-  PremiumInfo,
   ProgressionData,
   QuirkBlock,
   StatBonus,
 } from '../generators/progression';
+// Contrat solver (`data/generated/solver/characters.json`) : la fiche « Base
+// Stats » y lit base, évolutions et passifs de fiche. `StatBlock` est aliasé :
+// le nom nu est trop générique pour le barrel.
+export type {
+  CharacterIngredients,
+  StatBlock as SolverStatBlock,
+} from '../generators/solver-ingredients';
 export type {
   QuirksData,
   QuirkCategory,
