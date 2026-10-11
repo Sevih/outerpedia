@@ -171,6 +171,27 @@ voit sans le relancer. Sans tables du jeu sur le poste rien ne s'enregistre —
 le rebake échouerait APRÈS l'écriture du curé, l'état à moitié fait de la
 route de l'admin — et la savebar le dit ; l'état se lit quand même. Lien Item
 retiré du menu admin le 09/10 : le groupe « Editor » en sort, vide).
+Guides : Guides (= Guide editor › Overview + les catégories de boss, étape
+16, lot F18 : la vue d'ensemble de TOUS les guides du site par catégorie —
+titre, boss ou combat en clair, date, versions, caché, « contenu en code »
+pour ce que quick n'édite pas —, recherche par début de mot, case
+« cachés » ; puis l'éditeur d'un guide des sept catégories de `GUIDE_SPECS`,
+en sous-onglets : Méta (titre et description en six langues, « Traduire »,
+caché), Combat (le combat avec picker en lignes, ou les donjons ordonnés, ou
+le boss ; pour un versionné les pins de la version en lecture et
+« dépingler »), Intro, puis par version — Tips, Notes, Persos, Équipe (les
+quatre formes), Vidéos (en lecture, `label` préservé, ✕) — chaque texte EN
+avec son aperçu et ses traductions repliées, « Traduire » par onglet,
+l'anglais qui porte la structure d'un bloc. Un seul guide ouvert, tout le
+guide envoyé en un geste : `was` contre le disque, refus situés, le store de
+l'admin, `patchGuideMetaFields` élargi au titre, à la description et à
+`hidden`, le STAMP de `meta.updated` (la règle de `stamp-guides.ts`,
+partagée dans `guide-stamp.ts`) sur les seuls fichiers pertinents, UN commit
+`chore(guides): <cat>/<slug>`. « ＋ version » écrit sans committer et
+propose le Journal du site prérempli. Hash `#guides`, `#guides/<cat>/<slug>`,
+`#guides/<cat>/<slug>/<version>`. Liens des catégories de boss retirés du
+menu admin le 11/10 ; « Overview » y reste pour l'import de contribution,
+qui va avec les guides généraux (étape 17, F19)).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -187,7 +208,7 @@ C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeu
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
 Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 13 Item
 fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) →
-16 et 17 Guides →
+16 Guides de boss (fait, F18) → 17 Guides généraux →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
@@ -343,9 +364,22 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 ### 3. Guides (lot F, en plusieurs écrans si besoin)
 
-16. **Guide editor › Overview + catégories de boss**
+16. **Guide editor › Overview + catégories de boss** — FAIT, lot F18 : la
+    section « Guides » (groupe Guides, cf. « Déjà dans quick »). L'agacement
+    de Sevih y est corrigé : une catégorie dont TOUS les guides sont cachés
+    (Adventure License, 26 guides ; Monad Gate, 31) n'apparaît plus — ni dans
+    la vue d'ensemble, ni dans les cibles de Vidéos, ni dans le menu de
+    l'admin — sauf la case « cachés », qui les montre avec leur badge. Les
+    sept catégories de `GUIDE_SPECS` sont portées ; leurs liens sortent du
+    menu de l'admin, « Overview » y reste pour l'import de contribution
+    (étape 17). NOTE : guild-raid, skyward-tower, other, monad-gate et les
+    guides généraux en `.ts` (contenu dans `index.tsx` ou un composant) ne
+    sont éditables ni dans l'admin ni dans quick — c'est un choix, pas un
+    oubli : leur contenu est du code, il se retouche dans le dépôt. La vue
+    d'ensemble les liste quand même (« contenu en code », lien vers le site).
+    L'entrée reste pour que la numérotation ne bouge pas.
     `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos
-    - Agacements : deja certaines categorie n'existe plus (genre les AL ou monad gates)
+    - Agacements : deja certaines categorie n'existe plus (genre les AL ou monad gates) — corrigé : la règle « au moins un guide visible » (`categoriesWithVisibleGuide`, `guide-nav.ts`) s'applique partout, AL et Monad ne se proposent plus.
 
 17. **Guides généraux**
     `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`

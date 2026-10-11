@@ -24,8 +24,8 @@ export const $ = (id) => document.getElementById(id);
  * dessous. Le premier groupe est l'accueil : sa première section est celle
  * que la page ouvre. `wide` : la section prend toute la largeur de la fenêtre
  * (le `<main>` est sinon centré à 1200 px). `soon` : le groupe est annoncé mais
- * vide — quick doit absorber à terme les éditeurs, les guides et les outils de
- * l'admin, et la place se voit dès maintenant.
+ * vide — quick doit absorber à terme tout l'admin, et la place se voit dès
+ * maintenant (plus aucun groupe ne l'est depuis le 11/10 : Guides a sa section).
  */
 export const GROUPS = [
   {
@@ -66,7 +66,7 @@ export const GROUPS = [
       { id: 'items', label: 'Items', wide: true },
     ],
   },
-  { id: 'guides', label: 'Guides', soon: true, sections: [] },
+  { id: 'guides', label: 'Guides', sections: [{ id: 'guides', label: 'Guides', wide: true }] },
   { id: 'tools', label: 'Outils', sections: [{ id: 'names', label: 'Noms' }] },
 ];
 

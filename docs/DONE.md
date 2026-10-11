@@ -7,6 +7,142 @@
 
 ## 2026-10-11
 
+- **quick : section « Guides » — la vue d'ensemble et l'éditeur des guides de
+  boss, sans les catégories mortes (lot F18, étape 16 de la migration)** —
+  l'éditeur « Guide editor » de l'admin (`/admin/guides`, `GuideEditor`, 989
+  lignes) est porté dans quick pour les sept catégories de `GUIDE_SPECS` :
+  joint-challenge (5), world-boss (6), special-request (10),
+  irregular-extermination (4), adventure-license (26, tous cachés), adventure
+  (20), dimensional-singularity (15). L'agacement de Sevih (« certaines
+  catégories n'existent plus, genre les AL ou monad gates ») est corrigé par
+  UNE règle, « au moins un guide visible » — celle de `visibleCategorySlugs`
+  du site —, descendue dans `src/lib/admin/guide-nav.ts`
+  (`categoriesWithVisibleGuide`, `hasVisibleGuide`, `adminGuideMenu`, testés
+  sur des guides factices ET sur le corpus) : Adventure License et Monad Gate
+  ne se proposent plus ni dans la vue d'ensemble, ni dans les cibles de
+  l'onglet Vidéos (`videoTargets` filtre `hidden`), ni dans le menu de
+  l'admin — sans rien retirer de `GUIDE_SPECS`, que `videoTargets` et
+  `guide-specs.test.ts` lisent. La case « cachés » les montre, badge
+  « caché », et ils s'éditent. **Ce qui descend dans `src/lib/admin/`**
+  (testé) : `patchGuideMetaFields` élargi à `title`, `description`, `hidden`
+  (`GuideMetaPatch`, une seule écriture, l'ordre des clés gardé, une valeur
+  vide retire la clé, un texte sans anglais REFUSÉ — le scan le refuserait —,
+  `guide-store.meta.test.ts` en bac à sable) ; la règle de datation sortie de
+  `scripts/stamp-guides.ts` dans `guide-stamp.ts` (`stampMeta`
+  prettier-canonique, `todayLocal` sv-SE, `versionKeys`, `archivePrefixes`,
+  `hasRelevantChange`) — le script l'importe, son hook `--staged`, `--check`,
+  `--all` et `pnpm commit` ne changent pas (relu, pas rejoué : il faut un
+  commit) ; `buildPinTargets` et `archiveLabel` sortis de la page admin et
+  de `VersionPinPicker` dans `guide-pin-targets.ts`. **Serveur**
+  (`scripts/quick/actions.ts`, cinq routes dans `server.ts`) :
+  `guidesOverview(disk, withHidden)` → `GET /api/guides[?hidden=1]` — par
+  catégorie du site dans son ordre, vivante ou toutes, ses guides triés comme
+  `listGuidesByCategory`, le boss ou le combat EN CLAIR (`meta.group`,
+  `bossId`, le premier donjon « (+n) », ou le `group`/`main` du `config.json`
+  de la version récente pour un guild raid), `editable` (hors `GUIDE_SPECS` :
+  « contenu en code »), les comptes, `siteBase` ; `guideDraftState` → `GET
+/api/guides/state?cat=&slug=` — le `GuideDraft` de l'admin, le meta
+  éditable, la `spec`, les combats du MODE (`listGroups(spec.groupModes)`,
+  avec icône), les donjons, les monstres, le roster par nom d'affichage EN,
+  les `refs`, les cibles de pin en lecture, les langues ; `saveGuide` → `POST
+/api/guides` — `was` (brouillon + meta chargés) contre le disque, `stale`
+  sinon ; chaque texte nettoyé (langues vides retirées) et contrôlé
+  (`localizedIssues` : tags par la résolution du site, l'anglais), les noms
+  de persos contre le roster, ce que le store exigerait (intro, combat,
+  donjons, clé de version) — un écart est un refus SITUÉ `{ version, tab,
+index, field, reason }` et rien n'est écrit ; puis `saveGuideDraft` (ses
+  refus rendus situés), `patchGuideMetaFields` si le meta a bougé, puis CE
+  QUI A BOUGÉ lu de `git status` du dossier du guide (`gitDirtyFiles`,
+  renommages compris — y compris une version posée avant et pas committée),
+  rien : « rien à enregistrer », ni stamp ni commit ; sinon le STAMP si un
+  fichier hors archive a bougé (`hasRelevantChange`, la règle du script),
+  et UN `commitPaths` des fichiers modifiés plus le `meta.json`,
+  `chore(guides): <cat>/<slug>` — les `.json` partent en `--no-verify`,
+  sans ce stamp une édition par quick ne re-datait jamais le guide ;
+  `addGuideVersionAction` → `POST /api/guides/version` — ÉCRIT SANS
+  COMMITTER (tranché : la copie est une base à réécrire ; committée telle
+  quelle elle deviendrait la version par défaut du site, copie conforme de
+  la précédente sous une autre date ; le prochain « Enregistrer »
+  l'emporte, la page le dit) ; `POST /api/guides/preview` (`previewInline`,
+  ajouté à `READ_ONLY_POSTS` du banc) ; `ADMIN_TO_QUICK` gagne
+  `/admin/guides`. **La page** (`tabs/guides.{html,js,css}`, préfixe `gd-`,
+  groupe Guides qui perd son `soon`, `wide`) : la vue d'ensemble — recherche
+  par début de mot sur le titre et le slug, « cachés », une carte par
+  catégorie, table titre · boss/combat · date · versions · état · « site ↗ »,
+  un bouton par guide éditable, les autres atténués « contenu en code » ;
+  le guide — en-tête (titre en direct, catégorie, cat/slug, combat, date,
+  versions, « ouvrir sur le site »), savebar commune avec la langue de
+  l'aperçu, sous-onglets Méta · Combat · Intro · Tips · Notes · Persos ·
+  Équipe · Vidéos selon la spec (le `.tab` de 32 px de la Fiche perso), la
+  barre des versions d'un versionné (« ＋ version » avec clé et « dupliquer
+  depuis », refusé tant que des changements attendent, puis la note « posée,
+  pas committée » et le lien vers le Journal du site PRÉREMPLI — gabarit
+  « Mise à jour », guide · mode · mois · slug, par `openTemplate` exporté de
+  `changelog.js`, et aussi par le hash `#changelog?template=update&guide=…`
+  à l'ouverture). Tranché pour la forme : chaque texte est le TEXTE de B42
+  (EN, aperçu, refus, « Traductions (5) » repliées, « à retraduire ») ; les
+  conseils et les notes d'une équipe nommée sont des BLOCS (une entrée par
+  ligne, l'aperçu en puces, les traductions en blocs remplis par index —
+  l'anglais porte la structure, la règle de `guide-text.ts` recopiée en
+  vanilla et testée à l'écran : une ligne jp en plus ne crée pas d'entrée) ;
+  le combat se choisit dans le picker partagé en LIGNES (icône, nom, id ;
+  début de mot), comme les donjons (ordonnés, ↑ ↓ ✕) et le boss ; les persos
+  des slots et des groupes sont des tuiles (portrait 44 px, nom EN, ✕ ; « ? »
+  cerclé de rouge pour un nom hors roster) avec le picker en multi ; les
+  quatre formes d'équipe (slots, plages de stages, phases, nommées) ; les
+  pins d'une version se LISENT (badge « épinglé · v1 · note ») et se
+  DÉPINGLENT, `pinned` n'est envoyé que pour une version touchée ; les
+  vidéos en lecture avec leur `label` préservé, ✕, « ajouter dans Vidéos »
+  qui pose la cible ; la savebar compte les SOUS-ONGLETS par version qui
+  diffèrent du disque, le brouillon nettoyé comme le store l'écrirait (une
+  section sans conseil, un groupe vide, une équipe sans slot ne comptent
+  pas) ; un refus situé garde la saisie, cercle la ligne, pose le point
+  rouge sur l'onglet et la version, y retoucher le lève ; `stale` relit ;
+  `dirty`, `canLeave`, hash `#guides`, `#guides/<cat>/<slug>`,
+  `#guides/<cat>/<slug>/<version>` — plus `/<sous-onglet>` pour le banc
+  seulement. **Admin** : le groupe « Guide editor » ne propose plus que
+  « Overview » (l'import de contribution, F19) et « General guides »
+  (`adminGuideMenu`) ; les pages restent par leur URL. **Vérification** :
+  `pnpm typecheck` vert (les trois tsc muets), `pnpm lint` vert (`eslint`
+  muet), `pnpm test` : « Test Files 212 passed (212), Tests 3483 passed
+  (3483) » ; `NODE_ENV=development pnpm exec vitest run scripts/quick
+src/lib/admin` : « 50 passed, 1391 passed » — dont `guide-videos.test.ts`
+  (l'aller-retour sur tout le corpus) inchangé et vert ; 45 tests neufs
+  (`guide-nav`, `guide-store.meta`, `guide-stamp`, `guide-pin-targets`, 19
+  dans `actions.test.ts` : overview avec et sans cachés, état d'un versionné,
+  d'un plat et d'adventure, `saveGuide` stale, refus situés, `pinned` omis ou
+  vide, vidéos avec `label`, stamp sur les seuls fichiers pertinents,
+  archive seule sans stamp, rien à committer, meta en une écriture, refus du
+  store et du meta ; 14 en happy-dom : le groupe sans `soon`, la vue
+  d'ensemble, la recherche, « cachés », un plat, un versionné par le hash,
+  les pins, le bloc « l'anglais porte la structure », « Traduire »,
+  l'aperçu, le refus situé et `stale`, « ＋ version », `canLeave`). **Banc** :
+  quick isolé sur :4799 (clés vidées), douze captures — la vue d'ensemble
+  (93 guides dans 10 catégories · 57 cachés : General Guides et Adventure
+  en tête, « contenu en code » sur les généraux), `#guides/special-request/
+amadeus` (Méta), `#guides/joint-challenge/annihilator/2026-05` (la version
+  ouverte), puis par le hash de banc Combat du versionné (le combat
+  partagé, trois Annihilator « live · jamais versionné »), Tips (le bloc et
+  ses puces aux balises résolues), Équipe en slots, en plages (Amadeus 1→10,
+  11→13), nommée (Blockbuster, note en bloc), Persos en groupes et en
+  sections (Belial), Donjons (S1-8-5), Vidéos (label « Outerpedia »). Rien
+  d'enregistré, `/api/translate` jamais appelé avec des clés (GET et
+  `/api/guides/preview` seulement). **Laissé** : les guides généraux et
+  `ContributionImport` (F19) ; guild-raid, skyward-tower, other, monad-gate
+  listés en « contenu en code » (choix, cf. `quick-migration.md`) ; la
+  création et la suppression de guides (il faudrait un `index.tsx`) ; le
+  versionnage et l'épinglage des monstres (extractor 19-20 : le pin se lit
+  et se dépingle ici, il ne se crée pas) ; les contrôles à l'écran (TODO) ;
+  hors périmètre vu en portant : `tagSourceSheet` renvoie encore à
+  `/admin/tags` pour un tag mort dans un guide, et le gabarit « Mise à
+  jour » du Journal ne connaît que trois modes (TODO). Décision de forme
+  non demandée mais prise : un seul guide ouvert, la vue d'ensemble se
+  cache derrière lui et « ← Guides » y ramène (une liste latérale par
+  catégorie, celle de l'admin, aurait pris la largeur aux équipes à quatre
+  slots).
+
+## 2026-10-11
+
 - **Quatre PR de documentation des sessions cloud fusionnées en local (hors
   lot)** : `#51` (audit des doublons de règles du jeu outerpedia ↔ gear-solver,
   `docs/audit-doublons-solver.md`), T14 `#53` (commentaires de `datagen/` et

@@ -14,6 +14,7 @@
  */
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { relative, resolve, sep } from 'node:path';
+import type { LocalizedText } from '@contracts';
 import { writeJson } from '@datagen/lib/json';
 import { getGuide, readGuideFile, readGuideVersionFile } from '@/lib/data/guides';
 import {
@@ -184,13 +185,42 @@ export function loadGuideDraft(category: string, slug: string): GuideDraft {
   });
 }
 
-/** Champs de `meta.json` que l'admin sait fusionner. */
-export type GuideMetaKey = 'group' | 'bossId' | 'dungeons' | 'monsters';
+/** Champs de `meta.json` que l'admin et quick savent fusionner. */
+export type GuideMetaKey =
+  'group' | 'bossId' | 'dungeons' | 'monsters' | 'title' | 'description' | 'hidden';
+
+/**
+ * Ce qu'une fusion de `meta.json` peut poser : le combat (`group`, `bossId`,
+ * `dungeons`, `monsters` — l'admin et le ré-épinglage) et, depuis quick (lot
+ * F18), le titre et la description dans les six langues, et `hidden`. Une
+ * valeur VIDE (`undefined`, `[]`, `''`, `false`) supprime la clé : `hidden`
+ * n'est jamais écrit à `false`, et un guide sans `group` n'en porte pas.
+ * Les clés sont celles de `META_KEYS` (`src/lib/data/guides.ts`) : une clé
+ * inconnue casserait le build au scan, le type l'interdit ici.
+ */
+export interface GuideMetaPatch {
+  group?: string;
+  bossId?: string;
+  dungeons?: string[];
+  monsters?: string[];
+  title?: LocalizedText & { en: string };
+  description?: LocalizedText & { en: string };
+  hidden?: boolean;
+}
+
+/** Une valeur de patch qui veut dire « retire la clé ». */
+const emptyMetaValue = (value: unknown): boolean =>
+  value === undefined ||
+  value === false ||
+  value === '' ||
+  (Array.isArray(value) && value.length === 0);
 
 /**
  * Fusionne PLUSIEURS champs dans `meta.json` en UNE écriture (préserve tout le
  * reste ; une valeur vide supprime la clé). Rend `false` si le guide est
- * introuvable ou hors périmètre.
+ * introuvable ou hors périmètre — ou si un titre ou une description n'a pas
+ * d'anglais : le scan refuse un `meta.json` sans `{ en }`, on n'écrit pas ce
+ * qui casserait le build.
  *
  * Le multi-champs n'est pas un confort : `meta.json` est relu à chaque appel via
  * un cache mtime, donc deux patchs successifs sur le MÊME fichier peuvent partir
@@ -201,19 +231,22 @@ export type GuideMetaKey = 'group' | 'bossId' | 'dungeons' | 'monsters';
 export async function patchGuideMetaFields(
   category: string,
   slug: string,
-  fields: Partial<Record<GuideMetaKey, string | string[] | undefined>>,
+  fields: GuideMetaPatch,
 ): Promise<boolean> {
   const guide = getGuide(category, slug);
   if (!guide) return false;
   const dir = guideDir(category, slug);
   if (!dir) return false; // hors périmètre (le guide existe pourtant : `getGuide` a répondu)
+  for (const key of ['title', 'description'] as const) {
+    const text = fields[key];
+    if (text !== undefined && !text.en?.trim()) return false;
+  }
   const meta = (readGuideFile<Record<string, unknown>>(guide, 'meta.json') ?? {}) as Record<
     string,
     unknown
   >;
   for (const [key, value] of Object.entries(fields)) {
-    const empty = value === undefined || (Array.isArray(value) && value.length === 0);
-    if (empty) delete meta[key];
+    if (emptyMetaValue(value)) delete meta[key];
     else meta[key] = value;
   }
   await writeJson(resolve(dir, 'meta.json'), meta);
@@ -279,10 +312,9 @@ function withKeptPin(vdir: string, config: RawConfig | null): RawConfig | null {
 async function patchGuideMeta(
   category: string,
   slug: string,
-  key: GuideMetaKey,
-  value: string | string[] | undefined,
+  patch: GuideMetaPatch,
 ): Promise<void> {
-  await patchGuideMetaFields(category, slug, { [key]: value });
+  await patchGuideMetaFields(category, slug, patch);
 }
 
 /** Valide puis écrit un guide. Renvoie les écarts bloquants (vide = OK). */
@@ -333,8 +365,8 @@ export async function saveGuideDraft(
     if (errors.length) return errors;
 
     if (spec.monster === 'dungeons-meta')
-      await patchGuideMeta(category, slug, 'dungeons', cv.dungeons);
-    if (spec.monster === 'bossId-meta') await patchGuideMeta(category, slug, 'bossId', cv.bossId);
+      await patchGuideMeta(category, slug, { dungeons: cv.dungeons });
+    if (spec.monster === 'bossId-meta') await patchGuideMeta(category, slug, { bossId: cv.bossId });
     await writeJson(resolve(base, 'content.json'), fromContentDraft(spec, draft));
     return [];
   }
@@ -345,7 +377,7 @@ export async function saveGuideDraft(
     errors.push('A battle (monster) is required for this guide.');
   if (errors.length) return errors;
 
-  if (spec.monster === 'group-meta') await patchGuideMeta(category, slug, 'group', v.group);
+  if (spec.monster === 'group-meta') await patchGuideMeta(category, slug, { group: v.group });
 
   const payload = fromFlatDraft(spec, draft);
   for (const [file, data] of Object.entries(payload))

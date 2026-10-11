@@ -11,7 +11,9 @@
  * tenir la fiche d'un perso (rangs, rôle, paliers, priorité de skills, tags),
  * câbler les chips de skills d'un monstre (ceux des guides d'abord), tenir
  * le journal du site (le changelog, par gabarits), lire une table brute du jeu
- * (« Tables du jeu »). Tous committent, sauf le message Discord et les deux
+ * (« Tables du jeu »), éditer un guide de boss (« Guides » : ses textes
+ * dans les six langues, son combat, ses versions — la date du guide re-datée
+ * avant le commit). Tous committent, sauf le message Discord et les deux
  * écrans qui ne font que lire (le tableau de bord, les tables du jeu) ;
  * « Pousser », dans l'en-tête, pousse `main`. Et, à chaque patch du jeu, la
  * chaîne des données — rafraîchir, relire la promotion, promouvoir,
@@ -52,11 +54,13 @@ import {
   EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
+  GUIDES_DEPS,
   ITEMS_DEPS,
   MONSTERS_DEPS,
   NAMES_DEPS,
   TRANSLATE_DEPS,
   addComics,
+  addGuideVersionAction,
   addVideo,
   bannersState,
   changelogState,
@@ -73,6 +77,8 @@ import {
   gameTablesState,
   gearRecoState,
   gitState,
+  guideDraftState,
+  guidesOverview,
   itemsSearch,
   itemsState,
   monsterSheetState,
@@ -93,6 +99,7 @@ import {
   saveCouponList,
   saveEffects,
   saveGearReco,
+  saveGuide,
   saveItems,
   saveMonsterKit,
   saveNames,
@@ -801,6 +808,70 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     }>(req);
     await stream(res, (report) =>
       withGit(saveMonsterKit(String(id ?? ''), changes, was, MONSTERS_DEPS, report)),
+    );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/guides') {
+    // La vue d'ensemble de la section « Guides » : par catégorie vivante (ou
+    // toutes avec `?hidden=1`), ses guides — titre, date, versions, caché,
+    // éditable ou « contenu en code », le boss ou le combat. Relue du disque.
+    json(res, guidesOverview(GUIDES_DEPS, url.searchParams.has('hidden')));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/guides/state') {
+    // L'état du guide `?cat=&slug=`, lu du disque à chaque appel : son
+    // brouillon (celui de l'admin), ses textes de meta, sa spec, les options de
+    // ses pickers, les refs des tags, ses pins en lecture.
+    const out = await guideDraftState(
+      url.searchParams.get('cat') ?? '',
+      url.searchParams.get('slug') ?? '',
+    );
+    if ('error' in out) return json(res, { error: out.error }, 404);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/guides/preview') {
+    // L'aperçu des textes d'un guide en cours de saisie : les segments que le
+    // site rendra, dans la langue demandée (`previewInline`, celui de la
+    // fiche perso). Rien ne s'écrit.
+    const b = await body<{ texts?: unknown; lang?: unknown } | null>(req).catch(() => null);
+    const out = await previewInline(b?.texts, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/guides/version') {
+    // « ＋ version » : écrit le dossier de la version, ne committe PAS — le
+    // prochain « Enregistrer » l'emporte. Rend le brouillon relu.
+    const { category, slug, newKey, fromKey } = await body<Record<string, unknown>>(req);
+    const out = await addGuideVersionAction(
+      String(category ?? ''),
+      String(slug ?? ''),
+      newKey,
+      fromKey,
+    );
+    json(res, out, out.ok ? 200 : 400);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/guides') {
+    // « Enregistrer » d'un guide : tout le brouillon et ses textes de meta,
+    // contrôlés puis écrits par les stores de l'admin, le stamp de la date,
+    // UN commit `chore(guides): <catégorie>/<slug>`.
+    const { category, slug, draft, meta, was } = await body<Record<string, unknown>>(req);
+    await stream(res, (report) =>
+      withGit(
+        saveGuide(
+          String(category ?? ''),
+          String(slug ?? ''),
+          { draft, meta, was },
+          GUIDES_DEPS,
+          report,
+        ),
+      ),
     );
     return;
   }

@@ -1,0 +1,651 @@
+/* Onglet « Guides » : la vue d'ensemble (une carte par catégorie, une table de
+   guides), puis le guide ouvert — son en-tête, la savebar, les sous-onglets, la
+   barre des versions, et les cartes de chaque sous-onglet : les textes à tags
+   inline (l'anglais, l'aperçu, les traductions repliées — le modèle de la
+   Fiche perso, `c-text`), les persos en tuiles (`c-hero`), les pins, les
+   donjons. Le reste — carte, `.form`, `.savebar`, `.btn`, `.badge`, `.tab` —
+   vient de `quick.css` ; le picker partagé, de `hero-picker.css`. Préfixe
+   `gd-` : `g-` est à Gear reco. */
+
+/* ------------------------------------------------------- la vue d'ensemble */
+#tab-guides #gd-overview,
+#tab-guides #gd-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-guides #gd-overview[hidden],
+#tab-guides #gd-guide[hidden] {
+  display: none;
+}
+#tab-guides #gd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-guides .gd-cat .card-head {
+  flex-wrap: wrap;
+}
+#tab-guides .gd-cat table {
+  width: 100%;
+}
+/* Le titre d'un guide éditable est un bouton : le texte du site, souligné au survol. */
+#tab-guides .gd-open {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--content);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-guides .gd-open:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+#tab-guides .gd-open:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+#tab-guides .gd-slug {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+}
+/* Un guide dont le contenu est en code : atténué ; un guide caché : plus encore. */
+#tab-guides .gd-row.dim .gd-name {
+  color: var(--content-muted);
+}
+#tab-guides .gd-row.off > td {
+  opacity: 0.6;
+}
+#tab-guides .gd-state {
+  white-space: nowrap;
+}
+#tab-guides .gd-state .badge + .badge {
+  margin-left: 6px;
+}
+#tab-guides .gd-site {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- l'en-tête */
+#tab-guides .gd-head {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+}
+#tab-guides .gd-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 320px;
+}
+#tab-guides .gd-id strong {
+  font-size: 16px;
+}
+#tab-guides .gd-traits {
+  display: flex;
+  align-items: center;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-guides .gd-site-link {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- savebar */
+#tab-guides .savebar[hidden] {
+  display: none;
+}
+#tab-guides #gd-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+#tab-guides #gd-count span {
+  margin-right: 0;
+}
+#tab-guides .gd-msg {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* La langue de l'aperçu, une pour tout le guide : le groupe segmenté de la Fiche perso. */
+#tab-guides .gd-pv-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-guides .gd-pv-lang[hidden] {
+  display: none;
+}
+#tab-guides .gd-pv-lang .lbl {
+  margin-right: 0;
+}
+#tab-guides .gd-seg {
+  display: inline-flex;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-guides .gd-seg button {
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#tab-guides .gd-seg button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-guides .gd-seg button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* ------------------------------------------- les sous-onglets, les versions
+   La rangée des sous-onglets de la Fiche perso (`.tab` en 32 px), puis celle
+   des versions : un onglet par version, « ＋ version » et son formulaire, et
+   la note d'une version qui vient d'être posée. */
+#tab-guides .gd-tabs,
+#tab-guides .gd-vtabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--line-subtle);
+  overflow-x: auto;
+}
+#tab-guides .gd-tabs[hidden],
+#tab-guides .gd-versions[hidden] {
+  display: none;
+}
+#tab-guides .gd-tabs .tab,
+#tab-guides .gd-vtabs .tab {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+#tab-guides .gd-tabs .tab:focus-visible,
+#tab-guides .gd-vtabs .tab:focus-visible {
+  outline-offset: -2px;
+}
+#tab-guides .tab .dot.edit {
+  background: var(--accent);
+}
+#tab-guides .gd-vtabs .tab .lbl {
+  font-size: 11px;
+}
+#tab-guides .gd-vtabs .btn {
+  flex: none;
+  margin-left: 6px;
+}
+#tab-guides .gd-vtabs > .lbl {
+  margin-left: auto;
+  padding-left: 12px;
+  white-space: nowrap;
+}
+#tab-guides .gd-versions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#tab-guides .gd-addv {
+  padding: 12px 14px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  background: var(--surface-raised);
+}
+#tab-guides .gd-note {
+  margin: 0;
+}
+#tab-guides #gd-panel:empty {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- les cartes
+   Un sous-onglet est une pile de cartes (`.gd-stack`) ; Méta en montre deux
+   côte à côte (`.gd-cols`, une seule sous 1000 px). */
+#tab-guides .gd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-guides .gd-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+#tab-guides .gd-wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 1000px) {
+  #tab-guides .gd-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-guides .gd-card .card-head {
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-card .card-head .btn.icon {
+  margin-left: auto;
+}
+#tab-guides .gd-card.ko {
+  border-color: var(--danger);
+}
+#tab-guides .gd-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 18px;
+}
+#tab-guides .gd-body p {
+  margin: 0;
+}
+#tab-guides .gd-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+/* « Traduire » dit son refus à côté de lui, sur plusieurs lignes s'il le faut. */
+#tab-guides .gd-foot .badge {
+  height: auto;
+  min-height: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  white-space: normal;
+}
+/* Le refus d'un champ, sous lui ; vide, la ligne ne prend pas de place. */
+#tab-guides .gd-err,
+#tab-guides .gd-ko {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+#tab-guides .gd-err:empty,
+#tab-guides .gd-ko:empty {
+  display: none;
+}
+#tab-guides .gd-link {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------------- les textes
+   Un texte à tags inline, celui de la Fiche perso : l'anglais (un champ d'une
+   ligne pour un titre, une textarea qui grandit sinon), son aperçu sur le fond
+   de la page, ses refus, puis les traductions repliées, trois par rangée. */
+#tab-guides .gd-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+#tab-guides .gd-text textarea,
+#tab-guides .gd-text input {
+  width: 100%;
+  min-height: 0;
+  font-size: 13px;
+}
+#tab-guides .gd-text .refused {
+  border-color: var(--danger);
+}
+#tab-guides .gd-text.ko {
+  padding-left: 10px;
+  border-left: 2px solid var(--danger);
+}
+#tab-guides .gd-trs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+#tab-guides .gd-trs .field {
+  min-width: 0;
+}
+#tab-guides .gd-trs label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-guides summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: max-content;
+  max-width: 100%;
+  list-style: none;
+  cursor: pointer;
+}
+#tab-guides summary::-webkit-details-marker {
+  display: none;
+}
+#tab-guides details[open] summary {
+  margin-bottom: 8px;
+}
+#tab-guides summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+@media (max-width: 1300px) {
+  #tab-guides .gd-cols .gd-trs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  #tab-guides .gd-trs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* L'aperçu : les segments de `noteHtml` (`.pv-*`), sur le fond de la page ; une
+   liste à puces pour un bloc (un conseil par ligne). */
+#tab-guides .gd-pv {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface-base);
+  color: var(--content);
+  font-size: 14px;
+  line-height: 1.65;
+  transition: opacity 0.12s;
+}
+#tab-guides .gd-pv:empty {
+  display: none;
+}
+#tab-guides .gd-pv.busy {
+  opacity: 0.45;
+}
+#tab-guides .gd-pv ul {
+  margin: 0;
+  padding-left: 20px;
+}
+#tab-guides .gd-pv li:empty::after {
+  content: '…';
+  color: var(--placeholder);
+}
+/* Les jetons et classes de couleur des segments, ceux de la Fiche perso
+   (`character.css` ne les règle que sous `#tab-character`). */
+#tab-guides {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-bg: #1a69a7;
+  --debuff-bg: #a72a27;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+  --equipment: #fbbf24;
+}
+#tab-guides .text-buff {
+  color: var(--buff);
+}
+#tab-guides .text-debuff {
+  color: var(--debuff);
+}
+#tab-guides .text-class {
+  color: var(--klass);
+}
+#tab-guides .text-stat {
+  color: var(--stat);
+}
+#tab-guides .text-highlight {
+  color: var(--highlight);
+}
+#tab-guides .text-equipment {
+  color: var(--equipment);
+}
+#tab-guides .text-item-normal {
+  color: var(--item-normal);
+}
+#tab-guides .text-item-superior {
+  color: var(--item-superior);
+}
+#tab-guides .text-item-epic {
+  color: var(--item-epic);
+}
+#tab-guides .text-item-legendary {
+  color: var(--item-legendary);
+}
+#tab-guides .text-fire {
+  color: var(--fire);
+}
+#tab-guides .text-water {
+  color: var(--water);
+}
+#tab-guides .text-earth {
+  color: var(--earth);
+}
+#tab-guides .text-light {
+  color: var(--light);
+}
+#tab-guides .text-dark-elem {
+  color: var(--dark-elem);
+}
+#tab-guides .pv-unknown {
+  color: var(--danger);
+  font-weight: 600;
+}
+#tab-guides .pv-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+#tab-guides .pv-u {
+  text-decoration: underline;
+}
+#tab-guides .pv-ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+#tab-guides .pv-fx,
+#tab-guides .pv-it {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+#tab-guides .pv-fx {
+  border-radius: 4px;
+  background: var(--buff-bg);
+}
+#tab-guides .pv-fx.debuff {
+  background: var(--debuff-bg);
+}
+#tab-guides .pv-fx img,
+#tab-guides .pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------- le combat
+   Le combat ou le boss choisi : son icône, son nom, son id, « Changer… » ; les
+   donjons ordonnés ; les pins d'une version, un monstre par ligne. */
+#tab-guides .gd-battle {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+#tab-guides .gd-battle img,
+#tab-guides .gd-pin img {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+#tab-guides .gd-dungeons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding-left: 22px;
+}
+#tab-guides .gd-dungeons li {
+  display: flex;
+  align-items: center;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+}
+#tab-guides .gd-dungeons li > span:first-child {
+  flex: 1 1 200px;
+}
+#tab-guides .gd-pin {
+  display: flex;
+  align-items: center;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-pin:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+#tab-guides .gd-pn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------------- les persos
+   Une tuile de perso, celle des synergies de la Fiche perso : portrait 44 px
+   cadré sur le visage, nom, ✕. Un nom hors du roster : un « ? » et un cadre
+   rouge. Les slots d'une équipe : une rangée numérotée par slot. */
+#tab-guides .gd-heroes {
+  display: flex;
+  align-items: center;
+  gap: 8px 10px;
+  flex-wrap: wrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+#tab-guides .gd-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  background: var(--surface-base);
+  font-size: 13px;
+}
+#tab-guides .gd-hero.unknown {
+  border-color: var(--danger);
+}
+#tab-guides .gd-hero img,
+#tab-guides .gd-noface {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+  object-position: top;
+}
+#tab-guides .gd-noface {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--danger);
+  color: var(--danger);
+  font-weight: 700;
+}
+#tab-guides .gd-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#tab-guides .gd-slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#tab-guides .gd-slot > .lbl {
+  flex: none;
+  width: 18px;
+  text-align: right;
+}
+#tab-guides .gd-slot > .btn.icon {
+  flex: none;
+}
+#tab-guides .gd-group .gd-body {
+  gap: 12px;
+}
+
+/* ---------------------------------------------------------------- les vidéos */
+#tab-guides .gd-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tab-guides .gd-videos li {
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+}
+#tab-guides .gd-videos li .btn.icon {
+  margin-left: auto;
+}
+#tab-guides .gd-vt {
+  font-size: 13.5px;
+}
+
+/* ---------------------------------------------------------------- le picker
+   Les pickers en lignes (un combat, un donjon, un boss), dans le picker partagé
+   posé dans `<body>` : une icône, le nom, l'id en chasse fixe dessous. */
+.hp-modal .gd-pico {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+.hp-modal .gd-pk {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hp-modal .gd-pname,
+.hp-modal .gd-pid {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hp-modal .gd-pname {
+  color: var(--content);
+}
+.hp-modal .gd-pid {
+  color: var(--content-muted);
+  font-family: var(--mono);
+  font-size: 11px;
+}

@@ -1,17 +1,11 @@
 import { notFound } from 'next/navigation';
 import { characterDisplayName, getAllCharacters } from '@/lib/data/characters';
 import { getGuide } from '@/lib/data/guides';
-import { encounterLabel, encountersOfGroup, listDungeons, listGroups } from '@/lib/data/encounters';
-import {
-  listMonsters,
-  monsterArchives,
-  monsterDisplayNames,
-  monsterIconSrc,
-  getMonster,
-} from '@/lib/data/monsters';
+import { listDungeons, listGroups } from '@/lib/data/encounters';
+import { listMonsters } from '@/lib/data/monsters';
 import { buildInlineRefs } from '@/lib/admin/inline-refs';
-import { getT } from '@/i18n';
-import { guideSpec, isEditableGuideCategory, type GuideDraft } from '@/lib/admin/guide-draft';
+import { guideSpec, isEditableGuideCategory } from '@/lib/admin/guide-draft';
+import { buildPinTargets } from '@/lib/admin/guide-pin-targets';
 import { loadGuideDraft } from '@/lib/admin/guide-store';
 import {
   isEditableGeneralGuide,
@@ -20,7 +14,6 @@ import {
 } from '@/lib/admin/general-guide-store';
 import { loadShopPriorities } from '@/lib/admin/shop-priorities-store';
 import { GuideEditor } from '@/components/admin/GuideEditor';
-import type { PinTarget } from '@/components/admin/VersionPinPicker';
 import { FreeHeroesEditor } from '@/components/admin/FreeHeroesEditor';
 import { PremiumLimitedEditor } from '@/components/admin/PremiumLimitedEditor';
 import { ShopPrioritiesEditor } from '@/components/admin/ShopPrioritiesEditor';
@@ -108,9 +101,10 @@ export default async function GuideEditPage({
   // valides — la bonne réponse se cherchait parmi ses homonymes.
   const groupOptions = usesGroup ? listGroups('en', spec.groupModes) : [];
   // ÉPINGLAGE : ce qu'une version peut réellement figer, c'est-à-dire les
-  // monstres de SON combat et les archives qui existent pour eux. Le combat, lui,
-  // n'est pas un choix de version — mesuré sur les 16 guides versionnés, aucun
-  // n'en change d'une version à l'autre : il appartient au GUIDE.
+  // monstres de SON combat et les archives qui existent pour eux (la règle est
+  // dans `guide-pin-targets.ts`, partagée avec quick). Le combat, lui, n'est
+  // pas un choix de version — mesuré sur les 16 guides versionnés, aucun n'en
+  // change d'une version à l'autre : il appartient au GUIDE.
   const pinTargets = spec.versioned ? await buildPinTargets(draft) : [];
   const dungeonOptions = spec.monster === 'dungeons-meta' ? listDungeons('en') : [];
   const monsterOptions = spec.monster === 'bossId-meta' ? listMonsters('en') : [];
@@ -133,39 +127,4 @@ export default async function GuideEditPage({
       />
     </div>
   );
-}
-
-/**
- * Les monstres du combat d'un guide, chacun avec les états FIGÉS qu'on peut lui
- * choisir. Le combat est pris sur la première version qui en déclare un : il
- * appartient au guide, pas à la version (vérifié sur les 16 guides versionnés —
- * aucun n'en change), et une version « legacy » sans combat n'a donc rien à
- * épingler mais ne prive pas les autres.
- *
- * Un monstre SANS archive reste listé : c'est ce qui dit « celui-là n'a jamais
- * été versionné », alors que son absence se lirait comme un oubli du scan.
- */
-async function buildPinTargets(draft: GuideDraft): Promise<PinTarget[]> {
-  const group = draft.versions.find((v) => v.group)?.group;
-  if (!group) return [];
-  const t = await getT('en');
-  // Par ID, pas par rencontre : un même monstre peut tenir plusieurs difficultés
-  // (world boss), et il ne se fige qu'une fois — la liste `pinned` est indexée
-  // par monstre. On garde les difficultés pour le NOMMER à l'écran.
-  const byId = new Map<string, string[]>();
-  for (const enc of encountersOfGroup(group)) {
-    const label = encounterLabel(enc.ref, 'en', t);
-    for (const m of enc.monsters) byId.set(m.id, [...(byId.get(m.id) ?? []), label]);
-  }
-  const names = monsterDisplayNames([...byId.keys()], 'en');
-  return [...byId].map(([id, where]) => {
-    const monster = getMonster(id);
-    return {
-      id,
-      name: names.get(id) ?? id,
-      where,
-      ...(monster ? { icon: monsterIconSrc(monster) } : {}),
-      archives: monsterArchives(id),
-    };
-  });
 }

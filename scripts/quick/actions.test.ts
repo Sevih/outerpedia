@@ -87,6 +87,16 @@
  * jour bougent à chaque patch et à chaque curation), le store et git INJECTÉS :
  * aucun test n'écrit `data/curated/effects.json`.
  *
+ * Et contrat de la section « Guides » — `guidesOverview` (par catégorie
+ * vivante, les guides et leur combat en clair), `guideDraftState` (l'état d'un
+ * guide : son brouillon, ses options, ses pins), `saveGuide` (tout le guide en
+ * un geste : `was` contre le disque, les refus SITUÉS, le store, le meta, le
+ * stamp sur les seuls fichiers pertinents, UN commit) et
+ * `addGuideVersionAction` (écrit, ne committe pas). Les guides, les brouillons,
+ * les listes des pickers, les stores, le stamp et git sont FACTICES : aucun
+ * test ne lit l'arbre `_contents` ni n'écrit dedans — seule la résolution des
+ * tags inline est réelle.
+ *
  * Et contrat de l'onglet « Items » — `itemsState` (le catalogue servi sous
  * l'overlay du curé), `itemsSearch` (la règle d'Effets, sur l'id et le nom
  * anglais), `resolveText` et `saveItems`. Le catalogue et le curé sont FACTICES,
@@ -133,6 +143,9 @@ import { HUMAN_TAGS } from '@/components/tierlist/tiers';
 import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-store';
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import type { ItemCurated } from '@/lib/admin/item-curated-store';
+import type { GuideDraft } from '@/lib/admin/guide-draft';
+import type { InlineRefs } from '@/lib/admin/inline-refs';
+import type { Guide } from '@/lib/data/guides';
 import {
   monsterKitCards,
   pickMonsterKit,
@@ -170,6 +183,7 @@ import {
   NO_ITEM_BAKE,
   NO_TRANSLATE_KEY,
   addComics,
+  addGuideVersionAction,
   bannersState,
   changelogState,
   characterRoster,
@@ -189,6 +203,8 @@ import {
   gearRecoState,
   gitState,
   groupComics,
+  guideDraftState,
+  guidesOverview,
   itemsSearch,
   itemsState,
   monsterSheetState,
@@ -205,6 +221,7 @@ import {
   saveChangelogList,
   saveCharacterSheet,
   saveGearReco,
+  saveGuide,
   saveEffects,
   saveItems,
   saveMonsterKit,
@@ -228,6 +245,7 @@ import {
   type GameTablesDisk,
   type GearCatalog,
   type GearRecoDeps,
+  type GuidesDeps,
   type ItemChange,
   type ItemsDeps,
   type ItemsDisk,
@@ -3381,10 +3399,11 @@ describe('dashboardState — l’accueil de quick, toutes lectures injectées', 
     ]);
     // La table du jour : l'éditeur des effets, celui des persos (la « Fiche
     // perso », Gear reco compris), celui des EE et les outils Pro / Con et
-    // Synergy, trois de ses sous-onglets, celui des monstres et celui des
-    // items. Les lots suivants la rempliront.
+    // Synergy, trois de ses sous-onglets, celui des monstres, celui des
+    // items et l'éditeur des guides de boss. Les lots suivants la rempliront.
     expect(ADMIN_TO_QUICK).toEqual({
       '/admin/editor/characters': 'character',
+      '/admin/guides': 'guides',
       '/admin/editor/ee': 'character',
       '/admin/editor/effects': 'effects',
       '/admin/editor/items': 'items',
@@ -6732,6 +6751,554 @@ describe('commitPaths, pushMain, gitState — sur un dépôt jetable', () => {
     expect(pushMain(undefined, work)).toEqual({
       ok: false,
       log: ['la branche main n’a pas d’amont : rien à pousser d’ici.'],
+    });
+  });
+});
+
+describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — la section « Guides », tout injecté', () => {
+  const guide = (category: string, slug: string, over: Partial<Guide> = {}): Guide =>
+    ({
+      category,
+      slug,
+      title: { en: `${slug} title` },
+      description: { en: `${slug} desc` },
+      icon: 'I',
+      author: 'A',
+      updated: '2026-10-01',
+      versions: [],
+      ...over,
+    }) as Guide;
+  const JC = guide('joint-challenge', 'annihilator', {
+    versions: [{ key: '2026-10' }, { key: '2026-05' }],
+    bossId: '4318062',
+    updated: '2026-10-07',
+  });
+  const SR = guide('special-request', 'amadeus', { group: 'raid_2:X', order: 5 });
+  const SR2 = guide('special-request', 'ars-nova', { group: 'raid_2:Y', order: 1 });
+  const AL = guide('adventure-license', 'al-1', { hidden: true, group: 'adventure_challenge:Z' });
+  const GR = guide('guild-raid', 'frost-legion', { versions: [{ key: '2026-09' }] });
+  const ADV = guide('adventure', 'S1-8-5', { dungeons: ['100805', '100806'], order: 108 });
+  const MG = guide('monad-gate', 'depth1', { hidden: true, depth: 1, route: 1 });
+
+  const BASE = 'src/app/[lang]/guides/_contents/joint-challenge/annihilator/';
+  const version = (key: string, over: Partial<GuideDraft['versions'][number]> = {}) => ({
+    key,
+    group: 'event_boss:A',
+    pinned: [] as string[],
+    tipSections: [],
+    notes: [],
+    recommended: [],
+    recoSections: [],
+    teams: [],
+    videos: [],
+    ...over,
+  });
+  const JC_DRAFT: GuideDraft = {
+    intro: { en: 'Intro' },
+    versions: [
+      version('2026-10', {
+        pinned: ['4318062@1'],
+        tipSections: [
+          {
+            title: { en: 'Phase 1' },
+            tips: [{ en: 'Go fast {B/BT_STAT|ST_SPEED}', fr: 'Vite {B/BT_STAT|ST_SPEED}' }],
+          },
+        ],
+        notes: [{ en: 'Note' }],
+        recommended: [{ characters: ['Aer'], reason: { en: 'Fast' } }],
+        teams: [{ slots: [['Aer', 'Alice']], note: { en: 'n' } }],
+        videos: [{ platform: 'youtube', id: 'abc', title: 'T', author: 'Au', label: 'Legacy' }],
+      }),
+      version('2026-05'),
+    ],
+  };
+  const SR_DRAFT: GuideDraft = {
+    intro: { en: 'Intro' },
+    versions: [
+      {
+        key: '',
+        group: 'raid_2:X',
+        tipSections: [{ tips: [{ en: 'one' }, { en: 'two' }] }],
+        notes: [],
+        recommended: [],
+        recoSections: [],
+        teams: [{ stages: [1, 5], slots: [['Aer']] }],
+        videos: [],
+      },
+    ],
+  };
+  const ADV_DRAFT: GuideDraft = {
+    intro: { en: 'Intro' },
+    versions: [
+      {
+        key: '',
+        dungeons: ['100805', '100806'],
+        tipSections: [],
+        notes: [{ en: 'Before' }],
+        recommended: [],
+        recoSections: [],
+        teams: [],
+        videos: [],
+      },
+    ],
+  };
+  const DRAFTS: Record<string, GuideDraft> = {
+    'joint-challenge/annihilator': JC_DRAFT,
+    'special-request/amadeus': SR_DRAFT,
+    'special-request/ars-nova': SR_DRAFT,
+    'adventure/S1-8-5': ADV_DRAFT,
+  };
+  const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
+  const metaOf = (g: Guide) => ({
+    title: g.title,
+    description: g.description,
+    hidden: Boolean(g.hidden),
+  });
+  const wasOf = (g: Guide) => ({
+    draft: clone(DRAFTS[`${g.category}/${g.slug}`]),
+    meta: metaOf(g),
+  });
+
+  /** Les lectures et les écritures, factices : elles notent leurs appels. */
+  function deps(
+    over: {
+      dirty?: string[];
+      saveErrors?: string[];
+      metaOk?: boolean;
+      addErrors?: string[];
+      stamped?: boolean;
+      git?: Outcome;
+    } = {},
+  ) {
+    const calls = {
+      groups: [] as (readonly string[] | undefined)[],
+      pins: 0,
+      save: [] as GuideDraft[],
+      meta: [] as unknown[],
+      add: [] as [string, string][],
+      dirty: [] as string[],
+      stamp: [] as [string, string][],
+      git: [] as [string[], string][],
+    };
+    const fake: GuidesDeps = {
+      guides: () => [JC, SR, SR2, AL, GR, ADV, MG],
+      draft: (c, s) => {
+        const d = DRAFTS[`${c}/${s}`];
+        if (!d) throw new Error(`pas de brouillon : ${c}/${s}`);
+        return clone(d);
+      },
+      config: (g, key) =>
+        g.category === 'guild-raid' && key === '2026-09'
+          ? ({ main: 'guild_raid:G' } as never)
+          : { group: 'event_boss:A' },
+      groups: (modes) => {
+        calls.groups.push(modes);
+        return [
+          { group: 'event_boss:A', label: 'Annihilator · Joint Challenge', icon: '/images/a.webp' },
+          { group: 'raid_2:X', label: 'Amadeus · Special Request' },
+          { group: 'raid_2:Y', label: 'Ars Nova · Special Request' },
+          { group: 'guild_raid:G', label: 'Golden Guardian · Guild Raid' },
+          { group: 'adventure_challenge:Z', label: 'Z · Weekly Mission' },
+        ];
+      },
+      dungeons: () => [
+        { id: '100805', label: 'S1 8-5 · Normal' },
+        { id: '100806', label: 'S1 8-5 · Hard' },
+      ],
+      monsters: () => [{ id: '4318062', label: 'Annihilator' }],
+      roster: () => [
+        { id: '2000055', name: 'Aer', element: 'fire', class: 'striker', subClass: '', rarity: 3 },
+        { id: '2000002', name: 'Alice', element: 'earth', class: 'mage', subClass: '', rarity: 3 },
+      ],
+      refs: () => ({}) as InlineRefs,
+      pins: async () => {
+        calls.pins++;
+        return [{ id: '4318062', name: 'Annihilator', where: ['Very Hard'], archives: [] }];
+      },
+      saveDraft: async (_c, _s, d) => {
+        calls.save.push(d);
+        return over.saveErrors ?? [];
+      },
+      patchMeta: async (_c, _s, p) => {
+        calls.meta.push(p);
+        return over.metaOk ?? true;
+      },
+      addVersion: async (_c, _s, k, f) => {
+        calls.add.push([k, f]);
+        return over.addErrors ?? [];
+      },
+      dirty: (dir) => {
+        calls.dirty.push(dir);
+        return over.dirty ?? [];
+      },
+      stamp: async (path, date) => {
+        calls.stamp.push([path, date]);
+        return over.stamped ?? true;
+      },
+      today: () => '2026-10-11',
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  describe('guidesOverview', () => {
+    it('par catégorie VIVANTE, dans l’ordre du site : ni Adventure License ni Monad Gate, tous cachés', () => {
+      const { fake } = deps();
+      const out = guidesOverview(fake);
+      expect(out.categories.map((c) => c.slug)).toEqual([
+        'adventure',
+        'guild-raid',
+        'joint-challenge',
+        'special-request',
+      ]);
+      expect(out.withHidden).toBe(false);
+      expect(out.counts).toEqual({ guides: 5, hidden: 2, categories: 4 });
+      expect(out.siteBase).toMatch(/\/en\/guides$/);
+    });
+
+    it('chaque ligne : le titre, la date, les versions, le combat en clair ; éditable ou « contenu en code »', () => {
+      const { fake } = deps();
+      const by = Object.fromEntries(guidesOverview(fake).categories.map((c) => [c.slug, c]));
+      expect(by['joint-challenge']).toMatchObject({ editable: true, versioned: true, hidden: 0 });
+      expect(by['joint-challenge'].guides).toEqual([
+        {
+          slug: 'annihilator',
+          title: 'annihilator title',
+          updated: '2026-10-07',
+          versions: 2,
+          newest: '2026-10',
+          hidden: false,
+          battle: 'Annihilator', // `bossId` : le nom du monstre
+        },
+      ]);
+      // Un guild raid : pas éditable (contenu en code), son combat lu du `config.json` de sa version récente.
+      expect(by['guild-raid']).toMatchObject({ editable: false, versioned: false });
+      expect(by['guild-raid'].guides[0].battle).toBe('Golden Guardian · Guild Raid');
+      // Adventure : ses donjons, le premier nommé, les autres comptés.
+      expect(by['adventure'].guides[0].battle).toBe('S1 8-5 · Normal (+1)');
+      // Special Request : triés par `order`, le combat de `meta.group`.
+      expect(by['special-request'].guides.map((g) => [g.slug, g.battle])).toEqual([
+        ['ars-nova', 'Ars Nova · Special Request'],
+        ['amadeus', 'Amadeus · Special Request'],
+      ]);
+    });
+
+    it('« cachés » : toutes les catégories, les guides cachés marqués et comptés', () => {
+      const { fake } = deps();
+      const out = guidesOverview(fake, true);
+      expect(out.withHidden).toBe(true);
+      expect(out.categories.map((c) => c.slug)).toEqual([
+        'adventure',
+        'adventure-license',
+        'guild-raid',
+        'joint-challenge',
+        'special-request',
+        'monad-gate',
+      ]);
+      const al = out.categories.find((c) => c.slug === 'adventure-license')!;
+      expect(al).toMatchObject({ editable: true, hidden: 1 });
+      expect(al.guides).toEqual([
+        expect.objectContaining({ slug: 'al-1', hidden: true, battle: 'Z · Weekly Mission' }),
+      ]);
+      expect(out.counts.categories).toBe(6);
+    });
+  });
+
+  describe('guideDraftState', () => {
+    it('un guide inconnu, ou dont le contenu est en code : `error`', async () => {
+      const { fake } = deps();
+      expect(await guideDraftState('joint-challenge', 'nope', fake)).toEqual({
+        error: 'guide inconnu : joint-challenge/nope',
+      });
+      expect(await guideDraftState('guild-raid', 'frost-legion', fake)).toEqual({
+        error: 'catégorie non éditable, contenu en code : guild-raid',
+      });
+    });
+
+    it('un versionné : le brouillon, le meta, les combats DU MODE, les pins, le roster, les langues', async () => {
+      const { calls, fake } = deps();
+      const out = await guideDraftState('joint-challenge', 'annihilator', fake);
+      if ('error' in out) throw new Error(out.error);
+      expect(out.guide).toMatchObject({
+        category: 'joint-challenge',
+        slug: 'annihilator',
+        label: 'Joint Challenge',
+        title: 'annihilator title',
+        updated: '2026-10-07',
+        hidden: false,
+        versions: [{ key: '2026-10' }, { key: '2026-05' }],
+      });
+      expect(out.spec.versioned).toBe(true);
+      expect(out.draft).toEqual(JC_DRAFT);
+      expect(out.meta).toEqual({ title: JC.title, description: JC.description, hidden: false });
+      expect(calls.groups).toEqual([['event_boss']]);
+      expect(out.options.groups.length).toBe(5);
+      expect(out.options.dungeons).toEqual([]);
+      expect(out.options.monsters).toEqual([]);
+      expect(out.options.roster.map((c) => c.name)).toEqual(['Aer', 'Alice']);
+      expect(calls.pins).toBe(1);
+      expect(out.pins[0].id).toBe('4318062');
+      expect(out.langs.default).toBe('en');
+      expect(out.langs.shown.slice(0, 3)).toEqual(['en', 'fr', 'es']);
+      expect(out.langs.shown).toHaveLength(6);
+      expect(out.siteBase).toMatch(/\/en\/guides$/);
+    });
+
+    it('un plat : pas de pins, les combats de SES modes ; adventure : les donjons, pas de combat', async () => {
+      const { calls, fake } = deps();
+      const sr = await guideDraftState('special-request', 'amadeus', fake);
+      if ('error' in sr) throw new Error(sr.error);
+      expect(sr.pins).toEqual([]);
+      expect(calls.pins).toBe(0);
+      expect(calls.groups).toEqual([['raid_1', 'raid_2']]);
+      const adv = await guideDraftState('adventure', 'S1-8-5', fake);
+      if ('error' in adv) throw new Error(adv.error);
+      expect(adv.options.groups).toEqual([]);
+      expect(adv.options.dungeons.map((d) => d.id)).toEqual(['100805', '100806']);
+      expect(adv.guide.hidden).toBe(false);
+    });
+  });
+
+  describe('saveGuide', () => {
+    const CAT = 'joint-challenge';
+    const SLUG = 'annihilator';
+
+    it('`was` différent du disque : `stale`, rien n’est écrit ni committé', async () => {
+      const { calls, fake } = deps();
+      const was = wasOf(JC);
+      was.draft.intro.en = 'autre';
+      const r = await saveGuide(CAT, SLUG, { draft: clone(JC_DRAFT), meta: metaOf(JC), was }, fake);
+      expect(r).toMatchObject({ ok: false, stale: true, written: false });
+      expect(r.refused).toEqual([
+        { tab: 'guide', reason: 'le disque a changé depuis le chargement' },
+      ]);
+      expect(calls.save).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('les refus sont SITUÉS — version, onglet, ligne, champ — et rien n’est écrit', async () => {
+      const { calls, fake } = deps();
+      const draft = clone(JC_DRAFT);
+      draft.intro = { en: '' }; // requise pour un joint challenge
+      draft.versions[0].tipSections[0].tips[0] = { en: 'Bad {B/NOPE_TAG}' };
+      draft.versions[0].teams[0].slots[0] = ['Aer', 'Nobody'];
+      draft.versions[1].key = '2026-5';
+      const meta = { ...metaOf(JC), title: { en: '', fr: 'Sans anglais' } };
+      const r = await saveGuide(CAT, SLUG, { draft, meta, was: wasOf(JC) }, fake);
+      expect(r.ok).toBe(false);
+      expect(r.refused).toEqual([
+        { tab: 'meta', field: 'title', reason: 'pas de texte « en », la langue de repli' },
+        { tab: 'intro', reason: 'l’intro (anglais) est requise' },
+        {
+          version: '2026-10',
+          tab: 'tips',
+          index: 0,
+          reason: expect.stringMatching(/tag inconnu \{B\/NOPE_TAG\}/),
+        },
+        { version: '2026-10', tab: 'team', index: 0, reason: 'hors du roster : « Nobody »' },
+        {
+          version: '2026-5',
+          tab: 'guide',
+          reason: 'clé de version attendue YYYY-MM (« 2026-5 »)',
+        },
+      ]);
+      expect(r.log.filter((l) => l.startsWith('REFUSÉ'))).toHaveLength(5);
+      expect(calls.save).toEqual([]);
+      expect(calls.meta).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('un guide plat sans combat, adventure sans donjon : refusés à l’onglet Combat', async () => {
+      const { fake } = deps();
+      const sr = clone(SR_DRAFT);
+      delete sr.versions[0].group;
+      const r1 = await saveGuide(
+        'special-request',
+        'amadeus',
+        { draft: sr, meta: metaOf(SR), was: wasOf(SR) },
+        fake,
+      );
+      expect(r1.refused).toEqual([
+        { version: '', tab: 'battle', reason: 'un combat (monstre) est requis' },
+      ]);
+      const adv = clone(ADV_DRAFT);
+      adv.versions[0].dungeons = [];
+      const r2 = await saveGuide(
+        'adventure',
+        'S1-8-5',
+        { draft: adv, meta: metaOf(ADV), was: wasOf(ADV) },
+        fake,
+      );
+      expect(r2.refused).toEqual([
+        { version: '', tab: 'battle', reason: 'au moins un donjon est requis' },
+      ]);
+    });
+
+    it('écrit par le store, re-date le meta, et committe les fichiers qui ont bougé PLUS le meta', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}versions/2026-10/tips.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.versions[0].tipSections[0].tips[0].en = 'Go faster {B/BT_STAT|ST_SPEED}';
+      const r = await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(r).toMatchObject({ ok: true, written: true, stale: false, refused: [] });
+      expect(calls.save).toHaveLength(1);
+      expect(calls.save[0].versions[0].tipSections[0].tips[0].en).toBe(
+        'Go faster {B/BT_STAT|ST_SPEED}',
+      );
+      // Le meta n'a pas bougé : pas de patch ; le dossier du guide est lu de git.
+      expect(calls.meta).toEqual([]);
+      expect(calls.dirty).toEqual([BASE.slice(0, -1)]);
+      expect(calls.stamp).toEqual([[`${BASE}meta.json`, '2026-10-11']]);
+      expect(calls.git).toEqual([
+        [
+          [`${BASE}versions/2026-10/tips.json`, `${BASE}meta.json`],
+          'chore(guides): joint-challenge/annihilator',
+        ],
+      ]);
+      expect(r.log).toContain('meta.updated : 2026-10-11');
+    });
+
+    it('`pinned` OMIS par la page : le store ne le reçoit pas ; envoyé vide : il le reçoit vide', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}strings.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.intro.en = 'Intro, retouchée';
+      for (const v of draft.versions) delete v.pinned;
+      await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(calls.save[0].versions.map((v) => 'pinned' in v)).toEqual([false, false]);
+
+      const unpinned = clone(JC_DRAFT);
+      unpinned.versions[0].pinned = [];
+      delete unpinned.versions[1].pinned;
+      await saveGuide(CAT, SLUG, { draft: unpinned, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(calls.save[1].versions.map((v) => v.pinned)).toEqual([[], undefined]);
+    });
+
+    it('les vidéos repartent telles quelles, `label` compris', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}versions/2026-10/config.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.versions[0].videos.push({ platform: 'youtube', id: 'def', title: 'T2', author: 'Au' });
+      await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(calls.save[0].versions[0].videos).toEqual([
+        { platform: 'youtube', id: 'abc', title: 'T', author: 'Au', label: 'Legacy' },
+        { platform: 'youtube', id: 'def', title: 'T2', author: 'Au' },
+      ]);
+    });
+
+    it('une ARCHIVE seule qui bouge : committée, mais le guide n’est pas re-daté', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}versions/2026-05/tips.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.versions[1].tipSections = [{ tips: [{ en: 'old tip' }] }];
+      const r = await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(r.ok).toBe(true);
+      expect(calls.stamp).toEqual([]);
+      expect(calls.git).toEqual([
+        [[`${BASE}versions/2026-05/tips.json`], 'chore(guides): joint-challenge/annihilator'],
+      ]);
+      expect(r.log).toContain('archives seules : la date du guide ne bouge pas');
+    });
+
+    it('rien n’a bougé sur le disque : ni stamp, ni commit — et ce n’est pas une erreur', async () => {
+      const { calls, fake } = deps();
+      const r = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(JC_DRAFT), meta: metaOf(JC), was: wasOf(JC) },
+        fake,
+      );
+      expect(r).toMatchObject({ ok: true, written: false });
+      expect(r.log).toContain('Rien à enregistrer : le disque porte déjà ces valeurs.');
+      expect(calls.save).toHaveLength(1);
+      expect(calls.stamp).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('le meta : titre, description et `hidden` en UNE écriture, les langues vides retirées', async () => {
+      const { calls, fake } = deps({ dirty: [`${BASE}meta.json`] });
+      const meta = {
+        title: { en: 'Annihilator', fr: 'Annihilateur', jp: '   ' },
+        description: JC.description,
+        hidden: true,
+      };
+      const r = await saveGuide(CAT, SLUG, { draft: clone(JC_DRAFT), meta, was: wasOf(JC) }, fake);
+      expect(r.ok).toBe(true);
+      expect(calls.meta).toEqual([
+        {
+          title: { en: 'Annihilator', fr: 'Annihilateur' },
+          description: JC.description,
+          hidden: true,
+        },
+      ]);
+      // Le meta est pertinent : re-daté ; déjà dans les fichiers qui bougent, il ne part qu'une fois.
+      expect(calls.stamp).toHaveLength(1);
+      expect(calls.git[0][0]).toEqual([`${BASE}meta.json`]);
+    });
+
+    it('un refus du store est rendu situé, sans stamp ni commit ; un meta refusé aussi', async () => {
+      const { calls, fake } = deps({
+        saveErrors: ['Invalid version key : “2026-99” (YYYY-MM).'],
+        dirty: [`${BASE}meta.json`],
+      });
+      const r = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(JC_DRAFT), meta: metaOf(JC), was: wasOf(JC) },
+        fake,
+      );
+      expect(r.ok).toBe(false);
+      expect(r.refused).toEqual([
+        { version: '2026-99', tab: 'guide', reason: 'Invalid version key : “2026-99” (YYYY-MM).' },
+      ]);
+      expect(calls.stamp).toEqual([]);
+      expect(calls.git).toEqual([]);
+
+      const bad = deps({ metaOk: false });
+      const r2 = await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(JC_DRAFT), meta: { ...metaOf(JC), hidden: true }, was: wasOf(JC) },
+        bad.fake,
+      );
+      expect(r2.refused).toEqual([{ tab: 'meta', reason: 'meta.json refusé par le store' }]);
+      expect(bad.calls.git).toEqual([]);
+    });
+
+    it('un guide inconnu ou une catégorie non éditable : refusés sans rien lire', async () => {
+      const { calls, fake } = deps();
+      expect((await saveGuide('guild-raid', 'frost-legion', {}, fake)).log).toEqual([
+        'catégorie non éditable : guild-raid.',
+      ]);
+      expect((await saveGuide(CAT, 'nope', {}, fake)).log).toEqual([
+        'guide inconnu : joint-challenge/nope.',
+      ]);
+      expect(calls.save).toEqual([]);
+    });
+  });
+
+  describe('addGuideVersionAction', () => {
+    it('écrit la version et rend le brouillon relu — SANS committer', async () => {
+      const { calls, fake } = deps();
+      const r = await addGuideVersionAction(
+        'joint-challenge',
+        'annihilator',
+        ' 2026-11 ',
+        '2026-10',
+        fake,
+      );
+      expect(r.ok).toBe(true);
+      expect(r.version).toBe('2026-11');
+      expect(r.draft).toEqual(JC_DRAFT);
+      expect(r.log[0]).toMatch(/pas committée/);
+      expect(calls.add).toEqual([['2026-11', '2026-10']]);
+      expect(calls.git).toEqual([]);
+      expect(calls.stamp).toEqual([]);
+    });
+
+    it('les refus du store sont rendus tels quels', async () => {
+      const { fake } = deps({ addErrors: ['Version 2026-10 already exists.'] });
+      const r = await addGuideVersionAction('joint-challenge', 'annihilator', '2026-10', '', fake);
+      expect(r).toEqual({ ok: false, log: ['Version 2026-10 already exists.'] });
     });
   });
 });

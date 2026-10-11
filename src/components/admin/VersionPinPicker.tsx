@@ -10,33 +10,13 @@
  * jusqu'ici invisible en admin (posé par « Versionner », modifiable nulle part),
  * ce qui rendait un épinglage impossible à corriger sans ouvrir le JSON.
  */
-import type { MonsterArchiveChoice } from '@/lib/data/monsters';
+import { archiveLabel, type PinTarget } from '@/lib/admin/guide-pin-targets';
 
-/** Un monstre du combat, avec les états figés qu'on peut lui choisir. */
-export interface PinTarget {
-  id: string;
-  name: string;
-  /** Difficultés où il apparaît — deux boss homonymes ne se distinguent qu'ainsi. */
-  where: string[];
-  icon?: string;
-  archives: MonsterArchiveChoice[];
-}
+// Les cibles et le libellé d'une archive vivent dans `guide-pin-targets.ts` :
+// quick (section « Guides ») lit les mêmes.
+export type { PinTarget };
 
 const LIVE = '';
-
-/** `2026-08-11T16:58:19+02:00` → `Aug 11, 2026`. */
-const day = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-
-/** Ce qu'une archive dit d'elle-même, en une ligne. */
-function archiveLabel(a: MonsterArchiveChoice): string {
-  // La note humaine PRIME : « avant la refonte 1.11 » dit ce qu'un numéro ne
-  // dira jamais. C'est la même règle qu'au rendu public (cf. BossPanel).
-  if (a.label) return `v${a.version} · ${a.label}`;
-  return a.gameVersion
-    ? `v${a.version} · game ${a.gameVersion} · ${day(a.committedAt)}`
-    : `v${a.version} · ${day(a.committedAt)}`;
-}
 
 export function VersionPinPicker({
   targets,

@@ -48,11 +48,45 @@
       « Fiche perso », lot B43), Monster (onglet « Monstres », lot C12 — le
       câblage des chips ; ses stats, son intégration et ses versions sont de
       l'extractor, étapes 19-20), Item (onglet « Items », lot B44 — le
-      dernier des Éditeurs). Clos sans portage (lot A34) : Gear presets
+      dernier des Éditeurs), Guide editor › catégories de boss (section
+      « Guides », lot F18 — les sept catégories de `GUIDE_SPECS`, sans les
+      catégories mortes ; reste l'étape 17, les guides généraux et l'import
+      de contribution, F19). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Guides » — contrôles à l'écran (lot F18)** : le banc ne clique
+      pas, et aucun enregistrement réel n'a été joué ; `/api/translate` n'a
+      jamais été appelé avec des clés. Relancer quick d'abord (Ctrl-C puis
+      `pnpm quick` : cinq routes nouvelles — sans ça l'onglet dit « quick
+      lancé avant ce code »). (1) Guides › Guides : la vue d'ensemble liste
+      les catégories vivantes dans l'ordre du site ; « cachés » fait
+      apparaître Adventure License (26) et Monad Gate (31) avec leur badge ;
+      la recherche par début de mot (titre, slug). (2) Un guide PLAT
+      (Special Request) : Tips, un conseil ajouté en anglais en fin de bloc,
+      « Traduire » (les cinq langues posées, « Traductions » dépliées),
+      « Enregistrer » → UN commit `chore(guides): special-request/<slug>`
+      qui porte les JSON touchés ET le `meta.json` re-daté (contrôle : git show --stat) ; la savebar revient à « aucune modification ». (3) Un guide
+      VERSIONNÉ (Joint Challenge) : « ＋ version » avec une clé du mois
+      (dupliquée de la récente : elle s'ouvre, « pas encore committée »), la
+      proposition du Journal du site prérempli (gabarit « Mise à jour »,
+      guide · mode · mois · slug), puis dans Combat « Changer… » le combat
+      → toutes les versions qui en portent un suivent (vérifier les
+      `config.json`), « Enregistrer » → le dossier de la version nouvelle
+      part dans le commit. (4) Combat d'un versionné : un monstre épinglé
+      (aucun au 11/10 : en poser un par l'extractor d'abord) se lit avec
+      l'étiquette de son archive et se dépingle. (5) Le menu « Guide
+      editor » de l'admin : « Overview » et « General guides » seulement —
+      ni Adventure License, ni les catégories de boss. (6) Le menu Vidéos
+      de quick ne propose plus d'AL. (7) Après « Pousser » et le
+      déploiement : la page du guide retouché, sa date « Updated » sur le
+      site. Hors périmètre vu en portant : le gabarit « Mise à jour » du
+      Journal ne connaît que Joint Challenge, Guild Raid et World Boss (pas
+      de mode pour un Special Request re-versionné — ils sont plats, c'est
+      normal) ; `tagSourceSheet` (l'inbox des tags morts) renvoie encore à
+      `/admin/tags` pour un tag mort DANS UN GUIDE alors que quick l'édite
+      désormais : un lot A pour l'envoyer sur `#guides/<cat>/<slug>`.
 - [ ] **« Monstres » — contrôles à l'écran (lot C12)** : le banc ne clique
       pas, et aucun enregistrement réel n'a été joué. Relancer quick d'abord
       (Ctrl-C puis `pnpm quick` : trois routes nouvelles — sans ça l'onglet

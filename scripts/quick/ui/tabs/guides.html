@@ -1,0 +1,48 @@
+<section id="tab-guides" hidden>
+  <div class="head">
+    <h2>Guides</h2>
+    <p class="hint">
+      Les guides de boss du site, par catégorie : un clic ouvre le guide, ses textes en six langues,
+      son combat, ses versions. Rien ne s'écrit à la saisie : « Enregistrer » envoie tout le guide
+      et committe — la date du guide est re-datée dans le même commit. Lus au build : le site ne
+      change qu'une fois « Pousser » fait et le build de la CI déployé. L'anglais se saisit et porte
+      la structure (une ligne = un conseil) ; « Traduire » génère les autres langues, à relire. Une
+      catégorie dont tous les guides sont cachés n'apparaît qu'avec « cachés ». Les guides dont le
+      contenu est en code (guild raid, tour, monad, autres, généraux) ne s'éditent pas ici.
+    </p>
+  </div>
+
+  <!-- La vue d'ensemble : la recherche, la case « cachés », puis une carte par catégorie. -->
+  <div id="gd-overview">
+    <div class="card pad">
+      <div class="form">
+        <div class="field">
+          <label for="gd-q">Chercher</label>
+          <input
+            id="gd-q"
+            class="w-search"
+            placeholder="début d’un mot du titre ou du slug"
+            autocomplete="off"
+          />
+        </div>
+        <label class="check"><input type="checkbox" id="gd-hidden" /> cachés</label>
+        <span class="lbl" id="gd-total"></span>
+      </div>
+    </div>
+    <div id="gd-list"></div>
+  </div>
+
+  <!-- Le guide ouvert : son en-tête, la savebar, les sous-onglets, les versions, le panneau. -->
+  <div id="gd-guide" hidden>
+    <div class="card pad gd-head" id="gd-head"></div>
+    <div class="savebar" id="gd-bar" role="toolbar" aria-label="Enregistrement" hidden>
+      <span id="gd-count"></span>
+      <div class="gd-pv-lang" id="gd-pv-lang" hidden></div>
+      <button class="btn ghost" id="gd-reset" disabled>Annuler</button>
+      <button class="btn primary" id="gd-save" disabled>Enregistrer</button>
+    </div>
+    <div class="gd-tabs" id="gd-tabs" role="tablist" aria-label="Sous-onglets du guide"></div>
+    <div class="gd-versions" id="gd-versions" hidden></div>
+    <div id="gd-panel" role="tabpanel"></div>
+  </div>
+</section>

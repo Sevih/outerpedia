@@ -23,6 +23,7 @@ const TABS = [
   'effects',
   'monsters',
   'items',
+  'guides',
   'discord',
   'names',
 ];
@@ -278,6 +279,14 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([
       '/api/character/preview',
     ]);
+  });
+
+  it('des guides, relaie l’aperçu de ses textes et rien d’autre — ni l’enregistrement, ni « ＋ version »', () => {
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/guides'))).toEqual([
+      '/api/guides/preview',
+    ]);
+    expect(READ_ONLY_POSTS.has('/api/guides')).toBe(false);
+    expect(READ_ONLY_POSTS.has('/api/guides/version')).toBe(false);
   });
 
   it('des monstres, ne relaie aucun POST : le roster et l’état d’un kit sont des GET', () => {
@@ -701,9 +710,8 @@ describe('Noms — la page, sur le vrai markup', () => {
     const group = all('#groups button').find((b) => b.textContent?.includes('Outils'));
     expect(group?.dataset.group).toBe('tools');
     expect(group?.classList.contains('soon')).toBe(false);
-    expect(all('#groups .gtab.soon').map((b) => b.textContent?.trim().split(/\s+/)[0])).toEqual([
-      'Guides',
-    ]);
+    // Plus aucun groupe « à venir » depuis le 11/10 : Guides a sa section.
+    expect(all('#groups .gtab.soon')).toEqual([]);
     expect(el('tab-names').hidden).toBe(true);
     group?.click();
     expect(el('tab-names').hidden).toBe(false);
@@ -10120,5 +10128,809 @@ describe('Patch — la page, sur le vrai markup', () => {
     await vi.advanceTimersByTimeAsync(3000);
     await vi.advanceTimersByTimeAsync(10_000);
     expect(page.served.reads).toBe(2);
+  });
+});
+
+describe('Guides — la page, sur le vrai markup', () => {
+  // L'horloge est FACTICE (l'aperçu part 400 ms après une frappe).
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  type Text = Record<string, string>;
+  interface Version {
+    key: string;
+    group?: string;
+    pinned?: string[];
+    dungeons?: string[];
+    bossId?: string;
+    tipSections: { title?: Text; rawTitle?: unknown; tips: Text[] }[];
+    notes: Text[];
+    recommended: { characters: string[]; reason?: Text }[];
+    recoSections: { title?: Text; groups: { characters: string[]; reason?: Text }[] }[];
+    teams: {
+      stages?: [number, number];
+      title?: Text;
+      slots: string[][];
+      note?: Text;
+      notes?: Text[];
+    }[];
+    videos: { platform: string; id: string; title: string; author?: string; label?: string }[];
+  }
+  interface Draft {
+    intro: Text;
+    versions: Version[];
+  }
+  const ROSTER = [
+    { id: '2000055', name: 'Aer', element: 'fire', class: 'striker', subClass: '', rarity: 3 },
+    { id: '2000002', name: 'Alice', element: 'earth', class: 'mage', subClass: '', rarity: 3 },
+  ];
+  const LANGS = { default: 'en', shown: ['en', 'fr', 'es', 'jp', 'kr', 'zh'] };
+  const GROUPS = [
+    { group: 'event_boss:A', label: 'Annihilator · Joint Challenge', icon: '/images/a.webp' },
+    { group: 'event_boss:B', label: 'Deep Sea Guardian · Joint Challenge' },
+  ];
+  const SR_GROUPS = [
+    { group: 'raid_2:X', label: 'Amadeus · Special Request' },
+    { group: 'raid_2:Y', label: 'Ars Nova · Special Request' },
+  ];
+  const JC_SPEC = {
+    versioned: true,
+    monster: 'group-config',
+    groupModes: ['event_boss'],
+    teams: 'slots',
+    videos: true,
+    notes: true,
+    tipTitles: true,
+    introRequired: true,
+  };
+  const SR_SPEC = {
+    versioned: false,
+    monster: 'group-meta',
+    groupModes: ['raid_1', 'raid_2'],
+    teams: 'buckets',
+    videos: true,
+    notes: false,
+    tipTitles: false,
+    introRequired: true,
+  };
+  const version = (key: string, over: Partial<Version> = {}): Version => ({
+    key,
+    group: 'event_boss:A',
+    pinned: [],
+    tipSections: [],
+    notes: [],
+    recommended: [],
+    recoSections: [],
+    teams: [],
+    videos: [],
+    ...over,
+  });
+  /** Les deux guides du disque : un joint challenge versionné, un special request plat. */
+  const disk = () => ({
+    'joint-challenge/annihilator': {
+      draft: {
+        intro: { en: 'Intro', fr: 'Intro fr' },
+        versions: [
+          version('2026-10', {
+            pinned: ['4318062@1'],
+            tipSections: [
+              {
+                title: { en: 'Phase 1' },
+                tips: [{ en: 'Tip one {B/BT_BARRIER}', fr: 'Astuce un' }],
+              },
+            ],
+            notes: [{ en: 'A note' }],
+            recommended: [{ characters: ['Aer'], reason: { en: 'Fast' } }],
+            teams: [{ slots: [['Aer', 'Alice'], ['Alice']], note: { en: 'Team note' } }],
+            videos: [
+              { platform: 'youtube', id: 'abc', title: 'Run', author: 'Au', label: 'Legacy' },
+            ],
+          }),
+          version('2026-05'),
+        ],
+      } as Draft,
+      meta: {
+        title: { en: 'Annihilator Joint Challenge Guide' },
+        description: { en: 'JC desc' },
+        hidden: false,
+      },
+    },
+    'special-request/amadeus': {
+      draft: {
+        intro: { en: 'SR intro' },
+        versions: [
+          version('', {
+            group: 'raid_2:X',
+            pinned: undefined,
+            tipSections: [{ tips: [{ en: 'one' }, { en: 'two', fr: 'deux' }] }],
+            teams: [{ stages: [1, 5], slots: [['Aer']] }],
+          }),
+        ],
+      } as Draft,
+      meta: {
+        title: { en: 'Amadeus Special Request Guide' },
+        description: { en: 'SR desc' },
+        hidden: false,
+      },
+    },
+  });
+  type Disk = ReturnType<typeof disk>;
+  const OVERVIEW = {
+    categories: [
+      {
+        slug: 'general-guides',
+        label: 'General Guides',
+        editable: false,
+        versioned: false,
+        hidden: 0,
+        guides: [
+          {
+            slug: 'beginner-faq',
+            title: 'Beginner FAQ',
+            updated: '2026-10-03',
+            versions: 0,
+            hidden: false,
+            battle: '',
+          },
+        ],
+      },
+      {
+        slug: 'joint-challenge',
+        label: 'Joint Challenge',
+        editable: true,
+        versioned: true,
+        hidden: 0,
+        guides: [
+          {
+            slug: 'annihilator',
+            title: 'Annihilator Joint Challenge Guide',
+            updated: '2026-10-07',
+            versions: 2,
+            newest: '2026-10',
+            hidden: false,
+            battle: 'Annihilator',
+          },
+        ],
+      },
+      {
+        slug: 'special-request',
+        label: 'Special Request',
+        editable: true,
+        versioned: false,
+        hidden: 0,
+        guides: [
+          {
+            slug: 'ars-nova',
+            title: 'Ars Nova Special Request Guide',
+            updated: '2026-09-23',
+            versions: 0,
+            hidden: false,
+            battle: 'Ars Nova · Special Request',
+          },
+          {
+            slug: 'amadeus',
+            title: 'Amadeus Special Request Guide',
+            updated: '2026-10-04',
+            versions: 0,
+            hidden: false,
+            battle: 'Amadeus · Special Request',
+          },
+        ],
+      },
+    ],
+    withHidden: false,
+    counts: { guides: 4, hidden: 26, categories: 3 },
+    siteBase: 'https://outerpedia.local/en/guides',
+  };
+  const HIDDEN_CAT = {
+    slug: 'adventure-license',
+    label: 'Adventure License',
+    editable: true,
+    versioned: false,
+    hidden: 26,
+    guides: [
+      {
+        slug: 'al-1',
+        title: 'AL Guide',
+        updated: '2026-10-05',
+        versions: 0,
+        hidden: true,
+        battle: 'Z',
+      },
+    ],
+  };
+
+  type Call = { path: string; body?: unknown };
+  interface Sent {
+    category: string;
+    slug: string;
+    draft: Draft;
+    meta: { title: Text; description: Text; hidden: boolean };
+    was: unknown;
+  }
+  type Saved = { ok: boolean; log: string[]; [more: string]: unknown };
+
+  /**
+   * La page de quick dans un document happy-dom, comme pour « Monstres » : la
+   * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/guides.js` (qui
+   * importe le vrai `tabs/changelog.js`), `gear-view.mjs` et `hero-picker.mjs`.
+   * `fetch` est factice : la vue d'ensemble, l'état des deux guides d'après
+   * `disk` (relu à chaque appel), l'aperçu (un segment texte par texte), la
+   * traduction, l'enregistrement (`saved` ; d'office il écrit le brouillon
+   * envoyé dans `disk`) et « ＋ version ».
+   */
+  async function guides(
+    opts: {
+      hash?: string;
+      saved?: (body: Sent, disk: Disk) => Saved;
+      translated?: (texts: string[]) => unknown;
+    } = {},
+  ) {
+    vi.useFakeTimers();
+    vi.resetModules();
+    const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
+    const { document } = window;
+    const page = assemblePage(shell(), readTab);
+    document.body.innerHTML = (/<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? '').replace(
+      /<script[\s\S]*?<\/script>/g,
+      '',
+    );
+
+    const data = disk();
+    const calls: Call[] = [];
+    const confirm = vi.fn(() => true);
+    const answer = (payload: unknown, status = 200) => {
+      const bytes = new TextEncoder().encode(JSON.stringify(payload));
+      let read = false;
+      return {
+        ok: status === 200,
+        status,
+        json: async () => payload,
+        body: {
+          getReader: () => ({
+            read: async () => (read ? { done: true } : ((read = true), { value: bytes })),
+          }),
+        },
+      };
+    };
+    const written = (body: Sent): Saved => {
+      const key = `${body.category}/${body.slug}` as keyof Disk;
+      data[key].draft = JSON.parse(JSON.stringify(body.draft)) as Draft;
+      data[key].meta = JSON.parse(JSON.stringify(body.meta)) as Disk[typeof key]['meta'];
+      return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+    };
+    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+      const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
+      const url = new URL(path, 'http://localhost:4747');
+      if (url.pathname.startsWith('/api/guides') || url.pathname === '/api/translate')
+        calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/guides' && !body)
+        return answer(
+          url.searchParams.has('hidden')
+            ? {
+                ...OVERVIEW,
+                withHidden: true,
+                categories: [...OVERVIEW.categories, HIDDEN_CAT],
+                counts: { ...OVERVIEW.counts, categories: 4 },
+              }
+            : OVERVIEW,
+        );
+      if (url.pathname === '/api/guides/state') {
+        const key = `${url.searchParams.get('cat')}/${url.searchParams.get('slug')}` as keyof Disk;
+        const g = data[key];
+        if (!g) return answer({ error: `guide inconnu : ${key}` }, 404);
+        const jc = key === 'joint-challenge/annihilator';
+        const [category, slug] = key.split('/');
+        return answer({
+          guide: {
+            category,
+            slug,
+            label: jc ? 'Joint Challenge' : 'Special Request',
+            title: g.meta.title.en,
+            updated: '2026-10-07',
+            icon: 'I',
+            author: 'A',
+            hidden: g.meta.hidden,
+            versions: jc ? [{ key: '2026-10' }, { key: '2026-05' }] : [],
+          },
+          spec: jc ? JC_SPEC : SR_SPEC,
+          draft: JSON.parse(JSON.stringify(g.draft)),
+          meta: JSON.parse(JSON.stringify(g.meta)),
+          options: {
+            groups: jc ? GROUPS : SR_GROUPS,
+            dungeons: [],
+            monsters: [],
+            roster: ROSTER,
+          },
+          refs: {},
+          pins: jc
+            ? [
+                {
+                  id: '4318062',
+                  name: 'Annihilator (Light)',
+                  where: ['Very Hard'],
+                  archives: [
+                    {
+                      key: '4318062@1',
+                      version: 1,
+                      committedAt: '2026-08-11T10:00:00Z',
+                      label: 'before 1.11',
+                    },
+                  ],
+                },
+                { id: '4318042', name: 'Annihilator (Light)', where: ['Normal'], archives: [] },
+              ]
+            : [],
+          langs: LANGS,
+          siteBase: 'https://outerpedia.local/en/guides',
+        });
+      }
+      if (url.pathname === '/api/guides/preview') {
+        const { texts } = body as { texts: string[] };
+        return answer({ segments: texts.map((t) => (t ? [{ t: 'text', s: `[${t}]` }] : [])) });
+      }
+      if (url.pathname === '/api/translate') {
+        const { texts } = body as { texts: string[] };
+        return answer(
+          opts.translated?.(texts) ?? {
+            results: texts.map((t) => ({
+              fr: `fr ${t}`,
+              es: `es ${t}`,
+              jp: `jp ${t}`,
+              kr: `kr ${t}`,
+              zh: `zh ${t}`,
+            })),
+            provider: 'deepl',
+          },
+        );
+      }
+      if (url.pathname === '/api/guides/version') {
+        const { newKey } = body as { newKey: string };
+        data['joint-challenge/annihilator'].draft.versions.unshift(version(newKey));
+        return answer({
+          ok: true,
+          log: [`version ${newKey} créée — pas committée`],
+          draft: JSON.parse(JSON.stringify(data['joint-challenge/annihilator'].draft)),
+          version: newKey,
+        });
+      }
+      if (url.pathname === '/api/guides')
+        return answer(opts.saved?.(body as Sent, data) ?? written(body as Sent));
+      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+    });
+
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    vi.stubGlobal('location', window.location);
+    vi.stubGlobal('history', window.history);
+    vi.stubGlobal('fetch', fetch);
+    vi.stubGlobal('confirm', confirm);
+    vi.stubGlobal('Event', window.Event);
+
+    const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
+      sections: { start: () => void };
+    };
+    await import(/* @vite-ignore */ resolve(UI, 'tabs', 'guides.js'));
+    lib.sections.start();
+    const settle = async () => {
+      for (let i = 0; i < 6; i++) {
+        await vi.advanceTimersByTimeAsync(500);
+        await Promise.resolve();
+      }
+    };
+    await settle();
+
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLInputElement;
+    const all = (selector: string) =>
+      [...document.querySelectorAll(selector)] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(new window.Event(type, { bubbles: true }) as unknown as Event);
+    const type = (field: HTMLInputElement, value: string) => {
+      field.value = value;
+      fire(field as unknown as HTMLElement, 'input');
+    };
+    const field = (key: string, lang = 'en') =>
+      all(`#gd-panel [data-key="${key}"][data-lang="${lang}"]`)[0] as unknown as HTMLInputElement;
+    /** La valeur d'un champ — happy-dom garde le saut de ligne qui ouvre une `<textarea>`, un navigateur le mange. */
+    const val = (f: HTMLInputElement) => f.value.replace(/^\n/, '');
+    return {
+      val,
+      el,
+      all,
+      calls,
+      confirm,
+      data,
+      settle,
+      window,
+      type,
+      field,
+      come: async () => {
+        all('#tabs [data-tab="guides"]')[0].click();
+        await settle();
+      },
+      open: async (cat: string, slug: string) => {
+        all(`#gd-list .gd-open[data-cat="${cat}"][data-slug="${slug}"]`)[0].click();
+        await settle();
+      },
+      sub: async (id: string) => {
+        all(`#gd-tabs [data-sub="${id}"]`)[0].click();
+        await settle();
+      },
+      subs: () => all('#gd-tabs [role="tab"]').map((t) => t.dataset.sub),
+      dots: () =>
+        all('#gd-tabs [role="tab"]')
+          .filter((t) => t.querySelector('.dot'))
+          .map((t) => [t.dataset.sub, t.querySelector('.dot')!.className]),
+      count: () => el('gd-count').textContent,
+      states: () => calls.filter((c) => c.path.startsWith('/api/guides/state')).length,
+      posted: () =>
+        calls.filter((c) => c.path === '/api/guides' && c.body).map((c) => c.body as Sent),
+      previews: () =>
+        calls
+          .filter((c) => c.path === '/api/guides/preview')
+          .map((c) => c.body as { texts: string[]; lang: string }),
+      save: async () => {
+        el('gd-save').click();
+        await settle();
+      },
+    };
+  }
+
+  const JC = '#guides/joint-challenge/annihilator';
+
+  it('servie dans le groupe Guides, qui n’est plus « à venir », en pleine largeur — la vue d’ensemble lue à la venue', async () => {
+    const page = await guides();
+    expect(page.calls).toEqual([]);
+    const group = page.all('#groups button').find((b) => b.textContent?.includes('Guides'));
+    expect(group?.dataset.group).toBe('guides');
+    expect(group?.classList.contains('soon')).toBe(false);
+    group?.click();
+    await page.settle();
+    expect(page.el('tab-guides').hidden).toBe(false);
+    expect(page.all('main')[0].classList.contains('wide')).toBe(true);
+    expect(page.calls).toEqual([{ path: '/api/guides' }]);
+    expect(page.window.location.hash).toBe('#guides');
+  });
+
+  it('la vue d’ensemble : les catégories du serveur, un bouton par guide éditable, « contenu en code » sinon, le compte', async () => {
+    const page = await guides();
+    await page.come();
+    expect(page.all('#gd-list .gd-cat').map((c) => c.dataset.cat)).toEqual([
+      'general-guides',
+      'joint-challenge',
+      'special-request',
+    ]);
+    expect(page.el('gd-total').textContent).toBe('4 guides dans 3 catégories · 26 cachés');
+    const faq = page.all('#gd-list .gd-row[data-slug="beginner-faq"]')[0];
+    expect(faq.querySelector('.gd-open')).toBeNull();
+    expect(faq.classList.contains('dim')).toBe(true);
+    expect([...faq.querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
+      'contenu en code',
+    ]);
+    const ann = page.all('#gd-list .gd-row[data-slug="annihilator"]')[0];
+    expect(ann.querySelector('.gd-open')?.textContent).toBe('Annihilator Joint Challenge Guide');
+    expect([...ann.querySelectorAll('td')].map((t) => t.textContent)).toEqual([
+      'Annihilator Joint Challenge Guideannihilator',
+      'Annihilator',
+      '2026-10-07',
+      '2 · 2026-10',
+      '',
+      'site ↗',
+    ]);
+    expect(ann.querySelector('a')?.getAttribute('href')).toBe(
+      'https://outerpedia.local/en/guides/joint-challenge/annihilator',
+    );
+  });
+
+  it('la recherche : le début d’un mot du titre ou du slug, les catégories vides disparaissent', async () => {
+    const page = await guides();
+    await page.come();
+    page.type(page.el('gd-q'), 'ann');
+    expect(page.all('#gd-list .gd-cat').map((c) => c.dataset.cat)).toEqual(['joint-challenge']);
+    page.type(page.el('gd-q'), 'nih'); // pas un début de mot
+    expect(page.all('#gd-list .empty')[0].textContent).toBe('Aucun guide ne correspond.');
+    page.type(page.el('gd-q'), 'ars-nov'); // le slug
+    expect(page.all('#gd-list .gd-row').map((r) => r.dataset.slug)).toEqual(['ars-nova']);
+    page.type(page.el('gd-q'), '');
+    expect(page.all('#gd-list .gd-row')).toHaveLength(4);
+  });
+
+  it('« cachés » relit avec `?hidden=1` : Adventure License apparaît, ses guides avec le badge « caché »', async () => {
+    const page = await guides();
+    await page.come();
+    expect(page.all('#gd-list .gd-cat[data-cat="adventure-license"]')).toEqual([]);
+    page.el('gd-hidden').checked = true;
+    page
+      .el('gd-hidden')
+      .dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    await page.settle();
+    expect(page.calls.map((c) => c.path)).toEqual(['/api/guides', '/api/guides?hidden=1']);
+    const al = page.all('#gd-list .gd-cat[data-cat="adventure-license"]')[0];
+    expect(al.querySelector('.card-head')?.textContent).toContain('26 cachés');
+    const row = al.querySelector('.gd-row') as HTMLElement;
+    expect(row.classList.contains('off')).toBe(true);
+    expect([...row.querySelectorAll('.gd-state .badge')].map((b) => b.textContent)).toEqual([
+      'caché',
+    ]);
+    expect(row.querySelector('.gd-open')).not.toBeNull(); // éditable, même caché
+  });
+
+  it('un guide plat ouvert au clic : son état lu, l’en-tête, les sous-onglets de sa spec, l’adresse', async () => {
+    const page = await guides();
+    await page.come();
+    await page.open('special-request', 'amadeus');
+    expect(page.states()).toBe(1);
+    expect(page.el('gd-overview').hidden).toBe(true);
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.all('#gd-head strong')[0].textContent).toBe('Amadeus Special Request Guide');
+    expect(page.all('#gd-head .gd-traits')[0].textContent).toContain('Amadeus · Special Request');
+    // Special Request : pas de Notes ; plat : pas de barre de versions.
+    expect(page.subs()).toEqual(['meta', 'battle', 'intro', 'tips', 'reco', 'team', 'videos']);
+    expect(page.el('gd-versions').hidden).toBe(true);
+    expect(page.window.location.hash).toBe('#guides/special-request/amadeus');
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('gd-save').disabled).toBe(true);
+  });
+
+  it('les conseils en BLOC : l’anglais porte la structure — une ligne jp en plus ne crée pas d’entrée', async () => {
+    const page = await guides({ hash: '#guides/special-request/amadeus/tips' });
+    expect(page.el('tab-guides').hidden).toBe(false);
+    const en = page.field('tips.0');
+    expect(page.val(en)).toBe('one\ntwo');
+    expect(page.val(page.field('tips.0', 'fr'))).toBe('\ndeux');
+    // Une ligne de plus en jp : rien de créé, la troisième ligne ignorée.
+    page.type(page.field('tips.0', 'jp'), 'ichi\nni\nsan');
+    expect(page.count()).toBe('1 onglet modifié');
+    page.type(en, 'one\ntwo\nthree');
+    await page.settle();
+    expect(page.all('#gd-panel [data-pv-list] li')).toHaveLength(3);
+    await page.save();
+    const sent = page.posted()[0];
+    expect(sent.draft.versions[0].tipSections[0].tips).toEqual([
+      { en: 'one', jp: 'ichi' },
+      { en: 'two', fr: 'deux', jp: 'ni' },
+      { en: 'three' },
+    ]);
+    // Le plat ne parle pas d'épinglage : `pinned` absent de ce qui part.
+    expect('pinned' in sent.draft.versions[0]).toBe(false);
+    expect(sent.was).toEqual({
+      draft: disk()['special-request/amadeus'].draft,
+      meta: disk()['special-request/amadeus'].meta,
+    });
+    // Relu du disque après l'écriture : plus rien en attente.
+    expect(page.states()).toBe(2);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('un versionné par le hash, sur sa version : la barre des versions, les pins en lecture, « dépingler » envoie `pinned`', async () => {
+    const page = await guides({ hash: `${JC}/2026-05/battle` });
+    expect(
+      page
+        .all('#gd-versions [data-ver]')
+        .map((t) => [t.textContent, t.getAttribute('aria-selected')]),
+    ).toEqual([
+      ['2026-10récente', 'false'],
+      ['2026-05', 'true'],
+    ]);
+    expect(page.window.location.hash).toBe(`${JC}/2026-05`);
+    // Le combat, partagé ; l'état du boss de CETTE version : tout en live.
+    expect(page.all('#gd-panel .gd-battle strong')[0].textContent).toBe(
+      'Annihilator · Joint Challenge',
+    );
+    expect(page.all('#gd-panel .gd-pin .badge').map((b) => b.textContent)).toEqual([
+      'live',
+      'live',
+    ]);
+    // La version récente : un monstre épinglé, « dépingler ».
+    page.all('#gd-versions [data-ver="0"]')[0].click();
+    await page.settle();
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    expect(page.all('#gd-panel .gd-pin .badge').map((b) => b.textContent)).toEqual([
+      'épinglé · v1 · before 1.11',
+      'live',
+    ]);
+    page.all('#gd-panel [data-act="unpin"]')[0].click();
+    await page.settle();
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.dots()).toEqual([['battle', 'dot edit']]);
+    await page.save();
+    const [v1, v2] = page.posted()[0].draft.versions;
+    expect(v1.pinned).toEqual([]); // dépinglée : la liste vide fait autorité
+    expect('pinned' in v2).toBe(false); // pas touchée : omise
+  });
+
+  it('un autre sous-onglet par le hash, pas écrit ; un changement y compte, « Annuler » relit le disque', async () => {
+    const page = await guides({ hash: `${JC}/team` });
+    expect(page.window.location.hash).toBe(`${JC}/2026-10`);
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('team');
+    expect(
+      page.all('#gd-panel .gd-slot .gd-hero span:not(.gd-noface)').map((s) => s.textContent),
+    ).toEqual(['Aer', 'Alice', 'Alice']);
+    page.all('#gd-panel .gd-slot [data-act="del-hero"][data-name="Alice"]')[0].click();
+    await page.settle();
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.el('gd-reset').disabled).toBe(false);
+    page.el('gd-reset').click();
+    await page.settle();
+    expect(page.states()).toBe(2);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.all('#gd-panel .gd-slot').length).toBe(2);
+  });
+
+  it('les vidéos en lecture : le `label` gardé, ✕ retire la vidéo et ce qui part garde les autres intactes', async () => {
+    const page = await guides({ hash: `${JC}/videos` });
+    expect(page.all('#gd-panel .gd-videos li .badge').map((b) => b.textContent)).toEqual([
+      'Legacy',
+    ]);
+    expect(page.all('#gd-panel .gd-videos li')).toHaveLength(1);
+    expect(page.all('#gd-pv-lang')[0].hidden).toBe(true); // pas de texte ici
+    page.all('#gd-panel [data-act="del-video"]')[0].click();
+    await page.settle();
+    expect(page.count()).toBe('1 onglet modifié');
+    await page.save();
+    expect(page.posted()[0].draft.versions[0].videos).toEqual([]);
+  });
+
+  it('« Traduire » : les textes anglais de l’onglet, d’UN appel ; les cinq langues posées, à relire', async () => {
+    const page = await guides({ hash: `${JC}/tips` });
+    page.all('#gd-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    const sent = page.calls.filter((c) => c.path === '/api/translate');
+    expect(sent).toHaveLength(1);
+    expect((sent[0].body as { texts: string[] }).texts).toEqual([
+      'Phase 1',
+      'Tip one {B/BT_BARRIER}',
+    ]);
+    expect(page.field('tips.0.title', 'jp').value).toBe('jp Phase 1');
+    expect(page.val(page.field('tips.0', 'fr'))).toBe('fr Tip one {B/BT_BARRIER}');
+    expect(page.count()).toBe('1 onglet modifié');
+    // Ce qui vient d'être traduit s'ouvre.
+    expect(page.all('#gd-panel details[open]').length).toBeGreaterThan(0);
+    // L'anglais retouché depuis : « à retraduire ».
+    page.type(page.field('tips.0'), 'Tip one, edited {B/BT_BARRIER}');
+    expect(page.all('#gd-panel [data-text="tips.0"] [data-stale]')[0].textContent).toBe(
+      'à retraduire',
+    );
+  });
+
+  it('l’aperçu : UNE requête pour les textes de l’onglet, dans la langue de la savebar, 400 ms après la frappe', async () => {
+    const page = await guides({ hash: `${JC}/intro` });
+    expect(page.previews()).toEqual([{ texts: ['Intro'], lang: 'en' }]);
+    expect(page.all('#gd-panel [data-pv="intro"]')[0].textContent).toBe('[Intro]');
+    page.all('#gd-pv-lang [data-lang="fr"]')[0].click();
+    await page.settle();
+    expect(page.previews()[1]).toEqual({ texts: ['Intro fr'], lang: 'fr' });
+    page.type(page.field('intro'), 'Intro 2');
+    await page.settle();
+    // L'anglais a bougé, pas le français montré : la même demande ne repart pas.
+    expect(page.previews()).toHaveLength(2);
+    page.all('#gd-pv-lang [data-lang="en"]')[0].click();
+    await page.settle();
+    expect(page.previews()[2]).toEqual({ texts: ['Intro 2'], lang: 'en' });
+    page.type(page.field('intro'), 'Intro 3');
+    expect(page.previews()).toHaveLength(3); // pas encore : 400 ms
+    await page.settle();
+    expect(page.previews()[3]).toEqual({ texts: ['Intro 3'], lang: 'en' });
+  });
+
+  it('un refus SITUÉ : la saisie reste, le point rouge sur l’onglet et la version, le message sous la ligne ; `stale` relit', async () => {
+    const page = await guides({
+      hash: `${JC}/tips`,
+      saved: (body) =>
+        body.draft.versions[0].tipSections[0].tips[0].en.includes('bad')
+          ? {
+              ok: false,
+              log: ['REFUSÉ'],
+              written: false,
+              stale: false,
+              refused: [
+                { version: '2026-10', tab: 'tips', index: 0, reason: 'tag inconnu {B/NOPE}' },
+              ],
+            }
+          : {
+              ok: false,
+              log: ['REFUSÉ'],
+              written: false,
+              stale: true,
+              refused: [{ tab: 'guide', reason: 'le disque a changé' }],
+            },
+    });
+    page.type(page.field('tips.0'), 'bad {B/NOPE}');
+    await page.save();
+    expect(page.val(page.field('tips.0'))).toBe('bad {B/NOPE}');
+    expect(page.count()).toBe('1 onglet modifié1 refus');
+    expect(page.dots()).toEqual([['tips', 'dot ko']]);
+    expect(page.all('#gd-versions [data-ver="0"] .dot')[0].className).toBe('dot ko');
+    expect(
+      page
+        .all('#gd-panel .gd-err')
+        .map((e) => e.textContent)
+        .filter(Boolean),
+    ).toEqual(['tag inconnu {B/NOPE}']);
+    // Y retoucher lève le refus.
+    page.type(page.field('tips.0'), 'good');
+    expect(page.dots()).toEqual([['tips', 'dot edit']]);
+    // Le disque avait changé : relu tel quel.
+    await page.save();
+    expect(page.states()).toBe(2);
+    expect(page.val(page.field('tips.0'))).toBe('Tip one {B/BT_BARRIER}');
+    expect(page.count()).toBe('1 refus');
+  });
+
+  it('« ＋ version » : refusé avec des changements en attente ; sinon la version posée, montrée, le Journal proposé', async () => {
+    const page = await guides({ hash: JC });
+    page.all('#gd-versions [data-act="add-version"]')[0].click();
+    expect(page.el('gd-newkey')).not.toBeNull();
+    page.el('gd-newkey').value = '2026-11';
+    page.all('#gd-versions [data-act="create-version"]')[0].click();
+    await page.settle();
+    const posted = page.calls.filter((c) => c.path === '/api/guides/version');
+    expect(posted).toEqual([
+      {
+        path: '/api/guides/version',
+        body: {
+          category: 'joint-challenge',
+          slug: 'annihilator',
+          newKey: '2026-11',
+          fromKey: '2026-10',
+        },
+      },
+    ]);
+    expect(
+      page.all('#gd-versions [data-ver]').map((t) => t.textContent?.replace('récente', '')),
+    ).toEqual(['2026-11', '2026-10', '2026-05']);
+    expect(page.all('#gd-versions [aria-selected="true"]')[0].dataset.ver).toBe('0');
+    expect(page.window.location.hash).toBe(`${JC}/2026-11`);
+    const link = page.all('#gd-versions .gd-note a')[0];
+    expect(link.getAttribute('href')).toBe(
+      '#changelog?template=update&guide=Annihilator&mode=Joint+Challenge&month=November+2026&slug=annihilator',
+    );
+    // Rien en attente : le disque relu porte la version nouvelle.
+    expect(page.count()).toBe('aucune modification');
+    // Avec un changement en attente, le geste est refusé.
+    page.all('#gd-tabs [data-sub="meta"]')[0].click();
+    await page.settle();
+    page.type(page.field('meta.title'), 'Renamed');
+    page.all('#gd-versions [data-act="add-version"]')[0].click();
+    page.el('gd-newkey').value = '2026-12';
+    page.all('#gd-versions [data-act="create-version"]')[0].click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.path === '/api/guides/version')).toHaveLength(1);
+    expect(page.el('journal-last').textContent).toContain('« Enregistrer » d’abord');
+  });
+
+  it('quitter le guide ou l’onglet avec des changements : sur confirmation ; `dirty` les compte', async () => {
+    const page = await guides({ hash: `${JC}/meta` });
+    page.type(page.field('meta.title'), 'Renamed');
+    page.el('gd-hidden'); // la case de la vue d'ensemble n'est pas celle du guide
+    const hidden = page.all(
+      '#gd-panel input[data-meta="hidden"]',
+    )[0] as unknown as HTMLInputElement;
+    hidden.checked = true;
+    hidden.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.all('#gd-head [data-hidden]')[0].textContent).toBe('caché');
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#gd-head [data-act="back"]')[0].click();
+    await page.settle();
+    expect(page.el('gd-guide').hidden).toBe(false);
+    page.confirm.mockReturnValueOnce(false);
+    page.all('#tabs [data-tab="videos"]')[0].click();
+    expect(page.el('tab-guides').hidden).toBe(false);
+    expect(page.confirm).toHaveBeenCalledTimes(2);
+    await page.save();
+    expect(page.posted()[0].meta).toEqual({
+      title: { en: 'Renamed' },
+      description: { en: 'JC desc' },
+      hidden: true,
+    });
+    page.all('#gd-head [data-act="back"]')[0].click();
+    await page.settle();
+    expect(page.el('gd-overview').hidden).toBe(false);
+    expect(page.window.location.hash).toBe('#guides');
+    expect(page.confirm).toHaveBeenCalledTimes(2);
   });
 });

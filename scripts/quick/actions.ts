@@ -140,7 +140,27 @@ import { unusedItemIcons } from '@/lib/admin/item-icons';
 import { upsertGearReco } from '@/lib/admin/gear-reco-store';
 import { upsertSearchAliases } from '@/lib/admin/search-alias-store';
 import { upsertShortName } from '@/lib/admin/short-name-store';
-import { appendGuideVideo } from '@/lib/admin/guide-store';
+import {
+  addGuideVersion,
+  appendGuideVideo,
+  loadGuideDraft,
+  patchGuideMetaFields,
+  saveGuideDraft,
+  type GuideMetaPatch,
+} from '@/lib/admin/guide-store';
+import { categoriesWithVisibleGuide } from '@/lib/admin/guide-nav';
+import { buildPinTargets, type PinTarget } from '@/lib/admin/guide-pin-targets';
+import {
+  GUIDES_CONTENTS_SUBDIR,
+  archivePrefixes,
+  hasRelevantChange,
+  stampMeta,
+  todayLocal,
+} from '@/lib/admin/guide-stamp';
+import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
+import type { SectionTitle } from '@/lib/data/guide-sections';
+import type { InlineRefs } from '@/lib/admin/inline-refs';
+import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { EFFECT_FAMILIES, effectFamilyLabel, type EffectSide } from '@/lib/data/effect-families';
@@ -175,11 +195,25 @@ import {
 } from '@/lib/data/equipment';
 import { eeEditorChips, eeModelForView, type EeChipMeta } from '@/lib/data/equipment-detail';
 import { loadGearPresets, loadGearReco } from '@/lib/data/gear-reco';
-import { getEncounters, modeLabel } from '@/lib/data/encounters';
-import { listGuides } from '@/lib/data/guides';
+import {
+  getEncounters,
+  listDungeons,
+  listGroups,
+  modeLabel,
+  type GroupChoice,
+} from '@/lib/data/encounters';
+import { guideUpdatedDate, listGuides, readGuideVersionFile, type Guide } from '@/lib/data/guides';
+import { listMonsters } from '@/lib/data/monsters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
-import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
+import {
+  GUIDE_SPECS,
+  guideSpec,
+  type CatSpec,
+  type GuideDraft,
+  type RawConfig,
+  type VersionDraft,
+} from '@/lib/admin/guide-draft';
 import { img } from '@/lib/images';
 import {
   DEFAULT_LANG,
@@ -1048,12 +1082,14 @@ export const ADMIN_BASE_DEFAULT = 'https://outerpedia.local';
  * renvoie alors au lieu de l'admin (`inQuick`). Aujourd'hui l'éditeur des
  * effets, celui des persos (la « Fiche perso », Gear reco compris), celui des
  * EE (son sous-onglet « EE »), celui des monstres (« Monstres »), celui des
- * items (« Items ») et les outils Pro / Con et Synergy (deux autres
- * sous-onglets de la fiche) — l'inbox, elle,
+ * items (« Items »), les outils Pro / Con et Synergy (deux autres
+ * sous-onglets de la fiche) et l'éditeur des guides de boss (« Guides ») —
+ * l'inbox, elle,
  * ne renvoie encore qu'à l'extractor, aux tags et aux données du jeu.
  */
 export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
   '/admin/editor/characters': 'character',
+  '/admin/guides': 'guides',
   '/admin/editor/ee': 'character',
   '/admin/editor/effects': 'effects',
   '/admin/editor/items': 'items',
@@ -1519,8 +1555,10 @@ export function videoTargets(): { characters: VideoTargetOption[]; guides: Video
     .map((c) => ({ value: `character:${c.id}`, label: characterDisplayName(c) }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
+  // Ni les guides CACHÉS (les 26 Adventure License, morts) : une vidéo ne
+  // s'ajoute pas à une page que le site ne liste plus.
   const guides = listGuides()
-    .filter((g) => GUIDE_SPECS[g.category]?.videos)
+    .filter((g) => GUIDE_SPECS[g.category]?.videos && !g.hidden)
     .map((g) => {
       const version = g.versions[0]?.key;
       return {
@@ -4969,4 +5007,691 @@ export function gameTableSchema(
   if (refusal) return refusal;
   const schema = deps.describeTable(name);
   return { ...schema, links: deps.linkTargets(schema.columns) };
+}
+
+// ----------------------------------------------------------------- guides ----
+
+/** Le dossier des guides, relatif au dépôt, et le dossier d'UN guide. */
+const guideDirOf = (category: string, slug: string): string =>
+  `${GUIDES_CONTENTS_SUBDIR}/${category}/${slug}`;
+
+/**
+ * Les fichiers d'un dossier qui diffèrent de `HEAD` — modifiés, nouveaux
+ * (non suivis) ou supprimés —, chemins POSIX relatifs au dépôt. C'est ce qu'un
+ * enregistrement de guide committe, et ce sur quoi la règle de datation joue :
+ * `git status` du dossier, comme `scripts/stamp-guides.ts` le lit du dépôt
+ * entier. Les renommages sortent en deux chemins (cf. le script).
+ */
+function gitDirtyFiles(dir: string, cwd?: string): string[] {
+  const r = git(['status', '--porcelain', '-z', '--untracked-files=all', '--', dir], cwd);
+  if (!r.ok) return [];
+  const files: string[] = [];
+  const recs = r.out.split('\0');
+  for (let i = 0; i < recs.length; i++) {
+    const rec = recs[i];
+    if (rec.length < 4) continue;
+    files.push(rec.slice(3).replace(/\\/g, '/'));
+    if (/[RC]/.test(rec.slice(0, 2))) {
+      const orig = recs[++i];
+      if (orig) files.push(orig.replace(/\\/g, '/'));
+    }
+  }
+  return files;
+}
+
+/** Une ligne de la vue d'ensemble : un guide, ce qu'on en lit sans l'ouvrir. */
+export interface GuideOverviewRow {
+  slug: string;
+  /** Titre anglais. */
+  title: string;
+  /** `meta.updated`, ou dérivée de la version la plus récente. */
+  updated: string;
+  versions: number;
+  /** La version la plus récente (`YYYY-MM`), pour un guide versionné. */
+  newest?: string;
+  hidden: boolean;
+  /** Le boss ou le combat, en clair ; vide quand le guide n'en désigne pas. */
+  battle: string;
+}
+
+/** Une catégorie de la vue d'ensemble, ses guides triés comme sur le site. */
+export interface GuideOverviewCategory {
+  slug: string;
+  /** Libellé anglais de la catégorie. */
+  label: string;
+  /** Éditable dans quick (`GUIDE_SPECS`) ; sinon son contenu est en code (`index.tsx`). */
+  editable: boolean;
+  versioned: boolean;
+  /** Guides cachés de la catégorie, montrés ou non. */
+  hidden: number;
+  guides: GuideOverviewRow[];
+}
+
+/** Les textes éditables de `meta.json` : le titre, la description, `hidden`. */
+export interface GuideMetaState {
+  title: LocalizedText & { en: string };
+  description: LocalizedText & { en: string };
+  hidden: boolean;
+}
+
+/** Les lectures de la section « Guides » : le scan, les stores, les listes des pickers. */
+export interface GuidesDisk {
+  guides: () => Guide[];
+  draft: (category: string, slug: string) => GuideDraft;
+  /** Le `config.json` d'une version — son combat, pour la vue d'ensemble. */
+  config: (guide: Guide, version: string) => RawConfig | undefined;
+  groups: (modes?: readonly string[]) => GroupChoice[];
+  dungeons: () => { id: string; label: string }[];
+  monsters: () => { id: string; label: string }[];
+  roster: () => SheetRosterRow[];
+  refs: () => InlineRefs;
+  pins: (draft: GuideDraft) => Promise<PinTarget[]>;
+}
+
+/** Les écritures de `saveGuide` et d'« ＋ version », injectées : les stores, le stamp, git. */
+export interface GuidesDeps extends GuidesDisk {
+  saveDraft: (category: string, slug: string, draft: GuideDraft) => Promise<string[]>;
+  patchMeta: (category: string, slug: string, patch: GuideMetaPatch) => Promise<boolean>;
+  addVersion: (
+    category: string,
+    slug: string,
+    newKey: string,
+    fromKey: string,
+  ) => Promise<string[]>;
+  /** Les fichiers de `dir` (relatif au dépôt) qui diffèrent de `HEAD`. */
+  dirty: (dir: string) => string[];
+  /** Re-date un `meta.json` ; `false` s'il portait déjà cette date. */
+  stamp: (metaPath: string, date: string) => Promise<boolean>;
+  today: () => string;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles des routes : le scan du site, les stores de l'admin, le stamp partagé, le vrai git. */
+export const GUIDES_DEPS: GuidesDeps = {
+  guides: listGuides,
+  draft: loadGuideDraft,
+  config: (guide, version) => readGuideVersionFile<RawConfig>(guide, version, 'config.json'),
+  groups: (modes) => listGroups(DEFAULT_LANG, modes),
+  dungeons: () => listDungeons(DEFAULT_LANG),
+  monsters: () => listMonsters(DEFAULT_LANG),
+  roster: () => characterRoster().roster,
+  refs: buildInlineRefs,
+  pins: buildPinTargets,
+  saveDraft: saveGuideDraft,
+  patchMeta: patchGuideMetaFields,
+  addVersion: addGuideVersion,
+  dirty: (dir) => gitDirtyFiles(dir),
+  stamp: stampMeta,
+  today: todayLocal,
+  commitPaths,
+};
+
+/** Le site de dev du poste, où « ouvrir sur le site » mène (cf. `guideBase` des monstres). */
+const guidesSiteBase = (): string =>
+  `${process.env.ADMIN_BASE || ADMIN_BASE_DEFAULT}/${DEFAULT_LANG}/guides`;
+
+/** Les guides d'une catégorie, triés comme `listGuidesByCategory` : `order`, puis récent, puis slug. */
+const byGuideOrder = (a: Guide, b: Guide): number =>
+  (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) ||
+  guideUpdatedDate(b).localeCompare(guideUpdatedDate(a)) ||
+  a.slug.localeCompare(b.slug);
+
+/**
+ * La vue d'ensemble de la section « Guides » : par catégorie du site (dans son
+ * ordre), ses guides — slug, titre anglais, date, versions, caché, le boss ou
+ * le combat en clair — et si quick l'édite (`GUIDE_SPECS`) ou si son contenu
+ * est en code. Une catégorie dont TOUS les guides sont cachés n'y est pas (la
+ * règle de `visibleCategorySlugs` du site : c'est ainsi qu'Adventure License
+ * et Monad Gate, morts, quittent la liste), sauf `withHidden` — la case
+ * « cachés » — qui montre tout, badge « caché » à l'appui. Lu du disque à
+ * chaque appel.
+ */
+export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = false) {
+  const all = disk.guides();
+  const groupLabel = new Map(disk.groups().map((g) => [g.group, g.label]));
+  const monsterLabel = new Map(disk.monsters().map((m) => [m.id, m.label]));
+  const dungeonLabel = new Map(disk.dungeons().map((d) => [d.id, d.label]));
+  const battleOf = (g: Guide): string => {
+    if (g.group) return groupLabel.get(g.group) ?? g.group;
+    if (g.bossId) return monsterLabel.get(g.bossId.split('@')[0]) ?? g.bossId;
+    if (g.dungeons?.length) {
+      const first = dungeonLabel.get(g.dungeons[0]) ?? g.dungeons[0];
+      return g.dungeons.length > 1 ? `${first} (+${g.dungeons.length - 1})` : first;
+    }
+    const newest = g.versions[0];
+    if (newest) {
+      const cfg = disk.config(g, newest.key) as Record<string, unknown> | undefined;
+      const group = [cfg?.group, cfg?.main].find((k) => typeof k === 'string');
+      if (typeof group === 'string') return groupLabel.get(group) ?? group;
+    }
+    return '';
+  };
+  const row = (g: Guide): GuideOverviewRow => ({
+    slug: g.slug,
+    title: g.title.en,
+    updated: guideUpdatedDate(g),
+    versions: g.versions.length,
+    ...(g.versions[0] ? { newest: g.versions[0].key } : {}),
+    hidden: Boolean(g.hidden),
+    battle: battleOf(g),
+  });
+  const alive = new Set(categoriesWithVisibleGuide(GUIDE_CATEGORY_SLUGS, all));
+  const categories: GuideOverviewCategory[] = [];
+  for (const slug of GUIDE_CATEGORY_SLUGS) {
+    const mine = all.filter((g) => g.category === slug);
+    if (!mine.length || (!withHidden && !alive.has(slug))) continue;
+    const shown = (withHidden ? mine : mine.filter((g) => !g.hidden)).sort(byGuideOrder);
+    const spec = guideSpec(slug);
+    categories.push({
+      slug,
+      label: GUIDE_CATEGORIES[slug].label.en,
+      editable: Boolean(spec),
+      versioned: Boolean(spec?.versioned),
+      hidden: mine.filter((g) => g.hidden).length,
+      guides: shown.map(row),
+    });
+  }
+  return {
+    categories,
+    withHidden,
+    counts: {
+      guides: all.filter((g) => !g.hidden).length,
+      hidden: all.filter((g) => g.hidden).length,
+      categories: categories.length,
+    },
+    siteBase: guidesSiteBase(),
+  };
+}
+
+/** Les textes de `meta.json` que la page édite, tels que le disque les porte. */
+const guideMetaState = (g: Guide): GuideMetaState => ({
+  title: g.title,
+  description: g.description,
+  hidden: Boolean(g.hidden),
+});
+
+/**
+ * L'état d'UN guide pour la section « Guides » : ce que le scan en sait (sa
+ * catégorie et son libellé, son titre anglais, sa date, son icône, son auteur,
+ * ses versions), sa `spec` — ce que l'écran doit montrer —, son brouillon
+ * (`loadGuideDraft`, le même que l'admin), ses textes de meta éditables, les
+ * options des pickers selon la spec (les combats du mode, avec leur libellé et
+ * leur icône ; les donjons ; les monstres ; le roster par nom d'affichage
+ * anglais — ce que les équipes et les recos désignent), les `refs` des tags
+ * inline, les cibles de pin d'un versionné (en lecture), les langues, et où
+ * « ouvrir sur le site » mène. Lu du disque à chaque appel. `error` : guide
+ * inconnu, ou catégorie dont le contenu est en code.
+ */
+export async function guideDraftState(
+  category: string,
+  slug: string,
+  disk: GuidesDisk = GUIDES_DEPS,
+) {
+  const guide = disk.guides().find((g) => g.category === category && g.slug === slug);
+  if (!guide) return { error: `guide inconnu : ${category}/${slug}` };
+  const spec = guideSpec(category);
+  if (!spec) return { error: `catégorie non éditable, contenu en code : ${category}` };
+  const draft = disk.draft(category, slug);
+  const usesGroup = spec.monster === 'group-config' || spec.monster === 'group-meta';
+  return {
+    guide: {
+      category,
+      slug,
+      label: GUIDE_CATEGORIES[guide.category].label.en,
+      title: guide.title.en,
+      updated: guideUpdatedDate(guide),
+      icon: guide.icon,
+      author: guide.author,
+      hidden: Boolean(guide.hidden),
+      versions: guide.versions,
+    },
+    spec,
+    draft,
+    meta: guideMetaState(guide),
+    options: {
+      groups: usesGroup ? disk.groups(spec.groupModes) : [],
+      dungeons: spec.monster === 'dungeons-meta' ? disk.dungeons() : [],
+      monsters: spec.monster === 'bossId-meta' ? disk.monsters() : [],
+      roster: disk.roster(),
+    },
+    refs: disk.refs(),
+    pins: spec.versioned ? await disk.pins(draft) : [],
+    langs: {
+      default: DEFAULT_LANG,
+      shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
+    },
+    siteBase: guidesSiteBase(),
+  };
+}
+
+/**
+ * Un refus SITUÉ d'un enregistrement de guide : la version (`''` pour un guide
+ * plat, absente pour ce qui vaut pour tout le guide), l'onglet de la page
+ * (`guide`, `meta`, `battle`, `intro`, `tips`, `notes`, `reco`, `team`,
+ * `videos`), le rang dans la liste de l'onglet, le champ.
+ */
+export interface GuideRefusal {
+  version?: string;
+  tab: string;
+  index?: number;
+  field?: string;
+  reason: string;
+}
+
+export interface GuideSaveOutcome extends Outcome {
+  written: boolean;
+  stale: boolean;
+  refused: GuideRefusal[];
+}
+
+type LTextOut = LocalizedText & { en: string };
+
+/**
+ * Un texte localisé venu de la page, réduit aux langues écrites (une langue
+ * vidée ne s'écrit pas), ou `undefined` s'il n'en a aucune ; une forme
+ * inattendue, un texte sans anglais ou un tag que le site ne résout pas rend
+ * la raison du refus.
+ */
+function cleanGuideText(raw: unknown): LTextOut | undefined | string {
+  if (raw === undefined || raw === null) return undefined;
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return 'texte : forme inattendue';
+  const out: Record<string, string> = {};
+  for (const [lang, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (!isValidLang(lang)) return `langue inconnue : ${lang}`;
+    if (typeof value !== 'string') return `${lang} : une chaîne attendue`;
+    if (value.trim()) out[lang] = value;
+  }
+  if (!Object.keys(out).length) return undefined;
+  const bad = localizedIssues(out as LocalizedText);
+  return bad.length ? bad.join(' ; ') : (out as LTextOut);
+}
+
+/** Une liste de noms (persos d'un slot, d'un groupe) : des chaînes non vides, sans blancs autour. */
+function cleanNames(raw: unknown): string[] | string {
+  if (!Array.isArray(raw) || raw.some((n) => typeof n !== 'string'))
+    return 'une liste de noms attendue';
+  return (raw as string[]).map((n) => n.trim()).filter(Boolean);
+}
+
+/** Une liste de clés d'archive `<id>@<n>` (le `pinned` d'une version), telle quelle. */
+function cleanPins(raw: unknown): string[] | string {
+  if (!Array.isArray(raw) || raw.some((k) => typeof k !== 'string' || !/^\d+@\d+$/.test(k)))
+    return 'pinned : des clés « <id>@<n> » attendues';
+  return [...(raw as string[])];
+}
+
+/** Les vidéos d'une version, telles que la page les a reçues : `label` et le reste préservés. */
+function cleanVideos(raw: unknown): VideoItem[] | string {
+  if (!Array.isArray(raw)) return 'videos : une liste attendue';
+  for (const v of raw)
+    if (!v || typeof v !== 'object' || typeof (v as { id?: unknown }).id !== 'string')
+      return 'videos : chaque vidéo porte un id';
+  return raw as VideoItem[];
+}
+
+/**
+ * Une version venue de la page, rebâtie sur les SEULES clés du modèle
+ * (`VersionDraft`) : les textes nettoyés et contrôlés, les noms de persos
+ * contre le roster, les pins et les vidéos tels quels. Chaque écart est un
+ * refus situé — onglet et rang — et la version n'est pas rendue.
+ */
+function cleanGuideVersion(
+  raw: unknown,
+  spec: CatSpec,
+  names: ReadonlySet<string>,
+  refuse: (r: Omit<GuideRefusal, 'version'>) => void,
+): VersionDraft | null {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    refuse({ tab: 'guide', reason: 'version : forme inattendue' });
+    return null;
+  }
+  const v = raw as Record<string, unknown>;
+  let ok = true;
+  const text = (value: unknown, where: Omit<GuideRefusal, 'version' | 'reason'>) => {
+    const out = cleanGuideText(value);
+    if (typeof out === 'string') {
+      refuse({ ...where, reason: out });
+      ok = false;
+      return undefined;
+    }
+    return out;
+  };
+  const texts = (value: unknown, where: Omit<GuideRefusal, 'version' | 'reason'>): LTextOut[] => {
+    if (!Array.isArray(value)) {
+      refuse({ ...where, reason: 'une liste de textes attendue' });
+      ok = false;
+      return [];
+    }
+    return value.flatMap((t, i) => {
+      const out = text(t, { ...where, index: where.index ?? i });
+      return out ? [out] : [];
+    });
+  };
+  const heroes = (value: unknown, where: Omit<GuideRefusal, 'version' | 'reason'>): string[] => {
+    const out = cleanNames(value);
+    if (typeof out === 'string') {
+      refuse({ ...where, reason: out });
+      ok = false;
+      return [];
+    }
+    const stray = out.filter((n) => !names.has(n));
+    if (stray.length) {
+      refuse({ ...where, reason: `hors du roster : ${stray.map((n) => `« ${n} »`).join(', ')}` });
+      ok = false;
+    }
+    return out;
+  };
+  const list = (value: unknown, what: string, where: Omit<GuideRefusal, 'version' | 'reason'>) => {
+    if (Array.isArray(value)) return value as unknown[];
+    refuse({ ...where, reason: `${what} : une liste attendue` });
+    ok = false;
+    return [];
+  };
+  const record = (value: unknown): Record<string, unknown> =>
+    value && typeof value === 'object' && !Array.isArray(value)
+      ? (value as Record<string, unknown>)
+      : {};
+  const rawTitle = (value: unknown) =>
+    value && typeof value === 'object' && !Array.isArray(value)
+      ? { rawTitle: value as SectionTitle }
+      : {};
+
+  const out: VersionDraft = {
+    key: typeof v.key === 'string' ? v.key : '',
+    ...(v.labelOverride && typeof v.labelOverride === 'object'
+      ? { labelOverride: v.labelOverride as LocalizedText }
+      : {}),
+    ...(typeof v.group === 'string' && v.group ? { group: v.group } : {}),
+    ...(typeof v.bossId === 'string' && v.bossId ? { bossId: v.bossId } : {}),
+    tipSections: list(v.tipSections, 'tips', { tab: 'tips' }).map((s, i) => {
+      const r = record(s);
+      const title = text(r.title, { tab: 'tips', index: i, field: 'title' });
+      return {
+        ...(title ? { title } : {}),
+        ...rawTitle(r.rawTitle),
+        tips: texts(r.tips, { tab: 'tips', index: i }),
+      };
+    }),
+    notes: texts(v.notes, { tab: 'notes' }),
+    recommended: list(v.recommended, 'recommended', { tab: 'reco' }).map((g, i) => {
+      const r = record(g);
+      const reason = text(r.reason, { tab: 'reco', index: i, field: 'reason' });
+      return {
+        characters: heroes(r.characters, { tab: 'reco', index: i }),
+        ...(reason ? { reason } : {}),
+      };
+    }),
+    recoSections: list(v.recoSections, 'recoSections', { tab: 'reco' }).map((s, i) => {
+      const r = record(s);
+      const title = text(r.title, { tab: 'reco', index: i, field: 'title' });
+      return {
+        ...(title ? { title } : {}),
+        ...rawTitle(r.rawTitle),
+        groups: list(r.groups, 'groups', { tab: 'reco', index: i }).map((g) => {
+          const gr = record(g);
+          const reason = text(gr.reason, { tab: 'reco', index: i, field: 'reason' });
+          return {
+            characters: heroes(gr.characters, { tab: 'reco', index: i }),
+            ...(reason ? { reason } : {}),
+          };
+        }),
+      };
+    }),
+    teams: list(v.teams, 'teams', { tab: 'team' }).map((t, i) => {
+      const r = record(t);
+      const title = text(r.title, { tab: 'team', index: i, field: 'title' });
+      const note = text(r.note, { tab: 'team', index: i, field: 'note' });
+      const stages = Array.isArray(r.stages) ? r.stages.map(Number) : undefined;
+      if (stages && (stages.length !== 2 || stages.some((n) => !Number.isInteger(n) || n < 1))) {
+        refuse({
+          tab: 'team',
+          index: i,
+          field: 'stages',
+          reason: 'plage de stages : deux entiers',
+        });
+        ok = false;
+      }
+      return {
+        ...(stages ? { stages: [stages[0], stages[1]] as [number, number] } : {}),
+        ...rawTitle(r.rawTitle),
+        ...(title ? { title } : {}),
+        slots: list(r.slots, 'slots', { tab: 'team', index: i }).map((slot) =>
+          heroes(slot, { tab: 'team', index: i }),
+        ),
+        ...(note ? { note } : {}),
+        ...(r.notes !== undefined ? { notes: texts(r.notes, { tab: 'team', index: i }) } : {}),
+      };
+    }),
+    videos: [],
+  };
+  if (v.dungeons !== undefined) {
+    const d = cleanNames(v.dungeons);
+    if (typeof d === 'string') {
+      refuse({ tab: 'battle', reason: `donjons : ${d}` });
+      ok = false;
+    } else if (d.length) out.dungeons = d;
+  }
+  // `pinned` : PRÉSENT seulement quand la page a touché aux pins — absent, le
+  // store garde ceux du disque (cf. `VersionDraft.pinned`).
+  if (v.pinned !== undefined) {
+    const p = cleanPins(v.pinned);
+    if (typeof p === 'string') {
+      refuse({ tab: 'battle', reason: p });
+      ok = false;
+    } else out.pinned = p;
+  }
+  const videos = cleanVideos(v.videos ?? []);
+  if (typeof videos === 'string') {
+    refuse({ tab: 'videos', reason: videos });
+    ok = false;
+  } else out.videos = videos;
+  if (spec.notes === false && out.notes.length) out.notes = [];
+  return ok ? out : null;
+}
+
+/**
+ * Les textes de meta venus de la page : le titre et la description (l'anglais
+ * requis, les autres langues écrites gardées), `hidden`. Un écart est un refus
+ * situé à l'onglet Méta.
+ */
+function cleanGuideMeta(raw: unknown, refuse: (r: GuideRefusal) => void): GuideMetaPatch | null {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    refuse({ tab: 'meta', reason: 'meta : forme inattendue' });
+    return null;
+  }
+  const m = raw as Record<string, unknown>;
+  const out: GuideMetaPatch = {};
+  let ok = true;
+  for (const key of ['title', 'description'] as const) {
+    const text = cleanGuideText(m[key]);
+    if (typeof text === 'string') {
+      refuse({ tab: 'meta', field: key, reason: text });
+      ok = false;
+    } else if (!text?.en?.trim()) {
+      refuse({ tab: 'meta', field: key, reason: 'l’anglais est requis' });
+      ok = false;
+    } else out[key] = text;
+  }
+  out.hidden = m.hidden === true;
+  return ok ? out : null;
+}
+
+/**
+ * « Enregistrer » d'un guide : TOUT le guide en un geste — le brouillon entier
+ * (`saveGuideDraft` réécrit toutes les versions, c'est sa règle) et ses textes
+ * de meta —, puis le stamp, puis UN commit.
+ *
+ * Dans l'ordre : `was` doit être ce que le disque porte (sinon `stale`, rien
+ * n'est écrit — l'admin ou l'autre poste a écrit entre-temps) ; le brouillon
+ * et le meta sont CONTRÔLÉS avant toute écriture (textes, tags inline par la
+ * résolution du site, noms de persos dans le roster, ce que le store exigerait
+ * — l'intro, le combat, les clés de version), chaque écart SITUÉ à sa
+ * version, son onglet, sa ligne ; puis le store écrit le brouillon, ses refus
+ * rendus situés eux aussi ; puis `patchGuideMetaFields` (titre, description,
+ * `hidden`) en une écriture ; puis ce qui a BOUGÉ dans le dossier du guide se
+ * lit de git — rien : rien à committer, ni stamp — et, si un fichier PERTINENT
+ * a bougé (hors archives de version : la règle de `scripts/stamp-guides.ts`,
+ * partagée), `meta.updated` passe à aujourd'hui, le `meta.json` re-daté
+ * partant dans le même commit, `chore(guides): <catégorie>/<slug>`. Les
+ * `.json` de quick partent en `--no-verify` : sans ce stamp, une édition par
+ * quick ne re-daterait jamais le guide.
+ */
+export async function saveGuide(
+  category: string,
+  slug: string,
+  body: unknown,
+  deps: GuidesDeps = GUIDES_DEPS,
+  report?: Report,
+): Promise<GuideSaveOutcome> {
+  const refused: GuideRefusal[] = [];
+  const out = (
+    ok: boolean,
+    lines: string[],
+    more: { written?: boolean; stale?: boolean } = {},
+  ): GuideSaveOutcome => ({
+    ok,
+    log: lines,
+    written: more.written ?? false,
+    stale: more.stale ?? false,
+    refused,
+  });
+  const name = `${category}/${slug}`;
+  const spec = guideSpec(category);
+  if (!spec) return out(false, [`catégorie non éditable : ${category}.`]);
+  const guide = deps.guides().find((g) => g.category === category && g.slug === slug);
+  if (!guide) return out(false, [`guide inconnu : ${name}.`]);
+  const b = (body && typeof body === 'object' ? body : {}) as Record<string, unknown>;
+
+  const j = journal(report);
+  const where = (r: GuideRefusal): string =>
+    [
+      r.version ? `version ${r.version}` : '',
+      r.tab,
+      r.index !== undefined ? `[${r.index}]` : '',
+      r.field ? `· ${r.field}` : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+  const refuse = (r: GuideRefusal): void => {
+    refused.push(r);
+    j.done(`REFUSÉ — ${name} · ${where(r)} : ${r.reason}.`);
+  };
+
+  // Le disque, relu : ce que la page avait chargé doit être ce qu'il porte encore.
+  const disk = { draft: deps.draft(category, slug), meta: guideMetaState(guide) };
+  if (!sameJson(b.was, disk)) {
+    refuse({ tab: 'guide', reason: 'le disque a changé depuis le chargement' });
+    return out(false, [...j.lines, 'Rien à enregistrer.'], { stale: true });
+  }
+
+  const meta = cleanGuideMeta(b.meta, refuse);
+
+  const raw = (b.draft && typeof b.draft === 'object' ? b.draft : null) as Record<
+    string,
+    unknown
+  > | null;
+  if (!raw || !Array.isArray(raw.versions)) {
+    refuse({ tab: 'guide', reason: 'brouillon : forme inattendue' });
+    return out(false, [...j.lines, 'Rien à enregistrer.']);
+  }
+  const intro = cleanGuideText(raw.intro);
+  if (typeof intro === 'string') refuse({ tab: 'intro', reason: intro });
+  else if (spec.introRequired && !intro?.en?.trim())
+    refuse({ tab: 'intro', reason: 'l’intro (anglais) est requise' });
+  const names = new Set(deps.roster().map((c) => c.name));
+  const versions = raw.versions.map((v) => {
+    const key = v && typeof v === 'object' ? String((v as { key?: unknown }).key ?? '') : '';
+    return cleanGuideVersion(v, spec, names, (r) => refuse({ ...r, version: key }));
+  });
+  for (const v of versions) {
+    if (!v) continue;
+    if (spec.versioned && !/^\d{4}-(0[1-9]|1[0-2])$/.test(v.key))
+      refuse({
+        version: v.key,
+        tab: 'guide',
+        reason: `clé de version attendue YYYY-MM (« ${v.key} »)`,
+      });
+    if (spec.monster === 'dungeons-meta' && !v.dungeons?.length)
+      refuse({ version: v.key, tab: 'battle', reason: 'au moins un donjon est requis' });
+    if (spec.monster === 'bossId-meta' && !v.bossId)
+      refuse({ version: v.key, tab: 'battle', reason: 'un boss (monstre) est requis' });
+    if (spec.monster === 'group-meta' && !v.group)
+      refuse({ version: v.key, tab: 'battle', reason: 'un combat (monstre) est requis' });
+  }
+  if (refused.length || !meta) return out(false, [...j.lines, 'Rien à enregistrer.']);
+  const draft: GuideDraft = {
+    intro: (typeof intro === 'object' ? intro : undefined) ?? { en: '' },
+    versions: versions.filter((v): v is VersionDraft => v !== null),
+  };
+
+  j.doing('écriture du guide');
+  const errors = await deps.saveDraft(category, slug, draft);
+  for (const e of errors) {
+    const key = /version key : “([^”]+)”/.exec(e)?.[1];
+    refuse({
+      ...(key ? { version: key } : {}),
+      tab: /intro/i.test(e) ? 'intro' : /dungeon|boss|battle/i.test(e) ? 'battle' : 'guide',
+      reason: e,
+    });
+  }
+  if (errors.length) return out(false, [...j.lines, 'Rien à enregistrer.']);
+  if (!sameJson(meta, { ...disk.meta, hidden: disk.meta.hidden })) {
+    const wrote = await deps.patchMeta(category, slug, meta);
+    if (!wrote) {
+      refuse({ tab: 'meta', reason: 'meta.json refusé par le store' });
+      return out(false, [...j.lines, 'Rien à enregistrer.']);
+    }
+  }
+
+  // Ce qui a bougé, lu de git : les fichiers du guide qui diffèrent de HEAD —
+  // y compris une version posée par « ＋ version » et pas encore committée.
+  const dir = guideDirOf(category, slug);
+  const base = `${dir}/`;
+  const changed = deps.dirty(dir);
+  if (!changed.length)
+    return out(true, [...j.lines, 'Rien à enregistrer : le disque porte déjà ces valeurs.']);
+  j.done(
+    `${changed.length} fichier${changed.length > 1 ? 's' : ''} du guide ${changed.length > 1 ? 'ont' : 'a'} bougé`,
+  );
+
+  const keys = guide.versions.map((v) => v.key);
+  let stamped = false;
+  if (hasRelevantChange(base, changed, archivePrefixes(base, keys))) {
+    const today = deps.today();
+    stamped = await deps.stamp(`${base}meta.json`, today);
+    if (stamped) j.done(`meta.updated : ${today}`);
+  } else j.done('archives seules : la date du guide ne bouge pas');
+  const paths = [...new Set([...changed, ...(stamped ? [`${base}meta.json`] : [])])];
+  const commit = deps.commitPaths(paths, `chore(guides): ${name}`, report);
+  return out(commit.ok, [...j.lines, ...commit.log], { written: true });
+}
+
+/**
+ * « ＋ version » : une version nouvelle d'un guide versionné (`addGuideVersion`
+ * : la clé `YYYY-MM`, dupliquée de `fromKey` ou vierge — sans hériter du pin).
+ * Un geste qui ÉCRIT SANS COMMITTER : la copie est une BASE à réécrire, pas
+ * un contenu à publier — committée telle quelle, elle deviendrait la version
+ * par défaut du site, copie conforme de la précédente sous une autre date. Le
+ * prochain « Enregistrer » l'emporte avec ses retouches, dans son commit ; la
+ * page le dit. Rend le brouillon relu, la version nouvelle découverte.
+ */
+export async function addGuideVersionAction(
+  category: string,
+  slug: string,
+  newKey: unknown,
+  fromKey: unknown,
+  deps: GuidesDeps = GUIDES_DEPS,
+): Promise<Outcome & { draft?: GuideDraft; version?: string }> {
+  const key = String(newKey ?? '').trim();
+  const from = String(fromKey ?? '').trim();
+  const errors = await deps.addVersion(category, slug, key, from);
+  if (errors.length) return { ok: false, log: errors };
+  return {
+    ok: true,
+    log: [
+      `version ${key} créée sur le disque${from ? ` (copie de ${from}, sans son épinglage)` : ' (vierge)'} — pas committée : « Enregistrer » l’emportera.`,
+    ],
+    draft: deps.draft(category, slug),
+    version: key,
+  };
 }

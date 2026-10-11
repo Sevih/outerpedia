@@ -1,7 +1,7 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
 import { actionableCount, bucketsOf, EXTRACTOR_ENTITIES } from '@/lib/admin/admin-inbox';
-import { GUIDE_EDITOR_CATEGORIES } from '@/lib/admin/guide-nav';
+import { adminGuideMenu } from '@/lib/admin/guide-nav';
 import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -81,11 +81,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     },
     {
       // Une entrée par TYPE de guide (chaque type a sa propre liste latérale) ;
-      // « Overview » garde l'accueil (import de contribution) accessible.
+      // « Overview » garde l'accueil (import de contribution) accessible tant
+      // que l'import n'est pas porté. Les guides de BOSS (`GUIDE_SPECS`) sont
+      // portés dans quick (Guides › Guides, lot F18) : leurs liens sont sortis
+      // le 11/10 — les pages restent joignables par leur URL jusqu'au retrait
+      // de l'admin. Une catégorie dont tous les guides sont cachés (Adventure
+      // License) ne se propose plus non plus (`adminGuideMenu`).
       title: 'Guide editor',
       items: [
         { label: 'Overview', href: '/admin/guides', exact: true },
-        ...GUIDE_EDITOR_CATEGORIES.map((c) => ({
+        ...adminGuideMenu().map((c) => ({
           label: c.label,
           href: `/admin/guides/${c.slug}`,
         })),

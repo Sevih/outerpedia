@@ -10,7 +10,10 @@
  * change → `updated = aujourd'hui`. « Pertinent » = les fichiers partagés du
  * guide (meta/strings/index/notes…) + la DERNIÈRE version ; les archives de
  * versions (`versions/<plus ancienne>/`) ne comptent pas — corriger un vieux
- * guide versionné ne le fait pas remonter en « à jour ».
+ * guide versionné ne le fait pas remonter en « à jour ». La règle, l'écriture
+ * prettier-canonique du meta et la date locale vivent dans
+ * `src/lib/admin/guide-stamp.ts`, que quick (section « Guides ») appelle aussi
+ * avant ses commits en `--no-verify`.
  *
  * Pas de `git log` (historique parfois shallow en CI) : on lit `git status`
  * (modif indexées + working tree), toujours fiable en local. Idempotent.
@@ -25,13 +28,18 @@
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { writeTextAtomic } from '../datagen/lib/json';
 import { relative, resolve } from 'node:path';
-import { format as prettierFormat, resolveConfig } from 'prettier';
+import {
+  GUIDES_CONTENTS_SUBDIR,
+  STAMP_DATE_RE,
+  archivePrefixes,
+  hasRelevantChange,
+  stampMeta,
+  todayLocal,
+  versionKeys,
+} from '../src/lib/admin/guide-stamp';
 
-const CONTENTS = resolve(process.cwd(), 'src/app/[lang]/guides/_contents');
-const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
-const VERSION_DIR_RE = /^\d{4}-(0[1-9]|1[0-2])$/;
+const CONTENTS = resolve(process.cwd(), GUIDES_CONTENTS_SUBDIR);
 
 const argv = process.argv.slice(2);
 const flag = (f: string): string | null => {
@@ -47,12 +55,9 @@ if (argv.includes('--all') && !ALL) {
   console.error('`--all` exige une DATE de baseline (ex. `--all 2026-07-01`).');
   process.exit(1);
 }
-// Date LOCALE, pas UTC : un `pnpm commit` entre 0 h et 2 h (Paris) datait le
-// guide de la veille. `sv-SE` formate nativement en `YYYY-MM-DD`.
-const TODAY =
-  flag('--date') ?? ALL ?? new Intl.DateTimeFormat('sv-SE').format(new Date()).slice(0, 10);
+const TODAY = flag('--date') ?? ALL ?? todayLocal();
 
-if (!DATE_RE.test(TODAY)) {
+if (!STAMP_DATE_RE.test(TODAY)) {
   console.error(`Date invalide : "${TODAY}" (attendu YYYY-MM-DD).`);
   process.exit(1);
 }
@@ -110,34 +115,20 @@ function listGuideDirs(): GuideDir[] {
   return out;
 }
 
-/** Dossiers de versions d'un guide, triés (le plus récent d'abord). */
-function versionKeys(dir: string): string[] {
-  const vdir = resolve(dir, 'versions');
-  if (!existsSync(vdir)) return [];
-  return readdirSync(vdir, { withFileTypes: true })
-    .filter((e) => e.isDirectory() && VERSION_DIR_RE.test(e.name))
-    .map((e) => e.name)
-    .sort((a, b) => b.localeCompare(a));
-}
-
 /**
- * Un fichier changé est-il PERTINENT pour ce guide ? Oui s'il est dans le
- * dossier du guide MAIS pas dans une archive de version (tout `versions/<clé>`
- * autre que la plus récente est ignoré).
+ * Un fichier changé est-il PERTINENT pour ce guide ? La règle partagée
+ * (`hasRelevantChange`) : dans le dossier du guide, hors archives de version —
+ * et la modif du SEUL champ `updated` de meta.json ne compte pas (anti-boucle).
  */
-function relevantChange(g: GuideDir, changed: Set<string>, newestVersion: string | null): boolean {
+function relevantChange(g: GuideDir, changed: Set<string>): boolean {
   const base = relative(process.cwd(), g.dir).replace(/\\/g, '/') + '/';
-  const archives = versionKeys(g.dir)
-    .filter((k) => k !== newestVersion)
-    .map((k) => `${base}versions/${k}/`);
-  for (const f of changed) {
-    if (!f.startsWith(base)) continue;
-    if (archives.some((a) => f.startsWith(a))) continue; // archive → ignoré
-    // La modif du SEUL champ `updated` de meta.json ne compte pas (anti-boucle).
-    if (f === `${base}meta.json` && onlyUpdatedChanged(g.metaPath)) continue;
-    return true;
-  }
-  return false;
+  const archives = archivePrefixes(base, versionKeys(g.dir));
+  return hasRelevantChange(
+    base,
+    changed,
+    archives,
+    (f) => f === `${base}meta.json` && onlyUpdatedChanged(g.metaPath),
+  );
 }
 
 /** Le diff indexé/working de meta.json ne touche-t-il QUE le champ `updated` ? */
@@ -154,42 +145,6 @@ function onlyUpdatedChanged(metaPath: string): boolean {
   }
 }
 
-/**
- * Sérialise un objet EXACTEMENT comme prettier — via l'API, pas le CLI (qui
- * traiterait les `[lang]` du chemin comme un motif glob et ne matcherait pas le
- * fichier). Nécessaire : le stamp écrivait du `JSON.stringify`, qui ÉCLATE les
- * tableaux courts que prettier garde INLINE (`"dungeons": ["100805"]`) → meta
- * committé non-prettier (le commit maison saute les hooks via `--no-verify`) et
- * diff parasite au `format:check` du commit suivant. `resolveConfig` reprend le
- * `printWidth` du repo (seuil d'inline des tableaux).
- */
-async function toPrettierJson(obj: unknown, filepath: string): Promise<string> {
-  const config = await resolveConfig(filepath);
-  return prettierFormat(JSON.stringify(obj, null, 2), { ...config, filepath, parser: 'json' });
-}
-
-/** Lit/écrit meta.json en préservant l'ordre des clés (updated déjà présent
- * reste à sa place ; sinon inséré après `author`). Sortie prettier-canonique. */
-async function stampMeta(metaPath: string, date: string): Promise<boolean> {
-  const raw = readFileSync(metaPath, 'utf8');
-  const meta = JSON.parse(raw) as Record<string, unknown>;
-  if (meta.updated === date) return false;
-  let out: Record<string, unknown> = meta;
-  if ('updated' in meta) {
-    meta.updated = date;
-  } else {
-    // Insère `updated` juste après `author` (lisibilité des diffs).
-    out = {};
-    for (const [k, v] of Object.entries(meta)) {
-      out[k] = v;
-      if (k === 'author') out.updated = date;
-    }
-    if (!('updated' in out)) out.updated = date;
-  }
-  writeTextAtomic(metaPath, await toPrettierJson(out, metaPath));
-  return true;
-}
-
 async function main(): Promise<void> {
   const guides = listGuideDirs();
   const changed = ALL ? null : gitChangedFiles();
@@ -197,14 +152,13 @@ async function main(): Promise<void> {
   const wouldBump: string[] = [];
 
   for (const g of guides) {
-    const newest = versionKeys(g.dir)[0] ?? null;
     const meta = JSON.parse(readFileSync(g.metaPath, 'utf8')) as { updated?: string };
     const label = `${g.category}/${g.slug}`;
 
     let target: string | null = null;
     if (ALL) {
       target = TODAY; // baseline : tout le monde à la date de release.
-    } else if (changed && relevantChange(g, changed, newest)) {
+    } else if (changed && relevantChange(g, changed)) {
       target = TODAY; // un fichier pertinent change → aujourd'hui.
     }
     if (!target || meta.updated === target) continue;

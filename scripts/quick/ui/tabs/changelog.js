@@ -784,13 +784,36 @@ function changelogLeave() {
   );
 }
 
+/**
+ * Ouvre le formulaire d'un gabarit, ses champs posés à `values` (ceux que le
+ * serveur préremplit sont gardés sinon) : ce que « ＋ version » de la section
+ * Guides propose — une entrée « Mise à jour » pour la version nouvelle. Rien
+ * n'est posé dans la liste : c'est « Poser l'entrée » qui le fait. Rend `false`
+ * tant que le journal n'est pas chargé, ou si le gabarit est inconnu.
+ */
+export function openTemplate(id, values = {}) {
+  const t = data.templates.find((x) => x.id === id);
+  if (!t || !t.fields.length) return false;
+  form = t;
+  renderForm();
+  for (const [k, v] of Object.entries(values)) {
+    const el = $('j-form').querySelector(`[data-v="${k}"]`);
+    if (el && v) el.value = v;
+  }
+  $('j-form').querySelector('[data-act="pose"]')?.focus();
+  return true;
+}
+
 sections.register('changelog', {
   init: () => {
     // `#changelog/<n>` ouvre l'onglet sur la fiche de la n-ième entrée de la
-    // liste, à partir de 0 — la plus récente (un lien, le banc de captures).
+    // liste, à partir de 0 — la plus récente (un lien, le banc de captures) ;
+    // `#changelog?template=update&guide=…` l'ouvre sur le formulaire de ce
+    // gabarit, ses champs préremplis (le lien de « ＋ version », dans Guides).
     // `lib.js` ne connaît que `#changelog` : c'est le clic sur l'onglet qui l'ouvre.
-    const [, at] = /^#changelog\/(\d+)$/.exec(location.hash) ?? [];
-    if (at) document.querySelector('#tabs [data-tab="changelog"]')?.click();
+    const [, at, query] = /^#changelog(?:\/(\d+))?(?:\?(.*))?$/.exec(location.hash) ?? [];
+    const asked = query ? Object.fromEntries(new URLSearchParams(query)) : null;
+    if (at || asked) document.querySelector('#tabs [data-tab="changelog"]')?.click();
     // Les visages et les vignettes sont sous `imgBase`, connu avec
     // `/api/state` : redessinés si l'état en annonce une autre.
     stateLoaded.then(() => {
@@ -806,6 +829,10 @@ sections.register('changelog', {
         }
         render();
         if (r) pvAsk(r);
+        if (asked?.template) {
+          const { template, ...values } = asked;
+          openTemplate(template, values);
+        }
       })
       .catch((e) => log([`Journal du site illisible : ${e}`], false));
   },

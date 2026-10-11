@@ -41,10 +41,10 @@ pastille.
 - **En-tête** (`header.top`, 52 px, `surface-raised`) : le logo, les
   **groupes** en onglets (`.gtab`, filet accent sous l'actif ; « Accueil » en
   tête — sa première section, le tableau de bord, est celle que la page
-  ouvre ; `.gtab.soon`
-  grisé avec son badge « à venir » : Guides, tant que quick n'a pas repris
-  l'admin — Éditeurs a quatre sections, Fiche perso, Effets, Monstres et
-  Items, et Outils la sienne, Noms), puis à droite les
+  ouvre ; `.gtab.soon` grisé avec son badge « à venir » pour un groupe
+  annoncé mais vide — plus aucun depuis le 11/10 : Éditeurs a quatre
+  sections, Fiche perso, Effets, Monstres et Items, Guides la sienne, Guides,
+  et Outils la sienne, Noms), puis à droite les
   pastilles des services (`.pill` + `.dot`, `title` = pourquoi), « Pousser »,
   le poste et le port (`#env`), « Quitter ».
 - **« Pousser »** (`#push`, un `.btn.primary.sm` et son `.badge` `#push-count`) :
@@ -66,7 +66,7 @@ pastille.
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
   `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu,
-  `v-` Vidéos, `x-` Effets) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
+  `v-` Vidéos, `x-` Effets, `gd-` Guides) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
   lot C11) : aucun id de l'un n'est repris par l'autre, et un test le garde
   (« aucun `id` en double dans la page »). `hp-` est au picker de héros, qui
@@ -81,7 +81,7 @@ pastille.
   résultat — la console de « Patch » s'en sert.
 - **`<main>`** : 1200 px centrés, 24 px de marge.
   `wide: true` dans l'entrée de `GROUPS` lui donne toute la largeur
-  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Items, Discord. Une section
+  (`main.wide`) : Patch, Rangs, Tables du jeu, Fiche perso, Effets, Monstres, Items, Guides, Discord. Une section
   est une colonne à 18 px d'écart : `.head` (le `h2` et sa `p.hint`), puis des
   `.card`.
 - **Journal** (`aside.journal`, `surface-overlay`) : une bande DANS LE FLUX,
@@ -1030,6 +1030,90 @@ Propres à l'onglet, dans `tabs/items.css` : `.i-new`, `.i-total`, `.i-seg`
 tuile d'item `.gv-*` de Gear reco, recopiée sous `#tab-items` (`gear.css` ne
 la règle que sous `#c-gear`) ; `itemTile` prend pour elle un `dir` (`items`),
 le dossier du sprite quand ce n'est pas `equipment`.
+
+## Guides — croquis
+
+### Guides (`wide`, fait — F18)
+
+La vue d'ensemble des guides du site et l'éditeur des guides de boss (les
+sept catégories de `GUIDE_SPECS`), l'éditeur « Guide editor » de l'admin sans
+ses catégories mortes. Croquis du rendu :
+
+```
+.head  Guides — Les guides de boss du site, par catégorie : un clic ouvre le guide… la date du guide est re-datée dans le même commit…
+LA VUE D'ENSEMBLE (#gd-overview, `#guides`)
+.card.pad  .form : [Chercher 30ch « début d'un mot du titre ou du slug »] [☐ cachés] « 93 guides dans 10 catégories · 57 cachés »
+   une .card.gd-cat par catégorie du site, dans SON ordre, VIVANTE (au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas)
+     card-head : le libellé anglais · le slug (chasse fixe) · badge « N guides » · badge « N cachés » · badge warn « contenu en code » (une catégorie que quick n'édite pas : guild raid, tour, monad, autres, généraux)
+     table : Guide (titre = un bouton pour un guide éditable, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », ou « plat ») | État (badges « caché », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
+     une ligne « contenu en code » est atténuée (pas de bouton) ; une ligne cachée l'est davantage
+   .empty « Aucun guide ne correspond. »
+LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
+.card.pad.gd-head  [← Guides] titre anglais (celui de Méta, en direct) ; dessous badge off de la catégorie · cat/slug (chasse fixe) · le boss ou le combat · « mis à jour le … » · badge « N versions » · badge « caché » … [ouvrir sur le site ↗]
+.savebar   2 onglets modifiés · 1 refus   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (TOUT le guide part : brouillon, meta, `was` ; un commit) — « Aperçu » absent de Combat et Vidéos
+.gd-tabs (role tablist, le `.tab` de 32 px de la Fiche perso)  [Méta] [Combat] [Intro] [Tips] [Notes] [Persos] [Équipe] [Vidéos] — Notes, Équipe, Vidéos selon la spec de la catégorie ; un point accent = l'onglet diffère du disque, rouge = un refus
+.gd-versions (versionné seulement)  [2026-10 récente] [2026-05] [2025-12] … [＋ version]  « Méta, Combat et Intro valent pour tout le guide ; l'état du boss, Tips, Notes, Persos, Équipe et Vidéos sont ceux de la version. »
+   un point sur l'onglet d'une version : accent = modifiée, rouge = refusée ; « ＋ version » déplie .gd-addv : [Nouvelle version AAAA-MM] [Dupliquer depuis ▾] [Créer la version] annuler · « Écrit le dossier sans committer : « Enregistrer » l'emportera. »
+   après la création : p.gd-note « Version 2026-11 posée sur le disque, pas encore committée… [Ouvrir le Journal du site prérempli ↗] » (le gabarit « Mise à jour » du Journal, guide · mode · mois · slug)
+#gd-panel — Méta : .gd-cols, deux .card (Titre | Description), puis la carte des drapeaux en pleine largeur, puis [Traduire]
+   LE TEXTE (.gd-text, celui de la Fiche perso) : [l'anglais — un champ d'une ligne pour un titre, une textarea de deux lignes qui grandit sinon] · .gd-pv l'aperçu (les segments que le site rendra, une balise inconnue en ROUGE) · .gd-err son refus · ▸ [Traductions (5)] badge warn « à retraduire » « 3 / 5 » — déplié : cinq champs fr · es · jp · kr · zh, trois par rangée, placeholder = l'anglais
+   [☐ Caché — hors des listes du site, joignable par son URL]  « icône … · auteur … · mis à jour le … (posé au commit) »
+#gd-panel — Combat : .card « Combat » (group) : icône 36 px · nom · mode · group (chasse fixe) [Changer…] (le picker partagé en LIGNES : icône, nom, id ; recherche par début de mot) — versionné : « un seul pour tout le guide : changer ici vaut pour toutes les versions qui en portent un »
+   adventure : .card « Donjons » — ol : nom · id · ↑ ↓ ✕ par donjon, [＋ donjon] (picker en lignes) ; « Au moins un donjon est requis. » en rouge
+   dimensional-singularity : .card « Boss » — nom · id [Changer…] (picker en lignes sur tous les monstres)
+   versionné : .card « État du boss pour 2026-10 » — une .gd-pin par monstre du combat : icône · nom · difficultés · badge ok « live » + « N archives — s'épingle depuis l'extractor » / « jamais versionné », ou badge warn « épinglé · v2 · note » [dépingler] (le pin se LIT et se DÉPINGLE ici, il ne se crée pas : extractor, 19-20)
+#gd-panel — Intro : .card « Intro » (badge « requise » selon la spec ; « partagée par toutes les versions ») : le texte ; [Traduire]
+#gd-panel — Tips : sans titres (special request, irregular, AL, adventure) : .card « Conseils » : LE BLOC (.gd-text à textarea de quatre lignes, UN CONSEIL PAR LIGNE ; l'aperçu en liste à puces ; les traductions sont des blocs aussi, remplis par index — l'anglais porte la structure : une ligne jp en plus ne crée pas de conseil)
+   avec titres (joint, world boss, dim) : une .card « Section n » par section — ✕ en tête, le titre (placeholder « Titre automatique — saisir pour remplacer » quand un `rawTitle` est préservé), le bloc ; [＋ section] ; [Traduire]
+#gd-panel — Notes : une .card « Note n » par paragraphe (✕), le texte ; [＋ note] ; [Traduire]
+#gd-panel — Persos : une .card « Groupe n » par groupe — ✕, .gd-heroes (une tuile par perso : portrait 44 px, nom d'affichage anglais, ✕ ; un nom hors du roster : « ? » cerclé de rouge) [＋ héros] (le picker partagé en multi, les persos du groupe cochés), la raison ; [＋ groupe] ; [Traduire]
+   en sections (world boss, dim) : une .card « Section n » (✕, titre) qui porte ses groupes et son [＋ groupe] ; [＋ section]
+#gd-panel — Équipe : slots (joint) : UNE .card « Équipe » — .gd-slots : une ligne numérotée par slot = ses alternatives en tuiles [＋ héros] ✕, [＋ slot] (4 au plus) ; la note
+   buckets (special request) : une .card par plage — « Stages [1] → [5] » ✕, les slots, la note ; [＋ plage de stages]
+   sections (world boss) : une .card « Phase n » — ✕, titre, slots, note ; [＋ équipe (phase)]
+   named (irregular, AL) : une .card « Équipe n » — ✕, titre (auto ou libre), slots, la note en BLOC (un paragraphe par ligne) ; [＋ équipe] ; [Traduire]
+#gd-panel — Vidéos : .card « Vidéos » badge du compte … lien « ajouter dans Vidéos » (l'onglet Vidéos, la cible posée sur ce guide et cette version) ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
+en tête du panneau : les refus qui ne visent aucun onglet (le disque a changé, la forme) en rouge
+le hash : `#guides` (la vue d'ensemble), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas
+```
+
+Tout ce qui se lit vient de `GET /api/guides` (`guidesOverview` : par catégorie
+vivante — ou toutes avec `?hidden=1` —, ses guides triés comme le site, le
+combat en clair, `editable`, les comptes, `siteBase`), relu à chaque venue sur
+la vue d'ensemble, et de `GET /api/guides/state?cat=&slug=`
+(`guideDraftState` : le brouillon de l'admin — `loadGuideDraft` —, les textes
+de meta éditables, la `spec`, les options des pickers selon elle, les `refs`,
+les pins en lecture, les langues) — la page n'en recopie aucune règle. Les
+textes sont ceux de la Fiche perso : l'aperçu par `POST /api/guides/preview`
+(`previewInline`, UNE requête pour tous les textes du sous-onglet montré, 400 ms
+après la dernière frappe, dans la langue de la savebar), « Traduire » par
+`POST /api/translate` qui ÉCRASE les cinq langues des textes anglais de
+l'onglet. La savebar compte les SOUS-ONGLETS (par version) qui diffèrent du
+disque, le brouillon nettoyé comme le store l'écrirait (une section sans
+conseil, un groupe vide, une équipe sans slot ne comptent pas) ; `pinned` ne
+part que si la page a dépinglé. « Enregistrer » envoie TOUT à `POST
+/api/guides` (`saveGuide`) : `was` — le brouillon et le meta chargés — contre
+le disque (`stale` : relu tel quel), chaque texte contrôlé (tags inline par
+la résolution du site, l'anglais), les noms de persos contre le roster, ce que
+le store exigerait (intro, combat, clé de version), un écart SITUÉ (version,
+onglet, ligne, champ : la saisie reste, la ligne cerclée, le point rouge) ;
+puis `saveGuideDraft` (toutes les versions), `patchGuideMetaFields` (titre,
+description, `hidden`), ce qui a bougé lu de git, le stamp de `meta.updated`
+si un fichier hors archive a bougé, UN commit `chore(guides): <cat>/<slug>`
+du dossier modifié et du meta ; rien n'a bougé : rien n'est committé. « ＋
+version » (`POST /api/guides/version`) écrit le dossier SANS committer, refuse
+tant que des changements attendent, puis propose le Journal du site. Un autre
+guide, ou quitter l'onglet, avec des changements en attente : sur confirmation
+(`canLeave`). Propres à l'onglet, dans `tabs/guides.css` : `.gd-cat`,
+`.gd-open`, `.gd-slug`, `.gd-row`, `.gd-state`, `.gd-site`, `.gd-head`,
+`.gd-id`, `.gd-traits`, `.gd-pv-lang`, `.gd-seg` (le segmenté, recopié),
+`.gd-tabs`, `.gd-versions`, `.gd-vtabs`, `.gd-addv`, `.gd-note`, `.gd-stack`,
+`.gd-cols`, `.gd-wide`, `.gd-card`, `.gd-body`, `.gd-foot`, `.gd-err`,
+`.gd-ko`, `.gd-text`, `.gd-trs`, `.gd-pv` (et les jetons `.pv-*` recopiés
+sous `#tab-guides`), `.gd-battle`, `.gd-dungeons`, `.gd-pin`, `.gd-pn`,
+`.gd-heroes`, `.gd-hero`, `.gd-noface`, `.gd-slots`, `.gd-slot`, `.gd-group`,
+`.gd-videos`, `.gd-vt` ; pour les pickers en lignes, sous `.hp-modal` :
+`.gd-pico`, `.gd-pk`, `.gd-pname`, `.gd-pid`.
 
 ## Outils — croquis
 
