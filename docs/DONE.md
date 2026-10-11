@@ -7,6 +7,58 @@
 
 ## 2026-10-11
 
+- **Relecture F18 (Fable) — quick : section « Guides », vue d'ensemble et
+  éditeur des guides de boss, catégories mortes masquées, validé** — commit
+  `4399ab6b`, 28 fichiers, le message attendu, ni `package.json` ni le lock,
+  rien d'un autre lot. Périmètre relu dans le diff : `guide-nav.ts`
+  (`categoriesWithVisibleGuide`, `adminGuideMenu` — le menu de l'admin ne
+  propose plus que Overview et General guides, `GUIDE_SPECS` intact),
+  `guide-store.ts` (`patchGuideMetaFields` élargi à `title`, `description`,
+  `hidden` ; une valeur vide retire la clé, un texte sans anglais refusé ;
+  `saveGuideDraft` passe par le même patch), `guide-stamp.ts` (la règle de
+  `scripts/stamp-guides.ts` sortie telle quelle : `stampMeta`,
+  `hasRelevantChange`, `archivePrefixes`, `todayLocal` ; le script l'importe,
+  son hook et `pnpm commit` ne changent pas de comportement — relu ligne à
+  ligne, pas rejoué), `guide-pin-targets.ts` (`buildPinTargets` et
+  `archiveLabel` sortis de la page admin et de `VersionPinPicker`),
+  `actions.ts` (`guidesOverview`, `guideDraftState`, `saveGuide`,
+  `addGuideVersionAction`, `GUIDES_DEPS` tout injecté), cinq routes dans
+  `server.ts`, `videoTargets` sans les guides cachés, `/api/guides/preview`
+  dans `READ_ONLY_POSTS`, `openTemplate` exporté de `changelog.js`. Le scan
+  des guides est relu du disque en dev (`allGuides`, NODE_ENV de quick) :
+  « lu à chaque appel » tient. **Contrôles** : `pnpm typecheck` vert,
+  `pnpm lint` vert, `pnpm test` « 212 passed, 3483 passed »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  « 50 passed, 1391 passed » — les chiffres de l'entrée. **Rejoué** (tsx,
+  stores, stamp et git factices, roster réel) : `was` faux → `stale`, rien
+  d'appelé ; un nom hors roster et une clé `2026-5` → deux refus situés
+  (`version 2026-10 team [0]`, `version 2026-5 guide`), rien d'écrit ; rien
+  de sale après l'écriture → « rien à enregistrer », ni stamp ni commit ; un
+  `tips.json` de la version récente plus `hidden` → `patchMeta` en une
+  écriture, `stamp meta.json 2026-10-11`, UN commit
+  `chore(guides): joint-challenge/annihilator` des deux chemins ; une archive
+  seule (`versions/2025-06`) → committée sans stamp ; une erreur du store
+  rendue située ; « ＋ version » qui écrit sans committer, clé vide refusée.
+  Sur le quick isolé (:4798, clés vidées, GET et `/api/guides/preview`
+  seulement) : `/api/guides` 93 guides, 10 catégories, 57 cachés ; avec
+  `?hidden=1` 12 catégories, Adventure License (26) et Monad Gate (31)
+  comptées cachées ; l'état d'amadeus (plat, `group-meta`, 129 persos au
+  roster) et d'annihilator (cinq versions, cinq combats du mode, trois
+  Annihilator sans archive, la vidéo avec son `label`) ; guild-raid en 404
+  « guide inconnu », monad-gate en « contenu en code ». Huit captures du
+  banc relues : la vue d'ensemble, Méta et Tips d'amadeus (les sept conseils
+  en bloc, l'aperçu aux balises résolues), Équipe en plages 1→10 et 11→13,
+  annihilator sur `2026-05` (la barre des versions, Méta), son Combat (le
+  combat partagé, les trois états « live · jamais versionné »), son Équipe en
+  slots avec la note en aperçu, les Persos en sections de Belial. Rien
+  d'enregistré. **Corrigé en relecture** : l'entrée du lot avait recréé un
+  second en-tête `## 2026-10-11` sous elle, fusionné. **Reste à Sevih** :
+  les sept contrôles à l'écran du TODO (un guide plat enregistré → un
+  commit qui porte le `meta.json` re-daté ; « ＋ version » puis un combat
+  propagé ; « cachés » ; le menu admin ; le site après déploiement) —
+  relancer quick d'abord, cinq routes nouvelles. **Suite** : F19 (les guides
+  généraux et l'import de contribution), seul sur `scripts/quick/`.
+
 - **quick : section « Guides » — la vue d'ensemble et l'éditeur des guides de
   boss, sans les catégories mortes (lot F18, étape 16 de la migration)** —
   l'éditeur « Guide editor » de l'admin (`/admin/guides`, `GuideEditor`, 989
@@ -140,8 +192,6 @@ amadeus` (Méta), `#guides/joint-challenge/annihilator/2026-05` (la version
   cache derrière lui et « ← Guides » y ramène (une liste latérale par
   catégorie, celle de l'admin, aurait pris la largeur aux équipes à quatre
   slots).
-
-## 2026-10-11
 
 - **Quatre PR de documentation des sessions cloud fusionnées en local (hors
   lot)** : `#51` (audit des doublons de règles du jeu outerpedia ↔ gear-solver,
