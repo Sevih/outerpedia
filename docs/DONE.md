@@ -5,6 +5,27 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-11
+
+- **Quatre PR de documentation des sessions cloud fusionnées en local (hors
+  lot)** : `#51` (audit des doublons de règles du jeu outerpedia ↔ gear-solver,
+  `docs/audit-doublons-solver.md`), T14 `#53` (commentaires de `datagen/` et
+  README réalignés sur le code d'aujourd'hui — aucune ligne de code modifiée),
+  T7 `#55` (les tables du jeu jamais lues, `docs/audit-tables-non-lues.md`) et
+  T9 `#57` (poids des bundles A1–A6 et accessibilité B1–B8,
+  `docs/audit-bundles-accessibilite.md`). Relues par Fable : `#53` dit vrai sur
+  chaque commentaire touché ; les constats B1–B8 et A3–A6 de `#57` tiennent, les
+  deux imports lourds d'A1 (`CharacterCard` ↔ `characters.json`) et d'A2
+  (`game-tokens.ts` ↔ glossaire) restent à confirmer dans le code avant d'en
+  faire une tâche. Aucun conflit. Sur le résultat : prettier et eslint sur les
+  fichiers touchés, typecheck, 208 fichiers et 3420 tests verts (même contenu
+  que la relecture de la veille, base avancée d'un commit de doc). Le même jour,
+  fusionnées en local sans pousser : vingt PR de gear-solver (`#2` à `#22`,
+  typecheck et 440 tests verts ; `#23` à `#30`, le serveur de bureau, se
+  marchent dessus et retournent au cloud pour un rebase en chaîne) et six
+  rapports de sevih-tool (`#1` à `#4`, `#6`, `#9` ; `#5`, `#7` et `#8`
+  retournent au cloud pour correction).
+
 ## 2026-10-09
 
 - **Fiche « Base Stats » : les Core Fusion et les passifs de S2 justes, contrat
