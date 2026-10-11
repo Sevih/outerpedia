@@ -31,6 +31,21 @@
       `/admin/gear-presets`, sortie du menu le 09/10 mais joignable par son
       URL).
 
+## 🎟️ Codes promo (rapport de cloisonnement du 11/10, lot L8)
+
+- [ ] **Normaliser les codes en majuscules côté site** : les codes du jeu sont
+      tous en majuscules (règle de Sevih, 11/10). `applyCouponOp` et
+      `validateCoupons` (`src/lib/data/promo-rules.ts`) comparent le code tel
+      quel : passer en majuscules (ou refuser une minuscule) et réécrire le
+      commentaire « sensible à la casse ». Le bot, lui, met déjà en majuscules
+      ce qu'il reçoit : aujourd'hui il ne peut donc ni éditer ni retirer un
+      code en minuscules de la liste vivante. Rapport :
+      `sevih-tool/docs/revue/cloisonnement-2026-10.md` § 4.3.
+- [ ] **R2** : `24kthankyou` (expiré le 30/06), seul code sur 102 qui n'est pas
+      en majuscules, à passer en `24KTHANKYOU` dans la liste vivante (Sevih :
+      `/admin/tools/promo-codes` en dev, ou `applyLiveCouponOp`). L'instantané
+      `data/curated/coupons.json` est déjà corrigé (11/10).
+
 ## 🧰 Outil quick
 
 - [ ] **Migration de l'admin vers quick** (décision du 08/10) : inventaire,
