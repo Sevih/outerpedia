@@ -10,12 +10,14 @@
  * (`datagen/version-boss.ts`) n'est que le rattrapage `--ref <vieux commit>`.
  *
  * Source par défaut : **git HEAD** = dernier état committé — celui contre
- * lequel les guides ont été écrits, même quand le dev auto-apply a déjà écrasé
- * le working tree avec le nouvel état. `worktree` = état du disque.
+ * lequel les guides ont été écrits, même quand le working tree porte déjà le
+ * nouvel état (un « Save » ou un `datagen:promote --apply` passé avant).
+ * `worktree` = état du disque.
  *
- * TODO(guides) : quand le domaine guides existera, ce geste devra RÉ-ÉPINGLER
- * automatiquement les guides qui référencent `<id>` (live) vers `<id>@<n>` —
- * versionner ne doit JAMAIS demander d'éditer la config d'un guide à la main.
+ * Ce module ne fait que FIGER. Le ré-épinglage des guides qui référencent `<id>`
+ * (live) vers `<id>@<n>` est `src/lib/admin/repin-guides.ts`, joué par le
+ * bouton « Version the committed state » (route `api/admin/version/monster/[id]`) — pas par la
+ * CLI de rattrapage.
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';

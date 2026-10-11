@@ -10,7 +10,8 @@
  *     ├─ si le CODE du jeu a changé (version installée ≠ empreinte du dump) :
  *     │  dump (→ dump.cs)
  *     └─ si tiré : extract → convert → face-layout(py) → sprite-rect(py) →
- *        font-metrics(py) → build → promote[ --apply] → damage → [collect]
+ *        portrait-fx(py) → portrait-fx-report → font-metrics(py) → build →
+ *        promote[ --apply] → damage → [collect]
  *   [getNews]  ← optionnel (fetch web, indépendant du datamine) — NON BLOQUANT
  *
  * La chaîne gatée est DÉCLARÉE (`genSteps`), pas écrite en ligne droite : c'est

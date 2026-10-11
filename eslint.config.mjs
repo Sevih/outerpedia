@@ -36,7 +36,7 @@ const VIVID_COLOR_MSG =
 // t-elle sur `IS_DEV` ? Si oui, sors la brique partagée dans un module neutre au
 // lieu d'élargir la liste — c'est exactement ce qui a été fait pour
 // `translateReviews` (elle tirait DEEPL_API_KEY / ANTHROPIC_API_KEY dans le
-// bundle des pages `/contribute`), cf. `premium-limited/premium-translate.ts`.
+// bundle des pages `/contribute`), cf. `src/components/admin/premium-limited-translate.ts`.
 const ADMIN_SHIPS_TO_PROD = [
   '@/lib/admin/guard', // IS_DEV — simple constante (pages event)
   '@/lib/admin/inline-refs', // refs inline des outils publics de contribution

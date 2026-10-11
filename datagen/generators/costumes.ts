@@ -5,10 +5,11 @@
  * catalogue perso (`characters.json`) les liste déjà IMBRIQUÉS par perso ; ce
  * générateur en produit une vue PLATE (id → costume) destinée au catalogue
  * d'items admin (Editor › Item + picker de rewards), au même titre que les
- * monnaies (`goods.json`).
+ * monnaies (générateur `goods`).
  *
  * Entrées (tables du jeu) : CostumeTemplet, TextCharacter (noms), TextSystem
- * (descriptions). Sortie : data/costumes.json (id → entité).  [PROPOSITION]
+ * (descriptions). Sortie : `Record<id, CostumeEntry>`, sans fichier propre —
+ * `item-catalog` le fusionne dans le catalogue unifié `items.json`.
  */
 import { isMain } from '../lib/is-main';
 import { loadTable, num, type Row } from '../lib/tables';

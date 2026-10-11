@@ -71,7 +71,7 @@ const securityHeaders = [
 // « png » à cette liste ne répare rien — ça ne fait que changer la forme de
 // l'URL déclarée, qui reste morte. `favicon.ico` y échappe (Next le traite à
 // part). D'où les icônes servies depuis `public/`, déclarées à la main dans
-// `metadata.icons` (src/app/layout.tsx) : plus aucune convention magique.
+// `metadata.icons` (src/app/[lang]/layout.tsx) : plus aucune convention magique.
 const base = ['tsx', 'ts', 'jsx', 'js'];
 const pageExtensions = isDev ? [...base.map((e) => `dev.${e}`), ...base] : base;
 

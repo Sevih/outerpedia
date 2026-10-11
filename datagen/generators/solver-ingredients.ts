@@ -1,7 +1,8 @@
 /**
  * Ingrédients de stats par personnage pour GEAR-SOLVER — port FIDÈLE de
- * `gear-solver/data/calc-stats.mjs` (source de vérité du contrat ; ses
- * commentaires expliquent chaque choix, résumés ici).
+ * l'ancien `gear-solver/data/calc-stats.mjs`, aujourd'hui supprimé : CE module
+ * produit désormais les ingrédients (ses choix sont résumés ici), et la formule
+ * qui les consomme et fait foi est `gear-solver/packages/core/src/compose-stats.ts`.
  *
  * L'app compose au runtime le bloc de stats « sans équipement » depuis la
  * progression capturée (niveau, TransStar, codex, gifts…) ; ce module extrait
