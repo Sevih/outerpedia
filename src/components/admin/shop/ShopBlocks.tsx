@@ -29,28 +29,23 @@ import { InlineTextField } from '@/components/admin/InlineTextField';
 import { ItemInline } from '@/components/inline/ItemInline';
 import { img } from '@/lib/images';
 import { LANGS } from '@/lib/i18n/config';
+import { PERIODS, PRIORITIES, type Period, type Priority } from '@/lib/admin/shop-priorities-shape';
 import { btn, input } from '../_ui';
 export { btn };
 
 /** Langues du SITE (5) — dérivées de la source de vérité i18n. */
 export { LANGS };
 export type L = (typeof LANGS)[number];
-export type Priority = 'S' | 'A' | 'B' | 'C';
-export const PRIORITIES: Priority[] = ['S', 'A', 'B', 'C'];
-export const PERIODS = ['daily', 'weekly', 'monthly', 'one-time'] as const;
-export type Period = (typeof PERIODS)[number];
-
-/** Onglets dérivés (dans l'ordre du guide) + note de shop associée. */
-export const DERIVED_ORDER = ['guild', 'joint', 'friend', 'arena', 'stars', 'worldboss', 'survey'];
-export const DERIVED_LABEL: Record<string, string> = {
-  guild: 'Guild',
-  joint: 'Joint Challenge',
-  friend: 'Friendship',
-  arena: 'Arena',
-  stars: "Star's Memory",
-  worldboss: 'World Boss',
-  survey: 'Survey Hub',
-};
+// La forme (priorités, périodes, l'ordre et les libellés des shops dérivés) vit
+// dans `shop-priorities-shape.ts`, module PUR partagé avec quick (lot F19).
+export {
+  DERIVED_LABEL,
+  DERIVED_ORDER,
+  PERIODS,
+  PRIORITIES,
+  type Period,
+  type Priority,
+} from '@/lib/admin/shop-priorities-shape';
 
 const th = 'px-2.5 py-1.5 text-left text-xs font-medium text-content-subtle';
 const td = 'px-2.5 py-1.5 align-top';

@@ -649,3 +649,203 @@
   font-family: var(--mono);
   font-size: 11px;
 }
+
+/* ---------------------------------------------------------- les guides généraux
+   La forme servie (Premium & Limited, Free Heroes, Shop priorities) : les
+   champs d'une entrée (`.gd-field`, un libellé au-dessus ; `.gd-field-inline`,
+   le libellé devant un champ court), les entrées compactes — un produit du jeu
+   (`.gd-prod` : priorité, item, coût, limite, la note dessous), un palier
+   ordonné (`.gd-rank`) —, les sous-listes (`.gd-sub`), le segmenté S/A/B/C
+   (`.gd-prio`), la grille d'impact (`.gd-impact`), l'import (`.drop.busy`). */
+#tab-guides .gd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+#tab-guides .gd-field > .lbl {
+  margin-right: 0;
+}
+#tab-guides .gd-field.ko {
+  padding-left: 10px;
+  border-left: 2px solid var(--danger);
+}
+#tab-guides .gd-field-inline {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+#tab-guides .gd-field-hero {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#tab-guides .gd-entry > .card-head .gd-field-hero {
+  flex: 1 1 auto;
+}
+/* Le corps d'une entrée : les textes, les héros, la grille et la sous-liste
+   prennent la largeur ; les champs courts (cibles, coût, limite, un choix) se
+   rangent côte à côte sur une ligne. */
+#tab-guides .gd-entry > .gd-body,
+#tab-guides .gd-nested > .gd-body {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 24px;
+}
+#tab-guides .gd-entry > .gd-body > *,
+#tab-guides .gd-nested > .gd-body > * {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+#tab-guides .gd-entry > .gd-body > .gd-field-inline,
+#tab-guides .gd-entry > .gd-body > .gd-field-check,
+#tab-guides .gd-nested > .gd-body > .gd-field-inline,
+#tab-guides .gd-nested > .gd-body > .gd-field-check {
+  flex: 0 1 auto;
+}
+#tab-guides .gd-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line-subtle);
+}
+#tab-guides .gd-nested .gd-body {
+  gap: 12px;
+}
+#tab-guides .gd-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#tab-guides .gd-prod,
+#tab-guides .gd-rank {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-rows > :first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+#tab-guides .gd-prod.ko,
+#tab-guides .gd-rank.ko {
+  padding-left: 10px;
+  border-left: 2px solid var(--danger);
+}
+#tab-guides .gd-prod-row,
+#tab-guides .gd-rank {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+#tab-guides .gd-prod-row {
+  display: flex;
+}
+#tab-guides .gd-prod-row .gd-field-inline > .lbl,
+#tab-guides .gd-rank .gd-field-inline > .lbl {
+  display: none;
+}
+#tab-guides .gd-prod-item {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+#tab-guides .gd-prod-name {
+  display: inline-flex;
+  gap: 6px;
+  min-width: 0;
+}
+#tab-guides .gd-prod-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+#tab-guides .gd-prod-cost .ico {
+  width: 18px;
+  height: 18px;
+}
+#tab-guides .gd-prod-limit {
+  width: 9ch;
+  white-space: nowrap;
+}
+#tab-guides .gd-prod > .gd-field-text {
+  padding-left: 0;
+}
+#tab-guides .gd-rank-n {
+  width: 18px;
+  text-align: right;
+}
+#tab-guides .gd-rank .gd-field-hero {
+  flex: 1 1 200px;
+}
+/* Le segmenté S/A/B/C : un bouton par priorité, enfoncé = la priorité ; re-cliquer efface. */
+#tab-guides .gd-prio {
+  display: inline-flex;
+  height: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+#tab-guides .gd-prio button {
+  width: 30px;
+  border: 0;
+  background: transparent;
+  color: var(--content-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#tab-guides .gd-prio button + button {
+  border-left: 1px solid var(--line-subtle);
+}
+#tab-guides .gd-prio button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+#tab-guides .gd-prio button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+#tab-guides .gd-impact {
+  width: auto;
+}
+#tab-guides .gd-impact th,
+#tab-guides .gd-impact td {
+  padding: 4px 10px;
+}
+#tab-guides .gd-impact select {
+  width: 5ch;
+  height: 28px;
+  padding-right: 22px;
+}
+#tab-guides .gd-gen-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+#tab-guides .gd-gen-text > .lbl {
+  flex: none;
+  width: 18px;
+  padding-top: 8px;
+  text-align: right;
+}
+#tab-guides .gd-gen-text > .gd-text {
+  flex: 1 1 auto;
+}
+#tab-guides .gd-gen-text > .btn.icon {
+  flex: none;
+  margin-top: 2px;
+}
+/* L'import : la zone de dépôt occupée pendant la requête. */
+#tab-guides .drop.busy {
+  opacity: 0.55;
+  cursor: progress;
+}

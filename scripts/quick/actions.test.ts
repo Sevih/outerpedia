@@ -144,6 +144,8 @@ import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-stor
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import type { ItemCurated } from '@/lib/admin/item-curated-store';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
+import type { FreeHeroesData, PremiumLimitedData } from '@/lib/admin/general-guide-store';
+import type { ShopPrioritiesEditData } from '@/lib/admin/shop-priorities-store';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { Guide } from '@/lib/data/guides';
 import {
@@ -201,10 +203,12 @@ import {
   gameTableSchema,
   gameTablesState,
   gearRecoState,
+  generalGuideState,
   gitState,
   groupComics,
   guideDraftState,
   guidesOverview,
+  importContributionAction,
   itemsSearch,
   itemsState,
   monsterSheetState,
@@ -221,6 +225,7 @@ import {
   saveChangelogList,
   saveCharacterSheet,
   saveGearReco,
+  saveGeneralGuide,
   saveGuide,
   saveEffects,
   saveItems,
@@ -245,7 +250,9 @@ import {
   type GameTablesDisk,
   type GearCatalog,
   type GearRecoDeps,
+  type GeneralGuidesDeps,
   type GuidesDeps,
+  type GuidesDisk,
   type ItemChange,
   type ItemsDeps,
   type ItemsDisk,
@@ -6972,6 +6979,7 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
           newest: '2026-10',
           hidden: false,
           battle: 'Annihilator', // `bossId` : le nom du monstre
+          editable: true,
         },
       ]);
       // Un guild raid : pas éditable (contenu en code), son combat lu du `config.json` de sa version récente.
@@ -7299,6 +7307,681 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       const { fake } = deps({ addErrors: ['Version 2026-10 already exists.'] });
       const r = await addGuideVersionAction('joint-challenge', 'annihilator', '2026-10', '', fake);
       expect(r).toEqual({ ok: false, log: ['Version 2026-10 already exists.'] });
+    });
+  });
+});
+
+describe('generalGuideState, saveGeneralGuide, importContributionAction — les guides généraux, tout injecté', () => {
+  const guide = (slug: string, over: Partial<Guide> = {}): Guide =>
+    ({
+      category: 'general-guides',
+      slug,
+      title: { en: `${slug} title` },
+      description: { en: `${slug} desc` },
+      icon: 'I',
+      author: 'Shiraen',
+      updated: '2026-10-01',
+      versions: [],
+      ...over,
+    }) as Guide;
+  const PL = guide('premium-limited', { updated: '2026-10-07' });
+  const FREE = guide('free-heroes-start-banner');
+  const SHOP = guide('shop-purchase-priorities');
+  const FAQ = guide('beginner-faq');
+  const JC = guide('annihilator', {
+    category: 'joint-challenge',
+    bossId: '4318062',
+  } as Partial<Guide>);
+  const ROSTER = [
+    { id: '2000055', name: 'Aer', element: 'fire', class: 'striker', subClass: '', rarity: 3 },
+    { id: '2000002', name: 'Alice', element: 'earth', class: 'mage', subClass: '', rarity: 3 },
+    { id: '2000009', name: 'Mene', element: 'water', class: 'healer', subClass: '', rarity: 2 },
+  ];
+  const STEPS: Record<number, { value: number; label: string }[]> = {
+    3: [
+      { value: 3, label: '3★' },
+      { value: 4, label: '4★' },
+      { value: 6, label: '5★' },
+      { value: 9, label: '6★' },
+    ],
+    2: [
+      { value: 2, label: '2★' },
+      { value: 3, label: '3★' },
+      { value: 4, label: '4★' },
+      { value: 6, label: '5★' },
+      { value: 9, label: '6★' },
+    ],
+  };
+  const impact = () =>
+    Object.fromEntries(['3', '4', '5', '6'].map((s) => [s, { pve: '', pvp: '' }])) as Record<
+      '3' | '4' | '5' | '6',
+      { pve: string; pvp: string }
+    >;
+  const emptyOrder = () => ({ first: [], second: [], third: [], transcend: [] });
+  const PL_DATA: PremiumLimitedData = {
+    reviews: {
+      premium: [
+        {
+          name: 'Aer',
+          review: { en: 'Fast {B/BT_STAT|ST_SPEED}', fr: 'Vite' },
+          recommendedPve: '4 to 5',
+          recommendedPvp: 'Any',
+          impact: { ...impact(), '5': { pve: '4', pvp: '3' } },
+        },
+      ],
+      limited: [],
+    },
+    priorities: {
+      premium: { ...emptyOrder(), first: [{ name: 'Aer', stars: 3 }] },
+      limited: emptyOrder(),
+    },
+  };
+  const FREE_DATA: FreeHeroesData = {
+    sources: [
+      {
+        source: { en: 'Start Dash' },
+        entries: [
+          { names: ['Aer', 'Alice'], pickType: 'one' as const, reason: { en: 'Pick one' } },
+        ],
+      },
+    ],
+  };
+  const SHOP_DATA: ShopPrioritiesEditData = {
+    derived: [
+      {
+        key: 'guild',
+        currency: { name: { en: 'Guild Coin' }, icon: 'TI_Guild' },
+        rows: [
+          {
+            key: 'guild/gold-10000/daily',
+            name: { en: '10,000 Gold' },
+            icon: 'CM_TopMenu_Gold',
+            iconKind: 'item' as const,
+            grade: 'normal',
+            gives: 10000,
+            cost: 20,
+            limit: { count: 5, period: 'daily' },
+            priority: 'A' as const,
+          },
+          {
+            key: 'guild/item-20001/daily',
+            name: { en: 'Sandwich' },
+            icon: 'TI_Item_Growth_Potion_01',
+            iconKind: 'item' as const,
+            grade: 'normal',
+            gives: 1,
+            cost: 10,
+            limit: { count: 0, period: 'daily' },
+          },
+        ],
+      },
+    ],
+    editorial: {
+      shopNotes: { joint: { en: 'Save purchases' } },
+      textShops: { supply: { paragraphs: [{ en: 'Buy the module' }] } },
+      eventItems: [{ name: 'Cosmetic', priority: 'S' as const, label: { en: 'Cosmetic' } }],
+      resourceItems: [],
+    },
+  };
+  const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
+  const PL_DIR = 'src/app/[lang]/guides/_contents/general-guides/premium-limited';
+  const SHOP_DIR = 'src/app/[lang]/guides/_contents/general-guides/shop-purchase-priorities';
+
+  function deps(
+    over: {
+      dirty?: Record<string, string[]>;
+      errors?: string[];
+      imported?: { ok: true; summary: string } | { ok: false; errors: string[] };
+      stamped?: boolean;
+      loadThrows?: boolean;
+    } = {},
+  ) {
+    const calls = {
+      savePL: [] as unknown[],
+      saveFree: [] as unknown[],
+      saveShop: [] as unknown[],
+      imports: [] as unknown[],
+      dirty: [] as string[],
+      stamp: [] as [string, string][],
+      git: [] as [string[], string][],
+    };
+    const fake: GeneralGuidesDeps = {
+      guides: () => [PL, FREE, SHOP, FAQ, JC],
+      roster: () => ROSTER,
+      refs: () => ({}) as InlineRefs,
+      steps: (rarity) => STEPS[rarity] ?? [],
+      loadPremiumLimited: () => {
+        if (over.loadThrows) throw new Error('premium-reviews.json illisible');
+        return clone(PL_DATA);
+      },
+      loadFreeHeroes: () => clone(FREE_DATA),
+      loadShopPriorities: () => clone(SHOP_DATA),
+      savePremiumLimited: async (d) => {
+        calls.savePL.push(d);
+        return over.errors ?? [];
+      },
+      saveFreeHeroes: async (d) => {
+        calls.saveFree.push(d);
+        return over.errors ?? [];
+      },
+      saveShopPriorities: async (d) => {
+        calls.saveShop.push(d);
+        return over.errors ?? [];
+      },
+      importContribution: async (raw) => {
+        calls.imports.push(raw);
+        return (
+          over.imported ?? {
+            ok: true,
+            summary: 'Premium & Limited — review › premium › Aer: edited.',
+          }
+        );
+      },
+      dirty: (path) => {
+        calls.dirty.push(path);
+        return over.dirty?.[path] ?? [];
+      },
+      stamp: async (path, date) => {
+        calls.stamp.push([path, date]);
+        return over.stamped ?? true;
+      },
+      today: () => '2026-10-11',
+      commitPaths: (paths, message) => {
+        calls.git.push([paths, message]);
+        return { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, fake };
+  }
+
+  describe('generalGuideState', () => {
+    it('un slug inconnu, un général dont le contenu est en code, des données illisibles : `error`', () => {
+      const { fake } = deps();
+      expect(generalGuideState('nope', fake)).toEqual({
+        error: 'guide général non éditable, contenu en code : nope',
+      });
+      expect(generalGuideState('beginner-faq', fake)).toEqual({
+        error: 'guide général non éditable, contenu en code : beginner-faq',
+      });
+      const gone = deps();
+      gone.fake.guides = () => [FREE];
+      expect(generalGuideState('premium-limited', gone.fake)).toEqual({
+        error: 'guide inconnu : general-guides/premium-limited',
+      });
+      expect(generalGuideState('premium-limited', deps({ loadThrows: true }).fake)).toEqual({
+        error: 'données illisibles : premium-reviews.json illisible',
+      });
+    });
+
+    it('Premium & Limited : ce que le scan en sait, la forme, les données du store, les paliers de chaque perso', () => {
+      const out = generalGuideState('premium-limited', deps().fake);
+      if ('error' in out) throw new Error(out.error);
+      expect(out.guide).toEqual({
+        category: 'general-guides',
+        slug: 'premium-limited',
+        label: 'General Guides',
+        title: 'premium-limited title',
+        updated: '2026-10-07',
+        icon: 'I',
+        author: 'Shiraen',
+        hidden: false,
+        versions: [],
+      });
+      expect(out.spec.kind).toBe('premium-limited');
+      expect(out.spec.versioned).toBe(false);
+      expect(out.spec.tabs.map((t) => t.id)).toEqual(['premium', 'limited']);
+      expect(out.data).toEqual(PL_DATA);
+      expect(out.options.roster.map((c) => c.name)).toEqual(['Aer', 'Alice', 'Mene']);
+      expect(out.options.steps['2000055'].map((s) => s.label)).toEqual(['3★', '4★', '5★', '6★']);
+      expect(out.options.steps['2000009']).toHaveLength(5);
+      expect(out.langs.shown).toHaveLength(6);
+      expect(out.siteBase).toMatch(/\/en\/guides$/);
+    });
+
+    it('Free Heroes et Shop : leur forme sur leurs données ; pas de paliers', () => {
+      const free = generalGuideState('free-heroes-start-banner', deps().fake);
+      if ('error' in free) throw new Error(free.error);
+      expect(free.spec.tabs.map((t) => t.id)).toEqual(['sources']);
+      expect(free.data).toEqual(FREE_DATA);
+      expect(free.options.steps).toEqual({});
+      const shop = generalGuideState('shop-purchase-priorities', deps().fake);
+      if ('error' in shop) throw new Error(shop.error);
+      // La note de `joint` : son shop n'est pas dans les dérivés, elle a son onglet.
+      expect(shop.spec.tabs.map((t) => t.id)).toEqual([
+        'guild',
+        'event',
+        'resource',
+        'supply',
+        'joint',
+      ]);
+      expect(shop.data).toEqual(SHOP_DATA);
+    });
+
+    it('la vue d’ensemble : un général à fragment éditable a un bouton, les onze autres sont « contenu en code »', () => {
+      const disk: GuidesDisk = {
+        guides: () => [PL, FAQ, JC],
+        draft: () => ({ intro: { en: '' }, versions: [] }),
+        config: () => undefined,
+        groups: () => [],
+        dungeons: () => [],
+        monsters: () => [{ id: '4318062', label: 'Annihilator' }],
+        roster: () => ROSTER,
+        refs: () => ({}) as InlineRefs,
+        pins: async () => [],
+      };
+      const by = Object.fromEntries(guidesOverview(disk).categories.map((c) => [c.slug, c]));
+      expect(by['general-guides'].editable).toBe(true);
+      expect(by['general-guides'].guides.map((g) => [g.slug, g.editable])).toEqual([
+        ['premium-limited', true],
+        ['beginner-faq', false],
+      ]);
+      expect(by['joint-challenge'].guides[0].editable).toBe(true);
+    });
+  });
+
+  describe('saveGeneralGuide', () => {
+    it('`was` différent du disque : `stale`, rien n’est écrit ni committé', async () => {
+      const { calls, fake } = deps();
+      const was = clone(PL_DATA);
+      was.reviews.premium[0].review.en = 'autre';
+      const r = await saveGeneralGuide('premium-limited', { data: clone(PL_DATA), was }, fake);
+      expect(r).toMatchObject({ ok: false, stale: true, written: false });
+      expect(r.refused).toEqual([
+        { tab: 'guide', reason: 'le disque a changé depuis le chargement' },
+      ]);
+      expect(calls.savePL).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('les refus sont SITUÉS à l’onglet et à la clé du champ — et rien n’est écrit', async () => {
+      const { calls, fake } = deps();
+      const data = clone(PL_DATA);
+      data.reviews.premium[0].review = { en: 'Bad {B/NOPE_TAG}' };
+      data.reviews.premium[0].impact['4'].pve = '7';
+      data.reviews.limited.push({
+        name: 'Nobody',
+        review: { en: 'Unknown hero' },
+        recommendedPve: '',
+        recommendedPvp: '',
+        impact: impact(),
+      });
+      data.priorities.premium.first[0].stars = 5;
+      data.priorities.limited.transcend.push({ name: 'Alice', stars: 9 });
+      const r = await saveGeneralGuide('premium-limited', { data, was: clone(PL_DATA) }, fake);
+      expect(r.ok).toBe(false);
+      expect(r.refused).toEqual([
+        {
+          tab: 'premium',
+          key: 'reviews.premium.0.review',
+          reason: expect.stringMatching(/tag inconnu \{B\/NOPE_TAG\}/),
+        },
+        {
+          tab: 'premium',
+          key: 'reviews.premium.0.impact',
+          reason: 'impact 4★ : une note de 1 à 5, ou rien',
+        },
+        {
+          tab: 'premium',
+          key: 'priorities.premium.first.0.stars',
+          reason: '« 5 » n’est pas un palier plein — attendu 3 (3★), 4 (4★), 6 (5★), 9 (6★)',
+        },
+        {
+          tab: 'limited',
+          key: 'reviews.limited.0.name',
+          reason: 'hors du roster : « Nobody »',
+        },
+      ]);
+      expect(r.log.filter((l) => l.startsWith('REFUSÉ'))).toHaveLength(4);
+      expect(calls.savePL).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('un perso « pas encore sorti » passe sans le roster ; la review anglaise reste requise', async () => {
+      const { calls, fake } = deps({ dirty: { [PL_DIR]: [`${PL_DIR}/premium-reviews.json`] } });
+      const data = clone(PL_DATA);
+      data.reviews.limited.push({
+        name: 'Future Hero',
+        unreleased: true,
+        review: { en: 'Soon' },
+        recommendedPve: '',
+        recommendedPvp: '',
+        impact: impact(),
+      } as never);
+      const r = await saveGeneralGuide('premium-limited', { data, was: clone(PL_DATA) }, fake);
+      expect(r.refused).toEqual([]);
+      expect(r.ok).toBe(true);
+      const sent = calls.savePL[0] as typeof PL_DATA & {
+        reviews: { limited: { name: string; unreleased?: boolean }[] };
+      };
+      expect(sent.reviews.limited[0]).toMatchObject({ name: 'Future Hero', unreleased: true });
+      // Les reviews partent normalisées (la grille d'impact entière), les priorités telles quelles.
+      expect(Object.keys(sent.reviews.limited[0].impact)).toEqual(['3', '4', '5', '6']);
+      expect(sent.priorities).toEqual(PL_DATA.priorities);
+
+      const noEn = clone(PL_DATA);
+      noEn.reviews.premium[0].review = { fr: 'Sans anglais' };
+      const r2 = await saveGeneralGuide(
+        'premium-limited',
+        { data: noEn, was: clone(PL_DATA) },
+        fake,
+      );
+      expect(r2.refused[0]).toMatchObject({ tab: 'premium', key: 'reviews.premium.0.review' });
+    });
+
+    it('écrit par le store, re-date le meta, et committe les fichiers qui ont bougé PLUS le meta — un commit', async () => {
+      const { calls, fake } = deps({
+        dirty: {
+          [PL_DIR]: [`${PL_DIR}/premium-reviews.json`, `${PL_DIR}/premium-priorities.json`],
+        },
+      });
+      const data = clone(PL_DATA);
+      data.reviews.premium[0].review.en = 'Faster {B/BT_STAT|ST_SPEED}';
+      const r = await saveGeneralGuide('premium-limited', { data, was: clone(PL_DATA) }, fake);
+      expect(r).toMatchObject({ ok: true, written: true, stale: false, refused: [] });
+      expect(calls.dirty).toEqual([PL_DIR]);
+      expect(calls.stamp).toEqual([[`${PL_DIR}/meta.json`, '2026-10-11']]);
+      expect(calls.git).toEqual([
+        [
+          [
+            `${PL_DIR}/premium-reviews.json`,
+            `${PL_DIR}/premium-priorities.json`,
+            `${PL_DIR}/meta.json`,
+          ],
+          'chore(guides): general-guides/premium-limited',
+        ],
+      ]);
+      expect(r.log).toContain('meta.updated : 2026-10-11');
+    });
+
+    it('rien n’a bougé sur le disque : ni stamp, ni commit — et ce n’est pas une erreur', async () => {
+      const { calls, fake } = deps();
+      const r = await saveGeneralGuide(
+        'premium-limited',
+        { data: clone(PL_DATA), was: clone(PL_DATA) },
+        fake,
+      );
+      expect(r).toMatchObject({ ok: true, written: false });
+      expect(r.log).toContain('Rien à enregistrer : le disque porte déjà ces valeurs.');
+      expect(calls.savePL).toHaveLength(1);
+      expect(calls.stamp).toEqual([]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('Free Heroes : les sources contrôlées (libellé anglais, au moins un héros du roster, le type de choix), la raison vide écrite vide', async () => {
+      const { calls, fake } = deps();
+      const data = clone(FREE_DATA);
+      data.sources.push({
+        source: { fr: 'Sans anglais' },
+        entries: [{ names: ['Aer', 'Nobody'], pickType: 'deux' as never, reason: { en: '' } }],
+      });
+      const r = await saveGeneralGuide(
+        'free-heroes-start-banner',
+        { data, was: clone(FREE_DATA) },
+        fake,
+      );
+      expect(r.refused).toEqual([
+        {
+          tab: 'sources',
+          key: 'sources.1.source',
+          reason: 'pas de texte « en », la langue de repli',
+        },
+        { tab: 'sources', key: 'sources.1.entries.0.names', reason: 'hors du roster : « Nobody »' },
+        { tab: 'sources', key: 'sources.1.entries.0.pickType', reason: 'choix inconnu : « deux »' },
+      ]);
+      expect(calls.saveFree).toEqual([]);
+
+      const ok = deps({
+        dirty: {
+          'src/app/[lang]/guides/_contents/general-guides/free-heroes-start-banner': ['x.json'],
+        },
+      });
+      const good = clone(FREE_DATA);
+      good.sources[0].entries.push({ names: ['Mene'], pickType: 'all', reason: { en: '' } });
+      const r2 = await saveGeneralGuide(
+        'free-heroes-start-banner',
+        { data: good, was: clone(FREE_DATA) },
+        ok.fake,
+      );
+      expect(r2.ok).toBe(true);
+      expect(ok.calls.saveFree[0]).toEqual({
+        sources: [
+          {
+            source: { en: 'Start Dash' },
+            entries: [
+              { names: ['Aer', 'Alice'], pickType: 'one', reason: { en: 'Pick one' } },
+              { names: ['Mene'], pickType: 'all', reason: { en: '' } },
+            ],
+          },
+        ],
+      });
+    });
+
+    it('Shop : l’overlay tiré des lignes (une ligne sans priorité ni note en sort), l’éditorial contrôlé, les TROIS fichiers dans le commit', async () => {
+      const { calls, fake } = deps({
+        dirty: {
+          [SHOP_DIR]: [`${SHOP_DIR}/shop-editorial.json`],
+          'data/curated/shop-priorities.json': ['data/curated/shop-priorities.json'],
+          'data/generated/shop-priorities.json': ['data/generated/shop-priorities.json'],
+        },
+      });
+      const data = clone(SHOP_DATA);
+      data.derived[0].rows[0].priority = undefined;
+      data.derived[0].rows[1] = {
+        ...data.derived[0].rows[1],
+        priority: 'S',
+        notes: { en: 'Daily' },
+      };
+      data.editorial.shopNotes.guild = { en: 'Guild note' };
+      data.editorial.eventItems.push({
+        name: 'Manual',
+        priority: 'A',
+        gives: 2,
+        cost: { currency: 'Event Coin', amount: 300 },
+        limit: { count: 1, period: 'one-time' },
+      } as never);
+      const r = await saveGeneralGuide(
+        'shop-purchase-priorities',
+        { data, was: clone(SHOP_DATA) },
+        fake,
+      );
+      expect(r).toMatchObject({ ok: true, written: true, refused: [] });
+      expect(calls.saveShop).toEqual([
+        {
+          overlay: { 'guild/item-20001/daily': { priority: 'S', notes: { en: 'Daily' } } },
+          editorial: {
+            shopNotes: { joint: { en: 'Save purchases' }, guild: { en: 'Guild note' } },
+            textShops: { supply: { paragraphs: [{ en: 'Buy the module' }] } },
+            eventItems: [
+              { name: 'Cosmetic', priority: 'S', label: { en: 'Cosmetic' } },
+              {
+                name: 'Manual',
+                priority: 'A',
+                gives: 2,
+                cost: { currency: 'Event Coin', amount: 300 },
+                limit: { count: 1, period: 'one-time' },
+              },
+            ],
+            resourceItems: [],
+          },
+        },
+      ]);
+      expect(calls.dirty).toEqual([
+        SHOP_DIR,
+        'data/curated/shop-priorities.json',
+        'data/generated/shop-priorities.json',
+      ]);
+      expect(calls.git).toEqual([
+        [
+          [
+            `${SHOP_DIR}/shop-editorial.json`,
+            'data/curated/shop-priorities.json',
+            'data/generated/shop-priorities.json',
+            `${SHOP_DIR}/meta.json`,
+          ],
+          'chore(guides): general-guides/shop-purchase-priorities',
+        ],
+      ]);
+
+      const bad = clone(SHOP_DATA);
+      bad.derived[0].rows[0].priority = 'Z' as never;
+      bad.editorial.eventItems[0] = {
+        ...bad.editorial.eventItems[0],
+        limit: { count: 1, period: 'yearly' },
+      } as never;
+      bad.editorial.textShops.supply.paragraphs[0] = { fr: 'Sans anglais' };
+      const r2 = await saveGeneralGuide(
+        'shop-purchase-priorities',
+        { data: bad, was: clone(SHOP_DATA) },
+        fake,
+      );
+      expect(r2.refused).toEqual([
+        {
+          tab: 'guild',
+          key: 'derived.0.rows.0.priority',
+          reason: 'priorité inconnue : « Z » (S, A, B, C)',
+        },
+        {
+          tab: 'event',
+          key: 'editorial.eventItems.0.limit',
+          reason: 'limite : période inconnue (daily, weekly, monthly, one-time)',
+        },
+        {
+          tab: 'supply',
+          key: 'editorial.textShops.supply.paragraphs.0',
+          reason: 'pas de texte « en », la langue de repli',
+        },
+      ]);
+      expect(calls.saveShop).toHaveLength(1);
+    });
+
+    it('un refus du store est rendu situé, sans stamp ni commit', async () => {
+      const pl = deps({ errors: ['Limited/second #2: unknown hero “X”.'] });
+      const r = await saveGeneralGuide(
+        'premium-limited',
+        { data: clone(PL_DATA), was: clone(PL_DATA) },
+        pl.fake,
+      );
+      expect(r.refused).toEqual([
+        {
+          tab: 'limited',
+          key: 'priorities.limited.second.1',
+          reason: 'Limited/second #2: unknown hero “X”.',
+        },
+      ]);
+      expect(pl.calls.git).toEqual([]);
+      const free = deps({ errors: ['Source 2, entry 1: at least one hero is required.'] });
+      const r2 = await saveGeneralGuide(
+        'free-heroes-start-banner',
+        { data: clone(FREE_DATA), was: clone(FREE_DATA) },
+        free.fake,
+      );
+      expect(r2.refused[0]).toMatchObject({ tab: 'sources', key: 'sources.1.entries.0' });
+      const shop = deps({
+        errors: ['Text shop “supply”, paragraph 1: EN text is required.', 'autre'],
+      });
+      const r3 = await saveGeneralGuide(
+        'shop-purchase-priorities',
+        { data: clone(SHOP_DATA), was: clone(SHOP_DATA) },
+        shop.fake,
+      );
+      expect(r3.refused).toEqual([
+        {
+          tab: 'supply',
+          key: 'editorial.textShops.supply.paragraphs.0',
+          reason: 'Text shop “supply”, paragraph 1: EN text is required.',
+        },
+        { tab: 'guide', reason: 'autre' },
+      ]);
+      expect(shop.calls.stamp).toEqual([]);
+    });
+
+    it('un slug inconnu ou dont le contenu est en code : refusé sans rien lire', async () => {
+      const { calls, fake } = deps();
+      expect((await saveGeneralGuide('beginner-faq', {}, fake)).log).toEqual([
+        'guide général non éditable, contenu en code : beginner-faq.',
+      ]);
+      const gone = deps();
+      gone.fake.guides = () => [];
+      expect((await saveGeneralGuide('premium-limited', {}, gone.fake)).log).toEqual([
+        'guide inconnu : general-guides/premium-limited.',
+      ]);
+      expect(calls.savePL).toEqual([]);
+    });
+  });
+
+  describe('importContributionAction', () => {
+    const REVIEW = {
+      contributionVersion: 1,
+      kind: 'premium-limited-review',
+      mode: 'edit',
+      payload: { bucket: 'premium', entry: { name: 'Aer', review: { en: 'Edited' } } },
+    };
+
+    it('une contribution illisible : refusée sans appeler l’import', async () => {
+      const { calls, fake } = deps();
+      const r = await importContributionAction({ nope: true }, fake);
+      expect(r.ok).toBe(false);
+      expect(r.imported).toBe(false);
+      expect(r.log[0]).toMatch(/^Contribution illisible : unrecognized JSON/);
+      expect(calls.imports).toEqual([]);
+    });
+
+    it('les refus de l’import sont rendus tels quels, rien n’est committé', async () => {
+      const { calls, fake } = deps({
+        imported: { ok: false, errors: ['review has no hero name.'] },
+      });
+      const r = await importContributionAction(REVIEW, fake);
+      expect(r).toMatchObject({
+        ok: false,
+        imported: false,
+        kind: 'premium-limited-review',
+        errors: ['review has no hero name.'],
+      });
+      expect(r.log).toContain('REFUSÉ — review has no hero name.');
+      expect(calls.imports).toEqual([REVIEW]);
+      expect(calls.git).toEqual([]);
+    });
+
+    it('une review : l’import TEL QUEL, le dossier du guide lu de git, le meta re-daté, UN commit `chore(guides): import <kind>`', async () => {
+      const { calls, fake } = deps({ dirty: { [PL_DIR]: [`${PL_DIR}/premium-reviews.json`] } });
+      const r = await importContributionAction(REVIEW, fake);
+      expect(r).toMatchObject({ ok: true, imported: true, kind: 'premium-limited-review' });
+      expect(r.summary).toMatch(/Aer: edited/);
+      expect(calls.dirty).toEqual([PL_DIR]);
+      expect(calls.stamp).toEqual([[`${PL_DIR}/meta.json`, '2026-10-11']]);
+      expect(calls.git).toEqual([
+        [
+          [`${PL_DIR}/premium-reviews.json`, `${PL_DIR}/meta.json`],
+          'chore(guides): import premium-limited-review',
+        ],
+      ]);
+    });
+
+    it('des pros / cons : le curé des persos lu de git, pas de stamp, le commit', async () => {
+      const { calls, fake } = deps({
+        dirty: { 'data/curated/characters.json': ['data/curated/characters.json'] },
+        imported: { ok: true, summary: 'Character — pros/cons › Aer: 2 pro(s), 1 con(s).' },
+      });
+      const r = await importContributionAction(
+        {
+          kind: 'character-pros-cons',
+          payload: { id: '2000055', prosCons: { pros: [], cons: [] } },
+        },
+        fake,
+      );
+      expect(r.ok).toBe(true);
+      expect(calls.stamp).toEqual([]);
+      expect(calls.git).toEqual([
+        [['data/curated/characters.json'], 'chore(guides): import character-pros-cons'],
+      ]);
+    });
+
+    it('rien n’a bougé après l’import : rien à committer, et ce n’est pas une erreur', async () => {
+      const { calls, fake } = deps();
+      const r = await importContributionAction(REVIEW, fake);
+      expect(r).toMatchObject({ ok: true, imported: true });
+      expect(r.log).toContain('Rien à committer : le disque portait déjà cette contribution.');
+      expect(calls.git).toEqual([]);
     });
   });
 });

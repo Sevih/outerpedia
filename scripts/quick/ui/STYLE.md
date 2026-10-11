@@ -1033,19 +1033,23 @@ le dossier du sprite quand ce n'est pas `equipment`.
 
 ## Guides — croquis
 
-### Guides (`wide`, fait — F18)
+### Guides (`wide`, fait — F18 ; guides généraux et import, F19)
 
 La vue d'ensemble des guides du site et l'éditeur des guides de boss (les
 sept catégories de `GUIDE_SPECS`), l'éditeur « Guide editor » de l'admin sans
-ses catégories mortes. Croquis du rendu :
+ses catégories mortes — et, sous la même coquille, les trois guides généraux à
+fragment éditable et l'import de contribution (F19, plus bas). Croquis du
+rendu :
 
 ```
 .head  Guides — Les guides de boss du site, par catégorie : un clic ouvre le guide… la date du guide est re-datée dans le même commit…
 LA VUE D'ENSEMBLE (#gd-overview, `#guides`)
 .card.pad  .form : [Chercher 30ch « début d'un mot du titre ou du slug »] [☐ cachés] « 93 guides dans 10 catégories · 57 cachés »
    une .card.gd-cat par catégorie du site, dans SON ordre, VIVANTE (au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas)
-     card-head : le libellé anglais · le slug (chasse fixe) · badge « N guides » · badge « N cachés » · badge warn « contenu en code » (une catégorie que quick n'édite pas : guild raid, tour, monad, autres, généraux)
-     table : Guide (titre = un bouton pour un guide éditable, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », ou « plat ») | État (badges « caché », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
+.card.pad  .form : .drop « Importer une contribution — glisser ici (ou cliquer) le JSON d'un outil /contribute ou d'une review de Shiraen… » (F19 : `POST /api/guides/import`, le journal dit l'issue, la vue d'ensemble se relit ; un fichier qui n'est pas du JSON est refusé sans appel)
+   une .card.gd-cat par catégorie du site, dans SON ordre, VIVANTE (au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas)
+     card-head : le libellé anglais · le slug (chasse fixe) · badge « N guides » · badge « N cachés » · badge warn « contenu en code » (une catégorie dont quick n'édite AUCUN guide : guild raid, tour, monad, autres)
+     table : Guide (titre = un bouton pour un guide éditable — `editable` de la LIGNE : les sept catégories de `GUIDE_SPECS`, et trois généraux sur quatorze —, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », ou « plat ») | État (badges « caché », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
      une ligne « contenu en code » est atténuée (pas de bouton) ; une ligne cachée l'est davantage
    .empty « Aucun guide ne correspond. »
 LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
@@ -1075,12 +1079,21 @@ LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
 #gd-panel — Vidéos : .card « Vidéos » badge du compte … lien « ajouter dans Vidéos » (l'onglet Vidéos, la cible posée sur ce guide et cette version) ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
 en tête du panneau : les refus qui ne visent aucun onglet (le disque a changé, la forme) en rouge
 le hash : `#guides` (la vue d'ensemble), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas
+UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour un lien ou le banc) : la même coquille — en-tête (titre, badge « General Guides », cat/slug, la date), savebar, .gd-tabs — mais les sous-onglets, les cartes et les champs viennent de la FORME servie (`spec.tabs` : onglets › blocs › champs, cf. `general-guide-form.ts`) ; la page ne connaît aucun des trois guides
+   un bloc = une .card.gd-card (card-head : son libellé, son indication, badge du compte) : un texte seul (LE TEXTE), des textes (une rangée numérotée par texte, ✕, [＋ paragraphe]), ou une liste d'entrées
+   une entrée : une CARTE (.gd-entry — en tête le perso de l'entrée en tuile 44 px + [Changer…], ou « Source n » / « Item n » ; ✕ ; le corps : les champs, les courts côte à côte) ; ou une LIGNE compacte — un produit du jeu (.gd-prod : [S|A|B|C] (.gd-prio, re-cliquer efface) · icône + nom · coût avec l'icône de la monnaie · « 5 / daily » … [＋ note] ; la note ouverte = LE TEXTE sous la ligne), un palier de priorité (.gd-rank : rang · tuile du perso [Changer…] · [Palier ▾ : les crans PLEINS du perso, 3★ 4★ 5★ 6★] ↑ ↓ ✕)
+   les champs : text (LE TEXTE, en ligne pour un libellé) · hero (tuile + [Changer…], le picker partagé en choix unique ; « pas encore sorti » coché = un champ nu pour le nom) · heroes (tuiles ✕ [＋ héros], le picker en multi) · select · stars · string · number · check · priority · impact (table 3★→6★ × PvE / PvP, un select — 1 à 5 — par case) · cost (montant + monnaie) · limit (compte + période, la période éteinte sans compte) · product (lecture)
+   une sous-liste (.gd-sub : les entrées d'une source — chacune une .gd-nested avec ✕, [＋ entrée]) ; [＋ héros] (une liste par perso : le picker pose l'entrée), [＋ source], [＋ item], [＋ paragraphe] ; [Traduire] en pied d'onglet
+   Premium & Limited : [Premium] [Limited] — Reviews (cartes) puis 1er choix · 2e choix · 3e choix · Priorité de transcendance (lignes ordonnées) ; Free Heroes : [Sources] ; Shop : [Guild] [Joint Challenge] [Friendship] [Arena] [Star's Memory] [World Boss] [Survey Hub] [Event] [General / Resource] [Supply Module] [Rico Secret] (+ un onglet pour la note d'un shop absent de la rotation)
+   un refus est situé à la CLÉ du champ (le chemin dans les données : `reviews.premium.2.review`) : le champ cerclé, son message dessous, le point rouge sur l'onglet
 ```
 
 Tout ce qui se lit vient de `GET /api/guides` (`guidesOverview` : par catégorie
 vivante — ou toutes avec `?hidden=1` —, ses guides triés comme le site, le
-combat en clair, `editable`, les comptes, `siteBase`), relu à chaque venue sur
-la vue d'ensemble, et de `GET /api/guides/state?cat=&slug=`
+combat en clair, `editable` par ligne, les comptes, `siteBase`), relu à chaque
+venue sur la vue d'ensemble, de `GET /api/guides/general?slug=`
+(`generalGuideState` : la forme, les données du store, le roster, les paliers
+pleins par perso, les refs, les langues — F19), et de `GET /api/guides/state?cat=&slug=`
 (`guideDraftState` : le brouillon de l'admin — `loadGuideDraft` —, les textes
 de meta éditables, la `spec`, les options des pickers selon elle, les `refs`,
 les pins en lecture, les langues) — la page n'en recopie aucune règle. Les
@@ -1102,9 +1115,20 @@ description, `hidden`), ce qui a bougé lu de git, le stamp de `meta.updated`
 si un fichier hors archive a bougé, UN commit `chore(guides): <cat>/<slug>`
 du dossier modifié et du meta ; rien n'a bougé : rien n'est committé. « ＋
 version » (`POST /api/guides/version`) écrit le dossier SANS committer, refuse
-tant que des changements attendent, puis propose le Journal du site. Un autre
-guide, ou quitter l'onglet, avec des changements en attente : sur confirmation
-(`canLeave`). Propres à l'onglet, dans `tabs/guides.css` : `.gd-cat`,
+tant que des changements attendent, puis propose le Journal du site. Un guide
+GÉNÉRAL envoie ses données entières à `POST /api/guides/general`
+(`saveGeneralGuide` : `was` contre le store, chaque champ contrôlé sur la
+forme — textes et tags, noms dans le roster sauf un perso « pas encore
+sorti », paliers pleins, priorités, grilles —, un écart situé à sa clé, puis
+le store de l'admin, le stamp, UN commit `chore(guides): general-guides/<slug>`
+— pour les shops, le curé, le dérivé et l'éditorial dedans) ; la savebar y
+compte les ONGLETS qui diffèrent du disque, les données nettoyées comme le
+store les écrirait (un texte facultatif vide, une case décochée ne comptent
+pas). L'import (`POST /api/guides/import`, `importContributionAction`) remet
+le JSON tel quel à `importContribution` de l'admin puis committe ce qu'il a
+écrit, `chore(guides): import <kind>`. Un autre guide, ou quitter l'onglet,
+avec des changements en attente : sur confirmation (`canLeave`). Propres à
+l'onglet, dans `tabs/guides.css` : `.gd-cat`,
 `.gd-open`, `.gd-slug`, `.gd-row`, `.gd-state`, `.gd-site`, `.gd-head`,
 `.gd-id`, `.gd-traits`, `.gd-pv-lang`, `.gd-seg` (le segmenté, recopié),
 `.gd-tabs`, `.gd-versions`, `.gd-vtabs`, `.gd-addv`, `.gd-note`, `.gd-stack`,
@@ -1113,7 +1137,11 @@ guide, ou quitter l'onglet, avec des changements en attente : sur confirmation
 sous `#tab-guides`), `.gd-battle`, `.gd-dungeons`, `.gd-pin`, `.gd-pn`,
 `.gd-heroes`, `.gd-hero`, `.gd-noface`, `.gd-slots`, `.gd-slot`, `.gd-group`,
 `.gd-videos`, `.gd-vt` ; pour les pickers en lignes, sous `.hp-modal` :
-`.gd-pico`, `.gd-pk`, `.gd-pname`, `.gd-pid`.
+`.gd-pico`, `.gd-pk`, `.gd-pname`, `.gd-pid` ; pour les guides généraux (F19) :
+`.gd-field` (`-inline`, `-text`, `-hero`, `-check`), `.gd-entry`, `.gd-sub`,
+`.gd-nested`, `.gd-rows`, `.gd-prod` (`-row`, `-item`, `-name`, `-cost`,
+`-limit`), `.gd-rank` (`-n`), `.gd-prio`, `.gd-impact`, `.gd-gen-text`, et
+`.drop.busy` pour l'import.
 
 ## Outils — croquis
 

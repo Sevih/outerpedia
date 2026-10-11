@@ -4,6 +4,7 @@ import { Window } from 'happy-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { newEffectId } from '@/lib/admin/effect-catalog';
 import { effectHaystack, effectMatches } from '@/lib/admin/effect-search';
+import { generalGuideForm } from '@/lib/admin/general-guide-form';
 import type { GitState } from './actions';
 import { READ_ONLY_POSTS, openTab, tabsOf as menuTabs } from './shot.mjs';
 import { UI_TYPES, assemblePage, resolveUiFile, tabsOf } from './ui-serve';
@@ -10263,7 +10264,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       {
         slug: 'general-guides',
         label: 'General Guides',
-        editable: false,
+        editable: true,
         versioned: false,
         hidden: 0,
         guides: [
@@ -10274,6 +10275,34 @@ describe('Guides — la page, sur le vrai markup', () => {
             versions: 0,
             hidden: false,
             battle: '',
+            editable: false,
+          },
+          {
+            slug: 'premium-limited',
+            title: 'Premium & Limited Guide',
+            updated: '2026-10-07',
+            versions: 0,
+            hidden: false,
+            battle: '',
+            editable: true,
+          },
+          {
+            slug: 'free-heroes-start-banner',
+            title: 'Free Heroes & Starter Banners',
+            updated: '2026-10-02',
+            versions: 0,
+            hidden: false,
+            battle: '',
+            editable: true,
+          },
+          {
+            slug: 'shop-purchase-priorities',
+            title: 'Shop Purchase Priorities',
+            updated: '2026-10-01',
+            versions: 0,
+            hidden: false,
+            battle: '',
+            editable: true,
           },
         ],
       },
@@ -10322,9 +10351,104 @@ describe('Guides — la page, sur le vrai markup', () => {
       },
     ],
     withHidden: false,
-    counts: { guides: 4, hidden: 26, categories: 3 },
+    counts: { guides: 7, hidden: 26, categories: 3 },
     siteBase: 'https://outerpedia.local/en/guides',
   };
+  /** Les trois guides généraux à fragment éditable, tels que leurs stores les lisent. */
+  const impact = () =>
+    Object.fromEntries(['3', '4', '5', '6'].map((s) => [s, { pve: '', pvp: '' }]));
+  const emptyOrder = () => ({ first: [], second: [], third: [], transcend: [] });
+  const general = () => ({
+    'premium-limited': {
+      reviews: {
+        premium: [
+          {
+            name: 'Aer',
+            review: { en: 'Fast {B/BT_BARRIER}', fr: 'Vite' },
+            recommendedPve: '4 to 5',
+            recommendedPvp: '',
+            impact: { ...impact(), '5': { pve: '4', pvp: '3' } },
+          },
+        ],
+        limited: [],
+      },
+      priorities: {
+        premium: {
+          ...emptyOrder(),
+          first: [
+            { name: 'Aer', stars: 3 },
+            { name: 'Alice', stars: 4 },
+          ],
+        },
+        limited: emptyOrder(),
+      },
+    },
+    'free-heroes-start-banner': {
+      sources: [
+        {
+          source: { en: 'Start Dash' },
+          entries: [{ names: ['Aer'], pickType: 'one', reason: { en: 'Pick' } }],
+        },
+      ],
+    },
+    'shop-purchase-priorities': {
+      derived: [
+        {
+          key: 'guild',
+          currency: { name: { en: 'Guild Coin' }, icon: 'TI_Guild' },
+          rows: [
+            {
+              key: 'guild/gold-10000/daily',
+              name: { en: '10,000 Gold' },
+              icon: 'CM_TopMenu_Gold',
+              iconKind: 'item',
+              grade: 'normal',
+              gives: 10000,
+              cost: 20,
+              limit: { count: 5, period: 'daily' },
+              priority: 'A',
+            },
+            {
+              key: 'guild/item-20001/daily',
+              name: { en: 'Sandwich' },
+              icon: 'TI_Item_Growth_Potion_01',
+              iconKind: 'item',
+              grade: 'normal',
+              gives: 1,
+              cost: 10,
+              limit: { count: 0, period: 'daily' },
+            },
+          ],
+        },
+      ],
+      editorial: {
+        shopNotes: { joint: { en: 'Save purchases' } },
+        textShops: { supply: { paragraphs: [{ en: 'Buy the module' }] } },
+        eventItems: [{ name: 'Cosmetic', priority: 'S', label: { en: 'Cosmetic' } }],
+        resourceItems: [],
+      },
+    },
+  });
+  type General = ReturnType<typeof general>;
+  const STEPS = {
+    '2000055': [
+      { value: 3, label: '3★' },
+      { value: 4, label: '4★' },
+      { value: 6, label: '5★' },
+      { value: 9, label: '6★' },
+    ],
+    '2000002': [
+      { value: 3, label: '3★' },
+      { value: 4, label: '4★' },
+      { value: 6, label: '5★' },
+      { value: 9, label: '6★' },
+    ],
+  };
+  interface SentGeneral {
+    slug: keyof General;
+    data: Record<string, unknown>;
+    was: unknown;
+  }
   const HIDDEN_CAT = {
     slug: 'adventure-license',
     label: 'Adventure License',
@@ -10366,6 +10490,8 @@ describe('Guides — la page, sur le vrai markup', () => {
     opts: {
       hash?: string;
       saved?: (body: Sent, disk: Disk) => Saved;
+      savedGeneral?: (body: SentGeneral, disk: General) => Saved;
+      imported?: (body: unknown) => Saved;
       translated?: (texts: string[]) => unknown;
     } = {},
   ) {
@@ -10380,6 +10506,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     );
 
     const data = disk();
+    const gen = general();
     const calls: Call[] = [];
     const confirm = vi.fn(() => true);
     const answer = (payload: unknown, status = 200) => {
@@ -10402,11 +10529,53 @@ describe('Guides — la page, sur le vrai markup', () => {
       data[key].meta = JSON.parse(JSON.stringify(body.meta)) as Disk[typeof key]['meta'];
       return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
     };
+    const writtenGeneral = (body: SentGeneral): Saved => {
+      (gen as Record<string, unknown>)[body.slug] = JSON.parse(JSON.stringify(body.data));
+      return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+    };
     const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
       const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
       const url = new URL(path, 'http://localhost:4747');
       if (url.pathname.startsWith('/api/guides') || url.pathname === '/api/translate')
         calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/guides/general' && !body) {
+        const slug = (url.searchParams.get('slug') ?? '') as keyof General;
+        const d = gen[slug];
+        if (!d) return answer({ error: `guide général non éditable : ${slug}` }, 404);
+        return answer({
+          guide: {
+            category: 'general-guides',
+            slug,
+            label: 'General Guides',
+            title: OVERVIEW.categories[0].guides.find((g) => g.slug === slug)?.title ?? slug,
+            updated: '2026-10-07',
+            icon: 'I',
+            author: 'Shiraen',
+            hidden: false,
+            versions: [],
+          },
+          spec: generalGuideForm(slug, d),
+          data: JSON.parse(JSON.stringify(d)),
+          options: { roster: ROSTER, steps: slug === 'premium-limited' ? STEPS : {} },
+          refs: {},
+          langs: LANGS,
+          siteBase: 'https://outerpedia.local/en/guides',
+        });
+      }
+      if (url.pathname === '/api/guides/general')
+        return answer(
+          opts.savedGeneral?.(body as SentGeneral, gen) ?? writtenGeneral(body as SentGeneral),
+        );
+      if (url.pathname === '/api/guides/import')
+        return answer(
+          opts.imported?.(body) ?? {
+            ok: true,
+            log: ['fait'],
+            imported: true,
+            kind: 'premium-limited-review',
+            errors: [],
+          },
+        );
       if (url.pathname === '/api/guides' && !body)
         return answer(
           url.searchParams.has('hidden')
@@ -10568,6 +10737,12 @@ describe('Guides — la page, sur le vrai markup', () => {
       states: () => calls.filter((c) => c.path.startsWith('/api/guides/state')).length,
       posted: () =>
         calls.filter((c) => c.path === '/api/guides' && c.body).map((c) => c.body as Sent),
+      generalStates: () => calls.filter((c) => c.path.startsWith('/api/guides/general?')).length,
+      postedGeneral: () =>
+        calls
+          .filter((c) => c.path === '/api/guides/general' && c.body)
+          .map((c) => c.body as SentGeneral),
+      general: gen,
       previews: () =>
         calls
           .filter((c) => c.path === '/api/guides/preview')
@@ -10603,7 +10778,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       'joint-challenge',
       'special-request',
     ]);
-    expect(page.el('gd-total').textContent).toBe('4 guides dans 3 catégories · 26 cachés');
+    expect(page.el('gd-total').textContent).toBe('7 guides dans 3 catégories · 26 cachés');
     const faq = page.all('#gd-list .gd-row[data-slug="beginner-faq"]')[0];
     expect(faq.querySelector('.gd-open')).toBeNull();
     expect(faq.classList.contains('dim')).toBe(true);
@@ -10635,7 +10810,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     page.type(page.el('gd-q'), 'ars-nov'); // le slug
     expect(page.all('#gd-list .gd-row').map((r) => r.dataset.slug)).toEqual(['ars-nova']);
     page.type(page.el('gd-q'), '');
-    expect(page.all('#gd-list .gd-row')).toHaveLength(4);
+    expect(page.all('#gd-list .gd-row')).toHaveLength(7);
   });
 
   it('« cachés » relit avec `?hidden=1` : Adventure License apparaît, ses guides avec le badge « caché »', async () => {
@@ -10932,5 +11107,309 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.el('gd-overview').hidden).toBe(false);
     expect(page.window.location.hash).toBe('#guides');
     expect(page.confirm).toHaveBeenCalledTimes(2);
+  });
+  // ---------------------------------------------------------- les guides généraux
+  const PL = '#guides/general-guides/premium-limited';
+
+  it('un guide général dans la vue d’ensemble : un bouton pour les trois à fragment éditable, « contenu en code » pour les autres ; ouvert, les onglets de sa forme, pas de versions, l’adresse', async () => {
+    const page = await guides();
+    await page.come();
+    const cat = page.all('#gd-list .gd-cat[data-cat="general-guides"]')[0];
+    expect(cat.querySelector('.card-head .badge.warn')).toBeNull();
+    expect(
+      page
+        .all('#gd-list .gd-cat[data-cat="general-guides"] .gd-row')
+        .map((r) => [
+          r.dataset.slug,
+          Boolean(r.querySelector('.gd-open')),
+          r.classList.contains('dim'),
+        ]),
+    ).toEqual([
+      ['beginner-faq', false, true],
+      ['premium-limited', true, false],
+      ['free-heroes-start-banner', true, false],
+      ['shop-purchase-priorities', true, false],
+    ]);
+    await page.open('general-guides', 'premium-limited');
+    expect(page.calls.map((c) => c.path)).toContain('/api/guides/general?slug=premium-limited');
+    expect(page.states()).toBe(0);
+    expect(page.el('gd-guide').hidden).toBe(false);
+    expect(page.all('#gd-head strong')[0].textContent).toBe('Premium & Limited Guide');
+    expect(page.all('#gd-head .gd-traits')[0].textContent).toContain(
+      'general-guides/premium-limited',
+    );
+    expect(page.subs()).toEqual(['premium', 'limited']);
+    expect(page.el('gd-versions').hidden).toBe(true);
+    expect(page.window.location.hash).toBe(PL);
+    expect(page.count()).toBe('aucune modification');
+    // Les reviews puis les quatre paliers, en cartes ; le perso d'une review est son titre.
+    expect(page.all('#gd-panel [data-block]').map((b) => b.dataset.block)).toEqual([
+      'premium-reviews',
+      'premium-first',
+      'premium-second',
+      'premium-third',
+      'premium-transcend',
+    ]);
+    expect(page.all('#gd-panel .gd-entry .card-head .gd-hero span:last-child')[0].textContent).toBe(
+      'Aer',
+    );
+    expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
+    expect(page.previews()[0].texts).toEqual(['Fast {B/BT_BARRIER}']);
+  });
+
+  it('Premium & Limited sur Limited par le hash : « ＋ héros » ouvre le picker, le perso choisi ouvre sa review ; « Traduire » ; « Enregistrer » envoie tout à sa route', async () => {
+    const page = await guides({ hash: `${PL}/limited` });
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('limited');
+    expect(page.window.location.hash).toBe(PL);
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
+    page.all('#gd-panel [data-act="gen-add-hero"][data-key="reviews.limited"]')[0].click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
+    await page.settle();
+    expect(page.el('hp-modal').hidden).toBe(true);
+    const card = page.all('#gd-panel .gd-entry[data-entry="reviews.limited.0"]')[0];
+    expect(card.querySelector('.card-head .gd-hero span:last-child')?.textContent).toBe('Alice');
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.dots()).toEqual([['limited', 'dot edit']]);
+    page.type(page.field('reviews.limited.0.review'), 'Great {B/BT_BARRIER}');
+    await page.settle();
+    page.all('#gd-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    const sent = page.calls.filter((c) => c.path === '/api/translate');
+    expect(sent).toHaveLength(1);
+    expect((sent[0].body as { texts: string[] }).texts).toEqual(['Great {B/BT_BARRIER}']);
+    expect(page.val(page.field('reviews.limited.0.review', 'jp'))).toBe('jp Great {B/BT_BARRIER}');
+    await page.save();
+    const posted = page.postedGeneral()[0];
+    expect(posted.slug).toBe('premium-limited');
+    expect(posted.was).toEqual(general()['premium-limited']);
+    const data = posted.data as { reviews: { limited: Record<string, unknown>[] } };
+    expect(data.reviews.limited).toEqual([
+      {
+        name: 'Alice',
+        review: {
+          en: 'Great {B/BT_BARRIER}',
+          fr: 'fr Great {B/BT_BARRIER}',
+          es: 'es Great {B/BT_BARRIER}',
+          jp: 'jp Great {B/BT_BARRIER}',
+          kr: 'kr Great {B/BT_BARRIER}',
+          zh: 'zh Great {B/BT_BARRIER}',
+        },
+        recommendedPve: '',
+        recommendedPvp: '',
+        impact: impact(),
+      },
+    ]);
+    // Relu du disque après l'écriture : plus rien en attente.
+    expect(page.generalStates()).toBe(2);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('les paliers de priorité : des lignes ordonnées, le palier parmi les crans pleins du perso, ↓ puis ✕', async () => {
+    const page = await guides({ hash: `${PL}/premium` });
+    const rows = () =>
+      page
+        .all('#gd-panel [data-block="premium-first"] .gd-rank')
+        .map((r) => r.querySelector('.gd-hero span:last-child')?.textContent);
+    expect(rows()).toEqual(['Aer', 'Alice']);
+    const stars = page.all(
+      '#gd-panel [data-gen="priorities.premium.first.0.stars"] option',
+    ) as unknown as HTMLOptionElement[];
+    expect(stars.map((o) => [o.value, o.textContent, o.selected])).toEqual([
+      ['3', '3★', true],
+      ['4', '4★', false],
+      ['6', '5★', false],
+      ['9', '6★', false],
+    ]);
+    page
+      .all('#gd-panel [data-act="gen-down"][data-key="priorities.premium.first"][data-i="0"]')[0]
+      .click();
+    await page.settle();
+    expect(rows()).toEqual(['Alice', 'Aer']);
+    expect(page.count()).toBe('1 onglet modifié');
+    page
+      .all('#gd-panel [data-act="gen-del"][data-key="priorities.premium.first"][data-i="1"]')[0]
+      .click();
+    await page.settle();
+    expect(rows()).toEqual(['Alice']);
+    await page.save();
+    const data = page.postedGeneral()[0].data as {
+      priorities: { premium: { first: unknown[] } };
+    };
+    expect(data.priorities.premium.first).toEqual([{ name: 'Alice', stars: 4 }]);
+  });
+
+  it('un refus situé à sa clé : la saisie reste, le champ cerclé, le point rouge sur l’onglet ; `stale` relit', async () => {
+    const page = await guides({
+      hash: `${PL}/premium`,
+      savedGeneral: (body) =>
+        JSON.stringify(body.data).includes('bad')
+          ? {
+              ok: false,
+              log: ['REFUSÉ'],
+              written: false,
+              stale: false,
+              refused: [
+                { tab: 'premium', key: 'reviews.premium.0.review', reason: 'tag inconnu {B/NOPE}' },
+              ],
+            }
+          : {
+              ok: false,
+              log: ['REFUSÉ'],
+              written: false,
+              stale: true,
+              refused: [{ tab: 'guide', reason: 'le disque a changé' }],
+            },
+    });
+    page.type(page.field('reviews.premium.0.review'), 'bad {B/NOPE}');
+    await page.save();
+    expect(page.val(page.field('reviews.premium.0.review'))).toBe('bad {B/NOPE}');
+    expect(page.count()).toBe('1 onglet modifié1 refus');
+    expect(page.dots()).toEqual([['premium', 'dot ko']]);
+    expect(
+      page
+        .all('#gd-panel .gd-text[data-text="reviews.premium.0.review"]')[0]
+        .classList.contains('ko'),
+    ).toBe(true);
+    expect(
+      page
+        .all('#gd-panel .gd-err')
+        .map((e) => e.textContent)
+        .filter(Boolean),
+    ).toEqual(['tag inconnu {B/NOPE}']);
+    page.type(page.field('reviews.premium.0.review'), 'good');
+    expect(page.dots()).toEqual([['premium', 'dot edit']]);
+    await page.save();
+    expect(page.generalStates()).toBe(2);
+    expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
+    expect(page.count()).toBe('1 refus');
+  });
+
+  it('Free Heroes : « ＋ source » pose une carte, « ＋ entrée » sa sous-liste, « ＋ héros » le picker en multi, le type de choix ; ce qui part', async () => {
+    const page = await guides({ hash: '#guides/general-guides/free-heroes-start-banner' });
+    expect(page.subs()).toEqual(['sources']);
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(1);
+    expect(
+      page.all('#gd-panel .gd-nested .gd-hero > span:not(.gd-noface)').map((s) => s.textContent),
+    ).toEqual(['Aer']);
+    page.all('#gd-panel [data-act="gen-add"][data-key="sources"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(2);
+    expect(
+      page.all('#gd-panel .gd-entry[data-entry="sources.1"] .card-head strong')[0].textContent,
+    ).toBe('Source 2');
+    page.type(page.field('sources.1.source'), 'Event');
+    page.all('#gd-panel [data-act="gen-add-sub"][data-key="sources.1"]')[0].click();
+    await page.settle();
+    const entry = page.all('#gd-panel .gd-nested[data-entry="sources.1.entries.0"]')[0];
+    expect(entry).toBeDefined();
+    (entry.querySelector('[data-act="gen-add-heroes"]') as HTMLElement).click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    page.all('#hp-results .hp-tile[data-id="2000055"]')[0].click();
+    page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
+    page.all('#hp-foot [data-hp="ok"]')[0].click();
+    await page.settle();
+    expect(
+      page
+        .all(
+          '#gd-panel .gd-nested[data-entry="sources.1.entries.0"] .gd-hero > span:not(.gd-noface)',
+        )
+        .map((s) => s.textContent),
+    ).toEqual(['Aer', 'Alice']);
+    const pick = page.all(
+      '#gd-panel [data-gen="sources.1.entries.0.pickType"]',
+    )[0] as unknown as HTMLSelectElement;
+    pick.value = 'one';
+    pick.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    await page.settle();
+    expect(page.count()).toBe('1 onglet modifié');
+    await page.save();
+    const data = page.postedGeneral()[0].data as { sources: unknown[] };
+    expect(data.sources[1]).toEqual({
+      source: { en: 'Event' },
+      entries: [{ names: ['Aer', 'Alice'], pickType: 'one' }],
+    });
+  });
+
+  it('Shop : un onglet par shop, la priorité S/A/B/C d’une ligne (re-cliquer efface), « ＋ note » ouvre son texte, un item ajouté à Event ; ce qui part', async () => {
+    const page = await guides({ hash: '#guides/general-guides/shop-purchase-priorities/guild' });
+    expect(page.subs()).toEqual(['guild', 'event', 'resource', 'supply', 'joint']);
+    expect(page.all('#gd-panel .gd-prod')).toHaveLength(2);
+    expect(page.all('#gd-panel .gd-prod-name').map((n) => n.textContent)).toEqual([
+      '10,000 Gold',
+      'Sandwich',
+    ]);
+    expect(page.all('#gd-panel .gd-prod-cost').map((n) => n.textContent)).toEqual(['20', '10']);
+    const pressed = (key: string) =>
+      page
+        .all(`#gd-panel [data-act="gen-prio"][data-key="${key}"]`)
+        .filter((b) => b.getAttribute('aria-pressed') === 'true')
+        .map((b) => b.dataset.value);
+    expect(pressed('derived.0.rows.0.priority')).toEqual(['A']);
+    page
+      .all(
+        '#gd-panel [data-act="gen-prio"][data-key="derived.0.rows.1.priority"][data-value="S"]',
+      )[0]
+      .click();
+    await page.settle();
+    expect(pressed('derived.0.rows.1.priority')).toEqual(['S']);
+    expect(page.count()).toBe('1 onglet modifié');
+    page
+      .all(
+        '#gd-panel [data-act="gen-prio"][data-key="derived.0.rows.0.priority"][data-value="A"]',
+      )[0]
+      .click();
+    await page.settle();
+    expect(pressed('derived.0.rows.0.priority')).toEqual([]);
+    expect(page.field('derived.0.rows.1.notes')).toBeUndefined();
+    page.all('#gd-panel [data-act="gen-note"][data-key="derived.0.rows.1.notes"]')[0].click();
+    await page.settle();
+    page.type(page.field('derived.0.rows.1.notes'), 'Daily');
+    // La note de shop de l'onglet, vide : un texte aussi.
+    expect(page.field('editorial.shopNotes.guild')).toBeDefined();
+    await page.sub('event');
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(1);
+    page.all('#gd-panel [data-act="gen-add"][data-key="editorial.eventItems"]')[0].click();
+    await page.settle();
+    expect(pressed('editorial.eventItems.1.priority')).toEqual(['C']);
+    page.type(
+      page.all(
+        '#gd-panel [data-gen="editorial.eventItems.1.name"]',
+      )[0] as unknown as HTMLInputElement,
+      'Manual',
+    );
+    expect(page.count()).toBe('2 onglets modifiés');
+    await page.save();
+    const data = page.postedGeneral()[0].data as {
+      derived: { rows: Record<string, unknown>[] }[];
+      editorial: { eventItems: Record<string, unknown>[]; shopNotes: Record<string, unknown> };
+    };
+    expect('priority' in data.derived[0].rows[0]).toBe(false);
+    expect(data.derived[0].rows[1]).toMatchObject({ priority: 'S', notes: { en: 'Daily' } });
+    expect(data.editorial.eventItems[1]).toEqual({ priority: 'C', name: 'Manual' });
+    expect('guild' in data.editorial.shopNotes).toBe(false);
+  });
+
+  it('l’import : un fichier JSON choisi part tel quel à `/api/guides/import`, la vue d’ensemble se relit ; un fichier illisible est refusé sans appel', async () => {
+    const page = await guides();
+    await page.come();
+    const contribution = {
+      kind: 'premium-limited-review',
+      payload: { bucket: 'premium', entry: { name: 'Aer' } },
+    };
+    const drop = (file: { name: string; text: () => Promise<string> }) => {
+      const input = page.el('gd-file');
+      Object.defineProperty(input, 'files', { value: [file], configurable: true });
+      input.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    };
+    drop({ name: 'review-aer.json', text: async () => JSON.stringify(contribution) });
+    await page.settle();
+    const imports = page.calls.filter((c) => c.path === '/api/guides/import');
+    expect(imports).toEqual([{ path: '/api/guides/import', body: { contribution } }]);
+    expect(page.calls.filter((c) => c.path === '/api/guides')).toHaveLength(2);
+    drop({ name: 'nope.json', text: async () => '{nope' });
+    await page.settle();
+    expect(page.calls.filter((c) => c.path === '/api/guides/import')).toHaveLength(1);
+    expect(page.el('journal-last').textContent).toContain('Contribution illisible : nope.json');
   });
 });

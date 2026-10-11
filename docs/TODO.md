@@ -50,12 +50,41 @@
       l'extractor, étapes 19-20), Item (onglet « Items », lot B44 — le
       dernier des Éditeurs), Guide editor › catégories de boss (section
       « Guides », lot F18 — les sept catégories de `GUIDE_SPECS`, sans les
-      catégories mortes ; reste l'étape 17, les guides généraux et l'import
-      de contribution, F19). Clos sans portage (lot A34) : Gear presets
+      catégories mortes), Guide editor › General guides et Overview (la même
+      section, lot F19 — les trois guides généraux à fragment éditable sous
+      une même forme, et l'import de contribution ; le groupe « Guide
+      editor » quitte le menu de l'admin). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
       la colonne « Agacements » (en vrac) ; puis un lot par section.
+- [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
+      F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
+      joué, `/api/translate` jamais appelé avec des clés. Relancer quick
+      d'abord (Ctrl-C puis `pnpm quick` : trois routes nouvelles). (1)
+      Guides › Guides : dans General Guides, Premium & Limited, Free Heroes
+      et Shop priorities ont un bouton, les onze autres « contenu en code ».
+      (2) Premium & Limited › Premium : une review retouchée en anglais,
+      « Traduire » (les cinq langues posées, « Traductions » dépliées),
+      « Enregistrer » → UN commit `chore(guides): general-guides/premium-limited`
+      qui porte `premium-reviews.json`, `premium-priorities.json` ET le
+      `meta.json` re-daté (`git show --stat`) ; la savebar revient à
+      « aucune modification ». Puis « ＋ héros » sur un palier (le picker,
+      le palier proposé parmi les crans pleins du perso), ↑ ↓, ✕. (3) Un
+      fichier de review de Shiraen importé depuis la vue d'ensemble (glissé
+      ou choisi) : le journal dit « … › premium › <perso>: edited/added »,
+      un commit `chore(guides): import premium-limited-review` avec le
+      `meta.json` — un fichier qui n'est pas du JSON est refusé sans appel.
+      (4) Free Heroes : une source ajoutée (« ＋ source », « ＋ entrée »,
+      « ＋ héros » en multi, le type de choix), « Enregistrer » → le commit
+      porte `free-heroes-sources.json` et le `meta.json`. (5) Shop › Guild :
+      une priorité changée (re-cliquer efface), « ＋ note » sur un produit,
+      « Enregistrer » → TROIS fichiers dans le commit : `shop-editorial.json`,
+      `data/curated/shop-priorities.json`, `data/generated/shop-priorities.json`,
+      plus le `meta.json`. (6) Le menu de l'admin : plus de groupe « Guide
+      editor » ; `/admin/guides` répond encore par son URL. (7) Après
+      « Pousser » et le déploiement : les pages des trois guides, leur date
+      « Updated ».
 - [ ] **« Guides » — contrôles à l'écran (lot F18)** : le banc ne clique
       pas, et aucun enregistrement réel n'a été joué ; `/api/translate` n'a
       jamais été appelé avec des clés. Relancer quick d'abord (Ctrl-C puis
@@ -76,9 +105,9 @@
       `config.json`), « Enregistrer » → le dossier de la version nouvelle
       part dans le commit. (4) Combat d'un versionné : un monstre épinglé
       (aucun au 11/10 : en poser un par l'extractor d'abord) se lit avec
-      l'étiquette de son archive et se dépingle. (5) Le menu « Guide
-      editor » de l'admin : « Overview » et « General guides » seulement —
-      ni Adventure License, ni les catégories de boss. (6) Le menu Vidéos
+      l'étiquette de son archive et se dépingle. (5) Le menu de l'admin :
+      plus de groupe « Guide editor » du tout depuis F19 (ni Adventure
+      License, ni les catégories de boss, ni Overview). (6) Le menu Vidéos
       de quick ne propose plus d'AL. (7) Après « Pousser » et le
       déploiement : la page du guide retouché, sa date « Updated » sur le
       site. Hors périmètre vu en portant : le gabarit « Mise à jour » du

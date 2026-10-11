@@ -1,7 +1,6 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
 import { actionableCount, bucketsOf, EXTRACTOR_ENTITIES } from '@/lib/admin/admin-inbox';
-import { adminGuideMenu } from '@/lib/admin/guide-nav';
 import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -79,23 +78,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         // l'admin, et l'item « Assets » de l'inbox y renvoie toujours.
       ],
     },
-    {
-      // Une entrée par TYPE de guide (chaque type a sa propre liste latérale) ;
-      // « Overview » garde l'accueil (import de contribution) accessible tant
-      // que l'import n'est pas porté. Les guides de BOSS (`GUIDE_SPECS`) sont
-      // portés dans quick (Guides › Guides, lot F18) : leurs liens sont sortis
-      // le 11/10 — les pages restent joignables par leur URL jusqu'au retrait
-      // de l'admin. Une catégorie dont tous les guides sont cachés (Adventure
-      // License) ne se propose plus non plus (`adminGuideMenu`).
-      title: 'Guide editor',
-      items: [
-        { label: 'Overview', href: '/admin/guides', exact: true },
-        ...adminGuideMenu().map((c) => ({
-          label: c.label,
-          href: `/admin/guides/${c.slug}`,
-        })),
-      ],
-    },
+    // Groupe « Guide editor » : vide depuis le 11/10, il sort du menu. Les
+    // guides de BOSS (`GUIDE_SPECS`) sont portés dans quick (Guides › Guides,
+    // lot F18), liens sortis le 11/10 ; les trois guides GÉNÉRAUX à fragment
+    // éditable (Premium & Limited, Free Heroes, Shop priorities) et l'import de
+    // contribution (« Overview ») le sont aussi (lot F19), liens sortis le
+    // 11/10. Les pages (`/admin/guides`, `/admin/guides/<catégorie>/<slug>`)
+    // restent joignables par leur URL jusqu'au retrait de l'admin ; les onze
+    // guides généraux en `.ts` ne s'éditent ni ici ni dans quick (contenu en
+    // code).
     // Groupe « Misc » : vide depuis le 09/10, il sort du menu avec ses deux
     // liens. Tag control : pas porté dans quick, le contrôle EST le test
     // (`tag-control.test.ts`, bloquant dans `pnpm test` donc dans

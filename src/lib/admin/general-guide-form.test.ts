@@ -1,0 +1,176 @@
+/**
+ * La forme servie des guides généraux : trois guides, une description par
+ * onglets et blocs que quick rend sans connaître les guides, et la clé d'un
+ * champ qui retrouve son bloc (pour situer un refus).
+ */
+import { describe, expect, it } from 'vitest';
+import {
+  GENERAL_GUIDE_KINDS,
+  blockOfKey,
+  generalGuideForm,
+  generalGuideKind,
+  type ShopFormData,
+} from './general-guide-form';
+
+const SHOP: ShopFormData = {
+  derived: [
+    { key: 'arena', currency: { name: { en: 'Arena Coin' }, icon: 'TI_Arena' } },
+    { key: 'guild', currency: { name: { en: 'Guild Coin' }, icon: 'TI_Guild' } },
+  ],
+  editorial: { textShops: { supply: { paragraphs: [] } }, shopNotes: { joint: { en: 'Save' } } },
+};
+
+describe('generalGuideKind — les trois slugs éditables, rien d’autre', () => {
+  it('reconnaît les trois guides branchés et refuse un autre slug', () => {
+    expect(Object.keys(GENERAL_GUIDE_KINDS)).toEqual([
+      'premium-limited',
+      'free-heroes-start-banner',
+      'shop-purchase-priorities',
+    ]);
+    expect(generalGuideKind('premium-limited')).toBe('premium-limited');
+    expect(generalGuideKind('beginner-faq')).toBeUndefined();
+    expect(generalGuideForm('beginner-faq', {})).toBeUndefined();
+    expect(generalGuideKind('constructor')).toBeUndefined();
+  });
+});
+
+describe('generalGuideForm — Premium & Limited', () => {
+  const form = generalGuideForm('premium-limited', {})!;
+
+  it('deux onglets, les deux buckets ; chacun les reviews puis les quatre paliers ordonnés', () => {
+    expect(form.kind).toBe('premium-limited');
+    expect(form.versioned).toBe(false);
+    expect(form.tabs.map((t) => [t.id, t.label])).toEqual([
+      ['premium', 'Premium'],
+      ['limited', 'Limited'],
+    ]);
+    const limited = form.tabs[1];
+    expect(limited.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.ordered ?? false])).toEqual([
+      ['limited-reviews', 'reviews.limited', 'hero', false],
+      ['limited-first', 'priorities.limited.first', 'hero', true],
+      ['limited-second', 'priorities.limited.second', 'hero', true],
+      ['limited-third', 'priorities.limited.third', 'hero', true],
+      ['limited-transcend', 'priorities.limited.transcend', 'hero', true],
+    ]);
+  });
+
+  it('une review : le héros (libéré par « pas encore sorti »), la review requise, les cibles, l’impact', () => {
+    const reviews = form.tabs[0].blocks[0];
+    expect(reviews.title).toBe('name');
+    expect(reviews.fields!.map((f) => [f.key, f.kind])).toEqual([
+      ['name', 'hero'],
+      ['unreleased', 'check'],
+      ['review', 'text'],
+      ['recommendedPve', 'string'],
+      ['recommendedPvp', 'string'],
+      ['impact', 'impact'],
+    ]);
+    expect(reviews.fields![0]).toMatchObject({ required: true, unreleasedKey: 'unreleased' });
+    expect(reviews.fields![2].required).toBe(true);
+    const tier = form.tabs[0].blocks[1];
+    expect(tier.fields!.map((f) => f.kind)).toEqual(['hero', 'stars']);
+  });
+});
+
+describe('generalGuideForm — Free Heroes', () => {
+  it('un onglet, une liste de sources, chacune ses entrées imbriquées : héros, choix, raison', () => {
+    const form = generalGuideForm('free-heroes-start-banner', {})!;
+    expect(form.kind).toBe('free-heroes');
+    expect(form.tabs.map((t) => t.id)).toEqual(['sources']);
+    const [block] = form.tabs[0].blocks;
+    expect(block).toMatchObject({ path: ['sources'], kind: 'list', add: 'entry', title: 'source' });
+    expect(block.fields!.map((f) => [f.key, f.kind, f.line, f.required])).toEqual([
+      ['source', 'text', true, true],
+    ]);
+    expect(block.nested!.key).toBe('entries');
+    expect(block.nested!.fields.map((f) => [f.key, f.kind])).toEqual([
+      ['names', 'heroes'],
+      ['pickType', 'select'],
+      ['reason', 'text'],
+    ]);
+    expect(block.nested!.fields[1].options!.map((o) => o.value)).toEqual(['all', 'one']);
+    expect(block.nested!.fields[1].default).toBe('all');
+  });
+});
+
+describe('generalGuideForm — Shop priorities', () => {
+  const form = generalGuideForm('shop-purchase-priorities', SHOP)!;
+
+  it('un onglet par shop dérivé PRÉSENT, dans l’ordre du guide, puis Event, Resource, et les shops texte présents', () => {
+    expect(form.kind).toBe('shop-priorities');
+    expect(form.tabs.map((t) => t.id)).toEqual([
+      'guild',
+      'arena',
+      'event',
+      'resource',
+      'supply',
+      'joint',
+    ]);
+    expect(form.tabs.map((t) => t.label)).toEqual([
+      'Guild',
+      'Arena',
+      'Event',
+      'General / Resource',
+      'Supply Module',
+      'Joint Challenge',
+    ]);
+  });
+
+  it('une note d’un shop absent de la rotation garde son onglet : elle reste éditable, et écrite', () => {
+    const joint = form.tabs[5];
+    expect(joint.blocks.map((b) => [b.id, b.kind, b.path.join('.')])).toEqual([
+      ['joint-note', 'text', 'editorial.shopNotes.joint'],
+    ]);
+    expect(joint.blocks[0].hint).toMatch(/absent de la rotation/);
+    expect(blockOfKey(form, 'editorial.shopNotes.joint')?.tab.id).toBe('joint');
+  });
+
+  it('un dérivé : la note du shop, puis ses produits FIGÉS (pas de ＋) à l’index du shop dans les données, sa monnaie', () => {
+    const guild = form.tabs[0];
+    expect(guild.blocks.map((b) => [b.id, b.kind, b.path.join('.'), b.add])).toEqual([
+      ['guild-note', 'text', 'editorial.shopNotes.guild', undefined],
+      ['guild-rows', 'list', 'derived.1.rows', undefined],
+    ]);
+    expect(guild.blocks[1].currency).toEqual({ name: 'Guild Coin', icon: 'TI_Guild' });
+    expect(guild.blocks[1].fields!.map((f) => f.kind)).toEqual(['product', 'priority', 'text']);
+  });
+
+  it('Event et Resource : des items éditoriaux ajoutables, priorité C d’office ; un shop texte : ses paragraphes requis et sa note de gear', () => {
+    const event = form.tabs[2];
+    expect(event.blocks.map((b) => b.id)).toEqual(['event-note', 'event-items']);
+    expect(event.blocks[1]).toMatchObject({ path: ['editorial', 'eventItems'], add: 'entry' });
+    expect(event.blocks[1].fields!.map((f) => f.kind)).toEqual([
+      'priority',
+      'string',
+      'text',
+      'number',
+      'cost',
+      'limit',
+      'text',
+    ]);
+    expect(event.blocks[1].fields![0].default).toBe('C');
+    expect(form.tabs[3].blocks.map((b) => b.id)).toEqual(['resource-items']);
+    const supply = form.tabs[4];
+    expect(supply.blocks.map((b) => [b.id, b.kind, b.required ?? false])).toEqual([
+      ['supply-paragraphs', 'texts', true],
+      ['supply-gear', 'text', false],
+    ]);
+    expect(supply.blocks[0].path).toEqual(['editorial', 'textShops', 'supply', 'paragraphs']);
+  });
+});
+
+describe('blockOfKey — la clé d’un champ retrouve son bloc et son onglet', () => {
+  it('par le chemin le plus long qui préfixe la clé ; une clé hors forme : rien', () => {
+    const pl = generalGuideForm('premium-limited', {})!;
+    expect(blockOfKey(pl, 'reviews.limited.2.review')?.tab.id).toBe('limited');
+    expect(blockOfKey(pl, 'priorities.premium.third.0.stars')?.block.id).toBe('premium-third');
+    expect(blockOfKey(pl, 'priorities.premium')).toBeUndefined();
+    const shop = generalGuideForm('shop-purchase-priorities', SHOP)!;
+    expect(blockOfKey(shop, 'editorial.shopNotes.guild')?.tab.id).toBe('guild');
+    expect(blockOfKey(shop, 'editorial.shopNotes.guildx')).toBeUndefined();
+    expect(blockOfKey(shop, 'derived.0.rows.3.notes')?.tab.id).toBe('arena');
+    expect(blockOfKey(shop, 'editorial.textShops.supply.paragraphs.1')?.block.id).toBe(
+      'supply-paragraphs',
+    );
+  });
+});

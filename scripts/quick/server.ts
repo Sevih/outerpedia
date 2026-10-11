@@ -54,6 +54,7 @@ import {
   EFFECTS_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
+  GENERAL_GUIDES_DEPS,
   GUIDES_DEPS,
   ITEMS_DEPS,
   MONSTERS_DEPS,
@@ -76,9 +77,11 @@ import {
   gameTableSchema,
   gameTablesState,
   gearRecoState,
+  generalGuideState,
   gitState,
   guideDraftState,
   guidesOverview,
+  importContributionAction,
   itemsSearch,
   itemsState,
   monsterSheetState,
@@ -99,6 +102,7 @@ import {
   saveCouponList,
   saveEffects,
   saveGearReco,
+  saveGeneralGuide,
   saveGuide,
   saveItems,
   saveMonsterKit,
@@ -872,6 +876,41 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
           report,
         ),
       ),
+    );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/guides/general') {
+    // L'état d'un guide GÉNÉRAL à fragment éditable (`?slug=`), lu du disque
+    // à chaque appel : sa forme (les onglets, les blocs, les champs — c'est
+    // elle que la page rend), ses données telles que son store les lit, le
+    // roster, les paliers, les refs.
+    const out = generalGuideState(url.searchParams.get('slug') ?? '', GENERAL_GUIDES_DEPS);
+    if ('error' in out) return json(res, { error: out.error }, 404);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/guides/general') {
+    // « Enregistrer » d'un guide général : ses données entières, contrôlées
+    // sur la forme puis écrites par son store (pour les shops : le curé, le
+    // dérivé régénéré, l'éditorial), le stamp de la date, UN commit
+    // `chore(guides): general-guides/<slug>`.
+    const { slug, data, was } = await body<Record<string, unknown>>(req);
+    await stream(res, (report) =>
+      withGit(saveGeneralGuide(String(slug ?? ''), { data, was }, GENERAL_GUIDES_DEPS, report)),
+    );
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/guides/import') {
+    // « Importer une contribution » : le JSON d'un outil `/contribute/*`, remis
+    // tel quel à `importContribution` de l'admin (routé par son `kind`,
+    // fusionné, retraduit, écrit), puis ce qu'il a écrit committé d'un coup,
+    // `chore(guides): import <kind>`.
+    const { contribution } = await body<{ contribution?: unknown }>(req);
+    await stream(res, (report) =>
+      withGit(importContributionAction(contribution, GENERAL_GUIDES_DEPS, report)),
     );
     return;
   }

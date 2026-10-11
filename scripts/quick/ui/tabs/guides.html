@@ -2,13 +2,17 @@
   <div class="head">
     <h2>Guides</h2>
     <p class="hint">
-      Les guides de boss du site, par catégorie : un clic ouvre le guide, ses textes en six langues,
-      son combat, ses versions. Rien ne s'écrit à la saisie : « Enregistrer » envoie tout le guide
-      et committe — la date du guide est re-datée dans le même commit. Lus au build : le site ne
-      change qu'une fois « Pousser » fait et le build de la CI déployé. L'anglais se saisit et porte
-      la structure (une ligne = un conseil) ; « Traduire » génère les autres langues, à relire. Une
-      catégorie dont tous les guides sont cachés n'apparaît qu'avec « cachés ». Les guides dont le
-      contenu est en code (guild raid, tour, monad, autres, généraux) ne s'éditent pas ici.
+      Les guides du site, par catégorie : un clic ouvre le guide, ses textes en six langues, son
+      combat, ses versions — ou, pour Premium &amp; Limited, Free Heroes et Shop priorities, ses
+      listes (reviews et priorités de pull, sources de héros gratuits, priorités par shop). Rien ne
+      s'écrit à la saisie : « Enregistrer » envoie tout le guide et committe — la date du guide est
+      re-datée dans le même commit. Lus au build : le site ne change qu'une fois « Pousser » fait et
+      le build de la CI déployé. L'anglais se saisit et porte la structure (une ligne = un conseil)
+      ; « Traduire » génère les autres langues, à relire. Une catégorie dont tous les guides sont
+      cachés n'apparaît qu'avec « cachés ». Les guides dont le contenu est en code (guild raid,
+      tour, monad, autres, les onze autres généraux) ne s'éditent pas ici. Une contribution (le JSON
+      d'un outil /contribute, ou de Shiraen) s'importe d'ici : routée par son kind, fusionnée,
+      traduite, écrite et committée d'un coup.
     </p>
   </div>
 
@@ -27,6 +31,38 @@
         </div>
         <label class="check"><input type="checkbox" id="gd-hidden" /> cachés</label>
         <span class="lbl" id="gd-total"></span>
+      </div>
+    </div>
+    <!-- L'import de contribution : un fichier JSON glissé ou choisi, remis à l'admin tel quel. -->
+    <div class="card pad" aria-label="Importer une contribution">
+      <div class="form">
+        <div
+          class="drop grow"
+          id="gd-drop"
+          role="button"
+          tabindex="0"
+          aria-label="Importer une contribution : un fichier JSON"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 16V4M6 10l6-6 6 6M4 20h16" />
+          </svg>
+          <span
+            >Importer une contribution — glisser ici (ou cliquer) le JSON d'un outil /contribute ou
+            d'une review de Shiraen : routé par son kind, fusionné dans le bon guide, traduit, écrit
+            et committé d'un coup</span
+          >
+        </div>
+        <input type="file" id="gd-file" accept="application/json,.json" hidden />
       </div>
     </div>
     <div id="gd-list"></div>

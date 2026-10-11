@@ -2,14 +2,17 @@
 // l'éditeur des guides de boss (les catégories de `GUIDE_SPECS` : joint
 // challenge, world boss, special request, irregular extermination, adventure
 // license, adventure, dimensional singularity) — l'éditeur « Guide editor » de
-// l'admin, sans ses catégories mortes. Un guide à la fois, en sous-onglets :
-// Méta (titre et description en six langues, caché), Combat (ce que la
-// catégorie demande, et pour un versionné les pins en lecture), Intro, puis par
-// version — Tips, Notes, Persos, Équipe, Vidéos. L'anglais se saisit et porte la
-// structure, « Traduire » génère les autres langues, chaque texte porte son
-// aperçu. Une savebar, un enregistrement, un commit : tout le guide part en un
-// geste (`saveGuideDraft` réécrit toutes les versions), le `meta.json` re-daté
-// avec lui.
+// l'admin, sans ses catégories mortes — et, sous la même coquille, les trois
+// guides GÉNÉRAUX à fragment éditable (Premium & Limited, Free Heroes, Shop
+// priorities), rendus d'après la FORME que le serveur sert (`gen`, plus bas),
+// plus l'import d'une contribution depuis la vue d'ensemble. Un guide à la
+// fois, en sous-onglets : Méta (titre et description en six langues, caché),
+// Combat (ce que la catégorie demande, et pour un versionné les pins en
+// lecture), Intro, puis par version — Tips, Notes, Persos, Équipe, Vidéos.
+// L'anglais se saisit et porte la structure, « Traduire » génère les autres
+// langues, chaque texte porte son aperçu. Une savebar, un enregistrement, un
+// commit : tout le guide part en un geste (`saveGuideDraft` réécrit toutes les
+// versions), le `meta.json` re-daté avec lui.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
@@ -43,6 +46,9 @@ let was = null; // le brouillon et le meta tels que le disque les portait au cha
 let sub = 'meta'; // le sous-onglet montré
 let ver = 0; // la version montrée (index dans `draft.versions`)
 let wanted = null; // ce que le hash demande : { cat, slug, version }, tant que ce n'est pas chargé
+let wantedSub = null; // le sous-onglet que le hash demande d'un guide général, tant qu'il n'est pas chargé
+let gen = null; // le guide GÉNÉRAL ouvert : { slug, form, data, was } — `draft` et `meta` restent nuls
+const genOpen = new Set(); // les notes de produit ouvertes par « ＋ note », par clé, tant qu'elles sont vides
 let refused = []; // les refus du dernier enregistrement (`GuideRefusal`)
 const pinTouched = new Set(); // les versions dont la page a touché les pins
 const texts = new Map(); // au dessin : clé d'un texte → son objet (ou sa liste, pour un bloc)
@@ -81,8 +87,9 @@ const starts = (field, q) => {
 
 // ------------------------------------------------------ le modèle
 const spec = () => sheet.spec;
-const v = () => draft.versions[ver];
-const subsOn = () => SUBS.filter((s) => !s.when || s.when(spec()));
+const v = () => draft?.versions[ver];
+/** Les sous-onglets : ceux de la forme d'un guide général, ou ceux de la spec d'un guide de boss. */
+const subsOn = () => (gen ? gen.form.tabs : SUBS.filter((s) => !s.when || s.when(spec())));
 /** Un texte localisé, tel qu'il partirait : les langues écrites. */
 const textOut = (t) =>
   Object.fromEntries(Object.entries(t ?? {}).filter(([, x]) => String(x).trim()));
@@ -187,7 +194,8 @@ const diskSlice = (tab, vi) => sliceOf(cleanDraft(was.draft), cleanMeta(was.meta
 const nowSlice = (tab, vi) => sliceOf(cleanDraft(draft), cleanMeta(meta), tab, vi);
 const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 /** Un sous-onglet (d'une version) diffère-t-il du disque ? */
-const tabMoved = (tab, vi = ver) => sheet && !same(nowSlice(tab, vi), diskSlice(tab, vi));
+const tabMoved = (tab, vi = ver) =>
+  Boolean(sheet) && (gen ? tabMovedGen(tab) : !same(nowSlice(tab, vi), diskSlice(tab, vi)));
 /** Les tranches à comparer : les partagées, puis celles de chaque version. */
 function slices() {
   if (!sheet) return [];
@@ -202,14 +210,17 @@ function slices() {
   ];
 }
 /** Ce que compte la savebar : les sous-onglets, par version, qui diffèrent du disque. */
-const changes = () => slices().filter(([tab, vi]) => tabMoved(tab, vi)).length;
+const changes = () =>
+  gen
+    ? subsOn().filter((t) => tabMovedGen(t.id)).length
+    : slices().filter(([tab, vi]) => tabMoved(tab, vi)).length;
 
 /** Les refus qui visent un sous-onglet d'une version (`version` absente : tout le guide). */
 const refusedIn = (tab, vi = ver) =>
   refused.filter(
     (r) =>
       (r.tab === tab || (tab === 'guide' && !subsOn().some((s) => s.id === r.tab))) &&
-      (r.version === undefined || r.version === draft.versions[vi]?.key),
+      (r.version === undefined || r.version === draft?.versions[vi]?.key),
   );
 /** Les refus d'une ligne d'un sous-onglet ; `field` donné : ceux de ce champ seulement. */
 const refusedAt = (tab, index, field) =>
@@ -283,13 +294,16 @@ const dateOf = (iso) => iso || '—';
 /** Une ligne de guide : un bouton quand quick l'édite, sinon une ligne atténuée et le site. */
 function rowHtml(cat, g) {
   const site = `${esc(overview.siteBase)}/${esc(cat.slug)}/${esc(g.slug)}`;
+  // Éditable par guide : une catégorie de `GUIDE_SPECS` l'est entière, les
+  // généraux trois sur quatorze (`editable` de la ligne ; absent : celui de la catégorie).
+  const editable = g.editable ?? cat.editable;
   const badges = `${g.hidden ? '<span class="badge off">caché</span>' : ''}${
-    cat.editable ? '' : '<span class="badge off">contenu en code</span>'
+    editable ? '' : '<span class="badge off">contenu en code</span>'
   }`;
-  const title = cat.editable
+  const title = editable
     ? `<button class="gd-open" type="button" data-cat="${esc(cat.slug)}" data-slug="${esc(g.slug)}">${esc(g.title)}</button>`
     : `<span class="gd-name">${esc(g.title)}</span>`;
-  return `<tr class="gd-row${cat.editable ? '' : ' dim'}${g.hidden ? ' off' : ''}" data-slug="${esc(g.slug)}">
+  return `<tr class="gd-row${editable ? '' : ' dim'}${g.hidden ? ' off' : ''}" data-slug="${esc(g.slug)}">
     <td>${title}<span class="lbl gd-slug">${esc(g.slug)}</span></td>
     <td class="dim">${esc(g.battle || '—')}</td>
     <td class="code">${esc(dateOf(g.updated))}</td>
@@ -384,14 +398,14 @@ function head() {
   drawnBase = state.imgBase;
   $('gd-head').innerHTML = g
     ? `<button class="btn ghost sm" type="button" data-act="back" title="Revenir à la vue d’ensemble">← Guides</button>
-      <div class="gd-id"><strong>${esc(meta.title[def()] || g.title)}</strong>
+      <div class="gd-id"><strong>${esc(meta?.title[def()] || g.title)}</strong>
         <span class="gd-traits"><span class="badge off">${esc(g.label)}</span><span class="mono">${esc(g.category)}/${esc(g.slug)}</span>${
           battleLabel() ? `<span>${esc(battleLabel())}</span>` : ''
         }<span class="lbl">mis à jour le ${esc(g.updated || '—')}</span>${
           g.versions.length
             ? `<span class="badge off">${plural(g.versions.length, 'version')}</span>`
             : ''
-        }<span class="badge off" data-hidden>${meta.hidden ? 'caché' : ''}</span></span>
+        }<span class="badge off" data-hidden>${meta?.hidden ? 'caché' : ''}</span></span>
       </div>
       <a class="btn ghost sm gd-site-link" href="${esc(sheet.siteBase)}/${esc(g.category)}/${esc(g.slug)}" target="_blank" rel="noopener">ouvrir sur le site ↗</a>`
     : '';
@@ -901,6 +915,628 @@ function videosHtml() {
   </div></div>`;
 }
 
+// ------------------------------------------------------ les guides généraux
+// Trois guides généraux ont un fragment éditable (Premium & Limited, Free
+// Heroes, Shop priorities) : la page ne les connaît pas par leur nom, elle rend
+// la FORME que le serveur sert (`spec.tabs` : des onglets, des blocs, les
+// champs de chaque entrée — cf. `general-guide-form.ts`) sur les données du
+// store (`gen.data`), dans la même coquille que les guides de boss : en-tête,
+// savebar, sous-onglets, « Traduire » par onglet, un commit par « Enregistrer ».
+const getAt = (root, path) =>
+  path.reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), root);
+/** Pose `value` à `path` (les objets manquants créés) ; `undefined` retire la clé. */
+function setAt(root, path, value) {
+  let o = root;
+  path.slice(0, -1).forEach((k, i) => {
+    // Un segment numérique à suivre : une liste à créer, pas un objet.
+    if (!o[k] || typeof o[k] !== 'object') o[k] = /^\d+$/.test(path[i + 1]) ? [] : {};
+    o = o[k];
+  });
+  const last = path[path.length - 1];
+  if (value === undefined) delete o[last];
+  else o[last] = value;
+}
+/** Ce qui vit à `path`, ou ce que `make` pose là : la MÊME référence d'un dessin à l'autre. */
+function ensureAt(root, path, make) {
+  const cur = getAt(root, path);
+  if (cur !== undefined && cur !== null) return cur;
+  const made = make();
+  setAt(root, path, made);
+  return made;
+}
+const pathOf = (key) => key.split('.');
+/** Les refus posés sur une clé de champ (ou d'entrée). */
+const refusedKey = (key) => refused.filter((r) => r.key === key);
+
+/** Les champs d'une entrée nettoyés comme le store les écrirait : un texte vide absent, une case fausse absente. */
+function cleanFields(e, fields) {
+  for (const f of fields ?? []) {
+    if (f.kind === 'text') {
+      const t = optText(e[f.key]);
+      if (t) e[f.key] = t;
+      else delete e[f.key];
+    } else if (f.kind === 'check' && !e[f.key]) delete e[f.key];
+    else if (
+      (f.kind === 'number' || f.kind === 'priority') &&
+      (e[f.key] === '' || e[f.key] === null)
+    )
+      delete e[f.key];
+  }
+}
+/**
+ * Les données d'un guide général telles qu'elles partiraient : une copie où
+ * chaque bloc de la forme est nettoyé (les textes réduits aux langues
+ * écrites, un texte facultatif vide absent, un paragraphe vide retiré). C'est
+ * ce que la savebar compare au disque, nettoyé de même.
+ */
+function genClean(d) {
+  const out = JSON.parse(JSON.stringify(d));
+  for (const tab of gen.form.tabs)
+    for (const block of tab.blocks) {
+      const value = getAt(out, block.path);
+      if (block.kind === 'text') setAt(out, block.path, optText(value));
+      else if (block.kind === 'texts')
+        setAt(out, block.path, (value ?? []).filter(hasText).map(textOut));
+      else {
+        const list = value ?? [];
+        for (const e of list) {
+          cleanFields(e, block.fields);
+          if (block.nested)
+            for (const s of e[block.nested.key] ?? []) cleanFields(s, block.nested.fields);
+        }
+        setAt(out, block.path, list);
+      }
+    }
+  return out;
+}
+/** La tranche d'un onglet dans des données nettoyées : ses blocs, à leur chemin. */
+const genSlice = (clean, tab) =>
+  Object.fromEntries(tab.blocks.map((b) => [b.id, getAt(clean, b.path) ?? null]));
+/** Un onglet d'un guide général diffère-t-il du disque ? */
+function tabMovedGen(id) {
+  const tab = gen.form.tabs.find((t) => t.id === id);
+  return Boolean(tab) && !same(genSlice(genClean(gen.data), tab), genSlice(genClean(gen.was), tab));
+}
+/** Les textes LIVE d'un guide général, dans l'ordre de la forme (la traduction écrit dedans). */
+function genTexts() {
+  const out = [];
+  const ofFields = (e, fields) => {
+    for (const f of fields ?? []) if (f.kind === 'text' && e[f.key]) out.push(e[f.key]);
+  };
+  for (const tab of gen.form.tabs)
+    for (const block of tab.blocks) {
+      const value = getAt(gen.data, block.path);
+      if (block.kind === 'text') {
+        if (value) out.push(value);
+      } else if (block.kind === 'texts') out.push(...(value ?? []));
+      else
+        for (const e of value ?? []) {
+          ofFields(e, block.fields);
+          if (block.nested)
+            for (const s of e[block.nested.key] ?? []) ofFields(s, block.nested.fields);
+        }
+    }
+  return out;
+}
+
+/** Une entrée neuve d'après ses champs : vide selon le genre, ou `default`. */
+function blankEntry(fields, name = '') {
+  const e = {};
+  for (const f of fields ?? []) {
+    if (f.default !== undefined) e[f.key] = JSON.parse(JSON.stringify(f.default));
+    else if (f.kind === 'text') e[f.key] = { [def()]: '' };
+    else if (f.kind === 'hero') e[f.key] = name;
+    else if (f.kind === 'heroes') e[f.key] = [];
+    else if (f.kind === 'select') e[f.key] = f.options?.[0]?.value ?? '';
+    else if (f.kind === 'string') e[f.key] = '';
+    else if (f.kind === 'stars') e[f.key] = stepsOf(name)[0]?.value ?? 3;
+    else if (f.kind === 'impact')
+      e[f.key] = Object.fromEntries(['3', '4', '5', '6'].map((s) => [s, { pve: '', pvp: '' }]));
+  }
+  if (name) for (const f of fields ?? []) if (f.kind === 'hero') e[f.key] = name;
+  return e;
+}
+/** Les paliers pleins d'un perso, par son nom : ce que « Palier » propose. */
+const stepsOf = (name) => {
+  const c = heroByName(name);
+  return (c && sheet.options.steps?.[c.id]) ?? [];
+};
+
+/** Une tuile de perso sans ✕ (le perso d'une review, d'un palier). */
+function heroFace(name) {
+  const c = heroByName(name);
+  return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : name ? `« ${name} » : hors du roster` : 'aucun perso')}">${
+    c
+      ? `<img src="${src(`characters/portrait/CT_${esc(c.id)}`)}" alt="" aria-hidden="true" width="44" height="44" />`
+      : '<span class="gd-noface" aria-hidden="true">?</span>'
+  }<span>${esc(name || '—')}</span></span>`;
+}
+const fieldLabel = (f) => `<span class="lbl">${esc(f.label)}</span>`;
+const genAttr = (key, type) => `data-gen="${esc(key)}" data-type="${type}"`;
+
+/** Un champ d'une entrée, selon son genre ; `ek` : la clé de l'entrée, `e` l'entrée. */
+function fieldHtml(f, e, ek, block) {
+  const key = `${ek}.${f.key}`;
+  const bad = refusedKey(key);
+  switch (f.kind) {
+    case 'text':
+      return `<div class="gd-field gd-field-text">${fieldLabel(f)}${textHtml(
+        key,
+        ensureAt(e, [f.key], () => ({ [def()]: '' })),
+        { what: f.label, line: f.line, placeholder: f.placeholder ?? '', bad },
+      )}</div>`;
+    case 'hero': {
+      const free = f.unreleasedKey && e[f.unreleasedKey] === true;
+      return `<div class="gd-field gd-field-hero${bad.length ? ' ko' : ''}">${
+        free
+          ? `<input class="w-text" ${genAttr(key, 'string')} value="${esc(e[f.key] ?? '')}" placeholder="Nom du perso pas encore sorti" aria-label="${esc(f.label)}" autocomplete="off" />`
+          : `${heroFace(e[f.key] ?? '')}<button class="btn ghost sm" type="button" data-act="gen-pick-hero" data-key="${esc(key)}" aria-haspopup="dialog">${e[f.key] ? 'Changer…' : 'Choisir…'}</button>`
+      }${errHtml(bad)}</div>`;
+    }
+    case 'heroes':
+      return `<div class="gd-field${bad.length ? ' ko' : ''}">${fieldLabel(f)}${heroesHtml(
+        ensureAt(e, [f.key], () => []),
+        'gen-del-hero',
+        'gen-add-heroes',
+        `data-key="${esc(key)}"`,
+      )}${errHtml(bad)}</div>`;
+    case 'select':
+      return `<label class="gd-field gd-field-inline">${fieldLabel(f)}<select ${genAttr(key, 'string')} aria-label="${esc(f.label)}">${(
+        f.options ?? []
+      )
+        .map(
+          (o) =>
+            `<option value="${esc(o.value)}"${o.value === e[f.key] ? ' selected' : ''}>${esc(o.label)}</option>`,
+        )
+        .join('')}</select></label>`;
+    case 'stars': {
+      const steps = stepsOf(e.name ?? '');
+      const cur = e[f.key];
+      const opts = steps.length ? steps : [{ value: cur, label: String(cur) }];
+      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<select class="w-qty" ${genAttr(key, 'number')} aria-label="${esc(f.label)}">${opts
+        .map(
+          (o) =>
+            `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
+        )
+        .join('')}</select>${errHtml(bad)}</label>`;
+    }
+    case 'string':
+      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<input class="${block.title === f.key ? 'w-search' : 'w-text'}" ${genAttr(key, 'string')} value="${esc(e[f.key] ?? '')}" placeholder="${esc(f.placeholder ?? '')}" aria-label="${esc(f.label)}" autocomplete="off" />${errHtml(bad)}</label>`;
+    case 'number':
+      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<input class="w-qty" type="number" ${genAttr(key, 'number')} value="${esc(e[f.key] ?? '')}" aria-label="${esc(f.label)}" />${errHtml(bad)}</label>`;
+    case 'check':
+      return `<label class="check gd-field-check"><input type="checkbox" ${genAttr(key, 'bool')}${e[f.key] ? ' checked' : ''} /> ${esc(f.label)}</label>`;
+    case 'priority':
+      return `<div class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<div class="gd-prio" role="group" aria-label="${esc(f.label)}">${(
+        f.options ?? []
+      )
+        .map(
+          (o) =>
+            `<button type="button" data-act="gen-prio" data-key="${esc(key)}" data-value="${esc(o.value)}" aria-pressed="${o.value === e[f.key]}" title="${o.value === e[f.key] ? 'Effacer' : `Priorité ${esc(o.value)}`}">${esc(o.label)}</button>`,
+        )
+        .join('')}</div>${errHtml(bad)}</div>`;
+    case 'impact': {
+      const grid = ensureAt(e, [f.key], () => ({}));
+      const cell = (star, side) =>
+        `<select ${genAttr(`${key}.${star}.${side}`, 'string')} aria-label="${esc(f.label)} ${star}★ ${side}">${[
+          '',
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+        ]
+          .map(
+            (n) =>
+              `<option value="${n}"${(grid[star]?.[side] ?? '') === n ? ' selected' : ''}>${n || '—'}</option>`,
+          )
+          .join('')}</select>`;
+      return `<div class="gd-field${bad.length ? ' ko' : ''}">${fieldLabel(f)}<table class="gd-impact"><thead><tr><th>★</th><th>PvE</th><th>PvP</th></tr></thead><tbody>${[
+        '3',
+        '4',
+        '5',
+        '6',
+      ]
+        .map(
+          (star) =>
+            `<tr><td>${star}★</td><td>${cell(star, 'pve')}</td><td>${cell(star, 'pvp')}</td></tr>`,
+        )
+        .join('')}</tbody></table>${errHtml(bad)}</div>`;
+    }
+    case 'cost': {
+      const c = e[f.key];
+      return `<div class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<input class="w-qty" type="number" min="0" ${genAttr(`${key}.amount`, 'number')} value="${esc(c?.amount ?? '')}" aria-label="${esc(f.label)}, montant" /><input class="w-text" ${genAttr(`${key}.currency`, 'string')} value="${esc(c?.currency ?? '')}" placeholder="monnaie" aria-label="${esc(f.label)}, monnaie" autocomplete="off" />${errHtml(bad)}</div>`;
+    }
+    case 'limit': {
+      const l = e[f.key];
+      return `<div class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<input class="w-qty" type="number" min="1" ${genAttr(`${key}.count`, 'number')} value="${esc(l?.count ?? '')}" aria-label="${esc(f.label)}, compte" /><select ${genAttr(`${key}.period`, 'string')} aria-label="${esc(f.label)}, période"${l ? '' : ' disabled'}>${(
+        f.options ?? []
+      )
+        .map(
+          (o) =>
+            `<option value="${esc(o.value)}"${o.value === l?.period ? ' selected' : ''}>${esc(o.label)}</option>`,
+        )
+        .join('')}</select>${errHtml(bad)}</div>`;
+    }
+    case 'product': {
+      const name = e.name?.[def()] ?? '';
+      // Comme l'admin : « ×10,000 » sauf si le nom le dit déjà (« 10,000 Gold »).
+      const fmt = Number(e.gives ?? 0).toLocaleString('en-US');
+      const gives = e.gives > 1 && !name.includes(fmt) ? ` ×${fmt}` : '';
+      const icon = e.icon
+        ? `<img class="ico" src="${src(`${e.iconKind === 'equipment' ? 'equipment' : 'items'}/${esc(e.icon)}`)}" alt="" aria-hidden="true" width="24" height="24" />`
+        : '';
+      const cur = block.currency?.icon
+        ? `<img class="ico" src="${src(`items/${esc(block.currency.icon)}`)}" alt="" aria-hidden="true" width="18" height="18" title="${esc(block.currency.name)}" />`
+        : '';
+      return `<span class="gd-prod-item rw">${icon}<span class="gd-prod-name">${esc(name)}<span class="lbl">${esc(gives)}</span></span></span><span class="gd-prod-cost mono">${esc(e.cost ?? '')}${cur}</span><span class="lbl gd-prod-limit">${
+        e.limit?.count > 0 ? `${esc(e.limit.count)} / ${esc(e.limit.period)}` : '—'
+      }</span>`;
+    }
+    default:
+      return '';
+  }
+}
+
+/** Une entrée d'une liste : une ligne pour un produit ou un palier, une carte sinon. */
+function entryHtml(block, e, ek, i, count, listKey) {
+  const fields = block.fields ?? [];
+  const bad = refusedKey(ek);
+  const del = block.add
+    ? `<button class="btn icon" type="button" data-act="gen-del" data-key="${esc(listKey)}" data-i="${i}" title="Retirer" aria-label="Retirer l’entrée ${i + 1}">✕</button>`
+    : '';
+  if (fields.some((f) => f.kind === 'product')) {
+    const prod = fields.find((f) => f.kind === 'product');
+    const rest = fields.filter((f) => f.kind !== 'product');
+    const note = rest.find((f) => f.kind === 'text');
+    const open =
+      note &&
+      (hasText(e[note.key]) ||
+        genOpen.has(`${ek}.${note.key}`) ||
+        refusedKey(`${ek}.${note.key}`).length);
+    return `<div class="gd-prod${bad.length ? ' ko' : ''}" data-entry="${esc(ek)}">
+      <div class="gd-prod-row">${rest
+        .filter((f) => f.kind !== 'text')
+        .map((f) => fieldHtml(f, e, ek, block))
+        .join('')}${fieldHtml(prod, e, ek, block)}${
+        note && !open
+          ? `<button class="btn ghost sm" type="button" data-act="gen-note" data-key="${esc(`${ek}.${note.key}`)}">＋ note</button>`
+          : ''
+      }</div>${open ? fieldHtml(note, e, ek, block) : ''}${errHtml(bad)}
+    </div>`;
+  }
+  if (block.ordered) {
+    const hero = fields.find((f) => f.kind === 'hero');
+    const rest = fields.filter((f) => f !== hero);
+    return `<div class="gd-rank${bad.length ? ' ko' : ''}" data-entry="${esc(ek)}">
+      <span class="lbl mono gd-rank-n">${i + 1}</span>${hero ? fieldHtml(hero, e, ek, block) : ''}${rest.map((f) => fieldHtml(f, e, ek, block)).join('')}
+      <button class="btn icon" type="button" data-act="gen-up" data-key="${esc(listKey)}" data-i="${i}" title="Monter" aria-label="Monter ${esc(e.name ?? '')}"${i ? '' : ' disabled'}>↑</button><button class="btn icon" type="button" data-act="gen-down" data-key="${esc(listKey)}" data-i="${i}" title="Descendre" aria-label="Descendre ${esc(e.name ?? '')}"${i < count - 1 ? '' : ' disabled'}>↓</button>${del}${errHtml(bad)}
+    </div>`;
+  }
+  const title = fields.find((f) => f.key === block.title);
+  const head =
+    title?.kind === 'hero'
+      ? fieldHtml(title, e, ek, block)
+      : `<strong>${esc(block.addLabel ? `${block.addLabel.charAt(0).toUpperCase()}${block.addLabel.slice(1)} ${i + 1}` : `Entrée ${i + 1}`)}</strong>`;
+  const body = fields.filter((f) => f !== title || title.kind !== 'hero');
+  const nested = block.nested
+    ? `<div class="gd-sub"><span class="lbl">${esc(block.nested.label)}s</span>${ensureAt(
+        e,
+        [block.nested.key],
+        () => [],
+      )
+        .map((s, j) => {
+          const sk = `${ek}.${block.nested.key}.${j}`;
+          const sbad = refusedKey(sk);
+          return `<div class="card gd-card gd-nested${sbad.length ? ' ko' : ''}" data-entry="${esc(sk)}">
+            <div class="card-head"><strong>${esc(block.nested.label.charAt(0).toUpperCase() + block.nested.label.slice(1))} ${j + 1}</strong><button class="btn icon" type="button" data-act="gen-del" data-key="${esc(`${ek}.${block.nested.key}`)}" data-i="${j}" title="Retirer" aria-label="Retirer l’${esc(block.nested.label)} ${j + 1}">✕</button></div>
+            <div class="gd-body">${block.nested.fields.map((f) => fieldHtml(f, s, sk, block)).join('')}${errHtml(sbad)}</div>
+          </div>`;
+        })
+        .join(
+          '',
+        )}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="gen-add-sub" data-key="${esc(ek)}">＋ ${esc(block.nested.label)}</button></div></div>`
+    : '';
+  return `<div class="card gd-card gd-entry${bad.length ? ' ko' : ''}" data-entry="${esc(ek)}">
+    <div class="card-head">${head}${del}</div>
+    <div class="gd-body">${body.map((f) => fieldHtml(f, e, ek, block)).join('')}${errHtml(bad)}${nested}</div>
+  </div>`;
+}
+
+/** Un bloc de la forme : un texte seul, des textes, ou une liste d'entrées, dans sa carte. */
+function genBlockHtml(block) {
+  const key = block.path.join('.');
+  const bad = refusedKey(key);
+  const add = (label) =>
+    block.add
+      ? `<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="${block.add === 'hero' ? 'gen-add-hero' : 'gen-add'}" data-key="${esc(key)}"${block.add === 'hero' ? ' aria-haspopup="dialog"' : ''}>＋ ${esc(label)}</button></div>`
+      : '';
+  const head = (badge = '') =>
+    `<div class="card-head"><strong>${esc(block.label)}</strong>${block.hint ? `<span class="lbl">${esc(block.hint)}</span>` : ''}${badge}</div>`;
+  if (block.kind === 'text') {
+    const t = ensureAt(gen.data, block.path, () => ({ [def()]: '' }));
+    return `<div class="card gd-card${bad.length ? ' ko' : ''}" data-block="${esc(block.id)}">${head()}<div class="gd-body">${textHtml(key, t, { what: block.label, bad })}</div></div>`;
+  }
+  if (block.kind === 'texts') {
+    const list = ensureAt(gen.data, block.path, () => []);
+    return `<div class="card gd-card${bad.length ? ' ko' : ''}" data-block="${esc(block.id)}">${head(`<span class="badge off">${list.length}</span>`)}<div class="gd-body">${
+      list.length
+        ? list
+            .map(
+              (t, i) =>
+                `<div class="gd-gen-text" data-entry="${esc(`${key}.${i}`)}"><span class="lbl mono">${i + 1}</span>${textHtml(`${key}.${i}`, t, { what: `${block.label} ${i + 1}`, bad: refusedKey(`${key}.${i}`) })}<button class="btn icon" type="button" data-act="gen-del" data-key="${esc(key)}" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(block.addLabel ?? 'le texte')} ${i + 1}">✕</button></div>`,
+            )
+            .join('')
+        : '<p class="lbl">Aucun texte.</p>'
+    }${errHtml(bad)}${add(block.addLabel ?? 'texte')}</div></div>`;
+  }
+  const list = ensureAt(gen.data, block.path, () => []);
+  const rows = list.map((e, i) => entryHtml(block, e, `${key}.${i}`, i, list.length, key));
+  const compact = block.ordered || (block.fields ?? []).some((f) => f.kind === 'product');
+  return `<div class="card gd-card${bad.length ? ' ko' : ''}" data-block="${esc(block.id)}">${head(`<span class="badge off">${list.length}</span>`)}<div class="gd-body${compact ? ' gd-compact' : ''}">${
+    rows.length
+      ? compact
+        ? `<div class="gd-rows">${rows.join('')}</div>`
+        : `<div class="gd-stack">${rows.join('')}</div>`
+      : '<p class="lbl">Aucune entrée.</p>'
+  }${errHtml(bad)}${add(block.add === 'hero' ? 'héros' : (block.addLabel ?? 'entrée'))}</div></div>`;
+}
+
+/** Le sous-onglet montré d'un guide général : ses blocs, les refus de l'onglet, « Traduire ». */
+function genTabHtml() {
+  const tab = gen.form.tabs.find((t) => t.id === sub) ?? gen.form.tabs[0];
+  return `<div class="gd-stack">${tab.blocks.map(genBlockHtml).join('')}${errHtml(refusedIn(tab.id).filter((r) => !r.key))}${translateHtml()}</div>`;
+}
+
+/** Le picker en choix unique : le nom du perso choisi. */
+function pickHero(opener, chosen, onName) {
+  openHeroPicker({
+    title: 'Choisir un perso',
+    roster: sheet.options.roster,
+    imgBase: state.imgBase,
+    chosen: heroByName(chosen ?? '')?.id,
+    opener,
+    onPick: (id) => onName(heroById(id)?.name ?? id),
+  });
+}
+
+/** Les gestes d'un guide général (`data-act="gen-…"`), sur la clé du bloc, de l'entrée ou du champ. */
+function genAct(el, act) {
+  const key = el.dataset.key ?? '';
+  const path = pathOf(key);
+  const i = Number(el.dataset.i ?? -1);
+  const opener = () => el;
+  const redo = (focus) => {
+    forgive(sub);
+    render();
+    if (focus) $('gd-panel').querySelector(focus)?.focus();
+  };
+  const blockAt = (k) => {
+    for (const tab of gen.form.tabs)
+      for (const block of tab.blocks) {
+        const prefix = block.path.join('.');
+        if (k === prefix || k.startsWith(`${prefix}.`)) return block;
+      }
+    return undefined;
+  };
+  const block = blockAt(key);
+  switch (act) {
+    case 'translate':
+      return translate();
+    case 'gen-add': {
+      const list = ensureAt(gen.data, path, () => []);
+      list.push(block?.kind === 'texts' ? { [def()]: '' } : blankEntry(block?.fields));
+      return redo(
+        `[data-entry="${key}.${list.length - 1}"] input, [data-entry="${key}.${list.length - 1}"] textarea, [data-entry="${key}.${list.length - 1}"] button`,
+      );
+    }
+    case 'gen-add-sub': {
+      if (!block?.nested) return;
+      const e = getAt(gen.data, path);
+      if (!e) return;
+      const list = ensureAt(e, [block.nested.key], () => []);
+      list.push(blankEntry(block.nested.fields));
+      return redo(
+        `[data-entry="${key}.${block.nested.key}.${list.length - 1}"] [data-act="gen-add-heroes"]`,
+      );
+    }
+    case 'gen-add-hero':
+      return pickHero(opener, '', (name) => {
+        const list = ensureAt(gen.data, path, () => []);
+        list.push(blankEntry(block?.fields, name));
+        redo(
+          `[data-entry="${key}.${list.length - 1}"] textarea, [data-entry="${key}.${list.length - 1}"] select`,
+        );
+      });
+    case 'gen-pick-hero': {
+      const cur = getAt(gen.data, path);
+      return pickHero(opener, typeof cur === 'string' ? cur : '', (name) => {
+        setAt(gen.data, path, name);
+        // Un palier qui ne vaut pas pour le nouveau perso : son premier palier plein.
+        const e = getAt(gen.data, path.slice(0, -1));
+        const stars = block?.fields?.find((f) => f.kind === 'stars');
+        if (e && stars && !stepsOf(name).some((s) => s.value === e[stars.key]))
+          e[stars.key] = stepsOf(name)[0]?.value ?? e[stars.key];
+        redo(`[data-act="gen-pick-hero"][data-key="${key}"]`);
+      });
+    }
+    case 'gen-del': {
+      const list = getAt(gen.data, path);
+      if (!Array.isArray(list)) return;
+      list.splice(i, 1);
+      return redo(
+        `[data-act="gen-add"][data-key="${key}"], [data-act="gen-add-hero"][data-key="${key}"], [data-act="gen-add-sub"]`,
+      );
+    }
+    case 'gen-up':
+    case 'gen-down': {
+      const list = getAt(gen.data, path);
+      const j = act === 'gen-up' ? i - 1 : i + 1;
+      if (!Array.isArray(list) || j < 0 || j >= list.length) return;
+      [list[i], list[j]] = [list[j], list[i]];
+      return redo(`[data-act="${act}"][data-key="${key}"][data-i="${j}"]`);
+    }
+    case 'gen-add-heroes':
+    case 'gen-del-hero': {
+      const names = getAt(gen.data, path);
+      if (!Array.isArray(names)) return;
+      const set = (next) => {
+        names.length = 0;
+        names.push(...next);
+        redo(`[data-act="gen-add-heroes"][data-key="${key}"]`);
+      };
+      if (act === 'gen-del-hero') return set(names.filter((n) => n !== el.dataset.name));
+      return pickHeroes(names, opener, set);
+    }
+    case 'gen-prio': {
+      const cur = getAt(gen.data, path);
+      setAt(gen.data, path, cur === el.dataset.value ? undefined : el.dataset.value);
+      return redo(`[data-act="gen-prio"][data-key="${key}"][data-value="${el.dataset.value}"]`);
+    }
+    case 'gen-note':
+      ensureAt(gen.data, path, () => ({ [def()]: '' }));
+      genOpen.add(key);
+      return redo(`[data-key="${key}"][data-lang="${def()}"]`);
+    default:
+      return undefined;
+  }
+}
+
+/** Une saisie dans un champ nu d'un guide général (`data-gen`) : la valeur posée à sa clé. */
+function genInput(el) {
+  const path = pathOf(el.dataset.gen);
+  const type = el.dataset.type;
+  const value =
+    type === 'bool'
+      ? el.checked
+      : type === 'number'
+        ? el.value === ''
+          ? undefined
+          : Number(el.value)
+        : el.value;
+  const parent = path[path.length - 2];
+  // Un coût ou une limite naissent avec une valeur entière, comme dans l'admin ;
+  // vider le montant ou le compte les retire.
+  if (parent === 'cost' || parent === 'limit') {
+    const at = path.slice(0, -1);
+    const last = path[path.length - 1];
+    if ((last === 'amount' || last === 'count') && value === undefined)
+      setAt(gen.data, at, undefined);
+    else {
+      const o = ensureAt(gen.data, at, () =>
+        parent === 'cost' ? { currency: 'TBD', amount: 0 } : { count: 1, period: 'weekly' },
+      );
+      o[last] = value;
+    }
+  } else setAt(gen.data, path, value);
+  forgive(sub);
+  // Une case ou une limite changent la forme du champ voisin : redessin ; sinon les marques suffisent.
+  if (type === 'bool' || parent === 'limit') return render();
+  marks();
+  return undefined;
+}
+
+/** La photo des anglais d'un guide général : ce qui est « déjà traduit » au chargement. */
+function genBaseline() {
+  for (const t of genTexts()) at.set(t, t[def()] ?? '');
+}
+
+/**
+ * Un guide général relu du disque : son état (`/api/guides/general`), sa
+ * forme, ses données — c'est lui qui fait foi, la saisie en attente est
+ * abandonnée, sauf `keep`.
+ */
+async function loadGeneral(slug, keep = false) {
+  const s = await getJson(`/api/guides/general?slug=${encodeURIComponent(slug)}`);
+  if (!s.data || !s.spec || !s.langs)
+    throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
+  const first = !sheet;
+  const other = !gen || gen.slug !== slug;
+  sheet = s;
+  wanted = null;
+  pv.lang ||= s.langs.default;
+  was = JSON.parse(JSON.stringify(s.data));
+  draft = null;
+  meta = null;
+  if (!keep || other) {
+    gen = { slug, form: s.spec, data: s.data, was };
+    refused = [];
+    pinTouched.clear();
+    tr = { busy: tr.busy, error: '' };
+    pv.segs.clear();
+    pv.sent = '';
+    genBaseline();
+  } else gen.was = was;
+  if (other) {
+    const tabs = s.spec.tabs;
+    // Un autre guide s'ouvre sur son premier onglet ; le premier garde celui du hash.
+    const want = first ? wantedSub : null;
+    if (!tabs.some((t) => t.id === sub) || !first)
+      sub = tabs.some((t) => t.id === want) ? want : tabs[0].id;
+    created = null;
+    adding = false;
+    trOpen.clear();
+    genOpen.clear();
+  }
+  wantedSub = null;
+  ver = 0;
+  render();
+  if (!$('tab-guides').hidden) writeHash();
+}
+
+// ------------------------------------------------------ l'import de contribution
+/** Un fichier déposé : lu, remis au serveur tel quel ; la vue d'ensemble relue s'il a écrit. */
+async function importFile(file) {
+  let contribution;
+  try {
+    contribution = JSON.parse(await file.text());
+  } catch (e) {
+    return log(
+      [
+        `Contribution illisible : ${file.name} n’est pas du JSON (${e instanceof Error ? e.message : e}).`,
+      ],
+      false,
+    );
+  }
+  const drop = $('gd-drop');
+  drop.classList.add('busy');
+  drop.setAttribute('aria-busy', 'true');
+  log([], undefined, `import de ${file.name}`);
+  try {
+    const r = await post('/api/guides/import', { contribution });
+    if (r.imported) reloadOverview();
+  } catch (e) {
+    log([`Import interrompu : ${e}`], false);
+  } finally {
+    drop.classList.remove('busy');
+    drop.removeAttribute('aria-busy');
+  }
+  return undefined;
+}
+$('gd-drop').onclick = () => $('gd-file').click();
+$('gd-drop').onkeydown = (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    $('gd-file').click();
+  }
+};
+$('gd-drop').ondragover = (e) => {
+  e.preventDefault();
+  $('gd-drop').classList.add('over');
+};
+$('gd-drop').ondragleave = () => $('gd-drop').classList.remove('over');
+$('gd-drop').ondrop = (e) => {
+  e.preventDefault();
+  $('gd-drop').classList.remove('over');
+  const f = e.dataTransfer?.files?.[0];
+  if (f) importFile(f);
+};
+$('gd-file').onchange = () => {
+  const f = $('gd-file').files?.[0];
+  if (f) importFile(f);
+  $('gd-file').value = '';
+};
+
 // ------------------------------------------------------ le dessin
 /** Une textarea prend la hauteur de son texte (deux lignes au moins, par `rows`). */
 function grow(area) {
@@ -934,9 +1570,21 @@ function render() {
     pvLangs();
     return;
   }
-  if (!v() && sub !== 'meta' && sub !== 'intro') sub = 'meta';
   // Les refus qui ne visent aucun sous-onglet (le disque a changé, la forme) : en tête.
   const global = errHtml(refused.filter((r) => !subsOn().some((t) => t.id === r.tab)));
+  if (gen) {
+    if (!subsOn().some((t) => t.id === sub)) sub = subsOn()[0].id;
+    panel.innerHTML = global + genTabHtml();
+    growAll(panel);
+    head();
+    subTabs();
+    versionsBar();
+    bar();
+    pvLangs();
+    pvAsk();
+    return;
+  }
+  if (!v() && sub !== 'meta' && sub !== 'intro') sub = 'meta';
   const content = !v()
     ? sub === 'meta'
       ? metaHtml()
@@ -983,7 +1631,7 @@ function marks() {
     const err = el.querySelector('.gd-err');
     if (err) err.textContent = '';
   }
-  if (sub === 'meta') {
+  if (!gen && sub === 'meta') {
     const strong = $('gd-head').querySelector('strong');
     if (strong) strong.textContent = meta.title[def()] || sheet.guide.title;
     const hidden = $('gd-head').querySelector('[data-hidden]');
@@ -1069,6 +1717,8 @@ function pvAsk(delay = 0) {
 // ------------------------------------------------------ la saisie
 $('gd-panel').oninput = (e) => {
   if (!sheet) return;
+  const nude = e.target.closest('[data-gen]');
+  if (nude) return genInput(nude);
   const field = e.target.closest('[data-key]');
   if (field) {
     const key = field.dataset.key;
@@ -1100,6 +1750,9 @@ $('gd-panel').oninput = (e) => {
 };
 $('gd-panel').onchange = (e) => {
   if (!sheet) return;
+  // Un `select` ou une case d'un guide général : `change` seulement, pas `input`.
+  const nude = e.target.closest('select[data-gen], input[type="checkbox"][data-gen]');
+  if (nude) return genInput(nude);
   const box = e.target.closest('input[data-meta="hidden"]');
   if (box) {
     meta.hidden = box.checked;
@@ -1154,6 +1807,7 @@ $('gd-panel').onclick = (e) => {
   const el = e.target.closest('[data-act]');
   if (!el || !sheet) return;
   const { act } = el.dataset;
+  if (gen) return genAct(el, act);
   const i = Number(el.dataset.i ?? -1);
   const si = Number(el.dataset.s ?? -1);
   const x = v();
@@ -1480,6 +2134,8 @@ function baseline() {
  * abandonnée — sauf `keep`, où l'appelant la repose lui-même.
  */
 async function load(cat, slug, keep = false) {
+  if (cat === 'general-guides') return loadGeneral(slug, keep);
+  gen = null;
   const s = await getJson(
     `/api/guides/state?cat=${encodeURIComponent(cat)}&slug=${encodeURIComponent(slug)}`,
   );
@@ -1526,7 +2182,7 @@ function choose(cat, slug) {
 /** Retour à la vue d'ensemble : sur confirmation s'il reste des changements. */
 function back() {
   if (!sheet || !leave()) return;
-  sheet = draft = meta = was = null;
+  sheet = draft = meta = was = gen = null;
   refused = [];
   render();
   writeHash();
@@ -1549,13 +2205,16 @@ $('gd-save').onclick = async () => {
   $('gd-save').classList.add('busy');
   log([], undefined, 'envoi du guide au serveur');
   try {
-    const r = await post('/api/guides', {
-      category,
-      slug,
-      draft: draftOut(),
-      meta: metaOut(),
-      was,
-    });
+    // Un guide général : ses données entières à sa route ; un guide de boss : le brouillon et le meta.
+    const r = gen
+      ? await post('/api/guides/general', { slug, data: genClean(gen.data), was })
+      : await post('/api/guides', {
+          category,
+          slug,
+          draft: draftOut(),
+          meta: metaOut(),
+          was,
+        });
     refused = r.refused ?? [];
     if (r.written || r.stale) {
       // Le disque fait foi : relu, la saisie abandonnée (écrite, ou périmée).
@@ -1614,11 +2273,12 @@ function leave() {
 
 sections.register('guides', {
   init: () => {
-    // `#guides` : la vue d'ensemble ; `#guides/<cat>/<slug>` : un guide ;
+    // `#guides` : la vue d'ensemble ; `#guides/<cat>/<slug>` : un guide (un
+    // général aussi : `#guides/general-guides/premium-limited`) ;
     // `#guides/<cat>/<slug>/<version>` : une de ses versions — les trois
     // formes que la page écrit. Un segment de plus, `/<sous-onglet>` (`tips`,
-    // `team`…), l'ouvre sur ce sous-onglet : pour un lien ou le banc, la page
-    // ne l'écrit pas. `lib.js` ne connaît que `#guides` : c'est le clic sur
+    // `team`, ou `limited`, `guild` d'un général), l'ouvre sur ce sous-onglet :
+    // pour un lien ou le banc, la page ne l'écrit pas. `lib.js` ne connaît que `#guides` : c'est le clic sur
     // l'onglet qui l'ouvre.
     const [, cat, slug, ...rest] =
       /^#guides\/([^/]+)\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?$/.exec(location.hash) ?? [];
@@ -1627,6 +2287,7 @@ sections.register('guides', {
       const version = /^\d{4}-\d{2}$/.test(parts[0] ?? '') ? parts.shift() : undefined;
       wanted = { cat: decodeURIComponent(cat), slug: decodeURIComponent(slug), version };
       if (SUBS.some((s) => s.id === parts[0])) sub = parts[0];
+      else if (parts[0]) wantedSub = parts[0]; // un onglet d'un guide général (`premium`, `guild`…)
       document.querySelector('#tabs [data-tab="guides"]')?.click();
     }
     head();

@@ -157,6 +157,34 @@ import {
   stampMeta,
   todayLocal,
 } from '@/lib/admin/guide-stamp';
+import {
+  IMPACT_STARS,
+  blockOfKey,
+  generalGuideForm,
+  generalGuideKind,
+  type GeneralBlock,
+  type GeneralField,
+  type GeneralGuideForm,
+  type GeneralGuideKind,
+} from '@/lib/admin/general-guide-form';
+import {
+  loadFreeHeroes,
+  loadPremiumLimited,
+  normalizeReview,
+  saveFreeHeroes,
+  savePremiumLimited,
+  type FreeHeroesData,
+  type PremiumLimitedData,
+} from '@/lib/admin/general-guide-store';
+import {
+  loadShopPriorities,
+  saveShopPriorities,
+  type ShopPrioritiesEditData,
+  type ShopPrioritiesSaveData,
+} from '@/lib/admin/shop-priorities-store';
+import { PERIODS, PRIORITIES, overlayOf } from '@/lib/admin/shop-priorities-shape';
+import { importContribution, type ImportResult } from '@/lib/admin/contribution-actions';
+import { parseContribution } from '@/lib/contribute/contribution';
 import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
 import type { SectionTitle } from '@/lib/data/guide-sections';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
@@ -229,7 +257,7 @@ import { bulletSegments, type BulletSegment } from '@/lib/changelog-bullets';
 import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
 import { STAT_ICON } from '@/lib/stats';
-import { transcendenceLabel } from '@/lib/transcendence';
+import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import type { KitChip } from '@/components/admin/MonsterKitEditor';
 import { fitsOnTwoLines } from '@/components/character/CharacterPortrait';
@@ -5052,6 +5080,12 @@ export interface GuideOverviewRow {
   hidden: boolean;
   /** Le boss ou le combat, en clair ; vide quand le guide n'en désigne pas. */
   battle: string;
+  /**
+   * Éditable dans quick : sa catégorie est de `GUIDE_SPECS`, ou c'est l'un des
+   * guides généraux à fragment éditable (`GENERAL_GUIDE_KINDS`) ; sinon son
+   * contenu est en code (`index.tsx`).
+   */
+  editable: boolean;
 }
 
 /** Une catégorie de la vue d'ensemble, ses guides triés comme sur le site. */
@@ -5059,7 +5093,7 @@ export interface GuideOverviewCategory {
   slug: string;
   /** Libellé anglais de la catégorie. */
   label: string;
-  /** Éditable dans quick (`GUIDE_SPECS`) ; sinon son contenu est en code (`index.tsx`). */
+  /** Au moins un guide éditable dans quick (`GUIDE_SPECS`, ou un général à fragment éditable). */
   editable: boolean;
   versioned: boolean;
   /** Guides cachés de la catégorie, montrés ou non. */
@@ -5139,8 +5173,9 @@ const byGuideOrder = (a: Guide, b: Guide): number =>
 /**
  * La vue d'ensemble de la section « Guides » : par catégorie du site (dans son
  * ordre), ses guides — slug, titre anglais, date, versions, caché, le boss ou
- * le combat en clair — et si quick l'édite (`GUIDE_SPECS`) ou si son contenu
- * est en code. Une catégorie dont TOUS les guides sont cachés n'y est pas (la
+ * le combat en clair — et si quick l'édite (`GUIDE_SPECS`, ou l'un des trois
+ * guides généraux à fragment éditable) ou si son contenu est en code. Une
+ * catégorie dont TOUS les guides sont cachés n'y est pas (la
  * règle de `visibleCategorySlugs` du site : c'est ainsi qu'Adventure License
  * et Monad Gate, morts, quittent la liste), sauf `withHidden` — la case
  * « cachés » — qui montre tout, badge « caché » à l'appui. Lu du disque à
@@ -5166,6 +5201,9 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     }
     return '';
   };
+  const editableRow = (g: Guide): boolean =>
+    Boolean(guideSpec(g.category)) ||
+    (g.category === GENERAL_CATEGORY && generalGuideKind(g.slug) !== undefined);
   const row = (g: Guide): GuideOverviewRow => ({
     slug: g.slug,
     title: g.title.en,
@@ -5174,6 +5212,7 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     ...(g.versions[0] ? { newest: g.versions[0].key } : {}),
     hidden: Boolean(g.hidden),
     battle: battleOf(g),
+    editable: editableRow(g),
   });
   const alive = new Set(categoriesWithVisibleGuide(GUIDE_CATEGORY_SLUGS, all));
   const categories: GuideOverviewCategory[] = [];
@@ -5185,7 +5224,7 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     categories.push({
       slug,
       label: GUIDE_CATEGORIES[slug].label.en,
-      editable: Boolean(spec),
+      editable: Boolean(spec) || mine.some(editableRow),
       versioned: Boolean(spec?.versioned),
       hidden: mine.filter((g) => g.hidden).length,
       guides: shown.map(row),
@@ -5694,4 +5733,694 @@ export async function addGuideVersionAction(
     draft: deps.draft(category, slug),
     version: key,
   };
+}
+
+// -------------------------------------------------------- guides généraux ----
+
+/** La catégorie des guides généraux ; trois de ses guides ont un fragment éditable. */
+const GENERAL_CATEGORY = 'general-guides';
+
+/** Les fichiers d'un enregistrement de shop hors du dossier du guide : le curé et le dérivé. */
+const SHOP_DATA_FILES = [
+  'data/curated/shop-priorities.json',
+  'data/generated/shop-priorities.json',
+];
+
+/** Ce qu'un import de contribution peut écrire hors des guides : le curé des persos. */
+const CHARACTERS_CURATED_FILE = 'data/curated/characters.json';
+
+/** Un palier plein de transcendance, tel que la page le propose : sa valeur et son libellé. */
+export interface StepOption {
+  value: number;
+  label: string;
+}
+
+/** Les données d'un guide général, telles que son store les lit. */
+export type GeneralGuideData = PremiumLimitedData | FreeHeroesData | ShopPrioritiesEditData;
+
+/** Les lectures et les écritures des guides généraux, injectées : les trois stores, l'import, git. */
+export interface GeneralGuidesDeps {
+  guides: () => Guide[];
+  roster: () => SheetRosterRow[];
+  refs: () => InlineRefs;
+  /** Les paliers PLEINS d'un perso, d'après sa rareté (et ses exceptions). */
+  steps: (rarity: number, id: string) => StepOption[];
+  loadPremiumLimited: () => PremiumLimitedData;
+  loadFreeHeroes: () => FreeHeroesData;
+  loadShopPriorities: () => ShopPrioritiesEditData;
+  savePremiumLimited: (data: PremiumLimitedData) => Promise<string[]>;
+  saveFreeHeroes: (data: FreeHeroesData) => Promise<string[]>;
+  saveShopPriorities: (data: ShopPrioritiesSaveData) => Promise<string[]>;
+  importContribution: (raw: unknown) => Promise<ImportResult>;
+  /** Les fichiers d'un chemin (relatif au dépôt) qui diffèrent de `HEAD`. */
+  dirty: (path: string) => string[];
+  stamp: (metaPath: string, date: string) => Promise<boolean>;
+  today: () => string;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Celles des routes : les stores de l'admin, l'import de contribution, le stamp partagé, le vrai git. */
+export const GENERAL_GUIDES_DEPS: GeneralGuidesDeps = {
+  guides: listGuides,
+  roster: () => characterRoster().roster,
+  refs: buildInlineRefs,
+  steps: (rarity, id) =>
+    transcendenceFullSteps(rarity, id).map((value) => ({
+      value,
+      label: transcendenceLabel(rarity, value, id),
+    })),
+  loadPremiumLimited,
+  loadFreeHeroes,
+  loadShopPriorities,
+  savePremiumLimited,
+  saveFreeHeroes,
+  saveShopPriorities,
+  importContribution,
+  dirty: (path) => gitDirtyFiles(path),
+  stamp: stampMeta,
+  today: todayLocal,
+  commitPaths,
+};
+
+/** Les données d'un guide général, par son modèle. */
+function loadGeneral(kind: GeneralGuideKind, deps: GeneralGuidesDeps): GeneralGuideData {
+  switch (kind) {
+    case 'premium-limited':
+      return deps.loadPremiumLimited();
+    case 'free-heroes':
+      return deps.loadFreeHeroes();
+    default:
+      return deps.loadShopPriorities();
+  }
+}
+
+/**
+ * L'état d'un guide GÉNÉRAL à fragment éditable, pour la section « Guides » :
+ * ce que le scan en sait (comme un guide de boss), sa FORME (`generalGuideForm`
+ * : les onglets, les blocs, les champs — c'est elle que la page rend, sans
+ * connaître le guide), ses données telles que son store les lit, le roster
+ * par nom d'affichage anglais et, pour Premium & Limited, les paliers pleins
+ * de chaque perso (les options de `stars`), les `refs`, les langues, le site.
+ * Lu du disque à chaque appel. `error` : guide inconnu, ou dont le contenu
+ * est en code (les onze autres généraux), ou données illisibles.
+ */
+export function generalGuideState(slug: string, deps: GeneralGuidesDeps = GENERAL_GUIDES_DEPS) {
+  const kind = generalGuideKind(slug);
+  if (!kind) return { error: `guide général non éditable, contenu en code : ${slug}` };
+  const guide = deps.guides().find((g) => g.category === GENERAL_CATEGORY && g.slug === slug);
+  if (!guide) return { error: `guide inconnu : ${GENERAL_CATEGORY}/${slug}` };
+  let data: GeneralGuideData;
+  try {
+    data = loadGeneral(kind, deps);
+  } catch (e: unknown) {
+    return { error: `données illisibles : ${e instanceof Error ? e.message : String(e)}` };
+  }
+  const roster = deps.roster();
+  return {
+    guide: {
+      category: GENERAL_CATEGORY,
+      slug,
+      label: GUIDE_CATEGORIES[GENERAL_CATEGORY].label.en,
+      title: guide.title.en,
+      updated: guideUpdatedDate(guide),
+      icon: guide.icon,
+      author: guide.author,
+      hidden: Boolean(guide.hidden),
+      versions: [] as Guide['versions'],
+    },
+    spec: generalGuideForm(slug, data) as GeneralGuideForm,
+    data,
+    options: {
+      roster,
+      steps:
+        kind === 'premium-limited'
+          ? Object.fromEntries(roster.map((c) => [c.id, deps.steps(c.rarity, c.id)]))
+          : {},
+    },
+    refs: deps.refs(),
+    langs: {
+      default: DEFAULT_LANG,
+      shown: [...NOTE_LANGS, ...LANGS.filter((l) => !NOTE_LANGS.includes(l))],
+    },
+    siteBase: guidesSiteBase(),
+  };
+}
+
+/**
+ * Un refus SITUÉ d'un enregistrement de guide général : l'onglet de la page, la
+ * CLÉ du champ (le chemin dans les données, joint par des points — celle que
+ * la page donne à ses champs : `reviews.premium.2.review`), ou l'entrée seule
+ * (`sources.0.entries.1`) ; sans clé : tout l'onglet, ou tout le guide
+ * (`guide`).
+ */
+export interface GeneralRefusal {
+  tab: string;
+  key?: string;
+  reason: string;
+}
+
+export interface GeneralSaveOutcome extends Outcome {
+  written: boolean;
+  stale: boolean;
+  refused: GeneralRefusal[];
+}
+
+type Rec = Record<string, unknown>;
+const isRec = (v: unknown): v is Rec => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
+
+/** Ce qu'un contrôle de champ a sous la main : le roster, les paliers d'un perso, le refus. */
+interface GeneralCleanContext {
+  names: ReadonlySet<string>;
+  steps: (name: string) => StepOption[] | undefined;
+  refuse: (key: string, reason: string) => void;
+}
+
+/**
+ * Un champ d'une entrée, venu de la page, contrôlé selon son genre (cf.
+ * `GeneralFieldKind`) : rendu nettoyé dans `out` (absent quand il est vide et
+ * facultatif), ou refusé à sa clé — et `ok` passe à faux.
+ */
+function cleanGeneralField(
+  f: GeneralField,
+  entry: Rec,
+  out: Rec,
+  key: string,
+  ctx: GeneralCleanContext,
+): boolean {
+  const v = entry[f.key];
+  const no = (reason: string): false => {
+    ctx.refuse(key, reason);
+    return false;
+  };
+  switch (f.kind) {
+    case 'text': {
+      const t = cleanGuideText(v);
+      if (typeof t === 'string') return no(t);
+      if (f.required && !t?.en?.trim()) return no(`${f.label} (anglais) : requis`);
+      if (t) out[f.key] = t;
+      return true;
+    }
+    case 'hero': {
+      if (v !== undefined && typeof v !== 'string') return no('un nom de perso attendu');
+      const name = (v ?? '').trim();
+      out[f.key] = name;
+      if (!name) return f.required ? no('un héros est requis') : true;
+      const free = Boolean(f.unreleasedKey && entry[f.unreleasedKey] === true);
+      if (!free && !ctx.names.has(name)) return no(`hors du roster : « ${name} »`);
+      return true;
+    }
+    case 'heroes': {
+      const names = cleanNames(v ?? []);
+      if (typeof names === 'string') return no(names);
+      out[f.key] = names;
+      if (f.required && !names.length) return no('au moins un héros est requis');
+      const stray = names.filter((n) => !ctx.names.has(n));
+      return stray.length
+        ? no(`hors du roster : ${stray.map((n) => `« ${n} »`).join(', ')}`)
+        : true;
+    }
+    case 'select': {
+      const value = typeof v === 'string' ? v : String(f.default ?? '');
+      if (!f.options?.some((o) => o.value === value)) return no(`choix inconnu : « ${value} »`);
+      out[f.key] = value;
+      return true;
+    }
+    case 'stars': {
+      const n = typeof v === 'number' ? v : Number(v);
+      if (!Number.isInteger(n)) return no('un palier (entier) attendu');
+      out[f.key] = n;
+      const heroField = f.key === 'name' ? undefined : (entry.name as unknown);
+      const steps = typeof heroField === 'string' ? ctx.steps(heroField.trim()) : undefined;
+      if (steps && !steps.some((s) => s.value === n))
+        return no(
+          `« ${n} » n’est pas un palier plein — attendu ${steps.map((s) => `${s.value} (${s.label})`).join(', ')}`,
+        );
+      return true;
+    }
+    case 'string':
+      if (v !== undefined && v !== null && typeof v !== 'string') return no('un texte attendu');
+      out[f.key] = typeof v === 'string' ? v : '';
+      return true;
+    case 'number': {
+      if (v === undefined || v === null || v === '') return true;
+      const n = typeof v === 'number' ? v : Number(v);
+      if (!Number.isFinite(n)) return no('un nombre attendu');
+      out[f.key] = n;
+      return true;
+    }
+    case 'check':
+      if (v === true) out[f.key] = true;
+      return true;
+    case 'priority': {
+      if (v === undefined || v === null || v === '') return true;
+      if (typeof v !== 'string' || !(PRIORITIES as readonly string[]).includes(v))
+        return no(`priorité inconnue : « ${String(v)} » (S, A, B, C)`);
+      out[f.key] = v;
+      return true;
+    }
+    case 'impact': {
+      const grid: Record<string, { pve: string; pvp: string }> = {};
+      const raw = isRec(v) ? v : {};
+      for (const star of IMPACT_STARS) {
+        const cell = isRec(raw[star]) ? (raw[star] as Rec) : {};
+        const side = (s: unknown): string | null => {
+          const t = typeof s === 'string' ? s.trim() : s === undefined || s === null ? '' : null;
+          return t !== null && /^([1-5]?)$/.test(t) ? t : null;
+        };
+        const pve = side(cell.pve);
+        const pvp = side(cell.pvp);
+        if (pve === null || pvp === null) return no(`impact ${star}★ : une note de 1 à 5, ou rien`);
+        grid[star] = { pve, pvp };
+      }
+      out[f.key] = grid;
+      return true;
+    }
+    case 'cost': {
+      if (v === undefined || v === null) return true;
+      if (!isRec(v)) return no('coût : forme inattendue');
+      const amount = typeof v.amount === 'number' ? v.amount : Number(v.amount);
+      if (!Number.isFinite(amount) || amount < 0) return no('coût : un montant attendu');
+      const currency = typeof v.currency === 'string' ? v.currency.trim() : '';
+      if (!currency) return no('coût : la monnaie est requise');
+      out[f.key] = { currency, amount };
+      return true;
+    }
+    case 'limit': {
+      if (v === undefined || v === null) return true;
+      if (!isRec(v)) return no('limite : forme inattendue');
+      const count = typeof v.count === 'number' ? v.count : Number(v.count);
+      if (!Number.isInteger(count) || count < 1) return no('limite : un compte entier attendu');
+      if (typeof v.period !== 'string' || !(PERIODS as readonly string[]).includes(v.period))
+        return no(`limite : période inconnue (${PERIODS.join(', ')})`);
+      out[f.key] = { count, period: v.period };
+      return true;
+    }
+    case 'product':
+      if (typeof entry.key !== 'string' || !entry.key) return no('ligne sans clé de produit');
+      out.key = entry.key;
+      return true;
+    default:
+      return true;
+  }
+}
+
+/** Les entrées d'une liste (un bloc, ou la sous-liste d'une entrée), contrôlées champ à champ. */
+function cleanGeneralList(
+  raw: unknown,
+  fields: GeneralField[],
+  nested: GeneralBlock['nested'],
+  key: string,
+  ctx: GeneralCleanContext,
+): Rec[] | null {
+  if (!Array.isArray(raw)) {
+    ctx.refuse(key, 'une liste attendue');
+    return null;
+  }
+  let ok = true;
+  const out = raw.map((e, i) => {
+    const entryKey = `${key}.${i}`;
+    const entry = isRec(e) ? e : {};
+    if (!isRec(e)) {
+      ctx.refuse(entryKey, 'entrée : forme inattendue');
+      ok = false;
+    }
+    const clean: Rec = {};
+    for (const f of fields)
+      if (!cleanGeneralField(f, entry, clean, `${entryKey}.${f.key}`, ctx)) ok = false;
+    if (nested) {
+      const sub = cleanGeneralList(
+        entry[nested.key] ?? [],
+        nested.fields,
+        undefined,
+        `${entryKey}.${nested.key}`,
+        ctx,
+      );
+      if (!sub) ok = false;
+      clean[nested.key] = sub ?? [];
+    }
+    return clean;
+  });
+  return ok ? out : null;
+}
+
+const getAt = (root: unknown, path: readonly string[]): unknown =>
+  path.reduce<unknown>((o, k) => (isRec(o) || Array.isArray(o) ? (o as Rec)[k] : undefined), root);
+
+/** Pose `value` à `path` dans `root`, en créant les objets manquants ; `undefined` retire la clé. */
+function setAt(root: Rec, path: readonly string[], value: unknown): void {
+  let o: Rec = root;
+  path.slice(0, -1).forEach((k, i) => {
+    // Un segment numérique à suivre : une liste à créer, pas un objet.
+    if (!isRec(o[k]) && !Array.isArray(o[k])) o[k] = /^\d+$/.test(path[i + 1]) ? [] : {};
+    o = o[k] as Rec;
+  });
+  const last = path[path.length - 1];
+  if (value === undefined) delete o[last];
+  else o[last] = value;
+}
+
+/**
+ * Les données d'un guide général venues de la page, rebâties sur la FORME :
+ * chaque bloc à son chemin, chaque entrée réduite aux champs décrits et
+ * contrôlés (textes nettoyés et tags vérifiés, noms de persos dans le roster,
+ * paliers, priorités, grilles d'impact…), un texte vide et facultatif absent.
+ * Chaque écart est un refus situé à sa clé, et rien n'est rendu.
+ */
+function cleanGeneralData(
+  form: GeneralGuideForm,
+  raw: unknown,
+  ctx: GeneralCleanContext,
+): Rec | null {
+  if (!isRec(raw)) {
+    ctx.refuse('', 'données : forme inattendue');
+    return null;
+  }
+  const out: Rec = {};
+  let ok = true;
+  for (const tab of form.tabs)
+    for (const block of tab.blocks) {
+      const key = block.path.join('.');
+      const value = getAt(raw, block.path);
+      if (block.kind === 'text') {
+        const t = cleanGuideText(value);
+        if (typeof t === 'string') {
+          ctx.refuse(key, t);
+          ok = false;
+        } else if (block.required && !t?.en?.trim()) {
+          ctx.refuse(key, `${block.label} (anglais) : requis`);
+          ok = false;
+        } else setAt(out, block.path, t);
+      } else if (block.kind === 'texts') {
+        const list = Array.isArray(value) ? value : null;
+        if (!list) {
+          ctx.refuse(key, 'une liste de textes attendue');
+          ok = false;
+          continue;
+        }
+        const texts: LTextOut[] = [];
+        list.forEach((t, i) => {
+          const c = cleanGuideText(t);
+          if (typeof c === 'string') {
+            ctx.refuse(`${key}.${i}`, c);
+            ok = false;
+          } else if (block.required && !c?.en?.trim()) {
+            ctx.refuse(`${key}.${i}`, `${block.label} (anglais) : requis`);
+            ok = false;
+          } else if (c) texts.push(c);
+        });
+        setAt(out, block.path, texts);
+      } else {
+        const list = cleanGeneralList(value ?? [], block.fields ?? [], block.nested, key, ctx);
+        if (!list) ok = false;
+        setAt(out, block.path, list ?? []);
+      }
+    }
+  return ok ? out : null;
+}
+
+/** Ce que le store d'un modèle attend, bâti des données nettoyées. */
+function toStorePayload(
+  kind: GeneralGuideKind,
+  clean: Rec,
+): PremiumLimitedData | FreeHeroesData | ShopPrioritiesSaveData {
+  switch (kind) {
+    case 'premium-limited': {
+      const reviews = (clean.reviews ?? {}) as Rec;
+      const priorities = (clean.priorities ?? {}) as Rec;
+      const order = (b: string) => {
+        const o = (priorities[b] ?? {}) as Rec;
+        return {
+          first: (o.first ?? []) as PremiumLimitedData['priorities']['premium']['first'],
+          second: (o.second ?? []) as PremiumLimitedData['priorities']['premium']['second'],
+          third: (o.third ?? []) as PremiumLimitedData['priorities']['premium']['third'],
+          transcend: (o.transcend ??
+            []) as PremiumLimitedData['priorities']['premium']['transcend'],
+        };
+      };
+      const list = (b: string) =>
+        ((reviews[b] ?? []) as Partial<PremiumLimitedData['reviews']['premium'][number]>[]).map(
+          normalizeReview,
+        );
+      return {
+        reviews: { premium: list('premium'), limited: list('limited') },
+        priorities: { premium: order('premium'), limited: order('limited') },
+      };
+    }
+    case 'free-heroes':
+      return {
+        sources: ((clean.sources ?? []) as Rec[]).map((s) => ({
+          source: s.source as FreeHeroesData['sources'][number]['source'],
+          entries: ((s.entries ?? []) as Rec[]).map((e) => ({
+            names: e.names as string[],
+            pickType: e.pickType as 'one' | 'all',
+            reason: (e.reason ?? {
+              en: '',
+            }) as FreeHeroesData['sources'][number]['entries'][number]['reason'],
+          })),
+        })),
+      };
+    default: {
+      const editorial = (clean.editorial ?? {}) as Rec;
+      const textShops = (editorial.textShops ?? {}) as Record<string, Rec>;
+      return {
+        overlay: overlayOf(
+          ((clean.derived ?? []) as Rec[]).map((shop) => ({
+            rows: (shop.rows ?? []) as {
+              key: string;
+              priority?: 'S' | 'A' | 'B' | 'C';
+              notes?: LocalizedText;
+            }[],
+          })),
+        ),
+        editorial: {
+          shopNotes: (editorial.shopNotes ?? {}) as Record<string, LocalizedText>,
+          textShops: Object.fromEntries(
+            Object.entries(textShops).map(([k, shop]) => [
+              k,
+              {
+                paragraphs: (shop.paragraphs ?? []) as LocalizedText[],
+                ...(shop.gearNote ? { gearNote: shop.gearNote as LocalizedText } : {}),
+              },
+            ]),
+          ),
+          eventItems: (editorial.eventItems ??
+            []) as ShopPrioritiesSaveData['editorial']['eventItems'],
+          resourceItems: (editorial.resourceItems ??
+            []) as ShopPrioritiesSaveData['editorial']['resourceItems'],
+        },
+      };
+    }
+  }
+}
+
+/** Un refus du store (« Premium/second #2: … », « Source 1, entry 2: … »), ramené à son onglet et sa clé. */
+function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralRefusal, 'reason'> {
+  if (kind === 'premium-limited') {
+    const m = /^(Premium|Limited)(?:\/(first|second|third|transcend))? #(\d+)/.exec(error);
+    if (m) {
+      const bucket = m[1].toLowerCase();
+      const i = Number(m[3]) - 1;
+      return {
+        tab: bucket,
+        key: m[2] ? `priorities.${bucket}.${m[2]}.${i}` : `reviews.${bucket}.${i}`,
+      };
+    }
+  } else if (kind === 'free-heroes') {
+    const m = /^Source (\d+)(?:, entry (\d+))?/.exec(error);
+    if (m) {
+      const i = Number(m[1]) - 1;
+      return {
+        tab: 'sources',
+        key: m[2] ? `sources.${i}.entries.${Number(m[2]) - 1}` : `sources.${i}`,
+      };
+    }
+  } else {
+    const item = /^(Event|Resource) item (\d+)/.exec(error);
+    if (item) {
+      const tab = item[1].toLowerCase();
+      return { tab, key: `editorial.${tab}Items.${Number(item[2]) - 1}` };
+    }
+    const para = /^Text shop “([^”]+)”, paragraph (\d+)/.exec(error);
+    if (para)
+      return {
+        tab: para[1],
+        key: `editorial.textShops.${para[1]}.paragraphs.${Number(para[2]) - 1}`,
+      };
+  }
+  return { tab: 'guide' };
+}
+
+/**
+ * « Enregistrer » d'un guide général : ses données entières, en un geste.
+ *
+ * Dans l'ordre : `was` doit être ce que le store lit encore (sinon `stale`,
+ * rien n'est écrit — l'admin ou l'autre poste a écrit entre-temps) ; les
+ * données sont CONTRÔLÉES sur la forme avant toute écriture (textes et tags
+ * par la résolution du site, l'anglais requis où le store l'exige, noms de
+ * persos dans le roster — sauf un perso « pas encore sorti » —, paliers
+ * pleins, priorités, grilles d'impact), chaque écart SITUÉ à son onglet et sa
+ * clé ; puis le store écrit (`savePremiumLimited`, `saveFreeHeroes` —
+ * les deux fichiers de Premium & Limited sont solidaires —, ou
+ * `saveShopPriorities` sous verrou : le curé, le dérivé régénéré,
+ * l'éditorial), ses refus rendus situés eux aussi ; puis ce qui a BOUGÉ se
+ * lit de git — le dossier du guide et, pour les shops, ses deux fichiers de
+ * `data/` —, rien : rien à committer, ni stamp ; sinon `meta.updated` passe à
+ * aujourd'hui (la règle de F18 : un fichier du guide a bougé, le guide est
+ * re-daté) et UN commit `chore(guides): general-guides/<slug>` emporte tout,
+ * le `meta.json` compris.
+ */
+export async function saveGeneralGuide(
+  slug: string,
+  body: unknown,
+  deps: GeneralGuidesDeps = GENERAL_GUIDES_DEPS,
+  report?: Report,
+): Promise<GeneralSaveOutcome> {
+  const refused: GeneralRefusal[] = [];
+  const out = (
+    ok: boolean,
+    lines: string[],
+    more: { written?: boolean; stale?: boolean } = {},
+  ): GeneralSaveOutcome => ({
+    ok,
+    log: lines,
+    written: more.written ?? false,
+    stale: more.stale ?? false,
+    refused,
+  });
+  const name = `${GENERAL_CATEGORY}/${slug}`;
+  const kind = generalGuideKind(slug);
+  if (!kind) return out(false, [`guide général non éditable, contenu en code : ${slug}.`]);
+  const guide = deps.guides().find((g) => g.category === GENERAL_CATEGORY && g.slug === slug);
+  if (!guide) return out(false, [`guide inconnu : ${name}.`]);
+  const b = (isRec(body) ? body : {}) as Rec;
+
+  const j = journal(report);
+  const refuse = (r: GeneralRefusal): void => {
+    refused.push(r);
+    j.done(`REFUSÉ — ${name} · ${r.key ? r.key : r.tab} : ${r.reason}.`);
+  };
+
+  // Le disque, relu : ce que la page avait chargé doit être ce qu'il porte encore.
+  const disk = loadGeneral(kind, deps);
+  if (!sameJson(b.was, disk)) {
+    refuse({ tab: 'guide', reason: 'le disque a changé depuis le chargement' });
+    return out(false, [...j.lines, 'Rien à enregistrer.'], { stale: true });
+  }
+  const form = generalGuideForm(slug, disk) as GeneralGuideForm;
+  const roster = deps.roster();
+  const byName = new Map(roster.map((c) => [c.name, c]));
+  const clean = cleanGeneralData(form, b.data, {
+    names: new Set(byName.keys()),
+    steps: (heroName) => {
+      const c = byName.get(heroName);
+      return c ? deps.steps(c.rarity, c.id) : undefined;
+    },
+    refuse: (key, reason) =>
+      refuse({
+        tab: key ? (blockOfKey(form, key)?.tab.id ?? 'guide') : 'guide',
+        ...(key ? { key } : {}),
+        reason,
+      }),
+  });
+  if (!clean) return out(false, [...j.lines, 'Rien à enregistrer.']);
+
+  j.doing('écriture du guide');
+  const payload = toStorePayload(kind, clean);
+  const errors =
+    kind === 'premium-limited'
+      ? await deps.savePremiumLimited(payload as PremiumLimitedData)
+      : kind === 'free-heroes'
+        ? await deps.saveFreeHeroes(payload as FreeHeroesData)
+        : await deps.saveShopPriorities(payload as ShopPrioritiesSaveData);
+  for (const e of errors) refuse({ ...situateStoreError(kind, e), reason: e });
+  if (errors.length) return out(false, [...j.lines, 'Rien à enregistrer.']);
+
+  // Ce qui a bougé, lu de git : le dossier du guide, et pour les shops le curé et le dérivé.
+  const dir = guideDirOf(GENERAL_CATEGORY, slug);
+  const roots = [dir, ...(kind === 'shop-priorities' ? SHOP_DATA_FILES : [])];
+  const changed = [...new Set(roots.flatMap((r) => deps.dirty(r)))];
+  if (!changed.length)
+    return out(true, [...j.lines, 'Rien à enregistrer : le disque porte déjà ces valeurs.']);
+  j.done(
+    `${changed.length} fichier${changed.length > 1 ? 's' : ''} ${changed.length > 1 ? 'ont' : 'a'} bougé`,
+  );
+  const today = deps.today();
+  const metaPath = `${dir}/meta.json`;
+  if (await deps.stamp(metaPath, today)) j.done(`meta.updated : ${today}`);
+  const paths = [...new Set([...changed, metaPath])];
+  const commit = deps.commitPaths(paths, `chore(guides): ${name}`, report);
+  return out(commit.ok, [...j.lines, ...commit.log], { written: true });
+}
+
+export interface ImportOutcome extends Outcome {
+  /** La contribution a été écrite (committée ou non). */
+  imported: boolean;
+  /** Son `kind`, lu de l'enveloppe. */
+  kind?: string;
+  summary?: string;
+  /** Les refus de l'import, tels quels. */
+  errors: string[];
+}
+
+/**
+ * « Importer une contribution » : le JSON exporté par un outil `/contribute/*`
+ * (ou glissé de Shiraen), remis TEL QUEL à `importContribution` de l'admin —
+ * qui le route par son `kind`, le fusionne dans le bon store, retraduit ce
+ * que l'anglais contribué impose, et écrit —, ses refus rendus tels quels.
+ * Puis ce qu'il a écrit se lit de git — le dossier de Premium & Limited pour
+ * une review, le curé des persos pour des pros / cons ou des synergies — et
+ * part en UN commit `chore(guides): import <kind>` ; une review re-date le
+ * guide (`meta.json` dans le commit). Rien n'a bougé : rien n'est committé.
+ */
+export async function importContributionAction(
+  raw: unknown,
+  deps: GeneralGuidesDeps = GENERAL_GUIDES_DEPS,
+  report?: Report,
+): Promise<ImportOutcome> {
+  const j = journal(report);
+  let kind: string;
+  try {
+    kind = parseContribution(raw).kind;
+  } catch (e: unknown) {
+    const why = e instanceof Error ? e.message : String(e);
+    return { ok: false, log: [`Contribution illisible : ${why}`], imported: false, errors: [why] };
+  }
+  j.doing(`import d’une contribution « ${kind} »`);
+  const r = await deps.importContribution(raw);
+  if (!r.ok) {
+    for (const e of r.errors) j.done(`REFUSÉ — ${e}`);
+    return {
+      ok: false,
+      log: [...j.lines, 'Rien n’est écrit.'],
+      imported: false,
+      kind,
+      errors: r.errors,
+    };
+  }
+  j.done(r.summary);
+  const review = kind === 'premium-limited-review';
+  const dir = guideDirOf(GENERAL_CATEGORY, 'premium-limited');
+  const changed = [...new Set(deps.dirty(review ? dir : CHARACTERS_CURATED_FILE))];
+  const done = (ok: boolean, lines: string[]): ImportOutcome => ({
+    ok,
+    log: lines,
+    imported: true,
+    kind,
+    summary: r.summary,
+    errors: [],
+  });
+  if (!changed.length)
+    return done(true, [
+      ...j.lines,
+      'Rien à committer : le disque portait déjà cette contribution.',
+    ]);
+  const paths = [...changed];
+  if (review) {
+    const today = deps.today();
+    const metaPath = `${dir}/meta.json`;
+    if (await deps.stamp(metaPath, today)) j.done(`meta.updated : ${today}`);
+    paths.push(metaPath);
+  }
+  const commit = deps.commitPaths([...new Set(paths)], `chore(guides): import ${kind}`, report);
+  return done(commit.ok, [...j.lines, ...commit.log]);
 }

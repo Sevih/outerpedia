@@ -7,6 +7,142 @@
 
 ## 2026-10-11
 
+- **quick : section « Guides » — les trois guides généraux sous une même
+  forme et l'import de contribution ; le menu « Guide editor » quitte
+  l'admin (lot F19, étape 17 de la migration)** — les trois éditeurs sur
+  mesure de l'admin (`PremiumLimitedEditor` : un perso à la fois dans un
+  `<select>`, `FreeHeroesEditor`, `ShopPrioritiesEditor`) et
+  `ContributionImport` (« Overview ») sont portés dans la section « Guides »
+  de F18, dans la même coquille que les guides de boss : en-tête, savebar
+  commune, sous-onglets, « Traduire » par onglet, UN commit par
+  « Enregistrer » avec le `meta.json` re-daté. L'agacement de Sevih (« ui pas
+  pratique ») est traité par UNE forme pour les trois, décrite en DONNÉES et
+  servie par le serveur : `src/lib/admin/general-guide-form.ts` (pur, testé)
+  dit, par guide, ses onglets, ses blocs (une liste d'entrées, des textes, un
+  texte seul — chacun à son chemin dans les données du store) et les CHAMPS
+  d'une entrée (`text` — l'anglais, l'aperçu, les traductions repliées, le
+  modèle de B42 —, `hero` par le picker partagé en tuile, `heroes` en tuiles
+  et picker multi, `select`, `stars` — les crans PLEINS du perso, servis par
+  id —, `string`, `number`, `check`, `priority` S/A/B/C, `impact` — la grille
+  3★→6★ × PvE / PvP —, `cost`, `limit`, `product` en lecture) ; la page
+  (`tabs/guides.js`, branche `gen`) rend ce qu'on lui sert et ne connaît
+  aucun des trois guides par son nom — un quatrième général éditable = une
+  entrée dans la forme et un store, rien dans la page. Premium & Limited :
+  un onglet par bucket, les reviews en CARTES (le perso en tête, « pas
+  encore sorti » qui libère le nom, la review, les cibles PvE / PvP en
+  champ nu — « 4 to 5 », « Any » —, l'impact en selects) et les quatre
+  paliers en LIGNES ordonnées (rang, tuile, palier, ↑ ↓ ✕ ; « ＋ héros » par
+  le picker, le palier posé au premier cran plein) ; Free Heroes : les
+  sources en cartes, leurs entrées en sous-liste, les héros en multi, le
+  type de choix ; Shop : un onglet par shop dérivé (la note du shop, les
+  produits du jeu en lignes compactes — priorité, icône et nom, coût avec
+  l'icône de la monnaie, limite, « ＋ note » qui ouvre LE TEXTE sous la
+  ligne), Event et General / Resource (des items éditoriaux : priorité,
+  nom, libellé localisé, donne, coût, limite, note), Supply et Rico (des
+  paragraphes numérotés, la note de gear) — plus un onglet pour la note
+  d'un shop absent de la rotation, sans quoi un enregistrement rebâti sur
+  la forme la PERDRAIT (vu en test, corrigé). **Ce qui descend dans
+  `src/lib/admin/`** (testé) : la forme (`general-guide-form.ts` :
+  `GENERAL_GUIDE_KINDS`, `generalGuideForm(slug, data)`, `blockOfKey`) et
+  `shop-priorities-shape.ts` (`overlayOf` — l'overlay `slug → priorité /
+notes` que l'éditeur React rebâtissait dans son `useState`, une ligne sans
+  rien n'y est pas —, `DERIVED_ORDER`, `DERIVED_LABEL`, `PRIORITIES`,
+  `PERIODS`, `TEXT_SHOP_LABEL`, que `ShopBlocks.tsx` importe et ré-exporte
+  désormais). Les stores sont inchangés. **Serveur** (`scripts/quick/actions.ts`,
+  `GENERAL_GUIDES_DEPS` tout injecté ; trois routes dans `server.ts`) :
+  `generalGuideState(slug)` → `GET /api/guides/general?slug=` — ce que le
+  scan en sait, la forme, les données du store (`loadPremiumLimited`,
+  `loadFreeHeroes`, `loadShopPriorities`), le roster par nom d'affichage
+  anglais, les paliers pleins par perso (`transcendenceFullSteps` +
+  `transcendenceLabel`, avec les exceptions par id), les refs, les langues ;
+  `error` pour les onze généraux en code ; `saveGeneralGuide(slug, { data,
+was })` → `POST /api/guides/general` — `was` contre le store relu
+  (`stale`), puis chaque champ CONTRÔLÉ sur la forme avant toute écriture
+  (textes et tags par la résolution du site, l'anglais où le store l'exige,
+  noms dans le roster sauf un perso « pas encore sorti », paliers pleins du
+  perso, priorités, périodes, grilles d'impact), chaque écart SITUÉ `{ tab,
+key, reason }` — la clé est le chemin dans les données
+  (`reviews.premium.2.review`), celle que la page donne à ses champs — ;
+  puis le store (`savePremiumLimited` : les deux fichiers solidaires ;
+  `saveFreeHeroes` ; `saveShopPriorities` sous verrou : le curé, le dérivé
+  régénéré, l'éditorial), ses refus rendus situés par leur libellé
+  (« Limited/second #2 », « Source 2, entry 1 », « Text shop “supply”,
+  paragraph 1 ») ; puis ce qui a BOUGÉ lu de `git status` du dossier du
+  guide et, pour les shops, de `data/curated/shop-priorities.json` et
+  `data/generated/shop-priorities.json` — rien : rien à committer ; sinon le
+  STAMP de `meta.updated` (un fichier du guide a bougé, le guide est re-daté
+  — la règle de F18, sans archives ici) et UN `commitPaths`,
+  `chore(guides): general-guides/<slug>`, les trois fichiers d'un shop
+  dedans ; `importContributionAction(raw)` → `POST /api/guides/import` —
+  le JSON remis TEL QUEL à `importContribution` de l'admin (routé par son
+  `kind`, fusionné, retraduit, écrit — ses refus rendus tels quels, une
+  enveloppe illisible refusée sans l'appeler), puis ce qu'il a écrit lu de
+  git (le dossier de Premium & Limited pour une review, `data/curated/characters.json`
+  pour des pros / cons ou des synergies), le stamp pour une review, UN
+  commit `chore(guides): import <kind>`. La vue d'ensemble porte désormais
+  `editable` PAR LIGNE (`GuideOverviewRow.editable` : une catégorie de
+  `GUIDE_SPECS`, ou l'un des trois généraux) ; la catégorie l'est dès qu'un
+  guide l'est. **La page** : dans la vue d'ensemble, la carte « Importer une
+  contribution » (`.drop` : glisser, cliquer, Entrée ; le fichier lu et
+  envoyé tel quel, le journal dit l'issue, la vue d'ensemble se relit ; un
+  fichier qui n'est pas du JSON est refusé sans appel) ; un général s'ouvre
+  comme un guide de boss (`#guides/general-guides/<slug>`, `/<onglet>` pour
+  un lien ou le banc) ; la savebar compte les ONGLETS qui diffèrent du
+  disque, les données nettoyées comme le store les écrirait (un texte
+  facultatif vide, une case décochée, un nombre effacé ne comptent pas) ;
+  un refus situé cercle le champ, son message dessous, le point rouge sur
+  l'onglet, y retoucher le lève ; `stale` relit ; `dirty`, `canLeave`,
+  « Annuler » inchangés. Tranché pour la forme : les cibles PvE / PvP sont
+  un champ nu (l'admin avait un widget d'étoiles à plage, « 4 to 5 » se
+  tape aussi vite) ; l'impact en selects (–, 1 à 5) plutôt qu'en étoiles
+  cliquables ; les produits d'un shop en lignes compactes, la note repliée
+  derrière « ＋ note » (sept shops × dix à trente lignes, un bloc texte
+  complet par ligne aurait noyé la table) ; les sous-onglets du shop sont
+  onze (les sept dérivés, Event, Resource, Supply, Rico), ceux de l'admin ;
+  « ＋ héros » d'une liste de reviews ou d'un palier pose l'entrée au choix
+  du picker (plus de nom à taper). **Admin** : le groupe « Guide editor »
+  quitte le menu (`layout.dev.tsx`, vide depuis le 11/10) ; `/admin/guides`
+  et `/admin/guides/<cat>/<slug>` restent par leur URL, la page d'accueil le
+  dit. **Vérification** : `pnpm typecheck` vert (les trois tsc muets),
+  `pnpm lint` vert (`eslint` muet), `pnpm test` : « Test Files 214 passed
+  (214), Tests 3520 passed (3520) » ; `NODE_ENV=development pnpm exec vitest
+run scripts/quick src/lib/admin` : « 52 passed, 1428 passed » — 37 tests
+  neufs : 9 sur la forme (`general-guide-form.test.ts` : les trois guides,
+  les champs, l'onglet d'une note orpheline, `blockOfKey`), 3 sur l'overlay
+  (`shop-priorities-shape.test.ts`), 18 dans `actions.test.ts` (l'état des
+  trois guides et ses erreurs, `editable` par ligne dans la vue d'ensemble,
+  `stale`, les refus situés — tag, impact, roster, palier —, « pas encore
+  sorti », l'écriture avec stamp et commit, rien à committer, Free Heroes et
+  Shop contrôlés et leurs payloads de store, l'overlay, les trois fichiers
+  du shop dans le commit, les refus du store situés, l'import : illisible,
+  refusé, une review avec stamp, des pros / cons sans stamp, rien à
+  committer), 7 en happy-dom (la vue d'ensemble par ligne, un général
+  ouvert, « ＋ héros » par le picker et « Traduire » puis ce qui part, les
+  paliers ordonnés ↓ ✕, le refus situé à sa clé et `stale`, Free Heroes
+  avec sa sous-liste et le picker en multi, Shop : priorité, « ＋ note », un
+  item ajouté, l'import par le champ fichier). **Banc** : quick isolé sur
+  :4796 (clés vidées, GET seulement — `/api/guides/import` et
+  `/api/guides/general` ne sont pas dans `READ_ONLY_POSTS`, le banc les
+  refuse) : `/api/guides` 93 guides, General Guides avec ses trois
+  éditables ; l'état des trois guides (13 + 13 reviews, 129 persos au
+  roster et leurs paliers, 12 sources / 14 entrées, sept shops dérivés de 6
+  à 32 lignes, onze onglets) ; `beginner-faq` en 404 « contenu en code » ;
+  neuf captures relues — la vue d'ensemble avec la carte d'import,
+  Premium (Gnosis Domine en tête de carte, l'aperçu aux balises résolues,
+  « Traductions (5) », les cibles côte à côte), Limited, Free Heroes (Start
+  Dash, l'entrée aux quatre tuiles), Shop › Guild (les lignes S/A/B/C, coût
+  et monnaie, « ＋ note »), Event (la note du shop, Item 1 en carte), Supply
+  (deux paragraphes et leur aperçu). Rien d'enregistré, `/api/translate`
+  jamais appelé. **Laissé** : les onze guides généraux en `.ts` (choix,
+  cf. `quick-migration.md`) ; les contrôles à l'écran (TODO : une review
+  retouchée puis « Traduire » et « Enregistrer » → UN commit avec le
+  `meta.json` ; un fichier de Shiraen importé ; une source ajoutée ; une
+  priorité de shop changée → trois fichiers dans le commit) ;
+  `EditorialEditor` (pros / cons, synergies), déjà porté par B42 ; hors
+  périmètre vu en portant : l'export « Export this hero » de l'admin (le JSON
+  d'une review pour Shiraen) n'est pas porté — l'outil public
+  `/contribute/premium-reviews` le fait déjà.
+
 - **Relecture F18 (Fable) — quick : section « Guides », vue d'ensemble et
   éditeur des guides de boss, catégories mortes masquées, validé** — commit
   `4399ab6b`, 28 fichiers, le message attendu, ni `package.json` ni le lock,

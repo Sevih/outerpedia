@@ -190,8 +190,33 @@ partagée dans `guide-stamp.ts`) sur les seuls fichiers pertinents, UN commit
 `chore(guides): <cat>/<slug>`. « ＋ version » écrit sans committer et
 propose le Journal du site prérempli. Hash `#guides`, `#guides/<cat>/<slug>`,
 `#guides/<cat>/<slug>/<version>`. Liens des catégories de boss retirés du
-menu admin le 11/10 ; « Overview » y reste pour l'import de contribution,
-qui va avec les guides généraux (étape 17, F19)).
+menu admin le 11/10), et les guides GÉNÉRAUX à fragment éditable (= Guide
+editor › General guides, trois guides sur quatorze : Premium & Limited,
+Free Heroes, Shop priorities — étape 17, lot F19 : ouverts depuis la même
+vue d'ensemble, dans la même coquille, rendus d'après la FORME que le
+serveur sert (`general-guide-form.ts` : des onglets, des blocs, les champs
+d'une entrée — un texte localisé avec aperçu et traductions, un héros par
+le picker, des héros en tuiles, un palier plein, une priorité S/A/B/C, la
+grille d'impact…) sur les données de leur store ; la page ne connaît aucun
+des trois par son nom. Premium & Limited : un onglet par bucket, les
+reviews en cartes (le perso en tête, « pas encore sorti », la review, les
+cibles, l'impact) et les quatre paliers en lignes ordonnées ; Free Heroes :
+les sources, leurs entrées, les héros en multi ; Shop : un onglet par shop
+dérivé (la note du shop, les produits du jeu en lignes — priorité, item,
+coût, limite, « ＋ note »), Event et Resource (des items éditoriaux), Supply
+et Rico (des paragraphes). « Enregistrer » envoie les données entières à
+`POST /api/guides/general` : `was` contre le store, les refus situés à la
+clé du champ, le store de l'admin (`savePremiumLimited`, `saveFreeHeroes`,
+`saveShopPriorities` sous verrou — le curé, le dérivé régénéré,
+l'éditorial), le stamp de `meta.updated`, UN commit `chore(guides):
+general-guides/<slug>` — pour les shops, ses trois fichiers dedans. Et
+l'IMPORT DE CONTRIBUTION (= Guide editor › Overview) dans la vue
+d'ensemble : un JSON glissé ou choisi, remis tel quel à
+`importContribution` (routé par son `kind`, fusionné, retraduit, écrit),
+puis ce qu'il a écrit committé d'un coup, `chore(guides): import <kind>`.
+Le groupe « Guide editor » quitte le menu de l'admin le 11/10, vide ; les
+onze autres généraux (contenu en `.ts`) ne s'éditent nulle part, c'est un
+choix).
 Outils : Noms (= Tools › Short names + Search aliases, étapes 1 et 2, lot B34,
 liens retirés du menu admin le 08/10 — un onglet pour les deux, avec le verdict
 « ce nom déborde-t-il ? » du site par langue).
@@ -208,7 +233,7 @@ C10) → 7 Changelog (fait, B37) → 8 Game data (fait, B38) → 9 à 15 Éditeu
 (9 Character fait, C11, B42, B39 et B40 — B42 clôt aussi 3 Synergy et 4 Pro /
 Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 13 Item
 fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) →
-16 Guides de boss (fait, F18) → 17 Guides généraux →
+16 Guides de boss (fait, F18) → 17 Guides généraux (fait, F19) →
 19 et 20 Extractor (revue par entité, intégration) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
@@ -371,8 +396,8 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     la vue d'ensemble, ni dans les cibles de Vidéos, ni dans le menu de
     l'admin — sauf la case « cachés », qui les montre avec leur badge. Les
     sept catégories de `GUIDE_SPECS` sont portées ; leurs liens sortent du
-    menu de l'admin, « Overview » y reste pour l'import de contribution
-    (étape 17). NOTE : guild-raid, skyward-tower, other, monad-gate et les
+    menu de l'admin (« Overview » y est resté jusqu'à l'étape 17, F19, qui
+    porte l'import de contribution). NOTE : guild-raid, skyward-tower, other, monad-gate et les
     guides généraux en `.ts` (contenu dans `index.tsx` ou un composant) ne
     sont éditables ni dans l'admin ni dans quick — c'est un choix, pas un
     oubli : leur contenu est du code, il se retouche dans le dépôt. La vue
@@ -381,9 +406,22 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     `GuideEditor` (989 l.) : joint-challenge, special-request, irregular-extermination, adventure-license ; `InlineTextField`, traduction, vidéos
     - Agacements : deja certaines categorie n'existe plus (genre les AL ou monad gates) — corrigé : la règle « au moins un guide visible » (`categoriesWithVisibleGuide`, `guide-nav.ts`) s'applique partout, AL et Monad ne se proposent plus.
 
-17. **Guides généraux**
+17. **Guides généraux** — FAIT, lot F19 : les trois guides généraux à
+    fragment éditable (Premium & Limited, Free Heroes, Shop priorities) dans
+    la section « Guides » (cf. « Déjà dans quick »), sous UNE même forme
+    servie par le serveur, et l'import de contribution dans la vue
+    d'ensemble. `EditorialEditor` (pros / cons, synergies) était déjà porté
+    (B42) : rien à faire. Le groupe « Guide editor » quitte le menu de
+    l'admin, vide. CHOIX : les onze guides généraux en `.ts` (contenu dans
+    `index.tsx`) ne s'éditent ni dans l'admin ni dans quick — leur contenu
+    est du code, il se retouche dans le dépôt ; la vue d'ensemble les liste
+    « contenu en code ». L'entrée reste pour que la numérotation ne bouge pas.
     `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`
-    - Agacements : ui pas pratique
+    - Agacements : ui pas pratique — corrigé : plus de « un perso à la fois »
+      (toutes les reviews en cartes, le perso par le picker partagé), une
+      même forme pour les trois, chaque texte avec son aperçu et ses
+      traductions repliées, « Traduire » par onglet, un commit par
+      « Enregistrer ».
 
 ### 4. Extractor (plusieurs lots, en dernier)
 
