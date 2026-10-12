@@ -7,6 +7,39 @@
 
 ## 2026-10-12
 
+- **Relecture A36, B45, B46 (Fable) — quick : l'aperçu des textes rend les
+  effets comme le site, la vignette de perso partagée, le récap de la
+  curation à l'arrivée de la Fiche perso ; les trois validés** — commits
+  `f40a83cc`, `ded318ed`, `4462b570` (lots joués par Opus, enchaînés sans
+  relecture entre eux, décision du 12/10). Périmètre : un commit par lot, les
+  messages attendus, tout dans `scripts/quick/` et les docs ; ni
+  `package.json`, ni `pnpm-lock.yaml`, ni résolveur, ni route changés par
+  A36 ; B45 ne laisse plus aucun `faceicon/FI_` ni `portrait/CT_` hors de
+  `hero-tile.mjs` (vérifié par `grep`) ; B46 ajoute une route de lecture
+  (`GET /api/character/coverage`) et six lignes à Noms (`open()` sur
+  `#names/<id>`). Contrôles sur `4462b570` : `pnpm typecheck` 0, `pnpm lint`
+  0, `pnpm test` 221 fichiers / 3691 tests, `scripts/quick` +
+  `src/lib/admin` sous `NODE_ENV=development` 60 / 1612. Rejoué par `tsx` :
+  `effectTile` (buff et debuff en trois couches avec `--x-src`, le nom
+  encodé y compris `'` et `()`, « Interruption » en `img` brut, sans icône
+  un cadre vide), `noteHtml` sur le vrai moteur (`{B/BT_ADDITIVE_TURN}`,
+  `{D/BT_SEALED}`, `{S/ATK}` : tuile teintée, `title` « nom — description »,
+  `wide` sur la stat) ; les sept jetons de `pv.css` comparés un à un à
+  `globals.css`, identiques ; `heroTile` (3★ → `CT_Slot_Unique`, visage,
+  ombre, vignetage, élément et classe `CT_*`, le nom dessous ; sans rareté →
+  `TI_Slot_Normal` ; sans id → la case « ? ») ; `characterCoverage` sur le
+  vrai disque : 129 persos, onze champs aux comptes annoncés (48, 25, 127,
+  41, 128, 92, 96, 128, 35, 48, 79), manquants par nom, mémo stable. Banc
+  (quick isolé :3183, clés vidées) : `#character/2000055/pros-cons` — Extra
+  Turn en tuile bleue, Unbuffable en tuile rouge, comme le site ;
+  `#character/2000096/synergies` — Monad Eva et Skadi en vignettes cadre
+  rouge, élément et classe au coin, nom dessous ; `#character` — le récap,
+  picker fermé, « … et n autres » ; `#character/2000055/…` — « ← Récap »
+  devant la vignette d'Aer ; Rangs en vignettes. Reste à Sevih : le
+  confort à l'écran (le récap de 129 vignettes par ligne, la vignette dans
+  les listes) et trois points posés au TODO. Suite : F24 → B47 → A37 → F25 →
+  C13 → B48, à enchaîner, relecture du paquet à la fin.
+
 - **quick : Fiche perso — le récap de la curation à l'arrivée, le picker sur
   demande (lot B46)** — revue de quick par Sevih (12/10) : « éditeur > perso :
   pas de récap (combien de persos curés, pros/cons…) ; au lieu de ça on se

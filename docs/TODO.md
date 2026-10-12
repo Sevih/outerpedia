@@ -172,6 +172,23 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
+- [ ] **Relecture A36 / B45 / B46 (12/10) — suites à décider** : (1) B45 —
+      Bannières, Journal, Tableau de bord et Noms ne reçoivent que l'id du
+      perso : leur vignette a le fond neutre et pas d'icône au coin ; soit
+      quatre états du serveur gagnent rareté / élément / classe, soit la
+      page lit `/api/character/roster` une fois (un lot A). (2) A36 —
+      `tabs/monsters.js` et `tabs/extractor.js` gardent leur copie de la
+      tuile d'effet (`.m-fx`, `.ex-fx`) : à passer sur `effectTile` (un lot
+      A). (3) B46 — le récap compte ce qui est POSÉ, pas ce qui est DÛ : « Date
+      de sortie à la main » liste 81 persos dont la date est dérivée des
+      notes de MAJ ; Rang PvP liste Snow et Lisha, inéligibles ; dire si ces
+      lignes doivent compter « sans date d'aucune source » / « éligibles
+      seulement ». (4) Repéré par A36 : `pnpm test` sort par intermittence
+      « Errors 1 error » (`ReferenceError: document is not defined`, le
+      minuteur de « Copier » de `tabs/gamedata.js`, 2 s, qui tire après la
+      fermeture d'une fenêtre happy-dom) alors que tous les tests passent —
+      antérieur ; un `clearTimeout` à la fermeture ou un garde `typeof
+  document` (un lot A).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les
