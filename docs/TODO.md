@@ -41,10 +41,6 @@
       ce qu'il reçoit : aujourd'hui il ne peut donc ni éditer ni retirer un
       code en minuscules de la liste vivante. Rapport :
       `sevih-tool/docs/revue/cloisonnement-2026-10.md` § 4.3.
-- [ ] **R2** : `24kthankyou` (expiré le 30/06), seul code sur 102 qui n'est pas
-      en majuscules, à passer en `24KTHANKYOU` dans la liste vivante (Sevih :
-      `/admin/tools/promo-codes` en dev, ou `applyLiveCouponOp`). L'instantané
-      `data/curated/coupons.json` est déjà corrigé (11/10).
 
 ## 🧰 Outil quick
 

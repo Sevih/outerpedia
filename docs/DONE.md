@@ -5,6 +5,17 @@
 > détail vit dans git. Le `CHANGELOG.md` racine est GELÉ depuis le 03/08 —
 > ce fichier et le log git SONT le journal du projet.
 
+## 2026-10-12
+
+- **`24kthankyou` en majuscules** : seul code sur 102 qui n'était pas en
+  majuscules (expiré le 30/06), relevé par le rapport de cloisonnement des
+  sessions cloud (sevih-tool `#5`, § 4.3). Passé en `24KTHANKYOU` dans
+  l'instantané `data/curated/coupons.json` et dans la liste vivante sur R2 par
+  `applyLiveCouponOp` (opération `edit`, ETag vérifié, purge sautée faute de
+  `NEXT_PUBLIC_IMG_BASE` en local : visible sous 20 min). Le lot L8 du même
+  rapport (normaliser les codes en majuscules côté site, le bot le fait déjà
+  et ne pouvait donc ni éditer ni retirer ce code) reste au TODO.
+
 ## 2026-10-11
 
 - **quick : section « Guides » — les trois guides généraux sous une même
