@@ -1,10 +1,10 @@
 /**
  * La RÈGLE DE VISIBILITÉ des catégories de guides, côté outils (lot F18) : une
  * catégorie dont TOUS les guides sont cachés ne se propose plus — ni dans le
- * menu de l'admin, ni dans la vue d'ensemble de quick, ni dans ses cibles de
- * vidéo. C'est la règle de `visibleCategorySlugs` du site, et c'est elle qui
- * fait sortir Adventure License (26 guides, tous cachés) des menus SANS la
- * retirer de `GUIDE_SPECS`, que `videoTargets` et les tests de specs lisent.
+ * menu de l'admin, ni dans la vue d'ensemble de quick. C'est la règle de
+ * `visibleCategorySlugs` du site, et c'est elle qui fait sortir Adventure
+ * License (26 guides, tous cachés) des menus SANS la retirer de `GUIDE_SPECS`,
+ * que les tests de specs lisent.
  *
  * Et le MENU de l'admin : les guides de boss sont portés dans quick, leurs
  * liens sortent ; `general-guides` reste (lot F19). Les guides sont FACTICES :

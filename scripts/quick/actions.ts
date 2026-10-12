@@ -106,6 +106,7 @@ import {
 } from '@/lib/admin/changelog-templates';
 import { catalogOptions, listItemEntries } from '@/lib/data/item-catalog';
 import { rankItemMatches } from '@/lib/data/item-search';
+import { resolveVideo } from '@/lib/admin/video-add';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
 import {
@@ -193,7 +194,6 @@ import { upsertSearchAliases } from '@/lib/admin/search-alias-store';
 import { upsertShortName } from '@/lib/admin/short-name-store';
 import {
   addGuideVersion,
-  appendGuideVideo,
   loadGuideDraft,
   patchGuideMetaFields,
   saveGuideDraft,
@@ -301,7 +301,6 @@ import { listMonsters } from '@/lib/data/monsters';
 import { loadSearchAliases } from '@/lib/data/search-aliases';
 import { loadShortNames } from '@/lib/data/short-names';
 import {
-  GUIDE_SPECS,
   guideSpec,
   type CatSpec,
   type GuideDraft,
@@ -357,6 +356,7 @@ import type {
   ProsCons,
   Skill,
   SkillPriority,
+  VideoRef,
 } from '@contracts';
 import type { Character } from '@datagen/extractor/specs/character';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
@@ -1880,138 +1880,40 @@ export async function addComics(
 }
 
 // --------------------------------------------------------------- vidéos ------
+// Une vidéo s'ajoute là où elle vit : dans la Fiche d'un perso (carte Vidéos),
+// dans le sous-onglet Vidéos d'un guide. Les deux pages cherchent sur la chaîne
+// officielle et résolvent une URL par ces deux LECTURES ; la liste, elle, part
+// avec leur « Enregistrer » (`saveCharacterSheet`, `saveGuide`).
 
-export type VideoTarget =
-  | { kind: 'character'; id: string }
-  | { kind: 'guide'; category: string; slug: string; version?: string };
-
-export interface VideoTargetOption {
-  value: string;
-  label: string;
-}
-
-/**
- * Cibles proposées : un perso (tableau `videos` du curé) ou un guide.
- *
- * Côté guides on ne retient que les catégories dont la spec dit `videos: true`,
- * et le fichier visé est le `videos.json` du guide — à la racine s'il est plat,
- * sous `versions/<clé>/` s'il est versionné (la version la plus récente par
- * défaut, c'est celle qu'on alimente).
- */
-export function videoTargets(): { characters: VideoTargetOption[]; guides: VideoTargetOption[] } {
-  // Nom COMPLET, jamais le nom nu : `characterDisplayName` recolle le préfixe
-  // (« Core Fusion », ou le surnom quand le perso l'inclut — « Monad Iota »).
-  // Sans lui la liste montre plusieurs « Iota » que rien ne distingue.
-  // Étiquetage en anglais (langue pivot de l'admin).
-  const characters = getCharacterListItems()
-    .map((c) => ({ value: `character:${c.id}`, label: characterDisplayName(c) }))
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  // Ni les guides CACHÉS (les 26 Adventure License, morts) : une vidéo ne
-  // s'ajoute pas à une page que le site ne liste plus.
-  const guides = listGuides()
-    .filter((g) => GUIDE_SPECS[g.category]?.videos && !g.hidden)
-    .map((g) => {
-      const version = g.versions[0]?.key;
-      return {
-        value: `guide:${g.category}:${g.slug}${version ? `:${version}` : ''}`,
-        label: `${g.category} · ${g.slug}${version ? ` (${version})` : ''}`,
-      };
-    })
-    .sort((a, b) => a.label.localeCompare(b.label));
-
-  return { characters, guides };
-}
-
-/** Reconstruit une cible depuis la valeur du sélecteur. */
-export function parseTarget(value: string): VideoTarget | null {
-  const [kind, ...rest] = value.split(':');
-  if (kind === 'character' && rest[0]) return { kind: 'character', id: rest[0] };
-  if (kind === 'guide' && rest[0] && rest[1])
-    return { kind: 'guide', category: rest[0], slug: rest[1], version: rest[2] };
-  return null;
-}
-
-/** Id YouTube d'une URL collée, ou l'id lui-même s'il est déjà nu. */
-export function youtubeId(input: string): string | null {
-  const raw = input.trim();
-  if (/^[A-Za-z0-9_-]{11}$/.test(raw)) return raw;
-  const m = raw.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
-  return m ? m[1] : null;
-}
+const VIDEO_META_PATH = 'data/generated/video-meta.json';
 
 export const searchVideos = (query: string) => searchOfficial(query);
 
+/** La vidéo d'une URL ou d'un id, métadonnées YouTube comprises — rien n'est écrit. */
+export const videoMeta = (input: unknown) => resolveVideo(input, fetchMeta);
+
 /**
- * Ajoute une vidéo à sa cible, méta YouTube résolue au passage, puis rafraîchit
- * le cache `video-meta.json` (Schema.org exige `uploadDate`, jamais écrit à la
- * main) et committe. Ces données sont lues au rendu : elles n'existent en prod
- * qu'après « Pousser » et le build de la CI.
+ * Le cache `video-meta.json` après une écriture qui a touché des vidéos
+ * (Schema.org exige `uploadDate`, jamais écrit à la main) : `true` s'il a été
+ * rafraîchi — il part alors dans le commit. Un échec (YouTube injoignable) est
+ * dit au journal et n'arrête rien : le curé est déjà écrit et doit être
+ * committé, `pnpm datagen:video-meta` rattrapera le cache.
  */
-export async function addVideo(
-  target: VideoTarget,
-  input: string,
-  label?: string,
-  report?: Report,
-): Promise<Outcome> {
-  const id = youtubeId(input);
-  if (!id) return { ok: false, log: [`Id YouTube illisible : ${input}`] };
-
-  const j = journal(report);
-  const log = j.lines;
-
-  j.doing('métadonnées YouTube');
-  const meta = (await fetchMeta([id]))[id];
-  if (!meta) return { ok: false, log: [`YouTube ne connaît pas ${id} (ou la clé API manque).`] };
-
-  j.done(`${meta.title} — ${meta.author}`);
-  const touched: string[] = [];
-
-  if (target.kind === 'character') {
-    const curated = loadCuratedCharacters()[target.id] ?? {};
-    const videos = curated.videos ?? [];
-    if (videos.some((v) => v.id === id))
-      return { ok: false, log: [...log, 'Déjà présente sur ce perso.'] };
-    const errors = await upsertCharacterCurated(target.id, {
-      ...curated,
-      videos: [
-        ...videos,
-        {
-          platform: 'youtube',
-          id,
-          title: meta.title,
-          author: meta.author,
-          uploadDate: meta.uploadDate,
-        },
-      ],
-    });
-    if (errors.length) return { ok: false, log: [...log, ...errors] };
-    touched.push('data/curated/characters.json');
-    j.done(`ajoutée au perso ${target.id}.`);
-  } else {
-    // Le FICHIER dépend de la famille du guide (content.json, config.json d'une
-    // version, ou videos.json), et le store est seul à le savoir — c'est pour
-    // avoir recalculé ce chemin ici qu'on écrivait des vidéos que la page ne lit
-    // pas. Même principe que les persos, qui passent par `upsertCharacterCurated`.
-    const added = await appendGuideVideo(target.category, target.slug, target.version, {
-      platform: 'youtube',
-      id,
-      title: meta.title,
-      author: meta.author,
-      ...(label ? { label } : {}),
-    });
-    if (!added.path) return { ok: false, log: [...log, ...added.errors] };
-    touched.push(added.path);
-    j.done(`ajoutée au guide ${target.category}/${target.slug} (${added.path}).`);
-  }
-
+async function refreshVideoCache(
+  refresh: () => Promise<void>,
+  j: ReturnType<typeof journal>,
+): Promise<boolean> {
   j.doing('rafraîchissement du cache video-meta');
-  await refreshVideoMeta();
-  touched.push('data/generated/video-meta.json');
+  try {
+    await refresh();
+  } catch (e: unknown) {
+    j.done(
+      `cache video-meta NON rafraîchi (${e instanceof Error ? e.message : String(e)}) — \`pnpm datagen:video-meta\` le rattrapera.`,
+    );
+    return false;
+  }
   j.done('cache video-meta rafraîchi.');
-
-  const commit = commitPaths(touched, `feat(videos): ${meta.title}`, report);
-  return { ok: commit.ok, log: [...log, ...commit.log] };
+  return true;
 }
 
 // ---------------------------------------------------------- rangs et rôles ---
@@ -2120,6 +2022,7 @@ function withField(
     | Record<string, string>
     | SkillPriority
     | ProsCons
+    | VideoRef[]
     | SynergyGroup[]
     | undefined,
 ): CharacterCurated {
@@ -2229,7 +2132,11 @@ export function planRankChanges(disk: RankDisk, changes: RankChange[]): RankPlan
 
 export interface RankRow {
   id: string;
-  /** Nom COMPLET en anglais, comme la cible des vidéos (cf. `videoTargets`). */
+  /**
+   * Nom COMPLET en anglais, jamais le nom nu : `characterDisplayName` recolle
+   * le préfixe (« Core Fusion », ou le surnom quand le perso l'inclut — « Monad
+   * Iota »). Sans lui la liste montre plusieurs « Iota » que rien ne distingue.
+   */
   name: string;
   element: string;
   class: string;
@@ -2595,6 +2502,8 @@ export interface CharacterSheetDeps extends CharacterSheetDisk {
   upsertCharacter: (id: string, curated: CharacterCurated) => Promise<string[]>;
   upsertEe: (id: string, patch: EeCuratedPatch) => Promise<string[]>;
   applyKit: (patch: CharacterKitPatch) => Promise<string[]>;
+  /** Le cache `video-meta.json`, recalculé du disque : après une liste de vidéos écrite. */
+  refreshVideoMeta: () => Promise<void>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
@@ -2653,6 +2562,7 @@ export const CHARACTER_SHEET_DEPS: CharacterSheetDeps = {
   upsertCharacter: upsertCharacterCurated,
   upsertEe: upsertEeCurated,
   applyKit: applyCharacterKitCuration,
+  refreshVideoMeta,
   commitPaths,
 };
 
@@ -2718,7 +2628,8 @@ export interface SheetEe extends SheetEeItem, EeCuratedState {
  * DÉRIVÉS du jeu, en lecture), son entrée curée du disque ENTIÈRE (les
  * sous-onglets Pros / Cons et Synergies y lisent `prosCons` et `synergies`),
  * ses rangs tels que Rangs les sert — et l'échelle, les rôles, les paliers des
- * menus —, les tags humains que la fiche coche, ses vidéos en lecture. Pour les
+ * menus —, les tags humains que la fiche coche, ses vidéos (la carte Vidéos les
+ * édite : `curated.videos` part avec « Enregistrer »). Pour les
  * textes à tags inline : `refs`, ce que ces tags peuvent viser (les listes de
  * l'éditeur assisté de l'admin, `buildInlineRefs`), et `langs`, les langues du
  * site dans l'ordre où l'onglet les range — l'anglais se saisit, les autres se
@@ -2790,13 +2701,14 @@ export async function previewInline(
 }
 
 /** Les champs du curé que la fiche écrit hors des rangs, dans l'ordre du fichier. */
-const SHEET_KEYS = ['tags', 'skillPriority', 'prosCons', 'synergies'] as const;
+const SHEET_KEYS = ['tags', 'skillPriority', 'prosCons', 'videos', 'synergies'] as const;
 type SheetKey = (typeof SHEET_KEYS)[number];
 
 const SHEET_LABELS: Record<SheetKey, string> = {
   tags: 'tags',
   skillPriority: 'priorité de skills',
   prosCons: 'pros / cons',
+  videos: 'vidéos',
   synergies: 'synergies',
 };
 
@@ -2809,8 +2721,9 @@ const PRIORITY_KEYS = ['first', 'second', 'ultimate'] as const;
  * Ce que la fiche envoie. `ranks` : des cellules, comme Rangs les envoie (rang
  * PvE, rang PvP, rôle, paliers). `curated` : les champs hors rangs, chacun
  * ENTIER et seulement s'il a bougé — une priorité vide n'y est pas, une liste
- * de tags est celle des tags humains cochés, `prosCons` porte les deux listes
- * et `synergies` tous les groupes. `was` : l'entrée que la page avait chargée.
+ * de tags est celle des tags humains cochés, `prosCons` porte les deux listes,
+ * `videos` toutes les vidéos dans l'ordre de la page et `synergies` tous les
+ * groupes. `was` : l'entrée que la page avait chargée.
  * `kit` : les chips de skills, par carte modifiée — la liste ENTIÈRE de ses refs
  * masquées, celle de ses effets ajoutés (vide = plus rien sur cette carte).
  * `ee` : les chips de l'EE, ses deux listes ENTIÈRES, et l'entrée curée de l'EE
@@ -2823,6 +2736,7 @@ export interface CharacterSheetChanges {
     skillPriority?: SkillPriority;
     tags?: string[];
     prosCons?: ProsCons;
+    videos?: VideoRef[];
     synergies?: SynergyGroup[];
   };
   was?: CharacterCurated;
@@ -2887,6 +2801,34 @@ function cleanSheetTags(raw: unknown, disk: readonly string[]): string[] | strin
     ...disk.filter((t) => !HUMAN_TAGS.includes(t)),
     ...HUMAN_TAGS.filter((t) => (raw as string[]).includes(t)),
   ];
+}
+
+/**
+ * Les vidéos d'un perso venues de la page, dans SON ordre, rebâties sur les
+ * seules clés du modèle (`VideoRef`) : la plateforme et l'id, puis le titre,
+ * l'auteur et la date quand ils sont là. Un id en double est refusé — la page
+ * le refuse déjà à l'ajout.
+ */
+function cleanSheetVideos(raw: unknown): VideoRef[] | string {
+  if (!Array.isArray(raw)) return 'une liste attendue';
+  const out: VideoRef[] = [];
+  for (const v of raw) {
+    if (!v || typeof v !== 'object' || Array.isArray(v)) return 'forme inattendue';
+    const r = v as Record<string, unknown>;
+    if (typeof r.platform !== 'string' || !r.platform.trim()) return 'une vidéo sans plateforme';
+    if (typeof r.id !== 'string' || !r.id.trim()) return 'une vidéo sans id';
+    if (out.some((o) => o.platform === r.platform && o.id === r.id))
+      return `« ${r.id} » est en double`;
+    const video: VideoRef = { platform: r.platform, id: r.id };
+    for (const key of ['title', 'author', 'uploadDate'] as const) {
+      const text = r[key];
+      if (text === undefined || text === null || text === '') continue;
+      if (typeof text !== 'string') return `${r.id} · ${key} : une chaîne attendue`;
+      video[key] = text;
+    }
+    out.push(video);
+  }
+  return out;
 }
 
 /** Ce qui cloche dans une ligne d'une liste de la fiche. */
@@ -3138,7 +3080,10 @@ function planEe(
  *     Les pros, les cons et les raisons de synergie sont CONTRÔLÉS avant
  *     (`localizedIssues` : tags inline, langue de repli, parité), les héros
  *     d'une synergie aussi : un écart est un refus situé à la ligne
- *     (`list`, `index`), et la liste entière n'est pas écrite ;
+ *     (`list`, `index`), et la liste entière n'est pas écrite. Les vidéos
+ *     (`cleanSheetVideos`) partent dans l'ordre de la page ; écrites, le cache
+ *     `video-meta.json` est rafraîchi (`deps.refreshVideoMeta`) et part dans
+ *     le commit ;
  *   - puis les chips de skills (`changes.kit`), contrôlées par `planKit` contre
  *     les cartes que le serveur calcule pour CE perso, et écrites par
  *     `applyCharacterKitCuration` dans `character-skills.json` — seulement si
@@ -3315,6 +3260,18 @@ export async function saveCharacterSheet(
       );
     }
   }
+  let videosMoved = false;
+  if (keys.includes('videos')) {
+    const videos = cleanSheetVideos(sent.videos);
+    if (typeof videos === 'string')
+      refuse({ field: 'videos', reason: videos }, `${name} · ${SHEET_LABELS.videos}`);
+    else if (!sameJson(videos, current.videos ?? [])) {
+      const n = videos.length;
+      next = withField(next, 'videos', n ? videos : undefined);
+      said.push(n ? `${SHEET_LABELS.videos} : ${n}` : `${SHEET_LABELS.videos} retirées`);
+      videosMoved = true;
+    }
+  }
   if (keys.includes('synergies')) {
     const syn = cleanSynergies(sent.synergies, disk.roster);
     if (typeof syn === 'string')
@@ -3343,6 +3300,10 @@ export async function saveCharacterSheet(
     } else {
       touched.add(CHARACTERS_PATH);
       for (const line of said) j.done(line);
+      // Le cache des métadonnées suit la liste écrite : une vidéo ajoutée y
+      // entre, une vidéo retirée de partout en sort.
+      if (videosMoved && (await refreshVideoCache(deps.refreshVideoMeta, j)))
+        touched.add(VIDEO_META_PATH);
     }
   }
 
@@ -5630,6 +5591,8 @@ export interface GuidesDeps extends GuidesDisk {
   /** Re-date un `meta.json` ; `false` s'il portait déjà cette date. */
   stamp: (metaPath: string, date: string) => Promise<boolean>;
   today: () => string;
+  /** Le cache `video-meta.json`, recalculé du disque : après des vidéos écrites. */
+  refreshVideoMeta: () => Promise<void>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
 }
 
@@ -5650,6 +5613,7 @@ export const GUIDES_DEPS: GuidesDeps = {
   dirty: (dir) => gitDirtyFiles(dir),
   stamp: stampMeta,
   today: todayLocal,
+  refreshVideoMeta,
   commitPaths,
 };
 
@@ -6070,7 +6034,9 @@ function cleanGuideMeta(raw: unknown, refuse: (r: GuideRefusal) => void): GuideM
  * partagée), `meta.updated` passe à aujourd'hui, le `meta.json` re-daté
  * partant dans le même commit, `chore(guides): <catégorie>/<slug>`. Les
  * `.json` de quick partent en `--no-verify` : sans ce stamp, une édition par
- * quick ne re-daterait jamais le guide.
+ * quick ne re-daterait jamais le guide. Les vidéos d'une version ont bougé
+ * (une ajoutée, une retirée) : le cache `video-meta.json` est rafraîchi
+ * (`deps.refreshVideoMeta`) et part dans ce commit.
  */
 export async function saveGuide(
   category: string,
@@ -6197,7 +6163,18 @@ export async function saveGuide(
     stamped = await deps.stamp(`${base}meta.json`, today);
     if (stamped) j.done(`meta.updated : ${today}`);
   } else j.done('archives seules : la date du guide ne bouge pas');
-  const paths = [...new Set([...changed, ...(stamped ? [`${base}meta.json`] : [])])];
+  // Le cache des métadonnées suit les vidéos écrites, version par version.
+  const videosOf = (d: GuideDraft) => d.versions.map((v) => [v.key, v.videos]);
+  const cached =
+    !sameJson(videosOf(draft), videosOf(disk.draft)) &&
+    (await refreshVideoCache(deps.refreshVideoMeta, j));
+  const paths = [
+    ...new Set([
+      ...changed,
+      ...(stamped ? [`${base}meta.json`] : []),
+      ...(cached ? [VIDEO_META_PATH] : []),
+    ]),
+  ];
   const commit = deps.commitPaths(paths, `chore(guides): ${name}`, report);
   return out(commit.ok, [...j.lines, ...commit.log], { written: true });
 }

@@ -45,7 +45,6 @@ export const GROUPS = [
       { id: 'events', label: 'Événements', wide: true },
       { id: 'changelog', label: 'Journal du site' },
       { id: 'comics', label: '4-comics' },
-      { id: 'videos', label: 'Vidéos' },
       { id: 'discord', label: 'Discord', wide: true },
     ],
   },
@@ -74,15 +73,13 @@ export const GROUPS = [
 
 /**
  * `/api/state`, demandé une fois au démarrage (`sections.start`) : codes promo,
- * catalogue des récompenses, langues des 4-comics et plafond d'un envoi, cibles
- * des vidéos, ce que `.env.local` permet, le poste, la base des images et
- * l'état de git. Les sections qui en dépendent attendent `stateLoaded`.
+ * catalogue des récompenses, langues des 4-comics et plafond d'un envoi, ce
+ * que `.env.local` permet, le poste, la base des images et l'état de git. Les sections qui en dépendent attendent `stateLoaded`.
  */
 export const state = {
   coupons: [],
   rewards: [],
   langs: [],
-  targets: { characters: [], guides: [] },
   imgBase: 'https://img.outerpedia.com',
 };
 let loaded;

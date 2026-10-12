@@ -104,7 +104,13 @@ ligne pliée, sa fiche dépliée —, une entrée nouvelle posée par GABARIT
 l'historique, le perso cherché dans le roster donne le titre en six langues,
 la puce et le slug), « Traduire » par entrée, et sous la fiche l'APERÇU de la
 carte de `/changelog` dans la langue choisie ; lien retiré du menu admin le
-08/10), 4-comics, Vidéos, Discord.
+08/10), 4-comics, Discord. « Vidéos » n'y est PLUS une section (12/10, lot
+B48, revue de Sevih : « il y a une partie qui va dans l'éditeur de perso et
+l'autre au sein des guides ») : une vidéo s'ajoute là où elle vit — la carte
+Vidéos de la Fiche d'un perso, le sous-onglet Vidéos d'un guide —, par le même
+formulaire (`ui/video-add.js` : la recherche sur la chaîne officielle, une URL
+ou un id, « ＋ vidéo »), et part avec l'« Enregistrer » de la fiche ou du
+guide, `video-meta.json` dans le même commit.
 Données : Rangs, Extraction (= Extractor › la revue de chaque cible et son
 acceptation, étape 19, lot F20 : la vue d'ensemble des dix cibles avec leurs
 cinq comptes — ceux de l'inbox, les monstres au périmètre du site — et leur
@@ -198,8 +204,9 @@ ne s'ouvre plus qu'à son bouton, et « ← Récap » y ramène d'une fiche. C11
 la coquille, le picker
 partagé (`ui/hero-picker.mjs`) et le sous-onglet
 Fiche : rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills,
-tags humains, les tags dérivés et les vidéos en lecture — un enregistrement, un
-commit `chore(characters): <perso>`. Les rangs et le rôle restent AUSSI dans
+tags humains, les tags dérivés et les vidéos en lecture (ÉDITABLES depuis B48 :
+la liste avec miniatures, ✕, « Ajouter une vidéo » par la chaîne officielle ou
+par URL) — un enregistrement, un commit `chore(characters): <perso>`. Les rangs et le rôle restent AUSSI dans
 la grille Rangs. B42 porte Pros / Cons et Synergies (= Tools › Pro / Con et
 Tools › Synergy, étapes 4 et 3) : des textes à tags inline saisis en anglais,
 leur aperçu tel que le site les rend, « Traduire » vers les cinq autres
@@ -283,7 +290,8 @@ en sous-onglets : Méta (titre et description en six langues, « Traduire »,
 caché), Combat (le combat avec picker en lignes, ou les donjons ordonnés, ou
 le boss ; pour un versionné les pins de la version en lecture et
 « dépingler »), Intro, puis par version — Tips, Notes, Persos, Équipe (les
-quatre formes), Vidéos (en lecture, `label` préservé, ✕) — chaque texte EN
+quatre formes), Vidéos (`label` préservé, ✕, et depuis B48 « Ajouter une
+vidéo » sur la version montrée, une ancienne comprise) — chaque texte EN
 avec son aperçu et ses traductions repliées, « Traduire » par onglet,
 l'anglais qui porte la structure d'un bloc. Un seul guide ouvert, tout le
 guide envoyé en un geste : `was` contre le disque, refus situés, le store de
@@ -521,8 +529,8 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     section « Guides » (groupe Guides, cf. « Déjà dans quick »). L'agacement
     de Sevih y est corrigé : une catégorie dont TOUS les guides sont cachés
     (Adventure License, 26 guides ; Monad Gate, 31) n'apparaît plus — ni dans
-    la vue d'ensemble, ni dans les cibles de Vidéos, ni dans le menu de
-    l'admin — sauf la case « cachés », qui les montre avec leur badge. Les
+    la vue d'ensemble, ni dans les cibles de Vidéos (disparues avec la
+    section, B48), ni dans le menu de l'admin — sauf la case « cachés », qui les montre avec leur badge. Les
     sept catégories de `GUIDE_SPECS` sont portées ; leurs liens sortent du
     menu de l'admin (« Overview » y est resté jusqu'à l'étape 17, F19, qui
     porte l'import de contribution). NOTE : guild-raid, skyward-tower, other, monad-gate et les

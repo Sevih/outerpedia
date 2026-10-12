@@ -329,23 +329,42 @@
   gap: 8px;
 }
 
-/* Les vidéos, en lecture : une ligne par vidéo, son titre puis auteur et date. */
+/* Le lien de l'en-tête (« extraction »). */
 #tab-character .c-link {
   margin-left: auto;
 }
+/* Les vidéos : une ligne par vidéo — sa miniature (120 px), son titre puis
+   auteur et date, ✕ au bout. Une vidéo ajoutée porte le filet accent. Dessous,
+   « Ajouter une vidéo » : le formulaire partagé (`video-add.css`). */
 #tab-character .c-videos {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 #tab-character .c-videos li {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 6px 12px;
   flex-wrap: wrap;
+  padding-left: 8px;
+  border-left: 2px solid transparent;
+}
+#tab-character .c-videos li.dirty {
+  border-left-color: var(--accent);
+}
+#tab-character .c-videos img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface-overlay);
+  flex: 0 0 auto;
+}
+#tab-character .c-videos .btn.icon {
+  margin-left: auto;
 }
 #tab-character .c-vt {
   font-size: 13.5px;

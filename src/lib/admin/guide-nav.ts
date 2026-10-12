@@ -13,8 +13,7 @@
  * dont TOUS les guides sont cachés ne se propose plus nulle part
  * (`categoriesWithVisibleGuide`, la règle de `visibleCategorySlugs` du site) :
  * c'est ainsi qu'Adventure License, 26 guides tous cachés, quitte les menus
- * sans qu'on la retire de `GUIDE_SPECS`, que `videoTargets` et les tests de
- * specs lisent encore.
+ * sans qu'on la retire de `GUIDE_SPECS`, que les tests de specs lisent encore.
  */
 import { GUIDE_SPECS } from '@/lib/admin/guide-draft';
 import { listGuides, type Guide } from '@/lib/data/guides';

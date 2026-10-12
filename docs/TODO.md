@@ -304,8 +304,8 @@ document` (un lot A).
       (aucun au 11/10 : en poser un par l'extractor d'abord) se lit avec
       l'étiquette de son archive et se dépingle. (5) Le menu de l'admin :
       plus de groupe « Guide editor » du tout depuis F19 (ni Adventure
-      License, ni les catégories de boss, ni Overview). (6) Le menu Vidéos
-      de quick ne propose plus d'AL. (7) Après « Pousser » et le
+      License, ni les catégories de boss, ni Overview). (6) Caduc depuis B48 : le menu
+      Vidéos de quick a disparu avec sa section. (7) Après « Pousser » et le
       déploiement : la page du guide retouché, sa date « Updated » sur le
       site. Hors périmètre vu en portant : le gabarit « Mise à jour » du
       Journal ne connaît que Joint Challenge, Guild Raid et World Boss (pas
@@ -486,10 +486,35 @@ document` (un lot A).
       taper 7 → champ rouge, « entre 1 et 3, ou vide », rien ne part ; 2 →
       enregistré. Trois persos portent des priorités à 0 sur le disque : elles
       restent tant qu'on n'y touche pas — à trancher, 0 est-il une valeur ?
-      (6) Cocher « free », enregistrer ; « ajouter dans Vidéos » ouvre
-      l'onglet Vidéos sur ce perso. (7) Caduc depuis B40 : Gear reco n'a plus
+      (6) Cocher « free », enregistrer (« ajouter dans Vidéos » : caduc
+      depuis B48, la carte Vidéos s'édite sur place — cf. ses contrôles
+      plus bas). (7) Caduc depuis B40 : Gear reco n'a plus
       de picker de perso à lui, il prend celui de la fiche. À juger aussi : les
       deux cartes côte à côte (une seule sous 1000 px) — assez aérées ?
+- [ ] **Vidéos dans la fiche et dans le guide — contrôles à l'écran (lot
+      B48)** : le banc ne clique pas, et ni YouTube ni un enregistrement réel
+      n'ont été joués (clé vidée au banc, quota). Relancer quick AVEC la clé
+      (`.env.local`), puis : (1) le groupe Publication n'a plus « Vidéos »,
+      la pastille YouTube de l'en-tête est verte. (2) Fiche perso › Fiche
+      d'un perso sans vidéo : « Chercher sur la chaîne officielle » sur son
+      nom → CINQ candidats au plus, avec leur miniature ; « choisir » pose
+      l'id, « ＋ vidéo » l'ajoute en fin de liste (filet accent, « 1
+      changement ») — rien n'est committé à ce stade. (3) La même par URL
+      collée (`https://youtu.be/…`) sur un autre perso ; une URL déjà dans la
+      liste → « déjà dans la liste », sous le formulaire. « Enregistrer » →
+      UN commit `chore(characters): <perso>` dont `git show --stat` porte
+      `data/curated/characters.json` ET `data/generated/video-meta.json` (la
+      date de la vidéo y est entrée). (4) ✕ sur une vidéo, « Enregistrer » :
+      la clé `videos` suit, et l'id quitte `video-meta.json` s'il n'est plus
+      cité nulle part. (5) Guides › un joint challenge › une version
+      ANCIENNE › Vidéos : ajouter par URL avec un « Libellé d'onglet »,
+      « Enregistrer » → UN commit `chore(guides): <cat>/<slug>` qui porte le
+      `versions/<clé>/config.json` de CETTE version et `video-meta.json` ;
+      la version récente n'a pas bougé. (6) Après « Pousser » et le
+      déploiement : la vidéo sur la page du perso et sur celle du guide
+      (l'onglet du libellé). À juger aussi : la carte Vidéos en pleine
+      largeur avec ses miniatures de 120 px — pas trop haute sur un perso à
+      quatre ou cinq vidéos ?
 - [ ] **Onglet « Effets » — contrôles à l'écran (lot B41)** : le banc ne
       tape pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : quatre routes nouvelles). (1) La

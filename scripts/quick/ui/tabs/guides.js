@@ -11,7 +11,8 @@
 // Combat (ce que la catégorie demande, et pour un versionné les pins en
 // lecture), Intro, puis par version — Tips, Notes, Persos, Équipe, Vidéos.
 // L'anglais se saisit et porte la structure, « Traduire » génère les autres
-// langues, chaque texte porte son aperçu. Une savebar, un enregistrement, un
+// langues, chaque texte porte son aperçu. Vidéos : la liste, ✕, et l'ajout par
+// la chaîne officielle ou par URL (`video-add.js`). Une savebar, un enregistrement, un
 // commit : tout le guide part en un geste (`saveGuideDraft` réécrit toutes les
 // versions), le `meta.json` re-daté avec lui.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
@@ -19,6 +20,7 @@ import { noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { heroTile } from '../hero-tile.mjs';
 import { sortable } from '../sortable.mjs';
+import { videoAdder } from '../video-add.js';
 import { openTemplate } from './changelog.js';
 
 // Les sous-onglets, dans l'ordre de l'éditeur de l'admin ; `scoped` : par version.
@@ -1010,10 +1012,33 @@ function teamHtml() {
 }
 
 // ------------------------------------------------------ « Vidéos »
+// « ＋ vidéo » : le formulaire partagé avec la Fiche perso, plus le libellé
+// d'onglet. La vidéo résolue se pose en fin de liste de la version MONTRÉE —
+// chaque version a la sienne — et part avec « Enregistrer ».
+const vidAdd = videoAdder({
+  root: $('gd-panel'),
+  id: 'gd-va',
+  label: true,
+  has: (id) => Boolean(v()?.videos.some((vid) => vid.id === id)),
+  scope: () => v(),
+  onAdd: (vid, label) => {
+    v().videos.push({
+      platform: 'youtube',
+      id: vid.id,
+      title: vid.title,
+      author: vid.author,
+      ...(label ? { label } : {}),
+    });
+    forgive('videos');
+    render();
+    $('gd-panel').querySelector('#gd-va [data-va="url"]')?.focus();
+  },
+});
+
 function videosHtml() {
   const x = v();
   return `<div class="gd-stack"><div class="card gd-card" data-card="videos">
-    <div class="card-head"><strong>Vidéos</strong><span class="badge off">${x.videos.length}</span><a class="gd-link" href="#videos" data-act="videos">ajouter dans Vidéos</a></div>
+    <div class="card-head"><strong>Vidéos</strong><span class="badge off">${x.videos.length}</span></div>
     <div class="gd-body">${
       x.videos.length
         ? `<ul class="gd-videos">${x.videos
@@ -1026,6 +1051,10 @@ function videosHtml() {
             .join('')}</ul>`
         : '<p class="lbl">aucune vidéo</p>'
     }${tabErr('videos')}</div>
+  </div>
+  <div class="card gd-card">
+    <div class="card-head"><strong>Ajouter une vidéo</strong><span class="lbl">YouTube — elle part avec « Enregistrer »</span></div>
+    <div class="gd-body">${vidAdd.html()}</div>
   </div></div>`;
 }
 
@@ -2312,19 +2341,6 @@ $('gd-panel').onclick = (e) => {
   switch (act) {
     case 'translate':
       return translate();
-    case 'videos': {
-      e.preventDefault();
-      sections.go('videos');
-      const target = document.getElementById('v-target');
-      const value = `guide:${sheet.guide.category}:${sheet.guide.slug}${spec().versioned ? `:${x.key}` : ''}`;
-      if (
-        target &&
-        !document.getElementById('tab-videos')?.hidden &&
-        [...target.options].some((o) => o.value === value)
-      )
-        target.value = value;
-      return;
-    }
     // Méta — rien de plus que la case (`onchange`).
     // Combat.
     case 'pick-group': {
@@ -2463,7 +2479,7 @@ $('gd-panel').onclick = (e) => {
     // Vidéos.
     case 'del-video':
       x.videos.splice(i, 1);
-      return redo('[data-act="videos"]');
+      return redo('#gd-va [data-va="url"]');
     default:
       return;
   }
@@ -2656,6 +2672,7 @@ async function load(cat, slug, keep = false) {
     created = null;
     adding = false;
     trOpen.clear();
+    vidAdd.reset();
   }
   const i = draft.versions.findIndex((x) => x.key === key);
   ver = i >= 0 ? i : 0;

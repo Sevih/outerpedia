@@ -1,6 +1,7 @@
 // Onglet « Fiche perso » : un perso, choisi dans le picker de héros partagé, et
 // ce que le wiki sait de lui en sous-onglets. « Fiche » : rangs, rôle, paliers
-// par transcendance, priorité de skills, tags. « Pros / Cons » et
+// par transcendance, priorité de skills, tags, et ses vidéos — la liste, ✕, et
+// l'ajout par la chaîne officielle ou par URL (`video-add.js`). « Pros / Cons » et
 // « Synergies » : des textes à tags inline, saisis en anglais, traduits par
 // « Traduire », avec leur aperçu tel que le site les rendra — Pros / Cons en
 // une carte par colonne : le rendu du site, puis UN texte anglais (une ligne
@@ -19,6 +20,7 @@ import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib
 import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { heroTile } from '../hero-tile.mjs';
+import { videoAdder, videoThumb } from '../video-add.js';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
 // Les sous-onglets, dans l'ordre de la fiche du site.
@@ -86,6 +88,8 @@ const cells = new Map();
 // Priorité de skills et tags humains saisis ; `null` : ceux du disque.
 let prio = null;
 let tags = null;
+// Les vidéos du perso, dans l'ordre de la page (`null` : celles du disque).
+let vids = null;
 // Paliers montrés sans valeur : ajoutés par « ＋ palier », ou vidés à la main.
 const added = new Set();
 // Refus du dernier enregistrement : clé de cellule, de champ ou de ligne → la raison.
@@ -171,6 +175,17 @@ const prioIssue = (k) =>
 const tagsBase = () => sheet.humanTags.filter((t) => (sheet.curated.tags ?? []).includes(t));
 const tagsNow = () => tags ?? tagsBase();
 const tagsMoved = () => tagsNow().join('|') !== tagsBase().join('|');
+const vidsNow = () => vids ?? sheet.videos;
+/** Les vidéos ajoutées et retirées : ce que la carte Vidéos a en attente. */
+const vidChanges = () =>
+  vidsNow().filter((v) => !sheet.videos.some((d) => d.id === v.id)).length +
+  sheet.videos.filter((d) => !vidsNow().some((v) => v.id === d.id)).length;
+/** La liste de la page : celle du disque si elle y revient. */
+function setVids(list) {
+  vids = list;
+  if (!vidChanges()) vids = null;
+  refused.delete('videos');
+}
 
 // Les textes à tags inline. L'anglais se saisit, les autres langues se
 // génèrent (« Traduire ») et se relisent ; le site replie une langue absente
@@ -394,7 +409,7 @@ const refusedIn = (id) => [...refused.keys()].filter((k) => subOf(k) === id);
 /** Ce qu'un sous-onglet a en attente. */
 const subChanges = (id) =>
   id === 'fiche'
-    ? ficheCells() + Number(prioMoved()) + Number(tagsMoved())
+    ? ficheCells() + Number(prioMoved()) + Number(tagsMoved()) + vidChanges()
     : id === 'skills'
       ? kitChanges()
       : id === 'ee'
@@ -405,9 +420,9 @@ const subChanges = (id) =>
 
 /**
  * Ce que compte la savebar : une cellule de rang (les deux de l'EE comprises), la
- * priorité, les tags, chaque ligne de pros, de cons ou de synergie ajoutée,
- * modifiée ou retirée, et chaque chip de skill ou d'EE masquée, rétablie,
- * ajoutée ou retirée. Pas les builds de Gear reco : ils ont leur barre, et
+ * priorité, les tags, chaque vidéo ajoutée ou retirée, chaque ligne de pros, de
+ * cons ou de synergie ajoutée, modifiée ou retirée, et chaque chip de skill ou
+ * d'EE masquée, rétablie, ajoutée ou retirée. Pas les builds de Gear reco : ils ont leur barre, et
  * « Enregistrer » d'ici ne les envoie pas.
  */
 const changes = () =>
@@ -461,9 +476,10 @@ const legacy = () =>
 const cardKeys = {
   ranks: () =>
     [...new Set([...cells.keys(), ...refusedIn('fiche')])].filter(
-      (k) => subOf(k) === 'fiche' && !KIT_KEYS.includes(k),
+      (k) => subOf(k) === 'fiche' && !KIT_KEYS.includes(k) && k !== 'videos',
     ),
   kit: () => KIT_KEYS,
+  videos: () => ['videos'],
   pros: () => lists.pros.map((l) => lineKey('pros', l)),
   cons: () => lists.cons.map((l) => lineKey('cons', l)),
   'ee-ranks': () => Object.keys(EE_FIELDS),
@@ -474,13 +490,15 @@ const cardMoved = (card) =>
     ? ficheCells() > 0
     : card === 'kit'
       ? prioMoved() || tagsMoved()
-      : card === 'ee-ranks'
-        ? eeCells() > 0
-        : card === 'ee-chips'
-          ? eeChipChanges() > 0
-          : card in lists
-            ? listChanges(card) > 0
-            : false;
+      : card === 'videos'
+        ? vidChanges() > 0
+        : card === 'ee-ranks'
+          ? eeCells() > 0
+          : card === 'ee-chips'
+            ? eeChipChanges() > 0
+            : card in lists
+              ? listChanges(card) > 0
+              : false;
 const cardBad = (card) => cardKeys[card]().some((k) => refused.has(k)) || issuesIn(card).length > 0;
 
 // ------------------------------------------------------ l'en-tête
@@ -718,11 +736,32 @@ function tiersHtml() {
     }</span></div>`;
 }
 
-/** Une vidéo curée, en lecture : son titre, son auteur, sa date. */
-const videoRow = (v) =>
-  `<li><span class="c-vt">${esc(v.title || v.id)}</span><span class="lbl">${esc(
+/** Une vidéo curée : sa miniature (YouTube), son titre, son auteur, sa date, ✕. */
+const videoRow = (v, i) =>
+  `<li${sheet.videos.some((d) => d.id === v.id) ? '' : ' class="dirty"'}>${
+    v.platform === 'youtube'
+      ? `<img src="${esc(videoThumb(v.id))}" alt="" aria-hidden="true" width="120" height="68" loading="lazy" />`
+      : ''
+  }<span class="c-vt">${esc(v.title || v.id)}</span><span class="lbl">${esc(
     [v.author, v.uploadDate?.slice(0, 10)].filter(Boolean).join(' · '),
-  )}</span></li>`;
+  )}</span><button class="btn icon" type="button" data-act="del-video" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(v.title || v.id)}">✕</button></li>`;
+
+// « ＋ vidéo » : le formulaire partagé avec Guides ; la vidéo résolue se pose
+// en fin de liste, et part avec « Enregistrer ».
+const vidAdd = videoAdder({
+  root: $('c-panel'),
+  id: 'c-va',
+  has: (id) => Boolean(sheet) && vidsNow().some((v) => v.id === id),
+  scope: () => sheet?.char.id,
+  onAdd: (v) => {
+    setVids([
+      ...vidsNow(),
+      { platform: 'youtube', id: v.id, title: v.title, author: v.author, uploadDate: v.uploadDate },
+    ]);
+    render();
+    $('c-panel').querySelector('#c-va [data-va="url"]')?.focus();
+  },
+});
 
 /** L'en-tête d'une carte : son titre, « modifié », « refusé ». */
 const cardHead = (card, title, more = '') =>
@@ -734,7 +773,7 @@ function ficheHtml() {
   const p = prioNow();
   const now = tagsNow();
   const derived = sheet.char.tags ?? [];
-  const { videos } = sheet;
+  const videos = vidsNow();
   return `<div class="c-cols">
     <div class="card c-card${cardBad('ranks') ? ' ko' : ''}" data-card="ranks">
       ${cardHead('ranks', 'Rangs')}
@@ -773,13 +812,16 @@ function ficheHtml() {
         }</div>
       </div>
     </div>
-    <div class="card c-card c-wide" data-card="videos">
-      <div class="card-head"><strong>Vidéos</strong><span class="badge off">${videos.length}</span><span class="lbl">en lecture</span><a class="c-link" href="#videos" data-act="videos">ajouter dans Vidéos</a></div>
+    <div class="card c-card c-wide${cardBad('videos') ? ' ko' : ''}" data-card="videos">
+      ${cardHead('videos', 'Vidéos', `<span class="badge off">${videos.length}</span>`)}
       <div class="c-body">${
         videos.length
           ? `<ul class="c-videos">${videos.map(videoRow).join('')}</ul>`
           : '<p class="lbl">aucune vidéo</p>'
-      }</div>
+      }${err('videos')}
+        <h3>Ajouter une vidéo</h3>
+        ${vidAdd.html()}
+      </div>
     </div>
   </div>`;
 }
@@ -1664,20 +1706,10 @@ $('c-panel').onclick = (e) => {
       onPick: set,
     });
   }
-  if (act === 'videos') {
-    e.preventDefault();
-    const id = sheet.char.id;
-    sections.go('videos');
-    // L'onglet Vidéos s'ouvre sur ce perso, s'il s'est ouvert (des changements
-    // en attente peuvent retenir ici) et si sa liste de cibles le propose.
-    const target = document.getElementById('v-target');
-    const value = `character:${id}`;
-    if (
-      target &&
-      !document.getElementById('tab-videos')?.hidden &&
-      [...target.options].some((o) => o.value === value)
-    )
-      target.value = value;
+  if (act === 'del-video') {
+    setVids(vidsNow().filter((_, i) => i !== Number(el.dataset.i)));
+    render();
+    $('c-panel').querySelector('#c-va [data-va="url"]')?.focus();
   }
 };
 
@@ -1829,17 +1861,19 @@ async function load(id, keep = false) {
   // Un serveur plus vieux que cette page ne sert ni les langues des textes, ni le kit, ni l'EE.
   if (!s.langs || !s.kit || s.ee === undefined)
     throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
-  // Un autre perso : les builds du précédent ne sont plus ceux de la fiche.
+  // Un autre perso : les builds du précédent ne sont plus ceux de la fiche,
+  // ni ce qui était saisi pour lui dans « Ajouter une vidéo ».
   if (sheet?.char.id !== s.char.id) {
     gearReset();
     geared = null;
+    vidAdd.reset();
   }
   sheet = s;
   wanted = null;
   pv.lang ||= s.langs.default;
   if (!keep) {
     cells.clear();
-    prio = tags = null;
+    prio = tags = vids = null;
     kit.hide = {};
     kit.add = {};
     ee.hide = ee.add = null;
@@ -1932,6 +1966,7 @@ $('c-save').onclick = async () => {
       PRIOS.filter(([k]) => prioNow()[k] !== '').map(([k]) => [k, Number(prioNow()[k])]),
     );
   if (tagsMoved()) curated.tags = tagsNow();
+  if (vidChanges()) curated.videos = vidsNow();
   // Les lignes envoyées, par liste : le serveur situe un refus par son rang
   // dans l'envoi — ici le rang de la colonne, ou la clé du groupe.
   const sentKeys = {};
@@ -1975,23 +2010,26 @@ $('c-save').onclick = async () => {
     // saisie s'y repose. Une cellule enregistrée ou refusée n'est plus
     // « modifiée » (la refusée montre la valeur du disque, cerclée), comme dans
     // Rangs ; celle qui n'a pas été traitée reste en attente. Un champ hors
-    // rangs refusé garde sa saisie — sauf si c'est le disque qui avait changé
-    // (`stale`) : il montre alors le disque. Les listes de textes de même :
+    // rangs refusé garde sa saisie (les vidéos comprises) — sauf si c'est le
+    // disque qui avait changé (`stale`) : il montre alors le disque. Les listes
+    // de textes de même :
     // une liste que le disque porte maintenant telle quelle est relue de lui,
     // une liste refusée garde ses lignes, le refus sur la sienne. Les chips :
     // une carte que le disque porte maintenant comme saisie n'est plus
     // modifiée (`kitPrune`, au chargement), une carte refusée garde sa saisie ;
     // celles de l'EE de même (`eePrune`) — sauf `stale` : elles montrent le disque.
     const pending = [...cells.values()];
-    const typed = { prio, tags };
+    const typed = { prio, tags, vids };
     await load(id, true);
     cells.clear();
     for (const c of pending)
       if (!said.has(cellKey(c.field, c.step))) setCell(c.field, c.step, c.to);
-    prio = tags = null;
+    prio = tags = vids = null;
     if (!r.stale) {
       if (typed.prio && PRIOS.some(([k]) => typed.prio[k] !== prioBase()[k])) prio = typed.prio;
       if (typed.tags && typed.tags.join('|') !== tagsBase().join('|')) tags = typed.tags;
+      // Les vidéos : une liste que le disque porte maintenant n'est plus en attente.
+      if (typed.vids) setVids(typed.vids);
     }
     for (const list of LISTS) if (r.stale || sameAsDisk(list)) fromDisk([list]);
     if (r.stale) ee.hide = ee.add = null;

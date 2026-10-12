@@ -1062,6 +1062,8 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       /** Un perso sans EE, et les refus du store des EE. */
       noEe?: boolean;
       eeErrors?: string[];
+      /** Le rafraîchissement du cache des vidéos échoue (YouTube injoignable). */
+      videoMetaError?: string;
     } = {},
   ) {
     const calls = {
@@ -1070,6 +1072,8 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
       kit: [] as CharacterKitPatch[],
       git: [] as [string[], string][],
     };
+    /** Les rafraîchissements du cache des vidéos : hors de `calls`, que des tests comparent en entier. */
+    const refreshed = { n: 0 };
     const fake: CharacterSheetDeps = {
       disk: () =>
         disk({
@@ -1095,12 +1099,16 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
         calls.kit.push(patch);
         return over.kitErrors?.(patch) ?? [];
       },
+      refreshVideoMeta: async () => {
+        refreshed.n++;
+        if (over.videoMetaError) throw new Error(over.videoMetaError);
+      },
       commitPaths: (paths, message) => {
         calls.git.push([paths, message]);
         return over.git ?? { ok: true, log: ['git : fait'] };
       },
     };
-    return { calls, fake };
+    return { calls, fake, refreshed };
   }
   const cell = (field: RankChange['field'], from: string, to: string, step?: string): RankChange =>
     change(AER, field, from, to, step);
@@ -1178,6 +1186,139 @@ describe('saveCharacterSheet — disque, stores et git injectés', () => {
     ]);
     // Un champ nouveau prend sa place dans l'entrée, pas la queue après les vidéos.
     expect(Object.keys(calls.character[0][1])).toEqual(['rank', 'tags', 'skillPriority', 'videos']);
+  });
+
+  const SURF = {
+    platform: 'youtube',
+    id: 'aaaaaaaaaaa',
+    title: 'Slacking Surfer, Aer',
+    author: 'OUTERPLANE',
+    uploadDate: '2025-09-22T10:00:00Z',
+  };
+
+  it('des vidéos : la liste de la page, nettoyée, écrite à sa place ; le cache rafraîchi part dans le MÊME commit', async () => {
+    const { calls, fake, refreshed } = deps();
+    const out = await save(
+      {
+        curated: {
+          // Une clé hors du modèle et un champ vide ne s'écrivent pas.
+          videos: [
+            ...ENTRY.videos!,
+            { ...SURF, thumbnail: 'https://i.ytimg.com/x.jpg', label: '' } as never,
+            { platform: 'youtube', id: 'bbbbbbbbbbb', title: '' },
+          ],
+        },
+      },
+      fake,
+    );
+
+    expect(out).toEqual({
+      ok: true,
+      log: ['vidéos : 3', 'cache video-meta rafraîchi.', 'git : fait'],
+      written: true,
+      stale: false,
+      refused: [],
+    });
+    expect(calls.character).toEqual([
+      [
+        AER,
+        { ...ENTRY, videos: [...ENTRY.videos!, SURF, { platform: 'youtube', id: 'bbbbbbbbbbb' }] },
+      ],
+    ]);
+    expect(Object.keys(calls.character[0][1])).toEqual(Object.keys(ENTRY));
+    expect(Object.keys(calls.character[0][1].videos![1])).toEqual([
+      'platform',
+      'id',
+      'title',
+      'author',
+      'uploadDate',
+    ]);
+    expect(refreshed.n).toBe(1);
+    expect(calls.git).toEqual([
+      [
+        ['data/curated/characters.json', 'data/generated/video-meta.json'],
+        `chore(characters): ${name}`,
+      ],
+    ]);
+  });
+
+  it('des vidéos : la dernière retirée retire la clé ; une entrée d’une autre plateforme repart telle quelle', async () => {
+    const { calls, fake, refreshed } = deps();
+    const out = await save({ curated: { videos: [] } }, fake);
+    expect(out.log).toEqual(['vidéos retirées', 'cache video-meta rafraîchi.', 'git : fait']);
+    expect(calls.character[0][1]).not.toHaveProperty('videos');
+    expect(refreshed.n).toBe(1);
+
+    const twitch = { platform: 'twitch', id: '2222222222', title: 'VOD' };
+    const other = deps({ entry: { rank: 'A', videos: [twitch] } });
+    await saveCharacterSheet(
+      AER,
+      { curated: { videos: [twitch, SURF] }, was: { rank: 'A', videos: [twitch] } },
+      other.fake,
+    );
+    expect(other.calls.character[0][1].videos).toEqual([twitch, SURF]);
+  });
+
+  it('des vidéos : `was` contrôlé — le disque en a changé : `stale`, rien n’est écrit ni rafraîchi', async () => {
+    const { calls, fake, refreshed } = deps();
+    const out = await saveCharacterSheet(
+      AER,
+      { curated: { videos: [SURF] }, was: { ...ENTRY, videos: [] } },
+      fake,
+    );
+    expect(out).toMatchObject({ ok: false, written: false, stale: true });
+    expect(out.refused).toEqual([
+      { field: 'videos', reason: 'le disque a changé depuis le chargement' },
+    ]);
+    expect(out.log[0]).toBe(`REFUSÉ — ${name} · vidéos : le disque a changé depuis le chargement.`);
+    expect(calls.character).toEqual([]);
+    expect(refreshed.n).toBe(0);
+    expect(calls.git).toEqual([]);
+  });
+
+  it('des vidéos : une forme fausse ou un doublon est refusé au champ, sans écriture ; la liste du disque renvoyée ne rafraîchit rien', async () => {
+    for (const [videos, reason] of [
+      ['abc', 'une liste attendue'],
+      [['abc'], 'forme inattendue'],
+      [[{ id: 'aaaaaaaaaaa' }], 'une vidéo sans plateforme'],
+      [[{ platform: 'youtube', id: ' ' }], 'une vidéo sans id'],
+      [[SURF, { platform: 'youtube', id: SURF.id }], `« ${SURF.id} » est en double`],
+      [[{ ...SURF, title: 42 }], `${SURF.id} · title : une chaîne attendue`],
+    ] as const) {
+      const { calls, fake, refreshed } = deps();
+      const out = await save({ curated: { videos: videos as never } }, fake);
+      expect(out).toMatchObject({ ok: false, written: false, stale: false });
+      expect(out.refused).toEqual([{ field: 'videos', reason }]);
+      expect(calls.character).toEqual([]);
+      expect(refreshed.n).toBe(0);
+      expect(calls.git).toEqual([]);
+    }
+
+    const same = deps();
+    const out = await save({ curated: { videos: ENTRY.videos } }, same.fake);
+    expect(out).toMatchObject({ ok: true, written: false });
+    expect(same.refreshed.n).toBe(0);
+  });
+
+  it('des vidéos : le store refuse — ni cache ni commit ; le cache en échec n’arrête pas le commit du curé', async () => {
+    const refusing = deps({ errors: () => ['videos[1].id : vide'] });
+    const r1 = await save({ curated: { videos: [...ENTRY.videos!, SURF] } }, refusing.fake);
+    expect(r1.refused).toEqual([{ field: 'videos', reason: 'videos[1].id : vide' }]);
+    expect(refusing.refreshed.n).toBe(0);
+    expect(refusing.calls.git).toEqual([]);
+
+    const down = deps({ videoMetaError: 'YouTube API : HTTP 403' });
+    const r2 = await save({ curated: { videos: [...ENTRY.videos!, SURF] } }, down.fake);
+    expect(r2).toMatchObject({ ok: true, written: true, refused: [] });
+    expect(r2.log).toEqual([
+      'vidéos : 2',
+      'cache video-meta NON rafraîchi (YouTube API : HTTP 403) — `pnpm datagen:video-meta` le rattrapera.',
+      'git : fait',
+    ]);
+    // Le cache n'a pas été réécrit : il ne part pas.
+    expect(down.calls.git).toEqual([
+      [['data/curated/characters.json'], `chore(characters): ${name}`],
+    ]);
   });
 
   it('une priorité vidée et un tag décoché retirent leur clé', async () => {
@@ -7478,6 +7619,8 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       addErrors?: string[];
       stamped?: boolean;
       git?: Outcome;
+      /** Le rafraîchissement du cache des vidéos échoue (YouTube injoignable). */
+      videoMetaError?: string;
     } = {},
   ) {
     const calls = {
@@ -7490,6 +7633,8 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       stamp: [] as [string, string][],
       git: [] as [string[], string][],
     };
+    /** Les rafraîchissements du cache des vidéos : hors de `calls`, que des tests comparent en entier. */
+    const refreshed = { n: 0 };
     const fake: GuidesDeps = {
       guides: () => [JC, SR, SR2, AL, GR, ADV, MG],
       draft: (c, s) => {
@@ -7546,12 +7691,16 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
         return over.stamped ?? true;
       },
       today: () => '2026-10-11',
+      refreshVideoMeta: async () => {
+        refreshed.n++;
+        if (over.videoMetaError) throw new Error(over.videoMetaError);
+      },
       commitPaths: (paths, message) => {
         calls.git.push([paths, message]);
         return over.git ?? { ok: true, log: ['git : fait'] };
       },
     };
-    return { calls, fake };
+    return { calls, fake, refreshed };
   }
 
   describe('guidesOverview', () => {
@@ -7819,6 +7968,65 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
         { platform: 'youtube', id: 'abc', title: 'T', author: 'Au', label: 'Legacy' },
         { platform: 'youtube', id: 'def', title: 'T2', author: 'Au' },
       ]);
+    });
+
+    it('une vidéo ajoutée à une version ANCIENNE : le cache rafraîchi part dans le commit du guide', async () => {
+      const { calls, fake, refreshed } = deps({ dirty: [`${BASE}versions/2026-05/config.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.versions[1].videos.push({ platform: 'youtube', id: 'def', title: 'T2', author: 'Au' });
+      const r = await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, fake);
+      expect(r).toMatchObject({ ok: true, written: true, refused: [] });
+      expect(calls.save[0].versions[1].videos).toEqual([
+        { platform: 'youtube', id: 'def', title: 'T2', author: 'Au' },
+      ]);
+      expect(refreshed.n).toBe(1);
+      expect(calls.git).toEqual([
+        [
+          [`${BASE}versions/2026-05/config.json`, 'data/generated/video-meta.json'],
+          'chore(guides): joint-challenge/annihilator',
+        ],
+      ]);
+      expect(r.log).toContain('cache video-meta rafraîchi.');
+    });
+
+    it('une vidéo RETIRÉE rafraîchit le cache aussi ; sans vidéo qui bouge, il n’est ni recalculé ni committé', async () => {
+      const gone = deps({ dirty: [`${BASE}versions/2026-10/config.json`] });
+      const draft = clone(JC_DRAFT);
+      draft.versions[0].videos = [];
+      await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, gone.fake);
+      expect(gone.refreshed.n).toBe(1);
+      expect(gone.calls.git[0][0]).toContain('data/generated/video-meta.json');
+
+      const tips = deps({ dirty: [`${BASE}versions/2026-10/tips.json`] });
+      const other = clone(JC_DRAFT);
+      other.versions[0].tipSections[0].tips[0].en = 'Go faster {B/BT_STAT|ST_SPEED}';
+      await saveGuide(CAT, SLUG, { draft: other, meta: metaOf(JC), was: wasOf(JC) }, tips.fake);
+      expect(tips.refreshed.n).toBe(0);
+      expect(tips.calls.git[0][0]).not.toContain('data/generated/video-meta.json');
+    });
+
+    it('le cache des vidéos en échec n’arrête pas le commit du guide ; un store qui refuse ne le recalcule pas', async () => {
+      const down = deps({
+        dirty: [`${BASE}versions/2026-10/config.json`],
+        videoMetaError: 'YouTube API : HTTP 403',
+      });
+      const draft = clone(JC_DRAFT);
+      draft.versions[0].videos.push({ platform: 'youtube', id: 'def', title: 'T2', author: 'Au' });
+      const r = await saveGuide(CAT, SLUG, { draft, meta: metaOf(JC), was: wasOf(JC) }, down.fake);
+      expect(r).toMatchObject({ ok: true, written: true });
+      expect(r.log).toContain(
+        'cache video-meta NON rafraîchi (YouTube API : HTTP 403) — `pnpm datagen:video-meta` le rattrapera.',
+      );
+      expect(down.calls.git[0][0]).not.toContain('data/generated/video-meta.json');
+
+      const refusing = deps({ saveErrors: ['Invalid version key : “2026-99” (YYYY-MM).'] });
+      await saveGuide(
+        CAT,
+        SLUG,
+        { draft: clone(draft), meta: metaOf(JC), was: wasOf(JC) },
+        refusing.fake,
+      );
+      expect(refusing.refreshed.n).toBe(0);
     });
 
     it('une ARCHIVE seule qui bouge : committée, mais le guide n’est pas re-daté', async () => {

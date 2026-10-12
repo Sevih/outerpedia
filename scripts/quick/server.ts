@@ -33,7 +33,7 @@
  *
  * `.env.local` est chargé à la main (tsx ne le fait pas, contrairement à Next) :
  * sans R2_* la publication des codes promo et des bannières est sautée, sans
- * YOUTUBE_API_KEY l'onglet vidéos ne résout plus les métadonnées, sans DISCORD_BOT_TOKEN
+ * YOUTUBE_API_KEY l'ajout d'une vidéo (Fiche perso, Guides) ne cherche ni ne résout plus rien, sans DISCORD_BOT_TOKEN
  * l'onglet Discord rédige et prévisualise mais n'envoie pas, et n'importe pas
  * les anciens résumés (cf. `discord.ts`), sans DEEPL_API_KEY ni ANTHROPIC_API_KEY
  * « Traduire » (Gear reco, Journal du site) répond qu'il n'a pas de clé.
@@ -70,7 +70,6 @@ import {
   acceptExtraction,
   addComics,
   addGuideVersionAction,
-  addVideo,
   bannersState,
   eventsState,
   changelogState,
@@ -105,7 +104,6 @@ import {
   monsterSheetState,
   monstersRoster,
   namesState,
-  parseTarget,
   planMode,
   previewChangelogEntry,
   previewGearBuilds,
@@ -132,7 +130,7 @@ import {
   searchVideos,
   spriteFile,
   translateNotes,
-  videoTargets,
+  videoMeta,
   type CharacterSheetChanges,
   type ComicBatch,
   type EffectChange,
@@ -450,7 +448,6 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
       // Plusieurs BD partent dans UN corps : la page refuse d'elle-même ce que
       // `body` couperait.
       maxUpload: MAX_BODY,
-      targets: videoTargets(),
       hasYoutubeKey: Boolean(process.env.YOUTUBE_API_KEY),
       hasR2: Boolean(process.env.R2_BUCKET),
       hasDiscord: Boolean(process.env.DISCORD_BOT_TOKEN),
@@ -634,19 +631,12 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
 
   if (req.method === 'GET' && url.pathname === '/api/youtube') {
+    // « Chercher sur la chaîne officielle » de la carte Vidéos d'une fiche de
+    // perso et du sous-onglet Vidéos d'un guide : cinq candidats, 100 unités
+    // de quota par appel. Une lecture.
     const q = url.searchParams.get('q')?.trim();
     if (!q) return json(res, { error: 'requête vide' }, 400);
     json(res, { candidates: await searchVideos(q) });
-    return;
-  }
-
-  if (req.method === 'POST' && url.pathname === '/api/video') {
-    const { target, input, label } = await body<{ target: string; input: string; label?: string }>(
-      req,
-    );
-    const parsed = parseTarget(target);
-    if (!parsed) return json(res, { ok: false, log: [`Cible inconnue : ${target}`] }, 400);
-    await stream(res, (report) => withGit(addVideo(parsed, input, label, report)));
     return;
   }
 
@@ -716,6 +706,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // fausse : 400 `{ error }`, que la page affiche.
     const b = await body<{ texts?: unknown; lang?: unknown } | null>(req).catch(() => null);
     const out = await previewInline(b?.texts, b?.lang);
+    json(res, out, 'error' in out ? 400 : 200);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/character/video-meta') {
+    // « ＋ vidéo » par URL ou par id, de la fiche d'un perso comme d'un guide :
+    // l'id et ses métadonnées YouTube (`resolveVideo`). Une LECTURE — rien ne
+    // s'écrit, la page pose l'entrée dans sa liste, qui part avec
+    // « Enregistrer ». Un refus : 400 `{ error }`, que la page affiche.
+    const b = await body<{ input?: unknown } | null>(req).catch(() => null);
+    const out = await videoMeta(b?.input);
     json(res, out, 'error' in out ? 400 : 200);
     return;
   }

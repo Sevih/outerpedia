@@ -333,9 +333,6 @@
 #tab-guides .gd-ko:empty {
   display: none;
 }
-#tab-guides .gd-link {
-  margin-left: auto;
-}
 
 /* ---------------------------------------------------------------- les textes
    Un texte à tags inline, celui de la Fiche perso : l'anglais (un champ d'une
@@ -533,7 +530,9 @@
   gap: 12px;
 }
 
-/* ---------------------------------------------------------------- les vidéos */
+/* ---------------------------------------------------------------- les vidéos
+   La liste (titre · auteur · plateforme · id, le libellé d'onglet en badge, ✕),
+   puis la carte « Ajouter une vidéo » : le formulaire partagé (`video-add.css`). */
 #tab-guides .gd-videos {
   display: flex;
   flex-direction: column;

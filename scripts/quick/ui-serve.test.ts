@@ -18,7 +18,6 @@ const TABS = [
   'events',
   'changelog',
   'comics',
-  'videos',
   'ranks',
   'gamedata',
   'extractor',
@@ -40,7 +39,7 @@ const shell = (): string => readFileSync(resolve(UI, 'index.html'), 'utf8');
 
 /**
  * Les fenêtres happy-dom qu'un test ouvre, FERMÉES après lui : ce fichier
- * tourne dans UN processus, et une page assemblée (dix-huit onglets) reste en
+ * tourne dans UN processus, et une page assemblée (dix-sept onglets) reste en
  * mémoire tant que sa fenêtre est ouverte — à la trois-centième page, le tas
  * de Node (4 Go) débordait (12/10, lot F23 : sept pages de plus suffisaient).
  */
@@ -87,7 +86,7 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(() => assemblePage('<!-- @tab a -->', () => '<!-- @tab b -->')).toThrow(/illisible/);
   });
 
-  it('assemble la vraie page : dix-huit sections, plus aucun marqueur', () => {
+  it('assemble la vraie page : dix-sept sections, plus aucun marqueur', () => {
     expect(tabsOf(shell())).toEqual(TABS);
     const page = assemblePage(shell(), readTab);
     expect(page).not.toContain('@tab');
@@ -123,6 +122,33 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(readdirSync(resolve(UI, 'tabs')).sort()).toEqual(
       [...TABS.flatMap((t) => [`${t}.css`, `${t}.html`, `${t}.js`]), 'gear.css', 'gear.js'].sort(),
     );
+  });
+
+  it('Vidéos n’est plus une section : ni menu, ni marqueur, ni fichiers — son formulaire vit dans la fiche d’un perso et dans un guide', () => {
+    const ui = (file: string): string => readFileSync(resolve(UI, file), 'utf8');
+    expect(shell()).not.toMatch(/tabs\/videos|@tab videos/);
+    expect(ui('lib.js')).not.toMatch(/id: 'videos'|targets/);
+    for (const ext of ['html', 'js', 'css'])
+      expect(existsSync(resolve(UI, 'tabs', `videos.${ext}`)), ext).toBe(false);
+    // Le formulaire d'ajout : UN module et UNE feuille, liée avant celles des onglets.
+    const link = '<link rel="stylesheet" href="/ui/video-add.css" />';
+    expect(shell()).toContain(link);
+    expect(shell().indexOf(link)).toBeLessThan(shell().indexOf('/ui/tabs/dashboard.css'));
+    for (const tab of ['character', 'guides']) {
+      const js = ui(`tabs/${tab}.js`);
+      expect(js, tab).toContain("from '../video-add.js';");
+      // Plus de renvoi vers la section disparue.
+      expect(js, tab).not.toMatch(/ajouter dans Vidéos|sections\.go\('videos'\)|v-target/);
+      // Les règles du formulaire ne sont dans aucune feuille d'onglet.
+      expect(ui(`tabs/${tab}.css`), tab).not.toMatch(/\.va\b|\.va-/);
+    }
+    // Les deux ne lisent YouTube que par ces deux routes — des lectures.
+    const form = ui('video-add.js');
+    expect([...form.matchAll(/fetch\(\s*['`](\/api\/[a-z/-]+)/g)].map((m) => m[1])).toEqual([
+      '/api/youtube',
+      '/api/character/video-meta',
+    ]);
+    expect(form).not.toContain('post(');
   });
 
   it('Gear reco n’est plus une section : ni menu, ni marqueur, ni feuille, ni import — la fiche le charge', () => {
@@ -346,12 +372,12 @@ describe('shot — la page que le banc de captures photographie', () => {
       '/api/translate',
       '/api/gear-reco/translate',
       '/api/comics',
-      '/api/video',
       '/api/ranks',
       '/api/gear-reco',
       '/api/names',
       '/api/effects',
       '/api/character',
+      '/api/guides',
       '/api/monsters',
       '/api/discord/send',
       '/api/quit',
@@ -373,10 +399,15 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/effects'))).toEqual([]);
   });
 
-  it('de la fiche perso, relaie l’aperçu de ses textes et rien d’autre', () => {
+  it('de la fiche perso, relaie l’aperçu de ses textes et les métadonnées d’une vidéo — deux lectures —, pas l’enregistrement', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/character'))).toEqual([
       '/api/character/preview',
+      // « ＋ vidéo » : `resolveVideo` seul, rien d'écrit (la fiche ET un guide l'appellent).
+      '/api/character/video-meta',
     ]);
+    expect(READ_ONLY_POSTS.has('/api/character')).toBe(false);
+    // L'ancien geste, qui committait, n'existe plus : rien à relayer sous ce nom.
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/video'))).toEqual([]);
   });
 
   it('des événements, relaie l’aperçu de ses textes et rien d’autre : l’enregistrement publie sur R2 et committe', () => {
@@ -2764,6 +2795,11 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       gearSaved?: (body: unknown) => Saved;
       /** Le récap servi (d'office : celui du disque, cf. `coverage`) ; `null` : le serveur le refuse. */
       coverage?: (() => Coverage) | null;
+      /** Pas de clé YouTube sur ce poste (d'office : il y en a une). */
+      noYoutube?: boolean;
+      /** Ce que répond la recherche sur la chaîne, et la résolution d'une URL (YouTube factice). */
+      found?: (q: string) => unknown;
+      resolved?: (input: string) => unknown;
     } = {},
   ) {
     vi.resetModules();
@@ -2858,6 +2894,17 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
               : null,
         });
       }
+      if (url.pathname === '/api/youtube') {
+        calls.push({ path });
+        const out = opts.found?.(url.searchParams.get('q') ?? '') ?? { candidates: [] };
+        return answer(out, 'candidates' in (out as object) ? 200 : 500);
+      }
+      if (url.pathname === '/api/character/video-meta') {
+        const out = opts.resolved?.((body as { input: string }).input) ?? {
+          error: 'vidéo introuvable',
+        };
+        return answer(out, 'error' in (out as object) ? 400 : 200);
+      }
       if (url.pathname === '/api/character/preview') {
         const { texts, lang } = body as { texts: string[]; lang: string };
         await gate;
@@ -2943,7 +2990,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
             refused: [],
           },
         );
-      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+      return answer({
+        imgBase: 'https://img.test',
+        host: 'banc',
+        port: 4747,
+        hasYoutubeKey: !opts.noYoutube,
+      });
     });
 
     vi.stubGlobal('window', window);
@@ -3039,6 +3091,17 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         for (let i = 0; i < 6; i++) await settle();
       },
       posted: () => calls.filter((c) => c.path === '/api/character').map((c) => c.body),
+      /** La carte Vidéos : ses lignes telles qu'elles se lisent, son formulaire d'ajout. */
+      videos: () =>
+        all('#c-panel .c-videos li').map((li) =>
+          [...li.querySelectorAll('.c-vt, .lbl')].map((x) => x.textContent).join(' — '),
+        ),
+      va: (name: string) => all(`#c-va [data-va="${name}"]`)[0] as unknown as HTMLInputElement,
+      vaErr: () => all('#c-va [data-va-err]')[0].textContent,
+      /** Ce que la page a demandé à YouTube, par le serveur : les recherches, les URL résolues. */
+      searched: () => calls.filter((c) => c.path.startsWith('/api/youtube')).map((c) => c.path),
+      resolved: () =>
+        calls.filter((c) => c.path === '/api/character/video-meta').map((c) => c.body),
       states: () => calls.filter((c) => c.path.startsWith('/api/character/state')).length,
       /** Les aperçus demandés, et les appels à « Traduire ». */
       previews: () => calls.filter((c) => c.path === '/api/character/preview').map((c) => c.body),
@@ -3508,16 +3571,25 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       'ignore-defense',
     ]);
     expect(page.all('#c-panel .c-derived input')).toEqual([]);
-    // Les vidéos : titre, auteur, date — et rien à saisir.
-    expect(page.all('#c-panel .c-videos li').map((li) => li.textContent)).toEqual([
-      'Slacking Surfer, AerOuterplane · 2025-09-22',
-    ]);
-    expect(page.all('#c-panel [data-card="videos"] input, [data-card="videos"] select')).toEqual(
-      [],
+    // Les vidéos : la miniature, le titre, l'auteur et la date, ✕ — et le formulaire d'ajout dessous.
+    expect(page.videos()).toEqual(['Slacking Surfer, Aer — Outerplane · 2025-09-22']);
+    expect(page.all('#c-panel .c-videos li img')[0].getAttribute('src')).toBe(
+      'https://i.ytimg.com/vi/abc/mqdefault.jpg',
     );
+    expect(page.all('#c-panel .c-videos [data-act="del-video"]')).toHaveLength(1);
+    expect(
+      page
+        .all('#c-panel [data-card="videos"] label')
+        .map((l) => [l.textContent, l.getAttribute('for')]),
+    ).toEqual([
+      ['Chercher sur la chaîne officielle', 'c-va-q'],
+      ['URL ou id YouTube', 'c-va-url'],
+    ]);
 
     const ais = await character({ hash: `#character/${AIS}` });
-    expect(ais.all('#c-panel [data-card="videos"] .c-body')[0].textContent).toBe('aucune vidéo');
+    expect(ais.all('#c-panel [data-card="videos"] .c-body > .lbl')[0].textContent).toBe(
+      'aucune vidéo',
+    );
     expect(ais.all('#c-panel .c-derived')[0].textContent).toBe('déduits des données— aucun');
     expect(ais.tag('free').checked).toBe(false);
     expect(ais.prio('first').value).toBe('');
@@ -3930,17 +4002,237 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.states()).toBe(before);
   });
 
-  it('« ajouter dans Vidéos » ouvre l’onglet Vidéos, sur ce perso si sa liste le propose', async () => {
-    const page = await character({ hash: `#character/${AER}` });
-    // L'onglet Vidéos n'est pas chargé ici : sa liste de cibles est posée à la main.
-    page.el('v-target').innerHTML =
-      `<option value="character:1">Autre</option><option value="character:${AER}">Aer</option>`;
-    const link = page.all('#c-panel [data-act="videos"]')[0];
-    expect(link.textContent).toBe('ajouter dans Vidéos');
-    link.click();
-    expect(page.el('tab-videos').hidden).toBe(false);
-    expect(page.el('tab-character').hidden).toBe(true);
-    expect(page.el('v-target').value).toBe(`character:${AER}`);
+  // ------------------------------------------------ la carte Vidéos, éditable
+  const SURF_ID = 'aaaaaaaaaaa';
+  /** YouTube factice : une vidéo par URL collée, son id pris à la fin. */
+  const youtube = (input: string) => ({
+    video: {
+      id: input.slice(-11),
+      title: `Video ${input.slice(-11)}`,
+      author: 'OUTERPLANE',
+      uploadDate: '2026-10-01T09:00:00Z',
+    },
+  });
+
+  it('« ＋ vidéo » par URL : les métadonnées lues du serveur, l’entrée posée en fin de liste, comptée — et rien d’écrit avant « Enregistrer »', async () => {
+    const page = await character({ hash: `#character/${AER}`, resolved: youtube });
+    page.type(page.va('url'), ` https://youtu.be/${SURF_ID} `);
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    // Une LECTURE : la route des métadonnées, pas l'enregistrement.
+    expect(page.resolved()).toEqual([{ input: `https://youtu.be/${SURF_ID}` }]);
+    expect(page.posted()).toEqual([]);
+    expect(page.videos()).toEqual([
+      'Slacking Surfer, Aer — Outerplane · 2025-09-22',
+      `Video ${SURF_ID} — OUTERPLANE · 2026-10-01`,
+    ]);
+    // La nouvelle porte le filet des lignes modifiées, pas celle du disque.
+    expect(page.all('#c-panel .c-videos li').map((li) => li.className)).toEqual(['', 'dirty']);
+    expect(page.all('#c-panel [data-card="videos"] .badge.off')[0].textContent).toBe('2');
+    expect(page.all('#c-panel [data-mod="videos"]')[0].textContent).toBe('modifié');
+    expect(page.count()).toBe('1 changement');
+    expect(page.subs()[0][3]).toBe('dot edit');
+    // Le champ est vidé, prêt pour la suivante.
+    expect(page.va('url').value).toBe('');
+
+    await page.save();
+    const sent = page.posted()[0] as {
+      changes: { curated: { videos: unknown[] }; was: Curated };
+    };
+    expect(Object.keys(sent.changes.curated)).toEqual(['videos']);
+    expect(sent.changes.curated.videos).toEqual([
+      curated()[AER].videos![0],
+      {
+        platform: 'youtube',
+        id: SURF_ID,
+        title: `Video ${SURF_ID}`,
+        author: 'OUTERPLANE',
+        uploadDate: '2026-10-01T09:00:00Z',
+      },
+    ]);
+    expect(sent.changes.was.videos).toEqual(curated()[AER].videos);
+  });
+
+  it('✕ retire une vidéo : comptée, envoyée ; rajoutée, la liste du disque revient et plus rien n’attend', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      resolved: () => ({ video: { ...curated()[AER].videos![0] } }),
+      saved: (_body, disk) => {
+        disk[AER] = { ...disk[AER], videos: [] };
+        return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
+      },
+    });
+    page.all('#c-panel [data-act="del-video"]')[0].click();
+    expect(page.videos()).toEqual([]);
+    expect(page.count()).toBe('1 changement');
+    // La même, rajoutée : c'est le disque.
+    page.type(page.va('url'), 'abc');
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.videos()).toEqual(['Slacking Surfer, Aer — Outerplane · 2025-09-22']);
+    expect(page.count()).toBe('aucune modification');
+    expect(page.el('c-save').disabled).toBe(true);
+
+    page.all('#c-panel [data-act="del-video"]')[0].click();
+    await page.save();
+    expect((page.posted()[0] as { changes: { curated: unknown } }).changes.curated).toEqual({
+      videos: [],
+    });
+    // Enregistré : le disque relu ne porte plus de vidéo, plus rien n'attend.
+    expect(page.videos()).toEqual([]);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('un doublon, une URL vide, un refus du serveur : dits sous le formulaire, la liste ne bouge pas', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      resolved: (input) =>
+        input === 'nope'
+          ? { error: 'pas un id YouTube : nope' }
+          : { video: { id: 'abc', title: 'Dup' } },
+    });
+    page.va('add').click();
+    await page.settle();
+    expect(page.vaErr()).toBe('URL ou id requis.');
+    // L'id nu d'une vidéo de la liste : refusé sans rien demander au serveur.
+    page.type(page.va('url'), 'abc');
+    page.va('add').click();
+    await page.settle();
+    expect(page.vaErr()).toBe('Déjà dans la liste.');
+    expect(page.resolved()).toEqual([]);
+    // Son URL : le serveur rend l'id, la page reconnaît le doublon.
+    page.type(page.va('url'), 'https://youtu.be/xxxxxxxxabc');
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.vaErr()).toBe('Vidéo refusée : déjà dans la liste (Dup)');
+    page.type(page.va('url'), 'nope');
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.vaErr()).toBe('Vidéo refusée : pas un id YouTube : nope');
+    // La saisie refusée reste dans le champ, à corriger.
+    expect(page.va('url').value).toBe('nope');
+    expect(page.videos()).toHaveLength(1);
+    expect(page.count()).toBe('aucune modification');
+  });
+
+  it('« Chercher sur la chaîne officielle » : les candidats en cartes, « choisir » pose l’id ; celui de la liste n’est pas proposé', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      found: () => ({
+        candidates: [
+          {
+            id: 'abc',
+            title: 'Slacking Surfer, Aer',
+            author: 'OUTERPLANE',
+            uploadDate: '2025-09-22T10:00:00Z',
+          },
+          {
+            id: SURF_ID,
+            title: 'Aer <PV>',
+            author: 'OUTERPLANE',
+            uploadDate: '2026-10-01T09:00:00Z',
+          },
+        ],
+      }),
+      resolved: youtube,
+    });
+    expect(page.va('search').disabled).toBe(false);
+    // Rien à chercher : rien n'est demandé.
+    page.va('search').click();
+    await page.settle();
+    expect(page.searched()).toEqual([]);
+    page.type(page.va('q'), ' Aer & co ');
+    page.va('search').click();
+    await page.settle();
+    await page.settle();
+    expect(page.searched()).toEqual(['/api/youtube?q=Aer%20%26%20co']);
+    const cands = page.all('#c-va .va-cand');
+    expect(cands.map((c) => c.querySelector('strong')?.textContent)).toEqual([
+      'Slacking Surfer, Aer',
+      'Aer <PV>',
+    ]);
+    expect(cands[1].querySelector('span')?.textContent).toBe('OUTERPLANE · 2026-10-01');
+    expect(cands[1].querySelector('img')?.getAttribute('src')).toBe(
+      `https://i.ytimg.com/vi/${SURF_ID}/mqdefault.jpg`,
+    );
+    // Celle que le perso a déjà : dite, sans bouton.
+    expect(cands[0].querySelector('.badge')?.textContent).toBe('déjà dans la liste');
+    expect(cands[0].querySelector('[data-va="pick"]')).toBeNull();
+    // La recherche saisie survit au redessin.
+    expect(page.va('q').value).toBe(' Aer & co ');
+
+    (cands[1].querySelector('[data-va="pick"]') as unknown as HTMLElement).click();
+    expect(page.va('url').value).toBe(SURF_ID);
+    expect(page.all('#c-va .va-cand')).toEqual([]);
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    expect(page.resolved()).toEqual([{ input: SURF_ID }]);
+    expect(page.videos()).toHaveLength(2);
+  });
+
+  it('sans clé YouTube la recherche est grisée, et dit pourquoi ; un refus de la recherche se lit sous le formulaire', async () => {
+    const off = await character({ hash: `#character/${AER}`, noYoutube: true });
+    expect(off.va('search').disabled).toBe(true);
+    expect(off.va('q').disabled).toBe(true);
+    expect(off.va('search').title).toContain('YOUTUBE_API_KEY absente');
+    // L'URL reste saisissable : c'est le serveur qui répondra.
+    expect(off.va('url').disabled).toBe(false);
+
+    const down = await character({
+      hash: `#character/${AER}`,
+      found: () => ({ ok: false, log: ['Error: YouTube API 403 : quotaExceeded'] }),
+    });
+    down.type(down.va('q'), 'Aer');
+    down.va('search').click();
+    await down.settle();
+    await down.settle();
+    expect(down.vaErr()).toBe('Recherche refusée : Error: YouTube API 403 : quotaExceeded');
+    expect(down.all('#c-va .va-cand')).toEqual([]);
+  });
+
+  it('un autre perso : ses vidéos, et un formulaire vide — une vidéo refusée par le serveur garde sa saisie, cerclée', async () => {
+    const page = await character({
+      hash: `#character/${AER}`,
+      resolved: youtube,
+      saved: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [{ field: 'videos', reason: '« aaaaaaaaaaa » est en double' }],
+      }),
+    });
+    page.type(page.va('url'), SURF_ID);
+    page.va('add').click();
+    await page.settle();
+    await page.settle();
+    await page.save();
+    // Le refus se lit sur la carte Vidéos, pas sur celle des rangs ; la saisie reste.
+    expect(page.all('#c-panel [data-ko="videos"]')[0].textContent).toBe('refusé');
+    expect(page.all('#c-panel [data-ko="ranks"]')[0].textContent).toBe('');
+    expect(page.all('#c-panel [data-err="videos"]')[0].textContent).toBe(
+      '« aaaaaaaaaaa » est en double',
+    );
+    expect(page.videos()).toHaveLength(2);
+    expect(page.count()).toContain('1 changement');
+
+    page.type(page.va('q'), 'Aer');
+    page.el('c-pick').click();
+    page
+      .all('#hp-results .hp-tile')
+      .find((t) => t.dataset.id === AIS)!
+      .click();
+    await page.settle();
+    await page.settle();
+    expect(page.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    expect(page.videos()).toEqual([]);
+    expect(page.va('q').value).toBe('');
+    expect(page.count()).toBe('aucune modification');
   });
 
   // ------------------------------------------- « Pros / Cons » et « Synergies »
@@ -7763,7 +8055,6 @@ describe('Bannières — la page, sur le vrai markup', () => {
       ['events', 'Événements'],
       ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
-      ['videos', 'Vidéos'],
       ['discord', 'Discord'],
     ]);
     // `#banners` ouvre la section et son groupe.
@@ -8374,7 +8665,6 @@ describe('Événements — la page, sur le vrai markup', () => {
       ['events', 'Événements'],
       ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
-      ['videos', 'Vidéos'],
       ['discord', 'Discord'],
     ]);
     expect(page.el('tab-events').hidden).toBe(false);
@@ -9057,7 +9347,6 @@ describe('Journal du site — la page, sur le vrai markup', () => {
       ['events', 'Événements'],
       ['changelog', 'Journal du site'],
       ['comics', '4-comics'],
-      ['videos', 'Vidéos'],
       ['discord', 'Discord'],
     ]);
     expect(page.el('tab-changelog').hidden).toBe(false);
@@ -12037,6 +12326,9 @@ describe('Guides — la page, sur le vrai markup', () => {
       savedGeneral?: (body: SentGeneral, disk: General) => Saved;
       imported?: (body: unknown) => Saved;
       translated?: (texts: string[]) => unknown;
+      /** YouTube factice : la recherche sur la chaîne, la résolution d'une URL. */
+      found?: (q: string) => unknown;
+      resolved?: (input: string) => unknown;
     } = {},
   ) {
     vi.useFakeTimers();
@@ -12082,6 +12374,18 @@ describe('Guides — la page, sur le vrai markup', () => {
       const url = new URL(path, 'http://localhost:4747');
       if (url.pathname.startsWith('/api/guides') || url.pathname === '/api/translate')
         calls.push(body ? { path, body } : { path });
+      // « ＋ vidéo » : la recherche et la route des métadonnées, celles de la fiche perso.
+      if (url.pathname === '/api/youtube') {
+        calls.push({ path });
+        return answer(opts.found?.(url.searchParams.get('q') ?? '') ?? { candidates: [] });
+      }
+      if (url.pathname === '/api/character/video-meta') {
+        calls.push({ path, body });
+        const out = opts.resolved?.((body as { input: string }).input) ?? {
+          error: 'vidéo introuvable',
+        };
+        return answer(out, 'error' in (out as object) ? 400 : 200);
+      }
       if (url.pathname === '/api/guides/general' && !body) {
         const slug = (url.searchParams.get('slug') ?? '') as keyof General;
         const d = gen[slug];
@@ -12226,7 +12530,12 @@ describe('Guides — la page, sur le vrai markup', () => {
       }
       if (url.pathname === '/api/guides')
         return answer(opts.saved?.(body as Sent, data) ?? written(body as Sent));
-      return answer({ imgBase: 'https://img.test', host: 'banc', port: 4747 });
+      return answer({
+        imgBase: 'https://img.test',
+        host: 'banc',
+        port: 4747,
+        hasYoutubeKey: true,
+      });
     });
 
     vi.stubGlobal('window', window);
@@ -12321,6 +12630,11 @@ describe('Guides — la page, sur le vrai markup', () => {
         calls
           .filter((c) => c.path === '/api/guides/preview')
           .map((c) => c.body as { texts: string[]; lang: string }),
+      /** Le formulaire « Ajouter une vidéo » du sous-onglet Vidéos, et ce qu'il a demandé. */
+      va: (name: string) => all(`#gd-va [data-va="${name}"]`)[0] as unknown as HTMLInputElement,
+      vaErr: () => all('#gd-va [data-va-err]')[0].textContent,
+      resolved: () =>
+        calls.filter((c) => c.path === '/api/character/video-meta').map((c) => c.body),
       save: async () => {
         el('gd-save').click();
         await settle();
@@ -12412,7 +12726,7 @@ describe('Guides — la page, sur le vrai markup', () => {
 
     // Quitter l'onglet puis y revenir : la catégorie reste.
     back.cat('special-request');
-    back.all('#tabs [data-tab="videos"]')[0].click();
+    back.all('#tabs [data-tab="comics"]')[0].click();
     await back.come();
     expect(back.shown()).toEqual(['special-request']);
 
@@ -12626,7 +12940,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.all('#gd-panel .gd-slot').length).toBe(2);
   });
 
-  it('les vidéos en lecture : le `label` gardé, ✕ retire la vidéo et ce qui part garde les autres intactes', async () => {
+  it('les vidéos : le `label` gardé, ✕ retire la vidéo et ce qui part garde les autres intactes', async () => {
     const page = await guides({ hash: `${JC}/videos` });
     expect(page.all('#gd-panel .gd-videos li .badge').map((b) => b.textContent)).toEqual([
       'Legacy',
@@ -12638,6 +12952,66 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.count()).toBe('1 onglet modifié');
     await page.save();
     expect(page.posted()[0].draft.versions[0].videos).toEqual([]);
+  });
+
+  it('« ＋ vidéo » d’un guide : par URL, avec son libellé d’onglet, sur la version MONTRÉE — une ancienne aussi ; elle part avec « Enregistrer »', async () => {
+    const page = await guides({
+      hash: `${JC}/videos`,
+      resolved: (input) => ({
+        video: {
+          id: input.slice(-11),
+          title: `Run ${input.slice(-11)}`,
+          author: 'Au',
+          uploadDate: '2026-10-01T09:00:00Z',
+        },
+      }),
+    });
+    // Le même formulaire que la fiche d'un perso, plus le libellé d'onglet.
+    expect(page.all('#gd-va label').map((l) => [l.textContent, l.getAttribute('for')])).toEqual([
+      ['Chercher sur la chaîne officielle', 'gd-va-q'],
+      ['URL ou id YouTube', 'gd-va-url'],
+      ['Libellé d’onglet (option)', 'gd-va-tab'],
+    ]);
+    expect(page.va('search').disabled).toBe(false);
+
+    // La version ancienne (2026-05) n'a pas de vidéo : elle en reçoit une.
+    page.all('#gd-versions [data-ver]')[1].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-videos li')).toHaveLength(0);
+    page.type(page.va('url'), 'https://youtu.be/bbbbbbbbbbb');
+    page.type(page.va('tab'), ' Old run ');
+    page.va('add').click();
+    await page.settle();
+    expect(page.resolved()).toEqual([{ input: 'https://youtu.be/bbbbbbbbbbb' }]);
+    expect(page.posted()).toEqual([]);
+    expect(page.all('#gd-panel .gd-videos li').map((li) => li.textContent)).toEqual([
+      'Run bbbbbbbbbbbAu · youtube · bbbbbbbbbbbOld run✕',
+    ]);
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.va('url').value).toBe('');
+    expect(page.va('tab').value).toBe('');
+    // Un doublon sur CETTE version : refusé à l'écran, sans redemander YouTube.
+    page.type(page.va('url'), 'bbbbbbbbbbb');
+    page.va('add').click();
+    await page.settle();
+    expect(page.vaErr()).toBe('Déjà dans la liste.');
+    expect(page.resolved()).toHaveLength(1);
+
+    await page.save();
+    const sent = page.posted()[0].draft.versions;
+    // Ni date ni miniature dans un guide ; le libellé sans ses blancs ; l'autre version intacte.
+    expect(sent[1].videos).toEqual([
+      {
+        platform: 'youtube',
+        id: 'bbbbbbbbbbb',
+        title: 'Run bbbbbbbbbbb',
+        author: 'Au',
+        label: 'Old run',
+      },
+    ]);
+    expect(sent[0].videos).toEqual([
+      { platform: 'youtube', id: 'abc', title: 'Run', author: 'Au', label: 'Legacy' },
+    ]);
   });
 
   it('« Traduire » : les textes anglais de l’onglet, d’UN appel ; les cinq langues posées, à relire', async () => {
@@ -12784,7 +13158,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.el('gd-guide').hidden).toBe(false);
     page.confirm.mockReturnValueOnce(false);
-    page.all('#tabs [data-tab="videos"]')[0].click();
+    page.all('#tabs [data-tab="comics"]')[0].click();
     expect(page.el('tab-guides').hidden).toBe(false);
     expect(page.confirm).toHaveBeenCalledTimes(2);
     await page.save();

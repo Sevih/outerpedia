@@ -13,6 +13,9 @@
     <!-- L'aperçu d'un texte et la tuile d'effet, partagés : « Fiche perso », Guides, Événements,
          « Effets ». Avant les onglets, qui n'en gardent que leur conteneur. -->
     <link rel="stylesheet" href="/ui/pv.css" />
+    <!-- L'ajout d'une vidéo YouTube, partagé : la carte Vidéos de « Fiche perso » et le
+         sous-onglet Vidéos de Guides. -->
+    <link rel="stylesheet" href="/ui/video-add.css" />
     <!-- Une feuille par onglet, chargée par la route statique de `ui-serve.ts`. -->
     <link rel="stylesheet" href="/ui/tabs/dashboard.css" />
     <link rel="stylesheet" href="/ui/tabs/patch.css" />
@@ -21,7 +24,6 @@
     <link rel="stylesheet" href="/ui/tabs/events.css" />
     <link rel="stylesheet" href="/ui/tabs/changelog.css" />
     <link rel="stylesheet" href="/ui/tabs/comics.css" />
-    <link rel="stylesheet" href="/ui/tabs/videos.css" />
     <link rel="stylesheet" href="/ui/tabs/ranks.css" />
     <link rel="stylesheet" href="/ui/tabs/gamedata.css" />
     <link rel="stylesheet" href="/ui/tabs/extractor.css" />
@@ -90,7 +92,6 @@
       <!-- @tab events -->
       <!-- @tab changelog -->
       <!-- @tab comics -->
-      <!-- @tab videos -->
       <!-- @tab ranks -->
       <!-- @tab gamedata -->
       <!-- @tab extractor -->
@@ -114,7 +115,6 @@
       import '/ui/tabs/events.js';
       import '/ui/tabs/changelog.js';
       import '/ui/tabs/comics.js';
-      import '/ui/tabs/videos.js';
       import '/ui/tabs/ranks.js';
       import '/ui/tabs/gamedata.js';
       import '/ui/tabs/extractor.js';

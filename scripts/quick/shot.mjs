@@ -53,7 +53,10 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
  * du brouillon, les emojis des serveurs cochés, l'aperçu des builds d'un
  * perso, le verdict « déborde » d'un nom court saisi, l'aperçu d'une entrée du
  * journal du site, celui des pros, des cons et des synergies d'une fiche de
- * perso, celui des textes d'un guide, celui des textes d'un événement). Sans eux l'onglet Discord serait photographié sur une erreur, et les
+ * perso, celui des textes d'un guide, celui des textes d'un événement), et
+ * celui qu'elle émet à « ＋ vidéo » : les métadonnées YouTube d'une URL — une
+ * lecture aussi, qui coûte du quota (`YOUTUBE_API_KEY=` vide au banc).
+ * Sans eux l'onglet Discord serait photographié sur une erreur, et les
  * cartes de Gear reco, la fiche d'une entrée du journal ou les lignes d'une
  * fiche de perso sur un aperçu refusé.
  */
@@ -62,6 +65,7 @@ export const READ_ONLY_POSTS = new Set([
   '/api/discord/emojis',
   '/api/gear-reco/preview',
   '/api/character/preview',
+  '/api/character/video-meta',
   '/api/names/fit',
   '/api/changelog/preview',
   '/api/guides/preview',

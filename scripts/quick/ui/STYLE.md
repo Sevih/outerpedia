@@ -66,10 +66,12 @@ pastille.
   classes d'une lettre à elle (`b-` Bannières, `c-` Codes promo, `d-` et
   `e-` Discord, `ev-` Événements, `g-` Gear reco (sous-onglet de Fiche perso), `h-` Tableau de bord, `i-` Items, `j-` Journal du site,
   `k-` 4-comics, `m-` Monstres, `n-` Noms, `p-` Patch, `r-` Rangs, `t-` Tables du jeu, `ex-` Extraction,
-  `v-` Vidéos, `x-` Effets, `gd-` Guides) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
+  `x-` Effets, `gd-` Guides) — une lettre reprise et `$('c-list')` rend l'élément de l'autre
   onglet, sans erreur. Fiche perso PARTAGE `c-` avec Codes promo (décision du
   lot C11) : aucun id de l'un n'est repris par l'autre, et un test le garde
-  (« aucun `id` en double dans la page »). `hp-` est au picker de héros, qui
+  (« aucun `id` en double dans la page »). `va-` est à l'ajout d'une vidéo
+  (`video-add.js`), monté dans Fiche perso et dans Guides — la section
+  « Vidéos » et son préfixe `v-` ont disparu avec B48. `hp-` est au picker de héros, qui
   n'est à aucun onglet.
 - Ce qu'une section dit d'elle à `sections.register` : `init()` (une fois, au
   démarrage), `open()` (chaque fois qu'elle vient à l'écran), `dirty()`,
@@ -316,6 +318,39 @@ de 5 px sur le côté, bordure en pointillé d'accent sur la rangée). Les bouto
 ↑ ↓ restent : le clavier, et le banc — happy-dom ne connaît pas `DragEvent`,
 les tests tirent des `Event` nus (`dragstart`, `dragover`, `drop`, `dragend`),
 sans `dataTransfer` ni `clientX`.
+
+### L'ajout d'une vidéo (`ui/video-add.js`, B48)
+
+Une vidéo s'ajoute là où elle vit — la carte Vidéos d'une fiche de perso, le
+sous-onglet Vidéos d'un guide — par LE MÊME formulaire :
+`videoAdder({ root, id, label?, has, scope, onAdd })`, branché une fois sur le
+panneau de l'onglet (délégation : le panneau se redessine, la saisie et les
+candidats survivent), `html()` rend son markup sous l'id `id` (`c-va`,
+`gd-va`). `ui/video-add.css` (classes `.va*`, lié dans `index.html` avant les
+onglets) porte sa mise en page. Il n'y a plus de section « Vidéos ».
+
+```
+.va (une colonne, 12 px)
+  .form   [Chercher sur la chaîne officielle 30ch] [Chercher]   → GET /api/youtube?q= (5 candidats, 100 unités de quota) ; Entrée dans le champ = le bouton
+          sans YOUTUBE_API_KEY (`hasYoutubeKey` de /api/state) : le champ et le bouton GRISÉS, `title` = pourquoi
+  .va-cands  une .card.va-cand par candidat : miniature 120 × 68 (i.ytimg.com, dérivée de l'id) · titre (une ligne, tronqué) · chaîne · date · [choisir] (.btn.ghost.sm)
+          « choisir » pose l'id dans le champ URL et replie les candidats ; un candidat déjà dans la liste : badge off « déjà dans la liste », pas de bouton
+  .form   [URL ou id YouTube 42ch] ([Libellé d'onglet (option) 22ch] — un guide seulement) [＋ vidéo] (.btn.ghost : un ajout LOCAL, pas un `primary`)
+  .va-err le refus, en rouge sous le formulaire : « URL ou id requis. », « Déjà dans la liste. », « Vidéo refusée : pas un id YouTube… », « Recherche refusée : … »
+```
+
+« ＋ vidéo » n'écrit RIEN : `POST /api/character/video-meta` `{ input }` lit les
+métadonnées de YouTube (`resolveVideo`, 1 unité de quota — la route est une
+lecture, le banc la relaie) et la vidéo rendue est remise à l'onglet (`onAdd`),
+qui la pose en fin de SA liste ; elle part au disque avec « Enregistrer », dans
+le commit de la fiche ou du guide, `data/generated/video-meta.json` avec. Le
+refus se lit SOUS le formulaire (`.va-err`), comme un refus situé sous son
+champ (`.c-err`, `.gd-err`) — pas au journal, qui dit les gestes qui écrivent :
+ici rien n'a été tenté sur le disque. `has(id)` dit le doublon (refusé
+avant l'appel pour un id nu, après pour une URL) ; `scope()` abandonne une
+réponse arrivée après un changement de perso ou de version. YouTube seul à
+l'ajout ; une entrée d'une autre plateforme déjà dans une liste repart telle
+quelle.
 
 ## Les règles
 
@@ -899,7 +934,7 @@ du rendu :
      .c-cov-miss : les persos à qui le champ manque, par nom — la vignette de perso en 32 px (`heroTile`), chacune un bouton (.c-cov-hero, `title` = le nom) ; « complet » (.lbl) quand il n'y en a pas
         au-delà de 24 : [… et 57 autres] (.btn.ghost.sm) déplie le reste, et le champ reste déplié d'une venue à l'autre
      un clic sur une vignette ouvre le perso LÀ OÙ LE CHAMP SE RÈGLE : sa fiche sur le sous-onglet (`#character/<id>/<sous-onglet>`), ou une autre section (`#names/<id>`, `#extractor/character/<id>`)
-  les champs : Pros / Cons (`pros-cons`) · Synergies (`synergies`) · Priorité de skills, Tags, Rang PvE, Rang PvP (`fiche`) · Gear reco (`gear`) · EE (`ee`, compté parmi les persos qui en ont un) · Nom court (Noms) · Date de sortie à la main (Extraction, en lecture) · Vidéos (`fiche`, en lecture)
+  les champs : Pros / Cons (`pros-cons`) · Synergies (`synergies`) · Priorité de skills, Tags, Rang PvE, Rang PvP (`fiche`) · Gear reco (`gear`) · EE (`ee`, compté parmi les persos qui en ont un) · Nom court (Noms) · Date de sortie à la main (Extraction, en lecture) · Vidéos (`fiche`)
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets, sauf les builds de Gear reco, qui ont la leur ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
 .c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [EE] [Gear reco]
@@ -916,8 +951,10 @@ du rendu :
   .card « Kit »     card-head : titre · badges
      PRIORITÉ DE SKILLS  .form : [Skill 1] [Skill 2] [Ultimate] (nombre, 1 à 3) « 1 à 3 ; vide = non renseigné. » — une valeur hors de 1 à 3 : champ rouge, l'erreur dessous, rien n'est envoyé
      TAGS  les tags humains en cases (.check : free) ; dessous « déduits des données » puis les tags du jeu en .badge.off (lecture)
-  .card « Vidéos » (pleine largeur)  card-head : titre · badge du compte · « en lecture » … lien « ajouter dans Vidéos » (ouvre l'onglet Vidéos sur ce perso)
-     une ligne par vidéo : titre · auteur · date ; « aucune vidéo »
+  .card « Vidéos » (pleine largeur ; B48 : éditable)  card-head : titre · badge edit « modifié » · badge ko « refusé » · badge off du compte
+     .c-videos, une ligne par vidéo : miniature 120 × 68 (YouTube) · titre · auteur · date · ✕ (.btn.icon, au bout) ; filet accent à gauche d'une vidéo AJOUTÉE ; « aucune vidéo » ; le refus du serveur dessous, en rouge
+     AJOUTER UNE VIDÉO  le formulaire partagé (`video-add.js`, plus haut), sans libellé : la vidéo se pose en fin de liste
+     chaque vidéo ajoutée ou retirée compte pour un changement dans la savebar ; la liste part ENTIÈRE, dans l'ordre de la page (`curated.videos`), contrôlée contre `was` comme les autres champs
 #c-panel — Pros / Cons (F24) : .c-cols, UNE .card par colonne, côte à côte (une seule sous 1000 px)
   .card « Pros » | .card « Cons »   card-head : titre · badge off (le compte de lignes) · badge edit « modifié » · badge ko « refusé » · .lbl « une ligne par pro ; dans chaque langue, la ligne i traduit le pro i » (le contrat)
      .c-view  LE RENDU DU SITE (`ProsConsSection`), sur le fond de la page : une ligne (.c-vl) par rang = la puce du composant (.c-sign : `+` émeraude pour les pros, `−` rouge pour les cons) puis l'aperçu de la ligne (.c-pv, 13 px, première lettre en capitale) dans la langue de la savebar — les segments que le site rendra (icône + libellé dans la couleur du site, un effet sur sa tuile noire teintée, un item sur son cadre), un tag inconnu en ROUGE ; le texte BRUT tant que l'aperçu n'est pas arrivé ; atténué pendant que la requête court ; filet accent à gauche pour un rang modifié, rouge pour un rang refusé ; « Aucun pro. » / « Aucun con. »
@@ -1438,7 +1475,8 @@ LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
    buckets (special request) : une .card par plage — « Stages [1] → [5] » ✕, les slots, la note ; [＋ plage de stages]
    sections (world boss) : une .card « Phase n » — ✕, titre, slots, note ; [＋ équipe (phase)]
    named (irregular, AL) : une .card « Équipe n » — ✕, titre (auto ou libre), slots, la note en BLOC (un paragraphe par ligne) ; [＋ équipe] ; [Traduire]
-#gd-panel — Vidéos : .card « Vidéos » badge du compte … lien « ajouter dans Vidéos » (l'onglet Vidéos, la cible posée sur ce guide et cette version) ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
+#gd-panel — Vidéos : .card « Vidéos » badge du compte ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
+   puis .card « Ajouter une vidéo » · .lbl « YouTube — elle part avec « Enregistrer » » : le formulaire partagé (`video-add.js`, B48), avec [Libellé d'onglet] ; la vidéo se pose en fin de liste de la version MONTRÉE (chaque version a la sienne, une ancienne comprise)
 en tête du panneau : les refus qui ne visent aucun onglet (le disque a changé, la forme) en rouge
 le hash : `#guides/<cat>` (la vue d'ensemble, sur cette catégorie), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `#guides` seul se lit (la dernière catégorie montrée) et se réécrit en `#guides/<cat>` ; « ← Guides » revient sur la catégorie du guide ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas
 UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour un lien ou le banc) : la même coquille — en-tête (titre, badge « General Guides », cat/slug, la date), savebar, .gd-tabs — mais les sous-onglets, les cartes et les champs viennent de la FORME servie (`spec.tabs` : onglets › blocs › champs, cf. `general-guide-form.ts`) ; la page ne connaît aucun des quatre guides

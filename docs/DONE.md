@@ -7,6 +7,112 @@
 
 ## 2026-10-12
 
+- **quick : Vidéos éclatée — celles d'un perso dans sa fiche, celles d'un guide
+  dans le guide ; la section Publication › Vidéos disparaît (lot B48)** — revue
+  de quick par Sevih (12/10) : « pub > vidéos : il y a une partie qui va dans
+  l'éditeur de perso et l'autre au sein des guides ». La section n'était qu'UN
+  formulaire à cible (perso OU guide) qui committait à l'ajout, loin de la
+  liste qu'il alimentait : la fiche d'un perso montrait ses vidéos en lecture,
+  un guide savait en retirer une mais pas en ajouter, et les deux renvoyaient
+  à l'onglet par un lien. QUOI : une vidéo s'ajoute maintenant là où elle vit,
+  par le même formulaire, et part avec l'« Enregistrer » de la page.
+  FORMULAIRE PARTAGÉ : `ui/video-add.js` et `ui/video-add.css` (classes
+  `.va*`, feuille liée avant les onglets) —
+  `videoAdder({ root, id, label?, has, scope, onAdd })`, branché une fois sur
+  le panneau par délégation (il se redessine, la saisie et les candidats
+  survivent) : « Chercher sur la chaîne officielle » (`GET /api/youtube`,
+  inchangé ; candidats en cartes avec miniature, « choisir » pose l'id, un
+  candidat déjà dans la liste est dit sans bouton ; champ et bouton GRISÉS
+  sans `hasYoutubeKey`, redessinés quand `/api/state` arrive — il attend R2,
+  la fiche s'affiche avant lui), « URL ou id YouTube », « Libellé d'onglet »
+  pour un guide, « ＋ vidéo », Entrée dans un champ = son bouton. L'ajout est
+  LOCAL : `POST /api/character/video-meta` avec `{ input }` ne fait que lire
+  (`videoMeta` → `resolveVideo`), la vidéo rendue est remise à l'onglet
+  (`onAdd`) ; un doublon (`has` : avant l'appel pour un id nu, après pour une
+  URL), une URL vide, un refus du serveur se lisent SOUS le formulaire
+  (`.va-err`) ; `scope` abandonne une réponse arrivée après un changement de
+  perso ou de version. C'est un `.js` et non un `.mjs` : les `.mjs` de `ui/`
+  sont typés par `checkJs` et ne dépendent pas de `lib.js`, celui-ci si
+  (`state`, `stateLoaded`, `esc`). MODULE SERVEUR :
+  `src/lib/admin/video-add.ts` — `youtubeId` y descend d'`actions.ts`, et
+  `resolveVideo(input, fetchMeta)` rend la vidéo
+  (`{ video: { id, title, author, uploadDate } }`) ou `{ error }` (« URL ou
+  id requis », « pas un id YouTube », « vidéo introuvable », et le message de
+  YouTube quand la clé
+  manque ou que le quota tombe : rendu, jamais levé) ; le doublon reste à
+  l'appelant, qui connaît la liste. FICHE PERSO › carte Vidéos, éditable :
+  une ligne par vidéo (miniature `i.ytimg.com` de 120 px, titre · auteur ·
+  date, ✕, filet accent sur une vidéo ajoutée), les badges « modifié » /
+  « refusé » des autres cartes, « Ajouter une vidéo » dessous ; la savebar
+  compte chaque vidéo ajoutée ou retirée, une vidéo retirée puis rajoutée
+  rend la liste du disque. `SHEET_KEYS` gagne `videos` (à sa place dans
+  l'ordre du fichier) : la liste part ENTIÈRE dans `curated.videos`,
+  contrôlée contre `was` comme les autres clés, nettoyée par
+  `cleanSheetVideos` (`platform`, `id`, puis `title`, `author`, `uploadDate`
+  quand ils sont là ; une clé hors modèle tombe ; un doublon, une forme
+  fausse : refus du champ ; une entrée d'une autre plateforme repart telle
+  quelle — la plateforme n'est pas forcée à `youtube`, écart assumé à la
+  lettre du lot pour tenir son « hors périmètre »). Écrite,
+  `deps.refreshVideoMeta()` tourne et `data/generated/video-meta.json` entre
+  dans le MÊME commit `chore(characters): <perso>`. GUIDES › Vidéos : la
+  carte de la liste (inchangée : titre · auteur · plateforme · id, badge du
+  `label`, ✕) puis une carte « Ajouter une vidéo » ; la vidéo se pose en fin
+  de liste de la version MONTRÉE — toutes les versions en reçoivent, une
+  ancienne comprise — sous la forme d'`addVideo` (`platform`, `id`, `title`,
+  `author`, `label` s'il est saisi ; pas de date dans un guide). `saveGuide`
+  compare les vidéos envoyées à celles du disque, version par version : si
+  elles ont bougé (ajout OU retrait), `deps.refreshVideoMeta()` puis
+  `video-meta.json` dans le commit `chore(guides): <cat>/<slug>`. Un échec
+  du rafraîchissement (YouTube injoignable) est dit au journal et N'ARRÊTE
+  PAS le commit : le curé est déjà écrit, le laisser hors commit salirait
+  l'arbre — `pnpm datagen:video-meta` rattrape le cache (choix à moi, à
+  relire). SUPPRIMÉS : `POST /api/video`, `addVideo`, `videoTargets`,
+  `parseTarget`, les types `VideoTarget*`, `state.targets` (serveur et
+  `lib.js`), `tabs/videos.{html,js,css}`, l'entrée de `GROUPS`, le marqueur,
+  le `<link>` et l'`import` d'`index.html`, les deux liens « ajouter dans
+  Vidéos » et la règle `.gd-link` qu'eux seuls portaient ; et
+  `appendGuideVideo` de `guide-store.ts`, qui n'avait plus d'appelant (avec
+  `readGuideFileAt` et l'import `relative`, qui n'existaient que pour lui —
+  l'invariant qu'il gardait, « une vidéo vit dans le fichier que son guide
+  lit », tient par `saveGuideDraft` et reste testé par
+  `guide-videos.test.ts`). `GET /api/youtube` et `hasYoutubeKey` restent.
+  `READ_ONLY_POSTS` gagne `/api/character/video-meta` : le banc la relaie,
+  d'où `YOUTUBE_API_KEY=` VIDE au quick isolé. VÉRIFIÉ : `pnpm typecheck`
+  (dernière ligne : la commande `tsc … -p scripts/tsconfig.json`, sans
+  erreur), `pnpm lint` (`$ eslint`, rien dessous), `pnpm test` (Test Files
+  223 passed (223), Tests 3753 passed (3753)),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (62 fichiers, 1674 tests). Tests : `video-add.test.ts` (les formes d'URL,
+  les refus, YouTube factice — AUCUN test n'appelle l'API) ;
+  `actions.test.ts` (`saveCharacterSheet` avec `videos` : nettoyage et place
+  de la clé, `was`, formes refusées, cache rafraîchi et committé, store qui
+  refuse, cache en échec ; `saveGuide` : ajout sur une version ancienne,
+  retrait, rien quand les vidéos ne bougent pas) ; `ui-serve.test.ts`
+  (dix-sept sections, plus de menu ni de fichiers Vidéos, le relais refuse
+  toujours `/api/character` et `/api/guides` et relaie la route de lecture ;
+  la carte : ＋ par URL, ✕, doublon, recherche et « choisir », clé absente,
+  refus du serveur situé sur SA carte, autre perso ; Guides : ＋ sur une
+  version ancienne avec libellé). Banc (quick isolé sur :4821, toutes les
+  clés vidées, `hasYoutubeKey: false` relu de `/api/state`, donc aucun appel
+  à YouTube) : `--tabs character --hash character/2000055/fiche` (la carte,
+  sa miniature, le formulaire, la recherche grisée),
+  `--tabs guides --hash guides/joint-challenge/annihilator/2026-05/videos`
+  (la liste et la carte d'ajout avec le libellé), `--tabs coupons` (le menu
+  Publication : Codes promo, Bannières, Événements, Journal du site,
+  4-comics, Discord). Rien d'autre n'a changé à l'écran : le reste de la
+  fiche et des guides est identique sur les captures. Docs : `STYLE.md` (le
+  formulaire partagé, les deux croquis, le préfixe `v-` retiré),
+  `docs/quick-migration.md` (Publication sans Vidéos, où c'est désormais),
+  `docs/TODO.md` (les contrôles à l'écran, deux renvois caducs). LAISSÉ :
+  ni YouTube ni un enregistrement réel n'ont été joués — la recherche avec
+  la clé (cinq candidats), l'ajout par URL et les deux commits sont au TODO ;
+  twitch et bilibili à l'ajout (hors périmètre) ; l'ordre des vidéos ne se
+  retouche pas (pas demandé) ; le préambule commun des lots ne vide pas
+  encore `YOUTUBE_API_KEY` alors que le relais du banc laisse désormais
+  passer une route qui coûte du quota — à y ajouter (je n'ai lu que ma
+  section) ; `CLAUDE.md` cite encore « vidéo » parmi les six gestes de
+  quick, ce qui reste vrai sans être une section.
+
 - **Core Fusion : les priorités et les reviews passent du TypeScript au JSON,
   éditées dans quick sous la forme de Premium & Limited (lot C13)** — revue de
   quick par Sevih (12/10) : l'éditeur refait par F25 devait aussi servir à

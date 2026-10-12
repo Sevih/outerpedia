@@ -1,0 +1,56 @@
+/* L'ajout d'une vidéo YouTube (`video-add.js`), partagé : la carte Vidéos d'une
+   fiche de perso et le sous-onglet Vidéos d'un guide. Une colonne — la
+   recherche sur la chaîne officielle, ses candidats en cartes (miniature,
+   titre, chaîne et date, « choisir »), l'URL ou l'id et « ＋ vidéo », puis le
+   refus, sous le formulaire. Chargée avant les feuilles des onglets. */
+.va {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.va-cands {
+  display: grid;
+  gap: 8px;
+}
+.va-cands:empty {
+  display: none;
+}
+.va-cand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 10px;
+}
+.va-cand img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface-overlay);
+  flex: 0 0 auto;
+}
+.va-cand div {
+  min-width: 0;
+  flex: 1;
+}
+.va-cand strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.va-cand span:not(.badge) {
+  color: var(--content-muted);
+  font-size: 12px;
+}
+/* Le refus (doublon, id illisible, YouTube injoignable) ; vide, la ligne ne prend pas de place. */
+.va-err {
+  margin: 0;
+  color: var(--danger);
+  font-size: 12.5px;
+}
+.va-err:empty {
+  display: none;
+}
