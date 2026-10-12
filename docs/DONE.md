@@ -7,6 +7,144 @@
 
 ## 2026-10-12
 
+- **quick : section « Extraction » — figer un monstre et ré-épingler ses
+  guides en UN geste, le plan avant de figer ; le groupe « Extractor » quitte
+  le menu de l'admin (lot F22, fin de l'étape 20 de la migration, dernier des
+  trois sur l'extractor)** — l'agacement reporté de l'étape 12 (« c'est le
+  bordel, surtout la partie versionnage ») : dans l'admin, « Version the
+  committed state » figeait ET ré-épinglait d'un clic, sans rien montrer
+  avant, puis empilait jusqu'à cinq boîtes de compte-rendu ; le plan existait
+  (`repin: false`) mais l'écran ne s'en servait pas. Décision de Sevih du
+  09/10 : un geste, qui montre les guides touchés AVANT de figer. Le moteur
+  ne bouge pas (`versionMonster`, `planRepin`, `applyRepin` inchangés) ; le
+  lot pose ce qui manquait autour. **Ce qui descend dans `src/lib/admin/`
+  (testé)** : `monster-freeze.ts`, sans disque ni git — `freezePlanOf`, le
+  PLAN complet d'un figeage : la clé à venir (`nextArchive`, max + 1),
+  l'état de HEAD (sha, date, version du jeu), le plan de `planRepin` rangé
+  par ce qui arrive à chaque guide — `edits` (le `bossId` d'un guide plat,
+  `meta.monsters`, une liste jointe pour l'œil), `pins` (un combat dans le
+  `config.json` d'une version : ce qu'`applyRepin` sait épingler), `kept`
+  avec le motif EN FRANÇAIS (`keptReason`, traduit par CHAMP : le `bossId`
+  d'un versionné « jamais épinglé », la version « déjà figée » ; un motif
+  inconnu rendu tel quel, pas tu), `pending` (un guide plat qui passe par
+  un combat, avec le chemin `guides/<cat>/<slug>`) —, les guides à re-dater
+  (`guidesToStamp` sur `plannedFiles` : la règle de `guide-stamp.ts`, un
+  `meta.json` ou le `config.json` de la version la plus récente, jamais une
+  archive de version), le compte des guides ré-épinglés par GUIDE, le
+  message du commit, et `was` ; `pinIndex`, l'index inverse des pins ;
+  `monsterDirtyFiles`, le refus « working tree sale » ; `writtenFiles` et
+  `freezeReportOf` pour l'après. **Serveur** (`actions.ts`, un `FreezeDeps`
+  à part — `versionMonster`, `planRepin`, `applyRepin`, les archives, HEAD,
+  `git status`, le JSON à HEAD et sur le disque, les guides, le stamp,
+  `commitPaths`, tout injecté ; `ExtractorDeps` ne gagne que `pinners`) :
+  `freezePlan(id)` → `GET /api/extractor/freeze?id=` (404 pour un monstre
+  absent du committé, 400 sans id ; il ne lit pas les tables du jeu) ;
+  `freezeMonster(id, {label, was})` → `POST /api/extractor/freeze`, dans
+  l'ordre : le plan RECALCULÉ ; refus `dirty` si le monstre diffère de HEAD
+  — `git status` restreint à `monsters.json`, `monster-skills.json` et
+  `encounters.json`, puis à SON entrée, ses skills et les donjons de ses
+  spawns, ceux des deux états (un fichier propre n'est pas relu de HEAD, un
+  fichier sale pour un autre monstre ne bloque pas) ; refus `stale` si `was`
+  n'est plus celui montré ; rien d'écrit dans les deux cas ; puis
+  `versionMonster(id, { ref: 'HEAD', label })`, `applyRepin` du plan montré
+  (recalculé pour la clé écrite si elle n'est pas celle prévue), le stamp
+  des SEULS guides touchés, et UN commit
+  `chore(monsters): <nom> (<id>) fige en v<n>, <k> guides re-epingles` qui
+  porte l'archive, les `meta.json`, les `config.json` et les `meta.json`
+  re-datés ; le rapport (clé, éditions, versions épinglées, gardés, en
+  attente, non écrits, re-datés). La fiche monstre (`extractorEntity`) rend
+  ses archives avec `pinnedBy`. **La page** (`tabs/extractor.{html,js,css}`)
+  : sur la fiche d'un monstre, le bloc « Versions », lu en même temps que la
+  fiche — ses archives (date, source, jeu, note, skills) avec « épinglée
+  par » (chaque guide un lien vers Guides, sur sa version) ou le badge
+  « orpheline », la ligne « n guides le désignent encore en live », et
+  « Figer et ré-épingler… » : le plan dans le cadre des confirmations — « Créer
+  `<id>@<n>` : l'état COMMITTÉ de <nom> — HEAD … », puis « Guides
+  ré-épinglés », « Laissés en live », « En attente » (« ouvrir dans
+  Guides »), « Re-datés » —, le champ « Note de l'archive », le commit,
+  « Figer » et « Annuler » ; le refus « sale » situé DANS le plan, « Figer »
+  éteint ; après le geste la fiche et le plan sont relus — un refus laisse
+  le plan relu à l'écran, un succès pose le rapport, bordé de vert. L'ORDRE
+  du flux type : un monstre qui a changé ET dont le figeage ré-épinglerait
+  encore des guides voit « Ré-intégrer » remplacé par un bandeau ambre,
+  « 1. Figer l'état actuel », « 2. Intégrer l'extraction », chacun ouvrant
+  son plan, rien d'enchaîné. **Admin** : monster rejoint `EXTRACTOR_IN_QUICK`
+  (`admin-inbox.ts`), le groupe « Extractor » sort de `layout.dev.tsx` avec
+  son calcul de badges ; les pages restent par leur URL jusqu'à l'étape 22.
+  `docs/procedure/newPatch.md` corrigé : `datagen:version-boss` ne crée pas
+  `versions/<AAAA-MM>/` dans le guide, il fige l'archive du monstre (le
+  rattrapage en CLI, sans ré-épinglage) ; la voie normale est le geste de
+  quick, et « ＋ version » de Guides crée la version. **Docs** :
+  `quick-migration.md` (20 FAIT, § 4 clos, restent 6 Events et 22),
+  `STYLE.md` (le croquis du bloc et du bandeau, les routes, les classes),
+  TODO (huit contrôles au prochain boss qui change). **Ce que j'ai tranché
+  (forme)** : le bloc « Versions » est une carte à part, entre l'écart et
+  les cartes de la fiche — pas la dernière section sous les skills, où F21
+  listait les archives : le geste d'un boss ne se cherche pas en bas de
+  page, et l'état du plan ne saute pas quand le `select` de rencontre
+  redessine ; le plan ne s'ouvre qu'au clic (la carte reste à deux lignes
+  pour les milliers de monstres qu'aucun guide ne désigne) ; l'ordre « figer
+  puis intégrer » se décide sur `review === 'changed'` et sur les guides que
+  le figeage RÉ-ÉPINGLERAIT (`plan.guides`), pas sur ceux qu'il laisserait —
+  il disparaît donc de lui-même une fois le monstre figé ; l'index inverse
+  compte AUSSI les `bossId@n` et `monsters` d'un guide plat, au-delà des
+  `pinned` demandés, sans quoi une archive lue par un guide plat serait dite
+  orpheline ; `was` signe la clé, le sha de HEAD et les guides, pas `dirty`
+  (dit à part) ; la note tient en une ligne de 120 caractères ; le compte du
+  commit est par guide, pas par version ; une adresse de plus,
+  `#extractor/monster/<id>/freeze`, ouvre la fiche sur son plan (le banc ne
+  clique pas). **Vérifié** : `pnpm typecheck` vert (sortie vide, dernière
+  ligne : la commande `tsc --noEmit && … -p scripts/tsconfig.json`),
+  `pnpm lint` vert (sortie vide), `pnpm test` « Test Files 220 passed (220) ·
+  Tests 3646 passed (3646) », et la suite de quick et de l'admin rejouée en
+  mode dev « 58 passed · 1554 passed »
+  (`NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`).
+  Tests :
+  `monster-freeze.test.ts` (18 : la clé, le plan rangé, les motifs, le
+  compte par guide, les guides à re-dater, `was`, le plan vide, les fichiers
+  prévus et écrits, le rapport, l'index inverse, le monstre sale — un autre
+  monstre, un skill, un donjon, un skill retiré, un nouveau),
+  `actions.test.ts` (10 : le plan d'un monstre désigné par un guide plat,
+  par un versionné, par les deux, par personne ; les 404 et 400 ; le refus
+  sale avant d'écrire ; `was` périmé par une archive, un commit ou un guide
+  de plus ; « Figer » à moteur et git factices — l'ordre des appels,
+  l'archive de HEAD avec sa note, les fichiers de guides, le stamp des seuls
+  guides touchés, le message ; l'archive seule, orpheline ; un `meta.json`
+  déjà daté ; le moteur qui lève, le commit refusé ; et la fiche monstre
+  avec `pinnedBy`), `admin-inbox.test.ts` (le menu vide), `ui-serve.test.ts`
+  (8, la page en happy-dom : le bloc et ses archives, le plan et ses
+  groupes, l'adresse `/freeze`, « Figer » confirmé — la note et `was`
+  postés, le rapport, la fiche et le plan relus —, le refus `stale`, le
+  refus sale, l'ordre des deux gestes et ses deux contre-cas, le monstre pas
+  encore committé ; `READ_ONLY_POSTS` sans le POST). Banc : quick ISOLÉ sur
+  :4812 (clés vidées, GET seulement) — `/api/extractor/freeze?id=4318062`
+  (Annihilator, Joint Challenge, guide versionné) en 0,11 s : la clé
+  `4318062@1`, HEAD `175b1638`, jeu 1.11.404, quatre versions à épingler
+  (2026-10, 2026-05, 2025-12, 2025-06 ; 2024-01 n'a pas de combat), le
+  `bossId` du guide gardé, un guide re-daté ; 404 pour un id inconnu, 400
+  sans id ; `4548161` (Prototype EX-78) → `4548161@2` ; trois captures
+  relues (`shot.mjs --hash extractor/monster/4318062`, `…/4548161` —
+  l'archive du 11/08 « orpheline » —, `…/4318062/freeze` — le plan). RIEN
+  n'a été figé : aucun POST, `datagen:version-boss` pas lancé, le dossier
+  `monster-archive/` porte toujours ses trois fichiers. **Laissé** : les
+  trois archives de Prototype EX-78, orphelines et dites telles ; la
+  suppression d'archives et l'épinglage manuel depuis Guides (hors
+  périmètre) ; `MonsterActions.tsx` et la route `api/admin/version/monster`
+  de l'admin, intacts jusqu'à l'étape 22 ; `adminExtractorMenu`, qui ne rend
+  plus rien et tombera avec elle. **À trancher par Sevih (dans le TODO)** :
+  le refus « working tree sale » est appliqué tel que décidé, mais
+  « Promouvoir » de Patch écrit `data/generated/` sans committer — un boss
+  changé est alors précisément dans cet état, et committer ferait de HEAD
+  le NOUVEL état ; le message du refus le dit (annuler, figer, ré-intégrer),
+  et le commit du figeage ne porte de toute façon que l'archive et les
+  guides. Hors périmètre, repéré : `datagen/README.md` § « Versionner un
+  boss » et les docblocks de `version-monster.ts`, `version-boss.ts` et
+  `repin-guides.ts` disent encore que la voie normale est le bouton de
+  l'admin ; le plan épingle TOUTES les versions encore en live, la plus
+  récente comprise (règle du moteur) : créer la version nouvelle du guide
+  AVANT de figer l'épinglerait sur l'ancien boss — l'écran le montre
+  désormais avant, et il faudrait alors la dépingler dans Guides.
+
 - **Relecture F21 (Fable) — quick : Extraction, les fiches perso, monstre et
   équipement, l'intégration et les modes committés, les sprites, validé** —
   commit `7f11b793`, 25 fichiers, le message attendu, ni `package.json` ni

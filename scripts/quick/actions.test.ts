@@ -190,6 +190,8 @@ import type { Character } from '@datagen/extractor/specs/character';
 import type { EquipmentData } from '@datagen/generators/equipment';
 import type { EncountersData } from '@/lib/admin/monster-store';
 import type { MonsterArchiveEntry } from '@contracts';
+import { MONSTER_FILES, type FreezeGuide, type PinRef } from '@/lib/admin/monster-freeze';
+import type { RepinPlan, RepinResult } from '@/lib/admin/repin-guides';
 import {
   ADMIN_BASE_DEFAULT,
   ADMIN_TO_QUICK,
@@ -268,10 +270,13 @@ import {
   type EffectsDeps,
   type EffectsDisk,
   extractorEntity,
+  freezeMonster,
+  freezePlan,
   integrateEntity,
   integrateMode,
   planMode,
   spriteFile,
+  type FreezeDeps,
   type CharacterSheet,
   type ExtractorDeps,
   type ExtractorTargetInfo,
@@ -8269,6 +8274,8 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       git?: Outcome;
       /** Le perso nouveau n'a pas de date de sortie. */
       missing?: boolean;
+      /** L'index inverse des pins : par clé d'archive, qui l'épingle. */
+      pinners?: Record<string, PinRef[]>;
     } = {},
   ) {
     const calls: string[] = [];
@@ -8356,6 +8363,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       immunities: async () => ({ chips: [], unresolved: [] }),
       referencedEffects: async () => [],
       archives: async (id) => (id === '400101' ? ARCHIVES : []),
+      pinners: () => new Map(Object.entries(over.pinners ?? {})),
       missingReleases: async (char) =>
         over.missing && char.id === '2000003' ? [{ id: '2000003', label: 'Lambda' }] : [],
       integrateCharacter: async (id) => {
@@ -8827,8 +8835,20 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
         gameVersion: '1.4.14',
         label: 'avant la refonte',
         skills: 1,
+        // Personne ne l'épingle : orpheline.
+        pinnedBy: [],
       },
     ]);
+    // L'index inverse : la même archive, épinglée par une version de guide.
+    const pin: PinRef = {
+      guide: 'joint-challenge/annihilator',
+      field: 'version.pinned',
+      version: '2026-08',
+    };
+    const pinned = sheetOf(
+      await extractorEntity('monster', '400101', deps({ pinners: { '400101@1': [pin] } }).fake),
+    ).monster;
+    expect(pinned?.archives.map((a) => [a.key, a.pinnedBy])).toEqual([['400101@1', [pin]]]);
     expect(out.plan).toEqual({
       files: [
         'monsters.json',
@@ -9066,5 +9086,382 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     expect(spriteFile('MT_2', index)).toBeNull();
     expect(spriteFile('../MT_1', index)).toBeNull();
     expect(spriteFile('', index)).toBeNull();
+  });
+});
+
+describe('Extraction — freezePlan, freezeMonster : « Figer et ré-épingler », moteur, guides et git injectés', () => {
+  const CONTENTS = 'src/app/[lang]/guides/_contents';
+  const ID = '4318062';
+  /** Un plat qui NOMME le boss, un plat qui l'atteint par un combat, un versionné à deux versions. */
+  const GUIDES: FreezeGuide[] = [
+    { category: 'special-request', slug: 'flat-boss', bossId: ID, versions: [] },
+    { category: 'adventure', slug: 'flat-group', versions: [] },
+    {
+      category: 'joint-challenge',
+      slug: 'annihilator',
+      bossId: ID,
+      versions: [{ key: '2026-10' }, { key: '2026-08' }],
+    },
+  ];
+  /** Ce que `planRepin` rendrait pour chacun, la clé posée. */
+  const FLAT = (key: string): Pick<RepinPlan, 'edits' | 'pending' | 'kept'> => ({
+    edits: [
+      {
+        guide: 'special-request/flat-boss',
+        file: 'special-request/flat-boss/meta.json',
+        field: 'meta.bossId',
+        before: ID,
+        after: key,
+      },
+    ],
+    pending: [{ guide: 'adventure/flat-group', origin: 'meta.group', group: 'g-flat' }],
+    kept: [],
+  });
+  const VERSIONED = (): Pick<RepinPlan, 'edits' | 'pending' | 'kept'> => ({
+    edits: [],
+    pending: [
+      {
+        guide: 'joint-challenge/annihilator',
+        origin: 'version.config',
+        version: '2026-10',
+        group: 'jc-annihilator',
+      },
+    ],
+    kept: [
+      {
+        guide: 'joint-challenge/annihilator',
+        field: 'meta.bossId',
+        reason: 'a versioned guide’s meta.bossId carries its portrait and heading',
+      },
+      {
+        guide: 'joint-challenge/annihilator',
+        field: 'version.pinned',
+        version: '2026-08',
+        reason: 'already frozen on this monster',
+      },
+    ],
+  });
+  type Scenario = 'flat' | 'versioned' | 'both' | 'none';
+
+  function deps(
+    over: {
+      scenario?: Scenario;
+      archives?: number[];
+      dirty?: string[];
+      /** Ce que le disque porte pour le monstre quand `monsters.json` est sale. */
+      diskMonster?: unknown;
+      head?: string;
+      git?: Outcome;
+      /** `versionMonster` lève. */
+      throws?: string;
+      /** Le `meta.json` de ce guide porte déjà la date du jour. */
+      alreadyStamped?: string[];
+    } = {},
+  ) {
+    const calls: string[] = [];
+    const git: [string[], string][] = [];
+    const scenario = over.scenario ?? 'both';
+    const archives = [...(over.archives ?? [1])];
+    const committed = { id: ID, name: { en: 'Annihilator' }, skills: ['s1'] };
+    const fake: FreezeDeps = {
+      monster: (id) => (id === ID ? (committed as unknown as Monster) : undefined),
+      archives: async () => archives.map((version) => ({ version })),
+      head: () => ({
+        ref: over.head ?? 'abc1234',
+        committedAt: '2026-10-12T09:00:00+02:00',
+        gameVersion: '1.4.14',
+      }),
+      dirty: (paths) => {
+        expect([...paths]).toEqual(Object.values(MONSTER_FILES));
+        return over.dirty ?? [];
+      },
+      headJson: (path) => (path === MONSTER_FILES.monsters ? { [ID]: committed } : {}),
+      diskJson: (path) =>
+        path === MONSTER_FILES.monsters ? { [ID]: over.diskMonster ?? committed } : {},
+      guides: () => GUIDES,
+      planRepin: (id, key) => {
+        calls.push(`planRepin ${id} ${key}`);
+        const flat = scenario === 'flat' || scenario === 'both' ? FLAT(key) : null;
+        const versioned = scenario === 'versioned' || scenario === 'both' ? VERSIONED() : null;
+        return {
+          id,
+          key,
+          edits: [...(flat?.edits ?? []), ...(versioned?.edits ?? [])],
+          pending: [...(flat?.pending ?? []), ...(versioned?.pending ?? [])],
+          kept: [...(flat?.kept ?? []), ...(versioned?.kept ?? [])],
+        };
+      },
+      applyRepin: async (plan): Promise<RepinResult> => {
+        calls.push(`applyRepin ${plan.key}`);
+        return {
+          files: [...new Set(plan.edits.map((e) => e.file))],
+          applied: plan.edits,
+          skipped: [],
+          pinnedVersions: plan.pending
+            .filter((x) => x.origin === 'version.config')
+            .map((x) => `${x.guide}@${x.version}`),
+          pending: plan.pending.filter((x) => x.origin !== 'version.config'),
+          kept: plan.kept,
+        };
+      },
+      versionMonster: async (id, opts) => {
+        calls.push(`versionMonster ${id} ${opts.ref} ${opts.label ?? '(sans note)'}`);
+        if (over.throws) throw new Error(over.throws);
+        const version = Math.max(0, ...archives) + 1;
+        archives.push(version);
+        return {
+          key: `${id}@${version}`,
+          id,
+          version,
+          name: 'Annihilator',
+          skills: 6,
+          ref: 'abc1234',
+          gameVersion: '1.4.14',
+          file: `data/generated/monster-archive/${id}@${version}.json`,
+        };
+      },
+      stamp: async (meta, date) => {
+        calls.push(`stamp ${meta.slice(CONTENTS.length + 1)} ${date}`);
+        return !(over.alreadyStamped ?? []).some((g) => meta.includes(`/${g}/`));
+      },
+      today: () => '2026-10-12',
+      commitPaths: (paths, message) => {
+        calls.push('git');
+        git.push([paths, message]);
+        return over.git ?? { ok: true, log: ['git : fait'] };
+      },
+    };
+    return { calls, git, fake };
+  }
+
+  /** Le plan, ou une levée si la route a répondu par une erreur. */
+  async function planOf(fake: FreezeDeps, id = ID) {
+    const out = await freezePlan(id, fake);
+    if ('error' in out) throw new Error(out.error);
+    return out;
+  }
+
+  it('le plan d’un monstre qu’un guide PLAT nomme : l’édition du bossId, le combat du plat en attente', async () => {
+    const { calls, fake } = deps({ scenario: 'flat', archives: [] });
+    const p = await planOf(fake);
+    expect(p).toMatchObject({
+      id: ID,
+      name: 'Annihilator',
+      key: `${ID}@1`,
+      version: 1,
+      file: `data/generated/monster-archive/${ID}@1.json`,
+      head: { ref: 'abc1234', committedAt: '2026-10-12T09:00:00+02:00', gameVersion: '1.4.14' },
+      guides: 1,
+      dirty: [],
+      commit: `chore(monsters): Annihilator (${ID}) fige en v1, 1 guide re-epingle`,
+    });
+    expect(p.edits).toEqual([
+      { guide: 'special-request/flat-boss', field: 'meta.bossId', before: ID, after: `${ID}@1` },
+    ]);
+    expect(p.pins).toEqual([]);
+    expect(p.kept).toEqual([]);
+    // Le guide plat qui passe par un combat : rien d'automatique, un lien vers Guides.
+    expect(p.pending).toEqual([
+      { guide: 'adventure/flat-group', group: 'g-flat', go: 'guides/adventure/flat-group' },
+    ]);
+    expect(p.stamps).toEqual(['special-request/flat-boss']);
+    // Rien n'est écrit : le plan seul a été demandé, pour la clé à venir.
+    expect(calls).toEqual([`planRepin ${ID} ${ID}@1`]);
+  });
+
+  it('le plan d’un monstre qu’un guide VERSIONNÉ désigne : la version épinglée, le bossId gardé, la version déjà figée gardée', async () => {
+    const p = await planOf(deps({ scenario: 'versioned' }).fake);
+    expect(p.key).toBe(`${ID}@2`);
+    expect(p.edits).toEqual([]);
+    expect(p.pins).toEqual([
+      { guide: 'joint-challenge/annihilator', version: '2026-10', group: 'jc-annihilator' },
+    ]);
+    // Les `kept`, en français : le bossId d'un versionné n'est JAMAIS épinglé.
+    expect(p.kept.map((k) => [k.field, k.version])).toEqual([
+      ['meta.bossId', undefined],
+      ['version.pinned', '2026-08'],
+    ]);
+    expect(p.kept[0].why).toContain('jamais épinglé');
+    expect(p.kept[1].why).toContain('garde l’archive');
+    expect(p.pending).toEqual([]);
+    // La version épinglée est la plus récente : le guide sera re-daté.
+    expect(p.stamps).toEqual(['joint-challenge/annihilator']);
+    expect(p.commit).toBe(`chore(monsters): Annihilator (${ID}) fige en v2, 1 guide re-epingle`);
+  });
+
+  it('le plan par les deux : deux guides ré-épinglés, comptés par guide', async () => {
+    const p = await planOf(deps().fake);
+    expect([p.edits.length, p.pins.length, p.kept.length, p.pending.length]).toEqual([1, 1, 2, 1]);
+    expect(p.guides).toBe(2);
+    expect(p.stamps).toEqual(['special-request/flat-boss', 'joint-challenge/annihilator']);
+    expect(p.commit).toBe(`chore(monsters): Annihilator (${ID}) fige en v2, 2 guides re-epingles`);
+  });
+
+  it('un monstre que personne ne désigne : un plan vide ; absent du committé ou sans id : une erreur', async () => {
+    const p = await planOf(deps({ scenario: 'none', archives: [] }).fake);
+    expect([p.edits, p.pins, p.kept, p.pending, p.stamps, p.guides]).toEqual([
+      [],
+      [],
+      [],
+      [],
+      [],
+      0,
+    ]);
+    expect(await freezePlan('999', deps().fake)).toEqual({
+      error: 'monstre 999 absent du committé : rien à figer',
+      status: 404,
+    });
+    expect(await freezePlan('', deps().fake)).toEqual({ error: 'monstre manquant', status: 400 });
+    expect(await freezePlan(undefined, deps().fake)).toMatchObject({ status: 400 });
+  });
+
+  it('le working tree sale : le plan le dit, et « Figer » refuse avant d’écrire', async () => {
+    const dirty = {
+      dirty: [MONSTER_FILES.monsters],
+      diskMonster: { id: ID, skills: ['s1', 's2'] },
+    };
+    const p = await planOf(deps(dirty).fake);
+    expect(p.dirty).toEqual([MONSTER_FILES.monsters]);
+    const { calls, git, fake } = deps(dirty);
+    const out = await freezeMonster(ID, { was: p.was }, fake);
+    expect(out.ok).toBe(false);
+    expect(out.dirty).toEqual([MONSTER_FILES.monsters]);
+    expect(out.log[0]).toMatch(
+      /^Rien n’est figé — Annihilator \(4318062\) a des changements non committés dans data\/generated\/monsters\.json : l’archive fige HEAD, pas le working tree\. Enregistrer d’abord, ou annuler/,
+    );
+    expect(calls).toEqual([`planRepin ${ID} ${ID}@2`]);
+    expect(git).toEqual([]);
+    // Le fichier est sale pour un AUTRE monstre : celui-ci se fige.
+    const other = deps({ dirty: [MONSTER_FILES.monsters] });
+    expect((await planOf(other.fake)).dirty).toEqual([]);
+  });
+
+  it('`was` périmé : le plan recalculé n’est plus celui montré — refus, relecture, rien d’écrit', async () => {
+    const was = (await planOf(deps().fake)).was;
+    // Une archive de plus (la CLI), un commit passé, un guide épinglé à la main entre-temps.
+    for (const over of [{ archives: [1, 2] }, { head: 'def5678' }, { scenario: 'flat' as const }]) {
+      const { calls, git, fake } = deps(over);
+      const out = await freezeMonster(ID, { was }, fake);
+      expect(out).toMatchObject({ ok: false, stale: true });
+      expect(out.log[0]).toMatch(/^Rien n’est figé — le plan de Annihilator/);
+      expect(calls.filter((c) => !c.startsWith('planRepin'))).toEqual([]);
+      expect(git).toEqual([]);
+    }
+    // Sans `was` du tout : même refus.
+    expect((await freezeMonster(ID, {}, deps().fake)).stale).toBe(true);
+  });
+
+  it('« Figer » : l’archive de HEAD avec sa note, le ré-épinglage, le stamp des SEULS guides touchés, UN commit', async () => {
+    const { calls, git, fake } = deps();
+    const was = (await planOf(fake)).was;
+    calls.length = 0;
+    const lines: string[] = [];
+    const out = await freezeMonster(
+      ID,
+      { was, label: '  avant la   refonte 1.11 ' },
+      fake,
+      (line, doing) => lines.push(`${doing ? '…' : '✓'} ${line}`),
+    );
+    expect(out.ok).toBe(true);
+    // L'ordre : le plan recalculé, l'archive, le ré-épinglage, le stamp, le commit.
+    expect(calls).toEqual([
+      `planRepin ${ID} ${ID}@2`,
+      `versionMonster ${ID} HEAD avant la refonte 1.11`,
+      `applyRepin ${ID}@2`,
+      'stamp special-request/flat-boss/meta.json 2026-10-12',
+      'stamp joint-challenge/annihilator/meta.json 2026-10-12',
+      'git',
+    ]);
+    // UN commit : l'archive, le meta.json du plat, le config.json de la version
+    // épinglée, et le meta.json re-daté du versionné — pas le guide en attente.
+    expect(git).toEqual([
+      [
+        [
+          `data/generated/monster-archive/${ID}@2.json`,
+          `${CONTENTS}/special-request/flat-boss/meta.json`,
+          `${CONTENTS}/joint-challenge/annihilator/versions/2026-10/config.json`,
+          `${CONTENTS}/joint-challenge/annihilator/meta.json`,
+        ],
+        `chore(monsters): Annihilator (${ID}) fige en v2, 2 guides re-epingles`,
+      ],
+    ]);
+    expect(out.report).toMatchObject({
+      key: `${ID}@2`,
+      version: 2,
+      skills: 6,
+      edits: [
+        { guide: 'special-request/flat-boss', field: 'meta.bossId', before: ID, after: `${ID}@2` },
+      ],
+      pinned: [{ guide: 'joint-challenge/annihilator', version: '2026-10' }],
+      pending: [
+        { guide: 'adventure/flat-group', group: 'g-flat', go: 'guides/adventure/flat-group' },
+      ],
+      skipped: [],
+      stamped: ['special-request/flat-boss', 'joint-challenge/annihilator'],
+    });
+    expect(out.report?.kept).toHaveLength(2);
+    expect(out.log).toEqual([
+      `${ID}@2 figé : data/generated/monster-archive/${ID}@2.json — 6 skills, source abc1234, jeu 1.4.14, note « avant la refonte 1.11 ».`,
+      `special-request/flat-boss : meta.bossId → ${ID}@2`,
+      `joint-challenge/annihilator : version 2026-10 épinglée sur ${ID}@2`,
+      'meta.updated : 2026-10-12 — special-request/flat-boss, joint-challenge/annihilator',
+      'git : fait',
+    ]);
+    expect(lines[0]).toBe(`… Annihilator (${ID}) : état de abc1234 figé sous ${ID}@2`);
+  });
+
+  it('« Figer » sans guide à ré-épingler : l’archive seule, orpheline, ni stamp ni note', async () => {
+    const { calls, git, fake } = deps({ scenario: 'none', archives: [] });
+    const was = (await planOf(fake)).was;
+    calls.length = 0;
+    const out = await freezeMonster(ID, { was, label: 42 }, fake);
+    expect(out.ok).toBe(true);
+    expect(calls).toEqual([
+      `planRepin ${ID} ${ID}@1`,
+      `versionMonster ${ID} HEAD (sans note)`,
+      `applyRepin ${ID}@1`,
+      'git',
+    ]);
+    expect(git).toEqual([
+      [
+        [`data/generated/monster-archive/${ID}@1.json`],
+        `chore(monsters): Annihilator (${ID}) fige en v1, 0 guide re-epingle`,
+      ],
+    ]);
+    expect(out.log).toContain('aucun guide à ré-épingler : l’archive naît orpheline.');
+  });
+
+  it('un meta.json déjà à la date du jour n’est pas dit re-daté, mais part quand même s’il a été ré-épinglé', async () => {
+    const { git, fake } = deps({ alreadyStamped: ['flat-boss', 'annihilator'] });
+    const out = await freezeMonster(ID, { was: (await planOf(fake)).was }, fake);
+    expect(out.report?.stamped).toEqual([]);
+    expect(git[0][0]).toEqual([
+      `data/generated/monster-archive/${ID}@2.json`,
+      `${CONTENTS}/special-request/flat-boss/meta.json`,
+      `${CONTENTS}/joint-challenge/annihilator/versions/2026-10/config.json`,
+    ]);
+  });
+
+  it('le moteur qui lève, un commit refusé, un monstre inconnu : dits, sans rien de plus', async () => {
+    const thrown = deps({ throws: 'monstre 4318062 introuvable à `HEAD`' });
+    const out = await freezeMonster(ID, { was: (await planOf(thrown.fake)).was }, thrown.fake);
+    expect(out).toEqual({
+      ok: false,
+      log: ['Rien n’est figé — monstre 4318062 introuvable à `HEAD`'],
+    });
+    expect(thrown.git).toEqual([]);
+    const refused = deps({ git: { ok: false, log: ['git commit a échoué : x'] } });
+    const r = await freezeMonster(ID, { was: (await planOf(refused.fake)).was }, refused.fake);
+    expect(r.ok).toBe(false);
+    expect(r.log.at(-1)).toBe('git commit a échoué : x');
+    expect(r.report?.key).toBe(`${ID}@2`);
+    expect(await freezeMonster('999', {}, deps().fake)).toEqual({
+      ok: false,
+      log: ['Rien n’est figé — monstre 999 absent du committé.'],
+    });
+    expect(await freezeMonster(undefined, {}, deps().fake)).toEqual({
+      ok: false,
+      log: ['Aucun monstre.'],
+    });
   });
 });

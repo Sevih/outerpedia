@@ -71,8 +71,11 @@
       Effect, Armor et Item quittent le menu de l'admin), Extractor › fiches
       et intégration (la même section, lot F21 — la fiche d'un perso, d'un
       monstre, d'une famille d'équipement, « Intégrer », « Intégrer un
-      mode », les sprites du jeu ; les six liens quittent le menu de l'admin,
-      Monster attend F22 — versionnage). Clos sans portage (lot A34) : Gear presets
+      mode », les sprites du jeu ; les six liens quittent le menu de l'admin),
+      Extractor › versionnage (la même section, lot F22 — « Figer et
+      ré-épingler » sur la fiche monstre, le plan des guides avant de figer ;
+      le groupe « Extractor » quitte le menu de l'admin : restent Events, 6,
+      et le retrait de `/admin`, 22). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
@@ -105,6 +108,41 @@
       d'un item du tableau de bord puis la clé) arrive sur l'entité
       DÉPLIÉE — le banc l'a vue repliée sur le seul perso nouveau du 12/10,
       qui n'a aucun champ (relecture F20).
+- [ ] **« Extraction » › versionnage — contrôles à l'écran (lot F22)** : le
+      banc ne clique pas, et RIEN n'a été figé (`POST /api/extractor/freeze`
+      n'est pas dans `READ_ONLY_POSTS`) ; ses refus sont testés. Relancer
+      quick d'abord (Ctrl-C puis `pnpm quick` : deux routes nouvelles). Au
+      prochain boss de Joint Challenge ou de World Boss qui CHANGE dans le
+      jeu, AVANT de créer la version nouvelle de son guide : (1) sa fiche
+      (Données › Extraction › Monstres › « Fiche ») montre l'ordre « 1. Figer
+      l'état actuel », « 2. Intégrer l'extraction » à la place de
+      « Ré-intégrer » ; le bloc « Versions » dit combien de guides le
+      désignent encore en live. (2) « 1. Figer » : le PLAN se lit — la clé
+      `<id>@<n>`, le commit de HEAD et sa date, les versions du guide qui
+      seront épinglées (TOUTES celles encore en live, la plus récente
+      comprise : c'est pour ça qu'on fige avant « ＋ version »), et sous
+      « Laissés en live » le `bossId` du guide versionné, « jamais épinglé ».
+      (3) Une note, « Figer » → UN commit
+      `chore(monsters): <nom> (<id>) fige en v<n>, <k> guides re-epingles`
+      qui porte l'archive `data/generated/monster-archive/<id>@<n>.json`, le
+      `config.json` épinglé de chaque version et le `meta.json` re-daté (à
+      lire avec git show --stat HEAD) ; le rapport reste sous le plan,
+      l'archive apparaît dans la liste avec « épinglée par … ». (4) Dans
+      Guides › le guide › Combat : le badge « épinglé · v1 » et
+      « dépingler » (le contrôle 4 du lot F18, enfin jouable). (5) Retour à
+      la fiche : l'ordre a disparu, « Ré-intégrer » est revenu → l'intégrer.
+      (6) Après « Pousser » et le déploiement : l'ancienne version du guide
+      montre le boss de l'archive, la nouvelle le live. Aussi : (7) la fiche
+      de Prototype EX-78 (`#extractor/monster/4548161`) dit son archive du
+      11/08 « orpheline » ; (8) le menu de l'admin n'a plus de groupe
+      « Extractor ». À TRANCHER par Sevih après le premier passage : le refus
+      « working tree sale ». Il est appliqué tel que décidé, mais le flux de
+      Patch (« Promouvoir » écrit `data/generated/` sans committer) met le
+      boss changé dans cet état-là : figer demande alors d'annuler ses
+      changements, puisque committer ferait de HEAD le NOUVEL état — alors
+      que le commit du figeage ne porte que l'archive et les guides, et
+      figerait HEAD sans mal. Lever le refus est une ligne
+      (`freezeMonster`, `plan.dirty`).
 - [ ] **« Extraction » › fiches et intégration — contrôles à l'écran (lot
       F21)** : le banc ne clique pas, aucun POST d'intégration n'a été joué
       (ils ne sont pas dans `READ_ONLY_POSTS`) ; leurs refus sont testés.

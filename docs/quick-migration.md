@@ -70,8 +70,8 @@ dry-run EST la revue, décision Sevih ; la garde perso de `promote.ts` tient),
 travail en cours. Portage de la `PatchCard` COMPLET côté gestes, mais son
 lien reste dans l'admin tant que le cycle n'a pas été joué une fois dans
 quick — cf. TODO ; la revue par cible est l'étape 19, section « Extraction »
-des Données ; les fiches et l'intégration par entité, étape 20, restent dans
-l'admin).
+des Données ; les fiches, l'intégration par entité et le versionnage d'un
+monstre, étape 20, y sont aussi).
 Publication : Codes promo (= Tools › Promo code ; lien retiré du menu admin le
 08/10 — quick ajoute et supprime un code, mais ne RETOUCHE pas un code
 existant, période ou récompenses : supprimer puis recréer, ou lot A pour
@@ -123,14 +123,38 @@ extraites, tags détectés, cartes de skills, statuts référencés (un lien ver
 Effets, pas de case ici — choix), costumes. La fiche monstre : les stats à
 la rencontre dans un `select` « rang · Lv », la grille, le contexte en deux
 ou trois lignes, les rencontres (vingt-cinq puis « n de plus »), les
-immunités, les skills aux sprites du jeu, la liste des archives figées en
-lecture (F22 y posera le geste). « Intégrer un mode » sur la cible monster :
+immunités, les skills aux sprites du jeu. « Intégrer un mode » sur la cible
+monster :
 le `select`, le PLAN (les ids, leur nombre) avant le geste,
 `chore(extractor): mode <mode> — n monstres integres`. Les liens croisés :
 « fiche perso » ↔ « extraction », « câbler les chips » ↔ « extraction ». Liens
 Effect, Armor et Item retirés du menu admin le 12/10 (F20), Character, EE,
-Weapons, Amulet, Talisman et Sets aussi (F21) — Monster reste jusqu'à F22
-(versionnage)), Tables du jeu (=
+Weapons, Amulet, Talisman et Sets aussi (F21). Puis le VERSIONNAGE d'un
+monstre, fin de l'étape 20, lot F22 : sur sa fiche, le bloc « Versions » —
+ses archives figées (`monster-archive/<id>@<n>.json`), chacune avec QUI
+l'épingle (l'index inverse des `pinned` de tous les guides, et les `bossId@n`
+des guides plats) ou « orpheline », et UN geste, « Figer et ré-épingler », en
+deux temps. D'abord le PLAN (`GET /api/extractor/freeze?id=`) : la clé qui
+sera créée, l'état figé (le commit de HEAD, sa date, la version du jeu), puis
+les guides touchés AVANT de figer — ré-épinglés (le `bossId` d'un guide plat,
+`meta.monsters`, la version dont le `config.json` recevra la clé), laissés en
+live avec le motif en français (le `bossId` d'un guide VERSIONNÉ n'est jamais
+épinglé, une version déjà figée garde son archive), en attente (un guide plat
+qui passe par un combat : rien d'automatique, un lien vers Guides), re-datés
+—, un champ « note », le message du commit. Puis « Figer »
+(`POST /api/extractor/freeze`) : le plan est RECALCULÉ et comparé à celui
+montré (`was` : un écart → refus, relecture, rien d'écrit), `versionMonster`
+fige HEAD, `applyRepin` joue le plan, les guides touchés sont re-datés par la
+règle de `guide-stamp.ts`, et UN commit porte l'archive, les `meta.json` et
+les `config.json` :
+`chore(monsters): <nom> (<id>) fige en v<n>, <k> guides re-epingles`. Le
+geste REFUSE si le monstre diffère de HEAD dans
+`data/generated/` (l'archive fige HEAD, pas le working tree) ; il ne lit pas
+les tables du jeu. Quand un monstre a changé ET que le figeage ré-épinglerait
+encore des guides, la fiche dit l'ordre : « 1. Figer l'état actuel »,
+« 2. Intégrer l'extraction », chacun son plan, rien d'enchaîné. Une archive
+ne se supprime pas d'ici ; dépingler reste dans Guides. Lien Monster retiré
+du menu admin le 12/10 : le groupe « Extractor » en sort, vide), Tables du jeu (=
 Tools › Game data, étape 8, lot B38 : les
 tables brutes de `.gamedata/parsed/`, en lecture seule — un champ de recherche
 à la place de la liste latérale, ses suggestions rangées par USAGE : les
@@ -281,7 +305,7 @@ Con ; 10 Effect fait, B41 ; 11 EE fait, B43 ; 12 Monster fait, C12 ; 13 Item
 fait, B44 ; 14 Gear presets non porté et 15 Tag control fait autrement, A34) →
 16 Guides de boss (fait, F18) → 17 Guides généraux (fait, F19) →
 19 Extractor › revue (fait, F20) → 20 Extractor › fiches, intégration et
-versionnage (F21, F22) → 6 Events (décision Sevih
+versionnage (fait, F21 et F22) → 6 Events (décision Sevih
 du 08/10 : tout dernier, un seul événement publié à ce jour) → 22 Clôture. La
 numérotation des étapes ne change pas.
 
@@ -397,7 +421,8 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       l'épinglage `bossId@n` des guides (trois archives sur le disque, zéro
       épinglage au 09/10). Note pour 19-20 : versionnage à repenser — les
       archives et l'épinglage en UN geste qui montre les guides touchés
-      AVANT de figer.
+      AVANT de figer. FAIT, lot F22 : « Figer et ré-épingler » sur la fiche
+      du monstre, section « Extraction » (cf. l'étape 20).
 
 13. **Editor › Item** — FAIT, lot B44 : l'onglet « Items » (cf. « Déjà dans
     quick »). La ligne « Agacements » était vide : l'écran est porté tel
@@ -470,7 +495,7 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       traductions repliées, « Traduire » par onglet, un commit par
       « Enregistrer ».
 
-### 4. Extractor (plusieurs lots, en dernier)
+### 4. Extractor (plusieurs lots, en dernier) — CLOS le 12/10 (F20, F21, F22)
 
 18. **Home admin : boîte de réception** — FAIT, lot B36 : l'onglet
     « Tableau de bord » (cf. « Déjà dans quick »). La ligne « Agacements »
@@ -490,21 +515,25 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       (`diff-tree.ts`, `diff-words.ts`), les entités repliées par défaut et
       paginées, les gestes avec leur plan et leur confirmation.
 
-20. **Extractor › intégration** — FAIT pour les FICHES et l'INTÉGRATION,
-    lot F21 : la fiche d'une entité dans la section « Extraction » (cf.
-    « Déjà dans quick ») — perso, monstre, équipement par famille (ee,
-    weapon, amulet, talisman, set ; pas d'armure : la cible n'a ni fiche
-    ni intégration dans l'admin, choix), « Intégrer » avec son plan et sa
-    confirmation, « Intégrer un mode », les sprites bruts du jeu, les liens
-    croisés avec la Fiche perso et Monstres. Les six liens quittent le menu
-    de l'admin ; Monster reste jusqu'à F22. Reste le VERSIONNAGE (F22) :
-    « Figer et ré-épingler » en un geste sur la fiche monstre, qui porte déjà
-    la liste des archives en lecture.
+20. **Extractor › intégration** — FAIT, lots F21 et F22. F21 : la fiche
+    d'une entité dans la section « Extraction » (cf. « Déjà dans quick ») —
+    perso, monstre, équipement par famille (ee, weapon, amulet, talisman,
+    set ; pas d'armure : la cible n'a ni fiche ni intégration dans l'admin,
+    choix), « Intégrer » avec son plan et sa confirmation, « Intégrer un
+    mode », les sprites bruts du jeu, les liens croisés avec la Fiche perso
+    et Monstres. F22 : le VERSIONNAGE — « Figer et ré-épingler » en un geste
+    sur la fiche monstre, le plan des guides touchés avant de figer, les
+    archives avec qui les épingle. Les dix liens ont quitté le menu de
+    l'admin, le groupe « Extractor » avec eux ; les pages restent par leur
+    URL jusqu'à l'étape 22. Restent 6 (Events) et 22 (clôture).
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
     - Agacements : (reporté de l'étape 12 — « c'est le bordel, surtout la
       partie versionnage ») versionnage à repenser : les archives et
       l'épinglage en UN geste qui montre les guides touchés AVANT de figer
-      — F22.
+      — corrigé, F22 : un bouton et un plan lisible à la place de « Version
+      the committed state » et de ses cinq boîtes empilées après coup ; le
+      plan range les guides par ce qui leur arrive, dit pourquoi un guide
+      est laissé, et le geste committe.
 
 21. **Patch : lanceur et journal** — FAIT, lot C10 : la section « Patch »
     (cf. « Déjà dans quick »). La ligne « Agacements » était vide : les

@@ -4,8 +4,10 @@
 // intégrer ou retirer un item. Puis la FICHE d'une entité — un perso, un
 // monstre, une famille d'équipement — : ce que le jeu en dit, son écart, et
 // « Intégrer », qui l'écrit ; et « Intégrer un mode » sur la cible monster.
-// Chaque geste écrit et COMMITTE. Rien ne se saisit : la page n'est jamais
-// « sale ».
+// Un monstre a de plus son bloc « Versions » : ses archives figées, qui les
+// épingle, et « Figer et ré-épingler » — le plan des guides touchés AVANT de
+// figer, la note, puis le rapport. Chaque geste écrit et COMMITTE. Rien ne se
+// saisit que la note d'une archive : la page n'est jamais « sale ».
 import { $, esc, getJson, log, post, sections, state } from '../lib.js';
 import { gameText } from '../gear-view.mjs';
 
@@ -22,6 +24,10 @@ let enAt = null; // `{ target, key }` de la fiche ouverte
 let enSeq = 0; // la dernière lecture d'une fiche est la seule qui se dessine
 let enPending = null; // `cible/clé` de la fiche en cours de lecture
 let modePlan = null; // le plan d'« Intégrer un mode » montré
+let fz = null; // le plan de « Figer et ré-épingler » du monstre ouvert : `/api/extractor/freeze`
+let fzWhy = ''; // pourquoi il n'y a pas de plan (monstre pas encore committé, lecture en échec)
+let fzOpen = false; // le plan est à l'écran
+let fzReport = null; // le rapport du dernier figeage de cette fiche
 
 /** Les entités se dessinent par pages : une cible peut en porter des centaines. */
 const PAGE = 100;
@@ -54,7 +60,7 @@ const srcAt = (path) => esc(path.startsWith('/images/') ? `${state.imgBase}${pat
 const targetHash = (id, key) =>
   `#extractor${id ? `/${encodeURIComponent(id)}` : ''}${key ? `/${encodeURIComponent(key)}` : ''}`;
 
-/** `#extractor`, `#extractor/<cible>`, `#extractor/<cible>/<clé>`. */
+/** `#extractor`, `#extractor/<cible>`, `#extractor/<cible>/<clé>` (et `…/monster/<id>/freeze`). */
 function parseHash(hash) {
   const m = /^#extractor(?:\/([^/]+))?(?:\/(.+))?$/.exec(hash);
   if (!m) return null;
@@ -692,26 +698,11 @@ function monsterSheet(m) {
           { count: imm.chips.length },
         )
       : '';
-  const archives = section(
-    'Archives figées',
-    m.archives.length
-      ? `<ul class="ex-ul">${m.archives
-          .map(
-            (a) =>
-              `<li><code>${esc(a.key)}</code> — ${esc(a.committedAt.slice(0, 10))}, source ${esc(a.ref)}${
-                a.gameVersion ? `, jeu ${esc(a.gameVersion)}` : ''
-              }${a.label ? ` — ${esc(a.label)}` : ''} <span class="lbl">· ${plural(a.skills, 'skill')}</span></li>`,
-          )
-          .join('')}</ul>`
-      : '<p class="lbl">Aucune version figée : les guides suivent le live.</p>',
-    { count: m.archives.length },
-  );
   return (
     section('Stats à la rencontre', monsterStatsHtml(m), { cls: 'ex-sec-wide' }) +
     section('Rencontres', encounters + summons, { count: enc.total }) +
     immunities +
-    section('Skills', cardsHtml(m.cards), { count: m.cards.length, cls: 'ex-sec-wide' }) +
-    archives
+    section('Skills', cardsHtml(m.cards), { count: m.cards.length, cls: 'ex-sec-wide' })
   );
 }
 
@@ -793,7 +784,7 @@ function entityNote() {
     return en.monster
       ? en.monster.committedOnly
         ? 'Ce monstre n’est plus dans l’extraction fraîche : la fiche montre le committé, rien à intégrer.'
-        : '« Intégrer » écrit ce monstre, ses skills et ses donjons dans data/generated, re-dérive damage et solver, puis committe — pas d’images. Figer une version et ré-épingler ses guides : à venir (F22).'
+        : '« Intégrer » écrit ce monstre, ses skills et ses donjons dans data/generated, re-dérive damage et solver, puis committe — pas d’images. Figer une version et ré-épingler ses guides : le bloc « Versions ».'
       : 'Ce monstre n’est connu ni du frais ni du committé.';
   return en.gear
     ? '« Intégrer » écrit la famille entière (ses lignes, families.json, les pools, passifs et paliers référencés) dans data/generated/equipment, stage ses icônes, puis committe.'
@@ -807,7 +798,7 @@ function renderEntity() {
   const c = en.character;
   const m = en.monster;
   const g = en.gear;
-  const fresh = Boolean(c || (m && !m.committedOnly) || g);
+  const missing = c?.missing ?? [];
   // L'en-tête : l'icône, le nom, la ligne d'identité.
   $('ex-face').innerHTML = c
     ? `<img class="ex-portrait" src="${srcAt(c.portrait)}" alt="" aria-hidden="true" width="56" height="56" />`
@@ -870,14 +861,7 @@ function renderEntity() {
   $('ex-entity-links').innerHTML = links.length
     ? `<span class="lbl">Voir aussi :</span> ${links.join(' · ')}`
     : '';
-  // « Intégrer » : le frais existe ; caché à jour pour un perso ou un monstre
-  // (la règle de l'admin) ; refusé tant qu'une date de sortie manque.
-  const missing = c?.missing ?? [];
-  const btn = $('ex-integrate');
-  btn.hidden = !en.tables || !fresh || (en.review === 'same' && !g);
-  btn.textContent = en.review === 'added' ? 'Intégrer' : 'Ré-intégrer';
-  btn.disabled = busy || missing.length > 0;
-  btn.title = missing.length ? 'Une date de sortie manque : voir ci-dessous.' : '';
+  renderGestures();
   $('ex-entity-note').textContent = entityNote();
   const box = $('ex-missing');
   box.hidden = !missing.length;
@@ -903,7 +887,231 @@ function renderEntity() {
         : g
           ? gearSheetHtml(g)
           : '';
+  renderVersions();
 }
+
+/**
+ * Les gestes de l'en-tête. « Intégrer » : le frais existe ; caché à jour pour
+ * un perso ou un monstre (la règle de l'admin) ; refusé tant qu'une date de
+ * sortie manque. Pour un monstre qui a CHANGÉ et que le figeage ré-épinglerait
+ * encore (des guides le désignent en live), l'ordre du flux type prend sa
+ * place : « 1. Figer l'état actuel », « 2. Intégrer l'extraction ».
+ */
+function renderGestures() {
+  if (!en) return;
+  const c = en.character;
+  const m = en.monster;
+  const g = en.gear;
+  const fresh = Boolean(c || (m && !m.committedOnly) || g);
+  const missing = c?.missing ?? [];
+  const ordered = Boolean(
+    en.tables && m && !m.committedOnly && en.review === 'changed' && fz && fz.guides > 0,
+  );
+  const btn = $('ex-integrate');
+  btn.hidden = !en.tables || !fresh || (en.review === 'same' && !g) || ordered;
+  btn.textContent = en.review === 'added' ? 'Intégrer' : 'Ré-intégrer';
+  btn.disabled = busy || missing.length > 0;
+  btn.title = missing.length ? 'Une date de sortie manque : voir ci-dessous.' : '';
+  $('ex-order').hidden = !ordered;
+  $('ex-order-freeze').disabled = busy;
+  $('ex-order-integrate').disabled = busy;
+}
+
+// ------------------------------------------------------ « Versions »
+/** Un guide en lien vers Guides, sur sa version s'il y en a une. */
+const guideLink = (guide, version) => {
+  const path = `guides/${guide}${version ? `/${version}` : ''}`;
+  return `<a class="ex-link" href="#${esc(path)}" data-go="${esc(path)}">${esc(guide)}</a>`;
+};
+
+/** Qui épingle une archive : le guide, puis la version (ou le champ d'un guide plat). */
+const pinRefHtml = (p) =>
+  `${guideLink(p.guide, p.version)} <span class="lbl">· ${esc(p.version ?? (p.field === 'meta.bossId' ? 'bossId' : 'monsters'))}</span>`;
+
+const archiveHtml = (a) =>
+  `<li><code>${esc(a.key)}</code> — ${esc(a.committedAt.slice(0, 10))}, source ${esc(a.ref)}${
+    a.gameVersion ? `, jeu ${esc(a.gameVersion)}` : ''
+  }${a.label ? ` — ${esc(a.label)}` : ''} <span class="lbl">· ${plural(a.skills, 'skill')}</span> ${
+    a.pinnedBy.length
+      ? `<span class="ex-pinby">épinglée par ${a.pinnedBy.map(pinRefHtml).join(', ')}</span>`
+      : '<span class="badge warn">orpheline</span>'
+  }</li>`;
+
+/** Un groupe du plan ou du rapport : son titre, son compte, ses lignes ; rien s'il est vide. */
+const fgroup = (title, items, empty = '') =>
+  items.length || empty
+    ? `<div class="ex-fgroup"><div class="ex-fgroup-head"><strong>${esc(title)}</strong><span class="badge off">${items.length}</span></div>${
+        items.length
+          ? `<ul class="ex-ul">${items.map((i) => `<li>${i}</li>`).join('')}</ul>`
+          : `<p class="lbl">${esc(empty)}</p>`
+      }</div>`
+    : '';
+
+const editLine = (e) =>
+  `${guideLink(e.guide)} · <code>${esc(e.field)}</code> : <code>${esc(e.before)}</code> → <code>${esc(e.after)}</code>`;
+const keptLine = (k) =>
+  `${guideLink(k.guide, k.version)}${k.version ? ` · version ${esc(k.version)}` : ''} — ${esc(k.why)}`;
+const pendingLine = (p) =>
+  `${esc(p.guide)} · combat <code>${esc(p.group)}</code> — guide plat, rien d’automatique : <a class="ex-link" href="#${esc(p.go)}" data-go="${esc(p.go)}">ouvrir dans Guides</a>`;
+
+/** Les guides d'un plan, rangés par ce qui leur arrive. */
+function freezePlanHtml(p) {
+  return (
+    fgroup(
+      'Guides ré-épinglés',
+      [
+        ...p.edits.map(editLine),
+        ...p.pins.map(
+          (x) =>
+            `${guideLink(x.guide, x.version)} · version <strong>${esc(x.version)}</strong> (combat <code>${esc(x.group)}</code>) : <code>pinned</code> + <code>${esc(p.key)}</code>`,
+        ),
+      ],
+      'Aucun guide à ré-épingler : l’archive naîtra orpheline.',
+    ) +
+    fgroup('Laissés en live', p.kept.map(keptLine)) +
+    fgroup('En attente', p.pending.map(pendingLine)) +
+    fgroup(
+      'Re-datés (meta.updated)',
+      p.stamps.map((g) => guideLink(g)),
+    )
+  );
+}
+
+/** Ce que le figeage a fait : l'archive, puis les mêmes groupes, tels qu'écrits. */
+function freezeReportHtml(r) {
+  return (
+    `<p><span class="badge ok">figé</span> <code>${esc(r.key)}</code> — ${plural(r.skills, 'skill')}, <code>${esc(r.file)}</code>. Dépingler une version : dans Guides, onglet Combat.</p>` +
+    fgroup(
+      'Guides ré-épinglés',
+      [
+        ...r.edits.map(editLine),
+        ...r.pinned.map(
+          (x) =>
+            `${guideLink(x.guide, x.version)} · version <strong>${esc(x.version)}</strong> épinglée`,
+        ),
+      ],
+      'Aucun guide ré-épinglé : l’archive est orpheline.',
+    ) +
+    fgroup('Laissés en live', r.kept.map(keptLine)) +
+    fgroup('En attente', r.pending.map(pendingLine)) +
+    fgroup(
+      'Re-datés (meta.updated)',
+      r.stamped.map((g) => guideLink(g)),
+    ) +
+    fgroup(
+      'Non écrits',
+      r.skipped.map((g) => `${esc(g)} — meta.json refusé par le store`),
+    )
+  );
+}
+
+/** Le plan à l'écran : la clé créée, l'état figé, les guides, le refus « sale », le commit. */
+function renderFreezePlan() {
+  const box = $('ex-fplan');
+  box.hidden = !fz || !fzOpen;
+  if (box.hidden) return;
+  const p = fz;
+  $('ex-fplan-text').innerHTML =
+    `Créer <code>${esc(p.key)}</code> : l’état COMMITTÉ de ${esc(p.name)} — HEAD <code>${esc(p.head.ref)}</code> du ${esc(p.head.committedAt.slice(0, 10))}${
+      p.head.gameVersion ? `, jeu ${esc(p.head.gameVersion)}` : ''
+    } — figé dans <code>${esc(p.file)}</code>. Les guides touchés :`;
+  $('ex-fplan-body').innerHTML = freezePlanHtml(p);
+  const dirty = $('ex-fdirty');
+  dirty.hidden = !p.dirty.length;
+  dirty.innerHTML = p.dirty.length
+    ? `<p><strong>Figeage refusé avant d’écrire</strong> — ce monstre a des changements non committés dans :</p><ul>${p.dirty
+        .map((f) => `<li><code>${esc(f)}</code></li>`)
+        .join(
+          '',
+        )}</ul><p>L’archive fige HEAD, pas le working tree : enregistrer d’abord, ou annuler. Committer fait de HEAD le NOUVEL état — pour figer l’ancien, annuler ces changements, figer, puis ré-intégrer.</p>`
+    : '';
+  $('ex-fplan-commit').textContent =
+    `Puis UN commit « ${p.commit} » : l’archive, les meta.json et les config.json touchés, les meta.json re-datés.`;
+  $('ex-fplan-go').disabled = busy || p.dirty.length > 0;
+}
+
+/** Le bloc « Versions » d'un monstre : ses archives et qui les épingle, le geste, le plan, le rapport. */
+function renderVersions() {
+  const m = en?.monster;
+  const card = $('ex-versions');
+  card.hidden = !en?.tables || !m;
+  if (card.hidden) return;
+  $('ex-ver-count').textContent = m.archives.length;
+  $('ex-archives').innerHTML = m.archives.map(archiveHtml).join('');
+  $('ex-archives').hidden = !m.archives.length;
+  $('ex-ver-live').textContent = fz
+    ? fz.guides
+      ? `${plural(fz.guides, 'guide')} le désigne${fz.guides > 1 ? 'nt' : ''} encore en live`
+      : 'aucun guide à ré-épingler'
+    : '';
+  const btn = $('ex-freeze');
+  btn.hidden = !fz;
+  btn.disabled = busy;
+  $('ex-ver-note').textContent = fz
+    ? `${m.archives.length ? '' : 'Aucune version figée : les guides suivent le live. '}« Figer et ré-épingler » fige l’état COMMITTÉ (HEAD), pas l’extraction fraîche, et montre d’abord son plan. Une archive ne se supprime pas ; dépingler une version se fait dans Guides, onglet Combat.`
+    : fzWhy;
+  renderFreezePlan();
+  const report = $('ex-freport');
+  report.hidden = !fzReport;
+  report.innerHTML = fzReport ? freezeReportHtml(fzReport) : '';
+}
+
+/** Le plan de figeage du monstre ouvert ; sans plan, la raison (pas encore committé, lecture en échec). */
+async function readFreeze(key) {
+  try {
+    return { plan: await getJson(`/api/extractor/freeze?id=${encodeURIComponent(key)}`), why: '' };
+  } catch (e) {
+    return {
+      plan: null,
+      why:
+        /HTTP 404/.test(String(e)) && /absent du committé/.test(String(e))
+          ? 'Ce monstre n’est pas encore committé : rien à figer — l’intégrer d’abord.'
+          : `Plan de figeage illisible : ${e}`,
+    };
+  }
+}
+
+function openFreezePlan() {
+  if (!fz || busy) return;
+  fzOpen = true;
+  renderFreezePlan();
+  $('ex-versions').scrollIntoView?.({ block: 'nearest' });
+  (fz.dirty.length ? $('ex-fplan-cancel') : $('ex-fnote')).focus();
+}
+
+$('ex-freeze').onclick = openFreezePlan;
+$('ex-order-freeze').onclick = openFreezePlan;
+$('ex-fplan-cancel').onclick = () => {
+  fzOpen = false;
+  renderFreezePlan();
+};
+$('ex-fplan-go').onclick = async () => {
+  if (!fz || !enAt || busy || fz.dirty.length) return;
+  const p = fz;
+  busy = true;
+  renderGestures();
+  renderVersions();
+  log(
+    [],
+    undefined,
+    `${p.name} (${p.id}) : état de ${p.head.ref} figé sous ${p.key}, guides ré-épinglés, puis commit`,
+  );
+  let r = null;
+  try {
+    r = await post('/api/extractor/freeze', { id: p.id, label: $('ex-fnote').value, was: p.was });
+  } finally {
+    busy = false;
+    // Un refus (plan périmé, working tree sale) : le plan RELU reste à l'écran.
+    fzOpen = Boolean(r && !r.ok && (r.stale || r.dirty));
+    if (r?.report) {
+      fzReport = r.report;
+      $('ex-fnote').value = '';
+    }
+    // Le disque fait foi : la fiche, ses archives et le plan sont relus.
+    tg = null;
+    await loadEntity();
+  }
+};
 
 /** Lit la fiche ouverte ; seule la dernière demande se dessine. */
 async function loadEntity() {
@@ -912,11 +1120,18 @@ async function loadEntity() {
   const { target, key } = enAt;
   enPending = `${target}/${key}`;
   try {
-    const got = await getJson(
-      `/api/extractor/entity?target=${encodeURIComponent(target)}&key=${encodeURIComponent(key)}`,
-    );
+    // Un monstre : sa fiche et le plan de son figeage, lus ensemble — l'ordre
+    // « figer puis intégrer » se décide sur les deux.
+    const [got, freeze] = await Promise.all([
+      getJson(
+        `/api/extractor/entity?target=${encodeURIComponent(target)}&key=${encodeURIComponent(key)}`,
+      ),
+      target === 'monster' ? readFreeze(key) : { plan: null, why: '' },
+    ]);
     if (mine !== enSeq) return false;
     en = got;
+    fz = freeze.plan;
+    fzWhy = freeze.why;
     renderEntity();
     return true;
   } catch (e) {
@@ -937,15 +1152,22 @@ async function loadEntity() {
   }
 }
 
-async function openEntity(target, key) {
+async function openEntity(target, key, plan = false) {
   // La même fiche demandée deux fois pendant sa lecture (le clic d'`init`, puis
   // l'ouverture de `start`) : une seule lecture.
   if (enPending === `${target}/${key}`) return;
   en = null;
   enAt = { target, key };
+  fz = null;
+  fzWhy = '';
+  fzOpen = plan;
+  fzReport = null;
   history.replaceState(null, '', targetHash(target, key));
   showView('entity');
   $('ex-assets').hidden = true;
+  $('ex-versions').hidden = true;
+  $('ex-order').hidden = true;
+  $('ex-fnote').value = '';
   $('ex-face').innerHTML = '';
   $('ex-entity-title').textContent = key;
   $('ex-entity-meta').textContent = '';
@@ -970,8 +1192,8 @@ $('ex-entity-back').onclick = () => {
   return openTarget(target);
 };
 
-$('ex-integrate').onclick = () => {
-  if (!en?.plan) return;
+function openIntegratePlan() {
+  if (!en?.plan || busy) return;
   const p = en.plan;
   $('ex-iplan-text').textContent = `Écrire dans data/generated :`;
   $('ex-iplan-files').innerHTML =
@@ -979,7 +1201,9 @@ $('ex-integrate').onclick = () => {
     `<li>puis UN commit « ${esc(p.commit)} »</li>`;
   $('ex-iplan').hidden = false;
   $('ex-iplan-go').focus();
-};
+}
+$('ex-integrate').onclick = openIntegratePlan;
+$('ex-order-integrate').onclick = openIntegratePlan;
 $('ex-iplan-cancel').onclick = () => ($('ex-iplan').hidden = true);
 $('ex-iplan-go').onclick = async () => {
   if (!en || !enAt || busy) return;
@@ -987,7 +1211,8 @@ $('ex-iplan-go').onclick = async () => {
   const { target, key } = enAt;
   const name = $('ex-entity-title').textContent;
   busy = true;
-  $('ex-integrate').disabled = true;
+  renderGestures();
+  renderVersions();
   log([], undefined, `${name} (${key}) : intégration dans data/generated, puis commit`);
   let r = null;
   try {
@@ -1029,8 +1254,13 @@ function route() {
   const to = here?.id ? here : (wanted ?? here);
   wanted = null;
   // Une clé : la fiche, si la cible en a une — le serveur le dit (404 sinon,
-  // et la cible s'ouvre sur l'entité dépliée).
-  if (to?.id && to.key) return openEntity(to.id, to.key);
+  // et la cible s'ouvre sur l'entité dépliée). `#extractor/monster/<id>/freeze`
+  // ouvre la fiche d'un monstre sur le PLAN de son figeage (le banc de
+  // captures ne clique pas ; rien n'est posté).
+  if (to?.id && to.key) {
+    const freeze = to.id === 'monster' ? /^(.+)\/freeze$/.exec(to.key) : null;
+    return openEntity(to.id, freeze ? freeze[1] : to.key, Boolean(freeze));
+  }
   if (to?.id) return openTarget(to.id);
   return showOverview();
 }

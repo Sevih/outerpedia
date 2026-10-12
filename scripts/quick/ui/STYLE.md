@@ -375,7 +375,7 @@ table quittée. Propres à l'onglet, dans `tabs/gamedata.css` : `.t-info`,
 `.t-id`, `.t-reader`, `.t-note`, `.t-bar`, `.t-cols`, `.t-grid`, `.t-v`,
 `.t-text`, `.t-raw`, `.t-kv`, `.t-pair`.
 
-### Extraction (`wide`, fait — F20 ; fiches et intégration F21 ; versionnage F22)
+### Extraction (`wide`, fait — F20 ; fiches et intégration F21 ; versionnage — F22)
 
 La revue de maintenance de l'admin — l'extraction fraîche des tables du jeu
 contre ce que le site committe —, cible par cible, et ses gestes. Croquis du
@@ -403,13 +403,21 @@ LA CIBLE (#ex-target, `#extractor/<cible>` ; la vue d'ensemble se cache)
    .empty « Aucune entité ne correspond. » · « Pas de données du jeu : lancer un patch (pull) d'abord. »
 LA FICHE (#ex-entity, `#extractor/<cible>/<clé>` sur une cible à fiches — perso, monstre, ee, weapon, amulet, talisman, set ; la cible se cache)
 .card.pad.ex-head  [← Personnages] · .ex-face : le portrait du perso (`/api/sprite/CT_<id>`, 56 px arrondi), ou la vignette du monstre sur son fond de slot (`GD_Slot_Bg_*`) avec le badge BOSS, ou la tuile de l'équipement sur son cadre de rareté · .ex-id : le nom en strong (« Slime — The Blob ») · .ex-meta : `id` · badge off du type · icônes d'élément et de classe suivies de leur slug · race · étoiles · « chaîne start » / « IA attack » / « ★ 5/6 · AP · classes : … » / « EE de `id` · confiance 3 » · .ex-badges : « new — pas encore intégré » (edit), « 3 champs divergent » (ko), « absent de l'extraction fraîche » (warn), « à jour — le committé est l'extraction » (ok), ou la raison sans tables (warn) · .ex-links « Voir aussi : fiche perso » / « fiche perso › EE » / « câbler les chips » (data-go) … à droite [Intégrer] / [Ré-intégrer] (.btn.primary ; caché sans frais, et à jour pour un perso ou un monstre ; éteint tant qu'une date de sortie manque)
-   p.hint : ce que le geste écrit, selon la cible — et, pour un monstre, « Figer une version et ré-épingler ses guides : à venir (F22). »
+   p.hint : ce que le geste écrit, selon la cible — et, pour un monstre, « Figer une version et ré-épingler ses guides : le bloc « Versions ». »
    .ex-refuse (bordé de rouge, caché) : « Intégration refusée avant d'écrire — ce perso n'a de date de sortie d'aucune source… » · ul : `id` libellé · « Ajouter la clé à la main dans data/curated/character-release.json ("id": "AAAA-MM-JJ"), puis relire la fiche. »
+   .ex-order (bordé d'ambre, caché ; F22) — un monstre qui a CHANGÉ et dont le figeage ré-épinglerait encore des guides : « Ce monstre a changé dans le jeu et des guides le désignent encore en live : figer d'abord l'état committé…, puis intégrer le nouveau. Chaque geste montre son plan et se confirme ; rien ne s'enchaîne tout seul. » [1. Figer l'état actuel] (.btn.primary) [2. Intégrer l'extraction] (.btn.ghost) — ils prennent la place de [Ré-intégrer], caché tant que l'ordre est à l'écran ; le premier ouvre le plan du bloc « Versions », le second le plan d'« Intégrer »
    .ex-plan (rouge, caché) — le PLAN d'« Intégrer » : « Écrire dans data/generated : » · ul.ex-iplan-files : les fichiers (characters.json, skills.json, …, « data/generated/damage/* et data/generated/solver/* (re-dérivés) », « les images…, stagées ») · « puis UN commit « chore(extractor): <cible> <nom> (<clé>) integre » » · [Écrire et committer] (.btn.danger) [Annuler]
 .card#ex-entity-diff (caché sans écart) — card-head « Ce qui change » · « 3 champs » ; dessous le diff de la cible (.ex-diff, mêmes groupes, mêmes bandes et arbres)
+.card.pad.ex-versions#ex-versions (un monstre seul, F22 ; entre l'écart et la fiche — le geste d'un boss ne se cherche pas sous ses skills) — .ex-ver-head : « VERSIONS » (capitales grises) · badge off du nombre d'archives · .lbl « 2 guides le désignent encore en live » / « aucun guide à ré-épingler » … [Figer et ré-épingler…] (.btn.ghost, caché pour un monstre pas encore committé)
+   ul.ex-archives : `<id>@<n>` — date, source sha, jeu 1.4.14 — note · n skills · .ex-pinby « épinglée par joint-challenge/slime · 2026-08, special-request/blob · bossId » (chaque guide un lien data-go vers `guides/<cat>/<slug>/<version>`), ou badge warn « orpheline »
+   p.hint : « Aucune version figée : les guides suivent le live. » (sans archive) · « « Figer et ré-épingler » fige l'état COMMITTÉ (HEAD), pas l'extraction fraîche, et montre d'abord son plan. Une archive ne se supprime pas ; dépingler une version se fait dans Guides, onglet Combat. » ; ou la raison sans plan : « Ce monstre n'est pas encore committé : rien à figer — l'intégrer d'abord. »
+   .ex-plan (rouge, caché) — le PLAN, AVANT de figer : « Créer `400101@3` : l'état COMMITTÉ de Slime — HEAD `abc1234` du 2026-10-12, jeu 1.4.14 — figé dans `data/generated/monster-archive/400101@3.json`. Les guides touchés : » · .ex-fplan-body : un .ex-fgroup par sort (titre en gras + badge off du compte, puis ul.ex-ul) — « Guides ré-épinglés » (`guide` · `meta.bossId` : `400101` → `400101@3` ; `guide` · version 2026-10 (combat `jc-slime`) : `pinned` + `400101@3` ; vide : « Aucun guide à ré-épingler : l'archive naîtra orpheline. ») · « Laissés en live » (`guide` · version 2026-08 — le motif en français) · « En attente » (`guide` · combat `g` — guide plat, rien d'automatique : [ouvrir dans Guides] data-go) · « Re-datés (meta.updated) » ; un groupe vide ne se dessine pas, sauf le premier
+      .ex-refuse (dans le plan, caché) : « Figeage refusé avant d'écrire — ce monstre a des changements non committés dans : » · ul : `data/generated/monsters.json` · « L'archive fige HEAD, pas le working tree : enregistrer d'abord, ou annuler. Committer fait de HEAD le NOUVEL état — pour figer l'ancien, annuler ces changements, figer, puis ré-intégrer. » — [Figer] éteint
+      .form : [Note de l'archive (facultative) 30ch « avant la refonte 1.11 »] · « Puis UN commit « chore(monsters): Slime (400101) fige en v3, 2 guides re-epingles » : l'archive, les meta.json et les config.json touchés, les meta.json re-datés. » · [Figer] (.btn.danger) [Annuler]
+   .ex-freport (bordé de vert, caché ; après un figeage, tant que la fiche reste ouverte) — badge ok « figé » `400101@3` — 6 skills, le fichier · « Dépingler une version : dans Guides, onglet Combat. » · les mêmes .ex-fgroup, tels qu'ÉCRITS (« … · version 2026-10 épinglée »), plus « Non écrits » si le store a refusé un meta.json
 #ex-sheet — deux colonnes de .card.pad.ex-sec (titre en capitales grises + badge off du compte ; `.ex-sec-wide` prend les deux ; une seule sous 1000 px) :
    PERSO : « Stats extraites » (.ex-grid de .ex-cell : abréviation au-dessus de la valeur « 100 – 1000 ») · « Tags détectés » (.ex-tag : `slug` · libellé · groupe · détail ; le rappel de la page admin en hint) · « Skills » (wide : .ex-cols, deux .card.ex-skill par rangée — icône 36 px du sprite du jeu, nom, `id · type`, la description du jeu (`gameText`), les chips d'effets .ex-chip avec leur tuile .ex-fx) · « Statuts référencés » (chips : la tuile, le nom en lien vers `#effects/<id>`, badge off « caché du live » ; en hint « Cacher un statut du live se règle dans Éditeurs › Effets ») · « Costumes » (ul)
-   MONSTRE : « Stats à la rencontre » (wide : [Rencontre ▾ « SSS · Lv 120 — Mode · Stage (palier SSS) »] (select, éteint à une seule option, le palier le plus haut d'office) · la grille (HP « × 3 barres ») · .ex-ctx : « Lv 120 · transcendance 2 » / « modificateurs du donjon : ATK +10 % · quirks de compte : RES −10 % » ou « valeurs du templet, interpolées » / « dégâts : 4 250 001 – 5 000 000 · barre du palier : 750 000 · PV du mode : … » / « Passifs du palier : » pastilles) · « Rencontres » (ul : mode · stage (zone) · Lv n · n barres ; « … n de plus » après vingt-cinq ; sinon « Jamais spawné directement — invoqué par : …, lié au kit de : … » ; « Invoque : … » — chaque monstre un lien vers sa fiche) · « Immunités » (chips, et « ⚠ sans entrée au glossaire des effets : 64 “Freeze” » en ambre) · « Skills » (wide, comme le perso ; un rage_enter porte « — à 70 % PV ») · « Archives figées » (ul : `<id>@<n>` — date, source sha, jeu 1.4.14 — note · n skills ; sinon « Aucune version figée : les guides suivent le live. »)
+   MONSTRE : « Stats à la rencontre » (wide : [Rencontre ▾ « SSS · Lv 120 — Mode · Stage (palier SSS) »] (select, éteint à une seule option, le palier le plus haut d'office) · la grille (HP « × 3 barres ») · .ex-ctx : « Lv 120 · transcendance 2 » / « modificateurs du donjon : ATK +10 % · quirks de compte : RES −10 % » ou « valeurs du templet, interpolées » / « dégâts : 4 250 001 – 5 000 000 · barre du palier : 750 000 · PV du mode : … » / « Passifs du palier : » pastilles) · « Rencontres » (ul : mode · stage (zone) · Lv n · n barres ; « … n de plus » après vingt-cinq ; sinon « Jamais spawné directement — invoqué par : …, lié au kit de : … » ; « Invoque : … » — chaque monstre un lien vers sa fiche) · « Immunités » (chips, et « ⚠ sans entrée au glossaire des effets : 64 “Freeze” » en ambre) · « Skills » (wide, comme le perso ; un rage_enter porte « — à 70 % PV ») — les archives figées ont quitté ces cartes pour le bloc « Versions »
    ÉQUIPEMENT : « Main stats » (.ex-pill) · « Passif » / « Passif (base → +10) » (.ex-passive : icône 24 px, nom, « niv. 1 (s'ajoute) · 2 paliers », le texte au premier palier, « max : » au dernier ; .ex-variant « variante striker » `id` + ses mains + ses passifs ; les effets structurés en pastilles) · « Pièces (6★) » (.ex-piece : icône 40 px + slot) · « Bonus (base → enchanté) » (ul : base · 2P : … · 4P : …) · « Membres de la famille » (.ex-mono : les ids)
    .empty « Lecture… » / « Fiche illisible : … »
 le bilan d'images (.ex-assets) vit au niveau de la section : il suit le dernier geste, d'une cible ou d'une fiche
@@ -474,7 +482,34 @@ posé. « Intégrer un mode » : `GET /api/extractor/mode?mode=` (`planMode` :
 les spawnés puis leurs adds, la règle d'`integrateMonsterMode` rejouée,
 `was`) puis `POST /api/extractor/mode` (`integrateMode`, `chore(extractor):
 mode <mode> — n monstres integres`) ; la liste des modes vient avec la cible
-monster (`modes`). Propres à l'onglet, dans `tabs/extractor.css` :
+monster (`modes`).
+
+Le versionnage (F22) est le bloc « Versions » de la fiche monstre. La page
+lit ENSEMBLE la fiche et `GET /api/extractor/freeze?id=` (`freezePlan`) : la
+clé à venir, HEAD (sha, date, version du jeu), le plan de `planRepin` rangé
+par ce qui arrive à chaque guide (`edits`, `pins`, `kept` au motif traduit,
+`pending`), les guides à re-dater, le message du commit, `dirty` et `was` —
+la règle est `src/lib/admin/monster-freeze.ts` ; un monstre absent du
+committé répond 404 et le bloc dit pourquoi. Les archives viennent de la
+fiche, chacune avec `pinnedBy` (`pinIndex` : les `pinned` des `config.json`
+de tous les guides, et les `bossId@n` d'un guide plat). Le plan ne s'ouvre
+qu'au clic ; « Figer » poste `POST /api/extractor/freeze` (`freezeMonster`,
+`id`, `label`, `was`) : le plan RECALCULÉ, le refus `dirty` (le monstre
+diffère de HEAD dans `monsters.json`, `monster-skills.json` ou
+`encounters.json`) puis le refus `stale` (`was` a bougé), rien d'écrit dans
+les deux cas ; sinon `versionMonster(id, { ref: 'HEAD', label })`,
+`applyRepin`, le stamp des seuls guides touchés (`guidesToStamp`, la règle
+de `guide-stamp.ts`), UN `commitPaths`. Après le geste la fiche ET le plan
+sont relus : un refus laisse le plan relu à l'écran, un succès le ferme et
+pose le rapport (`report`). L'ordre « figer puis intégrer » (`.ex-order`) se
+décide sur les deux lectures : `review === 'changed'` et `plan.guides > 0`
+— des guides que le figeage ré-épinglerait, pas ceux qu'il laisserait ; il
+disparaît donc de lui-même une fois le monstre figé. Les tables du jeu ne
+sont pas lues par le figeage, mais la fiche qui le porte, si.
+`#extractor/monster/<id>/freeze` ouvre la fiche sur le plan (le banc de
+captures ne clique pas) ; rien n'est posté.
+
+Propres à l'onglet, dans `tabs/extractor.css` :
 `.ex-end`, `.ex-badges`, `.ex-n`, `.ex-quiet`, `.ex-tlabel`, `.ex-scope`,
 `.ex-head`, `.ex-who`, `.ex-id`, `.ex-meta`, `.ex-acts`, `.ex-plan`,
 `.ex-assets`, `.ex-missing`, `.ex-seg`, `.ex-total`, `.ex-list`,
@@ -493,7 +528,9 @@ monster (`modes`). Propres à l'onglet, dans `tabs/extractor.css` :
 `.ex-pico`, `.ex-variant`, `.ex-variant-head`, `.ex-pieces`, `.ex-piece`,
 `.ex-cols`, `.ex-skill`, `.ex-skico`, `.ex-skid`, `.ex-body`, `.ex-desc`,
 `.ex-chips`, `.ex-fxlist`, `.ex-chip`, `.ex-chn`, `.ex-fx` (la tuile
-d'effet des Monstres, recopiée).
+d'effet des Monstres, recopiée) ; et pour le versionnage : `.ex-order`,
+`.ex-versions`, `.ex-ver-head`, `.ex-archives`, `.ex-pinby`,
+`.ex-fplan-body`, `.ex-fgroup`, `.ex-fgroup-head`, `.ex-freport`.
 
 ## Accueil — croquis
 

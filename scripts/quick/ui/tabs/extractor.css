@@ -905,3 +905,100 @@
   height: 100%;
   object-fit: contain;
 }
+
+/* ------------------------------------------------------------ « Versions » */
+/* L'ordre du flux type, dans l'en-tête de la fiche : figer, puis intégrer. */
+#tab-extractor .ex-order {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--warn) 7%, transparent);
+}
+#tab-extractor .ex-order[hidden] {
+  display: none;
+}
+#tab-extractor .ex-order p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-order .actions {
+  margin: 0;
+}
+/* Le bloc d'un monstre : ses archives, le geste, son plan, son rapport. */
+#tab-extractor .ex-versions {
+  gap: 12px;
+}
+#tab-extractor .ex-versions[hidden] {
+  display: none;
+}
+#tab-extractor .ex-ver-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#tab-extractor .ex-ver-head strong {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--content-muted);
+}
+#tab-extractor .ex-versions .hint,
+#tab-extractor .ex-versions .form {
+  margin: 0;
+}
+#tab-extractor .ex-archives[hidden] {
+  display: none;
+}
+#tab-extractor .ex-archives code,
+#tab-extractor .ex-fgroup code,
+#tab-extractor .ex-plan code,
+#tab-extractor .ex-freport code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+#tab-extractor .ex-pinby {
+  color: var(--content-muted);
+}
+/* Les guides d'un plan ou d'un rapport, rangés par ce qui leur arrive. */
+#tab-extractor .ex-fplan-body,
+#tab-extractor .ex-freport {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#tab-extractor .ex-fplan-body:empty {
+  display: none;
+}
+#tab-extractor .ex-fgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-extractor .ex-fgroup-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+#tab-extractor .ex-fgroup p {
+  margin: 0;
+}
+#tab-extractor .ex-freport {
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--success) 45%, transparent);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-freport[hidden] {
+  display: none;
+}
+#tab-extractor .ex-freport > p {
+  margin: 0;
+}

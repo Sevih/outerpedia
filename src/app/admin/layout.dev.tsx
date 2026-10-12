@@ -1,6 +1,5 @@
 import { AdminSidebar, type NavSection } from '@/components/admin/AdminSidebar';
 import { assertDevOnly } from '@/lib/admin/guard';
-import { actionableCount, adminExtractorMenu, bucketsOf } from '@/lib/admin/admin-inbox';
 import { RootDocument } from '../root-document';
 
 // Outil local : jamais prérendu, 404 en prod.
@@ -12,43 +11,17 @@ export const metadata = { title: { default: 'Admin', template: '%s | Outerpedia 
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   assertDevOnly();
-  /**
-   * Badge « à traiter » d'une entité : le TOTAL `new + diff + removed` (le typo,
-   * cosmétique, en est exclu) ; le détail va en infobulle, sinon « 4 » se lit
-   * « 4 diff » alors que la page dit « 2 new + 2 diff ».
-   * Les buckets viennent de `admin-inbox` — même calcul que l'inbox de la home,
-   * mémoïsé à la requête (cf. `entityBuckets`).
-   */
-  const badge = (id: string) => {
-    const b = bucketsOf(id);
-    const count = actionableCount(b);
-    return count > 0
-      ? {
-          count,
-          tone: 'warn' as const,
-          title: `${b.new} new + ${b.diff} diff + ${b.removed} removed`,
-        }
-      : null;
-  };
-
   const sections: NavSection[] = [
-    {
-      // Liste + ordre viennent d'`admin-inbox` (source unique, partagée avec la
-      // home) — le Monstre et l'Item ferment la liste (décision Sevih). Effect,
-      // Armor et Item : portés dans quick (Données › Extraction, lot F20 — la
-      // revue par cible, l'acceptation, l'intégration des items), liens
-      // retirés le 12/10. Character, EE, Weapons, Amulet, Talisman, Sets :
-      // portés dans quick (la même section, lot F21 — la fiche par entité et
-      // son intégration, le mode), liens retirés le 12/10 ; les pages restent
-      // joignables par leur URL jusqu'au retrait de l'admin. Monster reste
-      // jusqu'au lot F22 (le versionnage, sur sa fiche).
-      title: 'Extractor',
-      items: adminExtractorMenu().map((e) => ({
-        label: e.label,
-        href: e.href,
-        badge: badge(e.id),
-      })),
-    },
+    // Groupe « Extractor » : vide depuis le 12/10, il sort du menu. Effect,
+    // Armor et Item : portés dans quick (Données › Extraction, lot F20 — la
+    // revue par cible, l'acceptation, l'intégration des items). Character, EE,
+    // Weapons, Amulet, Talisman, Sets : la même section (lot F21 — la fiche
+    // par entité et son intégration, le mode). Monster : la même encore (lot
+    // F22 — « Figer et ré-épingler » sur sa fiche, le plan avant de figer).
+    // La liste des dix cibles reste dans `admin-inbox` (`EXTRACTOR_ENTITIES`,
+    // lue par l'inbox de la home et par quick) ; les pages
+    // (`/admin/extractor/…`) restent joignables par leur URL jusqu'au retrait
+    // de l'admin.
     // Groupe « Editor » : vide depuis le 09/10, il sort du menu. Character :
     // porté dans quick (Éditeurs › Fiche perso, Gear reco compris), lien
     // retiré le 09/10. Effect : porté dans quick (Éditeurs › Effets), lien

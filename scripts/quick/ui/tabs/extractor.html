@@ -4,10 +4,11 @@
     <p class="hint">
       Le jeu a bougé : ce que l'extraction fraîche — bâtie des tables du jeu de ce poste —
       changerait à ce que le site committe (data/generated/), cible par cible, entité par entité.
-      Une entité a sa fiche : ce que le jeu en dit, son écart, et « Intégrer », qui l'écrit. Rien ne
-      se lit sans les tables. Un geste écrit le fichier et committe ; les images qu'il met en place
-      attendent dans le staging, que « Committer » de la section Patch pousse. Rien ne part en ligne
-      avant « Pousser » et le build de la CI.
+      Une entité a sa fiche : ce que le jeu en dit, son écart, et « Intégrer », qui l'écrit. Un
+      monstre se fige aussi de sa fiche, guides ré-épinglés, le plan d'abord. Rien ne se lit sans
+      les tables. Un geste écrit le fichier et committe ; les images qu'il met en place attendent
+      dans le staging, que « Committer » de la section Patch pousse. Rien ne part en ligne avant «
+      Pousser » et le build de la CI.
     </p>
   </div>
 
@@ -158,6 +159,22 @@
       <p class="hint" id="ex-entity-note"></p>
       <!-- Le refus situé : un perso sans date de sortie — la clé à ajouter au curé, à la main. -->
       <div class="ex-refuse" id="ex-missing" hidden></div>
+      <!-- L'ordre du flux type : un monstre qui a changé ET que des guides désignent encore en live. -->
+      <div class="ex-order" id="ex-order" hidden>
+        <p>
+          Ce monstre a changé dans le jeu et des guides le désignent encore en live : figer d'abord
+          l'état committé — celui contre lequel ils ont été écrits —, puis intégrer le nouveau.
+          Chaque geste montre son plan et se confirme ; rien ne s'enchaîne tout seul.
+        </p>
+        <div class="actions">
+          <button class="btn primary" id="ex-order-freeze" type="button">
+            1. Figer l'état actuel
+          </button>
+          <button class="btn ghost" id="ex-order-integrate" type="button">
+            2. Intégrer l'extraction
+          </button>
+        </div>
+      </div>
       <!-- Ce qu'« Intégrer » va écrire, et sa confirmation. -->
       <div class="ex-plan" id="ex-iplan" hidden>
         <p id="ex-iplan-text"></p>
@@ -176,6 +193,47 @@
         <span class="lbl" id="ex-entity-fields"></span>
       </div>
       <div class="ex-row" id="ex-entity-diff-body"></div>
+    </div>
+
+    <!-- « Versions » d'un monstre : ses archives et qui les épingle, puis « Figer et ré-épingler » — le plan, la note, le rapport. -->
+    <div class="card pad ex-versions" id="ex-versions" aria-label="Versions" hidden>
+      <div class="ex-ver-head">
+        <strong>Versions</strong>
+        <span class="badge off" id="ex-ver-count">0</span>
+        <span class="lbl" id="ex-ver-live"></span>
+        <button class="btn ghost ex-end" id="ex-freeze" type="button" hidden>
+          Figer et ré-épingler…
+        </button>
+      </div>
+      <ul class="ex-ul ex-archives" id="ex-archives"></ul>
+      <p class="hint" id="ex-ver-note"></p>
+      <!-- Le PLAN : la clé créée, l'état figé, les guides touchés — AVANT de figer. -->
+      <div class="ex-plan" id="ex-fplan" hidden>
+        <p id="ex-fplan-text"></p>
+        <div class="ex-fplan-body" id="ex-fplan-body"></div>
+        <!-- Le refus situé : le monstre diffère de HEAD dans data/generated. -->
+        <div class="ex-refuse" id="ex-fdirty" hidden></div>
+        <div class="form">
+          <div class="field">
+            <label for="ex-fnote">Note de l'archive (facultative)</label>
+            <input
+              id="ex-fnote"
+              type="text"
+              class="w-search"
+              maxlength="120"
+              placeholder="avant la refonte 1.11"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <p id="ex-fplan-commit"></p>
+        <div class="actions">
+          <button class="btn danger" id="ex-fplan-go" type="button">Figer</button>
+          <button class="btn ghost" id="ex-fplan-cancel" type="button">Annuler</button>
+        </div>
+      </div>
+      <!-- Le rapport du dernier figeage de cette fiche. -->
+      <div class="ex-freport" id="ex-freport" hidden></div>
     </div>
 
     <!-- La fiche selon la cible (posée par `renderSheet`). -->

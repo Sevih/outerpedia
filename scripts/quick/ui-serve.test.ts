@@ -297,6 +297,8 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect(READ_ONLY_POSTS.has('/api/extractor/item')).toBe(false);
     expect(READ_ONLY_POSTS.has('/api/extractor/integrate')).toBe(false);
     expect(READ_ONLY_POSTS.has('/api/extractor/mode')).toBe(false);
+    // « Figer » écrit une archive, des guides, et committe : son plan est un GET.
+    expect(READ_ONLY_POSTS.has('/api/extractor/freeze')).toBe(false);
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/sprite'))).toEqual([]);
   });
 
@@ -11575,6 +11577,60 @@ describe('Extraction — la page, sur le vrai markup', () => {
     diff: fields ? ENTITIES[0].diff : [],
     was: `sig:${target}:v1`,
   });
+  /** Le plan de « Figer et ré-épingler » de Slime : un plat édité, une version épinglée, deux gardés, un en attente. */
+  const FREEZE_PLAN = {
+    id: '400101',
+    name: 'Slime',
+    key: '400101@3',
+    version: 3,
+    file: 'data/generated/monster-archive/400101@3.json',
+    head: { ref: 'abc1234', committedAt: '2026-10-12T09:00:00+02:00', gameVersion: '1.4.14' },
+    edits: [
+      { guide: 'special-request/flat', field: 'meta.bossId', before: '400101', after: '400101@3' },
+    ],
+    pins: [{ guide: 'joint-challenge/slime', version: '2026-10', group: 'jc-slime' }],
+    kept: [
+      {
+        guide: 'joint-challenge/slime',
+        field: 'meta.bossId',
+        why: 'guide versionné : son bossId porte le portrait et le titre, il suit l’entité courante — jamais épinglé',
+      },
+      {
+        guide: 'joint-challenge/slime',
+        field: 'version.pinned',
+        version: '2026-08',
+        why: 'version déjà figée sur ce monstre : elle garde l’archive où elle est épinglée',
+      },
+    ],
+    pending: [{ guide: 'adventure/S1-1-1', group: 'g-flat', go: 'guides/adventure/S1-1-1' }],
+    stamps: ['special-request/flat', 'joint-challenge/slime'],
+    guides: 2,
+    commit: 'chore(monsters): Slime (400101) fige en v3, 2 guides re-epingles',
+    dirty: [] as string[],
+    was: 'plan:v1',
+  };
+  /** Le même monstre que personne ne désigne plus en live : rien à ré-épingler. */
+  const FREEZE_QUIET = {
+    ...FREEZE_PLAN,
+    edits: [],
+    pins: [],
+    pending: [],
+    stamps: [],
+    guides: 0,
+    commit: 'chore(monsters): Slime (400101) fige en v3, 0 guide re-epingle',
+  };
+  const FREEZE_REPORT = {
+    key: '400101@3',
+    version: 3,
+    file: 'data/generated/monster-archive/400101@3.json',
+    skills: 6,
+    edits: FREEZE_PLAN.edits,
+    pinned: [{ guide: 'joint-challenge/slime', version: '2026-10' }],
+    kept: FREEZE_PLAN.kept,
+    pending: FREEZE_PLAN.pending,
+    skipped: [],
+    stamped: ['special-request/flat', 'joint-challenge/slime'],
+  };
   const CHARACTER = (missing: boolean) => ({
     ...sheetBase('character', '2000003', 'added'),
     character: {
@@ -11681,6 +11737,18 @@ describe('Extraction — la page, sur le vrai markup', () => {
             gameVersion: '1.4.14',
             label: 'avant la refonte',
             skills: 1,
+            pinnedBy: [
+              { guide: 'joint-challenge/slime', field: 'version.pinned', version: '2026-08' },
+              { guide: 'special-request/blob', field: 'meta.bossId' },
+            ],
+          },
+          {
+            key: '400101@2',
+            version: 2,
+            ref: 'def5678',
+            committedAt: '2026-10-05T10:00:00+02:00',
+            skills: 2,
+            pinnedBy: [],
           },
         ],
       },
@@ -11745,6 +11813,10 @@ describe('Extraction — la page, sur le vrai markup', () => {
       posted?: (body: unknown) => unknown;
       /** Le perso nouveau n'a pas de date de sortie. */
       missing?: boolean;
+      /** Le plan de figeage servi, lecture après lecture (le dernier reste) ; `null` : pas encore committé. */
+      freeze?: unknown[];
+      /** Le statut de revue de la fiche de Slime (`same` d'office). */
+      review?: string;
     } = {},
   ) {
     vi.resetModules();
@@ -11757,6 +11829,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
     );
     const tables = opts.tables ?? true;
     const calls: Call[] = [];
+    let freezeReads = 0;
     const answer = (data: unknown) => {
       const bytes = new TextEncoder().encode(JSON.stringify(data));
       let read = false;
@@ -11796,6 +11869,13 @@ describe('Extraction — la page, sur le vrai markup', () => {
           });
         if (target === 'character' && key === '2000003')
           return answer(CHARACTER(Boolean(opts.missing)));
+        if (opts.review && `${target}/${key}` === 'monster/400101')
+          return answer({
+            ...(SHEETS['monster/400101'] as Record<string, unknown>),
+            review: opts.review,
+            fields: 3,
+            diff: ENTITIES[0].diff,
+          });
         return answer(
           SHEETS[`${target}/${key}`] ?? {
             ...sheetBase(target, key, 'same'),
@@ -11805,6 +11885,17 @@ describe('Extraction — la page, sur le vrai markup', () => {
             links: {},
           },
         );
+      }
+      if (url.pathname === '/api/extractor/freeze' && !posting) {
+        const plans = opts.freeze ?? [FREEZE_PLAN];
+        const plan = plans[Math.min(freezeReads++, plans.length - 1)];
+        if (plan === null || url.searchParams.get('id') !== '400101')
+          return {
+            ok: false,
+            status: 404,
+            json: async () => ({ error: 'monstre absent du committé : rien à figer' }),
+          };
+        return answer(plan);
       }
       if (url.pathname === '/api/extractor/mode' && !posting) {
         const mode = url.searchParams.get('mode') ?? '';
@@ -11877,6 +11968,7 @@ describe('Extraction — la page, sur le vrai markup', () => {
         url.pathname === '/api/extractor/accept' ||
         url.pathname === '/api/extractor/item' ||
         url.pathname === '/api/extractor/integrate' ||
+        url.pathname === '/api/extractor/freeze' ||
         url.pathname === '/api/extractor/mode'
       )
         return answer(
@@ -11979,6 +12071,41 @@ describe('Extraction — la page, sur le vrai markup', () => {
           chips: [...c.querySelectorAll('.ex-chip')].map((x) => x.textContent),
         })),
       }),
+      /** Le bloc « Versions » : ses archives, la ligne du live, le geste, le plan, le rapport. */
+      versions: () => {
+        const groups = (root: string) =>
+          all(`${root} .ex-fgroup`).map((g) => ({
+            title: g.querySelector('.ex-fgroup-head strong')?.textContent,
+            count: g.querySelector('.ex-fgroup-head .badge')?.textContent,
+            lines: [...g.querySelectorAll('li, p.lbl')].map((l) => l.textContent),
+          }));
+        return {
+          hidden: el('ex-versions').hidden,
+          count: el('ex-ver-count').textContent,
+          live: el('ex-ver-live').textContent,
+          note: el('ex-ver-note').textContent,
+          archives: all('#ex-archives li').map((l) => l.textContent?.replace(/\s+/g, ' ').trim()),
+          button: { hidden: el('ex-freeze').hidden, disabled: el('ex-freeze').disabled },
+          plan: el('ex-fplan').hidden
+            ? null
+            : {
+                text: el('ex-fplan-text').textContent,
+                groups: groups('#ex-fplan-body'),
+                dirty: el('ex-fdirty').hidden ? null : el('ex-fdirty').textContent,
+                commit: el('ex-fplan-commit').textContent,
+                go: el('ex-fplan-go').disabled,
+              },
+          report: el('ex-freport').hidden
+            ? null
+            : {
+                head: el('ex-freport').querySelector('p')?.textContent,
+                groups: groups('#ex-freport'),
+              },
+          order: el('ex-order').hidden
+            ? null
+            : all('#ex-order .btn').map((b) => b.textContent?.replace(/\s+/g, ' ').trim()),
+        };
+      },
       status: (value: string) =>
         all('#ex-status button')
           .find((b) => b.dataset.status === value)
@@ -12476,14 +12603,9 @@ describe('Extraction — la page, sur le vrai markup', () => {
     expect(s.links).toEqual([['câbler les chips', 'monsters/400101']]);
     // À jour : rien à intégrer pour un monstre (la règle de l'admin).
     expect(s.button.hidden).toBe(true);
-    expect(s.note).toContain('Figer une version et ré-épingler ses guides : à venir (F22).');
-    expect(s.sections).toEqual([
-      'Stats à la rencontre',
-      'Rencontres',
-      'Immunités',
-      'Skills',
-      'Archives figées',
-    ]);
+    expect(s.note).toContain('Figer une version et ré-épingler ses guides : le bloc « Versions ».');
+    // Les archives ont quitté les cartes de la fiche pour le bloc « Versions ».
+    expect(s.sections).toEqual(['Stats à la rencontre', 'Rencontres', 'Immunités', 'Skills']);
     // Le select : le palier le plus haut d'abord ; l'autre option redessine la grille.
     const select = page.el('ex-enc');
     expect([...select.querySelectorAll('option')].map((o) => o.textContent)).toEqual([
@@ -12514,7 +12636,15 @@ describe('Extraction — la page, sur le vrai markup', () => {
     );
     // Le skill d'enrage porte son déclencheur réel.
     expect(page.sheet().cards[0].head).toBe('Bitem1 · rage_enter — à 70 % PV');
-    expect(page.all('#ex-sheet .ex-ul li code').map((c) => c.textContent)).toContain('400101@1');
+    expect(page.all('#ex-archives li code').map((c) => c.textContent)).toEqual([
+      '400101@1',
+      '400101@2',
+    ]);
+    // La fiche et le plan de figeage sont lus ensemble.
+    expect(page.calls.map((c) => c.path)).toEqual([
+      '/api/extractor/entity?target=monster&key=400101',
+      '/api/extractor/freeze?id=400101',
+    ]);
   });
 
   it('la fiche d’un EE : la tuile sur son cadre, l’identité, les mains, le passif base → +10, le lien vers la Fiche perso › EE', async () => {
@@ -12592,5 +12722,228 @@ describe('Extraction — la page, sur le vrai markup', () => {
     // Pas de mode ailleurs que sur les monstres.
     const chars = await extractor({ hash: '#extractor/character' });
     expect(chars.el('ex-mode').hidden).toBe(true);
+  });
+
+  // --- le versionnage (F22) ---
+  it('le bloc « Versions » : les archives avec qui les épingle, « orpheline » sinon, et ce que le figeage ré-épinglerait', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101' });
+    const v = page.versions();
+    expect(v.hidden).toBe(false);
+    expect(v.count).toBe('2');
+    expect(v.archives).toEqual([
+      '400101@1 — 2026-10-01, source abc1234, jeu 1.4.14 — avant la refonte · 1 skill épinglée par joint-challenge/slime · 2026-08, special-request/blob · bossId',
+      '400101@2 — 2026-10-05, source def5678 · 2 skills orpheline',
+    ]);
+    // Qui épingle mène à Guides, sur la version.
+    expect(page.all('#ex-archives [data-go]').map((a) => a.dataset.go)).toEqual([
+      'guides/joint-challenge/slime/2026-08',
+      'guides/special-request/blob',
+    ]);
+    expect(v.live).toBe('2 guides le désignent encore en live');
+    expect(v.button).toEqual({ hidden: false, disabled: false });
+    expect(v.note).toContain('fige l’état COMMITTÉ (HEAD), pas l’extraction fraîche');
+    // Le plan ne s'ouvre qu'au geste, et rien n'est en cours.
+    expect([v.plan, v.report, v.order]).toEqual([null, null, null]);
+    // Pas de bloc sur une fiche qui n'est pas un monstre.
+    const hero = await extractor({ hash: '#extractor/character/2000003' });
+    expect(hero.versions().hidden).toBe(true);
+    expect(hero.calls.map((c) => c.path)).toEqual([
+      '/api/extractor/entity?target=character&key=2000003',
+    ]);
+  });
+
+  it('« Figer et ré-épingler » montre le PLAN avant de figer : la clé, HEAD, les guides rangés, le commit ; annuler ne poste rien', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101' });
+    page.el('ex-freeze').click();
+    const plan = page.versions().plan;
+    expect(plan?.text).toBe(
+      'Créer 400101@3 : l’état COMMITTÉ de Slime — HEAD abc1234 du 2026-10-12, jeu 1.4.14 — figé dans data/generated/monster-archive/400101@3.json. Les guides touchés :',
+    );
+    expect(plan?.groups).toEqual([
+      {
+        title: 'Guides ré-épinglés',
+        count: '2',
+        lines: [
+          'special-request/flat · meta.bossId : 400101 → 400101@3',
+          'joint-challenge/slime · version 2026-10 (combat jc-slime) : pinned + 400101@3',
+        ],
+      },
+      {
+        title: 'Laissés en live',
+        count: '2',
+        lines: [
+          'joint-challenge/slime — guide versionné : son bossId porte le portrait et le titre, il suit l’entité courante — jamais épinglé',
+          'joint-challenge/slime · version 2026-08 — version déjà figée sur ce monstre : elle garde l’archive où elle est épinglée',
+        ],
+      },
+      {
+        title: 'En attente',
+        count: '1',
+        lines: [
+          'adventure/S1-1-1 · combat g-flat — guide plat, rien d’automatique : ouvrir dans Guides',
+        ],
+      },
+      {
+        title: 'Re-datés (meta.updated)',
+        count: '2',
+        lines: ['special-request/flat', 'joint-challenge/slime'],
+      },
+    ]);
+    // Le guide plat en attente s'ouvre dans Guides.
+    expect(
+      page
+        .all('#ex-fplan-body [data-go="guides/adventure/S1-1-1"]')
+        .map((a) => [a.textContent, a.getAttribute('href')]),
+    ).toEqual([['ouvrir dans Guides', '#guides/adventure/S1-1-1']]);
+    expect(plan?.dirty).toBeNull();
+    expect(plan?.commit).toBe(
+      'Puis UN commit « chore(monsters): Slime (400101) fige en v3, 2 guides re-epingles » : l’archive, les meta.json et les config.json touchés, les meta.json re-datés.',
+    );
+    expect(plan?.go).toBe(false);
+    page.el('ex-fplan-cancel').click();
+    expect(page.versions().plan).toBeNull();
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
+  });
+
+  it('`#extractor/monster/<id>/freeze` ouvre la fiche sur le plan du figeage, sans rien poster', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101/freeze' });
+    expect(page.sheet().title).toBe('Slime — The Blob');
+    expect(page.versions().plan?.text).toContain('Créer 400101@3');
+    expect(page.calls).toEqual([
+      { path: '/api/extractor/entity?target=monster&key=400101' },
+      { path: '/api/extractor/freeze?id=400101' },
+    ]);
+    // Une autre cible n'a pas de plan : la clé reste entière.
+    const hero = await extractor({ hash: '#extractor/character/2000003/freeze' });
+    expect(hero.calls[0].path).toBe('/api/extractor/entity?target=character&key=2000003%2Ffreeze');
+  });
+
+  it('« Figer » confirmé : la note et `was` postés, puis le rapport, la fiche et le plan relus', async () => {
+    const page = await extractor({
+      hash: '#extractor/monster/400101',
+      freeze: [FREEZE_PLAN, FREEZE_QUIET],
+      posted: () => ({
+        ok: true,
+        log: ['fait'],
+        report: FREEZE_REPORT,
+        git: { branch: 'main', ahead: 1, behind: 0 },
+      }),
+    });
+    page.el('ex-freeze').click();
+    page.el('ex-fnote').value = 'avant la refonte 1.11';
+    page.el('ex-fplan-go').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      {
+        path: '/api/extractor/freeze',
+        body: { id: '400101', label: 'avant la refonte 1.11', was: 'plan:v1' },
+      },
+    ]);
+    // Le disque fait foi : la fiche et le plan sont relus après le geste.
+    expect(page.calls.filter((c) => !c.body).map((c) => c.path)).toEqual([
+      '/api/extractor/entity?target=monster&key=400101',
+      '/api/extractor/freeze?id=400101',
+      '/api/extractor/entity?target=monster&key=400101',
+      '/api/extractor/freeze?id=400101',
+    ]);
+    const v = page.versions();
+    expect(v.plan).toBeNull();
+    expect(page.el('ex-fnote').value).toBe('');
+    expect(v.live).toBe('aucun guide à ré-épingler');
+    expect(v.report?.head).toBe(
+      'figé 400101@3 — 6 skills, data/generated/monster-archive/400101@3.json. Dépingler une version : dans Guides, onglet Combat.',
+    );
+    expect(v.report?.groups.map((g) => [g.title, g.count])).toEqual([
+      ['Guides ré-épinglés', '2'],
+      ['Laissés en live', '2'],
+      ['En attente', '1'],
+      ['Re-datés (meta.updated)', '2'],
+    ]);
+    expect(v.report?.groups[0].lines).toEqual([
+      'special-request/flat · meta.bossId : 400101 → 400101@3',
+      'joint-challenge/slime · version 2026-10 épinglée',
+    ]);
+  });
+
+  it('un plan périmé : le refus `stale` laisse le plan RELU à l’écran, sans rapport', async () => {
+    const page = await extractor({
+      hash: '#extractor/monster/400101',
+      freeze: [FREEZE_PLAN, { ...FREEZE_QUIET, key: '400101@4', version: 4, was: 'plan:v2' }],
+      posted: () => ({ ok: false, stale: true, log: ['Rien n’est figé — le plan a changé'] }),
+    });
+    page.el('ex-freeze').click();
+    page.el('ex-fplan-go').click();
+    await page.settle();
+    const v = page.versions();
+    expect(v.report).toBeNull();
+    expect(v.plan?.text).toContain('Créer 400101@4');
+    expect(v.plan?.groups).toEqual([
+      {
+        title: 'Guides ré-épinglés',
+        count: '0',
+        lines: ['Aucun guide à ré-épingler : l’archive naîtra orpheline.'],
+      },
+      { title: 'Laissés en live', count: '2', lines: expect.any(Array) },
+    ]);
+  });
+
+  it('un monstre qui diffère de HEAD : le plan porte le refus situé, « Figer » est éteint et ne poste rien', async () => {
+    const page = await extractor({
+      hash: '#extractor/monster/400101',
+      freeze: [{ ...FREEZE_PLAN, dirty: ['data/generated/monsters.json'] }],
+    });
+    page.el('ex-freeze').click();
+    const plan = page.versions().plan;
+    expect(plan?.dirty).toContain('Figeage refusé avant d’écrire');
+    expect(plan?.dirty).toContain('data/generated/monsters.json');
+    expect(plan?.dirty).toContain('enregistrer d’abord, ou annuler');
+    expect(plan?.go).toBe(true);
+    page.el('ex-fplan-go').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
+  });
+
+  it('l’ordre du flux type : un monstre qui a changé ET que des guides désignent — « 1. Figer », « 2. Intégrer », chacun son plan', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101', review: 'changed' });
+    // Les deux gestes dans cet ordre, à la place du seul « Ré-intégrer ».
+    expect(page.versions().order).toEqual(["1. Figer l'état actuel", "2. Intégrer l'extraction"]);
+    expect(page.sheet().button.hidden).toBe(true);
+    // 1 : le plan du figeage, rien de posté.
+    page.el('ex-order-freeze').click();
+    expect(page.versions().plan?.text).toContain('Créer 400101@3');
+    expect(page.el('ex-iplan').hidden).toBe(true);
+    // 2 : le plan de l'intégration ; rien ne s'enchaîne tout seul.
+    page.el('ex-order-integrate').click();
+    expect(page.el('ex-iplan').hidden).toBe(false);
+    expect(page.calls.filter((c) => c.body)).toEqual([]);
+    page.el('ex-iplan-go').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      {
+        path: '/api/extractor/integrate',
+        body: { target: 'monster', key: '400101', was: 'sig:monster:v1' },
+      },
+    ]);
+    // Un monstre qui a changé mais que le figeage ne ré-épinglerait plus : « Ré-intégrer » seul.
+    const quiet = await extractor({
+      hash: '#extractor/monster/400101',
+      review: 'changed',
+      freeze: [FREEZE_QUIET],
+    });
+    expect(quiet.versions().order).toBeNull();
+    expect(quiet.sheet().button).toMatchObject({ hidden: false, text: 'Ré-intégrer' });
+    // Et un monstre à jour que des guides désignent : pas d'ordre non plus, rien à intégrer.
+    const same = await extractor({ hash: '#extractor/monster/400101' });
+    expect(same.versions().order).toBeNull();
+  });
+
+  it('un monstre pas encore committé : pas de geste, le bloc le dit', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101', freeze: [null] });
+    const v = page.versions();
+    expect(v.button.hidden).toBe(true);
+    expect(v.live).toBe('');
+    expect(v.note).toBe(
+      'Ce monstre n’est pas encore committé : rien à figer — l’intégrer d’abord.',
+    );
   });
 });

@@ -81,13 +81,26 @@ guides) et `team-planner` (il ne lit que du généré).
 
 ## Saison de boss qui revient (Joint Challenge, world boss…)
 
-```bash
-pnpm datagen:version-boss     # crée versions/<AAAA-MM>/ dans le guide du boss
-```
+Deux gestes distincts, tous les deux dans `pnpm quick` :
 
-Puis réviser `config.json` / `recommended.json` / `teams.json` / `tips.json`
-depuis la version précédente — le roster a bougé entre deux saisons — et
-`meta.json.updated` (ou `pnpm stamp:guides`).
+1. **Le boss a changé dans le jeu** (même id, contenu modifié) — et seulement
+   dans ce cas : sur sa fiche (Données › Extraction › Monstres › « Fiche »),
+   « 1. Figer l'état actuel » AVANT « 2. Intégrer l'extraction ». « Figer et
+   ré-épingler » montre d'abord son plan — la clé `<id>@<n>` qui sera créée, le
+   commit figé, les guides touchés, gardés, en attente —, puis fige l'état
+   COMMITTÉ dans `data/generated/monster-archive/<id>@<n>.json`, épingle dessus
+   les versions de guides qui le désignaient encore en live, re-date les guides
+   touchés et committe le tout, en un geste. L'ancienne version du guide lit
+   alors l'archive ; la nouvelle suit le live.
+2. **La nouvelle version du guide** : Guides › le guide › « ＋ version » crée
+   `versions/<AAAA-MM>/` (une copie de la précédente, sans son épinglage). Puis
+   réviser `config.json` / `recommended.json` / `teams.json` / `tips.json`
+   depuis la version précédente — le roster a bougé entre deux saisons ;
+   « Enregistrer » re-date `meta.json.updated` (à la main : `pnpm stamp:guides`).
+
+`pnpm datagen:version-boss <id> --ref <commit>` ne crée PAS de version de
+guide : c'est le rattrapage en ligne de commande du figeage — l'archive d'un
+état déjà recouvert par des commits — et il ne ré-épingle aucun guide.
 
 ## Un correctif de jeu peut périmer de l'éditorial
 

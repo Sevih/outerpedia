@@ -341,6 +341,24 @@ import type {
   IntegrateMonsterReport,
   IntegrateReport,
 } from '@/lib/admin/review-store';
+import {
+  MONSTER_FILES,
+  freezeCommitMessage,
+  freezePlanOf,
+  freezeReportOf,
+  guidesToStamp,
+  monsterDirtyFiles,
+  nextArchive,
+  pinIndex,
+  writtenFiles,
+  type FreezeGuide,
+  type FreezeHead,
+  type FreezePlan,
+  type FreezeReport,
+  type PinRef,
+} from '@/lib/admin/monster-freeze';
+import { applyRepin, planRepin, type RepinPlan, type RepinResult } from '@/lib/admin/repin-guides';
+import type { VersionMonsterReport } from '@datagen/extractor/version-monster';
 import type { EquipmentData } from '@datagen/generators/equipment';
 import { ITEM_SPRITE_DIR, buildImageIndex, type ImageIndex } from '@datagen/assets/source';
 import type { AcceptReport, MinorReport } from '@datagen/extractor/review';
@@ -6589,6 +6607,8 @@ export interface ExtractorDeps {
   referencedEffects: (skills: Skill[]) => Promise<ReferencedEffect[]>;
   /** Les archives figées d'un monstre (`monsterArchiveOf`), de la plus ancienne à la plus récente. */
   archives: (id: string) => Promise<MonsterArchiveEntry[]>;
+  /** L'index inverse des pins (`pinIndex`) : par clé `<id>@<n>`, les guides qui l'épinglent. */
+  pinners: () => Map<string, PinRef[]>;
   /** Les persos sans date de sortie une fois ce perso frais posé dans le committé (`missingReleaseDates`). */
   missingReleases: (char: Character) => Promise<MissingRelease[]>;
   /** Les intégrations du moteur — `syncDerived` (damage, solver) est DANS celles du perso, du monstre et du mode. */
@@ -6779,6 +6799,7 @@ export const EXTRACTOR_DEPS: ExtractorDeps = {
     return out;
   },
   archives: async (id) => (await reviewEngine()).monsterArchiveOf(id),
+  pinners: guidePinners,
   missingReleases: async (char) => {
     const committed = readGeneratedJson('characters.json') as Record<string, Character>;
     return missingReleaseDates({ ...committed, [char.id]: char });
@@ -6796,6 +6817,18 @@ export const EXTRACTOR_DEPS: ExtractorDeps = {
     return spriteMemo.index;
   },
 };
+
+/** Les guides du site et le `config.json` de leurs versions, rangés par archive épinglée. */
+function guidePinners(): Map<string, PinRef[]> {
+  const guides = listGuides();
+  const byName = new Map(guides.map((g) => [`${g.category}/${g.slug}`, g]));
+  return pinIndex(guides, (g, version) => {
+    const guide = byName.get(`${g.category}/${g.slug}`);
+    return guide
+      ? readGuideVersionFile<{ pinned?: unknown }>(guide, version, 'config.json')
+      : undefined;
+  });
+}
 
 /** Ce que `syncDerived` réécrit sous `data/generated/` : ses fichiers partent avec l'intégration. */
 const DERIVED_DIRS = ['data/generated/damage', 'data/generated/solver'];
@@ -7263,6 +7296,8 @@ export interface MonsterSheet {
     gameVersion?: string;
     label?: string;
     skills: number;
+    /** Qui l'épingle (l'index inverse des guides) ; vide : orpheline. */
+    pinnedBy: PinRef[];
   }[];
 }
 
@@ -7418,6 +7453,7 @@ export async function extractorEntity(
     const contexts = monsterStatContexts(m, src);
     const optionLabels = await deps.rankOptionLabels(contexts.flatMap((x) => x.options ?? []));
     const allFresh = (await deps.fresh('monster')) as Record<string, Monster>;
+    const pinners = deps.pinners();
     // Les cartes sous les RÈGLES SEULES (aucune curation) : la fiche montre ce
     // que le jeu dit ; le câblage des chips est l'onglet Monstres.
     const { cards, chips } = monsterKitCards(m, catalog, {
@@ -7481,6 +7517,7 @@ export async function extractorEntity(
         ...(a.gameVersion ? { gameVersion: a.gameVersion } : {}),
         ...(a.label ? { label: a.label } : {}),
         skills: Object.keys(a.skills).length,
+        pinnedBy: pinners.get(`${a.id}@${a.version}`) ?? [],
       })),
     };
     const plan: IntegratePlan | null = bundle
@@ -7730,4 +7767,268 @@ export async function integrateMode(
     report,
   );
   return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: null, ids: r.ids };
+}
+
+// --------------------------------------------------- figer et ré-épingler ----
+//
+// Le VERSIONNAGE d'un monstre (lot F22, fin de l'étape 20 de la migration) :
+// figer l'état committé d'un boss dans `data/generated/monster-archive/` et
+// ré-épingler les guides qui le désignaient encore en live — `versionMonster`
+// puis `applyRepin`, que l'admin enchaînait sans rien montrer (« Version the
+// committed state », puis cinq boîtes). Ici c'est UN geste en deux temps : le
+// PLAN d'abord (`freezePlan` : la clé à venir, l'état de HEAD, les guides
+// touchés, gardés, en attente), puis « Figer » (`freezeMonster`), qui rejoue
+// le plan, refuse s'il a bougé, écrit, re-date les guides touchés et COMMITTE
+// le tout. Le moteur ne bouge pas ; la règle est dans
+// `src/lib/admin/monster-freeze.ts`.
+
+/** Les lectures et les écritures d'un figeage, injectées : le moteur, les guides, le stamp, git. */
+export interface FreezeDeps {
+  /** Le monstre committé (`data/generated/monsters.json`, du disque) ; rien s'il n'y est pas. */
+  monster: (id: string) => Monster | undefined;
+  /** Ses archives figées (`monsterArchiveOf`), de la plus ancienne à la plus récente. */
+  archives: (id: string) => Promise<{ version: number }[]>;
+  /** HEAD : son sha court, sa date, la version du jeu qu'il committe. */
+  head: () => FreezeHead;
+  /** Parmi ces chemins, ceux qui diffèrent de HEAD (`git status`). */
+  dirty: (paths: readonly string[]) => string[];
+  /** Le JSON d'un fichier à HEAD ; rien s'il n'y est pas. */
+  headJson: (path: string) => Record<string, unknown> | undefined;
+  /** Le JSON d'un fichier du disque ; rien s'il manque. */
+  diskJson: (path: string) => Record<string, unknown> | undefined;
+  /** Les guides du site (le scan), pour la règle de datation. */
+  guides: () => FreezeGuide[];
+  planRepin: (id: string, key: string) => RepinPlan;
+  applyRepin: (plan: RepinPlan) => Promise<RepinResult>;
+  versionMonster: (
+    id: string,
+    opts: { ref: 'HEAD'; label?: string },
+  ) => Promise<VersionMonsterReport>;
+  /** Re-date un `meta.json` ; `false` s'il portait déjà cette date. */
+  stamp: (metaPath: string, date: string) => Promise<boolean>;
+  today: () => string;
+  commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+}
+
+/** Le contenu d'un fichier à HEAD (`monsters.json` pèse 7 Mo : le tampon de `git()` ne suffit pas). */
+function gitShowHead(path: string): string | undefined {
+  const r = spawnSync('git', ['show', `HEAD:${path}`], {
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+    stdio: ['ignore', 'pipe', 'ignore'],
+  });
+  return r.status === 0 ? r.stdout : undefined;
+}
+
+const parseObject = (raw: string | undefined): Record<string, unknown> | undefined => {
+  if (!raw) return undefined;
+  try {
+    const v: unknown = JSON.parse(raw);
+    return isRecord(v) ? v : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+/** Celles des routes : le committé, le moteur de versionnage, le ré-épinglage de l'admin, le vrai git. */
+export const FREEZE_DEPS: FreezeDeps = {
+  monster: (id) => MONSTERS_DEPS.monsters()[id],
+  archives: async (id) => (await import('@datagen/extractor/version-monster')).monsterArchiveOf(id),
+  head: () => {
+    const gameVersion = parseObject(gitShowHead('data/generated/game-version.json'))?.resVersion;
+    return {
+      ref: git(['rev-parse', '--short', 'HEAD']).out,
+      committedAt: git(['log', '-1', '--format=%cI', 'HEAD']).out,
+      ...(typeof gameVersion === 'string' && gameVersion ? { gameVersion } : {}),
+    };
+  },
+  dirty: (paths) => {
+    const r = git(['status', '--porcelain', '-z', '--', ...paths]);
+    if (!r.ok) return [];
+    return r.out
+      .split('\0')
+      .filter((rec) => rec.length > 3)
+      .map((rec) => rec.slice(3).replace(/\\/g, '/'));
+  },
+  headJson: (path) => parseObject(gitShowHead(path)),
+  diskJson: (path) =>
+    existsSync(resolve(path)) ? parseObject(readFileSync(resolve(path), 'utf8')) : undefined,
+  guides: listGuides,
+  planRepin,
+  applyRepin: (plan) => applyRepin(plan),
+  versionMonster: async (id, opts) =>
+    (await import('@datagen/extractor/version-monster')).versionMonster(id, opts),
+  stamp: stampMeta,
+  today: todayLocal,
+  commitPaths,
+};
+
+/** Le plan d'un figeage et le plan de ré-épinglage dont il est tiré (c'est lui qu'`applyRepin` joue). */
+async function computeFreeze(
+  id: string,
+  monster: Monster,
+  deps: FreezeDeps,
+): Promise<{ plan: FreezePlan; repin: RepinPlan }> {
+  const archives = await deps.archives(id);
+  const repin = deps.planRepin(id, nextArchive(id, archives).key);
+  const dirty = monsterDirtyFiles(id, deps.dirty(Object.values(MONSTER_FILES)), {
+    head: deps.headJson,
+    disk: deps.diskJson,
+  });
+  const plan = freezePlanOf({
+    id,
+    name: monster.name.en || id,
+    archives,
+    head: deps.head(),
+    repin,
+    guides: deps.guides(),
+    dirty,
+  });
+  return { plan, repin };
+}
+
+/**
+ * Le PLAN de « Figer et ré-épingler » (`GET /api/extractor/freeze?id=`) : la
+ * clé qui sera créée, l'état de HEAD qu'elle figera, les guides touchés AVANT
+ * de figer (éditions directes, versions épinglées), ceux qu'on laisse en live
+ * et pourquoi, les guides plats en attente, les guides re-datés, le message
+ * du commit, `dirty` (non vide : le geste refusera) et `was`. Rien ne s'écrit.
+ * Les tables du jeu n'y sont pour rien : le figeage lit le committé.
+ */
+export async function freezePlan(id: unknown, deps: FreezeDeps = FREEZE_DEPS) {
+  const key = typeof id === 'string' ? id.trim() : '';
+  if (!key) return { error: 'monstre manquant', status: 400 } as const;
+  const monster = deps.monster(key);
+  if (!monster)
+    return { error: `monstre ${key} absent du committé : rien à figer`, status: 404 } as const;
+  return (await computeFreeze(key, monster, deps)).plan;
+}
+
+/** Ce que rend « Figer » : l'issue, le refus (`stale`, `dirty`), le rapport de ce qui est écrit. */
+export interface FreezeOutcome extends Outcome {
+  /** Le plan recalculé n'est plus celui que l'écran a montré : relire. */
+  stale?: boolean;
+  /** Les fichiers où le monstre diffère de HEAD : le geste a refusé. */
+  dirty?: string[];
+  report?: FreezeReport;
+}
+
+/** La note d'une archive : une ligne, bornée. */
+const FREEZE_LABEL_MAX = 120;
+
+/**
+ * « Figer » (`POST /api/extractor/freeze`), dans l'ordre : le plan est
+ * RECALCULÉ ; un monstre qui diffère de HEAD dans `data/generated/` est refusé
+ * (l'archive fige HEAD, pas le working tree) ; un plan qui n'est plus celui
+ * que l'écran a montré (`was`) aussi — rien n'est écrit dans les deux cas.
+ * Puis `versionMonster(id, { ref: 'HEAD', label })` écrit l'archive,
+ * `applyRepin` joue le plan (les `meta.json` des guides plats, le `pinned` des
+ * versions), les guides dont un `meta.json` ou le `config.json` de la version
+ * la plus récente a bougé sont re-datés (la règle de `guide-stamp.ts`, comme
+ * « Guides »), et UN commit porte l'archive, les `meta.json`, les
+ * `config.json` et les `meta.json` re-datés.
+ */
+export async function freezeMonster(
+  id: unknown,
+  body: { label?: unknown; was?: unknown },
+  deps: FreezeDeps = FREEZE_DEPS,
+  report?: Report,
+): Promise<FreezeOutcome> {
+  const key = typeof id === 'string' ? id.trim() : '';
+  if (!key) return { ok: false, log: ['Aucun monstre.'] };
+  const monster = deps.monster(key);
+  if (!monster) return { ok: false, log: [`Rien n’est figé — monstre ${key} absent du committé.`] };
+  const { plan, repin } = await computeFreeze(key, monster, deps);
+  if (plan.dirty.length)
+    return {
+      ok: false,
+      dirty: plan.dirty,
+      log: [
+        `Rien n’est figé — ${plan.name} (${key}) a des changements non committés dans ${plan.dirty.join(', ')} : l’archive fige HEAD, pas le working tree. Enregistrer d’abord, ou annuler (committer fait de HEAD le NOUVEL état : pour figer l’ancien, annuler ces changements, figer, puis ré-intégrer).`,
+      ],
+    };
+  if (body.was !== plan.was)
+    return {
+      ok: false,
+      stale: true,
+      log: [
+        `Rien n’est figé — le plan de ${plan.name} (${key}) a changé depuis sa lecture (une archive, un guide ou un commit de plus) : il est relu.`,
+      ],
+    };
+  const label =
+    typeof body.label === 'string'
+      ? body.label.replace(/\s+/g, ' ').trim().slice(0, FREEZE_LABEL_MAX)
+      : '';
+
+  const j = journal(report);
+  j.doing(`${plan.name} (${key}) : état de ${plan.head.ref} figé sous ${plan.key}`);
+  let archive: VersionMonsterReport;
+  try {
+    archive = await deps.versionMonster(key, { ref: 'HEAD', ...(label ? { label } : {}) });
+  } catch (e: unknown) {
+    return {
+      ok: false,
+      log: [`Rien n’est figé — ${e instanceof Error ? e.message : String(e)}`],
+    };
+  }
+  j.done(
+    `${archive.key} figé : ${archive.file} — ${archive.skills} skill${archive.skills > 1 ? 's' : ''}, source ${archive.ref}${archive.gameVersion ? `, jeu ${archive.gameVersion}` : ''}${label ? `, note « ${label} »` : ''}.`,
+  );
+
+  // Le plan joué est celui qu'on a montré ; une clé autre que prévue (une
+  // archive posée entre le calcul et l'écriture) le fait recalculer pour elle.
+  let result: RepinResult;
+  try {
+    j.doing('ré-épinglage des guides');
+    result = await deps.applyRepin(
+      archive.key === plan.key ? repin : deps.planRepin(key, archive.key),
+    );
+  } catch (e: unknown) {
+    return {
+      ok: false,
+      log: [
+        ...j.lines,
+        `Ré-épinglage en échec : ${e instanceof Error ? e.message : String(e)} — rien n’est committé ; ${archive.file} est sur le disque.`,
+      ],
+    };
+  }
+  const repinned = new Set([
+    ...result.applied.map((e) => e.guide),
+    ...result.pinnedVersions.map((p) => p.slice(0, p.lastIndexOf('@'))),
+  ]);
+  for (const e of result.applied)
+    j.done(`${e.guide} : ${e.field} → ${Array.isArray(e.after) ? e.after.join(', ') : e.after}`);
+  for (const p of result.pinnedVersions) {
+    const at = p.lastIndexOf('@');
+    j.done(`${p.slice(0, at)} : version ${p.slice(at + 1)} épinglée sur ${archive.key}`);
+  }
+  for (const g of result.skipped) j.done(`${g} : meta.json refusé par le store, guide laissé.`);
+  if (!repinned.size) j.done('aucun guide à ré-épingler : l’archive naît orpheline.');
+
+  // La datation : les seuls guides touchés, par la règle partagée.
+  const files = writtenFiles(result);
+  const today = deps.today();
+  const stamped: string[] = [];
+  const metas: string[] = [];
+  for (const name of guidesToStamp(files, deps.guides())) {
+    const meta = `${GUIDES_CONTENTS_SUBDIR}/${name}/meta.json`;
+    // Un `meta.json` déjà à la date du jour n'est pas réécrit, mais il a pu
+    // l'être par le ré-épinglage : il est dans `files` de toute façon.
+    if (await deps.stamp(meta, today)) {
+      stamped.push(name);
+      metas.push(meta);
+    }
+  }
+  if (stamped.length) j.done(`meta.updated : ${today} — ${stamped.join(', ')}`);
+
+  const commit = deps.commitPaths(
+    [...new Set([archive.file, ...files, ...metas])],
+    freezeCommitMessage(plan.name, key, archive.version, repinned.size),
+    report,
+  );
+  return {
+    ok: commit.ok,
+    log: [...j.lines, ...commit.log],
+    report: freezeReportOf(archive, result, stamped),
+  };
 }

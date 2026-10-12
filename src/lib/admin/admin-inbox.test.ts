@@ -271,6 +271,7 @@ describe('adminExtractorMenu — les cibles que le menu de l’admin propose enc
       'ee',
       'effect',
       'item',
+      'monster',
       'set',
       'talisman',
       'weapon',
@@ -287,8 +288,8 @@ describe('adminExtractorMenu — les cibles que le menu de l’admin propose enc
       'monster',
       'item',
     ]);
-    // Le menu : les sept autres, dans le même ordre.
-    expect(adminExtractorMenu().map((e) => e.id)).toEqual(['monster']);
+    // Le menu : plus aucune — les dix cibles sont dans quick (F22), le groupe en sort.
+    expect(adminExtractorMenu()).toEqual([]);
     // L'inbox et `bucketsOf` ne filtrent pas : une cible portée reste comptée.
     expect(buildInbox().map((i) => i.key)).toEqual(['extract:effect', 'extract:armor']);
     expect(bucketsOf('effect')).toEqual(buckets({ diff: 1 }));

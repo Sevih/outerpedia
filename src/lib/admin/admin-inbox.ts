@@ -47,9 +47,11 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
  * Les cibles que la section « Extraction » de quick porte en entier — la revue
  * et l'acceptation (lot F20, migration 19 : effect, armor, item), puis les
  * fiches par entité et l'intégration (lot F21, migration 20 : character, ee,
- * weapon, amulet, talisman, set) : leur lien sort du menu de l'admin
- * (`adminExtractorMenu`). L'inbox et `bucketsOf` gardent les dix. Le monstre
- * reste au menu jusqu'au lot F22 (le versionnage, sur sa fiche).
+ * weapon, amulet, talisman, set), puis le versionnage du monstre (lot F22 :
+ * « Figer et ré-épingler » sur sa fiche) : leur lien sort du menu de l'admin
+ * (`adminExtractorMenu`). Les DIX y sont depuis le 12/10 : le groupe
+ * « Extractor » a quitté le menu (`layout.dev.tsx`). L'inbox et `bucketsOf`
+ * gardent les dix.
  */
 export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set([
   'character',
@@ -60,10 +62,11 @@ export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set([
   'armor',
   'talisman',
   'set',
+  'monster',
   'item',
 ]);
 
-/** Les entités d'extraction encore proposées par le menu de l'admin. */
+/** Les entités d'extraction encore proposées par le menu de l'admin : plus aucune depuis F22. */
 export const adminExtractorMenu = (): ExtractorEntity[] =>
   EXTRACTOR_ENTITIES.filter((e) => !EXTRACTOR_IN_QUICK.has(e.id));
 

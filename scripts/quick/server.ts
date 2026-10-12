@@ -56,6 +56,7 @@ import {
   CHARACTER_SHEET_DEPS,
   EFFECTS_DEPS,
   EXTRACTOR_DEPS,
+  FREEZE_DEPS,
   GAME_TABLES_DISK,
   GEAR_RECO_DEPS,
   GENERAL_GUIDES_DEPS,
@@ -82,6 +83,8 @@ import {
   extractorTarget,
   fillChangelogTemplate,
   fitNames,
+  freezeMonster,
+  freezePlan,
   gameTableSchema,
   gameTablesState,
   gearRecoState,
@@ -1007,6 +1010,25 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // « Intégrer un mode » : tous ses monstres et leurs adds, puis UN commit.
     const { mode, was } = await body<{ mode?: unknown; was?: unknown }>(req);
     await stream(res, (report) => withGit(integrateMode(mode, was, EXTRACTOR_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/extractor/freeze') {
+    // Le PLAN de « Figer et ré-épingler » un monstre (`?id=`) : la clé à
+    // venir, l'état de HEAD, les guides touchés, gardés, en attente, les
+    // fichiers sales qui feraient refuser, `was`. Rien ne s'écrit.
+    const out = await freezePlan(url.searchParams.get('id'));
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/extractor/freeze') {
+    // « Figer » : le plan recalculé et comparé à `was`, le refus « working
+    // tree sale », puis l'archive, le ré-épinglage, le stamp des guides
+    // touchés et UN commit.
+    const { id, label, was } = await body<{ id?: unknown; label?: unknown; was?: unknown }>(req);
+    await stream(res, (report) => withGit(freezeMonster(id, { label, was }, FREEZE_DEPS, report)));
     return;
   }
 
