@@ -145,6 +145,7 @@ import {
   type MonsterKitDisk,
   type MonsterKitSections,
 } from '@/lib/admin/monster-kit';
+import { gameModeGroups, modeKeysOf } from '@/lib/admin/game-modes';
 import {
   applyKitCuration,
   loadKitCurationSections,
@@ -4401,8 +4402,19 @@ export interface MonsterRosterRow {
   icon: string;
   /** Où on l'affronte : « mode · stage / zone » de ses spawns, comme la sidebar de l'admin. */
   place: string;
+  /** Les modes de jeu de ses spawns : des clés de `modeGroups`, dans leur ordre ; vide : sans mode. */
+  modes: string[];
+  /** Les stages / zones de ses spawns : les deux premiers, ceux de `place`. */
+  zones: string[];
   /** Les guides qui le désignent ; vide : un monstre du site, sans guide. */
   guides: GuideRef[];
+}
+
+/** Un mode de jeu du picker de Monstres : son titre, et combien de monstres du roster s'y affrontent. */
+export interface MonsterModeGroup {
+  key: string;
+  label: string;
+  count: number;
 }
 
 /**
@@ -4496,6 +4508,8 @@ interface MonstersIndex {
   roster: MonsterRosterRow[];
   rows: Map<string, MonsterRosterRow>;
   counts: { guides: number; site: number };
+  /** Les modes de jeu, dans l'ordre du damage calc du site (`gameModeGroups`). */
+  modeGroups: MonsterModeGroup[];
   /** Sans tables du jeu, « utilisés par le site » ne se calcule pas : la raison. */
   siteError?: string;
   /** skill → les monstres qui le portent. */
@@ -4524,6 +4538,7 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
   const modeNames = new Map<string, string>();
   for (const d of Object.values(dungeons))
     if (!modeNames.has(d.mode)) modeNames.set(d.mode, modeLabel(d, DEFAULT_LANG));
+  const groups = gameModeGroups(dungeons, DEFAULT_LANG);
   const guides = disk.guideIds(monsters);
   const row = (m: Monster): MonsterRosterRow => {
     const { modes, zones } = monsterPlaces(m, dungeons);
@@ -4542,6 +4557,8 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
       ]
         .filter(Boolean)
         .join(' · '),
+      modes: modeKeysOf(groups, modes),
+      zones: zones.slice(0, 2),
       guides: guides.get(m.id) ?? [],
     };
   };
@@ -4576,6 +4593,11 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
     roster,
     rows: new Map(roster.map((r) => [r.id, r])),
     counts: { guides: inGuides.length, site: roster.length },
+    modeGroups: groups.map(({ key, label }) => ({
+      key,
+      label,
+      count: roster.filter((r) => r.modes.includes(key)).length,
+    })),
     ...(siteError ? { siteError } : {}),
     carriers,
   };
@@ -4588,14 +4610,16 @@ function monstersIndex(disk: MonstersDisk): MonstersIndex {
  * Le roster de l'onglet « Monstres » : ceux que les GUIDES désignent d'abord
  * (`guideMonsterIds`, chacun avec ses guides), puis les autres monstres que le
  * site utilise (`siteMonsterIds`) — chaque groupe par nom. `counts.site` compte
- * les deux. Servi à part de l'état d'un monstre, et gardé tant que ni les
- * monstres, ni les donjons, ni les guides n'ont bougé. Sans tables du jeu sur
- * le poste, la liste du site manque (`siteError`) : les monstres des guides,
- * eux, se lisent du committé.
+ * les deux. `modeGroups` : les modes de jeu où les ranger, dans l'ordre et sous
+ * les titres du damage calc du site, chacun avec le nombre de monstres du roster
+ * qui s'y affrontent (`modes` d'une ligne en porte les clés). Servi à part de
+ * l'état d'un monstre, et gardé tant que ni les monstres, ni les donjons, ni
+ * les guides n'ont bougé. Sans tables du jeu sur le poste, la liste du site
+ * manque (`siteError`) : les monstres des guides, eux, se lisent du committé.
  */
 export function monstersRoster(disk: MonstersDisk = MONSTERS_DEPS) {
-  const { roster, counts, siteError } = monstersIndex(disk);
-  return { roster, counts, ...(siteError ? { siteError } : {}) };
+  const { roster, counts, modeGroups, siteError } = monstersIndex(disk);
+  return { roster, counts, modeGroups, ...(siteError ? { siteError } : {}) };
 }
 
 /** Une carte du kit telle que la page la reçoit : l'adresse de son icône, pas son sprite. */
@@ -4635,6 +4659,8 @@ export function monsterSheetState(id: string, disk: MonstersDisk = MONSTERS_DEPS
       type: m.type,
       icon: img.monster(m.icon),
       place: '',
+      modes: [],
+      zones: [],
       guides: [],
     },
     kit: {

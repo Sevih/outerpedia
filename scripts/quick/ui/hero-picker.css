@@ -76,6 +76,7 @@
 }
 .hp-togs {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 .hp-togs:empty {
@@ -109,8 +110,10 @@
 .hp-tog[aria-pressed='true'] img {
   opacity: 1;
 }
-/* Une pastille à libellé (`pills` : le type d'un monstre) : sa largeur est celle de son mot. */
+/* Une pastille à libellé (`pills` : le mode de jeu, le type d'un monstre) : sa
+   largeur est celle de son mot ; son compte (`counted`), atténué, le suit. */
 .hp-tog.txt {
+  gap: 6px;
   width: auto;
   padding: 0 10px;
   color: var(--content-muted);
@@ -121,6 +124,11 @@
 .hp-tog.txt:hover,
 .hp-tog.txt[aria-pressed='true'] {
   color: var(--content);
+}
+.hp-num {
+  color: var(--placeholder);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
 }
 .hp-seg {
   display: inline-flex;

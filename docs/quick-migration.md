@@ -238,8 +238,12 @@ l'écran de l'admin éditait. Le picker partagé, en lignes, montre d'abord les
 monstres que les GUIDES désignent (543 sur les 4 848 du jeu : `bossId`,
 `monsters`, `group`, `dungeons` des `meta.json`, les groupes des `config.json`
 de versions, et leurs adds), chacun avec son mode · stage et le nombre de ses
-guides ; « Site » élargit aux 2 451 que le site utilise ; pastilles de type,
-recherche par début de mot du nom ou par id. La fiche : le monstre, ses guides
+guides ; « Site » élargit aux 2 451 que le site utilise ; pastilles de MODE DE
+JEU (lot B47 : les modes dans l'ordre et sous les titres du damage calc du
+site — Story, Origin Story, Skyward Tower… Joint Challenge, puis « sans
+mode » —, chacune avec son compte dans le périmètre ; `gameModeGroups` de
+`src/lib/admin/game-modes.ts`, à garder aligné sur le damage calc) puis de
+type, recherche par début de mot du nom ou par id. La fiche : le monstre, ses guides
 en liens, puis ses cartes de skills comme le sous-onglet Skills de la Fiche
 perso — ✕ masque une chip, « rétablir » la rend, « ＋ effet » en ajoute une du
 glossaire, et un MENU par chip (« sur la carte… ») la pose sur une autre carte

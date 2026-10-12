@@ -1,10 +1,11 @@
 // Onglet « Monstres » : un monstre, choisi dans le picker partagé — ceux que les
-// guides désignent d'abord —, et le câblage des chips d'effets sur les cartes de
-// skills de son kit (`data/curated/monster-skills.json`) : ✕ masque une chip sur
-// sa carte, « rétablir » la rend, « ＋ effet » en ajoute une du glossaire, et le
-// menu d'une chip la pose sur une autre carte du kit. Une savebar, un
-// enregistrement, un commit. Les stats, l'intégration et les versions d'un
-// monstre sont sur sa fiche de la section « Extraction » : l'en-tête y mène.
+// guides désignent d'abord, par mode de jeu —, et le câblage des chips d'effets
+// sur les cartes de skills de son kit (`data/curated/monster-skills.json`) : ✕
+// masque une chip sur sa carte, « rétablir » la rend, « ＋ effet » en ajoute une
+// du glossaire, et le menu d'une chip la pose sur une autre carte du kit. Une
+// savebar, un enregistrement, un commit. Les stats, l'intégration et les
+// versions d'un monstre sont sur sa fiche de la section « Extraction » :
+// l'en-tête y mène.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { gameText } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
@@ -17,6 +18,12 @@ const TYPES = [
   ['named', 'named'],
   ['monster', 'monster'],
 ];
+// Les deux groupes de pastilles du picker, sous leurs libellés.
+const MODE = 'Mode';
+const TYPE = 'Type';
+// La pastille « sans mode » : un monstre qu'aucun mode de jeu ne range (un add
+// sans spawn, un monstre des seuls modes que le damage calc écarte).
+const NO_MODE = '';
 // Les deux sections par carte du curé, sous leurs noms.
 const KIT = { hide: 'chipHide', add: 'chipAdd' };
 
@@ -24,6 +31,7 @@ let roster = null; // `/api/monsters/roster`, lu à la première venue : le pick
 let asked = false; // le roster est demandé, ou là
 let sheet = null; // l'état du monstre ouvert (`/api/monsters/state`)
 let wanted = null; // le monstre que le hash demande, tant qu'il n'est pas demandé
+let wantedMode = null; // le mode de jeu que le hash demande, tant que le picker ne l'a pas pris
 let loading = null; // le monstre en cours de chargement
 // Les chips déplacées, pas encore envoyées : buff → sa carte, `null` = par défaut.
 let own = {};
@@ -35,6 +43,7 @@ let refused = new Map();
 const pkFilters = heroFilters(); // les filtres du picker de monstres, à lui
 const fxFilters = heroFilters(); // ceux du picker d'effets
 const nameWords = new Map(); // id → les mots de son nom, pour la recherche
+const modeLabels = new Map(); // la clé d'un mode de jeu → son titre
 let drawnBase = state.imgBase; // la base des images du dernier dessin (cf. `init`)
 
 const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
@@ -475,19 +484,50 @@ function matches(m, q) {
   return needle.length > 0 && needle.every((n) => words.some((w) => w.startsWith(n)));
 }
 
-/** Une ligne du picker : icône, nom, mode · zone dessous, type, « N guides ». */
+/** Les modes de jeu d'un monstre, ou « sans mode » : ce que ses pastilles filtrent. */
+const modesOf = (m) => (m.modes?.length ? m.modes : [NO_MODE]);
+
+/**
+ * Où on affronte un monstre : tous ses modes de jeu, sous leurs titres, puis
+ * ses stages / zones. Un serveur d'avant les modes : sa chaîne `place`.
+ */
+const whereOf = (m) =>
+  m.modes
+    ? [m.modes.map((key) => modeLabels.get(key) ?? key).join(', '), (m.zones ?? []).join(', ')]
+        .filter(Boolean)
+        .join(' · ')
+    : m.place;
+
+/** Une ligne du picker : icône, nom, modes · zones dessous, type, « N guides ». */
 const pickTile = (m) =>
-  `<span class="m-pk"><img class="m-pico" src="${srcAt(m.icon)}" alt="" aria-hidden="true" width="36" height="36" loading="lazy" /><span class="m-pn"><span class="m-pname">${esc(m.name)}</span><span class="m-pwhere">${esc(m.place || m.id)}</span></span><span class="badge off">${esc(typeLabel(m.type))}</span>${
+  `<span class="m-pk"><img class="m-pico" src="${srcAt(m.icon)}" alt="" aria-hidden="true" width="36" height="36" loading="lazy" /><span class="m-pn"><span class="m-pname">${esc(m.name)}</span><span class="m-pwhere">${esc(whereOf(m) || m.id)}</span></span><span class="badge off">${esc(typeLabel(m.type))}</span>${
     m.guides.length ? `<span class="badge edit">${plural(m.guides.length, 'guide')}</span>` : ''
   }</span>`;
 
 /**
+ * Les pastilles de mode de jeu : les modes que le roster porte, dans l'ordre et
+ * sous les titres du damage calc du site (`modeGroups` du serveur), puis « sans
+ * mode » s'il en reste. Aucune pour un serveur d'avant les modes.
+ */
+function modePills() {
+  const options = (roster.modeGroups ?? []).filter((g) => g.count).map((g) => [g.key, g.label]);
+  if (options.length && roster.roster.some((m) => !m.modes?.length))
+    options.push([NO_MODE, 'sans mode']);
+  return options.length ? [{ label: MODE, options, of: modesOf, counted: true }] : [];
+}
+
+/**
  * Le picker partagé, en lignes : les monstres des GUIDES d'office, « Site » pour
- * élargir à tous ceux que le site utilise, les pastilles de type, la recherche
- * sur le nom ou l'id.
+ * élargir à tous ceux que le site utilise, les pastilles de mode de jeu — chacune
+ * avec son compte dans ce périmètre — puis de type, la recherche sur le nom ou
+ * l'id.
  */
 function pickMonster() {
   const types = new Set(roster.roster.map((m) => m.type));
+  // `#monsters/mode/<clé>` : le picker s'ouvre sur ce mode, lui seul enfoncé.
+  if (wantedMode !== null && modeLabels.has(wantedMode))
+    pkFilters.pills[MODE] = new Set([wantedMode]);
+  wantedMode = null;
   openHeroPicker({
     title: 'Choisir un monstre',
     roster: roster.roster,
@@ -509,7 +549,10 @@ function pickMonster() {
       ],
       test: (m, value) => value === 'site' || m.guides.length > 0,
     },
-    pills: { label: 'Type', options: TYPES.filter(([t]) => types.has(t)), of: (m) => m.type },
+    pills: [
+      ...modePills(),
+      { label: TYPE, options: TYPES.filter(([t]) => types.has(t)), of: (m) => m.type },
+    ],
     match: matches,
     filters: pkFilters,
     chosen: sheet?.monster.id,
@@ -540,6 +583,7 @@ function askRoster() {
     .then((r) => {
       roster = r;
       for (const m of r.roster) nameWords.set(m.id, wordsOf(m.name));
+      for (const g of r.modeGroups ?? []) modeLabels.set(g.key, g.label);
       $('m-pick').disabled = false;
       pickIfEmpty();
     })
@@ -602,13 +646,14 @@ function leave() {
 sections.register('monsters', {
   init: () => {
     // `#monsters/<id>` ouvre l'onglet sur le kit de ce monstre (un lien, le
-    // banc de captures). `lib.js` ne connaît que `#monsters` : c'est le clic sur
+    // banc de captures), `#monsters/mode/<clé>` sur le picker filtré par ce mode
+    // de jeu (le banc). `lib.js` ne connaît que `#monsters` : c'est le clic sur
     // l'onglet qui l'ouvre.
     const [, open] = /^#monsters\/([^/]+)$/.exec(location.hash) ?? [];
-    if (open) {
-      wanted = decodeURIComponent(open);
-      document.querySelector('#tabs [data-tab="monsters"]')?.click();
-    }
+    const [, mode] = /^#monsters\/mode\/([^/]+)$/.exec(location.hash) ?? [];
+    if (open) wanted = decodeURIComponent(open);
+    if (mode) wantedMode = decodeURIComponent(mode);
+    if (open || mode) document.querySelector('#tabs [data-tab="monsters"]')?.click();
     who();
     bar();
     // Les images sont sous `imgBase`, connu avec `/api/state` : reposées si

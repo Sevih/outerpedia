@@ -6,7 +6,8 @@
  * qu'une question de contenu (un effet du glossaire, « Fiche perso » › Skills) :
  * l'appelant dessine alors ses tuiles (`tile`, `rows`) et nomme ce qu'on y
  * cherche (`placeholder`, `none`), ce qui répond à sa recherche (`match`) et
- * des pastilles à lui (`pills` : le type d'un monstre, onglet « Monstres »).
+ * des pastilles à lui (`pills` : le mode de jeu et le type d'un monstre, onglet
+ * « Monstres »).
  *
  * Sa modale est À LUI : posée dans `<body>` au premier appel, stylée par
  * `hero-picker.css` (classes `hp-`), elle s'ouvre donc de n'importe quelle
@@ -35,8 +36,16 @@ import { heroTile } from './hero-tile.mjs';
 /**
  * Les filtres, gardés par l'appelant d'une ouverture à l'autre (la recherche,
  * elle, repart vide) : les pastilles enfoncées (élément, classe, celles de
- * `pills`), et la valeur du groupe `seg`.
- * @typedef {{ elements: Set<string>, classes: Set<string>, seg: string, pills?: Set<string> }} HeroFilters
+ * chaque groupe de `pills`, sous son libellé), et la valeur du groupe `seg`.
+ * @typedef {{ elements: Set<string>, classes: Set<string>, seg: string, pills?: Record<string, Set<string>> }} HeroFilters
+ */
+
+/**
+ * Un groupe de pastilles à LIBELLÉ : `of` rend la valeur d'un item, ou ses
+ * valeurs (les modes de jeu d'un monstre) ; aucune enfoncée = tout. `counted` :
+ * chaque pastille porte le nombre d'items du roster qui ont sa valeur, dans le
+ * `seg` courant.
+ * @typedef {{ label: string, options: readonly (readonly [string, string])[], of: (item: any) => string | readonly string[], counted?: boolean }} PillGroup
  */
 
 /**
@@ -57,9 +66,10 @@ import { heroTile } from './hero-tile.mjs';
  * @property {{ label: string, options: readonly (readonly [string, string])[], test: (hero: any, value: string) => boolean }} [seg]
  *   Un groupe segmenté de plus dans la rangée de filtres (la nature d'un
  *   effet : tous, buffs, debuffs).
- * @property {{ label: string, options: readonly (readonly [string, string])[], of: (item: any) => string }} [pills]
- *   Des pastilles à LIBELLÉ de plus, après celles d'élément et de classe (le
- *   type d'un monstre) : `of` rend la valeur d'un item ; aucune enfoncée = tout.
+ * @property {PillGroup | readonly PillGroup[]} [pills]
+ *   Des pastilles à LIBELLÉ de plus, après celles d'élément et de classe : un
+ *   groupe, ou plusieurs dans l'ordre montré (le mode de jeu puis le type d'un
+ *   monstre) — un item passe s'il répond à CHAQUE groupe.
  * @property {(item: any, q: string) => boolean} [match] Ce qui répond à la
  *   recherche — `q` : la saisie en minuscules, sans blancs autour ; sans lui,
  *   le nom qui la contient.
@@ -83,7 +93,7 @@ export const heroFilters = () => ({
   elements: new Set(),
   classes: new Set(),
   seg: '',
-  pills: new Set(),
+  pills: {},
 });
 /** @type {HeroFilters} */
 const shared = heroFilters();
@@ -132,10 +142,43 @@ const search = () => /** @type {HTMLInputElement} */ (document.getElementById('h
 let open = null;
 
 /**
- * Les pastilles de `pills` enfoncées (des filtres bâtis à la main n'en ont pas encore).
- * @param {HeroFilters} filters
+ * Les groupes de `pills`, un seul compris.
+ * @param {HeroPickerOptions} opts
+ * @returns {readonly PillGroup[]}
  */
-const pillsOf = (filters) => (filters.pills ??= new Set());
+const pillGroups = ({ pills }) =>
+  !pills ? [] : /** @type {readonly PillGroup[]} */ (Array.isArray(pills) ? pills : [pills]);
+
+/**
+ * Les pastilles enfoncées d'un groupe de `pills` (des filtres bâtis à la main n'en ont pas encore).
+ * @param {HeroFilters} filters
+ * @param {PillGroup} group
+ */
+const pillsOf = (filters, group) => ((filters.pills ??= {})[group.label] ??= new Set());
+
+/**
+ * Les valeurs d'un item dans un groupe de `pills`.
+ * @param {PillGroup} group
+ * @param {Hero} item
+ * @returns {readonly string[]}
+ */
+const valuesOf = (group, item) => {
+  const v = group.of(item);
+  return typeof v === 'string' ? [v] : v;
+};
+
+/**
+ * Le compte d'une pastille : les items du roster qui ont sa valeur, dans le `seg` courant.
+ * @param {PillGroup} group
+ * @param {string} value
+ */
+function pillCount(group, value) {
+  if (!open) return 0;
+  const { opts, filters } = open;
+  return opts.roster.filter(
+    (c) => (!opts.seg || opts.seg.test(c, filters.seg)) && valuesOf(group, c).includes(value),
+  ).length;
+}
 
 /** @param {string} path */
 const src = (path) => `${esc(open?.opts.imgBase ?? '')}/images/${path}.webp`;
@@ -149,7 +192,7 @@ const icon = (kind, slug) =>
     `ui/${kind === 'element' ? 'elem/IG_Turn_Element_' : 'class/IG_Turn_Class_'}${cap(esc(slug))}`,
   )}" alt="" aria-hidden="true" />`;
 
-/** La rangée de filtres : les pastilles que le roster porte, celles de `pills`, puis le groupe `seg`. */
+/** La rangée de filtres : les pastilles que le roster porte, les groupes de `pills`, puis le groupe `seg`. */
 function filtersHtml() {
   if (!open) return '';
   const { opts, filters } = open;
@@ -170,16 +213,19 @@ function filtersHtml() {
     classes.has(c),
   )
     .map((c) => tog('class', c, filters.classes.has(c)))
-    .join('')}</div>${
-    opts.pills
-      ? `<div class="hp-togs" role="group" aria-label="${esc(opts.pills.label)}">${opts.pills.options
+    .join('')}</div>${pillGroups(opts)
+    .map(
+      (group, i) =>
+        `<div class="hp-togs" role="group" aria-label="${esc(group.label)}" data-pills="${i}">${group.options
           .map(
             ([value, text]) =>
-              `<button class="hp-tog txt" type="button" data-pill="${esc(value)}" aria-pressed="${pillsOf(filters).has(value)}">${esc(text)}</button>`,
+              `<button class="hp-tog txt" type="button" data-pill="${esc(value)}" aria-pressed="${pillsOf(filters, group).has(value)}">${esc(text)}${
+                group.counted ? ` <span class="hp-num">${pillCount(group, value)}</span>` : ''
+              }</button>`,
           )
-          .join('')}</div>`
-      : ''
-  }${
+          .join('')}</div>`,
+    )
+    .join('')}${
     opts.seg
       ? `<div class="hp-seg" role="group" aria-label="${esc(opts.seg.label)}">${opts.seg.options
           .map(
@@ -196,12 +242,15 @@ function shown() {
   if (!open) return [];
   const { opts, filters } = open;
   const q = search().value.trim().toLowerCase();
-  const { seg, pills, match } = opts;
-  const pressed = pillsOf(filters);
+  const { seg, match } = opts;
+  // Les groupes de `pills` qui filtrent : ceux où une pastille est enfoncée.
+  const pressed = pillGroups(opts)
+    .map((group) => /** @type {const} */ ([group, pillsOf(filters, group)]))
+    .filter(([, on]) => on.size);
   return opts.roster.filter(
     (c) =>
       (!q || (match ? match(c, q) : c.name.toLowerCase().includes(q))) &&
-      (!pills || !pressed.size || pressed.has(pills.of(c))) &&
+      pressed.every(([group, on]) => valuesOf(group, c).some((v) => on.has(v))) &&
       (!filters.elements.size || (c.element !== undefined && filters.elements.has(c.element))) &&
       (!filters.classes.size || (c.class !== undefined && filters.classes.has(c.class))) &&
       (!seg || seg.test(c, filters.seg)),
@@ -292,17 +341,25 @@ function pick(id) {
 /** @param {Element} tog Un bouton de la rangée de filtres. */
 function toggle(tog) {
   if (!open) return;
-  const { filters } = open;
+  const { opts, filters } = open;
+  /** @param {Element} pill Une pastille de `pills` : son groupe, par son rang. */
+  const groupOf = (pill) =>
+    pillGroups(opts)[Number(/** @type {HTMLElement} */ (pill.parentElement).dataset.pills)];
   const data = /** @type {HTMLElement} */ (tog).dataset;
   if (data.seg !== undefined) {
     filters.seg = data.seg;
     for (const b of tog.parentElement?.children ?? [])
       b.setAttribute('aria-pressed', String(b === tog));
+    // Les comptes des pastilles suivent le `seg`.
+    for (const num of el('hp-filters').querySelectorAll('.hp-num')) {
+      const pill = /** @type {HTMLElement} */ (num.parentElement);
+      num.textContent = String(pillCount(groupOf(pill), pill.dataset.pill ?? ''));
+    }
     return;
   }
   const [set, slug] =
     data.pill !== undefined
-      ? [pillsOf(filters), data.pill]
+      ? [pillsOf(filters, groupOf(tog)), data.pill]
       : data.element
         ? [filters.elements, data.element]
         : [filters.classes, data.class ?? ''];

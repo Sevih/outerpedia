@@ -2332,6 +2332,97 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
   });
 
+  it('`pills` en tableau : un groupe par libellé, dans l’ordre ; OU dans un groupe, ET entre eux ; `of` à plusieurs valeurs', async () => {
+    const p = await picker();
+    const filters = p.heroFilters();
+    const pills = [
+      {
+        label: 'Recos',
+        options: [
+          ['with', 'avec recos'],
+          ['none', 'sans reco'],
+        ],
+        of: (c: Hero) => (c.builds ? 'with' : 'none'),
+      },
+      {
+        label: 'Rôles',
+        options: [
+          ['dps', 'dps'],
+          ['none', 'support'],
+        ],
+        // Plusieurs valeurs : Alice est des deux. `none` est aussi une valeur de « Recos ».
+        of: (c: Hero) => (c.id === '1' ? ['dps'] : c.id === '2' ? ['dps', 'none'] : ['none']),
+      },
+    ];
+    p.open({ pills, filters });
+    expect(p.all('#hp-filters [data-pills]').map((g) => g.getAttribute('aria-label'))).toEqual([
+      'Recos',
+      'Rôles',
+    ]);
+    const togs = (group: string) => p.all(`#hp-filters [aria-label="${group}"] .hp-tog`);
+    expect(togs('Recos').map((b) => b.textContent)).toEqual(['avec recos', 'sans reco']);
+    expect(togs('Rôles').map((b) => b.textContent)).toEqual(['dps', 'support']);
+
+    togs('Rôles')[0].click();
+    expect(p.names()).toEqual(['Aer', 'Alice']);
+    // La même valeur dans l'autre groupe n'a pas bougé : chaque groupe a les siennes.
+    togs('Rôles')[1].click();
+    expect(togs('Recos').map((b) => b.getAttribute('aria-pressed'))).toEqual(['false', 'false']);
+    expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
+    // ET entre les groupes : « avec recos » parmi ceux d'un rôle enfoncé.
+    togs('Rôles')[0].click();
+    togs('Recos')[0].click();
+    expect(p.names()).toEqual(['Astei']);
+
+    // Rouvert avec les mêmes filtres : chaque groupe retrouve ses pastilles.
+    p.closeHeroPicker();
+    p.open({ pills, filters });
+    expect(togs('Recos').map((b) => b.getAttribute('aria-pressed'))).toEqual(['true', 'false']);
+    expect(togs('Rôles').map((b) => b.getAttribute('aria-pressed'))).toEqual(['false', 'true']);
+    // Un groupe retiré ne filtre plus ; celui qui reste garde les siennes.
+    p.open({ pills: [pills[1]], filters });
+    expect(p.names()).toEqual(['Alice', 'Astei']);
+  });
+
+  it('`counted` : chaque pastille du groupe porte son compte, celui du `seg` courant', async () => {
+    const p = await picker();
+    p.open({
+      filters: p.heroFilters(),
+      pills: [
+        {
+          label: 'Recos',
+          options: [
+            ['with', 'avec recos'],
+            ['none', 'sans reco'],
+          ],
+          of: (c: Hero) => (c.builds ? 'with' : 'none'),
+          counted: true,
+        },
+      ],
+      seg: {
+        label: 'Élément',
+        options: [
+          ['', 'Tous'],
+          ['fire', 'Feu'],
+        ],
+        test: (c: Hero, value: string) => !value || c.element === value,
+      },
+    });
+    const togs = () => p.all('#hp-filters [aria-label="Recos"] .hp-tog');
+    const seg = () => p.all('#hp-filters .hp-seg button');
+    expect(togs().map((b) => b.textContent)).toEqual(['avec recos 2', 'sans reco 1']);
+    expect(togs()[0].querySelector('.hp-num')?.textContent).toBe('2');
+    // Le compte suit le `seg`, pas la recherche ni les pastilles enfoncées.
+    seg()[1].click();
+    expect(togs().map((b) => b.textContent)).toEqual(['avec recos 2', 'sans reco 0']);
+    togs()[1].click();
+    p.search('zzz');
+    expect(togs().map((b) => b.textContent)).toEqual(['avec recos 2', 'sans reco 0']);
+    seg()[0].click();
+    expect(togs().map((b) => b.textContent)).toEqual(['avec recos 2', 'sans reco 1']);
+    expect(togs()[1].getAttribute('aria-pressed')).toBe('true');
+  });
+
   it('un roster sans élément : ni pastille d’élément, ni icône sur la tuile', async () => {
     const p = await picker();
     p.open({ roster: ROSTER.map(({ id, name, class: cls }) => ({ id, name, class: cls })) });
@@ -5695,6 +5786,8 @@ describe('Monstres — la page, sur le vrai markup', () => {
       type: 'area_boss',
       icon: '/images/ui/boss/MT_4014002.webp',
       place: 'Joint Challenge · Defeat the Annihilator Very Hard',
+      modes: ['joint-challenge'],
+      zones: ['Defeat the Annihilator Very Hard'],
       guides: [JC, S3],
     },
     {
@@ -5702,7 +5795,9 @@ describe('Monstres — la page, sur le vrai markup', () => {
       name: 'Annihilator',
       type: 'boss',
       icon: 'https://cdn.test/annihilator.webp',
-      place: 'Joint Challenge · Defeat the Annihilator Hard',
+      place: 'Story Hard, Joint Challenge · S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+      modes: ['story', 'joint-challenge'],
+      zones: ['S3 · Ep1 · Stage 10', 'Defeat the Annihilator Hard'],
       guides: [JC],
     },
     {
@@ -5711,6 +5806,8 @@ describe('Monstres — la page, sur le vrai markup', () => {
       type: 'named',
       icon: '/images/a.webp',
       place: '',
+      modes: [],
+      zones: [],
       guides: [FROST],
     },
     {
@@ -5719,8 +5816,17 @@ describe('Monstres — la page, sur le vrai markup', () => {
       type: 'monster',
       icon: '/images/ui/boss/MT_4004100.webp',
       place: 'Skyward Tower · 5F',
+      modes: ['skyward-tower'],
+      zones: ['5F'],
       guides: [],
     },
+  ];
+  /** Les modes de jeu du serveur, dans l'ordre du damage calc ; aucun monstre du roster en Origin Story. */
+  const MODES = [
+    { key: 'story', label: 'Story', count: 1 },
+    { key: 'origin', label: 'Origin Story', count: 0 },
+    { key: 'skyward-tower', label: 'Skyward Tower', count: 1 },
+    { key: 'joint-challenge', label: 'Joint Challenge', count: 2 },
   ];
   /** Le kit du boss : deux cartes à chips, et le skill technique de fin d'enrage, sans nom. */
   const CARDS = [
@@ -5807,6 +5913,8 @@ describe('Monstres — la page, sur le vrai markup', () => {
       disk?: Partial<KitDisk>;
       saved?: (body: unknown, disk: KitDisk) => Saved;
       siteError?: string;
+      /** Un serveur lancé avant les modes de jeu : ni `modes`, ni `zones`, ni `modeGroups`. */
+      legacy?: boolean;
     } = {},
   ) {
     vi.resetModules();
@@ -5841,8 +5949,18 @@ describe('Monstres — la page, sur le vrai markup', () => {
       if (url.pathname.startsWith('/api/monsters')) calls.push(body ? { path, body } : { path });
       if (url.pathname === '/api/monsters/roster')
         return answer({
-          roster: ROSTER,
+          roster: opts.legacy
+            ? ROSTER.map(({ id, name, type, icon, place, guides }) => ({
+                id,
+                name,
+                type,
+                icon,
+                place,
+                guides,
+              }))
+            : ROSTER,
           counts: { guides: 3, site: 4 },
+          ...(opts.legacy ? {} : { modeGroups: MODES }),
           ...(opts.siteError ? { siteError: opts.siteError } : {}),
         });
       if (url.pathname === '/api/monsters/state') {
@@ -6000,10 +6118,15 @@ describe('Monstres — la page, sur le vrai markup', () => {
     expect(page.el('hp-tally').textContent).toBe('3 des guides · 4 avec le site');
     expect(page.el('hp-q').placeholder).toBe('Chercher un monstre (nom ou id)…');
     expect(page.el('hp-results').className).toBe('hp-tiles rows');
-    // Une ligne : le nom, où on l'affronte (son id sinon), son type, « N guides ».
+    // Une ligne : le nom, où on l'affronte — TOUS ses modes de jeu, sous les
+    // titres du serveur, puis ses zones ; son id sinon —, son type, « N guides ».
     expect(page.rows()).toEqual([
       ['Annihilator', 'Joint Challenge · Defeat the Annihilator Very Hard', 'area boss · 2 guides'],
-      ['Annihilator', 'Joint Challenge · Defeat the Annihilator Hard', 'boss · 1 guide'],
+      [
+        'Annihilator',
+        'Story, Joint Challenge · S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+        'boss · 1 guide',
+      ],
       ['Giant God Soldier', ADD, 'named · 1 guide'],
     ]);
     // L'icône du serveur : relative, sous la base des images ; absolue, telle quelle.
@@ -6054,6 +6177,103 @@ describe('Monstres — la page, sur le vrai markup', () => {
     expect(ids()).toEqual([MOB]);
     seg()[0].click();
     expect(ids()).toEqual([]);
+  });
+
+  it('le picker : les pastilles de mode de jeu AVANT celles de type, dans l’ordre du serveur, chacune avec son compte dans le périmètre', async () => {
+    const page = await monsters({ hash: '#monsters' });
+    const ids = () => page.all('#hp-results .hp-tile').map((t) => t.dataset.id);
+    const seg = () => page.all('#hp-filters .hp-seg button');
+    const pills = (group: string) => page.all(`#hp-filters [aria-label="${group}"] .hp-tog`);
+    expect(page.all('#hp-filters [data-pills]').map((g) => g.getAttribute('aria-label'))).toEqual([
+      'Mode',
+      'Type',
+    ]);
+    // Les modes que le roster porte (aucun monstre en Origin Story : pas de
+    // pastille), puis « sans mode » ; le compte est celui des GUIDES, le
+    // périmètre d'office — la tour n'y a personne.
+    const modes = () => pills('Mode').map((b) => b.textContent);
+    expect(modes()).toEqual(['Story 1', 'Skyward Tower 0', 'Joint Challenge 2', 'sans mode 1']);
+    expect(pills('Mode').map((b) => b.getAttribute('aria-pressed'))).toEqual(
+      Array(4).fill('false'),
+    );
+    expect(pills('Type').map((b) => b.textContent)).toEqual([
+      'boss',
+      'area boss',
+      'named',
+      'monster',
+    ]);
+
+    // Un mode : ses monstres, celui qui en a deux compris.
+    pills('Mode')[2].click();
+    expect(ids()).toEqual([BOSS, TWIN]);
+    // ET le type : le mode se combine aux pastilles de type.
+    pills('Type')[0].click();
+    expect(ids()).toEqual([TWIN]);
+    pills('Type')[0].click();
+    // Deux modes : l'un OU l'autre.
+    pills('Mode')[3].click();
+    expect(ids()).toEqual([BOSS, TWIN, ADD]);
+    pills('Mode')[2].click();
+    // « sans mode » seul : l'add que rien ne range.
+    expect(ids()).toEqual([ADD]);
+    pills('Mode')[3].click();
+    pills('Mode')[0].click();
+    expect(ids()).toEqual([TWIN]);
+    pills('Mode')[0].click();
+
+    // « Site » élargit : les comptes suivent, et la tour a son monstre.
+    seg()[1].click();
+    expect(modes()).toEqual(['Story 1', 'Skyward Tower 1', 'Joint Challenge 2', 'sans mode 1']);
+    pills('Mode')[1].click();
+    expect(ids()).toEqual([MOB]);
+    // Refermé sur les guides, le mode reste enfoncé : plus personne.
+    seg()[0].click();
+    expect(modes()).toEqual(['Story 1', 'Skyward Tower 0', 'Joint Challenge 2', 'sans mode 1']);
+    expect(ids()).toEqual([]);
+  });
+
+  it('`#monsters/mode/<clé>` : le picker s’ouvre sur ce mode de jeu, lui seul enfoncé ; une clé inconnue ne filtre rien', async () => {
+    const page = await monsters({ hash: '#monsters/mode/joint-challenge' });
+    const ids = () => page.all('#hp-results .hp-tile').map((t) => t.dataset.id);
+    const pressed = () =>
+      page
+        .all('#hp-filters [aria-label="Mode"] .hp-tog')
+        .filter((b) => b.getAttribute('aria-pressed') === 'true')
+        .map((b) => b.textContent);
+    expect(page.el('tab-monsters').hidden).toBe(false);
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(pressed()).toEqual(['Joint Challenge 2']);
+    expect(ids()).toEqual([BOSS, TWIN]);
+    // Aucun état de monstre n'est demandé : le hash ne nomme personne.
+    expect(page.calls).toEqual([{ path: '/api/monsters/roster' }]);
+    // Le mode n'est pris qu'à cette ouverture : le choix d'un monstre écrit SON adresse.
+    await page.choose(TWIN);
+    expect(page.window.location.hash).toBe(`#monsters/${TWIN}`);
+
+    const other = await monsters({ hash: '#monsters/mode/nope' });
+    expect(other.el('hp-modal').hidden).toBe(false);
+    expect(
+      other
+        .all('#hp-filters [aria-label="Mode"] .hp-tog')
+        .map((b) => b.getAttribute('aria-pressed')),
+    ).toEqual(Array(4).fill('false'));
+    expect(other.rows()).toHaveLength(3);
+  });
+
+  it('un quick lancé avant les modes de jeu : pas de pastille de mode, la ligne garde « mode · stage » du serveur', async () => {
+    const page = await monsters({ hash: '#monsters/mode/joint-challenge', legacy: true });
+    expect(page.all('#hp-filters [data-pills]').map((g) => g.getAttribute('aria-label'))).toEqual([
+      'Type',
+    ]);
+    expect(page.rows()).toEqual([
+      ['Annihilator', 'Joint Challenge · Defeat the Annihilator Very Hard', 'area boss · 2 guides'],
+      [
+        'Annihilator',
+        'Story Hard, Joint Challenge · S3 · Ep1 · Stage 10, Defeat the Annihilator Hard',
+        'boss · 1 guide',
+      ],
+      ['Giant God Soldier', ADD, 'named · 1 guide'],
+    ]);
   });
 
   it('sans tables du jeu : le picker dit que la liste du site manque, les monstres des guides sont là', async () => {

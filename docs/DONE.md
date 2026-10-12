@@ -7,6 +7,93 @@
 
 ## 2026-10-12
 
+- **quick : Monstres — le picker filtre par mode de jeu, dans l'ordre et sous
+  les libellés du damage calc du site (lot B47)** — revue de quick par Sevih
+  (12/10) : « éditeur > monstre : sélection par mode de jeu (comme le damage
+  calc) ». Le picker n'avait que le périmètre [Guides | Site] et les pastilles
+  de type ; le mode n'était qu'un bout de la chaîne `place`, tronquée à deux
+  slugs (« Skyward Tower, Skyward Tower »). Un module pur,
+  `src/lib/admin/game-modes.ts` : `gameModeGroups(encounters, lang, gloss?)`
+  rend `[{ key, label, slugs }]` comme le damage calc liste ses modes —
+  `encounters.json` par id de donjon, les donjons peuplés, ni `retired` ni
+  `monad_battle_1` ; Story puis Origin Story en tête (les quatre modes story en
+  deux familles, `storyFamilyOf`), ensuite la première apparition ; `raid_1` et
+  `raid_2` sous « Special Request » ; les slugs d'un même titre en un groupe
+  (les trois tours, les deux boss de guild raid) ; les titres du jeu
+  (glossaires `modeFamilies` et `modes`). `key` est stable et jamais
+  localisée : `story`, `origin`, sinon le titre ANGLAIS en slug (`toSlug` de
+  `datagen/lib/slug.ts`) — la fusion se fait donc sur l'anglais, le libellé
+  suit la langue. `modeKeysOf(groups, slugs)` rend les clés d'un monstre. Sur
+  le committé la liste sort dans l'ordre attendu : Story, Origin Story, Skyward
+  Tower, Elemental Tower, Special Request, World Boss, Guild Raid, Weekly
+  Conquest Mission, Promotion Challenge, Pursuit Operation, Infiltration
+  Operation, Dimensional Singularity, Joint Challenge. Le damage calc N'EST PAS
+  modifié : sa liste se compose en trois fichiers (`index.tsx` pour le libellé
+  de chaque cible, `DamageCalculatorBrowser` pour la première apparition,
+  `TargetPicker` pour le repli des familles), l'extraire tenait bien au-delà
+  de trente lignes — les deux DOIVENT rester alignés, l'en-tête du module le
+  dit. Un écart assumé : le damage calc ne liste un mode que s'il y trouve une
+  cible (un boss, hors histoire), ici un donjon peuplé suffit ; aucun mode n'en
+  diffère aujourd'hui, et `game-modes.test.ts` le garde sur le committé.
+  Serveur (`scripts/quick/actions.ts`) : `MonsterRosterRow` gagne `modes` (les
+  clés de ses groupes, par ses spawns, dans l'ordre des groupes) et `zones`
+  (ses deux premiers stages, ceux de `place` — ajouté pour que la ligne garde
+  ses zones sans redécouper `place`, qui ne bouge pas) ; `monstersRoster()`
+  rend `modeGroups: [{ key, label, count }]`, `count` = les monstres du roster
+  servi dans ce groupe (guides et site ; les guides seuls sans tables du jeu).
+  Picker partagé (`ui/hero-picker.mjs`) : `pills` accepte un TABLEAU de
+  groupes, l'objet seul reste accepté ; OU dans un groupe, ET entre groupes ;
+  `of` rend une valeur ou plusieurs ; les pastilles enfoncées sont gardées PAR
+  GROUPE, sous son libellé (`filters.pills` devient un objet — personne ne le
+  lisait hors du picker) ; `counted` pose sur chaque pastille le nombre d'items
+  du roster qui ont sa valeur dans le `seg` courant (`.hp-num`), mis à jour sur
+  place quand le `seg` bascule. CSS : `.hp-togs` se replie (`flex-wrap`),
+  `.hp-tog.txt` prend un `gap`, `.hp-num`. Onglet (`tabs/monsters.js`) : deux
+  groupes, « Mode » (les groupes du serveur que le roster porte, dans l'ordre,
+  chacun avec son compte dans le périmètre courant, puis « sans mode » s'il en
+  reste) PUIS « Type » ; le segmenté Périmètre reste. `pickTile` montre TOUS
+  les modes du monstre sous leurs titres, puis ses zones (son id pour un add
+  sans spawn). `#monsters/mode/<clé>` ouvre le picker sur ce mode, lui seul
+  enfoncé ; une clé inconnue ne filtre rien ; `#monsters/<id>` ne change pas.
+  Un quick lancé avant ce code ne sert ni `modes` ni `modeGroups` : pas de
+  pastille de mode, la ligne garde `place`. Tranché sur la forme : le compte
+  de la pastille suit le périmètre du picker (le `count` du serveur, lui, vaut
+  pour tout le roster et décide seulement quelles pastilles existent) — une
+  pastille peut donc afficher 0 en « Guides » (Elemental Tower, Infiltration
+  Operation) ; un mode où le roster entier n'a personne n'a pas de pastille.
+  Vérification : `pnpm typecheck` exit 0 (`tsc --noEmit` ×3), `pnpm lint`
+  exit 0 (`eslint`), `pnpm test` « Test Files 222 passed (222) / Tests 3706
+  passed (3706) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  « Test Files 61 passed (61) / Tests 1627 passed (1627) ».
+  Tests : `game-modes.test.ts` (huit cas sur des donjons et des titres
+  factices — l'ordre, les familles, la fusion, les exclusions, la langue, le
+  repli sans glossaire de familles, `modeKeysOf` — et un sur le committé) ;
+  `actions.test.ts` (`modes`, `zones` et `modeGroups` du roster, un mode à
+  zéro, un donjon retiré et un skirmish écartés) ; `ui-serve.test.ts` (le
+  picker : `pills` en tableau, `counted` ; Monstres : les deux groupes et leur
+  ordre, le filtre par mode seul, à deux modes, avec le type, « sans mode »,
+  les comptes qui suivent « Site », le hash de mode, le quick d'avant). Banc
+  (quick isolé :4791, clés vidées, arrêté ensuite ;
+  `--tabs monsters --hash monsters` puis
+  `--hash monsters/mode/joint-challenge`) : les quatorze
+  pastilles de mode sur trois lignes dans le panneau de 1040 px — Story 3,
+  Origin Story 132, Skyward Tower 1, Elemental Tower 0, Special Request 166,
+  World Boss 36, Guild Raid 103, Weekly Conquest Mission 29, Promotion
+  Challenge 10, Pursuit Operation 12, Infiltration Operation 0, Dimensional
+  Singularity 15, Joint Challenge 15, sans mode 25 —, les types dessous, le
+  segmenté à droite ; sur le hash, Joint Challenge enfoncée et ses quinze
+  monstres. Docs : `STYLE.md` (le picker : `pills` en tableau et `counted` ; le
+  croquis de Monstres et un paragraphe « Les modes de jeu »),
+  `docs/quick-migration.md` (« Déjà dans quick » › Monstres). Laissé : l'en-tête
+  de la fiche (`who()`) garde `place` et ses deux slugs (la fiche est hors
+  périmètre) ; un monstre des seuls modes écartés (Monad Gate, donjon retiré
+  d'un mode disparu) tombe en « sans mode » et sa ligne ne montre que ses
+  zones ; `modeOptions` de l'extractor et `buildMonsterRows` de l'admin gardent
+  leurs listes par slug (hors périmètre — deux endroits de plus où la liste de
+  modes se refait) ; rien n'a été cliqué au banc, les filtres sont gardés par
+  les tests ; pas d'item dans `docs/TODO.md`.
+
 - **quick : Fiche perso › Pros / Cons — un texte par colonne (une ligne = un
   pro), le rendu du site dessous, les traductions ligne à ligne (lot F24)** —
   revue de quick par Sevih (12/10) : « plutôt que d'avoir 1 section par pro

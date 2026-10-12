@@ -6649,14 +6649,25 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
     '7': { id: '7', name: 'Increased Attack', icon: 'IG_Buff_Atk', isDebuff: false },
   };
   const PATH = 'data/curated/monster-skills.json';
-  const row = (m: Monster, guides: GuideRef[], place = '') => ({
+  const row = (
+    m: Monster,
+    guides: GuideRef[],
+    place = '',
+    modes: string[] = [],
+    zones: string[] = [],
+  ) => ({
     id: m.id,
     name: m.name.en,
     type: m.type,
     icon: img.monster(m.icon),
     place,
+    modes,
+    zones,
     guides,
   });
+  /** Un donjon PEUPLÉ : seul celui-là fait un mode de jeu. */
+  const dungeon = (mode: string, en: string, over: Partial<DungeonRef> = {}) =>
+    ({ mode, name: { en }, monsters: [{ id: 'mob' }], ...over }) as DungeonRef;
 
   /** Les lectures et les deux écritures, factices : elles notent leurs appels. */
   function deps(
@@ -6692,7 +6703,7 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
         if (over.siteError) throw new Error(over.siteError);
         return new Set([BOSS.id, 'mob', 'hors-committe']);
       },
-      dungeons: () => ({ d1: { mode: 'mode_inconnu', name: { en: 'Stage 1' } } as DungeonRef }),
+      dungeons: () => ({ d1: dungeon('mode_inconnu', 'Stage 1') }),
       stamp: () => state.stamp,
       applyKit: async (patch) => {
         calls.apply.push(patch);
@@ -6719,11 +6730,52 @@ describe('monstersRoster, monsterSheetState, saveMonsterKit — l’onglet « Mo
         row(TWIN, [GUIDE]),
         // Du site, sans guide : après les guides, quel que soit son nom. Son
         // libellé : « mode · stage » de ses spawns (un mode sans titre garde son slug).
-        row(MOB, [], 'mode_inconnu · Stage 1'),
+        row(MOB, [], 'mode_inconnu · Stage 1', ['mode-inconnu'], ['Stage 1']),
       ],
       // `site` compte les deux ; un id que le committé n'a pas n'a pas de ligne.
       counts: { guides: 2, site: 3 },
+      modeGroups: [{ key: 'mode-inconnu', label: 'mode_inconnu', count: 1 }],
     });
+  });
+
+  it('roster : `modes` — les modes de jeu de chaque monstre par ses spawns — et `modeGroups`, dans l’ordre du damage calc, avec leur compte', () => {
+    const { fake } = deps();
+    const at = (...ids: string[]) => ids.map((id) => ({ dungeon: id })) as Monster['spawns'];
+    const out = monstersRoster({
+      ...fake,
+      monsters: () => ({
+        [BOSS.id]: { ...BOSS, spawns: at('jc', 'hard', 'gate') },
+        twin: { ...TWIN, spawns: at('t2', 't1', 'old') },
+        mob: MOB,
+      }),
+      dungeons: () => ({
+        t1: dungeon('tower', '1F'),
+        t2: dungeon('tower_hard', '2F'),
+        // Écartés de la liste, comme au damage calc : les skirmish, un donjon retiré.
+        gate: dungeon('monad_battle_1', 'Gate'),
+        old: dungeon('world_boss', 'Old', { retired: true }),
+        chase: dungeon('irregular_chase', 'Chase'),
+        jc: dungeon('event_boss', 'Defeat'),
+        hard: dungeon('normal_hard', 'Stage 2'),
+        d1: dungeon('mode_inconnu', 'Stage 1'),
+      }),
+    });
+    // Story en tête, puis l'ordre des donjons ; les deux tours n'en font qu'une ;
+    // un mode que le roster n'affronte pas est là, à zéro.
+    expect(out.modeGroups).toEqual([
+      { key: 'story', label: 'Story', count: 1 },
+      { key: 'skyward-tower', label: 'Skyward Tower', count: 1 },
+      { key: 'pursuit-operation', label: 'Pursuit Operation', count: 0 },
+      { key: 'joint-challenge', label: 'Joint Challenge', count: 1 },
+      { key: 'mode-inconnu', label: 'mode_inconnu', count: 1 },
+    ]);
+    // Les clés d'un monstre : dans l'ordre des groupes, sans les modes écartés ;
+    // ses zones, les deux premières.
+    expect(out.roster.map((r) => [r.id, r.modes, r.zones])).toEqual([
+      [BOSS.id, ['story', 'joint-challenge'], ['Defeat', 'Stage 2']],
+      ['twin', ['skyward-tower'], ['2F', '1F']],
+      ['mob', ['mode-inconnu'], ['Stage 1']],
+    ]);
   });
 
   it('roster : gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {

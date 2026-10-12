@@ -837,7 +837,9 @@ autre chose que des héros (le picker d'effets de Skills) :
   `rows`        .hp-tiles.rows : des tuiles en LIGNES (une icône, le nom à côté, 13 px), 200 px au moins, trois colonnes dans le panneau
   `placeholder` la recherche (« Chercher un effet… », aussi son `aria-label`) ; `none` : le vide (« Aucun effet ne correspond. »)
   un item sans `class` ni `element` : aucune pastille — l'appelant passe SES `filters`, ceux du module pourraient porter une classe enfoncée
-  `pills`       des pastilles à LIBELLÉ (.hp-tog.txt, la largeur de leur mot), après celles d'élément et de classe : `{ label, options: [valeur, texte][], of(item) }` — plusieurs s'enfoncent, aucune = tout ; gardées dans `filters.pills` (les types du picker de Monstres : boss · area boss · named · monster)
+  `pills`       des pastilles à LIBELLÉ (.hp-tog.txt, la largeur de leur mot), après celles d'élément et de classe : un groupe `{ label, options: [valeur, texte][], of(item), counted? }`, ou un TABLEAU de groupes montrés dans l'ordre (B47 : le mode de jeu puis le type du picker de Monstres)
+                 dans un groupe plusieurs s'enfoncent (l'une OU l'autre), aucune = tout ; entre groupes, un item répond à CHACUN ; `of` rend une valeur, ou plusieurs (les modes d'un monstre) ; gardées par groupe, sous son libellé, dans `filters.pills`
+                 `counted` : chaque pastille porte son compte (.hp-num, atténué, après son mot) — les items du roster qui ont sa valeur dans le `seg` courant ; il suit le `seg`, ni la recherche ni les autres pastilles ; un groupe long se replie sur plusieurs lignes
   `match(item, q)` ce qui répond à la recherche, à la place de « le nom contient la saisie » — `q` : la saisie en minuscules, sans blancs autour (le début d'un mot du nom, ou de l'id, pour un monstre)
 ```
 
@@ -1205,8 +1207,11 @@ désignent. Croquis du rendu :
 .savebar   2 changements · 1 refus   [Annuler] [Enregistrer]   (absente sans monstre)
 le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : « Choisir un monstre » · badge « 543 des guides · 2451 avec le site »
    la recherche « Chercher un monstre (nom ou id)… » : chaque mot de la saisie COMMENCE un mot du nom (la règle d'Effets), ou la saisie commence l'id
-   pastilles de type (`pills` : boss · area boss · season boss · named · monster — ceux que le roster porte) ; à droite le segmenté [Guides | Site], « Guides » d'office
-   une ligne (.m-pk) : icône 36 px · nom, et dessous en atténué « mode · stage » (son id pour un add sans spawn) · badge off du type · badge edit « N guides » ; `title` = nom, id, titres de ses guides
+   pastilles de MODE DE JEU (B47 — `pills`, groupe « Mode », `counted`) : les modes que le roster porte, dans l'ordre et sous les titres du damage calc du site, chacune avec son compte dans le périmètre courant, sur trois lignes dans le panneau
+      [Story 3] [Origin Story 132] [Skyward Tower 1] [Elemental Tower 0] [Special Request 166] [World Boss 36] [Guild Raid 103] [Weekly Conquest Mission 29] [Promotion Challenge 10] [Pursuit Operation 12] [Infiltration Operation 0] [Dimensional Singularity 15] [Joint Challenge 15] [sans mode 25]
+      « sans mode », en fin : un monstre qu'aucun mode ne range (un add sans spawn, un monstre des seuls modes que le damage calc écarte) ; un mode où le roster n'a personne n'a pas de pastille
+   dessous, pastilles de type (groupe « Type » : boss · area boss · season boss · named · monster — ceux que le roster porte) ; à droite le segmenté [Guides | Site], « Guides » d'office
+   une ligne (.m-pk) : icône 36 px · nom, et dessous en atténué « modes · stages » — TOUS ses modes de jeu, sous leurs titres (« Story, Origin Story »), puis ses deux premiers stages ; son id pour un add sans spawn — · badge off du type · badge edit « N guides » ; `title` = nom, id, titres de ses guides
    les monstres des guides d'abord, par nom, puis ceux du site ; .empty « Aucun monstre ne correspond. »
 #m-panel — .m-cols, une .card.m-card par skill du kit, deux par rangée (une seule sous 1000 px), dans l'ordre du monstre
   .card   card-head : icône du skill 36 px · nom (« (sans nom) » pour un skill technique) · id · type (chasse fixe) · badge off « partagé par N monstres » (`title` : jusqu'à cinq noms) · badge edit « modifié » · badge ko « refusé »
@@ -1221,11 +1226,12 @@ le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : «
      .m-err    le refus de la carte, en rouge
   sous les cartes : le refus de l'envoi entier (`stale`, forme) ; .empty « Aucune carte de skill. »
 .card.ko (une carte refusée) : bord danger
-le hash : `#monsters/<id>` — la page l'écrit au choix du monstre : recharger y revient
+le hash : `#monsters/<id>` — la page l'écrit au choix du monstre : recharger y revient ; `#monsters/mode/<clé>` (`story`, `joint-challenge`… — B47, pour le banc) ouvre le picker sur ce mode de jeu, lui seul enfoncé ; une clé inconnue ne filtre rien
 ```
 
 Le roster vient de `GET /api/monsters/roster` (`monstersRoster` : les monstres
-des guides avec leurs guides, puis ceux du site, et `counts`), lu à la
+des guides avec leurs guides, puis ceux du site, `counts`, et `modeGroups` —
+les modes de jeu, cf. plus bas), lu à la
 PREMIÈRE venue sur l'onglet, pas au démarrage — le serveur le calcule une
 fois et le garde tant que ni les monstres, ni les donjons, ni les guides
 n'ont bougé ; sans tables du jeu sur le poste, la liste du site manque
@@ -1265,6 +1271,21 @@ l'onglet, dans `tabs/monsters.css` : `.m-char`, `.m-who`, `.m-face`, `.m-id`,
 d'effets ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
 `.m-pn`, `.m-pname`, `.m-pwhere`, et l'élargissement du panneau
 (`:has(.m-pk)`).
+
+Les modes de jeu (B47). Le picker filtre par mode « comme le damage calc » :
+`modeGroups` du serveur donne les groupes (`key`, `label`, `count` — les
+monstres du roster qui s'y affrontent), dans l'ordre et sous les titres de la
+liste de modes du damage calc du site, et chaque ligne du roster porte `modes`
+(les clés de ses groupes, par ses spawns) et `zones`. La liste est faite par
+`gameModeGroups` (`src/lib/admin/game-modes.ts`) : `encounters.json` par id de
+donjon, les donjons peuplés, ni retirés ni des skirmish du Monad Gate ; Story
+puis Origin Story en tête (les quatre modes story en deux familles), ensuite la
+première apparition ; les slugs d'un même titre en UN groupe (les trois tours,
+les deux Special Request, les deux boss de guild raid). La clé d'un groupe est
+stable et jamais localisée : `story`, `origin`, sinon le titre anglais en slug
+(`skyward-tower`). Le damage calc garde sa propre logique : les deux doivent
+rester alignés. Un quick lancé avant ce code ne sert ni `modes` ni
+`modeGroups` : pas de pastille de mode, la ligne garde la chaîne `place`.
 
 ### Items (`wide`, fait — B44)
 
