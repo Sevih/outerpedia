@@ -7,6 +7,54 @@
 
 ## 2026-10-12
 
+- **Relecture F20 (Fable) — quick : section « Extraction », la revue par
+  cible, un diff lisible, l'acceptation et les items committés, validé** —
+  commit `34f7d853`, 21 fichiers, le message attendu, ni `package.json` ni
+  le lock, rien d'un autre lot. Périmètre relu dans le diff : `diff-words.ts`
+  (la règle de `DiffHighlight` sortie telle quelle — appariement glouton à
+  vingt mots, balises couleur retirées pour comparer et rendues par segment —,
+  le composant React recâblé dessus, mêmes classes), `diff-tree.ts` (groupes
+  par racine et par `[#id]`, texte en mots sauf id résolu, le reste en lignes
+  d'arbre), `admin-inbox.ts` (`EXTRACTOR_IN_QUICK` effect/armor/item,
+  `adminExtractorMenu` ; l'inbox et `bucketsOf` gardent les dix),
+  `layout.dev.tsx`, `actions.ts` (`EXTRACTOR_DEPS` tout injecté, le moteur
+  importé à la demande ; `extractorOverview`, `extractorTarget`,
+  `acceptExtraction`, `integrateItemAction` ; `ADMIN_TO_QUICK` avec les dix
+  hrefs), quatre routes dans `server.ts`, `lib.js` (`sections.go` accepte un
+  chemin), la section dans `GROUPS` après « Tables du jeu ». **Contrôles** :
+  `pnpm typecheck` vert, `pnpm lint` vert, `pnpm test` « 216 passed, 3570
+  passed », `NODE_ENV=development pnpm exec vitest run scripts/quick
+src/lib/admin` « 54 passed, 1478 passed » — les chiffres de l'entrée.
+  **Rejoué** (tsx, moteur et git factices sur deux dictionnaires passés au
+  vrai `diffRecords`) : la cible classe et nomme (Alice diff 3 champs, Cara
+  new, Bob removed, dans cet ordre), le diff d'Alice en trois groupes —
+  « costumes › #c2 » en arbre (`id`, `name › en = Summer`), « desc » en mots
+  (« very » ajouté, sa couleur `#f00` portée par le segment), « skills »
+  avec `s2 — Guard · passive` résolu —, le filtre `new` + « ca » ne garde que
+  Cara ; `was` faux → `stale`, rien d'appelé ; sans tables → refus avant
+  d'écrire ; « Confirmer » sur effect → `acceptTarget` puis UN commit
+  `chore(extractor): effect — extraction confirmee` de
+  `data/generated/glossaries.json`, le bilan d'images au journal avec la
+  manquante nommée ; « retouches mineures » → `chore(extractor): character
+— 3 retouches mineures` ; un item neuf intégré, un item disparu retiré
+  (`chore(extractor): item Old (i2)`), un inconnu refusé. Sur le quick isolé
+  (:4796, clés vidées, GET seulement) : la vue d'ensemble en 1,2 s (dix
+  cibles, 129 persos, 4 848 monstres au périmètre du site, un seul écart au
+  12/10 : le perso nouveau `2400015`), la cible perso en 0,2 s, monstres en
+  0,3 s, items avec le curé dans sa signature, une cible inconnue en 404.
+  Trois captures relues : la table des dix cibles (comptes teintés, zéros
+  effacés, « rien à revoir », « périmètre du site » sous Monstres), la cible
+  Personnages (en-tête, la règle de la cible, « Confirmer l'extraction »,
+  filtres par statut avec leur compte, l'entité repliée), Items vide. Le
+  diff d'un vrai écart n'a pas pu être photographié sur le dépôt du jour :
+  le rejeu ci-dessus en tient lieu, et l'entrée du lot décrit un banc
+  fabriqué. Aucun POST joué. **Reste à Sevih** : les sept contrôles du TODO
+  au prochain patch, et un de plus : `#extractor/<cible>/<clé>` doit
+  arriver sur l'entité DÉPLIÉE (la capture du banc la montre repliée —
+  l'entité du jour n'a aucun champ, c'est peut-être la cause). **Suite** :
+  F21 (fiches perso, monstre, équipement, intégration, modes, sprites), seul
+  sur `scripts/quick/`, puis F22.
+
 - **quick : section « Extraction » — la revue par cible, un diff lisible,
   l'acceptation et les items committés (lot F20, étape 19 de la migration,
   premier de trois sur l'extractor)** — la revue de maintenance de l'admin

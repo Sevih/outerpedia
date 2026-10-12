@@ -98,7 +98,10 @@
       geste sur une cible lue avant un refresh → « Rien n'est écrit — … ont
       changé depuis la lecture », la cible relue. (7) Sur un poste sans
       `.gamedata` : le badge ambre, des zéros, une cible vide avec la raison,
-      aucun bouton de geste.
+      aucun bouton de geste. (8) `#extractor/<cible>/<clé>` (ou « Ouvrir »
+      d'un item du tableau de bord puis la clé) arrive sur l'entité
+      DÉPLIÉE — le banc l'a vue repliée sur le seul perso nouveau du 12/10,
+      qui n'a aucun champ (relecture F20).
 - [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick
