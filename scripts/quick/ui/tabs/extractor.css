@@ -447,3 +447,461 @@
     padding-left: 12px;
   }
 }
+
+/* ------------------------------------------------------ « Intégrer un mode »
+   Sur la cible monster : le select du mode et « Planifier » sur une ligne, puis
+   le plan dans le cadre rouge des confirmations — les ids qui seraient écrits,
+   les adds marqués. */
+#tab-extractor #ex-mode[hidden] {
+  display: none;
+}
+#tab-extractor .ex-mode-hint {
+  flex: 1 1 320px;
+  min-width: 0;
+  line-height: 1.45;
+}
+#tab-extractor .ex-mode-ids {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 12.5px;
+}
+#tab-extractor .ex-mode-ids:empty {
+  display: none;
+}
+#tab-extractor .ex-mode-id code {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--content-muted);
+}
+#tab-extractor .ex-mode-id.add {
+  color: var(--content-muted);
+}
+#tab-extractor .ex-mode-id.add::after {
+  content: ' (add)';
+  font-size: 11px;
+}
+#tab-extractor #ex-mode-go[hidden] {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ la fiche
+   L'en-tête : l'icône (le portrait d'un perso, la vignette d'un monstre sur son
+   fond de slot, la tuile d'un équipement sur son cadre), le nom, la ligne
+   d'identité, le statut, les liens croisés ; à droite « Intégrer ». Puis le
+   refus situé, le plan, le diff, et les cartes de la fiche. */
+#tab-extractor #ex-entity {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tab-extractor #ex-entity[hidden] {
+  display: none;
+}
+#tab-extractor .ex-face:empty {
+  display: none;
+}
+#tab-extractor .ex-portrait {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 12px;
+  border: 1px solid var(--line-subtle);
+  background: var(--surface-overlay);
+  object-fit: cover;
+}
+#tab-extractor .ex-slot {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+}
+#tab-extractor .ex-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+#tab-extractor .ex-slot .ex-slot-icon {
+  inset: 7%;
+  width: 86%;
+  height: 86%;
+}
+#tab-extractor .ex-slot .ex-slot-gear {
+  object-fit: contain;
+}
+#tab-extractor .ex-slot .ex-slot-badge {
+  top: -4px;
+  left: -4px;
+  width: auto;
+  height: 30%;
+  inset: auto;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.5));
+}
+#tab-extractor #ex-entity .ex-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  color: var(--content-muted);
+  font-size: 13px;
+}
+#tab-extractor #ex-entity .ex-meta code {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-extractor .ex-trait {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+#tab-extractor .ex-trait img {
+  width: 18px;
+  height: 18px;
+}
+#tab-extractor .ex-stars img {
+  width: 14px;
+  height: 14px;
+  margin-left: -4px;
+}
+#tab-extractor .ex-stars img:first-child {
+  margin-left: 0;
+}
+#tab-extractor .ex-links {
+  font-size: 13px;
+}
+#tab-extractor .ex-links:empty {
+  display: none;
+}
+#tab-extractor .ex-link {
+  color: var(--accent);
+}
+/* Le refus situé : un perso sans date de sortie — en rouge, la clé à ajouter. */
+#tab-extractor .ex-refuse {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger) 7%, transparent);
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-refuse[hidden] {
+  display: none;
+}
+#tab-extractor .ex-refuse p,
+#tab-extractor .ex-refuse ul {
+  margin: 0;
+}
+#tab-extractor .ex-refuse ul {
+  padding-left: 18px;
+}
+#tab-extractor .ex-refuse code {
+  font-family: var(--mono);
+}
+#tab-extractor .ex-iplan-files {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+/* Le diff de l'entité, dans sa carte : le `.ex-row` de la liste, sans sa ligne. */
+#tab-extractor #ex-entity-diff[hidden] {
+  display: none;
+}
+#tab-extractor #ex-entity-diff .ex-diff {
+  padding: 12px 14px;
+}
+
+/* Les cartes de la fiche : deux colonnes, une carte large (`.ex-sec-wide`)
+   prend les deux ; une seule sous 1000 px. */
+#tab-extractor #ex-sheet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+#tab-extractor #ex-sheet:empty {
+  display: none;
+}
+#tab-extractor .ex-sec-wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 1000px) {
+  #tab-extractor #ex-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-extractor .ex-sec-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#tab-extractor .ex-sec-head strong {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--content-muted);
+}
+#tab-extractor .ex-sec .hint {
+  margin: 0;
+}
+#tab-extractor .ex-sec p {
+  margin: 0;
+}
+/* La grille des stats : une cellule par stat, l'abréviation au-dessus de la valeur. */
+#tab-extractor .ex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 8px;
+}
+#tab-extractor .ex-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+}
+#tab-extractor .ex-cell-k {
+  color: var(--content-muted);
+  font-size: 11.5px;
+}
+#tab-extractor .ex-cell-v {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+#tab-extractor .ex-ctx {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--content-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+#tab-extractor .ex-pass {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 999px;
+  color: var(--content);
+  font-size: 12px;
+}
+#tab-extractor .ex-mstats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#tab-extractor .ex-mstats .form {
+  margin: 0;
+}
+/* Les listes de la fiche : rencontres, archives, costumes, bonus. */
+#tab-extractor .ex-ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+#tab-extractor .ex-enc-mode {
+  color: var(--content);
+  font-weight: 500;
+}
+#tab-extractor .ex-warn {
+  color: var(--warn);
+  font-size: 12.5px;
+}
+#tab-extractor .ex-mono {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--content-muted);
+  overflow-wrap: anywhere;
+}
+/* Les tags détectés d'un perso, un par ligne de chips. */
+#tab-extractor .ex-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#tab-extractor .ex-tag {
+  padding: 2px 8px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 999px;
+  font-size: 12.5px;
+}
+#tab-extractor .ex-tag code {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+/* Les mains et les effets structurés d'un équipement, en pastilles. */
+#tab-extractor .ex-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+#tab-extractor .ex-pill {
+  padding: 2px 8px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 6px;
+  background: var(--surface-base);
+  font-size: 12.5px;
+}
+/* Les passifs : icône, nom, niveau ; le texte au premier palier, puis au dernier. */
+#tab-extractor .ex-passives {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#tab-extractor .ex-passive {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+}
+#tab-extractor .ex-passive-head,
+#tab-extractor .ex-variant-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#tab-extractor .ex-pico {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+#tab-extractor .ex-variant {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+#tab-extractor .ex-variant-head code {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--content-muted);
+}
+#tab-extractor .ex-pieces {
+  display: flex;
+  gap: 12px;
+}
+#tab-extractor .ex-piece {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+#tab-extractor .ex-piece img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+/* Les cartes de skills, celles des Monstres : deux par rangée dans la carte large. */
+#tab-extractor .ex-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  #tab-extractor .ex-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+#tab-extractor .ex-skill .card-head {
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line-subtle);
+}
+#tab-extractor .ex-skico {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: contain;
+}
+#tab-extractor .ex-skid {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+#tab-extractor .ex-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 18px 16px;
+}
+#tab-extractor .ex-body:empty {
+  display: none;
+}
+#tab-extractor .ex-desc {
+  margin: 0;
+  color: var(--content-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+#tab-extractor .ex-chips,
+#tab-extractor .ex-fxlist {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#tab-extractor .ex-chip {
+  gap: 6px;
+  padding-left: 4px;
+}
+#tab-extractor .ex-chip.off {
+  border-style: dashed;
+  background: transparent;
+}
+#tab-extractor .ex-chip.off .ex-fx {
+  opacity: 0.5;
+}
+#tab-extractor .ex-chip .badge {
+  height: 18px;
+  padding: 0 6px;
+}
+/* La tuile d'un effet (celle des Monstres, `.m-fx`) : fond noir, l'icône en
+   masque teinté de sa nature — les teintes de `globals.css`. */
+#tab-extractor .ex-fx {
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: #000;
+}
+#tab-extractor .ex-fx.none {
+  border: 1px dashed var(--line);
+  background: transparent;
+}
+#tab-extractor .ex-fx i {
+  position: absolute;
+  inset: 0;
+  background: var(--buff-tint);
+  -webkit-mask: var(--ex-src) center / contain no-repeat;
+  mask: var(--ex-src) center / contain no-repeat;
+  mask-mode: luminance;
+}
+#tab-extractor .ex-fx.debuff i {
+  background: var(--debuff-tint);
+}
+#tab-extractor .ex-fx img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

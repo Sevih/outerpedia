@@ -4,9 +4,10 @@
     <p class="hint">
       Le jeu a bougé : ce que l'extraction fraîche — bâtie des tables du jeu de ce poste —
       changerait à ce que le site committe (data/generated/), cible par cible, entité par entité.
-      Rien ne se lit sans les tables. Un geste écrit le fichier et committe ; les images qu'il met
-      en place attendent dans le staging, que « Committer » de la section Patch pousse. Rien ne part
-      en ligne avant « Pousser » et le build de la CI.
+      Une entité a sa fiche : ce que le jeu en dit, son écart, et « Intégrer », qui l'écrit. Rien ne
+      se lit sans les tables. Un geste écrit le fichier et committe ; les images qu'il met en place
+      attendent dans le staging, que « Committer » de la section Patch pousse. Rien ne part en ligne
+      avant « Pousser » et le build de la CI.
     </p>
   </div>
 
@@ -68,19 +69,27 @@
       </div>
     </div>
 
-    <!-- Le bilan d'images du dernier geste : le staging, que Patch pousse. -->
-    <div class="card pad ex-assets" id="ex-assets" aria-label="Images" hidden>
-      <div class="card-head ex-assets-head">
-        <strong>Images mises en place</strong>
-        <button class="btn icon ex-end" id="ex-assets-close" aria-label="Fermer le bilan">✕</button>
+    <!-- « Intégrer un mode » : la cible monster seule — le select, le plan, la confirmation. -->
+    <div class="card pad" id="ex-mode" aria-label="Intégrer un mode" hidden>
+      <div class="form">
+        <div class="field">
+          <label for="ex-mode-select">Intégrer un mode</label>
+          <select id="ex-mode-select" class="w-search"></select>
+        </div>
+        <button class="btn ghost" id="ex-mode-plan" type="button">Planifier</button>
+        <span class="lbl ex-mode-hint">
+          Tous les monstres qui spawnent dans ce mode, et leurs adds : entités, skills et donjons
+          écrits, damage et solver re-dérivés, UN commit.
+        </span>
       </div>
-      <p id="ex-assets-text"></p>
-      <ul class="ex-missing" id="ex-assets-missing"></ul>
-      <p class="hint">
-        Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les
-        pousse sur R2 avec le commit de publication — rien ne part d'ici.
-        <button class="btn ghost sm" type="button" data-go="patch">Ouvrir Patch</button>
-      </p>
+      <div class="ex-plan" id="ex-mode-box" hidden>
+        <p id="ex-mode-text"></p>
+        <p class="ex-mode-ids" id="ex-mode-ids"></p>
+        <div class="actions">
+          <button class="btn danger" id="ex-mode-go" type="button">Écrire et committer</button>
+          <button class="btn ghost" id="ex-mode-cancel" type="button">Annuler</button>
+        </div>
+      </div>
     </div>
 
     <div class="card pad" aria-label="Recherche et filtres">
@@ -111,5 +120,66 @@
         <button class="btn ghost sm" id="ex-more" type="button"></button>
       </div>
     </div>
+  </div>
+
+  <!-- Le bilan d'images du dernier geste (d'une cible ou d'une fiche) : le staging, que Patch pousse. -->
+  <div class="card pad ex-assets" id="ex-assets" aria-label="Images" hidden>
+    <div class="card-head ex-assets-head">
+      <strong>Images mises en place</strong>
+      <button class="btn icon ex-end" id="ex-assets-close" aria-label="Fermer le bilan">✕</button>
+    </div>
+    <p id="ex-assets-text"></p>
+    <ul class="ex-missing" id="ex-assets-missing"></ul>
+    <p class="hint">
+      Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les
+      pousse sur R2 avec le commit de publication — rien ne part d'ici.
+      <button class="btn ghost sm" type="button" data-go="patch">Ouvrir Patch</button>
+    </p>
+  </div>
+
+  <!-- La fiche d'une entité (`#extractor/<cible>/<clé>`) : le frais, l'écart, « Intégrer ». -->
+  <div id="ex-entity" hidden>
+    <div class="card pad ex-head" aria-label="Fiche">
+      <div class="ex-who">
+        <button class="btn ghost sm" id="ex-entity-back" type="button">
+          ← <span id="ex-entity-target">cible</span>
+        </button>
+        <div class="ex-face" id="ex-face"></div>
+        <div class="ex-id">
+          <strong id="ex-entity-title"></strong>
+          <span class="ex-meta" id="ex-entity-meta"></span>
+          <span class="ex-badges" id="ex-entity-badges"></span>
+          <span class="ex-links" id="ex-entity-links"></span>
+        </div>
+        <div class="ex-acts">
+          <button class="btn primary" id="ex-integrate" type="button" hidden>Intégrer</button>
+        </div>
+      </div>
+      <p class="hint" id="ex-entity-note"></p>
+      <!-- Le refus situé : un perso sans date de sortie — la clé à ajouter au curé, à la main. -->
+      <div class="ex-refuse" id="ex-missing" hidden></div>
+      <!-- Ce qu'« Intégrer » va écrire, et sa confirmation. -->
+      <div class="ex-plan" id="ex-iplan" hidden>
+        <p id="ex-iplan-text"></p>
+        <ul class="ex-iplan-files" id="ex-iplan-files"></ul>
+        <div class="actions">
+          <button class="btn danger" id="ex-iplan-go" type="button">Écrire et committer</button>
+          <button class="btn ghost" id="ex-iplan-cancel" type="button">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- L'écart de l'entité, le diff lisible de la cible, en tête. -->
+    <div class="card" id="ex-entity-diff" aria-label="Ce qui change" hidden>
+      <div class="card-head">
+        <strong>Ce qui change</strong>
+        <span class="lbl" id="ex-entity-fields"></span>
+      </div>
+      <div class="ex-row" id="ex-entity-diff-body"></div>
+    </div>
+
+    <!-- La fiche selon la cible (posée par `renderSheet`). -->
+    <div id="ex-sheet"></div>
+    <div class="empty" id="ex-entity-empty" hidden>Lecture…</div>
   </div>
 </section>

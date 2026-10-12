@@ -4,7 +4,7 @@
 // sa carte, « rétablir » la rend, « ＋ effet » en ajoute une du glossaire, et le
 // menu d'une chip la pose sur une autre carte du kit. Une savebar, un
 // enregistrement, un commit. Les stats, l'intégration et les versions d'un
-// monstre restent à l'extractor de l'admin.
+// monstre sont sur sa fiche de la section « Extraction » : l'en-tête y mène.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { gameText } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
@@ -149,7 +149,7 @@ function who() {
           m.place ? `<span>${esc(m.place)}</span>` : ''
         }</span>
         <span class="m-guides">${guides()}</span>
-        <span class="lbl">Stats, intégration et versions : extractor (étapes 19-20).</span>
+        <span class="lbl">Stats, intégration et versions : <a class="m-goto" href="#extractor/monster/${esc(m.id)}" data-go="extractor/monster/${esc(m.id)}">extraction</a></span>
       </div>`
     : '<span class="lbl">Aucun monstre choisi.</span>';
   $('m-pick-label').textContent = m ? 'Changer de monstre' : 'Choisir un monstre';
@@ -518,6 +518,14 @@ function pickMonster() {
   });
 }
 $('m-pick').onclick = pickMonster;
+// « extraction » de l'en-tête : la fiche du monstre dans la section Extraction
+// (`sections.go` par chemin ; des changements en attente peuvent retenir ici).
+$('m-who').addEventListener('click', (e) => {
+  const to = e.target.closest('[data-go]')?.dataset.go;
+  if (!to) return;
+  e.preventDefault();
+  sections.go(to);
+});
 
 /** Sans monstre, l'onglet n'a rien à montrer : le picker s'ouvre de lui-même. */
 function pickIfEmpty() {

@@ -37,9 +37,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       // home) — le Monstre et l'Item ferment la liste (décision Sevih). Effect,
       // Armor et Item : portés dans quick (Données › Extraction, lot F20 — la
       // revue par cible, l'acceptation, l'intégration des items), liens
-      // retirés le 12/10 ; les pages restent joignables par leur URL jusqu'au
-      // retrait de l'admin. Les sept autres restent jusqu'aux lots F21 et F22
-      // (fiches par entité, intégration, versionnage).
+      // retirés le 12/10. Character, EE, Weapons, Amulet, Talisman, Sets :
+      // portés dans quick (la même section, lot F21 — la fiche par entité et
+      // son intégration, le mode), liens retirés le 12/10 ; les pages restent
+      // joignables par leur URL jusqu'au retrait de l'admin. Monster reste
+      // jusqu'au lot F22 (le versionnage, sur sa fiche).
       title: 'Extractor',
       items: adminExtractorMenu().map((e) => ({
         label: e.label,

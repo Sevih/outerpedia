@@ -7,6 +7,162 @@
 
 ## 2026-10-12
 
+- **quick : section « Extraction » — les fiches perso, monstre et équipement,
+  l'intégration et les modes committés, les sprites du jeu (lot F21, étape 20
+  de la migration, deuxième de trois sur l'extractor)** — après la revue par
+  cible de F20, chaque entité d'une cible à fiche a la sienne dans quick :
+  `#extractor/<cible>/<clé>` ouvre la fiche d'un perso, d'un monstre ou d'une
+  entité d'équipement (ee, weapon, amulet, talisman, set — par FAMILLE, l'unité
+  de la sidebar et du catalogue ; pas d'armure : la cible n'a ni fiche ni
+  intégration dans l'admin, choix noté dans `quick-migration.md`), lue du FRAIS
+  — ce que l'admin savait pour un perso et un monstre, et ne savait pas pour un
+  équipement `new` (`GearDetail` lisait le committé). Une cible sans fiche
+  (effet, armure, item) garde le comportement de F20 : la clé est l'entité
+  dépliée. **Ce qui descend dans `src/lib/admin/` (testé)** : `monster-sheet.ts`
+  — les rencontres d'un monstre résolues (le frais, le committé en repli),
+  triées, plafonnées à vingt-cinq puis « n de plus » ; les contextes de stats
+  par spawn dépliés par palier ; `monsterStatsSheet`, le calcul de
+  `MonsterStatsCard` (`statAt`, l'ordre de l'écran du jeu, le format, les
+  quirks de compte) rendu en OPTIONS prêtes pour un `select` — « rang · Lv »,
+  « Mode · Stage (palier) », la grille, le contexte éclaté en lignes (niveau et
+  transcendance ; modificateurs du donjon et quirks ou « valeurs du templet,
+  interpolées » ; dégâts, barre du palier, PV du mode), les passifs
+  dédoublonnés ; le déclencheur d'enrage d'un `rage_enterN` ; les relations
+  (invocateurs, kit lié, invoqués) ; `gear-sheet.ts` — `GEAR_TARGETS`, le pont
+  cible de revue ↔ kind d'intégration ↔ slot ↔ clé de famille (la table
+  `INTEGRATE` de `GearDetail`), et `gearSheet` : une famille trouvée par son id
+  OU l'id d'un membre (la revue est keyée par item, la fiche par famille), ses
+  mains sur les pools roulés seuls, ses passifs résolus sur le catalogue frais
+  (`fillPlaceholders`), ses variantes par classe, un EE (ses mains sans
+  l'option interne), un set (la meilleure pièce par slot, les bonus nommés par
+  la stat officielle ou la description) ; `release-check.ts` — le refus « date
+  de sortie manquante » rendu AVANT d'écrire et sans lever : la dérivation de
+  `releasesForRoster` rejouée, qui dit QUI manque ; `monster-icon.ts` prend la
+  route des sprites en paramètre (quick a la sienne) ; `admin-inbox.ts` :
+  `EXTRACTOR_IN_QUICK` gagne character, ee, weapon, amulet, talisman, set —
+  seul monster reste au menu de l'admin (`layout.dev.tsx`, F22) ;
+  `datagen/extractor/targets.ts` exporte `freshEquipment`, le build
+  d'équipement entier mémoïsé (la fiche a besoin des familles, des pools et
+  des passifs, pas du seul slot). **Serveur** (`actions.ts`, `ExtractorDeps`
+  étendu — tout injecté : `entityReview`, les bundles, l'équipement frais, les
+  rencontres, les immunités, les statuts référencés, les archives, les dates
+  manquantes, les quatre intégrations du moteur, `derivedFiles`,
+  `spriteIndex` ; cinq routes dans `server.ts`) : `extractorEntity(target,
+key)` → `GET /api/extractor/entity?target=&key=` (le statut de revue et le
+  diff en arbre de F20, la fiche selon la cible — le perso frais : stats,
+  tags détectés avec leur groupe, cartes de skills par `characterKitCards`
+  sous les règles seules aux sprites BRUTS du jeu (un perso nouveau n'a rien
+  sur R2), statuts référencés résolus par le glossaire, costumes, les dates
+  de sortie qui MANQUERAIENT ; le monstre : l'en-tête aux sprites (`MT_*`,
+  `GD_Slot_Bg_*`, `CT_Slot_Boss` — ce qu'`img.monster` n'a pas), le committé
+  en repli pour un disparu, les stats par rencontre, les rencontres, les
+  relations, les immunités en chips nommées et les réfs sans glossaire avec
+  le nom du tooltip, les cartes par `monsterKitCards` SANS curation (la
+  fiche montre ce que le jeu dit ; le câblage est l'onglet Monstres), les
+  archives figées en lecture ; l'équipement par `gearSheet` —, le PLAN du
+  geste (les fichiers, le commit), les liens croisés, `was` ; une cible sans
+  fiche répond 404, sans tables la raison) ; `integrateEntity(target, key,
+was)` → `POST /api/extractor/integrate` : la porte de F20 (tables, `was`
+  → `stale`), le refus « date de sortie manquante » AVANT d'écrire (la clé à
+  ajouter à `data/curated/character-release.json`, à la main — pas d'éditeur
+  ici), puis `integrateCharacter`, `integrateMonster` ou `integrateEquipment`
+  du moteur — `syncDerived` est DANS les deux premiers, inchangés — et UN
+  `commitPaths` des fichiers du rapport PLUS ceux de `data/generated/damage`
+  et `solver` tels qu'ils sont sur le disque (`derivedFiles`, des chemins
+  explicites, jamais un dossier ; `data/extracted/solver` n'est pas suivi,
+  `.gitignore` l'exclut) : `chore(extractor): <cible> <nom> (<clé>) integre`
+  — la clé de la FAMILLE pour l'équipement, quel que soit le membre cliqué ;
+  le bilan d'images en lignes de journal ; `planMode(mode)` → `GET
+/api/extractor/mode?mode=` (les spawnés du mode puis leurs adds, la règle
+  d'`integrateMonsterMode` rejouée, le compte, le message, `was`) et
+  `integrateMode(mode, was)` → `POST /api/extractor/mode` (`chore(extractor):
+mode <mode> — n monstres integres`, un mode vide refusé avant d'écrire) ; la
+  liste des modes vient avec la cible monster (`modes`, la règle de la
+  sidebar pour les libellés partagés) ; `spriteFile(name)` → `GET
+/api/sprite/<nom>` (l'index de `buildImageIndex`, refait quand les tables
+  bougent ; par basename, insensible à la casse, extension tolérée ; 404
+  sinon, jamais un chemin) ; `quickTabOf` : un href d'ENTITÉ de l'admin
+  (`/admin/extractor/<x>/<id>`) mène à sa fiche. **La page**
+  (`tabs/extractor.{html,js,css}`) : sur une cible à fiches, chaque ligne a
+  « Fiche » ; la fiche — l'en-tête (le portrait `CT_<id>` du jeu, la vignette
+  du monstre sur son fond de slot avec le badge BOSS, la tuile de
+  l'équipement sur son cadre de rareté ; le nom ; l'identité en icônes et
+  slugs ; le statut en badge ; « Voir aussi : fiche perso » / « fiche perso ›
+  EE » / « câbler les chips » ; à droite « Intégrer » ou « Ré-intégrer »,
+  caché sans frais et à jour pour un perso ou un monstre — la règle de
+  l'admin —, éteint tant qu'une date manque), le refus situé en rouge, le
+  plan dans le cadre des confirmations puis « Écrire et committer », le diff
+  en tête s'il y en a un, et les cartes de la fiche en deux colonnes : le
+  perso (stats, tags, skills aux chips d'effets — la tuile des Monstres
+  recopiée —, statuts référencés, costumes), le monstre (le `select` de la
+  rencontre, le palier le plus haut d'office, qui redessine la grille et le
+  contexte sans rien demander ; rencontres ; immunités ; skills ; archives),
+  l'équipement (mains en pastilles, passifs au premier et au dernier palier,
+  variantes par classe, pièces et bonus d'un set, membres). « Intégrer un
+  mode » sur la cible monster : le `select`, « Planifier » montre le PLAN
+  (le texte, les ids — les adds marqués —, quarante puis « n de plus »),
+  « Écrire et committer ». Le bilan d'images vit au niveau de la section, il
+  suit le dernier geste. Une adresse `/images/…` passe sous `imgBase`, une
+  adresse `/api/sprite/…` est celle de quick (`srcAt`). Jamais `dirty`. Les
+  liens croisés : « extraction » dans l'en-tête de la Fiche perso et de
+  Monstres (`sections.go` par chemin, `data-go`), à la place du libellé
+  « extractor (étapes 19-20) ». **Docs** : `quick-migration.md` (20 FAIT pour
+  les fiches et l'intégration, F22 reste ; la note sur les armures),
+  `STYLE.md` (le croquis de la fiche et du mode, les classes), TODO (les
+  contrôles au prochain patch). **Choix du lot** : `EffectHiddenToggle` n'est
+  PAS porté en case — l'onglet Effets (B41) édite déjà `hidden` avec sa
+  savebar et son commit, un second écrivain du même curé depuis une fiche en
+  lecture serait une seconde voie à tenir ; la fiche montre le badge « caché
+  du live » et chaque statut mène à sa fiche dans Effets ; les cartes de
+  skills d'un monstre sont sous les règles seules (pas de `chipOwner`,
+  `chipHide`, `chipAdd` : c'est l'affaire de Monstres) ; la « Source » de
+  `GearDetail` (boss, boutiques) n'est pas reprise — elle vient de
+  `sources.json`/`bosses.json`, hors de la cible, et l'intégration ne la
+  touche pas ; le diff montré sur une fiche d'équipement est celui de la clé
+  cliquée (la revue est par item), la fiche celle de la famille ; les
+  messages de commit prennent l'id de la cible (`character`, `monster`,
+  `weapon`…), comme F20. **Vérifié** : `pnpm typecheck` vert (sortie vide),
+  `pnpm lint` vert (sortie vide), `pnpm test` « Test Files 219 passed (219) ·
+  Tests 3610 passed (3610) », `NODE_ENV=development pnpm exec vitest run
+scripts/quick src/lib/admin` « 57 passed · 1518 passed ». Tests :
+  `monster-sheet.test.ts` (10), `gear-sheet.test.ts` (6),
+  `release-check.test.ts` (3), `admin-inbox.test.ts` (le menu réduit à
+  monster), `actions.test.ts` (la vue d'ensemble et la cible disent `sheet`
+  et `modes` ; la fiche d'un perso nouveau, modifié, disparu — avec et sans
+  date de sortie —, d'un monstre, d'une arme par l'id d'un membre ; les 404
+  et sans tables ; « Intégrer » un perso à moteur et git factices — les
+  fichiers du rapport ET ceux de damage/solver dans UN commit —, le refus
+  sans date avant d'écrire, un monstre, une arme à l'id de la famille sans
+  re-dérivation, la porte (`stale`, tables, cible sans fiche, clé vide,
+  absent du frais) ; le plan d'un mode, le mode intégré, le mode vide refusé
+  ; le sprite trouvé, 404, jamais un chemin), `ui-serve.test.ts` (la page en
+  happy-dom : les trois formes du hash dont la fiche et le repli sur
+  l'entité dépliée, « Fiche » par ligne, la fiche d'un perso nouveau — en-tête,
+  cartes, chips, statut référencé —, le refus sans date, le perso modifié —
+  diff, plan, geste, fiche relue, bilan —, le monstre — slot, badge, select
+  qui redessine, rencontres, immunités, archives —, l'EE, l'absent et sans
+  tables, le mode — select, plan, geste, cible relue ; `READ_ONLY_POSTS` sans
+  les deux POST, la route sprite un GET ; les liens « extraction » de
+  Monstres). Banc : quick ISOLÉ sur :4797 (clés vidées, GET seulement) —
+  `/api/extractor/entity` pour le perso 2000001 en 0,7 s, l'EE en 0,14 s, le
+  boss des guides 51000031 (Iota, stages 8 à 10, les modificateurs et les
+  quirks, six immunités, six skills dont l'enrage « à 50 % PV · 4 tours ») en
+  0,35 s, la famille d'armes 1 par son membre 151, la cible monster avec
+  vingt modes, les sprites `GD_Slot_Bg_03` et `CT_Slot_Boss` en 200 et un
+  inconnu, un chemin en 404 ; `shot.mjs --hash extractor/character/2000001`,
+  `extractor/monster/51000031`, `extractor/ee/2000001`, `extractor/monster` :
+  quatre captures relues (la fiche de K avec ses cartes et chips, Iota avec
+  le select, la grille de onze stats et le contexte en trois lignes, les
+  rencontres et les immunités, l'EE de K sur son cadre, la carte du mode sur
+  la cible Monstres). Aucun POST d'intégration joué (pas dans
+  `READ_ONLY_POSTS`) : leurs refus sont testés. **Laissé** : le versionnage
+  et le ré-épinglage (F22 : le geste sur la fiche monstre, la liste des
+  archives est déjà là), les armures (pas de fiche), la relecture du mode et
+  des fiches à l'écran au prochain patch (TODO). Hors périmètre, repéré :
+  `#extractor/<cible>/<clé>` sur une cible à fiches ouvre désormais la FICHE,
+  plus l'entité dépliée — le contrôle (8) du TODO de F20 vaut encore pour
+  effect, armor et item.
+
 - **Relecture F20 (Fable) — quick : section « Extraction », la revue par
   cible, un diff lisible, l'acceptation et les items committés, validé** —
   commit `34f7d853`, 21 fichiers, le message attendu, ni `package.json` ni

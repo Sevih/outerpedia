@@ -105,9 +105,32 @@ fichier que l'écran a vus, et refuse `stale` sinon ; le bilan d'images se
 lit après, avec un lien vers Patch, dont « Committer » pousse le staging.
 Sans `.gamedata` rien ne se lit et l'écran le dit. Hash `#extractor`,
 `#extractor/<cible>`, `#extractor/<cible>/<clé>`. Les dix items
-`extract:<id>` du Tableau de bord ouvrent leur cible ici. Liens Effect,
-Armor et Item retirés du menu admin le 12/10 — les sept autres restent
-jusqu'à F21 (fiches et intégration) et F22 (versionnage)), Tables du jeu (=
+`extract:<id>` du Tableau de bord ouvrent leur cible ici. Puis les FICHES
+par entité, étape 20, lot F21 : `#extractor/<cible>/<clé>` ouvre la fiche
+d'un perso, d'un monstre ou d'une entité d'équipement (ee, weapon, amulet,
+talisman, set — par FAMILLE ; pas d'armure, choix), lue du FRAIS — l'écart
+de F20 en tête s'il y en a un, l'en-tête aux sprites bruts du jeu
+(`GET /api/sprite/<nom>`, le même index que l'admin), et UN geste
+« Intégrer » (ou « Ré-intégrer ») : le plan en clair (les fichiers, le
+commit), la confirmation, puis `integrateCharacter`, `integrateMonster` ou
+`integrateEquipment` du moteur — `syncDerived` compris pour le perso et le
+monstre, dont les fichiers de `damage/` et `solver/` partent dans le même
+commit `chore(extractor): <cible> <nom> (<clé>) integre` —, le bilan
+d'images après, et « Ouvrir Patch » pour pousser le staging. Un perso sans
+date de sortie est REFUSÉ avant d'écrire, la clé à ajouter à
+`data/curated/character-release.json` à la main. La fiche perso : stats
+extraites, tags détectés, cartes de skills, statuts référencés (un lien vers
+Effets, pas de case ici — choix), costumes. La fiche monstre : les stats à
+la rencontre dans un `select` « rang · Lv », la grille, le contexte en deux
+ou trois lignes, les rencontres (vingt-cinq puis « n de plus »), les
+immunités, les skills aux sprites du jeu, la liste des archives figées en
+lecture (F22 y posera le geste). « Intégrer un mode » sur la cible monster :
+le `select`, le PLAN (les ids, leur nombre) avant le geste,
+`chore(extractor): mode <mode> — n monstres integres`. Les liens croisés :
+« fiche perso » ↔ « extraction », « câbler les chips » ↔ « extraction ». Liens
+Effect, Armor et Item retirés du menu admin le 12/10 (F20), Character, EE,
+Weapons, Amulet, Talisman et Sets aussi (F21) — Monster reste jusqu'à F22
+(versionnage)), Tables du jeu (=
 Tools › Game data, étape 8, lot B38 : les
 tables brutes de `.gamedata/parsed/`, en lecture seule — un champ de recherche
 à la place de la liste latérale, ses suggestions rangées par USAGE : les
@@ -267,9 +290,8 @@ numérotation des étapes ne change pas.
 - **21 Patch** — FAIT, lot C10 (cf. « Déjà dans quick ») : la chaîne
   `datagen/refresh.ts`, la promotion et le commit, lancés de la section
   « Patch » du groupe Accueil. Les persos non intégrés restent gardés :
-  l'intégration par entité (20) reste dans l'admin tant qu'elle n'est
-  pas portée, et son lien reste ; la revue par cible (19) est dans quick
-  depuis F20.
+  l'intégration par entité (20) est dans quick depuis F21 (la fiche d'une
+  entité, « Intégrer ») ; la revue par cible (19) depuis F20.
 
 ## Ordre et inventaire
 
@@ -468,11 +490,21 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
       (`diff-tree.ts`, `diff-words.ts`), les entités repliées par défaut et
       paginées, les gestes avec leur plan et leur confirmation.
 
-20. **Extractor › intégration**
+20. **Extractor › intégration** — FAIT pour les FICHES et l'INTÉGRATION,
+    lot F21 : la fiche d'une entité dans la section « Extraction » (cf.
+    « Déjà dans quick ») — perso, monstre, équipement par famille (ee,
+    weapon, amulet, talisman, set ; pas d'armure : la cible n'a ni fiche
+    ni intégration dans l'admin, choix), « Intégrer » avec son plan et sa
+    confirmation, « Intégrer un mode », les sprites bruts du jeu, les liens
+    croisés avec la Fiche perso et Monstres. Les six liens quittent le menu
+    de l'admin ; Monster reste jusqu'à F22. Reste le VERSIONNAGE (F22) :
+    « Figer et ré-épingler » en un geste sur la fiche monstre, qui porte déjà
+    la liste des archives en lecture.
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
     - Agacements : (reporté de l'étape 12 — « c'est le bordel, surtout la
       partie versionnage ») versionnage à repenser : les archives et
-      l'épinglage en UN geste qui montre les guides touchés AVANT de figer.
+      l'épinglage en UN geste qui montre les guides touchés AVANT de figer
+      — F22.
 
 21. **Patch : lanceur et journal** — FAIT, lot C10 : la section « Patch »
     (cf. « Déjà dans quick »). La ligne « Agacements » était vide : les

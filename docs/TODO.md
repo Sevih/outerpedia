@@ -68,8 +68,11 @@
       acceptation (section « Extraction » des Données, lot F20 — les dix
       cibles, leurs entités et un diff lisible, « Confirmer l'extraction »,
       les retouches mineures, « Intégrer » / « Retirer » un item ; les liens
-      Effect, Armor et Item quittent le menu de l'admin, les sept autres
-      attendent F21 — fiches et intégration — et F22 — versionnage). Clos sans portage (lot A34) : Gear presets
+      Effect, Armor et Item quittent le menu de l'admin), Extractor › fiches
+      et intégration (la même section, lot F21 — la fiche d'un perso, d'un
+      monstre, d'une famille d'équipement, « Intégrer », « Intégrer un
+      mode », les sprites du jeu ; les six liens quittent le menu de l'admin,
+      Monster attend F22 — versionnage). Clos sans portage (lot A34) : Gear presets
       (non porté, le fichier s'édite à la main) et Tag control (le contrôle
       est le test, bloquant dans `pnpm commit`).
       À faire par Sevih : remplir
@@ -102,6 +105,32 @@
       d'un item du tableau de bord puis la clé) arrive sur l'entité
       DÉPLIÉE — le banc l'a vue repliée sur le seul perso nouveau du 12/10,
       qui n'a aucun champ (relecture F20).
+- [ ] **« Extraction » › fiches et intégration — contrôles à l'écran (lot
+      F21)** : le banc ne clique pas, aucun POST d'intégration n'a été joué
+      (ils ne sont pas dans `READ_ONLY_POSTS`) ; leurs refus sont testés.
+      Relancer quick d'abord (Ctrl-C puis `pnpm quick` : cinq routes
+      nouvelles). Au prochain patch, un perso NOUVEAU : (1) sa fiche
+      (`#extractor/character/<id>`, ou « Fiche » sur sa ligne) — le portrait
+      et les icônes de skills viennent du jeu (`/api/sprite/…`), pas du
+      site ; d'abord SANS date de sortie dans
+      `data/curated/character-release.json` : le cadre rouge nomme l'id,
+      « Intégrer » est éteint ; puis la date posée à la main, la fiche
+      relue, « Intégrer » → le plan (characters.json, skills.json, slugs,
+      dates, damage/solver, images), « Écrire et committer » → UN commit
+      `chore(extractor): character <nom> (<id>) integre` qui porte
+      `skills.json` ET `data/generated/damage/*`, `solver/*` (à lire avec
+      git show --stat HEAD), le bilan d'images dans sa carte, Patch ›
+      « Committer » pousse le staging. (2) Un monstre : « Intégrer » (ou « Ré-intégrer »)
+      → `chore(extractor): monster <nom> (<id>) integre` avec
+      monsters.json, monster-skills.json, encounters.json s'il spawne, et
+      damage/solver ; le `select` des rencontres change la grille. (3) Un
+      mode sur la cible Monstres : « Planifier » montre les ids AVANT, puis
+      `chore(extractor): mode <mode> — n monstres integres`. (4) Une famille
+      d'armes depuis l'id d'un membre : UN commit à l'id de la FAMILLE, avec
+      `families.json` et les pools/passifs. (5) Les liens croisés : « fiche
+      perso » / « câbler les chips » depuis la fiche, « extraction » depuis
+      la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
+      avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
 - [ ] **« Guides » › guides généraux et import — contrôles à l'écran (lot
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick

@@ -291,10 +291,13 @@ describe('shot — la page que le banc de captures photographie', () => {
     expect(READ_ONLY_POSTS.has('/api/guides/version')).toBe(false);
   });
 
-  it('de l’extraction, ne relaie aucun POST : confirmer, appliquer, intégrer écrivent et committent', () => {
+  it('de l’extraction, ne relaie aucun POST : confirmer, appliquer, intégrer (un item, une entité, un mode) écrivent et committent ; la fiche, le plan d’un mode et un sprite sont des GET', () => {
     expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/extractor'))).toEqual([]);
     expect(READ_ONLY_POSTS.has('/api/extractor/accept')).toBe(false);
     expect(READ_ONLY_POSTS.has('/api/extractor/item')).toBe(false);
+    expect(READ_ONLY_POSTS.has('/api/extractor/integrate')).toBe(false);
+    expect(READ_ONLY_POSTS.has('/api/extractor/mode')).toBe(false);
+    expect([...READ_ONLY_POSTS].filter((path) => path.startsWith('/api/sprite'))).toEqual([]);
   });
 
   it('des monstres, ne relaie aucun POST : le roster et l’état d’un kit sont des GET', () => {
@@ -5457,8 +5460,11 @@ describe('Monstres — la page, sur le vrai markup', () => {
       ['Annihilator Guide', 'https://outerpedia.local/en/guides/joint-challenge/annihilator'],
       ['S3 Hard : Annihilator', 'https://outerpedia.local/en/guides/adventure/S3-1-10'],
     ]);
-    // Ce que l'onglet ne porte pas, et où le trouver.
-    expect(who.textContent).toContain('Stats, intégration et versions : extractor (étapes 19-20).');
+    // Ce que l'onglet ne porte pas, et où le trouver : la fiche d'extraction du monstre.
+    expect(who.textContent).toContain('Stats, intégration et versions : extraction');
+    expect(who.querySelector('[data-go]')?.getAttribute('data-go')).toBe(
+      `extractor/monster/${BOSS}`,
+    );
     expect(page.el('m-pick-label').textContent).toBe('Changer de monstre');
     expect(page.el('m-bar').hidden).toBe(false);
     expect(page.count()).toBe('aucune modification');
@@ -11534,6 +11540,193 @@ describe('Extraction — la page, sur le vrai markup', () => {
     { key: '15003', name: 'Stamina', status: 'new', fields: 0, diff: [] },
     { key: '15002', name: 'Gone Gem', status: 'removed', fields: 0, diff: [] },
   ];
+  /** Les cibles qui ont une fiche (`isSheetTarget` du serveur). */
+  const SHEET_TARGETS = ['character', 'monster', 'ee', 'weapon', 'amulet', 'talisman', 'set'];
+  const MODES = [{ value: 'joint_challenge', label: 'Joint Challenge' }];
+  const MODE_PLAN = {
+    mode: 'joint_challenge',
+    label: 'Joint Challenge',
+    ids: [
+      { id: '400101', name: 'Slime', add: false },
+      { id: '400109', name: 'Slime add', add: true },
+    ],
+    count: 2,
+    commit: 'chore(extractor): mode joint_challenge — 2 monstres integres',
+    was: 'sig:monster:v1',
+  };
+  const CARD = {
+    id: '101',
+    name: 'S1',
+    type: 'first',
+    typeLabel: 'first',
+    desc: 'Deal <color=#ff0000>30%</color> damage',
+    iconSrc: '/api/sprite/IC_101',
+    chips: [{ ref: 'Burn', name: 'Burn', icon: 'IC_Burn', isDebuff: true }],
+  };
+  const sheetBase = (target: string, key: string, review: string, fields = 0) => ({
+    target,
+    label: TARGETS.find((t) => t.id === target)?.label ?? 'Armes',
+    file: TARGETS.find((t) => t.id === target)?.file ?? 'equipment/weapon.json',
+    key,
+    tables: true,
+    effectSprite: 'images/ui/effect',
+    review,
+    fields,
+    diff: fields ? ENTITIES[0].diff : [],
+    was: `sig:${target}:v1`,
+  });
+  const CHARACTER = (missing: boolean) => ({
+    ...sheetBase('character', '2000003', 'added'),
+    character: {
+      id: '2000003',
+      name: 'Demiurge Lambda',
+      element: 'fire',
+      class: 'striker',
+      race: 'human',
+      rarity: 3,
+      chain: 'start',
+      portrait: '/api/sprite/CT_2000003',
+      stats: [
+        { slug: 'atk', abbr: 'ATK', value: '100 – 1000' },
+        { slug: 'hp', abbr: 'HP', value: '50' },
+      ],
+      tags: [{ slug: 'festival', label: 'Festival', group: 'limited' }],
+      cards: [CARD],
+      effects: [{ id: '12', name: 'Burn', icon: 'IC_Burn', isDebuff: true, hidden: true }],
+      costumes: ['Base', 'Summer'],
+      missing: missing ? [{ id: '2000003', label: 'Lambda' }] : [],
+    },
+    plan: {
+      files: [
+        'characters.json',
+        'skills.json',
+        'data/generated/damage/* et data/generated/solver/* (re-dérivés)',
+      ],
+      commit: 'chore(extractor): character Demiurge Lambda (2000003) integre',
+    },
+    links: { sheet: 'character/2000003' },
+  });
+  const SHEETS: Record<string, unknown> = {
+    'character/2000001': {
+      ...sheetBase('character', '2000001', 'changed', 3),
+      character: { ...CHARACTER(false).character, id: '2000001', name: 'Aer', missing: [] },
+      plan: {
+        files: ['characters.json'],
+        commit: 'chore(extractor): character Aer (2000001) integre',
+      },
+      links: { sheet: 'character/2000001' },
+    },
+    'monster/400101': {
+      ...sheetBase('monster', '400101', 'same'),
+      monster: {
+        id: '400101',
+        name: 'Slime',
+        nickname: 'The Blob',
+        type: 'boss',
+        element: 'water',
+        class: 'defender',
+        race: 'beast',
+        rarity: 3,
+        aiType: 'attack',
+        iconSrc: '/api/sprite/MT_1',
+        slotSrc: '/api/sprite/GD_Slot_Bg_03',
+        badgeSrc: '/api/sprite/CT_Slot_Boss',
+        committedOnly: false,
+        stats: {
+          options: [
+            {
+              label: 'E · Lv 80',
+              where: 'Singularity · Urd (palier E)',
+              cells: [{ slug: 'hp', abbr: 'HP', value: '8000' }],
+              context: ['Lv 80', 'dégâts : 0 – 99 999'],
+              passives: ['DMG UP +30%'],
+            },
+            {
+              label: 'SSS · Lv 120',
+              where: 'Singularity · Urd (palier SSS)',
+              cells: [{ slug: 'hp', abbr: 'HP', value: '12000', bars: 3 }],
+              context: ['Lv 120'],
+              passives: [],
+            },
+          ],
+          selected: 1,
+          template: false,
+        },
+        encounters: {
+          rows: [{ mode: 'Singularity', name: 'Urd', area: 'Singularity', level: 80 }],
+          more: 1,
+          total: 2,
+        },
+        relations: { summonedBy: [], linkedTo: [], summons: [{ id: '400109', name: 'Slime add' }] },
+        immunities: {
+          chips: [{ ref: 'Stun', name: 'Stun', icon: 'IC_Stun', isDebuff: true }],
+          unresolved: ['64 “Freeze”'],
+        },
+        cards: [
+          {
+            ...CARD,
+            id: 'm1',
+            name: 'Bite',
+            type: 'rage_enter',
+            typeLabel: 'rage_enter — à 70 % PV',
+            iconSrc: '/api/sprite/IC_m1',
+          },
+        ],
+        archives: [
+          {
+            key: '400101@1',
+            version: 1,
+            ref: 'abc1234',
+            committedAt: '2026-10-01T10:00:00+02:00',
+            gameVersion: '1.4.14',
+            label: 'avant la refonte',
+            skills: 1,
+          },
+        ],
+      },
+      plan: {
+        files: ['monsters.json', 'monster-skills.json'],
+        commit: 'chore(extractor): monster Slime (400101) integre',
+      },
+      links: { chips: 'monsters/400101' },
+    },
+    'ee/e1': {
+      ...sheetBase('ee', 'e1', 'added'),
+      gear: {
+        kind: 'ee',
+        id: 'e1',
+        name: { en: 'Blade of Aer' },
+        icon: 'TI_Equipment_EX_2000001',
+        iconSrc: '/api/sprite/TI_Equipment_EX_2000001',
+        frame: '/images/ui/bg/TI_Slot_Unique.webp',
+        grade: 'unique',
+        stars: [5],
+        classLimits: [],
+        mainStats: ['ATK%', 'CHC%'],
+        passives: [
+          {
+            level: 1,
+            isAdd: false,
+            name: 'Charge',
+            icon: 'IC_pc',
+            iconSrc: '/api/sprite/IC_pc',
+            first: 'Gain <color=#28d9ed>2</color> AP',
+            last: 'Gain <color=#28d9ed>4</color> AP',
+            levels: 2,
+          },
+        ],
+        effects: ['ap/buff'],
+        members: ['e1'],
+        characterId: '2000001',
+        trustLevel: 3,
+      },
+      plan: {
+        files: ['equipment/ee.json'],
+        commit: 'chore(extractor): ee Blade of Aer (e1) integre',
+      },
+      links: { sheet: 'character/2000001/ee' },
+    },
+  };
 
   interface Call {
     path: string;
@@ -11546,7 +11739,13 @@ describe('Extraction — la page, sur le vrai markup', () => {
    * sans tables du jeu. `opts.posted` : la réponse d'un geste.
    */
   async function extractor(
-    opts: { hash?: string; tables?: boolean; posted?: (body: unknown) => unknown } = {},
+    opts: {
+      hash?: string;
+      tables?: boolean;
+      posted?: (body: unknown) => unknown;
+      /** Le perso nouveau n'a pas de date de sortie. */
+      missing?: boolean;
+    } = {},
   ) {
     vi.resetModules();
     const window = new Window({ url: `http://localhost:4747/${opts.hash ?? ''}` });
@@ -11571,10 +11770,57 @@ describe('Extraction — la page, sur le vrai markup', () => {
         },
       };
     };
-    const fetch = vi.fn(async (path: string, init?: { body?: string }) => {
+    const fetch = vi.fn(async (path: string, init?: { body?: string; method?: string }) => {
       const body: unknown = init?.body ? JSON.parse(init.body) : undefined;
       const url = new URL(path, 'http://localhost:4747');
+      const posting = init?.method === 'POST';
       if (url.pathname.startsWith('/api/extractor')) calls.push(body ? { path, body } : { path });
+      if (url.pathname === '/api/extractor/entity') {
+        const target = url.searchParams.get('target') ?? '';
+        const key = url.searchParams.get('key') ?? '';
+        if (!SHEET_TARGETS.includes(target))
+          return {
+            ok: false,
+            status: 404,
+            json: async () => ({ error: `pas de fiche pour la cible ${target}` }),
+          };
+        if (!tables)
+          return answer({
+            target,
+            label: TARGETS.find((t) => t.id === target)?.label ?? target,
+            file: '',
+            key,
+            tables: false,
+            reason: 'Pas de données du jeu : lancer un patch (pull) d’abord.',
+            was: '',
+          });
+        if (target === 'character' && key === '2000003')
+          return answer(CHARACTER(Boolean(opts.missing)));
+        return answer(
+          SHEETS[`${target}/${key}`] ?? {
+            ...sheetBase(target, key, 'same'),
+            [target === 'character' ? 'character' : target === 'monster' ? 'monster' : 'gear']:
+              null,
+            plan: null,
+            links: {},
+          },
+        );
+      }
+      if (url.pathname === '/api/extractor/mode' && !posting) {
+        const mode = url.searchParams.get('mode') ?? '';
+        return answer(
+          mode === 'joint_challenge'
+            ? MODE_PLAN
+            : {
+                mode,
+                label: mode,
+                ids: [],
+                count: 0,
+                commit: `chore(extractor): mode ${mode} — 0 monstre integre`,
+                was: 'sig:monster:v1',
+              },
+        );
+      }
       if (url.pathname === '/api/extractor')
         return answer({
           tables,
@@ -11617,15 +11863,22 @@ describe('Extraction — la page, sur le vrai markup', () => {
           label: t.label,
           file: t.file,
           site: t.site,
+          sheet: SHEET_TARGETS.includes(id),
           tables: true,
           buckets: t.buckets,
           total: all.length,
           shown: entities.length,
           entities,
           was: `sig:${id}:v1`,
+          ...(id === 'monster' ? { modes: MODES } : {}),
         });
       }
-      if (url.pathname === '/api/extractor/accept' || url.pathname === '/api/extractor/item')
+      if (
+        url.pathname === '/api/extractor/accept' ||
+        url.pathname === '/api/extractor/item' ||
+        url.pathname === '/api/extractor/integrate' ||
+        url.pathname === '/api/extractor/mode'
+      )
         return answer(
           opts.posted?.(body) ?? {
             ok: true,
@@ -11687,6 +11940,45 @@ describe('Extraction — la page, sur le vrai markup', () => {
         all('#ex-rows .ex-toggle')
           .find((b) => b.dataset.key === key)
           ?.click(),
+      fire,
+      /** « Fiche » d'une ligne de la cible. */
+      sheetOf: (key: string) =>
+        all('#ex-rows [data-sheet]')
+          .find((b) => b.dataset.sheet === key)
+          ?.click(),
+      /** La fiche ouverte : son en-tête, son geste, ses cartes. */
+      sheet: () => ({
+        back: el('ex-entity-target').textContent,
+        title: el('ex-entity-title').textContent,
+        meta: el('ex-entity-meta').textContent,
+        badges: [...el('ex-entity-badges').querySelectorAll('.badge')].map((b) => b.textContent),
+        links: [...el('ex-entity-links').querySelectorAll('[data-go]')].map((a) => [
+          a.textContent,
+          (a as unknown as HTMLElement).dataset.go,
+        ]),
+        note: el('ex-entity-note').textContent,
+        button: {
+          hidden: el('ex-integrate').hidden,
+          text: el('ex-integrate').textContent,
+          disabled: el('ex-integrate').disabled,
+        },
+        missing: el('ex-missing').hidden ? null : el('ex-missing').textContent,
+        diff: el('ex-entity-diff').hidden ? null : el('ex-entity-fields').textContent,
+        sections: all('#ex-sheet .ex-sec').map(
+          (s) => s.querySelector('.ex-sec-head strong')?.textContent,
+        ),
+        cells: all('#ex-sheet .ex-cell').map(
+          (c) =>
+            `${c.querySelector('.ex-cell-k')?.textContent}=${c.querySelector('.ex-cell-v')?.textContent}`,
+        ),
+        cards: all('#ex-sheet .ex-skill').map((c) => ({
+          id: (c as unknown as HTMLElement).dataset.kit,
+          head: c.querySelector('.card-head')?.textContent?.trim(),
+          icon: c.querySelector('.ex-skico')?.getAttribute('src'),
+          desc: c.querySelector('.ex-desc')?.innerHTML,
+          chips: [...c.querySelectorAll('.ex-chip')].map((x) => x.textContent),
+        })),
+      }),
       status: (value: string) =>
         all('#ex-status button')
           .find((b) => b.dataset.status === value)
@@ -11998,12 +12290,25 @@ describe('Extraction — la page, sur le vrai markup', () => {
     ]);
   });
 
-  it('les trois formes de l’adresse : la cible, l’entité dépliée, et le chemin que le tableau de bord ouvre', async () => {
-    const entity = await extractor({ hash: '#extractor/character/2000001' });
-    expect(entity.el('tab-extractor').hidden).toBe(false);
+  it('les trois formes de l’adresse : la cible, l’entité (sa fiche, ou dépliée sans fiche), et le chemin que le tableau de bord ouvre', async () => {
+    // Une cible à fiches : la clé ouvre la FICHE (F21).
+    const sheet = await extractor({ hash: '#extractor/character/2000001' });
+    expect(sheet.el('tab-extractor').hidden).toBe(false);
+    expect(sheet.el('ex-entity').hidden).toBe(false);
+    expect(sheet.el('ex-target').hidden).toBe(true);
+    expect(sheet.sheet().title).toBe('Aer');
+    expect(sheet.hash()).toBe('#extractor/character/2000001');
+    expect(sheet.calls).toEqual([{ path: '/api/extractor/entity?target=character&key=2000001' }]);
+    // Une cible sans fiche (les items) : la clé est l'entité dépliée (F20).
+    const entity = await extractor({ hash: '#extractor/item/15003' });
     expect(entity.el('ex-target').hidden).toBe(false);
-    expect(entity.rows()[0]).toMatchObject({ key: '2000001', open: true });
-    expect(entity.hash()).toBe('#extractor/character/2000001');
+    expect(entity.el('ex-entity').hidden).toBe(true);
+    expect(entity.rows()[0]).toMatchObject({ key: '15003', open: true });
+    expect(entity.hash()).toBe('#extractor/item/15003');
+    expect(entity.calls.map((c) => c.path)).toEqual([
+      '/api/extractor/entity?target=item&key=15003',
+      '/api/extractor/target?id=item',
+    ]);
 
     const page = await extractor();
     expect(page.el('tab-extractor').hidden).toBe(true);
@@ -12018,5 +12323,274 @@ describe('Extraction — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.el('ex-title').textContent).toBe('Personnages');
     expect(page.hash()).toBe('#extractor/character');
+    // Et un chemin à clé ouvre la fiche, depuis la cible (le lien « extraction » des éditeurs).
+    page.go('extractor/monster/400101');
+    await page.settle();
+    expect(page.el('ex-entity').hidden).toBe(false);
+    expect(page.sheet().title).toBe('Slime — The Blob');
+  });
+
+  // --- les fiches (F21) ---
+  it('une ligne a « Fiche » sur une cible à fiches, pas sur les items ; elle ouvre la fiche, « ← » revient à la cible', async () => {
+    const page = await extractor({ hash: '#extractor/character' });
+    expect(page.all('#ex-rows [data-sheet]').map((b) => b.dataset.sheet)).toEqual([
+      '2000001',
+      '2000003',
+      '2000002',
+      '2000004',
+    ]);
+    page.sheetOf('2000003');
+    await page.settle();
+    expect(page.el('ex-entity').hidden).toBe(false);
+    expect(page.hash()).toBe('#extractor/character/2000003');
+    expect(page.sheet().back).toBe('Personnages');
+    page.el('ex-entity-back').click();
+    await page.settle();
+    expect(page.el('ex-target').hidden).toBe(false);
+    expect(page.el('ex-entity').hidden).toBe(true);
+    expect(page.hash()).toBe('#extractor/character');
+
+    const items = await extractor({ hash: '#extractor/item' });
+    expect(items.all('#ex-rows [data-sheet]')).toEqual([]);
+    expect(items.rows().map((r) => r.item)).toEqual(['Intégrer', 'Retirer']);
+  });
+
+  it('la fiche d’un perso NOUVEAU : l’en-tête aux sprites du jeu, le statut, « Intégrer », le lien vers la Fiche perso, les cartes', async () => {
+    const page = await extractor({ hash: '#extractor/character/2000003' });
+    const s = page.sheet();
+    expect(s.title).toBe('Demiurge Lambda');
+    expect(page.el('ex-face').querySelector('img')?.getAttribute('src')).toBe(
+      '/api/sprite/CT_2000003',
+    );
+    expect(s.meta).toBe('2000003firestrikerhumanchaîne start');
+    expect(s.badges).toEqual(['new — pas encore intégré']);
+    expect(s.links).toEqual([['fiche perso', 'character/2000003']]);
+    expect(s.button).toEqual({ hidden: false, text: 'Intégrer', disabled: false });
+    expect(s.missing).toBeNull();
+    expect(s.diff).toBeNull();
+    expect(s.sections).toEqual([
+      'Stats extraites',
+      'Tags détectés',
+      'Skills',
+      'Statuts référencés',
+      'Costumes',
+    ]);
+    expect(s.cells).toEqual(['ATK=100 – 1000', 'HP=50']);
+    expect(page.all('#ex-sheet .ex-tag').map((t) => t.textContent)).toEqual([
+      'festival · Festival · groupe limited',
+    ]);
+    expect(s.cards).toEqual([
+      {
+        id: '101',
+        head: 'S1101 · first',
+        icon: '/api/sprite/IC_101',
+        desc: 'Deal <span style="color:#ff0000">30%</span> damage',
+        chips: ['Burn'],
+      },
+    ]);
+    // La tuile d'une chip : l'icône en masque, sous `imgBase`.
+    expect(page.all('#ex-sheet .ex-skill .ex-fx')[0].getAttribute('style')).toBe(
+      "--ex-src: url('https://img.test/images/ui/effect/IC_Burn.webp')",
+    );
+    // Un statut référencé mène à sa fiche dans Effets, et dit s'il est caché du live.
+    const fx = page.all('#ex-sheet .ex-fxlist .ex-chip')[0];
+    expect(fx.querySelector('[data-go]')?.getAttribute('data-go')).toBe('effects/12');
+    expect(fx.querySelector('.badge')?.textContent).toBe('caché du live');
+    expect(page.all('#ex-sheet .ex-ul li').map((l) => l.textContent)).toEqual(['Base', 'Summer']);
+  });
+
+  it('un perso sans date de sortie : le refus situé, la clé à ajouter, « Intégrer » éteint', async () => {
+    const page = await extractor({ hash: '#extractor/character/2000003', missing: true });
+    const s = page.sheet();
+    expect(s.button).toMatchObject({ hidden: false, disabled: true });
+    expect(s.missing).toContain('Intégration refusée avant d’écrire');
+    expect(s.missing).toContain('2000003 Lambda');
+    expect(s.missing).toContain('data/curated/character-release.json');
+    expect(s.missing).toContain('"2000003": "AAAA-MM-JJ"');
+  });
+
+  it('un perso MODIFIÉ : le diff de la cible en tête, « Ré-intégrer », son plan puis le geste, la fiche relue, le bilan d’images', async () => {
+    const page = await extractor({
+      hash: '#extractor/character/2000001',
+      posted: () => ({
+        ok: true,
+        log: ['fait'],
+        assets: {
+          staged: 2,
+          restaged: 0,
+          present: 1,
+          missing: [{ key: 'images/x.webp', reason: 'absente du jeu' }],
+        },
+        git: { branch: 'main', ahead: 1, behind: 0 },
+      }),
+    });
+    const s = page.sheet();
+    expect(s.badges).toEqual(['3 champs divergent']);
+    expect(s.diff).toBe('3 champs');
+    expect(page.all('#ex-entity-diff .ex-gtitle').map((g) => g.textContent)).toEqual([
+      'skills › Fire Strike · second',
+      'costumes › #9',
+    ]);
+    expect(s.button.text).toBe('Ré-intégrer');
+    // Le plan : les fichiers et le commit, avant le geste.
+    expect(page.el('ex-iplan').hidden).toBe(true);
+    page.el('ex-integrate').click();
+    expect(page.el('ex-iplan').hidden).toBe(false);
+    expect(page.all('#ex-iplan-files li').map((l) => l.textContent)).toEqual([
+      'characters.json',
+      'puis UN commit « chore(extractor): character Aer (2000001) integre »',
+    ]);
+    page.el('ex-iplan-cancel').click();
+    expect(page.el('ex-iplan').hidden).toBe(true);
+    page.el('ex-integrate').click();
+    page.el('ex-iplan-go').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      {
+        path: '/api/extractor/integrate',
+        body: { target: 'character', key: '2000001', was: 'sig:character:v1' },
+      },
+    ]);
+    // Le disque fait foi : la fiche est relue ; le bilan d'images dans sa carte.
+    expect(page.calls.filter((c) => !c.body).map((c) => c.path)).toEqual([
+      '/api/extractor/entity?target=character&key=2000001',
+      '/api/extractor/entity?target=character&key=2000001',
+    ]);
+    expect(page.el('ex-assets').hidden).toBe(false);
+    expect(page.el('ex-assets-text').textContent).toBe(
+      '2 produites, 0 refaite, 1 déjà là, 1 manquante.',
+    );
+  });
+
+  it('la fiche d’un monstre : le slot et le badge boss, le select de la rencontre qui redessine la grille, les rencontres, les immunités, les archives, le lien vers Monstres', async () => {
+    const page = await extractor({ hash: '#extractor/monster/400101' });
+    const s = page.sheet();
+    expect(s.title).toBe('Slime — The Blob');
+    expect(page.all('#ex-face img').map((i) => i.getAttribute('src'))).toEqual([
+      '/api/sprite/GD_Slot_Bg_03',
+      '/api/sprite/MT_1',
+      '/api/sprite/CT_Slot_Boss',
+    ]);
+    expect(s.meta).toBe('400101bosswaterdefenderbeastIA attack');
+    expect(s.badges).toEqual(['à jour — le committé est l’extraction']);
+    expect(s.links).toEqual([['câbler les chips', 'monsters/400101']]);
+    // À jour : rien à intégrer pour un monstre (la règle de l'admin).
+    expect(s.button.hidden).toBe(true);
+    expect(s.note).toContain('Figer une version et ré-épingler ses guides : à venir (F22).');
+    expect(s.sections).toEqual([
+      'Stats à la rencontre',
+      'Rencontres',
+      'Immunités',
+      'Skills',
+      'Archives figées',
+    ]);
+    // Le select : le palier le plus haut d'abord ; l'autre option redessine la grille.
+    const select = page.el('ex-enc');
+    expect([...select.querySelectorAll('option')].map((o) => o.textContent)).toEqual([
+      'E · Lv 80 — Singularity · Urd (palier E)',
+      'SSS · Lv 120 — Singularity · Urd (palier SSS)',
+    ]);
+    expect(select.value).toBe('1');
+    expect(page.sheet().cells).toEqual(['HP=12000 × 3 barres']);
+    select.value = '0';
+    page.fire(page.el('ex-enc'), 'change');
+    expect(page.sheet().cells).toEqual(['HP=8000']);
+    expect(page.all('#ex-enc-body .ex-ctx p').map((p) => p.textContent)).toEqual([
+      'Lv 80',
+      'dégâts : 0 – 99 999',
+      'Passifs du palier : DMG UP +30%',
+    ]);
+    // Les rencontres, plafonnées ; ce qu'il invoque.
+    expect(page.all('#ex-sheet .ex-enc li').map((l) => l.textContent)).toEqual([
+      'Singularity · Urd (Singularity) · Lv 80',
+      '… 1 de plus',
+    ]);
+    expect(
+      page.all('#ex-sheet .ex-link[data-go="extractor/monster/400109"]').map((a) => a.textContent),
+    ).toEqual(['Slime add']);
+    // Les immunités : une chip, une réf sans glossaire.
+    expect(page.all('#ex-sheet .ex-warn')[0].textContent).toBe(
+      '⚠ sans entrée au glossaire des effets : 64 “Freeze”',
+    );
+    // Le skill d'enrage porte son déclencheur réel.
+    expect(page.sheet().cards[0].head).toBe('Bitem1 · rage_enter — à 70 % PV');
+    expect(page.all('#ex-sheet .ex-ul li code').map((c) => c.textContent)).toContain('400101@1');
+  });
+
+  it('la fiche d’un EE : la tuile sur son cadre, l’identité, les mains, le passif base → +10, le lien vers la Fiche perso › EE', async () => {
+    const page = await extractor({ hash: '#extractor/ee/e1' });
+    const s = page.sheet();
+    expect(s.title).toBe('Blade of Aer');
+    expect(page.all('#ex-face img').map((i) => i.getAttribute('src'))).toEqual([
+      'https://img.test/images/ui/bg/TI_Slot_Unique.webp',
+      '/api/sprite/TI_Equipment_EX_2000001',
+    ]);
+    expect(s.meta).toBe('e1eeunique★ 5EE de 2000001 · confiance 3');
+    expect(s.links).toEqual([['fiche perso › EE', 'character/2000001/ee']]);
+    expect(s.button).toMatchObject({ hidden: false, text: 'Intégrer' });
+    expect(s.sections).toEqual(['Main stats', 'Passif (base → +10)']);
+    expect(page.all('#ex-sheet .ex-pill').map((p) => p.textContent)).toEqual([
+      'ATK%',
+      'CHC%',
+      'ap/buff',
+    ]);
+    expect(page.all('#ex-sheet .ex-passive .ex-desc').map((p) => p.innerHTML)).toEqual([
+      'Gain <span style="color:#28d9ed">2</span> AP',
+      '<span class="lbl">max :</span> Gain <span style="color:#28d9ed">4</span> AP',
+    ]);
+  });
+
+  it('une entité absente du frais, et un poste sans tables : la fiche le dit, sans geste', async () => {
+    const gone = await extractor({ hash: '#extractor/weapon/9999' });
+    expect(gone.sheet().badges).toEqual(['à jour — le committé est l’extraction']);
+    expect(gone.sheet().button.hidden).toBe(true);
+    expect(gone.sheet().note).toBe(
+      'Cette entité n’est pas dans l’extraction fraîche : rien à intégrer.',
+    );
+    const dark = await extractor({ hash: '#extractor/character/2000003', tables: false });
+    expect(dark.sheet().badges).toEqual([
+      'Pas de données du jeu : lancer un patch (pull) d’abord.',
+    ]);
+    expect(dark.sheet().button.hidden).toBe(true);
+    expect(dark.sheet().sections).toEqual([]);
+  });
+
+  it('« Intégrer un mode » sur la cible monster : le select, le plan AVANT le geste, la confirmation, le geste, la cible relue', async () => {
+    const page = await extractor({ hash: '#extractor/monster' });
+    expect(page.el('ex-mode').hidden).toBe(false);
+    expect(
+      [...page.el('ex-mode-select').querySelectorAll('option')].map((o) => [
+        o.getAttribute('value'),
+        o.textContent,
+      ]),
+    ).toEqual([['joint_challenge', 'Joint Challenge']]);
+    expect(page.el('ex-mode-box').hidden).toBe(true);
+    page.el('ex-mode-plan').click();
+    await page.settle();
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/mode?mode=joint_challenge' });
+    expect(page.el('ex-mode-box').hidden).toBe(false);
+    expect(page.el('ex-mode-text').textContent).toBe(
+      'Écrire 2 monstres du mode Joint Challenge dans data/generated/monsters.json, monster-skills.json et encounters.json (les spawnés, puis leurs adds), re-dériver damage et solver, puis un commit « chore(extractor): mode joint_challenge — 2 monstres integres ».',
+    );
+    expect(
+      page.all('#ex-mode-ids .ex-mode-id').map((m) => [m.textContent, m.classList.contains('add')]),
+    ).toEqual([
+      ['400101 Slime', false],
+      ['400109 Slime add', true],
+    ]);
+    page.el('ex-mode-cancel').click();
+    expect(page.el('ex-mode-box').hidden).toBe(true);
+    page.el('ex-mode-plan').click();
+    await page.settle();
+    page.el('ex-mode-go').click();
+    await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      { path: '/api/extractor/mode', body: { mode: 'joint_challenge', was: 'sig:monster:v1' } },
+    ]);
+    expect(page.calls.at(-1)).toEqual({ path: '/api/extractor/target?id=monster' });
+    expect(page.el('ex-mode-box').hidden).toBe(true);
+    // Pas de mode ailleurs que sur les monstres.
+    const chars = await extractor({ hash: '#extractor/character' });
+    expect(chars.el('ex-mode').hidden).toBe(true);
   });
 });

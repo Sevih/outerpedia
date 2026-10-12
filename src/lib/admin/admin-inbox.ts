@@ -44,13 +44,24 @@ export const EXTRACTOR_ENTITIES: readonly ExtractorEntity[] = [
 ];
 
 /**
- * Les cibles dont la page admin n'est QUE la revue — et que la section
- * « Extraction » de quick porte en entier (lot F20, migration 19) : leur lien
- * sort du menu de l'admin (`adminExtractorMenu`). L'inbox et `bucketsOf`
- * gardent les dix. Les sept autres ont une fiche par entité (intégration,
- * versionnage) : elles restent au menu jusqu'aux lots F21 et F22.
+ * Les cibles que la section « Extraction » de quick porte en entier — la revue
+ * et l'acceptation (lot F20, migration 19 : effect, armor, item), puis les
+ * fiches par entité et l'intégration (lot F21, migration 20 : character, ee,
+ * weapon, amulet, talisman, set) : leur lien sort du menu de l'admin
+ * (`adminExtractorMenu`). L'inbox et `bucketsOf` gardent les dix. Le monstre
+ * reste au menu jusqu'au lot F22 (le versionnage, sur sa fiche).
  */
-export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set(['effect', 'armor', 'item']);
+export const EXTRACTOR_IN_QUICK: ReadonlySet<string> = new Set([
+  'character',
+  'effect',
+  'ee',
+  'weapon',
+  'amulet',
+  'armor',
+  'talisman',
+  'set',
+  'item',
+]);
 
 /** Les entités d'extraction encore proposées par le menu de l'admin. */
 export const adminExtractorMenu = (): ExtractorEntity[] =>

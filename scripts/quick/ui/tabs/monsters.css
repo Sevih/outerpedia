@@ -52,7 +52,8 @@
 #tab-monsters .m-guides {
   font-size: 13px;
 }
-#tab-monsters .m-link {
+#tab-monsters .m-link,
+#tab-monsters .m-goto {
   color: var(--accent);
 }
 #tab-monsters #m-pick {

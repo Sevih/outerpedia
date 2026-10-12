@@ -11,10 +11,13 @@
  */
 import { img } from '@/lib/images';
 
-export function monsterIconSrc(icon: string): string {
+/** La route qui sert les sprites bruts du jeu : celle de l'admin, sauf à en passer une autre (quick a la sienne). */
+export const ADMIN_SPRITE_ROUTE = '/api/admin/sprite';
+
+export function monsterIconSrc(icon: string, spriteRoute = ADMIN_SPRITE_ROUTE): string {
   return icon.startsWith('2')
     ? img.face(icon)
-    : `/api/admin/sprite/${encodeURIComponent(`MT_${icon}`)}`;
+    : `${spriteRoute}/${encodeURIComponent(`MT_${icon}`)}`;
 }
 
 const SLOT_BY_TYPE: Record<string, string> = {
@@ -25,8 +28,8 @@ const SLOT_BY_TYPE: Record<string, string> = {
   monster: 'GD_Slot_Bg_01',
 };
 
-export function monsterSlotSrc(type: string): string {
-  return `/api/admin/sprite/${SLOT_BY_TYPE[type] ?? 'GD_Slot_Bg_01'}`;
+export function monsterSlotSrc(type: string, spriteRoute = ADMIN_SPRITE_ROUTE): string {
+  return `${spriteRoute}/${SLOT_BY_TYPE[type] ?? 'GD_Slot_Bg_01'}`;
 }
 
 /** Types qui portent le badge « BOSS » dans l'admin. PAS le même set que
@@ -35,6 +38,9 @@ export function monsterSlotSrc(type: string): string {
 const BOSS_BADGE_TYPES = new Set(['boss', 'area_boss', 'season_boss']);
 
 /** Badge « BOSS » du jeu, ou undefined si le type n'en est pas un. */
-export function monsterBossBadgeSrc(type: string): string | undefined {
-  return BOSS_BADGE_TYPES.has(type) ? '/api/admin/sprite/CT_Slot_Boss' : undefined;
+export function monsterBossBadgeSrc(
+  type: string,
+  spriteRoute = ADMIN_SPRITE_ROUTE,
+): string | undefined {
+  return BOSS_BADGE_TYPES.has(type) ? `${spriteRoute}/CT_Slot_Boss` : undefined;
 }

@@ -77,6 +77,7 @@ import {
   effectNewId,
   effectsSearch,
   effectsState,
+  extractorEntity,
   extractorOverview,
   extractorTarget,
   fillChangelogTemplate,
@@ -89,13 +90,16 @@ import {
   guideDraftState,
   guidesOverview,
   importContributionAction,
+  integrateEntity,
   integrateItemAction,
+  integrateMode,
   itemsSearch,
   itemsState,
   monsterSheetState,
   monstersRoster,
   namesState,
   parseTarget,
+  planMode,
   previewChangelogEntry,
   previewGearBuilds,
   previewInline,
@@ -118,6 +122,7 @@ import {
   saveRanks,
   searchRewards,
   searchVideos,
+  spriteFile,
   translateNotes,
   videoTargets,
   type CharacterSheetChanges,
@@ -960,6 +965,60 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // porte que les acceptations.
     const { key, was } = await body<{ key?: unknown; was?: unknown }>(req);
     await stream(res, (report) => withGit(integrateItemAction(key, was, EXTRACTOR_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/extractor/entity') {
+    // La fiche d'une entité (`?target=&key=`) : son statut et son diff, le
+    // frais selon la cible (perso, monstre, équipement par famille), le plan
+    // de son intégration, les liens croisés, `was`. Rien ne s'écrit.
+    const out = await extractorEntity(
+      url.searchParams.get('target') ?? '',
+      url.searchParams.get('key') ?? '',
+    );
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/extractor/integrate') {
+    // « Intégrer » une entité (perso, monstre, équipement), puis UN commit —
+    // la porte de F20 (tables, `was`), et le refus « date de sortie
+    // manquante » d'un perso, avant d'écrire.
+    const { target, key, was } = await body<{ target?: unknown; key?: unknown; was?: unknown }>(
+      req,
+    );
+    await stream(res, (report) =>
+      withGit(integrateEntity(String(target ?? ''), key, was, EXTRACTOR_DEPS, report)),
+    );
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/extractor/mode') {
+    // Le PLAN d'« Intégrer un mode » (`?mode=`) : les monstres qui seraient
+    // écrits, leur nombre, le message du commit, `was`. Rien ne s'écrit.
+    const out = await planMode(url.searchParams.get('mode'));
+    if ('error' in out) return json(res, { error: out.error }, out.status);
+    json(res, out);
+    return;
+  }
+
+  if (req.method === 'POST' && url.pathname === '/api/extractor/mode') {
+    // « Intégrer un mode » : tous ses monstres et leurs adds, puis UN commit.
+    const { mode, was } = await body<{ mode?: unknown; was?: unknown }>(req);
+    await stream(res, (report) => withGit(integrateMode(mode, was, EXTRACTOR_DEPS, report)));
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname.startsWith('/api/sprite/')) {
+    // Un sprite BRUT de `.gamedata/extracted/images`, par basename — ce que
+    // `/api/admin/sprite/<nom>` sert à l'admin : les vignettes `MT_*` des
+    // monstres, les fonds de slot, les icônes des skills frais, que le site
+    // n'a pas (encore). Lecture seule ; 404 pour un sprite absent.
+    const hit = spriteFile(decodeURIComponent(url.pathname.slice('/api/sprite/'.length)));
+    if (!hit) return json(res, { error: 'sprite inconnu' }, 404);
+    res.writeHead(200, { 'content-type': hit.type, 'cache-control': 'public, max-age=86400' });
+    res.end(readFileSync(hit.file));
     return;
   }
 

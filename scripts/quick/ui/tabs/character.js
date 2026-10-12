@@ -392,6 +392,7 @@ function who() {
         }<span class="c-stars" title="${c.rarity}★">${`<img src="${src('ui/star/CM_icon_star_y')}" alt="" aria-hidden="true" />`.repeat(c.rarity)}</span>${
           c.chain ? `<span class="badge off">chaîne ${esc(c.chain)}</span>` : ''
         }</span>
+        <span class="lbl">Ce que le jeu en extrait, et son intégration : <a class="c-link" href="#extractor/character/${esc(c.id)}" data-go="extractor/character/${esc(c.id)}">extraction</a></span>
       </div>`
     : '<span class="lbl">Aucun perso choisi.</span>';
   $('c-pick-label').textContent = c ? 'Changer de perso' : 'Choisir un perso';
@@ -1561,6 +1562,14 @@ const pickChar = () =>
     onPick: choose,
   });
 $('c-pick').onclick = pickChar;
+// « extraction » de l'en-tête : la fiche du perso dans la section Extraction
+// (`sections.go` par chemin ; des changements en attente peuvent retenir ici).
+$('c-who').addEventListener('click', (e) => {
+  const to = e.target.closest('[data-go]')?.dataset.go;
+  if (!to) return;
+  e.preventDefault();
+  sections.go(to);
+});
 
 /** Sans perso, la fiche n'a rien à montrer : le picker s'ouvre de lui-même. */
 function pickIfEmpty() {

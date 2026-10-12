@@ -47,6 +47,13 @@ function equipment(): EquipmentData {
   return equipCache.data;
 }
 
+/**
+ * Le build d'équipement ENTIER, mémoïsé comme les cibles : la fiche d'une
+ * famille, d'un EE ou d'un set lue du FRAIS (`gear-sheet.ts`) a besoin des
+ * familles, des pools et des passifs en plus du slot de sa cible.
+ */
+export const freshEquipment = (): EquipmentData => equipment();
+
 const equipTarget = (id: string, label: string, key: keyof EquipmentData): GeneratedTarget => ({
   id,
   label,

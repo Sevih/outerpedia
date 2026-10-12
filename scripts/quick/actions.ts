@@ -89,6 +89,32 @@ import { rankItemMatches } from '@/lib/data/item-search';
 import { fetchMeta, searchOfficial } from '@/lib/admin/youtube';
 import { characterKitCards, kitEffectCatalog, pickKitCards } from '@/lib/admin/character-kit';
 import {
+  GEAR_TARGETS,
+  gearSheet,
+  type GearClassVariantView,
+  type GearPassiveView,
+  type GearSheet,
+  type GearTarget,
+} from '@/lib/admin/gear-sheet';
+import {
+  monsterEncounters,
+  monsterRageLabel,
+  monsterRelations,
+  monsterStatContexts,
+  monsterStatsSheet,
+  type DungeonSources,
+  type MonsterStatsSheet,
+} from '@/lib/admin/monster-sheet';
+import { monsterBossBadgeSrc, monsterIconSrc, monsterSlotSrc } from '@/lib/admin/monster-icon';
+import {
+  RELEASE_CURATED_PATH,
+  missingReleaseDates,
+  type MissingRelease,
+} from '@/lib/admin/release-check';
+import { immunityChipEffects } from '@/lib/skill-view';
+import { getGlossaries } from '@/lib/data/glossaries';
+import { tagDef, tagLabel } from '@/lib/data/tags';
+import {
   guideMonsterIds,
   monsterKitCards,
   monsterKitCatalog,
@@ -105,9 +131,13 @@ import {
   type KitCurationPatch,
 } from '@/lib/admin/monster-skill-curated-store';
 import {
+  committedEncounters,
   committedMonsterSkills,
   committedMonsters,
+  rankOptionAdminLabels,
   siteMonsterIds,
+  tooltipName,
+  type EncountersData,
 } from '@/lib/admin/monster-store';
 import {
   applyCharacterKitCuration,
@@ -193,8 +223,10 @@ import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
 import { EFFECT_FAMILIES, effectFamilyLabel, type EffectSide } from '@/lib/data/effect-families';
 import {
+  getMergedEffect,
   getMergedEffects,
   liveEffectSources,
+  mergeStatusEffects,
   type EffectSources,
   type MergedEffect,
 } from '@/lib/data/effects';
@@ -256,7 +288,7 @@ import { getT } from '@/i18n';
 import { bulletSegments, type BulletSegment } from '@/lib/changelog-bullets';
 import { localePath } from '@/lib/navigation';
 import { TAG_REGEX, checkText, type InlineSegment } from '@/lib/parse-text';
-import { STAT_ICON } from '@/lib/stats';
+import { STAT_ICON, statAbbr } from '@/lib/stats';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import type { KitChip } from '@/components/admin/MonsterKitEditor';
@@ -287,20 +319,30 @@ import type {
   LangDict,
   LocalizedText,
   Monster,
+  MonsterArchiveEntry,
   ProsCons,
   Skill,
   SkillPriority,
 } from '@contracts';
+import type { Character } from '@datagen/extractor/specs/character';
 import type { InboxItem } from '@/lib/admin/admin-inbox';
 import { diffLabels, skillLabel, type DiffResolvers } from '@/lib/admin/diff-labels';
 import { diffTree, type DiffGroup } from '@/lib/admin/diff-tree';
 import type {
   DiffBuckets,
+  EntityReview,
+  EquipmentEntityKind,
   ReviewEntity,
   ReviewEntityStatus,
   TargetReview,
 } from '@/lib/admin/review-types';
-import type { IntegrateReport } from '@/lib/admin/review-store';
+import type {
+  IntegrateModeReport,
+  IntegrateMonsterReport,
+  IntegrateReport,
+} from '@/lib/admin/review-store';
+import type { EquipmentData } from '@datagen/generators/equipment';
+import { ITEM_SPRITE_DIR, buildImageIndex, type ImageIndex } from '@datagen/assets/source';
 import type { AcceptReport, MinorReport } from '@datagen/extractor/review';
 import type { StageResult } from '@datagen/assets/stage';
 import type { SynergyGroup } from '@datagen/curated/character';
@@ -315,7 +357,6 @@ import { refreshVideoMeta } from '@datagen/video-meta';
 import { COMIC_LANGS, type ComicLang } from '@datagen/generators/comics';
 import { recruitWindows, type RecruitWindow } from '@datagen/generators/recruit';
 import { findSteamInstall, installedResVersion } from '@datagen/extract/steam';
-import { ITEM_SPRITE_DIR } from '@datagen/assets/source';
 import { fileStamp, listTableNames, loadTable, tablePath, type Row } from '@datagen/lib/tables';
 import { groupByStem, splitComicName } from './ui/comics-group.mjs';
 
@@ -1149,6 +1190,20 @@ export const ADMIN_TO_QUICK: Readonly<Record<string, string>> = {
 };
 
 /**
+ * La section de quick d'un `href` de l'admin : la ligne de `ADMIN_TO_QUICK`,
+ * ou, pour une page d'ENTITÉ de l'extractor (`/admin/extractor/<x>/<id>`),
+ * la fiche de cette entité dans la section Extraction
+ * (`extractor/<cible>/<id>`, lot F21) ; `null` si l'admin garde la page.
+ */
+export function quickTabOf(tabs: Readonly<Record<string, string>>, href: string): string | null {
+  const direct = tabs[href];
+  if (direct) return direct;
+  const m = /^(\/admin\/extractor\/[a-z]+)\/([^/]+)$/.exec(href);
+  const base = m ? tabs[m[1]] : undefined;
+  return base ? `${base}/${decodeURIComponent(m![2])}` : null;
+}
+
+/**
  * Où un tag mort se corrige dans quick, d'après sa provenance (le `source` de
  * `collectTagOccurrences`, `tag-control.ts`) : le sous-onglet de la « Fiche
  * perso » qui porte le texte — pros / cons, synergies, note d'un build. `null`
@@ -1370,7 +1425,7 @@ export async function dashboardState(disk: DashboardDisk = DASHBOARD_DISK) {
       ? deadTagSheet(await disk.deadTagSources())
       : null;
     return items.map((item) => {
-      const tab = disk.quickTabs[item.href] ?? null;
+      const tab = quickTabOf(disk.quickTabs, item.href);
       return {
         ...item,
         href: `${base}${item.href}`,
@@ -6509,6 +6564,71 @@ export interface ExtractorDeps {
   acceptMinor: (id: string) => Promise<MinorReport>;
   integrateItem: (key: string) => Promise<IntegrateReport>;
   commitPaths: (paths: string[], message: string, report?: Report) => Outcome;
+  // --- les fiches par entité et leur intégration (lot F21) ---
+  /** `entityReview` : le statut d'UNE entité (added, changed, removed, same) et ses champs divergents. */
+  entityReview: (id: string, key: string) => Promise<EntityReview>;
+  /** Le perso frais et SES skills frais (`extractedBundle`) ; rien s'il n'est pas dans l'extraction. */
+  characterBundle: (id: string) => Promise<CharacterBundle | undefined>;
+  /** Le monstre frais et SES skills frais (`extractedMonsterBundle`). */
+  monsterBundle: (id: string) => Promise<MonsterBundle | undefined>;
+  /** `monster-skills.json` du disque : le repli des skills d'un monstre disparu du frais. */
+  committedMonsterSkills: () => Record<string, Skill>;
+  /** Le build d'équipement frais ENTIER (familles, pools, passifs), mémoïsé sur les tables. */
+  equipment: () => Promise<EquipmentData>;
+  /** Les rencontres fraîches : donjons, titres de modes, passifs de palier, quirks de compte. */
+  encounters: () => Promise<EncountersData>;
+  /** `encounters.json` du disque : le repli d'un donjon disparu du frais. */
+  committedDungeons: () => Record<string, DungeonRef>;
+  /** `glossaries.statScales` : l'échelle d'affichage de chaque stat. */
+  statScales: () => Record<string, string>;
+  /** Les libellés humains des passifs de palier (`rankOptionAdminLabels`). */
+  rankOptionLabels: (ids: string[]) => Promise<Record<string, string>>;
+  /** Les immunités d'un monstre en chips nommées, et les réfs sans entrée au glossaire. */
+  immunities: (m: Monster) => Promise<{ chips: SheetChip[]; unresolved: string[] }>;
+  /** Les statuts que les skills d'un perso référencent, résolus par le glossaire des effets. */
+  referencedEffects: (skills: Skill[]) => Promise<ReferencedEffect[]>;
+  /** Les archives figées d'un monstre (`monsterArchiveOf`), de la plus ancienne à la plus récente. */
+  archives: (id: string) => Promise<MonsterArchiveEntry[]>;
+  /** Les persos sans date de sortie une fois ce perso frais posé dans le committé (`missingReleaseDates`). */
+  missingReleases: (char: Character) => Promise<MissingRelease[]>;
+  /** Les intégrations du moteur — `syncDerived` (damage, solver) est DANS celles du perso, du monstre et du mode. */
+  integrateCharacter: (id: string) => Promise<IntegrateReport>;
+  integrateEquipment: (kind: EquipmentEntityKind, id: string) => Promise<IntegrateReport>;
+  integrateMonster: (id: string) => Promise<IntegrateMonsterReport>;
+  integrateMode: (mode: string) => Promise<IntegrateModeReport>;
+  /** Les fichiers que `syncDerived` écrit sous `data/generated/` (damage, solver), tels qu'ils sont sur le disque. */
+  derivedFiles: () => string[];
+  /** L'index des sprites bruts du jeu (`buildImageIndex`), refait quand les tables bougent. */
+  spriteIndex: () => ImageIndex;
+}
+
+/** Le perso frais et ses skills : la forme d'`extractedBundle`. */
+export interface CharacterBundle {
+  char: Character;
+  skills: Record<string, unknown>;
+}
+
+/** Le monstre frais et ses skills : la forme d'`extractedMonsterBundle`. */
+export interface MonsterBundle {
+  monster: Monster;
+  skills: Record<string, unknown>;
+}
+
+/** Une chip d'effet telle que la fiche la montre : sa ref, son nom, son icône, sa nature. */
+export interface SheetChip {
+  ref: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+}
+
+/** Un statut que le kit d'un perso référence, et s'il est caché du live (curé `hidden`). */
+export interface ReferencedEffect {
+  id: string;
+  name: string;
+  icon?: string;
+  isDebuff: boolean;
+  hidden: boolean;
 }
 
 const EXTRACTOR_EMPTY: DiffBuckets = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
@@ -6605,7 +6725,98 @@ export const EXTRACTOR_DEPS: ExtractorDeps = {
   acceptMinor: async (id) => (await reviewEngine()).acceptMinor(id),
   integrateItem: async (key) => (await reviewEngine()).integrateItem(key),
   commitPaths,
+  entityReview: async (id, key) => (await reviewEngine()).entityReview(id, key),
+  characterBundle: async (id) => (await reviewEngine()).extractedBundle(id),
+  monsterBundle: async (id) => (await reviewEngine()).extractedMonsterBundle(id),
+  committedMonsterSkills,
+  equipment: async () => (await import('@datagen/extractor/targets')).freshEquipment(),
+  encounters: async () => (await import('@datagen/generators/encounters')).buildEncounters(),
+  committedDungeons: committedEncounters,
+  statScales: () => getGlossaries().statScales,
+  rankOptionLabels: async (ids) => rankOptionAdminLabels(ids),
+  immunities: async (m) => {
+    const { effects, unresolved } = immunityChipEffects(m);
+    const statuses = mergeStatusEffects({}, effects, 'en');
+    return {
+      chips: effects.map((e) => {
+        const ref = e.tooltip ?? e.label ?? '';
+        const st = statuses[ref];
+        return {
+          ref,
+          name: st?.name ?? ref,
+          ...(st?.icon ? { icon: st.icon } : {}),
+          isDebuff: st?.isDebuff ?? true,
+        };
+      }),
+      // Une réf numérique sans entrée au glossaire : le nom du tooltip du jeu la rend lisible.
+      unresolved: unresolved.map((ref) => {
+        const name = /^\d+$/.test(ref) ? tooltipName(ref) : undefined;
+        return name ? `${ref} “${name}”` : ref;
+      }),
+    };
+  },
+  referencedEffects: async (skills) => {
+    const g = getGlossaries();
+    const seen = new Set<string>();
+    const out: ReferencedEffect[] = [];
+    for (const s of skills)
+      for (const e of s.effects ?? []) {
+        const effId = e.tooltip
+          ? g.effectByTooltip[e.tooltip]
+          : e.label && g.effectByLabel[e.label];
+        if (!effId || seen.has(effId)) continue;
+        seen.add(effId);
+        const eff = getMergedEffect(effId);
+        if (eff)
+          out.push({
+            id: effId,
+            name: eff.name.en || effId,
+            ...(eff.icon ? { icon: eff.icon } : {}),
+            isDebuff: eff.isDebuff,
+            hidden: eff.hidden,
+          });
+      }
+    return out;
+  },
+  archives: async (id) => (await reviewEngine()).monsterArchiveOf(id),
+  missingReleases: async (char) => {
+    const committed = readGeneratedJson('characters.json') as Record<string, Character>;
+    return missingReleaseDates({ ...committed, [char.id]: char });
+  },
+  integrateCharacter: async (id) => (await reviewEngine()).integrateCharacter(id),
+  integrateEquipment: async (kind, id) => (await reviewEngine()).integrateEquipment(kind, id),
+  integrateMonster: async (id) => (await reviewEngine()).integrateMonster(id),
+  integrateMode: async (mode) => (await reviewEngine()).integrateMonsterMode(mode),
+  derivedFiles: () => DERIVED_DIRS.flatMap((dir) => filesUnder(dir)),
+  spriteIndex: () => {
+    // Refait quand les tables bougent : un patch pulled pendant que quick
+    // tourne ré-extrait aussi les images.
+    const stamp = mtimeOf(tablePath('TextSystem'));
+    if (!spriteMemo || spriteMemo.stamp !== stamp) spriteMemo = { stamp, index: buildImageIndex() };
+    return spriteMemo.index;
+  },
 };
+
+/** Ce que `syncDerived` réécrit sous `data/generated/` : ses fichiers partent avec l'intégration. */
+const DERIVED_DIRS = ['data/generated/damage', 'data/generated/solver'];
+
+/** Les fichiers d'un dossier, récursivement, en chemins relatifs au dépôt ; rien s'il manque. */
+function filesUnder(dir: string): string[] {
+  const out: string[] = [];
+  const walk = (rel: string): void => {
+    for (const d of readdirSync(resolve(rel), { withFileTypes: true }).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    )) {
+      const path = `${rel}/${d.name}`;
+      if (d.isDirectory()) walk(path);
+      else if (d.isFile()) out.push(path);
+    }
+  };
+  if (existsSync(resolve(dir))) walk(dir);
+  return out;
+}
+
+let spriteMemo: { stamp: string; index: ImageIndex } | undefined;
 
 /**
  * Le nom d'une entité d'une cible, d'après son entrée : le nom d'affichage
@@ -6657,6 +6868,7 @@ export async function extractorOverview(deps: ExtractorDeps = EXTRACTOR_DEPS) {
       label: t.label,
       file: t.file,
       site: t.id === 'monster',
+      sheet: isSheetTarget(t.id),
       committed: Object.keys(deps.committed(t)).length,
       buckets,
       actionable: buckets.new + buckets.diff + buckets.removed,
@@ -6682,7 +6894,14 @@ export async function extractorTarget(
 ) {
   const target = (await deps.targets()).find((t) => t.id === id);
   if (!target) return { error: `cible inconnue : ${id}`, status: 404 } as const;
-  const base = { id: target.id, label: target.label, file: target.file, site: id === 'monster' };
+  const base = {
+    id: target.id,
+    label: target.label,
+    file: target.file,
+    site: id === 'monster',
+    /** Les entités de cette cible ont une fiche (`#extractor/<cible>/<clé>`). */
+    sheet: isSheetTarget(id),
+  };
   if (!deps.tables())
     return {
       ...base,
@@ -6734,6 +6953,10 @@ export async function extractorTarget(
     shown: entities.length,
     entities,
     was: deps.signature(target),
+    // La cible monster porte le `select` de « Intégrer un mode ».
+    ...(id === 'monster'
+      ? { modes: await modeOptions(fresh as Record<string, Monster>, deps) }
+      : {}),
   };
 }
 
@@ -6875,4 +7098,636 @@ export async function integrateItemAction(
     report,
   );
   return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: r.assets, removed };
+}
+
+// ------------------------------------------------------- fiches d'extraction ----
+//
+// Les FICHES par entité de la section « Extraction » (lot F21, étape 20 de la
+// migration) : ce que l'extraction fraîche propose pour UN perso, UN monstre ou
+// UNE entité d'équipement — les pages `/admin/extractor/<x>/[id]` et
+// `GearDetail` —, et le geste « Intégrer » qui l'écrit dans `data/generated/`
+// et COMMITTE. S'y ajoutent « Intégrer un mode » (tous les monstres d'un mode
+// de jeu) et la route des sprites bruts du jeu, que les icônes des monstres et
+// des skills frais n'ont qu'ici.
+
+/** Les cibles qui ont une fiche : le perso, le monstre, l'équipement par famille (pas les armures). */
+export type SheetTarget = 'character' | 'monster' | GearTarget;
+export const SHEET_TARGETS: readonly SheetTarget[] = [
+  'character',
+  'monster',
+  'ee',
+  'weapon',
+  'amulet',
+  'talisman',
+  'set',
+];
+export const isSheetTarget = (id: string): id is SheetTarget =>
+  (SHEET_TARGETS as readonly string[]).includes(id);
+
+/** La route des sprites bruts de quick (`GET /api/sprite/<nom>`), et l'adresse d'un sprite. */
+export const SPRITE_ROUTE = '/api/sprite';
+const spriteSrc = (name: string): string => `${SPRITE_ROUTE}/${encodeURIComponent(name)}`;
+
+/** Un nom de sprite : un basename, sans chemin ; l'extension est ignorée. */
+const SPRITE_NAME = /^[\w.-]+$/;
+const SPRITE_TYPES: Record<string, string> = {
+  png: 'image/png',
+  webp: 'image/webp',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+};
+
+/**
+ * Le fichier d'un sprite brut de `.gamedata/extracted/images`, par basename
+ * (la règle de `/api/admin/sprite/[name]` : insensible à la casse, extension
+ * tolérée) ; `null` pour un nom qui n'en est pas un ou un sprite absent.
+ */
+export function spriteFile(
+  name: string,
+  index: ImageIndex = EXTRACTOR_DEPS.spriteIndex(),
+): { file: string; type: string } | null {
+  if (!SPRITE_NAME.test(name)) return null;
+  const file = index.get(name.toLowerCase().replace(/\.(png|webp|jpe?g)$/i, ''));
+  if (!file) return null;
+  const ext = file.split('.').pop()?.toLowerCase() ?? '';
+  return { file, type: SPRITE_TYPES[ext] ?? 'application/octet-stream' };
+}
+
+/** Un mode de jeu du `select` de « Intégrer un mode ». */
+export interface ModeOption {
+  value: string;
+  label: string;
+}
+
+/**
+ * Les modes où un monstre frais spawne, nommés (la règle de la sidebar de
+ * l'admin : un libellé partagé par deux slugs — guild raid main et sub — est
+ * suffixé du slug), triés par libellé.
+ */
+async function modeOptions(
+  fresh: Record<string, Monster>,
+  deps: ExtractorDeps,
+): Promise<ModeOption[]> {
+  const enc = await deps.encounters();
+  const label = (mode: string): string => enc.modes[mode]?.en ?? mode;
+  const seen = new Set<string>();
+  for (const m of Object.values(fresh))
+    for (const s of m.spawns ?? []) {
+      const mode = enc.dungeons[s.dungeon]?.mode;
+      if (mode) seen.add(mode);
+    }
+  const counts = new Map<string, number>();
+  for (const mode of seen) counts.set(label(mode), (counts.get(label(mode)) ?? 0) + 1);
+  return [...seen]
+    .map((value) => ({
+      value,
+      label: (counts.get(label(value)) ?? 0) > 1 ? `${label(value)} (${value})` : label(value),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
+/** Une ligne de stats extraites d'un perso : la fourchette du Lv 1 au Lv 100. */
+export interface SheetStat {
+  slug: string;
+  abbr: string;
+  value: string;
+}
+
+/** Une carte de skill telle que la fiche la montre : nom, type, description résolue, icône, chips. */
+export interface SheetCard {
+  id: string;
+  name: string;
+  type: string;
+  /** Le type, et pour un `rage_enterN` le déclencheur réel (« rage_enter — à 70 % PV »). */
+  typeLabel: string;
+  desc?: string;
+  iconSrc?: string;
+  chips: SheetChip[];
+}
+
+/** Les types de monstres qui portent le badge « BOSS » (les mêmes que l'admin). */
+const SLOT_FRAME_GRADE: Record<string, string> = {
+  normal: 'normal',
+  magic: 'magic',
+  rare: 'rare',
+  unique: 'unique',
+};
+
+/** Ce que l'écran a besoin de savoir d'un perso frais. */
+export interface CharacterSheet {
+  id: string;
+  name: string;
+  element: string;
+  class: string;
+  subClass?: string;
+  race: string;
+  rarity: number;
+  chain?: string;
+  portrait: string;
+  stats: SheetStat[];
+  tags: { slug: string; label: string; group?: string; detail?: string }[];
+  cards: SheetCard[];
+  effects: ReferencedEffect[];
+  costumes: string[];
+  /** Les persos sans date de sortie une fois celui-ci intégré : le geste est REFUSÉ tant qu'ils y sont. */
+  missing: MissingRelease[];
+}
+
+/** Ce que l'écran a besoin de savoir d'un monstre : le frais, ou le committé d'un disparu. */
+export interface MonsterSheet {
+  id: string;
+  name: string;
+  nickname?: string;
+  type: string;
+  element: string;
+  class: string;
+  subClass?: string;
+  race: string;
+  rarity: number;
+  aiType?: string;
+  iconSrc: string;
+  slotSrc: string;
+  badgeSrc?: string;
+  /** Vrai quand seul le committé le connaît : rien à intégrer. */
+  committedOnly: boolean;
+  stats: MonsterStatsSheet;
+  encounters: ReturnType<typeof monsterEncounters>;
+  relations: ReturnType<typeof monsterRelations>;
+  immunities: { chips: SheetChip[]; unresolved: string[] };
+  cards: SheetCard[];
+  archives: {
+    key: string;
+    version: number;
+    ref: string;
+    committedAt: string;
+    gameVersion?: string;
+    label?: string;
+    skills: number;
+  }[];
+}
+
+type SpritedPassive = GearPassiveView & { iconSrc: string };
+
+/** Ce que l'écran a besoin de savoir d'une entité d'équipement fraîche : la fiche, ses sprites adressés. */
+export interface GearSheetView extends Omit<GearSheet, 'passives' | 'classVariants' | 'pieces'> {
+  iconSrc: string;
+  /** Le cadre de rareté du site, derrière le sprite. */
+  frame: string;
+  passives: SpritedPassive[];
+  classVariants?: (Omit<GearClassVariantView, 'passives'> & {
+    iconSrc: string;
+    passives: SpritedPassive[];
+  })[];
+  pieces?: { slot: string; icon: string; iconSrc: string }[];
+}
+
+/** Ce que « Intégrer » va écrire, en clair, et le message du commit. */
+export interface IntegratePlan {
+  files: string[];
+  commit: string;
+}
+
+const integrateMessage = (target: string, name: string, key: string): string =>
+  `chore(extractor): ${target} ${name} (${key}) integre`;
+
+/** Les fichiers de `syncDerived`, dits une fois dans un plan. */
+const DERIVED_PLAN = 'data/generated/damage/* et data/generated/solver/* (re-dérivés)';
+
+const withSprite = <T extends { icon: string }>(p: T): T & { iconSrc: string } => ({
+  ...p,
+  iconSrc: spriteSrc(p.icon),
+});
+
+/**
+ * La fiche d'une entité (`#extractor/<cible>/<clé>`) : son statut de revue et
+ * son diff en arbre (celui de F20), la fiche selon la cible — le perso frais
+ * (stats, tags détectés, cartes de skills aux icônes du jeu, statuts
+ * référencés, costumes, et les dates de sortie qui MANQUERAIENT), le monstre
+ * (stats par rencontre, rencontres, relations, immunités, skills, archives
+ * figées — le committé en repli pour un monstre disparu), l'équipement par
+ * famille depuis le FRAIS —, le PLAN de son intégration, les liens croisés,
+ * et `was`, la signature que le geste renverra. Sans tables du jeu, rien ne se
+ * lit et la réponse le dit.
+ */
+export async function extractorEntity(
+  target: string,
+  key: string,
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+) {
+  const t = (await deps.targets()).find((x) => x.id === target);
+  if (!t) return { error: `cible inconnue : ${target}`, status: 404 } as const;
+  if (!isSheetTarget(target))
+    return { error: `pas de fiche pour la cible ${target}`, status: 404 } as const;
+  const base = { target, label: t.label, file: t.file, key };
+  if (!deps.tables()) return { ...base, tables: false as const, reason: NO_GAME_DATA, was: '' };
+
+  const review = await deps.entityReview(target, key);
+  const labels = diffLabels(review.fields, await deps.resolvers(target));
+  const common = {
+    ...base,
+    tables: true as const,
+    /** Le dossier des icônes d'effets sous `imgBase`, pour les chips. */
+    effectSprite: EFFECT_SPRITE,
+    /** Le statut de revue de l'entité : added, changed, removed, same. */
+    review: review.status,
+    fields: review.fields.length,
+    diff: diffTree(review.fields, labels),
+    was: deps.signature(t),
+  };
+
+  if (target === 'character') {
+    const bundle = await deps.characterBundle(key);
+    if (!bundle) return { ...common, character: null, plan: null, links: {} };
+    const c = bundle.char;
+    const skills = Object.values(bundle.skills) as Skill[];
+    const cards: SheetCard[] = characterKitCards(bundle, spriteSrc).map((card) => ({
+      id: card.id,
+      name: card.name,
+      type: card.type,
+      typeLabel: card.type,
+      ...(card.desc ? { desc: card.desc } : {}),
+      ...(card.iconSrc ? { iconSrc: card.iconSrc } : {}),
+      chips: card.chips,
+    }));
+    const character: CharacterSheet = {
+      id: c.id,
+      name: characterDisplayName(c),
+      element: c.element,
+      class: c.class,
+      ...(c.subClass ? { subClass: c.subClass } : {}),
+      race: c.race,
+      rarity: c.rarity,
+      ...(c.chainType ? { chain: c.chainType } : {}),
+      portrait: spriteSrc(`CT_${c.id}`),
+      stats: Object.entries(c.stats).map(([slug, r]) => ({
+        slug,
+        abbr: statAbbr(slug),
+        value: r.min === r.max ? String(r.max) : `${r.min} – ${r.max}`,
+      })),
+      tags: (c.tags ?? []).map((slug) => {
+        const group = tagDef(slug)?.group;
+        return {
+          slug,
+          label: tagLabel(slug, 'en'),
+          ...(group ? { group } : {}),
+          ...(slug === 'ignore-defense' && c.ignoreDefense
+            ? { detail: c.ignoreDefense.join(' + ') }
+            : {}),
+        };
+      }),
+      cards,
+      effects: await deps.referencedEffects(skills),
+      costumes: (c.costumes ?? []).map((x) => x.name.en),
+      missing: await deps.missingReleases(c),
+    };
+    const plan: IntegratePlan = {
+      files: [
+        'characters.json',
+        'skills.json',
+        'characters-slug-to-id.json',
+        'character-release.json',
+        DERIVED_PLAN,
+        'les images du perso et de ses skills, stagées',
+      ],
+      commit: integrateMessage('character', character.name, key),
+    };
+    return {
+      ...common,
+      character,
+      plan,
+      links: { sheet: `character/${key}` },
+    };
+  }
+
+  if (target === 'monster') {
+    const bundle = await deps.monsterBundle(key);
+    const committedM = deps.committed(t)[key] as Monster | undefined;
+    const m = bundle?.monster ?? committedM;
+    if (!m) return { ...common, monster: null, plan: null, links: {} };
+    // Les skills : le frais par-dessus le committé — ceux d'un disparu n'existent que là.
+    const catalog: Record<string, Skill | undefined> = {
+      ...deps.committedMonsterSkills(),
+      ...((bundle?.skills ?? {}) as Record<string, Skill>),
+    };
+    const enc = await deps.encounters();
+    const src: DungeonSources = {
+      dungeons: enc.dungeons,
+      modes: enc.modes,
+      fallback: deps.committedDungeons(),
+    };
+    const contexts = monsterStatContexts(m, src);
+    const optionLabels = await deps.rankOptionLabels(contexts.flatMap((x) => x.options ?? []));
+    const allFresh = (await deps.fresh('monster')) as Record<string, Monster>;
+    // Les cartes sous les RÈGLES SEULES (aucune curation) : la fiche montre ce
+    // que le jeu dit ; le câblage des chips est l'onglet Monstres.
+    const { cards, chips } = monsterKitCards(m, catalog, {
+      chipOwner: {},
+      chipHide: {},
+      chipAdd: {},
+    });
+    const chipOf = (buff: string): SheetChip => {
+      const c = chips.find((x) => x.buff === buff);
+      return {
+        ref: buff,
+        name: c?.name ?? buff,
+        ...(c?.icon ? { icon: c.icon } : {}),
+        isDebuff: c?.isDebuff ?? false,
+      };
+    };
+    const monster: MonsterSheet = {
+      id: m.id,
+      name: m.name.en || '(sans nom)',
+      ...(m.nickname?.en ? { nickname: m.nickname.en } : {}),
+      type: m.type,
+      element: m.element,
+      class: m.class,
+      ...(m.subClass ? { subClass: m.subClass } : {}),
+      race: m.race,
+      rarity: m.rarity,
+      ...(m.aiType ? { aiType: m.aiType } : {}),
+      iconSrc: monsterIconSrc(m.icon, SPRITE_ROUTE),
+      slotSrc: monsterSlotSrc(m.type, SPRITE_ROUTE),
+      ...(monsterBossBadgeSrc(m.type, SPRITE_ROUTE)
+        ? { badgeSrc: monsterBossBadgeSrc(m.type, SPRITE_ROUTE) }
+        : {}),
+      committedOnly: !bundle,
+      stats: monsterStatsSheet(
+        m.stats,
+        contexts,
+        deps.statScales(),
+        enc.bossQuirkMods,
+        optionLabels,
+      ),
+      encounters: monsterEncounters(m, src),
+      relations: monsterRelations(m, allFresh),
+      immunities: await deps.immunities(m),
+      cards: cards.map((card) => {
+        const rage = monsterRageLabel(m, card.type);
+        return {
+          id: card.id,
+          name: card.name || '(sans nom)',
+          type: card.type,
+          typeLabel: rage ? `${card.type} — ${rage}` : card.type,
+          ...(card.desc ? { desc: card.desc } : {}),
+          ...(card.icon ? { iconSrc: spriteSrc(card.icon) } : {}),
+          chips: card.chips.map(chipOf),
+        };
+      }),
+      archives: (await deps.archives(key)).map((a) => ({
+        key: `${a.id}@${a.version}`,
+        version: a.version,
+        ref: a.ref,
+        committedAt: a.committedAt,
+        ...(a.gameVersion ? { gameVersion: a.gameVersion } : {}),
+        ...(a.label ? { label: a.label } : {}),
+        skills: Object.keys(a.skills).length,
+      })),
+    };
+    const plan: IntegratePlan | null = bundle
+      ? {
+          files: [
+            'monsters.json',
+            'monster-skills.json',
+            ...(m.spawns?.length ? ['encounters.json (ses donjons)'] : []),
+            DERIVED_PLAN,
+          ],
+          commit: integrateMessage('monster', monster.name, key),
+        }
+      : null;
+    return { ...common, monster, plan, links: { chips: `monsters/${key}` } };
+  }
+
+  // L'équipement : la famille, l'EE ou le set, lu du build frais entier.
+  const sheet = gearSheet(await deps.equipment(), target, key);
+  if (!sheet) return { ...common, gear: null, plan: null, links: {} };
+  const { passives, classVariants, pieces, ...rest } = sheet;
+  const gear: GearSheetView = {
+    ...rest,
+    iconSrc: spriteSrc(sheet.icon),
+    frame: img.slotFrame(SLOT_FRAME_GRADE[sheet.grade] ?? 'normal'),
+    passives: passives.map(withSprite),
+    ...(classVariants
+      ? {
+          classVariants: classVariants.map((v) => ({
+            ...withSprite(v),
+            passives: v.passives.map(withSprite),
+          })),
+        }
+      : {}),
+    ...(pieces ? { pieces: pieces.map(withSprite) } : {}),
+  };
+  const { kind, familyKey } = GEAR_TARGETS[target];
+  const plan: IntegratePlan = {
+    files: [
+      `equipment/${kind === 'accessory' ? 'accessory' : kind === 'set' ? 'sets' : kind}.json${familyKey ? ' (toute la famille)' : ''}`,
+      ...(familyKey ? ['equipment/families.json'] : []),
+      'equipment/pools.json, passives.json, breakLimits.json (les records référencés)',
+      'les icônes de la famille et de ses passifs, stagées',
+    ],
+    commit: integrateMessage(target, sheet.name.en, sheet.id),
+  };
+  return {
+    ...common,
+    gear,
+    plan,
+    links: sheet.characterId ? { sheet: `character/${sheet.characterId}/ee` } : {},
+  };
+}
+
+/** Ce que rend « Intégrer » : l'issue, le bilan d'images, les dates manquantes d'un refus. */
+export interface IntegrateOutcome extends ExtractorOutcome {
+  missing?: MissingRelease[];
+}
+
+/** Les fichiers d'un rapport, sous `data/generated/`, plus ceux que `syncDerived` a réécrits. */
+const integratedPaths = (files: string[], deps: ExtractorDeps, derived: boolean): string[] => [
+  ...new Set([
+    ...files.map((f) => `${GENERATED_DIR}/${f}`),
+    ...(derived ? deps.derivedFiles() : []),
+  ]),
+];
+
+/**
+ * « Intégrer » (ou « Ré-intégrer ») UNE entité, puis UN commit : le perso
+ * (`integrateCharacter` — entité, skills, slugs, dates de sortie, images,
+ * `syncDerived`), le monstre (`integrateMonster` — entité, skills, donjons,
+ * `syncDerived`), l'équipement (`integrateEquipment` — la famille entière,
+ * `families.json`, les records référencés, les icônes). Même porte que les
+ * gestes de F20 : tables du jeu, signature `was`. Un perso dont la date de
+ * sortie manque est REFUSÉ avant d'écrire, avec la clé à ajouter au curé —
+ * la garde de `releasesFor`, rendue sans exception. Les fichiers de
+ * `syncDerived` (`data/generated/damage`, `solver`) partent dans le même
+ * commit ; `data/extracted/solver` n'est pas suivi par git.
+ */
+export async function integrateEntity(
+  target: string,
+  key: unknown,
+  was: unknown,
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+  report?: Report,
+): Promise<IntegrateOutcome> {
+  const id = typeof key === 'string' ? key.trim() : '';
+  if (!id) return { ok: false, log: ['Aucune entité.'] };
+  if (!isSheetTarget(target)) return { ok: false, log: [`pas de fiche pour la cible ${target}`] };
+  const gate = await extractorGate(target, was, deps);
+  if ('refused' in gate) return gate.refused;
+  const j = journal(report);
+
+  if (target === 'character') {
+    const bundle = await deps.characterBundle(id);
+    if (!bundle) return { ok: false, log: [`perso ${id} absent de l’extraction fraîche`] };
+    const name = characterDisplayName(bundle.char);
+    const missing = await deps.missingReleases(bundle.char);
+    if (missing.length)
+      return {
+        ok: false,
+        missing,
+        log: [
+          `Rien n’est écrit — ${missing.length > 1 ? `${missing.length} persos n’ont` : `${missing[0].label || missing[0].id} (${missing[0].id}) n’a`} de date de sortie d’aucune source : ajouter ${missing.map((m) => `« ${m.id} »`).join(', ')} à ${RELEASE_CURATED_PATH} (à la main, « id » : « AAAA-MM-JJ »), puis relire la fiche.`,
+        ],
+      };
+    j.doing(
+      `${name} (${id}) : intégration dans ${GENERATED_DIR} (entité, skills, slugs, dates de sortie), images, re-dérivation damage et solver`,
+    );
+    const r = await deps.integrateCharacter(id);
+    j.done(`${name} (${id}) : intégré — ${r.files.join(', ')} ; damage et solver re-dérivés.`);
+    for (const l of assetLines(r.assets)) j.done(l);
+    const commit = deps.commitPaths(
+      integratedPaths(r.files, deps, true),
+      integrateMessage('character', name, id),
+      report,
+    );
+    return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: r.assets };
+  }
+
+  if (target === 'monster') {
+    const bundle = await deps.monsterBundle(id);
+    if (!bundle) return { ok: false, log: [`monstre ${id} absent de l’extraction fraîche`] };
+    const name = bundle.monster.name.en || id;
+    j.doing(
+      `${name} (${id}) : intégration dans ${GENERATED_DIR} (entité, skills, donjons), re-dérivation damage et solver`,
+    );
+    const r = await deps.integrateMonster(id);
+    j.done(`${name} (${id}) : intégré — ${r.files.join(', ')} ; damage et solver re-dérivés.`);
+    const commit = deps.commitPaths(
+      integratedPaths(r.files, deps, true),
+      integrateMessage('monster', name, id),
+      report,
+    );
+    return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: null };
+  }
+
+  const sheet = gearSheet(await deps.equipment(), target, id);
+  if (!sheet) return { ok: false, log: [`${target} ${id} absent de l’extraction fraîche`] };
+  const name = sheet.name.en || sheet.id;
+  const { kind } = GEAR_TARGETS[target];
+  j.doing(
+    `${name} (${sheet.id}) : intégration dans ${GENERATED_DIR}/equipment (${sheet.kind === 'family' ? 'la famille entière, families.json' : sheet.kind}, les records référencés), icônes`,
+  );
+  const r = await deps.integrateEquipment(kind, sheet.id);
+  j.done(`${name} (${sheet.id}) : intégré — ${r.files.join(', ')}.`);
+  for (const l of assetLines(r.assets)) j.done(l);
+  const commit = deps.commitPaths(
+    integratedPaths(r.files, deps, false),
+    integrateMessage(target, name, sheet.id),
+    report,
+  );
+  return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: r.assets };
+}
+
+/** Le PLAN d'« Intégrer un mode » : les monstres qui seraient écrits. */
+export interface ModePlan {
+  mode: string;
+  label: string;
+  /** Les spawnés du mode, puis leurs adds, par id. */
+  ids: { id: string; name: string; add: boolean }[];
+  count: number;
+  commit: string;
+  was: string;
+}
+
+const modeMessage = (mode: string, n: number): string =>
+  `chore(extractor): mode ${mode} — ${n} monstre${n > 1 ? 's' : ''} integre${n > 1 ? 's' : ''}`;
+
+/** Les ids qu'`integrateMonsterMode` écrirait : les spawnés du mode et leurs adds (sa règle, rejouée). */
+async function modeIds(
+  mode: string,
+  deps: ExtractorDeps,
+): Promise<{ label: string; ids: ModePlan['ids'] }> {
+  const fresh = (await deps.fresh('monster')) as Record<string, Monster>;
+  const enc = await deps.encounters();
+  const spawned = new Set<string>();
+  for (const m of Object.values(fresh))
+    if ((m.spawns ?? []).some((s) => enc.dungeons[s.dungeon]?.mode === mode)) spawned.add(m.id);
+  const adds = new Set<string>();
+  if (spawned.size)
+    for (const m of Object.values(fresh)) {
+      if (spawned.has(m.id)) continue;
+      const anchors = [...(m.summonedBy ?? []), ...(m.linkedTo ?? [])];
+      if (anchors.some((a) => spawned.has(a))) adds.add(m.id);
+    }
+  const name = (id: string): string => fresh[id]?.name.en || '(sans nom)';
+  const ids = [...spawned, ...adds].sort().map((id) => ({ id, name: name(id), add: adds.has(id) }));
+  return { label: enc.modes[mode]?.en ?? mode, ids };
+}
+
+/**
+ * Le plan d'« Intégrer un mode » (`GET /api/extractor/mode?mode=`) : les ids
+ * qui seraient écrits et leur nombre, AVANT le geste ; `was`, la signature de
+ * la cible monster, que le geste renverra.
+ */
+export async function planMode(mode: unknown, deps: ExtractorDeps = EXTRACTOR_DEPS) {
+  const slug = typeof mode === 'string' ? mode.trim() : '';
+  if (!slug) return { error: 'mode manquant', status: 400 } as const;
+  const target = (await deps.targets()).find((t) => t.id === 'monster');
+  if (!target) return { error: 'cible inconnue : monster', status: 404 } as const;
+  if (!deps.tables()) return { error: NO_GAME_DATA, status: 409 } as const;
+  const { label, ids } = await modeIds(slug, deps);
+  const plan: ModePlan = {
+    mode: slug,
+    label,
+    ids,
+    count: ids.length,
+    commit: modeMessage(slug, ids.length),
+    was: deps.signature(target),
+  };
+  return plan;
+}
+
+/**
+ * « Intégrer un mode » (`integrateMonsterMode` : tous les spawnés du mode et
+ * leurs adds — entités, skills, donjons —, `syncDerived`), puis UN commit.
+ * Même porte : tables, signature. Un mode sans monstre est refusé avant
+ * d'écrire.
+ */
+export async function integrateMode(
+  mode: unknown,
+  was: unknown,
+  deps: ExtractorDeps = EXTRACTOR_DEPS,
+  report?: Report,
+): Promise<ExtractorOutcome & { ids?: string[] }> {
+  const slug = typeof mode === 'string' ? mode.trim() : '';
+  if (!slug) return { ok: false, log: ['Aucun mode.'] };
+  const gate = await extractorGate('monster', was, deps);
+  if ('refused' in gate) return gate.refused;
+  const { label, ids } = await modeIds(slug, deps);
+  if (!ids.length)
+    return {
+      ok: false,
+      log: [`Rien n’est écrit — aucun monstre ne spawne dans le mode « ${slug} ».`],
+    };
+  const j = journal(report);
+  j.doing(
+    `mode ${label} : intégration de ${ids.length} monstre${ids.length > 1 ? 's' : ''} dans ${GENERATED_DIR} (entités, skills, donjons), re-dérivation damage et solver`,
+  );
+  const r = await deps.integrateMode(slug);
+  j.done(
+    `mode ${label} : ${r.ids.length} monstre${r.ids.length > 1 ? 's' : ''} intégré${r.ids.length > 1 ? 's' : ''} — ${r.files.join(', ')} ; damage et solver re-dérivés.`,
+  );
+  const commit = deps.commitPaths(
+    integratedPaths(r.files, deps, true),
+    modeMessage(slug, r.ids.length),
+    report,
+  );
+  return { ok: commit.ok, log: [...j.lines, ...commit.log], assets: null, ids: r.ids };
 }

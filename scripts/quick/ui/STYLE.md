@@ -375,7 +375,7 @@ table quittée. Propres à l'onglet, dans `tabs/gamedata.css` : `.t-info`,
 `.t-id`, `.t-reader`, `.t-note`, `.t-bar`, `.t-cols`, `.t-grid`, `.t-v`,
 `.t-text`, `.t-raw`, `.t-kv`, `.t-pair`.
 
-### Extraction (`wide`, fait — F20 ; fiches et intégration F21, versionnage F22)
+### Extraction (`wide`, fait — F20 ; fiches et intégration F21 ; versionnage F22)
 
 La revue de maintenance de l'admin — l'extraction fraîche des tables du jeu
 contre ce que le site committe —, cible par cible, et ses gestes. Croquis du
@@ -394,12 +394,25 @@ LA CIBLE (#ex-target, `#extractor/<cible>` ; la vue d'ensemble se cache)
 .card.pad.ex-assets (bordé de vert, caché ; après un geste qui a stagé) — « Images mises en place » [✕] · « 2 produites, 1 refaite, 3 déjà là, 1 manquante. » · ul.ex-missing : `clé` — raison · p.hint « Elles attendent dans le staging (.assets-staging/) : « Committer » de la section Patch les pousse sur R2… » [Ouvrir Patch] (data-go)
 .card.pad  .form : [Chercher 30ch « Début d'un mot du nom, ou la clé »] Statut [tout 12 | new 1 | diff 2 | minor 3 | typo 1 | removed 1] (.ex-seg, le segmenté de Gear reco recopié, le compte en petit dans chaque bouton)   « 12 entités à revoir » ; dès qu'un filtre ou la recherche joue : « 3 sur 12 entités »
 .card.ex-list — les entités en LIGNES, repliées, par pages de 100 : card-foot « 100 lignes montrées sur 312 » … [100 de plus]
-   une ligne (.ex-line) : .ex-toggle (un bouton, aria-expanded) = badge du statut (58 px, centré : new = edit, diff et removed = ko, minor et typo = off) · nom · clé (chasse fixe, atténuée) … « 3 champs » (rien pour une nouvelle ou une disparue) · chevron ▶ (tourné quand déplié) ; pour un item, à droite [Intégrer] ou [Retirer] (.btn.ghost.sm, éteints pendant un geste)
+   une ligne (.ex-line) : .ex-toggle (un bouton, aria-expanded) = badge du statut (58 px, centré : new = edit, diff et removed = ko, minor et typo = off) · nom · clé (chasse fixe, atténuée) … « 3 champs » (rien pour une nouvelle ou une disparue) · chevron ▶ (tourné quand déplié) ; pour un item, à droite [Intégrer] ou [Retirer] (.btn.ghost.sm, éteints pendant un geste) ; sur une cible à fiches (`sheet`), à droite [Fiche] (.btn.ghost.sm)
+.card.pad#ex-mode (la cible monster seule, F21) — .form : [Intégrer un mode ▾ (select, 30ch)] [Planifier] (.btn.ghost) · « Tous les monstres qui spawnent dans ce mode, et leurs adds… UN commit. » ; puis .ex-plan (rouge) : « Écrire n monstres du mode X dans monsters.json, monster-skills.json et encounters.json (les spawnés, puis leurs adds), re-dériver damage et solver, puis un commit « … ». » · .ex-mode-ids : `id` nom, les adds atténués et suffixés « (add) », quarante puis « … n de plus » · [Écrire et committer] (.btn.danger) [Annuler]
    tri du serveur : diff, new, removed, puis minor et typo ; à statut égal les plus touchées d'abord, puis par clé
    dépliée, .ex-diff (en retrait de 44 px, sous la ligne) : un .ex-group par racine (fond de page, bordé), titré en capitales « SKILLS › Fire Strike · second » (l'élément résolu en texte normal) ; dans le groupe, un .ex-field par feuille : son chemin sous le groupe en chasse fixe (« desc › en », « (entier) » pour l'élément même), puis
      un TEXTE : deux bandes l'une sous l'autre — « existant » (fond rouge à 6 %) et « extrait » (vert) —, les mots retirés surlignés rouge à 25 %, les ajoutés vert, le reste atténué ; la couleur d'une balise `<color=#…>` du jeu posée sur ses mots
      un ARBRE : deux colonnes côte à côte (.ex-trees, l'existant à gauche, l'extrait à droite ; l'une sous l'autre sous 800 px) — une ligne par clé, indentée de 14 px par profondeur (`--d`), la clé en chasse fixe, une branche en gras avec son compte « (2) », « (absent) » en italique pour un côté vide, un id résolu suivi de « — son libellé »
    .empty « Aucune entité ne correspond. » · « Pas de données du jeu : lancer un patch (pull) d'abord. »
+LA FICHE (#ex-entity, `#extractor/<cible>/<clé>` sur une cible à fiches — perso, monstre, ee, weapon, amulet, talisman, set ; la cible se cache)
+.card.pad.ex-head  [← Personnages] · .ex-face : le portrait du perso (`/api/sprite/CT_<id>`, 56 px arrondi), ou la vignette du monstre sur son fond de slot (`GD_Slot_Bg_*`) avec le badge BOSS, ou la tuile de l'équipement sur son cadre de rareté · .ex-id : le nom en strong (« Slime — The Blob ») · .ex-meta : `id` · badge off du type · icônes d'élément et de classe suivies de leur slug · race · étoiles · « chaîne start » / « IA attack » / « ★ 5/6 · AP · classes : … » / « EE de `id` · confiance 3 » · .ex-badges : « new — pas encore intégré » (edit), « 3 champs divergent » (ko), « absent de l'extraction fraîche » (warn), « à jour — le committé est l'extraction » (ok), ou la raison sans tables (warn) · .ex-links « Voir aussi : fiche perso » / « fiche perso › EE » / « câbler les chips » (data-go) … à droite [Intégrer] / [Ré-intégrer] (.btn.primary ; caché sans frais, et à jour pour un perso ou un monstre ; éteint tant qu'une date de sortie manque)
+   p.hint : ce que le geste écrit, selon la cible — et, pour un monstre, « Figer une version et ré-épingler ses guides : à venir (F22). »
+   .ex-refuse (bordé de rouge, caché) : « Intégration refusée avant d'écrire — ce perso n'a de date de sortie d'aucune source… » · ul : `id` libellé · « Ajouter la clé à la main dans data/curated/character-release.json ("id": "AAAA-MM-JJ"), puis relire la fiche. »
+   .ex-plan (rouge, caché) — le PLAN d'« Intégrer » : « Écrire dans data/generated : » · ul.ex-iplan-files : les fichiers (characters.json, skills.json, …, « data/generated/damage/* et data/generated/solver/* (re-dérivés) », « les images…, stagées ») · « puis UN commit « chore(extractor): <cible> <nom> (<clé>) integre » » · [Écrire et committer] (.btn.danger) [Annuler]
+.card#ex-entity-diff (caché sans écart) — card-head « Ce qui change » · « 3 champs » ; dessous le diff de la cible (.ex-diff, mêmes groupes, mêmes bandes et arbres)
+#ex-sheet — deux colonnes de .card.pad.ex-sec (titre en capitales grises + badge off du compte ; `.ex-sec-wide` prend les deux ; une seule sous 1000 px) :
+   PERSO : « Stats extraites » (.ex-grid de .ex-cell : abréviation au-dessus de la valeur « 100 – 1000 ») · « Tags détectés » (.ex-tag : `slug` · libellé · groupe · détail ; le rappel de la page admin en hint) · « Skills » (wide : .ex-cols, deux .card.ex-skill par rangée — icône 36 px du sprite du jeu, nom, `id · type`, la description du jeu (`gameText`), les chips d'effets .ex-chip avec leur tuile .ex-fx) · « Statuts référencés » (chips : la tuile, le nom en lien vers `#effects/<id>`, badge off « caché du live » ; en hint « Cacher un statut du live se règle dans Éditeurs › Effets ») · « Costumes » (ul)
+   MONSTRE : « Stats à la rencontre » (wide : [Rencontre ▾ « SSS · Lv 120 — Mode · Stage (palier SSS) »] (select, éteint à une seule option, le palier le plus haut d'office) · la grille (HP « × 3 barres ») · .ex-ctx : « Lv 120 · transcendance 2 » / « modificateurs du donjon : ATK +10 % · quirks de compte : RES −10 % » ou « valeurs du templet, interpolées » / « dégâts : 4 250 001 – 5 000 000 · barre du palier : 750 000 · PV du mode : … » / « Passifs du palier : » pastilles) · « Rencontres » (ul : mode · stage (zone) · Lv n · n barres ; « … n de plus » après vingt-cinq ; sinon « Jamais spawné directement — invoqué par : …, lié au kit de : … » ; « Invoque : … » — chaque monstre un lien vers sa fiche) · « Immunités » (chips, et « ⚠ sans entrée au glossaire des effets : 64 “Freeze” » en ambre) · « Skills » (wide, comme le perso ; un rage_enter porte « — à 70 % PV ») · « Archives figées » (ul : `<id>@<n>` — date, source sha, jeu 1.4.14 — note · n skills ; sinon « Aucune version figée : les guides suivent le live. »)
+   ÉQUIPEMENT : « Main stats » (.ex-pill) · « Passif » / « Passif (base → +10) » (.ex-passive : icône 24 px, nom, « niv. 1 (s'ajoute) · 2 paliers », le texte au premier palier, « max : » au dernier ; .ex-variant « variante striker » `id` + ses mains + ses passifs ; les effets structurés en pastilles) · « Pièces (6★) » (.ex-piece : icône 40 px + slot) · « Bonus (base → enchanté) » (ul : base · 2P : … · 4P : …) · « Membres de la famille » (.ex-mono : les ids)
+   .empty « Lecture… » / « Fiche illisible : … »
+le bilan d'images (.ex-assets) vit au niveau de la section : il suit le dernier geste, d'une cible ou d'une fiche
 ```
 
 Tout ce qui se lit vient du serveur. `GET /api/extractor` (`extractorOverview`)
@@ -427,15 +440,60 @@ confirmee`, `… — n retouches mineures`, `chore(extractor): item <nom>
 bilan d'images posé dans sa carte. Un seul geste à la fois : les boutons
 sont éteints pendant qu'il tourne. Rien ne se saisit : jamais `dirty`.
 `sections.go('extractor/<cible>')` (le Tableau de bord) ouvre la section sur
-cette cible, même déjà à l'écran. Propres à l'onglet, dans
-`tabs/extractor.css` : `.ex-end`, `.ex-badges`, `.ex-n`, `.ex-quiet`,
-`.ex-tlabel`, `.ex-scope`, `.ex-head`, `.ex-who`, `.ex-id`, `.ex-meta`,
-`.ex-acts`, `.ex-plan`, `.ex-assets`, `.ex-missing`, `.ex-seg`, `.ex-total`,
-`.ex-list`, `.ex-rows`, `.ex-row`, `.ex-line`, `.ex-toggle`, `.ex-name`,
-`.ex-key`, `.ex-fields`, `.ex-chev`, `.ex-diff`, `.ex-group`, `.ex-gtitle`,
+cette cible, même déjà à l'écran ; `sections.go('extractor/<cible>/<clé>')`
+(les liens « extraction » de la Fiche perso et de Monstres) ouvre la fiche.
+
+La fiche (F21) vient de `GET /api/extractor/entity?target=&key=`
+(`extractorEntity`) : le statut de revue de l'entité (`entityReview`) et
+son diff en arbre, puis selon la cible — le perso frais (`extractedBundle`,
+ses cartes par `characterKitCards` sous les règles seules, aux sprites bruts
+du jeu, ses statuts référencés par le glossaire des effets, les dates de
+sortie qui MANQUERAIENT, `missingReleaseDates` de
+`src/lib/admin/release-check.ts`), le monstre (`extractedMonsterBundle`, le
+committé en repli pour un disparu ; les stats par rencontre, les rencontres
+plafonnées, les relations et l'enrage par `src/lib/admin/monster-sheet.ts` ;
+ses cartes par `monsterKitCards` sans curation ; ses immunités ; ses
+archives par `monsterArchiveOf`), l'équipement par famille lu du build
+frais ENTIER (`gearSheet` de `src/lib/admin/gear-sheet.ts`, qui porte aussi
+le pont cible ↔ kind d'intégration) —, le PLAN du geste (les fichiers, le
+commit), les liens croisés et `was`. Une cible sans fiche (effet, armure,
+item) répond 404 : la page ouvre alors la cible sur l'entité dépliée. Les
+sprites : `GET /api/sprite/<nom>` (`spriteFile`, l'index de
+`buildImageIndex` refait quand les tables bougent ; 404 sinon) — une
+adresse `/api/sprite/…` est celle de quick, une adresse `/images/…` passe
+sous `imgBase` (`srcAt`). « Intégrer » : `POST /api/extractor/integrate`
+(`integrateEntity`, `target`, `key`, `was`) — la porte de F20, puis le refus
+« date de sortie manquante » AVANT d'écrire (`missing`), puis
+`integrateCharacter`, `integrateMonster` ou `integrateEquipment` du moteur
+(`syncDerived` est DANS le perso et le monstre) et UN `commitPaths` des
+fichiers du rapport plus ceux de `data/generated/damage` et `solver` tels
+qu'ils sont sur le disque (`derivedFiles`) : `chore(extractor): <cible>
+<nom> (<clé>) integre` — la clé de la FAMILLE pour l'équipement, quel que
+soit le membre cliqué. Après le geste la fiche est relue, le bilan d'images
+posé. « Intégrer un mode » : `GET /api/extractor/mode?mode=` (`planMode` :
+les spawnés puis leurs adds, la règle d'`integrateMonsterMode` rejouée,
+`was`) puis `POST /api/extractor/mode` (`integrateMode`, `chore(extractor):
+mode <mode> — n monstres integres`) ; la liste des modes vient avec la cible
+monster (`modes`). Propres à l'onglet, dans `tabs/extractor.css` :
+`.ex-end`, `.ex-badges`, `.ex-n`, `.ex-quiet`, `.ex-tlabel`, `.ex-scope`,
+`.ex-head`, `.ex-who`, `.ex-id`, `.ex-meta`, `.ex-acts`, `.ex-plan`,
+`.ex-assets`, `.ex-missing`, `.ex-seg`, `.ex-total`, `.ex-list`,
+`.ex-rows`, `.ex-row`, `.ex-line`, `.ex-toggle`, `.ex-name`, `.ex-key`,
+`.ex-fields`, `.ex-chev`, `.ex-diff`, `.ex-group`, `.ex-gtitle`,
 `.ex-glabel`, `.ex-field`, `.ex-fname`, `.ex-side`, `.ex-text`, `.ex-w`,
 `.ex-trees`, `.ex-tree`, `.ex-tl`, `.ex-tk`, `.ex-tv`, `.ex-tlabel-id`,
-`.ex-tcount`.
+`.ex-tcount` ; et pour le mode et la fiche : `.ex-mode-hint`,
+`.ex-mode-ids`, `.ex-mode-id`, `.ex-face`, `.ex-portrait`, `.ex-slot`,
+`.ex-slot-icon`, `.ex-slot-gear`, `.ex-slot-badge`, `.ex-trait`,
+`.ex-stars`, `.ex-links`, `.ex-link`, `.ex-refuse`, `.ex-iplan-files`,
+`.ex-sec`, `.ex-sec-wide`, `.ex-sec-head`, `.ex-grid`, `.ex-cell`,
+`.ex-cell-k`, `.ex-cell-v`, `.ex-ctx`, `.ex-pass`, `.ex-mstats`, `.ex-ul`,
+`.ex-enc`, `.ex-enc-mode`, `.ex-warn`, `.ex-mono`, `.ex-tags`, `.ex-tag`,
+`.ex-pills`, `.ex-pill`, `.ex-passives`, `.ex-passive`, `.ex-passive-head`,
+`.ex-pico`, `.ex-variant`, `.ex-variant-head`, `.ex-pieces`, `.ex-piece`,
+`.ex-cols`, `.ex-skill`, `.ex-skico`, `.ex-skid`, `.ex-body`, `.ex-desc`,
+`.ex-chips`, `.ex-fxlist`, `.ex-chip`, `.ex-chn`, `.ex-fx` (la tuile
+d'effet des Monstres, recopiée).
 
 ## Accueil — croquis
 
@@ -949,7 +1007,7 @@ désignent. Croquis du rendu :
 .head  Monstres — Le câblage des chips d'effets sur les cartes de skills d'un monstre… Le picker montre d'abord les monstres que les guides désignent… Un skill est souvent partagé…
 .card.pad.m-char  l'en-tête du monstre : icône 56 px, nom ; dessous badge off du type · id (chasse fixe) · « mode · stage » de ses spawns
    « Guides : » ses guides en liens (le site de dev du poste, `/en/guides/<catégorie>/<slug>`, nouvel onglet) ; sans guide, badge off « aucun guide »
-   « Stats, intégration et versions : extractor (étapes 19-20). » en .lbl — ce que l'onglet ne porte pas
+   « Stats, intégration et versions : extraction » en .lbl — le lien (.m-goto, data-go) vers la fiche du monstre dans la section Extraction (F21)
    à droite [Changer de monstre] (le picker) ; sans monstre : « Aucun monstre choisi. », [Choisir un monstre], et le picker OUVERT d'office à chaque venue sur l'onglet
 .savebar   2 changements · 1 refus   [Annuler] [Enregistrer]   (absente sans monstre)
 le picker (le picker partagé en `rows`, élargi à 1040 px, deux colonnes) : « Choisir un monstre » · badge « 543 des guides · 2451 avec le site »

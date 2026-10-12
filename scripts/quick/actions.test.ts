@@ -145,6 +145,7 @@ import type {
   LangDict,
   LocalizedText,
   Monster,
+  Skill,
 } from '@contracts';
 import type { EffectOption, KitEditorCard } from '@/components/admin/CharacterKitEditor';
 import { HUMAN_TAGS } from '@/components/tierlist/tiers';
@@ -185,6 +186,10 @@ import { diffRecords, isMinorEntity, isTypoEntity } from '@datagen/extractor/cor
 import type { ReviewEntity } from '@/lib/admin/review-types';
 import type { DiffResolvers } from '@/lib/admin/diff-labels';
 import type { StageResult } from '@datagen/assets/stage';
+import type { Character } from '@datagen/extractor/specs/character';
+import type { EquipmentData } from '@datagen/generators/equipment';
+import type { EncountersData } from '@/lib/admin/monster-store';
+import type { MonsterArchiveEntry } from '@contracts';
 import {
   ADMIN_BASE_DEFAULT,
   ADMIN_TO_QUICK,
@@ -262,8 +267,16 @@ import {
   type EffectChange,
   type EffectsDeps,
   type EffectsDisk,
+  extractorEntity,
+  integrateEntity,
+  integrateMode,
+  planMode,
+  spriteFile,
+  type CharacterSheet,
   type ExtractorDeps,
   type ExtractorTargetInfo,
+  type GearSheetView,
+  type MonsterSheet,
   type GameTableDeps,
   type GameTablesDisk,
   type GearCatalog,
@@ -8023,6 +8036,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     { id: 'effect', label: 'Effets', file: 'glossaries.json', subKey: 'effects' },
     { id: 'monster', label: 'Monstres', file: 'monsters.json' },
     { id: 'item', label: 'Items', file: 'items.json' },
+    { id: 'weapon', label: 'Armes', file: 'equipment/weapon.json' },
   ];
   type Dict = Record<string, unknown>;
   const COMMITTED: Record<string, Dict> = {
@@ -8044,6 +8058,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       '400102': { id: '400102', name: { en: 'Off-site mob' }, stats: {} },
     },
     item: { '15001': { name: { en: 'Gem' } }, '15002': { name: { en: 'Gone Gem' } } },
+    weapon: { '1001': { name: { en: 'Steel Sword' }, star: 5 } },
   };
   const FRESH: Record<string, Dict> = {
     character: {
@@ -8076,8 +8091,153 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       '400102': { id: '400102', name: { en: 'Off-site mob' }, stats: { hp: {} } },
     },
     item: { '15001': { name: { en: 'Gem' } }, '15003': { name: { en: 'Stamina' } } },
+    weapon: {
+      '1001': { name: { en: 'Steel Sword' }, star: 5 },
+      '1002': { name: { en: 'Steel Sword' }, star: 6 },
+    },
   };
   const SKILLS: Record<string, string> = { '101': 'S1 · first', '103': 'Fire Strike · second' };
+
+  // --- les fiches (F21) : ce que le moteur rend pour un perso, un monstre, une arme ---
+  const CHAR_BASE = {
+    rarity: 3,
+    element: 'fire',
+    class: 'striker',
+    race: 'human',
+    icon: '2000003',
+    skills: ['101'],
+    stats: { atk: { min: 100, max: 1000 }, hp: { min: 50, max: 50 } },
+    tags: ['festival'],
+    costumes: [{ id: '1', name: { en: 'Base' }, sort: 1 }],
+  };
+  const CHAR_SKILLS: Record<string, Skill> = {
+    '101': {
+      id: '101',
+      name: { en: 'S1' },
+      desc: { en: 'Deal dmg' },
+      type: 'first',
+      icon: 'IC_101',
+      maxLevel: 1,
+      levels: [{ level: 1, vars: {} }],
+      effects: [],
+    } as unknown as Skill,
+  };
+  const MON_BASE = {
+    type: 'boss',
+    race: 'beast',
+    class: 'striker',
+    element: 'fire',
+    rarity: 3,
+    icon: '1',
+    skills: ['m1'],
+    spawns: [{ dungeon: 'd1', level: 90 }],
+  };
+  const MON_SKILLS: Record<string, Skill> = {
+    m1: {
+      id: 'm1',
+      name: { en: 'Bite' },
+      type: 'monster_1',
+      icon: 'IC_m1',
+      maxLevel: 1,
+      levels: [{ level: 1, vars: {} }],
+      effects: [],
+    } as unknown as Skill,
+  };
+  const ENCOUNTERS = {
+    modes: { joint_challenge: { en: 'Joint Challenge' } },
+    dungeons: {
+      d1: { mode: 'joint_challenge', name: { en: 'Annihilator VH' }, adv: { atk: 100 } },
+    },
+    rankOptions: {},
+    bossQuirkMods: {},
+  } as unknown as EncountersData;
+  const EQUIPMENT = {
+    weapon: {
+      '1001': {
+        name: { en: 'Steel Sword' },
+        grade: 'rare',
+        star: 5,
+        icon: 'TI_W_1001',
+        craftable: false,
+        classLimit: null,
+        main: ['p_roll'],
+        sub: null,
+        passives: [{ id: 'pa', level: 1, isAdd: false }],
+        breakLimit: null,
+      },
+      '1002': {
+        name: { en: 'Steel Sword' },
+        grade: 'unique',
+        star: 6,
+        icon: 'TI_W_1002',
+        craftable: true,
+        classLimit: null,
+        main: ['p_roll'],
+        sub: null,
+        passives: [{ id: 'pa', level: 1, isAdd: false }],
+        breakLimit: null,
+      },
+    },
+    accessory: {},
+    helmet: {},
+    armor: {},
+    gloves: {},
+    shoes: {},
+    talisman: {},
+    ee: {},
+    families: {
+      weapon: [
+        {
+          id: '1001',
+          topId: '1002',
+          ids: ['1001', '1002'],
+          stars: [5, 6],
+          classLimits: [],
+          wiki: true,
+        },
+      ],
+      accessory: [],
+      talisman: [],
+    },
+    pools: { p_roll: [{ stat: 'atk', mode: 'rate', value: 10, weight: 100 }] },
+    passives: {
+      pa: {
+        name: { en: 'Fury' },
+        desc: { en: 'ATK +[Value]' },
+        values: [{ value: '10%' }],
+        levels: [1],
+        icon: 'IC_pa',
+        buff: 'B',
+      },
+    },
+    breakLimits: {},
+    sets: {},
+    grades: {},
+    classes: {},
+    statNames: {},
+    statDescs: {},
+  } as unknown as EquipmentData;
+  const ARCHIVES = [
+    {
+      id: '400101',
+      version: 1,
+      ref: 'abc1234',
+      committedAt: '2026-10-01T10:00:00+02:00',
+      gameVersion: '1.4.14',
+      label: 'avant la refonte',
+      monster: {},
+      skills: { m1: {} },
+    },
+  ] as unknown as MonsterArchiveEntry[];
+  const DERIVED = ['data/generated/damage/roster.json', 'data/generated/solver/version.json'];
+  /** La réponse d'une fiche est une union par cible : ses trois membres, nommés. */
+  const sheetOf = (out: unknown) =>
+    out as {
+      character?: CharacterSheet | null;
+      monster?: MonsterSheet | null;
+      gear?: GearSheetView | null;
+    };
+  const NO_ASSETS: StageResult = { staged: 0, restaged: 0, present: 0, missing: [] };
   const EMPTY = { new: 0, diff: 0, minor: 0, typo: 0, removed: 0 };
   const ASSETS: StageResult = {
     staged: 2,
@@ -8107,6 +8267,8 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       minor?: number;
       assets?: StageResult;
       git?: Outcome;
+      /** Le perso nouveau n'a pas de date de sortie. */
+      missing?: boolean;
     } = {},
   ) {
     const calls: string[] = [];
@@ -8135,7 +8297,12 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
           changed: diff.changed.filter((c) => site.has(c.key)),
         };
       },
-      fresh: async (id) => FRESH[id],
+      fresh: async (id) =>
+        id === 'monster'
+          ? Object.fromEntries(
+              Object.entries(FRESH.monster).map(([k, m]) => [k, { ...MON_BASE, ...(m as Dict) }]),
+            )
+          : FRESH[id],
       committed: (t) => COMMITTED[t.id],
       resolvers: async (id): Promise<DiffResolvers> =>
         id === 'character' ? { skills: (s) => SKILLS[s] } : {},
@@ -8161,6 +8328,71 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
         git.push([paths, message]);
         return over.git ?? { ok: true, log: ['git : fait'] };
       },
+      entityReview: async (id, key) => {
+        const diff = diffRecords(COMMITTED[id] ?? {}, FRESH[id] ?? {});
+        if (diff.added.includes(key)) return { status: 'added', fields: [] };
+        if (diff.removed.includes(key)) return { status: 'removed', fields: [] };
+        const c = diff.changed.find((x) => x.key === key);
+        return c ? { status: 'changed', fields: c.fields } : { status: 'same', fields: [] };
+      },
+      characterBundle: async (id) => {
+        const char = FRESH.character[id] as Dict | undefined;
+        return char
+          ? { char: { ...CHAR_BASE, ...char } as unknown as Character, skills: CHAR_SKILLS }
+          : undefined;
+      },
+      monsterBundle: async (id) => {
+        const monster = FRESH.monster[id] as Dict | undefined;
+        return monster
+          ? { monster: { ...MON_BASE, ...monster } as unknown as Monster, skills: MON_SKILLS }
+          : undefined;
+      },
+      committedMonsterSkills: () => ({}),
+      equipment: async () => EQUIPMENT,
+      encounters: async () => ENCOUNTERS,
+      committedDungeons: () => ({}),
+      statScales: () => ({}),
+      rankOptionLabels: async () => ({}),
+      immunities: async () => ({ chips: [], unresolved: [] }),
+      referencedEffects: async () => [],
+      archives: async (id) => (id === '400101' ? ARCHIVES : []),
+      missingReleases: async (char) =>
+        over.missing && char.id === '2000003' ? [{ id: '2000003', label: 'Lambda' }] : [],
+      integrateCharacter: async (id) => {
+        calls.push(`integrateCharacter ${id}`);
+        return {
+          id,
+          files: [
+            'characters.json',
+            'skills.json',
+            'characters-slug-to-id.json',
+            'character-release.json',
+          ],
+          assets: over.assets ?? NO_ASSETS,
+        };
+      },
+      integrateEquipment: async (kind, id) => {
+        calls.push(`integrateEquipment ${kind} ${id}`);
+        return {
+          id,
+          files: ['equipment/weapon.json', 'equipment/families.json'],
+          assets: NO_ASSETS,
+        };
+      },
+      integrateMonster: async (id) => {
+        calls.push(`integrateMonster ${id}`);
+        return { id, files: ['monsters.json', 'monster-skills.json', 'encounters.json'] };
+      },
+      integrateMode: async (mode) => {
+        calls.push(`integrateMode ${mode}`);
+        return {
+          mode,
+          ids: ['400101', '400102'],
+          files: ['monsters.json', 'monster-skills.json', 'encounters.json'],
+        };
+      },
+      derivedFiles: () => DERIVED,
+      spriteIndex: () => new Map([['mt_1', '/game/MT_1.png']]),
     };
     return { calls, git, fake };
   }
@@ -8177,6 +8409,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       ['effect', 'Effets', 'glossaries.json', false, 0],
       ['monster', 'Monstres', 'monsters.json', true, 2],
       ['item', 'Items', 'items.json', false, 2],
+      ['weapon', 'Armes', 'equipment/weapon.json', false, 1],
     ]);
     expect(out.targets[0]).toMatchObject({
       buckets: { new: 1, diff: 1, minor: 1, typo: 1, removed: 1 },
@@ -8190,6 +8423,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       'buckets effect',
       'buckets monster',
       'buckets item',
+      'buckets weapon',
     ]);
   });
 
@@ -8198,7 +8432,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     const out = await extractorOverview(fake);
     expect(out.tables).toBe(false);
     expect(out.reason).toBe(NO_GAME_DATA);
-    expect(out.targets.map((t) => t.buckets)).toEqual([EMPTY, EMPTY, EMPTY, EMPTY]);
+    expect(out.targets.map((t) => t.buckets)).toEqual([EMPTY, EMPTY, EMPTY, EMPTY, EMPTY]);
     expect(out.targets[0].committed).toBe(4);
     expect(calls).toEqual([]);
   });
@@ -8315,6 +8549,7 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
       label: 'Personnages',
       file: 'characters.json',
       site: false,
+      sheet: true,
       tables: false,
       reason: NO_GAME_DATA,
       buckets: EMPTY,
@@ -8460,5 +8695,376 @@ describe('Extraction — extractorOverview, extractorTarget, acceptExtraction, i
     const out = await acceptExtraction('character', { mode: 'all', was: 'sig:character:v1' }, fake);
     expect(out.ok).toBe(false);
     expect(out.log.at(-1)).toBe('git commit a échoué : x');
+  });
+  // --- les fiches (F21) ---
+  it('la vue d’ensemble et une cible disent quelles cibles ont une fiche', async () => {
+    const { fake } = deps();
+    const ov = await extractorOverview(fake);
+    expect(ov.targets.map((t) => [t.id, t.sheet])).toEqual([
+      ['character', true],
+      ['effect', false],
+      ['monster', true],
+      ['item', false],
+      ['weapon', true],
+    ]);
+    const target = async (id: string) => {
+      const t = await extractorTarget(id, {}, fake);
+      if ('error' in t || !t.tables) throw new Error('error' in t ? t.error : 'sans tables');
+      return t;
+    };
+    expect((await target('item')).sheet).toBe(false);
+    const monster = await target('monster');
+    expect(monster.sheet).toBe(true);
+    // La cible monster porte le select d'« Intégrer un mode ».
+    expect(monster.modes).toEqual([{ value: 'joint_challenge', label: 'Joint Challenge' }]);
+    expect((await target('character')).modes).toBeUndefined();
+  });
+
+  it('la fiche d’un perso NOUVEAU : le frais, ses cartes aux sprites du jeu, le plan, le lien vers la Fiche perso', async () => {
+    const out = await extractorEntity('character', '2000003', deps().fake);
+    if ('error' in out || !out.tables) throw new Error('error' in out ? out.error : 'sans tables');
+    expect(out).toMatchObject({
+      target: 'character',
+      label: 'Personnages',
+      key: '2000003',
+      tables: true,
+      review: 'added',
+      fields: 0,
+      diff: [],
+      was: 'sig:character:v1',
+      links: { sheet: 'character/2000003' },
+      effectSprite: 'images/ui/effect',
+    });
+    const c = sheetOf(out).character;
+    if (!c) throw new Error('pas de perso');
+    expect(c).toMatchObject({
+      id: '2000003',
+      name: 'Demiurge Lambda',
+      element: 'fire',
+      class: 'striker',
+      rarity: 3,
+      portrait: '/api/sprite/CT_2000003',
+      costumes: ['Base'],
+      missing: [],
+    });
+    expect(c.stats).toEqual([
+      { slug: 'atk', abbr: 'ATK', value: '100 – 1000' },
+      { slug: 'hp', abbr: 'HP', value: '50' },
+    ]);
+    expect(c.tags.map((t) => t.slug)).toEqual(['festival']);
+    expect(c.cards.map((k) => [k.id, k.name, k.typeLabel, k.iconSrc, k.desc])).toEqual([
+      ['101', 'S1', 'first', '/api/sprite/IC_101', 'Deal dmg'],
+    ]);
+    expect(out.plan).toEqual({
+      files: [
+        'characters.json',
+        'skills.json',
+        'characters-slug-to-id.json',
+        'character-release.json',
+        'data/generated/damage/* et data/generated/solver/* (re-dérivés)',
+        'les images du perso et de ses skills, stagées',
+      ],
+      commit: 'chore(extractor): character Demiurge Lambda (2000003) integre',
+    });
+    // Sans date de sortie : la fiche le dit, le geste sera refusé.
+    const refused = await extractorEntity('character', '2000003', deps({ missing: true }).fake);
+    expect(sheetOf(refused).character?.missing).toEqual([{ id: '2000003', label: 'Lambda' }]);
+  });
+
+  it('la fiche d’un perso MODIFIÉ porte le diff de la cible ; un disparu n’a pas de frais', async () => {
+    const out = await extractorEntity('character', '2000001', deps().fake);
+    if ('error' in out || !out.tables) throw new Error('error' in out ? out.error : 'sans tables');
+    expect(out).toMatchObject({ review: 'changed', fields: 3 });
+    expect(out.diff.map((g) => g.title)).toEqual(['costumes › #9', 'profile', 'skills']);
+    expect(sheetOf(out).character?.name).toBe('Aer');
+    const gone = await extractorEntity('character', '2000002', deps().fake);
+    if ('error' in gone || !gone.tables)
+      throw new Error('error' in gone ? gone.error : 'sans tables');
+    expect(gone).toMatchObject({ review: 'removed', character: null, plan: null, links: {} });
+  });
+
+  it('la fiche d’un monstre : l’en-tête aux sprites, les stats par rencontre, les rencontres, les skills, les archives, le lien vers Monstres', async () => {
+    const out = await extractorEntity('monster', '400101', deps().fake);
+    if ('error' in out || !out.tables) throw new Error('error' in out ? out.error : 'sans tables');
+    expect(out).toMatchObject({
+      review: 'changed',
+      fields: 1,
+      links: { chips: 'monsters/400101' },
+    });
+    const m = sheetOf(out).monster;
+    if (!m) throw new Error('pas de monstre');
+    expect(m).toMatchObject({
+      id: '400101',
+      name: 'Slime',
+      type: 'boss',
+      iconSrc: '/api/sprite/MT_1',
+      slotSrc: '/api/sprite/GD_Slot_Bg_03',
+      badgeSrc: '/api/sprite/CT_Slot_Boss',
+      committedOnly: false,
+      immunities: { chips: [], unresolved: [] },
+    });
+    expect(m.stats.template).toBe(false);
+    expect(m.stats.options.map((o) => [o.label, o.where])).toEqual([
+      ['Lv 90', 'Joint Challenge · Annihilator VH'],
+    ]);
+    // Lv 90, ATK +10 % sur le templet 1..2 : 1 + floor(1 × 89 / 99) = 1 → 1.
+    expect(m.stats.options[0].cells).toEqual([{ slug: 'hp', abbr: 'HP', value: '1' }]);
+    expect(m.encounters).toEqual({
+      rows: [{ mode: 'Joint Challenge', name: 'Annihilator VH', level: 90 }],
+      more: 0,
+      total: 1,
+    });
+    expect(m.relations).toEqual({ summonedBy: [], linkedTo: [], summons: [] });
+    expect(m.cards.map((k) => [k.id, k.name, k.typeLabel, k.iconSrc])).toEqual([
+      ['m1', 'Bite', 'monster_1', '/api/sprite/IC_m1'],
+    ]);
+    expect(m.archives).toEqual([
+      {
+        key: '400101@1',
+        version: 1,
+        ref: 'abc1234',
+        committedAt: '2026-10-01T10:00:00+02:00',
+        gameVersion: '1.4.14',
+        label: 'avant la refonte',
+        skills: 1,
+      },
+    ]);
+    expect(out.plan).toEqual({
+      files: [
+        'monsters.json',
+        'monster-skills.json',
+        'encounters.json (ses donjons)',
+        'data/generated/damage/* et data/generated/solver/* (re-dérivés)',
+      ],
+      commit: 'chore(extractor): monster Slime (400101) integre',
+    });
+    // Un monstre inconnu du frais et du committé.
+    const none = await extractorEntity('monster', '999', deps().fake);
+    if ('error' in none || !none.tables)
+      throw new Error('error' in none ? none.error : 'sans tables');
+    expect(none).toMatchObject({ review: 'same', monster: null, plan: null });
+  });
+
+  it('la fiche d’une arme par l’id d’un MEMBRE : la famille depuis le frais, ses sprites, le plan à l’id de la famille', async () => {
+    const out = await extractorEntity('weapon', '1002', deps().fake);
+    if ('error' in out || !out.tables) throw new Error('error' in out ? out.error : 'sans tables');
+    expect(out).toMatchObject({ review: 'added', key: '1002', links: {} });
+    const gear = sheetOf(out).gear;
+    expect(gear).toMatchObject({
+      kind: 'family',
+      id: '1001',
+      name: { en: 'Steel Sword' },
+      icon: 'TI_W_1002',
+      iconSrc: '/api/sprite/TI_W_1002',
+      frame: '/images/ui/bg/TI_Slot_Unique.webp',
+      grade: 'unique',
+      stars: [5, 6],
+      mainStats: ['ATK%'],
+      members: ['1001', '1002'],
+    });
+    if (!gear) throw new Error('pas d’équipement');
+    expect(gear.passives.map((p) => [p.name, p.iconSrc, p.first])).toEqual([
+      ['Fury', '/api/sprite/IC_pa', 'ATK +<color=#28d9ed>10%</color>'],
+    ]);
+    expect(out.plan).toEqual({
+      files: [
+        'equipment/weapon.json (toute la famille)',
+        'equipment/families.json',
+        'equipment/pools.json, passives.json, breakLimits.json (les records référencés)',
+        'les icônes de la famille et de ses passifs, stagées',
+      ],
+      commit: 'chore(extractor): weapon Steel Sword (1001) integre',
+    });
+    const none = await extractorEntity('weapon', '9999', deps().fake);
+    if ('error' in none || !none.tables)
+      throw new Error('error' in none ? none.error : 'sans tables');
+    expect(none).toMatchObject({ gear: null, plan: null });
+  });
+
+  it('pas de fiche : une cible sans fiche ou inconnue est un 404 ; sans tables, la raison', async () => {
+    expect(await extractorEntity('effect', 'x', deps().fake)).toEqual({
+      error: 'pas de fiche pour la cible effect',
+      status: 404,
+    });
+    expect(await extractorEntity('nope', 'x', deps().fake)).toEqual({
+      error: 'cible inconnue : nope',
+      status: 404,
+    });
+    expect(await extractorEntity('character', '2000003', deps({ tables: false }).fake)).toEqual({
+      target: 'character',
+      label: 'Personnages',
+      file: 'characters.json',
+      key: '2000003',
+      tables: false,
+      reason: NO_GAME_DATA,
+      was: '',
+    });
+  });
+
+  it('« Intégrer » un perso : le moteur (sync compris), ses fichiers ET ceux de damage/solver dans UN commit, le bilan d’images', async () => {
+    const { calls, git, fake } = deps({ assets: ASSETS });
+    const out = await integrateEntity('character', '2000003', 'sig:character:v1', fake);
+    expect(out.ok).toBe(true);
+    expect(out.assets).toEqual(ASSETS);
+    expect(out.log).toEqual([
+      'Demiurge Lambda (2000003) : intégré — characters.json, skills.json, characters-slug-to-id.json, character-release.json ; damage et solver re-dérivés.',
+      'images : 2 produites, 1 refaite, 3 déjà là, 1 manquante — le staging part avec « Committer » de la section Patch.',
+      'image manquante : images/x.webp — absente du jeu',
+      'git : fait',
+    ]);
+    expect(calls).toEqual(['integrateCharacter 2000003', 'git']);
+    expect(git).toEqual([
+      [
+        [
+          'data/generated/characters.json',
+          'data/generated/skills.json',
+          'data/generated/characters-slug-to-id.json',
+          'data/generated/character-release.json',
+          ...DERIVED,
+        ],
+        'chore(extractor): character Demiurge Lambda (2000003) integre',
+      ],
+    ]);
+  });
+
+  it('un perso sans date de sortie est REFUSÉ avant d’écrire : la clé à ajouter au curé, rien d’appelé', async () => {
+    const { calls, fake } = deps({ missing: true });
+    const out = await integrateEntity('character', '2000003', 'sig:character:v1', fake);
+    expect(out.ok).toBe(false);
+    expect(out.missing).toEqual([{ id: '2000003', label: 'Lambda' }]);
+    expect(out.log[0]).toBe(
+      'Rien n’est écrit — Lambda (2000003) n’a de date de sortie d’aucune source : ajouter « 2000003 » à data/curated/character-release.json (à la main, « id » : « AAAA-MM-JJ »), puis relire la fiche.',
+    );
+    expect(calls).toEqual([]);
+  });
+
+  it('« Intégrer » un monstre : pas d’images, damage et solver dans le commit ; une arme : la famille, sans re-dérivation', async () => {
+    const m = deps();
+    const out = await integrateEntity('monster', '400101', 'sig:monster:v1', m.fake);
+    expect(out).toMatchObject({ ok: true, assets: null });
+    expect(out.log[0]).toBe(
+      'Slime (400101) : intégré — monsters.json, monster-skills.json, encounters.json ; damage et solver re-dérivés.',
+    );
+    expect(m.calls).toEqual(['integrateMonster 400101', 'git']);
+    expect(m.git).toEqual([
+      [
+        [
+          'data/generated/monsters.json',
+          'data/generated/monster-skills.json',
+          'data/generated/encounters.json',
+          ...DERIVED,
+        ],
+        'chore(extractor): monster Slime (400101) integre',
+      ],
+    ]);
+
+    const w = deps();
+    const gear = await integrateEntity('weapon', '1002', 'sig:weapon:v1', w.fake);
+    expect(gear.ok).toBe(true);
+    expect(gear.log[0]).toBe(
+      'Steel Sword (1001) : intégré — equipment/weapon.json, equipment/families.json.',
+    );
+    // Le kind d'intégration et l'id de la FAMILLE, pas le membre cliqué.
+    expect(w.calls).toEqual(['integrateEquipment weapon 1001', 'git']);
+    expect(w.git).toEqual([
+      [
+        ['data/generated/equipment/weapon.json', 'data/generated/equipment/families.json'],
+        'chore(extractor): weapon Steel Sword (1001) integre',
+      ],
+    ]);
+  });
+
+  it('« Intégrer » passe par la même porte : `stale`, tables absentes, cible sans fiche, clé vide, entité absente du frais', async () => {
+    const stale = deps({ sig: 'v2' });
+    const out = await integrateEntity('character', '2000003', 'sig:character:v1', stale.fake);
+    expect(out).toMatchObject({ ok: false, stale: true });
+    expect(stale.calls).toEqual([]);
+    const noTables = deps({ tables: false });
+    expect(await integrateEntity('monster', '400101', 'x', noTables.fake)).toEqual({
+      ok: false,
+      log: [`Rien n’est écrit — ${NO_GAME_DATA}`],
+    });
+    expect(await integrateEntity('item', '15003', 'sig:item:v1', deps().fake)).toEqual({
+      ok: false,
+      log: ['pas de fiche pour la cible item'],
+    });
+    expect(await integrateEntity('character', '', 'x', deps().fake)).toEqual({
+      ok: false,
+      log: ['Aucune entité.'],
+    });
+    const gone = deps();
+    expect(await integrateEntity('character', '2000002', 'sig:character:v1', gone.fake)).toEqual({
+      ok: false,
+      log: ['perso 2000002 absent de l’extraction fraîche'],
+    });
+    expect(gone.calls).toEqual([]);
+    expect(await integrateEntity('weapon', '9999', 'sig:weapon:v1', deps().fake)).toEqual({
+      ok: false,
+      log: ['weapon 9999 absent de l’extraction fraîche'],
+    });
+  });
+
+  it('le PLAN d’un mode : les spawnés puis leurs adds, le compte, le message, `was` ; un mode vide le dit', async () => {
+    const plan = await planMode('joint_challenge', deps().fake);
+    expect(plan).toEqual({
+      mode: 'joint_challenge',
+      label: 'Joint Challenge',
+      ids: [
+        { id: '400101', name: 'Slime', add: false },
+        { id: '400102', name: 'Off-site mob', add: false },
+      ],
+      count: 2,
+      commit: 'chore(extractor): mode joint_challenge — 2 monstres integres',
+      was: 'sig:monster:v1',
+    });
+    expect(await planMode('nope', deps().fake)).toMatchObject({
+      mode: 'nope',
+      label: 'nope',
+      ids: [],
+      count: 0,
+    });
+    expect(await planMode('', deps().fake)).toEqual({ error: 'mode manquant', status: 400 });
+    expect(await planMode('joint_challenge', deps({ tables: false }).fake)).toEqual({
+      error: NO_GAME_DATA,
+      status: 409,
+    });
+  });
+
+  it('« Intégrer un mode » : le moteur, les trois fichiers et damage/solver dans UN commit au compte écrit ; un mode vide est refusé avant', async () => {
+    const { calls, git, fake } = deps();
+    const out = await integrateMode('joint_challenge', 'sig:monster:v1', fake);
+    expect(out).toMatchObject({ ok: true, assets: null, ids: ['400101', '400102'] });
+    expect(out.log[0]).toBe(
+      'mode Joint Challenge : 2 monstres intégrés — monsters.json, monster-skills.json, encounters.json ; damage et solver re-dérivés.',
+    );
+    expect(calls).toEqual(['integrateMode joint_challenge', 'git']);
+    expect(git).toEqual([
+      [
+        [
+          'data/generated/monsters.json',
+          'data/generated/monster-skills.json',
+          'data/generated/encounters.json',
+          ...DERIVED,
+        ],
+        'chore(extractor): mode joint_challenge — 2 monstres integres',
+      ],
+    ]);
+    const empty = deps();
+    expect(await integrateMode('nope', 'sig:monster:v1', empty.fake)).toEqual({
+      ok: false,
+      log: ['Rien n’est écrit — aucun monstre ne spawne dans le mode « nope ».'],
+    });
+    expect(empty.calls).toEqual([]);
+    expect((await integrateMode('joint_challenge', 'old', deps().fake)).stale).toBe(true);
+    expect(await integrateMode('', 'x', deps().fake)).toEqual({ ok: false, log: ['Aucun mode.'] });
+  });
+
+  it('un sprite : par basename, insensible à la casse, extension tolérée ; 404 sinon, et jamais un chemin', () => {
+    const index = deps().fake.spriteIndex();
+    expect(spriteFile('MT_1', index)).toEqual({ file: '/game/MT_1.png', type: 'image/png' });
+    expect(spriteFile('mt_1.png', index)).toEqual({ file: '/game/MT_1.png', type: 'image/png' });
+    expect(spriteFile('MT_2', index)).toBeNull();
+    expect(spriteFile('../MT_1', index)).toBeNull();
+    expect(spriteFile('', index)).toBeNull();
   });
 });
