@@ -92,7 +92,10 @@
       une priorité changée (re-cliquer efface), « ＋ note » sur un produit,
       « Enregistrer » → TROIS fichiers dans le commit : `shop-editorial.json`,
       `data/curated/shop-priorities.json`, `data/generated/shop-priorities.json`,
-      plus le `meta.json`. (6) Le menu de l'admin : plus de groupe « Guide
+      plus le `meta.json` — ce premier enregistrement réordonne aussi les
+      clés de `shop-editorial.json` (`priority` avant `name`, `joint` avant
+      `event`) : un diff plus large UNE fois, les valeurs égales (relecture
+      F19). (6) Le menu de l'admin : plus de groupe « Guide
       editor » ; `/admin/guides` répond encore par son URL. (7) Après
       « Pousser » et le déploiement : les pages des trois guides, leur date
       « Updated ».

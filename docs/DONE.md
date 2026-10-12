@@ -7,6 +7,63 @@
 
 ## 2026-10-12
 
+- **Relecture F19 (Fable) — quick : les trois guides généraux sous une même
+  forme et l'import de contribution, le menu « Guide editor » hors de
+  l'admin, validé** — commit `84df70d7`, 18 fichiers, le message attendu, ni
+  `package.json` ni le lock, rien d'un autre lot. Périmètre relu dans le
+  diff : `general-guide-form.ts` (la forme en données : onglets, blocs,
+  champs, `blockOfKey` ; pur, testé), `shop-priorities-shape.ts`
+  (`overlayOf`, l'ordre et les libellés des shops — `ShopBlocks.tsx` les
+  ré-exporte, l'admin ne change pas), `actions.ts` (`generalGuideState`,
+  `saveGeneralGuide` qui contrôle sur la forme avant d'écrire, les refus du
+  store situés par leur libellé, `importContributionAction`,
+  `GENERAL_GUIDES_DEPS` tout injecté, `editable` par ligne dans la vue
+  d'ensemble), trois routes dans `server.ts`, `layout.dev.tsx` sans le
+  groupe « Guide editor ». Les stores sont inchangés. **Contrôles** :
+  `pnpm typecheck` vert, `pnpm lint` vert, `pnpm test` « 214 passed, 3520
+  passed », `NODE_ENV=development pnpm exec vitest run scripts/quick
+src/lib/admin` « 52 passed, 1428 passed » — les chiffres de l'entrée.
+  **Rejoué** (tsx, stores, import et git factices, données RÉELLES du
+  disque) : `was` faux → `stale`, rien d'appelé ; un nom hors roster, un
+  palier `4` sur Monad Eva, un impact « 9 » → trois refus situés à leur clé
+  (`reviews.premium.1.name`, `priorities.premium.first.0.stars`,
+  `reviews.limited.0.impact`), rien d'écrit ; un perso « pas encore sorti »
+  accepté hors roster ; une erreur du store « Limited/second #2 » ramenée à
+  `priorities.limited.second.1` ; les données du disque renvoyées telles
+  quelles → le payload du store ÉGAL au disque pour Premium & Limited et
+  Free Heroes, l'overlay des shops égal au curé (121 clés, `_doc` et les
+  deux slugs hors rotation préservés par le store), l'éditorial égal modulo
+  l'ordre des clés ; rien de sale → « rien à enregistrer », ni stamp ni
+  commit ; un fichier sale → stamp puis UN commit avec le `meta.json`, les
+  trois fichiers d'un shop dedans ; l'import : enveloppe sans `payload`
+  refusée sans appel, refus de l'import rendus tels quels sans commit, une
+  review → stamp et `chore(guides): import premium-limited-review`, des
+  pros / cons → `data/curated/characters.json` sans stamp, rien de bougé →
+  rien à committer. Sur le quick isolé (:4797, clés vidées, GET seulement) :
+  la vue d'ensemble, General Guides éditable avec ses trois guides à
+  bouton ; l'état des trois (13 + 13 reviews, 129 paliers, 12 sources et 14
+  entrées, sept shops dérivés et onze onglets dont la note orpheline
+  `joint`) ; `beginner-faq` en 404 « contenu en code ». Sept captures
+  relues : la vue d'ensemble avec la carte d'import, Premium (Gnosis Domine
+  en carte, l'aperçu aux balises résolues, les cibles), Limited, Free Heroes
+  (Start Dash, l'entrée aux quatre tuiles et son choix), Shop › Guild (les
+  lignes S/A/B/C, coût et monnaie, « ＋ note »), Event (la note, Item 1 en
+  carte), Supply (deux paragraphes et leur aperçu). Rien d'enregistré,
+  `/api/translate` jamais appelé. **Trouvé en rejouant, corrigé à part**
+  (`25de184c`) : la review Premium de Monad Iota portait en jp, kr et zh un
+  `{E/Dark}` de plus que l'anglais (« as many in the team as possible »
+  traduit avec le tag) — le contrôle des tags de quick, celui de B42,
+  refusait donc TOUT enregistrement de Premium & Limited tant que ce texte
+  n'était pas corrigé ; le tag retiré des trois traductions, le sens gardé,
+  le hook a re-daté le guide. C'était le seul texte fautif des trois
+  guides. **Vu, pas corrigé** : le premier enregistrement des shops par
+  quick réordonne les clés de `shop-editorial.json` (`priority` avant
+  `name`, `joint` avant `event`) — un diff plus large une fois, les valeurs
+  égales, stable ensuite (TODO). **Reste à Sevih** : les sept contrôles à
+  l'écran du TODO. **Suite** : étape 17 close ; restent l'extractor (19-20,
+  agacements à écrire), Events (6, dernier) et la clôture (22) — aucun lot
+  ouvert.
+
 - **`24kthankyou` en majuscules** : seul code sur 102 qui n'était pas en
   majuscules (expiré le 30/06), relevé par le rapport de cloisonnement des
   sessions cloud (sevih-tool `#5`, § 4.3). Passé en `24KTHANKYOU` dans
