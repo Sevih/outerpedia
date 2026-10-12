@@ -7,6 +7,57 @@
 
 ## 2026-10-12
 
+- **Relecture F24, B47, A37, F25, C13, B48 (Fable) — quick : Pros / Cons
+  en un texte par colonne, Monstres par mode de jeu, Guides une catégorie à
+  la fois, Premium & Limited en glisser-déposer et reviews compactes, Core
+  Fusion en JSON, Vidéos éclatée ; les six validés** — commits `bff3affc`,
+  `07e00cd4`, `3a31d2c5`, `fe4b8747`, `ad5f08c3`, `e2d8cce4` (lots joués
+  par Opus et Fable, enchaînés sans relecture entre eux). Périmètre : un
+  commit par lot, les messages attendus, rien dans `package.json` ni
+  `pnpm-lock.yaml` ; F24 n'a touché que la page ; B47 ajoute
+  `src/lib/admin/game-modes.ts` et ne touche pas au damage calc ; A37 sert
+  deux champs de plus (`tier`, `tiers`) sans route nouvelle, écart dit ;
+  F25 ajoute `ui/sortable.mjs` ; C13 transcrit les deux `.ts` de Core
+  Fusion en JSON (rejoué : les exports de l'ancien `reviews.ts` et
+  `priorities.ts` sérialisés contre les nouveaux — identiques, 6 reviews)
+  et le hook a re-daté `meta.json` ; B48 supprime la section Vidéos, la
+  route `POST /api/video`, `addVideo` et `appendGuideVideo` (plus aucun
+  appelant, vérifié par `grep`), ajoute une route de LECTURE
+  `POST /api/character/video-meta` à `READ_ONLY_POSTS`. Contrôles sur
+  `e2d8cce4` : `pnpm typecheck` 0, `pnpm lint` 0, `pnpm test` 223 fichiers
+  / 3753 tests, `scripts/quick` + `src/lib/admin` sous
+  `NODE_ENV=development` 62 / 1674. Rejoué par `tsx` : `gameModeGroups` sur
+  le vrai `encounters.json` rend treize groupes dans l'ordre du damage calc
+  (Story, Origin Story, Skyward Tower, Elemental Tower, Special Request,
+  World Boss, Guild Raid, Weekly Conquest Mission, Promotion Challenge,
+  Pursuit Operation, Infiltration Operation, Dimensional Singularity, Joint
+  Challenge) avec les bons slugs repliés ; `monstersRoster().modeGroups`
+  compte sur tout le roster (342 sans mode) ; `guidesOverview` sert les
+  quatre paliers et le `tier` de chaque général, `core-fusion` éditable ;
+  `generalGuideState('core-fusion')` sert le roster des six fusions, leurs
+  niveaux 1 à 5, 6 reviews, paliers 4 / 2 / 0 ; `resolveVideo` sur un
+  client YouTube factice : les trois formes d'URL et l'id nu résolus, « pas
+  un id YouTube », « URL ou id requis », « vidéo introuvable », et une
+  erreur du client rendue, jamais levée. Banc (quick isolé :3185, toutes
+  les clés vidées dont `YOUTUBE_API_KEY`, aucun appel YouTube dans le
+  journal) : Pros / Cons d'Aer — le rendu `+` / `−` du site au-dessus, la
+  textarea à quatre lignes, « Traductions (5) 5 / 5 » ; Monstres sur
+  `#monsters/mode/joint-challenge` — quatorze pastilles de mode avec leur
+  compte, Joint Challenge enfoncée, ses quinze monstres ; Guides — la
+  rangée des dix catégories, trois grises « contenu en code », General
+  Guides par palier ; Premium & Limited — « Premium · Priorités » en
+  vignettes avec rang, palier, ↑ ↓ ✕ et ＋, « Limited · Reviews » en liste
+  compacte « 13 / 13 reviews » avec les résumés ; Core Fusion — les
+  priorités avec le sélecteur de relation ; la carte Vidéos d'Aer éditable
+  avec miniature et formulaire, le sous-onglet Vidéos d'une version
+  ancienne d'Annihilator avec « Ajouter une vidéo » ; le menu Publication
+  sans Vidéos. Ajouté en relecture : `YOUTUBE_API_KEY=` dans la commande
+  du quick isolé du préambule commun (B48 l'avait demandé : le relais du
+  banc laisse passer une route qui coûte du quota). Reste à Sevih : les
+  contrôles à l'écran de chaque lot (TODO) et les points laissés, posés au
+  TODO. Suite : aucun lot ouvert — les quatre suites de la relecture
+  précédente et celles-ci à trancher, puis le lot 22.
+
 - **quick : Vidéos éclatée — celles d'un perso dans sa fiche, celles d'un guide
   dans le guide ; la section Publication › Vidéos disparaît (lot B48)** — revue
   de quick par Sevih (12/10) : « pub > vidéos : il y a une partie qui va dans

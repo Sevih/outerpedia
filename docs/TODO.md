@@ -172,6 +172,24 @@
       perso » / « câbler les chips » depuis la fiche, « extraction » depuis
       la Fiche perso et depuis Monstres. (6) Un geste sur une fiche lue
       avant un refresh → « Rien n'est écrit — … ont changé », la fiche relue.
+- [ ] **Relecture F24 / B47 / A37 / F25 / C13 / B48 (12/10) — suites à
+      décider** : (1) F24 — une ligne effacée en anglais laisse ses
+      traductions à leur rang (l'identité d'un pro est son rang) ; à juger à
+      l'usage, sinon un lot pour retrancher à l'enregistrement. (2) A37 —
+      `open()` de Guides ne relit pas le hash : un `sections.go('guides/<cat>/<slug>')`
+      venu d'une autre section (« ouvrir dans Guides » de l'extractor)
+      arriverait sur la vue d'ensemble quand la page est déjà chargée ; à
+      vérifier à l'écran, un lot A s'il le faut (le même défaut que Noms
+      avant B46). (3) B47 — l'en-tête de la fiche monstre garde `place` à
+      deux slugs ; `modeOptions` de l'extractor et `buildMonsterRows` de
+      l'admin refont leur liste de modes à part de `game-modes.ts`. (4) C13
+      / F25 — dans les vignettes de palier, le select de palier large de 6ch
+      montre « 3 » et non « 3★ » ; le store de Core Fusion ne refuse pas une
+      fusion du jeu SANS review, que le build refuse pourtant (choix de
+      l'agent pour ne pas bloquer la saisie une par une). (5) B48 — un échec
+      du rafraîchissement de `video-meta.json` n'arrête pas le commit (le
+      curé est déjà écrit ; `pnpm datagen:video-meta` rattrape) : à
+      confirmer ; twitch et bilibili ne s'ajoutent pas depuis quick.
 - [ ] **Relecture A36 / B45 / B46 (12/10) — suites à décider** : (1) B45 —
       Bannières, Journal, Tableau de bord et Noms ne reçoivent que l'id du
       perso : leur vignette a le fond neutre et pas d'icône au coin ; soit
