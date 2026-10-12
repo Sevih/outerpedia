@@ -65,11 +65,6 @@ const KNOWN_DIVERGENCES: ReadonlyArray<{ file: string; path: string; why: string
     why: 'même phrase que skuld-dark : {S/SPD} en plus dans jp/kr/zh',
   },
   {
-    file: `${GUIDES}/general-guides/premium-limited/premium-reviews.json`,
-    path: 'premium[1].review',
-    why: 'en « wants as many in the team as possible » (sous-entendu) ; jp/kr/zh explicitent « alliés {E/Dark} »',
-  },
-  {
     file: `${GUIDES}/joint-challenge/deep-sea-guardian/versions/2026-01/recommended.json`,
     path: '[3].reason',
     why: 'en « …COUNTER_RATE buff » ; jp/kr/zh « un {C/Striker} qui a …COUNTER_RATE »',
