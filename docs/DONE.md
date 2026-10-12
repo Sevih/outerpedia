@@ -7,6 +7,73 @@
 
 ## 2026-10-12
 
+- **quick : Fiche perso — le récap de la curation à l'arrivée, le picker sur
+  demande (lot B46)** — revue de quick par Sevih (12/10) : « éditeur > perso :
+  pas de récap (combien de persos curés, pros/cons…) ; au lieu de ça on se
+  fait agresser par le picker ». Sans perso, la section ouvrait le picker de
+  héros d'office à chaque venue (`pickIfEmpty`) et ne montrait rien d'autre.
+  Désormais `#c-panel` y porte le RÉCAP : une carte « Curation — 129 persos »,
+  une ligne par champ — libellé, compte en badge (`48 / 129`, vert quand rien
+  ne manque : la charte n'a pas de `.bar`), puis les persos à qui le champ
+  manque, par nom, en vignettes `heroTile` de 32 px (B45 est passé), chacune
+  un bouton ; au-delà de 24, « … et n autres » déplie le reste, et le champ
+  reste déplié d'une venue à l'autre. Un clic ouvre le perso là où le champ
+  se règle : sa fiche sur le sous-onglet (`#character/<id>/<sous-onglet>`),
+  ou une autre section par `sections.go` (`names/<id>`,
+  `extractor/character/<id>`). Le picker ne s'ouvre plus qu'à `#c-pick`
+  (`pickIfEmpty` retiré) ; « ← Récap », en tête de l'en-tête d'un perso
+  ouvert, ferme la fiche (`#character`) et relit le récap, sous le garde de
+  « Changer de perso » (`canDrop`, la confirmation de `choose` sortie en
+  fonction) ; un perso demandé par l'adresse et illisible laisse la page sur
+  le récap. Serveur : `characterCoverage(disk)` (`scripts/quick/actions.ts`,
+  lectures injectées — `CharacterCoverageDisk` : roster, curé des persos,
+  recos, noms courts, dates à la main, curé des EE et leurs porteurs, `stamp`)
+  rend `{ total, fields: [{ key, label, sub, done, missing: [{ id, name }] }] }`
+  pour onze champs — Pros / Cons, Synergies, Priorité de skills, Tags, Rang
+  PvE, Rang PvP, Gear reco, EE, Nom court, Date de sortie à la main, Vidéos —,
+  servi par `GET /api/character/coverage` et mémoïsé sur les mtimes des cinq
+  curés lus (`WeakMap` par disque, le motif de `monstersIndex`) ; par
+  `mtimeOf` et non `fileStamp`, dont les deux secondes de délai auraient
+  caché à la page l'enregistrement qu'elle vient de faire. La page le relit à
+  chaque venue sans perso (`showRecap`, le dernier lu restant à l'écran
+  pendant la lecture). Un champ VIDE ne compte pas (pros / cons sans ligne,
+  liste vide, nom court tout en blancs). Comptes du jour, ceux du lot : 48,
+  25, 127, 41, 128, 92, 96, 128 (EE), 35, 48, 79. Trois écarts à la lettre du
+  lot, à relire : (1) la priorité de skills ouvre `fiche` et non `skills` —
+  elle se règle dans la carte « Kit » du sous-onglet Fiche, Skills ne porte
+  que les chips ; (2) l'EE se compte parmi les persos QUI EN ONT UN (aujourd'hui
+  les 129, d'où 128 / 129 ; avec un perso sans EE, `done + missing` y sera
+  plus court que `total` — la page affiche donc `done / (done + manquants)`
+  pour chaque ligne), et un EE qui n'a que des chips, sans rang, reste
+  manquant ; (3)
+  `scripts/quick/ui/tabs/names.js` reçoit un `open()` de six lignes qui lit
+  `#names/<id>` — sans lui `sections.go('names/<id>')` ouvrait Noms sans le
+  perso (la section ne lisait son adresse qu'au démarrage). Vérifié :
+  `pnpm typecheck` (sortie 0, dernière ligne
+  `tsc --noEmit && … -p scripts/tsconfig.json`), `pnpm lint` (sortie 0,
+  dernière ligne `$ eslint`), `pnpm test` (`Tests  3691 passed (3691)`),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  (`Tests  1038 passed (1038)`) — `actions.test.ts` : les onze champs et leur
+  `sub`, les comptes et les manquants triés sur des stores factices, l'EE
+  parmi ses porteurs, la mémo sur `stamp`, et les comptes qui tombent juste
+  sur le vrai disque ; `ui-serve.test.ts` : le test « picker OUVERT d'office »
+  devient « le récap, le picker FERMÉ », plus le champ complet, le clic sur un
+  manquant (sous-onglet, Gear reco, autre section), « … et n autres »,
+  « ← Récap » (relecture, confirmation), le récap illisible, et le chemin
+  `names/<id>` côté Noms. Banc sur un quick isolé (:4793, clés vidées, GET
+  seuls) : `--tabs character --hash character` montre le récap, picker fermé ;
+  `--hash character/2000055/fiche` montre « ← Récap » devant la vignette.
+  STYLE.md (croquis de l'arrivée) et `docs/quick-migration.md` suivent.
+  Laissé, hors périmètre : la ligne « Date de sortie à la main » compte le
+  curé `character-release.json` (48) — les 81 « manquants » ont une date
+  DÉRIVÉE des notes de MAJ (`data/generated/character-release.json` en porte
+  129), ils ne manquent de rien sur le site ; à voir si la ligne doit plutôt
+  compter les persos sans date d'aucune source. De même le Rang PvP liste
+  Snow et Lisha, inéligibles (cf. `datagen/curated/character.ts`), et Nom
+  court ou Tags listent des persos qui n'en ont pas besoin : le récap dit ce
+  qui est posé, pas ce qui est dû. Pas de compteur au Tableau de bord, pas
+  d'édition des dates de sortie (hors lot).
+
 - **quick : une vignette de perso partagée, celle du site (fond de rareté,
   visage, élément, classe) — en-tête de la fiche, synergies, Guides, picker,
   listes (lot B45)** — revue de quick par Sevih (12/10) : « les synergies

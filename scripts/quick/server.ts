@@ -74,6 +74,7 @@ import {
   bannersState,
   eventsState,
   changelogState,
+  characterCoverage,
   characterRoster,
   characterSheetState,
   currentCoupons,
@@ -672,6 +673,15 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     // Le roster de la « Fiche perso », pour son picker de héros : lu une fois
     // par la page, pas à chaque perso ouvert.
     json(res, characterRoster());
+    return;
+  }
+
+  if (req.method === 'GET' && url.pathname === '/api/character/coverage') {
+    // Le récap de la curation, pour l'arrivée sur la « Fiche perso » sans
+    // perso : par champ, combien de persos le portent et lesquels ne l'ont
+    // pas. Gardé en mémoire tant qu'aucun des curés lus n'a bougé ; la page le
+    // relit à chaque retour.
+    json(res, characterCoverage());
     return;
   }
 

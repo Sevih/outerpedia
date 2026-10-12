@@ -10,6 +10,9 @@
 // commit — sauf « Gear reco » : les builds du perso, un module (`gear.js`) monté
 // dans son hôte, avec SA savebar et SON commit ; la fiche ne fait que compter
 // ses builds en attente avant de quitter l'onglet ou de changer de perso.
+// Sans perso, le récap de la curation : par champ, ce qui est fait et les persos
+// à qui il manque — un clic en ouvre un là où le champ se règle. Le picker ne
+// s'ouvre qu'à son bouton.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
@@ -68,6 +71,14 @@ let roster = null; // `/api/character/roster`, lu une fois : le picker
 let sheet = null; // l'état du perso ouvert (`/api/character/state`)
 let sub = 'fiche'; // le sous-onglet montré
 let wanted = null; // le perso que le hash demande, tant qu'il n'est pas chargé
+// Le récap de la curation (`/api/character/coverage`), montré sans perso : le
+// dernier lu, la dernière lecture partie, les champs dont « … et n autres » est
+// déplié, et combien de manquants un champ montre replié.
+let cover = null;
+let coverSeq = 0;
+const coverOpen = new Set();
+const COVER_SHOWN = 24;
+let shut = 0; // les retours au récap : une fiche lue avant le dernier n'est plus posée
 // Cellules de rang modifiées, pas encore envoyées : clé → changement.
 const cells = new Map();
 // Priorité de skills et tags humains saisis ; `null` : ceux du disque.
@@ -386,7 +397,7 @@ function who() {
     `<span class="c-trait"><img src="${src(`ui/${file}${cap(esc(slug))}`)}" alt="" aria-hidden="true" />${esc(slug)}</span>`;
   drawnBase = state.imgBase;
   $('c-who').innerHTML = c
-    ? `${heroTile(state, c, { px: 56 })}
+    ? `<button class="btn ghost sm" type="button" data-act="recap" title="Fermer la fiche : le récap de la curation">← Récap</button>${heroTile(state, c, { px: 56 })}
       <div class="c-id"><strong>${esc(c.name)}</strong>
         <span class="c-traits">${trait('elem/IG_Turn_Element_', c.element)}${trait('class/IG_Turn_Class_', c.class)}${
           c.subClass ? trait('class/CM_Sub_Class_', c.subClass) : ''
@@ -459,8 +470,73 @@ function subTabs() {
           off ? ` disabled title="${off}"` : ''
         }>${s.label}${dot ? `<span class="dot ${dot[0]}" role="img" aria-label="${dot[1]}" title="${dot[1]}"></span>` : ''}</button>`;
       }).join('');
-  if (sub !== 'gear') $('c-panel').setAttribute('aria-labelledby', `c-tab-${sub}`);
+  // Sans perso, le panneau porte le récap : il n'est celui d'aucun sous-onglet.
+  if (!sheet) $('c-panel').removeAttribute('aria-labelledby');
+  else if (sub !== 'gear') $('c-panel').setAttribute('aria-labelledby', `c-tab-${sub}`);
   if (focused) $(`c-tab-${sub}`)?.focus();
+}
+
+// ------------------------------------------------------ le récap
+/**
+ * Une ligne du récap : le champ, son compte, puis les persos à qui il manque,
+ * en vignettes — les `COVER_SHOWN` premiers, le reste derrière « … et n autres ».
+ * Le compte se lit sur ceux que le champ concerne (`done` + les manquants) :
+ * l'EE ne compte que les persos qui en ont un.
+ */
+function coverRow(f, rows) {
+  const all = coverOpen.has(f.key) || f.missing.length <= COVER_SHOWN;
+  const hero = (m) =>
+    `<button class="c-cov-hero" type="button" data-cov-id="${esc(m.id)}" data-cov-sub="${esc(f.sub)}" title="${esc(m.name)}" aria-label="${esc(`${m.name} — ${f.label}`)}">${heroTile(state, rows.get(m.id) ?? m, { px: 32 })}</button>`;
+  return `<div class="c-cov-row" data-cov="${esc(f.key)}">
+      <strong>${esc(f.label)}</strong>
+      <span class="badge ${f.missing.length ? 'off' : 'ok'}">${f.done} / ${f.done + f.missing.length}</span>
+      <div class="c-cov-miss">${(all ? f.missing : f.missing.slice(0, COVER_SHOWN)).map(hero).join('')}${
+        all
+          ? ''
+          : `<button class="btn ghost sm" type="button" data-cov-more="${esc(f.key)}">… et ${plural(f.missing.length - COVER_SHOWN, 'autre')}</button>`
+      }${f.missing.length ? '' : '<span class="lbl">complet</span>'}</div>
+    </div>`;
+}
+
+/** Le récap de la curation, tel que lu la dernière fois ; rien tant qu'il n'est pas arrivé. */
+function recapHtml() {
+  if (!cover) return '';
+  const rows = new Map((roster ?? []).map((c) => [c.id, c]));
+  return `<div class="card c-recap" role="group" aria-label="Récap de la curation">
+      <div class="card-head"><strong>Curation — ${plural(cover.total, 'perso')}</strong><span class="lbl">Par champ : ce qui est fait, puis les persos à qui il manque — un clic en ouvre un là où le champ se règle.</span></div>
+      <div class="c-cov">${cover.fields.map((f) => coverRow(f, rows)).join('')}</div>
+    </div>`;
+}
+
+/**
+ * Sans perso, le récap, relu du serveur à chaque venue : un enregistrement a
+ * pu bouger les comptes. Le dernier lu reste à l'écran pendant la lecture ; une
+ * réponse arrivée après une lecture plus récente n'est pas gardée, et rien
+ * n'est dessiné par-dessus une fiche ouverte entre-temps.
+ */
+async function showRecap() {
+  if (!roster || sheet || wanted || $('tab-character').hidden) return;
+  const mine = ++coverSeq;
+  render();
+  try {
+    const c = await getJson('/api/character/coverage');
+    if (mine !== coverSeq) return;
+    if (!Array.isArray(c.fields)) throw new Error('réponse sans champs');
+    cover = c;
+    if (!sheet && !wanted) render();
+  } catch (e) {
+    log([`Récap illisible : ${e}`], false);
+  }
+}
+
+/**
+ * Un manquant du récap : sa fiche sur le sous-onglet où le champ se règle, ou
+ * la section qui le porte (`names`, `extractor/character`), ouverte sur lui.
+ */
+function openMissing(id, to) {
+  if (!SUBS.some((s) => s.id === to)) return sections.go(`${to}/${encodeURIComponent(id)}`);
+  sub = to;
+  load(id).catch((e) => log([`Fiche illisible : ${e}`], false));
 }
 
 // ------------------------------------------------------ le sous-onglet « Fiche »
@@ -1135,7 +1211,10 @@ function showGear() {
     });
 }
 
-/** Le sous-onglet montré, redessiné en entier : un autre perso, « Annuler », l'état relu. */
+/**
+ * Le sous-onglet montré, redessiné en entier : un autre perso, « Annuler »,
+ * l'état relu — et, sans perso, le récap de la curation.
+ */
 function render() {
   const panel = $('c-panel');
   // Gear reco vit dans son hôte, à côté : il garde son DOM d'une venue à l'autre.
@@ -1143,8 +1222,9 @@ function render() {
   keepOpen();
   panel.hidden = gearOn;
   $('c-gear').hidden = !gearOn;
-  panel.innerHTML =
-    !sheet || gearOn
+  panel.innerHTML = !sheet
+    ? recapHtml()
+    : gearOn
       ? ''
       : sub === 'fiche'
         ? ficheHtml()
@@ -1288,6 +1368,15 @@ $('c-panel').oninput = (e) => {
 };
 
 $('c-panel').onclick = (e) => {
+  // Le récap : « … et n autres » déplie les manquants d'un champ, une vignette ouvre son perso.
+  const more = e.target.closest('[data-cov-more]')?.dataset.covMore;
+  if (more) {
+    coverOpen.add(more);
+    render();
+    return $('c-panel').querySelectorAll(`[data-cov="${more}"] .c-cov-hero`)[COVER_SHOWN]?.focus();
+  }
+  const miss = e.target.closest('[data-cov-id]');
+  if (miss) return openMissing(miss.dataset.covId, miss.dataset.covSub);
   const el = e.target.closest('[data-act]');
   if (!el || !sheet) return;
   const { act, step } = el.dataset;
@@ -1489,7 +1578,10 @@ $('c-tabs').onkeydown = (e) => {
  * (après un enregistrement).
  */
 async function load(id, keep = false) {
+  const at = shut;
   const s = await getJson(`/api/character/state?id=${encodeURIComponent(id)}`);
+  // « ← Récap » pendant la lecture : la fiche fermée ne revient pas.
+  if (at !== shut) return;
   // Un serveur plus vieux que cette page ne sert ni les langues des textes, ni le kit, ni l'EE.
   if (!s.langs || !s.kit || s.ee === undefined)
     throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
@@ -1528,15 +1620,36 @@ async function load(id, keep = false) {
  */
 function choose(id) {
   if (id === sheet?.char.id) return;
+  if (!canDrop()) return false;
+  load(id).catch((e) => log([`Fiche illisible : ${e}`], false));
+}
+
+/** Lâcher le perso ouvert — pour un autre, pour le récap : sur confirmation s'il porte des changements. */
+function canDrop() {
   const n = allChanges();
-  if (
-    n &&
-    !confirm(
+  return (
+    !n ||
+    confirm(
       `Abandonner ${plural(n, 'changement')} non enregistré${n > 1 ? 's' : ''} sur ${sheet.char.name} ?`,
     )
-  )
-    return false;
-  load(id).catch((e) => log([`Fiche illisible : ${e}`], false));
+  );
+}
+
+/**
+ * « ← Récap » : la fiche se ferme, le récap revient, relu — le garde de
+ * `choose` d'abord. Pas pendant un enregistrement : sa réponse se pose sur la
+ * fiche.
+ */
+function toRecap() {
+  if (!sheet || $('c-save').classList.contains('busy') || !canDrop()) return;
+  shut++;
+  gearReset();
+  geared = null;
+  sheet = null;
+  who();
+  writeHash();
+  showRecap();
+  $('c-pick').focus();
 }
 
 const pickChar = () =>
@@ -1552,16 +1665,12 @@ $('c-pick').onclick = pickChar;
 // « extraction » de l'en-tête : la fiche du perso dans la section Extraction
 // (`sections.go` par chemin ; des changements en attente peuvent retenir ici).
 $('c-who').addEventListener('click', (e) => {
+  if (e.target.closest('[data-act="recap"]')) return toRecap();
   const to = e.target.closest('[data-go]')?.dataset.go;
   if (!to) return;
   e.preventDefault();
   sections.go(to);
 });
-
-/** Sans perso, la fiche n'a rien à montrer : le picker s'ouvre de lui-même. */
-function pickIfEmpty() {
-  if (roster && !sheet && !wanted && !$('tab-character').hidden) pickChar();
-}
 
 $('c-reset').onclick = () =>
   load(sheet.char.id).catch((e) => log([`Fiche illisible : ${e}`], false));
@@ -1697,13 +1806,13 @@ sections.register('character', {
     stateLoaded.then(() => {
       if (state.imgBase === drawnBase) return;
       who();
-      if (sheet) render();
+      render();
     });
     return getJson('/api/character/roster')
       .then((r) => {
         roster = r.roster;
         $('c-pick').disabled = false;
-        if (!wanted) return pickIfEmpty();
+        if (!wanted) return showRecap();
         return load(wanted).then(() => {
           const card = sheet.kit.cards[wantedPick - 1];
           wantedPick = 0;
@@ -1713,12 +1822,17 @@ sections.register('character', {
       .catch((e) => {
         wanted = null;
         log([`Fiche perso illisible : ${e}`], false);
+        // Le perso demandé ne s'ouvre pas : la page reste sur le récap.
+        showRecap();
       });
   },
-  // Chaque venue à l'écran : sans perso, le picker ; avec, l'adresse — et, s'il
-  // n'y a rien en attente, la fiche relue (un rang a pu changer dans Rangs).
+  // Chaque venue à l'écran : sans perso, le récap relu ; avec, l'adresse — et,
+  // s'il n'y a rien en attente, la fiche relue (un rang a pu changer dans Rangs).
   open: () => {
-    if (!sheet) return pickIfEmpty();
+    if (!sheet) {
+      showRecap();
+      return;
+    }
     writeHash();
     if (!changes()) load(sheet.char.id).catch((e) => log([`Fiche illisible : ${e}`], false));
   },

@@ -640,3 +640,57 @@
 #tab-character .c-memo strong {
   color: var(--content);
 }
+
+/* ---------------------------------------------------------------- le récap
+   Sans perso : une carte, une ligne par champ curé — son libellé, son compte
+   (un badge : la charte n'a pas de barre), puis les persos à qui il manque, en
+   vignettes de 32 px. Sous 700 px, les vignettes passent sous le libellé. */
+#tab-character .c-cov-row {
+  display: grid;
+  grid-template-columns: 200px 76px minmax(0, 1fr);
+  align-items: start;
+  gap: 6px 14px;
+  padding: 10px 20px;
+}
+#tab-character .c-cov-row + .c-cov-row {
+  border-top: 1px solid var(--line-subtle);
+}
+#tab-character .c-cov-row > strong {
+  font-size: 13px;
+  line-height: 32px;
+}
+#tab-character .c-cov-row > .badge {
+  justify-self: start;
+  margin-top: 6px;
+}
+#tab-character .c-cov-miss {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 32px;
+}
+/* Une vignette cliquable : le bouton n'ajoute rien à la case, sinon son anneau. */
+#tab-character .c-cov-hero {
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+}
+#tab-character .c-cov-hero:hover {
+  outline: 2px solid var(--line);
+  outline-offset: 1px;
+}
+#tab-character .c-cov-hero:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+@media (max-width: 700px) {
+  #tab-character .c-cov-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  #tab-character .c-cov-miss {
+    grid-column: 1 / -1;
+  }
+}

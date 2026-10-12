@@ -241,6 +241,7 @@ import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
 import { autoTranslate } from '@/lib/admin/translate-actions';
 import { loadCuratedCharacters } from '@/lib/data/curated';
+import { loadCuratedJson } from '@/lib/data/disk';
 import { EFFECT_FAMILIES, effectFamilyLabel, type EffectSide } from '@/lib/data/effect-families';
 import {
   getMergedEffect,
@@ -2387,6 +2388,148 @@ export function characterRoster(): { roster: SheetRosterRow[] } {
       .map(sheetRosterRow)
       .sort((a, b) => a.name.localeCompare(b.name)),
   };
+}
+
+/** Un champ du récap : ce qui est curé, et les persos à qui il manque. */
+export interface CoverageField {
+  key: string;
+  label: string;
+  /**
+   * Où le champ se règle : un sous-onglet de la fiche (`fiche`, `pros-cons`,
+   * `synergies`, `ee`, `gear`), ou le chemin d'une autre section (`names`,
+   * `extractor/character`) — la page y ouvre le perso manquant.
+   */
+  sub: string;
+  done: number;
+  /** Par nom. */
+  missing: { id: string; name: string }[];
+}
+
+/** Le récap de la curation : le roster entier, puis une ligne par champ. */
+export interface CharacterCoverage {
+  total: number;
+  fields: CoverageField[];
+}
+
+/**
+ * Les lectures du récap de la « Fiche perso » : le roster, le curé des persos,
+ * les recos de gear, les noms courts, les dates de sortie posées à la main, le
+ * curé des EE et ceux qui en ont un — et `stamp`, ce qui date le tout : le
+ * récap n'est recalculé que s'il bouge.
+ */
+export interface CharacterCoverageDisk {
+  roster: () => SheetRosterRow[];
+  curated: () => Record<string, CharacterCurated>;
+  gearReco: () => Record<string, GearBuild[]>;
+  shortNames: () => Record<string, LocalizedText>;
+  releases: () => Record<string, string>;
+  ee: () => Record<string, EquipmentCuratedEntry>;
+  eeOwners: () => ReadonlySet<string>;
+  stamp: () => string;
+}
+
+/**
+ * Celles de la route : les cinq curés du disque. `mtimeOf`, pas `fileStamp` :
+ * la page relit le récap au retour d'un enregistrement, que les deux secondes
+ * de `fileStamp` lui cacheraient.
+ */
+export const CHARACTER_COVERAGE_DISK: CharacterCoverageDisk = {
+  roster: () => characterRoster().roster,
+  curated: loadCuratedCharacters,
+  gearReco: loadGearReco,
+  shortNames: loadShortNames,
+  releases: () =>
+    loadCuratedJson<{ releases?: Record<string, string> }>('curated/character-release.json', {})
+      .releases ?? {},
+  ee: () => loadEquipmentEditorial().ee,
+  eeOwners: () => new Set(getEEViews().map((e) => e.characterId)),
+  stamp: () =>
+    [CHARACTERS_PATH, GEAR_RECO_PATH, SHORT_NAMES_PATH, RELEASE_CURATED_PATH, EQUIPMENT_PATH]
+      .map(mtimeOf)
+      .join('|'),
+};
+
+const coverageMemo = new WeakMap<
+  CharacterCoverageDisk,
+  { stamp: string; coverage: CharacterCoverage }
+>();
+
+/**
+ * Le récap de la curation, pour l'arrivée sur la « Fiche perso » : par champ,
+ * combien de persos le portent et lesquels ne l'ont pas (par nom). Un champ
+ * VIDE ne compte pas : des pros / cons sans ligne, un texte sans langue, une
+ * liste sans élément. L'EE ne se compte que parmi les persos qui en ont un —
+ * les autres ne sont ni faits ni manquants, `done + missing` y est plus court
+ * que `total`. La date de sortie est celle POSÉE À LA MAIN
+ * (`character-release.json`) : les autres persos tiennent la leur des notes de
+ * mise à jour, ils ne manquent de rien sur le site. Gardé tant qu'aucun des
+ * fichiers lus n'a bougé (`disk.stamp()`), comme `monstersIndex`.
+ */
+export function characterCoverage(
+  disk: CharacterCoverageDisk = CHARACTER_COVERAGE_DISK,
+): CharacterCoverage {
+  const stamp = disk.stamp();
+  const kept = coverageMemo.get(disk);
+  if (kept?.stamp === stamp) return kept.coverage;
+
+  const roster = disk.roster();
+  const curated = disk.curated();
+  const gear = disk.gearReco();
+  const short = disk.shortNames();
+  const releases = disk.releases();
+  const ee = disk.ee();
+  const eeOwners = disk.eeOwners();
+  const said = (text: LocalizedText | undefined): boolean =>
+    Object.values(text ?? {}).some((v) => Boolean(v?.trim()));
+
+  const field = (
+    key: string,
+    label: string,
+    sub: string,
+    has: (id: string) => boolean,
+    among: SheetRosterRow[] = roster,
+  ): CoverageField => ({
+    key,
+    label,
+    sub,
+    done: among.filter((c) => has(c.id)).length,
+    missing: among
+      .filter((c) => !has(c.id))
+      .map(({ id, name }) => ({ id, name }))
+      .sort((a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id)),
+  });
+
+  const coverage: CharacterCoverage = {
+    total: roster.length,
+    fields: [
+      field('prosCons', 'Pros / Cons', 'pros-cons', (id) => {
+        const pc = curated[id]?.prosCons;
+        return Boolean(pc?.pros?.length || pc?.cons?.length);
+      }),
+      field('synergies', 'Synergies', 'synergies', (id) => Boolean(curated[id]?.synergies?.length)),
+      field('skillPriority', 'Priorité de skills', 'fiche', (id) =>
+        Object.values(curated[id]?.skillPriority ?? {}).some((v) => v !== undefined),
+      ),
+      field('tags', 'Tags', 'fiche', (id) => Boolean(curated[id]?.tags?.length)),
+      field('rank', 'Rang PvE', 'fiche', (id) => Boolean(curated[id]?.rank)),
+      field('rankPvp', 'Rang PvP', 'fiche', (id) => Boolean(curated[id]?.rankPvp)),
+      field('gear', 'Gear reco', 'gear', (id) => Boolean(gear[id]?.length)),
+      field(
+        'ee',
+        'EE',
+        'ee',
+        (id) => Boolean(ee[id]?.rank || ee[id]?.rank10),
+        roster.filter((c) => eeOwners.has(c.id)),
+      ),
+      field('shortName', 'Nom court', 'names', (id) => said(short[id])),
+      field('release', 'Date de sortie à la main', 'extractor/character', (id) =>
+        Boolean(releases[id]),
+      ),
+      field('videos', 'Vidéos', 'fiche', (id) => Boolean(curated[id]?.videos?.length)),
+    ],
+  };
+  coverageMemo.set(disk, { stamp, coverage });
+  return coverage;
 }
 
 /** Les deux sections du curé des chips de skills : cardId → refs. */

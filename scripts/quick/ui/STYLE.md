@@ -853,7 +853,7 @@ le panneau ; à la fermeture le focus revient à `opener()`.
 
 ## Éditeurs — croquis
 
-### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42 ; Skills — B39 ; EE — B43 ; Gear reco — B40)
+### Fiche perso (`wide`, coquille et sous-onglet Fiche — C11 ; Pros / Cons et Synergies — B42 ; Skills — B39 ; EE — B43 ; Gear reco — B40 ; l'arrivée sur le récap — B46)
 
 Ce que le wiki sait d'UN perso, en sous-onglets comme sur sa fiche du site :
 l'éditeur « Character » de l'admin, son onglet « Skills (buff/debuff) », ses
@@ -862,8 +862,17 @@ du rendu :
 
 ```
 .head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
-.card.pad.c-char  l'en-tête de perso : sa vignette en 56 px (`heroTile`, B45), nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
-   sans perso : « Aucun perso choisi. », [Choisir un perso], et le picker OUVERT d'office à chaque venue sur l'onglet
+.card.pad.c-char  l'en-tête de perso : [← Récap] (.btn.ghost.sm) · sa vignette en 56 px (`heroTile`, B45), nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
+   sans perso : « Aucun perso choisi. », [Choisir un perso] — le picker ne s'ouvre QU'À ce bouton — et, dans `#c-panel`, le récap de la curation (l'arrivée, B46)
+   [← Récap] ferme la fiche (`#character`) et relit le récap ; des changements en attente : sur confirmation, celle de [Changer de perso]
+#c-panel — l'arrivée, sans perso : .card.c-recap, le récap de la curation
+  card-head : « Curation — 129 persos » · .lbl « Par champ : ce qui est fait, puis les persos à qui il manque — un clic en ouvre un là où le champ se règle. »
+  .c-cov-row, une par champ (grille : libellé 200 px | compte | manquants ; sous 700 px les manquants passent dessous) :
+     le libellé (gras) · le compte en badge « 48 / 129 » (off ; ok — vert — quand rien ne manque : la charte n'a pas de barre de progression)
+     .c-cov-miss : les persos à qui le champ manque, par nom — la vignette de perso en 32 px (`heroTile`), chacune un bouton (.c-cov-hero, `title` = le nom) ; « complet » (.lbl) quand il n'y en a pas
+        au-delà de 24 : [… et 57 autres] (.btn.ghost.sm) déplie le reste, et le champ reste déplié d'une venue à l'autre
+     un clic sur une vignette ouvre le perso LÀ OÙ LE CHAMP SE RÈGLE : sa fiche sur le sous-onglet (`#character/<id>/<sous-onglet>`), ou une autre section (`#names/<id>`, `#extractor/character/<id>`)
+  les champs : Pros / Cons (`pros-cons`) · Synergies (`synergies`) · Priorité de skills, Tags, Rang PvE, Rang PvP (`fiche`) · Gear reco (`gear`) · EE (`ee`, compté parmi les persos qui en ont un) · Nom court (Noms) · Date de sortie à la main (Extraction, en lecture) · Vidéos (`fiche`, en lecture)
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets, sauf les builds de Gear reco, qui ont la leur ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
 .c-tabs (role tablist — la rangée des onglets de builds de Gear reco, `.tab` en 32 px)  [Fiche ●] [Pros / Cons ●] [Synergies] [Skills] [EE] [Gear reco]
@@ -924,6 +933,11 @@ le hash : `#character/<id>/<sous-onglet>` (`fiche` · `pros-cons` · `synergies`
    `#character/<id>/skills/picker/<n>` ouvre en plus le picker d'effets de la n-ième carte (à partir de 1) — pour le banc, la page ne l'écrit pas
 ```
 
+Le récap de l'arrivée vient de `GET /api/character/coverage`
+(`characterCoverage` : `{ total, fields: [{ key, label, sub, done, missing }] }`,
+gardé au serveur tant qu'aucun des cinq curés lus n'a bougé), RELU à chaque
+venue sans perso — un enregistrement vient peut-être de bouger les comptes ;
+le dernier lu reste à l'écran pendant la lecture.
 Le roster vient de `GET /api/character/roster`, lu UNE fois ; la fiche d'un
 perso de `GET /api/character/state?id=` (`characterSheetState` : sa ligne, sa
 chaîne, ses tags dérivés, son entrée curée entière, ses rangs et les listes de

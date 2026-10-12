@@ -190,7 +190,12 @@ et la ligne brute de l'admin ; lien retiré du menu admin le 08/10).
 B40 — portage COMPLET —, et Editor › EE, étape 11, lot B43 : UNE section pour
 tout ce que le wiki sait d'un perso, le picker de héros en tête, des
 sous-onglets comme sur la fiche du site — Fiche, Pros / Cons, Synergies,
-Skills, EE, Gear reco. C11 pose la coquille, le picker
+Skills, EE, Gear reco. L'ARRIVÉE, sans perso (B46, revue de Sevih du 12/10 :
+« pas de récap, on se fait agresser par le picker ») : le récap de la curation
+— par champ, combien de persos le portent et lesquels ne l'ont pas, en
+vignettes cliquables qui ouvrent le perso là où le champ se règle ; le picker
+ne s'ouvre plus qu'à son bouton, et « ← Récap » y ramène d'une fiche. C11 pose
+la coquille, le picker
 partagé (`ui/hero-picker.mjs`) et le sous-onglet
 Fiche : rangs PvE et PvP, rôle, paliers par transcendance, priorité de skills,
 tags humains, les tags dérivés et les vidéos en lecture — un enregistrement, un

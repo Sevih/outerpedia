@@ -766,7 +766,7 @@ describe('Noms — la page, sur le vrai markup', () => {
     vi.stubGlobal('confirm', confirm);
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
-      sections: { start: () => void };
+      sections: { start: () => void; go: (path: string) => void };
     };
     await import(/* @vite-ignore */ resolve(UI, 'tabs', 'names.js'));
     lib.sections.start();
@@ -790,6 +790,8 @@ describe('Noms — la page, sur le vrai markup', () => {
       confirm,
       disk,
       settle,
+      /** Une venue par un chemin, comme d'une autre section (`sections.go`). */
+      go: (path: string) => lib.sections.go(path),
       /** Les lignes de la liste : nom, badge, point. */
       list: () =>
         all('#n-list .n-row').map((b) => [
@@ -1047,6 +1049,20 @@ describe('Noms — la page, sur le vrai markup', () => {
     const ghost = await names({ hash: '#names/ghost' });
     expect(ghost.el('tab-names').hidden).toBe(false);
     expect(ghost.el('n-sheet').textContent?.trim()).toBe('Choisir un perso dans la liste.');
+  });
+
+  it("une venue par un chemin (`sections.go('names/<id>')`, le récap de la Fiche perso) ouvre ce perso", async () => {
+    const page = await names({ hash: '#coupons' });
+    expect(page.el('tab-names').hidden).toBe(true);
+    page.go('names/3');
+    expect(page.el('tab-names').hidden).toBe(false);
+    expect(page.all('#n-sheet .n-id strong')[0].textContent).toBe('Short Carla');
+    expect(location.hash).toBe('#names/3');
+    // Déjà à l'écran : un autre chemin y change de perso ; un id inconnu ne bouge rien.
+    page.go('names/1');
+    expect(page.all('#n-sheet .n-id strong')[0].textContent).toBe('Overflowing Name Anna');
+    page.go('names/ghost');
+    expect(page.all('#n-sheet .n-id strong')[0].textContent).toBe('Overflowing Name Anna');
   });
 
   it('« Annuler » rend le disque ; quitter l’onglet avec des changements demande confirmation', async () => {
@@ -2579,6 +2595,55 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
   });
 
   /**
+   * Le récap tel que le serveur le calcule, en petit : quatre champs — deux
+   * sous-onglets de la fiche, Gear reco, et Noms, une AUTRE section — sur le
+   * disque du harnais, relu à chaque appel. Les manquants par nom.
+   */
+  interface Coverage {
+    total: number;
+    fields: {
+      key: string;
+      label: string;
+      sub: string;
+      done: number;
+      missing: { id: string; name: string }[];
+    }[];
+  }
+  const coverage = (cur: Record<string, Curated>, gear: Record<string, unknown[]>): Coverage => {
+    const field = (key: string, label: string, sub: string, has: (id: string) => boolean) => ({
+      key,
+      label,
+      sub,
+      done: ROSTER.filter((c) => has(c.id)).length,
+      missing: ROSTER.filter((c) => !has(c.id)).map(({ id, name }) => ({ id, name })),
+    });
+    return {
+      total: ROSTER.length,
+      fields: [
+        field('prosCons', 'Pros / Cons', 'pros-cons', (id) =>
+          Boolean(cur[id]?.prosCons?.pros?.length || cur[id]?.prosCons?.cons?.length),
+        ),
+        field('rank', 'Rang PvE', 'fiche', (id) => Boolean(cur[id]?.rank)),
+        field('gear', 'Gear reco', 'gear', (id) => Boolean(gear[id]?.length)),
+        field('shortName', 'Nom court', 'names', () => false),
+      ],
+    };
+  };
+  /** Un récap à un seul champ, `n` persos manquants : de quoi dépasser les vingt-quatre montrés. */
+  const crowd = (n: number): Coverage => ({
+    total: n,
+    fields: [
+      {
+        key: 'tags',
+        label: 'Tags',
+        sub: 'fiche',
+        done: 0,
+        missing: Array.from({ length: n }, (_, i) => ({ id: `9${i}`, name: `Perso ${i + 1}` })),
+      },
+    ],
+  });
+
+  /**
    * La page de quick dans un document happy-dom, comme pour Noms et Effets : la
    * VRAIE coquille assemblée, le vrai `lib.js`, le vrai `tabs/character.js`, le
    * vrai `gear-view.mjs` et le vrai `hero-picker.mjs`. `fetch` est factice : il
@@ -2606,6 +2671,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       companion?: { id: string; name: string };
       /** Gear reco : la réponse à un enregistrement des builds (d'office, écrit). */
       gearSaved?: (body: unknown) => Saved;
+      /** Le récap servi (d'office : celui du disque, cf. `coverage`) ; `null` : le serveur le refuse. */
+      coverage?: (() => Coverage) | null;
     } = {},
   ) {
     vi.resetModules();
@@ -2648,6 +2715,10 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       const url = new URL(path, 'http://localhost:4747');
       if (url.pathname.startsWith('/api/character')) calls.push(body ? { path, body } : { path });
       if (url.pathname === '/api/character/roster') return answer({ roster: ROSTER });
+      if (url.pathname === '/api/character/coverage') {
+        if (opts.coverage === null) return answer({ error: 'curé illisible' }, 500);
+        return answer(opts.coverage?.() ?? coverage(disk.curated, disk.gear));
+      }
       if (url.pathname === '/api/character/state') {
         const id = url.searchParams.get('id') ?? '';
         const row = ROSTER.find((c) => c.id === id);
@@ -2860,6 +2931,18 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           b.querySelector('.dot')?.className ?? '',
         ]),
       count: () => el('c-count').textContent,
+      /** Le récap : ses lignes telles qu'elles se lisent — libellé, compte, manquants, la suite. */
+      recap: () =>
+        all('#c-panel .c-cov-row').map((row) => [
+          row.querySelector('strong')?.textContent,
+          row.querySelector('.badge')?.textContent,
+          [...row.querySelectorAll('.c-cov-hero')].map((b) => b.getAttribute('title')),
+          row.querySelector('[data-cov-more], .lbl')?.textContent ?? '',
+        ]),
+      /** La vignette d'un manquant, dans la ligne d'un champ. */
+      missing: (key: string, id: string) =>
+        all(`#c-panel [data-cov="${key}"] .c-cov-hero`).find((b) => b.dataset.covId === id)!,
+      coverages: () => calls.filter((c) => c.path === '/api/character/coverage').length,
       save: async () => {
         el('c-save').click();
         for (let i = 0; i < 6; i++) await settle();
@@ -2950,17 +3033,55 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(page.all('#tab-character h2')[0].textContent).toBe('Fiche perso');
   });
 
-  it('sans perso : « Aucun perso choisi. », rien d’autre, et le picker OUVERT d’office', async () => {
+  it('sans perso : le récap de la curation, le picker FERMÉ — il ne s’ouvre qu’à son bouton', async () => {
     const page = await character({ hash: '#character' });
     expect(page.el('c-who').textContent).toBe('Aucun perso choisi.');
     expect(page.el('c-pick-label').textContent).toBe('Choisir un perso');
     expect(page.el('c-pick').disabled).toBe(false);
     expect(page.el('c-bar').hidden).toBe(true);
     expect(page.el('c-tabs').hidden).toBe(true);
-    expect(page.el('c-panel').innerHTML).toBe('');
-    // Le roster est lu UNE fois, aucun état de perso n'est demandé.
-    expect(page.calls).toEqual([{ path: '/api/character/roster' }]);
+    // Le roster est lu UNE fois, puis le récap ; aucun état de perso n'est demandé.
+    expect(page.calls).toEqual([
+      { path: '/api/character/roster' },
+      { path: '/api/character/coverage' },
+    ]);
+    expect(page.el('hp-modal')).toBeNull();
 
+    // Une carte, une ligne par champ : libellé, compte, les manquants par nom.
+    expect(page.all('#c-panel .c-recap .card-head strong')[0].textContent).toBe(
+      'Curation — 3 persos',
+    );
+    expect(page.recap()).toEqual([
+      ['Pros / Cons', '1 / 3', ['Ais Wallenstein', 'Alice'], ''],
+      ['Rang PvE', '2 / 3', ['Alice'], ''],
+      ['Gear reco', '1 / 3', ['Ais Wallenstein', 'Alice'], ''],
+      ['Nom court', '0 / 3', ['Aer', 'Ais Wallenstein', 'Alice'], ''],
+    ]);
+    expect(page.all('#c-panel .c-cov-row .badge').map((b) => b.className)).toEqual([
+      'badge off',
+      'badge off',
+      'badge off',
+      'badge off',
+    ]);
+    // Un manquant : la vignette du site en 32 px, dans un bouton que son nom et son champ disent.
+    const alice = page.missing('rank', ALICE);
+    expect(alice.getAttribute('aria-label')).toBe('Alice — Rang PvE');
+    expect(alice.querySelector('.ht')?.getAttribute('style')).toBe('--ht:32px');
+    expect(
+      ['.ht-bg', '.ht-face', '.ht-el img', '.ht-cls'].map((part) =>
+        alice.querySelector(part)?.getAttribute('src'),
+      ),
+    ).toEqual([
+      'https://img.test/images/ui/boss/CT_Slot_Unique.webp',
+      `https://img.test/images/characters/faceicon/FI_${ALICE}.webp`,
+      'https://img.test/images/ui/boss/CT_Element_Earth.webp',
+      'https://img.test/images/ui/boss/CT_Class_Mage.webp',
+    ]);
+    // Le panneau du récap n'est celui d'aucun sous-onglet.
+    expect(page.el('c-panel').hasAttribute('aria-labelledby')).toBe(false);
+
+    // Le picker : à son bouton, et à lui seul.
+    page.el('c-pick').click();
     expect(page.el('hp-modal').hidden).toBe(false);
     expect(page.el('hp-title').textContent).toBe('Choisir un perso');
     expect(page.all('#hp-results .hp-n').map((n) => n.textContent)).toEqual([
@@ -2970,8 +3091,153 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
   });
 
+  it('récap : un champ sans manquant est dit complet, en vert', async () => {
+    const page = await character({
+      hash: '#character',
+      coverage: () => ({
+        total: 3,
+        fields: [{ key: 'rank', label: 'Rang PvE', sub: 'fiche', done: 3, missing: [] }],
+      }),
+    });
+    expect(page.recap()).toEqual([['Rang PvE', '3 / 3', [], 'complet']]);
+    expect(page.all('#c-panel .c-cov-row .badge')[0].className).toBe('badge ok');
+  });
+
+  it('récap : un clic sur un manquant ouvre sa fiche sur le sous-onglet du champ', async () => {
+    const page = await character({ hash: '#character' });
+    page.missing('prosCons', AIS).click();
+    await page.settle();
+    await page.settle();
+    expect(page.window.location.hash).toBe(`#character/${AIS}/pros-cons`);
+    expect(page.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
+    expect(page.subs().map(([label, on]) => [label, on])).toContainEqual(['Pros / Cons', 'true']);
+    expect(page.all('#c-panel .c-recap')).toEqual([]);
+    expect(page.el('c-panel').getAttribute('aria-labelledby')).toBe('c-tab-pros-cons');
+    expect(page.el('hp-modal')).toBeNull();
+
+    // Gear reco de même : son hôte, monté pour ce perso.
+    const gear = await character({ hash: '#character' });
+    gear.missing('gear', ALICE).click();
+    for (let i = 0; i < 6; i++) await gear.settle();
+    expect(gear.window.location.hash).toBe(`#character/${ALICE}/gear`);
+    expect(gear.el('c-gear').hidden).toBe(false);
+    expect(gear.gearStates()).toEqual([`/api/gear-reco/state?id=${ALICE}`]);
+  });
+
+  it('récap : un champ réglé dans une autre section y mène, sur ce perso', async () => {
+    const page = await character({ hash: '#character' });
+    page.missing('shortName', AIS).click();
+    await page.settle();
+    // Noms (pas chargé ici) lit ce chemin à son `open()` : la section, et l'adresse.
+    expect(page.el('tab-character').hidden).toBe(true);
+    expect(page.el('tab-names').hidden).toBe(false);
+    expect(page.window.location.hash).toBe(`#names/${AIS}`);
+    expect(page.states()).toBe(0);
+  });
+
+  it('récap : au-delà de vingt-quatre manquants, « … et n autres », déplié au clic — et qui le reste', async () => {
+    const page = await character({ hash: '#character', coverage: () => crowd(30) });
+    const [[, count, shown, more]] = page.recap();
+    expect(count).toBe('0 / 30');
+    expect(shown).toHaveLength(24);
+    expect(more).toBe('… et 6 autres');
+    page.all('#c-panel [data-cov-more]')[0].click();
+    expect(page.recap()[0][2]).toHaveLength(30);
+    expect(page.all('#c-panel [data-cov-more]')).toEqual([]);
+    // Relu au retour sur l'onglet, le champ déplié le reste.
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    page.all('#tabs [data-tab="character"]')[0].click();
+    await page.settle();
+    expect(page.coverages()).toBe(2);
+    expect(page.recap()[0][2]).toHaveLength(30);
+
+    // Vingt-quatre tout juste : tous montrés, sans suite ; vingt-cinq : « 1 autre ».
+    const exact = await character({ hash: '#character', coverage: () => crowd(24) });
+    expect(exact.recap()[0][2]).toHaveLength(24);
+    expect(exact.recap()[0][3]).toBe('');
+    const one = await character({ hash: '#character', coverage: () => crowd(25) });
+    expect(one.recap()[0][2]).toHaveLength(24);
+    expect(one.recap()[0][3]).toBe('… et 1 autre');
+  });
+
+  it('« ← Récap » ferme la fiche et relit le récap : un enregistrement a bougé les comptes', async () => {
+    const page = await character({ hash: `#character/${ALICE}/fiche` });
+    expect(page.coverages()).toBe(0);
+    const back = () => page.all('#c-who [data-act="recap"]')[0];
+    expect(back().textContent).toBe('← Récap');
+    // Alice reçoit un rang, sur le disque : le récap relu ne la compte plus manquante.
+    page.disk.curated[ALICE] = { rank: 'B' };
+    back().click();
+    await page.settle();
+    expect(page.window.location.hash).toBe('#character');
+    expect(page.el('c-who').textContent).toBe('Aucun perso choisi.');
+    expect(page.el('c-pick-label').textContent).toBe('Choisir un perso');
+    expect(page.el('c-bar').hidden).toBe(true);
+    expect(page.el('c-tabs').hidden).toBe(true);
+    expect(page.el('c-gear').hidden).toBe(true);
+    expect(page.coverages()).toBe(1);
+    expect(page.recap()[1]).toEqual(['Rang PvE', '3 / 3', [], 'complet']);
+    expect(page.el('hp-modal')).toBeNull();
+
+    // Revenir sur l'onglet le relit encore ; avec une fiche ouverte, non.
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    page.all('#tabs [data-tab="character"]')[0].click();
+    await page.settle();
+    expect(page.coverages()).toBe(2);
+    page.missing('prosCons', AIS).click();
+    await page.settle();
+    await page.settle();
+    page.all('#tabs [data-tab="effects"]')[0].click();
+    page.all('#tabs [data-tab="character"]')[0].click();
+    await page.settle();
+    expect(page.coverages()).toBe(2);
+  });
+
+  it('« ← Récap » avec des changements en attente : sur confirmation, comme pour changer de perso', async () => {
+    const page = await character({ hash: `#character/${AER}` });
+    page.pick(page.cell('rank'), 'S');
+    const back = () => page.all('#c-who [data-act="recap"]')[0];
+
+    page.confirm.mockReturnValueOnce(false);
+    back().click();
+    await page.settle();
+    expect(page.confirm).toHaveBeenLastCalledWith(
+      'Abandonner 1 changement non enregistré sur Aer ?',
+    );
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+    expect(page.count()).toBe('1 changement');
+    expect(page.coverages()).toBe(0);
+
+    back().click();
+    await page.settle();
+    expect(page.window.location.hash).toBe('#character');
+    expect(page.all('#c-panel .c-recap')).toHaveLength(1);
+    // La saisie abandonnée ne revient pas avec le perso.
+    page.missing('prosCons', AIS).click();
+    await page.settle();
+    await page.settle();
+    page.el('c-pick').click();
+    page.all('#hp-results .hp-tile')[0].click();
+    await page.settle();
+    await page.settle();
+    expect(page.all('#c-who strong')[0].textContent).toBe('Aer');
+    expect(page.count()).toBe('aucune modification');
+    expect(page.confirm).toHaveBeenCalledTimes(2);
+  });
+
+  it('récap illisible : le journal le dit, le picker reste à son bouton', async () => {
+    const page = await character({ hash: '#character', coverage: null });
+    expect(page.el('c-panel').innerHTML).toBe('');
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain('Récap illisible');
+    expect(page.el('log').textContent).toContain('curé illisible');
+    expect(page.el('hp-modal')).toBeNull();
+    expect(page.el('c-pick').disabled).toBe(false);
+  });
+
   it('un perso choisi dans le picker : sa fiche, son en-tête, et l’adresse qui le dit', async () => {
     const page = await character({ hash: '#character' });
+    page.el('c-pick').click();
     page.all('#hp-results .hp-tile')[0].click();
     await page.settle();
     await page.settle();
@@ -3029,11 +3295,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(nope.all('#c-who strong')[0].textContent).toBe('Ais Wallenstein');
   });
 
-  it('un perso que le roster ne connaît pas : le journal le dit, la page reste sans perso', async () => {
+  it('un perso que le roster ne connaît pas : le journal le dit, la page reste sans perso, sur le récap', async () => {
     const page = await character({ hash: '#character/nope' });
     expect(page.el('c-who').textContent).toBe('Aucun perso choisi.');
     expect(page.el('journal').dataset.state).toBe('ko');
     expect(page.el('log').textContent).toContain('perso inconnu : nope');
+    expect(page.recap()).toHaveLength(4);
+    expect(page.el('hp-modal')).toBeNull();
   });
 
   it('les sous-onglets : la rangée entière, Fiche montrée, tous allumés', async () => {
@@ -5009,11 +5277,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     );
     expect(plain.el('g-modal').hidden).toBe(true);
 
-    // `#gear` seul : la fiche, sur Gear reco — et le picker de héros, faute de perso.
+    // `#gear` seul : la fiche, faute de perso sur le récap — le perso choisi s'ouvre sur Gear reco.
     const bare = await geared('#gear');
     expect(bare.el('tab-character').hidden).toBe(false);
     expect(bare.gearStates()).toEqual([]);
-    expect(bare.el('hp-modal').hidden).toBe(false);
+    expect(bare.el('hp-modal')).toBeNull();
+    expect(bare.all('#c-panel .c-recap')).toHaveLength(1);
+    bare.el('c-pick').click();
     bare.all('#hp-results .hp-tile')[0].click();
     for (let i = 0; i < 6; i++) await bare.settle();
     expect(bare.window.location.hash).toBe(`#character/${AER}/gear`);

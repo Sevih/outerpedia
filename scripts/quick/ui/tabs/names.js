@@ -429,6 +429,12 @@ sections.register('names', {
       })
       .catch((e) => log([`Noms illisibles : ${e}`], false));
   },
+  // Une venue par un chemin (`sections.go('names/<id>')`, le récap de la Fiche
+  // perso) : ce perso, comme au démarrage.
+  open: () => {
+    const [, id] = /^#names\/([^/]+)$/.exec(location.hash) ?? [];
+    if (id) select(decodeURIComponent(id));
+  },
   // Des persos en attente ne survivent pas à un rechargement de la page.
   dirty: () => edits.size,
   canLeave: namesLeave,

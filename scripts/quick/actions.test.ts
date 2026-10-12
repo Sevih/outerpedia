@@ -20,7 +20,8 @@
  * rangs et ses chips partent en UNE écriture, sur l'entrée que la page avait lue.
  * Le disque est FACTICE, les stores et git INJECTÉS ; seul le roster est réel
  * (Aer, `2000055`). Et `previewInline`, l'aperçu de ces textes, par un
- * `renderInlineBatch` factice.
+ * `renderInlineBatch` factice. Et `characterCoverage`, le récap de la curation
+ * montré sans perso : roster et curés FACTICES, gardé sur leur `stamp`.
  *
  * Et contrat de `saveGearReco` — l'onglet « Gear reco ». Lui écrit et committe :
  * ses deux écritures (le store, git) sont INJECTÉES, aucun test n'écrit dans
@@ -209,6 +210,7 @@ import {
   addGuideVersionAction,
   bannersState,
   changelogState,
+  characterCoverage,
   characterRoster,
   characterSheetState,
   checkGearBuilds,
@@ -266,6 +268,7 @@ import {
   type BannersDisk,
   type ChangelogDeps,
   type ChangelogDisk,
+  type CharacterCoverageDisk,
   type CharacterSheetChanges,
   type CharacterSheetDeps,
   type ComicsDeps,
@@ -626,6 +629,137 @@ const EE_CATALOG: Record<string, EffectOption> = {
   '1': { ...KIT_CATALOG['1'], desc: 'Takes damage every turn.' },
   '7': KIT_CATALOG['7'],
 };
+
+describe('characterCoverage — le récap de la curation, stores factices', () => {
+  const row = (id: string, name: string) => ({
+    id,
+    name,
+    element: 'fire',
+    class: 'striker',
+    subClass: 'attacker',
+    rarity: 3,
+  });
+  /** Quatre persos, dans le désordre : Zed seul n'a pas d'EE. */
+  const ROSTER = [row('4', 'Zed'), row('1', 'Anna'), row('3', 'Carla'), row('2', 'Bob')];
+  const fake = (over: Partial<CharacterCoverageDisk> = {}) => {
+    const state = { stamp: 's1' };
+    const calls = { roster: 0, curated: 0 };
+    const disk: CharacterCoverageDisk = {
+      roster: () => {
+        calls.roster++;
+        return ROSTER;
+      },
+      curated: () => {
+        calls.curated++;
+        return {
+          '1': {
+            rank: 'S',
+            rankPvp: 'A',
+            tags: ['free'],
+            skillPriority: { first: 1 },
+            prosCons: { pros: [{ en: 'strong' }] },
+            synergies: [{ heroes: ['2'] }],
+            videos: [{ platform: 'youtube', id: 'abc' }],
+          },
+          // Des champs présents mais VIDES : aucun ne compte.
+          '2': {
+            rank: '',
+            tags: [],
+            skillPriority: {},
+            prosCons: { pros: [], cons: [] },
+            synergies: [],
+            videos: [],
+          },
+          '3': { rank: 'B', prosCons: { cons: [{ en: 'slow' }] } },
+        } as Record<string, CharacterCurated>;
+      },
+      gearReco: () => ({ '1': [{ name: 'Speed' }], '2': [] }) as Record<string, GearBuild[]>,
+      shortNames: () => ({ '3': { en: 'Car' }, '2': { en: ' ' } }),
+      releases: () => ({ '1': '2023-04-19' }),
+      ee: () => ({
+        '1': { rank: 'S', rank10: 'S' },
+        '2': { chipAdd: ['7'] },
+        '3': { rank10: 'A' },
+      }),
+      eeOwners: () => new Set(['1', '2', '3']),
+      stamp: () => state.stamp,
+      ...over,
+    };
+    return { disk, state, calls };
+  };
+  const line = (key: string, disk: CharacterCoverageDisk) => {
+    const f = characterCoverage(disk).fields.find((x) => x.key === key)!;
+    return [f.done, f.missing.map((m) => m.name)];
+  };
+
+  it('les onze champs, dans l’ordre, chacun avec le sous-onglet ou la section où il se règle', () => {
+    const { disk } = fake();
+    const out = characterCoverage(disk);
+    expect(out.total).toBe(4);
+    expect(out.fields.map((f) => [f.key, f.label, f.sub])).toEqual([
+      ['prosCons', 'Pros / Cons', 'pros-cons'],
+      ['synergies', 'Synergies', 'synergies'],
+      ['skillPriority', 'Priorité de skills', 'fiche'],
+      ['tags', 'Tags', 'fiche'],
+      ['rank', 'Rang PvE', 'fiche'],
+      ['rankPvp', 'Rang PvP', 'fiche'],
+      ['gear', 'Gear reco', 'gear'],
+      ['ee', 'EE', 'ee'],
+      ['shortName', 'Nom court', 'names'],
+      ['release', 'Date de sortie à la main', 'extractor/character'],
+      ['videos', 'Vidéos', 'fiche'],
+    ]);
+  });
+
+  it('les comptes, et les manquants PAR NOM — un champ vide ne compte pas', () => {
+    const { disk } = fake();
+    expect(line('prosCons', disk)).toEqual([2, ['Bob', 'Zed']]);
+    expect(line('synergies', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('skillPriority', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('tags', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('rank', disk)).toEqual([2, ['Bob', 'Zed']]);
+    expect(line('rankPvp', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('gear', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    // Un nom court tout en blancs n'en est pas un.
+    expect(line('shortName', disk)).toEqual([1, ['Anna', 'Bob', 'Zed']]);
+    expect(line('release', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    expect(line('videos', disk)).toEqual([1, ['Bob', 'Carla', 'Zed']]);
+    // Un manquant : son id et son nom, rien d'autre.
+    expect(characterCoverage(disk).fields[0].missing).toEqual([
+      { id: '2', name: 'Bob' },
+      { id: '4', name: 'Zed' },
+    ]);
+  });
+
+  it('l’EE ne se compte que parmi ceux qui en ont un : un rang suffit, des chips seules non', () => {
+    const { disk } = fake();
+    // Zed n'a pas d'EE : ni fait, ni manquant. Bob n'a que des chips : manquant.
+    expect(line('ee', disk)).toEqual([2, ['Bob']]);
+  });
+
+  it('gardé tant que rien ne bouge (`stamp`), recalculé ensuite', () => {
+    const { disk, state, calls } = fake();
+    const first = characterCoverage(disk);
+    expect(characterCoverage(disk)).toBe(first);
+    expect(calls).toEqual({ roster: 1, curated: 1 });
+    state.stamp = 's2';
+    expect(characterCoverage(disk)).not.toBe(first);
+    expect(calls).toEqual({ roster: 2, curated: 2 });
+  });
+
+  it('sur le vrai disque : le roster entier, et des comptes qui tombent juste', () => {
+    const out = characterCoverage();
+    expect(out.total).toBe(getCharacterListItems().length);
+    const eeOwners = new Set(getEEViews().map((e) => e.characterId));
+    for (const f of out.fields) {
+      const among = f.key === 'ee' ? eeOwners.size : out.total;
+      expect([f.key, f.done + f.missing.length]).toEqual([f.key, among]);
+      expect(f.missing.map((m) => m.name)).toEqual(
+        [...f.missing.map((m) => m.name)].sort((a, b) => a.localeCompare(b)),
+      );
+    }
+  });
+});
 
 describe('characterRoster, characterSheetState — la fiche lue, disque injecté', () => {
   const AER = '2000055';
