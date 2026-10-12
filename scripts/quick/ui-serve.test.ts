@@ -2953,8 +2953,28 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       previews: () => calls.filter((c) => c.path === '/api/character/preview').map((c) => c.body),
       translations: () => calls.filter((c) => c.path === '/api/translate').map((c) => c.body),
       sub: (id: string) => el(`c-tab-${id}`).click(),
-      /** Les lignes d'une liste (`pros`, `cons`, `synergies`), dans l'ordre. */
+      /** Les lignes d'une liste à lignes (`synergies`), dans l'ordre. */
       lines: (list: string) => all(`#c-panel [data-list="${list}"][data-k]`),
+      /** La textarea d'une colonne de Pros / Cons, dans une langue. */
+      col: (list: string, lang = 'en') =>
+        all(
+          `#c-panel textarea[data-col="${list}"][data-lang="${lang}"]`,
+        )[0] as unknown as HTMLTextAreaElement,
+      /** Son texte, sans le saut de ligne qui ouvre la balise. */
+      colText: (list: string, lang = 'en') =>
+        (
+          all(
+            `#c-panel textarea[data-col="${list}"][data-lang="${lang}"]`,
+          )[0] as unknown as HTMLTextAreaElement
+        ).value.replace(/^\n/, ''),
+      /** Le rendu du site d'une colonne : ses rangs. */
+      view: (list: string) => all(`#c-panel [data-view="${list}"] .c-vl`),
+      /** Ce rendu tel qu'il se lit : la puce, l'aperçu. */
+      rendered: (list: string) =>
+        all(`#c-panel [data-view="${list}"] .c-vl`).map((li) => [
+          li.querySelector('.c-sign')?.textContent,
+          li.querySelector('[data-pv]')?.textContent,
+        ]),
       /** La textarea d'une ligne, dans une langue. */
       area: (line: HTMLElement, lang = 'en') =>
         line.querySelector(`textarea[data-lang="${lang}"]`) as unknown as HTMLTextAreaElement,
@@ -3842,7 +3862,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     provider: 'deepl',
   });
 
-  it('`#character/2000055/pros-cons` : deux cartes, les lignes du disque, UN aperçu pour l’onglet', async () => {
+  it('`#character/2000055/pros-cons` : une carte par colonne — le rendu du site, UN texte anglais (une ligne = un pro), UN aperçu pour l’onglet', async () => {
     const page = await character({ hash: PROS });
     expect(page.window.location.hash).toBe(PROS);
     expect(page.subs().map((t) => t.slice(0, 2))).toEqual([
@@ -3858,20 +3878,36 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       'Cons',
     ]);
     expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['2', '1']);
-    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual([BEACH.en, 'strong']);
-    expect(page.lines('cons').map((l) => page.area(l).value.trim())).toEqual(['slow']);
-    const first = page.area(page.lines('pros')[0]);
-    expect(first.getAttribute('rows')).toBe('2');
-    expect(first.getAttribute('aria-label')).toBe('Pro 1, en anglais');
-    expect(page.act('add-line', page.all('[data-card="pros"]')[0]).textContent).toBe('＋ pro');
-    expect(page.act('add-line', page.all('[data-card="cons"]')[0]).textContent).toBe('＋ con');
-    expect(page.act('del-line', page.lines('pros')[0]).className).toBe('btn icon');
+    expect(page.all('#c-panel .c-card > .card-head .lbl').map((l) => l.textContent)).toEqual([
+      'une ligne par pro ; dans chaque langue, la ligne i traduit le pro i',
+      'une ligne par con ; dans chaque langue, la ligne i traduit le con i',
+    ]);
+    // L'anglais : une textarea par colonne, une ligne par pro.
+    expect(page.colText('pros')).toBe(`${BEACH.en}\nstrong`);
+    expect(page.colText('cons')).toBe('slow');
+    expect(page.col('pros').getAttribute('aria-label')).toBe(
+      'Pros, en anglais — une ligne par pro',
+    );
+    expect(page.col('pros').getAttribute('rows')).toBe('3');
+    expect(page.col('cons').getAttribute('placeholder')).toBe('Un con par ligne');
+    // Plus de « ＋ pro » ni de ✕ : une ligne s'ajoute ou se retire dans le texte.
+    expect(page.all('#c-panel [data-act="add-line"], #c-panel [data-act="del-line"]')).toEqual([]);
     expect(page.count()).toBe('aucune modification');
 
-    // UNE requête pour tout l'onglet, pros et cons, dans la langue de la savebar.
+    // En tête, le rendu du site : la puce du composant, puis l'aperçu de la
+    // ligne — UNE requête pour tout l'onglet, pros et cons, dans la langue de la savebar.
     expect(page.previews()).toEqual([{ texts: [BEACH.en, 'strong', 'slow'], lang: 'en' }]);
-    const pv = page.lines('pros')[0].querySelector('[data-pv]') as unknown as HTMLElement;
-    expect(pv.textContent).toBe('Strips buffs with BT_REMOVE_BUFF (en)');
+    expect(page.all('#c-panel .c-view').map((v) => v.className)).toEqual([
+      'c-view pros',
+      'c-view cons',
+    ]);
+    expect(page.rendered('pros')).toEqual([
+      ['+', 'Strips buffs with BT_REMOVE_BUFF (en)'],
+      ['+', 'strong'],
+    ]);
+    expect(page.rendered('cons')).toEqual([['−', 'slow']]);
+    const pv = page.view('pros')[0].querySelector('[data-pv]') as unknown as HTMLElement;
+    expect(pv.dataset.pv).toBe('pros:0');
     expect(pv.querySelector('.pv-seg.text-buff .pv-u')?.textContent).toBe('BT_REMOVE_BUFF (en)');
     expect(pv.classList.contains('busy')).toBe(false);
 
@@ -3894,44 +3930,48 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.sub('pros-cons');
     await page.settle();
     expect(page.previews()).toHaveLength(1);
-    expect(page.text(page.lines('pros')[0], '[data-pv]')).toBe(
-      'Strips buffs with BT_REMOVE_BUFF (en)',
-    );
+    expect(page.rendered('pros')[0][1]).toBe('Strips buffs with BT_REMOVE_BUFF (en)');
   });
 
-  it('pendant que l’aperçu court, le rendu précédent reste, atténué', async () => {
+  it('pendant que l’aperçu court, le rendu précédent reste, atténué ; une ligne nouvelle montre son texte brut', async () => {
     const page = await character({ hash: PROS });
-    const pv = () => page.lines('pros')[1].querySelector('[data-pv]') as unknown as HTMLElement;
-    expect(pv().textContent).toBe('strong');
+    const pv = (i: number) =>
+      page.view('pros')[i].querySelector('[data-pv]') as unknown as HTMLElement;
+    expect(pv(1).textContent).toBe('strong');
     const release = page.hold();
-    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    page.type(page.col('pros'), `${BEACH.en}\nstronger\nGrants {B/BT_ADDITIVE_TURN}`);
+    // Le rendu suit la frappe : le rang retouché garde son rendu, le rang nouveau son brut.
+    expect(pv(1).textContent).toBe('strong');
+    expect(pv(2).textContent).toBe('Grants {B/BT_ADDITIVE_TURN}');
+    expect(pv(2).classList.contains('busy')).toBe(false);
     await vi.advanceTimersByTimeAsync(400);
     expect(page.previews()).toHaveLength(2);
-    expect(pv().classList.contains('busy')).toBe(true);
-    expect(pv().textContent).toBe('strong');
+    expect(pv(1).classList.contains('busy')).toBe(true);
+    expect(pv(1).textContent).toBe('strong');
     release();
     await page.settle();
-    expect(pv().classList.contains('busy')).toBe(false);
-    expect(pv().textContent).toBe('stronger');
+    expect(pv(1).classList.contains('busy')).toBe(false);
+    expect(pv(1).textContent).toBe('stronger');
+    expect(pv(2).textContent).toBe('Grants BT_ADDITIVE_TURN (en)');
   });
 
-  it('« ＋ pro » : vide, la ligne ne compte pas ; saisie, elle compte, et l’aperçu part 400 ms après la frappe, en UNE requête', async () => {
+  it('une ligne = un pro : les lignes vides ignorées, le compte et le rendu suivent la frappe, l’aperçu part 400 ms après, en UNE requête', async () => {
     const page = await character({ hash: PROS });
-    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
-    await page.settle();
-    expect(page.lines('pros')).toHaveLength(3);
-    const added = () => page.lines('pros')[2];
-    // La ligne ajoutée a la main, et ne pèse rien tant qu'elle est vide.
-    expect(page.window.document.activeElement).toBe(
-      page.area(added()) as unknown as typeof page.window.document.activeElement,
-    );
-    expect(page.count()).toBe('aucune modification');
-    expect(page.subs()[1][3]).toBe('');
     const before = page.previews().length;
-
-    page.type(page.area(added()), 'Gra');
+    page.type(page.col('pros'), `${BEACH.en}\nstrong\n\nGra`);
     await vi.advanceTimersByTimeAsync(300);
-    page.type(page.area(added()), 'Grants {B/Foo} and {B/BT_ADDITIVE_TURN}');
+    const typed = `${BEACH.en}\nstrong\n\nGrants {B/Foo} and {B/BT_ADDITIVE_TURN}\n`;
+    page.type(page.col('pros'), typed);
+    expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['3', '1']);
+    expect(page.view('pros').map((li) => li.classList.contains('dirty'))).toEqual([
+      false,
+      false,
+      true,
+    ]);
+    expect(page.count()).toBe('1 changement');
+    expect(page.all('#c-panel [data-mod="pros"]')[0].textContent).toBe('modifié');
+    expect(page.all('#c-panel [data-mod="cons"]')[0].textContent).toBe('');
+    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot edit', '', '', '', '']);
     await vi.advanceTimersByTimeAsync(399);
     expect(page.previews()).toHaveLength(before);
     await vi.advanceTimersByTimeAsync(1);
@@ -3942,57 +3982,68 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       lang: 'en',
     });
     // Un tag que le site ne résout pas sort en ROUGE, comme dans Gear reco.
-    expect(page.text(added(), '[data-pv] .pv-unknown')).toBe('{B/Foo}');
-    expect(page.text(added(), '[data-pv]')).toBe('Grants {B/Foo} and BT_ADDITIVE_TURN (en)');
-
-    // La frappe n'a rien redessiné : la textarea garde la main et son texte.
-    expect(page.area(added()).value).toBe('Grants {B/Foo} and {B/BT_ADDITIVE_TURN}');
-    expect(added().classList.contains('dirty')).toBe(true);
-    expect(page.count()).toBe('1 changement');
-    expect(page.all('#c-panel [data-mod="pros"]')[0].textContent).toBe('modifié');
-    expect(page.all('#c-panel [data-mod="cons"]')[0].textContent).toBe('');
-    expect(page.subs().map((t) => t[3])).toEqual(['', 'dot edit', '', '', '', '']);
-    // Revidée, elle ne compte plus.
-    page.type(page.area(added()), ' ');
+    expect(page.text(page.view('pros')[2], '[data-pv] .pv-unknown')).toBe('{B/Foo}');
+    expect(page.rendered('pros')[2]).toEqual(['+', 'Grants {B/Foo} and BT_ADDITIVE_TURN (en)']);
+    // La frappe n'a pas redessiné la textarea : elle garde la main et son texte, lignes vides comprises.
+    expect(page.col('pros').value).toBe(typed);
+    // La ligne effacée : plus rien en attente.
+    page.type(page.col('pros'), `${BEACH.en}\nstrong\n`);
     expect(page.count()).toBe('aucune modification');
+    expect(page.view('pros')).toHaveLength(2);
   });
 
-  it('les traductions, repliées : cinq langues, l’anglais en placeholder, « à retraduire » quand il a bougé', async () => {
+  it('les traductions, repliées : une textarea par langue, ligne à ligne — l’anglais en placeholder, « 1 / 2 » dessous, « à retraduire » par rang', async () => {
     const page = await character({ hash: PROS });
-    const [beach, strong] = page.lines('pros');
-    const fold = beach.querySelector('details') as unknown as HTMLDetailsElement;
+    const card = page.all('#c-panel [data-card="pros"]')[0];
+    const fold = card.querySelector('details') as unknown as HTMLDetailsElement;
     expect(fold.open).toBe(false);
-    expect(page.text(beach, 'summary .btn')).toBe('Traductions (5)');
-    expect(page.text(beach, '[data-tally]')).toBe('5 / 5');
-    expect(page.text(strong, '[data-tally]')).toBe('0 / 5');
-    expect(
-      page
-        .all('.c-trs label')
-        .slice(0, 5)
-        .map((l) => l.textContent),
-    ).toEqual(['fr', 'es', 'jp', 'kr', 'zh']);
-    expect(page.area(beach, 'fr').value.trim()).toBe(BEACH.fr);
-    expect(page.area(strong, 'fr').value.trim()).toBe('');
-    expect(page.area(strong, 'fr').getAttribute('placeholder')).toBe('strong');
-    expect(page.text(beach, '[data-stale]')).toBe('');
+    expect(fold.dataset.fold).toBe('pros');
+    expect(page.text(card, 'summary .btn')).toBe('Traductions (5)');
+    // Les langues complètes : aucune — « strong » n'est traduit nulle part.
+    expect(page.text(card, '[data-tally]')).toBe('0 / 5');
+    expect(page.all('#c-panel [data-card="pros"] .c-trs label').map((l) => l.textContent)).toEqual([
+      'fr',
+      'es',
+      'jp',
+      'kr',
+      'zh',
+    ]);
+    expect(page.colText('pros', 'fr')).toBe(BEACH.fr);
+    expect(page.col('pros', 'fr').getAttribute('placeholder')).toBe(`${BEACH.en}\nstrong`);
+    expect(page.text(card, '[data-tc="fr"]')).toBe('1 / 2');
+    expect(page.text(card, '[data-over="fr"]')).toBe('');
+    expect(page.text(card, '[data-stale]')).toBe('');
 
-    // L'anglais retouché : ses traductions datent d'un autre texte.
-    page.type(page.area(beach), 'Removes buffs with {D/BT_REMOVE_BUFF}');
-    expect(page.text(beach, '[data-stale]')).toBe('à retraduire');
-    expect(beach.querySelector('[data-stale]')?.className).toBe('badge warn');
-    expect(page.area(beach, 'fr').placeholder).toBe('Removes buffs with {D/BT_REMOVE_BUFF}');
-    // Remis, plus rien à retraduire ; une ligne sans traduction n'en a jamais.
-    page.type(page.area(beach), BEACH.en ?? '');
-    expect(page.text(beach, '[data-stale]')).toBe('');
-    expect(page.count()).toBe('aucune modification');
-    page.type(page.area(strong), 'stronger');
-    expect(page.text(strong, '[data-stale]')).toBe('');
+    // L'anglais du rang 1 retouché : ses traductions datent d'un autre texte.
+    page.type(page.col('pros'), 'Removes buffs with {D/BT_REMOVE_BUFF}\nstrong');
+    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    expect(card.querySelector('[data-stale]')?.className).toBe('badge warn');
+    expect(page.col('pros', 'fr').placeholder).toBe(
+      'Removes buffs with {D/BT_REMOVE_BUFF}\nstrong',
+    );
+    // Remis, plus rien ; le rang 2, sans traduction, n'a jamais rien à retraduire.
+    page.type(page.col('pros'), `${BEACH.en}\nstronger`);
+    expect(page.text(card, '[data-stale]')).toBe('');
+    expect(page.count()).toBe('1 changement');
 
-    // Une traduction se retouche à la main : elle compte, et part à sa place.
-    page.type(page.area(beach, 'fr'), 'Retire {D/BT_REMOVE_BUFF}');
-    page.type(page.area(strong, 'fr'), 'plus fort');
-    expect(page.text(strong, '[data-tally]')).toBe('1 / 5');
+    // Réordonner l'anglais : les traductions restent à leur rang — le rang 1 est à retraduire.
+    page.type(page.col('pros'), `stronger\n${BEACH.en}`);
+    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    expect(page.view('pros').map((li) => li.classList.contains('dirty'))).toEqual([true, true]);
     expect(page.count()).toBe('2 changements');
+    page.type(page.col('pros'), `${BEACH.en}\nstronger`);
+
+    // Une traduction se retouche à la main, ligne à ligne : la ligne 2 va au rang 2.
+    page.type(page.col('pros', 'fr'), 'Retire {D/BT_REMOVE_BUFF}\nplus fort');
+    expect(page.text(card, '[data-tc="fr"]')).toBe('2 / 2');
+    // Le français est complet : une langue sur cinq.
+    expect(page.text(card, '[data-tally]')).toBe('1 / 5');
+    expect(page.count()).toBe('2 changements');
+    // Un rang laissé vide dit « pas traduit » là ; la ligne suivante reste à sa place.
+    page.type(page.col('cons'), 'slow\nweak');
+    page.type(page.col('cons', 'fr'), '\nfaible');
+    expect(page.text(page.all('#c-panel [data-card="cons"]')[0], '[data-tc="fr"]')).toBe('1 / 2');
+    expect(page.count()).toBe('3 changements');
     await page.save();
     const sent = (page.posted()[0] as { changes: { curated: { prosCons: Curated['prosCons'] } } })
       .changes.curated;
@@ -4002,11 +4053,45 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
           { ...BEACH, fr: 'Retire {D/BT_REMOVE_BUFF}' },
           { en: 'stronger', fr: 'plus fort' },
         ],
-        cons: [{ en: 'slow' }],
+        cons: [{ en: 'slow' }, { en: 'weak', fr: 'faible' }],
       },
     });
     // Les langues du disque gardent leur ordre dans le fichier.
     expect(Object.keys(sent.prosCons?.pros?.[0] ?? {})).toEqual(Object.keys(BEACH));
+  });
+
+  it('une traduction qui a PLUS de lignes que l’anglais : dit en ambre sous elle, sous la carte, et rien ne part', async () => {
+    const page = await character({ hash: PROS });
+    const card = page.all('#c-panel [data-card="cons"]')[0];
+    page.type(page.col('cons', 'fr'), 'lent\nfragile');
+    expect(page.text(card, '[data-over="fr"]')).toBe('2 lignes, l’anglais en a 1');
+    expect(card.querySelector('[data-over="fr"]')?.className).toBe('badge warn');
+    expect(page.text(card, '[data-tc="fr"]')).toBe('1 / 1');
+    expect(page.text(card, '.c-err')).toBe('Cons · fr : 2 lignes, l’anglais en a 1');
+    expect(card.classList.contains('ko')).toBe(true);
+    expect(page.all('#c-panel [data-ko="cons"]')[0].textContent).toBe('refusé');
+    expect(page.count()).toBe('2 changements1 erreurCons · fr : 2 lignes, l’anglais en a 1');
+    expect(page.subs()[1][3]).toBe('dot ko');
+    // Le rendu ne montre que les rangs de l'anglais.
+    expect(page.view('cons')).toHaveLength(1);
+    page.el('c-save').click();
+    await page.settle();
+    expect(page.posted()).toEqual([]);
+    expect(page.el('journal').dataset.state).toBe('ko');
+    expect(page.el('log').textContent).toContain('Rien n’est envoyé tant qu’il reste des erreurs');
+    // L'anglais rattrape : plus d'écart, et la ligne part à son rang.
+    page.type(page.col('cons'), 'slow\nfrail');
+    expect(page.text(card, '[data-over="fr"]')).toBe('');
+    expect(page.text(card, '.c-err')).toBe('');
+    expect(card.classList.contains('ko')).toBe(false);
+    expect(page.count()).toBe('2 changements');
+    await page.save();
+    const sent = (page.posted()[0] as { changes: { curated: { prosCons: Curated['prosCons'] } } })
+      .changes.curated;
+    expect(sent.prosCons?.cons).toEqual([
+      { en: 'slow', fr: 'lent' },
+      { en: 'frail', fr: 'fragile' },
+    ]);
   });
 
   it('la langue de l’aperçu : un clic dans la savebar, la requête part aussitôt — une langue absente se replie sur l’anglais', async () => {
@@ -4019,9 +4104,16 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       'false',
     );
     expect(page.previews().at(-1)).toEqual({ texts: [BEACH.fr, 'strong', 'slow'], lang: 'fr' });
-    expect(page.text(page.lines('pros')[0], '[data-pv]')).toBe(
-      'Retire les buffs avec BT_REMOVE_BUFF (fr)',
-    );
+    expect(page.rendered('pros')).toEqual([
+      ['+', 'Retire les buffs avec BT_REMOVE_BUFF (fr)'],
+      ['+', 'strong'],
+    ]);
+    // Une traduction tapée : le rang garde son rendu jusqu'à l'aperçu suivant, qui la montre.
+    page.type(page.col('pros', 'fr'), `${BEACH.fr}\nfort`);
+    expect(page.rendered('pros')[1]).toEqual(['+', 'strong']);
+    await page.preview();
+    expect(page.previews().at(-1)).toEqual({ texts: [BEACH.fr, 'fort', 'slow'], lang: 'fr' });
+    expect(page.rendered('pros')[1]).toEqual(['+', 'fort']);
     // La langue vaut pour toute la fiche : Synergies la garde.
     page.sub('synergies');
     expect(page.all('#c-pv-lang button[data-lang="fr"]')[0].getAttribute('aria-pressed')).toBe(
@@ -4029,30 +4121,47 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     );
   });
 
-  it('« Traduire » : les textes anglais de l’onglet, d’UN appel — les cinq langues ÉCRASÉES, à relire', async () => {
+  it('« Traduire » : les lignes périmées ou pas encore traduites, d’UN appel — leurs cinq langues ÉCRASÉES, la colonne dépliée', async () => {
     const page = await character({ hash: PROS, translated: deepl });
     const button = page.act('translate');
     expect(button.className).toBe('btn ghost');
+    expect(button.title).toContain('les lignes périmées ou pas encore traduites');
     expect(button.title).toContain('ÉCRASE');
-    page.type(page.area(page.lines('pros')[0]), 'Removes buffs');
-    expect(page.text(page.lines('pros')[0], '[data-stale]')).toBe('à retraduire');
+    // BEACH est traduit partout et à jour : il ne repart pas ; « strong » et « slow » n'ont rien.
     button.click();
     for (let i = 0; i < 4; i++) await page.settle();
-
-    expect(page.translations()).toEqual([{ texts: ['Removes buffs', 'strong', 'slow'] }]);
-    const [beach, strong] = page.lines('pros');
-    // Écrasées : la traduction du disque n'est plus là.
-    expect(page.area(beach, 'fr').value.trim()).toBe('fr:Removes buffs');
-    expect(page.area(strong, 'zh').value.trim()).toBe('zh:strong');
-    expect(page.area(page.lines('cons')[0], 'es').value.trim()).toBe('es:slow');
-    expect(page.text(beach, '[data-stale]')).toBe('');
-    expect(page.text(strong, '[data-tally]')).toBe('5 / 5');
-    // Ce qui vient d'être traduit s'ouvre : c'est à relire.
-    expect((beach.querySelector('details') as unknown as HTMLDetailsElement).open).toBe(true);
+    expect(page.translations()).toEqual([{ texts: ['strong', 'slow'] }]);
+    const card = () => page.all('#c-panel [data-card="pros"]')[0];
+    expect(page.colText('pros', 'fr')).toBe(`${BEACH.fr}\nfr:strong`);
+    expect(page.colText('pros', 'zh')).toBe(`${BEACH.zh}\nzh:strong`);
+    expect(page.colText('cons', 'es')).toBe('es:slow');
+    expect(page.text(card(), '[data-tally]')).toBe('5 / 5');
+    expect(page.text(card(), '[data-tc="fr"]')).toBe('2 / 2');
+    // Ce qui vient d'être traduit s'ouvre : c'est à relire — les deux colonnes.
+    expect(
+      page.all('#c-panel details[data-fold]').map((d) => (d as unknown as HTMLDetailsElement).open),
+    ).toEqual([true, true]);
     expect(page.act('translate').disabled).toBe(false);
-    expect(page.count()).toBe('3 changements');
+    expect(page.count()).toBe('2 changements');
     expect(page.el('journal').dataset.state).toBe('ok');
-    expect(page.el('log').textContent).toContain('3 textes : 15 traductions posées par DeepL');
+    expect(page.el('log').textContent).toContain('2 textes : 10 traductions posées par DeepL');
+
+    // Rien de périmé ni d'incomplet : rien ne part.
+    page.act('translate').click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.translations()).toHaveLength(1);
+    expect(page.el('log').textContent).toContain(
+      'Rien à traduire : chaque ligne est traduite partout, et à jour.',
+    );
+
+    // L'anglais du rang 1 retouché : lui seul repart, ses cinq langues écrasées.
+    page.type(page.col('pros'), 'Removes buffs\nstrong');
+    expect(page.text(card(), '[data-stale]')).toBe('à retraduire');
+    page.act('translate').click();
+    for (let i = 0; i < 4; i++) await page.settle();
+    expect(page.translations().at(-1)).toEqual({ texts: ['Removes buffs'] });
+    expect(page.colText('pros', 'fr')).toBe('fr:Removes buffs\nfr:strong');
+    expect(page.text(card(), '[data-stale]')).toBe('');
 
     await page.save();
     const pros = (page.posted()[0] as { changes: { curated: { prosCons: { pros: Text[] } } } })
@@ -4078,8 +4187,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       'Traduction refusée : Pas de clé DEEPL_API_KEY ni ANTHROPIC_API_KEY dans .env.local',
     );
     expect(page.text(page.el('c-panel'), '[data-tr-error]')).toContain('Pas de clé');
-    expect(page.area(page.lines('pros')[1], 'fr').value.trim()).toBe('');
-    expect(page.area(page.lines('pros')[0], 'fr').value.trim()).toBe(BEACH.fr);
+    expect(page.colText('pros', 'fr')).toBe(BEACH.fr);
     expect(page.count()).toBe('aucune modification');
     expect(page.act('translate').disabled).toBe(false);
 
@@ -4094,28 +4202,30 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(none.count()).toBe('aucune modification');
   });
 
-  it('✕ retire une ligne : elle compte, et part en moins dans la liste ENTIÈRE', async () => {
+  it('une ligne effacée du texte : elle compte par son rang, la liste part ENTIÈRE sans elle ; ses traductions restent à leur rang, « à retraduire »', async () => {
     const page = await character({ hash: PROS });
-    page.act('del-line', page.lines('pros')[0]).click();
-    await page.settle();
-    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual(['strong']);
+    const card = page.all('#c-panel [data-card="pros"]')[0];
+    page.type(page.col('pros'), BEACH.en ?? '');
+    expect(page.view('pros')).toHaveLength(1);
     expect(page.all('#c-panel [data-n]').map((b) => b.textContent)).toEqual(['1', '1']);
     expect(page.count()).toBe('1 changement');
-    expect(page.area(page.lines('pros')[0]).getAttribute('aria-label')).toBe('Pro 1, en anglais');
-    // Une ligne ajoutée puis retirée ne laisse rien.
-    page.act('add-line', page.all('[data-card="cons"]')[0]).click();
-    page.act('del-line', page.lines('cons')[1]).click();
+    // Effacer le PREMIER : les traductions du rang 1 restent, sous « strong » — à retraduire, le prix du rang.
+    page.type(page.col('pros'), 'strong');
+    expect(page.colText('pros', 'fr')).toBe(BEACH.fr);
+    expect(page.text(card, '[data-stale]')).toBe('à retraduire');
+    expect(page.count()).toBe('2 changements');
+    page.type(page.col('pros'), BEACH.en ?? '');
     expect(page.count()).toBe('1 changement');
 
     await page.save();
     expect((page.posted()[0] as { changes: unknown }).changes).toEqual({
       ranks: [],
-      curated: { prosCons: { pros: [{ en: 'strong' }], cons: [{ en: 'slow' }] } },
+      curated: { prosCons: { pros: [BEACH], cons: [{ en: 'slow' }] } },
       was: page.disk.curated[AER],
     });
   });
 
-  it('un tag refusé à l’enregistrement : situé sur SA ligne — carte cerclée, message sous la textarea, saisie gardée', async () => {
+  it('un tag refusé à l’enregistrement : situé sur SON rang — carte cerclée, le rang en rouge dans le rendu, le message sous le texte, saisie gardée', async () => {
     const page = await character({
       hash: PROS,
       saved: () => ({
@@ -4134,26 +4244,29 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       }),
     });
     // Une ligne vide au milieu : elle ne part pas, le rang du refus est celui de l'envoi.
-    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
-    page.act('add-line', page.all('[data-card="pros"]')[0]).click();
-    page.type(page.area(page.lines('pros')[3]), 'Grants {B/Foo}');
+    page.type(page.col('pros'), `${BEACH.en}\nstrong\n\nGrants {B/Foo}`);
     await page.save();
 
-    const bad = page.lines('pros')[3];
-    expect(page.area(bad).value.trim()).toBe('Grants {B/Foo}');
-    expect(page.area(bad).classList.contains('refused')).toBe(true);
-    expect(page.text(bad, '.c-err')).toBe('tag inconnu {B/Foo} (effet inconnu)');
-    expect(page.all('#c-panel [data-card="pros"]')[0].classList.contains('ko')).toBe(true);
+    const card = page.all('#c-panel [data-card="pros"]')[0];
+    expect(page.colText('pros')).toBe(`${BEACH.en}\nstrong\nGrants {B/Foo}`);
+    expect(page.col('pros').classList.contains('refused')).toBe(true);
+    expect(page.text(card, '.c-err')).toBe('Pro 3 : tag inconnu {B/Foo} (effet inconnu)');
+    expect(page.view('pros').map((li) => li.classList.contains('ko'))).toEqual([
+      false,
+      false,
+      true,
+    ]);
+    expect(card.classList.contains('ko')).toBe(true);
     expect(page.all('#c-panel [data-ko="pros"]')[0].textContent).toBe('refusé');
     expect(page.all('#c-panel [data-card="cons"]')[0].classList.contains('ko')).toBe(false);
-    expect(page.text(page.lines('pros')[0], '.c-err')).toBe('');
     expect(page.count()).toBe('1 changement1 refus');
     expect(page.subs().map((t) => t[3])).toEqual(['', 'dot ko', '', '', '', '']);
     // Y retoucher lève le refus.
-    page.type(page.area(bad), 'Grants {B/BT_ADDITIVE_TURN}');
-    expect(page.area(bad).classList.contains('refused')).toBe(false);
-    expect(page.text(bad, '.c-err')).toBe('');
-    expect(page.all('#c-panel [data-card="pros"]')[0].classList.contains('ko')).toBe(false);
+    page.type(page.col('pros'), `${BEACH.en}\nstrong\nGrants {B/BT_ADDITIVE_TURN}`);
+    expect(page.col('pros').classList.contains('refused')).toBe(false);
+    expect(page.text(card, '.c-err')).toBe('');
+    expect(page.view('pros')[2].classList.contains('ko')).toBe(false);
+    expect(card.classList.contains('ko')).toBe(false);
     expect(page.subs()[1][3]).toBe('dot edit');
   });
 
@@ -4166,11 +4279,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         return { ok: true, log: ['fait'], written: true, stale: false, refused: [] };
       },
     });
-    page.type(page.area(page.lines('cons')[0]), 'slower');
+    page.type(page.col('cons'), 'slower');
     expect(page.count()).toBe('1 changement');
+    expect(page.view('cons')[0].classList.contains('dirty')).toBe(true);
     await page.save();
-    expect(page.lines('cons').map((l) => page.area(l).value.trim())).toEqual(['slower']);
-    expect(page.lines('cons')[0].classList.contains('dirty')).toBe(false);
+    expect(page.colText('cons')).toBe('slower');
+    expect(page.view('cons')[0].classList.contains('dirty')).toBe(false);
     expect(page.count()).toBe('aucune modification');
     expect(page.subs()[1][3]).toBe('');
   });
@@ -4189,11 +4303,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
         };
       },
     });
-    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    page.type(page.col('pros'), `${BEACH.en}\nstronger`);
     await page.save();
-    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual(['from elsewhere']);
-    expect(page.lines('cons')).toEqual([]);
-    expect(page.all('#c-panel [data-card="cons"] .lbl')[0].textContent).toBe('Aucun con.');
+    expect(page.colText('pros')).toBe('from elsewhere');
+    expect(page.rendered('pros')).toEqual([['+', 'from elsewhere']]);
+    expect(page.colText('cons')).toBe('');
+    expect(page.view('cons')).toEqual([]);
+    expect(page.all('#c-panel [data-view="cons"] .lbl')[0].textContent).toBe('Aucun con.');
     expect(page.text(page.el('c-panel'), '[data-err="prosCons"]')).toBe(
       'le disque a changé depuis le chargement',
     );
@@ -4339,7 +4455,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
 
   it('« Annuler » rend tout, d’un sous-onglet à l’autre ; `canLeave` retient l’onglet', async () => {
     const page = await character({ hash: PROS });
-    page.type(page.area(page.lines('pros')[1]), 'stronger');
+    page.type(page.col('pros'), `${BEACH.en}\nstronger`);
     page.sub('synergies');
     page.act('add-line').click();
     page.type(page.area(page.lines('synergies')[0]), 'with someone');
@@ -4357,13 +4473,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     );
     // La saisie d'un sous-onglet survit au passage par un autre.
     page.sub('pros-cons');
-    expect(page.area(page.lines('pros')[1]).value.trim()).toBe('stronger');
+    expect(page.colText('pros')).toBe(`${BEACH.en}\nstronger`);
 
     page.el('c-reset').click();
     await page.settle();
     await page.settle();
     expect(page.count()).toBe('aucune modification');
-    expect(page.lines('pros').map((l) => page.area(l).value.trim())).toEqual([BEACH.en, 'strong']);
+    expect(page.colText('pros')).toBe(`${BEACH.en}\nstrong`);
     page.sub('synergies');
     expect(page.lines('synergies')).toEqual([]);
     expect(page.posted()).toEqual([]);

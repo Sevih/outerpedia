@@ -352,38 +352,20 @@
 }
 
 /* ------------------------------------------- « Pros / Cons » et « Synergies »
-   Des textes à tags inline, sur le modèle de la Note de Gear reco : l'anglais
-   dans une textarea de deux lignes qui grandit, dessous son aperçu, puis les
-   traductions, repliées. Pros / Cons : les deux cartes de `.c-cols` ;
-   Synergies : une carte par groupe. */
-#tab-character .c-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-/* Une ligne : son texte, et ✕ à droite. Modifiée, un filet accent la borde. */
-#tab-character .c-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding-left: 10px;
-  border-left: 2px solid var(--line-subtle);
-}
-#tab-character .c-line.dirty {
-  border-left-color: var(--accent);
-}
+   Des textes à tags inline, sur le modèle de la Note de Gear reco. Synergies :
+   une carte par groupe, l'anglais dans une textarea de deux lignes qui
+   grandit, dessous son aperçu, puis les traductions, repliées. Pros / Cons :
+   une carte par colonne de `.c-cols` — le rendu du site en tête (`.c-view`,
+   une puce `+` ou `−` par rang et l'aperçu de la ligne), UNE textarea
+   anglaise, une ligne par pro, puis les traductions repliées, une textarea par
+   langue, ligne à ligne. */
+/* Le texte d'un groupe de Synergies : l'anglais, l'aperçu, les traductions. */
 #tab-character .c-text {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
-}
-#tab-character .c-line > .btn.icon {
-  flex: none;
 }
 #tab-character .c-text textarea {
   width: 100%;
@@ -498,6 +480,72 @@
 /* Une requête court : le rendu précédent reste, atténué. */
 #tab-character .c-pv.busy {
   opacity: 0.45;
+}
+
+/* Pros / Cons : le rendu du site en tête de la carte (`ProsConsSection`) — sur
+   le fond de la page, une ligne par rang : la puce `+` émeraude ou `−` rouge
+   du site (ses `emerald-400` et `red-400`, ce dernier `--debuff`), puis
+   l'aperçu, 13 px, la première lettre en capitale. Un rang modifié se borde
+   d'accent, un rang refusé de rouge. */
+#tab-character .c-view {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-base);
+  list-style: none;
+}
+#tab-character .c-vl {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 6px;
+  margin-left: -8px;
+  padding-left: 6px;
+  border-left: 2px solid transparent;
+}
+#tab-character .c-vl.dirty {
+  border-left-color: var(--accent);
+}
+#tab-character .c-vl.ko {
+  border-left-color: var(--danger);
+}
+#tab-character .c-sign {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+#tab-character .c-view.pros .c-sign {
+  color: #34d399;
+}
+#tab-character .c-view.cons .c-sign {
+  color: var(--debuff);
+}
+#tab-character .c-view .c-pv {
+  padding: 0;
+  background: none;
+  font-size: 13px;
+  line-height: 1.5;
+}
+#tab-character .c-view .c-pv::first-letter {
+  text-transform: uppercase;
+}
+/* Le texte d'une colonne : une ligne par pro, la hauteur de ses lignes (`rows`, puis `grow`). */
+#tab-character textarea[data-col] {
+  width: 100%;
+  min-height: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+/* Sous une traduction : ses rangs écrits « 4 / 5 », et en ambre ses lignes en trop. */
+#tab-character .c-tc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 20px;
 }
 
 /* ---------------------------------------------------------------- « Skills »

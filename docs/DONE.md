@@ -7,6 +7,93 @@
 
 ## 2026-10-12
 
+- **quick : Fiche perso › Pros / Cons — un texte par colonne (une ligne = un
+  pro), le rendu du site dessous, les traductions ligne à ligne (lot F24)** —
+  revue de quick par Sevih (12/10) : « plutôt que d'avoir 1 section par pro
+  (ou con), avoir 1 section avec tous les pros en texte et au-dessus ou en
+  dessous le rendu, et en face même chose pour les cons ». Le MODÈLE
+  (`data/curated/characters.json`, `prosCons = { pros, cons }` de textes
+  localisés dans l'ordre du fichier) et le serveur (`cleanProsCons`,
+  `saveCharacterSheet`) ne bougent pas ; le serveur n'a pas été touché. Côté
+  page (`scripts/quick/ui/tabs/character.{js,css,html}`), une colonne est
+  désormais UNE carte, de haut en bas : le RENDU du site (`viewHtml` —
+  `ProsConsSection` : une puce `+` émeraude `#34d399` pour les pros, `−`
+  rouge `--debuff` pour les cons, par rang, puis l'aperçu `noteHtml` de la
+  ligne dans la langue du segmenté de la savebar, le texte brut tant que
+  l'aperçu n'est pas arrivé ; redessiné à chaque frappe, un rang modifié
+  bordé d'accent, un rang refusé de rouge) ; UNE textarea anglaise, « une
+  ligne = un pro » (les lignes vides ignorées, pas de numérotation, `rows`
+  = lignes + 1 puis `grow`) ; `<details>` « Traductions (5) » avec UNE
+  textarea par langue, elle aussi une ligne par rang, placeholder = l'anglais
+  ligne à ligne, dessous « 4 / 5 » (ses rangs écrits sur ceux de l'anglais)
+  et, en ambre, « 6 lignes, l'anglais en a 5 » quand elle en a trop ; dans le
+  `summary`, « à retraduire » dès qu'un rang a bougé par rapport à l'anglais
+  de sa traduction (le disque, ou le dernier « Traduire »), et « 3 / 5 » = les
+  langues traduites à chaque rang. Le rang est l'identité d'une ligne, dit
+  dans l'en-tête de la carte (« une ligne par pro ; dans chaque langue, la
+  ligne i traduit le pro i ») : `lineKey` et `pvKey` deviennent
+  `pros:<rang>` pour les colonnes (les synergies gardent leur clé `t<n>`),
+  `lineMoved` compare un pro à ce que le disque porte à son rang (`diskAt`),
+  `listChanges` compte les rangs qui diffèrent — un rang que le disque porte
+  et que la page n'a plus compris —, si bien que vider le texte et le
+  retaper à l'identique ne compte rien ; `setCol` pose une langue ligne à
+  ligne (la ligne i au rang i, les rangs au-delà perdent la langue, les rangs
+  vides de la fin s'en vont) ; un refus du serveur (`list`, `index`) se pose
+  sur son rang : rouge dans le rendu, « Pro 3 : tag inconnu … » sous le
+  texte, le texte cerclé. Une traduction qui a MOINS de lignes laisse les
+  rangs manquants vides (« pas traduit ») ; PLUS de lignes : une erreur de la
+  page (`issues()` porte maintenant des objets `{ sub, card, said }` ; « 1
+  erreur » dans la savebar, le message sous la textarea et sous la carte,
+  carte cerclée, point rouge sur le sous-onglet), rien ne part tant qu'elle
+  reste — tranché : la page ne retranche JAMAIS une traduction d'elle-même,
+  car pendant un réordonnement par couper-coller l'anglais passe par moins
+  de lignes, et retrancher à ce moment perdrait les traductions ; une ligne
+  effacée en anglais laisse donc ses traductions à leur rang, à effacer à la
+  main (ou « à retraduire » sous le pro qui a pris le rang), c'est le prix de
+  l'identité par rang, posé au TODO à juger. Réordonner = réordonner
+  l'anglais, les traductions restent à leur rang. « Traduire » n'envoie plus
+  que les lignes périmées ou qu'une langue n'a pas (la décision disait
+  « comme aujourd'hui » ; en fait B42 renvoyait TOUTES les lignes anglaises
+  — appliqué tel que décidé, pour Pros / Cons seulement, les synergies
+  gardent leur « tout » ; le `title` du bouton le dit ; « Rien à traduire :
+  chaque ligne est traduite partout, et à jour » quand rien ne part) ; ce
+  qu'il a traduit déplie les « Traductions » de sa colonne (`details
+data-fold`, `trOpen` par colonne ou par groupe). L'aperçu reste UNE
+  requête pour les rangs des deux colonnes (`pvItems`, un rang sans anglais
+  n'y est pas). Plus de « ＋ pro » ni de ✕ : une ligne s'ajoute ou se retire
+  dans le texte. Tranché sur la forme (lot F) : le rendu AU-DESSUS du texte
+  (ce qu'on relit en premier, le texte juste dessous pour corriger) ; les
+  traductions sous le texte, repliées comme avant ; la puce et les couleurs
+  du composant du site, pas un cadre par pro ; les lignes longues du texte se
+  replient (pas de défilement horizontal). Synergies inchangées (le TEXTE de
+  B42, `textHtml`). CSS : `.c-view`, `.c-vl`, `.c-sign`, `.c-tc`,
+  `textarea[data-col]` ; les règles mortes `.c-lines`, `.c-line` retirées.
+  Docs : `STYLE.md` (le croquis Pros / Cons et un paragraphe F24),
+  `docs/quick-migration.md` (étape 4), le hint de `character.html`, le TODO
+  (les contrôles à l'écran de B42 récrits pour la nouvelle forme : trois
+  pros, en réordonner deux, Enregistrer, vérifier le fichier ; une
+  traduction de trop → refus ; et les points à juger). Vérification :
+  `pnpm typecheck` exit 0 (`tsc --noEmit` ×3), `pnpm lint` exit 0
+  (`eslint`), `pnpm test` « Test Files 221 passed (221) / Tests 3692 passed
+  (3692) », `NODE_ENV=development pnpm exec vitest run scripts/quick` « Test
+  Files 8 passed (8) / Tests 1039 passed (1039) ». Les tests Pros / Cons de
+  `ui-serve.test.ts` récrits pour la nouvelle forme (douze cas : les deux
+  cartes et le rendu `+`/`−`, le brut en attendant l'aperçu, la textarea
+  une-ligne-un-pro et les lignes vides, les traductions ligne à ligne et le
+  rang laissé vide, « à retraduire » par rang et au réordonnement, la
+  divergence de compte refusée avant tout POST, la langue de l'aperçu,
+  « Traduire » sur les seules lignes périmées ou incomplètes, une ligne
+  effacée, le refus situé sur un rang, l'enregistrement, `stale`), avec
+  quatre helpers (`col`, `colText`, `view`, `rendered`). Banc (quick isolé
+  :4799, clés vidées, `--tabs character --hash character/2000055/pros-cons`)
+  : les deux cartes, le rendu d'Aer en tête (Extra Turn, To the Beach?,
+  Buff Removal en tuiles, Unbuffable en rouge côté cons), les quatre pros en
+  quatre lignes dans la textarea, « Traductions (5) 5 / 5 ». Laissé :
+  `prettier --write docs/TODO.md` a aussi remis une ligne hors de mon lot
+  (« document\` (un lot A). », déjà non conforme à HEAD) ; aucun
+  enregistrement réel joué (le banc ne clique pas) ; le serveur refuse
+  toujours par rang de l'ENVOI, ce qui vaut puisque l'envoi suit le rang.
+
 - **Relecture A36, B45, B46 (Fable) — quick : l'aperçu des textes rend les
   effets comme le site, la vignette de perso partagée, le récap de la
   curation à l'arrivée de la Fiche perso ; les trois validés** — commits

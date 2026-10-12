@@ -891,16 +891,15 @@ du rendu :
      TAGS  les tags humains en cases (.check : free) ; dessous « déduits des données » puis les tags du jeu en .badge.off (lecture)
   .card « Vidéos » (pleine largeur)  card-head : titre · badge du compte · « en lecture » … lien « ajouter dans Vidéos » (ouvre l'onglet Vidéos sur ce perso)
      une ligne par vidéo : titre · auteur · date ; « aucune vidéo »
-#c-panel — Pros / Cons : .c-cols, deux .card côte à côte (une seule sous 1000 px)
-  .card « Pros » | .card « Cons »   card-head : titre · badge off (le compte) · badge edit « modifié » · badge ko « refusé »
-     .c-lines : une ligne (.c-line, filet à gauche — accent quand elle est modifiée) = son texte, et ✕ (.btn.icon) à droite
-        le TEXTE d'une ligne (.c-text, le même dans Synergies) :
-          [textarea EN, 2 lignes, qui grandit avec le texte]   (bord danger quand la ligne est refusée)
-          .c-pv  l'aperçu : les segments que le site rendra (icône + libellé dans la couleur du site, un effet sur sa tuile noire teintée, un item sur son cadre), un tag inconnu en ROUGE ; atténué pendant que la requête court ; absent tant que le texte est vide
-          .c-err le refus de la ligne, en rouge
-          <details> [Traductions (5)] · badge warn « à retraduire » · « 3 / 5 »   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée, placeholder = l'anglais
-     [＋ pro] / [＋ con] (.btn.ghost.sm, en pied de carte) ; « Aucun pro. » / « Aucun con. »
-  sous les deux cartes : [Traduire] (.btn.ghost, `title` : il ÉCRASE) · badge error (son refus) · le refus du champ entier (`stale`, forme)
+#c-panel — Pros / Cons (F24) : .c-cols, UNE .card par colonne, côte à côte (une seule sous 1000 px)
+  .card « Pros » | .card « Cons »   card-head : titre · badge off (le compte de lignes) · badge edit « modifié » · badge ko « refusé » · .lbl « une ligne par pro ; dans chaque langue, la ligne i traduit le pro i » (le contrat)
+     .c-view  LE RENDU DU SITE (`ProsConsSection`), sur le fond de la page : une ligne (.c-vl) par rang = la puce du composant (.c-sign : `+` émeraude pour les pros, `−` rouge pour les cons) puis l'aperçu de la ligne (.c-pv, 13 px, première lettre en capitale) dans la langue de la savebar — les segments que le site rendra (icône + libellé dans la couleur du site, un effet sur sa tuile noire teintée, un item sur son cadre), un tag inconnu en ROUGE ; le texte BRUT tant que l'aperçu n'est pas arrivé ; atténué pendant que la requête court ; filet accent à gauche pour un rang modifié, rouge pour un rang refusé ; « Aucun pro. » / « Aucun con. »
+     [textarea EN, une ligne = un pro, qui grandit avec ses lignes — les lignes vides ignorées, pas de numérotation]   (bord danger quand un rang est refusé)
+     .c-err  les refus de la colonne : ceux de la page (« Cons · fr : 3 lignes, l'anglais en a 2 »), puis ceux du serveur par rang (« Pro 3 : tag inconnu … »)
+     <details> [Traductions (5)] · badge warn « à retraduire » (un rang dont l'anglais a bougé depuis sa traduction) · « 3 / 5 » (les langues traduites à chaque rang)   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée (une seule dans `.c-cols` sous 1300 px), chacune UNE LIGNE PAR RANG, placeholder = l'anglais ligne à ligne ; dessous (.c-tc) ses rangs écrits « 4 / 5 » et, en ambre, « 6 lignes, l'anglais en a 5 » quand elle en a trop
+     une traduction qui a MOINS de lignes que l'anglais laisse les rangs manquants vides (« pas traduit », à traduire) ; PLUS de lignes : une erreur de la page (savebar « 1 erreur », carte cerclée, point rouge), rien ne part tant qu'elle reste
+     réordonner = réordonner l'anglais ; les traductions RESTENT À LEUR RANG — un rang dont l'anglais a changé est « à retraduire »
+  sous les deux cartes : [Traduire] (.btn.ghost, `title` : les lignes périmées ou pas encore traduites, il ÉCRASE leurs traductions) · badge error (son refus) · le refus du champ entier (`stale`, forme)
 #c-panel — Synergies : .c-syn, une pile de .card.c-group, une par groupe
   .card   card-head : « Groupe 1 » · badge edit « modifié » · badge ko « refusé » … ✕ à droite (retire le groupe)
      .c-heroes : des tuiles (.c-hero : la vignette de perso en 44 px et le nom dessous — `heroTile` avec `name`, B45 —, ✕ au coin) puis [＋ héros] (.btn.ghost.sm — le picker de héros en `multi`, les héros du groupe cochés, le perso de la fiche exclu)
@@ -1003,6 +1002,37 @@ le point rouge sur son sous-onglet — y retoucher le lève. `refs` de l'état
 (`buildInlineRefs`, les listes de saisie assistée de l'admin) est servi, pas
 encore lu par la page : ce n'est PAS le contrôle (à apparence égale elle ne
 garde qu'une clé d'effet).
+
+Pros / Cons a changé de forme avec F24 (revue de Sevih du 12/10 : « plutôt
+que d'avoir 1 section par pro, 1 section avec tous les pros en texte et le
+rendu ») : le MODÈLE et le serveur ne bougent pas — deux listes de textes
+localisés, dans l'ordre du fichier —, mais une colonne est UNE carte : le
+rendu du site en tête (`ProsConsSection`, la puce `+` émeraude ou `−` rouge
+par rang, l'aperçu de la ligne dans la langue de la savebar, le texte brut
+tant qu'il n'est pas arrivé, redessiné à chaque frappe de l'anglais), puis UN
+texte anglais, une ligne par pro (les lignes vides ignorées, pas de
+numérotation), puis les traductions repliées, une textarea par langue, elle
+aussi une ligne par rang. LE RANG EST L'IDENTITÉ d'une ligne : la ligne i de
+chaque langue traduit le pro i (dit dans l'en-tête de la carte), un pro se
+compare au disque par son rang (la savebar compte les rangs qui diffèrent,
+un rang que le disque porte et que la page n'a plus compris), un refus du
+serveur se pose sur son rang (rouge dans le rendu, « Pro 3 : … » sous le
+texte, `pros:<rang>`). Une traduction qui a MOINS de lignes que l'anglais
+laisse les rangs manquants vides — « pas traduit », « 4 / 5 » dessous ; PLUS
+de lignes, c'est une erreur de la page (« 6 lignes, l'anglais en a 5 » en
+ambre sous la textarea et sous la carte, « 1 erreur » dans la savebar, point
+rouge) : rien ne part tant qu'elle reste, et la page ne retranche rien
+d'elle-même — pendant un réordonnement par couper-coller l'anglais passe
+par moins de lignes, retrancher les traductions à ce moment les perdrait.
+Réordonner = réordonner l'anglais ; les traductions RESTENT à leur rang, et
+un rang dont l'anglais n'est plus celui de sa traduction est « à
+retraduire » (comparé à l'anglais du disque, ou du dernier « Traduire ») —
+c'est le prix de l'identité par rang, dit dans DONE. « Traduire » n'envoie
+que les lignes périmées ou qu'une langue n'a pas ; une ligne traduite partout
+et à jour ne repart pas (le `title` du bouton le dit) ; ce qu'il a traduit
+déplie les « Traductions » de sa colonne. L'aperçu reste UNE requête pour les
+rangs des deux colonnes (`pros:<rang>`, `cons:<rang>` ; un rang sans anglais
+n'y est pas). Synergies garde le TEXTE de B42, une ligne par groupe.
 
 Skills (B39) porte l'éditeur de kit de l'admin (`CharacterKitEditor`) : la
 présentation seule, la donnée extraite reste fidèle aux tables. `kit` de

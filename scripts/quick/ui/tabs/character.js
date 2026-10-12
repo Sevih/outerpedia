@@ -2,7 +2,9 @@
 // ce que le wiki sait de lui en sous-onglets. « Fiche » : rangs, rôle, paliers
 // par transcendance, priorité de skills, tags. « Pros / Cons » et
 // « Synergies » : des textes à tags inline, saisis en anglais, traduits par
-// « Traduire », avec leur aperçu tel que le site les rendra. « Skills » : les
+// « Traduire », avec leur aperçu tel que le site les rendra — Pros / Cons en
+// une carte par colonne : le rendu du site, puis UN texte anglais (une ligne
+// = un pro) et les traductions ligne à ligne. « Skills » : les
 // cartes de skills du perso et leurs chips d'effets — ✕ en masque une, « ＋ effet »
 // en ajoute une du glossaire. « EE » : l'équipement exclusif du perso, quand il en
 // a un — ses deux rangs (les cellules de Rangs), ses passifs en lecture, ses chips
@@ -90,10 +92,12 @@ const added = new Set();
 let refused = new Map();
 // Les lignes de Pros / Cons et de Synergies. Une ligne : sa clé (`k`), son texte
 // par langue, l'anglais de sa dernière traduction (`at`), ce que le disque en
-// portait (`base`, `null` pour une ligne ajoutée). Un groupe de synergie est
-// une ligne qui porte en plus ses héros.
+// portait (`base`, `null` pour une ligne ajoutée — lu pour un groupe ; un pro
+// se compare au disque par son RANG). Un groupe de synergie est une ligne qui
+// porte en plus ses héros.
 const lists = { pros: [], cons: [], synergies: [] };
-// Les lignes du disque retirées, par liste : elles comptent dans la savebar.
+// Les groupes du disque retirés : ils comptent dans la savebar (un pro retiré
+// compte par son rang).
 const gone = { pros: 0, cons: 0, synergies: 0 };
 let seq = 0;
 const trOpen = new Set(); // les « Traductions » dépliées, par clé de ligne
@@ -170,10 +174,17 @@ const tagsMoved = () => tagsNow().join('|') !== tagsBase().join('|');
 
 // Les textes à tags inline. L'anglais se saisit, les autres langues se
 // génèrent (« Traduire ») et se relisent ; le site replie une langue absente
-// sur l'anglais.
+// sur l'anglais. Pros / Cons : une colonne est UN texte par langue, une ligne
+// par rang, et le rang est l'identité d'une ligne — la ligne i de chaque
+// langue traduit le pro i, ce que le disque porte au rang i est sa base.
+// Synergies : une ligne = un groupe, qui garde sa clé et sa base.
 const def = () => sheet.langs.default;
 const others = () => sheet.langs.shown.filter((l) => l !== def());
-const lineKey = (list, line) => `${list}:${line.k}`;
+const byRank = (list) => list !== 'synergies';
+/** La clé d'un refus sur une ligne : son rang (pros / cons), ou sa clé (synergies). */
+const lineKey = (list, line) => `${list}:${byRank(list) ? lists[list].indexOf(line) : line.k}`;
+/** La clé de l'aperçu d'une ligne : la même. */
+const pvKey = (list, line, i) => (byRank(list) ? `${list}:${i}` : line.k);
 /** Un texte tel qu'il partirait : les langues écrites, dans leur ordre. */
 const textOut = (text) => Object.fromEntries(Object.entries(text).filter(([, v]) => v.trim()));
 /** Une ligne telle qu'elle partirait : un texte localisé, ou un groupe de synergie. */
@@ -185,10 +196,28 @@ function lineOut(list, line) {
 /** Ni texte ni héros : une ligne vide ne part pas, et ajoutée elle ne compte pas. */
 const blank = (list, line) =>
   !Object.keys(textOut(line.text)).length && !(list === 'synergies' && line.heroes.length);
-const lineMoved = (list, line) =>
-  line.base === null ? !blank(list, line) : JSON.stringify(lineOut(list, line)) !== line.base;
-/** Lignes ajoutées, modifiées, retirées. */
-const listChanges = (list) => gone[list] + lists[list].filter((l) => lineMoved(list, l)).length;
+/** Ce que le disque porte d'une liste. */
+const diskList = (list) =>
+  (list === 'synergies' ? sheet.curated.synergies : sheet.curated.prosCons?.[list]) ?? [];
+/** Ce que le disque porte au rang `i` d'une colonne, tel qu'il partirait ; `null` au-delà. */
+const diskAt = (list, i) => {
+  const item = diskList(list)[i];
+  return item === undefined ? null : JSON.stringify(textOut(item));
+};
+/** Une ligne diffère-t-elle du disque — pour Pros / Cons, de ce qu'il porte à son rang `i` ? */
+const lineMoved = (list, line, i) => {
+  const base = byRank(list) ? diskAt(list, i) : line.base;
+  return base === null ? !blank(list, line) : JSON.stringify(lineOut(list, line)) !== base;
+};
+/**
+ * Lignes ajoutées, modifiées, retirées. Pros / Cons : par rang — un rang que
+ * le disque porte et que la page n'a plus compte aussi.
+ */
+const listChanges = (list) =>
+  byRank(list)
+    ? Math.max(lists[list].length, diskList(list).length) -
+      lists[list].filter((l, i) => !lineMoved(list, l, i)).length
+    : gone[list] + lists[list].filter((l) => lineMoved(list, l)).length;
 /** Une liste telle qu'elle partirait : ses lignes non vides. */
 const listOut = (list) => lists[list].filter((l) => !blank(list, l));
 
@@ -204,18 +233,17 @@ function newLine(list, item) {
   if (item) line.base = JSON.stringify(lineOut(list, line));
   return line;
 }
-/** Ce que le disque porte d'une liste. */
-const diskList = (list) =>
-  (list === 'synergies' ? sheet.curated.synergies : sheet.curated.prosCons?.[list]) ?? [];
 /** Les listes relues du disque : la saisie en attente y est abandonnée. */
 function fromDisk(which = LISTS) {
   for (const list of which) {
     lists[list] = diskList(list).map((item) => newLine(list, item));
     gone[list] = 0;
   }
-  const alive = new Set(LISTS.flatMap((list) => lists[list].map((l) => l.k)));
+  const alive = new Set(LISTS.flatMap((list) => lists[list].map((l, i) => pvKey(list, l, i))));
   for (const k of [...pv.segs.keys()]) if (!alive.has(k)) pv.segs.delete(k);
-  for (const k of [...trOpen]) if (!alive.has(k)) trOpen.delete(k);
+  // Les « Traductions » d'une colonne (sa carte) restent dépliées.
+  const folds = new Set([...alive, ...TEXT_TABS['pros-cons']]);
+  for (const k of [...trOpen]) if (!folds.has(k)) trOpen.delete(k);
   pv.sent = '';
 }
 /** Le disque porte-t-il déjà ce que la liste enverrait ? */
@@ -229,6 +257,55 @@ const stale = (line) =>
   Boolean(en(line)) && en(line) !== line.at.trim() && others().some((l) => line.text[l]?.trim());
 const tally = (line) =>
   `${others().filter((l) => line.text[l]?.trim()).length} / ${others().length}`;
+
+// Les colonnes de Pros / Cons : une langue = une textarea, une ligne par rang.
+/** Les textes d'une langue par rang, sans les vides de la fin : le contenu de sa textarea. */
+function colLines(list, lang) {
+  const out = lists[list].map((l) => l.text[lang] ?? '');
+  while (out.length && !out.at(-1).trim()) out.pop();
+  return out;
+}
+/** Les rangs que l'anglais porte : le nombre de pros. */
+const enCount = (list) => colLines(list, def()).length;
+/**
+ * Pose une langue d'une colonne, ligne à ligne : la ligne i va au rang i, les
+ * rangs au-delà perdent cette langue, et les rangs vides de la fin s'en vont.
+ * L'anglais s'écrit sans ses lignes vides (une ligne = un pro) ; une
+ * traduction garde les siennes, qui disent « pas traduit » à ce rang.
+ */
+function setCol(list, lang, raw) {
+  let value = raw.split('\n').map((s) => s.trim());
+  if (lang === def()) value = value.filter(Boolean);
+  while (value.length && !value.at(-1)) value.pop();
+  const rows = lists[list];
+  while (rows.length < value.length) rows.push(newLine(list));
+  rows.forEach((l, i) => {
+    l.text[lang] = value[i] ?? '';
+  });
+  while (rows.length && blank(list, rows.at(-1))) rows.pop();
+}
+/** Une traduction : ses rangs écrits sur ceux de l'anglais — « 4 / 5 ». */
+const colTally = (list, lang) =>
+  `${colLines(list, lang).filter((s, i) => i < enCount(list) && s.trim()).length} / ${enCount(list)}`;
+/** Une traduction qui a PLUS de lignes que l'anglais : rien ne part tant qu'elle en a. */
+function colOver(list, lang) {
+  const n = colLines(list, lang).length;
+  const m = enCount(list);
+  return n > m ? `${plural(n, 'ligne')}, l’anglais en a ${m}` : '';
+}
+/** « à retraduire » : un rang dont l'anglais a bougé depuis sa traduction. */
+const colStale = (list) => lists[list].some(stale);
+/** Les langues traduites à chaque rang de l'anglais — « 3 / 5 ». */
+const colDone = (list) =>
+  `${
+    enCount(list)
+      ? others().filter((lang) =>
+          lists[list].slice(0, enCount(list)).every((l) => l.text[lang]?.trim()),
+        ).length
+      : 0
+  } / ${others().length}`;
+/** Un rang de la colonne refusé par le serveur. */
+const colRefused = (list) => lists[list].some((l) => refused.has(lineKey(list, l)));
 
 // Les chips des skills. Une carte porte les chips que le kit lui pose (`chips`),
 // dont le curé masque certaines, et les effets que le curé lui ajoute.
@@ -338,13 +415,31 @@ const changes = () =>
 /** Tout ce qui attend, builds compris : ce que quitter l'onglet ou changer de perso abandonne. */
 const allChanges = () => changes() + gearChanges();
 
-/** Les erreurs que la page voit seule : tant qu'il en reste, rien n'est envoyé. */
+/**
+ * Les erreurs que la page voit seule : tant qu'il en reste, rien n'est envoyé.
+ * Une priorité hors de 1 à 3 ; une traduction de Pros / Cons qui a plus de
+ * lignes que l'anglais. Chacune dit sa carte et son sous-onglet.
+ */
 const issues = () =>
   sheet
-    ? PRIOS.filter(([k]) => prioIssue(k)).map(
-        ([k, label]) => `Priorité de skills · ${label} : ${prioIssue(k)}`,
-      )
+    ? [
+        ...PRIOS.filter(([k]) => prioIssue(k)).map(([k, label]) => ({
+          sub: 'fiche',
+          card: 'kit',
+          said: `Priorité de skills · ${label} : ${prioIssue(k)}`,
+        })),
+        ...TEXT_TABS['pros-cons'].flatMap((list) =>
+          others()
+            .filter((lang) => colOver(list, lang))
+            .map((lang) => ({
+              sub: 'pros-cons',
+              card: list,
+              said: `${cap(list)} · ${lang} : ${colOver(list, lang)}`,
+            })),
+        ),
+      ]
     : [];
+const issuesIn = (card) => issues().filter((x) => x.card === card);
 
 // Les paliers montrés : ceux qui portent un rang ou un rôle, modifications
 // comprises, et ceux d'`added`. Une clé héritée hors des paliers pleins n'est
@@ -386,8 +481,7 @@ const cardMoved = (card) =>
           : card in lists
             ? listChanges(card) > 0
             : false;
-const cardBad = (card) =>
-  cardKeys[card]().some((k) => refused.has(k)) || (card === 'kit' && issues().length > 0);
+const cardBad = (card) => cardKeys[card]().some((k) => refused.has(k)) || issuesIn(card).length > 0;
 
 // ------------------------------------------------------ l'en-tête
 /** Le perso choisi : sa vignette, nom, élément, classe, sous-classe, rareté, chaîne. */
@@ -413,7 +507,7 @@ function who() {
 function bar() {
   const n = changes();
   const no = refused.size;
-  const bad = issues();
+  const bad = issues().map((x) => x.said);
   $('c-bar').hidden = !sheet;
   $('c-count').innerHTML =
     `${n ? `<span class="badge edit">${plural(n, 'changement')}</span>` : ''}${
@@ -460,7 +554,7 @@ function subTabs() {
     : SUBS.map((s) => {
         const on = s.id === sub;
         const dot =
-          refusedIn(s.id).length || (s.id === 'fiche' && issues().length)
+          refusedIn(s.id).length || issues().some((x) => x.sub === s.id)
             ? ['ko', 'refusé ou en erreur']
             : subChanges(s.id)
               ? ['edit', 'modifié, pas encore enregistré']
@@ -663,7 +757,7 @@ function ficheHtml() {
               p[k] !== prioBase()[k] ? ' dirty' : ''
             }${prioIssue(k) || refused.has('skillPriority') ? ' refused' : ''}" type="number" min="1" max="3" step="1" inputmode="numeric" data-prio="${k}" value="${esc(p[k])}" /></div>`,
         ).join('')}<span class="lbl c-note">1 à 3 ; vide = non renseigné.</span></div>
-        ${err('skillPriority', refused.get('skillPriority') ?? issues()[0] ?? '')}
+        ${err('skillPriority', refused.get('skillPriority') ?? issuesIn('kit')[0]?.said ?? '')}
         <h3>Tags</h3>
         <div class="c-tags">${sheet.humanTags
           .map(
@@ -692,15 +786,25 @@ function ficheHtml() {
 
 // ------------------------------------- « Pros / Cons » et « Synergies »
 const viewEnv = () => ({ imgBase: state.imgBase, esc });
-/** L'aperçu d'une ligne : ses segments, tels que le site les rend. */
-const pvBody = (line) => noteHtml(viewEnv(), pv.segs.get(line.k) ?? []);
+/**
+ * L'aperçu d'une ligne : ses segments, tels que le site les rend ; `raw`, le
+ * texte brut tant qu'ils ne sont pas arrivés (Pros / Cons ; une synergie n'en
+ * montre rien).
+ */
+const pvBody = (key, raw) => {
+  const segs = pv.segs.get(key);
+  return segs ? noteHtml(viewEnv(), segs) : esc(raw ?? '');
+};
+/** Le texte d'une ligne dans la langue de l'aperçu : le sien, sinon l'anglais — le repli du site. */
+const pvText = (line) =>
+  line.text[pv.lang]?.trim() ? line.text[pv.lang] : (line.text[def()] ?? '');
 const where = (list, i) => `${cap(LIST_WORDS[list])} ${i + 1}`;
 
 /**
- * Le texte d'une ligne : l'anglais (une textarea de deux lignes, qui grandit),
- * son aperçu, son refus, puis les traductions, repliées. Le saut de ligne
- * après `<textarea>` est mangé par le navigateur : sans lui, c'est celui d'un
- * texte qui commence par une ligne vide qui le serait.
+ * Le texte d'une ligne de Synergies : l'anglais (une textarea de deux lignes,
+ * qui grandit), son aperçu, son refus, puis les traductions, repliées. Le saut
+ * de ligne après `<textarea>` est mangé par le navigateur : sans lui, c'est
+ * celui d'un texte qui commence par une ligne vide qui le serait.
  */
 function textHtml(list, line, i) {
   const key = lineKey(list, line);
@@ -710,9 +814,9 @@ function textHtml(list, line, i) {
       lang === def() && refused.has(key) ? ' class="refused"' : ''
     }>\n${esc(line.text[lang] ?? '')}</textarea>`;
   return `${area(def(), `aria-label="${what}, en anglais"`)}
-    <p class="c-pv pv-note${pv.busy ? ' busy' : ''}" data-pv>${pvBody(line)}</p>
+    <p class="c-pv pv-note${pv.busy ? ' busy' : ''}" data-pv="${line.k}">${pvBody(line.k)}</p>
     ${err(key)}
-    <details${trOpen.has(line.k) ? ' open' : ''}>
+    <details data-fold="${line.k}"${trOpen.has(line.k) ? ' open' : ''}>
       <summary><span class="btn ghost sm">Traductions (${others().length})</span><span class="badge warn" data-stale>${
         stale(line) ? 'à retraduire' : ''
       }</span><span class="lbl" data-tally>${tally(line)}</span></summary>
@@ -728,35 +832,103 @@ function textHtml(list, line, i) {
     </details>`;
 }
 
-/** « Traduire », le même dans les deux sous-onglets : il vaut pour tout l'onglet. */
+/**
+ * « Traduire », le même dans les deux sous-onglets : il vaut pour tout
+ * l'onglet — dans Pros / Cons, pour les lignes périmées ou pas encore traduites.
+ */
 const translateHtml = () =>
   `<button class="btn ghost${tr.busy ? ' busy' : ''}" type="button" data-act="translate"${
     tr.busy ? ' disabled' : ''
-  } title="Traduit les textes anglais de l’onglet vers ${others().join(', ')} et ÉCRASE les traductions en place : l’anglais fait foi (DeepL, puis Claude Haiku). À relire ; rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge error" data-tr-error>${esc(tr.error)}</span><p class="c-ko" data-pv-error>${esc(pv.error)}</p>`;
+  } title="Traduit ${
+    sub === 'pros-cons'
+      ? 'les lignes périmées ou pas encore traduites'
+      : 'les textes anglais de l’onglet'
+  } vers ${others().join(', ')} et ÉCRASE leurs traductions en place : l’anglais fait foi (DeepL, puis Claude Haiku). À relire ; rien ne s’écrit avant « Enregistrer ».">Traduire</button><span class="badge error" data-tr-error>${esc(tr.error)}</span><p class="c-ko" data-pv-error>${esc(pv.error)}</p>`;
 
-/** Une carte de Pros / Cons : ses lignes, puis « ＋ pro » ou « ＋ con ». */
-function sideHtml(list, title) {
+// Pros / Cons : une colonne = UNE carte.
+const SIGNS = { pros: '+', cons: '−' };
+/**
+ * Le rendu du site d'une colonne (`ProsConsSection`) : une puce `+` verte ou
+ * `−` rouge par rang, et l'aperçu de la ligne dans la langue de la savebar —
+ * le texte brut tant qu'il n'est pas arrivé. Un rang modifié se borde
+ * d'accent, un rang refusé de rouge.
+ */
+function viewHtml(list) {
+  const shown = lists[list].slice(0, enCount(list));
+  if (!shown.length) return `<p class="lbl">Aucun ${LIST_WORDS[list]}.</p>`;
+  return `<ul class="c-view ${list}" aria-label="${cap(LIST_WORDS[list])}s, tels que le site les rend">${shown
+    .map((line, i) => {
+      const key = pvKey(list, line, i);
+      return `<li class="c-vl${lineMoved(list, line, i) ? ' dirty' : ''}${
+        refused.has(key) ? ' ko' : ''
+      }" data-rank="${i}"><span class="c-sign" aria-hidden="true">${SIGNS[list]}</span><span class="c-pv pv-note${
+        pv.busy ? ' busy' : ''
+      }" data-pv="${key}">${pvBody(key, pvText(line))}</span></li>`;
+    })
+    .join('')}</ul>`;
+}
+
+/** Les refus d'une colonne, sous sa textarea : ceux de la page, puis ceux du serveur par rang. */
+const colSaid = (list) =>
+  [
+    ...issuesIn(list).map((x) => x.said),
+    ...lists[list].flatMap((line, i) =>
+      refused.has(lineKey(list, line))
+        ? [`${where(list, i)} : ${refused.get(lineKey(list, line))}`]
+        : [],
+    ),
+  ].join(' — ');
+
+/**
+ * Une colonne de Pros / Cons : le rendu du site, puis l'anglais en UNE
+ * textarea — une ligne = un pro —, ses refus, puis les traductions repliées,
+ * une textarea par langue, elle aussi une ligne par rang : la ligne i traduit
+ * le pro i, l'anglais ligne à ligne en placeholder ; sous chacune, ses rangs
+ * écrits « 4 / 5 » et, en ambre, les lignes en trop. Le saut de ligne après
+ * `<textarea>` : cf. `textHtml`.
+ */
+function colHtml(list, title) {
   const word = LIST_WORDS[list];
+  const en = colLines(list, def()).join('\n');
+  const area = (lang, attrs) =>
+    `<textarea rows="${Math.max(3, enCount(list) + 1)}" data-col="${list}" data-lang="${esc(lang)}" ${attrs}>\n${esc(
+      colLines(list, lang).join('\n'),
+    )}</textarea>`;
   return `<div class="card c-card${cardBad(list) ? ' ko' : ''}" data-card="${list}">
-    ${cardHead(list, title, `<span class="badge off" data-n>${lists[list].length}</span>`)}
+    ${cardHead(
+      list,
+      title,
+      `<span class="badge off" data-n>${enCount(list)}</span><span class="lbl">une ligne par ${word} ; dans chaque langue, la ligne i traduit le ${word} i</span>`,
+    )}
     <div class="c-body">
-      ${
-        lists[list].length
-          ? `<ul class="c-lines">${lists[list]
-              .map(
-                (line, i) =>
-                  `<li class="c-line${lineMoved(list, line) ? ' dirty' : ''}" data-list="${list}" data-k="${line.k}"><div class="c-text">${textHtml(list, line, i)}</div><button class="btn icon" type="button" data-act="del-line" title="Retirer" aria-label="Retirer le ${word} ${i + 1}">✕</button></li>`,
-              )
-              .join('')}</ul>`
-          : `<p class="lbl">Aucun ${word}.</p>`
-      }
-      <div class="c-foot"><button class="btn ghost sm" type="button" data-act="add-line" data-list="${list}">＋ ${word}</button></div>
+      <div data-view="${list}">${viewHtml(list)}</div>
+      ${area(
+        def(),
+        `aria-label="${title}, en anglais — une ligne par ${word}" placeholder="Un ${word} par ligne"${
+          colRefused(list) ? ' class="refused"' : ''
+        }`,
+      )}
+      ${err(list, colSaid(list))}
+      <details data-fold="${list}"${trOpen.has(list) ? ' open' : ''}>
+        <summary><span class="btn ghost sm">Traductions (${others().length})</span><span class="badge warn" data-stale>${
+          colStale(list) ? 'à retraduire' : ''
+        }</span><span class="lbl" data-tally>${colDone(list)}</span></summary>
+        <div class="c-trs">${others()
+          .map(
+            (lang) =>
+              `<div class="field"><label for="c-${list}-${esc(lang)}">${esc(lang)}</label>${area(
+                lang,
+                `id="c-${list}-${esc(lang)}" placeholder="${esc(en)}"`,
+              )}<span class="c-tc"><span class="lbl" data-tc="${esc(lang)}">${colTally(list, lang)}</span><span class="badge warn" data-over="${esc(lang)}">${esc(colOver(list, lang))}</span></span></div>`,
+          )
+          .join('')}</div>
+      </details>
     </div>
   </div>`;
 }
 
 const prosConsHtml = () =>
-  `<div class="c-cols">${sideHtml('pros', 'Pros')}${sideHtml('cons', 'Cons')}
+  `<div class="c-cols">${colHtml('pros', 'Pros')}${colHtml('cons', 'Cons')}
     <div class="c-wide c-foot">${translateHtml()}${err('prosCons')}</div>
   </div>`;
 
@@ -1116,13 +1288,28 @@ function grow(area) {
 }
 const growAll = (root) => root.querySelectorAll('textarea[data-lang]').forEach(grow);
 
+/**
+ * Les lignes à l'aperçu du sous-onglet montré : leur clé, leur texte dans la
+ * langue de la savebar — et, pour Pros / Cons, le brut à montrer en attendant.
+ * Un rang de colonne sans anglais (une traduction en trop) n'y est pas.
+ */
+const pvItems = () =>
+  (TEXT_TABS[sub] ?? []).flatMap((list) =>
+    lists[list].slice(0, byRank(list) ? enCount(list) : undefined).map((line, i) => ({
+      key: pvKey(list, line, i),
+      text: pvText(line),
+      raw: byRank(list) ? pvText(line) : undefined,
+    })),
+  );
+
 /** L'aperçu des lignes en place : son atténuation, et `redraw` son contenu. */
 function pvPaint(redraw) {
   const panel = $('c-panel');
+  const items = redraw ? new Map(pvItems().map((x) => [x.key, x])) : null;
   for (const at of panel.querySelectorAll('[data-pv]')) {
     at.classList.toggle('busy', pv.busy);
-    const found = redraw && lineAt(at);
-    if (found) at.innerHTML = pvBody(found.line);
+    const item = items?.get(at.dataset.pv);
+    if (item) at.innerHTML = pvBody(item.key, item.raw);
   }
   for (const at of panel.querySelectorAll('[data-pv-error]')) at.textContent = pv.error;
 }
@@ -1136,15 +1323,11 @@ function pvPaint(redraw) {
  * changement.
  */
 async function pvFetch() {
-  const of = TEXT_TABS[sub];
-  if (!sheet || !of) return;
-  const shown = of.flatMap((list) => lists[list]);
+  if (!sheet || !TEXT_TABS[sub]) return;
+  const shown = pvItems();
   if (!shown.length) return;
-  const keys = shown.map((l) => l.k);
-  const body = JSON.stringify({
-    texts: shown.map((l) => (l.text[pv.lang]?.trim() ? l.text[pv.lang] : (l.text[def()] ?? ''))),
-    lang: pv.lang,
-  });
+  const keys = shown.map((x) => x.key);
+  const body = JSON.stringify({ texts: shown.map((x) => x.text), lang: pv.lang });
   // Les clés comptent : un perso relu du disque a les mêmes textes sous d'autres clés.
   const sent = `${keys.join()} ${body}`;
   if (sent === pv.sent) return;
@@ -1180,12 +1363,11 @@ function pvAsk(delay = 0) {
   else pvFetch();
 }
 
-/** Les « Traductions » dépliées à l'écran : un redessin les rouvre. */
+/** Les « Traductions » dépliées à l'écran (une colonne, un groupe) : un redessin les rouvre. */
 function keepOpen() {
-  for (const d of $('c-panel').querySelectorAll('[data-k] details')) {
-    const k = d.closest('[data-k]').dataset.k;
-    if (d.open) trOpen.add(k);
-    else trOpen.delete(k);
+  for (const d of $('c-panel').querySelectorAll('details[data-fold]')) {
+    if (d.open) trOpen.add(d.dataset.fold);
+    else trOpen.delete(d.dataset.fold);
   }
 }
 
@@ -1243,7 +1425,32 @@ function render() {
   if (gearOn) showGear();
 }
 
-/** Ce qui suit la saisie dans une ligne de texte, sans la redessiner. */
+/**
+ * Ce qui suit la saisie dans une colonne de Pros / Cons, sans la redessiner :
+ * son compte, « à retraduire », les langues complètes, sous chaque traduction
+ * ses rangs écrits et ses lignes en trop, le bord de l'anglais refusé, et
+ * dans le rendu les rangs modifiés ou refusés.
+ */
+function colMarks(card, list) {
+  card
+    .querySelector(`textarea[data-col][data-lang="${def()}"]`)
+    .classList.toggle('refused', colRefused(list));
+  card.querySelector('[data-n]').textContent = String(enCount(list));
+  card.querySelector('[data-stale]').textContent = colStale(list) ? 'à retraduire' : '';
+  card.querySelector('[data-tally]').textContent = colDone(list);
+  for (const lang of others()) {
+    card.querySelector(`[data-tc="${lang}"]`).textContent = colTally(list, lang);
+    card.querySelector(`[data-over="${lang}"]`).textContent = colOver(list, lang);
+  }
+  for (const li of card.querySelectorAll('[data-rank]')) {
+    const i = Number(li.dataset.rank);
+    const line = lists[list][i];
+    li.classList.toggle('dirty', Boolean(line) && lineMoved(list, line, i));
+    li.classList.toggle('ko', refused.has(`${list}:${i}`));
+  }
+}
+
+/** Ce qui suit la saisie dans une ligne de Synergies, sans la redessiner. */
 function lineMarks({ el, list, line }) {
   const key = lineKey(list, line);
   el.classList.toggle('dirty', lineMoved(list, line));
@@ -1269,13 +1476,16 @@ function marks() {
     card.classList.toggle('ko', cardBad(id));
     card.querySelector(`[data-mod="${id}"]`).textContent = cardMoved(id) ? 'modifié' : '';
     card.querySelector(`[data-ko="${id}"]`).textContent = cardBad(id) ? 'refusé' : '';
+    if (id in SIGNS) colMarks(card, id);
   }
   for (const at of panel.querySelectorAll('[data-err]')) {
     const key = at.dataset.err;
     at.textContent =
       key === 'tiers'
         ? tiersSaid()
-        : (refused.get(key) ?? (key === 'skillPriority' ? (issues()[0] ?? '') : ''));
+        : key in SIGNS
+          ? colSaid(key)
+          : (refused.get(key) ?? (key === 'skillPriority' ? (issuesIn('kit')[0]?.said ?? '') : ''));
   }
   for (const input of panel.querySelectorAll('[data-prio]')) {
     const k = input.dataset.prio;
@@ -1341,9 +1551,29 @@ $('c-panel').onchange = (e) => {
   }
 };
 
-// Frappe dans une priorité ou dans un texte : l'état suit, rien n'est redessiné.
+// Frappe dans une priorité ou dans un texte : l'état suit, rien n'est redessiné
+// — sauf le rendu d'une colonne de Pros / Cons, qui suit l'anglais ligne à ligne.
 $('c-panel').oninput = (e) => {
   if (!sheet) return;
+  const col = e.target.closest('textarea[data-col]');
+  if (col) {
+    const list = col.dataset.col;
+    const { lang } = col.dataset;
+    setCol(list, lang, col.value);
+    // Un refus de la colonne vise un rang qui vient peut-être de bouger : levés.
+    for (const k of [...refused.keys()]) if (k.startsWith(`${list}:`)) refused.delete(k);
+    refused.delete(TEXT_FIELDS[sub]);
+    grow(col);
+    const card = col.closest('[data-card]');
+    card.querySelector('[data-view]').innerHTML = viewHtml(list);
+    // Une traduction pas encore écrite montre l'anglais qu'elle remplacera, ligne à ligne.
+    if (lang === def()) {
+      const en = colLines(list, def()).join('\n');
+      for (const other of card.querySelectorAll('.c-trs textarea')) other.placeholder = en;
+    }
+    marks();
+    return pvAsk(PV_DELAY);
+  }
   const area = e.target.closest('textarea[data-lang]');
   const found = area && lineAt(area);
   if (found) {
@@ -1473,10 +1703,23 @@ $('c-panel').addEventListener(
 async function translate() {
   const of = TEXT_TABS[sub];
   if (tr.busy || !of) return;
-  const todo = of
-    .flatMap((list) => lists[list].map((line) => ({ list, line, en: line.text[def()] ?? '' })))
-    .filter((x) => x.en.trim());
-  if (!todo.length) return log(['Rien à traduire : aucun texte anglais dans cet onglet.'], true);
+  // Pros / Cons : par ligne, celles qui sont périmées ou qu'une langue n'a pas ;
+  // une ligne traduite partout et à jour ne repart pas. Synergies : toutes.
+  const needs = (list, line) =>
+    !byRank(list) || stale(line) || others().some((l) => !line.text[l]?.trim());
+  const typed = of.flatMap((list) =>
+    lists[list].map((line) => ({ list, line, en: (line.text[def()] ?? '').trim() })),
+  );
+  const todo = typed.filter((x) => x.en && needs(x.list, x.line));
+  if (!todo.length)
+    return log(
+      [
+        typed.some((x) => x.en)
+          ? 'Rien à traduire : chaque ligne est traduite partout, et à jour.'
+          : 'Rien à traduire : aucun texte anglais dans cet onglet.',
+      ],
+      true,
+    );
   tr = { busy: true, error: '' };
   for (const el of $('c-panel').querySelectorAll('[data-act="translate"]')) {
     el.disabled = true;
@@ -1525,10 +1768,11 @@ async function translate() {
     log([`Traduction refusée : ${tr.error}`], false);
   } finally {
     tr.busy = false;
-    // Ce qui vient d'être traduit s'ouvre : c'est à relire (`render` reprend
-    // les « Traductions » dépliées à l'écran).
+    // Ce qui vient d'être traduit s'ouvre — la colonne, le groupe : c'est à
+    // relire (`render` reprend les « Traductions » dépliées à l'écran).
     for (const line of done) {
-      const d = $('c-panel').querySelector(`[data-k="${line.k}"] details`);
+      const list = LISTS.find((l) => lists[l].includes(line));
+      const d = $('c-panel').querySelector(`details[data-fold="${byRank(list) ? list : line.k}"]`);
       if (d) d.open = true;
     }
     render();
@@ -1677,7 +1921,7 @@ $('c-reset').onclick = () =>
 
 $('c-save').onclick = async () => {
   if (!sheet || !changes()) return;
-  const bad = issues();
+  const bad = issues().map((x) => x.said);
   if (bad.length) return log(['Rien n’est envoyé tant qu’il reste des erreurs :', ...bad], false);
 
   const id = sheet.char.id;
@@ -1688,11 +1932,12 @@ $('c-save').onclick = async () => {
       PRIOS.filter(([k]) => prioNow()[k] !== '').map(([k]) => [k, Number(prioNow()[k])]),
     );
   if (tagsMoved()) curated.tags = tagsNow();
-  // Les lignes envoyées, par liste : le serveur situe un refus par son rang.
+  // Les lignes envoyées, par liste : le serveur situe un refus par son rang
+  // dans l'envoi — ici le rang de la colonne, ou la clé du groupe.
   const sentKeys = {};
   const send = (list) => {
     const kept = listOut(list);
-    sentKeys[list] = kept.map((l) => l.k);
+    sentKeys[list] = kept.map((l) => (byRank(list) ? lists[list].indexOf(l) : l.k));
     return kept.map((l) => lineOut(list, l));
   };
   if (subChanges('pros-cons')) curated.prosCons = { pros: send('pros'), cons: send('cons') };

@@ -188,7 +188,7 @@
       minuteur de « Copier » de `tabs/gamedata.js`, 2 s, qui tire après la
       fermeture d'une fenêtre happy-dom) alors que tous les tests passent —
       antérieur ; un `clearTimeout` à la fermeture ou un garde `typeof
-  document` (un lot A).
+document` (un lot A).
 - [ ] **« Événements » — contrôles à l'écran (lot F23)** : le banc ne
       clique pas, aucun enregistrement réel n'a été joué, `/api/translate`
       jamais appelé avec des clés, `POST /api/events` jamais appelé (les
@@ -409,23 +409,35 @@
       joué et « Traduire » n'a jamais été appelé avec des clés. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : une route nouvelle, et l'état de la
       fiche sert les langues — sans ça la fiche dit « quick lancé avant ce
-      code »). (1) Un perso, sous-onglet Pros / Cons : « ＋ pro », taper un
-      texte avec un tag `{B/…}` — l'aperçu arrive sous la ligne après la
-      frappe, icône et nom de l'effet ; changer la langue « Aperçu » de la
-      savebar. (2) Un tag faux (`{B/Foo}`) : rouge dans l'aperçu ;
-      « Enregistrer » — attendu : refus sur la ligne, carte cerclée, rien
+      code »). (1) Un perso, sous-onglet Pros / Cons (la forme F24 : une carte
+      par colonne, le rendu du site en tête, UN texte anglais une ligne = un
+      pro, les traductions ligne à ligne) : saisir trois pros, un avec un tag
+      `{B/…}` — le rendu suit la frappe, l'aperçu arrive après 400 ms, icône
+      et nom de l'effet ; changer la langue « Aperçu » de la savebar ;
+      réordonner deux pros dans le texte (les traductions restent à leur rang,
+      « à retraduire ») ; « Enregistrer », vérifier le fichier : l'ordre du
+      texte, les traductions au rang. Une traduction de trop (une ligne de
+      plus que l'anglais dans une langue) : ambre sous la textarea, « 1
+      erreur » dans la savebar, rien ne part. (2) Un tag faux (`{B/Foo}`) :
+      rouge dans le rendu ; « Enregistrer » — attendu : refus sur le rang
+      (rouge dans le rendu, « Pro 3 : … » sous le texte), carte cerclée, rien
       d'écrit ; le corriger, enregistrer. (3) « Traduire » avec les clés : les
-      cinq langues se posent (elles ÉCRASENT celles en place), « Traductions »
-      se déplie, à relire ; « à retraduire » après une retouche de l'anglais.
+      lignes périmées ou pas encore traduites se posent dans les cinq langues
+      (elles ÉCRASENT les leurs ; une ligne traduite partout et à jour ne
+      repart pas), « Traductions » se déplie, à relire ; « à retraduire »
+      après une retouche de l'anglais.
       (4) Synergies : « ＋ groupe », « ＋ héros » (deux héros dans le picker,
       « Valider »), une raison, « Enregistrer » → UN commit
       `chore(characters): <perso>` ; un groupe sans héros est refusé. (5) Le
       diff du commit : seules les lignes touchées bougent dans
       `data/curated/characters.json`. (6) Après « Pousser » et le déploiement :
       la fiche du perso sur le site, sections Pros / Cons et Synergies. À
-      juger : « Traduire » de Pros / Cons posé sous les deux cartes ; les
-      textarea de deux lignes ; faut-il une saisie assistée des tags (les
-      `refs` sont servis, la page ne les lit pas encore) ?
+      juger : « Traduire » de Pros / Cons posé sous les deux cartes ; le
+      rendu du site AU-DESSUS du texte (F24 : Sevih a dit « au-dessus ou en
+      dessous ») ; une traduction orpheline après une ligne effacée en anglais
+      reste à son rang (à effacer à la main, « à retraduire » sinon) ; les
+      textarea de deux lignes des Synergies ; faut-il une saisie assistée des
+      tags (les `refs` sont servis, la page ne les lit pas encore) ?
 - [ ] **« Fiche perso » — contrôles à l'écran (lot C11)** : le banc ne
       clique pas, et aucun enregistrement réel n'a été joué. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : trois routes nouvelles). (1) Groupe

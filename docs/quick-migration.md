@@ -366,8 +366,12 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
    numérotation ne bouge pas.
    liste + fiche `[id]`
    - Agacements : ça devrais etre dans l'editor de character — corrigé : les
-     deux listes côte à côte dans la fiche du perso, chaque ligne avec son
-     aperçu dessous (plus d'onglet Pros / Cons ni de clic pour éditer).
+     deux colonnes côte à côte dans la fiche du perso ; depuis F24 (revue de
+     Sevih du 12/10), une carte par colonne : le rendu du site en tête (la
+     puce `+` ou `−`, l'aperçu de chaque ligne), UN texte anglais — une ligne
+     = un pro —, puis les traductions repliées, une textarea par langue, ligne
+     à ligne (plus d'onglet Pros / Cons, ni de clic pour éditer, ni de section
+     par pro).
 
 5. **Tools › Banner** — FAIT, lot B35 : l'onglet « Bannières » (cf. « Déjà
    dans quick »). L'agacement de Sevih (« on devrait pouvoir détecter les
