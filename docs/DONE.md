@@ -7,6 +7,58 @@
 
 ## 2026-10-12
 
+- **Relecture F21 (Fable) — quick : Extraction, les fiches perso, monstre et
+  équipement, l'intégration et les modes committés, les sprites, validé** —
+  commit `7f11b793`, 25 fichiers, le message attendu, ni `package.json` ni
+  le lock, rien d'un autre lot ; `datagen/extractor/targets.ts` ne gagne
+  qu'un export (`freshEquipment`, le build mémoïsé existant). Périmètre relu
+  dans le diff : `monster-sheet.ts` (rencontres plafonnées, contextes de
+  stats par palier en options de `select`, contexte en lignes, enrage,
+  relations), `gear-sheet.ts` (`GEAR_TARGETS`, la famille par son id ou
+  celui d'un membre, passifs résolus sur le frais, variantes par classe, EE,
+  set), `release-check.ts` (la dérivation de `releasesForRoster` rejouée
+  sans lever), `monster-icon.ts` (la route des sprites en paramètre),
+  `admin-inbox.ts` (`EXTRACTOR_IN_QUICK` : seul monster reste au menu),
+  `actions.ts` (`ExtractorDeps` étendu, tout injecté ; `extractorEntity`,
+  `integrateEntity`, `planMode`, `integrateMode`, `spriteFile`,
+  `quickTabOf` pour un href d'entité), cinq routes dans `server.ts`, les
+  liens « extraction » dans `character.js` et `monsters.js`. Un point à
+  garder en tête : `derivedFiles` liste TOUS les fichiers de
+  `data/generated/damage` et `solver` et les passe à `commitPaths` — ce sont
+  des dérivés que `syncDerived` régénère, inchangés ils ne pèsent rien, mais
+  un dérivé modifié par ailleurs partirait dans le commit de l'intégration.
+  **Contrôles** : `pnpm typecheck` vert, `pnpm lint` vert, `pnpm test` « 219
+  passed, 3610 passed », `NODE_ENV=development pnpm exec vitest run
+scripts/quick src/lib/admin` « 57 passed, 1518 passed » — les chiffres de
+  l'entrée. **Rejoué** (tsx, moteur et git factices, équipement frais réel) :
+  `was` faux → `stale` ; une date de sortie manquante → refus avant d'écrire,
+  l'id à ajouter à `data/curated/character-release.json` nommé ; un perso →
+  `integrateCharacter` puis UN commit des quatre fichiers du rapport PLUS
+  `damage/` et `solver/`, `chore(extractor): character Nova (9) integre` ;
+  un monstre, même règle ; une arme demandée par le membre `151` → la
+  famille `1` intégrée et committée à SON id ; armor refusée « pas de
+  fiche » ; sans tables, refus ; le plan d'un mode (le boss spawné et son
+  add marqué) puis son intégration avec les dérivés, un mode vide refusé ;
+  `spriteFile` par basename, extension tolérée, un chemin et un inconnu
+  rendus `null` ; `quickTabOf` d'un href d'entité → `extractor/monster/<id>`.
+  Sur le quick isolé (:4795, clés vidées, GET seulement) : la fiche de K en
+  0,7 s (huit stats, cinq cartes, un costume, aucune date manquante, le plan
+  et le lien « fiche perso »), Iota 51000031 en 0,65 s (trois options stage
+  8-10, onze stats au stage 10 — modificateurs du donjon et quirks de compte
+  en clair, PV du mode —, six immunités, six skills, lien « câbler les
+  chips »), l'EE de K (deux passifs, lien « fiche perso › EE »), la famille
+  d'armes 1 par son membre 151 (six membres), la cible Monstres avec vingt
+  modes et le plan de Dimensional Singularity (16 monstres dont un add) ;
+  armor et une clé inconnue en 404 ; les sprites `GD_Slot_Bg_03`,
+  `CT_Slot_Boss.png` en 200, un chemin et un inconnu en 404. Quatre captures
+  relues : K (portrait et icônes du jeu, stats, skills aux chips), Iota (le
+  `select` de rencontre, la grille, le contexte en trois lignes, rencontres,
+  immunités), l'EE sur son cadre avec « Ré-intégrer », la cible Monstres
+  avec « Intégrer un mode ». Aucun POST joué. **Reste à Sevih** : les six
+  contrôles du TODO au prochain patch. **Suite** : F22 (figer et
+  ré-épingler en un geste, le plan avant), seul sur `scripts/quick/` ; après
+  lui, le groupe Extractor quitte l'admin.
+
 - **quick : section « Extraction » — les fiches perso, monstre et équipement,
   l'intégration et les modes committés, les sprites du jeu (lot F21, étape 20
   de la migration, deuxième de trois sur l'extractor)** — après la revue par
