@@ -2,6 +2,7 @@
 // entrée se pose par gabarit, se traduit, et se relit telle que la page
 // `/changelog` la montrera.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { heroTile } from '../hero-tile.mjs';
 
 // `/api/changelog/state` : le fichier curé dans son ordre, le jour UTC, le
 // roster (id, nom anglais, slug), les gabarits et leurs champs préremplis, les
@@ -59,9 +60,6 @@ const linesOf = (text) =>
     .map((s) => s.trim())
     .filter(Boolean);
 const typeLabel = (type) => data.types.find((t) => t.value === type)?.label ?? type;
-// Le visage du jeu, comme dans Bannières ; décoratif, le nom est à côté.
-const face = (id, px) =>
-  `<img class="face" src="${esc(state.imgBase)}/images/characters/faceicon/FI_${esc(id)}.webp" alt="" aria-hidden="true" width="${px}" height="${px}" loading="lazy" />`;
 
 // ------------------------------------------------------ le modèle
 /** L'entrée que la ligne enverrait : la forme du fichier, langues dans son ordre. */
@@ -467,7 +465,7 @@ function suggest(input, on = true) {
   box.innerHTML = hits
     .map(
       (c) =>
-        `<div data-id="${esc(c.id)}" data-slug="${esc(c.slug)}">${face(c.id, 24)}<span>${esc(c.name)}</span><span class="lbl mono">${esc(c.slug)}</span></div>`,
+        `<div data-id="${esc(c.id)}" data-slug="${esc(c.slug)}">${heroTile(state, { id: c.id }, { px: 24 })}<span>${esc(c.name)}</span><span class="lbl mono">${esc(c.slug)}</span></div>`,
     )
     .join('');
   box.hidden = !hits.length;
@@ -814,8 +812,8 @@ sections.register('changelog', {
     const [, at, query] = /^#changelog(?:\/(\d+))?(?:\?(.*))?$/.exec(location.hash) ?? [];
     const asked = query ? Object.fromEntries(new URLSearchParams(query)) : null;
     if (at || asked) document.querySelector('#tabs [data-tab="changelog"]')?.click();
-    // Les visages et les vignettes sont sous `imgBase`, connu avec
-    // `/api/state` : redessinés si l'état en annonce une autre.
+    // Les vignettes (celles des persos, celles des entrées) sont sous `imgBase`,
+    // connu avec `/api/state` : redessinées si l'état en annonce une autre.
     stateLoaded.then(() => {
       if (state.imgBase !== drawnBase && data.today) render();
     });

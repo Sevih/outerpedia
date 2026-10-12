@@ -1,6 +1,7 @@
 // Onglet « Bannières » : les fenêtres de recrutement de la home (`banner.json`),
 // et ce que la table du jeu en sait de plus.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { heroTile } from '../hero-tile.mjs';
 
 // `/api/banners/state` : le fichier curé, le jour UTC, le roster, et le diff du
 // serveur contre la table du jeu (`missing`, `drift` ; `game` à `null` et
@@ -28,9 +29,6 @@ const TYPES = {
 /** Assez de suggestions pour choisir, pas le roster entier sous le champ. */
 const MAX_HITS = 12;
 
-// Le visage du jeu, comme dans Rangs ; décoratif, le nom est à côté.
-const face = (id, px) =>
-  `<img class="face" src="${esc(state.imgBase)}/images/characters/faceicon/FI_${esc(id)}.webp" alt="" aria-hidden="true" width="${px}" height="${px}" loading="lazy" />`;
 const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
 
 // ------------------------------------------------------ le modèle
@@ -83,10 +81,10 @@ const OFF_ROSTER =
   '<span class="badge ko" title="Ce perso n’est pas dans le roster du site : la home ne saurait pas l’afficher.">hors roster</span>';
 
 const missingLine = (w, i) =>
-  `<li class="b-win">${face(w.characterId, 32)}<span class="b-name">${esc(names.get(w.characterId) ?? w.characterId)}</span>${w.unknown ? OFF_ROSTER : ''}${typeBadge(w.type)}<span class="b-period">${esc(w.start)} → ${esc(w.end)}</span>${statusBadge(w)}<button class="btn ghost sm" data-insert="${i}"${w.unknown ? ' disabled' : ''}>Insérer</button></li>`;
+  `<li class="b-win">${heroTile(state, { id: w.characterId }, { px: 32 })}<span class="b-name">${esc(names.get(w.characterId) ?? w.characterId)}</span>${w.unknown ? OFF_ROSTER : ''}${typeBadge(w.type)}<span class="b-period">${esc(w.start)} → ${esc(w.end)}</span>${statusBadge(w)}<button class="btn ghost sm" data-insert="${i}"${w.unknown ? ' disabled' : ''}>Insérer</button></li>`;
 
 const driftLine = (d, i) =>
-  `<li class="b-win">${face(d.id, 32)}<span class="b-name">${esc(d.row.name || d.name)}</span>${typeBadge(d.type)}<span class="b-period">${esc(d.start)} → fin curée <strong>${esc(d.row.end || 'vide')}</strong>, jeu <strong>${esc(d.game)}</strong></span><button class="btn ghost sm" data-align="${i}">Aligner sur le jeu</button></li>`;
+  `<li class="b-win">${heroTile(state, { id: d.id }, { px: 32 })}<span class="b-name">${esc(d.row.name || d.name)}</span>${typeBadge(d.type)}<span class="b-period">${esc(d.start)} → fin curée <strong>${esc(d.row.end || 'vide')}</strong>, jeu <strong>${esc(d.game)}</strong></span><button class="btn ghost sm" data-align="${i}">Aligner sur le jeu</button></li>`;
 
 /**
  * Ce que le serveur propose, moins ce que la liste en cours porte déjà : une
@@ -177,11 +175,11 @@ const rowClass = (r) =>
     .filter(Boolean)
     .join(' ');
 
-// Une ligne ajoutée cherche d'abord son perso ; choisi, elle montre son visage
+// Une ligne ajoutée cherche d'abord son perso ; choisi, elle montre sa vignette
 // et son nom, qui se retouche (c'est le nom affiché sur le site).
 const who = (r) =>
   r.id
-    ? `<div class="b-who">${face(r.id, 32)}<input class="w-search" data-f="name" value="${esc(r.name)}" aria-label="Nom affiché" autocomplete="off" /></div>`
+    ? `<div class="b-who">${heroTile(state, { id: r.id }, { px: 32 })}<input class="w-search" data-f="name" value="${esc(r.name)}" aria-label="Nom affiché" autocomplete="off" /></div>`
     : `<div class="b-who picker"><input class="w-search" data-pick placeholder="Chercher un perso…" aria-label="Perso de la bannière" autocomplete="off" /><div class="results" hidden></div></div>`;
 
 const rowHtml = (r) => `<tr data-key="${r.key}" class="${rowClass(r)}">
@@ -256,7 +254,10 @@ function suggest(input) {
           .sort((a, b) => starts(a) - starts(b))
           .slice(0, MAX_HITS);
   box.innerHTML = hits
-    .map((c) => `<div data-id="${esc(c.id)}">${face(c.id, 24)}<span>${esc(c.name)}</span></div>`)
+    .map(
+      (c) =>
+        `<div data-id="${esc(c.id)}">${heroTile(state, { id: c.id }, { px: 24 })}<span>${esc(c.name)}</span></div>`,
+    )
     .join('');
   box.hidden = !hits.length;
 }
@@ -368,7 +369,7 @@ function bannersLeave() {
 
 sections.register('banners', {
   init: () => {
-    // Les visages sont sous `imgBase`, connu avec `/api/state` : redessinés si
+    // Les vignettes sont sous `imgBase`, connu avec `/api/state` : redessinées si
     // l'état en annonce une autre.
     stateLoaded.then(() => {
       if (state.imgBase !== drawnBase && data.today) render();

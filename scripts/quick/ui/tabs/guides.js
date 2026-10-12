@@ -16,6 +16,7 @@
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
+import { heroTile } from '../hero-tile.mjs';
 import { openTemplate } from './changelog.js';
 
 // Les sous-onglets, dans l'ordre de l'éditeur de l'admin ; `scoped` : par version.
@@ -787,14 +788,14 @@ function notesHtml() {
 }
 
 // ------------------------------------------------------ les persos
-/** Une tuile de perso, par son nom d'affichage anglais : portrait, nom, ✕. */
+/** Une tuile de perso, par son nom d'affichage anglais : sa vignette, son nom dessous, ✕. */
 function heroHtml(name, act, more = '') {
   const c = heroByName(name);
-  return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : `« ${name} » : hors du roster`)}">${
-    c
-      ? `<img src="${src(`characters/portrait/CT_${esc(c.id)}`)}" alt="" aria-hidden="true" width="44" height="44" />`
-      : '<span class="gd-noface" aria-hidden="true">?</span>'
-  }<span>${esc(name)}</span><button class="btn icon" type="button" data-act="${act}" data-name="${esc(name)}" ${more} title="Retirer" aria-label="Retirer ${esc(name)}">✕</button></span>`;
+  return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : `« ${name} » : hors du roster`)}">${heroTile(
+    state,
+    c ?? { name },
+    { name: true },
+  )}<button class="btn icon" type="button" data-act="${act}" data-name="${esc(name)}" ${more} title="Retirer" aria-label="Retirer ${esc(name)}">✕</button></span>`;
 }
 /** Une rangée de persos (un groupe, un slot) et son « ＋ héros ». */
 const heroesHtml = (names, act, addAct, more = '') =>
@@ -1045,11 +1046,11 @@ const stepsOf = (name) => {
 /** Une tuile de perso sans ✕ (le perso d'une review, d'un palier). */
 function heroFace(name) {
   const c = heroByName(name);
-  return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : name ? `« ${name} » : hors du roster` : 'aucun perso')}">${
-    c
-      ? `<img src="${src(`characters/portrait/CT_${esc(c.id)}`)}" alt="" aria-hidden="true" width="44" height="44" />`
-      : '<span class="gd-noface" aria-hidden="true">?</span>'
-  }<span>${esc(name || '—')}</span></span>`;
+  return `<span class="gd-hero${c ? '' : ' unknown'}" title="${esc(c ? c.name : name ? `« ${name} » : hors du roster` : 'aucun perso')}">${heroTile(
+    state,
+    c ?? { name: name || '—' },
+    { name: true },
+  )}</span>`;
 }
 const fieldLabel = (f) => `<span class="lbl">${esc(f.label)}</span>`;
 const genAttr = (key, type) => `data-gen="${esc(key)}" data-type="${type}"`;

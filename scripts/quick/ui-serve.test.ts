@@ -187,6 +187,44 @@ describe('assemblePage — la coquille et ses onglets', () => {
     }
   });
 
+  it('la vignette de perso a UNE feuille, `hero-tile.css`, liée avant les onglets : aucun onglet ne garde son visage ni son portrait', () => {
+    const page = shell();
+    const link = '<link rel="stylesheet" href="/ui/hero-tile.css" />';
+    expect(page).toContain(link);
+    expect(page.indexOf(link)).toBeLessThan(page.indexOf('href="/ui/tabs/'));
+    // Les mesures de `Thumbnail`, en fractions de la case de 128 : le visage en
+    // 122 centré, l'ombre de 122 × 32 et ses bords de 28, l'élément de 45 qui
+    // déborde du coin haut droit, la classe de 34 dessous.
+    const css = readFileSync(resolve(UI, 'hero-tile.css'), 'utf8');
+    expect(css).toMatch(/\.ht \{[^}]*width: var\(--ht\);\s*height: var\(--ht\);/);
+    expect(css).toMatch(
+      /\.ht-face,\s*\.ht-dim \{\s*left: 2\.34375%;\s*top: 2\.34375%;\s*width: 95\.3125%;\s*height: 95\.3125%;/,
+    );
+    expect(css).toMatch(/\.ht-dim \{\s*opacity: 0\.651;/);
+    expect(css).toMatch(/\.ht-shade \{[^}]*height: 25%;[^}]*border-image-slice: 0 28 fill;/);
+    expect(css).toMatch(
+      /\.ht-el \{\s*top: -4\.3828%;\s*right: -4\.7656%;\s*width: 35\.15625%;\s*height: 35\.15625%;/,
+    );
+    expect(css).toMatch(
+      /\.ht-cls \{\s*top: 30\.53125%;\s*right: 0;\s*width: 26\.5625%;\s*height: 26\.5625%;/,
+    );
+    // Le picker et les onglets passent par elle : plus de classe de visage ni de
+    // portrait à eux, plus d'adresse de visage bâtie à la main.
+    const read = (file: string) =>
+      readFileSync(resolve(UI, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+    const users = ['character', 'guides', 'banners', 'changelog', 'dashboard', 'names', 'ranks'];
+    for (const tab of users) {
+      expect(read(`tabs/${tab}.css`), tab).not.toMatch(
+        /\.(face|c-face|gd-noface)\b|\.(c|gd)-hero img/,
+      );
+      const js = readFileSync(resolve(UI, 'tabs', `${tab}.js`), 'utf8');
+      expect(js, tab).toContain("import { heroTile } from '../hero-tile.mjs';");
+      expect(js, tab).not.toMatch(/faceicon\/FI_|portrait\/CT_/);
+    }
+    expect(read('hero-picker.css')).not.toMatch(/\.hp-(fi|el)\b/);
+    expect(readFileSync(resolve(UI, 'hero-picker.mjs'), 'utf8')).not.toContain('faceicon/FI_');
+  });
+
   it('aucun `id` en double dans la page : deux onglets peuvent partager une lettre, pas un id', () => {
     // « Fiche perso » et Codes promo préfixent tous deux en `c-` : un id repris
     // et `$('c-list')` rendrait l'élément de l'autre onglet, sans erreur.
@@ -817,6 +855,13 @@ describe('Noms — la page, sur le vrai markup', () => {
       'court trop long',
       'court',
     ]);
+    // Chaque ligne : la vignette partagée (32 px), le fond neutre — l'onglet ne reçoit pas la rareté.
+    expect(page.all('#n-list .n-row > .ht').map((t) => t.getAttribute('style'))).toEqual(
+      Array.from({ length: 4 }, () => '--ht:32px'),
+    );
+    expect(page.all('#n-list .n-row .ht-bg')[0].getAttribute('src')).toMatch(
+      /\/images\/ui\/bg\/TI_Slot_Normal\.webp$/,
+    );
 
     page.filter('long');
     expect(page.list().map(([name]) => name)).toEqual(['Long Bella']);
@@ -1790,6 +1835,101 @@ describe('Effets — la page, sur le vrai markup', () => {
   });
 });
 
+describe('hero-tile — la vignette de perso du site', () => {
+  type Hero = { id?: string; name?: string; rarity?: number; element?: string; class?: string };
+  const load = async () =>
+    (await import(/* @vite-ignore */ resolve(UI, 'hero-tile.mjs'))) as {
+      heroTile: (
+        env: { imgBase: string },
+        hero: Hero | undefined,
+        opts?: { px?: number; name?: boolean },
+      ) => string;
+    };
+  const ENV = { imgBase: 'https://img.test' };
+  /** La vignette, posée dans un document : ses calques se lisent par sélecteur. */
+  const mount = async (hero: Hero | undefined, opts?: { px?: number; name?: boolean }) => {
+    const { heroTile } = await load();
+    const { document } = openWindow();
+    document.body.innerHTML = heroTile(ENV, hero, opts);
+    return document.body as unknown as HTMLElement;
+  };
+  const srcs = (root: HTMLElement, selector: string) =>
+    [...root.querySelectorAll(selector)].map((i) => i.getAttribute('src'));
+
+  it('un perso du roster : le fond de sa rareté, son visage, l’ombre, le vignetage, son élément et sa classe — les sprites de `Thumbnail`', async () => {
+    const body = await mount({ id: '2000055', rarity: 3, element: 'fire', class: 'striker' });
+    const tile = body.firstElementChild as HTMLElement;
+    expect(body.children).toHaveLength(1);
+    expect(tile.className).toBe('ht');
+    // 44 px par défaut ; décorative : un nom la double toujours.
+    expect(tile.getAttribute('style')).toBe('--ht:44px');
+    expect(tile.getAttribute('aria-hidden')).toBe('true');
+    // Les calques, dans l'ordre du prefab.
+    expect([...tile.children].map((c) => c.className)).toEqual([
+      'ht-bg',
+      'ht-face',
+      'ht-shade',
+      'ht-dim',
+      'ht-el',
+      'ht-cls',
+    ]);
+    expect(srcs(tile, 'img')).toEqual([
+      'https://img.test/images/ui/boss/CT_Slot_Unique.webp',
+      'https://img.test/images/characters/faceicon/FI_2000055.webp',
+      'https://img.test/images/ui/boss/CT_Slot_Dim_2.webp',
+      'https://img.test/images/ui/boss/CT_Element_Fire.webp',
+      'https://img.test/images/ui/boss/CT_Class_Striker.webp',
+    ]);
+    expect(tile.querySelector('.ht-shade')?.getAttribute('style')).toBe(
+      "border-image-source:url('https://img.test/images/ui/boss/CT_Slot_Bottom.webp')",
+    );
+    expect(tile.querySelector('.ht-el')?.getAttribute('data-el')).toBe('fire');
+    expect([...tile.querySelectorAll('img')].every((i) => i.getAttribute('alt') === '')).toBe(true);
+    const face = tile.querySelector('.ht-face');
+    expect([face?.getAttribute('width'), face?.getAttribute('loading')]).toEqual(['44', 'lazy']);
+  });
+
+  it('le fond suit la rareté (Magic, Rare, Unique) ; sans rareté connue, le fond Normal ; sans élément ni classe, pas d’icône au coin', async () => {
+    const slot = async (hero: Hero) => srcs(await mount(hero), '.ht-bg')[0];
+    expect(await slot({ id: '1', rarity: 1 })).toMatch(/\/ui\/boss\/CT_Slot_Magic\.webp$/);
+    expect(await slot({ id: '1', rarity: 2 })).toMatch(/\/ui\/boss\/CT_Slot_Rare\.webp$/);
+    expect(await slot({ id: '1', rarity: 3 })).toMatch(/\/ui\/boss\/CT_Slot_Unique\.webp$/);
+    expect(await slot({ id: '1' })).toMatch(/\/ui\/bg\/TI_Slot_Normal\.webp$/);
+    expect(await slot({ id: '1', rarity: 7 })).toMatch(/\/ui\/bg\/TI_Slot_Normal\.webp$/);
+
+    const bare = await mount({ id: '1' }, { px: 24 });
+    expect(bare.firstElementChild?.getAttribute('style')).toBe('--ht:24px');
+    expect(bare.querySelectorAll('.ht-el, .ht-cls')).toHaveLength(0);
+    expect(srcs(bare, '.ht-face')).toEqual([
+      'https://img.test/images/characters/faceicon/FI_1.webp',
+    ]);
+  });
+
+  it('`name` : le nom sous la vignette, dans une carte à sa mesure ; hors du roster, la case « ? »', async () => {
+    const card = (await mount({ id: '1', name: 'Aer <b>', rarity: 3 }, { px: 64, name: true }))
+      .firstElementChild as HTMLElement;
+    expect(card.className).toBe('ht-card');
+    expect(card.getAttribute('style')).toBe('--ht:64px');
+    expect([...card.children].map((c) => c.className)).toEqual(['ht', 'ht-n']);
+    // Le nom est échappé, et son `title` le porte en entier (deux lignes au plus).
+    expect(card.querySelector('.ht-n')?.textContent).toBe('Aer <b>');
+    expect(card.querySelector('.ht-n')?.getAttribute('title')).toBe('Aer <b>');
+    expect(card.querySelector('b')).toBeNull();
+
+    // Un nom que le roster ne connaît pas : pas d'id, pas d'image.
+    const stray = (await mount({ name: 'Nobody' }, { name: true }))
+      .firstElementChild as HTMLElement;
+    expect(stray.querySelector('.ht')?.className).toBe('ht none');
+    expect(stray.querySelector('.ht')?.textContent).toBe('?');
+    expect(stray.querySelectorAll('img')).toHaveLength(0);
+    expect(stray.querySelector('.ht-n')?.textContent).toBe('Nobody');
+    // Sans perso du tout, et sans nom : la case seule.
+    const none = (await mount(undefined)).firstElementChild as HTMLElement;
+    expect(none.className).toBe('ht none');
+    expect(none.getAttribute('style')).toBe('--ht:44px');
+  });
+});
+
 describe('hero-picker — le picker de héros partagé, dans un document', () => {
   afterEach(() => vi.unstubAllGlobals());
 
@@ -1881,14 +2021,23 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.document.activeElement).toBe(
       p.el('hp-q') as unknown as typeof p.document.activeElement,
     );
-    // Une tuile : le visage, l'icône d'élément, le nom — sous la base des images.
+    // Une tuile : la vignette du site (64 px) dans son anneau, le nom dessous —
+    // sous la base des images. Ce roster ne porte pas la rareté : le fond neutre.
     const tile = p.tile('1');
     expect(tile.title).toBe('Aer');
-    expect(tile.querySelector('.hp-fi')?.getAttribute('src')).toBe(
+    const ht = tile.querySelector('.hp-ring > .ht');
+    expect(ht?.getAttribute('style')).toBe('--ht:64px');
+    expect(ht?.querySelector('.ht-face')?.getAttribute('src')).toBe(
       'https://img.test/images/characters/faceicon/FI_1.webp',
     );
-    expect(tile.querySelector('.hp-el')?.getAttribute('src')).toBe(
-      'https://img.test/images/ui/elem/IG_Turn_Element_Fire.webp',
+    expect(ht?.querySelector('.ht-bg')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/bg/TI_Slot_Normal.webp',
+    );
+    expect(ht?.querySelector('.ht-el img')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/boss/CT_Element_Fire.webp',
+    );
+    expect(ht?.querySelector('.ht-cls')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/boss/CT_Class_Striker.webp',
     );
     // Choix unique : pas de pied, pas de pastille.
     expect(p.el('hp-foot').hidden).toBe(true);
@@ -2083,10 +2232,10 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     expect(p.el('hp-q').placeholder).toBe('Chercher un effet…');
     expect(p.el('hp-q').getAttribute('aria-label')).toBe('Chercher un effet');
     expect(p.el('hp-results').className).toBe('hp-tiles rows');
-    // La tuile est celle de l'appelant, dans le bouton du picker : ni visage ni anneau.
+    // La tuile est celle de l'appelant, dans le bouton du picker : ni vignette ni anneau.
     expect(p.tile('1').innerHTML).toBe('<i class="fx"></i><span>Burned</span>');
     expect(p.tile('1').title).toBe('Burned');
-    expect(p.all('#hp-results .hp-fi, #hp-results .hp-ring')).toEqual([]);
+    expect(p.all('#hp-results .ht, #hp-results .hp-ring')).toEqual([]);
     // Sans classe ni élément : aucune pastille.
     expect(p.all('#hp-filters .hp-tog')).toEqual([]);
     p.search('att');
@@ -2097,13 +2246,13 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     p.tile('7').click();
     expect(p.onPick).toHaveBeenCalledWith('7');
 
-    // Rouvert sur des héros : la grille de visages, ses mots à elle.
+    // Rouvert sur des héros : la grille de vignettes, ses mots à elle.
     p.open();
     expect(p.el('hp-q').placeholder).toBe('Chercher un perso…');
     expect(p.el('hp-q').getAttribute('aria-label')).toBe('Chercher un perso');
     expect(p.el('hp-results').className).toBe('hp-tiles');
     expect(p.el('hp-none').textContent).toBe('Aucun perso ne correspond.');
-    expect(p.all('#hp-results .hp-fi')).toHaveLength(3);
+    expect(p.all('#hp-results .ht')).toHaveLength(3);
   });
 
   it('`match` : la recherche de l’appelant remplace « le nom qui contient », sur la saisie en minuscules', async () => {
@@ -2171,7 +2320,8 @@ describe('hero-picker — le picker de héros partagé, dans un document', () =>
     const p = await picker();
     p.open({ roster: ROSTER.map(({ id, name, class: cls }) => ({ id, name, class: cls })) });
     expect(p.all('#hp-filters [data-element]')).toEqual([]);
-    expect(p.all('#hp-results .hp-el')).toEqual([]);
+    expect(p.all('#hp-results .ht')).toHaveLength(3);
+    expect(p.all('#hp-results .ht-el')).toEqual([]);
     expect(p.names()).toEqual(['Aer', 'Alice', 'Astei']);
   });
 });
@@ -2841,9 +2991,20 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
     expect(page.all('#c-who .c-stars img')).toHaveLength(3);
     expect(page.all('#c-who .badge.off')[0].textContent).toBe('chaîne join');
-    expect(page.all('#c-who .c-face')[0].getAttribute('src')).toBe(
-      `https://img.test/images/characters/portrait/CT_${AER}.webp`,
-    );
+    // La vignette du site, 56 px : le fond de sa rareté, son visage, son élément, sa classe.
+    const who = page.all('#c-who > .ht')[0];
+    expect(who.getAttribute('style')).toBe('--ht:56px');
+    expect(
+      ['.ht-bg', '.ht-face', '.ht-el img', '.ht-cls'].map((part) =>
+        who.querySelector(part)?.getAttribute('src'),
+      ),
+    ).toEqual([
+      'https://img.test/images/ui/boss/CT_Slot_Unique.webp',
+      `https://img.test/images/characters/faceicon/FI_${AER}.webp`,
+      'https://img.test/images/ui/boss/CT_Element_Fire.webp',
+      'https://img.test/images/ui/boss/CT_Class_Striker.webp',
+    ]);
+    expect(page.all('#c-who .ht-n')).toEqual([]);
     expect(page.el('c-pick-label').textContent).toBe('Changer de perso');
     expect(page.el('c-bar').hidden).toBe(false);
     expect(page.count()).toBe('aucune modification');
@@ -3781,12 +3942,19 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     expect(group.classList.contains('card')).toBe(true);
     expect(page.text(group, '.card-head strong')).toBe('Groupe 1');
     expect(page.act('del-line', group).closest('.card-head')).not.toBeNull();
-    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual(['Aer']);
-    const face = page.all('.c-hero img')[0];
+    expect(page.all('.c-hero').map((h) => h.querySelector('.ht-n')?.textContent)).toEqual(['Aer']);
+    // La vignette du site, 44 px, le nom dessous : le fond de rareté, le visage, l'élément.
+    const tile = page.all('.c-hero .ht-card > .ht')[0];
+    expect(tile.getAttribute('style')).toBe('--ht:44px');
+    expect(tile.querySelector('.ht-bg')?.getAttribute('src')).toBe(
+      'https://img.test/images/ui/boss/CT_Slot_Unique.webp',
+    );
+    const face = tile.querySelector('.ht-face') as HTMLElement;
     expect(face.getAttribute('src')).toBe(
-      `https://img.test/images/characters/portrait/CT_${AER}.webp`,
+      `https://img.test/images/characters/faceicon/FI_${AER}.webp`,
     );
     expect([face.getAttribute('width'), face.getAttribute('height')]).toEqual(['44', '44']);
+    expect(tile.querySelector('.ht-el')?.getAttribute('data-el')).toBe('fire');
     expect(page.act('del-hero', group).getAttribute('aria-label')).toBe('Retirer Aer');
     expect(page.act('add-hero', group).textContent).toBe('＋ héros');
     expect(page.area(group).value.trim()).toBe('Feeds {B/BT_ADDITIVE_TURN}');
@@ -3831,7 +3999,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     await page.settle();
 
     expect(page.el('hp-modal').hidden).toBe(true);
-    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual([
+    expect(page.all('.c-hero').map((h) => h.querySelector('.ht-n')?.textContent)).toEqual([
       'Alice',
       'Ais Wallenstein',
     ]);
@@ -3847,7 +4015,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.all('#hp-foot [data-hp="cancel"]')[0].click();
     // ✕ sur une tuile retire son héros.
     page.all('.c-hero [data-act="del-hero"]')[0].click();
-    expect(page.all('.c-hero').map((h) => h.querySelector('span')?.textContent)).toEqual([
+    expect(page.all('.c-hero').map((h) => h.querySelector('.ht-n')?.textContent)).toEqual([
       'Ais Wallenstein',
     ]);
     page.act('add-hero', group()).click();
@@ -4160,7 +4328,7 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     page.el('c-pick').click();
     expect(page.el('hp-q').placeholder).toBe('Chercher un perso…');
     expect(page.el('hp-results').classList.contains('rows')).toBe(false);
-    expect(page.all('#hp-results .hp-fi')).toHaveLength(3);
+    expect(page.all('#hp-results .ht')).toHaveLength(3);
     page.el('hp-close').click();
 
     // ✕ sur une chip ajoutée la retire : celle du picker ne compte plus, celle du disque compte.
@@ -7172,7 +7340,7 @@ describe('Bannières — la page, sur le vrai markup', () => {
     ]);
     page.all('#b-list .results div')[2].click();
     expect(page.rows()[0]).toEqual(['Summer Anna', '', '', 'brouillon | nouvelle', '']);
-    expect(page.all('#b-list tr')[0].querySelector('.face')?.getAttribute('src')).toBe(
+    expect(page.all('#b-list tr')[0].querySelector('.ht .ht-face')?.getAttribute('src')).toBe(
       'https://img.test/images/characters/faceicon/FI_5.webp',
     );
     expect(page.el('b-count').textContent).toBe('1 changement');
@@ -8750,7 +8918,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
     expect(results.hidden).toBe(true);
     page.type(search, 'AN');
     // Ceux qui commencent par la saisie d'abord, puis ceux qui la contiennent.
-    expect(page.all('#j-form .results div span:first-of-type').map((n) => n.textContent)).toEqual([
+    expect(page.all('#j-form .results div > .ht + span').map((n) => n.textContent)).toEqual([
       'Anna',
       'Dana',
       'Summer Anna',
@@ -8816,7 +8984,7 @@ describe('Journal du site — la page, sur le vrai markup', () => {
 
     const value = page.input('Outerpedia in French', 'f', 'linkValue');
     page.type(value, 'dan');
-    expect(page.texts(box, '.results div span:first-of-type')).toEqual(['Dana']);
+    expect(page.texts(box, '.results div > .ht + span')).toEqual(['Dana']);
     (box.querySelector('.results div') as HTMLElement).click();
     expect(value.value).toBe('dana');
     expect((box.querySelector('.results') as HTMLElement).hidden).toBe(true);
@@ -9914,7 +10082,7 @@ describe('Tableau de bord — la page, sur le vrai markup', () => {
       ['warn', '2 à insérer · 1 à alignerd’après la table du jeu', true],
     ]);
     expect(page.text(page.el('h-banners-count'))).toBe('2 actives1 à venir');
-    expect(page.all('#h-banners .face')[0].getAttribute('src')).toMatch(
+    expect(page.all('#h-banners .ht .ht-face')[0].getAttribute('src')).toMatch(
       /\/images\/characters\/faceicon\/FI_2\.webp$/,
     );
     expect(page.rows('h-coupons')).toEqual([
@@ -11630,9 +11798,11 @@ describe('Guides — la page, sur le vrai markup', () => {
     const page = await guides({ hash: `${JC}/team` });
     expect(page.window.location.hash).toBe(`${JC}/2026-10`);
     expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('team');
-    expect(
-      page.all('#gd-panel .gd-slot .gd-hero span:not(.gd-noface)').map((s) => s.textContent),
-    ).toEqual(['Aer', 'Alice', 'Alice']);
+    expect(page.all('#gd-panel .gd-slot .gd-hero .ht-n').map((s) => s.textContent)).toEqual([
+      'Aer',
+      'Alice',
+      'Alice',
+    ]);
     page.all('#gd-panel .gd-slot [data-act="del-hero"][data-name="Alice"]')[0].click();
     await page.settle();
     expect(page.count()).toBe('1 onglet modifié');
@@ -11859,9 +12029,7 @@ describe('Guides — la page, sur le vrai markup', () => {
       'premium-third',
       'premium-transcend',
     ]);
-    expect(page.all('#gd-panel .gd-entry .card-head .gd-hero span:last-child')[0].textContent).toBe(
-      'Aer',
-    );
+    expect(page.all('#gd-panel .gd-entry .card-head .gd-hero .ht-n')[0].textContent).toBe('Aer');
     expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
     expect(page.previews()[0].texts).toEqual(['Fast {B/BT_BARRIER}']);
   });
@@ -11877,7 +12045,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.el('hp-modal').hidden).toBe(true);
     const card = page.all('#gd-panel .gd-entry[data-entry="reviews.limited.0"]')[0];
-    expect(card.querySelector('.card-head .gd-hero span:last-child')?.textContent).toBe('Alice');
+    expect(card.querySelector('.card-head .gd-hero .ht-n')?.textContent).toBe('Alice');
     expect(page.count()).toBe('1 onglet modifié');
     expect(page.dots()).toEqual([['limited', 'dot edit']]);
     page.type(page.field('reviews.limited.0.review'), 'Great {B/BT_BARRIER}');
@@ -11919,7 +12087,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     const rows = () =>
       page
         .all('#gd-panel [data-block="premium-first"] .gd-rank')
-        .map((r) => r.querySelector('.gd-hero span:last-child')?.textContent);
+        .map((r) => r.querySelector('.gd-hero .ht-n')?.textContent);
     expect(rows()).toEqual(['Aer', 'Alice']);
     const stars = page.all(
       '#gd-panel [data-gen="priorities.premium.first.0.stars"] option',
@@ -11998,9 +12166,9 @@ describe('Guides — la page, sur le vrai markup', () => {
     const page = await guides({ hash: '#guides/general-guides/free-heroes-start-banner' });
     expect(page.subs()).toEqual(['sources']);
     expect(page.all('#gd-panel .gd-entry')).toHaveLength(1);
-    expect(
-      page.all('#gd-panel .gd-nested .gd-hero > span:not(.gd-noface)').map((s) => s.textContent),
-    ).toEqual(['Aer']);
+    expect(page.all('#gd-panel .gd-nested .gd-hero .ht-n').map((s) => s.textContent)).toEqual([
+      'Aer',
+    ]);
     page.all('#gd-panel [data-act="gen-add"][data-key="sources"]')[0].click();
     await page.settle();
     expect(page.all('#gd-panel .gd-entry')).toHaveLength(2);
@@ -12020,9 +12188,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     await page.settle();
     expect(
       page
-        .all(
-          '#gd-panel .gd-nested[data-entry="sources.1.entries.0"] .gd-hero > span:not(.gd-noface)',
-        )
+        .all('#gd-panel .gd-nested[data-entry="sources.1.entries.0"] .gd-hero .ht-n')
         .map((s) => s.textContent),
     ).toEqual(['Aer', 'Alice']);
     const pick = page.all(

@@ -1,7 +1,7 @@
 /* Le picker de héros (`hero-picker.mjs`), partagé par « Fiche perso » et Gear
    reco : une modale au-dessus du journal, posée dans `<body>` — recherche,
    pastilles d'élément et de classe, groupe segmenté facultatif, grille de
-   visages et, en multi-choix, un pied qui récapitule et valide. Les mêmes
+   vignettes (`hero-tile.css`) et, en multi-choix, un pied qui récapitule et valide. Les mêmes
    mesures que le picker de pièces de Gear reco (`.g-modal`, `tabs/gear.css`),
    qui reste dans son onglet. */
 .hp-modal {
@@ -177,12 +177,12 @@
 .hp-tile:hover {
   color: var(--content);
 }
-/* L'anneau du perso choisi, sur un conteneur : l'icône d'élément et la
-   pastille en débordent. */
+/* L'anneau du perso choisi, autour de sa vignette : l'icône d'élément (coin
+   haut droit) et la pastille (coin haut gauche) en débordent. */
 .hp-ring {
   position: relative;
   display: inline-flex;
-  padding: 2px;
+  padding: 4px;
   border: 2px solid transparent;
   border-radius: 8px;
 }
@@ -191,24 +191,6 @@
 }
 .hp-ring.on {
   border-color: var(--accent);
-}
-.hp-fi {
-  display: block;
-  width: 64px;
-  height: 64px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-.hp-el {
-  position: absolute;
-  left: -4px;
-  bottom: -4px;
-  width: 20px;
-  height: 20px;
-  padding: 1px;
-  border-radius: 50%;
-  background: var(--surface-base);
-  object-fit: contain;
 }
 /* `rows` : des tuiles en lignes, dessinées par l'appelant (`tile`) — une icône,
    un nom à côté —, sur plusieurs colonnes. */
@@ -230,10 +212,11 @@
   border-color: color-mix(in srgb, var(--accent) 50%, transparent);
   background: var(--surface-base);
 }
-/* La pastille d'une tuile cochée, en multi-choix : ✓. */
+/* La pastille d'une tuile cochée, en multi-choix : ✓ — à gauche, le coin
+   haut droit est à l'icône d'élément de la vignette. */
 .hp-cnt {
   position: absolute;
-  right: -6px;
+  left: -6px;
   top: -6px;
   display: inline-flex;
   align-items: center;

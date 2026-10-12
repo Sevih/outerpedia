@@ -258,6 +258,40 @@ class="ico">` de 24 px, décoratif, `alt=""`). Les icônes d'élément, de class
 de rareté et les portraits sont sous le même `imgBase` : B28 en fait les
 colonnes de Rangs.
 
+### La vignette de perso (B45)
+
+Un perso se montre partout par UNE vignette, celle du site
+(`Thumbnail kind="character"`, la transcription du prefab
+`uicharacterthumbnail`) :
+`heroTile(env, hero, { px = 44, name = false })` de `ui/hero-tile.mjs` rend
+son HTML, `ui/hero-tile.css` (classes `.ht*`, lié dans `index.html` avant les
+onglets) porte ses proportions. `env` = `{ imgBase }` (`state` convient) ;
+`hero` = une ligne de roster, `{ id, name?, rarity?, element?, class? }`.
+
+```
+.ht (carré de --ht, posé en style ; décoratif, aria-hidden — un nom le double toujours)
+  .ht-bg     le fond de rareté, pleine case : CT_Slot_Magic / Rare / Unique (rareté 1 / 2 / 3) ; sans rareté connue, TI_Slot_Normal (gris)
+  .ht-face   le visage FI_<id>, en 122 / 128 centré (un retrait de 3 : l'art ne mord pas sur la bordure du fond)
+  .ht-shade  l'ombre du bas (CT_Slot_Bottom en border-image, 28 de bord), 122 × 32 remontée de 3
+  .ht-dim    le vignetage (CT_Slot_Dim_2, opacité 0,651)
+  .ht-el     l'élément (CT_Element_*), 45 / 128 au coin haut droit — il DÉBORDE de la case (4,8 % à droite, 4,4 % en haut) : rien autour ne doit le rogner
+  .ht-cls    la classe (CT_Class_*), 34 / 128, sous l'élément
+.ht.none     la case « ? » (pointillé rouge) : un `hero` sans `id`, un nom hors du roster
+.ht-card     avec `name` : la vignette et .ht-n, `hero.name` dessous (11 px, centré, deux lignes au plus, `title` = le nom entier) ; large de --ht + 24 px
+```
+
+Les tailles : 64 px dans le picker de héros, 56 px en tête d'une fiche (Fiche
+perso, Noms), 44 px avec le nom sur une tuile de héros (synergies, Guides),
+36 px dans Rangs, 32 px dans une liste (Bannières, Noms), 24 px dans une liste
+de suggestions et au Tableau de bord. Un onglet qui ne reçoit que l'id (pas la
+rareté, l'élément ni la classe : Bannières, Journal, Tableau de bord, Noms) a
+le fond neutre et pas d'icône au coin. Ce que `Thumbnail` fait de plus et que
+la vignette ne reproduit pas : les étoiles de transcendance (elles se lisent
+dans la table du jeu, que la page n'a pas), le niveau, le skin des réglages du
+site. Un onglet ne recompose plus ni visage ni portrait : ni `.face`, ni
+`faceicon/FI_` écrit à la main. Les vignettes de MONSTRE (Extraction,
+Monstres) et les tuiles d'item (`itemTile`, `gear-view.mjs`) restent à part.
+
 ## Les règles
 
 - **Largeur maîtrisée** : 1200 px par défaut ; `wide` quand le contenu est une
@@ -287,7 +321,7 @@ croquis est sous « Fiche perso », dont il est le dernier sous-onglet (B40).
 .card.pad  .form : [Nom 30ch] [Rang de ▾] [Rang ▾] [Rôle ▾] [Élément : 5 icônes cliquables] [☐ par transcendance] [☐ modifiés]
 .savebar   129 / 129 persos · 2 modifications · 1 refus   [Annuler] [Enregistrer 2 changements]
 .card > .scroll > table
-   ▸ | portrait + Nom (+ badge « par transcendance ») | icône Élément | icône Classe | icône Sous-classe | ★★★ | Rôle ▾ | PvE ▾ | PvP ▾ | EE base ▾ | EE +10 ▾
+   ▸ | vignette 36 px + Nom (+ badge « par transcendance ») | icône Élément | icône Classe | icône Sous-classe | ★★★ | Rôle ▾ | PvE ▾ | PvP ▾ | EE base ▾ | EE +10 ▾
    tr.sub (fond surface-sunken) : une ligne par transcendance
    pied de carte : « n lignes montrées sur 129 » · l'échelle des rangs en icônes
 ```
@@ -560,7 +594,7 @@ rien. Croquis du rendu :
      ● proposition d'extraction en attente  data/extracted/ : à revoir, puis promouvoir      (warn, seulement s'il y en a une)
   .card « Publication » — deux têtes dans la même carte
      card-head : « Bannières » · badges « 2 actives » · « 1 à venir » … [Ouvrir Bannières]
-       ● visage 24 px · nom … badge ok « 12 j restants » (« dernier jour » à zéro) ; à venir : ● accent … badge upcoming « dans 5 j »
+       ● vignette 24 px · nom … badge ok « 12 j restants » (« dernier jour » à zéro) ; à venir : ● accent … badge upcoming « dans 5 j »
        ● 2 à insérer · 1 à aligner  d'après la table du jeu      (warn)
        « Aucune bannière active ni à venir. » ; sans table du jeu, le message du serveur dessous, atténué
      card-head : « Codes promo » · badge « 8 actifs » … [Ouvrir Codes promo]
@@ -635,17 +669,17 @@ jeu en sait de plus. Croquis du rendu :
 .savebar   2 changements · 1 refus   [Annuler] [Enregistrer]   (la liste entière part : fichier, R2, commit)
 .card « Dans le jeu »  card-head : titre · badge edit « 2 à insérer » · badge warn « 1 à aligner » … [Tout insérer] (absent sans rien d'insérable)
    une ligne par fenêtre (.b-win), les manquantes puis les dérives de fin :
-     visage 32 px · nom EN du roster · badge du type (pickup, seasonal, fes, « seasonal · sélection »…) · « 2026-10-20 → 2026-11-17 » · badge de statut … [Insérer]
+     vignette 32 px · nom EN du roster · badge du type (pickup, seasonal, fes, « seasonal · sélection »…) · « 2026-10-20 → 2026-11-17 » · badge de statut … [Insérer]
      un perso hors du roster du site : son id, badge ko « hors roster », [Insérer] éteint
-     visage · nom · badge du type · « 2026-09-08 → fin curée 2026-10-05, jeu 2026-10-06 » … [Aligner sur le jeu]
+     vignette · nom · badge du type · « 2026-09-08 → fin curée 2026-10-05, jeu 2026-10-06 » … [Aligner sur le jeu]
    rien à proposer : « Les bannières du jeu sont toutes dans la liste. » ; sans table du jeu : le message du serveur, en texte atténué (pas en rouge)
    insérer et aligner sont des changements EN ATTENTE : la ligne quitte la carte et entre dans la liste, rien ne s'écrit avant « Enregistrer »
 .card  card-head : « 52 bannières » · badges « 2 actives » · « 1 à venir » · « 1 brouillon » · « 49 expirées » … [☑ masquer les expirées] [＋ bannière]
-   table, récent → ancien :  visage 32 px + [nom affiché 30ch] | [début, date] | [fin, date] | statut | ✕
+   table, récent → ancien :  vignette 32 px + [nom affiché 30ch] | [début, date] | [fin, date] | statut | ✕
      statut : badge ok « active · 12 j restants » (« dernier jour » à zéro) · badge upcoming « à venir · dans 5 j » · badge expired « expirée » (ligne à 50 %) · badge warn « brouillon » (sans dates)
               puis badge edit « nouvelle » ou « modifiée », et badge ko « refusée » (`title` = le refus ; les champs de la ligne bordés de rouge)
      « masquer les expirées » est coché d'office ; une ligne expirée qui porte un changement ou un refus reste à l'écran
-     « ＋ bannière » pose une ligne en tête : [Chercher un perso…] et sa liste de suggestions du roster (.picker + .results, à partir de deux lettres, ceux qui commencent par la saisie d'abord ; Entrée prend la première) ; le perso choisi, la ligne montre son visage et son nom prérempli, sans dates = brouillon
+     « ＋ bannière » pose une ligne en tête : [Chercher un perso…] et sa liste de suggestions du roster (.picker + .results, à partir de deux lettres, ceux qui commencent par la saisie d'abord ; Entrée prend la première) ; le perso choisi, la ligne montre sa vignette et son nom prérempli, sans dates = brouillon
    .empty « Aucune bannière active ou à venir — 50 expirées masquées. »
 ```
 
@@ -794,12 +828,12 @@ openHeroPicker({ roster, imgBase, title, onPick, multi?, chosen?, opener?, filte
   .hp-top      la recherche (36 px, « Chercher un perso… ») ; dessous .hp-filters :
                  pastilles d'élément puis de classe (.hp-tog 36 px, `aria-pressed` ; celles que le roster porte, dans l'ordre du site ; aucune enfoncée = toutes)
                  `seg` : un groupe segmenté de plus, poussé à droite (« Tous · Buffs · Debuffs » du picker d'effets de Skills, qui passe aussi `tally` et `hint`)
-  .hp-body     .hp-tiles — une tuile par perso, dans l'ordre du roster : visage 64 px dans son anneau (.hp-ring, accent sur le choix), icône d'élément en bas à gauche, le nom dessous (11 px)
-                 en multi-choix, ✓ sur une tuile cochée : une pastille en haut à droite (.hp-cnt) ; `hint` : le `title` d'une tuile, son nom sinon
+  .hp-body     .hp-tiles — une tuile par perso, dans l'ordre du roster : la vignette de perso en 64 px (`heroTile`, B45) dans son anneau (.hp-ring, accent sur le choix), le nom dessous (.hp-n, 11 px)
+                 en multi-choix, ✓ sur une tuile cochée : une pastille en haut à GAUCHE (.hp-cnt — le coin droit est à l'icône d'élément) ; `hint` : le `title` d'une tuile, son nom sinon
                .empty « Aucun perso ne correspond. »
   .hp-foot     en multi-choix seulement : les noms cochés, dans l'ordre des clics (« Aucun perso. ») … [Annuler] [Valider]
 autre chose que des héros (le picker d'effets de Skills) :
-  `tile(item)`  le contenu d'une tuile, dessiné par l'appelant, dans le bouton du picker — ni visage ni anneau ; son CSS est à l'appelant, sous `.hp-modal`
+  `tile(item)`  le contenu d'une tuile, dessiné par l'appelant, dans le bouton du picker — ni vignette ni anneau ; son CSS est à l'appelant, sous `.hp-modal`
   `rows`        .hp-tiles.rows : des tuiles en LIGNES (une icône, le nom à côté, 13 px), 200 px au moins, trois colonnes dans le panneau
   `placeholder` la recherche (« Chercher un effet… », aussi son `aria-label`) ; `none` : le vide (« Aucun effet ne correspond. »)
   un item sans `class` ni `element` : aucune pastille — l'appelant passe SES `filters`, ceux du module pourraient porter une classe enfoncée
@@ -828,7 +862,7 @@ du rendu :
 
 ```
 .head  Fiche perso — Ce que le wiki sait d'un perso, par sous-onglets. Rien ne s'écrit à la saisie… Les rangs et le rôle se règlent aussi dans la grille Rangs.
-.card.pad.c-char  l'en-tête de perso : portrait 56 px, nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
+.card.pad.c-char  l'en-tête de perso : sa vignette en 56 px (`heroTile`, B45), nom, élément · classe · sous-classe (son icône) · ★★★ · badge off « chaîne join » ; à droite [Changer de perso] (le picker de héros)
    sans perso : « Aucun perso choisi. », [Choisir un perso], et le picker OUVERT d'office à chaque venue sur l'onglet
 .savebar   2 changements · 1 refus · 1 erreur · « Priorité de skills · Skill 2 : entre 1 et 3, ou vide »   Aperçu [en|fr|es|jp|kr|zh]   [Annuler] [Enregistrer]   (UNE barre pour tous les sous-onglets, sauf les builds de Gear reco, qui ont la leur ; absente sans perso)
    « Aperçu » (.c-pv-lang, le groupe segmenté .c-seg — celui de Gear reco) : la langue de l'aperçu des textes, `en` d'office, UNE pour toute la fiche ; absent du sous-onglet Fiche, qui n'a pas de texte
@@ -860,7 +894,7 @@ du rendu :
   sous les deux cartes : [Traduire] (.btn.ghost, `title` : il ÉCRASE) · badge error (son refus) · le refus du champ entier (`stale`, forme)
 #c-panel — Synergies : .c-syn, une pile de .card.c-group, une par groupe
   .card   card-head : « Groupe 1 » · badge edit « modifié » · badge ko « refusé » … ✕ à droite (retire le groupe)
-     .c-heroes : des tuiles (.c-hero : portrait 44 px cadré sur le visage, nom, ✕) puis [＋ héros] (.btn.ghost.sm — le picker de héros en `multi`, les héros du groupe cochés, le perso de la fiche exclu)
+     .c-heroes : des tuiles (.c-hero : la vignette de perso en 44 px et le nom dessous — `heroTile` avec `name`, B45 —, ✕ au coin) puis [＋ héros] (.btn.ghost.sm — le picker de héros en `multi`, les héros du groupe cochés, le perso de la fiche exclu)
      la raison : le TEXTE d'une ligne, comme un pro
   sous la pile : [＋ groupe] [Traduire] · badge error · le refus du champ ; « Aucune synergie. »
 #c-panel — Skills : .c-cols, une .card.c-skill par carte de skill, deux par rangée (une seule sous 1000 px) — mains, passifs, chaîne, duo
@@ -1306,7 +1340,7 @@ LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
 #gd-panel — Tips : sans titres (special request, irregular, AL, adventure) : .card « Conseils » : LE BLOC (.gd-text à textarea de quatre lignes, UN CONSEIL PAR LIGNE ; l'aperçu en liste à puces ; les traductions sont des blocs aussi, remplis par index — l'anglais porte la structure : une ligne jp en plus ne crée pas de conseil)
    avec titres (joint, world boss, dim) : une .card « Section n » par section — ✕ en tête, le titre (placeholder « Titre automatique — saisir pour remplacer » quand un `rawTitle` est préservé), le bloc ; [＋ section] ; [Traduire]
 #gd-panel — Notes : une .card « Note n » par paragraphe (✕), le texte ; [＋ note] ; [Traduire]
-#gd-panel — Persos : une .card « Groupe n » par groupe — ✕, .gd-heroes (une tuile par perso : portrait 44 px, nom d'affichage anglais, ✕ ; un nom hors du roster : « ? » cerclé de rouge) [＋ héros] (le picker partagé en multi, les persos du groupe cochés), la raison ; [＋ groupe] ; [Traduire]
+#gd-panel — Persos : une .card « Groupe n » par groupe — ✕, .gd-heroes (une tuile par perso : la vignette de perso en 44 px, le nom d'affichage anglais dessous, ✕ au coin ; un nom hors du roster : la case « ? » et la tuile cerclée de rouge) [＋ héros] (le picker partagé en multi, les persos du groupe cochés), la raison ; [＋ groupe] ; [Traduire]
    en sections (world boss, dim) : une .card « Section n » (✕, titre) qui porte ses groupes et son [＋ groupe] ; [＋ section]
 #gd-panel — Équipe : slots (joint) : UNE .card « Équipe » — .gd-slots : une ligne numérotée par slot = ses alternatives en tuiles [＋ héros] ✕, [＋ slot] (4 au plus) ; la note
    buckets (special request) : une .card par plage — « Stages [1] → [5] » ✕, les slots, la note ; [＋ plage de stages]
@@ -1371,7 +1405,7 @@ l'onglet, dans `tabs/guides.css` : `.gd-cat`,
 `.gd-cols`, `.gd-wide`, `.gd-card`, `.gd-body`, `.gd-foot`, `.gd-err`,
 `.gd-ko`, `.gd-text`, `.gd-trs`, `.gd-pv` (ses segments `.pv-*` sont dans
 `pv.css`), `.gd-battle`, `.gd-dungeons`, `.gd-pin`, `.gd-pn`,
-`.gd-heroes`, `.gd-hero`, `.gd-noface`, `.gd-slots`, `.gd-slot`, `.gd-group`,
+`.gd-heroes`, `.gd-hero`, `.gd-slots`, `.gd-slot`, `.gd-group`,
 `.gd-videos`, `.gd-vt` ; pour les pickers en lignes, sous `.hp-modal` :
 `.gd-pico`, `.gd-pk`, `.gd-pname`, `.gd-pid` ; pour les guides généraux (F19) :
 `.gd-field` (`-inline`, `-text`, `-hero`, `-check`), `.gd-entry`, `.gd-sub`,
@@ -1392,13 +1426,13 @@ de l'admin en un onglet. Croquis du rendu :
 .card.n-cols — deux colonnes (320 px | le reste ; l'une sous l'autre sous 900 px)
   gauche .n-side : [Chercher un perso…] [État ▾ : À traiter (défaut) · Nom court trop long · Avec nom court · Avec alias · Tous]
                    « 3 à traiter sur 129 »
-                   la liste (elle défile dans sa colonne), une ligne = un bouton : visage 32 px · nom EN · badge d'état · point
+                   la liste (elle défile dans sa colonne), une ligne = un bouton : vignette 32 px · nom EN · badge d'état · point
                      badge : « déborde » (ko) = à traiter ; « court trop long » (warn) ; « court » (ok) = un nom court qui tient ; rien quand tout tient
                      point : accent = modifié, pas enregistré ; rouge = refusé au dernier enregistrement
                      tri : à traiter, puis court trop long, puis par nom ; le perso ouvert garde sa ligne hors du filtre d'état
                    .empty « Aucun perso à traiter… » quand la liste est vide
   droite .n-sheet (le perso choisi, `#names/<id>` ; avant, un .empty « Choisir un perso dans la liste. »)
-     visage 56 px · nom EN · ses badges (l'état, « refusé : le disque avait changé », « modifié »)
+     vignette 56 px · nom EN · ses badges (l'état, « refusé : le disque avait changé », « modifié »)
      p.hint  la règle : le nom court là où le nom complet ne tient pas sur deux lignes de 80 px ; sans valeur, l'anglais sert
      table  Langue | Nom complet + badge « tient » (ok) / « déborde » (ko) | Nom court : [input 22ch, placeholder = le nom complet] puis le verdict du nom court EFFECTIF
             verdict : badge « tient » / « déborde » / « — » (aucun nom court) / « … » (le serveur n'a pas encore jugé) ; champ vide = « = en : S.Regina » atténué devant le badge

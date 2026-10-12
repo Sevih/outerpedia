@@ -81,10 +81,6 @@
   font-size: 12.5px;
   white-space: nowrap;
 }
-#tab-dashboard .face {
-  flex: 0 0 auto;
-  object-fit: contain;
-}
 
 /* Les teintes : la pastille d'une ligne, et son libellé quand la ligne EST
    l'état (`tint` : la version du jeu, les fichiers modifiés, la détection). */

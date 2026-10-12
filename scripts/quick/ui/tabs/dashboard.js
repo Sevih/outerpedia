@@ -1,6 +1,7 @@
 // Onglet « Tableau de bord » : l'accueil de quick — ce qui demande une action.
 // Il montre et renvoie, il ne fait rien : aucune route n'est postée d'ici.
 import { $, GROUPS, esc, gitBar, log, sections, state } from '../lib.js';
+import { heroTile } from '../hero-tile.mjs';
 
 // `/api/dashboard` : cinq blocs indépendants (`inbox`, `git`, `game`,
 // `banners`, `coupons`), chacun `null` avec sa raison dans `errors` quand sa
@@ -27,10 +28,6 @@ const unreadable = (error) => note(`Illisible : ${error ?? 'erreur inconnue'}`, 
 const hasSection = (id) => GROUPS.some((g) => g.sections.some((s) => s.id === id));
 const goButton = (tab, text) =>
   `<button class="btn ghost sm h-end" data-go="${esc(tab)}">${esc(text)}</button>`;
-
-// Le visage du jeu, comme dans Bannières ; décoratif, le nom est à côté.
-const face = (id) =>
-  `<img class="face" src="${esc(state.imgBase)}/images/characters/faceicon/FI_${esc(id)}.webp" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />`;
 
 // ------------------------------------------------------ « À faire »
 /**
@@ -161,13 +158,13 @@ function renderBanners(banners, error) {
     ...banners.active.map((b) =>
       row(
         'ok',
-        `${face(b.id)}${label(b.name)}<span class="badge active h-end">${left(b.daysLeft)}</span>`,
+        `${heroTile(state, { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge active h-end">${left(b.daysLeft)}</span>`,
       ),
     ),
     ...banners.upcoming.map((b) =>
       row(
         'info',
-        `${face(b.id)}${label(b.name)}<span class="badge upcoming h-end">dans ${b.inDays} j</span>`,
+        `${heroTile(state, { id: b.id }, { px: 24 })}${label(b.name)}<span class="badge upcoming h-end">dans ${b.inDays} j</span>`,
       ),
     ),
   ];

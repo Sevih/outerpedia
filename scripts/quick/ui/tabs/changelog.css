@@ -269,10 +269,6 @@
   scrollbar-color: var(--line) transparent;
   scrollbar-width: thin;
 }
-#tab-changelog .face {
-  flex: 0 0 auto;
-  object-fit: contain;
-}
 
 /* L'aperçu : sa tête, puis la carte de /changelog sur le fond de la page —
    ce n'est plus l'éditeur. */

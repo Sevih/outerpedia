@@ -1,5 +1,6 @@
 // Onglet « Noms » : le nom court d'affichage et les alias de recherche.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { heroTile } from '../hero-tile.mjs';
 
 let names = { rows: [], langs: [], width: 80 };
 let byId = new Map();
@@ -19,10 +20,6 @@ const FALLBACK = 'en';
 /** Le délai de l'aperçu de Gear reco : le verdict part après la dernière frappe. */
 const FIT_DELAY = 300;
 
-const src = (path) => `${esc(state.imgBase)}/images/${path}.webp`;
-// Le visage du jeu, comme dans Rangs ; décoratif, le nom est à côté.
-const face = (id, px) =>
-  `<img class="face" src="${src(`characters/faceicon/FI_${esc(id)}`)}" alt="" aria-hidden="true" width="${px}" height="${px}" loading="lazy" />`;
 const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
 
 // ------------------------------------------------------ le modèle
@@ -124,7 +121,7 @@ function renderList() {
   list.innerHTML = rows
     .map(
       (row) =>
-        `<li><button type="button" class="n-row" data-id="${esc(row.id)}" aria-current="${row.id === current}">${face(row.id, 32)}<span class="n-name">${esc(row.name)}</span>${statusBadge(row)}<span class="n-pt">${dot(row.id)}</span></button></li>`,
+        `<li><button type="button" class="n-row" data-id="${esc(row.id)}" aria-current="${row.id === current}">${heroTile(state, { id: row.id }, { px: 32 })}<span class="n-name">${esc(row.name)}</span>${statusBadge(row)}<span class="n-pt">${dot(row.id)}</span></button></li>`,
     )
     .join('');
   if (focused) rowButton(focused)?.focus();
@@ -196,7 +193,7 @@ function renderSheet() {
   }
   const w = workOf(row);
   $('n-sheet').innerHTML =
-    `<div class="n-who">${face(row.id, 56)}<div class="n-id"><strong>${esc(row.name)}</strong><span class="n-badges" id="n-badges">${sheetBadges(row)}</span></div></div>
+    `<div class="n-who">${heroTile(state, { id: row.id }, { px: 56 })}<div class="n-id"><strong>${esc(row.name)}</strong><span class="n-badges" id="n-badges">${sheetBadges(row)}</span></div></div>
     <p class="hint">Le site affiche le nom court là où le nom complet ne tient pas sur deux lignes de ${names.width} px, la largeur du libellé sur mobile ; sans valeur dans une langue, l'anglais sert.</p>
     <div class="scroll"><table>
       <thead><tr><th>Langue</th><th>Nom complet</th><th>Nom court</th></tr></thead>
@@ -420,7 +417,7 @@ sections.register('names', {
     // l'onglet qui l'ouvre.
     const [, open] = /^#names\/([^/]+)$/.exec(location.hash) ?? [];
     if (open) document.querySelector('#tabs [data-tab="names"]')?.click();
-    // Les visages sont sous `imgBase`, connu avec `/api/state` : redessinés
+    // Les vignettes sont sous `imgBase`, connu avec `/api/state` : redessinées
     // si l'état en annonce une autre.
     stateLoaded.then(() => {
       if (state.imgBase !== drawnBase && names.rows.length) renderNames();

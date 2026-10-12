@@ -7,6 +7,102 @@
 
 ## 2026-10-12
 
+- **quick : une vignette de perso partagée, celle du site (fond de rareté,
+  visage, élément, classe) — en-tête de la fiche, synergies, Guides, picker,
+  listes (lot B45)** — revue de quick par Sevih (12/10) : « les synergies
+  (comme ailleurs) n'utilisent pas les FaceIcon ». Ce qu'il appelle ainsi est
+  la vignette du site, `Thumbnail kind="character"`
+  (`src/components/ui/Thumbnail.tsx`, la transcription du prefab
+  `uicharacterthumbnail`) ; quick montrait un perso de six façons, aucune
+  n'étant elle : le portrait `portrait/CT_<id>` recadré en CSS (en-tête et
+  synergies de la Fiche perso, persos des Guides) ou le visage `FI_<id>` nu,
+  recopié dans cinq onglets et le picker, chacun avec sa classe `.face`.
+  Désormais UNE construction : `heroTile(env, hero, { px = 44, name })` de
+  `scripts/quick/ui/hero-tile.mjs` (pur, une chaîne en sortie, typé par
+  JSDoc comme `gear-view.mjs` ; `env` = `{ imgBase }`, `state` convient) et
+  UNE feuille, `scripts/quick/ui/hero-tile.css` (classes `.ht*`), liée dans
+  `index.html` avant les onglets. La case est un carré de `--ht` ; chaque
+  calque y est posé en fractions de la case de 128 du prefab, les mesures de
+  `Thumbnail` relevées une à une : le fond de rareté en pleine case
+  (`CT_Slot_Magic` / `Rare` / `Unique` pour 1 / 2 / 3), le visage et le
+  vignetage (`CT_Slot_Dim_2`, opacité 0,651) en 122 centrés, l'ombre du bas
+  (`CT_Slot_Bottom` en `border-image`, 28 de bord, 122 × 32 remontée de 3),
+  l'élément en 45 ancré au coin haut droit à (+6,1 ; +5,61) — il déborde de
+  la case, comme sur le site — avec la boîte propre à `earth` et à `fire`,
+  la classe en 34 dessous. Avec `name`, le nom du héros passe sous la
+  vignette (`.ht-card`, 11 px, deux lignes au plus, la hauteur réservée,
+  `title` = le nom entier) ; un `hero` sans `id` — un nom hors du roster —
+  rend la case « ? » (`.ht.none`, celle que portait `.gd-noface`). Emplois :
+  l'en-tête `who()` de la Fiche perso (56 px, sans nom), les synergies
+  (`heroHtml` : 44 px et le nom dessous, ✕ gardé, au coin de la tuile), les
+  Guides (`heroHtml` et `heroFace`, même tuile), le picker
+  (`hero-picker.mjs` : 64 px dans `.hp-ring`, qui garde l'anneau ; le nom
+  reste `.hp-n`), Rangs (36 px, sa ligne porte rareté, élément et classe),
+  Bannières (32 px, 24 px dans les suggestions), Journal (24 px), Tableau de
+  bord (24 px), Noms (32 px et 56 px). Les six copies de `face()` et du
+  portrait, les classes `.face`, `.c-face`, `.gd-noface`, `.hp-fi`, `.hp-el`
+  et les règles `.c-hero img` / `.gd-hero img` sortent ; le `.face` de
+  Discord (un emoji) et le `.ex-face` d'Extraction ne sont pas des persos de
+  roster, intacts. Trois écarts aux « faits » du lot, tranchés en lisant.
+  (1) Élément et classe : les sprites de la VIGNETTE du site,
+  `ui/boss/CT_Element_*` et `ui/boss/CT_Class_*` (`SKIN.character` de
+  `Thumbnail`), pas les `IG_Turn_*` que le lot citait — ceux-là restent aux
+  pastilles de filtre du picker et aux traits de l'en-tête. (2) « Sans
+  rareté connue → fond Normal » : le jeu n'a pas de `CT_Slot_Normal` (404
+  sur `img.outerpedia.com`), et `MT_Slot_Normal` est vert comme Magic — un
+  perso sans rareté passerait pour un 1★ ; le fond neutre est
+  `ui/bg/TI_Slot_Normal`, le gris des tuiles d'item, même motif, même
+  taille. (3) `stars` n'est PAS fait, comme le lot le prévoyait : aucune
+  ligne de roster ne porte `transcendence`, et la rangée d'étoiles se lit
+  dans la table du jeu (`transcend.json`, via `lib/transcendence`), que la
+  page n'a pas — l'option n'existe donc pas plutôt que d'exister à vide. Ce
+  que `Thumbnail` fait et que la vignette ne reproduit pas : ces étoiles, le
+  niveau, la bannière BOSS, le skin des réglages du site
+  (`SettingsPortrait`). Changements visuels, tous voulus par le lot : les
+  tuiles de héros (synergies, Guides) portent le nom DESSOUS et non plus à
+  côté, donc plus hautes et plus étroites ; dans le picker l'élément passe
+  du coin bas gauche (pastille ronde) au coin haut droit de la vignette,
+  l'anneau prend 4 px de marge au lieu de 2 pour le contenir, et le ✓ d'un
+  multi-choix passe du coin haut droit au coin haut GAUCHE (le droit est à
+  l'élément) ; l'en-tête de la fiche perd son cadre arrondi. Tests :
+  `ui-serve.test.ts` — ceux qui lisaient `.hp-fi`, `.hp-el`, `.c-face`,
+  `.c-hero img`, `.face` ou `.gd-hero span` lisent la vignette (`.ht`, le
+  fond de rareté, `.ht-face`, `.ht-el`, `.ht-n`) ; un `describe`
+  « hero-tile » (les calques dans l'ordre et leurs sprites, le fond par
+  rareté et le fond neutre, `name`, l'échappement, la case « ? ») ; un test
+  de coquille (la feuille liée avant les onglets, les fractions de
+  `Thumbnail` dans le CSS, les sept onglets qui importent `heroTile` et ne
+  bâtissent plus `faceicon/FI_` ni `portrait/CT_`, plus de `.face`) ; Noms
+  vérifie ses lignes. `STYLE.md` : le paragraphe « La vignette de perso
+  (B45) » dans Les composants, et les croquis de Rangs, Tableau de bord,
+  Bannières, picker, Fiche perso, Guides et Noms ; `docs/quick-migration.md`
+  ne décrit pas le portrait, inchangé ; pas d'item au TODO. Vérifié :
+  `pnpm typecheck` 0 (`tsc --noEmit -p scripts/tsconfig.json`), `pnpm lint`
+  0 (`eslint`), `pnpm test`
+  « Test Files 221 passed (221) / Tests 3678 passed (3678) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` « Test Files 8
+  passed (8) / Tests 1025 passed (1025) ». Banc (quick isolé :4811, clés
+  vidées, `shot.mjs`, arrêté ensuite) :
+  `--tabs character --hash character/2000096/synergies` — l'en-tête d'Ais
+  et les tuiles de Monad Eva et de Skadi : cadre rouge Unique, élément et
+  classe au coin, comme la vignette du site ;
+  `--tabs character --hash character` — le picker, 129 vignettes, huit par
+  rangée, rien de rogné ;
+  `--tabs guides --hash guides/general-guides/premium-limited/limited` et
+  `…/premium` — la tuile d'une review ; `--tabs ranks`, `--tabs banners`,
+  `--tabs dashboard`, `--tabs names --hash names/2000055`. Non vu à
+  l'image : les listes de suggestions (Bannières, Journal — il faut y
+  taper ; couvertes par les tests), le ✓ d'un multi-choix à gauche, la case
+  « ? » d'un nom hors du roster, un 1★ et un 2★ ; le hash
+  `character/2000055/fiche/picker` n'a pas été essayé (le picker s'ouvre
+  d'office sur `#character`). Laissé, hors périmètre : Bannières, Journal,
+  Tableau de bord et Noms ne reçoivent que l'id du perso — leur vignette a
+  donc le fond neutre et pas d'icône au coin ; leur donner rareté, élément
+  et classe, ce sont des champs de plus dans quatre états du serveur, que le
+  lot excluait (à décider : un lot, ou le roster de `/api/character/roster`
+  lu une fois par la page). Les vignettes de monstre d'Extraction et de
+  Monstres, et les tuiles d'item, restent à part.
+
 - **quick : l'aperçu des textes rend les effets comme le site — tuile noire
   teintée, exception Interruption, cadre singularity, tooltip du site en
   `title`, un seul `pv.css` (lot A36)** — revue de quick par Sevih (12/10) :

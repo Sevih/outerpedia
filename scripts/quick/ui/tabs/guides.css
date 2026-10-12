@@ -436,9 +436,10 @@
 }
 
 /* ---------------------------------------------------------------- les persos
-   Une tuile de perso, celle des synergies de la Fiche perso : portrait 44 px
-   cadré sur le visage, nom, ✕. Un nom hors du roster : un « ? » et un cadre
-   rouge. Les slots d'une équipe : une rangée numérotée par slot. */
+   Une tuile de perso, celle des synergies de la Fiche perso : la vignette du
+   site en 44 px (`hero-tile.css`), le nom dessous, ✕. Un nom hors du roster :
+   la case « ? » et un cadre rouge. Les slots d'une équipe : une rangée
+   numérotée par slot. */
 #tab-guides .gd-heroes {
   display: flex;
   align-items: center;
@@ -449,33 +450,18 @@
 }
 #tab-guides .gd-hero {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px;
+  align-items: flex-start;
+  padding: 8px 8px 4px;
   border: 1px solid var(--line-subtle);
   border-radius: 10px;
   background: var(--surface-base);
-  font-size: 13px;
+}
+/* ✕ au coin de la tuile, à côté de la vignette. */
+#tab-guides .gd-hero .btn.icon {
+  margin: -6px -6px 0 0;
 }
 #tab-guides .gd-hero.unknown {
   border-color: var(--danger);
-}
-#tab-guides .gd-hero img,
-#tab-guides .gd-noface {
-  width: 44px;
-  height: 44px;
-  flex: none;
-  border-radius: 8px;
-  background: var(--surface-overlay);
-  object-fit: cover;
-  object-position: top;
-}
-#tab-guides .gd-noface {
-  display: grid;
-  place-items: center;
-  border: 1px dashed var(--danger);
-  color: var(--danger);
-  font-weight: 700;
 }
 #tab-guides .gd-slots {
   display: flex;

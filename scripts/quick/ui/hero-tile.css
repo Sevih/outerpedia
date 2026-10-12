@@ -1,0 +1,116 @@
+/* La vignette de perso (`hero-tile.mjs`), partagée : celle du site
+   (`Thumbnail kind="character"`, le prefab `uicharacterthumbnail`). Une case
+   carrée de `--ht` de côté ; chaque calque y est posé en fractions de la case
+   de 128 du prefab, les mesures de `Thumbnail` : le fond en pleine case, le
+   visage et le vignetage en 122 centrés (un retrait de 3), l'ombre du bas en
+   122 × 32 remontée de 3, l'élément en 45 ancré au coin haut droit à
+   (+6,1 ; +5,61) — il DÉBORDE de la case, rien ne doit le rogner —, la classe
+   en 34 sous lui, à 39,08 du haut. */
+.ht {
+  position: relative;
+  display: block;
+  flex: none;
+  width: var(--ht);
+  height: var(--ht);
+}
+.ht > img,
+.ht > span {
+  position: absolute;
+  display: block;
+}
+.ht-bg {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ht-face,
+.ht-dim {
+  left: 2.34375%;
+  top: 2.34375%;
+  width: 95.3125%;
+  height: 95.3125%;
+}
+/* `m_Color.a` du calque dans le prefab : à plein il noircit les bords. */
+.ht-dim {
+  opacity: 0.651;
+}
+/* L'ombre est un sprite `Sliced` de 60 de large, 28 de bord de chaque côté :
+   ses extrémités gardent leur taille, seul le centre s'étire. L'image est
+   posée par le module (elle est sous la base des images). */
+.ht-shade {
+  left: 2.34375%;
+  bottom: 2.34375%;
+  width: 95.3125%;
+  height: 25%;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0 calc(var(--ht) * 0.21875);
+  border-image-slice: 0 28 fill;
+  border-image-width: 0 calc(var(--ht) * 0.21875);
+  border-image-repeat: stretch;
+}
+.ht-el {
+  top: -4.3828%;
+  right: -4.7656%;
+  width: 35.15625%;
+  height: 35.15625%;
+}
+/* Chaque élément a sa boîte dans les 50 du conteneur : les sprites n'ont pas
+   le même cadrage utile. */
+.ht-el img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+.ht-el[data-el='earth'] img {
+  top: 51.56%;
+  width: 94%;
+  height: 94%;
+}
+.ht-el[data-el='fire'] img {
+  top: 49.76%;
+  width: 92%;
+  height: 92%;
+}
+.ht-cls {
+  top: 30.53125%;
+  right: 0;
+  width: 26.5625%;
+  height: 26.5625%;
+}
+/* Un nom hors du roster : pas de perso à montrer. */
+.ht.none {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--danger);
+  border-radius: 8px;
+  background: var(--surface-overlay);
+  color: var(--danger);
+  font-weight: 700;
+}
+/* La vignette et son nom dessous (`name`), sur deux lignes au plus ; la
+   hauteur des deux lignes est réservée, pour que des voisines s'alignent. */
+.ht-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: calc(var(--ht) + 24px);
+  max-width: 100%;
+}
+.ht-n {
+  display: -webkit-box;
+  width: 100%;
+  min-height: 2.4em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}

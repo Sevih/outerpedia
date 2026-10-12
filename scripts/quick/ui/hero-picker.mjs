@@ -2,7 +2,7 @@
  * quick/ui/hero-picker — le picker de héros, PARTAGÉ : la modale où l'on
  * choisit un perso (« Fiche perso », Gear reco) ou plusieurs (les partenaires
  * d'une synergie) — recherche, pastilles d'élément et de classe, grille de
- * visages. Elle sert aussi à choisir AUTRE CHOSE qu'un héros, quand ce n'est
+ * vignettes (`hero-tile.mjs`). Elle sert aussi à choisir AUTRE CHOSE qu'un héros, quand ce n'est
  * qu'une question de contenu (un effet du glossaire, « Fiche perso » › Skills) :
  * l'appelant dessine alors ses tuiles (`tile`, `rows`) et nomme ce qu'on y
  * cherche (`placeholder`, `none`), ce qui répond à sa recherche (`match`) et
@@ -23,11 +23,13 @@
  * `gear-view.mjs` : la page le charge tel quel, les tests l'importent.
  */
 
+import { heroTile } from './hero-tile.mjs';
+
 /**
  * Un perso du roster. `element` manque quand l'appelant ne le connaît pas : la
- * tuile se passe de son icône, la rangée de sa pastille — de même `class`, pour
- * ce qui n'est pas un héros.
- * @typedef {{ id: string, name: string, class?: string, element?: string }} Hero
+ * vignette se passe de son icône, la rangée de sa pastille — de même `class`,
+ * pour ce qui n'est pas un héros ; sans `rarity`, la vignette a le fond neutre.
+ * @typedef {{ id: string, name: string, class?: string, element?: string, rarity?: number }} Hero
  */
 
 /**
@@ -63,9 +65,9 @@
  *   le nom qui la contient.
  * @property {(hero: any) => string} [hint] Le `title` d'une tuile ; sans lui, le nom.
  * @property {(item: any) => string} [tile] Le contenu d'une tuile, dessiné par
- *   l'appelant (déjà échappé) ; sans lui, le visage du héros, son élément, son nom.
+ *   l'appelant (déjà échappé) ; sans lui, la vignette du héros et son nom.
  * @property {boolean} [rows] Des tuiles en lignes (une icône, un nom à côté),
- *   sur plusieurs colonnes, au lieu de la grille de visages.
+ *   sur plusieurs colonnes, au lieu de la grille de vignettes.
  * @property {string} [placeholder] Ce que la recherche invite à chercher ; sans
  *   lui, « Chercher un perso… ».
  * @property {string} [none] Ce que dit une recherche sans résultat ; sans lui,
@@ -141,10 +143,9 @@ const src = (path) => `${esc(open?.opts.imgBase ?? '')}/images/${path}.webp`;
  * L'icône d'un élément ou d'une classe : décorative, doublée par un nom.
  * @param {'element' | 'class'} kind
  * @param {string} slug
- * @param {string} [cls]
  */
-const icon = (kind, slug, cls = '') =>
-  `<img${cls ? ` class="${cls}"` : ''} src="${src(
+const icon = (kind, slug) =>
+  `<img src="${src(
     `ui/${kind === 'element' ? 'elem/IG_Turn_Element_' : 'class/IG_Turn_Class_'}${cap(esc(slug))}`,
   )}" alt="" aria-hidden="true" />`;
 
@@ -216,11 +217,9 @@ function tile(c) {
     opts.multi ? ` aria-pressed="${on}"` : on ? ' aria-current="true"' : ''
   }>`;
   if (opts.tile) return `${head}${opts.tile(c)}</button>`;
-  return `${head}<span class="hp-ring${on ? ' on' : ''}"><img class="hp-fi" src="${src(
-    `characters/faceicon/FI_${esc(c.id)}`,
-  )}" alt="" aria-hidden="true" width="64" height="64" loading="lazy" />${
-    c.element ? icon('element', c.element, 'hp-el') : ''
-  }${opts.multi && on ? '<span class="hp-cnt">✓</span>' : ''}</span><span class="hp-n">${esc(c.name)}</span></button>`;
+  return `${head}<span class="hp-ring${on ? ' on' : ''}">${heroTile(opts, c, { px: 64 })}${
+    opts.multi && on ? '<span class="hp-cnt">✓</span>' : ''
+  }</span><span class="hp-n">${esc(c.name)}</span></button>`;
 }
 
 /** Le pied d'un multi-choix : les persos cochés, puis « Annuler » et « Valider ». */

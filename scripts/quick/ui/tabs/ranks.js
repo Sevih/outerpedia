@@ -1,5 +1,6 @@
 // Onglet « Rangs ».
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { heroTile } from '../hero-tile.mjs';
 
 let ranks = { rows: [], tiers: [], eeTiers: [], roles: [], steps: [] };
 let byId = new Map();
@@ -145,7 +146,7 @@ function subRow(row) {
 function mainRow(row, open) {
   return `<tr data-row="${row.id}">
     <td class="fold"><button class="btn icon disclose" type="button" data-fold="${row.id}" aria-expanded="${open}" aria-label="Réglages par transcendance — ${esc(row.name)}" title="Réglages par transcendance">${CHEVRON}</button></td>
-    <td class="perso"><div class="who"><img class="face" src="${src(`characters/faceicon/FI_${row.id}`)}" alt="" aria-hidden="true" width="36" height="36" loading="lazy" /><span class="name">${esc(row.name)} <span class="badge edit" data-badge="${row.id}">${badge(row)}</span></span></div></td>
+    <td class="perso"><div class="who">${heroTile(state, row, { px: 36 })}<span class="name">${esc(row.name)} <span class="badge edit" data-badge="${row.id}">${badge(row)}</span></span></div></td>
     <td>${trait('elem/IG_Turn_Element_', row.element)}</td>
     <td>${trait('class/IG_Turn_Class_', row.class)}</td>
     <td class="dim">${trait('class/CM_Sub_Class_', row.subClass)}</td>

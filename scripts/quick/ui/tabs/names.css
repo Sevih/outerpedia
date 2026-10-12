@@ -93,10 +93,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#tab-names .face {
-  flex: 0 0 auto;
-  object-fit: contain;
-}
 /* Le point d'une ligne : accent = modifiée, rouge = refusée. */
 #tab-names .n-pt {
   display: inline-flex;

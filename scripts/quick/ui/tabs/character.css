@@ -24,17 +24,6 @@
   gap: 16px;
   min-width: 0;
 }
-/* Le portrait du site est en hauteur : cadré sur le visage. */
-#tab-character .c-face {
-  width: 56px;
-  height: 56px;
-  flex: 0 0 56px;
-  border-radius: 12px;
-  border: 1px solid var(--line-subtle);
-  background: var(--surface-overlay);
-  object-fit: cover;
-  object-position: top;
-}
 #tab-character .c-id {
   display: flex;
   flex-direction: column;
@@ -462,8 +451,8 @@
 }
 
 /* Synergies : la pile des groupes. En tête de carte, ✕ part à droite ; dans la
-   carte, la rangée des héros — portrait 44 px cadré sur le visage, nom, ✕ —
-   puis la raison. */
+   carte, la rangée des héros — la vignette du site en 44 px (`hero-tile.css`),
+   le nom dessous, ✕ — puis la raison. */
 #tab-character .c-syn {
   display: flex;
   flex-direction: column;
@@ -480,22 +469,15 @@
 }
 #tab-character .c-hero {
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px;
+  align-items: flex-start;
+  padding: 8px 8px 4px;
   border: 1px solid var(--line-subtle);
   border-radius: 10px;
   background: var(--surface-base);
-  font-size: 13px;
 }
-#tab-character .c-hero img {
-  width: 44px;
-  height: 44px;
-  flex: none;
-  border-radius: 8px;
-  background: var(--surface-overlay);
-  object-fit: cover;
-  object-position: top;
+/* ✕ au coin de la tuile, à côté de la vignette. */
+#tab-character .c-hero .btn.icon {
+  margin: -6px -6px 0 0;
 }
 
 /* L'aperçu d'un texte : ses segments, bâtis par `noteHtml` de `gear-view.mjs`,

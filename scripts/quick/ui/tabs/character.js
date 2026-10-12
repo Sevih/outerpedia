@@ -13,6 +13,7 @@
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
 import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
+import { heroTile } from '../hero-tile.mjs';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
 // Les sous-onglets, dans l'ordre de la fiche du site.
@@ -378,14 +379,14 @@ const cardBad = (card) =>
   cardKeys[card]().some((k) => refused.has(k)) || (card === 'kit' && issues().length > 0);
 
 // ------------------------------------------------------ l'en-tête
-/** Le perso choisi : portrait, nom, élément, classe, sous-classe, rareté, chaîne. */
+/** Le perso choisi : sa vignette, nom, élément, classe, sous-classe, rareté, chaîne. */
 function who() {
   const c = sheet?.char;
   const trait = (file, slug) =>
     `<span class="c-trait"><img src="${src(`ui/${file}${cap(esc(slug))}`)}" alt="" aria-hidden="true" />${esc(slug)}</span>`;
   drawnBase = state.imgBase;
   $('c-who').innerHTML = c
-    ? `<img class="c-face" src="${src(`characters/portrait/CT_${esc(c.id)}`)}" alt="" aria-hidden="true" width="56" height="56" />
+    ? `${heroTile(state, c, { px: 56 })}
       <div class="c-id"><strong>${esc(c.name)}</strong>
         <span class="c-traits">${trait('elem/IG_Turn_Element_', c.element)}${trait('class/IG_Turn_Class_', c.class)}${
           c.subClass ? trait('class/CM_Sub_Class_', c.subClass) : ''
@@ -684,9 +685,9 @@ const prosConsHtml = () =>
   </div>`;
 
 const heroName = (id) => roster?.find((c) => c.id === id)?.name ?? id;
-/** Une tuile de héros : son portrait, son nom, ✕. */
+/** Une tuile de héros : sa vignette, son nom dessous, ✕. Le roster pas encore lu : son id, le fond neutre. */
 const heroHtml = (id) =>
-  `<span class="c-hero"><img src="${src(`characters/portrait/CT_${esc(id)}`)}" alt="" aria-hidden="true" width="44" height="44" /><span>${esc(heroName(id))}</span><button class="btn icon" type="button" data-act="del-hero" data-hero="${esc(id)}" title="Retirer" aria-label="Retirer ${esc(heroName(id))}">✕</button></span>`;
+  `<span class="c-hero">${heroTile(state, roster?.find((c) => c.id === id) ?? { id, name: id }, { name: true })}<button class="btn icon" type="button" data-act="del-hero" data-hero="${esc(id)}" title="Retirer" aria-label="Retirer ${esc(heroName(id))}">✕</button></span>`;
 
 /** Une carte par groupe : ses héros, « ＋ héros », puis la raison. */
 const synHtml = () =>

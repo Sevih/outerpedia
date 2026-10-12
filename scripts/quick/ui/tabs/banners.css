@@ -31,7 +31,7 @@
   display: none;
 }
 
-/* Dans le jeu : une ligne par fenêtre — le visage, le nom, le type, la
+/* Dans le jeu : une ligne par fenêtre — la vignette, le nom, le type, la
    période, puis son bouton à droite. */
 #tab-banners .b-wins {
   list-style: none;
@@ -85,10 +85,6 @@
 #tab-banners .results {
   scrollbar-color: var(--line) transparent;
   scrollbar-width: thin;
-}
-#tab-banners .face {
-  flex: 0 0 auto;
-  object-fit: contain;
 }
 #tab-banners .b-who {
   display: flex;
