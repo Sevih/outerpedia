@@ -50,6 +50,7 @@ export const SLOT_FRAME = /** @type {Readonly<Record<string, string>>} */ ({
   magic: 'Magic',
   rare: 'Rare',
   unique: 'Unique',
+  singularity: 'Singularity',
 });
 
 /** Grade → jeton de couleur du nom (`GRADE_TEXT` du site, jetons de `globals.css`). */
@@ -186,7 +187,9 @@ export const setRow = (env, set, at, size = 32) =>
 // rangées Weapon / Accessory / Talisman, les combos de sets et la légende de
 // leurs bonus, la priorité des substats, la note. Les données sont celles de
 // `previewGearReco` (admin) ; rien n'y est cliquable, une `desc` passe en
-// `title`. Les classes `.pv-*` et les couleurs sont dans `tabs/gear.css`.
+// `title`. La mise en page du build (`.pv-row`, `.pv-item`…) est dans
+// `tabs/gear.css` ; les segments de note, leurs couleurs et la tuile d'effet,
+// dans `pv.css`.
 
 /**
  * Une pièce résolue (`GearItem` du site) — ce que l'aperçu en lit.
@@ -235,7 +238,7 @@ export const setRow = (env, set, at, size = 32) =>
  * @property {string} [grade]
  * @property {boolean} [isDebuff]
  * @property {boolean} [underline]
- * @property {string} [desc] Sa description : le `title` du segment.
+ * @property {string} [desc] Sa description : avec son nom, le `title` du segment.
  */
 
 /**
@@ -265,7 +268,7 @@ export const setRow = (env, set, at, size = 32) =>
 
 /**
  * La classe de couleur qu'un segment porte, telle que le site la nomme
- * (`text-buff`, `text-item-legendary`…) : `tabs/gear.css` la traduit en jeton.
+ * (`text-buff`, `text-item-legendary`…) : `pv.css` la traduit en jeton.
  * Tout autre texte n'entre pas dans un attribut `class`.
  * @param {string | undefined} cls
  */
@@ -280,13 +283,43 @@ const colorClass = (cls) => (cls && /^text-[a-z0-9-]+$/.test(cls) ? cls : '');
 const srcOf = (env, src) => env.esc(src.startsWith('/') ? `${env.imgBase}${src}` : src);
 
 /**
- * Une description du jeu en `title` : sans ses balises de couleur, ses `\n`
- * littéraux en sauts de ligne.
+ * Ce que le tooltip du site dit d'un segment, en `title` : « nom — description »,
+ * la description du jeu sans ses balises de couleur, ses `\n` littéraux en sauts
+ * de ligne. Sans description, rien : le nom est déjà à côté.
  * @param {ViewEnv} env
+ * @param {string | undefined} name
  * @param {string | undefined} desc
  */
-const titleOf = (env, desc) =>
-  desc ? ` title="${env.esc(desc.replace(/<\/?color[^>]*>/gi, '').replace(/\\n/g, '\n'))}"` : '';
+const titleOf = (env, name, desc) =>
+  desc
+    ? ` title="${env.esc(`${name ? `${name} — ` : ''}${desc.replace(/<\/?color[^>]*>/gi, '').replace(/\\n/g, '\n')}`)}"`
+    : '';
+
+/**
+ * La tuile d'un effet, comme le site la peint (`EffectIconTile`) : fond noir
+ * arrondi, l'icône en MASQUE de luminance teinté de sa nature, sur trois
+ * couches (`TintedIcon`) — sauf les « Interruption », qui gardent leurs
+ * couleurs. Sans icône, un cadre vide. Décorative : le nom est à côté. UNE
+ * construction pour l'aperçu des textes, les chips de la « Fiche perso » et
+ * l'onglet « Effets » ; les règles (`.pv-fx`) et les teintes sont dans `pv.css`.
+ *
+ * @param {ViewEnv} env
+ * @param {string | undefined} icon Son sprite (`images/ui/effect`).
+ * @param {boolean | undefined} isDebuff
+ * @param {number} [px] Son côté, quand ce n'est pas celui de l'aperçu (18 px, `pv.css`).
+ */
+export function effectTile(env, icon, isDebuff, px) {
+  const size = px ? `width:${px}px;height:${px}px` : '';
+  if (!icon)
+    return `<span class="pv-fx none"${size ? ` style="${size}"` : ''} aria-hidden="true"></span>`;
+  // Les caractères qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
+  const url = env.esc(
+    `${env.imgBase}/images/ui/effect/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`,
+  );
+  if (icon.includes('Interruption'))
+    return `<span class="pv-fx"${size ? ` style="${size}"` : ''} aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
+  return `<span class="pv-fx ${isDebuff ? 'debuff' : 'buff'}" style="${size ? `${size};` : ''}--x-src:url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
+}
 
 /**
  * Un texte du jeu : `<color=#hex>…</color>` en span coloré (`renderGameColors`
@@ -309,8 +342,11 @@ export function gameText(env, text) {
 /**
  * Une note en segments, telle que le site la rend (`InlinePreview.tsx`) : le
  * texte, les sauts de ligne, et chaque balise résolue — icône et libellé dans
- * la couleur du site. Une balise que le site ne résout pas (`unknown`) sort en
- * ROUGE : c'est l'alerte de syntaxe.
+ * la couleur du site, un effet sur sa tuile teintée (`effectTile`), un item sur
+ * son cadre. L'écart du site est celui d'`InlineIcon` (2 px) ; `wide`, celui
+ * d'`ItemInline` et de `StatInline` (4 px). Le tooltip du site passe en
+ * `title` ; ses liens ne sont pas posés. Une balise que le site ne résout pas
+ * (`unknown`) sort en ROUGE : c'est l'alerte de syntaxe.
  * @param {ViewEnv} env
  * @param {readonly PreviewSegment[]} segments
  */
@@ -321,9 +357,10 @@ export function noteHtml(env, segments) {
   /**
    * @param {PreviewSegment} seg
    * @param {string} body
+   * @param {boolean} [wide]
    */
-  const chip = (seg, body) =>
-    `<span class="${['pv-seg', colorClass(seg.color)].filter(Boolean).join(' ')}"${titleOf(env, seg.desc)}>${body}</span>`;
+  const chip = (seg, body, wide) =>
+    `<span class="${['pv-seg', wide ? 'wide' : '', colorClass(seg.color)].filter(Boolean).join(' ')}"${titleOf(env, seg.label ?? seg.name, seg.desc)}>${body}</span>`;
   /**
    * @param {string | undefined} text
    * @param {boolean} [underline]
@@ -343,11 +380,7 @@ export function noteHtml(env, segments) {
         case 'effect':
           return chip(
             seg,
-            `${
-              seg.icon
-                ? `<span class="pv-fx ${seg.isDebuff ? 'debuff' : 'buff'}">${img(env, '', `ui/effect/${seg.icon}`)}</span>`
-                : ''
-            }${word(seg.label, true)}`,
+            `${seg.icon ? effectTile(env, seg.icon, seg.isDebuff) : ''}${word(seg.label, true)}`,
           );
         case 'item':
           return chip(
@@ -355,11 +388,13 @@ export function noteHtml(env, segments) {
             `<span class="pv-it">${img(env, '', `ui/bg/TI_Slot_${SLOT_FRAME[seg.grade ?? ''] ?? 'Normal'}`)}${
               seg.iconSrc ? `<img src="${srcOf(env, seg.iconSrc)}" alt="" />` : ''
             }</span>${word(seg.name, true)}`,
+            true,
           );
         case 'stat':
           return chip(
             { ...seg, color: 'text-stat' },
             `${seg.iconSrc ? ico(seg.iconSrc) : ''}${word(seg.name)}`,
+            true,
           );
         // `unknown`, et tout segment que ce module ne connaît pas encore.
         default:

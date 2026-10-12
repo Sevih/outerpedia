@@ -11,7 +11,7 @@
 // dans son hôte, avec SA savebar et SON commit ; la fiche ne fait que compter
 // ses builds en attente avant de quitter l'onglet ou de changer de perso.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
-import { gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
+import { effectTile, gameText, itemName, itemTile, noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { gearChanges, gearReset, mountGear } from './gear.js';
 
@@ -714,22 +714,8 @@ const synHtml = () =>
 // ------------------------------------------------------ le sous-onglet « Skills »
 /** Une image que le serveur a résolue : relative (`/images/…`), elle passe sous `imgBase`. */
 const srcAt = (path) => esc(path.startsWith('/') ? `${state.imgBase}${path}` : path);
-// Les caractères qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
-const fxUrl = (icon) =>
-  `${state.imgBase}/${sheet.kit.sprite}/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`;
-
-/**
- * La tuile d'un effet, comme le site la peint (`EffectIconTile`) et comme
- * l'onglet Effets : fond noir, l'icône en MASQUE teinté de sa nature — sauf les
- * « Interruption », qui gardent leurs couleurs. Décorative : le nom est à côté.
- */
-function fxTile(icon, isDebuff) {
-  if (!icon) return '<span class="c-fx none" aria-hidden="true"></span>';
-  const url = esc(fxUrl(icon));
-  if (icon.includes('Interruption'))
-    return `<span class="c-fx" aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
-  return `<span class="c-fx ${isDebuff ? 'debuff' : 'buff'}" style="--c-src: url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
-}
+/** La tuile d'un effet, celle du site (`effectTile` de `gear-view.mjs`) : 22 px sur une chip, 28 dans le picker. */
+const fxTile = (icon, isDebuff, px = 22) => effectTile(viewEnv(), icon, isDebuff, px);
 
 /** Un effet ajouté à une carte, tel que le catalogue le connaît ; sinon sa ref. */
 function addedChip(ref, catalog = sheet.kit.catalog) {
@@ -861,7 +847,7 @@ function pickFx({ title, catalog, have, opener, onPick }) {
     roster: options,
     imgBase: state.imgBase,
     rows: true,
-    tile: (o) => `${fxTile(o.icon, o.isDebuff)}<span>${esc(o.name)}</span>`,
+    tile: (o) => `${fxTile(o.icon, o.isDebuff, 28)}<span>${esc(o.name)}</span>`,
     hint: (o) => `${o.name} — ${o.id}`,
     placeholder: 'Chercher un effet…',
     none: 'Aucun effet ne correspond.',

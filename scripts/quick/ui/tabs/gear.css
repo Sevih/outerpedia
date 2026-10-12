@@ -4,9 +4,9 @@
    LE picker, une modale pour les pièces, les talismans et les sets. Les
    composants viennent de `quick.css` ; ce qui suit est propre au sous-onglet
    (cf. `STYLE.md`). Chargée par `character.css`, qui porte ce que les deux ont
-   en commun : les jetons et les classes de couleur du site, les segments de
-   note (`.pv-seg`, `.pv-fx`…), `summary`. Bleu accent = modifié ou choisi,
-   rouge = refusé, ambre = preset. */
+   en commun (`summary`) ; les jetons et les classes de couleur du site, les
+   segments de note (`.pv-seg`, `.pv-fx`…) sont dans `pv.css`. Bleu accent =
+   modifié ou choisi, rouge = refusé, ambre = preset. */
 
 /* L'hôte : la pile d'une section (`main > section` de `quick.css`). */
 #c-gear {
@@ -727,7 +727,7 @@
    (`GearRecoSection.tsx`), bâti par `previewHtml` de `gear-view.mjs` — classes
    `.pv-*`. Les couleurs sont celles du site : ses jetons et ses classes de
    couleur (`text-buff`, `text-item-legendary`…), que les segments de note
-   portent telles quelles — posés par `character.css` pour toute la fiche. */
+   portent telles quelles — posés par `pv.css` pour toutes les sections. */
 /* La langue de l'aperçu, dans la savebar : une pour toutes les cartes. */
 #c-gear .g-pv-lang {
   display: flex;

@@ -692,7 +692,7 @@ Blocs : une .card.ev-block par bloc, dans l'ordre : card-head badge upcoming du 
      prose, callout : le TEXTE (textarea) · list : une .ev-entry par puce (badge « puce 1 », ↑ ↓ ✕, le TEXTE) puis [＋ puce] · sections : par sous-section le sous-titre (ligne) et le texte, [＋ sous-section]
      timeline : « Rend les jalons de l'onglet Jalons — rien à saisir ici. » · cta : libellé (ligne), .form [URL 42ch], note (ligne) · videos : par vidéo .form [Plateforme ▾] [Identifiant 22ch] [Titre 30ch] [Auteur 22ch] ↑ ↓ ✕, puis « Mise en avant » (ligne), [＋ vidéo] · image : .form [Chemin R2 42ch] + aperçu, alt et légende (lignes)
    .empty « Aucun bloc : au moins un est requis. » · .ev-foot « ＋ bloc » [＋ Paragraphe] [＋ Liste à puces] … [＋ Image] (un bouton par genre du serveur)   puis [Traduire]
-le TEXTE (.ev-text, celui des Guides) : lbl du champ · l'anglais (input ou textarea qui grandit) · .ev-pv l'aperçu sur le fond de la page (les segments de `noteHtml`, les liens `[x](url)` en lien accent) · p.ev-err le refus situé · details ▸ [Traductions (5)] badge warn « à retraduire » lbl « 1 / 5 » → .ev-trs cinq champs, trois par rangée, placeholder = l'anglais
+le TEXTE (.ev-text, celui des Guides) : lbl du champ · l'anglais (input ou textarea qui grandit) · .ev-pv l'aperçu sur le fond de la page (les segments de `noteHtml` et `pv.css`, ceux de la Fiche perso ; les liens `[x](url)` en lien accent) · p.ev-err le refus situé · details ▸ [Traductions (5)] badge warn « à retraduire » lbl « 1 / 5 » → .ev-trs cinq champs, trois par rangée, placeholder = l'anglais
 le hash : `#events` la liste · `#events/<slug>` un événement (les deux formes que la page écrit) · `#events/<slug>/<onglet>` (meta, phases, blocks) l'ouvre sur ce sous-onglet, pour un lien ou le banc
 ```
 
@@ -853,7 +853,7 @@ du rendu :
      .c-lines : une ligne (.c-line, filet à gauche — accent quand elle est modifiée) = son texte, et ✕ (.btn.icon) à droite
         le TEXTE d'une ligne (.c-text, le même dans Synergies) :
           [textarea EN, 2 lignes, qui grandit avec le texte]   (bord danger quand la ligne est refusée)
-          .c-pv  l'aperçu : les segments que le site rendra (icône + libellé dans la couleur du site), un tag inconnu en ROUGE ; atténué pendant que la requête court ; absent tant que le texte est vide
+          .c-pv  l'aperçu : les segments que le site rendra (icône + libellé dans la couleur du site, un effet sur sa tuile noire teintée, un item sur son cadre), un tag inconnu en ROUGE ; atténué pendant que la requête court ; absent tant que le texte est vide
           .c-err le refus de la ligne, en rouge
           <details> [Traductions (5)] · badge warn « à retraduire » · « 3 / 5 »   — replié ; déplié : cinq textarea fr · es · jp · kr · zh, trois par rangée, placeholder = l'anglais
      [＋ pro] / [＋ con] (.btn.ghost.sm, en pied de carte) ; « Aucun pro. » / « Aucun con. »
@@ -867,7 +867,7 @@ du rendu :
   .card   card-head : icône du skill 36 px (le duo n'en a pas) · nom · id · type (chasse fixe) · badge edit « modifié » · badge ko « refusé »
      .c-desc   la description telle que le jeu l'écrit, en anglais : ses couleurs, ses sauts de ligne (`gameText` de `gear-view.mjs`)
      .c-chips  les chips d'effets, puis [＋ effet] (.btn.ghost.sm)
-        une chip = la `.chip` de la charte : tuile de l'effet 22 px (.c-fx : fond noir, l'icône en masque teinté buff ou debuff ; cadre vide sans icône) · nom · ✕ (`title` de la chip = sa ref)
+        une chip = la `.chip` de la charte : tuile de l'effet 22 px (.pv-fx de `pv.css` : fond noir, l'icône en masque teinté buff ou debuff ; cadre vide sans icône) · nom · ✕ (`title` de la chip = sa ref)
         ✕ sur une chip du kit la MASQUE : pointillés, atténuée, nom barré, et [rétablir] à la place de ✕
         un effet AJOUTÉ : badge edit « ajoutée », son ✕ le retire
         bord accent (.dirty) : la chip n'est pas dans l'état que le disque porte
@@ -921,7 +921,26 @@ lignes du sous-onglet montré (`POST /api/character/preview` →
 `renderInlineBatch`, l'aperçu de l'admin), 400 ms après la dernière frappe,
 dans la langue de la savebar — une langue qu'une ligne ne porte pas se replie
 sur l'anglais, comme au rendu ; les segments sont rendus par `noteHtml` de
-`gear-view.mjs`. « à retraduire » : l'anglais a bougé depuis le chargement (ou
+`gear-view.mjs`, COMME LE SITE (`InlinePreview.tsx`), famille par famille :
+une icône (18 px) et son libellé dans la classe de couleur du site, à 2 px
+(`InlineIcon`) ; un effet sur LA TUILE du site (`effectTile`, `.pv-fx` — fond
+noir arrondi, l'icône en masque de luminance teinté de sa nature sur trois
+couches, `--buff-tint` / `--debuff-tint` ; une icône « Interruption » garde
+ses couleurs), son nom souligné ; un item sur le cadre de son grade
+(`SLOT_FRAME`, `singularity` compris), une stat avec son icône, à 4 px
+(`.pv-seg.wide`). Le tooltip du site passe en `title` — « nom — description »,
+sans les balises de couleur du jeu, et rien sans description — et ses liens ne
+sont pas posés. Les règles sont dans UNE feuille, `ui/pv.css`, liée par
+`index.html` avant les onglets : les jetons du site qui manquent à `quick.css`
+(`--buff`, `--debuff`, `--buff-tint`, `--debuff-tint`, `--stat`,
+`--highlight`, `--equipment`, recopiés de `globals.css`), ses classes de
+couleur (`text-buff`, `text-item-legendary`, `text-earth`…), les segments
+(`.pv-*`) et la tuile — pour la fiche, la note d'un build de Gear reco, Guides
+et Événements, qui n'en gardent que leur conteneur.
+`effectTile(env, icon, isDebuff, px)` est aussi la tuile des chips d'effets
+de la fiche (22 px, 28
+dans le picker) et de l'onglet Effets (28 et 48 px) : le module pose le côté
+quand ce n'est pas les 18 px d'un texte. « à retraduire » : l'anglais a bougé depuis le chargement (ou
 depuis le dernier « Traduire ») et des traductions sont en place. « Traduire »
 envoie les textes anglais du sous-onglet à `POST /api/translate` et ÉCRASE les
 cinq autres langues, comme dans l'admin ; ce qu'il vient de traduire se
@@ -982,13 +1001,10 @@ consorts (l'en-tête de perso), `.c-tabs`, `.c-cols`, `.c-card`,
 `.c-body`, `.c-cell`, `.c-rkico`, `.c-pt` (la cellule de Rangs, recopiée),
 `.c-tiers`, `.c-err`, `.c-tags`, `.c-derived`, `.c-videos` ; pour les textes :
 `.c-pv-lang`, `.c-seg`, `.c-lines`, `.c-line`, `.c-text`, `.c-pv`, `.c-trs`,
-`.c-ko`, `.c-syn`, `.c-group`, `.c-heroes`, `.c-hero` — et les jetons et
-classes de couleur des segments (`.pv-*`, `text-buff`…), posés sur
-`#tab-character` pour la fiche ET pour Gear reco (`gear.css` ne les redéfinit
-pas) ; pour Skills : `.c-skill`,
-`.c-skico`, `.c-skid`, `.c-desc`, `.c-chips`, `.c-chip`, `.c-chn`, et `.c-fx`,
-la tuile d'effet de l'onglet Effets (`.x-ico`), recopiée avec ses deux
-teintes — elle vaut aussi sous `.hp-modal`, pour le picker d'effets ; pour EE :
+`.c-ko`, `.c-syn`, `.c-group`, `.c-heroes`, `.c-hero` (les segments, leurs
+couleurs et la tuile d'effet sont dans `pv.css`, pour la fiche ET pour Gear
+reco) ; pour Skills : `.c-skill`,
+`.c-skico`, `.c-skid`, `.c-desc`, `.c-chips`, `.c-chip`, `.c-chn` ; pour EE :
 `.c-ee`, `.c-een`, `.c-passive`, `.c-memo`, et la tuile d'item `.gv-*` de
 Gear reco recopiée sous `.c-ee` (`gear.css` ne la règle que sous `#c-gear`).
 
@@ -1023,7 +1039,7 @@ le picker de pièces (UNE modale pour les armes ou les amulettes, les talismans,
    clavier : Entrée dans la recherche = « Valider » (Ctrl + Entrée aussi) ; Entrée ou Espace sur une tuile la coche ou la décoche ; Échap, la croix, le voile ferment sans rien poser ; Tab reste dans le panneau
    en bas de la carte, sur le fond de la page : ▾ APERÇU (un bouton, `aria-expanded` ; ouvert d'office, rien n'est retenu) puis le build COMME LA FICHE PERSO le montrera — rangées à étiquette de 96 px (Weapon | Accessory | Talisman : tuile 44 px, nom au grade, puces de stat principale ; Armor Set : une ligne par combo, tuiles 32 px, puis la légende des bonus ; Substat Priority en barre, comme `SubstatPrioBar` — par stat, icône 14 px et abréviation, puis six segments de 6 px, pleins en jaune `#facc15` jusqu'à son rang, le reste en gris `#3f3f46`, 336 px au plus ; Notes : icône + libellé coloré par balise, une balise que le site ne résout pas en ROUGE, une pièce inconnue aussi) ; rien n'y est cliquable, une description passe en `title`
 le hash : `#character/<id>/gear` (écrit par la fiche) ; pour un lien ou le banc, sans que la page l'écrive, `#character/<id>/gear/build/<n>` ouvre sur le n-ième build (à partir de 1, borné) et `…/picker/<slot>` y ouvre en plus un picker (`weapons` / `amulets` / `talismans` / `sets` du build montré) — les deux se combinent : `#character/<id>/gear/build/2/picker/weapons`. Les anciens liens de la section sont REDIRIGÉS par `character.js` : `#gear/<id>…` vaut `#character/<id>/gear…`, `#gear` seul ouvre la fiche sur ce sous-onglet
-l'aperçu (`previewHtml` de `ui/gear-view.mjs`, pur et testé ; classes `.pv-*`) rend ce que répond `POST /api/gear-reco/preview` — les builds de la page résolus par le résolveur du site, dans la langue du groupe segmenté de la savebar (une pour toutes les cartes, `en` d'office). UNE requête pour tous les builds du perso à chaque changement (400 ms après la dernière frappe), gardée par build : changer d'onglet redessine depuis elle, sans requête ; pendant qu'elle court le rendu précédent reste, atténué (`.busy`) ; un refus s'écrit en rouge DANS le bloc — la seule exception à « le journal est le seul retour », l'aperçu se relançant à chaque touche. Les couleurs sont les classes du site (`text-buff`, `text-item-legendary`…) traduites en jetons ; ceux qui manquaient à `quick.css` (`--buff`, `--debuff`, `--buff-bg`, `--debuff-bg`, `--stat`, `--highlight`, `--equipment`) sont recopiés de `globals.css` dans `tabs/character.css`, portés par `#tab-character` — une fois pour la fiche et pour ce sous-onglet, comme les segments de note (`.pv-seg`, `.pv-fx`…)
+l'aperçu (`previewHtml` de `ui/gear-view.mjs`, pur et testé ; classes `.pv-*`) rend ce que répond `POST /api/gear-reco/preview` — les builds de la page résolus par le résolveur du site, dans la langue du groupe segmenté de la savebar (une pour toutes les cartes, `en` d'office). UNE requête pour tous les builds du perso à chaque changement (400 ms après la dernière frappe), gardée par build : changer d'onglet redessine depuis elle, sans requête ; pendant qu'elle court le rendu précédent reste, atténué (`.busy`) ; un refus s'écrit en rouge DANS le bloc — la seule exception à « le journal est le seul retour », l'aperçu se relançant à chaque touche. Les couleurs sont les classes du site (`text-buff`, `text-item-legendary`…) traduites en jetons ; ceux qui manquaient à `quick.css` (`--buff`, `--debuff`, `--buff-tint`, `--debuff-tint`, `--stat`, `--highlight`, `--equipment`) sont recopiés de `globals.css` dans `ui/pv.css`, une fois pour toutes les sections, avec les segments de note (`.pv-seg`, `.pv-fx`…) ; `tabs/gear.css` ne garde que la mise en page du build
 la tuile d'item (`ui/gear-view.mjs`, pur et testé ; classes `.gv-*` de `tabs/gear.css`) est celle de /equipment (`EquipmentIcon.tsx`) : cadre de rareté `images/ui/bg/TI_Slot_<Grade>.webp`, icône à 6 % de marge, étoiles en bas (18 % de la tuile, chevauchement 30 %), icône d'effet en haut à droite (26 %), icône de classe dessous (24 %) si la pièce n'a qu'une classe ; le nom prend le jeton `--item-*` de son grade (`GRADE_TOKEN`)
 .card.ko (un build refusé) : bord danger, badge « stat principale non permise », le message sous la pièce
 ```
@@ -1073,10 +1089,11 @@ RECHERCHE est au serveur : `GET /api/effects/search?q=` (`effectsSearch`)
 joue la règle de `src/lib/admin/effect-search.ts` et rend, par effet qui
 répond, le champ qui a répondu — 200 ms après la dernière frappe, seule la
 dernière demande se dessine, un champ vidé rend tout aussitôt. Les filtres,
-eux, sont à la page (ils lisent la ligne). La tuile (`.x-ico`) est celle du
-site (`EffectIconTile`) : fond noir, l'icône en masque teinté de sa nature
-(`--buff-tint`, `--debuff-tint`, recopiés de `globals.css` et portés par
-`#tab-effects`), sauf les icônes « Interruption », qui gardent leurs couleurs.
+eux, sont à la page (ils lisent la ligne). La tuile est celle du site
+(`EffectIconTile`), bâtie par `effectTile` de `gear-view.mjs` et réglée par
+`pv.css` (`.pv-fx`, 28 px dans le catalogue, 48 sur la fiche) : fond noir,
+l'icône en masque teinté de sa nature (`--buff-tint`, `--debuff-tint`), sauf
+les icônes « Interruption », qui gardent leurs couleurs.
 Une frappe ne redessine pas la fiche (le champ garde le curseur) : son titre,
 sa tuile, les familles du côté effectif, le point de sa ligne, ses badges et
 la savebar suivent ; la LIGNE du catalogue (nom, badges) ne suit qu'après
@@ -1091,7 +1108,7 @@ GARDE sa saisie, marqué d'un point rouge — sauf si le disque avait changé
 retire les créations. Quitter l'onglet avec des effets en attente demande
 confirmation (`canLeave`). Propres à l'onglet, dans `tabs/effects.css` :
 `.x-cols`, `.x-list`, `.x-heads`, `.x-rows`, `.x-pair`, `.x-sep`, `.x-row`,
-`.x-dim`, `.x-why`, `.x-nat`, `.x-ico`, `.x-sheet`, `.x-ext`, `.x-key`,
+`.x-dim`, `.x-why`, `.x-nat`, `.x-sheet`, `.x-ext`, `.x-key`,
 `.x-langs`.
 
 ### Monstres (`wide`, fait — C12)
@@ -1165,8 +1182,8 @@ site n'a pas (un monstre hors de ses pages) laisse son cadre vide. Propres à
 l'onglet, dans `tabs/monsters.css` : `.m-char`, `.m-who`, `.m-face`, `.m-id`,
 `.m-traits`, `.m-mono`, `.m-guides`, `.m-link`, `.m-cols`, `.m-wide`,
 `.m-card`, `.m-body`, `.m-err`, `.m-skico`, `.m-skid`, `.m-desc`, `.m-chips`,
-`.m-chip`, `.m-chn`, `.m-move`, et `.m-fx`, la tuile d'effet de la Fiche
-perso (`.c-fx`), recopiée — elle vaut aussi sous `.hp-modal`, pour le picker
+`.m-chip`, `.m-chn`, `.m-move`, et `.m-fx`, la tuile d'effet de `pv.css`
+(`.pv-fx`), recopiée — elle vaut aussi sous `.hp-modal`, pour le picker
 d'effets ; pour le picker de monstres, sous `.hp-modal` : `.m-pk`, `.m-pico`,
 `.m-pn`, `.m-pname`, `.m-pwhere`, et l'élargissement du panneau
 (`:has(.m-pk)`).
@@ -1352,8 +1369,8 @@ l'onglet, dans `tabs/guides.css` : `.gd-cat`,
 `.gd-id`, `.gd-traits`, `.gd-pv-lang`, `.gd-seg` (le segmenté, recopié),
 `.gd-tabs`, `.gd-versions`, `.gd-vtabs`, `.gd-addv`, `.gd-note`, `.gd-stack`,
 `.gd-cols`, `.gd-wide`, `.gd-card`, `.gd-body`, `.gd-foot`, `.gd-err`,
-`.gd-ko`, `.gd-text`, `.gd-trs`, `.gd-pv` (et les jetons `.pv-*` recopiés
-sous `#tab-guides`), `.gd-battle`, `.gd-dungeons`, `.gd-pin`, `.gd-pn`,
+`.gd-ko`, `.gd-text`, `.gd-trs`, `.gd-pv` (ses segments `.pv-*` sont dans
+`pv.css`), `.gd-battle`, `.gd-dungeons`, `.gd-pin`, `.gd-pn`,
 `.gd-heroes`, `.gd-hero`, `.gd-noface`, `.gd-slots`, `.gd-slot`, `.gd-group`,
 `.gd-videos`, `.gd-vt` ; pour les pickers en lignes, sous `.hp-modal` :
 `.gd-pico`, `.gd-pk`, `.gd-pname`, `.gd-pid` ; pour les guides généraux (F19) :

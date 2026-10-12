@@ -2,6 +2,7 @@
 // et l'entrée curée de chacun — nom, description, icône, nature, famille, clés,
 // masquage, note — ou la création d'un effet sans texte en jeu.
 import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib.js';
+import { effectTile } from '../gear-view.mjs';
 
 let fx = {
   catalog: { pairs: [], orphanBuffs: [], orphanDebuffs: [] },
@@ -9,7 +10,6 @@ let fx = {
   families: { buff: [], debuff: [] },
   origins: {},
   langs: [],
-  sprite: 'images/ui/effect',
   icons: [],
 };
 let byId = new Map();
@@ -32,23 +32,9 @@ const plural = (n, word) => `${n} ${word}${n > 1 ? 's' : ''}`;
 const sideOf = (isDebuff) => (isDebuff ? 'debuff' : 'buff');
 
 // ------------------------------------------------------ l'icône
-// Les caractères qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
-const iconUrl = (icon) =>
-  `${state.imgBase}/${fx.sprite}/${encodeURIComponent(icon).replace(/['()]/g, (c) => `%${c.charCodeAt(0).toString(16)}`)}.webp`;
-
-/**
- * La tuile d'un effet, comme le site la peint (`EffectIconTile`) : fond noir,
- * l'icône en MASQUE teinté de sa nature — sauf les « Interruption », qui
- * gardent leurs couleurs. Décorative : le nom est à côté.
- */
-function tile(icon, isDebuff, big) {
-  const cls = `x-ico${big ? ' lg' : ''}`;
-  if (!icon) return `<span class="${cls} none" aria-hidden="true"></span>`;
-  const url = esc(iconUrl(icon));
-  if (icon.includes('Interruption'))
-    return `<span class="${cls}" aria-hidden="true"><img src="${url}" alt="" loading="lazy" /></span>`;
-  return `<span class="${cls} ${sideOf(isDebuff)}" style="--x-src: url('${url}')" aria-hidden="true"><i></i><i></i><i></i></span>`;
-}
+/** La tuile d'un effet, celle du site (`effectTile` de `gear-view.mjs`) : 28 px dans le catalogue, 48 sur la fiche. */
+const tile = (icon, isDebuff, big) =>
+  effectTile({ imgBase: state.imgBase, esc }, icon, isDebuff, big ? 48 : 28);
 
 // ------------------------------------------------------ le modèle
 const rowOf = (id) => byId.get(id) ?? drafts.get(id);

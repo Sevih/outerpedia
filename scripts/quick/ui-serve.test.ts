@@ -147,6 +147,46 @@ describe('assemblePage — la coquille et ses onglets', () => {
     expect(selectors.filter((sel) => !sel.startsWith('#c-gear'))).toEqual([]);
   });
 
+  it('l’aperçu des textes a UNE feuille, `pv.css`, liée avant les onglets : ses jetons sont ceux du site, aucun onglet ne les recopie', () => {
+    const page = shell();
+    const link = '<link rel="stylesheet" href="/ui/pv.css" />';
+    expect(page).toContain(link);
+    expect(page.indexOf(link)).toBeLessThan(page.indexOf('href="/ui/tabs/'));
+    // Les jetons qu'elle pose : les valeurs de `globals.css`, sous les mêmes noms.
+    const pv = readFileSync(resolve(UI, 'pv.css'), 'utf8');
+    const site = readFileSync(resolve(import.meta.dirname, '../../src/app/globals.css'), 'utf8');
+    const value = (css: string, token: string) =>
+      new RegExp(`^\\s*${token}: (#[0-9a-f]{6});`, 'm').exec(css)?.[1];
+    const tokens = [...pv.matchAll(/^\s*(--[a-z-]+): #/gm)].map((m) => m[1]);
+    expect(tokens).toEqual([
+      '--buff',
+      '--debuff',
+      '--buff-tint',
+      '--debuff-tint',
+      '--stat',
+      '--highlight',
+      '--equipment',
+    ]);
+    for (const token of tokens) expect(value(pv, token), token).toBe(value(site, token));
+    expect(value(site, '--buff-tint')).toBe('#4cc2ff');
+    // La tuile d'effet : le fond noir, les trois couches en masque de luminance.
+    expect(pv).toMatch(/\.pv-fx \{[^}]*background: #000;/);
+    expect(pv).toMatch(/\.pv-fx i \{[^}]*mask: var\(--x-src\)[^}]*mask-mode: luminance;/);
+    // Les écarts du site : `gap-0.5` (icône, effet), `gap-1` (item, stat).
+    expect(pv).toMatch(/\.pv-seg \{[^}]*gap: 2px;/);
+    expect(pv).toMatch(/\.pv-seg\.wide \{\s*gap: 4px;/);
+    // Les onglets n'en gardent que leur conteneur : ni segment, ni classe de couleur, ni jeton.
+    for (const tab of ['character', 'guides', 'events', 'gear']) {
+      const css = readFileSync(resolve(UI, 'tabs', `${tab}.css`), 'utf8').replace(
+        /\/\*[\s\S]*?\*\//g,
+        '',
+      );
+      expect(css, tab).not.toMatch(/\.pv-(seg|u|ico|it|unknown)\b|\.text-[a-z]/);
+      expect(css, tab).not.toMatch(/--(buff|debuff|stat|highlight|equipment)(-tint|-bg)?:/);
+      expect(css, tab).not.toMatch(/\.(c-fx|x-ico)\b/);
+    }
+  });
+
   it('aucun `id` en double dans la page : deux onglets peuvent partager une lettre, pas un id', () => {
     // « Fiche perso » et Codes promo préfixent tous deux en `c-` : un id repris
     // et `$('c-list')` rendrait l'élément de l'autre onglet, sans erreur.
@@ -1256,7 +1296,7 @@ describe('Effets — la page, sur le vrai markup', () => {
           meta: b?.querySelector('.x-meta')?.textContent,
           why: b?.querySelector('.x-why')?.textContent ?? '',
           dot: b?.querySelector('.pt')?.className ?? '',
-          icon: b?.querySelector('.x-ico')?.className,
+          icon: b?.querySelector('.pv-fx')?.className,
         };
       },
       open: (id: string) =>
@@ -1323,7 +1363,7 @@ describe('Effets — la page, sur le vrai markup', () => {
       meta: '15 · statut',
       why: '',
       dot: '',
-      icon: 'x-ico buff',
+      icon: 'pv-fx buff',
     });
     // Une création curée : son origine, sa famille ; pas de « curé » en double.
     expect(page.line('UNCOUNTERABLE').meta).toBe('UNCOUNTERABLE · création · Utility');
@@ -1331,12 +1371,12 @@ describe('Effets — la page, sur le vrai markup', () => {
     expect(page.line('1')).toMatchObject({
       badges: ['debuff', 'masqué'],
       meta: '1 · statut · curé',
-      icon: 'x-ico debuff',
+      icon: 'pv-fx debuff',
     });
     expect(page.line('900')).toMatchObject({
       badges: ['debuff', 'sans description', 'sans icône'],
       meta: '900 · mécanique',
-      icon: 'x-ico none',
+      icon: 'pv-fx none',
     });
     expect(page.all('#x-rows .badge.warn').map((b) => b.textContent)).toEqual(['sans description']);
   });
@@ -1345,14 +1385,15 @@ describe('Effets — la page, sur le vrai markup', () => {
     const page = await effects({
       edit: (c) => (c.pairs[0].debuff.icon = 'IG_Buff_Stat_Speed_Interruption_D'),
     });
-    const tinted = page.all('#x-rows .x-row[data-id="15"] .x-ico')[0];
+    const tinted = page.all('#x-rows .x-row[data-id="15"] .pv-fx')[0];
     expect(tinted.getAttribute('style')).toBe(
-      "--x-src: url('https://img.test/images/ui/effect/IG_15.webp')",
+      "width:28px;height:28px;--x-src:url('https://img.test/images/ui/effect/IG_15.webp')",
     );
     expect(tinted.querySelectorAll('i')).toHaveLength(3);
     expect(tinted.getAttribute('aria-hidden')).toBe('true');
-    const native = page.all('#x-rows .x-row[data-id="26"] .x-ico')[0];
-    expect(native.className).toBe('x-ico');
+    const native = page.all('#x-rows .x-row[data-id="26"] .pv-fx')[0];
+    expect(native.className).toBe('pv-fx');
+    expect(native.getAttribute('style')).toBe('width:28px;height:28px');
     expect(native.querySelectorAll('i')).toHaveLength(0);
     expect(native.querySelector('img')?.getAttribute('src')).toBe(
       'https://img.test/images/ui/effect/IG_Buff_Stat_Speed_Interruption_D.webp',
@@ -1540,7 +1581,7 @@ describe('Effets — la page, sur le vrai markup', () => {
       'Utility Debuffs',
     ]);
     expect(page.el('x-tag-label').textContent).toBe('Famille éditoriale (debuff)');
-    expect(page.all('#x-preview .x-ico')[0].className).toBe('x-ico lg debuff');
+    expect(page.all('#x-preview .pv-fx')[0].className).toBe('pv-fx debuff');
     expect(page.el('x-badges').textContent).toBe('debuff' + 'modifié');
     // Une famille de l'AUTRE côté reste proposée : elle ne s'efface pas en douce.
     page.pick('x-tag', 'cc');
@@ -1555,8 +1596,8 @@ describe('Effets — la page, sur le vrai markup', () => {
 
     // L'icône tapée est celle de la tuile de la fiche.
     page.type(page.field('icon'), "IG_It's(new)");
-    expect(page.all('#x-preview .x-ico')[0].getAttribute('style')).toBe(
-      "--x-src: url('https://img.test/images/ui/effect/IG_It%27s%28new%29.webp')",
+    expect(page.all('#x-preview .pv-fx')[0].getAttribute('style')).toBe(
+      "width:48px;height:48px;--x-src:url('https://img.test/images/ui/effect/IG_It%27s%28new%29.webp')",
     );
 
     // Revenu aux valeurs du disque : plus rien en attente.
@@ -3962,13 +4003,13 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     ]);
     expect(chips(chain)).toEqual([]);
     // La tuile du site : l'icône en masque teinté de sa nature ; sans icône, un cadre vide.
-    const tile = (ref: string) => chip(second, ref).querySelector('.c-fx')!;
-    expect(tile('SYS_BUFF_REMOVE_BUFF').className).toBe('c-fx debuff');
-    expect(tile('SYS_BUFF_REMOVE_BUFF').getAttribute('style')).toContain(
-      "url('https://img.test/images/ui/effect/IG_Buff_Remove.webp')",
+    const tile = (ref: string) => chip(second, ref).querySelector('.pv-fx')!;
+    expect(tile('SYS_BUFF_REMOVE_BUFF').className).toBe('pv-fx debuff');
+    expect(tile('SYS_BUFF_REMOVE_BUFF').getAttribute('style')).toBe(
+      "width:22px;height:22px;--x-src:url('https://img.test/images/ui/effect/IG_Buff_Remove.webp')",
     );
-    expect(tile('SYS_NO_ICON').className).toBe('c-fx none');
-    expect(chip(first, '11').querySelector('.c-fx')?.className).toBe('c-fx buff');
+    expect(tile('SYS_NO_ICON').className).toBe('pv-fx none');
+    expect(chip(first, '11').querySelector('.pv-fx')?.className).toBe('pv-fx buff');
     expect(chip(first, '11').title).toBe('11');
     expect(chip(first, '11').querySelector('button')?.getAttribute('aria-label')).toBe(
       'Masquer Increased Crit Hit Chance',
@@ -4071,8 +4112,12 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
     // Une tuile : celle de l'effet, et son nom ; les « Interruption » gardent leurs couleurs.
     const [burned, , irremovable] = page.all('#hp-results .hp-tile');
     expect(burned.title).toBe('Burned — 1');
-    expect(burned.querySelector('.c-fx')?.className).toBe('c-fx debuff');
-    expect(irremovable.querySelector('.c-fx img')?.getAttribute('src')).toBe(
+    expect(burned.querySelector('.pv-fx')?.className).toBe('pv-fx debuff');
+    // Dans le picker, la tuile fait 28 px.
+    expect(burned.querySelector('.pv-fx')?.getAttribute('style')).toMatch(
+      /^width:28px;height:28px;/,
+    );
+    expect(irremovable.querySelector('.pv-fx img')?.getAttribute('src')).toBe(
       'https://img.test/images/ui/effect/IG_Buff_Immune_Interruption.webp',
     );
     // Ni pastille d'élément ni de classe : un effet n'en a pas.
@@ -4341,8 +4386,8 @@ describe('Fiche perso — la page, sur le vrai markup', () => {
       ['Priority Increase', '', '✕'],
       ['Silent', '', '✕'],
     ]);
-    expect(chip(eeCard(page), AUTO).querySelector('.c-fx')?.className).toBe('c-fx buff');
-    expect(chip(eeCard(page), 'SYS_NO_DESC').querySelector('.c-fx')?.className).toBe('c-fx none');
+    expect(chip(eeCard(page), AUTO).querySelector('.pv-fx')?.className).toBe('pv-fx buff');
+    expect(chip(eeCard(page), 'SYS_NO_DESC').querySelector('.pv-fx')?.className).toBe('pv-fx none');
     expect(page.act('add-chip', eeCard(page)).textContent).toBe('＋ effet');
     // L'aide-mémoire : une chip sans description n'y est pas.
     expect(memo(page)).toEqual(['Priority Increase — Increases the target’s Priority.']);

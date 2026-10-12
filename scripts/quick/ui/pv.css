@@ -1,0 +1,137 @@
+/* L'aperçu d'un texte, tel que le site le rend : les segments que bâtit
+   `noteHtml` de `gear-view.mjs` (classes `.pv-*`) et la tuile d'effet
+   (`effectTile`, `.pv-fx`). UNE feuille pour toutes les sections qui montrent
+   un texte — « Fiche perso » (Pros / Cons, Synergies, la note d'un build de
+   Gear reco), Guides, Événements — et pour la tuile d'effet des chips de la
+   fiche et de l'onglet « Effets ». Hors de tout onglet : la tuile vit aussi
+   dans le picker d'effets, posé dans `<body>`. Chargée avant les feuilles des
+   onglets, qui gardent leur conteneur (`.c-pv`, `.gd-pv`, `.ev-pv`). */
+
+/* Les jetons du site qui manquent à `quick.css`, recopiés de `globals.css` sous
+   les mêmes noms ; ceux des éléments, des grades et de la classe y sont déjà. */
+:root {
+  --buff: #38bdf8;
+  --debuff: #f87171;
+  --buff-tint: #4cc2ff;
+  --debuff-tint: #ff5a4e;
+  --stat: #fbbf24;
+  --highlight: #22d3ee;
+  --equipment: #fbbf24;
+}
+
+/* Les classes de couleur du site, que les segments portent telles quelles. */
+.text-buff {
+  color: var(--buff);
+}
+.text-debuff {
+  color: var(--debuff);
+}
+.text-class {
+  color: var(--klass);
+}
+.text-stat {
+  color: var(--stat);
+}
+.text-highlight {
+  color: var(--highlight);
+}
+.text-equipment {
+  color: var(--equipment);
+}
+.text-item-normal {
+  color: var(--item-normal);
+}
+.text-item-superior {
+  color: var(--item-superior);
+}
+.text-item-epic {
+  color: var(--item-epic);
+}
+.text-item-legendary {
+  color: var(--item-legendary);
+}
+.text-fire {
+  color: var(--fire);
+}
+.text-water {
+  color: var(--water);
+}
+.text-earth {
+  color: var(--earth);
+}
+.text-light {
+  color: var(--light);
+}
+.text-dark-elem {
+  color: var(--dark-elem);
+}
+
+/* Une balise que le site ne résout pas : l'alerte de syntaxe. */
+.pv-unknown {
+  color: var(--danger);
+  font-weight: 600;
+}
+/* Un segment : icône + libellé, à l'écart d'`InlineIcon` (`gap-0.5`) ; `wide`,
+   celui d'`ItemInline` et de `StatInline` (`gap-1`). */
+.pv-seg {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  vertical-align: middle;
+}
+.pv-seg.wide {
+  gap: 4px;
+}
+.pv-u {
+  text-decoration: underline;
+}
+.pv-ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+/* La tuile d'un item : son icône sur le cadre de son grade. */
+.pv-it {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+/* La tuile d'un effet, celle du site (`EffectIconTile`) : fond noir arrondi,
+   l'icône en masque de luminance teinté de sa nature, sur trois couches
+   (`TintedIcon` : l'alpha cumulé relève les arts gris) ; une « Interruption »
+   garde ses couleurs (`img`), un effet sans icône a un cadre vide. 18 px dans
+   un texte ; ailleurs le module pose son côté. */
+.pv-fx {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: #000;
+}
+.pv-fx.none {
+  border: 1px dashed var(--line);
+  background: transparent;
+}
+.pv-fx i {
+  position: absolute;
+  inset: 0;
+  background: var(--buff-tint);
+  -webkit-mask: var(--x-src) center / contain no-repeat;
+  mask: var(--x-src) center / contain no-repeat;
+  mask-mode: luminance;
+}
+.pv-fx.debuff i {
+  background: var(--debuff-tint);
+}
+.pv-fx img,
+.pv-it img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

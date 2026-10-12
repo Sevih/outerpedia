@@ -310,6 +310,7 @@ import {
 } from './actions';
 import { composeSetCombos, splitSetCombos } from './ui/gear-sets.mjs';
 import {
+  effectTile,
   gameText,
   gradeColor,
   groupCombos,
@@ -2292,7 +2293,7 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
     expect(noteHtml(env, [])).toBe('');
   });
 
-  it('un `item` : son cadre, son icône et son nom dans la classe du grade ; la desc en `title`', () => {
+  it('un `item` : son cadre, son icône et son nom dans la classe du grade ; nom et desc en `title`', () => {
     // Tel que le site le rend : avec le lien que l'aperçu ne pose pas.
     const segment = {
       t: 'item',
@@ -2304,8 +2305,11 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
       desc: 'Deals <color=#28d9ed>2%</color> more\\nto "one" target',
     };
     const html = noteHtml(env, [segment]);
-    expect(html.startsWith('<span class="pv-seg text-item-legendary" title="')).toBe(true);
-    expect(html).toContain('title="Deals 2% more\nto &quot;one&quot; target"');
+    // L'écart d'`ItemInline` (`wide`) ; le tooltip du site : « nom — description ».
+    expect(html.startsWith('<span class="pv-seg wide text-item-legendary" title="')).toBe(true);
+    expect(html).toContain(
+      'title="Surefire Greatsword — Deals 2% more\nto &quot;one&quot; target"',
+    );
     expect(html).toContain('src="https://img.test/images/ui/bg/TI_Slot_Unique.webp"');
     // Une adresse relative du site passe sous `imgBase`.
     expect(html).toContain('src="https://img.test/images/equipment/TI_Equipment_Weapon_06.webp"');
@@ -2313,9 +2317,18 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
     // Rien de cliquable dans l'aperçu.
     expect(html).not.toContain('href');
     expect(html).not.toContain('<a');
+    // Sans description : pas de `title`, le nom est déjà à côté.
+    expect(noteHtml(env, [{ ...segment, desc: undefined }])).not.toContain('title=');
+    // Un item `singularity` a son cadre, comme sur le site ; un grade inconnu, le cadre normal.
+    expect(noteHtml(env, [{ ...segment, grade: 'singularity' }])).toContain(
+      'src="https://img.test/images/ui/bg/TI_Slot_Singularity.webp"',
+    );
+    expect(noteHtml(env, [{ ...segment, grade: 'mythic' }])).toContain(
+      'src="https://img.test/images/ui/bg/TI_Slot_Normal.webp"',
+    );
   });
 
-  it('`icon`, `effect`, `stat` : icône + libellé dans la couleur du site', () => {
+  it('`icon`, `effect`, `stat` : icône + libellé dans la couleur du site, l’effet sur sa tuile teintée', () => {
     const fire = noteHtml(env, [
       { t: 'icon', label: 'Fire', color: 'text-fire', icon: 'https://cdn.test/f.webp' },
     ]);
@@ -2327,26 +2340,83 @@ describe('previewHtml — l’aperçu d’un build de gear-view', () => {
       '<span class="pv-seg text-buff"><span class="pv-u">Aer</span></span>',
     );
 
-    const stun = noteHtml(env, [
-      { t: 'effect', label: 'Stunned', color: 'text-debuff', icon: 'IG_Stun', isDebuff: true },
-    ]);
-    expect(stun).toContain('<span class="pv-seg text-debuff">');
-    expect(stun).toContain(
-      '<span class="pv-fx debuff"><img src="https://img.test/images/ui/effect/IG_Stun.webp" alt="" /></span>',
+    // Un effet : la tuile du site (l'icône en masque teinté, trois couches), le nom souligné.
+    const stunned = { t: 'effect', label: 'Stunned', color: 'text-debuff', icon: 'IG_Stun' };
+    expect(noteHtml(env, [{ ...stunned, isDebuff: true }])).toBe(
+      '<span class="pv-seg text-debuff"><span class="pv-fx debuff" style="--x-src:url(\'https://img.test/images/ui/effect/IG_Stun.webp\')" aria-hidden="true"><i></i><i></i><i></i></span><span class="pv-u">Stunned</span></span>',
     );
     expect(
       noteHtml(env, [{ t: 'effect', label: 'Up', color: 'text-buff', icon: 'x', isDebuff: false }]),
-    ).toContain('class="pv-fx buff"');
-
-    const atk = noteHtml(env, [
-      { t: 'stat', name: 'Attack', iconSrc: '/images/ui/stat/CM_Stat_Icon_ATK.webp' },
+    ).toContain(
+      '<span class="pv-fx buff" style="--x-src:url(\'https://img.test/images/ui/effect/x.webp\')"',
+    );
+    // Une « Interruption » garde ses couleurs : l'image brute dans la même tuile, sans teinte.
+    const kept = noteHtml(env, [
+      { ...stunned, icon: 'IG_Buff_Immune_Interruption', color: 'text-buff', isDebuff: false },
     ]);
-    expect(atk).toContain('<span class="pv-seg text-stat">');
+    expect(kept).toContain(
+      '<span class="pv-fx" aria-hidden="true"><img src="https://img.test/images/ui/effect/IG_Buff_Immune_Interruption.webp" alt="" loading="lazy" /></span>',
+    );
+    expect(kept).not.toContain('--x-src');
+    expect(kept).not.toContain('<i>');
+    // Sans icône : le nom seul, comme sur le site.
+    expect(noteHtml(env, [{ ...stunned, icon: undefined, isDebuff: true }])).toBe(
+      '<span class="pv-seg text-debuff"><span class="pv-u">Stunned</span></span>',
+    );
+    // Le tooltip du site en `title` : « nom — description », sans les balises de couleur.
+    expect(
+      noteHtml(env, [
+        {
+          ...stunned,
+          isDebuff: true,
+          desc: 'Cannot act for <color=#ff0000>1</color> turn\\nor more',
+        },
+      ]),
+    ).toContain(
+      '<span class="pv-seg text-debuff" title="Stunned — Cannot act for 1 turn\nor more">',
+    );
+
+    // Une stat : l'écart de `StatInline` (`wide`), son nom et sa description en `title`.
+    const attack = { t: 'stat', name: 'Attack', iconSrc: '/images/ui/stat/CM_Stat_Icon_ATK.webp' };
+    const atk = noteHtml(env, [attack]);
+    expect(atk).toContain('<span class="pv-seg wide text-stat">');
     expect(atk).toContain('src="https://img.test/images/ui/stat/CM_Stat_Icon_ATK.webp"');
+    expect(noteHtml(env, [{ ...attack, desc: 'Raises damage' }])).toContain(
+      '<span class="pv-seg wide text-stat" title="Attack — Raises damage">',
+    );
+    // Une icône qui porte une description (un skill) : son libellé devant, comme le tooltip du site.
+    expect(
+      noteHtml(env, [{ t: 'icon', label: 'Slash', color: 'text-highlight', desc: 'Hits once' }]),
+    ).toBe('<span class="pv-seg text-highlight" title="Slash — Hits once">Slash</span>');
 
     // Une classe de couleur qui n'en est pas une n'entre pas dans le HTML.
     expect(noteHtml(env, [{ t: 'icon', label: 'x', color: 'a" onclick="b' }])).toBe(
       '<span class="pv-seg">x</span>',
+    );
+  });
+
+  it('`effectTile` : UNE tuile pour l’aperçu, les chips et l’onglet Effets — son côté, son cadre vide, son adresse encodée', () => {
+    // Dans un texte : 18 px, posés par `pv.css` ; ailleurs le module pose le côté.
+    expect(effectTile(env, 'IG_Stun', true)).toBe(
+      '<span class="pv-fx debuff" style="--x-src:url(\'https://img.test/images/ui/effect/IG_Stun.webp\')" aria-hidden="true"><i></i><i></i><i></i></span>',
+    );
+    expect(effectTile(env, 'IG_Stun', false, 22)).toBe(
+      '<span class="pv-fx buff" style="width:22px;height:22px;--x-src:url(\'https://img.test/images/ui/effect/IG_Stun.webp\')" aria-hidden="true"><i></i><i></i><i></i></span>',
+    );
+    // Une nature inconnue vaut buff, comme `isDebuff` absent d'un segment.
+    expect(effectTile(env, 'IG_Stun', undefined)).toContain('class="pv-fx buff"');
+    // Sans icône : un cadre vide, à sa taille.
+    expect(effectTile(env, '', true)).toBe('<span class="pv-fx none" aria-hidden="true"></span>');
+    expect(effectTile(env, undefined, false, 48)).toBe(
+      '<span class="pv-fx none" style="width:48px;height:48px" aria-hidden="true"></span>',
+    );
+    // « Interruption » : l'image, ni teinte ni nature, à sa taille.
+    expect(effectTile(env, 'IG_Buff_Stat_Speed_Interruption_D', true, 28)).toBe(
+      '<span class="pv-fx" style="width:28px;height:28px" aria-hidden="true"><img src="https://img.test/images/ui/effect/IG_Buff_Stat_Speed_Interruption_D.webp" alt="" loading="lazy" /></span>',
+    );
+    // Le nom du sprite est encodé — avec ce qu'`encodeURIComponent` laisse et qu'un `url('…')` lirait.
+    expect(effectTile(env, 'IG It\'s(new)&"x"', false)).toContain(
+      "--x-src:url('https://img.test/images/ui/effect/IG%20It%27s%28new%29%26%22x%22.webp')",
     );
   });
 

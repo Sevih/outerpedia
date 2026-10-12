@@ -355,8 +355,8 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-/* L'aperçu : les segments de `noteHtml` (`.pv-*`), sur le fond de la page ; une
-   liste à puces pour un bloc (un conseil par ligne). */
+/* L'aperçu : les segments de `noteHtml` (`.pv-*`, réglés par `pv.css`), sur le
+   fond de la page ; une liste à puces pour un bloc (un conseil par ligne). */
 #tab-guides .gd-pv {
   padding: 8px 12px;
   border-radius: 8px;
@@ -379,103 +379,6 @@
 #tab-guides .gd-pv li:empty::after {
   content: '…';
   color: var(--placeholder);
-}
-/* Les jetons et classes de couleur des segments, ceux de la Fiche perso
-   (`character.css` ne les règle que sous `#tab-character`). */
-#tab-guides {
-  --buff: #38bdf8;
-  --debuff: #f87171;
-  --buff-bg: #1a69a7;
-  --debuff-bg: #a72a27;
-  --stat: #fbbf24;
-  --highlight: #22d3ee;
-  --equipment: #fbbf24;
-}
-#tab-guides .text-buff {
-  color: var(--buff);
-}
-#tab-guides .text-debuff {
-  color: var(--debuff);
-}
-#tab-guides .text-class {
-  color: var(--klass);
-}
-#tab-guides .text-stat {
-  color: var(--stat);
-}
-#tab-guides .text-highlight {
-  color: var(--highlight);
-}
-#tab-guides .text-equipment {
-  color: var(--equipment);
-}
-#tab-guides .text-item-normal {
-  color: var(--item-normal);
-}
-#tab-guides .text-item-superior {
-  color: var(--item-superior);
-}
-#tab-guides .text-item-epic {
-  color: var(--item-epic);
-}
-#tab-guides .text-item-legendary {
-  color: var(--item-legendary);
-}
-#tab-guides .text-fire {
-  color: var(--fire);
-}
-#tab-guides .text-water {
-  color: var(--water);
-}
-#tab-guides .text-earth {
-  color: var(--earth);
-}
-#tab-guides .text-light {
-  color: var(--light);
-}
-#tab-guides .text-dark-elem {
-  color: var(--dark-elem);
-}
-#tab-guides .pv-unknown {
-  color: var(--danger);
-  font-weight: 600;
-}
-#tab-guides .pv-seg {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  vertical-align: middle;
-}
-#tab-guides .pv-u {
-  text-decoration: underline;
-}
-#tab-guides .pv-ico {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-}
-#tab-guides .pv-fx,
-#tab-guides .pv-it {
-  position: relative;
-  flex: none;
-  width: 18px;
-  height: 18px;
-}
-#tab-guides .pv-fx {
-  border-radius: 4px;
-  background: var(--buff-bg);
-}
-#tab-guides .pv-fx.debuff {
-  background: var(--debuff-bg);
-}
-#tab-guides .pv-fx img,
-#tab-guides .pv-it img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 /* ---------------------------------------------------------------- le combat

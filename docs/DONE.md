@@ -7,6 +7,87 @@
 
 ## 2026-10-12
 
+- **quick : l'aperçu des textes rend les effets comme le site — tuile noire
+  teintée, exception Interruption, cadre singularity, tooltip du site en
+  `title`, un seul `pv.css` (lot A36)** — revue de quick par Sevih (12/10) :
+  « le rendu des textes doit être le même que sur le site (les icônes
+  d'effets par exemple, ce n'est pas le cas) ». Le résolveur était déjà celui
+  du site (`previewInline` → `renderInlineBatch`) ; l'écart était dans la mise
+  en HTML, `noteHtml` de `scripts/quick/ui/gear-view.mjs`, alignée ici sur
+  `InlinePreview.tsx` famille par famille, sans toucher ni au résolveur ni
+  aux routes. Effets : un segment `effect` sort sur la tuile du site
+  (`EffectIconTile`) — fond noir arrondi, l'icône en masque de luminance
+  teinté de sa nature sur trois couches (`--buff-tint` / `--debuff-tint`),
+  une icône dont le nom contient `Interruption` gardant ses couleurs (`img`
+  brut dans la même tuile), le nom du sprite encodé — au lieu de l'icône
+  brute sur un carré `--buff-bg`. UNE construction,
+  `effectTile(env, icon, isDebuff, px)` exportée de `gear-view.mjs` :
+  `fxTile` / `fxUrl` de
+  `tabs/character.js` et `tile()` / `iconUrl` de `tabs/effects.js` n'en sont
+  plus que des appels (22 px sur une chip, 28 dans le picker d'effets, 28 et
+  48 dans l'onglet Effets ; sans `px`, les 18 px d'un texte), et les classes
+  `.c-fx` et `.x-ico` disparaissent au profit de `.pv-fx`. Tooltips : le
+  `title` porte ce que dit le tooltip du site, « nom — description » (effet,
+  item, stat, et une icône qui a une description, un skill), la description
+  sans ses balises `<color>` ; sans description, pas de `title` — le site
+  montre alors le nom seul, qui est déjà à côté. Items : `SLOT_FRAME` gagne
+  `singularity` (le sprite de `src/lib/images.ts`), au lieu du repli sur
+  Normal. Espacements : 2 px pour une icône ou un effet (`gap-0.5`
+  d'`InlineIcon`), 4 px pour un item ou une stat (`gap-1`, classe `wide` sur
+  le segment), au lieu de 3 partout. CSS : `scripts/quick/ui/pv.css`, lié
+  dans `index.html` avant les onglets, porte UNE fois les jetons qui
+  manquaient à `quick.css` (`--buff`, `--debuff`, `--buff-tint`,
+  `--debuff-tint`, `--stat`, `--highlight`, `--equipment` — chaque valeur
+  comparée à `globals.css`, comme celles des éléments, des grades et de
+  `--klass` déjà dans `quick.css` : toutes identiques), les classes de
+  couleur du site, les segments `.pv-*` et la tuile ; les trois copies
+  sortent de `tabs/character.css`, `tabs/guides.css` et `tabs/events.css`
+  (339 lignes de moins), qui ne gardent que leur conteneur (`.c-pv`,
+  `.gd-pv`, `.ev-pv`) ; `--buff-bg` / `--debuff-bg`, que plus rien ne lit,
+  ne sont pas repris. Les liens restent absents de l'aperçu (voulu, test
+  « Rien de cliquable »). Tests mis à jour vers le nouveau HTML, pas
+  affaiblis : `actions.test.ts` (la tuile à trois couches et `--x-src`,
+  l'exception sur `IG_Buff_Immune_Interruption`, `singularity` et le repli
+  d'un grade inconnu, les `title`, `wide`, et un test d'`effectTile` — côté,
+  cadre vide, encodage) et `ui-serve.test.ts` (les tuiles des chips, du
+  picker et de l'onglet Effets en `.pv-fx` avec leur côté, plus un test de
+  coquille : `pv.css` lié avant les onglets, ses sept jetons égaux à ceux de
+  `globals.css`, aucun onglet qui recopie segment, classe de couleur ou
+  jeton). `STYLE.md` : le paragraphe du texte de la Fiche perso dit la
+  tuile, les écarts, le `title` et `pv.css`, les listes de classes sont à
+  jour ; `docs/quick-migration.md` ne décrit pas le rendu de l'aperçu,
+  inchangé ; pas d'item au TODO. Vérifié : `pnpm typecheck` 0
+  (`tsc --noEmit -p scripts/tsconfig.json`), `pnpm lint` 0 (`eslint`),
+  `pnpm test`
+  « Test Files 221 passed (221) / Tests 3674 passed (3674) »,
+  `NODE_ENV=development pnpm exec vitest run scripts/quick` « Test Files 8
+  passed (8) / Tests 1021 passed (1021) ». Banc (quick isolé :4799, clés
+  vidées, `shot.mjs`) :
+  `--tabs character --hash character/2000055/pros-cons` —
+  `{B/BT_ADDITIVE_TURN}` et `{D/BT_SEALED}`
+  sur leur tuile noire, l'icône bleue et rouge, le nom souligné ; comparé à
+  l'image avec `GET http://localhost:3000/characters/aer` (le serveur de
+  Sevih, lecture seule) : même tuile, mêmes teintes, mêmes écarts — seule la
+  police diffère, celle de quick ; `--tabs effects` et `…/2000055/skills` :
+  catalogue et chips inchangés à l'image ;
+  `--tabs guides --hash guides/joint-challenge/annihilator/tips` : Barrier
+  et Buff Removal sur leur
+  tuile, Dark en icône d'élément. Non comparé à l'image : un item
+  `singularity` et un effet « Interruption » dans un texte (aucun texte curé
+  du banc n'en porte ; couverts par les tests), et Événements (même
+  `noteHtml`, même feuille). Laissé, hors périmètre : `tabs/monsters.js` et
+  `tabs/extractor.js` gardent leur copie de la tuile (`.m-fx`, `.ex-fx`,
+  avec leurs teintes) — à passer sur `effectTile` dans un lot à eux ; le
+  champ `sprite` des états d'Effets et de la Fiche perso n'est plus lu par
+  la page (les routes sont intactes) ; un tooltip flottant ; une balise
+  inconnue reste en `--danger` gras (le site : `text-red-500`). Repéré en
+  vérifiant : `pnpm test` sort par intermittence « Errors 1 error »
+  (`ReferenceError: document is not defined`, le minuteur de « Copier » de
+  `tabs/gamedata.js`, 2 s, qui tire après la fermeture d'une fenêtre
+  happy-dom de `ui-serve.test.ts`) alors que tous les tests passent —
+  reproduit 1 fois sur 6 sur une copie de `HEAD` sans ce lot, 2 sur 5 avec :
+  antérieur, non corrigé ici.
+
 - **Relecture F23 (Fable) — quick : section « Événements », la liste,
   l'éditeur à six langues, enregistrer publie sur R2 et committe, validé** —
   commit `2930dfc1` (lot joué par Opus). Périmètre : un seul commit, le

@@ -191,10 +191,9 @@
   border-color: var(--accent);
   color: var(--content);
 }
-/* La tuile d'un effet, celle du site (`EffectIconTile`), de l'onglet Effets
-   (`.x-ico`) et de la « Fiche perso » (`.c-fx`) : fond noir, l'icône en masque
-   teinté de sa nature — les teintes de `globals.css`. Elle vit aussi dans le
-   picker d'effets, posé dans `<body>`. */
+/* La tuile d'un effet, celle du site (`EffectIconTile`) et de `pv.css`
+   (`.pv-fx`) : fond noir, l'icône en masque teinté de sa nature — les teintes
+   de `globals.css`. Elle vit aussi dans le picker d'effets, posé dans `<body>`. */
 #tab-monsters .m-fx,
 .hp-modal .m-fx {
   --buff-tint: #4cc2ff;
