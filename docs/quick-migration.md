@@ -432,7 +432,7 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
 
 19. **Extractor › revue par entité**
     `ExtractorReview`, `EntityDiffPanel`, `DiffHighlight`, `EntitySwitch` — Character, Effect, EE, Weapons, Amulet, Armor, Talisman, Sets, Monster, Item ; pour un monstre, `MonsterStatsCard` (ses stats, en lecture — cf. la correction de l'étape 12)
-    - Agacements :
+    - Agacements : ui pas joli
 
 20. **Extractor › intégration**
     `IntegrateCharacterButton`, `IntegrateGearButton`, `IntegrateModeButton`, `AcceptTargetButton`, `ContributionImport` ; pour un monstre, `MonsterActions` (Save, « Version » — cf. la correction de l'étape 12)
