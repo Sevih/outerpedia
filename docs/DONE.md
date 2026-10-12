@@ -7,6 +7,62 @@
 
 ## 2026-10-12
 
+- **Relecture F22 (Fable) — quick : Extraction, figer un monstre et
+  ré-épingler ses guides en un geste, le plan avant de figer ; le groupe
+  Extractor hors de l'admin, validé** — commit `0b0a495d` (lot joué par
+  Opus 5.5, pas Fable : le résultat tient), 17 fichiers, le message attendu,
+  ni `package.json` ni le lock, rien d'un autre lot. Périmètre relu dans le
+  diff : `monster-freeze.ts` (pur : `nextArchive`, `freezePlanOf` — édits,
+  pins, gardés avec le motif en français, en attente avec le lien vers
+  Guides, les guides à re-dater par la règle de `guide-stamp.ts`, `was` en
+  sha1 du plan —, `pinIndex` qui compte aussi les `bossId@n` et `monsters`
+  des guides plats, `monsterDirtyFiles` qui ne regarde que l'entrée du
+  monstre, ses skills et les donjons de ses spawns, `writtenFiles`,
+  `freezeReportOf`), `actions.ts` (`FREEZE_DEPS` à part, tout injecté ;
+  `freezePlan`, `freezeMonster` dans l'ordre sale → `was` → archive →
+  ré-épinglage → stamp → UN commit ; `pinnedBy` sur les archives de la
+  fiche), deux routes dans `server.ts`, `admin-inbox.ts` (monster dans
+  `EXTRACTOR_IN_QUICK`), `layout.dev.tsx` sans le groupe Extractor ni son
+  calcul de badges, `docs/procedure/newPatch.md` corrigé. Le moteur
+  (`versionMonster`, `planRepin`, `applyRepin`) n'est pas touché.
+  **Contrôles** : `pnpm typecheck` vert, `pnpm lint` vert, `pnpm test`
+  « 220 passed, 3646 passed », `NODE_ENV=development pnpm exec vitest run
+scripts/quick src/lib/admin` « 58 passed, 1554 passed » — les chiffres de
+  l'entrée. **Rejoué** (tsx, moteur, git et guides factices) : le plan d'un
+  monstre désigné par un guide plat ET un versionné à deux versions — un
+  édit du `bossId` plat, deux versions à épingler, le `bossId` versionné
+  gardé, un guide plat à `meta.group` en attente, les deux guides à re-dater,
+  « 2 guides re-epingles » ; `was` faux → `stale`, rien d'appelé ; l'entrée
+  du monstre changée sur le disque → refus « sale » avant d'écrire ; un
+  AUTRE monstre sale dans le même fichier → passe ; « Figer » → l'archive de
+  HEAD avec la note ramenée à 120 caractères, `applyRepin` du plan montré,
+  le stamp des seuls `meta.json` touchés, UN commit de l'archive, du
+  `meta.json` édité, des deux `config.json` et du `meta.json` re-daté ; le
+  moteur qui lève → rien de figé ; le ré-épinglage qui lève → l'archive sur
+  le disque, rien de committé, dit ; une clé écrite différente de celle
+  prévue → le plan recalculé pour elle. Sur le quick isolé (:4794, clés
+  vidées, GET seulement) : le plan d'Annihilator 4318062 en 0,12 s — clé
+  `4318062@1`, HEAD `0b0a495d`, jeu 1.11.404, les quatre versions du guide
+  en live à épingler (2024-01 n'a pas de combat), le `bossId` versionné
+  gardé, un guide re-daté, « 1 guide re-epingle » ; Prototype EX-78 →
+  `4548161@2`, son archive du 11/08 avec `pinnedBy` vide ; 404 et 400. Deux
+  captures relues : le plan d'Annihilator (le cadre rouge, les quatre
+  versions, « Laissés en live » avec le motif, « Re-datés », la note, le
+  commit, « Figer » / « Annuler »), la fiche de Prototype EX-78 avec
+  l'archive « orpheline ». RIEN n'a été figé : trois fichiers dans
+  `monster-archive/`, arbre propre. **À trancher par Sevih**, le lot l'a
+  bien vu (TODO) : le refus « working tree sale » vient de ma décision du
+  lot, mais le flux de Patch (« Promouvoir » écrit `data/generated/` sans
+  committer) met justement le boss changé dans cet état, et committer
+  d'abord ferait de HEAD le nouvel état. Ma recommandation : LEVER le
+  refus (`freezeMonster`, `plan.dirty`) et garder l'avertissement dans le
+  plan — « l'archive figera l'état COMMITTÉ (<sha>, <date>), pas celui du
+  disque » —, puisque figer HEAD puis intégrer est précisément le flux
+  voulu ; un lot A d'une ligne et un test. **Reste à Sevih** : les huit
+  contrôles du TODO au prochain boss qui change, avant « ＋ version » du
+  guide. **Suite** : § 4 Extractor clos ; restent 6 Events (dernier) et 22
+  (retrait de `/admin`) — aucun lot ouvert.
+
 - **quick : section « Extraction » — figer un monstre et ré-épingler ses
   guides en UN geste, le plan avant de figer ; le groupe « Extractor » quitte
   le menu de l'admin (lot F22, fin de l'étape 20 de la migration, dernier des
