@@ -8073,6 +8073,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       roster: () => ROSTER,
       refs: () => ({}) as InlineRefs,
       steps: (rarity) => STEPS[rarity] ?? [],
+      buckets: () => ({ premium: ['Aer', 'Mene'], limited: ['Alice'] }),
       loadPremiumLimited: () => {
         if (over.loadThrows) throw new Error('premium-reviews.json illisible');
         return clone(PL_DATA);
@@ -8136,7 +8137,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       });
     });
 
-    it('Premium & Limited : ce que le scan en sait, la forme, les données du store, les paliers de chaque perso', () => {
+    it('Premium & Limited : ce que le scan en sait, la forme, les données du store, les paliers de chaque perso, les persos attendus par bucket', () => {
       const out = generalGuideState('premium-limited', deps().fake);
       if ('error' in out) throw new Error(out.error);
       expect(out.guide).toEqual({
@@ -8152,8 +8153,14 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       });
       expect(out.spec.kind).toBe('premium-limited');
       expect(out.spec.versioned).toBe(false);
-      expect(out.spec.tabs.map((t) => t.id)).toEqual(['premium', 'limited']);
+      expect(out.spec.tabs.map((t) => t.id)).toEqual([
+        'premium-reviews',
+        'premium-priorities',
+        'limited-reviews',
+        'limited-priorities',
+      ]);
       expect(out.data).toEqual(PL_DATA);
+      expect(out.options.rosters).toEqual({ premium: ['Aer', 'Mene'], limited: ['Alice'] });
       expect(out.options.roster.map((c) => c.name)).toEqual(['Aer', 'Alice', 'Mene']);
       expect(out.options.steps['2000055'].map((s) => s.label)).toEqual(['3★', '4★', '5★', '6★']);
       expect(out.options.steps['2000009']).toHaveLength(5);
@@ -8167,6 +8174,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       expect(free.spec.tabs.map((t) => t.id)).toEqual(['sources']);
       expect(free.data).toEqual(FREE_DATA);
       expect(free.options.steps).toEqual({});
+      expect(free.options.rosters).toEqual({});
       const shop = generalGuideState('shop-purchase-priorities', deps().fake);
       if ('error' in shop) throw new Error(shop.error);
       // La note de `joint` : son shop n'est pas dans les dérivés, elle a son onglet.
@@ -8234,22 +8242,22 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       expect(r.ok).toBe(false);
       expect(r.refused).toEqual([
         {
-          tab: 'premium',
+          tab: 'premium-reviews',
           key: 'reviews.premium.0.review',
           reason: expect.stringMatching(/tag inconnu \{B\/NOPE_TAG\}/),
         },
         {
-          tab: 'premium',
+          tab: 'premium-reviews',
           key: 'reviews.premium.0.impact',
           reason: 'impact 4★ : une note de 1 à 5, ou rien',
         },
         {
-          tab: 'premium',
+          tab: 'premium-priorities',
           key: 'priorities.premium.first.0.stars',
           reason: '« 5 » n’est pas un palier plein — attendu 3 (3★), 4 (4★), 6 (5★), 9 (6★)',
         },
         {
-          tab: 'limited',
+          tab: 'limited-reviews',
           key: 'reviews.limited.0.name',
           reason: 'hors du roster : « Nobody »',
         },
@@ -8288,7 +8296,10 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
         { data: noEn, was: clone(PL_DATA) },
         fake,
       );
-      expect(r2.refused[0]).toMatchObject({ tab: 'premium', key: 'reviews.premium.0.review' });
+      expect(r2.refused[0]).toMatchObject({
+        tab: 'premium-reviews',
+        key: 'reviews.premium.0.review',
+      });
     });
 
     it('écrit par le store, re-date le meta, et committe les fichiers qui ont bougé PLUS le meta — un commit', async () => {
@@ -8486,12 +8497,20 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       );
       expect(r.refused).toEqual([
         {
-          tab: 'limited',
+          tab: 'limited-priorities',
           key: 'priorities.limited.second.1',
           reason: 'Limited/second #2: unknown hero “X”.',
         },
       ]);
       expect(pl.calls.git).toEqual([]);
+      // Une review refusée par le store : l'onglet des reviews du bucket.
+      const rv = deps({ errors: ['Premium #1: review text is required.'] });
+      const r1 = await saveGeneralGuide(
+        'premium-limited',
+        { data: clone(PL_DATA), was: clone(PL_DATA) },
+        rv.fake,
+      );
+      expect(r1.refused[0]).toMatchObject({ tab: 'premium-reviews', key: 'reviews.premium.0' });
       const free = deps({ errors: ['Source 2, entry 1: at least one hero is required.'] });
       const r2 = await saveGeneralGuide(
         'free-heroes-start-banner',

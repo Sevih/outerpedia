@@ -233,12 +233,21 @@ document` (un lot A).
       « Enregistrer » → UN commit `chore(guides): general-guides/premium-limited`
       qui porte `premium-reviews.json`, `premium-priorities.json` ET le
       `meta.json` re-daté (`git show --stat`) ; la savebar revient à
-      « aucune modification ». Puis « ＋ héros » sur un palier (le picker,
-      le palier proposé parmi les crans pleins du perso), ↑ ↓, ✕. (3) Un
+      « aucune modification ». Puis, depuis F25 (12/10) : Premium ›
+      Priorités, GLISSER une vignette d'un palier à un autre (le trait
+      d'insertion, la rangée cerclée), « Enregistrer » → `premium-priorities.json`
+      porte le déplacement ; « ＋ » d'un palier (le picker en multi : cochés =
+      le palier, « Valider » remplace), ↑ ↓, ✕. Premium › Reviews : une
+      ligne cliquée déplie sa review, une cible en ÉTOILES (3-6, « Any »,
+      une note) et une case d'impact en étoiles → `premium-reviews.json`
+      porte les chaînes du site (« 4 to 5 », « Any », « 3 ») ; « Traduire »
+      traduit aussi les reviews repliées. (3) Un
       fichier de review de Shiraen importé depuis la vue d'ensemble (glissé
       ou choisi) : le journal dit « … › premium › <perso>: edited/added »,
       un commit `chore(guides): import premium-limited-review` avec le
-      `meta.json` — un fichier qui n'est pas du JSON est refusé sans appel.
+      `meta.json` — un fichier qui n'est pas du JSON est refusé sans appel ;
+      un fichier de contribute/premium-reviews (le site n'a pas changé, F25)
+      toujours accepté.
       (4) Free Heroes : une source ajoutée (« ＋ source », « ＋ entrée »,
       « ＋ héros » en multi, le type de choix), « Enregistrer » → le commit
       porte `free-heroes-sources.json` et le `meta.json`. (5) Shop › Guild :

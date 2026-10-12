@@ -7,6 +7,102 @@
 
 ## 2026-10-12
 
+- **quick : Premium & Limited — un onglet Priorités en glisser-déposer, les
+  reviews à la façon de contribute/premium-reviews (lot F25)** — revue de
+  quick par Sevih (12/10) : « éditeur guide premium & core fusion : une tab
+  pour les priorités (glisser-déposer, ajouter/retirer des persos comme les
+  items des gear reco) ; les impacts ne sont pas lisibles ; se rapprocher de
+  l'UI de contribute/premium-reviews ». Ce lot : Premium & Limited seulement
+  (Core Fusion est du code `.ts`, lot C13, qui réutilisera cette forme). Le
+  MODÈLE ne bouge pas (les deux JSON, `general-guide-store.ts`, l'import) ;
+  la FORME (`general-guide-form.ts`) et son rendu, si. TRANCHÉ — quatre
+  sous-onglets plutôt que deux à segmenté : `premium-reviews`,
+  `premium-priorities`, `limited-reviews`, `limited-priorities` (« Premium ·
+  Reviews »…, hash `…/premium-limited/<sous-onglet>`) — c'est ce que la
+  coquille sait faire par onglet (le point « modifié » ou « refusé »,
+  « Traduire », le refus situé), et reviews et paliers ne se retouchent
+  jamais d'un même geste ; les ids des blocs restent (`premium-first`…), un
+  refus du store (`situateStoreError`) tombe sur `<bucket>-reviews` ou
+  `<bucket>-priorities`. La forme porte deux indications nouvelles, la page
+  ne nomme toujours pas le guide : `view: 'roster'` sur le bloc des reviews
+  (+ `roster: 'premium'`, la clé dans `options.rosters` que
+  `generalGuideState` sert désormais — `premiumLimitedRoster()` du store,
+  injecté par la dep `buckets`) et `view: 'tiles'` sur les quatre paliers ;
+  et un genre de champ `target` pour `recommendedPve/Pvp` (une CHAÎNE,
+  contrôlée comme `string` par le serveur). Reviews : UNE carte — le badge
+  « 11 / 13 reviews » (les persos du roster du bucket dont l'anglais est
+  écrit, la règle du site), « N manquantes » et leurs noms ; une LIGNE
+  compacte par perso du roster (vignette 32 px, ★ écrite / ☆ à écrire, le
+  nom, le résumé en chasse fixe « PvE 4 to 5 · PvP Any · impact 3/2 · 2/2 ·
+  3/5 · 2/4 »), puis « Hors roster · pas encore sortis » ; UNE review
+  dépliée à la fois (`openEntry`, l'objet lui-même : les index bougent),
+  sous sa ligne — un clic déplie, un autre replie, une ligne ☆ cliquée CRÉE
+  l'entrée du perso dépliée (le `pickRoster` du site) ; « ＋ review » ouvre
+  le picker en choix unique sur les persos du roster SANS entrée (« Tous les
+  persos du roster ont leur review. ») ; « ＋ pas encore sorti » pose une
+  entrée au nom libre (le `addUnreleased` du site ; la case reste dans la
+  carte). La review dépliée : le texte des Guides, les cibles en étoiles 3-6
+  - « Any » + note avec l'écho de la chaîne écrite (`parseReco`,
+    `formatReco`, `recoStar` : la règle exacte de `RecoTargetStars` — une
+    étoile, une plage, une borne cliquée retirée), l'impact en table 3★ → 6★ ×
+    PvE / PvP à cinq étoiles cliquables par case (re-cliquer vide), plus un
+    seul `select`. « Traduire » lit désormais les textes des DONNÉES de
+    l'onglet (`genTexts(sub)`), pas ceux dessinés : les reviews repliées sont
+    traduites aussi (Free Heroes et Shop : identique, tout y est dessiné). Un
+    refus sur une review repliée cercle sa ligne. Priorités : UNE carte, une
+    rangée de vignettes par palier (`data-block` = l'id du bloc), l'ordre = le
+    rang — chaque vignette (`draggable`) : le rang, la tuile 44 px de B45, le
+    palier parmi ses crans pleins dessous, ↑ ↓ ✕ ; « ＋ » = le picker en
+    MULTI comme les items de Gear reco (cochés = le palier, les nouveaux à la
+    suite dans l'ordre des clics, « Valider » remplace ; un nom hors du
+    roster, que le picker ne connaît pas, reste à sa place). Le glisser-déposer
+    est un helper commun, `scripts/quick/ui/sortable.mjs` — `sortable(root, opts)` avec `onMove(from, to, fromList, toList)`, `item` et `list`, par délégation (les rangées se redessinent, le branchement tient), qui ne déplace rien : il
+    dit le geste, l'appelant écrit ses données et redessine ; classes
+    `.dragging`, `.drop-before` / `.drop-after` (le trait d'insertion, du côté
+    où l'on tombe), `.drop-end` (en fin d'une rangée, vide ou après le
+    dernier), aussi d'un palier à l'AUTRE ; branché une fois sur `#gd-panel`.
+    ↑ ↓ restent le chemin du clavier et du banc. Free Heroes et Shop :
+    inchangés. Le site (`contribute/premium-reviews`), le store, l'import : pas
+    touchés. Vérification : `pnpm typecheck` exit 0, `pnpm lint` exit 0,
+    `pnpm test` « Test Files 222 passed (222) / Tests 3713 passed (3713) »,
+    `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+    « Test Files 61 passed (61) / Tests 1634 passed (1634) » (deux fois, sans
+    « unhandled error »). Banc sur un quick ISOLÉ (:4799, clés vidées) :
+    `--hash guides/general-guides/premium-limited/premium-priorities` (les
+    rangées de vignettes avec rang, palier, ↑ ↓ ✕, ＋) et `…/limited-reviews`
+    (« 13 / 13 reviews », la liste compacte et ses résumés) — la route d'enregistrement jamais appelée ; la review dépliée ne se photographie pas (le
+    banc ne clique pas), elle est couverte par les tests. Tests :
+    `general-guide-form.test.ts` (les quatre onglets, `view`, `roster`,
+    `target`, `blockOfKey` sur les nouveaux onglets) ; `actions.test.ts`
+    (`rosters` dans l'état, la dep `buckets`, les refus situés sur les quatre
+    onglets, un refus du store sur `premium-reviews`) ; `ui-serve.test.ts` —
+    les quatre sous-onglets et leurs libellés, le compteur et les manquants,
+    la liste et le dépliage unique (clic, reclic, une ligne ☆ qui crée), les
+    étoiles de cible (retrait d'une borne, extension, la note, « Any ») et
+    d'impact (poser, vider) → ce qui part, « ＋ review » restreint au roster
+    sans entrée puis vide, « ＋ pas encore sorti », ✕, « Traduire » sur une
+    review repliée, le refus situé (ligne et champ cerclés) et `stale` ; les
+    paliers : ↓ ↑, le glisser-déposer par `dragstart`/`dragover`/`drop` dans
+    la rangée et vers une AUTRE rangée (vide), « ＋ » multi (poser deux,
+    rouvrir avec les deux cochés, en décocher un), ✕, ce qui part ; et
+    `sortable.mjs` seul (trait d'insertion, fin de liste, dépôt sur soi ou
+    juste avant son suivant = rien, `dragend`, l'autre liste, débranché).
+    STYLE.md : le croquis P&L réécrit, `target` et l'impact dans la ligne des
+    champs, « Le glisser-déposer d'une liste » dans la partie commune ;
+    `docs/quick-migration.md` (étape 17) ; TODO : les contrôles de F19
+    complétés (glisser entre deux paliers → `premium-priorities.json`, une
+    cible et une case en étoiles → `premium-reviews.json`, l'import d'un
+    fichier de contribute toujours accepté). HORS PÉRIMÈTRE, corrigé quand
+    même parce qu'il rougissait `pnpm test` selon l'ordre des fichiers (vu
+    une fois sur deux avec les tests ajoutés) : les deux tests « Copier » de
+    Tables du jeu (`ui-serve.test.ts`) laissaient fuir la minuterie de 2 s du
+    bouton (`gamedata.js`), qui tombait après la fermeture de la fenêtre sur
+    un `document` disparu (« unhandled error ») — ils tiennent la minuterie
+    en faux temps et vérifient le retour à « Copier ». LAISSÉ : la ligne
+    d'une entrée « pas encore sorti » dit « (sans nom) » tant qu'un redessin
+    n'a pas relu le nom saisi (la saisie ne redessine pas, comme tout champ
+    nu) ; Core Fusion (C13) ; le site ne change pas (ses `MoveButtons` ↑ ↓
+    restent sans glisser-déposer) ; rien d'enregistré pour de vrai.
 - **quick : Guides — une catégorie à la fois, les généraux par palier, la
   recherche à travers toutes les catégories (lot A37)** — revue de quick par
   Sevih (12/10) : « éditeur guide : séparer par catégorie de guide ». La vue

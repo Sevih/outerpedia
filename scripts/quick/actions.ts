@@ -222,6 +222,7 @@ import {
   loadFreeHeroes,
   loadPremiumLimited,
   normalizeReview,
+  premiumLimitedRoster,
   saveFreeHeroes,
   savePremiumLimited,
   type FreeHeroesData,
@@ -6255,6 +6256,8 @@ export interface GeneralGuidesDeps {
   refs: () => InlineRefs;
   /** Les paliers PLEINS d'un perso, d'après sa rareté (et ses exceptions). */
   steps: (rarity: number, id: string) => StepOption[];
+  /** Les persos ATTENDUS de Premium & Limited, par bucket (les tags du roster) : le compteur « X / Y reviews ». */
+  buckets: () => Record<string, string[]>;
   loadPremiumLimited: () => PremiumLimitedData;
   loadFreeHeroes: () => FreeHeroesData;
   loadShopPriorities: () => ShopPrioritiesEditData;
@@ -6279,6 +6282,7 @@ export const GENERAL_GUIDES_DEPS: GeneralGuidesDeps = {
       value,
       label: transcendenceLabel(rarity, value, id),
     })),
+  buckets: premiumLimitedRoster,
   loadPremiumLimited,
   loadFreeHeroes,
   loadShopPriorities,
@@ -6310,7 +6314,8 @@ function loadGeneral(kind: GeneralGuideKind, deps: GeneralGuidesDeps): GeneralGu
  * : les onglets, les blocs, les champs — c'est elle que la page rend, sans
  * connaître le guide), ses données telles que son store les lit, le roster
  * par nom d'affichage anglais et, pour Premium & Limited, les paliers pleins
- * de chaque perso (les options de `stars`), les `refs`, les langues, le site.
+ * de chaque perso (les options de `stars`) et les persos attendus par bucket
+ * (`rosters`), les `refs`, les langues, le site.
  * Lu du disque à chaque appel. `error` : guide inconnu, ou dont le contenu
  * est en code (les onze autres généraux), ou données illisibles.
  */
@@ -6346,6 +6351,9 @@ export function generalGuideState(slug: string, deps: GeneralGuidesDeps = GENERA
         kind === 'premium-limited'
           ? Object.fromEntries(roster.map((c) => [c.id, deps.steps(c.rarity, c.id)]))
           : {},
+      // Les persos attendus par bucket (`view: 'roster'` de la forme) : ceux que
+      // `contribute/premium-reviews` compte — le tag `premium`, la famille `limited`.
+      rosters: kind === 'premium-limited' ? deps.buckets() : {},
     },
     refs: deps.refs(),
     langs: {
@@ -6448,6 +6456,7 @@ function cleanGeneralField(
       return true;
     }
     case 'string':
+    case 'target':
       if (v !== undefined && v !== null && typeof v !== 'string') return no('un texte attendu');
       out[f.key] = typeof v === 'string' ? v : '';
       return true;
@@ -6711,7 +6720,7 @@ function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralR
       const bucket = m[1].toLowerCase();
       const i = Number(m[3]) - 1;
       return {
-        tab: bucket,
+        tab: `${bucket}-${m[2] ? 'priorities' : 'reviews'}`,
         key: m[2] ? `priorities.${bucket}.${m[2]}.${i}` : `reviews.${bucket}.${i}`,
       };
     }

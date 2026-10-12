@@ -37,37 +37,57 @@ describe('generalGuideKind — les trois slugs éditables, rien d’autre', () =
 describe('generalGuideForm — Premium & Limited', () => {
   const form = generalGuideForm('premium-limited', {})!;
 
-  it('deux onglets, les deux buckets ; chacun les reviews puis les quatre paliers ordonnés', () => {
+  it('quatre onglets : par bucket, Reviews puis Priorités ; les reviews en `roster` sur le roster du bucket, les quatre paliers ordonnés en `tiles`', () => {
     expect(form.kind).toBe('premium-limited');
     expect(form.versioned).toBe(false);
     expect(form.tabs.map((t) => [t.id, t.label])).toEqual([
-      ['premium', 'Premium'],
-      ['limited', 'Limited'],
+      ['premium-reviews', 'Premium · Reviews'],
+      ['premium-priorities', 'Premium · Priorités'],
+      ['limited-reviews', 'Limited · Reviews'],
+      ['limited-priorities', 'Limited · Priorités'],
     ]);
-    const limited = form.tabs[1];
-    expect(limited.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.ordered ?? false])).toEqual([
-      ['limited-reviews', 'reviews.limited', 'hero', false],
-      ['limited-first', 'priorities.limited.first', 'hero', true],
-      ['limited-second', 'priorities.limited.second', 'hero', true],
-      ['limited-third', 'priorities.limited.third', 'hero', true],
-      ['limited-transcend', 'priorities.limited.transcend', 'hero', true],
+    const [reviews, priorities] = form.tabs.slice(2);
+    expect(
+      reviews.blocks.map((b) => [
+        b.id,
+        b.path.join('.'),
+        b.add,
+        b.view,
+        b.roster,
+        b.ordered ?? false,
+      ]),
+    ).toEqual([['limited-reviews', 'reviews.limited', 'hero', 'roster', 'limited', false]]);
+    expect(
+      priorities.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.ordered ?? false]),
+    ).toEqual([
+      ['limited-first', 'priorities.limited.first', 'hero', 'tiles', true],
+      ['limited-second', 'priorities.limited.second', 'hero', 'tiles', true],
+      ['limited-third', 'priorities.limited.third', 'hero', 'tiles', true],
+      ['limited-transcend', 'priorities.limited.transcend', 'hero', 'tiles', true],
+    ]);
+    expect(priorities.blocks.map((b) => b.label)).toEqual([
+      '1er choix',
+      '2e choix',
+      '3e choix',
+      'Priorité de transcendance',
     ]);
   });
 
-  it('une review : le héros (libéré par « pas encore sorti »), la review requise, les cibles, l’impact', () => {
+  it('une review : le héros (libéré par « pas encore sorti »), la review requise, les cibles en `target` (des chaînes), l’impact', () => {
     const reviews = form.tabs[0].blocks[0];
     expect(reviews.title).toBe('name');
     expect(reviews.fields!.map((f) => [f.key, f.kind])).toEqual([
       ['name', 'hero'],
       ['unreleased', 'check'],
       ['review', 'text'],
-      ['recommendedPve', 'string'],
-      ['recommendedPvp', 'string'],
+      ['recommendedPve', 'target'],
+      ['recommendedPvp', 'target'],
       ['impact', 'impact'],
     ]);
     expect(reviews.fields![0]).toMatchObject({ required: true, unreleasedKey: 'unreleased' });
     expect(reviews.fields![2].required).toBe(true);
-    const tier = form.tabs[0].blocks[1];
+    expect(reviews.fields![3].default).toBe('');
+    const tier = form.tabs[1].blocks[1];
     expect(tier.fields!.map((f) => f.kind)).toEqual(['hero', 'stars']);
   });
 });
@@ -162,8 +182,9 @@ describe('generalGuideForm — Shop priorities', () => {
 describe('blockOfKey — la clé d’un champ retrouve son bloc et son onglet', () => {
   it('par le chemin le plus long qui préfixe la clé ; une clé hors forme : rien', () => {
     const pl = generalGuideForm('premium-limited', {})!;
-    expect(blockOfKey(pl, 'reviews.limited.2.review')?.tab.id).toBe('limited');
+    expect(blockOfKey(pl, 'reviews.limited.2.review')?.tab.id).toBe('limited-reviews');
     expect(blockOfKey(pl, 'priorities.premium.third.0.stars')?.block.id).toBe('premium-third');
+    expect(blockOfKey(pl, 'priorities.premium.third.0.stars')?.tab.id).toBe('premium-priorities');
     expect(blockOfKey(pl, 'priorities.premium')).toBeUndefined();
     const shop = generalGuideForm('shop-purchase-priorities', SHOP)!;
     expect(blockOfKey(shop, 'editorial.shopNotes.guild')?.tab.id).toBe('guild');

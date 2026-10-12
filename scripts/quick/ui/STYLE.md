@@ -292,6 +292,31 @@ site. Un onglet ne recompose plus ni visage ni portrait : ni `.face`, ni
 `faceicon/FI_` écrit à la main. Les vignettes de MONSTRE (Extraction,
 Monstres) et les tuiles d'item (`itemTile`, `gear-view.mjs`) restent à part.
 
+### Le glisser-déposer d'une liste (`ui/sortable.mjs`, F25)
+
+Une rangée dont l'ORDRE est le contenu (les paliers de Premium & Limited ;
+Core Fusion ensuite) se range à la souris par `sortable(root, { onMove, item?,
+list? })`. Il ne déplace rien : il dit « l'élément `from` de cette liste va en
+`to` de celle-là » (`onMove(from, to, fromList, toList)`, `to` = l'index
+d'arrivée, le retrait déjà compté dans la même liste), l'appelant écrit ses
+données et redessine — le modèle de toute la page. Par DÉLÉGATION sur `root` :
+les rangées se redessinent (`innerHTML`), le branchement tient ; il rend ce qui
+le débranche. `item` : ce qui se déplace (`[draggable="true"]` sinon) ; `list`
+: l'ancêtre qui fait liste (sans lui, `root`) — un élément peut tomber dans une
+AUTRE liste du même `root`.
+
+```
+.dragging              sur l'élément saisi, le temps du geste (le fantôme est celui du navigateur ; l'appelant atténue la source)
+.drop-before / -after  sur l'élément survolé : le TRAIT d'insertion, du côté où l'on tombera (la moitié survolée ; sans coordonnées, avant)
+.drop-end              sur la liste survolée hors de ses éléments (vide, ou après le dernier) : en fin
+```
+
+Le CSS de l'appelant dessine ces trois états (Guides : `box-shadow` d'accent
+de 5 px sur le côté, bordure en pointillé d'accent sur la rangée). Les boutons
+↑ ↓ restent : le clavier, et le banc — happy-dom ne connaît pas `DragEvent`,
+les tests tirent des `Event` nus (`dragstart`, `dragover`, `drop`, `dragend`),
+sans `dataTransfer` ni `clientX`.
+
 ## Les règles
 
 - **Largeur maîtrisée** : 1200 px par défaut ; `wide` quand le contenu est une
@@ -1419,9 +1444,14 @@ le hash : `#guides/<cat>` (la vue d'ensemble, sur cette catégorie), `#guides/<c
 UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour un lien ou le banc) : la même coquille — en-tête (titre, badge « General Guides », cat/slug, la date), savebar, .gd-tabs — mais les sous-onglets, les cartes et les champs viennent de la FORME servie (`spec.tabs` : onglets › blocs › champs, cf. `general-guide-form.ts`) ; la page ne connaît aucun des trois guides
    un bloc = une .card.gd-card (card-head : son libellé, son indication, badge du compte) : un texte seul (LE TEXTE), des textes (une rangée numérotée par texte, ✕, [＋ paragraphe]), ou une liste d'entrées
    une entrée : une CARTE (.gd-entry — en tête le perso de l'entrée en tuile 44 px + [Changer…], ou « Source n » / « Item n » ; ✕ ; le corps : les champs, les courts côte à côte) ; ou une LIGNE compacte — un produit du jeu (.gd-prod : [S|A|B|C] (.gd-prio, re-cliquer efface) · icône + nom · coût avec l'icône de la monnaie · « 5 / daily » … [＋ note] ; la note ouverte = LE TEXTE sous la ligne), un palier de priorité (.gd-rank : rang · tuile du perso [Changer…] · [Palier ▾ : les crans PLEINS du perso, 3★ 4★ 5★ 6★] ↑ ↓ ✕)
-   les champs : text (LE TEXTE, en ligne pour un libellé) · hero (tuile + [Changer…], le picker partagé en choix unique ; « pas encore sorti » coché = un champ nu pour le nom) · heroes (tuiles ✕ [＋ héros], le picker en multi) · select · stars · string · number · check · priority · impact (table 3★→6★ × PvE / PvP, un select — 1 à 5 — par case) · cost (montant + monnaie) · limit (compte + période, la période éteinte sans compte) · product (lecture)
+   les champs : text (LE TEXTE, en ligne pour un libellé) · hero (tuile + [Changer…], le picker partagé en choix unique ; « pas encore sorti » coché = un champ nu pour le nom) · heroes (tuiles ✕ [＋ héros], le picker en multi) · select · stars · string · number · check · target (une cible de transcendance, CHAÎNE du site : étoiles 3-6 + [Any] + note, F25) · priority · impact (table 3★→6★ × PvE / PvP, cinq étoiles cliquables par case ; re-cliquer vide) · cost (montant + monnaie) · limit (compte + période, la période éteinte sans compte) · product (lecture)
    une sous-liste (.gd-sub : les entrées d'une source — chacune une .gd-nested avec ✕, [＋ entrée]) ; [＋ héros] (une liste par perso : le picker pose l'entrée), [＋ source], [＋ item], [＋ paragraphe] ; [Traduire] en pied d'onglet
-   Premium & Limited : [Premium] [Limited] — Reviews (cartes) puis 1er choix · 2e choix · 3e choix · Priorité de transcendance (lignes ordonnées) ; Free Heroes : [Sources] ; Shop : [Guild] [Joint Challenge] [Friendship] [Arena] [Star's Memory] [World Boss] [Survey Hub] [Event] [General / Resource] [Supply Module] [Rico Secret] (+ un onglet pour la note d'un shop absent de la rotation)
+   Premium & Limited (F25, revue de Sevih) : QUATRE sous-onglets [Premium · Reviews] [Premium · Priorités] [Limited · Reviews] [Limited · Priorités] (`…/premium-priorities` par le hash) — la forme le dit (`view` du bloc), la page ne nomme pas le guide
+     Reviews (`view: 'roster'`, à la façon de contribute/premium-reviews) : UNE .card.gd-roster-card — card-head : « Reviews » · badge « 11 / 13 reviews » (les persos du roster du bucket, `options.rosters`, dont l'anglais est écrit) · badge warn « 2 manquantes » ; p.gd-missing « Sans review : A, B » ; .gd-roster : une LIGNE par perso du roster (button.gd-rrow : vignette 32 px · ★ écrite / ☆ à écrire · le nom · le résumé en chasse fixe « PvE 4 to 5 · PvP Any · impact 3/2 · 2/2 · 3/5 · 2/4 » (3★ → 6★, PvE/PvP, – = vide) ; « — pas de review » sans entrée), puis « Hors roster · pas encore sortis » et leurs lignes (badge warn « pas encore sorti » / « hors roster ») ; UNE review dépliée à la fois, sa .gd-entry juste sous sa ligne (un clic déplie, un autre replie ; une ligne ☆ cliquée CRÉE l'entrée du perso, dépliée) ; en pied [＋ review] (le picker en choix unique sur les persos du roster SANS entrée — « Tous les persos du roster ont leur review. ») [＋ pas encore sorti] (une entrée au nom libre, dépliée)
+       la review dépliée : en tête la tuile 44 px + [Changer…] (ou le nom libre), ✕ ; [☐ Pas encore sorti] ; LE TEXTE ; Cible PvE / Cible PvP (`target`, .gd-target : .gd-stars ☆3 ★4 ★5 ☆6 (un clic pose une étoile, un second étend en plage, une borne cliquée se retire — la règle de `RecoTargetStars`) · [Any] (`aria-pressed`) · [note (facultatif) 20ch] · l'écho de la CHAÎNE écrite « 4 to 5 dps », celle que le site écrit) ; Impact : table 3★ → 6★ × PvE / PvP, chaque case cinq étoiles cliquables (.gd-stars, re-cliquer la note la vide), plus de select
+       « Traduire » vaut pour TOUTES les reviews de l'onglet, repliées comprises (les textes des données, pas ceux dessinés) ; un refus sur une review repliée cercle sa LIGNE (.gd-rrow.ko), dépliée son champ
+     Priorités (`view: 'tiles'`) : UNE .card.gd-tiers « Priorités » — une .gd-tier par palier (data-block = l'id du bloc : « 1er choix » badge du compte, …, « Priorité de transcendance ») : .gd-tiles, la RANGÉE de vignettes, l'ordre = le rang — chaque .gd-pick (`draggable`) : le rang en haut à gauche, la tuile de perso 44 px, [Palier ▾ : ses crans PLEINS] dessous, ↑ ↓ ✕ (22 px) ; [＋] clôt la rangée (le picker en MULTI comme les items de Gear reco : cochés = les persos du palier, les nouveaux à la suite dans l'ordre des clics, « Valider » REMPLACE le palier — un nom hors du roster reste à sa place)
+       le glisser-déposer (`ui/sortable.mjs`, branché une fois sur #gd-panel) : la vignette saisie s'atténue (.dragging), le trait d'insertion se pose du côté où elle tombera (.drop-before / .drop-after, 5 px d'accent), une rangée survolée hors de ses vignettes se cercle (.drop-end : elle tombera en fin) — aussi d'un palier à l'AUTRE ; ↑ ↓ restent le chemin du clavier et du banc ; Free Heroes : [Sources] ; Shop : [Guild] [Joint Challenge] [Friendship] [Arena] [Star's Memory] [World Boss] [Survey Hub] [Event] [General / Resource] [Supply Module] [Rico Secret] (+ un onglet pour la note d'un shop absent de la rotation)
    un refus est situé à la CLÉ du champ (le chemin dans les données : `reviews.premium.2.review`) : le champ cerclé, son message dessous, le point rouge sur l'onglet
 ```
 

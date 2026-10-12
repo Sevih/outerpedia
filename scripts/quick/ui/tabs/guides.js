@@ -18,6 +18,7 @@ import { $, esc, getJson, log, post, sections, state, stateLoaded } from '../lib
 import { noteHtml } from '../gear-view.mjs';
 import { heroFilters, openHeroPicker } from '../hero-picker.mjs';
 import { heroTile } from '../hero-tile.mjs';
+import { sortable } from '../sortable.mjs';
 import { openTemplate } from './changelog.js';
 
 // Les sous-onglets, dans l'ordre de l'éditeur de l'admin ; `scoped` : par version.
@@ -52,6 +53,7 @@ let wanted = null; // ce que le hash demande : { cat, slug, version }, tant que 
 let wantedSub = null; // le sous-onglet que le hash demande d'un guide général, tant qu'il n'est pas chargé
 let gen = null; // le guide GÉNÉRAL ouvert : { slug, form, data, was } — `draft` et `meta` restent nuls
 const genOpen = new Set(); // les notes de produit ouvertes par « ＋ note », par clé, tant qu'elles sont vides
+let openEntry = null; // l'entrée dépliée d'un bloc `roster` (une review) : l'objet lui-même, les index bougent
 let refused = []; // les refus du dernier enregistrement (`GuideRefusal`)
 const pinTouched = new Set(); // les versions dont la page a touché les pins
 const texts = new Map(); // au dessin : clé d'un texte → son objet (ou sa liste, pour un bloc)
@@ -1109,13 +1111,18 @@ function tabMovedGen(id) {
   const tab = gen.form.tabs.find((t) => t.id === id);
   return Boolean(tab) && !same(genSlice(genClean(gen.data), tab), genSlice(genClean(gen.was), tab));
 }
-/** Les textes LIVE d'un guide général, dans l'ordre de la forme (la traduction écrit dedans). */
-function genTexts() {
+/**
+ * Les textes LIVE d'un guide général, dans l'ordre de la forme (la traduction
+ * écrit dedans) ; `tabId` : ceux d'un seul onglet — « Traduire » vaut pour
+ * l'onglet montré, ses reviews repliées comprises (un bloc `roster` n'en
+ * dessine qu'une).
+ */
+function genTexts(tabId) {
   const out = [];
   const ofFields = (e, fields) => {
     for (const f of fields ?? []) if (f.kind === 'text' && e[f.key]) out.push(e[f.key]);
   };
-  for (const tab of gen.form.tabs)
+  for (const tab of gen.form.tabs.filter((t) => !tabId || t.id === tabId))
     for (const block of tab.blocks) {
       const value = getAt(gen.data, block.path);
       if (block.kind === 'text') {
@@ -1140,7 +1147,7 @@ function blankEntry(fields, name = '') {
     else if (f.kind === 'hero') e[f.key] = name;
     else if (f.kind === 'heroes') e[f.key] = [];
     else if (f.kind === 'select') e[f.key] = f.options?.[0]?.value ?? '';
-    else if (f.kind === 'string') e[f.key] = '';
+    else if (f.kind === 'string' || f.kind === 'target') e[f.key] = '';
     else if (f.kind === 'stars') e[f.key] = stepsOf(name)[0]?.value ?? 3;
     else if (f.kind === 'impact')
       e[f.key] = Object.fromEntries(['3', '4', '5', '6'].map((s) => [s, { pve: '', pvp: '' }]));
@@ -1162,6 +1169,54 @@ function heroFace(name) {
     c ?? { name: name || '—' },
     { name: true },
   )}</span>`;
+}
+
+/* --- les cibles de transcendance (`target`) : la chaîne du site, lue et écrite comme `RecoTargetStars` --- */
+/** « 4 to 5 » / « Any » / « 5 (support) 6 (dps) » → { any, min?, max?, note }. */
+function parseReco(s) {
+  const t = (s ?? '').trim();
+  if (!t) return { any: false, note: '' };
+  if (/^any$/i.test(t)) return { any: true, note: '' };
+  const m = /^(\d)(?:\s*to\s*(\d))?\s*(.*)$/i.exec(t);
+  if (m) {
+    const min = Number(m[1]);
+    return { any: false, min, max: m[2] ? Number(m[2]) : min, note: m[3].trim() };
+  }
+  return { any: false, note: t };
+}
+function formatReco(r) {
+  if (r.any) return 'Any';
+  const base = r.min ? (r.min === r.max ? String(r.min) : `${r.min} to ${r.max}`) : '';
+  return [base, r.note].filter(Boolean).join(' ').trim();
+}
+/** Un clic sur l'étoile `s` d'une cible : la règle du site (une seule, une plage, une borne retirée). */
+function recoStar(r, s) {
+  if (r.any || r.min === undefined) return { ...r, any: false, min: s, max: s };
+  const min = r.min;
+  const max = r.max ?? r.min;
+  if (min === max) {
+    if (s === min) return { ...r, min: undefined, max: undefined };
+    return { ...r, min: Math.min(min, s), max: Math.max(max, s) };
+  }
+  if (s < min) return { ...r, min: s };
+  if (s > max) return { ...r, max: s };
+  if (s === min) return { ...r, min: min + 1 };
+  if (s === max) return { ...r, max: max - 1 };
+  return { ...r, min: s, max: s };
+}
+const recoOn = (r, s) => !r.any && r.min !== undefined && s >= r.min && s <= (r.max ?? r.min);
+
+/** Le sélecteur de palier d'une entrée : les crans PLEINS de son perso. */
+function starsSelect(f, e, key, more = '') {
+  const steps = stepsOf(e.name ?? '');
+  const cur = e[f.key];
+  const opts = steps.length ? steps : [{ value: cur, label: String(cur) }];
+  return `<select class="w-qty" ${genAttr(key, 'number')} aria-label="${esc(f.label)}${e.name ? ` de ${esc(e.name)}` : ''}" ${more}>${opts
+    .map(
+      (o) =>
+        `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
+    )
+    .join('')}</select>`;
 }
 const fieldLabel = (f) => `<span class="lbl">${esc(f.label)}</span>`;
 const genAttr = (key, type) => `data-gen="${esc(key)}" data-type="${type}"`;
@@ -1201,16 +1256,20 @@ function fieldHtml(f, e, ek, block) {
             `<option value="${esc(o.value)}"${o.value === e[f.key] ? ' selected' : ''}>${esc(o.label)}</option>`,
         )
         .join('')}</select></label>`;
-    case 'stars': {
-      const steps = stepsOf(e.name ?? '');
-      const cur = e[f.key];
-      const opts = steps.length ? steps : [{ value: cur, label: String(cur) }];
-      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<select class="w-qty" ${genAttr(key, 'number')} aria-label="${esc(f.label)}">${opts
+    case 'stars':
+      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}${starsSelect(f, e, key)}${errHtml(bad)}</label>`;
+    case 'target': {
+      const r = parseReco(e[f.key] ?? '');
+      return `<div class="gd-field gd-field-inline gd-target${bad.length ? ' ko' : ''}">${fieldLabel(f)}<span class="gd-stars" role="group" aria-label="${esc(f.label)}, étoiles">${[
+        3, 4, 5, 6,
+      ]
         .map(
-          (o) =>
-            `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
+          (st) =>
+            `<button type="button" data-act="gen-target-star" data-key="${esc(key)}" data-value="${st}" aria-pressed="${recoOn(r, st)}" title="${st}★">${recoOn(r, st) ? '★' : '☆'}<small>${st}</small></button>`,
         )
-        .join('')}</select>${errHtml(bad)}</label>`;
+        .join(
+          '',
+        )}</span><button class="btn ghost sm" type="button" data-act="gen-target-any" data-key="${esc(key)}" aria-pressed="${r.any}">Any</button><input class="w-text" data-tnote="${esc(key)}" value="${esc(r.note)}" placeholder="note (facultatif)" aria-label="${esc(f.label)}, note" autocomplete="off" /><span class="lbl mono" data-tout>${esc(e[f.key] || '—')}</span>${errHtml(bad)}</div>`;
     }
     case 'string':
       return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<input class="${block.title === f.key ? 'w-search' : 'w-text'}" ${genAttr(key, 'string')} value="${esc(e[f.key] ?? '')}" placeholder="${esc(f.placeholder ?? '')}" aria-label="${esc(f.label)}" autocomplete="off" />${errHtml(bad)}</label>`;
@@ -1229,20 +1288,18 @@ function fieldHtml(f, e, ek, block) {
         .join('')}</div>${errHtml(bad)}</div>`;
     case 'impact': {
       const grid = ensureAt(e, [f.key], () => ({}));
-      const cell = (star, side) =>
-        `<select ${genAttr(`${key}.${star}.${side}`, 'string')} aria-label="${esc(f.label)} ${star}★ ${side}">${[
-          '',
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
+      // Cinq étoiles par case, comme `ImpactStars` du site : re-cliquer la note vide la case.
+      const cell = (star, side) => {
+        const n = Number(grid[star]?.[side] ?? '') || 0;
+        return `<span class="gd-stars" role="group" aria-label="${esc(f.label)} ${star}★ ${side}">${[
+          1, 2, 3, 4, 5,
         ]
           .map(
-            (n) =>
-              `<option value="${n}"${(grid[star]?.[side] ?? '') === n ? ' selected' : ''}>${n || '—'}</option>`,
+            (i) =>
+              `<button type="button" data-act="gen-impact" data-key="${esc(`${key}.${star}.${side}`)}" data-value="${i}" aria-pressed="${i <= n}" title="${i === n ? 'Effacer' : String(i)}">${i <= n ? '★' : '☆'}</button>`,
           )
-          .join('')}</select>`;
+          .join('')}</span>`;
+      };
       return `<div class="gd-field${bad.length ? ' ko' : ''}">${fieldLabel(f)}<table class="gd-impact"><thead><tr><th>★</th><th>PvE</th><th>PvP</th></tr></thead><tbody>${[
         '3',
         '4',
@@ -1355,8 +1412,103 @@ function entryHtml(block, e, ek, i, count, listKey) {
   </div>`;
 }
 
+/* --- `view: 'roster'` : les reviews à la façon de contribute/premium-reviews --- */
+/** Une review compte quand son anglais est écrit (la règle du site : une entrée vide n'enfle pas le compteur). */
+const reviewed = (e) => Boolean(e?.review?.[def()]?.trim());
+/** Le résumé d'une review en une ligne : « PvE 5 · PvP Any · impact 3/2 · 2/2 · 3/5 · 2/4 » (3★ → 6★, PvE/PvP, « – » pour une case vide). */
+function reviewSummary(e) {
+  const cells = ['3', '4', '5', '6']
+    .map((st) => `${e.impact?.[st]?.pve || '–'}/${e.impact?.[st]?.pvp || '–'}`)
+    .join(' · ');
+  return `PvE ${e.recommendedPve || '—'} · PvP ${e.recommendedPvp || '—'} · impact ${cells}`;
+}
+/** Une ligne de la liste compacte : la vignette, ★ ou ☆, le nom, le résumé ; un clic déplie sa review (ou la crée, pour un perso du roster). */
+function rosterRowHtml(block, listKey, name, e, i) {
+  const c = heroByName(name);
+  const open = e !== undefined && e === openEntry;
+  const ek = e !== undefined ? `${listKey}.${i}` : '';
+  const bad = ek
+    ? refusedKey(ek).length || (block.fields ?? []).some((f) => refusedKey(`${ek}.${f.key}`).length)
+    : false;
+  const label = name || '(sans nom)';
+  return `<button class="gd-rrow${open ? ' open' : ''}${bad ? ' ko' : ''}${c ? '' : ' unknown'}" type="button" data-act="gen-open" data-key="${esc(listKey)}"${
+    ek ? ` data-entry="${esc(ek)}"` : ''
+  } data-name="${esc(name)}" aria-expanded="${open}" title="${esc(open ? 'Replier' : e ? 'Déplier la review' : 'Écrire la review')}">${heroTile(
+    state,
+    c ?? { name: label },
+    { px: 32 },
+  )}<span class="gd-rmark" aria-label="${reviewed(e) ? 'review écrite' : 'review à écrire'}">${reviewed(e) ? '★' : '☆'}</span><span class="gd-rname">${esc(label)}</span>${
+    e?.unreleased
+      ? '<span class="badge warn">pas encore sorti</span>'
+      : c
+        ? ''
+        : '<span class="badge warn">hors roster</span>'
+  }${e ? `<span class="gd-rsum lbl mono">${esc(reviewSummary(e))}</span>` : '<span class="gd-rsum lbl">— pas de review</span>'}</button>`;
+}
+/** Le bloc des reviews : le compteur et les manquants, la liste du roster puis les entrées hors roster, UNE review dépliée. */
+function rosterBlockHtml(block) {
+  const key = block.path.join('.');
+  const bad = refusedKey(key);
+  const list = ensureAt(gen.data, block.path, () => []);
+  const names = sheet.options.rosters?.[block.roster ?? ''] ?? [];
+  const indexOf = (name) => list.findIndex((e) => e.name === name);
+  const done = names.filter((n) => reviewed(list[indexOf(n)])).length;
+  const missing = names.filter((n) => !reviewed(list[indexOf(n)]));
+  const off = list.map((e, i) => [e, i]).filter(([e]) => !names.includes(e.name));
+  const row = (name, i) =>
+    rosterRowHtml(block, key, name, i >= 0 ? list[i] : undefined, i) +
+    (i >= 0 && list[i] === openEntry
+      ? entryHtml(block, list[i], `${key}.${i}`, i, list.length, key)
+      : '');
+  return `<div class="card gd-card gd-roster-card${bad.length ? ' ko' : ''}" data-block="${esc(block.id)}">
+    <div class="card-head"><strong>${esc(block.label)}</strong>${block.hint ? `<span class="lbl">${esc(block.hint)}</span>` : ''}<span class="badge off" data-count>${done} / ${names.length} reviews</span>${
+      missing.length ? `<span class="badge warn">${plural(missing.length, 'manquante')}</span>` : ''
+    }</div>
+    <div class="gd-body">${
+      missing.length ? `<p class="lbl gd-missing">Sans review : ${esc(missing.join(', '))}</p>` : ''
+    }<div class="gd-roster" role="list">${names.map((n) => row(n, indexOf(n))).join('')}${
+      off.length
+        ? `<span class="lbl gd-roster-sep">Hors roster · pas encore sortis</span>${off.map(([e, i]) => row(e.name, i)).join('')}`
+        : ''
+    }${names.length || off.length ? '' : '<p class="lbl">Aucune review.</p>'}</div>${errHtml(bad)}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="gen-add-review" data-key="${esc(key)}" aria-haspopup="dialog">＋ review</button><button class="btn ghost sm" type="button" data-act="gen-add-unreleased" data-key="${esc(key)}" title="Un perso absent de la data : son nom reste libre, la review attend sa sortie">＋ pas encore sorti</button></div></div>
+  </div>`;
+}
+
+/* --- `view: 'tiles'` : les paliers en rangées de vignettes, glisser-déposer --- */
+/** Une vignette d'un palier : le rang, le perso, son palier de transcendance, ↑ ↓ ✕ ; `draggable`. */
+function tileHtml(block, e, ek, i, count, listKey) {
+  const bad = refusedKey(ek);
+  const stars = (block.fields ?? []).find((f) => f.kind === 'stars');
+  const fbad = (block.fields ?? []).flatMap((f) => refusedKey(`${ek}.${f.key}`));
+  const name = e.name ?? '';
+  return `<div class="gd-pick${bad.length || fbad.length ? ' ko' : ''}" draggable="true" role="listitem" data-entry="${esc(ek)}" data-key="${esc(listKey)}" data-i="${i}" aria-label="${esc(`rang ${i + 1} : ${name || 'aucun perso'}`)}">
+      <span class="gd-pick-n lbl mono">${i + 1}</span>${heroFace(name)}${stars ? starsSelect(stars, e, `${ek}.${stars.key}`) : ''}
+      <span class="gd-pick-acts"><button class="btn icon" type="button" data-act="gen-up" data-key="${esc(listKey)}" data-i="${i}" title="Monter" aria-label="Monter ${esc(name)}"${i ? '' : ' disabled'}>↑</button><button class="btn icon" type="button" data-act="gen-down" data-key="${esc(listKey)}" data-i="${i}" title="Descendre" aria-label="Descendre ${esc(name)}"${i < count - 1 ? '' : ' disabled'}>↓</button><button class="btn icon" type="button" data-act="gen-del" data-key="${esc(listKey)}" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(name)}">✕</button></span>${errHtml([...bad, ...fbad])}
+    </div>`;
+}
+/** Un palier : son libellé, sa rangée de vignettes (la liste du glisser-déposer), « ＋ » en multi-choix. */
+function tierHtml(block) {
+  const key = block.path.join('.');
+  const bad = refusedKey(key);
+  const list = ensureAt(gen.data, block.path, () => []);
+  return `<div class="gd-tier${bad.length ? ' ko' : ''}" data-block="${esc(block.id)}">
+    <div class="gd-tier-head"><strong>${esc(block.label)}</strong><span class="badge off">${list.length}</span></div>
+    <div class="gd-tiles" role="list" aria-label="${esc(block.label)}" data-key="${esc(key)}">${list
+      .map((e, i) => tileHtml(block, e, `${key}.${i}`, i, list.length, key))
+      .join(
+        '',
+      )}<button class="btn ghost sm gd-tiles-add" type="button" data-act="gen-pick-tiles" data-key="${esc(key)}" aria-haspopup="dialog" title="Choisir les persos du palier : cochés = ceux du palier, les nouveaux à la suite ; « Valider » remplace">＋</button></div>${errHtml(bad)}
+  </div>`;
+}
+/** Les blocs `tiles` d'un onglet, dans UNE carte : un palier par rangée, le glisser-déposer d'une rangée à l'autre. */
+const tiersHtml = (tab) =>
+  `<div class="card gd-card gd-tiers"><div class="card-head"><strong>Priorités</strong><span class="lbl">l’ordre est celui de la page — glisser une vignette, aussi d’un palier à l’autre ; ↑ ↓ au clavier</span></div><div class="gd-body">${tab.blocks
+    .map(tierHtml)
+    .join('')}</div></div>`;
+
 /** Un bloc de la forme : un texte seul, des textes, ou une liste d'entrées, dans sa carte. */
 function genBlockHtml(block) {
+  if (block.view === 'roster' && block.kind === 'list') return rosterBlockHtml(block);
   const key = block.path.join('.');
   const bad = refusedKey(key);
   const add = (label) =>
@@ -1397,7 +1549,11 @@ function genBlockHtml(block) {
 /** Le sous-onglet montré d'un guide général : ses blocs, les refus de l'onglet, « Traduire ». */
 function genTabHtml() {
   const tab = gen.form.tabs.find((t) => t.id === sub) ?? gen.form.tabs[0];
-  return `<div class="gd-stack">${tab.blocks.map(genBlockHtml).join('')}${errHtml(refusedIn(tab.id).filter((r) => !r.key))}${translateHtml()}</div>`;
+  const blocks =
+    tab.blocks.length && tab.blocks.every((b) => b.view === 'tiles' && b.kind === 'list')
+      ? tiersHtml(tab)
+      : tab.blocks.map(genBlockHtml).join('');
+  return `<div class="gd-stack">${blocks}${errHtml(refusedIn(tab.id).filter((r) => !r.key))}${translateHtml()}</div>`;
 }
 
 /** Le picker en choix unique : le nom du perso choisi. */
@@ -1460,6 +1616,96 @@ function genAct(el, act) {
           `[data-entry="${key}.${list.length - 1}"] textarea, [data-entry="${key}.${list.length - 1}"] select`,
         );
       });
+    // Un bloc `roster` : une ligne cliquée déplie sa review (un autre clic la
+    // replie) ; un perso du roster sans entrée en reçoit une, dépliée.
+    case 'gen-open': {
+      const list = ensureAt(gen.data, path, () => []);
+      let e = el.dataset.entry ? getAt(gen.data, pathOf(el.dataset.entry)) : undefined;
+      if (e && e === openEntry) {
+        openEntry = null;
+        return redo(`[data-act="gen-open"][data-entry="${el.dataset.entry}"]`);
+      }
+      if (!e) {
+        e = blankEntry(block?.fields, el.dataset.name ?? '');
+        list.push(e);
+      }
+      openEntry = e;
+      return redo(`[data-entry="${key}.${list.indexOf(e)}"] textarea`);
+    }
+    // « ＋ review » : le picker, en choix unique, sur les persos du roster du bucket qui n'ont pas d'entrée.
+    case 'gen-add-review': {
+      const list = ensureAt(gen.data, path, () => []);
+      const names = sheet.options.rosters?.[block?.roster ?? ''] ?? [];
+      const left = names.filter((n) => !list.some((e) => e.name === n));
+      return openHeroPicker({
+        title: 'Une review pour…',
+        roster: sheet.options.roster.filter((c) => left.includes(c.name)),
+        imgBase: state.imgBase,
+        none: 'Tous les persos du roster ont leur review.',
+        opener,
+        onPick: (id) => {
+          const e = blankEntry(block?.fields, heroById(id)?.name ?? id);
+          list.push(e);
+          openEntry = e;
+          redo(`[data-entry="${key}.${list.length - 1}"] textarea`);
+        },
+      });
+    }
+    // « ＋ pas encore sorti » : une entrée au nom libre, dépliée, comme le site.
+    case 'gen-add-unreleased': {
+      const list = ensureAt(gen.data, path, () => []);
+      const e = blankEntry(block?.fields);
+      const free = block?.fields?.find((f) => f.kind === 'hero')?.unreleasedKey;
+      if (free) e[free] = true;
+      list.push(e);
+      openEntry = e;
+      return redo(`[data-entry="${key}.${list.length - 1}"] input[data-gen]`);
+    }
+    // « ＋ » d'un palier : le picker en multi, cochés = les persos du palier ; les
+    // nouveaux à la suite dans l'ordre des clics, les décochés partent (un nom
+    // hors du roster, que le picker ne connaît pas, reste à sa place).
+    case 'gen-pick-tiles': {
+      const list = ensureAt(gen.data, path, () => []);
+      return openHeroPicker({
+        title: block?.label ?? 'Persos',
+        roster: sheet.options.roster,
+        imgBase: state.imgBase,
+        multi: true,
+        chosen: list.map((e) => heroByName(e.name)?.id).filter(Boolean),
+        opener,
+        onPick: (ids) => {
+          const next = ids.map((id) => {
+            const name = heroById(id)?.name ?? id;
+            return list.find((e) => e.name === name) ?? blankEntry(block?.fields, name);
+          });
+          list.forEach((e, i) => {
+            if (!heroByName(e.name)) next.splice(Math.min(i, next.length), 0, e);
+          });
+          list.length = 0;
+          list.push(...next);
+          redo(`[data-act="gen-pick-tiles"][data-key="${key}"]`);
+        },
+      });
+    }
+    // Une cible (`target`) : ses étoiles 3-6 et « Any », la chaîne du site réécrite.
+    case 'gen-target-star': {
+      const r = recoStar(parseReco(getAt(gen.data, path)), Number(el.dataset.value));
+      setAt(gen.data, path, formatReco(r));
+      return redo(
+        `[data-act="gen-target-star"][data-key="${key}"][data-value="${el.dataset.value}"]`,
+      );
+    }
+    case 'gen-target-any': {
+      const r = parseReco(getAt(gen.data, path));
+      setAt(gen.data, path, formatReco({ ...r, any: !r.any, min: undefined, max: undefined }));
+      return redo(`[data-act="gen-target-any"][data-key="${key}"]`);
+    }
+    // Une case d'impact : la note cliquée, ou vide si c'est déjà elle.
+    case 'gen-impact': {
+      const cur = getAt(gen.data, path);
+      setAt(gen.data, path, cur === el.dataset.value ? '' : el.dataset.value);
+      return redo(`[data-act="gen-impact"][data-key="${key}"][data-value="${el.dataset.value}"]`);
+    }
     case 'gen-pick-hero': {
       const cur = getAt(gen.data, path);
       return pickHero(opener, typeof cur === 'string' ? cur : '', (name) => {
@@ -1512,6 +1758,17 @@ function genAct(el, act) {
     default:
       return undefined;
   }
+}
+
+/** La note libre d'une cible (`data-tnote`) : la chaîne recomposée, son écho mis à jour sans redessin. */
+function targetNote(el) {
+  const path = pathOf(el.dataset.tnote);
+  const value = formatReco({ ...parseReco(getAt(gen.data, path)), note: el.value });
+  setAt(gen.data, path, value);
+  const out = el.parentElement?.querySelector('[data-tout]');
+  if (out) out.textContent = value || '—';
+  forgive(sub);
+  marks();
 }
 
 /** Une saisie dans un champ nu d'un guide général (`data-gen`) : la valeur posée à sa clé. */
@@ -1577,6 +1834,7 @@ async function loadGeneral(slug, keep = false) {
     tr = { busy: tr.busy, error: '' };
     pv.segs.clear();
     pv.sent = '';
+    openEntry = null;
     genBaseline();
   } else gen.was = was;
   if (other) {
@@ -1829,6 +2087,8 @@ function pvAsk(delay = 0) {
 // ------------------------------------------------------ la saisie
 $('gd-panel').oninput = (e) => {
   if (!sheet) return;
+  const note = e.target.closest('[data-tnote]');
+  if (note) return targetNote(note);
   const nude = e.target.closest('[data-gen]');
   if (nude) return genInput(nude);
   const field = e.target.closest('[data-key]');
@@ -1880,6 +2140,29 @@ $('gd-panel').addEventListener(
   },
   true,
 );
+
+// Le glisser-déposer des vignettes d'un palier (`view: 'tiles'`), branché UNE
+// fois sur le panneau : les rangées se redessinent, le branchement tient. Un
+// dépôt écrit la liste de départ et celle d'arrivée (la même, ou un autre
+// palier), puis redessine ; le palier (`stars`) suit le perso.
+sortable($('gd-panel'), {
+  item: '.gd-pick',
+  list: '.gd-tiles',
+  onMove: (from, to, fromList, toList) => {
+    if (!gen) return;
+    const a = getAt(gen.data, pathOf(fromList.dataset.key ?? ''));
+    const b = fromList === toList ? a : getAt(gen.data, pathOf(toList.dataset.key ?? ''));
+    if (!Array.isArray(a) || !Array.isArray(b)) return;
+    const [e] = a.splice(from, 1);
+    if (!e) return;
+    b.splice(to, 0, e);
+    forgive(sub);
+    render();
+    $('gd-panel')
+      .querySelector(`.gd-pick[data-key="${toList.dataset.key}"][data-i="${to}"] select`)
+      ?.focus();
+  },
+});
 
 /** Le picker partagé, en lignes, sur des options `{ id, name, icon? }`. */
 function pickRows({ title, options, chosen, placeholder, none, opener, onPick }) {
@@ -2140,7 +2423,8 @@ $('gd-versions').onkeydown = (e) => {
 async function translate() {
   if (tr.busy || !sheet) return;
   const todo = [];
-  for (const t of texts.values())
+  // Les textes de l'onglet : ceux dessinés — ou, pour un guide général, ceux de ses données.
+  for (const t of gen ? genTexts(sub) : texts.values())
     for (const x of Array.isArray(t) ? t : [t]) if (en(x)) todo.push({ text: x, en: x[def()] });
   if (!todo.length) return log(['Rien à traduire : aucun texte anglais dans cet onglet.'], true);
   tr = { busy: true, error: '' };

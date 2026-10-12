@@ -10223,10 +10223,18 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
     // La langue que le tableau masque y est, et rien n'est résolu.
     expect(page.raw()).toEqual(Object.entries(SEASONAL));
 
+    // Le bouton dit « copié » deux secondes, puis redevient « Copier » : la
+    // minuterie est tenue ici (fausse), sinon elle tombe après la fermeture de
+    // la fenêtre, sur un `document` qui n'existe plus — un « unhandled error »
+    // qui rougissait la suite selon l'ordre des fichiers.
+    vi.useFakeTimers();
     page.el('t-copy').click();
-    await page.settle();
+    await vi.advanceTimersByTimeAsync(10);
     expect(page.writeText).toHaveBeenCalledWith(JSON.stringify(SEASONAL, null, 2));
     expect(page.el('t-copy').textContent).toBe('copié');
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(page.el('t-copy').textContent).toBe('Copier');
+    vi.useRealTimers();
 
     // Entrée sur une ligne l'ouvre aussi ; la croix referme.
     page.fire(page.all('#t-rows tr[data-i="0"]')[0], 'keydown', 'Enter');
@@ -10243,9 +10251,12 @@ describe('Tables du jeu — la page, sur le vrai markup', () => {
       clipboard: { writeText: () => Promise.reject(new Error('refusé')) },
     });
     page.all('#t-rows tr[data-i="0"] td')[0].click();
+    vi.useFakeTimers();
     page.el('t-copy').click();
-    await page.settle();
+    await vi.advanceTimersByTimeAsync(10);
     expect(page.el('t-copy').textContent).toBe('impossible');
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(page.el('t-copy').textContent).toBe('Copier');
   });
 
   it('`&row=<n>` dans le hash montre la ligne brute de la n-ième ligne (le banc ne clique pas)', async () => {
@@ -12071,7 +12082,12 @@ describe('Guides — la page, sur le vrai markup', () => {
           },
           spec: generalGuideForm(slug, d),
           data: JSON.parse(JSON.stringify(d)),
-          options: { roster: ROSTER, steps: slug === 'premium-limited' ? STEPS : {} },
+          options: {
+            roster: ROSTER,
+            steps: slug === 'premium-limited' ? STEPS : {},
+            rosters:
+              slug === 'premium-limited' ? { premium: ['Aer', 'Alice'], limited: ['Alice'] } : {},
+          },
           refs: {},
           langs: LANGS,
           siteBase: 'https://outerpedia.local/en/guides',
@@ -12762,7 +12778,7 @@ describe('Guides — la page, sur le vrai markup', () => {
   // ---------------------------------------------------------- les guides généraux
   const PL = '#guides/general-guides/premium-limited';
 
-  it('un guide général dans la vue d’ensemble : un bouton pour les trois à fragment éditable, « contenu en code » pour les autres ; ouvert, les onglets de sa forme, pas de versions, l’adresse', async () => {
+  it('un guide général dans la vue d’ensemble : un bouton pour les trois à fragment éditable, « contenu en code » pour les autres ; ouvert, les quatre onglets de sa forme, pas de versions, l’adresse', async () => {
     const page = await guides();
     await page.come();
     const cat = page.all('#gd-list .gd-cat[data-cat="general-guides"]')[0];
@@ -12789,44 +12805,213 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.all('#gd-head .gd-traits')[0].textContent).toContain(
       'general-guides/premium-limited',
     );
-    expect(page.subs()).toEqual(['premium', 'limited']);
+    expect(page.subs()).toEqual([
+      'premium-reviews',
+      'premium-priorities',
+      'limited-reviews',
+      'limited-priorities',
+    ]);
+    expect(page.all('#gd-tabs [role="tab"]').map((t) => t.textContent)).toEqual([
+      'Premium · Reviews',
+      'Premium · Priorités',
+      'Limited · Reviews',
+      'Limited · Priorités',
+    ]);
     expect(page.el('gd-versions').hidden).toBe(true);
     expect(page.window.location.hash).toBe(PL);
     expect(page.count()).toBe('aucune modification');
-    // Les reviews puis les quatre paliers, en cartes ; le perso d'une review est son titre.
+    // Reviews : UNE carte, le compteur et les manquants, une ligne par perso du roster — aucune review dépliée.
     expect(page.all('#gd-panel [data-block]').map((b) => b.dataset.block)).toEqual([
       'premium-reviews',
-      'premium-first',
-      'premium-second',
-      'premium-third',
-      'premium-transcend',
     ]);
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('1 / 2 reviews');
+    expect(page.all('#gd-panel .card-head .badge.warn')[0].textContent).toBe('1 manquante');
+    expect(page.all('#gd-panel .gd-missing')[0].textContent).toBe('Sans review : Alice');
+    expect(
+      page
+        .all('#gd-panel .gd-rrow')
+        .map((r) => [
+          r.dataset.name,
+          r.dataset.entry ?? null,
+          r.querySelector('.gd-rmark')?.textContent,
+          r.querySelector('.gd-rsum')?.textContent,
+        ]),
+    ).toEqual([
+      ['Aer', 'reviews.premium.0', '★', 'PvE 4 to 5 · PvP — · impact –/– · –/– · 4/3 · –/–'],
+      ['Alice', null, '☆', '— pas de review'],
+    ]);
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
+    expect(page.previews()).toEqual([]);
+    // La ligne cliquée déplie sa review : le perso en tête, le texte, l'aperçu ; recliquer la replie.
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].getAttribute('aria-expanded')).toBe(
+      'true',
+    );
     expect(page.all('#gd-panel .gd-entry .card-head .gd-hero .ht-n')[0].textContent).toBe('Aer');
     expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
     expect(page.previews()[0].texts).toEqual(['Fast {B/BT_BARRIER}']);
+    expect(page.count()).toBe('aucune modification');
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
   });
 
-  it('Premium & Limited sur Limited par le hash : « ＋ héros » ouvre le picker, le perso choisi ouvre sa review ; « Traduire » ; « Enregistrer » envoie tout à sa route', async () => {
-    const page = await guides({ hash: `${PL}/limited` });
-    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('limited');
+  it('les cibles en étoiles 3-6 + « Any » + note, l’impact en étoiles : ce qui part est la chaîne du site ; une ligne ☆ cliquée crée la review de ce perso', async () => {
+    const page = await guides({ hash: `${PL}/premium-reviews` });
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    const stars = (key: string) =>
+      page
+        .all(`#gd-panel [data-act="gen-target-star"][data-key="${key}"]`)
+        .map((b) => `${b.getAttribute('aria-pressed') === 'true' ? '★' : '☆'}${b.dataset.value}`)
+        .join(' ');
+    const out = (key: string) =>
+      page.all(`#gd-panel [data-tnote="${key}"]`)[0].parentElement?.querySelector('[data-tout]')
+        ?.textContent;
+    const pve = 'reviews.premium.0.recommendedPve';
+    const pvp = 'reviews.premium.0.recommendedPvp';
+    expect(stars(pve)).toBe('☆3 ★4 ★5 ☆6');
+    expect(out(pve)).toBe('4 to 5');
+    expect(stars(pvp)).toBe('☆3 ☆4 ☆5 ☆6');
+    expect(out(pvp)).toBe('—');
+    // Une borne cliquée se retire (4-5 → 5) ; un clic au-delà étend (5 → 5 to 6).
+    page
+      .all(`#gd-panel [data-act="gen-target-star"][data-key="${pve}"][data-value="4"]`)[0]
+      .click();
+    await page.settle();
+    expect(stars(pve)).toBe('☆3 ☆4 ★5 ☆6');
+    page
+      .all(`#gd-panel [data-act="gen-target-star"][data-key="${pve}"][data-value="6"]`)[0]
+      .click();
+    await page.settle();
+    expect(out(pve)).toBe('5 to 6');
+    // La note s'ajoute à la chaîne ; « Any » la remplace (et garde la note).
+    page.type(page.all(`#gd-panel [data-tnote="${pve}"]`)[0] as unknown as HTMLInputElement, 'dps');
+    expect(out(pve)).toBe('5 to 6 dps');
+    page.all(`#gd-panel [data-act="gen-target-any"][data-key="${pvp}"]`)[0].click();
+    await page.settle();
+    expect(out(pvp)).toBe('Any');
+    expect(
+      page
+        .all(`#gd-panel [data-act="gen-target-any"][data-key="${pvp}"]`)[0]
+        .getAttribute('aria-pressed'),
+    ).toBe('true');
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.dots()).toEqual([['premium-reviews', 'dot edit']]);
+    // L'impact : 5★ PvE vaut 4 — quatre étoiles allumées ; un clic sur 2 note 2, un clic sur la note la vide.
+    const cell = (key: string) =>
+      page
+        .all(`#gd-panel [data-act="gen-impact"][data-key="${key}"]`)
+        .map((b) => b.textContent)
+        .join('');
+    expect(cell('reviews.premium.0.impact.5.pve')).toBe('★★★★☆');
+    expect(cell('reviews.premium.0.impact.3.pvp')).toBe('☆☆☆☆☆');
+    page
+      .all(
+        '#gd-panel [data-act="gen-impact"][data-key="reviews.premium.0.impact.3.pvp"][data-value="2"]',
+      )[0]
+      .click();
+    await page.settle();
+    expect(cell('reviews.premium.0.impact.3.pvp')).toBe('★★☆☆☆');
+    page
+      .all(
+        '#gd-panel [data-act="gen-impact"][data-key="reviews.premium.0.impact.5.pve"][data-value="4"]',
+      )[0]
+      .click();
+    await page.settle();
+    expect(cell('reviews.premium.0.impact.5.pve')).toBe('☆☆☆☆☆');
+    // Alice (☆) cliquée : son entrée naît, dépliée, la précédente repliée ; le compteur ne la compte pas sans anglais.
+    page.all('#gd-panel .gd-rrow[data-name="Alice"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-entry').map((e) => e.dataset.entry)).toEqual([
+      'reviews.premium.1',
+    ]);
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('1 / 2 reviews');
+    page.type(page.field('reviews.premium.1.review'), 'Solid');
+    await page.save();
+    const data = page.postedGeneral()[0].data as {
+      reviews: { premium: Record<string, unknown>[] };
+    };
+    expect(data.reviews.premium[0]).toMatchObject({
+      recommendedPve: '5 to 6 dps',
+      recommendedPvp: 'Any',
+      impact: { ...impact(), '3': { pve: '', pvp: '2' }, '5': { pve: '', pvp: '3' } },
+    });
+    expect(data.reviews.premium[1]).toEqual({
+      name: 'Alice',
+      review: { en: 'Solid' },
+      recommendedPve: '',
+      recommendedPvp: '',
+      impact: impact(),
+    });
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('2 / 2 reviews');
+  });
+
+  it('Premium & Limited sur Limited › Reviews par le hash : « ＋ review » ouvre le picker sur les persos du roster sans review, le perso choisi ouvre sa review ; « ＋ pas encore sorti » ; « Traduire » ; « Enregistrer » envoie tout à sa route', async () => {
+    const page = await guides({ hash: `${PL}/limited-reviews` });
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('limited-reviews');
     expect(page.window.location.hash).toBe(PL);
     expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
-    page.all('#gd-panel [data-act="gen-add-hero"][data-key="reviews.limited"]')[0].click();
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('0 / 1 reviews');
+    page.all('#gd-panel [data-act="gen-add-review"][data-key="reviews.limited"]')[0].click();
     expect(page.el('hp-modal').hidden).toBe(false);
+    // Le roster du bucket seulement : Alice, pas Aer.
+    expect(page.all('#hp-results .hp-tile').map((t) => t.dataset.id)).toEqual(['2000002']);
     page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
     await page.settle();
     expect(page.el('hp-modal').hidden).toBe(true);
     const card = page.all('#gd-panel .gd-entry[data-entry="reviews.limited.0"]')[0];
     expect(card.querySelector('.card-head .gd-hero .ht-n')?.textContent).toBe('Alice');
+    expect(page.all('#gd-panel .gd-rrow[data-name="Alice"]')[0].getAttribute('aria-expanded')).toBe(
+      'true',
+    );
     expect(page.count()).toBe('1 onglet modifié');
-    expect(page.dots()).toEqual([['limited', 'dot edit']]);
+    expect(page.dots()).toEqual([['limited-reviews', 'dot edit']]);
     page.type(page.field('reviews.limited.0.review'), 'Great {B/BT_BARRIER}');
     await page.settle();
+    // Plus personne à proposer : le picker le dit.
+    page.all('#gd-panel [data-act="gen-add-review"][data-key="reviews.limited"]')[0].click();
+    expect(page.all('#hp-results .hp-tile')).toHaveLength(0);
+    expect(page.el('hp-none').hidden).toBe(false);
+    expect(page.el('hp-none').textContent).toBe('Tous les persos du roster ont leur review.');
+    page.el('hp-close').click();
+    // Un perso pas encore sorti : une entrée au nom libre, dépliée, hors roster.
+    page.all('#gd-panel [data-act="gen-add-unreleased"][data-key="reviews.limited"]')[0].click();
+    await page.settle();
+    const free = page.all(
+      '#gd-panel .gd-entry[data-entry="reviews.limited.1"] input[data-gen="reviews.limited.1.name"]',
+    )[0] as unknown as HTMLInputElement;
+    expect(free).toBeDefined();
+    page.type(free, 'Future Hero');
+    // Sa ligne, après le séparateur, « (sans nom) » tant qu'un redessin n'a pas lu le nom (la saisie ne redessine pas).
+    expect(page.all('#gd-panel .gd-roster-sep')).toHaveLength(1);
+    expect(
+      page
+        .all('#gd-panel .gd-rrow')
+        .map((r) => [
+          r.querySelector('.gd-rname')?.textContent,
+          r.querySelector('.badge')?.textContent ?? null,
+        ]),
+    ).toEqual([
+      ['Alice', null],
+      ['(sans nom)', 'pas encore sorti'],
+    ]);
+    page.all('#gd-panel [data-act="gen-del"][data-key="reviews.limited"][data-i="1"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-rrow').map((r) => r.dataset.name)).toEqual(['Alice']);
+    page.all('#gd-panel [data-act="gen-add-unreleased"][data-key="reviews.limited"]')[0].click();
+    await page.settle();
+    page.all('#gd-panel [data-act="gen-del"][data-key="reviews.limited"][data-i="1"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
     page.all('#gd-panel [data-act="translate"]')[0].click();
     await page.settle();
     const sent = page.calls.filter((c) => c.path === '/api/translate');
     expect(sent).toHaveLength(1);
     expect((sent[0].body as { texts: string[] }).texts).toEqual(['Great {B/BT_BARRIER}']);
+    page.all('#gd-panel .gd-rrow[data-name="Alice"]')[0].click();
+    await page.settle();
     expect(page.val(page.field('reviews.limited.0.review', 'jp'))).toBe('jp Great {B/BT_BARRIER}');
     await page.save();
     const posted = page.postedGeneral()[0];
@@ -12849,18 +13034,41 @@ describe('Guides — la page, sur le vrai markup', () => {
         impact: impact(),
       },
     ]);
-    // Relu du disque après l'écriture : plus rien en attente.
+    // Relu du disque après l'écriture : plus rien en attente, la review repliée.
     expect(page.generalStates()).toBe(2);
     expect(page.count()).toBe('aucune modification');
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('1 / 1 reviews');
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
   });
 
-  it('les paliers de priorité : des lignes ordonnées, le palier parmi les crans pleins du perso, ↓ puis ✕', async () => {
-    const page = await guides({ hash: `${PL}/premium` });
-    const rows = () =>
+  it('les paliers de priorité : une rangée de vignettes par palier, le palier parmi les crans pleins du perso, ↓ puis ✕ ; le glisser-déposer, aussi d’un palier à l’autre ; « ＋ » en multi remplace le palier', async () => {
+    const page = await guides({ hash: `${PL}/premium-priorities` });
+    expect(page.all('#gd-panel [data-block]').map((b) => b.dataset.block)).toEqual([
+      'premium-first',
+      'premium-second',
+      'premium-third',
+      'premium-transcend',
+    ]);
+    const rows = (tier = 'first') =>
       page
-        .all('#gd-panel [data-block="premium-first"] .gd-rank')
+        .all(`#gd-panel [data-block="premium-${tier}"] .gd-pick`)
         .map((r) => r.querySelector('.gd-hero .ht-n')?.textContent);
+    const tile = (tier: string, i: number) =>
+      page.all(`#gd-panel [data-block="premium-${tier}"] .gd-pick[data-i="${i}"]`)[0];
+    const drag = (from: HTMLElement, to: HTMLElement) => {
+      from.dispatchEvent(new page.window.Event('dragstart', { bubbles: true }) as unknown as Event);
+      expect(from.classList.contains('dragging')).toBe(true);
+      to.dispatchEvent(
+        new page.window.Event('dragover', { bubbles: true, cancelable: true }) as unknown as Event,
+      );
+      to.dispatchEvent(
+        new page.window.Event('drop', { bubbles: true, cancelable: true }) as unknown as Event,
+      );
+    };
     expect(rows()).toEqual(['Aer', 'Alice']);
+    expect(tile('first', 0).getAttribute('draggable')).toBe('true');
+    expect(tile('first', 0).querySelector('.gd-pick-n')?.textContent).toBe('1');
+    expect(page.all('#gd-panel [data-block="premium-first"] .badge')[0].textContent).toBe('2');
     const stars = page.all(
       '#gd-panel [data-gen="priorities.premium.first.0.stars"] option',
     ) as unknown as HTMLOptionElement[];
@@ -12870,27 +13078,87 @@ describe('Guides — la page, sur le vrai markup', () => {
       ['6', '5★', false],
       ['9', '6★', false],
     ]);
+    // ↓ au clavier, puis ↑.
     page
       .all('#gd-panel [data-act="gen-down"][data-key="priorities.premium.first"][data-i="0"]')[0]
       .click();
     await page.settle();
     expect(rows()).toEqual(['Alice', 'Aer']);
     expect(page.count()).toBe('1 onglet modifié');
+    expect(page.dots()).toEqual([['premium-priorities', 'dot edit']]);
     page
-      .all('#gd-panel [data-act="gen-del"][data-key="priorities.premium.first"][data-i="1"]')[0]
+      .all('#gd-panel [data-act="gen-up"][data-key="priorities.premium.first"][data-i="1"]')[0]
       .click();
     await page.settle();
+    expect(rows()).toEqual(['Aer', 'Alice']);
+    expect(page.count()).toBe('aucune modification');
+    // Glisser Alice sur Aer (sans coordonnées : avant lui).
+    drag(tile('first', 1), tile('first', 0));
+    await page.settle();
+    expect(rows()).toEqual(['Alice', 'Aer']);
+    expect(
+      page.all('#gd-panel .dragging, #gd-panel .drop-before, #gd-panel .drop-end'),
+    ).toHaveLength(0);
+    // Glisser Aer sur un AUTRE palier (sa rangée, vide) : il la rejoint, son palier suit.
+    drag(
+      tile('first', 1),
+      page.all('#gd-panel .gd-tiles[data-key="priorities.premium.second"]')[0],
+    );
+    await page.settle();
     expect(rows()).toEqual(['Alice']);
+    expect(rows('second')).toEqual(['Aer']);
+    expect(page.all('#gd-panel [data-block="premium-second"] .badge')[0].textContent).toBe('1');
+    // « ＋ » du 3e choix : le picker en multi, rien de coché ; Aer puis Alice cochés, « Valider » pose les deux, dans l'ordre des clics.
+    page
+      .all('#gd-panel [data-act="gen-pick-tiles"][data-key="priorities.premium.third"]')[0]
+      .click();
+    expect(page.el('hp-modal').hidden).toBe(false);
+    expect(page.el('hp-foot').hidden).toBe(false);
+    expect(page.all('#hp-results .hp-tile[aria-pressed="true"]')).toHaveLength(0);
+    page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
+    page.all('#hp-results .hp-tile[data-id="2000055"]')[0].click();
+    page.all('[data-hp="ok"]')[0].click();
+    await page.settle();
+    expect(rows('third')).toEqual(['Alice', 'Aer']);
+    // Rouvert : les deux cochés ; Alice décochée, « Valider » la retire — Aer garde son palier.
+    const sel = page.all(
+      '#gd-panel [data-gen="priorities.premium.third.1.stars"]',
+    )[0] as unknown as HTMLSelectElement;
+    sel.value = '6';
+    sel.dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    await page.settle();
+    page
+      .all('#gd-panel [data-act="gen-pick-tiles"][data-key="priorities.premium.third"]')[0]
+      .click();
+    expect(page.all('#hp-results .hp-tile[aria-pressed="true"]').map((t) => t.dataset.id)).toEqual([
+      '2000055',
+      '2000002',
+    ]);
+    page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
+    page.all('[data-hp="ok"]')[0].click();
+    await page.settle();
+    expect(rows('third')).toEqual(['Aer']);
+    // ✕ sur Alice au 1er choix.
+    page
+      .all('#gd-panel [data-act="gen-del"][data-key="priorities.premium.first"][data-i="0"]')[0]
+      .click();
+    await page.settle();
+    expect(rows()).toEqual([]);
     await page.save();
     const data = page.postedGeneral()[0].data as {
-      priorities: { premium: { first: unknown[] } };
+      priorities: { premium: Record<string, unknown[]> };
     };
-    expect(data.priorities.premium.first).toEqual([{ name: 'Alice', stars: 4 }]);
+    expect(data.priorities.premium).toEqual({
+      first: [],
+      second: [{ name: 'Aer', stars: 3 }],
+      third: [{ name: 'Aer', stars: 6 }],
+      transcend: [],
+    });
   });
 
-  it('un refus situé à sa clé : la saisie reste, le champ cerclé, le point rouge sur l’onglet ; `stale` relit', async () => {
+  it('un refus situé à sa clé : la saisie reste, la ligne et le champ cerclés, le point rouge sur l’onglet ; `stale` relit', async () => {
     const page = await guides({
-      hash: `${PL}/premium`,
+      hash: `${PL}/premium-reviews`,
       savedGeneral: (body) =>
         JSON.stringify(body.data).includes('bad')
           ? {
@@ -12899,7 +13167,11 @@ describe('Guides — la page, sur le vrai markup', () => {
               written: false,
               stale: false,
               refused: [
-                { tab: 'premium', key: 'reviews.premium.0.review', reason: 'tag inconnu {B/NOPE}' },
+                {
+                  tab: 'premium-reviews',
+                  key: 'reviews.premium.0.review',
+                  reason: 'tag inconnu {B/NOPE}',
+                },
               ],
             }
           : {
@@ -12910,11 +13182,14 @@ describe('Guides — la page, sur le vrai markup', () => {
               refused: [{ tab: 'guide', reason: 'le disque a changé' }],
             },
     });
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
     page.type(page.field('reviews.premium.0.review'), 'bad {B/NOPE}');
     await page.save();
     expect(page.val(page.field('reviews.premium.0.review'))).toBe('bad {B/NOPE}');
     expect(page.count()).toBe('1 onglet modifié1 refus');
-    expect(page.dots()).toEqual([['premium', 'dot ko']]);
+    expect(page.dots()).toEqual([['premium-reviews', 'dot ko']]);
+    expect(page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].classList.contains('ko')).toBe(true);
     expect(
       page
         .all('#gd-panel .gd-text[data-text="reviews.premium.0.review"]')[0]
@@ -12927,11 +13202,15 @@ describe('Guides — la page, sur le vrai markup', () => {
         .filter(Boolean),
     ).toEqual(['tag inconnu {B/NOPE}']);
     page.type(page.field('reviews.premium.0.review'), 'good');
-    expect(page.dots()).toEqual([['premium', 'dot edit']]);
+    expect(page.dots()).toEqual([['premium-reviews', 'dot edit']]);
     await page.save();
     expect(page.generalStates()).toBe(2);
-    expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
     expect(page.count()).toBe('1 refus');
+    // Relu : la review est repliée, le disque fait foi.
+    expect(page.all('#gd-panel .gd-entry')).toHaveLength(0);
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
   });
 
   it('Free Heroes : « ＋ source » pose une carte, « ＋ entrée » sa sous-liste, « ＋ héros » le picker en multi, le type de choix ; ce qui part', async () => {
@@ -13058,6 +13337,97 @@ describe('Guides — la page, sur le vrai markup', () => {
     await page.settle();
     expect(page.calls.filter((c) => c.path === '/api/guides/import')).toHaveLength(1);
     expect(page.el('journal-last').textContent).toContain('Contribution illisible : nope.json');
+  });
+});
+
+describe('sortable.mjs — le glisser-déposer d’une liste, par délégation', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  /** Le VRAI `sortable.mjs` sur deux rangées dans un document happy-dom vide. */
+  async function rows() {
+    vi.resetModules();
+    const window = openWindow({ url: 'http://localhost:4747/' });
+    const { document } = window;
+    document.body.innerHTML = `<div id="root">
+      <div class="row" id="a"><span class="it" draggable="true">a0</span><span class="it" draggable="true">a1</span><span class="it" draggable="true">a2</span><button>+</button></div>
+      <div class="row" id="b"></div>
+    </div>`;
+    vi.stubGlobal('window', window);
+    vi.stubGlobal('document', document);
+    const { sortable } = (await import(/* @vite-ignore */ resolve(UI, 'sortable.mjs'))) as {
+      sortable: (
+        root: HTMLElement,
+        opts: {
+          onMove: (from: number, to: number, fromList: HTMLElement, toList: HTMLElement) => void;
+          item?: string;
+          list?: string;
+        },
+      ) => () => void;
+    };
+    const el = (id: string) => document.getElementById(id) as unknown as HTMLElement;
+    const items = (id: string) => [...el(id).querySelectorAll('.it')] as unknown as HTMLElement[];
+    const fire = (target: HTMLElement, type: string) =>
+      target.dispatchEvent(
+        new window.Event(type, { bubbles: true, cancelable: true }) as unknown as Event,
+      );
+    const onMove = vi.fn<(from: number, to: number, a: HTMLElement, b: HTMLElement) => void>();
+    const off = sortable(el('root'), { onMove, item: '.it', list: '.row' });
+    return { el, items, fire, onMove, off };
+  }
+
+  it('saisi puis déposé sur un autre élément : `onMove(from, to)` dans la même liste, l’index d’arrivée compte le retrait ; les classes du geste retombent', async () => {
+    const { el, items, fire, onMove } = await rows();
+    const [a0, , a2] = items('a');
+    fire(a0, 'dragstart');
+    expect(a0.classList.contains('dragging')).toBe(true);
+    // Survoler a2 (sans coordonnées : avant lui) pose le trait d'insertion.
+    fire(a2, 'dragover');
+    expect(a2.classList.contains('drop-before')).toBe(true);
+    // Survoler la rangée hors de ses éléments : en fin.
+    fire(el('a').querySelector('button') as unknown as HTMLElement, 'dragover');
+    expect(a2.classList.contains('drop-before')).toBe(false);
+    expect(el('a').classList.contains('drop-end')).toBe(true);
+    fire(a2, 'drop');
+    // a0 tombe avant a2 : l'index 2 moins son propre retrait = 1.
+    expect(onMove).toHaveBeenCalledWith(0, 1, el('a'), el('a'));
+    expect(a0.classList.contains('dragging')).toBe(false);
+    expect(el('root').querySelectorAll('.drop-before, .drop-after, .drop-end')).toHaveLength(0);
+  });
+
+  it('déposé sur lui-même, ou juste avant son suivant : rien ne bouge ; `dragend` relâche', async () => {
+    const { items, fire, onMove } = await rows();
+    const [a0, a1] = items('a');
+    fire(a0, 'dragstart');
+    fire(a0, 'drop');
+    expect(onMove).not.toHaveBeenCalled();
+    fire(a0, 'dragstart');
+    fire(a1, 'drop');
+    expect(onMove).not.toHaveBeenCalled();
+    fire(a0, 'dragstart');
+    fire(a0, 'dragend');
+    expect(a0.classList.contains('dragging')).toBe(false);
+    // Plus rien de saisi : un dépôt ne fait rien.
+    fire(a1, 'drop');
+    expect(onMove).not.toHaveBeenCalled();
+  });
+
+  it('déposé dans une AUTRE liste (vide) : `onMove` avec les deux listes, en fin ; débranché, plus rien', async () => {
+    const { el, items, fire, onMove, off } = await rows();
+    const [, a1] = items('a');
+    fire(a1, 'dragstart');
+    fire(el('b'), 'dragover');
+    expect(el('b').classList.contains('drop-end')).toBe(true);
+    fire(el('b'), 'drop');
+    expect(onMove).toHaveBeenCalledWith(1, 0, el('a'), el('b'));
+    // Hors de toute liste : rien.
+    fire(items('a')[0], 'dragstart');
+    fire(el('root'), 'drop');
+    expect(onMove).toHaveBeenCalledTimes(1);
+    off();
+    fire(items('a')[0], 'dragstart');
+    expect(items('a')[0].classList.contains('dragging')).toBe(false);
   });
 });
 

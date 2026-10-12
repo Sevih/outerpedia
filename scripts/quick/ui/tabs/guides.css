@@ -758,10 +758,205 @@
 #tab-guides .gd-impact td {
   padding: 4px 10px;
 }
-#tab-guides .gd-impact select {
-  width: 5ch;
-  height: 28px;
-  padding-right: 22px;
+#tab-guides .gd-impact td {
+  white-space: nowrap;
+}
+/* Des étoiles cliquables (une note d'impact, une cible 3-6) : cinq ou quatre
+   boutons nus, l'allumée en ambre ; sous une étoile de cible, son chiffre. */
+#tab-guides .gd-stars {
+  display: inline-flex;
+  gap: 1px;
+}
+#tab-guides .gd-stars button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 20px;
+  padding: 1px 2px;
+  border: 0;
+  background: transparent;
+  color: var(--content-subtle);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+#tab-guides .gd-stars button[aria-pressed='true'] {
+  color: var(--warn);
+}
+#tab-guides .gd-stars button small {
+  color: var(--content-subtle);
+  font-size: 9px;
+  line-height: 1;
+}
+#tab-guides .gd-stars button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -1px;
+  border-radius: 4px;
+}
+#tab-guides .gd-target .btn[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#tab-guides .gd-target .w-text {
+  width: 20ch;
+}
+
+/* ---------------------------------------------------- les reviews (`roster`)
+   La liste compacte de contribute/premium-reviews : une ligne par perso du
+   roster — vignette 32 px, ★ écrite / ☆ à écrire, le nom, le résumé en chasse
+   fixe — ; la ligne ouverte est accentuée, sa carte .gd-entry juste dessous ;
+   les entrées hors roster après un séparateur. */
+#tab-guides .gd-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#tab-guides .gd-rrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 8px;
+  background: var(--surface-base);
+  color: var(--content);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+#tab-guides .gd-rrow:hover {
+  border-color: var(--accent);
+}
+#tab-guides .gd-rrow.open {
+  border-color: var(--accent);
+  background: var(--surface-overlay);
+}
+#tab-guides .gd-rrow.ko {
+  border-color: var(--danger);
+}
+#tab-guides .gd-rrow.unknown .ht.none {
+  flex: none;
+}
+#tab-guides .gd-rrow .ht {
+  flex: none;
+}
+#tab-guides .gd-rmark {
+  flex: none;
+  color: var(--warn);
+  font-size: 14px;
+}
+#tab-guides .gd-rname {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#tab-guides .gd-rsum {
+  flex: 1 1 200px;
+  min-width: 0;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tab-guides .gd-roster > .gd-entry {
+  margin: 2px 0 8px 14px;
+}
+#tab-guides .gd-roster-sep {
+  margin-top: 8px;
+}
+#tab-guides .gd-missing {
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------- les paliers (`tiles`)
+   Une rangée de vignettes par palier, l'ordre = le rang : chaque .gd-pick
+   (déplaçable) porte son rang, la tuile de perso, le palier dessous, ↑ ↓ ✕ ;
+   « ＋ » clôt la rangée. Le glisser-déposer (`sortable.mjs`) pose `.dragging`
+   sur la vignette saisie, le trait d'insertion `.drop-before` / `.drop-after`
+   sur la survolée, `.drop-end` sur la rangée hors de ses vignettes. */
+#tab-guides .gd-tiers .gd-body {
+  gap: 14px;
+}
+#tab-guides .gd-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#tab-guides .gd-tier.ko {
+  padding-left: 10px;
+  border-left: 2px solid var(--danger);
+}
+#tab-guides .gd-tier-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#tab-guides .gd-tiles {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 56px;
+  padding: 4px;
+  border: 1px dashed transparent;
+  border-radius: 10px;
+}
+#tab-guides .gd-tiles.drop-end {
+  border-color: var(--accent);
+}
+#tab-guides .gd-pick {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 6px 4px;
+  border: 1px solid var(--line-subtle);
+  border-radius: 10px;
+  background: var(--surface-base);
+  cursor: grab;
+}
+#tab-guides .gd-pick .gd-hero {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+#tab-guides .gd-pick.ko {
+  border-color: var(--danger);
+}
+#tab-guides .gd-pick.dragging {
+  opacity: 0.4;
+}
+#tab-guides .gd-pick.drop-before {
+  box-shadow: -5px 0 0 -1px var(--accent);
+}
+#tab-guides .gd-pick.drop-after {
+  box-shadow: 5px 0 0 -1px var(--accent);
+}
+#tab-guides .gd-pick-n {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+}
+#tab-guides .gd-pick .w-qty {
+  width: 6ch;
+  height: 24px;
+}
+#tab-guides .gd-pick-acts {
+  display: flex;
+  gap: 2px;
+}
+#tab-guides .gd-pick-acts .btn.icon {
+  width: 22px;
+  height: 22px;
+  min-width: 0;
+}
+#tab-guides .gd-tiles-add {
+  align-self: center;
 }
 #tab-guides .gd-gen-text {
   display: flex;

@@ -305,9 +305,15 @@ serveur sert (`general-guide-form.ts` : des onglets, des blocs, les champs
 d'une entrée — un texte localisé avec aperçu et traductions, un héros par
 le picker, des héros en tuiles, un palier plein, une priorité S/A/B/C, la
 grille d'impact…) sur les données de leur store ; la page ne connaît aucun
-des trois par son nom. Premium & Limited : un onglet par bucket, les
-reviews en cartes (le perso en tête, « pas encore sorti », la review, les
-cibles, l'impact) et les quatre paliers en lignes ordonnées ; Free Heroes :
+des trois par son nom. Premium & Limited : quatre sous-onglets depuis le
+12/10 (F25, revue de Sevih) — par bucket, Reviews à la façon de
+`contribute/premium-reviews` (le compteur « 11 / 13 reviews » et les
+manquants, une liste compacte des persos du roster, une seule review
+dépliée, les cibles en étoiles 3-6 + « Any », l'impact en étoiles) et
+Priorités (les quatre paliers en rangées de vignettes, glisser-déposer
+natif par `ui/sortable.mjs`, aussi d'un palier à l'autre, « ＋ » en
+multi-choix) ; auparavant un onglet par bucket, les reviews en cartes toutes
+dépliées et les paliers en lignes ↑ ↓ ; Free Heroes :
 les sources, leurs entrées, les héros en multi ; Shop : un onglet par shop
 dérivé (la note du shop, les produits du jeu en lignes — priorité, item,
 coût, limite, « ＋ note »), Event et Resource (des items éditoriaux), Supply

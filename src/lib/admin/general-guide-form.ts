@@ -44,6 +44,9 @@ export const generalGuideKind = (slug: string): GeneralGuideKind | undefined =>
  *   - `stars` : un palier PLEIN de transcendance du perso de l'entrée
  *     (les options dépendent de sa rareté : `options.steps` de l'état) ;
  *   - `string`, `number`, `check` : un champ nu ;
+ *   - `target` : une cible de transcendance recommandée — une CHAÎNE (« 4 to
+ *     5 », « Any », « 5 (support) 6 (dps) »), saisie en étoiles 3-6 + « Any »
+ *     + une note, comme `contribute/premium-reviews` l'écrit ;
  *   - `priority` : S, A, B, C ou rien ;
  *   - `impact` : la grille 3★ → 6★ × PvE / PvP, notée 1 à 5 ;
  *   - `cost` : `{ currency, amount }` ; `limit` : `{ count, period }` ;
@@ -59,6 +62,7 @@ export type GeneralFieldKind =
   | 'string'
   | 'number'
   | 'check'
+  | 'target'
   | 'priority'
   | 'impact'
   | 'cost'
@@ -100,6 +104,20 @@ export interface GeneralBlock {
   ordered?: boolean;
   /** `list` : le champ qui nomme une entrée (son titre de carte). */
   title?: string;
+  /**
+   * `list` d'un perso par entrée, comment la page la montre :
+   *   - `roster` : à la façon de `contribute/premium-reviews` — le compteur
+   *     « 11 / 13 reviews » et les manquants, une liste compacte des persos
+   *     (ceux de `roster`, puis les entrées hors roster), UN formulaire déplié à
+   *     la fois ; « ＋ review » propose les persos du roster sans entrée ;
+   *   - `tiles` : des vignettes en rangée, l'ordre = le rang (`ordered`), en
+   *     glisser-déposer — aussi entre les blocs `tiles` du même onglet —, ↑ ↓
+   *     au clavier, « ＋ » en multi-choix comme les items de Gear reco.
+   * Absent : des cartes, ou des lignes ordonnées.
+   */
+  view?: 'roster' | 'tiles';
+  /** `roster` : la clé, dans `options.rosters` de l'état, des persos attendus (`premium`). */
+  roster?: string;
   /** `text`, `texts` : l'anglais est requis. */
   required?: boolean;
   /** Un shop dérivé : sa monnaie (le coût des lignes se lit avec son icône). */
@@ -149,43 +167,47 @@ const REVIEW_FIELDS: GeneralField[] = [
     default: false,
   },
   text('review', 'Review', { required: true }),
-  {
-    key: 'recommendedPve',
-    kind: 'string',
-    label: 'Cible PvE',
-    placeholder: '4 to 5 · Any',
-    default: '',
-  },
-  {
-    key: 'recommendedPvp',
-    kind: 'string',
-    label: 'Cible PvP',
-    placeholder: '4 to 5 · Any',
-    default: '',
-  },
+  { key: 'recommendedPve', kind: 'target', label: 'Cible PvE', default: '' },
+  { key: 'recommendedPvp', kind: 'target', label: 'Cible PvP', default: '' },
   { key: 'impact', kind: 'impact', label: 'Impact par transcendance (1-5)' },
 ];
 
+/**
+ * Par bucket, DEUX onglets — Reviews, Priorités — plutôt que deux onglets
+ * Premium / Limited à segmenté : un sous-onglet par usage, c'est ce que la
+ * coquille sait faire (le point « modifié » ou « refusé », « Traduire », le
+ * hash, le refus situé — tout vaut par onglet), et les reviews et les paliers
+ * ne se retouchent jamais d'un même geste. Les ids des blocs ne bougent pas
+ * (`premium-reviews`, `premium-first`…) : un refus du store les retrouve.
+ */
 function premiumLimitedForm(slug: string): GeneralGuideForm {
   return {
     slug,
     kind: 'premium-limited',
     versioned: false,
-    tabs: BUCKETS.map(([bucket, label]) => ({
-      id: bucket,
-      label,
-      blocks: [
-        {
-          id: `${bucket}-reviews`,
-          label: 'Reviews',
-          hint: 'une par héros ; la review est publique, contribuée par Shiraen',
-          path: ['reviews', bucket],
-          kind: 'list',
-          add: 'hero',
-          title: 'name',
-          fields: REVIEW_FIELDS,
-        },
-        ...TIERS.map(([tier, tierLabel]): GeneralBlock => ({
+    tabs: BUCKETS.flatMap(([bucket, label]): GeneralTab[] => [
+      {
+        id: `${bucket}-reviews`,
+        label: `${label} · Reviews`,
+        blocks: [
+          {
+            id: `${bucket}-reviews`,
+            label: 'Reviews',
+            hint: 'une par héros ; la review est publique, contribuée par Shiraen',
+            path: ['reviews', bucket],
+            kind: 'list',
+            add: 'hero',
+            title: 'name',
+            view: 'roster',
+            roster: bucket,
+            fields: REVIEW_FIELDS,
+          },
+        ],
+      },
+      {
+        id: `${bucket}-priorities`,
+        label: `${label} · Priorités`,
+        blocks: TIERS.map(([tier, tierLabel]): GeneralBlock => ({
           id: `${bucket}-${tier}`,
           label: tierLabel,
           hint: 'l’ordre est celui de la page',
@@ -194,13 +216,14 @@ function premiumLimitedForm(slug: string): GeneralGuideForm {
           add: 'hero',
           ordered: true,
           title: 'name',
+          view: 'tiles',
           fields: [
             { key: 'name', kind: 'hero', label: 'Héros', required: true },
             { key: 'stars', kind: 'stars', label: 'Palier' },
           ],
         })),
-      ],
-    })),
+      },
+    ]),
   };
 }
 
