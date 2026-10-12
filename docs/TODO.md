@@ -135,14 +135,14 @@
       montre le boss de l'archive, la nouvelle le live. Aussi : (7) la fiche
       de Prototype EX-78 (`#extractor/monster/4548161`) dit son archive du
       11/08 « orpheline » ; (8) le menu de l'admin n'a plus de groupe
-      « Extractor ». À TRANCHER par Sevih après le premier passage : le refus
-      « working tree sale ». Il est appliqué tel que décidé, mais le flux de
-      Patch (« Promouvoir » écrit `data/generated/` sans committer) met le
-      boss changé dans cet état-là : figer demande alors d'annuler ses
-      changements, puisque committer ferait de HEAD le NOUVEL état — alors
-      que le commit du figeage ne porte que l'archive et les guides, et
-      figerait HEAD sans mal. Lever le refus est une ligne
-      (`freezeMonster`, `plan.dirty`).
+      « Extractor ». (9) Lot A35 — après « Promouvoir » dans Patch, AVANT
+      de committer la promotion : la fiche du boss changé montre « 1. Figer
+      l'état actuel », « 2. Committer la promotion (Patch) » ; le plan porte
+      la ligne ambre « Le disque diffère de HEAD pour ce monstre (…) —
+      l'archive figera l'état committé, <sha> du <date> », « Figer » est
+      actif, le journal redit la ligne avant l'archive, et
+      git show --stat HEAD ne porte que l'archive et les guides (la
+      promotion reste à committer, dans Patch).
 - [ ] **« Extraction » › fiches et intégration — contrôles à l'écran (lot
       F21)** : le banc ne clique pas, aucun POST d'intégration n'a été joué
       (ils ne sont pas dans `READ_ONLY_POSTS`) ; leurs refus sont testés.

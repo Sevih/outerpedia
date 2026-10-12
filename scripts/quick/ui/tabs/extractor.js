@@ -895,7 +895,9 @@ function renderEntity() {
  * un perso ou un monstre (la règle de l'admin) ; refusé tant qu'une date de
  * sortie manque. Pour un monstre qui a CHANGÉ et que le figeage ré-épinglerait
  * encore (des guides le désignent en live), l'ordre du flux type prend sa
- * place : « 1. Figer l'état actuel », « 2. Intégrer l'extraction ».
+ * place : « 1. Figer l'état actuel », « 2. Intégrer l'extraction ». Changé
+ * sur le DISQUE et pas dans la revue (« Promouvoir » a écrit, rien n'est
+ * committé : `fz.dirty`) : le même ordre, et le second pas renvoie à Patch.
  */
 function renderGestures() {
   if (!en) return;
@@ -904,8 +906,9 @@ function renderGestures() {
   const g = en.gear;
   const fresh = Boolean(c || (m && !m.committedOnly) || g);
   const missing = c?.missing ?? [];
+  const changed = Boolean(m && !m.committedOnly && en.review === 'changed');
   const ordered = Boolean(
-    en.tables && m && !m.committedOnly && en.review === 'changed' && fz && fz.guides > 0,
+    en.tables && m && fz && fz.guides > 0 && (changed || fz.dirty.length > 0),
   );
   const btn = $('ex-integrate');
   btn.hidden = !en.tables || !fresh || (en.review === 'same' && !g) || ordered;
@@ -913,8 +916,12 @@ function renderGestures() {
   btn.disabled = busy || missing.length > 0;
   btn.title = missing.length ? 'Une date de sortie manque : voir ci-dessous.' : '';
   $('ex-order').hidden = !ordered;
+  $('ex-order-changed').hidden = !changed;
+  $('ex-order-disk').hidden = changed;
   $('ex-order-freeze').disabled = busy;
+  $('ex-order-integrate').hidden = !changed;
   $('ex-order-integrate').disabled = busy;
+  $('ex-order-commit').hidden = changed;
 }
 
 // ------------------------------------------------------ « Versions »
@@ -1005,7 +1012,7 @@ function freezeReportHtml(r) {
   );
 }
 
-/** Le plan à l'écran : la clé créée, l'état figé, les guides, le refus « sale », le commit. */
+/** Le plan à l'écran : la clé créée, l'état figé, les guides, l'avertissement « le disque diffère de HEAD », le commit. */
 function renderFreezePlan() {
   const box = $('ex-fplan');
   box.hidden = !fz || !fzOpen;
@@ -1019,15 +1026,15 @@ function renderFreezePlan() {
   const dirty = $('ex-fdirty');
   dirty.hidden = !p.dirty.length;
   dirty.innerHTML = p.dirty.length
-    ? `<p><strong>Figeage refusé avant d’écrire</strong> — ce monstre a des changements non committés dans :</p><ul>${p.dirty
-        .map((f) => `<li><code>${esc(f)}</code></li>`)
+    ? `Le disque diffère de HEAD pour ce monstre (${p.dirty
+        .map((f) => `<code>${esc(f)}</code>`)
         .join(
-          '',
-        )}</ul><p>L’archive fige HEAD, pas le working tree : enregistrer d’abord, ou annuler. Committer fait de HEAD le NOUVEL état — pour figer l’ancien, annuler ces changements, figer, puis ré-intégrer.</p>`
+          ', ',
+        )}) — l’archive figera l’état committé, <code>${esc(p.head.ref)}</code> du ${esc(p.head.committedAt.slice(0, 10))}, pas ce qui est sur le disque. C’est le flux voulu après « Promouvoir » : figer, puis committer la promotion.`
     : '';
   $('ex-fplan-commit').textContent =
     `Puis UN commit « ${p.commit} » : l’archive, les meta.json et les config.json touchés, les meta.json re-datés.`;
-  $('ex-fplan-go').disabled = busy || p.dirty.length > 0;
+  $('ex-fplan-go').disabled = busy;
 }
 
 /** Le bloc « Versions » d'un monstre : ses archives et qui les épingle, le geste, le plan, le rapport. */
@@ -1076,7 +1083,7 @@ function openFreezePlan() {
   fzOpen = true;
   renderFreezePlan();
   $('ex-versions').scrollIntoView?.({ block: 'nearest' });
-  (fz.dirty.length ? $('ex-fplan-cancel') : $('ex-fnote')).focus();
+  $('ex-fnote').focus();
 }
 
 $('ex-freeze').onclick = openFreezePlan;
@@ -1086,7 +1093,7 @@ $('ex-fplan-cancel').onclick = () => {
   renderFreezePlan();
 };
 $('ex-fplan-go').onclick = async () => {
-  if (!fz || !enAt || busy || fz.dirty.length) return;
+  if (!fz || !enAt || busy) return;
   const p = fz;
   busy = true;
   renderGestures();
@@ -1101,8 +1108,8 @@ $('ex-fplan-go').onclick = async () => {
     r = await post('/api/extractor/freeze', { id: p.id, label: $('ex-fnote').value, was: p.was });
   } finally {
     busy = false;
-    // Un refus (plan périmé, working tree sale) : le plan RELU reste à l'écran.
-    fzOpen = Boolean(r && !r.ok && (r.stale || r.dirty));
+    // Un refus (plan périmé) : le plan RELU reste à l'écran.
+    fzOpen = Boolean(r && !r.ok && r.stale);
     if (r?.report) {
       fzReport = r.report;
       $('ex-fnote').value = '';

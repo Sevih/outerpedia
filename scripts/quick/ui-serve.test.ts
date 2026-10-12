@@ -12103,7 +12103,9 @@ describe('Extraction — la page, sur le vrai markup', () => {
               },
           order: el('ex-order').hidden
             ? null
-            : all('#ex-order .btn').map((b) => b.textContent?.replace(/\s+/g, ' ').trim()),
+            : all('#ex-order .btn')
+                .filter((b) => !b.hidden)
+                .map((b) => b.textContent?.replace(/\s+/g, ' ').trim()),
         };
       },
       status: (value: string) =>
@@ -12887,20 +12889,73 @@ describe('Extraction — la page, sur le vrai markup', () => {
     ]);
   });
 
-  it('un monstre qui diffère de HEAD : le plan porte le refus situé, « Figer » est éteint et ne poste rien', async () => {
+  it('un monstre qui diffère de HEAD : le plan porte l’avertissement ambre, « Figer » reste actif et poste', async () => {
     const page = await extractor({
       hash: '#extractor/monster/400101',
-      freeze: [{ ...FREEZE_PLAN, dirty: ['data/generated/monsters.json'] }],
+      freeze: [
+        {
+          ...FREEZE_PLAN,
+          dirty: ['data/generated/monsters.json', 'data/generated/monster-skills.json'],
+        },
+        FREEZE_QUIET,
+      ],
+      posted: () => ({ ok: true, log: ['fait'], report: FREEZE_REPORT }),
     });
     page.el('ex-freeze').click();
     const plan = page.versions().plan;
-    expect(plan?.dirty).toContain('Figeage refusé avant d’écrire');
-    expect(plan?.dirty).toContain('data/generated/monsters.json');
-    expect(plan?.dirty).toContain('enregistrer d’abord, ou annuler');
-    expect(plan?.go).toBe(true);
+    expect(plan?.dirty).toBe(
+      'Le disque diffère de HEAD pour ce monstre (data/generated/monsters.json, data/generated/monster-skills.json) — l’archive figera l’état committé, abc1234 du 2026-10-12, pas ce qui est sur le disque. C’est le flux voulu après « Promouvoir » : figer, puis committer la promotion.',
+    );
+    // Un avertissement, pas un refus : l'ambre de `.ex-warn`, plus le cadre rouge.
+    expect(page.el('ex-fdirty').className).toBe('ex-warn');
+    expect(plan?.go).toBe(false);
     page.el('ex-fplan-go').click();
     await page.settle();
+    expect(page.calls.filter((c) => c.body)).toEqual([
+      { path: '/api/extractor/freeze', body: { id: '400101', label: '', was: 'plan:v1' } },
+    ]);
+    expect(page.versions().report?.head).toContain('figé 400101@3');
+  });
+
+  it('l’ordre quand le monstre a changé sur le DISQUE, pas dans la revue : « 1. Figer », « 2. Committer la promotion (Patch) »', async () => {
+    const dirty = { ...FREEZE_PLAN, dirty: ['data/generated/monsters.json'] };
+    // La revue dit « à jour » (le disque EST l'extraction, promue) : le second pas renvoie à Patch.
+    const page = await extractor({ hash: '#extractor/monster/400101', freeze: [dirty] });
+    expect(page.versions().order).toEqual([
+      "1. Figer l'état actuel",
+      '2. Committer la promotion (Patch)',
+    ]);
+    expect(page.el('ex-order-disk').textContent).toContain(
+      'a changé sur le disque — une promotion pas encore committée',
+    );
+    expect([page.el('ex-order-disk').hidden, page.el('ex-order-changed').hidden]).toEqual([
+      false,
+      true,
+    ]);
+    expect(page.sheet().button.hidden).toBe(true);
+    // 1 : le plan du figeage, avec l'avertissement ; rien de posté.
+    page.el('ex-order-freeze').click();
+    expect(page.versions().plan?.dirty).toContain('Le disque diffère de HEAD');
+    // 2 : un lien vers la section Patch, pas un geste.
+    expect(page.el('ex-order-commit').dataset.go).toBe('patch');
     expect(page.calls.filter((c) => c.body)).toEqual([]);
+    // Changé AUSSI dans la revue : le second pas reste « Intégrer l'extraction ».
+    const both = await extractor({
+      hash: '#extractor/monster/400101',
+      review: 'changed',
+      freeze: [dirty],
+    });
+    expect(both.versions().order).toEqual(["1. Figer l'état actuel", "2. Intégrer l'extraction"]);
+    expect([both.el('ex-order-disk').hidden, both.el('ex-order-changed').hidden]).toEqual([
+      true,
+      false,
+    ]);
+    // Sale, mais plus aucun guide à ré-épingler : pas d'ordre.
+    const quiet = await extractor({
+      hash: '#extractor/monster/400101',
+      freeze: [{ ...FREEZE_QUIET, dirty: ['data/generated/monsters.json'] }],
+    });
+    expect(quiet.versions().order).toBeNull();
   });
 
   it('l’ordre du flux type : un monstre qui a changé ET que des guides désignent — « 1. Figer », « 2. Intégrer », chacun son plan', async () => {

@@ -7892,7 +7892,8 @@ async function computeFreeze(
  * clé qui sera créée, l'état de HEAD qu'elle figera, les guides touchés AVANT
  * de figer (éditions directes, versions épinglées), ceux qu'on laisse en live
  * et pourquoi, les guides plats en attente, les guides re-datés, le message
- * du commit, `dirty` (non vide : le geste refusera) et `was`. Rien ne s'écrit.
+ * du commit, `dirty` (non vide : l'écran avertit, l'archive figera HEAD, pas
+ * le disque) et `was`. Rien ne s'écrit.
  * Les tables du jeu n'y sont pour rien : le figeage lit le committé.
  */
 export async function freezePlan(id: unknown, deps: FreezeDeps = FREEZE_DEPS) {
@@ -7904,12 +7905,10 @@ export async function freezePlan(id: unknown, deps: FreezeDeps = FREEZE_DEPS) {
   return (await computeFreeze(key, monster, deps)).plan;
 }
 
-/** Ce que rend « Figer » : l'issue, le refus (`stale`, `dirty`), le rapport de ce qui est écrit. */
+/** Ce que rend « Figer » : l'issue, le refus (`stale`), le rapport de ce qui est écrit. */
 export interface FreezeOutcome extends Outcome {
   /** Le plan recalculé n'est plus celui que l'écran a montré : relire. */
   stale?: boolean;
-  /** Les fichiers où le monstre diffère de HEAD : le geste a refusé. */
-  dirty?: string[];
   report?: FreezeReport;
 }
 
@@ -7918,9 +7917,11 @@ const FREEZE_LABEL_MAX = 120;
 
 /**
  * « Figer » (`POST /api/extractor/freeze`), dans l'ordre : le plan est
- * RECALCULÉ ; un monstre qui diffère de HEAD dans `data/generated/` est refusé
- * (l'archive fige HEAD, pas le working tree) ; un plan qui n'est plus celui
- * que l'écran a montré (`was`) aussi — rien n'est écrit dans les deux cas.
+ * RECALCULÉ ; un plan qui n'est plus celui que l'écran a montré (`was`) est
+ * refusé, rien n'est écrit. Un monstre qui diffère de HEAD dans
+ * `data/generated/` (`plan.dirty`) ne l'est PAS : c'est l'état où « Promouvoir »
+ * (Patch) laisse un boss changé, et c'est l'ANCIEN état, celui de HEAD, qu'on
+ * veut figer — le journal le dit avant l'archive.
  * Puis `versionMonster(id, { ref: 'HEAD', label })` écrit l'archive,
  * `applyRepin` joue le plan (les `meta.json` des guides plats, le `pinned` des
  * versions), les guides dont un `meta.json` ou le `config.json` de la version
@@ -7939,14 +7940,6 @@ export async function freezeMonster(
   const monster = deps.monster(key);
   if (!monster) return { ok: false, log: [`Rien n’est figé — monstre ${key} absent du committé.`] };
   const { plan, repin } = await computeFreeze(key, monster, deps);
-  if (plan.dirty.length)
-    return {
-      ok: false,
-      dirty: plan.dirty,
-      log: [
-        `Rien n’est figé — ${plan.name} (${key}) a des changements non committés dans ${plan.dirty.join(', ')} : l’archive fige HEAD, pas le working tree. Enregistrer d’abord, ou annuler (committer fait de HEAD le NOUVEL état : pour figer l’ancien, annuler ces changements, figer, puis ré-intégrer).`,
-      ],
-    };
   if (body.was !== plan.was)
     return {
       ok: false,
@@ -7961,6 +7954,10 @@ export async function freezeMonster(
       : '';
 
   const j = journal(report);
+  if (plan.dirty.length)
+    j.done(
+      `le disque diffère de HEAD pour ce monstre (${plan.dirty.join(', ')}) : l’archive fige l’état COMMITTÉ ${plan.head.ref} du ${plan.head.committedAt.slice(0, 10)}, pas celui du disque`,
+    );
   j.doing(`${plan.name} (${key}) : état de ${plan.head.ref} figé sous ${plan.key}`);
   let archive: VersionMonsterReport;
   try {
@@ -7968,7 +7965,7 @@ export async function freezeMonster(
   } catch (e: unknown) {
     return {
       ok: false,
-      log: [`Rien n’est figé — ${e instanceof Error ? e.message : String(e)}`],
+      log: [...j.lines, `Rien n’est figé — ${e instanceof Error ? e.message : String(e)}`],
     };
   }
   j.done(

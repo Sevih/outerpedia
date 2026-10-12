@@ -147,12 +147,17 @@ montré (`was` : un écart → refus, relecture, rien d'écrit), `versionMonster
 fige HEAD, `applyRepin` joue le plan, les guides touchés sont re-datés par la
 règle de `guide-stamp.ts`, et UN commit porte l'archive, les `meta.json` et
 les `config.json` :
-`chore(monsters): <nom> (<id>) fige en v<n>, <k> guides re-epingles`. Le
-geste REFUSE si le monstre diffère de HEAD dans
-`data/generated/` (l'archive fige HEAD, pas le working tree) ; il ne lit pas
+`chore(monsters): <nom> (<id>) fige en v<n>, <k> guides re-epingles`. Si le
+monstre diffère de HEAD dans `data/generated/` (l'état où « Promouvoir » de
+Patch laisse un boss changé), le geste AVERTIT sans refuser (lot A35,
+décision de Sevih du 12/10) : le plan dit en ambre que l'archive figera
+l'état committé — le sha et la date de HEAD —, pas ce qui est sur le disque,
+et le journal le redit avant l'archive ; il ne lit pas
 les tables du jeu. Quand un monstre a changé ET que le figeage ré-épinglerait
 encore des guides, la fiche dit l'ordre : « 1. Figer l'état actuel »,
-« 2. Intégrer l'extraction », chacun son plan, rien d'enchaîné. Une archive
+« 2. Intégrer l'extraction », chacun son plan, rien d'enchaîné ; changé sur
+le disque seulement (la promotion pas encore committée), le second pas est
+« 2. Committer la promotion (Patch) ». Une archive
 ne se supprime pas d'ici ; dépingler reste dans Guides. Lien Monster retiré
 du menu admin le 12/10 : le groupe « Extractor » en sort, vide), Tables du jeu (=
 Tools › Game data, étape 8, lot B38 : les

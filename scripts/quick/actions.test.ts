@@ -9315,23 +9315,50 @@ describe('Extraction — freezePlan, freezeMonster : « Figer et ré-épingler �
     expect(await freezePlan(undefined, deps().fake)).toMatchObject({ status: 400 });
   });
 
-  it('le working tree sale : le plan le dit, et « Figer » refuse avant d’écrire', async () => {
+  it('le disque diffère de HEAD : le plan le dit, « Figer » passe et le journal avertit AVANT l’archive', async () => {
     const dirty = {
       dirty: [MONSTER_FILES.monsters],
       diskMonster: { id: ID, skills: ['s1', 's2'] },
     };
     const p = await planOf(deps(dirty).fake);
     expect(p.dirty).toEqual([MONSTER_FILES.monsters]);
+    // `was` ne signe pas `dirty` : le plan d'un monstre propre porte le même.
+    expect(p.was).toBe((await planOf(deps().fake)).was);
     const { calls, git, fake } = deps(dirty);
-    const out = await freezeMonster(ID, { was: p.was }, fake);
-    expect(out.ok).toBe(false);
-    expect(out.dirty).toEqual([MONSTER_FILES.monsters]);
-    expect(out.log[0]).toMatch(
-      /^Rien n’est figé — Annihilator \(4318062\) a des changements non committés dans data\/generated\/monsters\.json : l’archive fige HEAD, pas le working tree\. Enregistrer d’abord, ou annuler/,
+    const lines: string[] = [];
+    const out = await freezeMonster(ID, { was: p.was }, fake, (line, doing) =>
+      lines.push(`${doing ? '…' : '✓'} ${line}`),
     );
-    expect(calls).toEqual([`planRepin ${ID} ${ID}@2`]);
-    expect(git).toEqual([]);
-    // Le fichier est sale pour un AUTRE monstre : celui-ci se fige.
+    expect(out.ok).toBe(true);
+    expect(out).not.toHaveProperty('dirty');
+    const warning =
+      'le disque diffère de HEAD pour ce monstre (data/generated/monsters.json) : l’archive fige l’état COMMITTÉ abc1234 du 2026-10-12, pas celui du disque';
+    expect(out.log[0]).toBe(warning);
+    // L'avertissement précède l'annonce de l'archive, et c'est bien HEAD qui est figé.
+    expect(lines.slice(0, 2)).toEqual([
+      `✓ ${warning}`,
+      `… Annihilator (${ID}) : état de abc1234 figé sous ${ID}@2`,
+    ]);
+    expect(calls.slice(0, 3)).toEqual([
+      `planRepin ${ID} ${ID}@2`,
+      `versionMonster ${ID} HEAD (sans note)`,
+      `applyRepin ${ID}@2`,
+    ]);
+    // Le commit ne porte que l'archive et les guides : rien de `data/generated/` hors l'archive.
+    expect(git).toHaveLength(1);
+    expect(git[0][0].filter((f) => Object.values(MONSTER_FILES).includes(f as never))).toEqual([]);
+    expect(out.report?.key).toBe(`${ID}@2`);
+    // Un monstre propre : pas de ligne d'avertissement.
+    const clean = deps();
+    const quiet = await freezeMonster(ID, { was: p.was }, clean.fake);
+    expect(quiet.log.some((l) => l.startsWith('le disque diffère de HEAD'))).toBe(false);
+    // Le moteur qui lève sur un monstre sale : l'avertissement reste devant le refus.
+    const thrown = deps({ ...dirty, throws: 'monstre 4318062 introuvable à `HEAD`' });
+    expect((await freezeMonster(ID, { was: p.was }, thrown.fake)).log).toEqual([
+      warning,
+      'Rien n’est figé — monstre 4318062 introuvable à `HEAD`',
+    ]);
+    // Le fichier est sale pour un AUTRE monstre : rien à dire de celui-ci.
     const other = deps({ dirty: [MONSTER_FILES.monsters] });
     expect((await planOf(other.fake)).dirty).toEqual([]);
   });

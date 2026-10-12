@@ -159,12 +159,17 @@
       <p class="hint" id="ex-entity-note"></p>
       <!-- Le refus situé : un perso sans date de sortie — la clé à ajouter au curé, à la main. -->
       <div class="ex-refuse" id="ex-missing" hidden></div>
-      <!-- L'ordre du flux type : un monstre qui a changé ET que des guides désignent encore en live. -->
+      <!-- L'ordre du flux type : un monstre qui a changé (dans la revue, ou sur le disque après « Promouvoir ») ET que des guides désignent encore en live. -->
       <div class="ex-order" id="ex-order" hidden>
-        <p>
+        <p id="ex-order-changed">
           Ce monstre a changé dans le jeu et des guides le désignent encore en live : figer d'abord
           l'état committé — celui contre lequel ils ont été écrits —, puis intégrer le nouveau.
           Chaque geste montre son plan et se confirme ; rien ne s'enchaîne tout seul.
+        </p>
+        <p id="ex-order-disk" hidden>
+          Ce monstre a changé sur le disque — une promotion pas encore committée — et des guides le
+          désignent encore en live : figer d'abord l'état committé — celui contre lequel ils ont été
+          écrits —, puis committer la promotion dans Patch. Rien ne s'enchaîne tout seul.
         </p>
         <div class="actions">
           <button class="btn primary" id="ex-order-freeze" type="button">
@@ -172,6 +177,9 @@
           </button>
           <button class="btn ghost" id="ex-order-integrate" type="button">
             2. Intégrer l'extraction
+          </button>
+          <button class="btn ghost" id="ex-order-commit" type="button" data-go="patch" hidden>
+            2. Committer la promotion (Patch)
           </button>
         </div>
       </div>
@@ -211,8 +219,8 @@
       <div class="ex-plan" id="ex-fplan" hidden>
         <p id="ex-fplan-text"></p>
         <div class="ex-fplan-body" id="ex-fplan-body"></div>
-        <!-- Le refus situé : le monstre diffère de HEAD dans data/generated. -->
-        <div class="ex-refuse" id="ex-fdirty" hidden></div>
+        <!-- L'avertissement : le monstre diffère de HEAD dans data/generated — l'archive fige HEAD. -->
+        <p class="ex-warn" id="ex-fdirty" hidden></p>
         <div class="form">
           <div class="field">
             <label for="ex-fnote">Note de l'archive (facultative)</label>

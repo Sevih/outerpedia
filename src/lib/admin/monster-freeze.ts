@@ -1,7 +1,7 @@
 /**
  * FIGER un monstre et RÉ-ÉPINGLER ses guides en UN geste — quick, section
  * « Extraction », lot F22 : ce que l'écran montre AVANT de figer, et ce que le
- * geste doit savoir pour refuser ou re-dater.
+ * geste doit savoir pour refuser, avertir ou re-dater.
  *
  * Le moteur ne bouge pas : l'archive est `versionMonster`
  * (`datagen/extractor/version-monster.ts`), le ré-épinglage `planRepin` /
@@ -15,9 +15,10 @@
  *     plan recalculé n'est plus celui que l'écran a montré ;
  *   - l'INDEX INVERSE des pins (`pinIndex`) : par clé `<id>@<n>`, qui l'épingle
  *     — une archive que personne n'épingle est « orpheline » ;
- *   - le refus « working tree sale » (`monsterDirtyFiles`) : l'archive fige
- *     HEAD, pas le disque — un monstre dont l'état diffère de HEAD ne se fige
- *     pas d'ici.
+ *   - l'avertissement « le disque diffère de HEAD » (`monsterDirtyFiles`) :
+ *     l'archive fige HEAD, pas le disque — un monstre dont l'état diffère de
+ *     HEAD se fige quand même (c'est l'ancien état qu'on veut), l'écran et le
+ *     journal disent lequel des deux part dans l'archive.
  *
  * Aucun disque ni git ici : l'appelant passe ce qu'il a lu.
  */
@@ -247,8 +248,9 @@ const strings = (v: unknown): string[] =>
  * skills et les donjons sont ceux des DEUX états : un skill retiré du kit sur
  * le disque est un changement du monstre.
  *
- * Non vide : le geste refuse. L'archive fige HEAD, et ce que l'écran montre
- * (la fiche, le diff) ne dit pas lequel des deux états on s'apprête à figer.
+ * Non vide : le geste AVERTIT, il ne refuse pas. L'archive fige HEAD, et ce
+ * que l'écran montre (la fiche, le diff) ne dit pas lequel des deux états on
+ * s'apprête à figer — le plan et le journal le disent donc.
  */
 export function monsterDirtyFiles(
   id: string,
@@ -322,7 +324,7 @@ export interface FreezePlan {
   /** Le nombre de guides distincts ré-épinglés (`edits` et `pins`). */
   guides: number;
   commit: string;
-  /** Les fichiers où le monstre diffère de HEAD : non vide, le geste refuse. */
+  /** Les fichiers où le monstre diffère de HEAD : non vide, l'écran avertit (l'archive fige HEAD). */
   dirty: string[];
   /** La signature de ce plan : le geste la renvoie, et refuse si elle a bougé. */
   was: string;

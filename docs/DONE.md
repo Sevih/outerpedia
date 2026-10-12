@@ -7,6 +7,62 @@
 
 ## 2026-10-12
 
+- **quick : figer un monstre dont le disque diffère de HEAD — l'avertissement
+  remplace le refus (lot A35)** — l'item « À TRANCHER par Sevih » du lot F22,
+  tranché le 12/10 : le refus tombe, l'avertissement reste. **Pourquoi** :
+  « Promouvoir » (Patch) écrit `data/generated/` sans committer, et met donc
+  justement le boss changé dans l'état que `freezeMonster` refusait ; or
+  `versionMonster(id, { ref: 'HEAD' })` lit HEAD par `git show` (le disque ne
+  le gêne pas), le commit du figeage ne porte que ses chemins (`commitPaths` :
+  l'archive et les guides), et c'est l'ANCIEN état qu'on veut figer —
+  committer d'abord ferait de HEAD le nouveau. **Serveur**
+  (`scripts/quick/actions.ts`) : `freezeMonster` ne refuse plus sur
+  `plan.dirty` ; quand la liste n'est pas vide, le journal dit AVANT l'archive
+  « le disque diffère de HEAD pour ce monstre (<fichiers>) : l'archive fige
+  l'état COMMITTÉ <sha> du <date>, pas celui du disque » (la ligne reste en
+  tête du journal si le moteur lève ensuite) ; `FreezeOutcome` perd son
+  `dirty`, plus rendu par rien ; le plan (`GET /api/extractor/freeze`) garde
+  le sien, `was` ne le signe toujours pas, le refus `stale` est inchangé.
+  **La page** (`tabs/extractor.{html,js}`, pas de CSS : la classe `.ex-warn`
+  existait) : `#ex-fdirty` passe du cadre rouge `.ex-refuse` à une ligne ambre
+  `p.ex-warn` dans le plan — « Le disque diffère de HEAD pour ce monstre
+  (<fichiers>) — l'archive figera l'état committé, <sha> du <date>, pas ce
+  qui est sur le disque. C'est le flux voulu après « Promouvoir » : figer,
+  puis committer la promotion. » ; « Figer » reste actif, `freezeNow` n'est
+  plus gardé par `dirty`, le focus va à la note comme pour un monstre
+  propre. Le bandeau d'ordre s'affiche aussi quand `plan.dirty` n'est pas
+  vide et que `plan.guides > 0` : un second paragraphe (`#ex-order-disk`,
+  l'ancien inchangé à la lettre) — « Ce monstre a changé sur le disque — une
+  promotion pas encore committée — … » — et le second pas est « 2. Committer la
+  promotion (Patch) », un bouton `data-go="patch"` (un lien vers la section,
+  comme « Ouvrir Patch », pas un geste) ; quand la revue dit AUSSI
+  « changed », le second pas reste « 2. Intégrer l'extraction ».
+  `src/lib/admin/monster-freeze.ts` : quatre COMMENTAIRES qui disaient « le
+  geste refuse » réalignés, aucune ligne de code (`monsterDirtyFiles` et
+  `was` intacts, `monster-freeze.test.ts` non touché). **Tests** : celui du
+  refus dans `actions.test.ts` devient celui de l'avertissement (le geste
+  passe, la ligne en tête du journal et avant l'annonce de l'archive,
+  `versionMonster … HEAD`, un commit sans aucun des trois fichiers de
+  `data/generated/`, pas de ligne pour un monstre propre, `was` identique
+  sale ou propre) ; dans `ui-serve.test.ts`, le refus situé devient l'ambre
+  (le texte entier, la classe, « Figer » actif, le POST part, le rapport) et
+  un test nouveau couvre le bandeau « disque » (les deux boutons, le lien
+  vers Patch, le cas « changed » aussi, pas de bandeau sans guide). **Docs**
+  : `STYLE.md` (croquis du bandeau et du plan, le paragraphe des routes),
+  `quick-migration.md` (« Déjà dans quick », Extraction), `TODO.md` (l'item
+  « À TRANCHER » sort, remplacé par un contrôle (9) à l'écran).
+  **Vérification** : `pnpm typecheck` (sortie 0, dernière ligne
+  `tsc --noEmit && … -p scripts/tsconfig.json`), `pnpm lint` (sortie 0,
+  `eslint`), `pnpm test` « Test Files 220 passed (220) / Tests 3647 passed
+  (3647) », les suites `scripts/quick` et `src/lib/admin` sous
+  `NODE_ENV=development` « 58 passed, 1555 passed » ; prettier vert sur les
+  dix fichiers. RIEN n'a été figé, aucun quick lancé. **Laissé** : pas de
+  capture — l'ambre et le bandeau « disque » ne se voient qu'avec un
+  `data/generated/` sale, que je n'ai pas fabriqué ; à voir par Sevih au
+  prochain « Promouvoir » (contrôle 9 du TODO). Le plan garde son cadre
+  rouge de confirmation, l'ambre est le texte seul. Le bandeau « disque » ne
+  dépend pas de `committedOnly` (la décision ne le demande pas).
+
 - **Relecture F22 (Fable) — quick : Extraction, figer un monstre et
   ré-épingler ses guides en un geste, le plan avant de figer ; le groupe
   Extractor hors de l'admin, validé** — commit `0b0a495d` (lot joué par

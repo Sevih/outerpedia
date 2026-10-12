@@ -405,14 +405,14 @@ LA FICHE (#ex-entity, `#extractor/<cible>/<clé>` sur une cible à fiches — pe
 .card.pad.ex-head  [← Personnages] · .ex-face : le portrait du perso (`/api/sprite/CT_<id>`, 56 px arrondi), ou la vignette du monstre sur son fond de slot (`GD_Slot_Bg_*`) avec le badge BOSS, ou la tuile de l'équipement sur son cadre de rareté · .ex-id : le nom en strong (« Slime — The Blob ») · .ex-meta : `id` · badge off du type · icônes d'élément et de classe suivies de leur slug · race · étoiles · « chaîne start » / « IA attack » / « ★ 5/6 · AP · classes : … » / « EE de `id` · confiance 3 » · .ex-badges : « new — pas encore intégré » (edit), « 3 champs divergent » (ko), « absent de l'extraction fraîche » (warn), « à jour — le committé est l'extraction » (ok), ou la raison sans tables (warn) · .ex-links « Voir aussi : fiche perso » / « fiche perso › EE » / « câbler les chips » (data-go) … à droite [Intégrer] / [Ré-intégrer] (.btn.primary ; caché sans frais, et à jour pour un perso ou un monstre ; éteint tant qu'une date de sortie manque)
    p.hint : ce que le geste écrit, selon la cible — et, pour un monstre, « Figer une version et ré-épingler ses guides : le bloc « Versions ». »
    .ex-refuse (bordé de rouge, caché) : « Intégration refusée avant d'écrire — ce perso n'a de date de sortie d'aucune source… » · ul : `id` libellé · « Ajouter la clé à la main dans data/curated/character-release.json ("id": "AAAA-MM-JJ"), puis relire la fiche. »
-   .ex-order (bordé d'ambre, caché ; F22) — un monstre qui a CHANGÉ et dont le figeage ré-épinglerait encore des guides : « Ce monstre a changé dans le jeu et des guides le désignent encore en live : figer d'abord l'état committé…, puis intégrer le nouveau. Chaque geste montre son plan et se confirme ; rien ne s'enchaîne tout seul. » [1. Figer l'état actuel] (.btn.primary) [2. Intégrer l'extraction] (.btn.ghost) — ils prennent la place de [Ré-intégrer], caché tant que l'ordre est à l'écran ; le premier ouvre le plan du bloc « Versions », le second le plan d'« Intégrer »
+   .ex-order (bordé d'ambre, caché ; F22) — un monstre qui a CHANGÉ et dont le figeage ré-épinglerait encore des guides : « Ce monstre a changé dans le jeu et des guides le désignent encore en live : figer d'abord l'état committé…, puis intégrer le nouveau. Chaque geste montre son plan et se confirme ; rien ne s'enchaîne tout seul. » [1. Figer l'état actuel] (.btn.primary) [2. Intégrer l'extraction] (.btn.ghost) — ils prennent la place de [Ré-intégrer], caché tant que l'ordre est à l'écran ; le premier ouvre le plan du bloc « Versions », le second le plan d'« Intégrer ». Changé sur le DISQUE et pas dans la revue (« Promouvoir » a écrit, rien n'est committé ; A35) : « Ce monstre a changé sur le disque — une promotion pas encore committée — et des guides le désignent encore en live : figer d'abord l'état committé…, puis committer la promotion dans Patch. Rien ne s'enchaîne tout seul. » [1. Figer l'état actuel] [2. Committer la promotion (Patch)] (.btn.ghost, data-go « patch » : un lien vers la section, pas un geste)
    .ex-plan (rouge, caché) — le PLAN d'« Intégrer » : « Écrire dans data/generated : » · ul.ex-iplan-files : les fichiers (characters.json, skills.json, …, « data/generated/damage/* et data/generated/solver/* (re-dérivés) », « les images…, stagées ») · « puis UN commit « chore(extractor): <cible> <nom> (<clé>) integre » » · [Écrire et committer] (.btn.danger) [Annuler]
 .card#ex-entity-diff (caché sans écart) — card-head « Ce qui change » · « 3 champs » ; dessous le diff de la cible (.ex-diff, mêmes groupes, mêmes bandes et arbres)
 .card.pad.ex-versions#ex-versions (un monstre seul, F22 ; entre l'écart et la fiche — le geste d'un boss ne se cherche pas sous ses skills) — .ex-ver-head : « VERSIONS » (capitales grises) · badge off du nombre d'archives · .lbl « 2 guides le désignent encore en live » / « aucun guide à ré-épingler » … [Figer et ré-épingler…] (.btn.ghost, caché pour un monstre pas encore committé)
    ul.ex-archives : `<id>@<n>` — date, source sha, jeu 1.4.14 — note · n skills · .ex-pinby « épinglée par joint-challenge/slime · 2026-08, special-request/blob · bossId » (chaque guide un lien data-go vers `guides/<cat>/<slug>/<version>`), ou badge warn « orpheline »
    p.hint : « Aucune version figée : les guides suivent le live. » (sans archive) · « « Figer et ré-épingler » fige l'état COMMITTÉ (HEAD), pas l'extraction fraîche, et montre d'abord son plan. Une archive ne se supprime pas ; dépingler une version se fait dans Guides, onglet Combat. » ; ou la raison sans plan : « Ce monstre n'est pas encore committé : rien à figer — l'intégrer d'abord. »
    .ex-plan (rouge, caché) — le PLAN, AVANT de figer : « Créer `400101@3` : l'état COMMITTÉ de Slime — HEAD `abc1234` du 2026-10-12, jeu 1.4.14 — figé dans `data/generated/monster-archive/400101@3.json`. Les guides touchés : » · .ex-fplan-body : un .ex-fgroup par sort (titre en gras + badge off du compte, puis ul.ex-ul) — « Guides ré-épinglés » (`guide` · `meta.bossId` : `400101` → `400101@3` ; `guide` · version 2026-10 (combat `jc-slime`) : `pinned` + `400101@3` ; vide : « Aucun guide à ré-épingler : l'archive naîtra orpheline. ») · « Laissés en live » (`guide` · version 2026-08 — le motif en français) · « En attente » (`guide` · combat `g` — guide plat, rien d'automatique : [ouvrir dans Guides] data-go) · « Re-datés (meta.updated) » ; un groupe vide ne se dessine pas, sauf le premier
-      .ex-refuse (dans le plan, caché) : « Figeage refusé avant d'écrire — ce monstre a des changements non committés dans : » · ul : `data/generated/monsters.json` · « L'archive fige HEAD, pas le working tree : enregistrer d'abord, ou annuler. Committer fait de HEAD le NOUVEL état — pour figer l'ancien, annuler ces changements, figer, puis ré-intégrer. » — [Figer] éteint
+      p.ex-warn (dans le plan, caché ; ambre — un AVERTISSEMENT, pas un refus, A35) : « Le disque diffère de HEAD pour ce monstre (`data/generated/monsters.json`) — l'archive figera l'état committé, `abc1234` du 2026-10-12, pas ce qui est sur le disque. C'est le flux voulu après « Promouvoir » : figer, puis committer la promotion. » — [Figer] reste actif
       .form : [Note de l'archive (facultative) 30ch « avant la refonte 1.11 »] · « Puis UN commit « chore(monsters): Slime (400101) fige en v3, 2 guides re-epingles » : l'archive, les meta.json et les config.json touchés, les meta.json re-datés. » · [Figer] (.btn.danger) [Annuler]
    .ex-freport (bordé de vert, caché ; après un figeage, tant que la fiche reste ouverte) — badge ok « figé » `400101@3` — 6 skills, le fichier · « Dépingler une version : dans Guides, onglet Combat. » · les mêmes .ex-fgroup, tels qu'ÉCRITS (« … · version 2026-10 épinglée »), plus « Non écrits » si le store a refusé un meta.json
 #ex-sheet — deux colonnes de .card.pad.ex-sec (titre en capitales grises + badge off du compte ; `.ex-sec-wide` prend les deux ; une seule sous 1000 px) :
@@ -494,16 +494,20 @@ committé répond 404 et le bloc dit pourquoi. Les archives viennent de la
 fiche, chacune avec `pinnedBy` (`pinIndex` : les `pinned` des `config.json`
 de tous les guides, et les `bossId@n` d'un guide plat). Le plan ne s'ouvre
 qu'au clic ; « Figer » poste `POST /api/extractor/freeze` (`freezeMonster`,
-`id`, `label`, `was`) : le plan RECALCULÉ, le refus `dirty` (le monstre
-diffère de HEAD dans `monsters.json`, `monster-skills.json` ou
-`encounters.json`) puis le refus `stale` (`was` a bougé), rien d'écrit dans
-les deux cas ; sinon `versionMonster(id, { ref: 'HEAD', label })`,
+`id`, `label`, `was`) : le plan RECALCULÉ, le refus `stale` (`was` a bougé),
+rien d'écrit ; sinon `versionMonster(id, { ref: 'HEAD', label })`,
 `applyRepin`, le stamp des seuls guides touchés (`guidesToStamp`, la règle
-de `guide-stamp.ts`), UN `commitPaths`. Après le geste la fiche ET le plan
-sont relus : un refus laisse le plan relu à l'écran, un succès le ferme et
-pose le rapport (`report`). L'ordre « figer puis intégrer » (`.ex-order`) se
-décide sur les deux lectures : `review === 'changed'` et `plan.guides > 0`
-— des guides que le figeage ré-épinglerait, pas ceux qu'il laisserait ; il
+de `guide-stamp.ts`), UN `commitPaths`. Un monstre qui diffère de HEAD
+(`plan.dirty` : `monsters.json`, `monster-skills.json` ou `encounters.json`)
+n'est PAS refusé (A35) : le plan l'avertit en ambre, le journal le dit avant
+l'archive, et c'est HEAD qui est figé — l'état où « Promouvoir » laisse un
+boss changé. Après le geste la fiche ET le plan sont relus : un refus laisse
+le plan relu à l'écran, un succès le ferme et pose le rapport (`report`).
+L'ordre « figer puis intégrer » (`.ex-order`) se décide sur les deux
+lectures : `plan.guides > 0` — des guides que le figeage ré-épinglerait, pas
+ceux qu'il laisserait — et `review === 'changed'` ou `plan.dirty` non vide
+(le second pas est alors « Committer la promotion (Patch) », sauf si la revue
+dit aussi « changed ») ; il
 disparaît donc de lui-même une fois le monstre figé. Les tables du jeu ne
 sont pas lues par le figeage, mais la fiche qui le porte, si.
 `#extractor/monster/<id>/freeze` ouvre la fiche sur le plan (le banc de
