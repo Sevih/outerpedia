@@ -1,20 +1,22 @@
 /**
- * LA FORME des trois guides généraux éditables — ce que l'admin disait en
- * trois pages React (`PremiumLimitedEditor`, `FreeHeroesEditor`,
+ * LA FORME des guides généraux éditables — ce que l'admin disait en trois
+ * pages React (`PremiumLimitedEditor`, `FreeHeroesEditor`,
  * `ShopPrioritiesEditor`), dit ici en DONNÉES : des onglets, chacun des blocs,
  * chaque bloc une liste d'entrées (ou un texte seul) dont les CHAMPS sont
  * décrits — un texte localisé, un héros, des héros, un choix, un palier de
  * transcendance, une priorité S/A/B/C… Quick rend la forme qu'on lui sert et
- * ne connaît aucun des trois guides par son nom ; le serveur contrôle ce qui
+ * ne connaît aucun de ces guides par son nom ; le serveur contrôle ce qui
  * revient avec la même description (`scripts/quick/actions.ts`,
- * `saveGeneralGuide`). Un quatrième guide général éditable = une entrée ici,
- * ses lectures et écritures dans un store, rien dans la page.
+ * `saveGeneralGuide`). Un guide général éditable de plus = une entrée ici,
+ * ses lectures et écritures dans un store, rien dans la page — Core Fusion
+ * (C13) est le quatrième, sur la forme de Premium & Limited.
  *
  * Module volontairement PUR (ni `node:fs`, ni store) : testable seul, et la
  * forme dépend des DONNÉES (les shops dérivés présents, les shops texte) sans
  * les lire.
  */
 import { STARS } from './review-shape';
+import { FUSION_TIERS } from './core-fusion-shape';
 import {
   DERIVED_LABEL,
   DERIVED_ORDER,
@@ -23,13 +25,15 @@ import {
   TEXT_SHOP_LABEL,
 } from './shop-priorities-shape';
 
-export type GeneralGuideKind = 'premium-limited' | 'free-heroes' | 'shop-priorities';
+export type GeneralGuideKind =
+  'premium-limited' | 'free-heroes' | 'shop-priorities' | 'core-fusion';
 
 /** Les slugs de `general-guides` éditables, et le modèle de chacun. */
 export const GENERAL_GUIDE_KINDS: Readonly<Record<string, GeneralGuideKind>> = {
   'premium-limited': 'premium-limited',
   'free-heroes-start-banner': 'free-heroes',
   'shop-purchase-priorities': 'shop-priorities',
+  'core-fusion': 'core-fusion',
 };
 
 export const generalGuideKind = (slug: string): GeneralGuideKind | undefined =>
@@ -49,6 +53,12 @@ export const generalGuideKind = (slug: string): GeneralGuideKind | undefined =>
  *     + une note, comme `contribute/premium-reviews` l'écrit ;
  *   - `priority` : S, A, B, C ou rien ;
  *   - `impact` : la grille 3★ → 6★ × PvE / PvP, notée 1 à 5 ;
+ *   - `levels` : des niveaux de fusion cochables, une liste d'entiers — ceux
+ *     de la table du jeu du perso de l'entrée (`options.levels` de l'état) ;
+ *   - `op` : la relation d'une priorité avec la SUIVANTE — `>`, `>=`, ou
+ *     `null` (l'option de valeur vide) ;
+ *   - `group` : des champs `text` FACULTATIFS sous une même clé (`fields`),
+ *     repliés sous le libellé — l'objet n'est écrit que s'il porte un texte ;
  *   - `cost` : `{ currency, amount }` ; `limit` : `{ count, period }` ;
  *   - `product` : le produit du jeu d'une ligne dérivée, en LECTURE (icône,
  *     nom, coût, limite — le factuel n'est jamais curé).
@@ -65,6 +75,9 @@ export type GeneralFieldKind =
   | 'target'
   | 'priority'
   | 'impact'
+  | 'levels'
+  | 'op'
+  | 'group'
   | 'cost'
   | 'limit'
   | 'product';
@@ -83,6 +96,8 @@ export interface GeneralField {
   default?: unknown;
   /** `hero` : la case (`check` de la même entrée) qui libère le nom — un perso pas encore sorti. */
   unreleasedKey?: string;
+  /** `group` : ses textes, chacun à sa clé dans l'objet du groupe. */
+  fields?: GeneralField[];
 }
 
 export interface GeneralBlock {
@@ -116,7 +131,7 @@ export interface GeneralBlock {
    * Absent : des cartes, ou des lignes ordonnées.
    */
   view?: 'roster' | 'tiles';
-  /** `roster` : la clé, dans `options.rosters` de l'état, des persos attendus (`premium`). */
+  /** `roster` : la clé, dans `options.rosters` de l'état, des persos attendus (`premium`, `core-fusion`). */
   roster?: string;
   /** `text`, `texts` : l'anglais est requis. */
   required?: boolean;
@@ -224,6 +239,97 @@ function premiumLimitedForm(slug: string): GeneralGuideForm {
         })),
       },
     ]),
+  };
+}
+
+/* --- Core Fusion --- */
+
+const FUSION_TIER_LABEL: Record<(typeof FUSION_TIERS)[number], string> = {
+  first: '1re priorité',
+  second: '2e priorité',
+  third: '3e priorité',
+};
+
+const FUSION_REVIEW_FIELDS: GeneralField[] = [
+  { key: 'name', kind: 'hero', label: 'Héros', required: true },
+  text('review', 'Review', { required: true }),
+  { key: 'recommendedLevels', kind: 'levels', label: 'Niveaux recommandés', default: [] },
+  {
+    key: 'changes',
+    kind: 'group',
+    label: 'Ce qui change à la fusion',
+    fields: [
+      text('s1', 'S1'),
+      text('s2', 'S2'),
+      text('s3', 'S3'),
+      text('chain', 'Chaîne / Dual'),
+      text('passive', 'Passif de fusion'),
+      text('transcendence', 'Transcendance'),
+    ],
+  },
+];
+
+/**
+ * La forme de Premium & Limited (F25), sans bucket : un onglet Reviews — la
+ * liste compacte sur le roster des fusions du jeu, une review dépliée à la
+ * fois — et un onglet Priorités, ses trois paliers en vignettes glissables,
+ * chacune son palier de transcendance et sa relation avec la suivante.
+ */
+function coreFusionForm(slug: string): GeneralGuideForm {
+  return {
+    slug,
+    kind: 'core-fusion',
+    versioned: false,
+    tabs: [
+      {
+        id: 'reviews',
+        label: 'Reviews',
+        blocks: [
+          {
+            id: 'reviews',
+            label: 'Reviews',
+            hint: 'une par héros fusion — le guide du site exige celle de chaque fusion du jeu',
+            path: ['reviews'],
+            kind: 'list',
+            add: 'hero',
+            title: 'name',
+            view: 'roster',
+            roster: 'core-fusion',
+            fields: FUSION_REVIEW_FIELDS,
+          },
+        ],
+      },
+      {
+        id: 'priorities',
+        label: 'Priorités',
+        blocks: FUSION_TIERS.map((tier): GeneralBlock => ({
+          id: tier,
+          label: FUSION_TIER_LABEL[tier],
+          hint: 'l’ordre est celui de la page',
+          path: ['priorities', tier],
+          kind: 'list',
+          add: 'hero',
+          ordered: true,
+          title: 'name',
+          view: 'tiles',
+          fields: [
+            { key: 'name', kind: 'hero', label: 'Héros', required: true },
+            { key: 'stars', kind: 'stars', label: 'Palier' },
+            {
+              key: 'op',
+              kind: 'op',
+              label: 'Relation avec le suivant',
+              options: [
+                { value: '>', label: '>' },
+                { value: '>=', label: '≥' },
+                { value: '', label: '—' },
+              ],
+              default: null,
+            },
+          ],
+        })),
+      },
+    ],
   };
 }
 
@@ -437,6 +543,8 @@ export function generalGuideForm(slug: string, data: unknown): GeneralGuideForm 
       return freeHeroesForm(slug);
     case 'shop-priorities':
       return shopPrioritiesForm(slug, data as ShopFormData);
+    case 'core-fusion':
+      return coreFusionForm(slug);
     default:
       return undefined;
   }

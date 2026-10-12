@@ -219,15 +219,21 @@ import {
   type GeneralGuideKind,
 } from '@/lib/admin/general-guide-form';
 import {
+  coreFusionRoster,
+  loadCoreFusion,
   loadFreeHeroes,
   loadPremiumLimited,
   normalizeReview,
   premiumLimitedRoster,
+  saveCoreFusion,
   saveFreeHeroes,
   savePremiumLimited,
+  type CoreFusionData,
+  type CoreFusionHero,
   type FreeHeroesData,
   type PremiumLimitedData,
 } from '@/lib/admin/general-guide-store';
+import { FUSION_TIERS, isFusionOp, normalizeFusionReview } from '@/lib/admin/core-fusion-shape';
 import {
   loadShopPriorities,
   saveShopPriorities,
@@ -5660,7 +5666,7 @@ const byGuideOrder = (a: Guide, b: Guide): number =>
 /**
  * La vue d'ensemble de la section « Guides » : par catégorie du site (dans son
  * ordre), ses guides — slug, titre anglais, date, versions, caché, le boss ou
- * le combat en clair — et si quick l'édite (`GUIDE_SPECS`, ou l'un des trois
+ * le combat en clair — et si quick l'édite (`GUIDE_SPECS`, ou l'un des quatre
  * guides généraux à fragment éditable) ou si son contenu est en code, et le
  * palier d'un guide général (`tier`, avec la liste `tiers`). Une
  * catégorie dont TOUS les guides sont cachés n'y est pas (la
@@ -6228,7 +6234,7 @@ export async function addGuideVersionAction(
 
 // -------------------------------------------------------- guides généraux ----
 
-/** La catégorie des guides généraux ; trois de ses guides ont un fragment éditable. */
+/** La catégorie des guides généraux ; quatre de ses guides ont un fragment éditable. */
 const GENERAL_CATEGORY = 'general-guides';
 
 /** Les fichiers d'un enregistrement de shop hors du dossier du guide : le curé et le dérivé. */
@@ -6247,9 +6253,10 @@ export interface StepOption {
 }
 
 /** Les données d'un guide général, telles que son store les lit. */
-export type GeneralGuideData = PremiumLimitedData | FreeHeroesData | ShopPrioritiesEditData;
+export type GeneralGuideData =
+  PremiumLimitedData | FreeHeroesData | ShopPrioritiesEditData | CoreFusionData;
 
-/** Les lectures et les écritures des guides généraux, injectées : les trois stores, l'import, git. */
+/** Les lectures et les écritures des guides généraux, injectées : les stores, l'import, git. */
 export interface GeneralGuidesDeps {
   guides: () => Guide[];
   roster: () => SheetRosterRow[];
@@ -6258,12 +6265,16 @@ export interface GeneralGuidesDeps {
   steps: (rarity: number, id: string) => StepOption[];
   /** Les persos ATTENDUS de Premium & Limited, par bucket (les tags du roster) : le compteur « X / Y reviews ». */
   buckets: () => Record<string, string[]>;
+  /** Les héros FUSION du jeu : les reviews attendues de Core Fusion, et les niveaux de fusion de chacun. */
+  fusions: () => CoreFusionHero[];
   loadPremiumLimited: () => PremiumLimitedData;
   loadFreeHeroes: () => FreeHeroesData;
   loadShopPriorities: () => ShopPrioritiesEditData;
+  loadCoreFusion: () => CoreFusionData;
   savePremiumLimited: (data: PremiumLimitedData) => Promise<string[]>;
   saveFreeHeroes: (data: FreeHeroesData) => Promise<string[]>;
   saveShopPriorities: (data: ShopPrioritiesSaveData) => Promise<string[]>;
+  saveCoreFusion: (data: CoreFusionData) => Promise<string[]>;
   importContribution: (raw: unknown) => Promise<ImportResult>;
   /** Les fichiers d'un chemin (relatif au dépôt) qui diffèrent de `HEAD`. */
   dirty: (path: string) => string[];
@@ -6283,12 +6294,15 @@ export const GENERAL_GUIDES_DEPS: GeneralGuidesDeps = {
       label: transcendenceLabel(rarity, value, id),
     })),
   buckets: premiumLimitedRoster,
+  fusions: coreFusionRoster,
   loadPremiumLimited,
   loadFreeHeroes,
   loadShopPriorities,
+  loadCoreFusion,
   savePremiumLimited,
   saveFreeHeroes,
   saveShopPriorities,
+  saveCoreFusion,
   importContribution,
   dirty: (path) => gitDirtyFiles(path),
   stamp: stampMeta,
@@ -6303,6 +6317,8 @@ function loadGeneral(kind: GeneralGuideKind, deps: GeneralGuidesDeps): GeneralGu
       return deps.loadPremiumLimited();
     case 'free-heroes':
       return deps.loadFreeHeroes();
+    case 'core-fusion':
+      return deps.loadCoreFusion();
     default:
       return deps.loadShopPriorities();
   }
@@ -6313,11 +6329,13 @@ function loadGeneral(kind: GeneralGuideKind, deps: GeneralGuidesDeps): GeneralGu
  * ce que le scan en sait (comme un guide de boss), sa FORME (`generalGuideForm`
  * : les onglets, les blocs, les champs — c'est elle que la page rend, sans
  * connaître le guide), ses données telles que son store les lit, le roster
- * par nom d'affichage anglais et, pour Premium & Limited, les paliers pleins
- * de chaque perso (les options de `stars`) et les persos attendus par bucket
- * (`rosters`), les `refs`, les langues, le site.
+ * par nom d'affichage anglais et, pour Premium & Limited et Core Fusion, les
+ * paliers pleins de chaque perso (les options de `stars`) et les persos
+ * attendus (`rosters` : par bucket, ou les fusions du jeu) — pour Core Fusion
+ * encore, les niveaux de fusion de chaque héros (`levels`) —, les `refs`, les
+ * langues, le site.
  * Lu du disque à chaque appel. `error` : guide inconnu, ou dont le contenu
- * est en code (les onze autres généraux), ou données illisibles.
+ * est en code (les dix autres généraux), ou données illisibles.
  */
 export function generalGuideState(slug: string, deps: GeneralGuidesDeps = GENERAL_GUIDES_DEPS) {
   const kind = generalGuideKind(slug);
@@ -6331,6 +6349,7 @@ export function generalGuideState(slug: string, deps: GeneralGuidesDeps = GENERA
     return { error: `données illisibles : ${e instanceof Error ? e.message : String(e)}` };
   }
   const roster = deps.roster();
+  const fusions = kind === 'core-fusion' ? deps.fusions() : [];
   return {
     guide: {
       category: GENERAL_CATEGORY,
@@ -6348,12 +6367,20 @@ export function generalGuideState(slug: string, deps: GeneralGuidesDeps = GENERA
     options: {
       roster,
       steps:
-        kind === 'premium-limited'
+        kind === 'premium-limited' || kind === 'core-fusion'
           ? Object.fromEntries(roster.map((c) => [c.id, deps.steps(c.rarity, c.id)]))
           : {},
-      // Les persos attendus par bucket (`view: 'roster'` de la forme) : ceux que
-      // `contribute/premium-reviews` compte — le tag `premium`, la famille `limited`.
-      rosters: kind === 'premium-limited' ? deps.buckets() : {},
+      // Les persos attendus (`view: 'roster'` de la forme) : par bucket, ceux que
+      // `contribute/premium-reviews` compte — le tag `premium`, la famille
+      // `limited` ; pour Core Fusion, les fusions du jeu.
+      rosters:
+        kind === 'premium-limited'
+          ? deps.buckets()
+          : kind === 'core-fusion'
+            ? { 'core-fusion': fusions.map((f) => f.name) }
+            : {},
+      // Les niveaux de fusion de chaque héros fusion, par id (les cases de `levels`).
+      levels: Object.fromEntries(fusions.map((f) => [f.id, f.levels])),
     },
     refs: deps.refs(),
     langs: {
@@ -6386,10 +6413,11 @@ export interface GeneralSaveOutcome extends Outcome {
 type Rec = Record<string, unknown>;
 const isRec = (v: unknown): v is Rec => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
 
-/** Ce qu'un contrôle de champ a sous la main : le roster, les paliers d'un perso, le refus. */
+/** Ce qu'un contrôle de champ a sous la main : le roster, les paliers d'un perso, ses niveaux de fusion, le refus. */
 interface GeneralCleanContext {
   names: ReadonlySet<string>;
   steps: (name: string) => StepOption[] | undefined;
+  levels: (name: string) => number[] | undefined;
   refuse: (key: string, reason: string) => void;
 }
 
@@ -6493,6 +6521,36 @@ function cleanGeneralField(
       }
       out[f.key] = grid;
       return true;
+    }
+    case 'levels': {
+      const list = v ?? [];
+      if (!Array.isArray(list) || list.some((n) => !Number.isInteger(n)))
+        return no('des niveaux (entiers) attendus');
+      const levels = [...new Set(list as number[])].sort((a, b) => a - b);
+      out[f.key] = levels;
+      const known = typeof entry.name === 'string' ? ctx.levels(entry.name.trim()) : undefined;
+      const stray = known ? levels.filter((n) => !known.includes(n)) : [];
+      return stray.length
+        ? no(
+            `« ${stray.join(', ')} » n’est pas un niveau de fusion — attendu ${(known ?? []).join(', ')}`,
+          )
+        : true;
+    }
+    case 'op': {
+      if (v === undefined || v === null || v === '') out[f.key] = null;
+      else if (isFusionOp(v)) out[f.key] = v;
+      else return no(`relation inconnue : « ${String(v)} » (>, >=, ou rien)`);
+      return true;
+    }
+    case 'group': {
+      if (v === undefined || v === null) return true;
+      if (!isRec(v)) return no(`${f.label} : forme inattendue`);
+      const group: Rec = {};
+      let ok = true;
+      for (const sub of f.fields ?? [])
+        if (!cleanGeneralField(sub, v, group, `${key}.${sub.key}`, ctx)) ok = false;
+      if (Object.keys(group).length) out[f.key] = group;
+      return ok;
     }
     case 'cost': {
       if (v === undefined || v === null) return true;
@@ -6641,7 +6699,7 @@ function cleanGeneralData(
 function toStorePayload(
   kind: GeneralGuideKind,
   clean: Rec,
-): PremiumLimitedData | FreeHeroesData | ShopPrioritiesSaveData {
+): PremiumLimitedData | FreeHeroesData | ShopPrioritiesSaveData | CoreFusionData {
   switch (kind) {
     case 'premium-limited': {
       const reviews = (clean.reviews ?? {}) as Rec;
@@ -6663,6 +6721,17 @@ function toStorePayload(
       return {
         reviews: { premium: list('premium'), limited: list('limited') },
         priorities: { premium: order('premium'), limited: order('limited') },
+      };
+    }
+    case 'core-fusion': {
+      const priorities = (clean.priorities ?? {}) as Rec;
+      return {
+        reviews: ((clean.reviews ?? []) as Partial<CoreFusionData['reviews'][number]>[]).map(
+          normalizeFusionReview,
+        ),
+        priorities: Object.fromEntries(
+          FUSION_TIERS.map((tier) => [tier, priorities[tier] ?? []]),
+        ) as CoreFusionData['priorities'],
       };
     }
     case 'free-heroes':
@@ -6712,7 +6781,7 @@ function toStorePayload(
   }
 }
 
-/** Un refus du store (« Premium/second #2: … », « Source 1, entry 2: … »), ramené à son onglet et sa clé. */
+/** Un refus du store (« Premium/second #2: … », « Source 1, entry 2: … », « Reviews #3 … »), ramené à son onglet et sa clé. */
 function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralRefusal, 'reason'> {
   if (kind === 'premium-limited') {
     const m = /^(Premium|Limited)(?:\/(first|second|third|transcend))? #(\d+)/.exec(error);
@@ -6723,6 +6792,14 @@ function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralR
         tab: `${bucket}-${m[2] ? 'priorities' : 'reviews'}`,
         key: m[2] ? `priorities.${bucket}.${m[2]}.${i}` : `reviews.${bucket}.${i}`,
       };
+    }
+  } else if (kind === 'core-fusion') {
+    const m = /^(?:Reviews|Priorities\/(first|second|third)) #(\d+)/.exec(error);
+    if (m) {
+      const i = Number(m[2]) - 1;
+      return m[1]
+        ? { tab: 'priorities', key: `priorities.${m[1]}.${i}` }
+        : { tab: 'reviews', key: `reviews.${i}` };
     }
   } else if (kind === 'free-heroes') {
     const m = /^Source (\d+)(?:, entry (\d+))?/.exec(error);
@@ -6757,9 +6834,10 @@ function situateStoreError(kind: GeneralGuideKind, error: string): Omit<GeneralR
  * données sont CONTRÔLÉES sur la forme avant toute écriture (textes et tags
  * par la résolution du site, l'anglais requis où le store l'exige, noms de
  * persos dans le roster — sauf un perso « pas encore sorti » —, paliers
- * pleins, priorités, grilles d'impact), chaque écart SITUÉ à son onglet et sa
- * clé ; puis le store écrit (`savePremiumLimited`, `saveFreeHeroes` —
- * les deux fichiers de Premium & Limited sont solidaires —, ou
+ * pleins, priorités, grilles d'impact, niveaux de fusion), chaque écart SITUÉ
+ * à son onglet et sa clé ; puis le store écrit (`savePremiumLimited`,
+ * `saveCoreFusion`, `saveFreeHeroes` — les deux fichiers de Premium & Limited
+ * sont solidaires, ceux de Core Fusion aussi —, ou
  * `saveShopPriorities` sous verrou : le curé, le dérivé régénéré,
  * l'éditorial), ses refus rendus situés eux aussi ; puis ce qui a BOUGÉ se
  * lit de git — le dossier du guide et, pour les shops, ses deux fichiers de
@@ -6808,12 +6886,16 @@ export async function saveGeneralGuide(
   const form = generalGuideForm(slug, disk) as GeneralGuideForm;
   const roster = deps.roster();
   const byName = new Map(roster.map((c) => [c.name, c]));
+  const fusionLevels = new Map(
+    (kind === 'core-fusion' ? deps.fusions() : []).map((f) => [f.name, f.levels]),
+  );
   const clean = cleanGeneralData(form, b.data, {
     names: new Set(byName.keys()),
     steps: (heroName) => {
       const c = byName.get(heroName);
       return c ? deps.steps(c.rarity, c.id) : undefined;
     },
+    levels: (heroName) => fusionLevels.get(heroName),
     refuse: (key, reason) =>
       refuse({
         tab: key ? (blockOfKey(form, key)?.tab.id ?? 'guide') : 'guide',
@@ -6830,7 +6912,9 @@ export async function saveGeneralGuide(
       ? await deps.savePremiumLimited(payload as PremiumLimitedData)
       : kind === 'free-heroes'
         ? await deps.saveFreeHeroes(payload as FreeHeroesData)
-        : await deps.saveShopPriorities(payload as ShopPrioritiesSaveData);
+        : kind === 'core-fusion'
+          ? await deps.saveCoreFusion(payload as CoreFusionData)
+          : await deps.saveShopPriorities(payload as ShopPrioritiesSaveData);
   for (const e of errors) refuse({ ...situateStoreError(kind, e), reason: e });
   if (errors.length) return out(false, [...j.lines, 'Rien à enregistrer.']);
 

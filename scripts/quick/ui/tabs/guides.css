@@ -958,6 +958,27 @@
 #tab-guides .gd-tiles-add {
   align-self: center;
 }
+/* Un groupe de textes facultatifs (`group` : « Ce qui change à la fusion »),
+   replié sous son libellé ; déplié, ses champs en colonne, en retrait. Les
+   niveaux de fusion (`.gd-levels`) : le segmenté de `.gd-prio`, en chiffres. */
+#tab-guides .gd-group > .gd-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+  padding-left: 12px;
+  border-left: 2px solid var(--line-subtle);
+}
+#tab-guides .gd-group.ko > .gd-body {
+  border-left-color: var(--danger);
+}
+/* Les « Traductions » repliées d'un groupe déplié : `details[open] summary` les atteindrait. */
+#tab-guides .gd-group[open] details:not([open]) summary {
+  margin-bottom: 0;
+}
+#tab-guides .gd-levels button {
+  font-family: var(--mono);
+}
 #tab-guides .gd-gen-text {
   display: flex;
   align-items: flex-start;

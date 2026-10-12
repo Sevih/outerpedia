@@ -299,7 +299,8 @@ retenue par le navigateur, les généraux rangés par palier, et la recherche
 qui traverse toutes les catégories. Liens des catégories de boss retirés du
 menu admin le 11/10), et les guides GÉNÉRAUX à fragment éditable (= Guide
 editor › General guides, trois guides sur quatorze : Premium & Limited,
-Free Heroes, Shop priorities — étape 17, lot F19 : ouverts depuis la même
+Free Heroes, Shop priorities — plus Core Fusion depuis le lot C13, que
+l'admin n'éditait pas — étape 17, lot F19 : ouverts depuis la même
 vue d'ensemble, dans la même coquille, rendus d'après la FORME que le
 serveur sert (`general-guide-form.ts` : des onglets, des blocs, les champs
 d'une entrée — un texte localisé avec aperçu et traductions, un héros par
@@ -542,7 +543,15 @@ Chaque entrée : l'écran admin, ce qu'il contient, puis la ligne
     l'admin, vide. CHOIX : les onze guides généraux en `.ts` (contenu dans
     `index.tsx`) ne s'éditent ni dans l'admin ni dans quick — leur contenu
     est du code, il se retouche dans le dépôt ; la vue d'ensemble les liste
-    « contenu en code ». L'entrée reste pour que la numérotation ne bouge pas.
+    « contenu en code ». REVENU DESSUS pour Core Fusion SEULEMENT (lot C13,
+    revue de quick par Sevih du 12/10) : ses priorités de déblocage et ses
+    reviews sortent du TypeScript (`core-fusion/priorities.json`,
+    `core-fusion/reviews.json`, une transcription — les `.ts` ne sont plus
+    que l'import typé, comme `premium-limited/reviews.ts`) et s'éditent dans
+    quick sur la forme de Premium & Limited : `coreFusionForm`
+    (`general-guide-form.ts`), `loadCoreFusion` / `saveCoreFusion`
+    (`general-guide-store.ts`). Restent « en code » les DIX autres généraux.
+    L'entrée reste pour que la numérotation ne bouge pas.
     `PremiumLimitedEditor`, `EditorialEditor`, `FreeHeroesEditor`
     - Agacements : ui pas pratique — corrigé : plus de « un perso à la fois »
       (toutes les reviews en cartes, le perso par le picker partagé), une

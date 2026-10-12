@@ -11878,7 +11878,7 @@ describe('Guides — la page, sur le vrai markup', () => {
     ],
     siteBase: 'https://outerpedia.local/en/guides',
   };
-  /** Les trois guides généraux à fragment éditable, tels que leurs stores les lisent. */
+  /** Les quatre guides généraux à fragment éditable, tels que leurs stores les lisent. */
   const impact = () =>
     Object.fromEntries(['3', '4', '5', '6'].map((s) => [s, { pve: '', pvp: '' }]));
   const emptyOrder = () => ({ first: [], second: [], third: [], transcend: [] });
@@ -11950,6 +11950,24 @@ describe('Guides — la page, sur le vrai markup', () => {
         textShops: { supply: { paragraphs: [{ en: 'Buy the module' }] } },
         eventItems: [{ name: 'Cosmetic', priority: 'S', label: { en: 'Cosmetic' } }],
         resourceItems: [],
+      },
+    },
+    'core-fusion': {
+      reviews: [
+        {
+          name: 'Aer',
+          review: { en: 'Rework {B/BT_BARRIER}', fr: 'Refonte' },
+          recommendedLevels: [3, 5],
+          changes: { s1: { en: 'New S1' }, passive: { en: 'New passive' } },
+        },
+      ],
+      priorities: {
+        first: [
+          { name: 'Aer', stars: 3, op: '>' },
+          { name: 'Alice', stars: 4, op: null },
+        ],
+        second: [],
+        third: [],
       },
     },
   });
@@ -12084,9 +12102,18 @@ describe('Guides — la page, sur le vrai markup', () => {
           data: JSON.parse(JSON.stringify(d)),
           options: {
             roster: ROSTER,
-            steps: slug === 'premium-limited' ? STEPS : {},
+            steps: slug === 'premium-limited' || slug === 'core-fusion' ? STEPS : {},
             rosters:
-              slug === 'premium-limited' ? { premium: ['Aer', 'Alice'], limited: ['Alice'] } : {},
+              slug === 'premium-limited'
+                ? { premium: ['Aer', 'Alice'], limited: ['Alice'] }
+                : slug === 'core-fusion'
+                  ? { 'core-fusion': ['Aer', 'Alice'] }
+                  : {},
+            // Dans ce faux, Aer et Alice sont les fusions du jeu : cinq niveaux chacune.
+            levels:
+              slug === 'core-fusion'
+                ? { '2000055': [1, 2, 3, 4, 5], '2000002': [1, 2, 3, 4, 5] }
+                : {},
           },
           refs: {},
           langs: LANGS,
@@ -13211,6 +13238,225 @@ describe('Guides — la page, sur le vrai markup', () => {
     page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
     await page.settle();
     expect(page.val(page.field('reviews.premium.0.review'))).toBe('Fast {B/BT_BARRIER}');
+  });
+
+  const CF = '#guides/general-guides/core-fusion';
+
+  it('Core Fusion › Priorités par le hash : trois paliers en vignettes, le palier et la relation `op` par vignette (« — » = `null`), le glisser-déposer d’un palier à l’autre emporte les deux', async () => {
+    const page = await guides({ hash: `${CF}/priorities` });
+    expect(page.calls.map((c) => c.path)).toContain('/api/guides/general?slug=core-fusion');
+    expect(page.subs()).toEqual(['reviews', 'priorities']);
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('priorities');
+    expect(page.window.location.hash).toBe(CF);
+    expect(page.all('#gd-panel [data-block]').map((b) => b.dataset.block)).toEqual([
+      'first',
+      'second',
+      'third',
+    ]);
+    const rows = (tier = 'first') =>
+      page
+        .all(`#gd-panel [data-block="${tier}"] .gd-pick`)
+        .map((r) => r.querySelector('.gd-hero .ht-n')?.textContent);
+    const tile = (tier: string, i: number) =>
+      page.all(`#gd-panel [data-block="${tier}"] .gd-pick[data-i="${i}"]`)[0];
+    const op = (key: string) =>
+      page.all(`#gd-panel [data-gen="${key}"]`)[0] as unknown as HTMLSelectElement;
+    // L'attribut `selected` du markup, pas la propriété : happy-dom ne rend pas « choisie » une option de valeur vide.
+    const opts = (key: string) =>
+      (page.all(`#gd-panel [data-gen="${key}"] option`) as unknown as HTMLOptionElement[]).map(
+        (o) => [o.value, o.textContent, o.hasAttribute('selected')],
+      );
+    const pick = async (key: string, value: string) => {
+      op(key).value = value;
+      op(key).dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+      await page.settle();
+    };
+    expect(rows()).toEqual(['Aer', 'Alice']);
+    // Chaque vignette : son palier parmi les crans pleins, puis sa relation avec la suivante.
+    expect(
+      page
+        .all('#gd-panel [data-block="first"] .gd-pick[data-i="0"] select')
+        .map((x) => x.dataset.gen),
+    ).toEqual(['priorities.first.0.stars', 'priorities.first.0.op']);
+    expect(opts('priorities.first.0.op')).toEqual([
+      ['>', '>', true],
+      ['>=', '≥', false],
+      ['', '—', false],
+    ]);
+    // `null` sur le disque : l'option vide est la choisie.
+    expect(opts('priorities.first.1.op').map((o) => o[2])).toEqual([false, false, true]);
+    expect(page.count()).toBe('aucune modification');
+    // « ≥ » puis retour à « — » : la valeur vide redevient `null`, plus rien en attente.
+    await pick('priorities.first.1.op', '>=');
+    expect(page.count()).toBe('1 onglet modifié');
+    expect(page.dots()).toEqual([['priorities', 'dot edit']]);
+    await pick('priorities.first.1.op', '');
+    expect(page.count()).toBe('aucune modification');
+    await pick('priorities.first.1.op', '>=');
+    await pick('priorities.first.0.op', '');
+    // Glisser Aer sur le 2e palier (sa rangée, vide) : il la rejoint, palier et relation avec lui.
+    const from = tile('first', 0);
+    const to = page.all('#gd-panel .gd-tiles[data-key="priorities.second"]')[0];
+    from.dispatchEvent(new page.window.Event('dragstart', { bubbles: true }) as unknown as Event);
+    for (const type of ['dragover', 'drop'])
+      to.dispatchEvent(
+        new page.window.Event(type, { bubbles: true, cancelable: true }) as unknown as Event,
+      );
+    await page.settle();
+    expect(rows()).toEqual(['Alice']);
+    expect(rows('second')).toEqual(['Aer']);
+    // « ＋ » du 3e palier : une vignette neuve naît sans relation, à son premier cran plein.
+    page.all('#gd-panel [data-act="gen-pick-tiles"][data-key="priorities.third"]')[0].click();
+    page.all('#hp-results .hp-tile[data-id="2000002"]')[0].click();
+    page.all('[data-hp="ok"]')[0].click();
+    await page.settle();
+    expect(rows('third')).toEqual(['Alice']);
+    expect(opts('priorities.third.0.op').map((o) => o[2])).toEqual([false, false, true]);
+    await page.save();
+    const posted = page.postedGeneral()[0];
+    expect(posted.slug).toBe('core-fusion');
+    expect(posted.was).toEqual(general()['core-fusion']);
+    expect((posted.data as { priorities: unknown }).priorities).toEqual({
+      first: [{ name: 'Alice', stars: 4, op: '>=' }],
+      second: [{ name: 'Aer', stars: 3, op: null }],
+      third: [{ name: 'Alice', stars: 3, op: null }],
+    });
+    // Les reviews partent telles que le disque les porte : rien n'y a été touché.
+    expect((posted.data as { reviews: unknown }).reviews).toEqual(general()['core-fusion'].reviews);
+  });
+
+  it('Core Fusion › Reviews : la liste compacte sur les fusions du jeu, sans « pas encore sorti » ; les niveaux cochables de la table du jeu ; `changes` replié en six textes, un texte vidé absent de ce qui part', async () => {
+    const page = await guides({ hash: CF });
+    expect(page.all('#gd-tabs [aria-selected="true"]')[0].dataset.sub).toBe('reviews');
+    expect(page.all('#gd-panel [data-block]').map((b) => b.dataset.block)).toEqual(['reviews']);
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('1 / 2 reviews');
+    expect(page.all('#gd-panel .gd-missing')[0].textContent).toBe('Sans review : Alice');
+    expect(page.all('#gd-panel [data-act="gen-add-review"]')).toHaveLength(1);
+    expect(page.all('#gd-panel [data-act="gen-add-unreleased"]')).toHaveLength(0);
+    expect(
+      page
+        .all('#gd-panel .gd-rrow')
+        .map((r) => [
+          r.dataset.name,
+          r.dataset.entry ?? null,
+          r.querySelector('.gd-rmark')?.textContent,
+          r.querySelector('.gd-rsum')?.textContent,
+        ]),
+    ).toEqual([
+      ['Aer', 'reviews.0', '★', 'Lv 3, 5 · 2 / 6 changements'],
+      ['Alice', null, '☆', '— pas de review'],
+    ]);
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    expect(page.val(page.field('reviews.0.review'))).toBe('Rework {B/BT_BARRIER}');
+    // Les niveaux : ceux de la table du jeu, 3 et 5 cochés ; 4 coché, 3 décoché.
+    const levels = () =>
+      page
+        .all('#gd-panel [data-act="gen-level"][data-key="reviews.0.recommendedLevels"]')
+        .map((b) => `${b.dataset.value}${b.getAttribute('aria-pressed') === 'true' ? '✓' : ''}`)
+        .join(' ');
+    const level = async (lv: number) => {
+      page
+        .all(
+          `#gd-panel [data-act="gen-level"][data-key="reviews.0.recommendedLevels"][data-value="${lv}"]`,
+        )[0]
+        .click();
+      await page.settle();
+    };
+    expect(levels()).toBe('1 2 3✓ 4 5✓');
+    await level(4);
+    await level(3);
+    expect(levels()).toBe('1 2 3 4✓ 5✓');
+    expect(page.count()).toBe('1 onglet modifié');
+    // « Ce qui change à la fusion » : replié, son compte ; ses six textes dedans, dans l'ordre du fichier.
+    const group = () =>
+      page.all(
+        '#gd-panel details.gd-group[data-group="reviews.0.changes"]',
+      )[0] as unknown as HTMLDetailsElement;
+    expect(group().open).toBe(false);
+    expect(group().querySelector('summary')?.textContent).toBe('Ce qui change à la fusion2 / 6');
+    expect(
+      [...group().querySelectorAll('.gd-text')].map((t) => (t as HTMLElement).dataset.text),
+    ).toEqual([
+      'reviews.0.changes.s1',
+      'reviews.0.changes.s2',
+      'reviews.0.changes.s3',
+      'reviews.0.changes.chain',
+      'reviews.0.changes.passive',
+      'reviews.0.changes.transcendence',
+    ]);
+    expect(page.val(page.field('reviews.0.changes.s1'))).toBe('New S1');
+    // Déplié, il le reste d'un dessin à l'autre.
+    group().open = true;
+    group().dispatchEvent(new page.window.Event('toggle') as unknown as Event);
+    await level(1);
+    expect(group().open).toBe(true);
+    await level(1);
+    page.type(page.field('reviews.0.changes.s2'), 'New S2');
+    page.type(page.field('reviews.0.changes.passive'), '');
+    // « Traduire » atteint les textes du groupe.
+    page.all('#gd-panel [data-act="translate"]')[0].click();
+    await page.settle();
+    const sent = page.calls.filter((c) => c.path === '/api/translate');
+    // Ce qui manque de traductions dans l'onglet : la review, et les changements écrits (le vidé n'en est plus).
+    expect((sent[0].body as { texts: string[] }).texts).toEqual([
+      'Rework {B/BT_BARRIER}',
+      'New S1',
+      'New S2',
+    ]);
+    expect(page.val(page.field('reviews.0.changes.s2', 'jp'))).toBe('jp New S2');
+    // Alice (☆) cliquée : sa review naît, sans niveau ni changement.
+    page.all('#gd-panel .gd-rrow[data-name="Alice"]')[0].click();
+    await page.settle();
+    expect(page.all('#gd-panel .gd-entry').map((e) => e.dataset.entry)).toEqual(['reviews.1']);
+    page.type(page.field('reviews.1.review'), 'Solid');
+    await page.save();
+    const data = page.postedGeneral()[0].data as { reviews: Record<string, unknown>[] };
+    expect(data.reviews[0]).toMatchObject({
+      name: 'Aer',
+      recommendedLevels: [4, 5],
+      changes: { s1: { en: 'New S1' }, s2: { en: 'New S2', jp: 'jp New S2' } },
+    });
+    expect(Object.keys(data.reviews[0].changes as object)).toEqual(['s1', 's2']);
+    expect(data.reviews[1]).toEqual({
+      name: 'Alice',
+      review: { en: 'Solid' },
+      recommendedLevels: [],
+    });
+    expect(page.all('#gd-panel [data-count]')[0].textContent).toBe('2 / 2 reviews');
+  });
+
+  it('Core Fusion : un refus sur un texte de `changes` cercle la ligne de la review et ouvre le groupe sur le champ fautif', async () => {
+    const page = await guides({
+      hash: CF,
+      savedGeneral: () => ({
+        ok: false,
+        log: ['REFUSÉ'],
+        written: false,
+        stale: false,
+        refused: [{ tab: 'reviews', key: 'reviews.0.changes.s1', reason: 'tag inconnu {B/NOPE}' }],
+      }),
+    });
+    page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].click();
+    await page.settle();
+    page.type(page.field('reviews.0.changes.s1'), 'bad {B/NOPE}');
+    await page.save();
+    expect(page.dots()).toEqual([['reviews', 'dot ko']]);
+    expect(page.all('#gd-panel .gd-rrow[data-name="Aer"]')[0].classList.contains('ko')).toBe(true);
+    const group = page.all(
+      '#gd-panel details.gd-group[data-group="reviews.0.changes"]',
+    )[0] as unknown as HTMLDetailsElement;
+    expect(group.open).toBe(true);
+    expect(group.classList.contains('ko')).toBe(true);
+    expect(
+      page.all('#gd-panel .gd-text[data-text="reviews.0.changes.s1"]')[0].classList.contains('ko'),
+    ).toBe(true);
+    expect(
+      page
+        .all('#gd-panel .gd-err')
+        .map((e) => e.textContent)
+        .filter(Boolean),
+    ).toEqual(['tag inconnu {B/NOPE}']);
   });
 
   it('Free Heroes : « ＋ source » pose une carte, « ＋ entrée » sa sous-liste, « ＋ héros » le picker en multi, le type de choix ; ce qui part', async () => {

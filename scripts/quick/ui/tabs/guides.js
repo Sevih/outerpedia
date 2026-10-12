@@ -3,9 +3,9 @@
 // l'éditeur des guides de boss (les catégories de `GUIDE_SPECS` : joint
 // challenge, world boss, special request, irregular extermination, adventure
 // license, adventure, dimensional singularity) — l'éditeur « Guide editor » de
-// l'admin, sans ses catégories mortes — et, sous la même coquille, les trois
+// l'admin, sans ses catégories mortes — et, sous la même coquille, les quatre
 // guides GÉNÉRAUX à fragment éditable (Premium & Limited, Free Heroes, Shop
-// priorities), rendus d'après la FORME que le serveur sert (`gen`, plus bas),
+// priorities, Core Fusion), rendus d'après la FORME que le serveur sert (`gen`, plus bas),
 // plus l'import d'une contribution depuis la vue d'ensemble. Un guide à la
 // fois, en sous-onglets : Méta (titre et description en six langues, caché),
 // Combat (ce que la catégorie demande, et pour un versionné les pins en
@@ -52,7 +52,7 @@ let ver = 0; // la version montrée (index dans `draft.versions`)
 let wanted = null; // ce que le hash demande : { cat, slug, version }, tant que ce n'est pas chargé
 let wantedSub = null; // le sous-onglet que le hash demande d'un guide général, tant qu'il n'est pas chargé
 let gen = null; // le guide GÉNÉRAL ouvert : { slug, form, data, was } — `draft` et `meta` restent nuls
-const genOpen = new Set(); // les notes de produit ouvertes par « ＋ note », par clé, tant qu'elles sont vides
+const genOpen = new Set(); // par clé : les notes de produit ouvertes par « ＋ note » tant qu'elles sont vides, les groupes (`group`) dépliés
 let openEntry = null; // l'entrée dépliée d'un bloc `roster` (une review) : l'objet lui-même, les index bougent
 let refused = []; // les refus du dernier enregistrement (`GuideRefusal`)
 const pinTouched = new Set(); // les versions dont la page a touché les pins
@@ -1030,8 +1030,8 @@ function videosHtml() {
 }
 
 // ------------------------------------------------------ les guides généraux
-// Trois guides généraux ont un fragment éditable (Premium & Limited, Free
-// Heroes, Shop priorities) : la page ne les connaît pas par leur nom, elle rend
+// Quatre guides généraux ont un fragment éditable (Premium & Limited, Free
+// Heroes, Shop priorities, Core Fusion) : la page ne les connaît pas par leur nom, elle rend
 // la FORME que le serveur sert (`spec.tabs` : des onglets, des blocs, les
 // champs de chaque entrée — cf. `general-guide-form.ts`) sur les données du
 // store (`gen.data`), dans la même coquille que les guides de boss : en-tête,
@@ -1070,7 +1070,12 @@ function cleanFields(e, fields) {
       if (t) e[f.key] = t;
       else delete e[f.key];
     } else if (f.kind === 'check' && !e[f.key]) delete e[f.key];
-    else if (
+    else if (f.kind === 'group') {
+      // Un groupe : ses textes nettoyés de même ; sans aucun, il est absent.
+      const g = e[f.key];
+      if (g) cleanFields(g, f.fields);
+      if (!g || !Object.keys(g).length) delete e[f.key];
+    } else if (
       (f.kind === 'number' || f.kind === 'priority') &&
       (e[f.key] === '' || e[f.key] === null)
     )
@@ -1120,7 +1125,9 @@ function tabMovedGen(id) {
 function genTexts(tabId) {
   const out = [];
   const ofFields = (e, fields) => {
-    for (const f of fields ?? []) if (f.kind === 'text' && e[f.key]) out.push(e[f.key]);
+    for (const f of fields ?? [])
+      if (f.kind === 'text' && e[f.key]) out.push(e[f.key]);
+      else if (f.kind === 'group' && e[f.key]) ofFields(e[f.key], f.fields);
   };
   for (const tab of gen.form.tabs.filter((t) => !tabId || t.id === tabId))
     for (const block of tab.blocks) {
@@ -1159,6 +1166,12 @@ function blankEntry(fields, name = '') {
 const stepsOf = (name) => {
   const c = heroByName(name);
   return (c && sheet.options.steps?.[c.id]) ?? [];
+};
+
+/** Les niveaux de fusion d'un héros fusion, par son nom : ce que « Niveaux recommandés » propose. */
+const levelsOf = (name) => {
+  const c = heroByName(name);
+  return (c && sheet.options.levels?.[c.id]) ?? [];
 };
 
 /** Une tuile de perso sans ✕ (le perso d'une review, d'un palier). */
@@ -1212,6 +1225,18 @@ function starsSelect(f, e, key, more = '') {
   const cur = e[f.key];
   const opts = steps.length ? steps : [{ value: cur, label: String(cur) }];
   return `<select class="w-qty" ${genAttr(key, 'number')} aria-label="${esc(f.label)}${e.name ? ` de ${esc(e.name)}` : ''}" ${more}>${opts
+    .map(
+      (o) =>
+        `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
+    )
+    .join('')}</select>`;
+}
+/** Le sélecteur de relation d'une entrée avec la SUIVANTE (`op`) : `>`, `≥`, ou rien (`null`, l'option vide). */
+function opSelect(f, e, key) {
+  const cur = e[f.key] ?? '';
+  return `<select class="w-qty" ${genAttr(key, 'nullable')} aria-label="${esc(f.label)}${e.name ? ` de ${esc(e.name)}` : ''}" title="${esc(f.label)} : > strictement avant, ≥ avant ou à égalité, — sans relation">${(
+    f.options ?? []
+  )
     .map(
       (o) =>
         `<option value="${esc(o.value)}"${o.value === cur ? ' selected' : ''}>${esc(o.label)}</option>`,
@@ -1311,6 +1336,32 @@ function fieldHtml(f, e, ek, block) {
             `<tr><td>${star}★</td><td>${cell(star, 'pve')}</td><td>${cell(star, 'pvp')}</td></tr>`,
         )
         .join('')}</tbody></table>${errHtml(bad)}</div>`;
+    }
+    case 'levels': {
+      // Des cases : les niveaux de la table du jeu du héros ; un niveau écrit qui n'en est pas reste visible (et refusé).
+      const on = ensureAt(e, [f.key], () => []);
+      const all = [...new Set([...levelsOf(e.name ?? ''), ...on])].sort((a, b) => a - b);
+      return `<div class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}<div class="gd-prio gd-levels" role="group" aria-label="${esc(f.label)}">${all
+        .map(
+          (lv) =>
+            `<button type="button" data-act="gen-level" data-key="${esc(key)}" data-value="${lv}" aria-pressed="${on.includes(lv)}" title="Niveau ${lv}${on.includes(lv) ? ' : retirer' : ''}">${lv}</button>`,
+        )
+        .join(
+          '',
+        )}</div>${all.length ? '' : '<span class="lbl">choisir d’abord un héros fusion</span>'}${errHtml(bad)}</div>`;
+    }
+    case 'op':
+      return `<label class="gd-field gd-field-inline${bad.length ? ' ko' : ''}">${fieldLabel(f)}${opSelect(f, e, key)}${errHtml(bad)}</label>`;
+    case 'group': {
+      // Des textes facultatifs repliés sous un libellé ; ouvert : dit par `genOpen`, ou un refus dedans.
+      const g = ensureAt(e, [f.key], () => ({}));
+      const subs = f.fields ?? [];
+      const written = subs.filter((sf) => hasText(g[sf.key])).length;
+      const sbad = subs.some((sf) => refusedKey(`${key}.${sf.key}`).length);
+      return `<details class="gd-group${bad.length || sbad ? ' ko' : ''}" data-group="${esc(key)}"${genOpen.has(key) || sbad ? ' open' : ''}>
+        <summary><span class="btn ghost sm">${esc(f.label)}</span><span class="badge off" data-count>${written} / ${subs.length}</span></summary>
+        <div class="gd-body">${subs.map((sf) => fieldHtml(sf, g, key, block)).join('')}${errHtml(bad)}</div>
+      </details>`;
     }
     case 'cost': {
       const c = e[f.key];
@@ -1415,20 +1466,42 @@ function entryHtml(block, e, ek, i, count, listKey) {
 /* --- `view: 'roster'` : les reviews à la façon de contribute/premium-reviews --- */
 /** Une review compte quand son anglais est écrit (la règle du site : une entrée vide n'enfle pas le compteur). */
 const reviewed = (e) => Boolean(e?.review?.[def()]?.trim());
-/** Le résumé d'une review en une ligne : « PvE 5 · PvP Any · impact 3/2 · 2/2 · 3/5 · 2/4 » (3★ → 6★, PvE/PvP, « – » pour une case vide). */
-function reviewSummary(e) {
-  const cells = ['3', '4', '5', '6']
-    .map((st) => `${e.impact?.[st]?.pve || '–'}/${e.impact?.[st]?.pvp || '–'}`)
-    .join(' · ');
-  return `PvE ${e.recommendedPve || '—'} · PvP ${e.recommendedPvp || '—'} · impact ${cells}`;
+/**
+ * Le résumé d'une review en une ligne, d'après les champs du bloc : avec une
+ * grille d'impact, « PvE 5 · PvP Any · impact 3/2 · 2/2 · 3/5 · 2/4 » (3★ → 6★,
+ * PvE/PvP, « – » pour une case vide) ; avec des niveaux et un groupe, « Lv 3,
+ * 5 · 5 / 6 changements ».
+ */
+function reviewSummary(block, e) {
+  const fields = block.fields ?? [];
+  const parts = [];
+  for (const f of fields)
+    if (f.kind === 'levels') parts.push(`Lv ${(e[f.key] ?? []).join(', ') || '—'}`);
+    else if (f.kind === 'group')
+      parts.push(
+        `${(f.fields ?? []).filter((sf) => hasText(e[f.key]?.[sf.key])).length} / ${(f.fields ?? []).length} changements`,
+      );
+  if (fields.some((f) => f.kind === 'impact')) {
+    const cells = ['3', '4', '5', '6']
+      .map((st) => `${e.impact?.[st]?.pve || '–'}/${e.impact?.[st]?.pvp || '–'}`)
+      .join(' · ');
+    parts.push(`PvE ${e.recommendedPve || '—'} · PvP ${e.recommendedPvp || '—'} · impact ${cells}`);
+  }
+  return parts.join(' · ');
 }
 /** Une ligne de la liste compacte : la vignette, ★ ou ☆, le nom, le résumé ; un clic déplie sa review (ou la crée, pour un perso du roster). */
 function rosterRowHtml(block, listKey, name, e, i) {
   const c = heroByName(name);
   const open = e !== undefined && e === openEntry;
   const ek = e !== undefined ? `${listKey}.${i}` : '';
+  // Un refus sur l'entrée, sur un de ses champs, ou sur un texte d'un de ses groupes.
   const bad = ek
-    ? refusedKey(ek).length || (block.fields ?? []).some((f) => refusedKey(`${ek}.${f.key}`).length)
+    ? refusedKey(ek).length ||
+      (block.fields ?? []).some(
+        (f) =>
+          refusedKey(`${ek}.${f.key}`).length ||
+          (f.fields ?? []).some((sf) => refusedKey(`${ek}.${f.key}.${sf.key}`).length),
+      )
     : false;
   const label = name || '(sans nom)';
   return `<button class="gd-rrow${open ? ' open' : ''}${bad ? ' ko' : ''}${c ? '' : ' unknown'}" type="button" data-act="gen-open" data-key="${esc(listKey)}"${
@@ -1443,7 +1516,7 @@ function rosterRowHtml(block, listKey, name, e, i) {
       : c
         ? ''
         : '<span class="badge warn">hors roster</span>'
-  }${e ? `<span class="gd-rsum lbl mono">${esc(reviewSummary(e))}</span>` : '<span class="gd-rsum lbl">— pas de review</span>'}</button>`;
+  }${e ? `<span class="gd-rsum lbl mono">${esc(reviewSummary(block, e))}</span>` : '<span class="gd-rsum lbl">— pas de review</span>'}</button>`;
 }
 /** Le bloc des reviews : le compteur et les manquants, la liste du roster puis les entrées hors roster, UNE review dépliée. */
 function rosterBlockHtml(block) {
@@ -1455,6 +1528,8 @@ function rosterBlockHtml(block) {
   const done = names.filter((n) => reviewed(list[indexOf(n)])).length;
   const missing = names.filter((n) => !reviewed(list[indexOf(n)]));
   const off = list.map((e, i) => [e, i]).filter(([e]) => !names.includes(e.name));
+  // « Pas encore sorti » n'existe que si la forme libère le nom (`unreleasedKey` du héros).
+  const free = (block.fields ?? []).some((f) => f.kind === 'hero' && f.unreleasedKey);
   const row = (name, i) =>
     rosterRowHtml(block, key, name, i >= 0 ? list[i] : undefined, i) +
     (i >= 0 && list[i] === openEntry
@@ -1468,21 +1543,26 @@ function rosterBlockHtml(block) {
       missing.length ? `<p class="lbl gd-missing">Sans review : ${esc(missing.join(', '))}</p>` : ''
     }<div class="gd-roster" role="list">${names.map((n) => row(n, indexOf(n))).join('')}${
       off.length
-        ? `<span class="lbl gd-roster-sep">Hors roster · pas encore sortis</span>${off.map(([e, i]) => row(e.name, i)).join('')}`
+        ? `<span class="lbl gd-roster-sep">${free ? 'Hors roster · pas encore sortis' : 'Hors roster'}</span>${off.map(([e, i]) => row(e.name, i)).join('')}`
         : ''
-    }${names.length || off.length ? '' : '<p class="lbl">Aucune review.</p>'}</div>${errHtml(bad)}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="gen-add-review" data-key="${esc(key)}" aria-haspopup="dialog">＋ review</button><button class="btn ghost sm" type="button" data-act="gen-add-unreleased" data-key="${esc(key)}" title="Un perso absent de la data : son nom reste libre, la review attend sa sortie">＋ pas encore sorti</button></div></div>
+    }${names.length || off.length ? '' : '<p class="lbl">Aucune review.</p>'}</div>${errHtml(bad)}<div class="gd-foot"><button class="btn ghost sm" type="button" data-act="gen-add-review" data-key="${esc(key)}" aria-haspopup="dialog">＋ review</button>${
+      free
+        ? `<button class="btn ghost sm" type="button" data-act="gen-add-unreleased" data-key="${esc(key)}" title="Un perso absent de la data : son nom reste libre, la review attend sa sortie">＋ pas encore sorti</button>`
+        : ''
+    }</div></div>
   </div>`;
 }
 
 /* --- `view: 'tiles'` : les paliers en rangées de vignettes, glisser-déposer --- */
-/** Une vignette d'un palier : le rang, le perso, son palier de transcendance, ↑ ↓ ✕ ; `draggable`. */
+/** Une vignette d'un palier : le rang, le perso, son palier de transcendance, sa relation avec la suivante (`op`, si la forme en a une), ↑ ↓ ✕ ; `draggable`. */
 function tileHtml(block, e, ek, i, count, listKey) {
   const bad = refusedKey(ek);
   const stars = (block.fields ?? []).find((f) => f.kind === 'stars');
+  const op = (block.fields ?? []).find((f) => f.kind === 'op');
   const fbad = (block.fields ?? []).flatMap((f) => refusedKey(`${ek}.${f.key}`));
   const name = e.name ?? '';
   return `<div class="gd-pick${bad.length || fbad.length ? ' ko' : ''}" draggable="true" role="listitem" data-entry="${esc(ek)}" data-key="${esc(listKey)}" data-i="${i}" aria-label="${esc(`rang ${i + 1} : ${name || 'aucun perso'}`)}">
-      <span class="gd-pick-n lbl mono">${i + 1}</span>${heroFace(name)}${stars ? starsSelect(stars, e, `${ek}.${stars.key}`) : ''}
+      <span class="gd-pick-n lbl mono">${i + 1}</span>${heroFace(name)}${stars ? starsSelect(stars, e, `${ek}.${stars.key}`) : ''}${op ? opSelect(op, e, `${ek}.${op.key}`) : ''}
       <span class="gd-pick-acts"><button class="btn icon" type="button" data-act="gen-up" data-key="${esc(listKey)}" data-i="${i}" title="Monter" aria-label="Monter ${esc(name)}"${i ? '' : ' disabled'}>↑</button><button class="btn icon" type="button" data-act="gen-down" data-key="${esc(listKey)}" data-i="${i}" title="Descendre" aria-label="Descendre ${esc(name)}"${i < count - 1 ? '' : ' disabled'}>↓</button><button class="btn icon" type="button" data-act="gen-del" data-key="${esc(listKey)}" data-i="${i}" title="Retirer" aria-label="Retirer ${esc(name)}">✕</button></span>${errHtml([...bad, ...fbad])}
     </div>`;
 }
@@ -1706,6 +1786,15 @@ function genAct(el, act) {
       setAt(gen.data, path, cur === el.dataset.value ? '' : el.dataset.value);
       return redo(`[data-act="gen-impact"][data-key="${key}"][data-value="${el.dataset.value}"]`);
     }
+    // Un niveau de fusion : coché ou décoché, la liste gardée en ordre croissant.
+    case 'gen-level': {
+      const list = ensureAt(gen.data, path, () => []);
+      const lv = Number(el.dataset.value);
+      const next = list.includes(lv) ? list.filter((n) => n !== lv) : [...list, lv];
+      list.length = 0;
+      list.push(...next.sort((a, b) => a - b));
+      return redo(`[data-act="gen-level"][data-key="${key}"][data-value="${lv}"]`);
+    }
     case 'gen-pick-hero': {
       const cur = getAt(gen.data, path);
       return pickHero(opener, typeof cur === 'string' ? cur : '', (name) => {
@@ -1782,7 +1871,9 @@ function genInput(el) {
         ? el.value === ''
           ? undefined
           : Number(el.value)
-        : el.value;
+        : type === 'nullable'
+          ? el.value || null
+          : el.value;
   const parent = path[path.length - 2];
   // Un coût ou une limite naissent avec une valeur entière, comme dans l'admin ;
   // vider le montant ou le compte les retire.
@@ -2132,10 +2223,13 @@ $('gd-panel').onchange = (e) => {
     marks();
   }
 };
-// Des « Traductions » dépliées : leurs textarea prennent leur hauteur.
+// Des « Traductions » dépliées : leurs textarea prennent leur hauteur. Un groupe
+// (`group`) déplié le reste d'un dessin à l'autre : sa clé dans `genOpen`.
 $('gd-panel').addEventListener(
   'toggle',
   (e) => {
+    const group = e.target.dataset?.group;
+    if (group) genOpen[e.target.open ? 'add' : 'delete'](group);
     if (e.target.open) growAll(e.target);
   },
   true,

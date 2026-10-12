@@ -226,8 +226,9 @@ document` (un lot A).
       F19)** : le banc ne clique pas, aucun enregistrement réel n'a été
       joué, `/api/translate` jamais appelé avec des clés. Relancer quick
       d'abord (Ctrl-C puis `pnpm quick` : trois routes nouvelles). (1)
-      Guides › Guides : dans General Guides, Premium & Limited, Free Heroes
-      et Shop priorities ont un bouton, les onze autres « contenu en code ».
+      Guides › Guides : dans General Guides, Premium & Limited, Free Heroes,
+      Shop priorities et Core Fusion (C13) ont un bouton, les dix autres
+      « contenu en code ».
       (2) Premium & Limited › Premium : une review retouchée en anglais,
       « Traduire » (les cinq langues posées, « Traductions » dépliées),
       « Enregistrer » → UN commit `chore(guides): general-guides/premium-limited`
@@ -261,6 +262,26 @@ document` (un lot A).
       editor » ; `/admin/guides` répond encore par son URL. (7) Après
       « Pousser » et le déploiement : les pages des trois guides, leur date
       « Updated ».
+- [ ] **« Guides » › Core Fusion — contrôles à l'écran (lot C13)** : aucun
+      enregistrement réel n'a été joué (le banc ne clique pas, un POST de
+      quick committe). Relancer quick d'abord (Ctrl-C puis `pnpm quick`).
+      (1) Le site : `/guides/general-guides/core-fusion` identique à avant
+      dans les six langues (les six cartes, les deux paliers, les « > »
+      entre les portraits) — comparé en dev par `curl`, à revoir après le
+      build de la CI ; seule la date « Updated » bouge (12/10 : le hook
+      `stamp-guides` a re-daté le guide au commit du lot). (2) Guides › General Guides › Core Fusion ›
+      Priorités : GLISSER une vignette du 1er au 2e palier, « Enregistrer »
+      → UN commit `chore(guides): general-guides/core-fusion` qui porte
+      `priorities.json` et le `meta.json` re-daté (`git show --stat`), le
+      déplacement dans le fichier, `op` et `stars` partis avec la vignette ;
+      changer une relation (« > », « ≥ », « — » → `null` dans le fichier).
+      (3) Reviews : une ligne dépliée, un niveau recommandé coché puis
+      décoché, « Ce qui change à la fusion » déplié, un texte retouché,
+      « Traduire », « Enregistrer » → `reviews.json` porte la retouche et
+      RIEN d'autre (pas de clé réordonnée ni de langue perdue dans les cinq
+      autres reviews : `git diff` court) ; un changement vidé disparaît du
+      fichier. (4) Un enregistrement SANS retouche dit « Rien à enregistrer :
+      le disque porte déjà ces valeurs » et ne committe rien.
 - [ ] **« Guides » — contrôles à l'écran (lot F18)** : le banc ne clique
       pas, et aucun enregistrement réel n'a été joué ; `/api/translate` n'a
       jamais été appelé avec des clés. Relancer quick d'abord (Ctrl-C puis

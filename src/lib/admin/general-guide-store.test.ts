@@ -1,8 +1,9 @@
 /**
- * Contrat des fragments de GUIDES GÉNÉRAUX (audit F8) — `saveFreeHeroes` et
- * `savePremiumLimited`, qui écrivent des JSON importés STATIQUEMENT par le rendu.
+ * Contrat des fragments de GUIDES GÉNÉRAUX (audit F8) — `saveFreeHeroes`,
+ * `savePremiumLimited` et `saveCoreFusion` (C13), qui écrivent des JSON importés
+ * STATIQUEMENT par le rendu.
  *
- * D'où l'enjeu propre à ces deux-là : un nom de héros qui ne résout pas casse le
+ * D'où l'enjeu propre à ceux-là : un nom de héros qui ne résout pas casse le
  * BUILD, pas seulement une page. La validation est donc la même garde que celle
  * du build, jouée en amont pour la remonter à l'éditeur — avec UNE exception
  * délibérée, `unreleased`, sans laquelle la contribution anticipée (Shiraen
@@ -14,28 +15,68 @@
  */
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { sandbox } from './store-fixture';
-import type { FreeHeroesData, PremiumLimitedData, ReviewEntryData } from './general-guide-store';
+import type {
+  CoreFusionData,
+  FreeHeroesData,
+  FusionReviewData,
+  PremiumLimitedData,
+  ReviewEntryData,
+} from './general-guide-store';
+// Les VRAIS fichiers du guide Core Fusion : le store doit les relire tels quels.
+import realFusionPriorities from '@/app/[lang]/guides/_contents/general-guides/core-fusion/priorities.json';
+import realFusionReviews from '@/app/[lang]/guides/_contents/general-guides/core-fusion/reviews.json';
 
 const ROSTER = ['Stella', 'Tamamo', 'Vlada'];
+/** Les fusions du roster de test : celles que les vrais fichiers nomment (niveaux 1 à 5, comme le jeu). */
+const FUSIONS = [
+  'Core Fusion Lisha',
+  'Core Fusion Snow',
+  'Core Fusion Veronica',
+  'Core Fusion Notia',
+  'Core Fusion Eternal',
+  'Core Fusion Epsilon',
+];
 
 vi.mock('@/lib/data/characters', () => ({
   // Rend un PERSO, pas un booléen déguisé : la validation des priorités lit sa
   // rareté pour connaître l'échelle de paliers qui s'applique.
   findCharacterByName: (n: string) =>
-    ROSTER.includes(n) ? { id: n, name: { en: n }, rarity: 3, tags: ['premium'] } : undefined,
-  getAllCharacters: () => ROSTER.map((name) => ({ name, tags: ['premium'] })),
+    ROSTER.includes(n) || FUSIONS.includes(n)
+      ? { id: n, name: { en: n }, rarity: 3, tags: ['premium'] }
+      : undefined,
+  getAllCharacters: () => [
+    ...ROSTER.map((name) => ({ name, tags: ['premium'] })),
+    // Une fusion : sa base et sa table de niveaux, ce que `getCoreFusionPairs` lit.
+    ...FUSIONS.map((name) => ({
+      id: name,
+      name,
+      tags: ['core-fusion'],
+      originalCharacter: 'base',
+      fusion: { levels: [5, 1, 2, 3, 4].map((level) => ({ level, cost: 100, item: 'core' })) },
+    })),
+  ],
+  getCharacter: (id: string) => ({ id }),
   characterDisplayName: (c: { name: string }) => c.name,
 }));
 
 const box = sandbox('general-guides-');
 // ⚠ APRÈS `sandbox()` : le store fige ses chemins au chargement.
-const { saveFreeHeroes, savePremiumLimited, normalizeReview, isEditableGeneralGuide } =
-  await import('./general-guide-store');
+const {
+  saveFreeHeroes,
+  savePremiumLimited,
+  normalizeReview,
+  isEditableGeneralGuide,
+  coreFusionRoster,
+  loadCoreFusion,
+  saveCoreFusion,
+} = await import('./general-guide-store');
 
 const GUIDES = 'src/app/[lang]/guides/_contents/general-guides';
 const FREE = `${GUIDES}/free-heroes-start-banner/free-heroes-sources.json`;
 const REVIEWS = `${GUIDES}/premium-limited/premium-reviews.json`;
 const PRIORITIES = `${GUIDES}/premium-limited/premium-priorities.json`;
+const CF_REVIEWS = `${GUIDES}/core-fusion/reviews.json`;
+const CF_PRIORITIES = `${GUIDES}/core-fusion/priorities.json`;
 
 const source = (over: Partial<FreeHeroesData['sources'][number]> = {}) => ({
   source: { en: 'Starter banner' },
@@ -53,12 +94,26 @@ const plData = (over: Partial<PremiumLimitedData> = {}): PremiumLimitedData => (
   ...over,
 });
 
+const fusionReview = (over: Partial<FusionReviewData> = {}): FusionReviewData => ({
+  name: 'Core Fusion Snow',
+  review: { en: 'Full rework' },
+  recommendedLevels: [3, 5],
+  ...over,
+});
+const cfData = (over: Partial<CoreFusionData> = {}): CoreFusionData => ({
+  reviews: [],
+  priorities: { first: [], second: [], third: [] },
+  ...over,
+});
+
 beforeEach(async () => {
   box.reset();
   // Les dossiers du guide doivent exister : le store écrit dedans sans les créer.
   await box.put(FREE, { sources: [] });
   await box.put(REVIEWS, { premium: [], limited: [] });
   await box.put(PRIORITIES, { premium: emptyOrder(), limited: emptyOrder() });
+  await box.put(CF_REVIEWS, realFusionReviews);
+  await box.put(CF_PRIORITIES, realFusionPriorities);
 });
 afterAll(() => box.dispose());
 
@@ -275,6 +330,151 @@ describe('savePremiumLimited — priorités', () => {
   it('ne laisse aucun temporaire derrière lui', async () => {
     await savePremiumLimited(plData());
     expect(box.leftovers()).toEqual([]);
+  });
+});
+
+describe('loadCoreFusion / saveCoreFusion — Core Fusion en JSON (C13)', () => {
+  it('charge le VRAI JSON du guide tel quel, et le réécrit à l’identique : une transcription, rien ne bouge à l’aller-retour', async () => {
+    const data = loadCoreFusion();
+    expect(data.reviews).toEqual(realFusionReviews);
+    expect(data.priorities).toEqual(realFusionPriorities);
+    // L'ordre des clés compte (le fichier est comparé en octets par git) : `toEqual` ne le dit pas.
+    expect(JSON.stringify(data.reviews)).toBe(JSON.stringify(realFusionReviews));
+    expect(JSON.stringify(data.priorities)).toBe(JSON.stringify(realFusionPriorities));
+    expect(data.reviews.length).toBeGreaterThan(0);
+
+    const before = [box.raw(CF_REVIEWS), box.raw(CF_PRIORITIES)];
+    expect(await saveCoreFusion(data)).toEqual([]);
+    expect([box.raw(CF_REVIEWS), box.raw(CF_PRIORITIES)]).toEqual(before);
+    expect(box.leftovers()).toEqual([]);
+  });
+
+  it('le roster des fusions : celles du jeu, triées par nom, chacune ses niveaux en ordre croissant', () => {
+    const roster = coreFusionRoster();
+    expect(roster.map((h) => h.name)).toEqual([...FUSIONS].sort());
+    expect(roster[0]).toEqual({
+      name: 'Core Fusion Epsilon',
+      id: 'Core Fusion Epsilon',
+      levels: [1, 2, 3, 4, 5],
+    });
+  });
+
+  it('écrit reviews et priorités dans LEURS fichiers, un `changes` sans texte absent, ses clés dans l’ordre du fichier', async () => {
+    const data = cfData({
+      reviews: [
+        fusionReview({
+          changes: { passive: { en: 'New passive' }, s1: { en: 'New S1' }, s2: { en: '  ' } },
+        }),
+        fusionReview({ name: 'Core Fusion Lisha', changes: { s3: { en: '' } } }),
+      ],
+      priorities: {
+        first: [{ name: 'Core Fusion Snow', stars: 3, op: '>=' }],
+        second: [{ name: 'Stella', stars: 9, op: null }],
+        third: [],
+      },
+    });
+    expect(await saveCoreFusion(data)).toEqual([]);
+    const written = box.read<FusionReviewData[]>(CF_REVIEWS);
+    expect(Object.keys(written[0])).toEqual(['name', 'review', 'recommendedLevels', 'changes']);
+    expect(Object.keys(written[0].changes ?? {})).toEqual(['s1', 'passive']);
+    expect('changes' in written[1]).toBe(false);
+    expect(box.read(CF_PRIORITIES)).toEqual(data.priorities);
+  });
+
+  it('exige un héros, qu’il RÉSOLVE, que ce soit une fusion du jeu (la garde du rendu, jouée avant), et sa review EN', async () => {
+    const errors = await saveCoreFusion(
+      cfData({
+        reviews: [
+          fusionReview({ name: '' }),
+          fusionReview({ name: 'Inconnu' }),
+          fusionReview({ name: 'Stella' }),
+          fusionReview({ review: { fr: 'Sans anglais' } }),
+        ],
+      }),
+    );
+    expect(errors).toEqual([
+      'Reviews #1: hero is required.',
+      'Reviews #2: unknown hero “Inconnu”.',
+      'Reviews #3: “Stella” is not a core fusion.',
+      'Reviews #4 (Core Fusion Snow): EN review is required.',
+    ]);
+  });
+
+  it('refuse un niveau recommandé qui n’est pas de la table de fusion du héros, ou pas un entier', async () => {
+    const errors = await saveCoreFusion(
+      cfData({
+        reviews: [
+          fusionReview({ recommendedLevels: [3, 6] }),
+          fusionReview({ recommendedLevels: [2.5] }),
+          fusionReview({ recommendedLevels: 'trois' as never }),
+        ],
+      }),
+    );
+    expect(errors).toEqual([
+      'Reviews #1 (Core Fusion Snow): “6” is not a fusion level — expected 1, 2, 3, 4, 5.',
+      'Reviews #2 (Core Fusion Snow): recommended levels must be integers.',
+      'Reviews #3 (Core Fusion Snow): recommended levels must be integers.',
+    ]);
+    // CONTRE-ÉPREUVE : chacun des cinq niveaux du jeu passe, et aucun aussi.
+    expect(
+      await saveCoreFusion(
+        cfData({
+          reviews: [
+            fusionReview({ recommendedLevels: [1, 2, 3, 4, 5] }),
+            fusionReview({ recommendedLevels: [] }),
+          ],
+        }),
+      ),
+    ).toEqual([]);
+  });
+
+  it('refuse une clé de `changes` hors des six', async () => {
+    const errors = await saveCoreFusion(
+      cfData({ reviews: [fusionReview({ changes: { s4: { en: 'Nope' } } as never })] }),
+    );
+    expect(errors.join()).toMatch(
+      /Reviews #1 \(Core Fusion Snow\): unknown change “s4” — expected s1, s2, s3, chain, passive, transcendence/,
+    );
+  });
+
+  it('les priorités : un héros inconnu SITUÉ à son palier, un palier qui n’est pas plein, une relation hors de >, >=, null', async () => {
+    const errors = await saveCoreFusion(
+      cfData({
+        priorities: {
+          first: [{ name: 'Core Fusion Snow', stars: 5, op: '>' }],
+          second: [{ name: 'Inconnu', stars: 3, op: null }],
+          third: [{ name: 'Stella', stars: 3, op: '=>' as never }],
+        },
+      }),
+    );
+    expect(errors).toHaveLength(3);
+    expect(errors[0]).toMatch(/Priorities\/first #1: “5” is not a full transcendence step/);
+    expect(errors[1]).toBe('Priorities/second #1: unknown hero “Inconnu”.');
+    expect(errors[2]).toBe('Priorities/third #1: “=>” is not a relation — expected >, >= or null.');
+    // CONTRE-ÉPREUVE : les trois relations valides passent, sur les trois paliers.
+    expect(
+      await saveCoreFusion(
+        cfData({
+          priorities: {
+            first: [{ name: 'Core Fusion Snow', stars: 3, op: '>' }],
+            second: [{ name: 'Stella', stars: 9, op: '>=' }],
+            third: [{ name: 'Vlada', stars: 6, op: null }],
+          },
+        }),
+      ),
+    ).toEqual([]);
+  });
+
+  it('n’écrit AUCUN des deux fichiers quand la validation échoue', async () => {
+    const before = [box.raw(CF_REVIEWS), box.raw(CF_PRIORITIES)];
+    const errors = await saveCoreFusion(
+      cfData({
+        reviews: [fusionReview()],
+        priorities: { first: [{ name: 'Inconnu', stars: 3, op: null }], second: [], third: [] },
+      }),
+    );
+    expect(errors.length).toBeGreaterThan(0);
+    expect([box.raw(CF_REVIEWS), box.raw(CF_PRIORITIES)]).toEqual(before);
   });
 });
 

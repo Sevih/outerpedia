@@ -14,7 +14,19 @@ import { writeJson } from '@datagen/lib/json';
 import type { LocalizedText } from '@contracts';
 import { normalizeReview, type ReviewEntryData } from './review-shape';
 export { normalizeReview };
+import {
+  FUSION_CHANGE_KEYS,
+  FUSION_TIERS,
+  emptyFusionOrder,
+  isFusionOp,
+  normalizeFusionPick,
+  normalizeFusionReview,
+  type CoreFusionData,
+  type FusionPriorityOrderData,
+  type FusionReviewData,
+} from './core-fusion-shape';
 import { characterDisplayName, findCharacterByName, getAllCharacters } from '@/lib/data/characters';
+import { getCoreFusionPairs } from '@/lib/data/core-fusion';
 import { hasTagInGroup } from '@/lib/data/tags';
 import { transcendenceFullSteps, transcendenceLabel } from '@/lib/transcendence';
 
@@ -114,6 +126,7 @@ const plReviewsPath = () => resolve(plDir(), 'premium-reviews.json');
 const plPrioritiesPath = () => resolve(plDir(), 'premium-priorities.json');
 
 const PREMIUM_TAG = 'premium';
+const PL_TIERS = ['first', 'second', 'third', 'transcend'] as const;
 
 /**
  * Rosters « à reviewer » dérivés des TAGS de perso (source unique, toujours à
@@ -189,8 +202,13 @@ function validateReviews(bucket: string, list: ReviewEntryData[], errors: string
  * leur libellé, puisque c'est précisément la correspondance qui n'est pas
  * évidente.
  */
-function validateOrder(bucket: string, order: PriorityOrderData, errors: string[]): void {
-  (['first', 'second', 'third', 'transcend'] as const).forEach((tier) => {
+function validateOrder<T extends string>(
+  bucket: string,
+  order: Partial<Record<T, PriorityPickData[]>>,
+  tiers: readonly T[],
+  errors: string[],
+): void {
+  tiers.forEach((tier) => {
     (order[tier] ?? []).forEach((p, i) => {
       const at = `${bucket}/${tier} #${i + 1}`;
       if (!p.name?.trim()) return errors.push(`${at}: hero is required.`);
@@ -212,8 +230,8 @@ export async function savePremiumLimited(data: PremiumLimitedData): Promise<stri
   const errors: string[] = [];
   validateReviews('Premium', data.reviews.premium, errors);
   validateReviews('Limited', data.reviews.limited, errors);
-  validateOrder('Premium', data.priorities.premium, errors);
-  validateOrder('Limited', data.priorities.limited, errors);
+  validateOrder('Premium', data.priorities.premium, PL_TIERS, errors);
+  validateOrder('Limited', data.priorities.limited, PL_TIERS, errors);
   if (errors.length) return errors;
 
   await writeJson(plReviewsPath(), {
@@ -224,5 +242,110 @@ export async function savePremiumLimited(data: PremiumLimitedData): Promise<stri
     premium: data.priorities.premium,
     limited: data.priorities.limited,
   });
+  return [];
+}
+
+/* --- Modèle « Core Fusion » (reviews + priorités de déblocage) --- */
+
+// Forme + normalisation : `core-fusion-shape.ts` (PUR — partagé avec la forme de quick).
+export type {
+  CoreFusionData,
+  FusionPriorityOrderData,
+  FusionPriorityPickData,
+  FusionReviewData,
+} from './core-fusion-shape';
+
+const cfDir = () => resolve(GENERAL_DIR, 'core-fusion');
+const cfReviewsPath = () => resolve(cfDir(), 'reviews.json');
+const cfPrioritiesPath = () => resolve(cfDir(), 'priorities.json');
+
+/** Un héros fusion du jeu : son nom d'affichage EN (la clé de l'éditorial), son id, ses niveaux de fusion. */
+export interface CoreFusionHero {
+  name: string;
+  id: string;
+  levels: number[];
+}
+
+/**
+ * Les héros FUSION du jeu (les paires base ↔ fusion de `getCoreFusionPairs`),
+ * triés par nom d'affichage EN : ceux dont le guide EXIGE la review (une fusion
+ * du jeu sans review casse le build), et les niveaux que leur review peut
+ * recommander — ceux de la table du jeu, dont le coût dérive.
+ */
+export function coreFusionRoster(): CoreFusionHero[] {
+  return getCoreFusionPairs()
+    .map((p) => ({
+      name: characterDisplayName(p.fusion),
+      id: p.fusion.id,
+      levels: p.info.levels.map((l) => l.level).sort((a, b) => a - b),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** Lit reviews + priorités de déblocage dans leurs JSON locaux. */
+export function loadCoreFusion(): CoreFusionData {
+  const reviews = JSON.parse(readFileSync(cfReviewsPath(), 'utf8')) as Partial<FusionReviewData>[];
+  const priorities = JSON.parse(
+    readFileSync(cfPrioritiesPath(), 'utf8'),
+  ) as Partial<FusionPriorityOrderData>;
+  const order = emptyFusionOrder();
+  for (const tier of FUSION_TIERS) order[tier] = (priorities[tier] ?? []).map(normalizeFusionPick);
+  return { reviews: (reviews ?? []).map(normalizeFusionReview), priorities: order };
+}
+
+/**
+ * Valide les reviews de fusion : le héros est une FUSION DU JEU (la garde du
+ * rendu, jouée avant — un nom hors des paires casse le build), sa review EN est
+ * écrite, ses niveaux recommandés sont des entiers de SA table de fusion (un
+ * niveau absent des paliers du jeu casse le build lui aussi), et `changes` ne
+ * porte que ses six clés.
+ */
+function validateFusionReviews(list: FusionReviewData[], errors: string[]): void {
+  const heroes = new Map(coreFusionRoster().map((h) => [h.name, h]));
+  list.forEach((r, i) => {
+    const at = `Reviews #${i + 1}`;
+    const named = `${at} (${r.name || '?'})`;
+    const hero = heroes.get(r.name ?? '');
+    if (!r.name?.trim()) errors.push(`${at}: hero is required.`);
+    else if (!findCharacterByName(r.name)) errors.push(`${at}: unknown hero “${r.name}”.`);
+    else if (!hero) errors.push(`${at}: “${r.name}” is not a core fusion.`);
+    if (!r.review?.en?.trim()) errors.push(`${named}: EN review is required.`);
+    const levels: unknown = r.recommendedLevels;
+    if (!Array.isArray(levels) || levels.some((l) => !Number.isInteger(l)))
+      errors.push(`${named}: recommended levels must be integers.`);
+    else if (hero) {
+      const stray = (levels as number[]).filter((l) => !hero.levels.includes(l));
+      if (stray.length)
+        errors.push(
+          `${named}: “${stray.join(', ')}” is not a fusion level — expected ${hero.levels.join(', ')}.`,
+        );
+    }
+    const known: readonly string[] = FUSION_CHANGE_KEYS;
+    for (const key of Object.keys(r.changes ?? {}))
+      if (!known.includes(key))
+        errors.push(`${named}: unknown change “${key}” — expected ${known.join(', ')}.`);
+  });
+}
+
+/** Valide puis écrit reviews + priorités de déblocage. Renvoie les écarts bloquants (vide = OK). */
+export async function saveCoreFusion(data: CoreFusionData): Promise<string[]> {
+  const errors: string[] = [];
+  validateFusionReviews(data.reviews, errors);
+  validateOrder('Priorities', data.priorities, FUSION_TIERS, errors);
+  for (const tier of FUSION_TIERS)
+    (data.priorities[tier] ?? []).forEach((p, i) => {
+      if (p.op !== null && !isFusionOp(p.op))
+        errors.push(
+          `Priorities/${tier} #${i + 1}: “${String(p.op)}” is not a relation — expected >, >= or null.`,
+        );
+    });
+  if (errors.length) return errors;
+
+  // Les deux écritures sont solidaires, comme celles de Premium & Limited.
+  await writeJson(cfReviewsPath(), data.reviews.map(normalizeFusionReview));
+  const order = emptyFusionOrder();
+  for (const tier of FUSION_TIERS)
+    order[tier] = (data.priorities[tier] ?? []).map(normalizeFusionPick);
+  await writeJson(cfPrioritiesPath(), order);
   return [];
 }

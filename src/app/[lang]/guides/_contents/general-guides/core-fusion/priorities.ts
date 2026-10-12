@@ -1,28 +1,24 @@
 /**
- * Priorités de déblocage — donnée INLINE (pas de JSON à côté, contrairement au
+ * Priorités de déblocage — VERBATIM (`priorities.json`, à côté, comme le
  * pendant premium `premium-priorities.json`).
  * `op` relie une entrée à la SUIVANTE (`>` strictement avant, `>=`).
+ *
+ * Priorités éditables (JSON) : sorties du TS pour quick. Rendu inchangé.
  */
+import prioritiesData from './priorities.json';
+
 export interface FusionPriorityPick {
   name: string;
   stars: number;
   op: '>' | '>=' | null;
 }
 
-export const unlockOrder: {
+// Un `type`, pas une `interface` : `Object.entries(unlockOrder)` doit rester typé
+// (`priorities.test.ts` de premium-limited parcourt les paliers ainsi).
+export type FusionPriorityOrder = {
   first: FusionPriorityPick[];
   second: FusionPriorityPick[];
   third: FusionPriorityPick[];
-} = {
-  first: [
-    { name: 'Core Fusion Veronica', stars: 3, op: '>' },
-    { name: 'Core Fusion Eternal', stars: 3, op: '>' },
-    { name: 'Core Fusion Notia', stars: 3, op: '>' },
-    { name: 'Core Fusion Epsilon', stars: 3, op: '>' },
-  ],
-  second: [
-    { name: 'Core Fusion Lisha', stars: 3, op: '>' },
-    { name: 'Core Fusion Snow', stars: 3, op: null },
-  ],
-  third: [],
 };
+
+export const unlockOrder: FusionPriorityOrder = prioritiesData as FusionPriorityOrder;

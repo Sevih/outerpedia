@@ -154,7 +154,11 @@ import type { CharacterKitPatch } from '@/lib/admin/character-skill-curated-stor
 import { collapseBuild, expandBuild } from '@/lib/admin/gear-preset-resolve';
 import type { ItemCurated } from '@/lib/admin/item-curated-store';
 import type { GuideDraft } from '@/lib/admin/guide-draft';
-import type { FreeHeroesData, PremiumLimitedData } from '@/lib/admin/general-guide-store';
+import type {
+  CoreFusionData,
+  FreeHeroesData,
+  PremiumLimitedData,
+} from '@/lib/admin/general-guide-store';
 import type { ShopPrioritiesEditData } from '@/lib/admin/shop-priorities-store';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { Guide } from '@/lib/data/guides';
@@ -7950,6 +7954,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
   const PL = guide('premium-limited', { updated: '2026-10-07' });
   const FREE = guide('free-heroes-start-banner');
   const SHOP = guide('shop-purchase-priorities');
+  const CF = guide('core-fusion');
   const FAQ = guide('beginner-faq');
   const JC = guide('annihilator', {
     category: 'joint-challenge',
@@ -8046,7 +8051,31 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       resourceItems: [],
     },
   };
+  // Core Fusion : dans ce faux, Aer et Alice sont les fusions du jeu (niveaux 1 à 5).
+  const FUSIONS = [
+    { name: 'Aer', id: '2000055', levels: [1, 2, 3, 4, 5] },
+    { name: 'Alice', id: '2000002', levels: [1, 2, 3, 4, 5] },
+  ];
+  const CF_DATA: CoreFusionData = {
+    reviews: [
+      {
+        name: 'Aer',
+        review: { en: 'Full rework {B/BT_STAT|ST_SPEED}', fr: 'Refonte' },
+        recommendedLevels: [3, 5],
+        changes: { s1: { en: 'New S1' }, passive: { en: 'New passive' } },
+      },
+    ],
+    priorities: {
+      first: [
+        { name: 'Aer', stars: 3, op: '>' },
+        { name: 'Alice', stars: 3, op: null },
+      ],
+      second: [],
+      third: [],
+    },
+  };
   const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
+  const CF_DIR = 'src/app/[lang]/guides/_contents/general-guides/core-fusion';
   const PL_DIR = 'src/app/[lang]/guides/_contents/general-guides/premium-limited';
   const SHOP_DIR = 'src/app/[lang]/guides/_contents/general-guides/shop-purchase-priorities';
 
@@ -8063,23 +8092,30 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       savePL: [] as unknown[],
       saveFree: [] as unknown[],
       saveShop: [] as unknown[],
+      saveCF: [] as unknown[],
       imports: [] as unknown[],
       dirty: [] as string[],
       stamp: [] as [string, string][],
       git: [] as [string[], string][],
     };
     const fake: GeneralGuidesDeps = {
-      guides: () => [PL, FREE, SHOP, FAQ, JC],
+      guides: () => [PL, FREE, SHOP, CF, FAQ, JC],
       roster: () => ROSTER,
       refs: () => ({}) as InlineRefs,
       steps: (rarity) => STEPS[rarity] ?? [],
       buckets: () => ({ premium: ['Aer', 'Mene'], limited: ['Alice'] }),
+      fusions: () => FUSIONS,
       loadPremiumLimited: () => {
         if (over.loadThrows) throw new Error('premium-reviews.json illisible');
         return clone(PL_DATA);
       },
       loadFreeHeroes: () => clone(FREE_DATA),
       loadShopPriorities: () => clone(SHOP_DATA),
+      loadCoreFusion: () => clone(CF_DATA),
+      saveCoreFusion: async (d) => {
+        calls.saveCF.push(d);
+        return over.errors ?? [];
+      },
       savePremiumLimited: async (d) => {
         calls.savePL.push(d);
         return over.errors ?? [];
@@ -8175,6 +8211,7 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       expect(free.data).toEqual(FREE_DATA);
       expect(free.options.steps).toEqual({});
       expect(free.options.rosters).toEqual({});
+      expect(free.options.levels).toEqual({});
       const shop = generalGuideState('shop-purchase-priorities', deps().fake);
       if ('error' in shop) throw new Error(shop.error);
       // La note de `joint` : son shop n'est pas dans les dérivés, elle a son onglet.
@@ -8188,9 +8225,23 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       expect(shop.data).toEqual(SHOP_DATA);
     });
 
-    it('la vue d’ensemble : un général à fragment éditable a un bouton, les onze autres sont « contenu en code »', () => {
+    it('Core Fusion : la forme de Premium & Limited sans bucket — Reviews et Priorités —, les fusions du jeu attendues, leurs niveaux de fusion, les paliers', () => {
+      const out = generalGuideState('core-fusion', deps().fake);
+      if ('error' in out) throw new Error(out.error);
+      expect(out.spec.kind).toBe('core-fusion');
+      expect(out.spec.tabs.map((t) => t.id)).toEqual(['reviews', 'priorities']);
+      expect(out.data).toEqual(CF_DATA);
+      expect(out.options.rosters).toEqual({ 'core-fusion': ['Aer', 'Alice'] });
+      expect(out.options.levels).toEqual({
+        '2000055': [1, 2, 3, 4, 5],
+        '2000002': [1, 2, 3, 4, 5],
+      });
+      expect(out.options.steps['2000055'].map((s) => s.value)).toEqual([3, 4, 6, 9]);
+    });
+
+    it('la vue d’ensemble : un général à fragment éditable a un bouton — Core Fusion compris —, les dix autres sont « contenu en code »', () => {
       const disk: GuidesDisk = {
-        guides: () => [PL, FAQ, JC],
+        guides: () => [PL, CF, FAQ, JC],
         draft: () => ({ intro: { en: '' }, versions: [] }),
         config: () => undefined,
         groups: () => [],
@@ -8202,10 +8253,9 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
       };
       const by = Object.fromEntries(guidesOverview(disk).categories.map((c) => [c.slug, c]));
       expect(by['general-guides'].editable).toBe(true);
-      expect(by['general-guides'].guides.map((g) => [g.slug, g.editable])).toEqual([
-        ['premium-limited', true],
-        ['beginner-faq', false],
-      ]);
+      expect(
+        Object.fromEntries(by['general-guides'].guides.map((g) => [g.slug, g.editable])),
+      ).toEqual({ 'premium-limited': true, 'core-fusion': true, 'beginner-faq': false });
       expect(by['joint-challenge'].guides[0].editable).toBe(true);
     });
   });
@@ -8486,6 +8536,141 @@ describe('generalGuideState, saveGeneralGuide, importContributionAction — les 
         },
       ]);
       expect(calls.saveShop).toHaveLength(1);
+    });
+
+    it('Core Fusion : les reviews normalisées (un `changes` vidé absent), les trois paliers avec leur `op`, les deux fichiers et le meta dans UN commit', async () => {
+      const { calls, fake } = deps({
+        dirty: { [CF_DIR]: [`${CF_DIR}/reviews.json`, `${CF_DIR}/priorities.json`] },
+      });
+      const data = clone(CF_DATA) as unknown as {
+        reviews: Record<string, unknown>[];
+        priorities: Record<string, Record<string, unknown>[]>;
+      };
+      // Ce que la page envoie : des niveaux cochés dans le désordre, un changement
+      // vidé, un `op` remis à « — » (la valeur vide du sélecteur), une clé hors forme.
+      data.reviews[0].recommendedLevels = [5, 3, 4, 3];
+      data.reviews[0].changes = {
+        s1: { en: '  ' },
+        passive: { en: 'New passive' },
+        s9: { en: 'x' },
+      };
+      data.reviews.push({
+        name: 'Alice',
+        review: { en: 'Solid' },
+        recommendedLevels: [],
+        changes: { s2: { en: '' } },
+      });
+      data.priorities.first[0].op = '';
+      data.priorities.first[1].op = '>=';
+      data.priorities.third.push({ name: 'Aer', stars: 9 });
+      const r = await saveGeneralGuide('core-fusion', { data, was: clone(CF_DATA) }, fake);
+      expect(r.refused).toEqual([]);
+      expect(r).toMatchObject({ ok: true, written: true, stale: false });
+      expect(calls.saveCF).toEqual([
+        {
+          reviews: [
+            {
+              name: 'Aer',
+              review: { en: 'Full rework {B/BT_STAT|ST_SPEED}', fr: 'Refonte' },
+              recommendedLevels: [3, 4, 5],
+              changes: { passive: { en: 'New passive' } },
+            },
+            { name: 'Alice', review: { en: 'Solid' }, recommendedLevels: [] },
+          ],
+          priorities: {
+            first: [
+              { name: 'Aer', stars: 3, op: null },
+              { name: 'Alice', stars: 3, op: '>=' },
+            ],
+            second: [],
+            third: [{ name: 'Aer', stars: 9, op: null }],
+          },
+        },
+      ]);
+      expect(calls.savePL).toEqual([]);
+      expect(calls.dirty).toEqual([CF_DIR]);
+      expect(calls.stamp).toEqual([[`${CF_DIR}/meta.json`, '2026-10-11']]);
+      expect(calls.git).toEqual([
+        [
+          [`${CF_DIR}/reviews.json`, `${CF_DIR}/priorities.json`, `${CF_DIR}/meta.json`],
+          'chore(guides): general-guides/core-fusion',
+        ],
+      ]);
+    });
+
+    it('Core Fusion : les refus situés — un niveau hors de la table du jeu, une relation inconnue, un tag dans un changement, un palier, un héros hors roster ; ceux du store aussi', async () => {
+      const { calls, fake } = deps();
+      const data = clone(CF_DATA) as unknown as {
+        reviews: Record<string, unknown>[];
+        priorities: Record<string, Record<string, unknown>[]>;
+      };
+      data.reviews[0].recommendedLevels = [3, 6];
+      data.reviews[0].changes = { s1: { en: 'Bad {B/NOPE_TAG}' } };
+      data.reviews.push({
+        name: 'Nobody',
+        review: { fr: 'Sans anglais' },
+        recommendedLevels: [1.5],
+      });
+      data.priorities.first[0].op = '=>';
+      data.priorities.first[1].stars = 5;
+      const r = await saveGeneralGuide('core-fusion', { data, was: clone(CF_DATA) }, fake);
+      expect(r.ok).toBe(false);
+      expect(r.refused).toEqual([
+        {
+          tab: 'reviews',
+          key: 'reviews.0.recommendedLevels',
+          reason: '« 6 » n’est pas un niveau de fusion — attendu 1, 2, 3, 4, 5',
+        },
+        {
+          tab: 'reviews',
+          key: 'reviews.0.changes.s1',
+          reason: expect.stringMatching(/tag inconnu \{B\/NOPE_TAG\}/),
+        },
+        { tab: 'reviews', key: 'reviews.1.name', reason: 'hors du roster : « Nobody »' },
+        {
+          tab: 'reviews',
+          key: 'reviews.1.review',
+          reason: 'pas de texte « en », la langue de repli',
+        },
+        {
+          tab: 'reviews',
+          key: 'reviews.1.recommendedLevels',
+          reason: 'des niveaux (entiers) attendus',
+        },
+        {
+          tab: 'priorities',
+          key: 'priorities.first.0.op',
+          reason: 'relation inconnue : « => » (>, >=, ou rien)',
+        },
+        {
+          tab: 'priorities',
+          key: 'priorities.first.1.stars',
+          reason: '« 5 » n’est pas un palier plein — attendu 3 (3★), 4 (4★), 6 (5★), 9 (6★)',
+        },
+      ]);
+      expect(calls.saveCF).toEqual([]);
+      expect(calls.git).toEqual([]);
+
+      // Un refus du store : une review à son index, une priorité à son palier, le reste au guide.
+      const store = deps({
+        errors: [
+          'Reviews #2 (Mene): “Mene” is not a core fusion.',
+          'Priorities/second #1: unknown hero “X”.',
+          'autre',
+        ],
+      });
+      const r2 = await saveGeneralGuide(
+        'core-fusion',
+        { data: clone(CF_DATA), was: clone(CF_DATA) },
+        store.fake,
+      );
+      expect(r2.refused.map((x) => [x.tab, x.key])).toEqual([
+        ['reviews', 'reviews.1'],
+        ['priorities', 'priorities.second.0'],
+        ['guide', undefined],
+      ]);
+      expect(store.calls.stamp).toEqual([]);
+      expect(store.calls.git).toEqual([]);
     });
 
     it('un refus du store est rendu situé, sans stamp ni commit', async () => {

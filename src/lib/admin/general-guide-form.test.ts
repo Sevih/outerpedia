@@ -1,5 +1,5 @@
 /**
- * La forme servie des guides généraux : trois guides, une description par
+ * La forme servie des guides généraux : quatre guides, une description par
  * onglets et blocs que quick rend sans connaître les guides, et la clé d'un
  * champ qui retrouve son bloc (pour situer un refus).
  */
@@ -20,13 +20,15 @@ const SHOP: ShopFormData = {
   editorial: { textShops: { supply: { paragraphs: [] } }, shopNotes: { joint: { en: 'Save' } } },
 };
 
-describe('generalGuideKind — les trois slugs éditables, rien d’autre', () => {
-  it('reconnaît les trois guides branchés et refuse un autre slug', () => {
+describe('generalGuideKind — les quatre slugs éditables, rien d’autre', () => {
+  it('reconnaît les quatre guides branchés et refuse un autre slug', () => {
     expect(Object.keys(GENERAL_GUIDE_KINDS)).toEqual([
       'premium-limited',
       'free-heroes-start-banner',
       'shop-purchase-priorities',
+      'core-fusion',
     ]);
+    expect(generalGuideKind('core-fusion')).toBe('core-fusion');
     expect(generalGuideKind('premium-limited')).toBe('premium-limited');
     expect(generalGuideKind('beginner-faq')).toBeUndefined();
     expect(generalGuideForm('beginner-faq', {})).toBeUndefined();
@@ -89,6 +91,68 @@ describe('generalGuideForm — Premium & Limited', () => {
     expect(reviews.fields![3].default).toBe('');
     const tier = form.tabs[1].blocks[1];
     expect(tier.fields!.map((f) => f.kind)).toEqual(['hero', 'stars']);
+  });
+});
+
+describe('generalGuideForm — Core Fusion (C13)', () => {
+  const form = generalGuideForm('core-fusion', {})!;
+
+  it('deux onglets, la forme de Premium & Limited sans bucket : les reviews en `roster` sur les fusions du jeu, trois paliers ordonnés en `tiles`', () => {
+    expect(form.kind).toBe('core-fusion');
+    expect(form.versioned).toBe(false);
+    expect(form.tabs.map((t) => [t.id, t.label])).toEqual([
+      ['reviews', 'Reviews'],
+      ['priorities', 'Priorités'],
+    ]);
+    const [reviews, priorities] = form.tabs;
+    expect(
+      reviews.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.roster, b.title]),
+    ).toEqual([['reviews', 'reviews', 'hero', 'roster', 'core-fusion', 'name']]);
+    expect(
+      priorities.blocks.map((b) => [b.id, b.path.join('.'), b.add, b.view, b.ordered ?? false]),
+    ).toEqual([
+      ['first', 'priorities.first', 'hero', 'tiles', true],
+      ['second', 'priorities.second', 'hero', 'tiles', true],
+      ['third', 'priorities.third', 'hero', 'tiles', true],
+    ]);
+  });
+
+  it('une review : le héros (jamais « pas encore sorti »), la review requise, les niveaux cochables, `changes` en un GROUPE de six textes facultatifs', () => {
+    const fields = form.tabs[0].blocks[0].fields!;
+    expect(fields.map((f) => [f.key, f.kind])).toEqual([
+      ['name', 'hero'],
+      ['review', 'text'],
+      ['recommendedLevels', 'levels'],
+      ['changes', 'group'],
+    ]);
+    expect(fields[0].required).toBe(true);
+    expect(fields[0].unreleasedKey).toBeUndefined();
+    expect(fields[1].required).toBe(true);
+    expect(fields[2].default).toEqual([]);
+    expect(fields[3].label).toBe('Ce qui change à la fusion');
+    expect(fields[3].fields!.map((f) => [f.key, f.kind, f.required ?? false])).toEqual([
+      ['s1', 'text', false],
+      ['s2', 'text', false],
+      ['s3', 'text', false],
+      ['chain', 'text', false],
+      ['passive', 'text', false],
+      ['transcendence', 'text', false],
+    ]);
+  });
+
+  it('une priorité : le héros, son palier, et `op` — `>`, `>=`, ou la valeur vide (`null`), `null` d’office', () => {
+    const fields = form.tabs[1].blocks[0].fields!;
+    expect(fields.map((f) => [f.key, f.kind])).toEqual([
+      ['name', 'hero'],
+      ['stars', 'stars'],
+      ['op', 'op'],
+    ]);
+    expect(fields[2].options).toEqual([
+      { value: '>', label: '>' },
+      { value: '>=', label: '≥' },
+      { value: '', label: '—' },
+    ]);
+    expect(fields[2].default).toBeNull();
   });
 });
 
@@ -186,6 +250,10 @@ describe('blockOfKey — la clé d’un champ retrouve son bloc et son onglet', 
     expect(blockOfKey(pl, 'priorities.premium.third.0.stars')?.block.id).toBe('premium-third');
     expect(blockOfKey(pl, 'priorities.premium.third.0.stars')?.tab.id).toBe('premium-priorities');
     expect(blockOfKey(pl, 'priorities.premium')).toBeUndefined();
+    // Core Fusion : le texte d'un groupe (`changes.s1`) retrouve le bloc des reviews.
+    const cf = generalGuideForm('core-fusion', {})!;
+    expect(blockOfKey(cf, 'reviews.0.changes.s1')?.tab.id).toBe('reviews');
+    expect(blockOfKey(cf, 'priorities.second.1.op')?.block.id).toBe('second');
     const shop = generalGuideForm('shop-purchase-priorities', SHOP)!;
     expect(blockOfKey(shop, 'editorial.shopNotes.guild')?.tab.id).toBe('guild');
     expect(blockOfKey(shop, 'editorial.shopNotes.guildx')).toBeUndefined();

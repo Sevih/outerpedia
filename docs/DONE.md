@@ -7,6 +7,112 @@
 
 ## 2026-10-12
 
+- **Core Fusion : les priorités et les reviews passent du TypeScript au JSON,
+  éditées dans quick sous la forme de Premium & Limited (lot C13)** — revue de
+  quick par Sevih (12/10) : l'éditeur refait par F25 devait aussi servir à
+  Core Fusion, or ses données étaient du CODE (`core-fusion/priorities.ts`,
+  `core-fusion/reviews.ts`, 359 l.) et le slug absent de `GENERAL_GUIDE_KINDS`
+  — la décision F19 (« les onze généraux en `.ts` restent en code ») est levée
+  pour ce guide SEULEMENT, les dix autres n'ont pas bougé. DONNÉES :
+  `core-fusion/priorities.json`
+  (`{first, second, third: [{name, stars, op}]}`) et
+  `core-fusion/reviews.json`
+  (`[{name, review, recommendedLevels, changes?}]`), à côté des deux `.ts` qui
+  ne sont plus que l'import typé (`import … from './x.json'`, comme
+  `premium-limited/reviews.ts`) ; les types du rendu y restent,
+  `FusionPriorityOrder` en `type` et non en `interface` pour que le
+  `Object.entries(unlockOrder)` de `premium-limited/priorities.test.ts` reste
+  typé. C'est une TRANSCRIPTION, par un script jetable non committé : les deux
+  exports sérialisés avant et après sont identiques à l'octet (ordre des clés
+  et des langues compris), `index.tsx` et `PriorityTiers.tsx` ne sont pas
+  touchés. STORE (`general-guide-store.ts`) : `loadCoreFusion()` /
+  `saveCoreFusion()` sur le patron de P&L — les deux écritures solidaires,
+  rien d'écrit au premier écart —, plus `coreFusionRoster()` (les fusions du
+  jeu par `getCoreFusionPairs`, triées, chacune ses niveaux de fusion). Refus
+  : un héros qui ne résout pas, ou qui résout mais N'EST PAS une fusion du jeu
+  (la garde de `index.tsx`, qui casse le build, jouée avant), la review EN
+  absente, un niveau recommandé non entier ou absent de la table de fusion du
+  héros (l'autre `throw` du rendu, `FusionCostPills`), une clé de `changes`
+  hors des six, un palier qui n'est pas plein (`validateOrder` de P&L, ses
+  paliers passés en paramètre — seule retouche du code existant du store), un
+  `op` hors de `>`, `>=`, `null`. La forme pure vit dans
+  `src/lib/admin/core-fusion-shape.ts` (types, `FUSION_TIERS`,
+  `FUSION_CHANGE_KEYS`, `normalizeFusionReview` : de `changes` les seuls
+  textes écrits, dans l'ordre du fichier, l'objet absent s'il est vide), sur
+  le modèle de `review-shape.ts` et `shop-priorities-shape.ts` — la forme de
+  quick ne peut pas tirer le store. FORME (`general-guide-form.ts`) :
+  `coreFusionForm`, `GENERAL_GUIDE_KINDS` gagne `core-fusion` ; deux onglets,
+  `reviews` (`view: 'roster'`, `roster: 'core-fusion'`) et `priorities` (trois
+  blocs `view: 'tiles'`, `first` / `second` / `third`), et TROIS genres de
+  champ nouveaux, la page ne nommant toujours aucun guide : `levels` (des
+  niveaux cochables), `op` (un sélecteur `>` / `≥` / `—`, la valeur vide =
+  `null`), `group` (des textes facultatifs sous une clé, repliés sous leur
+  libellé — les six de `changes`). QUICK (`actions.ts`) : `generalGuideState`
+  sert pour ce guide les paliers pleins, `rosters['core-fusion']` et
+  `options.levels` (les niveaux de fusion par id de héros) par la dep nouvelle
+  `fusions` ; `cleanGeneralField` contrôle les trois genres (niveaux
+  dédoublonnés et triés, refusés hors de la table du jeu ; `op` ; le groupe
+  champ à champ, absent s'il est vide), `toStorePayload` et
+  `situateStoreError` ont leur cas (`Reviews #n` → `reviews.<i>`,
+  `Priorities/<palier> #n` → `priorities.<palier>.<i>`) ; `saveGeneralGuide`
+  était déjà générique, aucun cas particulier de P&L ne bloquait.
+  `guidesOverview` : `core-fusion` sort « éditable » sans retouche (il lit
+  `generalGuideKind`). PAGE (`tabs/guides.js`, `guides.css`, `guides.html`) :
+  les composants de F25 réutilisés tels quels — la liste compacte, une review
+  dépliée à la fois, les vignettes et `sortable.mjs` — avec ce que la forme
+  demande en plus : le sélecteur de relation dans la vignette, sous le palier
+  ; les niveaux en segmenté (`.gd-prio.gd-levels`) ; le groupe en
+  `details.gd-group` (son compte « 5 / 6 », il reste déplié d'un dessin à
+  l'autre par `genOpen`, un refus dedans l'ouvre et cercle la ligne de la
+  review) ; le résumé d'une ligne bâti des champs du bloc (« Lv 3, 5 · 5 / 6
+  changements » ici, la chaîne de P&L inchangée) ; « ＋ pas encore sorti » et
+  le séparateur « pas encore sortis » seulement quand la forme libère le nom
+  (`unreleasedKey`) — donc pas pour Core Fusion ; « Traduire » et la
+  comparaison au disque descendent dans les groupes. ÉCART AVEC L'ÉNONCÉ, à
+  relire : le lot demandait des cases « 3/4/5/6 » pour `recommendedLevels` ;
+  les niveaux de fusion du JEU vont de 1 à 5 (les six fusions,
+  `fusion.levels`) et un niveau absent casse le build — les cases sont donc
+  celles de la table du jeu du héros (1 à 5 aujourd'hui), et le 6 n'est pas
+  proposé. Autres choix d'interprétation : `op` est un sélecteur À PART du
+  palier (deux selects dans la vignette), une vignette neuve naît sans
+  relation (`null`) ; le « ＋ » d'un palier ouvre le picker sur TOUT le roster,
+  comme P&L (le rendu accepte n'importe quel perso dans un palier), alors que
+  les reviews n'acceptent que des fusions. VÉRIFIÉ : `pnpm typecheck`
+  (dernière ligne :
+  `$ tsc --noEmit && tsc --noEmit -p datagen/tsconfig.json && tsc --noEmit -p scripts/tsconfig.json`,
+  sans erreur), `pnpm lint` (`$ eslint`, sans sortie), `pnpm test`
+  (`Tests  3730 passed (3730)`, 222 fichiers),
+  `NODE_ENV=development pnpm exec vitest run scripts/quick src/lib/admin`
+  (`Tests  1651 passed (1651)`) ; `inline-tag-parity` vert sans exception
+  nouvelle (il lit désormais `reviews.json`, six langues par texte). Tests
+  ajoutés : store (le VRAI JSON chargé puis réécrit à l'octet, le roster, les
+  refus et leurs contre-épreuves), forme, `actions.test.ts` (l'état,
+  l'enregistrement sur un store factice, les refus situés), `ui-serve.test.ts`
+  (les deux onglets, `op`, les niveaux, `changes`, un refus dans le groupe).
+  SITE : un `next dev` tournait sur :3000 — `curl` de
+  `/guides/general-guides/core-fusion` dans les SIX langues avant et après,
+  identiques une fois retirés le `?v=<horodatage>` des chunks et l'id de
+  requête `__next_r` du dev (rien d'autre ne diffère) ; `pnpm build` non
+  lancé, comme demandé. SEUL changement visible du site, et il n'est pas un
+  choix du lot : le hook `stamp-guides` du pre-commit a re-daté le guide —
+  `meta.updated` passe du 2026-09-25 au 2026-10-12, vingtième fichier du
+  commit (la règle de F18 : un fichier du dossier d'un guide a bougé) ; la
+  date « Updated » de la page changera donc au déploiement, son contenu non.
+  QUICK : un quick isolé (clés vidées, :4813, que des GET), l'état servi relu
+  par `curl`, le banc sur `guides/general-guides/core-fusion/priorities` et
+  sur les reviews, plus une capture de la review dépliée par un relais jetable
+  en lecture seule (le banc ne clique pas) ; P&L recapturé, inchangé. Un
+  enregistrement SANS retouche rejoué hors serveur par `saveGeneralGuide` avec
+  le vrai store et git neutralisé : les deux JSON réécrits à l'octet près
+  (md5), « Rien à enregistrer ». LAISSÉ : aucun enregistrement réel depuis la
+  page (un POST de quick committe) — contrôles au TODO ; le store ne refuse
+  pas une fusion du jeu SANS review, que le build refuse pourtant (le refuser
+  bloquerait la saisie review par review le jour où deux fusions sortent
+  ensemble) ; `EDITABLE_GENERAL_GUIDES`, le registre de l'ADMIN, ne gagne pas
+  `core-fusion` (l'admin n'a pas d'éditeur pour lui, et sort au lot 22).
+  Repéré hors périmètre : dans les vignettes de palier (P&L comme ici) le
+  select de palier, large de 6ch, montre « 3 » et non « 3★ » — la flèche du
+  select mange le libellé.
 - **quick : Premium & Limited — un onglet Priorités en glisser-déposer, les
   reviews à la façon de contribute/premium-reviews (lot F25)** — revue de
   quick par Sevih (12/10) : « éditeur guide premium & core fusion : une tab

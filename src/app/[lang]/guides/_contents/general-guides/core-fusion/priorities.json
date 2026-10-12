@@ -1,0 +1,37 @@
+{
+  "first": [
+    {
+      "name": "Core Fusion Veronica",
+      "stars": 3,
+      "op": ">"
+    },
+    {
+      "name": "Core Fusion Eternal",
+      "stars": 3,
+      "op": ">"
+    },
+    {
+      "name": "Core Fusion Notia",
+      "stars": 3,
+      "op": ">"
+    },
+    {
+      "name": "Core Fusion Epsilon",
+      "stars": 3,
+      "op": ">"
+    }
+  ],
+  "second": [
+    {
+      "name": "Core Fusion Lisha",
+      "stars": 3,
+      "op": ">"
+    },
+    {
+      "name": "Core Fusion Snow",
+      "stars": 3,
+      "op": null
+    }
+  ],
+  "third": []
+}
