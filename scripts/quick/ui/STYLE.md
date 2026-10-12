@@ -1368,7 +1368,7 @@ le dossier du sprite quand ce n'est pas `equipment`.
 
 ## Guides — croquis
 
-### Guides (`wide`, fait — F18 ; guides généraux et import, F19)
+### Guides (`wide`, fait — F18 ; guides généraux et import, F19 ; une catégorie à la fois, A37)
 
 La vue d'ensemble des guides du site et l'éditeur des guides de boss (les
 sept catégories de `GUIDE_SPECS`), l'éditeur « Guide editor » de l'admin sans
@@ -1378,14 +1378,16 @@ rendu :
 
 ```
 .head  Guides — Les guides de boss du site, par catégorie : un clic ouvre le guide… la date du guide est re-datée dans le même commit…
-LA VUE D'ENSEMBLE (#gd-overview, `#guides`)
+LA VUE D'ENSEMBLE (#gd-overview, `#guides/<cat>`) — UNE catégorie à la fois (A37)
 .card.pad  .form : [Chercher 30ch « début d'un mot du titre ou du slug »] [☐ cachés] « 93 guides dans 10 catégories · 57 cachés »
-   une .card.gd-cat par catégorie du site, dans SON ordre, VIVANTE (au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas)
 .card.pad  .form : .drop « Importer une contribution — glisser ici (ou cliquer) le JSON d'un outil /contribute ou d'une review de Shiraen… » (F19 : `POST /api/guides/import`, le journal dit l'issue, la vue d'ensemble se relit ; un fichier qui n'est pas du JSON est refusé sans appel)
-   une .card.gd-cat par catégorie du site, dans SON ordre, VIVANTE (au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas)
+.gd-cats (role tablist, le `.tab` de 32 px des sous-onglets, sur plusieurs lignes plutôt qu'en défilement)  [General Guides 14] [Adventure 20] [Guild Raid 5 contenu en code] [World Boss 6] … — une entrée par catégorie SERVIE, dans l'ordre du site (vivante : au moins un guide visible — sans « cachés », Adventure License et Monad Gate n'y sont pas) : son libellé, le badge de son compte ; une catégorie dont quick n'édite AUCUN guide (guild raid, tour, autres) reste là, grise, « contenu en code », `disabled` — elle ne s'ouvre pas, ses guides ne se voient que par la recherche
+   UNE .card.gd-cat sous la rangée : la catégorie dépliée — celle du hash, sinon la dernière montrée (`localStorage` `quick.guides.cat`), sinon la première éditable ; ← → Home End passent d'une catégorie éditable à l'autre
+   la recherche non vide traverse TOUTES les catégories : la rangée reste (aucun onglet actif), la liste montre une .card.gd-cat par catégorie qui a une correspondance, celles en code comprises ; un clic sur une catégorie lève la recherche et l'ouvre ; vide : une seule catégorie
      card-head : le libellé anglais · le slug (chasse fixe) · badge « N guides » · badge « N cachés » · badge warn « contenu en code » (une catégorie dont quick n'édite AUCUN guide : guild raid, tour, monad, autres)
      table : Guide (titre = un bouton pour un guide éditable — `editable` de la LIGNE : les sept catégories de `GUIDE_SPECS`, et trois généraux sur quatorze —, son slug dessous en chasse fixe) | Boss / combat (en clair) | Mis à jour (chasse fixe) | Versions (badge « 5 · 2026-10 », ou « plat ») | État (badges « caché », « contenu en code ») | « site ↗ » (le site de dev du poste, nouvel onglet)
      une ligne « contenu en code » est atténuée (pas de bouton) ; une ligne cachée l'est davantage
+     General Guides : ses guides rangés par PALIER (`tier` de la ligne) — un tbody.gd-tier par palier servi (`tiers`, l'ordre de lecture du site) qui en a, ouvert par un sous-titre en travers de la table (tr.gd-tier-head : « First Steps » · sa clé en chasse fixe), puis Banners & Pulls, Resources & Daily Loop, Heroes & Gear ; dans un palier, l'ordre du serveur
    .empty « Aucun guide ne correspond. »
 LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
 .card.pad.gd-head  [← Guides] titre anglais (celui de Méta, en direct) ; dessous badge off de la catégorie · cat/slug (chasse fixe) · le boss ou le combat · « mis à jour le … » · badge « N versions » · badge « caché » … [ouvrir sur le site ↗]
@@ -1413,7 +1415,7 @@ LE GUIDE (#gd-guide, `#guides/<cat>/<slug>` ; la vue d'ensemble se cache)
    named (irregular, AL) : une .card « Équipe n » — ✕, titre (auto ou libre), slots, la note en BLOC (un paragraphe par ligne) ; [＋ équipe] ; [Traduire]
 #gd-panel — Vidéos : .card « Vidéos » badge du compte … lien « ajouter dans Vidéos » (l'onglet Vidéos, la cible posée sur ce guide et cette version) ; une ligne par vidéo : titre · auteur · plateforme · id · badge du `label` (préservé) · ✕
 en tête du panneau : les refus qui ne visent aucun onglet (le disque a changé, la forme) en rouge
-le hash : `#guides` (la vue d'ensemble), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas
+le hash : `#guides/<cat>` (la vue d'ensemble, sur cette catégorie), `#guides/<cat>/<slug>` (un guide), `#guides/<cat>/<slug>/<version>` (une version) — la page les écrit ; `#guides` seul se lit (la dernière catégorie montrée) et se réécrit en `#guides/<cat>` ; « ← Guides » revient sur la catégorie du guide ; `…/<sous-onglet>` (`tips`, `team`…) en plus, pour un lien ou le banc, ne s'écrit pas
 UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour un lien ou le banc) : la même coquille — en-tête (titre, badge « General Guides », cat/slug, la date), savebar, .gd-tabs — mais les sous-onglets, les cartes et les champs viennent de la FORME servie (`spec.tabs` : onglets › blocs › champs, cf. `general-guide-form.ts`) ; la page ne connaît aucun des trois guides
    un bloc = une .card.gd-card (card-head : son libellé, son indication, badge du compte) : un texte seul (LE TEXTE), des textes (une rangée numérotée par texte, ✕, [＋ paragraphe]), ou une liste d'entrées
    une entrée : une CARTE (.gd-entry — en tête le perso de l'entrée en tuile 44 px + [Changer…], ou « Source n » / « Item n » ; ✕ ; le corps : les champs, les courts côte à côte) ; ou une LIGNE compacte — un produit du jeu (.gd-prod : [S|A|B|C] (.gd-prio, re-cliquer efface) · icône + nom · coût avec l'icône de la monnaie · « 5 / daily » … [＋ note] ; la note ouverte = LE TEXTE sous la ligne), un palier de priorité (.gd-rank : rang · tuile du perso [Changer…] · [Palier ▾ : les crans PLEINS du perso, 3★ 4★ 5★ 6★] ↑ ↓ ✕)
@@ -1425,7 +1427,9 @@ UN GUIDE GÉNÉRAL (F19 ; `#guides/general-guides/<slug>`, `…/<onglet>` pour u
 
 Tout ce qui se lit vient de `GET /api/guides` (`guidesOverview` : par catégorie
 vivante — ou toutes avec `?hidden=1` —, ses guides triés comme le site, le
-combat en clair, `editable` par ligne, les comptes, `siteBase`), relu à chaque
+combat en clair, `editable` et `tier` par ligne, les comptes, les `tiers`
+libellés, `siteBase` : UNE réponse pour toutes les catégories, la rangée n'en
+relit aucune), relu à chaque
 venue sur la vue d'ensemble, de `GET /api/guides/general?slug=`
 (`generalGuideState` : la forme, les données du store, le roster, les paliers
 pleins par perso, les refs, les langues — F19), et de `GET /api/guides/state?cat=&slug=`
@@ -1463,8 +1467,8 @@ pas). L'import (`POST /api/guides/import`, `importContributionAction`) remet
 le JSON tel quel à `importContribution` de l'admin puis committe ce qu'il a
 écrit, `chore(guides): import <kind>`. Un autre guide, ou quitter l'onglet,
 avec des changements en attente : sur confirmation (`canLeave`). Propres à
-l'onglet, dans `tabs/guides.css` : `.gd-cat`,
-`.gd-open`, `.gd-slug`, `.gd-row`, `.gd-state`, `.gd-site`, `.gd-head`,
+l'onglet, dans `tabs/guides.css` : `.gd-cats`, `.gd-cat`, `.gd-tier`
+(`-head`), `.gd-open`, `.gd-slug`, `.gd-row`, `.gd-state`, `.gd-site`, `.gd-head`,
 `.gd-id`, `.gd-traits`, `.gd-pv-lang`, `.gd-seg` (le segmenté, recopié),
 `.gd-tabs`, `.gd-versions`, `.gd-vtabs`, `.gd-addv`, `.gd-note`, `.gd-stack`,
 `.gd-cols`, `.gd-wide`, `.gd-card`, `.gd-body`, `.gd-foot`, `.gd-err`,

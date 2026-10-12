@@ -292,7 +292,11 @@ l'admin, `patchGuideMetaFields` élargi au titre, à la description et à
 partagée dans `guide-stamp.ts`) sur les seuls fichiers pertinents, UN commit
 `chore(guides): <cat>/<slug>`. « ＋ version » écrit sans committer et
 propose le Journal du site prérempli. Hash `#guides`, `#guides/<cat>/<slug>`,
-`#guides/<cat>/<slug>/<version>`. Liens des catégories de boss retirés du
+`#guides/<cat>/<slug>/<version>`. Depuis le 12/10 (A37, revue de Sevih) la
+vue d'ensemble ne montre qu'UNE catégorie à la fois : une rangée de
+catégories au-dessus de la liste, `#guides/<cat>`, la dernière montrée
+retenue par le navigateur, les généraux rangés par palier, et la recherche
+qui traverse toutes les catégories. Liens des catégories de boss retirés du
 menu admin le 11/10), et les guides GÉNÉRAUX à fragment éditable (= Guide
 editor › General guides, trois guides sur quatorze : Premium & Limited,
 Free Heroes, Shop priorities — étape 17, lot F19 : ouverts depuis la même

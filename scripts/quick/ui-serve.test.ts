@@ -11759,6 +11759,7 @@ describe('Guides — la page, sur le vrai markup', () => {
             hidden: false,
             battle: '',
             editable: false,
+            tier: 'first-steps',
           },
           {
             slug: 'premium-limited',
@@ -11768,6 +11769,7 @@ describe('Guides — la page, sur le vrai markup', () => {
             hidden: false,
             battle: '',
             editable: true,
+            tier: 'pulls',
           },
           {
             slug: 'free-heroes-start-banner',
@@ -11777,6 +11779,7 @@ describe('Guides — la page, sur le vrai markup', () => {
             hidden: false,
             battle: '',
             editable: true,
+            tier: 'first-steps',
           },
           {
             slug: 'shop-purchase-priorities',
@@ -11786,6 +11789,27 @@ describe('Guides — la page, sur le vrai markup', () => {
             hidden: false,
             battle: '',
             editable: true,
+            tier: 'economy',
+          },
+        ],
+      },
+      // Une catégorie dont tout le contenu est en code : servie, jamais ouvrable.
+      {
+        slug: 'guild-raid',
+        label: 'Guild Raid',
+        editable: false,
+        versioned: false,
+        hidden: 0,
+        guides: [
+          {
+            slug: 'frost-legion',
+            title: 'Frost Legion Guild Raid Guide',
+            updated: '2026-09-12',
+            versions: 1,
+            newest: '2026-09',
+            hidden: false,
+            battle: 'Frost Legion · Guild Raid',
+            editable: false,
           },
         ],
       },
@@ -11834,7 +11858,13 @@ describe('Guides — la page, sur le vrai markup', () => {
       },
     ],
     withHidden: false,
-    counts: { guides: 7, hidden: 26, categories: 3 },
+    counts: { guides: 8, hidden: 26, categories: 4 },
+    tiers: [
+      { key: 'first-steps', label: 'First Steps' },
+      { key: 'pulls', label: 'Banners & Pulls' },
+      { key: 'economy', label: 'Resources & Daily Loop' },
+      { key: 'heroes-gear', label: 'Heroes & Gear' },
+    ],
     siteBase: 'https://outerpedia.local/en/guides',
   };
   /** Les trois guides généraux à fragment éditable, tels que leurs stores les lisent. */
@@ -11972,6 +12002,8 @@ describe('Guides — la page, sur le vrai markup', () => {
   async function guides(
     opts: {
       hash?: string;
+      /** La dernière catégorie montrée, telle que le navigateur l'a gardée (`quick.guides.cat`). */
+      lastCat?: string;
       saved?: (body: Sent, disk: Disk) => Saved;
       savedGeneral?: (body: SentGeneral, disk: General) => Saved;
       imported?: (body: unknown) => Saved;
@@ -12066,7 +12098,7 @@ describe('Guides — la page, sur le vrai markup', () => {
                 ...OVERVIEW,
                 withHidden: true,
                 categories: [...OVERVIEW.categories, HIDDEN_CAT],
-                counts: { ...OVERVIEW.counts, categories: 4 },
+                counts: { ...OVERVIEW.counts, categories: 5 },
               }
             : OVERVIEW,
         );
@@ -12161,6 +12193,8 @@ describe('Guides — la page, sur le vrai markup', () => {
     vi.stubGlobal('fetch', fetch);
     vi.stubGlobal('confirm', confirm);
     vi.stubGlobal('Event', window.Event);
+    if (opts.lastCat) window.localStorage.setItem('quick.guides.cat', opts.lastCat);
+    vi.stubGlobal('localStorage', window.localStorage);
 
     const lib = (await import(/* @vite-ignore */ resolve(UI, 'lib.js'))) as {
       sections: { start: () => void };
@@ -12203,7 +12237,21 @@ describe('Guides — la page, sur le vrai markup', () => {
         all('#tabs [data-tab="guides"]')[0].click();
         await settle();
       },
+      /** Un clic sur une catégorie de la rangée. */
+      cat: (slug: string) => all(`#gd-cats [data-cat="${slug}"]`)[0].click(),
+      /** La rangée : chaque catégorie, son texte, l'active, les inactives. */
+      cats: () =>
+        all('#gd-cats [role="tab"]').map((t) => [
+          t.dataset.cat,
+          t.textContent,
+          t.getAttribute('aria-selected') === 'true',
+          (t as unknown as HTMLButtonElement).disabled,
+        ]),
+      /** Les cartes de la liste, par catégorie. */
+      shown: () => all('#gd-list .gd-cat').map((c) => c.dataset.cat),
+      stored: () => window.localStorage.getItem('quick.guides.cat'),
       open: async (cat: string, slug: string) => {
+        all(`#gd-cats [data-cat="${cat}"]`)[0].click();
         all(`#gd-list .gd-open[data-cat="${cat}"][data-slug="${slug}"]`)[0].click();
         await settle();
       },
@@ -12250,24 +12298,39 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(page.el('tab-guides').hidden).toBe(false);
     expect(page.all('main')[0].classList.contains('wide')).toBe(true);
     expect(page.calls).toEqual([{ path: '/api/guides' }]);
-    expect(page.window.location.hash).toBe('#guides');
+    // La première catégorie éditable s'ouvre, et l'adresse la dit.
+    expect(page.window.location.hash).toBe('#guides/general-guides');
   });
 
-  it('la vue d’ensemble : les catégories du serveur, un bouton par guide éditable, « contenu en code » sinon, le compte', async () => {
+  it('la vue d’ensemble : une rangée de catégories dans l’ordre du serveur, UNE seule dépliée ; un bouton par guide éditable, « contenu en code » sinon, le compte', async () => {
     const page = await guides();
     await page.come();
-    expect(page.all('#gd-list .gd-cat').map((c) => c.dataset.cat)).toEqual([
-      'general-guides',
-      'joint-challenge',
-      'special-request',
+    expect(page.cats()).toEqual([
+      ['general-guides', 'General Guides4', true, false],
+      ['guild-raid', 'Guild Raid1contenu en code', false, true],
+      ['joint-challenge', 'Joint Challenge1', false, false],
+      ['special-request', 'Special Request2', false, false],
     ]);
-    expect(page.el('gd-total').textContent).toBe('7 guides dans 3 catégories · 26 cachés');
+    expect(page.shown()).toEqual(['general-guides']);
+    expect(page.el('gd-total').textContent).toBe('8 guides dans 4 catégories · 26 cachés');
     const faq = page.all('#gd-list .gd-row[data-slug="beginner-faq"]')[0];
     expect(faq.querySelector('.gd-open')).toBeNull();
     expect(faq.classList.contains('dim')).toBe(true);
     expect([...faq.querySelectorAll('.badge')].map((b) => b.textContent)).toEqual([
       'contenu en code',
     ]);
+    // Une autre catégorie : elle remplace la première, l'adresse et la mémoire suivent.
+    page.cat('joint-challenge');
+    expect(page.shown()).toEqual(['joint-challenge']);
+    expect(page.cats().map(([slug, , on]) => [slug, on])).toEqual([
+      ['general-guides', false],
+      ['guild-raid', false],
+      ['joint-challenge', true],
+      ['special-request', false],
+    ]);
+    expect(page.window.location.hash).toBe('#guides/joint-challenge');
+    expect(page.stored()).toBe('joint-challenge');
+    expect(page.calls).toEqual([{ path: '/api/guides' }]); // rien n'est relu : la liste tient en une réponse
     const ann = page.all('#gd-list .gd-row[data-slug="annihilator"]')[0];
     expect(ann.querySelector('.gd-open')?.textContent).toBe('Annihilator Joint Challenge Guide');
     expect([...ann.querySelectorAll('td')].map((t) => t.textContent)).toEqual([
@@ -12281,31 +12344,123 @@ describe('Guides — la page, sur le vrai markup', () => {
     expect(ann.querySelector('a')?.getAttribute('href')).toBe(
       'https://outerpedia.local/en/guides/joint-challenge/annihilator',
     );
+    // Une catégorie en code ne s'ouvre pas : ni au clic, ni au clavier (les flèches la sautent).
+    page.cat('guild-raid');
+    expect(page.shown()).toEqual(['joint-challenge']);
+    page.el('gd-cats').dispatchEvent(
+      Object.assign(new page.window.Event('keydown', { bubbles: true }), {
+        key: 'ArrowLeft',
+      }) as unknown as Event,
+    );
+    expect(page.shown()).toEqual(['general-guides']);
+    expect(page.window.location.hash).toBe('#guides/general-guides');
   });
 
-  it('la recherche : le début d’un mot du titre ou du slug, les catégories vides disparaissent', async () => {
+  it('`#guides/<cat>` ouvre cette catégorie ; `#guides` la dernière montrée ; une catégorie inconnue ou en code, la première éditable', async () => {
+    const direct = await guides({ hash: '#guides/special-request', lastCat: 'joint-challenge' });
+    expect(direct.el('tab-guides').hidden).toBe(false);
+    expect(direct.shown()).toEqual(['special-request']);
+    expect(direct.window.location.hash).toBe('#guides/special-request');
+    expect(direct.stored()).toBe('special-request');
+
+    const back = await guides({ hash: '#guides', lastCat: 'joint-challenge' });
+    expect(back.shown()).toEqual(['joint-challenge']);
+    expect(back.window.location.hash).toBe('#guides/joint-challenge');
+
+    // Quitter l'onglet puis y revenir : la catégorie reste.
+    back.cat('special-request');
+    back.all('#tabs [data-tab="videos"]')[0].click();
+    await back.come();
+    expect(back.shown()).toEqual(['special-request']);
+
+    for (const hash of ['#guides/nope', '#guides/guild-raid']) {
+      const page = await guides({ hash });
+      expect(page.shown()).toEqual(['general-guides']);
+      expect(page.window.location.hash).toBe('#guides/general-guides');
+    }
+    // Une mémoire qui ne vaut plus rien (catégorie disparue) : la première éditable aussi.
+    const stale = await guides({ hash: '#guides', lastCat: 'monad-gate' });
+    expect(stale.shown()).toEqual(['general-guides']);
+  });
+
+  it('les guides généraux rangés par palier, dans l’ordre du serveur : un sous-titre par palier servi qui en a', async () => {
+    const page = await guides();
+    await page.come();
+    expect(
+      page
+        .all('#gd-list .gd-cat[data-cat="general-guides"] tbody.gd-tier')
+        .map((t) => [
+          t.dataset.tier,
+          t.querySelector('.gd-tier-head th')?.textContent,
+          [...t.querySelectorAll('.gd-row')].map((r) => (r as HTMLElement).dataset.slug),
+        ]),
+    ).toEqual([
+      ['first-steps', 'First Stepsfirst-steps', ['beginner-faq', 'free-heroes-start-banner']],
+      ['pulls', 'Banners & Pullspulls', ['premium-limited']],
+      ['economy', 'Resources & Daily Loopeconomy', ['shop-purchase-priorities']],
+    ]);
+    // Une catégorie sans palier : une table plate.
+    page.cat('special-request');
+    expect(page.all('#gd-list .gd-tier')).toEqual([]);
+    expect(page.all('#gd-list .gd-row').map((r) => r.dataset.slug)).toEqual([
+      'ars-nova',
+      'amadeus',
+    ]);
+  });
+
+  it('la recherche traverse TOUTES les catégories : le début d’un mot du titre ou du slug, une carte par catégorie qui correspond ; vide, une seule catégorie', async () => {
     const page = await guides();
     await page.come();
     page.type(page.el('gd-q'), 'ann');
-    expect(page.all('#gd-list .gd-cat').map((c) => c.dataset.cat)).toEqual(['joint-challenge']);
+    expect(page.shown()).toEqual(['joint-challenge']);
+    // La rangée reste, sans onglet actif ; l'adresse garde la catégorie dépliée.
+    expect(page.cats().map(([slug, , on]) => [slug, on])).toEqual([
+      ['general-guides', false],
+      ['guild-raid', false],
+      ['joint-challenge', false],
+      ['special-request', false],
+    ]);
+    expect(page.window.location.hash).toBe('#guides/general-guides');
+    page.type(page.el('gd-q'), 'guide'); // quatre catégories, celle en code comprise
+    expect(page.shown()).toEqual([
+      'general-guides',
+      'guild-raid',
+      'joint-challenge',
+      'special-request',
+    ]);
+    expect(page.all('#gd-list .gd-row').map((r) => r.dataset.slug)).toEqual([
+      'premium-limited',
+      'frost-legion',
+      'annihilator',
+      'ars-nova',
+      'amadeus',
+    ]);
     page.type(page.el('gd-q'), 'nih'); // pas un début de mot
     expect(page.all('#gd-list .empty')[0].textContent).toBe('Aucun guide ne correspond.');
     page.type(page.el('gd-q'), 'ars-nov'); // le slug
     expect(page.all('#gd-list .gd-row').map((r) => r.dataset.slug)).toEqual(['ars-nova']);
     page.type(page.el('gd-q'), '');
-    expect(page.all('#gd-list .gd-row')).toHaveLength(7);
+    expect(page.shown()).toEqual(['general-guides']);
+    expect(page.all('#gd-list .gd-row')).toHaveLength(4);
+    // Un clic sur une catégorie pendant une recherche : la recherche se lève, la catégorie s'ouvre.
+    page.type(page.el('gd-q'), 'ann');
+    page.cat('special-request');
+    expect(page.el('gd-q').value).toBe('');
+    expect(page.shown()).toEqual(['special-request']);
   });
 
-  it('« cachés » relit avec `?hidden=1` : Adventure License apparaît, ses guides avec le badge « caché »', async () => {
+  it('« cachés » relit avec `?hidden=1` : Adventure License entre dans la rangée, ses guides avec le badge « caché »', async () => {
     const page = await guides();
     await page.come();
-    expect(page.all('#gd-list .gd-cat[data-cat="adventure-license"]')).toEqual([]);
+    expect(page.all('#gd-cats [data-cat="adventure-license"]')).toEqual([]);
     page.el('gd-hidden').checked = true;
     page
       .el('gd-hidden')
       .dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
     await page.settle();
     expect(page.calls.map((c) => c.path)).toEqual(['/api/guides', '/api/guides?hidden=1']);
+    expect(page.shown()).toEqual(['general-guides']); // la catégorie dépliée ne bouge pas
+    page.cat('adventure-license');
     const al = page.all('#gd-list .gd-cat[data-cat="adventure-license"]')[0];
     expect(al.querySelector('.card-head')?.textContent).toContain('26 cachés');
     const row = al.querySelector('.gd-row') as HTMLElement;
@@ -12314,6 +12469,14 @@ describe('Guides — la page, sur le vrai markup', () => {
       'caché',
     ]);
     expect(row.querySelector('.gd-open')).not.toBeNull(); // éditable, même caché
+    // Décochée, la catégorie n'est plus servie : la première éditable reprend.
+    page.el('gd-hidden').checked = false;
+    page
+      .el('gd-hidden')
+      .dispatchEvent(new page.window.Event('change', { bubbles: true }) as unknown as Event);
+    await page.settle();
+    expect(page.shown()).toEqual(['general-guides']);
+    expect(page.window.location.hash).toBe('#guides/general-guides');
   });
 
   it('un guide plat ouvert au clic : son état lu, l’en-tête, les sous-onglets de sa spec, l’adresse', async () => {
@@ -12590,7 +12753,10 @@ describe('Guides — la page, sur le vrai markup', () => {
     page.all('#gd-head [data-act="back"]')[0].click();
     await page.settle();
     expect(page.el('gd-overview').hidden).toBe(false);
-    expect(page.window.location.hash).toBe('#guides');
+    // « ← Guides » revient sur la catégorie du guide, pas sur la première.
+    expect(page.window.location.hash).toBe('#guides/joint-challenge');
+    expect(page.shown()).toEqual(['joint-challenge']);
+    expect(page.stored()).toBe('joint-challenge');
     expect(page.confirm).toHaveBeenCalledTimes(2);
   });
   // ---------------------------------------------------------- les guides généraux
@@ -12611,8 +12777,8 @@ describe('Guides — la page, sur le vrai markup', () => {
         ]),
     ).toEqual([
       ['beginner-faq', false, true],
-      ['premium-limited', true, false],
       ['free-heroes-start-banner', true, false],
+      ['premium-limited', true, false],
       ['shop-purchase-priorities', true, false],
     ]);
     await page.open('general-guides', 'premium-limited');

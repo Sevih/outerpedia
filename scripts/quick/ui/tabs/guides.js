@@ -1,4 +1,5 @@
-// Onglet « Guides » : la vue d'ensemble des guides du site, par catégorie, et
+// Onglet « Guides » : la vue d'ensemble des guides du site, une catégorie à la
+// fois (une rangée de catégories, la recherche les traverse toutes), et
 // l'éditeur des guides de boss (les catégories de `GUIDE_SPECS` : joint
 // challenge, world boss, special request, irregular extermination, adventure
 // license, adventure, dimensional singularity) — l'éditeur « Guide editor » de
@@ -40,6 +41,7 @@ const PV_DELAY = 400;
 let overview = null; // `/api/guides`, relu à chaque venue sur la vue d'ensemble
 let withHidden = false; // la case « cachés »
 let query = ''; // la recherche de la vue d'ensemble
+let cat = null; // la catégorie dépliée de la vue d'ensemble (son slug)
 let sheet = null; // l'état du guide ouvert (`/api/guides/state`)
 let draft = null; // son brouillon, celui que la page retouche
 let meta = null; // ses textes de meta, retouchés
@@ -314,29 +316,105 @@ function rowHtml(cat, g) {
   </tr>`;
 }
 
-/** Les catégories et leurs guides, filtrés par la recherche. */
-function overviewHtml() {
-  const q = query.trim();
-  const cats = overview.categories
-    .map((c) => ({
-      ...c,
-      guides: c.guides.filter((g) => !q || starts(g.title, q) || starts(g.slug, q)),
-    }))
-    .filter((c) => c.guides.length);
-  if (!cats.length) return '<div class="empty">Aucun guide ne correspond.</div>';
-  return cats
+// La dernière catégorie montrée survit au rechargement ; un stockage refusé
+// (navigation privée) ne doit pas casser l'onglet.
+const CAT_KEY = 'quick.guides.cat';
+const lastCat = () => {
+  try {
+    return localStorage.getItem(CAT_KEY);
+  } catch {
+    return null;
+  }
+};
+const keepCat = (slug) => {
+  try {
+    localStorage.setItem(CAT_KEY, slug);
+  } catch {}
+};
+/** Une catégorie qui s'ouvre : servie, et quick y édite au moins un guide. */
+const opens = (slug) => Boolean(overview?.categories.some((c) => c.slug === slug && c.editable));
+/**
+ * La catégorie dépliée : celle demandée (le hash, un clic, le guide quitté)
+ * tant que le serveur la sert, sinon la dernière montrée (`renderOverview` la
+ * retient), sinon la première éditable.
+ */
+function openCat() {
+  if (opens(cat)) return cat;
+  const last = lastCat();
+  return opens(last) ? last : (overview?.categories.find((c) => c.editable)?.slug ?? null);
+}
+
+/** Les lignes d'une catégorie ; sous un sous-titre par palier quand ses guides en portent un. */
+function rowsHtml(c) {
+  const rows = (guides) => guides.map((g) => rowHtml(c, g)).join('');
+  if (!c.guides.some((g) => g.tier)) return `<tbody>${rows(c.guides)}</tbody>`;
+  const tiers = overview.tiers ?? [];
+  const known = (g) => tiers.some((t) => t.key === g.tier);
+  return [...tiers, { key: '', label: 'Sans palier' }]
+    .map((t) => ({ ...t, guides: c.guides.filter((g) => (t.key ? g.tier === t.key : !known(g))) }))
+    .filter((t) => t.guides.length)
     .map(
-      (c) => `<div class="card gd-cat" data-cat="${esc(c.slug)}">
+      (t) =>
+        `<tbody class="gd-tier" data-tier="${esc(t.key)}"><tr class="gd-tier-head"><th colspan="6" scope="rowgroup">${esc(t.label)}<span class="lbl mono">${esc(t.key)}</span></th></tr>${rows(t.guides)}</tbody>`,
+    )
+    .join('');
+}
+
+/** La carte d'une catégorie : son en-tête, la table de ses guides. */
+const catHtml = (c) => `<div class="card gd-cat" data-cat="${esc(c.slug)}">
       <div class="card-head"><strong>${esc(c.label)}</strong><span class="lbl mono">${esc(c.slug)}</span><span class="badge off">${plural(c.guides.length, 'guide')}</span>${
         c.hidden ? `<span class="badge off">${c.hidden} caché${c.hidden > 1 ? 's' : ''}</span>` : ''
       }${c.editable ? '' : '<span class="badge warn">contenu en code</span>'}</div>
       <div class="scroll"><table>
         <thead><tr><th>Guide</th><th>Boss / combat</th><th>Mis à jour</th><th>Versions</th><th>État</th><th><span class="sr">Site</span></th></tr></thead>
-        <tbody>${c.guides.map((g) => rowHtml(c, g)).join('')}</tbody>
+        ${rowsHtml(c)}
       </table></div>
-    </div>`,
-    )
+    </div>`;
+
+/**
+ * La liste : UNE catégorie, celle de la rangée ; ou, tant que la recherche
+ * n'est pas vide, les correspondances de TOUTES les catégories, une carte par
+ * catégorie qui en a.
+ */
+function overviewHtml() {
+  const q = query.trim();
+  if (!q) {
+    const c = overview.categories.find((x) => x.slug === cat);
+    return c ? catHtml(c) : '<div class="empty">Aucune catégorie à ouvrir.</div>';
+  }
+  const cats = overview.categories
+    .map((c) => ({ ...c, guides: c.guides.filter((g) => starts(g.title, q) || starts(g.slug, q)) }))
+    .filter((c) => c.guides.length);
+  if (!cats.length) return '<div class="empty">Aucun guide ne correspond.</div>';
+  return cats.map(catHtml).join('');
+}
+
+/**
+ * La rangée des catégories, dans l'ordre du site : un onglet par catégorie
+ * servie, son compte ; une catégorie dont tout le contenu est en code reste
+ * visible, grise, et ne s'ouvre pas. Pendant une recherche la liste les
+ * traverse toutes : aucun onglet n'est l'actif.
+ */
+function catsHtml() {
+  const searching = Boolean(query.trim());
+  return overview.categories
+    .map((c) => {
+      const on = !searching && c.slug === cat;
+      return `<button class="tab" type="button" role="tab" id="gd-cat-${esc(c.slug)}" data-cat="${esc(c.slug)}" aria-selected="${on}" aria-controls="gd-list" tabindex="${c.slug === cat ? 0 : -1}"${
+        c.editable ? '' : ' disabled title="Contenu en code : rien à éditer ici"'
+      }>${esc(c.label)}<span class="badge off">${c.guides.length}</span>${
+        c.editable ? '' : '<span class="lbl">contenu en code</span>'
+      }</button>`;
+    })
     .join('');
+}
+
+/** La rangée et la liste, redessinées ; le focus d'un onglet de catégorie lui revient. */
+function drawList() {
+  const focused = document.activeElement?.closest?.('#gd-cats [role="tab"]')?.dataset.cat;
+  $('gd-cats').innerHTML = catsHtml();
+  $('gd-list').innerHTML = overviewHtml();
+  if (focused) $(`gd-cat-${focused}`)?.focus();
 }
 
 function renderOverview() {
@@ -345,6 +423,7 @@ function renderOverview() {
   if (sheet) return;
   drawnBase = state.imgBase;
   if (!overview) {
+    $('gd-cats').innerHTML = '';
     $('gd-list').innerHTML = '';
     $('gd-total').textContent = '';
     return;
@@ -353,7 +432,19 @@ function renderOverview() {
   $('gd-total').textContent =
     `${plural(counts.guides, 'guide')} dans ${plural(counts.categories, 'catégorie')}` +
     (counts.hidden ? ` · ${counts.hidden} caché${counts.hidden > 1 ? 's' : ''}` : '');
-  $('gd-list').innerHTML = overviewHtml();
+  cat = openCat();
+  if (cat) keepCat(cat);
+  drawList();
+}
+
+/** Une catégorie choisie dans la rangée : elle se déplie seule, la recherche levée. */
+function showCat(slug) {
+  if (!opens(slug)) return;
+  cat = slug;
+  keepCat(slug);
+  query = $('gd-q').value = '';
+  drawList();
+  writeHash();
 }
 
 /** La vue d'ensemble, relue du disque. */
@@ -362,12 +453,32 @@ async function loadOverview() {
   if (!o.categories) throw new Error('quick lancé avant ce code : Ctrl-C puis `pnpm quick`');
   overview = o;
   renderOverview();
+  // La catégorie dépliée est dans l'adresse (un guide ouvert entre-temps garde la sienne).
+  if (!sheet && !$('tab-guides').hidden) writeHash();
 }
 const reloadOverview = () => loadOverview().catch((e) => log([`Guides illisibles : ${e}`], false));
 
 $('gd-q').oninput = () => {
   query = $('gd-q').value;
-  if (overview) $('gd-list').innerHTML = overviewHtml();
+  if (overview) drawList();
+};
+$('gd-cats').onclick = (e) => {
+  const el = e.target.closest('[role="tab"]:not([disabled])');
+  if (el) showCat(el.dataset.cat);
+};
+$('gd-cats').onkeydown = (e) => {
+  const on = (overview?.categories ?? []).filter((c) => c.editable);
+  const i = on.findIndex((c) => c.slug === cat);
+  const to = {
+    ArrowLeft: (i + on.length - 1) % on.length,
+    ArrowRight: (i + 1) % on.length,
+    Home: 0,
+    End: on.length - 1,
+  }[e.key];
+  if (to === undefined || !on.length) return;
+  e.preventDefault();
+  showCat(on[to].slug);
+  $(`gd-cat-${cat}`)?.focus();
 };
 $('gd-hidden').onchange = () => {
   withHidden = $('gd-hidden').checked;
@@ -2081,7 +2192,7 @@ async function translate() {
 }
 
 // ------------------------------------------------------ les sous-onglets, les versions
-/** L'adresse dit le guide et sa version : recharger y revient. */
+/** L'adresse dit le guide et sa version, ou la catégorie dépliée : recharger y revient. */
 const writeHash = () =>
   history.replaceState(
     null,
@@ -2090,7 +2201,9 @@ const writeHash = () =>
       ? `#guides/${encodeURIComponent(sheet.guide.category)}/${encodeURIComponent(sheet.guide.slug)}${
           spec().versioned && v() ? `/${encodeURIComponent(v().key)}` : ''
         }`
-      : '#guides',
+      : cat
+        ? `#guides/${encodeURIComponent(cat)}`
+        : '#guides',
   );
 
 function showSub(id) {
@@ -2180,9 +2293,10 @@ function choose(cat, slug) {
   reload(cat, slug);
 }
 
-/** Retour à la vue d'ensemble : sur confirmation s'il reste des changements. */
+/** Retour à la vue d'ensemble, sur la catégorie du guide : sur confirmation s'il reste des changements. */
 function back() {
   if (!sheet || !leave()) return;
+  cat = sheet.guide.category;
   sheet = draft = meta = was = gen = null;
   refused = [];
   render();
@@ -2274,23 +2388,26 @@ function leave() {
 
 sections.register('guides', {
   init: () => {
-    // `#guides` : la vue d'ensemble ; `#guides/<cat>/<slug>` : un guide (un
-    // général aussi : `#guides/general-guides/premium-limited`) ;
-    // `#guides/<cat>/<slug>/<version>` : une de ses versions — les trois
-    // formes que la page écrit. Un segment de plus, `/<sous-onglet>` (`tips`,
+    // `#guides` : la vue d'ensemble, sur la dernière catégorie visitée ;
+    // `#guides/<cat>` : sur cette catégorie ; `#guides/<cat>/<slug>` : un guide
+    // (un général aussi : `#guides/general-guides/premium-limited`) ;
+    // `#guides/<cat>/<slug>/<version>` : une de ses versions — les formes
+    // que la page écrit. Un segment de plus, `/<sous-onglet>` (`tips`,
     // `team`, ou `limited`, `guild` d'un général), l'ouvre sur ce sous-onglet :
     // pour un lien ou le banc, la page ne l'écrit pas. `lib.js` ne connaît que `#guides` : c'est le clic sur
     // l'onglet qui l'ouvre.
-    const [, cat, slug, ...rest] =
+    const [, gcat, slug, ...rest] =
       /^#guides\/([^/]+)\/([^/]+)(?:\/([^/]+))?(?:\/([^/]+))?$/.exec(location.hash) ?? [];
-    if (cat) {
+    // Une catégorie seule : `openCat` la retient si le serveur la sert et que quick l'édite.
+    const [, only] = /^#guides\/([^/]+)$/.exec(location.hash) ?? [];
+    if (gcat) {
       const parts = rest.filter(Boolean).map(decodeURIComponent);
       const version = /^\d{4}-\d{2}$/.test(parts[0] ?? '') ? parts.shift() : undefined;
-      wanted = { cat: decodeURIComponent(cat), slug: decodeURIComponent(slug), version };
+      wanted = { cat: decodeURIComponent(gcat), slug: decodeURIComponent(slug), version };
       if (SUBS.some((s) => s.id === parts[0])) sub = parts[0];
       else if (parts[0]) wantedSub = parts[0]; // un onglet d'un guide général (`premium`, `guild`…)
-      document.querySelector('#tabs [data-tab="guides"]')?.click();
-    }
+    } else if (only) cat = decodeURIComponent(only);
+    if (gcat || only) document.querySelector('#tabs [data-tab="guides"]')?.click();
     head();
     bar();
     stateLoaded.then(() => {

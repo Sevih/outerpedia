@@ -7,6 +7,78 @@
 
 ## 2026-10-12
 
+- **quick : Guides — une catégorie à la fois, les généraux par palier, la
+  recherche à travers toutes les catégories (lot A37)** — revue de quick par
+  Sevih (12/10) : « éditeur guide : séparer par catégorie de guide ». La vue
+  d'ensemble empilait une carte par catégorie (dix visibles, 93 guides ; 150
+  avec les cachés) : il fallait dérouler la page pour atteindre Special
+  Request. Au-dessus de la liste, une rangée de catégories (`#gd-cats`, un
+  `role="tablist"` sur le `.tab` de 32 px des sous-onglets, qui passe à la
+  ligne plutôt que de défiler) : une entrée par catégorie servie, dans l'ordre
+  du site, son libellé et le badge de son compte ; une catégorie dont quick
+  n'édite aucun guide (guild raid, tour, autres) y reste, grise, « contenu en
+  code », `disabled` — elle ne s'ouvre ni au clic ni aux flèches. UNE seule
+  catégorie est dépliée : la même carte `.gd-cat` qu'avant, seule. Laquelle
+  (`openCat`) : celle du hash `#guides/<cat>`, sinon la dernière montrée
+  (`localStorage`, clé `quick.guides.cat`, sous `try` : un stockage refusé ne
+  casse rien), sinon la première éditable ; une catégorie inconnue, en code, ou
+  que le serveur ne sert plus (une catégorie cachée, « cachés » décochée)
+  retombe de la même façon. La page écrit `#guides/<cat>` dès que la vue
+  d'ensemble est lue ; `#guides` seul reste lisible et se réécrit. Les hash
+  d'un guide n'ont pas bougé, et « ← Guides » revient sur la catégorie du
+  guide quitté (elle devient aussi la dernière montrée). La recherche `#gd-q`
+  non vide traverse TOUTES les catégories, celles en code comprises : la
+  rangée reste, sans onglet actif, et la liste montre une carte par catégorie
+  qui a une correspondance — le rendu d'avant ; vidée, une seule catégorie.
+  General Guides range ses guides par palier : un `tbody.gd-tier` par palier
+  qui en a, ouvert par un sous-titre en travers de la table (First Steps,
+  Banners & Pulls, Resources & Daily Loop, Heroes & Gear, la clé en chasse
+  fixe), l'ordre du serveur dans le palier, les non éditables atténués comme
+  avant. ÉCART À LA CONSIGNE, à relire : le lot dit « le serveur ne change pas
+  (pas de route par catégorie) », mais `guidesOverview` ne servait pas le
+  palier — la page ne pouvait pas grouper sans lui, sauf à recopier une table
+  slug → palier, ce que `guide-categories.ts` a justement retiré du site. La
+  réponse de `GET /api/guides` gagne donc deux champs, sans route nouvelle ni
+  appel de plus : `tier` sur la ligne d'un guide qui en porte un, et `tiers`
+  (`[{ key, label }]`, `GUIDE_TIER_KEYS` et le libellé anglais de
+  `GUIDE_TIERS`). La page ne nomme aucune catégorie : c'est la présence d'un
+  `tier` qui déclenche les sous-titres. Deux choix de détail, à défaire si
+  Sevih préfère autrement : un clic sur une catégorie PENDANT une recherche
+  lève la recherche et ouvre la catégorie (sinon le clic ne montrait rien) ;
+  les paliers s'appliquent aussi aux résultats de recherche (une seule
+  fonction de rendu). Vérification : `pnpm typecheck` exit 0
+  (`tsc --noEmit -p scripts/tsconfig.json` en dernier), `pnpm lint` exit 0
+  (`eslint`), `pnpm test` « Test Files 222 passed (222) / Tests 3709 passed
+  (3709) », `NODE_ENV=development pnpm exec vitest run scripts/quick`
+  « Test Files 8 passed (8) / Tests 1048 passed (1048) ». Tests :
+  `ui-serve.test.ts` — la fixture gagne les paliers et une catégorie en code,
+  le banc la mémoire du navigateur (`lastCat`) ; la rangée et la seule carte
+  dépliée, le clic, l'adresse et la mémoire qui suivent, la catégorie en code
+  qui ne s'ouvre pas (clic, flèche), rien de relu au changement de catégorie ;
+  `#guides/<cat>`, `#guides` et la dernière montrée, le retour sur l'onglet,
+  les replis (inconnue, en code, mémoire périmée) ; les paliers ; la recherche
+  inter-catégories et le clic qui la lève ; « cachés » qui ajoute puis retire
+  une catégorie de la rangée ; « ← Guides » sur la catégorie du guide ;
+  `actions.test.ts` — `tier` et `tiers`. Banc (quick isolé :4791, clés vidées,
+  arrêté ensuite ; `--tabs guides --hash guides`, puis
+  `--hash guides/general-guides` et `--hash guides/joint-challenge`) : la
+  rangée tient sur deux lignes à 1440 px (dix catégories, trois grises),
+  General Guides ouvert sur ses quatre paliers, Joint Challenge sur ses cinq
+  guides et son onglet souligné ; `#guides` sans mémoire ouvre General Guides.
+  Rien d'autre n'a changé à l'écran : la recherche, « cachés », l'import et la
+  carte d'une catégorie gardent leur markup et leurs styles (c'est le diff qui
+  le dit : pas de capture « avant » prise), la phrase d'aide de l'onglet dit
+  seulement « une catégorie à la fois ». Docs :
+  `STYLE.md` (le croquis de la vue d'ensemble, le hash, les classes
+  `.gd-cats` et `.gd-tier`), `docs/quick-migration.md` (« Déjà dans quick »
+  › Guides). Laissé : le compte d'un onglet est celui de la catégorie, pas
+  celui des correspondances pendant une recherche ; rien n'a été cliqué au
+  banc, les gestes sont gardés par les tests ; hors périmètre, repéré en
+  lisant — `open()` de la section ne relit pas le hash, donc un
+  `sections.go('guides/<cat>/<slug>')` venu d'une autre section (le lien
+  « ouvrir dans Guides » de l'extractor) arrive sur la vue d'ensemble quand la
+  page est déjà chargée, à vérifier ; pas d'item dans `docs/TODO.md`.
+
 - **quick : Monstres — le picker filtre par mode de jeu, dans l'ordre et sous
   les libellés du damage calc du site (lot B47)** — revue de quick par Sevih
   (12/10) : « éditeur > monstre : sélection par mode de jeu (comme le damage

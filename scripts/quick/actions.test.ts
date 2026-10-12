@@ -7612,6 +7612,30 @@ describe('guidesOverview, guideDraftState, saveGuide, addGuideVersionAction — 
       ]);
       expect(out.counts.categories).toBe(6);
     });
+
+    it('le palier d’un guide général sur sa ligne, et la liste des paliers dans l’ordre de lecture du site', () => {
+      const { fake } = deps();
+      const general = [
+        guide('general-guides', 'gear', { tier: 'heroes-gear', order: 2 }),
+        guide('general-guides', 'premium-limited', { tier: 'pulls', order: 2 }),
+        guide('general-guides', 'beginner-faq', { tier: 'first-steps', order: 1 }),
+      ];
+      const out = guidesOverview({ ...fake, guides: () => [...general, JC] });
+      expect(out.tiers).toEqual([
+        { key: 'first-steps', label: 'First Steps' },
+        { key: 'pulls', label: 'Banners & Pulls' },
+        { key: 'economy', label: 'Resources & Daily Loop' },
+        { key: 'heroes-gear', label: 'Heroes & Gear' },
+      ]);
+      const by = Object.fromEntries(out.categories.map((c) => [c.slug, c]));
+      // L'ordre des lignes reste celui du site (`order`, tous paliers mêlés) : c'est la page qui range.
+      expect(by['general-guides'].guides.map((g) => [g.slug, g.tier, g.editable])).toEqual([
+        ['beginner-faq', 'first-steps', false],
+        ['gear', 'heroes-gear', false],
+        ['premium-limited', 'pulls', true],
+      ]);
+      expect(by['joint-challenge'].guides[0]).not.toHaveProperty('tier');
+    });
   });
 
   describe('guideDraftState', () => {

@@ -236,7 +236,12 @@ import {
 import { PERIODS, PRIORITIES, overlayOf } from '@/lib/admin/shop-priorities-shape';
 import { importContribution, type ImportResult } from '@/lib/admin/contribution-actions';
 import { parseContribution } from '@/lib/contribute/contribution';
-import { GUIDE_CATEGORIES, GUIDE_CATEGORY_SLUGS } from '@/lib/data/guide-categories';
+import {
+  GUIDE_CATEGORIES,
+  GUIDE_CATEGORY_SLUGS,
+  GUIDE_TIER_KEYS,
+  GUIDE_TIERS,
+} from '@/lib/data/guide-categories';
 import type { SectionTitle } from '@/lib/data/guide-sections';
 import type { InlineRefs } from '@/lib/admin/inline-refs';
 import type { VideoItem } from '@/components/ui/MultiVideoEmbed';
@@ -5565,6 +5570,8 @@ export interface GuideOverviewRow {
    * contenu est en code (`index.tsx`).
    */
   editable: boolean;
+  /** Son palier (`meta.tier`, les guides généraux) : la page les range sous lui. */
+  tier?: string;
 }
 
 /** Une catégorie de la vue d'ensemble, ses guides triés comme sur le site. */
@@ -5653,7 +5660,8 @@ const byGuideOrder = (a: Guide, b: Guide): number =>
  * La vue d'ensemble de la section « Guides » : par catégorie du site (dans son
  * ordre), ses guides — slug, titre anglais, date, versions, caché, le boss ou
  * le combat en clair — et si quick l'édite (`GUIDE_SPECS`, ou l'un des trois
- * guides généraux à fragment éditable) ou si son contenu est en code. Une
+ * guides généraux à fragment éditable) ou si son contenu est en code, et le
+ * palier d'un guide général (`tier`, avec la liste `tiers`). Une
  * catégorie dont TOUS les guides sont cachés n'y est pas (la
  * règle de `visibleCategorySlugs` du site : c'est ainsi qu'Adventure License
  * et Monad Gate, morts, quittent la liste), sauf `withHidden` — la case
@@ -5692,6 +5700,7 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
     hidden: Boolean(g.hidden),
     battle: battleOf(g),
     editable: editableRow(g),
+    ...(g.tier ? { tier: g.tier } : {}),
   });
   const alive = new Set(categoriesWithVisibleGuide(GUIDE_CATEGORY_SLUGS, all));
   const categories: GuideOverviewCategory[] = [];
@@ -5717,6 +5726,8 @@ export function guidesOverview(disk: GuidesDisk = GUIDES_DEPS, withHidden = fals
       hidden: all.filter((g) => g.hidden).length,
       categories: categories.length,
     },
+    // Les paliers des guides généraux, dans l'ordre de lecture du site, libellés en anglais.
+    tiers: GUIDE_TIER_KEYS.map((key) => ({ key, label: GUIDE_TIERS[key].label.en })),
     siteBase: guidesSiteBase(),
   };
 }
